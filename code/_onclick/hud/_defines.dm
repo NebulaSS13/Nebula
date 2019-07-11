@@ -156,3 +156,10 @@
 // AI: Crew
 #define ui_ai_crew_mon "RIGHT-1:30,TOP:0"
 #define ui_ai_crew_rec "RIGHT-2:30, TOP:0"
+
+// pAI
+#define ui_pai_software "TOP,LEFT:6"
+#define ui_pai_subsystems "TOP,LEFT+1:6"
+#define ui_pai_shell "TOP,LEFT+2:6"
+#define ui_pai_light "TOP,LEFT+3:6"
+#define ui_pai_rest "TOP,LEFT+4:6"
