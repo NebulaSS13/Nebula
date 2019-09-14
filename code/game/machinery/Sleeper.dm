@@ -259,9 +259,6 @@
 /obj/machinery/sleeper/proc/go_out()
 	if(!occupant)
 		return
-	if(occupant.client)
-		occupant.client.eye = occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.dropInto(loc)
 	set_occupant(null)
 
@@ -279,9 +276,6 @@
 		update_use_power(POWER_USE_IDLE)
 		return
 	occupant.forceMove(src)
-	if(occupant.client)
-		occupant.client.perspective = EYE_PERSPECTIVE
-		occupant.client.eye = src
 	SetName("[name] ([occupant])")
 	update_use_power(POWER_USE_ACTIVE)
 

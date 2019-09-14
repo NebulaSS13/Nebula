@@ -208,9 +208,6 @@
 					break
 		holder.drop_from_inventory(card)
 
-	if(client)
-		client.perspective = EYE_PERSPECTIVE
-		client.eye = src
 	dropInto(card.loc)
 
 	card.forceMove(src)
@@ -314,10 +311,6 @@
 
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
-
-	if(client)
-		client.perspective = EYE_PERSPECTIVE
-		client.eye = card
 
 	//stop resting
 	resting = 0

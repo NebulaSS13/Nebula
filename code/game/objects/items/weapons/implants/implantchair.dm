@@ -109,9 +109,6 @@
 	if(src.occupant)
 		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
 		return
-	if(M.client)
-		M.client.perspective = EYE_PERSPECTIVE
-		M.client.eye = src
 	M.forceMove(src)
 	src.occupant = M
 	src.add_fingerprint(usr)
