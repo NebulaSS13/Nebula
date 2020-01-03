@@ -141,17 +141,17 @@
 	melee_accuracy_bonus = -10
 
 //Predefined materials go here.
-/obj/item/material/twohanded/baseballbat/metal/New(var/newloc)
-	..(newloc,MATERIAL_ALUMINIUM)
+/obj/item/material/twohanded/baseballbat/metal/Initialize(mapload)
+	..(mapload, MATERIAL_ALUMINIUM)
 
-/obj/item/material/twohanded/baseballbat/uranium/New(var/newloc)
-	..(newloc,MATERIAL_URANIUM)
+/obj/item/material/twohanded/baseballbat/uranium/Initialize(mapload)
+	. = ..(mapload, MATERIAL_URANIUM)
 
-/obj/item/material/twohanded/baseballbat/gold/New(var/newloc)
-	..(newloc,MATERIAL_GOLD)
+/obj/item/material/twohanded/baseballbat/gold/Initialize(mapload)
+	. = ..(mapload, MATERIAL_GOLD)
 
-/obj/item/material/twohanded/baseballbat/platinum/New(var/newloc)
-	..(newloc,MATERIAL_PLATINUM)
+/obj/item/material/twohanded/baseballbat/platinum/Initialize(mapload)
+	. = ..(mapload, MATERIAL_PLATINUM)
 
-/obj/item/material/twohanded/baseballbat/diamond/New(var/newloc)
-	..(newloc,MATERIAL_DIAMOND)
+/obj/item/material/twohanded/baseballbat/diamond/Initialize(mapload)
+	. = ..(mapload, MATERIAL_DIAMOND)

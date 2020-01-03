@@ -15,8 +15,8 @@
 	applies_material_name = FALSE
 	matter = list(MATERIAL_WOOD = 70)
 
-/obj/item/material/clipboard/New(newloc, material_key)
-	..()
+/obj/item/material/clipboard/Initialize()
+	. = ..()
 	update_icon()
 	if(material)
 		desc = initial(desc)

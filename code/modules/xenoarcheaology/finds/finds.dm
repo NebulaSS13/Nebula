@@ -21,9 +21,8 @@
 	icon_state = "strange"
 	origin_tech = list(TECH_MATERIAL = 5)
 
-/obj/item/ore/strangerock/New(loc, var/inside_item_type = 0)
-	..(loc)
-
+/obj/item/ore/strangerock/Initialize(mapload, var/inside_item_type = 0)
+	. = ..(mapload)
 	if(inside_item_type)
 		var/T = get_archeological_find_by_findtype(inside_item_type)
 		new T(src)

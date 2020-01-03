@@ -116,8 +116,8 @@
 	item_state = "gift"
 	w_class = ITEM_SIZE_HUGE
 
-/obj/item/gift/New(newloc, obj/item/wrapped = null)
-	..(newloc)
+/obj/item/gift/Initialize(mapload, obj/item/wrapped = null)
+	. = ..(mapload)
 
 	if(istype(wrapped))
 		gift = wrapped
