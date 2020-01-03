@@ -89,29 +89,28 @@
 	else
 		return ..()
 
-/obj/item/storage/wallet/random/New()
-	..()
+/obj/item/storage/wallet/random/Initialize()
+	. = ..()
 	var/item1_type = pick( /obj/item/spacecash/bundle/c10,/obj/item/spacecash/bundle/c100,/obj/item/spacecash/bundle/c1000,/obj/item/spacecash/bundle/c20,/obj/item/spacecash/bundle/c200,/obj/item/spacecash/bundle/c50, /obj/item/spacecash/bundle/c500)
 	var/item2_type
 	if(prob(50))
 		item2_type = pick( /obj/item/spacecash/bundle/c10,/obj/item/spacecash/bundle/c100,/obj/item/spacecash/bundle/c1000,/obj/item/spacecash/bundle/c20,/obj/item/spacecash/bundle/c200,/obj/item/spacecash/bundle/c50, /obj/item/spacecash/bundle/c500)
 	var/item3_type = pick( /obj/item/material/coin/silver, /obj/item/material/coin/silver, /obj/item/material/coin/gold, /obj/item/material/coin/iron, /obj/item/material/coin/iron, /obj/item/material/coin/iron )
 
-	spawn(2)
-		if(item1_type)
-			new item1_type(src)
-		if(item2_type)
-			new item2_type(src)
-		if(item3_type)
-			new item3_type(src)
+	if(item1_type)
+		new item1_type(src)
+	if(item2_type)
+		new item2_type(src)
+	if(item3_type)
+		new item3_type(src)
 	update_icon()
 
 /obj/item/storage/wallet/poly
 	name = "polychromic wallet"
 	desc = "You can recolor it! Fancy! The future is NOW!"
 
-/obj/item/storage/wallet/poly/New()
-	..()
+/obj/item/storage/wallet/poly/Initialize()
+	. = ..()
 	color = get_random_colour()
 	update_icon()
 

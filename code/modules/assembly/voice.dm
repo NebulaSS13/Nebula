@@ -7,8 +7,8 @@
 	var/listening = 0
 	var/recorded	//the activation message
 
-/obj/item/assembly/voice/New()
-	..()
+/obj/item/assembly/voice/Initialize()
+	. = ..()
 	GLOB.listening_objects += src
 
 /obj/item/assembly/voice/Destroy()

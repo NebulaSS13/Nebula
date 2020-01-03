@@ -96,12 +96,6 @@
 	var/unbreakable = FALSE                    // Whether or not this weapon degrades.
 	var/base_worth = 1                         // Multiplier for base material worth.
 
-/obj/item/New()
-	..()
-	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
-		pixel_x = rand(-randpixel, randpixel)
-		pixel_y = rand(-randpixel, randpixel)
-
 /obj/item/Initialize(var/ml, var/material_key)
 	if(!material_key)
 		material_key = material
@@ -122,6 +116,9 @@
 			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
 				set_extension(src, armor_type, armor, armor_degradation_speed)
 				break
+	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
+		pixel_x = rand(-randpixel, randpixel)
+		pixel_y = rand(-randpixel, randpixel)
 
 /obj/item/Destroy()
 	STOP_PROCESSING(SSobj, src)

@@ -40,8 +40,8 @@
 		/obj/machinery/radiocarbon_spectrometer
 	)
 
-/obj/item/chems/glass/New()
-	..()
+/obj/item/chems/glass/Initialize()
+	. = ..()
 	base_name = name
 
 /obj/item/chems/glass/examine(mob/user, distance)

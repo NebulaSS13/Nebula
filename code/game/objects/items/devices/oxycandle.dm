@@ -16,8 +16,8 @@
 	var/brightness_on = 1 // Moderate-low bright.
 	action_button_name = null
 
-/obj/item/oxycandle/New()
-	..()
+/obj/item/oxycandle/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/item/oxycandle/afterattack(var/obj/O, var/mob/user, var/proximity)

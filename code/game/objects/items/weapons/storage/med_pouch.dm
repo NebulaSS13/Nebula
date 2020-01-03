@@ -186,8 +186,8 @@ Single Use Emergency Pouches
 /obj/item/chems/pill/pouch_pill/paracetamol
 	chem_type = /datum/reagent/paracetamol
 
-/obj/item/chems/pill/pouch_pill/New()
-	..()
+/obj/item/reagent_containers/pill/pouch_pill/Initialize()
+	. = ..()
 	reagents.add_reagent(chem_type, chem_amount)
 	name = "emergency [reagents.get_master_reagent_name()] pill ([reagents.total_volume]u)"
 	color = reagents.get_color()

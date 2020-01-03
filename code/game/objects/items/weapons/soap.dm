@@ -18,13 +18,10 @@
 	var/decal_name
 	var/list/decals = list("diamond", "heart", "circle", "triangle", "")
 
-/obj/item/soap/New()
-	..()
+/obj/item/weapon/soap/Initialize()
+	. = ..()
 	create_reagents(30)
 	wet()
-
-/obj/item/soap/Initialize()
-	. = ..()
 	var/shape = pick(valid_shapes)
 	var/scent = pick(valid_scents)
 	var/smelly = pick(scent_intensity)

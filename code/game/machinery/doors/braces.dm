@@ -52,8 +52,8 @@
 		icon_state = "brace_open"
 
 
-/obj/item/airlock_brace/New()
-	..()
+/obj/item/airlock_brace/Initialize()
+	. = ..()
 	cur_health = max_health
 	electronics = new/obj/item/airlock_electronics/brace(src)
 	update_access()

@@ -9,8 +9,8 @@
 	var/filled = FALSE
 	attack_verb = list("lunched")
 
-/obj/item/storage/lunchbox/New()
-	..()
+/obj/item/storage/lunchbox/Initialize()
+	. = ..()
 	if(filled)
 		var/list/lunches = lunchables_lunches()
 		var/lunch = lunches[pick(lunches)]

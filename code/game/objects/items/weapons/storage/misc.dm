@@ -4,8 +4,8 @@
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"
 
-/obj/item/storage/pill_bottle/dice/New()
-	..()
+/obj/item/storage/pill_bottle/dice/Initialize()
+	. = ..()
 	for(var/i = 1 to 7)
 		new /obj/item/dice( src )
 
@@ -15,8 +15,8 @@
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "magicdicebag"
 
-/obj/item/storage/pill_bottle/dice_nerd/New()
-	..()
+/obj/item/storage/pill_bottle/dice_nerd/Initialize()
+	. = ..()
 	new /obj/item/dice/d4( src )
 	new /obj/item/dice( src )
 	new /obj/item/dice/d8( src )

@@ -38,8 +38,8 @@
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword,/obj/item/handcuffs)
 	siemens_coefficient = 0.3
 
-/obj/item/clothing/suit/space/void/merc/New()
-	..()
+/obj/item/clothing/suit/space/void/merc/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/space/void/merc/prepared

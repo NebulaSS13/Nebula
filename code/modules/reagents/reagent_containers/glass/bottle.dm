@@ -66,8 +66,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/inaprovaline/New()
-	..()
+/obj/item/chems/glass/bottle/inaprovaline/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
 	update_icon()
 
@@ -78,8 +78,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/toxin/New()
-	..()
+/obj/item/chems/glass/bottle/toxin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin, 60)
 	update_icon()
 
@@ -90,8 +90,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/cyanide/New()
-	..()
+/obj/item/chems/glass/bottle/cyanide/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 30) //volume changed to match chloral
 	update_icon()
 
@@ -102,8 +102,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/stoxin/New()
-	..()
+/obj/item/chems/glass/bottle/stoxin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/soporific, 60)
 	update_icon()
 
@@ -114,8 +114,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/chloralhydrate/New()
-	..()
+/obj/item/chems/glass/bottle/chloralhydrate/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/chloralhydrate, 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
 	update_icon()
 
@@ -126,8 +126,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/antitoxin/New()
-	..()
+/obj/item/chems/glass/bottle/antitoxin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/dylovene, 60)
 	update_icon()
 
@@ -138,8 +138,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-1"
 
-/obj/item/chems/glass/bottle/mutagen/New()
-	..()
+/obj/item/chems/glass/bottle/mutagen/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/mutagen, 60)
 	update_icon()
 
@@ -150,8 +150,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-1"
 
-/obj/item/chems/glass/bottle/ammonia/New()
-	..()
+/obj/item/chems/glass/bottle/ammonia/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/ammonia, 60)
 	update_icon()
 
@@ -162,8 +162,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/eznutrient/New()
-	..()
+/obj/item/chems/glass/bottle/eznutrient/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/eznutrient, 60)
 	update_icon()
 
@@ -174,8 +174,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/left4zed/New()
-	..()
+/obj/item/chems/glass/bottle/left4zed/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/left4zed, 60)
 	update_icon()
 
@@ -186,8 +186,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/robustharvest/New()
-	..()
+/obj/item/chems/glass/bottle/robustharvest/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/robustharvest, 60)
 	update_icon()
 
@@ -198,8 +198,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/diethylamine/New()
-	..()
+/obj/item/chems/glass/bottle/diethylamine/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/diethylamine, 60)
 	update_icon()
 
@@ -210,8 +210,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/pacid/New()
-	..()
+/obj/item/chems/glass/bottle/pacid/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/acid/polyacid, 60)
 	update_icon()
 
@@ -223,8 +223,8 @@
 	icon_state = "holyflask"
 
 
-/obj/item/chems/glass/bottle/adminordrazine/New()
-	..()
+/obj/item/chems/glass/bottle/adminordrazine/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/adminordrazine, 60)
 	update_icon()
 
@@ -235,8 +235,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/capsaicin/New()
-	..()
+/obj/item/chems/glass/bottle/capsaicin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/capsaicin, 60)
 	update_icon()
 
@@ -247,7 +247,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/frostoil/New()
-	..()
+/obj/item/chems/glass/bottle/frostoil/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/frostoil, 60)
 	update_icon()

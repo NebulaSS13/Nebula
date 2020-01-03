@@ -11,9 +11,6 @@
 	sharp = 1
 	edge =  1
 
-/obj/item/material/star/New()
-	..()
-
 /obj/item/material/star/throw_impact(atom/hit_atom)
 	..()
 	if(material.radioactivity>0 && istype(hit_atom,/mob/living))

@@ -205,8 +205,8 @@
 		return 1
 
 
-/obj/item/assembly_holder/New()
-	..()
+/obj/item/assembly_holder/Initialize()
+	. = ..()
 	GLOB.listening_objects += src
 
 /obj/item/assembly_holder/Destroy()

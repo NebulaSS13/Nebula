@@ -52,8 +52,8 @@
 	desc = "A simple deck of playing cards."
 	icon_state = "deck"
 
-/obj/item/deck/cards/New()
-	..()
+/obj/item/deck/cards/Initialize()
+	. = ..()
 
 	var/datum/playingcard/P
 	for(var/suit in list("spades","clubs","diamonds","hearts"))
