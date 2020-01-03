@@ -35,8 +35,8 @@
 	var/obj/item/storage/messenger/messenger_bag
 	var/obj/item/card/id/access_card
 
-/mob/living/simple_animal/crow/New()
-	..()
+/mob/living/simple_animal/crow/Initialize()
+	. = ..()
 	messenger_bag = new(src)
 	update_icon()
 

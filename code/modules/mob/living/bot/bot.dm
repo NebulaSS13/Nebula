@@ -46,8 +46,8 @@
 
 	layer = HIDING_MOB_LAYER
 
-/mob/living/bot/New()
-	..()
+/mob/living/bot/Initialize()
+	. = ..()
 	update_icons()
 
 	botcard = new /obj/item/card/id(src)
