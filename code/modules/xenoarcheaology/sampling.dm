@@ -8,7 +8,8 @@
 	sharp = 1
 	var/datum/geosample/geological_data
 
-/obj/item/rocksliver/New()
+/obj/item/rocksliver/Initialize()
+	. = ..()
 	icon_state = "sliver[rand(1, 3)]"
 
 /datum/geosample

@@ -538,7 +538,7 @@
 	desc = "Contains only water, malt and hops."
 	icon_state = "beer"
 	center_of_mass = "x=16;y=12"
-/obj/item/chems/food/drinks/bottle/small/beer/New()
+/obj/item/chems/food/drinks/bottle/small/beer/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/beer, 30)
 
@@ -548,7 +548,7 @@
 	icon_state = "alebottle"
 	item_state = "beer"
 	center_of_mass = "x=16;y=10"
-/obj/item/chems/food/drinks/bottle/small/ale/New()
+/obj/item/chems/food/drinks/bottle/small/ale/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/ale, 30)
 
@@ -580,6 +580,6 @@
 	icon_state = "oil"
 	isGlass = 0
 
-/obj/item/chems/food/drinks/bottle/oiljug/New()
+/obj/item/chems/food/drinks/bottle/oiljug/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/lube/oil, 100)
