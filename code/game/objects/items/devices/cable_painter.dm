@@ -1,4 +1,4 @@
-obj/item/cable_painter
+/obj/item/cable_painter
 	name = "cable painter"
 	desc = "A device for repainting cables."
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -8,8 +8,8 @@ obj/item/cable_painter
 	var/list/modes
 	w_class = ITEM_SIZE_SMALL
 
-obj/item/cable_painter/New()
-	..()
+/obj/item/cable_painter/Initialize()
+	. = ..()
 	color_selection = pick(GLOB.possible_cable_colours)
 
 obj/item/cable_painter/examine(mob/user, distance)
@@ -17,7 +17,7 @@ obj/item/cable_painter/examine(mob/user, distance)
 	if(distance <= 1)
 		to_chat(user, "The color is currently set to [lowertext(color_selection)].")
 
-obj/item/cable_painter/attack_self(mob/user)
+/obj/item/cable_painter/attack_self(mob/user)
 	var/new_color_selection = input("What color would you like to use?", "Choose a Color", color_selection) as null|anything in GLOB.possible_cable_colours
 	if(new_color_selection && !user.incapacitated() && (src in user))
 		color_selection = new_color_selection
