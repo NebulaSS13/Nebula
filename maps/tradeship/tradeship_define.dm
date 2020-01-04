@@ -16,7 +16,9 @@
 	default_law_type = /datum/ai_laws/corporate
 
 	evac_controller_type = /datum/evacuation_controller/lifepods
-	lobby_screens = list('maps/tradeship/lobby/bloodmoney.png','maps/tradeship/lobby/vapormoney.png')
+
+	// yingspace.png was remixed from Out-Of-Placers assets by Raptie and is included with kind permission.
+	lobby_screens = list('maps/tradeship/lobby/yingspace.png')
 
 	allowed_spawns = list("Cryogenic Storage")
 	default_spawn = "Cryogenic Storage"
