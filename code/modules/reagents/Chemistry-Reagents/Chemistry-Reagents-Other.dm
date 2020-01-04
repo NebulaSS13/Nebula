@@ -426,8 +426,6 @@
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 
 /datum/reagent/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	..()
 	M.add_chemical_effect(CE_SQUEAKY, 1)
 
@@ -439,10 +437,6 @@
 	reagent_state = LIQUID
 	color = COLOR_GRAY80
 
-/datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
-		M.adjustToxLoss(removed * 6)
-
 /datum/reagent/carbon_monoxide
 	name = "Carbon Monoxide"
 	description = "A dangerous carbon comubstion byproduct."
@@ -452,7 +446,7 @@
 	metabolism = 0.05 // As with helium.
 
 /datum/reagent/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(!istype(M) || alien == IS_DIONA)
+	if(!istype(M))
 		return
 	var/warning_message
 	var/warning_prob = 10

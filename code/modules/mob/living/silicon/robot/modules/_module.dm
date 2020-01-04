@@ -10,12 +10,7 @@
 	var/channels = list()
 	var/networks = list()
 	var/languages = list(
-		LANGUAGE_HUMAN_EURO = 1,
-		LANGUAGE_UNATHI_SINTA = 0,
-		LANGUAGE_SKRELLIAN = 0,
-		LANGUAGE_GUTTER = 1,
-		LANGUAGE_SIGN = 0,
-		LANGUAGE_HUMAN_RUSSIAN = 1
+		LANGUAGE_HUMAN = 1
 		)
 	var/sprites = list()
 	var/can_be_pushed = 1

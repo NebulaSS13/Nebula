@@ -228,7 +228,6 @@
 
 /obj/item/clothing/shoes/laceup/sneakies
 	desc = "The height of fashion, and they're pre-polished. Upon further inspection, the soles appear to be on backwards. They look uncomfortable."
-	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints/reversed
 	item_flags = ITEM_FLAG_SILENT
 

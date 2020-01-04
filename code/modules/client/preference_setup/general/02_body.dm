@@ -246,7 +246,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			switch(organ_name)
 				if(BP_HEART)
 					. += "\tPacemaker-assisted [organ_name]"
-				if("voicebox") //on adding voiceboxes for speaking skrell/similar replacements
+				if("voicebox") //on adding voiceboxes for speaking alien languages
 					. += "\tSurgically altered [organ_name]"
 				if(BP_EYES)
 					. += "\tRetinal overlayed [organ_name]"

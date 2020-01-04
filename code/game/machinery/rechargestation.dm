@@ -77,10 +77,6 @@
 
 	if(target && !target.fully_charged())
 		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick
-		if(ishuman(occupant))
-			var/mob/living/carbon/human/H = occupant
-			if(H.species.name == SPECIES_ADHERENT)
-				diff /= 2 //Adherents charge at half the normal rate.
 		var/charge_used = diff - use_power_oneoff(diff / CELLRATE, LOCAL) * CELLRATE
 		target.give(charge_used)
 

@@ -114,8 +114,8 @@
 		/obj/item/weapon/material/knife,
 	)
 
-	new /obj/item/weapon/material/knife/table/unathi(hold)
-	new /obj/item/weapon/material/knife/table/unathi(hold)
+	new /obj/item/weapon/material/knife/table/primitive(hold)
+	new /obj/item/weapon/material/knife/table/primitive(hold)
 
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"

@@ -107,7 +107,7 @@
 	user.visible_message("<span class='warning'>[user] jumped up and down on \the [target]'s [affecting.name]!</span>")
 	playsound(user.loc, attack_sound, 25, 1, -1)
 
-/datum/unarmed_attack/tail //generally meant for people like unathi
+/datum/unarmed_attack/tail
 	attack_verb = list ("bludgeoned", "lashed", "smacked", "whapped")
 	attack_noun = list ("tail")
 	attack_name = "tail swipe"

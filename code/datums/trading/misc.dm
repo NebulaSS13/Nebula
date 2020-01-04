@@ -1,11 +1,10 @@
 /datum/trader/ship/pet_shop
 	name = "Pet Shop Owner"
-	name_language = LANGUAGE_SKRELLIAN
+	name_language = LANGUAGE_HUMAN
 	origin = "Pet Shop"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
 	possible_origins = list("Paws-Out", "Pets-R-Smart", "Tentacle Companions", "Xeno-Pets and Assorted Goods", "Barks and Drools")
 	speech = list("hail_generic"    = "Welcome to my xeno-pet shop! Here you will find many wonderful companions. Some a bit more... aggressive than others. But companions none the less. I also buy pets, or trade them.",
-				"hail_Skrell"       = "Ah! A fellow Skrell. How wonderful, I may have a few pets imported from back home. Take a look.",
 				"hail_deny"         = "I no longer wish to speak to you.",
 
 				"trade_complete"    = "Remember to give them attention and food. They are living beings, and you should treat them like so.",
@@ -68,7 +67,7 @@
 
 /datum/trader/ship/prank_shop
 	name = "Prank Shop Owner"
-	name_language = LANGUAGE_ROOTLOCAL
+	name_language = LANGUAGE_HUMAN
 	origin = "Prank Shop"
 	compliment_increase = 0
 	insult_drop = 0
@@ -113,7 +112,6 @@
 	origin = "Replica Store"
 	possible_origins = list("Ye-Old Armory", "Knights and Knaves", "The Blacksmith", "Historical Human Apparel and Items", "The Pointy End", "Fight Knight's Knightly Nightly Knight Fights", "Elminster's Fine Steel", "The Arms of King Duordan", "Queen's Edict")
 	speech = list("hail_generic" = "Greetings, traveler! You've the look of one with a keen hunger for human history. Come in, and learn! Mayhaps even... buy?",
-				"hail_Unathi"    = "Ah, you've the look of a lizard who knows his way around martial combat. Come in! We can only hope our steel meets the formidable Moghedi standards.",
 				"hail_deny"      = "I shan't palaver with a man who thumbs his nose at the annals of history. Goodbye.",
 
 				"trade_complete" = "Thank you, mighty warrior. And remember - these may be replicas, but their edges are honed to razor sharpness!",
@@ -127,7 +125,7 @@
 				"insult_good"    = "Hey, bro, I'm just tryin' to make a living here, okay? The Camelot schtick is part of my brand.",
 				"insult_bad"     = "Man, fuck you, then.",
 
-				"bribe_refusal"  = "Alas, traveler - I could stay all eve, but I've an Unathi client in waiting, and they are not known for patience.",
+				"bribe_refusal"  = "Alas, traveler - I could stay all eve, but I've an client in waiting, and they are not known for patience.",
 				"bribe_accept"   = "Mayhaps I could set a spell longer, and rest my weary feet.",
 				)
 	possible_trading_items = list(/obj/item/clothing/head/wizard/magus = TRADER_THIS_TYPE,

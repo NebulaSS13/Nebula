@@ -34,8 +34,6 @@
 	if(power_cell)
 		power_cell.charge = power_cell.maxcharge
 		to_chat(user, "<span class='notice'><b>Your [power_cell] has been charged to capacity.</b></span>")
-	if(istype(H) && H.species.name == SPECIES_ADHERENT)
-		return
 	if(isrobot(user))
 		user.apply_damage(150, BURN, def_zone = BP_CHEST)
 		visible_message("<span class='danger'>Electricity arcs off [user] as it touches \the [src]!</span>")

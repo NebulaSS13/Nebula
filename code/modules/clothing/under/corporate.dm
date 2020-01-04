@@ -13,9 +13,6 @@
 	siemens_coefficient = 0.9
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
-		)
 
 /obj/item/clothing/under/rank/scientist
 	name = "\improper EXO polo and pants"
@@ -29,9 +26,6 @@
 		)
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
-		)
 	starting_accessories = list(/obj/item/clothing/accessory/tunic)
 
 /obj/item/clothing/under/rank/scientist/executive
@@ -53,9 +47,6 @@
 		)
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
-		)
 
 /obj/item/clothing/under/rank/ntpilot
 	name = "green flight suit"
@@ -65,9 +56,6 @@
 	worn_state = "pilot"
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
-		)
 
 /obj/item/clothing/under/suit_jacket/corp
 	name = "\improper EXO executive suit"
@@ -78,9 +66,6 @@
 	starting_accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket, /obj/item/clothing/accessory/corptie)
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
-		)
 
 //NanoTrasen
 /obj/item/clothing/under/rank/guard/nanotrasen
@@ -115,9 +100,6 @@
 	item_state = "r_suit"
 	worn_state = "pilot_nt"
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
-		)
 
 /obj/item/clothing/under/suit_jacket/corp/nanotrasen
 	name = "\improper NanoTrasen executive suit"
@@ -158,9 +140,6 @@
 	icon_state = "pilot_heph"
 	worn_state = "pilot_heph"
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
-		)
 
 /obj/item/clothing/under/suit_jacket/corp/heph
 	name = "\improper Hephaestus executive suit"

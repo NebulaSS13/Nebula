@@ -188,7 +188,7 @@
 /decl/random_chem_effect/random_properties/cooling_act(var/datum/reagent/random/reagent, var/datum/reagents/reagents)
 
 /decl/random_chem_effect/random_properties/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
-	if(chem_effect_define && alien != IS_DIONA) // screw diona
+	if(chem_effect_define) // screw diona
 		M.add_chemical_effect(chem_effect_define, value)
 
 /decl/random_chem_effect/random_properties/get_interactions(var/datum/reagent/random/reagent, var/sci_skill, var/chem_skill)
@@ -347,8 +347,7 @@
 	desc = "acute toxicity"
 
 /decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
-	if(alien != IS_DIONA)
-		M.adjustToxLoss(value * removed)
+	M.adjustToxLoss(value * removed)
 
 /decl/random_chem_effect/random_properties/heal_brute
 	beneficial = 1
@@ -356,8 +355,7 @@
 	desc = "tissue repair"
 
 /decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
-	if(alien != IS_DIONA)
-		M.heal_organ_damage(removed * value, 0)
+	M.heal_organ_damage(removed * value, 0)
 
 /decl/random_chem_effect/random_properties/heal_burns
 	beneficial = 1
@@ -365,8 +363,7 @@
 	desc = "burn repair"
 
 /decl/random_chem_effect/random_properties/heal_brute/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
-	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, removed * value)
+	M.heal_organ_damage(0, removed * value)
 
 #undef RANDOM_CHEM_EFFECT_TRUE
 #undef RANDOM_CHEM_EFFECT_INT

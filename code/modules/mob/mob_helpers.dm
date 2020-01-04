@@ -26,10 +26,6 @@
 		update_emotes()
 	return full_prosthetic
 
-/mob/living/carbon/human/proc/isFBP()
-	return istype(internal_organs_by_name[BP_BRAIN], /obj/item/organ/internal/mmi_holder)
-
-
 /mob/living/silicon/isSynthetic()
 	return 1
 

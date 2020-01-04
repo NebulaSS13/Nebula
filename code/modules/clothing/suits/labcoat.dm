@@ -67,18 +67,6 @@
 	desc = "A cozy overcoat."
 	color = "#292929"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/xyn_machine
-	name = "\improper Xynergy labcoat"
-	desc = "A stiffened, stylised labcoat designed to fit IPCs. It has blue and purple trim, denoting it as a Xynergy labcoat."
-	icon_state = "labcoat_xy"
-	icon_open = "labcoat_xy_open"
-	icon_closed = "labcoat_xy"
-	armor = list(
-		melee = ARMOR_MELEE_MINOR, 
-		bio = ARMOR_BIO_MINOR
-		)
-	species_restricted = list(SPECIES_IPC)
-
 /obj/item/clothing/suit/storage/toggle/labcoat/foundation
 	name = "\improper Foundation labcoat"
 	desc = "A medical labcoat with a Cuchulain Foundation crest stencilled on the back."

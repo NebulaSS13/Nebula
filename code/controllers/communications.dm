@@ -103,7 +103,6 @@ var/const/PUBLIC_HIGH_FREQ	= 1489
 var/const/RADIO_HIGH_FREQ	= 1600
 
 var/const/BOT_FREQ	= 1447
-var/const/SKRELL_FREQ = 1598
 var/const/COMM_FREQ = 1353
 var/const/ERT_FREQ	= 1345
 var/const/AI_FREQ	= 1343
@@ -152,8 +151,7 @@ var/list/radiochannels = list(
 	"AI Private"	= AI_FREQ,
 	"Entertainment" = ENT_FREQ,
 	"Medical(I)"	= MED_I_FREQ,
-	"Security(I)"	= SEC_I_FREQ,
-	"Recon"			= SKRELL_FREQ
+	"Security(I)"	= SEC_I_FREQ
 )
 
 var/list/channel_color_presets = list(
@@ -168,8 +166,7 @@ var/list/channel_color_presets = list(
 	"Tantalizing Turquoise" = COMMS_COLOR_MEDICAL,
 	"Bemoaning Brown" = COMMS_COLOR_SUPPLY,
 	"Gastric Green" = COMMS_COLOR_SERVICE,
-	"Bold Brass" = COMMS_COLOR_EXPLORER,
-	"Viewable Violet" = COMMS_COLOR_SKRELL	
+	"Bold Brass" = COMMS_COLOR_EXPLORER
 )
 
 // central command channels, i.e deathsquid & response teams
