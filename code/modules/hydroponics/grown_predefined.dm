@@ -1,5 +1,5 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
-	plantname = "ambrosia"
+	plantname = "biteleaf"
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
-	plantname = "ambrosiadeus"
+	plantname = "biteleafdeus"

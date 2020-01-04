@@ -217,7 +217,7 @@ var/global/list/plant_seed_sprites = list()
 	seed_type = "goldapple"
 
 /obj/item/seeds/ambrosiavulgarisseed
-	seed_type = "ambrosia"
+	seed_type = "biteleaf"
 
 /obj/item/seeds/ambrosiadeusseed
 	seed_type = "ambrosiadeus"

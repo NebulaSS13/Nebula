@@ -881,11 +881,11 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/tossedsalad
 
 /datum/recipe/aesirsalad
-	fruit = list("goldapple" = 1, "ambrosiadeus" = 1)
+	fruit = list("goldapple" = 1, "biteleafdeus" = 1)
 	result = /obj/item/weapon/reagent_containers/food/snacks/aesirsalad
 
 /datum/recipe/validsalad
-	fruit = list("potato" = 1, "ambrosia" = 3)
+	fruit = list("potato" = 1, "biteleaf" = 3)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meatball)
 	result = /obj/item/weapon/reagent_containers/food/snacks/validsalad
 	make_food(var/obj/container as obj)
