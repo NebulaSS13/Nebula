@@ -126,7 +126,7 @@
 	icon_state = "whitedress"
 
 /obj/item/clothing/shoes/sandal
-	desc = "A pair of rather plain, wooden sandals."
+	desc = "A pair of rather plain wooden sandals."
 	name = "sandals"
 	icon_state = "wizard"
 	species_restricted = null
@@ -134,6 +134,14 @@
 	wizard_garb = 1
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
+
+/obj/item/clothing/shoes/sandal/yinglet
+	name = "small sandals"
+	desc = "A pair of rather plain wooden sandals. They seem to be the right size and shape for a yinglet."
+	species_restricted = list(SPECIES_YINGLET)
+	item_icons = list(
+		slot_shoes_str = 'maps/tradeship/icons/onmob_shoes_yinglet.dmi'
+	)
 
 /obj/item/clothing/shoes/sandal/marisa
 	desc = "A pair of magic, black shoes."

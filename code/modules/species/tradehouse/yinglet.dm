@@ -3,7 +3,7 @@
 	name = SPECIES_YINGLET
 	name_plural = "Yinglets"
 	description = "A species of short, slender rat-birds with a fondness for clams. Commonly found wherever humans are, \
-	either scavenging amongst their leavings of benefiting from adjacency to an older and more developed culture."
+	either scavenging amongst their leavings, or benefiting from adjacency to an older and more developed culture."
 	autohiss_basic_map = list("th" = list("z"))
 
 	icobase =         'icons/mob/human_races/species/yinglet/body.dmi'
@@ -62,7 +62,8 @@
 
 /datum/species/yinglet/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
-	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H), slot_shoes)
+	if(H && !H.shoes)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal/yinglet(H), slot_shoes)
 
 /datum/species/yinglet/New()
 	equip_adjust = list(
