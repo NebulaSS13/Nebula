@@ -12,8 +12,6 @@
 
 // Cultural IDs.
 #define FACTION_OTHER          "Other Faction"
-#define FACTION_TEST_SUBJECTS  "Test Subjects"
-
 
 #define HOME_SYSTEM_STATELESS  "Stateless"
 #define HOME_SYSTEM_OTHER      "Other System"

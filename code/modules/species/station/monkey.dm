@@ -50,7 +50,7 @@
 	force_cultural_info = list(
 		TAG_CULTURE =   CULTURE_MONKEY,
 		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
+		TAG_FACTION =   FACTION_OTHER
 	)
 
 	var/list/no_touchie = list(/obj/item/weapon/mirror,
