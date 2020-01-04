@@ -1,7 +1,7 @@
 /datum/unit_test/station_wires_shall_be_connected
 	exceptions = list(list(48, 54, 2, EAST))
 
-/datum/map/bearcat
+/datum/map/tradeship
 	// Unit test exemptions
 
 	apc_test_exempt_areas = list(

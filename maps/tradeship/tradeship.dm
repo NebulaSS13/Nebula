@@ -1,27 +1,26 @@
 #if !defined(using_map_DATUM)
-	#include "bearcat_unit_testing.dm"
+	#include "tradeship_unit_testing.dm"
 
 	#include "../../code/datums/music_tracks/businessend.dm"
 	#include "../../code/datums/music_tracks/salutjohn.dm"
 
-	#include "bearcat_areas.dm"
-	#include "bearcat_jobs.dm"
-	#include "bearcat_lobby.dm"
-	#include "bearcat_shuttles.dm"
-	#include "bearcat_overmap.dm"
-	#include "bearcat_overrides.dm"
-	#include "bearcat_loadouts.dm"
-	#include "bearcat-1.dmm"
-	#include "bearcat-2.dmm"
+	#include "tradeship_areas.dm"
+	#include "tradeship_jobs.dm"
+	#include "tradeship_lobby.dm"
+	#include "tradeship_shuttles.dm"
+	#include "tradeship_overmap.dm"
+	#include "tradeship_overrides.dm"
+	#include "tradeship_loadouts.dm"
+	#include "tradeship-1.dmm"
+	#include "tradeship-2.dmm"
 
-	#define using_map_DATUM /datum/map/bearcat
+	#define using_map_DATUM /datum/map/tradeship
 
 #elif !defined(MAP_OVERRIDE)
 
-	#warn A map has already been included, ignoring Bearcat
+	#warn A map has already been included, ignoring Tradeship
 
 #endif
-
 
 /turf/simulated/floor
 	name = "bare deck"

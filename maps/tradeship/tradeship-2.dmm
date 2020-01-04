@@ -11,7 +11,7 @@
 "ac" = (
 /obj/machinery/airlock_sensor{
 	frequency = 1383;
-	id_tag = "bearcat_shuttle_sensor";
+	id_tag = "tradeship_shuttle_sensor";
 	pixel_y = -24
 	},
 /obj/structure/cable{
@@ -23,7 +23,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
 	frequency = 1383;
-	id_tag = "bearcat_shuttle_pump_out_internal"
+	id_tag = "tradeship_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/shuttle/outgoing)
@@ -51,7 +51,7 @@
 /turf/space,
 /area/space)
 "ak" = (
-/obj/effect/overmap/visitable/ship/bearcat,
+/obj/effect/overmap/visitable/ship/tradeship,
 /turf/space,
 /area/space)
 "ar" = (
@@ -332,7 +332,7 @@
 /obj/structure/sign/warning/vacuum{
 	pixel_x = -35
 	},
-/obj/machinery/computer/shuttle_control/explore/bearcat{
+/obj/machinery/computer/shuttle_control/explore/tradeship{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -478,7 +478,7 @@
 	opacity = 0
 	},
 /obj/machinery/access_button/airlock_interior{
-	master_tag = "bearcat_starboard_dock";
+	master_tag = "tradeship_starboard_dock";
 	pixel_x = -12;
 	pixel_y = 20
 	},
@@ -506,7 +506,7 @@
 	pixel_y = 37
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	id_tag = "bearcat_starboard_dock";
+	id_tag = "tradeship_starboard_dock";
 	pixel_y = 25;
 	tag_airpump = "dock_star_pump";
 	tag_chamber_sensor = "dock_star_sensor";
@@ -541,7 +541,7 @@
 /area/ship/scrap/dock)
 "ca" = (
 /obj/machinery/access_button/airlock_exterior{
-	master_tag = "bearcat_starboard_dock";
+	master_tag = "tradeship_starboard_dock";
 	pixel_x = 18;
 	pixel_y = 20
 	},
@@ -3857,11 +3857,11 @@
 "jc" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
 	frequency = 1383;
-	id_tag = "bearcat_shuttle_out"
+	id_tag = "tradeship_shuttle_out"
 	},
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1383;
-	master_tag = "bearcat_shuttle";
+	master_tag = "tradeship_shuttle";
 	pixel_x = 18;
 	pixel_y = -20
 	},
@@ -4641,7 +4641,7 @@
 "lc" = (
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1383;
-	master_tag = "bearcat_dock_port";
+	master_tag = "tradeship_dock_port";
 	pixel_x = -18;
 	pixel_y = 20
 	},
@@ -4783,7 +4783,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/dock)
 "ob" = (
-/obj/machinery/computer/shuttle_control/explore/bearcat,
+/obj/machinery/computer/shuttle_control/explore/tradeship,
 /obj/effect/shuttle_landmark/docking_arm_port/shuttle,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	icon_state = "intact";
@@ -4802,7 +4802,7 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1383;
-	id_tag = "bearcat_dock_port";
+	id_tag = "tradeship_dock_port";
 	pixel_y = 25;
 	tag_airpump = "dock_port_pump";
 	tag_chamber_sensor = "dock_port_sensor";
@@ -4857,7 +4857,7 @@
 	},
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1383;
-	master_tag = "bearcat_dock_port";
+	master_tag = "tradeship_dock_port";
 	pixel_x = 12;
 	pixel_y = 20
 	},
@@ -5367,7 +5367,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
 	frequency = 1383;
-	id_tag = "bearcat_shuttle_pump_out_external"
+	id_tag = "tradeship_shuttle_pump_out_external"
 	},
 /obj/structure/handrai{
 	tag = "icon-handrail (EAST)";
@@ -6763,14 +6763,14 @@
 "Yb" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
 	frequency = 1383;
-	id_tag = "bearcat_shuttle_in"
+	id_tag = "tradeship_shuttle_in"
 	},
 /obj/structure/cable{
 	icon_state = "4-10"
 	},
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1383;
-	master_tag = "bearcat_shuttle";
+	master_tag = "tradeship_shuttle";
 	pixel_x = -12;
 	pixel_y = 20
 	},
@@ -6830,18 +6830,18 @@
 "Zb" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	frequency = 1383;
-	id_tag = "bearcat_shuttle_pump"
+	id_tag = "tradeship_shuttle_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
 	frequency = 1383;
-	id_tag = "bearcat_shuttle";
+	id_tag = "tradeship_shuttle";
 	pixel_x = 0;
 	pixel_y = -24;
-	tag_airpump = "bearcat_shuttle_pump";
-	tag_chamber_sensor = "bearcat_shuttle_sensor";
-	tag_exterior_door = "bearcat_shuttle_out";
-	tag_interior_door = "bearcat_shuttle_in"
+	tag_airpump = "tradeship_shuttle_pump";
+	tag_chamber_sensor = "tradeship_shuttle_sensor";
+	tag_exterior_door = "tradeship_shuttle_out";
+	tag_interior_door = "tradeship_shuttle_in"
 	},
 /obj/structure/cable{
 	d1 = 4;

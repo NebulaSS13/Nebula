@@ -1,22 +1,22 @@
-/datum/map/bearcat
-	name = "Bearcat"
-	full_name = "Bearcat"
-	path = "overmap_example"
+/datum/map/tradeship
+	name = "Tradeship"
+	full_name = "Tradeship Ivanmoth"
+	path = "tradeship"
 
-	station_name  = "FTV Bearcat"
-	station_short = "Bearcat"
+	station_name  = "Tradeship Ivanmoth"
+	station_short = "Ivanmoth"
 
-	dock_name     = "FTS Capitalist's Rest"
-	boss_name     = "FTU Merchant Navy"
-	boss_short    = "Merchant Admiral"
-	company_name  = "Legit Cargo Ltd."
-	company_short = "LC"
+	dock_name     = "Val Salia Station"
+	boss_name     = "Tradehouse Administration"
+	boss_short    = "Admin"
+	company_name  = "Tradehouse Ivanmoth"
+	company_short = "Ivanmoth"
 	overmap_event_areas = 11
 
 	default_law_type = /datum/ai_laws/corporate
 
 	evac_controller_type = /datum/evacuation_controller/lifepods
-	lobby_screens = list('maps/bearcat/lobby/bloodmoney.png','maps/bearcat/lobby/vapormoney.png')
+	lobby_screens = list('maps/tradeship/lobby/bloodmoney.png','maps/tradeship/lobby/vapormoney.png')
 
 	allowed_spawns = list("Cryogenic Storage")
 	default_spawn = "Cryogenic Storage"
@@ -35,11 +35,11 @@
 	department_money = 0
 	salary_modifier = 0.2
 
-/datum/map/bearcat/get_map_info()
+/datum/map/tradeship/get_map_info()
 	return "You're aboard the <b>[station_name],</b> an independent vessel affiliated with Free Trade Union, on a SPACE FRONTIER. \
 	No major corporation or government has laid claim on the planets in this sector, so their exploitation is entirely up to you - mine, poach and deforest all you want."
 
-/datum/map/bearcat/setup_map()
+/datum/map/tradeship/setup_map()
 	..()
 	SStrade.traders += new /datum/trader/xeno_shop
 	SStrade.traders += new /datum/trader/medical
