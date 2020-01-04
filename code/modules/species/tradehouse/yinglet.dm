@@ -1,3 +1,4 @@
+// Semi-adapted from Polaris Teshari.
 /datum/species/yinglet
 	name = SPECIES_YINGLET
 	name_plural = "Yinglets"
@@ -6,7 +7,26 @@
 	icobase =  'icons/mob/human_races/species/yinglet/body.dmi'
 	deform =  'icons/mob/human_races/species/yinglet/body.dmi'
 	limb_blend = ICON_MULTIPLY
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	bump_flag = MONKEY
+	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
+
+	has_limbs = list(
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest/yinglet),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin/yinglet),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/yinglet),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/yinglet),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/yinglet),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/yinglet),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/yinglet),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand/yinglet),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/yinglet),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/yinglet),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/yinglet)
+		)
+
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_STOMACH =  /obj/item/organ/internal/stomach,
@@ -20,6 +40,21 @@
 		/datum/mob_descriptor/height = -3,
 		/datum/mob_descriptor/build =  -3
 	)
+	min_age = 5
+	max_age = 20
+	slowdown = -1
+	total_health = 75
+	brute_mod = 1.25
+	burn_mod =  1.25
+	mob_size = MOB_SMALL
+	holder_type = /obj/item/weapon/holder/human
+	blood_volume = 350
+	hunger_factor = 0.1
+	inherent_verbs = list(/mob/living/proc/hide)
+
+/datum/species/yinglet/equip_survival_gear(var/mob/living/carbon/human/H)
+	..()
+	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H), slot_shoes)
 
 /datum/species/yinglet/New()
 	equip_adjust = list(

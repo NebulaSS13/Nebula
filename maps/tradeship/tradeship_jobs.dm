@@ -17,8 +17,7 @@
 	)
 
 /datum/job/captain
-	title = "Trademaster"
-	supervisors = "your profit margin and your conscience"
+	supervisors = "your profit margin, your conscience, and Trademaster Viracroix"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/captain
 	min_skill = list(   SKILL_WEAPONS = SKILL_ADEPT,
 	                    SKILL_SCIENCE     = SKILL_ADEPT,
@@ -107,7 +106,7 @@
 
 /datum/job/hop
 	title = "First Mate"
-	supervisors = "the Trademaster"
+	supervisors = "the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/mate
 	hud_icon = "hudheadofpersonnel"
 	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
@@ -154,6 +153,52 @@
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
 	total_positions = 1
 	spawn_positions = 1
+
+//TODO
+/*
+/datum/job/rd
+	title = "Head Researcher"
+	spawn_positions = 1
+	total_positions = 1
+
+/datum/job/scientist
+	title = "Researcher"
+	spawn_positions = 1
+	total_positions = 2
+
+/datum/job/yinglet
+	title = "Enclave Scav"
+	spawn_positions = 2
+	total_positions = 4
+	hud_icon = "hudying"
+	supervisors = "the Matriarch and the Patriarches"
+	var/requires_species = SPECIES_YINGLET
+	var/requires_gender = MALE
+
+/datum/job/yinglet/some_check
+	check requires_species
+	check requires_gender
+
+/datum/job/yinglet/patriarch
+	title = "Enclave Patriarch"
+	hud_icon = "hudyingpatriarch"
+	spawn_positions = 1
+	total_positions = 2
+	supervisors = "the Matriarch"
+
+/datum/job/yinglet/lady
+	title = "Enclave Lady"
+	hud_icon = "hudyinglady"
+	spawn_positions = 1
+	total_positions = 3
+	requires_gender = FEMALE
+
+/datum/job/yinglet/lady/matriarch
+	title = "Enclave Matriarch"
+	hud_icon = "hudyingmatriarch"
+	spawn_positions = 1
+	total_positions = 1
+*/
 
 
 // OUTFITS
