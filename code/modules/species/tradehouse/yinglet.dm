@@ -2,10 +2,18 @@
 /datum/species/yinglet
 	name = SPECIES_YINGLET
 	name_plural = "Yinglets"
-	description = "Clams?"
+	description = "A species of short, slender rat-birds with a fondness for clams. Commonly found wherever humans are, \
+	either scavenging amongst their leavings of benefiting from adjacency to an older and more developed culture."
 	autohiss_basic_map = list("th" = list("z"))
-	icobase =  'icons/mob/human_races/species/yinglet/body.dmi'
-	deform =  'icons/mob/human_races/species/yinglet/body.dmi'
+
+	icobase =         'icons/mob/human_races/species/yinglet/body.dmi'
+	deform =          'icons/mob/human_races/species/yinglet/deformed_body.dmi'
+	preview_icon =    'icons/mob/human_races/species/yinglet/preview.dmi'
+	husk_icon =       'icons/mob/human_races/species/yinglet/husk.dmi'
+	damage_overlays = 'icons/mob/human_races/species/yinglet/damage_overlay.dmi'
+	damage_mask =     'icons/mob/human_races/species/yinglet/damage_mask.dmi'
+	blood_mask =      'icons/mob/human_races/species/yinglet/blood_mask.dmi'
+
 	limb_blend = ICON_MULTIPLY
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
