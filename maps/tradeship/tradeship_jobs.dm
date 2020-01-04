@@ -159,13 +159,19 @@
 // OUTFITS
 #define TRADESHIP_OUTFIT_JOB_NAME(job_name) ("Tradeship - Job - " + job_name)
 
-/decl/hierarchy/outfit/job/tradeship/
+/decl/hierarchy/outfit/job/tradeship
 	hierarchy_type = /decl/hierarchy/outfit/job/tradeship
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store
-	uniform = /obj/item/clothing/under/tradeship_plain
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat
 	l_ear = null
 	r_ear = null
+	var/yinglet_suit_fallback = /obj/item/clothing/suit/storage/toggle/redcoat/yinglet
+
+/decl/hierarchy/outfit/job/tradeship/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+	. = ..()
+	if(. && yinglet_suit_fallback && istype(H) && !H.wear_suit && H.species.get_bodytype(H) == SPECIES_YINGLET)
+		H.equip_to_slot_or_del(new yinglet_suit_fallback(H), slot_wear_suit)
 
 /decl/hierarchy/outfit/job/tradeship/captain
 	name = TRADESHIP_OUTFIT_JOB_NAME("Captain")
@@ -174,6 +180,7 @@
 	pda_type = /obj/item/modular_computer/pda/captain
 	r_pocket = /obj/item/device/radio
 	id_type = /obj/item/weapon/card/id/gold
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officer
 
 /decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
@@ -198,6 +205,7 @@
 	id_type = /obj/item/weapon/card/id/engineering/head
 	r_pocket = /obj/item/device/radio
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 
 /decl/hierarchy/outfit/job/tradeship/doc
 	name = TRADESHIP_OUTFIT_JOB_NAME("Ship's Doc")
@@ -205,6 +213,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/laceup
 	pda_type = /obj/item/modular_computer/pda/medical
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 
 /decl/hierarchy/outfit/job/tradeship/mate
 	name = TRADESHIP_OUTFIT_JOB_NAME("First Mate")
@@ -213,6 +222,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	pda_type = /obj/item/modular_computer/pda/cargo
 	l_hand = /obj/item/weapon/material/clipboard
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
 
 /decl/hierarchy/outfit/job/tradeship/hand
 	name = TRADESHIP_OUTFIT_JOB_NAME("Deck Hand")
@@ -224,14 +234,10 @@
 /decl/hierarchy/outfit/job/tradeship/hand/cook
 	name = TRADESHIP_OUTFIT_JOB_NAME("Cook")
 	head = /obj/item/clothing/head/chefhat
-	suit = /obj/item/clothing/suit/chef/classic
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
 
 /decl/hierarchy/outfit/job/tradeship/hand/engine
 	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Engineer")
 	head = /obj/item/clothing/head/hardhat
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
-
-/decl/hierarchy/outfit/job/tradeship/hand/engine/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(prob(50))
-		suit = /obj/item/clothing/suit/storage/hazardvest
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
