@@ -288,6 +288,7 @@
 #define CORPSE_CAN_REENTER_AND_RESPAWN 2
 
 #define SPECIES_HUMAN       "Human"
+#define SPECIES_YINGLET     "Yinglet"
 #define SPECIES_DIONA       "Diona"
 #define SPECIES_VOX         "Vox"
 #define SPECIES_VOX_ARMALIS "Vox Armalis"

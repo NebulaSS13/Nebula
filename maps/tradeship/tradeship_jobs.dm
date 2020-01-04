@@ -9,7 +9,11 @@
 		/datum/job/engineer
 	)
 	species_to_job_whitelist = list(
-		/datum/species/vox = list(/datum/job/assistant)
+		/datum/species/yinglet = list(
+			/datum/job/assistant,
+			/datum/job/engineer,
+			/datum/job/cyborg
+		)
 	)
 
 /datum/job/captain
