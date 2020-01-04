@@ -21,10 +21,10 @@ var/datum/robolimb/basic_robolimb
 	var/has_eyes = TRUE
 	var/can_feel_pain
 	var/skintone
-	var/list/species_cannot_use = list(SPECIES_YINGLET)
+	var/list/species_cannot_use = list() //SPECIES_YINGLET)
 	var/list/restricted_to = list()
 	var/list/applies_to_part = list() //TODO.
-	var/list/allowed_bodytypes = list(SPECIES_HUMAN)
+	var/list/allowed_bodytypes = list(SPECIES_YINGLET, SPECIES_HUMAN)
 
 /datum/robolimb/bishop
 	company = "Bishop"

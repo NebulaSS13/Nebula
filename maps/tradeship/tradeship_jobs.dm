@@ -163,6 +163,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job/tradeship
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store
+	uniform = /obj/item/clothing/under/tradeship_plain
 	l_ear = null
 	r_ear = null
 
@@ -173,7 +174,6 @@
 	pda_type = /obj/item/modular_computer/pda/captain
 	r_pocket = /obj/item/device/radio
 	id_type = /obj/item/weapon/card/id/gold
-
 
 /decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
