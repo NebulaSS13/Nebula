@@ -207,6 +207,7 @@ BLIND     // can't see anything
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = EYES
 	slot_flags = SLOT_EYES
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2
 	var/see_invisible = -1
@@ -337,6 +338,7 @@ BLIND     // can't see anything
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 
 	var/image/light_overlay_image
 	var/light_overlay = "helmet_light"
