@@ -7,8 +7,8 @@
 	station_short = "Ivanmoth"
 
 	dock_name     = "Val Salia Station"
-	boss_name     = "Trademaster Viracroix"
-	boss_short    = "Viracroix"
+	boss_name     = "Trade Administration"
+	boss_short    = "Admin"
 	company_name  = "Tradehouse Ivanmoth"
 	company_short = "Ivanmoth"
 	overmap_event_areas = 11

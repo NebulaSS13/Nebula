@@ -23,7 +23,7 @@
 	body_parts = list(BP_GROIN)
 	blend = ICON_MULTIPLY
 
-/datum/sprite_accessory/marking/yinglet/long_ears
+/datum/sprite_accessory/marking/yinglet/short_ears
 	name = "Short Ears"
 	icon_state = "shortears"
 	blend = ICON_MULTIPLY
@@ -45,7 +45,7 @@
 
 /datum/sprite_accessory/hair/yinglet/familyman
 	name = "Family Man"
-	icon_state = "hair_thefamilyman"
+	icon_state = "hair_familyman"
 
 /datum/sprite_accessory/hair/yinglet/spiky
 	name = "Spiky"
