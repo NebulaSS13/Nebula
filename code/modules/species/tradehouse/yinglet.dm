@@ -68,40 +68,40 @@
 /datum/species/yinglet/New()
 	equip_adjust = list(
 		slot_head_str = list(
-			"[NORTH]" = list("x" = 0,  "y" = -3),  
-			"[EAST]" =  list("x" = 3,  "y" = -3),  
-			"[WEST]" =  list("x" = -3, "y" = -3),  
-			"[SOUTH]" = list("x" = 0,  "y" = -3)
+			"[NORTH]" = list("x" = 0,  "y" = 2),  
+			"[EAST]" =  list("x" = 3,  "y" = 2),  
+			"[WEST]" =  list("x" = -3, "y" = 2),  
+			"[SOUTH]" = list("x" = 0,  "y" = 2)
 		),
 		slot_back_str = list(
-			"[NORTH]" = list("x" = 0,  "y" = -5),  
-			"[EAST]" =  list("x" = 3,  "y" = -5),  
-			"[WEST]" =  list("x" = -3, "y" = -5),  
-			"[SOUTH]" = list("x" = 0,  "y" = -5)
+			"[NORTH]" = list("x" = 0,  "y" = 0),  
+			"[EAST]" =  list("x" = 3,  "y" = 0),  
+			"[WEST]" =  list("x" = -3, "y" = 0),  
+			"[SOUTH]" = list("x" = 0,  "y" = 0)
 		),
 		slot_belt_str = list(
-			"[NORTH]" = list("x" = 0,  "y" = -1),  
-			"[EAST]" =  list("x" = 2,  "y" = -1),  
-			"[WEST]" =  list("x" = -2, "y" = -1),  
-			"[SOUTH]" = list("x" = 0,  "y" = -1)
+			"[NORTH]" = list("x" = 0,  "y" = 4),  
+			"[EAST]" =  list("x" = 2,  "y" = 4),  
+			"[WEST]" =  list("x" = -2, "y" = 4),  
+			"[SOUTH]" = list("x" = 0,  "y" = 4)
 		),
 		slot_glasses_str = list(
-			"[NORTH]" = list("x" = 0,  "y" = -3),  
-			"[EAST]" =  list("x" = 2,  "y" = -3),  
-			"[WEST]" =  list("x" = -2, "y" = -3),  
-			"[SOUTH]" = list("x" = 0,  "y" = -3)
+			"[NORTH]" = list("x" = 0,  "y" = 2),  
+			"[EAST]" =  list("x" = 2,  "y" = 2),  
+			"[WEST]" =  list("x" = -2, "y" = 2),  
+			"[SOUTH]" = list("x" = 0,  "y" = 2)
 		),
 		slot_l_hand_str = list(
-			"[NORTH]" = list("x" = 2,  "y" = -3),  
-			"[EAST]" =  list("x" = 2,  "y" = -3),  
-			"[WEST]" =  list("x" = -2, "y" = -3),  
-			"[SOUTH]" = list("x" = -2, "y" = -3)
+			"[NORTH]" = list("x" = 2,  "y" = 2),  
+			"[EAST]" =  list("x" = 2,  "y" = 2),  
+			"[WEST]" =  list("x" = -2, "y" = 2),  
+			"[SOUTH]" = list("x" = -2, "y" = 2)
 		),
 		slot_r_hand_str = list(
-			"[NORTH]" = list("x" = -2, "y" = -3),  
-			"[EAST]" =  list("x" = 2,  "y" = -3),  
-			"[WEST]" =  list("x" = -2, "y" = -3),  
-			"[SOUTH]" = list("x" = 2,  "y" = -3)
+			"[NORTH]" = list("x" = -2, "y" = 2),  
+			"[EAST]" =  list("x" = 2,  "y" = 2),  
+			"[WEST]" =  list("x" = -2, "y" = 2),  
+			"[SOUTH]" = list("x" = 2,  "y" = 2)
 		)
 	)
 	..()
