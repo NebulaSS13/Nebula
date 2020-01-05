@@ -102,6 +102,12 @@
 			"[EAST]" =  list("x" = 2,  "y" = -3),  
 			"[WEST]" =  list("x" = -2, "y" = -3),  
 			"[SOUTH]" = list("x" = 2,  "y" = -3)
+		),
+		slot_wear_mask_str = list(
+			"[NORTH]" = list("x" = 0,  "y" = -3),  
+			"[EAST]" =  list("x" = 2,  "y" = -3),  
+			"[WEST]" =  list("x" = -2, "y" = -3),  
+			"[SOUTH]" = list("x" = 0,  "y" = -3)
 		)
 	)
 	..()

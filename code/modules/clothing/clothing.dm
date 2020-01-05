@@ -453,6 +453,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/obj_mask.dmi'
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 
 	var/voicechange = 0
 	var/list/say_messages
