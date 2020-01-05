@@ -284,3 +284,6 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/bamboo
 	seed_type = "bamboo"
+
+/obj/item/seeds/bruisegrassseed
+	seed_type = "bruisegrass"

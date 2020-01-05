@@ -1244,6 +1244,17 @@
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
+/datum/seed/algae/bruisegrass
+	name = "bruisegrass"
+	seed_name = "bruisegrass"
+	display_name = "bruisegrass"
+	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/tramadol = list(1,10))
+	kitchen_tag = "bruisegrass"
+
+/datum/seed/algae/bruisegrass/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#b33715")
+
 /datum/seed/bamboo
 	name = "bamboo"
 	seed_name = "bamboo"

@@ -19,6 +19,7 @@
 	icon_open = "redcoat_open"
 	icon_closed = "redcoat"
 	species_restricted = list(SPECIES_HUMAN)
+	sprite_sheets = list(SPECIES_YINGLET = 'maps/tradeship/icons/onmob_suit_yinglet.dmi')
 
 	var/has_badge
 	var/has_buttons
@@ -29,9 +30,6 @@
 	desc = "The signature uniform of Tradeship guardsmen. This one seems to be sized for a yinglet."
 	species_restricted = list(SPECIES_YINGLET)
 	icon = 'maps/tradeship/icons/suit_yinglet.dmi'
-	item_icons = list(
-		slot_wear_suit_str = 'maps/tradeship/icons/onmob_suit_yinglet.dmi'
-	)
 
 /obj/item/clothing/suit/storage/toggle/redcoat/yinglet/officer
 	name = "\improper Tradeship officer's coat"
@@ -90,3 +88,21 @@
 	has_buttons = "buttons_gold"
 	has_collar =  "collar_gold"
 	has_buckle =  "buckle_gold"
+
+/obj/machinery/vending/hydroseeds/New()
+	products = products || list()
+	products[/obj/item/seeds/bruisegrassseed] = products[/obj/item/seeds/poppyseed] || 3
+	products -= /obj/item/seeds/poppyseed
+	..()
+
+/obj/machinery/seed_storage/garden/New()
+	starting_seeds = starting_seeds || list()
+	starting_seeds[/obj/item/seeds/bruisegrassseed] = starting_seeds[/obj/item/seeds/poppyseed] || 15
+	starting_seeds -= /obj/item/seeds/poppyseed
+	..()
+
+/obj/machinery/seed_storage/xenobotany/New()
+	starting_seeds = starting_seeds || list()
+	starting_seeds[/obj/item/seeds/bruisegrassseed] = starting_seeds[/obj/item/seeds/poppyseed] || 15
+	starting_seeds -= /obj/item/seeds/poppyseed
+	..()
