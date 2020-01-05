@@ -1,5 +1,5 @@
 /obj/item/device/assembly/mousetrap
-	name = "mousetrap"
+	name = "rat trap"
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
 	origin_tech = list(TECH_COMBAT = 1)

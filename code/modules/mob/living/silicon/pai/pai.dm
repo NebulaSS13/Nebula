@@ -26,7 +26,7 @@
 	var/global/list/possible_chassis = list(
 		"Drone" = "repairbot",
 		"Cat" = "cat",
-		"Mouse" = "mouse",
+		"Snaprat" = "mouse",
 		"Monkey" = "monkey",
 		"Rabbit" = "rabbit",
 		"Mushroom" = "mushroom",

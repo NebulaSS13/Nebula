@@ -129,7 +129,7 @@
 		icon_state = icon_rest
 
 /mob/living/simple_animal/familiar/pet/mouse
-	name = "mouse"
+	name = "elderly snaprat"
 	desc = "A small rodent. It looks very old."
 	icon_state = "mouse_gray"
 	icon_living = "mouse_gray"

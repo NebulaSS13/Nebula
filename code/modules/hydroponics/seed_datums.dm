@@ -1250,10 +1250,12 @@
 	display_name = "bruisegrass"
 	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/tramadol = list(1,10))
 	kitchen_tag = "bruisegrass"
+	exude_gasses = null
 
 /datum/seed/algae/bruisegrass/New()
 	..()
-	set_trait(TRAIT_PRODUCT_COLOUR,"#b33715")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#8a2546")
+	set_trait(TRAIT_PLANT_COLOUR,"#8a2546")
 
 /datum/seed/bamboo
 	name = "bamboo"

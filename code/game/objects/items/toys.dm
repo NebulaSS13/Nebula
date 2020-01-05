@@ -749,8 +749,8 @@
 	icon_state = "nymphplushie"
 
 /obj/item/toy/plushie/mouse
-	name = "mouse plush"
-	desc = "A plushie of a delightful mouse! What was once considered a vile rodent is now your very best friend."
+	name = "snaprat plush"
+	desc = "A plushie of a snaprat! What was once considered a vile rodent is now your very best friend."
 	icon_state = "mouseplushie"
 
 /obj/item/toy/plushie/kitten

@@ -327,9 +327,9 @@
 	startswith = list(/obj/item/weapon/handcuffs = 7)
 
 /obj/item/weapon/storage/box/mousetraps
-	name = "box of Pest-B-Gon mousetraps"
+	name = "box of Pest-B-Gon rat traps"
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
-	icon_state = "mousetraps"
+	icon_state = "rat traps"
 	startswith = list(/obj/item/device/assembly/mousetrap = 6)
 
 /obj/item/weapon/storage/box/mousetraps/empty
