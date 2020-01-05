@@ -685,6 +685,7 @@ BLIND     // can't see anything
 	blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
+	species_restricted = list(SPECIES_HUMAN,SPECIES_YINGLET)
 
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
