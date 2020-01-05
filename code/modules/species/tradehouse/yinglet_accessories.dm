@@ -2,6 +2,7 @@
 	name = "Scav Tailpoof"
 	species_allowed = list(SPECIES_YINGLET)
 	icon_state = "tailpoof"
+	icon = 'icons/mob/human_races/species/yinglet/markings.dmi'
 	body_parts = list(BP_GROIN)
 
 /datum/sprite_accessory/marking/yinglet/shelltooth
