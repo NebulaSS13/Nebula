@@ -1,12 +1,12 @@
-//Unathi clothing.
+//Primitive clothing.
 
-/obj/item/clothing/suit/unathi/robe
+/obj/item/clothing/suit/robe
 	name = "roughspun robes"
-	desc = "A traditional Unathi garment."
+	desc = "A simple garment."
 	icon_state = "robe-unathi"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
-/obj/item/clothing/suit/unathi/mantle
+/obj/item/clothing/suit/mantle
 	name = "hide mantle"
 	desc = "A rather grisly selection of cured hides and skin, sewn together to form a ragged mantle."
 	icon_state = "mantle-unathi"
@@ -87,5 +87,4 @@
 		bomb = ARMOR_BOMB_PADDED) //Higher melee armor versus lower everything else.
 	icon_state = "vox-scrap"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS
-	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
 	siemens_coefficient = 1 //Its literally metal

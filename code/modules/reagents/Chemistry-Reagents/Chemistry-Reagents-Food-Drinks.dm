@@ -50,8 +50,6 @@
 /datum/reagent/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	var/nut_removed = removed
 	var/hyd_removed = removed
-	if(alien == IS_UNATHI)
-		removed *= 0.1 // Unathi get most of their nutrition from meat.
 	if(nutriment_factor)
 		M.adjust_nutrition(nutriment_factor * nut_removed) // For hunger and fatness
 	if(hydration_factor)
@@ -64,35 +62,20 @@
 
 	injectable = 1
 
-/datum/reagent/nutriment/protein // Bad for Skrell!
+/datum/reagent/nutriment/protein
 	name = "Animal Protein"
 	taste_description = "some sort of protein"
 	color = "#440000"
 
-/datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	switch(alien)
-		if(IS_SKRELL)
-			M.adjustToxLoss(0.5 * removed)
-			return
-	..()
-
 /datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
-	switch(alien)
-		if(IS_UNATHI) removed *= 2.25
 	M.adjust_nutrition(nutriment_factor * removed)
 
-/datum/reagent/nutriment/protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien && alien == IS_SKRELL)
-		M.adjustToxLoss(2 * removed)
-		return
-	..()
-
-/datum/reagent/nutriment/protein/egg // Also bad for skrell.
+/datum/reagent/nutriment/protein/egg
 	name = "egg yolk"
 	taste_description = "egg"
 	color = "#ffffaa"
 
-//vegetamarian alternative that is safe for skrell to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
+//vegetamarian alternative that is safe for vegans to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
 
 /datum/reagent/nutriment/softtofu
 	name = "plant protein"
@@ -106,13 +89,6 @@
 	taste_description = "sweetness"
 	nutriment_factor = 10
 	color = "#ffff00"
-
-/datum/reagent/nutriment/honey/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
-	..()
-
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src)
 
 /datum/reagent/nutriment/flour
 	name = "flour"
@@ -363,8 +339,6 @@
 	value = 0.2
 
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
 		M.emote("shiver")
@@ -386,13 +360,9 @@
 	value = 0.2
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	M.adjustToxLoss(0.5 * removed)
 
 /datum/reagent/capsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
@@ -433,9 +403,6 @@
 	var/obj/item/partial_face_protection = null
 
 	var/effective_strength = 5
-
-	if(alien == IS_SKRELL)	//Larger eyes means bigger targets.
-		effective_strength = 8
 
 	var/list/protection
 	if(istype(M, /mob/living/carbon/human))
@@ -553,9 +520,6 @@
 /datum/reagent/drink/juice/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
 	..()
 	M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src,0.5)
 
 /datum/reagent/drink/juice/banana
 	name = "Banana Juice"
@@ -619,8 +583,6 @@
 
 /datum/reagent/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.adjustToxLoss(-0.5 * removed)
 
 /datum/reagent/drink/juice/orange
@@ -634,8 +596,6 @@
 
 /datum/reagent/drink/juice/orange/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.adjustOxyLoss(-2 * removed)
 
 /datum/reagent/toxin/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
@@ -647,11 +607,6 @@
 
 	glass_name = "poison berry juice"
 	glass_desc = "A glass of deadly juice."
-
-/datum/reagent/toxin/poisonberryjuice/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_UNATHI)
-		return //unathi are immune!
-	return ..()
 
 /datum/reagent/drink/juice/potato
 	name = "Potato Juice"
@@ -694,8 +649,6 @@
 
 /datum/reagent/drink/juice/tomato/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.heal_organ_damage(0, 0.5 * removed)
 
 /datum/reagent/drink/juice/watermelon
@@ -757,8 +710,6 @@
 
 /datum/reagent/drink/milk/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.heal_organ_damage(0.5 * removed, 0)
 	holder.remove_reagent(/datum/reagent/capsaicin, 10 * removed)
 
@@ -796,10 +747,7 @@
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	..()
-
 	if(adj_temp > 0)
 		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
 	if(volume > 15)
@@ -812,8 +760,6 @@
 	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
-	if(alien == IS_DIONA)
-		return
 	M.make_jittery(5)
 	M.add_chemical_effect(CE_PULSE, 1)
 
@@ -1037,13 +983,6 @@
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
 
-/datum/reagent/milkshake/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
-	..()
-
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src,0.5)
-
 /datum/reagent/drink/rewriter
 	name = "Rewriter"
 	description = "The secret of the sanctuary of the Libarian..."
@@ -1159,8 +1098,6 @@
 
 /datum/reagent/drink/doctor_delight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.adjustOxyLoss(-4 * removed)
 	M.heal_organ_damage(2 * removed, 2 * removed)
 	M.adjustToxLoss(-2 * removed)
@@ -1196,8 +1133,6 @@
 
 /datum/reagent/drink/hell_ramen/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 
 /datum/reagent/drink/nothing
@@ -1250,8 +1185,6 @@
 
 /datum/reagent/ethanol/beer/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.jitteriness = max(M.jitteriness - 3, 0)
 
 /datum/reagent/ethanol/bluecuracao
@@ -1288,8 +1221,6 @@
 
 /datum/reagent/ethanol/deadrum/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.dizziness +=5
 
 /datum/reagent/ethanol/gin
@@ -1307,8 +1238,6 @@
 	overdose = 45
 
 /datum/reagent/ethanol/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	..()
 	M.dizziness = max(0, M.dizziness - 5)
 	M.drowsyness = max(0, M.drowsyness - 3)
@@ -1317,8 +1246,6 @@
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /datum/reagent/ethanol/coffee/overdose(var/mob/living/carbon/M, var/alien)
-	if(alien == IS_DIONA)
-		return
 	M.make_jittery(5)
 
 /datum/reagent/ethanol/coffee/kahlua
@@ -1386,8 +1313,6 @@
 
 /datum/reagent/ethanol/thirteenloko/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.drowsyness = max(0, M.drowsyness - 7)
 	if (M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
@@ -2212,8 +2137,6 @@
 
 /datum/reagent/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.adjustToxLoss(-0.5 * removed)
 
 /datum/reagent/drink/tea/icetea
@@ -2654,51 +2577,7 @@
 	glass_name = "vodka cola"
 	glass_desc = "A refreshing mix of vodka and cola."
 
-// Alien Drinks
-
-/datum/reagent/drink/alien/unathijuice
-	name = "Hrukhza Leaf Extract"
-	description = "A bitter liquid used in most recipes on Moghes."
-	taste_description = "bland, disgusting bitterness"
-	color = "#e78108"
-	glass_name = "hrukhza leaf extract"
-	glass_desc = "A bitter extract from the hrukhza."
-
-/datum/reagent/drink/alien/kzkzaa
-	name = "Kzkzaa"
-	description = "Fish extract from Moghes."
-	taste_description = "fishy fish"
-	color = "#e78108"
-	glass_name = "kzkzaa"
-	glass_desc = "A glass of Kzkzaa, fish extract, commonly drank on Moghes."
-
-/datum/reagent/drink/alien/mumbaksting
-	name = "Mumbak Sting"
-	description = "A drink made from the venom of the Yuum."
-	taste_description = "harsh and stinging sweetness"
-	color = "#7e4c2e"
-	glass_name = "Mumbak sting"
-	glass_desc = "A drink made from the venom of the Yuum."
-
-/datum/reagent/ethanol/alien/wasgaelhi
-	name = "Wasgaelhi"
-	description = "Wine made from various fruits from the swamps of Moghes."
-	taste_description = "swampy fruit"
-	color = "#678e46"
-	strength = 10
-	glass_name = "wasgaelhi"
-	glass_desc = "Wine made from various fruits from the swamps of Moghes."
-
-/datum/reagent/drink/alien/skrianhi
-	name = "Skrianhi Tea"
-	description = "A blend of teas from Moghes, commonly drank by Unathi."
-	taste_description = "bitter energising tea"
-	color = "#0e0900"
-	glass_name = "skiranhi tea"
-	glass_desc = "A blend of teas from Moghes, commonly drank by Unathi."
-
 // Non-Alcoholic Drinks
-
 /datum/reagent/drink/fools_gold
 	name = "Fool's Gold"
 	description = "A non-alcoholic beverage typically served as an alternative to whiskey."
@@ -2742,8 +2621,6 @@
 
 /datum/reagent/drink/beastenergy/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.drowsyness = max(0, M.drowsyness - 7)
 	M.make_jittery(2)
 	M.add_chemical_effect(CE_PULSE, 1)

@@ -299,7 +299,7 @@
 	plantname = "libertycap"
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
-	plantname = "ambrosia"
+	plantname = "biteleaf"
 
 /obj/item/weapon/reagent_containers/food/snacks/fruit_slice
 	name = "fruit slice"

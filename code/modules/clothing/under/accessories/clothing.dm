@@ -212,7 +212,7 @@
 	name = "flower-pattern shirt"
 	desc = "You probably need some welder googles to look at this."
 	icon_state = "hawaii"
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_accessories_monkey.dmi')
+	sprite_sheets = list(SPECIES_MONKEY = 'icons/mob/species/monkey/onmob_accessories_monkey.dmi')
 
 /obj/item/clothing/accessory/toggleable/hawaii/red
 	icon_state = "hawaii2"

@@ -99,14 +99,6 @@
 	name = "ammunition (stun cartridge, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/stunshell
 
-/datum/fabricator_recipe/arms_ammo/hidden/skrellian_rifle_flechette
-	name = "ammunition (skrellian rifle, flechette)"
-	path = /obj/item/weapon/magnetic_ammo/skrell
-
-/datum/fabricator_recipe/arms_ammo/hidden/skrellian_rifle_slug
-	name = "ammunition (skrellian rifle, slug)"
-	path = /obj/item/weapon/magnetic_ammo/skrell/slug
-
 /datum/fabricator_recipe/arms_ammo/hidden/stripperclip
 	name = "ammunition (stripper clip)"
 	path = /obj/item/ammo_magazine/speedloader/clip

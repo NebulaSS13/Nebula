@@ -628,7 +628,6 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/tonic = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
@@ -722,7 +721,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/candy = 6,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 6,/obj/item/weapon/reagent_containers/food/snacks/chips =6,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 6,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 6,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 6)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6, /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 3)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6)
 	prices = list(/obj/item/clothing/mask/chewable/candy/lolli = 2,
 					/obj/item/weapon/storage/chewables/candy/gum = 4,
 					/obj/item/weapon/storage/chewables/candy/cookies = 4,
@@ -1150,7 +1149,7 @@
 					/obj/item/weapon/storage/toolbox/crystal = 5)
 
 /obj/machinery/vending/tool/adherent/vend(var/datum/stored_items/vending_products/R, var/mob/living/carbon/user)
-	if((istype(user) && user.species.name == SPECIES_ADHERENT) || emagged)
+	if(emagged)
 		. = ..()
 	else
 		to_chat(user, "<span class='notice'>The vending machine emits a discordant note, and a small hole blinks several times. It looks like it wants something inserted.</span>")

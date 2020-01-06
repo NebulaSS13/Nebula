@@ -9,27 +9,6 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "monkey crate"
 
-/decl/hierarchy/supply_pack/livecargo/farwa
-	name = "Inert - Farwa cubes"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/farwacubes)
-	cost = 30
-	containertype = /obj/structure/closet/crate/freezer
-	containername = "farwa crate"
-
-/decl/hierarchy/supply_pack/livecargo/skrell
-	name = "Inert - Neaera cubes"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/neaeracubes)
-	cost = 30
-	containertype = /obj/structure/closet/crate/freezer
-	containername = "neaera crate"
-
-/decl/hierarchy/supply_pack/livecargo/stok
-	name = "Inert - Stok cubes"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes/stokcubes)
-	cost = 30
-	containertype = /obj/structure/closet/crate/freezer
-	containername = "stok crate"
-
 /decl/hierarchy/supply_pack/livecargo/spidercubes
 	name = "Inert - Spiders"
 	contains = list(/obj/item/weapon/storage/box/monkeycubes/spidercubes)

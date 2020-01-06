@@ -1,5 +1,5 @@
 /datum/species/monkey
-	name = "Monkey"
+	name = SPECIES_MONKEY
 	name_plural = "Monkeys"
 	description = "Ook."
 	codex_description = "Monkeys and other similar creatures tend to be found on science stations and vessels as \
@@ -50,7 +50,7 @@
 	force_cultural_info = list(
 		TAG_CULTURE =   CULTURE_MONKEY,
 		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
+		TAG_FACTION =   FACTION_OTHER
 	)
 
 	var/list/no_touchie = list(/obj/item/weapon/mirror,
@@ -91,79 +91,3 @@
 		if(touchables.len)
 			var/obj/touchy = pick(touchables)
 			touchy.attack_hand(H)
-
-	if(prob(1))
-		H.emote(pick("scratch","jump","roll","tail"))
-
-	if(H.get_shock() && H.shock_stage < 40 && prob(3))
-		H.custom_emote("chimpers pitifully")
-
-	if(H.shock_stage > 10 && prob(3))
-		H.emote(pick("cry","whimper"))
-
-	if(H.shock_stage >= 40 && prob(3))
-		H.emote("scream")
-
-	if(!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
-		H.custom_emote("thrashes in agony")
-
-/datum/species/monkey/handle_post_spawn(var/mob/living/carbon/human/H)
-	..()
-	H.item_state = lowertext(name)
-
-/datum/species/monkey/alien
-	name = "Farwa"
-	name_plural = "Farwa"
-	health_hud_intensity = 2
-
-	icobase = 'icons/mob/human_races/species/monkey/farwa_body.dmi'
-	deform = 'icons/mob/human_races/species/monkey/farwa_body.dmi'
-
-	flesh_color = "#afa59e"
-	base_color = "#333333"
-	tail = "farwatail"
-	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_FARWA,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
-	)
-
-/datum/species/monkey/skrell
-	name = "Neaera"
-	name_plural = "Neaera"
-	health_hud_intensity = 1.75
-
-	icobase = 'icons/mob/human_races/species/monkey/neaera_body.dmi'
-	deform = 'icons/mob/human_races/species/monkey/neaera_body.dmi'
-
-	greater_form = SPECIES_SKRELL
-	flesh_color = "#8cd7a3"
-	blood_color = "#1d2cbf"
-	reagent_tag = IS_SKRELL
-	tail = null
-	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_NEARA,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
-	)
-
-
-/datum/species/monkey/unathi
-	name = "Stok"
-	name_plural = "Stok"
-	health_hud_intensity = 1.5
-
-	icobase = 'icons/mob/human_races/species/monkey/stok_body.dmi'
-	deform = 'icons/mob/human_races/species/monkey/stok_body.dmi'
-
-	tail = "stoktail"
-	greater_form = SPECIES_UNATHI
-	flesh_color = "#34af10"
-	base_color = "#066000"
-	reagent_tag = IS_UNATHI
-	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_STOK,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
-	)
-

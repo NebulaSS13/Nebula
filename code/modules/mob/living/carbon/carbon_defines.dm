@@ -15,7 +15,7 @@
 	var/losebreath = 0 //if we failed to breathe last tick
 
 	var/coughedtime = null
-
+	var/ignore_rads = FALSE
 	var/cpr_time = 1.0
 	var/lastpuke = 0
 	var/nutrition = 400

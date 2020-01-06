@@ -83,14 +83,6 @@
 	if(.)
 		return
 
-	// This is horrible but short of spawning a jetpack inside the organ than locating
-	// it, I don't really see another viable approach short of a total jetpack refactor.
-	for(var/obj/item/organ/internal/powered/jets/jet in internal_organs)
-		if(!jet.is_broken() && jet.active)
-			inertia_dir = 0
-			return 1
-	// End 'eugh'
-
 	//Do we have a working jetpack?
 	var/obj/item/weapon/tank/jetpack/thrust
 	if(back)

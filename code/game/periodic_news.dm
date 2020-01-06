@@ -58,13 +58,6 @@
 						say so!"}
 			round_time = 60 * 15
 
-		net_block
-			author = "Assistant Editor Carl Ritz"
-			channel_name = "The Gibson Gazette"
-			message = {"Several corporations banding together to block access to 'wetskrell.net', site administrators
-			claiming violation of net laws."}
-			round_time = 60 * 50
-
 		found_ssd
 			channel_name = "Nyx Daily"
 			author = "Doctor Eric Hanfield"

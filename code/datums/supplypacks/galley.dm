@@ -105,9 +105,7 @@
 			/obj/item/weapon/lipstick/random,
 			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 2,
 			/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 4,
-			/obj/item/weapon/storage/box/glowsticks = 2,
-			/obj/item/weapon/clothingbag/rubbermask,
-			/obj/item/weapon/clothingbag/rubbersuit)
+			/obj/item/weapon/storage/box/glowsticks = 2)
 	cost = 20
 	containername = "party equipment crate"
 

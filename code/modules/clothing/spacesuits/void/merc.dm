@@ -14,7 +14,6 @@
 		rad = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.3
-	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
 	camera = /obj/machinery/camera/network/mercenary
 	light_overlay = "helmet_light_green" //todo: species-specific light overlays
 
@@ -38,7 +37,6 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.3
-	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC)
 
 /obj/item/clothing/suit/space/void/merc/New()
 	..()

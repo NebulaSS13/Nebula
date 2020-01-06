@@ -10,9 +10,6 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_NABBER)
-		return
-
 	M.adjustToxLoss(removed * 3)
 
 /datum/reagent/acetone/touch_obj(var/obj/O)	//I copied this wholesale from ethanol and could likely be converted into a shared proc. ~Techhead
@@ -52,16 +49,6 @@
 	overdose = 5
 	value = DISPENSER_REAGENT_VALUE
 
-/datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
-		M.add_chemical_effect(CE_OXYGENATED, 2)
-	else if(alien != IS_DIONA)
-		M.adjustToxLoss(removed * 1.5)
-
-/datum/reagent/ammonia/overdose(var/mob/living/carbon/M, var/alien)
-	if(alien != IS_VOX || volume > overdose*6)
-		..()
-
 /datum/reagent/carbon
 	name = "Carbon"
 	description = "A chemical element, the building block of life."
@@ -73,8 +60,6 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if(ingested && ingested.reagent_list.len > 1) // Need to have at least 2 reagents - cabon and something to remove
 		var/effect = 1 / (ingested.reagent_list.len - 1)
@@ -132,11 +117,6 @@
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
 	var/strength_mod = 1
-	if(alien == IS_SKRELL)
-		strength_mod *= 5
-	if(alien == IS_DIONA)
-		strength_mod = 0
-
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
 
@@ -219,8 +199,7 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
+	M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /datum/reagent/lithium
 	name = "Lithium"
@@ -231,11 +210,10 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		if(istype(M.loc, /turf/space))
-			M.SelfMove(pick(GLOB.cardinal))
-		if(prob(5))
-			M.emote(pick("twitch", "drool", "moan"))
+	if(istype(M.loc, /turf/space))
+		M.SelfMove(pick(GLOB.cardinal))
+	if(prob(5))
+		M.emote(pick("twitch", "drool", "moan"))
 
 /datum/reagent/mercury
 	name = "Mercury"
@@ -246,12 +224,11 @@
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		if(istype(M.loc, /turf/space))
-			M.SelfMove(pick(GLOB.cardinal))
-		if(prob(5))
-			M.emote(pick("twitch", "drool", "moan"))
-		M.adjustBrainLoss(0.1)
+	if(istype(M.loc, /turf/space))
+		M.SelfMove(pick(GLOB.cardinal))
+	if(prob(5))
+		M.emote(pick("twitch", "drool", "moan"))
+	M.adjustBrainLoss(0.1)
 
 /datum/reagent/phosphorus
 	name = "Phosphorus"
@@ -422,10 +399,6 @@
 
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	M.adjust_nutrition(removed * 3)
-
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src)
 
 /datum/reagent/sulfur
 	name = "Sulfur"

@@ -6,24 +6,15 @@
 *///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /datum/language/human/euro
-	name = LANGUAGE_HUMAN_EURO
-	desc = "A constructed language established by a conference of European and African research universities convening in Zurich, Switzerland starting in 2119, \
-			later adopted with little controversy as the lingua franca of the entirety of Sol space following the establishment of the SCG."
+	name = LANGUAGE_HUMAN
+	desc = "The common language of most human settlements."
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = ""
 	key = "1"
 	flags = WHITELISTED
 	shorthand = "ZAC"
-	partial_understanding = list(
-		LANGUAGE_HUMAN_CHINESE = 5,
-		LANGUAGE_HUMAN_ARABIC = 5,
-		LANGUAGE_HUMAN_INDIAN = 5,
-		LANGUAGE_HUMAN_IBERIAN = 30,
-		LANGUAGE_HUMAN_RUSSIAN = 5,
-		LANGUAGE_HUMAN_SELENIAN = 75,
-		LANGUAGE_SPACER = 20
-	)
+	partial_understanding = list()
 	syllables = list(
 		"al", "an", "ar", "as", "at", "ea", "ed", "en", "er", "es", "ha", "he", "hi", "in", "is", "it",
 		"le", "me", "nd", "ne", "ng", "nt", "on", "or", "ou", "re", "se", "st", "te", "th", "ti", "to",

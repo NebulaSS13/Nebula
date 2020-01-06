@@ -92,7 +92,7 @@
 /datum/trader/grocery
 	name = "Grocer"
 	name_language = TRADER_DEFAULT_NAME
-	possible_origins = list("HyTee", "Kreugars", "Spaceway", "Privaxs", "FutureValue", "Phyvendyme", "Skreller's Market")
+	possible_origins = list("HyTee", "Kreugars", "Spaceway", "Privaxs", "FutureValue", "Phyvendyme", "Seller's Market")
 	trade_flags = TRADER_MONEY
 
 	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks                      = TRADER_SUBTYPES_ONLY,

@@ -495,21 +495,6 @@
 	desc = "A Human suit made out of rubber."
 	icon_state = "mansuit"
 
-/obj/item/clothing/suit/rubber/cat
-	name = "cat suit"
-	desc = "A cat suit made out of rubber."
-	icon_state = "catsuit"
-
-/obj/item/clothing/suit/rubber/skrell
-	name = "skrell suit"
-	desc = "A Skrell suit made out of rubber."
-	icon_state = "skrellsuit"
-
-/obj/item/clothing/suit/rubber/unathi
-	name = "unathi suit"
-	desc = "A Unathi suit made out of rubber."
-	icon_state = "lizsuit"
-
 /obj/item/clothing/suit/hospital
 	name = "hospital gown"
 	desc = "A thin, long and loose robe-like garment worn by people undergoing active medical treatment."

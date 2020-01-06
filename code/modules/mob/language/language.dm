@@ -13,7 +13,7 @@
 	var/whisper_verb                  // Optional. When not specified speech_verb + quietly/softly is used instead.
 	var/signlang_verb = list("signs", "gestures") // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"               // CSS style to use for strings in this language.
-	var/key = ""                     // Character used to speak in language eg. :o for Unathi.
+	var/key = ""                      // Character used to speak in language
 	var/flags = 0                     // Various language flags.
 	var/native                        // If set, non-native speakers will have trouble speaking.
 	var/list/syllables                // Used when scrambling text for a non-speaker.

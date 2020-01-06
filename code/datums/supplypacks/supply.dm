@@ -81,7 +81,6 @@
 /decl/hierarchy/supply_pack/supply/snacks
 	num_contained = 2
 	contains = list(/obj/item/weapon/storage/box/snack,
-					/obj/item/weapon/storage/box/snack/jerky,
 					/obj/item/weapon/storage/box/snack/noraisin,
 					/obj/item/weapon/storage/box/snack/cheesehonks,
 					/obj/item/weapon/storage/box/snack/tastybread,

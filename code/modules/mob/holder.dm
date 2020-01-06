@@ -7,11 +7,6 @@ var/list/holder_mob_icon_cache = list()
 	icon = 'icons/obj/objects.dmi'
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 
-	sprite_sheets = list(
-		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_head_vox_armalis.dmi'
-		)
-
 	origin_tech = null
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_holder.dmi',

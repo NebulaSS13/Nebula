@@ -682,16 +682,16 @@
 	desc = "It looks like it was tailored for a monkey."
 	icon_state = "punpun"
 	worn_state = "punpun"
-	species_restricted = list("Monkey")
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
+	species_restricted = list(SPECIES_MONKEY)
+	sprite_sheets = list(SPECIES_MONKEY = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/punpants
 	name = "monkey pants"
 	desc = "It looks like it was tailored for a monkey."
 	icon_state = "jeansmustang"
 	worn_state = "jeansmustang"
-	species_restricted = list("Monkey")
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
+	species_restricted = list(SPECIES_MONKEY)
+	sprite_sheets = list(SPECIES_MONKEY = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	desc = "A warm looking sweater and a pair of dark blue slacks."

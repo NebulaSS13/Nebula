@@ -243,7 +243,7 @@
 			host.embedded -= src
 			host.drop_from_inventory(src)
 		QDEL_IN(src, 0)
-		
+
 /obj/item/weapon/melee/energy/machete
 	name = "energy machete"
 	desc = "A machete handle that extends out into a long, purple machete blade. It appears to be Skrellian in origin."
@@ -251,7 +251,7 @@
 	active_icon = "machete_skrell"
 	active_force = 16		//In line with standard machetes at time of creation.
 	active_throwforce = 17.25
-	lighting_color = COLOR_SABER_SKRELL
+	lighting_color = "#6600cc"
 	force = 3
 	throwforce = 1
 	w_class = ITEM_SIZE_SMALL

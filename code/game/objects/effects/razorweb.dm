@@ -29,18 +29,10 @@
 	var/last_light
 	var/image/gleam
 	var/image/web
-	var/global/species_immunity_list = list(
-		SPECIES_MANTID_ALATE   = TRUE,
-		SPECIES_MANTID_GYNE    = TRUE,
-		SPECIES_MONARCH_QUEEN  = TRUE,
-		SPECIES_MONARCH_WORKER = TRUE
-	)
+	var/global/species_immunity_list = list()
 
 /obj/effect/razorweb/Destroy()
 	if(owner)
-		var/obj/item/organ/external/groin/insectoid/mantid/spinner = locate() in owner
-		if(spinner)
-			spinner.existing_webs -= src
 		owner = null
 	. = ..()
 

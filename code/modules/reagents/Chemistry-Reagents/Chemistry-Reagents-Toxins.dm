@@ -17,7 +17,7 @@
 	var/strength = 4 // How much damage it deals per unit
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(strength && alien != IS_DIONA)
+	if(strength)
 		M.add_chemical_effect(CE_TOXIN, strength)
 		var/dam = (strength * removed)
 		if(target_organ && ishuman(M))
@@ -114,11 +114,6 @@
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
-
-/datum/reagent/toxin/phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_NABBER)
-		return
-	..()
 
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
@@ -244,8 +239,6 @@
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_DIONA)
-		return
 	M.status_flags |= FAKEDEATH
 	M.adjustOxyLoss(3 * removed)
 	M.Weaken(10)
@@ -301,16 +294,6 @@
 	if(istype(O, /obj/effect/vine))
 		qdel(O)
 
-/datum/reagent/toxin/plantbgone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if(alien == IS_DIONA)
-		M.adjustToxLoss(50 * removed)
-
-/datum/reagent/toxin/plantbgone/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if(alien == IS_DIONA)
-		M.adjustToxLoss(50 * removed)
-
 /datum/reagent/acid/polyacid
 	name = "Polytrinic acid"
 	description = "Polytrinic acid is a an extremely corrosive chemical substance."
@@ -337,16 +320,9 @@
 	value = 2.4
 
 /datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	if(alien == IS_SKRELL)
-		M.take_organ_damage(2.4 * removed, 0)
-		if(M.losebreath < 22.5)
-			M.losebreath++
-	else
-		M.take_organ_damage(3 * removed, 0)
-		if(M.losebreath < 15)
-			M.losebreath++
+	M.take_organ_damage(3 * removed, 0)
+	if(M.losebreath < 15)
+		M.losebreath++
 
 /datum/reagent/mutagen
 	name = "Unstable mutagen"
@@ -395,8 +371,6 @@
 	value = 1.2
 
 /datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	if(prob(10))
 		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
 		M.adjustToxLoss(rand(100, 300) * removed)
@@ -414,13 +388,7 @@
 	value = 2.5
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
 	var/threshold = 1
-	if(alien == IS_SKRELL)
-		threshold = 1.2
-
 	if(M.chem_doses[type] < 1 * threshold)
 		if(M.chem_doses[type] == metabolism * 2 || prob(5))
 			M.emote("yawn")
@@ -448,24 +416,16 @@
 	value = 2.6
 
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
 	var/threshold = 1
-	if(alien == IS_SKRELL)
-		threshold = 1.2
 	M.add_chemical_effect(CE_SEDATE, 1)
-
 	if(M.chem_doses[type] <= metabolism * threshold)
 		M.confused += 2
 		M.drowsyness += 2
-
 	if(M.chem_doses[type] < 2 * threshold)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
 	else
 		M.sleeping = max(M.sleeping, 30)
-
 	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
 
@@ -490,13 +450,7 @@
 	value = 2.6
 
 /datum/reagent/vecuronium_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
 	var/threshold = 2
-	if(alien == IS_SKRELL)
-		threshold = 2.4
-
 	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
 		M.confused = max(M.confused, 2)
 		M.add_chemical_effect(CE_VOICELOSS, 1)
@@ -526,13 +480,7 @@
 	value = 2.8
 
 /datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
 	var/drug_strength = 15
-	if(alien == IS_SKRELL)
-		drug_strength = drug_strength * 0.8
-
 	M.druggy = max(M.druggy, drug_strength)
 	if(prob(10))
 		M.SelfMove(pick(GLOB.cardinal))
@@ -551,8 +499,6 @@
 	value = 2.5
 
 /datum/reagent/serotrotium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	if(prob(7))
 		M.emote(pick("twitch", "drool", "moan", "gasp"))
 	return
@@ -570,11 +516,7 @@
 	value = 2
 
 /datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	var/drug_strength = 4
-	if(alien == IS_SKRELL)
-		drug_strength = drug_strength * 0.8
 	M.make_dizzy(drug_strength)
 	M.confused = max(M.confused, drug_strength * 5)
 
@@ -588,8 +530,6 @@
 	value = 1.8
 
 /datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	M.jitteriness = max(M.jitteriness - 5, 0)
 	if(prob(80))
 		M.adjustBrainLoss(5.25 * removed)
@@ -609,13 +549,8 @@
 	value = 0.6
 
 /datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
 	M.add_chemical_effect(CE_MIND, -2)
-	if(alien == IS_SKRELL)
-		M.hallucination(25, 30)
-	else
-		M.hallucination(50, 50)
+	M.hallucination(50, 50)
 
 /datum/reagent/psilocybin
 	name = "Psilocybin"
@@ -627,13 +562,7 @@
 	value = 0.7
 
 /datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
 	var/threshold = 1
-	if(alien == IS_SKRELL)
-		threshold = 1.2
-
 	M.druggy = max(M.druggy, 30)
 
 	if(M.chem_doses[type] < 1 * threshold)
@@ -665,9 +594,8 @@
 	cultural taboo, people develop and dose themselves with substances that would curl the hair on \
 	a brinker's vatgrown second head. Three Eye is one of the most notorious narcotics to ever come \
 	out of the independant habitats, and has about as much in common with recreational drugs as a \
-	Stok does with an Unathi strike trooper. It is equally effective on humans, Skrell, dionaea and \
-	probably the Captain's cat, and distributing it will get you guaranteed jail time in every \
-	human territory."
+	small dog does to a monster truck. It is equally effective on humans, yinglets, and probably the \
+	Captain's cat, and distributing it will get you guaranteed jail time in every human territory."
 	reagent_state = LIQUID
 	color = "#ccccff"
 	metabolism = REM
@@ -743,10 +671,9 @@
 	metabolism = REM * 0.2
 	value = 2
 
+/*
 /datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
 	if(!istype(H))
-		return
-	if(H.species.name == SPECIES_PROMETHEAN)
 		return
 	H.adjustToxLoss(40 * removed)
 	if(H.chem_doses[type] < 1 || prob(30))
@@ -785,6 +712,7 @@
 		to_chat(H, "<span class='danger'>Your slimy [O.name] plops off!</span>")
 		O.droplimb()
 	H.update_body()
+*/
 
 /datum/reagent/aslimetoxin
 	name = "Advanced Mutation Toxin"
@@ -846,8 +774,6 @@
 	heating_point = null
 
 /datum/reagent/toxin/hair_remover/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(alien == IS_SKRELL)	//skrell can't have hair unless you hack it in, also to prevent tentacles from falling off
-		return
 	M.species.set_default_hair(M)
 	to_chat(M, "<span class='warning'>You feel a chill and your skin feels lighter..</span>")
 	remove_self(volume)
@@ -891,20 +817,6 @@
 	heating_products = null
 	heating_point = null
 
-/datum/reagent/toxin/bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_MANTID)
-		. = ..()
-
-/datum/reagent/toxin/bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_MANTID)
-		M.add_chemical_effect(CE_OXYGENATED, 1)
-	else
-		..()
-
-/datum/reagent/toxin/bromide/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_MANTID)
-		. = ..()
-
 /datum/reagent/toxin/methyl_bromide
 	name = "Methyl Bromide"
 	description = "A fumigant derived from bromide."
@@ -915,19 +827,13 @@
 	heating_products = null
 	heating_point = null
 
-/datum/reagent/toxin/methyl_bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
-
-/datum/reagent/toxin/methyl_bromide/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
-
 /datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
 	if(istype(T))
 		T.assume_gas(GAS_METHYL_BROMIDE, volume, T20C)
 		remove_self(volume)
 
 /datum/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
+	. = ..()
 	if(istype(M))
 		for(var/obj/item/organ/external/E in M.organs)
 			if(LAZYLEN(E.implants))

@@ -39,12 +39,6 @@
 	pda_type = /obj/item/modular_computer/pda //cause I like the look
 	id_pda_assignment = "Merchant"
 
-/decl/hierarchy/outfit/merchant/vox
-	name = "Merchant - Vox"
-	shoes = /obj/item/clothing/shoes/jackboots/unathi
-	uniform = /obj/item/clothing/under/vox/vox_robes
-	suit = /obj/item/clothing/suit/armor/vox_scrap
-
 /decl/hierarchy/outfit/clown
 	name = "Clown"
 	shoes = /obj/item/clothing/shoes/clown_shoes

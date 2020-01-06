@@ -749,8 +749,8 @@
 	icon_state = "nymphplushie"
 
 /obj/item/toy/plushie/mouse
-	name = "mouse plush"
-	desc = "A plushie of a delightful mouse! What was once considered a vile rodent is now your very best friend."
+	name = "snaprat plush"
+	desc = "A plushie of a snaprat! What was once considered a vile rodent is now your very best friend."
 	icon_state = "mouseplushie"
 
 /obj/item/toy/plushie/kitten
@@ -760,18 +760,13 @@
 
 /obj/item/toy/plushie/lizard
 	name = "lizard plush"
-	desc = "A plushie of a scaly lizard! Very controversial, after being accused as \"racist\" by some Unathi."
+	desc = "A plushie of a scaly lizard!"
 	icon_state = "lizardplushie"
 
 /obj/item/toy/plushie/spider
 	name = "spider plush"
 	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
 	icon_state = "spiderplushie"
-
-/obj/item/toy/plushie/farwa
-	name = "farwa plush"
-	desc = "A farwa plush doll. It's soft and comforting!"
-	icon_state = "farwaplushie"
 
 //Toy cult sword
 /obj/item/toy/cultsword

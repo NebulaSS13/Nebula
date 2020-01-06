@@ -40,12 +40,6 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/boiledegg
 
-/datum/recipe/dionaroast
-	fruit = list("apple" = 1)
-	reagents = list(/datum/reagent/acid/polyacid = 5) //It dissolves the carapace. Still poisonous, though.
-	items = list(/obj/item/weapon/holder/diona)
-	result = /obj/item/weapon/reagent_containers/food/snacks/dionaroast
-
 /datum/recipe/classichotdog
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/bun,
@@ -887,11 +881,11 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/tossedsalad
 
 /datum/recipe/aesirsalad
-	fruit = list("goldapple" = 1, "ambrosiadeus" = 1)
+	fruit = list("goldapple" = 1, "biteleafdeus" = 1)
 	result = /obj/item/weapon/reagent_containers/food/snacks/aesirsalad
 
 /datum/recipe/validsalad
-	fruit = list("potato" = 1, "ambrosia" = 3)
+	fruit = list("potato" = 1, "biteleaf" = 3)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meatball)
 	result = /obj/item/weapon/reagent_containers/food/snacks/validsalad
 	make_food(var/obj/container as obj)

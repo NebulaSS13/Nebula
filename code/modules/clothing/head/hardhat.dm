@@ -60,7 +60,6 @@
 	siemens_coefficient = 0.9
 	center_of_mass = null
 	randpixel = 0
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	flash_protection = FLASH_PROTECTION_MAJOR
 
 /obj/item/clothing/head/hardhat/firefighter/Chief
@@ -72,7 +71,6 @@
 	icon_state = "Damage-Control-Helmet"
 	light_overlay = "DC_light"
 	flags_inv = HIDEEARS|BLOCKHAIR
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 
 /obj/item/clothing/head/hardhat/damage_control/Yellow
 	name = "senior damage control helmet"

@@ -303,21 +303,6 @@
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube)
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped = 5)
 
-/obj/item/weapon/storage/box/monkeycubes/farwacubes
-	name = "farwa cube box"
-	desc = "Drymate brand farwa cubes, shipped from Nyx. Just add water!"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube = 5)
-
-/obj/item/weapon/storage/box/monkeycubes/stokcubes
-	name = "stok cube box"
-	desc = "Drymate brand stok cubes, shipped from Moghes. Just add water!"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube = 5)
-
-/obj/item/weapon/storage/box/monkeycubes/neaeracubes
-	name = "neaera cube box"
-	desc = "Drymate brand neaera cubes, shipped from Jargon 4. Just add water!"
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube = 5)
-
 /obj/item/weapon/storage/box/monkeycubes/spidercubes
 	name = "spiderling cube box"
 	desc = "Drymate brand Instant spiders. WHY WOULD YOU ORDER THIS!?"
@@ -342,9 +327,9 @@
 	startswith = list(/obj/item/weapon/handcuffs = 7)
 
 /obj/item/weapon/storage/box/mousetraps
-	name = "box of Pest-B-Gon mousetraps"
+	name = "box of Pest-B-Gon rat traps"
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
-	icon_state = "mousetraps"
+	icon_state = "rat traps"
 	startswith = list(/obj/item/device/assembly/mousetrap = 6)
 
 /obj/item/weapon/storage/box/mousetraps/empty
@@ -584,9 +569,6 @@
 /obj/item/weapon/storage/box/snack
 	name = "box of snack food"
 	desc = "A box full of snack foods."
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 7)
-
-/obj/item/weapon/storage/box/snack/jerky
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 7)
 
 /obj/item/weapon/storage/box/snack/noraisin

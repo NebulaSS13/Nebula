@@ -33,13 +33,6 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 
-/obj/item/clothing/shoes/jackboots/unathi
-	name = "toe-less jackboots"
-	desc = "Modified pair of jackboots, particularly comfortable for those species whose toes hold claws."
-	item_state = "digiboots"
-	icon_state = "digiboots"
-	species_restricted = null
-
 /obj/item/clothing/shoes/workboots
 	name = "workboots"
 	desc = "A pair of steel-toed work boots designed for use in industrial settings. Safety first."

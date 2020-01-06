@@ -44,7 +44,7 @@
 /obj/item/weapon/material/knife/table/plastic
 	default_material = MATERIAL_PLASTIC
 
-/obj/item/weapon/material/knife/table/unathi
+/obj/item/weapon/material/knife/table/primitive
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon_state = "unathiknife"

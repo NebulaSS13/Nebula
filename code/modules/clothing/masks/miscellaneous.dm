@@ -242,18 +242,6 @@
 	desc = "A rubber cat mask."
 	icon_state = "catmet"
 
-/obj/item/clothing/mask/rubber/species/unathi
-	name = "unathi mask"
-	desc = "A rubber unathi mask."
-	icon_state = "lizmet"
-	species = SPECIES_UNATHI
-
-/obj/item/clothing/mask/rubber/species/skrell
-	name = "skrell mask"
-	desc = "A rubber skrell mask."
-	icon_state = "skrellmet"
-	species = SPECIES_SKRELL
-
 /obj/item/clothing/mask/spirit
 	name = "spirit mask"
 	desc = "An eerie mask of ancient, pitted wood."

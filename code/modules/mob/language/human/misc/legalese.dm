@@ -7,9 +7,7 @@
 	space_chance = 100
 	key = "u"
 	partial_understanding = list(
-		LANGUAGE_HUMAN_EURO = 10,
-		LANGUAGE_HUMAN_SELENIAN = 25,
-		LANGUAGE_SKRELLIAN = 5
+		LANGUAGE_HUMAN = 10
 	)
 	syllables = list(
 		"hitherto", "whereof", "hereunto", "deed", "hereinbefore", "whereas", "consensus", "nonwithstanding",

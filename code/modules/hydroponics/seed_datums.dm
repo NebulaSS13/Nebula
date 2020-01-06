@@ -303,12 +303,12 @@
 
 //Ambrosia/varieties.
 /datum/seed/ambrosia
-	name = "ambrosia"
-	seed_name = "ambrosia vulgaris"
-	display_name = "ambrosia vulgaris"
-	mutants = list("ambrosiadeus")
+	name = "biteleaf"
+	seed_name = "biteleaf"
+	display_name = "biteleaf"
+	mutants = list("biteleafdeus")
 	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/space_drugs = list(1,8), /datum/reagent/kelotane = list(1,8,1), /datum/reagent/bicaridine = list(1,10,1), /datum/reagent/toxin = list(1,10))
-	kitchen_tag = "ambrosia"
+	kitchen_tag = "biteleaf"
 
 /datum/seed/ambrosia/New()
 	..()
@@ -323,12 +323,12 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 
 /datum/seed/ambrosia/deus
-	name = "ambrosiadeus"
-	seed_name = "ambrosia deus"
-	display_name = "ambrosia deus"
+	name = "biteleafdeus"
+	seed_name = "biteleaf deus"
+	display_name = "biteleaf deus"
 	mutants = null
 	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/bicaridine = list(1,8), /datum/reagent/synaptizine = list(1,8,1), /datum/reagent/hyperzine = list(1,10,1), /datum/reagent/space_drugs = list(1,10))
-	kitchen_tag = "ambrosiadeus"
+	kitchen_tag = "biteleafdeus"
 
 /datum/seed/ambrosia/deus/New()
 	..()
@@ -1243,6 +1243,19 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
+
+/datum/seed/algae/bruisegrass
+	name = "bruisegrass"
+	seed_name = "bruisegrass"
+	display_name = "bruisegrass"
+	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/tramadol = list(1,10))
+	kitchen_tag = "bruisegrass"
+	exude_gasses = null
+
+/datum/seed/algae/bruisegrass/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#8a2546")
+	set_trait(TRAIT_PLANT_COLOUR,"#8a2546")
 
 /datum/seed/bamboo
 	name = "bamboo"

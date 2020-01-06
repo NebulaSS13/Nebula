@@ -2704,35 +2704,3 @@
 	result_amount = 3
 	catalysts = list(/datum/reagent/nutriment)
 	mix_message = "The milk ferments into kefir"
-
-// Alien Drinks
-
-/datum/chemical_reaction/skrianhi
-	name = "Skrianhi Tea"
-	result = /datum/reagent/drink/alien/skrianhi
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/water = 1)
-	result_amount = 3
-	minimum_temperature = 50 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
-	mix_message = "The tea turns a bitter black"
-
-/datum/chemical_reaction/mumbaksting
-	name = "Mumbak Sting"
-	result = /datum/reagent/drink/alien/mumbaksting
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/toxin = 1)
-	result_amount = 3
-	mix_message = "The toxins mix with the juice to create a dark red substance"
-
-/datum/chemical_reaction/wasgaelhi
-	name = "Wasgaelhi"
-	result = /datum/reagent/ethanol/alien/wasgaelhi
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/ethanol/wine = 1)
-	result_amount = 3
-	mix_message = "The mixture turns a dark green"
-
-/datum/chemical_reaction/kzkzaa
-	name = "Kzkzaa"
-	result = /datum/reagent/drink/alien/kzkzaa
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/nutriment/protein = 1)
-	result_amount = 3
-	mix_message = "The mixture turns a dark green"

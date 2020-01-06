@@ -332,12 +332,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/egg/yellow
 	icon_state = "egg-yellow"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/lizard
-	name = "unathi egg"
-	desc = "Large, slightly elongated egg with a thick shell."
-	icon_state = "lizard_egg"
-	w_class = ITEM_SIZE_SMALL
-
 /obj/item/weapon/reagent_containers/food/snacks/egg/lizard/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein/egg, 5)
@@ -1418,33 +1412,7 @@
 	obj_flags = 0
 	wrapped = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwacube
-	name = "farwa cube"
-	monkey_type = /mob/living/carbon/human/farwa
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube
-	name = "farwa cube"
-	monkey_type = /mob/living/carbon/human/farwa
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/stokcube
-	name = "stok cube"
-	monkey_type = /mob/living/carbon/human/stok
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube
-	name = "stok cube"
-	monkey_type = /mob/living/carbon/human/stok
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
-	name = "neaera cube"
-	monkey_type = /mob/living/carbon/human/neaera
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
-	name = "neaera cube"
-	monkey_type = /mob/living/carbon/human/neaera
-
-
 //Spider cubes, all that's left of the cube PR
-
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/spidercube
 	name = "spider cube"
 	monkey_type = /obj/effect/spider/spiderling
@@ -3200,7 +3168,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/canned/caviar
 	name = "\improper Terran Caviar"
 	icon_state = "fisheggs"
-	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt. Skrell approved!"
+	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt."
 	trash = /obj/item/trash/fishegg
 	filling_color = "#000000"
 	center_of_mass = "x=15;y=9"
@@ -3394,16 +3362,6 @@
 	nutriment_desc = list("bread" = 2, "sweetness" = 3)
 	nutriment_amt = 6
 	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
-	name = "\improper SkrellSnax"
-	desc = "Cured fungus shipped all the way from Jargon 4, almost like jerky! Almost."
-	icon_state = "skrellsnacks"
-	filling_color = "#a66829"
-	center_of_mass = "x=15;y=12"
-	nutriment_desc = list("mushroom" = 5, "salt" = 5)
-	nutriment_amt = 10
-	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/candy
 	name = "candy"

@@ -76,7 +76,7 @@
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/lizard/are/bad'
+		SPECIES_YINGLET = 'icons/scavs/are/bad'
 		)
 	If index term exists and icon_override is not set, this sprite sheet will be used.
 	*/

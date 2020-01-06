@@ -130,7 +130,6 @@
 								/obj/item/clothing/under/swimsuit         = TRADER_BLACKLIST,
 								/obj/item/clothing/under/syndicate        = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/tactical         = TRADER_BLACKLIST,
-								/obj/item/clothing/under/vox              = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/wedding          = TRADER_BLACKLIST,
 								/obj/item/clothing/under/punpun           = TRADER_BLACKLIST)
 

@@ -40,7 +40,7 @@
 		if(VERM_MICE)
 			spawn_types = list(/mob/living/simple_animal/mouse) // The base mouse type selects a random color for us
 			max_number = 12
-			vermstring = "mice"
+			vermstring = "snaprats"
 		if(VERM_LIZARDS)
 			spawn_types = list(/mob/living/simple_animal/lizard)
 			max_number = 6

@@ -526,19 +526,6 @@
 		..()
 		reagents.add_reagent(/datum/reagent/drink/juice/lime, 100)
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice
-	name = "Hrukhza Leaf Extract"
-	desc = "Hrukhza Leaf, a vital component of any Moghes drinks."
-	icon_state = "hrukhzaextract"
-	item_state = "carton"
-	center_of_mass = "x=16;y=8"
-	isGlass = 0
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/drink/alien/unathijuice, 100)
-
-
 //Small bottles
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small
 	volume = 50

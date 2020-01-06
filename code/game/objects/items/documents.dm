@@ -40,8 +40,8 @@
 
 /obj/item/documents/scg/blue
 	name = "blue secret documents"
-	desc = "\"Top Secret\" documents detailing the Skrellian company Krri'gli, and their insistent requests upon specific priority sectors for the Torch to investigate."
-	description_antag = "Krri'gli seem to be guiding the Torch, subtly, to a specific unmapped sector of the galaxy. It's almost like they're too afraid to investigate it personally."
+	desc = "\"Top Secret\" documents detailing the outworlder company Krri'gli, and their insistent requests upon specific priority sectors for the Torch to investigate."
+	description_antag = "Krri'gli seem to be guiding the ship, subtly, to a specific unmapped sector of the galaxy. It's almost like they're too afraid to investigate it personally."
 	icon_state = "docs_blue"
 
 /obj/item/documents/scgr

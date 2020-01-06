@@ -60,7 +60,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/suit/storage/toggle/brown_jacket,
 		/obj/item/clothing/suit/storage/toggle/hoodie,
 		/obj/item/clothing/suit/storage/toggle/hoodie/black,
-		/obj/item/clothing/suit/unathi/mantle,
+		/obj/item/clothing/suit/mantle,
 		/obj/item/clothing/suit/poncho/colored,
 		)
 
@@ -151,26 +151,23 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	if(!..())
 		return 0
 
-	if(player.species && player.species.get_bodytype(player) == SPECIES_VOX)
-		equip_vox(player)
-	else
-		var/new_shoes =   pick(raider_shoes)
-		var/new_uniform = pick(raider_uniforms)
-		var/new_glasses = pick(raider_glasses)
-		var/new_helmet =  pick(raider_helmets)
-		var/new_suit =    pick(raider_suits)
+	var/new_shoes =   pick(raider_shoes)
+	var/new_uniform = pick(raider_uniforms)
+	var/new_glasses = pick(raider_glasses)
+	var/new_helmet =  pick(raider_helmets)
+	var/new_suit =    pick(raider_suits)
 
-		player.equip_to_slot_or_del(new new_shoes(player),slot_shoes)
-		if(!player.shoes)
-			//If equipping shoes failed, fall back to equipping sandals
-			var/fallback_type = pick(/obj/item/clothing/shoes/sandal, /obj/item/clothing/shoes/jackboots/unathi)
-			player.equip_to_slot_or_del(new fallback_type(player), slot_shoes)
+	player.equip_to_slot_or_del(new new_shoes(player),slot_shoes)
+	if(!player.shoes)
+		//If equipping shoes failed, fall back to equipping sandals
+		var/fallback_type = pick(/obj/item/clothing/shoes/sandal)
+		player.equip_to_slot_or_del(new fallback_type(player), slot_shoes)
 
-		player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform)
-		player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
-		player.equip_to_slot_or_del(new new_helmet(player),slot_head)
-		player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
-		equip_weapons(player)
+	player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform)
+	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
+	player.equip_to_slot_or_del(new new_helmet(player),slot_head)
+	player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
+	equip_weapons(player)
 
 	var/obj/item/weapon/card/id/id = create_id("Visitor", player, equip = 0)
 	id.SetName("[player.real_name]'s Passport")
@@ -237,18 +234,3 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 				new bullet_thrower.ammo_type(ammobox)
 			player.put_in_any_hand_if_possible(ammobox)
 		return
-
-/datum/antagonist/raider/proc/equip_vox(var/mob/living/carbon/human/player)
-
-	var/uniform_type = pick(list(/obj/item/clothing/under/vox/vox_robes,/obj/item/clothing/under/vox/vox_casual))
-
-	player.equip_to_slot_or_del(new uniform_type(player), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(player), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
-	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(player), slot_gloves) // AS ABOVE.
-	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
-	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
-	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
-
-	player.set_internals(locate(/obj/item/weapon/tank) in player.contents)
-	return 1
-

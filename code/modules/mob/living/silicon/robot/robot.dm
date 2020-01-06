@@ -109,7 +109,7 @@
 	spark_system.attach(src)
 
 	add_language(LANGUAGE_ROBOT_GLOBAL, 1)
-	add_language(LANGUAGE_EAL, 1)
+	add_language(LANGUAGE_HUMAN, 1)
 
 	wires = new(src)
 
