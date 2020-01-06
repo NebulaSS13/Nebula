@@ -625,14 +625,15 @@
 //proc for trays to spawn pre-planted
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant()
 	var/obj/item/seeds/S = locate() in get_turf(src)
-	seed = S.seed
-	lastproduce = 0
-	dead = 0
-	age = 1
-	health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
-	lastcycle = world.time
+	if(S.seed)
+		seed = S.seed
+		lastproduce = 0
+		dead = 0
+		age = 1
+		health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
+		lastcycle = world.time
+		check_health()
 	qdel(S)
-	check_health()
 
 /obj/machinery/portable_atmospherics/hydroponics/do_simple_ranged_interaction(var/mob/user)
 	if(dead)
