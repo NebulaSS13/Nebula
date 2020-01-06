@@ -10,7 +10,7 @@
 /area/ship/scrap/shuttle/outgoing)
 "ac" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1383;
+	frequency = 1380;
 	id_tag = "tradeship_shuttle_sensor";
 	pixel_y = -24
 	},
@@ -20,9 +20,8 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1383;
 	id_tag = "tradeship_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/plating,
@@ -526,9 +525,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/dock)
 "bZ" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 8;
-	frequency = 1379;
 	id_tag = "dock_star_pump"
 	},
 /obj/structure/cable{
@@ -3555,8 +3553,7 @@
 	pressure_checks = 2;
 	external_pressure_bound_default = 0;
 	internal_pressure_bound_default = 2000;
-	pressure_checks_default = 2;
-	frequency = 1443
+	pressure_checks_default = 2
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/ship/scrap/maintenance/atmos)
@@ -3854,11 +3851,11 @@
 /area/ship/scrap/crew/saloon)
 "jc" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
-	frequency = 1383;
+	frequency = 1380;
 	id_tag = "tradeship_shuttle_out"
 	},
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1383;
+	frequency = 1380;
 	master_tag = "tradeship_shuttle";
 	pixel_x = 18;
 	pixel_y = -20
@@ -3989,8 +3986,7 @@
 	pressure_checks = 2;
 	external_pressure_bound_default = 0;
 	internal_pressure_bound_default = 2000;
-	pressure_checks_default = 2;
-	frequency = 1443
+	pressure_checks_default = 2
 	},
 /turf/simulated/floor/reinforced/airmix,
 /area/ship/scrap/maintenance/atmos)
@@ -4135,8 +4131,7 @@
 	pressure_checks = 2;
 	external_pressure_bound_default = 0;
 	internal_pressure_bound_default = 2000;
-	pressure_checks_default = 2;
-	frequency = 1443
+	pressure_checks_default = 2
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/ship/scrap/maintenance/atmos)
@@ -4638,13 +4633,13 @@
 /area/ship/scrap/command/bridge)
 "lc" = (
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1383;
+	frequency = 1380;
 	master_tag = "tradeship_dock_port";
 	pixel_x = -18;
 	pixel_y = 20
 	},
 /obj/machinery/door/airlock/external/bolted/cycling{
-	frequency = 1383;
+	frequency = 1380;
 	id_tag = "dock_port_out"
 	},
 /obj/machinery/shield_diffuser,
@@ -4702,9 +4697,8 @@
 /turf/simulated/wall,
 /area/ship/scrap/garden)
 "nc" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	frequency = 1383;
 	id_tag = "dock_port_pump"
 	},
 /obj/structure/cable{
@@ -4794,12 +4788,12 @@
 	dir = 1
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1383;
+	frequency = 1380;
 	id_tag = "dock_port_sensor";
 	pixel_y = 36
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1383;
+	frequency = 1380;
 	id_tag = "tradeship_dock_port";
 	pixel_y = 25;
 	tag_airpump = "dock_port_pump";
@@ -4854,7 +4848,7 @@
 	opacity = 0
 	},
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1383;
+	frequency = 1380;
 	master_tag = "tradeship_dock_port";
 	pixel_x = 12;
 	pixel_y = 20
@@ -4864,7 +4858,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/bolted/cycling{
-	frequency = 1383;
+	frequency = 1380;
 	id_tag = "dock_port_in"
 	},
 /obj/structure/cable{
@@ -5362,9 +5356,8 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/hidden)
 "zb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	frequency = 1383;
 	id_tag = "tradeship_shuttle_pump_out_external"
 	},
 /obj/structure/handrai{
@@ -6760,14 +6753,14 @@
 /area/ship/scrap/cargo)
 "Yb" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
-	frequency = 1383;
+	frequency = 1380;
 	id_tag = "tradeship_shuttle_in"
 	},
 /obj/structure/cable{
 	icon_state = "4-10"
 	},
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1383;
+	frequency = 1380;
 	master_tag = "tradeship_shuttle";
 	pixel_x = -12;
 	pixel_y = 20
@@ -6826,13 +6819,12 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/power)
 "Zb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1383;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "tradeship_shuttle_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
-	frequency = 1383;
+	frequency = 1380;
 	id_tag = "tradeship_shuttle";
 	pixel_x = 0;
 	pixel_y = -24;
