@@ -2177,7 +2177,6 @@
 	"priv_region_access",
 	"priv_station_access",
 	"priv_syndicate_access",
-	"prometheans",
 	"protected_objects",
 	"rad_collectors",
 	"radio_controller",
