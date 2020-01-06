@@ -21,6 +21,26 @@
 	icon_state = "tailtuft"
 	body_parts = list(BP_GROIN)
 
+/datum/sprite_accessory/marking/yinglet/recolour_left_hand
+	name = "Body Colour (Left Arm)"
+	icon_state = "lh"
+	body_parts = list(BP_L_HAND)
+
+/datum/sprite_accessory/marking/yinglet/recolour_right_hand
+	name = "Body Colour (Right Arm)"
+	icon_state = "rh"
+	body_parts = list(BP_R_HAND)
+
+/datum/sprite_accessory/marking/yinglet/recolour_left_foot
+	name = "Body Colour (Left Leg)"
+	icon_state = "lf"
+	body_parts = list(BP_L_FOOT)
+
+/datum/sprite_accessory/marking/yinglet/recolour_right_foot
+	name = "Body Colour (Right Leg)"
+	icon_state = "rf"
+	body_parts = list(BP_R_FOOT)
+
 /datum/sprite_accessory/marking/yinglet/short_ears
 	name = "Ying Short Ears"
 	icon_state = "shortears"
