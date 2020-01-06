@@ -4,6 +4,7 @@
 	#include "../../code/datums/music_tracks/businessend.dm"
 	#include "../../code/datums/music_tracks/salutjohn.dm"
 
+	#include "tradeship_items.dm"
 	#include "tradeship_areas.dm"
 	#include "tradeship_jobs.dm"
 	#include "tradeship_lobby.dm"

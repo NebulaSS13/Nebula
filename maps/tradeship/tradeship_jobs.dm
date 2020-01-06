@@ -13,11 +13,16 @@
 			/datum/job/assistant,
 			/datum/job/engineer,
 			/datum/job/cyborg
+		),
+		/datum/species/yinglet/southern = list(
+			/datum/job/assistant,
+			/datum/job/engineer,
+			/datum/job/cyborg
 		)
 	)
 
 /datum/job/captain
-	supervisors = "your profit margin, your conscience, and Trademaster Viracroix"
+	supervisors = "your profit margin, your conscience, and the Trademaster"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/captain
 	min_skill = list(   SKILL_WEAPONS = SKILL_ADEPT,
 	                    SKILL_SCIENCE     = SKILL_ADEPT,

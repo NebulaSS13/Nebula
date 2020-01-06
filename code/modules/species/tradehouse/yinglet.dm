@@ -60,6 +60,16 @@
 	hunger_factor = 0.1
 	inherent_verbs = list(/mob/living/proc/hide)
 
+	available_cultural_info = list(
+		TAG_CULTURE =   list(CULTURE_SCAV_ENCLAVE, CULTURE_OTHER),
+		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
+		TAG_FACTION =   list(FACTION_SCAV, FACTION_OTHER),
+		TAG_RELIGION =  list(RELIGION_OTHER, RELIGION_ATHEISM, RELIGION_AGNOSTICISM)
+	)
+
+/datum/species/yinglet/get_bodytype(var/mob/living/carbon/human/H)
+	. = SPECIES_YINGLET
+
 /datum/species/yinglet/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	if(H && !H.shoes)
@@ -112,5 +122,16 @@
 	)
 	..()
 
-
-
+// This is honestly just so the other name generator becomes available.
+/datum/species/yinglet/southern
+	name = SPECIES_YINGLET_SOUTHERN
+	name_plural = "Southern Yinglets"
+	description = "Although similar to the other clam-loving rat-birds of the yinglet species, the southern \
+	yinglets are more parochial, tribal and generally less developed. Nobody is quite clear on which south \
+	they are from."
+	available_cultural_info = list(
+		TAG_CULTURE =   list(CULTURE_SCAV_TRIBE, CULTURE_OTHER),
+		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
+		TAG_FACTION =   list(FACTION_SCAV, FACTION_OTHER),
+		TAG_RELIGION =  list(RELIGION_OTHER, RELIGION_ATHEISM, RELIGION_AGNOSTICISM)
+	)
