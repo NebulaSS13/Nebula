@@ -287,13 +287,14 @@
 #define CORPSE_CAN_REENTER 1
 #define CORPSE_CAN_REENTER_AND_RESPAWN 2
 
-#define SPECIES_HUMAN       "Human"
-#define SPECIES_YINGLET     "Yinglet"
-#define SPECIES_MONKEY      "Monkey"
-#define SPECIES_ALIEN       "Humanoid"
-#define SPECIES_GOLEM       "Golem"
+#define SPECIES_HUMAN            "Human"
+#define SPECIES_YINGLET          "Yinglet"
+#define SPECIES_YINGLET_SOUTHERN "Southern Yinglet"
+#define SPECIES_MONKEY           "Monkey"
+#define SPECIES_ALIEN            "Humanoid"
+#define SPECIES_GOLEM            "Golem"
 
-#define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_YINGLET)
+#define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_YINGLET, SPECIES_YINGLET_SOUTHERN)
 #define RESTRICTED_SPECIES   list(SPECIES_ALIEN, SPECIES_GOLEM)
 
 #define SURGERY_CLOSED 0
