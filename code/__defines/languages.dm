@@ -1,5 +1,7 @@
 //Human
 #define LANGUAGE_HUMAN             "Common"
+#define LANGUAGE_NYMPH             "Nymph"
+
 #define LANGUAGE_LEGALESE          "Legalese"
 //Antag
 #define LANGUAGE_CULT              "Cult"

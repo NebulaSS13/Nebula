@@ -73,7 +73,6 @@
 	insult_drop = 0
 	possible_origins = list("Yacks and Yucks Shop", "The Shop From Which I Sell Humorous Items", "The Prank Gestalt", "The Clown's Armory", "Uncle Knuckle's Chuckle Bunker", "A Place from Which to do Humorous Business")
 	speech = list("hail_generic" = "We welcome you to our shop of humorous items. We invite you to partake in the divine experience of being pranked, and pranking someone else.",
-				"hail_Diona"     = "Welcome, other gestalt. We invite you to learn of our experiences, and teach us of your own.",
 				"hail_deny"      = "We cannot do business with you. We are sorry.",
 
 				"trade_complete" = "We thank you for purchasing something. We enjoyed the experience of you doing so and we hope to learn from it.",

@@ -245,8 +245,13 @@
 
 /decl/hierarchy/outfit/job/tradeship/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	. = ..()
-	if(. && yinglet_suit_fallback && istype(H) && !H.wear_suit && H.species.get_bodytype(H) == SPECIES_YINGLET)
-		H.equip_to_slot_or_del(new yinglet_suit_fallback(H), slot_wear_suit)
+	if(H && H.species.get_bodytype(H) == SPECIES_YINGLET)
+		if(shoes && !H.shoes)
+			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal/yinglet(H), slot_shoes)
+		if(uniform && !H.w_uniform)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/yinglet(H), slot_w_uniform)
+		if(suit && !H.wear_suit && yinglet_suit_fallback)
+			H.equip_to_slot_or_del(new yinglet_suit_fallback(H), slot_wear_suit)
 
 /decl/hierarchy/outfit/job/tradeship/captain
 	name = TRADESHIP_OUTFIT_JOB_NAME("Captain")
