@@ -20,6 +20,7 @@
 #define COLOR_CYAN             "#00ffff"
 #define COLOR_TEAL             "#33cccc"
 #define COLOR_RED              "#ff0000"
+#define COLOR_DARK_RED         "#aa0000"
 #define COLOR_PINK             "#ff00ff"
 #define COLOR_PALE_PINK        "#bf89ba"
 #define COLOR_ORANGE           "#ff9900"

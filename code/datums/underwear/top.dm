@@ -47,3 +47,9 @@
 	underwear_name = "tube top"
 	icon_state = "tubetop"
 	has_color = TRUE
+
+/datum/category_item/underwear/top/yinglet_wraps
+	name = "Yinglet Chestwrap"
+	underwear_name = "chestwrap"
+	icon_state = "ying_chestwrap"
+	has_color = TRUE

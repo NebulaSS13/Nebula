@@ -70,11 +70,6 @@
 /datum/species/yinglet/get_bodytype(var/mob/living/carbon/human/H)
 	. = SPECIES_YINGLET
 
-/datum/species/yinglet/equip_survival_gear(var/mob/living/carbon/human/H)
-	..()
-	if(H && !H.shoes)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal/yinglet(H), slot_shoes)
-
 /datum/species/yinglet/New()
 	equip_adjust = list(
 		slot_head_str = list(

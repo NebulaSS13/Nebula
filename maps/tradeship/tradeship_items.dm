@@ -9,8 +9,8 @@
 	)
 
 /obj/item/clothing/suit/storage/toggle/redcoat
-	name = "\improper Tradeship redcoat"
-	desc = "The signature uniform of Tradeship guardsmen."
+	name = "\improper Tradehouse redcoat"
+	desc = "The signature uniform of Tradeshouse guardsmen."
 	icon = 'maps/tradeship/icons/suit.dmi'
 	icon_state = "redcoat"
 	item_icons = list(
@@ -27,17 +27,35 @@
 	var/has_buckle
 
 /obj/item/clothing/suit/storage/toggle/redcoat/yinglet
-	desc = "The signature uniform of Tradeship guardsmen. This one seems to be sized for a yinglet."
+	desc = "The signature uniform of Tradehouse guardsmen. This one seems to be sized for a yinglet."
 	species_restricted = list(SPECIES_YINGLET)
 	icon = 'maps/tradeship/icons/suit_yinglet.dmi'
 
 /obj/item/clothing/suit/storage/toggle/redcoat/yinglet/officer
-	name = "\improper Tradeship officer's coat"
-	desc = "The striking uniform of a Tradeship guard officer, complete with gold collar, buttons and trim. This one seems to be sized for a yinglet."
+	name = "\improper Tradehouse officer's coat"
+	desc = "The striking uniform of a Tradehouse guard officer, complete with gold collar, buttons and trim. This one seems to be sized for a yinglet."
 	has_badge =   "badge"
 	has_buttons = "buttons_gold"
 	has_collar =  "collar_gold"
 	has_buckle =  "buckle_gold"
+
+/obj/item/clothing/under/yinglet
+	name = "small loincloth"
+	desc = "A few rags that wrap around the legs and crotch for a semblance of modesty."
+	species_restricted = list(SPECIES_YINGLET)
+	icon = 'maps/tradeship/icons/under_yinglet.dmi'
+	icon_state = "loincloth"
+	sprite_sheets = list(SPECIES_YINGLET = 'maps/tradeship/icons/onmob_under_yinglet.dmi')
+	color = COLOR_BEIGE
+
+/obj/item/clothing/suit/yinglet
+	name = "small cape"
+	desc = "A short length of cloth worked into a cape. Some people would say it looks stupid."
+	species_restricted = list(SPECIES_YINGLET)
+	icon = 'maps/tradeship/icons/suit_yinglet.dmi'
+	icon_state = "cape"
+	color = COLOR_DARK_RED
+	sprite_sheets = list(SPECIES_YINGLET = 'maps/tradeship/icons/onmob_suit_yinglet.dmi')
 
 /obj/item/clothing/suit/storage/toggle/redcoat/Initialize()
 	update_icon()
@@ -46,7 +64,7 @@
 /obj/item/clothing/suit/storage/toggle/redcoat/examine(var/mob/user, var/distance)
 	. = ..()
 	if(has_badge)
-		to_chat(user, "This one has a badge sewn to the front indicating the wearer is recognized by the Tradeship.")
+		to_chat(user, "This one has a badge sewn to the front indicating the wearer is recognized by the Tradehouse.")
 
 /obj/item/clothing/suit/storage/toggle/redcoat/proc/collect_overlays(var/from_icon)
 	var/list/adding_overlays
@@ -71,8 +89,8 @@
 	return ret
 
 /obj/item/clothing/suit/storage/toggle/redcoat/service
-	name = "\improper Tradeship service coat"
-	desc = "The brown-collared uniform of Tradeship service staff."
+	name = "\improper Tradehouse service coat"
+	desc = "The brown-collared uniform of Tradehouse service staff."
 	has_collar = "collar_brown"
 
 /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
@@ -82,8 +100,8 @@
 	has_badge = "badge"
 
 /obj/item/clothing/suit/storage/toggle/redcoat/officer
-	name = "\improper Tradeship officer's coat"
-	desc = "The striking uniform of a Tradeship guard officer, complete with gold collar and buttons."
+	name = "\improper Tradehouse officer's coat"
+	desc = "The striking uniform of a Tradehouse guard officer, complete with gold collar and buttons."
 	has_badge =   "badge"
 	has_buttons = "buttons_gold"
 	has_collar =  "collar_gold"
