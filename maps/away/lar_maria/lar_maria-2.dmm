@@ -1036,7 +1036,6 @@
 /area/lar_maria/library)
 "cx" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/hydroponics_pod_people,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cy" = (

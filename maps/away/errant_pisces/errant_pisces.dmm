@@ -4384,7 +4384,6 @@
 "kC" = (
 /obj/structure/bookcase,
 /obj/item/weapon/book/manual/materials_chemistry_analysis,
-/obj/item/weapon/book/manual/hydroponics_pod_people,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kD" = (
