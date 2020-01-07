@@ -64,7 +64,7 @@
 		return 0
 
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	A.attack_generic(src,rand(5,6),"bitten")
+	A.attack_generic(src,rand(5,6),"bites")
 
 /*
 	Slimes
