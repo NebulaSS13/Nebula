@@ -3,21 +3,28 @@
 		/datum/job/captain,
 		/datum/job/chief_engineer,
 		/datum/job/doctor,
+		/datum/job/rd,
 		/datum/job/hop, 
 		/datum/job/cyborg, 
 		/datum/job/assistant, 
-		/datum/job/engineer
+		/datum/job/engineer,
+		/datum/job/doctor/junior,
+		/datum/job/scientist
 	)
 	species_to_job_whitelist = list(
 		/datum/species/yinglet = list(
 			/datum/job/assistant,
 			/datum/job/engineer,
-			/datum/job/cyborg
+			/datum/job/cyborg,
+			/datum/job/doctor/junior,
+			/datum/job/scientist
 		),
 		/datum/species/yinglet/southern = list(
 			/datum/job/assistant,
 			/datum/job/engineer,
-			/datum/job/cyborg
+			/datum/job/cyborg,
+			/datum/job/doctor/junior,
+			/datum/job/scientist
 		)
 	)
 
@@ -27,7 +34,6 @@
 	min_skill = list(   SKILL_WEAPONS = SKILL_ADEPT,
 	                    SKILL_SCIENCE     = SKILL_ADEPT,
 	                    SKILL_PILOT       = SKILL_ADEPT)
-
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_WEAPONS     = SKILL_MAX)
 	skill_points = 30
@@ -72,7 +78,7 @@
 	return get_all_station_access()
 
 /datum/job/chief_engineer
-	title = "Chief Engineer"
+	title = "Head Engineer"
 	supervisors = "the Captain"
 	department_flag = ENG
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/chief_engineer
@@ -89,9 +95,10 @@
 	                    SKILL_ATMOS        = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX)
 	skill_points = 30
+	alt_titles = list()
 
 /datum/job/doctor
-	title = "Doc"
+	title = "Head Doctor"
 	supervisors = "the Captain and your own ethics"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/doc
 	alt_titles = list(
@@ -109,6 +116,13 @@
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
 	skill_points = 28
 
+/datum/job/doctor/junior
+	title = "Junior Doctor"
+	supervisors = "the Head Doctor and the Captain"
+	total_positions = 2
+	spawn_positions = 2
+	alt_titles = list()
+
 /datum/job/hop
 	title = "First Mate"
 	supervisors = "the Captain"
@@ -123,6 +137,7 @@
 	                    SKILL_FINANCE     = SKILL_MAX,
 	                    SKILL_BUREAUCRACY = SKILL_ADEPT)
 	skill_points = 30
+	alt_titles = list()
 
 /datum/job/assistant
 	title = "Deck Hand"
@@ -136,7 +151,7 @@
 
 /datum/job/engineer
 	title = "Junior Engineer"
-	supervisors = "Chief Engineer"
+	supervisors = "the Head Engineer"
 	total_positions = 2
 	spawn_positions = 2
 	hud_icon = "hudengineer"
@@ -152,24 +167,34 @@
 	                    SKILL_ATMOS        = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX)
 	skill_points = 20
+	alt_titles = list()
 
 /datum/job/cyborg
 	supervisors = "your laws and the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
 	total_positions = 1
 	spawn_positions = 1
+	alt_titles = list()
+
+/datum/job/rd
+	title = "Head Researcher"
+	supervisors = "the Captain"
+	spawn_positions = 1
+	total_positions = 1
+	alt_titles = list()
+	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher
+
+/datum/job/scientist
+	title = "Junior Researcher"
+	supervisors = "the Head Researcher and the Captain"
+	spawn_positions = 1
+	total_positions = 2
+	alt_titles = list()
+	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
 
 //TODO
 /*
-/datum/job/rd
-	title = "Head Researcher"
-	spawn_positions = 1
-	total_positions = 1
 
-/datum/job/scientist
-	title = "Researcher"
-	spawn_positions = 1
-	total_positions = 2
 
 /datum/job/yinglet
 	title = "Enclave Scav"
@@ -243,7 +268,7 @@
 			qdel(eyegore)
 
 /decl/hierarchy/outfit/job/tradeship/chief_engineer
-	name = TRADESHIP_OUTFIT_JOB_NAME("Chief Engineer")
+	name = TRADESHIP_OUTFIT_JOB_NAME("Head Engineer")
 	uniform = /obj/item/clothing/under/rank/chief_engineer
 	glasses = /obj/item/clothing/glasses/welding/superior
 	suit = /obj/item/clothing/suit/storage/hazardvest
@@ -258,12 +283,15 @@
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 
 /decl/hierarchy/outfit/job/tradeship/doc
-	name = TRADESHIP_OUTFIT_JOB_NAME("Ship's Doc")
+	name = TRADESHIP_OUTFIT_JOB_NAME("Head Doctor")
 	uniform = /obj/item/clothing/under/det/black
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/laceup
 	pda_type = /obj/item/modular_computer/pda/medical
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
+
+/decl/hierarchy/outfit/job/tradeship/doc/junior
+	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Doctor")
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
 
 /decl/hierarchy/outfit/job/tradeship/mate
 	name = TRADESHIP_OUTFIT_JOB_NAME("First Mate")
@@ -290,4 +318,14 @@
 	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Engineer")
 	head = /obj/item/clothing/head/hardhat
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
+
+/decl/hierarchy/outfit/job/tradeship/hand/researcher
+	name = TRADESHIP_OUTFIT_JOB_NAME("Head Researcher")
+	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
+	shoes = /obj/item/clothing/shoes/laceup
+	pda_type = /obj/item/modular_computer/pda/science
+
+/decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
+	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Researcher")
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
