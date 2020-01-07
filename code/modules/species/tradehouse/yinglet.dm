@@ -50,11 +50,11 @@
 	)
 	min_age = 5
 	max_age = 20
-	slowdown = -1
+	slowdown = -0.5
 	total_health = 75
 	brute_mod = 1.25
 	burn_mod =  1.25
-	mob_size = MOB_SMALL
+	//mob_size = MOB_SMALL
 	holder_type = /obj/item/weapon/holder/human
 	blood_volume = 350
 	hunger_factor = 0.1
