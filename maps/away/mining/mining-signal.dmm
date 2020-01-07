@@ -108,7 +108,7 @@
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "aA" = (
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "aB" = (
 /obj/machinery/papershredder,
@@ -382,7 +382,7 @@
 /area/outpost/abandoned)
 "by" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "bz" = (
 /obj/item/ammo_casing/shotgun/pellet,
@@ -433,7 +433,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "bE" = (
 /obj/effect/floor_decal/corner/purple{
@@ -467,7 +467,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/cigbutt/cigarbutt,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "bJ" = (
 /obj/effect/decal/cleanable/dirt,
@@ -511,11 +511,11 @@
 "bR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "bS" = (
 /obj/random/trash,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "bT" = (
 /obj/effect/floor_decal/corner/purple{
@@ -648,7 +648,7 @@
 "ck" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "cl" = (
 /obj/structure/hygiene/shower{
@@ -904,7 +904,7 @@
 "dd" = (
 /obj/structure/barricade,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "de" = (
 /obj/structure/hygiene/shower{
@@ -1010,7 +1010,7 @@
 /obj/structure/door_assembly{
 	anchored = 1
 	},
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "du" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
@@ -1153,7 +1153,7 @@
 /area/outpost/abandoned)
 "dO" = (
 /obj/structure/ore_box,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "dP" = (
 /obj/structure/closet/crate/large,
@@ -2634,7 +2634,7 @@
 	dir = 4;
 	icon_state = "intact"
 	},
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "vb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
@@ -2646,7 +2646,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/diona,
+/turf/simulated/floor,
 /area/outpost/abandoned)
 "wb" = (
 /obj/machinery/computer/modular/preset/cardslot/command{

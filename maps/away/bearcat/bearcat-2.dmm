@@ -749,9 +749,8 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bv" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "dock_port_pump"
 	},
 /obj/structure/cable{
@@ -968,9 +967,8 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bH" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 8;
-	frequency = 1379;
 	id_tag = "dock_star_pump"
 	},
 /obj/structure/cable{
@@ -3480,7 +3478,6 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/item/weapon/reagent_containers/glass/rag,
-/obj/item/weapon/clothingbag/rubbermask,
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/wash)
@@ -3561,7 +3558,6 @@
 /area/ship/scrap/unused)
 "gd" = (
 /obj/random/maintenance,
-/obj/item/weapon/clothingbag/rubbersuit,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/unused)
 "ge" = (
@@ -4662,8 +4658,7 @@
 	pressure_checks = 2;
 	external_pressure_bound_default = 0;
 	internal_pressure_bound_default = 2000;
-	pressure_checks_default = 2;
-	frequency = 1443
+	pressure_checks_default = 2
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
@@ -5193,8 +5188,7 @@
 	pressure_checks = 2;
 	external_pressure_bound_default = 0;
 	internal_pressure_bound_default = 2000;
-	pressure_checks_default = 2;
-	frequency = 1443
+	pressure_checks_default = 2
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
