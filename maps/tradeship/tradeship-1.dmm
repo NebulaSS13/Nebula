@@ -2431,6 +2431,7 @@
 /obj/structure/mopbucket,
 /obj/structure/table/rack{
 	dir = 8;
+	
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/device/multitool{
