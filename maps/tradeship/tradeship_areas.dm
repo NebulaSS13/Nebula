@@ -83,15 +83,15 @@
 	icon_state = "yellow"
 
 /area/ship/scrap/broken1
-	name = "\improper Robotic Maintenance"
+	name = "\improper Research Bay"
 	icon_state = "green"
 
 /area/ship/scrap/broken2
-	name = "\improper Compartment 1-B"
+	name = "\improper Fabrication Bay"
 	icon_state = "yellow"
 
 /area/ship/scrap/gambling
-	name = "\improper Compartment 1-C"
+	name = "\improper Chemistry Bay"
 	icon_state = "cave"
 
 /area/ship/scrap/maintenance
