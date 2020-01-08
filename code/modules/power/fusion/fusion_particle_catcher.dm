@@ -32,7 +32,7 @@
 		SetName("collector [mysize] OFF")
 
 /obj/effect/fusion_particle_catcher/bullet_act(var/obj/item/projectile/Proj)
-	parent.AddEnergy(Proj.damage)
+	parent.AddEnergy(parent.plasma_temperature < 1000 ? Proj.damage * 20 : Proj.damage) // quick and dirty hack to get the field up to power faster
 	update_icon()
 	return 0
 
