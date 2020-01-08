@@ -122,6 +122,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	alt_titles = list()
+	skill_points = 24
 
 /datum/job/hop
 	title = "First Mate"
@@ -183,6 +184,18 @@
 	total_positions = 1
 	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_COMPUTER    = SKILL_BASIC,
+	                    SKILL_FINANCE     = SKILL_ADEPT,
+	                    SKILL_BOTANY      = SKILL_BASIC,
+	                    SKILL_ANATOMY     = SKILL_BASIC,
+	                    SKILL_DEVICES     = SKILL_BASIC,
+	                    SKILL_SCIENCE     = SKILL_ADEPT)
+
+	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_DEVICES     = SKILL_MAX,
+	                    SKILL_SCIENCE     = SKILL_MAX)
+	skill_points = 30
 
 /datum/job/scientist
 	title = "Junior Researcher"
@@ -191,6 +204,15 @@
 	total_positions = 2
 	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	                    SKILL_COMPUTER    = SKILL_BASIC,
+	                    SKILL_DEVICES     = SKILL_BASIC,
+	                    SKILL_SCIENCE     = SKILL_ADEPT)
+
+	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_DEVICES     = SKILL_MAX,
+	                    SKILL_SCIENCE     = SKILL_MAX)
+	skill_points = 24
 
 //TODO
 /*
