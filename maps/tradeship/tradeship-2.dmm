@@ -3372,6 +3372,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/atmos)
+"ig" = (
+/obj/machinery/atmospherics/pipe/simple/visible/cyan,
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "ih" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -4079,20 +4083,6 @@
 /obj/structure/window/phoronreinforced,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
-"jv" = (
-/obj/machinery/meter,
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
-/obj/structure/window/phoronreinforced,
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/engine/aft)
-"jw" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
-	dir = 9
-	},
-/obj/structure/window/phoronreinforced,
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/engine/aft)
 "jx" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
@@ -4101,10 +4091,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "jy" = (
-/obj/machinery/atmospherics/pipe/simple/visible/green{
-	icon_state = "intact";
-	dir = 5
-	},
+/obj/machinery/atmospherics/pipe/simple/visible/green,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -4396,23 +4383,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
-"ka" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
-	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/engine/aft)
 "kb" = (
 /obj/item/device/radio/intercom{
 	dir = 8;
@@ -4511,15 +4481,14 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "km" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 4
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 8
 	},
-/obj/machinery/meter,
 /obj/structure/cable{
 	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+	d2 = 8;
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
@@ -4533,20 +4502,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
-"ko" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 4
-	},
-/turf/simulated/wall,
-/area/ship/scrap/maintenance/power)
-"kp" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 10
-	},
-/turf/simulated/wall,
-/area/ship/scrap/maintenance/power)
 "kq" = (
 /obj/structure/grille/broken,
 /obj/structure/lattice,
@@ -4573,13 +4528,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/atmos)
-"ku" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
-	dir = 5
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/engine/aft)
 "kv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	icon_state = "intact";
@@ -4596,70 +4544,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
-"kw" = (
-/obj/machinery/meter,
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
-	dir = 4
-	},
-/obj/machinery/power/emitter/gyrotron/anchored{
-	dir = 1;
-	icon_state = "emitter-off";
-	initial_id_tag = "main_drive"
-	},
-/obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/engine/aft)
-"kx" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
-/obj/machinery/fusion_fuel_injector/mapped{
-	dir = 1;
-	icon_state = "injector0";
-	initial_id_tag = "main_drive"
-	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/engine/aft)
-"ky" = (
-/obj/machinery/atmospherics/valve/open{
-	icon_state = "map_valve1";
-	dir = 4
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/engine/aft)
 "kz" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
 	icon_state = "intact";
-	dir = 10
+	dir = 4
 	},
 /obj/machinery/meter,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "kA" = (
@@ -4675,13 +4565,13 @@
 /area/ship/scrap/maintenance/engine/aft)
 "kB" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 1;
+	icon_state = "map_vent";
+	dir = 8;
+	use_power = 1;
 	external_pressure_bound = 140;
-	external_pressure_bound_default = 140;
-	icon_state = "map_vent_out";
 	pressure_checks = 1;
-	pressure_checks_default = 1;
-	use_power = 1
+	external_pressure_bound_default = 140;
+	pressure_checks_default = 1
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
@@ -4792,6 +4682,11 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/port)
 "md" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 5
+	},
+/obj/machinery/meter,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "mX" = (
@@ -4856,6 +4751,22 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/cryo)
+"nr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 4
+	},
+/obj/structure/window/phoronreinforced{
+	icon_state = "rwindow";
+	dir = 1
+	},
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 1;
+	icon_state = "injector0";
+	initial_id_tag = "main_drive"
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "nu" = (
 /obj/structure/shuttle/engine/propulsion/burst/right{
 	dir = 1
@@ -5054,6 +4965,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/maintenance/atmos)
+"qH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 10
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "qO" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -5146,6 +5065,16 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/maintenance/atmos)
+"ry" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "scram"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "rQ" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
@@ -5208,6 +5137,15 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/hidden)
+"sX" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "tc" = (
 /obj/machinery/light{
 	icon_state = "bulb1";
@@ -5561,6 +5499,13 @@
 /obj/machinery/door/airlock/hatch/autoname/engineering,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/engine/aft)
+"AF" = (
+/obj/machinery/atmospherics/valve/open{
+	icon_state = "map_valve1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "AH" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
@@ -5843,6 +5788,19 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/dock)
+"FT" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 1;
+	icon_state = "injector0";
+	initial_id_tag = "main_drive"
+	},
+/obj/structure/window/phoronreinforced{
+	icon_state = "rwindow";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "FV" = (
 /obj/item/device/radio,
 /obj/structure/cable{
@@ -5999,6 +5957,23 @@
 "IA" = (
 /obj/effect/paint/red,
 /turf/simulated/wall/r_wall/hull,
+/area/ship/scrap/maintenance/engine/aft)
+"IV" = (
+/obj/machinery/atmospherics/pipe/simple/visible/green{
+	icon_state = "intact";
+	dir = 5
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "Jb" = (
 /obj/structure/table/standard,
@@ -6426,6 +6401,19 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/airless,
 /area/space)
+"Om" = (
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
+/obj/structure/window/phoronreinforced,
+/obj/machinery/power/emitter/gyrotron/anchored{
+	initial_id_tag = "main_drive"
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "Oq" = (
 /obj/structure/bed/chair/comfy/teal{
 	icon_state = "comfychair_teal";
@@ -6681,6 +6669,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/shuttle/outgoing)
+"Tf" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "Tl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -6692,6 +6690,20 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
+"To" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 9
+	},
+/obj/structure/window/phoronreinforced,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/engine/aft)
 "Tt" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
@@ -10043,11 +10055,11 @@ ih
 ix
 AB
 jd
+Tf
 ld
 jI
 jV
 kh
-ku
 md
 rv
 iQ
@@ -10125,12 +10137,12 @@ ii
 iy
 XX
 je
+LP
 ju
 jJ
 jY
 ki
 kv
-md
 kD
 kI
 wB
@@ -10207,12 +10219,12 @@ ij
 iz
 iQ
 jf
-jv
+LP
+Om
 jK
 jX
 kj
-kw
-md
+nr
 kE
 kI
 wB
@@ -10289,12 +10301,12 @@ ik
 iA
 iR
 jg
-jw
+LP
+To
 jL
 eO
 kk
-kx
-md
+FT
 kF
 kI
 wB
@@ -10372,11 +10384,11 @@ iB
 iQ
 jh
 jx
+sX
 jM
 UP
 kl
-ky
-md
+AF
 kF
 kI
 wB
@@ -10454,11 +10466,11 @@ iC
 XX
 ji
 jy
+IV
 jN
-ka
 km
 kz
-LP
+qH
 kG
 kI
 wB
@@ -10535,12 +10547,12 @@ im
 iD
 iQ
 jj
+ig
 jz
 jO
 kb
 kn
 kA
-md
 QS
 iQ
 vL
@@ -10620,8 +10632,8 @@ HF
 hL
 hL
 hL
-ko
-jZ
+hJ
+ry
 jZ
 iQ
 iQ
@@ -10702,7 +10714,7 @@ jk
 hL
 hL
 hL
-kp
+hJ
 kB
 or
 IA
