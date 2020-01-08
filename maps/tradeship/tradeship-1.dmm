@@ -121,10 +121,6 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light_switch{
-	pixel_x = 0;
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "ax" = (
@@ -224,6 +220,9 @@
 "aJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/weapon/stool/padded,
+/obj/machinery/light_switch{
+	pixel_x = 20
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "aK" = (
@@ -320,12 +319,8 @@
 "aY" = (
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/dorms1)
-"aZ" = (
-/obj/machinery/chemical_dispenser,
-/turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
 "ba" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/chemical_dispenser/full,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/gambling)
 "bb" = (
@@ -493,18 +488,22 @@
 /area/ship/scrap/gambling)
 "bn" = (
 /obj/machinery/chem_master,
+/obj/item/device/radio/intercom{
+	dir = 4;
+	pixel_x = -22
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/gambling)
 "bo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
 /obj/item/weapon/stool/padded,
 /obj/effect/landmark/start{
 	name = "Head Researcher"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/gambling)
@@ -884,20 +883,23 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/computer/rdconsole/core,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken2)
 "cd" = (
-/obj/machinery/power/apc{
-	dir = 1
-	},
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1;
 	d2 = 2
 	},
-/obj/structure/table/standard,
+/obj/machinery/cryopod/robot,
+/obj/machinery/computer/cryopod{
+	pixel_y = 25
+	},
+/obj/machinery/power/apc{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken2)
 "ce" = (
@@ -1035,20 +1037,24 @@
 /turf/simulated/floor,
 /area/ship/scrap/broken2)
 "cs" = (
-/obj/machinery/r_n_d/destructive_analyzer,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken2)
 "cu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken2)
@@ -1147,10 +1153,7 @@
 /area/ship/scrap/crew/dorms2)
 "cJ" = (
 /obj/machinery/light,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	level = 2
-	},
+/obj/machinery/r_n_d/destructive_analyzer,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken2)
 "cL" = (
@@ -1282,8 +1285,14 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken1)
 "db" = (
-/obj/machinery/vending/hydronutrients/generic,
+/obj/structure/table/standard,
+/obj/item/weapon/wirecutters/clippers,
+/obj/item/weapon/material/minihoe,
+/obj/item/weapon/reagent_containers/glass/bucket,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/item/weapon/disk/botany,
+/obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
+/obj/item/weapon/reagent_containers/glass/bottle/robustharvest,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken1)
 "dc" = (
@@ -1302,6 +1311,7 @@
 	pixel_y = 24
 	},
 /obj/item/device/floor_painter,
+/obj/item/clothing/mask/plunger,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "dd" = (
@@ -1518,7 +1528,17 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken1)
 "dE" = (
-/obj/machinery/vending/hydroseeds/generic,
+/obj/structure/hygiene/sink{
+	dir = 4;
+	icon_state = "sink";
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken1)
 "dH" = (
@@ -2256,6 +2276,12 @@
 /obj/machinery/door/airlock/hatch/autoname/engineering,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/scrap/maintenance/eva)
+"gJ" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/ship/scrap/gambling)
 "gX" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -2332,20 +2358,19 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/dorms1)
 "lb" = (
-/obj/machinery/alarm{
-	pixel_y = 24
+/obj/machinery/power/apc{
+	dir = 1
 	},
-/obj/structure/table/standard,
-/obj/item/weapon/wirecutters/clippers,
-/obj/item/weapon/material/minihoe,
-/obj/item/weapon/reagent_containers/glass/bucket,
 /obj/structure/cable{
 	icon_state = "0-2";
 	pixel_y = 1;
 	d2 = 2
 	},
-/obj/machinery/power/apc{
-	dir = 1
+/obj/machinery/seed_extractor,
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken1)
@@ -2408,7 +2433,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/machinery/seed_extractor,
+/obj/machinery/botany/extractor,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken1)
 "pr" = (
@@ -2506,15 +2531,15 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
 "ub" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
 /obj/item/weapon/stool/padded,
 /obj/effect/landmark/start{
 	name = "Junior Researcher"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken2)
@@ -2537,6 +2562,11 @@
 /area/ship/scrap/maintenance/lower)
 "vb" = (
 /obj/machinery/recharge_station,
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken2)
 "vw" = (
@@ -2785,7 +2815,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/taperoll/engineering/applied,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -2878,7 +2907,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/taperoll/engineering/applied,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -2941,7 +2969,6 @@
 /area/ship/scrap/crew/dorms3)
 "Tb" = (
 /obj/machinery/light,
-/obj/machinery/botany/extractor,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/broken1)
 "Ub" = (
@@ -5575,8 +5602,8 @@ Mx
 ah
 ah
 aO
-aZ
 bn
+gJ
 Cb
 JM
 Fb

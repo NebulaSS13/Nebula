@@ -917,10 +917,6 @@
 	icon_state = "white"
 	},
 /area/ship/scrap/crew/cryo)
-"dg" = (
-/obj/machinery/computer/cryopod,
-/turf/simulated/wall,
-/area/ship/scrap/crew/cryo)
 "dh" = (
 /obj/structure/window/reinforced/tinted{
 	icon_state = "twindow";
@@ -1010,6 +1006,9 @@
 	pixel_x = 24
 	},
 /obj/machinery/cryopod,
+/obj/machinery/computer/cryopod{
+	pixel_y = 30
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/cryo)
 "dt" = (
@@ -2814,9 +2813,6 @@
 /turf/space,
 /area/space)
 "hd" = (
-/obj/machinery/light{
-	dir = 8
-	},
 /obj/structure/closet/crate/uranium,
 /obj/machinery/button/blast_door{
 	id_tag = "radaway";
@@ -5171,6 +5167,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/structure/table/standard,
+/obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
+/obj/item/weapon/plantspray/pests,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/garden)
 "sc" = (
@@ -5343,7 +5342,9 @@
 /obj/item/weapon/storage/box/ammo/shotgunshells,
 /obj/item/weapon/handcuffs,
 /obj/item/device/boombox,
-/obj/item/device/radio/intercom,
+/obj/item/device/radio/intercom{
+	pixel_y = 20
+	},
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
 "vW" = (
@@ -6112,6 +6113,10 @@
 	pixel_y = 0
 	},
 /obj/random/powercell,
+/obj/machinery/light{
+	icon_state = "bulb1";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/maintenance/power)
 "Kc" = (
@@ -10922,7 +10927,7 @@ aa
 aa
 aa
 om
-dg
+de
 ds
 dJ
 dJ
