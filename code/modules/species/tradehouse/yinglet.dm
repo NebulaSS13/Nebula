@@ -67,6 +67,17 @@
 		TAG_RELIGION =  list(RELIGION_OTHER, RELIGION_ATHEISM, RELIGION_AGNOSTICISM)
 	)
 
+/datum/species/yinglet/skills_from_age(age)
+	switch(age)
+		if(0 to 5)   
+			. = -4
+		if(5 to 10)
+			. = 0
+		if(10 to 15)
+			. = 4
+		else
+			. = 8
+
 /datum/species/yinglet/get_bodytype(var/mob/living/carbon/human/H)
 	. = SPECIES_YINGLET
 
