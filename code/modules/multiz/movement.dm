@@ -253,6 +253,11 @@
 			var/obj/item/organ/external/victim = pick(victims)
 			victim.dislocate()
 			to_chat(src, "<span class='warning'>You feel a sickening pop as your [victim.joint] is wrenched out of the socket.</span>")
+
+	if(client)
+		var/area/A = get_area(landing)
+		if(A)
+			A.alert_on_fall(src)
 	updatehealth()
 
 

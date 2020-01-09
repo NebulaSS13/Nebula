@@ -178,3 +178,8 @@
   name = "\improper Cargo Lift"
   icon_state = "shuttle3"
   base_turf = /turf/simulated/open
+
+/area/ship/scrap/shuttle/lift/alert_on_fall(var/mob/living/carbon/human/H)
+	if(H.client && SSpersistence.elevator_fall_shifts > 0)
+		SSwebhooks.send(WEBHOOK_ELEVATOR_FALL, list("text" = "We managed to make it [SSpersistence.elevator_fall_shifts] shift\s without someone falling down an elevator shaft."))
+		SSpersistence.elevator_fall_shifts = -1
