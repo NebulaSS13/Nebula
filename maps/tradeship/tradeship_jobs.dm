@@ -156,6 +156,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	hud_icon = "hudengineer"
+	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,
 	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
@@ -172,7 +173,6 @@
 
 /datum/job/cyborg
 	supervisors = "your laws and the Captain"
-	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
 	total_positions = 1
 	spawn_positions = 1
 	alt_titles = list()
@@ -328,6 +328,8 @@
 	pda_type = /obj/item/modular_computer/pda/cargo
 	l_hand = /obj/item/weapon/material/clipboard
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
+	id_type = /obj/item/weapon/card/id/silver
+	pda_type = /obj/item/modular_computer/pda/heads/hop
 
 /decl/hierarchy/outfit/job/tradeship/hand
 	name = TRADESHIP_OUTFIT_JOB_NAME("Deck Hand")
@@ -346,13 +348,16 @@
 	head = /obj/item/clothing/head/hardhat
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
+	id_type = /obj/item/weapon/card/id/engineering
 
 /decl/hierarchy/outfit/job/tradeship/hand/researcher
 	name = TRADESHIP_OUTFIT_JOB_NAME("Head Researcher")
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 	shoes = /obj/item/clothing/shoes/laceup
 	pda_type = /obj/item/modular_computer/pda/science
+	id_type = /obj/item/weapon/card/id/science/head
 
 /decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
 	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Researcher")
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
+	id_type = /obj/item/weapon/card/id/science
