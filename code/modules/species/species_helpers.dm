@@ -63,3 +63,6 @@ var/list/stored_shock_by_ref = list()
 
 /datum/species/proc/get_digestion_product()
 	return /datum/reagent/nutriment
+
+/datum/species/proc/handle_post_species_pref_set(var/datum/preferences/pref)
+	return

@@ -376,6 +376,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 			pref.cultural_info = mob_species.default_cultural_info.Copy()
 
+			mob_species.handle_post_species_pref_set(pref)
+
 			sanitize_organs()
 
 			if(!has_flag(all_species[pref.species], HAS_UNDERWEAR))
