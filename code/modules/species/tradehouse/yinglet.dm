@@ -78,6 +78,16 @@
 		else
 			. = 8
 
+/datum/species/yinglet/handle_post_species_pref_set(var/datum/preferences/pref)
+	pref.body_markings = pref.body_markings || list()
+	if(!pref.body_markings["Ying Long Ears"])
+		pref.body_markings["Ying Long Ears"] = "#888888"
+	if(!pref.body_markings["Shelltooth"])
+		pref.body_markings["Shelltooth"] = "#cccccc"
+	pref.r_skin = 120
+	pref.g_skin = 120
+	pref.b_skin = 120
+
 /datum/species/yinglet/get_bodytype(var/mob/living/carbon/human/H)
 	. = SPECIES_YINGLET
 
