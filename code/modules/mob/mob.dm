@@ -86,7 +86,7 @@
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
-	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, checkghosts)
+	get_mobs_and_objs_in_view_fast(T, range, mobs, objs, checkghosts)
 
 	for(var/o in objs)
 		var/obj/O = o
