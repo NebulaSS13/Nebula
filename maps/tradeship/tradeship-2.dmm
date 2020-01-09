@@ -2083,6 +2083,10 @@
 	icon_state = "handrail";
 	dir = 8
 	},
+/obj/machinery/vending/tool{
+	icon_state = "tool";
+	dir = 8
+	},
 /turf/simulated/open,
 /area/ship/scrap/cargo)
 "ft" = (
