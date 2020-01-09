@@ -433,6 +433,12 @@
 		M.visible_message("<span class='notice'>[user] decided life was worth living</span>")
 		mouthshoot = 0
 		return
+
+	if(safety())
+		user.visible_message("*click click*", SPAN_DANGER("*click*"))
+		mouthshoot = 0
+		return
+
 	var/obj/item/projectile/in_chamber = consume_next_projectile()
 	if (istype(in_chamber))
 		user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")

@@ -2,6 +2,10 @@ SUBSYSTEM_DEF(persistence)
 	name = "Persistence"
 	init_order = SS_INIT_MISC_LATE
 	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
+
+	var/elevator_fall_path = "data/elevator_falls_tracking.txt"
+	var/elevator_fall_shifts = -1 // This is snowflake, but oh well.
+
 	var/list/tracking_values = list()
 	var/list/persistence_datums = list()
 
@@ -12,10 +16,24 @@ SUBSYSTEM_DEF(persistence)
 		persistence_datums[thing] = P
 		P.Initialize()
 
+	// Begin snowflake.
+	if(fexists(elevator_fall_path))
+		try
+			elevator_fall_shifts = text2num(file2text(elevator_fall_path))
+		catch()
+			elevator_fall_shifts = initial(elevator_fall_shifts)
+	if(isnull(elevator_fall_shifts))
+		elevator_fall_shifts = initial(elevator_fall_shifts)
+	elevator_fall_shifts++
+	// End snowflake.
+
 /datum/controller/subsystem/persistence/Shutdown()
 	for(var/thing in persistence_datums)
 		var/datum/persistent/P = persistence_datums[thing]
 		P.Shutdown()
+
+	// Refer to snowflake above.
+	text2file("[elevator_fall_shifts]", elevator_fall_path)
 
 /datum/controller/subsystem/persistence/proc/track_value(var/atom/value, var/track_type)
 
