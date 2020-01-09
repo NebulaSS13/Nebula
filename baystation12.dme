@@ -2771,6 +2771,7 @@
 #include "code\modules\species\station\golem.dm"
 #include "code\modules\species\station\monkey.dm"
 #include "code\modules\species\station\station.dm"
+#include "code\modules\species\tradehouse\baxxid.dm"
 #include "code\modules\species\tradehouse\yinglet.dm"
 #include "code\modules\species\tradehouse\yinglet_accessories.dm"
 #include "code\modules\species\tradehouse\yinglet_organs.dm"
