@@ -265,15 +265,20 @@
 	r_ear = null
 	var/yinglet_suit_fallback = /obj/item/clothing/suit/storage/toggle/redcoat/yinglet
 
+/decl/hierarchy/outfit/job/tradeship/proc/try_give_yinglet_fallbacks(var/mob/living/carbon/human/H)
+	if(!H || H.species.get_bodytype(H) != SPECIES_YINGLET)
+		return
+	if(shoes && !H.shoes)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal/yinglet(H), slot_shoes)
+	if(uniform && !H.w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/yinglet(H), slot_w_uniform)
+	if(suit && !H.wear_suit && yinglet_suit_fallback)
+		H.equip_to_slot_or_del(new yinglet_suit_fallback(H), slot_wear_suit)
+
 /decl/hierarchy/outfit/job/tradeship/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+	try_give_yinglet_fallbacks(H)
 	. = ..()
-	if(H && H.species.get_bodytype(H) == SPECIES_YINGLET)
-		if(shoes && !H.shoes)
-			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal/yinglet(H), slot_shoes)
-		if(uniform && !H.w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/yinglet(H), slot_w_uniform)
-		if(suit && !H.wear_suit && yinglet_suit_fallback)
-			H.equip_to_slot_or_del(new yinglet_suit_fallback(H), slot_wear_suit)
+	try_give_yinglet_fallbacks(H)
 
 /decl/hierarchy/outfit/job/tradeship/captain
 	name = TRADESHIP_OUTFIT_JOB_NAME("Captain")
@@ -349,6 +354,10 @@
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
 	id_type = /obj/item/weapon/card/id/engineering
+	shoes = /obj/item/clothing/shoes/workboots
+	l_hand = /obj/item/weapon/wrench
+	belt = /obj/item/weapon/storage/belt/utility/full
+	r_pocket = /obj/item/device/radio
 
 /decl/hierarchy/outfit/job/tradeship/hand/researcher
 	name = TRADESHIP_OUTFIT_JOB_NAME("Head Researcher")
