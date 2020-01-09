@@ -66,11 +66,27 @@
 	name = "Bread"
 	var/ying_puke_prob = 35
 
-/datum/reagent/nutriment/bread/adjust_nutrition(mob/living/carbon/human/M, alien, removed)
-	. = ..()
+/datum/reagent/nutriment/bread/on_mob_life(var/mob/living/carbon/human/M, var/alien, var/location)
+	if(istype(M) && alien == IS_YINGLET) 
+		// Yings do not process bread or breadlike substances well.
+		ingest_met =       0.1 // Make sure there's something to 
+		touch_met =        0.1 // throw up when we inevitably puke.
+		nutriment_factor = 0.1 // Don't get much nutrition out of it either.
+		. = ..()
+		// Reset in case somehow the reagent is processed outside again.
+		ingest_met =       initial(ingest_met)
+		touch_met =        initial(touch_met)
+		nutriment_factor = initial(nutriment_factor)
+	else
+		// Process as normal.
+		. = ..()
+
+/datum/reagent/nutriment/bread/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(istype(M) && alien == IS_YINGLET && prob(ying_puke_prob) && !M.lastpuke)
 		to_chat(M, SPAN_WARNING("Your gut churns as it struggles to digest \the [lowertext(name)]..."))
-		M.vomit()
+		M.vomit(timevomit = 3)
+		return
+	. = ..()
 
 /datum/reagent/nutriment/bread/cake
 	name = "Cake"
