@@ -261,10 +261,10 @@
 /area/ship/scrap/escape_star)
 "aO" = (
 /turf/simulated/wall,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "aP" = (
 /turf/simulated/wall/r_wall,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "aR" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/handrai{
@@ -319,10 +319,18 @@
 "aY" = (
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/dorms1)
+"aZ" = (
+/obj/machinery/chem_master,
+/obj/item/device/radio/intercom{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/simulated/floor/tiled/white,
+/area/ship/scrap/science/chemistry)
 "ba" = (
 /obj/machinery/chemical_dispenser/full,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "bb" = (
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -341,7 +349,7 @@
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/item/weapon/reagent_containers/glass/beaker,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "bc" = (
 /obj/machinery/light{
 	dir = 8
@@ -485,15 +493,13 @@
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "bn" = (
-/obj/machinery/chem_master,
-/obj/item/device/radio/intercom{
-	dir = 4;
-	pixel_x = -22
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "bo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -506,7 +512,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "bp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -520,7 +526,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "br" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -665,7 +671,7 @@
 /obj/machinery/reagent_temperature/cooler,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "bH" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -674,7 +680,7 @@
 	},
 /obj/machinery/reagentgrinder,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "bI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -855,7 +861,7 @@
 "ca" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "cb" = (
 /obj/machinery/light/small/red{
 	icon_state = "bulb1";
@@ -886,7 +892,7 @@
 /obj/machinery/computer/rdconsole/core,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "cd" = (
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -901,10 +907,10 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "ce" = (
 /turf/simulated/wall,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "cf" = (
 /obj/machinery/light{
 	dir = 8
@@ -1035,7 +1041,7 @@
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "cs" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -1043,7 +1049,7 @@
 	},
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "cu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1057,7 +1063,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "cx" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -1155,7 +1161,7 @@
 /obj/machinery/light,
 /obj/machinery/r_n_d/destructive_analyzer,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "cL" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -1197,10 +1203,10 @@
 "cP" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "cS" = (
 /turf/simulated/wall,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "cU" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -1279,11 +1285,11 @@
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "da" = (
 /obj/machinery/seed_storage/xenobotany,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "db" = (
 /obj/structure/table/standard,
 /obj/item/weapon/wirecutters/clippers,
@@ -1294,7 +1300,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
 /obj/item/weapon/reagent_containers/glass/bottle/robustharvest,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "dc" = (
 /obj/item/weapon/caution,
 /obj/item/weapon/caution,
@@ -1316,7 +1322,7 @@
 /area/ship/scrap/maintenance/storage)
 "dd" = (
 /turf/simulated/wall/r_wall,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "df" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -1433,7 +1439,7 @@
 	name = "Junior Researcher"
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "dr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1447,7 +1453,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "dt" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -1526,7 +1532,7 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "dE" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -1540,7 +1546,7 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "dH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1576,7 +1582,7 @@
 "dO" = (
 /obj/machinery/botany/editor,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "dP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -2276,12 +2282,6 @@
 /obj/machinery/door/airlock/hatch/autoname/engineering,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/scrap/maintenance/eva)
-"gJ" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
 "gX" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -2316,7 +2316,7 @@
 "iW" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "jb" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -2373,11 +2373,11 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "lD" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "lE" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -2419,7 +2419,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "ob" = (
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -2427,7 +2427,7 @@
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "pb" = (
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -2435,7 +2435,7 @@
 	},
 /obj/machinery/botany/extractor,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "pr" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -2542,7 +2542,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "uh" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
@@ -2568,7 +2568,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "vw" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -2632,7 +2632,6 @@
 /turf/simulated/floor/lino,
 /area/ship/scrap/crew/dorms1)
 "zb" = (
-/obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -2646,8 +2645,9 @@
 	pixel_x = 0
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/hatch/autoname/science,
 /turf/simulated/floor/plating,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "Ab" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/door/firedoor,
@@ -2687,7 +2687,7 @@
 /obj/structure/table/standard,
 /obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "Db" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
@@ -2718,7 +2718,7 @@
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "Eb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2744,7 +2744,7 @@
 	},
 /obj/machinery/r_n_d/circuit_imprinter,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "Gb" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -2806,9 +2806,8 @@
 "Ic" = (
 /obj/machinery/r_n_d/protolathe,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "Jb" = (
-/obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -2822,8 +2821,9 @@
 	pixel_y = 0
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/hatch/autoname/science,
 /turf/simulated/floor/plating,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "Js" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -2832,7 +2832,7 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor,
-/area/ship/scrap/broken2)
+/area/ship/scrap/science/fabricaton)
 "Kb" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2898,9 +2898,8 @@
 "NL" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "Ob" = (
-/obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -2914,8 +2913,9 @@
 	pixel_y = 0
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/hatch/autoname/science,
 /turf/simulated/floor/plating,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "Pb" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2970,7 +2970,7 @@
 "Tb" = (
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "Ub" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3017,7 +3017,7 @@
 "VM" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
-/area/ship/scrap/gambling)
+/area/ship/scrap/science/chemistry)
 "Wb" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -3034,7 +3034,7 @@
 "WZ" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
-/area/ship/scrap/broken1)
+/area/ship/scrap/science)
 "Xb" = (
 /obj/item/weapon/stock_parts/circuitboard/pacman,
 /obj/item/weapon/stock_parts/circuitboard/recharge_station,
@@ -5602,8 +5602,8 @@ Mx
 ah
 ah
 aO
+aZ
 bn
-gJ
 Cb
 JM
 Fb

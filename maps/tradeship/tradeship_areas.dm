@@ -82,15 +82,16 @@
 	name = "\improper Starboard Escape Pods"
 	icon_state = "yellow"
 
-/area/ship/scrap/broken1
+/area/ship/scrap/science
 	name = "\improper Research Bay"
 	icon_state = "green"
+	req_access = list(access_research)
 
-/area/ship/scrap/broken2
+/area/ship/scrap/science/fabricaton
 	name = "\improper Fabrication Bay"
 	icon_state = "yellow"
 
-/area/ship/scrap/gambling
+/area/ship/scrap/science/chemistry
 	name = "\improper Chemistry Bay"
 	icon_state = "cave"
 
