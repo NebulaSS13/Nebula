@@ -272,6 +272,7 @@
 	icon_state = "handrail";
 	dir = 4
 	},
+/obj/machinery/mining/brace,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "aS" = (
@@ -302,15 +303,16 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/crate/plastic,
-/obj/random/accessory,
-/obj/random/accessory,
-/obj/item/weapon/reagent_containers/glass/paint/random,
 /obj/structure/handrai{
 	tag = "icon-handrail (WEST)";
 	icon_state = "handrail";
 	dir = 8
 	},
+/obj/structure/closet/crate/plastic,
+/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/glass,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "aX" = (
@@ -386,6 +388,10 @@
 	icon_state = "handrail";
 	dir = 4
 	},
+/obj/structure/closet/crate/plastic,
+/obj/random/accessory,
+/obj/random/accessory,
+/obj/item/weapon/reagent_containers/glass/paint/random,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bf" = (
@@ -423,7 +429,6 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/random/closet,
 /obj/structure/handrai{
 	tag = "icon-handrail (WEST)";
 	icon_state = "handrail";
@@ -785,7 +790,6 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/mining/brace,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bU" = (
@@ -899,13 +903,10 @@
 	pixel_y = 1;
 	d2 = 2
 	},
-/obj/machinery/cryopod/robot,
-/obj/machinery/computer/cryopod{
-	pixel_y = 25
-	},
 /obj/machinery/power/apc{
 	dir = 4
 	},
+/obj/machinery/organ_printer/robot/mapped,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "ce" = (
@@ -1047,7 +1048,6 @@
 	dir = 4;
 	level = 2
 	},
-/obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "cu" = (
@@ -2132,6 +2132,9 @@
 	icon_state = "5-8"
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/computer/cryopod{
+	pixel_x = 28
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "eR" = (
@@ -2181,6 +2184,7 @@
 	dir = 9
 	},
 /obj/item/taperoll/engineering,
+/obj/item/weapon/tape_roll,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
 "eW" = (
@@ -2192,6 +2196,7 @@
 	dir = 1
 	},
 /obj/machinery/light,
+/obj/item/device/radio,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
 "eX" = (
@@ -2205,23 +2210,22 @@
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/clothing/head/welding,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
 "eY" = (
-/obj/item/clothing/head/welding,
-/obj/item/device/radio,
-/obj/item/weapon/tape_roll,
-/obj/structure/table/standard,
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
+/obj/machinery/recharge_station,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "eZ" = (
 /obj/machinery/vending/tool{
 	dir = 1
 	},
+/obj/machinery/cryopod/robot,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "fb" = (
@@ -2561,12 +2565,12 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
 "vb" = (
-/obj/machinery/recharge_station,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24;
 	pixel_y = 0
 	},
+/obj/machinery/robotics_fabricator,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "vw" = (
@@ -2826,6 +2830,7 @@
 /area/ship/scrap/science/fabricaton)
 "Js" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/mining/drill,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "JM" = (
@@ -3100,6 +3105,13 @@
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
+"Zd" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/mining/brace,
+/obj/random/accessory,
+/obj/random/accessory,
+/turf/simulated/floor/tiled/monotile,
+/area/ship/scrap/cargo/lower)
 
 (1,1,1) = {"
 aa
@@ -6421,7 +6433,7 @@ xj
 ao
 aw
 du
-Js
+Zd
 bg
 bx
 bN
