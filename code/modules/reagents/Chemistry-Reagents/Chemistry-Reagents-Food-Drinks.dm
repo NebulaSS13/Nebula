@@ -62,6 +62,20 @@
 
 	injectable = 1
 
+/datum/reagent/nutriment/bread
+	name = "Bread"
+	var/ying_puke_prob = 35
+
+/datum/reagent/nutriment/bread/adjust_nutrition(mob/living/carbon/human/M, alien, removed)
+	. = ..()
+	if(istype(M) && alien == IS_YINGLET && prob(ying_puke_prob) && !M.lastpuke)
+		to_chat(M, SPAN_WARNING("Your gut churns as it struggles to digest \the [lowertext(name)]..."))
+		M.vomit()
+
+/datum/reagent/nutriment/bread/cake
+	name = "Cake"
+	ying_puke_prob = 15
+
 /datum/reagent/nutriment/protein
 	name = "Animal Protein"
 	taste_description = "some sort of protein"
