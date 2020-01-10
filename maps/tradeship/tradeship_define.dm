@@ -1,16 +1,16 @@
 /datum/map/tradeship
 	name = "Tradeship"
-	full_name = "Tradeship Ivanmoth"
+	full_name = "Tradeship Ivenmoth"
 	path = "tradeship"
 
-	station_name  = "Tradeship Ivanmoth"
-	station_short = "Ivanmoth"
+	station_name  = "Tradeship Ivenmoth"
+	station_short = "Ivenmoth"
 
 	dock_name     = "Val Salia Station"
 	boss_name     = "Trade Administration"
 	boss_short    = "Admin"
-	company_name  = "Tradehouse Ivanmoth"
-	company_short = "Ivanmoth"
+	company_name  = "Tradehouse Ivenmoth"
+	company_short = "Ivenmoth"
 	overmap_event_areas = 11
 
 	default_law_type = /datum/ai_laws/corporate
@@ -33,7 +33,7 @@
 	salary_modifier = 0.2
 
 /datum/map/tradeship/get_map_info()
-	return "You're aboard the <b>[station_name],</b> a survey and mercantile vessel affiliated with <b>Tradehouse Ivanmoth</b>, a large merchant guild operating out of Val Salia Station. \
+	return "You're aboard the <b>[station_name],</b> a survey and mercantile vessel affiliated with <b>Tradehouse Ivenmoth</b>, a large merchant guild operating out of Val Salia Station. \
 	No meaningful authorities can claim the planets and resources in this uncharted sector, so their exploitation is entirely up to you - mine, poach and deforest all you want."
 
 /datum/map/tradeship/setup_map()
