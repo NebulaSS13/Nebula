@@ -184,7 +184,7 @@
 		return (R.cell)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M		
-		if(H.isSynthetic()) // FBPs and IPCs
+		if(H.isSynthetic())
 			return 1
 		if(istype(H.back,/obj/item/weapon/rig))
 			var/obj/item/weapon/rig/R = H.back

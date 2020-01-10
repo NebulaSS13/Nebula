@@ -495,29 +495,15 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	else if(href_list["limbs"])
 
-		var/list/limb_selection_list = list("Left Leg","Right Leg","Left Arm","Right Arm","Left Foot","Right Foot","Left Hand","Right Hand","Full Body")
-
-		// Full prosthetic bodies without a brain are borderline unkillable so make sure they have a brain to remove/destroy.
-		var/datum/species/current_species = all_species[pref.species]
-		if(current_species.spawn_flags & SPECIES_NO_FBP_CHARGEN)
-			limb_selection_list -= "Full Body"
-		else if(pref.organ_data[BP_CHEST] == "cyborg")
-			limb_selection_list |= "Head"
-
+		var/list/limb_selection_list = list("Left Leg","Right Leg","Left Arm","Right Arm","Left Foot","Right Foot","Left Hand","Right Hand")
 		var/organ_tag = input(user, "Which limb do you want to change?") as null|anything in limb_selection_list
-
 		if(!organ_tag || !CanUseTopic(user)) return TOPIC_NOACTION
 
 		var/limb = null
 		var/second_limb = null // if you try to change the arm, the hand should also change
 		var/third_limb = null  // if you try to unchange the hand, the arm should also change
 
-		// Do not let them amputate their entire body, ty.
 		var/list/choice_options = list("Normal","Amputated","Prosthesis")
-
-		//Dare ye who decides to one day make fbps be able to have fleshy bits. Heed my warning, recursion is a bitch. - Snapshot
-		if(pref.organ_data[BP_CHEST] == "cyborg")
-			choice_options = list("Amputated", "Prosthesis")
 
 		switch(organ_tag)
 			if("Left Leg")
@@ -544,13 +530,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			if("Right Hand")
 				limb = BP_R_HAND
 				third_limb = BP_R_ARM
-			if("Head")
-				limb =        BP_HEAD
-				choice_options = list("Prosthesis")
-			if("Full Body")
-				limb =        BP_CHEST
-				third_limb =  BP_GROIN
-				choice_options = list("Normal","Prosthesis")
 
 		var/new_state = input(user, "What state do you wish the limb to be in?") as null|anything in choice_options
 		if(!new_state || !CanUseTopic(user)) return TOPIC_NOACTION

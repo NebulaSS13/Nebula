@@ -19,12 +19,12 @@
 // Shield modes allow you to calibrate the field to fit specific needs. It is, for example, possible to create a field that will block airflow, but let people pass by calibrating it
 // properly. Each enabled shield mode adds up to the upkeep power usage, however. The following defines are a multiplier - 1.5 means the power usage will be increased 1.5x.
 
-#define MODEUSAGE_HYPERKINETIC 			// Blocks meteors and projectile based weapons. Relatively low as the shields are primarily intended as an anti-meteor countermeasure.
-#define MODEUSAGE_PHOTONIC 				// Blocks energy weapons, and makes the field opaque.
+#define MODEUSAGE_HYPERKINETIC 			    // Blocks meteors and projectile based weapons. Relatively low as the shields are primarily intended as an anti-meteor countermeasure.
+#define MODEUSAGE_PHOTONIC 				    // Blocks energy weapons, and makes the field opaque.
 #define MODEUSAGE_NONHUMANS 				// Blocks most organic lifeforms, with an exception being humanoid mobs. Typical uses include carps.
-#define MODEUSAGE_HUMANOIDS 			// Blocks humanoid mobs.
-#define MODEUSAGE_ANORGANIC 				// Blocks silicon-based mobs (cyborgs, drones, FBPs, IPCs, ..)
-#define MODEUSAGE_ATMOSPHERIC 			// Blocks airflow.
+#define MODEUSAGE_HUMANOIDS 			    // Blocks humanoid mobs.
+#define MODEUSAGE_ANORGANIC 				// Blocks non-organic mobs.
+#define MODEUSAGE_ATMOSPHERIC 			    // Blocks airflow.
 #define MODEUSAGE_HULL 1					// Enables hull shielding mode, which changes a square shaped field into a field that covers external hull only.
 #define MODEUSAGE_BYPASS 					// Attempts to counter shield diffusers. Puts very large EM strain on the shield when doing so. Has to be hacked.
 #define MODEUSAGE_OVERCHARGE 3				// Overcharges the shield, causing it to shock anyone who touches a field segment. Best used with MODE_ORGANIC_HUMANOIDS. Has to be hacked.
