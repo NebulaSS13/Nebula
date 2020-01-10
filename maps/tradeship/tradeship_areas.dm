@@ -183,3 +183,7 @@
 	if(H.client && SSpersistence.elevator_fall_shifts > 0)
 		SSwebhooks.send(WEBHOOK_ELEVATOR_FALL, list("text" = "We managed to make it [SSpersistence.elevator_fall_shifts] shift\s without someone falling down an elevator shaft."))
 		SSpersistence.elevator_fall_shifts = -1
+
+/area/ship/scrap/maintenance/solars
+  name = "\improper Solar Array Access"
+  icon_state = "SolarcontrolA"

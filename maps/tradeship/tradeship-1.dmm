@@ -114,15 +114,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/cargo/lower)
-"aw" = (
-/obj/structure/ladder/up,
-/obj/machinery/light{
-	icon_state = "bulb1";
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
-/area/ship/scrap/cargo/lower)
 "ax" = (
 /obj/structure/table/standard,
 /obj/item/device/flashlight/lamp,
@@ -216,14 +207,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
-/area/ship/scrap/cargo/lower)
-"aJ" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/stool/padded,
-/obj/machinery/light_switch{
-	pixel_x = 20
-	},
-/turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "aK" = (
 /obj/machinery/light/small/red{
@@ -653,6 +636,7 @@
 /area/ship/scrap/crew/dorms1)
 "bD" = (
 /obj/structure/table/standard,
+/obj/random/masks,
 /turf/simulated/floor/lino,
 /area/ship/scrap/crew/dorms1)
 "bE" = (
@@ -694,6 +678,9 @@
 	d2 = 2;
 	icon_state = "1-2";
 	pixel_y = 0
+	},
+/obj/structure/sign/chemistry{
+	pixel_x = -30
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
@@ -790,6 +777,10 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
+/obj/machinery/light/small{
+	icon_state = "bulb_map";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bU" = (
@@ -885,7 +876,7 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/escape_port)
@@ -1787,9 +1778,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "eo" = (
-/obj/structure/table/rack,
-/obj/item/weapon/tank/jetpack/oxygen,
-/obj/item/clothing/mask/breath,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/eva)
 "ep" = (
@@ -1799,6 +1788,8 @@
 	dir = 1
 	},
 /obj/structure/table/rack,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/clothing/mask/breath,
 /obj/item/weapon/tank/jetpack/oxygen,
 /obj/item/clothing/mask/breath,
 /turf/simulated/floor/plating,
@@ -2216,7 +2207,7 @@
 "eY" = (
 /obj/item/device/radio/intercom{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -25
 	},
 /obj/machinery/recharge_station,
 /turf/simulated/floor/plating,
@@ -2311,6 +2302,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/eva)
+"he" = (
+/obj/machinery/conveyor{
+	dir = 1;
+	icon_state = "conveyor0";
+	id = "con"
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "ib" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -2339,6 +2338,18 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/crew/dorms1)
+"jM" = (
+/obj/machinery/light{
+	icon_state = "bulb1";
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/mineral/unloading_machine{
+	input_turf = 2;
+	output_turf = 1
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "kb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
@@ -2390,6 +2401,20 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
+"lO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/obj/structure/sign/science_1{
+	pixel_x = -30
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/maintenance/lower)
 "mb" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -2463,7 +2488,7 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -30
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/escape_star)
@@ -2487,6 +2512,15 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/maintenance/techstorage)
+"rB" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/weapon/ore/iron,
+/obj/item/weapon/ore/coal{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "rP" = (
 /obj/structure/handrai{
 	tag = "icon-handrail (EAST)";
@@ -2534,6 +2568,11 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
+"tz" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "ub" = (
 /obj/item/weapon/stool/padded,
 /obj/effect/landmark/start{
@@ -2564,6 +2603,20 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
+"uw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/obj/structure/sign/xenoflora{
+	pixel_x = -30
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/maintenance/lower)
 "vb" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -2584,6 +2637,14 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/ship/scrap/crew/dorms1)
+"vz" = (
+/obj/machinery/conveyor_switch{
+	id = "con";
+	pixel_x = 10;
+	pixel_y = 10
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "vW" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -2658,7 +2719,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/cargo/lower)
 "AT" = (
-/obj/effect/paint/brown,
+/obj/machinery/computer/mining,
 /turf/simulated/wall,
 /area/ship/scrap/cargo/lower)
 "Bb" = (
@@ -2678,6 +2739,18 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms1)
+"Bq" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/conveyor{
+	backwards = 8;
+	dir = 9;
+	forwards = 2;
+	icon_state = "conveyor1";
+	id = "con";
+	movedir = 6
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "BO" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -2692,6 +2765,14 @@
 /obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/chemistry)
+"CN" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/loading{
+	icon_state = "loadingarea";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "Db" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
@@ -2738,9 +2819,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
-"Ep" = (
-/turf/simulated/wall/r_wall,
-/area/ship/scrap/escape_port)
 "Fb" = (
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -2791,6 +2869,10 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
+"HH" = (
+/obj/structure/ladder/up,
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "Ib" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/holostool,
@@ -2811,6 +2893,14 @@
 /obj/machinery/r_n_d/protolathe,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
+"IU" = (
+/obj/machinery/conveyor{
+	dir = 10;
+	icon_state = "conveyor1";
+	id = "con"
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "Jb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2867,6 +2957,11 @@
 	},
 /turf/simulated/floor/lino,
 /area/ship/scrap/crew/dorms2)
+"Lx" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/weapon/stool/padded,
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "Mb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2956,6 +3051,14 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/ship/scrap/cargo/lower)
+"Rl" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/mineral/processing_unit{
+	input_turf = 1;
+	output_turf = 2
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "Rq" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -3036,6 +3139,17 @@
 /obj/machinery/door/airlock/hatch/autoname/engineering,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/scrap/maintenance/storage)
+"Wp" = (
+/obj/machinery/light_switch{
+	pixel_x = -25
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
+"WT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "WZ" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
@@ -5948,11 +6062,11 @@ bI
 Eb
 cf
 kb
-bI
+lO
 uo
 cf
 kb
-bI
+uw
 dP
 dZ
 dZ
@@ -6016,12 +6130,12 @@ aa
 aa
 aa
 aa
-aa
-aa
 ql
-sY
-Mx
-Ep
+pr
+pr
+pr
+al
+al
 al
 ao
 ao
@@ -6098,13 +6212,13 @@ aa
 aa
 aa
 aa
-aa
-aa
 pr
 pr
 al
 al
 aF
+Wp
+du
 aR
 bd
 bt
@@ -6180,13 +6294,13 @@ aa
 aa
 aa
 aa
-aa
-aa
 ad
 aj
 au
 aG
 aS
+du
+aU
 Js
 gb
 bu
@@ -6262,13 +6376,13 @@ aa
 aa
 aa
 aa
-aa
-aa
 ae
 ak
 av
 aH
 aT
+aU
+du
 du
 Dh
 bv
@@ -6344,13 +6458,13 @@ aa
 aa
 aa
 aa
-aa
-aa
 pr
 lE
 al
 al
-aU
+vz
+rB
+du
 aU
 bf
 bw
@@ -6426,13 +6540,13 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
 xj
-ao
-aw
-du
+IU
+he
+jM
+CN
+aU
+Lx
 Zd
 bg
 bx
@@ -6508,13 +6622,13 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
 xj
-ao
+Bq
+tz
+Rl
+WT
+HH
 ax
-aJ
 aV
 bh
 by
@@ -6590,13 +6704,13 @@ aa
 aa
 aa
 aa
-aa
-aa
-ql
+pr
+pr
+pr
 pr
 AT
-ao
-ao
+al
+al
 ao
 ao
 Ab
