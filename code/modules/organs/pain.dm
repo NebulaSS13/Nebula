@@ -1,5 +1,10 @@
 mob/proc/flash_pain(var/target)
 	if(pain)
+		var/matrix/M
+		if(client && max(client.last_view_x_dim, client.last_view_y_dim) > 7)
+			M = matrix()
+			M.Scale(ceil(client.last_view_x_dim/7), ceil(client.last_view_y_dim/7))
+		pain.transform = M
 		animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
 		animate(pain, alpha = 0, time = 20)
 

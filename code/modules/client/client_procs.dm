@@ -410,14 +410,17 @@ client/verb/character_setup()
 	winset(src, "mapwindow.map", "icon-size=[val]")
 	OnResize()
 
+/client
+	var/last_view_x_dim = 7
+	var/last_view_y_dim = 7
+
 /client/verb/OnResize()
-	/*
 	set hidden = 1
 	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
 	var/winsize_string = winget(src, "mapwindow.map", "size")
-	var/x_dim = round(text2num(winsize_string) / divisor)
-	var/y_dim = round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor)
-	view = "[x_dim]x[y_dim]"
+	last_view_x_dim = round(text2num(winsize_string) / divisor)
+	last_view_y_dim = round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor)
+	view = "[last_view_x_dim]x[last_view_y_dim]"
 
 	// Reset eye/perspective
 	var/last_perspective = perspective
@@ -430,7 +433,8 @@ client/verb/character_setup()
 		eye = last_eye
 
 	// Recenter skybox and lighting.
-	set_skybox_offsets(x_dim, y_dim)
-	if(mob && mob.l_general)
-		mob.l_general.fit_to_client_view(src)
-	*/
+	set_skybox_offsets(last_view_x_dim, last_view_y_dim)
+	if(mob)
+		if(mob.l_general)
+			mob.l_general.fit_to_client_view(last_view_x_dim, last_view_y_dim)
+		mob.reload_fullscreen()
