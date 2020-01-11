@@ -18,20 +18,19 @@
 
 /obj/lighting_general
 	plane = LIGHTING_PLANE
-	screen_loc = "8,8"
-
+	screen_loc = "CENTER,CENTER"
 	icon = LIGHTING_ICON
 	icon_state = LIGHTING_ICON_STATE_DARK
-
 	color = "#ffffff"
-
 	blend_mode = BLEND_MULTIPLY
 
 /obj/lighting_general/Initialize()
 	. = ..()
-	var/matrix/M = matrix()
-	M.Scale(world.view*2.2)
+	fit_to_client_view()
 
+/obj/lighting_general/proc/fit_to_client_view(var/client/C)
+	var/matrix/M = matrix()
+	M.Scale((C ? C.view : world.view) * 2.2)
 	transform = M
 
 /obj/lighting_general/proc/sync(var/new_colour)
