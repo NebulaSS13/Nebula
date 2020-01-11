@@ -33,6 +33,8 @@ SUBSYSTEM_DEF(persistence)
 		P.Shutdown()
 
 	// Refer to snowflake above.
+	if(fexists(elevator_fall_path))
+		fdel(elevator_fall_path)
 	text2file("[elevator_fall_shifts]", elevator_fall_path)
 
 /datum/controller/subsystem/persistence/proc/track_value(var/atom/value, var/track_type)
