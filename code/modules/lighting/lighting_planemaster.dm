@@ -28,10 +28,15 @@
 	. = ..()
 	fit_to_client_view()
 
-/obj/lighting_general/proc/fit_to_client_view(var/client/C)
+/obj/lighting_general/proc/fit_to_client_view(var/x_dim, var/y_dim)
+	/*
 	var/matrix/M = matrix()
-	M.Scale((C ? C.view : world.view) * 2.2)
+	if(x_dim && y_dim)
+		M.Scale(x_dim * 2.2, y_dim * 2.2)
+	else
+		M.Scale(world.view * 2.2)
 	transform = M
+	*/
 
 /obj/lighting_general/proc/sync(var/new_colour)
 	color = new_colour
