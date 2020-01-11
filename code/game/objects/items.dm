@@ -741,11 +741,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 
 	user.client.view = world.view
+	user.client.OnResize()
 	if(!user.hud_used.hud_shown)
 		user.toggle_zoom_hud()
 
 	user.client.pixel_x = 0
 	user.client.pixel_y = 0
+	user.client.OnResize()
 	user.visible_message("[zoomdevicename ? "\The [user] looks up from [src]" : "\The [user] lowers [src]"].")
 
 /obj/item/proc/pwr_drain()

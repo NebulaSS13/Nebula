@@ -404,3 +404,31 @@ client/verb/character_setup()
 	var/mob/living/M = mob
 	if(istype(M))
 		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+	
+/client/verb/SetWindowIconSize(var/val as num|text)
+	set hidden = 1
+	winset(src, "mapwindow.map", "icon-size=[val]")
+	OnResize()
+
+/client/verb/OnResize()
+	set hidden = 1
+	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
+	var/winsize_string = winget(src, "mapwindow.map", "size")
+	var/x_dim = round(text2num(winsize_string) / divisor)
+	var/y_dim = round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor)
+	view = "[x_dim]x[y_dim]"
+
+	// Reset eye/perspective
+	var/last_perspective = perspective
+	perspective = MOB_PERSPECTIVE
+	if(perspective != last_perspective)
+		perspective = last_perspective
+	var/last_eye = eye
+	eye = mob
+	if(eye != last_eye)
+		eye = last_eye
+
+	// Recenter skybox and lighting.
+	set_skybox_offsets(x_dim, y_dim)
+	if(mob && mob.l_general)
+		mob.l_general.fit_to_client_view(src)
