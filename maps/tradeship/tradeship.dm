@@ -14,6 +14,7 @@
 	#include "tradeship_loadouts.dm"
 	#include "tradeship-1.dmm"
 	#include "tradeship-2.dmm"
+	#include "tradeship-3.dmm"
 
 	#define using_map_DATUM /datum/map/tradeship
 
