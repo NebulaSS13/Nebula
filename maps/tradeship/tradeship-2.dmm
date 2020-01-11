@@ -4487,7 +4487,6 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/item/weapon/book/manual/rust_engine,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "kn" = (
