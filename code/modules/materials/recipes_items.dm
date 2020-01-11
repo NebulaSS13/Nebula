@@ -271,3 +271,69 @@
 	req_amount = 2
 	on_floor = 1
 	send_material_data = 1
+
+/datum/stack_recipe/wooden_prosthetic
+	title = "left arm"
+	result_type = /obj/item/organ/external/arm/wooden
+	req_amount = 10
+	difficulty = 0
+
+/datum/stack_recipe/wooden_prosthetic/right_arm
+	title = "right arm"
+	result_type = /obj/item/organ/external/arm/right/wooden
+
+/datum/stack_recipe/wooden_prosthetic/left_leg
+	title = "left leg"
+	result_type = /obj/item/organ/external/leg/wooden
+
+/datum/stack_recipe/wooden_prosthetic/right_leg
+	title = "right leg"
+	result_type = /obj/item/organ/external/leg/right/wooden
+
+/datum/stack_recipe/wooden_prosthetic/left_hand
+	title = "left hand"
+	result_type = /obj/item/organ/external/hand/wooden
+
+/datum/stack_recipe/wooden_prosthetic/right_hand
+	title = "right hand"
+	result_type = /obj/item/organ/external/hand/right/wooden
+
+/datum/stack_recipe/wooden_prosthetic/left_foot
+	title = "left foot"
+	result_type = /obj/item/organ/external/foot/wooden
+
+/datum/stack_recipe/wooden_prosthetic/right_foot
+	title = "right foot"
+	result_type = /obj/item/organ/external/foot/right/wooden
+
+/datum/stack_recipe/wooden_prosthetic/left_arm_ying
+	title = "small left arm"
+	result_type = /obj/item/organ/external/arm/yinglet/wooden
+
+/datum/stack_recipe/wooden_prosthetic/right_arm_ying
+	title = "small right arm"
+	result_type = /obj/item/organ/external/arm/right/yinglet/wooden
+
+/datum/stack_recipe/wooden_prosthetic/left_leg_ying
+	title = "small left leg"
+	result_type = /obj/item/organ/external/leg/yinglet/wooden
+
+/datum/stack_recipe/wooden_prosthetic/right_leg_ying
+	title = "small right leg"
+	result_type = /obj/item/organ/external/leg/right/yinglet/wooden
+
+/datum/stack_recipe/wooden_prosthetic/left_hand_ying
+	title = "small left hand"
+	result_type = /obj/item/organ/external/hand/yinglet/wooden
+
+/datum/stack_recipe/wooden_prosthetic/right_hand_ying
+	title = "small right hand"
+	result_type = /obj/item/organ/external/hand/right/yinglet/wooden
+
+/datum/stack_recipe/wooden_prosthetic/left_foot_ying
+	title = "small left foot"
+	result_type = /obj/item/organ/external/foot/yinglet/wooden
+
+/datum/stack_recipe/wooden_prosthetic/right_foot_ying
+	title = "small right foot"
+	result_type = /obj/item/organ/external/foot/right/yinglet/wooden

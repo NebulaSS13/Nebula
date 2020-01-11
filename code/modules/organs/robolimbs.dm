@@ -21,10 +21,14 @@ var/datum/robolimb/basic_robolimb
 	var/has_eyes = TRUE
 	var/can_feel_pain
 	var/skintone
-	var/list/species_cannot_use = list() //SPECIES_YINGLET)
+	var/list/species_cannot_use = list()
 	var/list/restricted_to = list()
 	var/list/applies_to_part = list() //TODO.
-	var/list/allowed_bodytypes = list(SPECIES_YINGLET, SPECIES_HUMAN)
+	var/list/allowed_bodytypes = list(SPECIES_HUMAN)
+	var/modifier_string = "robotic"
+	var/hardiness = 1
+	var/fine_manipulation = TRUE
+	var/movement_slowdown = 0
 
 /datum/robolimb/bishop
 	company = "Bishop"
@@ -39,22 +43,10 @@ var/datum/robolimb/basic_robolimb
 	has_eyes = FALSE
 	unavailable_at_fab = 1
 
-/datum/robolimb/bishop/alt
-	company = "Bishop Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_alt.dmi'
-	applies_to_part = list(BP_HEAD)
-	unavailable_at_fab = 1
-
 /datum/robolimb/hephaestus
 	company = "Hephaestus Industries"
 	desc = "This limb has a militaristic black and green casing with gold stripes."
 	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_main.dmi'
-	unavailable_at_fab = 1
-
-/datum/robolimb/hephaestus/alt
-	company = "Hephaestus Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_alt.dmi'
-	applies_to_part = list(BP_HEAD)
 	unavailable_at_fab = 1
 
 /datum/robolimb/hephaestus/titan
@@ -81,12 +73,6 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_econo.dmi'
 	unavailable_at_fab = 1
 
-/datum/robolimb/xion/alt
-	company = "Xion Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt.dmi'
-	applies_to_part = list(BP_HEAD)
-	unavailable_at_fab = 1
-
 /datum/robolimb/nanotrasen
 	company = "NanoTrasen"
 	desc = "This limb is made from a cheap polymer."
@@ -104,43 +90,10 @@ var/datum/robolimb/basic_robolimb
 	desc = "A simple robotic limb with retro design. Seems rather stiff."
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_economy.dmi'
 
-/datum/robolimb/wardtakahashi/alt
-	company = "Ward-Takahashi Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_alt.dmi'
-	applies_to_part = list(BP_HEAD)
-	unavailable_at_fab = 1
-
 /datum/robolimb/morpheus
 	company = "Morpheus"
 	desc = "This limb is simple and functional; no effort has been made to make it look human."
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_main.dmi'
-	unavailable_at_fab = 1
-
-/datum/robolimb/morpheus/alt
-	company = "Morpheus Atlantis"
-	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_atlantis.dmi'
-	applies_to_part = list(BP_HEAD)
-	unavailable_at_fab = 1
-
-/datum/robolimb/morpheus/alt/blitz
-	company = "Morpheus Blitz"
-	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_blitz.dmi'
-	applies_to_part = list(BP_HEAD)
-	has_eyes = FALSE
-	unavailable_at_fab = 1
-
-/datum/robolimb/morpheus/alt/airborne
-	company = "Morpheus Airborne"
-	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_airborne.dmi'
-	applies_to_part = list(BP_HEAD)
-	has_eyes = FALSE
-	unavailable_at_fab = 1
-
-/datum/robolimb/morpheus/alt/prime
-	company = "Morpheus Prime"
-	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_prime.dmi'
-	applies_to_part = list(BP_HEAD)
-	has_eyes = FALSE
 	unavailable_at_fab = 1
 
 /datum/robolimb/mantis
@@ -163,8 +116,29 @@ var/datum/robolimb/basic_robolimb
 	desc = "This limb has a sturdy and heavy build to it."
 	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_main.dmi'
 
-/datum/robolimb/shellguard/alt
-	company = "Shellguard Alt."
-	icon = 'icons/mob/human_races/cyberlimbs/shellguard/shellguard_alt.dmi'
-	applies_to_part = list(BP_HEAD)
+/datum/robolimb/wooden
+	company = "wooden prosthesis"
+	desc = "A crude wooden prosthetic."
+	icon = 'icons/mob/human_races/cyberlimbs/morgan/morgan_main.dmi'
 	unavailable_at_fab = 1
+	hardiness = 0.75
+	fine_manipulation = FALSE
+	movement_slowdown = 1
+
+/datum/robolimb/ying_wooden
+	company = "scavenged prosthesis"
+	desc = "A stick, tied to the owner's body with rags. Very scav chic."
+	icon = 'icons/mob/human_races/cyberlimbs/yinglet/wooden_main.dmi'
+	allowed_bodytypes = list(SPECIES_YINGLET)
+	unavailable_at_fab = 1
+	modifier_string = "wooden"
+	hardiness = 0.75
+	fine_manipulation = FALSE
+	movement_slowdown = 2
+
+/datum/robolimb/ying_metal
+	company = "Lunar Transit"
+	desc = "A cheap robotic prosthetic designed for yinglet owners."
+	icon = 'icons/mob/human_races/cyberlimbs/yinglet/metal_main.dmi'
+	allowed_bodytypes = list(SPECIES_YINGLET)
+	modifier_string = "wooden"

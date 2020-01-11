@@ -1082,6 +1082,12 @@ obj/item/organ/external/proc/remove_clamps()
 		return 1
 	return 0
 
+/obj/item/organ/external/proc/has_fine_manipulation()
+	if(model)
+		var/datum/robolimb/R = all_robolimbs[model]
+		return (R && R.fine_manipulation)
+	return (species && species.has_fine_manipulation(owner))
+
 /obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0)
 
 	if(BP_IS_ROBOTIC(src))
@@ -1089,6 +1095,7 @@ obj/item/organ/external/proc/remove_clamps()
 
 	..()
 
+	slowdown = 0
 
 	if(company)
 		var/datum/robolimb/R = all_robolimbs[company]
@@ -1099,15 +1106,16 @@ obj/item/organ/external/proc/remove_clamps()
 		else
 			model = company
 			force_icon = R.icon
-			name = "robotic [initial(name)]"
+			name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
 			desc = "[R.desc] It looks like it was produced by [R.company]."
+			slowdown = R.movement_slowdown
+			max_damage *= R.hardiness
+			min_broken_damage *= R.hardiness
 
 	dislocated = -1
 	remove_splint()
 	update_icon(1)
 	unmutate()
-
-	slowdown = 0
 
 	for(var/obj/item/organ/external/T in children)
 		T.robotize(company, 1)

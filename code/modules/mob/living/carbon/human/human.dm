@@ -623,11 +623,16 @@
 	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
-	if(species.has_fine_manipulation(src))
-		return 1
-	if(!silent)
-		to_chat(src, "<span class='warning'>You don't have the dexterity to use that!</span>")
-	return 0
+	var/obj/item/organ/external/active_hand = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
+	if(!active_hand)
+		if(!silent)
+			to_chat(src, "<span class='warning'>Your hand is missing!</span>")
+		return 0
+	if(!active_hand.has_fine_manipulation())
+		if(!silent)
+			to_chat(src, "<span class='warning'>Your [active_hand.name] doesn't have the dexterity to use that!</span>")
+		return 0
+	return 1
 
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
 	if(full_body)
