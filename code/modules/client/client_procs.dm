@@ -431,4 +431,4 @@ client/verb/character_setup()
 	// Recenter skybox and lighting.
 	set_skybox_offsets(x_dim, y_dim)
 	if(mob && mob.l_general)
-		mob.l_general.fit_to_client_view(src)
+		mob.l_general.fit_to_client_view(x_dim, y_dim)
