@@ -123,7 +123,7 @@
 	var/int_pressure_diff = abs(last_int_pressure - breath_pressure)
 	var/ext_pressure_diff = abs(last_ext_pressure - ext_pressure) * owner.get_pressure_weakness(ext_pressure)
 	if(int_pressure_diff > max_pressure_diff && ext_pressure_diff > max_pressure_diff)
-		var/lung_rupture_prob = BP_IS_ROBOTIC(src) ? prob(30) : prob(60) //Robotic lungs are less likely to rupture.
+		var/lung_rupture_prob = BP_IS_PROSTHETIC(src) ? prob(30) : prob(60) //Robotic lungs are less likely to rupture.
 		if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 			rupture()
 
@@ -191,7 +191,7 @@
 	// Pass reagents from the gas into our body.
 	// Presumably if you breathe it you have a specialized metabolism for it, so we drop/ignore breath_type. Also avoids
 	// humans processing thousands of units of oxygen over the course of a round for the sole purpose of poisoning vox.
-	var/ratio = BP_IS_ROBOTIC(src)? 0.66 : 1
+	var/ratio = BP_IS_PROSTHETIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
 		var/breathed_product = gas_data.breathed_product[gasname]
 		if(breathed_product)
@@ -210,7 +210,7 @@
 	if(!failed_breath)
 		last_successful_breath = world.time
 		owner.adjustOxyLoss(-5 * inhale_efficiency)
-		if(!BP_IS_ROBOTIC(src) && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
+		if(!BP_IS_PROSTHETIC(src) && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
 			if(breathing || owner.shock_stage >= 10)
 				sound_to(owner, sound(species.breathing_sound,0,0,0,5))
 				breathing = 0
@@ -302,7 +302,7 @@
 	if(owner.failed_last_breath || !active_breathing)
 		return "no respiration"
 
-	if(BP_IS_ROBOTIC(src))
+	if(BP_IS_PROSTHETIC(src))
 		if(is_bruised())
 			return "malfunctioning fans"
 		else

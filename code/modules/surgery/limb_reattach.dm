@@ -35,7 +35,7 @@
 	var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
 	if(!P || P.is_stump())
 		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
-	else if(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E))
+	else if(BP_IS_PROSTHETIC(P) && !BP_IS_PROSTHETIC(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
 	else if(BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a crystalline body."))
@@ -45,7 +45,7 @@
 		. = TRUE
 
 /decl/surgery_step/limb/attach/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/organ/external/tool)
-	if(istype(tool) && BP_IS_ROBOTIC(tool))
+	if(istype(tool) && BP_IS_PROSTHETIC(tool))
 		if(target.isSynthetic())
 			return SURGERY_SKILLS_ROBOTIC
 		else
@@ -56,7 +56,7 @@
 	if(..())
 		var/obj/item/organ/external/E = tool
 		var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
-		. = (P && !P.is_stump() && !(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E)))
+		. = (P && !P.is_stump() && !(BP_IS_PROSTHETIC(P) && !BP_IS_PROSTHETIC(E)))
 
 /decl/surgery_step/limb/attach/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = tool
@@ -96,7 +96,7 @@
 
 /decl/surgery_step/limb/connect/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool, target_zone)
 	var/obj/item/organ/external/E = target && target.get_organ(target_zone)
-	if(istype(E) && BP_IS_ROBOTIC(E))
+	if(istype(E) && BP_IS_PROSTHETIC(E))
 		if(target.isSynthetic())
 			return SURGERY_SKILLS_ROBOTIC
 		else

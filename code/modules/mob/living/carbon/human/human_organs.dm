@@ -185,12 +185,12 @@
 	if(affected)
 		switch(affected.body_part)
 			if(FOOT_LEFT, FOOT_RIGHT)
-				if(!BP_IS_ROBOTIC(affected))
+				if(!BP_IS_PROSTHETIC(affected))
 					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
 				else
 					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
 			if(LEG_LEFT, LEG_RIGHT)
-				if(!BP_IS_ROBOTIC(affected))
+				if(!BP_IS_PROSTHETIC(affected))
 					to_chat(src, SPAN_WARNING("Your [affected.name] buckles from the shock!"))
 				else
 					to_chat(src, SPAN_WARNING("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
@@ -217,7 +217,7 @@
 	if(!unEquip(thing))
 		return
 
-	if(BP_IS_ROBOTIC(affected))
+	if(BP_IS_PROSTHETIC(affected))
 		visible_message("<B>\The [src]</B> drops what they were holding, \his [affected.name] malfunctioning!")
 
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()

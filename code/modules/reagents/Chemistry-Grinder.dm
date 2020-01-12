@@ -259,7 +259,7 @@
 	var/dam = rand(10, 15)
 	user.visible_message("<span class='danger'>\The [user]'s hand gets caught in \the [src]!</span>", "<span class='danger'>Your hand gets caught in \the [src]!</span>")
 	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
-	if(BP_IS_ROBOTIC(hand_organ))
+	if(BP_IS_PROSTHETIC(hand_organ))
 		beaker.reagents.add_reagent(/datum/reagent/iron, dam)
 	else
 		user.take_blood(beaker, dam)

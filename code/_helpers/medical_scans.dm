@@ -20,7 +20,7 @@
 		var/obj/item/organ/internal/heart/heart = H.internal_organs_by_name[BP_HEART]
 		if(!heart)
 			pulse_result = 0
-		else if(BP_IS_ROBOTIC(heart))
+		else if(BP_IS_PROSTHETIC(heart))
 			pulse_result = -2
 		else if(H.status_flags & FAKEDEATH)
 			pulse_result = 0

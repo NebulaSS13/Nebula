@@ -281,7 +281,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 
 	var/recent_pump = LAZYACCESS(heart.external_pump, 1) > world.time - (20 SECONDS)
 	var/pulse_mod = 1
-	if((status_flags & FAKEDEATH) || BP_IS_ROBOTIC(heart))
+	if((status_flags & FAKEDEATH) || BP_IS_PROSTHETIC(heart))
 		pulse_mod = 1
 	else
 		switch(heart.pulse)

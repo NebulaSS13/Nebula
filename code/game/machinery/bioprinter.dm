@@ -270,7 +270,7 @@
 		return FALSE
 	if(initial(O.vital))
 		return FALSE
-	if(initial(O.status) & ORGAN_ROBOTIC)
+	if(initial(O.status) & ORGAN_PROSTHETIC)
 		return FALSE
 	if(ispath(organtype, /obj/item/organ/external))
 		var/obj/item/organ/external/E = organtype

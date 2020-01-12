@@ -273,7 +273,7 @@ meteor_act
 
 /mob/living/carbon/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
 	var/obj/item/organ/external/affecting = get_organ(user.zone_sel.selecting)
-	if(!affecting || !BP_IS_ROBOTIC(affecting))
+	if(!affecting || !BP_IS_PROSTHETIC(affecting))
 		to_chat(user, "<span class='warning'>That limb isn't robotic.</span>")
 		return -1
 	if(affecting.status & ORGAN_SABOTAGED)

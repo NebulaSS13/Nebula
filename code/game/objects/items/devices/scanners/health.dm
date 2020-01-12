@@ -230,7 +230,7 @@
 		var/list/damaged = H.get_damaged_organs(1,1)
 		if(damaged.len)
 			for(var/obj/item/organ/external/org in damaged)
-				var/limb_result = "[capitalize(org.name)][BP_IS_ROBOTIC(org) ? " (Cybernetic)" : ""]:"
+				var/limb_result = "[capitalize(org.name)][BP_IS_PROSTHETIC(org) ? " (Cybernetic)" : ""]:"
 				if(org.brute_dam > 0)
 					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, (org.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))] physical trauma</b></font>\]"
 				if(org.burn_dam > 0)

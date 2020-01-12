@@ -172,7 +172,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(!BP_IS_ROBOTIC(I))
+				if(!BP_IS_PROSTHETIC(I))
 					I.heal_damage(20*removed)
 
 
@@ -200,7 +200,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(!BP_IS_ROBOTIC(I))
+				if(!BP_IS_PROSTHETIC(I))
 					I.heal_damage(30*removed)
 
 /datum/reagent/nanitefluid
@@ -219,7 +219,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(BP_IS_ROBOTIC(I))
+				if(BP_IS_PROSTHETIC(I))
 					I.heal_damage(20*removed)
 
 /* Painkillers */
@@ -435,7 +435,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/internal/I in H.internal_organs)
-			if(!BP_IS_ROBOTIC(I))
+			if(!BP_IS_PROSTHETIC(I))
 				if(I.organ_tag == BP_BRAIN)
 					if(I.damage >= I.min_bruised_damage)
 						continue

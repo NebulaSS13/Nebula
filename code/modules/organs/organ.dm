@@ -109,7 +109,7 @@ var/list/organ_cache = list()
 	if(is_preserved())
 		return
 	//Process infections
-	if (BP_IS_ROBOTIC(src) || (owner && owner.species && (owner.species.species_flags & SPECIES_FLAG_IS_PLANT)))
+	if (BP_IS_PROSTHETIC(src) || (owner && owner.species && (owner.species.species_flags & SPECIES_FLAG_IS_PLANT)))
 		germ_level = 0
 		return
 
@@ -185,7 +185,7 @@ var/list/organ_cache = list()
 	// immunosuppressant that changes transplant data to make it match.
 	if(owner.virus_immunity() < 10) //for now just having shit immunity will suppress it
 		return
-	if(BP_IS_ROBOTIC(src))
+	if(BP_IS_PROSTHETIC(src))
 		return
 	if(dna)
 		if(!rejecting)
@@ -251,7 +251,7 @@ var/list/organ_cache = list()
 
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
-	status = ORGAN_ROBOTIC
+	status = ORGAN_PROSTHETIC
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = ORGAN_ASSISTED
@@ -276,7 +276,7 @@ var/list/organ_cache = list()
 
 	START_PROCESSING(SSobj, src)
 	rejecting = null
-	if(!BP_IS_ROBOTIC(src))
+	if(!BP_IS_PROSTHETIC(src))
 		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurences of locate(/datum/reagent/blood) horror
 		if(!organ_blood || !organ_blood.data["blood_DNA"])
 			owner.vessel.trans_to(src, 5, 1, 1)
@@ -292,13 +292,13 @@ var/list/organ_cache = list()
 	owner = target
 	action_button_name = initial(action_button_name)
 	forceMove(owner) //just in case
-	if(BP_IS_ROBOTIC(src))
+	if(BP_IS_PROSTHETIC(src))
 		set_dna(owner.dna)
 	return 1
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 
-	if(status & ORGAN_ROBOTIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+	if(status & ORGAN_PROSTHETIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return ..()
 
 	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
@@ -317,7 +317,7 @@ var/list/organ_cache = list()
 	target.attackby(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
-	return (!BP_IS_ROBOTIC(src) && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))
+	return (!BP_IS_PROSTHETIC(src) && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
@@ -331,7 +331,7 @@ var/list/organ_cache = list()
 		. += tag ? "<span class='average'>Crystalline</span>" : "Crystalline"
 	else if(BP_IS_ASSISTED(src))
 		. += tag ? "<span class='average'>Assisted</span>" : "Assisted"
-	else if(BP_IS_ROBOTIC(src))
+	else if(BP_IS_PROSTHETIC(src))
 		. += tag ? "<span class='average'>Mechanical</span>" : "Mechanical"
 	if(status & ORGAN_CUT_AWAY)
 		. += tag ? "<span class='bad'>Severed</span>" : "Severed"
