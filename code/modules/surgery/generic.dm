@@ -311,7 +311,7 @@
 /decl/surgery_step/generic/amputate/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	var/target_zone = user.zone_sel.selecting
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(BP_IS_ROBOTIC(affected))
+	if(BP_IS_PROSTHETIC(affected))
 		return SURGERY_SKILLS_ROBOTIC
 	else
 		return ..()

@@ -81,7 +81,7 @@
 				var/picked = pick(check)
 				var/obj/item/organ/external/affecting = H.get_organ(picked)
 				if(affecting)
-					if(BP_IS_ROBOTIC(affecting))
+					if(BP_IS_PROSTHETIC(affecting))
 						return
 					affecting.take_external_damage(5, 0)
 					H.updatehealth()

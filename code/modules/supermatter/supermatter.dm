@@ -395,7 +395,7 @@
 		var/obj/item/organ/internal/eyes/eyes = subject.internal_organs_by_name[BP_EYES]
 		if (!eyes)
 			continue
-		if (BP_IS_ROBOTIC(eyes))
+		if (BP_IS_PROSTHETIC(eyes))
 			continue
 		if(subject.has_meson_effect())
 			continue

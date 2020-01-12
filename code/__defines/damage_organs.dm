@@ -47,7 +47,7 @@
 #define ORGAN_DISFIGURED (1<<8)  // The organ is scarred/disfigured. Alters whether or not the face can be recognised.
 #define ORGAN_SABOTAGED  (1<<9)  // The organ will explode if exposed to EMP, if prosthetic.
 #define ORGAN_ASSISTED   (1<<10) // The organ is partially prosthetic. No mechanical effect.
-#define ORGAN_ROBOTIC    (1<<11) // The organ is robotic. Changes numerous behaviors, search BP_IS_ROBOTIC for checks.
+#define ORGAN_PROSTHETIC (1<<11) // The organ is prosthetic. Changes numerous behaviors, search BP_IS_PROSTHETIC for checks.
 #define ORGAN_BRITTLE    (1<<12) // The organ takes additional blunt damage. If robotic, cannot be repaired through normal means.
 #define ORGAN_CRYSTAL    (1<<13) // The organ does not suffer laser damage, but shatters on droplimb.
 

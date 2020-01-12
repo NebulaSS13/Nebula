@@ -59,7 +59,7 @@
 
 		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
 			var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
-			if(BP_IS_ROBOTIC(regen_organ))
+			if(BP_IS_PROSTHETIC(regen_organ))
 				continue
 			if(istype(regen_organ))
 				if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))

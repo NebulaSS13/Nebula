@@ -135,7 +135,7 @@
 		if(!repaired_organ && prob(25))
 			for(var/thing in H.organs)
 				var/obj/item/organ/external/E = thing
-				if(BP_IS_ROBOTIC(E))
+				if(BP_IS_PROSTHETIC(E))
 					for(var/obj/implanted_object in E.implants)
 						if(!istype(implanted_object,/obj/item/weapon/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
 							E.implants -= implanted_object

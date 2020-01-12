@@ -72,13 +72,13 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 				to_chat(user,SPAN_NOTICE("The material covering this area is too thick for you to do surgery through!"))
 				return FALSE
 			// Check various conditional flags.
-			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_ROBOTIC(affected)) || \
+			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_PROSTHETIC(affected)) || \
 			 ((surgery_candidate_flags & SURGERY_NO_CRYSTAL) && BP_IS_CRYSTAL(affected))   || \
 			 ((surgery_candidate_flags & SURGERY_NO_STUMP) && affected.is_stump())         || \
-			 ((surgery_candidate_flags & SURGERY_NO_FLESH) && !(BP_IS_ROBOTIC(affected) || BP_IS_CRYSTAL(affected))))
+			 ((surgery_candidate_flags & SURGERY_NO_FLESH) && !(BP_IS_PROSTHETIC(affected) || BP_IS_CRYSTAL(affected))))
 				return FALSE
 			// Check if the surgery target is accessible.
-			if(BP_IS_ROBOTIC(affected))
+			if(BP_IS_PROSTHETIC(affected))
 				if(((surgery_candidate_flags & SURGERY_NEEDS_ENCASEMENT) || \
 				 (surgery_candidate_flags & SURGERY_NEEDS_INCISION)      || \
 				 (surgery_candidate_flags & SURGERY_NEEDS_RETRACTED))    && \

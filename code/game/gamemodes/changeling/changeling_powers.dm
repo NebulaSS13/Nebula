@@ -727,7 +727,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 			to_chat(src, "<span class='warning'>[T]'s armor has protected them.</span>")
 			return //thick clothes will protect from the sting
 
-	if(T.isSynthetic() || BP_IS_ROBOTIC(target_limb)) return
+	if(T.isSynthetic() || BP_IS_PROSTHETIC(target_limb)) return
 	if(!T.mind || !T.mind.changeling) return T	//T will be affected by the sting
 	to_chat(T, "<span class='warning'>You feel a tiny prick.</span>")
 	return

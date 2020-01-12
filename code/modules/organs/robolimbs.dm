@@ -29,6 +29,7 @@ var/datum/robolimb/basic_robolimb
 	var/hardiness = 1
 	var/fine_manipulation = TRUE
 	var/movement_slowdown = 0
+	var/is_robotic = TRUE
 
 /datum/robolimb/bishop
 	company = "Bishop"
@@ -121,9 +122,11 @@ var/datum/robolimb/basic_robolimb
 	desc = "A crude wooden prosthetic."
 	icon = 'icons/mob/human_races/cyberlimbs/morgan/morgan_main.dmi'
 	unavailable_at_fab = 1
+	modifier_string = "wooden"
 	hardiness = 0.75
 	fine_manipulation = FALSE
 	movement_slowdown = 1
+	is_robotic = FALSE
 
 /datum/robolimb/ying_wooden
 	company = "scavenged prosthesis"
@@ -135,10 +138,10 @@ var/datum/robolimb/basic_robolimb
 	hardiness = 0.75
 	fine_manipulation = FALSE
 	movement_slowdown = 2
+	is_robotic = FALSE
 
 /datum/robolimb/ying_metal
 	company = "Lunar Transit"
 	desc = "A cheap robotic prosthetic designed for yinglet owners."
 	icon = 'icons/mob/human_races/cyberlimbs/yinglet/metal_main.dmi'
 	allowed_bodytypes = list(SPECIES_YINGLET)
-	modifier_string = "wooden"

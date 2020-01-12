@@ -1331,8 +1331,8 @@
 		to_chat(user, "<span class='warning'>They are missing that limb.</span>")
 		return 0
 
-	if(BP_IS_ROBOTIC(affecting))
-		to_chat(user, "<span class='warning'>That limb is robotic.</span>")
+	if(BP_IS_PROSTHETIC(affecting))
+		to_chat(user, "<span class='warning'>That limb is prosthetic.</span>")
 		return 0
 
 	. = CAN_INJECT
@@ -1581,7 +1581,7 @@
 	else if(organ_check in list(BP_LIVER, BP_KIDNEYS))
 		affecting = organs_by_name[BP_GROIN]
 
-	if(affecting && BP_IS_ROBOTIC(affecting))
+	if(affecting && BP_IS_PROSTHETIC(affecting))
 		return 0
 	return (species && species.has_organ[organ_check])
 
@@ -1598,7 +1598,7 @@
 	. = ..()
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
 	if(H && !H.open)
-		. *= (!BP_IS_ROBOTIC(H)) ? pulse()/PULSE_NORM : 1.5
+		. *= (!BP_IS_PROSTHETIC(H)) ? pulse()/PULSE_NORM : 1.5
 
 /mob/living/carbon/human/need_breathe()
 	if(!(mNobreath in mutations) && species.breathing_organ && should_have_organ(species.breathing_organ))
@@ -1807,7 +1807,7 @@
 	var/obj/item/organ/external/E = get_organ(def_zone)
 	if(!E || E.is_stump())
 		return BULLET_IMPACT_NONE
-	if(BP_IS_ROBOTIC(E))
+	if(BP_IS_PROSTHETIC(E))
 		return BULLET_IMPACT_METAL
 	return BULLET_IMPACT_MEAT
 

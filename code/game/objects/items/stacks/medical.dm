@@ -17,8 +17,8 @@
 	. = FALSE
 	if(BP_IS_CRYSTAL(limb))
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a crystalline limb."))
-	else if(BP_IS_ROBOTIC(limb))
-		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a robotic limb."))
+	else if(BP_IS_PROSTHETIC(limb))
+		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a prosthetic limb."))
 	else
 		. = TRUE
 
@@ -259,8 +259,8 @@
 	var/list/splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)	//List of organs you can splint, natch.
 
 /obj/item/stack/medical/splint/check_limb_state(var/mob/user, var/obj/item/organ/external/limb)
-	if(BP_IS_ROBOTIC(limb))
-		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a robotic limb."))
+	if(BP_IS_PROSTHETIC(limb))
+		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a prosthetic limb."))
 		return FALSE
 	return TRUE
 
@@ -333,7 +333,7 @@
 	heal_burn =  5
 
 /obj/item/stack/medical/resin/check_limb_state(var/mob/user, var/obj/item/organ/external/limb)
-	if(!BP_IS_ROBOTIC(limb) && !BP_IS_CRYSTAL(limb))
+	if(!BP_IS_PROSTHETIC(limb) && !BP_IS_CRYSTAL(limb))
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat an organic limb."))
 		return FALSE
 	return TRUE

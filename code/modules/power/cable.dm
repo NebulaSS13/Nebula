@@ -520,7 +520,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
-		if(!BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
+		if(!BP_IS_PROSTHETIC(S) || user.a_intent != I_HELP)
 			return ..()
 
 		if(BP_IS_BRITTLE(S))

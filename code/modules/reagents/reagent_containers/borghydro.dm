@@ -67,7 +67,7 @@
 		if(!affected)
 			to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
 			return
-		else if(BP_IS_ROBOTIC(affected))
+		else if(BP_IS_PROSTHETIC(affected))
 			to_chat(user, "<span class='danger'>You cannot inject a robotic limb.</span>")
 			return
 
