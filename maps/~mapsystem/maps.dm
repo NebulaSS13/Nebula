@@ -56,6 +56,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/company_name  = "BadMan"
 	var/company_short = "BM"
 	var/system_name = "Uncharted System"
+	var/ground_noun = "ground"
 
 	var/map_admin_faxes = list()
 

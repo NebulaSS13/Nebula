@@ -2,6 +2,7 @@
 	name = "Tradeship"
 	full_name = "Tradeship Ivenmoth"
 	path = "tradeship"
+	ground_noun = "deck"
 
 	station_name  = "Tradeship Ivenmoth"
 	station_short = "Ivenmoth"
