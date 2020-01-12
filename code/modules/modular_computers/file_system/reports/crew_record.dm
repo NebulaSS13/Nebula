@@ -77,7 +77,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 				if(BP_IS_ASSISTED(I))
 					organ_data += I.get_mechanical_assisted_descriptor()
 				else if (BP_IS_PROSTHETIC(I))
-					organ_data += "robotic [I.name] prosthetic"
+					organ_data += "[I.name] prosthetic"
 			set_implants(jointext(organ_data, "\[*\]"))
 
 	// Security record

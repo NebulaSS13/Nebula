@@ -279,7 +279,10 @@ datum/wound/puncture/massive
 			if(BP_IS_PROSTHETIC(lost_limb))
 				max_bleeding_stage = -1
 				bleed_threshold = INFINITY
-				stages = list("mangled robotic socket" = 0)
+				if(lost_limb.is_robotic())
+					stages = list("mangled robotic socket" = 0)
+				else
+					stages = list("mangled prosthetic socket" = 0)
 			else if(BP_IS_CRYSTAL(lost_limb))
 				max_bleeding_stage = -1
 				bleed_threshold = INFINITY

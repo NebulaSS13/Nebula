@@ -1332,7 +1332,7 @@
 		return 0
 
 	if(BP_IS_PROSTHETIC(affecting))
-		to_chat(user, "<span class='warning'>That limb is robotic.</span>")
+		to_chat(user, "<span class='warning'>That limb is prosthetic.</span>")
 		return 0
 
 	. = CAN_INJECT

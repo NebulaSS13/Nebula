@@ -182,7 +182,7 @@
 
 /mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
 
-	if(affected)
+	if(affected && (!BP_IS_PROSTHETIC(affected) || affected.is_robotic()))
 		switch(affected.body_part)
 			if(FOOT_LEFT, FOOT_RIGHT)
 				if(!BP_IS_PROSTHETIC(affected))
@@ -217,7 +217,7 @@
 	if(!unEquip(thing))
 		return
 
-	if(BP_IS_PROSTHETIC(affected))
+	if(affected.is_robotic())
 		visible_message("<B>\The [src]</B> drops what they were holding, \his [affected.name] malfunctioning!")
 
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()

@@ -146,7 +146,7 @@
 
 /obj/item/organ/external/emp_act(severity)
 
-	if(!BP_IS_PROSTHETIC(src))
+	if(!is_robotic())
 		return
 
 	if(owner && BP_IS_CRYSTAL(src)) // Crystalline robotics == piezoelectrics.
@@ -1154,7 +1154,7 @@ obj/item/organ/external/proc/remove_clamps()
 	return ..() && !is_stump() && !(status & ORGAN_TENDON_CUT) && (!can_feel_pain() || get_pain() < pain_disability_threshold) && brute_ratio < 1 && burn_ratio < 1
 
 /obj/item/organ/external/proc/is_malfunctioning()
-	return (BP_IS_PROSTHETIC(src) && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
+	return (is_robotic() && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
 
 /obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0, var/supplied_message, var/datum/wound/supplied_wound)
 	if(!owner || loc != owner)
@@ -1383,3 +1383,9 @@ obj/item/organ/external/proc/remove_clamps()
 		. += max_delay * 3/8
 	else if(BP_IS_PROSTHETIC(src))
 		. += max_delay * CLAMP01(damage/max_damage)
+
+/obj/item/organ/external/proc/is_robotic()
+	. = FALSE
+	if(BP_IS_PROSTHETIC(src) && model)
+		var/datum/robolimb/R = all_robolimbs[model]
+		. = R && R.is_robotic

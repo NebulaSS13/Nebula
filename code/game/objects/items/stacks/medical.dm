@@ -18,7 +18,7 @@
 	if(BP_IS_CRYSTAL(limb))
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a crystalline limb."))
 	else if(BP_IS_PROSTHETIC(limb))
-		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a robotic limb."))
+		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a prosthetic limb."))
 	else
 		. = TRUE
 
@@ -260,7 +260,7 @@
 
 /obj/item/stack/medical/splint/check_limb_state(var/mob/user, var/obj/item/organ/external/limb)
 	if(BP_IS_PROSTHETIC(limb))
-		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a robotic limb."))
+		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat a prosthetic limb."))
 		return FALSE
 	return TRUE
 
