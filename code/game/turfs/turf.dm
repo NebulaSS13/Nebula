@@ -41,14 +41,12 @@
 		luminosity = 0
 	else
 		luminosity = 1
-
 	opaque_counter = opacity
-
 	if (mapload && permit_ao)
 		queue_ao()
-
 	if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(mapload)
+	update_starlight()
 
 /turf/on_update_icon()
 	update_flood_overlay()
@@ -357,3 +355,18 @@ var/const/enterloopsanity = 100
 
 /turf/proc/is_floor()
 	return FALSE
+
+/turf/proc/update_starlight()
+	if(!config.starlight)
+		return
+	var/area/A = get_area(src)
+	if(!A.show_starlight)
+		return
+	//Let's make sure not to break everything if people use a crazy setting.
+	var/turf/T = locate(/turf/simulated) in orange(src,1)
+	if(T)
+		A = get_area(T)
+		if(A && A.dynamic_lighting)
+			set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
+			return
+	set_light(0)

@@ -7,6 +7,7 @@
 	var/global/global_uid = 0
 	var/uid
 	var/area_flags
+	var/show_starlight = FALSE
 
 /area/New()
 	icon_state = ""

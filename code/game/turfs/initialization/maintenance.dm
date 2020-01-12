@@ -15,7 +15,7 @@
 	web_probability = 0
 
 /decl/turf_initializer/maintenance/InitializeTurf(var/turf/simulated/T)
-	if(T.density)
+	if(!istype(T) || T.density)
 		return
 	// Quick and dirty check to avoid placing things inside windows
 	if(locate(/obj/structure/grille, T))
