@@ -443,8 +443,6 @@
 			return global.forced_ambiance_list;
 		if("fruit_icon_cache")
 			return global.fruit_icon_cache;
-		if("fusion_reactions")
-			return global.fusion_reactions;
 		if("game_id")
 			return global.game_id;
 		if("game_version")
@@ -1358,8 +1356,6 @@
 			global.forced_ambiance_list=newval;
 		if("fruit_icon_cache")
 			global.fruit_icon_cache=newval;
-		if("fusion_reactions")
-			global.fusion_reactions=newval;
 		if("game_id")
 			global.game_id=newval;
 		if("game_version")
@@ -2051,7 +2047,6 @@
 	"follow_repository",
 	"forced_ambiance_list",
 	"fruit_icon_cache",
-	"fusion_reactions",
 	"game_id",
 	"game_version",
 	"game_year",

@@ -1570,6 +1570,7 @@
 #include "code\modules\codex\codex_mob.dm"
 #include "code\modules\codex\categories\_category.dm"
 #include "code\modules\codex\categories\category_cultures.dm"
+#include "code\modules\codex\categories\category_fusion_reaction.dm"
 #include "code\modules\codex\categories\category_gases.dm"
 #include "code\modules\codex\categories\category_languages.dm"
 #include "code\modules\codex\categories\category_materials.dm"
