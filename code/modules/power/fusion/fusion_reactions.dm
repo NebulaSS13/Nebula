@@ -1,4 +1,4 @@
-var/list/fusion_reactions
+GLOBAL_LIST_INIT(fusion_reactions, list())
 
 /decl/fusion_reaction
 	var/p_react = "" // Primary reactant.
@@ -11,26 +11,26 @@ var/list/fusion_reactions
 	var/list/products = list()
 	var/minimum_reaction_temperature = 100
 	var/priority = 100
+	var/hidden_from_codex = FALSE
 
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0
 
 proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
-	if(!fusion_reactions)
-		fusion_reactions = list()
+	if(!LAZYLEN(GLOB.fusion_reactions))
 		for(var/rtype in typesof(/decl/fusion_reaction) - /decl/fusion_reaction)
 			var/decl/fusion_reaction/cur_reaction = new rtype()
-			if(!fusion_reactions[cur_reaction.p_react])
-				fusion_reactions[cur_reaction.p_react] = list()
-			fusion_reactions[cur_reaction.p_react][cur_reaction.s_react] = cur_reaction
-			if(!fusion_reactions[cur_reaction.s_react])
-				fusion_reactions[cur_reaction.s_react] = list()
-			fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
+			if(!GLOB.fusion_reactions[cur_reaction.p_react])
+				GLOB.fusion_reactions[cur_reaction.p_react] = list()
+			GLOB.fusion_reactions[cur_reaction.p_react][cur_reaction.s_react] = cur_reaction
+			if(!GLOB.fusion_reactions[cur_reaction.s_react])
+				GLOB.fusion_reactions[cur_reaction.s_react] = list()
+			GLOB.fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
 
-	if(fusion_reactions.Find(p_react))
-		var/list/secondary_reactions = fusion_reactions[p_react]
+	if(GLOB.fusion_reactions.Find(p_react))
+		var/list/secondary_reactions = GLOB.fusion_reactions[p_react]
 		if(secondary_reactions.Find(s_react))
-			return fusion_reactions[p_react][s_react]
+			return GLOB.fusion_reactions[p_react][s_react]
 
 // Material fuels
 //  deuterium
@@ -123,6 +123,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_production = 5
 	radiation = 40
 	instability = 20
+	hidden_from_codex = TRUE
 
 /decl/fusion_reaction/phoron_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 
