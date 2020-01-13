@@ -1087,7 +1087,7 @@ About the new airlock wires panel:
 		return src.attack_hand(user)
 	else if(isMultitool(C))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/assembly/signaler))
+	else if(istype(C, /obj/item/assembly/signaler))
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/pai_cable))	// -- TLE
 		var/obj/item/pai_cable/cable = C
@@ -1145,7 +1145,7 @@ About the new airlock wires panel:
 				else
 					to_chat(user, "<span class='warning'>You need to be wielding \the [C] to do that.</span>")
 
-	else if(istype(C, /obj/item/device/floor_painter))
+	else if(istype(C, /obj/item/floor_painter))
 		return
 
 	else

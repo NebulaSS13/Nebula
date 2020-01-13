@@ -20,7 +20,7 @@
 		/obj/item/borg/upgrade/jetpack
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/borg/sight/meson,
 		/obj/item/wrench,
 		/obj/item/screwdriver,
@@ -28,7 +28,7 @@
 		/obj/item/pickaxe/borgdrill,
 		/obj/item/storage/sheetsnatcher/borg,
 		/obj/item/gripper/miner,
-		/obj/item/device/scanner/mining,
+		/obj/item/scanner/mining,
 		/obj/item/crowbar
 	)
 	emag = /obj/item/gun/energy/plasmacutter

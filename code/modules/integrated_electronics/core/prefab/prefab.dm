@@ -15,7 +15,7 @@
 		if(istext(result))
 			CRASH("Invalid prefab [type]: [result]")
 		else
-			var/obj/item/device/electronic_assembly/assembly = SScircuit.load_electronic_assembly(location, result)
+			var/obj/item/electronic_assembly/assembly = SScircuit.load_electronic_assembly(location, result)
 			assembly.opened = FALSE
 			assembly.update_icon()
 			if(power_cell_type)

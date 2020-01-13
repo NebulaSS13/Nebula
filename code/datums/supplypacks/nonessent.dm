@@ -3,9 +3,9 @@
 
 /decl/hierarchy/supply_pack/nonessent/painters
 	name = "Art - Painting Supplies"
-	contains = list(/obj/item/device/pipe_painter = 2,
-					/obj/item/device/floor_painter = 2,
-					/obj/item/device/cable_painter = 2)
+	contains = list(/obj/item/pipe_painter = 2,
+					/obj/item/floor_painter = 2,
+					/obj/item/cable_painter = 2)
 	cost = 10
 	containername = "painting supplies crate"
 	containertype = /obj/structure/closet/crate
@@ -13,8 +13,8 @@
 /decl/hierarchy/supply_pack/nonessent/artscrafts
 	name = "Art - Arts and Crafts supplies"
 	contains = list(/obj/item/storage/fancy/crayons,
-	/obj/item/device/camera,
-	/obj/item/device/camera_film = 2,
+	/obj/item/camera,
+	/obj/item/camera_film = 2,
 	/obj/item/storage/photo_album,
 	/obj/item/stack/package_wrap/twenty_five,
 	/obj/item/reagent_containers/glass/paint/red,
@@ -52,24 +52,24 @@
 
 /decl/hierarchy/supply_pack/nonessent/instruments
 	name = "Rec - Musical Instruments"
-	contains = list(/obj/item/device/synthesized_instrument/synthesizer,
-					/obj/item/device/synthesized_instrument/guitar/multi,
-					/obj/item/device/synthesized_instrument/trumpet)
+	contains = list(/obj/item/synthesized_instrument/synthesizer,
+					/obj/item/synthesized_instrument/guitar/multi,
+					/obj/item/synthesized_instrument/trumpet)
 	cost = 40
 	containername = "musical instrument crate"
 
 
 /decl/hierarchy/supply_pack/nonessent/llamps
 	num_contained = 3
-	contains = list(/obj/item/device/flashlight/lamp/lava,
-					/obj/item/device/flashlight/lamp/lava/red,
-					/obj/item/device/flashlight/lamp/lava/orange,
-					/obj/item/device/flashlight/lamp/lava/yellow,
-					/obj/item/device/flashlight/lamp/lava/green,
-					/obj/item/device/flashlight/lamp/lava/cyan,
-					/obj/item/device/flashlight/lamp/lava/blue,
-					/obj/item/device/flashlight/lamp/lava/purple,
-					/obj/item/device/flashlight/lamp/lava/pink)
+	contains = list(/obj/item/flashlight/lamp/lava,
+					/obj/item/flashlight/lamp/lava/red,
+					/obj/item/flashlight/lamp/lava/orange,
+					/obj/item/flashlight/lamp/lava/yellow,
+					/obj/item/flashlight/lamp/lava/green,
+					/obj/item/flashlight/lamp/lava/cyan,
+					/obj/item/flashlight/lamp/lava/blue,
+					/obj/item/flashlight/lamp/lava/purple,
+					/obj/item/flashlight/lamp/lava/pink)
 	name = "Deco - Lava lamps"
 	cost = 10
 	containername = "lava lamp crate"
@@ -250,14 +250,14 @@
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
 	name = "Mod - \"Firestarter\" exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/powerloader/flames_red)
+	contains = list(/obj/item/kit/paint/powerloader/flames_red)
 	cost = 50
 	containername = "heavy exosuit modkit crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl4
 	num_contained = 1
 	name = "Mod - \"Burning Chrome\" exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/powerloader/flames_blue)
+	contains = list(/obj/item/kit/paint/powerloader/flames_blue)
 	cost = 50
 	containername = "heavy exosuit modkit crate"
 

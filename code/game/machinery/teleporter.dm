@@ -101,7 +101,7 @@
 	var/list/areaindex = list()
 
 	. = TRUE
-	for(var/obj/item/device/radio/beacon/R in world)
+	for(var/obj/item/radio/beacon/R in world)
 		if(!R.functioning)
 			continue
 		var/turf/T = get_turf(R)
@@ -262,8 +262,8 @@
 		audible_message("<span class='warning'>Failure: Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
 		return
 
-	if(istype(com.locked, /obj/item/device/radio/beacon))
-		var/obj/item/device/radio/beacon/B = com.locked
+	if(istype(com.locked, /obj/item/radio/beacon))
+		var/obj/item/radio/beacon/B = com.locked
 		if(!B.functioning)
 			audible_message("<span class='warning'>Failure: Unable to establish connection to provided coordinates. Please reinstate coordinate matrix.</span>")
 			return

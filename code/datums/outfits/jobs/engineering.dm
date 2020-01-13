@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/engineering
 	hierarchy_type = /decl/hierarchy/outfit/job/engineering
 	belt = /obj/item/storage/belt/utility/full
-	l_ear = /obj/item/device/radio/headset/headset_eng
+	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
@@ -14,7 +14,7 @@
 	name = OUTFIT_JOB_NAME("Chief engineer")
 	head = /obj/item/clothing/head/hardhat/white
 	uniform = /obj/item/clothing/under/rank/chief_engineer
-	l_ear = /obj/item/device/radio/headset/heads/ce
+	l_ear = /obj/item/radio/headset/heads/ce
 	gloves = /obj/item/clothing/gloves/thick
 	id_type = /obj/item/card/id/engineering/head
 	pda_type = /obj/item/modular_computer/pda/heads/ce
@@ -23,7 +23,7 @@
 	name = OUTFIT_JOB_NAME("Engineer")
 	head = /obj/item/clothing/head/hardhat
 	uniform = /obj/item/clothing/under/rank/engineer
-	r_pocket = /obj/item/device/t_scanner
+	r_pocket = /obj/item/t_scanner
 	id_type = /obj/item/card/id/engineering
 	pda_type = /obj/item/modular_computer/pda/engineering
 

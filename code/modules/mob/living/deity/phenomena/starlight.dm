@@ -224,7 +224,7 @@
 	name = "Wisp"
 	desc = "Creates or moves a small ball of light for your followers to use."
 	cost = 30
-	object_type = /obj/item/device/flashlight/slime
+	object_type = /obj/item/flashlight/slime
 
 /datum/phenomena/movable_object/wisp/add_object()
 	..()

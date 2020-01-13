@@ -10,16 +10,16 @@
 	)
 	sprites = list("Drone" = "drone-service")
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/pen/robopen,
 		/obj/item/form_printer,
 		/obj/item/gripper/clerical,
 		/obj/item/hand_labeler,
 		/obj/item/stamp,
 		/obj/item/stamp/denied,
-		/obj/item/device/destTagger,
+		/obj/item/destTagger,
 		/obj/item/crowbar,
-		/obj/item/device/megaphone,
+		/obj/item/megaphone,
 		/obj/item/stack/package_wrap/cyborg
 	)
 	emag = /obj/item/stamp/chameleon

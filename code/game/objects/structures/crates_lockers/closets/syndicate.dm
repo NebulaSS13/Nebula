@@ -16,7 +16,7 @@
 	new /obj/item/crowbar/red(src)
 	new /obj/item/cell/high(src)
 	new /obj/item/card/id/syndicate(src)
-	new /obj/item/device/multitool(src)
+	new /obj/item/multitool(src)
 	new /obj/item/shield/energy(src)
 	new /obj/item/clothing/shoes/magboots(src)
 
@@ -57,7 +57,7 @@
 	new /obj/item/pinpointer/nukeop(src)
 	new /obj/item/pinpointer/nukeop(src)
 	new /obj/item/modular_computer/pda/syndicate(src)
-	var/obj/item/device/radio/uplink/U = new(src)
+	var/obj/item/radio/uplink/U = new(src)
 	U.hidden_uplink.uses = 40
 	return
 

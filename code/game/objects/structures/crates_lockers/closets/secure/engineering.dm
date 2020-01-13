@@ -14,12 +14,12 @@
 		/obj/item/clothing/head/welding,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/shoes/brown,
-		/obj/item/device/radio/headset/heads/ce,
+		/obj/item/radio/headset/heads/ce,
 		/obj/item/storage/toolbox/mechanical,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/multitool,
-		/obj/item/device/flash,
+		/obj/item/multitool,
+		/obj/item/flash,
 		/obj/item/taperoll/engineering,
 		/obj/item/crowbar/brace_jack
 	)
@@ -34,7 +34,7 @@
 		/obj/item/clothing/gloves/insulated = 3,
 		/obj/item/storage/toolbox/electrical = 3,
 		/obj/item/module/power_control = 3,
-		/obj/item/device/multitool = 3
+		/obj/item/multitool = 3
 	)
 
 /obj/structure/closet/secure_closet/engineering_welding
@@ -62,7 +62,7 @@
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/eng, 50),
 		/obj/item/storage/toolbox/mechanical,
-		/obj/item/device/radio/headset/headset_eng,
+		/obj/item/radio/headset/headset_eng,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/glasses/meson,
@@ -80,9 +80,9 @@
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/eng, 50),
 		/obj/item/clothing/suit/fire/firefighter,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/extinguisher,
-		/obj/item/device/radio/headset/headset_eng,
+		/obj/item/radio/headset/headset_eng,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/taperoll/atmos

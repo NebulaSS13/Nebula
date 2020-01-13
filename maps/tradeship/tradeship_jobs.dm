@@ -285,7 +285,7 @@
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda/captain
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/radio
 	id_type = /obj/item/card/id/gold
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officer
 
@@ -310,7 +310,7 @@
 	l_hand = /obj/item/wrench
 	belt = /obj/item/storage/belt/utility/full
 	id_type = /obj/item/card/id/engineering/head
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/radio
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 
@@ -357,7 +357,7 @@
 	shoes = /obj/item/clothing/shoes/workboots
 	l_hand = /obj/item/wrench
 	belt = /obj/item/storage/belt/utility/full
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/radio
 
 /decl/hierarchy/outfit/job/tradeship/hand/researcher
 	name = TRADESHIP_OUTFIT_JOB_NAME("Head Researcher")

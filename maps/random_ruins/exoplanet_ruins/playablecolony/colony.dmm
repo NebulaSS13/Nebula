@@ -154,7 +154,7 @@
 /area/map_template/colony/medbay)
 "aC" = (
 /obj/item/gun/energy/gun/small,
-/obj/item/device/flashlight/upgraded,
+/obj/item/flashlight/upgraded,
 /obj/item/crowbar/prybar,
 /obj/item/clothing/under/captain_fly,
 /obj/item/clothing/under/color/blackjumpshorts,
@@ -173,7 +173,7 @@
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
 /obj/item/clothing/suit/storage/toggle/track/gcc,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/structure/closet/shipping_wall{
 	pixel_y = -28
 	},
@@ -466,7 +466,7 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor,
@@ -548,7 +548,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -565,24 +565,24 @@
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
 	dir = 5
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -648,7 +648,7 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/blue,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -21
 	},
@@ -694,7 +694,7 @@
 	dir = 1
 	},
 /obj/structure/closet/firecloset,
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor,
@@ -950,7 +950,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -21
 	},
@@ -1521,7 +1521,7 @@
 /area/map_template/colony/atmospherics)
 "dj" = (
 /obj/item/gun/energy/gun/small,
-/obj/item/device/flashlight/upgraded,
+/obj/item/flashlight/upgraded,
 /obj/item/crowbar/prybar,
 /obj/item/clothing/under/captain_fly,
 /obj/item/clothing/under/color/blackjumpshorts,
@@ -1544,7 +1544,7 @@
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/structure/closet/cabinet,
 /turf/simulated/floor/carpet,
 /area/map_template/colony/dorms)
@@ -2390,7 +2390,7 @@
 	dir = 9
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/device/pipe_painter,
+/obj/item/pipe_painter,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
 "eJ" = (
@@ -2418,7 +2418,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/toolbox/mechanical,
 /obj/item/storage/toolbox/mechanical,
-/obj/item/device/integrated_circuit_printer/upgraded,
+/obj/item/integrated_circuit_printer/upgraded,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "eN" = (
@@ -2441,7 +2441,7 @@
 	dir = 5
 	},
 /obj/item/storage/belt/medical,
-/obj/item/device/scanner/health,
+/obj/item/scanner/health,
 /obj/item/storage/pill_bottle/tramadol,
 /obj/item/storage/pill_bottle/tramadol,
 /obj/item/storage/pill_bottle/spaceacillin,
@@ -2526,7 +2526,7 @@
 	icon_state = "techfloor_edges";
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2554,7 +2554,7 @@
 /obj/effect/submap_landmark/spawnpoint/colonist_spawn,
 /obj/structure/bed/padded,
 /obj/item/gun/energy/gun/small,
-/obj/item/device/flashlight/upgraded,
+/obj/item/flashlight/upgraded,
 /obj/item/crowbar/prybar,
 /obj/item/clothing/under/color/blackjumpshorts,
 /obj/item/clothing/under/captain_fly,
@@ -2577,7 +2577,7 @@
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/structure/closet/shipping_wall{
 	pixel_y = 34
 	},
@@ -2868,7 +2868,7 @@
 	icon_state = "techfloor_edges";
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -3043,7 +3043,7 @@
 /area/map_template/colony/engineering)
 "fM" = (
 /obj/item/gun/energy/gun/small,
-/obj/item/device/flashlight/upgraded,
+/obj/item/flashlight/upgraded,
 /obj/item/crowbar/prybar,
 /obj/item/clothing/under/captain_fly,
 /obj/item/clothing/under/color/blackjumpshorts,
@@ -3066,7 +3066,7 @@
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
 /obj/item/clothing/suit/storage/toggle/track/gcc,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/structure/closet/cabinet,
 /turf/simulated/floor/carpet,
 /area/map_template/colony/dorms)
@@ -3708,8 +3708,8 @@
 /obj/item/storage/belt/utility,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/steel/fifty,
-/obj/item/device/geiger,
-/obj/item/device/geiger,
+/obj/item/geiger,
+/obj/item/geiger,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "gI" = (
@@ -3733,7 +3733,7 @@
 	dir = 6
 	},
 /obj/structure/closet/firecloset,
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor,
@@ -3953,7 +3953,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -4052,7 +4052,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -4151,7 +4151,7 @@
 	icon_state = "spline_fancy";
 	dir = 10
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -4205,10 +4205,10 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/radio,
+/obj/item/radio,
+/obj/item/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/colony/armory)
 "hC" = (
@@ -4939,7 +4939,7 @@
 	dir = 1
 	},
 /obj/structure/closet/firecloset,
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor,
@@ -5103,9 +5103,9 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/obj/item/device/scanner/gas,
-/obj/item/device/scanner/gas,
-/obj/item/device/scanner/gas,
+/obj/item/scanner/gas,
+/obj/item/scanner/gas,
+/obj/item/scanner/gas,
 /obj/item/clamp,
 /obj/item/clamp,
 /obj/item/clamp,
@@ -5120,7 +5120,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -5405,7 +5405,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -5459,7 +5459,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -21
 	},
@@ -5475,7 +5475,7 @@
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/box/detergent,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -5490,7 +5490,7 @@
 	icon_state = "spline_fancy";
 	dir = 10
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -5670,7 +5670,7 @@
 	dir = 6
 	},
 /obj/structure/closet/firecloset,
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor,
@@ -5691,7 +5691,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -5992,7 +5992,7 @@
 	dir = 8
 	},
 /obj/structure/closet/firecloset,
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor,
@@ -6027,16 +6027,16 @@
 /obj/structure/closet/crate,
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/oxycandle,
-/obj/item/device/radio/intercom{
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/oxycandle,
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -6074,7 +6074,7 @@
 	name = "hacked Hot Drinks machine";
 	prices = list()
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -21
 	},
@@ -6135,7 +6135,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/item/reagent_containers/spray/pepper,
 /obj/machinery/recharger,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/item/storage/box/handcuffs,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
@@ -6240,7 +6240,7 @@
 	icon_state = "techfloor_edges";
 	dir = 5
 	},
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
@@ -6578,7 +6578,7 @@
 	dir = 1
 	},
 /obj/structure/closet/firecloset,
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/hydroponics)
@@ -6876,7 +6876,7 @@
 	dir = 8
 	},
 /obj/item/clothing/mask/plunger,
-/obj/item/device/lightreplacer,
+/obj/item/lightreplacer,
 /obj/item/storage/box/lights/mixed,
 /obj/item/storage/box/lights/mixed,
 /turf/simulated/floor/tiled/techfloor,
@@ -6885,7 +6885,7 @@
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -7224,7 +7224,7 @@
 	dir = 10
 	},
 /obj/structure/closet/firecloset,
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
@@ -7263,7 +7263,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /obj/item/clothing/suit/space/void/atmos,
 /obj/item/clothing/head/helmet/space/void/atmos,
 /obj/item/tank/emergency/oxygen/engi,
@@ -7438,7 +7438,7 @@
 /obj/machinery/cell_charger,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/device/flashlight/lamp/floodlamp,
+/obj/item/flashlight/lamp/floodlamp,
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "mQ" = (
@@ -7650,7 +7650,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /obj/item/clothing/suit/space/void/engineering/salvage,
 /obj/item/clothing/head/helmet/space/void/engineering/salvage,
 /obj/item/tank/emergency/oxygen/engi,
@@ -7793,7 +7793,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /obj/item/clothing/suit/space/void/mining/alt,
 /obj/item/clothing/head/helmet/space/void/mining/alt,
 /obj/item/tank/emergency/oxygen/engi,
@@ -7984,7 +7984,7 @@
 	dir = 6
 	},
 /obj/machinery/light/spot,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -8023,7 +8023,7 @@
 	power_rating = 25000;
 	tag = "playablecolonymain_pump"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -21
 	},
@@ -8215,7 +8215,7 @@
 	icon_state = "1-8"
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -8285,7 +8285,7 @@
 /obj/item/cell/super,
 /obj/item/cell/super,
 /obj/item/cell/super,
-/obj/item/device/scanner/mining,
+/obj/item/scanner/mining,
 /obj/item/storage/box/greenglowsticks,
 /obj/item/storage/box/greenglowsticks,
 /obj/item/storage/box/greenglowsticks,
@@ -8668,7 +8668,7 @@
 	icon_state = "techfloor_edges";
 	dir = 8
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -8745,7 +8745,7 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 9
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -8775,7 +8775,7 @@
 /area/map_template/colony/hydroponics)
 "Ek" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -21
 	},

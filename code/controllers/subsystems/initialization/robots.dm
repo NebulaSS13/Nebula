@@ -16,12 +16,12 @@ SUBSYSTEM_DEF(robots)
 	)
 
 	var/list/mmi_types_by_title = list(
-		"cyborg"         = /obj/item/device/mmi,
+		"cyborg"         = /obj/item/mmi,
 		"robot"          = /obj/item/organ/internal/posibrain,
-		"drone"          = /obj/item/device/mmi/digital/robot,
-		"cyborg, flying" = /obj/item/device/mmi,
+		"drone"          = /obj/item/mmi/digital/robot,
+		"cyborg, flying" = /obj/item/mmi,
 		"robot, flying"  = /obj/item/organ/internal/posibrain,
-		"drone, flying"  = /obj/item/device/mmi/digital/robot
+		"drone, flying"  = /obj/item/mmi/digital/robot
 	)
 
 /datum/controller/subsystem/robots/Initialize()
@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(robots)
 			.[include_override] = modules[include_override]
 
 /datum/controller/subsystem/robots/proc/get_mmi_type_by_title(var/check_title)
-	. = mmi_types_by_title[lowertext(trim(check_title))] || /obj/item/device/mmi
+	. = mmi_types_by_title[lowertext(trim(check_title))] || /obj/item/mmi
 
 /datum/controller/subsystem/robots/proc/get_mob_type_by_title(var/check_title)
 	. = mob_types_by_title[lowertext(trim(check_title))] || /mob/living/silicon/robot

@@ -18,7 +18,7 @@
 	var/operating = 0//cooldown
 	var/turf/previousturf = null
 	var/obj/item/weldingtool/weldtool = null
-	var/obj/item/device/assembly/igniter/igniter = null
+	var/obj/item/assembly/igniter/igniter = null
 	var/obj/item/tank/tank = null
 
 
@@ -92,7 +92,7 @@
 		return
 
 	if(isigniter(W))
-		var/obj/item/device/assembly/igniter/I = W
+		var/obj/item/assembly/igniter/I = W
 		if(I.secured)	return
 		if(igniter)		return
 		if(!user.unEquip(I, src))
@@ -111,8 +111,8 @@
 		update_icon()
 		return
 
-	if(istype(W, /obj/item/device/scanner/gas))
-		var/obj/item/device/scanner/gas/A = W
+	if(istype(W, /obj/item/scanner/gas))
+		var/obj/item/scanner/gas/A = W
 		A.analyze_gases(src, user)
 		return
 	..()
@@ -202,7 +202,7 @@
 	..()
 	weldtool = new /obj/item/weldingtool(src)
 	weldtool.status = 0
-	igniter = new /obj/item/device/assembly/igniter(src)
+	igniter = new /obj/item/assembly/igniter(src)
 	igniter.secured = 0
 	status = 1
 	update_icon()

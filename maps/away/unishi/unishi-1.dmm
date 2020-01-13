@@ -443,7 +443,7 @@
 	dir = 8
 	},
 /obj/structure/table/standard,
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/unishi/engineroom)

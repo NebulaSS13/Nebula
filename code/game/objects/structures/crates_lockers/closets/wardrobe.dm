@@ -119,9 +119,9 @@
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
-	new /obj/item/device/radio/headset(src)
-	new /obj/item/device/radio/headset(src)
-	new /obj/item/device/radio/headset(src)
+	new /obj/item/radio/headset(src)
+	new /obj/item/radio/headset(src)
+	new /obj/item/radio/headset(src)
 
 /obj/structure/closet/wardrobe/yellow
 	name = "yellow wardrobe"

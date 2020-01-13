@@ -58,7 +58,7 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_med,
+		/obj/item/radio/headset/headset_med,
 		/obj/item/taperoll/medical,
 		/obj/item/storage/belt/medical/emt,
 		RANDOM_SCRUBS,
@@ -81,12 +81,12 @@
 	    /obj/item/clothing/mask/gas,
 	    /obj/item/clothing/suit/storage/toggle/fr_jacket,
 	    /obj/item/clothing/suit/storage/toggle/labcoat,
-	    /obj/item/device/radio/headset/headset_med,
-	    /obj/item/device/flashlight,
+	    /obj/item/radio/headset/headset_med,
+	    /obj/item/flashlight,
 	    /obj/item/tank/emergency/oxygen/engi,
 	    /obj/item/clothing/glasses/hud/health,
-	    /obj/item/device/scanner/health,
-	    /obj/item/device/radio/off,
+	    /obj/item/scanner/health,
+	    /obj/item/radio/off,
 	    /obj/random/medical,
 	    /obj/item/crowbar,
 	    /obj/item/extinguisher/mini,
@@ -111,8 +111,8 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/shoes/brown,
-		/obj/item/device/radio/headset/heads/cmo,
-		/obj/item/device/flash,
+		/obj/item/radio/headset/heads/cmo,
+		/obj/item/flash,
 		/obj/item/reagent_containers/hypospray/vial,
 		RANDOM_SCRUBS
 	)
@@ -158,9 +158,9 @@
 		/obj/item/reagent_containers/pill/methylphenidate,
 		/obj/item/material/clipboard,
 		/obj/item/folder/white,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape/random = 3,
-		/obj/item/device/camera,
+		/obj/item/taperecorder,
+		/obj/item/tape/random = 3,
+		/obj/item/camera,
 		/obj/item/toy/therapy_blue,
 		/obj/item/storage/belt/general
 	)
@@ -187,7 +187,7 @@
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
-		/obj/item/device/scanner/health,
+		/obj/item/scanner/health,
 		/obj/item/clothing/glasses/hud/health
 	)
 

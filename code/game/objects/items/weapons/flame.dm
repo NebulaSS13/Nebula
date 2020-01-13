@@ -31,7 +31,7 @@
 	else if(istype(A, /obj/item/clothing/mask/smokable) && !istype(A, /obj/item/clothing/mask/smokable/pipe))
 		var/obj/item/clothing/mask/smokable/S = A
 		return (S.lit)
-	else if(istype(A, /obj/item/device/assembly/igniter))
+	else if(istype(A, /obj/item/assembly/igniter))
 		return TRUE
 	return FALSE
 

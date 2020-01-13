@@ -190,7 +190,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "az" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -30
 	},

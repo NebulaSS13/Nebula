@@ -1,6 +1,6 @@
 // Powersink - used to drain station power
 
-/obj/item/device/powersink
+/obj/item/powersink
 	name = "power sink"
 	desc = "A nulling power sink which drains energy from electrical systems."
 	icon_state = "powersink0"
@@ -28,10 +28,10 @@
 
 	var/obj/structure/cable/attached		// the attached cable
 
-/obj/item/device/powersink/on_update_icon()
+/obj/item/powersink/on_update_icon()
 	icon_state = "powersink[mode == OPERATING]"
 
-/obj/item/device/powersink/proc/set_mode(value)
+/obj/item/powersink/proc/set_mode(value)
 	if(value == mode)
 		return
 	switch(value)
@@ -58,12 +58,12 @@
 	update_icon()
 	set_light(0)
 
-/obj/item/device/powersink/Destroy()
+/obj/item/powersink/Destroy()
 	if(mode == 2)
 		STOP_PROCESSING_POWER_OBJECT(src)
 	. = ..()
 
-/obj/item/device/powersink/attackby(var/obj/item/I, var/mob/user)
+/obj/item/powersink/attackby(var/obj/item/I, var/mob/user)
 	if(isScrewdriver(I))
 		if(mode == DISCONNECTED)
 			var/turf/T = loc
@@ -88,10 +88,10 @@
 	else
 		return ..()
 
-/obj/item/device/powersink/attack_ai()
+/obj/item/powersink/attack_ai()
 	return
 
-/obj/item/device/powersink/attack_hand(var/mob/user)
+/obj/item/powersink/attack_hand(var/mob/user)
 	. = ..()
 	if(.)
 		return
@@ -115,7 +115,7 @@
 				"<span class='italics'>You hear a click.</span>")
 			set_mode(CLAMPED_OFF)
 
-/obj/item/device/powersink/pwr_drain()
+/obj/item/powersink/pwr_drain()
 	if(!attached)
 		set_mode(DISCONNECTED)
 		return

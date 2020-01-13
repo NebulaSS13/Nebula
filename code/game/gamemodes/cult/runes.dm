@@ -463,7 +463,7 @@
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		GLOB.cult.add_cultiness(CULTINESS_PER_SACRIFICE)
-		var/obj/item/device/soulstone/full/F = new(get_turf(src))
+		var/obj/item/soulstone/full/F = new(get_turf(src))
 		for(var/mob/M in cultists | get_cultists())
 			to_chat(M, "<span class='warning'>The Geometer of Blood accepts this offering.</span>")
 		visible_message("<span class='notice'>\The [F] appears over \the [src].</span>")
@@ -710,7 +710,7 @@
 
 /obj/effect/rune/revive/cast(var/mob/living/user)
 	var/mob/living/carbon/human/target
-	var/obj/item/device/soulstone/source
+	var/obj/item/soulstone/source
 	for(var/mob/living/carbon/human/M in get_turf(src))
 		if(M.stat == DEAD)
 			if(iscultist(M))
@@ -719,7 +719,7 @@
 					break
 	if(!target)
 		return fizzle(user)
-	for(var/obj/item/device/soulstone/S in get_turf(src))
+	for(var/obj/item/soulstone/S in get_turf(src))
 		if(S.full && !S.shade.key)
 			source = S
 			break

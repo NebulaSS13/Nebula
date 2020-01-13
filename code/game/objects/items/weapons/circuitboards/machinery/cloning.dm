@@ -4,7 +4,7 @@
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 3, TECH_DATA = 3)
 	req_components = list(
-		/obj/item/device/scanner/health = 1,
+		/obj/item/scanner/health = 1,
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/manipulator = 2
 	)

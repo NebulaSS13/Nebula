@@ -158,13 +158,13 @@
 /area/ship/scrap/cargo/lower)
 "aw" = (
 /obj/structure/table/standard,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /obj/item/paper_bin,
 /obj/item/stamp/cargo,
 /obj/item/stamp/denied,
 /obj/random/clipboard,
-/obj/item/device/radio,
-/obj/item/device/radio/intercom{
+/obj/item/radio,
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -399,7 +399,7 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/dorms1)
 "aV" = (
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/gambling)
 "aW" = (
@@ -957,7 +957,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -1030,7 +1030,7 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -1506,7 +1506,7 @@
 	dir = 1
 	},
 /obj/machinery/organ_printer/robot/mapped,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/usedup,
@@ -1676,7 +1676,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/item/device/robotanalyzer,
+/obj/item/robotanalyzer,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/broken1)
 "dm" = (
@@ -1804,7 +1804,7 @@
 	dir = 8
 	},
 /obj/item/storage/toolbox/mechanical,
-/obj/item/device/multitool{
+/obj/item/multitool{
 	pixel_x = 3
 	},
 /obj/item/clothing/glasses/welding,
@@ -2106,7 +2106,7 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/item/device/integrated_circuit_printer,
+/obj/item/integrated_circuit_printer,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "ec" = (
@@ -2140,7 +2140,7 @@
 	pixel_x = 7;
 	pixel_y = 4
 	},
-/obj/item/device/t_scanner,
+/obj/item/t_scanner,
 /obj/item/cell/high,
 /obj/machinery/alarm{
 	pixel_y = 32;
@@ -2166,7 +2166,7 @@
 /obj/item/pickaxe,
 /obj/item/stack/flag/yellow,
 /obj/item/storage/box/glowsticks,
-/obj/item/device/scanner/mining,
+/obj/item/scanner/mining,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eg" = (
@@ -2175,7 +2175,7 @@
 /obj/item/FixOVein,
 /obj/structure/closet/crate,
 /obj/item/mop,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	level = 2
@@ -2204,7 +2204,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2543,7 +2543,7 @@
 	},
 /obj/item/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding,
-/obj/item/device/scanner/gas,
+/obj/item/scanner/gas,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 9
@@ -2599,7 +2599,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/storage)
 "eM" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -2632,8 +2632,8 @@
 /area/ship/scrap/maintenance/eva)
 "eQ" = (
 /obj/structure/table/standard,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
 /obj/item/storage/box/lights/bulbs,
 /obj/item/storage/box/lights/mixed,
 /obj/structure/cable,
@@ -2650,8 +2650,8 @@
 "eR" = (
 /obj/structure/table/standard,
 /obj/item/inflatable_dispenser,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/radio,
+/obj/item/radio,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -2673,10 +2673,10 @@
 /area/ship/scrap/maintenance/storage)
 "eT" = (
 /obj/item/clothing/head/welding,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/item/tape_roll,
 /obj/structure/table/standard,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = -32
 	},
 /turf/simulated/floor/usedup,

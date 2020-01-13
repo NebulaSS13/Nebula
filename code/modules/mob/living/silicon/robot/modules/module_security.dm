@@ -46,16 +46,16 @@
 		"Tridroid" = "orb-security"
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/borg/sight/hud/sec,
 		/obj/item/handcuffs/cyborg,
 		/obj/item/melee/baton/robot,
 		/obj/item/gun/energy/gun/secure/mounted,
 		/obj/item/taperoll/police,
-		/obj/item/device/megaphone,
-		/obj/item/device/holowarrant,
+		/obj/item/megaphone,
+		/obj/item/holowarrant,
 		/obj/item/crowbar,
-		/obj/item/device/hailer
+		/obj/item/hailer
 	)
 	emag = /obj/item/gun/energy/laser/mounted
 
@@ -68,7 +68,7 @@
 		"Combat Android" = "droid-combat"
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/borg/sight/thermal,
 		/obj/item/gun/energy/laser/mounted,
 		/obj/item/gun/energy/plasmacutter,

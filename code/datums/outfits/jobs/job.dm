@@ -3,7 +3,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 	uniform = /obj/item/clothing/under/color/grey
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 	shoes = /obj/item/clothing/shoes/black
 
 	id_slot = slot_wear_id

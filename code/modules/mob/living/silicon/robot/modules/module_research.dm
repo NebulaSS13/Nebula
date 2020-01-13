@@ -11,11 +11,11 @@
 		"Droid" = "droid-science"
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/portable_destructive_analyzer,
 		/obj/item/gripper/research,
 		/obj/item/gripper/no_use/loader,
-		/obj/item/device/robotanalyzer,
+		/obj/item/robotanalyzer,
 		/obj/item/card/robot,
 		/obj/item/wrench,
 		/obj/item/screwdriver,

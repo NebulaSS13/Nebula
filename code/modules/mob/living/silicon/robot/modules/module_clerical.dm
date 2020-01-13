@@ -24,12 +24,12 @@
 		"Default" = "Service2"
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/gripper/service,
 		/obj/item/reagent_containers/glass/bucket,
 		/obj/item/material/minihoe,
 		/obj/item/material/hatchet,
-		/obj/item/device/scanner/plant,
+		/obj/item/scanner/plant,
 		/obj/item/storage/plants,
 		/obj/item/robot_harvester,
 		/obj/item/material/kitchen/rollingpin,
@@ -88,14 +88,14 @@
 		"Default" =  "Service2"
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/pen/robopen,
 		/obj/item/form_printer,
 		/obj/item/gripper/clerical,
 		/obj/item/hand_labeler,
 		/obj/item/stamp,
 		/obj/item/stamp/denied,
-		/obj/item/device/destTagger,
+		/obj/item/destTagger,
 		/obj/item/crowbar,
 		/obj/item/stack/package_wrap/cyborg
 	)

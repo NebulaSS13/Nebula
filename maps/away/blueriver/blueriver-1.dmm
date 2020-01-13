@@ -36,11 +36,11 @@
 /area/bluespaceriver/underground)
 "i" = (
 /obj/item/pickaxe/xeno/six_pick,
-/obj/item/device/measuring_tape,
+/obj/item/measuring_tape,
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "j" = (
-/obj/item/device/camera,
+/obj/item/camera,
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "k" = (
@@ -48,7 +48,7 @@
 /area/bluespaceriver/underground)
 "l" = (
 /obj/item/gun/energy/plasmacutter,
-/obj/item/device/depth_scanner,
+/obj/item/depth_scanner,
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "m" = (
@@ -87,7 +87,7 @@
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "t" = (
-/obj/item/device/geiger,
+/obj/item/geiger,
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "u" = (

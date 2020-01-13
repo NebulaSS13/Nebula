@@ -43,40 +43,40 @@
 	lore_text = "The most basic of Vigil units may sometimes use toolboxes like these, which are surprisingly similar in design to ones of human origin. On occasion, some units have been known to harbor a slight preference for these archaic designs over something more streamlined, for whatever reason."
 	
 /datum/codex_entry/cable_painter
-	associated_paths = list(/obj/item/device/cable_painter)
+	associated_paths = list(/obj/item/cable_painter)
 	mechanics_text = "Use this device to select a preferred cable color. Apply it to a bundle of cables on your person, or use it on installed cabling on the floor to paint it in your chosen color."
 	lore_text = "A device often used by spacefaring engineers to color-code their electrical systems. An experienced technician can identify traditional installations by color alone."
 
 /datum/codex_entry/floor_painter
-	associated_paths = list(/obj/item/device/floor_painter)
+	associated_paths = list(/obj/item/floor_painter)
 	mechanics_text = "Use this item in your hand to access a menu in which you may change the type of decal, applied direction, and color. Click any accessible tile on the floor to apply your choice."
 	lore_text = "This ubiquitous maintenance-grade paintgun isn't as fancy or convenient as modern consumer models, but with an internal synthesizer it never runs out of pigment!"
 	antag_text = "This thing would be perfect for vandalism. Could you write your name in the halls?"
 
 /datum/codex_entry/geiger_counter
-	associated_paths = list(/obj/item/device/geiger)
+	associated_paths = list(/obj/item/geiger)
 	mechanics_text = "By using this item, you may toggle its scanning mode on and off. Examine it while it's on to check for ambient radiation."
 	lore_text = "For centuries geiger counters have been saving the lives of unsuspecting laborers and technicians. You can never be too careful around radiation."
 
 /datum/codex_entry/light_replacer
-	associated_paths = list(/obj/item/device/lightreplacer)
+	associated_paths = list(/obj/item/lightreplacer)
 	mechanics_text = "Examine or use this item to see how many lights are remaining. You can feed it lightbulbs or sheets of glass to refill it."
 	lore_text = "Can you believe they used to have to screw lightbulbs in by hand?"
 	antag_text = "Using a cryptographic sequencer on this device will cause it to overload each light it replaces; when turned on, the new lights will explode!"
 
 /datum/codex_entry/multitool
-	associated_paths = list(/obj/item/device/multitool)
+	associated_paths = list(/obj/item/multitool)
 	mechanics_text = "Multitools are incredibly versatile and can be used on a wide variety of machines. The most common use for this is to trip a device's wires without having to cut them. Simply click on an object with exposed wiring to use it. There might be other uses, as well..."
 	lore_text = "The common, every day multitool is descended from certain electrical tools from Earth's early space age. Though none too cheap, they are incredibly handy, and can be found in any self-respecting technician's toolbox."
 	antag_text = "This handy little tool can get you through doors, turn off power, and anything else you might need."
 
 /datum/codex_entry/pipe_painter
-	associated_paths = list(/obj/item/device/pipe_painter)
+	associated_paths = list(/obj/item/pipe_painter)
 	mechanics_text = "Use the pipe painter to specify which color you'd like to apply to pipes. Click on exposed piping to alter its hue."
 	lore_text = "Though by no means a modern miracle, synthesized pigments have revolutionized the electrical engineering industry, making time-consuming painting and color coding jobs an effortless non-issue."
 
 /datum/codex_entry/t_scanner
-	associated_paths = list(/obj/item/device/t_scanner)
+	associated_paths = list(/obj/item/t_scanner)
 	mechanics_text = "Use this to toggle its scanning capabilities on and off. While on, it will expose the layout of cabling and pipework in a 7x7 area around you."
 	lore_text = "The T-ray scanner is a modern spectroscopy solution and labor-saving device. Why work yourself to the bone removing floor panels when you can simply look through them with submillimeter radiation?"
 

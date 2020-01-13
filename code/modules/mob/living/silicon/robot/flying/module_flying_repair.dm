@@ -19,17 +19,17 @@
 		/obj/item/wrench,
 		/obj/item/crowbar,
 		/obj/item/wirecutters,
-		/obj/item/device/multitool,
-		/obj/item/device/t_scanner,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/geiger,
+		/obj/item/multitool,
+		/obj/item/t_scanner,
+		/obj/item/scanner/gas,
+		/obj/item/geiger,
 		/obj/item/taperoll/engineering,
 		/obj/item/taperoll/atmos,
 		/obj/item/gripper,
 		/obj/item/gripper/no_use/loader,
-		/obj/item/device/lightreplacer,
-		/obj/item/device/pipe_painter,
-		/obj/item/device/floor_painter,
+		/obj/item/lightreplacer,
+		/obj/item/pipe_painter,
+		/obj/item/floor_painter,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/inducer/borg,
 		/obj/item/stack/material/cyborg/steel,
@@ -40,7 +40,7 @@
 		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel,
-		/obj/item/device/plunger/robot
+		/obj/item/plunger/robot
 	)
 	synths = list(
 		/datum/matter_synth/metal = 	30000,
@@ -88,7 +88,7 @@
 	. = ..()
 
 /obj/item/robot_module/flying/repair/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/device/lightreplacer/LR = locate() in equipment
+	var/obj/item/lightreplacer/LR = locate() in equipment
 	if(LR)
 		LR.Charge(R, amount)
 	..()

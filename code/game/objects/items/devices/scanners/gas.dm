@@ -2,7 +2,7 @@
 #define MV_MODE 1 //moles and volume
 #define GAS_TRAIT_MODE 2 //gas traits and constants
 
-/obj/item/device/scanner/gas
+/obj/item/scanner/gas
 	name = "gas analyzer"
 	desc = "A hand-held environmental scanner which reports current gas levels. Has a button to cycle modes."
 	icon_state = "atmos"
@@ -13,10 +13,10 @@
 	window_height = 400
 	var/mode = DEFAULT_MODE
 
-/obj/item/device/scanner/gas/get_header()
+/obj/item/scanner/gas/get_header()
 	return "[..()]<a href='?src=\ref[src];switchmode=1'>Switch Mode</a>"
 
-/obj/item/device/scanner/gas/OnTopic(var/user, var/list/href_list)
+/obj/item/scanner/gas/OnTopic(var/user, var/list/href_list)
 	..()
 	if(href_list["switchmode"])
 		++mode
@@ -30,10 +30,10 @@
 				mode = DEFAULT_MODE
 		playsound(src.loc, 'sound/machines/button4.ogg', 30, 0)
 
-/obj/item/device/scanner/gas/is_valid_scan_target(atom/O)
+/obj/item/scanner/gas/is_valid_scan_target(atom/O)
 	return istype(O)
 
-/obj/item/device/scanner/gas/scan(atom/A, mob/user)
+/obj/item/scanner/gas/scan(atom/A, mob/user)
 	var/air_contents = A.return_air()
 	if(!air_contents)
 		to_chat(user, "<span class='warning'>Your [src] flashes a red light as it fails to analyze \the [A].</span>")

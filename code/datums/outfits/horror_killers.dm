@@ -5,7 +5,7 @@
 	gloves = /obj/item/clothing/gloves/thick
 	mask = /obj/item/clothing/mask/gas/clown_hat
 	head = /obj/item/clothing/head/chaplain_hood
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/chaplain_hoodie
 	r_pocket = /obj/item/bikehorn
@@ -22,7 +22,7 @@
 	gloves = /obj/item/clothing/gloves/latex
 	mask = /obj/item/clothing/mask/surgical
 	head = /obj/item/clothing/head/welding
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/apron
 	l_pocket = /obj/item/material/knife/combat
@@ -40,7 +40,7 @@
 	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat/black) }
 	shoes = /obj/item/clothing/shoes/black
 	gloves = /obj/item/clothing/gloves/thick
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_pocket = /obj/item/melee/energy/sword
 

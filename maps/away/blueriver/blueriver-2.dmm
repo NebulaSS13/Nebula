@@ -298,7 +298,7 @@
 /area/bluespaceriver/ship)
 "bb" = (
 /obj/machinery/r_n_d/circuit_imprinter,
-/obj/item/device/ano_scanner,
+/obj/item/ano_scanner,
 /obj/item/paper{
 	info = "I don't understand where they could have gone, but one of the researchers and a guard disappeared last night. We've started looking for them, figuring maybe they got trapped somewhere in the ruins, maybe a booby trap or something that was still functioning, but we haven't seen any sign of them. their equipment, both of their equipment, is still in the ship, and there's no signs of anything grabbing them in the night, they're just... Gone.  Tomorrow morning we head back into space to go resupply and submit what we've found so far, but when we come back we'll have more than enough manpower to really dig into this place."
 	},

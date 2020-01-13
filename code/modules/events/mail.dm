@@ -8,13 +8,13 @@
 	endWhen = 3000
 
 	var/list/possible_gifts = list(
-		/obj/item/device/flashlight/lamp/lava,
+		/obj/item/flashlight/lamp/lava,
 		/obj/item/storage/fancy/crayons,
 		/obj/item/instrument/guitar,
 		/obj/item/toy/torchmodel,
 		/obj/item/clothing/accessory/locket,
-		/obj/item/device/binoculars,
-		/obj/item/device/camera,
+		/obj/item/binoculars,
+		/obj/item/camera,
 		/obj/item/clothing/accessory/bowtie/ugly
 	)
 

@@ -57,7 +57,7 @@
 	id = "advancedflash"
 	req_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
 	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 2000, MATERIAL_SILVER = 500)
-	build_path = /obj/item/device/flash/advanced
+	build_path = /obj/item/flash/advanced
 	sort_string = "TADAA"
 
 /datum/design/item/weapon/stunrevolver

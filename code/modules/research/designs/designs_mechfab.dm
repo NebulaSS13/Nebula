@@ -457,7 +457,7 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2)
 	build_type = MECHFAB
 	materials = list(MATERIAL_STEEL = 750, MATERIAL_GLASS = 750)
-	build_path = /obj/item/device/flash/synthetic
+	build_path = /obj/item/flash/synthetic
 	category = "Misc"
 
 //Augments, son

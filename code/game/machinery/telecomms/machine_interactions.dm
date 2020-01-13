@@ -60,7 +60,7 @@
 	// You need a multitool to use this, or be silicon
 	if(!issilicon(user))
 		// istype returns false if the value is null
-		if(!istype(user.get_active_hand(), /obj/item/device/multitool))
+		if(!istype(user.get_active_hand(), /obj/item/multitool))
 			return STATUS_CLOSE
 	return ..()
 
@@ -69,7 +69,7 @@
 	return TRUE
 
 /obj/machinery/telecomms/interact(var/mob/user)
-	var/obj/item/device/multitool/P = get_multitool(user)
+	var/obj/item/multitool/P = get_multitool(user)
 
 	user.set_machine(src)
 	var/list/dat = list()
@@ -144,15 +144,15 @@
 
 /obj/machinery/telecomms/proc/get_multitool(mob/user as mob)
 
-	var/obj/item/device/multitool/P = null
+	var/obj/item/multitool/P = null
 	// Let's double check
-	if(!issilicon(user) && istype(user.get_active_hand(), /obj/item/device/multitool))
+	if(!issilicon(user) && istype(user.get_active_hand(), /obj/item/multitool))
 		P = user.get_active_hand()
 	else if(isAI(user))
 		var/mob/living/silicon/ai/U = user
 		P = U.aiMulti
 	else if(isrobot(user) && in_range(user, src))
-		if(istype(user.get_active_hand(), /obj/item/device/multitool))
+		if(istype(user.get_active_hand(), /obj/item/multitool))
 			P = user.get_active_hand()
 	return P
 
@@ -208,13 +208,13 @@
 	if(..())
 		return 1
 	if(!issilicon(usr))
-		if(!istype(usr.get_active_hand(), /obj/item/device/multitool))
+		if(!istype(usr.get_active_hand(), /obj/item/multitool))
 			return
 
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	var/obj/item/device/multitool/P = get_multitool(usr)
+	var/obj/item/multitool/P = get_multitool(usr)
 
 	if(href_list["input"])
 		switch(href_list["input"])

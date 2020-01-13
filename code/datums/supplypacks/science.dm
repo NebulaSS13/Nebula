@@ -19,9 +19,9 @@
 
 /decl/hierarchy/supply_pack/science/robotics
 	name = "Parts - Robotics"
-	contains = list(/obj/item/device/assembly/prox_sensor = 3,
+	contains = list(/obj/item/assembly/prox_sensor = 3,
 					/obj/item/storage/toolbox/electrical,
-					/obj/item/device/flash = 4,
+					/obj/item/flash = 4,
 					/obj/item/cell/high = 2)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/gear
@@ -31,9 +31,9 @@
 /decl/hierarchy/supply_pack/science/phoron
 	name = "Parts - Phoron device kit"
 	contains = list(/obj/item/tank/phoron = 3,
-					/obj/item/device/assembly/igniter = 3,
-					/obj/item/device/assembly/prox_sensor = 3,
-					/obj/item/device/assembly/timer = 3)
+					/obj/item/assembly/igniter = 3,
+					/obj/item/assembly/prox_sensor = 3,
+					/obj/item/assembly/timer = 3)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/phoron
 	containername = "phoron assembly crate"
@@ -49,16 +49,16 @@
 	name = "Shaft miner equipment"
 	contains = list(/obj/item/storage/backpack/industrial,
 					/obj/item/storage/backpack/satchel/eng,
-					/obj/item/device/radio/headset/headset_cargo,
+					/obj/item/radio/headset/headset_cargo,
 					/obj/item/clothing/under/rank/miner,
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/black,
-					/obj/item/device/scanner/gas,
+					/obj/item/scanner/gas,
 					/obj/item/storage/ore,
-					/obj/item/device/flashlight/lantern,
+					/obj/item/flashlight/lantern,
 					/obj/item/shovel,
 					/obj/item/pickaxe,
-					/obj/item/device/scanner/mining,
+					/obj/item/scanner/mining,
 					/obj/item/clothing/glasses/material,
 					/obj/item/clothing/glasses/meson)
 	cost = 15
@@ -68,8 +68,8 @@
 
 /decl/hierarchy/supply_pack/science/flamps
 	num_contained = 3
-	contains = list(/obj/item/device/flashlight/lamp/floodlamp,
-					/obj/item/device/flashlight/lamp/floodlamp/green)
+	contains = list(/obj/item/flashlight/lamp/floodlamp,
+					/obj/item/flashlight/lamp/floodlamp/green)
 	name = "Equipment - Flood lamps"
 	cost = 20
 	containername = "flood lamp crate"

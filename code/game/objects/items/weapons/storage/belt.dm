@@ -111,17 +111,17 @@
 		/obj/item/weldingtool,
 		/obj/item/wirecutters,
 		/obj/item/wrench,
-		/obj/item/device/multitool,
-		/obj/item/device/flashlight,
+		/obj/item/multitool,
+		/obj/item/flashlight,
 		/obj/item/stack/cable_coil,
-		/obj/item/device/t_scanner,
-		/obj/item/device/scanner/gas,
+		/obj/item/t_scanner,
+		/obj/item/scanner/gas,
 		/obj/item/taperoll/engineering,
 		/obj/item/inducer/,
-		/obj/item/device/robotanalyzer,
+		/obj/item/robotanalyzer,
 		/obj/item/material/minihoe,
 		/obj/item/material/hatchet,
-		/obj/item/device/scanner/plant,
+		/obj/item/scanner/plant,
 		/obj/item/taperoll,
 		/obj/item/extinguisher/mini,
 		/obj/item/marshalling_wand,
@@ -148,7 +148,7 @@
 	new /obj/item/weldingtool(src)
 	new /obj/item/crowbar(src)
 	new /obj/item/wirecutters(src)
-	new /obj/item/device/t_scanner(src)
+	new /obj/item/t_scanner(src)
 	update_icon()
 
 
@@ -159,7 +159,7 @@
 	icon_state = "medicalbelt"
 	item_state = "medical"
 	can_hold = list(
-		/obj/item/device/scanner/health,
+		/obj/item/scanner/health,
 		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/glass/beaker,
 		/obj/item/reagent_containers/glass/bottle,
@@ -169,14 +169,14 @@
 		/obj/item/storage/fancy/cigarettes,
 		/obj/item/storage/pill_bottle,
 		/obj/item/stack/medical,
-		/obj/item/device/flashlight/pen,
+		/obj/item/flashlight/pen,
 		/obj/item/clothing/mask/surgical,
 		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/crowbar,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/taperoll,
 		/obj/item/extinguisher/mini,
 		/obj/item/storage/med_pouch,
@@ -202,7 +202,7 @@
 		/obj/item/grenade,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/handcuffs,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
@@ -210,16 +210,16 @@
 		/obj/item/melee/baton,
 		/obj/item/melee/telebaton,
 		/obj/item/flame/lighter,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/modular_computer/pda,
-		/obj/item/device/radio/headset,
-		/obj/item/device/hailer,
-		/obj/item/device/megaphone,
+		/obj/item/radio/headset,
+		/obj/item/hailer,
+		/obj/item/megaphone,
 		/obj/item/melee,
 		/obj/item/taperoll,
-		/obj/item/device/holowarrant,
+		/obj/item/holowarrant,
 		/obj/item/magnetic_ammo,
-		/obj/item/device/binoculars,
+		/obj/item/binoculars,
 		/obj/item/clothing/gloves
 		)
 
@@ -234,7 +234,7 @@
 		/obj/item/grenade,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/handcuffs,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
@@ -242,16 +242,16 @@
 		/obj/item/melee/baton,
 		/obj/item/melee/telebaton,
 		/obj/item/flame/lighter,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/modular_computer/pda,
-		/obj/item/device/radio/headset,
-		/obj/item/device/hailer,
-		/obj/item/device/megaphone,
+		/obj/item/radio/headset,
+		/obj/item/hailer,
+		/obj/item/megaphone,
 		/obj/item/melee,
 		/obj/item/taperoll,
-		/obj/item/device/holowarrant,
+		/obj/item/holowarrant,
 		/obj/item/magnetic_ammo,
-		/obj/item/device/binoculars,
+		/obj/item/binoculars,
 		/obj/item/clothing/gloves
 		)
 
@@ -262,29 +262,29 @@
 	item_state = "gear"
 	overlay_flags = BELT_OVERLAY_ITEMS
 	can_hold = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/melee/telebaton,
-		/obj/item/device/taperecorder,
+		/obj/item/taperecorder,
 		/obj/item/folder,
 		/obj/item/paper,
 		/obj/item/material/clipboard,
 		/obj/item/modular_computer/tablet,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/modular_computer/pda,
-		/obj/item/device/radio/headset,
-		/obj/item/device/megaphone,
+		/obj/item/radio/headset,
+		/obj/item/megaphone,
 		/obj/item/taperoll,
-		/obj/item/device/holowarrant,
-		/obj/item/device/radio,
-		/obj/item/device/tape,
+		/obj/item/holowarrant,
+		/obj/item/radio,
+		/obj/item/tape,
 		/obj/item/pen,
 		/obj/item/stamp,
 		/obj/item/stack/package_wrap,
-		/obj/item/device/binoculars,
+		/obj/item/binoculars,
 		/obj/item/marshalling_wand,
-		/obj/item/device/camera,
+		/obj/item/camera,
 		/obj/item/hand_labeler,
-		/obj/item/device/destTagger,
+		/obj/item/destTagger,
 		/obj/item/clothing/glasses,
 		/obj/item/clothing/head/soft,
 		/obj/item/hand_labeler,
@@ -299,13 +299,13 @@
 	item_state = "janibelt"
 	can_hold = list(
 		/obj/item/grenade/chem_grenade,
-		/obj/item/device/lightreplacer,
-		/obj/item/device/flashlight,
+		/obj/item/lightreplacer,
+		/obj/item/flashlight,
 		/obj/item/reagent_containers/spray/cleaner,
 		/obj/item/soap,
 		/obj/item/holosign_creator,
 		/obj/item/clothing/gloves,
-		/obj/item/device/assembly/mousetrap,
+		/obj/item/assembly/mousetrap,
 		/obj/item/crowbar/prybar,
 		/obj/item/clothing/mask/plunger
 		)
@@ -318,29 +318,29 @@
 	storage_slots = 7
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
 	can_hold = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/melee/telebaton,
-		/obj/item/device/taperecorder,
+		/obj/item/taperecorder,
 		/obj/item/folder,
 		/obj/item/paper,
 		/obj/item/material/clipboard,
 		/obj/item/modular_computer/tablet,
-		/obj/item/device/flash,
-		/obj/item/device/flashlight,
+		/obj/item/flash,
+		/obj/item/flashlight,
 		/obj/item/modular_computer/pda,
-		/obj/item/device/radio/headset,
-		/obj/item/device/megaphone,
+		/obj/item/radio/headset,
+		/obj/item/megaphone,
 		/obj/item/taperoll,
-		/obj/item/device/holowarrant,
-		/obj/item/device/radio,
-		/obj/item/device/tape,
+		/obj/item/holowarrant,
+		/obj/item/radio,
+		/obj/item/tape,
 		/obj/item/pen,
 		/obj/item/stamp,
 		/obj/item/stack/package_wrap,
-		/obj/item/device/binoculars,
+		/obj/item/binoculars,
 		/obj/item/marshalling_wand,
-		/obj/item/device/camera,
-		/obj/item/device/destTagger,
+		/obj/item/camera,
+		/obj/item/destTagger,
 		/obj/item/clothing/glasses,
 		/obj/item/clothing/head/soft,
 		/obj/item/hand_labeler,
@@ -357,21 +357,21 @@
 	overlay_flags = BELT_OVERLAY_HOLSTER
 	can_hold = list(
 		/obj/item/reagent_containers/spray/luminol,
-		/obj/item/device/uv_light,
+		/obj/item/uv_light,
 		/obj/item/reagent_containers/syringe,
 		/obj/item/forensics/swab,
 		/obj/item/sample/print,
 		/obj/item/sample/fibers,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape,
+		/obj/item/taperecorder,
+		/obj/item/tape,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/gloves/forensic,
 		/obj/item/folder,
 		/obj/item/paper,
 		/obj/item/forensics/sample_kit,
-		/obj/item/device/camera,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape
+		/obj/item/camera,
+		/obj/item/taperecorder,
+		/obj/item/tape
 		)
 
 /obj/item/storage/belt/holster/machete
@@ -382,25 +382,25 @@
 	storage_slots = 8
 	overlay_flags = BELT_OVERLAY_HOLSTER
 	can_hold = list(
-		/obj/item/device/binoculars,
-		/obj/item/device/camera,
+		/obj/item/binoculars,
+		/obj/item/camera,
 		/obj/item/stack/flag,
-		/obj/item/device/geiger,
-		/obj/item/device/flashlight,
-		/obj/item/device/radio,
-		/obj/item/device/gps,
-		/obj/item/device/scanner/mining,
-		/obj/item/device/scanner/xenobio,
-		/obj/item/device/scanner/plant,
+		/obj/item/geiger,
+		/obj/item/flashlight,
+		/obj/item/radio,
+		/obj/item/gps,
+		/obj/item/scanner/mining,
+		/obj/item/scanner/xenobio,
+		/obj/item/scanner/plant,
 		/obj/item/folder,
 		/obj/item/paper,
 		/obj/item/pen,
-		/obj/item/device/spaceflare,
-		/obj/item/device/radio/beacon,
+		/obj/item/spaceflare,
+		/obj/item/radio/beacon,
 		/obj/item/pinpointer/radio,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape,
-		/obj/item/device/scanner/gas
+		/obj/item/taperecorder,
+		/obj/item/tape,
+		/obj/item/scanner/gas
 		)
 	can_holster = list(/obj/item/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
@@ -412,18 +412,18 @@
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
 	can_hold = list(
-		/obj/item/device/soulstone
+		/obj/item/soulstone
 		)
 
 /obj/item/storage/belt/soulstone/full/New()
 	..()
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
 
 
 /obj/item/storage/belt/champion

@@ -4,7 +4,7 @@
 
 /decl/hierarchy/supply_pack/supply/toner
 	name = "Refills - Toner cartridges"
-	contains = list(/obj/item/device/toner = 3)
+	contains = list(/obj/item/toner = 3)
 	cost = 10
 	containername = "toner cartridges"
 
@@ -51,7 +51,7 @@
 	containername = "spare PDA crate"
 
 /decl/hierarchy/supply_pack/supply/eftpos
-	contains = list(/obj/item/device/eftpos)
+	contains = list(/obj/item/eftpos)
 	name = "Electronics - EFTPOS scanner"
 	cost = 10
 	containername = "\improper EFTPOS crate"

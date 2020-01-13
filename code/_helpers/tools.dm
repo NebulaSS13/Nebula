@@ -46,7 +46,7 @@
 /obj/item/screwdriver/isscrewdriver()
 	return TRUE
 
-/obj/item/device/multitool/ismultitool()
+/obj/item/multitool/ismultitool()
 	return TRUE
 
 /obj/item/crowbar/iscrowbar()

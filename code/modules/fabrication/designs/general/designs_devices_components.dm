@@ -37,25 +37,25 @@
 	path = /obj/item/stock_parts/power/terminal/buildable
 
 /datum/fabricator_recipe/device_component/igniter
-	path = /obj/item/device/assembly/igniter
+	path = /obj/item/assembly/igniter
 
 /datum/fabricator_recipe/device_component/signaler
-	path = /obj/item/device/assembly/signaler
+	path = /obj/item/assembly/signaler
 
 /datum/fabricator_recipe/device_component/sensor_infra
-	path = /obj/item/device/assembly/infra
+	path = /obj/item/assembly/infra
 
 /datum/fabricator_recipe/device_component/timer
-	path = /obj/item/device/assembly/timer
+	path = /obj/item/assembly/timer
 
 /datum/fabricator_recipe/device_component/sensor_prox
-	path = /obj/item/device/assembly/prox_sensor
+	path = /obj/item/assembly/prox_sensor
 
 /datum/fabricator_recipe/device_component/cable_coil
 	path = /obj/item/stack/cable_coil/single
 
 /datum/fabricator_recipe/device_component/electropack
-	path = /obj/item/device/radio/electropack
+	path = /obj/item/radio/electropack
 	hidden = TRUE
 
 /datum/fabricator_recipe/device_component/beartrap

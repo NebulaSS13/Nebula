@@ -23,14 +23,14 @@
 	startswith = list(
 		/obj/item/crowbar/red,
 		/obj/item/extinguisher/mini,
-		/obj/item/device/radio,
+		/obj/item/radio,
 		/obj/item/weldingtool/mini,
 		/obj/item/welder_tank/mini
 	)
 
 /obj/item/storage/toolbox/emergency/Initialize()
 	. = ..()
-	var/item = pick(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare,  /obj/item/device/flashlight/flare/glowstick/red))
+	var/item = pick(list(/obj/item/flashlight, /obj/item/flashlight/flare,  /obj/item/flashlight/flare/glowstick/red))
 	new item(src)
 
 
@@ -39,14 +39,14 @@
 	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "blue"
 	item_state = "toolbox_blue"
-	startswith = list(/obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/device/scanner/gas, /obj/item/wirecutters)
+	startswith = list(/obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/scanner/gas, /obj/item/wirecutters)
 
 /obj/item/storage/toolbox/electrical
 	name = "electrical toolbox"
 	desc = "Bright yellow toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "yellow"
 	item_state = "toolbox_yellow"
-	startswith = list(/obj/item/screwdriver, /obj/item/wirecutters, /obj/item/device/t_scanner, /obj/item/crowbar)
+	startswith = list(/obj/item/screwdriver, /obj/item/wirecutters, /obj/item/t_scanner, /obj/item/crowbar)
 
 /obj/item/storage/toolbox/electrical/Initialize()
 	. = ..()
@@ -64,4 +64,4 @@
 	item_state = "toolbox_syndi"
 	origin_tech = list(TECH_COMBAT = 1, TECH_ESOTERIC = 1)
 	attack_cooldown = 10
-	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/wirecutters, /obj/item/device/multitool)
+	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/wirecutters, /obj/item/multitool)

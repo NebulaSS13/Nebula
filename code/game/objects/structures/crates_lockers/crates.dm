@@ -15,18 +15,18 @@
 	if(.)
 		if(rigged)
 			visible_message("<span class='danger'>There are wires attached to the lid of [src]...</span>")
-			for(var/obj/item/device/assembly_holder/H in src)
+			for(var/obj/item/assembly_holder/H in src)
 				H.process_activation(usr)
-			for(var/obj/item/device/assembly/A in src)
+			for(var/obj/item/assembly/A in src)
 				A.activate()
 
 /obj/structure/closet/crate/examine(mob/user)
 	. = ..()
 	if(rigged && opened)
 		var/list/devices = list()
-		for(var/obj/item/device/assembly_holder/H in src)
+		for(var/obj/item/assembly_holder/H in src)
 			devices += H
-		for(var/obj/item/device/assembly/A in src)
+		for(var/obj/item/assembly/A in src)
 			devices += A
 		to_chat(user,"There are some wires attached to the lid, connected to [english_list(devices)].")
 
@@ -44,7 +44,7 @@
 			to_chat(user, "<span class='notice'>You rig [src].</span>")
 			rigged = 1
 			return
-	else if(istype(W, /obj/item/device/assembly_holder) || istype(W, /obj/item/device/assembly))
+	else if(istype(W, /obj/item/assembly_holder) || istype(W, /obj/item/assembly))
 		if(rigged)
 			if(!user.unEquip(W, src))
 				return
@@ -247,7 +247,7 @@
 		/obj/item/storage/plants = 2,
 		/obj/item/material/hatchet = 2,
 		/obj/item/wirecutters/clippers = 2,
-		/obj/item/device/scanner/plant = 2
+		/obj/item/scanner/plant = 2
 	)
 
 /obj/structure/closet/crate/secure/biohazard

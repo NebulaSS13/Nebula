@@ -2,7 +2,7 @@
 	name = OUTFIT_JOB_NAME("Assistant")
 
 /decl/hierarchy/outfit/job/service
-	l_ear = /obj/item/device/radio/headset/headset_service
+	l_ear = /obj/item/radio/headset/headset_service
 	hierarchy_type = /decl/hierarchy/outfit/job/service
 
 /decl/hierarchy/outfit/job/service/bartender
@@ -24,7 +24,7 @@
 	uniform = /obj/item/clothing/under/rank/hydroponics
 	suit = /obj/item/clothing/suit/apron
 	gloves = /obj/item/clothing/gloves/thick/botany
-	r_pocket = /obj/item/device/scanner/plant
+	r_pocket = /obj/item/scanner/plant
 	id_type = /obj/item/card/id/civilian/botanist
 	pda_type = /obj/item/modular_computer/pda
 
@@ -48,7 +48,7 @@
 
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
-	l_ear = /obj/item/device/radio/headset/ia
+	l_ear = /obj/item/radio/headset/ia
 	uniform = /obj/item/clothing/under/rank/internalaffairs
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/brown

@@ -2,7 +2,7 @@
 #define MODKIT_SUIT 2
 #define MODKIT_FULL 3
 
-/obj/item/device/modkit
+/obj/item/modkit
 	name = "hardsuit modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user."
 	icon_state = "modkit"
@@ -14,7 +14,7 @@
 		/obj/item/clothing/suit/space/void
 		)
 
-/obj/item/device/modkit/afterattack(obj/O, mob/user as mob, proximity)
+/obj/item/modkit/afterattack(obj/O, mob/user as mob, proximity)
 	if(!proximity)
 		return
 
@@ -60,6 +60,6 @@
 	if(!parts)
 		qdel(src)
 
-/obj/item/device/modkit/examine(mob/user)
+/obj/item/modkit/examine(mob/user)
 	. = ..(user)
 	to_chat(user, "It looks as though it modifies hardsuits to fit [target_species] users.")

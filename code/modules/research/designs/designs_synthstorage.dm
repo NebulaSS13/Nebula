@@ -8,7 +8,7 @@
 	id = "paicard"
 	req_tech = list(TECH_DATA = 2)
 	materials = list(MATERIAL_GLASS = 500, MATERIAL_STEEL = 500)
-	build_path = /obj/item/device/paicard
+	build_path = /obj/item/paicard
 	sort_string = "VABAI"
 
 /datum/design/item/synthstorage/intelicard

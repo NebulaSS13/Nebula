@@ -1,4 +1,4 @@
-/obj/item/device/assembly/igniter
+/obj/item/assembly/igniter
 	name = "igniter"
 	desc = "A small electronic device able to ignite combustable substances."
 	icon_state = "igniter"
@@ -18,7 +18,7 @@
 			var/turf/location = get_turf(loc)
 			if(location)
 				location.hotspot_expose(1000,1000)
-			if (istype(src.loc,/obj/item/device/assembly_holder))
+			if (istype(src.loc,/obj/item/assembly_holder))
 				if (istype(src.loc.loc, /obj/structure/reagent_dispensers/fueltank/))
 					var/obj/structure/reagent_dispensers/fueltank/tank = src.loc.loc
 					if (tank && tank.modded)

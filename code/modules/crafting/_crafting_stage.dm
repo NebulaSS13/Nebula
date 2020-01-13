@@ -97,10 +97,10 @@
 	completion_trigger_type = /obj/item/pipe
 
 /decl/crafting_stage/scanner
-	completion_trigger_type = /obj/item/device/scanner/health
+	completion_trigger_type = /obj/item/scanner/health
 
 /decl/crafting_stage/proximity
-	completion_trigger_type = /obj/item/device/assembly/prox_sensor
+	completion_trigger_type = /obj/item/assembly/prox_sensor
 
 /decl/crafting_stage/robot_arms
 	progress_message = "You add the robotic arm to the assembly."

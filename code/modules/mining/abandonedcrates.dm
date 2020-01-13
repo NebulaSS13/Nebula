@@ -28,7 +28,7 @@
 			new/obj/item/flame/lighter/zippo(src)
 		if(6 to 10)
 			new/obj/item/pickaxe/drill(src)
-			new/obj/item/device/taperecorder(src)
+			new/obj/item/taperecorder(src)
 			new/obj/item/clothing/suit/space(src)
 			new/obj/item/clothing/head/helmet/space/fishbowl(src)
 		if(11 to 15)
@@ -104,7 +104,7 @@
 		if(89, 90)
 			new/obj/item/organ/internal/heart(src)
 		if(91)
-			new/obj/item/device/soulstone(src)
+			new/obj/item/soulstone(src)
 		if(92)
 			new/obj/item/material/sword/katana(src)
 		if(93)
@@ -181,7 +181,7 @@
 
 /obj/structure/closet/crate/secure/loot/attackby(obj/item/W as obj, mob/user as mob)
 	if(locked)
-		if (istype(W, /obj/item/device/multitool)) // Greetings Urist McProfessor, how about a nice game of cows and bulls?
+		if (istype(W, /obj/item/multitool)) // Greetings Urist McProfessor, how about a nice game of cows and bulls?
 			to_chat(user, "<span class='notice'>DECA-CODE LOCK ANALYSIS:</span>")
 			if (attempts == 1)
 				to_chat(user, "<span class='warning'>* Anti-Tamper system will activate on the next failed access attempt.</span>")

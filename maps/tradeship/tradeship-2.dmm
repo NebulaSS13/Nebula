@@ -37,7 +37,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -178,7 +178,7 @@
 /area/ship/scrap/comms)
 "bb" = (
 /obj/machinery/light,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -865,7 +865,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/item/device/synthesized_instrument/guitar,
+/obj/item/synthesized_instrument/guitar,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/crew/saloon)
 "da" = (
@@ -2131,7 +2131,7 @@
 /obj/random/medical,
 /obj/item/stack/medical/advanced/bruise_pack,
 /obj/item/reagent_containers/syringe/antiviral,
-/obj/item/device/scanner/health,
+/obj/item/scanner/health,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "fz" = (
@@ -2605,7 +2605,7 @@
 /area/ship/scrap/unused)
 "gw" = (
 /obj/effect/decal/cleanable/generic,
-/obj/item/device/flashlight,
+/obj/item/flashlight,
 /obj/structure/skele_stand{
 	anchored = 0;
 	name = "Spookers"
@@ -2620,7 +2620,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/unused)
 "gx" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -4381,7 +4381,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "kb" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -4426,7 +4426,7 @@
 /area/ship/scrap/maintenance/atmos)
 "kh" = (
 /obj/machinery/atmospherics/valve/open,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -4852,7 +4852,7 @@
 /area/ship/scrap/comms)
 "pb" = (
 /obj/machinery/seed_storage/garden,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled,
@@ -4894,7 +4894,7 @@
 "pT" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 32
 	},
 /obj/structure/cable{
@@ -5021,7 +5021,7 @@
 /area/ship/scrap/garden)
 "rc" = (
 /obj/structure/closet/walllocker/emerglocker/south,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -5199,7 +5199,7 @@
 	pixel_x = 24
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -30
 	},
@@ -5239,7 +5239,7 @@
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -30
 	},
@@ -5279,13 +5279,13 @@
 /obj/item/gun/energy/stunrevolver,
 /obj/structure/closet/cabinet,
 /obj/item/storage/secure/briefcase,
-/obj/item/device/taperecorder,
-/obj/item/device/camera,
+/obj/item/taperecorder,
+/obj/item/camera,
 /obj/item/storage/backpack/dufflebag/syndie,
 /obj/item/storage/box/ammo/shotgunshells,
 /obj/item/handcuffs,
-/obj/item/device/boombox,
-/obj/item/device/radio/intercom{
+/obj/item/boombox,
+/obj/item/radio/intercom{
 	pixel_y = 20
 	},
 /turf/simulated/floor/wood,
@@ -5436,7 +5436,7 @@
 	icon_state = "bulb1";
 	dir = 8
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -5513,7 +5513,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/maintenance/atmos)
 "Ac" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -30
 	},
@@ -5595,10 +5595,10 @@
 /area/ship/scrap/maintenance/power)
 "BD" = (
 /obj/structure/table/standard,
-/obj/item/device/multitool{
+/obj/item/multitool{
 	pixel_x = 5
 	},
-/obj/item/device/pipe_painter,
+/obj/item/pipe_painter,
 /obj/item/clamp,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/atmos)
@@ -5620,7 +5620,7 @@
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/machinery/vending/dinnerware,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled,
@@ -5651,7 +5651,7 @@
 	id_tag = "sensor";
 	name = "Sensor Shroud"
 	},
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
 "Db" = (
@@ -5797,7 +5797,7 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/powered/pump/filled,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -5827,7 +5827,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/dock)
 "FV" = (
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/structure/cable{
 	icon_state = "4-9"
 	},
@@ -5839,7 +5839,7 @@
 /area/space)
 "FW" = (
 /obj/structure/table/reinforced,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /obj/random_multi/single_item/captains_spare_id,
 /obj/item/spacecash/bundle/c1000,
 /obj/item/storage/bible/booze,
@@ -5894,7 +5894,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/atmos)
 "Hc" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /obj/machinery/alarm{
@@ -6002,7 +6002,7 @@
 	},
 /obj/random/powercell,
 /obj/random/powercell,
-/obj/item/device/boombox,
+/obj/item/boombox,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/maintenance/power)
 "Jc" = (
@@ -6088,7 +6088,7 @@
 "Kb" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
-/obj/item/device/flashlight,
+/obj/item/flashlight,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -6256,7 +6256,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -6278,7 +6278,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -6368,7 +6368,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -30
 	},
@@ -6664,8 +6664,8 @@
 "Tb" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/crate,
-/obj/item/device/radio,
-/obj/item/device/spaceflare,
+/obj/item/radio,
+/obj/item/spaceflare,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24;
@@ -6788,7 +6788,7 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -7054,7 +7054,7 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/techfloor/grid,

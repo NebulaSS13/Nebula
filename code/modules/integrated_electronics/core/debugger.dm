@@ -1,4 +1,4 @@
-/obj/item/device/integrated_electronics/debugger
+/obj/item/integrated_electronics/debugger
 	name = "circuit debugger"
 	desc = "This small tool allows one working with custom machinery to directly set data to a specific pin, useful for writing \
 	settings to specific circuits, or for debugging purposes.  It can also pulse activation pins."
@@ -11,7 +11,7 @@
 	var/accepting_refs = FALSE
 	matter = list(MATERIAL_ALUMINIUM = 1500, MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_PLASTIC = 500)
 
-/obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
+/obj/item/integrated_electronics/debugger/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
 
 	var/new_data = null
@@ -37,7 +37,7 @@
 			data_to_write = null
 			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
 
-/obj/item/device/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
+/obj/item/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
 	. = ..()
 	if(accepting_refs && proximity)
 		data_to_write = weakref(target)
@@ -46,7 +46,7 @@
 		now off.</span>")
 		accepting_refs = FALSE
 
-/obj/item/device/integrated_electronics/debugger/proc/write_data(var/datum/integrated_io/io, mob/user)
+/obj/item/integrated_electronics/debugger/proc/write_data(var/datum/integrated_io/io, mob/user)
 	if(io.io_type == DATA_CHANNEL)
 		io.write_data_to_pin(data_to_write)
 		var/data_to_show = data_to_write

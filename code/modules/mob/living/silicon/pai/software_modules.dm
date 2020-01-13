@@ -98,7 +98,7 @@
 			var/ch_stat = user.silicon_radio.channels[ch_name]
 			var/ch_dat[0]
 			ch_dat["name"] = ch_name
-			// FREQ_LISTENING is const in /obj/item/device/radio
+			// FREQ_LISTENING is const in /obj/item/radio
 			ch_dat["listening"] = !!(ch_stat & user.silicon_radio.FREQ_LISTENING)
 			channels[++channels.len] = ch_dat
 

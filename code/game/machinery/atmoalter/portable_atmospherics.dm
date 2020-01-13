@@ -133,7 +133,7 @@
 				to_chat(user, "<span class='notice'>Nothing happens.</span>")
 				return ..()
 
-	else if (istype(W, /obj/item/device/scanner/gas))
+	else if (istype(W, /obj/item/scanner/gas))
 		return
 
 	return ..()

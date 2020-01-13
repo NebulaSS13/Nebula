@@ -41,7 +41,7 @@
 /area/template_noop)
 "ak" = (
 /obj/structure/table/standard,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/cockpit)
 "al" = (
@@ -2188,7 +2188,7 @@
 /area/template_noop)
 "SX" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/item/device/scanner/xenobio,
+/obj/item/scanner/xenobio,
 /turf/simulated/floor/tiled/white/lowpressure,
 /area/map_template/ecship/science)
 "UQ" = (

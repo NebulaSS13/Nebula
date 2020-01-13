@@ -3,7 +3,7 @@
 	var/global/list/energetic_things = list(
 		/obj/item/melee/cultblade,
 		/obj/item/card/emag,
-		/obj/item/device/multitool
+		/obj/item/multitool
 	)
 
 /datum/artifact_trigger/energy/on_hit(obj/O, mob/user)

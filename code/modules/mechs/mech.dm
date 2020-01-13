@@ -22,7 +22,7 @@
 
 	var/emp_damage = 0
 
-	var/obj/item/device/radio/exosuit/radio
+	var/obj/item/radio/exosuit/radio
 
 	var/wreckage_path = /obj/structure/mech_wreckage
 	var/mech_turn_sound = 'sound/mecha/mechturn.ogg'

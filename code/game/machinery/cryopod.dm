@@ -152,7 +152,7 @@
 	var/mob/occupant = null       // Person waiting to be despawned.
 	var/time_till_despawn = 9000  // Down to 15 minutes //30 minutes-ish is too long
 	var/time_entered = 0          // Used to keep track of the safe period.
-	var/obj/item/device/radio/intercom/announce //
+	var/obj/item/radio/intercom/announce //
 
 	var/obj/machinery/computer/cryopod/control_computer
 	var/last_no_computer_message = 0
@@ -164,8 +164,8 @@
 		/obj/item/integrated_circuit/input/teleporter_locator,
 		/obj/item/card/id/captains_spare,
 		/obj/item/aicard,
-		/obj/item/device/mmi,
-		/obj/item/device/paicard,
+		/obj/item/mmi,
+		/obj/item/paicard,
 		/obj/item/gun,
 		/obj/item/pinpointer,
 		/obj/item/clothing/suit,
@@ -243,7 +243,7 @@
 		..()
 
 /obj/machinery/cryopod/New()
-	announce = new /obj/item/device/radio/intercom(src)
+	announce = new /obj/item/radio/intercom(src)
 	..()
 
 /obj/machinery/cryopod/Destroy()
@@ -348,8 +348,8 @@
 
 		var/preserve = null
 		// Snowflaaaake.
-		if(istype(W, /obj/item/device/mmi))
-			var/obj/item/device/mmi/brain = W
+		if(istype(W, /obj/item/mmi))
+			var/obj/item/mmi/brain = W
 			if(brain.brainmob && brain.brainmob.client && brain.brainmob.key)
 				preserve = 1
 			else

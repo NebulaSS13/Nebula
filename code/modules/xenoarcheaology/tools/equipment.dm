@@ -20,7 +20,7 @@
 		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_SHIELDED
 	)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/device/scanner/health,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/pinpointer/radio,/obj/item/device/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/scanner/health,/obj/item/measuring_tape,/obj/item/ano_scanner,/obj/item/depth_scanner,/obj/item/core_sampler,/obj/item/gps,/obj/item/pinpointer/radio,/obj/item/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
 
 /obj/item/clothing/head/helmet/space/void/excavation
 	name = "excavation voidsuit helmet"
@@ -46,15 +46,15 @@
 	item_state = ACCESSORY_SLOT_UTILITY
 	can_hold = list(
 		/obj/item/storage/box/samplebags,
-		/obj/item/device/core_sampler,
+		/obj/item/core_sampler,
 		/obj/item/pinpointer/radio,
-		/obj/item/device/radio/beacon,
-		/obj/item/device/gps,
-		/obj/item/device/measuring_tape,
-		/obj/item/device/flashlight,
+		/obj/item/radio/beacon,
+		/obj/item/gps,
+		/obj/item/measuring_tape,
+		/obj/item/flashlight,
 		/obj/item/pickaxe,
-		/obj/item/device/depth_scanner,
-		/obj/item/device/camera,
+		/obj/item/depth_scanner,
+		/obj/item/camera,
 		/obj/item/paper,
 		/obj/item/photo,
 		/obj/item/folder,
@@ -66,6 +66,6 @@
 		/obj/item/wrench,
 		/obj/item/storage/excavation,
 		/obj/item/anobattery,
-		/obj/item/device/ano_scanner,
+		/obj/item/ano_scanner,
 		/obj/item/taperoll,
 		/obj/item/pickaxe/xeno/hand)

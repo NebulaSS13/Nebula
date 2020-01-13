@@ -11,7 +11,7 @@
 	var/obj/item/storage/bag/trash/mybag	= null
 	var/obj/item/mop/mymop = null
 	var/obj/item/reagent_containers/spray/myspray = null
-	var/obj/item/device/lightreplacer/myreplacer = null
+	var/obj/item/lightreplacer/myreplacer = null
 	var/signs = 0	//maximum capacity hardcoded below
 
 
@@ -59,7 +59,7 @@
 		updateUsrDialog()
 		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
-	else if(istype(I, /obj/item/device/lightreplacer) && !myreplacer)
+	else if(istype(I, /obj/item/lightreplacer) && !myreplacer)
 		if(!user.unEquip(I, src))
 			return
 		myreplacer = I

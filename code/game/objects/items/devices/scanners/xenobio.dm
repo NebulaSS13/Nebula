@@ -1,4 +1,4 @@
-/obj/item/device/scanner/xenobio
+/obj/item/scanner/xenobio
 	name = "xenolife scanner"
 	desc = "Multipurpose organic life scanner. With spectral breath analyzer you can find out what snacks Ian had! Or what gasses alien life breathes."
 	icon_state = "xenobio"
@@ -13,7 +13,7 @@
 		/mob/living/carbon/slime
 	)
 
-/obj/item/device/scanner/xenobio/is_valid_scan_target(atom/O)
+/obj/item/scanner/xenobio/is_valid_scan_target(atom/O)
 	if(is_type_in_list(O, valid_targets))
 		return TRUE
 	if(istype(O, /obj/structure/stasis_cage))
@@ -21,7 +21,7 @@
 		return !!cagie.contained
 	return FALSE
 
-/obj/item/device/scanner/xenobio/scan(mob/O, mob/user)
+/obj/item/scanner/xenobio/scan(mob/O, mob/user)
 	scan_title = O.name
 	scan_data = xenobio_scan_results(O)
 	user.show_message(SPAN_NOTICE(scan_data))

@@ -1,4 +1,4 @@
-/obj/item/device/scanner
+/obj/item/scanner
 	name = "handheld scanner"
 	desc = "A hand-held scanner of some sort. You shouldn't be seeing it."
 	icon_state = "atmos"
@@ -18,25 +18,25 @@
 	var/scan_sound
 	var/printout_color
 
-/obj/item/device/scanner/attack_self(mob/user)
+/obj/item/scanner/attack_self(mob/user)
 	show_menu(user)
 
-/obj/item/device/scanner/proc/show_menu(mob/user)
+/obj/item/scanner/proc/show_menu(mob/user)
 	var/datum/browser/popup = new(user, "scanner", scan_title, window_width, window_height)
 	popup.set_content("[get_header()]<hr>[scan_data]")
 	popup.open()
 
-/obj/item/device/scanner/proc/get_header()
+/obj/item/scanner/proc/get_header()
 	return "<a href='?src=\ref[src];print=1'>Print Report</a><a href='?src=\ref[src];clear=1'>Clear data</a>"
 
-/obj/item/device/scanner/proc/can_use(mob/user)
+/obj/item/scanner/proc/can_use(mob/user)
 	if (user.incapacitated())
 		return
 	if (!user.IsAdvancedToolUser())
 		return
 	return TRUE
 
-/obj/item/device/scanner/afterattack(atom/A, mob/user, proximity)
+/obj/item/scanner/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
 		return
 	if(!can_use(user))
@@ -54,12 +54,12 @@
 	else
 		to_chat(user, "You cannot get any results from \the [A] with \the [src].")
 
-/obj/item/device/scanner/proc/is_valid_scan_target(atom/O)
+/obj/item/scanner/proc/is_valid_scan_target(atom/O)
 	return FALSE
 
-/obj/item/device/scanner/proc/scan(atom/A, mob/user)
+/obj/item/scanner/proc/scan(atom/A, mob/user)
 
-/obj/item/device/scanner/proc/print_report_verb()
+/obj/item/scanner/proc/print_report_verb()
 	set name = "Print Report"
 	set category = "Object"
 	set src = usr
@@ -71,7 +71,7 @@
 		return
 	print_report(user)
 
-/obj/item/device/scanner/OnTopic(var/user, var/list/href_list)
+/obj/item/scanner/OnTopic(var/user, var/list/href_list)
 	if(href_list["print"])
 		print_report(user)
 		return 1
@@ -81,7 +81,7 @@
 		scan_title = null
 		return 1
 
-/obj/item/device/scanner/proc/print_report(var/mob/living/user)
+/obj/item/scanner/proc/print_report(var/mob/living/user)
 	if(!scan_data)
 		to_chat(user, "There is no scan data to print.")
 		return

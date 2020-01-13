@@ -92,7 +92,7 @@
 	icon_state = initial(icon_state)
 	item_state = initial(item_state)
 
-/obj/item/device/multitool/crystal
+/obj/item/multitool/crystal
 	name = "crystalline multitool"
 	desc = "A crystalline energy patterning tool of an alien make."
 	icon_state = "crystal_multitool"
@@ -107,7 +107,7 @@
 	item_state = "utilitybelt_crystal"
 
 /obj/item/storage/belt/utility/crystal/Initialize()
-	new /obj/item/device/multitool/crystal(src)
+	new /obj/item/multitool/crystal(src)
 	new /obj/item/wrench/crystal(src)
 	new /obj/item/crowbar/crystal(src)
 	new /obj/item/screwdriver/crystal(src)
@@ -125,7 +125,7 @@
 	attack_cooldown = 15
 
 /obj/item/storage/toolbox/crystal/Initialize()
-	new /obj/item/device/multitool/crystal(src)
+	new /obj/item/multitool/crystal(src)
 	new /obj/item/wrench/crystal(src)
 	new /obj/item/crowbar/crystal(src)
 	new /obj/item/screwdriver/crystal(src)

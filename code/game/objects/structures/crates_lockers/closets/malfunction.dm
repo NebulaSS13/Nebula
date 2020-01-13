@@ -10,4 +10,4 @@
 		/obj/item/clothing/suit/space/void,
 		/obj/item/crowbar,
 		/obj/item/cell,
-		/obj/item/device/multitool)
+		/obj/item/multitool)

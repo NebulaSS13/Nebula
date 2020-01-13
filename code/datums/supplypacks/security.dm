@@ -120,7 +120,7 @@
 
 /decl/hierarchy/supply_pack/security/weapons
 	name = "Weapons - Security basic"
-	contains = list(/obj/item/device/flash = 4,
+	contains = list(/obj/item/flash = 4,
 					/obj/item/reagent_containers/spray/pepper = 4,
 					/obj/item/melee/baton/loaded = 4,
 					/obj/item/gun/energy/taser = 4)
@@ -252,18 +252,18 @@
 /decl/hierarchy/supply_pack/security/detectivegear
 	name = "Forensics - investigation equipment"
 	contains = list(/obj/item/storage/box/evidence = 2,
-					/obj/item/device/radio/headset/headset_sec,
+					/obj/item/radio/headset/headset_sec,
 					/obj/item/taperoll/police,
 					/obj/item/clothing/glasses/sunglasses,
-					/obj/item/device/camera,
+					/obj/item/camera,
 					/obj/item/folder/red,
 					/obj/item/folder/blue,
 					/obj/item/clothing/gloves/forensic,
-					/obj/item/device/taperecorder,
-					/obj/item/device/scanner/spectrometer,
-					/obj/item/device/camera_film = 2,
+					/obj/item/taperecorder,
+					/obj/item/scanner/spectrometer,
+					/obj/item/camera_film = 2,
 					/obj/item/storage/photo_album,
-					/obj/item/device/scanner/reagent,
+					/obj/item/scanner/reagent,
 					/obj/item/storage/briefcase/crimekit = 2)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure

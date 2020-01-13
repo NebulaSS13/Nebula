@@ -17,7 +17,7 @@
 
 /datum/gear/utility/taperecorder
 	display_name = "tape recorder"
-	path = /obj/item/device/taperecorder
+	path = /obj/item/taperecorder
 
 /datum/gear/utility/folder/New()
 	..()
@@ -31,11 +31,11 @@
 
 /datum/gear/utility/paicard
 	display_name = "personal AI device"
-	path = /obj/item/device/paicard
+	path = /obj/item/paicard
 
 /datum/gear/utility/camera
 	display_name = "camera"
-	path = /obj/item/device/camera
+	path = /obj/item/camera
 
 /datum/gear/utility/photo_album
 	display_name = "photo album"
@@ -43,7 +43,7 @@
 
 /datum/gear/utility/film_roll
 	display_name = "film roll"
-	path = /obj/item/device/camera_film
+	path = /obj/item/camera_film
 
 /datum/gear/accessory/stethoscope
 	display_name = "stethoscope (medical)"

@@ -16,7 +16,7 @@
 	var/location = get_turf(holder.my_atom)
 	if(reaction_flags)
 		for(var/i = 1, i <= created_volume, i++)
-			new /obj/item/device/soulstone(location)
+			new /obj/item/soulstone(location)
 	else
 		for(var/i = 1, i <= created_volume*2, i++)
 			new /obj/item/material/shard(location, MATERIAL_CRYSTAL)

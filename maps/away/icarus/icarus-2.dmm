@@ -190,15 +190,15 @@
 /area/icarus/vessel)
 "aP" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aQ" = (
 /obj/structure/table/rack,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
 "aR" = (
@@ -1099,7 +1099,7 @@
 /area/icarus/vessel)
 "du" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dv" = (
@@ -1177,7 +1177,7 @@
 /area/icarus/vessel)
 "dH" = (
 /obj/structure/table/standard,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dI" = (

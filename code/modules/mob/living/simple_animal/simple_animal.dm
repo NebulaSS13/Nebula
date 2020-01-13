@@ -286,7 +286,7 @@
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
 		return
 
-	if(istype(O, /obj/item/device/flash))
+	if(istype(O, /obj/item/flash))
 		if(stat != DEAD)
 			O.attack(src, user, user.zone_sel.selecting)
 			return

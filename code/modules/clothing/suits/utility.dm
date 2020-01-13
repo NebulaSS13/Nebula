@@ -22,7 +22,7 @@
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 10, energy = 10, bomb = 15, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO | ARMS
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/crowbar/emergency_forcing_tool)
+	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/crowbar/emergency_forcing_tool)
 	flags_inv = HIDETAIL
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	heat_protection = UPPER_TORSO | LOWER_TORSO | ARMS
@@ -133,7 +133,7 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/device/geiger)
+	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/geiger)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT, 
 		rad = ARMOR_RAD_SHIELDED

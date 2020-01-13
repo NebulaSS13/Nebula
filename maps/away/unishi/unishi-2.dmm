@@ -15,7 +15,7 @@
 "ae" = (
 /obj/structure/table/woodentable,
 /obj/random/advdevice,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "af" = (
@@ -28,7 +28,7 @@
 "ag" = (
 /obj/structure/table/woodentable,
 /obj/item/reagent_containers/glass/bottle/tericadone,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "ah" = (
@@ -41,7 +41,7 @@
 /area/unishi/library)
 "ai" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "aj" = (
@@ -253,7 +253,7 @@
 /obj/structure/table/standard,
 /obj/item/stock_parts/circuitboard/solar_control,
 /obj/item/stock_parts/circuitboard/roboprinter,
-/obj/item/device/bot_kit,
+/obj/item/bot_kit,
 /turf/simulated/floor,
 /area/unishi/common)
 "aI" = (
@@ -684,7 +684,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "bP" = (
-/obj/item/device/flashlight/upgraded,
+/obj/item/flashlight/upgraded,
 /turf/simulated/floor,
 /area/unishi/common)
 "bQ" = (
@@ -1279,8 +1279,8 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "dn" = (
-/obj/item/device/transfer_valve,
-/obj/item/device/transfer_valve,
+/obj/item/transfer_valve,
+/obj/item/transfer_valve,
 /obj/structure/table/glass,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -1721,7 +1721,7 @@
 /area/unishi/xenobio)
 "ev" = (
 /obj/structure/table/glass,
-/obj/item/device/scanner/xenobio,
+/obj/item/scanner/xenobio,
 /obj/item/storage/box/monkeycubes,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white,
@@ -2167,7 +2167,7 @@
 "fy" = (
 /obj/structure/table/woodentable,
 /obj/random/snack,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fz" = (
@@ -2193,7 +2193,7 @@
 "fC" = (
 /obj/structure/table/woodentable,
 /obj/item/paper_bin,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fD" = (
@@ -2824,7 +2824,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gZ" = (
-/obj/item/device/geiger,
+/obj/item/geiger,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},

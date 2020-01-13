@@ -887,7 +887,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/device/flashlight,
+/obj/item/flashlight,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/airless,
@@ -1261,7 +1261,7 @@
 /area/slavers_base/secwing)
 "di" = (
 /obj/structure/table/rack,
-/obj/item/device/flashlight,
+/obj/item/flashlight,
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
@@ -1283,7 +1283,7 @@
 /area/slavers_base/secwing)
 "dl" = (
 /obj/structure/table/rack,
-/obj/item/device/flash,
+/obj/item/flash,
 /obj/random/ammo,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
@@ -1708,8 +1708,8 @@
 /area/slavers_base/secwing)
 "ep" = (
 /obj/structure/table/steel,
-/obj/item/device/flash,
-/obj/item/device/radio,
+/obj/item/flash,
+/obj/item/radio,
 /obj/item/paper{
 	info = "If this fuck from A-3 keeps thinking he's better then piece of meat, throw him to hangar and show how little pressure turns diamonds into shit.";
 	name = "Note"
@@ -2572,7 +2572,7 @@
 	},
 /obj/item/stock_parts/circuitboard/broken,
 /obj/item/contraband/poster,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -2928,7 +2928,7 @@
 /area/slavers_base/dorms)
 "hl" = (
 /obj/structure/bed,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "hm" = (
@@ -3113,7 +3113,7 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "hM" = (
@@ -3133,7 +3133,7 @@
 /area/slavers_base/demo)
 "hO" = (
 /obj/structure/table/woodentable,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "hP" = (
@@ -3798,7 +3798,7 @@
 /area/slavers_base/dorms)
 "jq" = (
 /obj/structure/table/standard,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -3941,7 +3941,7 @@
 /area/slavers_base/demo)
 "jJ" = (
 /obj/structure/table/standard,
-/obj/item/device/megaphone,
+/obj/item/megaphone,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jK" = (
@@ -3955,7 +3955,7 @@
 /area/slavers_base/demo)
 "jM" = (
 /obj/structure/table/standard,
-/obj/item/device/scanner/health,
+/obj/item/scanner/health,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jN" = (
@@ -4263,7 +4263,7 @@
 /area/slavers_base/maint)
 "kM" = (
 /obj/structure/table/standard,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kN" = (

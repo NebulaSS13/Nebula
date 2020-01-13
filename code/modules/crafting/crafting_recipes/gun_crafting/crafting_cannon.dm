@@ -31,7 +31,7 @@
 	item_icon_state = "pneumatic4"
 
 /decl/crafting_stage/cannon_valve
-	completion_trigger_type = /obj/item/device/transfer_valve
+	completion_trigger_type = /obj/item/transfer_valve
 	progress_message = "You install the transfer valve and connect it to the piping."
 	item_desc = "It is a half-finished pneumatic cannon with a transfer valve installed."
 	next_stages = list(/decl/crafting_stage/welding/cannon_valve)

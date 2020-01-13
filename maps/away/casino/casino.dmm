@@ -227,7 +227,7 @@
 	pixel_x = -30;
 	pixel_y = -8
 	},
-/obj/item/device/multitool,
+/obj/item/multitool,
 /obj/item/plastique,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
@@ -239,7 +239,7 @@
 	dir = 2;
 	id_tag = "admin_shuttle_dock_pump"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -252,7 +252,7 @@
 /area/casino/casino_bridge)
 "aL" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aM" = (
@@ -830,7 +830,7 @@
 /area/casino/casino_security)
 "cj" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "ck" = (
@@ -983,7 +983,7 @@
 /area/casino/casino_security)
 "cB" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "cC" = (
@@ -1694,7 +1694,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_storage)
 "eA" = (
-/obj/item/device/multitool,
+/obj/item/multitool,
 /obj/item/wirecutters,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -2172,7 +2172,7 @@
 /area/casino/casino_security)
 "fH" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -2812,7 +2812,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "hz" = (
-/obj/item/device/flash,
+/obj/item/flash,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "hA" = (
@@ -3757,7 +3757,7 @@
 /obj/item/storage/box/glass_extras,
 /obj/item/storage/box/glasses/pint,
 /obj/item/storage/box/glasses/wine,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "jR" = (
@@ -4030,7 +4030,7 @@
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/mask/gas,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "kG" = (
@@ -5044,7 +5044,7 @@
 /area/casino/casino_bow)
 "nj" = (
 /obj/structure/bed/chair,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -5169,7 +5169,7 @@
 /obj/machinery/vending/wallmed1{
 	pixel_x = -25
 	},
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/cable{
 	d1 = 1;

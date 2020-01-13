@@ -7,7 +7,7 @@
 /obj/structure/closet/secure_closet/personal/WillContain()
 	return list(
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
-		/obj/item/device/radio/headset
+		/obj/item/radio/headset
 	)
 
 /obj/structure/closet/secure_closet/personal/empty/WillContain()
@@ -22,7 +22,7 @@
 	closet_appearance = /decl/closet_appearance/cabinet/secure
 
 /obj/structure/closet/secure_closet/personal/cabinet/WillContain()
-	return list(/obj/item/storage/backpack/satchel/grey/withwallet, /obj/item/device/radio/headset)
+	return list(/obj/item/storage/backpack/satchel/grey/withwallet, /obj/item/radio/headset)
 
 /obj/structure/closet/secure_closet/personal/CanToggleLock(var/mob/user, var/obj/item/card/id/id_card)
 	return ..() || (istype(id_card) && id_card.registered_name && (!registered_name || (registered_name == id_card.registered_name)))

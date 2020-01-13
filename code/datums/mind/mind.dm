@@ -456,7 +456,7 @@
 				take_uplink()
 			if("crystals")
 				if (usr.client.holder.rights & R_FUN)
-					var/obj/item/device/uplink/suplink = find_syndicate_uplink()
+					var/obj/item/uplink/suplink = find_syndicate_uplink()
 					if(!suplink)
 						to_chat(usr, "<span class='warning'>Failed to find an uplink.</span>")
 						return
@@ -481,7 +481,7 @@
 	return null
 
 /datum/mind/proc/take_uplink()
-	var/obj/item/device/uplink/H = find_syndicate_uplink()
+	var/obj/item/uplink/H = find_syndicate_uplink()
 	if(H)
 		qdel(H)
 

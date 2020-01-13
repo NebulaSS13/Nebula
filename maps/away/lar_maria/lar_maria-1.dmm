@@ -509,7 +509,7 @@
 /area/lar_maria/vir_main)
 "bt" = (
 /obj/structure/table/glass,
-/obj/item/device/flashlight/pen,
+/obj/item/flashlight/pen,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bu" = (

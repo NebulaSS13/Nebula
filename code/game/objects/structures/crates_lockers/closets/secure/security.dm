@@ -14,7 +14,7 @@
 		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/head/helmet,
 		/obj/item/clothing/shoes/brown,
-		/obj/item/device/radio/headset/heads/captain,
+		/obj/item/radio/headset/heads/captain,
 		/obj/item/clothing/gloves/captain,
 		/obj/item/gun/energy/gun,
 		/obj/item/clothing/suit/armor/captain,
@@ -34,9 +34,9 @@
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/head/helmet,
-		/obj/item/device/radio/headset/heads/hop,
+		/obj/item/radio/headset/heads/hop,
 		/obj/item/storage/box/ids = 2,
-		/obj/item/device/flash
+		/obj/item/flash
 	)
 
 /obj/structure/closet/secure_closet/hop2
@@ -78,19 +78,19 @@
 		/obj/item/clothing/suit/armor/hos/jensen,
 		/obj/item/clothing/suit/armor/hos,
 		/obj/item/clothing/head/HoS/dermal,
-		/obj/item/device/radio/headset/heads/hos,
+		/obj/item/radio/headset/heads/hos,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/shield/riot,
 		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/belt/holster/security,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/melee/baton/loaded,
 		/obj/item/gun/energy/gun,
 		/obj/item/clothing/accessory/storage/holster/waist,
 		/obj/item/melee/telebaton,
 		/obj/item/clothing/head/beret/sec/corporate/hos,
-		/obj/item/device/holowarrant
+		/obj/item/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/warden
@@ -109,7 +109,7 @@
 		/obj/item/clothing/under/rank/warden/corp,
 		/obj/item/clothing/suit/armor/vest/warden,
 		/obj/item/clothing/head/warden,
-		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/storage/box/flashbangs,
@@ -120,7 +120,7 @@
 		/obj/item/gun/energy/gun,
 		/obj/item/storage/box/holobadge,
 		/obj/item/clothing/head/beret/sec/corporate/warden,
-		/obj/item/device/holowarrant
+		/obj/item/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/security
@@ -134,41 +134,41 @@
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/head/helmet,
-		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/radio/headset/headset_sec,
 		/obj/item/storage/belt/holster/security,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/grenade/chem_grenade/teargas,
 		/obj/item/melee/baton/loaded,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
-		/obj/item/device/hailer,
+		/obj/item/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/head/soft/sec/corp,
 		/obj/item/clothing/under/rank/security/corp,
 		/obj/item/gun/energy/taser,
-		/obj/item/device/holowarrant,
+		/obj/item/holowarrant,
 	)
 
 /obj/structure/closet/secure_closet/security/cargo/WillContain()
 	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 		/obj/item/clothing/accessory/armband/cargo,
-		/obj/item/device/encryptionkey/headset_cargo
+		/obj/item/encryptionkey/headset_cargo
 	))
 
 /obj/structure/closet/secure_closet/security/engine/WillContain()
 	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 			/obj/item/clothing/accessory/armband/engine,
-			/obj/item/device/encryptionkey/headset_eng
+			/obj/item/encryptionkey/headset_eng
 		))
 
 /obj/structure/closet/secure_closet/security/science/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(/obj/item/device/encryptionkey/headset_sci))
+	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(/obj/item/encryptionkey/headset_sci))
 
 /obj/structure/closet/secure_closet/security/med/WillContain()
 	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 			/obj/item/clothing/accessory/armband/medgreen,
-			/obj/item/device/encryptionkey/headset_med
+			/obj/item/encryptionkey/headset_med
 		))
 
 /obj/structure/closet/secure_closet/detective
@@ -190,14 +190,14 @@
 		/obj/item/clothing/head/det/grey,
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/storage/box/evidence,
-		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/vest/detective,
 		/obj/item/taperoll/police,
 		/obj/item/gun/projectile/pistol/sec/detective,
 		/obj/item/clothing/accessory/storage/holster/armpit,
 		/obj/item/reagent_containers/food/drinks/flask/detflask,
 		/obj/item/storage/briefcase/crimekit,
-		/obj/item/device/holowarrant
+		/obj/item/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/injection
@@ -247,9 +247,9 @@
 
 /obj/structure/closet/secure_closet/lawyer/WillContain()
 	return list(
-		/obj/item/device/flash = 2,
-		/obj/item/device/camera = 2,
-		/obj/item/device/camera_film = 2,
-		/obj/item/device/taperecorder = 2,
+		/obj/item/flash = 2,
+		/obj/item/camera = 2,
+		/obj/item/camera_film = 2,
+		/obj/item/taperecorder = 2,
 		/obj/item/storage/secure/briefcase = 2,
 	)

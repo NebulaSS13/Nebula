@@ -650,17 +650,17 @@
 	base_type = /obj/machinery/vending/boozeomat
 
 /obj/machinery/vending/assist
-	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
+	products = list(	/obj/item/assembly/prox_sensor = 5,/obj/item/assembly/igniter = 3,/obj/item/assembly/signaler = 4,
 						/obj/item/wirecutters = 1)
-	contraband = list(/obj/item/device/flashlight = 5,/obj/item/device/assembly/timer = 2)
+	contraband = list(/obj/item/flashlight = 5,/obj/item/assembly/timer = 2)
 	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
 
 /obj/machinery/vending/assist/antag
 	name = "AntagCorpVend"
 	contraband = list()
-	products = list(	/obj/item/device/assembly/prox_sensor = 5, /obj/item/device/assembly/signaler = 4,
-						/obj/item/device/assembly/infra = 4, /obj/item/device/assembly/prox_sensor = 4,
-						/obj/item/handcuffs = 8, /obj/item/device/flash = 4, /obj/item/clothing/glasses/sunglasses = 4)
+	products = list(	/obj/item/assembly/prox_sensor = 5, /obj/item/assembly/signaler = 4,
+						/obj/item/assembly/infra = 4, /obj/item/assembly/prox_sensor = 4,
+						/obj/item/handcuffs = 8, /obj/item/flash = 4, /obj/item/clothing/glasses/sunglasses = 4)
 
 /obj/machinery/vending/coffee
 	name = "Hot Drinks machine"
@@ -903,7 +903,7 @@
 	products = list(/obj/item/reagent_containers/glass/bottle/antitoxin = 4,/obj/item/reagent_containers/glass/bottle/inaprovaline = 4,
 					/obj/item/reagent_containers/glass/bottle/stoxin = 4,/obj/item/reagent_containers/glass/bottle/toxin = 4,
 					/obj/item/reagent_containers/syringe/antiviral = 4,/obj/item/reagent_containers/syringe = 12,
-					/obj/item/device/scanner/health = 5,/obj/item/reagent_containers/glass/beaker = 4, /obj/item/reagent_containers/dropper = 2,
+					/obj/item/scanner/health = 5,/obj/item/reagent_containers/glass/beaker = 4, /obj/item/reagent_containers/dropper = 2,
 					/obj/item/stack/medical/advanced/bruise_pack = 3, /obj/item/stack/medical/advanced/ointment = 3, /obj/item/stack/medical/splint = 2,
 					/obj/item/reagent_containers/hypospray/autoinjector/pain = 4)
 	contraband = list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
@@ -918,8 +918,8 @@
 	desc = "All the fine parts you need in one vending machine!"
 	base_type = /obj/machinery/vending/phoronresearch
 	products = list(/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
-					/obj/item/device/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
-					/obj/item/device/assembly/prox_sensor = 6,/obj/item/device/assembly/igniter = 6)
+					/obj/item/transfer_valve = 6,/obj/item/assembly/timer = 6,/obj/item/assembly/signaler = 6,
+					/obj/item/assembly/prox_sensor = 6,/obj/item/assembly/igniter = 6)
 
 /obj/machinery/vending/wallmed1
 	name = "NanoMed"
@@ -976,7 +976,7 @@
 		/obj/item/handcuffs = 8,
 		/obj/item/grenade/flashbang = 4,
 		/obj/item/grenade/chem_grenade/teargas = 4,
-		/obj/item/device/flash = 5,
+		/obj/item/flash = 5,
 		/obj/item/reagent_containers/food/snacks/donut/normal = 12,
 		/obj/item/storage/box/evidence = 6)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/storage/box/donut = 2)
@@ -1126,8 +1126,8 @@
 	vend_delay = 11
 	base_type = /obj/machinery/vending/tool
 	products = list(/obj/item/stack/cable_coil/random = 10,/obj/item/crowbar = 5,/obj/item/weldingtool = 3,/obj/item/wirecutters = 5,
-					/obj/item/wrench = 5,/obj/item/device/scanner/gas = 5,/obj/item/device/t_scanner = 5,/obj/item/screwdriver = 5,
-					/obj/item/device/flashlight/flare/glowstick = 3, /obj/item/device/flashlight/flare/glowstick/red = 3, /obj/item/tape_roll = 8)
+					/obj/item/wrench = 5,/obj/item/scanner/gas = 5,/obj/item/t_scanner = 5,/obj/item/screwdriver = 5,
+					/obj/item/flashlight/flare/glowstick = 3, /obj/item/flashlight/flare/glowstick/red = 3, /obj/item/tape_roll = 8)
 	contraband = list(/obj/item/weldingtool/hugetank = 2,/obj/item/clothing/gloves/insulated/cheap = 2)
 	premium = list(/obj/item/clothing/gloves/insulated = 1)
 
@@ -1144,7 +1144,7 @@
 					/obj/item/screwdriver/crystal = 5,
 					/obj/item/crowbar/crystal = 5,
 					/obj/item/wrench/crystal = 5,
-					/obj/item/device/multitool/crystal = 5,
+					/obj/item/multitool/crystal = 5,
 					/obj/item/storage/belt/utility/crystal = 5,
 					/obj/item/storage/toolbox/crystal = 5)
 
@@ -1163,7 +1163,7 @@
 	vend_delay = 21
 	base_type = /obj/machinery/vending/engivend
 	req_access = list(list(access_atmospherics,access_engine_equip))
-	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/device/geiger = 4,/obj/item/airlock_electronics = 10,/obj/item/module/power_control = 10,/obj/item/airalarm_electronics = 10,/obj/item/cell = 10,/obj/item/clamp = 10)
+	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/multitool = 4,/obj/item/geiger = 4,/obj/item/airlock_electronics = 10,/obj/item/module/power_control = 10,/obj/item/airalarm_electronics = 10,/obj/item/cell = 10,/obj/item/clamp = 10)
 	contraband = list(/obj/item/cell/high = 3)
 	premium = list(/obj/item/storage/belt/utility = 3)
 
@@ -1178,7 +1178,7 @@
 	req_access = list(list(access_atmospherics,access_engine_equip))
 	products = list(/obj/item/reagent_containers/food/drinks/bottle/oiljug = 6,
 					/obj/item/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/insulated = 4, /obj/item/screwdriver = 12,
-					/obj/item/crowbar = 12,/obj/item/wirecutters = 12,/obj/item/device/multitool = 12,/obj/item/wrench = 12,/obj/item/device/t_scanner = 12,
+					/obj/item/crowbar = 12,/obj/item/wirecutters = 12,/obj/item/multitool = 12,/obj/item/wrench = 12,/obj/item/t_scanner = 12,
 					/obj/item/cell = 8, /obj/item/weldingtool = 8,/obj/item/clothing/head/welding = 8,
 					/obj/item/light/tube = 10,/obj/item/stock_parts/scanning_module = 5,/obj/item/stock_parts/micro_laser = 5,
 					/obj/item/stock_parts/matter_bin = 5,/obj/item/stock_parts/manipulator = 5,/obj/item/stock_parts/console_screen = 5,
@@ -1198,10 +1198,10 @@
 	req_access = list(access_robotics)
 	base_type = /obj/machinery/vending/robotics
 	products = list(/obj/item/reagent_containers/food/drinks/bottle/oiljug = 5,
-					/obj/item/stack/cable_coil = 4,/obj/item/device/flash/synthetic = 4,/obj/item/cell = 4,/obj/item/device/scanner/health = 2,
+					/obj/item/stack/cable_coil = 4,/obj/item/flash/synthetic = 4,/obj/item/cell = 4,/obj/item/scanner/health = 2,
 					/obj/item/scalpel = 1,/obj/item/circular_saw = 1,/obj/item/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/screwdriver = 2,/obj/item/crowbar = 2)
-	contraband = list(/obj/item/device/flash = 2)
+	contraband = list(/obj/item/flash = 2)
 
 //FOR ACTORS GUILD - mainly props that cannot be spawned otherwise
 /obj/machinery/vending/props
@@ -1210,7 +1210,7 @@
 	icon_state = "theater"
 	icon_vend = "theater-vend"
 	icon_deny = "theater-deny"
-	products = list(/obj/structure/flora/pottedplant = 2, /obj/item/device/flashlight/lamp = 2, /obj/item/device/flashlight/lamp/green = 2, /obj/item/reagent_containers/food/drinks/jar = 1,
+	products = list(/obj/structure/flora/pottedplant = 2, /obj/item/flashlight/lamp = 2, /obj/item/flashlight/lamp/green = 2, /obj/item/reagent_containers/food/drinks/jar = 1,
 					/obj/item/nullrod = 1, /obj/item/toy/cultsword = 4, /obj/item/toy/katana = 2)
 
 /obj/machinery/vending/props/on_update_icon()

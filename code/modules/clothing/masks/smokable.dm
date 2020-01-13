@@ -131,7 +131,7 @@
 			text = lightermes
 		else if(isWelder(W))
 			text = weldermes
-		else if(istype(W, /obj/item/device/assembly/igniter))
+		else if(istype(W, /obj/item/assembly/igniter))
 			text = ignitermes
 		else
 			text = genericmes
@@ -528,7 +528,7 @@
 		if(M.lit)
 			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
 
-	else if(istype(W, /obj/item/device/assembly/igniter))
+	else if(istype(W, /obj/item/assembly/igniter))
 		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
 
 	user.update_inv_wear_mask(0)

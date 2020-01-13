@@ -57,18 +57,18 @@
 				/obj/item/weldingtool/largetank,
 				/obj/item/crowbar,
 				/obj/item/wrench,
-				/obj/item/device/flashlight)
+				/obj/item/flashlight)
 
 /obj/random/technology_scanner
 	name = "random scanner"
 	desc = "This is a random technology scanner."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "atmos"
 
 /obj/random/technology_scanner/spawn_choices()
-	return list(/obj/item/device/t_scanner = 5,
-				/obj/item/device/radio = 2,
-				/obj/item/device/scanner/gas = 5)
+	return list(/obj/item/t_scanner = 5,
+				/obj/item/radio = 2,
+				/obj/item/scanner/gas = 5)
 
 /obj/random/powercell
 	name = "random powercell"
@@ -92,11 +92,11 @@
 	icon_state = "signaller"
 
 /obj/random/bomb_supply/spawn_choices()
-	return list(/obj/item/device/assembly/igniter,
-				/obj/item/device/assembly/prox_sensor,
-				/obj/item/device/assembly/signaler,
-				/obj/item/device/assembly/timer,
-				/obj/item/device/multitool)
+	return list(/obj/item/assembly/igniter,
+				/obj/item/assembly/prox_sensor,
+				/obj/item/assembly/signaler,
+				/obj/item/assembly/timer,
+				/obj/item/multitool)
 
 /obj/random/toolbox
 	name = "random toolbox"
@@ -531,7 +531,7 @@ obj/random/closet //A couple of random closets to spice up maint
 				/obj/item/tank/emergency/nitrogen = 2,
 				/obj/item/tank/emergency/nitrogen/double = 1,
 				/obj/item/tank/nitrogen = 1,
-				/obj/item/device/suit_cooling_unit = 1)
+				/obj/item/suit_cooling_unit = 1)
 
 /obj/random/material //Random materials for building stuff
 	name = "random material"
@@ -594,10 +594,10 @@ obj/random/obstruction/spawn_choices()
 	icon_state = "gift1"
 
 /obj/random/assembly/spawn_choices()
-	return list(/obj/item/device/electronic_assembly,
-				/obj/item/device/electronic_assembly/medium,
-				/obj/item/device/electronic_assembly/large,
-				/obj/item/device/electronic_assembly/drone)
+	return list(/obj/item/electronic_assembly,
+				/obj/item/electronic_assembly/medium,
+				/obj/item/electronic_assembly/large,
+				/obj/item/electronic_assembly/drone)
 
 /obj/random/advdevice
 	name = "random advanced device"
@@ -606,23 +606,23 @@ obj/random/obstruction/spawn_choices()
 	icon_state = "game_kit"
 
 /obj/random/advdevice/spawn_choices()
-	return list(/obj/item/device/flashlight/lantern,
-				/obj/item/device/flashlight/flare,
-				/obj/item/device/flashlight/pen,
-				/obj/item/device/toner,
-				/obj/item/device/paicard,
-				/obj/item/device/destTagger,
+	return list(/obj/item/flashlight/lantern,
+				/obj/item/flashlight/flare,
+				/obj/item/flashlight/pen,
+				/obj/item/toner,
+				/obj/item/paicard,
+				/obj/item/destTagger,
 				/obj/item/beartrap,
 				/obj/item/handcuffs,
 				/obj/item/camera_assembly,
-				/obj/item/device/camera,
+				/obj/item/camera,
 				/obj/item/modular_computer/pda,
 				/obj/item/card/emag_broken,
-				/obj/item/device/radio/headset,
-				/obj/item/device/flashlight/flare/glowstick/yellow,
-				/obj/item/device/flashlight/flare/glowstick/orange,
+				/obj/item/radio/headset,
+				/obj/item/flashlight/flare/glowstick/yellow,
+				/obj/item/flashlight/flare/glowstick/orange,
 				/obj/item/grenade/light,
-				/obj/item/device/oxycandle)
+				/obj/item/oxycandle)
 
 /obj/random/smokes
 	name = "random smokeable"
@@ -993,7 +993,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/cell/infinite = 1,
 				/obj/item/archaeological_find = 2,
 				/obj/machinery/artifact = 1,
-				/obj/item/device/multitool/hacktool = 2,
+				/obj/item/multitool/hacktool = 2,
 				/obj/item/surgicaldrill = 7,
 				/obj/item/FixOVein = 7,
 				/obj/item/retractor = 7,
@@ -1004,7 +1004,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/circular_saw = 7,
 				/obj/item/scalpel = 7,
 				/obj/item/melee/baton/loaded = 9,
-				/obj/item/device/radio/headset/syndicate = 6)
+				/obj/item/radio/headset/syndicate = 6)
 
 /obj/random/voidhelmet
 	name = "Random Voidsuit Helmet"

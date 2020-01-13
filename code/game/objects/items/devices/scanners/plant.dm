@@ -1,8 +1,8 @@
 
-/obj/item/device/scanner/plant
+/obj/item/scanner/plant
 	name = "plant analyzer"
 	desc = "A hand-held botanical scanner used to analyze plants."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/fastbeep.ogg'
@@ -14,12 +14,12 @@
 		/obj/item/seeds
 	)
 
-/obj/item/device/scanner/plant/is_valid_scan_target(atom/O)
+/obj/item/scanner/plant/is_valid_scan_target(atom/O)
 	if(is_type_in_list(O, valid_targets))
 		return TRUE
 	return FALSE
 
-/obj/item/device/scanner/plant/scan(atom/A, mob/user)
+/obj/item/scanner/plant/scan(atom/A, mob/user)
 	scan_title = "[A] at [get_area(A)]"
 	scan_data = plant_scan_results(A)
 	show_menu(user)

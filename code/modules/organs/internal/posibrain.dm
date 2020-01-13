@@ -309,7 +309,7 @@
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	vital = 1
-	var/obj/item/device/mmi/stored_mmi
+	var/obj/item/mmi/stored_mmi
 	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete
 	var/ownerckey // used in the event the owner is out of body
 

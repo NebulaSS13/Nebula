@@ -137,7 +137,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "ax" = (
-/obj/item/device/radio/intercom/raider{
+/obj/item/radio/intercom/raider{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -341,7 +341,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aV" = (
-/obj/item/device/radio/intercom/raider{
+/obj/item/radio/intercom/raider{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -573,7 +573,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "br" = (
-/obj/item/device/radio/intercom/raider{
+/obj/item/radio/intercom/raider{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -689,7 +689,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bD" = (
-/obj/item/device/radio/intercom/raider{
+/obj/item/radio/intercom/raider{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -995,7 +995,7 @@
 /area/space)
 "cl" = (
 /obj/random/junk,
-/obj/item/device/radio/intercom/raider{
+/obj/item/radio/intercom/raider{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -1004,7 +1004,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "cm" = (
-/obj/item/device/radio/intercom/raider{
+/obj/item/radio/intercom/raider{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -1403,8 +1403,8 @@
 /obj/structure/table/rack,
 /obj/item/storage/belt/utility/full,
 /obj/item/storage/belt/utility/full,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
+/obj/item/multitool,
+/obj/item/multitool,
 /obj/item/clothing/shoes/magboots,
 /obj/random/maintenance,
 /obj/item/tank/oxygen,

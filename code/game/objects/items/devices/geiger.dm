@@ -4,7 +4,7 @@
 
 // Sound obtained then edited from here : https://freesound.org/people/leonelmail/sounds/328381/ -- Under creative commons 0
 
-/obj/item/device/geiger
+/obj/item/geiger
 	name = "geiger counter"
 	desc = "A handheld device used for detecting and measuring radiation in an area."
 	icon_state = "geiger_off"
@@ -17,28 +17,28 @@
 	var/geiger_volume = 0
 	var/sound_id
 
-/obj/item/device/geiger/Initialize()
+/obj/item/geiger/Initialize()
 	. = ..()
 	sound_id = "[type]_[sequential_id(type)]"
 
-/obj/item/device/geiger/proc/update_sound(var/playing)
+/obj/item/geiger/proc/update_sound(var/playing)
 	if(playing && !sound_token)
 		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, "sound/items/geiger.ogg", volume = geiger_volume, range = 4, falloff = 3, prefer_mute = TRUE)
 	else if(!playing && sound_token)
 		QDEL_NULL(sound_token)
 
-/obj/item/device/geiger/Destroy()
+/obj/item/geiger/Destroy()
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 	update_sound(0)
 
-/obj/item/device/geiger/Process()
+/obj/item/geiger/Process()
 	if(!scanning)
 		return
 	radiation_count = SSradiation.get_rads_at_turf(get_turf(src))
 	update_icon()
 
-/obj/item/device/geiger/examine(mob/user)
+/obj/item/geiger/examine(mob/user)
 	. = ..()
 	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] Roentgen."
 	if(radiation_count > RAD_LEVEL_LOW)
@@ -46,7 +46,7 @@
 	else
 		to_chat(user, "<span class='notice'>[msg]</span>")
 
-/obj/item/device/geiger/attack_self(var/mob/user)
+/obj/item/geiger/attack_self(var/mob/user)
 	scanning = !scanning
 	if(scanning)
 		START_PROCESSING(SSobj, src)
@@ -55,7 +55,7 @@
 	update_icon()
 	to_chat(user, "<span class='notice'>\icon[src] You switch [scanning ? "on" : "off"] [src].</span>")
 
-/obj/item/device/geiger/on_update_icon()
+/obj/item/geiger/on_update_icon()
 	if(!scanning)
 		icon_state = "geiger_off"
 		update_sound(0)

@@ -10,7 +10,7 @@
 	var/stage = 0
 	var/state = 0
 	var/path = 0
-	var/obj/item/device/assembly_holder/detonator = null
+	var/obj/item/assembly_holder/detonator = null
 	var/list/beakers = new/list()
 	var/list/allowed_containers = list(/obj/item/reagent_containers/glass/beaker, /obj/item/reagent_containers/glass/bottle)
 	var/affected_area = 3
@@ -48,8 +48,8 @@
 
 	attackby(obj/item/W as obj, mob/user as mob)
 
-		if(istype(W,/obj/item/device/assembly_holder) && (!stage || stage==1) && path != 2)
-			var/obj/item/device/assembly_holder/det = W
+		if(istype(W,/obj/item/assembly_holder) && (!stage || stage==1) && path != 2)
+			var/obj/item/assembly_holder/det = W
 			if(istype(det.a_left,det.a_right.type) || (!isigniter(det.a_left) && !isigniter(det.a_right)))
 				to_chat(user, "<span class='warning'>Assembly must contain one igniter.</span>")
 				return
@@ -64,10 +64,10 @@
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 25, -3)
 			detonator = det
 			if(istimer(detonator.a_left))
-				var/obj/item/device/assembly/timer/T = detonator.a_left
+				var/obj/item/assembly/timer/T = detonator.a_left
 				det_time = 10*T.time
 			if(istimer(detonator.a_right))
-				var/obj/item/device/assembly/timer/T = detonator.a_right
+				var/obj/item/assembly/timer/T = detonator.a_right
 				det_time = 10*T.time
 			icon_state = initial(icon_state) +"_ass"
 			SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
@@ -148,10 +148,10 @@
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 50, 1)
 			spawn(0) //Otherwise det_time is erroneously set to 0 after this
 				if(istimer(detonator.a_left)) //Make sure description reflects that the timer has been reset
-					var/obj/item/device/assembly/timer/T = detonator.a_left
+					var/obj/item/assembly/timer/T = detonator.a_left
 					det_time = 10*T.time
 				if(istimer(detonator.a_right))
-					var/obj/item/device/assembly/timer/T = detonator.a_right
+					var/obj/item/assembly/timer/T = detonator.a_right
 					det_time = 10*T.time
 			return
 
@@ -207,7 +207,7 @@
 		B2.reagents.add_reagent(/datum/reagent/foaming_agent, 10)
 		B2.reagents.add_reagent(/datum/reagent/acid/polyacid, 10)
 
-		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+		detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
 		beakers += B1
 		beakers += B2
@@ -230,7 +230,7 @@
 		B2.reagents.add_reagent(/datum/reagent/acid, 15)
 		B1.reagents.add_reagent(/datum/reagent/fuel,20)
 
-		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+		detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
 		beakers += B1
 		beakers += B2
@@ -252,7 +252,7 @@
 		B2.reagents.add_reagent(/datum/reagent/phosphorus, 25)
 		B2.reagents.add_reagent(/datum/reagent/sugar, 25)
 
-		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+		detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
 		beakers += B1
 		beakers += B2
@@ -273,7 +273,7 @@
 		B2.reagents.add_reagent(/datum/reagent/water, 40)
 		B2.reagents.add_reagent(/datum/reagent/space_cleaner, 10)
 
-		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+		detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
 		beakers += B1
 		beakers += B2
@@ -296,7 +296,7 @@
 		B2.reagents.add_reagent(/datum/reagent/sugar, 40)
 		B2.reagents.add_reagent(/datum/reagent/capsaicin/condensed, 80)
 
-		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+		detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
 		beakers += B1
 		beakers += B2
@@ -318,7 +318,7 @@
 	B1.reagents.add_reagent(/datum/reagent/water, 40)
 	B2.reagents.add_reagent(/datum/reagent/water, 40)
 
-	detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
 	beakers += B1
 	beakers += B2

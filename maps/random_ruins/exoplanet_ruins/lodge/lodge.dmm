@@ -34,7 +34,7 @@
 /turf/simulated/floor/wood,
 /area/template_noop)
 "i" = (
-/obj/item/device/flashlight/lamp/green,
+/obj/item/flashlight/lamp/green,
 /obj/structure/table/woodentable,
 /turf/simulated/floor/carpet/green,
 /area/template_noop)
@@ -139,7 +139,7 @@
 /area/template_noop)
 "x" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /obj/effect/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)

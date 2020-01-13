@@ -151,10 +151,10 @@ var/list/outfits_decls_by_type_
 	if(head)
 		H.equip_to_slot_or_del(new head(H),slot_head)
 	if(l_ear)
-		var/l_ear_path = (OUTFIT_ADJUSTMENT_PLAIN_HEADSET & equip_adjustments) && ispath(l_ear, /obj/item/device/radio/headset) ? /obj/item/device/radio/headset : l_ear
+		var/l_ear_path = (OUTFIT_ADJUSTMENT_PLAIN_HEADSET & equip_adjustments) && ispath(l_ear, /obj/item/radio/headset) ? /obj/item/radio/headset : l_ear
 		H.equip_to_slot_or_del(new l_ear_path(H),slot_l_ear)
 	if(r_ear)
-		var/r_ear_path = (OUTFIT_ADJUSTMENT_PLAIN_HEADSET & equip_adjustments) && ispath(r_ear, /obj/item/device/radio/headset) ? /obj/item/device/radio/headset : r_ear
+		var/r_ear_path = (OUTFIT_ADJUSTMENT_PLAIN_HEADSET & equip_adjustments) && ispath(r_ear, /obj/item/radio/headset) ? /obj/item/radio/headset : r_ear
 		H.equip_to_slot_or_del(new r_ear_path(H),slot_r_ear)
 	if(glasses)
 		H.equip_to_slot_or_del(new glasses(H),slot_glasses)

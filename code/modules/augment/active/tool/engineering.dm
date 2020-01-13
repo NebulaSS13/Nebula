@@ -10,7 +10,7 @@
 		/obj/item/weldingtool/finger,
 		/obj/item/crowbar/finger,
 		/obj/item/wirecutters/finger,
-		/obj/item/device/multitool/finger
+		/obj/item/multitool/finger
 	)
 
 /obj/item/weldingtool/finger
@@ -69,7 +69,7 @@
 	icon_state = initial(icon_state)
 	item_state = initial(item_state)
 
-/obj/item/device/multitool/finger
+/obj/item/multitool/finger
 	name = "digital multitool"
 	desc = "A multitool inside of a multitool. Doubletool?"
 	icon_state = "multitool_finger"

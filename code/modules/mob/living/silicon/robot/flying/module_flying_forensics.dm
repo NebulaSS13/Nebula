@@ -16,13 +16,13 @@
 		/obj/item/storage/evidence,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/borg/sight/hud/sec,
 		/obj/item/taperoll/police,
 		/obj/item/scalpel/laser1,
 		/obj/item/autopsy_scanner,
 		/obj/item/reagent_containers/spray/luminol,
-		/obj/item/device/uv_light,
+		/obj/item/uv_light,
 		/obj/item/crowbar
 	)
 	emag = /obj/item/gun/energy/laser/mounted

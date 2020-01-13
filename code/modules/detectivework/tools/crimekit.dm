@@ -9,7 +9,7 @@
 		/obj/item/storage/box/swabs,
 		/obj/item/storage/box/fingerprints,
 		/obj/item/reagent_containers/spray/luminol,
-		/obj/item/device/uv_light,
+		/obj/item/uv_light,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
 		/obj/item/storage/csi_markers

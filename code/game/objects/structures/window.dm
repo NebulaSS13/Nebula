@@ -503,7 +503,7 @@
 		/obj/item/stock_parts/power/apc
 	)
 
-/obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
+/obj/machinery/button/windowtint/attackby(obj/item/W as obj, mob/user as mob)
 	if(isMultitool(W))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", src.name, id), MAX_NAME_LEN)
 		if(user.incapacitated() && !user.Adjacent(src))

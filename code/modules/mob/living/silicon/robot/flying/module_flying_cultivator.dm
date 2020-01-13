@@ -17,7 +17,7 @@
 		/obj/item/circular_saw,
 		/obj/item/extinguisher,
 		/obj/item/gripper/cultivator,
-		/obj/item/device/scanner/plant,
+		/obj/item/scanner/plant,
 		/obj/item/robot_harvester
 	)
 	emag = /obj/item/melee/energy/machete

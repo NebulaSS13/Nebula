@@ -116,13 +116,13 @@
 /area/ship/scrap/cargo/lower)
 "ax" = (
 /obj/structure/table/standard,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /obj/item/paper_bin,
 /obj/item/stamp/cargo,
 /obj/item/stamp/denied,
 /obj/random/clipboard,
-/obj/item/device/radio,
-/obj/item/device/radio/intercom{
+/obj/item/radio,
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -306,7 +306,7 @@
 /area/ship/scrap/crew/dorms1)
 "aZ" = (
 /obj/machinery/chem_master,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -837,7 +837,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -874,7 +874,7 @@
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -30
 	},
@@ -1298,7 +1298,7 @@
 /obj/item/FixOVein,
 /obj/structure/closet/crate,
 /obj/item/mop,
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	level = 2
@@ -1307,7 +1307,7 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
-/obj/item/device/floor_painter,
+/obj/item/floor_painter,
 /obj/item/clothing/mask/plunger,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
@@ -1746,7 +1746,7 @@
 /obj/item/pickaxe,
 /obj/item/stack/flag/yellow,
 /obj/item/storage/box/glowsticks,
-/obj/item/device/scanner/mining,
+/obj/item/scanner/mining,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
 "em" = (
@@ -1770,7 +1770,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2129,7 +2129,7 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "eR" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -2162,8 +2162,8 @@
 /area/ship/scrap/maintenance/eva)
 "eV" = (
 /obj/structure/table/standard,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
 /obj/item/storage/box/lights/bulbs,
 /obj/item/storage/box/lights/mixed,
 /obj/structure/cable,
@@ -2181,13 +2181,13 @@
 "eW" = (
 /obj/structure/table/standard,
 /obj/item/inflatable_dispenser,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/radio,
+/obj/item/radio,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /obj/machinery/light,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
 "eX" = (
@@ -2205,7 +2205,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/storage)
 "eY" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -25
 	},
@@ -2458,7 +2458,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science)
 "pb" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -2486,7 +2486,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -30
 	},
@@ -2555,7 +2555,7 @@
 	},
 /obj/item/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding,
-/obj/item/device/scanner/gas,
+/obj/item/scanner/gas,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 9
@@ -2691,7 +2691,7 @@
 /obj/structure/sign/poster{
 	pixel_y = 32
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/lino,
@@ -2813,14 +2813,14 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
 "Fb" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -2836,7 +2836,7 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -2884,7 +2884,7 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/lino,
@@ -2990,7 +2990,7 @@
 	icon_state = "bulb1";
 	dir = 1
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/simulated/floor/lino,
@@ -3163,7 +3163,7 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/item/device/integrated_circuit_printer,
+/obj/item/integrated_circuit_printer,
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
@@ -3200,7 +3200,7 @@
 	pixel_x = 7;
 	pixel_y = 4
 	},
-/obj/item/device/t_scanner,
+/obj/item/t_scanner,
 /obj/item/cell/high,
 /obj/machinery/alarm{
 	pixel_y = 24

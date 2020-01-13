@@ -90,7 +90,7 @@
 	suit = /obj/item/clothing/suit/armor/pcarrier
 	head = /obj/item/clothing/head/soft/lar_maria/zhp_cap
 	shoes = /obj/item/clothing/shoes/dutyboots
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 
 /mob/living/simple_animal/hostile/lar_maria/guard//angry guards armed with batons and shotguns. Still bite
 	name = "\improper security"

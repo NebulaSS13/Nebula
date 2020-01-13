@@ -144,7 +144,7 @@
 	..()
 
 /obj/item/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/rate)
-	var/obj/item/device/flash/F = locate() in equipment
+	var/obj/item/flash/F = locate() in equipment
 	if(F)
 		if(F.broken)
 			F.broken = 0

@@ -157,19 +157,19 @@ var/list/mining_floors = list()
 		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return
 
-	if (istype(W, /obj/item/device/core_sampler))
+	if (istype(W, /obj/item/core_sampler))
 		geologic_data.UpdateNearbyArtifactInfo(src)
-		var/obj/item/device/core_sampler/C = W
+		var/obj/item/core_sampler/C = W
 		C.sample_item(src, user)
 		return
 
-	if (istype(W, /obj/item/device/depth_scanner))
-		var/obj/item/device/depth_scanner/C = W
+	if (istype(W, /obj/item/depth_scanner))
+		var/obj/item/depth_scanner/C = W
 		C.scan_atom(user, src)
 		return
 
-	if (istype(W, /obj/item/device/measuring_tape))
-		var/obj/item/device/measuring_tape/P = W
+	if (istype(W, /obj/item/measuring_tape))
+		var/obj/item/measuring_tape/P = W
 		user.visible_message("<span class='notice'>\The [user] extends [P] towards [src].</span>","<span class='notice'>You extend [P] towards [src].</span>")
 		if(do_after(user,10, src))
 			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>")

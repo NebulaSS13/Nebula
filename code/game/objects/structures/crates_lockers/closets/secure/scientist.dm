@@ -9,7 +9,7 @@
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_sci,
+		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/material/clipboard
 	)
@@ -25,7 +25,7 @@
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_sci,
+		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/material/clipboard,
@@ -44,9 +44,9 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/gloves/latex,
-		/obj/item/device/radio/headset/heads/rd,
+		/obj/item/radio/headset/heads/rd,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/material/clipboard,
 	)
 
@@ -56,8 +56,8 @@
 
 /obj/structure/closet/secure_closet/animal/WillContain()
 	return list(
-		/obj/item/device/assembly/signaler,
-		/obj/item/device/radio/electropack = 3,
+		/obj/item/assembly/signaler,
+		/obj/item/radio/electropack = 3,
 		/obj/item/gun/launcher/syringe/rapid,
 		/obj/item/storage/box/syringegun,
 		/obj/item/storage/box/syringes,

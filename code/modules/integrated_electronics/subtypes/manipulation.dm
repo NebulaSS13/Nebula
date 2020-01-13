@@ -351,7 +351,7 @@
 	var/atom/movable/acting_object = get_object()
 	var/turf/T = get_turf(acting_object)
 	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
-	if(!QDELETED(AM) && !istype(AM, /obj/item/device/electronic_assembly) && !istype(AM, /obj/item/device/transfer_valve) && !istype(AM, /obj/item/material/twohanded) && !istype(assembly.loc, /obj/item/implant))
+	if(!QDELETED(AM) && !istype(AM, /obj/item/electronic_assembly) && !istype(AM, /obj/item/transfer_valve) && !istype(AM, /obj/item/material/twohanded) && !istype(assembly.loc, /obj/item/implant))
 		var/mode = get_pin_data(IC_INPUT, 2)
 		if(mode == 1)
 			if(check_target(AM))
@@ -495,7 +495,7 @@
 	var/target_y_rel = round(get_pin_data(IC_INPUT, 2))
 	var/obj/item/A = get_pin_data_as_type(IC_INPUT, 3, /obj/item)
 
-	if(!A || A.anchored || A.throwing || A == assembly || istype(A, /obj/item/material/twohanded) || istype(A, /obj/item/device/transfer_valve))
+	if(!A || A.anchored || A.throwing || A == assembly || istype(A, /obj/item/material/twohanded) || istype(A, /obj/item/transfer_valve))
 		return
 
 	if (istype(assembly.loc, /obj/item/implant/compressed)) //Prevents the more abusive form of chestgun.
@@ -572,7 +572,7 @@
 	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
 		rift_location = get_step(rift_location, step_dir) || rift_location
 	else
-		var/obj/item/device/electronic_assembly/assembly = get_object()
+		var/obj/item/electronic_assembly/assembly = get_object()
 		if(assembly)
 			rift_location = get_step(rift_location, assembly.dir) || rift_location
 
@@ -607,7 +607,7 @@
 	set category = "Object"
 	set src = usr.loc
 
-	var/obj/item/device/electronic_assembly/assembly = get_object()
+	var/obj/item/electronic_assembly/assembly = get_object()
 	assembly.closed_interact(usr)
 
 /obj/item/integrated_circuit/manipulation/ai/relaymove(var/mob/user, var/direction)
@@ -646,7 +646,7 @@
 
 
 /obj/item/integrated_circuit/manipulation/ai/attackby(var/obj/item/I, var/mob/user)
-	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
+	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/paicard, /obj/item/mmi)))
 		load_ai(user, I)
 	else return ..()
 

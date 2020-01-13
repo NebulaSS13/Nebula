@@ -26,7 +26,7 @@ var/list/global/tank_gauge_cache = list()
 	var/integrity = 20
 	var/maxintegrity = 20
 	var/valve_welded = 0
-	var/obj/item/device/tankassemblyproxy/proxyassembly
+	var/obj/item/tankassemblyproxy/proxyassembly
 
 	var/volume = 70
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
@@ -38,7 +38,7 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/Initialize()
 	. = ..()
-	proxyassembly = new /obj/item/device/tankassemblyproxy(src)
+	proxyassembly = new /obj/item/tankassemblyproxy(src)
 	proxyassembly.tank = src
 
 	air_contents = new /datum/gas_mixture(volume, T20C)
@@ -55,8 +55,8 @@ var/list/global/tank_gauge_cache = list()
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(proxyassembly)
 
-	if(istype(loc, /obj/item/device/transfer_valve))
-		var/obj/item/device/transfer_valve/TTV = loc
+	if(istype(loc, /obj/item/transfer_valve))
+		var/obj/item/transfer_valve/TTV = loc
 		TTV.remove_tank(src)
 		if(!QDELETED(TTV)) // It will delete tanks inside it on qdel.
 			qdel(TTV)
@@ -98,7 +98,7 @@ var/list/global/tank_gauge_cache = list()
 	if (istype(loc, /obj/item/assembly))
 		icon = loc
 
-	if (istype(W, /obj/item/device/scanner/gas))
+	if (istype(W, /obj/item/scanner/gas))
 		return
 
 	if (istype(W,/obj/item/latexballon))
@@ -121,7 +121,7 @@ var/list/global/tank_gauge_cache = list()
 				wired = 0
 				to_chat(user, "<span class='notice'>You cut the wire and remove the device.</span>")
 
-				var/obj/item/device/assembly_holder/assy = proxyassembly.assembly
+				var/obj/item/assembly_holder/assy = proxyassembly.assembly
 				if(assy.a_left && assy.a_right)
 					assy.dropInto(usr.loc)
 					assy.master = null
@@ -149,7 +149,7 @@ var/list/global/tank_gauge_cache = list()
 		else
 			to_chat(user, "<span class='notice'>There are no wires to cut!</span>")
 
-	if(istype(W, /obj/item/device/assembly_holder))
+	if(istype(W, /obj/item/assembly_holder))
 		if(wired)
 			to_chat(user, "<span class='notice'>You begin attaching the assembly to \the [src].</span>")
 			if(do_after(user, 50, src))
@@ -389,7 +389,7 @@ var/list/global/tank_gauge_cache = list()
 
 	if(pressure > TANK_FRAGMENT_PRESSURE)
 		if(integrity <= 7)
-			if(!istype(loc,/obj/item/device/transfer_valve))
+			if(!istype(loc,/obj/item/transfer_valve))
 				log_and_message_admins("Explosive tank rupture! last key to touch the tank was [fingerprintslast].")
 
 			//Give the gas a chance to build up more pressure through reacting
@@ -420,8 +420,8 @@ var/list/global/tank_gauge_cache = list()
 			var/num_fragments = round(rand(8,10) * sqrt(strength * mult))
 			fragmentate(T, num_fragments, 7, list(/obj/item/projectile/bullet/pellet/fragment/tank/small = 7,/obj/item/projectile/bullet/pellet/fragment/tank = 2,/obj/item/projectile/bullet/pellet/fragment/strong = 1))
 
-			if(istype(loc, /obj/item/device/transfer_valve))
-				var/obj/item/device/transfer_valve/TTV = loc
+			if(istype(loc, /obj/item/transfer_valve))
+				var/obj/item/transfer_valve/TTV = loc
 				TTV.remove_tank(src)
 				qdel(TTV)
 
@@ -450,8 +450,8 @@ var/list/global/tank_gauge_cache = list()
 			var/num_fragments = round(rand(6,8) * sqrt(strength * mult)) //Less chunks, but bigger
 			fragmentate(T, num_fragments, 7, list(/obj/item/projectile/bullet/pellet/fragment/tank/small = 1,/obj/item/projectile/bullet/pellet/fragment/tank = 5,/obj/item/projectile/bullet/pellet/fragment/strong = 4))
 
-			if(istype(loc, /obj/item/device/transfer_valve))
-				var/obj/item/device/transfer_valve/TTV = loc
+			if(istype(loc, /obj/item/transfer_valve))
+				var/obj/item/transfer_valve/TTV = loc
 				TTV.remove_tank(src)
 
 			qdel(src)
@@ -512,7 +512,7 @@ var/list/global/tank_gauge_cache = list()
 
 	wired = 1
 
-	var/obj/item/device/assembly_holder/H = new(src)
+	var/obj/item/assembly_holder/H = new(src)
 	proxyassembly.assembly = H
 	H.master = proxyassembly
 
@@ -531,17 +531,17 @@ var/list/global/tank_gauge_cache = list()
 ///Pulled from rewritten bomb.dm
 /////////////////////////////////
 
-/obj/item/device/tankassemblyproxy
+/obj/item/tankassemblyproxy
 	name = "Tank assembly proxy"
 	desc = "Used as a stand in to trigger single tank assemblies... but you shouldn't see this."
 	var/obj/item/tank/tank = null
-	var/obj/item/device/assembly_holder/assembly = null
+	var/obj/item/assembly_holder/assembly = null
 
-/obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
+/obj/item/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
 
 /obj/item/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
-	var/obj/item/device/assembly_holder/S = W
+	var/obj/item/assembly_holder/S = W
 	var/mob/M = user
 	if(!S.secured)										//Check if the assembly is secured
 		return
@@ -561,7 +561,7 @@ var/list/global/tank_gauge_cache = list()
 	update_icon(TRUE)
 
 /obj/item/tank/proc/ignite()	//This happens when a bomb is told to explode
-	var/obj/item/device/assembly_holder/assy = proxyassembly.assembly
+	var/obj/item/assembly_holder/assy = proxyassembly.assembly
 	var/ign = assy.a_right
 	var/obj/item/other = assy.a_left
 
@@ -579,10 +579,10 @@ var/list/global/tank_gauge_cache = list()
 
 	air_contents.add_thermal_energy(15000)
 
-/obj/item/device/tankassemblyproxy/on_update_icon()
+/obj/item/tankassemblyproxy/on_update_icon()
 	tank.update_icon()
 
-/obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
 	if(assembly)
 		assembly.HasProximity(AM)
 

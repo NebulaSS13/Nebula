@@ -11,13 +11,13 @@
 				/obj/item/storage/backpack/industrial,
 				/obj/item/storage/backpack/satchel/eng
 			)),
-		/obj/item/device/radio/headset/headset_cargo,
+		/obj/item/radio/headset/headset_cargo,
 		/obj/item/clothing/under/rank/miner,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/black,
-		/obj/item/device/scanner/gas,
+		/obj/item/scanner/gas,
 		/obj/item/storage/ore,
-		/obj/item/device/flashlight/lantern,
+		/obj/item/flashlight/lantern,
 		/obj/item/shovel,
 		/obj/item/pickaxe,
 		/obj/item/clothing/glasses/meson

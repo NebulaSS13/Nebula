@@ -3114,7 +3114,7 @@
 "hb" = (
 /obj/structure/table/woodentable,
 /obj/item/paper_bin,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "hc" = (
@@ -4777,7 +4777,7 @@
 	},
 /obj/structure/table/standard,
 /obj/item/book/manual/mass_spectrometry,
-/obj/item/device/scanner/spectrometer,
+/obj/item/scanner/spectrometer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lS" = (
@@ -6822,7 +6822,7 @@
 "qK" = (
 /obj/structure/table/rack,
 /obj/item/clothing/mask/breath,
-/obj/item/device/flashlight,
+/obj/item/flashlight,
 /obj/item/stack/net/thirty,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)

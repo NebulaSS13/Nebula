@@ -31,7 +31,7 @@
 		)
 
 /obj/item/reagent_containers/food/condiment/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
+	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(tmp_label == label_text)
 			return

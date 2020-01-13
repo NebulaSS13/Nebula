@@ -25,9 +25,9 @@
 		"Needles" = "medicalrobot"
 		)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/borg/sight/hud/med,
-		/obj/item/device/scanner/health,
+		/obj/item/scanner/health,
 		/obj/item/reagent_containers/borghypo/surgeon,
 		/obj/item/scalpel/manager,
 		/obj/item/hemostat,
@@ -99,10 +99,10 @@
 	)
 	equipment = list(
 		/obj/item/crowbar,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/borg/sight/hud/med,
-		/obj/item/device/scanner/health,
-		/obj/item/device/scanner/reagent/adv,
+		/obj/item/scanner/health,
+		/obj/item/scanner/reagent/adv,
 		/obj/item/robot_rack/body_bag,
 		/obj/item/reagent_containers/borghypo/crisis,
 		/obj/item/shockpaddles/robot,

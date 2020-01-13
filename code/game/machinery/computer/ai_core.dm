@@ -9,7 +9,7 @@ var/global/list/empty_playable_ai_cores = list()
 	var/state = 0
 	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
 	var/obj/item/stock_parts/circuitboard/circuit = null
-	var/obj/item/device/mmi/brain = null
+	var/obj/item/mmi/brain = null
 	var/authorized
 
 /obj/structure/AIcore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
@@ -135,10 +135,10 @@ var/global/list/empty_playable_ai_cores = list()
 				laws.add_inherent_law(M.newFreeFormLaw)
 				to_chat(usr, "Added a freeform law.")
 
-			if(istype(P, /obj/item/device/mmi) || istype(P, /obj/item/organ/internal/posibrain))
+			if(istype(P, /obj/item/mmi) || istype(P, /obj/item/organ/internal/posibrain))
 				var/mob/living/carbon/brain/B
-				if(istype(P, /obj/item/device/mmi))
-					var/obj/item/device/mmi/M = P
+				if(istype(P, /obj/item/mmi))
+					var/obj/item/mmi/M = P
 					B = M.brainmob
 				else
 					var/obj/item/organ/internal/posibrain/PB = P

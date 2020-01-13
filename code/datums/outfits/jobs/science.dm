@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/science
 	hierarchy_type = /decl/hierarchy/outfit/job/science
-	l_ear = /obj/item/device/radio/headset/headset_sci
+	l_ear = /obj/item/radio/headset/headset_sci
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/modular_computer/pda/science
@@ -11,7 +11,7 @@
 
 /decl/hierarchy/outfit/job/science/rd
 	name = OUTFIT_JOB_NAME("Chief Science Officer")
-	l_ear = /obj/item/device/radio/headset/heads/rd
+	l_ear = /obj/item/radio/headset/heads/rd
 	uniform = /obj/item/clothing/under/rank/research_director
 	shoes = /obj/item/clothing/shoes/brown
 	l_hand = /obj/item/material/clipboard

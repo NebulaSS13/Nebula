@@ -27,7 +27,7 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 /datum/antagonist/actor/equip(var/mob/living/carbon/human/player)
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/chameleon(src), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/chameleon(src), slot_shoes)
-	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/entertainment(src), slot_l_ear)
+	player.equip_to_slot_or_del(new /obj/item/radio/headset/entertainment(src), slot_l_ear)
 	var/obj/item/card/id/centcom/ERT/C = new(player.loc)
 	C.assignment = "Actor"
 	player.set_id_info(C)

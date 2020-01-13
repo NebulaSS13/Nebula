@@ -254,7 +254,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -462,7 +462,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bb" = (
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -569,7 +569,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bm" = (
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -592,7 +592,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bp" = (
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -782,7 +782,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bL" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -882,7 +882,7 @@
 "bW" = (
 /obj/structure/table/woodentable,
 /obj/item/toy/figure/wizard,
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -927,7 +927,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cb" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner,
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -1099,7 +1099,7 @@
 "cr" = (
 /obj/structure/table/rack,
 /obj/item/storage/belt/utility/full,
-/obj/item/device/multitool,
+/obj/item/multitool,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	dir = 2;
@@ -1108,7 +1108,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cs" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/multitool/hacktool,
+/obj/item/multitool/hacktool,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	dir = 2;
@@ -1117,7 +1117,7 @@
 /area/map_template/ninja_dojo/dojo)
 "ct" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio/uplink,
+/obj/item/radio/uplink,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	dir = 2;
@@ -1228,7 +1228,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/item/plastique,
 /obj/item/plastique,
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -1475,7 +1475,7 @@
 	icon_state = "tube1";
 	dir = 8
 	},
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 4;
 	pixel_x = -22
 	},

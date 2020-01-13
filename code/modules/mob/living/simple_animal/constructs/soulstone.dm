@@ -2,7 +2,7 @@
 #define SOULSTONE_EMPTY 0
 #define SOULSTONE_ESSENCE 1
 
-/obj/item/device/soulstone
+/obj/item/soulstone
 	name = "soul stone shard"
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "soulstone"
@@ -18,34 +18,34 @@
 	var/smashing = 0
 	var/soulstatus = null
 
-/obj/item/device/soulstone/Initialize(var/mapload)
+/obj/item/soulstone/Initialize(var/mapload)
 	shade = new /mob/living/simple_animal/shade(src)
 	. = ..(mapload)
 
-/obj/item/device/soulstone/disrupts_psionics()
+/obj/item/soulstone/disrupts_psionics()
 	return (full == SOULSTONE_EMPTY) ? src : FALSE
 
-/obj/item/device/soulstone/proc/shatter()
+/obj/item/soulstone/proc/shatter()
 	playsound(loc, "shatter", 70, 1)
 	for(var/i=1 to rand(2,5))
 		new /obj/item/material/shard(get_turf(src), MATERIAL_NULLGLASS)
 	qdel(src)
 
-/obj/item/device/soulstone/withstand_psi_stress(var/stress, var/atom/source)
+/obj/item/soulstone/withstand_psi_stress(var/stress, var/atom/source)
 	. = ..(stress, source)
 	if(. > 0)
 		. = max(0, . - rand(2,5))
 		shatter()
 
-/obj/item/device/soulstone/full
+/obj/item/soulstone/full
 	full = SOULSTONE_ESSENCE
 	icon_state = "soulstone2"
 
-/obj/item/device/soulstone/Destroy()
+/obj/item/soulstone/Destroy()
 	QDEL_NULL(shade)
 	return ..()
 
-/obj/item/device/soulstone/examine(mob/user)
+/obj/item/soulstone/examine(mob/user)
 	. = ..()
 	if(full == SOULSTONE_EMPTY)
 		to_chat(user, "The shard still flickers with a fraction of the full artifact's power, but it needs to be filled with the essence of someone's life before it can be used.")
@@ -54,7 +54,7 @@
 	if(full == SOULSTONE_CRACKED)
 		to_chat(user, "This one is cracked and useless.")
 
-/obj/item/device/soulstone/on_update_icon()
+/obj/item/soulstone/on_update_icon()
 	if(full == SOULSTONE_EMPTY)
 		icon_state = "soulstone"
 	if(full == SOULSTONE_ESSENCE)
@@ -63,7 +63,7 @@
 		icon_state = "soulstone"//TODO: cracked sprite
 		SetName("cracked soulstone")
 
-/obj/item/device/soulstone/attackby(var/obj/item/I, var/mob/user)
+/obj/item/soulstone/attackby(var/obj/item/I, var/mob/user)
 	..()
 	if(is_evil && istype(I, /obj/item/nullrod))
 		to_chat(user, "<span class='notice'>You cleanse \the [src] of taint, purging its shackles to its creator..</span>")
@@ -78,7 +78,7 @@
 			user.visible_message("<span class='danger'>\The [user] shatters \the [src] with \the [I]!</span>")
 			shatter()
 
-/obj/item/device/soulstone/attack(var/mob/living/simple_animal/M, var/mob/user)
+/obj/item/soulstone/attack(var/mob/living/simple_animal/M, var/mob/user)
 	if(M == shade)
 		to_chat(user, "<span class='notice'>You recapture \the [M].</span>")
 		M.forceMove(src)
@@ -94,7 +94,7 @@
 	M.dust()
 	set_full(SOULSTONE_ESSENCE)
 
-/obj/item/device/soulstone/attack_self(var/mob/user)
+/obj/item/soulstone/attack_self(var/mob/user)
 	if(full != SOULSTONE_ESSENCE) // No essence - no shade
 		to_chat(user, "<span class='notice'>This [src] has no life essence.</span>")
 		return
@@ -115,7 +115,7 @@
 		if(choice == "No")
 			return
 
-/obj/item/device/soulstone/proc/set_full(var/f)
+/obj/item/soulstone/proc/set_full(var/f)
 	full = f
 	update_icon()
 
@@ -130,8 +130,8 @@
 	desc = "This eerie contraption looks like it would come alive if supplied with a missing ingredient."
 
 /obj/structure/constructshell/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/device/soulstone))
-		var/obj/item/device/soulstone/S = I
+	if(istype(I, /obj/item/soulstone))
+		var/obj/item/soulstone/S = I
 		if(!S.shade.client)
 			to_chat(user, "<span class='notice'>\The [I] has essence, but no soul. Activate it in your hand to find a soul for it first.</span>")
 			return

@@ -784,7 +784,7 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "bN" = (
@@ -1059,7 +1059,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cF" = (
-/obj/item/device/scanner/price,
+/obj/item/scanner/price,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cG" = (
@@ -1924,7 +1924,7 @@
 "ft" = (
 /obj/structure/table/standard,
 /obj/random/smokes,
-/obj/item/device/radio,
+/obj/item/radio,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/supply)
 "fu" = (

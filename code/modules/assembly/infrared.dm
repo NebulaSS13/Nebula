@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-/obj/item/device/assembly/infra
+/obj/item/assembly/infra
 	name = "infrared emitter"
 	desc = "Emits a visible or invisible beam and is triggered when the beam is interrupted."
 	icon_state = "infrared"
@@ -16,25 +16,25 @@
 	var/list/seen_turfs
 	var/datum/proximity_trigger/line/proximity_trigger
 
-/obj/item/device/assembly/infra/New()
+/obj/item/assembly/infra/New()
 	..()
 	beams = list()
 	seen_turfs = list()
-	proximity_trigger = new(src, /obj/item/device/assembly/infra/proc/on_beam_entered, /obj/item/device/assembly/infra/proc/on_visibility_change, world.view, PROXIMITY_EXCLUDE_HOLDER_TURF)
+	proximity_trigger = new(src, /obj/item/assembly/infra/proc/on_beam_entered, /obj/item/assembly/infra/proc/on_visibility_change, world.view, PROXIMITY_EXCLUDE_HOLDER_TURF)
 
-/obj/item/device/assembly/infra/Destroy()
+/obj/item/assembly/infra/Destroy()
 	qdel(proximity_trigger)
 	proximity_trigger = null
 
 	. = ..()
 
-/obj/item/device/assembly/infra/activate()
+/obj/item/assembly/infra/activate()
 	if(!..())
 		return 0//Cooldown check
 	set_active(!on)
 	return 1
 
-/obj/item/device/assembly/infra/proc/set_active(new_on)
+/obj/item/assembly/infra/proc/set_active(new_on)
 	if(new_on == on)
 		return
 	on = new_on
@@ -44,12 +44,12 @@
 		proximity_trigger.unregister_turfs()
 	update_icon()
 
-/obj/item/device/assembly/infra/toggle_secure()
+/obj/item/assembly/infra/toggle_secure()
 	secured = !secured
 	set_active(secured ? FALSE : on)
 	return secured
 
-/obj/item/device/assembly/infra/on_update_icon()
+/obj/item/assembly/infra/on_update_icon()
 	overlays.Cut()
 	if(on)
 		overlays += "infrared_on"
@@ -57,7 +57,7 @@
 		holder.update_icon()
 	update_beams()
 
-/obj/item/device/assembly/infra/interact(mob/user as mob)//TODO: change this this to the wire control panel
+/obj/item/assembly/infra/interact(mob/user as mob)//TODO: change this this to the wire control panel
 	if(!secured)
 		return
 	if(!CanInteract(user, GLOB.physical_state))
@@ -71,7 +71,7 @@
 	user << browse(jointext(dat,null), "window=infra")
 	onclose(user, "infra")
 
-/obj/item/device/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)
+/obj/item/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)
 	if(..())
 		usr << browse(null, "window=infra")
 		onclose(usr, "infra")
@@ -91,7 +91,7 @@
 	if(usr)
 		attack_self(usr)
 
-/obj/item/device/assembly/infra/proc/on_beam_entered(var/atom/enterer)
+/obj/item/assembly/infra/proc/on_beam_entered(var/atom/enterer)
 	if(enterer == src)
 		return
 	if(enterer.invisibility > INVISIBILITY_LEVEL_TWO)
@@ -108,11 +108,11 @@
 	spawn(10)
 		process_cooldown()
 
-/obj/item/device/assembly/infra/proc/on_visibility_change(var/list/old_turfs, var/list/new_turfs)
+/obj/item/assembly/infra/proc/on_visibility_change(var/list/old_turfs, var/list/new_turfs)
 	seen_turfs = new_turfs
 	update_beams()
 
-/obj/item/device/assembly/infra/proc/update_beams()
+/obj/item/assembly/infra/proc/update_beams()
 	create_update_and_delete_beams(on, visible, dir, seen_turfs, beams)
 
 /proc/create_update_and_delete_beams(var/active, var/visible, var/dir, var/list/seen_turfs, var/list/existing_beams)

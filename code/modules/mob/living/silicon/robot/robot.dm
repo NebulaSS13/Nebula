@@ -50,8 +50,8 @@
 	var/obj/item/module_state_2
 	var/obj/item/module_state_3
 
-	silicon_camera = /obj/item/device/camera/siliconcam/robot_camera
-	silicon_radio = /obj/item/device/radio/borg
+	silicon_camera = /obj/item/camera/siliconcam/robot_camera
+	silicon_radio = /obj/item/radio/borg
 
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/cell/cell = /obj/item/cell/high
@@ -62,7 +62,7 @@
 	// Components are basically robot organs.
 	var/list/components = list()
 
-	var/obj/item/device/mmi/mmi = null
+	var/obj/item/mmi/mmi = null
 
 	var/obj/item/stock_parts/matter_bin/storage = null
 
@@ -311,7 +311,7 @@
 
 	if(istype(mmi, /obj/item/organ/internal/posibrain))
 		braintype = "Robot"
-	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
+	else if(istype(mmi, /obj/item/mmi/digital/robot))
 		braintype = "Drone"
 	else
 		braintype = "Cyborg"
@@ -647,7 +647,7 @@
 			to_chat(user, "Unable to locate a radio.")
 		update_icon()
 
-	else if(istype(W, /obj/item/device/encryptionkey/) && opened)
+	else if(istype(W, /obj/item/encryptionkey/) && opened)
 		if(silicon_radio)//sanityyyyyy
 			silicon_radio.attackby(W,user)//GTFO, you have your own procs
 		else
@@ -682,7 +682,7 @@
 				to_chat(usr, "Upgrade error!")
 
 	else
-		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/scanner/health)) )
+		if( !(istype(W, /obj/item/robotanalyzer) || istype(W, /obj/item/scanner/health)) )
 			spark_system.start()
 		return ..()
 

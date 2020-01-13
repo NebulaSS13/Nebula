@@ -205,8 +205,8 @@
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/storage/firstaid(Tsec)
-	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/device/scanner/health(Tsec)
+	new /obj/item/assembly/prox_sensor(Tsec)
+	new /obj/item/scanner/health(Tsec)
 	if (prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 

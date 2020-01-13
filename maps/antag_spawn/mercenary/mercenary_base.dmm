@@ -939,12 +939,12 @@
 	id_tag = "merc_airlock";
 	req_access = list("ACCESS_SYNDICATE")
 	},
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "bz" = (
@@ -1478,9 +1478,9 @@
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
 /obj/item/inflatable_dispenser,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
+/obj/item/spaceflare,
+/obj/item/spaceflare,
+/obj/item/spaceflare,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cm" = (
@@ -2883,13 +2883,13 @@
 /obj/effect/spawner/newbomb/timer/syndicate,
 /obj/structure/table/rack,
 /obj/effect/spawner/newbomb/timer/syndicate,
-/obj/item/device/assembly/signaler{
+/obj/item/assembly/signaler{
 	pixel_y = 2
 	},
-/obj/item/device/assembly/signaler{
+/obj/item/assembly/signaler{
 	pixel_y = 2
 	},
-/obj/item/device/assembly/signaler{
+/obj/item/assembly/signaler{
 	pixel_y = 2
 	},
 /obj/effect/landmark/delete_on_shuttle{
@@ -3003,9 +3003,9 @@
 /area/map_template/merc_spawn)
 "QF" = (
 /obj/structure/table/rack,
-/obj/item/device/suit_cooling_unit,
-/obj/item/device/suit_cooling_unit,
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "QJ" = (

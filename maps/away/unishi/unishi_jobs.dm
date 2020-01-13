@@ -29,7 +29,7 @@
 
 /decl/hierarchy/outfit/job/unishi/crew
 	name = UNISHI_OUTFIT_JOB_NAME("Unishi Crewman")
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/radio
 	shoes = /obj/item/clothing/shoes/black
 	belt = /obj/item/storage/belt/utility/full
 
@@ -38,7 +38,7 @@
 	uniform = /obj/item/clothing/under/rank/engineer
 	suit = /obj/item/clothing/suit/storage/toggle/hoodie/cti
 	shoes = /obj/item/clothing/shoes/black
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/radio
 	l_pocket = /obj/item/crowbar/prybar
 
 /obj/effect/submap_landmark/spawnpoint/unishi_crew

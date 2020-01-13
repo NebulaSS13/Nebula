@@ -218,7 +218,7 @@
 		..()
 
 /mob/living/carbon/human/proc/has_headset_in_ears()
-	return istype(get_equipped_item(slot_l_ear), /obj/item/device/radio/headset) || istype(get_equipped_item(slot_r_ear), /obj/item/device/radio/headset)
+	return istype(get_equipped_item(slot_l_ear), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear), /obj/item/radio/headset)
 
 /mob/living/carbon/human/welding_eyecheck()
 	var/obj/item/organ/internal/eyes/E = src.internal_organs_by_name[species.vision_organ]

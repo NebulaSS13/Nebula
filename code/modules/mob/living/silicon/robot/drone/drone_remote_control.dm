@@ -3,7 +3,7 @@
 
 /mob/living/silicon/robot/drone
 	var/mob/living/silicon/ai/controlling_ai
-	var/obj/item/device/radio/drone_silicon_radio
+	var/obj/item/radio/drone_silicon_radio
 
 /mob/living/silicon/robot/drone/attack_ai(var/mob/living/silicon/ai/user)
 
@@ -29,7 +29,7 @@
 
 	//give controlled drone access to AI radio
 	drone_silicon_radio = silicon_radio
-	silicon_radio = new /obj/item/device/radio/headset/heads/ai_integrated(src)
+	silicon_radio = new /obj/item/radio/headset/heads/ai_integrated(src)
 	//silicon_radio.recalculateChannels()
 
 	add_language(LANGUAGE_DRONE_GLOBAL, 1)

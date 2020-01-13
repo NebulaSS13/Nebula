@@ -9,10 +9,10 @@
 		"Eyebot" = "eyebot-medical"
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/borg/sight/hud/med,
-		/obj/item/device/scanner/health,
-		/obj/item/device/scanner/reagent/adv,
+		/obj/item/scanner/health,
+		/obj/item/scanner/reagent/adv,
 		/obj/item/reagent_containers/borghypo/crisis,
 		/obj/item/extinguisher/mini,
 		/obj/item/taperoll/medical,
@@ -22,7 +22,7 @@
 		/obj/item/wrench,
 		/obj/item/crowbar,
 		/obj/item/wirecutters,
-		/obj/item/device/multitool,
+		/obj/item/multitool,
 		/obj/item/stack/medical/ointment,
 		/obj/item/stack/medical/bruise_pack,
 		/obj/item/stack/medical/splint

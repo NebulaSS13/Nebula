@@ -20,7 +20,7 @@
 
 /decl/crafting_stage/zipgun_trigger
 	item_icon_state = "zipgun3"
-	completion_trigger_type = /obj/item/device/assembly/mousetrap
+	completion_trigger_type = /obj/item/assembly/mousetrap
 	item_desc = "A half-built zipgun with a trigger and firing pin assembly loosely fitted into place."
 	progress_message = "You take the mousetrap apart and construct a crude trigger for the zipgun."
 	next_stages = list(/decl/crafting_stage/screwdriver/zipgun)

@@ -221,7 +221,7 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	ghost_trap_role = "Cultist"
 
 /datum/ghosttrap/cult/welcome_candidate(var/mob/target)
-	var/obj/item/device/soulstone/S = target.loc
+	var/obj/item/soulstone/S = target.loc
 	if(istype(S))
 		if(S.is_evil)
 			GLOB.cult.add_antagonist(target.mind)

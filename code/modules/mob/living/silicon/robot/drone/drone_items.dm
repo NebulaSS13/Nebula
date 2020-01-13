@@ -3,7 +3,7 @@
 /obj/item/gripper
 	name = "magnetic gripper"
 	desc = "A simple grasping tool specialized in construction and engineering work."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "gripper"
 
 	item_flags = ITEM_FLAG_NO_BLUDGEON
@@ -78,10 +78,10 @@
 	can_hold = list(
 		/obj/item/cell,
 		/obj/item/stock_parts,
-		/obj/item/device/mmi,
+		/obj/item/mmi,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/organ/internal/brain,
 		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
@@ -90,11 +90,11 @@
 		/obj/item/reagent_containers/glass,
 		/obj/item/reagent_containers/food/snacks/monkeycube,
 		/obj/item/stock_parts/computer,
-		/obj/item/device/transfer_valve,
-		/obj/item/device/assembly/signaler,
-		/obj/item/device/assembly/timer,
-		/obj/item/device/assembly/igniter,
-		/obj/item/device/assembly/infra,
+		/obj/item/transfer_valve,
+		/obj/item/assembly/signaler,
+		/obj/item/assembly/timer,
+		/obj/item/assembly/igniter,
+		/obj/item/assembly/infra,
 		/obj/item/tank
 		)
 
@@ -276,7 +276,7 @@
 
 	name = "matter decompiler"
 	desc = "Eating trash, bits of glass, or other debris will replenish your stores."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "decompiler"
 
 	//Metal, glass, wood, plastic.
@@ -439,7 +439,7 @@
 		else
 			module_string += text("[O]: <A HREF=?src=\ref[src];act=\ref[O]>Activate</A><BR>")
 
-		if((istype(O,/obj/item) || istype(O,/obj/item/device)) && !(istype(O,/obj/item/stack/cable_coil)))
+		if((istype(O,/obj/item) || istype(O,/obj/item)) && !(istype(O,/obj/item/stack/cable_coil)))
 			tools += module_string
 		else
 			resources += module_string

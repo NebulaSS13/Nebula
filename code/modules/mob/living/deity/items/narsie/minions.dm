@@ -10,7 +10,7 @@
 	category = DEITY_TREE_DARK_MINION
 	requirements = list(DEITY_TREE_DARK_MINION = 1)
 	base_cost = 20
-	boon_path = /obj/item/device/soulstone
+	boon_path = /obj/item/soulstone
 
 /datum/deity_item/boon/blood_zombie
 	name = "Blood Plague"

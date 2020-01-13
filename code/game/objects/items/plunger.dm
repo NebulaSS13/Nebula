@@ -11,7 +11,7 @@
 	hitsound = 'sound/effects/plunger.ogg'
 	matter = list("steel" = 5000)
 
-/obj/item/device/plunger/robot
+/obj/item/plunger/robot
 	name = "plunger"
 	desc = "a plunger. It unclogs things."
 	icon_state = "plunger_black"

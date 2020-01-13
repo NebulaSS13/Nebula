@@ -95,7 +95,7 @@
 /area/map_template/rescue_base/base)
 "aq" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/taperecorder,
+/obj/item/taperecorder,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -146,7 +146,7 @@
 /area/map_template/rescue_base/base)
 "ax" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/assembly/mousetrap,
+/obj/item/assembly/mousetrap,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -210,7 +210,7 @@
 /obj/structure/table/rack,
 /obj/item/gun/projectile/shotgun/pump/combat,
 /obj/item/gun/projectile/shotgun/pump/combat,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -266,7 +266,7 @@
 "aI" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/belt/utility/full,
-/obj/item/device/assembly/igniter,
+/obj/item/assembly/igniter,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -288,7 +288,7 @@
 "aL" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -300,7 +300,7 @@
 /obj/structure/table/reinforced,
 /obj/machinery/chemical_dispenser/bar_soft/full,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -369,7 +369,7 @@
 	},
 /area/map_template/rescue_base/base)
 "aU" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -510,7 +510,7 @@
 /obj/machinery/recharger{
 	pixel_y = 4
 	},
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -602,7 +602,7 @@
 /area/map_template/rescue_base/base)
 "br" = (
 /obj/structure/table/reinforced,
-/obj/item/device/flash,
+/obj/item/flash,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -624,8 +624,8 @@
 /area/map_template/rescue_base/base)
 "bu" = (
 /obj/structure/table/rack,
-/obj/item/device/lightreplacer,
-/obj/item/device/lightreplacer,
+/obj/item/lightreplacer,
+/obj/item/lightreplacer,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -748,7 +748,7 @@
 /area/map_template/rescue_base/base)
 "bG" = (
 /obj/structure/table/reinforced,
-/obj/item/device/camera,
+/obj/item/camera,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -838,7 +838,7 @@
 "bQ" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/captain,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -960,8 +960,8 @@
 /obj/item/storage/box/teargas,
 /obj/item/storage/box/flashbangs,
 /obj/item/storage/box/flashbangs,
-/obj/item/device/flash,
-/obj/item/device/flash,
+/obj/item/flash,
+/obj/item/flash,
 /obj/item/melee/baton/loaded,
 /obj/item/melee/baton/loaded,
 /obj/item/reagent_containers/spray/pepper,
@@ -1076,8 +1076,8 @@
 /area/map_template/rescue_base/base)
 "cl" = (
 /obj/structure/table/rack,
-/obj/item/device/flash,
-/obj/item/device/flash,
+/obj/item/flash,
+/obj/item/flash,
 /obj/item/melee/baton/loaded,
 /obj/item/melee/baton/loaded,
 /obj/item/storage/box/syringes,
@@ -1174,7 +1174,7 @@
 /obj/item/cell/high,
 /obj/item/cell/high,
 /obj/item/cell/high,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -1449,12 +1449,12 @@
 /area/map_template/rescue_base/base)
 "cL" = (
 /obj/structure/table/reinforced,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
+/obj/item/paicard,
+/obj/item/paicard,
+/obj/item/paicard,
+/obj/item/paicard,
+/obj/item/paicard,
+/obj/item/paicard,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1500,12 +1500,12 @@
 /area/map_template/rescue_base/base)
 "cQ" = (
 /obj/structure/table/reinforced,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
@@ -1547,8 +1547,8 @@
 /obj/item/storage/box/bloodpacks,
 /obj/item/tape/medical,
 /obj/item/tape/medical,
-/obj/item/device/flashlight/pen,
-/obj/item/device/flashlight/pen,
+/obj/item/flashlight/pen,
+/obj/item/flashlight/pen,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1850,7 +1850,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dw" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -1937,7 +1937,7 @@
 /obj/structure/table/reinforced,
 /obj/item/aicard,
 /obj/item/pinpointer/advpinpointer,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -1978,7 +1978,7 @@
 /area/map_template/rescue_base/base)
 "dK" = (
 /obj/machinery/pipedispenser,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -2058,7 +2058,7 @@
 /area/map_template/rescue_base/base)
 "dS" = (
 /obj/structure/table/steel,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2
 	},
 /turf/unsimulated/floor{
@@ -2143,7 +2143,7 @@
 /area/map_template/rescue_base/base)
 "ed" = (
 /obj/structure/table/reinforced,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -2312,7 +2312,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/device/radio/phone{
+/obj/item/radio/phone{
 	desc = "Should anything ever go wrong...";
 	frequency = 1345
 	},
@@ -2366,8 +2366,8 @@
 /area/map_template/rescue_base/base)
 "eA" = (
 /obj/structure/table/rack,
-/obj/item/device/flash,
-/obj/item/device/flash,
+/obj/item/flash,
+/obj/item/flash,
 /obj/item/melee/baton/loaded,
 /obj/item/melee/baton/loaded,
 /obj/item/grenade/chem_grenade/metalfoam,
@@ -2409,8 +2409,8 @@
 /obj/item/taperoll/engineering,
 /obj/item/taperoll/atmos,
 /obj/item/taperoll/atmos,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
+/obj/item/multitool,
+/obj/item/multitool,
 /obj/item/tape_roll,
 /obj/item/tape_roll,
 /obj/item/tape_roll,
@@ -2557,7 +2557,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eG" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
@@ -2800,7 +2800,7 @@
 /area/map_template/rescue_base/start)
 "fi" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 8;
 	pixel_x = 22;
 	pixel_y = 0
@@ -2854,7 +2854,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fq" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 8;
 	pixel_x = 22;
 	pixel_y = 0
@@ -2963,12 +2963,12 @@
 /area/map_template/rescue_base/start)
 "fE" = (
 /obj/structure/table/rack,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/radio,
+/obj/item/radio,
+/obj/item/radio,
+/obj/item/radio,
+/obj/item/radio,
+/obj/item/radio,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -3047,22 +3047,22 @@
 /area/map_template/rescue_base/start)
 "fO" = (
 /obj/structure/closet,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fP" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 8;
 	pixel_x = 22;
 	pixel_y = 0
@@ -3118,7 +3118,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fX" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -3379,7 +3379,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gM" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -3390,7 +3390,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gO" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 8;
 	pixel_x = 22;
 	pixel_y = 0
@@ -3451,7 +3451,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gT" = (
-/obj/item/device/flashlight/lantern,
+/obj/item/flashlight/lantern,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -3481,7 +3481,7 @@
 	},
 /obj/item/clothing/shoes/orange,
 /obj/item/clothing/under/color/orange,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	dir = 8;
 	pixel_x = 22;
 	pixel_y = 0

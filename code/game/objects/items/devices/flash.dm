@@ -1,4 +1,4 @@
-/obj/item/device/flash
+/obj/item/flash
 	name = "flash"
 	desc = "A device that produces a bright flash of light, designed to stun and disorient an attacker."
 	icon_state = "flash"
@@ -16,14 +16,14 @@
 	var/str_min = 2 //how weak the effect CAN be
 	var/str_max = 7 //how powerful the effect COULD be
 
-/obj/item/device/flash/proc/clown_check(var/mob/user)
+/obj/item/flash/proc/clown_check(var/mob/user)
 	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
 		user.unequip_item()
 		return 0
 	return 1
 
-/obj/item/device/flash/proc/flash_recharge()
+/obj/item/flash/proc/flash_recharge()
 	//capacitor recharges over time
 	for(var/i=0, i<3, i++)
 		if(last_used+600 > world.time)
@@ -34,7 +34,7 @@
 	times_used = max(0,round(times_used)) //sanity
 
 //attack_as_weapon
-/obj/item/device/flash/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/flash/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(!user || !M)	return 0 //sanity
 	admin_attack_log(user, M, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
 
@@ -133,7 +133,7 @@
 
 
 
-/obj/item/device/flash/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
+/obj/item/flash/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
 	if(!user || !clown_check(user)) 	return 0
 
 	if(broken)
@@ -179,7 +179,7 @@
 
 	return 1
 
-/obj/item/device/flash/emp_act(severity)
+/obj/item/flash/emp_act(severity)
 	if(broken)	return
 	flash_recharge()
 	switch(times_used)
@@ -199,14 +199,14 @@
 						O.show_message("<span class='disarm'>[M] is blinded by the [name]!</span>")
 	..()
 
-/obj/item/device/flash/synthetic //not for regular use, weaker effects
+/obj/item/flash/synthetic //not for regular use, weaker effects
 	name = "modified flash"
 	desc = "A device that produces a bright flash of light. This is a specialized version designed specifically for use in camera systems."
 	icon_state = "sflash"
 	str_min = 1
 	str_max = 4
 
-/obj/item/device/flash/advanced
+/obj/item/flash/advanced
 	name = "advanced flash"
 	desc = "A device that produces a very bright flash of light. This is an advanced and expensive version often issued to VIPs."
 	icon_state = "advflash"

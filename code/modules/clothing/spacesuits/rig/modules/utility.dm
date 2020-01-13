@@ -22,7 +22,6 @@
 	selectable = 1
 	toggleable = 0
 	disruptive = 0
-
 	var/obj/item/device
 
 /obj/item/rig_module/device/healthscanner
@@ -35,7 +34,7 @@
 	usable = 1
 	use_power_cost = 200
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
-	device = /obj/item/device/scanner/health
+	device = /obj/item/scanner/health
 
 /obj/item/rig_module/device/defib
 	name = "mounted defibrillator"
@@ -71,7 +70,7 @@
 	use_power_cost = 200
 	usable = 1
 	selectable = 0
-	device = /obj/item/device/ano_scanner
+	device = /obj/item/ano_scanner
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/orescanner
@@ -85,14 +84,14 @@
 	usable = 1
 	toggleable = 1
 	use_power_cost = 200
-	device = /obj/item/device/scanner/mining
+	device = /obj/item/scanner/mining
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/orescanner/activate()
 	if(!check() || !device)
 		return 0
 
-	var/obj/item/device/scanner/mining/scanner = device
+	var/obj/item/scanner/mining/scanner = device
 	scanner.put_disk_in_hand(holder.wearer)
 
 /obj/item/rig_module/device/rcd

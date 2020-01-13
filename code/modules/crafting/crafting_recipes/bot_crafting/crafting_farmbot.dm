@@ -16,7 +16,7 @@
 /decl/crafting_stage/farmbot_begin
 	progress_message = "You attach a plant scanner to the water tank."
 	begins_with_object_type = /obj/item/farmbot_arm_assembly
-	completion_trigger_type = /obj/item/device/scanner/plant
+	completion_trigger_type = /obj/item/scanner/plant
 	next_stages = list(/decl/crafting_stage/farmbot_bucket)
 	item_icon_state = "farmbot_1"
 

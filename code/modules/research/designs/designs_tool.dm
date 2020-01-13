@@ -8,7 +8,7 @@
 	id = "light_replacer"
 	req_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 4)
 	materials = list(MATERIAL_STEEL = 1500, MATERIAL_SILVER = 150, MATERIAL_GLASS = 3000)
-	build_path = /obj/item/device/lightreplacer
+	build_path = /obj/item/lightreplacer
 	sort_string = "VAGAB"
 
 /datum/design/item/tool/airlock_brace
@@ -52,7 +52,7 @@
 	id = "price_scanner"
 	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3000, MATERIAL_SILVER = 250)
-	build_path = /obj/item/device/scanner/price
+	build_path = /obj/item/scanner/price
 	sort_string = "VAGAF"
 
 /datum/design/item/tool/experimental_welder
@@ -89,5 +89,5 @@
 	req_tech = list(TECH_ENGINEERING = 2)
 	materials = list(MATERIAL_STEEL = 3000)
 	chemicals = list(/datum/reagent/sodiumchloride = 20, /datum/reagent/acetone = 20)
-	build_path = /obj/item/device/oxycandle
+	build_path = /obj/item/oxycandle
 	sort_string = "VAGAJ"

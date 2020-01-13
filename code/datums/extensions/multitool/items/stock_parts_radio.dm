@@ -8,7 +8,7 @@
 		return STATUS_CLOSE
 	return ..()	
 
-/datum/extension/interactive/multitool/radio/interact(obj/item/device/multitool/M, mob/user)
+/datum/extension/interactive/multitool/radio/interact(obj/item/multitool/M, mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)
 		return
 	var/obj/machinery/actual_machine = machine && machine.resolve()
@@ -17,7 +17,7 @@
 	return ..()
 
 // Could use buffers, but am afraid of multitool interaction clashes.
-/datum/extension/interactive/multitool/radio/proc/aquire_target(obj/item/device/multitool/M, mob/user)
+/datum/extension/interactive/multitool/radio/proc/aquire_target(obj/item/multitool/M, mob/user)
 	var/candidates = list()
 	for(var/obj/machinery/new_machine in view(2, user))
 		candidates += new_machine
@@ -30,7 +30,7 @@
 	machine = weakref(input)
 	return input
 
-/datum/extension/interactive/multitool/radio/get_interact_window(obj/item/device/multitool/M, mob/user)
+/datum/extension/interactive/multitool/radio/get_interact_window(obj/item/multitool/M, mob/user)
 	var/obj/item/stock_parts/radio/radio = holder
 	var/list/dat = list()
 
@@ -159,7 +159,7 @@
 	radio.sanitize_events(actual_machine, radio.transmit_on_change)
 	radio.sanitize_events(actual_machine, radio.transmit_on_tick)
 
-/datum/extension/interactive/multitool/radio/transmitter/get_interact_window(obj/item/device/multitool/M, mob/user)
+/datum/extension/interactive/multitool/radio/transmitter/get_interact_window(obj/item/multitool/M, mob/user)
 	var/obj/item/stock_parts/radio/transmitter/basic/radio = holder
 	var/list/dat = list()
 
@@ -193,7 +193,7 @@
 		radio.event = null
 	radio.sanitize_events(actual_machine, radio.transmit_on_event)
 
-/datum/extension/interactive/multitool/radio/event_transmitter/get_interact_window(obj/item/device/multitool/M, mob/user)
+/datum/extension/interactive/multitool/radio/event_transmitter/get_interact_window(obj/item/multitool/M, mob/user)
 	var/obj/item/stock_parts/radio/transmitter/on_event/radio = holder
 	var/list/dat = list()
 
@@ -235,7 +235,7 @@
 	radio.sanitize_events(actual_machine, radio.receive_and_call)
 	radio.sanitize_events(actual_machine, radio.receive_and_write)
 
-/datum/extension/interactive/multitool/radio/receiver/get_interact_window(obj/item/device/multitool/M, mob/user)
+/datum/extension/interactive/multitool/radio/receiver/get_interact_window(obj/item/multitool/M, mob/user)
 	var/obj/item/stock_parts/radio/receiver/radio = holder
 	var/list/dat = list()
 

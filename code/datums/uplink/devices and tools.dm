@@ -48,7 +48,7 @@
 	name = "Encrypted Radio Channel Key"
 	desc = "This headset encryption key will allow you to speak on a hidden, encrypted radio channel. Use a screwdriver on your headset to exchange keys."
 	item_cost = 1
-	path = /obj/item/device/encryptionkey/syndicate
+	path = /obj/item/encryptionkey/syndicate
 
 /datum/uplink_item/item/tools/shield_diffuser
 	name = "Handheld Shield Diffuser"
@@ -62,7 +62,7 @@
 	suit sensors in your vicinity. The range at which this device operates can be toggled as well. All of these \
 	options drain the internal battery."
 	item_cost = 20
-	path = /obj/item/device/suit_sensor_jammer
+	path = /obj/item/suit_sensor_jammer
 
 /datum/uplink_item/item/tools/encryptionkey_binary
 	name = "Binary Translator Key"
@@ -70,7 +70,7 @@
 	synthetics and AI have access to. Remember, non-synths don't normally have access to this channel, so talking in it will raise suspicion. \
 	Use a screwdriver on your headset to exchange keys."
 	item_cost = 20
-	path = /obj/item/device/encryptionkey/binary
+	path = /obj/item/encryptionkey/binary
 
 /datum/uplink_item/item/tools/emag
 	name = "Cryptographic Sequencer"
@@ -84,7 +84,7 @@
 /datum/uplink_item/item/tools/hacking_tool
 	name = "Door Hacking Tool"
 	item_cost = 24
-	path = /obj/item/device/multitool/hacktool
+	path = /obj/item/multitool/hacktool
 	desc = "Appears and functions as a standard multitool until a screwdriver is used to toggle it. \
 			While in hacking mode, this device will grant full access to any airlock in 20 to 40 seconds. \
 			This device will be able to continuously reaccess the last 6 to 8  airlocks it was used on."
@@ -106,7 +106,7 @@
 	name = "Flashdark"
 	desc = "A device similar to a flash light that absorbs the surrounding light, casting a shadowy, black mass."
 	item_cost = 32
-	path = /obj/item/device/flashlight/flashdark
+	path = /obj/item/flashlight/flashdark
 
 /datum/uplink_item/item/tools/powersink
 	name = "Powersink (DANGER!)"
@@ -114,7 +114,7 @@
 	draining power at an alarming rate. Use with caution, as this will be extremely noticable to anyone \
 	monitoring the power systems."
 	item_cost = 40
-	path = /obj/item/device/powersink
+	path = /obj/item/powersink
 
 /datum/uplink_item/item/tools/teleporter
 	name = "Teleporter Circuit Board"
@@ -152,7 +152,7 @@
 /datum/uplink_item/item/tools/interceptor
 	name = "Radio Interceptor"
 	item_cost = 30
-	path = /obj/item/device/radio/intercept
+	path = /obj/item/radio/intercept
 	desc = "A receiver-like device that can intercept secure radio channels. This item is too big to fit into your pockets."
 
 /datum/uplink_item/item/tools/ttv

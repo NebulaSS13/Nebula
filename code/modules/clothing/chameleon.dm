@@ -293,7 +293,7 @@
 //**Chameleon Headset**
 //*********************
 
-/obj/item/device/radio/headset/chameleon
+/obj/item/radio/headset/chameleon
 	name = "radio headset"
 	icon_state = "headset"
 	item_state = "headset"
@@ -302,12 +302,12 @@
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 	var/list/global/clothing_choices
 
-/obj/item/device/radio/headset/chameleon/Initialize()
+/obj/item/radio/headset/chameleon/Initialize()
 	. = ..()
 	if(!clothing_choices)
-		clothing_choices = generate_chameleon_choices(/obj/item/device/radio/headset)
+		clothing_choices = generate_chameleon_choices(/obj/item/radio/headset)
 
-/obj/item/device/radio/headset/chameleon/verb/change(picked in clothing_choices)
+/obj/item/radio/headset/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Headset Appearance"
 	set category = "Chameleon Items"
 	set src in usr

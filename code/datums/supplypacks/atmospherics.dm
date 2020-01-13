@@ -17,7 +17,7 @@
 			 		/obj/item/clothing/suit/space/emergency = 4,
 					/obj/item/clothing/head/helmet/space/emergency = 4,
 					/obj/item/clothing/mask/gas = 4,
-					/obj/item/device/flashlight/flare/glowstick = 5)
+					/obj/item/flashlight/flare/glowstick = 5)
 	cost = 25
 
 	containername = "emergency crate"

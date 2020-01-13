@@ -10,14 +10,14 @@
 		"Mop Gear Rex" = "mopgearrex"
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/soap,
 		/obj/item/storage/bag/trash,
 		/obj/item/mop/advanced,
 		/obj/item/holosign_creator,
-		/obj/item/device/lightreplacer,
+		/obj/item/lightreplacer,
 		/obj/item/borg/sight/hud/jani,
-		/obj/item/device/plunger/robot,
+		/obj/item/plunger/robot,
 		/obj/item/crowbar,
 		/obj/item/weldingtool
 	)
@@ -35,7 +35,7 @@
 
 /obj/item/robot_module/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	var/obj/item/device/lightreplacer/LR = locate() in equipment
+	var/obj/item/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
 	if(emag)
 		var/obj/item/reagent_containers/spray/S = emag

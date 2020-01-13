@@ -2,7 +2,7 @@
 	name = "Spec Ops - Officer"
 	uniform = /obj/item/clothing/under/syndicate/combat
 	suit = /obj/item/clothing/suit/armor/swat/officer
-	l_ear = /obj/item/device/radio/headset/ert
+	l_ear = /obj/item/radio/headset/ert
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	head = /obj/item/clothing/head/beret/deathsquad
@@ -29,7 +29,7 @@
 	uniform = /obj/item/clothing/under/ert
 	shoes = /obj/item/clothing/shoes/swat
 	gloves = /obj/item/clothing/gloves/thick/swat
-	l_ear = /obj/item/device/radio/headset/ert
+	l_ear = /obj/item/radio/headset/ert
 	belt = /obj/item/gun/energy/gun
 	glasses = /obj/item/clothing/glasses/sunglasses
 	back = /obj/item/storage/backpack/satchel
@@ -55,7 +55,7 @@
 	name = "Spec Ops - Mercenary"
 	uniform = /obj/item/clothing/under/syndicate
 	shoes = /obj/item/clothing/shoes/combat
-	l_ear = /obj/item/device/radio/headset/syndicate/alt
+	l_ear = /obj/item/radio/headset/syndicate/alt
 	belt = /obj/item/storage/belt/holster/security
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat
@@ -91,6 +91,6 @@
 	uniform =  /obj/item/clothing/under/suit_jacket/charcoal
 	shoes =    /obj/item/clothing/shoes/black
 	l_hand =   /obj/item/storage/briefcase/foundation
-	l_ear =    /obj/item/device/radio/headset/foundation
+	l_ear =    /obj/item/radio/headset/foundation
 	holster =  /obj/item/clothing/accessory/storage/holster/armpit
 	id_slot =  slot_wear_id

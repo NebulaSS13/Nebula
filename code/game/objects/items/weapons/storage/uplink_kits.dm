@@ -63,7 +63,7 @@
 	startswith = list(
 		/obj/item/clothing/gloves/chameleon,
 		/obj/item/clothing/glasses/chameleon,
-		/obj/item/device/radio/headset/chameleon,
+		/obj/item/radio/headset/chameleon,
 		/obj/item/clothing/accessory/chameleon,
 		/obj/item/clothing/accessory/chameleon,
 		/obj/item/clothing/accessory/chameleon
@@ -76,13 +76,13 @@
 		/obj/item/hand_labeler,
 		/obj/item/stamp/chameleon,
 		/obj/item/pen/chameleon,
-		/obj/item/device/destTagger,
+		/obj/item/destTagger,
 		)
 
 /obj/item/storage/box/syndie_kit/spy
 	startswith = list(
-		/obj/item/device/spy_bug = 6,
-		/obj/item/device/spy_monitor
+		/obj/item/spy_bug = 6,
+		/obj/item/spy_monitor
 	)
 
 /obj/item/storage/box/syndie_kit/silenced

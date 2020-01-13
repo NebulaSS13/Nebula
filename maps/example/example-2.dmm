@@ -127,8 +127,8 @@
 /obj/item/scalpel/laser1,
 /obj/item/scalpel/laser2,
 /obj/item/scalpel/laser3,
-/obj/item/device/robotanalyzer,
-/obj/item/device/scanner/health,
+/obj/item/robotanalyzer,
+/obj/item/scanner/health,
 /obj/item/storage/firstaid/adv,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)

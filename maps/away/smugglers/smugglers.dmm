@@ -101,11 +101,11 @@
 /turf/simulated/floor/airless,
 /area/smugglers/base)
 "au" = (
-/obj/item/device/flashlight/flare/glowstick/yellow{
+/obj/item/flashlight/flare/glowstick/yellow{
 	pixel_x = 5;
 	pixel_y = 7
 	},
-/obj/item/device/flashlight/flare/glowstick/yellow,
+/obj/item/flashlight/flare/glowstick/yellow,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "av" = (
@@ -703,7 +703,7 @@
 /obj/structure/table/woodentable,
 /obj/item/paper,
 /obj/item/pen,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /obj/structure/cable{
 	d2 = 8;
 	icon_state = "0-8"

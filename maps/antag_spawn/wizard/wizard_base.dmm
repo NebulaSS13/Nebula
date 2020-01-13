@@ -24,7 +24,7 @@
 /area/map_template/wizard_station)
 "af" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp/green{
+/obj/item/flashlight/lamp/green{
 	on = 0;
 	pixel_x = -3;
 	pixel_y = 8
@@ -70,7 +70,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/wizard_station)
 "an" = (
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -195,7 +195,7 @@
 "aD" = (
 /obj/structure/table/woodentable,
 /obj/machinery/computer/modular/preset/library,
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -309,7 +309,7 @@
 /area/map_template/wizard_station)
 "aQ" = (
 /obj/structure/table/woodentable,
-/obj/item/device/megaphone,
+/obj/item/megaphone,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -358,7 +358,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -400,7 +400,7 @@
 "bb" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_soft/full,
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -427,7 +427,7 @@
 /obj/item/clothing/suit/wizrobe/gentlecoat,
 /obj/item/clothing/head/wizard/cap,
 /obj/item/staff/gentcane,
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -498,7 +498,7 @@
 	},
 /area/map_template/wizard_station)
 "bm" = (
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -521,7 +521,7 @@
 	},
 /area/map_template/wizard_station)
 "bp" = (
-/obj/item/device/radio/intercom/syndicate{
+/obj/item/radio/intercom/syndicate{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -595,7 +595,7 @@
 /area/map_template/wizard_station)
 "bz" = (
 /obj/structure/table/marble,
-/obj/item/device/flashlight/slime,
+/obj/item/flashlight/slime,
 /turf/unsimulated/floor{
 	name = "plating";
 	icon_state = "cult"

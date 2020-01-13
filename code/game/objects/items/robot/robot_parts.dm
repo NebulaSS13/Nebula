@@ -72,8 +72,8 @@
 	part = list(BP_HEAD)
 	model_info = 1
 	bp_tag = BP_HEAD
-	var/obj/item/device/flash/flash1 = null
-	var/obj/item/device/flash/flash2 = null
+	var/obj/item/flash/flash1 = null
+	var/obj/item/flash/flash2 = null
 
 /obj/item/robot_parts/head/can_install(mob/user)
 	var/success = TRUE
@@ -125,7 +125,7 @@
 
 /obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/device/flash))
+	if(istype(W, /obj/item/flash))
 		if(istype(user,/mob/living/silicon/robot))
 			var/current_module = user.get_active_hand()
 			if(current_module == W)

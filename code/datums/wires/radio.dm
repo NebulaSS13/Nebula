@@ -1,5 +1,5 @@
 /datum/wires/radio
-	holder_type = /obj/item/device/radio
+	holder_type = /obj/item/radio
 	wire_count = 3
 	descriptions = list(
 		new /datum/wire_description(WIRE_SIGNAL, "This wire connects several radio components."),
@@ -12,19 +12,19 @@ var/const/WIRE_RECEIVE = 2
 var/const/WIRE_TRANSMIT = 4
 
 /datum/wires/radio/CanUse(var/mob/living/L)
-	var/obj/item/device/radio/R = holder
+	var/obj/item/radio/R = holder
 	if(R.b_stat)
 		return 1
 	return 0
 
 /datum/wires/radio/GetInteractWindow(mob/user)
-	var/obj/item/device/radio/R = holder
+	var/obj/item/radio/R = holder
 	. += ..()
 	if(R.cell)
 		. += "<BR><A href='?src=\ref[R];remove_cell=1'>Remove cell</A><BR>"
 
 /datum/wires/radio/UpdatePulsed(var/index)
-	var/obj/item/device/radio/R = holder
+	var/obj/item/radio/R = holder
 	switch(index)
 		if(WIRE_SIGNAL)
 			R.listening = !R.listening && !IsIndexCut(WIRE_RECEIVE)
@@ -38,7 +38,7 @@ var/const/WIRE_TRANSMIT = 4
 	SSnano.update_uis(holder)
 
 /datum/wires/radio/UpdateCut(var/index, var/mended)
-	var/obj/item/device/radio/R = holder
+	var/obj/item/radio/R = holder
 	switch(index)
 		if(WIRE_SIGNAL)
 			R.listening = mended && !IsIndexCut(WIRE_RECEIVE)

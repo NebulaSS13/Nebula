@@ -159,7 +159,7 @@
 	icon_state = "weldtank"
 	amount_per_transfer_from_this = 10
 	var/modded = 0
-	var/obj/item/device/assembly_holder/rig = null
+	var/obj/item/assembly_holder/rig = null
 	initial_reagent_types = list(/datum/reagent/fuel = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
@@ -189,7 +189,7 @@
 		if (modded)
 			log_and_message_admins("opened a fuel tank at [loc.loc.name], leaking fuel.")
 			leak_fuel(amount_per_transfer_from_this)
-	else if (istype(W,/obj/item/device/assembly_holder))
+	else if (istype(W,/obj/item/assembly_holder))
 		if (rig)
 			to_chat(user, "<span class='warning'>There is another device already in the way.</span>")
 			return ..()
@@ -199,8 +199,8 @@
 				return
 			user.visible_message("<span class='notice'>\The [user] rigs \the [W] to \the [src].</span>", "<span class='notice'>You rig \the [W] to \the [src].</span>")
 
-			var/obj/item/device/assembly_holder/H = W
-			if (istype(H.a_left,/obj/item/device/assembly/igniter) || istype(H.a_right,/obj/item/device/assembly/igniter))
+			var/obj/item/assembly_holder/H = W
+			if (istype(H.a_left,/obj/item/assembly/igniter) || istype(H.a_right,/obj/item/assembly/igniter))
 				log_and_message_admins("rigged a fuel tank for explosion at [loc.loc.name].")
 			rig = W
 			var/icon/test = getFlatIcon(W)

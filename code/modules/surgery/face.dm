@@ -6,7 +6,7 @@
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/stack/cable_coil = 75,
-		/obj/item/device/assembly/mousetrap = 10,
+		/obj/item/assembly/mousetrap = 10,
 		/obj/item/material/kitchen/utensil/fork = 75
 	)
 	min_duration = 100

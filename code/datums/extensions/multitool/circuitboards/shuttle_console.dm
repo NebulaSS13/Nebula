@@ -1,7 +1,7 @@
 /datum/extension/interactive/multitool/circuitboards/shuttle_console
 	expected_type = /obj/item/stock_parts/circuitboard/shuttle_console
 
-/datum/extension/interactive/multitool/circuitboards/shuttle_console/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
+/datum/extension/interactive/multitool/circuitboards/shuttle_console/get_interact_window(var/obj/item/multitool/M, var/mob/user)
 	var/obj/item/stock_parts/circuitboard/shuttle_console/board = holder
 	var/dat = list()
 	dat += "<b>Current Selected Shuttle:</b>  [board.shuttle_tag || "NONE"]<br>"

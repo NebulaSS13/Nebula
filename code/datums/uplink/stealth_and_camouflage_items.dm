@@ -51,7 +51,7 @@
 	name = "Chameleon Projector"
 	desc = "Use this to scan a small, portable object in order to disguise yourself as said object."
 	item_cost = 32
-	path = /obj/item/device/chameleon
+	path = /obj/item/chameleon
 
 /datum/uplink_item/item/stealth_items/sneakies
 	name = "Sneakies"

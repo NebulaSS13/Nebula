@@ -10,7 +10,7 @@
 /obj/item/locator
 	name = "locator"
 	desc = "Used to track those with locater implants."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "locator"
 	var/temp = null
 	var/frequency = 1451
@@ -60,7 +60,7 @@ Frequency:
 			if (sr)
 				src.temp += "<B>Located Beacons:</B><BR>"
 
-				for(var/obj/item/device/radio/beacon/W in world)
+				for(var/obj/item/radio/beacon/W in world)
 					if(!W.functioning)
 						continue
 					if (W.frequency == src.frequency)

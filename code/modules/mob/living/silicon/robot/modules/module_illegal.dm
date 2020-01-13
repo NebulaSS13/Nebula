@@ -7,7 +7,7 @@
 		"Dread" = "securityrobot"
 	)
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/melee/energy/sword,
 		/obj/item/gun/energy/pulse_rifle/destroyer,
 		/obj/item/crowbar,

@@ -29,7 +29,7 @@
 	path = /obj/item/reagent_containers/food/drinks/glass2/carafe
 
 /datum/fabricator_recipe/flashlight
-	path = /obj/item/device/flashlight
+	path = /obj/item/flashlight
 
 /datum/fabricator_recipe/floor_light
 	path = /obj/machinery/floor_light
@@ -41,13 +41,13 @@
 	path = /obj/item/glass_jar
 
 /datum/fabricator_recipe/radio_headset
-	path = /obj/item/device/radio/headset
+	path = /obj/item/radio/headset
 
 /datum/fabricator_recipe/radio_bounced
-	path = /obj/item/device/radio/off
+	path = /obj/item/radio/off
 
 /datum/fabricator_recipe/suit_cooler
-	path = /obj/item/device/suit_cooling_unit
+	path = /obj/item/suit_cooling_unit
 
 /datum/fabricator_recipe/weldermask
 	path = /obj/item/clothing/head/welding
@@ -56,10 +56,10 @@
 	path = /obj/item/material/knife/kitchen
 
 /datum/fabricator_recipe/taperecorder
-	path = /obj/item/device/taperecorder/empty
+	path = /obj/item/taperecorder/empty
 
 /datum/fabricator_recipe/tape
-	path = /obj/item/device/tape
+	path = /obj/item/tape
 
 /datum/fabricator_recipe/tube/large
 	path = /obj/item/light/tube/large
@@ -105,7 +105,7 @@
 	path = /obj/item/material/clipboard/plastic
 
 /datum/fabricator_recipe/destTagger
-	path = /obj/item/device/destTagger
+	path = /obj/item/destTagger
 
 /datum/fabricator_recipe/labeler
 	path = /obj/item/hand_labeler

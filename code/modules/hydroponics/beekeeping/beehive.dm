@@ -103,7 +103,7 @@
 			B.fill()
 		update_icon()
 		return
-	else if(istype(I, /obj/item/device/scanner/plant))
+	else if(istype(I, /obj/item/scanner/plant))
 		to_chat(user, "<span class='notice'>Scan result of \the [src]...</span>")
 		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
 		if(frames)
@@ -220,7 +220,7 @@
 /obj/item/bee_smoker
 	name = "bee smoker"
 	desc = "A device used to calm down bees before harvesting honey."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "battererburnt"
 	w_class = ITEM_SIZE_SMALL
 

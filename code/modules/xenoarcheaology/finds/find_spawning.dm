@@ -302,7 +302,7 @@
 /obj/item/archaeological_find/crystal/spawn_item()
 	var/obj/item/new_item
 	if(prob(25))
-		new_item = new /obj/item/device/soulstone(loc)
+		new_item = new /obj/item/soulstone(loc)
 	else
 		new_item = new(loc)
 	apply_image_decorations = 1
@@ -334,7 +334,7 @@
 	find_type = ARCHAEO_TELEBEACON
 
 /obj/item/archaeological_find/beacon/spawn_item()
-	var/obj/item/device/radio/beacon/new_item = new(loc)
+	var/obj/item/radio/beacon/new_item = new(loc)
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_item.icon_state = "unknown[rand(1,4)]"
 	new_item.desc = ""

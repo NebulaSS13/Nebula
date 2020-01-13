@@ -203,7 +203,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aC" = (
-/obj/item/device/multitool,
+/obj/item/multitool,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aD" = (
@@ -429,7 +429,7 @@
 /area/constructionsite/maintenance)
 "bj" = (
 /obj/structure/table/standard,
-/obj/item/device/scanner/gas,
+/obj/item/scanner/gas,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bk" = (
@@ -858,7 +858,7 @@
 /area/derelict/ship)
 "cK" = (
 /obj/structure/table/standard,
-/obj/item/device/radio/off,
+/obj/item/radio/off,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "cL" = (

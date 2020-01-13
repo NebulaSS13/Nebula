@@ -635,7 +635,7 @@
 	else
 		if (istype(user, /mob/living/silicon))
 			return attack_robot(user)
-		if (!opened && wiresexposed && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/device/assembly/signaler)))
+		if (!opened && wiresexposed && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/assembly/signaler)))
 			return wires.Interact(user)
 
 		user.visible_message("<span class='danger'>The [src.name] has been hit with the [W.name] by [user.name]!</span>", \

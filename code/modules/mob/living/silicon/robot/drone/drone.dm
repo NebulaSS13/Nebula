@@ -51,7 +51,7 @@ var/list/mob_hat_cache = list()
 
 	laws = /datum/ai_laws/drone
 
-	silicon_camera = /obj/item/device/camera/siliconcam/drone_camera
+	silicon_camera = /obj/item/camera/siliconcam/drone_camera
 
 	//Used for self-mailing.
 	var/mail_destination = ""

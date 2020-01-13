@@ -190,9 +190,9 @@
 
 /decl/hierarchy/supply_pack/engineering/robotics
 	name = "Parts - Robotics assembly"
-	contains = list(/obj/item/device/assembly/prox_sensor = 3,
+	contains = list(/obj/item/assembly/prox_sensor = 3,
 					/obj/item/storage/toolbox/electrical,
-					/obj/item/device/flash = 4,
+					/obj/item/flash = 4,
 					/obj/item/cell/high = 2)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/gear

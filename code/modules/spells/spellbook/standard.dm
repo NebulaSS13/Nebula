@@ -48,5 +48,5 @@
 							/obj/item/towel,
 							/obj/item/tank/jetpack,
 							/obj/item/clothing/mask/plunger,
-							/obj/item/device/megaphone,
+							/obj/item/megaphone,
 							/obj/item/deck/cards)

@@ -94,7 +94,7 @@
 					 /obj/item/pen/retractable/red,
 					 /obj/item/pen/retractable/blue,
 					 /obj/item/pen/green,
-					 /obj/item/device/camera_film,
+					 /obj/item/camera_film,
 					 /obj/item/folder/blue,
 					 /obj/item/folder/red,
 					 /obj/item/folder/yellow,

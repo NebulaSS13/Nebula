@@ -63,10 +63,10 @@
 
 	owner_channels.Cut()
 
-	var/obj/item/device/radio/headset/R
-	if(owner.l_ear && istype(owner.l_ear,/obj/item/device/radio))
+	var/obj/item/radio/headset/R
+	if(owner.l_ear && istype(owner.l_ear,/obj/item/radio))
 		R = owner.l_ear
-	else if(owner.r_ear && istype(owner.r_ear,/obj/item/device/radio))
+	else if(owner.r_ear && istype(owner.r_ear,/obj/item/radio))
 		R = owner.r_ear
 
 	if(!R)	return 0

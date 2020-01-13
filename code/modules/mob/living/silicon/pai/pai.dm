@@ -20,7 +20,7 @@
 	var/ram = 100	// Used as currency to purchase different abilities
 	var/list/software = list()
 	var/userDNA		// The DNA string of our assigned user
-	var/obj/item/device/paicard/card	// The card we inhabit
+	var/obj/item/paicard/card	// The card we inhabit
 
 	var/chassis = "repairbot"   // A record of your chosen chassis.
 	var/global/list/possible_chassis = list(
@@ -77,7 +77,7 @@
 
 	var/translator_on = 0 // keeps track of the translator module
 
-/mob/living/silicon/pai/New(var/obj/item/device/paicard)
+/mob/living/silicon/pai/New(var/obj/item/paicard)
 	status_flags |= NO_ANTAG
 	card = paicard
 
@@ -92,7 +92,7 @@
 
 	if(card)
 		if(!card.radio)
-			card.radio = new /obj/item/device/radio(card)
+			card.radio = new /obj/item/radio(card)
 		silicon_radio = card.radio
 
 /mob/living/silicon/pai/Destroy()
@@ -119,7 +119,7 @@
 	return 0
 
 /mob/living/silicon/pai/restrained()
-	return !istype(loc, /obj/item/device/paicard) && ..()
+	return !istype(loc, /obj/item/paicard) && ..()
 
 /mob/living/silicon/pai/emp_act(severity)
 	// Silence for 2 minutes
@@ -271,7 +271,7 @@
 	set category = "IC"
 
 	// Pass lying down or getting up to our pet human, if we're in a rig.
-	if(istype(src.loc,/obj/item/device/paicard))
+	if(istype(src.loc,/obj/item/paicard))
 		resting = 0
 		var/obj/item/rig/rig = src.get_rig()
 		if(istype(rig))

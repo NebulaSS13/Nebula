@@ -26,7 +26,7 @@
 
 	. += new/datum/atom_creator/simple(list(/obj/item/storage/toolbox/emergency, /obj/item/inflatable/wall = 2), 75)
 	. += new/datum/atom_creator/simple(list(/obj/item/tank/emergency/oxygen/engi, /obj/item/clothing/mask/gas/half), 10)
-	. += new/datum/atom_creator/simple(/obj/item/device/oxycandle, 15)
+	. += new/datum/atom_creator/simple(/obj/item/oxycandle, 15)
 	. += new/datum/atom_creator/simple(/obj/item/storage/firstaid/o2, 25)
 	. += new/datum/atom_creator/simple(list(/obj/item/clothing/suit/space/emergency,/obj/item/clothing/head/helmet/space/emergency), 25)
 
@@ -44,7 +44,7 @@
 		/obj/item/storage/med_pouch/burn,
 		/obj/item/storage/backpack/dufflebag/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight
+		/obj/item/flashlight
 		)
 
 /obj/structure/closet/firecloset/chief
@@ -54,7 +54,7 @@
 		/obj/item/storage/med_pouch/burn,
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank/oxygen/red,
 		/obj/item/extinguisher,
 		/obj/item/clothing/head/hardhat/firefighter/Chief)
@@ -72,7 +72,7 @@
 	if(prob(40))
 		new /obj/item/clothing/suit/storage/hazardvest(src)
 	if(prob(70))
-		new /obj/item/device/flashlight(src)
+		new /obj/item/flashlight(src)
 	if(prob(70))
 		new /obj/item/screwdriver(src)
 	if(prob(70))
@@ -84,7 +84,7 @@
 	if(prob(70))
 		new /obj/item/wirecutters(src)
 	if(prob(70))
-		new /obj/item/device/t_scanner(src)
+		new /obj/item/t_scanner(src)
 	if(prob(20))
 		new /obj/item/storage/belt/utility(src)
 	if(prob(30))
@@ -94,7 +94,7 @@
 	if(prob(30))
 		new /obj/item/stack/cable_coil/random(src)
 	if(prob(20))
-		new /obj/item/device/multitool(src)
+		new /obj/item/multitool(src)
 	if(prob(5))
 		new /obj/item/clothing/gloves/insulated(src)
 	if(prob(40))
@@ -116,7 +116,7 @@
 		/obj/item/clothing/head/radiation,
 		/obj/item/clothing/suit/radiation,
 		/obj/item/clothing/head/radiation,
-		/obj/item/device/geiger = 2)
+		/obj/item/geiger = 2)
 
 /*
  * Bombsuit closet
@@ -198,5 +198,5 @@
 /obj/structure/closet/shipping_wall/filled/WillContain()
 	return list(
 		/obj/item/stack/material/cardboard/ten,
-		/obj/item/device/destTagger,
+		/obj/item/destTagger,
 		/obj/item/stack/package_wrap/twenty_five)

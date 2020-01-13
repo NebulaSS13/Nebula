@@ -6,19 +6,19 @@
 	path = /obj/item/crowbar/prybar
 
 /datum/fabricator_recipe/tool/int_wirer
-	path = /obj/item/device/integrated_electronics/wirer
+	path = /obj/item/integrated_electronics/wirer
 
 /datum/fabricator_recipe/tool/int_debugger
-	path = /obj/item/device/integrated_electronics/debugger
+	path = /obj/item/integrated_electronics/debugger
 
 /datum/fabricator_recipe/tool/int_analyzer
-	path = /obj/item/device/integrated_electronics/analyzer
+	path = /obj/item/integrated_electronics/analyzer
 
 /datum/fabricator_recipe/tool/multitool
-	path = /obj/item/device/multitool
+	path = /obj/item/multitool
 
 /datum/fabricator_recipe/tool/t_scanner
-	path = /obj/item/device/t_scanner
+	path = /obj/item/t_scanner
 
 /datum/fabricator_recipe/tool/weldertool
 	path = /obj/item/weldingtool

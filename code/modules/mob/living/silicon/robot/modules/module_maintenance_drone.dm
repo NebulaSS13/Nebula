@@ -11,16 +11,16 @@
 		/obj/item/wrench,
 		/obj/item/crowbar,
 		/obj/item/wirecutters,
-		/obj/item/device/multitool,
-		/obj/item/device/lightreplacer,
+		/obj/item/multitool,
+		/obj/item/lightreplacer,
 		/obj/item/gripper,
 		/obj/item/soap,
 		/obj/item/gripper/no_use/loader,
 		/obj/item/extinguisher/mini,
-		/obj/item/device/pipe_painter,
-		/obj/item/device/floor_painter,
+		/obj/item/pipe_painter,
+		/obj/item/floor_painter,
 		/obj/item/inducer/borg,
-		/obj/item/device/plunger/robot,
+		/obj/item/plunger/robot,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/reagent_containers/spray/cleaner/drone,
 		/obj/item/borg/sight/hud/jani,
@@ -121,6 +121,6 @@
 	. = ..()
 
 /obj/item/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/device/lightreplacer/LR = locate() in equipment
+	var/obj/item/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
 	..()

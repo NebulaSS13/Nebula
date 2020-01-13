@@ -230,8 +230,8 @@
 
 	new /obj/item/material/minihoe(Tsec)
 	new /obj/item/reagent_containers/glass/bucket(Tsec)
-	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/device/scanner/plant(Tsec)
+	new /obj/item/assembly/prox_sensor(Tsec)
+	new /obj/item/scanner/plant(Tsec)
 
 	if(tank)
 		tank.forceMove(Tsec)

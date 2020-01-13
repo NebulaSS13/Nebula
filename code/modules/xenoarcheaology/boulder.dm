@@ -22,21 +22,21 @@
 	..()
 
 /obj/structure/boulder/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/device/core_sampler))
+	if(istype(I, /obj/item/core_sampler))
 		src.geological_data.artifact_distance = rand(-100,100) / 100
 		src.geological_data.artifact_id = artifact_find.artifact_id
 
-		var/obj/item/device/core_sampler/C = I
+		var/obj/item/core_sampler/C = I
 		C.sample_item(src, user)
 		return
 
-	if(istype(I, /obj/item/device/depth_scanner))
-		var/obj/item/device/depth_scanner/C = I
+	if(istype(I, /obj/item/depth_scanner))
+		var/obj/item/depth_scanner/C = I
 		C.scan_atom(user, src)
 		return
 
-	if(istype(I, /obj/item/device/measuring_tape))
-		var/obj/item/device/measuring_tape/P = I
+	if(istype(I, /obj/item/measuring_tape))
+		var/obj/item/measuring_tape/P = I
 		user.visible_message("<span class='notice'>\The [user] extends \the [P] towards \the [src].</span>", "<span class='notice'>You extend \the [P] towards \the [src].</span>")
 		if(do_after(user, 15))
 			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [src.excavation_level]cm.</span>")
