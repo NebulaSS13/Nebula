@@ -6,7 +6,7 @@
 	max_force = 5
 	applies_material_colour = TRUE
 	w_class = ITEM_SIZE_SMALL
-	default_material = MATERIAL_WOOD
+	material = MATERIAL_WOOD
 
 /obj/item/material/urn/afterattack(var/obj/A, var/mob/user, var/proximity)
 	if(!istype(A, /obj/effect/decal/cleanable/ash))

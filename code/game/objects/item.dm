@@ -86,14 +86,37 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
+	// Material handling for material weapons (not used by default, unless material is supplied or set)
+	var/material/material                      // Reference to material decl. If set to a string corresponding to a material ID, will init the item with that material.
+	var/applies_material_colour = FALSE        // Whether or not the material recolours this icon.
+	var/applies_material_name = FALSE          // If true, item becomes 'material item' ie. 'steel hatchet'.
+	var/max_force = 40	                       // any damage above this is added to armor penetration value
+	var/material_force_multiplier = 0.5	       // Multiplier to material's generic damage value for this specific type of weapon
+	var/thrown_material_force_multiplier = 0.5 // As above, but for throwing the weapon.
+	var/unbreakable = FALSE                    // Whether or not this weapon degrades.
+	var/base_worth = 1                         // Multiplier for base material worth.
+
 /obj/item/New()
 	..()
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
 
-/obj/item/Initialize()
+/obj/item/Initialize(var/ml, var/material_key)
+	if(!material_key)
+		material_key = material
+	if(material_key)
+		set_material(material_key)
 	. = ..()
+	if(istype(material))
+		matter = material.get_matter()
+		if(matter.len)
+			for(var/material_type in matter)
+				if(!isnull(matter[material_type]))
+					matter[material_type] *= material_force_multiplier
+	else
+		material = null
+
 	if(islist(armor))
 		for(var/type in armor)
 			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
@@ -101,6 +124,7 @@
 				break
 
 /obj/item/Destroy()
+	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(hidden_uplink)
 	if(ismob(loc))
 		var/mob/m = loc
@@ -858,3 +882,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		set_icon_state(citem.item_icon_state)
 		item_state = null
 		icon_override = CUSTOM_ITEM_MOB
+
+/obj/item/Value()
+	return material ? material.value * base_worth : base_worth

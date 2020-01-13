@@ -113,60 +113,62 @@
 	icon_state = "beaker"
 	item_state = "beaker"
 	center_of_mass = "x=15;y=10"
-	matter = list(MATERIAL_GLASS = 500)
+	material = MATERIAL_GLASS
+	applies_material_name = TRUE
+	material_force_multiplier = 0.25
 
-	New()
-		..()
-		desc += " It can hold up to [volume] units."
+/obj/item/chems/glass/beaker/Initialize()
+	. = ..()
+	desc += " It can hold up to [volume] units."
 
-	on_reagent_change()
-		update_icon()
-
-	pickup(mob/user)
-		..()
-		update_icon()
-
-	dropped(mob/user)
-		..()
-		update_icon()
-
-	attack_hand()
-		..()
-		update_icon()
-
+/obj/item/chems/glass/beaker/on_reagent_change()
 	update_icon()
-		overlays.Cut()
 
-		if(reagents.total_volume)
-			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+/obj/item/chems/glass/beaker/pickup(mob/user)
+	..()
+	update_icon()
 
-			var/percent = round((reagents.total_volume / volume) * 100)
-			switch(percent)
-				if(0 to 9)		filling.icon_state = "[icon_state]-10"
-				if(10 to 24) 	filling.icon_state = "[icon_state]10"
-				if(25 to 49)	filling.icon_state = "[icon_state]25"
-				if(50 to 74)	filling.icon_state = "[icon_state]50"
-				if(75 to 79)	filling.icon_state = "[icon_state]75"
-				if(80 to 90)	filling.icon_state = "[icon_state]80"
-				if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
+/obj/item/chems/glass/beaker/dropped(mob/user)
+	..()
+	update_icon()
 
-			filling.color = reagents.get_color()
-			overlays += filling
+/obj/item/chems/glass/beaker/attack_hand()
+	..()
+	update_icon()
 
-		if (!ATOM_IS_OPEN_CONTAINER(src))
-			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
-			overlays += lid
+/obj/item/chems/glass/beaker/on_update_icon()
+	
+	var/new_overlays
+	if(reagents && reagents.total_volume)
+		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+		var/percent = round((reagents.total_volume / volume) * 100)
+		switch(percent)
+			if(0 to 9)		filling.icon_state = "[icon_state]-10"
+			if(10 to 24) 	filling.icon_state = "[icon_state]10"
+			if(25 to 49)	filling.icon_state = "[icon_state]25"
+			if(50 to 74)	filling.icon_state = "[icon_state]50"
+			if(75 to 79)	filling.icon_state = "[icon_state]75"
+			if(80 to 90)	filling.icon_state = "[icon_state]80"
+			if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
+		filling.color = reagents.get_color()
+		LAZYADD(new_overlays, filling)
+
+	if (!ATOM_IS_OPEN_CONTAINER(src))
+		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
+		LAZYADD(new_overlays, lid)
+
+	overlays = new_overlays
 
 /obj/item/chems/glass/beaker/large
 	name = "large beaker"
 	desc = "A large beaker."
 	icon_state = "beakerlarge"
 	center_of_mass = "x=16;y=10"
-	matter = list(MATERIAL_GLASS = 5000)
 	volume = 120
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;120"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	material_force_multiplier = 2.5
 
 /obj/item/chems/glass/beaker/bowl
 	name = "mixing bowl"
@@ -174,45 +176,46 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mixingbowl"
 	center_of_mass = "x=16;y=10"
-	matter = list(MATERIAL_STEEL = 300)
 	volume = 180
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;180"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
+	material = MATERIAL_STEEL
+	material_force_multiplier = 0.2
 
 /obj/item/chems/glass/beaker/noreact
 	name = "cryostasis beaker"
 	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon_state = "beakernoreact"
 	center_of_mass = "x=16;y=8"
-	matter = list(MATERIAL_GLASS = 500)
 	volume = 60
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
+	material = null
 
 /obj/item/chems/glass/beaker/bluespace
 	name = "bluespace beaker"
 	desc = "A bluespace beaker, powered by experimental bluespace technology."
 	icon_state = "beakerbluespace"
 	center_of_mass = "x=16;y=10"
-	matter = list(MATERIAL_GLASS = 5000)
 	volume = 300
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;120;150;200;250;300"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	material_force_multiplier = 2.5
 
 /obj/item/chems/glass/beaker/vial
 	name = "vial"
 	desc = "A small glass vial."
 	icon_state = "vial"
 	center_of_mass = "x=15;y=8"
-	matter = list(MATERIAL_GLASS = 250)
 	volume = 30
 	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;30"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	material_force_multiplier = 0.1
 
 /obj/item/chems/glass/beaker/insulated
 	name = "insulated beaker"
@@ -223,6 +226,7 @@
 	possible_transfer_amounts = "5;10;15;30"
 	atom_flags = null
 	temperature_coefficient = 1
+	material = null
 
 /obj/item/chems/glass/beaker/insulated/large
 	name = "large insulated beaker"
@@ -250,21 +254,22 @@
 	icon_state = "bucket"
 	item_state = "bucket"
 	center_of_mass = "x=16;y=9"
-	matter = list(MATERIAL_PLASTIC = 280)
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = "10;20;30;60;120;150;180"
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
+	material = MATERIAL_PLASTIC
+	material_force_multiplier = 0.2
 
 /obj/item/chems/glass/bucket/wood
 	name = "bucket"
 	desc = "It's a wooden bucket. How rustic."
 	icon_state = "wbucket"
 	item_state = "wbucket"
-	matter = list(MATERIAL_WOOD = 280)
 	volume = 200
+	material = MATERIAL_WOOD
 
 /obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user as mob)
 	if(istype(D, /obj/item/mop))
@@ -279,43 +284,12 @@
 		return ..()
 
 /obj/item/chems/glass/bucket/on_update_icon()
-	overlays.Cut()
+	var/new_overlays
 	if (!ATOM_IS_OPEN_CONTAINER(src))
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
-		overlays += lid
-	else if(reagents.total_volume && round((reagents.total_volume / volume) * 100) > 80)
+		LAZYADD(new_overlays, lid)
+	else if(reagents && reagents.total_volume && round((reagents.total_volume / volume) * 100) > 80)
 		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "bucket")
 		filling.color = reagents.get_color()
-		overlays += filling
-
-/*
-/obj/item/chems/glass/blender_jug
-	name = "Blender Jug"
-	desc = "A blender jug, part of a blender."
-	icon = 'icons/obj/kitchen.dmi'
-	icon_state = "blender_jug_e"
-	volume = 100
-
-	on_reagent_change()
-		switch(src.reagents.total_volume)
-			if(0)
-				icon_state = "blender_jug_e"
-			if(1 to 75)
-				icon_state = "blender_jug_h"
-			if(76 to 100)
-				icon_state = "blender_jug_f"
-
-/obj/item/chems/glass/canister		//not used apparantly
-	desc = "It's a canister. Mainly used for transporting fuel."
-	name = "canister"
-	icon = 'icons/obj/tank.dmi'
-	icon_state = "canister"
-	item_state = "canister"
-	m_amt = 300
-	g_amt = 0
-	w_class = ITEM_SIZE_HUGE
-
-	amount_per_transfer_from_this = 20
-	possible_transfer_amounts = "10;20;30;60"
-	volume = 120
-*/
+		LAZYADD(new_overlays, filling)
+	overlays = new_overlays

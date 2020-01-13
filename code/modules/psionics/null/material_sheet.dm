@@ -15,7 +15,7 @@
 	name = "nullglass"
 	icon_state = "sheet-shiny"
 	plural_icon_state = "sheet-shiny-mult"
-	default_type = MATERIAL_NULLGLASS
+	material = MATERIAL_NULLGLASS
 
 /obj/item/stack/material/nullglass/fifty
 	amount = 50

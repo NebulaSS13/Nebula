@@ -11,26 +11,25 @@ var/global/list/stool_cache = list() //haha stool
 	force = 10
 	throwforce = 10
 	w_class = ITEM_SIZE_HUGE
+	material = DEFAULT_FURNITURE_MATERIAL
 	var/base_icon = "stool"
-	var/material/material
 	var/material/padding_material
 
 /obj/item/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
+	padding_material = MATERIAL_CARPET
 
-/obj/item/stool/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
-	..(newloc)
-	material = SSmaterials.get_material_by_name(new_material)
-	if(new_padding_material)
-		padding_material = SSmaterials.get_material_by_name(new_padding_material)
-	if(!istype(material))
-		qdel(src)
-		return
-	force = round(material.get_blunt_damage()*0.4)
-	update_icon()
-
-/obj/item/stool/padded/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, new_material, MATERIAL_CARPET)
+/obj/item/stool/Initialize(var/ml, var/material_key, var/new_padding_material)
+	. = ..()
+	if(material)
+		if(!new_padding_material)
+			new_padding_material = padding_material
+		if(new_padding_material)
+			padding_material = SSmaterials.get_material_by_name(new_padding_material)
+		if(!istype(padding_material))
+			padding_material = null
+		force = round(material.get_blunt_damage()*0.4)
+		update_icon()
 
 /obj/item/stool/bar
 	name = "bar stool"
@@ -40,9 +39,7 @@ var/global/list/stool_cache = list() //haha stool
 
 /obj/item/stool/bar/padded
 	icon_state = "bar_stool_padded_preview"
-
-/obj/item/stool/bar/padded/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, new_material, MATERIAL_CARPET)
+	padding_material = MATERIAL_CARPET
 
 /obj/item/stool/on_update_icon()
 	// Prep icon.

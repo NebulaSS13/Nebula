@@ -17,7 +17,7 @@
 	matter_multiplier = 0.5
 	material_flags = USE_MATERIAL_COLOR
 	stacktype = /obj/item/stack/material/rods
-	default_type = MATERIAL_STEEL
+	material = MATERIAL_STEEL
 
 /obj/item/stack/material/rods/ten
 	amount = 10

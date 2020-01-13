@@ -6,7 +6,7 @@
 	icon_state = "knife"
 	item_state = "knife"
 	max_force = 15
-	force_divisor = 0.3
+	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	matter = list(MATERIAL_STEEL = 12000)
 	origin_tech = list(TECH_MATERIAL = 1)
@@ -33,22 +33,22 @@
 	name = "table knife"
 	desc = "A simple table knife, used to cut up individual portions of food."
 	icon_state = "table"
-	default_material = MATERIAL_ALUMINIUM
+	material = MATERIAL_ALUMINIUM
 	max_force = 7
-	force_divisor = 0.1
+	material_force_multiplier = 0.1
 	sharp = FALSE
 	attack_verb = list("prodded")
 	applies_material_name = FALSE
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/material/knife/table/plastic
-	default_material = MATERIAL_PLASTIC
+	material = MATERIAL_PLASTIC
 
 /obj/item/material/knife/table/primitive
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon_state = "unathiknife"
-	default_material = MATERIAL_WOOD
+	material = MATERIAL_WOOD
 	applies_material_colour = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
@@ -64,21 +64,21 @@
 	desc = "A heavy blade used to process food, especially animal carcasses."
 	icon_state = "butch"
 	armor_penetration = 5
-	force_divisor = 0.18
+	material_force_multiplier = 0.18
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /obj/item/material/knife/kitchen/cleaver/bronze
 	name = "master chef's cleaver"
 	desc = "A heavy blade used to process food. This one is so fancy, it must be for a truly exceptional chef. There aren't any here, so what it's doing here is anyone's guess."
-	default_material = MATERIAL_BRONZE
-	force_divisor = 1 //25 with material bronze
+	material = MATERIAL_BRONZE
+	material_force_multiplier = 1 //25 with material bronze
 
 //fighting knives
 /obj/item/material/knife/combat
 	name = "combat knife"
 	desc = "A blade with a saw-like pattern on the reverse edge and a heavy handle."
 	icon_state = "tacknife"
-	force_divisor = 0.2
+	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
 
 //random stuff

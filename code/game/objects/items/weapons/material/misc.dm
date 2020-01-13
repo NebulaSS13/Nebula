@@ -6,12 +6,12 @@
 	icon_state = "harpoon"
 	item_state = "harpoon"
 	max_force = 20
-	force_divisor = 0.3 // 18 with hardness 60 (steel)
-	thrown_force_divisor = 1.8
+	material_force_multiplier = 0.3 // 18 with hardness 60 (steel)
+	thrown_material_force_multiplier = 1.8
 	attack_verb = list("jabbed","stabbed","ripped")
 	does_spin = FALSE
 	var/spent
-	worth_multiplier = 15
+	base_worth = 15
 
 
 /obj/item/material/harpoon/bomb
@@ -38,11 +38,11 @@
 	SetName("broken harpoon")
 	desc = "A short spear with just a barb - if it once had a spearhead, it doesn't any more."
 	icon_state = "harpoon_bomb_spent"
-	force_divisor = 0.1
-	thrown_force_divisor = 0.3
+	material_force_multiplier = 0.1
+	thrown_material_force_multiplier = 0.3
 	sharp = FALSE
 	edge = FALSE
-	worth_multiplier = 6
+	base_worth = 6
 
 /obj/item/material/hatchet
 	name = "hatchet"
@@ -50,8 +50,8 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "hatchet"
 	max_force = 15
-	force_divisor = 0.2 // 12 with hardness 60 (steel)
-	thrown_force_divisor = 0.75 // 15 with weight 20 (steel)
+	material_force_multiplier = 0.2 // 12 with hardness 60 (steel)
+	thrown_material_force_multiplier = 0.75 // 15 with weight 20 (steel)
 	w_class = ITEM_SIZE_SMALL
 	sharp = 1
 	edge = 1
@@ -69,11 +69,10 @@
 	item_state = "machete"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
-	default_material = MATERIAL_TITANIUM
+	material = MATERIAL_TITANIUM
 	base_parry_chance = 50
-	attack_cooldown_modifier = 1
 	max_force = 20
-	force_divisor = 0.20 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
+	material_force_multiplier = 0.20 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
 
 /obj/item/material/hatchet/machete/unbreakable
 	unbreakable = TRUE
@@ -81,7 +80,7 @@
 /obj/item/material/hatchet/machete/steel
 	name = "fabricated machete"
 	desc = "A long, machine-stamped blade with a somewhat ungainly handle. Found in military surplus stores, malls, and horror movies since before interstellar travel."
-	default_material = MATERIAL_STEEL
+	material = MATERIAL_STEEL
 	base_parry_chance = 40
 	matter = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 2500)
 
@@ -104,8 +103,8 @@
 	icon_state = "hoe"
 	item_state = "hoe"
 	max_force = 5
-	force_divisor = 0.25 // 5 with weight 20 (steel)
-	thrown_force_divisor = 0.25 // as above
+	material_force_multiplier = 0.25 // 5 with weight 20 (steel)
+	thrown_material_force_multiplier = 0.25 // as above
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 
@@ -117,8 +116,8 @@
 	name = "scythe"
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
 	max_force = 15
-	force_divisor = 0.275 // 16 with hardness 60 (steel)
-	thrown_force_divisor = 0.25 // 5 with weight 20 (steel)
+	material_force_multiplier = 0.275 // 16 with hardness 60 (steel)
+	thrown_material_force_multiplier = 0.25 // 5 with weight 20 (steel)
 	sharp = 1
 	edge = 1
 	throw_speed = 1
@@ -127,7 +126,7 @@
 	slot_flags = SLOT_BACK
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
-	worth_multiplier = 20
+	base_worth = 20
 
 
 /obj/item/material/cross
@@ -135,16 +134,16 @@
 	desc = "It's a cross, commonly used as a holy symbol by Christians."
 	icon_state = "cross"
 	max_force = 5
-	force_divisor = 0.1
-	thrown_force_divisor = 0.1
+	material_force_multiplier = 0.1
+	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "bashed")
 
 /obj/item/material/cross/wood
-	default_material = MATERIAL_WOOD
+	material = MATERIAL_WOOD
 
 /obj/item/material/cross/silver
-	default_material = MATERIAL_SILVER
+	material = MATERIAL_SILVER
 
 /obj/item/material/cross/gold
-	default_material = MATERIAL_GOLD
+	material = MATERIAL_GOLD
