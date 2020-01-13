@@ -403,7 +403,7 @@
 		to_chat(user, "<span class='warning'>Someone's already washing here.</span>")
 		return
 
-	var/obj/item/reagent_containers/RG = O
+	var/obj/item/chems/RG = O
 	if (istype(RG) && ATOM_IS_OPEN_CONTAINER(RG) && RG.reagents)
 		RG.reagents.add_reagent(/datum/reagent/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")

@@ -65,7 +65,7 @@
 "ai" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/raisins,
-/obj/item/reagent_containers/food/drinks/glass2/fitnessflask,
+/obj/item/chems/food/drinks/glass2/fitnessflask,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "aj" = (
@@ -121,7 +121,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/tastybread,
-/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/chems/food/drinks/cans/speer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "ap" = (
@@ -307,7 +307,7 @@
 /obj/item/bedsheet/orange,
 /obj/item/stock_parts/matter_bin/adv,
 /obj/item/stock_parts/micro_laser/ultra,
-/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
 /obj/item/stack/material/sandstone{
 	amount = 50
 	},
@@ -562,7 +562,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/chems/food/drinks/glass2/coffeecup/metal,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/crashed_pod)
 "bk" = (
@@ -629,12 +629,12 @@
 /area/map_template/crashed_pod)
 "bu" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/reagent_containers/food/condiment/small/saltshaker,
-/obj/item/reagent_containers/food/condiment/small/peppermill,
+/obj/item/chems/food/condiment/small/saltshaker,
+/obj/item/chems/food/condiment/small/peppermill,
 /obj/effect/decal/cleanable/flour,
 /obj/item/trash/candy/proteinbar,
 /obj/machinery/reagentgrinder,
-/obj/item/reagent_containers/food/condiment/small/sugar,
+/obj/item/chems/food/condiment/small/sugar,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "bv" = (
@@ -817,7 +817,7 @@
 /obj/item/binoculars,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/candy/proteinbar,
-/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/chems/food/drinks/cans/speer,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
@@ -975,23 +975,23 @@
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
-/obj/item/reagent_containers/food/condiment/enzyme,
-/obj/item/reagent_containers/food/drinks/milk,
-/obj/item/reagent_containers/food/drinks/milk,
+/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/food/drinks/milk,
+/obj/item/chems/food/drinks/milk,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/item/beartrap,
 /obj/item/material/knife/kitchen/cleaver,
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "bZ" = (
@@ -1007,7 +1007,7 @@
 /obj/item/storage/backpack/dufflebag/eng,
 /obj/item/material/ashtray/bronze,
 /obj/item/paper_bin,
-/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/chems/food/drinks/cans/speer,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/pen,
 /turf/simulated/floor/tiled/dark,
@@ -1047,12 +1047,12 @@
 /obj/item/cell/crap,
 /obj/item/storage/box/lights,
 /obj/item/scanner/gas,
-/obj/item/reagent_containers/food/drinks/cans/speer,
-/obj/item/reagent_containers/food/drinks/cans/speer,
-/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/chems/food/drinks/cans/speer,
+/obj/item/chems/food/drinks/cans/speer,
+/obj/item/chems/food/drinks/cans/speer,
 /obj/item/storage/box/monkeycubes,
-/obj/item/reagent_containers/food/drinks/bottle/vodka,
-/obj/item/reagent_containers/food/drinks/bottle/specialwhiskey,
+/obj/item/chems/food/drinks/bottle/vodka,
+/obj/item/chems/food/drinks/bottle/specialwhiskey,
 /obj/item/tracker_electronics,
 /obj/item/pen/blue,
 /obj/item/pen/green,
@@ -1070,7 +1070,7 @@
 /obj/item/seeds/cornseed,
 /obj/item/seeds/cornseed,
 /obj/item/material/hatchet,
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /obj/item/material/minihoe,
 /obj/item/plantspray/pests,
 /obj/item/plantspray/pests,

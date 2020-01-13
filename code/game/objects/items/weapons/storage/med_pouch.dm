@@ -30,9 +30,9 @@ Single Use Emergency Pouches
 	. = ..()
 	name = "emergency [injury_type] pouch"
 	make_exact_fit()
-	for(var/obj/item/reagent_containers/pill/P in contents)
+	for(var/obj/item/chems/pill/P in contents)
 		P.color = color
-	for(var/obj/item/reagent_containers/hypospray/autoinjector/A in contents)
+	for(var/obj/item/chems/hypospray/autoinjector/A in contents)
 		A.band_color = color
 		A.update_icon()
 
@@ -70,9 +70,9 @@ Single Use Emergency Pouches
 	color = COLOR_RED
 
 	startswith = list(
-	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
-	/obj/item/reagent_containers/pill/pouch_pill/inaprovaline,
-	/obj/item/reagent_containers/pill/pouch_pill/paracetamol,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline,
+	/obj/item/chems/pill/pouch_pill/inaprovaline,
+	/obj/item/chems/pill/pouch_pill/paracetamol,
 	/obj/item/stack/medical/bruise_pack = 2,
 		)
 	instructions = {"
@@ -91,10 +91,10 @@ Single Use Emergency Pouches
 	color = COLOR_SEDONA
 
 	startswith = list(
-	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
-	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/deletrathol,
-	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/adrenaline,
-	/obj/item/reagent_containers/pill/pouch_pill/paracetamol,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/deletrathol,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
+	/obj/item/chems/pill/pouch_pill/paracetamol,
 	/obj/item/stack/medical/ointment = 2,
 		)
 	instructions = {"
@@ -114,11 +114,11 @@ Single Use Emergency Pouches
 	color = COLOR_BLUE
 
 	startswith = list(
-	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline,
-	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/dexalin,
-	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/adrenaline,
-	/obj/item/reagent_containers/pill/pouch_pill/inaprovaline,
-	/obj/item/reagent_containers/pill/pouch_pill/dexalin,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/dexalin,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
+	/obj/item/chems/pill/pouch_pill/inaprovaline,
+	/obj/item/chems/pill/pouch_pill/dexalin,
 		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
@@ -137,8 +137,8 @@ Single Use Emergency Pouches
 	color = COLOR_GREEN
 
 	startswith = list(
-	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/dylovene,
-	/obj/item/reagent_containers/pill/pouch_pill/dylovene,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/dylovene,
+	/obj/item/chems/pill/pouch_pill/dylovene,
 		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
@@ -155,8 +155,8 @@ Single Use Emergency Pouches
 	color = COLOR_AMBER
 
 	startswith = list(
-	/obj/item/reagent_containers/hypospray/autoinjector/antirad,
-	/obj/item/reagent_containers/pill/pouch_pill/dylovene,
+	/obj/item/chems/hypospray/autoinjector/antirad,
+	/obj/item/chems/pill/pouch_pill/dylovene,
 		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
@@ -167,52 +167,52 @@ Single Use Emergency Pouches
 	6) Stay in place once they respond.\
 		"}
 
-/obj/item/reagent_containers/pill/pouch_pill
+/obj/item/chems/pill/pouch_pill
 	name = "emergency pill"
 	desc = "An emergency pill from an emergency medical pouch"
 	icon_state = "pill2"
 	var/datum/reagent/chem_type
 	var/chem_amount = 15
 
-/obj/item/reagent_containers/pill/pouch_pill/inaprovaline
+/obj/item/chems/pill/pouch_pill/inaprovaline
 	chem_type = /datum/reagent/inaprovaline
 
-/obj/item/reagent_containers/pill/pouch_pill/dylovene
+/obj/item/chems/pill/pouch_pill/dylovene
 	chem_type = /datum/reagent/dylovene
 
-/obj/item/reagent_containers/pill/pouch_pill/dexalin
+/obj/item/chems/pill/pouch_pill/dexalin
 	chem_type = /datum/reagent/dexalin
 
-/obj/item/reagent_containers/pill/pouch_pill/paracetamol
+/obj/item/chems/pill/pouch_pill/paracetamol
 	chem_type = /datum/reagent/paracetamol
 
-/obj/item/reagent_containers/pill/pouch_pill/New()
+/obj/item/chems/pill/pouch_pill/New()
 	..()
 	reagents.add_reagent(chem_type, chem_amount)
 	name = "emergency [reagents.get_master_reagent_name()] pill ([reagents.total_volume]u)"
 	color = reagents.get_color()
 
-/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto
+/obj/item/chems/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
 	desc = "An emergency autoinjector from an emergency medical pouch"
 
-/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline
+/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline
 	name = "emergency inaprovaline autoinjector"
 	starts_with = list(/datum/reagent/inaprovaline = 5)
 
-/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/deletrathol
+/obj/item/chems/hypospray/autoinjector/pouch_auto/deletrathol
 	name = "emergency deletrathol autoinjector"
 	starts_with = list(/datum/reagent/deletrathol = 5)
 
-/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/dylovene
+/obj/item/chems/hypospray/autoinjector/pouch_auto/dylovene
 	name = "emergency dylovene autoinjector"
 	starts_with = list(/datum/reagent/dylovene = 5)
 
-/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/dexalin
+/obj/item/chems/hypospray/autoinjector/pouch_auto/dexalin
 	name = "emergency dexalin autoinjector"
 	starts_with = list(/datum/reagent/dexalin = 5)
 
-/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/adrenaline
+/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
 	starts_with = list(/datum/reagent/adrenaline = 8)

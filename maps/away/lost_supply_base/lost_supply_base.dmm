@@ -1600,7 +1600,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/chems/food/drinks/cans/waterbottle,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "et" = (

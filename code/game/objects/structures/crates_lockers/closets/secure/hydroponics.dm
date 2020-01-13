@@ -15,5 +15,5 @@
 		/obj/item/material/minihoe,
 		/obj/item/material/hatchet,
 		/obj/item/wirecutters/clippers,
-		/obj/item/reagent_containers/spray/plantbgone,
+		/obj/item/chems/spray/plantbgone,
 	)

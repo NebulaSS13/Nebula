@@ -5,7 +5,7 @@
 	possible_origins = list("Papa Joe's", "Pizza Ship", "Dominator Pizza", "Little Kaezars", "Pizza Planet", "Cheese Louise", "Little Taste o' Neo-Italy", "Pizza Gestapo")
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list() //They are a pizza shop, not a bargainer.
-	possible_trading_items = list(/obj/item/reagent_containers/food/snacks/sliceable/pizza   = TRADER_SUBTYPES_ONLY)
+	possible_trading_items = list(/obj/item/chems/food/snacks/sliceable/pizza   = TRADER_SUBTYPES_ONLY)
 
 	speech = list("hail_generic"    = "Hello! Welcome to ORIGIN, may I take your order?",
 				"hail_deny"         = "Beeeep... I'm sorry, your connection has been severed.",
@@ -40,14 +40,14 @@
 	possible_origins = list("888 Shanghai Kitchen", "Mr. Lee's Greater Hong Kong", "The House of the Venerable and Inscrutable Colonel", "Lucky Dragon")
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list()
-	possible_trading_items = list(/obj/item/reagent_containers/food/snacks/meatkabob    	       = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/snacks/monkeysdelight             = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/snacks/ricepudding                = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/snacks/slice/xenomeatbread/filled = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/snacks/soydope                    = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/snacks/stewedsoymeat              = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/snacks/wingfangchu                = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/drinks/dry_ramen                  = TRADER_THIS_TYPE
+	possible_trading_items = list(/obj/item/chems/food/snacks/meatkabob    	       = TRADER_THIS_TYPE,
+							/obj/item/chems/food/snacks/monkeysdelight             = TRADER_THIS_TYPE,
+							/obj/item/chems/food/snacks/ricepudding                = TRADER_THIS_TYPE,
+							/obj/item/chems/food/snacks/slice/xenomeatbread/filled = TRADER_THIS_TYPE,
+							/obj/item/chems/food/snacks/soydope                    = TRADER_THIS_TYPE,
+							/obj/item/chems/food/snacks/stewedsoymeat              = TRADER_THIS_TYPE,
+							/obj/item/chems/food/snacks/wingfangchu                = TRADER_THIS_TYPE,
+							/obj/item/chems/food/drinks/dry_ramen                  = TRADER_THIS_TYPE
 							)
 
 	var/list/fortunes = list("Today it's up to you to create the peacefulness you long for.",
@@ -83,7 +83,7 @@
 /datum/trader/ship/chinese/trade(var/list/offers, var/num, var/turf/location)
 	. = ..()
 	if(.)
-		var/obj/item/reagent_containers/food/snacks/fortunecookie/cookie = new(location)
+		var/obj/item/chems/food/snacks/fortunecookie/cookie = new(location)
 		var/obj/item/paper/paper = new(cookie)
 		cookie.trash = paper
 		paper.SetName("Fortune")
@@ -95,19 +95,19 @@
 	possible_origins = list("HyTee", "Kreugars", "Spaceway", "Privaxs", "FutureValue", "Phyvendyme", "Seller's Market")
 	trade_flags = TRADER_MONEY
 
-	possible_trading_items = list(/obj/item/reagent_containers/food/snacks                      = TRADER_SUBTYPES_ONLY,
-							/obj/item/reagent_containers/food/drinks/cans                       = TRADER_SUBTYPES_ONLY,
-							/obj/item/reagent_containers/food/drinks/bottle                     = TRADER_SUBTYPES_ONLY,
-							/obj/item/reagent_containers/food/drinks/bottle/small               = TRADER_BLACKLIST,
-							/obj/item/reagent_containers/food/snacks/boiledslimecore            = TRADER_BLACKLIST,
-							/obj/item/reagent_containers/food/snacks/checker                    = TRADER_BLACKLIST_ALL,
-							/obj/item/reagent_containers/food/snacks/fruit_slice                = TRADER_BLACKLIST,
-							/obj/item/reagent_containers/food/snacks/slice                      = TRADER_BLACKLIST_ALL,
-							/obj/item/reagent_containers/food/snacks/grown                      = TRADER_BLACKLIST_ALL,
-							/obj/item/reagent_containers/food/snacks/human                      = TRADER_BLACKLIST_ALL,
-							/obj/item/reagent_containers/food/snacks/sliceable/braincake        = TRADER_BLACKLIST,
-							/obj/item/reagent_containers/food/snacks/meat/human                 = TRADER_BLACKLIST,
-							/obj/item/reagent_containers/food/snacks/variable                   = TRADER_BLACKLIST_ALL
+	possible_trading_items = list(/obj/item/chems/food/snacks                      = TRADER_SUBTYPES_ONLY,
+							/obj/item/chems/food/drinks/cans                       = TRADER_SUBTYPES_ONLY,
+							/obj/item/chems/food/drinks/bottle                     = TRADER_SUBTYPES_ONLY,
+							/obj/item/chems/food/drinks/bottle/small               = TRADER_BLACKLIST,
+							/obj/item/chems/food/snacks/boiledslimecore            = TRADER_BLACKLIST,
+							/obj/item/chems/food/snacks/checker                    = TRADER_BLACKLIST_ALL,
+							/obj/item/chems/food/snacks/fruit_slice                = TRADER_BLACKLIST,
+							/obj/item/chems/food/snacks/slice                      = TRADER_BLACKLIST_ALL,
+							/obj/item/chems/food/snacks/grown                      = TRADER_BLACKLIST_ALL,
+							/obj/item/chems/food/snacks/human                      = TRADER_BLACKLIST_ALL,
+							/obj/item/chems/food/snacks/sliceable/braincake        = TRADER_BLACKLIST,
+							/obj/item/chems/food/snacks/meat/human                 = TRADER_BLACKLIST,
+							/obj/item/chems/food/snacks/variable                   = TRADER_BLACKLIST_ALL
 							)
 
 	speech = list("hail_generic"     = "Hello, welcome to ORIGIN, grocery store of the future!",
@@ -149,20 +149,20 @@
 
 				"bribe_refusal"      = "Oh ho ho! I'd never think of taking ORIGIN on the road!",
 				)
-	possible_trading_items = list(/obj/item/reagent_containers/food/snacks/slice/birthdaycake/filled     = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/carrotcake/filled         = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/cheesecake/filled         = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/chocolatecake/filled      = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/lemoncake/filled          = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/limecake/filled           = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/orangecake/filled         = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/plaincake/filled          = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/pumpkinpie/filled         = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/slice/bananabread/filled        = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/sliceable                       = TRADER_SUBTYPES_ONLY,
-								/obj/item/reagent_containers/food/snacks/sliceable/pizza                 = TRADER_BLACKLIST_ALL,
-								/obj/item/reagent_containers/food/snacks/sliceable/xenomeatbread         = TRADER_BLACKLIST,
-								/obj/item/reagent_containers/food/snacks/sliceable/flatdough             = TRADER_BLACKLIST,
-								/obj/item/reagent_containers/food/snacks/sliceable/braincake             = TRADER_BLACKLIST,
-								/obj/item/reagent_containers/food/snacks/pie                             = TRADER_THIS_TYPE,
-								/obj/item/reagent_containers/food/snacks/applepie                        = TRADER_THIS_TYPE)
+	possible_trading_items = list(/obj/item/chems/food/snacks/slice/birthdaycake/filled     = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/carrotcake/filled         = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/cheesecake/filled         = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/chocolatecake/filled      = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/lemoncake/filled          = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/limecake/filled           = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/orangecake/filled         = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/plaincake/filled          = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/pumpkinpie/filled         = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/slice/bananabread/filled        = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/sliceable                       = TRADER_SUBTYPES_ONLY,
+								/obj/item/chems/food/snacks/sliceable/pizza                 = TRADER_BLACKLIST_ALL,
+								/obj/item/chems/food/snacks/sliceable/xenomeatbread         = TRADER_BLACKLIST,
+								/obj/item/chems/food/snacks/sliceable/flatdough             = TRADER_BLACKLIST,
+								/obj/item/chems/food/snacks/sliceable/braincake             = TRADER_BLACKLIST,
+								/obj/item/chems/food/snacks/pie                             = TRADER_THIS_TYPE,
+								/obj/item/chems/food/snacks/applepie                        = TRADER_THIS_TYPE)

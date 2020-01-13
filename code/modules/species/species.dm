@@ -94,7 +94,7 @@
 	var/vision_flags = SEE_SELF               // Same flags as glasses.
 
 	// Death vars.
-	var/meat_type =     /obj/item/reagent_containers/food/snacks/meat/human
+	var/meat_type =     /obj/item/chems/food/snacks/meat/human
 	var/meat_amount =   3
 	var/skin_material = MATERIAL_SKIN_GENERIC
 	var/skin_amount =   3

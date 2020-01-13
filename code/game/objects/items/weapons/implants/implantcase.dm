@@ -47,7 +47,7 @@
 		else
 			SetName(initial(name))
 			desc = "A case containing an implant."
-	else if(istype(I, /obj/item/reagent_containers/syringe))
+	else if(istype(I, /obj/item/chems/syringe))
 		if(istype(imp,/obj/item/implant/chem))
 			imp.attackby(I,user)
 	else if (istype(I, /obj/item/implanter))

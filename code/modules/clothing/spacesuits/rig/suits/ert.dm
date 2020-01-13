@@ -23,7 +23,7 @@
 	allowed = list(/obj/item/flashlight, /obj/item/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/handcuffs, /obj/item/t_scanner, /obj/item/rcd, /obj/item/crowbar, \
 	/obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/multitool, \
 	/obj/item/radio, /obj/item/scanner/gas,/obj/item/storage/briefcase/inflatable, /obj/item/melee/baton, /obj/item/gun, \
-	/obj/item/storage/firstaid, /obj/item/reagent_containers/hypospray, /obj/item/roller)
+	/obj/item/storage/firstaid, /obj/item/chems/hypospray, /obj/item/roller)
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,

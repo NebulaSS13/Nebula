@@ -14,9 +14,9 @@
 "d" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/iv_drip,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "e" = (
@@ -81,8 +81,8 @@
 "o" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
-/obj/item/reagent_containers/dropper,
-/obj/item/reagent_containers/chem_disp_cartridge/peridaxon,
+/obj/item/chems/dropper,
+/obj/item/chems/chem_disp_cartridge/peridaxon,
 /obj/item/stack/nanopaste,
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -182,7 +182,7 @@
 "C" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
-/obj/item/reagent_containers/glass/beaker/cryoxadone,
+/obj/item/chems/glass/beaker/cryoxadone,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "D" = (

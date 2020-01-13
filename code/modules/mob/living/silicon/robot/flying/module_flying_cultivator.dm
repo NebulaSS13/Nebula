@@ -12,7 +12,7 @@
 		/obj/item/wirecutters/clippers,
 		/obj/item/material/minihoe/unbreakable,
 		/obj/item/material/hatchet/unbreakable,
-		/obj/item/reagent_containers/glass/bucket,
+		/obj/item/chems/glass/bucket,
 		/obj/item/scalpel/laser1,
 		/obj/item/circular_saw,
 		/obj/item/extinguisher,

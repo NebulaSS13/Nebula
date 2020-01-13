@@ -2824,7 +2824,7 @@
 /area/lar_maria/mess_hall)
 "hM" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/glass/beaker,
+/obj/item/chems/glass/beaker,
 /obj/random/snack,
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
@@ -2930,7 +2930,7 @@
 "id" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
-/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/chems/food/condiment/flour,
 /obj/item/storage/fancy/egg_box,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)

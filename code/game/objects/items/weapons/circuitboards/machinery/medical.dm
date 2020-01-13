@@ -49,7 +49,7 @@
 	req_components = list (
 		/obj/item/stock_parts/scanning_module = 1,
 		/obj/item/stock_parts/manipulator = 2,
-		/obj/item/reagent_containers/syringe = 2)
+		/obj/item/chems/syringe = 2)
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/keyboard = 1,

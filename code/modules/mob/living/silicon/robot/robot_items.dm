@@ -209,7 +209,7 @@
 
 		var addedSomething = 0
 
-		for(var/obj/item/reagent_containers/food/I in pickup)
+		for(var/obj/item/chems/food/I in pickup)
 
 
 			if( I != src && !I.anchored && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/projectile) )
@@ -467,7 +467,7 @@
 	to_chat(user, "You fail to pick up \the [A] with \the [src]")
 	return
 
-/obj/item/reagent_containers/spray/cleaner/drone
+/obj/item/chems/spray/cleaner/drone
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
 	volume = 150
@@ -523,8 +523,8 @@
 	var/base_power_generation = 75 KILOWATTS
 	var/max_fuel_items = 5
 	var/list/fuel_types = list(
-		/obj/item/reagent_containers/food/snacks/meat = 2,
-		/obj/item/reagent_containers/food/snacks/fish = 1.5
+		/obj/item/chems/food/snacks/meat = 2,
+		/obj/item/chems/food/snacks/fish = 1.5
 	)
 
 /obj/item/bioreactor/attack_self(var/mob/user)
@@ -539,7 +539,7 @@
 	if(!proximity_flag || !istype(target))
 		return
 
-	var/is_fuel = istype(target, /obj/item/reagent_containers/food/snacks/grown)
+	var/is_fuel = istype(target, /obj/item/chems/food/snacks/grown)
 	is_fuel = is_fuel || is_type_in_list(target, fuel_types)
 
 	if(!is_fuel)
@@ -570,7 +570,7 @@
 
 	for(var/thing in contents)
 		var/atom/A = thing
-		if(istype(A, /obj/item/reagent_containers/food/snacks/grown))
+		if(istype(A, /obj/item/chems/food/snacks/grown))
 			generating_power = base_power_generation
 			using_item = A
 		else 

@@ -44,7 +44,7 @@
 	melee_damage_upper = 10 //peck
 	speak_chance = 1//1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/cracker/
+	meat_type = /obj/item/chems/food/snacks/cracker/
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
@@ -52,7 +52,7 @@
 	stop_automated_movement = 1
 	universal_speak = TRUE
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
+	meat_type = /obj/item/chems/food/snacks/meat/chicken/game
 	meat_amount = 3
 	skin_material = MATERIAL_SKIN_FEATHERS
 

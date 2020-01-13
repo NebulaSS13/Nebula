@@ -36,10 +36,10 @@
 	color = "#800000"
 	amount_to_zombify = 3
 
-/obj/item/reagent_containers/glass/beaker/vial/random_podchem
+/obj/item/chems/glass/beaker/vial/random_podchem
 	name = "unmarked vial"
 
-/obj/item/reagent_containers/glass/beaker/vial/random_podchem/Initialize()
+/obj/item/chems/glass/beaker/vial/random_podchem/Initialize()
 	. = ..()
 	desc += "Label is smudged, and there's crusted blood fingerprints on it."
 	var/reagent_type = pick(/datum/reagent/random, /datum/reagent/toxin/zombie/science, /datum/reagent/rezadone, /datum/reagent/three_eye)

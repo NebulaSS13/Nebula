@@ -42,7 +42,7 @@
 	origin_tech = list(TECH_BIO = 3, TECH_MATERIAL = 2, TECH_DATA = 1)
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
-		/obj/item/reagent_containers/glass/beaker = 1,
+		/obj/item/chems/glass/beaker = 1,
 		/obj/item/weedkiller = 1,
 		/obj/item/pipe = 2)
 	additional_spawn_components = list(

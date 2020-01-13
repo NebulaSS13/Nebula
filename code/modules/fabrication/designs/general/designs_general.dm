@@ -1,32 +1,32 @@
 /datum/fabricator_recipe/bucket
-	path = /obj/item/reagent_containers/glass/bucket
+	path = /obj/item/chems/glass/bucket
 
 /datum/fabricator_recipe/drinkingglass
-	path = /obj/item/reagent_containers/food/drinks/glass2/square
+	path = /obj/item/chems/food/drinks/glass2/square
 
 /datum/fabricator_recipe/drinkingglass/rocks
-	path = /obj/item/reagent_containers/food/drinks/glass2/rocks
+	path = /obj/item/chems/food/drinks/glass2/rocks
 
 /datum/fabricator_recipe/drinkingglass/shake
-	path = /obj/item/reagent_containers/food/drinks/glass2/shake
+	path = /obj/item/chems/food/drinks/glass2/shake
 
 /datum/fabricator_recipe/drinkingglass/cocktail
-	path = /obj/item/reagent_containers/food/drinks/glass2/cocktail
+	path = /obj/item/chems/food/drinks/glass2/cocktail
 
 /datum/fabricator_recipe/drinkingglass/shot
-	path = /obj/item/reagent_containers/food/drinks/glass2/shot
+	path = /obj/item/chems/food/drinks/glass2/shot
 
 /datum/fabricator_recipe/drinkingglass/pint
-	path = /obj/item/reagent_containers/food/drinks/glass2/pint
+	path = /obj/item/chems/food/drinks/glass2/pint
 
 /datum/fabricator_recipe/drinkingglass/mug
-	path = /obj/item/reagent_containers/food/drinks/glass2/mug
+	path = /obj/item/chems/food/drinks/glass2/mug
 
 /datum/fabricator_recipe/drinkingglass/wine
-	path = /obj/item/reagent_containers/food/drinks/glass2/wine
+	path = /obj/item/chems/food/drinks/glass2/wine
 
 /datum/fabricator_recipe/drinkingglass/wine
-	path = /obj/item/reagent_containers/food/drinks/glass2/carafe
+	path = /obj/item/chems/food/drinks/glass2/carafe
 
 /datum/fabricator_recipe/flashlight
 	path = /obj/item/flashlight

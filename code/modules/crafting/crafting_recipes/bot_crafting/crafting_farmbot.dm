@@ -22,7 +22,7 @@
 
 /decl/crafting_stage/farmbot_bucket
 	progress_message = "You attach the bucket to the assembly."
-	completion_trigger_type = /obj/item/reagent_containers/glass/bucket
+	completion_trigger_type = /obj/item/chems/glass/bucket
 	next_stages = list(/decl/crafting_stage/farmbot_minihoe)
 	item_icon_state = "farmbot_1"
 

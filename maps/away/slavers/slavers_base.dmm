@@ -221,7 +221,7 @@
 /area/slavers_base/cells)
 "aS" = (
 /obj/structure/mattress/dirty,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aT" = (
@@ -245,7 +245,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aW" = (
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aX" = (
@@ -258,13 +258,13 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aY" = (
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /obj/random/trash,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aZ" = (
 /obj/structure/mattress/dirty,
-/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/chems/food/drinks/cans/waterbottle,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "ba" = (
@@ -288,7 +288,7 @@
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bd" = (
@@ -306,7 +306,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bf" = (
-/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/chems/food/drinks/cans/waterbottle,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bg" = (
@@ -836,7 +836,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "ce" = (
@@ -1072,7 +1072,7 @@
 /area/slavers_base/cells)
 "cB" = (
 /obj/machinery/door/window/brigdoor/northright,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cC" = (
@@ -1135,7 +1135,7 @@
 /area/slavers_base/cells)
 "cM" = (
 /obj/structure/mattress/dirty,
-/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/chems/food/drinks/cans/waterbottle,
 /obj/random/junk,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -1146,8 +1146,8 @@
 /area/slavers_base/cells)
 "cO" = (
 /obj/structure/mattress/dirty,
-/obj/item/reagent_containers/glass/rag,
-/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/chems/glass/rag,
+/obj/item/chems/food/drinks/cans/waterbottle,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -1161,7 +1161,7 @@
 "cQ" = (
 /obj/machinery/light/small/red,
 /obj/structure/mattress/dirty,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cR" = (
@@ -1459,7 +1459,7 @@
 /area/slavers_base/med)
 "dE" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "dF" = (
@@ -1619,7 +1619,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "dZ" = (
-/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/chems/food/snacks/liquidfood,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "ea" = (
@@ -1961,7 +1961,7 @@
 	},
 /obj/structure/table/standard,
 /obj/item/implantpad,
-/obj/item/reagent_containers/pill/spaceacillin,
+/obj/item/chems/pill/spaceacillin,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eY" = (
@@ -3549,8 +3549,8 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/item/reagent_containers/food/condiment/small/peppermill,
-/obj/item/reagent_containers/food/condiment/small/saltshaker{
+/obj/item/chems/food/condiment/small/peppermill,
+/obj/item/chems/food/condiment/small/saltshaker{
 	pixel_x = 3;
 	pixel_y = 10
 	},

@@ -22,7 +22,7 @@
 		/obj/item/inducer/borg,
 		/obj/item/plunger/robot,
 		/obj/item/inflatable_dispenser/robot,
-		/obj/item/reagent_containers/spray/cleaner/drone,
+		/obj/item/chems/spray/cleaner/drone,
 		/obj/item/borg/sight/hud/jani,
 		/obj/item/tank/jetpack/carbondioxide,
 		/obj/item/matter_decompiler,
@@ -105,7 +105,7 @@
 
 /obj/item/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	var/obj/item/reagent_containers/spray/cleaner/drone/SC = locate() in equipment
+	var/obj/item/chems/spray/cleaner/drone/SC = locate() in equipment
 	SC.reagents.add_reagent(/datum/reagent/space_cleaner, 8 * amount)
 
 /obj/item/robot_module/drone/construction

@@ -5,32 +5,32 @@
 	name = "bottle of Happy pills"
 	desc = "Highly illegal drug. When you want to see the rainbow."
 	wrapper_color = COLOR_PINK
-	startswith = list(/obj/item/reagent_containers/pill/happy = 10)
+	startswith = list(/obj/item/chems/pill/happy = 10)
 
 /obj/item/storage/pill_bottle/zoom
 	name = "bottle of Zoom pills"
 	desc = "Highly illegal drug. Trade brain for speed."
 	wrapper_color = COLOR_BLUE
-	startswith = list(/obj/item/reagent_containers/pill/zoom = 10)
+	startswith = list(/obj/item/chems/pill/zoom = 10)
 
 /obj/item/storage/pill_bottle/three_eye
 	name = "bottle of Three Eye pills"
 	desc = "Highly illegal drug. Stimulates rarely used portions of the brain."
 	wrapper_color = COLOR_BLUE
-	startswith = list(/obj/item/reagent_containers/pill/three_eye = 10)
+	startswith = list(/obj/item/chems/pill/three_eye = 10)
 
-/obj/item/reagent_containers/glass/beaker/vial/random
+/obj/item/chems/glass/beaker/vial/random
 	atom_flags = 0
 	var/list/random_reagent_list = list(list(/datum/reagent/water = 15) = 1, list(/datum/reagent/space_cleaner = 15) = 1)
 
-/obj/item/reagent_containers/glass/beaker/vial/random/toxin
+/obj/item/chems/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
 		list(/datum/reagent/mindbreaker = 10, /datum/reagent/space_drugs = 20) = 3,
 		list(/datum/reagent/toxin/carpotoxin = 15)                             = 2,
 		list(/datum/reagent/impedrezene = 15)                                  = 2,
 		list(/datum/reagent/toxin/zombiepowder = 10)                           = 1)
 
-/obj/item/reagent_containers/glass/beaker/vial/random/New()
+/obj/item/chems/glass/beaker/vial/random/New()
 	..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER

@@ -18,22 +18,22 @@
 	path = /obj/item/hemostat
 
 /datum/fabricator_recipe/medical/beaker
-	path = /obj/item/reagent_containers/glass/beaker
+	path = /obj/item/chems/glass/beaker
 
 /datum/fabricator_recipe/medical/beaker_large
-	path = /obj/item/reagent_containers/glass/beaker/large
+	path = /obj/item/chems/glass/beaker/large
 
 /datum/fabricator_recipe/medical/beaker_insul
-	path = /obj/item/reagent_containers/glass/beaker/insulated
+	path = /obj/item/chems/glass/beaker/insulated
 
 /datum/fabricator_recipe/medical/beaker_insul_large
-	path = /obj/item/reagent_containers/glass/beaker/insulated/large
+	path = /obj/item/chems/glass/beaker/insulated/large
 
 /datum/fabricator_recipe/medical/vial
-	path = /obj/item/reagent_containers/glass/beaker/vial
+	path = /obj/item/chems/glass/beaker/vial
 
 /datum/fabricator_recipe/medical/syringe
-	path = /obj/item/reagent_containers/syringe
+	path = /obj/item/chems/syringe
 
 /datum/fabricator_recipe/medical/implanter
 	path = /obj/item/implanter
@@ -42,4 +42,4 @@
 	path = /obj/item/storage/pill_bottle
 
 /datum/fabricator_recipe/medical/hypospray/autoinjector
-	path = /obj/item/reagent_containers/hypospray/autoinjector/empty
+	path = /obj/item/chems/hypospray/autoinjector/empty

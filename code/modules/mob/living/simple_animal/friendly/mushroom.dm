@@ -15,7 +15,7 @@
 	harm_intent_damage = 5
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/reagent_containers/food/snacks/hugemushroomslice
+	meat_type = /obj/item/chems/food/snacks/hugemushroomslice
 	bone_material = null
 	bone_amount =   0
 	skin_material = null 

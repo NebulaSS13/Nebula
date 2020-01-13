@@ -283,7 +283,7 @@
 	initial_capacity = 500
 	initial_reagent_types = list(/datum/reagent/water = 1)
 	var/cups = 12
-	var/cup_type = /obj/item/reagent_containers/food/drinks/sillycup
+	var/cup_type = /obj/item/chems/food/drinks/sillycup
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
 	if(cups > 0)

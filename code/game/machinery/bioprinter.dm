@@ -168,8 +168,8 @@
 	icon_state = "bioprinter"
 	base_type = /obj/machinery/organ_printer/flesh
 	var/list/amount_list = list(
-		/obj/item/reagent_containers/food/snacks/meat = 50,
-		/obj/item/reagent_containers/food/snacks/rawcutlet = 15
+		/obj/item/chems/food/snacks/meat = 50,
+		/obj/item/chems/food/snacks/rawcutlet = 15
 		)
 	var/datum/dna/loaded_dna_datum
 	var/datum/species/loaded_species //For quick refrencing
@@ -181,9 +181,9 @@
 /obj/machinery/organ_printer/flesh/dismantle()
 	var/turf/T = get_turf(src)
 	if(T)
-		while(stored_matter >= amount_list[/obj/item/reagent_containers/food/snacks/meat])
-			stored_matter -= amount_list[/obj/item/reagent_containers/food/snacks/meat]
-			new /obj/item/reagent_containers/food/snacks/meat(T)
+		while(stored_matter >= amount_list[/obj/item/chems/food/snacks/meat])
+			stored_matter -= amount_list[/obj/item/chems/food/snacks/meat]
+			new /obj/item/chems/food/snacks/meat(T)
 	return ..()
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
@@ -231,8 +231,8 @@
 			qdel(W)
 
 	// DNA sample from syringe.
-	if(istype(W,/obj/item/reagent_containers/syringe))
-		var/obj/item/reagent_containers/syringe/S = W
+	if(istype(W,/obj/item/chems/syringe))
+		var/obj/item/chems/syringe/S = W
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
 		if(injected && LAZYLEN(injected.data))
 			var/loaded_dna = injected.data

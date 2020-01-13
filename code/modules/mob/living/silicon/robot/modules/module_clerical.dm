@@ -26,7 +26,7 @@
 	equipment = list(
 		/obj/item/flash,
 		/obj/item/gripper/service,
-		/obj/item/reagent_containers/glass/bucket,
+		/obj/item/chems/glass/bucket,
 		/obj/item/material/minihoe,
 		/obj/item/material/hatchet,
 		/obj/item/scanner/plant,
@@ -36,12 +36,12 @@
 		/obj/item/material/knife/kitchen,
 		/obj/item/crowbar,
 		/obj/item/rsf,
-		/obj/item/reagent_containers/dropper/industrial,
+		/obj/item/chems/dropper/industrial,
 		/obj/item/flame/lighter/zippo,
 		/obj/item/tray/robotray,
-		/obj/item/reagent_containers/borghypo/service
+		/obj/item/chems/borghypo/service
 	)
-	emag = /obj/item/reagent_containers/food/drinks/bottle/small/beer
+	emag = /obj/item/chems/food/drinks/bottle/small/beer
 	skills = list(
 		SKILL_BUREAUCRACY         = SKILL_PROF,
 		SKILL_COMPUTER            = SKILL_EXPERT,
@@ -67,10 +67,10 @@
 
 /obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	var/obj/item/reagent_containers/food/condiment/enzyme/E = locate() in equipment
+	var/obj/item/chems/food/condiment/enzyme/E = locate() in equipment
 	E.reagents.add_reagent(/datum/reagent/enzyme, 2 * amount)
 	if(emag)
-		var/obj/item/reagent_containers/food/drinks/bottle/small/beer/B = emag
+		var/obj/item/chems/food/drinks/bottle/small/beer/B = emag
 		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
 
 /obj/item/robot_module/clerical/general

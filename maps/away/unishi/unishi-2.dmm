@@ -27,7 +27,7 @@
 /area/unishi/library)
 "ag" = (
 /obj/structure/table/woodentable,
-/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/chems/glass/bottle/tericadone,
 /obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
@@ -283,11 +283,11 @@
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "aN" = (
-/obj/item/reagent_containers/chem_disp_cartridge/acetone,
-/obj/item/reagent_containers/chem_disp_cartridge/copper,
-/obj/item/reagent_containers/chem_disp_cartridge/imidazoline,
+/obj/item/chems/chem_disp_cartridge/acetone,
+/obj/item/chems/chem_disp_cartridge/copper,
+/obj/item/chems/chem_disp_cartridge/imidazoline,
 /obj/structure/table/rack,
-/obj/item/reagent_containers/syringe/antitoxin,
+/obj/item/chems/syringe/antitoxin,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "aO" = (
@@ -339,8 +339,8 @@
 /area/unishi/chem)
 "aV" = (
 /obj/structure/table/reinforced,
-/obj/item/reagent_containers/spray/cleaner,
-/obj/item/reagent_containers/dropper,
+/obj/item/chems/spray/cleaner,
+/obj/item/chems/dropper,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/chem)
 "aW" = (
@@ -432,9 +432,9 @@
 /area/unishi/chem)
 "bk" = (
 /obj/structure/table/reinforced,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/glass/beaker/bluespace,
-/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/chems/glass/beaker/large,
+/obj/item/chems/glass/beaker/bluespace,
+/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "bl" = (
@@ -772,7 +772,7 @@
 /area/unishi/common)
 "ca" = (
 /obj/structure/table/standard,
-/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cb" = (
@@ -880,7 +880,7 @@
 /obj/structure/table/glass,
 /obj/item/pen/green,
 /obj/item/paper_bin,
-/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "co" = (
@@ -1172,7 +1172,7 @@
 	},
 /obj/item/folder/yellow,
 /obj/item/pen/green,
-/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/chems/glass/bottle/tericadone,
 /obj/item/stack/material/phoron/fifty,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
@@ -1569,10 +1569,10 @@
 /area/unishi/rnd)
 "ea" = (
 /obj/structure/table/glass,
-/obj/item/reagent_containers/glass/bottle/tericadone,
-/obj/item/reagent_containers/glass/bottle/tericadone,
-/obj/item/reagent_containers/glass/bottle/tericadone,
-/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/chems/glass/bottle/tericadone,
+/obj/item/chems/glass/bottle/tericadone,
+/obj/item/chems/glass/bottle/tericadone,
+/obj/item/chems/glass/bottle/tericadone,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;

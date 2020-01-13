@@ -132,9 +132,9 @@
 		/obj/item/material/knife,
 		/obj/item/material/star,
 		/obj/item/rcd_ammo,
-		/obj/item/reagent_containers/syringe,
-		/obj/item/reagent_containers/hypospray,
-		/obj/item/reagent_containers/hypospray/autoinjector,
+		/obj/item/chems/syringe,
+		/obj/item/chems/hypospray,
+		/obj/item/chems/hypospray/autoinjector,
 		/obj/item/syringe_cartridge,
 		/obj/item/plastique,
 		/obj/item/clothing/mask/smokable,
@@ -143,12 +143,12 @@
 		/obj/item/magnetic_ammo,
 		/obj/item/ammo_magazine,
 		/obj/item/net_shell,
-		/obj/item/reagent_containers/glass/beaker/vial,
+		/obj/item/chems/glass/beaker/vial,
 		/obj/item/paper,
 		/obj/item/pen,
 		/obj/item/photo,
 		/obj/item/marshalling_wand,
-		/obj/item/reagent_containers/pill,
+		/obj/item/chems/pill,
 		/obj/item/storage/pill_bottle
 	)
 

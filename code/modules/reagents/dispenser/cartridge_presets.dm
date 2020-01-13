@@ -1,4 +1,4 @@
-/obj/item/reagent_containers/chem_disp_cartridge
+/obj/item/chems/chem_disp_cartridge
 	small
 		volume = CARTRIDGE_VOLUME_SMALL
 

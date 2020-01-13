@@ -35,7 +35,7 @@
 	var/list/reagents // example: = list(/datum/reagent/drink/juice/berry = 5) // do not list same reagent twice
 	var/list/items    // example: = list(/obj/item/crowbar, /obj/item/welder) // place /foo/bar before /foo
 	var/list/fruit    // example: = list("fruit" = 3)
-	var/result        // example: = /obj/item/reagent_containers/food/snacks/donut/normal
+	var/result        // example: = /obj/item/chems/food/snacks/donut/normal
 	var/time = 100    // 1/10 part of second
 	var/hidden_from_codex = FALSE
 	var/lore_text
@@ -61,7 +61,7 @@
 		var/list/checklist = list()
 		 // You should trust Copy().
 		checklist = fruit.Copy()
-		for(var/obj/item/reagent_containers/food/snacks/grown/G in container)
+		for(var/obj/item/chems/food/snacks/grown/G in container)
 			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]))
 				continue
 			checklist[G.seed.kitchen_tag]--
@@ -80,7 +80,7 @@
 		var/list/checklist = list()
 		checklist = items.Copy() // You should really trust Copy
 		for(var/obj/O in container.InsertedContents())
-			if(istype(O,/obj/item/reagent_containers/food/snacks/grown))
+			if(istype(O,/obj/item/chems/food/snacks/grown))
 				continue // Fruit is handled in check_fruit().
 			var/found = 0
 			for(var/i = 1; i < checklist.len+1; i++)

@@ -166,7 +166,7 @@
 
 /datum/stack_recipe/ivbag
 	title = "IV bag"
-	result_type = /obj/item/reagent_containers/ivbag
+	result_type = /obj/item/chems/ivbag
 	req_amount = 4
 	difficulty = 2
 
@@ -179,16 +179,16 @@
 	return "[title] ([modifier])"
 
 /datum/stack_recipe/cartridge/small
-	result_type = /obj/item/reagent_containers/chem_disp_cartridge/small
+	result_type = /obj/item/chems/chem_disp_cartridge/small
 	modifier = "small"
 
 /datum/stack_recipe/cartridge/medium
-	result_type = /obj/item/reagent_containers/chem_disp_cartridge/medium
+	result_type = /obj/item/chems/chem_disp_cartridge/medium
 	modifier = "medium"
 	req_amount = 3
 
 /datum/stack_recipe/cartridge/large
-	result_type = /obj/item/reagent_containers/chem_disp_cartridge
+	result_type = /obj/item/chems/chem_disp_cartridge
 	modifier = "large"
 	req_amount = 5
 

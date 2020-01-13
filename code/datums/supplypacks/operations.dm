@@ -21,7 +21,7 @@
 					/obj/item/storage/pill_bottle/zoom,
 					/obj/item/storage/pill_bottle/happy,
 					/obj/item/storage/pill_bottle/three_eye,
-					/obj/item/reagent_containers/food/drinks/bottle/pwine)
+					/obj/item/chems/food/drinks/bottle/pwine)
 
 	name = "UNLISTED - Contraband crate"
 	cost = 30

@@ -666,8 +666,8 @@
 // if a syringe, can inject phoron to make it explode
 /obj/item/light/attackby(var/obj/item/I, var/mob/user)
 	..()
-	if(istype(I, /obj/item/reagent_containers/syringe))
-		var/obj/item/reagent_containers/syringe/S = I
+	if(istype(I, /obj/item/chems/syringe))
+		var/obj/item/chems/syringe/S = I
 
 		to_chat(user, "You inject the solution into the [src].")
 

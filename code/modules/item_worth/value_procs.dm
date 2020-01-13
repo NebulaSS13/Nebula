@@ -26,7 +26,7 @@
 		return 1
 	return ..()
 
-/obj/item/reagent_containers/Value()
+/obj/item/chems/Value()
 	. = ..()
 	if(reagents)
 		for(var/a in reagents.reagent_list)

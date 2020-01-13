@@ -1601,15 +1601,15 @@
 "ez" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/reagent_containers/glass/beaker{
+/obj/item/chems/glass/beaker{
 	pixel_x = 5
 	},
 /obj/item/book/manual/chef_recipes,
-/obj/item/reagent_containers/food/condiment/small/peppermill{
+/obj/item/chems/food/condiment/small/peppermill{
 	pixel_x = 3
 	},
-/obj/item/reagent_containers/food/condiment/enzyme,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/crew/kitchen)
 "eA" = (
@@ -1775,7 +1775,7 @@
 /obj/item/storage/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/material/kitchen/rollingpin,
-/obj/item/reagent_containers/food/condiment/small/saltshaker{
+/obj/item/chems/food/condiment/small/saltshaker{
 	pixel_x = -3;
 	pixel_y = 0
 	},
@@ -2130,7 +2130,7 @@
 /obj/item/storage/firstaid/adv,
 /obj/random/medical,
 /obj/item/stack/medical/advanced/bruise_pack,
-/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/chems/syringe/antiviral,
 /obj/item/scanner/health,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
@@ -2282,7 +2282,7 @@
 /obj/structure/table/standard,
 /obj/item/glass_extra/straw,
 /obj/item/toy/therapy_blue,
-/obj/item/reagent_containers/spray/cleaner,
+/obj/item/chems/spray/cleaner,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/defibrillator/compact/loaded,
 /turf/simulated/floor/tiled/white,
@@ -2656,7 +2656,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/random/clothing,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /obj/item/clothing/under/yinglet,
 /obj/item/clothing/under/yinglet,
 /obj/item/clothing/shoes/sandal/yinglet,
@@ -2674,7 +2674,7 @@
 "gC" = (
 /obj/structure/table/standard,
 /obj/machinery/light,
-/obj/item/reagent_containers/spray/cleaner,
+/obj/item/chems/spray/cleaner,
 /obj/item/storage/laundry_basket,
 /obj/random_multi/single_item/captains_spare_id,
 /turf/simulated/floor/tiled/freezer,
@@ -3250,9 +3250,9 @@
 	dir = 8
 	},
 /obj/structure/table/standard,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
-/obj/item/reagent_containers/chem_disp_cartridge/coffee{
+/obj/item/chems/food/drinks/glass2/coffeecup/metal,
+/obj/item/chems/food/drinks/glass2/coffeecup/metal,
+/obj/item/chems/chem_disp_cartridge/coffee{
 	name = "coffee canister"
 	},
 /obj/structure/handrai,
@@ -4838,8 +4838,8 @@
 "oo" = (
 /obj/machinery/light,
 /obj/machinery/optable,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/britcup,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/food/drinks/glass2/coffeecup/britcup,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "or" = (
@@ -5085,7 +5085,7 @@
 	dir = 6
 	},
 /obj/structure/table/standard,
-/obj/item/reagent_containers/glass/bottle/eznutrient,
+/obj/item/chems/glass/bottle/eznutrient,
 /obj/item/plantspray/pests,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/garden)
@@ -6011,8 +6011,8 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
@@ -6581,7 +6581,7 @@
 	dir = 4;
 	name = "Captain's Quarters APC"
 	},
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/one,
+/obj/item/chems/food/drinks/glass2/coffeecup/one,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
@@ -6806,7 +6806,7 @@
 	name = "south bump";
 	pixel_y = -24
 	},
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/garden)

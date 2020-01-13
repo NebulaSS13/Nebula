@@ -34,7 +34,7 @@
 	to_chat(R, "<span class='notice'>You hear a faint *beep*.</span>")
 
 /obj/item/implant/chem/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/reagent_containers/syringe))
+	if(istype(I, /obj/item/chems/syringe))
 		if(reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, "<span class='warning'>\The [src] is full.</span>")
 		else

@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// (Mixing)Glass.
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/reagent_containers/glass
+/obj/item/chems/glass
 	name = " "
 	var/base_name = " "
 	desc = ""
@@ -40,11 +40,11 @@
 		/obj/machinery/radiocarbon_spectrometer
 	)
 
-/obj/item/reagent_containers/glass/New()
+/obj/item/chems/glass/New()
 	..()
 	base_name = name
 
-/obj/item/reagent_containers/glass/examine(mob/user, distance)
+/obj/item/chems/glass/examine(mob/user, distance)
 	. = ..()
 	if(distance > 2)
 		return
@@ -56,7 +56,7 @@
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>The airtight lid seals it completely.</span>")
 
-/obj/item/reagent_containers/glass/attack_self()
+/obj/item/chems/glass/attack_self()
 	..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
@@ -66,14 +66,14 @@
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
-/obj/item/reagent_containers/glass/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/chems/glass/attack(mob/M as mob, mob/user as mob, def_zone)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return	..()
 	if(standard_feed_mob(user, M))
 		return
 	return 0
 
-/obj/item/reagent_containers/glass/standard_feed_mob(var/mob/user, var/mob/target)
+/obj/item/chems/glass/standard_feed_mob(var/mob/user, var/mob/target)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
 		return 1
@@ -81,13 +81,13 @@
 		return 1
 	return ..()
 
-/obj/item/reagent_containers/glass/self_feed_message(var/mob/user)
+/obj/item/chems/glass/self_feed_message(var/mob/user)
 	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/datum/reagent/R in reagents.reagent_list)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
 
-/obj/item/reagent_containers/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
+/obj/item/chems/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity) //Is the container open & are they next to whatever they're clicking?
 		return 1 //If not, do nothing.
 	for(var/type in can_be_placed_into) //Is it something it can be placed into?
@@ -106,7 +106,7 @@
 			return 1
 	..()
 
-/obj/item/reagent_containers/glass/beaker
+/obj/item/chems/glass/beaker
 	name = "beaker"
 	desc = "A beaker."
 	icon = 'icons/obj/chemical.dmi'
@@ -157,7 +157,7 @@
 			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 			overlays += lid
 
-/obj/item/reagent_containers/glass/beaker/large
+/obj/item/chems/glass/beaker/large
 	name = "large beaker"
 	desc = "A large beaker."
 	icon_state = "beakerlarge"
@@ -168,7 +168,7 @@
 	possible_transfer_amounts = "5;10;15;25;30;60;120"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/reagent_containers/glass/beaker/bowl
+/obj/item/chems/glass/beaker/bowl
 	name = "mixing bowl"
 	desc = "A large mixing bowl."
 	icon = 'icons/obj/kitchen.dmi'
@@ -181,7 +181,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
 
-/obj/item/reagent_containers/glass/beaker/noreact
+/obj/item/chems/glass/beaker/noreact
 	name = "cryostasis beaker"
 	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon_state = "beakernoreact"
@@ -191,7 +191,7 @@
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 
-/obj/item/reagent_containers/glass/beaker/bluespace
+/obj/item/chems/glass/beaker/bluespace
 	name = "bluespace beaker"
 	desc = "A bluespace beaker, powered by experimental bluespace technology."
 	icon_state = "beakerbluespace"
@@ -202,7 +202,7 @@
 	possible_transfer_amounts = "5;10;15;25;30;60;120;150;200;250;300"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/reagent_containers/glass/beaker/vial
+/obj/item/chems/glass/beaker/vial
 	name = "vial"
 	desc = "A small glass vial."
 	icon_state = "vial"
@@ -214,7 +214,7 @@
 	possible_transfer_amounts = "5;10;15;30"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/reagent_containers/glass/beaker/insulated
+/obj/item/chems/glass/beaker/insulated
 	name = "insulated beaker"
 	desc = "A glass beaker surrounded with black insulation."
 	icon_state = "insulated"
@@ -224,26 +224,26 @@
 	atom_flags = null
 	temperature_coefficient = 1
 
-/obj/item/reagent_containers/glass/beaker/insulated/large
+/obj/item/chems/glass/beaker/insulated/large
 	name = "large insulated beaker"
 	icon_state = "insulatedlarge"
 	center_of_mass = "x=16;y=10"
 	matter = list(MATERIAL_GLASS = 5000, MATERIAL_PLASTIC = 2500)
 	volume = 120
 
-/obj/item/reagent_containers/glass/beaker/cryoxadone
+/obj/item/chems/glass/beaker/cryoxadone
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/cryoxadone, 30)
 		update_icon()
 
-/obj/item/reagent_containers/glass/beaker/sulphuric
+/obj/item/chems/glass/beaker/sulphuric
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/acid, 60)
 		update_icon()
 
-/obj/item/reagent_containers/glass/bucket
+/obj/item/chems/glass/bucket
 	name = "bucket"
 	desc = "It's a bucket."
 	icon = 'icons/obj/janitor.dmi'
@@ -258,7 +258,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
 
-/obj/item/reagent_containers/glass/bucket/wood
+/obj/item/chems/glass/bucket/wood
 	name = "bucket"
 	desc = "It's a wooden bucket. How rustic."
 	icon_state = "wbucket"
@@ -266,7 +266,7 @@
 	matter = list(MATERIAL_WOOD = 280)
 	volume = 200
 
-/obj/item/reagent_containers/glass/bucket/attackby(var/obj/D, mob/user as mob)
+/obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user as mob)
 	if(istype(D, /obj/item/mop))
 		if(reagents.total_volume < 1)
 			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")
@@ -278,7 +278,7 @@
 	else
 		return ..()
 
-/obj/item/reagent_containers/glass/bucket/on_update_icon()
+/obj/item/chems/glass/bucket/on_update_icon()
 	overlays.Cut()
 	if (!ATOM_IS_OPEN_CONTAINER(src))
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
@@ -289,7 +289,7 @@
 		overlays += filling
 
 /*
-/obj/item/reagent_containers/glass/blender_jug
+/obj/item/chems/glass/blender_jug
 	name = "Blender Jug"
 	desc = "A blender jug, part of a blender."
 	icon = 'icons/obj/kitchen.dmi'
@@ -305,7 +305,7 @@
 			if(76 to 100)
 				icon_state = "blender_jug_f"
 
-/obj/item/reagent_containers/glass/canister		//not used apparantly
+/obj/item/chems/glass/canister		//not used apparantly
 	desc = "It's a canister. Mainly used for transporting fuel."
 	name = "canister"
 	icon = 'icons/obj/tank.dmi'

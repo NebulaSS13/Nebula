@@ -19,7 +19,7 @@
 	var/state = 0
 	var/gibs_ready = 0
 	var/obj/crayon
-	var/obj/item/reagent_containers/pill/detergent/detergent
+	var/obj/item/chems/pill/detergent/detergent
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	clicksound = "button"
 	clickvol = 40
@@ -131,7 +131,7 @@
 				return
 			crayon = W
 			return TRUE
-		if(!detergent && istype(W,/obj/item/reagent_containers/pill/detergent))
+		if(!detergent && istype(W,/obj/item/chems/pill/detergent))
 			if(!user.unEquip(W, src))
 				return
 			detergent = W

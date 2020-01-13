@@ -11,9 +11,9 @@
 					/obj/item/storage/firstaid/o2,
 					/obj/item/storage/firstaid/adv,
 					/obj/item/storage/firstaid/stab,
-					/obj/item/reagent_containers/glass/bottle/antitoxin,
-					/obj/item/reagent_containers/glass/bottle/inaprovaline,
-					/obj/item/reagent_containers/glass/bottle/stoxin,
+					/obj/item/chems/glass/bottle/antitoxin,
+					/obj/item/chems/glass/bottle/inaprovaline,
+					/obj/item/chems/glass/bottle/stoxin,
 					/obj/item/storage/box/syringes,
 					/obj/item/storage/box/autoinjectors)
 	cost = 70
@@ -69,7 +69,7 @@
 
 /decl/hierarchy/supply_pack/medical/blood
 	name = "Refills - Nanoblood"
-	contains = list(/obj/item/reagent_containers/ivbag/nanoblood = 4)
+	contains = list(/obj/item/chems/ivbag/nanoblood = 4)
 	cost = 15
 	containername = "nanoblood crate"
 
@@ -112,7 +112,7 @@
 	contains = list(/obj/item/storage/belt/medical,
 					/obj/item/radio/headset/heads/cmo,
 					/obj/item/clothing/under/rank/chief_medical_officer,
-					/obj/item/reagent_containers/hypospray/vial,
+					/obj/item/chems/hypospray/vial,
 					/obj/item/clothing/accessory/stethoscope,
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
@@ -122,7 +122,7 @@
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
 					/obj/item/flashlight/pen,
-					/obj/item/reagent_containers/syringe)
+					/obj/item/chems/syringe)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
 	containername = "chief medical officer equipment crate"
@@ -142,7 +142,7 @@
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
 					/obj/item/flashlight/pen,
-					/obj/item/reagent_containers/syringe)
+					/obj/item/chems/syringe)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical Doctor equipment crate"
@@ -159,10 +159,10 @@
 					/obj/item/clothing/mask/surgical,
 					/obj/item/clothing/shoes/white,
 					/obj/item/clothing/gloves/latex,
-					/obj/item/reagent_containers/dropper,
+					/obj/item/chems/dropper,
 					/obj/item/scanner/health,
 					/obj/item/storage/box/pillbottles,
-					/obj/item/reagent_containers/syringe)
+					/obj/item/chems/syringe)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "pharmacist equipment crate"
@@ -186,7 +186,7 @@
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
 					/obj/item/flashlight/pen,
-					/obj/item/reagent_containers/syringe,
+					/obj/item/chems/syringe,
 					/obj/item/clothing/accessory/storage/white_vest)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure

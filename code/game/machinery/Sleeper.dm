@@ -17,7 +17,7 @@
 	var/list/upgrade_chemicals = list("Kelotane" = /datum/reagent/kelotane)
 	var/list/upgrade2_chemicals = list("Hyronalin" = /datum/reagent/hyronalin)
 	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover, "Chloral Hydrate" = /datum/reagent/chloralhydrate)
-	var/obj/item/reagent_containers/glass/beaker = null
+	var/obj/item/chems/glass/beaker = null
 	var/filtering = 0
 	var/pump
 	var/list/stasis_settings = list(1, 2, 5, 10)
@@ -32,7 +32,7 @@
 /obj/machinery/sleeper/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
 	if(populate_parts)
-		beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
+		beaker = new /obj/item/chems/glass/beaker/large(src)
 	update_icon()
 
 /obj/machinery/sleeper/examine(mob/user, distance)
@@ -162,7 +162,7 @@
 		go_out()
 
 /obj/machinery/sleeper/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/reagent_containers/glass))
+	if(istype(I, /obj/item/chems/glass))
 		add_fingerprint(user)
 		if(!beaker)
 			if(!user.unEquip(I, src))

@@ -6,7 +6,7 @@
 	icon_closed = "labcoat"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
-	allowed = list(/obj/item/scanner/gas,/obj/item/stack/medical,/obj/item/reagent_containers/dropper,/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/hypospray,/obj/item/scanner/health,/obj/item/flashlight/pen,/obj/item/reagent_containers/glass/bottle,/obj/item/reagent_containers/glass/beaker,/obj/item/reagent_containers/pill,/obj/item/storage/pill_bottle,/obj/item/paper)
+	allowed = list(/obj/item/scanner/gas,/obj/item/stack/medical,/obj/item/chems/dropper,/obj/item/chems/syringe,/obj/item/chems/hypospray,/obj/item/scanner/health,/obj/item/flashlight/pen,/obj/item/chems/glass/bottle,/obj/item/chems/glass/beaker,/obj/item/chems/pill,/obj/item/storage/pill_bottle,/obj/item/paper)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT
 		)

@@ -13,7 +13,7 @@
 	idle_power_usage = 20
 	clicksound = "button"
 	clickvol = 20
-	var/obj/item/reagent_containers/beaker = null
+	var/obj/item/chems/beaker = null
 	var/obj/item/storage/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0
 	var/useramount = 30 // Last used amount
@@ -42,7 +42,7 @@
 
 /obj/machinery/chem_master/attackby(var/obj/item/B as obj, var/mob/user as mob)
 
-	if(istype(B, /obj/item/reagent_containers/glass))
+	if(istype(B, /obj/item/chems/glass))
 
 		if(src.beaker)
 			to_chat(user, "A beaker is already loaded into the machine.")
@@ -169,7 +169,7 @@
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
 			while (count-- && count >= 0)
-				var/obj/item/reagent_containers/pill/P = new/obj/item/reagent_containers/pill(loc)
+				var/obj/item/chems/pill/P = new/obj/item/chems/pill(loc)
 				if(!name) name = reagents.get_master_reagent_name()
 				P.SetName("[name] pill")
 				P.icon_state = "pill"+pillsprite
@@ -229,7 +229,7 @@
 
 /obj/machinery/chem_master/proc/create_bottle(mob/user)
 	var/name = sanitizeSafe(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()), MAX_NAME_LEN)
-	var/obj/item/reagent_containers/glass/bottle/P = new/obj/item/reagent_containers/glass/bottle(loc)
+	var/obj/item/chems/glass/bottle/P = new/obj/item/chems/glass/bottle(loc)
 	if(!name)
 		name = reagents.get_master_reagent_name()
 	P.SetName("[name] bottle")
@@ -316,7 +316,7 @@
 	return ..(reagent, "Condiment infos", 0)
 
 /obj/machinery/chem_master/condimaster/create_bottle(mob/user)
-	var/obj/item/reagent_containers/food/condiment/P = new/obj/item/reagent_containers/food/condiment(src.loc)
+	var/obj/item/chems/food/condiment/P = new/obj/item/chems/food/condiment(src.loc)
 	reagents.trans_to_obj(P,50)
 
 /obj/machinery/chem_master/condimaster/extra_options()

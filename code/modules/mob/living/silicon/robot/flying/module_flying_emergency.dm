@@ -13,7 +13,7 @@
 		/obj/item/borg/sight/hud/med,
 		/obj/item/scanner/health,
 		/obj/item/scanner/reagent/adv,
-		/obj/item/reagent_containers/borghypo/crisis,
+		/obj/item/chems/borghypo/crisis,
 		/obj/item/extinguisher/mini,
 		/obj/item/taperoll/medical,
 		/obj/item/inflatable_dispenser/robot,
@@ -28,7 +28,7 @@
 		/obj/item/stack/medical/splint
 	)
 	synths = list(/datum/matter_synth/medicine = 15000)
-	emag = /obj/item/reagent_containers/spray
+	emag = /obj/item/chems/spray
 	skills = list(
 		SKILL_ANATOMY      = SKILL_BASIC,
 		SKILL_MEDICAL      = SKILL_PROF,
@@ -66,7 +66,7 @@
 		stack.synths = list(medicine)
 
 /obj/item/robot_module/flying/emergency/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/reagent_containers/spray/PS = emag
+	var/obj/item/chems/spray/PS = emag
 	if(PS && PS.reagents.total_volume < PS.volume)
 		var/adding = min(PS.volume-PS.reagents.total_volume, 2*amount)
 		if(adding > 0)

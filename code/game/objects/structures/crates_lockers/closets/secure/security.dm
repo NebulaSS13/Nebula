@@ -115,7 +115,7 @@
 		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/box/teargas,
 		/obj/item/storage/belt/holster/security,
-		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/chems/spray/pepper,
 		/obj/item/melee/baton/loaded,
 		/obj/item/gun/energy/gun,
 		/obj/item/storage/box/holobadge,
@@ -137,7 +137,7 @@
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/flash,
-		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/chems/spray/pepper,
 		/obj/item/grenade/chem_grenade/teargas,
 		/obj/item/melee/baton/loaded,
 		/obj/item/clothing/glasses/sunglasses/sechud,
@@ -195,7 +195,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/gun/projectile/pistol/sec/detective,
 		/obj/item/clothing/accessory/storage/holster/armpit,
-		/obj/item/reagent_containers/food/drinks/flask/detflask,
+		/obj/item/chems/food/drinks/flask/detflask,
 		/obj/item/storage/briefcase/crimekit,
 		/obj/item/holowarrant
 	)
@@ -205,7 +205,7 @@
 	req_access = list(access_captain)
 
 /obj/structure/closet/secure_closet/injection/WillContain()
-	return list(/obj/item/reagent_containers/syringe/ld50_syringe/choral = 2)
+	return list(/obj/item/chems/syringe/ld50_syringe/choral = 2)
 
 /obj/structure/closet/secure_closet/brig
 	name = "brig locker"

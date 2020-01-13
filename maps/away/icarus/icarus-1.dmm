@@ -570,7 +570,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/chems/food/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ce" = (
@@ -808,7 +808,7 @@
 /area/icarus/vessel)
 "cP" = (
 /obj/structure/table/standard,
-/obj/item/reagent_containers/pill/dexalin,
+/obj/item/chems/pill/dexalin,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -935,7 +935,7 @@
 /area/icarus/vessel)
 "di" = (
 /obj/structure/table/standard,
-/obj/item/reagent_containers/chem_disp_cartridge/hydrazine,
+/obj/item/chems/chem_disp_cartridge/hydrazine,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dj" = (
@@ -1090,7 +1090,7 @@
 /area/icarus/vessel)
 "dI" = (
 /obj/structure/table/standard,
-/obj/item/reagent_containers/food/drinks/cans/cola,
+/obj/item/chems/food/drinks/cans/cola,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dJ" = (
@@ -1621,7 +1621,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/chems/food/drinks/cans/waterbottle,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fi" = (

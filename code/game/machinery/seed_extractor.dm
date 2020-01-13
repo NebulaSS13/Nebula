@@ -16,7 +16,7 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
 	if((. = component_attackby(O, user)))
 		return
 	// Fruits and vegetables.
-	if(istype(O, /obj/item/reagent_containers/food/snacks/grown) || istype(O, /obj/item/grown))
+	if(istype(O, /obj/item/chems/food/snacks/grown) || istype(O, /obj/item/grown))
 		if(!user.unEquip(O))
 			return
 
@@ -25,7 +25,7 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
 			var/obj/item/grown/F = O
 			new_seed_type = SSplants.seeds[F.plantname]
 		else
-			var/obj/item/reagent_containers/food/snacks/grown/F = O
+			var/obj/item/chems/food/snacks/grown/F = O
 			new_seed_type = SSplants.seeds[F.plantname]
 
 		if(new_seed_type)

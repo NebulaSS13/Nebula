@@ -3,14 +3,14 @@
 
 /decl/hierarchy/supply_pack/custodial/janitor
 	name = "Gear - Janitorial supplies"
-	contains = list(/obj/item/reagent_containers/glass/bucket,
+	contains = list(/obj/item/chems/glass/bucket,
 					/obj/item/mop,
 					/obj/item/caution = 4,
 					/obj/item/storage/bag/trash,
 					/obj/item/lightreplacer,
-					/obj/item/reagent_containers/spray/cleaner,
+					/obj/item/chems/spray/cleaner,
 					/obj/item/storage/box/lights/mixed,
-					/obj/item/reagent_containers/glass/rag,
+					/obj/item/chems/glass/rag,
 					/obj/item/grenade/chem_grenade/cleaner = 3,
 					/obj/structure/mopbucket)
 	cost = 20
@@ -35,9 +35,9 @@
 	contains = list(/obj/item/mop,
 					/obj/item/grenade/chem_grenade/cleaner = 3,
 					/obj/item/storage/box/detergent = 3,
-					/obj/item/reagent_containers/glass/bucket,
-					/obj/item/reagent_containers/glass/rag,
-					/obj/item/reagent_containers/spray/cleaner = 2,
+					/obj/item/chems/glass/bucket,
+					/obj/item/chems/glass/rag,
+					/obj/item/chems/spray/cleaner = 2,
 					/obj/item/soap)
 	cost = 10
 	containertype = /obj/structure/closet/crate/large

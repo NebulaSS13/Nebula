@@ -43,9 +43,9 @@
 "ai" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/implantpad,
-/obj/item/reagent_containers/syringe/drugs,
-/obj/item/reagent_containers/syringe/drugs,
-/obj/item/reagent_containers/syringe/drugs,
+/obj/item/chems/syringe/drugs,
+/obj/item/chems/syringe/drugs,
+/obj/item/chems/syringe/drugs,
 /obj/machinery/alarm{
 	locked = 0;
 	pixel_y = 20
@@ -1855,8 +1855,8 @@
 /area/map_template/colony/atmospherics)
 "dQ" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/chems/ivbag/nanoblood,
+/obj/item/chems/ivbag/nanoblood,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dR" = (
@@ -2446,7 +2446,7 @@
 /obj/item/storage/pill_bottle/tramadol,
 /obj/item/storage/pill_bottle/spaceacillin,
 /obj/item/storage/pill_bottle/antidexafen,
-/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/chems/glass/beaker/large,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/medbay)
 "eP" = (
@@ -2640,9 +2640,9 @@
 	icon_state = "spline_fancy";
 	dir = 1
 	},
-/obj/item/reagent_containers/food/condiment/small/peppermill,
-/obj/item/reagent_containers/food/condiment/small/saltshaker,
-/obj/item/reagent_containers/food/condiment/small/sugar,
+/obj/item/chems/food/condiment/small/peppermill,
+/obj/item/chems/food/condiment/small/saltshaker,
+/obj/item/chems/food/condiment/small/sugar,
 /turf/simulated/floor/wood,
 /area/map_template/colony/messhall)
 "ff" = (
@@ -3001,9 +3001,9 @@
 	icon_state = "spline_fancy";
 	dir = 1
 	},
-/obj/item/reagent_containers/food/condiment/small/peppermill,
-/obj/item/reagent_containers/food/condiment/small/saltshaker,
-/obj/item/reagent_containers/food/condiment/small/sugar,
+/obj/item/chems/food/condiment/small/peppermill,
+/obj/item/chems/food/condiment/small/saltshaker,
+/obj/item/chems/food/condiment/small/sugar,
 /turf/simulated/floor/wood,
 /area/map_template/colony/messhall)
 "fJ" = (
@@ -3301,7 +3301,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/item/reagent_containers/food/drinks/pitcher,
+/obj/item/chems/food/drinks/pitcher,
 /turf/simulated/floor/wood,
 /area/map_template/colony/messhall)
 "gc" = (
@@ -3352,11 +3352,11 @@
 /obj/item/storage/box/cola/spacewind,
 /obj/item/storage/box/cola/icedtea,
 /obj/item/storage/box/cola/drgibb,
-/obj/item/reagent_containers/food/drinks/shaker,
-/obj/item/reagent_containers/food/drinks/pitcher,
-/obj/item/reagent_containers/glass/beaker/bowl,
-/obj/item/reagent_containers/food/condiment/salt,
-/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/chems/food/drinks/shaker,
+/obj/item/chems/food/drinks/pitcher,
+/obj/item/chems/glass/beaker/bowl,
+/obj/item/chems/food/condiment/salt,
+/obj/item/chems/food/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gf" = (
@@ -4723,7 +4723,7 @@
 "iw" = (
 /obj/structure/table/marble,
 /obj/machinery/reagent_temperature,
-/obj/item/reagent_containers/food/drinks/shaker,
+/obj/item/chems/food/drinks/shaker,
 /obj/machinery/vending/boozeomat{
 	density = 0;
 	pixel_y = -32;
@@ -5840,7 +5840,7 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/machinery/reagentgrinder/juicer,
-/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/chems/glass/beaker/large,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/hydroponics)
 "kf" = (
@@ -6057,7 +6057,7 @@
 	dir = 5
 	},
 /obj/structure/closet/secure_closet/hydroponics_torch,
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/hydroponics)
 "ky" = (
@@ -6133,7 +6133,7 @@
 	dir = 8
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/reagent_containers/spray/pepper,
+/obj/item/chems/spray/pepper,
 /obj/machinery/recharger,
 /obj/item/radio,
 /obj/item/storage/box/handcuffs,
@@ -6863,14 +6863,14 @@
 /obj/item/storage/box/detergent,
 /obj/item/storage/box/detergent,
 /obj/item/mop,
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /obj/item/storage/bag/trash,
 /obj/item/storage/bag/trash,
 /obj/item/storage/bag/trash,
 /obj/item/storage/bag/trash,
 /obj/item/storage/bag/trash,
-/obj/item/reagent_containers/spray/cleaner,
-/obj/item/reagent_containers/spray/cleaner,
+/obj/item/chems/spray/cleaner,
+/obj/item/chems/spray/cleaner,
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
 	dir = 8

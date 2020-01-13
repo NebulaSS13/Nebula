@@ -10,7 +10,7 @@
 	throwforce = 3
 	force = 3
 	w_class = ITEM_SIZE_TINY
-	var/obj/item/reagent_containers/syringe/syringe
+	var/obj/item/chems/syringe/syringe
 
 /obj/item/syringe_cartridge/on_update_icon()
 	underlays.Cut()
@@ -19,7 +19,7 @@
 		underlays += syringe.filling
 
 /obj/item/syringe_cartridge/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/reagent_containers/syringe) && user.unEquip(I, src))
+	if(istype(I, /obj/item/chems/syringe) && user.unEquip(I, src))
 		syringe = I
 		to_chat(user, "<span class='notice'>You carefully insert [syringe] into [src].</span>")
 		sharp = 1

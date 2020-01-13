@@ -45,7 +45,7 @@
 	return ..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/food/snacks/grown/) || istype(O,/obj/item/seeds/))
+	if(istype(O,/obj/item/chems/food/snacks/grown/) || istype(O,/obj/item/seeds/))
 		return 1
 	return 0
 
@@ -76,11 +76,11 @@
 	req_access = list(list(access_medical,access_chemistry))
 
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass/))
+	if(istype(O,/obj/item/chems/glass/))
 		return 1
 	if(istype(O,/obj/item/storage/pill_bottle/))
 		return 1
-	if(istype(O,/obj/item/reagent_containers/pill/))
+	if(istype(O,/obj/item/chems/pill/))
 		return 1
 	return 0
 
@@ -91,7 +91,7 @@
 	icon_contents = "chem"
 
 /obj/machinery/smartfridge/secure/virology/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass/beaker/vial/))
+	if(istype(O,/obj/item/chems/glass/beaker/vial/))
 		return 1
 	return 0
 
@@ -101,7 +101,7 @@
 	icon_contents = "chem"
 
 /obj/machinery/smartfridge/chemistry/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/storage/pill_bottle) || istype(O,/obj/item/reagent_containers))
+	if(istype(O,/obj/item/storage/pill_bottle) || istype(O,/obj/item/chems))
 		return 1
 	return 0
 
@@ -118,7 +118,7 @@
 	icon_contents = "drink"
 
 /obj/machinery/smartfridge/drinks/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass) || istype(O,/obj/item/reagent_containers/food/drinks) || istype(O,/obj/item/reagent_containers/food/condiment))
+	if(istype(O,/obj/item/chems/glass) || istype(O,/obj/item/chems/food/drinks) || istype(O,/obj/item/chems/food/condiment))
 		return 1
 
 /obj/machinery/smartfridge/foods
@@ -129,7 +129,7 @@
 	icon_contents = "food"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/food/snacks) || istype(O,/obj/item/material/kitchen/utensil))
+	if(istype(O,/obj/item/chems/food/snacks) || istype(O,/obj/item/material/kitchen/utensil))
 		return 1
 
 /obj/machinery/smartfridge/drying_rack
@@ -138,8 +138,8 @@
 	icon_state = "drying_rack"
 
 /obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O as obj)
-	if(istype(O, /obj/item/reagent_containers/food/snacks/))
-		var/obj/item/reagent_containers/food/snacks/S = O
+	if(istype(O, /obj/item/chems/food/snacks/))
+		var/obj/item/chems/food/snacks/S = O
 		return S.dried_type
 	else if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/mat = O
@@ -175,8 +175,8 @@
 		for(var/thing in I.instances)
 
 			var/remove_thing = FALSE
-			if(istype(thing, /obj/item/reagent_containers/food/snacks))
-				var/obj/item/reagent_containers/food/snacks/S = thing
+			if(istype(thing, /obj/item/chems/food/snacks))
+				var/obj/item/chems/food/snacks/S = thing
 				if(S.dry || !I.get_specific_product(get_turf(src), S)) 
 					continue
 				if(S.dried_type == S.type)

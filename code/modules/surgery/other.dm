@@ -149,14 +149,14 @@
 /decl/surgery_step/sterilize
 	name = "Sterilize wound"
 	allowed_tools = list(
-		/obj/item/reagent_containers/spray = 100,
-		/obj/item/reagent_containers/dropper = 100,
-		/obj/item/reagent_containers/glass/bottle = 90,
-		/obj/item/reagent_containers/food/drinks/flask = 90,
-		/obj/item/reagent_containers/glass/beaker = 75,
-		/obj/item/reagent_containers/food/drinks/bottle = 75,
-		/obj/item/reagent_containers/food/drinks/glass2 = 75,
-		/obj/item/reagent_containers/glass/bucket = 50
+		/obj/item/chems/spray = 100,
+		/obj/item/chems/dropper = 100,
+		/obj/item/chems/glass/bottle = 90,
+		/obj/item/chems/food/drinks/flask = 90,
+		/obj/item/chems/glass/beaker = 75,
+		/obj/item/chems/food/drinks/bottle = 75,
+		/obj/item/chems/food/drinks/glass2 = 75,
+		/obj/item/chems/glass/bucket = 50
 	)
 	can_infect = 0
 	blood_level = 0
@@ -181,10 +181,10 @@
 /decl/surgery_step/sterilize/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-	if (!istype(tool, /obj/item/reagent_containers))
+	if (!istype(tool, /obj/item/chems))
 		return
 
-	var/obj/item/reagent_containers/container = tool
+	var/obj/item/chems/container = tool
 
 	var/amount = container.amount_per_transfer_from_this
 	var/temp_holder = new/obj()
@@ -202,10 +202,10 @@
 /decl/surgery_step/sterilize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-	if (!istype(tool, /obj/item/reagent_containers))
+	if (!istype(tool, /obj/item/chems))
 		return
 
-	var/obj/item/reagent_containers/container = tool
+	var/obj/item/chems/container = tool
 
 	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
 
@@ -213,7 +213,7 @@
 	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
 	affected.disinfect()
 
-/decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/reagent_containers/container)
+/decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/chems/container)
 	if(istype(container) && ATOM_IS_OPEN_CONTAINER(container))
 		if(container.reagents.has_reagent(/datum/reagent/sterilizine))
 			return TRUE
