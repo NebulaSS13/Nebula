@@ -55,7 +55,7 @@
 	min_age = 5
 	max_age = 20
 	slowdown = -0.5
-	total_health = 75
+	total_health = 150
 	brute_mod = 1.25
 	burn_mod =  1.25
 	//mob_size = MOB_SMALL
