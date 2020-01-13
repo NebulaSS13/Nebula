@@ -41,11 +41,11 @@
 
 /obj/machinery/organ_printer/RefreshParts()
 	print_delay = initial(print_delay)
-	print_delay -= 10 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	print_delay += 10 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
+	print_delay -= 10 * total_component_rating_of_type(/obj/item/stock_parts/manipulator)
+	print_delay += 10 * number_of_components(/obj/item/stock_parts/manipulator)
 	print_delay = max(0, print_delay)
 
-	max_stored_matter = 50 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 20)
+	max_stored_matter = 50 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 20)
 	. = ..()
 
 /obj/machinery/organ_printer/components_are_accessible(path)
@@ -143,7 +143,7 @@
 	visible_message("<span class='info'>\The [src] churns for a moment, then spits out \a [O].</span>")
 	return O
 
-/obj/machinery/organ_printer/robot/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/machinery/organ_printer/robot/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
 		if((max_stored_matter-stored_matter) < matter_amount_per_sheet)
 			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
@@ -168,8 +168,8 @@
 	icon_state = "bioprinter"
 	base_type = /obj/machinery/organ_printer/flesh
 	var/list/amount_list = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat = 50,
-		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet = 15
+		/obj/item/reagent_containers/food/snacks/meat = 50,
+		/obj/item/reagent_containers/food/snacks/rawcutlet = 15
 		)
 	var/datum/dna/loaded_dna_datum
 	var/datum/species/loaded_species //For quick refrencing
@@ -181,9 +181,9 @@
 /obj/machinery/organ_printer/flesh/dismantle()
 	var/turf/T = get_turf(src)
 	if(T)
-		while(stored_matter >= amount_list[/obj/item/weapon/reagent_containers/food/snacks/meat])
-			stored_matter -= amount_list[/obj/item/weapon/reagent_containers/food/snacks/meat]
-			new /obj/item/weapon/reagent_containers/food/snacks/meat(T)
+		while(stored_matter >= amount_list[/obj/item/reagent_containers/food/snacks/meat])
+			stored_matter -= amount_list[/obj/item/reagent_containers/food/snacks/meat]
+			new /obj/item/reagent_containers/food/snacks/meat(T)
 	return ..()
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
@@ -217,7 +217,7 @@
 
 	..(user, choice)
 
-/obj/machinery/organ_printer/flesh/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/organ_printer/flesh/attackby(obj/item/W, mob/user)
 	// Load with matter for printing.
 	for(var/path in amount_list)
 		if(istype(W, path))
@@ -231,8 +231,8 @@
 			qdel(W)
 
 	// DNA sample from syringe.
-	if(istype(W,/obj/item/weapon/reagent_containers/syringe))
-		var/obj/item/weapon/reagent_containers/syringe/S = W
+	if(istype(W,/obj/item/reagent_containers/syringe))
+		var/obj/item/reagent_containers/syringe/S = W
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
 		if(injected && LAZYLEN(injected.data))
 			var/loaded_dna = injected.data

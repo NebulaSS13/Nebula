@@ -1,4 +1,4 @@
-/obj/item/device/scanner/spectrometer
+/obj/item/scanner/spectrometer
 	name = "mass spectrometer"
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample or analyzes unusual chemicals."
 	icon_state = "spectrometer"
@@ -11,24 +11,24 @@
 	scan_sound = 'sound/effects/scanbeep.ogg'
 	var/details = 0
 
-/obj/item/device/scanner/spectrometer/Initialize()
+/obj/item/scanner/spectrometer/Initialize()
 	. = ..()
 	create_reagents(5)
 
-/obj/item/device/scanner/spectrometer/on_reagent_change()
+/obj/item/scanner/spectrometer/on_reagent_change()
 	update_icon()
 
-/obj/item/device/scanner/spectrometer/on_update_icon()
+/obj/item/scanner/spectrometer/on_update_icon()
 	icon_state = initial(icon_state)
 	if(reagents.total_volume)
 		icon_state += "_s"
 
-/obj/item/device/scanner/spectrometer/is_valid_scan_target(atom/O)
+/obj/item/scanner/spectrometer/is_valid_scan_target(atom/O)
 	if(!O.reagents || !O.reagents.total_volume)
 		return FALSE
-	return (O.atom_flags & ATOM_FLAG_OPEN_CONTAINER) || istype(O, /obj/item/weapon/reagent_containers/syringe)
+	return (O.atom_flags & ATOM_FLAG_OPEN_CONTAINER) || istype(O, /obj/item/reagent_containers/syringe)
 
-/obj/item/device/scanner/spectrometer/scan(atom/A, mob/user)
+/obj/item/scanner/spectrometer/scan(atom/A, mob/user)
 	if(A != src)
 		to_chat(user, "<span class='notice'>\The [src] takes a sample out of \the [A]</span>")
 		reagents.clear_reagents()
@@ -38,7 +38,7 @@
 	reagents.clear_reagents()
 	user.show_message(scan_data)
 
-/obj/item/device/scanner/spectrometer/attack_self(mob/user)
+/obj/item/scanner/spectrometer/attack_self(mob/user)
 	if(!can_use(user))
 		return
 	if(reagents.total_volume)
@@ -79,7 +79,7 @@
 
 	return jointext(dat, "<br>")
 
-/obj/item/device/scanner/spectrometer/adv
+/obj/item/scanner/spectrometer/adv
 	name = "advanced mass spectrometer"
 	icon_state = "adv_spectrometer"
 	details = 1

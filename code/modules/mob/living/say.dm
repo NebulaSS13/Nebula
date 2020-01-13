@@ -77,8 +77,8 @@ proc/get_radio_key_from_channel(var/channel)
 
 	var/mob/living/carbon/human/H = src
 	if (H.l_ear || H.r_ear)
-		var/obj/item/device/radio/headset/dongle
-		if(istype(H.l_ear,/obj/item/device/radio/headset))
+		var/obj/item/radio/headset/dongle
+		if(istype(H.l_ear,/obj/item/radio/headset))
 			dongle = H.l_ear
 		else
 			dongle = H.r_ear
@@ -122,7 +122,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	if(message_mode == "intercom")
-		for(var/obj/item/device/radio/intercom/I in view(1, null))
+		for(var/obj/item/radio/intercom/I in view(1, null))
 			I.talk_into(src, message, verb, speaking)
 			used_radios += I
 	return 0

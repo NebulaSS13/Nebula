@@ -42,20 +42,20 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 		var/list/category_list = circuit_fabricator_recipe_list[category]
 		category_list += IC // Populating the fabricator categories
 
-	for(var/path in typesof(/obj/item/device/electronic_assembly))
-		var/obj/item/device/electronic_assembly/A = path
+	for(var/path in typesof(/obj/item/electronic_assembly))
+		var/obj/item/electronic_assembly/A = path
 		var/name = initial(A.name)
 		all_assemblies[name] = path
 		cached_assemblies[A] = new path
 
-	circuit_fabricator_recipe_list["Assemblies"] = subtypesof(/obj/item/device/electronic_assembly) - list(/obj/item/device/electronic_assembly/medium, /obj/item/device/electronic_assembly/large, /obj/item/device/electronic_assembly/drone, /obj/item/device/electronic_assembly/wallmount)
+	circuit_fabricator_recipe_list["Assemblies"] = subtypesof(/obj/item/electronic_assembly) - list(/obj/item/electronic_assembly/medium, /obj/item/electronic_assembly/large, /obj/item/electronic_assembly/drone, /obj/item/electronic_assembly/wallmount)
 
 	circuit_fabricator_recipe_list["Tools"] = list(
-		/obj/item/device/integrated_electronics/wirer,
-		/obj/item/device/integrated_electronics/debugger,
-		/obj/item/device/integrated_electronics/analyzer,
-		/obj/item/device/integrated_electronics/detailer,
-		/obj/item/weapon/card/data,
-		/obj/item/weapon/card/data/full_color,
-		/obj/item/weapon/card/data/disk
+		/obj/item/integrated_electronics/wirer,
+		/obj/item/integrated_electronics/debugger,
+		/obj/item/integrated_electronics/analyzer,
+		/obj/item/integrated_electronics/detailer,
+		/obj/item/card/data,
+		/obj/item/card/data/full_color,
+		/obj/item/card/data/disk
 		)

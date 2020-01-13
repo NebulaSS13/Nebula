@@ -58,7 +58,7 @@
 		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if(H) H.update_system_info()
 	handle_hud_icons_health()
-	var/obj/item/weapon/cell/C = get_cell()
+	var/obj/item/cell/C = get_cell()
 	if(istype(C))
 		hud_power.maptext = "[round(get_cell().charge)]/[round(get_cell().maxcharge)]"
 	else hud_power.maptext = "CHECK POWER"

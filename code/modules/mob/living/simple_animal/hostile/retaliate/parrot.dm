@@ -44,7 +44,7 @@
 	melee_damage_upper = 10 //peck
 	speak_chance = 1//1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/cracker/
+	meat_type = /obj/item/reagent_containers/food/snacks/cracker/
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
@@ -52,7 +52,7 @@
 	stop_automated_movement = 1
 	universal_speak = TRUE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken/game
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
 	meat_amount = 3
 	skin_material = MATERIAL_SKIN_FEATHERS
 
@@ -68,7 +68,7 @@
 	var/list/available_channels = list()
 
 	//Headset for Poly to yell at engineers :)
-	var/obj/item/device/radio/headset/ears = null
+	var/obj/item/radio/headset/ears = null
 
 	//The thing the parrot is currently interested in. This gets used for items the parrot wants to pick up, mobs it wants to steal from,
 	//mobs it wants to attack or mobs that have attacked it
@@ -98,11 +98,11 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/New()
 	..()
 	if(!ears)
-		var/headset = pick(/obj/item/device/radio/headset/headset_sec, \
-						/obj/item/device/radio/headset/headset_eng, \
-						/obj/item/device/radio/headset/headset_med, \
-						/obj/item/device/radio/headset/headset_sci, \
-						/obj/item/device/radio/headset/headset_cargo)
+		var/headset = pick(/obj/item/radio/headset/headset_sec, \
+						/obj/item/radio/headset/headset_eng, \
+						/obj/item/radio/headset/headset_med, \
+						/obj/item/radio/headset/headset_sci, \
+						/obj/item/radio/headset/headset_cargo)
 		ears = new headset(src)
 
 	parrot_sleep_dur = parrot_sleep_max //In case someone decides to change the max without changing the duration var
@@ -189,12 +189,12 @@
 						if(!item_to_add)
 							return TOPIC_HANDLED
 
-						if( !istype(item_to_add,  /obj/item/device/radio/headset) )
+						if( !istype(item_to_add,  /obj/item/radio/headset) )
 							to_chat(user, "<span class='warning'>This object won't fit.</span>")
 							return TOPIC_HANDLED
 						if(!user.unEquip(item_to_add, src))
 							return TOPIC_HANDLED
-						var/obj/item/device/radio/headset/headset_to_add = item_to_add
+						var/obj/item/radio/headset/headset_to_add = item_to_add
 
 						src.ears = headset_to_add
 						to_chat(user, "You fit the headset onto [src].")
@@ -667,8 +667,8 @@
 		return 0
 
 	if(!drop_gently)
-		if(istype(held_item, /obj/item/weapon/grenade))
-			var/obj/item/weapon/grenade/G = held_item
+		if(istype(held_item, /obj/item/grenade))
+			var/obj/item/grenade/G = held_item
 			G.dropInto(loc)
 			G.detonate()
 			to_chat(src, "You let go of the [held_item]!")
@@ -708,7 +708,7 @@
 	speak = list("Poly wanna cracker!", ":e Check the singlo, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS FREE CALL THE SHUTTLE")
 
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly/New()
-	ears = new /obj/item/device/radio/headset/headset_eng(src)
+	ears = new /obj/item/radio/headset/headset_eng(src)
 	available_channels = list(":e")
 	..()
 
@@ -739,7 +739,7 @@
 
 	if(message_mode)
 		if(message_mode in radiochannels)
-			if(ears && istype(ears,/obj/item/device/radio))
+			if(ears && istype(ears,/obj/item/radio))
 				ears.talk_into(src,sanitize(message), message_mode, verb, null)
 
 

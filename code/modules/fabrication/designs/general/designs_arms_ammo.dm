@@ -1,5 +1,5 @@
 /datum/fabricator_recipe/arms_ammo
-	path = /obj/item/weapon/syringe_cartridge
+	path = /obj/item/syringe_cartridge
 	category = "Arms and Ammunition"
 
 /datum/fabricator_recipe/arms_ammo/shotgun_holder
@@ -10,7 +10,7 @@
 	path = /obj/item/ammo_casing/shotgun/blank
 
 /datum/fabricator_recipe/arms_ammo/hidden
-	path = /obj/item/weapon/material/hatchet/machete/steel
+	path = /obj/item/material/hatchet/machete/steel
 	hidden = TRUE
 
 /datum/fabricator_recipe/arms_ammo/hidden/shotgun
@@ -26,7 +26,7 @@
 	path = /obj/item/ammo_magazine/smg_top/rubber
 
 /datum/fabricator_recipe/arms_ammo/hidden/flamethrower
-	path = /obj/item/weapon/flamethrower/full
+	path = /obj/item/flamethrower/full
 
 /datum/fabricator_recipe/arms_ammo/hidden/speedloader
 	name = "ammunition (speedloader)"
@@ -93,7 +93,7 @@
 	path = /obj/item/ammo_casing/shotgun/pellet
 
 /datum/fabricator_recipe/arms_ammo/hidden/tacknife
-	path = /obj/item/weapon/material/knife/combat
+	path = /obj/item/material/knife/combat
 
 /datum/fabricator_recipe/arms_ammo/hidden/stunshell
 	name = "ammunition (stun cartridge, shotgun)"

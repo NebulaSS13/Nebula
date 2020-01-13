@@ -190,7 +190,7 @@
 	id = "icprinter"
 	req_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 1)
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 5000)
-	build_path = /obj/item/device/integrated_circuit_printer
+	build_path = /obj/item/integrated_circuit_printer
 	sort_string = "WCLAC"
 
 /datum/design/item/integrated_printer_upgrade_advanced

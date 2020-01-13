@@ -1,10 +1,10 @@
 /decl/hierarchy/outfit/job/security
 	hierarchy_type = /decl/hierarchy/outfit/job/security
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
-	l_ear = /obj/item/device/radio/headset/headset_sec
+	l_ear = /obj/item/radio/headset/headset_sec
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/jackboots
-	backpack_contents = list(/obj/item/weapon/handcuffs = 1)
+	backpack_contents = list(/obj/item/handcuffs = 1)
 
 /decl/hierarchy/outfit/job/security/New()
 	..()
@@ -12,17 +12,17 @@
 
 /decl/hierarchy/outfit/job/security/hos
 	name = OUTFIT_JOB_NAME("Head of security")
-	l_ear = /obj/item/device/radio/headset/heads/hos
+	l_ear = /obj/item/radio/headset/heads/hos
 	uniform = /obj/item/clothing/under/rank/head_of_security
-	id_type = /obj/item/weapon/card/id/security/head
+	id_type = /obj/item/card/id/security/head
 	pda_type = /obj/item/modular_computer/pda/heads/hos
-	backpack_contents = list(/obj/item/weapon/handcuffs = 1)
+	backpack_contents = list(/obj/item/handcuffs = 1)
 
 /decl/hierarchy/outfit/job/security/warden
 	name = OUTFIT_JOB_NAME("Warden")
 	uniform = /obj/item/clothing/under/rank/warden
-	l_pocket = /obj/item/device/flash
-	id_type = /obj/item/weapon/card/id/security/warden
+	l_pocket = /obj/item/flash
+	id_type = /obj/item/card/id/security/warden
 	pda_type = /obj/item/modular_computer/pda/security
 
 /decl/hierarchy/outfit/job/security/detective
@@ -30,12 +30,12 @@
 	head = /obj/item/clothing/head/det
 	uniform = /obj/item/clothing/under/det
 	suit = /obj/item/clothing/suit/storage/det_trench
-	l_pocket = /obj/item/weapon/flame/lighter/zippo
+	l_pocket = /obj/item/flame/lighter/zippo
 	shoes = /obj/item/clothing/shoes/laceup
-	r_hand = /obj/item/weapon/storage/briefcase/crimekit
-	id_type = /obj/item/weapon/card/id/security/detective
+	r_hand = /obj/item/storage/briefcase/crimekit
+	id_type = /obj/item/card/id/security/detective
 	pda_type = /obj/item/modular_computer/pda/forensics
-	backpack_contents = list(/obj/item/weapon/storage/box/evidence = 1)
+	backpack_contents = list(/obj/item/storage/box/evidence = 1)
 
 /decl/hierarchy/outfit/job/security/detective/New()
 	..()
@@ -49,7 +49,7 @@
 /decl/hierarchy/outfit/job/security/officer
 	name = OUTFIT_JOB_NAME("Security Officer")
 	uniform = /obj/item/clothing/under/rank/security
-	l_pocket = /obj/item/device/flash
-	r_pocket = /obj/item/weapon/handcuffs
-	id_type = /obj/item/weapon/card/id/security
+	l_pocket = /obj/item/flash
+	r_pocket = /obj/item/handcuffs
+	id_type = /obj/item/card/id/security
 	pda_type = /obj/item/modular_computer/pda/security

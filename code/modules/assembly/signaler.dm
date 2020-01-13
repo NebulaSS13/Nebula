@@ -1,4 +1,4 @@
-/obj/item/device/assembly/signaler
+/obj/item/assembly/signaler
 	name = "remote signaling device"
 	desc = "Used to remotely activate devices."
 	icon_state = "signaller"
@@ -17,14 +17,14 @@
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
 
-/obj/item/device/assembly/signaler/New()
+/obj/item/assembly/signaler/New()
 	..()
 	spawn(40)
 		set_frequency(frequency)
 	return
 
 
-/obj/item/device/assembly/signaler/activate()
+/obj/item/assembly/signaler/activate()
 	if(cooldown > 0)	return 0
 	cooldown = 2
 	spawn(10)
@@ -33,12 +33,12 @@
 	signal()
 	return 1
 
-/obj/item/device/assembly/signaler/on_update_icon()
+/obj/item/assembly/signaler/on_update_icon()
 	if(holder)
 		holder.update_icon()
 	return
 
-/obj/item/device/assembly/signaler/interact(mob/user as mob, flag1)
+/obj/item/assembly/signaler/interact(mob/user as mob, flag1)
 	var/t1 = "-------"
 	var/dat = {"
 		<TT>
@@ -65,7 +65,7 @@
 	return
 
 
-/obj/item/device/assembly/signaler/Topic(href, href_list, state = GLOB.physical_state)
+/obj/item/assembly/signaler/Topic(href, href_list, state = GLOB.physical_state)
 	if((. = ..()))
 		usr << browse(null, "window=radio")
 		onclose(usr, "radio")
@@ -93,7 +93,7 @@
 	return
 
 
-/obj/item/device/assembly/signaler/proc/signal()
+/obj/item/assembly/signaler/proc/signal()
 	if(!radio_connection) return
 
 	var/datum/signal/signal = new
@@ -103,7 +103,7 @@
 	radio_connection.post_signal(src, signal)
 	return
 /*
-	for(var/obj/item/device/assembly/signaler/S in world)
+	for(var/obj/item/assembly/signaler/S in world)
 		if(!S)	continue
 		if(S == src)	continue
 		if((S.frequency == src.frequency) && (S.code == src.code))
@@ -112,7 +112,7 @@
 	return 0*/
 
 
-/obj/item/device/assembly/signaler/pulse(var/radio = 0)
+/obj/item/assembly/signaler/pulse(var/radio = 0)
 	if(src.connected && src.wires)
 		connected.Pulse(src)
 	else if(holder)
@@ -122,7 +122,7 @@
 	return 1
 
 
-/obj/item/device/assembly/signaler/receive_signal(datum/signal/signal)
+/obj/item/assembly/signaler/receive_signal(datum/signal/signal)
 	if(!signal)	return 0
 	if(signal.encryption != code)	return 0
 	if(!(src.wires & WIRE_RADIO_RECEIVE))	return 0
@@ -134,7 +134,7 @@
 	return
 
 
-/obj/item/device/assembly/signaler/proc/set_frequency(new_frequency)
+/obj/item/assembly/signaler/proc/set_frequency(new_frequency)
 	set waitfor = 0
 	if(!frequency)
 		return
@@ -147,7 +147,7 @@
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 	return
 
-/obj/item/device/assembly/signaler/Process()
+/obj/item/assembly/signaler/Process()
 	if(!deadman)
 		STOP_PROCESSING(SSobj, src)
 	var/mob/M = src.loc
@@ -160,7 +160,7 @@
 		M.visible_message("[M]'s finger twitches a bit over [src]'s signal button!")
 	return
 
-/obj/item/device/assembly/signaler/verb/deadman_it()
+/obj/item/assembly/signaler/verb/deadman_it()
 	set src in usr
 	set name = "Threaten to push the button!"
 	set desc = "BOOOOM!"
@@ -177,7 +177,7 @@
 		usr.visible_message("<span class='notice'>[usr] moves their finger away from [src]'s signal button.</span>")
 
 
-/obj/item/device/assembly/signaler/Destroy()
+/obj/item/assembly/signaler/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)
 	frequency = 0

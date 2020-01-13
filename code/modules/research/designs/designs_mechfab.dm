@@ -457,7 +457,7 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2)
 	build_type = MECHFAB
 	materials = list(MATERIAL_STEEL = 750, MATERIAL_GLASS = 750)
-	build_path = /obj/item/device/flash/synthetic
+	build_path = /obj/item/flash/synthetic
 	category = "Misc"
 
 //Augments, son
@@ -536,7 +536,7 @@
 /datum/design/item/mechfab/rig/zero
 	category = "Hardsuits"
 	name = "Null suit control module"
-	build_path = /obj/item/weapon/rig/zero
+	build_path = /obj/item/rig/zero
 	materials = list(DEFAULT_WALL_MATERIAL = 30000, "glass" = 5000, "silver" = 1000)
 	id = "null _suit"
 	time = 120

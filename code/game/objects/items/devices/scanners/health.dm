@@ -1,4 +1,4 @@
-/obj/item/device/scanner/health
+/obj/item/scanner/health
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	icon_state = "health"
@@ -9,10 +9,10 @@
 	printout_color = "#deebff"
 	var/mode = 1
 
-/obj/item/device/scanner/health/is_valid_scan_target(atom/O)
+/obj/item/scanner/health/is_valid_scan_target(atom/O)
 	return istype(O, /mob/living/carbon/human) || istype(O, /obj/structure/closet/body_bag)
 
-/obj/item/device/scanner/health/scan(atom/A, mob/user)
+/obj/item/scanner/health/scan(atom/A, mob/user)
 	scan_data = medical_scan_action(A, user, src, mode)
 	playsound(src, 'sound/effects/fastbeep.ogg', 20)
 
@@ -317,7 +317,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 
 	return degree
 
-/obj/item/device/scanner/health/verb/toggle_mode()
+/obj/item/scanner/health/verb/toggle_mode()
 	set name = "Switch Verbosity"
 	set category = "Object"
 

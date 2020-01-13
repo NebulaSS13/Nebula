@@ -1,25 +1,25 @@
 
-/obj/item/device/scanner/plant
+/obj/item/scanner/plant
 	name = "plant analyzer"
 	desc = "A hand-held botanical scanner used to analyze plants."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/fastbeep.ogg'
 	printout_color = "#eeffe8"
 	var/global/list/valid_targets = list(
-		/obj/item/weapon/reagent_containers/food/snacks/grown,
-		/obj/item/weapon/grown,
+		/obj/item/reagent_containers/food/snacks/grown,
+		/obj/item/grown,
 		/obj/machinery/portable_atmospherics/hydroponics,
 		/obj/item/seeds
 	)
 
-/obj/item/device/scanner/plant/is_valid_scan_target(atom/O)
+/obj/item/scanner/plant/is_valid_scan_target(atom/O)
 	if(is_type_in_list(O, valid_targets))
 		return TRUE
 	return FALSE
 
-/obj/item/device/scanner/plant/scan(atom/A, mob/user)
+/obj/item/scanner/plant/scan(atom/A, mob/user)
 	scan_title = "[A] at [get_area(A)]"
 	scan_data = plant_scan_results(A)
 	show_menu(user)
@@ -27,13 +27,13 @@
 /proc/plant_scan_results(obj/target)
 	var/datum/seed/grown_seed
 	var/datum/reagents/grown_reagents
-	if(istype(target,/obj/item/weapon/reagent_containers/food/snacks/grown))
-		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = target
+	if(istype(target,/obj/item/reagent_containers/food/snacks/grown))
+		var/obj/item/reagent_containers/food/snacks/grown/G = target
 		grown_seed = SSplants.seeds[G.plantname]
 		grown_reagents = G.reagents
 
-	else if(istype(target,/obj/item/weapon/grown))
-		var/obj/item/weapon/grown/G = target
+	else if(istype(target,/obj/item/grown))
+		var/obj/item/grown/G = target
 		grown_seed = SSplants.seeds[G.plantname]
 		grown_reagents = G.reagents
 

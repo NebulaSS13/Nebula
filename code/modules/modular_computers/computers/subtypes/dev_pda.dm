@@ -10,7 +10,7 @@
 	light_strength = 2
 	slot_flags = SLOT_ID | SLOT_BELT
 	stores_pen = TRUE
-	stored_pen = /obj/item/weapon/pen/retractable
+	stored_pen = /obj/item/pen/retractable
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
 
@@ -27,13 +27,13 @@
 		..()
 
 // PDA box
-/obj/item/weapon/storage/box/PDAs
+/obj/item/storage/box/PDAs
 	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"
 
-/obj/item/weapon/storage/box/PDAs/Initialize()
+/obj/item/storage/box/PDAs/Initialize()
 	. = ..()
 
 	new /obj/item/modular_computer/pda(src)
@@ -73,7 +73,7 @@
 	icon_state_unpowered = "pda-h"
 
 /obj/item/modular_computer/pda/heads/paperpusher
-	stored_pen = /obj/item/weapon/pen/fancy
+	stored_pen = /obj/item/pen/fancy
 
 /obj/item/modular_computer/pda/heads/hop
 	icon_state = "pda-hop"

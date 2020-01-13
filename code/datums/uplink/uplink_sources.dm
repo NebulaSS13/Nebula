@@ -24,7 +24,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 		return SETUP_FAILED
 
 	var/pda_pass = "[rand(100,999)] [pick(GLOB.greek_letters)]"
-	var/obj/item/device/uplink/T = new(P, M.mind, amount)
+	var/obj/item/uplink/T = new(P, M.mind, amount)
 	P.hidden_uplink = T
 	var/datum/computer_file/program/uplink/program = new(pda_pass)
 	if(!P.hard_drive.try_store_file(program))
@@ -40,7 +40,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a radio")
 
 /decl/uplink_source/radio/setup_uplink_source(var/mob/M, var/amount)
-	var/obj/item/device/radio/R = find_in_mob(M, /obj/item/device/radio)
+	var/obj/item/radio/R = find_in_mob(M, /obj/item/radio)
 	if(!R)
 		return SETUP_FAILED
 
@@ -54,7 +54,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 			freq += 1
 
 	freq = freqlist[rand(1, freqlist.len)]
-	var/obj/item/device/uplink/T = new(R, M.mind, amount)
+	var/obj/item/uplink/T = new(R, M.mind, amount)
 	R.hidden_uplink = T
 	R.traitor_frequency = freq
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features.</span>")
@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(!head)
 		return SETUP_FAILED
 
-	var/obj/item/weapon/implant/uplink/U = new(H, round(amount * 0.8))
+	var/obj/item/implant/uplink/U = new(H, round(amount * 0.8))
 	U.imp_in = H
 	U.implanted = TRUE
 	U.part = head
@@ -85,7 +85,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	desc = "Teleports an uplink unit to your location. Has 30% more TC."
 
 /decl/uplink_source/unit/setup_uplink_source(var/mob/M, var/amount)
-	var/obj/item/device/radio/uplink/U = new(M, M.mind, round(amount * 1.3))
+	var/obj/item/radio/uplink/U = new(M, M.mind, round(amount * 1.3))
 	put_on_mob(M, U, "\A [U]")
 
 /decl/uplink_source/telecrystals

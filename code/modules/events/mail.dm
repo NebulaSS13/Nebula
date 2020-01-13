@@ -8,23 +8,23 @@
 	endWhen = 3000
 
 	var/list/possible_gifts = list(
-		/obj/item/device/flashlight/lamp/lava,
-		/obj/item/weapon/storage/fancy/crayons,
+		/obj/item/flashlight/lamp/lava,
+		/obj/item/storage/fancy/crayons,
 		/obj/item/instrument/guitar,
 		/obj/item/toy/torchmodel,
 		/obj/item/clothing/accessory/locket,
-		/obj/item/device/binoculars,
-		/obj/item/device/camera,
+		/obj/item/binoculars,
+		/obj/item/camera,
 		/obj/item/clothing/accessory/bowtie/ugly
 	)
 
 	var/list/rare_gifts = list(
 		/obj/item/toy/bosunwhistle,
 		/obj/item/toy/cultsword,
-		/obj/item/weapon/bikehorn/airhorn,
-		/obj/item/weapon/gun/projectile/revolver/capgun,
-		/obj/item/weapon/grenade/fake,
-		/obj/item/weapon/storage/backpack/clown,
+		/obj/item/bikehorn/airhorn,
+		/obj/item/gun/projectile/revolver/capgun,
+		/obj/item/grenade/fake,
+		/obj/item/storage/backpack/clown,
 		/obj/item/organ/external/head,
 		/obj/item/clothing/glasses/night
 	)

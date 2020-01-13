@@ -91,13 +91,13 @@
 	icon_state = "star_traitor"
 	flags_inv = HIDEEARS | BLOCKHAIR
 
-/obj/item/weapon/material/knife/ritual/shadow
+/obj/item/material/knife/ritual/shadow
 	name = "black death"
 	desc = "An obsidian dagger. The singed remains of a green cloth are wrapped around the 'handle.'"
 	force_divisor = 0.3
 	var/charge = 5
 
-/obj/item/weapon/material/knife/ritual/shadow/apply_hit_effect(var/mob/living/target, var/mob/living/user, var/hit_zone)
+/obj/item/material/knife/ritual/shadow/apply_hit_effect(var/mob/living/target, var/mob/living/user, var/hit_zone)
 	. = ..()
 	if(charge)
 		if(target.getBruteLoss() > 15)
@@ -113,7 +113,7 @@
 			to_chat(user, "<span class='warning'>\The [src] appears to be out of power!</span>")
 		new /obj/effect/temporary(get_turf(user),3, 'icons/effects/effects.dmi', "fire_goon")
 
-/obj/item/weapon/gun/energy/staff/beacon
+/obj/item/gun/energy/staff/beacon
 	name = "holy beacon"
 	desc = "Look closely into its crystal; there's a miniature sun. Or maybe that's just some fancy LEDs. Either way, it looks thoroughly mystical."
 	icon = 'icons/obj/wizard.dmi'
@@ -123,7 +123,7 @@
 	projectile_type = /obj/item/projectile/energy/flash
 	required_antag_type = MODE_GODCULTIST
 
-/obj/item/weapon/material/sword/blazing
+/obj/item/material/sword/blazing
 	name = "blazing blade"
 	damtype = BURN
 	icon_state = "fireblade"
@@ -132,16 +132,16 @@
 	var/last_near_structure = 0
 	var/mob/living/deity/linked
 
-/obj/item/weapon/material/sword/blazing/Initialize(var/maploading, var/material, var/deity)
+/obj/item/material/sword/blazing/Initialize(var/maploading, var/material, var/deity)
 	. = ..()
 	START_PROCESSING(SSobj, src)
 	linked = deity
 
-/obj/item/weapon/material/sword/blazing/Destroy()
+/obj/item/material/sword/blazing/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/material/sword/blazing/Process()
+/obj/item/material/sword/blazing/Process()
 	if(!linked || last_near_structure + 10 SECONDS > world.time)
 		return
 

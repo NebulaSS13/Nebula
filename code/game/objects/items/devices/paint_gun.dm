@@ -1,6 +1,6 @@
-/obj/item/device/floor_painter
+/obj/item/floor_painter
 	name = "paint gun"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "flpainter"
 	item_state = "fl_painter"
 	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of exosuits, floors and walls."
@@ -68,7 +68,7 @@
 		)
 
 
-/obj/item/device/floor_painter/resolve_attackby(var/atom/A, var/mob/user, proximity, params)
+/obj/item/floor_painter/resolve_attackby(var/atom/A, var/mob/user, proximity, params)
 	if(!proximity)
 		return
 
@@ -184,7 +184,7 @@
 	playsound(get_turf(src), 'sound/effects/spray3.ogg', 30, 1, -6)
 	new painting_decal(F, painting_dir, painting_colour)
 
-/obj/item/device/floor_painter/attack_self(var/mob/user)
+/obj/item/floor_painter/attack_self(var/mob/user)
 	var/choice = input("What do you wish to change?") as null|anything in list("Decal","Direction", "Colour", "Preset Colour", "Mode")
 	if(choice == "Decal")
 		choose_decal()
@@ -197,11 +197,11 @@
 	else if(choice == "Mode")
 		toggle_mode()
 
-/obj/item/device/floor_painter/examine(mob/user)
+/obj/item/floor_painter/examine(mob/user)
 	. = ..(user)
 	to_chat(user, "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [paint_colour] paint.")
 
-/obj/item/device/floor_painter/verb/choose_colour()
+/obj/item/floor_painter/verb/choose_colour()
 	set name = "Choose Colour"
 	set desc = "Choose a paintgun colour."
 	set category = "Object"
@@ -214,7 +214,7 @@
 		paint_colour = new_colour
 		to_chat(usr, "<span class='notice'>You set \the [src] to paint with <font color='[paint_colour]'>a new colour</font>.</span>")
 
-/obj/item/device/floor_painter/verb/choose_preset_colour()
+/obj/item/floor_painter/verb/choose_preset_colour()
 	set name = "Choose Preset Colour"
 	set desc = "Choose a paintgun colour."
 	set category = "Object"
@@ -227,7 +227,7 @@
 		paint_colour = preset_colors[new_colour]
 		to_chat(usr, "<span class='notice'>You set \the [src] to paint with <font color='[paint_colour]'>a new colour</font>.</span>")
 
-/obj/item/device/floor_painter/verb/choose_decal()
+/obj/item/floor_painter/verb/choose_decal()
 	set name = "Choose Decal"
 	set desc = "Choose a paintgun decal."
 	set category = "Object"
@@ -241,7 +241,7 @@
 		decal = new_decal
 		to_chat(usr, "<span class='notice'>You set \the [src] decal to '[decal]'.</span>")
 
-/obj/item/device/floor_painter/verb/choose_direction()
+/obj/item/floor_painter/verb/choose_direction()
 	set name = "Choose Direction"
 	set desc = "Choose a paintgun direction."
 	set category = "Object"
@@ -255,7 +255,7 @@
 		paint_dir = new_dir
 		to_chat(usr, "<span class='notice'>You set \the [src] direction to '[paint_dir]'.</span>")
 
-/obj/item/device/floor_painter/verb/toggle_mode()
+/obj/item/floor_painter/verb/toggle_mode()
 	set name = "Toggle Painter Mode"
 	set desc = "Choose a paintgun mode."
 	set category = "Object"

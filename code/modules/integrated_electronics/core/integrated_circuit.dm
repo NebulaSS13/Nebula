@@ -5,7 +5,7 @@
 	icon_state = "template"
 	w_class = ITEM_SIZE_TINY
 	matter = list()				// To be filled later
-	var/obj/item/device/electronic_assembly/assembly // Reference to the assembly holding this circuit, if any.
+	var/obj/item/electronic_assembly/assembly // Reference to the assembly holding this circuit, if any.
 	var/extended_desc
 	var/list/inputs
 	var/list/inputs_default// Assoc list which will fill a pin with data upon creation.  e.g. "2" = 0 will set input pin 2 to equal 0 instead of null.
@@ -120,7 +120,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		displayed_name = input
 
 /obj/item/integrated_circuit/nano_host()
-	if(istype(src.loc, /obj/item/device/electronic_assembly))
+	if(istype(src.loc, /obj/item/electronic_assembly))
 		return loc
 	return ..()
 
@@ -252,7 +252,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 			if(href_list["link"])
 				linked = locate(href_list["link"]) in pin.linked
 
-			if(istype(held_item, /obj/item/device/integrated_electronics))
+			if(istype(held_item, /obj/item/integrated_electronics))
 				pin.handle_wire(linked, held_item, href_list["act"], usr)
 				. = IC_TOPIC_REFRESH
 			else
@@ -262,8 +262,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				assembly.add_allowed_scanner(usr.ckey)
 
 	else if(href_list["scan"])
-		if(istype(held_item, /obj/item/device/integrated_electronics/debugger))
-			var/obj/item/device/integrated_electronics/debugger/D = held_item
+		if(istype(held_item, /obj/item/integrated_electronics/debugger))
+			var/obj/item/integrated_electronics/debugger/D = held_item
 			if(D.accepting_refs)
 				D.afterattack(src, usr, TRUE)
 				. = IC_TOPIC_REFRESH
@@ -284,7 +284,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		. = IC_TOPIC_REFRESH
 
 	else if(href_list["remove"] && assembly)
-		if(istype(held_item, /obj/item/weapon/screwdriver))
+		if(istype(held_item, /obj/item/screwdriver))
 			disconnect_all()
 			dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
@@ -401,8 +401,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 	return FALSE
 
-/obj/item/integrated_circuit/proc/added_to_assembly(var/obj/item/device/electronic_assembly/assembly)
+/obj/item/integrated_circuit/proc/added_to_assembly(var/obj/item/electronic_assembly/assembly)
 	return
 
-/obj/item/integrated_circuit/proc/removed_from_assembly(var/obj/item/device/electronic_assembly/assembly)
+/obj/item/integrated_circuit/proc/removed_from_assembly(var/obj/item/electronic_assembly/assembly)
 	return

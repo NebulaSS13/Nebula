@@ -19,13 +19,13 @@
 			continue
 		H.Paralyse(5)
 		if(H.wear_id)
-			var/obj/item/weapon/card/id/id = H.GetIdCard()
+			var/obj/item/card/id/id = H.GetIdCard()
 			for(var/A in id.access)
 				if(A == access_security)
 					security++
 		if(!security)
 			//strip their stuff before they teleport into a cell :downs:
-			for(var/obj/item/weapon/W in H)
+			for(var/obj/item/W in H)
 				if(istype(W, /obj/item/organ/external))
 					continue
 					//don't strip organs

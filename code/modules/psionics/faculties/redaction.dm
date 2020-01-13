@@ -70,7 +70,7 @@
 			var/valid_objects = list()
 			for(var/thing in E.implants)
 				var/obj/imp = thing
-				if(imp.w_class >= removal_size && !istype(imp, /obj/item/weapon/implant))
+				if(imp.w_class >= removal_size && !istype(imp, /obj/item/implant))
 					valid_objects += imp
 			if(LAZYLEN(valid_objects))
 				var/removing = pick(valid_objects)

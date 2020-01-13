@@ -11,13 +11,13 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	var/inuse = 0
-	var/obj/item/weapon/reagent_containers/beaker = null
+	var/obj/item/reagent_containers/beaker = null
 	var/limit = 10
 	var/list/holdingitems = list()
 
 	var/list/bag_whitelist = list(
-		/obj/item/weapon/storage/pill_bottle,
-		/obj/item/weapon/storage/plants)
+		/obj/item/storage/pill_bottle,
+		/obj/item/storage/plants)
 	var/blacklisted_types = list()
 	var/item_size_limit = ITEM_SIZE_HUGE
 	var/skill_to_check = SKILL_CHEMISTRY
@@ -25,7 +25,7 @@
 
 /obj/machinery/reagentgrinder/New()
 	..()
-	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+	beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
 /obj/machinery/reagentgrinder/on_update_icon()
@@ -39,9 +39,9 @@
 
 /obj/machinery/reagentgrinder/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
-	if (istype(O,/obj/item/weapon/reagent_containers/glass) || \
-		istype(O,/obj/item/weapon/reagent_containers/food/drinks/glass2) || \
-		istype(O,/obj/item/weapon/reagent_containers/food/drinks/shaker))
+	if (istype(O,/obj/item/reagent_containers/glass) || \
+		istype(O,/obj/item/reagent_containers/food/drinks/glass2) || \
+		istype(O,/obj/item/reagent_containers/food/drinks/shaker))
 
 		if (beaker)
 			return 1
@@ -58,7 +58,7 @@
 		return
 
 	if(is_type_in_list(O, bag_whitelist))
-		var/obj/item/weapon/storage/bag = O
+		var/obj/item/storage/bag = O
 		var/failed = 1
 		for(var/obj/item/G in O)
 			if(!G.reagents || !G.reagents.total_volume)
@@ -287,7 +287,7 @@
 	obj_flags = null
 	grind_sound = 'sound/machines/juicer.ogg'
 	blacklisted_types = list(/obj/item/stack/material)
-	bag_whitelist = list(/obj/item/weapon/storage/plants)
+	bag_whitelist = list(/obj/item/storage/plants)
 	item_size_limit = ITEM_SIZE_SMALL
 	skill_to_check = SKILL_COOKING
 

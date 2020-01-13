@@ -1,4 +1,4 @@
-/obj/item/device/holowarrant
+/obj/item/holowarrant
 	name = "warrant projector"
 	desc = "The practical paperwork replacement for the officer on the go."
 	icon_state = "holowarrant"
@@ -13,7 +13,7 @@
 	var/datum/computer_file/data/warrant/active
 
 //look at it
-/obj/item/device/holowarrant/examine(mob/user, distance)
+/obj/item/holowarrant/examine(mob/user, distance)
 	. = ..()
 	if(active)
 		to_chat(user, "It's a holographic warrant for '[active.fields["namewarrant"]]'.")
@@ -23,7 +23,7 @@
 		to_chat(user, "<span class='notice'>You have to be closer if you want to read it.</span>")
 
 // an active warrant with access authorized grants access
-/obj/item/device/holowarrant/GetAccess()
+/obj/item/holowarrant/GetAccess()
 	. = list()
 
 	if(!active)
@@ -35,7 +35,7 @@
 	. |= active.fields["access"]
 
 //hit yourself with it
-/obj/item/device/holowarrant/attack_self(mob/living/user as mob)
+/obj/item/holowarrant/attack_self(mob/living/user as mob)
 	active = null
 	var/list/warrants = list()
 	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
@@ -51,9 +51,9 @@
 			active = W
 	update_icon()
 
-/obj/item/device/holowarrant/attackby(obj/item/weapon/W, mob/user)
+/obj/item/holowarrant/attackby(obj/item/W, mob/user)
 	if(active)
-		var/obj/item/weapon/card/id/I = W.GetIdCard()
+		var/obj/item/card/id/I = W.GetIdCard()
 		if(I && check_access_list(I.GetAccess()))
 			var/choice = alert(user, "Would you like to authorize this warrant?","Warrant authorization","Yes","No")
 			if(choice == "Yes")
@@ -67,18 +67,18 @@
 	..()
 
 //hit other people with it
-/obj/item/device/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	user.visible_message("<span class='notice'>[user] holds up a warrant projector and shows the contents to [M].</span>", \
 			"<span class='notice'>You show the warrant to [M].</span>")
 	M.examinate(src)
 
-/obj/item/device/holowarrant/on_update_icon()
+/obj/item/holowarrant/on_update_icon()
 	if(active)
 		icon_state = "holowarrant_filled"
 	else
 		icon_state = "holowarrant"
 
-/obj/item/device/holowarrant/proc/show_content(mob/user, forceshow)
+/obj/item/holowarrant/proc/show_content(mob/user, forceshow)
 	if(!active)
 		return
 	if(active.fields["arrestsearch"] == "arrest")

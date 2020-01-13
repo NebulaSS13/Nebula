@@ -122,19 +122,19 @@
 		if(T.density)
 			T.ChangeTurf(get_base_turf_by_area(T))
 
-/obj/item/device/spaceflare
+/obj/item/spaceflare
 	name = "bluespace flare"
 	desc = "Burst transmitter used to broadcast all needed information for shuttle navigation systems. Has a flare attached for marking the spot where you probably shouldn't be standing."
 	icon_state = "bluflare"
 	light_color = "#3728ff"
 	var/active
 
-/obj/item/device/spaceflare/attack_self(var/mob/user)
+/obj/item/spaceflare/attack_self(var/mob/user)
 	if(!active)
 		visible_message("<span class='notice'>[user] pulls the cord, activating the [src].</span>")
 		activate()
 
-/obj/item/device/spaceflare/proc/activate()
+/obj/item/spaceflare/proc/activate()
 	if(active)
 		return
 	var/turf/T = get_turf(src)
@@ -150,7 +150,7 @@
 	T.hotspot_expose(1500, 5)
 	update_icon()
 
-/obj/item/device/spaceflare/on_update_icon()
+/obj/item/spaceflare/on_update_icon()
 	if(active)
 		icon_state = "bluflare_on"
 		set_light(0.3, 0.1, 6, 2, "85d1ff")

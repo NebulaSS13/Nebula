@@ -1,4 +1,4 @@
-/obj/item/device/camera/tvcamera
+/obj/item/camera/tvcamera
 	name = "press camera drone"
 	desc = "A Ward-Takahashi EyeBuddy livestreaming press camera drone. Weapon of choice for war correspondents and reality show cameramen. It does not appear to have any internal memory storage."
 	icon_state = "camcorder"
@@ -7,19 +7,19 @@
 	slot_flags = SLOT_BELT
 	var/channel = "General News Feed"
 	var/obj/machinery/camera/network/thunder/camera
-	var/obj/item/device/radio/radio
+	var/obj/item/radio/radio
 
-/obj/item/device/camera/tvcamera/New()
+/obj/item/camera/tvcamera/New()
 	..()
 	GLOB.listening_objects += src
 
-/obj/item/device/camera/tvcamera/Destroy()
+/obj/item/camera/tvcamera/Destroy()
 	GLOB.listening_objects -= src
 	QDEL_NULL(camera)
 	QDEL_NULL(radio)
 	. = ..()
 
-/obj/item/device/camera/tvcamera/Initialize()
+/obj/item/camera/tvcamera/Initialize()
 	camera = new(src)
 	camera.c_tag = channel
 	camera.status = FALSE
@@ -29,13 +29,13 @@
 	radio.power_usage = 0
 	. = ..()
 
-/obj/item/device/camera/tvcamera/examine(mob/user)
+/obj/item/camera/tvcamera/examine(mob/user)
 	. = ..()
 	to_chat(user, "Video feed is currently: [camera.status ? "Online" : "Offline"]")
 	to_chat(user, "Audio feed is currently: [radio.broadcasting ? "Online" : "Offline"]")
 	to_chat(user, "Photography setting is currently: [on ? "On" : "Off"]")
 
-/obj/item/device/camera/tvcamera/attack_self(mob/user)
+/obj/item/camera/tvcamera/attack_self(mob/user)
 	add_fingerprint(user)
 	user.set_machine(src)
 	var/dat = list()
@@ -49,7 +49,7 @@
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/obj/item/device/camera/tvcamera/Topic(bred, href_list, state = GLOB.physical_state)
+/obj/item/camera/tvcamera/Topic(bred, href_list, state = GLOB.physical_state)
 	if(..())
 		return 1
 	if (href_list["photo"])
@@ -78,7 +78,7 @@
 	if(!href_list["close"])
 		attack_self(usr)
 
-/obj/item/device/camera/tvcamera/on_update_icon()
+/obj/item/camera/tvcamera/on_update_icon()
 	..()
 	if(camera.status)
 		icon_state = "camcorder_on"
@@ -92,11 +92,11 @@
 		H.update_inv_l_hand()
 
 /* Assembly by a roboticist */
-/obj/item/robot_parts/head/attackby(var/obj/item/device/assembly/S, mob/user as mob)
-	if ((!istype(S, /obj/item/device/assembly/infra)))
+/obj/item/robot_parts/head/attackby(var/obj/item/assembly/S, mob/user as mob)
+	if ((!istype(S, /obj/item/assembly/infra)))
 		..()
 		return
-	var/obj/item/weapon/TVAssembly/A = new(user)
+	var/obj/item/TVAssembly/A = new(user)
 	qdel(S)
 	user.put_in_hands(A)
 	to_chat(user, "<span class='notice'>You add the infrared sensor to the robot head.</span>")
@@ -104,7 +104,7 @@
 
 /* Using camcorder icon as I can't sprite.
 Using robohead because of restricting to roboticist */
-/obj/item/weapon/TVAssembly
+/obj/item/TVAssembly
 	name = "TV Camera assembly"
 	desc = "A robotic head with an infrared sensor inside"
 	icon = 'icons/obj/robot_parts.dmi'
@@ -113,7 +113,7 @@ Using robohead because of restricting to roboticist */
 	var/buildstep = 0
 	w_class = ITEM_SIZE_LARGE
 
-/obj/item/weapon/TVAssembly/attackby(var/obj/item/W, var/mob/user)
+/obj/item/TVAssembly/attackby(var/obj/item/W, var/mob/user)
 	switch(buildstep)
 		if(0)
 			if(istype(W, /obj/item/robot_parts/robot_component/camera))
@@ -122,7 +122,7 @@ Using robohead because of restricting to roboticist */
 				desc = "This TV camera assembly has a camera module."
 				buildstep++
 		if(1)
-			if(istype(W, /obj/item/device/taperecorder))
+			if(istype(W, /obj/item/taperecorder))
 				qdel(W)
 				buildstep++
 				to_chat(user, "<span class='notice'>You add the tape recorder to [src]</span>")
@@ -152,7 +152,7 @@ Using robohead because of restricting to roboticist */
 					buildstep++
 					to_chat(user, "<span class='notice'>You encase the assembly.</span>")
 					var/turf/T = get_turf(src)
-					new /obj/item/device/camera/tvcamera(T)
+					new /obj/item/camera/tvcamera(T)
 					qdel(src)
 					return
 	..()

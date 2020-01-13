@@ -8,7 +8,7 @@
 	id = "light_replacer"
 	req_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 4)
 	materials = list(MATERIAL_STEEL = 1500, MATERIAL_SILVER = 150, MATERIAL_GLASS = 3000)
-	build_path = /obj/item/device/lightreplacer
+	build_path = /obj/item/lightreplacer
 	sort_string = "VAGAB"
 
 /datum/design/item/tool/airlock_brace
@@ -17,7 +17,7 @@
 	id = "brace"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 50)
-	build_path = /obj/item/weapon/airlock_brace
+	build_path = /obj/item/airlock_brace
 	sort_string = "VAGAC"
 
 /datum/design/item/tool/brace_jack
@@ -26,7 +26,7 @@
 	id = "bracejack"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MATERIAL_STEEL = 120)
-	build_path = /obj/item/weapon/crowbar/brace_jack
+	build_path = /obj/item/crowbar/brace_jack
 	sort_string = "VAGAD"
 
 /datum/design/item/tool/clamp
@@ -52,7 +52,7 @@
 	id = "price_scanner"
 	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3000, MATERIAL_SILVER = 250)
-	build_path = /obj/item/device/scanner/price
+	build_path = /obj/item/scanner/price
 	sort_string = "VAGAF"
 
 /datum/design/item/tool/experimental_welder
@@ -61,7 +61,7 @@
 	id = "experimental_welder"
 	req_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4)
 	materials = list(MATERIAL_STEEL = 120, MATERIAL_GLASS = 50)
-	build_path = /obj/item/weapon/weldingtool/experimental
+	build_path = /obj/item/weldingtool/experimental
 	sort_string = "VAGAG"
 
 /datum/design/item/tool/shield_diffuser
@@ -70,7 +70,7 @@
 	id = "portable_shield_diffuser"
 	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ESOTERIC = 2)
 	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 5000, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 2000)
-	build_path = /obj/item/weapon/shield_diffuser
+	build_path = /obj/item/shield_diffuser
 	sort_string = "VAGAH"
 
 /datum/design/item/tool/rpd
@@ -79,7 +79,7 @@
 	id = "rpd"
 	req_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 6)
 	materials = list(MATERIAL_STEEL = 15000, MATERIAL_GLASS = 10000, MATERIAL_SILVER = 2000)
-	build_path = /obj/item/weapon/rpd
+	build_path = /obj/item/rpd
 	sort_string = "VAGAI"
 
 /datum/design/item/tool/oxycandle
@@ -89,5 +89,5 @@
 	req_tech = list(TECH_ENGINEERING = 2)
 	materials = list(MATERIAL_STEEL = 3000)
 	chemicals = list(/datum/reagent/sodiumchloride = 20, /datum/reagent/acetone = 20)
-	build_path = /obj/item/device/oxycandle
+	build_path = /obj/item/oxycandle
 	sort_string = "VAGAJ"

@@ -15,7 +15,7 @@
 "ae" = (
 /obj/structure/table/woodentable,
 /obj/random/advdevice,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "af" = (
@@ -27,8 +27,8 @@
 /area/unishi/library)
 "ag" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
-/obj/item/device/flashlight/lamp,
+/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "ah" = (
@@ -41,7 +41,7 @@
 /area/unishi/library)
 "ai" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "aj" = (
@@ -251,9 +251,9 @@
 /area/unishi/common)
 "aH" = (
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/circuitboard/solar_control,
-/obj/item/weapon/stock_parts/circuitboard/roboprinter,
-/obj/item/device/bot_kit,
+/obj/item/stock_parts/circuitboard/solar_control,
+/obj/item/stock_parts/circuitboard/roboprinter,
+/obj/item/bot_kit,
 /turf/simulated/floor,
 /area/unishi/common)
 "aI" = (
@@ -263,16 +263,16 @@
 /area/unishi/common)
 "aJ" = (
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/circuitboard/roboprinter,
-/obj/item/weapon/stock_parts/circuitboard/rdserver,
-/obj/item/weapon/stock_parts/circuitboard/helm,
+/obj/item/stock_parts/circuitboard/roboprinter,
+/obj/item/stock_parts/circuitboard/rdserver,
+/obj/item/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)
 "aK" = (
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/circuitboard/robotics,
-/obj/item/weapon/stock_parts/circuitboard/protolathe,
-/obj/item/weapon/stock_parts/circuitboard/helm,
+/obj/item/stock_parts/circuitboard/robotics,
+/obj/item/stock_parts/circuitboard/protolathe,
+/obj/item/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)
 "aL" = (
@@ -283,11 +283,11 @@
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "aN" = (
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/acetone,
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/copper,
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/imidazoline,
+/obj/item/reagent_containers/chem_disp_cartridge/acetone,
+/obj/item/reagent_containers/chem_disp_cartridge/copper,
+/obj/item/reagent_containers/chem_disp_cartridge/imidazoline,
 /obj/structure/table/rack,
-/obj/item/weapon/reagent_containers/syringe/antitoxin,
+/obj/item/reagent_containers/syringe/antitoxin,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "aO" = (
@@ -339,8 +339,8 @@
 /area/unishi/chem)
 "aV" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/reagent_containers/spray/cleaner,
-/obj/item/weapon/reagent_containers/dropper,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/dropper,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/chem)
 "aW" = (
@@ -432,9 +432,9 @@
 /area/unishi/chem)
 "bk" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
-/obj/item/weapon/reagent_containers/glass/beaker/bluespace,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/bluespace,
+/obj/item/reagent_containers/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "bl" = (
@@ -684,7 +684,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "bP" = (
-/obj/item/device/flashlight/upgraded,
+/obj/item/flashlight/upgraded,
 /turf/simulated/floor,
 /area/unishi/common)
 "bQ" = (
@@ -772,7 +772,7 @@
 /area/unishi/common)
 "ca" = (
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/item/reagent_containers/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cb" = (
@@ -878,9 +878,9 @@
 	pixel_y = -28
 	},
 /obj/structure/table/glass,
-/obj/item/weapon/pen/green,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/item/pen/green,
+/obj/item/paper_bin,
+/obj/item/reagent_containers/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "co" = (
@@ -1080,19 +1080,19 @@
 /area/unishi/meeting)
 "cN" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/pen/fancy,
+/obj/item/paper_bin,
+/obj/item/pen/fancy,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "cO" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/pen/fancy,
+/obj/item/pen/fancy,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "cP" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/folder/yellow,
-/obj/item/weapon/pen/green,
+/obj/item/folder/yellow,
+/obj/item/pen/green,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "cQ" = (
@@ -1149,8 +1149,8 @@
 	dir = 4
 	},
 /obj/random/clipboard,
-/obj/item/weapon/folder/white,
-/obj/item/weapon/pen/reagent/sleepy,
+/obj/item/folder/white,
+/obj/item/pen/reagent/sleepy,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "cY" = (
@@ -1158,8 +1158,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/weapon/folder/yellow,
-/obj/item/weapon/pen/green,
+/obj/item/folder/yellow,
+/obj/item/pen/green,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "cZ" = (
@@ -1170,9 +1170,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/item/weapon/folder/yellow,
-/obj/item/weapon/pen/green,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/item/folder/yellow,
+/obj/item/pen/green,
+/obj/item/reagent_containers/glass/bottle/tericadone,
 /obj/item/stack/material/phoron/fifty,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
@@ -1279,8 +1279,8 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "dn" = (
-/obj/item/device/transfer_valve,
-/obj/item/device/transfer_valve,
+/obj/item/transfer_valve,
+/obj/item/transfer_valve,
 /obj/structure/table/glass,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -1569,10 +1569,10 @@
 /area/unishi/rnd)
 "ea" = (
 /obj/structure/table/glass,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/reagent_containers/glass/bottle/tericadone,
+/obj/item/reagent_containers/glass/bottle/tericadone,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;
@@ -1721,17 +1721,17 @@
 /area/unishi/xenobio)
 "ev" = (
 /obj/structure/table/glass,
-/obj/item/device/scanner/xenobio,
-/obj/item/weapon/storage/box/monkeycubes,
+/obj/item/scanner/xenobio,
+/obj/item/storage/box/monkeycubes,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white,
 /area/unishi/xenobio)
 "ew" = (
 /obj/structure/table/glass,
-/obj/item/weapon/extinguisher,
-/obj/item/weapon/extinguisher,
-/obj/item/weapon/extinguisher,
-/obj/item/weapon/storage/box/monkeycubes,
+/obj/item/extinguisher,
+/obj/item/extinguisher,
+/obj/item/extinguisher,
+/obj/item/storage/box/monkeycubes,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -1860,8 +1860,8 @@
 /area/unishi/xenobio)
 "eO" = (
 /obj/machinery/optable,
-/obj/item/weapon/scalpel,
-/obj/item/weapon/circular_saw,
+/obj/item/scalpel,
+/obj/item/circular_saw,
 /turf/simulated/floor/tiled/white,
 /area/unishi/xenobio)
 "eP" = (
@@ -2167,7 +2167,7 @@
 "fy" = (
 /obj/structure/table/woodentable,
 /obj/random/snack,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fz" = (
@@ -2180,7 +2180,7 @@
 /area/unishi/common)
 "fA" = (
 /obj/machinery/portable_atmospherics/hydroponics,
-/obj/item/weapon/plantspray/weeds,
+/obj/item/plantspray/weeds,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fB" = (
@@ -2192,8 +2192,8 @@
 /area/unishi/common)
 "fC" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper_bin,
-/obj/item/device/flashlight/lamp,
+/obj/item/paper_bin,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fD" = (
@@ -2489,7 +2489,7 @@
 /area/unishi/smresearch)
 "go" = (
 /obj/effect/decal/cleanable/vomit,
-/obj/item/weapon/defibrillator,
+/obj/item/defibrillator,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gp" = (
@@ -2816,7 +2816,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gY" = (
-/obj/item/weapon/paper/crumpled/bloody{
+/obj/item/paper/crumpled/bloody{
 	info = "I FUCKING KNEW that piece of shit was no good. To whoever finds this, his name is Robert Moreno. He is one of the undergrads here, or at least his story went. The fucker lured us here on the pretense of a huge emergency, and the second we came in, the shutters closed behind us. We have been hearing gunshots through the ship throughout. The emitter was locked and on, and kept hitting that rock thing that one of the profs was studying, and we cant get the damn thing to stop. It chewed through everything we put in front of it and it doesnt look like it's stopping any time soon. The grad student in charge of this monstrosity is screaming and telling us that it's all over. We've been vomiting non stop, and I think our time here is running out."
 	},
 /obj/item/usedcryobag,
@@ -2824,7 +2824,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gZ" = (
-/obj/item/device/geiger,
+/obj/item/geiger,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -2838,7 +2838,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hb" = (
-/obj/item/weapon/book/manual/engineering_construction,
+/obj/item/book/manual/engineering_construction,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";

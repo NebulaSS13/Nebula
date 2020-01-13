@@ -21,13 +21,13 @@
 
 /obj/structure/closet/emcloset/WillContain()
 	//Guaranteed kit - two tanks and masks
-	. = list(/obj/item/weapon/tank/emergency/oxygen = 2,
+	. = list(/obj/item/tank/emergency/oxygen = 2,
 			/obj/item/clothing/mask/breath = 2)
 
-	. += new/datum/atom_creator/simple(list(/obj/item/weapon/storage/toolbox/emergency, /obj/item/inflatable/wall = 2), 75)
-	. += new/datum/atom_creator/simple(list(/obj/item/weapon/tank/emergency/oxygen/engi, /obj/item/clothing/mask/gas/half), 10)
-	. += new/datum/atom_creator/simple(/obj/item/device/oxycandle, 15)
-	. += new/datum/atom_creator/simple(/obj/item/weapon/storage/firstaid/o2, 25)
+	. += new/datum/atom_creator/simple(list(/obj/item/storage/toolbox/emergency, /obj/item/inflatable/wall = 2), 75)
+	. += new/datum/atom_creator/simple(list(/obj/item/tank/emergency/oxygen/engi, /obj/item/clothing/mask/gas/half), 10)
+	. += new/datum/atom_creator/simple(/obj/item/oxycandle, 15)
+	. += new/datum/atom_creator/simple(/obj/item/storage/firstaid/o2, 25)
 	. += new/datum/atom_creator/simple(list(/obj/item/clothing/suit/space/emergency,/obj/item/clothing/head/helmet/space/emergency), 25)
 
 /*
@@ -41,22 +41,22 @@
 
 /obj/structure/closet/firecloset/WillContain()
 	return list(
-		/obj/item/weapon/storage/med_pouch/burn,
-		/obj/item/weapon/storage/backpack/dufflebag/firefighter,
+		/obj/item/storage/med_pouch/burn,
+		/obj/item/storage/backpack/dufflebag/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight
+		/obj/item/flashlight
 		)
 
 /obj/structure/closet/firecloset/chief
 
 /obj/structure/closet/firecloset/chief/WillContain()
 	return list(
-		/obj/item/weapon/storage/med_pouch/burn,
+		/obj/item/storage/med_pouch/burn,
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight,
-		/obj/item/weapon/tank/oxygen/red,
-		/obj/item/weapon/extinguisher,
+		/obj/item/flashlight,
+		/obj/item/tank/oxygen/red,
+		/obj/item/extinguisher,
 		/obj/item/clothing/head/hardhat/firefighter/Chief)
 
 /*
@@ -72,21 +72,21 @@
 	if(prob(40))
 		new /obj/item/clothing/suit/storage/hazardvest(src)
 	if(prob(70))
-		new /obj/item/device/flashlight(src)
+		new /obj/item/flashlight(src)
 	if(prob(70))
-		new /obj/item/weapon/screwdriver(src)
+		new /obj/item/screwdriver(src)
 	if(prob(70))
-		new /obj/item/weapon/wrench(src)
+		new /obj/item/wrench(src)
 	if(prob(70))
-		new /obj/item/weapon/weldingtool(src)
+		new /obj/item/weldingtool(src)
 	if(prob(70))
-		new /obj/item/weapon/crowbar(src)
+		new /obj/item/crowbar(src)
 	if(prob(70))
-		new /obj/item/weapon/wirecutters(src)
+		new /obj/item/wirecutters(src)
 	if(prob(70))
-		new /obj/item/device/t_scanner(src)
+		new /obj/item/t_scanner(src)
 	if(prob(20))
-		new /obj/item/weapon/storage/belt/utility(src)
+		new /obj/item/storage/belt/utility(src)
 	if(prob(30))
 		new /obj/item/stack/cable_coil/random(src)
 	if(prob(30))
@@ -94,7 +94,7 @@
 	if(prob(30))
 		new /obj/item/stack/cable_coil/random(src)
 	if(prob(20))
-		new /obj/item/device/multitool(src)
+		new /obj/item/multitool(src)
 	if(prob(5))
 		new /obj/item/clothing/gloves/insulated(src)
 	if(prob(40))
@@ -111,12 +111,12 @@
 
 /obj/structure/closet/radiation/WillContain()
 	return list(
-		/obj/item/weapon/storage/med_pouch/toxin = 2,
+		/obj/item/storage/med_pouch/toxin = 2,
 		/obj/item/clothing/suit/radiation,
 		/obj/item/clothing/head/radiation,
 		/obj/item/clothing/suit/radiation,
 		/obj/item/clothing/head/radiation,
-		/obj/item/device/geiger = 2)
+		/obj/item/geiger = 2)
 
 /*
  * Bombsuit closet
@@ -162,9 +162,9 @@
 /obj/structure/closet/hydrant/WillContain()
 	return list(
 		/obj/item/inflatable/door = 2,
-		/obj/item/weapon/storage/med_pouch/burn = 2,
+		/obj/item/storage/med_pouch/burn = 2,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/storage/backpack/dufflebag/firefighter
+		/obj/item/storage/backpack/dufflebag/firefighter
 		)
 
 /*
@@ -198,5 +198,5 @@
 /obj/structure/closet/shipping_wall/filled/WillContain()
 	return list(
 		/obj/item/stack/material/cardboard/ten,
-		/obj/item/device/destTagger,
+		/obj/item/destTagger,
 		/obj/item/stack/package_wrap/twenty_five)

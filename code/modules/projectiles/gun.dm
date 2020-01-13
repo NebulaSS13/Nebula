@@ -9,7 +9,7 @@
 	var/name = "default"
 	var/list/settings = list()
 
-/datum/firemode/New(obj/item/weapon/gun/gun, list/properties = null)
+/datum/firemode/New(obj/item/gun/gun, list/properties = null)
 	..()
 	if(!properties) return
 
@@ -23,12 +23,12 @@
 		else
 			settings[propname] = propvalue
 
-/datum/firemode/proc/apply_to(obj/item/weapon/gun/gun)
+/datum/firemode/proc/apply_to(obj/item/gun/gun)
 	for(var/propname in settings)
 		gun.vars[propname] = settings[propname]
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
-/obj/item/weapon/gun
+/obj/item/gun
 	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
 	icon = 'icons/obj/guns/gui.dmi'
@@ -91,7 +91,7 @@
 	var/has_safety = TRUE
 	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
 
-/obj/item/weapon/gun/Initialize()
+/obj/item/gun/Initialize()
 	. = ..()
 	for(var/i in 1 to firemodes.len)
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
@@ -100,14 +100,14 @@
 		scoped_accuracy = accuracy
 
 	if(scope_zoom)
-		verbs += /obj/item/weapon/gun/proc/scope
+		verbs += /obj/item/gun/proc/scope
 
-/obj/item/weapon/gun/update_twohanding()
+/obj/item/gun/update_twohanding()
 	if(one_hand_penalty)
 		update_icon() // In case item_state is set somewhere else.
 	..()
 
-/obj/item/weapon/gun/on_update_icon()
+/obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
 	overlays.Cut()
 	if(istype(M))
@@ -126,7 +126,7 @@
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
 //Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
-/obj/item/weapon/gun/proc/special_check(var/mob/user)
+/obj/item/gun/proc/special_check(var/mob/user)
 
 	if(!istype(user, /mob/living))
 		return 0
@@ -156,11 +156,11 @@
 		return 0
 	return 1
 
-/obj/item/weapon/gun/emp_act(severity)
+/obj/item/gun/emp_act(severity)
 	for(var/obj/O in contents)
 		O.emp_act(severity)
 
-/obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
+/obj/item/gun/afterattack(atom/A, mob/living/user, adjacent, params)
 	if(adjacent) return //A is adjacent, is the user, or is on the user's person
 
 	if(!user.aiming)
@@ -172,7 +172,7 @@
 
 	Fire(A,user,params) //Otherwise, fire normally.
 
-/obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
+/obj/item/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
 		handle_suicide(user)
 	else if(user.a_intent != I_HURT && user.aiming && user.aiming.active) //if aim mode, don't pistol whip
@@ -185,12 +185,12 @@
 	else
 		return ..() //Pistolwhippin'
 
-/obj/item/weapon/gun/dropped(var/mob/living/user)
+/obj/item/gun/dropped(var/mob/living/user)
 	check_accidents(user)
 	update_icon()
 	return ..()
 
-/obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
+/obj/item/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
 	if(target.z != user.z) return
 
@@ -250,11 +250,11 @@
 	next_fire_time = world.time + delay
 
 //obtains the next projectile to fire
-/obj/item/weapon/gun/proc/consume_next_projectile()
+/obj/item/gun/proc/consume_next_projectile()
 	return null
 
 //used by aiming code
-/obj/item/weapon/gun/proc/can_hit(atom/target as mob, var/mob/living/user as mob)
+/obj/item/gun/proc/can_hit(atom/target as mob, var/mob/living/user as mob)
 	if(!special_check(user))
 		return 2
 	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone
@@ -262,7 +262,7 @@
 	return check_trajectory(target, user)
 
 //called if there was no projectile to shoot
-/obj/item/weapon/gun/proc/handle_click_empty(mob/user)
+/obj/item/gun/proc/handle_click_empty(mob/user)
 	if (user)
 		user.visible_message("*click click*", "<span class='danger'>*click*</span>")
 	else
@@ -270,7 +270,7 @@
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 
 //called after successfully firing
-/obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
 	if(fire_anim)
 		flick(fire_anim, src)
 
@@ -319,15 +319,15 @@
 
 	if(istype(user,/mob/living/carbon/human) && user.is_cloaked()) //shooting will disable a rig cloaking device
 		var/mob/living/carbon/human/H = user
-		if(istype(H.back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/R = H.back
+		if(istype(H.back,/obj/item/rig))
+			var/obj/item/rig/R = H.back
 			for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
 				S.deactivate()
 
 	update_icon()
 
 
-/obj/item/weapon/gun/proc/process_point_blank(obj/projectile, mob/user, atom/target)
+/obj/item/gun/proc/process_point_blank(obj/projectile, mob/user, atom/target)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
@@ -344,7 +344,7 @@
 			max_mult = max(max_mult, G.point_blank_mult())
 	P.damage *= max_mult
 
-/obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/living/user, atom/target, var/burst, var/held_twohanded)
+/obj/item/gun/proc/process_accuracy(obj/projectile, mob/living/user, atom/target, var/burst, var/held_twohanded)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
@@ -386,7 +386,7 @@
 	P.dispersion = disp_mod
 
 //does the actual launching of the projectile
-/obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
+/obj/item/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return 0 //default behaviour only applies to true projectiles
@@ -413,7 +413,7 @@
 
 	return launched
 
-/obj/item/weapon/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
+/obj/item/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
 	var/shot_sound = (istype(P) && P.fire_sound)? P.fire_sound : fire_sound
 	if(silenced)
 		playsound(user, shot_sound, 10, 1)
@@ -421,8 +421,8 @@
 		playsound(user, shot_sound, 50, 1)
 
 //Suicide handling.
-/obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
-/obj/item/weapon/gun/proc/handle_suicide(mob/living/user)
+/obj/item/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
+/obj/item/gun/proc/handle_suicide(mob/living/user)
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/M = user
@@ -468,14 +468,14 @@
 		mouthshoot = 0
 		return
 
-/obj/item/weapon/gun/proc/scope()
+/obj/item/gun/proc/scope()
 	set category = "Object"
 	set name = "Use Scope"
 	set popup_menu = 1
 
 	toggle_scope(usr, scope_zoom)
 
-/obj/item/weapon/gun/proc/toggle_scope(mob/user, var/zoom_amount=2.0)
+/obj/item/gun/proc/toggle_scope(mob/user, var/zoom_amount=2.0)
 	//looking through a scope limits your periphereal vision
 	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
 	var/zoom_offset = round(world.view * zoom_amount)
@@ -494,13 +494,13 @@
 			screen_shake = round(screen_shake*zoom_amount+1) //screen shake is worse when looking through a scope
 
 //make sure accuracy and screen_shake are reset regardless of how the item is unzoomed.
-/obj/item/weapon/gun/zoom()
+/obj/item/gun/zoom()
 	..()
 	if(!zoom)
 		accuracy = initial(accuracy)
 		screen_shake = initial(screen_shake)
 
-/obj/item/weapon/gun/examine(mob/user)
+/obj/item/gun/examine(mob/user)
 	. = ..()
 	if(user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		if(firemodes.len > 1)
@@ -510,7 +510,7 @@
 		to_chat(user, "The safety is [safety() ? "on" : "off"].")
 	last_safety_check = world.time
 
-/obj/item/weapon/gun/proc/switch_firemodes()
+/obj/item/gun/proc/switch_firemodes()
 
 	var/next_mode = get_next_firemode()
 	if(!next_mode || next_mode == sel_mode)
@@ -522,21 +522,21 @@
 	playsound(loc, selector_sound, 50, 1)
 	return new_mode
 
-/obj/item/weapon/gun/proc/get_next_firemode()
+/obj/item/gun/proc/get_next_firemode()
 	if(firemodes.len <= 1)
 		return null
 	. = sel_mode + 1
 	if(. > firemodes.len)
 		. = 1
 
-/obj/item/weapon/gun/attack_self(mob/user)
+/obj/item/gun/attack_self(mob/user)
 	var/datum/firemode/new_mode = switch_firemodes(user)
 	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		new_mode = switch_firemodes(user)
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
-/obj/item/weapon/gun/proc/toggle_safety(var/mob/user)
+/obj/item/gun/proc/toggle_safety(var/mob/user)
 	safety_state = !safety_state
 	update_icon()
 	if(user)
@@ -544,31 +544,31 @@
 		last_safety_check = world.time
 		playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
 
-/obj/item/weapon/gun/verb/toggle_safety_verb()
+/obj/item/gun/verb/toggle_safety_verb()
 	set src in usr
 	set category = "Object"
 	set name = "Toggle Gun Safety"
 	if(usr == loc)
 		toggle_safety(usr)
 
-/obj/item/weapon/gun/CtrlClick(var/mob/user)
+/obj/item/gun/CtrlClick(var/mob/user)
 	if(loc == user)
 		toggle_safety(user)
 		return TRUE
 	. = ..()
 
-/obj/item/weapon/gun/proc/safety()
+/obj/item/gun/proc/safety()
 	return has_safety && safety_state
 
-/obj/item/weapon/gun/equipped()
+/obj/item/gun/equipped()
 	..()
 	update_icon()
 	last_handled = world.time
 
-/obj/item/weapon/gun/on_active_hand()
+/obj/item/gun/on_active_hand()
 	last_handled = world.time
 
-/obj/item/weapon/gun/on_disarm_attempt(mob/target, mob/attacker)
+/obj/item/gun/on_disarm_attempt(mob/target, mob/attacker)
 	var/list/turfs = list()
 	for(var/turf/T in view())
 		turfs += T
@@ -578,10 +578,10 @@
 		afterattack(shoot_to,target)
 		return 1
 
-/obj/item/weapon/gun/proc/can_autofire()
+/obj/item/gun/proc/can_autofire()
 	return (can_autofire && world.time >= next_fire_time)
 
-/obj/item/weapon/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
+/obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
 	if(istype(user))
 		if(!safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
 			user.visible_message(SPAN_WARNING(message))

@@ -16,7 +16,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	initial_spawn_target = 6
 	min_player_age = 14
 
-	id_type = /obj/item/weapon/card/id/syndicate
+	id_type = /obj/item/card/id/syndicate
 
 	faction = "pirate"
 	base_to_load = /datum/map_template/ruin/antag_spawn/heist
@@ -65,34 +65,34 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		)
 
 	var/list/raider_guns = list(
-		/obj/item/weapon/gun/energy/laser,
-		/obj/item/weapon/gun/energy/retro,
-		/obj/item/weapon/gun/energy/xray,
-		/obj/item/weapon/gun/energy/xray/pistol,
-		/obj/item/weapon/gun/energy/mindflayer,
-		/obj/item/weapon/gun/energy/toxgun,
-		/obj/item/weapon/gun/energy/stunrevolver,
-		/obj/item/weapon/gun/energy/ionrifle,
-		/obj/item/weapon/gun/energy/taser,
-		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
-		/obj/item/weapon/gun/launcher/crossbow,
-		/obj/item/weapon/gun/launcher/grenade/loaded,
-		/obj/item/weapon/gun/launcher/pneumatic,
-		/obj/item/weapon/gun/projectile/automatic/machine_pistol,
-		/obj/item/weapon/gun/projectile/automatic/merc_smg,
-		/obj/item/weapon/gun/projectile/automatic/sec_smg,
-		/obj/item/weapon/gun/projectile/automatic/assault_rifle,
-		/obj/item/weapon/gun/projectile/shotgun/pump,
-		/obj/item/weapon/gun/projectile/shotgun/pump/combat,
-		/obj/item/weapon/gun/projectile/shotgun/doublebarrel,
-		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/pellet,
-		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
-		/obj/item/weapon/gun/projectile/pistol/sec,
-		/obj/item/weapon/gun/projectile/pistol/holdout,
-		/obj/item/weapon/gun/projectile/revolver,
-		/obj/item/weapon/gun/projectile/pirate,
-		/obj/item/weapon/gun/projectile/revolver/medium,
-		/obj/item/weapon/gun/projectile/pistol/throwback
+		/obj/item/gun/energy/laser,
+		/obj/item/gun/energy/retro,
+		/obj/item/gun/energy/xray,
+		/obj/item/gun/energy/xray/pistol,
+		/obj/item/gun/energy/mindflayer,
+		/obj/item/gun/energy/toxgun,
+		/obj/item/gun/energy/stunrevolver,
+		/obj/item/gun/energy/ionrifle,
+		/obj/item/gun/energy/taser,
+		/obj/item/gun/energy/crossbow/largecrossbow,
+		/obj/item/gun/launcher/crossbow,
+		/obj/item/gun/launcher/grenade/loaded,
+		/obj/item/gun/launcher/pneumatic,
+		/obj/item/gun/projectile/automatic/machine_pistol,
+		/obj/item/gun/projectile/automatic/merc_smg,
+		/obj/item/gun/projectile/automatic/sec_smg,
+		/obj/item/gun/projectile/automatic/assault_rifle,
+		/obj/item/gun/projectile/shotgun/pump,
+		/obj/item/gun/projectile/shotgun/pump/combat,
+		/obj/item/gun/projectile/shotgun/doublebarrel,
+		/obj/item/gun/projectile/shotgun/doublebarrel/pellet,
+		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
+		/obj/item/gun/projectile/pistol/sec,
+		/obj/item/gun/projectile/pistol/holdout,
+		/obj/item/gun/projectile/revolver,
+		/obj/item/gun/projectile/pirate,
+		/obj/item/gun/projectile/revolver/medium,
+		/obj/item/gun/projectile/pistol/throwback
 		)
 
 	var/list/raider_holster = list(
@@ -102,8 +102,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		)
 
 /datum/antagonist/raider/update_access(var/mob/living/player)
-	for(var/obj/item/weapon/storage/wallet/W in player.contents)
-		for(var/obj/item/weapon/card/id/id in W.contents)
+	for(var/obj/item/storage/wallet/W in player.contents)
+		for(var/obj/item/card/id/id in W.contents)
 			id.SetName("[player.real_name]'s Passport")
 			id.registered_name = player.real_name
 			W.SetName("[initial(W.name)] ([id.name])")
@@ -169,10 +169,10 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
 	equip_weapons(player)
 
-	var/obj/item/weapon/card/id/id = create_id("Visitor", player, equip = 0)
+	var/obj/item/card/id/id = create_id("Visitor", player, equip = 0)
 	id.SetName("[player.real_name]'s Passport")
 	id.assignment = "Visitor"
-	var/obj/item/weapon/storage/wallet/W = new(player)
+	var/obj/item/storage/wallet/W = new(player)
 	W.handle_item_insertion(id)
 	if(player.equip_to_slot_or_del(W, slot_wear_id))
 		spawn_money(rand(50,150)*10,W)
@@ -190,7 +190,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 
 	//Give some of the raiders a pirate gun as a secondary
 	if(prob(60))
-		var/obj/item/secondary = new /obj/item/weapon/gun/projectile/pirate(T)
+		var/obj/item/secondary = new /obj/item/gun/projectile/pirate(T)
 		if(!(primary.slot_flags & SLOT_HOLSTER))
 			holster = new new_holster(T)
 			var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
@@ -221,15 +221,15 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		else
 			player.put_in_any_hand_if_possible(holster)
 
-/datum/antagonist/raider/proc/equip_ammo(var/mob/living/carbon/human/player, var/obj/item/weapon/gun/gun)
-	if(istype(gun, /obj/item/weapon/gun/projectile))
-		var/obj/item/weapon/gun/projectile/bullet_thrower = gun
+/datum/antagonist/raider/proc/equip_ammo(var/mob/living/carbon/human/player, var/obj/item/gun/gun)
+	if(istype(gun, /obj/item/gun/projectile))
+		var/obj/item/gun/projectile/bullet_thrower = gun
 		if(bullet_thrower.magazine_type)
 			player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_l_store)
 			if(prob(20)) //don't want to give them too much
 				player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_r_store)
 		else if(bullet_thrower.ammo_type)
-			var/obj/item/weapon/storage/box/ammobox = new(get_turf(player.loc))
+			var/obj/item/storage/box/ammobox = new(get_turf(player.loc))
 			for(var/i in 1 to rand(3,5) + rand(0,2))
 				new bullet_thrower.ammo_type(ammobox)
 			player.put_in_any_hand_if_possible(ammobox)

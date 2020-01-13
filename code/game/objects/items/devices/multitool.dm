@@ -3,7 +3,7 @@
  *
  */
 
-/obj/item/device/multitool
+/obj/item/multitool
 	name = "multitool"
 	desc = "This small, handheld device is made of durable, insulated plastic, and tipped with electrodes, perfect for interfacing with numerous machines."
 	icon_state = "multitool"
@@ -21,41 +21,41 @@
 	var/buffer_name
 	var/atom/buffer_object
 
-/obj/item/device/multitool/Destroy()
+/obj/item/multitool/Destroy()
 	unregister_buffer(buffer_object)
 	return ..()
 
-/obj/item/device/multitool/proc/get_buffer(var/typepath)
+/obj/item/multitool/proc/get_buffer(var/typepath)
 	// Only allow clearing the buffer name when someone fetches the buffer.
 	// Means you cannot be sure the source hasn't been destroyed until the very moment it's needed.
 	get_buffer_name(TRUE)
 	if(buffer_object && (!typepath || istype(buffer_object, typepath)))
 		return buffer_object
 
-/obj/item/device/multitool/proc/get_buffer_name(var/null_name_if_missing = FALSE)
+/obj/item/multitool/proc/get_buffer_name(var/null_name_if_missing = FALSE)
 	if(buffer_object)
 		buffer_name = buffer_object.name
 	else if(null_name_if_missing)
 		buffer_name = null
 	return buffer_name
 
-/obj/item/device/multitool/proc/set_buffer(var/atom/buffer)
+/obj/item/multitool/proc/set_buffer(var/atom/buffer)
 	if(!buffer || istype(buffer))
 		buffer_name = buffer ? buffer.name : null
 		if(buffer != buffer_object)
 			unregister_buffer(buffer_object)
 			buffer_object = buffer
 			if(buffer_object)
-				GLOB.destroyed_event.register(buffer_object, src, /obj/item/device/multitool/proc/unregister_buffer)
+				GLOB.destroyed_event.register(buffer_object, src, /obj/item/multitool/proc/unregister_buffer)
 
-/obj/item/device/multitool/proc/unregister_buffer(var/atom/buffer_to_unregister)
+/obj/item/multitool/proc/unregister_buffer(var/atom/buffer_to_unregister)
 	// Only remove the buffered object, don't reset the name
 	// This means one cannot know if the buffer has been destroyed until one attempts to use it.
 	if(buffer_to_unregister == buffer_object && buffer_object)
 		GLOB.destroyed_event.unregister(buffer_object, src)
 		buffer_object = null
 
-/obj/item/device/multitool/resolve_attackby(atom/A, mob/user)
+/obj/item/multitool/resolve_attackby(atom/A, mob/user)
 	if(!isobj(A))
 		return ..(A, user)
 

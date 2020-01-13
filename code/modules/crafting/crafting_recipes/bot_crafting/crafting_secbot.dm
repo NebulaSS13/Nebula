@@ -1,6 +1,6 @@
 /decl/crafting_stage/secbot_signaller
 	begins_with_object_type = /obj/item/clothing/head/helmet
-	completion_trigger_type = /obj/item/device/assembly/signaler
+	completion_trigger_type = /obj/item/assembly/signaler
 	progress_message = "You add the signaler to the helmet."
 	item_icon_state = "secbot_1"
 	next_stages = list(/decl/crafting_stage/welding/secbot)
@@ -23,6 +23,6 @@
 	next_stages = list(/decl/crafting_stage/secbot_baton)
 
 /decl/crafting_stage/secbot_baton
-	completion_trigger_type = /obj/item/weapon/melee/baton
+	completion_trigger_type = /obj/item/melee/baton
 	progress_message = "You complete the Securitron! Beep boop."
 	product = /mob/living/bot/secbot

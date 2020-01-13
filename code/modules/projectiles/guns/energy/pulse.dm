@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/energy/pulse_rifle
+/obj/item/gun/energy/pulse_rifle
 	name = "pulse rifle"
 	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Because of its complexity and cost, it is rarely seen in use except by specialists."
 	icon = 'icons/obj/guns/pulse_rifle.dmi'
@@ -18,7 +18,7 @@
 	wielded_item_state = "gun_wielded"
 	bulk = GUN_BULK_RIFLE
 
-/obj/item/weapon/gun/energy/pulse_rifle/carbine
+/obj/item/gun/energy/pulse_rifle/carbine
 	name = "pulse carbine"
 	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Less bulky than the full-sized rifle."
 	icon = 'icons/obj/guns/pulse_carbine.dmi'
@@ -33,7 +33,7 @@
 	move_delay = 2
 	bulk = GUN_BULK_RIFLE - 3
 
-/obj/item/weapon/gun/energy/pulse_rifle/pistol
+/obj/item/gun/energy/pulse_rifle/pistol
 	name = "pulse pistol"
 	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Even smaller than the carbine."
 	icon = 'icons/obj/guns/pulse_pistol.dmi'
@@ -49,18 +49,18 @@
 	wielded_item_state = null
 	bulk = 0
 
-/obj/item/weapon/gun/energy/pulse_rifle/mounted
+/obj/item/gun/energy/pulse_rifle/mounted
 	self_recharge = 1
 	use_external_power = 1
 	has_safety = FALSE
 
-/obj/item/weapon/gun/energy/pulse_rifle/destroyer
+/obj/item/gun/energy/pulse_rifle/destroyer
 	name = "pulse destroyer"
 	desc = "A heavy-duty, pulse-based energy weapon. Because of its complexity and cost, it is rarely seen in use except by specialists."
-	cell_type = /obj/item/weapon/cell/super
+	cell_type = /obj/item/cell/super
 	fire_delay = 25
 	projectile_type=/obj/item/projectile/beam/pulse/destroy
 	charge_cost= 40
 
-/obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
+/obj/item/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
 	to_chat(user, "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>")

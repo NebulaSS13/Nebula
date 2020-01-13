@@ -42,7 +42,7 @@
 				if (!subject_uniform.has_sensor)
 					to_chat(user, SPAN_WARNING("\The [subject_uniform] has no sensors to lock."))
 					return
-				var/obj/item/device/multitool/user_multitool = user.get_multitool()
+				var/obj/item/multitool/user_multitool = user.get_multitool()
 				if (!istype(user_multitool))
 					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [subject_uniform]'s sensors."))
 					return
@@ -160,11 +160,11 @@
 				return
 
 		// Find an internal source.
-		if(istype(back, /obj/item/weapon/tank))
+		if(istype(back, /obj/item/tank))
 			set_internals(back)
-		else if(istype(s_store, /obj/item/weapon/tank))
+		else if(istype(s_store, /obj/item/tank))
 			set_internals(s_store)
-		else if(istype(belt, /obj/item/weapon/tank))
+		else if(istype(belt, /obj/item/tank))
 			set_internals(belt)
 		else
 			to_chat(user, "<span class='warning'>You could not find a suitable tank!</span>")

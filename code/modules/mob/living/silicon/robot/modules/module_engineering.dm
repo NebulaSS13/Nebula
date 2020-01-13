@@ -1,4 +1,4 @@
-/obj/item/weapon/robot_module/engineering
+/obj/item/robot_module/engineering
 	name = "engineering robot module"
 	display_name = "Engineering"
 	channels = list(
@@ -22,29 +22,29 @@
 	)
 	no_slip = 1
 	equipment = list(
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/borg/sight/meson,
-		/obj/item/weapon/extinguisher,
-		/obj/item/weapon/weldingtool/largetank,
-		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/wrench,
-		/obj/item/weapon/crowbar,
-		/obj/item/weapon/wirecutters,
-		/obj/item/device/multitool,
-		/obj/item/device/t_scanner,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/geiger,
+		/obj/item/extinguisher,
+		/obj/item/weldingtool/largetank,
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/crowbar,
+		/obj/item/wirecutters,
+		/obj/item/multitool,
+		/obj/item/t_scanner,
+		/obj/item/scanner/gas,
+		/obj/item/geiger,
 		/obj/item/taperoll/engineering,
 		/obj/item/taperoll/atmos,
-		/obj/item/weapon/gripper,
-		/obj/item/weapon/gripper/no_use/loader,
-		/obj/item/device/lightreplacer,
-		/obj/item/device/pipe_painter,
-		/obj/item/device/floor_painter,
-		/obj/item/weapon/inflatable_dispenser/robot,
+		/obj/item/gripper,
+		/obj/item/gripper/no_use/loader,
+		/obj/item/lightreplacer,
+		/obj/item/pipe_painter,
+		/obj/item/floor_painter,
+		/obj/item/inflatable_dispenser/robot,
 		/obj/item/inducer/borg,
-		/obj/item/device/plunger/robot,
-		/obj/item/weapon/matter_decompiler,
+		/obj/item/plunger/robot,
+		/obj/item/matter_decompiler,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,
 		/obj/item/stack/material/rods/cyborg,
@@ -60,7 +60,7 @@
 		/datum/matter_synth/plasteel = 20000,
 		/datum/matter_synth/wire
 	)
-	emag = /obj/item/weapon/melee/baton/robot/electrified_arm
+	emag = /obj/item/melee/baton/robot/electrified_arm
 	skills = list(
 		SKILL_ATMOS        = SKILL_PROF,
 		SKILL_ENGINES      = SKILL_PROF,
@@ -69,14 +69,14 @@
 		SKILL_COMPUTER     = SKILL_EXPERT
 	)
 
-/obj/item/weapon/robot_module/engineering/finalize_synths()
+/obj/item/robot_module/engineering/finalize_synths()
 
 	var/datum/matter_synth/metal/metal =       locate() in synths
 	var/datum/matter_synth/glass/glass =       locate() in synths
 	var/datum/matter_synth/plasteel/plasteel = locate() in synths
 	var/datum/matter_synth/wire/wire =         locate() in synths
 
-	var/obj/item/weapon/matter_decompiler/MD = locate() in equipment
+	var/obj/item/matter_decompiler/MD = locate() in equipment
 	MD.metal = metal
 	MD.glass = glass
 
@@ -103,7 +103,7 @@
 	var/obj/item/stack/material/cyborg/plasteel/PL = locate() in equipment
 	PL.synths = list(plasteel)
 
-/obj/item/weapon/robot_module/engineering/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/device/lightreplacer/LR = locate() in equipment
+/obj/item/robot_module/engineering/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+	var/obj/item/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
 	..()

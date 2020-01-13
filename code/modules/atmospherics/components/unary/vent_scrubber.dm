@@ -24,9 +24,9 @@
 	build_icon_state = "scrubber"
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc/buildable,
-		/obj/item/weapon/stock_parts/radio/receiver/buildable,
-		/obj/item/weapon/stock_parts/radio/transmitter/on_event/buildable,
+		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/radio/receiver/buildable,
+		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/input_toggle,
@@ -188,10 +188,10 @@
 			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
 	return ..()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/weldingtool))
+/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/weldingtool))
 
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(!WT.isOn())
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")

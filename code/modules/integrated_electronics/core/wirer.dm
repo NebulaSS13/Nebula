@@ -3,7 +3,7 @@
 #define UNWIRE		"unwire"
 #define UNWIRING	"unwiring"
 
-/obj/item/device/integrated_electronics/wirer
+/obj/item/integrated_electronics/wirer
 	name = "circuit wirer"
 	desc = "It's a small wiring tool, with a wire roll, electric soldering iron, wire cutter, and more in one package. \
 	The wires used are generally useful for small electronics, such as circuitboards and breadboards, as opposed to larger wires \
@@ -16,10 +16,10 @@
 	var/mode = WIRE
 	matter = list(MATERIAL_ALUMINIUM = 1500, MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_PLASTIC = 500)
 
-/obj/item/device/integrated_electronics/wirer/on_update_icon()
+/obj/item/integrated_electronics/wirer/on_update_icon()
 	icon_state = "wirer-[mode]"
 
-/obj/item/device/integrated_electronics/wirer/proc/wire(var/datum/integrated_io/io, mob/user)
+/obj/item/integrated_electronics/wirer/proc/wire(var/datum/integrated_io/io, mob/user)
 	if(!io.holder.assembly)
 		to_chat(user, "<span class='warning'>\The [io.holder] needs to be secured inside an assembly first.</span>")
 		return
@@ -77,7 +77,7 @@
 				to_chat(user, "<span class='warning'>\The [selected_io.holder]'s [selected_io.name] and \the [io.holder]'s \
 				[io.name] are not connected.</span>")
 
-/obj/item/device/integrated_electronics/wirer/proc/select_io(datum/integrated_io/io)
+/obj/item/integrated_electronics/wirer/proc/select_io(datum/integrated_io/io)
 	if(selected_io)
 		unselect_io(selected_io)
 	selected_io = io
@@ -88,7 +88,7 @@
 		if(WIRE)
 			mode = WIRING
 
-/obj/item/device/integrated_electronics/wirer/proc/unselect_io(datum/integrated_io/io)
+/obj/item/integrated_electronics/wirer/proc/unselect_io(datum/integrated_io/io)
 	if(selected_io != io)
 		return
 	GLOB.destroyed_event.unregister(selected_io, src)
@@ -99,7 +99,7 @@
 		if(WIRING)
 			mode = WIRE
 
-/obj/item/device/integrated_electronics/wirer/attack_self(mob/user)
+/obj/item/integrated_electronics/wirer/attack_self(mob/user)
 	switch(mode)
 		if(WIRE)
 			mode = UNWIRE

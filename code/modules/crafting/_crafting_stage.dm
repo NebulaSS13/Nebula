@@ -69,7 +69,7 @@
 	. = istype(M) && (!stack_material || M.material.name == stack_material) && ..()
 
 /decl/crafting_stage/welding/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
-	var/obj/item/weapon/weldingtool/T = thing
+	var/obj/item/weldingtool/T = thing
 	. = istype(T) && T.remove_fuel(0, user) && T.isOn()
 
 /decl/crafting_stage/welding
@@ -91,16 +91,16 @@
 
 /decl/crafting_stage/tape
 	consume_completion_trigger = FALSE
-	completion_trigger_type = /obj/item/weapon/tape_roll
+	completion_trigger_type = /obj/item/tape_roll
 
 /decl/crafting_stage/pipe
 	completion_trigger_type = /obj/item/pipe
 
 /decl/crafting_stage/scanner
-	completion_trigger_type = /obj/item/device/scanner/health
+	completion_trigger_type = /obj/item/scanner/health
 
 /decl/crafting_stage/proximity
-	completion_trigger_type = /obj/item/device/assembly/prox_sensor
+	completion_trigger_type = /obj/item/assembly/prox_sensor
 
 /decl/crafting_stage/robot_arms
 	progress_message = "You add the robotic arm to the assembly."
@@ -111,6 +111,6 @@
 
 /decl/crafting_stage/empty_storage/can_begin_with(obj/item/thing)
 	. = ..()
-	if(. && istype(thing, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/box = thing
+	if(. && istype(thing, /obj/item/storage))
+		var/obj/item/storage/box = thing
 		. = (length(box.contents) == 0)

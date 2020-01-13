@@ -285,8 +285,8 @@
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda/captain
-	r_pocket = /obj/item/device/radio
-	id_type = /obj/item/weapon/card/id/gold
+	r_pocket = /obj/item/radio
+	id_type = /obj/item/card/id/gold
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officer
 
 /decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/carbon/human/H)
@@ -307,10 +307,10 @@
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_type = /obj/item/modular_computer/pda/heads/ce
-	l_hand = /obj/item/weapon/wrench
-	belt = /obj/item/weapon/storage/belt/utility/full
-	id_type = /obj/item/weapon/card/id/engineering/head
-	r_pocket = /obj/item/device/radio
+	l_hand = /obj/item/wrench
+	belt = /obj/item/storage/belt/utility/full
+	id_type = /obj/item/card/id/engineering/head
+	r_pocket = /obj/item/radio
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 
@@ -331,9 +331,9 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	pda_type = /obj/item/modular_computer/pda/cargo
-	l_hand = /obj/item/weapon/material/clipboard
+	l_hand = /obj/item/material/clipboard
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
-	id_type = /obj/item/weapon/card/id/silver
+	id_type = /obj/item/card/id/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop
 
 /decl/hierarchy/outfit/job/tradeship/hand
@@ -353,20 +353,20 @@
 	head = /obj/item/clothing/head/hardhat
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
-	id_type = /obj/item/weapon/card/id/engineering
+	id_type = /obj/item/card/id/engineering
 	shoes = /obj/item/clothing/shoes/workboots
-	l_hand = /obj/item/weapon/wrench
-	belt = /obj/item/weapon/storage/belt/utility/full
-	r_pocket = /obj/item/device/radio
+	l_hand = /obj/item/wrench
+	belt = /obj/item/storage/belt/utility/full
+	r_pocket = /obj/item/radio
 
 /decl/hierarchy/outfit/job/tradeship/hand/researcher
 	name = TRADESHIP_OUTFIT_JOB_NAME("Head Researcher")
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 	shoes = /obj/item/clothing/shoes/laceup
 	pda_type = /obj/item/modular_computer/pda/science
-	id_type = /obj/item/weapon/card/id/science/head
+	id_type = /obj/item/card/id/science/head
 
 /decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
 	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Researcher")
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
-	id_type = /obj/item/weapon/card/id/science
+	id_type = /obj/item/card/id/science

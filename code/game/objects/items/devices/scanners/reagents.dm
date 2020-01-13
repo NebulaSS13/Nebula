@@ -1,4 +1,4 @@
-/obj/item/device/scanner/reagent
+/obj/item/scanner/reagent
 	name = "reagent scanner"
 	desc = "A hand-held reagent scanner which identifies chemical agents."
 	icon_state = "spectrometer"
@@ -8,10 +8,10 @@
 	scan_sound = 'sound/effects/scanbeep.ogg'
 	var/details = 0
 
-/obj/item/device/scanner/reagent/is_valid_scan_target(obj/O)
+/obj/item/scanner/reagent/is_valid_scan_target(obj/O)
 	return istype(O)
 
-/obj/item/device/scanner/reagent/scan(obj/O, mob/user)
+/obj/item/scanner/reagent/scan(obj/O, mob/user)
 	scan_data = reagent_scan_results(O, details)
 	scan_data = jointext(scan_data, "<br>")
 	user.show_message(SPAN_NOTICE(scan_data))
@@ -26,7 +26,7 @@
 	for (var/datum/reagent/R in O.reagents.reagent_list)
 		. += "[R][details ? ": [R.volume / one_percent]%" : ""]"
 
-/obj/item/device/scanner/reagent/adv
+/obj/item/scanner/reagent/adv
 	name = "advanced reagent scanner"
 	icon_state = "adv_spectrometer"
 	details = 1

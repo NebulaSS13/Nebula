@@ -191,12 +191,12 @@
 	excess (atmospheric) pipes into the dispenser, as well.  The dispenser requires electricity to function."
 
 /datum/codex_entry/transfer_valve
-	associated_paths = list(/obj/item/device/transfer_valve)
+	associated_paths = list(/obj/item/transfer_valve)
 	mechanics_text = "This machine is used to merge the contents of two different gas tanks. Plug the tanks into the transfer, then open the valve to mix them together. You can also attach various assembly devices to trigger this process."
 	antag_text = "With a tank of hot phoron and cold oxygen, this benign little atmospheric device becomes an incredibly deadly bomb. You don't want to be anywhere near it when it goes off."
 
 /datum/codex_entry/gas_tank
-	associated_paths = list(/obj/item/weapon/tank)
+	associated_paths = list(/obj/item/tank)
 	mechanics_text = "These tanks are utilised to store any of the various types of gaseous substances. \
 	They can be attached to various portable atmospheric devices to be filled or emptied. <br>\
 	<br>\
@@ -210,7 +210,7 @@
 	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
 
 /datum/codex_entry/gas_analyzer
-	associated_paths = list(/obj/item/device/scanner/gas)
+	associated_paths = list(/obj/item/scanner/gas)
 	mechanics_text = "A device that analyzes the gas contents of a tile or atmospherics devices. Has 3 modes: Default operates without \
 	additional output data; Moles and volume shows the moles per gas in the mixture and the total moles and volume; Gas \
 	traits and data describes the traits per gas, how it interacts with the world, and some of its property constants."

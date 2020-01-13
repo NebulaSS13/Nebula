@@ -9,7 +9,7 @@
 /*******
 * film *
 *******/
-/obj/item/device/camera_film
+/obj/item/camera_film
 	name = "film cartridge"
 	icon = 'icons/obj/photography.dmi'
 	desc = "A camera film cartridge. Insert it into a camera to reload it."
@@ -23,7 +23,7 @@
 ********/
 var/global/photo_count = 0
 
-/obj/item/weapon/photo
+/obj/item/photo
 	name = "photo"
 	icon = 'icons/obj/photography.dmi'
 	icon_state = "photo"
@@ -36,13 +36,13 @@ var/global/photo_count = 0
 	var/image/tiny
 	var/photo_size = 3
 
-/obj/item/weapon/photo/New()
+/obj/item/photo/New()
 	id = photo_count++
 
-/obj/item/weapon/photo/attack_self(mob/user as mob)
+/obj/item/photo/attack_self(mob/user as mob)
 	user.examinate(src)
 
-/obj/item/weapon/photo/on_update_icon()
+/obj/item/photo/on_update_icon()
 	overlays.Cut()
 	var/scale = 8/(photo_size*32)
 	var/image/small_img = image(img.icon)
@@ -57,14 +57,14 @@ var/global/photo_count = 0
 	tiny.pixel_x = -32*(photo_size-1)/2 - 3
 	tiny.pixel_y = -32*(photo_size-1)/2 + 3
 
-/obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
-	if(istype(P, /obj/item/weapon/pen))
+/obj/item/photo/attackby(obj/item/P as obj, mob/user as mob)
+	if(istype(P, /obj/item/pen))
 		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
 		if(loc == user && user.stat == 0)
 			scribble = txt
 	..()
 
-/obj/item/weapon/photo/examine(mob/user, distance)
+/obj/item/photo/examine(mob/user, distance)
 	. = TRUE
 	if(!img)
 		return
@@ -74,7 +74,7 @@ var/global/photo_count = 0
 	else
 		to_chat(user, "<span class='notice'>It is too far away.</span>")
 
-/obj/item/weapon/photo/proc/show(mob/user as mob)
+/obj/item/photo/proc/show(mob/user as mob)
 	user << browse_rsc(img, "tmp_photo_[id].png")
 	user << browse("<html><head><title>[name]</title></head>" \
 		+ "<body style='overflow:hidden;margin:0;text-align:center'>" \
@@ -84,7 +84,7 @@ var/global/photo_count = 0
 	onclose(user, "[name]")
 	return
 
-/obj/item/weapon/photo/verb/rename()
+/obj/item/photo/verb/rename()
 	set name = "Rename photo"
 	set category = "Object"
 	set src in usr
@@ -101,16 +101,16 @@ var/global/photo_count = 0
 /**************
 * photo album *
 **************/
-/obj/item/weapon/storage/photo_album
+/obj/item/storage/photo_album
 	name = "Photo album"
 	icon = 'icons/obj/photography.dmi'
 	icon_state = "album"
 	item_state = "briefcase"
 	w_class = ITEM_SIZE_NORMAL //same as book
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
-	can_hold = list(/obj/item/weapon/photo)
+	can_hold = list(/obj/item/photo)
 
-/obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
+/obj/item/storage/photo_album/MouseDrop(obj/over_object as obj)
 
 	if((istype(usr, /mob/living/carbon/human)))
 		var/mob/M = usr
@@ -137,7 +137,7 @@ var/global/photo_count = 0
 /*********
 * camera *
 *********/
-/obj/item/device/camera
+/obj/item/camera
 	name = "camera"
 	icon = 'icons/obj/photography.dmi'
 	desc = "A polaroid camera."
@@ -153,18 +153,18 @@ var/global/photo_count = 0
 	var/icon_on = "camera"
 	var/icon_off = "camera_off"
 	var/size = 3
-/obj/item/device/camera/on_update_icon()
+/obj/item/camera/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	if(on)
 		icon_state = "[bis.base_icon_state]"
 	else
 		icon_state = "[bis.base_icon_state]_off"
-/obj/item/device/camera/Initialize()
+/obj/item/camera/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
 	. = ..()
 
-/obj/item/device/camera/verb/change_size()
+/obj/item/camera/verb/change_size()
 	set name = "Set Photo Focus"
 	set category = "Object"
 	var/nsize = input("Photo Size","Pick a size of resulting photo.") as null|anything in list(1,3,5,7)
@@ -172,17 +172,17 @@ var/global/photo_count = 0
 		size = nsize
 		to_chat(usr, "<span class='notice'>Camera will now take [size]x[size] photos.</span>")
 
-/obj/item/device/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+/obj/item/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return
 
-/obj/item/device/camera/attack_self(mob/user as mob)
+/obj/item/camera/attack_self(mob/user as mob)
 	on = !on
 	update_icon()
 	to_chat(user, "You switch the camera [on ? "on" : "off"].")
 	return
 
-/obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/device/camera_film))
+/obj/item/camera/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/camera_film))
 		if(pictures_left)
 			to_chat(user, "<span class='notice'>[src] still has some film in it!</span>")
 			return
@@ -193,7 +193,7 @@ var/global/photo_count = 0
 	..()
 
 
-/obj/item/device/camera/proc/get_mobs(turf/the_turf as turf)
+/obj/item/camera/proc/get_mobs(turf/the_turf as turf)
 	var/mob_detail
 	for(var/mob/living/carbon/A in the_turf)
 		if(A.invisibility) continue
@@ -212,7 +212,7 @@ var/global/photo_count = 0
 			mob_detail += "You can also see [A] on the photo[(A.health / A.maxHealth)< 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
 	return mob_detail
 
-/obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
+/obj/item/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
 	if(!on || !pictures_left || ismob(target.loc)) return
 	captureimage(target, user, flag)
 
@@ -224,7 +224,7 @@ var/global/photo_count = 0
 	on = 0
 	update_icon()
 
-/obj/item/device/camera/examine(mob/user)
+/obj/item/camera/examine(mob/user)
 	. = ..()
 	to_chat(user, "It has [pictures_left] photo\s left.")
 
@@ -236,7 +236,7 @@ var/global/photo_count = 0
 	var/can_see = (T in view(viewer))
 	return can_see
 
-/obj/item/device/camera/proc/captureimage(atom/target, mob/living/user, flag)
+/obj/item/camera/proc/captureimage(atom/target, mob/living/user, flag)
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y + (size-1)/2
 	var/z_c	= target.z
@@ -250,16 +250,16 @@ var/global/photo_count = 0
 		y_c--
 		x_c = x_c - size
 
-	var/obj/item/weapon/photo/p = createpicture(target, user, mobs, flag)
+	var/obj/item/photo/p = createpicture(target, user, mobs, flag)
 	printpicture(user, p)
 
-/obj/item/device/camera/proc/createpicture(atom/target, mob/user, mobs, flag)
+/obj/item/camera/proc/createpicture(atom/target, mob/user, mobs, flag)
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y - (size-1)/2
 	var/z_c	= target.z
 	var/icon/photoimage = generate_image(x_c, y_c, z_c, size, CAPTURE_MODE_REGULAR, user, 0)
 
-	var/obj/item/weapon/photo/p = new()
+	var/obj/item/photo/p = new()
 	p.img = photoimage
 	p.desc = mobs
 	p.photo_size = size
@@ -267,12 +267,12 @@ var/global/photo_count = 0
 
 	return p
 
-/obj/item/device/camera/proc/printpicture(mob/user, obj/item/weapon/photo/p)
+/obj/item/camera/proc/printpicture(mob/user, obj/item/photo/p)
 	if(!user.put_in_inactive_hand(p))
 		p.dropInto(loc)
 
-/obj/item/weapon/photo/proc/copy(var/copy_id = 0)
-	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
+/obj/item/photo/proc/copy(var/copy_id = 0)
+	var/obj/item/photo/p = new/obj/item/photo()
 
 	p.SetName(name) // Do this first, manually, to make sure listeners are alerted properly.
 	p.appearance = appearance

@@ -104,8 +104,8 @@
 /mob/living/carbon/human/GetVoice()
 
 	var/voice_sub
-	if(istype(back,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = back
+	if(istype(back,/obj/item/rig))
+		var/obj/item/rig/rig = back
 		// todo: fix this shit
 		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
 			voice_sub = rig.speech.voice_holder.voice
@@ -164,38 +164,38 @@
 	switch(message_mode)
 		if("intercom")
 			if(!src.restrained())
-				for(var/obj/item/device/radio/intercom/I in view(1))
+				for(var/obj/item/radio/intercom/I in view(1))
 					I.talk_into(src, message, null, verb, speaking)
 					I.add_fingerprint(src)
 					used_radios += I
 		if("headset")
-			if(l_ear && istype(l_ear,/obj/item/device/radio))
-				var/obj/item/device/radio/R = l_ear
+			if(l_ear && istype(l_ear,/obj/item/radio))
+				var/obj/item/radio/R = l_ear
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += l_ear
-			else if(r_ear && istype(r_ear,/obj/item/device/radio))
-				var/obj/item/device/radio/R = r_ear
+			else if(r_ear && istype(r_ear,/obj/item/radio))
+				var/obj/item/radio/R = r_ear
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += r_ear
 		if("right ear")
-			var/obj/item/device/radio/R
+			var/obj/item/radio/R
 			var/has_radio = 0
-			if(r_ear && istype(r_ear,/obj/item/device/radio))
+			if(r_ear && istype(r_ear,/obj/item/radio))
 				R = r_ear
 				has_radio = 1
-			if(r_hand && istype(r_hand, /obj/item/device/radio))
+			if(r_hand && istype(r_hand, /obj/item/radio))
 				R = r_hand
 				has_radio = 1
 			if(has_radio)
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += R
 		if("left ear")
-			var/obj/item/device/radio/R
+			var/obj/item/radio/R
 			var/has_radio = 0
-			if(l_ear && istype(l_ear,/obj/item/device/radio))
+			if(l_ear && istype(l_ear,/obj/item/radio))
 				R = l_ear
 				has_radio = 1
-			if(l_hand && istype(l_hand,/obj/item/device/radio))
+			if(l_hand && istype(l_hand,/obj/item/radio))
 				R = l_hand
 				has_radio = 1
 			if(has_radio)
@@ -206,10 +206,10 @@
 			return 1
 		else
 			if(message_mode)
-				if(l_ear && istype(l_ear,/obj/item/device/radio))
+				if(l_ear && istype(l_ear,/obj/item/radio))
 					l_ear.talk_into(src,message, message_mode, verb, speaking)
 					used_radios += l_ear
-				else if(r_ear && istype(r_ear,/obj/item/device/radio))
+				else if(r_ear && istype(r_ear,/obj/item/radio))
 					r_ear.talk_into(src,message, message_mode, verb, speaking)
 					used_radios += r_ear
 

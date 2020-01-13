@@ -28,7 +28,7 @@
 	completion_message = "Ahh, that was just what you needed."
 
 /datum/goal/achievement/specific_object/food/New()
-	possible_objects = subtypesof(/obj/item/weapon/reagent_containers/food/snacks)
+	possible_objects = subtypesof(/obj/item/reagent_containers/food/snacks)
 	..()
 
 /datum/goal/achievement/specific_object/food/update_strings()

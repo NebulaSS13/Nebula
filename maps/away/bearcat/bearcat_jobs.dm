@@ -22,20 +22,20 @@
 	hierarchy_type = /decl/hierarchy/outfit/job/bearcat
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/radio
 	l_ear = null
 	r_ear = null
 
 /decl/hierarchy/outfit/job/bearcat/crew
 	name = BEARCAT_OUTFIT_JOB_NAME("Crew")
-	id_type = /obj/item/weapon/card/id/bearcat
+	id_type = /obj/item/card/id/bearcat
 
 /decl/hierarchy/outfit/job/bearcat/captain
 	name = BEARCAT_OUTFIT_JOB_NAME("Captain")
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda/captain
-	id_type = /obj/item/weapon/card/id/bearcat_captain
+	id_type = /obj/item/card/id/bearcat_captain
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
 	..()

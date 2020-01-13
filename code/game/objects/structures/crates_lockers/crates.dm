@@ -15,18 +15,18 @@
 	if(.)
 		if(rigged)
 			visible_message("<span class='danger'>There are wires attached to the lid of [src]...</span>")
-			for(var/obj/item/device/assembly_holder/H in src)
+			for(var/obj/item/assembly_holder/H in src)
 				H.process_activation(usr)
-			for(var/obj/item/device/assembly/A in src)
+			for(var/obj/item/assembly/A in src)
 				A.activate()
 
 /obj/structure/closet/crate/examine(mob/user)
 	. = ..()
 	if(rigged && opened)
 		var/list/devices = list()
-		for(var/obj/item/device/assembly_holder/H in src)
+		for(var/obj/item/assembly_holder/H in src)
 			devices += H
-		for(var/obj/item/device/assembly/A in src)
+		for(var/obj/item/assembly/A in src)
 			devices += A
 		to_chat(user,"There are some wires attached to the lid, connected to [english_list(devices)].")
 
@@ -44,7 +44,7 @@
 			to_chat(user, "<span class='notice'>You rig [src].</span>")
 			rigged = 1
 			return
-	else if(istype(W, /obj/item/device/assembly_holder) || istype(W, /obj/item/device/assembly))
+	else if(istype(W, /obj/item/assembly_holder) || istype(W, /obj/item/assembly))
 		if(rigged)
 			if(!user.unEquip(W, src))
 				return
@@ -85,7 +85,7 @@
 	desc = "A fuel tank crate."
 
 /obj/structure/closet/crate/internals/fuel/WillContain()
-	return list(/obj/item/weapon/tank/hydrogen = 4)
+	return list(/obj/item/tank/hydrogen = 4)
 
 /obj/structure/closet/crate/trashcart
 	name = "trash cart"
@@ -103,8 +103,8 @@
 
 /obj/structure/closet/crate/rcd/WillContain()
 	return list(
-		/obj/item/weapon/rcd_ammo = 3,
-		/obj/item/weapon/rcd
+		/obj/item/rcd_ammo = 3,
+		/obj/item/rcd
 	)
 
 /obj/structure/closet/crate/solar
@@ -113,9 +113,9 @@
 /obj/structure/closet/crate/solar/WillContain()
 	return list(
 		/obj/item/solar_assembly = 14,
-		/obj/item/weapon/stock_parts/circuitboard/solar_control,
-		/obj/item/weapon/tracker_electronics,
-		/obj/item/weapon/paper/solar
+		/obj/item/stock_parts/circuitboard/solar_control,
+		/obj/item/tracker_electronics,
+		/obj/item/paper/solar
 	)
 
 /obj/structure/closet/crate/solar_assembly
@@ -154,7 +154,7 @@
 	desc = "A crate of emergency rations."
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
-	return list(/obj/random/mre = 6, /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 12)
+	return list(/obj/random/mre = 6, /obj/item/reagent_containers/food/drinks/cans/waterbottle = 12)
 
 /obj/structure/closet/crate/freezer/meat
 	name = "meat crate"
@@ -162,9 +162,9 @@
 
 /obj/structure/closet/crate/freezer/meat/WillContain()
 	return list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat/beef = 4,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 4,
-		/obj/item/weapon/reagent_containers/food/snacks/fish = 4
+		/obj/item/reagent_containers/food/snacks/meat/beef = 4,
+		/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 4,
+		/obj/item/reagent_containers/food/snacks/fish = 4
 	)
 
 /obj/structure/closet/crate/bin
@@ -242,12 +242,12 @@
 
 /obj/structure/closet/crate/hydroponics/prespawned/WillContain()
 	return list(
-		/obj/item/weapon/reagent_containers/spray/plantbgone = 2,
-		/obj/item/weapon/material/minihoe = 2,
-		/obj/item/weapon/storage/plants = 2,
-		/obj/item/weapon/material/hatchet = 2,
-		/obj/item/weapon/wirecutters/clippers = 2,
-		/obj/item/device/scanner/plant = 2
+		/obj/item/reagent_containers/spray/plantbgone = 2,
+		/obj/item/material/minihoe = 2,
+		/obj/item/storage/plants = 2,
+		/obj/item/material/hatchet = 2,
+		/obj/item/wirecutters/clippers = 2,
+		/obj/item/scanner/plant = 2
 	)
 
 /obj/structure/closet/crate/secure/biohazard
@@ -280,7 +280,7 @@
 	desc = "A rectangular plastic crate, filled up with blank papers for refilling bins and printers. A bureaucrat's favorite."
 
 /obj/structure/closet/crate/paper_refill/WillContain()
-	return list(/obj/item/weapon/paper = 30)
+	return list(/obj/item/paper = 30)
 
 /obj/structure/closet/crate/uranium
 	name = "fissibles crate"

@@ -8,7 +8,7 @@
 	id = "binaryencrypt"
 	req_tech = list(TECH_ESOTERIC = 2)
 	materials = list(MATERIAL_STEEL = 300, MATERIAL_GLASS = 300)
-	build_path = /obj/item/device/encryptionkey/binary
+	build_path = /obj/item/encryptionkey/binary
 	sort_string = "VASAA"
 
 /datum/design/item/camouflage/AssembleDesignName()
@@ -21,7 +21,7 @@
 	id = "chameleon"
 	req_tech = list(TECH_ESOTERIC = 2)
 	materials = list(MATERIAL_STEEL = 500, MATERIAL_ALUMINIUM = 500, MATERIAL_PLASTIC = 500)
-	build_path = /obj/item/weapon/storage/backpack/chameleon/sydie_kit
+	build_path = /obj/item/storage/backpack/chameleon/sydie_kit
 	sort_string = "VASBA"
 
 /datum/design/item/advmop
@@ -30,7 +30,7 @@
 	id = "advmop"
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_POWER = 3)
 	materials = list(MATERIAL_ALUMINIUM = 2500, MATERIAL_STEEL = 500, MATERIAL_PLASTIC = 200)
-	build_path = /obj/item/weapon/mop/advanced
+	build_path = /obj/item/mop/advanced
 
 /datum/design/blutrash
 	name = "Trashbag of Holding"
@@ -38,7 +38,7 @@
 	id = "blutrash"
 	req_tech = list(TECH_BLUESPACE = 5, TECH_MATERIALS = 6)
 	materials = list(MATERIAL_PLASTIC = 5000, MATERIAL_GOLD = 1500, MATERIAL_URANIUM = 250, MATERIAL_PHORON = 1500)
-	build_path = /obj/item/weapon/storage/bag/trash/bluespace
+	build_path = /obj/item/storage/bag/trash/bluespace
 
 /datum/design/item/holosign
 	name = "Holographic Sign Projector"

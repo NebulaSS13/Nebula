@@ -46,8 +46,8 @@
 
 
 /obj/machinery/computer/teleporter/attackby(var/obj/I, var/mob/living/user)
-	if(istype(I, /obj/item/weapon/card/data/))
-		var/obj/item/weapon/card/data/C = I
+	if(istype(I, /obj/item/card/data/))
+		var/obj/item/card/data/C = I
 		if(stat & (NOPOWER|BROKEN) & (C.function != "teleporter"))
 			attack_hand(user)
 
@@ -101,7 +101,7 @@
 	var/list/areaindex = list()
 
 	. = TRUE
-	for(var/obj/item/device/radio/beacon/R in world)
+	for(var/obj/item/radio/beacon/R in world)
 		if(!R.functioning)
 			continue
 		var/turf/T = get_turf(R)
@@ -116,7 +116,7 @@
 			areaindex[tmpname] = 1
 		L[tmpname] = R
 
-	for (var/obj/item/weapon/implant/tracking/I in world)
+	for (var/obj/item/implant/tracking/I in world)
 		if (!I.implanted || !ismob(I.loc))
 			continue
 		else
@@ -242,7 +242,7 @@
 	overlays.Cut()
 	overlays += image('icons/obj/stationobjs.dmi', icon_state = "controller-wires")
 
-/obj/machinery/teleport/station/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
 	attack_hand(user)
 
 /obj/machinery/teleport/station/interface_interact(var/mob/user)
@@ -262,8 +262,8 @@
 		audible_message("<span class='warning'>Failure: Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
 		return
 
-	if(istype(com.locked, /obj/item/device/radio/beacon))
-		var/obj/item/device/radio/beacon/B = com.locked
+	if(istype(com.locked, /obj/item/radio/beacon))
+		var/obj/item/radio/beacon/B = com.locked
 		if(!B.functioning)
 			audible_message("<span class='warning'>Failure: Unable to establish connection to provided coordinates. Please reinstate coordinate matrix.</span>")
 			return

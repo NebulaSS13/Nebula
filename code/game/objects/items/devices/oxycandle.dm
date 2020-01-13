@@ -1,7 +1,7 @@
-/obj/item/device/oxycandle
+/obj/item/oxycandle
 	name = "oxygen candle"
 	desc = "A steel tube with the words 'OXYGEN - PULL CORD TO IGNITE' stamped on the side.\nA small label reads <span class='warning'>'WARNING: NOT FOR LIGHTING USE. WILL IGNITE FLAMMABLE GASSES'</span>"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "oxycandle"
 	item_state = "oxycandle"
 	w_class = ITEM_SIZE_SMALL // Should fit into internal's box or maybe pocket
@@ -16,16 +16,16 @@
 	var/brightness_on = 1 // Moderate-low bright.
 	action_button_name = null
 
-/obj/item/device/oxycandle/New()
+/obj/item/oxycandle/New()
 	..()
 	update_icon()
 
-/obj/item/device/oxycandle/afterattack(var/obj/O, var/mob/user, var/proximity)
+/obj/item/oxycandle/afterattack(var/obj/O, var/mob/user, var/proximity)
 	if(proximity && istype(O) && on)
 		O.HandleObjectHeating(src, user, 500)
 	..()
 
-/obj/item/device/oxycandle/attack_self(mob/user)
+/obj/item/oxycandle/attack_self(mob/user)
 	if(!on)
 		to_chat(user, "<span class='notice'>You pull the cord and [src] ignites.</span>")
 		on = 1
@@ -39,7 +39,7 @@
 		START_PROCESSING(SSprocessing, src)
 
 // Process of Oxygen candles releasing air. Makes 200 volume of oxygen
-/obj/item/device/oxycandle/Process()
+/obj/item/oxycandle/Process()
 	if(!loc)
 		return
 	var/turf/pos = get_turf(src)
@@ -66,7 +66,7 @@
 	var/list/air_mix = list(GAS_OXYGEN = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
 	air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN])
 
-/obj/item/device/oxycandle/on_update_icon()
+/obj/item/oxycandle/on_update_icon()
 	if(on == 1)
 		icon_state = "oxycandle_on"
 		item_state = icon_state
@@ -81,7 +81,7 @@
 		set_light(0)
 	update_held_icon()
 
-/obj/item/device/oxycandle/Destroy()
+/obj/item/oxycandle/Destroy()
 	QDEL_NULL(air_contents)
 	STOP_PROCESSING(SSprocessing, src)
 	. = ..()

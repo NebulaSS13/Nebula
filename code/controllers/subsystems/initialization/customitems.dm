@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(customitems)
 		if(citem.ckey != M.ckey || lowertext(citem.character_name) != lowertext(M.real_name))
 			continue
 		// Check for required access.
-		var/obj/item/weapon/card/id/current_id = M.wear_id
+		var/obj/item/card/id/current_id = M.wear_id
 		if(length(citem.req_access) && (!istype(current_id) || !has_access(current_id.access, citem.req_access)))
 			continue
 		// Check for required job title.
@@ -108,7 +108,7 @@ SUBSYSTEM_DEF(customitems)
 	if(apply_to_target_type && !ispath(apply_to_target_type, /obj/item))
 		return SPAN_WARNING("The target item path is invalid or does not exist.")
 	else if(item_icon_state)
-		if(ispath(item_path, /obj/item/device/kit/suit))
+		if(ispath(item_path, /obj/item/kit/suit))
 			for(var/state in list("[item_icon_state]_suit", "[item_icon_state]_helmet"))
 				if(!(state in SScustomitems.item_states))
 					return SPAN_WARNING("The given item icon [state] does not exist.")

@@ -60,7 +60,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/blood,
-/obj/item/weapon/gun/projectile/revolver/medium,
+/obj/item/gun/projectile/revolver/medium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "an" = (
@@ -73,7 +73,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/item/weapon/paper/marooned/note09,
+/obj/item/paper/marooned/note09,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "ao" = (
@@ -82,11 +82,11 @@
 /turf/template_noop,
 /area/template_noop)
 "ap" = (
-/obj/item/weapon/paper/marooned/note02{
+/obj/item/paper/marooned/note02{
 	pixel_x = -3;
 	pixel_y = -5
 	},
-/obj/item/weapon/paper/marooned/note01{
+/obj/item/paper/marooned/note01{
 	pixel_x = 2;
 	pixel_y = -1
 	},
@@ -104,7 +104,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "ar" = (
-/obj/item/weapon/paper/marooned/note03{
+/obj/item/paper/marooned/note03{
 	pixel_x = 2;
 	pixel_y = 2
 	},
@@ -134,9 +134,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "av" = (
-/obj/item/weapon/paper/marooned/note06,
+/obj/item/paper/marooned/note06,
 /obj/random/trash,
-/obj/item/weapon/paper/marooned/note08,
+/obj/item/paper/marooned/note08,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aw" = (
@@ -151,8 +151,8 @@
 /area/map_template/marooned)
 "ay" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/weapon/paper/marooned/note04,
-/obj/item/weapon/paper/marooned/note05{
+/obj/item/paper/marooned/note04,
+/obj/item/paper/marooned/note05{
 	pixel_x = -3;
 	pixel_y = 1
 	},
@@ -175,7 +175,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aB" = (
-/obj/item/weapon/paper/marooned/note07{
+/obj/item/paper/marooned/note07{
 	pixel_x = 6
 	},
 /obj/random/trash,
@@ -228,7 +228,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "aI" = (
-/obj/item/weapon/wirecutters,
+/obj/item/wirecutters,
 /obj/item/stack/cable_coil,
 /obj/machinery/power/port_gen/pacman/super,
 /obj/structure/cable{
@@ -322,17 +322,17 @@
 /turf/simulated/wall/ocp_wall,
 /area/template_noop)
 "aW" = (
-/obj/item/weapon/stock_parts/computer/battery_module{
+/obj/item/stock_parts/computer/battery_module{
 	pixel_x = -7;
 	pixel_y = 0
 	},
-/obj/item/weapon/melee/baton/cattleprod{
+/obj/item/melee/baton/cattleprod{
 	desc = "Metal rod with wire attached to it.";
 	name = "jury-rigged antenna";
 	pixel_x = 5;
 	pixel_y = 3
 	},
-/obj/item/device/radio,
+/obj/item/radio,
 /obj/item/stack/cable_coil,
 /obj/structure/cable{
 	icon_state = "0-6";
@@ -358,7 +358,7 @@
 /turf/template_noop,
 /area/template_noop)
 "aY" = (
-/obj/item/weapon/melee/baton/cattleprod{
+/obj/item/melee/baton/cattleprod{
 	desc = "Metal rod with wire attached to it.";
 	name = "jury-rigged antenna";
 	pixel_x = 5;

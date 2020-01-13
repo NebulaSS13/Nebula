@@ -6,8 +6,8 @@
 	anchored = 1
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/transmitter/basic/buildable,
-		/obj/item/weapon/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/radio/transmitter/basic/buildable,
+		/obj/item/stock_parts/power/apc/buildable
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/gas,

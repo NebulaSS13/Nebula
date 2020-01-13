@@ -38,7 +38,7 @@
 #define LIGHT_BURNED 3
 
 
-/obj/item/device/lightreplacer
+/obj/item/lightreplacer
 	name = "light replacer"
 	desc = "A lightweight automated device, capable of interfacing with and rapidly replacing standard light installations."
 	icon = 'icons/obj/janitor.dmi'
@@ -54,19 +54,19 @@
 	var/emagged = 0
 	var/charge = 0
 
-/obj/item/device/lightreplacer/examine(mob/user, distance)
+/obj/item/lightreplacer/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2)
 		to_chat(user, "It has [uses] light\s remaining.")
 
-/obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
+/obj/item/lightreplacer/resolve_attackby(var/atom/A, mob/user)
 
 	//Check for lights in a container, refilling our charges.
-	if(istype(A, /obj/item/weapon/storage/))
-		var/obj/item/weapon/storage/S = A
+	if(istype(A, /obj/item/storage/))
+		var/obj/item/storage/S = A
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
-		for(var/obj/item/weapon/light/L in S.contents)
+		for(var/obj/item/light/L in S.contents)
 			if(!user.stat && src.uses < src.max_uses && L.status == 0)
 				src.AddUses(1)
 				amt_inserted++
@@ -88,7 +88,7 @@
 			return
 	. = ..()
 
-/obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
+/obj/item/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
@@ -101,8 +101,8 @@
 		else
 			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights.</span>")
 
-	if(istype(W, /obj/item/weapon/light))
-		var/obj/item/weapon/light/L = W
+	if(istype(W, /obj/item/light))
+		var/obj/item/light/L = W
 		if(L.status == 0) // LIGHT OKAY
 			if(uses < max_uses)
 				if(!user.unEquip(L))
@@ -115,7 +115,7 @@
 			to_chat(user, "You need a working light.")
 			return
 
-/obj/item/device/lightreplacer/attack_self(mob/user)
+/obj/item/lightreplacer/attack_self(mob/user)
 	/* // This would probably be a bit OP. If you want it though, uncomment the code.
 	if(isrobot(user))
 		var/mob/living/silicon/robot/R = user
@@ -126,27 +126,27 @@
 	*/
 	to_chat(usr, "It has [uses] lights remaining.")
 
-/obj/item/device/lightreplacer/on_update_icon()
+/obj/item/lightreplacer/on_update_icon()
 	icon_state = "lightreplacer[emagged]"
 
 
-/obj/item/device/lightreplacer/proc/Use(var/mob/user)
+/obj/item/lightreplacer/proc/Use(var/mob/user)
 
 	playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 	AddUses(-1)
 	return 1
 
 // Negative numbers will subtract
-/obj/item/device/lightreplacer/proc/AddUses(var/amount = 1)
+/obj/item/lightreplacer/proc/AddUses(var/amount = 1)
 	uses = min(max(uses + amount, 0), max_uses)
 
-/obj/item/device/lightreplacer/proc/Charge(var/mob/user, var/amount = 1)
+/obj/item/lightreplacer/proc/Charge(var/mob/user, var/amount = 1)
 	charge += amount
 	if(charge > 6)
 		AddUses(1)
 		charge = 0
 
-/obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
+/obj/item/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
 
 	if(target.get_status() == LIGHT_OK)
 		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
@@ -158,12 +158,12 @@
 		if(target.lightbulb)
 			target.remove_bulb()
 
-		var/obj/item/weapon/light/L = new target.light_type()
+		var/obj/item/light/L = new target.light_type()
 		L.rigged = emagged
 		target.insert_bulb(L)
 
 
-/obj/item/device/lightreplacer/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/lightreplacer/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
 	playsound(src.loc, "sparks", 100, 1)
 	update_icon()
@@ -171,7 +171,7 @@
 
 //Can you use it?
 
-/obj/item/device/lightreplacer/proc/CanUse(var/mob/living/user)
+/obj/item/lightreplacer/proc/CanUse(var/mob/living/user)
 	src.add_fingerprint(user)
 	//Not sure what else to check for. Maybe if clumsy?
 	if(uses > 0)

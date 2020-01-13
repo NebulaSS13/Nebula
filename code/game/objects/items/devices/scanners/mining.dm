@@ -4,7 +4,7 @@
 #define  ORE_EXOTIC  "exotic matter"
 /turf/simulated/var/surveyed
 
-/obj/item/device/scanner/mining
+/obj/item/scanner/mining
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
 	icon_state = "ore"
@@ -15,14 +15,14 @@
 
 	scan_sound = 'sound/effects/ping.ogg'
 
-/obj/item/device/scanner/mining/examine(mob/user)
+/obj/item/scanner/mining/examine(mob/user)
 	. = ..()
 	to_chat(user,"A tiny indicator on the [src] shows it holds [survey_data] good explorer points.")
 
-/obj/item/device/scanner/mining/is_valid_scan_target(turf/simulated/T)
+/obj/item/scanner/mining/is_valid_scan_target(turf/simulated/T)
 	return istype(T)
 
-/obj/item/device/scanner/mining/scan(turf/simulated/T, mob/user)
+/obj/item/scanner/mining/scan(turf/simulated/T, mob/user)
 	scan_title = "Mineral scan data"
 	var/list/scan_results = mineral_scan_results(T)
 	if(!scan_data)
@@ -37,18 +37,18 @@
 		playsound(loc, 'sound/machines/ping.ogg', 40, 1)
 		to_chat(user,"<span class='notice'>New survey data stored - [scan_results[2]] GEP.</span>")
 
-/obj/item/device/scanner/mining/proc/put_disk_in_hand(var/mob/M)
+/obj/item/scanner/mining/proc/put_disk_in_hand(var/mob/M)
 	if(!survey_data)
 		to_chat(M,"<span class='warning'>There is no survey data stored on the [src].</span>")
 		return 0
 	visible_message("<span class='notice'>The [src] spits out a disk containing [survey_data] GEP.</span>")
-	var/obj/item/weapon/disk/survey/D = new(get_turf(src))
+	var/obj/item/disk/survey/D = new(get_turf(src))
 	D.data = survey_data
 	survey_data = 0
 	M.put_in_hands(D)
 	return 1
 
-/obj/item/device/scanner/mining/verb/get_data()
+/obj/item/scanner/mining/verb/get_data()
 	set category = "Object"
 	set name = "Get Survey Data"
 	set src in usr
@@ -60,17 +60,17 @@
 		return
 	put_disk_in_hand(M)
 
-/obj/item/weapon/disk/survey
+/obj/item/disk/survey
 	name = "survey data disk"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "nucleardisk"
 	var/data
 
-/obj/item/weapon/disk/survey/examine(mob/user)
+/obj/item/disk/survey/examine(mob/user)
 	. = ..()
 	to_chat(user,"A tiny indicator on the [src] shows it holds [data] good explorer points.")
 
-/obj/item/weapon/disk/survey/Value()
+/obj/item/disk/survey/Value()
 	if(data < 10000)
 		return 0.07*data
 	if(data < 30000)

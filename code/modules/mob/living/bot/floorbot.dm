@@ -220,14 +220,14 @@
 	var/list/shrapnel = list()
 
 	for(var/I = 3, I<3 , I++) //Toolbox shatters.
-		shrapnel += new /obj/item/weapon/material/shard/shrapnel(Tsec)
+		shrapnel += new /obj/item/material/shard/shrapnel(Tsec)
 
 	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
 		shrapnel += new /obj/item/stack/tile/floor(Tsec)
 
 	if(prob(50))
 		shrapnel += new /obj/item/robot_parts/l_arm(Tsec)
-	shrapnel += new /obj/item/device/assembly/prox_sensor(Tsec)
+	shrapnel += new /obj/item/assembly/prox_sensor(Tsec)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)

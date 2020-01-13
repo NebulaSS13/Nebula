@@ -1,6 +1,6 @@
 #define MAX_CIRCUIT_CLONE_TIME 3 MINUTES //circuit slow-clones can only take up this amount of time to complete
 
-/obj/item/device/integrated_circuit_printer
+/obj/item/integrated_circuit_printer
 	name = "integrated circuit printer"
 	desc = "A portable(ish) machine made to print tiny modular circuitry out of metal."
 	icon = 'icons/obj/assemblies/electronic_tools.dmi'
@@ -17,15 +17,15 @@
 	var/materials = list(MATERIAL_STEEL = 0)
 	var/metal_max = 25 * SHEET_MATERIAL_AMOUNT
 
-/obj/item/device/integrated_circuit_printer/proc/check_interactivity(mob/user)
+/obj/item/integrated_circuit_printer/proc/check_interactivity(mob/user)
 	return CanUseTopic(user)
 
-/obj/item/device/integrated_circuit_printer/upgraded
+/obj/item/integrated_circuit_printer/upgraded
 	upgraded = TRUE
 	can_clone = TRUE
 	fast_clone = TRUE
 
-/obj/item/device/integrated_circuit_printer/debug //translation: "integrated_circuit_printer/local_server"
+/obj/item/integrated_circuit_printer/debug //translation: "integrated_circuit_printer/local_server"
 	name = "debug circuit printer"
 	debug = TRUE
 	upgraded = TRUE
@@ -33,17 +33,17 @@
 	fast_clone = TRUE
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/device/integrated_circuit_printer/proc/print_program(mob/user)
+/obj/item/integrated_circuit_printer/proc/print_program(mob/user)
 	if(!cloning)
 		return
 
 	visible_message("<span class='notice'>[src] has finished printing its assembly!</span>")
 	playsound(src, 'sound/items/poster_being_created.ogg', 50, TRUE)
-	var/obj/item/device/electronic_assembly/assembly = SScircuit.load_electronic_assembly(get_turf(src), program)
+	var/obj/item/electronic_assembly/assembly = SScircuit.load_electronic_assembly(get_turf(src), program)
 	assembly.creator = key_name(user)
 	cloning = FALSE
 
-/obj/item/device/integrated_circuit_printer/proc/recycle(obj/item/O, mob/user, obj/item/device/electronic_assembly/assembly)
+/obj/item/integrated_circuit_printer/proc/recycle(obj/item/O, mob/user, obj/item/electronic_assembly/assembly)
 	if(!O.canremove) //in case we have an augment circuit
 		return
 	for(var/material in O.matter)
@@ -61,7 +61,7 @@
 	qdel(O)
 	return TRUE
 
-/obj/item/device/integrated_circuit_printer/attackby(obj/item/O, mob/user)
+/obj/item/integrated_circuit_printer/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/M = O
 		var/amt = M.amount
@@ -92,8 +92,8 @@
 			attack_self(user)
 		return TRUE
 
-	if(istype(O, /obj/item/device/electronic_assembly))
-		var/obj/item/device/electronic_assembly/EA = O //microtransactions not included
+	if(istype(O, /obj/item/electronic_assembly))
+		var/obj/item/electronic_assembly/EA = O //microtransactions not included
 		if(EA.battery)
 			to_chat(user, "<span class='warning'>Remove [EA]'s power cell first!</span>")
 			return
@@ -127,10 +127,10 @@
 
 	return ..()
 
-/obj/item/device/integrated_circuit_printer/attack_self(mob/user)
+/obj/item/integrated_circuit_printer/attack_self(mob/user)
 	interact(user)
 
-/obj/item/device/integrated_circuit_printer/interact(mob/user)
+/obj/item/integrated_circuit_printer/interact(mob/user)
 	if(!(in_range(src, user) || issilicon(user)))
 		return
 
@@ -200,7 +200,7 @@
 	popup.set_content(JOINTEXT(HTML))
 	popup.open()
 
-/obj/item/device/integrated_circuit_printer/Topic(href, href_list)
+/obj/item/integrated_circuit_printer/Topic(href, href_list)
 	if(!check_interactivity(usr))
 		return
 	if(..())
@@ -216,8 +216,8 @@
 			return TRUE
 
 		var/list/cost
-		if(ispath(build_type, /obj/item/device/electronic_assembly))
-			var/obj/item/device/electronic_assembly/E = SScircuit.cached_assemblies[build_type]
+		if(ispath(build_type, /obj/item/electronic_assembly))
+			var/obj/item/electronic_assembly/E = SScircuit.cached_assemblies[build_type]
 			cost = E.matter
 		else if(ispath(build_type, /obj/item/integrated_circuit))
 			var/obj/item/integrated_circuit/IC = SScircuit.cached_components[build_type]
@@ -231,8 +231,8 @@
 		var/obj/item/built = new build_type(get_turf(src))
 		usr.put_in_hands(built)
 
-		if(istype(built, /obj/item/device/electronic_assembly))
-			var/obj/item/device/electronic_assembly/E = built
+		if(istype(built, /obj/item/electronic_assembly))
+			var/obj/item/electronic_assembly/E = built
 			E.creator = key_name(usr)
 			E.opened = TRUE
 			E.update_icon()
@@ -319,7 +319,7 @@
 
 	interact(usr)
 
-/obj/item/device/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
+/obj/item/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
 	for(var/material in cost)
 		if(materials[material] < cost[material])
 			var/material/material_datum = SSmaterials.get_material_by_name(material)

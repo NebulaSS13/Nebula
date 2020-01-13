@@ -121,19 +121,19 @@
 
 /obj/machinery/door/unpowered/simple/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user, 0, I)
-	if(istype(I, /obj/item/weapon/key) && lock)
-		var/obj/item/weapon/key/K = I
+	if(istype(I, /obj/item/key) && lock)
+		var/obj/item/key/K = I
 		if(!lock.toggle(I))
 			to_chat(user, "<span class='warning'>\The [K] does not fit in the lock!</span>")
 		return
 	if(lock && lock.pick_lock(I,user))
 		return
 
-	if(istype(I,/obj/item/weapon/material/lock_construct))
+	if(istype(I,/obj/item/material/lock_construct))
 		if(lock)
 			to_chat(user, "<span class='warning'>\The [src] already has a lock.</span>")
 		else
-			var/obj/item/weapon/material/lock_construct/L = I
+			var/obj/item/material/lock_construct/L = I
 			lock = L.create_lock(src,user)
 		return
 
@@ -159,8 +159,8 @@
 		return
 
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
-	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
-		var/obj/item/weapon/W = I
+	if(src.density && istype(I, /obj/item) && user.a_intent == I_HURT && !istype(I, /obj/item/card))
+		var/obj/item/W = I
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			user.do_attack_animation(src)

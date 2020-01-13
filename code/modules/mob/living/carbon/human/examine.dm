@@ -126,7 +126,7 @@
 
 	//handcuffed?
 	if(handcuffed)
-		if(istype(handcuffed, /obj/item/weapon/handcuffs/cable))
+		if(istype(handcuffed, /obj/item/handcuffs/cable))
 			msg += "<span class='warning'>[T.He] [T.is] \icon[handcuffed] restrained with cable!</span>\n"
 		else
 			msg += "<span class='warning'>[T.He] [T.is] \icon[handcuffed] handcuffed!</span>\n"
@@ -276,7 +276,7 @@
 		var/perpname = "wot"
 		var/criminal = "None"
 
-		var/obj/item/weapon/card/id/id = GetIdCard()
+		var/obj/item/card/id/id = GetIdCard()
 		if(istype(id))
 			perpname = id.registered_name
 		else
@@ -294,7 +294,7 @@
 		var/perpname = "wot"
 		var/medical = "None"
 
-		var/obj/item/weapon/card/id/id = GetIdCard()
+		var/obj/item/card/id/id = GetIdCard()
 		if(istype(id))
 			perpname = id.registered_name
 		else

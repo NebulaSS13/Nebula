@@ -22,7 +22,6 @@
 	selectable = 1
 	toggleable = 0
 	disruptive = 0
-
 	var/obj/item/device
 
 /obj/item/rig_module/device/healthscanner
@@ -35,7 +34,7 @@
 	usable = 1
 	use_power_cost = 200
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
-	device = /obj/item/device/scanner/health
+	device = /obj/item/scanner/health
 
 /obj/item/rig_module/device/defib
 	name = "mounted defibrillator"
@@ -46,7 +45,7 @@
 	interface_desc = "A prototype defibrillator, palm-mounted for ease of use."
 
 	use_power_cost = 0//Already handled by defib, but it's 150 Wh, normal defib takes 100
-	device = /obj/item/weapon/shockpaddles/rig
+	device = /obj/item/shockpaddles/rig
 
 /obj/item/rig_module/device/drill
 	name = "hardsuit mounted drill"
@@ -59,7 +58,7 @@
 	use_power_cost = 3600 //2 Wh per use
 	module_cooldown = 0
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
-	device = /obj/item/weapon/pickaxe/diamonddrill
+	device = /obj/item/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
 	name = "anomaly scanner module"
@@ -71,7 +70,7 @@
 	use_power_cost = 200
 	usable = 1
 	selectable = 0
-	device = /obj/item/device/ano_scanner
+	device = /obj/item/ano_scanner
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/orescanner
@@ -85,14 +84,14 @@
 	usable = 1
 	toggleable = 1
 	use_power_cost = 200
-	device = /obj/item/device/scanner/mining
+	device = /obj/item/scanner/mining
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/orescanner/activate()
 	if(!check() || !device)
 		return 0
 
-	var/obj/item/device/scanner/mining/scanner = device
+	var/obj/item/scanner/mining/scanner = device
 	scanner.put_disk_in_hand(holder.wearer)
 
 /obj/item/rig_module/device/rcd
@@ -105,7 +104,7 @@
 	engage_string = "Configure RCD"
 	use_power_cost = 300
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
-	device = /obj/item/weapon/rcd/mounted
+	device = /obj/item/rcd/mounted
 
 /obj/item/rig_module/device/Initialize()
 	. = ..()
@@ -301,12 +300,12 @@
 /obj/item/rig_module/voice/installed()
 	..()
 	holder.speech = src
-	holder.verbs |= /obj/item/weapon/rig/proc/alter_voice
+	holder.verbs |= /obj/item/rig/proc/alter_voice
 
 /obj/item/rig_module/voice/removed()
 	..()
 	holder.speech = null
-	holder.verbs -= /obj/item/weapon/rig/proc/alter_voice
+	holder.verbs -= /obj/item/rig/proc/alter_voice
 
 /obj/item/rig_module/voice/engage()
 
@@ -356,7 +355,7 @@
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
 	origin_tech = list(TECH_MATERIAL = 6,  TECH_ENGINEERING = 7)
-	var/obj/item/weapon/tank/jetpack/rig/jets
+	var/obj/item/tank/jetpack/rig/jets
 
 /obj/item/rig_module/maneuvering_jets/engage()
 	if(!..())
@@ -413,7 +412,7 @@
 	use_power_cost = 200
 	usable = 1
 	selectable = 0
-	device = /obj/item/weapon/paper_bin
+	device = /obj/item/paper_bin
 
 /obj/item/rig_module/device/paperdispenser/engage(atom/target)
 
@@ -432,7 +431,7 @@
 	interface_desc = "Signatures with style(tm)."
 	engage_string = "Change color"
 	usable = 1
-	device = /obj/item/weapon/pen/multi
+	device = /obj/item/pen/multi
 
 /obj/item/rig_module/device/stamp
 	name = "mounted stamp"
@@ -447,8 +446,8 @@
 
 /obj/item/rig_module/device/stamp/Initialize()
 	. = ..()
-	stamp = new /obj/item/weapon/stamp(src)
-	deniedstamp = new /obj/item/weapon/stamp/denied(src)
+	stamp = new /obj/item/stamp(src)
+	deniedstamp = new /obj/item/stamp/denied(src)
 	device = stamp
 
 /obj/item/rig_module/device/stamp/engage(atom/target)
@@ -471,7 +470,7 @@
 	interface_name = "mounted matter decompiler"
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
-	device = /obj/item/weapon/matter_decompiler
+	device = /obj/item/matter_decompiler
 
 /obj/item/rig_module/cooling_unit
 	name = "mounted cooling unit"

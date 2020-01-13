@@ -205,19 +205,19 @@
 	return 1
 
 /obj/structure/deity/radiant_statue/attackby(var/obj/item/I, var/mob/user)
-	if(charging && (istype(I, /obj/item/weapon/material/knife/ritual/shadow) || istype(I, /obj/item/weapon/gun/energy/staff/beacon)) && charge_item(I, user))
+	if(charging && (istype(I, /obj/item/material/knife/ritual/shadow) || istype(I, /obj/item/gun/energy/staff/beacon)) && charge_item(I, user))
 		return
 	..()
 
 /obj/structure/deity/radiant_statue/proc/charge_item(var/obj/item/I, var/mob/user)
 	. = 0
-	if(istype(I, /obj/item/weapon/gun/energy))
-		var/obj/item/weapon/gun/energy/energy = I
+	if(istype(I, /obj/item/gun/energy))
+		var/obj/item/gun/energy/energy = I
 		if(energy.power_supply)
 			energy.power_supply.give(energy.charge_cost * energy.max_shots)
 			. = 1
-	else if(istype(I ,/obj/item/weapon/material/knife/ritual/shadow))
-		var/obj/item/weapon/material/knife/ritual/shadow/shad = I
+	else if(istype(I ,/obj/item/material/knife/ritual/shadow))
+		var/obj/item/material/knife/ritual/shadow/shad = I
 		shad.charge = initial(shad.charge)
 		. = 1
 	if(.)
