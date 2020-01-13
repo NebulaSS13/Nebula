@@ -1,21 +1,21 @@
 /obj/item/material/kitchen
 	icon = 'icons/obj/kitchen.dmi'
-	worth_multiplier = 1.1
+	base_worth = 1.1
 
 /*
  * Utensils
  */
 /obj/item/material/kitchen/utensil
 	w_class = ITEM_SIZE_TINY
-	thrown_force_divisor = 1
+	thrown_material_force_multiplier = 1
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
 	max_force = 5
 	sharp = 0
 	edge = 0
-	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
-	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
-	default_material = MATERIAL_ALUMINIUM
+	material_force_multiplier = 0.1 // 6 when wielded with hardness 60 (steel)
+	thrown_material_force_multiplier = 0.25 // 5 when thrown with weight 20 (steel)
+	material = MATERIAL_ALUMINIUM
 
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
@@ -63,17 +63,17 @@
 	icon_state = "fork"
 
 /obj/item/material/kitchen/utensil/fork/plastic
-	default_material = MATERIAL_PLASTIC
+	material = MATERIAL_PLASTIC
 
 /obj/item/material/kitchen/utensil/spoon
 	name = "spoon"
 	desc = "It's a spoon. You can see your own upside-down face in it."
 	icon_state = "spoon"
 	attack_verb = list("attacked", "poked")
-	force_divisor = 0.1 //2 when wielded with weight 20 (steel)
+	material_force_multiplier = 0.1 //2 when wielded with weight 20 (steel)
 
 /obj/item/material/kitchen/utensil/spoon/plastic
-	default_material = MATERIAL_PLASTIC
+	material = MATERIAL_PLASTIC
 
 /obj/item/material/kitchen/utensil/spork
 	name = "spork"
@@ -81,7 +81,7 @@
 	icon_state = "spork"
 
 /obj/item/material/kitchen/utensil/spork/plastic
-	default_material = MATERIAL_PLASTIC
+	material = MATERIAL_PLASTIC
 
 /obj/item/material/kitchen/utensil/foon
 	name = "foon"
@@ -89,7 +89,7 @@
 	icon_state = "foon"
 
 /obj/item/material/kitchen/utensil/foon/plastic
-	default_material = MATERIAL_PLASTIC
+	material = MATERIAL_PLASTIC
 
  /*
  * Rolling Pins
@@ -100,10 +100,10 @@
 	desc = "Used to knock out the Bartender."
 	icon_state = "rolling_pin"
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
-	default_material = MATERIAL_WOOD
+	material = MATERIAL_WOOD
 	max_force = 15
-	force_divisor = 0.7 // 10 when wielded with weight 15 (wood)
-	thrown_force_divisor = 1 // as above
+	material_force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
+	thrown_material_force_multiplier = 1 // as above
 
 /obj/item/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))

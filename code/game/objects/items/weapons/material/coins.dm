@@ -7,8 +7,8 @@
 	force = 1
 	throwforce = 1
 	max_force = 5
-	force_divisor = 0.1
-	thrown_force_divisor = 0.1
+	material_force_multiplier = 0.1
+	thrown_material_force_multiplier = 0.1
 	w_class = 1
 	slot_flags = SLOT_EARS
 	var/string_colour
@@ -47,22 +47,22 @@
 
 // Subtypes.
 /obj/item/material/coin/gold
-	default_material = MATERIAL_GOLD
+	material = MATERIAL_GOLD
 
 /obj/item/material/coin/silver
-	default_material = MATERIAL_SILVER
+	material = MATERIAL_SILVER
 
 /obj/item/material/coin/diamond
-	default_material = MATERIAL_DIAMOND
+	material = MATERIAL_DIAMOND
 
 /obj/item/material/coin/iron
-	default_material = MATERIAL_IRON
+	material = MATERIAL_IRON
 
 /obj/item/material/coin/uranium
-	default_material = MATERIAL_URANIUM
+	material = MATERIAL_URANIUM
 
 /obj/item/material/coin/platinum
-	default_material = MATERIAL_PLATINUM
+	material = MATERIAL_PLATINUM
 
 /obj/item/material/coin/phoron
-	default_material = MATERIAL_PHORON
+	material = MATERIAL_PHORON

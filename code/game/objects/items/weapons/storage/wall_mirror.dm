@@ -35,7 +35,7 @@
 		return
 	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", mirror = src)
 
-/obj/item/storage/mirror/proc/shatter()
+/obj/item/storage/mirror/shatter()
 	if(shattered)	return
 	shattered = 1
 	icon_state = "mirror_broke"

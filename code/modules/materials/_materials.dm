@@ -6,9 +6,8 @@
 
 	PATHS THAT USE DATUMS
 		turf/simulated/wall
-		obj/item/material
+		obj/item
 		obj/structure/barricade
-		obj/item/stack/material
 		obj/structure/table
 
 	VALID ICONS

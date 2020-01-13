@@ -149,14 +149,13 @@
 		to_chat(user, "<span class='notice'>There isn't enough material here to construct a wall.</span>")
 		return 0
 
-	var/material/M = SSmaterials.get_material_by_name(S.default_type)
-	if(!istype(M))
+	if(!istype(S.material))
 		return 0
 
 	var/wall_fake
 	add_hiddenprint(usr)
 
-	if(M.integrity < 50)
+	if(S.material.integrity < 50)
 		to_chat(user, "<span class='notice'>This material is too soft for use in wall construction.</span>")
 		return 0
 
@@ -174,7 +173,7 @@
 	var/turf/Tsrc = get_turf(src)
 	Tsrc.ChangeTurf(/turf/simulated/wall)
 	var/turf/simulated/wall/T = get_turf(src)
-	T.set_material(M, reinf_material)
+	T.set_material(S.material, reinf_material)
 	if(wall_fake)
 		T.can_open = 1
 	T.add_hiddenprint(usr)

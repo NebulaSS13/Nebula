@@ -26,3 +26,6 @@
 /material/nullglass/generate_recipes()
 	. = ..()
 	. += new /datum/stack_recipe/tile/nullglass(src)
+
+/obj/item/material/shard/nullglass/New(var/newloc)
+	..(newloc, MATERIAL_NULLGLASS)

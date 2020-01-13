@@ -10,13 +10,12 @@
 	edge = 1
 	w_class = ITEM_SIZE_SMALL
 	max_force = 8
-	force_divisor = 0.12 // 6 with hardness 30 (glass)
-	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
+	material_force_multiplier = 0.12 // 6 with hardness 30 (glass)
+	thrown_material_force_multiplier = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
-	default_material = MATERIAL_GLASS
+	material = MATERIAL_GLASS
 	unbreakable = 1 //It's already broken.
-	drops_debris = 0
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 /obj/item/material/shard/set_material(var/new_material)
@@ -97,5 +96,5 @@
 
 /obj/item/material/shard/shrapnel
 	name = "shrapnel"
-	default_material = MATERIAL_STEEL
+	material = MATERIAL_STEEL
 	w_class = ITEM_SIZE_TINY	//it's real small

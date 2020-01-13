@@ -26,7 +26,7 @@
 	var/unwieldsound = null
 	var/base_icon
 	var/base_name
-	var/unwielded_force_divisor = 0.25
+	var/unwielded_material_force_multiplier = 0.25
 	var/wielded_parry_bonus = 15
 
 /obj/item/material/twohanded/update_twohanding()
@@ -43,7 +43,7 @@
 /obj/item/material/twohanded/update_force()
 	..()
 	base_name = name
-	force_unwielded = round(force*unwielded_force_divisor)
+	force_unwielded = round(force*unwielded_material_force_multiplier)
 	force_wielded = force
 	force = force_unwielded
 
@@ -74,13 +74,13 @@
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 
 	max_force = 60	//for wielded
-	force_divisor = 0.6
-	unwielded_force_divisor = 0.3
+	material_force_multiplier = 0.6
+	unwielded_material_force_multiplier = 0.3
 	sharp = 1
 	edge = 1
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
-	worth_multiplier = 31
+	base_worth = 31
 
 /obj/item/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -106,17 +106,17 @@
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	max_force = 20	//for wielded
 	applies_material_colour = 0
-	force_divisor = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
-	unwielded_force_divisor = 0.20
-	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
+	material_force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
+	unwielded_material_force_multiplier = 0.20
+	thrown_material_force_multiplier = 1.5 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
 	edge = 0
 	sharp = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
-	default_material = MATERIAL_GLASS
+	material = MATERIAL_GLASS
 	does_spin = FALSE
-	worth_multiplier = 7
+	base_worth = 7
 
 /obj/item/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
@@ -134,11 +134,10 @@
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	default_material = MATERIAL_MAPLE
+	material = MATERIAL_MAPLE
 	max_force = 40	//for wielded
-	force_divisor = 1.1           // 22 when wielded with weight 20 (steel)
-	unwielded_force_divisor = 0.7 // 15 when unwielded based on above.
-	attack_cooldown_modifier = 1
+	material_force_multiplier = 1.1           // 22 when wielded with weight 20 (steel)
+	unwielded_material_force_multiplier = 0.7 // 15 when unwielded based on above.
 	melee_accuracy_bonus = -10
 
 //Predefined materials go here.

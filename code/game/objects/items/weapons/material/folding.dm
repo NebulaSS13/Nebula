@@ -8,7 +8,7 @@
 	item_state = null
 	force = 0.2 //force of folded obj
 	max_force = 10
-	force_divisor = 0.2
+	material_force_multiplier = 0.2
 	applies_material_colour = FALSE
 	applies_material_name = FALSE
 	unbreakable = TRUE
@@ -94,11 +94,10 @@
 	name = "the concept of a fighting knife in which the blade can be stowed in its own handle"
 	desc = "This is a master item - berate the admin or mapper who spawned this"
 	max_force = 15
-	force_divisor = 0.25
-	thrown_force_divisor = 0.25
-	attack_cooldown_modifier = -1
+	material_force_multiplier = 0.25
+	thrown_material_force_multiplier = 0.25
 	takes_colour = FALSE
-	worth_multiplier = 8
+	base_worth = 8
 
 /obj/item/material/knife/folding/combat/balisong
 	name = "butterfly knife"

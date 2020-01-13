@@ -48,9 +48,6 @@
 /obj/item/ore/Value()
 	return material ? material.value : 0
 
-/obj/item/material/Value()
-	return material.value * worth_multiplier
-
 /obj/item/spacecash/Value()
 	return worth
 

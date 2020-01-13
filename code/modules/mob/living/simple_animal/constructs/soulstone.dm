@@ -25,7 +25,7 @@
 /obj/item/soulstone/disrupts_psionics()
 	return (full == SOULSTONE_EMPTY) ? src : FALSE
 
-/obj/item/soulstone/proc/shatter()
+/obj/item/soulstone/shatter()
 	playsound(loc, "shatter", 70, 1)
 	for(var/i=1 to rand(2,5))
 		new /obj/item/material/shard(get_turf(src), MATERIAL_NULLGLASS)

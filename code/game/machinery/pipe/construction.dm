@@ -22,7 +22,7 @@ Buildable meters
 	var/rotate_class = PIPE_ROTATE_STANDARD
 
 /obj/item/pipe/Initialize(var/mapload, var/obj/machinery/atmospherics/P)
-	. = ..()
+	. = ..(mapload, null)
 	if(!P)
 		return
 	if(!P.dir)
