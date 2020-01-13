@@ -57,7 +57,7 @@
 						return
 
 				var/mob/living/M = target
-				var/contained = reagentlist()
+				var/contained = REAGENT_LIST(src)
 				admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
 
 				var/spill_amt = M.incapacitated()? 0 : 30

@@ -40,7 +40,7 @@
 		if(!do_mob(user, M))
 			return
 		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
-		var/contained = reagentlist()
+		var/contained = REAGENT_LIST(src)
 		admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 		if(reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
@@ -58,7 +58,7 @@
 			return
 		to_chat(user, "<span class='notice'>You dissolve \the [src] in [target].</span>")
 
-		admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
+		admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [REAGENT_LIST(src)]")
 		reagents.trans_to(target, reagents.total_volume)
 		for(var/mob/O in viewers(2, user))
 			O.show_message("<span class='warning'>[user] puts something in \the [target].</span>", 1)

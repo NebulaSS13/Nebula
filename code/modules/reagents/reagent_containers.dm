@@ -4,6 +4,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	w_class = ITEM_SIZE_SMALL
+
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = "5;10;15;25;30"
 	var/volume = 30
@@ -11,23 +12,21 @@
 
 /obj/item/reagent_containers/proc/cannot_interact(mob/user)
 	if(!CanPhysicallyInteract(user))
-		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
+		to_chat(usr, SPAN_WARNING("You're in no condition to do that!"))
 		return TRUE
 	if(ismob(loc) && loc != user)
-		to_chat(usr, "<span class='notice'>You can't set transfer amounts while [src] is being held by someone else.</span>")
+		to_chat(usr, SPAN_WARNING("You can't set transfer amounts while \the [src] is being held by someone else."))
 		return TRUE
 	return FALSE
 
 /obj/item/reagent_containers/verb/set_amount_per_transfer_from_this()
-	set name = "Set transfer amount"
+	set name = "Set Transfer Amount"
 	set category = "Object"
 	set src in range(1)
-	if (cannot_interact(usr))
+	if(cannot_interact(usr))
 		return
-	var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
-	if (cannot_interact(usr)) // because input takes time and the situation can change
-		return
-	if(N)
+	var/N = input("How much do you wish to transfer per use?", "Set Transfer Amount") as null|anything in possible_transfer_amounts
+	if(N && !cannot_interact(usr))
 		amount_per_transfer_from_this = N
 
 /obj/item/reagent_containers/New()
@@ -41,11 +40,6 @@
 
 /obj/item/reagent_containers/afterattack(obj/target, mob/user, flag)
 	return
-
-/obj/item/reagent_containers/proc/reagentlist() // For attack logs
-	if(reagents)
-		return reagents.get_reagents()
-	return "No reagent holder"
 
 /obj/item/reagent_containers/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
@@ -97,7 +91,7 @@
 		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return 1
 
-	var/contained = reagentlist()
+	var/contained = REAGENT_LIST(src)
 	admin_attack_log(user, target, "Used \the [name] containing [contained] to splash the victim.", "Was splashed by \the [name] containing [contained].", "used \the [name] containing [contained] to splash")
 
 	user.visible_message("<span class='danger'>[target] has been splashed with something by [user]!</span>", "<span class = 'notice'>You splash the solution onto [target].</span>")
@@ -163,7 +157,7 @@
 
 			other_feed_message_finish(user, target)
 
-			var/contained = reagentlist()
+			var/contained = REAGENT_LIST(src)
 			admin_attack_log(user, target, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 
 			reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
