@@ -59,7 +59,7 @@
 	belt = /obj/item/storage/belt/holster/security
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat
-	l_pocket = /obj/item/reagent_containers/pill/cyanide
+	l_pocket = /obj/item/chems/pill/cyanide
 
 	id_slot = slot_wear_id
 	id_type = /obj/item/card/id/syndicate

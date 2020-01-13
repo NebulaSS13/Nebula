@@ -11,7 +11,7 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
 	species_restricted = null
-	allowed = list (/obj/item/reagent_containers/spray/plantbgone,/obj/item/scanner/plant,/obj/item/seeds,/obj/item/reagent_containers/glass/bottle,/obj/item/material/minihoe)
+	allowed = list (/obj/item/chems/spray/plantbgone,/obj/item/scanner/plant,/obj/item/seeds,/obj/item/chems/glass/bottle,/obj/item/material/minihoe)
 
 //Captain
 /obj/item/clothing/suit/captunic
@@ -186,8 +186,8 @@
 	icon_open = "fr_jacket_open"
 	icon_closed = "fr_jacket"
 	blood_overlay_type = "armor"
-	allowed = list(/obj/item/stack/medical, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/hypospray, /obj/item/reagent_containers/syringe, \
-	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency, /obj/item/reagent_containers/ivbag)
+	allowed = list(/obj/item/stack/medical, /obj/item/chems/dropper, /obj/item/chems/hypospray, /obj/item/chems/syringe, \
+	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency, /obj/item/chems/ivbag)
 	body_parts_covered = UPPER_TORSO|ARMS
 
 /obj/item/clothing/suit/storage/toggle/fr_jacket/ems
@@ -202,8 +202,8 @@
 	desc = "A black chest-rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
 	icon_state = "Med-chest-rig"
 	blood_overlay_type = "armor"
-	allowed = list(/obj/item/stack/medical, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/hypospray, /obj/item/reagent_containers/syringe, \
-	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency, /obj/item/reagent_containers/ivbag,/obj/item/clothing/head/hardhat/EMS)
+	allowed = list(/obj/item/stack/medical, /obj/item/chems/dropper, /obj/item/chems/hypospray, /obj/item/chems/syringe, \
+	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency, /obj/item/chems/ivbag,/obj/item/clothing/head/hardhat/EMS)
 	body_parts_covered = UPPER_TORSO
 
 /obj/item/clothing/suit/surgicalapron
@@ -212,6 +212,6 @@
 	icon_state = "surgical"
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	allowed = list(/obj/item/stack/medical, /obj/item/reagent_containers/dropper, /obj/item/reagent_containers/hypospray, /obj/item/reagent_containers/syringe, \
+	allowed = list(/obj/item/stack/medical, /obj/item/chems/dropper, /obj/item/chems/hypospray, /obj/item/chems/syringe, \
 	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency,/obj/item/scalpel,/obj/item/retractor,/obj/item/hemostat, \
 	/obj/item/cautery,/obj/item/bonegel,/obj/item/FixOVein)

@@ -379,7 +379,7 @@
 /obj/structure/closet/crate/plastic,
 /obj/random/accessory,
 /obj/random/accessory,
-/obj/item/reagent_containers/glass/paint/random,
+/obj/item/chems/glass/paint/random,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "aS" = (

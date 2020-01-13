@@ -21,10 +21,10 @@
 	return list(
 		/obj/item/storage/box/autoinjectors,
 		/obj/item/storage/box/syringes,
-		/obj/item/reagent_containers/dropper = 2,
-		/obj/item/reagent_containers/glass/beaker = 2,
-		/obj/item/reagent_containers/glass/bottle/inaprovaline = 2,
-		/obj/item/reagent_containers/glass/bottle/antitoxin = 2,
+		/obj/item/chems/dropper = 2,
+		/obj/item/chems/glass/beaker = 2,
+		/obj/item/chems/glass/bottle/inaprovaline = 2,
+		/obj/item/chems/glass/bottle/antitoxin = 2,
 		/obj/random/firstaid,
 		/obj/item/storage/box/masks,
 		/obj/item/storage/box/gloves
@@ -75,8 +75,8 @@
 	return list(
 	    /obj/item/storage/box/autoinjectors,
 	    /obj/item/storage/box/syringes,
-	    /obj/item/reagent_containers/glass/bottle/inaprovaline,
-	    /obj/item/reagent_containers/glass/bottle/antitoxin,
+	    /obj/item/chems/glass/bottle/inaprovaline,
+	    /obj/item/chems/glass/bottle/antitoxin,
 	    /obj/item/storage/belt/medical/emt,
 	    /obj/item/clothing/mask/gas,
 	    /obj/item/clothing/suit/storage/toggle/fr_jacket,
@@ -113,7 +113,7 @@
 		/obj/item/clothing/shoes/brown,
 		/obj/item/radio/headset/heads/cmo,
 		/obj/item/flash,
-		/obj/item/reagent_containers/hypospray/vial,
+		/obj/item/chems/hypospray/vial,
 		RANDOM_SCRUBS
 	)
 
@@ -126,7 +126,7 @@
 /obj/structure/closet/secure_closet/chemical/WillContain()
 	return list(
 		/obj/item/storage/box/pillbottles = 2,
-		/obj/item/reagent_containers/glass/beaker/cryoxadone,
+		/obj/item/chems/glass/beaker/cryoxadone,
 		/obj/random/medical = 12
 	)
 
@@ -152,10 +152,10 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,
 		/obj/item/clothing/shoes/white,
-		/obj/item/reagent_containers/glass/bottle/stoxin,
-		/obj/item/reagent_containers/syringe,
+		/obj/item/chems/glass/bottle/stoxin,
+		/obj/item/chems/syringe,
 		/obj/item/storage/pill_bottle/citalopram,
-		/obj/item/reagent_containers/pill/methylphenidate,
+		/obj/item/chems/pill/methylphenidate,
 		/obj/item/material/clipboard,
 		/obj/item/folder/white,
 		/obj/item/taperecorder,
@@ -175,12 +175,12 @@
 	return list(
 		/obj/item/storage/box/autoinjectors,
 		/obj/item/storage/box/syringes,
-		/obj/item/reagent_containers/dropper = 2,
-		/obj/item/reagent_containers/glass/beaker = 2,
-		/obj/item/reagent_containers/glass/bottle/inaprovaline,
+		/obj/item/chems/dropper = 2,
+		/obj/item/chems/glass/beaker = 2,
+		/obj/item/chems/glass/bottle/inaprovaline,
 		/obj/item/storage/pill_bottle/spaceacillin,
-		/obj/item/reagent_containers/syringe/antiviral,
-		/obj/item/reagent_containers/glass/bottle/antitoxin,
+		/obj/item/chems/syringe/antiviral,
+		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/storage/box/masks,
 		/obj/item/storage/box/gloves,
 		/obj/item/clothing/under/rank/virologist,
@@ -200,8 +200,8 @@
 /obj/structure/closet/secure_closet/psychiatry/WillContain()
 	return list(
 		/obj/item/clothing/suit/straight_jacket,
-		/obj/item/reagent_containers/glass/bottle/stoxin,
-		/obj/item/reagent_containers/syringe,
+		/obj/item/chems/glass/bottle/stoxin,
+		/obj/item/chems/syringe,
 		/obj/item/storage/pill_bottle/citalopram,
 		/obj/item/storage/pill_bottle/methylphenidate,
 		/obj/item/storage/pill_bottle/paroxetine,

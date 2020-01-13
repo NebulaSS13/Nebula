@@ -325,7 +325,7 @@ Sells devices, odds and ends, and medical stuff
 				"insult_bad"        = "*muffled laughter* Sorry, was that you trying to talk shit? Adorable.",
 				)
 
-	possible_wanted_items = list(/obj/item/reagent_containers/food/drinks/bottle = TRADER_THIS_TYPE,
+	possible_wanted_items = list(/obj/item/chems/food/drinks/bottle = TRADER_THIS_TYPE,
 								/obj/item/organ/internal/liver = TRADER_THIS_TYPE,
 								/obj/item/organ/internal/kidneys = TRADER_THIS_TYPE,
 								/obj/item/organ/internal/lungs = TRADER_THIS_TYPE,
@@ -338,7 +338,7 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/storage/firstaid/toxin  = TRADER_THIS_TYPE,
 								  /obj/item/storage/firstaid/adv  = TRADER_THIS_TYPE,
 								  /obj/item/storage/box/bloodpacks  = TRADER_THIS_TYPE,
-								  /obj/item/reagent_containers/ivbag  = TRADER_SUBTYPES_ONLY,
+								  /obj/item/chems/ivbag  = TRADER_SUBTYPES_ONLY,
 								  /obj/item/retractor = TRADER_THIS_TYPE,
 								  /obj/item/hemostat = TRADER_THIS_TYPE,
 								  /obj/item/cautery = TRADER_THIS_TYPE,
@@ -348,12 +348,12 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/circular_saw = TRADER_THIS_TYPE,
 								  /obj/item/bonegel = TRADER_THIS_TYPE,
 								  /obj/item/bonesetter = TRADER_THIS_TYPE,
-								  /obj/item/reagent_containers/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
-								  /obj/item/reagent_containers/glass/bottle/stoxin = TRADER_THIS_TYPE,
-								  /obj/item/reagent_containers/glass/bottle/antitoxin = TRADER_THIS_TYPE,
-								  /obj/item/reagent_containers/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
+								  /obj/item/chems/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
+								  /obj/item/chems/glass/bottle/stoxin = TRADER_THIS_TYPE,
+								  /obj/item/chems/glass/bottle/antitoxin = TRADER_THIS_TYPE,
+								  /obj/item/chems/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
 								  /obj/item/bodybag/cryobag = TRADER_THIS_TYPE,
-								  /obj/item/reagent_containers/chem_disp_cartridge/dexalin/small = TRADER_THIS_TYPE,
+								  /obj/item/chems/chem_disp_cartridge/dexalin/small = TRADER_THIS_TYPE,
 								  /obj/item/sign/medipolma = TRADER_THIS_TYPE
 								)
 

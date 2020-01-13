@@ -40,19 +40,19 @@
 	w_class = ITEM_SIZE_TINY
 
 //tobacco sold seperately if you're too snobby to grow it yourself.
-/obj/item/reagent_containers/food/snacks/grown/dried_tobacco
+/obj/item/chems/food/snacks/grown/dried_tobacco
 	plantname = "tobacco"
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/Initialize()
+/obj/item/chems/food/snacks/grown/dried_tobacco/Initialize()
 	. = ..()
 	dry = TRUE
 	SetName("dried [name]")
 	color = "#a38463"
-/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/bad
+/obj/item/chems/food/snacks/grown/dried_tobacco/bad
 	plantname = "badtobacco"
 
-/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine
+/obj/item/chems/food/snacks/grown/dried_tobacco/fine
 	plantname = "finetobacco"
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
@@ -73,7 +73,7 @@
 			return
 	..()
 
-/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/I, mob/user)
+/obj/item/chems/food/snacks/grown/attackby(obj/item/I, mob/user)
 	if(is_type_in_list(I, list(/obj/item/paper/cig/, /obj/item/paper/, /obj/item/teleportation_scroll)))
 		if(!dry)
 			to_chat(user, "<span class='warning'>You need to dry [src] first!</span>")

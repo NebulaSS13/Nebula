@@ -33,7 +33,7 @@
 	startswith = list(
 		/obj/item/implanter/imprinting,
 		/obj/item/implantpad,
-		/obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
+		/obj/item/chems/hypospray/autoinjector/mindbreaker
 		)
 
 // Space suit uplink kit
@@ -100,15 +100,15 @@
 
 /obj/item/storage/box/syndie_kit/toxin
 	startswith = list(
-		/obj/item/reagent_containers/glass/beaker/vial/random/toxin,
-		/obj/item/reagent_containers/syringe
+		/obj/item/chems/glass/beaker/vial/random/toxin,
+		/obj/item/chems/syringe
 	)
 
 /obj/item/storage/box/syndie_kit/syringegun
 	startswith = list(
 		/obj/item/gun/launcher/syringe/disguised,
 		/obj/item/syringe_cartridge = 4,
-		/obj/item/reagent_containers/syringe = 4
+		/obj/item/chems/syringe = 4
 	)
 
 /obj/item/storage/box/syndie_kit/cigarette

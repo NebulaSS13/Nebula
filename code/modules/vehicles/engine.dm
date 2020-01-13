@@ -89,10 +89,10 @@
 	temp_reagents_holder.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/engine/thermal/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I,/obj/item/reagent_containers) && ATOM_IS_OPEN_CONTAINER(I))
-		if(istype(I,/obj/item/reagent_containers/food/snacks) || istype(I,/obj/item/reagent_containers/pill))
+	if(istype(I,/obj/item/chems) && ATOM_IS_OPEN_CONTAINER(I))
+		if(istype(I,/obj/item/chems/food/snacks) || istype(I,/obj/item/chems/pill))
 			return 0
-		var/obj/item/reagent_containers/C = I
+		var/obj/item/chems/C = I
 		C.standard_pour_into(user,src)
 		return 1
 	..()

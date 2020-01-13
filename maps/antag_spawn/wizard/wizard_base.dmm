@@ -29,7 +29,7 @@
 	pixel_x = -3;
 	pixel_y = 8
 	},
-/obj/item/reagent_containers/food/drinks/flask/barflask,
+/obj/item/chems/food/drinks/flask/barflask,
 /turf/simulated/floor/carpet,
 /area/map_template/wizard_station)
 "ag" = (
@@ -216,7 +216,7 @@
 /area/map_template/wizard_station)
 "aF" = (
 /obj/structure/table/woodentable,
-/obj/item/reagent_containers/food/snacks/chawanmushi,
+/obj/item/chems/food/snacks/chawanmushi,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -271,10 +271,10 @@
 /area/map_template/wizard_station)
 "aL" = (
 /obj/structure/closet,
-/obj/item/reagent_containers/food/drinks/bottle/bottleofnothing,
-/obj/item/reagent_containers/food/drinks/bottle/pwine,
-/obj/item/reagent_containers/food/drinks/bottle/specialwhiskey,
-/obj/item/reagent_containers/food/drinks/bottle/cognac,
+/obj/item/chems/food/drinks/bottle/bottleofnothing,
+/obj/item/chems/food/drinks/bottle/pwine,
+/obj/item/chems/food/drinks/bottle/specialwhiskey,
+/obj/item/chems/food/drinks/bottle/cognac,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -391,7 +391,7 @@
 /area/map_template/wizard_station)
 "ba" = (
 /obj/structure/table/woodentable,
-/obj/item/reagent_containers/food/snacks/milosoup,
+/obj/item/chems/food/snacks/milosoup,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

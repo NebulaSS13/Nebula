@@ -18,7 +18,7 @@
 		/obj/random/medical/lite,
 		/obj/item/lipstick/random,
 		/obj/random/soap,
-		/obj/item/reagent_containers/spray/cleaner/deodorant,
+		/obj/item/chems/spray/cleaner/deodorant,
 		/obj/item/towel/random)
 
 /obj/item/storage/mirror/MouseDrop(obj/over_object as obj)

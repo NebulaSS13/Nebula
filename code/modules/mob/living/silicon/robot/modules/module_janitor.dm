@@ -21,7 +21,7 @@
 		/obj/item/crowbar,
 		/obj/item/weldingtool
 	)
-	emag = /obj/item/reagent_containers/spray
+	emag = /obj/item/chems/spray
 	skills = list(
 		SKILL_EVA    = SKILL_MAX,
 		SKILL_MECH   = HAS_PERK,
@@ -38,5 +38,5 @@
 	var/obj/item/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
 	if(emag)
-		var/obj/item/reagent_containers/spray/S = emag
+		var/obj/item/chems/spray/S = emag
 		S.reagents.add_reagent(/datum/reagent/lube, 20 * amount)

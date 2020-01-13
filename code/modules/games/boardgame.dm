@@ -163,7 +163,7 @@ obj/item/board/attackby(obj/item/I as obj, mob/user as mob)
 
 //Checkers
 
-/obj/item/reagent_containers/food/snacks/checker
+/obj/item/chems/food/snacks/checker
 	name = "checker"
 	desc = "It is plastic and shiny."
 	icon = 'icons/obj/pieces.dmi'
@@ -174,54 +174,54 @@ obj/item/board/attackby(obj/item/I as obj, mob/user as mob)
 	nutriment_amt = 1
 	var/piece_color ="black"
 
-/obj/item/reagent_containers/food/snacks/checker/New()
+/obj/item/chems/food/snacks/checker/New()
 	..()
 	icon_state = "[name]_[piece_color]"
 	name = "[piece_color] [name]"
 
-/obj/item/reagent_containers/food/snacks/checker/red
+/obj/item/chems/food/snacks/checker/red
 	piece_color ="red"
 
 //Chess
 
-/obj/item/reagent_containers/food/snacks/checker/pawn
+/obj/item/chems/food/snacks/checker/pawn
 	name = "pawn"
 	desc = "How many pawns will die in your war?"
 
-/obj/item/reagent_containers/food/snacks/checker/pawn/red
+/obj/item/chems/food/snacks/checker/pawn/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/knight
+/obj/item/chems/food/snacks/checker/knight
 	name = "knight"
 	desc = "The piece chess deserves, and needs to actually play."
 
-/obj/item/reagent_containers/food/snacks/checker/knight/red
+/obj/item/chems/food/snacks/checker/knight/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/bishop
+/obj/item/chems/food/snacks/checker/bishop
 	name = "bishop"
 	desc = "What corruption occured, urging holy men to fight?"
 
-/obj/item/reagent_containers/food/snacks/checker/bishop/red
+/obj/item/chems/food/snacks/checker/bishop/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/rook
+/obj/item/chems/food/snacks/checker/rook
 	name = "rook"
 	desc = "Representing ancient moving towers. So powerful and fast they were banned from wars, forever."
 
-/obj/item/reagent_containers/food/snacks/checker/rook/red
+/obj/item/chems/food/snacks/checker/rook/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/queen
+/obj/item/chems/food/snacks/checker/queen
 	name = "queen"
 	desc = "A queen of battle and pain. She dances across the battlefield."
 
-/obj/item/reagent_containers/food/snacks/checker/queen/red
+/obj/item/chems/food/snacks/checker/queen/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/king
+/obj/item/chems/food/snacks/checker/king
 	name = "king"
 	desc = "Why does a chess game end when the king dies?"
 
-/obj/item/reagent_containers/food/snacks/checker/king/red
+/obj/item/chems/food/snacks/checker/king/red
 	piece_color ="red"

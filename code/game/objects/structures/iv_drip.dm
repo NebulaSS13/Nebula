@@ -5,7 +5,7 @@
 	density = 0
 	var/mob/living/carbon/human/attached
 	var/mode = 1 // 1 is injecting, 0 is taking blood.
-	var/obj/item/reagent_containers/beaker
+	var/obj/item/chems/beaker
 	var/list/transfer_amounts = list(REM, 1, 2)
 	var/transfer_amount = 1
 
@@ -65,7 +65,7 @@
 		hook_up(over_object, usr)
 
 /obj/structure/iv_drip/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/reagent_containers))
+	if (istype(W, /obj/item/chems))
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
 			return

@@ -190,7 +190,7 @@
 	anchored = 0
 	buckle_pixel_shift = "x=0;y=0;z=6"
 	var/item_form_type = /obj/item/roller	//The folded-up object path.
-	var/obj/item/reagent_containers/beaker
+	var/obj/item/chems/beaker
 	var/iv_attached = 0
 	var/iv_stand = TRUE
 
@@ -215,7 +215,7 @@
 /obj/structure/bed/roller/attackby(obj/item/I, mob/user)
 	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))
 		return 1
-	if(iv_stand && !beaker && istype(I, /obj/item/reagent_containers))
+	if(iv_stand && !beaker && istype(I, /obj/item/chems))
 		if(!user.unEquip(I, src))
 			return
 		to_chat(user, "You attach \the [I] to \the [src].")

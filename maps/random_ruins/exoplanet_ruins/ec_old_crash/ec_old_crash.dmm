@@ -194,7 +194,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/item/reagent_containers/chem_disp_cartridge/coffee{
+/obj/item/chems/chem_disp_cartridge/coffee{
 	name = "coffee canister"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -612,7 +612,7 @@
 /area/map_template/ecship/science)
 "bt" = (
 /obj/structure/reagent_dispensers/watertank,
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /turf/simulated/floor/tiled/white/lowpressure,
 /area/map_template/ecship/science)
 "bu" = (

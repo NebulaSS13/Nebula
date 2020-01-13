@@ -21,7 +21,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/scalpel/laser1,
 		/obj/item/autopsy_scanner,
-		/obj/item/reagent_containers/spray/luminol,
+		/obj/item/chems/spray/luminol,
 		/obj/item/uv_light,
 		/obj/item/crowbar
 	)
@@ -35,7 +35,7 @@
 	)
 
 /obj/item/robot_module/flying/forensics/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/reagent_containers/spray/luminol/luminol = locate() in equipment
+	var/obj/item/chems/spray/luminol/luminol = locate() in equipment
 	if(!luminol)
 		luminol = new(src)
 		equipment += luminol

@@ -66,7 +66,7 @@
 	path = /obj/item/cell/device/standard
 
 /datum/fabricator_recipe/device_component/ecigcartridge
-	path = /obj/item/reagent_containers/ecig_cartridge/blank
+	path = /obj/item/chems/ecig_cartridge/blank
 
 /datum/fabricator_recipe/device_component/conveyor_construct
 	path = /obj/item/conveyor_construct

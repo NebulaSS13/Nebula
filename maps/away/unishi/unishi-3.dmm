@@ -1212,8 +1212,8 @@
 "dl" = (
 /obj/structure/table/standard,
 /obj/item/storage/laundry_basket,
-/obj/item/reagent_containers/pill/detergent,
-/obj/item/reagent_containers/pill/detergent,
+/obj/item/chems/pill/detergent,
+/obj/item/chems/pill/detergent,
 /obj/item/storage/chewables/candy/gum,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1286,7 +1286,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "du" = (
-/obj/item/reagent_containers/pill/detergent,
+/obj/item/chems/pill/detergent,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -1961,7 +1961,7 @@
 /area/unishi/living)
 "fd" = (
 /obj/structure/table/reinforced,
-/obj/item/reagent_containers/food/drinks/bottle/premiumwine,
+/obj/item/chems/food/drinks/bottle/premiumwine,
 /obj/machinery/light{
 	dir = 1
 	},

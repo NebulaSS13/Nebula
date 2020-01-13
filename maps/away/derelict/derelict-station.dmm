@@ -2325,9 +2325,9 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hz" = (
-/obj/item/reagent_containers/ivbag,
-/obj/item/reagent_containers/ivbag,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/chems/ivbag,
+/obj/item/chems/ivbag,
+/obj/item/chems/ivbag/blood/OMinus,
 /obj/structure/closet/medical_wall{
 	name = "Blood Closet"
 	},

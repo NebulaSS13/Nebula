@@ -521,7 +521,7 @@
 	dir = 4;
 	name = "Captain's Quarters APC"
 	},
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/one,
+/obj/item/chems/food/drinks/glass2/coffeecup/one,
 /obj/item/tank/oxygen,
 /obj/item/clothing/mask/breath/emergency,
 /turf/simulated/floor/wood,
@@ -2133,15 +2133,15 @@
 "dT" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/reagent_containers/glass/beaker{
+/obj/item/chems/glass/beaker{
 	pixel_x = 5
 	},
 /obj/item/book/manual/chef_recipes,
-/obj/item/reagent_containers/food/condiment/small/peppermill{
+/obj/item/chems/food/condiment/small/peppermill{
 	pixel_x = 3
 	},
-/obj/item/reagent_containers/food/condiment/enzyme,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/kitchen)
 "dU" = (
@@ -2312,7 +2312,7 @@
 /obj/item/storage/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/material/kitchen/rollingpin,
-/obj/item/reagent_containers/food/condiment/small/saltshaker{
+/obj/item/chems/food/condiment/small/saltshaker{
 	pixel_x = -3;
 	pixel_y = 0
 	},
@@ -2592,7 +2592,7 @@
 /obj/structure/table/standard,
 /obj/item/glass_extra/straw,
 /obj/item/toy/therapy_blue,
-/obj/item/reagent_containers/spray/cleaner,
+/obj/item/chems/spray/cleaner,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "ez" = (
@@ -2684,8 +2684,8 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/kitchen)
 "eG" = (
@@ -2804,8 +2804,8 @@
 "eP" = (
 /obj/machinery/light,
 /obj/machinery/optable,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/britcup,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/food/drinks/glass2/coffeecup/britcup,
+/obj/item/chems/glass/rag,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eQ" = (
@@ -2822,7 +2822,7 @@
 /obj/item/storage/firstaid/adv,
 /obj/random/medical,
 /obj/item/stack/medical/advanced/bruise_pack,
-/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/chems/syringe/antiviral,
 /obj/item/scanner/health,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -3477,7 +3477,7 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/random/clothing,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /obj/effect/floor_decal/corner/white/diagonal,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/wash)
@@ -3493,7 +3493,7 @@
 "fX" = (
 /obj/structure/table/standard,
 /obj/machinery/light/small,
-/obj/item/reagent_containers/spray/cleaner,
+/obj/item/chems/spray/cleaner,
 /obj/item/storage/laundry_basket,
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/item/cell/high,
@@ -4314,9 +4314,9 @@
 	dir = 8
 	},
 /obj/structure/table/standard,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
-/obj/item/reagent_containers/chem_disp_cartridge/coffee{
+/obj/item/chems/food/drinks/glass2/coffeecup/metal,
+/obj/item/chems/food/drinks/glass2/coffeecup/metal,
+/obj/item/chems/chem_disp_cartridge/coffee{
 	name = "coffee canister"
 	},
 /turf/simulated/floor/tiled/usedup,

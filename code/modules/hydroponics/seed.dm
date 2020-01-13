@@ -754,14 +754,14 @@
 			if(has_mob_product)
 				product = new has_mob_product(get_turf(user),name)
 			else
-				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(user),name)
+				product = new /obj/item/chems/food/snacks/grown(get_turf(user),name)
 			. += product
 
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(!istype(product, /mob))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)
-					if(istype(product,/obj/item/reagent_containers/food))
-						var/obj/item/reagent_containers/food/food = product
+					if(istype(product,/obj/item/chems/food))
+						var/obj/item/chems/food/food = product
 						food.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 			if(mysterious)

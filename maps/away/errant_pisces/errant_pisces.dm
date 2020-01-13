@@ -25,7 +25,7 @@
 	icon_dead = "shark_dead"
 	icon_gib = "shark_dead"
 	turns_per_move = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/sharkmeat
+	meat_type = /obj/item/chems/food/snacks/sharkmeat
 	speed = 2
 	maxHealth = 100
 	health = 100
@@ -67,14 +67,14 @@
 				L.forceMove(T)
 			visible_message("<span class='danger'>\The [src] releases [L].</span>")
 
-/obj/item/reagent_containers/food/snacks/sharkmeat
+/obj/item/chems/food/snacks/sharkmeat
 	name = "cosmoshark fillet"
 	desc = "A fillet of cosmoshark meat."
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
 	center_of_mass = "x=17;y=13"
 
-/obj/item/reagent_containers/food/snacks/sharkmeat/New()
+/obj/item/chems/food/snacks/sharkmeat/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
 	reagents.add_reagent(/datum/reagent/space_drugs, 1)

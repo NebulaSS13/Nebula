@@ -61,7 +61,7 @@
 /obj/item/folder/blue,
 /obj/item/form_printer,
 /obj/structure/table/woodentable,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup,
+/obj/item/chems/food/drinks/glass2/coffeecup,
 /obj/item/newspaper,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
@@ -94,7 +94,7 @@
 	dir = 8
 	},
 /obj/structure/safe,
-/obj/item/reagent_containers/pill/cyanide,
+/obj/item/chems/pill/cyanide,
 /obj/item/rig/medical/equipped,
 /obj/item/gun/energy/captain,
 /obj/effect/spider/stickyweb,
@@ -265,7 +265,7 @@
 "aM" = (
 /obj/structure/table/marble,
 /obj/item/pizzabox/vegetable,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
@@ -367,7 +367,7 @@
 	},
 /obj/structure/table/marble,
 /obj/item/book/manual/chef_recipes,
-/obj/item/reagent_containers/food/drinks/pitcher,
+/obj/item/chems/food/drinks/pitcher,
 /obj/effect/decal/cleanable/dirt,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood/yew,
@@ -1008,7 +1008,7 @@
 	level = 2
 	},
 /obj/item/shovel/spade,
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)

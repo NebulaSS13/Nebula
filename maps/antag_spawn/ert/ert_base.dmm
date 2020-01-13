@@ -247,15 +247,15 @@
 /area/map_template/rescue_base/base)
 "aH" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/reagent_containers/syringe/drugs{
+/obj/item/chems/syringe/drugs{
 	pixel_x = 3;
 	pixel_y = -1
 	},
-/obj/item/reagent_containers/syringe/drugs{
+/obj/item/chems/syringe/drugs{
 	pixel_x = 3;
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/syringe/drugs{
+/obj/item/chems/syringe/drugs{
 	pixel_x = 3;
 	pixel_y = 9
 	},
@@ -641,8 +641,8 @@
 /obj/item/clothing/head/bio_hood/janitor,
 /obj/item/clothing/suit/bio_suit/janitor,
 /obj/item/clothing/glasses/science,
-/obj/item/reagent_containers/spray/plantbgone,
-/obj/item/reagent_containers/spray/plantbgone,
+/obj/item/chems/spray/plantbgone,
+/obj/item/chems/spray/plantbgone,
 /obj/item/storage/box/lights/mixed,
 /obj/item/storage/box/lights/mixed,
 /obj/item/grenade/chem_grenade/cleaner,
@@ -664,11 +664,11 @@
 "bx" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/reagent_containers/food/condiment/small/saltshaker{
+/obj/item/chems/food/condiment/small/saltshaker{
 	pixel_x = -3;
 	pixel_y = 0
 	},
-/obj/item/reagent_containers/food/condiment/small/peppermill{
+/obj/item/chems/food/condiment/small/peppermill{
 	pixel_x = 3
 	},
 /turf/unsimulated/floor{
@@ -690,7 +690,7 @@
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/storage/box/sinpockets,
 /obj/structure/closet/secure_closet/freezer/kitchen,
-/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/chems/food/condiment/enzyme,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -964,8 +964,8 @@
 /obj/item/flash,
 /obj/item/melee/baton/loaded,
 /obj/item/melee/baton/loaded,
-/obj/item/reagent_containers/spray/pepper,
-/obj/item/reagent_containers/spray/pepper,
+/obj/item/chems/spray/pepper,
+/obj/item/chems/spray/pepper,
 /obj/item/melee/telebaton,
 /obj/item/melee/telebaton,
 /obj/machinery/recharger/wallcharger{
@@ -1103,16 +1103,16 @@
 /area/map_template/rescue_base/base)
 "cm" = (
 /obj/structure/table/reinforced,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/glass/bottle/inaprovaline,
-/obj/item/reagent_containers/glass/bottle/inaprovaline,
-/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/chems/hypospray,
+/obj/item/chems/hypospray,
+/obj/item/chems/hypospray,
+/obj/item/chems/hypospray,
+/obj/item/chems/hypospray,
+/obj/item/chems/hypospray,
+/obj/item/chems/glass/beaker/large,
+/obj/item/chems/glass/bottle/inaprovaline,
+/obj/item/chems/glass/bottle/inaprovaline,
+/obj/item/chems/glass/bottle/inaprovaline,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1300,7 +1300,7 @@
 /area/map_template/rescue_base/base)
 "cy" = (
 /obj/machinery/chemical_dispenser/ert,
-/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/chems/glass/beaker/large,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1378,14 +1378,14 @@
 /area/map_template/rescue_base/base)
 "cG" = (
 /obj/structure/table/reinforced,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
@@ -1484,7 +1484,7 @@
 /area/map_template/rescue_base/base)
 "cO" = (
 /obj/machinery/chemical_dispenser/full,
-/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/chems/glass/beaker/large,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1540,10 +1540,10 @@
 /area/map_template/rescue_base/base)
 "cT" = (
 /obj/structure/table/reinforced,
-/obj/item/reagent_containers/spray/cleaner,
-/obj/item/reagent_containers/spray/cleaner,
-/obj/item/reagent_containers/spray/sterilizine,
-/obj/item/reagent_containers/spray/sterilizine,
+/obj/item/chems/spray/cleaner,
+/obj/item/chems/spray/cleaner,
+/obj/item/chems/spray/sterilizine,
+/obj/item/chems/spray/sterilizine,
 /obj/item/storage/box/bloodpacks,
 /obj/item/tape/medical,
 /obj/item/tape/medical,
@@ -3236,7 +3236,7 @@
 /area/map_template/rescue_base/start)
 "go" = (
 /obj/structure/table/glass,
-/obj/item/reagent_containers/glass/beaker/cryoxadone{
+/obj/item/chems/glass/beaker/cryoxadone{
 	pixel_x = 0;
 	pixel_y = 0
 	},
@@ -3310,19 +3310,19 @@
 /obj/structure/closet/medical_wall{
 	pixel_y = 32
 	},
-/obj/item/reagent_containers/glass/bottle/antitoxin{
+/obj/item/chems/glass/bottle/antitoxin{
 	pixel_x = -4;
 	pixel_y = 8
 	},
-/obj/item/reagent_containers/glass/bottle/inaprovaline{
+/obj/item/chems/glass/bottle/inaprovaline{
 	pixel_x = 4;
 	pixel_y = 7
 	},
-/obj/item/reagent_containers/syringe,
-/obj/item/reagent_containers/syringe/antiviral,
-/obj/item/reagent_containers/syringe/antiviral,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/chems/syringe,
+/obj/item/chems/syringe/antiviral,
+/obj/item/chems/syringe/antiviral,
+/obj/item/chems/ivbag/blood/OMinus,
+/obj/item/chems/ivbag/blood/OMinus,
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gD" = (
@@ -3429,9 +3429,9 @@
 /obj/structure/closet/medical_wall{
 	pixel_x = -32
 	},
-/obj/item/reagent_containers/glass/bottle/stoxin,
-/obj/item/reagent_containers/glass/bottle/stoxin,
-/obj/item/reagent_containers/syringe,
+/obj/item/chems/glass/bottle/stoxin,
+/obj/item/chems/glass/bottle/stoxin,
+/obj/item/chems/syringe,
 /obj/item/tank/anesthetic,
 /obj/item/clothing/mask/breath/medical,
 /turf/simulated/floor/tiled/white,
@@ -3502,8 +3502,8 @@
 /area/map_template/rescue_base/start)
 "gZ" = (
 /obj/structure/table/glass,
-/obj/item/reagent_containers/spray/sterilizine,
-/obj/item/reagent_containers/spray/cleaner,
+/obj/item/chems/spray/sterilizine,
+/obj/item/chems/spray/cleaner,
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "ha" = (
@@ -3553,8 +3553,8 @@
 /area/map_template/rescue_base/start)
 "hg" = (
 /obj/structure/table/glass,
-/obj/item/reagent_containers/syringe/antiviral,
-/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/chems/syringe/antiviral,
+/obj/item/chems/syringe/antiviral,
 /obj/item/stack/medical/advanced/bruise_pack,
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)

@@ -121,7 +121,7 @@
 /decl/hierarchy/supply_pack/security/weapons
 	name = "Weapons - Security basic"
 	contains = list(/obj/item/flash = 4,
-					/obj/item/reagent_containers/spray/pepper = 4,
+					/obj/item/chems/spray/pepper = 4,
 					/obj/item/melee/baton/loaded = 4,
 					/obj/item/gun/energy/taser = 4)
 	cost = 50
@@ -245,7 +245,7 @@
 	contains = list(/obj/item/forensics/sample_kit,
 					/obj/item/forensics/sample_kit/powder,
 					/obj/item/storage/box/swabs = 3,
-					/obj/item/reagent_containers/spray/luminol)
+					/obj/item/chems/spray/luminol)
 	cost = 30
 	containername = "auxiliary forensic tools crate"
 

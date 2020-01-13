@@ -28,7 +28,7 @@
 		/obj/item/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/scanner/health,
-		/obj/item/reagent_containers/borghypo/surgeon,
+		/obj/item/chems/borghypo/surgeon,
 		/obj/item/scalpel/manager,
 		/obj/item/hemostat,
 		/obj/item/retractor,
@@ -43,12 +43,12 @@
 		/obj/item/crowbar,
 		/obj/item/stack/nanopaste,
 		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/reagent_containers/dropper/
+		/obj/item/chems/dropper/
 	)
 	synths = list(
 		/datum/matter_synth/medicine = 10000,
 	)
-	emag = /obj/item/reagent_containers/spray
+	emag = /obj/item/chems/spray
 	skills = list(
 		SKILL_ANATOMY     = SKILL_PROF,
 		SKILL_MEDICAL     = SKILL_ADEPT,
@@ -84,7 +84,7 @@
 
 /obj/item/robot_module/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	if(emag)
-		var/obj/item/reagent_containers/spray/PS = emag
+		var/obj/item/chems/spray/PS = emag
 		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
 	..()
 
@@ -104,10 +104,10 @@
 		/obj/item/scanner/health,
 		/obj/item/scanner/reagent/adv,
 		/obj/item/robot_rack/body_bag,
-		/obj/item/reagent_containers/borghypo/crisis,
+		/obj/item/chems/borghypo/crisis,
 		/obj/item/shockpaddles/robot,
-		/obj/item/reagent_containers/dropper/industrial,
-		/obj/item/reagent_containers/syringe,
+		/obj/item/chems/dropper/industrial,
+		/obj/item/chems/syringe,
 		/obj/item/gripper/chemistry,
 		/obj/item/extinguisher/mini,
 		/obj/item/taperoll/medical,
@@ -119,7 +119,7 @@
 	synths = list(
 		/datum/matter_synth/medicine = 15000
 	)
-	emag = /obj/item/reagent_containers/spray
+	emag = /obj/item/chems/spray
 	skills = list(
 		SKILL_ANATOMY     = SKILL_BASIC,
 		SKILL_MEDICAL     = SKILL_PROF,
@@ -157,13 +157,13 @@
 		stack.synths = list(medicine)
 
 /obj/item/robot_module/medical/crisis/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/reagent_containers/syringe/S = locate() in equipment
+	var/obj/item/chems/syringe/S = locate() in equipment
 	if(S.mode == 2)
 		S.reagents.clear_reagents()
 		S.mode = initial(S.mode)
 		S.desc = initial(S.desc)
 		S.update_icon()
 	if(emag)
-		var/obj/item/reagent_containers/spray/PS = emag
+		var/obj/item/chems/spray/PS = emag
 		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
 	..()

@@ -23,7 +23,7 @@
 	var/image/on_icon
 
 	var/heater_mode =          HEATER_MODE_HEAT
-	var/list/permitted_types = list(/obj/item/reagent_containers/glass)
+	var/list/permitted_types = list(/obj/item/chems/glass)
 	var/max_temperature =      200 CELSIUS
 	var/min_temperature =      40  CELSIUS
 	var/heating_power =        10 // K

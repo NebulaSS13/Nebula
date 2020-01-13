@@ -315,7 +315,7 @@
 		return 1
 	return ..()
 
-/obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/reagent_containers/glass/glass, var/mob/user, proximity)
+/obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/chems/glass/glass, var/mob/user, proximity)
 	..()
 	if(!proximity)
 		return
@@ -504,8 +504,8 @@
 
 	..()
 
-	if (istype(W, /obj/item/reagent_containers/food/snacks))
-		var/obj/item/reagent_containers/food/snacks/grown/G = W
+	if (istype(W, /obj/item/chems/food/snacks))
+		var/obj/item/chems/food/snacks/grown/G = W
 		if (!G.dry)
 			to_chat(user, "<span class='notice'>[G] must be dried before you stuff it into [src].</span>")
 			return

@@ -14,7 +14,7 @@
 	id = "chemsprayer"
 	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_BIO = 2)
 	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 1000)
-	build_path = /obj/item/reagent_containers/spray/chemsprayer
+	build_path = /obj/item/chems/spray/chemsprayer
 	sort_string = "TAAAA"
 
 /datum/design/item/weapon/rapidsyringe

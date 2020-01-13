@@ -25,7 +25,7 @@
 		/obj/item/scalpel/laser3,
 		/obj/item/circular_saw,
 		/obj/item/extinguisher/mini,
-		/obj/item/reagent_containers/syringe,
+		/obj/item/chems/syringe,
 		/obj/item/gripper/chemistry,
 		/obj/item/stack/nanopaste
 	)

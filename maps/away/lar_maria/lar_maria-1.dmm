@@ -235,7 +235,7 @@
 	dir = 1
 	},
 /obj/item/storage/box/beakers,
-/obj/item/reagent_containers/spray/cleaner,
+/obj/item/chems/spray/cleaner,
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
 	dir = 2;
@@ -621,7 +621,7 @@
 /obj/structure/table/glass,
 /obj/item/storage/box/masks,
 /obj/item/storage/box/gloves,
-/obj/item/reagent_containers/spray/sterilizine,
+/obj/item/chems/spray/sterilizine,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bK" = (
@@ -1842,8 +1842,8 @@
 /area/lar_maria/sec_wing)
 "eP" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/reagent_containers/spray/pepper,
-/obj/item/reagent_containers/spray/pepper,
+/obj/item/chems/spray/pepper,
+/obj/item/chems/spray/pepper,
 /obj/machinery/alarm{
 	alarm_id = "misc_research";
 	dir = 8;
@@ -1969,7 +1969,7 @@
 /area/lar_maria/sec_wing)
 "ff" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/reagent_containers/spray/pepper,
+/obj/item/chems/spray/pepper,
 /obj/item/deck/cards,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)

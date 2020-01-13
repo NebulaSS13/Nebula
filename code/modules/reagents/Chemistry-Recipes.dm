@@ -979,7 +979,7 @@
 /datum/chemical_reaction/slime/monkey/on_reaction(var/datum/reagents/holder)
 	..()
 	for(var/i = 1, i <= 3, i++)
-		new /obj/item/reagent_containers/food/snacks/monkeycube(get_turf(holder.my_atom))
+		new /obj/item/chems/food/snacks/monkeycube(get_turf(holder.my_atom))
 
 //Green
 /datum/chemical_reaction/slime/mutate
@@ -1036,7 +1036,7 @@
 
 /datum/chemical_reaction/slime/bork/on_reaction(var/datum/reagents/holder)
 	..()
-	var/list/borks = typesof(/obj/item/reagent_containers/food/snacks) - /obj/item/reagent_containers/food/snacks
+	var/list/borks = typesof(/obj/item/chems/food/snacks) - /obj/item/chems/food/snacks
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
 		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
@@ -1301,7 +1301,7 @@
 	required = /obj/item/slime_extract/pyrite
 
 /datum/chemical_reaction/slime/paint/on_reaction(var/datum/reagents/holder)
-	new /obj/item/reagent_containers/glass/paint/random(get_turf(holder.my_atom))
+	new /obj/item/chems/glass/paint/random(get_turf(holder.my_atom))
 	..()
 
 //cerulean
@@ -1347,7 +1347,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/tofu(location)
+		new /obj/item/chems/food/snacks/tofu(location)
 
 /datum/chemical_reaction/chocolate_bar
 	name = "Chocolate Bar"
@@ -1360,7 +1360,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/chocolatebar(location)
+		new /obj/item/chems/food/snacks/chocolatebar(location)
 
 /datum/chemical_reaction/chocolate_bar2
 	name = "Chocolate Bar"
@@ -1373,7 +1373,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/chocolatebar(location)
+		new /obj/item/chems/food/snacks/chocolatebar(location)
 
 /datum/chemical_reaction/chocolate_milk
 	name = "Chocolate Milk"
@@ -1500,7 +1500,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel(location)
+		new /obj/item/chems/food/snacks/sliceable/cheesewheel(location)
 
 /datum/chemical_reaction/rawmeatball
 	name = "Raw Meatball"
@@ -1513,7 +1513,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/rawmeatball(location)
+		new /obj/item/chems/food/snacks/rawmeatball(location)
 
 /datum/chemical_reaction/dough
 	name = "Dough"
@@ -1526,7 +1526,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/dough(location)
+		new /obj/item/chems/food/snacks/dough(location)
 
 /datum/chemical_reaction/soydough
 	name = "Soy dough"
@@ -1539,7 +1539,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/dough(location)
+		new /obj/item/chems/food/snacks/dough(location)
 
 //batter reaction as food precursor, for things that don't use pliable dough precursor.
 
@@ -1575,7 +1575,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/meat/syntiflesh(location)
+		new /obj/item/chems/food/snacks/meat/syntiflesh(location)
 
 /datum/chemical_reaction/hot_ramen
 	name = "Hot Ramen"

@@ -4,8 +4,8 @@
 
 /decl/hierarchy/supply_pack/hydroponics/hydroponics // -- Skie
 	name = "Gear - Hydroponics Supplies"
-	contains = list(/obj/item/reagent_containers/spray/plantbgone = 4,
-					/obj/item/reagent_containers/glass/bottle/ammonia = 2,
+	contains = list(/obj/item/chems/spray/plantbgone = 4,
+					/obj/item/chems/glass/bottle/ammonia = 2,
 					/obj/item/material/hatchet,
 					/obj/item/material/minihoe,
 					/obj/item/scanner/plant,
@@ -44,7 +44,7 @@
 /decl/hierarchy/supply_pack/hydroponics/weedcontrol
 	name = "Gear - Weed control"
 	contains = list(/obj/item/material/hatchet = 2,
-					/obj/item/reagent_containers/spray/plantbgone = 4,
+					/obj/item/chems/spray/plantbgone = 4,
 					/obj/item/clothing/mask/gas = 2,
 					/obj/item/grenade/chem_grenade/antiweed = 2)
 	cost = 25

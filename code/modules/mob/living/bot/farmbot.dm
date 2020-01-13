@@ -229,7 +229,7 @@
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/material/minihoe(Tsec)
-	new /obj/item/reagent_containers/glass/bucket(Tsec)
+	new /obj/item/chems/glass/bucket(Tsec)
 	new /obj/item/assembly/prox_sensor(Tsec)
 	new /obj/item/scanner/plant(Tsec)
 

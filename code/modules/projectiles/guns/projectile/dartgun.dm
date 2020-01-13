@@ -65,7 +65,7 @@
 	var/list/mixing = list() //Containers being used for mixing.
 	var/max_beakers = 3
 	var/dart_reagent_amount = 15
-	var/container_type = /obj/item/reagent_containers/glass/beaker
+	var/container_type = /obj/item/chems/glass/beaker
 	var/list/starting_chems = null
 
 /obj/item/gun/projectile/dartgun/Initialize()
@@ -100,18 +100,18 @@
 	. = ..()
 	if (beakers.len)
 		to_chat(user, "<span class='notice'>\The [src] contains:</span>")
-		for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
+		for(var/obj/item/chems/glass/beaker/B in beakers)
 			if(B.reagents && B.reagents.reagent_list.len)
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
 
 /obj/item/gun/projectile/dartgun/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/reagent_containers/glass))
+	if(istype(I, /obj/item/chems/glass))
 		add_beaker(I, user)
 		return 1
 	..()
 
-/obj/item/gun/projectile/dartgun/proc/add_beaker(var/obj/item/reagent_containers/glass/B, mob/user)
+/obj/item/gun/projectile/dartgun/proc/add_beaker(var/obj/item/chems/glass/B, mob/user)
 	if(!istype(B, container_type))
 		to_chat(user, "<span class='warning'>[B] doesn't seem to fit into [src].</span>")
 		return
@@ -123,7 +123,7 @@
 	beakers |= B
 	user.visible_message("\The [user] inserts \a [B] into [src].", "<span class='notice'>You slot [B] into [src].</span>")
 
-/obj/item/gun/projectile/dartgun/proc/remove_beaker(var/obj/item/reagent_containers/glass/B, mob/user)
+/obj/item/gun/projectile/dartgun/proc/remove_beaker(var/obj/item/chems/glass/B, mob/user)
 	mixing -= B
 	beakers -= B
 	user.put_in_hands(B)
@@ -133,7 +133,7 @@
 /obj/item/gun/projectile/dartgun/proc/fill_dart(var/obj/item/projectile/bullet/chemdart/dart)
 	if(mixing.len)
 		var/mix_amount = dart.reagent_amount/mixing.len
-		for(var/obj/item/reagent_containers/glass/beaker/B in mixing)
+		for(var/obj/item/chems/glass/beaker/B in mixing)
 			B.reagents.trans_to_obj(dart, mix_amount)
 
 /obj/item/gun/projectile/dartgun/attack_self(mob/user)
@@ -147,7 +147,7 @@
 		dat += "There are no beakers inserted!<br><br>"
 	else
 		for(var/i in 1 to beakers.len)
-			var/obj/item/reagent_containers/glass/beaker/B = beakers[i]
+			var/obj/item/chems/glass/beaker/B = beakers[i]
 			if(!istype(B)) continue
 
 			dat += "Beaker [i] contains: "

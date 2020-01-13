@@ -45,13 +45,13 @@
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
 
-	key_type = /obj/item/reagent_containers/food/snacks/egg
+	key_type = /obj/item/chems/food/snacks/egg
 	can_hold = list(
-		/obj/item/reagent_containers/food/snacks/egg,
-		/obj/item/reagent_containers/food/snacks/boiledegg
+		/obj/item/chems/food/snacks/egg,
+		/obj/item/chems/food/snacks/boiledegg
 		)
 
-	startswith = list(/obj/item/reagent_containers/food/snacks/egg = 12)
+	startswith = list(/obj/item/chems/food/snacks/egg = 12)
 
 /obj/item/storage/fancy/egg_box/empty
 	startswith = null
@@ -67,9 +67,9 @@
 	storage_slots = 6
 	max_w_class = ITEM_SIZE_TINY
 	w_class = ITEM_SIZE_SMALL
-	key_type = /obj/item/reagent_containers/food/snacks/cracker
-	can_hold = list(/obj/item/reagent_containers/food/snacks/cracker)
-	startswith = list(/obj/item/reagent_containers/food/snacks/cracker = 6)
+	key_type = /obj/item/chems/food/snacks/cracker
+	can_hold = list(/obj/item/chems/food/snacks/cracker)
+	startswith = list(/obj/item/chems/food/snacks/cracker = 6)
 
 /*
  * Crayon Box
@@ -280,8 +280,8 @@
 	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 12
 
-	key_type = /obj/item/reagent_containers/glass/beaker/vial
-	startswith = list(/obj/item/reagent_containers/glass/beaker/vial = 12)
+	key_type = /obj/item/chems/glass/beaker/vial
+	startswith = list(/obj/item/chems/glass/beaker/vial = 12)
 
 /obj/item/storage/fancy/vials/on_update_icon()
 	var/key_count = count_by_type(contents, key_type)
@@ -307,7 +307,7 @@
 	update_icon()
 
 /obj/item/storage/lockbox/vials/on_update_icon()
-	var/total_contents = count_by_type(contents, /obj/item/reagent_containers/glass/beaker/vial)
+	var/total_contents = count_by_type(contents, /obj/item/chems/glass/beaker/vial)
 	src.icon_state = "vialbox[Floor(total_contents/2)]"
 	src.overlays.Cut()
 	if (!broken)

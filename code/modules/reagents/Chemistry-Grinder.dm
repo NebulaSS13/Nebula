@@ -11,7 +11,7 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	var/inuse = 0
-	var/obj/item/reagent_containers/beaker = null
+	var/obj/item/chems/beaker = null
 	var/limit = 10
 	var/list/holdingitems = list()
 
@@ -25,7 +25,7 @@
 
 /obj/machinery/reagentgrinder/New()
 	..()
-	beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
+	beaker = new /obj/item/chems/glass/beaker/large(src)
 	update_icon()
 
 /obj/machinery/reagentgrinder/on_update_icon()
@@ -39,9 +39,9 @@
 
 /obj/machinery/reagentgrinder/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
-	if (istype(O,/obj/item/reagent_containers/glass) || \
-		istype(O,/obj/item/reagent_containers/food/drinks/glass2) || \
-		istype(O,/obj/item/reagent_containers/food/drinks/shaker))
+	if (istype(O,/obj/item/chems/glass) || \
+		istype(O,/obj/item/chems/food/drinks/glass2) || \
+		istype(O,/obj/item/chems/food/drinks/shaker))
 
 		if (beaker)
 			return 1

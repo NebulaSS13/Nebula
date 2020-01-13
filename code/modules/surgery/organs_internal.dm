@@ -380,11 +380,11 @@
 /decl/surgery_step/internal/treat_necrosis
 	name = "Treat necrosis"
 	allowed_tools = list(
-		/obj/item/reagent_containers/dropper = 100,
-		/obj/item/reagent_containers/glass/bottle = 75,
-		/obj/item/reagent_containers/glass/beaker = 75,
-		/obj/item/reagent_containers/spray = 50,
-		/obj/item/reagent_containers/glass/bucket = 50,
+		/obj/item/chems/dropper = 100,
+		/obj/item/chems/glass/bottle = 75,
+		/obj/item/chems/glass/beaker = 75,
+		/obj/item/chems/spray = 50,
+		/obj/item/chems/glass/bucket = 50,
 	)
 
 	can_infect = 0
@@ -394,7 +394,7 @@
 	max_duration = 60
 
 /decl/surgery_step/internal/treat_necrosis/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/reagent_containers/container = tool
+	var/obj/item/chems/container = tool
 	if(!istype(container) || !container.reagents.has_reagent(/datum/reagent/peridaxon) || !..())
 		return FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -425,7 +425,7 @@
 
 /decl/surgery_step/internal/treat_necrosis/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/internal/affected = LAZYACCESS(target.surgeries_in_progress, target_zone)
-	var/obj/item/reagent_containers/container = tool
+	var/obj/item/chems/container = tool
 
 	var/amount = container.amount_per_transfer_from_this
 	var/datum/reagents/temp_reagents = new(amount, GLOB.temp_reagents_holder)
@@ -447,10 +447,10 @@
 /decl/surgery_step/internal/treat_necrosis/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-	if (!istype(tool, /obj/item/reagent_containers))
+	if (!istype(tool, /obj/item/chems))
 		return
 
-	var/obj/item/reagent_containers/container = tool
+	var/obj/item/chems/container = tool
 
 	var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
 

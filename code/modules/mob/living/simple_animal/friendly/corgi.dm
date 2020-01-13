@@ -21,7 +21,7 @@
 	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/corgi
+	meat_type = /obj/item/chems/food/snacks/meat/corgi
 	meat_amount = 3
 	skin_material = MATERIAL_SKIN_FUR_ORANGE
 
@@ -56,7 +56,7 @@
 			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
 				movement_target = null
 				stop_automated_movement = 0
-				for(var/obj/item/reagent_containers/food/snacks/S in oview(src,3))
+				for(var/obj/item/chems/food/snacks/S in oview(src,3))
 					if(isturf(S.loc) || ishuman(S.loc))
 						movement_target = S
 						break
@@ -92,7 +92,7 @@
 					set_dir(i)
 					sleep(1)
 
-/obj/item/reagent_containers/food/snacks/meat/corgi
+/obj/item/chems/food/snacks/meat/corgi
 	name = "Corgi meat"
 	desc = "Tastes like... well you know..."
 

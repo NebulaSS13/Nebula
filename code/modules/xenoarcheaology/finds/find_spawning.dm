@@ -108,11 +108,11 @@
 	apply_image_decorations = 1
 
 /obj/item/archaeological_find/bowl/spawn_item()
-	var/obj/item/reagent_containers/R
+	var/obj/item/chems/R
 	if(prob(33))
-		R = new /obj/item/reagent_containers/glass/replenishing(loc)
+		R = new /obj/item/chems/glass/replenishing(loc)
 	else
-		R = new /obj/item/reagent_containers/glass/beaker(loc)
+		R = new /obj/item/chems/glass/beaker(loc)
 	R.icon = 'icons/obj/xenoarchaeology.dmi'
 	R.icon_state = "bowl"
 	if(prob(20))

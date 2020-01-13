@@ -66,7 +66,7 @@
 		dispose()
 		return
 	else if(src.dirty==100) // The microwave is all dirty so can't be used!
-		if(istype(O, /obj/item/reagent_containers/spray/cleaner) || istype(O, /obj/item/reagent_containers/glass/rag)) // If they're trying to clean it then let them
+		if(istype(O, /obj/item/chems/spray/cleaner) || istype(O, /obj/item/chems/glass/rag)) // If they're trying to clean it then let them
 			user.visible_message( \
 				"<span class='notice'>\The [user] starts to clean the microwave.</span>", \
 				"<span class='notice'>You start to clean the microwave.</span>" \
@@ -104,9 +104,9 @@
 				"<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", \
 				"<span class='notice'>You add \the [O] to \the [src].</span>")
 			return
-	else if(istype(O,/obj/item/reagent_containers/glass) || \
-	        istype(O,/obj/item/reagent_containers/food/drinks) || \
-	        istype(O,/obj/item/reagent_containers/food/condiment) \
+	else if(istype(O,/obj/item/chems/glass) || \
+	        istype(O,/obj/item/chems/food/drinks) || \
+	        istype(O,/obj/item/chems/food/condiment) \
 		)
 		if (!O.reagents)
 			return 1
@@ -178,20 +178,20 @@
 		var/list/items_measures_p = new
 		for (var/obj/O in InsertedContents())
 			var/display_name = O.name
-			if (istype(O,/obj/item/reagent_containers/food/snacks/egg))
+			if (istype(O,/obj/item/chems/food/snacks/egg))
 				items_measures[display_name] = "egg"
 				items_measures_p[display_name] = "eggs"
-			if (istype(O,/obj/item/reagent_containers/food/snacks/tofu))
+			if (istype(O,/obj/item/chems/food/snacks/tofu))
 				items_measures[display_name] = "tofu chunk"
 				items_measures_p[display_name] = "tofu chunks"
-			if (istype(O,/obj/item/reagent_containers/food/snacks/meat)) //any meat
+			if (istype(O,/obj/item/chems/food/snacks/meat)) //any meat
 				items_measures[display_name] = "slab of meat"
 				items_measures_p[display_name] = "slabs of meat"
-			if (istype(O,/obj/item/reagent_containers/food/snacks/donkpocket))
+			if (istype(O,/obj/item/chems/food/snacks/donkpocket))
 				display_name = "Turnovers"
 				items_measures[display_name] = "turnover"
 				items_measures_p[display_name] = "turnovers"
-			if (istype(O,/obj/item/reagent_containers/food/snacks/fish))
+			if (istype(O,/obj/item/chems/food/snacks/fish))
 				items_measures[display_name] = "fillet of fish"
 				items_measures_p[display_name] = "fillets of fish"
 			items_counts[display_name]++
@@ -298,7 +298,7 @@
 
 /obj/machinery/microwave/proc/has_extra_item()
 	for (var/obj/O in ingredients) // do not use src or src.contents unless you want to cook your own components
-		if (!istype(O,/obj/item/reagent_containers/food) && !istype(O, /obj/item/grown))
+		if (!istype(O,/obj/item/chems/food) && !istype(O, /obj/item/grown))
 			return 1
 	return 0
 
@@ -381,7 +381,7 @@
 		qdel(O)
 	LAZYCLEARLIST(ingredients)
 	src.reagents.clear_reagents()
-	var/obj/item/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
+	var/obj/item/chems/food/snacks/badrecipe/ffuu = new(src)
 	ffuu.reagents.add_reagent(/datum/reagent/carbon, amount)
 	ffuu.reagents.add_reagent(/datum/reagent/toxin, amount/10)
 	return ffuu

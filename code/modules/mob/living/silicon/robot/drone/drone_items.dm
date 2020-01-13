@@ -63,9 +63,9 @@
 	desc = "A simple grasping tool for chemical work."
 
 	can_hold = list(
-		/obj/item/reagent_containers/glass,
-		/obj/item/reagent_containers/pill,
-		/obj/item/reagent_containers/ivbag,
+		/obj/item/chems/glass,
+		/obj/item/chems/pill,
+		/obj/item/chems/ivbag,
 		/obj/item/stack/material/phoron,
 		/obj/item/storage/pill_bottle,
 		)
@@ -87,8 +87,8 @@
 		/obj/item/stack/cable_coil,
 		/obj/item/stock_parts/circuitboard,
 		/obj/item/slime_extract,
-		/obj/item/reagent_containers/glass,
-		/obj/item/reagent_containers/food/snacks/monkeycube,
+		/obj/item/chems/glass,
+		/obj/item/chems/food/snacks/monkeycube,
 		/obj/item/stock_parts/computer,
 		/obj/item/transfer_valve,
 		/obj/item/assembly/signaler,
@@ -103,7 +103,7 @@
 	icon_state = "gripper"
 	desc = "A simple grasping tool used to perform tasks in the xenobiology division, such as handling plant samples and disks."
 	can_hold = list(
-		/obj/item/reagent_containers/glass,
+		/obj/item/chems/glass,
 		/obj/item/seeds,
 		/obj/item/grown,
 		/obj/item/slime_extract,
@@ -115,8 +115,8 @@
 	icon_state = "gripper"
 	desc = "A simple grasping tool used to perform tasks in the service sector, such as handling food, drinks, and seeds."
 	can_hold = list(
-		/obj/item/reagent_containers/glass,
-		/obj/item/reagent_containers/food,
+		/obj/item/chems/glass,
+		/obj/item/chems/food,
 		/obj/item/seeds,
 		/obj/item/grown,
 		/obj/item/glass_extra
@@ -130,7 +130,7 @@
 	can_hold = list(
 	/obj/item/organ,
 	/obj/item/robot_parts,
-	/obj/item/reagent_containers/ivbag
+	/obj/item/chems/ivbag
 	)
 
 /obj/item/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
@@ -387,7 +387,7 @@
 		else if(istype(W,/obj/item/material/shard))
 			if(glass)
 				glass.add_charge(1000)
-		else if(istype(W,/obj/item/reagent_containers/food/snacks/grown))
+		else if(istype(W,/obj/item/chems/food/snacks/grown))
 			if(wood)
 				wood.add_charge(4000)
 		else if(istype(W,/obj/item/pipe))

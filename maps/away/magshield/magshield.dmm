@@ -2503,7 +2503,7 @@
 /area/magshield/west)
 "gn" = (
 /obj/structure/table/steel,
-/obj/item/reagent_containers/food/drinks/coffee,
+/obj/item/chems/food/drinks/coffee,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "go" = (
@@ -2755,7 +2755,7 @@
 /area/magshield/west)
 "gZ" = (
 /obj/structure/table/steel,
-/obj/item/reagent_containers/food/drinks/coffee,
+/obj/item/chems/food/drinks/coffee,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
@@ -3002,7 +3002,7 @@
 /turf/space,
 /area/magshield/west)
 "hN" = (
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /turf/simulated/floor/tiled,
 /area/magshield/east)
 "hO" = (
@@ -3142,7 +3142,7 @@
 /area/magshield/east)
 "if" = (
 /obj/structure/reagent_dispensers/watertank,
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "ig" = (
@@ -3304,16 +3304,16 @@
 /area/magshield/west)
 "iD" = (
 /obj/structure/table/steel,
-/obj/item/reagent_containers/food/drinks/cans/space_up,
-/obj/item/reagent_containers/food/drinks/cans/space_up{
+/obj/item/chems/food/drinks/cans/space_up,
+/obj/item/chems/food/drinks/cans/space_up{
 	pixel_x = 5;
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/food/drinks/cans/space_up{
+/obj/item/chems/food/drinks/cans/space_up{
 	pixel_x = -8;
 	pixel_y = 5
 	},
-/obj/item/reagent_containers/food/drinks/cans/space_up{
+/obj/item/chems/food/drinks/cans/space_up{
 	pixel_x = -2;
 	pixel_y = -4
 	},
@@ -3601,7 +3601,7 @@
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
-/obj/item/reagent_containers/food/snacks/flatbread,
+/obj/item/chems/food/snacks/flatbread,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jw" = (
@@ -3906,7 +3906,7 @@
 /area/magshield/south)
 "kp" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/reagent_containers/food/snacks/hotdog,
+/obj/item/chems/food/snacks/hotdog,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "kq" = (
@@ -4069,7 +4069,7 @@
 /area/magshield/south)
 "kI" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/snacks/chips,
+/obj/item/chems/food/snacks/chips,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kJ" = (
@@ -4083,11 +4083,11 @@
 /area/magshield/south)
 "kL" = (
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "kM" = (

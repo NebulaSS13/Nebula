@@ -3,10 +3,10 @@ GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
 	/obj/item/auto_cpr,
 	/obj/item/scanner/health,
 	/obj/item/shockpaddles,
-	/obj/item/reagent_containers/hypospray,
+	/obj/item/chems/hypospray,
 	/obj/item/modular_computer,
-	/obj/item/reagent_containers/syringe,
-	/obj/item/reagent_containers/borghypo
+	/obj/item/chems/syringe,
+	/obj/item/chems/borghypo
 ))
 GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 

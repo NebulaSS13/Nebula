@@ -2,9 +2,9 @@
 	name = "blood packs box"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
-	startswith = list(/obj/item/reagent_containers/ivbag = 7)
+	startswith = list(/obj/item/chems/ivbag = 7)
 
-/obj/item/reagent_containers/ivbag
+/obj/item/chems/ivbag
 	name = "\improper IV bag"
 	desc = "Flexible bag for IV injectors."
 	icon = 'icons/obj/bloodpack.dmi'
@@ -17,19 +17,19 @@
 
 	var/mob/living/carbon/human/attached
 
-/obj/item/reagent_containers/ivbag/Destroy()
+/obj/item/chems/ivbag/Destroy()
 	STOP_PROCESSING(SSobj,src)
 	attached = null
 	. = ..()
 
-/obj/item/reagent_containers/ivbag/on_reagent_change()
+/obj/item/chems/ivbag/on_reagent_change()
 	update_icon()
 	if(reagents.total_volume > volume/2)
 		w_class = ITEM_SIZE_SMALL
 	else
 		w_class = ITEM_SIZE_TINY
 
-/obj/item/reagent_containers/ivbag/on_update_icon()
+/obj/item/chems/ivbag/on_update_icon()
 	overlays.Cut()
 	var/percent = round(reagents.total_volume / volume * 100)
 	if(reagents.total_volume)
@@ -40,7 +40,7 @@
 	if(attached)
 		overlays += image('icons/obj/bloodpack.dmi', "dongle")
 
-/obj/item/reagent_containers/ivbag/MouseDrop(over_object, src_location, over_location)
+/obj/item/chems/ivbag/MouseDrop(over_object, src_location, over_location)
 	if(!CanMouseDrop(over_object))
 		return
 	if(!ismob(loc))
@@ -54,7 +54,7 @@
 			START_PROCESSING(SSobj,src)
 	update_icon()
 
-/obj/item/reagent_containers/ivbag/Process()
+/obj/item/chems/ivbag/Process()
 	if(!ismob(loc))
 		return PROCESS_KILL
 
@@ -77,34 +77,34 @@
 	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_BLOOD)
 	update_icon()
 
-/obj/item/reagent_containers/ivbag/nanoblood/New()
+/obj/item/chems/ivbag/nanoblood/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nanoblood, volume)
 
-/obj/item/reagent_containers/ivbag/blood
+/obj/item/chems/ivbag/blood
 	name = "blood pack"
 	var/blood_type = null
 
-/obj/item/reagent_containers/ivbag/blood/New()
+/obj/item/chems/ivbag/blood/New()
 	..()
 	if(blood_type)
 		name = "blood pack [blood_type]"
 		reagents.add_reagent(/datum/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
 
-/obj/item/reagent_containers/ivbag/blood/APlus
+/obj/item/chems/ivbag/blood/APlus
 	blood_type = "A+"
 
-/obj/item/reagent_containers/ivbag/blood/AMinus
+/obj/item/chems/ivbag/blood/AMinus
 	blood_type = "A-"
 
-/obj/item/reagent_containers/ivbag/blood/BPlus
+/obj/item/chems/ivbag/blood/BPlus
 	blood_type = "B+"
 
-/obj/item/reagent_containers/ivbag/blood/BMinus
+/obj/item/chems/ivbag/blood/BMinus
 	blood_type = "B-"
 
-/obj/item/reagent_containers/ivbag/blood/OPlus
+/obj/item/chems/ivbag/blood/OPlus
 	blood_type = "O+"
 
-/obj/item/reagent_containers/ivbag/blood/OMinus
+/obj/item/chems/ivbag/blood/OMinus
 	blood_type = "O-"

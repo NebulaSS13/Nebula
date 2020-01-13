@@ -92,16 +92,16 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/food/New()
 	..()
 	contents = list(
-		/obj/item/reagent_containers/food/condiment/flour,
-		/obj/item/reagent_containers/food/condiment/flour,
-		/obj/item/reagent_containers/food/condiment/flour,
-		/obj/item/reagent_containers/food/drinks/milk,
-		/obj/item/reagent_containers/food/drinks/milk,
+		/obj/item/chems/food/condiment/flour,
+		/obj/item/chems/food/condiment/flour,
+		/obj/item/chems/food/condiment/flour,
+		/obj/item/chems/food/drinks/milk,
+		/obj/item/chems/food/drinks/milk,
 		/obj/item/storage/fancy/egg_box,
-		/obj/item/reagent_containers/food/snacks/tofu,
-		/obj/item/reagent_containers/food/snacks/tofu,
-		/obj/item/reagent_containers/food/snacks/meat,
-		/obj/item/reagent_containers/food/snacks/meat)
+		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/snacks/meat,
+		/obj/item/chems/food/snacks/meat)
 
 /datum/supply_drop_loot/armour
 	name = "Armour"
@@ -150,9 +150,9 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/storage/firstaid/toxin,
 		/obj/item/storage/firstaid/o2,
 		/obj/item/storage/firstaid/adv,
-		/obj/item/reagent_containers/glass/bottle/antitoxin,
-		/obj/item/reagent_containers/glass/bottle/inaprovaline,
-		/obj/item/reagent_containers/glass/bottle/stoxin,
+		/obj/item/chems/glass/bottle/antitoxin,
+		/obj/item/chems/glass/bottle/inaprovaline,
+		/obj/item/chems/glass/bottle/stoxin,
 		/obj/item/storage/box/syringes,
 		/obj/item/storage/box/autoinjectors)
 

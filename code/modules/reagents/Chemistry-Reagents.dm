@@ -146,7 +146,7 @@
 	holder = null
 	. = ..()
 
-/datum/reagent/proc/ex_act(obj/item/reagent_containers/holder, severity)
+/datum/reagent/proc/ex_act(obj/item/chems/holder, severity)
 	return
 
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */

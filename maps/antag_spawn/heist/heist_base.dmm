@@ -153,7 +153,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "az" = (
 /obj/random/trash,
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -928,7 +928,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "cc" = (
 /obj/structure/table/woodentable,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/glass/rag,
 /obj/random/loot,
 /turf/unsimulated/floor{
 	icon_state = "wood"
@@ -1627,8 +1627,8 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/reagent_containers/food/snacks/tastybread,
-/obj/item/reagent_containers/food/snacks/tastybread,
+/obj/item/chems/food/snacks/tastybread,
+/obj/item/chems/food/snacks/tastybread,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -1841,12 +1841,12 @@
 /obj/structure/table/standard,
 /obj/item/cautery,
 /obj/item/retractor,
-/obj/item/reagent_containers/glass/bottle/stoxin,
-/obj/item/reagent_containers/glass/bottle/stoxin,
-/obj/item/reagent_containers/syringe,
+/obj/item/chems/glass/bottle/stoxin,
+/obj/item/chems/glass/bottle/stoxin,
+/obj/item/chems/syringe,
 /obj/item/gun/launcher/syringe/rapid,
 /obj/item/storage/box/syringegun,
-/obj/item/reagent_containers/glass/beaker/vial/random/toxin,
+/obj/item/chems/glass/beaker/vial/random/toxin,
 /turf/simulated/floor/shuttle/white,
 /area/map_template/skipjack_station/start)
 "eu" = (
@@ -1876,8 +1876,8 @@
 /obj/item/bonesetter,
 /obj/item/bonegel,
 /obj/item/FixOVein,
-/obj/item/reagent_containers/syringe/antiviral,
-/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/chems/syringe/antiviral,
+/obj/item/chems/syringe/antiviral,
 /turf/simulated/floor/shuttle/white,
 /area/map_template/skipjack_station/start)
 "ez" = (

@@ -42,7 +42,7 @@
 
 /datum/gear/flask
 	display_name = "flask"
-	path = /obj/item/reagent_containers/food/drinks/flask/barflask
+	path = /obj/item/chems/food/drinks/flask/barflask
 
 /datum/gear/flask/New()
 	..()
@@ -50,7 +50,7 @@
 
 /datum/gear/vacflask
 	display_name = "vacuum-flask"
-	path = /obj/item/reagent_containers/food/drinks/flask/vacuumflask
+	path = /obj/item/chems/food/drinks/flask/vacuumflask
 
 /datum/gear/vacflask/New()
 	..()
@@ -58,7 +58,7 @@
 
 /datum/gear/coffeecup
 	display_name = "coffee cup"
-	path = /obj/item/reagent_containers/food/drinks/glass2/coffeecup
+	path = /obj/item/chems/food/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/knife

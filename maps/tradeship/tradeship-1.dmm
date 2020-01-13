@@ -329,10 +329,10 @@
 	dir = 1
 	},
 /obj/structure/table/standard,
-/obj/item/reagent_containers/dropper,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/glass/beaker,
+/obj/item/chems/dropper,
+/obj/item/chems/glass/beaker/large,
+/obj/item/chems/glass/beaker/large,
+/obj/item/chems/glass/beaker,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/chemistry)
 "bc" = (
@@ -374,7 +374,7 @@
 /obj/structure/closet/crate/plastic,
 /obj/random/accessory,
 /obj/random/accessory,
-/obj/item/reagent_containers/glass/paint/random,
+/obj/item/chems/glass/paint/random,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bf" = (
@@ -1285,11 +1285,11 @@
 /obj/structure/table/standard,
 /obj/item/wirecutters/clippers,
 /obj/item/material/minihoe,
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/disk/botany,
-/obj/item/reagent_containers/glass/bottle/eznutrient,
-/obj/item/reagent_containers/glass/bottle/robustharvest,
+/obj/item/chems/glass/bottle/eznutrient,
+/obj/item/chems/glass/bottle/robustharvest,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science)
 "dc" = (

@@ -133,13 +133,13 @@ obj/item/paper/prof2
 	reagent_state = LIQUID
 	color = "#ffc4ff"
 
-/obj/item/reagent_containers/glass/bottle/tericadone
+/obj/item/chems/glass/bottle/tericadone
 	name = "tericadone bottle"
 	desc = "A small bottle."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/reagent_containers/glass/bottle/tericadone/New()
+/obj/item/chems/glass/bottle/tericadone/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/phoron/safe , 60)
 	update_icon()

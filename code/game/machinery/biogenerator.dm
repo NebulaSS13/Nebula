@@ -17,7 +17,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/processing = 0
-	var/obj/item/reagent_containers/glass/beaker = null
+	var/obj/item/chems/glass/beaker = null
 	var/points = 0
 	var/state = BG_READY
 	var/denied = 0
@@ -27,14 +27,14 @@
 	var/capacity = 10   //How many ingredients can we store?
 	var/list/products = list(
 		"Food" = list(
-			/obj/item/reagent_containers/food/drinks/milk/smallcarton = 30,
-			/obj/item/reagent_containers/food/drinks/milk = 50,
-			/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 50,
+			/obj/item/chems/food/drinks/milk/smallcarton = 30,
+			/obj/item/chems/food/drinks/milk = 50,
+			/obj/item/chems/food/snacks/meat/syntiflesh = 50,
 			/obj/item/storage/fancy/egg_box = 300),
 		"Nutrients" = list(
-			/obj/item/reagent_containers/glass/bottle/eznutrient = 60,
-			/obj/item/reagent_containers/glass/bottle/left4zed = 120,
-			/obj/item/reagent_containers/glass/bottle/robustharvest = 120),
+			/obj/item/chems/glass/bottle/eznutrient = 60,
+			/obj/item/chems/glass/bottle/left4zed = 120,
+			/obj/item/chems/glass/bottle/robustharvest = 120),
 		"Leather" = list(
 			/obj/item/storage/wallet/leather = 100,
 			/obj/item/clothing/gloves/thick/botany = 250,
@@ -52,7 +52,7 @@
 /obj/machinery/biogenerator/New()
 	..()
 	create_reagents(1000)
-	beaker = new /obj/item/reagent_containers/glass/bottle(src)
+	beaker = new /obj/item/chems/glass/bottle(src)
 
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()
@@ -79,7 +79,7 @@
 		return
 	if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
-	if(istype(O, /obj/item/reagent_containers/glass))
+	if(istype(O, /obj/item/chems/glass))
 		if(beaker)
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
 			return TRUE
@@ -94,7 +94,7 @@
 	else if(istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/plants/P = O
 		var/hadPlants = 0
-		for(var/obj/item/reagent_containers/food/snacks/grown/G in P.contents)
+		for(var/obj/item/chems/food/snacks/grown/G in P.contents)
 			hadPlants = 1
 			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
 			ingredients++
@@ -108,7 +108,7 @@
 			to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
 
 
-	else if(!istype(O, /obj/item/reagent_containers/food/snacks/grown))
+	else if(!istype(O, /obj/item/chems/food/snacks/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
 	else if(user.unEquip(O, src))
 		ingredients++
@@ -190,7 +190,7 @@
 		return
 
 	var/S = 0
-	for(var/obj/item/reagent_containers/food/snacks/grown/I in contents)
+	for(var/obj/item/chems/food/snacks/grown/I in contents)
 		S += 5
 		ingredients--
 		if(I.reagents.get_reagent_amount(/datum/reagent/nutriment) < 0.1)

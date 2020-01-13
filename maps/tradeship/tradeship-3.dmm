@@ -479,7 +479,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/maintenance/solars)
 "bg" = (
-/obj/item/reagent_containers/glass/paint/yellow,
+/obj/item/chems/glass/paint/yellow,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
 "bh" = (

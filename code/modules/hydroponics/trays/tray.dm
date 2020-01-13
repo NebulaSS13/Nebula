@@ -446,9 +446,9 @@
 
 		return
 
-	else if(istype(O, /obj/item/reagent_containers/syringe))
+	else if(istype(O, /obj/item/chems/syringe))
 
-		var/obj/item/reagent_containers/syringe/S = O
+		var/obj/item/chems/syringe/S = O
 
 		if (S.mode == 1)
 			if(seed)
@@ -486,7 +486,7 @@
 		attack_hand(user)
 
 		var/obj/item/storage/plants/S = O
-		for (var/obj/item/reagent_containers/food/snacks/grown/G in locate(user.x,user.y,user.z))
+		for (var/obj/item/chems/food/snacks/grown/G in locate(user.x,user.y,user.z))
 			if(!S.can_be_inserted(G, user))
 				return
 			S.handle_item_insertion(G, 1)

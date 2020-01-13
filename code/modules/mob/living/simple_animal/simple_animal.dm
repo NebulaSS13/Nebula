@@ -9,7 +9,7 @@
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat
+	meat_type = /obj/item/chems/food/snacks/meat
 	meat_amount = 3
 	bone_material = MATERIAL_BONE_GENERIC
 	bone_amount = 5

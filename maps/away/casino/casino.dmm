@@ -2221,7 +2221,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "fO" = (
-/obj/item/reagent_containers/glass/bucket,
+/obj/item/chems/glass/bucket,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "fP" = (
@@ -2269,7 +2269,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/reagent_containers/food/drinks/milk/smallcarton,
+/obj/item/chems/food/drinks/milk/smallcarton,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fW" = (
@@ -2388,7 +2388,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/item/reagent_containers/food/drinks/flask/shiny,
+/obj/item/chems/food/drinks/flask/shiny,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "gn" = (
@@ -3097,8 +3097,8 @@
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
-/obj/item/reagent_containers/food/condiment/flour,
-/obj/item/reagent_containers/food/condiment/sugar,
+/obj/item/chems/food/condiment/flour,
+/obj/item/chems/food/condiment/sugar,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "im" = (
@@ -3106,13 +3106,13 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/reagent_containers/food/condiment/sugar,
-/obj/item/reagent_containers/food/snacks/sliceable/bread,
+/obj/item/chems/food/condiment/sugar,
+/obj/item/chems/food/snacks/sliceable/bread,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "in" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/chems/food/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "io" = (
@@ -3134,13 +3134,13 @@
 "iq" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/reagent_containers/food/snacks/applepie,
+/obj/item/chems/food/snacks/applepie,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "ir" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/reagent_containers/food/snacks/bigbiteburger,
+/obj/item/chems/food/snacks/bigbiteburger,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "is" = (
@@ -3242,10 +3242,10 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/snacks/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/casino/casino_kitchen)
 "iD" = (
@@ -3345,7 +3345,7 @@
 /obj/machinery/door/firedoor,
 /obj/structure/table/marble,
 /obj/item/trash/tray,
-/obj/item/reagent_containers/food/snacks/stew,
+/obj/item/chems/food/snacks/stew,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "iR" = (
@@ -3665,8 +3665,8 @@
 /area/casino/casino_kitchen)
 "jE" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/drinks/bottle/absinthe,
-/obj/item/reagent_containers/food/drinks/shaker{
+/obj/item/chems/food/drinks/bottle/absinthe,
+/obj/item/chems/food/drinks/shaker{
 	pixel_x = 10;
 	pixel_y = 10
 	},
@@ -3703,7 +3703,7 @@
 "jJ" = (
 /obj/structure/table/woodentable,
 /obj/item/material/ashtray/bronze,
-/obj/item/reagent_containers/food/snacks/cubancarp,
+/obj/item/chems/food/snacks/cubancarp,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jK" = (
@@ -3762,11 +3762,11 @@
 /area/casino/casino_kitchen)
 "jR" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/drinks/bottle/gin,
-/obj/item/reagent_containers/food/drinks/bottle/tequilla{
+/obj/item/chems/food/drinks/bottle/gin,
+/obj/item/chems/food/drinks/bottle/tequilla{
 	pixel_x = -10
 	},
-/obj/item/reagent_containers/food/drinks/bottle/vodka{
+/obj/item/chems/food/drinks/bottle/vodka{
 	pixel_x = 10
 	},
 /turf/simulated/floor/tiled,
@@ -3784,8 +3784,8 @@
 "jU" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/reagent_containers/food/snacks/waffles,
-/obj/item/reagent_containers/food/drinks/cans/iced_tea,
+/obj/item/chems/food/snacks/waffles,
+/obj/item/chems/food/drinks/cans/iced_tea,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jV" = (
@@ -3863,8 +3863,8 @@
 /area/casino/casino_kitchen)
 "kf" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/drinks/bottle/rum,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/chems/food/drinks/bottle/rum,
+/obj/item/chems/glass/rag,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
@@ -3877,7 +3877,7 @@
 /area/casino/casino_mainfloor)
 "kh" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/drinks/bottle/cognac,
+/obj/item/chems/food/drinks/bottle/cognac,
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "ki" = (
@@ -3929,7 +3929,7 @@
 /area/casino/casino_mainfloor)
 "ko" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/drinks/h_chocolate,
+/obj/item/chems/food/drinks/h_chocolate,
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "kp" = (
@@ -4706,7 +4706,7 @@
 /area/casino/casino_patron_bathroom)
 "mj" = (
 /obj/structure/table/woodentable,
-/obj/item/reagent_containers/food/drinks/bottle/specialwhiskey,
+/obj/item/chems/food/drinks/bottle/specialwhiskey,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
 /obj/item/flame/lighter/zippo/random,

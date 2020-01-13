@@ -185,7 +185,7 @@
 /area/template_noop)
 "aM" = (
 /obj/effect/decal/cleanable/vomit,
-/obj/item/reagent_containers/glass/paint/random,
+/obj/item/chems/glass/paint/random,
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = 32
 	},

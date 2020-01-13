@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Droppers.
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/reagent_containers/dropper
+/obj/item/chems/dropper
 	name = "Dropper"
 	desc = "A dropper. Transfers 5 units."
 	icon = 'icons/obj/chemical.dmi'
@@ -21,7 +21,7 @@
 				to_chat(user, "<span class='notice'>[target] is full.</span>")
 				return
 
-			if(!ATOM_IS_OPEN_CONTAINER(target) && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
+			if(!ATOM_IS_OPEN_CONTAINER(target) && !ismob(target) && !istype(target, /obj/item/chems/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
 				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 
@@ -97,7 +97,7 @@
 		else
 			icon_state = "dropper0"
 
-/obj/item/reagent_containers/dropper/industrial
+/obj/item/chems/dropper/industrial
 	name = "Industrial Dropper"
 	desc = "A larger dropper. Transfers 10 units."
 	amount_per_transfer_from_this = 10
