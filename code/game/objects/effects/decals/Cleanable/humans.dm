@@ -52,29 +52,19 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/Initialize(mapload)
 	. = ..()
-	if(merge_with_blood(!mapload))
+	if(merge_with_blood())
 		return INITIALIZE_HINT_QDEL
 	start_drying()
 
 // Returns true if overriden and needs deletion. If the argument is false, we will merge into any existing blood.
-/obj/effect/decal/cleanable/blood/proc/merge_with_blood(var/override = TRUE)
-	. = FALSE
-	if(blood_size == BLOOD_SIZE_NO_MERGE)
+/obj/effect/decal/cleanable/blood/proc/merge_with_blood()
+	if(!isturf(loc) || blood_size == BLOOD_SIZE_NO_MERGE)
 		return
-	if(isturf(loc))
-		for(var/obj/effect/decal/cleanable/blood/B in loc)
-			if(B == src)
-				continue
-			if(B.blood_size == BLOOD_SIZE_NO_MERGE)
-				continue
-			if(override && blood_size >= B.blood_size)
-				if (B.blood_DNA)
-					blood_DNA |= B.blood_DNA.Copy()
-				qdel(B)
-				continue
+	for(var/obj/effect/decal/cleanable/blood/B in loc)
+		if(B != src && B.blood_size != BLOOD_SIZE_NO_MERGE)
 			if(B.blood_DNA)
 				B.blood_DNA |= blood_DNA.Copy()
-			. = TRUE
+			return TRUE
 
 /obj/effect/decal/cleanable/blood/proc/start_drying()
 	drytime = world.time + DRYING_TIME * (amount+1)
