@@ -95,7 +95,7 @@
 "au" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/bedsheet/brown,
+/obj/item/bedsheet/brown,
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "av" = (
@@ -243,10 +243,10 @@
 /area/unishi/bridge)
 "aW" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/energy/laser,
-/obj/item/weapon/gun/energy/laser,
-/obj/item/weapon/gun/energy/stunrevolver,
-/obj/item/weapon/gun/energy/stunrevolver,
+/obj/item/gun/energy/laser,
+/obj/item/gun/energy/laser,
+/obj/item/gun/energy/stunrevolver,
+/obj/item/gun/energy/stunrevolver,
 /obj/item/clothing/suit/armor/pcarrier/blue,
 /obj/item/clothing/suit/armor/pcarrier/tan,
 /obj/item/clothing/suit/armor/pcarrier/tan,
@@ -347,7 +347,7 @@
 /area/unishi/living)
 "bm" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel,
+/obj/item/towel,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "bn" = (
@@ -423,7 +423,7 @@
 /area/unishi/living)
 "bw" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/blue,
+/obj/item/bedsheet/blue,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "bx" = (
@@ -462,8 +462,8 @@
 /obj/item/ammo_magazine/speedloader/magnum,
 /obj/item/ammo_magazine/speedloader/magnum,
 /obj/item/ammo_magazine/speedloader/magnum,
-/obj/item/weapon/gun/projectile/revolver,
-/obj/item/weapon/handcuffs,
+/obj/item/gun/projectile/revolver,
+/obj/item/handcuffs,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -579,8 +579,8 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/unishi/living)
 "bP" = (
-/obj/item/weapon/stool/padded,
-/obj/item/weapon/storage/box/lights/bulbs,
+/obj/item/stool/padded,
+/obj/item/storage/box/lights/bulbs,
 /turf/simulated/floor,
 /area/unishi/living)
 "bQ" = (
@@ -589,13 +589,13 @@
 /area/unishi/med)
 "bR" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/storage/firstaid/surgery,
-/obj/item/weapon/tank/anesthetic,
+/obj/item/storage/firstaid/surgery,
+/obj/item/tank/anesthetic,
 /obj/item/clothing/mask/breath/anesthetic,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/weapon/scalpel/laser1,
+/obj/item/scalpel/laser1,
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "bS" = (
@@ -605,7 +605,7 @@
 /obj/structure/closet/secure_closet/medical1{
 	req_access = newlist()
 	},
-/obj/item/weapon/defibrillator/loaded,
+/obj/item/defibrillator/loaded,
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "bT" = (
@@ -613,7 +613,7 @@
 /obj/item/bodybag,
 /obj/item/bodybag,
 /obj/item/roller,
-/obj/item/weapon/storage/chewables/candy/medicallollis,
+/obj/item/storage/chewables/candy/medicallollis,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -661,7 +661,7 @@
 /obj/structure/table/standard,
 /obj/item/bodybag/cryobag,
 /obj/item/modular_computer/laptop/preset/custom_loadout/advanced,
-/obj/item/weapon/book/manual/medical_diagnostics_manual,
+/obj/item/book/manual/medical_diagnostics_manual,
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "cd" = (
@@ -781,7 +781,7 @@
 "cp" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/medical,
-/obj/item/weapon/bedsheet/medical,
+/obj/item/bedsheet/medical,
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "cq" = (
@@ -961,9 +961,9 @@
 /area/unishi/lounge)
 "cH" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/cell/crap,
-/obj/item/weapon/stock_parts/circuitboard/gyrotron_control,
-/obj/item/weapon/paper_bin,
+/obj/item/cell/crap,
+/obj/item/stock_parts/circuitboard/gyrotron_control,
+/obj/item/paper_bin,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -985,17 +985,17 @@
 /area/unishi/living)
 "cK" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/dice,
-/obj/item/weapon/deck/cards,
-/obj/item/weapon/pen/fancy,
+/obj/item/dice,
+/obj/item/deck/cards,
+/obj/item/pen/fancy,
 /obj/random/tech_supply,
 /turf/simulated/floor/wood,
 /area/unishi/lounge)
 "cL" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/board,
-/obj/item/weapon/book/manual/mass_spectrometry,
-/obj/item/weapon/book/manual/stasis,
+/obj/item/board,
+/obj/item/book/manual/mass_spectrometry,
+/obj/item/book/manual/stasis,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cM" = (
@@ -1003,8 +1003,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/item/weapon/cell/crap,
-/obj/item/weapon/newspaper,
+/obj/item/cell/crap,
+/obj/item/newspaper,
 /obj/random/tech_supply,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1093,7 +1093,7 @@
 "cY" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/raisins,
-/obj/item/weapon/book/manual/nuclear,
+/obj/item/book/manual/nuclear,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cZ" = (
@@ -1144,7 +1144,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dd" = (
-/obj/item/weapon/stool/bar/padded,
+/obj/item/stool/bar/padded,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -1206,15 +1206,15 @@
 "dk" = (
 /obj/structure/hygiene/shower,
 /obj/structure/curtain/open/shower,
-/obj/item/weapon/soap,
+/obj/item/soap,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dl" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/laundry_basket,
-/obj/item/weapon/reagent_containers/pill/detergent,
-/obj/item/weapon/reagent_containers/pill/detergent,
-/obj/item/weapon/storage/chewables/candy/gum,
+/obj/item/storage/laundry_basket,
+/obj/item/reagent_containers/pill/detergent,
+/obj/item/reagent_containers/pill/detergent,
+/obj/item/storage/chewables/candy/gum,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dm" = (
@@ -1227,7 +1227,7 @@
 /area/unishi/kitchen)
 "do" = (
 /obj/structure/table/marble,
-/obj/item/weapon/book/manual/chef_recipes,
+/obj/item/book/manual/chef_recipes,
 /turf/simulated/floor/tiled,
 /area/unishi/kitchen)
 "dp" = (
@@ -1235,7 +1235,7 @@
 	dir = 8;
 	pixel_x = -15
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = -28
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -1286,7 +1286,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "du" = (
-/obj/item/weapon/reagent_containers/pill/detergent,
+/obj/item/reagent_containers/pill/detergent,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -1325,7 +1325,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/kitchen)
 "dy" = (
-/obj/item/weapon/mop,
+/obj/item/mop,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 4
@@ -1342,8 +1342,8 @@
 /area/unishi/kitchen)
 "dB" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
-/obj/item/weapon/storage/box/emps,
-/obj/item/weapon/storage/box/smokes,
+/obj/item/storage/box/emps,
+/obj/item/storage/box/smokes,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dC" = (
@@ -1354,14 +1354,14 @@
 /area/unishi/living)
 "dD" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/cane/concealed,
+/obj/item/cane/concealed,
 /obj/item/clothing/suit/radiation,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/weapon/caution,
+/obj/item/caution,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -1393,7 +1393,7 @@
 /area/unishi/kitchen)
 "dJ" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/brown,
+/obj/item/bedsheet/brown,
 /obj/item/toy/plushie/kitten,
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled,
@@ -1410,11 +1410,11 @@
 /area/unishi/living)
 "dL" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/green,
-/obj/item/weapon/gun/projectile/pistol/holdout,
-/obj/item/weapon/storage/secure/briefcase,
-/obj/item/weapon/card/emag_broken,
-/obj/item/weapon/plastique,
+/obj/item/bedsheet/green,
+/obj/item/gun/projectile/pistol/holdout,
+/obj/item/storage/secure/briefcase,
+/obj/item/card/emag_broken,
+/obj/item/plastique,
 /obj/item/ammo_casing/pistol/used,
 /obj/item/ammo_casing/pistol/used,
 /obj/item/ammo_casing/pistol/used,
@@ -1502,20 +1502,20 @@
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/item/weapon/bedsheet/purple,
+/obj/item/bedsheet/purple,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dW" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/bedsheet/green,
+/obj/item/bedsheet/green,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dX" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/item/weapon/bedsheet/yellow,
+/obj/item/bedsheet/yellow,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dY" = (
@@ -1534,8 +1534,8 @@
 /area/unishi/living)
 "eb" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/contraband/poster,
-/obj/item/weapon/haircomb/random,
+/obj/item/contraband/poster,
+/obj/item/haircomb/random,
 /obj/random/advdevice,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1555,7 +1555,7 @@
 /area/unishi/living)
 "ee" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/orange,
+/obj/item/bedsheet/orange,
 /obj/machinery/light/small,
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -1631,7 +1631,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/item/weapon/bedsheet/orange,
+/obj/item/bedsheet/orange,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "eo" = (
@@ -1680,13 +1680,13 @@
 "es" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/bedsheet/orange,
+/obj/item/bedsheet/orange,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "et" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/bedsheet/purple,
+/obj/item/bedsheet/purple,
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1697,7 +1697,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/item/weapon/bedsheet/orange,
+/obj/item/bedsheet/orange,
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1729,7 +1729,7 @@
 /area/unishi/living)
 "eA" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/rd,
+/obj/item/bedsheet/rd,
 /turf/simulated/floor/wood,
 /area/unishi/living)
 "eB" = (
@@ -1813,10 +1813,10 @@
 /area/unishi/living)
 "eJ" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/haircomb/brush,
-/obj/item/weapon/lipstick/black,
-/obj/item/weapon/lipstick/jade,
-/obj/item/weapon/lipstick/purple,
+/obj/item/haircomb/brush,
+/obj/item/lipstick/black,
+/obj/item/lipstick/jade,
+/obj/item/lipstick/purple,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood,
 /area/unishi/living)
@@ -1873,7 +1873,7 @@
 /area/unishi/living)
 "eS" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/pen/fancy,
+/obj/item/pen/fancy,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood,
 /area/unishi/living)
@@ -1889,7 +1889,7 @@
 /area/unishi/living)
 "eV" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /turf/simulated/floor/wood,
 /area/unishi/living)
 "eW" = (
@@ -1919,16 +1919,16 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/item/weapon/spacecash/bundle/c1000,
-/obj/item/weapon/spacecash/bundle/c1000,
-/obj/item/weapon/spacecash/bundle/c1000,
-/obj/item/weapon/spacecash/bundle/c1000,
-/obj/item/weapon/spacecash/bundle/c1000,
-/obj/item/weapon/spacecash/bundle/c1000,
-/obj/item/weapon/spacecash/bundle/c1000,
-/obj/item/weapon/spacecash/bundle/c200,
-/obj/item/weapon/spacecash/bundle/c200,
-/obj/item/weapon/grenade/supermatter,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c200,
+/obj/item/spacecash/bundle/c200,
+/obj/item/grenade/supermatter,
 /turf/simulated/floor/wood,
 /area/unishi/living)
 "eZ" = (
@@ -1936,11 +1936,11 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/item/weapon/spacecash/bundle/c200,
-/obj/item/weapon/spacecash/bundle/c200,
-/obj/item/weapon/spacecash/bundle/c500,
-/obj/item/weapon/spacecash/bundle/c500,
-/obj/item/weapon/pen/reagent/sleepy,
+/obj/item/spacecash/bundle/c200,
+/obj/item/spacecash/bundle/c200,
+/obj/item/spacecash/bundle/c500,
+/obj/item/spacecash/bundle/c500,
+/obj/item/pen/reagent/sleepy,
 /obj/random/hardsuit,
 /turf/simulated/floor/wood,
 /area/unishi/living)
@@ -1961,7 +1961,7 @@
 /area/unishi/living)
 "fd" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine,
+/obj/item/reagent_containers/food/drinks/bottle/premiumwine,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -2052,7 +2052,7 @@
 "vn" = (
 /obj/structure/bed/padded,
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/bedsheet/orange,
+/obj/item/bedsheet/orange,
 /obj/random/clothing,
 /turf/simulated/floor/tiled,
 /area/unishi/living)

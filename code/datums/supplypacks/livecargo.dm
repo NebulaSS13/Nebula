@@ -4,14 +4,14 @@
 
 /decl/hierarchy/supply_pack/livecargo/monkey
 	name = "Inert - Monkey cubes"
-	contains = list (/obj/item/weapon/storage/box/monkeycubes)
+	contains = list (/obj/item/storage/box/monkeycubes)
 	cost = 20
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "monkey crate"
 
 /decl/hierarchy/supply_pack/livecargo/spidercubes
 	name = "Inert - Spiders"
-	contains = list(/obj/item/weapon/storage/box/monkeycubes/spidercubes)
+	contains = list(/obj/item/storage/box/monkeycubes/spidercubes)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Spiderling crate"

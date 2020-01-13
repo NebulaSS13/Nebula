@@ -22,7 +22,7 @@
 	supernatural = 1
 
 /mob/living/simple_animal/faithful_hound/death()
-	new /obj/item/weapon/ectoplasm (get_turf(src))
+	new /obj/item/ectoplasm (get_turf(src))
 	..(null, "disappears!")
 	qdel(src)
 

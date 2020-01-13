@@ -13,7 +13,7 @@
 	faction = "sharks"
 	melee_damage_flags = DAM_SHARP
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/shark
+	meat_type = /obj/item/reagent_containers/food/snacks/fish/shark
 	meat_amount = 5
 	bone_amount = 15
 	skin_amount = 15

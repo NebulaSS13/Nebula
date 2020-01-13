@@ -477,7 +477,7 @@
 	color = "#dbc3c3"
 	var/boompower = 1
 
-/datum/reagent/anfo/ex_act(obj/item/weapon/reagent_containers/holder, severity)
+/datum/reagent/anfo/ex_act(obj/item/reagent_containers/holder, severity)
 	var/activated_volume = volume
 	switch(severity)
 		if(2)

@@ -9,7 +9,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	active_power_usage = 5 KILOWATTS
-	var/obj/item/weapon/card/id/auth_card
+	var/obj/item/card/id/auth_card
 	var/locked = 1
 	var/obj/effect/suspension_field/suspension_field
 
@@ -37,7 +37,7 @@
 
 /obj/machinery/suspension_gen/interact(var/mob/user)
 	var/dat = "<b>Multi-phase mobile suspension field generator MK II \"Steadfast\"</b><br>"
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	if(cell)
 		var/colour = "red"
 		var/percent = cell.percent()
@@ -76,7 +76,7 @@
 /obj/machinery/suspension_gen/OnTopic(var/mob/user, href_list)
 	if(href_list["toggle_field"])
 		if(!suspension_field)
-			var/obj/item/weapon/cell/cell = get_cell()
+			var/obj/item/cell/cell = get_cell()
 			if(cell.charge > 0)
 				if(anchored)
 					activate()
@@ -87,7 +87,7 @@
 		. = TOPIC_REFRESH
 	else if(href_list["insertcard"])
 		var/obj/item/I = user.get_active_hand()
-		if (istype(I, /obj/item/weapon/card))
+		if (istype(I, /obj/item/card))
 			if(!user.unEquip(I, src))
 				return
 			auth_card = I
@@ -129,7 +129,7 @@
 		return SPAN_NOTICE("Turn \the [src] off first.")
 	return ..()
 
-/obj/machinery/suspension_gen/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/suspension_gen/attackby(obj/item/W, mob/user)
 	if(component_attackby(W, user))
 		return TRUE
 	else if(isWrench(W))
@@ -145,8 +145,8 @@
 				desc = "It has stubby legs bolted up against it's body for stabilising."
 		else
 			to_chat(user, "<span class='warning'>You are unable to secure [src] while it is active!</span>")
-	else if(istype(W, /obj/item/weapon/card))
-		var/obj/item/weapon/card/I = W
+	else if(istype(W, /obj/item/card))
+		var/obj/item/card/I = W
 		if(!auth_card)
 			if(attempt_unlock(I, user))
 				to_chat(user, "<span class='info'>You swipe [I], the console flashes \'<i>Access granted.</i>\'</span>")
@@ -155,11 +155,11 @@
 		else
 			to_chat(user, "<span class='warning'>Remove [auth_card] first.</span>")
 
-/obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/weapon/card/C, var/mob/user)
+/obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/card/C, var/mob/user)
 	if(!panel_open)
-		if(istype(C, /obj/item/weapon/card/emag))
+		if(istype(C, /obj/item/card/emag))
 			C.resolve_attackby(src, user)
-		else if(istype(C, /obj/item/weapon/card/id) && check_access(C))
+		else if(istype(C, /obj/item/card/id) && check_access(C))
 			locked = 0
 		if(!locked)
 			return 1

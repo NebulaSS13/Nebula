@@ -370,7 +370,7 @@
 				visible_message(SPAN_NOTICE("\The [user] pries out \the [body.cell] using the \the [thing]."))
 				body.cell = null
 				return
-			else if(istype(thing, /obj/item/weapon/cell))
+			else if(istype(thing, /obj/item/cell))
 				if(!maintenance_protocols)
 					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
 					return

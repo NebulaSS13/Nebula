@@ -5,7 +5,7 @@
 	slot = ACCESSORY_SLOT_UTILITY
 	var/slots = 3
 	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
-	var/obj/item/weapon/storage/internal/pockets/hold
+	var/obj/item/storage/internal/pockets/hold
 	w_class = ITEM_SIZE_NORMAL
 	high_visibility = 1
 	on_rolled = list("down" = "none")
@@ -15,7 +15,7 @@
 	create_storage()
 
 /obj/item/clothing/accessory/storage/proc/create_storage()
-	hold = new/obj/item/weapon/storage/internal/pockets(src, slots, max_w_class)
+	hold = new/obj/item/storage/internal/pockets(src, slots, max_w_class)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user as mob)
 	if(has_suit && hold)	//if we are part of a suit
@@ -83,7 +83,7 @@
 	slots = 4 //to accomodate it being slotless
 
 /obj/item/clothing/accessory/storage/drop_pouches/create_storage()
-	hold = new/obj/item/weapon/storage/internal/pouch(src, slots*BASE_STORAGE_COST(max_w_class))
+	hold = new/obj/item/storage/internal/pouch(src, slots*BASE_STORAGE_COST(max_w_class))
 
 /obj/item/clothing/accessory/storage/drop_pouches/black
 	name = "black drop pouches"
@@ -110,12 +110,12 @@
 /obj/item/clothing/accessory/storage/knifeharness/Initialize()
 	. = ..()
 	hold.can_hold = list(
-		/obj/item/weapon/material/hatchet,
-		/obj/item/weapon/material/knife,
+		/obj/item/material/hatchet,
+		/obj/item/material/knife,
 	)
 
-	new /obj/item/weapon/material/knife/table/primitive(hold)
-	new /obj/item/weapon/material/knife/table/primitive(hold)
+	new /obj/item/material/knife/table/primitive(hold)
+	new /obj/item/material/knife/table/primitive(hold)
 
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"
@@ -128,32 +128,32 @@
 	. = ..()
 	hold.can_hold = list(
 		/obj/item/ammo_casing,
-		/obj/item/weapon/grenade,
-		/obj/item/weapon/material/knife,
-		/obj/item/weapon/material/star,
-		/obj/item/weapon/rcd_ammo,
-		/obj/item/weapon/reagent_containers/syringe,
-		/obj/item/weapon/reagent_containers/hypospray,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/weapon/syringe_cartridge,
-		/obj/item/weapon/plastique,
+		/obj/item/grenade,
+		/obj/item/material/knife,
+		/obj/item/material/star,
+		/obj/item/rcd_ammo,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/reagent_containers/hypospray/autoinjector,
+		/obj/item/syringe_cartridge,
+		/obj/item/plastique,
 		/obj/item/clothing/mask/smokable,
-		/obj/item/weapon/screwdriver,
+		/obj/item/screwdriver,
 		/obj/item/device/multitool,
-		/obj/item/weapon/magnetic_ammo,
+		/obj/item/magnetic_ammo,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/net_shell,
-		/obj/item/weapon/reagent_containers/glass/beaker/vial,
-		/obj/item/weapon/paper,
-		/obj/item/weapon/pen,
-		/obj/item/weapon/photo,
-		/obj/item/weapon/marshalling_wand,
-		/obj/item/weapon/reagent_containers/pill,
-		/obj/item/weapon/storage/pill_bottle
+		/obj/item/net_shell,
+		/obj/item/reagent_containers/glass/beaker/vial,
+		/obj/item/paper,
+		/obj/item/pen,
+		/obj/item/photo,
+		/obj/item/marshalling_wand,
+		/obj/item/reagent_containers/pill,
+		/obj/item/storage/pill_bottle
 	)
 
 /obj/item/clothing/accessory/storage/bandolier/safari/Initialize()
 	. = ..()
 
 	for(var/i = 0, i < slots, i++)
-		new /obj/item/weapon/net_shell(hold)
+		new /obj/item/net_shell(hold)

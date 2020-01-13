@@ -17,7 +17,7 @@
 	attacktext = "mauled"
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/tomatomeat
+	meat_type = /obj/item/reagent_containers/food/snacks/tomatomeat
 	bone_material = null
 	bone_amount =   0
 	skin_material = null 

@@ -22,7 +22,7 @@
 	pry_time = 8 SECONDS
 	break_stuff_probability = 5
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken/game
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
 	meat_amount = 6
 	bone_amount = 8
 	skin_amount = 8
@@ -74,4 +74,4 @@
 	loose_threshold = 20
 	max_lower = 25
 	max_upper = 35
-	skull_type = /obj/item/weapon/pen/fancy/quill
+	skull_type = /obj/item/pen/fancy/quill

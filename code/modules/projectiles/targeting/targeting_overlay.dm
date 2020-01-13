@@ -162,7 +162,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	to_chat(target, "<span class='danger'>You now have a gun pointed at you. No sudden moves!</span>")
 	aiming_with = thing
 	aiming_at = target
-	if(istype(aiming_with, /obj/item/weapon/gun))
+	if(istype(aiming_with, /obj/item/gun))
 		sound_to(aiming_at, sound('sound/weapons/TargetOn.ogg'))
 		sound_to(owner, sound('sound/weapons/TargetOn.ogg'))
 
@@ -207,7 +207,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 /obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
 	if(!aiming_with || !aiming_at)
 		return
-	if(istype(aiming_with, /obj/item/weapon/gun))
+	if(istype(aiming_with, /obj/item/gun))
 		sound_to(aiming_at, sound('sound/weapons/TargetOff.ogg'))
 		sound_to(owner, sound('sound/weapons/TargetOff.ogg'))
 	if(!no_message)

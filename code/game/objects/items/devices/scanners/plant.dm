@@ -8,8 +8,8 @@
 	scan_sound = 'sound/effects/fastbeep.ogg'
 	printout_color = "#eeffe8"
 	var/global/list/valid_targets = list(
-		/obj/item/weapon/reagent_containers/food/snacks/grown,
-		/obj/item/weapon/grown,
+		/obj/item/reagent_containers/food/snacks/grown,
+		/obj/item/grown,
 		/obj/machinery/portable_atmospherics/hydroponics,
 		/obj/item/seeds
 	)
@@ -27,13 +27,13 @@
 /proc/plant_scan_results(obj/target)
 	var/datum/seed/grown_seed
 	var/datum/reagents/grown_reagents
-	if(istype(target,/obj/item/weapon/reagent_containers/food/snacks/grown))
-		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = target
+	if(istype(target,/obj/item/reagent_containers/food/snacks/grown))
+		var/obj/item/reagent_containers/food/snacks/grown/G = target
 		grown_seed = SSplants.seeds[G.plantname]
 		grown_reagents = G.reagents
 
-	else if(istype(target,/obj/item/weapon/grown))
-		var/obj/item/weapon/grown/G = target
+	else if(istype(target,/obj/item/grown))
+		var/obj/item/grown/G = target
 		grown_seed = SSplants.seeds[G.plantname]
 		grown_reagents = G.reagents
 

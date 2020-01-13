@@ -21,7 +21,7 @@
 	attacktext = "punched"
 	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/corpse/russian
-	var/weapon1 = /obj/item/weapon/material/knife/combat
+	var/weapon1 = /obj/item/material/knife/combat
 	unsuitable_atmos_damage = 15
 	faction = "russian"
 	status_flags = CANPUSH
@@ -32,7 +32,7 @@
 	icon_state = "russianranged"
 	icon_living = "russianranged"
 	corpse = /obj/effect/landmark/corpse/russian/ranged
-	weapon1 = /obj/item/weapon/gun/projectile/revolver
+	weapon1 = /obj/item/gun/projectile/revolver
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet
 	projectilesound = 'sound/weapons/gunshot/gunshot2.ogg'

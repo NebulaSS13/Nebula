@@ -58,22 +58,22 @@
 
 /datum/gear/storage/waistpack
 	display_name = "waist pack"
-	path = /obj/item/weapon/storage/belt/waistpack
+	path = /obj/item/storage/belt/waistpack
 	slot = slot_belt
 	cost = 2
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/storage/waistpack/big
 	display_name = "large waist pack"
-	path = /obj/item/weapon/storage/belt/waistpack/big
+	path = /obj/item/storage/belt/waistpack/big
 	cost = 4
 
 /datum/gear/accessory/wallet
 	display_name = "wallet, colour select"
-	path = /obj/item/weapon/storage/wallet
+	path = /obj/item/storage/wallet
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/wallet_poly
 	display_name = "wallet, polychromic"
-	path = /obj/item/weapon/storage/wallet/poly
+	path = /obj/item/storage/wallet/poly
 	cost = 2

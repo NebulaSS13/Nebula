@@ -1,4 +1,4 @@
-/obj/item/weapon/pen/crayon
+/obj/item/pen/crayon
 	name = "crayon"
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
 	icon = 'icons/obj/crayons.dmi'
@@ -14,6 +14,6 @@
 	var/instant = 0
 	var/colourName = "red" //for updateIcon purposes
 
-/obj/item/weapon/pen/crayon/Initialize()
+/obj/item/pen/crayon/Initialize()
 	name = "[colourName] crayon"
 	. = ..()

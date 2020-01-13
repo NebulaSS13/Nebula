@@ -16,7 +16,7 @@
 	attacktext = "slashed"
 	faction = "drakes"
 	pry_time = 4 SECONDS
-	skull_type = /obj/item/weapon/melee/whip/tail
+	skull_type = /obj/item/melee/whip/tail
 	bleed_colour = COLOR_VIOLET
 	melee_damage_flags = DAM_EDGE
 

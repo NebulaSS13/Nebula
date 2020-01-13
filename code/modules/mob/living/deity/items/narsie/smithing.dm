@@ -5,7 +5,7 @@
 	max_level = 1
 	base_cost = 75
 	var/forge_type = /obj/structure/deity/blood_forge
-	var/list/recipes = list(/obj/item/weapon/melee/cultblade = 50,
+	var/list/recipes = list(/obj/item/melee/cultblade = 50,
 							/obj/item/clothing/head/culthood/alt = 10,
 							/obj/item/clothing/suit/cultrobes/alt = 20
 							)

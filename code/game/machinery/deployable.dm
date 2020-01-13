@@ -22,8 +22,8 @@
 
 		src.icon_state = "barrier[src.locked]"
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if (istype(W, /obj/item/weapon/card/id/))
+	attackby(obj/item/W as obj, mob/user as mob)
+		if (istype(W, /obj/item/card/id/))
 			if (src.allowed(user))
 				if	(src.emagged < 2.0)
 					src.locked = !src.locked

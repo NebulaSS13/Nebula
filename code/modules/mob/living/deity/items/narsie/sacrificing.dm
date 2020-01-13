@@ -11,7 +11,7 @@
 	category = DEITY_TREE_SACRIFICE
 	requirements = list(DEITY_TREE_SACRIFICE = 1)
 	base_cost = 10
-	boon_path = /obj/item/weapon/material/knife/ritual/sacrifice
+	boon_path = /obj/item/material/knife/ritual/sacrifice
 
 /datum/deity_item/boon/sac_spell
 	name = "Sacrifice Spell"
@@ -27,7 +27,7 @@
 	category = DEITY_TREE_SACRIFICE
 	requirements = list(DEITY_TREE_SACRIFICE = 1)
 	base_cost = 50
-	boon_path = /obj/item/weapon/material/twohanded/fireaxe/cult
+	boon_path = /obj/item/material/twohanded/fireaxe/cult
 
 /datum/deity_item/blood_stone
 	name = "Bloodied Stone"

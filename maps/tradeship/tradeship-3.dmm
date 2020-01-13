@@ -60,7 +60,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "aj" = (
-/obj/item/weapon/newspaper,
+/obj/item/newspaper,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "ak" = (
@@ -463,7 +463,7 @@
 	icon_state = "handrail";
 	dir = 1
 	},
-/obj/item/weapon/wrench,
+/obj/item/wrench,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "bf" = (
@@ -479,7 +479,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/maintenance/solars)
 "bg" = (
-/obj/item/weapon/reagent_containers/glass/paint/yellow,
+/obj/item/reagent_containers/glass/paint/yellow,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
 "bh" = (

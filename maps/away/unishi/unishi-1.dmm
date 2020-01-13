@@ -770,10 +770,10 @@
 /area/unishi/engineroom)
 "bY" = (
 /obj/structure/table/standard,
-/obj/item/weapon/rcd,
-/obj/item/weapon/rcd_ammo/large,
-/obj/item/weapon/rcd_ammo/large,
-/obj/item/weapon/rcd_ammo/large,
+/obj/item/rcd,
+/obj/item/rcd_ammo/large,
+/obj/item/rcd_ammo/large,
+/obj/item/rcd_ammo/large,
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bZ" = (

@@ -225,8 +225,8 @@
 /area/lar_maria/vir_main)
 "aA" = (
 /obj/structure/table/glass,
-/obj/item/weapon/paper,
-/obj/item/weapon/folder/white,
+/obj/item/paper,
+/obj/item/folder/white,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aB" = (
@@ -234,8 +234,8 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/storage/box/beakers,
-/obj/item/weapon/reagent_containers/spray/cleaner,
+/obj/item/storage/box/beakers,
+/obj/item/reagent_containers/spray/cleaner,
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
 	dir = 2;
@@ -344,7 +344,7 @@
 /area/lar_maria/cells)
 "aV" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/contraband/poster,
+/obj/item/contraband/poster,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "aW" = (
@@ -484,7 +484,7 @@
 /area/lar_maria/vir_main)
 "bo" = (
 /obj/structure/table/glass,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bp" = (
@@ -498,13 +498,13 @@
 /area/lar_maria/vir_main)
 "br" = (
 /obj/structure/table/glass,
-/obj/item/weapon/paper,
-/obj/item/weapon/pen/blue,
+/obj/item/paper,
+/obj/item/pen/blue,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bs" = (
 /obj/structure/table/glass,
-/obj/item/weapon/paper/lar_maria/note_4,
+/obj/item/paper/lar_maria/note_4,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bt" = (
@@ -619,14 +619,14 @@
 	dir = 8
 	},
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/masks,
-/obj/item/weapon/storage/box/gloves,
-/obj/item/weapon/reagent_containers/spray/sterilizine,
+/obj/item/storage/box/masks,
+/obj/item/storage/box/gloves,
+/obj/item/reagent_containers/spray/sterilizine,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bK" = (
 /obj/structure/table/glass,
-/obj/item/weapon/folder/white,
+/obj/item/folder/white,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bL" = (
@@ -637,7 +637,7 @@
 /area/lar_maria/vir_main)
 "bM" = (
 /obj/structure/table/glass,
-/obj/item/weapon/paper,
+/obj/item/paper,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bN" = (
@@ -666,7 +666,7 @@
 /area/lar_maria/cells)
 "bS" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/newspaper,
+/obj/item/newspaper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "bT" = (
@@ -730,7 +730,7 @@
 	dir = 8
 	},
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/bodybags,
+/obj/item/storage/box/bodybags,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cc" = (
@@ -830,7 +830,7 @@
 /area/lar_maria/vir_main)
 "cn" = (
 /obj/machinery/door/window/northright,
-/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "co" = (
@@ -999,7 +999,7 @@
 /area/lar_maria/vir_main)
 "cF" = (
 /obj/structure/table/glass,
-/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/storage/firstaid/surgery,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -1016,7 +1016,7 @@
 /area/lar_maria/vir_main)
 "cI" = (
 /obj/structure/table/glass,
-/obj/item/weapon/scalpel,
+/obj/item/scalpel,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cJ" = (
@@ -1059,7 +1059,7 @@
 /area/lar_maria/sec_wing)
 "cP" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/deck/cards,
+/obj/item/deck/cards,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "cQ" = (
@@ -1488,7 +1488,7 @@
 /area/lar_maria/vir_aux)
 "dP" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/deck/tarot,
+/obj/item/deck/tarot,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "dQ" = (
@@ -1565,8 +1565,8 @@
 /area/lar_maria/sec_wing)
 "ef" = (
 /obj/structure/table/rack,
-/obj/item/weapon/shield/riot,
-/obj/item/weapon/shield/riot,
+/obj/item/shield/riot,
+/obj/item/shield/riot,
 /obj/item/clothing/head/helmet/riot,
 /obj/item/clothing/suit/armor/riot,
 /turf/simulated/floor/tiled,
@@ -1608,7 +1608,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "em" = (
-/obj/item/weapon/storage/box/freezer,
+/obj/item/storage/box/freezer,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "en" = (
@@ -1642,7 +1642,7 @@
 /area/lar_maria/cells)
 "er" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/book/manual/chef_recipes,
+/obj/item/book/manual/chef_recipes,
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
 	dir = 2;
@@ -1774,7 +1774,7 @@
 /area/lar_maria/vir_aux)
 "eF" = (
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/syringes,
+/obj/item/storage/box/syringes,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eG" = (
@@ -1796,13 +1796,13 @@
 /area/lar_maria/cells)
 "eI" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eJ" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/smokes,
-/obj/item/weapon/gun/energy/taser,
+/obj/item/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eK" = (
@@ -1813,7 +1813,7 @@
 /area/lar_maria/sec_wing)
 "eL" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/handcuffs,
+/obj/item/storage/box/handcuffs,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eM" = (
@@ -1823,7 +1823,7 @@
 "eN" = (
 /obj/structure/closet,
 /obj/item/clothing/under/color/red,
-/obj/item/weapon/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/projectile/shotgun/pump/combat,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eO" = (
@@ -1842,8 +1842,8 @@
 /area/lar_maria/sec_wing)
 "eP" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/reagent_containers/spray/pepper,
-/obj/item/weapon/reagent_containers/spray/pepper,
+/obj/item/reagent_containers/spray/pepper,
+/obj/item/reagent_containers/spray/pepper,
 /obj/machinery/alarm{
 	alarm_id = "misc_research";
 	dir = 8;
@@ -1930,7 +1930,7 @@
 /area/lar_maria/vir_aux)
 "eY" = (
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/freezer,
+/obj/item/storage/box/freezer,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eZ" = (
@@ -1943,8 +1943,8 @@
 /area/lar_maria/vir_aux)
 "fb" = (
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/beakers,
-/obj/item/weapon/storage/box/pillbottles,
+/obj/item/storage/box/beakers,
+/obj/item/storage/box/pillbottles,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fc" = (
@@ -1969,15 +1969,15 @@
 /area/lar_maria/sec_wing)
 "ff" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/reagent_containers/spray/pepper,
-/obj/item/weapon/deck/cards,
+/obj/item/reagent_containers/spray/pepper,
+/obj/item/deck/cards,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fg" = (
 /obj/structure/table/rack,
-/obj/item/weapon/melee/baton,
-/obj/item/weapon/melee/baton,
-/obj/item/weapon/melee/baton,
+/obj/item/melee/baton,
+/obj/item/melee/baton,
+/obj/item/melee/baton,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fh" = (
@@ -1987,8 +1987,8 @@
 /area/lar_maria/sec_wing)
 "fi" = (
 /obj/structure/closet,
-/obj/item/weapon/shield/riot,
-/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/shield/riot,
+/obj/item/storage/box/ammo/shotgunammo,
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 4
@@ -2042,7 +2042,7 @@
 /area/lar_maria/sec_wing)
 "fn" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/handcuffs,
+/obj/item/handcuffs,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fo" = (
@@ -2076,13 +2076,13 @@
 "fr" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/masks,
-/obj/item/weapon/storage/box/gloves,
+/obj/item/storage/box/masks,
+/obj/item/storage/box/gloves,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fs" = (
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/autoinjectors,
+/obj/item/storage/box/autoinjectors,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "ft" = (
@@ -2105,13 +2105,13 @@
 /area/lar_maria/cells)
 "fv" = (
 /obj/structure/table/rack,
-/obj/item/weapon/flamethrower/full,
+/obj/item/flamethrower/full,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fw" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/glowsticks,
+/obj/item/storage/box/glowsticks,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2622,8 +2622,8 @@
 /area/lar_maria/vir_aux)
 "gf" = (
 /obj/structure/closet/crate,
-/obj/item/weapon/folder/white,
-/obj/item/weapon/material/knife/folding,
+/obj/item/folder/white,
+/obj/item/material/knife/folding,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "gg" = (
@@ -2663,7 +2663,7 @@
 /area/lar_maria/cells)
 "gk" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/dice/d12,
+/obj/item/dice/d12,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "gl" = (
@@ -2715,8 +2715,8 @@
 /obj/structure/closet/crate/radiation,
 /obj/item/stack/cable_coil/random,
 /obj/item/stack/material/tritium/ten,
-/obj/item/weapon/wirecutters,
-/obj/item/weapon/wrench,
+/obj/item/wirecutters,
+/obj/item/wrench,
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "gu" = (
@@ -2790,8 +2790,8 @@
 /area/lar_maria/cells)
 "gC" = (
 /obj/structure/closet/crate,
-/obj/item/weapon/contraband/poster,
-/obj/item/weapon/inflatable_duck,
+/obj/item/contraband/poster,
+/obj/item/inflatable_duck,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "gD" = (
@@ -2928,7 +2928,7 @@
 /area/lar_maria/cells)
 "gT" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/newspaper,
+/obj/item/newspaper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "gU" = (
@@ -3020,7 +3020,7 @@
 /area/lar_maria/vir_access)
 "hi" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel,
+/obj/item/towel,
 /obj/random/soap,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -3132,7 +3132,7 @@
 /area/lar_maria/vir_access)
 "hA" = (
 /obj/structure/closet/crate/trashcart,
-/obj/item/weapon/material/ashtray/plastic,
+/obj/item/material/ashtray/plastic,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hB" = (
@@ -3151,7 +3151,7 @@
 /area/lar_maria/sec_wing)
 "hD" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/energy/taser,
+/obj/item/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "hE" = (
@@ -3160,7 +3160,7 @@
 	pixel_x = -30
 	},
 /obj/random/smokes,
-/obj/item/weapon/storage/box/matches,
+/obj/item/storage/box/matches,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -3342,7 +3342,7 @@
 /area/lar_maria/cells)
 "hW" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/contraband/poster,
+/obj/item/contraband/poster,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hX" = (
@@ -3361,7 +3361,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/item/weapon/paper/lar_maria/note_7,
+/obj/item/paper/lar_maria/note_7,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "hZ" = (
@@ -3387,7 +3387,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "ib" = (
-/obj/item/weapon/paper/lar_maria/note_8,
+/obj/item/paper/lar_maria/note_8,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "ic" = (
@@ -3642,7 +3642,7 @@
 /area/lar_maria/cells)
 "iA" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/material/ashtray/plastic,
+/obj/item/material/ashtray/plastic,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "iB" = (
@@ -3682,7 +3682,7 @@
 	dir = 4
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/gun/energy/taser,
+/obj/item/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "iE" = (
@@ -3733,7 +3733,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/item/weapon/gun/energy/taser,
+/obj/item/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "iL" = (
@@ -3805,7 +3805,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = 25
 	},
 /turf/simulated/floor/tiled/white,

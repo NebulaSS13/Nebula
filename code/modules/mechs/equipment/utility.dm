@@ -174,7 +174,7 @@
 						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						locked = null
 
-						var/obj/item/weapon/cell/C = owner.get_cell()
+						var/obj/item/cell/C = owner.get_cell()
 						if(istype(C))
 							C.use(active_power_use * CELLRATE)
 
@@ -195,7 +195,7 @@
 
 
 				log_and_message_admins("used [src]'s area throw on [target].", user, owner.loc)
-				var/obj/item/weapon/cell/C = owner.get_cell()
+				var/obj/item/cell/C = owner.get_cell()
 				if(istype(C))
 					C.use(active_power_use * CELLRATE * 2) //bit more expensive to throw all
 
@@ -205,16 +205,16 @@
 #undef CATAPULT_AREA
 
 
-/obj/item/weapon/material/drill_head
+/obj/item/material/drill_head
 	var/durability = 0
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon_state = "drill_head"
 
-/obj/item/weapon/material/drill_head/proc/get_durability_percentage()
+/obj/item/material/drill_head/proc/get_durability_percentage()
 	return (durability * 100) / (2 * material.integrity)
 
-/obj/item/weapon/material/drill_head/examine(mob/user, distance)
+/obj/item/material/drill_head/examine(mob/user, distance)
 	. = ..()
 	var/percentage = get_durability_percentage()
 	var/descriptor = "looks close to breaking"
@@ -229,7 +229,7 @@
 		
 	to_chat(user, "It [descriptor].")
 	
-/obj/item/weapon/material/drill_head/Initialize()
+/obj/item/material/drill_head/Initialize()
 	. = ..()
 	durability = 2 * material.integrity
 
@@ -242,14 +242,14 @@
 	equipment_delay = 10
 
 	//Drill can have a head
-	var/obj/item/weapon/material/drill_head/drill_head
+	var/obj/item/material/drill_head/drill_head
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 	
 
 
 /obj/item/mech_equipment/drill/Initialize()
 	. = ..()
-	drill_head = new /obj/item/weapon/material/drill_head(src, "steel")//You start with a basic steel head
+	drill_head = new /obj/item/material/drill_head(src, "steel")//You start with a basic steel head
 
 /obj/item/mech_equipment/drill/attack_self(var/mob/user)
 	. = ..()
@@ -263,9 +263,9 @@
 		return "Integrity: [round(drill_head.get_durability_percentage())]%"
 	return
 
-/obj/item/mech_equipment/drill/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W,/obj/item/weapon/material/drill_head))
-		var/obj/item/weapon/material/drill_head/DH = W
+/obj/item/mech_equipment/drill/attackby(obj/item/W, mob/user)
+	if(istype(W,/obj/item/material/drill_head))
+		var/obj/item/material/drill_head/DH = W
 		if(!user.unEquip(DH))
 			return
 		if(drill_head)
@@ -285,8 +285,8 @@
 			var/obj/target_obj = target
 			if(target_obj.unacidable)
 				return
-		if(istype(target,/obj/item/weapon/material/drill_head))
-			var/obj/item/weapon/material/drill_head/DH = target
+		if(istype(target,/obj/item/material/drill_head))
+			var/obj/item/material/drill_head/DH = target
 			if(drill_head)
 				owner.visible_message(SPAN_NOTICE("\The [owner] detaches the [drill_head] mounted on the [src]."))
 				drill_head.forceMove(owner.loc)
@@ -299,7 +299,7 @@
 			to_chat(user, SPAN_WARNING("Your drill doesn't have a head!"))
 			return
 		
-		var/obj/item/weapon/cell/C = owner.get_cell()
+		var/obj/item/cell/C = owner.get_cell()
 		if(istype(C))
 			C.use(active_power_use * CELLRATE)
 		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
@@ -347,7 +347,7 @@
 							continue
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in I //clamps work, but anythin that contains an ore crate internally is valid
 						if(ore_box)
-							for(var/obj/item/weapon/ore/ore in range(T,1))
+							for(var/obj/item/ore/ore in range(T,1))
 								if(get_dir(owner,ore)&owner.dir)
 									ore.Move(ore_box)
 
@@ -366,12 +366,12 @@
 	name = "mounted plasma cutter"
 	desc = "An industrial plasma cutter mounted onto the chassis of the mech. "
 	icon_state = "railauto" //TODO: Make a new sprite that doesn't get sec called on you.
-	holding_type = /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
+	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
 
-/obj/item/weapon/gun/energy/plasmacutter/mounted/mech
+/obj/item/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 	

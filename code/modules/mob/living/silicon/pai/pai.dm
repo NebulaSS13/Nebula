@@ -10,8 +10,8 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
-	holder_type = /obj/item/weapon/holder
-	idcard = /obj/item/weapon/card/id
+	holder_type = /obj/item/holder
+	idcard = /obj/item/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
 	var/network = "SS13"
@@ -44,7 +44,7 @@
 		"Corvid" = list("caws", "caws loudly", "whistles")
 		)
 
-	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
+	var/obj/item/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
 	var/master_dna			// DNA string for owner verification
@@ -273,7 +273,7 @@
 	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(src.loc,/obj/item/device/paicard))
 		resting = 0
-		var/obj/item/weapon/rig/rig = src.get_rig()
+		var/obj/item/rig/rig = src.get_rig()
 		if(istype(rig))
 			rig.force_rest(src)
 	else
@@ -282,8 +282,8 @@
 		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 //Overriding this will stop a number of headaches down the track.
-/mob/living/silicon/pai/attackby(obj/item/weapon/W, mob/user)
-	var/obj/item/weapon/card/id/card = W.GetIdCard()
+/mob/living/silicon/pai/attackby(obj/item/W, mob/user)
+	var/obj/item/card/id/card = W.GetIdCard()
 	if(card && user.a_intent == I_HELP)
 		var/list/new_access = card.GetAccess()
 		src.idcard.access = new_access
@@ -324,7 +324,7 @@
 	resting = 0
 
 	// If we are being held, handle removing our holder from their inv.
-	var/obj/item/weapon/holder/H = loc
+	var/obj/item/holder/H = loc
 	if(istype(H))
 		var/mob/living/M = H.loc
 		if(istype(M))
@@ -345,7 +345,7 @@
 /mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
 	. = ..()
 	if(.)
-		var/obj/item/weapon/holder/H = .
+		var/obj/item/holder/H = .
 		if(istype(H))
 			H.icon_state = "pai-[icon_state]"
 			grabber.update_inv_l_hand()

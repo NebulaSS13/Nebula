@@ -1,4 +1,4 @@
-/obj/item/weapon/robot_module/flying/repair
+/obj/item/robot_module/flying/repair
 	name = "repair drone module"
 	display_name = "Repair"
 	channels = list ("Engineering" = TRUE)
@@ -13,24 +13,24 @@
 	)
 	equipment = list(
 		/obj/item/borg/sight/meson,
-		/obj/item/weapon/extinguisher,
-		/obj/item/weapon/weldingtool/largetank,
-		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/wrench,
-		/obj/item/weapon/crowbar,
-		/obj/item/weapon/wirecutters,
+		/obj/item/extinguisher,
+		/obj/item/weldingtool/largetank,
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/crowbar,
+		/obj/item/wirecutters,
 		/obj/item/device/multitool,
 		/obj/item/device/t_scanner,
 		/obj/item/device/scanner/gas,
 		/obj/item/device/geiger,
 		/obj/item/taperoll/engineering,
 		/obj/item/taperoll/atmos,
-		/obj/item/weapon/gripper,
-		/obj/item/weapon/gripper/no_use/loader,
+		/obj/item/gripper,
+		/obj/item/gripper/no_use/loader,
 		/obj/item/device/lightreplacer,
 		/obj/item/device/pipe_painter,
 		/obj/item/device/floor_painter,
-		/obj/item/weapon/inflatable_dispenser/robot,
+		/obj/item/inflatable_dispenser/robot,
 		/obj/item/inducer/borg,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,
@@ -48,7 +48,7 @@
 		/datum/matter_synth/plasteel = 	10000,
 		/datum/matter_synth/wire
 	)
-	emag = /obj/item/weapon/melee/baton/robot/electrified_arm
+	emag = /obj/item/melee/baton/robot/electrified_arm
 	skills = list(
 		SKILL_ATMOS        = SKILL_PROF,
 		SKILL_ENGINES      = SKILL_PROF,
@@ -56,7 +56,7 @@
 		SKILL_ELECTRICAL   = SKILL_PROF
 	)
 
-/obj/item/weapon/robot_module/flying/repair/finalize_synths()
+/obj/item/robot_module/flying/repair/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/metal/metal =       locate() in synths
 	var/datum/matter_synth/glass/glass =       locate() in synths
@@ -87,7 +87,7 @@
 	PL.synths = list(plasteel)
 	. = ..()
 
-/obj/item/weapon/robot_module/flying/repair/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/flying/repair/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
 	if(LR)
 		LR.Charge(R, amount)

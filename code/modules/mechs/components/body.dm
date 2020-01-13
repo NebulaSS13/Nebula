@@ -4,7 +4,7 @@
 	gender = NEUTER
 
 	var/mech_health = 300
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 	var/obj/item/robot_parts/robot_component/diagnosis_unit/diagnostics
 	var/obj/item/robot_parts/robot_component/armour/exosuit/armour
 	var/obj/machinery/portable_atmospherics/canister/air_supply
@@ -85,7 +85,7 @@
 
 /obj/item/mech_component/chassis/prebuild()
 	diagnostics = new(src)
-	cell = new /obj/item/weapon/cell/exosuit(src)
+	cell = new /obj/item/cell/exosuit(src)
 	cell.charge = cell.maxcharge
 
 /obj/item/mech_component/chassis/attackby(var/obj/item/thing, var/mob/user)
@@ -94,7 +94,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] already has a diagnostic system installed."))
 			return
 		if(install_component(thing, user)) diagnostics = thing
-	else if(istype(thing, /obj/item/weapon/cell))
+	else if(istype(thing, /obj/item/cell))
 		if(cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
 			return

@@ -59,7 +59,7 @@
 	brute_mod = 1.25
 	burn_mod =  1.25
 	//mob_size = MOB_SMALL
-	holder_type = /obj/item/weapon/holder/human
+	holder_type = /obj/item/holder/human
 	blood_volume = 350
 	hunger_factor = 0.1
 	inherent_verbs = list(/mob/living/proc/hide)

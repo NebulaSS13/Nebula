@@ -22,14 +22,14 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ai" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "aj" = (
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "ak" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "al" = (
@@ -46,7 +46,7 @@
 /area/icarus/vessel)
 "ao" = (
 /obj/structure/bed/chair/comfy/black,
-/obj/item/weapon/storage/secure/briefcase,
+/obj/item/storage/secure/briefcase,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "ap" = (
@@ -69,7 +69,7 @@
 /area/icarus/vessel)
 "au" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/flame/lighter/zippo/random,
+/obj/item/flame/lighter/zippo/random,
 /obj/random/smokes,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
@@ -82,11 +82,11 @@
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "ax" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "ay" = (
-/obj/item/weapon/shreddedp,
+/obj/item/shreddedp,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "az" = (
@@ -107,12 +107,12 @@
 /area/icarus/vessel)
 "aD" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/lunchbox/mars,
+/obj/item/storage/lunchbox/mars,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "aE" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/photo_album,
+/obj/item/storage/photo_album,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "aF" = (
@@ -155,7 +155,7 @@
 /area/icarus/vessel)
 "aL" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/fancy/cigar,
+/obj/item/storage/fancy/cigar,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "aM" = (
@@ -215,7 +215,7 @@
 /area/icarus/vessel)
 "aW" = (
 /obj/structure/janitorialcart,
-/obj/item/weapon/mop,
+/obj/item/mop,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "aX" = (
@@ -364,7 +364,7 @@
 	dir = 1
 	},
 /obj/structure/table/steel,
-/obj/item/weapon/folder/white,
+/obj/item/folder/white,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bz" = (
@@ -472,7 +472,7 @@
 /area/icarus/vessel)
 "bO" = (
 /obj/structure/table/steel,
-/obj/item/weapon/folder/white,
+/obj/item/folder/white,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bP" = (
@@ -570,7 +570,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/weapon/reagent_containers/food/condiment/flour,
+/obj/item/reagent_containers/food/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ce" = (
@@ -591,14 +591,14 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ch" = (
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ci" = (
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -640,7 +640,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "cq" = (
-/obj/item/weapon/towel,
+/obj/item/towel,
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 0
@@ -673,7 +673,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/weapon/material/kitchen/rollingpin,
+/obj/item/material/kitchen/rollingpin,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cu" = (
@@ -788,7 +788,7 @@
 	dir = 4
 	},
 /obj/item/trash/plate,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cM" = (
@@ -808,7 +808,7 @@
 /area/icarus/vessel)
 "cP" = (
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/pill/dexalin,
+/obj/item/reagent_containers/pill/dexalin,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -935,12 +935,12 @@
 /area/icarus/vessel)
 "di" = (
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/hydrazine,
+/obj/item/reagent_containers/chem_disp_cartridge/hydrazine,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dj" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel,
+/obj/item/towel,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -986,7 +986,7 @@
 /area/icarus/vessel)
 "dq" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dr" = (
@@ -1090,7 +1090,7 @@
 /area/icarus/vessel)
 "dI" = (
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/food/drinks/cans/cola,
+/obj/item/reagent_containers/food/drinks/cans/cola,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dJ" = (
@@ -1140,7 +1140,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/surgicaldrill,
+/obj/item/surgicaldrill,
 /turf/simulated/floor/tiled/white,
 /area/icarus/open)
 "dR" = (
@@ -1327,7 +1327,7 @@
 /area/icarus/open)
 "ex" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/firstaid/empty,
+/obj/item/storage/firstaid/empty,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "ey" = (
@@ -1350,7 +1350,7 @@
 "eB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/scalpel,
+/obj/item/scalpel,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eC" = (
@@ -1367,7 +1367,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/bedsheet/orange,
+/obj/item/bedsheet/orange,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eE" = (
@@ -1410,7 +1410,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eK" = (
@@ -1475,7 +1475,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eS" = (
@@ -1507,7 +1507,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eV" = (
@@ -1549,7 +1549,7 @@
 "fa" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/storage/pill_bottle/antidexafen,
+/obj/item/storage/pill_bottle/antidexafen,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fb" = (
@@ -1569,7 +1569,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/storage/bag/trash,
+/obj/item/storage/bag/trash,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fd" = (
@@ -1621,7 +1621,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fi" = (
@@ -1713,7 +1713,7 @@
 /area/icarus/open)
 "fs" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "ft" = (
@@ -1757,7 +1757,7 @@
 /area/icarus/vessel)
 "fC" = (
 /obj/structure/table/steel,
-/obj/item/weapon/tank/air,
+/obj/item/tank/air,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "fD" = (
@@ -1813,7 +1813,7 @@
 /area/icarus/vessel)
 "fN" = (
 /obj/structure/table/steel,
-/obj/item/weapon/marshalling_wand,
+/obj/item/marshalling_wand,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "fO" = (
@@ -1832,7 +1832,7 @@
 /area/icarus/vessel)
 "fR" = (
 /obj/structure/table/steel,
-/obj/item/weapon/marshalling_wand,
+/obj/item/marshalling_wand,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -2568,7 +2568,7 @@
 "ie" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "if" = (
@@ -2577,7 +2577,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "ig" = (
@@ -2602,7 +2602,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "ij" = (
@@ -2641,7 +2641,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "io" = (
@@ -2670,14 +2670,14 @@
 	dir = 1;
 	pixel_y = 16
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = 0;
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "nb" = (
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = 30
 	},
 /obj/structure/hygiene/sink{
@@ -2689,7 +2689,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "ob" = (
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = -30
 	},
 /obj/structure/hygiene/sink{

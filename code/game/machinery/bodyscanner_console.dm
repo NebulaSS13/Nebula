@@ -116,7 +116,7 @@
 			to_chat(user, "\icon[src]<span class='warning'>Error: No scan stored.</span>")
 			return TOPIC_REFRESH
 		var/list/scan = data["scan"]
-		new /obj/item/weapon/paper/bodyscan(loc, "Printout error.", "Body scan report - [stored_scan_subject]", scan.Copy())
+		new /obj/item/paper/bodyscan(loc, "Printout error.", "Body scan report - [stored_scan_subject]", scan.Copy())
 		return TOPIC_REFRESH
 
 	if(href_list["push"])		
