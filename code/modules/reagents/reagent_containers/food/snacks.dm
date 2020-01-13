@@ -47,7 +47,7 @@
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		qdel(src)
 		return 0
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>\The [src] isn't open!</span>")
 		return 0
 	if(istype(M, /mob/living/carbon))
@@ -125,7 +125,7 @@
 	if(istype(W,/obj/item/storage))
 		..()// -> item/attackby()
 		return
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>\The [src] isn't open!</span>")
 		return 0
 	// Eating with forks
@@ -280,7 +280,7 @@
 /obj/item/reagent_containers/food/snacks/egg/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(istype(O,/obj/machinery/microwave))
 		return ..()
-	if(!(proximity && O.is_open_container()))
+	if(!(proximity && ATOM_IS_OPEN_CONTAINER(O)))
 		return
 	to_chat(user, "You crack \the [src] into \the [O].")
 	reagents.trans_to(O, reagents.total_volume)

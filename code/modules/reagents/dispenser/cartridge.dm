@@ -28,7 +28,7 @@
 		to_chat(user, "It is empty.")
 	else
 		to_chat(user, "It contains [reagents.total_volume] units of liquid.")
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "The cap is sealed.")
 
 /obj/item/reagent_containers/chem_disp_cartridge/verb/verb_set_label(L as text)
@@ -53,7 +53,7 @@
 
 /obj/item/reagent_containers/chem_disp_cartridge/attack_self()
 	..()
-	if (is_open_container())
+	if (ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(usr, "<span class = 'notice'>You put the cap on \the [src].</span>")
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
@@ -61,7 +61,7 @@
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/reagent_containers/chem_disp_cartridge/afterattack(obj/target, mob/user , flag)
-	if (!is_open_container() || !flag)
+	if (!ATOM_IS_OPEN_CONTAINER(src) || !flag)
 		return
 
 	else if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
@@ -78,7 +78,7 @@
 		var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
 		to_chat(user, "<span class='notice'>You fill \the [src] with [trans] units of the contents of \the [target].</span>")
 
-	else if(target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
+	else if(ATOM_IS_OPEN_CONTAINER(target) && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
 
 		if(!reagents.total_volume)
 			to_chat(user, "<span class='warning'>\The [src] is empty.</span>")

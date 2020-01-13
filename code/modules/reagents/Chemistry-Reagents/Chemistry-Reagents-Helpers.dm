@@ -8,7 +8,7 @@
 	return TRUE
 
 /obj/can_be_injected_by(var/atom/injector)
-	return is_open_container() && ..()
+	. = ATOM_IS_OPEN_CONTAINER(src) && ..()
 
 /mob/living/can_be_injected_by(var/atom/injector)
 	return ..() && (can_inject(null, 0, BP_CHEST) || can_inject(null, 0, BP_GROIN))

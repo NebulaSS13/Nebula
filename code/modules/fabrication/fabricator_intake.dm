@@ -4,7 +4,7 @@
 #define SUBSTANCE_TAKEN_ALL   2
 
 /obj/machinery/fabricator/proc/take_reagents(var/obj/item/thing, var/mob/user, var/destructive = FALSE)
-	if(!thing.reagents || (!destructive && !thing.is_open_container()))
+	if(!thing.reagents || (!destructive && !ATOM_IS_OPEN_CONTAINER(thing)))
 		return SUBSTANCE_TAKEN_NONE
 	for(var/datum/reagent/R in thing.reagents.reagent_list)
 		if(!base_storage_capacity[R.type])

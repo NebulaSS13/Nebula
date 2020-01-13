@@ -79,7 +79,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	var/obj/item/reagent_containers/glass/G = O
-	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
+	if(stat == CONSCIOUS && istype(G) && ATOM_IS_OPEN_CONTAINER(G))
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
 		var/transfered = udder.trans_type_to(G, /datum/reagent/drink/milk, rand(5,10))
 		if(G.reagents.total_volume >= G.volume)
@@ -124,7 +124,7 @@
 
 /mob/living/simple_animal/cow/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	var/obj/item/reagent_containers/glass/G = O
-	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
+	if(stat == CONSCIOUS && istype(G) && ATOM_IS_OPEN_CONTAINER(G))
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
 		var/transfered = udder.trans_type_to(G, /datum/reagent/drink/milk, rand(5,10))
 		if(G.reagents.total_volume >= G.volume)

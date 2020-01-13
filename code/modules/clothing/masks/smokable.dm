@@ -320,7 +320,7 @@
 	if(!proximity)
 		return
 	if(istype(glass)) //you can dip cigarettes into beakers
-		if(!glass.is_open_container())
+		if(!ATOM_IS_OPEN_CONTAINER(glass))
 			to_chat(user, "<span class='notice'>You need to take the lid off first.</span>")
 			return
 		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)

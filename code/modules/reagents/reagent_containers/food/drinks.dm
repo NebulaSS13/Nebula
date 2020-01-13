@@ -18,7 +18,7 @@
 	return
 
 /obj/item/reagent_containers/food/drinks/attack_self(mob/user as mob)
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		open(user)
 
 /obj/item/reagent_containers/food/drinks/proc/open(mob/user)
@@ -45,19 +45,19 @@
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_feed_mob(var/mob/user, var/mob/target)
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_pour_into(var/mob/user, var/atom/target)
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
 		return 1
 	return ..()

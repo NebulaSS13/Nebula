@@ -97,7 +97,7 @@
 			usermessage = "You load \the [W] into \the [src] as you remove the old one."
 		else
 			usermessage = "You load \the [W] into \the [src]."
-		if(W.is_open_container())
+		if(ATOM_IS_OPEN_CONTAINER(W))
 			W.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 			W.update_icon()
 		loaded_vial = W

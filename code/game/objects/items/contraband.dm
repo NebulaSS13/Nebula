@@ -32,7 +32,7 @@
 
 /obj/item/reagent_containers/glass/beaker/vial/random/New()
 	..()
-	if(is_open_container())
+	if(ATOM_IS_OPEN_CONTAINER(src))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 
 	var/list/picked_reagents = pickweight(random_reagent_list)

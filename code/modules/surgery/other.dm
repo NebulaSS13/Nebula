@@ -214,7 +214,7 @@
 	affected.disinfect()
 
 /decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/reagent_containers/container)
-	if(istype(container) && container.is_open_container())
+	if(istype(container) && ATOM_IS_OPEN_CONTAINER(container))
 		if(container.reagents.has_reagent(/datum/reagent/sterilizine))
 			return TRUE
 		else

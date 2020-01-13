@@ -411,7 +411,7 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O, var/mob/user)
 
-	if (O.is_open_container())
+	if (ATOM_IS_OPEN_CONTAINER(O))
 		return 0
 
 	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)

@@ -178,11 +178,11 @@
 		return 0
 
 	// Ensure we don't splash beakers and similar containers.
-	if(!target.is_open_container() && istype(target, /obj/item/reagent_containers))
+	if(!ATOM_IS_OPEN_CONTAINER(target) && istype(target, /obj/item/reagent_containers))
 		to_chat(user, "<span class='notice'>\The [target] is closed.</span>")
 		return 1
 	// Otherwise don't care about splashing.
-	else if(!target.is_open_container())
+	else if(!ATOM_IS_OPEN_CONTAINER(target))
 		return 0
 
 	if(!reagents || !reagents.total_volume)
