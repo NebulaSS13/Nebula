@@ -102,12 +102,6 @@
 /atom/proc/Bumped(AM as mob|obj)
 	return
 
-// Convenience proc to see if a container is open for chemistry handling
-// returns true if open
-// false if closed
-/atom/proc/is_open_container()
-	return atom_flags & ATOM_FLAG_OPEN_CONTAINER
-
 /*//Convenience proc to see whether a container can be accessed in a certain way.
 
 	proc/can_subract_container()

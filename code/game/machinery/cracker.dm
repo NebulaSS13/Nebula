@@ -32,7 +32,7 @@
 
 /obj/machinery/portable_atmospherics/cracker/attackby(var/obj/item/thing, var/mob/user)
 	// remove deuterium as a reagent
-	if(thing.is_open_container() && thing.reagents)
+	if(ATOM_IS_OPEN_CONTAINER(thing) && thing.reagents)
 		if(!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= 0)
 			to_chat(user, SPAN_WARNING("There is no deuterium stored in \the [src]."))
 			return

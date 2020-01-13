@@ -52,3 +52,5 @@
 
 #define HANDLE_REACTIONS(_reagents)  SSchemistry.active_holders[_reagents] = TRUE
 #define UNQUEUE_REACTIONS(_reagents) SSchemistry.active_holders -= _reagents
+
+#define REAGENT_LIST(R) (R.reagents ? R.reagents.get_reagents() : "No reagent holder")

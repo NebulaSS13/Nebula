@@ -94,7 +94,7 @@
 		return 1
 	if(component_attackby(O, user))
 		return TRUE
-	if(O.is_open_container())
+	if(ATOM_IS_OPEN_CONTAINER(O))
 		return 1
 	if(panel_open)
 		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")

@@ -105,7 +105,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	if(!linked_console)
 		to_chat(user, "\The [src] must be linked to an R&D console first.")
 		return 1
-	if(O.is_open_container())
+	if(ATOM_IS_OPEN_CONTAINER(O))
 		return 0
 	if(is_robot_module(O))
 		return 0

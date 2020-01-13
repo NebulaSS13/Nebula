@@ -21,7 +21,7 @@
 				to_chat(user, "<span class='notice'>[target] is full.</span>")
 				return
 
-			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
+			if(!ATOM_IS_OPEN_CONTAINER(target) && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
 				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 
@@ -57,7 +57,7 @@
 						return
 
 				var/mob/living/M = target
-				var/contained = reagentlist()
+				var/contained = REAGENT_LIST(src)
 				admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
 
 				var/spill_amt = M.incapacitated()? 0 : 30
@@ -74,7 +74,7 @@
 
 		else // Taking from something
 
-			if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers))
+			if(!ATOM_IS_OPEN_CONTAINER(target) && !istype(target,/obj/structure/reagent_dispensers))
 				to_chat(user, "<span class='notice'>You cannot directly remove reagents from [target].</span>")
 				return
 

@@ -53,12 +53,12 @@
 		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
 	else
 		to_chat(user, "<span class='notice'>It is empty.</span>")
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>The airtight lid seals it completely.</span>")
 
 /obj/item/reagent_containers/glass/attack_self()
 	..()
-	if(is_open_container())
+	if(ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
@@ -74,7 +74,7 @@
 	return 0
 
 /obj/item/reagent_containers/glass/standard_feed_mob(var/mob/user, var/mob/target)
-	if(!is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(src))
 		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
 		return 1
 	if(user.a_intent == I_HURT)
@@ -88,7 +88,7 @@
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
 
 /obj/item/reagent_containers/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
-	if(!is_open_container() || !proximity) //Is the container open & are they next to whatever they're clicking?
+	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity) //Is the container open & are they next to whatever they're clicking?
 		return 1 //If not, do nothing.
 	for(var/type in can_be_placed_into) //Is it something it can be placed into?
 		if(istype(target, type))
@@ -153,7 +153,7 @@
 			filling.color = reagents.get_color()
 			overlays += filling
 
-		if (!is_open_container())
+		if (!ATOM_IS_OPEN_CONTAINER(src))
 			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 			overlays += lid
 
@@ -280,7 +280,7 @@
 
 /obj/item/reagent_containers/glass/bucket/on_update_icon()
 	overlays.Cut()
-	if (!is_open_container())
+	if (!ATOM_IS_OPEN_CONTAINER(src))
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 		overlays += lid
 	else if(reagents.total_volume && round((reagents.total_volume / volume) * 100) > 80)

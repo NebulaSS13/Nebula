@@ -196,7 +196,7 @@
 			addtimer(CALLBACK(src, .proc/inject_after, weakref(L)), injection_status * 3 SECONDS)
 			return
 		else
-			if(!AM.is_open_container())
+			if(!ATOM_IS_OPEN_CONTAINER(AM))
 				activate_pin(3)
 				return
 
@@ -229,7 +229,7 @@
 				activate_pin(3)
 				return
 
-			if(!AM.is_open_container())
+			if(!ATOM_IS_OPEN_CONTAINER(AM))
 				activate_pin(3)
 				return
 			tramount = min(tramount, AM.reagents.total_volume)
@@ -284,7 +284,7 @@
 	if(!source.reagents)
 		return
 
-	if(!source.is_open_container())
+	if(!ATOM_IS_OPEN_CONTAINER(source))
 		return
 
 	source.reagents.trans_to(target, transfer_amount)
@@ -474,7 +474,7 @@
 	if(!source.reagents || !target.reagents)
 		return
 
-	if(!source.is_open_container() || istype(source, /mob))
+	if(!ATOM_IS_OPEN_CONTAINER(source) || istype(source, /mob))
 		return
 
 	if(target.reagents.maximum_volume - target.reagents.total_volume <= 0)

@@ -167,7 +167,7 @@
 	if(!proximity)
 		return
 
-	if(!target.is_open_container() || !target.reagents)
+	if(!ATOM_IS_OPEN_CONTAINER(target) || !target.reagents)
 		return
 
 	if(!reagent_volumes[reagent_ids[mode]])

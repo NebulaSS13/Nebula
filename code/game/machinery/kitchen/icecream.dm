@@ -116,7 +116,7 @@
 		else
 			to_chat(user, "<span class='notice'>[O] already has icecream in it.</span>")
 		return 1
-	else if(O.is_open_container())
+	else if(ATOM_IS_OPEN_CONTAINER(O))
 		return
 	else
 		..()

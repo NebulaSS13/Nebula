@@ -15,9 +15,13 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ATOM_FLAG_CLIMBABLE              0x0002 // This object can be climbed on
 #define ATOM_FLAG_NO_BLOOD               0x0004 // Used for items if they don't want to get a blood overlay.
 #define ATOM_FLAG_NO_REACT               0x0008 // Reagents don't react inside this container.
-#define ATOM_FLAG_OPEN_CONTAINER         0x0010 // Is an open container for chemistry purposes.
-#define ATOM_FLAG_INITIALIZED            0x0020 // Has this atom been initialized
-#define ATOM_FLAG_NO_TEMP_CHANGE         0x0040 // Reagents do not cool or heat to ambient temperature in this container.
+#define ATOM_FLAG_CONTAINER              0x0010 // Is a container for chemistry purposes.
+#define ATOM_FLAG_OPEN_CONTAINER         0x0020 // Is an open container for chemistry purposes.
+#define ATOM_FLAG_INITIALIZED            0x0040 // Has this atom been initialized
+#define ATOM_FLAG_NO_TEMP_CHANGE         0x0080 // Reagents do not cool or heat to ambient temperature in this container.
+
+#define ATOM_IS_CONTAINER(A) (A.atom_flags & ATOM_FLAG_CONTAINER)
+#define ATOM_IS_OPEN_CONTAINER(A) (A.atom_flags & ATOM_FLAG_OPEN_CONTAINER)
 
 #define MOVABLE_FLAG_PROXMOVE            0x0001 // Does this object require proximity checking in Enter()?
 #define MOVABLE_FLAG_Z_INTERACT          0x0002 // Should attackby and attack_hand be relayed through ladders and open spaces?
