@@ -1,6 +1,6 @@
 /obj/machinery/recharge_station
-	name = "cyborg recharging station"
-	desc = "A heavy duty rapid charging system, designed to quickly recharge cyborg power reserves."
+	name = "robot recharging station"
+	desc = "A heavy duty rapid charging system, designed to quickly recharge autonomous system power reserves."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "borgcharger0"
 	density = 1
@@ -26,6 +26,17 @@
 /obj/machinery/recharge_station/Initialize()
 	. = ..()
 	update_icon()
+
+/obj/machinery/recharge_station/MouseDrop_T(var/mob/living/target, var/mob/user)
+	if(!CanMouseDrop(target, user) || !istype(target))
+		return FALSE
+	user.visible_message(SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."), SPAN_NOTICE("You start placing \the [target] into \the [src]."))
+	if(!do_after(user, 30, src))
+		return
+	if(target.buckled)
+		to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
+		return FALSE	
+	go_in(target)
 
 /obj/machinery/recharge_station/Process()
 	if(stat & (BROKEN | NOPOWER))
@@ -163,7 +174,6 @@
 	go_in(R)
 
 /obj/machinery/recharge_station/proc/go_in(var/mob/M)
-
 
 	if(occupant)
 		return
