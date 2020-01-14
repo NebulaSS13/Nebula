@@ -12,7 +12,15 @@
 			var/list/material_info = list(mat.mechanics_text)
 
 			material_info += "Its melting point is [mat.melting_point] K."
-	
+
+			if(mat.ore_compresses_to && mat.ore_compresses_to != mat.name)
+				var/material/M = SSmaterials.get_material_by_name(mat.ore_compresses_to)
+				material_info += "It can be compressed into [M.display_name]."
+
+			if(mat.ore_smelts_to && mat.ore_smelts_to != mat.name)
+				var/material/M = SSmaterials.get_material_by_name(mat.ore_smelts_to)
+				material_info += "It can be smelted into [M.display_name]."
+
 			if(mat.brute_armor < 2)
 				material_info += "It is weak to physical impacts."
 			else if(mat.brute_armor > 2)
