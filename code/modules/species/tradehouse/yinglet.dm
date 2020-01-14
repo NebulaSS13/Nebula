@@ -149,6 +149,7 @@
 	description = "Although similar to the other clam-loving rat-birds of the yinglet species, the southern \
 	yinglets are more parochial, tribal and generally less developed. Nobody is quite clear on which south \
 	they are from."
+	autohiss_basic_map = list("th" = list("d"))
 	available_cultural_info = list(
 		TAG_CULTURE =   list(CULTURE_SCAV_TRIBE, CULTURE_OTHER),
 		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
