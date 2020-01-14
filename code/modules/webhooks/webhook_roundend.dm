@@ -17,7 +17,7 @@
 				s_was = "were"
 				s_survivor = "survivors"
 
-			if(!evacuation_controller.emergency_evacuation)
+			if(!SSevac.evacuation_controller.emergency_evacuation)
 				s_escaped = "transferred"
 
 			desc += "There [s_was] **[data["survivors"]] [s_survivor] ([data["escaped"]] [s_escaped])** and **[data["ghosts"]] ghosts.**"

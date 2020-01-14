@@ -154,8 +154,8 @@
 
 // this function displays the shuttles ETA in the status panel if the shuttle has been called
 /mob/living/silicon/proc/show_emergency_shuttle_eta()
-	if(evacuation_controller)
-		var/eta_status = evacuation_controller.get_status_panel_eta()
+	if(SSevac.evacuation_controller)
+		var/eta_status = SSevac.evacuation_controller.get_status_panel_eta()
 		if(eta_status)
 			stat(null, eta_status)
 

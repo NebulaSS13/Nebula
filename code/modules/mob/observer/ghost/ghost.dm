@@ -191,8 +191,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/Stat()
 	. = ..()
 	if(statpanel("Status"))
-		if(evacuation_controller)
-			var/eta_status = evacuation_controller.get_status_panel_eta()
+		if(SSevac.evacuation_controller)
+			var/eta_status = SSevac.evacuation_controller.get_status_panel_eta()
 			if(eta_status)
 				stat(null, eta_status)
 

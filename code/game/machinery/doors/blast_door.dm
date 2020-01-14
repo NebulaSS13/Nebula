@@ -268,7 +268,7 @@
 	name = "Escape Pod release Door"
 
 /obj/machinery/door/blast/regular/escape_pod/Process()	
-	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)		
+	if(SSevac.evacuation_controller.emergency_evacuation && SSevac.evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)		
 		src.force_open()
 	. = ..()
 

@@ -5,8 +5,6 @@
 #define EVAC_COOLDOWN   4
 #define EVAC_COMPLETE   5
 
-var/datum/evacuation_controller/evacuation_controller
-
 /datum/evacuation_controller
 
 	var/name = "generic evac controller"
