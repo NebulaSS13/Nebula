@@ -177,17 +177,6 @@
 		return list()
 	return ..()
 
-// Request updates for air vents and scrubbers which appear to have been added.
-/obj/machinery/alarm/power_change()
-	. = ..()
-	if(. && !(stat & NOPOWER) && alarm_area)
-		for(var/id_tag in alarm_area.air_vent_names)
-			if(!alarm_area.air_vent_info[id_tag])
-				send_signal(id_tag, list("status" = TRUE))
-		for(var/id_tag in alarm_area.air_scrub_names)
-			if(!alarm_area.air_scrub_info[id_tag])
-				send_signal(id_tag, list("status" = TRUE))
-
 /obj/machinery/alarm/Process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 		return
@@ -382,8 +371,6 @@
 	set_light(0.25, 0.1, 1, 2, new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
-	if(stat & (NOPOWER|BROKEN))
-		return
 	if (alarm_area.master_air_alarm != src)
 		if (master_is_operating())
 			return
@@ -457,25 +444,25 @@
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
 			for(var/device_id in alarm_area.air_scrub_names)
-				send_signal(device_id, list("power"= 1, "co2_scrub"= 1, "set_scrubbing"= SCRUBBER_SCRUB, "panic_siphon"= 0) )
+				send_signal(device_id, list("set_power"= 1, "set_scrub_gas" = list(GAS_CO2 = 1), "set_scrubbing"= SCRUBBER_SCRUB, "panic_siphon"= 0) )
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("set_power"= 1, "set_checks"= "default", "set_external_pressure"= "default") )
 
 		if(AALARM_MODE_PANIC, AALARM_MODE_CYCLE)
 			for(var/device_id in alarm_area.air_scrub_names)
-				send_signal(device_id, list("power"= 1, "panic_siphon"= 1) )
+				send_signal(device_id, list("set_power"= 1, "panic_siphon"= 1) )
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("set_power"= 0) )
 
 		if(AALARM_MODE_REPLACEMENT)
 			for(var/device_id in alarm_area.air_scrub_names)
-				send_signal(device_id, list("power"= 1, "panic_siphon"= 1) )
+				send_signal(device_id, list("set_power"= 1, "panic_siphon"= 1) )
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("set_power"= 1, "set_checks"= "default", "set_external_pressure"= "default") )
 
 		if(AALARM_MODE_FILL)
 			for(var/device_id in alarm_area.air_scrub_names)
-				send_signal(device_id, list("power"= 0) )
+				send_signal(device_id, list("set_power"= 0) )
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("set_power"= 1, "set_checks"= "default", "set_external_pressure"= "default") )
 
