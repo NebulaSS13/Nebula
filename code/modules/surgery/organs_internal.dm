@@ -294,7 +294,7 @@
 /decl/surgery_step/internal/attach_organ
 	name = "Attach internal organ"
 	allowed_tools = list(
-		/obj/item/FixOVein = 100,
+		/obj/item/sutures = 100,
 		/obj/item/stack/cable_coil = 75,
 		/obj/item/tape_roll = 50
 	)
@@ -364,7 +364,7 @@
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
-		I.status &= ~ORGAN_CUT_AWAY //apply fixovein
+		I.status &= ~ORGAN_CUT_AWAY //apply sutures
 		affected.implants -= I
 		I.replaced(target, affected)
 

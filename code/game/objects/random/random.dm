@@ -995,7 +995,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/machinery/artifact = 1,
 				/obj/item/multitool/hacktool = 2,
 				/obj/item/surgicaldrill = 7,
-				/obj/item/FixOVein = 7,
+				/obj/item/sutures = 7,
 				/obj/item/retractor = 7,
 				/obj/item/hemostat = 7,
 				/obj/item/cautery = 7,

@@ -114,7 +114,6 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			H.bloody_body(target,0)
 	if(shock_level)
 		target.shock_stage = max(target.shock_stage, shock_level)
-	return
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
 /decl/surgery_step/proc/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

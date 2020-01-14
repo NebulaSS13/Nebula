@@ -214,4 +214,4 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	allowed = list(/obj/item/stack/medical, /obj/item/chems/dropper, /obj/item/chems/hypospray, /obj/item/chems/syringe, \
 	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency,/obj/item/scalpel,/obj/item/retractor,/obj/item/hemostat, \
-	/obj/item/cautery,/obj/item/bonegel,/obj/item/FixOVein)
+	/obj/item/cautery,/obj/item/bonegel,/obj/item/sutures)

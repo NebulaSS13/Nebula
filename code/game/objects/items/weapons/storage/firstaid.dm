@@ -147,7 +147,7 @@
 		/obj/item/scalpel,
 		/obj/item/surgicaldrill,
 		/obj/item/bonegel,
-		/obj/item/FixOVein,
+		/obj/item/sutures,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/nanopaste
 		)
@@ -161,7 +161,7 @@
 		/obj/item/scalpel,
 		/obj/item/surgicaldrill,
 		/obj/item/bonegel,
-		/obj/item/FixOVein,
+		/obj/item/sutures,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		)
 
