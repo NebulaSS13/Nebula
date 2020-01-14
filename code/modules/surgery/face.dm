@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/fix_face
 	name = "Repair face"
+	description = "This procedure is used to repair disfiguring facial damage."
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/stack/cable_coil = 75,

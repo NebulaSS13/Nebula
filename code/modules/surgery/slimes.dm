@@ -7,6 +7,7 @@
 //	generic slime surgery step datum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime
+	hidden_from_codex = TRUE
 
 /decl/surgery_step/slime/is_valid_target(mob/living/carbon/slime/target)
 	return isslime(target)

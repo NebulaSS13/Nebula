@@ -91,7 +91,7 @@
 	valid_colors = list("#0f0f2a", "#2a0f0f", "#0f2a0f", COLOR_GRAY20, COLOR_DARK_GUNMETAL)
 
 /obj/item/material/knife/folding/combat //master obj
-	name = "the concept of a fighting knife in which the blade can be stowed in its own handle"
+	name = "switchblade"
 	desc = "This is a master item - berate the admin or mapper who spawned this"
 	max_force = 15
 	material_force_multiplier = 0.25

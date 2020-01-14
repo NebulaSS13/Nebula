@@ -14,6 +14,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/fix_organ
 	name = "Repair internal organ"
+	description = "This procedure is used to repair damage to the internal organs of a patient."
 	allowed_tools = list(
 		/obj/item/stack/medical/advanced/bruise_pack = 100,
 		/obj/item/stack/medical/bruise_pack = 40,
@@ -86,6 +87,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/detatch_organ
 	name = "Detach organ"
+	description = "This procedure detaches an internal organ for removal."
 	allowed_tools = list(
 		/obj/item/scalpel = 100,
 		/obj/item/material/shard = 50
@@ -135,6 +137,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/remove_organ
 	name = "Remove internal organ"
+	description = "This procedure removes a detached internal organ."
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/wirecutters = 75,
@@ -214,6 +217,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/replace_organ
 	name = "Replace internal organ"
+	description = "This procedure replaces a removed internal organ."
 	allowed_tools = list(
 		/obj/item/organ/internal = 100
 	)
@@ -293,6 +297,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/attach_organ
 	name = "Attach internal organ"
+	description = "This procedure reattaches a replaced internal organ."
 	allowed_tools = list(
 		/obj/item/sutures = 100,
 		/obj/item/stack/cable_coil = 75,
@@ -379,6 +384,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/internal/treat_necrosis
 	name = "Treat necrosis"
+	description = "This procedure treats necrosis of an organ by rejuvenating the necrotic flesh."
 	allowed_tools = list(
 		/obj/item/chems/dropper = 100,
 		/obj/item/chems/glass/bottle = 75,

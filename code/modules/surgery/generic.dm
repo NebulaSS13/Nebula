@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/cut_with_laser
 	name = "Make laser incision"
+	description = "This procedure uses a laser to quickly and cleanly make an incision."
 	allowed_tools = list(
 		/obj/item/scalpel/laser3 = 95,
 		/obj/item/scalpel/laser2 = 85,
@@ -58,6 +59,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/managed
 	name = "Make managed incision"
+	description = "This procedure uses a laser scalpel to construct a pre-clamped incision into a patient's body."
 	allowed_tools = list(
 		/obj/item/scalpel/manager = 100
 	)
@@ -90,6 +92,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/cut_open
 	name = "Make incision"
+	description = "This procedure cuts a small wound that allows access to deeper tissue."
 	allowed_tools = list(
 		/obj/item/scalpel = 100,
 		/obj/item/material/knife = 75,
@@ -142,6 +145,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/clamp_bleeders
 	name = "Clamp bleeders"
+	description = "This procedure clamps off veins within an incision, preventing it from bleeding excessively."
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/stack/cable_coil = 75,
@@ -183,6 +187,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/retract_skin
 	name = "Widen incision"
+	description = "This procedure is used to widen an incision when it is too small to access the interior."
 	allowed_tools = list(
 		/obj/item/retractor = 100,
 		/obj/item/crowbar = 75,

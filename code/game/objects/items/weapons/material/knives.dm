@@ -1,6 +1,6 @@
 //knives for stabbing and slashing and so on and so forth
 /obj/item/material/knife //master obj
-	name = "the concept of a knife"
+	name = "knife"
 	desc = "You call that a knife? This is a master item - berate the admin or mapper who spawned this"
 	icon = 'icons/obj/knife.dmi'
 	icon_state = "knife"

@@ -13,6 +13,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 /* SURGERY STEPS */
 /decl/surgery_step
 	var/name
+	var/description = "A mysterious surgical procedure."
 	var/list/allowed_tools               // type path referencing tools that can be used for this step, and how well are they suited for it
 	var/list/allowed_species             // type paths referencing races that this step applies to.
 	var/list/disallowed_species          // type paths referencing races that this step applies to.
@@ -24,6 +25,8 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	var/delicate = 0                     // if this step NEEDS stable optable or can be done on any valid surface with no penalty
 	var/surgery_candidate_flags = 0      // Various bitflags for requirements of the surgery.
 	var/strict_access_requirement = TRUE // Whether or not this surgery will be fuzzy on size requirements.
+	var/hidden_from_codex                // Is this surgery a secret?
+	var/list/additional_codex_lines
 
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
