@@ -26,15 +26,14 @@
 	name = MATERIAL_GRAPHITE
 	ore_compresses_to = MATERIAL_GRAPHITE
 	icon_colour = "#444444"
-	ore_smelts_to = MATERIAL_PLASTIC
 	ore_name = "graphite"
-	ore_smelts_to = MATERIAL_PLASTIC
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	chem_products = list(
 		/datum/reagent/carbon = 15,
+		/datum/reagent/toxin/plasticide = 5,
 		/datum/reagent/acetone = 5
 		)
 	sale_price = 1
