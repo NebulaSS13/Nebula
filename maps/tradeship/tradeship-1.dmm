@@ -1295,7 +1295,7 @@
 "dc" = (
 /obj/item/caution,
 /obj/item/caution,
-/obj/item/FixOVein,
+/obj/item/sutures,
 /obj/structure/closet/crate,
 /obj/item/mop,
 /obj/item/radio,

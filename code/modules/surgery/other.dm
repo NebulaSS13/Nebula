@@ -9,7 +9,7 @@
 /decl/surgery_step/fix_tendon
 	name = "Repair tendon"
 	allowed_tools = list(
-		/obj/item/FixOVein = 100,
+		/obj/item/sutures = 100,
 		/obj/item/stack/cable_coil = 75,
 		/obj/item/tape_roll = 50
 	)
@@ -52,7 +52,7 @@
 /decl/surgery_step/fix_vein
 	name = "Repair arterial bleeding"
 	allowed_tools = list(
-		/obj/item/FixOVein = 100,
+		/obj/item/sutures = 100,
 		/obj/item/stack/cable_coil = 75,
 		/obj/item/tape_roll = 50
 	)

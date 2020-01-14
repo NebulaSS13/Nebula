@@ -1875,7 +1875,7 @@
 /obj/structure/table/standard,
 /obj/item/bonesetter,
 /obj/item/bonegel,
-/obj/item/FixOVein,
+/obj/item/sutures,
 /obj/item/chems/syringe/antiviral,
 /obj/item/chems/syringe/antiviral,
 /turf/simulated/floor/shuttle/white,

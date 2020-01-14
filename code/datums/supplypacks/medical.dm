@@ -295,7 +295,7 @@
 					/obj/item/surgicaldrill,
 					/obj/item/clothing/mask/breath/medical,
 					/obj/item/tank/anesthetic,
-					/obj/item/FixOVein,
+					/obj/item/sutures,
 					/obj/item/hemostat,
 					/obj/item/scalpel,
 					/obj/item/bonegel,
