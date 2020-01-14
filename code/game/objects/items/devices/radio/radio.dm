@@ -606,16 +606,14 @@
 /obj/item/radio/borg/syndicate
 	keyslot = /obj/item/encryptionkey/syndicate
 
-/obj/item/radio/borg/New(var/mob/living/silicon/robot/loc)
-	if(!istype(loc))
+/obj/item/radio/borg/Initialize()
+	. = ..()
+	if(!isrobot(loc))
+		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid spawn location: [log_info_line(loc)]")
-	..()
 	if(keyslot)
 		keyslot = new keyslot(src)
 	myborg = loc
-
-/obj/item/radio/borg/Initialize()
-	. = ..()
 	recalculateChannels()
 
 /obj/item/radio/borg/Destroy()
@@ -805,8 +803,8 @@
 /obj/item/radio/phone/medbay
 	frequency = MED_I_FREQ
 
-/obj/item/radio/phone/medbay/New()
-	..()
+/obj/item/radio/phone/medbay/Initialize()
+	. = ..()
 	internal_channels = GLOB.default_medbay_channels.Copy()
 
 /obj/item/radio/CouldUseTopic(var/mob/user)

@@ -40,8 +40,8 @@
 		/obj/machinery/radiocarbon_spectrometer
 	)
 
-/obj/item/chems/glass/New()
-	..()
+/obj/item/chems/glass/Initialize()
+	. = ..()
 	base_name = name
 
 /obj/item/chems/glass/examine(mob/user, distance)
@@ -137,10 +137,11 @@
 	update_icon()
 
 /obj/item/chems/glass/beaker/on_update_icon()
-	
-	var/new_overlays
-	if(reagents && reagents.total_volume)
+	overlays.Cut()
+
+	if(reagents.total_volume)
 		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+
 		var/percent = round((reagents.total_volume / volume) * 100)
 		switch(percent)
 			if(0 to 9)		filling.icon_state = "[icon_state]-10"
@@ -150,14 +151,13 @@
 			if(75 to 79)	filling.icon_state = "[icon_state]75"
 			if(80 to 90)	filling.icon_state = "[icon_state]80"
 			if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
+
 		filling.color = reagents.get_color()
-		LAZYADD(new_overlays, filling)
+		overlays += filling
 
 	if (!ATOM_IS_OPEN_CONTAINER(src))
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
-		LAZYADD(new_overlays, lid)
-
-	overlays = new_overlays
+		overlays += lid
 
 /obj/item/chems/glass/beaker/large
 	name = "large beaker"
@@ -235,17 +235,15 @@
 	matter = list(MATERIAL_GLASS = 5000, MATERIAL_PLASTIC = 2500)
 	volume = 120
 
-/obj/item/chems/glass/beaker/cryoxadone
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/cryoxadone, 30)
-		update_icon()
+/obj/item/chems/glass/beaker/cryoxadone/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/cryoxadone, 30)
+	update_icon()
 
-/obj/item/chems/glass/beaker/sulphuric
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/acid, 60)
-		update_icon()
+/obj/item/chems/glass/beaker/sulphuric/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/acid, 60)
+	update_icon()
 
 /obj/item/chems/glass/bucket
 	name = "bucket"

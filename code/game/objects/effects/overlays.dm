@@ -8,9 +8,10 @@
 	icon='icons/effects/beam.dmi'
 	icon_state= "b_beam"
 	var/tmp/atom/BeamSource
-	New()
-		..()
-		spawn(10) qdel(src)
+
+/obj/effect/overlay/beam/Initialize()
+	. = ..()
+	QDEL_IN(src, 1 SECOND)
 
 /obj/effect/overlay/palmtree_r
 	name = "Palm tree"
@@ -48,7 +49,7 @@
 	layer = ABOVE_TILE_LAYER
 	mouse_opacity = 0
 
-/obj/effect/overlay/wallrot/New()
-	..()
+/obj/effect/overlay/wallrot/Initialize()
+	. = ..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)

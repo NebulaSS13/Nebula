@@ -17,8 +17,8 @@
 	if(istype(rig))
 		rig.forced_move(direction, user)
 
-/obj/item/paicard/New()
-	..()
+/obj/item/paicard/Initialize()
+	. = ..()
 	overlays += "pai-off"
 
 /obj/item/paicard/Destroy()

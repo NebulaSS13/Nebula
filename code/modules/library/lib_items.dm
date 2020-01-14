@@ -97,39 +97,38 @@
 /obj/structure/bookcase/manuals/medical
 	name = "Medical Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/medical_cloning(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/chemistry_recipes(src)
-		update_icon()
+/obj/structure/bookcase/manuals/medical/Initialize()
+	. = ..()
+	new /obj/item/book/manual/medical_cloning(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/chemistry_recipes(src)
+	update_icon()
 
 
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/engineering_construction(src)
-		new /obj/item/book/manual/engineering_particle_accelerator(src)
-		new /obj/item/book/manual/engineering_hacking(src)
-		new /obj/item/book/manual/engineering_guide(src)
-		new /obj/item/book/manual/atmospipes(src)
-		new /obj/item/book/manual/engineering_singularity_safety(src)
-		new /obj/item/book/manual/evaguide(src)
-		new /obj/item/book/manual/rust_engine(src)
-		update_icon()
+/obj/structure/bookcase/manuals/engineering/Initialize()
+	. = ..()
+	new /obj/item/book/manual/engineering_construction(src)
+	new /obj/item/book/manual/engineering_particle_accelerator(src)
+	new /obj/item/book/manual/engineering_hacking(src)
+	new /obj/item/book/manual/engineering_guide(src)
+	new /obj/item/book/manual/atmospipes(src)
+	new /obj/item/book/manual/engineering_singularity_safety(src)
+	new /obj/item/book/manual/evaguide(src)
+	new /obj/item/book/manual/rust_engine(src)
+	update_icon()
 
 /obj/structure/bookcase/manuals/research_and_development
 	name = "R&D Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/research_and_development(src)
-		update_icon()
-
+/obj/structure/bookcase/manuals/research_and_development/Initialize()
+	. = ..()
+	new /obj/item/book/manual/research_and_development(src)
+	update_icon()
 
 /*
  * Book
@@ -236,8 +235,8 @@
 	unique = 1   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
 	var/url // Using full url or just tittle, example - Standard_Operating_Procedure (https://wiki.baystation12.net/index.php?title=Standard_Operating_Procedure)
 
-/obj/item/book/manual/New()
-	..()
+/obj/item/book/manual/Initialize()
+	. = ..()
 	if(url)		// URL provided for this manual
 		// If we haven't wikiurl or it included in url - just use url
 		if(config.wikiurl && !findtextEx(url, config.wikiurl, 1, length(config.wikiurl)+1))

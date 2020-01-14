@@ -120,11 +120,11 @@
 	report_danger_level = 0
 	breach_detection = 0
 
-/obj/machinery/alarm/server/New()
-	..()
+/obj/machinery/alarm/server/Initialize()
 	req_access = list(access_rd, access_atmospherics, access_engine_equip)
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+30, T0C+40) // K
 	target_temperature = T0C+10
+	. = ..()
 
 /obj/machinery/alarm/Destroy()
 	unregister_radio(src, frequency)
@@ -133,11 +133,8 @@
 		elect_master(exclude_self = TRUE)
 	return ..()
 
-/obj/machinery/alarm/New(var/loc, var/dir, atom/frame)
-	..(loc)
-
-	if(dir)
-		src.set_dir(dir)
+/obj/machinery/alarm/Initialize(mapload, var/dir, atom/frame)
+	. = ..(mapload, dir)
 
 	if(istype(frame))
 		buildstage = 0
@@ -147,8 +144,6 @@
 		update_icon()
 		frame.transfer_fingerprints_to(src)
 
-/obj/machinery/alarm/Initialize()
-	. = ..()
 	alarm_area = get_area(src)
 	area_uid = alarm_area.uid
 	if (name == "alarm")
@@ -913,10 +908,6 @@ FIRE ALARM
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
-/obj/machinery/firealarm/Initialize()
-	. = ..()
-	update_icon()
-
 /obj/machinery/firealarm/proc/get_cached_overlay(state)
 	if(!LAZYACCESS(overlays_cache, state))
 		LAZYSET(overlays_cache, state, image(icon, state))
@@ -1144,8 +1135,8 @@ FIRE ALARM
 
 
 
-/obj/machinery/firealarm/New(loc, dir, atom/frame)
-	..(loc)
+/obj/machinery/firealarm/Initialize(mapload, dir, atom/frame)
+	. = ..(mapload)
 
 	if(dir)
 		src.set_dir((dir & (NORTH|SOUTH)) ? dir : GLOB.reverse_dir[dir])
@@ -1158,8 +1149,6 @@ FIRE ALARM
 		update_icon()
 		frame.transfer_fingerprints_to(src)
 
-/obj/machinery/firealarm/Initialize()
-	. = ..()
 	if(z in GLOB.using_map.contact_levels)
 		update_icon()
 

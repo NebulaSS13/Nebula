@@ -15,13 +15,12 @@
 	item_state = "gift1"
 	randpixel = 10
 
-/obj/item/a_gift/New()
-	..()
+/obj/item/a_gift/Initialize()
+	. = ..()
 	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
 		icon_state = "gift[w_class]"
 	else
 		icon_state = "gift[pick(1, 2, 3)]"
-	return
 
 /obj/item/a_gift/ex_act()
 	qdel(src)
@@ -117,8 +116,8 @@
 	item_state = "gift"
 	w_class = ITEM_SIZE_HUGE
 
-/obj/item/gift/New(newloc, obj/item/wrapped = null)
-	..(newloc)
+/obj/item/gift/Initialize(mapload, obj/item/wrapped = null)
+	. = ..(mapload)
 
 	if(istype(wrapped))
 		gift = wrapped

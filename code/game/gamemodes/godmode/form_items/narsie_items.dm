@@ -74,6 +74,6 @@
 	volume = 10
 	amount_per_transfer_from_this = 10
 
-/obj/item/chems/food/drinks/zombiedrink/New()
-	..()
+/obj/item/chems/food/drinks/zombiedrink/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/zombie, 10)

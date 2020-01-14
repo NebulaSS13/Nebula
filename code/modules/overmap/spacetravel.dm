@@ -8,13 +8,14 @@ var/list/cached_space = list()
 	invisibility = 101
 	known = 0
 
-/obj/effect/overmap/visitable/sector/temporary/New(var/nx, var/ny, var/nz)
+/obj/effect/overmap/visitable/sector/temporary/Initialize(mapload, var/nx, var/ny, var/nz)
 	loc = locate(nx, ny, GLOB.using_map.overmap_z)
 	x = nx
 	y = ny
 	map_z += nz
 	map_sectors["[nz]"] = src
 	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [nz].")
+	. = ..()
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
 	map_sectors["[map_z]"] = null
@@ -39,7 +40,7 @@ proc/get_deepspace(x,y)
 		res.y = y
 		return res
 	else
-		return new /obj/effect/overmap/visitable/sector/temporary(x, y, GLOB.using_map.get_empty_zlevel())
+		return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, GLOB.using_map.get_empty_zlevel())
 
 /atom/movable/proc/lost_in_space()
 	for(var/atom/movable/AM in contents)

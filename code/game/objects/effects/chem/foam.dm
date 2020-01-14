@@ -15,8 +15,8 @@
 	var/expand = 1
 	var/metal = 0
 
-/obj/effect/effect/foam/New(var/loc, var/ismetal = 0)
-	..(loc)
+/obj/effect/effect/foam/Initialize(mapload, var/ismetal = 0)
+	. = ..(mapload)
 	icon_state = "[ismetal? "m" : ""]foam"
 	metal = ismetal
 	playsound(src, 'sound/effects/bubbles2.ogg', 80, 1, -3)
@@ -131,8 +131,8 @@
 	desc = "A lightweight foamed metal wall."
 	var/metal = 1 // 1 = aluminium, 2 = iron
 
-/obj/structure/foamedmetal/New()
-	..()
+/obj/structure/foamedmetal/Initialize()
+	. = ..()
 	update_nearby_tiles(1)
 
 /obj/structure/foamedmetal/Destroy()

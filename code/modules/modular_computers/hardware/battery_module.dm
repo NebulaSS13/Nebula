@@ -8,7 +8,7 @@
 	malfunction_probability = 1
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	var/battery_rating = 75
-	var/obj/item/cell/battery = null
+	var/obj/item/cell/battery = /obj/item/cell
 
 /obj/item/stock_parts/computer/battery_module/advanced
 	name = "advanced battery"
@@ -55,11 +55,7 @@
 	icon_state = "battery_lambda"
 	hardware_size = 1
 	battery_rating = 3000
-
-/obj/item/stock_parts/computer/battery_module/lambda/New()
-	..()
-	battery = new/obj/item/cell/infinite(src)
-
+	battery = /obj/item/cell/infinite
 
 /obj/item/stock_parts/computer/battery_module/diagnostics()
 	. = ..()
@@ -67,7 +63,7 @@
 
 /obj/item/stock_parts/computer/battery_module/Initialize()
 	. = ..()
-	battery = new/obj/item/cell(src)
+	battery = new battery(src)
 	battery.maxcharge = battery_rating
 	battery.charge = 0
 

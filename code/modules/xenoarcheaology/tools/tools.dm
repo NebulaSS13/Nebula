@@ -51,8 +51,8 @@
 	name = "sample bag box"
 	desc = "A box claiming to contain sample bags."
 
-/obj/item/storage/box/samplebags/New()
-	..()
+/obj/item/storage/box/samplebags/Initialize()
+	. = ..()
 	for(var/i = 1 to 7)
 		var/obj/item/evidencebag/S = new(src)
 		S.SetName("sample bag")

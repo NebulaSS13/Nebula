@@ -12,8 +12,8 @@
 
 	var/obj/item/loaded_item	//What is currently inside the analyzer.
 
-/obj/item/portable_destructive_analyzer/New()
-	..()
+/obj/item/portable_destructive_analyzer/Initialize()
+	. = ..()
 	files = new /datum/research/techonly(src) //Setup the research data holder.
 
 /obj/item/portable_destructive_analyzer/attack_self(user as mob)

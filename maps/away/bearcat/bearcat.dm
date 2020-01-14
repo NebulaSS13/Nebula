@@ -21,13 +21,13 @@
 	max_speed = 1/(10 SECONDS)
 	burn_delay = 10 SECONDS
 
-/obj/effect/overmap/visitable/ship/bearcat/New()
+/obj/effect/overmap/visitable/ship/bearcat/Initialize()
 	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
 	for(var/area/ship/scrap/A)
 		A.name = "\improper [name] - [A.name]"
 		GLOB.using_map.area_purity_test_exempt_areas += A.type
 	name = "[name], \a [initial(name)]"
-	..()
+	. = ..()
 
 /datum/map_template/ruin/away_site/bearcat_wreck
 	name = "Bearcat Wreck"
@@ -111,9 +111,14 @@
 
 /obj/effect/landmark/deadcap
 	name = "Dead Captain"
-	delete_me = 1
 
 /obj/effect/landmark/deadcap/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+// chair may need to init first
+/obj/effect/landmark/deadcap/LateInitialize()
+	..()
 	var/turf/T = get_turf(src)
 	var/mob/living/carbon/human/corpse = new(T)
 	scramble(1,corpse,100)
@@ -126,7 +131,7 @@
 	var/obj/structure/bed/chair/C = locate() in T
 	if(C)
 		C.buckle_mob(corpse)
-	. = ..()
+	qdel(src)
 
 /decl/hierarchy/outfit/deadcap
 	name = "Derelict Captain"

@@ -98,14 +98,14 @@
 	else if(href_list["eject_drive"] && uninstall_component(/obj/item/stock_parts/computer/hard_drive/portable))
 		visible_message("\icon[src] [src] beeps and ejects its portable disk.")
 
-/obj/machinery/ntnet_relay/New()
+/obj/machinery/ntnet_relay/Initialize()
+	. = ..()
 	uid = gl_uid
 	gl_uid++
 	if(ntnet_global)
 		ntnet_global.relays.Add(src)
 		NTNet = ntnet_global
 		ntnet_global.add_log("New quantum relay activated. Current amount of linked relays: [NTNet.relays.len]")
-	..()
 
 /obj/machinery/ntnet_relay/Destroy()
 	if(ntnet_global)

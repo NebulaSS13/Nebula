@@ -8,17 +8,19 @@
 	var/min_bruised_damage = 10       // Damage before considered bruised
 	var/damage_reduction = 0.5     //modifier for internal organ injury
 
-/obj/item/organ/internal/New(var/mob/living/carbon/holder)
+/obj/item/organ/internal/Initialize(mapload, datum/dna/given_dna)
 	if(max_damage)
 		min_bruised_damage = Floor(max_damage / 4)
-	..()
-	if(istype(holder))
+	. = ..()
+	if(iscarbon(loc))
+		var/mob/living/carbon/holder = loc
 		holder.internal_organs |= src
 
 		var/mob/living/carbon/human/H = holder
 		if(istype(H))
 			var/obj/item/organ/external/E = H.get_organ(parent_organ)
 			if(!E)
+				. = INITIALIZE_HINT_QDEL
 				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
 			E.internal_organs |= src
 

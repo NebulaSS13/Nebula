@@ -6,10 +6,10 @@
 	w_class = 1
 	var/key_data = ""
 
-/obj/item/key/New(var/newloc,var/data)
+/obj/item/key/Initialize(mapload,var/data)
+	. = ..(mapload)
 	if(data)
 		key_data = data
-	..(newloc)
 
 /obj/item/key/proc/get_data(var/mob/user)
 	return key_data

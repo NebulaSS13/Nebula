@@ -16,48 +16,48 @@
 	obj_flags = 0
 	volume = 60
 
-	on_reagent_change()
-		update_icon()
-
-	pickup(mob/user)
-		..()
-		update_icon()
-
-	dropped(mob/user)
-		..()
-		update_icon()
-
-	attack_hand()
-		..()
-		update_icon()
-
-	New()
-		..()
-		if(!icon_state)
-			icon_state = "bottle-[rand(1,4)]"
-
+/obj/item/chems/glass/bottle/on_reagent_change()
 	update_icon()
-		overlays.Cut()
 
-		if(reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
-			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+/obj/item/chems/glass/bottle/pickup(mob/user)
+	..()
+	update_icon()
 
-			var/percent = round((reagents.total_volume / volume) * 100)
-			switch(percent)
-				if(0 to 9)		filling.icon_state = "[icon_state]--10"
-				if(10 to 24) 	filling.icon_state = "[icon_state]-10"
-				if(25 to 49)	filling.icon_state = "[icon_state]-25"
-				if(50 to 74)	filling.icon_state = "[icon_state]-50"
-				if(75 to 79)	filling.icon_state = "[icon_state]-75"
-				if(80 to 90)	filling.icon_state = "[icon_state]-80"
-				if(91 to INFINITY)	filling.icon_state = "[icon_state]-100"
+/obj/item/chems/glass/bottle/dropped(mob/user)
+	..()
+	update_icon()
 
-			filling.color = reagents.get_color()
-			overlays += filling
+/obj/item/chems/glass/bottle/attack_hand()
+	..()
+	update_icon()
 
-		if (!ATOM_IS_OPEN_CONTAINER(src))
-			var/image/lid = image(icon, src, "lid_bottle")
-			overlays += lid
+/obj/item/chems/glass/bottle/Initialize()
+	. = ..()
+	if(!icon_state)
+		icon_state = "bottle-[rand(1,4)]"
+
+/obj/item/chems/glass/bottle/on_update_icon()
+	overlays.Cut()
+
+	if(reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
+		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+
+		var/percent = round((reagents.total_volume / volume) * 100)
+		switch(percent)
+			if(0 to 9)		filling.icon_state = "[icon_state]--10"
+			if(10 to 24) 	filling.icon_state = "[icon_state]-10"
+			if(25 to 49)	filling.icon_state = "[icon_state]-25"
+			if(50 to 74)	filling.icon_state = "[icon_state]-50"
+			if(75 to 79)	filling.icon_state = "[icon_state]-75"
+			if(80 to 90)	filling.icon_state = "[icon_state]-80"
+			if(91 to INFINITY)	filling.icon_state = "[icon_state]-100"
+
+		filling.color = reagents.get_color()
+		overlays += filling
+
+	if (!ATOM_IS_OPEN_CONTAINER(src))
+		var/image/lid = image(icon, src, "lid_bottle")
+		overlays += lid
 
 
 /obj/item/chems/glass/bottle/inaprovaline
@@ -66,8 +66,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/inaprovaline/New()
-	..()
+/obj/item/chems/glass/bottle/inaprovaline/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
 	update_icon()
 
@@ -78,8 +78,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/toxin/New()
-	..()
+/obj/item/chems/glass/bottle/toxin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin, 60)
 	update_icon()
 
@@ -90,8 +90,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/cyanide/New()
-	..()
+/obj/item/chems/glass/bottle/cyanide/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 30) //volume changed to match chloral
 	update_icon()
 
@@ -102,8 +102,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/stoxin/New()
-	..()
+/obj/item/chems/glass/bottle/stoxin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/soporific, 60)
 	update_icon()
 
@@ -114,8 +114,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/chloralhydrate/New()
-	..()
+/obj/item/chems/glass/bottle/chloralhydrate/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/chloralhydrate, 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
 	update_icon()
 
@@ -126,8 +126,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/antitoxin/New()
-	..()
+/obj/item/chems/glass/bottle/antitoxin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/dylovene, 60)
 	update_icon()
 
@@ -138,8 +138,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-1"
 
-/obj/item/chems/glass/bottle/mutagen/New()
-	..()
+/obj/item/chems/glass/bottle/mutagen/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/mutagen, 60)
 	update_icon()
 
@@ -150,8 +150,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-1"
 
-/obj/item/chems/glass/bottle/ammonia/New()
-	..()
+/obj/item/chems/glass/bottle/ammonia/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/ammonia, 60)
 	update_icon()
 
@@ -162,8 +162,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/eznutrient/New()
-	..()
+/obj/item/chems/glass/bottle/eznutrient/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/eznutrient, 60)
 	update_icon()
 
@@ -174,8 +174,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/left4zed/New()
-	..()
+/obj/item/chems/glass/bottle/left4zed/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/left4zed, 60)
 	update_icon()
 
@@ -186,8 +186,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/robustharvest/New()
-	..()
+/obj/item/chems/glass/bottle/robustharvest/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/robustharvest, 60)
 	update_icon()
 
@@ -198,8 +198,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/diethylamine/New()
-	..()
+/obj/item/chems/glass/bottle/diethylamine/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/diethylamine, 60)
 	update_icon()
 
@@ -210,8 +210,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/pacid/New()
-	..()
+/obj/item/chems/glass/bottle/pacid/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/acid/polyacid, 60)
 	update_icon()
 
@@ -223,8 +223,8 @@
 	icon_state = "holyflask"
 
 
-/obj/item/chems/glass/bottle/adminordrazine/New()
-	..()
+/obj/item/chems/glass/bottle/adminordrazine/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/adminordrazine, 60)
 	update_icon()
 
@@ -235,8 +235,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/capsaicin/New()
-	..()
+/obj/item/chems/glass/bottle/capsaicin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/capsaicin, 60)
 	update_icon()
 
@@ -247,7 +247,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/frostoil/New()
-	..()
+/obj/item/chems/glass/bottle/frostoil/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/frostoil, 60)
 	update_icon()

@@ -19,8 +19,8 @@
 	var/step_delay = 10 // lower is faster
 	volume = 250
 
-/obj/item/chems/spray/New()
-	..()
+/obj/item/chems/spray/Initialize()
+	. = ..()
 	src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
 /obj/item/chems/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
@@ -100,24 +100,24 @@
 	desc = "BLAM!-brand non-foaming space cleaner!"
 	step_delay = 6
 
-/obj/item/chems/spray/cleaner/New()
-	..()
+/obj/item/chems/spray/cleaner/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/space_cleaner, volume)
 
 /obj/item/chems/spray/sterilizine
 	name = "sterilizine"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
 
-/obj/item/chems/spray/sterilizine/New()
-	..()
+/obj/item/chems/spray/sterilizine/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/sterilizine, volume)
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"
 	desc = "Very effective at removing hair, feathers, spines and horns."
 
-/obj/item/chems/spray/hair_remover/New()
-	..()
+/obj/item/chems/spray/hair_remover/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/hair_remover, volume)
 
 /obj/item/chems/spray/pepper
@@ -131,8 +131,8 @@
 	var/safety = 1
 	step_delay = 1
 
-/obj/item/chems/spray/pepper/New()
-	..()
+/obj/item/chems/spray/pepper/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 60)
 
 /obj/item/chems/spray/pepper/examine(mob/user, distance)
@@ -160,8 +160,8 @@
 	possible_transfer_amounts = null
 	volume = 10
 
-/obj/item/chems/spray/waterflower/New()
-	..()
+/obj/item/chems/spray/waterflower/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/water, 10)
 
 /obj/item/chems/spray/chemsprayer
@@ -205,8 +205,8 @@
 	item_state = "plantbgone"
 	volume = 100
 
-/obj/item/chems/spray/plantbgone/New()
-	..()
+/obj/item/chems/spray/plantbgone/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/plantbgone, 100)
 
 /obj/item/chems/spray/plantbgone/afterattack(atom/A as mob|obj, mob/user as mob, proximity)

@@ -22,14 +22,17 @@
 	noblend_objects = list(/obj/machinery/door/window)
 	material = DEFAULT_WALL_MATERIAL
 
-/obj/structure/wall_frame/New(var/new_loc, var/materialtype)
-	..(new_loc)
+/obj/structure/wall_frame/Initialize(mapload, var/materialtype)
+	..(mapload)
+	. = INITIALIZE_HINT_LATELOAD
 
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
 	material = SSmaterials.get_material_by_name(materialtype)
 	health = material.integrity
 
+/obj/structure/wall_frame/LateInitialize()
+	..()
 	update_connections(1)
 	update_icon()
 

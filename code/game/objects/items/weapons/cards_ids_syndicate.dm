@@ -6,12 +6,12 @@
 	color = COLOR_GRAY40
 	detail_color = COLOR_NT_RED
 
-/obj/item/card/id/syndicate/New(mob/user as mob)
-	..()
+/obj/item/card/id/syndicate/Initialize()
+	. = ..()
 	access = syndicate_access.Copy()
 
-/obj/item/card/id/syndicate/station_access/New()
-	..() // Same as the normal Syndicate id, only already has all station access
+/obj/item/card/id/syndicate/station_access/Initialize()
+	. = ..() // Same as the normal Syndicate id, only already has all station access
 	access |= get_all_station_access()
 
 /obj/item/card/id/syndicate/Destroy()

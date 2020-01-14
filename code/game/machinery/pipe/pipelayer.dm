@@ -1,3 +1,5 @@
+// Note: this machine is not compatible with the current pipe construction code. Needs a refactor of the lay pipe and pipe selection procs before using.
+
 /obj/machinery/pipelayer
 
 	name = "automatic pipe layer"
@@ -15,9 +17,9 @@
 	var/obj/item/wrench/W
 	var/list/Pipes = list("regular pipes"=0,"scrubbers pipes"=31,"supply pipes"=29,"heat exchange pipes"=2, "fuel pipes"=45)
 
-/obj/machinery/pipelayer/New()
+/obj/machinery/pipelayer/Initialize()
+	. = ..()
 	W = new(src)
-	..()
 
 /obj/machinery/pipelayer/Move(new_turf,M_Dir)
 	..()
@@ -126,7 +128,8 @@
 	else
 		p_dir=M_Dir
 
-	var/obj/item/pipe/P = new (w_turf, dir=p_dir)
+	var/obj/item/pipe/P = new (w_turf)
+	P.set_dir(p_dir)
 	P.attackby(W , src)
 
 	return 1

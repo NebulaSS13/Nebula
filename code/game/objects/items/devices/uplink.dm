@@ -35,11 +35,12 @@
 /obj/item/uplink/nano_host()
 	return loc
 
-/obj/item/uplink/New(var/atom/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
-	if(!istype(location, /atom))
-		CRASH("Invalid spawn location. Expected /atom, was [location ? location.type : "NULL"]")
+/obj/item/uplink/Initialize(mapload, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
+	. = ..(mapload)
+	if(!istype(loc, /atom))
+		. = INITIALIZE_HINT_QDEL
+		CRASH("Invalid spawn location. Expected /atom, was [log_info_line(loc)]")
 
-	..()
 	nanoui_data = list()
 	update_nano_data()
 
@@ -215,8 +216,8 @@
 // Includes normal radio uplink, multitool uplink,
 // implant uplink (not the implant tool) and a preset headset uplink.
 
-/obj/item/radio/uplink/New(var/loc, var/owner, var/amount)
-	..()
+/obj/item/radio/uplink/Initialize(mapload, var/owner, var/amount)
+	. = ..()
 	hidden_uplink = new(src, owner, amount)
 	icon_state = "radio"
 
@@ -224,8 +225,8 @@
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 
-/obj/item/multitool/uplink/New(var/loc, var/owner)
-	..()
+/obj/item/multitool/uplink/Initialize(mapload, var/owner)
+	. = ..()
 	hidden_uplink = new(src, owner)
 
 /obj/item/multitool/uplink/attack_self(mob/user as mob)
@@ -235,8 +236,8 @@
 /obj/item/radio/headset/uplink
 	traitor_frequency = 1445
 
-/obj/item/radio/headset/uplink/New()
-	..()
+/obj/item/radio/headset/uplink/Initialize()
+	. = ..()
 	hidden_uplink = new(src)
 
 /obj/item/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.contained_state)

@@ -6,9 +6,9 @@
 	icon = 'icons/misc/buildmode.dmi'
 	var/datum/click_handler/build_mode/host
 
-/obj/effect/bmode/New(var/host)
-	..()
-	src.host = host
+/obj/effect/bmode/Initialize()
+	. = ..()
+	src.host = loc
 
 /obj/effect/bmode/Destroy()
 	host = null
@@ -21,8 +21,8 @@
 	icon_state = "build"
 	screen_loc = "NORTH,WEST"
 
-/obj/effect/bmode/dir/New()
-	..()
+/obj/effect/bmode/dir/Initialize()
+	. = ..()
 	set_dir(host.dir)
 
 /obj/effect/bmode/dir/OnClick(var/list/parameters)
@@ -49,8 +49,8 @@
 /obj/effect/bmode/mode
 	screen_loc = "NORTH,WEST+2"
 
-/obj/effect/bmode/mode/New()
-	..()
+/obj/effect/bmode/mode/Initialize()
+	. = ..()
 	icon_state = host.current_build_mode.icon_state
 
 /obj/effect/bmode/mode/OnClick(var/list/parameters)

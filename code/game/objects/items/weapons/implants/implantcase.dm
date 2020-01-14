@@ -11,11 +11,11 @@
 	w_class = ITEM_SIZE_TINY
 	var/obj/item/implant/imp = null
 
-/obj/item/implantcase/New()
+/obj/item/implantcase/Initialize()
+	. = ..()
 	if(ispath(imp))
 		imp = new imp(src)
 		update_description()
-	..()
 	update_icon()
 
 /obj/item/implantcase/proc/update_description()

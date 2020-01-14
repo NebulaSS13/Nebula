@@ -382,9 +382,9 @@
 	desc = "A party-grade glowstick."
 	color = "#ff00ff"
 
-/obj/item/flashlight/flare/glowstick/random/New()
+/obj/item/flashlight/flare/glowstick/random/Initialize()
 	color = rgb(rand(50,255),rand(50,255),rand(50,255))
-	..()
+	. = ..()
 
 /obj/item/flashlight/slime
 	gender = PLURAL
@@ -400,9 +400,6 @@
 	flashlight_max_bright = 1
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 5
-
-/obj/item/flashlight/slime/New()
-	..()
 
 //hand portable floodlights for emergencies. Less bulky than the large ones. But also less light. Unused green variant in the sheet.
 

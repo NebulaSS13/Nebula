@@ -33,8 +33,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	var/investing_time = 0 //what time we target forr a return on our spell investment.
 	var/has_sacrificed = 0 //whether we have already got our sacrifice bonus for the current investment.
 
-/obj/item/spellbook/New()
-	..()
+/obj/item/spellbook/Initialize()
+	. = ..()
 	set_spellbook(spellbook_type)
 
 /obj/item/spellbook/proc/set_spellbook(var/type)

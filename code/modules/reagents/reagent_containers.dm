@@ -29,9 +29,9 @@
 	if(N && !cannot_interact(usr))
 		amount_per_transfer_from_this = N
 
-/obj/item/chems/New()
+/obj/item/chems/Initialize()
+	. = ..()
 	create_reagents(volume)
-	..()
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 

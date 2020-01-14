@@ -328,8 +328,8 @@
 	name = "Syringe (inaprovaline)"
 	desc = "Contains inaprovaline - used to stabilize patients."
 
-/obj/item/chems/syringe/inaprovaline/New()
-	..()
+/obj/item/chems/syringe/inaprovaline/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/inaprovaline, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
@@ -338,8 +338,8 @@
 	name = "Syringe (anti-toxin)"
 	desc = "Contains anti-toxins."
 
-/obj/item/chems/syringe/antitoxin/New()
-	..()
+/obj/item/chems/syringe/antitoxin/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/dylovene, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
@@ -348,8 +348,8 @@
 	name = "Syringe (spaceacillin)"
 	desc = "Contains antiviral agents."
 
-/obj/item/chems/syringe/antiviral/New()
-	..()
+/obj/item/chems/syringe/antiviral/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/spaceacillin, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
@@ -358,8 +358,8 @@
 	name = "Syringe (drugs)"
 	desc = "Contains aggressive drugs meant for torture."
 
-/obj/item/chems/syringe/drugs/New()
-	..()
+/obj/item/chems/syringe/drugs/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/space_drugs, 5)
 	reagents.add_reagent(/datum/reagent/mindbreaker, 5)
 	reagents.add_reagent(/datum/reagent/cryptobiolin, 5)
@@ -368,8 +368,8 @@
 
 /obj/item/chems/syringe/ld50_syringe/choral
 
-/obj/item/chems/syringe/ld50_syringe/choral/New()
-	..()
+/obj/item/chems/syringe/ld50_syringe/choral/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/chloralhydrate, 60)
 	mode = SYRINGE_INJECT
 	update_icon()
@@ -378,8 +378,8 @@
 	name = "Syringe (anabolic steroids)"
 	desc = "Contains drugs for muscle growth."
 
-/obj/item/chems/syringe/steroid/New()
-	..()
+/obj/item/chems/syringe/steroid/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/adrenaline, 5)
 	reagents.add_reagent(/datum/reagent/hyperzine, 10)
 

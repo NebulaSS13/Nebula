@@ -15,8 +15,8 @@
 /obj/item/cane/concealed
 	var/concealed_blade
 
-/obj/item/cane/concealed/New()
-	..()
+/obj/item/cane/concealed/Initialize()
+	. = ..()
 	var/obj/item/material/knife/folding/combat/switchblade/temp_blade = new(src)
 	concealed_blade = temp_blade
 

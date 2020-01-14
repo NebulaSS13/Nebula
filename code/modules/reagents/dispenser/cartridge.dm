@@ -14,7 +14,7 @@
 	var/spawn_reagent = null
 	var/label = ""
 
-/obj/item/chems/chem_disp_cartridge/New()
+/obj/item/chems/chem_disp_cartridge/Initialize()
 	. = ..()
 	if(spawn_reagent)
 		reagents.add_reagent(spawn_reagent, volume)

@@ -98,8 +98,8 @@
 	title = "Medical Diagnostics Manual"
 	url = "Guide_to_Medicine"
 
-/obj/item/book/manual/medical_diagnostics_manual/New()
-	..()
+/obj/item/book/manual/medical_diagnostics_manual/Initialize()
+	. = ..()
 	dat = {"<html>
 				<head>
 				<style>

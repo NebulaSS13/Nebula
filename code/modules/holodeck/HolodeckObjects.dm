@@ -247,12 +247,10 @@
 	var/item_color
 
 /obj/item/holo/esword/green
-	New()
-		item_color = "green"
+	item_color = "green"
 
 /obj/item/holo/esword/red
-	New()
-		item_color = "red"
+	item_color = "red"
 
 /obj/item/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	. = ..()
@@ -265,7 +263,8 @@
 /obj/item/holo/esword/get_parry_chance(mob/user)
 	return active ? ..() : 0
 
-/obj/item/holo/esword/New()
+/obj/item/holo/esword/Initialize()
+	. = ..()
 	item_color = pick("red","blue","green","purple")
 
 /obj/item/holo/esword/attack_self(mob/living/user as mob)
@@ -377,10 +376,6 @@
 	to_chat(user, "The AI is not to interact with these devices!")
 	return
 
-/obj/machinery/readybutton/New()
-	..()
-
-
 /obj/machinery/readybutton/attackby(obj/item/W as obj, mob/user as mob)
 	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
 
@@ -443,8 +438,8 @@
 /mob/living/simple_animal/hostile/carp/holodeck/on_update_icon()
 	return
 
-/mob/living/simple_animal/hostile/carp/holodeck/New()
-	..()
+/mob/living/simple_animal/hostile/carp/holodeck/Initialize()
+	. = ..()
 	set_light(0.5, 0.1, 2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)

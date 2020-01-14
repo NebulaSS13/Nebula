@@ -130,8 +130,8 @@
 		)
 
 
-/obj/item/storage/belt/utility/full/New()
-	..()
+/obj/item/storage/belt/utility/full/Initialize()
+	. = ..()
 	new /obj/item/screwdriver(src)
 	new /obj/item/wrench(src)
 	new /obj/item/weldingtool(src)
@@ -141,8 +141,8 @@
 	update_icon()
 
 
-/obj/item/storage/belt/utility/atmostech/New()
-	..()
+/obj/item/storage/belt/utility/atmostech/Initialize()
+	. = ..()
 	new /obj/item/screwdriver(src)
 	new /obj/item/wrench(src)
 	new /obj/item/weldingtool(src)
@@ -415,8 +415,8 @@
 		/obj/item/soulstone
 		)
 
-/obj/item/storage/belt/soulstone/full/New()
-	..()
+/obj/item/storage/belt/soulstone/full/Initialize()
+	. = ..()
 	new /obj/item/soulstone(src)
 	new /obj/item/soulstone(src)
 	new /obj/item/soulstone(src)

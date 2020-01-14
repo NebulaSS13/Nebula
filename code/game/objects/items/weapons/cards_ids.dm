@@ -365,9 +365,9 @@ var/const/NO_EMAG_ACT = -50
 	assignment = "Captain"
 	detail_color = COLOR_AMBER
 
-/obj/item/card/id/captains_spare/New()
+/obj/item/card/id/captains_spare/Initialize()
+	. = ..()
 	access = get_all_station_access()
-	..()
 
 /obj/item/card/id/synthetic
 	name = "\improper Synthetic ID"
@@ -376,9 +376,9 @@ var/const/NO_EMAG_ACT = -50
 	assignment = "Synthetic"
 	detail_color = COLOR_AMBER
 
-/obj/item/card/id/synthetic/New()
+/obj/item/card/id/synthetic/Initialize()
+	. = ..()
 	access = get_all_station_access() + access_synth
-	..()
 
 /obj/item/card/id/centcom
 	name = "\improper CentCom. ID"
@@ -389,20 +389,16 @@ var/const/NO_EMAG_ACT = -50
 	detail_color = COLOR_COMMAND_BLUE
 	extra_details = list("goldstripe")
 
-/obj/item/card/id/centcom/New()
-	access = get_all_centcom_access()
-	..()
-
-/obj/item/card/id/centcom/station/New()
-	..()
+/obj/item/card/id/centcom/station/Initialize()
+	. = ..()
 	access |= get_all_station_access()
 
 /obj/item/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
 	assignment = "Emergency Response Team"
 
-/obj/item/card/id/centcom/ERT/New()
-	..()
+/obj/item/card/id/centcom/ERT/Initialize()
+	. = ..()
 	access |= get_all_station_access()
 
 /obj/item/card/id/foundation_civilian
@@ -442,8 +438,8 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/card/id/foundation/on_update_icon()
 	return
 
-/obj/item/card/id/foundation/New()
-	..()
+/obj/item/card/id/foundation/Initialize()
+	. = ..()
 	access |= get_all_station_access()
 
 /obj/item/card/id/all_access
@@ -454,9 +450,9 @@ var/const/NO_EMAG_ACT = -50
 	detail_color = COLOR_MAROON
 	extra_details = list("goldstripe")
 
-/obj/item/card/id/all_access/New()
+/obj/item/card/id/all_access/Initialize()
+	. = ..()
 	access = get_access_ids()
-	..()
 
 // Department-flavor IDs
 /obj/item/card/id/medical

@@ -60,8 +60,11 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/New()
-	. = ..()
+/obj/machinery/door/Initialize()
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	..()
+	. = INITIALIZE_HINT_LATELOAD
+
 	if(density)
 		layer = closed_layer
 		update_heat_protection(get_turf(src))
@@ -81,23 +84,16 @@
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
 
 	health = maxhealth
-	update_connections(1)
-	update_icon()
-
-	update_nearby_tiles(need_rebuild=1)
-
-/obj/machinery/door/Initialize()
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
-	. = ..()
-	if(autoset_access)
 #ifdef UNIT_TEST
-		if(length(req_access))
-			crash_with("A door with mapped access restrictions was set to autoinitialize access.")
+	if(autoset_access && length(req_access))
+		crash_with("A door with mapped access restrictions was set to autoinitialize access.")
 #endif
-		return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/door/LateInitialize()
 	..()
+	update_connections(1)
+	update_icon()
+	update_nearby_tiles(need_rebuild=1)
 	if(autoset_access) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
 		inherit_access_from_area()
 
