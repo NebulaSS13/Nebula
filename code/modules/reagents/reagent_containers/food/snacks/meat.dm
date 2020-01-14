@@ -9,7 +9,7 @@
 	filling_color = "#ff1c1c"
 	center_of_mass = "x=16;y=14"
 
-/obj/item/weapon/reagent_containers/food/snacks/meat/Initialize()
+/obj/item/chems/food/snacks/meat/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
 	bitesize = 3

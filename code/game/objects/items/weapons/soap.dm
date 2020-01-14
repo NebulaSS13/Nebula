@@ -18,7 +18,7 @@
 	var/decal_name
 	var/list/decals = list("diamond", "heart", "circle", "triangle", "")
 
-/obj/item/weapon/soap/Initialize()
+/obj/item/soap/Initialize()
 	. = ..()
 	create_reagents(30)
 	wet()

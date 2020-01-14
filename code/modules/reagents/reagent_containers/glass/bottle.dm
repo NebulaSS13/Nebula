@@ -55,7 +55,7 @@
 		filling.color = reagents.get_color()
 		overlays += filling
 
-	if (!is_open_container())
+	if (!ATOM_IS_OPEN_CONTAINER(src))
 		var/image/lid = image(icon, src, "lid_bottle")
 		overlays += lid
 

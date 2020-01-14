@@ -6,7 +6,7 @@
 	bitesize = 1
 	var/fish_type = "fish"
 
-/obj/item/chems/food/snacks/sushi/Initialize(mapload, var/obj/item/weapon/reagent_containers/food/snacks/rice, var/obj/item/weapon/reagent_containers/food/snacks/topping)
+/obj/item/chems/food/snacks/sushi/Initialize(mapload, var/obj/item/chems/food/snacks/rice, var/obj/item/chems/food/snacks/topping)
 	. = ..(mapload)
 
 	if(istype(topping))

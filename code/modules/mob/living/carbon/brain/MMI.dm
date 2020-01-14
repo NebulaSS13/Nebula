@@ -145,12 +145,12 @@
 
 	var/obj/item/radio/radio = null//Let's give it a radio.
 
-/obj/item/device/mmi/radio_enabled/Initialize()
+/obj/item/mmi/radio_enabled/Initialize()
 	. = ..()
 	radio = new(src)//Spawns a radio inside the MMI.
 	radio.broadcasting = 1//So it's broadcasting from the start.
 
-/obj/item/device/mmi/radio_enabled/verb/Toggle_Broadcasting() //Allows the brain to toggle the radio functions.
+/obj/item/mmi/radio_enabled/verb/Toggle_Broadcasting() //Allows the brain to toggle the radio functions.
 	set name = "Toggle Broadcasting"
 	set desc = "Toggle broadcasting channel on or off."
 	set category = "MMI"
@@ -163,7 +163,7 @@
 	radio.broadcasting = radio.broadcasting==1 ? 0 : 1
 	to_chat(brainmob, "<span class='notice'>Radio is [radio.broadcasting==1 ? "now" : "no longer"] broadcasting.</span>")
 
-/obj/item/device/mmi/radio_enabled/verb/Toggle_Listening()
+/obj/item/mmi/radio_enabled/verb/Toggle_Listening()
 	set name = "Toggle Listening"
 	set desc = "Toggle listening channel on or off."
 	set category = "MMI"

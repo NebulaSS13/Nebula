@@ -18,7 +18,7 @@
 
 /mob/living/simple_animal/familiar/Initialize()
 	. = ..()
-	add_language(LANGUAGE_HUMAN_EURO)
+	add_language(LANGUAGE_HUMAN)
 	for(var/spell in wizardy_spells)
 		src.add_spell(new spell, "const_spell_ready")
 

@@ -132,23 +132,23 @@
 
 /obj/item/storage/belt/utility/full/Initialize()
 	. = ..()
-	new /obj/item/weapon/screwdriver(src)
-	new /obj/item/weapon/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
-	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/wirecutters(src)
+	new /obj/item/screwdriver(src)
+	new /obj/item/wrench(src)
+	new /obj/item/weldingtool(src)
+	new /obj/item/crowbar(src)
+	new /obj/item/wirecutters(src)
 	new /obj/item/stack/cable_coil/random(src, 30)
 	update_icon()
 
 
 /obj/item/storage/belt/utility/atmostech/Initialize()
 	. = ..()
-	new /obj/item/weapon/screwdriver(src)
-	new /obj/item/weapon/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
-	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/wirecutters(src)
-	new /obj/item/device/t_scanner(src)
+	new /obj/item/screwdriver(src)
+	new /obj/item/wrench(src)
+	new /obj/item/weldingtool(src)
+	new /obj/item/crowbar(src)
+	new /obj/item/wirecutters(src)
+	new /obj/item/t_scanner(src)
 	update_icon()
 
 
@@ -417,13 +417,13 @@
 
 /obj/item/storage/belt/soulstone/full/Initialize()
 	. = ..()
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
-	new /obj/item/device/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
+	new /obj/item/soulstone(src)
 
 
 /obj/item/storage/belt/champion

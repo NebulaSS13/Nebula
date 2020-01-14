@@ -68,14 +68,6 @@
 /turf/space/is_solid_structure()
 	return locate(/obj/structure/lattice, src) //counts as solid structure if it has a lattice
 
-/turf/space/proc/update_starlight()
-	if(!config.starlight)
-		return
-	if(locate(/turf/simulated) in RANGE_TURFS(src, 1)) //Let's make sure not to break everything if people use a crazy setting.
-		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
-	else
-		set_light(0)
-
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 
 	if (istype(C, /obj/item/stack/material/rods))

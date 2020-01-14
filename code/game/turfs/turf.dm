@@ -363,7 +363,7 @@ var/const/enterloopsanity = 100
 	if(!A.show_starlight)
 		return
 	//Let's make sure not to break everything if people use a crazy setting.
-	var/turf/T = locate(/turf/simulated) in orange(src,1)
+	var/turf/T = locate(/turf/simulated) in RANGE_TURFS(src,1)
 	if(T)
 		A = get_area(T)
 		if(A && A.dynamic_lighting)

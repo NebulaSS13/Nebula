@@ -127,7 +127,7 @@
 
 /obj/structure/bookcase/manuals/research_and_development/Initialize()
 	. = ..()
-	new /obj/item/weapon/book/manual/research_and_development(src)
+	new /obj/item/book/manual/research_and_development(src)
 	update_icon()
 
 /*

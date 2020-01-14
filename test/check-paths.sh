@@ -36,7 +36,7 @@ exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 23 "text2path uses" 'text2path'
 exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto uses" 'goto '
-exactly 493 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
+exactly 483 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 3 "obj/New uses" '^/obj.*/New\('
 exactly 0 "relatively pathed /New calls" '\tNew\('
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
