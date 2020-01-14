@@ -183,7 +183,8 @@ SUBSYSTEM_DEF(throwing)
 	if (callback)
 		callback.Invoke()
 
-	thrownthing.fall()
+	if(!QDELETED(thrownthing))
+		thrownthing.fall()
 
 	qdel(src)
 
