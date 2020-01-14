@@ -20,12 +20,6 @@
 	handle_paralysed()	// Just in case something snuck in a Paralyse() call.
 	lying = 0			// Handle lying down
 
-	malf_process()
-
-	if(APU_power && (hardware_integrity() < 50))
-		to_chat(src, "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>")
-		stop_apu(1)
-
 	// We aren't shut down, and we lack external power. Try to fix it using the restoration routine.
 	if (!self_shutdown && !has_power(0))
 		// AI's restore power routine is not running. Start it automatically.

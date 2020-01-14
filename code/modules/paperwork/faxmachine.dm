@@ -206,20 +206,17 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
 	GLOB.adminfaxes += rcvdcopy
 
-	var/mob/intercepted = check_for_interception()
-
-
 	//message badmins that a fax has arrived
 	if (destination == GLOB.using_map.boss_name)
-		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#006100")
+		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#006100")
 	else if (destination == "Sol Federal Police")
-		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#1f66a0")
+		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#1f66a0")
 	else if (destination == "[GLOB.using_map.boss_short] Supply")
-		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#5f4519")
+		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#5f4519")
 	else if (destination in GLOB.using_map.map_admin_faxes)
-		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#510b74")
+		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#510b74")
 	else
-		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, "UNKNOWN")
+		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, "UNKNOWN")
 
 	sendcooldown = 1800
 	sleep(50)

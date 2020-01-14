@@ -90,7 +90,7 @@
 		return 1
 	if(istype(src.loc,/obj/item))
 		return 1
-	if(APU_power || admin_powered)
+	if(admin_powered)
 		return 1
 	if(respect_override && power_override_active)
 		return 1
@@ -211,7 +211,7 @@
 
 /obj/machinery/ai_powersupply/proc/get_power_state()
 	// Dead, powered by APU, admin power, or inside an item (inteliCard/IIS). No power usage.
-	if(!powered_ai.stat == DEAD || powered_ai.APU_power || powered_ai.admin_powered || istype(powered_ai.loc, /obj/item/))
+	if(!powered_ai.stat == DEAD || powered_ai.admin_powered || istype(powered_ai.loc, /obj/item/))
 		return 0
 	// Normal power usage.
 	return 2
