@@ -3281,7 +3281,6 @@
 	nutriment_desc = list("cheese" = 5, "chips" = 2)
 	nutriment_amt = 4
 	bitesize = 2
-	nutriment_type = /datum/reagent/nutriment/bread
 
 /obj/item/chems/food/snacks/syndicake
 	name = "\improper Syndi-Cakes"
