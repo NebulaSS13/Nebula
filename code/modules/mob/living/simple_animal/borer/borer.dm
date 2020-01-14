@@ -189,8 +189,8 @@
 	. = ..()
 	statpanel("Status")
 
-	if(evacuation_controller)
-		var/eta_status = evacuation_controller.get_status_panel_eta()
+	if(SSevac.evacuation_controller)
+		var/eta_status = SSevac.evacuation_controller.get_status_panel_eta()
 		if(eta_status)
 			stat(null, eta_status)
 

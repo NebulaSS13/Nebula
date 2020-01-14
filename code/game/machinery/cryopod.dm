@@ -237,7 +237,7 @@
 
 //Don't use these for in-round leaving
 /obj/machinery/cryopod/lifepod/Process()
-	if(evacuation_controller && evacuation_controller.state >= EVAC_LAUNCHING)
+	if(SSevac.evacuation_controller && SSevac.evacuation_controller.state >= EVAC_LAUNCHING)
 		if(occupant && !launched)
 			launch()
 		..()

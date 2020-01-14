@@ -4,6 +4,8 @@ SUBSYSTEM_DEF(evac)
 	//Initializes at default time
 	flags = SS_NO_TICK_CHECK|SS_BACKGROUND
 	wait = 2 SECONDS
+	var/datum/evacuation_controller/evacuation_controller
+
 
 /datum/controller/subsystem/evac/Initialize()
 	. = ..()

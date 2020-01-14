@@ -345,9 +345,9 @@ Helpers
 	if(mode.explosion_in_progress)
 		return 0
 	if(config.continous_rounds)
-		return evacuation_controller.round_over() || mode.station_was_nuked
+		return SSevac.evacuation_controller.round_over() || mode.station_was_nuked
 	else
-		return mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || universe_has_ended
+		return mode.check_finished() || (SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation) || universe_has_ended
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
 	if(config.continous_rounds)
@@ -380,7 +380,7 @@ Helpers
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
-				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
+				if(SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation)
 					if(isNotAdminLevel(playerTurf.z))
 						to_chat(Player, "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>")
 					else

@@ -5,7 +5,7 @@
 /datum/vote/transfer/can_run(mob/creator, automatic)
 	if(!(. = ..()))
 		return
-	if(!evacuation_controller || !evacuation_controller.should_call_autotransfer_vote())
+	if(!SSevac.evacuation_controller || !SSevac.evacuation_controller.should_call_autotransfer_vote())
 		return FALSE
 	if(!automatic && (!config.allow_vote_restart || !is_admin(creator)))
 		return FALSE // Admins and autovotes bypass the config setting.
