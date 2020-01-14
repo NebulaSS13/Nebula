@@ -92,6 +92,10 @@
 	name = "Cake"
 	ying_puke_prob = 15
 
+/datum/reagent/nutriment/soggy_food
+	name = "Soggy Food"
+	taste_description = "blandness"
+
 /datum/reagent/nutriment/protein
 	name = "Animal Protein"
 	taste_description = "some sort of protein"
