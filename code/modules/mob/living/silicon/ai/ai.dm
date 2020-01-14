@@ -81,7 +81,6 @@ var/list/ai_verbs_default = list(
 	var/datum/malf_research/research = null		// Malfunction research datum.
 	var/obj/machinery/power/apc/hack = null		// APC that is currently being hacked.
 	var/list/hacked_apcs = null					// List of all hacked APCs
-	var/APU_power = 0							// If set to 1 AI runs on APU power
 	var/hacking = 0								// Set to 1 if AI is hacking APC, cyborg, other AI, or running system override.
 	var/system_override = 0						// Set to 1 if system override is initiated, 2 if succeeded.
 	var/hack_can_fail = 1						// If 0, all abilities have zero chance of failing.
@@ -194,10 +193,8 @@ var/list/ai_verbs_default = list(
 			radio_text += ", "
 
 	to_chat(src, radio_text)
-
-	if (GLOB.malf && !(mind in GLOB.malf.current_antagonists))
-		show_laws()
-		to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
+	show_laws()
+	to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
 
 	job = "AI"
 	setup_icon()
