@@ -8,6 +8,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/fix_tendon
 	name = "Repair tendon"
+	description = "This procedure repairs damage to a tendon."
 	allowed_tools = list(
 		/obj/item/sutures = 100,
 		/obj/item/stack/cable_coil = 75,
@@ -51,6 +52,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/fix_vein
 	name = "Repair arterial bleeding"
+	description = "This procedure repairs damage to an artery."
 	allowed_tools = list(
 		/obj/item/sutures = 100,
 		/obj/item/stack/cable_coil = 75,
@@ -108,6 +110,7 @@
 	min_duration = 120
 	max_duration = 180
 	surgery_candidate_flags = 0
+	hidden_from_codex = TRUE
 
 /decl/surgery_step/hardsuit/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return TRUE
@@ -148,6 +151,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/sterilize
 	name = "Sterilize wound"
+	description = "This procedure sterilizes a wound with alcohol."
 	allowed_tools = list(
 		/obj/item/chems/spray = 100,
 		/obj/item/chems/dropper = 100,

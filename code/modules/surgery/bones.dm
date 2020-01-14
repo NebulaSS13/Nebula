@@ -17,6 +17,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/bone/glue
 	name = "Begin bone repair"
+	description = "This procedure is used to begin setting a bone in place by treating the damage with bone gel."
 	allowed_tools = list(
 		/obj/item/bonegel = 100,
 		/obj/item/tape_roll = 75
@@ -56,6 +57,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/bone/set_bone
 	name = "Set bone"
+	description = "After preparing with bone gel, this procedure sets a broken bone in place for final repair."
 	allowed_tools = list(
 		/obj/item/bonesetter = 100,
 		/obj/item/wrench = 75
@@ -107,6 +109,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/bone/finish
 	name = "Finish bone repair"
+	description = "After setting a bone in place, this procedure seals the last of the damage with bone gel."
 	allowed_tools = list(
 		/obj/item/bonegel = 100,
 		/obj/item/tape_roll = 75

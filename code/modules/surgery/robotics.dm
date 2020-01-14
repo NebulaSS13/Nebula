@@ -34,6 +34,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/unscrew_hatch
 	name = "Unscrew maintenance hatch"
+	description = "This procedure unsecures the maintenance hatch of a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
 		/obj/item/material/coin = 50,
@@ -69,6 +70,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/screw_hatch
 	name = "Secure maintenance hatch"
+	description = "This procedure screws shut the maintenance hatch of a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
 		/obj/item/material/coin = 50,
@@ -104,6 +106,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/open_hatch
 	name = "Open maintenance hatch"
+	description = "This procedure levers open the maintenance hatch of a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/retractor = 100,
 		/obj/item/crowbar = 100,
@@ -140,6 +143,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/close_hatch
 	name = "Close maintenance hatch"
+	description = "This procedure closes the maintenance hatch of a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/retractor = 100,
 		/obj/item/crowbar = 100,
@@ -177,6 +181,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/repair_brute
 	name = "Repair damage to prosthetic"
+	description = "This procedure patches physical damage to a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/weldingtool = 100,
 		/obj/item/gun/energy/plasmacutter = 50,
@@ -240,6 +245,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/repair_brittle
 	name = "Reinforce prosthetic"
+	description = "This procedure repairs brittleness within a robotic prosthetic."
 	allowed_tools = list(/obj/item/stack/nanopaste = 100)
 	min_duration = 50
 	max_duration = 60
@@ -277,6 +283,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/repair_burn
 	name = "Repair burns on prosthetic"
+	description = "This procedure repairs fire or electrical damage to a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/stack/cable_coil = 100
 	)
@@ -335,6 +342,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/fix_organ_robotic //For artificial organs
 	name = "Repair prosthetic organ"
+	description = "This procedure repairs damage to a robotic internal organ."
 	allowed_tools = list(
 		/obj/item/stack/nanopaste = 100,
 		/obj/item/bonegel = 30,
@@ -394,6 +402,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/detatch_organ_robotic
 	name = "Decouple prosthetic organ"
+	description = "This procedure decouples a robotic internal organ for removal."
 	allowed_tools = list(
 		/obj/item/multitool = 100
 	)
@@ -436,6 +445,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/attach_organ_robotic
 	name = "Reattach prosthetic organ"
+	description = "This procedure reattaches a decoupled robotic internal organ."
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
 	)
@@ -486,6 +496,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/install_mmi
 	name = "Install MMI"
+	description = "This procedure installs an MMI within a prosthetic organ."
 	allowed_tools = list(
 		/obj/item/mmi = 100
 	)
@@ -545,17 +556,20 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 
 /decl/surgery_step/internal/remove_organ/robotic
 	name = "Remove robotic component"
+	description = "This procedure removes a robotic component."
 	can_infect = 0
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/internal/replace_organ/robotic
 	name = "Replace robotic component"
+	description = "This procedure installs a robotic component."
 	can_infect = 0
 	robotic_surgery = TRUE
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/remove_mmi
 	name = "Remove MMI"
+	description = "This procedure removes an MMI from a prosthetic organ."
 	min_duration = 60
 	max_duration = 80
 	allowed_tools = list(

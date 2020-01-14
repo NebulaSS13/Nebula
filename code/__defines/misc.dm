@@ -271,3 +271,12 @@
 #ifndef HTTP_POST_DLL_LOCATION
 #define HTTP_POST_DLL_LOCATION (world.system_type == MS_WINDOWS ? WINDOWS_HTTP_POST_DLL_LOCATION : UNIX_HTTP_POST_DLL_LOCATION)
 #endif
+
+// Surgery candidate flags.
+#define SURGERY_NO_ROBOTIC        1
+#define SURGERY_NO_CRYSTAL        2
+#define SURGERY_NO_STUMP          4
+#define SURGERY_NO_FLESH          8 
+#define SURGERY_NEEDS_INCISION   16
+#define SURGERY_NEEDS_RETRACTED  32
+#define SURGERY_NEEDS_ENCASEMENT 64

@@ -125,7 +125,7 @@
 //////////////////////
 
 /obj/effect/meteor
-	name = "the concept of meteor"
+	name = "meteor"
 	desc = "You should probably run instead of gawking at this."
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "small"

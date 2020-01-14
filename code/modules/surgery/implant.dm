@@ -23,6 +23,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/cavity/make_space
 	name = "Hollow out cavity"
+	description = "This procedure is used to prepare a patient to have something large implanted in their body."
 	allowed_tools = list(
 		/obj/item/surgicaldrill = 100,
 		/obj/item/pen = 75,
@@ -54,6 +55,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/cavity/close_space
 	name = "Close cavity"
+	description = "This procedure is used to repair and close off a cavity within the body."
 	allowed_tools = list(
 		/obj/item/cautery = 100,
 		/obj/item/clothing/mask/smokable/cigarette = 75,
@@ -89,6 +91,7 @@
 	allowed_tools = list(/obj/item = 100)
 	min_duration = 80
 	max_duration = 100
+	hidden_from_codex = TRUE
 
 /decl/surgery_step/cavity/place_item/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(istype(user,/mob/living/silicon/robot))
@@ -142,6 +145,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/cavity/implant_removal
 	name = "Remove foreign body"
+	description = "This procedure is used to remove foreign bodies like shrapnel or implants from a patient."
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/wirecutters = 75,

@@ -25,6 +25,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/limb/attach
 	name = "Replace limb"
+	description = "This procedure is used to position a severed limb against the stump for further attachment."
 	allowed_tools = list(/obj/item/organ/external = 100)
 	min_duration = 50
 	max_duration = 70
@@ -85,6 +86,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/limb/connect
 	name = "Connect limb"
+	description = "This procedure is used to reconnect a replaced severed limb."
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/stack/cable_coil = 75,
@@ -136,6 +138,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/limb/mechanize
 	name = "Attach prosthetic limb"
+	description = "This procedure is used to attach a prosthetic limb to the stump of a patient."
 	allowed_tools = list(/obj/item/robot_parts = 100)
 
 	min_duration = 80
