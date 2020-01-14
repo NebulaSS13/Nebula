@@ -26,8 +26,8 @@
 	var/list/charge_costs = null
 	var/list/datum/matter_synth/synths = null
 
-/obj/item/stack/Initialize(mapload, var/amount=null)
-	. = ..()
+/obj/item/stack/Initialize(mapload, amount, material)
+	. = ..(mapload, material)
 	if (!stacktype)
 		stacktype = type
 	if (amount >= 1)

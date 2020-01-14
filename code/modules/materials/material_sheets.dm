@@ -15,7 +15,7 @@
 	var/matter_multiplier = 1
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
-	. = ..(mapload, _material)
+	. = ..(mapload, amount, _material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(!_reinf_material)
