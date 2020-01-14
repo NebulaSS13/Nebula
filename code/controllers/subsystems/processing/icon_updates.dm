@@ -23,6 +23,15 @@ PROCESSING_SUBSYSTEM_DEF(icon_update)
 
 	while (curr.len)
 		var/atom/A = curr[curr.len]
+
+		if(QDELETED(A))
+			curr.len--
+			if (no_mc_tick)
+				CHECK_TICK
+			else if (MC_TICK_CHECK)
+				return
+			continue
+
 		var/list/argv = curr[A]
 		curr.len--
 
