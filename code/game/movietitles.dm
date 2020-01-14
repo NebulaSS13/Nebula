@@ -58,7 +58,7 @@ client
 	icon_state = "blank"
 	mouse_opacity = 0
 	alpha = 0
-	screen_loc = "1,1"
+	screen_loc = "CENTER-7,1"
 	plane = HUD_PLANE
 	layer = HUD_ABOVE_ITEM_LAYER
 	var/client/parent
