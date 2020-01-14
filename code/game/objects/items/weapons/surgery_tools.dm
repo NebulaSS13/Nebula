@@ -149,12 +149,11 @@
 	name = "sutures"
 	desc = "Surgical needles and thread in a handy sterile package."
 	icon = 'icons/obj/surgery.dmi'
-	icon_state = "sutures"
+	icon_state = "fixovein"
 	force = 0
 	throwforce = 1.0
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 3)
 	w_class = ITEM_SIZE_SMALL
-	var/usage_amount = 10
 
 /obj/item/bonesetter
 	name = "bone setter"
