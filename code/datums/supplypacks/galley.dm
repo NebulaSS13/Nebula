@@ -42,7 +42,7 @@
 		/obj/item/chems/food/snacks/fish = 3,
 		/obj/item/chems/food/snacks/fish/shark = 3,
 		/obj/item/chems/food/snacks/fish/octopus = 3,
-		/obj/item/chems/food/snacks/fish/mollusc = 3
+		/obj/item/mollusc/clam = 3
 		)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "seafood crate"
