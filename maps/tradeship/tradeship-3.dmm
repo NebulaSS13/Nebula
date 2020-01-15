@@ -284,8 +284,7 @@
 /area/space)
 "aK" = (
 /obj/effect/landmark/map_data{
-	height = 2;
-	level = 3
+	height = 4
 	},
 /turf/space,
 /area/space)

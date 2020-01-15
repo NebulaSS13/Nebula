@@ -55,11 +55,35 @@
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
 /area/ship/scrap/cargo/lower
-	name = "\improper Lower Cargo Hold"
+	name = "Loading Bay"
 
 /area/ship/scrap/dock
 	name = "\improper Docking Bay"
 	icon_state = "entry_1"
+
+/area/ship/scrap/aft_port_underside_maint
+	name = "\improper Underside - Aft Port Maintenance"
+	icon_state = "medbay"
+
+/area/ship/scrap/aft_starboard_underside_maint
+	name = "\improper Underside - Aft Starboard Maintenance"
+	icon_state = "toilet"
+
+/area/ship/scrap/loading_bay
+	name = "\improper Underside - Loading Bay"
+	icon_state = "entry_1"
+
+/area/ship/scrap/fore_port_underside_maint
+	name = "\improper Underside - Fore Port Maintenance"
+	icon_state = "green"
+
+/area/ship/scrap/fore_starboard_underside_maint
+	name = "\improper Underside - Fore Starboard Maintenance"
+	icon_state = "locker"
+
+/area/ship/scrap/enclave
+	name = "\improper Underside - Enclave"
+	icon_state = "yellow"
 
 /area/ship/scrap/garden
 	name = "\improper Garden"

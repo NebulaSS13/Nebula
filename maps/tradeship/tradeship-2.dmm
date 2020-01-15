@@ -1881,6 +1881,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
+/obj/structure/disposalpipe/down,
 /turf/simulated/floor/plating,
 /area/ship/scrap/crew/hallway/starboard)
 "fb" = (
@@ -2088,6 +2089,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/ship/scrap/crew/hallway/starboard)
 "fu" = (
@@ -2369,6 +2371,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/ship/scrap/crew/hallway/starboard)
 "gc" = (
@@ -2581,6 +2584,7 @@
 	icon_state = "bulb1";
 	dir = 4
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/scrap/crew/hallway/starboard)
 "gu" = (
@@ -2715,6 +2719,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/ship/scrap/crew/hallway/starboard)
 "gP" = (
@@ -2780,21 +2785,13 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/hallway)
 "hb" = (
 /obj/structure/shuttle/engine/propulsion/burst/left,
 /turf/simulated/floor/airless,
 /area/ship/scrap/shuttle/outgoing)
-"hc" = (
-/obj/structure/disposaloutlet{
-	dir = 8
-	},
-/obj/structure/disposalpipe/trunk{
-	dir = 4
-	},
-/turf/space,
-/area/space)
 "hd" = (
 /obj/structure/closet/crate/uranium,
 /obj/machinery/button/blast_door{
@@ -2820,11 +2817,8 @@
 /obj/structure/cable{
 	icon_state = "6-8"
 	},
-/obj/structure/disposalpipe/junction/yjunction{
-	icon_state = "pipe-y";
-	dir = 8
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/scrap/maintenance/hallway)
 "hj" = (
@@ -2842,6 +2836,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/hallway)
 "hk" = (
@@ -2919,9 +2914,9 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment{
-	icon_state = "conpipe-c";
-	dir = 2
+/obj/structure/disposalpipe/junction{
+	icon_state = "pipe-j1";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/scrap/maintenance/hallway)
@@ -2939,6 +2934,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	icon_state = "intact";
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2963,6 +2961,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/scrap/maintenance/hallway)
@@ -2990,6 +2991,9 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/hallway)
 "hx" = (
@@ -3008,6 +3012,9 @@
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/hallway)
@@ -3033,6 +3040,9 @@
 	icon_state = "bulb_map";
 	dir = 1
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/hallway)
 "hz" = (
@@ -3057,6 +3067,10 @@
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
+	},
+/obj/structure/disposalpipe/segment/bent{
+	icon_state = "pipe-c";
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/hallway)
@@ -5025,9 +5039,6 @@
 "rb" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -5099,9 +5110,6 @@
 	},
 /obj/effect/floor_decal/corner/yellow{
 	dir = 8
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -5212,15 +5220,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/comms)
-"ub" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/garden)
 "uc" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -5250,9 +5249,6 @@
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -5358,9 +5354,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -6149,12 +6142,6 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/power)
-"JA" = (
-/obj/effect/landmark/map_data{
-	height = 2
-	},
-/turf/space,
-/area/space)
 "JI" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -6317,6 +6304,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/open,
 /area/ship/scrap/crew/hallway/starboard)
 "Ln" = (
@@ -6649,6 +6637,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/scrap/crew/hallway/starboard)
 "Ql" = (
@@ -7024,9 +7013,6 @@
 /area/ship/scrap/maintenance/atmos)
 "WO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -9549,7 +9535,7 @@ gm
 cy
 Lx
 aa
-hc
+aa
 aa
 GF
 GF
@@ -9762,7 +9748,7 @@ aa
 aa
 aa
 aa
-JA
+aa
 aa
 aa
 aa
@@ -9877,7 +9863,7 @@ gp
 gB
 nb
 pb
-ub
+WO
 yb
 Mp
 hO
