@@ -39,13 +39,14 @@
 /decl/hierarchy/supply_pack/galley/seafood
 	name = "Perishables - Seafood"
 	contains = list(
-		/obj/item/chems/food/snacks/fish = 2,
-		/obj/item/chems/food/snacks/fish/shark = 2,
-		/obj/item/chems/food/snacks/fish/octopus = 2
+		/obj/item/chems/food/snacks/fish = 3,
+		/obj/item/chems/food/snacks/fish/shark = 3,
+		/obj/item/chems/food/snacks/fish/octopus = 3,
+		/obj/item/chems/food/snacks/fish/mollusc = 3
 		)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "seafood crate"
-	cost = 20
+	cost = 30
 
 /decl/hierarchy/supply_pack/galley/eggs
 	name = "Perishables - Eggs"

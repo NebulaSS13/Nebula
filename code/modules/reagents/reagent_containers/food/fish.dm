@@ -1,5 +1,5 @@
 /obj/item/chems/food/snacks/fish
-	name = "fish fillet"
+	name = "fillet"
 	desc = "A fillet of fish."
 	icon_state = "fishfillet"
 	filling_color = "#ffdefe"
@@ -10,7 +10,8 @@
 /obj/item/chems/food/snacks/fish/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
-	name = "[fish_type] fillet"
+	name = "[fish_type] [initial(name)]"
+
 // This will remove carp poison etc. Deliberate, meant to be similar to preparing pufferfish.
 /obj/item/chems/food/snacks/fish/attackby(var/obj/item/W, var/mob/user)
 	if(is_sharp(W) && (locate(/obj/structure/table) in loc))
@@ -47,3 +48,9 @@
 
 /obj/item/chems/food/snacks/fish/octopus
 	fish_type = "tako"
+
+/obj/item/chems/food/snacks/fish/mollusc
+	name = "meat"
+	desc = "Some slimy meat from clams or molluscs."
+	fish_type = "mollusc"
+	nutriment_type = /datum/reagent/nutriment/slime_meat
