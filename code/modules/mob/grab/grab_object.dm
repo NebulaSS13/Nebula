@@ -25,7 +25,7 @@
 	This section is for overrides of existing procs.
 */
 /obj/item/grab/Initialize(mapload, mob/living/carbon/human/victim)
-	. = ..()
+	. = ..(mapload)
 	current_grab = all_grabstates[start_grab_name]
 
 	assailant = loc
