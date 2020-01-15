@@ -121,6 +121,10 @@
 	product_records = null
 	return ..()
 
+/obj/machinery/vending/get_codex_value()
+	return "vendomat"
+	
+
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
 		if(1.0)
