@@ -55,11 +55,30 @@
 	if(hydration_factor)
 		M.adjust_hydration(hydration_factor * hyd_removed) // For thirst
 
+/datum/reagent/nutriment/slime_meat
+	name = "Slime-Meat"
+	description = "Mollusc meat, or slug meat - something slimy, anyway."
+	scannable = 1
+	taste_description = "cold, bitter slime"
+	overdose = 10
+	hydration_factor = 6
+
+/datum/reagent/nutriment/slime_meat/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien == IS_YINGLET)
+		M.reagents.add_reagent(/datum/reagent/space_drugs, 0.1)
+
+/datum/reagent/nutriment/slime_meat/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(alien == IS_YINGLET)
+		nutriment_factor = 12
+		M.add_chemical_effect(CE_PAINKILLER, 15)
+	else
+		nutriment_factor = initial(nutriment_factor)
+	. = ..()
+
 /datum/reagent/nutriment/glucose
 	name = "Glucose"
 	color = "#ffffff"
 	scannable = 1
-
 	injectable = 1
 
 /datum/reagent/nutriment/bread
