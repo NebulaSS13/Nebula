@@ -90,6 +90,7 @@
 	. += new/datum/stack_recipe/fire_alarm(src)
 	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
 	. += new/datum/stack_recipe/furniture/coffin(src)
+	. += new/datum/stack_recipe/butcher_hook(src)
 
 /material/plasteel/generate_recipes(var/reinforce_material)
 	. = ..()
