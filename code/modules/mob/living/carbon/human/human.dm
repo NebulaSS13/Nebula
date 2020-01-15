@@ -922,7 +922,7 @@
 						qdel(H)
 
 	losebreath = 0
-
+	UpdateAppearance()
 	..()
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
