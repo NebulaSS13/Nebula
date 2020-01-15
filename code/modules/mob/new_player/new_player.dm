@@ -356,9 +356,6 @@
 		matchmaker.do_matchmaking()
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
-	if(character.needs_wheelchair())
-		equip_wheelchair(character)
-
 	qdel(src)
 
 
