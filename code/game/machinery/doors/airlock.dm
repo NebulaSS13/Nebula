@@ -115,6 +115,9 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/get_material()
 	return SSmaterials.get_material_by_name(mineral ? mineral : MATERIAL_STEEL)
 
+/obj/machinery/door/airlock/get_codex_value()
+	return "airlock"
+
 //regular airlock presets
 
 /obj/machinery/door/airlock/command
