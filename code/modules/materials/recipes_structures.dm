@@ -1,4 +1,11 @@
 //Furniture is in a separate file.
+/datum/stack_recipe/butcher_hook
+	title = "meat hook"
+	result_type = /obj/structure/kitchenspike
+	req_amount = 10
+	time = 40
+	one_per_turf = 1
+	difficulty = 1
 
 /datum/stack_recipe/ai_core
 	title = "AI core"
