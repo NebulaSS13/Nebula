@@ -137,7 +137,7 @@
 /obj/item/grab/proc/can_grab()
 	if(!assailant.Adjacent(affecting))
 		return 0
-	if(assailant.anchored || affecting.anchored)
+	if(assailant.anchored || affecting.anchored || assailant.buckled || affecting.buckled)
 		return 0
 	if(assailant.get_active_hand())
 		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
