@@ -9,7 +9,7 @@
 		if(reaction.hidden_from_codex)
 			continue
 		var/list/reaction_info = list()
-		reaction_info += "Fusion between [reaction.p_react] and [reaction.s_react] and be achieved with a plasma temperature of [reaction.minimum_reaction_temperature = 8000] Kelvin or higher." 
+		reaction_info += "Fusion between [reaction.p_react] and [reaction.s_react] can be achieved with a plasma temperature of [reaction.minimum_reaction_temperature = 8000] Kelvin or higher." 
 		reaction_info += "This reaction consumes [initial(reaction.energy_consumption)] heat unit\s and produces [reaction.energy_production] heat unit\s."
 		reaction_info += "The process has an instability rating of [reaction.instability] and a radiation rating of [reaction.radiation]."
 		if(LAZYLEN(reaction.products))
