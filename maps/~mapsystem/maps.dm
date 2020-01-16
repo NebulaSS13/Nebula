@@ -77,7 +77,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
+	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Robot Storage")
 	var/default_spawn = "Arrivals Shuttle"
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller

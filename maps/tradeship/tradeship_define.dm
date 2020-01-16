@@ -19,8 +19,6 @@
 	// yingspace.png was remixed from Out-Of-Placers assets by Raptie and is included with kind permission.
 	lobby_screens = list('maps/tradeship/lobby/yingspace.png')
 
-	allowed_spawns = list("Cryogenic Storage")
-	default_spawn = "Cryogenic Storage"
 	use_overmap = 1
 	num_exoplanets = 3
 	welcome_sound = 'sound/effects/cowboysting.ogg'
