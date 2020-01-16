@@ -171,7 +171,7 @@
 /mob/living/simple_animal/cat/fluff/Life()
 	. = ..()
 	if(!.)
-		return FALSE 
+		return FALSE
 	if (stat || !friend)
 		return
 	if (get_dist(src, friend) <= 1)
@@ -257,3 +257,12 @@
 /mob/living/simple_animal/cat/kitten/Initialize()
 	. = ..()
 	gender = pick(MALE, FEMALE)
+
+/mob/living/simple_animal/cat/fluff/ran
+	name = "Rantime"
+	desc = "Her full name is Ran Ste-Su G'Mindel Time."
+	gender = FEMALE
+	icon_state = "cat2"
+	item_state = "cat2"
+	icon_living = "cat2"
+	icon_dead = "cat2_dead"
