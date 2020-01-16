@@ -37,13 +37,14 @@
 		if (istype(W,/obj/item/clothing/mask/smokable/cigarette))
 			var/obj/item/clothing/mask/smokable/cigarette/cig = W
 			if (cig.lit == 1)
-				visible_message("[user] crushes [cig] in [src], putting it out.")
+				visible_message(SPAN_NOTICE("\The [user] crushes \the [cig] in \the [src], putting it out."))
 				W = cig.extinguish(no_message = 1)
 			else if (cig.lit == 0)
-				to_chat(user, "You place [cig] in [src] without even smoking it. Why would you do that?")
+				to_chat(user, SPAN_NOTICE("You place \the [cig] in \the [src] without even smoking it. Why would you do that?"))
+		else
+			visible_message(SPAN_NOTICE("\The [user] places \the [W] in \the [src]."))
 
 		if(user.unEquip(W, src))
-			visible_message("[user] places [W] in [src].")
 			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()
 	else
