@@ -227,13 +227,13 @@
 	icon_state = "loadingarea";
 	dir = 1
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/effect/landmark{
+	name = "JoinLateCryoTwo"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/escape_star)
@@ -248,13 +248,13 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = -32
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/landmark{
+	name = "JoinLateCryoTwo"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/escape_star)
@@ -354,6 +354,9 @@
 	dir = 1
 	},
 /obj/machinery/cryopod/robot,
+/obj/effect/landmark{
+	name = "JoinLateCyborg"
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/robot)
 "bc" = (
@@ -2486,13 +2489,13 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/landmark{
+	name = "JoinLateCryoTwo"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/escape_star)
@@ -2533,13 +2536,13 @@
 	dir = 1;
 	pixel_y = -30
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/landmark{
+	name = "JoinLateCryoTwo"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/escape_star)
