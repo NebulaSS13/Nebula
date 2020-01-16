@@ -721,13 +721,15 @@
 			clear_fullscreen("brute")
 
 		if(healths)
-			healths.overlays.Cut()
+
+			var/mutable_appearance/healths_ma = new(healths)
+			healths_ma.icon_state = "blank"
+			healths_ma.overlays = null
+
 			if (chem_effects[CE_PAINKILLER] > 100)
-				healths.icon_state = "health_numb"
+				healths_ma.icon_state = "health_numb"
 			else
 				// Generate a by-limb health display.
-				healths.icon_state = "blank"
-
 				var/no_damage = 1
 				var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
 				if(can_feel_pain())
@@ -754,8 +756,8 @@
 							health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
 				else if(no_damage)
 					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
-
-				healths.overlays += health_images
+				healths_ma.overlays += health_images
+			healths.appearance = healths_ma
 
 		if(nutrition_icon)
 			switch(nutrition)
