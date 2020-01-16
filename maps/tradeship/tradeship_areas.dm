@@ -16,10 +16,6 @@
 	name = "\improper Galley"
 	icon_state = "kitchen"
 
-/area/ship/scrap/crew/cryo
-	name = "\improper Cryo Storage"
-	icon_state = "cryo"
-
 /area/ship/scrap/crew/dorms1
 	name = "\improper Crew Cabin #1"
 	icon_state = "green"
@@ -91,9 +87,10 @@
 	name = "\improper Fabrication Bay"
 	icon_state = "yellow"
 
-/area/ship/scrap/science/chemistry
+/area/ship/scrap/crew/medbay/chemistry
 	name = "\improper Chemistry Bay"
 	icon_state = "cave"
+	req_access = list(access_medical)
 
 /area/ship/scrap/maintenance
 	name = "\improper Maintenance Compartments"
@@ -187,3 +184,7 @@
 /area/ship/scrap/maintenance/solars
   name = "\improper Solar Array Access"
   icon_state = "SolarcontrolA"
+
+/area/ship/scrap/maintenance/robot
+  name = "\improper Robot Storage"
+  icon_state = "ai_cyborg"

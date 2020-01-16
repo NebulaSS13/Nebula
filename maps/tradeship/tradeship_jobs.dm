@@ -4,9 +4,9 @@
 		/datum/job/chief_engineer,
 		/datum/job/doctor,
 		/datum/job/rd,
-		/datum/job/hop, 
-		/datum/job/cyborg, 
-		/datum/job/assistant, 
+		/datum/job/hop,
+		/datum/job/cyborg,
+		/datum/job/assistant,
 		/datum/job/engineer,
 		/datum/job/doctor/junior,
 		/datum/job/scientist
@@ -320,6 +320,7 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	pda_type = /obj/item/modular_computer/pda/medical
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
+	id_type = /obj/item/card/id/medical
 
 /decl/hierarchy/outfit/job/tradeship/doc/junior
 	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Doctor")
