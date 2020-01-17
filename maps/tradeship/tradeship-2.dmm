@@ -43,12 +43,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/atmos)
-"aj" = (
-/obj/effect/landmark/map_data{
-	height = 2
-	},
-/turf/space,
-/area/space)
 "ak" = (
 /obj/effect/overmap/visitable/ship/tradeship,
 /turf/space,
@@ -3282,6 +3276,9 @@
 /obj/structure/sign/poster{
 	pixel_y = 32
 	},
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/engineering)
 "ib" = (
@@ -6152,6 +6149,12 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/power)
+"JA" = (
+/obj/effect/landmark/map_data{
+	height = 2
+	},
+/turf/space,
+/area/space)
 "JI" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -7116,9 +7119,6 @@
 /obj/structure/bed/padded,
 /obj/effect/landmark/start{
 	name = "Head Engineer"
-	},
-/obj/machinery/firealarm{
-	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/engineering)
@@ -9762,7 +9762,7 @@ aa
 aa
 aa
 aa
-aj
+JA
 aa
 aa
 aa
