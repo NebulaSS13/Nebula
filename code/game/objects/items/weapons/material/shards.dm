@@ -17,6 +17,17 @@
 	material = MATERIAL_GLASS
 	unbreakable = 1 //It's already broken.
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
+	var/has_handle
+
+/obj/item/material/shard/attack(mob/living/M, mob/living/user, var/target_zone)
+	. = ..()
+	if(. && !has_handle)
+		var/mob/living/carbon/human/H = user
+		if(istype(H) && !H.gloves && !(H.species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
+			var/obj/item/organ/external/hand = H.get_organ(H.hand ? BP_L_HAND : BP_R_HAND)
+			if(istype(hand) && !BP_IS_PROSTHETIC(hand))
+				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
+				hand.take_external_damage(rand(5,10), used_weapon = src)
 
 /obj/item/material/shard/set_material(var/new_material)
 	..(new_material)
@@ -53,7 +64,33 @@
 			material.place_sheet(loc)
 			qdel(src)
 			return
+	if(istype(W, /obj/item/stack/cable_coil))
+
+		if(!material || (material.shard_type in list(SHARD_SPLINTER, SHARD_SHRAPNEL)))
+			to_chat(user, SPAN_WARNING("\The [src] is not suitable for using as a shank."))
+			return
+		if(has_handle)
+			to_chat(user, SPAN_WARNING("\The [src] already has a handle."))
+			return
+		var/obj/item/stack/cable_coil/cable = W
+		if(cable.use(3))
+			to_chat(user, SPAN_NOTICE("You wind some cable around the thick end of \the [src]."))
+			has_handle = cable.color
+			SetName("[material.display_name] shank")
+			update_icon()
+			return
+		to_chat(user, SPAN_WARNING("You need 3 or more units of cable to give \the [src] a handle."))
+		return
 	return ..()
+
+/obj/item/material/shard/on_update_icon()
+	overlays.Cut()
+	. = ..()
+	if(has_handle)
+		var/image/I = image('icons/obj/shards.dmi', "handle")
+		I.appearance_flags |= RESET_COLOR
+		I.color = has_handle
+		overlays += I
 
 /obj/item/material/shard/Crossed(AM as mob|obj)
 	..()
