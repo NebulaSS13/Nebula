@@ -16,8 +16,8 @@
 	var/radiation_level = 2 // 1 is removing germs, 2 is removing blood, 3 is removing phoron.
 	var/model_text = ""     // Some flavour text for the topic box.
 	var/locked = 1          // If locked, nothing can be taken from or added to the cycler.
-	var/can_repair = 1         // If set, the cycler can repair voidsuits.
-	var/electrified = 0
+	var/can_repair = 1      // If set, the cycler can repair voidsuits.
+	var/electrified = 0     // If set, will shock users.
 
 	// Possible modifications to pick between
 	var/list/available_modifications = list(
@@ -43,7 +43,7 @@
 	)
 
 	//Species that the suits can be configured to fit.
-	var/list/species = list(SPECIES_HUMAN)
+	var/list/species = list(SPECIES_HUMAN, SPECIES_YINGLET)
 
 	var/decl/item_modifier/target_modification
 	var/target_species
@@ -54,11 +54,41 @@
 
 	wires = /datum/wires/suit_storage_unit
 
+/obj/machinery/suit_cycler/on_update_icon()
+
+	var/new_overlays
+
+	if(!locked && !active)
+		LAZYADD(new_overlays, image(icon, "open"))
+		if(helmet)
+			LAZYADD(new_overlays, image(icon, "helm"))
+		if(suit)
+			LAZYADD(new_overlays, image(icon, "suit"))
+
+	if(irradiating)
+		LAZYADD(new_overlays, image(icon, "light_radiation"))
+		set_light(0.8, 1, 3, 2, COLOR_RED_LIGHT)
+	else if(active)
+		LAZYADD(new_overlays, image(icon, "light_active"))
+		set_light(0.8, 1, 3, 2, COLOR_YELLOW)
+	else
+		set_light(0)
+
+	if(panel_open)
+		LAZYADD(new_overlays, image(icon, "panel"))
+
+	overlays = new_overlays
+
 /obj/machinery/suit_cycler/Initialize()
 	. = ..()
 	if(!length(available_modifications) || !length(species))
 		crash_with("Invalid setup: [log_info_line(src)]")
 		return INITIALIZE_HINT_QDEL
+
+	if(ispath(suit))
+		suit = new suit(src)
+	if(ispath(helmet))
+		helmet = new helmet(src)
 
 	available_modifications = list_values(decls_repository.get_decls(available_modifications))
 
@@ -71,7 +101,35 @@
 	DROP_NULL(helmet)
 	return ..()
 
-/obj/machinery/suit_cycler/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/suit_cycler/MouseDrop_T(var/mob/target, var/mob/user)
+	. = CanMouseDrop(target, user) && try_move_inside(target, user)
+
+/obj/machinery/suit_cycler/proc/try_move_inside(var/mob/living/target, var/mob/living/user)
+	if(!istype(target) || !istype(user) || !target.Adjacent(user) || !user.Adjacent(src) || user.incapacitated())
+		return FALSE
+
+	if(locked)
+		to_chat(user, SPAN_WARNING("The suit cycler is locked."))
+		return FALSE
+
+	if(suit || helmet)
+		to_chat(user, SPAN_WARNING("There is no room inside the cycler for \the [target]."))
+		return FALSE
+
+	visible_message(SPAN_WARNING("\The [user] starts putting \the [target] into the suit cycler."))
+	if(do_after(user, 20, src))
+		if(!istype(target) || locked || suit || helmet || !target.Adjacent(user) || !user.Adjacent(src) || user.incapacitated())
+			return FALSE
+		if (target.client)
+			target.client.perspective = EYE_PERSPECTIVE
+			target.client.eye = src
+		target.forceMove(src)
+		occupant = target
+		add_fingerprint(user)
+		return TRUE
+	return FALSE
+
+/obj/machinery/suit_cycler/attackby(obj/item/I, mob/user)
 
 	if(electrified != 0)
 		if(shock(user, 100))
@@ -89,46 +147,28 @@
 		if(!(ismob(G.affecting)))
 			return
 
-		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
-			return
-
-		if(contents.len > 0)
-			to_chat(user, "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>")
-			return
-
-		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>", range = 3)
-
-		if(do_after(user, 20, src))
-			if(!G || !G.affecting) return
-			var/mob/M = G.affecting
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.forceMove(src)
-			occupant = M
-
-			add_fingerprint(user)
+		if(try_move_inside(G.affecting, user))
+			user.drop_from_inventory(G)
 			qdel(G)
-
 			updateUsrDialog()
-
 			return
+
 	else if(isScrewdriver(I))
 
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ?  "open" : "close"] the maintenance panel.")
+		update_icon()
 		updateUsrDialog()
 		return
 
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
 		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
+			to_chat(user, SPAN_WARNING("The suit cycler is locked."))
 			return
 
 		if(helmet)
-			to_chat(user, "<span class='danger'>The cycler already contains a helmet.</span>")
+			to_chat(user, SPAN_WARNING("The cycler already contains a helmet."))
 			return
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
@@ -138,18 +178,18 @@
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
-		
+		update_icon()
 		updateUsrDialog()
 		return
 
 	else if(istype(I,/obj/item/clothing/suit/space/void))
 
 		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
+			to_chat(user, SPAN_WARNING("The suit cycler is locked."))
 			return
 
 		if(suit)
-			to_chat(user, "<span class='danger'>The cycler already contains a voidsuit.</span>")
+			to_chat(user, SPAN_WARNING("The cycler already contains a voidsuit."))
 			return
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
@@ -159,7 +199,7 @@
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		suit = I
-
+		update_icon()
 		updateUsrDialog()
 		return
 
@@ -167,11 +207,11 @@
 
 /obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged)
-		to_chat(user, "<span class='danger'>The cycler has already been subverted.</span>")
+		to_chat(user, SPAN_WARNING("The cycler has already been subverted."))
 		return
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
-	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
+	to_chat(user, SPAN_DANGER("You run the sequencer across the interface, corrupting the operating protocols."))
 
 	var/additional_modifications = list_values(decls_repository.get_decls(emagged_modifications))
 	available_modifications |= additional_modifications
@@ -203,29 +243,29 @@
 	else if(locked)
 		dat += "<br><font color='red'><B>The [model_text ? "[model_text] " : ""]suit cycler is currently locked. Please contact your system administrator.</b></font>"
 		if(allowed(user))
-			dat += "<br><a href='?src=\ref[src];toggle_lock=1'>\[unlock unit\]</a>"
+			dat += "<br><a href='?src=\ref[src];toggle_lock=1'>Unlock unit</a>"
 	else
 		dat += "<h1>Suit cycler</h1>"
-		dat += "<B>Welcome to the [model_text ? "[model_text] " : ""]suit cycler control panel. <a href='?src=\ref[src];toggle_lock=1'>\[lock unit\]</a></B><HR>"
+		dat += "<B>Welcome to the [model_text ? "[model_text] " : ""]suit cycler control panel. <a href='?src=\ref[src];toggle_lock=1'>Lock unit</a></B><HR>"
 
 		dat += "<h2>Maintenance</h2>"
-		dat += "<b>Helmet: </b> [helmet ? "\the [helmet]" : "no helmet stored" ]. <A href='?src=\ref[src];eject_helmet=1'>\[eject\]</a><br/>"
-		dat += "<b>Suit: </b> [suit ? "\the [suit]" : "no suit stored" ]. <A href='?src=\ref[src];eject_suit=1'>\[eject\]</a>"
+		dat += "<b>Helmet: </b> [helmet ? "\the [helmet]" : "no helmet stored" ]. <A href='?src=\ref[src];eject_helmet=1'>Eject</a><br/>"
+		dat += "<b>Suit: </b> [suit ? "\the [suit]" : "no suit stored" ]. <A href='?src=\ref[src];eject_suit=1'>Eject</a>"
 
 		if(can_repair && suit && istype(suit))
-			dat += "[(suit.damage ? " <A href='?src=\ref[src];repair_suit=1'>\[repair\]</a>" : "")]"
+			dat += "[(suit.damage ? " <A href='?src=\ref[src];repair_suit=1'>Repair</a>" : "")]"
 
 		dat += "<br/><b>UV decontamination systems:</b> <font color = '[emagged ? "red'>SYSTEM ERROR" : "green'>READY"]</font><br>"
 		dat += "Output level: [radiation_level]<br>"
-		dat += "<A href='?src=\ref[src];select_rad_level=1'>\[select power level\]</a> <A href='?src=\ref[src];begin_decontamination=1'>\[begin decontamination cycle\]</a><br><hr>"
+		dat += "<A href='?src=\ref[src];select_rad_level=1'>Select power level</a> <A href='?src=\ref[src];begin_decontamination=1'>Begin decontamination cycle</a><br><hr>"
 
 		dat += "<h2>Customisation</h2>"
 		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_species=1'>[target_species]</a>."
-		dat += "<A href='?src=\ref[src];apply_paintjob=1'><br>\[apply customisation routine\]</a><br><hr>"
+		dat += "<br><A href='?src=\ref[src];apply_paintjob=1'>Apply customisation routine</a><br><hr>"
 
-	show_browser(user, JOINTEXT(dat), "window=suit_cycler")
-	onclose(user, "suit_cycler")
-	return
+	var/datum/browser/popup = new(user, "suit_cycler", "Suit Cycler")
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 
 /obj/machinery/suit_cycler/Topic(href, href_list)
 	if((. = ..()))
@@ -251,7 +291,9 @@
 		var/choices = list(1,2,3)
 		if(emagged)
 			choices = list(1,2,3,4,5)
-		radiation_level = input("Please select the desired radiation level.","Suit cycler",null) as null|anything in choices
+		var/choice = input("Please select the desired radiation level.","Suit cycler",null) as null|anything in choices
+		if(choice)
+			radiation_level = choice
 	else if(href_list["repair_suit"])
 
 		if(!suit || !can_repair) return
@@ -282,11 +324,12 @@
 	else if(href_list["begin_decontamination"])
 
 		if(safeties && occupant)
-			to_chat(usr, "<span class='danger'>The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle.</span>")
+			to_chat(usr, SPAN_DANGER("\The [src] has detected an occupant. Please remove the occupant before commencing the decontamination cycle."))
 			return
 
 		active = 1
 		irradiating = 10
+		update_icon()
 		updateUsrDialog()
 
 		sleep(10)
@@ -303,6 +346,7 @@
 			if(radiation_level > 1)
 				suit.clean_blood()
 
+	update_icon()
 	updateUsrDialog()
 
 /obj/machinery/suit_cycler/Process()
@@ -316,17 +360,21 @@
 		active = 0
 		irradiating = 0
 		electrified = 0
+		update_icon()
 		return
 
 	if(irradiating == 1)
 		finished_job()
 		irradiating = 0
+		update_icon()
 		return
 
 	irradiating--
+	update_icon()
 
 	if(occupant)
-		if(prob(radiation_level*2)) occupant.emote("scream")
+		if(prob(radiation_level*2) && occupant.can_feel_pain())
+			occupant.emote("scream")
 		if(radiation_level > 2)
 			occupant.take_organ_damage(0,radiation_level*2 + rand(1,3))
 		if(radiation_level > 1)
@@ -335,7 +383,7 @@
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)
-	T.visible_message("\icon[src]<span class='notice'>\The [src] pings loudly.</span>")
+	T.visible_message(SPAN_NOTICE("\The [src] pings loudly."))
 	active = 0
 	updateUsrDialog()
 
@@ -350,16 +398,14 @@
 	set name = "Eject Cycler"
 	set category = "Object"
 	set src in oview(1)
-
 	if (usr.incapacitated())
 		return
-
 	eject_occupant(usr)
 
-/obj/machinery/suit_cycler/proc/eject_occupant(mob/user as mob)
+/obj/machinery/suit_cycler/proc/eject_occupant(mob/user)
 
 	if(locked || active)
-		to_chat(user, "<span class='warning'>The cycler is locked.</span>")
+		to_chat(user, SPAN_WARNING("The cycler is locked."))
 		return
 
 	if (!occupant)
