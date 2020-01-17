@@ -18,6 +18,7 @@
 
 	// yingspace.png was remixed from Out-Of-Placers assets by Raptie and is included with kind permission.
 	lobby_screens = list('maps/tradeship/lobby/yingspace.png')
+	lobby_tracks = list(/music_track/zazie)
 
 	use_overmap = 1
 	num_exoplanets = 3
