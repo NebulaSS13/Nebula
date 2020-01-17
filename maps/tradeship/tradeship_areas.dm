@@ -19,14 +19,17 @@
 /area/ship/scrap/crew/dorms1
 	name = "\improper Crew Cabin #1"
 	icon_state = "green"
+	area_flags = AREA_FLAG_RAD_SHIELDED
 
 /area/ship/scrap/crew/dorms2
 	name = "\improper Crew Cabin #2"
 	icon_state = "purple"
+	area_flags = AREA_FLAG_RAD_SHIELDED
 
 /area/ship/scrap/crew/dorms3
 	name = "\improper Crew Cabin #3"
 	icon_state = "yellow"
+	area_flags = AREA_FLAG_RAD_SHIELDED
 
 /area/ship/scrap/crew/saloon
 	name = "\improper Saloon"
@@ -44,10 +47,12 @@
 /area/ship/scrap/crew/medbay
 	name = "\improper Medical Bay"
 	icon_state = "medbay"
+	area_flags = AREA_FLAG_RAD_SHIELDED
 
 /area/ship/scrap/cargo
 	name = "\improper Cargo Hold"
 	icon_state = "quartstorage"
+	area_flags = AREA_FLAG_RAD_SHIELDED
 
 /area/ship/scrap/cargo/lower
 	name = "\improper Lower Cargo Hold"
