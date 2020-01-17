@@ -24,6 +24,7 @@
 		if(origin)
 			forceMove(get_turf(origin))
 		prepared_maneuver.perform(src, check, get_acrobatics_multiplier(prepared_maneuver), reflexively = TRUE)
+		prepared_maneuver = null
 
 /mob/living/verb/prepare_maneuver()
 	set name = "Prepare To Maneuver"
