@@ -285,3 +285,11 @@ proc/age2agedescription(age)
 	if(damflags & DAM_BIO)
 		res += "bio"
 	return english_list(res)
+
+/proc/get_effective_view(var/val)
+	if(isnum(val))
+		return val
+	if(istext(val))
+		var/list/vals = splittext(val, "x")
+		return Floor(max(text2num(vals[1]), text2num(vals[2]))/2)
+	return 0
