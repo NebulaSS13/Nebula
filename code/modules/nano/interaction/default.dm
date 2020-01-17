@@ -12,7 +12,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 /mob/observer/ghost/default_can_use_topic(var/src_object)
 	if(can_admin_interact())
 		return STATUS_INTERACTIVE							// Admins are more equal
-	if(!client || get_dist(src_object, src)	> client.view)	// Preventing ghosts from having a million windows open by limiting to objects in range
+	if(!client || get_dist(src_object, src)	> get_effective_view(client.view))	// Preventing ghosts from having a million windows open by limiting to objects in range
 		return STATUS_CLOSE
 	return STATUS_UPDATE									// Ghosts can view updates
 
