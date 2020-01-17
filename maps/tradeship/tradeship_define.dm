@@ -32,6 +32,9 @@
 	department_money = 0
 	salary_modifier = 0.2
 
+	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Please move to a shielded area such as the cargo bay, dormitories or medbay until the radiation has passed."
+	
+
 /datum/map/tradeship/get_map_info()
 	return "You're aboard the <b>[station_name],</b> a survey and mercantile vessel affiliated with <b>Tradehouse Ivenmoth</b>, a large merchant guild operating out of Val Salia Station. \
 	No meaningful authorities can claim the planets and resources in this uncharted sector, so their exploitation is entirely up to you - mine, poach and deforest all you want."

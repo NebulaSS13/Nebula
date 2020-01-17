@@ -19,7 +19,7 @@
 		return res
 
 /datum/event/radiation_storm/announce()
-	command_announcement.Announce("High levels of radiation detected in proximity of the [location_name()]. Please evacuate into one of the shielded maintenance tunnels.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
+	GLOB.using_map.radiation_detected_announcement()
 
 /datum/event/radiation_storm/start()
 	..()
