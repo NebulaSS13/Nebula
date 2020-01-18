@@ -32,7 +32,7 @@ RUN ln -fs /usr/share/zoneinfo/UTC /etc/localtime \
     libc6-i386 libgcc1:i386 libstdc++6:i386 uchardet default-jdk \
     make build-essential libssl-dev zlib1g-dev libbz2-dev \
     libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-    xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+    xz-utils tk-dev libffi-dev liblzma-dev python-openssl git unzip
 
 FROM tester_prereqs as pyenv
 ENV PYENV_ROOT=/pyenv \
