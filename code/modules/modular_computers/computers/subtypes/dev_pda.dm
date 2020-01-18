@@ -13,6 +13,7 @@
 	stored_pen = /obj/item/pen/retractable
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 
 /obj/item/modular_computer/pda/Initialize()
 	. = ..()
