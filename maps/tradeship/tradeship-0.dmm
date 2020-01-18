@@ -9,7 +9,11 @@
 /turf/simulated/wall,
 /area/space)
 "ae" = (
-/turf/simulated/floor/tiled,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/landmark/start{
+	name = "Enclave Patriarch"
+	},
+/turf/simulated/floor/wood/walnut,
 /area/ship/scrap/enclave)
 "af" = (
 /obj/structure/disposalpipe/up,
@@ -94,6 +98,7 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/enclave)
 "ar" = (
@@ -171,6 +176,9 @@
 /obj/effect/landmark/start{
 	name = "Enclave Specialist"
 	},
+/obj/item/stool/padded,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/enclave)
 "ay" = (
@@ -197,6 +205,7 @@
 /obj/effect/landmark/start{
 	name = "Enclave Specialist"
 	},
+/obj/item/stool/wood,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/enclave)
 "aA" = (
@@ -390,7 +399,10 @@
 /obj/effect/landmark/start{
 	name = "Enclave Specialist"
 	},
-/turf/simulated/floor/tiled,
+/obj/item/stool/padded,
+/obj/effect/decal/cleanable/filth,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor,
 /area/ship/scrap/enclave)
 "aT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -404,11 +416,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 6
-	},
-/turf/simulated/floor/tiled,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor,
 /area/ship/scrap/enclave)
 "aU" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
@@ -561,14 +570,16 @@
 /area/ship/scrap/fore_port_underside_maint)
 "bk" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor,
 /area/ship/scrap/enclave)
 "bl" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	level = 2
 	},
-/turf/simulated/floor/tiled,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor,
 /area/ship/scrap/enclave)
 "bm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1162,16 +1173,22 @@
 	dir = 9
 	},
 /obj/machinery/light{
-	dir = 8
+	dir = 8;
+	flickering = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start{
+	name = "Enclave Patriarch"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/enclave)
 "en" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 5
-	},
-/turf/simulated/floor/tiled,
+/obj/item/paicard,
+/obj/item/megaphone,
+/obj/item/material/twohanded/spear,
+/obj/item/radio,
+/obj/structure/table/woodentable/walnut,
+/turf/simulated/floor/wood/walnut,
 /area/ship/scrap/enclave)
 "fq" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
@@ -1205,6 +1222,9 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/enclave)
+"hc" = (
+/turf/simulated/floor/carpet/red,
+/area/ship/scrap/enclave)
 "iH" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
@@ -1221,11 +1241,8 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/fore_starboard_underside_maint)
 "iY" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 9
-	},
-/turf/simulated/floor/tiled,
+/obj/structure/flora/pottedplant/bamboo,
+/turf/simulated/floor/wood/walnut,
 /area/ship/scrap/enclave)
 "kO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1238,6 +1255,25 @@
 	},
 /turf/simulated/floor,
 /area/ship/scrap/aft_port_underside_maint)
+"lg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/landmark/start{
+	name = "Enclave Specialist"
+	},
+/obj/item/stool/bar/padded,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/ship/scrap/enclave)
 "lv" = (
 /turf/simulated/wall,
 /area/ship/scrap/fore_starboard_underside_maint)
@@ -1248,6 +1284,9 @@
 	},
 /turf/simulated/floor,
 /area/ship/scrap/loading_bay)
+"mG" = (
+/turf/simulated/floor/wood/walnut,
+/area/ship/scrap/enclave)
 "oo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1278,22 +1317,49 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/loading_bay)
-"rp" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 6
+"pU" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
 	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/enclave)
-"rt" = (
+/obj/structure/curtain/open/bed{
+	icon_state = "closed";
+	opacity = 1;
+	pixel_y = 1
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/loading_bay)
+"rp" = (
+/obj/effect/floor_decal/corner/beige,
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
 	dir = 5
 	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/storage/backpack/dufflebag,
+/obj/item/chems/glass/rag,
+/obj/item/chems/glass/bucket,
+/turf/simulated/floor/tiled,
+/area/ship/scrap/enclave)
+"rt" = (
 /obj/effect/landmark/start{
 	name = "Enclave Matriarch"
 	},
-/turf/simulated/floor/tiled,
+/obj/structure/bed/chair/padded/beige,
+/turf/simulated/floor/carpet/red,
+/area/ship/scrap/enclave)
+"rZ" = (
+/obj/item/chems/food/snacks/fish/mollusc,
+/obj/item/mollusc,
+/obj/item/mollusc/barnacle,
+/obj/item/mollusc/clam,
+/obj/structure/table/gamblingtable,
+/turf/simulated/floor/wood/walnut,
 /area/ship/scrap/enclave)
 "sX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1458,6 +1524,9 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/effect/landmark/start{
+	name = "Enclave Patriarch"
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/enclave)
 "Gb" = (
@@ -1576,6 +1645,14 @@
 	},
 /turf/simulated/floor,
 /area/ship/scrap/aft_starboard_underside_maint)
+"QW" = (
+/obj/item/stack/tile/floor{
+	amount = 5
+	},
+/obj/item/crowbar/red,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor,
+/area/ship/scrap/enclave)
 "Rr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1608,6 +1685,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/loading_bay)
+"Ua" = (
+/obj/effect/landmark/start{
+	name = "Enclave Matriarch"
+	},
+/obj/structure/bed/chair/wood/walnut,
+/turf/simulated/floor/carpet/red,
+/area/ship/scrap/enclave)
 "UI" = (
 /obj/structure/disposaloutlet{
 	icon_state = "outlet";
@@ -1696,6 +1780,27 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/fore_port_underside_maint)
+"ZL" = (
+/obj/effect/landmark/start{
+	name = "Enclave Patriarch"
+	},
+/turf/simulated/floor/wood/walnut,
+/area/ship/scrap/enclave)
+"ZR" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/obj/structure/curtain/open/bed{
+	pixel_y = 1
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/loading_bay)
 
 (1,1,1) = {"
 aa
@@ -4770,9 +4875,9 @@ aa
 fY
 en
 ae
-ae
+mG
 ax
-oU
+pU
 cd
 lB
 lB
@@ -4851,10 +4956,10 @@ aa
 aa
 fY
 rt
-ae
+hc
 bk
 az
-oU
+pU
 cd
 lB
 aj
@@ -4932,11 +5037,11 @@ aa
 aa
 aa
 fY
-rt
-ae
+Ua
+hc
 bl
 aS
-oU
+ZR
 cd
 lB
 lB
@@ -5014,11 +5119,11 @@ aa
 aa
 aa
 fY
-en
-ae
-ae
-ax
-oU
+rZ
+ZL
+QW
+lg
+pU
 cd
 lB
 bA
