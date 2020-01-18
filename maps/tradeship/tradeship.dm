@@ -13,6 +13,7 @@
 	#include "tradeship_overmap.dm"
 	#include "tradeship_overrides.dm"
 	#include "tradeship_loadouts.dm"
+	#include "tradeship-0.dmm"
 	#include "tradeship-1.dmm"
 	#include "tradeship-2.dmm"
 	#include "tradeship-3.dmm"
