@@ -572,4 +572,5 @@ mob/new_player/MayRespawn()
 	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
 		return
 	var/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
-	new_track.play_to(src)
+	if(new_track)
+		new_track.play_to(src)
