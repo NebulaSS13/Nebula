@@ -164,8 +164,7 @@ function find_code_deps {
     need_cmd grep
     need_cmd awk
     need_cmd md5sum
-    need_cmd python3
-    need_cmd pip
+    need_cmd pyenv
 }
 
 function find_web_deps {
@@ -193,11 +192,17 @@ function find_code {
     fi
 }
 
+function setup_python3 {
+    pyenv global 3.6.7
+    pip3 install --upgrade pip -q
+    pip3 install pyyaml==5.3 -q
+    pip3 install beautifulsoup4==4.8.2 -q
+}
+
 function run_code_tests {
     msg "*** running code tests ***"
     find_code_deps
-    pip install --user PyYaml -q
-    pip install --user beautifulsoup4 -q
+    setup_python3
     shopt -s globstar
     run_test "check travis contains all maps" "scripts/validateTravisContainsAllMaps.sh"
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
