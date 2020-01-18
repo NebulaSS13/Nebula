@@ -49,6 +49,12 @@
 	color = COLOR_BEIGE
 	var/detail_color
 
+/obj/item/clothing/under/yinglet/matriarch
+	name = "matriarch robe"
+	desc = "An expensive and well-made garment for the enclave matriarch."
+	icon_state = "matriarch_robe"
+	color = null
+
 /obj/item/clothing/under/yinglet/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
 	if(detail_color && slot == slot_w_uniform_str)
@@ -67,12 +73,19 @@
 /obj/item/clothing/head/yinglet
 	name = "small hood"
 	desc = "A yinglet-sized cloth hood and mantle. It has ear holes."
+	icon = 'maps/tradeship/icons/head_yinglet.dmi'
 	icon_state = "ying_hood"
 	flags_inv = BLOCKHAIR
 	species_restricted = list(SPECIES_YINGLET)
 	sprite_sheets = list(SPECIES_YINGLET = 'maps/tradeship/icons/onmob_head_yinglet.dmi')
 	color = COLOR_BEIGE
 	var/detail_color
+
+/obj/item/clothing/head/yinglet/matriarch
+	name = "matriarch hood"
+	desc = "The well-crafted and heavily decorated hood of an enclave matriarch."
+	icon_state = "matriarch_hood"
+	color = null
 
 /obj/item/clothing/head/yinglet/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
