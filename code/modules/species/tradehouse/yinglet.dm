@@ -4,7 +4,10 @@
 	name_plural = "Yinglets"
 	description = "A species of short, slender rat-birds with a fondness for clams. Commonly found wherever humans are, \
 	either scavenging amongst their leavings, or benefiting from adjacency to an older and more developed culture."
-	autohiss_basic_map = list("th" = list("z"))
+	autohiss_basic_map = list(
+		"the" = list("zhe"), 
+		"th" = list("z")
+	)
 
 	icobase =         'icons/mob/human_races/species/yinglet/body.dmi'
 	deform =          'icons/mob/human_races/species/yinglet/deformed_body.dmi'
@@ -149,7 +152,10 @@
 	description = "Although similar to the other clam-loving rat-birds of the yinglet species, the southern \
 	yinglets are more parochial, tribal and generally less developed. Nobody is quite clear on which south \
 	they are from."
-	autohiss_basic_map = list("th" = list("d"))
+	autohiss_basic_map = list(
+		"th" = list("d")
+	)
+
 	available_cultural_info = list(
 		TAG_CULTURE =   list(CULTURE_SCAV_TRIBE, CULTURE_OTHER),
 		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
