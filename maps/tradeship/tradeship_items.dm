@@ -47,6 +47,47 @@
 	icon_state = "loincloth"
 	sprite_sheets = list(SPECIES_YINGLET = 'maps/tradeship/icons/onmob_under_yinglet.dmi')
 	color = COLOR_BEIGE
+	var/detail_color
+
+/obj/item/clothing/under/yinglet/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(detail_color && slot == slot_w_uniform_str)
+		var/image/I = image('maps/tradeship/icons/onmob_under_yinglet.dmi', "[icon_state]_detail")
+		I.color = detail_color
+		I.appearance_flags |= RESET_COLOR
+		ret.overlays += I
+	. = ret
+
+/obj/item/clothing/under/yinglet/scout
+	name = "scout loincloth"
+	desc = "A layered loincloth and skirtlike garment worn by enclave scouts."
+	color = "#917756"
+	detail_color = "#698a71"
+
+/obj/item/clothing/head/yinglet
+	name = "small hood"
+	desc = "A yinglet-sized cloth hood and mantle. It has ear holes."
+	icon_state = "ying_hood"
+	flags_inv = BLOCKHAIR
+	species_restricted = list(SPECIES_YINGLET)
+	sprite_sheets = list(SPECIES_YINGLET = 'maps/tradeship/icons/onmob_head_yinglet.dmi')
+	color = COLOR_BEIGE
+	var/detail_color
+
+/obj/item/clothing/head/yinglet/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(detail_color && slot == slot_head_str)
+		var/image/I = image('maps/tradeship/icons/onmob_head_yinglet.dmi', "[icon_state]_detail")
+		I.color = detail_color
+		I.appearance_flags |= RESET_COLOR
+		ret.overlays += I
+	. = ret
+
+/obj/item/clothing/head/yinglet/scout
+	name = "scout hood"
+	desc = "A layered hood and mantle worn by enclave scouts."
+	color = "#917756"
+	detail_color = "#698a71"
 
 /obj/item/clothing/suit/yinglet
 	name = "small cape"
