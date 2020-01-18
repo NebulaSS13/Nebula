@@ -12,7 +12,7 @@
 
 /datum/unit_test/vision_glasses/start_test()
 	spawn(0)
-		var/list/test = create_test_mob_with_mind(null, /mob/living/carbon/human)
+		var/list/test = create_test_mob_with_mind(get_safe_turf(), /mob/living/carbon/human)
 		if(isnull(test))
 			fail("Check Runtimed in Mob creation")
 
