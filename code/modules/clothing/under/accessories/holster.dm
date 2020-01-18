@@ -76,9 +76,13 @@
 	sound_out = 'sound/effects/holster/tactiholsterout.ogg'
 
 /obj/item/clothing/accessory/storage/holster/machete
-	name = "machete sheath"
+	name = "blade sheath"
 	desc = "A handsome synthetic leather sheath with matching belt."
 	icon_state = "holster_machete"
-	can_holster = list(/obj/item/material/hatchet/machete)
+	can_holster = list(
+		/obj/item/material/hatchet/machete,
+		/obj/item/material/knife/kitchen/cleaver,
+		/obj/item/material/sword/katana
+	)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
