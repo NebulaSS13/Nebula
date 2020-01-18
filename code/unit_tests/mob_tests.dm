@@ -70,6 +70,8 @@ proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living
 	if(isnull(mobloc))
 		if(!default_mobloc)
 			for(var/turf/simulated/floor/tiled/T in world)
+				if(!T.zone || !T.zone.air)
+					continue
 				var/pressure = T.zone.air.return_pressure()
 				if(90 < pressure && pressure < 120) // Find a turf between 90 and 120
 					default_mobloc = T
@@ -145,7 +147,7 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 	var/damage_location = BP_CHEST
 
 /datum/unit_test/mob_damage/start_test()
-	var/list/test = create_test_mob_with_mind(null, mob_type)
+	var/list/test = create_test_mob_with_mind(get_safe_turf(), mob_type)
 	var/damage_amount = 4	// Do not raise, if damage >= 5 there is a % chance to reduce damage by half in /obj/item/organ/external/take_damage()
 							// Which makes checks impossible.
 
