@@ -180,7 +180,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
-	if(lobby_tracks.len)
+	if(LAZYLEN(lobby_tracks) == 1)
+		lobby_track_type = lobby_tracks[1]
+	else if(LAZYLEN(lobby_tracks))
 		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
 		lobby_track_type = pick(subtypesof(/music_track) - exclude)
