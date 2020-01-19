@@ -236,11 +236,12 @@
 	forceMove(nloc)
 
 //Don't use these for in-round leaving
+// don't tell me what to do chinsky
 /obj/machinery/cryopod/lifepod/Process()
 	if(SSevac.evacuation_controller && SSevac.evacuation_controller.state >= EVAC_LAUNCHING)
 		if(occupant && !launched)
 			launch()
-		..()
+	..()
 
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
