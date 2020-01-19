@@ -125,7 +125,7 @@
 
 /obj/item/mollusc/attackby(var/obj/item/thing, var/mob/user)
 	if(thing.sharp || thing.edge)
-		user.visible_message(SPAN_NOTICE("\The [user] cracks open \the [src] with \the thing."))
+		user.visible_message(SPAN_NOTICE("\The [user] cracks open \the [src] with \the [thing]."))
 		crack_shell(user)
 		return
 	. = ..()
