@@ -16,12 +16,13 @@
 	damage_overlays = 'icons/mob/human_races/species/yinglet/damage_overlay.dmi'
 	damage_mask =     'icons/mob/human_races/species/yinglet/damage_mask.dmi'
 	blood_mask =      'icons/mob/human_races/species/yinglet/blood_mask.dmi'
+	lip_icon =        'icons/mob/human_races/species/yinglet/lips.dmi'
 
 	flesh_color = "#ab8c65"
 	base_color = "#ab8c65"
 	limb_blend = ICON_MULTIPLY
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_LIPS
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
