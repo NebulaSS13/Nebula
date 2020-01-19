@@ -131,7 +131,7 @@
 			if(mmi_type)
 				O.mmi = new mmi_type(O)
 				O.mmi.transfer_identity(src)
-	else
+	if(O.key != key)
 		O.key = key
 
 	O.dropInto(loc)
