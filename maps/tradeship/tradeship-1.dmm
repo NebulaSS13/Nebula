@@ -1307,22 +1307,15 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science)
 "dc" = (
-/obj/item/caution,
-/obj/item/caution,
-/obj/item/sutures,
 /obj/structure/closet/crate,
-/obj/item/mop,
-/obj/item/radio,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	level = 2
 	},
-/obj/item/storage/bag/trash,
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
 /obj/item/floor_painter,
-/obj/item/clothing/mask/plunger,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "dd" = (
@@ -1492,8 +1485,7 @@
 /area/ship/scrap/cargo/lower)
 "dv" = (
 /obj/machinery/light,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/steel_grid,
+/turf/simulated/open,
 /area/ship/scrap/cargo/lower)
 "dw" = (
 /obj/effect/floor_decal/corner/beige{
@@ -2414,6 +2406,11 @@
 	icon_state = "warning";
 	dir = 1
 	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (WEST)";
+	icon_state = "railing0";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "ib" = (
@@ -2513,7 +2510,6 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/cargo/lower)
 "lK" = (
-/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "lO" = (
@@ -2532,12 +2528,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
 "lZ" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 4
-	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/simulated/open,
 /area/ship/scrap/cargo/lower)
 "mb" = (
 /obj/effect/floor_decal/corner/beige{
@@ -2968,6 +2959,9 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
+"Ei" = (
+/turf/simulated/floor/plating,
+/area/space)
 "Fb" = (
 /obj/item/radio/intercom{
 	dir = 4;
@@ -5982,7 +5976,7 @@ aa
 aa
 aa
 aa
-aa
+Ei
 ai
 ar
 cb
@@ -6064,7 +6058,7 @@ aa
 aa
 aa
 aa
-aa
+Ei
 ai
 ar
 aC
@@ -6146,7 +6140,7 @@ aa
 aa
 aa
 aa
-aa
+Ei
 ai
 ar
 jb
@@ -6228,7 +6222,7 @@ aa
 aa
 aa
 aa
-aa
+Ei
 ai
 as
 aE
@@ -6966,7 +6960,7 @@ aa
 aa
 aa
 aa
-aa
+Ei
 ap
 ay
 aK
@@ -7048,7 +7042,7 @@ aa
 aa
 aa
 aa
-aa
+Ei
 ap
 ay
 nb
@@ -7130,7 +7124,7 @@ aa
 aa
 aa
 aa
-aa
+Ei
 ap
 ay
 aM
@@ -7212,7 +7206,7 @@ aa
 aa
 aa
 aa
-aa
+Ei
 ap
 az
 qb
