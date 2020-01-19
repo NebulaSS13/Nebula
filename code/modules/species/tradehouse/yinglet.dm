@@ -62,7 +62,7 @@
 	total_health = 150
 	brute_mod = 1.25
 	burn_mod =  1.25
-	//mob_size = MOB_SMALL
+	mob_size = MOB_SMALL
 	holder_type = /obj/item/holder/human
 	blood_volume = 350
 	hunger_factor = 0.1
