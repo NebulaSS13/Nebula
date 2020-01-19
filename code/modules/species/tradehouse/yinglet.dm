@@ -5,7 +5,6 @@
 	description = "A species of short, slender rat-birds with a fondness for clams. Commonly found wherever humans are, \
 	either scavenging amongst their leavings, or benefiting from adjacency to an older and more developed culture."
 	autohiss_basic_map = list(
-		"the" = list("zhe"), 
 		"th" = list("z")
 	)
 
