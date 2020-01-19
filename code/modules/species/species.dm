@@ -17,6 +17,7 @@
 	var/icobase =      'icons/mob/human_races/species/human/body.dmi'          // Normal icon set.
 	var/deform =       'icons/mob/human_races/species/human/deformed_body.dmi' // Mutated icon set.
 	var/preview_icon = 'icons/mob/human_races/species/human/preview.dmi'
+	var/lip_icon =     'icons/mob/human_races/species/human/lips.dmi'
 	var/husk_icon =    'icons/mob/human_races/species/default_husk.dmi'
 	var/bandages_icon
 

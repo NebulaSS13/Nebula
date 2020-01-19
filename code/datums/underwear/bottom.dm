@@ -15,13 +15,7 @@
 	has_color = TRUE
 
 /datum/category_item/underwear/bottom/briefs/is_default(var/gender)
-	return gender != FEMALE
-
-/datum/category_item/underwear/bottom/panties_noback
-	name = "Panties, noback"
-	underwear_name = "panties"
-	icon_state = "panties_noback"
-	has_color = TRUE
+	return TRUE
 
 /datum/category_item/underwear/bottom/boxers_loveheart
 	name = "Boxers, Loveheart"
@@ -45,48 +39,10 @@
 	icon_state = "panties"
 	has_color = TRUE
 
-/datum/category_item/underwear/bottom/panties/is_default(var/gender)
-	return gender == FEMALE
-
-/datum/category_item/underwear/bottom/lacy_thong
-	name = "Lacy thong"
-	underwear_name = "thong"
-	icon_state = "lacy_thong"
-
-/datum/category_item/underwear/bottom/lacy_thong_alt
-	name = "Lacy thong, alt"
-	underwear_name = "thong"
-	icon_state = "lacy_thong_alt"
-	has_color = TRUE
-
-/datum/category_item/underwear/bottom/panties_alt
-	name = "Panties, alt"
-	underwear_name = "panties"
-	icon_state = "panties_alt"
-	has_color = TRUE
-
 /datum/category_item/underwear/bottom/compression_shorts
 	name = "Compression shorts"
 	icon_state = "compression_shorts"
 	has_color = TRUE
-
-/datum/category_item/underwear/bottom/thong
-	name = "Thong"
-	underwear_name = "thong"
-	icon_state = "thong"
-	has_color = TRUE
-
-/datum/category_item/underwear/bottom/expedition_pt_shorts
-	name = "PT shorts, Expeditionary Corps"
-	icon_state = "expedition_shorts"
-
-/datum/category_item/underwear/bottom/fleet_pt_shorts
-	name = "PT shorts, Fleet"
-	icon_state = "fleet_shorts"
-
-/datum/category_item/underwear/bottom/army_pt_shorts
-	name = "PT shorts, Army"
-	icon_state = "army_shorts"
 
 /datum/category_item/underwear/bottom/longjon
 	name = "Long John Bottoms"

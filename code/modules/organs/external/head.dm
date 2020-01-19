@@ -111,7 +111,7 @@
 			if(eye_glow) overlays |= eye_glow
 
 		if(owner.lip_style && !BP_IS_PROSTHETIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
-			var/icon/lip_icon = new/icon('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.lip_style]_s")
+			var/icon/lip_icon = new/icon(species ? species.lip_icon : 'icons/mob/human_races/species/human/lips.dmi', "lips_[owner.lip_style]_s")
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)
 
