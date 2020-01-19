@@ -41,13 +41,6 @@
 				item_slowdown += I.slowdown_general
 				item_slowdown += I.slowdown_per_slot[slot]
 				item_slowdown += I.slowdown_accessory
-
-				if(item_slowdown >= 0)
-					var/size_mod = size_strength_mod()
-					if(size_mod + 1 > 0)
-						item_slowdown = item_slowdown / (size_mod + 1)
-					else
-						item_slowdown = item_slowdown - size_mod
 				total_item_slowdown += max(item_slowdown, 0)
 		tally += total_item_slowdown
 
