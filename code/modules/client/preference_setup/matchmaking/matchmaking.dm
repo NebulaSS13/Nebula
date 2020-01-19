@@ -22,7 +22,7 @@ var/global/datum/matchmaker/matchmaker = new()
 		if(R.other && !R.finalized)
 			to_warn |= R.holder.current
 	for(var/mob/M in to_warn)
-		to_chat(M,"<span class='warning'>You have new connections. Use \"<a href='byond://?src=\ref[M];show_relations=1'>See Relationship Info</a>\" to view and finalize them.</span>")
+		to_chat(M,"<span class='warning'>You have new connections. Use \"<a href='byond://?src=\ref[M];show_relationship_info=1'>See Relationship Info</a>\" to view and finalize them.</span>")
 
 /datum/matchmaker/proc/get_relationships(datum/mind/M, finalized_only)
 	. = list()
@@ -206,6 +206,10 @@ var/global/datum/matchmaker/matchmaker = new()
 	if(href_list["show_relations"])
 		if(istype(user))
 			user.see_relationship_info_with(src)
+			return TOPIC_HANDLED
+	if(href_list["show_relationship_info"])
+		if(istype(user))
+			user.see_relationship_info()
 			return TOPIC_HANDLED
 	return ..()
 
