@@ -43,7 +43,8 @@
 	no_skill_buffs = TRUE
 
 /datum/job/cyborg/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
-	return H && H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
+	if(H)
+		return H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
 /datum/job/cyborg/equip(var/mob/living/carbon/human/H)
 	return !!H
