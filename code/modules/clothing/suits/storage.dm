@@ -1,4 +1,5 @@
 /obj/item/clothing/suit/storage
+	action_button_name = "Open Storage"
 	var/obj/item/storage/internal/pockets/pockets
 	var/slots = 2
 
