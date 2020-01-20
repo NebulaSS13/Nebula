@@ -64,18 +64,18 @@
 
 
 // Molluscs!
-/obj/item/mollusc_shell
+/obj/item/trash/mollusc_shell
 	name = "mollusc shell"
 	icon = 'icons/obj/molluscs.dmi'
 	icon_state = "mollusc_shell"
 	desc = "The cracked shell of an unfortunate mollusc."
 	material = MATERIAL_BONE_GENERIC
 
-/obj/item/mollusc_shell/clam
+/obj/item/trash/mollusc_shell/clam
 	name = "clamshell"
 	icon_state = "clam_shell"
 
-/obj/item/mollusc_shell/barnacle
+/obj/item/trash/mollusc_shell/barnacle
 	name = "barnacle shell"
 	icon_state = "barnacle_shell"
 
@@ -84,22 +84,23 @@
 	desc = "A small slimy mollusc. Fresh!"
 	icon = 'icons/obj/molluscs.dmi'
 	icon_state = "mollusc"
+	w_class = ITEM_SIZE_TINY
 	var/meat_type = /obj/item/chems/food/snacks/fish/mollusc
-	var/shell_type = /obj/item/mollusc_shell
+	var/shell_type = /obj/item/trash/mollusc_shell
 
 /obj/item/mollusc/barnacle
 	name = "barnacle"
 	desc = "A hull barnacle, probably freshly scraped off a spaceship."
 	icon_state = "barnacle"
 	meat_type = /obj/item/chems/food/snacks/fish/mollusc/barnacle
-	shell_type = /obj/item/mollusc_shell/barnacle
+	shell_type = /obj/item/trash/mollusc_shell/barnacle
 
 /obj/item/mollusc/clam
 	name = "clam"
 	desc = "A free-ranging space clam."
 	icon_state = "clam"
 	meat_type = /obj/item/chems/food/snacks/fish/mollusc/clam
-	shell_type = /obj/item/mollusc_shell/clam
+	shell_type = /obj/item/trash/mollusc_shell/clam
 
 /obj/item/mollusc/proc/crack_shell(var/mob/user)
 	playsound(loc, "fracture", 80, 1)

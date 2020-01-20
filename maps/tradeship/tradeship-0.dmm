@@ -1464,7 +1464,7 @@
 	dir = 4;
 	id = "trash_sort"
 	},
-/obj/item/mollusc_shell/clam,
+/obj/item/trash/mollusc_shell/clam,
 /turf/simulated/floor,
 /area/ship/scrap/loading_bay)
 "pi" = (
@@ -1830,7 +1830,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/item/mollusc_shell/barnacle,
+/obj/item/trash/mollusc_shell/barnacle,
 /turf/simulated/floor,
 /area/ship/scrap/fore_starboard_underside_maint)
 "HS" = (
@@ -1927,7 +1927,7 @@
 /area/ship/scrap/fore_starboard_underside_maint)
 "NR" = (
 /obj/structure/mattress,
-/obj/item/mollusc_shell,
+/obj/item/trash/mollusc_shell,
 /turf/simulated/floor,
 /area/ship/scrap/fore_port_underside_maint)
 "PF" = (
