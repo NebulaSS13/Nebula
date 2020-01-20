@@ -12,6 +12,5 @@ Dockerfile
 .editorconfig
 .gitattributes
 .gitignore
-.travis.yml
 .github
 sql

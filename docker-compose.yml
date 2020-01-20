@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   db:
     build: ./sql
@@ -8,8 +8,12 @@ services:
     volumes:
       - "./sql/test_db:/var/lib/mysql"
   game:
-    build: .
+    build:
+      context: .
+      target: spacestation
     image: bs12:latest
+    depends_on:
+      - db
     networks:
       - internal
     ports:
