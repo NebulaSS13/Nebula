@@ -286,7 +286,8 @@ proc/age2agedescription(age)
 		res += "bio"
 	return english_list(res)
 
-/proc/get_effective_view(var/val)
+/proc/get_effective_view(var/client/C)
+	var/val = C ? C.view : world.view
 	if(isnum(val))
 		return val
 	if(istext(val))
