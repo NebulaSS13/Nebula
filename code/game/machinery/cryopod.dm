@@ -368,12 +368,12 @@
 				W.forceMove(src.loc)
 
 	//Update any existing objectives involving this mob.
-	for(var/datum/objective/O in all_objectives)
+	for(var/datum/objective/O in GLOB.all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
 		if(O.target == occupant.mind)
 			if(O.owner && O.owner.current)
-				to_chat(O.owner.current, "<span class='warning'>You get the feeling your target is no longer within your reach...</span>")
+				to_chat(O.owner.current, SPAN_DANGER("You get the feeling your target, [occupant.real_name], is no longer within your reach..."))
 			qdel(O)
 
 	//Handle job slot/tater cleanup.
