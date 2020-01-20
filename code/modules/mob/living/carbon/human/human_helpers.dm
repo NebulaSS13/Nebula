@@ -174,7 +174,7 @@
 	next_sonar_ping += 10 SECONDS
 	var/heard_something = FALSE
 	to_chat(src, "<span class='notice'>You take a moment to listen in to your environment...</span>")
-	for(var/mob/living/L in range(client.view, src))
+	for(var/mob/living/L in range(get_effective_view(client), src))
 		var/turf/T = get_turf(L)
 		if(!T || L == src || L.stat == DEAD || is_below_sound_pressure(T))
 			continue
@@ -191,7 +191,7 @@
 		var/direction = get_dir(src, L)
 		if(direction)
 			feedback += "towards the [dir2text(direction)], "
-			switch(get_dist(src, L) / client.view)
+			switch(get_dist(src, L) / get_effective_view(client))
 				if(0 to 0.2)
 					feedback += "very close by."
 				if(0.2 to 0.4)

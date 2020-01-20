@@ -12,7 +12,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 /mob/observer/ghost/default_can_use_topic(var/src_object)
 	if(can_admin_interact())
 		return STATUS_INTERACTIVE							// Admins are more equal
-	if(!client || get_dist(src_object, src)	> get_effective_view(client.view))	// Preventing ghosts from having a million windows open by limiting to objects in range
+	if(!client || get_dist(src_object, src)	> get_effective_view(client))	// Preventing ghosts from having a million windows open by limiting to objects in range
 		return STATUS_CLOSE
 	return STATUS_UPDATE									// Ghosts can view updates
 
@@ -28,7 +28,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 		return
 
 	// robots can interact with things they can see within their view range
-	if((src_object in view(src)) && get_dist(src_object, src) <= src.client.view)
+	if((src_object in view(src)) && get_dist(src_object, src) <= get_effective_view(client))
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
 
@@ -44,7 +44,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
-	if(src_object in view(client.view, src))
+	if(src_object in view(get_effective_view(client), src))
 		return STATUS_INTERACTIVE
 
 	// If we're installed in a chassi, rather than transfered to an inteliCard or other container, then check if we have camera view
@@ -53,7 +53,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 		if(cameranet && !cameranet.is_turf_visible(get_turf(src_object)))
 			return STATUS_CLOSE
 		return STATUS_INTERACTIVE
-	else if(get_dist(src_object, src) <= client.view)	// View does not return what one would expect while installed in an inteliCard
+	else if(get_dist(src_object, src) <= get_effective_view(client))	// View does not return what one would expect while installed in an inteliCard
 		return STATUS_INTERACTIVE
 
 	return STATUS_CLOSE

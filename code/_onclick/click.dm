@@ -283,7 +283,7 @@
 /mob/observer/ghost/TurfAdjacent(var/turf/T)
 	if(!isturf(loc) || !client)
 		return FALSE
-	return z == T.z && (get_dist(loc, T) <= client.view)
+	return z == T.z && (get_dist(loc, T) <= get_effective_view(client))
 
 /*
 	Control+Shift click
