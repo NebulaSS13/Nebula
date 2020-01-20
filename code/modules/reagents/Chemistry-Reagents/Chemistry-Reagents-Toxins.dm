@@ -107,17 +107,13 @@
 	color = "#ff3300"
 	strength = 30
 	touch_met = 5
-	var/fire_mult = 5
 	heating_point = null
 	heating_products = null
-
-/datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
-	if(istype(L))
-		L.adjust_fire_stacks(amount / fire_mult)
+	fuel_value = 5
 
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
-	if(prob(10 * fire_mult))
+	if(prob(10 * fuel_value))
 		M.pl_effects()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T)
@@ -131,7 +127,7 @@
 	name = "Oxyphoron"
 	description = "An exceptionally flammable molecule formed from deuterium synthesis."
 	strength = 15
-	fire_mult = 15
+	fuel_value = 15
 
 /datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
 	if(!istype(T))

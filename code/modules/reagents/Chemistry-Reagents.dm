@@ -41,6 +41,7 @@
 	var/heating_point
 	var/heating_message = "begins to boil!"
 	var/heating_sound = 'sound/effects/bubbles.ogg'
+	var/fuel_value = 0
 
 	var/temperature_multiplier = 1
 	var/value = 1
@@ -64,15 +65,22 @@
 /datum/reagent/proc/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
 	return
 
-// This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
-/datum/reagent/proc/touch_mob(var/mob/M, var/amount)
-	return
-
 /datum/reagent/proc/touch_obj(var/obj/O, var/amount) // Acid melting, cleaner cleaning, etc
 	return
 
+#define FLAMMABLE_LIQUID_DIVISOR 7
+// This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
+/datum/reagent/proc/touch_mob(var/mob/living/M, var/amount)
+	if(fuel_value && amount && istype(M))
+		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+
 /datum/reagent/proc/touch_turf(var/turf/T, var/amount) // Cleaner cleaning, lube lubbing, etc, all go here
-	return
+	if(fuel_value && istype(T))
+		var/removing = Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+		if(removing > 0)
+			new /obj/effect/decal/cleanable/liquid_fuel(T, removing)
+			remove_self(removing)
+#undef FLAMMABLE_LIQUID_DIVISOR
 
 /datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))

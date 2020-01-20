@@ -218,6 +218,7 @@
 	color = "#673910"
 	touch_met = 50
 	value = 6
+	fuel_value = 1.5
 
 /datum/reagent/thermite/touch_turf(var/turf/T)
 	if(volume >= 5)
@@ -227,10 +228,6 @@
 			W.overlays += image('icons/effects/effects.dmi',icon_state = "#673910")
 			remove_self(5)
 	return
-
-/datum/reagent/thermite/touch_mob(var/mob/living/L, var/amount)
-	if(istype(L))
-		L.adjust_fire_stacks(amount / 5)
 
 /datum/reagent/thermite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustFireLoss(3 * removed)
@@ -242,14 +239,11 @@
 	reagent_state = LIQUID
 	color = "#673910"
 	touch_met = 50
+	fuel_value = 5
 
 /datum/reagent/napalm/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
 	remove_self(volume)
-
-/datum/reagent/napalm/touch_mob(var/mob/living/L, var/amount)
-	if(istype(L))
-		L.adjust_fire_stacks(amount / 100)
 
 /datum/reagent/napalm/b
 	name = "Napalm B"

@@ -35,33 +35,38 @@
 	update_name()
 
 /obj/item/chems/glass/rag/Destroy()
+	var/obj/item/chems/food/drinks/bottle/bottle = loc
+	if(istype(bottle) && bottle.rag == src)
+		bottle.rag = null
+		bottle.update_icon()
 	STOP_PROCESSING(SSobj, src) //so we don't continue turning to ash while gc'd
 	. = ..()
 
 /obj/item/chems/glass/rag/attack_self(mob/user as mob)
 	if(on_fire && user.unEquip(src))
-		user.visible_message("<span class='warning'>\The [user] stamps out [src].</span>", "<span class='warning'>You stamp out [src].</span>")
+		user.visible_message(SPAN_NOTICE("\The [user] stamps out [src]."), SPAN_NOTICE("You stamp out [src]."))
 		extinguish()
 	else
 		remove_contents(user)
 
 /obj/item/chems/glass/rag/attackby(obj/item/W, mob/user)
-	if(!on_fire && istype(W, /obj/item/flame))
-		var/obj/item/flame/F = W
-		if(F.lit)
-			ignite()
-			if(on_fire)
-				visible_message("<span class='warning'>\The [user] lights [src] with [W].</span>")
-			else
-				to_chat(user, "<span class='warning'>You manage to singe [src], but fail to light it.</span>")
-
+	if(isflamesource(W))
+		if(on_fire)
+			to_chat(user, SPAN_WARNING("\The [src] is already blazing merrily!"))
+			return
+		ignite()
+		if(on_fire)
+			visible_message(SPAN_DANGER("\The [user] lights \the [src] with \the [W]."))
+		else
+			to_chat(user, SPAN_WARNING("You attempt to light \the [src] with \the [W], but it doesn't seem to be flammable."))
+		update_name()
+		return
 	. = ..()
-	update_name()
 
 /obj/item/chems/glass/rag/proc/update_name()
 	if(on_fire)
 		SetName("burning [initial(name)]")
-	else if(reagents.total_volume)
+	else if(reagents && reagents.total_volume)
 		SetName("damp [initial(name)]")
 	else
 		SetName("dry [initial(name)]")
@@ -163,8 +168,13 @@
 //rag must have a minimum of 2 units welder fuel and at least 80% of the reagents must be welder fuel.
 //maybe generalize flammable reagents someday
 /obj/item/chems/glass/rag/proc/can_ignite()
-	var/fuel = reagents.get_reagent_amount(/datum/reagent/fuel)
-	return (fuel >= 2 && fuel >= reagents.total_volume*0.8)
+	var/total_fuel = 0
+	var/total_volume = 0
+	if(reagents)
+		total_volume += reagents.total_volume
+		for(var/datum/reagent/R in reagents.reagent_list)
+			total_fuel = R.volume * R.fuel_value
+	. = (total_fuel >= 2 && total_fuel >= total_volume*0.5)
 
 /obj/item/chems/glass/rag/proc/ignite()
 	if(on_fire)
@@ -174,7 +184,7 @@
 
 	//also copied from matches
 	if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
-		visible_message("<span class='danger'>\The [src] conflagrates violently!</span>")
+		visible_message(SPAN_DANGER("\The [src] explodes!"))
 		var/datum/effect/effect/system/reagents_explosion/e = new()
 		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
 		e.start()

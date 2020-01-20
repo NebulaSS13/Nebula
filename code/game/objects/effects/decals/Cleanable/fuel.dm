@@ -1,5 +1,6 @@
 /obj/effect/decal/cleanable/liquid_fuel
 	//Liquid fuel is used for things that used to rely on volatile fuels or phoron being contained to a couple tiles.
+	name = "flammable liquid"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "fuel"
 	layer = BLOOD_LAYER
@@ -7,6 +8,11 @@
 	cleanable_scent = "fuel"
 
 /obj/effect/decal/cleanable/liquid_fuel/proc/Spread(exclude=list())
+
+	// Ooze down to the lowest available area.
+	while(HasBelow(loc.z) && istype(loc, /turf/simulated/open))
+		dropInto(GetBelow(loc))
+
 	//Allows liquid fuels to sometimes flow into other tiles.
 	if(amount < 15) return //lets suppose welder fuel is fairly thick and sticky. For something like water, 5 or less would be more appropriate.
 	var/turf/simulated/S = loc
@@ -35,6 +41,11 @@
 	. = ..()
 
 /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/Spread()
+
+	// Ooze down to the lowest available area.
+	while(HasBelow(loc.z) && istype(loc, /turf/simulated/open))
+		dropInto(GetBelow(loc))
+
 	//The spread for flamethrower fuel is much more precise, to create a wide fire pattern.
 	if(amount < 0.1) return
 	var/turf/simulated/S = loc
