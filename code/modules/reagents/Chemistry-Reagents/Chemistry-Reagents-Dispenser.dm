@@ -91,6 +91,8 @@
 	reagent_state = LIQUID
 	color = "#404030"
 	touch_met = 5
+	fuel_value = 0.75
+
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
@@ -104,10 +106,6 @@
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 	value = DISPENSER_REAGENT_VALUE
-
-/datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
-	if(istype(L))
-		L.adjust_fire_stacks(amount / 15)
 
 /datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed * 2 * toxicity)

@@ -18,8 +18,8 @@
 	if(isGlass) unacidable = 1
 
 /obj/item/chems/food/drinks/bottle/Destroy()
-	if(rag)
-		rag.forceMove(src.loc)
+	if(!QDELETED(rag))
+		rag.dropInto(loc)
 	rag = null
 	return ..()
 
@@ -29,14 +29,17 @@
 	if(isGlass && TT.thrower && TT.thrower.a_intent != I_HELP)
 		if(TT.speed > throw_speed || smash_check(TT.dist_travelled)) //not as reliable as smashing directly
 			if(reagents)
-				hit_atom.visible_message("<span class='notice'>The contents of \the [src] splash all over [hit_atom]!</span>")
+				hit_atom.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over \the [hit_atom]!"))
 				reagents.splash(hit_atom, reagents.total_volume)
-			src.smash(loc, hit_atom)
+			smash(loc, hit_atom)
 
 /obj/item/chems/food/drinks/bottle/proc/smash_check(var/distance)
-	if(!isGlass || !smash_duration)
+	if(!isGlass)
 		return 0
-
+	if(rag && rag.on_fire) // Molotovs should be somewhat reliable, they're a pain to make.
+		return TRUE
+	if(!smash_duration)
+		return 0
 	var/list/chance_table = list(95, 95, 90, 85, 75, 60, 40, 15) //starting from distance 0
 	var/idx = max(distance + 1, 1) //since list indices start at 1
 	if(idx > chance_table.len)
@@ -45,20 +48,36 @@
 
 /obj/item/chems/food/drinks/bottle/proc/smash(var/newloc, atom/against = null)
 	//Creates a shattering noise and replaces the bottle with a broken_bottle
-	var/obj/item/broken_bottle/B = new /obj/item/broken_bottle(newloc)
+	var/obj/item/broken_bottle/B = new(newloc)
 	if(prob(33))
 		new/obj/item/material/shard(newloc) // Create a glass shard at the target's location!
 	B.icon_state = src.icon_state
-
 	var/icon/I = new('icons/obj/drinks.dmi', src.icon_state)
 	I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
 	I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
 	B.icon = I
+	B.dropInto(newloc)
 
-	if(rag && rag.on_fire && isliving(against))
-		rag.forceMove(loc)
-		var/mob/living/L = against
-		L.IgniteMob()
+	// Propagate our fire source down to the lowest level we can.
+	// Ignite any fuel or mobs we have spilled. TODO: generalize to
+	// flame sources when traversing open space.
+	if(rag)
+		var/turf/T = get_turf(newloc)
+		if(istype(T))
+			while(T)
+				rag.forceMove(T)
+				if(rag.on_fire)
+					T.hotspot_expose(700, 5)
+					for(var/mob/living/M in T.contents)
+						M.IgniteMob()
+				if(HasBelow(T.z) && istype(T, /turf/simulated/open))
+					T = GetBelow(T)
+				else
+					T = null
+			rag.dropInto(rag.loc)
+		else
+			rag.dropInto(newloc)
+		rag = null
 
 	playsound(src, "shatter", 70, 1)
 	src.transfer_fingerprints_to(B)
@@ -70,7 +89,7 @@
 	if(!rag && istype(W, /obj/item/chems/glass/rag))
 		insert_rag(W, user)
 		return
-	if(rag && istype(W, /obj/item/flame))
+	if(rag && isflamesource(W))
 		rag.attackby(W, user)
 		return
 	..()
@@ -83,10 +102,22 @@
 
 /obj/item/chems/food/drinks/bottle/proc/insert_rag(obj/item/chems/glass/rag/R, mob/user)
 	if(!isGlass || rag) return
+
 	if(user.unEquip(R))
-		to_chat(user, "<span class='notice'>You stuff [R] into [src].</span>")
+		to_chat(user, SPAN_NOTICE("You stuff [R] into [src]."))
 		rag = R
 		rag.forceMove(src)
+
+		// Equalize reagents between the rag and bottle so that
+		// the rag will probably have something to burn, and the
+		// bottle contents will be tainted by having the rag dipped 
+		// in it.
+		if(rag && rag.reagents)
+			rag.reagents.trans_to(src, rag.reagents.total_volume)
+			if(reagents)
+				reagents.trans_to(rag, min(reagents.total_volume, rag.reagents.maximum_volume))
+			rag.update_name()
+
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 		update_icon()
 
@@ -121,19 +152,21 @@
 	var/mob/living/carbon/human/H = target
 	if(istype(H) && H.headcheck(hit_zone))
 		var/obj/item/organ/affecting = H.get_organ(hit_zone) //headcheck should ensure that affecting is not null
-		user.visible_message("<span class='danger'>[user] smashes [src] into [H]'s [affecting.name]!</span>")
+		user.visible_message(SPAN_DANGER("\The [user] smashes \the [src] into [H]'s [affecting.name]!"))
 		// You are going to knock someone out for longer if they are not wearing a helmet.
 		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 10) * 100
 		var/weaken_duration = smash_duration + min(0, force - blocked + 10)
 		if(weaken_duration)
 			target.apply_effect(min(weaken_duration, 5), WEAKEN, blocked) // Never weaken more than a flash!
 	else
-		user.visible_message("<span class='danger'>\The [user] smashes [src] into [target]!</span>")
+		user.visible_message(SPAN_DANGER("\The [user] smashes \the [src] into [target]!"))
 
 	//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
 	if(reagents)
-		user.visible_message("<span class='notice'>The contents of \the [src] splash all over [target]!</span>")
+		user.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over [target]!"))
 		reagents.splash(target, reagents.total_volume)
+		if(rag && rag.on_fire && istype(target))
+			target.IgniteMob()
 
 	//Finally, smash the bottle. This kills (qdel) the bottle.
 	var/obj/item/broken_bottle/B = smash(target.loc, target)
@@ -141,8 +174,7 @@
 
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/broken_bottle
-
-	name = "Broken Bottle"
+	name = "broken bottle"
 	desc = "A bottle with a sharp broken bottom."
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "broken_bottle"

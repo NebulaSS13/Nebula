@@ -20,8 +20,8 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 /mob/is_burnable()
 	return simulated
 
-turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
-
+/turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
+	return
 
 /turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(fire_protection > world.time-300)
