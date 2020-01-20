@@ -20,6 +20,7 @@
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/chems/food/drinks/juicebox/apple
+	name = "apple juicebox"
 	desc = "A small cardboard juicebox with a cartoon apple on it."
 	icon_state = "juicebox_red"
 
@@ -28,6 +29,7 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/apple, 25)
 
 /obj/item/chems/food/drinks/juicebox/orange
+	name = "orange juicebox"
 	desc = "A small cardboard juicebox with a cartoon orange on it."
 	icon_state = "juicebox_orange"
 
@@ -36,6 +38,7 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/orange, 25)
 
 /obj/item/chems/food/drinks/juicebox/grape
+	name = "grape juicebox"
 	desc = "A small cardboard juicebox with some cartoon grapes on it."
 	icon_state = "juicebox_purple"
 
