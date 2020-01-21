@@ -42,8 +42,10 @@
 		update_icon()
 	else ..()
 
+// "Coin Flipping, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
 /obj/item/material/coin/attack_self(var/mob/user)
-	user.visible_message("<span class='notice'>\The [user] has thrown \the [src]. It lands on [rand(1, 2) == 1 ? "tails" : "heads"]!</span>")
+	playsound(usr.loc, 'sound/effects/coin_flip.ogg', 75, 1)
+	user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air and catches it, revealing that it landed on [(prob(50) && "tails") || "heads"]!"))
 
 // Subtypes.
 /obj/item/material/coin/gold
