@@ -237,8 +237,6 @@
 			return global.all_languages;
 		if("all_money_accounts")
 			return global.all_money_accounts;
-		if("all_objectives")
-			return global.all_objectives;
 		if("all_robolimbs")
 			return global.all_robolimbs;
 		if("all_species")
@@ -1132,8 +1130,6 @@
 			global.all_languages=newval;
 		if("all_money_accounts")
 			global.all_money_accounts=newval;
-		if("all_objectives")
-			global.all_objectives=newval;
 		if("all_robolimbs")
 			global.all_robolimbs=newval;
 		if("all_species")
@@ -1908,7 +1904,6 @@
 	"all_grabstates",
 	"all_languages",
 	"all_money_accounts",
-	"all_objectives",
 	"all_robolimbs",
 	"all_species",
 	"all_ui_styles",
