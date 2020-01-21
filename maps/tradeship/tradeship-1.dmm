@@ -370,7 +370,8 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/turf/simulated/floor/tiled,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/lower)
 "bd" = (
 /obj/effect/floor_decal/corner/beige{
@@ -518,6 +519,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
+	},
+/obj/machinery/light/small{
+	flickering = 1
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/robot)
@@ -686,10 +690,8 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/structure/sign/chemistry{
-	pixel_x = -30
-	},
 /obj/structure/disposalpipe/segment,
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
 "bJ" = (
@@ -907,7 +909,7 @@
 /obj/machinery/power/apc{
 	dir = 4
 	},
-/obj/machinery/organ_printer/robot/mapped,
+/obj/machinery/r_n_d/destructive_analyzer,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "ce" = (
@@ -1164,7 +1166,7 @@
 /area/ship/scrap/crew/dorms2)
 "cJ" = (
 /obj/machinery/light,
-/obj/machinery/r_n_d/destructive_analyzer,
+/obj/machinery/r_n_d/circuit_imprinter,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "cL" = (
@@ -1175,6 +1177,9 @@
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
 	dir = 9
+	},
+/obj/machinery/light_switch{
+	pixel_x = -25
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
@@ -1471,6 +1476,21 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science)
+"ds" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/obj/structure/disposalpipe/segment,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/maintenance/lower)
 "dt" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -1550,9 +1570,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2
-	},
-/obj/effect/landmark/start{
-	name = "Junior Researcher"
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science)
@@ -2400,6 +2417,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
+"hp" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/window/westleft,
+/obj/machinery/door/blast/shutters/open{
+	id_tag = "rndshutters";
+	name = "Fabrication Bay Shutters"
+	},
+/obj/structure/table/marble,
+/turf/simulated/floor,
+/area/ship/scrap/science/fabricaton)
 "hI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/warning{
@@ -2967,11 +2994,17 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/machinery/r_n_d/circuit_imprinter,
+/obj/machinery/r_n_d/protolathe,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "Fw" = (
 /obj/structure/table/standard,
+/obj/item/integrated_circuit_printer,
+/obj/machinery/button/blast_door{
+	id_tag = "rndshutters";
+	name = "Desk Shutters";
+	pixel_x = -25
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "Gb" = (
@@ -3037,7 +3070,7 @@
 /turf/simulated/floor/lino,
 /area/ship/scrap/crew/dorms2)
 "Ic" = (
-/obj/machinery/r_n_d/protolathe,
+/obj/machinery/organ_printer/robot/mapped,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "IU" = (
@@ -3303,12 +3336,6 @@
 /obj/machinery/door/airlock/hatch/autoname/engineering,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/scrap/maintenance/storage)
-"Wp" = (
-/obj/machinery/light_switch{
-	pixel_x = -25
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/cargo/lower)
 "WT" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -3327,7 +3354,6 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/item/integrated_circuit_printer,
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
@@ -3392,6 +3418,9 @@
 /area/ship/scrap/cargo/lower)
 "Zs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/landmark/start{
+	name = "Junior Researcher"
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "ZJ" = (
@@ -6149,7 +6178,7 @@ aO
 zb
 aO
 ce
-ce
+hp
 Jb
 ce
 ce
@@ -6231,7 +6260,7 @@ bc
 br
 bI
 Eb
-cf
+ds
 kb
 lO
 uo
@@ -6388,7 +6417,7 @@ pr
 al
 al
 aF
-Wp
+aU
 du
 aR
 bd
