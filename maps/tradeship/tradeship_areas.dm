@@ -196,14 +196,17 @@
 	icon_state = "tcomsatcham"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/signal.ogg','sound/ambience/sonar.ogg')
 
+/area/ship/scrap/shuttle
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
 /area/ship/scrap/shuttle/outgoing
-  name = "\improper Exploration Shuttle"
-  icon_state = "tcomsatcham"
+	name = "\improper Exploration Shuttle"
+	icon_state = "tcomsatcham"
 
 /area/ship/scrap/shuttle/lift
-  name = "\improper Cargo Lift"
-  icon_state = "shuttle3"
-  base_turf = /turf/simulated/open
+	name = "\improper Cargo Lift"
+	icon_state = "shuttle3"
+	base_turf = /turf/simulated/open
 
 /area/ship/scrap/shuttle/lift/alert_on_fall(var/mob/living/carbon/human/H)
 	if(H.client && SSpersistence.elevator_fall_shifts > 0)
@@ -211,9 +214,9 @@
 		SSpersistence.elevator_fall_shifts = -1
 
 /area/ship/scrap/maintenance/solars
-  name = "\improper Solar Array Access"
-  icon_state = "SolarcontrolA"
+	name = "\improper Solar Array Access"
+	icon_state = "SolarcontrolA"
 
 /area/ship/scrap/maintenance/robot
-  name = "\improper Robot Storage"
-  icon_state = "ai_cyborg"
+	name = "\improper Robot Storage"
+	icon_state = "ai_cyborg"
