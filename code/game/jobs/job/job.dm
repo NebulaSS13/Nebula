@@ -194,7 +194,6 @@
 
 /datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
 
-
 	if(!isnull(allowed_branches) && (!prefs.branches[title] || !is_branch_allowed(prefs.branches[title])))
 		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
 		return TRUE
@@ -214,6 +213,11 @@
 	
 	if(!S.check_background(src, prefs))
 		to_chat(feedback, "<span class='boldannounce'>Incompatible background for [title].</span>")
+		return TRUE
+
+	var/special_blocker = check_special_blockers(prefs)
+	if(special_blocker)
+		to_chat(feedback, "<span class='boldannounce'>Your current preferences are not appropriate for [title] due to: '[special_blocker]'.</span>")
 		return TRUE
 
 	return FALSE
@@ -369,6 +373,10 @@
 			reasons["Your species choice does not allow it."] = TRUE
 		if(!S.check_background(src, caller.prefs))
 			reasons["Your background choices do not allow it."] = TRUE
+		var/special_blocker = check_special_blockers(caller.prefs)
+		if(special_blocker)
+			reasons["Your preferences do not allow it: '[special_blocker]'."] = TRUE
+		return TRUE
 	if(LAZYLEN(reasons))
 		. = reasons
 
@@ -462,4 +470,7 @@
 	return FALSE
 
 /datum/job/proc/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+	return
+
+/datum/job/proc/check_special_blockers(var/datum/preferences/prefs)
 	return
