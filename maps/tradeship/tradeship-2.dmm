@@ -715,6 +715,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
+/obj/item/wrench,
 /turf/simulated/floor/plating,
 /area/ship/scrap/shuttle/outgoing)
 "cB" = (
