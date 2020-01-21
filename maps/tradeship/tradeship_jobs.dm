@@ -9,10 +9,18 @@
 		/datum/job/assistant,
 		/datum/job/engineer,
 		/datum/job/doctor/junior,
-		/datum/job/scientist
+		/datum/job/scientist,
+		/datum/job/yinglet,
+		/datum/job/yinglet/scout,
+		/datum/job/yinglet/patriarch,
+		/datum/job/yinglet/matriarch
 	)
 	species_to_job_whitelist = list(
 		/datum/species/yinglet = list(
+			/datum/job/yinglet,
+			/datum/job/yinglet/scout,
+			/datum/job/yinglet/patriarch,
+			/datum/job/yinglet/matriarch,
 			/datum/job/assistant,
 			/datum/job/engineer,
 			/datum/job/cyborg,
@@ -20,6 +28,10 @@
 			/datum/job/scientist
 		),
 		/datum/species/yinglet/southern = list(
+			/datum/job/yinglet,
+			/datum/job/yinglet/scout,
+			/datum/job/yinglet/patriarch,
+			/datum/job/yinglet/matriarch,
 			/datum/job/assistant,
 			/datum/job/engineer,
 			/datum/job/cyborg,
@@ -214,44 +226,110 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 24
 
-//TODO
-/*
-
-
 /datum/job/yinglet
-	title = "Enclave Scav"
+	title = "Enclave Worker"
 	spawn_positions = 2
 	total_positions = 4
 	hud_icon = "hudying"
 	supervisors = "the Matriarch and the Patriarches"
-	var/requires_species = SPECIES_YINGLET
-	var/requires_gender = MALE
+	outfit_type = /decl/hierarchy/outfit/job/yinglet
+	department_flag = CIV
+	var/required_gender
 
-/datum/job/yinglet/some_check
-	check requires_species
-	check requires_gender
+/datum/job/yinglet/is_species_allowed(var/datum/species/S)
+	if(S && !istype(S))
+		S = all_species[S]
+	. = istype(S) && (S.name == SPECIES_YINGLET || S.name == SPECIES_YINGLET_SOUTHERN)
+
+/datum/job/yinglet/check_special_blockers(var/datum/preferences/prefs)
+	if(required_gender && prefs.gender != required_gender)
+		. = "[required_gender] only"
+
+/datum/job/yinglet/scout
+	title = "Enclave Scout"
+	spawn_positions = 1
+	total_positions = 3
+	department_flag = EXP
+	hud_icon = "hudyingscout"
+	supervisors = "the Matriarch and the Patriarches"
+	outfit_type = /decl/hierarchy/outfit/job/yinglet/scout
+	access = list(access_eva, access_research)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	                    SKILL_EVA         = SKILL_ADEPT,
+	                    SKILL_SCIENCE     = SKILL_ADEPT,
+	                    SKILL_PILOT       = SKILL_BASIC)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+	                    SKILL_SCIENCE     = SKILL_MAX,
+	                    SKILL_COMBAT      = SKILL_EXPERT,
+	                    SKILL_WEAPONS     = SKILL_EXPERT)
+	skill_points = 22
 
 /datum/job/yinglet/patriarch
 	title = "Enclave Patriarch"
 	hud_icon = "hudyingpatriarch"
-	spawn_positions = 1
-	total_positions = 2
-	supervisors = "the Matriarch"
-
-/datum/job/yinglet/lady
-	title = "Enclave Lady"
-	hud_icon = "hudyinglady"
-	spawn_positions = 1
+	spawn_positions = 2
 	total_positions = 3
-	requires_gender = FEMALE
+	supervisors = "the Matriarch"
+	required_gender = MALE
+	outfit_type = /decl/hierarchy/outfit/job/yinglet/patriarch
+	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
+	                    SKILL_FINANCE     = SKILL_EXPERT,
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_PILOT       = SKILL_ADEPT,
+						SKILL_COMPUTER     = SKILL_BASIC,
+	                    SKILL_EVA          = SKILL_BASIC,
+	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
+	                    SKILL_ELECTRICAL   = SKILL_BASIC)
 
-/datum/job/yinglet/lady/matriarch
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+	                    SKILL_FINANCE     = SKILL_MAX,
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
+						SKILL_CONSTRUCTION = SKILL_MAX,
+	                    SKILL_ELECTRICAL   = SKILL_MAX,
+	                    SKILL_ATMOS        = SKILL_MAX,
+	                    SKILL_ENGINES      = SKILL_MAX)
+	skill_points = 26
+	department_flag = COM|CIV
+	access = list(
+		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge, 
+		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
+		access_hop, access_RC_announce, access_keycard_auth)
+	minimal_access = list(
+		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge, 
+		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
+		access_hop, access_RC_announce, access_keycard_auth)
+
+
+/datum/job/yinglet/matriarch
 	title = "Enclave Matriarch"
 	hud_icon = "hudyingmatriarch"
 	spawn_positions = 1
 	total_positions = 1
-*/
+	required_gender = FEMALE
+	supervisors = "your own wishes, and maybe the Captain"
+	outfit_type = /decl/hierarchy/outfit/job/yinglet/matriarch
+	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
+	                    SKILL_FINANCE     = SKILL_EXPERT,
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_PILOT       = SKILL_ADEPT)
 
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+	                    SKILL_FINANCE     = SKILL_MAX,
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT)
+	skill_points = 30
+	head_position = 1
+	department_flag = COM|CIV
+	selection_color = "#2f2f7f"
+	req_admin_notify = 1
+	access = list(
+		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge, 
+		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
+		access_hop, access_RC_announce, access_keycard_auth)
+	minimal_access = list(
+		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge, 
+		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
+		access_hop, access_RC_announce, access_keycard_auth)
 
 // OUTFITS
 #define TRADESHIP_OUTFIT_JOB_NAME(job_name) ("Tradeship - Job - " + job_name)
@@ -371,3 +449,29 @@
 	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Researcher")
 	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
 	id_type = /obj/item/card/id/science
+
+/decl/hierarchy/outfit/job/yinglet
+	name = TRADESHIP_OUTFIT_JOB_NAME("Enclave Worker")
+	uniform = /obj/item/clothing/under/yinglet
+	shoes = /obj/item/clothing/shoes/sandal/yinglet
+	id_type = /obj/item/card/id
+	pda_type = /obj/item/modular_computer/pda
+	l_ear = null
+	r_ear = null
+
+/decl/hierarchy/outfit/job/yinglet/scout
+	name = TRADESHIP_OUTFIT_JOB_NAME("Enclave Scout")
+	uniform = /obj/item/clothing/under/yinglet/scout
+	head = /obj/item/clothing/head/yinglet/scout
+
+/decl/hierarchy/outfit/job/yinglet/patriarch
+	name = TRADESHIP_OUTFIT_JOB_NAME("Enclave Patriarch")
+	suit = /obj/item/clothing/suit/yinglet
+	pda_type = /obj/item/modular_computer/pda/heads
+
+/decl/hierarchy/outfit/job/yinglet/matriarch
+	name = TRADESHIP_OUTFIT_JOB_NAME("Enclave Matriarch")
+	uniform = /obj/item/clothing/under/yinglet/matriarch
+	head = /obj/item/clothing/head/yinglet/matriarch
+	id_type = /obj/item/card/id/silver
+	pda_type = /obj/item/modular_computer/pda/heads

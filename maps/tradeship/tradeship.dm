@@ -8,6 +8,7 @@
 	#include "tradeship_items.dm"
 	#include "tradeship_areas.dm"
 	#include "tradeship_jobs.dm"
+	#include "tradeship_loadout.dm"
 	#include "tradeship_spawnpoints.dm"
 	#include "tradeship_shuttles.dm"
 	#include "tradeship_overmap.dm"

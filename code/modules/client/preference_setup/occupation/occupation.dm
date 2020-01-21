@@ -165,6 +165,10 @@
 					bad_message = "<b>\[SPECIES RESTRICTED]</b>"
 				else if(!S.check_background(job, user.client.prefs))
 					bad_message = "<b>\[BACKGROUND RESTRICTED]</b>"
+				else
+					var/special_block = job.check_special_blockers(user.client.prefs)
+					if(special_block)
+						bad_message = "<b>\[[uppertext(special_block)]]</b>"
 
 				var/current_level = JOB_LEVEL_NEVER
 				if(pref.job_high == job.title)
