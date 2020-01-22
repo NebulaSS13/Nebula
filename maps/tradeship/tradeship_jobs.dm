@@ -290,13 +290,14 @@
 	                    SKILL_ATMOS        = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX)
 	skill_points = 26
+	head_position = 1
 	department_flag = COM|CIV
 	access = list(
-		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge, 
+		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge,
 		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
 		access_hop, access_RC_announce, access_keycard_auth)
 	minimal_access = list(
-		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge, 
+		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge,
 		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
 		access_hop, access_RC_announce, access_keycard_auth)
 
@@ -323,11 +324,11 @@
 	selection_color = "#2f2f7f"
 	req_admin_notify = 1
 	access = list(
-		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge, 
+		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge,
 		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
 		access_hop, access_RC_announce, access_keycard_auth)
 	minimal_access = list(
-		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge, 
+		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge,
 		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
 		access_hop, access_RC_announce, access_keycard_auth)
 
@@ -467,6 +468,7 @@
 /decl/hierarchy/outfit/job/yinglet/patriarch
 	name = TRADESHIP_OUTFIT_JOB_NAME("Enclave Patriarch")
 	suit = /obj/item/clothing/suit/yinglet
+	id_type = /obj/item/card/id/silver
 	pda_type = /obj/item/modular_computer/pda/heads
 
 /decl/hierarchy/outfit/job/yinglet/matriarch
