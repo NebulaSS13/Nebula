@@ -313,11 +313,15 @@
 	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_EXPERT,
 	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
-	                    SKILL_PILOT       = SKILL_ADEPT)
+	                    SKILL_PILOT       = SKILL_ADEPT,
+						SKILL_MEDICAL     = SKILL_ADEPT
+						)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_FINANCE     = SKILL_MAX,
-	                    SKILL_BUREAUCRACY = SKILL_ADEPT)
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
+						SKILL_MEDICAL     = SKILL_MAX
+						)
 	skill_points = 30
 	head_position = 1
 	department_flag = COM|CIV
