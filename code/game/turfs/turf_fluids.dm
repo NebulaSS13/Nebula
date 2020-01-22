@@ -34,15 +34,18 @@
 	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))
 
 /turf/check_fluid_depth(var/min)
-	..()
-	return (get_fluid_depth() >= min)
+	. = (get_fluid_depth() >= min)
 
 /turf/get_fluid_depth()
-	..()
 	if(is_flooded(absolute=1))
 		return FLUID_MAX_DEPTH
 	var/obj/effect/fluid/F = return_fluid()
-	return (istype(F) ? F.fluid_amount : 0 )
+	if(istype(F))
+		return F.fluid_amount
+	var/obj/structure/glass_tank/aquarium = locate() in contents
+	if(aquarium && aquarium.reagents && aquarium.reagents.total_volume)
+		return aquarium.reagents.total_volume * TANK_WATER_MULTIPLIER
+	return 0
 
 /turf/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
 	. = ..()
