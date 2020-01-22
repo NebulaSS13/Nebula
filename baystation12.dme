@@ -1097,6 +1097,7 @@
 #include "code\game\objects\items\weapons\storage\specialized.dm"
 #include "code\game\objects\items\weapons\storage\storage.dm"
 #include "code\game\objects\items\weapons\storage\toolbox.dm"
+#include "code\game\objects\items\weapons\storage\trays.dm"
 #include "code\game\objects\items\weapons\storage\uplink_kits.dm"
 #include "code\game\objects\items\weapons\storage\wall_mirror.dm"
 #include "code\game\objects\items\weapons\storage\wallets.dm"
