@@ -79,6 +79,12 @@
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	eye_color = COLOR_LIME
 
+/obj/item/clothing/glasses/eyepatch/hud/science
+	name = "SCIpatch"
+	desc = "A Science-type heads-up display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
+	hud_type = HUD_SCIENCE
+	eye_color = COLOR_PINK
+
 /obj/item/clothing/glasses/eyepatch/hud/meson/Initialize()
 	. = ..()
 	overlay = GLOB.global_hud.meson
