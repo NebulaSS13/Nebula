@@ -430,15 +430,13 @@
 
 	connections = dirs_to_corner_states(connection_dirs)
 
-#define CORNER_NONE 0
-
+#define CORNER_NONE             0
 #define CORNER_COUNTERCLOCKWISE 1
-#define CORNER_DIAGONAL 2
-#define CORNER_CLOCKWISE 4
-
-#define CORNER_EASTWEST 1
-#define CORNER_DIAGONAL 2
-#define CORNER_NORTHSOUTH 4
+#define CORNER_DIAGONAL         2
+#define CORNER_CLOCKWISE        4
+// Aquarium-specific corners (due to ordering requirements)
+#define CORNER_EASTWEST         CORNER_COUNTERCLOCKWISE
+#define CORNER_NORTHSOUTH       CORNER_CLOCKWISE
 
 /*
 	turn() is weird:
@@ -507,9 +505,7 @@
 #undef CORNER_NONE
 
 #undef CORNER_COUNTERCLOCKWISE
-#undef CORNER_DIAGONAL
 #undef CORNER_CLOCKWISE
-
 #undef CORNER_EASTWEST
 #undef CORNER_DIAGONAL
 #undef CORNER_NORTHSOUTH
