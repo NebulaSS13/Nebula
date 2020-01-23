@@ -1,10 +1,9 @@
 #define DISPENSER_REAGENT_VALUE 0.2
 
 /datum/reagent/acetone
-	name = "Acetone"
+	name = "acetone"
 	description = "A colorless liquid solvent used in chemical synthesis."
 	taste_description = "acid"
-	reagent_state = LIQUID
 	color = "#808080"
 	metabolism = REM * 0.2
 	value = DISPENSER_REAGENT_VALUE
@@ -30,31 +29,28 @@
 	return
 
 /datum/reagent/aluminium
-	name = "Aluminium"
+	name = "aluminium"
 	taste_description = "metal"
 	taste_mult = 1.1
 	description = "A silvery white and ductile member of the boron group of chemical elements."
-	reagent_state = SOLID
 	color = "#a8a8a8"
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/ammonia
-	name = "Ammonia"
+	name = "ammonia"
 	taste_description = "mordant"
 	taste_mult = 2
 	description = "A caustic substance commonly used in fertilizer or household cleaners."
-	reagent_state = LIQUID
 	color = "#404030"
 	metabolism = REM * 0.5
 	overdose = 5
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/carbon
-	name = "Carbon"
+	name = "carbon"
 	description = "A chemical element, the building block of life."
 	taste_description = "sour chalk"
 	taste_mult = 1.5
-	reagent_state = SOLID
 	color = "#1c1300"
 	ingest_met = REM * 5
 	value = DISPENSER_REAGENT_VALUE
@@ -78,17 +74,16 @@
 			dirtoverlay.alpha = min(dirtoverlay.alpha + volume * 30, 255)
 
 /datum/reagent/copper
-	name = "Copper"
+	name = "copper"
 	description = "A highly ductile metal."
 	taste_description = "copper"
 	color = "#6e3b08"
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/ethanol
-	name = "Ethanol" //Parent class for all alcoholic reagents.
+	name = "ethanol" //Parent class for all alcoholic reagents.
 	description = "A well-known alcohol with a variety of applications."
 	taste_description = "pure alcohol"
-	reagent_state = LIQUID
 	color = "#404030"
 	touch_met = 5
 	fuel_value = 0.75
@@ -167,10 +162,9 @@
 	return
 
 /datum/reagent/hydrazine
-	name = "Hydrazine"
+	name = "hydrazine"
 	description = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
 	taste_description = "sweet tasting metal"
-	reagent_state = LIQUID
 	color = "#808080"
 	metabolism = REM * 0.2
 	touch_met = 5
@@ -189,10 +183,9 @@
 	return
 
 /datum/reagent/iron
-	name = "Iron"
+	name = "iron"
 	description = "Pure iron is a metal."
 	taste_description = "metal"
-	reagent_state = SOLID
 	color = "#353535"
 	value = DISPENSER_REAGENT_VALUE
 
@@ -200,10 +193,9 @@
 	M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 /datum/reagent/lithium
-	name = "Lithium"
+	name = "lithium"
 	description = "A chemical element, used as antidepressant."
 	taste_description = "metal"
-	reagent_state = SOLID
 	color = "#808080"
 	value = DISPENSER_REAGENT_VALUE
 
@@ -214,10 +206,9 @@
 		M.emote(pick("twitch", "drool", "moan"))
 
 /datum/reagent/mercury
-	name = "Mercury"
+	name = "mercury"
 	description = "A chemical element."
 	taste_mult = 0 //mercury apparently is tasteless. IDK
-	reagent_state = LIQUID
 	color = "#484848"
 	value = DISPENSER_REAGENT_VALUE
 
@@ -229,18 +220,16 @@
 	M.adjustBrainLoss(0.1)
 
 /datum/reagent/phosphorus
-	name = "Phosphorus"
+	name = "phosphorus"
 	description = "A chemical element, the backbone of biological energy carriers."
 	taste_description = "vinegar"
-	reagent_state = SOLID
 	color = "#832828"
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/potassium
-	name = "Potassium"
+	name = "potassium"
 	description = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
-	reagent_state = SOLID
 	color = "#a0a0a0"
 	value = DISPENSER_REAGENT_VALUE
 
@@ -251,10 +240,9 @@
 		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/radium
-	name = "Radium"
+	name = "radium"
 	description = "Radium is an alkaline earth metal. It is extremely radioactive."
 	taste_description = "the color blue, and regret"
-	reagent_state = SOLID
 	color = "#c7c7c7"
 	value = DISPENSER_REAGENT_VALUE
 
@@ -270,10 +258,9 @@
 			return
 
 /datum/reagent/acid
-	name = "Sulphuric acid"
+	name = "sulphuric acid"
 	description = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
-	reagent_state = LIQUID
 	color = "#db5008"
 	metabolism = REM * 2
 	touch_met = 50 // It's acid!
@@ -359,7 +346,6 @@
 	name = "Hydrochloric Acid"
 	description = "A very corrosive mineral acid with the molecular formula HCl."
 	taste_description = "stomach acid"
-	reagent_state = LIQUID
 	color = "#808080"
 	power = 3
 	meltdose = 8
@@ -367,26 +353,23 @@
 	value = DISPENSER_REAGENT_VALUE * 2
 
 /datum/reagent/silicon
-	name = "Silicon"
+	name = "silicon"
 	description = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
-	reagent_state = SOLID
 	color = "#a8a8a8"
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/sodium
-	name = "Sodium"
+	name = "sodium"
 	description = "A chemical element, readily reacts with water."
 	taste_description = "salty metal"
-	reagent_state = SOLID
 	color = "#808080"
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/sugar
-	name = "Sugar"
+	name = "sugar"
 	description = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	taste_description = "sugar"
 	taste_mult = 3
-	reagent_state = SOLID
 	color = "#ffffff"
 	scannable = 1
 
@@ -399,18 +382,16 @@
 	M.adjust_nutrition(removed * 3)
 
 /datum/reagent/sulfur
-	name = "Sulfur"
+	name = "sulfur"
 	description = "A chemical element with a pungent smell."
 	taste_description = "old eggs"
-	reagent_state = SOLID
 	color = "#bf8c00"
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/tungsten
-	name = "Tungsten"
+	name = "tungsten"
 	description = "A chemical element, and a strong oxidising agent."
 	taste_mult = 0 //no taste
-	reagent_state = SOLID
 	color = "#dcdcdc"
 	value = DISPENSER_REAGENT_VALUE
 

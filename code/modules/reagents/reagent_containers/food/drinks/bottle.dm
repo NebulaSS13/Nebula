@@ -423,16 +423,6 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/pwine, 100)
 
-/obj/item/chems/food/drinks/bottle/blackstrap
-	name = "Two Brothers Blackstrap"
-	desc = "A bottle of Blackstrap, distilled in Two Brothers, Tersten."
-	icon_state = "blackstrap"
-	center_of_mass = "x=16;y=4"
-
-/obj/item/chems/food/drinks/bottle/blackstrap/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/ethanol/blackstrap, 100)
-
 /obj/item/chems/food/drinks/bottle/sake
 	name = "Takeo Sadow's Combined Sake"
 	desc = "Finest Sake allowed for import in the SCG."
@@ -443,17 +433,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/ethanol/sake, 100)
 
-
-/obj/item/chems/food/drinks/bottle/lordaniawine
-	name = "New Aresian Vintage 2230"
-	desc = "The kind of wine that just demands attention, and a big wallet."
-	icon_state = "lordaniawine"
-	center_of_mass = "x=16;y=4"
-
-/obj/item/chems/food/drinks/bottle/lordaniawine/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/ethanol/lordaniawine, 100)
-
 /obj/item/chems/food/drinks/bottle/champagne
 	name = "Murcelano Vinyard's Premium Champagne"
 	desc = "The regal drink of celebrities and royalty."
@@ -463,26 +442,6 @@
 /obj/item/chems/food/drinks/bottle/champagne/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/ethanol/champagne, 100)
-
-/obj/item/chems/food/drinks/bottle/prosecco
-	name = "2280 Prosecco"
-	desc = "A delicious prosecco, ideal for long days at work."
-	icon_state = "prosecco"
-	center_of_mass = "x=16;y=4"
-
-/obj/item/chems/food/drinks/bottle/prosecco/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/ethanol/prosecco, 100)
-
-/obj/item/chems/food/drinks/bottle/llanbrydewhiskey
-	name = "Pritchard's Wisgi Ucheldirol"
-	desc = "The bottle is covered in strange archaic markings... Oh wait, that's just Welsh."
-	icon_state = "whiskeybottle3"
-	center_of_mass = "x=16;y=4"
-
-/obj/item/chems/food/drinks/bottle/llanbrydewhiskey/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/ethanol/llanbrydewhiskey, 100)
 
 /obj/item/chems/food/drinks/bottle/jagermeister
 	name = "Kaisermeister Deluxe"
@@ -521,19 +480,6 @@
 	var/agedyear = rand(game_year-150,game_year)
 	name = "Chateau [namepick] De Blanc"
 	desc += " This bottle is marked as [agedyear] Vintage."
-
-/obj/item/chems/food/drinks/bottle/brandy
-	name = "New Amsterdam Deluxe Brandy"
-	desc = "A bottle of premium Lunar brandy."
-	icon_state = "lunabrandy"
-	center_of_mass = "x=16;y=4"
-
-/obj/item/chems/food/drinks/bottle/brandy/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/ethanol/lunabrandy, 100)
-	var/namepick = pick("Selenian","New Vegas","Yueliang","Gideon","New Amsterdam","Saurian")
-	var/typepick = pick("Deluxe Brandy","Premium Brandy","Luxury Brandy","Expensive Brandy","Special Brandy")
-	SetName("[namepick] [typepick]")
 
 //////////////////////////JUICES AND STUFF ///////////////////////
 
@@ -610,16 +556,6 @@
 /obj/item/chems/food/drinks/bottle/small/ale/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/ale, 30)
-
-/obj/item/chems/food/drinks/bottle/small/hellshenpa
-	name = "Hellshen Pale Ale"
-	desc = "The best ale on Mars, according to the label."
-	icon_state = "hellshenbeer"
-	center_of_mass = "x=16;y=12"
-
-/obj/item/chems/food/drinks/bottle/small/hellshenpa/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/ethanol/hellshenpa, 30)
 
 /obj/item/chems/food/drinks/bottle/small/gingerbeer
 	name = "Ginger Beer"

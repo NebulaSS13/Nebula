@@ -15,7 +15,6 @@
 		/datum/reagent/lube/oil =      1,
 		/datum/reagent/space_cleaner = 1,
 		/datum/reagent/napalm =        1,
-		/datum/reagent/napalm/b =      1,
 		/datum/reagent/thermite =      1,
 		/datum/reagent/foaming_agent = 1,
 		/datum/reagent/surfactant =    1,

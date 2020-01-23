@@ -23,7 +23,6 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	description = "A strange and exotic chemical substance."
 	taste_mult = 0 // Random taste not yet implemented
 	hidden_from_codex = TRUE
-	reagent_state = LIQUID
 	var/max_effect_number = 8
 
 /datum/reagent/random/New(var/datum/reagents/holder, var/override = FALSE)

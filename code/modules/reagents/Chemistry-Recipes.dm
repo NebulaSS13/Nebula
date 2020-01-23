@@ -620,7 +620,7 @@
 
 /datum/chemical_reaction/napalmb
 	name = "Napalm B"
-	result = /datum/reagent/napalm/b
+	result = /datum/reagent/napalm
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/fuel = 1 )
 	result_amount = 2
 	mix_message = "The solution thickens and takes on a slimy sheen."
@@ -1771,32 +1771,6 @@
 	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/orange = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/battuta
-	name = "Ibn Battuta"
-	result = /datum/reagent/ethanol/battuta
-	required_reagents = list(/datum/reagent/ethanol/herbal = 2, /datum/reagent/drink/juice/orange = 1)
-	catalysts = list(/datum/reagent/nutriment/mint)
-	result_amount = 3
-
-/datum/chemical_reaction/magellan
-	name = "Magellan"
-	result = /datum/reagent/ethanol/magellan
-	required_reagents = list(/datum/reagent/ethanol/wine = 1, /datum/reagent/ethanol/specialwhiskey = 1)
-	catalysts = list(/datum/reagent/sugar)
-	result_amount = 2
-
-/datum/chemical_reaction/zhenghe
-	name = "Zheng He"
-	result = /datum/reagent/ethanol/zhenghe
-	required_reagents = list(/datum/reagent/drink/tea = 2, /datum/reagent/ethanol/vermouth = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/armstrong
-	name = "Armstrong"
-	result = /datum/reagent/ethanol/armstrong
-	required_reagents = list(/datum/reagent/ethanol/beer = 2, /datum/reagent/ethanol/vodka = 1, /datum/reagent/drink/juice/lime = 1)
-	result_amount = 4
-
 /datum/chemical_reaction/bloody_mary
 	name = "Bloody Mary"
 	result = /datum/reagent/ethanol/bloody_mary
@@ -2541,35 +2515,10 @@
 	catalysts = list(/datum/reagent/nutriment = 5)
 	result_amount = 3
 
-/datum/chemical_reaction/lunabrandy
-	name = "Lunar Brandy"
-	result = /datum/reagent/ethanol/lunabrandy
-	required_reagents = list(/datum/reagent/drink/juice/grape = 1, /datum/reagent/ethanol/wine = 2)
-	catalysts = list(/datum/reagent/nutriment = 5)
-	result_amount = 3
-
-/datum/chemical_reaction/hellshenpa
-	name = "Hellshen Pale Ale"
-	result = /datum/reagent/ethanol/hellshenpa
-	required_reagents = list(/datum/reagent/ethanol/beer = 1, /datum/reagent/sugar = 1, /datum/reagent/water = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/vodkacola
 	name = "Vodka Cola"
 	result = /datum/reagent/ethanol/vodkacola
 	required_reagents = list(/datum/reagent/drink/space_cola = 1, /datum/reagent/ethanol/vodka = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/red_whiskey
-	name = "Red Whiskey"
-	result = /datum/reagent/ethanol/red_whiskey
-	required_reagents = list(/datum/reagent/drink/juice/berry = 1, /datum/reagent/drink/juice/tomato = 1, /datum/reagent/ethanol/whiskey = 1, /datum/reagent/ethanol/specialwhiskey = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/nevadan_gold
-	name = "Nevadan Gold Whiskey"
-	result = /datum/reagent/ethanol/nevadan_gold
-	required_reagents = list(/datum/reagent/ethanol/specialwhiskey = 1, /datum/reagent/ethanol/goldschlager = 1, /datum/reagent/ethanol/coffee/irishcoffee = 1,)
 	result_amount = 3
 
 /datum/chemical_reaction/arak
@@ -2581,25 +2530,6 @@
 	minimum_temperature = (0 CELSIUS) - 100
 	maximum_temperature = 0 CELSIUS
 	mix_message = "The aniseed ferments into a translucent white mixture"
-
-/datum/chemical_reaction/blackstrap
-	name = "Blackstrap"
-	result = /datum/reagent/ethanol/blackstrap
-	required_reagents = list(/datum/reagent/ethanol/whiskey = 1, /datum/reagent/ethanol/rum = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/stag
-	name = "Stag"
-	result = /datum/reagent/ethanol/stag
-	required_reagents = list(/datum/reagent/drink/tea = 2, /datum/reagent/ethanol/rum = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/lordaniawine
-	name = "Lordanian Wine"
-	result = /datum/reagent/ethanol/lordaniawine
-	required_reagents = list(/datum/reagent/ethanol/wine = 2, /datum/reagent/drink/grenadine = 1)
-	catalysts = list(/datum/reagent/nutriment/mint)
-	result_amount = 3
 
 /datum/chemical_reaction/jagerbomb
 	name = "Jagerbomb"
@@ -2614,56 +2544,12 @@
 	catalysts = list(/datum/reagent/nutriment/mint)
 	result_amount = 3
 
-/datum/chemical_reaction/lonestarmule
-	name = "Lonestar Mule"
-	result = /datum/reagent/ethanol/lonestarmule
-	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/drink/gingerbeer = 1, /datum/reagent/drink/juice/lime = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/llanbrydewhiskey
-	name = "Llanbryde Whiskey"
-	result = /datum/reagent/ethanol/llanbrydewhiskey
-	required_reagents = list(/datum/reagent/ethanol/specialwhiskey= 2, /datum/reagent/ethanol/gin = 1)
-	catalysts = list(/datum/reagent/sugar)
-	result_amount = 3
-
 /datum/chemical_reaction/kvass
 	name = "Kvass"
 	result = /datum/reagent/ethanol/kvass
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol/beer = 1)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 3
-
-/datum/chemical_reaction/gargled
-	name = "Gargled"
-	result = /datum/reagent/ethanol/coffee/gargled
-	required_reagents = list(/datum/reagent/ethanol/blackstrap = 1, /datum/reagent/drink/coffee = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/bogus
-	name = "Bogus"
-	result = /datum/reagent/ethanol/bogus
-	required_reagents = list(/datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/blackstrap = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/moscowmule
-	name = "Moscow Mule"
-	result = /datum/reagent/ethanol/moscowmule
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/gingerbeer = 1, /datum/reagent/drink/juice/lime = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/springpunch
-	name = "Gilgamesh Spring Punch"
-	result = /datum/reagent/ethanol/springpunch
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/lemon = 1,  /datum/reagent/sugar = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/jimmygideon
-	name = "Jimmy Gideon"
-	result = /datum/reagent/ethanol/jimmygideon
-	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/hot_coco = 1)
-	result_amount = 3
-
 
 // Non-Alcoholic Drinks
 

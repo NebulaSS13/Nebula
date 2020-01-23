@@ -24,7 +24,6 @@
 /datum/reagent/crystal
 	name = "crystallizing agent"
 	taste_description = "sharpness"
-	reagent_state = LIQUID
 	color = "#13bc5e"
 
 /datum/reagent/crystal/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

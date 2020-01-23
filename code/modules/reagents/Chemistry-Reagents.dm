@@ -4,7 +4,6 @@
 	var/taste_description = "old rotten bandaids"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
 	var/datum/reagents/holder = null
-	var/reagent_state = SOLID
 	var/list/data = null
 	var/volume = 0
 	var/metabolism = REM // This would be 0.2 normally
@@ -157,15 +156,5 @@
 /datum/reagent/proc/ex_act(obj/item/chems/holder, severity)
 	return
 
-/* DEPRECATED - TODO: REMOVE EVERYWHERE */
-
-/datum/reagent/proc/reaction_turf(var/turf/target)
-	touch_turf(target)
-
-/datum/reagent/proc/reaction_obj(var/obj/target)
-	touch_obj(target)
-
-/datum/reagent/proc/reaction_mob(var/mob/target)
-	touch_mob(target)
-
 /datum/reagent/proc/custom_temperature_effects(var/temperature)
+	return

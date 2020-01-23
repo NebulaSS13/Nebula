@@ -11,7 +11,6 @@
 	)
 	name = "Blood"
 	description = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
-	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#c80000"
 	scannable = 1
@@ -78,9 +77,8 @@
 // Water!
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /datum/reagent/water
-	name = "Water"
+	name = "water"
 	description = "A ubiquitous chemical substance composed of hydrogen and oxygen."
-	reagent_state = LIQUID
 	color = "#0064c877"
 	scannable = 1
 	metabolism = REM * 10
@@ -163,7 +161,7 @@
 		M.confused = max(M.confused, 2)
 
 /datum/reagent/water/boiling
-	name = "Boiling water"
+	name = "boiling water"
 	chilling_products = list(/datum/reagent/water)
 	chilling_point =   99 CELSIUS
 	chilling_message = "stops boiling."
@@ -172,11 +170,10 @@
 
 // Ice is a drink for some reason.
 /datum/reagent/drink/ice
-	name = "Ice"
+	name = "ice"
 	description = "Frozen water, your dentist wouldn't like you chewing this."
 	taste_description = "ice"
 	taste_mult = 1.5
-	reagent_state = SOLID
 	color = "#619494"
 	adj_temp = -5
 	hydration = 10
@@ -191,10 +188,9 @@
 
 // Fuel.
 /datum/reagent/fuel
-	name = "Welding fuel"
+	name = "welding fuel"
 	description = "A stable hydrazine-based compound whose exact manufacturing specifications are a closely-guarded secret. One of the most common fuels in human space. Extremely flammable."
 	taste_description = "gross metal"
-	reagent_state = LIQUID
 	color = "#660000"
 	touch_met = 5
 	fuel_value = 1
@@ -223,7 +219,7 @@
 	remove_self(volume)
 
 /datum/reagent/coagulated_blood
-	name = "Coagulated Blood"
+	name = "coagulated blood"
 	color = "#aa0000"
 	taste_description = "chewy iron"
 	taste_mult = 1.5

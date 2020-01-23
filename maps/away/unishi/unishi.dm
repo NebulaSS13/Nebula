@@ -130,7 +130,6 @@ obj/item/paper/prof2
 	name = "tericadone"
 	description = "Phoron substitute currently in labratory testing"
 	taste_mult = 1.5
-	reagent_state = LIQUID
 	color = "#ffc4ff"
 
 /obj/item/chems/glass/bottle/tericadone

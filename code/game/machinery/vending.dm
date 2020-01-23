@@ -612,15 +612,11 @@
 					/obj/item/chems/food/drinks/bottle/bluecuracao = 5,
 					/obj/item/chems/food/drinks/bottle/absinthe = 5,
 					/obj/item/chems/food/drinks/bottle/specialwhiskey = 5,
-					/obj/item/chems/food/drinks/bottle/llanbrydewhiskey = 5,
 					/obj/item/chems/food/drinks/bottle/bottleofnothing =5,
-					/obj/item/chems/food/drinks/bottle/blackstrap = 5,
-					/obj/item/chems/food/drinks/bottle/prosecco = 5,
 					/obj/item/chems/food/drinks/bottle/champagne = 5,
 					/obj/item/chems/food/drinks/bottle/herbal = 5,
 					/obj/item/chems/food/drinks/bottle/small/beer = 15,
 					/obj/item/chems/food/drinks/bottle/small/ale = 15,
-					/obj/item/chems/food/drinks/bottle/small/hellshenpa = 15,
 					/obj/item/chems/food/drinks/bottle/small/gingerbeer = 15,
 					/obj/item/chems/food/drinks/cans/speer = 10,
 					/obj/item/chems/food/drinks/cans/ale = 10,
@@ -643,9 +639,7 @@
 	contraband = list(/obj/item/chems/food/drinks/bottle/premiumwine = 3,
 					/obj/item/chems/food/drinks/bottle/premiumvodka = 3,
 					/obj/item/chems/food/drinks/bottle/patron = 5,
-					/obj/item/chems/food/drinks/bottle/goldschlager = 5,
-					/obj/item/chems/food/drinks/bottle/lordaniawine = 5,
-					/obj/item/chems/food/drinks/bottle/brandy = 5)
+					/obj/item/chems/food/drinks/bottle/goldschlager = 5)
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"

@@ -579,32 +579,7 @@
 			charges = max(charges - 1, 0)
 			if(fix.damage == 0)
 				damaged -= fix
-	/* this is going to need rebalancing
-	if(charges)
-		user.ingested.add_reagent(/datum/reagent/hell_water, charges)
-		statuses += "you feel empowered"
-	*/
 	return statuses
-
-/datum/reagent/hell_water
-	name = "Hell water"
-	reagent_state = LIQUID
-	color = "#0050a177"
-	metabolism = REM * 0.1
-
-/datum/reagent/hell_water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(iscultist(M))
-		M.AdjustParalysis(-1)
-		M.AdjustStunned(-1)
-		M.AdjustWeakened(-1)
-		M.add_chemical_effect(CE_PAINKILLER, 40)
-		M.add_chemical_effect(CE_SPEEDBOOST, 1)
-		M.adjustOxyLoss(-10 * removed)
-		M.heal_organ_damage(5 * removed, 5 * removed, 1)
-		M.adjustToxLoss(-5 * removed)
-	else
-		M.fire_stacks = max(2, M.fire_stacks)
-		M.IgniteMob()
 
 /obj/effect/rune/emp
 	cultname = "emp"
