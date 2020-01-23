@@ -177,6 +177,14 @@ var/list/holder_mob_icon_cache = list()
 	var/list/generate_for_slots = list(slot_l_hand_str, slot_r_hand_str, slot_back_str)
 	slot_flags = SLOT_BACK
 
+/obj/item/holder/human/yinglet/attack_self()
+	var/mob/owner = locate() in contents
+	if(owner.stat == CONSCIOUS)
+		var/turf/T = get_turf(owner)
+		T.visible_message(SPAN_WARNING("\icon[owner] Eee!"))
+		playsound(T, 'sound/effects/mousesqueek.ogg', 75, 1)
+	..()
+
 /obj/item/holder/human/sync(var/mob/living/M)
 	// Generate appropriate on-mob icons.
 	var/mob/living/carbon/human/owner = M
