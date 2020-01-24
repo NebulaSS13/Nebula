@@ -35,8 +35,11 @@
 			. += body_armor
 
 /mob/living/exosuit/updatehealth()
-	maxHealth = body.mech_health
-	health = maxHealth-(getFireLoss()+getBruteLoss())
+	if(body)
+		maxHealth = body.mech_health
+		health = maxHealth-(getFireLoss()+getBruteLoss())
+	else
+		health = 0 // Shouldn't exist without a body, no idea how the runtime is being generated.
 
 /mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
 	if(MC)
