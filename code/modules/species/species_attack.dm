@@ -76,6 +76,16 @@
 	shredding = 1
 	attack_name = "strong claws"
 
+/datum/unarmed_attack/claws/strong/baxxid
+	attack_verb = list("stabbed", "maimed", "impaled")
+	damage = 12
+	sharp = 1
+	edge = 1
+	delay = 15
+	eye_attack_text = "an enormous forelimb"
+	eye_attack_text_victim = "an enormous forelimb"
+	attack_name = "forelimb stab"
+
 /datum/unarmed_attack/claws/strong/gloves
 	blocked_by_gloves = FALSE
 
@@ -159,6 +169,10 @@
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"
 	attack_name = "forelimb slash"
+
+/datum/unarmed_attack/punch/weak
+	attack_verb = list("swiped", "smacked", "smecked")
+	attack_name = "smek"
 
 /datum/unarmed_attack/punch/starborn
 	attack_verb = list("scorched", "burned", "fried")

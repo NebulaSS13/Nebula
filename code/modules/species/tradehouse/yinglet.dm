@@ -17,6 +17,12 @@
 	blood_mask =      'icons/mob/human_races/species/yinglet/blood_mask.dmi'
 	lip_icon =        'icons/mob/human_races/species/yinglet/lips.dmi'
 
+	unarmed_attacks = list(
+		/datum/unarmed_attack/punch/weak,
+		/datum/unarmed_attack/stomp/weak,
+		/datum/unarmed_attack/bite
+	)
+
 	flesh_color = "#ab8c65"
 	base_color = "#ab8c65"
 	limb_blend = ICON_MULTIPLY

@@ -14,8 +14,13 @@
 		/datum/job/yinglet/scout,
 		/datum/job/yinglet/patriarch,
 		/datum/job/yinglet/matriarch
+		//datum/job/baxxid_advisor
 	)
 	species_to_job_whitelist = list(
+		/datum/species/baxxid = list(
+			/datum/job/assistant
+		//	/datum/job/baxxid_advisor
+		),
 		/datum/species/yinglet = list(
 			/datum/job/yinglet,
 			/datum/job/yinglet/scout,
@@ -336,6 +341,21 @@
 		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge,
 		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
 		access_hop, access_RC_announce, access_keycard_auth)
+
+/*
+/datum/job/baxxid_advisor
+	title = "Baxxid Advisor"
+	skill_points = 40
+	supervisors = "the elders of your family, the Captain and the Trademaster"
+	department_flag = COM|CIV
+	total_positions = 1
+	spawn_positions = 1
+
+/datum/job/baxxid_advisor/is_species_allowed(var/datum/species/S)
+	if(S && !istype(S))
+		S = all_species[S]
+	. = istype(S) && S.name == SPECIES_BAXXID
+*/
 
 // OUTFITS
 #define TRADESHIP_OUTFIT_JOB_NAME(job_name) ("Tradeship - Job - " + job_name)
