@@ -91,8 +91,7 @@
 	if(busy)
 		to_chat(user, "This device is busy.")
 		return STATUS_CLOSE
-	if(!user.IsAdvancedToolUser())
-		to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
+	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 

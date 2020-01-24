@@ -32,7 +32,7 @@
 /obj/item/scanner/proc/can_use(mob/user)
 	if (user.incapacitated())
 		return
-	if (!user.IsAdvancedToolUser())
+	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return
 	return TRUE
 

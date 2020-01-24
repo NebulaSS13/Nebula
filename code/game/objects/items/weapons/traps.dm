@@ -15,7 +15,7 @@
 	var/deployed = 0
 
 /obj/item/beartrap/proc/can_use(mob/user)
-	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
+	. = (user.check_dexterity(DEXTERITY_SIMPLE_MACHINES) && !issilicon(user) && !user.stat && !user.restrained())
 
 /obj/item/beartrap/user_unbuckle_mob(mob/user as mob)
 	if(buckled_mob && can_use(user))

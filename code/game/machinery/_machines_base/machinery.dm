@@ -287,7 +287,7 @@ Class Procs:
 		return
 	if(!CanPhysicallyInteract(user))
 		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
-	if(!user.IsAdvancedToolUser())
+	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return TRUE
 	if(ishuman(user))

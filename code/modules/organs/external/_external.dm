@@ -1082,11 +1082,13 @@ obj/item/organ/external/proc/remove_clamps()
 		return 1
 	return 0
 
-/obj/item/organ/external/proc/has_fine_manipulation()
+/obj/item/organ/external/proc/get_dexterity()
 	if(model)
 		var/datum/robolimb/R = all_robolimbs[model]
-		return (R && R.fine_manipulation)
-	return (species && species.has_fine_manipulation(owner))
+		if(R)
+			return R.manual_dexterity
+	if(species)
+		return species.manual_dexterity
 
 /obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0)
 

@@ -130,7 +130,7 @@
 
 	if(!istype(user, /mob/living))
 		return 0
-	if(!user.IsAdvancedToolUser())
+	if(!user.check_dexterity(DEXTERITY_WEAPONS))
 		return 0
 
 	var/mob/living/M = user

@@ -492,8 +492,7 @@
 	if(!id_card)
 		id_card = user.GetIdCard()
 
-	if(!user.IsAdvancedToolUser())
-		to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return FALSE
 
 	if(CanToggleLock(user, id_card))

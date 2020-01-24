@@ -157,7 +157,6 @@
 
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
-	var/has_fine_manipulation = 1 // Can use small items.
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight_range = 2       // Native darksight distance.
 	var/darksight_tint = DARKTINT_NONE // How shadows are tinted.
@@ -257,6 +256,9 @@
 		list(/decl/emote/audible/grunt, /decl/emote/audible/groan, /decl/emote/audible/moan) = 40,
 		list(/decl/emote/audible/grunt, /decl/emote/audible/groan) = 10,
 	)
+
+	var/manual_dexterity = DEXTERITY_FULL
+
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify

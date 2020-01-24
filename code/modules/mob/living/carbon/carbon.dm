@@ -507,3 +507,6 @@
 		to_chat(src, "<span class='warning'>You are no longer running on internals.</span>")
 	if(internals)
 		internals.icon_state = "internal[!!internal]"
+
+/mob/living/carbon/has_dexterity(var/dex_level)
+	. = ..() && (species.manual_dexterity >= dex_level)

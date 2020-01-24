@@ -60,7 +60,7 @@
 		return 0
 	if(user.incapacitated())
 		return 0
-	if(!user.IsAdvancedToolUser())
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return 0
 	if(!proximity)
 		return 0

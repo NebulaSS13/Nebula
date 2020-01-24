@@ -5,9 +5,6 @@ var/list/stored_shock_by_ref = list()
 		target.electrocute_act(stored_shock_by_ref["\ref[src]"]*0.9, src)
 		stored_shock_by_ref["\ref[src]"] = 0
 
-/datum/species/proc/has_fine_manipulation(var/mob/living/carbon/human/H)
-	return has_fine_manipulation
-
 /datum/species/proc/toggle_stance(var/mob/living/carbon/human/H)
 	if(!H.incapacitated())
 		H.pulling_punches = !H.pulling_punches

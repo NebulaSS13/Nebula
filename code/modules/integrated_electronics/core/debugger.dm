@@ -20,13 +20,13 @@
 			accepting_refs = FALSE
 			new_data = user.get_input("Now type in a string", "[src] string writing", null, MOB_INPUT_TEXT, src)
 			new_data = sanitize(new_data,trim = 0)
-			if(istext(new_data) && user.IsAdvancedToolUser())
+			if(istext(new_data) && user.check_dexterity(DEXTERITY_KEYBOARDS))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
 		if("number")
 			accepting_refs = FALSE
 			new_data = user.get_input("Now type in a number", "[src] number writing", null, MOB_INPUT_NUM, src)
-			if(isnum(new_data) && user.IsAdvancedToolUser())
+			if(isnum(new_data) && user.check_dexterity(DEXTERITY_KEYBOARDS))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to [new_data].</span>")
 		if("ref")

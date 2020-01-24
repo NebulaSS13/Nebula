@@ -36,7 +36,7 @@
 
 /obj/item/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
-	if(!user.IsAdvancedToolUser())
+	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))

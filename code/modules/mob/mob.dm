@@ -728,11 +728,6 @@
 	set hidden = 1
 	return facedir(client.client_dir(SOUTH))
 
-
-//This might need a rename but it should replace the can this mob use things check
-/mob/proc/IsAdvancedToolUser()
-	return 0
-
 /mob/proc/Stun(amount)
 	if(status_flags & CANSTUN)
 		facing_dir = null
@@ -1112,3 +1107,11 @@
 	if(ear_deaf)
 		return 0
 	return 1
+
+/mob/proc/has_dexterity(var/dex_level)
+	. = TRUE
+
+/mob/proc/check_dexterity(var/dex_level, var/silent)
+	. = has_dexterity(dex_level)
+	if(!. && !silent)
+		to_chat(src, FEEDBACK_YOU_LACK_DEXTERITY)

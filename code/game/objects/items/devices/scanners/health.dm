@@ -17,8 +17,7 @@
 	playsound(src, 'sound/effects/fastbeep.ogg', 20)
 
 /proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, var/verbose)
-	if (!user.IsAdvancedToolUser())
-		to_chat(user, "<span class='warning'>You are not nimble enough to use this device.</span>")
+	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))

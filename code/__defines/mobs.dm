@@ -337,3 +337,12 @@
 
 #define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
 #define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns
+
+#define DEXTERITY_NONE            0
+#define DEXTERITY_SIMPLE_MACHINES 1
+#define DEXTERITY_KEYBOARDS       2
+#define DEXTERITY_TOUCHSCREENS    3
+#define DEXTERITY_GRIP            4
+#define DEXTERITY_WEAPONS         5
+#define DEXTERITY_COMPLEX_TOOLS   6
+#define DEXTERITY_FULL            7

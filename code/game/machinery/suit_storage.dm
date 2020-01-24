@@ -183,7 +183,7 @@
 		ui.open()
 
 /obj/machinery/suit_storage_unit/CanUseTopic(var/mob/user)
-	if(!user.IsAdvancedToolUser())
+	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
 		return STATUS_CLOSE
 	return ..()
 

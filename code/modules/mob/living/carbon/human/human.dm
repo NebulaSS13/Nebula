@@ -194,7 +194,7 @@
 
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
-	if(user.incapacitated()  || !user.Adjacent(src) || !user.IsAdvancedToolUser())
+	if(user.incapacitated()  || !user.Adjacent(src) || !user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
 		return
 
 	user.set_machine(src)
@@ -620,18 +620,6 @@
 	if(parent.w_class > affecting.w_class + 1)
 		return prob(100 / 2**(parent.w_class - affecting.w_class - 1))
 
-	return 1
-
-/mob/living/carbon/human/IsAdvancedToolUser(var/silent)
-	var/obj/item/organ/external/active_hand = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
-	if(!active_hand)
-		if(!silent)
-			to_chat(src, "<span class='warning'>Your hand is missing!</span>")
-		return 0
-	if(!active_hand.has_fine_manipulation())
-		if(!silent)
-			to_chat(src, "<span class='warning'>Your [active_hand.name] doesn't have the dexterity to use that!</span>")
-		return 0
 	return 1
 
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
@@ -1824,3 +1812,18 @@
 				B.transform = M.Scale(scale)
 
 				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.blood_color)
+
+/mob/living/carbon/human/has_dexterity(var/dex_level)
+	. = check_dexterity(dex_level, silent = TRUE)
+
+/mob/living/carbon/human/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent)
+	var/obj/item/organ/external/active_hand = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
+	if(!active_hand)
+		if(!silent)
+			to_chat(src, SPAN_WARNING("Your hand is missing!"))
+		return FALSE
+	if(active_hand.get_dexterity() < dex_level)
+		if(!silent)
+			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't have the dexterity to use that!"))
+		return FALSE
+	return TRUE

@@ -159,9 +159,6 @@
 
 	. = ..()
 
-/mob/living/exosuit/IsAdvancedToolUser()
-	return TRUE
-
 /mob/living/exosuit/examine(mob/user)
 	. = ..()
 	if(LAZYLEN(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))

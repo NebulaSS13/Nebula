@@ -24,8 +24,7 @@
 		to_chat(M, "<span class='danger'>You've been silenced!</span>")
 		return
 
-	if (!user.IsAdvancedToolUser())
-		to_chat(user, "<span class='danger'>You don't have the dexterity to do this!</span>")
+	if (!user.check_dexterity(DEXTERITY_WEAPONS))
 		return
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))

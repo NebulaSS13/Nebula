@@ -130,8 +130,7 @@
 	if(!construction_stage && try_graffiti(user, W))
 		return
 
-	if (!user.IsAdvancedToolUser())
-		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
+	if (!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
 		return
 
 	//get the user's location

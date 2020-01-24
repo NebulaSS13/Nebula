@@ -5,7 +5,8 @@
 	deform =          'icons/mob/human_races/species/baxxid/body.dmi'
 	preview_icon =    'icons/mob/human_races/species/baxxid/preview.dmi'
 	icon_template =   'icons/mob/human_races/species/baxxid/template.dmi'
-
+	manual_dexterity = DEXTERITY_KEYBOARDS
+	
 	limb_blend = ICON_MULTIPLY
 	spawn_flags = SPECIES_IS_RESTRICTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR

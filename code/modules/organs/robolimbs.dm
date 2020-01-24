@@ -27,7 +27,7 @@ var/datum/robolimb/basic_robolimb
 	var/list/allowed_bodytypes = list(SPECIES_HUMAN)
 	var/modifier_string = "robotic"
 	var/hardiness = 1
-	var/fine_manipulation = TRUE
+	var/manual_dexterity = DEXTERITY_FULL
 	var/movement_slowdown = 0
 	var/is_robotic = TRUE
 
@@ -124,7 +124,7 @@ var/datum/robolimb/basic_robolimb
 	unavailable_at_fab = 1
 	modifier_string = "wooden"
 	hardiness = 0.75
-	fine_manipulation = FALSE
+	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
 	movement_slowdown = 1
 	is_robotic = FALSE
 
@@ -136,7 +136,7 @@ var/datum/robolimb/basic_robolimb
 	unavailable_at_fab = 1
 	modifier_string = "wooden"
 	hardiness = 0.75
-	fine_manipulation = FALSE
+	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
 	movement_slowdown = 2
 	is_robotic = FALSE
 
