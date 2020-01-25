@@ -6,9 +6,16 @@
 	preview_icon =    'icons/mob/human_races/species/baxxid/preview.dmi'
 	icon_template =   'icons/mob/human_races/species/baxxid/template.dmi'
 	manual_dexterity = DEXTERITY_KEYBOARDS
-	
+	mob_size = MOB_LARGE
+
+	unarmed_attacks = list(
+		/datum/unarmed_attack/claws/strong/baxxid,
+		/datum/unarmed_attack/bite/strong
+	)
+
+	hud_type = /datum/hud_data/baxxid
 	limb_blend = ICON_MULTIPLY
-	spawn_flags = SPECIES_IS_RESTRICTED
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart,
@@ -19,6 +26,18 @@
 		BP_BRAIN =    /obj/item/organ/internal/brain,
 		BP_EYES =     /obj/item/organ/internal/eyes/baxxid
 		)
+
+/datum/language/baxxid
+/datum/species/baxxid/handle_autohiss(message, datum/language/lang, mode)
+	. = message
+	if(!istype(lang, /datum/language/baxxid))
+		var/hnnn = "H"
+		for(var/i = 1 to rand(3,5))
+			hnnn += "n"
+		var/first_char = copytext(message, 1, 1)
+		if(first_char != lowertext(first_char))
+			hnnn = uppertext(capitalize(hnnn))
+		. = "[hnnn][uppertext(.)]"
 
 /obj/item/organ/internal/eyes/baxxid
 	eye_icon = 'icons/mob/human_races/species/baxxid/eyes.dmi'
