@@ -62,7 +62,6 @@ var/list/organ_cache = list()
 
 	if(iscarbon(loc))
 		owner = loc
-		w_class = max(w_class + mob_size_difference(owner.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
 		if(!given_dna && owner.dna)
 			given_dna = owner.dna
 		else
@@ -72,6 +71,7 @@ var/list/organ_cache = list()
 		set_dna(given_dna)
 	if (!species)
 		species = all_species[SPECIES_HUMAN]
+	species.resize_organ(src)
 
 	create_reagents(5 * (w_class-1)**2)
 	reagents.add_reagent(/datum/reagent/nutriment/protein, reagents.maximum_volume)
