@@ -240,6 +240,10 @@
 
 	// Something with pulling things
 	var/extra_delay = HandleGrabs(direction, old_turf)
+
+	if(QDELETED(mob)) // No idea why, but this was causing null check runtimes on live.
+		return
+
 	mob.ExtraMoveCooldown(extra_delay)
 
 	for (var/obj/item/grab/G in mob)
