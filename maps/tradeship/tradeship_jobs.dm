@@ -1,4 +1,5 @@
 /datum/map/tradeship
+	default_assistant_title = "Deck Hand"
 	allowed_jobs = list(
 		/datum/job/captain,
 		/datum/job/chief_engineer,
