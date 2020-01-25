@@ -37,15 +37,26 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/holder/dropped()
 	..()
-	spawn(1)
-		update_state()
+	update_state(1)
 
-/obj/item/holder/proc/update_state()
+/obj/item/holder/throw_impact(atom/hit_atom, datum/thrownthing/TT)
+	. = ..()
+	update_state(1)
+	
+/obj/item/holder/proc/update_state(var/delay)
+	set waitfor = 0
+
 	if(last_holder != loc)
 		for(var/mob/M in contents)
 			unregister_all_movement(last_holder, M)
 
-	if(istype(loc,/turf) || !(contents.len))
+	if(delay)
+		sleep(delay)
+
+	if(QDELETED(src) || throwing)
+		return
+
+	if(istype(loc,/turf) || !contents.len)
 		for(var/mob/M in contents)
 			var/atom/movable/mob_container = M
 			mob_container.dropInto(loc)
