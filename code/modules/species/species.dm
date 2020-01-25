@@ -387,7 +387,13 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		H.organs |= H.organs_by_name[name]
 
 	for(var/name in H.internal_organs_by_name)
-		H.internal_organs |= H.internal_organs_by_name[name]
+		var/obj/item/organ/internal/I = H.internal_organs_by_name[name]
+		var/obj/item/organ/external/E = H.organs_by_name[I.parent_organ]
+		H.internal_organs |= I
+		if(istype(E) && I.w_class > E.cavity_max_w_class)
+			E.cavity_max_w_class = I.w_class
+			if(E.cavity_max_w_class > E.w_class)
+				E.w_class = E.cavity_max_w_class
 
 	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
 		O.owner = H
