@@ -1,10 +1,10 @@
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9
+
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
 	var/tint = TINT_NONE							  // Sets the item's level of visual impairment tint.
 	var/list/species_restricted = list(SPECIES_HUMAN) //everyone except for these species can wear this kit.
-
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
@@ -13,8 +13,27 @@
 	var/visible_name = "Unknown"
 	var/ironed_state = WRINKLES_DEFAULT
 	var/smell_state = SMELL_DEFAULT
-
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
+	var/made_of_cloth = FALSE
+
+// Sort of a placeholder for proper tailoring.
+/obj/item/clothing/attackby(obj/item/I, mob/user)
+	if(made_of_cloth && (I.edge || I.sharp) && user.a_intent == I_HURT)
+		if(!isturf(loc) && user.l_hand != src && user.r_hand != src)
+			var/it = gender == PLURAL ? "them" : "it"
+			to_chat(user, SPAN_WARNING("You must either be holding \the [src], or [it] must be on the ground, before you can shred [it]."))
+			return
+		user.visible_message(SPAN_DANGER("\The [user] begins tearing up \the [src] with \the [I]."))
+		if(do_after(user, 5 SECONDS, src))
+			user.visible_message(SPAN_DANGER("\The [user] tears \the [src] into rags with \the [I]."))
+			for(var/i = 1 to rand(2,3))
+				new /obj/item/chems/glass/rag(get_turf(src))
+			if(loc == user)
+				user.drop_from_inventory(src)
+			qdel(src)
+		return
+	. = ..()
+// End placeholder.
 
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
@@ -284,6 +303,7 @@ BLIND     // can't see anything
 
 		cut_fingertops() // apply change, so relevant xenos can wear these
 		return
+	. = ..()
 
 // Applies "clipped" and removes relevant restricted species from the list,
 // making them wearable by the specified species, does nothing if already cut
@@ -575,7 +595,7 @@ BLIND     // can't see anything
 	else
 		add_hidden(I, user)
 		return
-	..()
+	. = ..()
 
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/handcuffs/cuffs, var/mob/user)
 	if (!can_add_cuffs)
@@ -728,6 +748,8 @@ BLIND     // can't see anything
 	slot_flags = SLOT_ICLOTHING
 	w_class = ITEM_SIZE_NORMAL
 	force = 0
+	made_of_cloth = TRUE
+
 	var/has_sensor = SUIT_HAS_SENSORS //For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
 		/*
