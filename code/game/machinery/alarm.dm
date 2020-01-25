@@ -402,10 +402,7 @@
 	else if (device_type=="AScr")
 		new_name = "[alarm_area.name] Air Scrubber #[alarm_area.air_scrub_names.len+1]"
 		alarm_area.air_scrub_names[m_id] = new_name
-	else
-		return
-	spawn (10)
-		send_signal(m_id, list("init" = new_name) )
+	send_signal(m_id, list("init" = new_name) )
 
 /obj/machinery/alarm/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
