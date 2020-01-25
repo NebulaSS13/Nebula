@@ -1600,6 +1600,7 @@
 #include "code\modules\codex\entries\psionics.dm"
 #include "code\modules\codex\entries\spells.dm"
 #include "code\modules\codex\entries\stacks.dm"
+#include "code\modules\codex\entries\storage.dm"
 #include "code\modules\codex\entries\structures.dm"
 #include "code\modules\codex\entries\tools.dm"
 #include "code\modules\codex\entries\turfs.dm"

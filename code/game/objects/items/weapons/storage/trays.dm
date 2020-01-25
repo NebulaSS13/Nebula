@@ -97,9 +97,6 @@
 		else
 			to_chat(user, "\The [src] is empty.")
 
-/obj/item/storage/tray/get_codex_value()
-	return "tray"
-
 /* 
 -----------------------------------------------------------------
 TRAY TYPES GO HERE
