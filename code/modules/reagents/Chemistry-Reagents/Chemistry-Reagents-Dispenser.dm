@@ -343,7 +343,7 @@
 		remove_self(meltdose) // 10 units of acid will not melt EVERYTHING on the tile
 
 /datum/reagent/acid/hydrochloric //Like sulfuric, but less toxic and more acidic.
-	name = "Hydrochloric Acid"
+	name = "hydrochloric acid"
 	description = "A very corrosive mineral acid with the molecular formula HCl."
 	taste_description = "stomach acid"
 	color = "#808080"
