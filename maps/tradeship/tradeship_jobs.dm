@@ -320,7 +320,8 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_FINANCE     = SKILL_MAX,
 	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
-						SKILL_MEDICAL     = SKILL_MAX
+						SKILL_MEDICAL     = SKILL_MAX,
+						SKILL_ANATOMY     = SKILL_EXPERT
 						)
 	skill_points = 30
 	head_position = 1
