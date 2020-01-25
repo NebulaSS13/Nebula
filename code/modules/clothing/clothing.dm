@@ -174,6 +174,7 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 	var/volume_multiplier = 1
 
 /obj/item/clothing/ears/update_clothing_icon()
