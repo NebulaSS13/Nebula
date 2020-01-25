@@ -37,7 +37,7 @@
 			A.attackby(I, user)
 		return
 
-	..()
+	. = ..()
 
 /obj/item/clothing/attack_hand(var/mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
