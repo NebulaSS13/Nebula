@@ -1816,12 +1816,17 @@
 /mob/living/carbon/human/has_dexterity(var/dex_level)
 	. = check_dexterity(dex_level, silent = TRUE)
 
-/mob/living/carbon/human/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent)
-	var/obj/item/organ/external/active_hand = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
+/mob/living/carbon/human/check_dexterity(var/dex_level = DEXTERITY_FULL, var/silent, var/force_active_hand)
+	if(isnull(force_active_hand))
+		force_active_hand = hand ? BP_L_HAND : BP_R_HAND
+	var/obj/item/organ/external/active_hand = organs_by_name[force_active_hand]
 	if(!active_hand)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your hand is missing!"))
 		return FALSE
+	if(!active_hand.is_usable())
+		to_chat(src, SPAN_WARNING("Your [active_hand.name] is unusable!"))
+		return
 	if(active_hand.get_dexterity() < dex_level)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't have the dexterity to use that!"))

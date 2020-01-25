@@ -39,10 +39,13 @@
 		qdel(src)
 	return
 
-/obj/item/chems/food/snacks/attack_self(mob/user as mob)
-	return
+/obj/item/chems/food/snacks/attack_self(mob/user)
+	attack(user, user)
 
-/obj/item/chems/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/chems/food/snacks/dragged_onto(var/mob/user)
+	attack(user, user)
+
+/obj/item/chems/food/snacks/attack(mob/M, mob/user, def_zone)
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		qdel(src)

@@ -219,24 +219,65 @@
 
 	return ..(user, distance, "", desc_comp)
 
-/obj/item/attack_hand(mob/user as mob)
-	if (!user) return
-	if (anchored)
+// Partially copied from atom/MouseDrop()
+/obj/item/MouseDrop(var/atom/over)
+	if(usr && over && Adjacent(usr))
+		if(over == usr)
+			usr.face_atom(src)
+			dragged_onto(over)
+			return
+		else if(usr.client && istype(over, /obj/screen/inventory) && (over in usr.client.screen))
+			var/obj/screen/inventory/inv = over
+			var/old_loc = loc
+			if(inv.slot_id)
+				to_chat(usr, SPAN_NOTICE("You begin putting on \the [src]..."))
+				if(do_after(usr, 3 SECONDS, src) && usr.equip_to_slot_if_possible(src, inv.slot_id))
+					return
+			if(loc != old_loc)
+				dropInto(old_loc)
+	return ..()
+
+/obj/item/proc/dragged_onto(var/mob/user)
+	attack_hand(user)
+
+/obj/item/attack_hand(mob/user)
+
+	if(!user)
+		return
+
+	if(anchored)
 		return ..()
-	if (hasorgans(user))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-		if (user.hand)
-			temp = H.organs_by_name[BP_L_HAND]
-		if(temp && !temp.is_usable())
-			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
-			return
-		if(!temp)
-			to_chat(user, "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>")
-			return
 
+	if(!user.check_dexterity(DEXTERITY_GRIP, silent = TRUE))
+
+		if(user.check_dexterity(DEXTERITY_KEYBOARDS, silent = TRUE))
+
+			if(loc == user)
+				to_chat(user, SPAN_NOTICE("You begin trying to remove \the [src]..."))
+				if(do_after(user, 3 SECONDS, src) && user.unEquip(src))
+					user.drop_from_inventory(src)
+				else
+					to_chat(user, SPAN_WARNING("You fail to remove \the [src]!"))
+				return
+
+			if(isturf(loc))
+				if(loc == get_turf(user))
+					attack_self(user)
+				else
+					dropInto(get_turf(user))
+				return
+
+			if(istype(loc, /obj/item/storage))
+				visible_message(SPAN_NOTICE("\The [user] fumbles \the [src] out of \the [loc]."))
+				var/obj/item/storage/bag = loc
+				bag.remove_from_storage(src)
+				dropInto(get_turf(bag))
+				return
+
+		to_chat(user, SPAN_WARNING("You are not dexterous enough to pick up \the [src]."))
+		return
+	
 	var/old_loc = loc
-
 	pickup(user)
 	if (istype(loc, /obj/item/storage))
 		var/obj/item/storage/S = loc
