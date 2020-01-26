@@ -23,3 +23,6 @@
 /datum/fabricator_recipe/engineering/rcd
 	path = /obj/item/rcd
 	hidden = TRUE
+
+/datum/fabricator_recipe/engineering/solars
+	path = /obj/item/solar_assembly
