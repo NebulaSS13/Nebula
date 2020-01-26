@@ -215,6 +215,7 @@ var/list/solars_list = list()
 	item_state = "electropack"
 	w_class = ITEM_SIZE_HUGE // Pretty big!
 	anchored = 0
+	matter = list(MATERIAL_STEEL = 4000)
 	var/tracker = 0
 	var/glass_type = null
 
