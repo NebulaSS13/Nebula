@@ -419,6 +419,11 @@
 	sign_state = "goldenplaque"
 	var/claimant
 
+/obj/item/sign/ivenmoth
+	name = "\improper Ivenmoth sigil"
+	icon_state = "ivenmoth"
+	desc = "The logo of tradehouse Ivenmoth, unchanged for a thousands of years."
+
 /obj/item/sign/medipolma/attack_self(mob/user)
 	if(!claimant)
 		to_chat(user, "<span class='notice'>You fill in your name in the blanks with a permanent marker.</span>")
