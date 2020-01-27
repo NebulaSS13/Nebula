@@ -12,3 +12,9 @@
 	guns["holdout pistol"] = /obj/item/gun/projectile/pistol/holdout
 	guns["pistol"] = /obj/item/gun/projectile/pistol/sec
 	gear_tweaks += new/datum/gear_tweak/path(guns)
+
+/datum/gear/head/yinglet_hood
+	display_name = "yinglet hood, colour select"
+	path = /obj/item/clothing/head/yinglet
+	flags = GEAR_HAS_COLOR_SELECTION
+	description = "A simple cloth hood with ear-holes. Not suitable for human use."
