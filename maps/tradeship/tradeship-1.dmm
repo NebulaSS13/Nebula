@@ -126,6 +126,10 @@
 	dir = 8;
 	pixel_x = 22
 	},
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 6
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "ay" = (
@@ -265,13 +269,17 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/robot)
 "aR" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/handrai{
 	tag = "icon-handrail (EAST)";
 	icon_state = "handrail";
 	dir = 4
 	},
 /obj/machinery/mining/brace,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 9
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "aS" = (
@@ -442,6 +450,7 @@
 	icon_state = "handrail";
 	dir = 8
 	},
+/obj/structure/ore_box,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bi" = (
@@ -707,6 +716,10 @@
 /obj/item/bodybag,
 /obj/item/stack/tile/carpet/fifty,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 9
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bK" = (
@@ -2302,7 +2315,7 @@
 /area/ship/scrap/maintenance/storage)
 "fb" = (
 /obj/machinery/light,
-/obj/machinery/suit_storage_unit/engineering/salvage,
+/obj/machinery/suit_cycler/tradeship,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/eva)
 "fc" = (
@@ -2311,7 +2324,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/machinery/suit_storage_unit/engineering/salvage,
+/obj/machinery/suit_cycler/tradeship,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/eva)
 "fd" = (
@@ -2415,7 +2428,7 @@
 	icon_state = "conveyor0";
 	id = "con"
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "hp" = (
 /obj/machinery/door/firedoor,
@@ -2472,6 +2485,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/escape_port)
+"js" = (
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "jD" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -2486,7 +2506,7 @@
 	input_turf = 2;
 	output_turf = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "kb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -2724,7 +2744,7 @@
 "tz" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "ub" = (
 /obj/item/stool/padded,
@@ -2925,19 +2945,27 @@
 	id = "con";
 	movedir = 6
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "BO" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/dorms3)
+"Cr" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "CN" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/loading{
 	icon_state = "loadingarea";
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "Db" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -3051,6 +3079,10 @@
 /area/ship/scrap/cargo/lower)
 "HH" = (
 /obj/structure/ladder/up,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 6
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "Ib" = (
@@ -3079,7 +3111,7 @@
 	icon_state = "conveyor1";
 	id = "con"
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "Jb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3248,7 +3280,7 @@
 	input_turf = 1;
 	output_turf = 2
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "Rq" = (
 /obj/effect/paint/brown,
@@ -3339,7 +3371,7 @@
 "WT" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "WZ" = (
 /obj/effect/paint/brown,
@@ -6417,8 +6449,8 @@ pr
 al
 al
 aF
-aU
-du
+js
+Cr
 aR
 bd
 bt

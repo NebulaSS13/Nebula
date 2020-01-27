@@ -17,10 +17,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
-"ad" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/airless,
-/area/space)
 "ae" = (
 /turf/simulated/floor/airless,
 /area/space)
@@ -117,11 +113,6 @@
 	icon_state = "coil2"
 	},
 /turf/simulated/floor/airless,
-/area/space)
-"ar" = (
-/obj/item/solar_assembly,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/airless,
 /area/space)
 "as" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -271,8 +262,7 @@
 	icon_state = "0-4"
 	},
 /obj/item/solar_assembly,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/airless,
 /area/space)
 "aJ" = (
 /obj/structure/cable/yellow{
@@ -356,8 +346,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/airless,
 /area/space)
 "aT" = (
 /obj/structure/cable/yellow{
@@ -365,8 +354,7 @@
 	icon_state = "0-8"
 	},
 /obj/item/solar_assembly,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/airless,
 /area/space)
 "aU" = (
 /obj/structure/cable/yellow{
@@ -456,15 +444,6 @@
 /obj/item/stack/material/glass/ten,
 /turf/simulated/floor/airless,
 /area/space)
-"be" = (
-/obj/structure/handrai{
-	tag = "icon-handrail (NORTH)";
-	icon_state = "handrail";
-	dir = 1
-	},
-/obj/item/wrench,
-/turf/simulated/floor/reinforced/airless,
-/area/space)
 "bf" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/supply,
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers,
@@ -493,6 +472,10 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
+/area/space)
+"tg" = (
+/obj/item/wrench,
+/turf/simulated/floor/reinforced/airless,
 /area/space)
 
 (1,1,1) = {"
@@ -3899,13 +3882,13 @@ ax
 ax
 ae
 ae
-ad
-ad
-ad
+ae
+ae
+ae
 aI
 aS
 aZ
-be
+an
 aV
 au
 aV
@@ -4061,11 +4044,11 @@ ax
 ax
 ax
 ax
-ad
-ad
 ae
-ad
-ar
+ae
+ae
+ae
+ay
 ae
 aW
 aZ
@@ -4312,7 +4295,7 @@ ax
 ax
 ax
 ax
-ax
+tg
 ax
 ax
 ax
