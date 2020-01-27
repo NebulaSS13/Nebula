@@ -12,6 +12,7 @@
 	w_class = 1
 	slot_flags = SLOT_EARS
 	var/string_colour
+	var/can_flip = TRUE
 
 /obj/item/material/coin/Initialize()
 	. = ..()
@@ -44,8 +45,22 @@
 
 // "Coin Flipping, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
 /obj/item/material/coin/attack_self(var/mob/user)
+	if(!can_flip)
+		to_chat(user, SPAN_WARNING("\The [src] is already being flipped!"))
+		return
+	coin_flip(user)
+
+/obj/item/material/coin/proc/coin_flip(var/mob/user)
+	if(!can_flip)
+		return
+	can_flip = FALSE
 	playsound(usr.loc, 'sound/effects/coin_flip.ogg', 75, 1)
-	user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air and catches it, revealing that it landed on [(prob(50) && "tails") || "heads"]!"))
+	user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air."))
+	sleep(1.5 SECOND)
+	if(!QDELETED(user) && !QDELETED(src) && loc == user)
+		user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [(prob(50) && "tails") || "heads"]!"))
+	can_flip = TRUE
+	return
 
 // Subtypes.
 /obj/item/material/coin/gold
