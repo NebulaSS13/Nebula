@@ -5691,6 +5691,8 @@
 	name = "External Lockdown"
 	},
 /obj/random_multi/single_item/captains_spare_id,
+/obj/item/documents/tradehouse/account,
+/obj/item/documents/tradehouse/personnel,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
 "CD" = (
@@ -6121,16 +6123,14 @@
 	pixel_x = 32
 	},
 /obj/random/voidhelmet,
-/obj/random/voidhelmet,
-/obj/random/voidhelmet,
-/obj/random/voidsuit,
-/obj/random/voidsuit,
 /obj/random/voidsuit,
 /obj/structure/handrai{
 	tag = "icon-handrail (WEST)";
 	icon_state = "handrail";
 	dir = 8
 	},
+/obj/random/voidhelmet,
+/obj/random/voidsuit,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/crew/saloon)
 "Jp" = (

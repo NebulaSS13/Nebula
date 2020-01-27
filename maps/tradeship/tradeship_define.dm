@@ -40,6 +40,18 @@
 
 	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Please move to a shielded area such as the cargo bay, dormitories or medbay until the radiation has passed."
 	
+	potential_theft_targets = list(
+		"the tradehouse accounting documents"	= /obj/item/documents/tradehouse/account,
+		"the tradehouse personnel data"			= /obj/item/documents/tradehouse/personnel,
+		"the Captain's spare ID"				= /obj/item/card/id/captains_spare,
+		"the ship's blueprints"					= /obj/item/blueprints,
+		"the Matriarch's robes"					= /obj/item/clothing/under/yinglet/matriarch,
+		"a jetpack"								= /obj/item/tank/jetpack/,
+		"a pump action shotgun"					= /obj/item/gun/projectile/shotgun/pump/,
+		"a health analyzer"						= /obj/item/scanner/health,
+		"the integrated circuit printer"		= /obj/item/integrated_circuit_printer,
+		"a whole uneaten mollusc"				= /obj/item/mollusc
+	)
 
 /datum/map/tradeship/get_map_info()
 	return "You're aboard the <b>[station_name],</b> a survey and mercantile vessel affiliated with <b>Tradehouse Ivenmoth</b>, a large merchant guild operating out of Val Salia Station. \
