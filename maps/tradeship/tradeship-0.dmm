@@ -1984,6 +1984,13 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/loading_bay)
+"Qy" = (
+/obj/turbolift_map_holder/tradeship{
+	icon_state = "";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/loading_bay)
 "QW" = (
 /obj/item/stack/tile/floor{
 	amount = 5
@@ -5264,7 +5271,7 @@ XU
 JI
 JI
 JI
-JI
+Qy
 ao
 yO
 aI

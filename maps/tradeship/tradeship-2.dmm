@@ -5848,10 +5848,6 @@
 /obj/machinery/door/airlock/hatch/autoname/command,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/comms)
-"Fb" = (
-/obj/effect/shuttle_landmark/lift/top,
-/turf/simulated/open,
-/area/ship/scrap/cargo)
 "Fc" = (
 /obj/machinery/light{
 	icon_state = "bulb1";
@@ -7074,7 +7070,6 @@
 "Ya" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/computer/shuttle_control/lift,
 /obj/structure/catwalk,
 /obj/structure/railing/mapped,
 /turf/simulated/open,
@@ -10352,7 +10347,7 @@ eV
 fp
 Ya
 fZ
-Fb
+fZ
 fZ
 fZ
 fZ

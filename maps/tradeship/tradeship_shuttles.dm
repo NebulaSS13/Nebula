@@ -8,26 +8,6 @@
 	dock_target = "tradeship_shuttle"
 	current_location = "nav_tradeship_port_dock_shuttle"
 
-/datum/shuttle/autodock/ferry/lift
-	name = "Cargo Lift"
-	shuttle_area = /area/ship/scrap/shuttle/lift
-	warmup_time = 3	//give those below some time to get out of the way
-	waypoint_station = "nav_tradeship_lift_bottom"
-	waypoint_offsite = "nav_tradeship_lift_top"
-	sound_takeoff = 'sound/effects/lift_heavy_start.ogg'
-	sound_landing = 'sound/effects/lift_heavy_stop.ogg'
-	ceiling_type = null
-	knockdown = 0
-
-/obj/machinery/computer/shuttle_control/lift
-	name = "cargo lift controls"
-	shuttle_tag = "Cargo Lift"
-	ui_template = "shuttle_control_console_lift.tmpl"
-	icon_state = "tiny"
-	icon_keyboard = "tiny_keyboard"
-	icon_screen = "lift"
-	density = 0
-
 //In case multiple shuttles can dock at a location,
 //subtypes can be used to hold the shuttle-specific data
 /obj/effect/shuttle_landmark/docking_arm_starboard
@@ -44,17 +24,6 @@
 /obj/effect/shuttle_landmark/docking_arm_port/shuttle
 	landmark_tag = "nav_tradeship_port_dock_shuttle"
 
-/obj/effect/shuttle_landmark/lift/top
-	name = "Top Deck"
-	landmark_tag = "nav_tradeship_lift_top"
-	flags = SLANDMARK_FLAG_AUTOSET
-
-/obj/effect/shuttle_landmark/lift/bottom
-	name = "Lower Deck"
-	landmark_tag = "nav_tradeship_lift_bottom"
-	base_area = /area/ship/scrap/cargo/lower
-	base_turf = /turf/simulated/floor
-
 /obj/effect/shuttle_landmark/below_deck_bow
 	name = "Near CSV Tradeship Bow"
 	landmark_tag = "nav_tradeship_below_bow"
@@ -62,3 +31,23 @@
 /obj/effect/shuttle_landmark/below_deck_starboardastern
 	name = "Near CSV Tradeship Starboard Astern"
 	landmark_tag = "nav_tradeship_below_starboardastern"
+
+// Essentially a bare platform that moves up and down.
+/obj/turbolift_map_holder/tradeship
+	name = "Tradeship cargo elevator placeholder"
+	depth = 3
+	lift_size_x = 3
+	lift_size_y = 3
+	door_type =     null
+	wall_type =     null
+	firedoor_type = null
+	light_type =    null
+	floor_type =  /turf/simulated/floor/tiled/dark/monotile
+	button_type = /obj/structure/lift/button/standalone
+	panel_type =  /obj/structure/lift/panel/standalone
+	icon = 'icons/obj/turbolift_preview_2x2.dmi'
+	areas_to_use = list(
+		/area/turbolift/tradeship_enclave,
+		/area/turbolift/tradeship_cargo,
+		/area/turbolift/tradeship_upper
+	)
