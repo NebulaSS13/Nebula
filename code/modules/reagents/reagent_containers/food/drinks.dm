@@ -15,24 +15,26 @@
 
 /obj/item/chems/food/drinks/on_reagent_change()
 	update_icon()
-	return
 
-/obj/item/chems/food/drinks/attack_self(mob/user as mob)
+/obj/item/chems/food/drinks/dragged_onto(var/mob/user)
+	attack_self(user)
+
+/obj/item/chems/food/drinks/attack_self(mob/user)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		open(user)
+		return
+	attack(user, user)
 
 /obj/item/chems/food/drinks/proc/open(mob/user)
 	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
-	to_chat(user, "<span class='notice'>You open \the [src] with an audible pop!</span>")
+	to_chat(user, SPAN_NOTICE("You open \the [src] with an audible pop!"))
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/chems/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/chems/food/drinks/attack(mob/M, mob/user, def_zone)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return ..()
-
 	if(standard_feed_mob(user, M))
 		return
-
 	return 0
 
 /obj/item/chems/food/drinks/afterattack(obj/target, mob/user, proximity)

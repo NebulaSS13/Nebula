@@ -18,13 +18,17 @@
 	if(!icon_state)
 		icon_state = "pill[rand(1, 5)]" //preset pills only use colour changing or unique icons
 
-/obj/item/chems/pill/attack(mob/M as mob, mob/user as mob, def_zone)
-		//TODO: replace with standard_feed_mob() call.
+/obj/item/chems/pill/attack_self(mob/user)
+	attack(user, user)
 
+/obj/item/chems/pill/dragged_onto(var/mob/user)
+	attack(user, user)
+
+/obj/item/chems/pill/attack(mob/M, mob/user, def_zone)
+	//TODO: replace with standard_feed_mob() call.
 	if(M == user)
 		if(!M.can_eat(src))
 			return
-
 		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
 		if(reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
