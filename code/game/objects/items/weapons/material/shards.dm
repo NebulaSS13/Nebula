@@ -135,3 +135,7 @@
 	name = "shrapnel"
 	material = MATERIAL_STEEL
 	w_class = ITEM_SIZE_TINY	//it's real small
+
+/obj/item/material/shard/plastic
+	material = MATERIAL_PLASTIC
+	w_class = ITEM_SIZE_TINY
