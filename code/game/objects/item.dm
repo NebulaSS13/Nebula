@@ -220,21 +220,31 @@
 	return ..(user, distance, "", desc_comp)
 
 // Partially copied from atom/MouseDrop()
+// This is going to need a solid go-over post-Baxxid to properly integrate all the movement procs
+// into each other and make sure everything is updating nicely. Snowflaking it for now. ~Jan 2020
 /obj/item/MouseDrop(var/atom/over)
 	if(usr && over && Adjacent(usr))
 		if(over == usr)
 			usr.face_atom(src)
 			dragged_onto(over)
-			return
 		else if(usr.client && istype(over, /obj/screen/inventory) && (over in usr.client.screen))
 			var/obj/screen/inventory/inv = over
-			var/old_loc = loc
-			if(inv.slot_id)
+			if(!inv.slot_id)
+				return 
+			if(!usr.check_dexterity(DEXTERITY_GRIP, silent = TRUE))
 				to_chat(usr, SPAN_NOTICE("You begin putting on \the [src]..."))
-				if(do_after(usr, 3 SECONDS, src) && usr.equip_to_slot_if_possible(src, inv.slot_id))
+				if(!do_after(usr, 3 SECONDS, src) || QDELETED(over) || QDELETED(src) || QDELETED(usr))
 					return
-			if(loc != old_loc)
-				dropInto(old_loc)
+			if(istype(loc, /obj/item/storage))
+				var/obj/item/storage/bag = loc
+				bag.remove_from_storage(src)
+				dropInto(get_turf(bag))
+			else if(istype(loc, /mob))
+				var/mob/M = loc
+				if(!M.unEquip(src, get_turf(src)))
+					return
+			usr.equip_to_slot_if_possible(src, inv.slot_id)
+		return
 	return ..()
 
 /obj/item/proc/dragged_onto(var/mob/user)
