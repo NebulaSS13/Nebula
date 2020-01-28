@@ -53,3 +53,37 @@
 	w_class = ITEM_SIZE_SMALL
 	matter = list(MATERIAL_STEEL = 150)
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked", "attacked", "slashed", "torn", "ripped", "cut")
+
+/obj/item/crowbar/prybar/cheap
+	name = "discount pry bar"
+	desc = "A plastic bar with a wedge. It looks so poorly manufactured that you're sure it will break if you try to use it."
+	force = 2
+	throwforce = 4
+	matter = list(MATERIAL_PLASTIC = 60)
+	obj_flags = null
+	w_class = ITEM_SIZE_TINY
+	
+//List of things prybar has high chance of breaking on. Global for optimzation
+var/global/list/prybar_break_chances = list(
+	/obj/machinery/door = 80,
+	/turf/simulated/floor/tiled = 25,
+	/mob/living = 15,
+	/obj/machinery = 15
+	)
+
+/obj/item/crowbar/prybar/cheap/afterattack(atom/target, mob/user)
+	. = ..()
+	var/break_chance = 05
+
+	if(QDELETED(src))
+		return
+	for(var/checktype in prybar_break_chances)
+		if(istype(target, checktype))
+			break_chance = prybar_break_chances[checktype]
+			break
+	if(prob(break_chance))
+		playsound(user, 'sound/effects/snap.ogg', 40, 1)
+		to_chat(user, SPAN_WARNING("\The [src] shatters like the cheap garbage it was!"))
+		qdel(src)
+		user.put_in_hands(new /obj/item/material/shard(get_turf(user), MATERIAL_PLASTIC))
+	return
