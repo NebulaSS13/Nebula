@@ -9,7 +9,7 @@
 	bone_material = null
 	skin_material = null
 
-	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/sharp)
+	unarmed_attacks = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/sharp)
 	darksight_range = 8
 	darksight_tint = DARKTINT_GOOD
 	siemens_coefficient = 0

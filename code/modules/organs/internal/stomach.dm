@@ -1,5 +1,3 @@
-#define PUKE_ACTION_NAME "Empty Stomach"
-
 /obj/item/organ/internal/stomach
 	name = "stomach"
 	desc = "Gross. This is hard to stomach."
@@ -21,7 +19,7 @@
 	if(!ingested.my_atom)
 		ingested.my_atom = src
 	if(species.gluttonous)
-		action_button_name = PUKE_ACTION_NAME
+		verbs |= /obj/item/organ/internal/stomach/proc/throw_up
 
 /obj/item/organ/internal/stomach/removed()
 	. = ..()
@@ -71,17 +69,13 @@
 			else if(species.gluttonous & GLUT_ITEM_ANYTHING)
 				return DEVOUR_FAST
 
-/obj/item/organ/internal/stomach/refresh_action_button()
-	. = ..()
-	if(.)
-		action.button_icon_state = "puke"
-		if(action.button) action.button.UpdateIcon()
 
-/obj/item/organ/internal/stomach/attack_self(mob/user)
-	. = ..()
-	if(. && action_button_name == PUKE_ACTION_NAME && owner && !owner.incapacitated())
+obj/item/organ/internal/stomach/proc/throw_up()
+	set name = "Empty Stomach"
+	set category = "IC"
+	set src in usr
+	if(usr == owner && owner && !owner.incapacitated())
 		owner.vomit(deliberate = TRUE)
-		refresh_action_button()
 
 /obj/item/organ/internal/stomach/return_air()
 	return null
@@ -135,4 +129,3 @@
 			owner.vomit()
 
 #undef STOMACH_VOLUME
-#undef PUKE_ACTION_NAME

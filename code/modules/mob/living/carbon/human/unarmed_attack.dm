@@ -2,7 +2,7 @@ var/global/list/sparring_attack_cache = list()
 
 //Species unarmed attacks
 /datum/unarmed_attack
-	var/attack_verb = list("attack")	// Empty hand hurt intent verb.
+	var/attack_verb = list("attacks")	// Empty hand hurt intent verb.
 	var/attack_noun = list("fist")
 	var/damage = 0						// Extra empty hand attack damage.
 	var/attack_sound = "punch"

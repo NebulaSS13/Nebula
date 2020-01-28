@@ -6,7 +6,7 @@
 	deform = 'icons/mob/human_races/species/golem/body.dmi'
 	husk_icon = 'icons/mob/human_races/species/golem/husk.dmi'
 
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
+	unarmed_attacks = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
 	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0

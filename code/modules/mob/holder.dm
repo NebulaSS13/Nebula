@@ -185,8 +185,13 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/holder/human
 	icon = 'icons/mob/holder_complex.dmi'
-	var/list/generate_for_slots = list(slot_l_hand_str, slot_r_hand_str, slot_back_str)
+	var/mob_blend_mode = ICON_ADD
 	slot_flags = SLOT_BACK
+	var/list/generate_for_slots = list(slot_l_hand_str, slot_r_hand_str, slot_back_str)
+
+/obj/item/holder/human/yinglet
+	mob_blend_mode = ICON_MULTIPLY
+	generate_for_slots = list()
 
 /obj/item/holder/human/yinglet/attack_self()
 	var/mob/owner = locate() in contents
@@ -199,7 +204,7 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/human/sync(var/mob/living/M)
 	// Generate appropriate on-mob icons.
 	var/mob/living/carbon/human/owner = M
-	if(istype(owner) && owner.species)
+	if(istype(owner) && owner.species && LAZYLEN(generate_for_slots))
 
 		var/skin_colour = rgb(owner.r_skin, owner.g_skin, owner.b_skin)
 		var/hair_colour = rgb(owner.r_hair, owner.g_hair, owner.b_hair)
