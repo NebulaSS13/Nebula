@@ -203,16 +203,6 @@
 	name = "\improper Exploration Shuttle"
 	icon_state = "tcomsatcham"
 
-/area/ship/scrap/shuttle/lift
-	name = "\improper Cargo Lift"
-	icon_state = "shuttle3"
-	base_turf = /turf/simulated/open
-
-/area/ship/scrap/shuttle/lift/alert_on_fall(var/mob/living/carbon/human/H)
-	if(H.client && SSpersistence.elevator_fall_shifts > 0)
-		SSwebhooks.send(WEBHOOK_ELEVATOR_FALL, list("text" = "We managed to make it [SSpersistence.elevator_fall_shifts] shift\s without someone falling down an elevator shaft."))
-		SSpersistence.elevator_fall_shifts = -1
-
 /area/ship/scrap/maintenance/solars
 	name = "\improper Solar Array Access"
 	icon_state = "SolarcontrolA"
@@ -220,3 +210,29 @@
 /area/ship/scrap/maintenance/robot
 	name = "\improper Robot Storage"
 	icon_state = "ai_cyborg"
+
+/area/turbolift
+	name = "\improper Cargo Elevator"
+	icon_state = "shuttle"
+	requires_power = 0
+	dynamic_lighting = 1
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	arrival_sound = null
+	lift_announce_str = null
+
+/area/turbolift/alert_on_fall(var/mob/living/carbon/human/H)
+	if(H.client && SSpersistence.elevator_fall_shifts > 0)
+		SSwebhooks.send(WEBHOOK_ELEVATOR_FALL, list("text" = "We managed to make it [SSpersistence.elevator_fall_shifts] shift\s without someone falling down an elevator shaft."))
+		SSpersistence.elevator_fall_shifts = -1
+
+/area/turbolift/tradeship_enclave
+	name = "Enclave Sublevel"
+	base_turf = /turf/simulated/floor
+
+/area/turbolift/tradeship_cargo
+	name = "Lower Cargo Bay"
+	base_turf = /turf/simulated/open
+
+/area/turbolift/tradeship_upper
+	name = "Upper Cargo Bay"
+	base_turf = /turf/simulated/open

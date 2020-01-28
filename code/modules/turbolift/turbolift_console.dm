@@ -83,9 +83,12 @@
 	light_up = TRUE
 	update_icon()
 
+/obj/structure/lift/button/standalone
+	icon_state = "plinth"
+
 /obj/structure/lift/button/on_update_icon()
 	if(light_up)
-		icon_state = "button_lit"
+		icon_state = "[initial(icon_state)]_lit"
 	else
 		icon_state = initial(icon_state)
 
@@ -97,6 +100,8 @@
 	icon_state = "panel"
 	mouse_opacity = 2 //No more eyestrain aiming at tiny pixels
 
+/obj/structure/lift/panel/standalone
+	icon_state = "standing_panel"
 
 /obj/structure/lift/panel/attack_ghost(var/mob/user)
 	return interact(user)
@@ -118,10 +123,11 @@
 		dat += "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[label]</a>: [floor.name]</font><br>"
 
 	dat += "<hr>"
-	if(lift.doors_are_open())
-		dat += "<a href='?src=\ref[src];close_doors=1'>Close Doors</a><br>"
-	else
-		dat += "<a href='?src=\ref[src];open_doors=1'>Open Doors</a><br>"
+	if(LAZYLEN(lift.doors))
+		if(lift.doors_are_open())
+			dat += "<a href='?src=\ref[src];close_doors=1'>Close Doors</a><br>"
+		else
+			dat += "<a href='?src=\ref[src];open_doors=1'>Open Doors</a><br>"
 	dat += "<a href='?src=\ref[src];emergency_stop=1'>Emergency Stop</a>"
 	dat += "<hr></body></html>"
 

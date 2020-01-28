@@ -1,3 +1,14 @@
+/*
+ * Turbolifts! Sort of like multishuttles-lite.
+ *
+ * How-to: Map /obj/turbolift_map_holder in at the bottom of the shaft, give it a depth
+ * value equivalent to the number of floors it should span (inclusive of the first),
+ * and at runtime it will update the map, set areas and create control panels and
+ * wifi-set doors appropriate to itself. You will save time at init if you map the
+ * elevator shaft in properly before runtime, but ultimately you're just avoiding a
+ * bunch of ChangeTurf() calls.
+ */
+
 // Lift master datum. One per turbolift.
 /datum/turbolift
 	var/datum/turbolift_floor/target_floor              // Where are we going?
@@ -51,7 +62,8 @@
 				next_process = world.time + move_delay
 		if(LIFT_WAITING_A)
 			var/area/turbolift/origin = locate(current_floor.area_ref)
-			control_panel_interior.visible_message("<b>The elevator</b> announces, \"[origin.lift_announce_str]\"")
+			if(origin.lift_announce_str)
+				control_panel_interior.visible_message("<b>The elevator</b> announces, \"[origin.lift_announce_str]\"")
 			next_process = world.time + floor_wait_delay
 			busy_state = LIFT_WAITING_B
 		if(LIFT_WAITING_B)
@@ -94,7 +106,8 @@
 
 	if(target_floor == current_floor)
 
-		playsound(control_panel_interior.loc, origin.arrival_sound, 50, 1)
+		if(origin.arrival_sound)
+			playsound(control_panel_interior.loc, origin.arrival_sound, 50, 1)
 		target_floor.arrived(src)
 		target_floor = null
 

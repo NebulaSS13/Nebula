@@ -823,7 +823,6 @@
 "bV" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/computer/shuttle_control/lift,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "bW" = (
@@ -943,35 +942,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/lower)
-"ch" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 9
-	},
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 5
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
-"ci" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 5
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
-"cj" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 5
-	},
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
 "ck" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -1095,27 +1065,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
-"cy" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 9
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
-"cz" = (
-/obj/effect/shuttle_landmark/lift/bottom,
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
-"cA" = (
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
-"cB" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
 "cC" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
@@ -1246,35 +1195,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
-"cV" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 9
-	},
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 10
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
-"cW" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 10
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
-"cX" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 6
-	},
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 10
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/shuttle/lift)
 "cY" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -6538,10 +6458,10 @@ gb
 bu
 bK
 bU
-ch
-cy
-cy
-cV
+lZ
+lZ
+lZ
+lZ
 mb
 lK
 ao
@@ -6620,10 +6540,10 @@ Dh
 bv
 bL
 bV
-ci
-cz
-cA
-cW
+lZ
+lZ
+lZ
+lZ
 dh
 dv
 ao
@@ -6702,10 +6622,10 @@ bf
 bw
 bM
 bW
-ci
-cA
-cA
-cW
+lZ
+lZ
+lZ
+lZ
 ao
 lZ
 ao
@@ -6784,10 +6704,10 @@ bg
 bx
 bN
 ib
-cj
-cB
-cB
-cX
+lZ
+lZ
+lZ
+lZ
 di
 hI
 ao

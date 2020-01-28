@@ -8,21 +8,18 @@
 	var/lift_size_y = 2 // ie. a 3x3 lift would have a value of 2 in each of these variables.
 
 	// Various turf and door types used when generating the turbolift floors.
-	var/wall_type =  /turf/simulated/wall/elevator
-	var/floor_type = /turf/simulated/floor/tiled/dark
-	var/door_type =  /obj/machinery/door/airlock/lift
+	var/wall_type =     /turf/simulated/wall/elevator
+	var/floor_type =    /turf/simulated/floor/tiled/dark
+	var/door_type =     /obj/machinery/door/airlock/lift
 	var/firedoor_type = /obj/machinery/door/firedoor
+	var/button_type =   /obj/structure/lift/button
+	var/panel_type =    /obj/structure/lift/panel
+	var/light_type =    /obj/machinery/light
 
 	var/list/areas_to_use = list()
 
-/obj/turbolift_map_holder/Destroy()
-	turbolifts -= src
-	return ..()
-
 /obj/turbolift_map_holder/Initialize()
 	. = ..()
-	turbolifts += src
-
 	// Create our system controller.
 	var/datum/turbolift/lift = new()
 
@@ -57,7 +54,7 @@
 
 		if(NORTH)
 
-			int_panel_x = ux + Floor(lift_size_x/2)
+			int_panel_x = ux + Floor(lift_size_x/2) 
 			int_panel_y = uy + 1
 			ext_panel_x = ux
 			ext_panel_y = ey + 2
@@ -74,7 +71,7 @@
 
 		if(SOUTH)
 
-			int_panel_x = ux + Floor(lift_size_x/2)
+			int_panel_x = ux + Floor(lift_size_x/2) 
 			int_panel_y = ey - 1
 			ext_panel_x = ex
 			ext_panel_y = uy - 2
@@ -144,7 +141,7 @@
 				// Update path appropriately if needed.
 				var/swap_to = /turf/simulated/open
 				if(cz == uz)                                                                       // Elevator.
-					if((tx == ux || ty == uy || tx == ex || ty == ey) && !(tx >= door_x1 && tx <= door_x2 && ty >= door_y1 && ty <= door_y2))
+					if(wall_type && (tx == ux || ty == uy || tx == ex || ty == ey) && !(tx >= door_x1 && tx <= door_x2 && ty >= door_y1 && ty <= door_y2))
 						swap_to = wall_type
 					else
 						swap_to = floor_type
@@ -169,47 +166,52 @@
 		cfloor.set_area_ref("\ref[A]")
 
 		// Place exterior doors.
-		for(var/tx = door_x1 to door_x2)
-			for(var/ty = door_y1 to door_y2)
-				var/turf/checking = locate(tx,ty,cz)
-				var/internal = 1
-				if(!(checking in floor_turfs))
-					internal = 0
-					if(checking.type != floor_type)
-						checking.ChangeTurf(floor_type)
-						checking = locate(tx,ty,cz)
-					for(var/atom/movable/thing in checking.contents)
-						if(thing.simulated)
-							qdel(thing)
-				if(checking.type == floor_type) // Don't build over empty space on lower levels.
-					var/obj/machinery/door/airlock/lift/newdoor = new door_type(checking)
-					if(internal)
-						lift.doors += newdoor
-						newdoor.lift = cfloor
-					else
-						var/obj/machinery/door/firedoor/newfiredoor = new firedoor_type(checking)
-						cfloor.doors += newdoor
-						cfloor.doors += newfiredoor
-						newdoor.floor = cfloor
+		if(door_type || firedoor_type)
+			for(var/tx = door_x1 to door_x2)
+				for(var/ty = door_y1 to door_y2)
+					var/turf/checking = locate(tx,ty,cz)
+					var/internal = 1
+					if(!(checking in floor_turfs))
+						internal = 0
+						if(checking.type != floor_type)
+							checking.ChangeTurf(floor_type)
+							checking = locate(tx,ty,cz)
+						for(var/atom/movable/thing in checking.contents)
+							if(thing.simulated)
+								qdel(thing)
+					if(checking.type == floor_type) // Don't build over empty space on lower levels.
+						var/obj/machinery/door/airlock/lift/newdoor
+						if(door_type)
+							newdoor = new door_type(checking)
+							if(internal)
+								lift.doors += newdoor
+								newdoor.lift = cfloor
+							else
+								cfloor.doors += newdoor
+								newdoor.floor = cfloor
+								if(firedoor_type)
+									var/obj/machinery/door/firedoor/newfiredoor = new firedoor_type(checking)
+									cfloor.doors += newfiredoor
 
 		// Place exterior control panel.
 		var/turf/placing = locate(ext_panel_x, ext_panel_y, cz)
-		var/obj/structure/lift/button/panel_ext = new(placing, lift)
+		var/obj/structure/lift/button/panel_ext = new button_type(placing, lift)
 		panel_ext.floor = cfloor
 		panel_ext.set_dir(udir)
 		cfloor.ext_panel = panel_ext
 
 		// Place lights
-		var/turf/placing1 = locate(light_x1, light_y1, cz)
-		var/turf/placing2 = locate(light_x2, light_y2, cz)
-		var/obj/machinery/light/light1 = new(placing1, light)
-		var/obj/machinery/light/light2 = new(placing2, light)
-		if(udir == NORTH || udir == SOUTH)
-			light1.set_dir(WEST)
-			light2.set_dir(EAST)
-		else
-			light1.set_dir(SOUTH)
-			light2.set_dir(NORTH)
+		if(light_type)
+			var/turf/placing1 = locate(light_x1, light_y1, cz)
+			var/turf/placing2 = locate(light_x2, light_y2, cz)
+			var/obj/machinery/light/light1 = new light_type(placing1, light)
+			var/obj/machinery/light/light2 = new light_type(placing2, light)
+			if(udir == NORTH || udir == SOUTH)
+				light1.set_dir(WEST)
+				light2.set_dir(EAST)
+			else
+				light1.set_dir(SOUTH)
+				light2.set_dir(NORTH)
 
 		// Update area.
 		if(az > areas_to_use.len)
@@ -220,7 +222,7 @@
 
 	// Place lift panel.
 	var/turf/T = locate(int_panel_x, int_panel_y, uz)
-	lift.control_panel_interior = new(T, lift)
+	lift.control_panel_interior = new panel_type(T, lift)
 	lift.control_panel_interior.set_dir(udir)
 	lift.current_floor = lift.floors[1]
 
