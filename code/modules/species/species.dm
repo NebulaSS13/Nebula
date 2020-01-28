@@ -73,11 +73,10 @@
 
 	// Combat vars.
 	var/total_health = 200                   // Point at which the mob will enter crit.
-	var/list/unarmed_types = list(           // Possible unarmed attacks that the mob will use in combat,
+	var/list/unarmed_attacks = list(           // Possible unarmed attacks that the mob will use in combat,
 		/datum/unarmed_attack,
 		/datum/unarmed_attack/bite
 		)
-	var/list/unarmed_attacks = null           // For empty hand harm-intent attack
 
 	var/list/natural_armour_values            // Armour values used if naked.
 	var/brute_mod =      1                    // Physical damage multiplier.
@@ -326,6 +325,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if(!breathing_organ && has_organ[BP_LUNGS])
 		breathing_organ = BP_LUNGS
 
+	var/list/unarmed_types = unarmed_attacks.Copy()
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
