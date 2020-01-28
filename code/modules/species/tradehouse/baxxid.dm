@@ -15,6 +15,7 @@
 
 	hud_type = /datum/hud_data/baxxid
 	limb_blend = ICON_MULTIPLY
+	species_flags = SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NO_SLIP
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	has_organ = list(
