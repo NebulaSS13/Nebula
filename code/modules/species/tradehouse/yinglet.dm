@@ -16,6 +16,7 @@
 	damage_mask =     'icons/mob/human_races/species/yinglet/damage_mask.dmi'
 	blood_mask =      'icons/mob/human_races/species/yinglet/blood_mask.dmi'
 	lip_icon =        'icons/mob/human_races/species/yinglet/lips.dmi'
+	gluttonous = GLUT_SMALLER | GLUT_ITEM_TINY
 
 	unarmed_attacks = list(
 		/datum/unarmed_attack/punch/weak,

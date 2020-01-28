@@ -20,16 +20,44 @@
 		/datum/reagent/surfactant =    1,
 		/datum/reagent/paint =         1
 	)
+	var/global/list/gains_nutriment_from_matter = list(
+		MATERIAL_WOOD =            TRUE,
+		MATERIAL_MAHOGANY =        TRUE,
+		MATERIAL_MAPLE =           TRUE,
+		MATERIAL_EBONY =           TRUE,
+		MATERIAL_WALNUT =          TRUE,
+		MATERIAL_LEATHER_GENERIC = TRUE,
+		MATERIAL_PLASTIC =         TRUE,
+		MATERIAL_CARDBOARD =       TRUE,
+		MATERIAL_CLOTH =           TRUE,
+		MATERIAL_ROCK_SALT =       TRUE
+	)
 
 /obj/item/organ/internal/stomach/yinglet/Process()
 	. = ..()
-	if(is_usable())
-		// Handle some post-metabolism reagent processing for generally inedible foods.
-		if(ingested.total_volume > 0)
-			for(var/datum/reagent/R in ingested.reagent_list)
-				var/inedible_nutriment_amount = gains_nutriment_from_inedible_reagents[R.type]
-				if(inedible_nutriment_amount > 0)
-					owner.adjust_nutrition(inedible_nutriment_amount)
+	if(!is_usable())
+		return
+	// Handle some post-metabolism reagent processing for generally inedible foods.
+	var/total_nutriment = 0
+	if(ingested.total_volume > 0)
+		for(var/datum/reagent/R in ingested.reagent_list)
+			total_nutriment += gains_nutriment_from_inedible_reagents[R.type]
+	for(var/obj/item/food in contents)
+		for(var/mat in food.matter)
+			if(!gains_nutriment_from_matter[mat])
+				continue
+			var/digested = min(food.matter[mat], rand(200,500))
+			food.matter[mat] -= digested
+			digested *= 0.75
+			if(food.matter[mat] <= 0)
+				food.matter -= mat
+			if(!LAZYLEN(food.matter))
+				qdel(food)
+			total_nutriment += digested/100
+	// Apply to reagents.
+	total_nutriment = Floor(total_nutriment)
+	if(total_nutriment > 0 && owner)
+		owner.adjust_nutrition(total_nutriment)
 
 /obj/item/organ/external/chest/yinglet
 	max_damage = 45
