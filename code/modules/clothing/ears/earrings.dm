@@ -4,7 +4,7 @@
 	desc = "An earring of some kind."
 	icon = 'icons/obj/clothing/obj_ears.dmi'
 	gender = PLURAL
-	species_restricted = list(SPECIES_HUMAN)
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 
 /obj/item/clothing/ears/earring/stud
 	name = "pearl stud earrings"
