@@ -221,7 +221,7 @@
 /area/template_noop)
 "L" = (
 /obj/machinery/portable_atmospherics/hydroponics/soil,
-/obj/item/seeds/towermycelium,
+/obj/item/seeds/corkwood,
 /turf/template_noop,
 /area/template_noop)
 "M" = (

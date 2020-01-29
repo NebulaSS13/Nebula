@@ -380,7 +380,7 @@
 	name = "plumphelmet"
 	seed_name = "plump helmet"
 	display_name = "plump helmet mushrooms"
-	mutants = list("walkingmushroom","towercap")
+	mutants = list("walkingmushroom","corkwood")
 	chems = list(/datum/reagent/nutriment = list(2,10))
 	kitchen_tag = "plumphelmet"
 
@@ -415,7 +415,7 @@
 	name = "reishi"
 	seed_name = "reishi"
 	display_name = "reishi"
-	mutants = list("libertycap","glowshroom")
+	mutants = list("libertycap","glowbell")
 	chems = list(/datum/reagent/nutriment = list(1,50), /datum/reagent/psilocybin = list(3,5))
 
 /datum/seed/mushroom/hallucinogenic/New()
@@ -480,40 +480,80 @@
 	set_trait(TRAIT_PLANT_COLOUR,"#e6d8dd")
 	set_trait(TRAIT_PLANT_ICON,"mushroom5")
 
-/datum/seed/mushroom/towercap
-	name = "towercap"
-	seed_name = "tower cap"
-	display_name = "tower caps"
+/datum/seed/mushroom/corkwood
+	name = "corkwood"
+	seed_name = "corkwood"
+	display_name = "corkwood stalks"
 	chems = list(/datum/reagent/woodpulp = list(10,1))
 	mutants = null
 
-/datum/seed/mushroom/towercap/New()
+/datum/seed/mushroom/corkwood/New()
 	..()
 	set_trait(TRAIT_MATURATION,15)
 	set_trait(TRAIT_PRODUCT_ICON,"mushroom7")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#79a36d")
-	set_trait(TRAIT_PLANT_COLOUR,"#857f41")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#d3aca3")
+	set_trait(TRAIT_PLANT_COLOUR,"#dcd9d9")
 	set_trait(TRAIT_PLANT_ICON,"mushroom8")
 
-/datum/seed/mushroom/glowshroom
-	name = "glowshroom"
-	seed_name = "glowshroom"
-	display_name = "glowshrooms"
-	mutants = null
-	chems = list(/datum/reagent/radium = list(1,20))
+/datum/seed/mushroom/glowbell
+	name = "glowbell"
+	seed_name = "glowbell"
+	display_name = "glowbells"
+	mutants = list("weepingmoon", "caverncandle")
+	chems = list(/datum/reagent/glowsap = list(1,20))
 
-/datum/seed/mushroom/glowshroom/New()
+/datum/seed/mushroom/glowbell/New()
 	..()
 	set_trait(TRAIT_SPREAD,1)
 	set_trait(TRAIT_MATURATION,15)
 	set_trait(TRAIT_YIELD,3)
 	set_trait(TRAIT_POTENCY,30)
 	set_trait(TRAIT_BIOLUM,1)
-	set_trait(TRAIT_BIOLUM_COLOUR,"#006622")
+	set_trait(TRAIT_BIOLUM_COLOUR,"#9eefff")
 	set_trait(TRAIT_PRODUCT_ICON,"mushroom2")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#ddfab6")
-	set_trait(TRAIT_PLANT_COLOUR,"#efff8a")
-	set_trait(TRAIT_PLANT_ICON,"mushroom7")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#90d7f0")
+	set_trait(TRAIT_PLANT_COLOUR,"#75bdd7")
+	set_trait(TRAIT_PLANT_ICON,"mushroom2")
+
+/datum/seed/mushroom/weepingmoon
+	name = "weepingmoon"
+	seed_name = "weepingmoon"
+	display_name = "weeping moons"
+	mutants = null
+	chems = list(/datum/reagent/glowsap = list(1,20))
+
+/datum/seed/mushroom/weepingmoon/New()
+	..()
+	set_trait(TRAIT_SPREAD,1)
+	set_trait(TRAIT_MATURATION,15)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,30)
+	set_trait(TRAIT_BIOLUM,1)
+	set_trait(TRAIT_BIOLUM_COLOUR,"#9eefff")
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom4")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#90d7f0")
+	set_trait(TRAIT_PLANT_COLOUR,"#75bdd7")
+	set_trait(TRAIT_PLANT_ICON,"mushroom4")
+
+/datum/seed/mushroom/caverncandle
+	name = "caverncandle"
+	seed_name = "caverncandle"
+	display_name = "cavern candles"
+	mutants = null
+	chems = list(/datum/reagent/glowsap = list(1,20))
+
+/datum/seed/mushroom/caverncandle/New()
+	..()
+	set_trait(TRAIT_SPREAD,1)
+	set_trait(TRAIT_MATURATION,15)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,30)
+	set_trait(TRAIT_BIOLUM,1)
+	set_trait(TRAIT_BIOLUM_COLOUR,"#9eefff")
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom3")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#90d7f0")
+	set_trait(TRAIT_PLANT_COLOUR,"#75bdd7")
+	set_trait(TRAIT_PLANT_ICON,"mushroom3")
 
 /datum/seed/mushroom/plastic
 	name = "plastic"

@@ -174,11 +174,11 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/chantermycelium
 	seed_type = "mushrooms"
 
-/obj/item/seeds/towermycelium
-	seed_type = "towercap"
+/obj/item/seeds/corkwood
+	seed_type = "corkwood"
 
-/obj/item/seeds/glowshroom
-	seed_type = "glowshroom"
+/obj/item/seeds/glowbell
+	seed_type = "glowbell"
 
 /obj/item/seeds/plumpmycelium
 	seed_type = "plumphelmet"
