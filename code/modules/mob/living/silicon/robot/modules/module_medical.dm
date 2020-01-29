@@ -43,7 +43,7 @@
 		/obj/item/crowbar,
 		/obj/item/stack/nanopaste,
 		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/chems/dropper/
+		/obj/item/chems/dropper
 	)
 	synths = list(
 		/datum/matter_synth/medicine = 10000,
