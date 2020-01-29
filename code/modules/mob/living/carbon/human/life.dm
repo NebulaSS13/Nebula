@@ -552,6 +552,10 @@
 		if(chem_doses[T] <= 0)
 			chem_doses -= T
 
+	// Not an ideal place to handle this, but there doesn't seem to be a more appropriate centralized area.
+	if(chem_effects[CE_GLOWINGEYES])
+		update_eyes()
+
 	updatehealth()
 
 // Check if we should die.

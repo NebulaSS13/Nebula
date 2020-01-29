@@ -75,11 +75,14 @@
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
 		return
-	eye_colour = list(
-		owner.r_eyes ? owner.r_eyes : 0,
-		owner.g_eyes ? owner.g_eyes : 0,
-		owner.b_eyes ? owner.b_eyes : 0
-		)
+	if(owner.chem_effects[CE_GLOWINGEYES])
+		eye_colour = list(117, 189, 214) // blue glow, hardcoded for now.
+	else
+		eye_colour = list(
+			owner.r_eyes ? owner.r_eyes : 0,
+			owner.g_eyes ? owner.g_eyes : 0,
+			owner.b_eyes ? owner.b_eyes : 0
+			)
 
 /obj/item/organ/internal/eyes/take_internal_damage(amount, var/silent=0)
 	var/oldbroken = is_broken()
