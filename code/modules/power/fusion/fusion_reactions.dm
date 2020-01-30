@@ -116,7 +116,7 @@
 				H.hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
-		if(I.cur_assembly && I.cur_assembly.fuel_type == MAT_SUPERMATTER)
+		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == MAT_SUPERMATTER)
 			explosion(get_turf(I), 1, 2, 3)
 			spawn(5)
 				if(I && I.loc)
