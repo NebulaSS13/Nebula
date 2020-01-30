@@ -6,6 +6,7 @@
 	icon = 'icons/obj/crafting_icons.dmi'
 
 /decl/crafting_stage/material/crossbow_rods
+	descriptor = "crossbow"
 	begins_with_object_type = /obj/item/crossbowframe
 	completion_trigger_type = /obj/item/stack/material/rods
 	stack_consume_amount = 3

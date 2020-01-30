@@ -6,6 +6,7 @@
 	icon_state = "coilgun_construction_1"
 
 /decl/crafting_stage/material/coilgun_body
+	descriptor = "coilgun"
 	begins_with_object_type = /obj/item/coilgun_assembly
 	item_desc = "It's a half-built coilgun with a metal frame loosely shaped around the stock."
 	progress_message = "You shape some steel sheets around the stock to form a body."

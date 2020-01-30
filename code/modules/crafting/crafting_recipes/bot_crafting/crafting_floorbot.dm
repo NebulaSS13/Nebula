@@ -1,4 +1,5 @@
 /decl/crafting_stage/empty_storage/floorbot
+	descriptor = "floor bot"
 	stack_consume_amount = 10
 	begins_with_object_type = /obj/item/storage/toolbox
 	completion_trigger_type = /obj/item/stack/tile

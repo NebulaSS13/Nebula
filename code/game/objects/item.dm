@@ -198,6 +198,22 @@
 	var/desc_comp = "" //For "description composite"
 	desc_comp += "It is a [size] item."
 
+	var/list/available_recipes = list()
+	for(var/decl/crafting_stage/initial_stage in SSfabrication.find_crafting_recipes(type))
+		if(initial_stage.can_begin_with(src) && ispath(initial_stage.completion_trigger_type))
+			var/atom/movable/prop = initial_stage.completion_trigger_type
+			if(initial_stage.stack_consume_amount > 1)
+				available_recipes[initial_stage] = "[initial_stage.stack_consume_amount] [initial(prop.name)]\s"
+			else
+				available_recipes[initial_stage] = "\a [initial(prop.name)]"
+
+	if(length(available_recipes))
+		desc_comp += "<BR>*--------* <BR>"
+		for(var/decl/crafting_stage/initial_stage in available_recipes)
+			desc_comp += SPAN_NOTICE("With [available_recipes[initial_stage]], you could start making \a [initial_stage.descriptor] out of this.")
+			desc_comp += "<BR>"
+		desc_comp += "*--------*"
+
 	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
 		desc_comp += "<BR>*--------* <BR>"
 
@@ -328,8 +344,12 @@
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/W, mob/user)
-	if((. = SSfabrication.try_craft_with(src, W, user)))
-		return
+
+	if(SSfabrication.try_craft_with(src, W, user))
+		return TRUE
+
+	if(SSfabrication.try_craft_with(W, src, user))
+		return TRUE
 
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W

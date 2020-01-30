@@ -1,4 +1,5 @@
 /decl/crafting_stage
+	var/descriptor = "undefined crafted item"
 	var/item_desc = "It's an unfinished item of some sort."
 	var/item_icon = 'icons/obj/crafting_icons.dmi'
 	var/item_icon_state = "default"

@@ -2,6 +2,30 @@
 	var/decl/crafting_stage/current_crafting_stage
 	var/label_name
 
+/obj/item/crafting_holder/examine(mob/user, distance)
+	. = ..()
+	if(current_crafting_stage)
+		var/list/next_steps = list()
+		var/list/next_products = list()
+		for(var/decl/crafting_stage/next_stage in current_crafting_stage.next_stages)
+			if(ispath(next_stage.completion_trigger_type))
+				var/atom/next_tool = next_stage.completion_trigger_type
+				var/tool_string = initial(next_tool.name)
+				if(next_stage.stack_consume_amount > 1)
+					tool_string = "[next_stage.stack_consume_amount] [tool_string]\s"
+				else
+					tool_string = "\a [tool_string]"
+				if(ispath(next_stage.product))
+					var/atom/next_product = next_stage.product
+					next_products[tool_string] = "\a [initial(next_product.name)]"
+				else
+					next_steps += tool_string
+		if(length(next_products))
+			for(var/thing in next_products)
+				to_chat(user, SPAN_NOTICE("With <b>[thing]</b>, you could finish building <b>[next_products[thing]]</b>."))
+		if(length(next_steps))
+			to_chat(user, SPAN_NOTICE("You could continue to work on this with <b>[english_list(next_steps, and_text = " or ")]</b>."))
+
 /obj/item/crafting_holder/Initialize(var/ml, var/decl/crafting_stage/initial_stage, var/obj/item/target, var/obj/item/tool, var/mob/user)
 	. = ..()
 	name = "[target.name] assembly"

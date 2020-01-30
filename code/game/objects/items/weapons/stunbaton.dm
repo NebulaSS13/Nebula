@@ -22,8 +22,8 @@
 /obj/item/melee/baton/loaded
 	bcell = /obj/item/cell/device/high
 
-/obj/item/melee/baton/Initialize()
-	. = ..()
+/obj/item/melee/baton/Initialize(var/ml)
+	. = ..(ml)
 	if(ispath(bcell))
 		bcell = new bcell(src)
 		update_icon()

@@ -6,6 +6,7 @@
 	item_state = "zipgun-solid"
 
 /decl/crafting_stage/pipe/zipgun
+	descriptor = "zipgun"
 	begins_with_object_type = /obj/item/zipgunframe
 	item_desc = "A half-built zipgun with a barrel loosely fitted to the stock."
 	item_icon_state = "zipgun1"

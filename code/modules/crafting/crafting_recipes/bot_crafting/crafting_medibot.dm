@@ -1,4 +1,5 @@
 /decl/crafting_stage/empty_storage/medibot
+	descriptor = "medical bot"
 	begins_with_object_type = /obj/item/storage/firstaid
 	progress_message = "You add the robot arm to the first aid kit."
 	completion_trigger_type = /obj/item/robot_parts

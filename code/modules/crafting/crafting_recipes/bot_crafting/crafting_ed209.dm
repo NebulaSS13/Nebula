@@ -1,4 +1,5 @@
 /decl/crafting_stage/material/ed209_start
+	descriptor = "security walker"
 	stack_consume_amount = 5
 	stack_material = MATERIAL_STEEL
 	begins_with_object_type = /obj/item/robot_parts/robot_suit
