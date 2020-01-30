@@ -6,6 +6,7 @@
 	ore_desc = "Someone messed up..."
 	ore_icon_overlay = "lump"
 	hidden_from_codex = TRUE
+	reflectiveness = MAT_VALUE_DULL
 
 /material/cult
 	display_name = "disturbing stone"
@@ -18,6 +19,7 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	hidden_from_codex = TRUE
+	reflectiveness = MAT_VALUE_DULL
 
 /material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)

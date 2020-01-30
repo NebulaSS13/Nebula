@@ -26,6 +26,7 @@
 	. += new/datum/stack_recipe/ring(src)
 	. += new/datum/stack_recipe/clipboard(src)
 	. += new/datum/stack_recipe/cross(src)
+	. += new/datum/stack_recipe/improvised_armour(src)
 
 	if(hardness >= MAT_VALUE_FLEXIBLE)
 		. += new/datum/stack_recipe/baseball_bat(src)

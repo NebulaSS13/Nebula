@@ -58,6 +58,7 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	sale_price = 2
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/pyrite
 	display_name = "pyrite"
@@ -79,6 +80,7 @@
 	icon_reinf = "reinf_stone"
 	ore_compresses_to = MAT_PYRITE
 	sale_price = 2
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/spodumene
 	display_name = "spodumene"
@@ -258,6 +260,7 @@
 	gas_breathed_product = /datum/reagent/toxin/phoron
 	gas_symbol_html = "Ph"
 	gas_symbol = "Ph"
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/phoron/supermatter
 	display_name = "exotic matter"
