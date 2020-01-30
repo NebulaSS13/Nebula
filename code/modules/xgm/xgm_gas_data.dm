@@ -43,7 +43,7 @@
 	var/overlay_limit = null
 
 	var/flags = 0
-	var/burn_product = MATERIAL_CO2
+	var/burn_product = MAT_CO2
 	var/breathed_product
 	var/condensation_point = INFINITY
 	var/condensation_product

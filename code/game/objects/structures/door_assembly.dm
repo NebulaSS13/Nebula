@@ -185,14 +185,14 @@
 		var/material_name = S.get_material_name()		
 		if (S)
 			if (S.get_amount() >= 1)
-				if(material_name == MATERIAL_GLASS && S.reinf_material)
+				if(material_name == MAT_GLASS && S.reinf_material)
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 					user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
 					if(do_after(user, 40,src) && !glass)
 						if (S.use(1))
 							to_chat(user, "<span class='notice'>You installed reinforced glass windows into the airlock assembly.</span>")
 							glass = 1
-				else if(!(material_name in list(MATERIAL_GOLD, MATERIAL_SILVER, MATERIAL_DIAMOND, MATERIAL_URANIUM, MATERIAL_PHORON, MATERIAL_SANDSTONE)))
+				else if(!(material_name in list(MAT_GOLD, MAT_SILVER, MAT_DIAMOND, MAT_URANIUM, MAT_PHORON, MAT_SANDSTONE)))
 					to_chat(user, "You cannot make an airlock out of that material.")
 					return
 				else

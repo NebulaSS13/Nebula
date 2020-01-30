@@ -482,11 +482,11 @@
 	var/nitrousoxide = 0
 	var/hydrogen = 0
 	if(atmosphere.total_moles) // Division by zero prevention
-		oxygen = (atmosphere.gas[MATERIAL_OXYGEN] / atmosphere.total_moles) * 100 // Percentage of the gas
-		phoron = (atmosphere.gas[MATERIAL_PHORON] / atmosphere.total_moles) * 100
-		carbondioxide = (atmosphere.gas[MATERIAL_CO2] / atmosphere.total_moles) * 100
-		nitrousoxide = (atmosphere.gas[MATERIAL_N2O] / atmosphere.total_moles) * 100
-		hydrogen = (atmosphere.gas[MATERIAL_HYDROGEN] / atmosphere.total_moles) * 100
+		oxygen = (atmosphere.gas[MAT_OXYGEN] / atmosphere.total_moles) * 100 // Percentage of the gas
+		phoron = (atmosphere.gas[MAT_PHORON] / atmosphere.total_moles) * 100
+		carbondioxide = (atmosphere.gas[MAT_CO2] / atmosphere.total_moles) * 100
+		nitrousoxide = (atmosphere.gas[MAT_N2O] / atmosphere.total_moles) * 100
+		hydrogen = (atmosphere.gas[MAT_HYDROGEN] / atmosphere.total_moles) * 100
 
 	if(!oxygen)
 		status.Add("No oxygen.")

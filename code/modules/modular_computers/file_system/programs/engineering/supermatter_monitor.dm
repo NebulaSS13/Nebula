@@ -88,12 +88,12 @@
 		data["SM_ambientpressure"] = process_data_output(engine_skill, air.return_pressure())
 		data["SM_EPR"] = process_data_output(engine_skill, active.get_epr())
 		if(air.total_moles)
-			data["SM_gas_O2"] = round(100*air.gas[MATERIAL_OXYGEN]/air.total_moles,0.01)
-			data["SM_gas_CO2"] = round(100*air.gas[MATERIAL_CO2]/air.total_moles,0.01)
-			data["SM_gas_N2"] = round(100*air.gas[MATERIAL_NITROGEN]/air.total_moles,0.01)
-			data["SM_gas_PH"] = round(100*air.gas[MATERIAL_PHORON]/air.total_moles,0.01)
-			data["SM_gas_N2O"] = round(100*air.gas[MATERIAL_N2O]/air.total_moles,0.01)
-			data["SM_gas_H2"] = round(100*air.gas[MATERIAL_HYDROGEN]/air.total_moles,0.01)
+			data["SM_gas_O2"] = round(100*air.gas[MAT_OXYGEN]/air.total_moles,0.01)
+			data["SM_gas_CO2"] = round(100*air.gas[MAT_CO2]/air.total_moles,0.01)
+			data["SM_gas_N2"] = round(100*air.gas[MAT_NITROGEN]/air.total_moles,0.01)
+			data["SM_gas_PH"] = round(100*air.gas[MAT_PHORON]/air.total_moles,0.01)
+			data["SM_gas_N2O"] = round(100*air.gas[MAT_N2O]/air.total_moles,0.01)
+			data["SM_gas_H2"] = round(100*air.gas[MAT_HYDROGEN]/air.total_moles,0.01)
 		else
 			data["SM_gas_O2"] = 0
 			data["SM_gas_CO2"] = 0

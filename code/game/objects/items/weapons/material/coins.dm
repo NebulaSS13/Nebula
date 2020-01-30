@@ -64,22 +64,22 @@
 
 // Subtypes.
 /obj/item/material/coin/gold
-	material = MATERIAL_GOLD
+	material = MAT_GOLD
 
 /obj/item/material/coin/silver
-	material = MATERIAL_SILVER
+	material = MAT_SILVER
 
 /obj/item/material/coin/diamond
-	material = MATERIAL_DIAMOND
+	material = MAT_DIAMOND
 
 /obj/item/material/coin/iron
-	material = MATERIAL_IRON
+	material = MAT_IRON
 
 /obj/item/material/coin/uranium
-	material = MATERIAL_URANIUM
+	material = MAT_URANIUM
 
 /obj/item/material/coin/platinum
-	material = MATERIAL_PLATINUM
+	material = MAT_PLATINUM
 
 /obj/item/material/coin/phoron
-	material = MATERIAL_PHORON
+	material = MAT_PHORON

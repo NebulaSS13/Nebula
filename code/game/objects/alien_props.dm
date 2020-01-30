@@ -71,7 +71,7 @@
 
 /obj/machinery/door/airlock/alien/Initialize()
 	. = ..()
-	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
+	var/material/A = SSmaterials.get_material_by_name(MAT_ALIENALLOY)
 	if(A)
 		door_color = A.icon_colour
 	stripe_color = get_random_colour(FALSE, 0, 255)

@@ -11,7 +11,7 @@
 	active_power_usage = 10000
 
 /obj/machinery/robotic_fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if (istype(O, /obj/item/stack/material) && O.get_material_name() == MATERIAL_STEEL)
+	if (istype(O, /obj/item/stack/material) && O.get_material_name() == MAT_STEEL)
 		var/obj/item/stack/M = O
 		if (src.metal_amount < 150000.0)
 			var/count = 0
@@ -21,7 +21,7 @@
 					if(!M.get_amount())
 						return
 					while(metal_amount < 150000 && M.use(1))
-						src.metal_amount += O.matter[MATERIAL_STEEL] /*O:height * O:width * O:length * 100000.0*/
+						src.metal_amount += O.matter[MAT_STEEL] /*O:height * O:width * O:length * 100000.0*/
 						count++
 
 					to_chat(user, "You insert [count] metal sheet\s into the fabricator.")

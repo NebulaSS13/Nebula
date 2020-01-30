@@ -59,7 +59,7 @@
 		set_opacity(0)
 		layer = open_layer
 
-	implicit_material = SSmaterials.get_material_by_name(MATERIAL_PLASTEEL)
+	implicit_material = SSmaterials.get_material_by_name(MAT_PLASTEEL)
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
@@ -150,7 +150,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 		return
-	if(istype(C, /obj/item/stack/material) && C.get_material_name() == MATERIAL_PLASTEEL)
+	if(istype(C, /obj/item/stack/material) && C.get_material_name() == MAT_PLASTEEL)
 		var/amt = Ceiling((maxhealth - health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")

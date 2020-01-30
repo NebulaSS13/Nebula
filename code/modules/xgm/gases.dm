@@ -1,5 +1,5 @@
 /decl/xgm_gas/oxygen
-	id = MATERIAL_OXYGEN
+	id = MAT_OXYGEN
 	name = "Oxygen"
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.032	// kg/mol
@@ -10,7 +10,7 @@
 
 
 /decl/xgm_gas/nitrogen
-	id = MATERIAL_NITROGEN
+	id = MAT_NITROGEN
 	name = "Nitrogen"
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.028	// kg/mol
@@ -18,7 +18,7 @@
 	symbol = "N2"
 
 /decl/xgm_gas/carbon_dioxide
-	id = MATERIAL_CO2
+	id = MAT_CO2
 	name = "Carbon Dioxide"
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol
@@ -26,7 +26,7 @@
 	symbol = "CO2"
 
 /decl/xgm_gas/methyl_bromide
-	id = MATERIAL_METHYL_BROMIDE
+	id = MAT_METHYL_BROMIDE
 	name = "Methyl Bromide"
 	specific_heat = 42.59 // J/(mol*K)
 	molar_mass = 0.095	  // kg/mol
@@ -35,7 +35,7 @@
 	symbol = "CH3Br"
 
 /decl/xgm_gas/phoron
-	id = MATERIAL_PHORON
+	id = MAT_PHORON
 	name = "Phoron"
 
 	//Note that this has a significant impact on TTV yield.
@@ -55,7 +55,7 @@
 	symbol = "Ph"
 
 /decl/xgm_gas/sleeping_agent
-	id = MATERIAL_N2O
+	id = MAT_N2O
 	name = "Nitrous Oxide"
 	specific_heat = 40	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol. N2O
@@ -68,7 +68,7 @@
 	symbol = "N2O"
 
 /decl/xgm_gas/methane
-	id = MATERIAL_METHANE
+	id = MAT_METHANE
 	name = "Methane"
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.016	// kg/mol
@@ -77,7 +77,7 @@
 	symbol = "CH4"
 
 /decl/xgm_gas/alium
-	id = MATERIAL_ALIEN
+	id = MAT_ALIEN
 	name = "Aliether"
 	hidden_from_codex = TRUE
 	symbol_html = "X"
@@ -104,29 +104,29 @@
 		overlay_limit = 0.5
 
 /decl/xgm_gas/hydrogen
-	id = MATERIAL_HYDROGEN
+	id = MAT_HYDROGEN
 	name = "Hydrogen"
 	specific_heat = 100	// J/(mol*K)
 	molar_mass = 0.002	// kg/mol
 	flags = XGM_GAS_FUEL|XGM_GAS_FUSION_FUEL
-	burn_product = MATERIAL_STEAM
+	burn_product = MAT_STEAM
 	symbol_html = "H<sub>2</sub>"
 	symbol = "H2"
 
 /decl/xgm_gas/hydrogen/deuterium
-	id = MATERIAL_DEUTERIUM
+	id = MAT_DEUTERIUM
 	name = "Deuterium"
 	symbol_html = "D"
 	symbol = "D"
 
 /decl/xgm_gas/hydrogen/tritium
-	id = MATERIAL_TRITIUM
+	id = MAT_TRITIUM
 	name = "Tritium"
 	symbol_html = "T"
 	symbol = "T"
 
 /decl/xgm_gas/helium
-	id = MATERIAL_HELIUM
+	id = MAT_HELIUM
 	name = "Helium"
 	specific_heat = 80	// J/(mol*K)
 	molar_mass = 0.004	// kg/mol
@@ -136,7 +136,7 @@
 	symbol = "He"
 
 /decl/xgm_gas/argon
-	id = MATERIAL_ARGON
+	id = MAT_ARGON
 	name = "Argon"
 	specific_heat = 10	// J/(mol*K)
 	molar_mass = 0.018	// kg/mol
@@ -145,7 +145,7 @@
 
 // If narcosis is ever simulated, krypton has a narcotic potency seven times greater than regular airmix.
 /decl/xgm_gas/krypton
-	id = MATERIAL_KRYPTON
+	id = MAT_KRYPTON
 	name = "Krypton"
 	specific_heat = 5	// J/(mol*K)
 	molar_mass = 0.036	// kg/mol
@@ -153,7 +153,7 @@
 	symbol = "Kr"
 
 /decl/xgm_gas/neon
-	id = MATERIAL_NEON
+	id = MAT_NEON
 	name = "Neon"
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.01	// kg/mol
@@ -161,7 +161,7 @@
 	symbol = "Ne"
 
 /decl/xgm_gas/xenon
-	id = MATERIAL_XENON
+	id = MAT_XENON
 	name = "Xenon"
 	specific_heat = 3	// J/(mol*K)
 	molar_mass = 0.054	// kg/mol
@@ -170,7 +170,7 @@
 	symbol = "Xe"
 
 /decl/xgm_gas/nitrodioxide
-	id = MATERIAL_NO2
+	id = MAT_NO2
 	name = "Nitrogen Dioxide"
 	tile_color = "#ca6409"
 	specific_heat = 37	// J/(mol*K)
@@ -181,7 +181,7 @@
 	symbol = "NO2"
 
 /decl/xgm_gas/nitricoxide
-	id = MATERIAL_NO
+	id = MAT_NO
 	name = "Nitric Oxide"
 
 	specific_heat = 10	// J/(mol*K)
@@ -191,7 +191,7 @@
 	symbol = "NO"
 
 /decl/xgm_gas/chlorine
-	id = MATERIAL_CHLORINE
+	id = MAT_CHLORINE
 	name = "Chlorine"
 	tile_color = "#c5f72d"
 	overlay_limit = 0.5
@@ -203,7 +203,7 @@
 	symbol = "Cl"
 
 /decl/xgm_gas/vapor
-	id = MATERIAL_STEAM
+	id = MAT_STEAM
 	name = "Steam"
 	tile_overlay = "generic"
 	overlay_limit = 0.5
@@ -216,7 +216,7 @@
 	symbol = "H2O"
 
 /decl/xgm_gas/sulfurdioxide
-	id = MATERIAL_SULFUR
+	id = MAT_SULFUR
 	name = "Sulfur Dioxide"
 
 	specific_heat = 30	// J/(mol*K)
@@ -225,7 +225,7 @@
 	symbol = "SO2"
 
 /decl/xgm_gas/ammonia
-	id = MATERIAL_AMMONIA
+	id = MAT_AMMONIA
 	name = "Ammonia"
 
 	specific_heat = 20	// J/(mol*K)
@@ -235,7 +235,7 @@
 	symbol = "NH3"
 
 /decl/xgm_gas/carbon_monoxide
-	id = MATERIAL_CO
+	id = MAT_CO
 	name = "Carbon Monoxide"
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.028	// kg/mol

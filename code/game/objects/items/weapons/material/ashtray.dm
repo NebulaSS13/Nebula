@@ -68,10 +68,10 @@
 	return ..()
 
 /obj/item/material/ashtray/plastic/Initialize(mapload)
-	. = ..(mapload, MATERIAL_PLASTIC)
+	. = ..(mapload, MAT_PLASTIC)
 
 /obj/item/material/ashtray/bronze/Initialize(mapload)
-	. = ..(mapload, MATERIAL_BRONZE)
+	. = ..(mapload, MAT_BRONZE)
 
 /obj/item/material/ashtray/glass/Initialize(mapload)
-	. = ..(mapload, MATERIAL_GLASS)
+	. = ..(mapload, MAT_GLASS)

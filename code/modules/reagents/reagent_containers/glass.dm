@@ -113,7 +113,7 @@
 	icon_state = "beaker"
 	item_state = "beaker"
 	center_of_mass = "x=15;y=10"
-	material = MATERIAL_GLASS
+	material = MAT_GLASS
 	applies_material_name = TRUE
 	material_force_multiplier = 0.25
 
@@ -181,7 +181,7 @@
 	possible_transfer_amounts = "5;10;15;25;30;60;180"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
-	material = MATERIAL_STEEL
+	material = MAT_STEEL
 	material_force_multiplier = 0.2
 
 /obj/item/chems/glass/beaker/noreact
@@ -222,7 +222,7 @@
 	desc = "A glass beaker surrounded with black insulation."
 	icon_state = "insulated"
 	center_of_mass = "x=15;y=8"
-	matter = list(MATERIAL_GLASS = 500, MATERIAL_PLASTIC = 250)
+	matter = list(MAT_GLASS = 500, MAT_PLASTIC = 250)
 	possible_transfer_amounts = "5;10;15;30"
 	atom_flags = null
 	temperature_coefficient = 1
@@ -232,7 +232,7 @@
 	name = "large insulated beaker"
 	icon_state = "insulatedlarge"
 	center_of_mass = "x=16;y=10"
-	matter = list(MATERIAL_GLASS = 5000, MATERIAL_PLASTIC = 2500)
+	matter = list(MAT_GLASS = 5000, MAT_PLASTIC = 2500)
 	volume = 120
 
 /obj/item/chems/glass/beaker/cryoxadone/Initialize()
@@ -258,7 +258,7 @@
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
-	material = MATERIAL_PLASTIC
+	material = MAT_PLASTIC
 	material_force_multiplier = 0.2
 
 /obj/item/chems/glass/bucket/wood
@@ -267,7 +267,7 @@
 	icon_state = "wbucket"
 	item_state = "wbucket"
 	volume = 200
-	material = MATERIAL_WOOD
+	material = MAT_WOOD
 
 /obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user as mob)
 	if(istype(D, /obj/item/mop))

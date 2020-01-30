@@ -9,7 +9,7 @@
 	icon_state = "r_generic"
 
 /turf/simulated/wall/r_wall/New(var/newloc)
-	..(newloc, MATERIAL_PLASTEEL,MATERIAL_PLASTEEL) //3strong
+	..(newloc, MAT_PLASTEEL,MAT_PLASTEEL) //3strong
 
 /turf/simulated/wall/r_wall/hull
 	name = "hull"
@@ -41,108 +41,108 @@
 	icon_state = "titanium"
 
 /turf/simulated/wall/titanium/New(var/newloc)
-	..(newloc,MATERIAL_TITANIUM)
+	..(newloc,MAT_TITANIUM)
 
 /turf/simulated/wall/r_titanium
 	icon_state = "r_titanium"
 
 /turf/simulated/wall/r_titanium/New(var/newloc)
-	..(newloc, MATERIAL_TITANIUM,MATERIAL_TITANIUM)
+	..(newloc, MAT_TITANIUM,MAT_TITANIUM)
 
 /turf/simulated/wall/ocp_wall
 	icon_state = "r_ocp"
 
 /turf/simulated/wall/ocp_wall/New(var/newloc)
-	..(newloc, MATERIAL_OSMIUM_CARBIDE_PLASTEEL, MATERIAL_OSMIUM_CARBIDE_PLASTEEL)
+	..(newloc, MAT_OSMIUM_CARBIDE_PLASTEEL, MAT_OSMIUM_CARBIDE_PLASTEEL)
 
 //Material walls
 
 /turf/simulated/wall/r_wall/rglass_wall/New(var/newloc)
-	..(newloc, MATERIAL_GLASS, MATERIAL_STEEL)
+	..(newloc, MAT_GLASS, MAT_STEEL)
 	icon_state = "r_generic"
 
 /turf/simulated/wall/iron/New(var/newloc)
-	..(newloc,MATERIAL_IRON)
+	..(newloc,MAT_IRON)
 
 /turf/simulated/wall/uranium/New(var/newloc)
-	..(newloc,MATERIAL_URANIUM)
+	..(newloc,MAT_URANIUM)
 
 /turf/simulated/wall/diamond/New(var/newloc)
-	..(newloc,MATERIAL_DIAMOND)
+	..(newloc,MAT_DIAMOND)
 
 /turf/simulated/wall/gold/New(var/newloc)
-	..(newloc,MATERIAL_GOLD)
+	..(newloc,MAT_GOLD)
 
 /turf/simulated/wall/silver/New(var/newloc)
-	..(newloc,MATERIAL_SILVER)
+	..(newloc,MAT_SILVER)
 
 /turf/simulated/wall/phoron/New(var/newloc)
-	..(newloc,MATERIAL_PHORON)
+	..(newloc,MAT_PHORON)
 
 /turf/simulated/wall/sandstone/New(var/newloc)
-	..(newloc,MATERIAL_SANDSTONE)
+	..(newloc,MAT_SANDSTONE)
 
 /turf/simulated/wall/rutile/New(var/newloc)
-	..(newloc,MATERIAL_RUTILE)
+	..(newloc,MAT_RUTILE)
 
 /turf/simulated/wall/wood
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/wood/New(var/newloc)
-	..(newloc,MATERIAL_WOOD)
+	..(newloc,MAT_WOOD)
 
 /turf/simulated/wall/mahogany
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/mahogany/New(var/newloc)
-	..(newloc,MATERIAL_MAHOGANY)
+	..(newloc,MAT_MAHOGANY)
 
 /turf/simulated/wall/maple
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/maple/New(var/newloc)
-	..(newloc,MATERIAL_MAPLE)
+	..(newloc,MAT_MAPLE)
 
 /turf/simulated/wall/ebony
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/ebony/New(var/newloc)
-	..(newloc,MATERIAL_EBONY)
+	..(newloc,MAT_EBONY)
 
 /turf/simulated/wall/walnut
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/walnut/New(var/newloc)
-	..(newloc,MATERIAL_WALNUT)
+	..(newloc,MAT_WALNUT)
 
 /turf/simulated/wall/ironphoron/New(var/newloc)
-	..(newloc,MATERIAL_IRON,MATERIAL_PHORON)
+	..(newloc,MAT_IRON,MAT_PHORON)
 
 /turf/simulated/wall/golddiamond/New(var/newloc)
-	..(newloc,MATERIAL_GOLD,MATERIAL_DIAMOND)
+	..(newloc,MAT_GOLD,MAT_DIAMOND)
 
 /turf/simulated/wall/silvergold/New(var/newloc)
-	..(newloc,MATERIAL_SILVER,MATERIAL_GOLD)
+	..(newloc,MAT_SILVER,MAT_GOLD)
 
 /turf/simulated/wall/sandstonediamond/New(var/newloc)
-	..(newloc,MATERIAL_SANDSTONE,MATERIAL_DIAMOND)
+	..(newloc,MAT_SANDSTONE,MAT_DIAMOND)
 
 /turf/simulated/wall/crystal/New(var/newloc)
-	..(newloc,MATERIAL_CRYSTAL)
+	..(newloc,MAT_CRYSTAL)
 
 /turf/simulated/wall/voxshuttle/New(var/newloc)
-	..(newloc, MATERIAL_VOX)
+	..(newloc, MAT_VOX)
 
 /turf/simulated/wall/voxshuttle/attackby()
 	return
 
 /turf/simulated/wall/concrete/New(var/newloc)
-	..(newloc,MATERIAL_CONCRETE)
+	..(newloc,MAT_CONCRETE)
 
 //Alien metal walls
 /turf/simulated/wall/alium
@@ -151,7 +151,7 @@
 	list/blend_objects = newlist()
 
 /turf/simulated/wall/alium/New(var/newloc)
-	..(newloc,MATERIAL_ALIENALLOY)
+	..(newloc,MAT_ALIENALLOY)
 
 /turf/simulated/wall/alium/ex_act(severity)
 	if(prob(explosion_resistance))
@@ -164,7 +164,7 @@
 	blend_turfs = list(/turf/simulated/wall)
 
 /turf/simulated/wall/cult/New(var/newloc, var/reinforce = 0)
-	..(newloc, MATERIAL_CULT, reinforce ? MATERIAL_REINFORCED_CULT : null)
+	..(newloc, MAT_CULT, reinforce ? MAT_REINFORCED_CULT : null)
 
 /turf/simulated/wall/cult/reinf/New(var/newloc)
 	..(newloc, 1)

@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
-	var/init_material = MATERIAL_STEEL
+	var/init_material = MAT_STEEL
 	obj_flags = OBJ_FLAG_NOFALL
 
 /obj/structure/lattice/get_material()

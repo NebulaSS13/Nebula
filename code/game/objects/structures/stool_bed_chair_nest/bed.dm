@@ -19,7 +19,7 @@
 	buckle_lying = 1
 	var/material/padding_material
 	var/base_icon = "bed"
-	var/material_alteration = MATERIAL_ALTERATION_ALL
+	var/material_alteration = MAT_FLAG_ALTERATION_ALL
 	var/buckling_sound = 'sound/effects/buckle.ogg'
 
 /obj/structure/bed/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
@@ -44,7 +44,7 @@
 	var/cache_key = "[base_icon]-[material.name]"
 	if(isnull(stool_cache[cache_key]))
 		var/image/I = image('icons/obj/furniture.dmi', base_icon)
-		if(material_alteration & MATERIAL_ALTERATION_COLOR)
+		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.color = material.icon_colour
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
@@ -53,16 +53,16 @@
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
 		if(isnull(stool_cache[padding_cache_key]))
 			var/image/I =  image(icon, "[base_icon]_padding")
-			if(material_alteration & MATERIAL_ALTERATION_COLOR)
+			if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 				I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
 
 	// Strings.
-	if(material_alteration & MATERIAL_ALTERATION_NAME)
+	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
 		SetName(padding_material ? "[padding_material.adjective_name] [initial(name)]" : "[material.adjective_name] [initial(name)]") //this is not perfect but it will do for now.
 
-	if(material_alteration & MATERIAL_ALTERATION_DESC)
+	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
 		desc = initial(desc)
 		desc += padding_material ? " It's made of [material.use_name] and covered with [padding_material.use_name]." : " It's made of [material.use_name]."
 
@@ -101,10 +101,10 @@
 			return
 		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
 		if(istype(W,/obj/item/stack/tile/carpet))
-			padding_type = MATERIAL_CARPET
+			padding_type = MAT_CARPET
 		else if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.flags & MATERIAL_PADDING))
+			if(M.material && (M.material.flags & MAT_FLAG_PADDING))
 				padding_type = "[M.material.name]"
 		if(!padding_type)
 			to_chat(user, "You cannot pad \the [src] with that.")
@@ -174,10 +174,10 @@
 	base_icon = "psychbed"
 
 /obj/structure/bed/psych/Initialize(mapload)
-	. = ..(mapload, MATERIAL_WALNUT, MATERIAL_LEATHER_GENERIC)
+	. = ..(mapload, MAT_WALNUT, MAT_LEATHER_GENERIC)
 
 /obj/structure/bed/padded/Initialize(mapload)
-	. = ..(mapload, MATERIAL_ALUMINIUM,MATERIAL_CLOTH)
+	. = ..(mapload, MAT_ALUMINIUM,MAT_CLOTH)
 
 /*
  * Roller beds

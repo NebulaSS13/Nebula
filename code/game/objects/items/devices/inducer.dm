@@ -12,7 +12,7 @@
 	var/obj/item/cell/cell = /obj/item/cell
 	var/recharging = FALSE
 	origin_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 4)
-	matter = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 700)
+	matter = list(MAT_STEEL = 1000, MAT_GLASS = 700)
 	slot_flags = SLOT_BELT
 
 /obj/item/inducer/Initialize()

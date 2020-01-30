@@ -87,7 +87,7 @@
 	var/list/window_options = list()
 
 	// Damage values.
-	var/hardness = MATERIAL_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
+	var/hardness = MAT_VALUE_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
 	var/weight = 20              // Determines blunt damage/throwforce for weapons.
 
 	// Noise when someone is faceplanted onto a table made of this material.
@@ -101,7 +101,7 @@
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
-	var/construction_difficulty = MATERIAL_EASY_DIY
+	var/construction_difficulty = MAT_VALUE_EASY_DIY
 
 	// Mining behavior.
 	var/alloy_product
@@ -188,9 +188,9 @@
 	return hardness //todo
 
 /material/proc/get_attack_cooldown()
-	if(weight <= MATERIAL_LIGHT)
+	if(weight <= MAT_FLAG_LIGHT)
 		return FAST_WEAPON_COOLDOWN
-	if(weight >= MATERIAL_HEAVY)
+	if(weight >= MAT_FLAG_HEAVY)
 		return SLOW_WEAPON_COOLDOWN
 	return DEFAULT_WEAPON_COOLDOWN
 
@@ -229,7 +229,7 @@
 
 // Used by walls and weapons to determine if they break or not.
 /material/proc/is_brittle()
-	return !!(flags & MATERIAL_BRITTLE)
+	return !!(flags & MAT_FLAG_BRITTLE)
 
 /material/proc/combustion_effect(var/turf/T, var/temperature)
 	return

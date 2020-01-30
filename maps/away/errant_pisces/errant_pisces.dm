@@ -46,7 +46,7 @@
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
 		var/datum/gas_mixture/sharkmaw_phoron = new
-		sharkmaw_phoron.adjust_gas(MATERIAL_PHORON,  10)
+		sharkmaw_phoron.adjust_gas(MAT_PHORON,  10)
 		environment.merge(sharkmaw_phoron)
 		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
 

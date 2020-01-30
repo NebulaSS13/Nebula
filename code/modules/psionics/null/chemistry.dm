@@ -19,7 +19,7 @@
 			new /obj/item/soulstone(location)
 	else
 		for(var/i = 1, i <= created_volume*2, i++)
-			new /obj/item/material/shard(location, MATERIAL_CRYSTAL)
+			new /obj/item/material/shard(location, MAT_CRYSTAL)
 
 /datum/reagent/crystal
 	name = "crystallizing agent"
@@ -27,7 +27,7 @@
 	color = "#13bc5e"
 
 /datum/reagent/crystal/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	var/result_mat = (M.psi || (M.mind && GLOB.wizards.is_antagonist(M.mind))) ? MATERIAL_NULLGLASS : MATERIAL_CRYSTAL
+	var/result_mat = (M.psi || (M.mind && GLOB.wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : MAT_CRYSTAL
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in shuffle(H.organs.Copy()))

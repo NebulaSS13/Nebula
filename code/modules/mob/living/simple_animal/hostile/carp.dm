@@ -33,8 +33,8 @@
 	pass_flags = PASS_FLAG_TABLE
 
 	meat_type = /obj/item/chems/food/snacks/fish/poison
-	skin_material = MATERIAL_SKIN_FISH_PURPLE
-	bone_material = MATERIAL_BONE_CARTILAGE
+	skin_material = MAT_SKIN_FISH_PURPLE
+	bone_material = MAT_BONE_CARTILAGE
 
 	var/carp_color = "carp" //holder for icon set
 	var/list/icon_sets = list("carp", "blue", "yellow", "grape", "rust", "teal")

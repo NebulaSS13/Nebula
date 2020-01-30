@@ -113,7 +113,7 @@
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
-	T.assume_gas(MATERIAL_PHORON, volume, T20C)
+	T.assume_gas(MAT_PHORON, volume, T20C)
 	remove_self(volume)
 
 // Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
@@ -126,8 +126,8 @@
 /datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
-	T.assume_gas(MATERIAL_OXYGEN, ceil(volume/2), T20C)
-	T.assume_gas(MATERIAL_PHORON, ceil(volume/2), T20C)
+	T.assume_gas(MAT_OXYGEN, ceil(volume/2), T20C)
+	T.assume_gas(MAT_PHORON, ceil(volume/2), T20C)
 	remove_self(volume)
 
 /datum/reagent/toxin/cyanide //Fast and Lethal
@@ -792,7 +792,7 @@
 
 /datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
 	if(istype(T))
-		T.assume_gas(MATERIAL_METHYL_BROMIDE, volume, T20C)
+		T.assume_gas(MAT_METHYL_BROMIDE, volume, T20C)
 		remove_self(volume)
 
 /datum/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

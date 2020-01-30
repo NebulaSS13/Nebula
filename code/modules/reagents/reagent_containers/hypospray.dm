@@ -189,4 +189,4 @@
 	name = "autoinjector"
 	band_color = COLOR_WHITE
 	starts_with = list()
-	matter = list(MATERIAL_PLASTIC = 150, MATERIAL_GLASS = 50)
+	matter = list(MAT_PLASTIC = 150, MAT_GLASS = 50)

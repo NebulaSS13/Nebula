@@ -21,16 +21,16 @@
 		/datum/reagent/paint =         1
 	)
 	var/global/list/gains_nutriment_from_matter = list(
-		MATERIAL_WOOD =            TRUE,
-		MATERIAL_MAHOGANY =        TRUE,
-		MATERIAL_MAPLE =           TRUE,
-		MATERIAL_EBONY =           TRUE,
-		MATERIAL_WALNUT =          TRUE,
-		MATERIAL_LEATHER_GENERIC = TRUE,
-		MATERIAL_PLASTIC =         TRUE,
-		MATERIAL_CARDBOARD =       TRUE,
-		MATERIAL_CLOTH =           TRUE,
-		MATERIAL_ROCK_SALT =       TRUE
+		MAT_WOOD =            TRUE,
+		MAT_MAHOGANY =        TRUE,
+		MAT_MAPLE =           TRUE,
+		MAT_EBONY =           TRUE,
+		MAT_WALNUT =          TRUE,
+		MAT_LEATHER_GENERIC = TRUE,
+		MAT_PLASTIC =         TRUE,
+		MAT_CARDBOARD =       TRUE,
+		MAT_CLOTH =           TRUE,
+		MAT_ROCK_SALT =       TRUE
 	)
 
 /obj/item/organ/internal/stomach/yinglet/Process()

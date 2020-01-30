@@ -17,7 +17,7 @@ var/global/list/stool_cache = list() //haha stool
 
 /obj/item/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
-	padding_material = MATERIAL_CARPET
+	padding_material = MAT_CARPET
 
 /obj/item/stool/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
 	. = ..(mapload)
@@ -30,7 +30,7 @@ var/global/list/stool_cache = list() //haha stool
 	update_icon()
 
 /obj/item/stool/padded/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, new_material, MATERIAL_CARPET)
+	. = ..(mapload, new_material, MAT_CARPET)
 
 /obj/item/stool/bar
 	name = "bar stool"
@@ -40,10 +40,10 @@ var/global/list/stool_cache = list() //haha stool
 
 /obj/item/stool/bar/padded
 	icon_state = "bar_stool_padded_preview"
-	padding_material = MATERIAL_CARPET
+	padding_material = MAT_CARPET
 
 /obj/item/stool/bar/padded/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, new_material, MATERIAL_CARPET)
+	. = ..(mapload, new_material, MAT_CARPET)
 
 /obj/item/stool/on_update_icon()
 	// Prep icon.
@@ -133,10 +133,10 @@ var/global/list/stool_cache = list() //haha stool
 			return
 		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
 		if(istype(W,/obj/item/stack/tile/carpet))
-			padding_type = MATERIAL_CARPET
+			padding_type = MAT_CARPET
 		else if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.flags & MATERIAL_PADDING))
+			if(M.material && (M.material.flags & MAT_FLAG_PADDING))
 				padding_type = "[M.material.name]"
 		if(!padding_type)
 			to_chat(user, "You cannot pad \the [src] with that.")
@@ -161,4 +161,4 @@ var/global/list/stool_cache = list() //haha stool
 //Generated subtypes for mapping porpoises
 
 /obj/item/stool/wood/Initialize(mapload)
-	. = ..(mapload, MATERIAL_WOOD)
+	. = ..(mapload, MAT_WOOD)

@@ -33,13 +33,13 @@
 /obj/machinery/portable_atmospherics/cracker/attackby(var/obj/item/thing, var/mob/user)
 	// remove deuterium as a reagent
 	if(ATOM_IS_OPEN_CONTAINER(thing) && thing.reagents)
-		if(!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= 0)
+		if(!reagent_buffer[MAT_DEUTERIUM] || reagent_buffer[MAT_DEUTERIUM] <= 0)
 			to_chat(user, SPAN_WARNING("There is no deuterium stored in \the [src]."))
 			return
-		var/transfer_amt = min(thing.reagents.maximum_volume, reagent_buffer[MATERIAL_DEUTERIUM])
-		thing.reagents.add_reagent(MATERIAL_DEUTERIUM, transfer_amt)
+		var/transfer_amt = min(thing.reagents.maximum_volume, reagent_buffer[MAT_DEUTERIUM])
+		thing.reagents.add_reagent(MAT_DEUTERIUM, transfer_amt)
 		thing.update_icon()
-		reagent_buffer[MATERIAL_DEUTERIUM] -= transfer_amt
+		reagent_buffer[MAT_DEUTERIUM] -= transfer_amt
 		user.visible_message(SPAN_NOTICE("\The [user] siphons [transfer_amt] unit\s of deuterium from \the [src] into \the [thing]."))
 		return
 	. = ..()
@@ -75,13 +75,13 @@
 			// Gas production.
 			var/datum/gas_mixture/produced = new
 			var/gen_amt = min(1, (gas_generated_per_tick * (consuming/fluid_consumption_per_tick)))
-			produced.adjust_gas(MATERIAL_OXYGEN,  gen_amt)
-			produced.adjust_gas(MATERIAL_HYDROGEN, gen_amt * 2)
+			produced.adjust_gas(MAT_OXYGEN,  gen_amt)
+			produced.adjust_gas(MAT_HYDROGEN, gen_amt * 2)
 			produced.temperature = T20C //todo water temperature
 			air_contents.merge(produced)
 
 			// Deuterium extraction.
-			if(prob(deuterium_generation_chance) && (!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= max_reagents))
-				if(!reagent_buffer[MATERIAL_DEUTERIUM])
-					reagent_buffer[MATERIAL_DEUTERIUM] = 0
-				reagent_buffer[MATERIAL_DEUTERIUM] += deuterium_generation_amount
+			if(prob(deuterium_generation_chance) && (!reagent_buffer[MAT_DEUTERIUM] || reagent_buffer[MAT_DEUTERIUM] <= max_reagents))
+				if(!reagent_buffer[MAT_DEUTERIUM])
+					reagent_buffer[MAT_DEUTERIUM] = 0
+				reagent_buffer[MAT_DEUTERIUM] += deuterium_generation_amount

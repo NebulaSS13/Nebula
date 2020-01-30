@@ -24,7 +24,7 @@
 	meat_type = /obj/item/chems/food/snacks/meat/goat
 	meat_amount = 4
 	bone_amount = 8
-	skin_material = MATERIAL_SKIN_GOATHIDE
+	skin_material = MAT_SKIN_GOATHIDE
 	skin_amount = 8
 
 	var/datum/reagents/udder = null
@@ -113,7 +113,7 @@
 	meat_type = /obj/item/chems/food/snacks/meat/beef
 	meat_amount = 6
 	bone_amount = 10
-	skin_material = MATERIAL_SKIN_COWHIDE
+	skin_material = MAT_SKIN_COWHIDE
 	skin_amount = 10
 
 	var/datum/reagents/udder = null
@@ -182,7 +182,7 @@
 	meat_amount = 1
 	bone_amount = 3
 	skin_amount = 3
-	skin_material = MATERIAL_SKIN_FEATHERS
+	skin_material = MAT_SKIN_FEATHERS
 
 	var/amount_grown = 0
 
@@ -225,7 +225,7 @@ var/global/chicken_count = 0
 
 	meat_type = /obj/item/chems/food/snacks/meat/chicken
 	meat_amount = 2
-	skin_material = MATERIAL_SKIN_FEATHERS
+	skin_material = MAT_SKIN_FEATHERS
 
 	var/eggsleft = 0
 	var/body_color

@@ -6,9 +6,9 @@
 /mob/living
 	var/meat_type =         /obj/item/chems/food/snacks/meat
 	var/meat_amount =       3
-	var/skin_material =     MATERIAL_SKIN_GENERIC
+	var/skin_material =     MAT_SKIN_GENERIC
 	var/skin_amount =       3
-	var/bone_material =     MATERIAL_BONE_GENERIC
+	var/bone_material =     MAT_BONE_GENERIC
 	var/bone_amount =       3
 	var/skull_type
 	var/butchery_rotation = 90

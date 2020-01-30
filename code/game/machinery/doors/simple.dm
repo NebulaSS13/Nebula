@@ -20,7 +20,7 @@
 /obj/machinery/door/unpowered/simple/Initialize(mapload, var/material_name, var/locked)
 	. = ..(mapload)
 	if(!material_name)
-		material_name = MATERIAL_STEEL
+		material_name = MAT_STEEL
 	material = SSmaterials.get_material_by_name(material_name)
 	if(!material)
 		return INITIALIZE_HINT_QDEL
@@ -200,41 +200,41 @@
 	return ..()
 
 /obj/machinery/door/unpowered/simple/iron/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_IRON, complexity)
+	. = ..(mapload, MAT_IRON, complexity)
 
 /obj/machinery/door/unpowered/simple/silver/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_SILVER, complexity)
+	. = ..(mapload, MAT_SILVER, complexity)
 
 /obj/machinery/door/unpowered/simple/gold/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_GOLD, complexity)
+	. = ..(mapload, MAT_GOLD, complexity)
 
 /obj/machinery/door/unpowered/simple/uranium/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_URANIUM, complexity)
+	. = ..(mapload, MAT_URANIUM, complexity)
 
 /obj/machinery/door/unpowered/simple/sandstone/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_SANDSTONE, complexity)
+	. = ..(mapload, MAT_SANDSTONE, complexity)
 
 /obj/machinery/door/unpowered/simple/diamond/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_DIAMOND, complexity)
+	. = ..(mapload, MAT_DIAMOND, complexity)
 
 /obj/machinery/door/unpowered/simple/wood
 	icon_state = "wood"
 	color = "#824b28"
 
 /obj/machinery/door/unpowered/simple/wood/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_WOOD, complexity)
+	. = ..(mapload, MAT_WOOD, complexity)
 
 /obj/machinery/door/unpowered/simple/mahogany/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_MAHOGANY, complexity)
+	. = ..(mapload, MAT_MAHOGANY, complexity)
 
 /obj/machinery/door/unpowered/simple/maple/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_MAPLE, complexity)
+	. = ..(mapload, MAT_MAPLE, complexity)
 
 /obj/machinery/door/unpowered/simple/ebony/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_EBONY, complexity)
+	. = ..(mapload, MAT_EBONY, complexity)
 
 /obj/machinery/door/unpowered/simple/walnut/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_WALNUT, complexity)
+	. = ..(mapload, MAT_WALNUT, complexity)
 
 /obj/machinery/door/unpowered/simple/wood/saloon
 	icon_base = "saloon"
@@ -242,9 +242,9 @@
 	normalspeed = 0
 
 /obj/machinery/door/unpowered/simple/wood/saloon/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_WOOD, complexity)
+	. = ..(mapload, MAT_WOOD, complexity)
 	glass = 1
 	set_opacity(0)
 
 /obj/machinery/door/unpowered/simple/cult/Initialize(mapload,var/material_name,var/complexity)
-	. = ..(mapload, MATERIAL_CULT, complexity)
+	. = ..(mapload, MAT_CULT, complexity)

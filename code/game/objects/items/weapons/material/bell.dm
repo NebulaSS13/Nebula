@@ -9,7 +9,7 @@
 	material_force_multiplier = 0.8
 	thrown_material_force_multiplier = 0.3
 	hitsound = 'sound/items/oneding.ogg'
-	material = MATERIAL_ALUMINIUM
+	material = MAT_ALUMINIUM
 
 /obj/item/material/bell/attack_hand(mob/user as mob)
 	if (user.a_intent == I_GRAB)

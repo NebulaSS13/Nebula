@@ -81,7 +81,7 @@ obj/structure/ex_act(severity)
 /obj/structure/transit_tube_pod/Initialize()
 	. = ..()
 
-	air_contents.adjust_multi(MATERIAL_OXYGEN, MOLES_O2STANDARD * 2, MATERIAL_NITROGEN, MOLES_N2STANDARD)
+	air_contents.adjust_multi(MAT_OXYGEN, MOLES_O2STANDARD * 2, MAT_NITROGEN, MOLES_N2STANDARD)
 	air_contents.temperature = T20C
 
 	// Give auto tubes time to align before trying to start moving

@@ -13,7 +13,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 30)
+	matter = list(MAT_STEEL = 70, MAT_GLASS = 30)
 	origin_tech = list(TECH_ENGINEERING = 1)
 
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)

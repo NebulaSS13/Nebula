@@ -8,7 +8,7 @@
 	id = "hdd_basic"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 400, MATERIAL_GLASS = 100)
+	materials = list(MAT_STEEL = 400, MAT_GLASS = 100)
 	build_path = /obj/item/stock_parts/computer/hard_drive/
 	sort_string = "VBAAA"
 
@@ -17,7 +17,7 @@
 	id = "hdd_advanced"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 800, MATERIAL_GLASS = 200)
+	materials = list(MAT_STEEL = 800, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/hard_drive/advanced
 	sort_string = "VBAAB"
 
@@ -26,7 +26,7 @@
 	id = "hdd_super"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 1600, MATERIAL_GLASS = 400)
+	materials = list(MAT_STEEL = 1600, MAT_GLASS = 400)
 	build_path = /obj/item/stock_parts/computer/hard_drive/super
 	sort_string = "VBAAC"
 
@@ -35,7 +35,7 @@
 	id = "hdd_cluster"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 3200, MATERIAL_GLASS = 800)
+	materials = list(MAT_STEEL = 3200, MAT_GLASS = 800)
 	build_path = /obj/item/stock_parts/computer/hard_drive/cluster
 	sort_string = "VBAAD"
 
@@ -44,7 +44,7 @@
 	id = "hdd_micro"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 400, MATERIAL_GLASS = 100)
+	materials = list(MAT_STEEL = 400, MAT_GLASS = 100)
 	build_path = /obj/item/stock_parts/computer/hard_drive/micro
 	sort_string = "VBAAE"
 
@@ -53,7 +53,7 @@
 	id = "hdd_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 800, MATERIAL_GLASS = 200)
+	materials = list(MAT_STEEL = 800, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/hard_drive/small
 	sort_string = "VBAAF"
 
@@ -67,7 +67,7 @@
 	id = "netcard_basic"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 100)
+	materials = list(MAT_STEEL = 250, MAT_GLASS = 100)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/network_card
 	sort_string = "VBABA"
@@ -77,7 +77,7 @@
 	id = "netcard_advanced"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 200)
+	materials = list(MAT_STEEL = 500, MAT_GLASS = 200)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/network_card/advanced
 	sort_string = "VBABB"
@@ -87,7 +87,7 @@
 	id = "netcard_wired"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 3)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_STEEL = 2500, MATERIAL_GLASS = 400)
+	materials = list(MAT_STEEL = 2500, MAT_GLASS = 400)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/network_card/wired
 	sort_string = "VBABC"
@@ -102,7 +102,7 @@
 	id = "portadrive_basic"
 	req_tech = list(TECH_DATA = 1)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_GLASS = 800)
+	materials = list(MAT_GLASS = 800)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/hard_drive/portable
 	sort_string = "VBACA"
@@ -112,7 +112,7 @@
 	id = "portadrive_advanced"
 	req_tech = list(TECH_DATA = 2)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_GLASS = 1600)
+	materials = list(MAT_GLASS = 1600)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/hard_drive/portable/advanced
 	sort_string = "VBACB"
@@ -122,7 +122,7 @@
 	id = "portadrive_super"
 	req_tech = list(TECH_DATA = 4)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_GLASS = 3200)
+	materials = list(MAT_GLASS = 3200)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/hard_drive/portable/super
 	sort_string = "VBACC"
@@ -137,7 +137,7 @@
 	id = "cardslot"
 	req_tech = list(TECH_DATA = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 600)
+	materials = list(MAT_STEEL = 600)
 	build_path = /obj/item/stock_parts/computer/card_slot
 	sort_string = "VBADA"
 
@@ -147,7 +147,7 @@
 	id = "cardbroadcaster"
 	req_tech = list(TECH_DATA = 3)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 600)
+	materials = list(MAT_STEEL = 600)
 	build_path = /obj/item/stock_parts/computer/card_slot/broadcaster
 	sort_string = "VBADB"
 
@@ -157,7 +157,7 @@
 	id = "aislot"
 	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_STEEL = 2000)
+	materials = list(MAT_STEEL = 2000)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/ai_slot
 	sort_string = "VBADC"
@@ -168,7 +168,7 @@
 	id = "nanoprinter"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 600)
+	materials = list(MAT_STEEL = 600)
 	build_path = /obj/item/stock_parts/computer/nano_printer
 	sort_string = "VBADD"
 
@@ -178,7 +178,7 @@
 	id = "teslalink"
 	req_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 2000)
+	materials = list(MAT_STEEL = 2000)
 	build_path = /obj/item/stock_parts/computer/tesla_link
 	sort_string = "VBADE"
 
@@ -188,7 +188,7 @@
 	id = "scan_reagent"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_BIO = 2, TECH_MAGNET = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
+	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/scanner/reagent
 	sort_string = "VBADF"
 
@@ -197,7 +197,7 @@
 	id = "scan_paper"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
+	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/scanner/paper
 	sort_string = "VBADG"
 
@@ -206,7 +206,7 @@
 	id = "scan_atmos"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
+	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/scanner/atmos
 	sort_string = "VBADH"
 
@@ -215,7 +215,7 @@
 	id = "scan_medical"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2, TECH_BIO = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
+	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/scanner/medical
 	sort_string = "VBADI"
 
@@ -229,7 +229,7 @@
 	id = "bat_normal"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 400)
+	materials = list(MAT_STEEL = 400)
 	build_path = /obj/item/stock_parts/computer/battery_module
 	sort_string = "VBAEA"
 
@@ -238,7 +238,7 @@
 	id = "bat_advanced"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 800)
+	materials = list(MAT_STEEL = 800)
 	build_path = /obj/item/stock_parts/computer/battery_module/advanced
 	sort_string = "VBAEB"
 
@@ -247,7 +247,7 @@
 	id = "bat_super"
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 1600)
+	materials = list(MAT_STEEL = 1600)
 	build_path = /obj/item/stock_parts/computer/battery_module/super
 	sort_string = "VBAEC"
 
@@ -256,7 +256,7 @@
 	id = "bat_ultra"
 	req_tech = list(TECH_POWER = 5, TECH_ENGINEERING = 4)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 3200)
+	materials = list(MAT_STEEL = 3200)
 	build_path = /obj/item/stock_parts/computer/battery_module/ultra
 	sort_string = "VBAED"
 
@@ -265,7 +265,7 @@
 	id = "bat_nano"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 200)
+	materials = list(MAT_STEEL = 200)
 	build_path = /obj/item/stock_parts/computer/battery_module/nano
 	sort_string = "VBAEE"
 
@@ -274,7 +274,7 @@
 	id = "bat_micro"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list(MATERIAL_STEEL = 400)
+	materials = list(MAT_STEEL = 400)
 	build_path = /obj/item/stock_parts/computer/battery_module/micro
 	sort_string = "VBAEF"
 
@@ -288,7 +288,7 @@
 	id = "cpu_normal"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_STEEL = 1600)
+	materials = list(MAT_STEEL = 1600)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/processor_unit
 	sort_string = "VBAFA"
@@ -298,7 +298,7 @@
 	id = "cpu_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_STEEL = 800)
+	materials = list(MAT_STEEL = 800)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/processor_unit/small
 	sort_string = "VBAFB"
@@ -308,7 +308,7 @@
 	id = "pcpu_normal"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_STEEL = 6400, glass = 2000)
+	materials = list(MAT_STEEL = 6400, glass = 2000)
 	chemicals = list(/datum/reagent/acid = 40)
 	build_path = /obj/item/stock_parts/computer/processor_unit/photonic
 	sort_string = "VBAFC"
@@ -318,7 +318,7 @@
 	id = "pcpu_small"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
 	build_type = IMPRINTER
-	materials = list(MATERIAL_STEEL = 3200, glass = 1000)
+	materials = list(MAT_STEEL = 3200, glass = 1000)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/processor_unit/photonic/small
 	sort_string = "VBAFD"

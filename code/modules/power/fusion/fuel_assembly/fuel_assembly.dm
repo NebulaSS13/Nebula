@@ -59,16 +59,16 @@
 
 // Mapper shorthand.
 /obj/item/fuel_assembly/deuterium/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_DEUTERIUM)
+	. = ..(mapload,  MAT_DEUTERIUM)
 
 /obj/item/fuel_assembly/tritium/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_TRITIUM)
+	. = ..(mapload,  MAT_TRITIUM)
 
 /obj/item/fuel_assembly/phoron/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_PHORON)
+	. = ..(mapload,  MAT_PHORON)
 
 /obj/item/fuel_assembly/supermatter/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_SUPERMATTER)
+	. = ..(mapload,  MAT_SUPERMATTER)
 
 /obj/item/fuel_assembly/hydrogen/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_HYDROGEN)
+	. = ..(mapload,  MAT_HYDROGEN)

@@ -97,15 +97,15 @@
 			var/data_value = 1
 
 			switch(metal)
-				if(MATERIAL_SAND, MATERIAL_GRAPHITE, MATERIAL_IRON)
+				if(MAT_SAND, MAT_GRAPHITE, MAT_IRON)
 					ore_type = ORE_SURFACE
-				if(MATERIAL_GOLD, MATERIAL_SILVER, MATERIAL_DIAMOND, MATERIAL_RUTILE)
+				if(MAT_GOLD, MAT_SILVER, MAT_DIAMOND, MAT_RUTILE)
 					ore_type = ORE_PRECIOUS
 					data_value = 2
-				if(MATERIAL_URANIUM)
+				if(MAT_URANIUM)
 					ore_type = ORE_NUCLEAR
 					data_value = 3
-				if(MATERIAL_PHORON, MATERIAL_OSMIUM, MATERIAL_METALLIC_HYDROGEN)
+				if(MAT_PHORON, MAT_OSMIUM, MAT_METALLIC_HYDROGEN)
 					ore_type = ORE_EXOTIC
 					data_value = 4
 

@@ -67,21 +67,21 @@
 		uphill = list(
 			source = list(
 				initial_gas = list(
-					MATERIAL_OXYGEN         = 5,
-					MATERIAL_NITROGEN       = 10,
-					MATERIAL_CO2 = 5,
-					MATERIAL_PHORON         = 10,
-					MATERIAL_N2O = 5,
+					MAT_OXYGEN         = 5,
+					MAT_NITROGEN       = 10,
+					MAT_CO2 = 5,
+					MAT_PHORON         = 10,
+					MAT_N2O = 5,
 				),
 				temperature = T20C - 5,
 			),
 			sink = list(
 				initial_gas = list(
-					MATERIAL_OXYGEN         = 10,
-					MATERIAL_NITROGEN       = 20,
-					MATERIAL_CO2 = 10,
-					MATERIAL_PHORON         = 20,
-					MATERIAL_N2O = 10,
+					MAT_OXYGEN         = 10,
+					MAT_NITROGEN       = 20,
+					MAT_CO2 = 10,
+					MAT_PHORON         = 20,
+					MAT_N2O = 10,
 				),
 				temperature = T20C + 5,
 			)
@@ -89,21 +89,21 @@
 		downhill = list(
 			source = list(
 				initial_gas = list(
-					MATERIAL_OXYGEN         = 10,
-					MATERIAL_NITROGEN       = 20,
-					MATERIAL_CO2 = 10,
-					MATERIAL_PHORON         = 20,
-					MATERIAL_N2O = 10,
+					MAT_OXYGEN         = 10,
+					MAT_NITROGEN       = 20,
+					MAT_CO2 = 10,
+					MAT_PHORON         = 20,
+					MAT_N2O = 10,
 				),
 				temperature = T20C + 5,
 			),
 			sink = list(
 				initial_gas = list(
-					MATERIAL_OXYGEN         = 5,
-					MATERIAL_NITROGEN       = 10,
-					MATERIAL_CO2 = 5,
-					MATERIAL_PHORON         = 10,
-					MATERIAL_N2O = 5,
+					MAT_OXYGEN         = 5,
+					MAT_NITROGEN       = 10,
+					MAT_CO2 = 5,
+					MAT_PHORON         = 10,
+					MAT_N2O = 5,
 				),
 				temperature = T20C - 5,
 			),
@@ -111,21 +111,21 @@
 		flat = list(
 			source = list(
 				initial_gas = list(
-					MATERIAL_OXYGEN         = 10,
-					MATERIAL_NITROGEN       = 20,
-					MATERIAL_CO2 = 10,
-					MATERIAL_PHORON         = 20,
-					MATERIAL_N2O = 10,
+					MAT_OXYGEN         = 10,
+					MAT_NITROGEN       = 20,
+					MAT_CO2 = 10,
+					MAT_PHORON         = 20,
+					MAT_N2O = 10,
 				),
 				temperature = T20C,
 			),
 			sink = list(
 				initial_gas = list(
-					MATERIAL_OXYGEN         = 10,
-					MATERIAL_NITROGEN       = 20,
-					MATERIAL_CO2 = 10,
-					MATERIAL_PHORON         = 20,
-					MATERIAL_N2O = 10,
+					MAT_OXYGEN         = 10,
+					MAT_NITROGEN       = 20,
+					MAT_CO2 = 10,
+					MAT_PHORON         = 20,
+					MAT_N2O = 10,
 				),
 				temperature = T20C,
 			),
@@ -133,11 +133,11 @@
 		vacuum_sink = list(
 			source = list(
 				initial_gas = list(
-					MATERIAL_OXYGEN         = 10,
-					MATERIAL_NITROGEN       = 20,
-					MATERIAL_CO2 = 10,
-					MATERIAL_PHORON         = 20,
-					MATERIAL_N2O = 10,
+					MAT_OXYGEN         = 10,
+					MAT_NITROGEN       = 20,
+					MAT_CO2 = 10,
+					MAT_PHORON         = 20,
+					MAT_N2O = 10,
 				),
 				temperature = T20C,
 			),
@@ -153,11 +153,11 @@
 			),
 			sink = list(
 				initial_gas = list(
-					MATERIAL_OXYGEN         = 10,
-					MATERIAL_NITROGEN       = 20,
-					MATERIAL_CO2 = 10,
-					MATERIAL_PHORON         = 20,
-					MATERIAL_N2O = 10,
+					MAT_OXYGEN         = 10,
+					MAT_NITROGEN       = 20,
+					MAT_CO2 = 10,
+					MAT_PHORON         = 20,
+					MAT_N2O = 10,
 				),
 				temperature = T20C,
 			),

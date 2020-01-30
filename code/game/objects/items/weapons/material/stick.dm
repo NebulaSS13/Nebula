@@ -7,7 +7,7 @@
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
-	material = MATERIAL_WOOD
+	material = MAT_WOOD
 	attack_verb = list("poked", "jabbed")
 
 

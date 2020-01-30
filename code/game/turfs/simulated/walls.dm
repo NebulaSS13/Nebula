@@ -229,7 +229,7 @@
 		new/obj/effect/overlay/wallrot(src)
 
 /turf/simulated/wall/proc/can_melt()
-	if(material.flags & MATERIAL_UNMELTABLE)
+	if(material.flags & MAT_FLAG_UNMELTABLE)
 		return 0
 	return 1
 

@@ -11,7 +11,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 	alpha = 180
 	var/material/reinf_material
-	var/init_material = MATERIAL_GLASS
+	var/init_material = MAT_GLASS
 	var/init_reinf_material = null
 	var/maxhealth
 	var/health
@@ -35,7 +35,7 @@
 	if(!new_material)
 		new_material = init_material
 		if(!new_material)
-			new_material = MATERIAL_GLASS
+			new_material = MAT_GLASS
 	if(!new_reinf_material)
 		new_reinf_material = init_reinf_material
 	material = SSmaterials.get_material_by_name(new_material)
@@ -428,7 +428,7 @@
 /obj/structure/window/phoronbasic
 	name = "phoron window"
 	color = GLASS_COLOR_PHORON
-	init_material = MATERIAL_PHORON_GLASS
+	init_material = MAT_PHORON_GLASS
 
 /obj/structure/window/phoronbasic/full
 	dir = 5
@@ -438,8 +438,8 @@
 	name = "reinforced borosilicate window"
 	icon_state = "rwindow"
 	color = GLASS_COLOR_PHORON
-	init_material = MATERIAL_PHORON_GLASS
-	init_reinf_material = MATERIAL_STEEL
+	init_material = MAT_PHORON_GLASS
+	init_reinf_material = MAT_STEEL
 
 /obj/structure/window/phoronreinforced/full
 	dir = 5
@@ -448,8 +448,8 @@
 /obj/structure/window/reinforced
 	name = "reinforced window"
 	icon_state = "rwindow"
-	init_material = MATERIAL_GLASS
-	init_reinf_material = MATERIAL_STEEL
+	init_material = MAT_GLASS
+	init_reinf_material = MAT_STEEL
 
 /obj/structure/window/reinforced/full
 	dir = 5

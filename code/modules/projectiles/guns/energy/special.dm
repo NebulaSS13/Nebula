@@ -155,7 +155,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
-	matter = list(MATERIAL_STEEL = 4000)
+	matter = list(MAT_STEEL = 4000)
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
 	self_recharge = 1
@@ -196,6 +196,6 @@
 	item_state = "incen"
 	safety_icon = "safety"
 	origin_tech = list(TECH_COMBAT = 7, TECH_MAGNET = 4, TECH_ESOTERIC = 4)
-	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_PLASTIC = 500, MATERIAL_DIAMOND = 500)
+	matter = list(MAT_ALUMINIUM = 1000, MAT_PLASTIC = 500, MAT_DIAMOND = 500)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser
 	max_shots = 4

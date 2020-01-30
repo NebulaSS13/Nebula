@@ -1,7 +1,7 @@
 /datum/design/item/powercell
 	build_type = PROTOLATHE | MECHFAB
 	category = "Misc"
-	materials = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 50, MATERIAL_PLASTIC = 20)
+	materials = list(MAT_STEEL = 700, MAT_GLASS = 50, MAT_PLASTIC = 20)
 
 /datum/design/item/powercell/AssembleDesignName()
 	name = "Power cell model ([item_name])"
@@ -44,7 +44,7 @@
 	name = "hyper-capacity"
 	id = "hyper_cell"
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
-	materials = list(MATERIAL_STEEL = 400, MATERIAL_GOLD = 150, MATERIAL_SILVER = 150, MATERIAL_GLASS = 70, MATERIAL_ALUMINIUM = 25)
+	materials = list(MAT_STEEL = 400, MAT_GOLD = 150, MAT_SILVER = 150, MAT_GLASS = 70, MAT_ALUMINIUM = 25)
 	build_path = /obj/item/cell/hyper
 	sort_string = "DAAAD"
 
@@ -52,7 +52,7 @@
 	name = "basic"
 	id = "device_cell_standard"
 	req_tech = list(TECH_POWER = 1)
-	materials = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 5)
+	materials = list(MAT_STEEL = 70, MAT_GLASS = 5)
 	build_path = /obj/item/cell/device/standard
 	sort_string = "DAAAE"
 
@@ -61,6 +61,6 @@
 	build_type = PROTOLATHE | MECHFAB
 	id = "device_cell_high"
 	req_tech = list(TECH_POWER = 2)
-	materials = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 6)
+	materials = list(MAT_STEEL = 70, MAT_GLASS = 6)
 	build_path = /obj/item/cell/device/high
 	sort_string = "DAAAF"

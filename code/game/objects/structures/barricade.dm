@@ -14,7 +14,7 @@
 /obj/structure/barricade/Initialize(var/mapload, var/material_name)
 	. = ..(mapload)
 	if(!material_name)
-		material_name = MATERIAL_WOOD
+		material_name = MAT_WOOD
 	material = SSmaterials.get_material_by_name("[material_name]")
 	if(!material)
 		return INITIALIZE_HINT_QDEL
@@ -116,7 +116,7 @@
 /obj/structure/barricade/spike/Initialize(var/mapload, var/material_name, var/rod_material_name)
 	. = ..(mapload, material_name)
 	if(!rod_material_name)
-		rod_material_name = MATERIAL_WOOD
+		rod_material_name = MAT_WOOD
 	rod_material = SSmaterials.get_material_by_name("[rod_material_name]")
 	SetName("cheval-de-frise")
 	desc = "A rather simple [material.display_name] barrier. It menaces with spikes of [rod_material.display_name]."

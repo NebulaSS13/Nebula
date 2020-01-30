@@ -14,7 +14,7 @@
 	one_hand_penalty = 0
 	fire_sound = 'sound/weapons/foamblaster.ogg'
 	fire_sound_text = "a pleasing 'pomp'"
-	matter = list(MATERIAL_PLASTIC = 200)
+	matter = list(MAT_PLASTIC = 200)
 
 	var/max_darts = 1
 	var/list/darts = new/list()

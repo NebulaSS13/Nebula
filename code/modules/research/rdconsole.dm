@@ -68,23 +68,23 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 /obj/machinery/computer/rdconsole/proc/CallMaterialName(var/ID)
 	var/return_name = ID
 	switch(return_name)
-		if(MATERIAL_STEEL)
+		if(MAT_STEEL)
 			return_name = "Steel"
-		if(MATERIAL_ALUMINIUM)
+		if(MAT_ALUMINIUM)
 			return_name = "Aluminium"
-		if(MATERIAL_GLASS)
+		if(MAT_GLASS)
 			return_name = "Glass"
-		if(MATERIAL_PLASTIC)
+		if(MAT_PLASTIC)
 			return_name = "Plastic"
-		if(MATERIAL_GOLD)
+		if(MAT_GOLD)
 			return_name = "Gold"
-		if(MATERIAL_SILVER)
+		if(MAT_SILVER)
 			return_name = "Silver"
-		if(MATERIAL_PHORON)
+		if(MAT_PHORON)
 			return_name = "Solid Phoron"
-		if(MATERIAL_URANIUM)
+		if(MAT_URANIUM)
 			return_name = "Uranium"
-		if(MATERIAL_DIAMOND)
+		if(MAT_DIAMOND)
 			return_name = "Diamond"
 	return return_name
 

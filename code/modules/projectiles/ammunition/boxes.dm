@@ -4,7 +4,7 @@
 	icon_state = "spdloader"
 	caliber = CALIBER_PISTOL
 	ammo_type = /obj/item/ammo_casing/pistol
-	matter = list(MATERIAL_STEEL = 1260)
+	matter = list(MAT_STEEL = 1260)
 	max_ammo = 6
 	multiple_sprites = 1
 
@@ -16,7 +16,7 @@
 	icon_state = "spdloader_magnum"
 	caliber = CALIBER_PISTOL_MAGNUM
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
-	matter = list(MATERIAL_STEEL = 1440)
+	matter = list(MAT_STEEL = 1440)
 	max_ammo = 6
 	multiple_sprites = 1
 
@@ -25,7 +25,7 @@
 	icon_state = "spdloader_small"
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
-	matter = list(MATERIAL_STEEL = 1060)
+	matter = list(MAT_STEEL = 1060)
 	max_ammo = 6
 	multiple_sprites = 1
 
@@ -35,7 +35,7 @@
 	icon_state = "clip"
 	caliber = CALIBER_RIFLE
 	ammo_type = /obj/item/ammo_casing/rifle
-	matter = list(MATERIAL_STEEL = 1800)
+	matter = list(MAT_STEEL = 1800)
 	max_ammo = 5
 	multiple_sprites = 1
 
@@ -45,7 +45,7 @@
 	icon_state = "shotholder"
 	caliber = CALIBER_SHOTGUN
 	ammo_type = /obj/item/ammo_casing/shotgun
-	matter = list(MATERIAL_STEEL = 1440)
+	matter = list(MAT_STEEL = 1440)
 	max_ammo = 4
 	multiple_sprites = 1
 	var/marking_color
@@ -76,24 +76,24 @@
 /obj/item/ammo_magazine/shotholder/beanbag
 	name = "beanbag shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
-	matter = list(MATERIAL_STEEL = 720)
+	matter = list(MAT_STEEL = 720)
 	marking_color = COLOR_PAKISTAN_GREEN
 
 /obj/item/ammo_magazine/shotholder/flash
 	name = "illumination shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
-	matter = list(MATERIAL_STEEL = 360, MATERIAL_GLASS = 360)
+	matter = list(MAT_STEEL = 360, MAT_GLASS = 360)
 	marking_color = COLOR_PALE_YELLOW
 
 /obj/item/ammo_magazine/shotholder/stun
 	name = "stun shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/stunshell
-	matter = list(MATERIAL_STEEL = 1440, MATERIAL_GLASS = 2880)
+	matter = list(MAT_STEEL = 1440, MAT_GLASS = 2880)
 	marking_color = COLOR_MUZZLE_FLASH
 
 /obj/item/ammo_magazine/shotholder/empty
 	name = "shotgun ammunition holder"
-	matter = list(MATERIAL_STEEL = 250)
+	matter = list(MAT_STEEL = 250)
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/machine_pistol
@@ -101,7 +101,7 @@
 	icon_state = "machine_pistol"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/pistol
-	matter = list(MATERIAL_STEEL = 1200)
+	matter = list(MAT_STEEL = 1200)
 	caliber = CALIBER_PISTOL
 	max_ammo = 16
 	multiple_sprites = 1
@@ -114,7 +114,7 @@
 	icon_state = "smg_top"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/pistol/small
-	matter = list(MATERIAL_STEEL = 1200)
+	matter = list(MAT_STEEL = 1200)
 	caliber = CALIBER_PISTOL_SMALL
 	max_ammo = 20
 	multiple_sprites = 1
@@ -136,7 +136,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
-	matter = list(MATERIAL_STEEL = 1500)
+	matter = list(MAT_STEEL = 1500)
 	ammo_type = /obj/item/ammo_casing/pistol
 	max_ammo = 20
 	multiple_sprites = 1
@@ -150,7 +150,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
-	matter = list(MATERIAL_STEEL = 750)
+	matter = list(MAT_STEEL = 750)
 	ammo_type = /obj/item/ammo_casing/pistol
 	max_ammo = 10
 	multiple_sprites = 1
@@ -165,7 +165,7 @@
 /obj/item/ammo_magazine/pistol/double
 	name = "doublestack pistol magazine"
 	icon_state = "pistol"
-	matter = list(MATERIAL_STEEL = 1050)
+	matter = list(MAT_STEEL = 1050)
 	max_ammo = 15
 
 /obj/item/ammo_magazine/pistol/double/rubber
@@ -178,7 +178,7 @@
 
 /obj/item/ammo_magazine/pistol/small
 	icon_state = "holdout"
-	matter = list(MATERIAL_STEEL = 480)
+	matter = list(MAT_STEEL = 480)
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	max_ammo = 8
@@ -192,7 +192,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL_MAGNUM
-	matter = list(MATERIAL_STEEL = 1680)
+	matter = list(MAT_STEEL = 1680)
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	max_ammo = 7
 	multiple_sprites = 1
@@ -204,7 +204,7 @@
 	name = "ammunition box"
 	icon_state = "smallpistol"
 	origin_tech = list(TECH_COMBAT = 2)
-	matter = list(MATERIAL_STEEL = 1800)
+	matter = list(MAT_STEEL = 1800)
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	max_ammo = 30
@@ -214,7 +214,7 @@
 	icon_state = "smallpistol"
 	origin_tech = list(TECH_COMBAT = 2)
 	caliber = CALIBER_PISTOL
-	matter = list(MATERIAL_STEEL = 2250)
+	matter = list(MAT_STEEL = 2250)
 	ammo_type = /obj/item/ammo_casing/pistol
 	max_ammo = 30
 
@@ -248,7 +248,7 @@
 	origin_tech = list(TECH_COMBAT = 4)
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL_FLECHETTE
-	matter = list(MATERIAL_STEEL = 2000)
+	matter = list(MAT_STEEL = 2000)
 	ammo_type = /obj/item/ammo_casing/flechette
 	max_ammo = 40
 	multiple_sprites = 1
@@ -271,7 +271,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE
-	matter = list(MATERIAL_STEEL = 4500)
+	matter = list(MAT_STEEL = 4500)
 	ammo_type = /obj/item/ammo_casing/rifle
 	max_ammo = 50
 	multiple_sprites = 1
@@ -284,7 +284,7 @@
 	icon_state = "assault_rifle"
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE
-	matter = list(MATERIAL_STEEL = 1800)
+	matter = list(MAT_STEEL = 1800)
 	ammo_type = /obj/item/ammo_casing/rifle
 	max_ammo = 20
 	multiple_sprites = 1
@@ -295,7 +295,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE_MILITARY
-	matter = list(MATERIAL_STEEL = 1800)
+	matter = list(MAT_STEEL = 1800)
 	ammo_type = /obj/item/ammo_casing/rifle/military
 	max_ammo = 15 //if we lived in a world where normal mags had 30 rounds, this would be a 20 round mag
 	multiple_sprites = 1
@@ -313,6 +313,6 @@
 	icon_state = "T38"
 	caliber = CALIBER_CAPS
 	ammo_type = /obj/item/ammo_casing/cap
-	matter = list(MATERIAL_STEEL = 600)
+	matter = list(MAT_STEEL = 600)
 	max_ammo = 7
 	multiple_sprites = 1

@@ -4,7 +4,7 @@
 	icon_state = "crystal_welder"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list(MATERIAL_CRYSTAL = 1250)
+	matter = list(MAT_CRYSTAL = 1250)
 	cell = null
 	fuel_cost_multiplier = 1
 
@@ -44,7 +44,7 @@
 	icon_state = "crystal_wirecutter"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list(MATERIAL_CRYSTAL = 1250)
+	matter = list(MAT_CRYSTAL = 1250)
 	build_from_parts = FALSE
 
 /obj/item/wirecutters/crystal/Initialize()
@@ -58,7 +58,7 @@
 	icon_state = "crystal_screwdriver"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list(MATERIAL_CRYSTAL = 1250)
+	matter = list(MAT_CRYSTAL = 1250)
 	build_from_parts = FALSE
 
 /obj/item/screwdriver/crystal/Initialize()
@@ -72,7 +72,7 @@
 	icon_state = "crystal_crowbar"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list(MATERIAL_CRYSTAL = 1250)
+	matter = list(MAT_CRYSTAL = 1250)
 
 /obj/item/crowbar/crystal/Initialize()
 	. = ..()
@@ -85,7 +85,7 @@
 	icon_state = "crystal_wrench"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list(MATERIAL_CRYSTAL = 1250)
+	matter = list(MAT_CRYSTAL = 1250)
 
 /obj/item/wrench/crystal/Initialize()
 	. = ..()
@@ -98,7 +98,7 @@
 	icon_state = "crystal_multitool"
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
-	matter = list(MATERIAL_CRYSTAL = 1250)
+	matter = list(MAT_CRYSTAL = 1250)
 
 /obj/item/storage/belt/utility/crystal
 	name = "crystalline tool harness"

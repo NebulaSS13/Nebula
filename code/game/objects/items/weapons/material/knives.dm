@@ -8,7 +8,7 @@
 	max_force = 15
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	matter = list(MATERIAL_STEEL = 12000)
+	matter = list(MAT_STEEL = 12000)
 	origin_tech = list(TECH_MATERIAL = 1)
 	unbreakable = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -33,7 +33,7 @@
 	name = "table knife"
 	desc = "A simple table knife, used to cut up individual portions of food."
 	icon_state = "table"
-	material = MATERIAL_ALUMINIUM
+	material = MAT_ALUMINIUM
 	max_force = 7
 	material_force_multiplier = 0.1
 	sharp = FALSE
@@ -42,13 +42,13 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/material/knife/table/plastic
-	material = MATERIAL_PLASTIC
+	material = MAT_PLASTIC
 
 /obj/item/material/knife/table/primitive
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon_state = "unathiknife"
-	material = MATERIAL_WOOD
+	material = MAT_WOOD
 	applies_material_colour = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
@@ -70,7 +70,7 @@
 /obj/item/material/knife/kitchen/cleaver/bronze
 	name = "master chef's cleaver"
 	desc = "A heavy blade used to process food. This one is so fancy, it must be for a truly exceptional chef. There aren't any here, so what it's doing here is anyone's guess."
-	material = MATERIAL_BRONZE
+	material = MAT_BRONZE
 	material_force_multiplier = 1 //25 with material bronze
 
 //fighting knives

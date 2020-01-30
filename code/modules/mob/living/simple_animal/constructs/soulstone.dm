@@ -28,7 +28,7 @@
 /obj/item/soulstone/shatter()
 	playsound(loc, "shatter", 70, 1)
 	for(var/i=1 to rand(2,5))
-		new /obj/item/material/shard(get_turf(src), MATERIAL_NULLGLASS)
+		new /obj/item/material/shard(get_turf(src), MAT_NULLGLASS)
 	qdel(src)
 
 /obj/item/soulstone/withstand_psi_stress(var/stress, var/atom/source)

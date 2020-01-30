@@ -35,7 +35,7 @@
 		user.put_in_hands(F)
 		return 1
 	else if(istype(thing, /obj/machinery/power/supermatter/shard))
-		var/obj/item/fuel_assembly/F = new(get_turf(src), MATERIAL_SUPERMATTER)
+		var/obj/item/fuel_assembly/F = new(get_turf(src), MAT_SUPERMATTER)
 		visible_message("<span class='notice'>\The [src] compresses the \[thing] into a new fuel assembly.</span>")
 		qdel(thing)
 		user.put_in_hands(F)

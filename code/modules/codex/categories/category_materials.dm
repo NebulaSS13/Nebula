@@ -43,14 +43,14 @@
 			if(mat.opacity < 0.5)
 				material_info += "It is transparent."
 
-			if(mat.weight <= MATERIAL_LIGHT)
+			if(mat.weight <= MAT_FLAG_LIGHT)
 				material_info += "It is very light."
-			else if(mat.weight >= MATERIAL_HEAVY)
+			else if(mat.weight >= MAT_FLAG_HEAVY)
 				material_info += "It is very heavy."
 			else
 				material_info += "It is of average weight."
 
-			var/material/steel = SSmaterials.materials_by_name[MATERIAL_STEEL]
+			var/material/steel = SSmaterials.materials_by_name[MAT_STEEL]
 			var/comparison = round(mat.hardness / steel.hardness, 0.1)
 			if(comparison >= 0.9 && comparison <= 1.1)
 				material_info += "It is as hard as steel."
@@ -89,13 +89,13 @@
 			if(mat.is_fusion_fuel)
 				material_info += "It can be used as fusion fuel."
 
-			if(mat.flags & MATERIAL_UNMELTABLE)
+			if(mat.flags & MAT_FLAG_UNMELTABLE)
 				material_info += "It is impossible to melt."
 
-			if(mat.flags & MATERIAL_BRITTLE)
+			if(mat.flags & MAT_FLAG_BRITTLE)
 				material_info += "It is brittle and can shatter under strain."
 
-			if(mat.flags & MATERIAL_PADDING)
+			if(mat.flags & MAT_FLAG_PADDING)
 				material_info += "It can be used to pad furniture."
 
 			entry.mechanics_text = jointext(material_info,"<br>")

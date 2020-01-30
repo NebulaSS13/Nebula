@@ -22,4 +22,4 @@
 	meat_amount = 1
 	bone_amount = 1
 	skin_amount = 1
-	skin_material = MATERIAL_SKIN_LIZARD
+	skin_material = MAT_SKIN_LIZARD

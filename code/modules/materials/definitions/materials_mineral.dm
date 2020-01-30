@@ -1,8 +1,8 @@
 /material/pitchblende
-	name = MATERIAL_PITCHBLENDE
-	ore_compresses_to = MATERIAL_PITCHBLENDE
+	name = MAT_PITCHBLENDE
+	ore_compresses_to = MAT_PITCHBLENDE
 	icon_colour = "#917d1a"
-	ore_smelts_to = MATERIAL_URANIUM
+	ore_smelts_to = MAT_URANIUM
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
@@ -23,8 +23,8 @@
 	sale_price = 2
 
 /material/graphite
-	name = MATERIAL_GRAPHITE
-	ore_compresses_to = MATERIAL_GRAPHITE
+	name = MAT_GRAPHITE
+	ore_compresses_to = MAT_GRAPHITE
 	icon_colour = "#444444"
 	ore_name = "graphite"
 	ore_result_amount = 5
@@ -39,8 +39,8 @@
 	sale_price = 1
 
 /material/quartz
-	name = MATERIAL_QUARTZ
-	ore_compresses_to = MATERIAL_QUARTZ
+	name = MAT_QUARTZ
+	ore_compresses_to = MAT_QUARTZ
 	ore_name = "quartz"
 	opacity = 0.5
 	ore_result_amount = 10
@@ -60,7 +60,7 @@
 	sale_price = 2
 
 /material/pyrite
-	name = MATERIAL_PYRITE
+	name = MAT_PYRITE
 	ore_name = "pyrite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -77,12 +77,12 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	ore_compresses_to = MATERIAL_PYRITE
+	ore_compresses_to = MAT_PYRITE
 	sale_price = 2
 
 /material/spodumene
-	name = MATERIAL_SPODUMENE
-	ore_compresses_to = MATERIAL_SPODUMENE
+	name = MAT_SPODUMENE
+	ore_compresses_to = MAT_SPODUMENE
 	ore_name = "spodumene"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -101,8 +101,8 @@
 	sale_price = 2
 
 /material/cinnabar
-	name = MATERIAL_CINNABAR
-	ore_compresses_to = MATERIAL_CINNABAR
+	name = MAT_CINNABAR
+	ore_compresses_to = MAT_CINNABAR
 	ore_name = "cinnabar"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -121,8 +121,8 @@
 	sale_price = 2
 
 /material/phosphorite
-	name = MATERIAL_PHOSPHORITE
-	ore_compresses_to = MATERIAL_PHOSPHORITE
+	name = MAT_PHOSPHORITE
+	ore_compresses_to = MAT_PHOSPHORITE
 	ore_name = "phosphorite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -141,8 +141,8 @@
 	sale_price = 2
 
 /material/rocksalt
-	name = MATERIAL_ROCK_SALT
-	ore_compresses_to = MATERIAL_ROCK_SALT
+	name = MAT_ROCK_SALT
+	ore_compresses_to = MAT_ROCK_SALT
 	ore_name = "rock salt"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -161,8 +161,8 @@
 	sale_price = 2
 
 /material/potash
-	name = MATERIAL_POTASH
-	ore_compresses_to = MATERIAL_POTASH
+	name = MAT_POTASH
+	ore_compresses_to = MAT_POTASH
 	ore_name = "potash"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -181,7 +181,7 @@
 	sale_price = 2
 
 /material/bauxite
-	name = MATERIAL_BAUXITE
+	name = MAT_BAUXITE
 	ore_name = "bauxite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -197,16 +197,16 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	ore_smelts_to = MATERIAL_ALUMINIUM
-	ore_compresses_to = MATERIAL_BAUXITE
+	ore_smelts_to = MAT_ALUMINIUM
+	ore_compresses_to = MAT_BAUXITE
 	sale_price = 1
 
 /material/sand
-	name = MATERIAL_SAND
+	name = MAT_SAND
 	stack_type = null
 	icon_colour = "#e2dbb5"
-	ore_smelts_to = MATERIAL_GLASS
-	ore_compresses_to = MATERIAL_SANDSTONE
+	ore_smelts_to = MAT_GLASS
+	ore_compresses_to = MAT_SANDSTONE
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
 	chem_products = list(
@@ -214,14 +214,14 @@
 		)
 
 /material/phoron
-	name = MATERIAL_PHORON
+	name = MAT_PHORON
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_colour = "#e37108"
 	shard_type = SHARD_SHARD
-	hardness = MATERIAL_RIGID
+	hardness = MAT_VALUE_RIGID
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
@@ -230,9 +230,9 @@
 	chem_products = list(
 		/datum/reagent/toxin/phoron = 20
 		)
-	construction_difficulty = MATERIAL_HARD_DIY
+	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_name = "phoron"
-	ore_compresses_to = MATERIAL_PHORON
+	ore_compresses_to = MAT_PHORON
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_uncommon"
@@ -242,13 +242,13 @@
 		"billion" = 13,
 		"billion_lower" = 10
 		)
-	xarch_source_mineral = MATERIAL_PHORON
+	xarch_source_mineral = MAT_PHORON
 	ore_icon_overlay = "gems"
 	sale_price = 5
 	value = 200
 
 /material/phoron/supermatter
-	name = MATERIAL_SUPERMATTER
+	name = MAT_SUPERMATTER
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
 	radioactivity = 20
@@ -268,7 +268,7 @@
 	for(var/turf/simulated/floor/target_tile in range(2,T))
 		var/phoronToDeduce = (temperature/30) * effect_multiplier
 		totalPhoron += phoronToDeduce
-		target_tile.assume_gas(MATERIAL_PHORON, phoronToDeduce, 200+T0C)
+		target_tile.assume_gas(MAT_PHORON, phoronToDeduce, 200+T0C)
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)

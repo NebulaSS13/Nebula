@@ -101,7 +101,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 			if(istype(P, /obj/item/stack/material))
 				var/obj/item/stack/material/RG = P
-				if(RG.material.name == MATERIAL_GLASS && RG.reinf_material)
+				if(RG.material.name == MAT_GLASS && RG.reinf_material)
 					if (RG.get_amount() < 2)
 						to_chat(user, "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>")
 						return

@@ -114,7 +114,7 @@
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
 
-	material = SSmaterials.get_material_by_name(MATERIAL_OSMIUM_CARBIDE_PLASTEEL)
+	material = SSmaterials.get_material_by_name(MAT_OSMIUM_CARBIDE_PLASTEEL)
 
 /mob/living/exosuit/premade/firefighter/spawn_mech_equipment()
 	..()

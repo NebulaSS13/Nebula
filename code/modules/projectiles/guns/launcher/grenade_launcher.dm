@@ -24,7 +24,7 @@
 		/obj/item/grenade/flashbang/clusterbang,
 		/obj/item/grenade/frag)
 
-	matter = list(MATERIAL_STEEL = 2000)
+	matter = list(MAT_STEEL = 2000)
 
 //revolves the magazine, allowing players to choose between multiple grenade types
 /obj/item/gun/launcher/grenade/proc/pump(mob/M as mob)

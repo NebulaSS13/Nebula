@@ -7,7 +7,7 @@
 	desc = "A device to automatically replace lights. Refill with working lightbulbs."
 	id = "light_replacer"
 	req_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 4)
-	materials = list(MATERIAL_STEEL = 1500, MATERIAL_SILVER = 150, MATERIAL_GLASS = 3000)
+	materials = list(MAT_STEEL = 1500, MAT_SILVER = 150, MAT_GLASS = 3000)
 	build_path = /obj/item/lightreplacer
 	sort_string = "VAGAB"
 
@@ -16,7 +16,7 @@
 	desc = "Special door attachment that can be used to provide extra security."
 	id = "brace"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
-	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 50)
+	materials = list(MAT_STEEL = 2000, MAT_GLASS = 50)
 	build_path = /obj/item/airlock_brace
 	sort_string = "VAGAC"
 
@@ -25,7 +25,7 @@
 	desc = "A special maintenance tool that can be used to remove airlock braces."
 	id = "bracejack"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
-	materials = list(MATERIAL_STEEL = 120)
+	materials = list(MAT_STEEL = 120)
 	build_path = /obj/item/crowbar/brace_jack
 	sort_string = "VAGAD"
 
@@ -34,7 +34,7 @@
 	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
 	id = "stasis_clamp"
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MAGNET = 4)
-	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 500)
+	materials = list(MAT_STEEL = 500, MAT_GLASS = 500)
 	build_path = /obj/item/clamp
 	sort_string = "VAGAE"
 
@@ -43,7 +43,7 @@
 	desc = "An electromagnetic inducer that can transfer power from one cell into another."
 	id = "inducer"
 	req_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 4)
-	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 100)
+	materials = list(MAT_STEEL = 2000, MAT_GLASS = 100)
 	build_path = /obj/item/inducer
 
 /datum/design/item/tool/price_scanner
@@ -51,7 +51,7 @@
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
 	id = "price_scanner"
 	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
-	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3000, MATERIAL_SILVER = 250)
+	materials = list(MAT_STEEL = 3000, MAT_GLASS = 3000, MAT_SILVER = 250)
 	build_path = /obj/item/scanner/price
 	sort_string = "VAGAF"
 
@@ -60,7 +60,7 @@
 	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
 	id = "experimental_welder"
 	req_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4)
-	materials = list(MATERIAL_STEEL = 120, MATERIAL_GLASS = 50)
+	materials = list(MAT_STEEL = 120, MAT_GLASS = 50)
 	build_path = /obj/item/weldingtool/experimental
 	sort_string = "VAGAG"
 
@@ -69,7 +69,7 @@
 	desc = "A small handheld device designed to disrupt energy barriers."
 	id = "portable_shield_diffuser"
 	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ESOTERIC = 2)
-	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 5000, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 2000)
+	materials = list(MAT_STEEL = 5000, MAT_GLASS = 5000, MAT_GOLD = 2000, MAT_SILVER = 2000)
 	build_path = /obj/item/shield_diffuser
 	sort_string = "VAGAH"
 
@@ -78,7 +78,7 @@
 	desc = "A compacted and complicated device, that relies on compressed matter to dispense piping on the move."
 	id = "rpd"
 	req_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 6)
-	materials = list(MATERIAL_STEEL = 15000, MATERIAL_GLASS = 10000, MATERIAL_SILVER = 2000)
+	materials = list(MAT_STEEL = 15000, MAT_GLASS = 10000, MAT_SILVER = 2000)
 	build_path = /obj/item/rpd
 	sort_string = "VAGAI"
 
@@ -87,7 +87,7 @@
 	desc = "a device which, via a chemical reaction, can pressurise small areas."
 	id="oxycandle"
 	req_tech = list(TECH_ENGINEERING = 2)
-	materials = list(MATERIAL_STEEL = 3000)
+	materials = list(MAT_STEEL = 3000)
 	chemicals = list(/datum/reagent/sodiumchloride = 20, /datum/reagent/acetone = 20)
 	build_path = /obj/item/oxycandle
 	sort_string = "VAGAJ"

@@ -67,9 +67,9 @@
  */
 /obj/item/organ/internal/lungs/proc/sync_breath_types()
 	min_breath_pressure = species.breath_pressure
-	breath_type = species.breath_type ? species.breath_type : MATERIAL_OXYGEN
-	poison_types = species.poison_types ? species.poison_types : list(MATERIAL_PHORON = TRUE)
-	exhale_type = species.exhale_type ? species.exhale_type : MATERIAL_CO2
+	breath_type = species.breath_type ? species.breath_type : MAT_OXYGEN
+	poison_types = species.poison_types ? species.poison_types : list(MAT_PHORON = TRUE)
+	exhale_type = species.exhale_type ? species.exhale_type : MAT_CO2
 
 /obj/item/organ/internal/lungs/Process()
 	..()

@@ -69,7 +69,7 @@
 	icon = 'icons/obj/molluscs.dmi'
 	icon_state = "mollusc_shell"
 	desc = "The cracked shell of an unfortunate mollusc."
-	material = MATERIAL_BONE_GENERIC
+	material = MAT_BONE_GENERIC
 
 /obj/item/trash/mollusc_shell/clam
 	name = "clamshell"

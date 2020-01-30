@@ -1,7 +1,7 @@
 /datum/design/circuit
 	build_type = IMPRINTER
 	req_tech = list(TECH_DATA = 2)
-	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_ALUMINIUM = 1000)
+	materials = list(MAT_PLASTIC = 1000, MAT_ALUMINIUM = 1000)
 	chemicals = list(/datum/reagent/acid = 20)
 	time = 5
 
@@ -771,7 +771,7 @@
 	name = "ion propulsion system"
 	id = "ionengine"
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
-	materials = list(MATERIAL_GOLD = 250, MATERIAL_DIAMOND = 250, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 1000, MATERIAL_ALUMINIUM = 1000)
+	materials = list(MAT_GOLD = 250, MAT_DIAMOND = 250, MAT_URANIUM = 250, MAT_PLASTIC = 1000, MAT_ALUMINIUM = 1000)
 	build_path = /obj/item/stock_parts/circuitboard/engine/ion
 	sort_string = "XAAAB"
 

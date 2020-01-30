@@ -62,7 +62,7 @@
 	completion_trigger_type = /obj/item/stack/material
 	stack_consume_amount = 5
 	consume_completion_trigger = FALSE
-	var/stack_material = MATERIAL_STEEL
+	var/stack_material = MAT_STEEL
 
 /decl/crafting_stage/material/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
 	var/obj/item/stack/material/M = thing

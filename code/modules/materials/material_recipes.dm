@@ -27,13 +27,13 @@
 	. += new/datum/stack_recipe/clipboard(src)
 	. += new/datum/stack_recipe/cross(src)
 
-	if(hardness >= MATERIAL_FLEXIBLE)
+	if(hardness >= MAT_VALUE_FLEXIBLE)
 		. += new/datum/stack_recipe/baseball_bat(src)
 		. += new/datum/stack_recipe/urn(src)
 		. += new/datum/stack_recipe/spoon(src)
 		. += new/datum/stack_recipe/coin(src)
 
-	if(integrity >= 50 && hardness >= MATERIAL_FLEXIBLE + 10)
+	if(integrity >= 50 && hardness >= MAT_VALUE_FLEXIBLE + 10)
 		. += new/datum/stack_recipe/furniture/door(src)
 		. += new/datum/stack_recipe/furniture/barricade(src)
 		. += new/datum/stack_recipe/furniture/stool(src)
@@ -49,7 +49,7 @@
 		. += new/datum/stack_recipe/furniture/wall_frame(src)
 		. += new/datum/stack_recipe/furniture/table_frame(src)
 
-	if(hardness > MATERIAL_RIGID + 10)
+	if(hardness > MAT_VALUE_RIGID + 10)
 		. += new/datum/stack_recipe/fork(src)
 		. += new/datum/stack_recipe/knife(src)
 		. += new/datum/stack_recipe/bell(src)

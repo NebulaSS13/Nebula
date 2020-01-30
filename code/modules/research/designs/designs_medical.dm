@@ -1,5 +1,5 @@
 /datum/design/item/medical
-	materials = list(MATERIAL_STEEL = 30, MATERIAL_GLASS = 20)
+	materials = list(MAT_STEEL = 30, MAT_GLASS = 20)
 
 /datum/design/item/medical/AssembleDesignName()
 	..()
@@ -9,7 +9,7 @@
 	desc = "Multipurpose organic life scanner."
 	id = "slime_scanner"
 	req_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
-	materials = list(MATERIAL_STEEL = 200, MATERIAL_GLASS = 100, MATERIAL_PLASTIC = 150)
+	materials = list(MAT_STEEL = 200, MAT_GLASS = 100, MAT_PLASTIC = 150)
 	build_path = /obj/item/scanner/xenobio
 	sort_string = "MACFA"
 
@@ -17,7 +17,7 @@
 	desc = "A hand-held scanner able to diagnose robotic injuries."
 	id = "robot_scanner"
 	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 3)
-	materials = list(MATERIAL_STEEL = 500, MATERIAL_GLASS = 200, MATERIAL_PLASTIC = 150)
+	materials = list(MAT_STEEL = 500, MAT_GLASS = 200, MAT_PLASTIC = 150)
 	build_path = /obj/item/robotanalyzer
 	sort_string = "MACFB"
 
@@ -53,7 +53,7 @@
 	desc = "A tube of paste containing swarms of repair nanites. Very effective in repairing robotic machinery."
 	id = "nanopaste"
 	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
-	materials = list(MATERIAL_STEEL = 7000, MATERIAL_GLASS = 7000)
+	materials = list(MAT_STEEL = 7000, MAT_GLASS = 7000)
 	build_path = /obj/item/stack/nanopaste
 	sort_string = "MADAA"
 
@@ -61,7 +61,7 @@
 	desc = "A sterile, air-needle autoinjector for rapid administration of drugs"
 	id = "hypospray"
 	req_tech = list(TECH_MATERIAL = 4, TECH_BIO = 5)
-	materials = list(MATERIAL_STEEL = 8000, MATERIAL_GLASS = 8000, MATERIAL_SILVER = 2000)
+	materials = list(MAT_STEEL = 8000, MAT_GLASS = 8000, MAT_SILVER = 2000)
 	build_path = /obj/item/chems/hypospray/vial
 	sort_string = "MAEAA"
 
@@ -70,6 +70,6 @@
 	a hostile enviroment."
 	id = "cryobag"
 	req_tech = list(TECH_MATERIAL = 6, TECH_BIO = 6)
-	materials = list(MATERIAL_PLASTIC = 15000, MATERIAL_GLASS = 15000, MATERIAL_SILVER = 5000, MATERIAL_GOLD = 1000)
+	materials = list(MAT_PLASTIC = 15000, MAT_GLASS = 15000, MAT_SILVER = 5000, MAT_GOLD = 1000)
 	build_path = /obj/item/bodybag/cryobag
 	sort_string = "MAFAA"

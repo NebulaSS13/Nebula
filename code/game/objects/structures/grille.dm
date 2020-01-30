@@ -10,7 +10,7 @@
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
 	rad_resistance_modifier = 0.1
-	var/init_material = MATERIAL_STEEL
+	var/init_material = MAT_STEEL
 	var/health = 10
 	var/destroyed = 0
 
@@ -251,7 +251,7 @@
 /obj/structure/grille/cult
 	name = "cult grille"
 	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
-	init_material = MATERIAL_CULT
+	init_material = MAT_CULT
 
 /obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
 	if(air_group)

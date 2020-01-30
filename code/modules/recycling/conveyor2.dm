@@ -246,7 +246,7 @@
 	desc = "A conveyor belt assembly. Must be linked to a conveyor control switch assembly before placement."
 	w_class = ITEM_SIZE_HUGE
 	var/id = "" //inherited by the belt
-	matter = list(MATERIAL_STEEL = 400, MATERIAL_PLASTIC = 200)
+	matter = list(MAT_STEEL = 400, MAT_PLASTIC = 200)
 
 /obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
 	..()
@@ -278,7 +278,7 @@
 	icon_state = "switch-off"
 	w_class = ITEM_SIZE_HUGE
 	var/id = "" //inherited by the switch
-	matter = list(MATERIAL_STEEL = 200)
+	matter = list(MAT_STEEL = 200)
 
 
 /obj/item/conveyor_switch_construct/Initialize()

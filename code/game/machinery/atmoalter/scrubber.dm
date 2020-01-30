@@ -23,7 +23,7 @@
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
 		for(var/g in gas_data.gases)
-			if(g != MATERIAL_OXYGEN && g != MATERIAL_NITROGEN)
+			if(g != MAT_OXYGEN && g != MAT_NITROGEN)
 				scrubbing_gas += g
 
 

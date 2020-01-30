@@ -8,4 +8,4 @@
 	ruin_tags = RUIN_HUMAN|RUIN_HABITAT
 
 /turf/simulated/floor/wood/usedup
-	initial_gas = list(MATERIAL_CO2 = MOLES_O2STANDARD, MATERIAL_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(MAT_CO2 = MOLES_O2STANDARD, MAT_NITROGEN = MOLES_N2STANDARD)
