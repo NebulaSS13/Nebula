@@ -1,4 +1,3 @@
-GLOBAL_LIST_INIT(fusion_reactions, list())
 
 /decl/fusion_reaction
 	var/p_react = "" // Primary reactant.
@@ -16,109 +15,81 @@ GLOBAL_LIST_INIT(fusion_reactions, list())
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0
 
-proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
-	if(!LAZYLEN(GLOB.fusion_reactions))
-		for(var/rtype in typesof(/decl/fusion_reaction) - /decl/fusion_reaction)
-			var/decl/fusion_reaction/cur_reaction = new rtype()
-			if(!GLOB.fusion_reactions[cur_reaction.p_react])
-				GLOB.fusion_reactions[cur_reaction.p_react] = list()
-			GLOB.fusion_reactions[cur_reaction.p_react][cur_reaction.s_react] = cur_reaction
-			if(!GLOB.fusion_reactions[cur_reaction.s_react])
-				GLOB.fusion_reactions[cur_reaction.s_react] = list()
-			GLOB.fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
-
-	if(GLOB.fusion_reactions.Find(p_react))
-		var/list/secondary_reactions = GLOB.fusion_reactions[p_react]
-		if(secondary_reactions.Find(s_react))
-			return GLOB.fusion_reactions[p_react][s_react]
-
-// Material fuels
-//  deuterium
-//  tritium
-//  phoron
-//  supermatter
-
-// Gaseous/reagent fuels
-// hydrogen
-//  helium
-//  lithium
-//  boron
-
 // Basic power production reactions.
 // This is not necessarily realistic, but it makes a basic failure more spectacular.
 /decl/fusion_reaction/hydrogen_hydrogen
-	p_react = GAS_HYDROGEN
-	s_react = GAS_HYDROGEN
+	p_react = MAT_HYDROGEN
+	s_react = MAT_HYDROGEN
 	energy_consumption = 1
 	energy_production = 2
-	products = list(GAS_HELIUM = 1)
+	products = list(MAT_HELIUM = 1)
 	priority = 10
 
 /decl/fusion_reaction/deuterium_deuterium
-	p_react = GAS_DEUTERIUM
-	s_react = GAS_DEUTERIUM
+	p_react = MAT_DEUTERIUM
+	s_react = MAT_DEUTERIUM
 	energy_consumption = 1
 	energy_production = 2
 	priority = 0
 
 // Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
-	p_react = GAS_DEUTERIUM
-	s_react = GAS_HELIUM
+	p_react = MAT_DEUTERIUM
+	s_react = MAT_HELIUM
 	energy_consumption = 1
 	energy_production = 5
 	radiation = 2
 
 /decl/fusion_reaction/deuterium_tritium
-	p_react = GAS_DEUTERIUM
-	s_react = GAS_TRITIUM
+	p_react = MAT_DEUTERIUM
+	s_react = MAT_TRITIUM
 	energy_consumption = 1
 	energy_production = 1
-	products = list(GAS_HELIUM = 1)
+	products = list(MAT_HELIUM = 1)
 	instability = 0.5
 	radiation = 3
 
 /decl/fusion_reaction/deuterium_lithium
-	p_react = GAS_DEUTERIUM
-	s_react = "lithium"
+	p_react = MAT_DEUTERIUM
+	s_react = MAT_LITHIUM
 	energy_consumption = 2
 	energy_production = 0
 	radiation = 3
-	products = list(GAS_TRITIUM= 1)
+	products = list(MAT_TRITIUM= 1)
 	instability = 1
 
 // Unideal/material production reactions
 /decl/fusion_reaction/oxygen_oxygen
-	p_react = GAS_OXYGEN
-	s_react = GAS_OXYGEN
+	p_react = MAT_OXYGEN
+	s_react = MAT_OXYGEN
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
 	radiation = 5
-	products = list("silicon"= 1)
+	products = list(MAT_SILICON = 1)
 
 /decl/fusion_reaction/iron_iron
-	p_react = "iron"
-	s_react = "iron"
-	products = list("silver" = 10, "gold" = 10, "platinum" = 10) // Not realistic but w/e
+	p_react = MAT_IRON
+	s_react = MAT_IRON
+	products = list(MAT_SILVER = 10, MAT_GOLD = 10, MAT_PLATINUM = 10) // Not realistic but w/e
 	energy_consumption = 10
 	energy_production = 0
 	instability = 2
 	minimum_reaction_temperature = 10000
 
 /decl/fusion_reaction/phoron_hydrogen
-	p_react = GAS_HYDROGEN
-	s_react = GAS_PHORON
+	p_react = MAT_HYDROGEN
+	s_react = MAT_PHORON
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
-	products = list("mhydrogen" = 1)
+	products = list(MAT_METALLIC_HYDROGEN = 1)
 	minimum_reaction_temperature = 8000
 
 // VERY UNIDEAL REACTIONS.
 /decl/fusion_reaction/phoron_supermatter
-	p_react = "supermatter"
-	s_react = GAS_PHORON
+	p_react = MAT_SUPERMATTER
+	s_react = MAT_PHORON
 	energy_consumption = 0
 	energy_production = 5
 	radiation = 40
@@ -145,7 +116,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 				H.hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
-		if(I.cur_assembly && I.cur_assembly.fuel_type == MATERIAL_SUPERMATTER)
+		if(I.cur_assembly && I.cur_assembly.fuel_type == MAT_SUPERMATTER)
 			explosion(get_turf(I), 1, 2, 3)
 			spawn(5)
 				if(I && I.loc)
@@ -156,11 +127,10 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 
 	return 1
 
-
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen
-	p_react = "boron"
-	s_react = GAS_HYDROGEN
+	p_react = MAT_BORON
+	s_react = MAT_HYDROGEN
 	minimum_energy_level = FUSION_HEAT_CAP * 0.5
 	energy_consumption = 3
 	energy_production = 15

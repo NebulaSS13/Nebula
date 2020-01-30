@@ -69,7 +69,7 @@
 	item_state = "machete"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
-	material = MATERIAL_TITANIUM
+	material = MAT_TITANIUM
 	base_parry_chance = 50
 	max_force = 20
 	material_force_multiplier = 0.20 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
@@ -80,9 +80,9 @@
 /obj/item/material/hatchet/machete/steel
 	name = "fabricated machete"
 	desc = "A long, machine-stamped blade with a somewhat ungainly handle. Found in military surplus stores, malls, and horror movies since before interstellar travel."
-	material = MATERIAL_STEEL
+	material = MAT_STEEL
 	base_parry_chance = 40
-	matter = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 2500)
+	matter = list(MAT_STEEL = 15000, MAT_PLASTIC = 2500)
 
 /obj/item/material/hatchet/machete/Initialize()
 	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"
@@ -140,10 +140,10 @@
 	attack_verb = list("attacked", "bashed")
 
 /obj/item/material/cross/wood
-	material = MATERIAL_WOOD
+	material = MAT_WOOD
 
 /obj/item/material/cross/silver
-	material = MATERIAL_SILVER
+	material = MAT_SILVER
 
 /obj/item/material/cross/gold
-	material = MATERIAL_GOLD
+	material = MAT_GOLD

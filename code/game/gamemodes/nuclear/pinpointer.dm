@@ -6,7 +6,7 @@
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	matter = list(MATERIAL_STEEL = 500)
+	matter = list(MAT_STEEL = 500)
 	var/weakref/target
 	var/active = 0
 	var/beeping = 2

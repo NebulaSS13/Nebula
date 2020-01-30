@@ -4,7 +4,7 @@
 
 /datum/design/item/smes_coil
 	desc = "A superconductive magnetic coil used to store power in magnetic fields."
-	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000, MATERIAL_SILVER = 1000, MATERIAL_ALUMINIUM = 500)
+	materials = list(MAT_STEEL = 2000, MAT_GLASS = 2000, MAT_GOLD = 1000, MAT_SILVER = 1000, MAT_ALUMINIUM = 500)
 
 /datum/design/item/smes_coil/standard
 	name = "standard"

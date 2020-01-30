@@ -15,7 +15,7 @@
 
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_PLASTIC = 0, MATERIAL_GLASS = 0, MATERIAL_GOLD = 0, MATERIAL_SILVER = 0, MATERIAL_PHORON = 0, MATERIAL_URANIUM = 0, MATERIAL_DIAMOND = 0)
+	var/list/materials = list(MAT_STEEL = 0, MAT_ALUMINIUM = 0, MAT_PLASTIC = 0, MAT_GLASS = 0, MAT_GOLD = 0, MAT_SILVER = 0, MAT_PHORON = 0, MAT_URANIUM = 0, MAT_DIAMOND = 0)
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -148,7 +148,7 @@
 		return ..()
 
 	var/obj/item/stack/material/stack = I
-	var/material = stack.material.name
+	var/material = stack.material.type
 	var/stack_singular = "[stack.material.use_name] [stack.material.sheet_singular_name]" // eg "steel sheet", "wood plank"
 	var/stack_plural = "[stack.material.use_name] [stack.material.sheet_plural_name]" // eg "steel sheets", "wood planks"
 	var/amnt = stack.perunit
@@ -285,23 +285,23 @@
 	material = lowertext(material)
 	var/mattype
 	switch(material)
-		if(MATERIAL_STEEL)
+		if(MAT_STEEL)
 			mattype = /obj/item/stack/material/steel
-		if(MATERIAL_GLASS)
+		if(MAT_GLASS)
 			mattype = /obj/item/stack/material/glass
-		if(MATERIAL_ALUMINIUM)
+		if(MAT_ALUMINIUM)
 			mattype = /obj/item/stack/material/aluminium
-		if(MATERIAL_PLASTIC)
+		if(MAT_PLASTIC)
 			mattype = /obj/item/stack/material/plastic
-		if(MATERIAL_GOLD)
+		if(MAT_GOLD)
 			mattype = /obj/item/stack/material/gold
-		if(MATERIAL_SILVER)
+		if(MAT_SILVER)
 			mattype = /obj/item/stack/material/silver
-		if(MATERIAL_DIAMOND)
+		if(MAT_DIAMOND)
 			mattype = /obj/item/stack/material/diamond
-		if(MATERIAL_PHORON)
+		if(MAT_PHORON)
 			mattype = /obj/item/stack/material/phoron
-		if(MATERIAL_URANIUM)
+		if(MAT_URANIUM)
 			mattype = /obj/item/stack/material/uranium
 		else
 			return

@@ -34,18 +34,18 @@
 	. += " <a href='?src=\ref[src];examine=1'>\[View\]</a>"
 
 /obj/item/clothing/ring/material/wood
-	material = MATERIAL_WALNUT
+	material = MAT_WALNUT
 /obj/item/clothing/ring/material/plastic
-	material = MATERIAL_PLASTIC
+	material = MAT_PLASTIC
 /obj/item/clothing/ring/material/steel
-	material = MATERIAL_STEEL
+	material = MAT_STEEL
 /obj/item/clothing/ring/material/silver
-	material = MATERIAL_SILVER
+	material = MAT_SILVER
 /obj/item/clothing/ring/material/gold
-	material = MATERIAL_GOLD
+	material = MAT_GOLD
 /obj/item/clothing/ring/material/platinum
-	material = MATERIAL_PLATINUM
+	material = MAT_PLATINUM
 /obj/item/clothing/ring/material/bronze
-	material = MATERIAL_BRONZE
+	material = MAT_BRONZE
 /obj/item/clothing/ring/material/glass
-	material = MATERIAL_GLASS
+	material = MAT_GLASS

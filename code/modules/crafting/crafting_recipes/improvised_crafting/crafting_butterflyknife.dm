@@ -29,4 +29,4 @@
 
 /decl/crafting_stage/screwdriver/balisong/get_product(var/obj/item/work)
 	var/obj/item/material/butterflyblade/blade = locate() in work
-	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.name)
+	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.type)

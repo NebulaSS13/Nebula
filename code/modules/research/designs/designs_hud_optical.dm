@@ -1,5 +1,5 @@
 /datum/design/item/hud
-	materials = list(MATERIAL_ALUMINIUM = 50, MATERIAL_GLASS = 50)
+	materials = list(MAT_ALUMINIUM = 50, MAT_GLASS = 50)
 
 /datum/design/item/hud/AssembleDesignName()
 	..()
@@ -32,7 +32,7 @@
 /datum/design/item/optical/AssembleDesignName()
 	..()
 	name = "Optical glasses design ([item_name])"
-	materials = list(MATERIAL_STEEL = 50, MATERIAL_GLASS = 50)
+	materials = list(MAT_STEEL = 50, MAT_GLASS = 50)
 
 /datum/design/item/optical/mesons
 	name = "mesons"
@@ -53,6 +53,6 @@
 	name = "tactical"
 	id = "tactical_goggles"
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 5)
-	materials = list(MATERIAL_STEEL = 50, MATERIAL_GLASS = 50, MATERIAL_SILVER = 50, MATERIAL_GOLD = 50)
+	materials = list(MAT_STEEL = 50, MAT_GLASS = 50, MAT_SILVER = 50, MAT_GOLD = 50)
 	build_path = /obj/item/clothing/glasses/tacgoggles
 	sort_string = "GAAAC"

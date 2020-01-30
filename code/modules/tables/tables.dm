@@ -28,10 +28,10 @@
 
 /obj/structure/table/Initialize()
 	..()
-	if(istext(material))
-		material = SSmaterials.get_material_by_name(material)
-	if(istext(reinforced))
-		reinforced = SSmaterials.get_material_by_name(reinforced)
+	if(ispath(material, /material))
+		material = SSmaterials.get_material_datum(material)
+	if(ispath(reinforced, /material))
+		reinforced = SSmaterials.get_material_datum(reinforced)
 	// One table per turf.
 	for(var/obj/structure/table/T in loc)
 		if(T != src)
@@ -295,7 +295,7 @@
 	if(full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
-		var/material/M = SSmaterials.get_material_by_name(MATERIAL_STEEL)
+		var/material/M = SSmaterials.get_material_datum(MAT_STEEL)
 		S = M.place_shard(loc)
 		if(S) shards += S
 	qdel(src)
@@ -341,7 +341,7 @@
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
 			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
-			if (T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.name == material.name)
+			if (T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.type == material.type)
 				type++
 				tabledirs |= direction
 
@@ -421,7 +421,7 @@
 		if(!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
-		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
+		if(material && T.material && material.type == T.material.type && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
 			spawn(0)

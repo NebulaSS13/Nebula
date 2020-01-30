@@ -28,7 +28,7 @@
 
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
-	material = SSmaterials.get_material_by_name(materialtype)
+	material = SSmaterials.get_material_datum(materialtype)
 	health = material.integrity
 
 /obj/structure/wall_frame/LateInitialize()
@@ -176,7 +176,7 @@
 	paint_color = COLOR_WALL_GUNMETAL
 
 /obj/structure/wall_frame/titanium
-	material = MATERIAL_TITANIUM
+	material = MAT_TITANIUM
 
 /obj/structure/wall_frame/hull
 	paint_color = COLOR_HULL

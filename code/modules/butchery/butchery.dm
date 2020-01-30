@@ -6,9 +6,9 @@
 /mob/living
 	var/meat_type =         /obj/item/chems/food/snacks/meat
 	var/meat_amount =       3
-	var/skin_material =     MATERIAL_SKIN_GENERIC
+	var/skin_material =     MAT_SKIN_GENERIC
 	var/skin_amount =       3
-	var/bone_material =     MATERIAL_BONE_GENERIC
+	var/bone_material =     MAT_BONE_GENERIC
 	var/bone_amount =       3
 	var/skull_type
 	var/butchery_rotation = 90
@@ -43,7 +43,7 @@
 /mob/living/proc/harvest_skin()
 	. = list()
 	if(skin_material && skin_amount)
-		var/material/M = SSmaterials.get_material_by_name(skin_material)
+		var/material/M = SSmaterials.get_material_datum(skin_material)
 		. += new M.stack_type(get_turf(src), skin_amount, skin_material)
 		blood_splatter(get_turf(src), src, large = TRUE)
 
@@ -51,7 +51,7 @@
 	. = list()
 	var/turf/T = get_turf(src)
 	if(bone_material && bone_amount)
-		var/material/M = SSmaterials.get_material_by_name(bone_material)
+		var/material/M = SSmaterials.get_material_datum(bone_material)
 		. += new M.stack_type(T, bone_amount, bone_material)
 		blood_splatter(T, src, large = TRUE)
 	if(skull_type)

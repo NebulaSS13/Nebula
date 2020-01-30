@@ -1,6 +1,6 @@
 /decl/crafting_stage/material/ed209_start
 	stack_consume_amount = 5
-	stack_material = MATERIAL_STEEL
+	stack_material = MAT_STEEL
 	begins_with_object_type = /obj/item/robot_parts/robot_suit
 	next_stages = list(/decl/crafting_stage/ed209_legs)
 	progress_message = "You bulk out the robotic frame with the steel sheets."

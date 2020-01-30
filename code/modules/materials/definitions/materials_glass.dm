@@ -1,15 +1,15 @@
 
 /material/glass
-	name = MATERIAL_GLASS
+	display_name = "glass"
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	stack_type = /obj/item/stack/material/glass
-	flags = MATERIAL_BRITTLE
+	flags = MAT_FLAG_BRITTLE
 	icon_colour = GLASS_COLOR
 	opacity = 0.3
 	integrity = 50
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = MATERIAL_RIGID + 10	
+	hardness = MAT_VALUE_RIGID + 10	
 	melting_point = T0C + 100
 	weight = 14
 	brute_armor = 1
@@ -30,12 +30,11 @@
 	return ..() && !is_reinforced()
 
 /material/glass/phoron
-	name = MATERIAL_PHORON_GLASS
-	lore_text = "An extremely heat-resistant form of glass."
 	display_name = "borosilicate glass"
+	lore_text = "An extremely heat-resistant form of glass."
 	stack_type = /obj/item/stack/material/glass/phoronglass
-	flags = MATERIAL_BRITTLE
-	hardness = MATERIAL_HARD
+	flags = MAT_FLAG_BRITTLE
+	hardness = MAT_VALUE_HARD
 	integrity = 70
 	brute_armor = 2
 	burn_armor = 5
@@ -43,8 +42,8 @@
 	icon_colour = GLASS_COLOR_PHORON
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	wire_product = null
-	construction_difficulty = MATERIAL_HARD_DIY
+	construction_difficulty = MAT_VALUE_HARD_DIY
 	alloy_product = TRUE
-	alloy_materials = list(MATERIAL_GLASS = 2500, MATERIAL_PLATINUM = 1250)
+	alloy_materials = list(MAT_GLASS = 2500, MAT_PLATINUM = 1250)
 	sale_price = 2
 	value = 40

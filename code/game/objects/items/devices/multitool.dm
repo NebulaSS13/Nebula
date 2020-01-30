@@ -14,7 +14,7 @@
 	throw_range = 15
 	throw_speed = 3
 
-	matter = list(MATERIAL_PLASTIC = 50, MATERIAL_GLASS = 20, MATERIAL_STEEL = 5)
+	matter = list(MAT_PLASTIC = 50, MAT_GLASS = 20, MAT_STEEL = 5)
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 

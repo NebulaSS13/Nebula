@@ -557,7 +557,7 @@
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched
-	matter = list(MATERIAL_STEEL = 60)
+	matter = list(MAT_STEEL = 60)
 	var/rigged = 0		// true if rigged to explode
 	var/broken_chance = 2
 
@@ -575,7 +575,7 @@
 	icon_state = "ltube"
 	base_state = "ltube"
 	item_state = "c_tube"
-	matter = list(MATERIAL_GLASS = 100, MATERIAL_ALUMINIUM = 20)
+	matter = list(MAT_GLASS = 100, MAT_ALUMINIUM = 20)
 
 	b_outer_range = 5
 	b_colour = "#fffee0"
@@ -607,7 +607,7 @@
 	base_state = "lbulb"
 	item_state = "contvapour"
 	broken_chance = 3
-	matter = list(MATERIAL_GLASS = 100)
+	matter = list(MAT_GLASS = 100)
 
 	b_max_bright = 0.6
 	b_inner_range = 0.1
@@ -637,7 +637,7 @@
 	icon_state = "fbulb"
 	base_state = "fbulb"
 	item_state = "egg4"
-	matter = list(MATERIAL_GLASS = 100)
+	matter = list(MAT_GLASS = 100)
 
 // update the icon state and description of the light
 /obj/item/light/on_update_icon()

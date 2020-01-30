@@ -26,7 +26,7 @@
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_atmosphere()
 	..()
 	if(atmosphere)
-		atmosphere.adjust_gas(GAS_CHLORINE, MOLES_O2STANDARD)
+		atmosphere.adjust_gas(MAT_CHLORINE, MOLES_O2STANDARD)
 		atmosphere.temperature = T100C - rand(0, 100)
 		atmosphere.update_values()
 
@@ -64,6 +64,6 @@
 	dirt_color = "#d2e0b7"
 	footstep_type = /decl/footsteps/sand
 
-/turf/simulated/floor/exoplanet/chlorine_sand/New()
+/turf/simulated/floor/exoplanet/chlorine_sand/Initialize(var/ml)
+	. = ..()
 	icon_state = "chlorine_sand[rand(0,11)]"
-	..()

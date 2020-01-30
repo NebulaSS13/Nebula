@@ -131,35 +131,35 @@
 	initial_gas = null
 
 /turf/simulated/floor/reinforced/airmix
-	initial_gas = list(GAS_OXYGEN = MOLES_O2ATMOS, GAS_NITROGEN = MOLES_N2ATMOS)
+	initial_gas = list(MAT_OXYGEN = MOLES_O2ATMOS, MAT_NITROGEN = MOLES_N2ATMOS)
 
 /turf/simulated/floor/reinforced/nitrogen
-	initial_gas = list(GAS_NITROGEN = ATMOSTANK_NITROGEN)
+	initial_gas = list(MAT_NITROGEN = ATMOSTANK_NITROGEN)
 
 /turf/simulated/floor/reinforced/hydrogen
-	initial_gas = list(GAS_HYDROGEN = ATMOSTANK_HYDROGEN)
+	initial_gas = list(MAT_HYDROGEN = ATMOSTANK_HYDROGEN)
 
 /turf/simulated/floor/reinforced/oxygen
-	initial_gas = list(GAS_OXYGEN = ATMOSTANK_OXYGEN)
+	initial_gas = list(MAT_OXYGEN = ATMOSTANK_OXYGEN)
 
 /turf/simulated/floor/reinforced/phoron
-	initial_gas = list(GAS_PHORON = ATMOSTANK_PHORON)
+	initial_gas = list(MAT_PHORON = ATMOSTANK_PHORON)
 
 /turf/simulated/floor/reinforced/nitrogen/engine
 	name = "engine floor"
-	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(MAT_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/reinforced/phoron/fuel
-	initial_gas = list(GAS_PHORON = ATMOSTANK_PHORON_FUEL)
+	initial_gas = list(MAT_PHORON = ATMOSTANK_PHORON_FUEL)
 
 /turf/simulated/floor/reinforced/hydrogen/fuel
-	initial_gas = list(GAS_HYDROGEN = ATMOSTANK_HYDROGEN_FUEL)
+	initial_gas = list(MAT_HYDROGEN = ATMOSTANK_HYDROGEN_FUEL)
 
 /turf/simulated/floor/reinforced/carbon_dioxide
-	initial_gas = list(GAS_CO2 = ATMOSTANK_CO2)
+	initial_gas = list(MAT_CO2 = ATMOSTANK_CO2)
 
 /turf/simulated/floor/reinforced/n20
-	initial_gas = list(GAS_N2O = ATMOSTANK_NITROUSOXIDE)
+	initial_gas = list(MAT_N2O = ATMOSTANK_NITROUSOXIDE)
 
 
 /turf/simulated/floor/cult
@@ -307,7 +307,7 @@
 	temperature = TCMB
 
 /turf/simulated/floor/greengrid/nitrogen
-	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(MAT_NITROGEN = MOLES_N2STANDARD)
 
 // Placeholders
 /turf/simulated/floor/airless/lava
@@ -325,9 +325,9 @@
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
 
-/turf/simulated/floor/snow/New()
+/turf/simulated/floor/snow/Initialize()
+	. = ..()
 	icon_state = pick("snow[rand(1,12)]","snow0")
-	..()
 
 /turf/simulated/floor/light
 /turf/simulated/floor/airless/ceiling
@@ -344,9 +344,9 @@
 	icon_state = "desert"
 	has_resources = 1
 
-/turf/simulated/floor/beach/sand/desert/New()
+/turf/simulated/floor/beach/sand/desert/Initialize()
+	. = ..()
 	icon_state = "desert[rand(0,5)]"
-	..()
 
 /turf/simulated/floor/beach/coastline
 	name = "coastline"
@@ -368,8 +368,8 @@
 /turf/simulated/floor/beach/water/ocean
 	icon_state = "seadeep"
 
-/turf/simulated/floor/beach/water/New()
-	..()
+/turf/simulated/floor/beach/water/Initialize()
+	. = ..()
 	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water5","layer"=MOB_LAYER+0.1)
 
 /turf/simulated/floor/crystal

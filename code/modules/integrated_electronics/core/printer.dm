@@ -14,7 +14,7 @@
 	var/cloning = FALSE			// If the printer is currently creating a circuit
 	var/recycling = FALSE		// If an assembly is being emptied into this printer
 	var/list/program			// Currently loaded save, in form of list
-	var/materials = list(MATERIAL_STEEL = 0)
+	var/materials = list(MAT_STEEL = 0)
 	var/metal_max = 25 * SHEET_MATERIAL_AMOUNT
 
 /obj/item/integrated_circuit_printer/proc/check_interactivity(mob/user)
@@ -48,7 +48,7 @@
 		return
 	for(var/material in O.matter)
 		if(materials[material] + O.matter[material] > metal_max)
-			var/material/material_datum = SSmaterials.get_material_by_name(material)
+			var/material/material_datum = SSmaterials.get_material_datum(material)
 			if(material_datum)
 				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.display_name]!</span>")
 			return
@@ -65,10 +65,10 @@
 	if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/M = O
 		var/amt = M.amount
-		if(amt * SHEET_MATERIAL_AMOUNT + materials[M.material.name] > metal_max)
-			amt = -round(-(metal_max - materials[M.material.name]) / SHEET_MATERIAL_AMOUNT) //round up
+		if(amt * SHEET_MATERIAL_AMOUNT + materials[M.material.type] > metal_max)
+			amt = -round(-(metal_max - materials[M.material.type]) / SHEET_MATERIAL_AMOUNT) //round up
 		if(M.use(amt))
-			materials[M.material.name] = min(metal_max, materials[M.material.name] + amt * SHEET_MATERIAL_AMOUNT)
+			materials[M.material.type] = min(metal_max, materials[M.material.type] + amt * SHEET_MATERIAL_AMOUNT)
 			to_chat(user, "<span class='warning'>You insert [M.material.display_name] into \the [src].</span>")
 			if(user)
 				attack_self(user) // We're really bad at refreshing the UI, so this is the best we've got.
@@ -148,7 +148,7 @@
 		HTML += "Materials: "
 		var/list/dat = list()
 		for(var/material in materials)
-			var/material/material_datum = SSmaterials.get_material_by_name(material)
+			var/material/material_datum = SSmaterials.get_material_datum(material)
 			dat += "[materials[material]]/[metal_max] [material_datum.display_name]"
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
@@ -322,7 +322,7 @@
 /obj/item/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
 	for(var/material in cost)
 		if(materials[material] < cost[material])
-			var/material/material_datum = SSmaterials.get_material_by_name(material)
+			var/material/material_datum = SSmaterials.get_material_datum(material)
 			to_chat(user, "<span class='warning'>You need [cost[material]] [material_datum.display_name] to build that!</span>")
 			return FALSE
 	for(var/material in cost) //Iterate twice to make sure it's going to work before deducting

@@ -29,7 +29,8 @@
 /proc/list_gases(var/gases)
 	. = list()
 	for(var/g in gases)
-		. += "[gas_data.name[g]] ([gases[g]]%)"
+		var/material/mat = SSmaterials.get_material_datum(g)
+		. += "[capitalize(mat.display_name)] ([gases[g]]%)"
 	return english_list(.)
 
 /proc/xenobio_scan_results(mob/target)
@@ -41,8 +42,12 @@
 		var/mob/living/carbon/human/H = target
 		. += "Data for [H]:"
 		. += "Species:\t[H.species]"
-		. += "Breathes:\t[gas_data.name[H.species.breath_type]]"
-		. += "Exhales:\t[gas_data.name[H.species.exhale_type]]"
+		if(H.species.breath_type)
+			var/material/mat = SSmaterials.get_material_datum(H.species.breath_type)
+			. += "Breathes:\t[mat.display_name]"
+		if(H.species.exhale_type)
+			var/material/mat = SSmaterials.get_material_datum(H.species.exhale_type)
+			. += "Exhales:\t[mat.display_name]"
 		. += "Known toxins:\t[english_list(H.species.poison_types)]"
 		. += "Temperature comfort zone:\t[H.species.cold_discomfort_level] K to [H.species.heat_discomfort_level] K"
 		. += "Pressure comfort zone:\t[H.species.warning_low_pressure] kPa to [H.species.warning_high_pressure] kPa"

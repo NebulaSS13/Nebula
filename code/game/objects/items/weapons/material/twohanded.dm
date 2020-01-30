@@ -114,7 +114,7 @@
 	sharp = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
-	material = MATERIAL_GLASS
+	material = MAT_GLASS
 	does_spin = FALSE
 	base_worth = 7
 
@@ -134,7 +134,7 @@
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	material = MATERIAL_MAPLE
+	material = MAT_MAPLE
 	max_force = 40	//for wielded
 	material_force_multiplier = 1.1           // 22 when wielded with weight 20 (steel)
 	unwielded_material_force_multiplier = 0.7 // 15 when unwielded based on above.
@@ -142,16 +142,16 @@
 
 //Predefined materials go here.
 /obj/item/material/twohanded/baseballbat/metal/Initialize(mapload)
-	..(mapload, MATERIAL_ALUMINIUM)
+	..(mapload, MAT_ALUMINIUM)
 
 /obj/item/material/twohanded/baseballbat/uranium/Initialize(mapload)
-	. = ..(mapload, MATERIAL_URANIUM)
+	. = ..(mapload, MAT_URANIUM)
 
 /obj/item/material/twohanded/baseballbat/gold/Initialize(mapload)
-	. = ..(mapload, MATERIAL_GOLD)
+	. = ..(mapload, MAT_GOLD)
 
 /obj/item/material/twohanded/baseballbat/platinum/Initialize(mapload)
-	. = ..(mapload, MATERIAL_PLATINUM)
+	. = ..(mapload, MAT_PLATINUM)
 
 /obj/item/material/twohanded/baseballbat/diamond/Initialize(mapload)
-	. = ..(mapload, MATERIAL_DIAMOND)
+	. = ..(mapload, MAT_DIAMOND)

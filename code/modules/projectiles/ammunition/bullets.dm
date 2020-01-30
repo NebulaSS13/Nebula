@@ -65,7 +65,7 @@
 	spent_icon = "slshell-spent"
 	caliber = CALIBER_SHOTGUN
 	projectile_type = /obj/item/projectile/bullet/shotgun
-	matter = list(MATERIAL_STEEL = 360)
+	matter = list(MAT_STEEL = 360)
 	fall_sounds = list('sound/weapons/guns/shotgun_fall.ogg')
 
 /obj/item/ammo_casing/shotgun/pellet
@@ -74,7 +74,7 @@
 	icon_state = "gshell"
 	spent_icon = "gshell-spent"
 	projectile_type = /obj/item/projectile/bullet/pellet/shotgun
-	matter = list(MATERIAL_STEEL = 360)
+	matter = list(MAT_STEEL = 360)
 
 /obj/item/ammo_casing/shotgun/blank
 	name = "shotgun shell"
@@ -82,7 +82,7 @@
 	icon_state = "blshell"
 	spent_icon = "blshell-spent"
 	projectile_type = /obj/item/projectile/bullet/blank
-	matter = list(MATERIAL_STEEL = 90)
+	matter = list(MAT_STEEL = 90)
 
 /obj/item/ammo_casing/shotgun/practice
 	name = "shotgun shell"
@@ -90,7 +90,7 @@
 	icon_state = "pshell"
 	spent_icon = "pshell-spent"
 	projectile_type = /obj/item/projectile/bullet/shotgun/practice
-	matter = list(MATERIAL_STEEL = 90)
+	matter = list(MAT_STEEL = 90)
 
 /obj/item/ammo_casing/shotgun/beanbag
 	name = "beanbag shell"
@@ -98,7 +98,7 @@
 	icon_state = "bshell"
 	spent_icon = "bshell-spent"
 	projectile_type = /obj/item/projectile/bullet/shotgun/beanbag
-	matter = list(MATERIAL_STEEL = 180)
+	matter = list(MAT_STEEL = 180)
 
 //Can stun in one hit if aimed at the head, but
 //is blocked by clothing that stops tasers and is vulnerable to EMP
@@ -109,7 +109,7 @@
 	spent_icon = "stunshell-spent"
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 	leaves_residue = 0
-	matter = list(MATERIAL_STEEL = 360, MATERIAL_GLASS = 720)
+	matter = list(MAT_STEEL = 360, MAT_GLASS = 720)
 
 /obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
 	if(prob(100/severity)) BB = null
@@ -122,7 +122,7 @@
 	icon_state = "fshell"
 	spent_icon = "fshell-spent"
 	projectile_type = /obj/item/projectile/energy/flash/flare
-	matter = list(MATERIAL_STEEL = 90, MATERIAL_GLASS = 90)
+	matter = list(MAT_STEEL = 90, MAT_GLASS = 90)
 
 /obj/item/ammo_casing/rifle
 	desc = "A rifle bullet casing."
@@ -138,7 +138,7 @@
 	spent_icon = "lcasing-spent"
 	caliber = CALIBER_ANTIMATERIAL
 	projectile_type = /obj/item/projectile/bullet/rifle/shell
-	matter = list(MATERIAL_STEEL = 1250)
+	matter = list(MAT_STEEL = 1250)
 
 /obj/item/ammo_casing/shell/apds
 	name = "\improper APDS shell casing"
@@ -177,7 +177,7 @@
 	desc = "A pistol bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/small
 	icon_state = "pistolcasing_h"
-	matter = list(MATERIAL_STEEL = 130, MATERIAL_URANIUM = 100)
+	matter = list(MAT_STEEL = 130, MAT_URANIUM = 100)
 
 /obj/item/ammo_casing/pistol/small/emp
 	name = "small haywire round"
@@ -191,4 +191,4 @@
 	icon_state = "empshell"
 	spent_icon = "empshell-spent"
 	projectile_type  = /obj/item/projectile/ion
-	matter = list(MATERIAL_STEEL = 260, MATERIAL_URANIUM = 200)
+	matter = list(MAT_STEEL = 260, MAT_URANIUM = 200)

@@ -70,37 +70,37 @@
 /obj/machinery/atmospherics/unary/tank/air
 	name = "Pressure Tank (Air)"
 	icon_state = "air"
-	filling = list(GAS_OXYGEN = O2STANDARD, GAS_NITROGEN = N2STANDARD)
+	filling = list(MAT_OXYGEN = O2STANDARD, MAT_NITROGEN = N2STANDARD)
 
 /obj/machinery/atmospherics/unary/tank/oxygen
 	name = "Pressure Tank (Oxygen)"
 	icon_state = "o2"
-	filling = list(GAS_OXYGEN = 1)
+	filling = list(MAT_OXYGEN = 1)
 
 /obj/machinery/atmospherics/unary/tank/nitrogen
 	name = "Pressure Tank (Nitrogen)"
 	icon_state = "n2"
-	filling = list(GAS_NITROGEN = 1)
+	filling = list(MAT_NITROGEN = 1)
 
 /obj/machinery/atmospherics/unary/tank/carbon_dioxide
 	name = "Pressure Tank (Carbon Dioxide)"
 	icon_state = "co2"
-	filling = list(GAS_CO2 = 1)
+	filling = list(MAT_CO2 = 1)
 
 /obj/machinery/atmospherics/unary/tank/phoron
 	name = "Pressure Tank (Phoron)"
 	icon_state = "phoron"
-	filling = list(GAS_PHORON = 1)
+	filling = list(MAT_PHORON = 1)
 
 /obj/machinery/atmospherics/unary/tank/nitrous_oxide
 	name = "Pressure Tank (Nitrous Oxide)"
 	icon_state = "n2o"
-	filling = list(GAS_N2O = 1)
+	filling = list(MAT_N2O = 1)
 
 /obj/machinery/atmospherics/unary/tank/hydrogen
 	name = "Pressure Tank (Hydrogen)"
 	icon_state = "h2"
-	filling = list(GAS_HYDROGEN = 1)
+	filling = list(MAT_HYDROGEN = 1)
 
 /obj/item/pipe/tank
 	icon = 'icons/atmos/tank.dmi'

@@ -44,4 +44,4 @@
 
 /obj/item/stock_parts/radio/receiver/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	matter = list(MATERIAL_STEEL = 400)
+	matter = list(MAT_STEEL = 400)

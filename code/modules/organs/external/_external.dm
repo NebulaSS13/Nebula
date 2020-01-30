@@ -904,7 +904,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(DROPLIMB_BLUNT)
 			var/obj/gore
 			if(BP_IS_CRYSTAL(src))
-				gore = new /obj/item/material/shard(get_turf(victim), MATERIAL_CRYSTAL)
+				gore = new /obj/item/material/shard(get_turf(victim), MAT_CRYSTAL)
 			else if(BP_IS_PROSTHETIC(src))
 				gore = new /obj/effect/decal/cleanable/blood/gibs/robot(get_turf(victim))
 			else

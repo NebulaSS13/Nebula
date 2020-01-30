@@ -124,7 +124,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	busy = 1
 	use_power_oneoff(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
 
-	var/t = stack.material.name
+	var/t = stack.material.type
 	if(t)
 		if(do_after(usr, 16, src))
 			if(stack.use(amount))

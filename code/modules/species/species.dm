@@ -96,9 +96,9 @@
 	// Death vars.
 	var/meat_type =     /obj/item/chems/food/snacks/meat/human
 	var/meat_amount =   3
-	var/skin_material = MATERIAL_SKIN_GENERIC
+	var/skin_material = MAT_SKIN_GENERIC
 	var/skin_amount =   3
-	var/bone_material = MATERIAL_BONE_GENERIC
+	var/bone_material = MAT_BONE_GENERIC
 	var/bone_amount =   3
 	var/remains_type =  /obj/item/remains/xeno
 	var/gibbed_anim =   "gibbed-h"
@@ -115,9 +115,9 @@
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                             // Used for metabolizing reagents.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
-	var/breath_type = GAS_OXYGEN                                  // Non-oxygen gas breathed, if any.
-	var/poison_types = list(GAS_PHORON = TRUE, GAS_CHLORINE = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
-	var/exhale_type = GAS_CO2                          // Exhaled gas type.
+	var/breath_type = MAT_OXYGEN                                  // Non-oxygen gas breathed, if any.
+	var/poison_types = list(MAT_PHORON = TRUE, MAT_CHLORINE = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+	var/exhale_type = MAT_CO2                          // Exhaled gas type.
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
 	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees
 	var/cold_level_2 = 200                                      // Cold damage level 2 below this point.
@@ -768,8 +768,12 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 					dat += "</br><b>Vulnerable to [kind].</b>"
 				else if(damage_types[kind] < 1)
 					dat += "</br><b>Resistant to [kind].</b>"
-			dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
-			dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
+			if(breath_type)
+				var/material/mat = SSmaterials.get_material_datum(breath_type)
+				dat += "</br><b>They breathe [mat.display_name].</b>"
+			if(exhale_type)
+				var/material/mat = SSmaterials.get_material_datum(exhale_type)
+				dat += "</br><b>They exhale [mat.display_name].</b>"
 			if(LAZYLEN(poison_types))
 				dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"

@@ -52,8 +52,8 @@
 			extinguish()
 		else
 			environment.remove_by_flag(XGM_GAS_OXIDIZER, gas_consumption)
-			environment.adjust_gas(GAS_CO2, 0.5*gas_consumption,0)
-			environment.adjust_gas(GAS_CO, 0.5*gas_consumption)
+			environment.adjust_gas(MAT_CO2, 0.5*gas_consumption,0)
+			environment.adjust_gas(MAT_CO, 0.5*gas_consumption)
 
 /obj/item/clothing/mask/smokable/Process()
 	var/turf/location = get_turf(src)
@@ -291,7 +291,7 @@
 	name = "wooden tip"
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
 	icon_state = "woodbutt"
-	matter = list(MATERIAL_WOOD = 1)
+	matter = list(MAT_WOOD = 1)
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/W, var/mob/user)
 	..()

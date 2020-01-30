@@ -68,28 +68,28 @@
 /datum/objective/heist/salvage/choose_target()
 	switch(rand(1,8))
 		if(1)
-			target = MATERIAL_STEEL
+			target = MAT_STEEL
 			target_amount = 300
 		if(2)
-			target = MATERIAL_GLASS
+			target = MAT_GLASS
 			target_amount = 200
 		if(3)
-			target = MATERIAL_PLASTEEL
+			target = MAT_PLASTEEL
 			target_amount = 100
 		if(4)
-			target = MATERIAL_PHORON
+			target = MAT_PHORON
 			target_amount = 100
 		if(5)
-			target = MATERIAL_SILVER
+			target = MAT_SILVER
 			target_amount = 50
 		if(6)
-			target = MATERIAL_GOLD
+			target = MAT_GOLD
 			target_amount = 20
 		if(7)
-			target = MATERIAL_URANIUM
+			target = MAT_URANIUM
 			target_amount = 20
 		if(8)
-			target = MATERIAL_DIAMOND
+			target = MAT_DIAMOND
 			target_amount = 20
 
 	explanation_text = "Ransack the [station_name()] and escape with [target_amount] [target]."

@@ -84,7 +84,7 @@
 	. = ..()
 
 /obj/machinery/door/firedoor/get_material()
-	return SSmaterials.get_material_by_name(MATERIAL_STEEL)
+	return SSmaterials.get_material_datum(MAT_STEEL)
 
 /obj/machinery/door/firedoor/examine(mob/user, distance)
 	. = ..()

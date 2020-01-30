@@ -14,7 +14,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
-	matter = list(MATERIAL_ALUMINIUM = 1500, MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_PLASTIC = 500)
+	matter = list(MAT_ALUMINIUM = 1500, MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 500)
 
 /obj/item/integrated_electronics/wirer/on_update_icon()
 	icon_state = "wirer-[mode]"

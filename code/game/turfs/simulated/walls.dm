@@ -29,14 +29,14 @@
 	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/phoronbasic/full, /obj/structure/window/phoronreinforced/full) // Objects which to blend with
 	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
-/turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
-	..(newloc)
+/turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
+	. = ..(ml)
 	icon_state = "blank"
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
-	material = SSmaterials.get_material_by_name(materialtype)
+	material = SSmaterials.get_material_datum(materialtype)
 	if(!isnull(rmaterialtype))
-		reinf_material = SSmaterials.get_material_by_name(rmaterialtype)
+		reinf_material = SSmaterials.get_material_datum(rmaterialtype)
 	update_material()
 	hitsound = material.hitsound
 
@@ -199,7 +199,7 @@
 			O.forceMove(src)
 
 	clear_plants()
-	material = SSmaterials.get_material_by_name("placeholder")
+	material = SSmaterials.get_material_datum(MAT_PLACEHOLDER)
 	reinf_material = null
 	update_connections(1)
 
@@ -229,7 +229,7 @@
 		new/obj/effect/overlay/wallrot(src)
 
 /turf/simulated/wall/proc/can_melt()
-	if(material.flags & MATERIAL_UNMELTABLE)
+	if(material.flags & MAT_FLAG_UNMELTABLE)
 		return 0
 	return 1
 

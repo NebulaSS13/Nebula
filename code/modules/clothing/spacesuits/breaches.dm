@@ -179,10 +179,10 @@
 /obj/item/clothing/suit/space/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack/material))
 		var/repair_power = 0
-		switch(W.get_material_name())
-			if(MATERIAL_STEEL)
+		switch(W.get_material_type())
+			if(MAT_STEEL)
 				repair_power = 2
-			if(MATERIAL_PLASTIC)
+			if(MAT_PLASTIC)
 				repair_power = 1
 
 		if(!repair_power)

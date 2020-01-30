@@ -97,7 +97,7 @@
 		var/obj/item/stack/material/stack = O
 		var/material/material = stack.material
 		if(!length(material.chem_products))
-			to_chat(user, SPAN_NOTICE("\The [material.name] is unable to produce any usable reagents."))
+			to_chat(user, SPAN_NOTICE("\The [material.display_name] is unable to produce any usable reagents."))
 			return 1
 
 	else if(!O.reagents || !O.reagents.total_volume)

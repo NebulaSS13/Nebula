@@ -19,4 +19,4 @@
 		M.adjustToxLoss(rand(urgh/2,urgh))
 
 /obj/item/material/star/ninja
-	material = MATERIAL_URANIUM
+	material = MAT_URANIUM

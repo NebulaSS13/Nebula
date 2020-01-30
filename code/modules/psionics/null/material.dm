@@ -8,11 +8,11 @@
 	is_psionic_nullifier = TRUE
 
 /material/nullglass
-	name = MATERIAL_NULLGLASS
+	
 	icon_colour = COLOR_NULLGLASS
 	conductive = 1
 	stack_type = /obj/item/stack/material/nullglass
-	flags = MATERIAL_BRITTLE
+	flags = MAT_FLAG_BRITTLE
 	opacity = 0.5
 	integrity = 30
 	shard_type = SHARD_SHARD
@@ -28,4 +28,4 @@
 	. += new /datum/stack_recipe/tile/nullglass(src)
 
 /obj/item/material/shard/nullglass/New(var/newloc)
-	..(newloc, MATERIAL_NULLGLASS)
+	..(newloc, MAT_NULLGLASS)

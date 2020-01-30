@@ -219,8 +219,8 @@
 /turf/simulated/wall/containment
 	paint_color = COLOR_GRAY20
 
-/turf/simulated/wall/containment/New(var/newloc)
-	..(newloc,MATERIAL_CONCRETE, MATERIAL_ALIENALLOY)
+/turf/simulated/wall/containment/Initialize(var/ml)
+	. = ..(ml, MAT_CONCRETE, MAT_ALIENALLOY)
 
 /datum/random_map/maze/lab
 	wall_type =  /turf/simulated/wall/containment

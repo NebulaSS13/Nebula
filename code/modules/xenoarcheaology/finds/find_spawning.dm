@@ -25,7 +25,7 @@
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
 	if(istype(I, /obj/item/material))
 		var/obj/item/material/M = I
-		M.set_material(MATERIAL_ALIENALLOY)
+		M.set_material(MAT_ALIENALLOY)
 		source_material = "alien alloy"
 	else
 		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
@@ -251,7 +251,7 @@
 	item_type = "[pick("cylinder","tank","chamber")]"
 	var/obj/item/tank/new_item = new/obj/item/tank(loc)
 	new_item.air_contents.gas.Cut()
-	new_item.air_contents.adjust_gas(pick(gas_data.gases),15)
+	new_item.air_contents.adjust_gas(pick(SSmaterials.all_gasses),15)
 	additional_desc = "It [pick("gloops","sloshes")] slightly when you shake it."
 	return new_item
 
@@ -279,7 +279,7 @@
 	desc = "Salvaged lump of usable material."
 	find_type = ARCHAEO_METAL
 	apply_material_decorations = 0
-	var/list/possible_materials = list(MATERIAL_STEEL, MATERIAL_PLASTEEL, MATERIAL_TITANIUM, MATERIAL_GLASS)
+	var/list/possible_materials = list(MAT_STEEL, MAT_PLASTEEL, MAT_TITANIUM, MAT_GLASS)
 
 /obj/item/archaeological_find/material/spawn_item()
 	var/mat_to_spawn = pickweight(possible_materials)
@@ -290,7 +290,7 @@
 
 /obj/item/archaeological_find/material/exotic
 	item_type = "rare material lump"
-	possible_materials = list(MATERIAL_ALIENALLOY, MATERIAL_PHORON, MATERIAL_HYDROGEN, MATERIAL_PHORON_GLASS)
+	possible_materials = list(MAT_ALIENALLOY, MAT_PHORON, MAT_METALLIC_HYDROGEN, MAT_PHORON_GLASS)
 
 /obj/item/archaeological_find/crystal
 	item_type = "crystal"

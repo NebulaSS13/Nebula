@@ -106,8 +106,8 @@
 		id_tag = num2text(sequential_id("obj/machinery"))
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
-		for(var/g in gas_data.gases)
-			if(g != GAS_OXYGEN && g != GAS_NITROGEN)
+		for(var/g in SSmaterials.all_gasses)
+			if(g != MAT_OXYGEN && g != MAT_NITROGEN)
 				scrubbing_gas += g
 	var/area/A = get_area(src)
 	if(A && !A.air_scrub_names[id_tag])
@@ -241,7 +241,7 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on/sauna/Initialize()
 	. = ..()
-	scrubbing_gas -= GAS_STEAM
+	scrubbing_gas -= MAT_STEAM
 
 /decl/public_access/public_variable/scrubbing
 	expected_type = /obj/machinery/atmospherics/unary/vent_scrubber

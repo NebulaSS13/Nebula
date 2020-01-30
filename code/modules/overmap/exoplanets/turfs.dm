@@ -10,7 +10,7 @@
 /turf/simulated/floor/exoplanet/can_engrave()
 	return FALSE
 
-/turf/simulated/floor/exoplanet/New()
+/turf/simulated/floor/exoplanet/Initialize(var/ml)
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
@@ -24,7 +24,7 @@
 			set_light(E.lightlevel, 0.1, 2)
 			if(E.planetary_area && istype(loc, world.area))
 				ChangeArea(src, E.planetary_area)
-	..()
+	. = ..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
 	if(diggable && istype(C,/obj/item/shovel))
@@ -149,11 +149,11 @@
 	if(!resources)
 		resources = list()
 	if(prob(70))
-		resources[MATERIAL_GRAPHITE] = rand(3,5)
+		resources[MAT_GRAPHITE] = rand(3,5)
 	if(prob(5))
-		resources[MATERIAL_URANIUM] = rand(1,3)
+		resources[MAT_URANIUM] = rand(1,3)
 	if(prob(2))
-		resources[MATERIAL_DIAMOND] = 1
+		resources[MAT_DIAMOND] = 1
 
 /turf/simulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)

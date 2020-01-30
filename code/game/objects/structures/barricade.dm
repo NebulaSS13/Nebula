@@ -14,8 +14,8 @@
 /obj/structure/barricade/Initialize(var/mapload, var/material_name)
 	. = ..(mapload)
 	if(!material_name)
-		material_name = MATERIAL_WOOD
-	material = SSmaterials.get_material_by_name("[material_name]")
+		material_name = MAT_WOOD
+	material = SSmaterials.get_material_datum(material_name)
 	if(!material)
 		return INITIALIZE_HINT_QDEL
 	SetName("[material.display_name] barricade")
@@ -37,7 +37,7 @@
 		if(do_after(user, 4 SECONDS, src))
 			if(R.use(5))
 				visible_message("<span class='notice'>\The [user] fastens \the [R] to \the [src].</span>")
-				var/obj/structure/barricade/spike/CDF = new(loc, material.name, R.material.name)
+				var/obj/structure/barricade/spike/CDF = new(loc, material.type, R.material.type)
 				CDF.dir = user.dir
 				qdel(src)
 				return
@@ -47,7 +47,7 @@
 	
 	if(istype(W, /obj/item/stack))
 		var/obj/item/stack/D = W
-		if(D.get_material_name() != material.name)
+		if(D.get_material_type() != material.type)
 			return //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
 		if (health < maxhealth)
 			if (D.get_amount() < 1)
@@ -116,8 +116,8 @@
 /obj/structure/barricade/spike/Initialize(var/mapload, var/material_name, var/rod_material_name)
 	. = ..(mapload, material_name)
 	if(!rod_material_name)
-		rod_material_name = MATERIAL_WOOD
-	rod_material = SSmaterials.get_material_by_name("[rod_material_name]")
+		rod_material_name = MAT_WOOD
+	rod_material = SSmaterials.get_material_datum(rod_material_name)
 	SetName("cheval-de-frise")
 	desc = "A rather simple [material.display_name] barrier. It menaces with spikes of [rod_material.display_name]."
 	damage = (rod_material.hardness * 0.85)

@@ -125,7 +125,7 @@
 		)
 
 	var/matter_amount_per_sheet = 10
-	var/matter_type = MATERIAL_STEEL
+	var/matter_type = MAT_STEEL
 
 /obj/machinery/organ_printer/robot/mapped/Initialize()
 	. = ..()
@@ -144,7 +144,7 @@
 	return O
 
 /obj/machinery/organ_printer/robot/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
+	if(istype(W, /obj/item/stack/material) && W.get_material_type() == matter_type)
 		if((max_stored_matter-stored_matter) < matter_amount_per_sheet)
 			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
 			return

@@ -1,5 +1,5 @@
 /material/uranium
-	name = MATERIAL_URANIUM
+	display_name = "uranium"
 	lore_text = "A highly radioactive metal. Commonly used as fuel in fission reactors."
 	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
 	wall_name = "bulkhead"
@@ -15,18 +15,18 @@
 	chem_products = list(
 				/datum/reagent/uranium = 20
 				)
-	construction_difficulty = MATERIAL_HARD_DIY
+	construction_difficulty = MAT_VALUE_HARD_DIY
 	sale_price = 2
 	value = 100
 
 /material/gold
-	name = MATERIAL_GOLD
+	display_name = "gold"
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/gold
 	icon_colour = COLOR_GOLD
 	weight = 25
-	hardness = MATERIAL_FLEXIBLE + 5
+	hardness = MAT_VALUE_FLEXIBLE + 5
 	integrity = 100
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
@@ -34,8 +34,8 @@
 	chem_products = list(
 				/datum/reagent/gold = 20
 				)
-	construction_difficulty = MATERIAL_HARD_DIY
-	ore_smelts_to = MATERIAL_GOLD
+	construction_difficulty = MAT_VALUE_HARD_DIY
+	ore_smelts_to = MAT_GOLD
 	ore_result_amount = 5
 	ore_name = "native gold"
 	ore_spread_chance = 10
@@ -51,20 +51,20 @@
 	value = 40	
 
 /material/gold/bronze //placeholder for ashtrays
-	name = MATERIAL_BRONZE
+	display_name = "bronze"
 	lore_text = "An alloy of copper and tin."
 	icon_colour = "#edd12f"
-	construction_difficulty = MATERIAL_HARD_DIY
+	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = null
 	ore_compresses_to = null
 	sale_price = null
 
 /material/copper
-	name = MATERIAL_COPPER
+	display_name = "copper"
 	wall_name = "bulkhead"
 	icon_colour = "#b87333"
 	weight = 15
-	hardness = MATERIAL_FLEXIBLE + 10
+	hardness = MAT_VALUE_FLEXIBLE + 10
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -72,8 +72,8 @@
 		/datum/reagent/copper = 12,
 		/datum/reagent/silver = 8
 		)
-	construction_difficulty = MATERIAL_HARD_DIY
-	ore_smelts_to = MATERIAL_COPPER
+	construction_difficulty = MAT_VALUE_HARD_DIY
+	ore_smelts_to = MAT_COPPER
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "tetrahedrite"
@@ -82,21 +82,21 @@
 	sale_price = 1
 
 /material/silver
-	name = MATERIAL_SILVER
+	display_name = "silver"
 	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#d1e6e3"
 	weight = 22
-	hardness = MATERIAL_FLEXIBLE + 10
+	hardness = MAT_VALUE_FLEXIBLE + 10
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
 				/datum/reagent/silver = 20
 				)
-	construction_difficulty = MATERIAL_HARD_DIY
-	ore_smelts_to = MATERIAL_SILVER
+	construction_difficulty = MAT_VALUE_HARD_DIY
+	ore_smelts_to = MAT_SILVER
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "native silver"
@@ -106,7 +106,7 @@
 	value = 35
 
 /material/steel
-	name = MATERIAL_STEEL
+	display_name = "steel"
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/steel
@@ -120,16 +120,15 @@
 				/datum/reagent/iron = 19.6,
 				/datum/reagent/carbon = 0.4
 				)
-	alloy_materials = list(MATERIAL_IRON = 1875, MATERIAL_GRAPHITE = 1875)
+	alloy_materials = list(MAT_IRON = 1875, MAT_GRAPHITE = 1875)
 	alloy_product = TRUE
 	sale_price = 1
-	ore_smelts_to = MATERIAL_STEEL
-	construction_difficulty = MATERIAL_NORMAL_DIY
+	ore_smelts_to = MAT_STEEL
+	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	value = 4
 
 /material/steel/holographic
-	name = "holo" + MATERIAL_STEEL
-	display_name = MATERIAL_STEEL
+	display_name = "holographic steel"
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
@@ -140,7 +139,7 @@
 	value = 0
 
 /material/aluminium
-	name = MATERIAL_ALUMINIUM
+	display_name = "aluminium"
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/aluminium
@@ -156,8 +155,7 @@
 	sale_price = 1
 
 /material/aluminium/holographic
-	name = "holo" + MATERIAL_ALUMINIUM
-	display_name = MATERIAL_ALUMINIUM
+	display_name = "holoaluminium"
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
@@ -167,7 +165,7 @@
 	hidden_from_codex = TRUE
 
 /material/plasteel
-	name = MATERIAL_PLASTEEL
+	display_name = "plasteel"
 	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/plasteel
@@ -179,19 +177,19 @@
 	explosion_resistance = 25
 	brute_armor = 6
 	burn_armor = 10
-	hardness = MATERIAL_VERY_HARD
+	hardness = MAT_VALUE_VERY_HARD
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	hitsound = 'sound/weapons/smash.ogg'
-	construction_difficulty = MATERIAL_HARD_DIY
-	alloy_materials = list(MATERIAL_STEEL = 2500, MATERIAL_PLATINUM = 1250)
+	construction_difficulty = MAT_VALUE_HARD_DIY
+	alloy_materials = list(MAT_STEEL = 2500, MAT_PLATINUM = 1250)
 	alloy_product = TRUE
 	sale_price = 2
-	ore_smelts_to = MATERIAL_PLASTEEL
+	ore_smelts_to = MAT_PLASTEEL
 	value = 12
 
 /material/plasteel/titanium
-	name = MATERIAL_TITANIUM
+	display_name = "titanium"
 	lore_text = "A light, strong, corrosion-resistant metal. Perfect for cladding high-velocity ballistic supply pods."
 	brute_armor = 10
 	burn_armor = 8
@@ -203,13 +201,13 @@
 	door_icon_base = "metal"
 	icon_colour = "#d1e6e3"
 	icon_reinf = "reinf_metal"
-	construction_difficulty = MATERIAL_VERY_HARD_DIY
+	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_materials = null
 	alloy_product = FALSE
 	value = 30
 
 /material/plasteel/ocp
-	name = MATERIAL_OSMIUM_CARBIDE_PLASTEEL
+	display_name = "osmium-carbide plasteel"
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
 	melting_point = 12000
@@ -220,13 +218,13 @@
 	burn_armor = 20
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 3)
-	alloy_materials = list(MATERIAL_PLASTEEL = 7500, MATERIAL_OSMIUM = 3750)
-	construction_difficulty = MATERIAL_VERY_HARD_DIY
+	alloy_materials = list(MAT_PLASTEEL = 7500, MAT_OSMIUM = 3750)
+	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_product = TRUE
 	sale_price = 3
 
 /material/osmium
-	name = MATERIAL_OSMIUM
+	display_name = "osmium"
 	lore_text = "An extremely hard form of platinum."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/osmium
@@ -234,61 +232,13 @@
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	construction_difficulty = MATERIAL_VERY_HARD_DIY
+	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	sale_price = 3
-	ore_smelts_to = MATERIAL_OSMIUM
+	ore_smelts_to = MAT_OSMIUM
 	value = 30
 
-/material/tritium
-	name = MATERIAL_TRITIUM
-	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
-	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
-	wall_name = "bulkhead"
-	stack_type = /obj/item/stack/material/tritium
-	icon_colour = "#777777"
-	stack_origin_tech = list(TECH_MATERIAL = 5)
-	sheet_singular_name = "ingot"
-	sheet_plural_name = "ingots"
-	is_fusion_fuel = 1
-	construction_difficulty = MATERIAL_HARD_DIY
-	value = 300
-
-/material/deuterium
-	name = MATERIAL_DEUTERIUM
-	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
-	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
-	wall_name = "bulkhead"
-	stack_type = /obj/item/stack/material/deuterium
-	icon_colour = "#999999"
-	stack_origin_tech = list(TECH_MATERIAL = 3)
-	sheet_singular_name = "ingot"
-	sheet_plural_name = "ingots"
-	is_fusion_fuel = 1
-	construction_difficulty = MATERIAL_HARD_DIY
-
-/material/mhydrogen
-	name = MATERIAL_HYDROGEN
-	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
-	display_name = "metallic hydrogen"
-	wall_name = "bulkhead"
-	stack_type = /obj/item/stack/material/mhydrogen
-	icon_colour = "#e6c5de"
-	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
-	is_fusion_fuel = 1
-	chem_products = list(
-				/datum/reagent/hydrazine = 20
-				)
-	construction_difficulty = MATERIAL_HARD_DIY
-	ore_smelts_to = MATERIAL_TRITIUM
-	ore_compresses_to = MATERIAL_HYDROGEN
-	ore_name = "raw hydrogen"
-	ore_scan_icon = "mineral_rare"
-	ore_icon_overlay = "gems"
-	sale_price = 5
-	value = 100
-
 /material/platinum
-	name = MATERIAL_PLATINUM
+	display_name = "platinum"
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/platinum
@@ -297,9 +247,9 @@
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	construction_difficulty = MATERIAL_HARD_DIY
-	ore_smelts_to = MATERIAL_PLATINUM
-	ore_compresses_to = MATERIAL_OSMIUM
+	construction_difficulty = MAT_VALUE_HARD_DIY
+	ore_smelts_to = MAT_PLATINUM
+	ore_compresses_to = MAT_OSMIUM
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "raw platinum"
@@ -309,7 +259,7 @@
 	value = 80
 
 /material/iron
-	name = MATERIAL_IRON
+	display_name = "iron"
 	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/iron
@@ -318,7 +268,7 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
-	construction_difficulty = MATERIAL_NORMAL_DIY
+	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chem_products = list(
 				/datum/reagent/iron = 20
 				)
@@ -327,8 +277,7 @@
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
-	name = MATERIAL_VOX
-	display_name = "durable alloy"
+	display_name = "dense alloy"
 	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#6c7364"
@@ -337,21 +286,19 @@
 	explosion_resistance = 200 // Hull plating.
 	hardness = 500
 	weight = 500
-	construction_difficulty = MATERIAL_HARD_DIY
+	construction_difficulty = MAT_VALUE_HARD_DIY
 	hidden_from_codex = TRUE
 	value = 100
 
 // Likewise.
 /material/voxalloy/elevatorium
-	name = MATERIAL_ELEVATORIUM
 	display_name = "elevator panelling"
 	wall_name = "bulkhead"
 	icon_colour = "#666666"
-	construction_difficulty = MATERIAL_HARD_DIY
+	construction_difficulty = MAT_VALUE_HARD_DIY
 	hidden_from_codex = TRUE
 
 /material/aliumium
-	name = MATERIAL_ALIENALLOY
 	display_name = "alien alloy"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -362,7 +309,7 @@
 	sheet_singular_name = "chunk"
 	sheet_plural_name = "chunks"
 	stack_type = /obj/item/stack/material/aliumium
-	construction_difficulty = MATERIAL_VERY_HARD_DIY
+	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	hidden_from_codex = TRUE
 
 /material/aliumium/New()
@@ -380,11 +327,11 @@
 	return
 
 /material/hematite
-	name = MATERIAL_HEMATITE
+	display_name = "hematite"
 	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#aa6666"
-	ore_smelts_to = MATERIAL_IRON
+	ore_smelts_to = MAT_IRON
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
@@ -393,11 +340,11 @@
 	sale_price = 1
 
 /material/rutile
-	name = MATERIAL_RUTILE
+	display_name = "rutile"
 	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#d8ad97"
-	ore_smelts_to = MATERIAL_TITANIUM
+	ore_smelts_to = MAT_TITANIUM
 	ore_result_amount = 5
 	ore_spread_chance = 15
 	ore_scan_icon = "mineral_uncommon"

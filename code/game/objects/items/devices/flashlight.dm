@@ -11,7 +11,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 
-	matter = list(MATERIAL_PLASTIC = 50, MATERIAL_GLASS = 20)
+	matter = list(MAT_PLASTIC = 50, MAT_GLASS = 20)
 
 	action_button_name = "Toggle Flashlight"
 	var/on = FALSE
@@ -167,7 +167,7 @@
 	item_state = "maglight"
 	force = 10
 	attack_verb = list ("smacked", "thwacked", "thunked")
-	matter = list(MATERIAL_ALUMINIUM = 200, MATERIAL_GLASS = 50)
+	matter = list(MAT_ALUMINIUM = 200, MAT_GLASS = 50)
 	hitsound = "swing_hit"
 	flashlight_max_bright = 0.5
 	flashlight_outer_range = 5
@@ -184,7 +184,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	matter = list(MATERIAL_STEEL = 200,MATERIAL_GLASS = 100)
+	matter = list(MAT_STEEL = 200,MAT_GLASS = 100)
 	flashlight_outer_range = 5
 
 /obj/item/flashlight/lantern/on_update_icon()
@@ -429,7 +429,7 @@
 	on = 0
 	action_button_name = "Toggle lamp"
 	flashlight_outer_range = 3 //range of light when on
-	matter = list(MATERIAL_ALUMINIUM = 250, MATERIAL_GLASS = 200)
+	matter = list(MAT_ALUMINIUM = 250, MAT_GLASS = 200)
 
 /obj/item/flashlight/lamp/lava/on_update_icon()
 	overlays.Cut()

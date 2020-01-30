@@ -23,7 +23,7 @@
 		fuel_colour = initial(R.color)
 		initial_amount = 50000
 
-	var/material/material = SSmaterials.get_material_by_name(fuel_type)
+	var/material/material = SSmaterials.get_material_datum(fuel_type)
 	if(istype(material))
 		initial_amount = material.units_per_sheet * 5 // Fuel compressor eats 5 sheets.
 		SetName("[material.use_name] fuel rod assembly")
@@ -59,16 +59,16 @@
 
 // Mapper shorthand.
 /obj/item/fuel_assembly/deuterium/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_DEUTERIUM)
+	. = ..(mapload,  MAT_DEUTERIUM)
 
 /obj/item/fuel_assembly/tritium/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_TRITIUM)
+	. = ..(mapload,  MAT_TRITIUM)
 
 /obj/item/fuel_assembly/phoron/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_PHORON)
+	. = ..(mapload,  MAT_PHORON)
 
 /obj/item/fuel_assembly/supermatter/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_SUPERMATTER)
+	. = ..(mapload,  MAT_SUPERMATTER)
 
 /obj/item/fuel_assembly/hydrogen/Initialize(mapload)
-	. = ..(mapload,  MATERIAL_HYDROGEN)
+	. = ..(mapload,  MAT_HYDROGEN)

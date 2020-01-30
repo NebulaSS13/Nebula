@@ -1,3 +1,28 @@
+/obj/effect/gas_overlay
+	name = "gas"
+	desc = "You shouldn't be clicking this."
+	icon = 'icons/effects/tile_effects.dmi'
+	icon_state = "generic"
+	layer = FIRE_LAYER
+	appearance_flags = RESET_COLOR
+	mouse_opacity = 0
+	var/material/material
+
+/obj/effect/gas_overlay/proc/update_alpha_animation(var/new_alpha)
+	animate(src, alpha = new_alpha)
+	alpha = new_alpha
+	animate(src, alpha = 0.8 * new_alpha, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
+	animate(alpha = new_alpha, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
+
+/obj/effect/gas_overlay/Initialize(mapload, gas)
+	. = ..()
+	material = SSmaterials.get_material_datum(gas)
+	if(!istype(material))
+		return INITIALIZE_HINT_QDEL
+	if(material.gas_tile_overlay)
+		icon_state = material.gas_tile_overlay
+	color = material.icon_colour
+
 /*
 	MATERIAL DATUMS
 	This data is used by various parts of the game for basic physical properties and behaviors
@@ -26,17 +51,15 @@
 //Returns the material the object is made of, if applicable.
 //Will we ever need to return more than one value here? Or should we just return the "dominant" material.
 /obj/proc/get_material()
-	return null
+	return
 
 //mostly for convenience
-/obj/proc/get_material_name()
-	var/material/material = get_material()
-	if(material)
-		return material.name
+/obj/proc/get_material_type()
+	var/material/mat = get_material()
+	. = mat && mat.type
 
 // Material definition and procs follow.
 /material
-	var/name	                          // Unique name for use in indexing the list.
 	var/display_name                      // Prettier name for display.
 	var/adjective_name
 	var/use_name
@@ -87,7 +110,7 @@
 	var/list/window_options = list()
 
 	// Damage values.
-	var/hardness = MATERIAL_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
+	var/hardness = MAT_VALUE_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
 	var/weight = 20              // Determines blunt damage/throwforce for weapons.
 
 	// Noise when someone is faceplanted onto a table made of this material.
@@ -101,7 +124,7 @@
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
-	var/construction_difficulty = MATERIAL_EASY_DIY
+	var/construction_difficulty = MAT_VALUE_EASY_DIY
 
 	// Mining behavior.
 	var/alloy_product
@@ -119,6 +142,19 @@
 	// Xenoarch behavior.
 	var/list/xarch_ages = list("thousand" = 999, "million" = 999)
 	var/xarch_source_mineral = "iron"
+
+	// Gas behavior.
+	var/gas_overlay_limit
+	var/gas_burn_product
+	var/gas_breathed_product
+	var/gas_condensation_product
+	var/gas_specific_heat
+	var/gas_molar_mass
+	var/gas_flags =              0
+	var/gas_symbol_html
+	var/gas_symbol
+	var/gas_tile_overlay =       "generic"
+	var/gas_condensation_point = INFINITY
 
 // Placeholders for light tiles and rglass.
 /material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
@@ -146,24 +182,22 @@
 
 /material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
-		to_chat(user, "<span class='warning'>You cannot make anything out of \the [target_stack]</span>")
+		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]."))	
 		return
 	if(!used_stack.can_use(5) || !target_stack.can_use(1))
-		to_chat(user, "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>")
+		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [display_name] to make anything useful."))
 		return
 
 	used_stack.use(5)
 	target_stack.use(1)
-	to_chat(user, "<span class='notice'>You attach wire to the [name].</span>")
+	to_chat(user, SPAN_NOTICE("You attach wire to the [display_name]."))
 	var/obj/item/product = new wire_product(get_turf(user))
 	if(!(user.l_hand && user.r_hand))
 		user.put_in_hands(product)
 
-// Make sure we have a display name and shard icon even if they aren't explicitly set.
+// Make sure we have a use name and shard icon even if they aren't explicitly set.
 /material/New()
 	..()
-	if(!display_name)
-		display_name = name
 	if(!use_name)
 		use_name = display_name
 	if(!adjective_name)
@@ -176,8 +210,11 @@
 // Return the matter comprising this material.
 /material/proc/get_matter()
 	var/list/temp_matter = list()
-	temp_matter[name] = SHEET_MATERIAL_AMOUNT
+	temp_matter[type] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
+
+/material/proc/is_a_gas()
+	. = !isnull(gas_specific_heat) && !isnull(gas_molar_mass) // Arbitrary but good enough.
 
 // Weapons handle applying a divisor for this value locally.
 /material/proc/get_blunt_damage()
@@ -188,9 +225,9 @@
 	return hardness //todo
 
 /material/proc/get_attack_cooldown()
-	if(weight <= MATERIAL_LIGHT)
+	if(weight <= MAT_FLAG_LIGHT)
 		return FAST_WEAPON_COOLDOWN
-	if(weight >= MATERIAL_HEAVY)
+	if(weight >= MAT_FLAG_HEAVY)
 		return SLOW_WEAPON_COOLDOWN
 	return DEFAULT_WEAPON_COOLDOWN
 
@@ -204,7 +241,7 @@
 
 // Used by walls when qdel()ing to avoid neighbor merging.
 /material/placeholder
-	name = "placeholder"
+	display_name = "placeholder"
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)
@@ -220,16 +257,16 @@
 
 // Debris product. Used ALL THE TIME.
 /material/proc/place_sheet(var/turf/target, var/amount = 1)
-	return stack_type ? new stack_type(target, amount, name) : null
+	return stack_type ? new stack_type(target, amount, type) : null
 
 // As above.
 /material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/material/shard(target, src.name)
+		return new /obj/item/material/shard(target, type)
 
 // Used by walls and weapons to determine if they break or not.
 /material/proc/is_brittle()
-	return !!(flags & MATERIAL_BRITTLE)
+	return !!(flags & MAT_FLAG_BRITTLE)
 
 /material/proc/combustion_effect(var/turf/T, var/temperature)
 	return

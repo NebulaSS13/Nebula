@@ -31,8 +31,8 @@
 /turf/simulated/floor/protects_atom(var/atom/A)
 	return (A.level <= 1 && !is_plating()) || ..()
 
-/turf/simulated/floor/New(var/newloc, var/floortype)
-	..(newloc)
+/turf/simulated/floor/Initialize(var/ml, var/floortype)
+	. = ..(ml)
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
 	if(floortype)
@@ -94,7 +94,7 @@
 	initial_gas = null
 
 /turf/simulated/floor/shuttle_ceiling/air
-	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(MAT_OXYGEN = MOLES_O2STANDARD, MAT_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/is_floor()
 	return TRUE

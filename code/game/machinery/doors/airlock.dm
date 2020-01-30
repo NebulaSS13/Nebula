@@ -113,7 +113,7 @@ var/list/airlock_overlays = list()
 	..()
 
 /obj/machinery/door/airlock/get_material()
-	return SSmaterials.get_material_by_name(mineral ? mineral : MATERIAL_STEEL)
+	return SSmaterials.get_material_datum(mineral ? mineral : MAT_STEEL)
 
 /obj/machinery/door/airlock/get_codex_value()
 	return "airlock"
@@ -309,41 +309,41 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/gold
 	name = "Gold Airlock"
 	door_color = COLOR_SUN
-	mineral = MATERIAL_GOLD
+	mineral = MAT_GOLD
 
 /obj/machinery/door/airlock/crystal
 	name = "Crystal Airlock"
 	door_color = COLOR_CRYSTAL
-	mineral = MATERIAL_CRYSTAL
+	mineral = MAT_CRYSTAL
 
 /obj/machinery/door/airlock/silver
 	name = "Silver Airlock"
 	door_color = COLOR_SILVER
-	mineral = MATERIAL_SILVER
+	mineral = MAT_SILVER
 
 /obj/machinery/door/airlock/diamond
 	name = "Diamond Airlock"
 	door_color = COLOR_CYAN_BLUE
-	mineral = MATERIAL_DIAMOND
+	mineral = MAT_DIAMOND
 
 /obj/machinery/door/airlock/uranium
 	name = "Uranium Airlock"
 	desc = "And they said I was crazy."
 	door_color = COLOR_PAKISTAN_GREEN
-	mineral = MATERIAL_URANIUM
+	mineral = MAT_URANIUM
 	var/last_event = 0
 	var/rad_power = 7.5
 
 /obj/machinery/door/airlock/sandstone
 	name = "\improper Sandstone Airlock"
 	door_color = COLOR_BEIGE
-	mineral = MATERIAL_SANDSTONE
+	mineral = MAT_SANDSTONE
 
 /obj/machinery/door/airlock/phoron
 	name = "\improper Phoron Airlock"
 	desc = "No way this can end badly."
 	door_color = COLOR_PURPLE
-	mineral = MATERIAL_PHORON
+	mineral = MAT_PHORON
 
 /obj/machinery/door/airlock/centcom
 	airlock_type = "centcomm"
@@ -433,7 +433,7 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
 	for(var/turf/simulated/floor/target_tile in range(2,loc))
-		target_tile.assume_gas(GAS_PHORON, 35, 400+T0C)
+		target_tile.assume_gas(MAT_PHORON, 35, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(temperature, 400)
 	for(var/turf/simulated/wall/W in range(3,src))
 		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
@@ -865,7 +865,7 @@ About the new airlock wires panel:
 	if (src.isElectrified())
 		if (istype(mover, /obj/item))
 			var/obj/item/i = mover
-			if (i.matter && (MATERIAL_STEEL in i.matter) && i.matter[MATERIAL_STEEL] > 0)
+			if (i.matter && (MAT_STEEL in i.matter) && i.matter[MAT_STEEL] > 0)
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(5, 1, src)
 				s.start()

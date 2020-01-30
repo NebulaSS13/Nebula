@@ -67,9 +67,9 @@
  */
 /obj/item/organ/internal/lungs/proc/sync_breath_types()
 	min_breath_pressure = species.breath_pressure
-	breath_type = species.breath_type ? species.breath_type : GAS_OXYGEN
-	poison_types = species.poison_types ? species.poison_types : list(GAS_PHORON = TRUE)
-	exhale_type = species.exhale_type ? species.exhale_type : GAS_CO2
+	breath_type = species.breath_type ? species.breath_type : MAT_OXYGEN
+	poison_types = species.poison_types ? species.poison_types : list(MAT_PHORON = TRUE)
+	exhale_type = species.exhale_type ? species.exhale_type : MAT_CO2
 
 /obj/item/organ/internal/lungs/Process()
 	..()
@@ -193,7 +193,8 @@
 	// humans processing thousands of units of oxygen over the course of a round for the sole purpose of poisoning vox.
 	var/ratio = BP_IS_PROSTHETIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
-		var/breathed_product = gas_data.breathed_product[gasname]
+		var/material/mat = SSmaterials.get_material_datum(gasname)
+		var/breathed_product = mat.gas_breathed_product
 		if(breathed_product)
 			var/reagent_amount = breath.gas[gasname] * REAGENT_GAS_EXCHANGE_FACTOR * ratio
 			 // Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.

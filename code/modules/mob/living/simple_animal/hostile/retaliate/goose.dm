@@ -26,7 +26,7 @@
 	meat_amount = 6
 	bone_amount = 8
 	skin_amount = 8
-	skin_material = MATERIAL_SKIN_FEATHERS
+	skin_material = MAT_SKIN_FEATHERS
 
 	var/enrage_potency = 3
 	var/enrage_potency_loose = 4

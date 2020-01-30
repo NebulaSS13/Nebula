@@ -13,9 +13,9 @@
 			if(istype(I, /obj/item/stack/material))
 				var/obj/item/stack/material/S = I
 				if(S.material && S.material.stack_type)
-					if(isnull(stacks[S.material.name]))
-						stacks[S.material.name] = 0
-					stacks[S.material.name] += S.amount
+					if(isnull(stacks[S.material.type]))
+						stacks[S.material.type] = 0
+					stacks[S.material.type] += S.amount
 					qdel(S)
 					continue
 			if(output_turf)
@@ -24,7 +24,7 @@
 	if(output_turf)
 		for(var/sheet in stacks)
 			if(stacks[sheet] >= stack_amt)
-				var/material/stackmat = SSmaterials.get_material_by_name(sheet)
+				var/material/stackmat = SSmaterials.get_material_datum(sheet)
 				stackmat.place_sheet(output_turf, stack_amt)
 				stacks[sheet] -= stack_amt
 
@@ -47,7 +47,7 @@
 		stack_amt = choice
 		. = TRUE
 	else if(href_list["release_stack"] && stacks[href_list["release_stack"]] > 0)
-		var/material/stackmat = SSmaterials.get_material_by_name(href_list["release_stack"])
+		var/material/stackmat = SSmaterials.get_material_datum(href_list["release_stack"])
 		stackmat.place_sheet(output_turf, stacks[href_list["release_stack"]])
 		stacks[href_list["release_stack"]] = 0
 		. = TRUE

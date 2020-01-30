@@ -165,8 +165,9 @@ Class Procs:
 
 	// Handle condensation from the air.
 	for(var/g in air.gas)
-		var/product = gas_data.condensation_products[g]
-		if(product && air.temperature <= gas_data.condensation_points[g])
+		var/material/mat = SSmaterials.get_material_datum(g)
+		var/product = mat.gas_condensation_product
+		if(product && air.temperature <= mat.gas_condensation_point)
 			var/condensation_area = air.group_multiplier
 			while(condensation_area > 0)
 				condensation_area--
@@ -190,9 +191,10 @@ Class Procs:
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)
 	for(var/g in air.gas)
-		to_chat(M, "[gas_data.name[g]]: [air.gas[g]]")
+		var/material/mat = SSmaterials.get_material_datum(g)
+		to_chat(M, "[capitalize(mat.display_name)]: [air.gas[g]]")
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
-	to_chat(M, "O2 per N2: [(air.gas[GAS_NITROGEN] ? air.gas[GAS_OXYGEN]/air.gas[GAS_NITROGEN] : "N/A")] Moles: [air.total_moles]")
+	to_chat(M, "O2 per N2: [(air.gas[MAT_NITROGEN] ? air.gas[MAT_OXYGEN]/air.gas[MAT_NITROGEN] : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")
 //	to_chat(M, "Unsimulated: [unsimulated_contents.len]")
 //	to_chat(M, "Edges: [edges.len]")

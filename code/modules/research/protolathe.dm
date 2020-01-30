@@ -129,7 +129,7 @@
 	if(do_after(user, 16,src))
 		if(stack.use(amount))
 			to_chat(user, "<span class='notice'>You add [amount] sheet\s to \the [src].</span>")
-			materials[stack.material.name] += amount * SHEET_MATERIAL_AMOUNT
+			materials[stack.material.type] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()
 

@@ -259,8 +259,6 @@
 	if(istype(T))
 		var/datum/gas_mixture/plasma
 		for(var/reactant in reactants)
-			if(!gas_data.name[reactant])
-				continue
 			if(!plasma)
 				plasma = new
 			plasma.adjust_gas(reactant, max(1,round(reactants[reactant]*0.1)), 0) // *0.1 to compensate for *10 when uptaking gas.
@@ -368,7 +366,7 @@
 			for(var/cur_s_react in possible_s_reacts)
 				if(possible_s_reacts[cur_s_react] < 1)
 					continue
-				var/decl/fusion_reaction/cur_reaction = get_fusion_reaction(cur_p_react, cur_s_react)
+				var/decl/fusion_reaction/cur_reaction = SSmaterials.get_fusion_reaction(cur_p_react, cur_s_react)
 				if(cur_reaction && plasma_temperature >= cur_reaction.minimum_energy_level)
 					LAZYDISTINCTADD(possible_reactions, cur_reaction)
 

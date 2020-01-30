@@ -23,7 +23,7 @@
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
 
-	skin_material = MATERIAL_SKIN_FUR_ORANGE
+	skin_material = MAT_SKIN_FUR_ORANGE
 
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
@@ -222,7 +222,7 @@
 	item_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
-	skin_material = MATERIAL_SKIN_FUR_BLACK
+	skin_material = MAT_SKIN_FUR_BLACK
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"

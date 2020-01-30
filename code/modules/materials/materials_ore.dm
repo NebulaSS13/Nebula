@@ -17,7 +17,7 @@
 	. = ..()
 	if(istype(material))
 		matter = list()
-		matter[material.name] = SHEET_MATERIAL_AMOUNT
+		matter[material.type] = SHEET_MATERIAL_AMOUNT
 		name =       material.ore_name
 		desc =       material.ore_desc ? material.ore_desc : "A lump of ore."
 		color =      material.icon_colour
@@ -40,28 +40,28 @@
 
 // Map definitions.
 /obj/item/ore/uranium
-	material = MATERIAL_PITCHBLENDE
+	material = MAT_PITCHBLENDE
 /obj/item/ore/iron
-	material = MATERIAL_HEMATITE
+	material = MAT_HEMATITE
 /obj/item/ore/coal
-	material = MATERIAL_GRAPHITE
+	material = MAT_GRAPHITE
 /obj/item/ore/glass
-	material = MATERIAL_SAND
+	material = MAT_SAND
 /obj/item/ore/silver
-	material = MATERIAL_SILVER
+	material = MAT_SILVER
 /obj/item/ore/gold
-	material = MATERIAL_GOLD
+	material = MAT_GOLD
 /obj/item/ore/diamond
-	material = MATERIAL_DIAMOND
+	material = MAT_DIAMOND
 /obj/item/ore/osmium
-	material = MATERIAL_PLATINUM
+	material = MAT_PLATINUM
 /obj/item/ore/hydrogen
-	material = MATERIAL_HYDROGEN
+	material = MAT_METALLIC_HYDROGEN
 /obj/item/ore/slag
-	material = MATERIAL_WASTE
+	material = MAT_WASTE
 /obj/item/ore/phoron
-	material = MATERIAL_PHORON
+	material = MAT_PHORON
 /obj/item/ore/aluminium
-	material = MATERIAL_BAUXITE
+	material = MAT_BAUXITE
 /obj/item/ore/rutile
-	material = MATERIAL_RUTILE
+	material = MAT_RUTILE

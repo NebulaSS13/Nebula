@@ -66,8 +66,7 @@
 		// Update global type to string cache.
 		if(!stored_substances_to_names[mat])
 			if(ispath(mat, /material))
-				var/material/mat_instance = mat
-				mat_instance = SSmaterials.get_material_by_name(initial(mat_instance.name))
+				var/material/mat_instance = SSmaterials.get_material_datum(mat)
 				if(istype(mat_instance))
 					stored_substances_to_names[mat] = mat_instance.display_name
 			else if(ispath(mat, /datum/reagent))
@@ -128,8 +127,8 @@
 	for(var/mat in stored_material)
 		if(ispath(mat, /material))
 			var/mat_name = stored_substances_to_names[mat]
-			var/material/M = SSmaterials.get_material_by_name(mat_name)
+			var/material/M = SSmaterials.get_material_datum(mat_name)
 			if(stored_material[mat] > M.units_per_sheet)
-				M.place_sheet(get_turf(src), round(stored_material[mat] / M.units_per_sheet), M.name)
+				M.place_sheet(get_turf(src), round(stored_material[mat] / M.units_per_sheet), M.type)
 	..()
 	return TRUE

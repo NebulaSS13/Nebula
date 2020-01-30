@@ -95,7 +95,7 @@
 /obj/item/electronic_assembly/Initialize()
 	.=..()
 	START_PROCESSING(SScircuit, src)
-	matter[MATERIAL_STEEL] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
+	matter[MAT_STEEL] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
 
 /obj/item/electronic_assembly/Destroy()
 	STOP_PROCESSING(SScircuit, src)

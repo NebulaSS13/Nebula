@@ -17,8 +17,8 @@
 	meat_amount = 5
 	bone_amount = 15
 	skin_amount = 15
-	bone_material = MATERIAL_BONE_CARTILAGE
-	skin_material = MATERIAL_SKIN_SHARK
+	bone_material = MAT_BONE_CARTILAGE
+	skin_material = MAT_SKIN_SHARK
 
 /mob/living/simple_animal/hostile/aquatic/shark/huge
 	name = "gigacretoxyrhina"

@@ -10,7 +10,7 @@
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
 	rad_resistance_modifier = 0.1
-	var/init_material = MATERIAL_STEEL
+	var/init_material = MAT_STEEL
 	var/health = 10
 	var/destroyed = 0
 
@@ -25,7 +25,7 @@
 	. = INITIALIZE_HINT_LATELOAD
 	if(!new_material)
 		new_material = init_material
-	material = SSmaterials.get_material_by_name(new_material)
+	material = SSmaterials.get_material_datum(new_material)
 	if(!istype(material))
 		..()
 		return INITIALIZE_HINT_QDEL
@@ -192,11 +192,11 @@
 			destroyed = 1
 			visible_message("<span class='notice'>\The [src] falls to pieces!</span>")
 			update_icon()
-			new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
+			new /obj/item/stack/material/rods(get_turf(src), 1, material.type)
 
 		else
 			if(health <= -6)
-				new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
+				new /obj/item/stack/material/rods(get_turf(src), 1, material.type)
 				qdel(src)
 				return
 	return
@@ -251,7 +251,7 @@
 /obj/structure/grille/cult
 	name = "cult grille"
 	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
-	init_material = MATERIAL_CULT
+	init_material = MAT_CULT
 
 /obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
 	if(air_group)
@@ -266,16 +266,16 @@
 	if(ST.in_use)
 		return
 	if(ST.get_amount() < 2)
-		to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
+		to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 		return
-	to_chat(user, "<span class='notice'>Assembling grille...</span>")
+	to_chat(user, SPAN_NOTICE("Assembling grille..."))
 	ST.in_use = 1
 	if (!do_after(user, 10))
 		ST.in_use = 0
 		return
 	if(!ST.use(2))
 		return
-	var/obj/structure/grille/F = new /obj/structure/grille(loc, ST.material.name)
-	to_chat(user, "<span class='notice'>You assemble a grille</span>")
+	var/obj/structure/grille/F = new /obj/structure/grille(loc, ST.material.type)
+	to_chat(user, SPAN_NOTICE("You assemble a grille."))
 	ST.in_use = 0
 	F.add_fingerprint(user)

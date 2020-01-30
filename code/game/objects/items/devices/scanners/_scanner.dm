@@ -7,7 +7,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	matter = list(MATERIAL_ALUMINIUM = 30,MATERIAL_GLASS = 20)
+	matter = list(MAT_ALUMINIUM = 30,MAT_GLASS = 20)
 	var/scan_title
 	var/scan_data
 	//For displaying scans
