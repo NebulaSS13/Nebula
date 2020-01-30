@@ -128,7 +128,7 @@
 	else
 		p_dir=M_Dir
 
-	var/obj/item/pipe/P = new (w_turf)
+	var/obj/item/pipe/P = new(w_turf)
 	P.set_dir(p_dir)
 	P.attackby(W , src)
 

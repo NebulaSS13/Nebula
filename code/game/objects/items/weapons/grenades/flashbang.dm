@@ -19,8 +19,8 @@
 		var/damage = round(30/(get_dist(B,T)+1))
 		B.take_damage(damage)
 
-	new/obj/effect/sparks(src.loc)
-	new/obj/effect/effect/smoke/illumination(src.loc, 5, range=30, power=1, color="#ffffff")
+	new /obj/effect/sparks(src.loc)
+	new /obj/effect/effect/smoke/illumination(loc, 5, 30, 1, "#ffffff")
 	qdel(src)
 
 /obj/item/grenade/flashbang/proc/bang(var/turf/T , var/mob/living/carbon/M)					// Added a new proc called 'bang' that takes a location and a person to be banged.

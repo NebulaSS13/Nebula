@@ -56,7 +56,6 @@ SUBSYSTEM_DEF(materials)
 			for(var/component in new_mineral.alloy_materials)
 				processable_ores[component] = TRUE
 				alloy_components[component] = TRUE
-	. = ..()
 
 /datum/controller/subsystem/materials/proc/get_material_datum(var/mat)
 	. = materials_by_name[mat]
