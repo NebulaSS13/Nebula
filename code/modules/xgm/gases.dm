@@ -1,5 +1,5 @@
 /decl/xgm_gas/oxygen
-	id = GAS_OXYGEN
+	id = MATERIAL_OXYGEN
 	name = "Oxygen"
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.032	// kg/mol
@@ -35,7 +35,7 @@
 	symbol = "CH3Br"
 
 /decl/xgm_gas/phoron
-	id = GAS_PHORON
+	id = MATERIAL_PHORON
 	name = "Phoron"
 
 	//Note that this has a significant impact on TTV yield.
@@ -104,7 +104,7 @@
 		overlay_limit = 0.5
 
 /decl/xgm_gas/hydrogen
-	id = GAS_HYDROGEN
+	id = MATERIAL_HYDROGEN
 	name = "Hydrogen"
 	specific_heat = 100	// J/(mol*K)
 	molar_mass = 0.002	// kg/mol
@@ -114,19 +114,19 @@
 	symbol = "H2"
 
 /decl/xgm_gas/hydrogen/deuterium
-	id = GAS_DEUTERIUM
+	id = MATERIAL_DEUTERIUM
 	name = "Deuterium"
 	symbol_html = "D"
 	symbol = "D"
 
 /decl/xgm_gas/hydrogen/tritium
-	id = GAS_TRITIUM
+	id = MATERIAL_TRITIUM
 	name = "Tritium"
 	symbol_html = "T"
 	symbol = "T"
 
 /decl/xgm_gas/helium
-	id = GAS_HELIUM
+	id = MATERIAL_HELIUM
 	name = "Helium"
 	specific_heat = 80	// J/(mol*K)
 	molar_mass = 0.004	// kg/mol

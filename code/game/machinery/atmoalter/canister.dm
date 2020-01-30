@@ -358,18 +358,18 @@ update_flag
 
 /obj/machinery/portable_atmospherics/canister/phoron/Initialize()
 	. = ..()
-	air_contents.adjust_gas(GAS_PHORON, MolesForPressure())
+	air_contents.adjust_gas(MATERIAL_PHORON, MolesForPressure())
 	queue_icon_update()
 
 
 /obj/machinery/portable_atmospherics/canister/oxygen/Initialize()
 	. = ..()
-	air_contents.adjust_gas(GAS_OXYGEN, MolesForPressure())
+	air_contents.adjust_gas(MATERIAL_OXYGEN, MolesForPressure())
 	queue_icon_update()
 
 /obj/machinery/portable_atmospherics/canister/hydrogen/Initialize()
 	. = ..()
-	air_contents.adjust_gas(GAS_HYDROGEN, MolesForPressure())
+	air_contents.adjust_gas(MATERIAL_HYDROGEN, MolesForPressure())
 	queue_icon_update()
 
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled/Initialize()
@@ -401,7 +401,7 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/air/Initialize()
 	. = ..()
 	var/list/air_mix = StandardAirMix()
-	src.air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN], GAS_NITROGEN, air_mix[GAS_NITROGEN])
+	src.air_contents.adjust_multi(MATERIAL_OXYGEN, air_mix[MATERIAL_OXYGEN], GAS_NITROGEN, air_mix[GAS_NITROGEN])
 	queue_icon_update()
 
 
@@ -418,12 +418,12 @@ update_flag
 
 /obj/machinery/portable_atmospherics/canister/phoron/engine_setup/Initialize()
 	. = ..()
-	src.air_contents.adjust_gas(GAS_PHORON, MolesForPressure())
+	src.air_contents.adjust_gas(MATERIAL_PHORON, MolesForPressure())
 	queue_icon_update()
 
 /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup/Initialize()
 	. = ..()
-	src.air_contents.adjust_gas(GAS_HYDROGEN, MolesForPressure())
+	src.air_contents.adjust_gas(MATERIAL_HYDROGEN, MolesForPressure())
 	queue_icon_update()
 
 // Spawn debug tanks.
@@ -435,7 +435,7 @@ update_flag
 
 /obj/machinery/portable_atmospherics/canister/helium/Initialize()
 	. = ..()
-	air_contents.adjust_gas(GAS_HELIUM, MolesForPressure())
+	air_contents.adjust_gas(MATERIAL_HELIUM, MolesForPressure())
 	queue_icon_update()
 
 /obj/machinery/portable_atmospherics/canister/methyl_bromide

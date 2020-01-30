@@ -28,4 +28,4 @@
 
 /datum/artifact_trigger/gas/phoron
 	name = "concentration of phoron"
-	gas_needed = list(GAS_PHORON = 5)
+	gas_needed = list(MATERIAL_PHORON = 5)

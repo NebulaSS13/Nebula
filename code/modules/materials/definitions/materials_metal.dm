@@ -267,7 +267,7 @@
 	construction_difficulty = MATERIAL_HARD_DIY
 
 /material/mhydrogen
-	name = MATERIAL_HYDROGEN
+	name = MATERIAL_METALLIC_HYDROGEN
 	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
 	display_name = "metallic hydrogen"
 	wall_name = "bulkhead"
@@ -280,7 +280,7 @@
 				)
 	construction_difficulty = MATERIAL_HARD_DIY
 	ore_smelts_to = MATERIAL_TRITIUM
-	ore_compresses_to = MATERIAL_HYDROGEN
+	ore_compresses_to = MATERIAL_METALLIC_HYDROGEN
 	ore_name = "raw hydrogen"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "gems"

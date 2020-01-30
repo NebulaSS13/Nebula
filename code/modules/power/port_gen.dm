@@ -261,7 +261,7 @@
 	var/phoron = (sheets+sheet_left)*20
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
-		environment.adjust_gas_temp(GAS_PHORON, phoron/10, operating_temperature + T0C)
+		environment.adjust_gas_temp(MATERIAL_PHORON, phoron/10, operating_temperature + T0C)
 
 	sheets = 0
 	sheet_left = 0

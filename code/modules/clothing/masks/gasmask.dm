@@ -15,7 +15,7 @@
 		bio = ARMOR_BIO_STRONG
 		)
 	filtered_gases = list(
-		GAS_PHORON,
+		MATERIAL_PHORON,
 		GAS_N2O,
 		GAS_CHLORINE,
 		GAS_AMMONIA,
@@ -196,7 +196,7 @@
 	item_state = "respirator"
 	flags_inv = 0
 	body_parts_covered = 0
-	filtered_gases = list(GAS_OXYGEN)
+	filtered_gases = list(MATERIAL_OXYGEN)
 
 
 /obj/item/clothing/mask/gas/swat/vox
@@ -206,8 +206,8 @@
 	item_state = "voxswat"
 	body_parts_covered = EYES
 	filtered_gases = list(
-		GAS_OXYGEN,
-		GAS_PHORON,
+		MATERIAL_OXYGEN,
+		MATERIAL_PHORON,
 		GAS_N2O,
 		GAS_CHLORINE,
 		GAS_AMMONIA,

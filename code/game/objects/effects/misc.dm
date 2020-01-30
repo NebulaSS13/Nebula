@@ -118,5 +118,5 @@
 	if(P && !P.air_temporary)
 		P.air_temporary = new(P.volume, tempurature)
 		var/datum/gas_mixture/G = P.air_temporary
-		G.adjust_gas(GAS_OXYGEN,((pressure*P.volume)/(R_IDEAL_GAS_EQUATION*temperature)))
+		G.adjust_gas(MATERIAL_OXYGEN,((pressure*P.volume)/(R_IDEAL_GAS_EQUATION*temperature)))
 	return INITIALIZE_HINT_QDEL

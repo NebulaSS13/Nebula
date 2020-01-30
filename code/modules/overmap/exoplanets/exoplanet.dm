@@ -317,12 +317,12 @@
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
 	if(habitability_class == HABITABILITY_IDEAL)
-		atmosphere.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
+		atmosphere.adjust_gas(MATERIAL_OXYGEN, MOLES_O2STANDARD, 0)
 		atmosphere.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 	else //let the fuckery commence
 		var/list/newgases = gas_data.gases.Copy()
 		if(prob(90)) //all phoron planet should be rare
-			newgases -= GAS_PHORON
+			newgases -= MATERIAL_PHORON
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= GAS_ALIEN
 		newgases -= GAS_STEAM
@@ -332,7 +332,7 @@
 
 		//Breathable planet
 		if(habitability_class == HABITABILITY_OKAY)
-			atmosphere.gas[GAS_OXYGEN] += MOLES_O2STANDARD
+			atmosphere.gas[MATERIAL_OXYGEN] += MOLES_O2STANDARD
 			total_moles -= MOLES_O2STANDARD
 			badflag = XGM_GAS_FUEL|XGM_GAS_CONTAMINANT
 

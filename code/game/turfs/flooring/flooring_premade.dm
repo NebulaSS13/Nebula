@@ -131,29 +131,29 @@
 	initial_gas = null
 
 /turf/simulated/floor/reinforced/airmix
-	initial_gas = list(GAS_OXYGEN = MOLES_O2ATMOS, GAS_NITROGEN = MOLES_N2ATMOS)
+	initial_gas = list(MATERIAL_OXYGEN = MOLES_O2ATMOS, GAS_NITROGEN = MOLES_N2ATMOS)
 
 /turf/simulated/floor/reinforced/nitrogen
 	initial_gas = list(GAS_NITROGEN = ATMOSTANK_NITROGEN)
 
 /turf/simulated/floor/reinforced/hydrogen
-	initial_gas = list(GAS_HYDROGEN = ATMOSTANK_HYDROGEN)
+	initial_gas = list(MATERIAL_HYDROGEN = ATMOSTANK_HYDROGEN)
 
 /turf/simulated/floor/reinforced/oxygen
-	initial_gas = list(GAS_OXYGEN = ATMOSTANK_OXYGEN)
+	initial_gas = list(MATERIAL_OXYGEN = ATMOSTANK_OXYGEN)
 
 /turf/simulated/floor/reinforced/phoron
-	initial_gas = list(GAS_PHORON = ATMOSTANK_PHORON)
+	initial_gas = list(MATERIAL_PHORON = ATMOSTANK_PHORON)
 
 /turf/simulated/floor/reinforced/nitrogen/engine
 	name = "engine floor"
 	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/reinforced/phoron/fuel
-	initial_gas = list(GAS_PHORON = ATMOSTANK_PHORON_FUEL)
+	initial_gas = list(MATERIAL_PHORON = ATMOSTANK_PHORON_FUEL)
 
 /turf/simulated/floor/reinforced/hydrogen/fuel
-	initial_gas = list(GAS_HYDROGEN = ATMOSTANK_HYDROGEN_FUEL)
+	initial_gas = list(MATERIAL_HYDROGEN = ATMOSTANK_HYDROGEN_FUEL)
 
 /turf/simulated/floor/reinforced/carbon_dioxide
 	initial_gas = list(GAS_CO2 = ATMOSTANK_CO2)

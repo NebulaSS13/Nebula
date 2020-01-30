@@ -1846,6 +1846,7 @@
 #include "code\modules\materials\recipes_stacks.dm"
 #include "code\modules\materials\recipes_storage.dm"
 #include "code\modules\materials\recipes_structures.dm"
+#include "code\modules\materials\definitions\materials_gasses.dm"
 #include "code\modules\materials\definitions\materials_glass.dm"
 #include "code\modules\materials\definitions\materials_metal.dm"
 #include "code\modules\materials\definitions\materials_mineral.dm"

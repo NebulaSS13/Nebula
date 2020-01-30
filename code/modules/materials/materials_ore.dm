@@ -56,7 +56,7 @@
 /obj/item/ore/osmium
 	material = MATERIAL_PLATINUM
 /obj/item/ore/hydrogen
-	material = MATERIAL_HYDROGEN
+	material = MATERIAL_METALLIC_HYDROGEN
 /obj/item/ore/slag
 	material = MATERIAL_WASTE
 /obj/item/ore/phoron

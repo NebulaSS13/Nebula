@@ -1,6 +1,6 @@
 /decl/environment_data
 	var/list/important_gasses = list(
-		GAS_OXYGEN =         TRUE,
+		MATERIAL_OXYGEN =         TRUE,
 		GAS_NITROGEN =       TRUE,
 		GAS_CO2 = TRUE
 	)
@@ -8,11 +8,11 @@
 		GAS_CO2 = TRUE
 	)
 	var/list/filter_gasses = list(
-		GAS_OXYGEN,
+		MATERIAL_OXYGEN,
 		GAS_NITROGEN,
 		GAS_CO2,
 		GAS_N2O,
-		GAS_PHORON
+		MATERIAL_PHORON
 	)
 
 ////////////////////////////////////////
@@ -150,7 +150,7 @@
 		SetName("[alarm_area.name] Air Alarm")
 
 	// breathable air according to human/Life()
-	TLV[GAS_OXYGEN] =			list(16, 19, 135, 140) // Partial pressure, kpa
+	TLV[MATERIAL_OXYGEN] =			list(16, 19, 135, 140) // Partial pressure, kpa
 	TLV[GAS_CO2] = list(-1.0, -1.0, 5, 10) // Partial pressure, kpa
 	TLV["other"] =			list(-1.0, -1.0, 0.2, 0.5) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
@@ -269,7 +269,7 @@
 		other_moles += environment.gas[g] //this is only going to be used in a partial pressure calc, so we don't need to worry about group_multiplier here.
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
-	oxygen_dangerlevel = get_danger_level(environment.gas[GAS_OXYGEN]*partial_pressure, TLV[GAS_OXYGEN])
+	oxygen_dangerlevel = get_danger_level(environment.gas[MATERIAL_OXYGEN]*partial_pressure, TLV[MATERIAL_OXYGEN])
 	co2_dangerlevel = get_danger_level(environment.gas[GAS_CO2]*partial_pressure, TLV[GAS_CO2])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
 	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
@@ -612,7 +612,7 @@
 			var/thresholds[0]
 
 			var/list/gas_names = list(
-				GAS_OXYGEN         = "O<sub>2</sub>",
+				MATERIAL_OXYGEN         = "O<sub>2</sub>",
 				GAS_CO2 = "CO<sub>2</sub>",
 				"other"          = "Other")
 			for (var/g in gas_names)

@@ -22,18 +22,18 @@
 	var/list/resource_field = list()
 
 	var/ore_types = list(
-		MATERIAL_IRON     = /obj/item/ore/iron,
-		MATERIAL_URANIUM =  /obj/item/ore/uranium,
-		MATERIAL_GOLD =     /obj/item/ore/gold,
-		MATERIAL_SILVER =   /obj/item/ore/silver,
-		MATERIAL_DIAMOND =  /obj/item/ore/diamond,
-		MATERIAL_PHORON =   /obj/item/ore/phoron,
-		MATERIAL_OSMIUM =   /obj/item/ore/osmium,
-		MATERIAL_HYDROGEN = /obj/item/ore/hydrogen,
-		MATERIAL_SAND =     /obj/item/ore/glass,
-		MATERIAL_GRAPHITE = /obj/item/ore/coal,
-		MATERIAL_ALUMINIUM = /obj/item/ore/aluminium,
-		MATERIAL_RUTILE = /obj/item/ore/rutile
+		MATERIAL_IRON     =          /obj/item/ore/iron,
+		MATERIAL_URANIUM =           /obj/item/ore/uranium,
+		MATERIAL_GOLD =              /obj/item/ore/gold,
+		MATERIAL_SILVER =            /obj/item/ore/silver,
+		MATERIAL_DIAMOND =           /obj/item/ore/diamond,
+		MATERIAL_PHORON =            /obj/item/ore/phoron,
+		MATERIAL_OSMIUM =            /obj/item/ore/osmium,
+		MATERIAL_METALLIC_HYDROGEN = /obj/item/ore/hydrogen,
+		MATERIAL_SAND =              /obj/item/ore/glass,
+		MATERIAL_GRAPHITE =          /obj/item/ore/coal,
+		MATERIAL_ALUMINIUM =         /obj/item/ore/aluminium,
+		MATERIAL_RUTILE =            /obj/item/ore/rutile
 		)
 
 	//Upgrades

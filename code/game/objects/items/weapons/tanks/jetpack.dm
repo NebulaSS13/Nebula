@@ -76,14 +76,14 @@
 	desc = "It works well in a void."
 	icon_state = "jetpack-void"
 	item_state =  "jetpack-void"
-	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(MATERIAL_OXYGEN = 6*ONE_ATMOSPHERE)
 
 /obj/item/tank/jetpack/oxygen
 	name = "jetpack (oxygen)"
 	desc = "A tank of compressed oxygen for use as propulsion in zero-gravity areas. Use with caution."
 	icon_state = "jetpack"
 	item_state = "jetpack"
-	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(MATERIAL_OXYGEN = 6*ONE_ATMOSPHERE)
 
 /obj/item/tank/jetpack/carbondioxide
 	name = "jetpack (carbon dioxide)"
