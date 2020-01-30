@@ -98,13 +98,13 @@
 		if(ATM_O2)
 			return MATERIAL_OXYGEN
 		if(ATM_N2)
-			return GAS_NITROGEN
+			return MATERIAL_NITROGEN
 		if(ATM_CO2)
-			return GAS_CO2
+			return MATERIAL_CO2
 		if(ATM_P)
 			return MATERIAL_PHORON
 		if(ATM_N2O)
-			return GAS_N2O
+			return MATERIAL_N2O
 		if(ATM_H2)
 			return MATERIAL_HYDROGEN
 		else

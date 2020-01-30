@@ -166,7 +166,7 @@
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
 	var/datum/gas_mixture/environment = loc.return_air()
 	if(environment)
-		environment.adjust_gas(GAS_CO, 0.05*power_output)
+		environment.adjust_gas(MATERIAL_CO, 0.05*power_output)
 
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet

@@ -356,7 +356,7 @@
 
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = Clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[GAS_NITROGEN] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
+		oxygen = Clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[MATERIAL_NITROGEN] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
 
 		//calculate power gain for oxygen reaction
 		var/temp_factor

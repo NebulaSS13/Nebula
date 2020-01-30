@@ -36,7 +36,7 @@
 	desc = "A tank with an N2O/O2 gas mix."
 	icon_state = "anesthetic"
 	item_state = "an_tank"
-	starting_pressure = list(MATERIAL_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, GAS_N2O = 6*ONE_ATMOSPHERE*N2STANDARD)
+	starting_pressure = list(MATERIAL_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, MATERIAL_N2O = 6*ONE_ATMOSPHERE*N2STANDARD)
 	volume = 270
 
 /*
@@ -46,7 +46,7 @@
 	name = "air tank"
 	desc = "Mixed anyone?"
 	icon_state = MATERIAL_OXYGEN
-	starting_pressure = list(MATERIAL_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, GAS_NITROGEN = 6*ONE_ATMOSPHERE*N2STANDARD)
+	starting_pressure = list(MATERIAL_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, MATERIAL_NITROGEN = 6*ONE_ATMOSPHERE*N2STANDARD)
 	volume = 180
 
 /*
@@ -114,7 +114,7 @@
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon_state = "emergency_nitro"
 	gauge_icon = "indicator_emergency"
-	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(MATERIAL_NITROGEN = 10*ONE_ATMOSPHERE)
 
 /obj/item/tank/emergency/nitrogen/double
 	name = "double emergency nitrogen tank"
@@ -130,5 +130,5 @@
 	desc = "A tank of nitrogen."
 	icon_state = "nitrogen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(MATERIAL_NITROGEN = 10*ONE_ATMOSPHERE)
 	volume = 180

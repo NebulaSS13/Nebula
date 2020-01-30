@@ -70,7 +70,7 @@
 /obj/machinery/atmospherics/unary/tank/air
 	name = "Pressure Tank (Air)"
 	icon_state = "air"
-	filling = list(MATERIAL_OXYGEN = O2STANDARD, GAS_NITROGEN = N2STANDARD)
+	filling = list(MATERIAL_OXYGEN = O2STANDARD, MATERIAL_NITROGEN = N2STANDARD)
 
 /obj/machinery/atmospherics/unary/tank/oxygen
 	name = "Pressure Tank (Oxygen)"
@@ -80,12 +80,12 @@
 /obj/machinery/atmospherics/unary/tank/nitrogen
 	name = "Pressure Tank (Nitrogen)"
 	icon_state = "n2"
-	filling = list(GAS_NITROGEN = 1)
+	filling = list(MATERIAL_NITROGEN = 1)
 
 /obj/machinery/atmospherics/unary/tank/carbon_dioxide
 	name = "Pressure Tank (Carbon Dioxide)"
 	icon_state = "co2"
-	filling = list(GAS_CO2 = 1)
+	filling = list(MATERIAL_CO2 = 1)
 
 /obj/machinery/atmospherics/unary/tank/phoron
 	name = "Pressure Tank (Phoron)"
@@ -95,7 +95,7 @@
 /obj/machinery/atmospherics/unary/tank/nitrous_oxide
 	name = "Pressure Tank (Nitrous Oxide)"
 	icon_state = "n2o"
-	filling = list(GAS_N2O = 1)
+	filling = list(MATERIAL_N2O = 1)
 
 /obj/machinery/atmospherics/unary/tank/hydrogen
 	name = "Pressure Tank (Hydrogen)"

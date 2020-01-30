@@ -91,7 +91,7 @@
 	distribute_pressure = 0
 	icon_state = "jetpack-black"
 	item_state =  "jetpack-black"
-	starting_pressure = list(GAS_CO2 = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(MATERIAL_CO2 = 6*ONE_ATMOSPHERE)
 
 /obj/item/tank/jetpack/rig
 	name = "jetpack"

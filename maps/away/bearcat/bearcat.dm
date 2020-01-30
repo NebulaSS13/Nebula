@@ -98,16 +98,16 @@
 	door_color = COLOR_AMBER
 
 /turf/simulated/floor/usedup
-	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(MATERIAL_CO2 = MOLES_O2STANDARD, MATERIAL_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/tiled/usedup
-	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(MATERIAL_CO2 = MOLES_O2STANDARD, MATERIAL_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/tiled/dark/usedup
-	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(MATERIAL_CO2 = MOLES_O2STANDARD, MATERIAL_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/tiled/white/usedup
-	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(MATERIAL_CO2 = MOLES_O2STANDARD, MATERIAL_NITROGEN = MOLES_N2STANDARD)
 
 /obj/effect/landmark/deadcap
 	name = "Dead Captain"

@@ -19,7 +19,7 @@
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_rare"
-	xarch_source_mineral = GAS_NITROGEN
+	xarch_source_mineral = MATERIAL_NITROGEN
 	ore_icon_overlay = "gems"
 	sale_price = 5
 	sheet_singular_name = "gem"

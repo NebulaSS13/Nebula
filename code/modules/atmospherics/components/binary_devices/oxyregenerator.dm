@@ -123,10 +123,10 @@
 			phase = "processing"
 
 	if (phase == "processing")//processing CO2 in tank
-		if (inner_tank.gas[GAS_CO2])
-			var/co2_intake = between(0, inner_tank.gas[GAS_CO2], power_setting*delay/10)
+		if (inner_tank.gas[MATERIAL_CO2])
+			var/co2_intake = between(0, inner_tank.gas[MATERIAL_CO2], power_setting*delay/10)
 			last_flow_rate = co2_intake
-			inner_tank.adjust_gas(GAS_CO2, -co2_intake, 1)
+			inner_tank.adjust_gas(MATERIAL_CO2, -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new
 			new_oxygen.adjust_gas(MATERIAL_OXYGEN,  co2_intake)
 			new_oxygen.temperature = T20C+30 //it's sort of hot after molecular bond breaking
@@ -179,7 +179,7 @@
 	data["targetPressure"] = round(target_pressure)
 	data["phase"] = phase
 	if (inner_tank.total_moles > 0)
-		data["co2"] = round(100 * inner_tank.gas[GAS_CO2]/inner_tank.total_moles)
+		data["co2"] = round(100 * inner_tank.gas[MATERIAL_CO2]/inner_tank.total_moles)
 		data["o2"] = round(100 * inner_tank.gas[MATERIAL_OXYGEN]/inner_tank.total_moles)
 	else
 		data["co2"] = 0

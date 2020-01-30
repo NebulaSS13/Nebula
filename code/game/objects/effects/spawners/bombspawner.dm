@@ -70,7 +70,7 @@
 
 	PT.valve_welded = 1
 	PT.air_contents.gas[MATERIAL_PHORON] = phoron_amt
-	PT.air_contents.gas[GAS_CO2] = carbon_amt
+	PT.air_contents.gas[MATERIAL_CO2] = carbon_amt
 	PT.air_contents.total_moles = phoron_amt + carbon_amt
 	PT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	PT.air_contents.update_values()

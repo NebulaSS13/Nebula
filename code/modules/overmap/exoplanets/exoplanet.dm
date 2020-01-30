@@ -318,14 +318,14 @@
 	atmosphere = new
 	if(habitability_class == HABITABILITY_IDEAL)
 		atmosphere.adjust_gas(MATERIAL_OXYGEN, MOLES_O2STANDARD, 0)
-		atmosphere.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
+		atmosphere.adjust_gas(MATERIAL_NITROGEN, MOLES_N2STANDARD)
 	else //let the fuckery commence
 		var/list/newgases = gas_data.gases.Copy()
 		if(prob(90)) //all phoron planet should be rare
 			newgases -= MATERIAL_PHORON
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
-			newgases -= GAS_ALIEN
-		newgases -= GAS_STEAM
+			newgases -= MATERIAL_ALIEN
+		newgases -= MATERIAL_STEAM
 
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
 		var/badflag = 0

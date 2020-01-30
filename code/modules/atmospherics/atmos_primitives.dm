@@ -484,8 +484,8 @@
 	if(atmosphere.total_moles) // Division by zero prevention
 		oxygen = (atmosphere.gas[MATERIAL_OXYGEN] / atmosphere.total_moles) * 100 // Percentage of the gas
 		phoron = (atmosphere.gas[MATERIAL_PHORON] / atmosphere.total_moles) * 100
-		carbondioxide = (atmosphere.gas[GAS_CO2] / atmosphere.total_moles) * 100
-		nitrousoxide = (atmosphere.gas[GAS_N2O] / atmosphere.total_moles) * 100
+		carbondioxide = (atmosphere.gas[MATERIAL_CO2] / atmosphere.total_moles) * 100
+		nitrousoxide = (atmosphere.gas[MATERIAL_N2O] / atmosphere.total_moles) * 100
 		hydrogen = (atmosphere.gas[MATERIAL_HYDROGEN] / atmosphere.total_moles) * 100
 
 	if(!oxygen)

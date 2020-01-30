@@ -792,7 +792,7 @@
 
 /datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
 	if(istype(T))
-		T.assume_gas(GAS_METHYL_BROMIDE, volume, T20C)
+		T.assume_gas(MATERIAL_METHYL_BROMIDE, volume, T20C)
 		remove_self(volume)
 
 /datum/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

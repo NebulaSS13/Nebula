@@ -1,6 +1,6 @@
 #define DEFAULT_MODE 0
 #define MV_MODE 1 //moles and volume
-#define GAS_TRAIT_MODE 2 //gas traits and constants
+#define MATERIAL_TRAIT_MODE 2 //gas traits and constants
 
 /obj/item/scanner/gas
 	name = "gas analyzer"
@@ -23,7 +23,7 @@
 		switch(mode)
 			if(MV_MODE)
 				to_chat(user, "You set the gas analyzer to Moles and volume.")
-			if(GAS_TRAIT_MODE)
+			if(MATERIAL_TRAIT_MODE)
 				to_chat(user, "You set the gas analyzer to Gas traits and data.")
 			else
 				to_chat(user, "You set the gas analyzer to Default.")
@@ -66,7 +66,7 @@
 				switch(mode)
 					if(MV_MODE)
 						perGas_add_string = ", Moles: [round(mixture.gas[mix], 0.01)]"
-					if(GAS_TRAIT_MODE)
+					if(MATERIAL_TRAIT_MODE)
 						var/list/traits = list()
 						if(gas_data.flags[mix] & XGM_GAS_FUEL)
 							traits += "can be used as combustion fuel"
@@ -88,4 +88,4 @@
 
 #undef DEFAULT_MODE
 #undef MV_MODE
-#undef GAS_TRAIT_MODE
+#undef MATERIAL_TRAIT_MODE

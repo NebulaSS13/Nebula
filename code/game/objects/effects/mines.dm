@@ -52,7 +52,7 @@
 
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-			target.assume_gas(GAS_N2O, 30)
+			target.assume_gas(MATERIAL_N2O, 30)
 
 	spawn(0)
 		qdel(src)
