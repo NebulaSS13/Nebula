@@ -2,17 +2,6 @@
 "aa" = (
 /turf/space,
 /area/space)
-"ab" = (
-/obj/machinery/firealarm{
-	pixel_y = 16
-	},
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
 "ac" = (
 /obj/structure/lattice,
 /turf/space,
@@ -29,25 +18,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/maintenance/solars)
-"ag" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
-	id_tag = "solars_out"
-	},
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/obj/machinery/access_button/airlock_exterior{
-	master_tag = "solars";
-	pixel_x = -24;
-	pixel_y = -1
-	},
-/turf/simulated/floor/tiled/steel_ridged,
-/area/ship/scrap/maintenance/solars)
 "ah" = (
-/obj/machinery/power/smes/buildable,
-/obj/structure/cable{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
@@ -73,38 +49,22 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
-"al" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
-	id_tag = "solars_in"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/obj/machinery/access_button/airlock_interior{
-	pixel_x = -24;
-	pixel_y = -1;
-	master_tag = "solars"
-	},
-/turf/simulated/floor/tiled/steel_ridged,
-/area/ship/scrap/maintenance/solars)
 "am" = (
 /obj/machinery/mech_sensor,
 /turf/space,
-/area/space)
-"an" = (
-/obj/structure/handrai{
-	tag = "icon-handrail (NORTH)";
-	icon_state = "handrail";
-	dir = 1
-	},
-/turf/simulated/floor/reinforced/airless,
 /area/space)
 "ao" = (
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
 "ap" = (
 /obj/structure/ladder,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
 "aq" = (
@@ -115,17 +75,22 @@
 /turf/simulated/floor/airless,
 /area/space)
 "as" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/light/small,
+/obj/structure/cable{
+	icon_state = "4-8";
+	d1 = 1;
+	d2 = 4
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+	icon_state = "1-8";
+	d1 = 1;
+	d2 = 4
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
@@ -151,28 +116,19 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
 "av" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/power/apc,
 /obj/structure/cable{
-	icon_state = "2-8";
-	dir = 8;
-	d1 = 32;
-	d2 = 1
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
-"aw" = (
-/obj/structure/cable/yellow{
-	d2 = 2;
-	dir = 2;
-	icon_state = "0-2"
-	},
-/turf/simulated/floor/airless,
-/area/space)
 "ax" = (
 /turf/simulated/floor/reinforced/airless,
 /area/space)
@@ -180,71 +136,12 @@
 /obj/item/solar_assembly,
 /turf/simulated/floor/airless,
 /area/space)
-"az" = (
-/obj/item/radio/intercom{
-	dir = 1;
-	pixel_y = -30
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aA" = (
-/obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	id_tag = "solars";
-	pixel_x = 25;
-	pixel_y = -4;
-	tag_airpump = "solars_pump";
-	tag_chamber_sensor = "solars_sensor";
-	tag_exterior_door = "solars_out";
-	tag_interior_door = "solars_in"
-	},
-/obj/machinery/airlock_sensor{
-	id_tag = "solars_sensor";
-	pixel_x = -25
-	},
-/obj/machinery/light/small{
-	icon_state = "bulb_map";
-	dir = 8
-	},
-/obj/structure/cable/yellow{
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/ship/scrap/maintenance/solars)
 "aB" = (
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aC" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
-	dir = 5
-	},
-/obj/structure/cable/yellow{
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aD" = (
-/obj/machinery/light,
+/obj/machinery/power/smes/buildable,
 /obj/structure/cable{
+	icon_state = "0-2";
 	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aE" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aF" = (
-/obj/machinery/power/apc,
-/obj/structure/cable{
-	d2 = 8;
-	icon_state = "0-8"
+	d2 = 4
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
@@ -264,14 +161,6 @@
 /obj/item/solar_assembly,
 /turf/simulated/floor/airless,
 /area/space)
-"aJ" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/airless,
-/area/space)
 "aK" = (
 /obj/effect/landmark/map_data{
 	height = 4
@@ -289,49 +178,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
-"aM" = (
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aN" = (
-/obj/machinery/light,
-/obj/structure/closet/crate/solar,
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aO" = (
-/obj/machinery/alarm{
-	dir = 1;
-	icon_state = "alarm0";
-	pixel_x = 0;
-	pixel_y = -32
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aP" = (
-/obj/machinery/constructable_frame/computerframe{
-	icon_state = "unwired";
-	dir = 1
-	},
-/obj/structure/cable/yellow,
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
-"aQ" = (
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/plating,
-/area/ship/scrap/maintenance/solars)
 "aR" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -341,37 +187,23 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
 "aS" = (
-/obj/structure/cable/yellow{
-	d2 = 4;
-	icon_state = "0-4"
+/obj/structure/catwalk,
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 8
 	},
-/obj/machinery/power/solar,
-/turf/simulated/floor/airless,
-/area/space)
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 8
+	},
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
 "aT" = (
 /obj/structure/cable/yellow{
 	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/item/solar_assembly,
-/turf/simulated/floor/airless,
-/area/space)
-"aU" = (
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/airless,
 /area/space)
 "aV" = (
@@ -385,61 +217,11 @@
 	},
 /turf/simulated/floor/airless,
 /area/space)
-"aX" = (
-/obj/structure/catwalk,
-/turf/simulated/floor/airless,
-/area/space)
-"aY" = (
-/obj/structure/catwalk,
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/turf/simulated/floor/airless,
-/area/space)
-"aZ" = (
-/obj/structure/catwalk,
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/airless,
-/area/space)
-"ba" = (
-/obj/structure/catwalk,
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/airless,
-/area/space)
 "bb" = (
 /obj/structure/sign/warning/airlock,
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/maintenance/solars)
-"bc" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/airless,
-/area/space)
 "bd" = (
 /obj/item/stack/material/glass/ten,
 /turf/simulated/floor/airless,
@@ -453,18 +235,227 @@
 	dir = 2;
 	icon_state = "32-2"
 	},
-/obj/effect/paint/brown,
-/turf/simulated/wall/r_wall/hull,
+/obj/structure/lattice,
+/turf/simulated/open,
 /area/ship/scrap/maintenance/solars)
-"bg" = (
-/obj/item/chems/glass/paint/yellow,
+"br" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"dq" = (
+/obj/structure/cable/yellow{
+	icon_state = "6-9"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"gb" = (
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
-"bh" = (
+"gx" = (
+/obj/structure/railing/mapped,
+/obj/effect/floor_decal/industrial/warning,
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"gY" = (
+/obj/structure/cable/yellow{
+	icon_state = "6-9"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"hp" = (
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
+"iz" = (
+/obj/structure/cable/yellow{
+	icon_state = "5-10"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"jy" = (
+/obj/machinery/constructable_frame/computerframe{
+	icon_state = "unwired";
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"kF" = (
 /obj/structure/cable/yellow{
 	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"ma" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	id_tag = "solars";
+	pixel_x = 25;
+	pixel_y = -4;
+	tag_airpump = "solars_pump";
+	tag_chamber_sensor = "solars_sensor";
+	tag_exterior_door = "solars_out";
+	tag_interior_door = "solars_in"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ship/scrap/maintenance/solars)
+"mV" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-9"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"oE" = (
+/obj/machinery/light/small{
+	icon_state = "bulb_map";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"pC" = (
+/obj/item/wrench,
+/obj/structure/handrai{
+	tag = "icon-handrail (EAST)";
+	icon_state = "handrail";
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"qw" = (
+/obj/item/frame/light_switch{
+	pixel_x = 24
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"sx" = (
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"uM" = (
+/obj/machinery/door/airlock/external/bolted/cycling{
+	id_tag = "solars_in"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/ship/scrap/maintenance/solars)
+"vi" = (
+/obj/structure/handrai{
+	tag = "icon-handrail (WEST)";
+	icon_state = "handrail";
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"vC" = (
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"wf" = (
+/obj/structure/cable/yellow{
+	icon_state = "6-8"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"xe" = (
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 8
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb_map";
+	dir = 4
+	},
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
+"yp" = (
+/obj/item/ore/iron,
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"yt" = (
+/obj/machinery/door/airlock/external/bolted/cycling{
+	id_tag = "solars_out"
+	},
+/obj/structure/cable/yellow{
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/ship/scrap/maintenance/solars)
+"yQ" = (
+/obj/machinery/airlock_sensor{
+	id_tag = "solars_sensor";
+	pixel_x = -25
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb_map";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ship/scrap/maintenance/solars)
+"zh" = (
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
+"zH" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -473,8 +464,313 @@
 	},
 /turf/simulated/floor/airless,
 /area/space)
-"tg" = (
-/obj/item/wrench,
+"Al" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"BD" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8;
+	level = 2
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"DP" = (
+/obj/structure/cable/yellow{
+	icon_state = "2-5"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"DZ" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ship/scrap/maintenance/solars)
+"Fe" = (
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"FY" = (
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/structure/handrai{
+	tag = "icon-handrail (EAST)";
+	icon_state = "handrail";
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"GP" = (
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
+"Hh" = (
+/obj/machinery/door/airlock/external/bolted/cycling{
+	id_tag = "solars_in"
+	},
+/obj/machinery/access_button/airlock_interior{
+	pixel_x = -24;
+	pixel_y = -1;
+	master_tag = "solars"
+	},
+/turf/space,
+/area/ship/scrap/maintenance/solars)
+"IY" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"Jf" = (
+/obj/structure/catwalk,
+/obj/structure/railing/mapped,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
+"Ko" = (
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 1
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb_map";
+	dir = 4
+	},
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
+"KG" = (
+/obj/structure/cable/yellow{
+	icon_state = "5-10"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"Lf" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 2
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb_map";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"Mk" = (
+/obj/structure/catwalk,
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 8
+	},
+/obj/structure/handrai{
+	tag = "icon-handrail (WEST)";
+	icon_state = "handrail";
+	dir = 8
+	},
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
+"Oy" = (
+/obj/structure/cable/yellow{
+	icon_state = "4-10"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"Pg" = (
+/obj/item/chems/glass/paint/yellow,
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb_map";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"Rg" = (
+/obj/structure/cable/yellow,
+/turf/simulated/floor/airless,
+/area/space)
+"Rk" = (
+/obj/machinery/door/airlock/external/bolted/cycling{
+	id_tag = "solars_out"
+	},
+/obj/machinery/access_button/airlock_exterior{
+	master_tag = "solars";
+	pixel_x = -24;
+	pixel_y = -1
+	},
+/turf/space,
+/area/ship/scrap/maintenance/solars)
+"Sc" = (
+/obj/structure/cable/yellow{
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"SO" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"Tt" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"Ua" = (
+/obj/structure/cable/yellow{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"Ux" = (
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"UT" = (
+/obj/structure/catwalk,
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/turf/simulated/open,
+/area/ship/scrap/maintenance/solars)
+"UY" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24;
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"We" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	icon_state = "alarm0";
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"Xu" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"XQ" = (
+/obj/machinery/door/airlock/multi_tile/engineering,
+/obj/machinery/door/firedoor,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/ship/scrap/maintenance/solars)
+"Yq" = (
+/obj/structure/handrai{
+	tag = "icon-handrail (NORTH)";
+	icon_state = "handrail";
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"Zx" = (
+/obj/structure/handrai{
+	tag = "icon-handrail (EAST)";
+	icon_state = "handrail";
+	dir = 4
+	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 
@@ -2407,9 +2703,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+ax
+ax
+ax
 aa
 aa
 aa
@@ -2488,7 +2784,7 @@ aa
 aa
 aa
 aa
-aa
+ax
 ax
 ax
 ax
@@ -2569,7 +2865,7 @@ aa
 aa
 aa
 aa
-aa
+ax
 ax
 ax
 ax
@@ -2733,7 +3029,7 @@ aa
 aa
 aa
 aa
-ax
+aa
 ax
 ax
 ax
@@ -2816,16 +3112,16 @@ aa
 aa
 aa
 aa
-ax
-ax
-ax
+aa
 ax
 aa
+ax
 aa
 aa
 aa
 aa
 aa
+ac
 ax
 ax
 ax
@@ -2896,18 +3192,18 @@ ax
 ax
 ax
 ax
-aa
-aa
-aa
 ax
-aa
 ax
-aa
-aa
-aa
-aa
-aa
-ac
+ax
+ae
+ax
+ax
+ae
+ae
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -2976,19 +3272,19 @@ ax
 ax
 ax
 ax
+ae
 ax
 ax
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+ae
+Ua
+ae
+ay
+ae
+ae
+ae
+ae
+ae
 ax
 ax
 ax
@@ -3060,16 +3356,16 @@ ax
 ax
 ax
 ax
+yp
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+DP
+zH
+Rg
+ae
+ae
+aq
+ae
+ae
 ax
 ax
 ax
@@ -3142,17 +3438,17 @@ ax
 ax
 ax
 ax
+ae
+iz
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+bd
+ae
+ae
+ay
+ae
+ae
+ae
+ae
 ax
 ax
 ax
@@ -3224,7 +3520,7 @@ ax
 ax
 ax
 ax
-ax
+iz
 ax
 ax
 ax
@@ -3301,25 +3597,25 @@ ax
 ax
 ax
 ax
+ae
+ax
+ax
+ax
+KG
 ax
 ax
 ax
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+vi
+aV
+au
+au
+aV
+vi
 ax
 ax
 aV
+au
 au
 aV
 ax
@@ -3386,25 +3682,25 @@ ax
 ax
 ax
 ax
+Oy
 ax
 ax
 ax
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+aV
+aV
+aV
+jy
+ao
+aV
+aV
+aV
 ax
 aV
 bf
 ak
 aV
-aV
+aH
 ax
 ax
 ax
@@ -3468,26 +3764,26 @@ ax
 ax
 ax
 ax
+Tt
 ax
 ax
 ax
-ae
-ax
-ae
-ae
-ax
-ax
-ax
-ax
-ax
-ax
+aV
+aV
+Lf
+FY
+sx
+gb
+FY
+Pg
+aV
 ax
 aV
 aB
 as
-aE
 aV
-aH
+ax
+ax
 ax
 ax
 ax
@@ -3550,25 +3846,25 @@ ax
 ax
 ax
 ax
-ax
-ae
-ae
-ay
-ae
-ae
-ae
-ae
-ae
-aX
-ax
-ax
-ax
-an
+Yq
 aV
-ab
+au
+aV
+aV
+kF
+gx
+GP
+GP
+GP
+GP
+Fe
+aV
+aV
+aV
+aL
 av
-aD
 aV
+ax
 ax
 ax
 ax
@@ -3632,25 +3928,25 @@ ax
 ax
 ax
 ax
-ax
-ax
-ae
-ae
-ae
-ae
-aq
-aw
-aJ
-aY
-ax
-ax
-ax
-ax
-aV
+Tt
+Rk
+DZ
+yQ
+Hh
+SO
+Ux
+GP
+GP
+GP
+GP
+Al
+XQ
+UY
+aR
 ah
 ap
-aF
 aV
+ax
 ax
 ax
 ax
@@ -3714,25 +4010,25 @@ ax
 ax
 ax
 ax
-ax
-ax
-ae
-ae
-ay
-ae
-ae
-ae
-bd
-aZ
-ax
-ax
-ax
-ax
+Xu
+yt
+af
+ma
+uM
+IY
+hp
+GP
+GP
+GP
+GP
+zh
+vC
+qw
+oE
+BD
+We
 aV
-aL
-ao
-aO
-aV
+aH
 ax
 ax
 ax
@@ -3796,25 +4092,25 @@ ax
 ax
 ax
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-aZ
-ax
-ax
-ax
-ax
-au
-aM
-ao
-az
+Yq
 aV
+au
+aV
+bb
+at
+Jf
+GP
+GP
+GP
+GP
+UT
+aV
+aV
+aV
+au
+au
+aV
+ax
 ax
 ax
 ax
@@ -3878,25 +4174,25 @@ ax
 ax
 ax
 ax
+br
 ax
 ax
-ae
-ae
-ae
-ae
-ae
-aI
+ax
+aV
+aV
+xe
+Mk
 aS
-aZ
-an
+aS
+Mk
+Ko
 aV
-au
-aV
-aV
-aQ
-aR
-aP
-aV
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -3960,25 +4256,25 @@ ax
 ax
 ax
 ax
+wf
 ax
 ax
-ae
-ae
-ae
-aw
-aJ
-bh
-aU
-ba
-bc
-ag
-af
-aA
-al
-aC
-ao
-aN
+ax
+ax
 aV
+aV
+aV
+aG
+aG
+aV
+aV
+aV
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4043,25 +4339,25 @@ ax
 ax
 ax
 ax
+dq
 ax
-ae
-ae
-ae
-ae
-ay
-ae
-aW
-aZ
-an
+ax
+ax
+ax
+Zx
 aV
 au
+au
 aV
-bb
-at
-ao
-aG
-aV
-aH
+pC
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4126,23 +4422,23 @@ ax
 ax
 ax
 ax
-ax
+gY
 ax
 ae
 ax
 ax
 ax
 ax
-aT
 ax
 ax
 ax
 ax
-aV
-aV
-bg
-aV
-aV
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4209,21 +4505,21 @@ ax
 ax
 ax
 ax
+dq
+ax
+aI
+aI
+ae
+ae
+ae
+ae
+ae
+ae
 ax
 ax
 ax
 ax
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-aV
-au
-aV
 ax
 ax
 ax
@@ -4292,15 +4588,15 @@ ax
 ax
 ax
 ax
-ax
-ax
-ax
-tg
-ax
-ax
-ax
-ax
-ax
+mV
+Sc
+Sc
+Rg
+ae
+ae
+ae
+ae
+ae
 ax
 ax
 ax
@@ -4371,17 +4667,17 @@ ax
 ax
 ax
 ax
+ae
 ax
 ax
 ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+aT
+aW
+ay
+ae
+ae
+ae
+ae
 ax
 ax
 ax
@@ -4459,7 +4755,7 @@ ax
 ax
 ax
 ax
-ax
+ae
 ax
 ax
 ax
@@ -4536,20 +4832,20 @@ ax
 ax
 ax
 ax
-aa
-aa
-aa
 ax
-aa
 ax
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ax
+ax
+ax
+ax
+yp
+ax
+ax
+ax
+ax
+ax
+ax
+ac
 aa
 aa
 aa
@@ -4620,9 +4916,9 @@ aa
 aa
 aa
 aa
+aa
 ax
-ax
-ax
+aa
 ax
 aa
 aa
@@ -4701,7 +4997,7 @@ aa
 aa
 aa
 aa
-ax
+aa
 ax
 ax
 ax
@@ -4865,7 +5161,7 @@ aa
 aa
 aa
 aa
-aa
+ax
 ax
 ax
 ax
@@ -4948,7 +5244,7 @@ aa
 aa
 aa
 aa
-aa
+ax
 ax
 ax
 ax
@@ -5031,9 +5327,9 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
+ax
+ax
+ax
 aa
 aa
 aa

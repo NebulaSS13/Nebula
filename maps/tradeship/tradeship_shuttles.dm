@@ -35,19 +35,20 @@
 // Essentially a bare platform that moves up and down.
 /obj/turbolift_map_holder/tradeship
 	name = "Tradeship cargo elevator placeholder"
-	depth = 3
+	depth = 4
 	lift_size_x = 3
 	lift_size_y = 3
 	door_type =     null
 	wall_type =     null
 	firedoor_type = null
 	light_type =    null
-	floor_type =  /turf/simulated/floor/tiled/dark/monotile
+	floor_type =  /turf/simulated/floor/tiled/steel_grid
 	button_type = /obj/structure/lift/button/standalone
 	panel_type =  /obj/structure/lift/panel/standalone
 	icon = 'icons/obj/turbolift_preview_2x2.dmi'
 	areas_to_use = list(
 		/area/turbolift/tradeship_enclave,
 		/area/turbolift/tradeship_cargo,
-		/area/turbolift/tradeship_upper
+		/area/turbolift/tradeship_upper,
+		/area/turbolift/tradeship_roof
 	)
