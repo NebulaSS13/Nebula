@@ -21,7 +21,7 @@
 	. = ..(mapload)
 	if(!material_name)
 		material_name = MAT_STEEL
-	material = SSmaterials.get_material_by_name(material_name)
+	material = SSmaterials.get_material_datum(material_name)
 	if(!material)
 		return INITIALIZE_HINT_QDEL
 	maxhealth = max(100, material.integrity*10)
@@ -45,12 +45,6 @@
 
 /obj/machinery/door/unpowered/simple/requiresID()
 	return 0
-
-/obj/machinery/door/unpowered/simple/get_material()
-	return material
-
-/obj/machinery/door/unpowered/simple/get_material_name()
-	return material.name
 
 /obj/machinery/door/unpowered/simple/bullet_act(var/obj/item/projectile/Proj)
 	var/damage = Proj.get_structure_damage()
@@ -136,7 +130,7 @@
 			lock = L.create_lock(src,user)
 		return
 
-	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
+	if(istype(I, /obj/item/stack/material) && I.get_material_type() == src.get_material_type())
 		if(stat & BROKEN)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return

@@ -14,7 +14,7 @@
 /obj/item/tank/oxygen
 	name = "oxygen tank"
 	desc = "A tank of oxygen."
-	icon_state = MAT_OXYGEN
+	icon_state = "oxygen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list(MAT_OXYGEN = 6*ONE_ATMOSPHERE)
 	volume = 180
@@ -45,7 +45,7 @@
 /obj/item/tank/air
 	name = "air tank"
 	desc = "Mixed anyone?"
-	icon_state = MAT_OXYGEN
+	icon_state = "oxygen"
 	starting_pressure = list(MAT_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, MAT_NITROGEN = 6*ONE_ATMOSPHERE*N2STANDARD)
 	volume = 180
 

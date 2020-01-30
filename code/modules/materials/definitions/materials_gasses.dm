@@ -1,6 +1,5 @@
 // Placeholders for compile purposes.
 /material/gas
-	name = null
 	display_name = null
 	icon_colour = COLOR_GRAY80
 	stack_type = null
@@ -13,95 +12,95 @@
 	value = 0
 
 /material/gas/hydrogen
-	name = MAT_HYDROGEN
+	display_name = "hydrogen"
 	lore_text = "A colorless, flammable gas."
 	is_fusion_fuel = TRUE
 
 /material/gas/boron
-	name = MAT_BORON
+	display_name = "boron"
 	lore_text = "Boron is a chemical element with the symbol B and atomic number 5."
 	is_fusion_fuel = TRUE
 
 /material/gas/lithium
-	name = MAT_LITHIUM
+	display_name = "lithium"
 	lore_text = "A chemical element, used as antidepressant."
 	chem_products = list(/datum/reagent/lithium = 20)
 	is_fusion_fuel = TRUE
 
 /material/gas/oxygen
-	name = MAT_OXYGEN
+	display_name = "oxygen"
 	lore_text = "An ubiquitous oxidizing agent."
 	chem_products = list(/datum/reagent/oxygen = 20)
 	is_fusion_fuel = TRUE
 
 /material/gas/helium
-	name = MAT_HELIUM
+	display_name = "helium"
 	lore_text = "A noble gas. It makes your voice squeaky."
 	chem_products = list(/datum/reagent/helium = 20)
 	is_fusion_fuel = TRUE
 
 /material/gas/carbon_dioxide
-	name = MAT_CO2
+	display_name = "carbon dioxide"
 	lore_text = "A byproduct of respiration."
 
 /material/gas/carbon_monoxide
-	name = MAT_CO
+	display_name = "carbon monoxide"
 	lore_text = "A highly poisonous gas."
 	chem_products = list(/datum/reagent/carbon_monoxide = 20)
 
 /material/gas/methyl_bromide
-	name = MAT_METHYL_BROMIDE
+	display_name = "methyl bromide"
 	lore_text = "A once-popular fumigant and weedkiller."
 	chem_products = list(/datum/reagent/toxin/methyl_bromide = 20)
 
-/material/gas/n2o
-	name = MAT_N2O
+/material/gas/sleeping_agent
+	display_name = "sleeping agent"
 	lore_text = "A mild sedative. Also known as laughing gas."
 	chem_products = list(/datum/reagent/nitrous_oxide = 20)
 
 /material/gas/nitrogen
-	name = MAT_NITROGEN
+	display_name = "nitrogen"
 	lore_text = "An ubiquitous noble gas."
 
-/material/gas/no2
-	name = MAT_NO2
+/material/gas/nitrodioxide
+	display_name = "nitrogen dioxide"
 	chem_products = list(/datum/reagent/toxin = 20)
 
-/material/gas/no
-	name = MAT_NO
+/material/gas/nitricoxide
+	display_name = "nitric oxide"
 
 /material/gas/methane
-	name = MAT_METHANE
+	display_name = "methane"
 
 /material/gas/alien
-	name = MAT_ALIEN
+	display_name = "alien gas"
 
 /material/gas/argon
-	name = MAT_ARGON
+	display_name = "argon"
 	lore_text = "Just when you need it, all of your supplies argon."
 
 /material/gas/krypton
-	name = MAT_KRYPTON
+	display_name = "krypton"
 
 /material/gas/neon
-	name = MAT_NEON
+	display_name = "neon"
 
 /material/gas/xenon
-	name = MAT_XENON
+	display_name = "xenon"
 	chem_products = list(/datum/reagent/nitrous_oxide/xenon = 20)
 
 /material/gas/ammonia
-	name = MAT_AMMONIA
+	display_name = "ammonia"
 	chem_products = list(/datum/reagent/ammonia = 20)
 
 /material/gas/chlorine
-	name = MAT_CHLORINE
+	display_name = "chlorine"
 	chem_products = list(/datum/reagent/toxin/chlorine = 20)
 
-/material/gas/sulfur
-	name = MAT_SULFUR
+/material/gas/sulfurdioxide
+	display_name = "sulfur dioxide"
 	chem_products = list(/datum/reagent/sulfur = 20)
 
-/material/gas/steam
-	name = MAT_STEAM
+/material/gas/water
+	display_name = "water vapour"
 	chem_products = list(/datum/reagent/water = 20)

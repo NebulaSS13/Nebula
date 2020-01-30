@@ -17,7 +17,7 @@
 
 /decl/crafting_stage/spear_blade_shard/get_product(var/obj/item/work)
 	var/obj/item/material/shard/blade = locate() in work
-	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.name)
+	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.type)
 
 /decl/crafting_stage/spear_blade_blade
 	completion_trigger_type = /obj/item/material/butterflyblade
@@ -26,7 +26,7 @@
 
 /decl/crafting_stage/spear_blade_blade/get_product(var/obj/item/work)
 	var/obj/item/material/butterflyblade/blade = locate() in work
-	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.name)
+	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.type)
 
 /decl/crafting_stage/stunprod_wirecutters
 	completion_trigger_type = /obj/item/wirecutters

@@ -42,7 +42,7 @@
 
 	material = material_key
 	if(!isnull(material) && !istype(material))
-		material = SSmaterials.get_material_by_name(material)
+		material = SSmaterials.get_material_datum(material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 

@@ -182,7 +182,7 @@
 
 	else if(istype(W, /obj/item/stack/material) && !glass)
 		var/obj/item/stack/material/S = W
-		var/material_name = S.get_material_name()		
+		var/material_name = S.get_material_type()		
 		if (S)
 			if (S.get_amount() >= 1)
 				if(material_name == MAT_GLASS && S.reinf_material)
@@ -201,8 +201,8 @@
 						user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
 						if(do_after(user, 40,src) && !glass)
 							if (S.use(2))
-								to_chat(user, "<span class='notice'>You installed [S.get_material_name()] plating into the airlock assembly.</span>")
-								glass = S.get_material_name()
+								to_chat(user, "<span class='notice'>You installed [S.get_material_type()] plating into the airlock assembly.</span>")
+								glass = S.get_material_type()
 
 	else if(isScrewdriver(W) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)

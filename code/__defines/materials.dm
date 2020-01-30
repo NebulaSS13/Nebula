@@ -1,119 +1,130 @@
-#define MAT_PLASTIC                 "plastic"
-#define MAT_PLASTEEL                "plasteel"
-#define MAT_STEEL                   "steel"
-#define MAT_GLASS                   "glass"
-#define MAT_GOLD                    "gold"
-#define MAT_SILVER                  "silver"
-#define MAT_DIAMOND                 "diamond"
-#define MAT_PHORON                  "phoron"
-#define MAT_URANIUM                 "uranium"
-#define MAT_CRYSTAL                 "crystal"
-#define MAT_SANDSTONE               "sandstone"
-#define MAT_CONCRETE                "concrete"
-#define MAT_IRON                    "iron"
-#define MAT_PLATINUM                "platinum"
-#define MAT_BRONZE                  "bronze"
-#define MAT_PHORON_GLASS            "phglass"
-#define MAT_REINFORCED_PHORON_GLASS "rphglass"
-#define MAT_MARBLE                  "marble"
-#define MAT_CULT                    "cult"
-#define MAT_REINFORCED_CULT         "cult2"
-#define MAT_VOX                     "voxalloy"
-#define MAT_TITANIUM                "titanium"
-#define MAT_RUTILE                  "rutile"
-#define MAT_OSMIUM_CARBIDE_PLASTEEL "osmium-carbide plasteel"
-#define MAT_OSMIUM                  "osmium"
-#define MAT_HYDROGEN                "hydrogen"
-#define MAT_METALLIC_HYDROGEN       "mhydrogen"
-#define MAT_WASTE                   "waste"
-#define MAT_ELEVATORIUM             "elevatorium"
-#define MAT_ALIENALLOY              "aliumium"
-#define MAT_SAND                    "sand"
-#define MAT_GRAPHITE                "graphite"
-#define MAT_DEUTERIUM               "deuterium"
-#define MAT_TRITIUM                 "tritium"
-#define MAT_SUPERMATTER             "supermatter"
-#define MAT_PITCHBLENDE             "pitchblende"
-#define MAT_HEMATITE                "hematite"
-#define MAT_QUARTZ                  "quartz"
-#define MAT_PYRITE                  "pyrite"
-#define MAT_SPODUMENE               "spodumene"
-#define MAT_CINNABAR                "cinnabar"
-#define MAT_PHOSPHORITE             "phosphorite"
-#define MAT_ROCK_SALT               "rock salt"
-#define MAT_POTASH                  "potash"
-#define MAT_BAUXITE                 "bauxite"
-#define MAT_COPPER                  "copper"
-#define MAT_CARDBOARD               "cardboard"
-#define MAT_CLOTH                   "cloth"
-#define MAT_CARPET                  "carpet"
-#define MAT_ALUMINIUM               "aluminium"
-#define MAT_NULLGLASS               "nullglass"
-#define MAT_HYDROGEN                "hydrogen"
-#define MAT_BORON                   "boron"
-#define MAT_LITHIUM                 "lithium"
-#define MAT_OXYGEN                  "oxygen"
-#define MAT_HELIUM                  "helium"
+#define MAT_PLACEHOLDER             /material/placeholder
 
+#define MAT_PLASTIC                 /material/plastic
+#define MAT_PLASTEEL                /material/plasteel
+#define MAT_STEEL                   /material/steel
+#define MAT_GLASS                   /material/glass
+#define MAT_GOLD                    /material/gold
+#define MAT_SILVER                  /material/silver
+#define MAT_DIAMOND                 /material/diamond
+#define MAT_PHORON                  /material/phoron
+#define MAT_URANIUM                 /material/uranium
+#define MAT_CRYSTAL                 /material/diamond/crystal
+#define MAT_SANDSTONE               /material/stone
+#define MAT_CONCRETE                /material/stone/concrete
+#define MAT_IRON                    /material/iron
+#define MAT_PLATINUM                /material/platinum
+#define MAT_BRONZE                  /material/gold/bronze
+#define MAT_PHORON_GLASS            /material/glass/phoron
+#define MAT_MARBLE                  /material/stone/marble
+#define MAT_CULT                    /material/cult
+#define MAT_REINFORCED_CULT         /material/cult/reinf
+#define MAT_VOX                     /material/voxalloy
+#define MAT_TITANIUM                /material/plasteel/titanium
+#define MAT_RUTILE                  /material/rutile
+#define MAT_OSMIUM_CARBIDE_PLASTEEL /material/plasteel/ocp
+#define MAT_OSMIUM                  /material/osmium
+#define MAT_HYDROGEN                /material/hydrogen
+#define MAT_METALLIC_HYDROGEN       /material/mhydrogen
+#define MAT_WASTE                   /material/waste
+#define MAT_ELEVATORIUM             /material/voxalloy/elevatorium
+#define MAT_ALIENALLOY              /material/aliumium
+#define MAT_SAND                    /material/sand
+#define MAT_GRAPHITE                /material/graphite
+#define MAT_DEUTERIUM               /material/deuterium
+#define MAT_TRITIUM                 /material/tritium
+#define MAT_SUPERMATTER             /material/phoron/supermatter
+#define MAT_PITCHBLENDE             /material/pitchblende
+#define MAT_HEMATITE                /material/hematite
+#define MAT_QUARTZ                  /material/quartz
+#define MAT_PYRITE                  /material/pyrite
+#define MAT_SPODUMENE               /material/spodumene
+#define MAT_CINNABAR                /material/cinnabar
+#define MAT_PHOSPHORITE             /material/phosphorite
+#define MAT_ROCK_SALT               /material/rocksalt
+#define MAT_POTASH                  /material/potash
+#define MAT_BAUXITE                 /material/bauxite
+#define MAT_COPPER                  /material/copper
+#define MAT_CARDBOARD               /material/cardboard
+#define MAT_CLOTH                   /material/cloth
+#define MAT_CLOTH_TEAL              /material/cloth/teal
+#define MAT_CLOTH_BLACK             /material/cloth/black
+#define MAT_CLOTH_GREEN             /material/cloth/green
+#define MAT_CLOTH_PURPLE            /material/cloth/purple
+#define MAT_CLOTH_BLUE              /material/cloth/blue
+#define MAT_CLOTH_BEIGE             /material/cloth/beige
+#define MAT_CLOTH_LIME              /material/cloth/lime
+#define MAT_CLOTH_YELLOW            /material/cloth/yellow
+
+
+
+#define MAT_CARPET                  /material/carpet
+#define MAT_ALUMINIUM               /material/aluminium
+#define MAT_NULLGLASS               /material/nullglass
 // gasses
-#define MAT_CO2                     "carbon_dioxide"
-#define MAT_CO                      "carbon_monoxide"
-#define MAT_METHYL_BROMIDE          "methyl_bromide"
-#define MAT_N2O                     "sleeping_agent"
-#define MAT_NITROGEN                "nitrogen"
-#define MAT_NO2                     "nitrodioxide"
-#define MAT_NO                      "nitricoxide"
-#define MAT_METHANE                 "methane"
-#define MAT_ALIEN                   "aliether"
-#define MAT_ARGON                   "argon"
-#define MAT_KRYPTON                 "krypton"
-#define MAT_NEON                    "neon"
-#define MAT_XENON                   "xenon"
-#define MAT_AMMONIA                 "ammonia"
-#define MAT_CHLORINE                "chlorine"
-#define MAT_SULFUR                  "sulfurdioxide"
-#define MAT_STEAM                   "water"
+#define MAT_CO2                     /material/gas/carbon_dioxide
+#define MAT_CO                      /material/gas/carbon_monoxide
+#define MAT_METHYL_BROMIDE          /material/gas/methyl_bromide
+#define MAT_N2O                     /material/gas/sleeping_agent
+#define MAT_NITROGEN                /material/gas/nitrogen
+#define MAT_NO2                     /material/gas/nitrodioxide
+#define MAT_NO                      /material/gas/nitricoxide
+#define MAT_METHANE                 /material/gas/methane
+#define MAT_ALIEN_GAS               /material/gas/alien
+#define MAT_ARGON                   /material/gas/argon
+#define MAT_KRYPTON                 /material/gas/krypton
+#define MAT_NEON                    /material/gas/neon
+#define MAT_XENON                   /material/gas/xenon
+#define MAT_AMMONIA                 /material/gas/ammonia
+#define MAT_CHLORINE                /material/gas/chlorine
+#define MAT_SULFUR_DIOXIDE          /material/gas/sulfurdioxide
+#define MAT_STEAM                   /material/gas/water
+#define MAT_HYDROGEN                /material/gas/hydrogen
+#define MAT_BORON                   /material/gas/boron
+#define MAT_LITHIUM                 /material/gas/lithium
+#define MAT_OXYGEN                  /material/gas/oxygen
+#define MAT_HELIUM                  /material/gas/helium
 
 //woods
-#define MAT_WOOD                    "wood"
-#define MAT_MAHOGANY                "mahogany"
-#define MAT_MAPLE                   "maple"
-#define MAT_EBONY                   "ebony"
-#define MAT_WALNUT                  "walnut"
-#define MAT_BAMBOO                  "bamboo"
-#define MAT_YEW                     "yew"
+#define MAT_WOOD                    /material/wood
+#define MAT_MAHOGANY                /material/wood/mahogany
+#define MAT_MAPLE                   /material/wood/maple
+#define MAT_EBONY                   /material/wood/ebony
+#define MAT_WALNUT                  /material/wood/walnut
+#define MAT_BAMBOO                  /material/wood/bamboo
+#define MAT_YEW                     /material/wood/yew
 
 // skins and bones
-#define MAT_SKIN_GENERIC            "skin"
-#define MAT_SKIN_LIZARD             "lizardskin"
-#define MAT_SKIN_CHITIN             "chitin"
-#define MAT_SKIN_FUR                "brown fur"
-#define MAT_SKIN_FUR_GRAY           "gray fur"
-#define MAT_SKIN_FUR_WHITE          "white fur"
-#define MAT_SKIN_GOATHIDE           "goathide"
-#define MAT_SKIN_COWHIDE            "cowhide"
-#define MAT_SKIN_SHARK              "sharkskin"
-#define MAT_SKIN_FISH               "fishskin"
-#define MAT_SKIN_FUR_ORANGE         "orange fur"
-#define MAT_SKIN_FUR_BLACK          "black fur"
-#define MAT_SKIN_FUR_HEAVY          "heavy fur"
-#define MAT_SKIN_FISH_PURPLE        "purple fishskin"
-#define MAT_SKIN_FEATHERS           "white feathers"
-#define MAT_SKIN_FEATHERS_PURPLE    "purple feathers"
-#define MAT_SKIN_FEATHERS_BLUE      "blue feathers"
-#define MAT_SKIN_FEATHERS_GREEN     "green feathers"
-#define MAT_SKIN_FEATHERS_BROWN     "brown feathers"
-#define MAT_SKIN_FEATHERS_RED       "red feathers"
-#define MAT_SKIN_FEATHERS_BLACK     "black feathers"
+#define MAT_SKIN_GENERIC            /material/skin
+#define MAT_SKIN_LIZARD             /material/skin/lizard
+#define MAT_SKIN_CHITIN             /material/skin/insect
+#define MAT_SKIN_FUR                /material/skin/fur
+#define MAT_SKIN_FUR_GRAY           /material/skin/fur/gray
+#define MAT_SKIN_FUR_WHITE          /material/skin/fur/white
+#define MAT_SKIN_GOATHIDE           /material/skin/goat
+#define MAT_SKIN_COWHIDE            /material/skin/cow
+#define MAT_SKIN_SHARK              /material/skin/shark
+#define MAT_SKIN_FISH               /material/skin/fish
+#define MAT_SKIN_FUR_ORANGE         /material/skin/fur/orange
+#define MAT_SKIN_FUR_BLACK          /material/skin/fur/black
+#define MAT_SKIN_FUR_HEAVY          /material/skin/fur/heavy
+#define MAT_SKIN_FISH_PURPLE        /material/skin/fish/purple
+#define MAT_SKIN_FEATHERS           /material/skin/feathers
+#define MAT_SKIN_FEATHERS_PURPLE    /material/skin/feathers/purple
+#define MAT_SKIN_FEATHERS_BLUE      /material/skin/feathers/blue
+#define MAT_SKIN_FEATHERS_GREEN     /material/skin/feathers/green
+#define MAT_SKIN_FEATHERS_BROWN     /material/skin/feathers/brown
+#define MAT_SKIN_FEATHERS_RED       /material/skin/feathers/red
+#define MAT_SKIN_FEATHERS_BLACK     /material/skin/feathers/black
 
-#define MAT_BONE_GENERIC            "bone"
-#define MAT_BONE_CARTILAGE          "cartilage"
-#define MAT_BONE_FISH               "fishbone"
+#define MAT_BONE_GENERIC            /material/bone
+#define MAT_BONE_CARTILAGE          /material/bone/cartilage
+#define MAT_BONE_FISH               /material/bone/fish
 
-#define MAT_LEATHER_GENERIC         "leather"
-#define MAT_LEATHER_LIZARD          "scaled hide"
-#define MAT_LEATHER_FUR             "furred hide"
-#define MAT_LEATHER_CHITIN          "treated chitin"
+#define MAT_LEATHER_GENERIC         /material/leather
+#define MAT_LEATHER_LIZARD          /material/leather/lizard
+#define MAT_LEATHER_FUR             /material/leather/fur
+#define MAT_LEATHER_CHITIN          /material/leather/chitin
 
 // defaults
 #define DEFAULT_WALL_MATERIAL       MAT_STEEL

@@ -1,5 +1,5 @@
 /material/wood
-	name = MAT_WOOD
+	display_name = "wood"
 	lore_text = "A fibrous structural material harvested from an indeterminable plant. Don't get a splinter."
 	adjective_name = "wooden"
 	stack_type = /obj/item/stack/material/wood
@@ -32,9 +32,7 @@
 	value = 3
 
 /material/wood/holographic
-	name = "holo" + MAT_WOOD
 	icon_colour = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
-	display_name = "wood"
 	stack_type = null
 	shard_type = SHARD_NONE
 	sale_price = 0
@@ -42,7 +40,7 @@
 	hidden_from_codex = TRUE
 
 /material/wood/mahogany
-	name = MAT_MAHOGANY
+	display_name = "mahogany"
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	adjective_name = MAT_MAHOGANY
 	icon_colour = WOOD_COLOR_RICH
@@ -51,13 +49,13 @@
 	value = 45
 
 /material/wood/maple
-	name = MAT_MAPLE
+	display_name = "maple"
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	adjective_name = MAT_MAPLE
 	icon_colour = WOOD_COLOR_PALE
 
 /material/wood/ebony
-	name = MAT_EBONY
+	display_name = "ebony"
 	lore_text = "Ebony is the name for a group of dark coloured, extremely dense, and fine grained hardwoods. \
 				Despite gene modification to produce larger source trees and ample land to plant them on, \
 				genuine ebony remains a luxury for the very wealthy thanks to the price fixing efforts of intergalactic luxuries cartels. \
@@ -71,7 +69,7 @@
 	value = 85
 
 /material/wood/walnut
-	name = MAT_WALNUT
+	display_name = "walnut"
 	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
 				Walnut is especially favoured for construction of figurines (where it contrasts with lighter coloured woods) and tables. \
 				The ultimate aspiration of many professionals is an office with a vintage walnut desk, the bigger and heavier the better."
@@ -83,7 +81,7 @@
 	value = 21
 
 /material/wood/bamboo
-	name = MAT_BAMBOO
+	display_name = "bamboo"
 	lore_text = "Bamboo is a fast-growing grass which can be used similar to wood after processing. Due to its swift growth \
 				and high strength, various species of bamboo area common building materials in developing societies."
 	adjective_name = MAT_BAMBOO
@@ -92,7 +90,7 @@
 	hardness = MAT_VALUE_RIGID
 
 /material/wood/yew
-	name = MAT_YEW
+	display_name = "yew"
 	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
 				tree can live for nearly a thousand years thanks to its natural disease resistance."
 	adjective_name = MAT_YEW

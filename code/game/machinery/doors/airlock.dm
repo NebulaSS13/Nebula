@@ -113,7 +113,7 @@ var/list/airlock_overlays = list()
 	..()
 
 /obj/machinery/door/airlock/get_material()
-	return SSmaterials.get_material_by_name(mineral ? mineral : MAT_STEEL)
+	return SSmaterials.get_material_datum(mineral ? mineral : MAT_STEEL)
 
 /obj/machinery/door/airlock/get_codex_value()
 	return "airlock"

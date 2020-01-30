@@ -21,7 +21,7 @@
 	if(!_reinf_material)
 		_reinf_material = reinf_material
 	if(_reinf_material)
-		reinf_material = SSmaterials.get_material_by_name(_reinf_material)
+		reinf_material = SSmaterials.get_material_datum(_reinf_material)
 		if(!istype(reinf_material))
 			reinf_material = null
 	base_state = icon_state
@@ -40,7 +40,7 @@
 /obj/item/stack/material/list_recipes(mob/user, recipes_sublist)
 	if(!material)
 		return
-	recipes = material.get_recipes(reinf_material && reinf_material.name)
+	recipes = material.get_recipes(reinf_material && reinf_material.type)
 	..() 
 
 /obj/item/stack/material/get_codex_value()
@@ -92,9 +92,9 @@
 		return FALSE
 	if(matter_multiplier != M.matter_multiplier)
 		return FALSE
-	if(material.name != M.material.name)
+	if(material.type != M.material.type)
 		return FALSE
-	if((reinf_material && reinf_material.name) != (M.reinf_material && M.reinf_material.name))
+	if((reinf_material && reinf_material.type) != (M.reinf_material && M.reinf_material.type))
 		return FALSE
 	return TRUE
 

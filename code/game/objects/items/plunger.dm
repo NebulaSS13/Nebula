@@ -9,7 +9,7 @@
 	w_class = 3
 	slot_flags = SLOT_HEAD | SLOT_MASK
 	hitsound = 'sound/effects/plunger.ogg'
-	matter = list("steel" = 5000)
+	matter = list(MATERIAL_PLASTIC = 500)
 
 /obj/item/plunger/robot
 	name = "plunger"

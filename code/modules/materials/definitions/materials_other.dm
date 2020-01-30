@@ -1,5 +1,5 @@
 /material/waste
-	name = MAT_WASTE
+	display_name = "slag"
 	stack_type = null
 	icon_colour = "#2e3a07"
 	ore_name = "slag"
@@ -8,7 +8,6 @@
 	hidden_from_codex = TRUE
 
 /material/cult
-	name = MAT_CULT
 	display_name = "disturbing stone"
 	icon_base = "cult"
 	icon_colour = "#402821"
@@ -24,6 +23,5 @@
 	new /obj/structure/girder/cult(target)
 
 /material/cult/reinf
-	name = MAT_REINFORCED_CULT
 	display_name = "runic inscriptions"
 	

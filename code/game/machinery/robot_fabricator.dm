@@ -11,7 +11,7 @@
 	active_power_usage = 10000
 
 /obj/machinery/robotic_fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if (istype(O, /obj/item/stack/material) && O.get_material_name() == MAT_STEEL)
+	if (istype(O, /obj/item/stack/material) && O.get_material_type() == MAT_STEEL)
 		var/obj/item/stack/M = O
 		if (src.metal_amount < 150000.0)
 			var/count = 0

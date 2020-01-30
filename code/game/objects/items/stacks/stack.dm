@@ -351,8 +351,8 @@
 
 /datum/stack_recipe/New(material/material, var/reinforce_material)
 	if(material)
-		use_material = material.name
-		difficulty += material.construction_difficulty
+		use_material = material.type
+		difficulty +=  material.construction_difficulty
 	if(reinforce_material)
 		use_reinf_material = reinforce_material
 

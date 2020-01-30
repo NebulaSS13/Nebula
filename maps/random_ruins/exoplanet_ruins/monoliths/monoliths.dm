@@ -20,7 +20,7 @@
 /obj/structure/monolith/Initialize()
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
-	var/material/A = SSmaterials.get_material_by_name(MAT_ALIENALLOY)
+	var/material/A = SSmaterials.get_material_datum(MAT_ALIENALLOY)
 	if(A)
 		color = A.icon_colour
 	if(GLOB.using_map.use_overmap)

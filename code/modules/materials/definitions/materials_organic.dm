@@ -1,5 +1,5 @@
 /material/plastic
-	name = MAT_PLASTIC
+	display_name = "plastic"
 	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
 	stack_type = /obj/item/stack/material/plastic
 	flags = MAT_FLAG_BRITTLE
@@ -18,7 +18,6 @@
 	sale_price = 1
 
 /material/plastic/holographic
-	name = "holo" + MAT_PLASTIC
 	display_name = MAT_PLASTIC
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -26,7 +25,7 @@
 	hidden_from_codex = TRUE
 
 /material/cardboard
-	name = MAT_CARDBOARD
+	display_name = "cardboard"
 	lore_text = "What with the difficulties presented by growing plants in orbit, a stock of cardboard in space is probably more valuable than gold."
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MAT_FLAG_BRITTLE
@@ -46,8 +45,7 @@
 	value = 0
 
 /material/cloth //todo
-	name = MAT_CLOTH
-	display_name ="cotton"
+	display_name = "cotton"
 	use_name = "cotton"
 	icon_colour = "#ffffff"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
@@ -61,64 +59,47 @@
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 
-/material/cloth/carpet
-	name = "carpet"
-	display_name = "red"
-	use_name = "red upholstery"
-	icon_colour = "#9d2300"
-	sheet_singular_name = "tile"
-	sheet_plural_name = "tiles"
-
 /material/cloth/yellow
-	name = "yellow"
 	display_name ="yellow"
 	use_name = "yellow cloth"
 	icon_colour = "#ffbf00"
 
 /material/cloth/teal
-	name = "teal"
 	display_name = "teal"
 	use_name = "teal cloth"
 	icon_colour = "#00e1ff"
 
 /material/cloth/black
-	name = "black"
 	display_name = "black"
 	use_name = "black cloth"
 	icon_colour = "#505050"
 
 /material/cloth/green
-	name = "green"
 	display_name = "green"
 	use_name = "green cloth"
 	icon_colour = "#b7f27d"
 
-/material/cloth/puple
-	name = "purple"
+/material/cloth/purple
 	display_name = "purple"
 	use_name = "purple cloth"
 	icon_colour = "#9933ff"
 
 /material/cloth/blue
-	name = "blue"
 	display_name = "blue"
 	use_name = "blue cloth"
 	icon_colour = "#46698c"
 
 /material/cloth/beige
-	name = "beige"
 	display_name = "beige"
 	use_name = "beige cloth"
 	icon_colour = "#ceb689"
 
 /material/cloth/lime
-	name = "lime"
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62e36c"
 
 /material/carpet
-	name = MAT_CARPET
 	display_name = "red"
 	use_name = "red upholstery"
 	icon_colour = "#9d2300"
@@ -132,7 +113,7 @@
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 
 /material/skin
-	name = MAT_SKIN_GENERIC
+	display_name = "skin"
 	stack_type = /obj/item/stack/material/generic/skin
 	icon_colour = "#9e8c72"
 	flags = MAT_FLAG_PADDING
@@ -149,14 +130,14 @@
 	var/tans_to = MAT_LEATHER_GENERIC
 
 /material/skin/lizard
-	name = MAT_SKIN_LIZARD
+	display_name = "lizardskin"
 	icon_colour = "#626952"
 	tans_to = MAT_LEATHER_LIZARD
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = 10
 
 /material/skin/insect
-	name = MAT_SKIN_CHITIN
+	display_name = "chitin"
 	icon_colour = "#7a726d"
 	tans_to = MAT_LEATHER_CHITIN
 	integrity = 75
@@ -165,78 +146,63 @@
 	brute_armor = 2
 
 /material/skin/fur
-	name = MAT_SKIN_FUR
+	display_name = "fur"
 	icon_colour = "#7a726d"
 	tans_to = MAT_LEATHER_FUR
-
 /material/skin/fur/gray
-	name = MAT_SKIN_FUR_GRAY
 
 /material/skin/fur/white
-	name = MAT_SKIN_FUR_WHITE
 
 /material/skin/fur/orange
-	name = MAT_SKIN_FUR_ORANGE
 	icon_colour = COLOR_ORANGE
 
 /material/skin/fur/black
-	name = MAT_SKIN_FUR_BLACK
 	icon_colour = COLOR_GRAY20
 
 /material/skin/fur/heavy
-	name = MAT_SKIN_FUR_HEAVY
 	icon_colour = COLOR_GUNMETAL
 
 /material/skin/goat
-	name = MAT_SKIN_GOATHIDE
 	icon_colour = COLOR_SILVER
 
 /material/skin/cow
-	name = MAT_SKIN_COWHIDE
 	icon_colour = COLOR_GRAY40
 
 /material/skin/shark
-	name = MAT_SKIN_SHARK
+	display_name = "sharkskin"
 	icon_colour = COLOR_PURPLE_GRAY
 
 /material/skin/fish
-	name = MAT_SKIN_FISH
 	icon_colour = COLOR_BOTTLE_GREEN
+	display_name = "fishskin"
 
 /material/skin/fish/purple
-	name = MAT_SKIN_FISH_PURPLE
 	icon_colour = COLOR_PALE_PURPLE_GRAY
 
 /material/skin/feathers
-	name = MAT_SKIN_FEATHERS
+	display_name = "feathers"
 	icon_colour = COLOR_SILVER
 
 /material/skin/feathers/purple
-	name = MAT_SKIN_FEATHERS_PURPLE
 	icon_colour = COLOR_PALE_PURPLE_GRAY
 
 /material/skin/feathers/blue
-	name = MAT_SKIN_FEATHERS_BLUE
 	icon_colour = COLOR_SKY_BLUE
 
 /material/skin/feathers/green
-	name = MAT_SKIN_FEATHERS_GREEN
 	icon_colour = COLOR_BOTTLE_GREEN
 
 /material/skin/feathers/brown
-	name = MAT_SKIN_FEATHERS_BROWN
 	icon_colour = COLOR_BEASTY_BROWN
 
 /material/skin/feathers/red
-	name = MAT_SKIN_FEATHERS_RED
 	icon_colour = COLOR_RED
 
 /material/skin/feathers/black
-	name = MAT_SKIN_FEATHERS_BLACK
 	icon_colour = COLOR_GRAY15
 
 /material/bone
-	name = MAT_BONE_GENERIC
+	display_name = "bone"
 	sheet_singular_name = "length"
 	sheet_plural_name = "lengths"
 	icon_colour = "#f0edc7"
@@ -253,17 +219,17 @@
 	value = 1
 
 /material/bone/fish
-	name = MAT_BONE_FISH
+	display_name = "fishbone"
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = 13
 
 /material/bone/cartilage
-	name = MAT_BONE_CARTILAGE
+	display_name = "cartilage"
 	hardness = 0
 	weight = 10
 
 /material/leather
-	name = MAT_LEATHER_GENERIC
+	display_name = "leather"
 	icon_colour = "#5c4831"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	flags = MAT_FLAG_PADDING
@@ -279,16 +245,16 @@
 	weight = 10
 
 /material/leather/lizard
-	name = MAT_LEATHER_LIZARD
+	display_name = "hide"
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
 	weight = 15
 
 /material/leather/fur
-	name = MAT_LEATHER_FUR
+	display_name = "tanned pelt"
 
 /material/leather/chitin
-	name = MAT_LEATHER_CHITIN
+	display_name = "treated chitin"
 	integrity = 100
 	hardness = MAT_VALUE_HARD
 	weight = 18

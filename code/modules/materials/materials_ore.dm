@@ -17,7 +17,7 @@
 	. = ..()
 	if(istype(material))
 		matter = list()
-		matter[material.name] = SHEET_MATERIAL_AMOUNT
+		matter[material.type] = SHEET_MATERIAL_AMOUNT
 		name =       material.ore_name
 		desc =       material.ore_desc ? material.ore_desc : "A lump of ore."
 		color =      material.icon_colour

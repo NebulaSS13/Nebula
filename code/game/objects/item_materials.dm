@@ -67,7 +67,7 @@
 
 /obj/item/proc/set_material(var/new_material)
 	if(new_material)
-		material = SSmaterials.get_material_by_name(new_material)
+		material = SSmaterials.get_material_datum(new_material)
 	if(istype(material))
 		health = round(material.integrity/5)
 		if(material.products_need_process())

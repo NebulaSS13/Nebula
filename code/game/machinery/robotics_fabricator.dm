@@ -148,7 +148,7 @@
 		return ..()
 
 	var/obj/item/stack/material/stack = I
-	var/material = stack.material.name
+	var/material = stack.material.type
 	var/stack_singular = "[stack.material.use_name] [stack.material.sheet_singular_name]" // eg "steel sheet", "wood plank"
 	var/stack_plural = "[stack.material.use_name] [stack.material.sheet_plural_name]" // eg "steel sheets", "wood planks"
 	var/amnt = stack.perunit

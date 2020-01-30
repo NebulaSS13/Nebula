@@ -8,7 +8,7 @@
 	is_psionic_nullifier = TRUE
 
 /material/nullglass
-	name = MAT_NULLGLASS
+	
 	icon_colour = COLOR_NULLGLASS
 	conductive = 1
 	stack_type = /obj/item/stack/material/nullglass

@@ -20,7 +20,7 @@
 		return INITIALIZE_HINT_QDEL
 	if(!new_material)
 		new_material = init_material
-	material = SSmaterials.get_material_by_name(new_material)
+	material = SSmaterials.get_material_datum(new_material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 
@@ -53,8 +53,8 @@
 		qdel(src)
 
 /obj/structure/lattice/proc/deconstruct(var/mob/user)
-	to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
-	new /obj/item/stack/material/rods(loc, 1, material.name)
+	to_chat(user, SPAN_NOTICE("Slicing lattice joints..."))
+	new /obj/item/stack/material/rods(loc, 1, material.type)
 	qdel(src)
 
 /obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)

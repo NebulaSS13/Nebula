@@ -324,7 +324,7 @@
 		if(prob(90)) //all phoron planet should be rare
 			newgases -= MAT_PHORON
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
-			newgases -= MAT_ALIEN
+			newgases -= MAT_ALIEN_GAS
 		newgases -= MAT_STEAM
 
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100

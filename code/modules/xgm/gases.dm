@@ -77,7 +77,7 @@
 	symbol = "CH4"
 
 /decl/xgm_gas/alium
-	id = MAT_ALIEN
+	id = MAT_ALIEN_GAS
 	name = "Aliether"
 	hidden_from_codex = TRUE
 	symbol_html = "X"
@@ -216,7 +216,7 @@
 	symbol = "H2O"
 
 /decl/xgm_gas/sulfurdioxide
-	id = MAT_SULFUR
+	id = MAT_SULFUR_DIOXIDE
 	name = "Sulfur Dioxide"
 
 	specific_heat = 30	// J/(mol*K)

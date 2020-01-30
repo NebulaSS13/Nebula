@@ -38,12 +38,12 @@
 			new_material = MAT_GLASS
 	if(!new_reinf_material)
 		new_reinf_material = init_reinf_material
-	material = SSmaterials.get_material_by_name(new_material)
+	material = SSmaterials.get_material_datum(new_material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 
 	if(new_reinf_material)
-		reinf_material = SSmaterials.get_material_by_name(new_reinf_material)
+		reinf_material = SSmaterials.get_material_datum(new_reinf_material)
 
 	name = "[reinf_material ? "reinforced " : ""][material.display_name] window"
 	desc = "A window pane made from [material.display_name]."
@@ -123,13 +123,13 @@
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
-		visible_message("<span class='warning'>\The [src] shatters!</span>")
+		visible_message(SPAN_DANGER("\The [src] shatters!"))
 
 	var/debris_count = is_fulltile() ? 4 : 1
 	for(var/i = 0 to debris_count)
 		material.place_shard(loc)
 		if(reinf_material)
-			new /obj/item/stack/material/rods(loc, 1, reinf_material.name)
+			new /obj/item/stack/material/rods(loc, 1, reinf_material.type)
 	qdel(src)
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
@@ -584,7 +584,7 @@
 				return
 
 		if (ST.use(required_amount))
-			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.name, ST.reinf_material && ST.reinf_material.name)
+			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.type, ST.reinf_material && ST.reinf_material.type)
 			to_chat(user, "<span class='notice'>You place [WD].</span>")
 			WD.construction_state = 0
 			WD.set_anchored(FALSE)

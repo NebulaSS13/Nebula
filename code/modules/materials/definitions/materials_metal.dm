@@ -1,5 +1,5 @@
 /material/uranium
-	name = MAT_URANIUM
+	display_name = "uranium"
 	lore_text = "A highly radioactive metal. Commonly used as fuel in fission reactors."
 	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
 	wall_name = "bulkhead"
@@ -20,7 +20,7 @@
 	value = 100
 
 /material/gold
-	name = MAT_GOLD
+	display_name = "gold"
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/gold
@@ -51,7 +51,7 @@
 	value = 40	
 
 /material/gold/bronze //placeholder for ashtrays
-	name = MAT_BRONZE
+	display_name = "bronze"
 	lore_text = "An alloy of copper and tin."
 	icon_colour = "#edd12f"
 	construction_difficulty = MAT_VALUE_HARD_DIY
@@ -60,7 +60,7 @@
 	sale_price = null
 
 /material/copper
-	name = MAT_COPPER
+	display_name = "copper"
 	wall_name = "bulkhead"
 	icon_colour = "#b87333"
 	weight = 15
@@ -82,7 +82,7 @@
 	sale_price = 1
 
 /material/silver
-	name = MAT_SILVER
+	display_name = "silver"
 	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/silver
@@ -106,7 +106,7 @@
 	value = 35
 
 /material/steel
-	name = MAT_STEEL
+	display_name = "steel"
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/steel
@@ -128,7 +128,6 @@
 	value = 4
 
 /material/steel/holographic
-	name = "holo" + MAT_STEEL
 	display_name = MAT_STEEL
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -140,7 +139,7 @@
 	value = 0
 
 /material/aluminium
-	name = MAT_ALUMINIUM
+	display_name = "aluminium"
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/aluminium
@@ -156,7 +155,6 @@
 	sale_price = 1
 
 /material/aluminium/holographic
-	name = "holo" + MAT_ALUMINIUM
 	display_name = MAT_ALUMINIUM
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -167,7 +165,7 @@
 	hidden_from_codex = TRUE
 
 /material/plasteel
-	name = MAT_PLASTEEL
+	display_name = "plasteel"
 	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/plasteel
@@ -191,7 +189,7 @@
 	value = 12
 
 /material/plasteel/titanium
-	name = MAT_TITANIUM
+	display_name = "titanium"
 	lore_text = "A light, strong, corrosion-resistant metal. Perfect for cladding high-velocity ballistic supply pods."
 	brute_armor = 10
 	burn_armor = 8
@@ -209,7 +207,7 @@
 	value = 30
 
 /material/plasteel/ocp
-	name = MAT_OSMIUM_CARBIDE_PLASTEEL
+	display_name = "osmium-carbide plasteel"
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
 	melting_point = 12000
@@ -226,7 +224,7 @@
 	sale_price = 3
 
 /material/osmium
-	name = MAT_OSMIUM
+	display_name = "osmium"
 	lore_text = "An extremely hard form of platinum."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/osmium
@@ -240,7 +238,7 @@
 	value = 30
 
 /material/tritium
-	name = MAT_TRITIUM
+	display_name = "tritium"
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
 	wall_name = "bulkhead"
@@ -254,7 +252,7 @@
 	value = 300
 
 /material/deuterium
-	name = MAT_DEUTERIUM
+	display_name = "deuterium"
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
 	wall_name = "bulkhead"
@@ -267,7 +265,7 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
 /material/mhydrogen
-	name = MAT_METALLIC_HYDROGEN
+	display_name = "metallic hydrogen"
 	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
 	display_name = "metallic hydrogen"
 	wall_name = "bulkhead"
@@ -288,7 +286,7 @@
 	value = 100
 
 /material/platinum
-	name = MAT_PLATINUM
+	display_name = "platinum"
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/platinum
@@ -309,7 +307,7 @@
 	value = 80
 
 /material/iron
-	name = MAT_IRON
+	display_name = "iron"
 	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/iron
@@ -327,8 +325,7 @@
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
-	name = MAT_VOX
-	display_name = "durable alloy"
+	display_name = "dense alloy"
 	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#6c7364"
@@ -343,7 +340,6 @@
 
 // Likewise.
 /material/voxalloy/elevatorium
-	name = MAT_ELEVATORIUM
 	display_name = "elevator panelling"
 	wall_name = "bulkhead"
 	icon_colour = "#666666"
@@ -351,7 +347,6 @@
 	hidden_from_codex = TRUE
 
 /material/aliumium
-	name = MAT_ALIENALLOY
 	display_name = "alien alloy"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -380,7 +375,7 @@
 	return
 
 /material/hematite
-	name = MAT_HEMATITE
+	display_name = "hematite"
 	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#aa6666"
@@ -393,7 +388,7 @@
 	sale_price = 1
 
 /material/rutile
-	name = MAT_RUTILE
+	display_name = "rutile"
 	wall_name = "bulkhead"
 	stack_type = null
 	icon_colour = "#d8ad97"

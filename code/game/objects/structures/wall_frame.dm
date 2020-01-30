@@ -28,7 +28,7 @@
 
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
-	material = SSmaterials.get_material_by_name(materialtype)
+	material = SSmaterials.get_material_datum(materialtype)
 	health = material.integrity
 
 /obj/structure/wall_frame/LateInitialize()

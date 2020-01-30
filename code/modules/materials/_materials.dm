@@ -26,17 +26,15 @@
 //Returns the material the object is made of, if applicable.
 //Will we ever need to return more than one value here? Or should we just return the "dominant" material.
 /obj/proc/get_material()
-	return null
+	return
 
 //mostly for convenience
-/obj/proc/get_material_name()
-	var/material/material = get_material()
-	if(material)
-		return material.name
+/obj/proc/get_material_type()
+	var/material/mat = get_material()
+	. = mat && mat.type
 
 // Material definition and procs follow.
 /material
-	var/name	                          // Unique name for use in indexing the list.
 	var/display_name                      // Prettier name for display.
 	var/adjective_name
 	var/use_name
@@ -146,24 +144,22 @@
 
 /material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
-		to_chat(user, "<span class='warning'>You cannot make anything out of \the [target_stack]</span>")
+		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]."))	
 		return
 	if(!used_stack.can_use(5) || !target_stack.can_use(1))
-		to_chat(user, "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>")
+		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [display_name] to make anything useful."))
 		return
 
 	used_stack.use(5)
 	target_stack.use(1)
-	to_chat(user, "<span class='notice'>You attach wire to the [name].</span>")
+	to_chat(user, SPAN_NOTICE("You attach wire to the [display_name]."))
 	var/obj/item/product = new wire_product(get_turf(user))
 	if(!(user.l_hand && user.r_hand))
 		user.put_in_hands(product)
 
-// Make sure we have a display name and shard icon even if they aren't explicitly set.
+// Make sure we have a use name and shard icon even if they aren't explicitly set.
 /material/New()
 	..()
-	if(!display_name)
-		display_name = name
 	if(!use_name)
 		use_name = display_name
 	if(!adjective_name)
@@ -176,7 +172,7 @@
 // Return the matter comprising this material.
 /material/proc/get_matter()
 	var/list/temp_matter = list()
-	temp_matter[name] = SHEET_MATERIAL_AMOUNT
+	temp_matter[type] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
 // Weapons handle applying a divisor for this value locally.
@@ -204,7 +200,7 @@
 
 // Used by walls when qdel()ing to avoid neighbor merging.
 /material/placeholder
-	name = "placeholder"
+	display_name = "placeholder"
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)
@@ -220,12 +216,12 @@
 
 // Debris product. Used ALL THE TIME.
 /material/proc/place_sheet(var/turf/target, var/amount = 1)
-	return stack_type ? new stack_type(target, amount, name) : null
+	return stack_type ? new stack_type(target, amount, type) : null
 
 // As above.
 /material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/material/shard(target, src.name)
+		return new /obj/item/material/shard(target, type)
 
 // Used by walls and weapons to determine if they break or not.
 /material/proc/is_brittle()

@@ -288,7 +288,7 @@ var/list/mining_floors = list()
 		return
 
 	clear_ore_effects()
-	var/obj/item/ore/O = new(src, mineral.name)
+	var/obj/item/ore/O = new(src, mineral.type)
 	if(geologic_data && istype(O))
 		geologic_data.UpdateNearbyArtifactInfo(src)
 		O.geologic_data = geologic_data
@@ -395,7 +395,7 @@ var/list/mining_floors = list()
 		mineral_name = pickweight(default_mineral_list)
 
 	if(!mineral && mineral_name)
-		mineral = SSmaterials.get_material_by_name(mineral_name)
+		mineral = SSmaterials.get_material_datum(mineral_name)
 	if(istype(mineral))
 		UpdateMineral()
 	..(newloc)

@@ -1,5 +1,5 @@
 /material/pitchblende
-	name = MAT_PITCHBLENDE
+	display_name = "pitchblende"
 	ore_compresses_to = MAT_PITCHBLENDE
 	icon_colour = "#917d1a"
 	ore_smelts_to = MAT_URANIUM
@@ -23,7 +23,7 @@
 	sale_price = 2
 
 /material/graphite
-	name = MAT_GRAPHITE
+	display_name = "graphite"
 	ore_compresses_to = MAT_GRAPHITE
 	icon_colour = "#444444"
 	ore_name = "graphite"
@@ -39,7 +39,7 @@
 	sale_price = 1
 
 /material/quartz
-	name = MAT_QUARTZ
+	display_name = "quartz"
 	ore_compresses_to = MAT_QUARTZ
 	ore_name = "quartz"
 	opacity = 0.5
@@ -60,7 +60,7 @@
 	sale_price = 2
 
 /material/pyrite
-	name = MAT_PYRITE
+	display_name = "pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -81,7 +81,7 @@
 	sale_price = 2
 
 /material/spodumene
-	name = MAT_SPODUMENE
+	display_name = "spodumene"
 	ore_compresses_to = MAT_SPODUMENE
 	ore_name = "spodumene"
 	ore_result_amount = 10
@@ -101,7 +101,7 @@
 	sale_price = 2
 
 /material/cinnabar
-	name = MAT_CINNABAR
+	display_name = "cinnabar"
 	ore_compresses_to = MAT_CINNABAR
 	ore_name = "cinnabar"
 	ore_result_amount = 10
@@ -121,7 +121,7 @@
 	sale_price = 2
 
 /material/phosphorite
-	name = MAT_PHOSPHORITE
+	display_name = "phosphorite"
 	ore_compresses_to = MAT_PHOSPHORITE
 	ore_name = "phosphorite"
 	ore_result_amount = 10
@@ -141,7 +141,7 @@
 	sale_price = 2
 
 /material/rocksalt
-	name = MAT_ROCK_SALT
+	display_name = "rock salt"
 	ore_compresses_to = MAT_ROCK_SALT
 	ore_name = "rock salt"
 	ore_result_amount = 10
@@ -161,7 +161,7 @@
 	sale_price = 2
 
 /material/potash
-	name = MAT_POTASH
+	display_name = "potash"
 	ore_compresses_to = MAT_POTASH
 	ore_name = "potash"
 	ore_result_amount = 10
@@ -181,7 +181,7 @@
 	sale_price = 2
 
 /material/bauxite
-	name = MAT_BAUXITE
+	display_name = "bauxite"
 	ore_name = "bauxite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -202,7 +202,7 @@
 	sale_price = 1
 
 /material/sand
-	name = MAT_SAND
+	display_name = "sand"
 	stack_type = null
 	icon_colour = "#e2dbb5"
 	ore_smelts_to = MAT_GLASS
@@ -214,7 +214,7 @@
 		)
 
 /material/phoron
-	name = MAT_PHORON
+	display_name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
@@ -248,7 +248,7 @@
 	value = 200
 
 /material/phoron/supermatter
-	name = MAT_SUPERMATTER
+	display_name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
 	radioactivity = 20
