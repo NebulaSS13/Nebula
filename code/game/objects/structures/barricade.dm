@@ -15,7 +15,7 @@
 	. = ..(mapload)
 	if(!material_name)
 		material_name = MAT_WOOD
-	material = SSmaterials.get_material_datum("[material_name]")
+	material = SSmaterials.get_material_datum(material_name)
 	if(!material)
 		return INITIALIZE_HINT_QDEL
 	SetName("[material.display_name] barricade")
@@ -117,7 +117,7 @@
 	. = ..(mapload, material_name)
 	if(!rod_material_name)
 		rod_material_name = MAT_WOOD
-	rod_material = SSmaterials.get_material_datum("[rod_material_name]")
+	rod_material = SSmaterials.get_material_datum(rod_material_name)
 	SetName("cheval-de-frise")
 	desc = "A rather simple [material.display_name] barrier. It menaces with spikes of [rod_material.display_name]."
 	damage = (rod_material.hardness * 0.85)

@@ -22,10 +22,9 @@
 	. = ..()
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
-		for(var/g in gas_data.gases)
+		for(var/g in SSmaterials.all_gasses)
 			if(g != MAT_OXYGEN && g != MAT_NITROGEN)
 				scrubbing_gas += g
-
 
 /obj/machinery/portable_atmospherics/powered/scrubber/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

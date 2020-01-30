@@ -5,7 +5,7 @@
 
 /datum/artifact_trigger/gas/New()
 	if(!gas_needed)
-		gas_needed = list(pick(gas_data.gases) = rand(1,10))
+		gas_needed = list(pick(SSmaterials.all_gasses) = rand(1,10))
 
 /datum/artifact_trigger/gas/on_gas_exposure(datum/gas_mixture/gas)
 	. = TRUE

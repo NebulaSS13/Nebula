@@ -10,10 +10,26 @@ SUBSYSTEM_DEF(materials)
 	var/list/processable_ores
 	var/list/fusion_reactions
 
+	var/list/all_gasses
+	var/list/gas_flag_cache
+
 /datum/controller/subsystem/materials/Initialize()
-	build_material_lists()
-	build_fusion_reaction_list()
+	build_material_lists()       // Build core material lists.
+	build_fusion_reaction_list() // Build fusion reaction tree.
+	build_gas_lists()             // Cache our gas data.
 	. = ..()
+
+/datum/controller/subsystem/materials/proc/build_gas_lists()
+	all_gasses = list()
+	gas_flag_cache = list()
+	for(var/thing in materials_by_name)
+		var/material/mat = materials_by_name[thing]
+		if(mat.is_a_gas())
+			all_gasses[thing] = mat
+			gas_flag_cache[thing] = mat.gas_flags
+
+/datum/controller/subsystem/materials/proc/get_gas_flags(var/id)
+	. = gas_flag_cache[id]
 
 /datum/controller/subsystem/materials/proc/build_material_lists()
 
@@ -45,7 +61,10 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/get_material_datum(var/mat)
 	. = materials_by_name[mat]
 	if(!.)
-		log_error("Unable to acquire material by key '[mat]'")
+		if(ispath(mat))
+			log_error("Unable to acquire material by path '[mat]'.")
+		else
+			log_error("Unable to acquire material by non-path key '[mat]'.")
 
 /proc/material_display_name(var/mat)
 	var/material/material = SSmaterials.get_material_datum(mat)

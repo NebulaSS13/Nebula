@@ -18,7 +18,7 @@
 	sale_price = 1
 
 /material/plastic/holographic
-	display_name = MAT_PLASTIC
+	display_name = "holographic plastic"
 	stack_type = null
 	shard_type = SHARD_NONE
 	sale_price = null

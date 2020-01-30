@@ -46,11 +46,11 @@
 	var/total_moles = air_sample.total_moles
 	if(total_moles <= 0)
 		return
-
 	. = list()
-	for(var/gas in air_sample.gas)				
-		var/gaspercent = round(air_sample.gas["[gas]"]*100/total_moles,0.01)
-		var/gas_list = list("symbol" = gas_data.symbol_html["[gas]"], "percent" = gaspercent)
+	for(var/gas in air_sample.gas)
+		var/material/mat = SSmaterials.get_material_datum(gas)			
+		var/gaspercent = round(air_sample.gas[gas]*100/total_moles,0.01)
+		var/gas_list = list("symbol" = mat.gas_symbol_html, "percent" = gaspercent)
 		. += list(gas_list)
 
 /decl/public_access/public_variable/pressure

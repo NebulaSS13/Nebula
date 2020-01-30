@@ -1,6 +1,7 @@
 #define MAT_PLACEHOLDER             /material/placeholder
 
 #define MAT_PLASTIC                 /material/plastic
+#define MAT_PLASTIC_HOLOGRAPHIC     /material/plastic/holographic
 #define MAT_PLASTEEL                /material/plasteel
 #define MAT_STEEL                   /material/steel
 #define MAT_GLASS                   /material/glass
@@ -24,15 +25,15 @@
 #define MAT_RUTILE                  /material/rutile
 #define MAT_OSMIUM_CARBIDE_PLASTEEL /material/plasteel/ocp
 #define MAT_OSMIUM                  /material/osmium
-#define MAT_HYDROGEN                /material/hydrogen
-#define MAT_METALLIC_HYDROGEN       /material/mhydrogen
 #define MAT_WASTE                   /material/waste
 #define MAT_ELEVATORIUM             /material/voxalloy/elevatorium
 #define MAT_ALIENALLOY              /material/aliumium
 #define MAT_SAND                    /material/sand
 #define MAT_GRAPHITE                /material/graphite
-#define MAT_DEUTERIUM               /material/deuterium
-#define MAT_TRITIUM                 /material/tritium
+#define MAT_HYDROGEN                /material/hydrogen
+#define MAT_METALLIC_HYDROGEN       /material/hydrogen/metallic
+#define MAT_DEUTERIUM               /material/hydrogen/deuterium
+#define MAT_TRITIUM                 /material/hydrogen/tritium
 #define MAT_SUPERMATTER             /material/phoron/supermatter
 #define MAT_PITCHBLENDE             /material/pitchblende
 #define MAT_HEMATITE                /material/hematite
@@ -55,11 +56,9 @@
 #define MAT_CLOTH_BEIGE             /material/cloth/beige
 #define MAT_CLOTH_LIME              /material/cloth/lime
 #define MAT_CLOTH_YELLOW            /material/cloth/yellow
-
-
-
 #define MAT_CARPET                  /material/carpet
 #define MAT_ALUMINIUM               /material/aluminium
+#define MAT_ALUMINIUM_HOLOGRAPHIC   /material/aluminium/holographic
 #define MAT_NULLGLASS               /material/nullglass
 // gasses
 #define MAT_CO2                     /material/gas/carbon_dioxide
@@ -79,7 +78,6 @@
 #define MAT_CHLORINE                /material/gas/chlorine
 #define MAT_SULFUR_DIOXIDE          /material/gas/sulfurdioxide
 #define MAT_STEAM                   /material/gas/water
-#define MAT_HYDROGEN                /material/gas/hydrogen
 #define MAT_BORON                   /material/gas/boron
 #define MAT_LITHIUM                 /material/gas/lithium
 #define MAT_OXYGEN                  /material/gas/oxygen
@@ -87,6 +85,7 @@
 
 //woods
 #define MAT_WOOD                    /material/wood
+#define MAT_WOOD_HOLOGRAPHIC        /material/wood/holographic
 #define MAT_MAHOGANY                /material/wood/mahogany
 #define MAT_MAPLE                   /material/wood/maple
 #define MAT_EBONY                   /material/wood/ebony

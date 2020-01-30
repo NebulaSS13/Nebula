@@ -1,8 +1,6 @@
 /*
 	Unit tests for ATMOSPHERICS primitives
 */
-#define ALL_GASIDS gas_data.gases
-
 /datum/unit_test/atmos_machinery
 	template = /datum/unit_test/atmos_machinery
 	var/list/test_cases = list()
@@ -43,7 +41,7 @@
 
 /datum/unit_test/atmos_machinery/proc/check_moles_conserved(var/case_name, var/list/before_gas_mixes, var/list/after_gas_mixes)
 	var/failed = FALSE
-	for(var/gasid in gas_data.gases)
+	for(var/gasid in SSmaterials.all_gasses)
 		var/before = 0
 		for(var/gasmix in before_gas_mixes)
 			var/datum/gas_mixture/G = before_gas_mixes[gasmix]
@@ -199,8 +197,7 @@
 	name = "ATMOS MACHINERY: scrub_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/scrub_gas/start_test()
-	var/list/filtering = gas_data.gases
-
+	var/list/filtering = SSmaterials.all_gasses
 	for(var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -216,7 +213,7 @@
 	name = "ATMOS MACHINERY: filter_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/filter_gas/start_test()
-	var/list/filtering = gas_data.gases
+	var/list/filtering = SSmaterials.all_gasses
 
 	for(var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
@@ -239,7 +236,7 @@
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/filtering = list()
-		for(var/gasid in gas_data.gases)
+		for(var/gasid in SSmaterials.all_gasses)
 			filtering[gasid] = after_gas_mixes["sink"] //just filter everything to sink
 
 		filter_gas_multi(null, filtering, after_gas_mixes["source"], after_gas_mixes["sink"], null, INFINITY)
@@ -258,9 +255,11 @@
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/mix_sources = list()
-		for(var/gasid in ALL_GASIDS)
+		var/list/all_gasses = SSmaterials.all_gasses
+		var/gas_count = length(all_gasses)
+		for(var/gasid in all_gasses)
 			var/datum/gas_mixture/mix_source = after_gas_mixes["sink"]
-			mix_sources[mix_source] = 1.0/gas_data.gases.len //doesn't work as a macro for some reason
+			mix_sources[mix_source] = 1.0/gas_count //doesn't work as a macro for some reason
 
 		mix_gas(null, mix_sources, after_gas_mixes["sink"], null, INFINITY)
 
@@ -314,5 +313,3 @@
 	else
 		pass("All pipes were mapped properly.")
 	return 1
-
-#undef ALL_GASIDS

@@ -251,7 +251,7 @@
 	item_type = "[pick("cylinder","tank","chamber")]"
 	var/obj/item/tank/new_item = new/obj/item/tank(loc)
 	new_item.air_contents.gas.Cut()
-	new_item.air_contents.adjust_gas(pick(gas_data.gases),15)
+	new_item.air_contents.adjust_gas(pick(SSmaterials.all_gasses),15)
 	additional_desc = "It [pick("gloops","sloshes")] slightly when you shake it."
 	return new_item
 

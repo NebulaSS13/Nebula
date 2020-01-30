@@ -1,3 +1,28 @@
+/obj/effect/gas_overlay
+	name = "gas"
+	desc = "You shouldn't be clicking this."
+	icon = 'icons/effects/tile_effects.dmi'
+	icon_state = "generic"
+	layer = FIRE_LAYER
+	appearance_flags = RESET_COLOR
+	mouse_opacity = 0
+	var/material/material
+
+/obj/effect/gas_overlay/proc/update_alpha_animation(var/new_alpha)
+	animate(src, alpha = new_alpha)
+	alpha = new_alpha
+	animate(src, alpha = 0.8 * new_alpha, time = 10, easing = SINE_EASING | EASE_OUT, loop = -1)
+	animate(alpha = new_alpha, time = 10, easing = SINE_EASING | EASE_IN, loop = -1)
+
+/obj/effect/gas_overlay/Initialize(mapload, gas)
+	. = ..()
+	material = SSmaterials.get_material_datum(gas)
+	if(!istype(material))
+		return INITIALIZE_HINT_QDEL
+	if(material.gas_tile_overlay)
+		icon_state = material.gas_tile_overlay
+	color = material.icon_colour
+
 /*
 	MATERIAL DATUMS
 	This data is used by various parts of the game for basic physical properties and behaviors
@@ -118,6 +143,19 @@
 	var/list/xarch_ages = list("thousand" = 999, "million" = 999)
 	var/xarch_source_mineral = "iron"
 
+	// Gas behavior.
+	var/gas_overlay_limit
+	var/gas_burn_product
+	var/gas_breathed_product
+	var/gas_condensation_product
+	var/gas_specific_heat
+	var/gas_molar_mass
+	var/gas_flags =              0
+	var/gas_symbol_html
+	var/gas_symbol
+	var/gas_tile_overlay =       "generic"
+	var/gas_condensation_point = INFINITY
+
 // Placeholders for light tiles and rglass.
 /material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
 	if(!used_stack.can_use(1))
@@ -174,6 +212,9 @@
 	var/list/temp_matter = list()
 	temp_matter[type] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
+
+/material/proc/is_a_gas()
+	. = !isnull(gas_specific_heat) && !isnull(gas_molar_mass) // Arbitrary but good enough.
 
 // Weapons handle applying a divisor for this value locally.
 /material/proc/get_blunt_damage()

@@ -768,8 +768,12 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 					dat += "</br><b>Vulnerable to [kind].</b>"
 				else if(damage_types[kind] < 1)
 					dat += "</br><b>Resistant to [kind].</b>"
-			dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
-			dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
+			if(breath_type)
+				var/material/mat = SSmaterials.get_material_datum(breath_type)
+				dat += "</br><b>They breathe [mat.display_name].</b>"
+			if(exhale_type)
+				var/material/mat = SSmaterials.get_material_datum(exhale_type)
+				dat += "</br><b>They exhale [mat.display_name].</b>"
 			if(LAZYLEN(poison_types))
 				dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"

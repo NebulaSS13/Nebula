@@ -224,7 +224,8 @@
 		if(S.consume_gasses)
 			S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
 		for(var/g in atmosphere.gas)
-			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
+			var/material/mat = SSmaterials.get_material_datum(g)
+			if(mat.gas_flags & XGM_GAS_CONTAMINANT)
 				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 	if(prob(50))
 		var/chem_type = SSchemistry.get_random_chem(TRUE, atmosphere ? atmosphere.temperature : T0C)
@@ -244,15 +245,16 @@
 		A.verbs |= /mob/living/simple_animal/proc/name_species
 	if(atmosphere)
 		//Set up gases for living things
+		var/list/all_gasses = SSmaterials.all_gasses
 		if(!LAZYLEN(breathgas))
-			var/list/goodgases = gas_data.gases.Copy()
+			var/list/goodgases = all_gasses.Copy() 
 			var/gasnum = min(rand(1,3), goodgases.len)
 			for(var/i = 1 to gasnum)
 				var/gas = pick(goodgases)
 				breathgas[gas] = round(0.4*goodgases[gas], 0.1)
 				goodgases -= gas
 		if(!badgas)
-			var/list/badgases = gas_data.gases.Copy()
+			var/list/badgases = all_gasses.Copy()
 			badgases -= atmosphere.gas
 			badgas = pick(badgases)
 
@@ -320,7 +322,8 @@
 		atmosphere.adjust_gas(MAT_OXYGEN, MOLES_O2STANDARD, 0)
 		atmosphere.adjust_gas(MAT_NITROGEN, MOLES_N2STANDARD)
 	else //let the fuckery commence
-		var/list/newgases = gas_data.gases.Copy()
+		var/list/newgases = SSmaterials.all_gasses
+		newgases = newgases.Copy() // So we don't mutate the global list.
 		if(prob(90)) //all phoron planet should be rare
 			newgases -= MAT_PHORON
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
@@ -342,13 +345,15 @@
 		while(i <= gasnum && total_moles && newgases.len)
 			if(badflag && sanity)
 				for(var/g in newgases)
-					if(gas_data.flags[g] & badflag)
+					var/material/mat = SSmaterials.get_material_datum(g)
+					if(mat.gas_flags & badflag)
 						newgases -= g
 			var/ng = pick_n_take(newgases)	//pick a gas
+			var/material/mat = SSmaterials.get_material_datum(ng)
 			if(sanity) //make sure atmosphere is not flammable... always
-				if(gas_data.flags[ng] & XGM_GAS_OXIDIZER)
+				if(mat.gas_flags & XGM_GAS_OXIDIZER)
 					badflag |= XGM_GAS_FUEL
-				if(gas_data.flags[ng] & XGM_GAS_FUEL)
+				if(mat.gas_flags & XGM_GAS_FUEL)
 					badflag |= XGM_GAS_OXIDIZER
 				sanity = 0
 
@@ -367,7 +372,8 @@
 			var/list/gases = list()
 			for(var/g in atmosphere.gas)
 				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
-					gases += gas_data.name[g]
+					var/material/mat = SSmaterials.get_material_datum(g)
+					gases += mat.display_name
 			extra_data += "Atmosphere composition: [english_list(gases)]"
 			var/inaccuracy = rand(8,12)/10
 			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
@@ -456,8 +462,8 @@
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_atmosphere_color()
 	var/list/colors = list()
 	for(var/g in atmosphere.gas)
-		if(gas_data.tile_overlay_color[g])
-			colors += gas_data.tile_overlay_color[g]
+		var/material/mat = SSmaterials.get_material_datum(g)
+		colors += mat.icon_colour
 	if(colors.len)
 		return MixColors(colors)
 

@@ -1140,10 +1140,9 @@
 	var/list/gas_names = list()
 	var/list/gas_amounts = list()
 	for(var/id in gases)
-		var/name = gas_data.name[id]
-		var/amt = round(gases[id], 0.001)
-		gas_names.Add(name)
-		gas_amounts.Add(amt)
+		var/material/mat = SSmaterials.get_material_datum(id)
+		gas_names.Add(mat.display_name)
+		gas_amounts.Add(round(gases[id], 0.001))
 
 	set_pin_data(IC_OUTPUT, 1, gas_names)
 	set_pin_data(IC_OUTPUT, 2, gas_amounts)

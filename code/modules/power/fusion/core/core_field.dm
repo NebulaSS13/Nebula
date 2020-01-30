@@ -259,8 +259,6 @@
 	if(istype(T))
 		var/datum/gas_mixture/plasma
 		for(var/reactant in reactants)
-			if(!gas_data.name[reactant])
-				continue
 			if(!plasma)
 				plasma = new
 			plasma.adjust_gas(reactant, max(1,round(reactants[reactant]*0.1)), 0) // *0.1 to compensate for *10 when uptaking gas.

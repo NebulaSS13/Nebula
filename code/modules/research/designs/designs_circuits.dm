@@ -775,13 +775,6 @@
 	build_path = /obj/item/stock_parts/circuitboard/engine/ion
 	sort_string = "XAAAB"
 
-/datum/design/circuit/sublimator/sauna
-	name = "sauna heater system"
-	id = "sauna"
-	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
-	build_path = /obj/item/stock_parts/circuitboard/sublimator/sauna
-	sort_string = "XAAAC"
-
 /datum/design/circuit/vitals
 	name = "vitals monitor"
 	id = "vitals"
@@ -789,7 +782,7 @@
 	build_path = /obj/item/stock_parts/circuitboard/vitals_monitor
 	sort_string = "XAAAD"
 
-/datum/design/circuit/sublimator/modular_computer
+/datum/design/circuit/modular_computer
 	name = "general-purpose computer"
 	id = "pc_motherboard"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)

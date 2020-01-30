@@ -128,7 +128,7 @@
 	value = 4
 
 /material/steel/holographic
-	display_name = MAT_STEEL
+	display_name = "holographic steel"
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
@@ -155,7 +155,7 @@
 	sale_price = 1
 
 /material/aluminium/holographic
-	display_name = MAT_ALUMINIUM
+	display_name = "holoaluminium"
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
@@ -236,54 +236,6 @@
 	sale_price = 3
 	ore_smelts_to = MAT_OSMIUM
 	value = 30
-
-/material/tritium
-	display_name = "tritium"
-	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
-	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
-	wall_name = "bulkhead"
-	stack_type = /obj/item/stack/material/tritium
-	icon_colour = "#777777"
-	stack_origin_tech = list(TECH_MATERIAL = 5)
-	sheet_singular_name = "ingot"
-	sheet_plural_name = "ingots"
-	is_fusion_fuel = 1
-	construction_difficulty = MAT_VALUE_HARD_DIY
-	value = 300
-
-/material/deuterium
-	display_name = "deuterium"
-	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
-	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
-	wall_name = "bulkhead"
-	stack_type = /obj/item/stack/material/deuterium
-	icon_colour = "#999999"
-	stack_origin_tech = list(TECH_MATERIAL = 3)
-	sheet_singular_name = "ingot"
-	sheet_plural_name = "ingots"
-	is_fusion_fuel = 1
-	construction_difficulty = MAT_VALUE_HARD_DIY
-
-/material/mhydrogen
-	display_name = "metallic hydrogen"
-	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
-	display_name = "metallic hydrogen"
-	wall_name = "bulkhead"
-	stack_type = /obj/item/stack/material/mhydrogen
-	icon_colour = "#e6c5de"
-	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
-	is_fusion_fuel = 1
-	chem_products = list(
-				/datum/reagent/hydrazine = 20
-				)
-	construction_difficulty = MAT_VALUE_HARD_DIY
-	ore_smelts_to = MAT_TRITIUM
-	ore_compresses_to = MAT_METALLIC_HYDROGEN
-	ore_name = "raw hydrogen"
-	ore_scan_icon = "mineral_rare"
-	ore_icon_overlay = "gems"
-	sale_price = 5
-	value = 100
 
 /material/platinum
 	display_name = "platinum"

@@ -45,14 +45,22 @@
 	color = COLOR_OFF_WHITE
 
 /obj/structure/table/holotable/Initialize()
-	material = "holo[DEFAULT_FURNITURE_MATERIAL]"
+	material = MAT_ALUMINIUM_HOLOGRAPHIC
+	. = ..()
+
+/obj/structure/table/holo_plastictable
+	icon_state = "holo_preview"
+	color = COLOR_OFF_WHITE
+
+/obj/structure/table/holo_plastictable/Initialize()
+	material = MAT_PLASTIC_HOLOGRAPHIC
 	. = ..()
 
 /obj/structure/table/holo_woodentable
 	icon_state = "holo_preview"
 
 /obj/structure/table/holo_woodentable/Initialize()	
-	material = "holo[MAT_WOOD]"
+	material = MAT_WOOD_HOLOGRAPHIC
 	. = ..()
 
 //wood wood wood

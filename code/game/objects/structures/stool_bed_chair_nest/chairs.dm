@@ -171,7 +171,7 @@
 	overlays |= I
 
 /obj/structure/bed/chair/comfy/captain/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload,MAT_STEEL,"blue")
+	. = ..(mapload, MAT_STEEL, MAT_CLOTH_BLUE)
 
 /obj/structure/bed/chair/armchair
 	name = "armchair"
@@ -257,7 +257,7 @@
 	. = ..(mapload, newmaterial, MAT_CLOTH)
 
 /obj/structure/bed/chair/office/dark/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "black")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BLACK)
 
 /obj/structure/bed/chair/office/comfy
 	name = "comfy office chair"
@@ -319,10 +319,10 @@
 		overlays |= I
 
 /obj/structure/bed/chair/shuttle/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload,MAT_STEEL,"blue")
+	. = ..(mapload,MAT_STEEL,MAT_CLOTH_BLUE)
 
 /obj/structure/bed/chair/shuttle/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload,MAT_STEEL,"black")
+	. = ..(mapload,MAT_STEEL,MAT_CLOTH_BLACK)
 
 /obj/structure/bed/chair/shuttle/white/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	. = ..(mapload,MAT_STEEL,MAT_CLOTH)
