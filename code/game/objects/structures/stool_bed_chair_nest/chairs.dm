@@ -134,28 +134,28 @@
 	. = ..(mapload, newmaterial, MAT_CARPET)
 
 /obj/structure/bed/chair/comfy/teal/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "teal")
+	. = ..(mapload, newmaterial, MAT_CLOTH_TEAL)
 
 /obj/structure/bed/chair/comfy/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "black")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BLACK)
 
 /obj/structure/bed/chair/comfy/green/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "green")
+	. = ..(mapload, newmaterial, MAT_CLOTH_GREEN)
 
 /obj/structure/bed/chair/comfy/purple/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "purple")
+	. = ..(mapload, newmaterial, MAT_CLOTH_PURPLE)
 
 /obj/structure/bed/chair/comfy/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "blue")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BLUE)
 
 /obj/structure/bed/chair/comfy/beige/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "beige")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BEIGE)
 
 /obj/structure/bed/chair/comfy/lime/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "lime")
+	. = ..(mapload, newmaterial, MAT_CLOTH_LIME)
 
 /obj/structure/bed/chair/comfy/yellow/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "yellow")
+	. = ..(mapload, newmaterial, MAT_CLOTH_YELLOW)
 
 /obj/structure/bed/chair/comfy/captain
 	name = "captain chair"
@@ -186,28 +186,28 @@
 	. = ..(mapload, newmaterial, MAT_CARPET)
 
 /obj/structure/bed/chair/armchair/teal/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "teal")
+	. = ..(mapload, newmaterial, MAT_CLOTH_TEAL)
 
 /obj/structure/bed/chair/armchair/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "black")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BLACK)
 
 /obj/structure/bed/chair/armchair/green/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "green")
+	. = ..(mapload, newmaterial, MAT_CLOTH_GREEN)
 
 /obj/structure/bed/chair/armchair/purple/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "purple")
+	. = ..(mapload, newmaterial, MAT_CLOTH_PURPLE)
 
 /obj/structure/bed/chair/armchair/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "blue")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BLUE)
 
 /obj/structure/bed/chair/armchair/beige/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "beige")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BEIGE)
 
 /obj/structure/bed/chair/armchair/lime/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "lime")
+	. = ..(mapload, newmaterial, MAT_CLOTH_LIME)
 
 /obj/structure/bed/chair/armchair/yellow/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "yellow")
+	. = ..(mapload, newmaterial, MAT_CLOTH_YELLOW)
 
 /obj/structure/bed/chair/office
 	name = "office chair"
@@ -272,28 +272,28 @@
 	. = ..(mapload, newmaterial, MAT_CARPET)
 
 /obj/structure/bed/chair/office/comfy/teal/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "teal")
+	. = ..(mapload, newmaterial, MAT_CLOTH_TEAL)
 
 /obj/structure/bed/chair/office/comfy/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "black")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BLACK)
 
 /obj/structure/bed/chair/office/comfy/green/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "green")
+	. = ..(mapload, newmaterial, MAT_CLOTH_GREEN)
 
 /obj/structure/bed/chair/office/comfy/purple/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "purple")
+	. = ..(mapload, newmaterial, MAT_CLOTH_PURPLE)
 
 /obj/structure/bed/chair/office/comfy/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "blue")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BLUE)
 
 /obj/structure/bed/chair/office/comfy/beige/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "beige")
+	. = ..(mapload, newmaterial, MAT_CLOTH_BEIGE)
 
 /obj/structure/bed/chair/office/comfy/lime/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "lime")
+	. = ..(mapload, newmaterial, MAT_CLOTH_LIME)
 
 /obj/structure/bed/chair/office/comfy/yellow/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, newmaterial, "yellow")
+	. = ..(mapload, newmaterial, MAT_CLOTH_YELLOW)
 
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"

@@ -206,10 +206,10 @@
 
 
 /obj/item/material/drill_head
-	var/durability = 0
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon_state = "drill_head"
+	var/durability = 0
 
 /obj/item/material/drill_head/proc/get_durability_percentage()
 	return (durability * 100) / (2 * material.integrity)
@@ -244,12 +244,10 @@
 	//Drill can have a head
 	var/obj/item/material/drill_head/drill_head
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
-	
-
 
 /obj/item/mech_equipment/drill/Initialize()
 	. = ..()
-	drill_head = new /obj/item/material/drill_head(src, "steel")//You start with a basic steel head
+	drill_head = new /obj/item/material/drill_head(src, MAT_STEEL) //You start with a basic steel head
 
 /obj/item/mech_equipment/drill/attack_self(var/mob/user)
 	. = ..()

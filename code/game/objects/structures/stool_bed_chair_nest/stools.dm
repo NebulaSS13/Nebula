@@ -159,6 +159,5 @@ var/global/list/stool_cache = list() //haha stool
 		..()
 
 //Generated subtypes for mapping porpoises
-
 /obj/item/stool/wood/Initialize(mapload)
 	. = ..(mapload, MAT_WOOD)
