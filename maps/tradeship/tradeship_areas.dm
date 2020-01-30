@@ -26,11 +26,6 @@
 	icon_state = "purple"
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
-/area/ship/scrap/crew/dorms3
-	name = "\improper Crew Cabin #3"
-	icon_state = "yellow"
-	area_flags = AREA_FLAG_RAD_SHIELDED
-
 /area/ship/scrap/crew/saloon
 	name = "\improper Saloon"
 	icon_state = "conference"
@@ -211,6 +206,12 @@
 	name = "\improper Robot Storage"
 	icon_state = "ai_cyborg"
 
+/area/ship/scrap/drunk_tank
+	name = "Drunk Tank"
+	icon_state = "brig"
+	req_access = list(access_brig)
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
 /area/turbolift
 	name = "\improper Cargo Elevator"
 	icon_state = "shuttle"
@@ -235,4 +236,8 @@
 
 /area/turbolift/tradeship_upper
 	name = "Upper Cargo Bay"
+	base_turf = /turf/simulated/open
+
+/area/turbolift/tradeship_roof
+	name = "Solar Array Access"
 	base_turf = /turf/simulated/open

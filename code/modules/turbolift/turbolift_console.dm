@@ -27,6 +27,7 @@
 			user.visible_message("<span class='danger'>\The [user] hammers on the lift button!</span>")
 		else
 			user.visible_message("<span class='notice'>\The [user] presses the lift button.</span>")
+		playsound(src, 'sound/machines/button3.ogg', 100, 1)
 
 
 /obj/structure/lift/Initialize(mapload, var/datum/turbolift/_lift)
