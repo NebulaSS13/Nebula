@@ -1,4 +1,5 @@
 /decl/crafting_stage/proximity/janibot
+	descriptor = "janitor bot"
 	begins_with_object_type = /obj/item/chems/glass/bucket
 	progress_message = "You put the proximity sensor into the bucket."
 	item_icon_state = "janibot_1"

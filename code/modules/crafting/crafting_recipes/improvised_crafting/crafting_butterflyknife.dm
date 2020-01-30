@@ -15,6 +15,7 @@
 	thrown_material_force_multiplier = 0.1
 
 /decl/crafting_stage/balisong_blade
+	descriptor = "balisong"
 	begins_with_object_type = /obj/item/material/butterflyhandle
 	item_desc = "It's an unfinished balisong with some loose screws."
 	item_icon_state = "butterfly"

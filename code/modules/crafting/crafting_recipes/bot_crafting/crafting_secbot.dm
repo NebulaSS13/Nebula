@@ -1,4 +1,5 @@
 /decl/crafting_stage/secbot_signaller
+	descriptor = "security bot"
 	begins_with_object_type = /obj/item/clothing/head/helmet
 	completion_trigger_type = /obj/item/assembly/signaler
 	progress_message = "You add the signaler to the helmet."

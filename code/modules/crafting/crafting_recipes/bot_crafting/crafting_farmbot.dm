@@ -14,6 +14,7 @@
 	tank.forceMove(src)
 
 /decl/crafting_stage/farmbot_begin
+	descriptor = "farm bot"
 	progress_message = "You attach a plant scanner to the water tank."
 	begins_with_object_type = /obj/item/farmbot_arm_assembly
 	completion_trigger_type = /obj/item/scanner/plant

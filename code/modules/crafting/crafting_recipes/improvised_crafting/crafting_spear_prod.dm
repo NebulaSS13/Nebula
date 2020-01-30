@@ -1,4 +1,5 @@
 /decl/crafting_stage/material/stunprod_rod
+	descriptor = "spear or stunprod"
 	begins_with_object_type = /obj/item/handcuffs/cable
 	item_icon_state = "wiredrod"
 	progress_message = "You wind the cable cuffs around the top of the steel rod."

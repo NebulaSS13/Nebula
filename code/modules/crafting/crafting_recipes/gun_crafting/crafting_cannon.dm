@@ -6,6 +6,7 @@
 	item_state = "pneumatic"
 
 /decl/crafting_stage/pipe/cannon
+	descriptor = "pneumatic cannon"
 	item_desc = "It is a half-finished pneumatic cannon with a pipe segment installed."
 	progress_message = "You secure the piping inside the frame."
 	next_stages = list(/decl/crafting_stage/welding/cannon_pipe)
