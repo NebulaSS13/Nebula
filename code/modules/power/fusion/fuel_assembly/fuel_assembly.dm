@@ -7,45 +7,30 @@
 	var/material_name
 	var/percent_depleted = 1
 	var/list/rod_quantities = list()
-	var/fuel_type = "composite"
-	var/fuel_colour
 	var/radioactivity = 0
 	var/initial_amount
 
 /obj/item/fuel_assembly/Initialize(mapload, var/_material, var/_colour)
-	. = ..(mapload)
-	fuel_type = _material
-	fuel_colour = _colour
+	. = ..(mapload, _material)
+	initial_amount = material.units_per_sheet * 5 // Fuel compressor eats 5 sheets.
+	SetName("[material.use_name] fuel rod assembly")
+	desc = "A fuel rod for a fusion reactor. This one is made from [material.use_name]."
+	if(material.radioactivity)
+		radioactivity = material.radioactivity
+		desc += " It is warm to the touch."
+		START_PROCESSING(SSobj, src)
+	if(material.luminescence)
+		set_light(material.luminescence, material.luminescence, material.icon_colour)
+	rod_quantities[material.type] = initial_amount
+	update_icon()
 
-	if(ispath(fuel_type, /datum/reagent))
-		var/datum/reagent/R = fuel_type
-		fuel_type = lowertext(initial(R.name))
-		fuel_colour = initial(R.color)
-		initial_amount = 50000
-
-	var/material/material = SSmaterials.get_material_datum(fuel_type)
-	if(istype(material))
-		initial_amount = material.units_per_sheet * 5 // Fuel compressor eats 5 sheets.
-		SetName("[material.use_name] fuel rod assembly")
-		desc = "A fuel rod for a fusion reactor. This one is made from [material.use_name]."
-		fuel_colour = material.icon_colour
-		fuel_type = material.use_name
-		if(material.radioactivity)
-			radioactivity = material.radioactivity
-			desc += " It is warm to the touch."
-			START_PROCESSING(SSobj, src)
-		if(material.luminescence)
-			set_light(material.luminescence, material.luminescence, material.icon_colour)
-	else
-		SetName("[fuel_type] fuel rod assembly")
-		desc = "A fuel rod for a fusion reactor. This one is made from [fuel_type]."
-
-	icon_state = "blank"
-	var/image/I = image(icon, "fuel_assembly")
-	I.color = fuel_colour
-	overlays += list(I, image(icon, "fuel_assembly_bracket"))
-	rod_quantities[fuel_type] = initial_amount
-
+/obj/item/fuel_assembly/on_update_icon()
+	icon_state = "fuel_assembly"
+	color = material.icon_colour
+	var/image/I = image(icon, "fuel_assembly_bracket")
+	I.appearance_flags |= RESET_COLOR
+	overlays = list(I)
+	
 /obj/item/fuel_assembly/Process()
 	if(!radioactivity)
 		return PROCESS_KILL
