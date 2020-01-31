@@ -17,6 +17,7 @@
 /area/ship/scrap/enclave)
 "af" = (
 /obj/structure/disposalpipe/up,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor,
 /area/ship/scrap/loading_bay)
 "ag" = (
@@ -1296,6 +1297,7 @@
 	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/loading_bay)
 "hc" = (
@@ -1701,6 +1703,7 @@
 /area/ship/scrap/loading_bay)
 "AO" = (
 /obj/item/clothing/under/yinglet,
+/obj/structure/hygiene/drain,
 /mob/living/simple_animal/mouse,
 /turf/simulated/floor,
 /area/ship/scrap/aft_starboard_underside_maint)
@@ -2086,6 +2089,7 @@
 /turf/simulated/floor,
 /area/ship/scrap/loading_bay)
 "Xo" = (
+/obj/structure/hygiene/drain,
 /turf/simulated/floor,
 /area/ship/scrap/aft_port_underside_maint)
 "XK" = (
