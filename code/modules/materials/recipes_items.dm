@@ -24,6 +24,14 @@
 	on_floor = 1
 	send_material_data = 1
 
+/datum/stack_recipe/improvised_armour
+	title = "improvised armour"
+	result_type = /obj/item/clothing/suit/armor/crafted
+	req_amount = 20
+	one_per_turf = 1
+	on_floor = 1
+	send_material_data = 1
+
 /datum/stack_recipe/coin
 	title = "coin"
 	result_type = /obj/item/material/coin

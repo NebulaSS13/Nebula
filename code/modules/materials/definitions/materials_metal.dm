@@ -16,6 +16,7 @@
 				/datum/reagent/uranium = 20
 				)
 	construction_difficulty = MAT_VALUE_HARD_DIY
+	reflectiveness = MAT_VALUE_MATTE
 	sale_price = 2
 	value = 100
 
@@ -35,6 +36,7 @@
 				/datum/reagent/gold = 20
 				)
 	construction_difficulty = MAT_VALUE_HARD_DIY
+	reflectiveness = MAT_VALUE_SHINY
 	ore_smelts_to = MAT_GOLD
 	ore_result_amount = 5
 	ore_name = "native gold"
@@ -53,6 +55,7 @@
 /material/gold/bronze //placeholder for ashtrays
 	display_name = "bronze"
 	lore_text = "An alloy of copper and tin."
+	reflectiveness = MAT_VALUE_SHINY
 	icon_colour = "#edd12f"
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = null
@@ -65,6 +68,7 @@
 	icon_colour = "#b87333"
 	weight = 15
 	hardness = MAT_VALUE_FLEXIBLE + 10
+	reflectiveness = MAT_VALUE_SHINY
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -89,6 +93,7 @@
 	icon_colour = "#d1e6e3"
 	weight = 22
 	hardness = MAT_VALUE_FLEXIBLE + 10
+	reflectiveness = MAT_VALUE_SHINY
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -125,6 +130,7 @@
 	sale_price = 1
 	ore_smelts_to = MAT_STEEL
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
+	reflectiveness = MAT_VALUE_SHINY
 	value = 4
 
 /material/steel/holographic
@@ -153,6 +159,7 @@
 	icon_colour = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	sale_price = 1
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/aluminium/holographic
 	display_name = "holoaluminium"
@@ -187,6 +194,7 @@
 	sale_price = 2
 	ore_smelts_to = MAT_PLASTEEL
 	value = 12
+	reflectiveness = MAT_VALUE_MATTE
 
 /material/plasteel/titanium
 	display_name = "titanium"
@@ -205,6 +213,7 @@
 	alloy_materials = null
 	alloy_product = FALSE
 	value = 30
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/plasteel/ocp
 	display_name = "osmium-carbide plasteel"
@@ -222,6 +231,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_product = TRUE
 	sale_price = 3
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/osmium
 	display_name = "osmium"
@@ -236,6 +246,7 @@
 	sale_price = 3
 	ore_smelts_to = MAT_OSMIUM
 	value = 30
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/platinum
 	display_name = "platinum"
@@ -257,6 +268,7 @@
 	ore_icon_overlay = "shiny"
 	sale_price = 5
 	value = 80
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/iron
 	display_name = "iron"
@@ -274,6 +286,7 @@
 				)
 	sale_price = 1
 	value = 5
+	reflectiveness = MAT_VALUE_MATTE
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -289,6 +302,7 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	hidden_from_codex = TRUE
 	value = 100
+	reflectiveness = MAT_VALUE_SHINY
 
 // Likewise.
 /material/voxalloy/elevatorium
@@ -319,6 +333,7 @@
 	brute_armor = rand(10,20)
 	burn_armor = rand(10,20)
 	hardness = rand(15,100)
+	reflectiveness = rand(15,100)
 	integrity = rand(200,400)
 	melting_point = rand(400,10000)
 	..()

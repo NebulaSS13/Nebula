@@ -13,6 +13,8 @@
 	gas_burn_product = MAT_CO2
 	gas_specific_heat = 20    // J/(mol*K)
 	gas_molar_mass =    0.032 // kg/mol
+	reflectiveness = 0
+	hardness = 0
 
 /material/gas/boron
 	display_name = "boron"

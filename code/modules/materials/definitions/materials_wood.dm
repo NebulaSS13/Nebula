@@ -30,6 +30,7 @@
 				)
 	sale_price = 1
 	value = 3
+	reflectiveness = MAT_VALUE_DULL
 
 /material/wood/holographic
 	icon_colour = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown

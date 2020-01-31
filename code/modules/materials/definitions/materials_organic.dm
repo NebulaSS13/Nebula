@@ -16,6 +16,7 @@
 				/datum/reagent/toxin/plasticide = 20
 				)
 	sale_price = 1
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/plastic/holographic
 	display_name = "holographic plastic"
@@ -43,6 +44,7 @@
 	destruction_desc = "crumples"
 	conductive = 0
 	value = 0
+	reflectiveness = MAT_VALUE_DULL
 
 /material/cloth //todo
 	display_name = "cotton"
@@ -58,6 +60,7 @@
 	stack_type = null
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
+	reflectiveness = MAT_VALUE_DULL
 
 /material/cloth/yellow
 	display_name ="yellow"
@@ -111,6 +114,7 @@
 	conductive = 0
 	stack_type = null
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
+	reflectiveness = MAT_VALUE_DULL
 
 /material/skin
 	display_name = "skin"
@@ -128,6 +132,7 @@
 	weight = 5
 	explosion_resistance = 1
 	var/tans_to = MAT_LEATHER_GENERIC
+	reflectiveness = MAT_VALUE_DULL
 
 /material/skin/lizard
 	display_name = "lizardskin"
@@ -217,6 +222,7 @@
 	hardness = MAT_VALUE_RIGID
 	weight = 18
 	value = 1
+	reflectiveness = MAT_VALUE_MATTE
 
 /material/bone/fish
 	display_name = "fishbone"
@@ -243,12 +249,14 @@
 	integrity = 50
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = 10
+	reflectiveness = MAT_VALUE_MATTE
 
 /material/leather/lizard
 	display_name = "hide"
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
 	weight = 15
+	reflectiveness = MAT_VALUE_SHINY
 
 /material/leather/fur
 	display_name = "tanned pelt"
