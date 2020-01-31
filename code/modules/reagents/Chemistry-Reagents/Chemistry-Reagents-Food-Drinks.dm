@@ -1066,17 +1066,17 @@
 	glass_desc = "A glass of refreshing cola."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/spacemountainwind
+/datum/reagent/drink/citrussoda
 	name = "citrus soda"
-	description = "Blows right through you like a space wind."
+	description = "Fizzy and tangy."
 	taste_description = "sweet citrus soda"
 	color = "#102000"
 	adj_drowsy = -7
 	adj_sleepy = -1
 	adj_temp = -5
 
-	glass_name = "Space Mountain Wind"
-	glass_desc = "Space Mountain Wind. As you know, there are no mountains in space, only wind."
+	glass_name = "citrus soda"
+	glass_desc = "A glass of fizzy citrus soda."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/cherrycola

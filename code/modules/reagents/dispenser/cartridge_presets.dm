@@ -51,7 +51,7 @@
 	chai_tea	spawn_reagent = /datum/reagent/drink/tea/chai
 	red_tea		spawn_reagent = /datum/reagent/drink/tea/red
 	cola		spawn_reagent = /datum/reagent/drink/cola
-	smw			spawn_reagent = /datum/reagent/drink/spacemountainwind
+	smw			spawn_reagent = /datum/reagent/drink/citrussoda
 	cherrycola	spawn_reagent = /datum/reagent/drink/cherrycola
 	spaceup		spawn_reagent = /datum/reagent/drink/space_up
 	tonic		spawn_reagent = /datum/reagent/drink/tonic

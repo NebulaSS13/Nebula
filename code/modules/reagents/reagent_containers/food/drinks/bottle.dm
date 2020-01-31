@@ -411,7 +411,7 @@
 
 /obj/item/chems/food/drinks/bottle/space_mountain_wind/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/spacemountainwind, 100)
+	reagents.add_reagent(/datum/reagent/drink/citrussoda, 100)
 
 /obj/item/chems/food/drinks/bottle/pwine
 	name = "Warlock's Velvet"

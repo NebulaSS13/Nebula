@@ -40,7 +40,7 @@
 
 /obj/item/chems/food/drinks/cans/space_mountain_wind/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/spacemountainwind, 30)
+	reagents.add_reagent(/datum/reagent/drink/citrussoda, 30)
 
 /obj/item/chems/food/drinks/cans/thirteenloko
 	name = "\improper Thirteen Loko"

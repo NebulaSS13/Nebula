@@ -143,7 +143,7 @@
 		/datum/reagent/drink/tea,
 		/datum/reagent/drink/tea/icetea,
 		/datum/reagent/drink/cola,
-		/datum/reagent/drink/spacemountainwind,
+		/datum/reagent/drink/citrussoda,
 		/datum/reagent/drink/cherrycola,
 		/datum/reagent/drink/space_up,
 		/datum/reagent/drink/tonic,
@@ -155,7 +155,7 @@
 		/datum/reagent/drink/coffee,
 		/datum/reagent/drink/hot_coco,
 		/datum/reagent/drink/tea/green,
-		/datum/reagent/drink/spacemountainwind,
+		/datum/reagent/drink/citrussoda,
 		/datum/reagent/ethanol/beer,
 		/datum/reagent/ethanol/coffee/kahlua
 		)

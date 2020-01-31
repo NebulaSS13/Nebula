@@ -1926,7 +1926,7 @@
 /datum/chemical_reaction/demonsblood
 	name = "Demon's Blood"
 	result = /datum/reagent/ethanol/demonsblood
-	required_reagents = list(/datum/reagent/ethanol/rum = 3, /datum/reagent/drink/spacemountainwind = 1, /datum/reagent/blood = 1, /datum/reagent/drink/cherrycola = 1)
+	required_reagents = list(/datum/reagent/ethanol/rum = 3, /datum/reagent/drink/citrussoda = 1, /datum/reagent/blood = 1, /datum/reagent/drink/cherrycola = 1)
 	result_amount = 6
 
 /datum/chemical_reaction/booger
@@ -2185,7 +2185,7 @@
 /datum/chemical_reaction/rewriter
 	name = "Rewriter"
 	result = /datum/reagent/drink/rewriter
-	required_reagents = list(/datum/reagent/drink/spacemountainwind = 1, /datum/reagent/drink/coffee = 1)
+	required_reagents = list(/datum/reagent/drink/citrussoda = 1, /datum/reagent/drink/coffee = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/suidream
@@ -2577,7 +2577,7 @@
 /datum/chemical_reaction/browndwarf
 	name = "Brown Dwarf"
 	result = /datum/reagent/drink/browndwarf
-	required_reagents = list(/datum/reagent/drink/hot_coco = 2, /datum/reagent/drink/spacemountainwind = 1)
+	required_reagents = list(/datum/reagent/drink/hot_coco = 2, /datum/reagent/drink/citrussoda = 1)
 	result_amount = 3
 	minimum_temperature = 70 CELSIUS
 	maximum_temperature = (70 CELSIUS) + 100
