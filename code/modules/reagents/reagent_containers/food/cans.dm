@@ -60,7 +60,7 @@
 
 /obj/item/chems/food/drinks/cans/dr_gibb/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/dr_gibb, 30)
+	reagents.add_reagent(/datum/reagent/drink/cherrycola, 30)
 
 /obj/item/chems/food/drinks/cans/starkist
 	name = "\improper Star-kist"

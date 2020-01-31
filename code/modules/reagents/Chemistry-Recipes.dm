@@ -1926,7 +1926,7 @@
 /datum/chemical_reaction/demonsblood
 	name = "Demon's Blood"
 	result = /datum/reagent/ethanol/demonsblood
-	required_reagents = list(/datum/reagent/ethanol/rum = 3, /datum/reagent/drink/spacemountainwind = 1, /datum/reagent/blood = 1, /datum/reagent/drink/dr_gibb = 1)
+	required_reagents = list(/datum/reagent/ethanol/rum = 3, /datum/reagent/drink/spacemountainwind = 1, /datum/reagent/blood = 1, /datum/reagent/drink/cherrycola = 1)
 	result_amount = 6
 
 /datum/chemical_reaction/booger
@@ -2205,7 +2205,7 @@
 /datum/chemical_reaction/ships_surgeon
 	name = "Ship's Surgeon"
 	result = /datum/reagent/ethanol/ships_surgeon
-	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/drink/dr_gibb = 2, /datum/reagent/drink/ice = 1)
+	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/drink/cherrycola = 2, /datum/reagent/drink/ice = 1)
 	result_amount = 4
 
 /datum/chemical_reaction/luminol

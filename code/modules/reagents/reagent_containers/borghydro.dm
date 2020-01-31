@@ -144,7 +144,7 @@
 		/datum/reagent/drink/tea/icetea,
 		/datum/reagent/drink/space_cola,
 		/datum/reagent/drink/spacemountainwind,
-		/datum/reagent/drink/dr_gibb,
+		/datum/reagent/drink/cherrycola,
 		/datum/reagent/drink/space_up,
 		/datum/reagent/drink/tonic,
 		/datum/reagent/drink/sodawater,

@@ -52,7 +52,7 @@
 	red_tea		spawn_reagent = /datum/reagent/drink/tea/red
 	cola		spawn_reagent = /datum/reagent/drink/space_cola
 	smw			spawn_reagent = /datum/reagent/drink/spacemountainwind
-	dr_gibb		spawn_reagent = /datum/reagent/drink/dr_gibb
+	cherrycola	spawn_reagent = /datum/reagent/drink/cherrycola
 	spaceup		spawn_reagent = /datum/reagent/drink/space_up
 	tonic		spawn_reagent = /datum/reagent/drink/tonic
 	sodawater	spawn_reagent = /datum/reagent/drink/sodawater

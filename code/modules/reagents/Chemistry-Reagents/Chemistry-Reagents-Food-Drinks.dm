@@ -1079,7 +1079,7 @@
 	glass_desc = "Space Mountain Wind. As you know, there are no mountains in space, only wind."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/dr_gibb
+/datum/reagent/drink/cherrycola
 	name = "cherry soda"
 	description = "A delicious blend of 42 different flavours"
 	taste_description = "cherry soda"

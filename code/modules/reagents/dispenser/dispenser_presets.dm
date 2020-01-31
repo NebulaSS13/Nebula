@@ -78,7 +78,7 @@
 			/obj/item/chems/chem_disp_cartridge/red_tea,
 			/obj/item/chems/chem_disp_cartridge/cola,
 			/obj/item/chems/chem_disp_cartridge/smw,
-			/obj/item/chems/chem_disp_cartridge/dr_gibb,
+			/obj/item/chems/chem_disp_cartridge/cherrycola,
 			/obj/item/chems/chem_disp_cartridge/spaceup,
 			/obj/item/chems/chem_disp_cartridge/tonic,
 			/obj/item/chems/chem_disp_cartridge/sodawater,
