@@ -65,29 +65,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
 
-/obj/machinery/computer/rdconsole/proc/CallMaterialName(var/ID)
-	var/return_name = ID
-	switch(return_name)
-		if(MAT_STEEL)
-			return_name = "Steel"
-		if(MAT_ALUMINIUM)
-			return_name = "Aluminium"
-		if(MAT_GLASS)
-			return_name = "Glass"
-		if(MAT_PLASTIC)
-			return_name = "Plastic"
-		if(MAT_GOLD)
-			return_name = "Gold"
-		if(MAT_SILVER)
-			return_name = "Silver"
-		if(MAT_PHORON)
-			return_name = "Solid Phoron"
-		if(MAT_URANIUM)
-			return_name = "Uranium"
-		if(MAT_DIAMOND)
-			return_name = "Diamond"
-	return return_name
-
 /obj/machinery/computer/rdconsole/proc/CallReagentName(var/reagent_type)
 	var/datum/reagent/R = reagent_type
 	return ispath(reagent_type, /datum/reagent) ? initial(R.name) : "Unknown"
@@ -373,12 +350,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	else if(href_list["lathe_ejectsheet"]) //Causes the protolathe to eject a sheet of material
 		. = TOPIC_REFRESH
 		CHECK_LATHE
-		linked_lathe.eject(href_list["lathe_ejectsheet"], text2num(href_list["amount"]))
+		linked_lathe.eject(text2path(href_list["lathe_ejectsheet"]), text2num(href_list["amount"]))
 
 	else if(href_list["imprinter_ejectsheet"]) //Causes the protolathe to eject a sheet of material
 		. = TOPIC_REFRESH
 		CHECK_IMPRINTER
-		linked_imprinter.eject(href_list["imprinter_ejectsheet"], text2num(href_list["amount"]))
+		linked_imprinter.eject(text2path(href_list["imprinter_ejectsheet"]), text2num(href_list["amount"]))
 
 	else if(href_list["find_device"]) //The R&D console looks for devices nearby to link up with.
 		screen = 0.0
@@ -617,8 +594,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					if(PROTOLATHE) dat += "Lathe Type: Proto-lathe<BR>"
 				dat += "Required Materials:<BR>"
 				for(var/M in d_disk.blueprint.materials)
-					if(copytext(M, 1, 2) == "$") dat += "* [copytext(M, 2)] x [d_disk.blueprint.materials[M]]<BR>"
-					else dat += "* [M] x [d_disk.blueprint.materials[M]]<BR>"
+					var/material/mat = SSmaterials.get_material_datum(M)
+					if(copytext(mat.display_name, 1, 2) == "$") 
+						dat += "* [copytext(mat.display_name, 2)] x [d_disk.blueprint.materials[M]]<BR>"
+					else 
+						dat += "* [mat.display_name] x [d_disk.blueprint.materials[M]]<BR>"
 				dat += "<HR>Operations: "
 				dat += "<A href='?src=\ref[src];updt_design=1'>Upload to Database</A> || "
 				dat += "<A href='?src=\ref[src];clear_design=1'>Clear Disk</A> || "
@@ -720,7 +700,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					continue
 				var/temp_dat
 				for(var/M in D.materials)
-					temp_dat += ", [D.materials[M]] [CallMaterialName(M)]"
+					var/material/mat = SSmaterials.get_material_datum(M)
+					temp_dat += ", [D.materials[M]] [capitalize(mat.display_name)]"
 				for(var/T in D.chemicals)
 					temp_dat += ", [D.chemicals[T]*(linked_imprinter ? linked_imprinter.mat_efficiency : 1)] [CallReagentName(T)]"
 				if(temp_dat)
@@ -738,8 +719,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Material Storage<BR><HR>"
 			dat += "<UL>"
 			for(var/M in linked_lathe.materials)
+				var/material/mat = SSmaterials.get_material_datum(M)
 				var/amount = linked_lathe.materials[M]
-				dat += "<LI><B>[capitalize(M)]</B>: [amount] cm<sup>3</sup>"
+				dat += "<LI><B>[capitalize(mat.display_name)]</B>: [amount] cm<sup>3</sup>"
 				if(amount >= SHEET_MATERIAL_AMOUNT)
 					dat += " || Eject "
 					for (var/C in list(1, 3, 5, 10, 15, 20, 25, 30, 40))
@@ -800,7 +782,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					continue
 				var/temp_dat
 				for(var/M in D.materials)
-					temp_dat += ", [D.materials[M]*linked_imprinter.mat_efficiency] [CallMaterialName(M)]"
+					var/material/mat = SSmaterials.get_material_datum(M)
+					temp_dat += ", [D.materials[M]*linked_imprinter.mat_efficiency] [capitalize(mat.display_name)]"
 				for(var/T in D.chemicals)
 					temp_dat += ", [D.chemicals[T]*linked_imprinter.mat_efficiency] [CallReagentName(T)]"
 				if(temp_dat)
@@ -828,8 +811,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Material Storage<BR><HR>"
 			dat += "<UL>"
 			for(var/M in linked_imprinter.materials)
+				var/material/mat = SSmaterials.get_material_datum(M)
 				var/amount = linked_imprinter.materials[M]
-				dat += "<LI><B>[capitalize(M)]</B>: [amount] cm<sup>3</sup>"
+				dat += "<LI><B>[capitalize(mat.display_name)]</B>: [amount] cm<sup>3</sup>"
 				if(amount >= SHEET_MATERIAL_AMOUNT)
 					dat += " || Eject: "
 					for (var/C in list(1, 3, 5, 10, 15, 20, 25, 30, 40))

@@ -15,7 +15,17 @@
 
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(MAT_STEEL = 0, MAT_ALUMINIUM = 0, MAT_PLASTIC = 0, MAT_GLASS = 0, MAT_GOLD = 0, MAT_SILVER = 0, MAT_PHORON = 0, MAT_URANIUM = 0, MAT_DIAMOND = 0)
+	var/list/materials = list(
+		MAT_STEEL =     0, 
+		MAT_ALUMINIUM = 0, 
+		MAT_PLASTIC =   0, 
+		MAT_GLASS =     0, 
+		MAT_GOLD =      0, 
+		MAT_SILVER =    0, 
+		MAT_PHORON =    0, 
+		MAT_URANIUM =   0, 
+		MAT_DIAMOND =   0
+	)
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -123,7 +133,7 @@
 			manufacturer = href_list["manufacturer"]
 
 	if(href_list["eject"])
-		eject_materials(href_list["eject"], text2num(href_list["amount"]))
+		eject_materials(text2path(href_list["eject"]), text2num(href_list["amount"]))
 
 	if(href_list["sync"])
 		sync()
@@ -260,7 +270,8 @@
 /obj/machinery/robotics_fabricator/proc/get_design_resourses(var/datum/design/D)
 	var/list/F = list()
 	for(var/T in D.materials)
-		F += "[capitalize(T)]: [D.materials[T] * mat_efficiency]"
+		var/material/mat = SSmaterials.get_material_datum(T)
+		F += "[capitalize(mat.display_name)]: [D.materials[T] * mat_efficiency]"
 	return english_list(F, and_text = ", ")
 
 /obj/machinery/robotics_fabricator/proc/get_design_time(var/datum/design/D)
@@ -278,34 +289,14 @@
 /obj/machinery/robotics_fabricator/proc/get_materials()
 	. = list()
 	for(var/T in materials)
-		. += list(list("mat" = capitalize(T), "amt" = materials[T]))
+		. += list(list("mat" = "[T]", "amt" = materials[T]))
 
 /obj/machinery/robotics_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
 	var/recursive = amount == -1 ? 1 : 0
-	material = lowertext(material)
-	var/mattype
-	switch(material)
-		if(MAT_STEEL)
-			mattype = /obj/item/stack/material/steel
-		if(MAT_GLASS)
-			mattype = /obj/item/stack/material/glass
-		if(MAT_ALUMINIUM)
-			mattype = /obj/item/stack/material/aluminium
-		if(MAT_PLASTIC)
-			mattype = /obj/item/stack/material/plastic
-		if(MAT_GOLD)
-			mattype = /obj/item/stack/material/gold
-		if(MAT_SILVER)
-			mattype = /obj/item/stack/material/silver
-		if(MAT_DIAMOND)
-			mattype = /obj/item/stack/material/diamond
-		if(MAT_PHORON)
-			mattype = /obj/item/stack/material/phoron
-		if(MAT_URANIUM)
-			mattype = /obj/item/stack/material/uranium
-		else
-			return
-	var/obj/item/stack/material/S = new mattype(loc)
+	var/material/mat = SSmaterials.get_material_datum(material)
+	if(!mat.stack_type)
+		return
+	var/obj/item/stack/material/S = new mat.stack_type(loc, 0, material)
 	if(amount <= 0)
 		amount = S.max_amount
 	var/ejected = min(round(materials[material] / S.perunit), amount)
