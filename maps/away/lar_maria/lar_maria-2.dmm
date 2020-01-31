@@ -681,7 +681,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "br" = (
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "bs" = (
@@ -1631,7 +1631,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "em" = (
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "en" = (

@@ -1761,7 +1761,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "fD" = (
-/obj/machinery/suit_storage_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "fE" = (

@@ -102,11 +102,6 @@
 	associated_paths = list(/obj/machinery/power/smes)
 	mechanics_text = "It's a big battery. An important part of the power network that ensures that you still have power when your generators eventually explode. Maximum input and output settings are available. <BR>The lights on the front show the status of the SMES: The column on the left shows stored power, a blinking red light at top right shows that it's on but receiving no power, blinking yellow shows that the SMES is charging, and the little light on the middle right shows whether it's outputting power or not. <BR>A floor terminal puts power into the SMES, and power is output to a wire underneath."
 
-/datum/codex_entry/suit_storage_unit
-	associated_paths = list(/obj/machinery/suit_storage_unit)
-	mechanics_text = "Used to store and steralize voidsuits. The SSU must be unlocked to open, and closed to steralize. <BR>Using a screwdriver on the SSU opens the maintenance panel, which allows for steralization power and safety to be toggled. If the the steralization process is activated while set to 15nm, it will damage the machine and contents."
-	antag_text = "You can use grab intent to grab and put a person inside, and then activate steralization, assuming you've turned off the safety."
-
 /datum/codex_entry/vending
 	associated_paths = list(/obj/machinery/vending)
 	associated_strings = list("vendomat","vending machine")

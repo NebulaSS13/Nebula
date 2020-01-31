@@ -2852,7 +2852,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "gL" = (
-/obj/machinery/suit_storage_unit/security,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "gM" = (

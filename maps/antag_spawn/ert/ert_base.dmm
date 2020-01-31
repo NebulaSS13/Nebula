@@ -3042,7 +3042,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fN" = (
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fO" = (
