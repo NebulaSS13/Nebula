@@ -676,6 +676,7 @@
 "bD" = (
 /obj/structure/table/standard,
 /obj/random/masks,
+/obj/random_multi/single_item/captains_spare_id,
 /turf/simulated/floor/lino,
 /area/ship/scrap/crew/dorms1)
 "bE" = (

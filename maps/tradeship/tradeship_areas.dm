@@ -186,10 +186,24 @@
 	icon_state = "captain"
 	req_access = list(access_captain)
 
+/area/ship/scrap/command/fmate
+	name = "\improper First Mate's Office"
+	icon_state = "heads_hop"
+	req_access = list(access_hop)
+
+/area/ship/scrap/command/bridge_upper
+	name = "\improper Upper Bridge"
+	icon_state = "blue"
+	req_access = list(access_heads)
+
 /area/ship/scrap/comms
 	name = "\improper Communications Relay"
 	icon_state = "tcomsatcham"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/signal.ogg','sound/ambience/sonar.ogg')
+
+/area/ship/scrap/bridge_unused
+	name = "\improper Bridge Starboard Storage"
+	icon_state = "armory"
 
 /area/ship/scrap/shuttle
 	area_flags = AREA_FLAG_RAD_SHIELDED
