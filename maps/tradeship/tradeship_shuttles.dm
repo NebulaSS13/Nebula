@@ -52,3 +52,5 @@
 		/area/turbolift/tradeship_upper,
 		/area/turbolift/tradeship_roof
 	)
+	floor_departure_sound = 'sound/effects/lift_heavy_start.ogg'
+	floor_arrival_sound =   'sound/effects/lift_heavy_stop.ogg'

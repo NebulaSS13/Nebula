@@ -18,10 +18,18 @@
 
 	var/list/areas_to_use = list()
 
+	var/floor_departure_sound
+	var/floor_arrival_sound
+
+
 /obj/turbolift_map_holder/Initialize()
 	. = ..()
 	// Create our system controller.
 	var/datum/turbolift/lift = new()
+	if(floor_departure_sound)
+		lift.floor_departure_sound = floor_departure_sound
+	if(floor_arrival_sound)
+		lift.floor_arrival_sound = floor_arrival_sound
 
 	// Holder values since we're moving this object to null ASAP.
 	var/ux = x
