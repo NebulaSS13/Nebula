@@ -61,14 +61,21 @@
 /area/ship/scrap/shuttle/outgoing)
 "aw" = (
 /turf/simulated/wall/r_wall,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "aD" = (
-/obj/machinery/ntnet_relay,
-/turf/simulated/floor/bluegrid,
-/area/ship/scrap/comms)
-"aE" = (
-/turf/simulated/floor/bluegrid,
-/area/ship/scrap/comms)
+/obj/structure/table/standard,
+/obj/item/paper_bin,
+/obj/item/pen/multi,
+/obj/structure/filingcabinet/wallcabinet{
+	pixel_x = 1;
+	pixel_y = 28
+	},
+/obj/machinery/light_switch{
+	pixel_x = -24
+	},
+/obj/item/material/clipboard,
+/turf/simulated/floor/carpet,
+/area/ship/scrap/command/fmate)
 "aI" = (
 /obj/item/bedsheet/captain,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -97,11 +104,12 @@
 /turf/simulated/wall/titanium,
 /area/ship/scrap/shuttle/outgoing)
 "aP" = (
-/obj/machinery/message_server,
-/turf/simulated/floor/bluegrid,
-/area/ship/scrap/comms)
+/obj/structure/table/standard,
+/obj/item/megaphone,
+/obj/machinery/cell_charger,
+/turf/simulated/floor/carpet,
+/area/ship/scrap/command/fmate)
 "aQ" = (
-/obj/machinery/door/window/westleft,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 4;
@@ -113,8 +121,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/ship/scrap/comms)
+/turf/simulated/floor/wood,
+/area/ship/scrap/command/fmate)
 "aS" = (
 /obj/structure/cable{
 	icon_state = "2-8"
@@ -165,11 +173,12 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/obj/machinery/computer/message_monitor{
+/obj/machinery/computer/modular/preset/cardslot/command{
+	icon_state = "computer";
 	dir = 4
 	},
-/turf/simulated/floor/bluegrid,
-/area/ship/scrap/comms)
+/turf/simulated/floor/carpet,
+/area/ship/scrap/command/fmate)
 "bb" = (
 /obj/machinery/light,
 /obj/item/radio/intercom{
@@ -325,9 +334,7 @@
 /obj/structure/sign/warning/vacuum{
 	pixel_x = -35
 	},
-/obj/machinery/computer/shuttle_control/explore/tradeship{
-	dir = 4
-	},
+/obj/machinery/computer/shuttle_control/explore/tradeship,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/dock)
 "bC" = (
@@ -3653,6 +3660,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/mob/living/simple_animal/opossum/poppy,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/engineering)
 "iB" = (
@@ -4883,7 +4891,7 @@
 "oK" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "pb" = (
 /obj/item/radio/intercom{
 	pixel_y = 22
@@ -5024,7 +5032,7 @@
 	id_tag = "sensor"
 	},
 /turf/simulated/floor/airless,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "ra" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
@@ -5074,7 +5082,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "rv" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/warning,
@@ -5128,6 +5136,19 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/structure/ladder/up,
+/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/zpipe/up/supply{
+	dir = 1
+	},
+/obj/structure/cable,
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	icon_state = "16-0"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/dock)
 "sf" = (
@@ -5171,6 +5192,18 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/hidden)
+"sM" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/space)
 "sS" = (
 /turf/simulated/floor/plating,
 /area/ship/scrap/hidden)
@@ -5200,6 +5233,9 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/dock)
+"tg" = (
+/turf/simulated/floor/tiled/monotile,
+/area/ship/scrap/dock)
 "tJ" = (
 /obj/machinery/door/blast/regular{
 	id_tag = "scram"
@@ -5220,7 +5256,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/airless,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "uc" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -5305,8 +5341,6 @@
 /obj/item/gun/energy/stunrevolver,
 /obj/structure/closet/cabinet,
 /obj/item/storage/secure/briefcase,
-/obj/item/taperecorder,
-/obj/item/camera,
 /obj/item/storage/backpack/dufflebag/syndie,
 /obj/item/storage/box/ammo/shotgunshells,
 /obj/item/handcuffs,
@@ -5314,6 +5348,8 @@
 /obj/item/radio/intercom{
 	pixel_y = 20
 	},
+/obj/item/clothing/head/powdered_wig,
+/obj/item/clothing/suit/judgerobe,
 /turf/simulated/floor/wood,
 /area/ship/scrap/command/captain)
 "vS" = (
@@ -5453,9 +5489,8 @@
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "xS" = (
-/obj/machinery/r_n_d/server/core,
-/turf/simulated/floor/bluegrid,
-/area/ship/scrap/comms)
+/turf/simulated/floor/carpet,
+/area/ship/scrap/command/fmate)
 "xZ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -5527,7 +5562,7 @@
 "zs" = (
 /obj/machinery/shipsensors,
 /turf/simulated/floor/airless,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "zO" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -5642,6 +5677,14 @@
 /obj/item/clamp,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/atmos)
+"BZ" = (
+/obj/structure/table/marble,
+/obj/machinery/door/window/brigdoor/southright,
+/obj/machinery/door/blast/shutters{
+	id_tag = "fmate"
+	},
+/turf/simulated/floor/wood,
+/area/ship/scrap/command/fmate)
 "Cb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 6
@@ -5796,11 +5839,24 @@
 	pixel_x = 24;
 	pixel_y = 0
 	},
-/obj/structure/window/reinforced{
-	dir = 8
+/obj/item/handcuffs,
+/obj/item/melee/telebaton,
+/obj/item/gun/energy/stunrevolver/rifle,
+/obj/structure/closet/secure_closet{
+	req_access = list("ACCESS_HEAD_OF_PERSONNEL")
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/ship/scrap/comms)
+/obj/item/clothing/suit/armor/vest,
+/obj/item/storage/box/ids,
+/obj/item/flash,
+/obj/item/clothing/glasses/sunglasses,
+/obj/item/storage/box/evidence,
+/obj/item/taperoll/police,
+/obj/item/holowarrant,
+/obj/item/storage/briefcase/crimekit,
+/obj/item/taperecorder,
+/obj/item/camera,
+/turf/simulated/floor/wood,
+/area/ship/scrap/command/fmate)
 "Ec" = (
 /obj/structure/closet/crate,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -5832,6 +5888,27 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
+"EA" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/ship/scrap/dock)
 "EQ" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -5847,7 +5924,7 @@
 	},
 /obj/machinery/door/airlock/hatch/autoname/command,
 /turf/simulated/floor/tiled/dark,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "Fc" = (
 /obj/machinery/light{
 	icon_state = "bulb1";
@@ -5875,7 +5952,7 @@
 	},
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "FS" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
@@ -6105,6 +6182,18 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/hallway)
+"Jk" = (
+/obj/structure/bed/chair/office/dark,
+/obj/machinery/button/blast_door{
+	id_tag = "fmate";
+	pixel_x = 25;
+	pixel_y = -2
+	},
+/obj/effect/landmark/start{
+	name = "First Mate"
+	},
+/turf/simulated/floor/wood,
+/area/ship/scrap/command/fmate)
 "Jn" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -6311,7 +6400,7 @@
 "Ls" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
-/area/ship/scrap/comms)
+/area/ship/scrap/command/fmate)
 "Lx" = (
 /obj/structure/handrai{
 	tag = "icon-handrail (WEST)";
@@ -6468,11 +6557,12 @@
 	dir = 1;
 	pixel_y = -30
 	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/ship/scrap/comms)
+/obj/structure/dogbed,
+/obj/item/clothing/shoes/brown,
+/obj/random/plushie,
+/mob/living/simple_animal/corgi/Ian,
+/turf/simulated/floor/wood,
+/area/ship/scrap/command/fmate)
 "Oc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	icon_state = "intact";
@@ -6492,9 +6582,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/sign/warning/server_room{
-	pixel_x = -32
-	},
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -10078,9 +10165,9 @@ aw
 aD
 aP
 ba
-oK
-aa
-bA
+aw
+sM
+bm
 bB
 bQ
 ch
@@ -10158,11 +10245,11 @@ qT
 zs
 FD
 xS
-aE
-aE
-FD
-aa
-bA
+xS
+xS
+Jk
+BZ
+tg
 bC
 qc
 uc
@@ -10491,7 +10578,7 @@ as
 as
 bm
 bw
-bE
+EA
 sc
 Mw
 FS

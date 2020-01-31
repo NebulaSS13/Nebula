@@ -154,7 +154,7 @@
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_FINANCE     = SKILL_MAX,
-	                    SKILL_BUREAUCRACY = SKILL_ADEPT)
+	                    SKILL_BUREAUCRACY = SKILL_EXPERT)
 	skill_points = 30
 	alt_titles = list()
 
