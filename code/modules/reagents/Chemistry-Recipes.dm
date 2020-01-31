@@ -2191,7 +2191,7 @@
 /datum/chemical_reaction/suidream
 	name = "Sui Dream"
 	result = /datum/reagent/ethanol/suidream
-	required_reagents = list(/datum/reagent/drink/space_up = 1, /datum/reagent/ethanol/bluecuracao = 1, /datum/reagent/ethanol/melonliquor = 1)
+	required_reagents = list(/datum/reagent/drink/lemonade = 1, /datum/reagent/ethanol/bluecuracao = 1, /datum/reagent/ethanol/melonliquor = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/rum

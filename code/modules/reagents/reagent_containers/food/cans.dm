@@ -79,7 +79,7 @@
 
 /obj/item/chems/food/drinks/cans/space_up/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/space_up, 30)
+	reagents.add_reagent(/datum/reagent/drink/lemonade, 30)
 
 /obj/item/chems/food/drinks/cans/lemon_lime
 	name = "\improper Lemon-Lime"

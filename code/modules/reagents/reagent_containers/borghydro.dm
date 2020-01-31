@@ -145,7 +145,7 @@
 		/datum/reagent/drink/cola,
 		/datum/reagent/drink/citrussoda,
 		/datum/reagent/drink/cherrycola,
-		/datum/reagent/drink/space_up,
+		/datum/reagent/drink/lemonade,
 		/datum/reagent/drink/tonic,
 		/datum/reagent/drink/sodawater,
 		/datum/reagent/drink/lemon_lime,

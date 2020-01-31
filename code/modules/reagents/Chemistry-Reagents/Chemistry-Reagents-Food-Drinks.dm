@@ -1087,18 +1087,18 @@
 	adj_drowsy = -6
 	adj_temp = -5
 
-	glass_name = "Dr. Gibb"
-	glass_desc = "Dr. Gibb. Not as dangerous as the name might imply."
+	glass_name = "cherry soda"
+	glass_desc = "A glass of cherry soda, a delicious blend of 42 flavours."
 
-/datum/reagent/drink/space_up
-	name = "lemon soda"
+/datum/reagent/drink/lemonade
+	name = "lemonade"
 	description = "Tastes like a hull breach in your mouth."
 	taste_description = "a hull breach"
 	color = "#202800"
 	adj_temp = -8
 
-	glass_name = "Space-up"
-	glass_desc = "Space-up. It helps keep your cool."
+	glass_name = "lemonade"
+	glass_desc = "A glass of lemonade. It helps keep you cool."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/lemon_lime

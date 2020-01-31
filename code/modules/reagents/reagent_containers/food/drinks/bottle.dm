@@ -401,7 +401,7 @@
 
 /obj/item/chems/food/drinks/bottle/space_up/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/space_up, 100)
+	reagents.add_reagent(/datum/reagent/drink/lemonade, 100)
 
 /obj/item/chems/food/drinks/bottle/space_mountain_wind
 	name = "\improper Space Mountain Wind"
