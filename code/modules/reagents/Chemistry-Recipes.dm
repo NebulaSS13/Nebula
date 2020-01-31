@@ -1638,7 +1638,7 @@
 /datum/chemical_reaction/nuka_cola
 	name = "Nuka Cola"
 	result = /datum/reagent/drink/nuka_cola
-	required_reagents = list(/datum/reagent/uranium = 1, /datum/reagent/drink/space_cola = 5)
+	required_reagents = list(/datum/reagent/uranium = 1, /datum/reagent/drink/cola = 5)
 	result_amount = 5
 	mix_message = "The solution bubbles and emits an eerie green glow."
 
@@ -1738,7 +1738,7 @@
 /datum/chemical_reaction/cuba_libre
 	name = "Cuba Libre"
 	result = /datum/reagent/ethanol/cuba_libre
-	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/space_cola = 1)
+	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/martini
@@ -1762,7 +1762,7 @@
 /datum/chemical_reaction/whiskey_cola
 	name = "Whiskey Cola"
 	result = /datum/reagent/ethanol/whiskey_cola
-	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/drink/space_cola = 1)
+	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/screwdriver
@@ -1926,7 +1926,7 @@
 /datum/chemical_reaction/demonsblood
 	name = "Demon's Blood"
 	result = /datum/reagent/ethanol/demonsblood
-	required_reagents = list(/datum/reagent/ethanol/rum = 3, /datum/reagent/drink/spacemountainwind = 1, /datum/reagent/blood = 1, /datum/reagent/drink/dr_gibb = 1)
+	required_reagents = list(/datum/reagent/ethanol/rum = 3, /datum/reagent/drink/citrussoda = 1, /datum/reagent/blood = 1, /datum/reagent/drink/cherrycola = 1)
 	result_amount = 6
 
 /datum/chemical_reaction/booger
@@ -1954,7 +1954,7 @@
 /datum/chemical_reaction/grapesoda
 	name = "Grape Soda"
 	result = /datum/reagent/drink/grapesoda
-	required_reagents = list(/datum/reagent/drink/juice/grape = 2, /datum/reagent/drink/space_cola = 1)
+	required_reagents = list(/datum/reagent/drink/juice/grape = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/sbiten
@@ -2173,7 +2173,7 @@
 /datum/chemical_reaction/brownstar
 	name = "Brown Star"
 	result = /datum/reagent/drink/brownstar
-	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/space_cola = 1)
+	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/milkshake
@@ -2185,13 +2185,13 @@
 /datum/chemical_reaction/rewriter
 	name = "Rewriter"
 	result = /datum/reagent/drink/rewriter
-	required_reagents = list(/datum/reagent/drink/spacemountainwind = 1, /datum/reagent/drink/coffee = 1)
+	required_reagents = list(/datum/reagent/drink/citrussoda = 1, /datum/reagent/drink/coffee = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/suidream
 	name = "Sui Dream"
 	result = /datum/reagent/ethanol/suidream
-	required_reagents = list(/datum/reagent/drink/space_up = 1, /datum/reagent/ethanol/bluecuracao = 1, /datum/reagent/ethanol/melonliquor = 1)
+	required_reagents = list(/datum/reagent/drink/lemonade = 1, /datum/reagent/ethanol/bluecuracao = 1, /datum/reagent/ethanol/melonliquor = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/rum
@@ -2205,7 +2205,7 @@
 /datum/chemical_reaction/ships_surgeon
 	name = "Ship's Surgeon"
 	result = /datum/reagent/ethanol/ships_surgeon
-	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/drink/dr_gibb = 2, /datum/reagent/drink/ice = 1)
+	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/drink/cherrycola = 2, /datum/reagent/drink/ice = 1)
 	result_amount = 4
 
 /datum/chemical_reaction/luminol
@@ -2518,7 +2518,7 @@
 /datum/chemical_reaction/vodkacola
 	name = "Vodka Cola"
 	result = /datum/reagent/ethanol/vodkacola
-	required_reagents = list(/datum/reagent/drink/space_cola = 1, /datum/reagent/ethanol/vodka = 2)
+	required_reagents = list(/datum/reagent/drink/cola = 1, /datum/reagent/ethanol/vodka = 2)
 	result_amount = 3
 
 /datum/chemical_reaction/arak
@@ -2577,7 +2577,7 @@
 /datum/chemical_reaction/browndwarf
 	name = "Brown Dwarf"
 	result = /datum/reagent/drink/browndwarf
-	required_reagents = list(/datum/reagent/drink/hot_coco = 2, /datum/reagent/drink/spacemountainwind = 1)
+	required_reagents = list(/datum/reagent/drink/hot_coco = 2, /datum/reagent/drink/citrussoda = 1)
 	result_amount = 3
 	minimum_temperature = 70 CELSIUS
 	maximum_temperature = (70 CELSIUS) + 100

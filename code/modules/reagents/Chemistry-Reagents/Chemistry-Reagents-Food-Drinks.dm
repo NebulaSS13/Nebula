@@ -1054,7 +1054,7 @@
 	glass_name = "grenadine syrup"
 	glass_desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
 
-/datum/reagent/drink/space_cola
+/datum/reagent/drink/cola
 	name = "cola"
 	description = "A refreshing beverage."
 	taste_description = "cola"
@@ -1062,24 +1062,24 @@
 	adj_drowsy = -3
 	adj_temp = -5
 
-	glass_name = "Space Cola"
-	glass_desc = "A glass of refreshing Space Cola"
+	glass_name = "cola"
+	glass_desc = "A glass of refreshing cola."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/spacemountainwind
+/datum/reagent/drink/citrussoda
 	name = "citrus soda"
-	description = "Blows right through you like a space wind."
+	description = "Fizzy and tangy."
 	taste_description = "sweet citrus soda"
 	color = "#102000"
 	adj_drowsy = -7
 	adj_sleepy = -1
 	adj_temp = -5
 
-	glass_name = "Space Mountain Wind"
-	glass_desc = "Space Mountain Wind. As you know, there are no mountains in space, only wind."
+	glass_name = "citrus soda"
+	glass_desc = "A glass of fizzy citrus soda."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/dr_gibb
+/datum/reagent/drink/cherrycola
 	name = "cherry soda"
 	description = "A delicious blend of 42 different flavours"
 	taste_description = "cherry soda"
@@ -1087,18 +1087,18 @@
 	adj_drowsy = -6
 	adj_temp = -5
 
-	glass_name = "Dr. Gibb"
-	glass_desc = "Dr. Gibb. Not as dangerous as the name might imply."
+	glass_name = "cherry soda"
+	glass_desc = "A glass of cherry soda, a delicious blend of 42 flavours."
 
-/datum/reagent/drink/space_up
-	name = "lemon soda"
+/datum/reagent/drink/lemonade
+	name = "lemonade"
 	description = "Tastes like a hull breach in your mouth."
 	taste_description = "a hull breach"
 	color = "#202800"
 	adj_temp = -8
 
-	glass_name = "Space-up"
-	glass_desc = "Space-up. It helps keep your cool."
+	glass_name = "lemonade"
+	glass_desc = "A glass of lemonade. It helps keep you cool."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/lemon_lime

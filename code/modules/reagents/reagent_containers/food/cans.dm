@@ -14,7 +14,7 @@
 
 /obj/item/chems/food/drinks/cans/cola/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/space_cola, 30)
+	reagents.add_reagent(/datum/reagent/drink/cola, 30)
 
 /obj/item/chems/food/drinks/cans/waterbottle
 	name = "bottled water"
@@ -40,7 +40,7 @@
 
 /obj/item/chems/food/drinks/cans/space_mountain_wind/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/spacemountainwind, 30)
+	reagents.add_reagent(/datum/reagent/drink/citrussoda, 30)
 
 /obj/item/chems/food/drinks/cans/thirteenloko
 	name = "\improper Thirteen Loko"
@@ -60,7 +60,7 @@
 
 /obj/item/chems/food/drinks/cans/dr_gibb/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/dr_gibb, 30)
+	reagents.add_reagent(/datum/reagent/drink/cherrycola, 30)
 
 /obj/item/chems/food/drinks/cans/starkist
 	name = "\improper Star-kist"
@@ -79,7 +79,7 @@
 
 /obj/item/chems/food/drinks/cans/space_up/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/space_up, 30)
+	reagents.add_reagent(/datum/reagent/drink/lemonade, 30)
 
 /obj/item/chems/food/drinks/cans/lemon_lime
 	name = "\improper Lemon-Lime"

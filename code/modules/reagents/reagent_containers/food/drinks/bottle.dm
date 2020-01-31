@@ -391,7 +391,7 @@
 
 /obj/item/chems/food/drinks/bottle/cola/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/space_cola, 100)
+	reagents.add_reagent(/datum/reagent/drink/cola, 100)
 
 /obj/item/chems/food/drinks/bottle/space_up
 	name = "\improper Space-Up"
@@ -401,7 +401,7 @@
 
 /obj/item/chems/food/drinks/bottle/space_up/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/space_up, 100)
+	reagents.add_reagent(/datum/reagent/drink/lemonade, 100)
 
 /obj/item/chems/food/drinks/bottle/space_mountain_wind
 	name = "\improper Space Mountain Wind"
@@ -411,7 +411,7 @@
 
 /obj/item/chems/food/drinks/bottle/space_mountain_wind/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/spacemountainwind, 100)
+	reagents.add_reagent(/datum/reagent/drink/citrussoda, 100)
 
 /obj/item/chems/food/drinks/bottle/pwine
 	name = "Warlock's Velvet"
