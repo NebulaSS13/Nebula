@@ -143,7 +143,7 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "ax" = (
@@ -151,7 +151,7 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "ay" = (
@@ -1582,7 +1582,7 @@
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "de" = (
-/obj/machinery/suit_storage_unit/engineering/salvage,
+/obj/machinery/suit_cycler,
 /obj/machinery/light/small/red{
 	icon_state = "bulb1";
 	dir = 8
@@ -1590,7 +1590,7 @@
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "df" = (
-/obj/machinery/suit_storage_unit/engineering/salvage,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "dg" = (
@@ -1639,7 +1639,7 @@
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "dk" = (
-/obj/machinery/suit_storage_unit/engineering/salvage,
+/obj/machinery/suit_cycler,
 /obj/machinery/light/small/red{
 	icon_state = "bulb1";
 	dir = 4

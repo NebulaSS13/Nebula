@@ -1189,11 +1189,11 @@
 /area/errant_pisces/enginering)
 "dj" = (
 /obj/machinery/light/small,
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "dk" = (
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "dl" = (
@@ -4514,7 +4514,7 @@
 /turf/simulated/wall,
 /area/errant_pisces/prod_storage)
 "lb" = (
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "lc" = (
@@ -5038,7 +5038,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/science_wing)
 "mB" = (
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/plating,
 /area/errant_pisces/science_wing)
 "mC" = (
@@ -6693,7 +6693,7 @@
 	icon_state = "bulb1";
 	dir = 4
 	},
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -6737,7 +6737,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qw" = (
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qx" = (
@@ -6793,7 +6793,7 @@
 	icon_state = "bulb1";
 	dir = 4
 	},
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qH" = (

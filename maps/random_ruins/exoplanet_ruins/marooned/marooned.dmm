@@ -145,7 +145,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "ax" = (
-/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/suit_cycler,
 /obj/effect/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)

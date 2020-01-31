@@ -52,7 +52,7 @@
 	var/obj/item/clothing/suit/space/void/suit = null
 	var/obj/item/clothing/head/helmet/space/helmet = null
 
-	wires = /datum/wires/suit_storage_unit
+	wires = /datum/wires/suit_cycler
 
 /obj/machinery/suit_cycler/on_update_icon()
 
