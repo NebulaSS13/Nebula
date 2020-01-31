@@ -134,7 +134,7 @@
 /datum/design/item/weapon/decloner
 	id = "decloner"
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 7, TECH_BIO = 5, TECH_POWER = 6)
-	materials = list(MAT_GOLD = 5000,MAT_URANIUM = 10000, "mutagen" = 40)
+	materials = list(MAT_GOLD = 5000, MAT_URANIUM = 10000)
 	build_path = /obj/item/gun/energy/decloner
 	sort_string = "TAJAB"
 
