@@ -1054,7 +1054,7 @@
 	glass_name = "grenadine syrup"
 	glass_desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
 
-/datum/reagent/drink/space_cola
+/datum/reagent/drink/cola
 	name = "cola"
 	description = "A refreshing beverage."
 	taste_description = "cola"
@@ -1062,8 +1062,8 @@
 	adj_drowsy = -3
 	adj_temp = -5
 
-	glass_name = "Space Cola"
-	glass_desc = "A glass of refreshing Space Cola"
+	glass_name = "cola"
+	glass_desc = "A glass of refreshing cola."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/spacemountainwind

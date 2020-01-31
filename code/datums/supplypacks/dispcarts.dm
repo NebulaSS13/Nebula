@@ -70,7 +70,7 @@ PACK(tea,        /obj/item/chems/chem_disp_cartridge/tea,        "Reagent refill
 PACK(green_tea,  /obj/item/chems/chem_disp_cartridge/green_tea,  "Reagent refill - Green Tea",           "green tea reagent cartridge crate",                     15)
 PACK(chai_tea,   /obj/item/chems/chem_disp_cartridge/chai_tea,   "Reagent refill - Chai Tea",            "chai tea reagent cartridge crate",                      15)
 PACK(red_tea,    /obj/item/chems/chem_disp_cartridge/red_tea,    "Reagent refill - Rooibos Tea",         "rooibos tea reagent cartridge crate",                   15)
-PACK(cola,       /obj/item/chems/chem_disp_cartridge/cola,       "Reagent refill - Space Cola",          "\improper Space Cola reagent cartridge crate",          15)
+PACK(cola,       /obj/item/chems/chem_disp_cartridge/cola,       "Reagent refill - Cola",                "cola reagent cartridge crate",                          15)
 PACK(smw,        /obj/item/chems/chem_disp_cartridge/smw,        "Reagent refill - Space Mountain Wind", "\improper Space Mountain Wind reagent cartridge crate", 15)
 PACK(cherrycola, /obj/item/chems/chem_disp_cartridge/cherrycola, "Reagent refill - Cherry Cola",         "cherry cola reagent cartridge crate",                   15)
 PACK(spaceup,    /obj/item/chems/chem_disp_cartridge/spaceup,    "Reagent refill - Space-Up",            "\improper Space-Up reagent cartridge crate",            15)

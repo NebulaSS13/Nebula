@@ -1638,7 +1638,7 @@
 /datum/chemical_reaction/nuka_cola
 	name = "Nuka Cola"
 	result = /datum/reagent/drink/nuka_cola
-	required_reagents = list(/datum/reagent/uranium = 1, /datum/reagent/drink/space_cola = 5)
+	required_reagents = list(/datum/reagent/uranium = 1, /datum/reagent/drink/cola = 5)
 	result_amount = 5
 	mix_message = "The solution bubbles and emits an eerie green glow."
 
@@ -1738,7 +1738,7 @@
 /datum/chemical_reaction/cuba_libre
 	name = "Cuba Libre"
 	result = /datum/reagent/ethanol/cuba_libre
-	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/space_cola = 1)
+	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/martini
@@ -1762,7 +1762,7 @@
 /datum/chemical_reaction/whiskey_cola
 	name = "Whiskey Cola"
 	result = /datum/reagent/ethanol/whiskey_cola
-	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/drink/space_cola = 1)
+	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/screwdriver
@@ -1954,7 +1954,7 @@
 /datum/chemical_reaction/grapesoda
 	name = "Grape Soda"
 	result = /datum/reagent/drink/grapesoda
-	required_reagents = list(/datum/reagent/drink/juice/grape = 2, /datum/reagent/drink/space_cola = 1)
+	required_reagents = list(/datum/reagent/drink/juice/grape = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/sbiten
@@ -2173,7 +2173,7 @@
 /datum/chemical_reaction/brownstar
 	name = "Brown Star"
 	result = /datum/reagent/drink/brownstar
-	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/space_cola = 1)
+	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/milkshake
@@ -2518,7 +2518,7 @@
 /datum/chemical_reaction/vodkacola
 	name = "Vodka Cola"
 	result = /datum/reagent/ethanol/vodkacola
-	required_reagents = list(/datum/reagent/drink/space_cola = 1, /datum/reagent/ethanol/vodka = 2)
+	required_reagents = list(/datum/reagent/drink/cola = 1, /datum/reagent/ethanol/vodka = 2)
 	result_amount = 3
 
 /datum/chemical_reaction/arak

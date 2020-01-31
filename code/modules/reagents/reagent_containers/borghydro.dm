@@ -142,7 +142,7 @@
 		/datum/reagent/drink/ice,
 		/datum/reagent/drink/tea,
 		/datum/reagent/drink/tea/icetea,
-		/datum/reagent/drink/space_cola,
+		/datum/reagent/drink/cola,
 		/datum/reagent/drink/spacemountainwind,
 		/datum/reagent/drink/cherrycola,
 		/datum/reagent/drink/space_up,
