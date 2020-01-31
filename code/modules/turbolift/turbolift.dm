@@ -20,6 +20,8 @@
 	var/floor_wait_delay = 9 SECONDS                    // Time to wait at floor stops.
 	var/obj/structure/lift/panel/control_panel_interior // Lift control panel.
 	var/doors_closing = 0								// Whether doors are in the process of closing
+	var/floor_departure_sound
+	var/floor_arrival_sound
 
 	var/tmp/moving_upwards
 	var/busy_state                                      // Used for controller processing.
@@ -127,6 +129,9 @@
 	if(!istype(origin) || !istype(destination) || (origin == destination))
 		return 0
 
+	if(floor_departure_sound)
+		playsound(control_panel_interior.loc, floor_departure_sound, 50, 1)
+
 	for(var/turf/T in destination)
 		for(var/atom/movable/AM in T)
 			if(istype(AM, /mob/living))
@@ -142,6 +147,9 @@
 
 	current_floor = next_floor
 	control_panel_interior.visible_message("The elevator [moving_upwards ? "rises" : "descends"] smoothly.")
+
+	if(floor_arrival_sound)
+		playsound(control_panel_interior.loc, floor_arrival_sound, 50, 1)
 
 	return 1
 
