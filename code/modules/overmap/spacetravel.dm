@@ -9,17 +9,18 @@ var/list/cached_space = list()
 	known = 0
 
 /obj/effect/overmap/visitable/sector/temporary/Initialize(mapload, var/nx, var/ny, var/nz)
-	loc = locate(nx, ny, GLOB.using_map.overmap_z)
-	x = nx
-	y = ny
-	map_z += nz
-	map_sectors["[nz]"] = src
+	var/start_loc = locate(1, 1, nz) // This will be moved to the overmap in ..(), but must start on this z level for init to function.
+	forceMove(start_loc)
+	start_x = nx // This is overmap position
+	start_y = ny
 	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [nz].")
 	. = ..()
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
-	map_sectors["[map_z]"] = null
+	for(var/num in map_z)
+		map_sectors["[num]"] = null
 	testing("Temporary sector at [x],[y] was deleted.")
+	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
 	testing("Checking if sector at [map_z[1]] can die.")
@@ -36,8 +37,7 @@ proc/get_deepspace(x,y)
 	else if(cached_space.len)
 		res = cached_space[cached_space.len]
 		cached_space -= res
-		res.x = x
-		res.y = y
+		res.forceMove(locate(x, y, GLOB.using_map.overmap_z))
 		return res
 	else
 		return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, GLOB.using_map.get_empty_zlevel())
