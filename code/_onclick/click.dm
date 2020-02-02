@@ -163,7 +163,7 @@
 
 // Default behavior: ignore double clicks, the second click that makes the doubleclick call already calls for a normal click
 /mob/proc/DblClickOn(var/atom/A, var/params)
-	return
+	. = A.show_atom_list_for_turf(src, get_turf(A))
 
 /*
 	Translates into attack_hand, etc.
@@ -268,14 +268,16 @@
 	A.AltClick(src)
 
 /atom/proc/AltClick(var/mob/user)
-	var/turf/T = get_turf(src)
+	. = show_atom_list_for_turf(user, get_turf(src))
+
+/atom/proc/show_atom_list_for_turf(var/mob/user, var/turf/T)
 	if(T && user.TurfAdjacent(T))
 		if(user.listed_turf == T)
 			user.listed_turf = null
 		else
 			user.listed_turf = T
 			user.client.statpanel = "Turf"
-	return 1
+	. = TRUE
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)
