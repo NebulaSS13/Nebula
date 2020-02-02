@@ -877,6 +877,7 @@
 #include "code\game\objects\items\glassjar.dm"
 #include "code\game\objects\items\holosign_creator.dm"
 #include "code\game\objects\items\instruments.dm"
+#include "code\game\objects\items\item_icon_experimental.dm"
 #include "code\game\objects\items\latexballoon.dm"
 #include "code\game\objects\items\paintkit.dm"
 #include "code\game\objects\items\plunger.dm"
