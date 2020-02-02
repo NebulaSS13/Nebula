@@ -10,9 +10,11 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	obj_flags = OBJ_FLAG_ROTATABLE
 	alpha = 180
-	var/material/reinf_material
-	var/init_material = MAT_GLASS
-	var/init_reinf_material = null
+	material = MAT_GLASS
+	rad_resistance_modifier = 0.5
+	atmos_canpass = CANPASS_PROC
+	handle_generic_blending = TRUE
+
 	var/maxhealth
 	var/health
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
@@ -21,52 +23,39 @@
 	var/polarized = 0
 	var/basestate = "window"
 	var/reinf_basestate = "rwindow"
-	rad_resistance_modifier = 0.5
-	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
-	noblend_objects = list(/obj/machinery/door/window)
+	var/list/connections
+	var/list/other_connections
+	
+/obj/structure/window/clear_connections()
+	connections = null
+	other_connections = null
 
-	atmos_canpass = CANPASS_PROC
+/obj/structure/window/set_connections(dirs, other_dirs)
+	connections = dirs_to_corner_states(dirs)
+	other_connections = dirs_to_corner_states(other_dirs)
 
-/obj/structure/window/get_material()
-	return material
-
-/obj/structure/window/Initialize(mapload, start_dir=null, constructed=0, var/new_material, var/new_reinf_material)
-	..()
-	if(!new_material)
-		new_material = init_material
-		if(!new_material)
-			new_material = MAT_GLASS
-	if(!new_reinf_material)
-		new_reinf_material = init_reinf_material
-	material = SSmaterials.get_material_datum(new_material)
-	if(!istype(material))
-		return INITIALIZE_HINT_QDEL
-
-	if(new_reinf_material)
-		reinf_material = SSmaterials.get_material_datum(new_reinf_material)
-
+/obj/structure/window/update_materials(var/keep_health)
 	name = "[reinf_material ? "reinforced " : ""][material.display_name] window"
 	desc = "A window pane made from [material.display_name]."
-	color =  material.icon_colour
-
-	if (start_dir)
-		set_dir(start_dir)
-
-	maxhealth = material.integrity
-	if(reinf_material)
-		maxhealth += 0.5 * reinf_material.integrity
-
-	if(is_fulltile())
-		layer = FULL_WINDOW_LAYER
-
-	health = maxhealth
-
-	return INITIALIZE_HINT_LATELOAD
+	if(!keep_health)
+		maxhealth = material.integrity
+		if(reinf_material)
+			maxhealth += 0.5 * reinf_material.integrity
+		health = maxhealth
+	
+/obj/structure/window/Initialize()
+	. = ..()
+	if(!istype(material))
+		. = INITIALIZE_HINT_QDEL
+	if(. != INITIALIZE_HINT_QDEL)
+		if(is_fulltile())
+			layer = FULL_WINDOW_LAYER
+		. = INITIALIZE_HINT_LATELOAD
 
 // Updating connections may depend on material properties.
-/obj/structure/window/LateInitialize(mapload, start_dir=null, constructed=0, var/new_material, var/new_reinf_material)
+/obj/structure/window/LateInitialize()
 	..()
-	set_anchored(!constructed) // calls update_connections, potentially
+	//set_anchored(!constructed) // calls update_connections, potentially
 	update_connections(1)
 	update_icon()
 	update_nearby_tiles(need_rebuild=1)
@@ -378,6 +367,7 @@
 /obj/structure/window/on_update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
+	color =  material.icon_colour
 	if(reinf_material)
 		basestate = reinf_basestate
 	else
@@ -393,17 +383,19 @@
 	icon_state = ""
 	if(is_on_frame())
 		for(var/i = 1 to 4)
-			if(other_connections[i] != "0")
-				I = image(icon, "[basestate]_other_onframe[connections[i]]", dir = 1<<(i-1))
+			var/conn = connections ? connections[i] : "0"
+			if(other_connections && other_connections[i] != "0")
+				I = image(icon, "[basestate]_other_onframe[conn]", dir = 1<<(i-1))
 			else
-				I = image(icon, "[basestate]_onframe[connections[i]]", dir = 1<<(i-1))
+				I = image(icon, "[basestate]_onframe[conn]", dir = 1<<(i-1))
 			overlays += I
 	else
 		for(var/i = 1 to 4)
-			if(other_connections[i] != "0")
-				I = image(icon, "[basestate]_other[connections[i]]", dir = 1<<(i-1))
+			var/conn = connections ? connections[i] : "0"
+			if(other_connections && other_connections[i] != "0")
+				I = image(icon, "[basestate]_other[conn]", dir = 1<<(i-1))
 			else
-				I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
+				I = image(icon, "[basestate][conn]", dir = 1<<(i-1))
 			overlays += I
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -428,7 +420,7 @@
 /obj/structure/window/phoronbasic
 	name = "phoron window"
 	color = GLASS_COLOR_PHORON
-	init_material = MAT_PHORON_GLASS
+	material = MAT_PHORON_GLASS
 
 /obj/structure/window/phoronbasic/full
 	dir = 5
@@ -438,8 +430,8 @@
 	name = "reinforced borosilicate window"
 	icon_state = "rwindow"
 	color = GLASS_COLOR_PHORON
-	init_material = MAT_PHORON_GLASS
-	init_reinf_material = MAT_STEEL
+	material = MAT_PHORON_GLASS
+	reinf_material = MAT_STEEL
 
 /obj/structure/window/phoronreinforced/full
 	dir = 5
@@ -448,8 +440,8 @@
 /obj/structure/window/reinforced
 	name = "reinforced window"
 	icon_state = "rwindow"
-	init_material = MAT_GLASS
-	init_reinf_material = MAT_STEEL
+	material = MAT_GLASS
+	reinf_material = MAT_STEEL
 
 /obj/structure/window/reinforced/full
 	dir = 5

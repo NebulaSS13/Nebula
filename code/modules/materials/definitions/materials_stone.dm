@@ -45,7 +45,7 @@
 	icon_reinf = "reinf_stone"
 	icon_colour = "#d9c179"
 	shard_type = SHARD_STONE_PIECE
-	weight = 22
+	weight = 23
 	hardness = MAT_VALUE_HARD - 5
 	reflectiveness = MAT_VALUE_MATTE
 	brute_armor = 3

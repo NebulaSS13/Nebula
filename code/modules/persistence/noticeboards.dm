@@ -69,11 +69,10 @@
 		if(!skip_icon_update)
 			update_icon()
 
-/obj/structure/noticeboard/proc/dismantle()
+/obj/structure/noticeboard/dismantle(var/do_not_destroy)
 	for(var/thing in notices)
 		remove_paper(thing, skip_icon_update = TRUE)
-	new /obj/item/stack/material(get_turf(src), 10, MAT_WOOD)
-	qdel(src)
+	. = ..()
 
 /obj/structure/noticeboard/Destroy()
 	QDEL_NULL_LIST(notices)

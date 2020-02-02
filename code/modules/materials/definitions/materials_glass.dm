@@ -23,6 +23,7 @@
 	conductive = 0
 	sale_price = 1
 	value = 4
+	wall_support_value = 14
 
 /material/glass/proc/is_reinforced()
 	return (integrity > 75) //todo

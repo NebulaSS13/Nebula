@@ -8,33 +8,32 @@
 	w_class = ITEM_SIZE_NORMAL
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
-	var/init_material = MAT_STEEL
+	material = MAT_STEEL
 	obj_flags = OBJ_FLAG_NOFALL
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 
-/obj/structure/lattice/get_material()
-	return material
-
-/obj/structure/lattice/Initialize(mapload, var/new_material)
+/obj/structure/lattice/Initialize()
 	. = ..()
-	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
-		return INITIALIZE_HINT_QDEL
-	if(!new_material)
-		new_material = init_material
-	material = SSmaterials.get_material_datum(new_material)
-	if(!istype(material))
-		return INITIALIZE_HINT_QDEL
+	if(. != INITIALIZE_HINT_QDEL)
+		if(!istype(material))
+			return INITIALIZE_HINT_QDEL
+		if(!istype(src.loc, /turf/space) && !istype(src.loc, /turf/simulated/open))
+			return INITIALIZE_HINT_QDEL
+		for(var/obj/structure/lattice/LAT in loc)
+			if(LAT != src)
+				crash_with("Found multiple lattices at '[log_info_line(loc)]'")
+				qdel(LAT)
+		. = INITIALIZE_HINT_LATELOAD
 
-	SetName("[material.display_name] lattice")
-	desc = "A lightweight support [material.display_name] lattice."
-	color =  material.icon_colour
+/obj/structure/lattice/LateInitialize()
+	. = ..()
+	update_neighbors()
 
-	for(var/obj/structure/lattice/LAT in loc)
-		if(LAT != src)
-			crash_with("Found multiple lattices at '[log_info_line(loc)]'")
-			qdel(LAT)
-	update_icon()
-	if(!mapload)
-		update_neighbors()
+/obj/structure/lattice/update_material_desc()
+	if(material)
+		desc = "A lightweight support [material.display_name] lattice."
+	else
+		desc = "A lightweight support [material.display_name] lattice."
 
 /obj/structure/lattice/Destroy()
 	var/turf/old_loc = get_turf(src)
@@ -86,6 +85,7 @@
 			to_chat(user, "<span class='notice'>You require at least two rods to complete the catwalk.</span>")
 
 /obj/structure/lattice/on_update_icon()
+	..()
 	var/dir_sum = 0
 	for (var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
@@ -94,5 +94,4 @@
 		else
 			if(!(istype(get_step(src, direction), /turf/space)) && !(istype(get_step(src, direction), /turf/simulated/open)))
 				dir_sum += direction
-
 	icon_state = "lattice[dir_sum]"

@@ -1,6 +1,6 @@
 /obj/effect/wallframe_spawn
 	name = "wall frame window grille spawner"
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/structures/grille.dmi'
 	icon_state = "wingrille"
 	density = 1
 	anchored = 1.0

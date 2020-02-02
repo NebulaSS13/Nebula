@@ -15,14 +15,13 @@
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	anchored = 1
+	material = MAT_ALIENALLOY
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/active = 0
 
 /obj/structure/monolith/Initialize()
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
-	var/material/A = SSmaterials.get_material_datum(MAT_ALIENALLOY)
-	if(A)
-		color = A.icon_colour
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
@@ -30,6 +29,7 @@
 	update_icon()
 
 /obj/structure/monolith/on_update_icon()
+	..()
 	overlays.Cut()
 	if(active)
 		var/image/I = image(icon,"[icon_state]decor")

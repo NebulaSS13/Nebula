@@ -17,54 +17,35 @@
 	can_buckle = 1
 	buckle_dir = SOUTH
 	buckle_lying = 1
-	var/material/padding_material
-	var/base_icon = "bed"
-	var/material_alteration = MAT_FLAG_ALTERATION_ALL
+	material = DEFAULT_FURNITURE_MATERIAL
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 	var/buckling_sound = 'sound/effects/buckle.ogg'
 
-/obj/structure/bed/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
-	color = null
-	material = SSmaterials.get_material_datum(new_material)
-	if(!istype(material))
-		return INITIALIZE_HINT_QDEL
-	. = ..(mapload)
-	if(new_padding_material)
-		padding_material = SSmaterials.get_material_datum(new_padding_material)
-	update_icon()
+/obj/structure/bed/update_material_name()
+	if(reinf_material)
+		SetName("[reinf_material.adjective_name] [initial(name)]")
+	else if(material)
+		SetName("[material.adjective_name] [initial(name)]")
+	else
+		SetName(initial(name))
 
-/obj/structure/bed/get_material()
-	return material
+/obj/structure/bed/update_material_desc()
+	if(reinf_material)
+		desc = "[initial(desc)] It's made of [material.use_name] and covered with [reinf_material.use_name]." 
+	else
+		desc = "[initial(desc)] It's made of [material.use_name]."
 
 // Reuse the cache/code from stools, todo maybe unify.
 /obj/structure/bed/on_update_icon()
-	// Prep icon.
-	icon_state = ""
-	overlays.Cut()
-	// Base icon.
-	var/cache_key = "[base_icon]-[material.type]"
-	if(isnull(stool_cache[cache_key]))
-		var/image/I = image('icons/obj/furniture.dmi', base_icon)
+	..()
+	var/new_overlays
+	if(istype(reinf_material))
+		var/image/I = image(icon, "[icon_state]_padding")
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-			I.color = material.icon_colour
-		stool_cache[cache_key] = I
-	overlays |= stool_cache[cache_key]
-	// Padding overlay.
-	if(padding_material)
-		var/padding_cache_key = "[base_icon]-padding-[padding_material.type]"
-		if(isnull(stool_cache[padding_cache_key]))
-			var/image/I =  image(icon, "[base_icon]_padding")
-			if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-				I.color = padding_material.icon_colour
-			stool_cache[padding_cache_key] = I
-		overlays |= stool_cache[padding_cache_key]
-
-	// Strings.
-	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
-		SetName(padding_material ? "[padding_material.adjective_name] [initial(name)]" : "[material.adjective_name] [initial(name)]") //this is not perfect but it will do for now.
-
-	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
-		desc = initial(desc)
-		desc += padding_material ? " It's made of [material.use_name] and covered with [padding_material.use_name]." : " It's made of [material.use_name]."
+			I.appearance_flags |= RESET_COLOR
+			I.color = reinf_material.icon_colour
+		LAZYADD(new_overlays, I)
+	overlays = new_overlays
 
 /obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
@@ -92,7 +73,7 @@
 		dismantle()
 		qdel(src)
 	else if(istype(W,/obj/item/stack))
-		if(padding_material)
+		if(reinf_material)
 			to_chat(user, "\The [src] is already padded.")
 			return
 		var/obj/item/stack/C = W
@@ -117,7 +98,7 @@
 		return
 
 	else if(isWirecutter(W))
-		if(!padding_material)
+		if(!reinf_material)
 			to_chat(user, "\The [src] has no padding to remove.")
 			return
 		to_chat(user, "You remove the padding from \the [src].")
@@ -153,31 +134,27 @@
 			unbuckle_mob()
 
 /obj/structure/bed/proc/remove_padding()
-	if(padding_material)
-		padding_material.place_sheet(get_turf(src))
-		padding_material = null
+	if(reinf_material)
+		reinf_material.place_sheet(get_turf(src))
+		reinf_material = null
 	update_icon()
 
 /obj/structure/bed/proc/add_padding(var/padding_type)
-	padding_material = SSmaterials.get_material_datum(padding_type)
+	reinf_material = SSmaterials.get_material_datum(padding_type)
 	update_icon()
-
-/obj/structure/bed/proc/dismantle()
-	material.place_sheet(get_turf(src))
-	if(padding_material)
-		padding_material.place_sheet(get_turf(src))
 
 /obj/structure/bed/psych
 	name = "psychiatrist's couch"
 	desc = "For prime comfort during psychiatric evaluations."
 	icon_state = "psychbed"
-	base_icon = "psychbed"
 
-/obj/structure/bed/psych/Initialize(mapload)
-	. = ..(mapload, MAT_WALNUT, MAT_LEATHER_GENERIC)
+/obj/structure/bed/psych
+	material = MAT_WALNUT
+	reinf_material = MAT_LEATHER_GENERIC
 
-/obj/structure/bed/padded/Initialize(mapload)
-	. = ..(mapload, MAT_ALUMINIUM,MAT_CLOTH)
+/obj/structure/bed/padded
+	material = MAT_ALUMINIUM
+	reinf_material = MAT_CLOTH
 
 /*
  * Roller beds

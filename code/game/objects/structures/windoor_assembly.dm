@@ -17,6 +17,7 @@
 	density = 0
 	dir = NORTH
 	w_class = ITEM_SIZE_NORMAL
+	material = MAT_GLASS
 
 	var/obj/item/airlock_electronics/electronics = null
 
@@ -25,17 +26,8 @@
 	var/secure = ""		//Whether or not this creates a secure windoor
 	var/state = "01"	//How far the door assembly has progressed in terms of sprites
 
-/obj/structure/windoor_assembly/Initialize(mapload, start_dir=NORTH, constructed=0)
-	. = ..(mapload)
-	if(constructed)
-		state = "01"
-		anchored = 0
-	switch(start_dir)
-		if(NORTH, SOUTH, EAST, WEST)
-			set_dir(start_dir)
-		else //If the user is facing northeast. northwest, southeast, southwest or north, default to north
-			set_dir(NORTH)
-
+/obj/structure/windoor_assembly/Initialize()
+	. = ..()
 	update_nearby_tiles(need_rebuild=1)
 
 obj/structure/windoor_assembly/Destroy()

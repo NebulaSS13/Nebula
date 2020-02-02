@@ -8,15 +8,27 @@
 	layer = CATWALK_LAYER
 	footstep_type = /decl/footsteps/catwalk
 	obj_flags = OBJ_FLAG_NOFALL
+	handle_generic_blending = TRUE
 	var/hatch_open = FALSE
 	var/obj/item/stack/tile/mono/plated_tile
+	var/list/connections
+	var/list/other_connections
+	
+/obj/structure/catwalk/clear_connections()
+	connections = null
+	other_connections = null
+
+/obj/structure/catwalk/set_connections(dirs, other_dirs)
+	connections = dirs_to_corner_states(dirs)
+	other_connections = dirs_to_corner_states(other_dirs)
 
 /obj/structure/catwalk/Initialize()
-	..()
-	for(var/obj/structure/catwalk/C in get_turf(src))
-		if(C != src)
-			qdel(C)
-	return INITIALIZE_HINT_LATELOAD
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		for(var/obj/structure/catwalk/C in get_turf(src))
+			if(C != src)
+				qdel(C)
+		. = INITIALIZE_HINT_LATELOAD
 
 /obj/structure/catwalk/LateInitialize()
 	..()
@@ -34,7 +46,6 @@
 			L.update_connections()
 			L.update_icon() //so siding get updated properly
 
-
 /obj/structure/catwalk/on_update_icon()
 	update_connections()
 	overlays.Cut()
@@ -42,7 +53,7 @@
 	var/image/I
 	if(!hatch_open)
 		for(var/i = 1 to 4)
-			I = image('icons/obj/catwalks.dmi', "catwalk[connections[i]]", dir = 1<<(i-1))
+			I = image('icons/obj/catwalks.dmi', "catwalk[connections ? connections[i] : "0"]", dir = 1<<(i-1))
 			overlays += I
 	if(plated_tile)
 		I = image('icons/obj/catwalks.dmi', "plated")
