@@ -142,8 +142,6 @@
 /obj/item/clothing/gloves/boxing/hologlove
 	name = "boxing gloves"
 	desc = "Because you really needed another excuse to punch your crewmates."
-	icon_state = "boxing"
-	item_state = "boxing"
 
 /obj/structure/window/holowindow/full
 	dir = 5

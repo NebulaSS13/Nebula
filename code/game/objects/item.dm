@@ -14,7 +14,6 @@
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASS_FLAG_TABLE
-//	causeerrorheresoifixthis
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
 	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
@@ -110,7 +109,6 @@
 					matter[material_type] *= material_force_multiplier
 	else
 		material = null
-
 	if(islist(armor))
 		for(var/type in armor)
 			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
@@ -864,8 +862,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_state = icon_state
 	return mob_state
 
-
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
+	
+	if(on_mob_icon)
+		return experimental_mob_overlay(user_mob, slot)
+
 	var/bodytype = "Default"
 	var/mob/living/carbon/human/user_human
 	if(ishuman(user_mob))

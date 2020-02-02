@@ -1031,6 +1031,21 @@ var/global/floorIsLava = 0
 			if(T)
 				new /obj/structure/closet/debug(T, check_appearance)
 
+/datum/admins/proc/check_unconverted_single_icon_items()
+	set category = "Debug"
+	set desc = "Count items missing single icon definition."
+	set name = "Check Single Mob Icons"
+	if(!check_rights(R_DEBUG))
+		return
+	var/types_missing_icons
+	for(var/checktype in typesof(/obj/item))
+		var/obj/item/I = checktype
+		if(!initial(I.on_mob_icon))
+			LAZYADD(types_missing_icons, checktype)
+	if(alert("[LAZYLEN(types_missing_icons)] item\s are missing on_mob_icon being set. Do you wish to see the full list?", "Check missing icons", "Yes", "No") == "Yes")
+		for(var/checktype in types_missing_icons)
+			to_chat(usr, checktype)
+
 /datum/admins/proc/spawn_fruit(seedtype in SSplants.seeds)
 	set category = "Debug"
 	set desc = "Spawn the product of a seed."
