@@ -131,7 +131,7 @@
 	new /obj/item/clothing/head/that(src.loc)
 
 /obj/effect/landmark/costume/scratch/make_costumes()
-	new /obj/item/clothing/gloves/white(src.loc)
+	new /obj/item/clothing/gloves/color/white(src.loc)
 	new /obj/item/clothing/shoes/white(src.loc)
 	new /obj/item/clothing/under/scratch(src.loc)
 	if (prob(30))

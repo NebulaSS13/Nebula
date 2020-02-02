@@ -2,7 +2,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/nanotrasen
 	uniform = /obj/item/clothing/under/rank/centcom
 	shoes = /obj/item/clothing/shoes/laceup
-	gloves = /obj/item/clothing/gloves/white
+	gloves = /obj/item/clothing/gloves/color/white
 	l_ear = /obj/item/radio/headset/heads/hop
 	glasses = /obj/item/clothing/glasses/sunglasses
 
