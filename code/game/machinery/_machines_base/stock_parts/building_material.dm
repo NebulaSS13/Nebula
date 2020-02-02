@@ -55,3 +55,10 @@
 		I.dropInto(loc)
 	materials = null
 	..()
+
+/obj/item/stock_parts/building_material/building_cost()
+	. = ..()
+	for(var/obj/item/thing in materials)
+		var/list/costs = thing.building_cost()
+		for(var/key in costs)
+			.[key] += costs[key]

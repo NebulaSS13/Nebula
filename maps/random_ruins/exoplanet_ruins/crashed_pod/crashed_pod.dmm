@@ -370,7 +370,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "aM" = (
-/obj/machinery/pipedispenser,
+/obj/machinery/fabricator/pipe,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/effect/decal/cleanable/generic,
 /obj/effect/decal/cleanable/cobweb2,

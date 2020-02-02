@@ -18,6 +18,7 @@ SUBSYSTEM_DEF(fabrication)
 		var/decl/crafting_stage/handler = all_crafting_handlers[hid]
 		if(ispath(handler.begins_with_object_type))
 			LAZYDISTINCTADD(crafting_procedures_by_type[handler.begins_with_object_type], handler)
+	init_rpd_lists()
 	. = ..()
 
 /datum/controller/subsystem/fabrication/proc/get_categories(var/fab_type)

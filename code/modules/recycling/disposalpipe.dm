@@ -82,7 +82,8 @@ obj/structure/disposalpipe/Destroy()
 	// update the icon_state to reflect hidden status
 /obj/structure/disposalpipe/proc/update()
 	var/turf/T = src.loc
-	hide(!T.is_plating() && !istype(T,/turf/space))	// space never hides pipes
+	if(loc)
+		hide(!T.is_plating() && !istype(T,/turf/space))	// space never hides pipes
 
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon

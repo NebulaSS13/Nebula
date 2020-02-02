@@ -5522,7 +5522,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "jE" = (
-/obj/machinery/pipedispenser,
+/obj/machinery/fabricator/pipe,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 4

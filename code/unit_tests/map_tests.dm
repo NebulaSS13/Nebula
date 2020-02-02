@@ -458,6 +458,8 @@ datum/unit_test/ladder_check/start_test()
 		num2text(WEST)  = list(list(EAST,  list(NORTH, EAST)), list(SOUTH, list(SOUTH, EAST))))
 
 	for(var/obj/structure/disposalpipe/segment/D in world)
+		if(!D.loc)
+			continue
 		if(D.icon_state == "pipe-s")
 			if(!(D.dir == SOUTH || D.dir == EAST))
 				log_bad("Following disposal pipe has an invalid direction set: [log_info_line(D)]")
@@ -691,6 +693,8 @@ datum/unit_test/ladder_check/start_test()
 	. = 1
 	var/fail = FALSE
 	for(var/obj/structure/disposalpipe/sortjunction/sort in world)
+		if(!sort.loc)
+			continue
 		if(is_type_in_list(sort, exempt_junctions))
 			continue
 		var/obj/machinery/disposal/bin = get_bin_from_junction(sort)

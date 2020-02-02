@@ -920,7 +920,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "cB" = (
-/obj/machinery/pipedispenser,
+/obj/machinery/fabricator/pipe,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "cC" = (

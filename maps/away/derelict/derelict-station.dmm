@@ -239,7 +239,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "aH" = (
-/obj/machinery/pipedispenser,
+/obj/machinery/fabricator/pipe,
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "aI" = (
@@ -1835,11 +1835,11 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "fC" = (
-/obj/machinery/pipedispenser,
+/obj/machinery/fabricator/pipe,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fD" = (
-/obj/machinery/pipedispenser/disposal,
+/obj/machinery/fabricator/pipe/disposal,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fE" = (

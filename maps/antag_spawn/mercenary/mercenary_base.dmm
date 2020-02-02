@@ -1136,7 +1136,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/pipedispenser,
+/obj/machinery/fabricator/pipe,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "bP" = (
@@ -2372,7 +2372,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "nE" = (
-/obj/machinery/pipedispenser/disposal,
+/obj/machinery/fabricator/pipe/disposal,
 /obj/structure/railing/mapped/no_density,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
@@ -2386,7 +2386,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "nQ" = (
-/obj/machinery/pipedispenser,
+/obj/machinery/fabricator/pipe,
 /obj/structure/railing/mapped/no_density,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)

@@ -12,7 +12,7 @@
 
 /obj/item/stock_parts/circuitboard/pipedispensor
 	name = T_BOARD("pipe dispenser")
-	build_path = /obj/machinery/pipedispenser
+	build_path = /obj/machinery/fabricator/pipe
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 5)
 	req_components = list(
@@ -25,4 +25,4 @@
 
 /obj/item/stock_parts/circuitboard/pipedispensor/disposal
 	name = T_BOARD("disposal pipe dispenser")
-	build_path = /obj/machinery/pipedispenser/disposal
+	build_path = /obj/machinery/fabricator/pipe/disposal

@@ -3933,7 +3933,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "hd" = (
-/obj/machinery/pipedispenser,
+/obj/machinery/fabricator/pipe,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2

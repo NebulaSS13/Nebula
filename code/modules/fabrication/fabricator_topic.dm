@@ -15,6 +15,13 @@
 		try_dump_material(href_list["eject_mat"])
 		. = TOPIC_REFRESH
 
+	if(href_list["color_select"])
+		var/choice = input(user, "What color do you want to select?") as null|anything in pipe_colors
+		if(!choice)
+			return TOPIC_HANDLED
+		selected_color = choice
+		return TOPIC_REFRESH
+
 /obj/machinery/fabricator/proc/try_cancel_build(var/datum/fabricator_build_order/order)
 	if(istype(order) && currently_building != order && is_functioning())
 		if(order in queued_orders)
@@ -28,7 +35,7 @@
 	for(var/mat_path in stored_substances_to_names)
 		if(stored_substances_to_names[mat_path] == mat_name)
 			if(ispath(mat_path, /material))
-				var/material/mat = SSmaterials.get_material_datum(mat_name)
+				var/material/mat = SSmaterials.get_material_datum(mat_path)
 				if(mat && stored_material[mat_path] > mat.units_per_sheet && mat.stack_type)
 					var/sheet_count = Floor(stored_material[mat_path]/mat.units_per_sheet)
 					stored_material[mat_path] -= sheet_count * mat.units_per_sheet

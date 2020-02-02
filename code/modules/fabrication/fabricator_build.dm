@@ -9,13 +9,13 @@
 		return
 
 	// Print the item.
-	if(ispath(currently_building.target_recipe.path, /obj/item/stack))
-		new currently_building.target_recipe.path(get_turf(src), amount = currently_building.multiplier)
-	else
-		new currently_building.target_recipe.path(get_turf(src))
+	do_build(currently_building.target_recipe, currently_building.multiplier)
 	QDEL_NULL(currently_building)
 	get_next_build()
 	update_icon()
+
+/obj/machinery/fabricator/proc/do_build(var/datum/fabricator_recipe/recipe, var/amount)
+	recipe.build(get_turf(src), amount)
 
 /obj/machinery/fabricator/proc/start_building()
 	if(!(fab_status_flags & FAB_BUSY) && is_functioning())

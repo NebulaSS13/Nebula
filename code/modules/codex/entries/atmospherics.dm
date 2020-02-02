@@ -186,7 +186,7 @@
 
 //Pipe dispensers
 /datum/codex_entry/atmos_pipe_dispenser
-	associated_paths = list(/obj/machinery/pipedispenser)
+	associated_paths = list(/obj/machinery/fabricator/pipe)
 	mechanics_text = "This can be moved by using a wrench.  You will need to wrench it again when you want to use it.  You can put \
 	excess (atmospheric) pipes into the dispenser, as well.  The dispenser requires electricity to function."
 

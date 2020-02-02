@@ -1,67 +1,66 @@
-GLOBAL_LIST_INIT(rpd_pipe_selection, list(
-	new /datum/pipe/pipe_dispenser/simple() = list(
-		new /datum/pipe/pipe_dispenser/simple/straight(),
-		new /datum/pipe/pipe_dispenser/simple/bent(),
-		new /datum/pipe/pipe_dispenser/simple/manifold(),
-		new /datum/pipe/pipe_dispenser/simple/manifold4w(),
-		new /datum/pipe/pipe_dispenser/simple/cap()),
-	new /datum/pipe/pipe_dispenser/supply() = list(
-		new /datum/pipe/pipe_dispenser/supply/straight(),
-		new /datum/pipe/pipe_dispenser/supply/bent(),
-		new /datum/pipe/pipe_dispenser/supply/manifold(),
-		new /datum/pipe/pipe_dispenser/supply/manifold4w(),
-		new /datum/pipe/pipe_dispenser/supply/cap()),
-	new /datum/pipe/pipe_dispenser/scrubber() = list(
-		new /datum/pipe/pipe_dispenser/scrubber/straight(),
-		new /datum/pipe/pipe_dispenser/scrubber/bent(),
-		new /datum/pipe/pipe_dispenser/scrubber/manifold(),
-		new /datum/pipe/pipe_dispenser/scrubber/manifold4w(),
-		new /datum/pipe/pipe_dispenser/scrubber/cap()),
-	))
+GLOBAL_LIST_EMPTY(rpd_pipe_selection)
+GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 
-GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
-	new /datum/pipe/pipe_dispenser/simple() = list(
-		new /datum/pipe/pipe_dispenser/simple/straight(),
-		new /datum/pipe/pipe_dispenser/simple/bent(),
-		new /datum/pipe/pipe_dispenser/simple/manifold(),
-		new /datum/pipe/pipe_dispenser/simple/manifold4w(),
-		new /datum/pipe/pipe_dispenser/simple/cap(),
-		new /datum/pipe/pipe_dispenser/simple/up(),
-		new /datum/pipe/pipe_dispenser/simple/down()
+/proc/init_rpd_lists()
+	GLOB.rpd_pipe_selection = list(
+	"Regular Pipes" = list(
+		new /datum/fabricator_recipe/pipe(),
+		new /datum/fabricator_recipe/pipe/bent(),
+		new /datum/fabricator_recipe/pipe/manifold(),
+		new /datum/fabricator_recipe/pipe/manifold4w(),
+		new /datum/fabricator_recipe/pipe/cap()),
+	"Supply Pipes" = list(
+		new /datum/fabricator_recipe/pipe/supply(),
+		new /datum/fabricator_recipe/pipe/supply/bent(),
+		new /datum/fabricator_recipe/pipe/supply/manifold(),
+		new /datum/fabricator_recipe/pipe/supply/manifold4w(),
+		new /datum/fabricator_recipe/pipe/supply/cap()),
+	"Scrubber Pipes" = list(
+		new /datum/fabricator_recipe/pipe/scrubber(),
+		new /datum/fabricator_recipe/pipe/scrubber/bent(),
+		new /datum/fabricator_recipe/pipe/scrubber/manifold(),
+		new /datum/fabricator_recipe/pipe/scrubber/manifold4w(),
+		new /datum/fabricator_recipe/pipe/scrubber/cap())
+	)
+
+	GLOB.rpd_pipe_selection_skilled = list(
+	"Regular Pipes" = list(
+		new /datum/fabricator_recipe/pipe(),
+		new /datum/fabricator_recipe/pipe/bent(),
+		new /datum/fabricator_recipe/pipe/manifold(),
+		new /datum/fabricator_recipe/pipe/manifold4w(),
+		new /datum/fabricator_recipe/pipe/cap(),
+		new /datum/fabricator_recipe/pipe/up(),
+		new /datum/fabricator_recipe/pipe/down()
 		),
-	new /datum/pipe/pipe_dispenser/supply() = list(
-		new /datum/pipe/pipe_dispenser/supply/straight(),
-		new /datum/pipe/pipe_dispenser/supply/bent(),
-		new /datum/pipe/pipe_dispenser/supply/manifold(),
-		new /datum/pipe/pipe_dispenser/supply/manifold4w(),
-		new /datum/pipe/pipe_dispenser/supply/cap(),
-		new /datum/pipe/pipe_dispenser/supply/up(),
-		new /datum/pipe/pipe_dispenser/supply/down()
+	"Supply Pipes" = list(
+		new /datum/fabricator_recipe/pipe/supply(),
+		new /datum/fabricator_recipe/pipe/supply/bent(),
+		new /datum/fabricator_recipe/pipe/supply/manifold(),
+		new /datum/fabricator_recipe/pipe/supply/manifold4w(),
+		new /datum/fabricator_recipe/pipe/supply/cap(),
+		new /datum/fabricator_recipe/pipe/supply/up(),
+		new /datum/fabricator_recipe/pipe/supply/down()
 		),
-	new /datum/pipe/pipe_dispenser/scrubber() = list(
-		new /datum/pipe/pipe_dispenser/scrubber/straight(),
-		new /datum/pipe/pipe_dispenser/scrubber/bent(),
-		new /datum/pipe/pipe_dispenser/scrubber/manifold(),
-		new /datum/pipe/pipe_dispenser/scrubber/manifold4w(),
-		new /datum/pipe/pipe_dispenser/scrubber/cap(),
-		new /datum/pipe/pipe_dispenser/scrubber/up(),
-		new /datum/pipe/pipe_dispenser/scrubber/down()
+	"Scrubber Pipes" = list(
+		new /datum/fabricator_recipe/pipe/scrubber(),
+		new /datum/fabricator_recipe/pipe/scrubber/bent(),
+		new /datum/fabricator_recipe/pipe/scrubber/manifold(),
+		new /datum/fabricator_recipe/pipe/scrubber/manifold4w(),
+		new /datum/fabricator_recipe/pipe/scrubber/cap(),
+		new /datum/fabricator_recipe/pipe/scrubber/up(),
+		new /datum/fabricator_recipe/pipe/scrubber/down()
 		),
-	new /datum/pipe/pipe_dispenser/fuel() = list(
-		new /datum/pipe/pipe_dispenser/fuel/straight(),
-		new /datum/pipe/pipe_dispenser/fuel/bent(),
-		new /datum/pipe/pipe_dispenser/fuel/manifold(),
-		new /datum/pipe/pipe_dispenser/fuel/manifold4w(),
-		new /datum/pipe/pipe_dispenser/fuel/cap(),
-		new /datum/pipe/pipe_dispenser/fuel/up(),
-		new /datum/pipe/pipe_dispenser/fuel/down()
-		),
-	new /datum/pipe/pipe_dispenser/device() = list(
-		new /datum/pipe/pipe_dispenser/device/universaladapter(),
-		new /datum/pipe/pipe_dispenser/device/gaspump(),
-		new /datum/pipe/pipe_dispenser/device/manualvalve()
+	"Fuel Pipes" = list(
+		new /datum/fabricator_recipe/pipe/fuel(),
+		new /datum/fabricator_recipe/pipe/fuel/bent(),
+		new /datum/fabricator_recipe/pipe/fuel/manifold(),
+		new /datum/fabricator_recipe/pipe/fuel/manifold4w(),
+		new /datum/fabricator_recipe/pipe/fuel/cap(),
+		new /datum/fabricator_recipe/pipe/fuel/up(),
+		new /datum/fabricator_recipe/pipe/fuel/down()
 		)
-	))
+	)
 
 /obj/item/rpd
 	name = "rapid piping device"
@@ -76,7 +75,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	origin_tech = list(TECH_ENGINEERING = 5, TECH_MATERIAL = 4)
 
 	var/datum/effect/effect/system/spark_spread/spark_system
-	var/datum/pipe/P
+	var/datum/fabricator_recipe/pipe/P
 	var/pipe_color = "white"
 	var/datum/browser/popup
 
@@ -99,9 +98,8 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	if(color_options)
 		. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[pipe_color]'>[pipe_color]</font></a></td></tr>"
 	for(var/category in pipe_categories)
-		var/datum/pipe/cat = category
-		. += "<tr><td><font color = '#517087'><strong>[initial(cat.category)]</strong></font></td></tr>"
-		for(var/datum/pipe/pipe in pipe_categories[category])
+		. += "<tr><td><font color = '#517087'><strong>[category]</strong></font></td></tr>"
+		for(var/datum/fabricator_recipe/pipe/pipe in pipe_categories[category])
 			. += "<tr><td>[pipe.name]</td><td>[P.type == pipe.type ? "<span class='linkOn'>Select</span>" : "<a href='?src=\ref[src];select=\ref[pipe]'>Select</a>"]</td></tr>"
 	.+= "</table>"
 	. = JOINTEXT(.)
@@ -149,7 +147,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 				return
 			playsound(get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
 
-		P.Build(P, T, pipe_colors[pipe_color])
+		P.build(T, 1, pipe_colors[pipe_color])
 		if(prob(20)) src.spark_system.start()
 
 /obj/item/rpd/examine(var/mob/user, distance)

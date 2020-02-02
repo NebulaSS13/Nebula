@@ -1,13 +1,14 @@
 #define PRINT_MULTIPLIER_DIVISOR 5
 
 /obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
-
 	var/list/data = list()
 
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
 
 	if(is_functioning())	
+		data["color_selectable"] = color_selectable
+		data["color"] = selected_color
 
 		var/current_storage =  list()
 		data["material_storage"] =  current_storage
@@ -69,12 +70,11 @@
 						build_option["unavailable"] = 1
 					material_components += "[round(R.resources[material] * mat_efficiency)] [stored_substances_to_names[material]]"
 				build_option["cost"] = "[capitalize(jointext(material_components, ", "))]."
-			if(ispath(R.path, /obj/item/stack) && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
-				var/obj/item/stack/R_stack = R.path
-				build_option["multipliers"] = list()
-				for(var/i = 1 to Floor(min(R_stack.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
+			if(R.max_amount >= PRINT_MULTIPLIER_DIVISOR && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
+				build_option["multiplier"] = list()
+				for(var/i = 1 to Floor(min(R.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
 					var/mult = i * PRINT_MULTIPLIER_DIVISOR
-					build_option["multipliers"] += list(list("label" = "x[mult]", "multiplier" = mult))
+					build_option["multiplier"] += list(list("label" = "x[mult]", "multiplier" = mult))
 			data["build_options"] += list(build_option)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

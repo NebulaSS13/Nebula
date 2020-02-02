@@ -16,6 +16,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/has_recycler = TRUE
+	var/color_selectable = FALSE // Allows selecting a color by the user in the UI, to do with as you please.
+	var/selected_color = "white"
+
 	var/list/material_overlays = list()
 	var/base_icon_state = "autolathe"
 	var/image/panel_image

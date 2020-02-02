@@ -72,11 +72,15 @@
 		to_chat(user, SPAN_WARNING("\The [src] cannot process \the [thing]."))
 
 /obj/machinery/fabricator/attackby(var/obj/item/O, var/mob/user)
-	if(component_attackby(O, user) || stat)
+	if(component_attackby(O, user))
 		return TRUE
 	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		attack_hand(user)
 		return TRUE
+	if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
+		return ..()
+	if(stat & (NOPOWER | BROKEN))
+		return
 	// Take reagents, if any are applicable.
 	var/reagents_taken = take_reagents(O, user)
 	if(reagents_taken != SUBSTANCE_TAKEN_NONE && !has_recycler)

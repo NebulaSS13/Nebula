@@ -44,11 +44,9 @@
 			turn = D.turn
 			constructed_path = D.type
 			set_dir(D.dir)
-	update_icon()
-
-/obj/structure/disposalconstruct/Initialize()
+	if(loc)
+		update_icon()
 	update_verbs()
-	. = ..()
 
 /obj/structure/disposalconstruct/proc/update_verbs()
 	if(anchored)

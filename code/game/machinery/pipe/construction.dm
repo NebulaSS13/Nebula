@@ -23,6 +23,7 @@ Buildable meters
 
 /obj/item/pipe/Initialize(var/mapload, var/obj/machinery/atmospherics/P)
 	. = ..(mapload, null)
+	set_extension(src, /datum/extension/parts_stash)
 	if(!P)
 		return
 	if(!P.dir)
@@ -152,6 +153,9 @@ Buildable meters
 
 	//TODO: Move all of this stuff into the various pipe constructors.
 	var/obj/machinery/atmospherics/P = new constructed_path(get_turf(src))
+	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
+	if(stash)
+		stash.install_into(P)
 
 	P.pipe_color = color
 	P.set_dir(dir)
@@ -211,12 +215,17 @@ Buildable meters
 /obj/item/machine_chassis
 	var/build_type
 
+/obj/item/machine_chassis/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/parts_stash)
+
 /obj/item/machine_chassis/attackby(var/obj/item/W, var/mob/user)
 	if(!isWrench(W))
 		return ..()
 	var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)
-	machine.apply_component_presets()
-	machine.RefreshParts()
+	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
+	if(stash)
+		stash.install_into(machine)
 	if(machine.construct_state)
 		machine.construct_state.post_construct(machine)
 	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -229,7 +238,7 @@ Buildable meters
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "gsensor1"
 	w_class = ITEM_SIZE_LARGE
-	build_type = /obj/machinery/air_sensor/buildable
+	build_type = /obj/machinery/air_sensor
 
 /obj/item/machine_chassis/pipe_meter
 	name = "meter"
@@ -238,4 +247,4 @@ Buildable meters
 	icon_state = "meter"
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_LARGE
-	build_type = /obj/machinery/meter/buildable
+	build_type = /obj/machinery/meter
