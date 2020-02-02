@@ -38,90 +38,10 @@
 	item_state = "bgloves"
 	siemens_coefficient = 0.50
 	permeability_coefficient = 0.05
-
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
-
-/obj/item/clothing/gloves/thick
-	desc = "These work gloves are thick and fire-resistant."
-	name = "work gloves"
-	icon_state = "black"
-	item_state = "bgloves"
-	siemens_coefficient = 0.50
-	permeability_coefficient = 0.05
-	item_flags = ITEM_FLAG_THICKMATERIAL
-
-	cold_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HANDS
-	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
-
-/obj/item/clothing/gloves/thick/swat
-	desc = "These tactical gloves are somewhat fire and impact-resistant."
-	name = "\improper SWAT Gloves"
-	item_state = "swat_gl"
-	force = 5
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_MINOR)
-
-/obj/item/clothing/gloves/thick/combat //Combined effect of SWAT gloves and insulated gloves
-	desc = "These tactical gloves are somewhat fire and impact resistant."
-	name = "combat gloves"
-	icon_state = "work"
-	item_state = "wgloves"
-	siemens_coefficient = 0
-	permeability_coefficient = 0.05
-	force = 5
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_MINOR)
-	cold_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HANDS
-	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
-
-/obj/item/clothing/gloves/thick/botany
-	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
-	name = "thick leather gloves"
-	icon_state = "leather"
-	item_state = "ggloves"
-
-/obj/item/clothing/gloves/latex
-	name = "latex gloves"
-	desc = "Sterile latex gloves."
-	siemens_coefficient = 1.1 //thin latex gloves, much more conductive than fabric gloves (basically a capacitor for AC)
-	permeability_coefficient = 0.01
-	germ_level = 0
-	icon = 'icons/clothing/hands/gloves_generic.dmi'
-	on_mob_icon = 'icons/clothing/hands/gloves_generic.dmi'
-	icon_state = "world"
-
-/obj/item/clothing/gloves/latex/nitrile
-	name = "nitrile gloves"
-	desc = "Sterile nitrile gloves"
-	color = COLOR_BLUE_LIGHT
-
-/obj/item/clothing/gloves/thick/duty
-	desc = "These brown duty gloves are made from a durable synthetic."
-	name = "work gloves"
-	icon_state = "work"
-	item_state = "wgloves"
-	armor = list(
-		melee = ARMOR_MELEE_MINOR, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR
-		)
 
 /obj/item/clothing/gloves/tactical
 	desc = "These brown tactical gloves are made from a durable synthetic, and have hardened knuckles."

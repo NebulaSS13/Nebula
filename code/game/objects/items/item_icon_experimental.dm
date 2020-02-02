@@ -10,19 +10,24 @@
 	if(on_mob_icon)
 		icon = on_mob_icon
 		icon_state = "world"
+		update_icon()
 
 /obj/item/hud_layerise()
 	..()
 	if(on_mob_icon)
 		icon_state = "inventory"
+		update_icon()
 
 /obj/item/reset_plane_and_layer()
 	..()
 	if(on_mob_icon)
+		var/last_state = icon_state
 		if(plane == HUD_PLANE)
 			icon_state = "inventory"
 		else
 			icon_state = "world"
+		if(last_state != icon_state)
+			update_icon()
 
 /mob/proc/get_bodytype()
 	return
