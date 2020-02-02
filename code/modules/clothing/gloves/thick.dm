@@ -42,13 +42,11 @@
 	. = ..()
 	var/image/I = image(icon, "[icon_state]-botany_fingertips")
 	I.appearance_flags |= RESET_COLOR
-	world.log << "2 [icon_state]-botany_fingertips"
 	overlays = list(I)
 
 /obj/item/clothing/gloves/thick/botany/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	if(slot == slot_gloves_str)
 		var/image/I = image(icon, "[bodytype]-botany_fingertips")
-		world.log << "1 [bodytype]-botany_fingertips"
 		I.appearance_flags |= RESET_COLOR
 		overlay.overlays = list(I)
 	. = ..()
