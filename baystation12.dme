@@ -1476,6 +1476,7 @@
 #include "code\modules\clothing\glasses\prescription.dm"
 #include "code\modules\clothing\glasses\sunglasses.dm"
 #include "code\modules\clothing\glasses\thermals.dm"
+#include "code\modules\clothing\gloves\_gloves.dm"
 #include "code\modules\clothing\gloves\boxing.dm"
 #include "code\modules\clothing\gloves\color.dm"
 #include "code\modules\clothing\gloves\miscellaneous.dm"
