@@ -139,6 +139,7 @@
 /area/ship/scrap/maintenance/eva
 	name = "\improper EVA Storage"
 	icon_state = "eva"
+	req_access = list(access_eva)
 
 /area/ship/scrap/maintenance/engineering
 	name = "\improper Engineering Bay"
@@ -215,6 +216,7 @@
 /area/ship/scrap/maintenance/solars
 	name = "\improper Solar Array Access"
 	icon_state = "SolarcontrolA"
+	req_access = list(access_engine)
 
 /area/ship/scrap/maintenance/robot
 	name = "\improper Robot Storage"
