@@ -25,7 +25,7 @@
 	set src in range(1)
 	if(cannot_interact(usr))
 		return
-	var/N = input("How much do you wish to transfer per use?", "Set Transfer Amount") as null|anything in possible_transfer_amounts
+	var/N = input("How much do you wish to transfer per use?", "Set Transfer Amount") as null|anything in cached_number_list_decode(possible_transfer_amounts)
 	if(N && !cannot_interact(usr))
 		amount_per_transfer_from_this = N
 
