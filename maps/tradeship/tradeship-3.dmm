@@ -499,8 +499,9 @@
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "qw" = (
-/obj/item/frame/light_switch{
-	pixel_x = 24
+/obj/machinery/light_switch{
+	pixel_z = 0;
+	pixel_w = 24
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)

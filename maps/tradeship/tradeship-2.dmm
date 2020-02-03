@@ -300,6 +300,9 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
+/obj/machinery/light_switch{
+	pixel_w = 27
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/dock)
 "bx" = (
@@ -2656,6 +2659,9 @@
 /area/space)
 "gA" = (
 /obj/machinery/washing_machine,
+/obj/item/storage/box/monkeycubes{
+	pixel_z = 13
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/ship/scrap/crew/wash)
 "gB" = (
@@ -4967,6 +4973,9 @@
 	pixel_y = 25
 	},
 /obj/machinery/biogenerator,
+/obj/machinery/light_switch{
+	pixel_w = 22
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/garden)
 "qc" = (
@@ -5129,9 +5138,6 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/garden)
 "sc" = (
-/obj/machinery/light_switch{
-	pixel_x = 28
-	},
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
@@ -5829,9 +5835,6 @@
 /obj/structure/cable{
 	icon_state = "0-2";
 	d2 = 2
-	},
-/obj/machinery/light_switch{
-	pixel_x = 28
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/firealarm{
