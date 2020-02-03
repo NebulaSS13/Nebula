@@ -6,7 +6,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 	var/amount_per_transfer_from_this = 5
-	var/possible_transfer_amounts = "5;10;15;25;30"
+	var/possible_transfer_amounts = @"[5,10,15,25,30]"
 	var/volume = 30
 	var/label_text
 
@@ -25,7 +25,7 @@
 	set src in range(1)
 	if(cannot_interact(usr))
 		return
-	var/N = input("How much do you wish to transfer per use?", "Set Transfer Amount") as null|anything in cached_number_list_decode(possible_transfer_amounts)
+	var/N = input("How much do you wish to transfer per use?", "Set Transfer Amount") as null|anything in cached_json_decode(possible_transfer_amounts)
 	if(N && !cannot_interact(usr))
 		amount_per_transfer_from_this = N
 

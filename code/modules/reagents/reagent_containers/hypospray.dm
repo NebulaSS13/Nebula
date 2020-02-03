@@ -53,7 +53,7 @@
 	item_state = "autoinjector"
 	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
 	var/obj/item/chems/glass/beaker/vial/loaded_vial
-	possible_transfer_amounts = "1;2;5;10;15;20;30"
+	possible_transfer_amounts = @"[1,2,5,10,15,20,30]"
 	amount_per_transfer_from_this = 5
 	volume = 0
 

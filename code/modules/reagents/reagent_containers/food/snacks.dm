@@ -16,7 +16,7 @@
 	var/nutriment_type = /datum/reagent/nutriment
 	var/list/nutriment_desc = list("food" = 1)
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/chems/food/snacks/Initialize()
@@ -245,7 +245,7 @@
 	icon_state = "aesirsalad"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#468c00"
-	center_of_mass = "x=17;y=11"
+	center_of_mass = @"{'x':17,'y':11}"
 	nutriment_amt = 8
 	nutriment_desc = list("apples" = 3,"salad" = 5)
 	bitesize = 3
@@ -261,7 +261,7 @@
 	icon_state = "egg"
 	filling_color = "#fdffd1"
 	volume = 10
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 
 /obj/item/chems/food/snacks/egg/Initialize()
 	.=..()
@@ -334,7 +334,7 @@
 	desc = "A fried egg, with a touch of salt and pepper."
 	icon_state = "friedegg"
 	filling_color = "#ffdf78"
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
 /obj/item/chems/food/snacks/friedegg/Initialize()
 	.=..()
@@ -358,7 +358,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "appendix"
 	filling_color = "#e00d34"
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 3
 /obj/item/chems/food/snacks/organ/Initialize()
 	.=..()
@@ -371,7 +371,7 @@
 	icon_state = "tofu"
 	desc = "We all love tofu."
 	filling_color = "#fffee0"
-	center_of_mass = "x=17;y=10"
+	center_of_mass = @"{'x':17,'y':10}"
 //	nutriment_amt = 3
 	nutriment_desc = list("tofu" = 3, "goeyness" = 3)
 	bitesize = 3
@@ -385,7 +385,7 @@
 	desc = "A fake turkey made from tofu."
 	icon_state = "tofurkey"
 	filling_color = "#fffee0"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	nutriment_amt = 12
 	nutriment_desc = list("turkey" = 3, "tofu" = 5, "goeyness" = 4)
 	bitesize = 3
@@ -395,7 +395,7 @@
 	desc = "Moist, peppery breadcrumbs for filling the body cavities of dead birds. Dig in!"
 	icon_state = "stuffing"
 	filling_color = "#c9ac83"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_amt = 3
 	nutriment_desc = list("dryness" = 2, "bread" = 2)
 	bitesize = 1
@@ -405,7 +405,7 @@
 	desc = "A finger of fish."
 	icon_state = "fishfingers"
 	filling_color = "#ffdefe"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
 /obj/item/chems/food/snacks/fishfingers/Initialize()
 	.=..()
@@ -416,7 +416,7 @@
 	desc = "A slice from a huge mushroom."
 	icon_state = "hugemushroomslice"
 	filling_color = "#e0d7c5"
-	center_of_mass = "x=17;y=16"
+	center_of_mass = @"{'x':17,'y':16}"
 	nutriment_amt = 3
 	nutriment_desc = list("raw" = 2, "mushroom" = 2)
 	bitesize = 6
@@ -429,7 +429,7 @@
 	desc = "A slice from a huge tomato."
 	icon_state = "tomatomeat"
 	filling_color = "#db0000"
-	center_of_mass = "x=17;y=16"
+	center_of_mass = @"{'x':17,'y':16}"
 	nutriment_amt = 3
 	nutriment_desc = list("raw" = 2, "tomato" = 3)
 	bitesize = 6
@@ -439,7 +439,7 @@
 	desc = "A very manly slab of meat."
 	icon_state = "bearmeat"
 	filling_color = "#db0000"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
 /obj/item/chems/food/snacks/bearmeat/Initialize()
 	.=..()
@@ -451,7 +451,7 @@
 	desc = "An economical replacement for crab. In space! Would probably be a lot nicer cooked."
 	icon_state = "spiderleg"
 	filling_color = "#d5f5dc"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
 
 /obj/item/chems/food/snacks/spider/Initialize()
@@ -469,7 +469,7 @@
 	desc = "A slab of green meat. Smells like acid."
 	icon_state = "xenomeat"
 	filling_color = "#43de18"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 6
 /obj/item/chems/food/snacks/xenomeat/Initialize()
 	.=..()
@@ -481,7 +481,7 @@
 	desc = "A great meal all round."
 	icon_state = "meatball"
 	filling_color = "#db0000"
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 /obj/item/chems/food/snacks/meatball/Initialize()
 	.=..()
@@ -493,7 +493,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "sausage"
 	filling_color = "#db0000"
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 /obj/item/chems/food/snacks/sausage/Initialize()
 	.=..()
@@ -504,7 +504,7 @@
 	desc = "A piece of mixed, long meat, with some bite to it."
 	icon_state = "sausage"
 	filling_color = "#db0000"
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 /obj/item/chems/food/snacks/fatsausage/Initialize()
 	.=..()
@@ -537,7 +537,7 @@
 	desc = "The food of choice for the seasoned traitor."
 	icon_state = "donkpocket"
 	filling_color = "#dedeab"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("heartiness" = 1, "dough" = 2)
 	nutriment_amt = 2
 	var/warm = 0
@@ -570,7 +570,7 @@
 	desc = "A strange looking burger. It looks almost sentient."
 	icon_state = "brainburger"
 	filling_color = "#f2b6ea"
-	center_of_mass = "x=15;y=11"
+	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/brainburger/Initialize()
 	.=..()
@@ -582,7 +582,7 @@
 	desc = "Spooky! It doesn't look very filling."
 	icon_state = "ghostburger"
 	filling_color = "#fff2ff"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("buns" = 3, "spookiness" = 3)
 	nutriment_amt = 2
 	bitesize = 2
@@ -596,7 +596,7 @@
 	name = "-burger"
 	desc = "A bloody burger."
 	icon_state = "hburger"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/human/burger/Initialize()
 	.=..()
@@ -606,7 +606,7 @@
 	name = "cheeseburger"
 	desc = "The cheese adds a good flavor."
 	icon_state = "cheeseburger"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 	nutriment_amt = 2
 /obj/item/chems/food/snacks/cheeseburger/Initialize()
@@ -618,7 +618,7 @@
 	desc = "The cornerstone of every nutritious breakfast."
 	icon_state = "hburger"
 	filling_color = "#d63c3c"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 	bitesize = 2
@@ -632,7 +632,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "burger"
 	filling_color = "#d63c3c"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 	bitesize = 2
@@ -646,7 +646,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "hamburger"
 	filling_color = "#d63c3c"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 	bitesize = 2
@@ -659,7 +659,7 @@
 	desc = "Almost like a carp is yelling somewhere... Give me back that fillet -o- carp, give me that carp."
 	icon_state = "fishburger"
 	filling_color = "#ffdefe"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
 /obj/item/chems/food/snacks/fishburger/Initialize()
 	.=..()
@@ -670,7 +670,7 @@
 	desc = "What.. is that meat?"
 	icon_state = "tofuburger"
 	filling_color = "#fffee0"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("bun" = 2, "pseudo-soy meat" = 3)
 	nutriment_amt = 6
 	bitesize = 2
@@ -680,7 +680,7 @@
 	desc = "The lettuce is the only organic component. Beep."
 	icon_state = "roburger"
 	filling_color = COLOR_GRAY80
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("bun" = 2, "metal" = 3)
 	nutriment_amt = 2
 	bitesize = 2
@@ -695,7 +695,7 @@
 	icon_state = "roburger"
 	filling_color = COLOR_GRAY80
 	volume = 100
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 0.1
 /obj/item/chems/food/snacks/roburgerbig/Initialize()
 	.=..()
@@ -706,7 +706,7 @@
 	desc = "Smells caustic. Tastes like heresy."
 	icon_state = "xburger"
 	filling_color = "#43de18"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/xenoburger/Initialize()
 	.=..()
@@ -717,7 +717,7 @@
 	desc = "This tastes funny..."
 	icon_state = "clownburger"
 	filling_color = "#ff00ff"
-	center_of_mass = "x=17;y=12"
+	center_of_mass = @"{'x':17,'y':12}"
 	nutriment_desc = list("bun" = 2, "clown shoe" = 3)
 	nutriment_amt = 6
 	bitesize = 2
@@ -727,7 +727,7 @@
 	desc = "Its taste defies language."
 	icon_state = "mimeburger"
 	filling_color = "#ffffff"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("bun" = 2, "mime paint" = 3)
 	nutriment_amt = 6
 	bitesize = 2
@@ -738,7 +738,7 @@
 	icon_state = "omelette"
 	trash = /obj/item/trash/plate
 	filling_color = "#fff9a8"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 1
 /obj/item/chems/food/snacks/omelette/Initialize()
 	.=..()
@@ -749,7 +749,7 @@
 	desc = "A delicious and spongy little cake."
 	icon_state = "muffin"
 	filling_color = "#e0cf9b"
-	center_of_mass = "x=17;y=4"
+	center_of_mass = @"{'x':17,'y':4}"
 	nutriment_desc = list("sweetness" = 3, "muffin" = 3)
 	nutriment_amt = 6
 	bitesize = 2
@@ -760,7 +760,7 @@
 	icon_state = "pie"
 	trash = /obj/item/trash/plate
 	filling_color = "#fbffb8"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_desc = list("pie" = 3, "cream" = 2)
 	nutriment_amt = 4
 	bitesize = 3
@@ -779,7 +779,7 @@
 	desc = "No black birds, this is a good sign."
 	icon_state = "berryclafoutis"
 	trash = /obj/item/trash/plate
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_desc = list("sweetness" = 2, "pie" = 3)
 	nutriment_amt = 4
 	bitesize = 3
@@ -793,7 +793,7 @@
 	icon_state = "waffles"
 	trash = /obj/item/trash/waffles
 	filling_color = "#e6deb5"
-	center_of_mass = "x=15;y=11"
+	center_of_mass = @"{'x':15,'y':11}"
 	nutriment_desc = list("waffle" = 8)
 	nutriment_amt = 8
 	bitesize = 2
@@ -803,7 +803,7 @@
 	desc = "Pancakes with blueberries, delicious."
 	icon_state = "pancakes"
 	trash = /obj/item/trash/plate
-	center_of_mass = "x=15;y=11"
+	center_of_mass = @"{'x':15,'y':11}"
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
 	bitesize = 2
@@ -813,7 +813,7 @@
 	desc = "Pancakes without blueberries, still delicious."
 	icon_state = "pancakes"
 	trash = /obj/item/trash/plate
-	center_of_mass = "x=15;y=11"
+	center_of_mass = @"{'x':15,'y':11}"
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
 	bitesize = 2
@@ -824,7 +824,7 @@
 	icon_state = "eggplantparm"
 	trash = /obj/item/trash/plate
 	filling_color = "#4d2f5e"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("cheese" = 3, "eggplant" = 3)
 	nutriment_amt = 6
 	bitesize = 2
@@ -835,7 +835,7 @@
 	icon_state = "soylent_green"
 	trash = /obj/item/trash/waffles
 	filling_color = "#b8e6b5"
-	center_of_mass = "x=15;y=11"
+	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/soylentgreen/Initialize()
 	.=..()
@@ -847,7 +847,7 @@
 	icon_state = "soylent_yellow"
 	trash = /obj/item/trash/waffles
 	filling_color = "#e6fa61"
-	center_of_mass = "x=15;y=11"
+	center_of_mass = @"{'x':15,'y':11}"
 	nutriment_desc = list("some sort of protein" = 10)//seasoned vERY well.
 	nutriment_amt = 10
 	bitesize = 2
@@ -858,7 +858,7 @@
 	desc = "An old barber recipe, very delicious!"
 	trash = /obj/item/trash/plate
 	filling_color = "#948051"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
 /obj/item/chems/food/snacks/meatpie/Initialize()
 	.=..()
@@ -870,7 +870,7 @@
 	desc = "A delicious tofu pie."
 	trash = /obj/item/trash/plate
 	filling_color = "#fffee0"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_desc = list("tofu" = 2, "pie" = 8)
 	nutriment_amt = 10
 	bitesize = 2
@@ -880,7 +880,7 @@
 	desc = "Sweet and tasty poison pie."
 	icon_state = "amanita_pie"
 	filling_color = "#ffcccc"
-	center_of_mass = "x=17;y=9"
+	center_of_mass = @"{'x':17,'y':9}"
 	nutriment_desc = list("sweetness" = 3, "mushroom" = 3, "pie" = 2)
 	nutriment_amt = 5
 	bitesize = 3
@@ -894,7 +894,7 @@
 	desc = "I bet you love stuff made out of plump helmets!"
 	icon_state = "plump_pie"
 	filling_color = "#b8279b"
-	center_of_mass = "x=17;y=9"
+	center_of_mass = @"{'x':17,'y':9}"
 	nutriment_desc = list("heartiness" = 2, "mushroom" = 3, "pie" = 3)
 	nutriment_amt = 8
 	bitesize = 2
@@ -911,7 +911,7 @@
 	desc = "A delicious meatpie. Probably heretical."
 	trash = /obj/item/trash/plate
 	filling_color = "#43de18"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
 /obj/item/chems/food/snacks/xemeatpie/Initialize()
 	.=..()
@@ -923,7 +923,7 @@
 	icon_state = "wingfangchu"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#43de18"
-	center_of_mass = "x=17;y=9"
+	center_of_mass = @"{'x':17,'y':9}"
 	bitesize = 2
 /obj/item/chems/food/snacks/wingfangchu/Initialize()
 	.=..()
@@ -935,7 +935,7 @@
 	desc = "Delicious meat, on a stick."
 	trash = /obj/item/stack/material/rods
 	filling_color = "#a85340"
-	center_of_mass = "x=17;y=15"
+	center_of_mass = @"{'x':17,'y':15}"
 	bitesize = 2
 /obj/item/chems/food/snacks/meatkabob/Initialize()
 	.=..()
@@ -947,7 +947,7 @@
 	desc = "Vegan meat, on a stick."
 	trash = /obj/item/stack/material/rods
 	filling_color = "#fffee0"
-	center_of_mass = "x=17;y=15"
+	center_of_mass = @"{'x':17,'y':15}"
 	nutriment_desc = list("tofu" = 3, "metal" = 1)
 	nutriment_amt = 8
 	bitesize = 2
@@ -958,7 +958,7 @@
 	icon_state = "cubancarp"
 	trash = /obj/item/trash/plate
 	filling_color = "#e9adff"
-	center_of_mass = "x=12;y=5"
+	center_of_mass = @"{'x':12,'y':5}"
 	nutriment_desc = list("toasted bread" = 3)
 	nutriment_amt = 3
 	bitesize = 3
@@ -973,7 +973,7 @@
 	icon_state = "popcorn"
 	trash = /obj/item/trash/popcorn
 	filling_color = "#fffad4"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	nutriment_desc = list("popcorn" = 3)
 	nutriment_amt = 2
 	bitesize = 0.1
@@ -983,7 +983,7 @@
 	desc = "Totally baked."
 	icon_state = "loadedbakedpotato"
 	filling_color = "#9c7a68"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("baked potato" = 3)
 	nutriment_amt = 3
 	bitesize = 2
@@ -997,7 +997,7 @@
 	icon_state = "fries"
 	trash = /obj/item/trash/plate
 	filling_color = "#eddd00"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("fresh fries" = 4)
 	nutriment_amt = 4
 	bitesize = 2
@@ -1008,7 +1008,7 @@
 	icon_state = "onionrings"
 	trash = /obj/item/trash/plate
 	filling_color = "#eddd00"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("fried onions" = 5)
 	nutriment_amt = 5
 	bitesize = 2
@@ -1019,7 +1019,7 @@
 	icon_state = "soydope"
 	trash = /obj/item/trash/plate
 	filling_color = "#c4bf76"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("slime" = 2, "soy" = 2)
 	nutriment_amt = 2
 	bitesize = 2
@@ -1029,7 +1029,7 @@
 	desc = "A bundle of raw spaghetti."
 	icon_state = "spagetti"
 	filling_color = "#eddd00"
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	nutriment_desc = list("noodles" = 2)
 	nutriment_amt = 1
 	bitesize = 1
@@ -1040,7 +1040,7 @@
 	icon_state = "cheesyfries"
 	trash = /obj/item/trash/plate
 	filling_color = "#eddd00"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("fresh fries" = 3, "cheese" = 3)
 	nutriment_amt = 4
 	bitesize = 2
@@ -1053,7 +1053,7 @@
 	desc = "A true prophecy in each cookie!"
 	icon_state = "fortune_cookie"
 	filling_color = "#e8e79e"
-	center_of_mass = "x=15;y=14"
+	center_of_mass = @"{'x':15,'y':14}"
 	nutriment_desc = list("fortune cookie" = 2)
 	nutriment_amt = 3
 	bitesize = 2
@@ -1063,7 +1063,7 @@
 	desc = "Someone should be demoted from chef for this."
 	icon_state = "badrecipe"
 	filling_color = "#211f02"
-	center_of_mass = "x=16;y=12"
+	center_of_mass = @"{'x':16,'y':12}"
 	bitesize = 2
 /obj/item/chems/food/snacks/badrecipe/Initialize()
 	.=..()
@@ -1078,7 +1078,7 @@
 	slice_path = /obj/item/chems/food/snacks/cutlet
 	slices_num = 3
 	filling_color = "#7a3d11"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
 /obj/item/chems/food/snacks/plainsteak/Initialize()
 	.=..()
@@ -1090,7 +1090,7 @@
 	icon_state = "meatstake"
 	trash = /obj/item/trash/plate
 	filling_color = "#7a3d11"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
 /obj/item/chems/food/snacks/meatsteak/Initialize()
 	.=..()
@@ -1108,7 +1108,7 @@
 	icon_state = "meatstake"
 	trash = /obj/item/trash/plate
 	filling_color = "#7a3d11"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_desc = list("onion" = 2, "mushroom" = 2)
 	nutriment_amt = 4
 	bitesize = 3
@@ -1123,7 +1123,7 @@
 	icon_state = "spacylibertyduff"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#42b873"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	nutriment_desc = list("mushroom" = 6)
 	nutriment_amt = 6
 	bitesize = 3
@@ -1137,7 +1137,7 @@
 	icon_state = "amanitajelly"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#ed0758"
-	center_of_mass = "x=16;y=5"
+	center_of_mass = @"{'x':16,'y':5}"
 	nutriment_desc = list("jelly" = 3, "mushroom" = 3)
 	nutriment_amt = 6
 	bitesize = 3
@@ -1152,7 +1152,7 @@
 	icon_state = "poppypretzel"
 	bitesize = 2
 	filling_color = "#916e36"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("poppy seeds" = 2, "pretzel" = 3)
 	nutriment_amt = 5
 	bitesize = 2
@@ -1163,7 +1163,7 @@
 	icon_state = "meatballsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#785210"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	bitesize = 5
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 
@@ -1190,7 +1190,7 @@
 	desc = "Smells like copper."
 	icon_state = "tomatosoup"
 	filling_color = "#ff0000"
-	center_of_mass = "x=16;y=7"
+	center_of_mass = @"{'x':16,'y':7}"
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
 
@@ -1205,7 +1205,7 @@
 	desc = "Not very funny."
 	icon_state = "clownstears"
 	filling_color = "#c4fbff"
-	center_of_mass = "x=16;y=7"
+	center_of_mass = @"{'x':16,'y':7}"
 	nutriment_desc = list("salt" = 1, "the worst joke" = 3)
 	nutriment_amt = 4
 	bitesize = 5
@@ -1222,7 +1222,7 @@
 	icon_state = "vegetablesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#afc4b5"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	nutriment_desc = list("carrot" = 2, "corn" = 2, "eggplant" = 2, "potato" = 2)
 	nutriment_amt = 8
 	bitesize = 5
@@ -1238,7 +1238,7 @@
 	icon_state = "nettlesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#afc4b5"
-	center_of_mass = "x=16;y=7"
+	center_of_mass = @"{'x':16,'y':7}"
 	nutriment_desc = list("salad" = 4, "egg" = 2, "potato" = 2)
 	nutriment_amt = 8
 	bitesize = 5
@@ -1255,7 +1255,7 @@
 	icon_state = "mysterysoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#f082ff"
-	center_of_mass = "x=16;y=6"
+	center_of_mass = @"{'x':16,'y':6}"
 	nutriment_desc = list("backwash" = 1)
 	nutriment_amt = 1
 	bitesize = 5
@@ -1305,7 +1305,7 @@
 	icon_state = "wishsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#d1f4ff"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
 
@@ -1322,7 +1322,7 @@
 	icon_state = "hotchili"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#ff3c00"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("chilli peppers" = 3)
 	nutriment_amt = 3
 	bitesize = 5
@@ -1337,7 +1337,7 @@
 	desc = "This slush is barely a liquid!"
 	icon_state = "coldchili"
 	filling_color = "#2b00ff"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("chilly peppers" = 3)
 	nutriment_amt = 3
 	trash = /obj/item/trash/snack_bowl
@@ -1357,7 +1357,7 @@
 	icon_state = "monkeycube"
 	bitesize = 12
 	filling_color = "#adac7f"
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 
 	var/wrapped = 0
 	var/growing = 0
@@ -1430,7 +1430,7 @@
 	desc = "Forget the Luna Burger! THIS is the future!"
 	icon_state = "bigbiteburger"
 	filling_color = "#e3d681"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("buns" = 4)
 	nutriment_amt = 4
 	bitesize = 3
@@ -1444,7 +1444,7 @@
 	icon_state = "enchiladas"
 	trash = /obj/item/trash/tray
 	filling_color = "#a36a1f"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_desc = list("tortilla" = 3, "corn" = 3)
 	nutriment_amt = 2
 	bitesize = 4
@@ -1459,7 +1459,7 @@
 	icon_state = "monkeysdelight"
 	trash = /obj/item/trash/tray
 	filling_color = "#5c3c11"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 6
 /obj/item/chems/food/snacks/monkeysdelight/Initialize()
 	.=..()
@@ -1473,7 +1473,7 @@
 	desc = "Bon appetit!"
 	icon_state = "baguette"
 	filling_color = "#e3d796"
-	center_of_mass = "x=18;y=12"
+	center_of_mass = @"{'x':18,'y':12}"
 	nutriment_desc = list("french bread" = 6)
 	nutriment_amt = 6
 	bitesize = 3
@@ -1489,7 +1489,7 @@
 	desc = "I do say so myself chap."
 	icon_state = "fishandchips"
 	filling_color = "#e3d796"
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	nutriment_desc = list("salt" = 1, "chips" = 3)
 	nutriment_amt = 3
 	bitesize = 3
@@ -1503,7 +1503,7 @@
 	icon_state = "sandwich"
 	trash = /obj/item/trash/plate
 	filling_color = "#d9be29"
-	center_of_mass = "x=16;y=4"
+	center_of_mass = @"{'x':16,'y':4}"
 	nutriment_desc = list("bread" = 3, "cheese" = 3)
 	nutriment_amt = 3
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -1519,7 +1519,7 @@
 	icon_state = "toastedsandwich"
 	trash = /obj/item/trash/plate
 	filling_color = "#d9be29"
-	center_of_mass = "x=16;y=4"
+	center_of_mass = @"{'x':16,'y':4}"
 	nutriment_desc = list("toasted bread" = 3, "cheese" = 3)
 	nutriment_amt = 3
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -1551,7 +1551,7 @@
 	icon_state = "tomatosoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#d92929"
-	center_of_mass = "x=16;y=7"
+	center_of_mass = @"{'x':16,'y':7}"
 	nutriment_desc = list("soup" = 5)
 	nutriment_amt = 5
 	bitesize = 3
@@ -1567,7 +1567,7 @@
 	icon_state = "rofflewaffles"
 	trash = /obj/item/trash/waffles
 	filling_color = "#ff00f7"
-	center_of_mass = "x=15;y=11"
+	center_of_mass = @"{'x':15,'y':11}"
 	nutriment_desc = list("waffle" = 7, "sweetness" = 1)
 	nutriment_amt = 8
 	bitesize = 4
@@ -1580,7 +1580,7 @@
 	desc = "A nice and warm stew. Healthy and strong."
 	icon_state = "stew"
 	filling_color = "#9e673a"
-	center_of_mass = "x=16;y=5"
+	center_of_mass = @"{'x':16,'y':5}"
 	nutriment_desc = list("tomato" = 2, "potato" = 2, "carrot" = 2, "eggplant" = 2, "mushroom" = 2)
 	nutriment_amt = 6
 	bitesize = 10
@@ -1597,7 +1597,7 @@
 	icon_state = "jellytoast"
 	trash = /obj/item/trash/plate
 	filling_color = "#b572ab"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	nutriment_desc = list("toasted bread" = 2)
 	nutriment_amt = 1
 	bitesize = 3
@@ -1618,7 +1618,7 @@
 	desc = "Culinary delight..?"
 	icon_state = "jellyburger"
 	filling_color = "#b572ab"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("buns" = 5)
 	nutriment_amt = 5
 	bitesize = 2
@@ -1638,7 +1638,7 @@
 	desc = "The universes best soup! Yum!!!"
 	icon_state = "milosoup"
 	trash = /obj/item/trash/snack_bowl
-	center_of_mass = "x=16;y=7"
+	center_of_mass = @"{'x':16,'y':7}"
 	nutriment_desc = list("soy" = 8)
 	nutriment_amt = 8
 	bitesize = 4
@@ -1654,7 +1654,7 @@
 	desc = "Even non-vegetarians will LOVE this!"
 	icon_state = "stewedsoymeat"
 	trash = /obj/item/trash/plate
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("soy" = 4, "tomato" = 4)
 	nutriment_amt = 8
 	bitesize = 2
@@ -1665,7 +1665,7 @@
 	icon_state = "spagettiboiled"
 	trash = /obj/item/trash/plate
 	filling_color = "#fcee81"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("noodles" = 2)
 	nutriment_amt = 2
 	bitesize = 2
@@ -1676,7 +1676,7 @@
 	icon_state = "boiledrice"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#fffbdb"
-	center_of_mass = "x=17;y=11"
+	center_of_mass = @"{'x':17,'y':11}"
 	nutriment_desc = list("rice" = 2)
 	nutriment_amt = 6
 	bitesize = 2
@@ -1695,7 +1695,7 @@
 	icon_state = "katsu"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#faa005"
-	center_of_mass = "x=17;y=11"
+	center_of_mass = @"{'x':17,'y':11}"
 	nutriment_desc = list("rice" = 2, "apple" = 2, "potato" = 2, "carrot" = 2, "bread" = 2, )
 	nutriment_amt = 6
 	bitesize = 2
@@ -1706,7 +1706,7 @@
 	icon_state = "rpudding"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#fffbdb"
-	center_of_mass = "x=17;y=11"
+	center_of_mass = @"{'x':17,'y':11}"
 	nutriment_desc = list("rice" = 2)
 	nutriment_amt = 4
 	bitesize = 2
@@ -1717,7 +1717,7 @@
 	icon_state = "pastatomato"
 	trash = /obj/item/trash/plate
 	filling_color = "#de4545"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("tomato" = 3, "noodles" = 3)
 	nutriment_amt = 6
 	bitesize = 4
@@ -1731,7 +1731,7 @@
 	icon_state = "nanopasta"
 	trash = /obj/item/trash/plate
 	filling_color = "#535e66"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_amt = 6
 	bitesize = 4
 /obj/item/chems/food/snacks/nanopasta/Initialize()
@@ -1744,7 +1744,7 @@
 	icon_state = "meatballspagetti"
 	trash = /obj/item/trash/plate
 	filling_color = "#de4545"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("noodles" = 4)
 	nutriment_amt = 4
 	bitesize = 2
@@ -1757,7 +1757,7 @@
 	desc = "A lawyers favourite."
 	icon_state = "spesslaw"
 	filling_color = "#de4545"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("noodles" = 4)
 	nutriment_amt = 4
 	bitesize = 2
@@ -1771,7 +1771,7 @@
 	icon_state = "carrotfries"
 	trash = /obj/item/trash/plate
 	filling_color = "#faa005"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("carrot" = 3, "salt" = 1)
 	nutriment_amt = 3
 	bitesize = 2
@@ -1784,7 +1784,7 @@
 	desc = "This is a mountain of a burger. FOOD!"
 	icon_state = "superbiteburger"
 	filling_color = "#cca26a"
-	center_of_mass = "x=16;y=3"
+	center_of_mass = @"{'x':16,'y':3}"
 	nutriment_desc = list("buns" = 25)
 	nutriment_amt = 25
 	bitesize = 10
@@ -1797,7 +1797,7 @@
 	desc = "An apple coated in sugary sweetness."
 	icon_state = "candiedapple"
 	filling_color = "#f21873"
-	center_of_mass = "x=15;y=13"
+	center_of_mass = @"{'x':15,'y':13}"
 	nutriment_desc = list("apple" = 3, "caramel" = 3, "sweetness" = 2)
 	nutriment_amt = 3
 	bitesize = 3
@@ -1807,7 +1807,7 @@
 	desc = "A pie containing sweet sweet love... or apple."
 	icon_state = "applepie"
 	filling_color = "#e0edc5"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_desc = list("sweetness" = 2, "apple" = 2, "pie" = 2)
 	nutriment_amt = 4
 	bitesize = 3
@@ -1817,7 +1817,7 @@
 	desc = "Taste so good, make a grown man cry."
 	icon_state = "cherrypie"
 	filling_color = "#ff525a"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("sweetness" = 2, "cherry" = 2, "pie" = 2)
 	nutriment_amt = 4
 	bitesize = 3
@@ -1827,7 +1827,7 @@
 	desc = "It is very bitter and winy."
 	icon_state = "twobread"
 	filling_color = "#dbcc9a"
-	center_of_mass = "x=15;y=12"
+	center_of_mass = @"{'x':15,'y':12}"
 	nutriment_desc = list("sourness" = 2, "bread" = 2)
 	nutriment_amt = 2
 	bitesize = 3
@@ -1838,7 +1838,7 @@
 	desc = "Is such a thing even possible?"
 	icon_state = "threebread"
 	filling_color = "#dbcc9a"
-	center_of_mass = "x=15;y=12"
+	center_of_mass = @"{'x':15,'y':12}"
 	nutriment_desc = list("sourness" = 2, "bread" = 3)
 	nutriment_amt = 3
 	bitesize = 4
@@ -1850,7 +1850,7 @@
 	icon_state = "jellysandwich"
 	trash = /obj/item/trash/plate
 	filling_color = "#9e3a78"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	nutriment_desc = list("bread" = 2)
 	nutriment_amt = 2
 	bitesize = 3
@@ -1881,7 +1881,7 @@
 	desc = "A tasty after-dinner mint. It is only wafer thin."
 	icon_state = "mint"
 	filling_color = "#f2f2f2"
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
 /obj/item/chems/food/snacks/mint/Initialize()
 	.=..()
@@ -1894,7 +1894,7 @@
 	icon_state = "mushroomsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#e386bf"
-	center_of_mass = "x=17;y=10"
+	center_of_mass = @"{'x':17,'y':10}"
 	nutriment_desc = list("mushroom" = 8, "milk" = 2)
 	nutriment_amt = 8
 	bitesize = 3
@@ -1905,7 +1905,7 @@
 	desc = "This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced dwarven wheat flour."
 	icon_state = "phelmbiscuit"
 	filling_color = "#cfb4c4"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_desc = list("mushroom" = 4)
 	nutriment_amt = 5
 	bitesize = 2
@@ -1924,7 +1924,7 @@
 	icon_state = "chawanmushi"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#f0f2e4"
-	center_of_mass = "x=17;y=10"
+	center_of_mass = @"{'x':17,'y':10}"
 	bitesize = 1
 /obj/item/chems/food/snacks/chawanmushi/Initialize()
 	.=..()
@@ -1937,7 +1937,7 @@
 	icon_state = "beetsoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#fac9ff"
-	center_of_mass = "x=15;y=8"
+	center_of_mass = @"{'x':15,'y':8}"
 	nutriment_desc = list("tomato" = 4, "beet" = 4)
 	nutriment_amt = 8
 	bitesize = 2
@@ -1954,7 +1954,7 @@
 	icon_state = "herbsalad"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#76b87f"
-	center_of_mass = "x=17;y=11"
+	center_of_mass = @"{'x':17,'y':11}"
 	nutriment_desc = list("salad" = 2, "tomato" = 2, "carrot" = 2, "apple" = 2)
 	nutriment_amt = 8
 	bitesize = 3
@@ -1965,7 +1965,7 @@
 	icon_state = "validsalad"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#76b87f"
-	center_of_mass = "x=17;y=11"
+	center_of_mass = @"{'x':17,'y':11}"
 	nutriment_desc = list("100% real salad")
 	nutriment_amt = 6
 	bitesize = 3
@@ -1979,7 +1979,7 @@
 	icon_state = "gappletart"
 	trash = /obj/item/trash/plate
 	filling_color = "#ffff00"
-	center_of_mass = "x=16;y=18"
+	center_of_mass = @"{'x':16,'y':18}"
 	nutriment_desc = list("apple" = 8)
 	nutriment_amt = 8
 	bitesize = 3
@@ -2031,7 +2031,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/meatbread
 	slices_num = 5
 	filling_color = "#ff7575"
-	center_of_mass = "x=19;y=9"
+	center_of_mass = @"{'x':19,'y':9}"
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -2048,7 +2048,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#ff7575"
 	bitesize = 2
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/meatbread
 
 /obj/item/chems/food/snacks/slice/meatbread/filled
@@ -2061,7 +2061,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/xenomeatbread
 	slices_num = 5
 	filling_color = "#8aff75"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -2078,7 +2078,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#8aff75"
 	bitesize = 2
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/xenomeatbread
 
 /obj/item/chems/food/snacks/slice/xenomeatbread/filled
@@ -2091,7 +2091,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/bananabread
 	slices_num = 5
 	filling_color = "#ede5ad"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -2108,7 +2108,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#ede5ad"
 	bitesize = 2
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/bananabread
 
 /obj/item/chems/food/snacks/slice/bananabread/filled
@@ -2121,7 +2121,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/tofubread
 	slices_num = 5
 	filling_color = "#f7ffe0"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 	nutriment_desc = list("tofu" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -2134,7 +2134,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#f7ffe0"
 	bitesize = 2
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/tofubread
 
 /obj/item/chems/food/snacks/slice/tofubread/filled
@@ -2147,7 +2147,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/carrotcake
 	slices_num = 5
 	filling_color = "#ffd675"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "carrot" = 15)
 	nutriment_amt = 25
 	bitesize = 2
@@ -2164,7 +2164,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#ffd675"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/carrotcake
 
 /obj/item/chems/food/snacks/slice/carrotcake/filled
@@ -2177,7 +2177,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/braincake
 	slices_num = 5
 	filling_color = "#e6aedb"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "slime" = 15)
 	nutriment_amt = 5
 	bitesize = 2
@@ -2195,7 +2195,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#e6aedb"
 	bitesize = 2
-	center_of_mass = "x=16;y=12"
+	center_of_mass = @"{'x':16,'y':12}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/braincake
 
 /obj/item/chems/food/snacks/slice/braincake/filled
@@ -2208,7 +2208,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/cheesecake
 	slices_num = 5
 	filling_color = "#faf7af"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "cream" = 10, "cheese" = 15)
 	nutriment_amt = 10
 	bitesize = 2
@@ -2224,7 +2224,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#faf7af"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/cheesecake
 
 /obj/item/chems/food/snacks/slice/cheesecake/filled
@@ -2237,7 +2237,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/plaincake
 	slices_num = 5
 	filling_color = "#f7edd5"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "vanilla" = 15)
 	nutriment_amt = 20
 	nutriment_type = /datum/reagent/nutriment/bread/cake
@@ -2249,7 +2249,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#f7edd5"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/plaincake
 
 /obj/item/chems/food/snacks/slice/plaincake/filled
@@ -2262,7 +2262,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/orangecake
 	slices_num = 5
 	filling_color = "#fada8e"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "orange" = 15)
 	nutriment_amt = 20
 	nutriment_type = /datum/reagent/nutriment/bread/cake
@@ -2274,7 +2274,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#fada8e"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/orangecake
 
 /obj/item/chems/food/snacks/slice/orangecake/filled
@@ -2287,7 +2287,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/limecake
 	slices_num = 5
 	filling_color = "#cbfa8e"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "lime" = 15)
 	nutriment_amt = 20
 	nutriment_type = /datum/reagent/nutriment/bread/cake
@@ -2299,7 +2299,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#cbfa8e"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/limecake
 
 /obj/item/chems/food/snacks/slice/limecake/filled
@@ -2312,7 +2312,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/lemoncake
 	slices_num = 5
 	filling_color = "#fafa8e"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "lemon" = 15)
 	nutriment_amt = 20
 	nutriment_type = /datum/reagent/nutriment/bread/cake
@@ -2324,7 +2324,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#fafa8e"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/lemoncake
 
 /obj/item/chems/food/snacks/slice/lemoncake/filled
@@ -2337,7 +2337,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/chocolatecake
 	slices_num = 5
 	filling_color = "#805930"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "chocolate" = 15)
 	nutriment_amt = 20
 	nutriment_type = /datum/reagent/nutriment/bread/cake
@@ -2349,7 +2349,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#805930"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/chocolatecake
 
 /obj/item/chems/food/snacks/slice/chocolatecake/filled
@@ -2362,7 +2362,7 @@
 	slice_path = /obj/item/chems/food/snacks/cheesewedge
 	slices_num = 5
 	filling_color = "#fff700"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cheese" = 10)
 	nutriment_amt = 10
 	bitesize = 2
@@ -2377,7 +2377,7 @@
 	icon_state = "cheesewedge"
 	filling_color = "#fff700"
 	bitesize = 2
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/snacks/sliceable/birthdaycake
 	name = "birthday cake"
@@ -2386,7 +2386,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/birthdaycake
 	slices_num = 5
 	filling_color = "#ffd6d6"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10)
 	nutriment_amt = 20
 	bitesize = 3
@@ -2404,7 +2404,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#ffd6d6"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/birthdaycake
 
 /obj/item/chems/food/snacks/slice/birthdaycake/filled
@@ -2417,7 +2417,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/bread
 	slices_num = 5
 	filling_color = "#ffe396"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 	nutriment_desc = list("bread" = 6)
 	nutriment_amt = 6
 	bitesize = 2
@@ -2430,7 +2430,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#d27332"
 	bitesize = 2
-	center_of_mass = "x=16;y=4"
+	center_of_mass = @"{'x':16,'y':4}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/bread
 
 /obj/item/chems/food/snacks/slice/bread/filled
@@ -2444,7 +2444,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/creamcheesebread
 	slices_num = 5
 	filling_color = "#fff896"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 	nutriment_desc = list("bread" = 6, "cream" = 3, "cheese" = 3)
 	nutriment_amt = 5
 	bitesize = 2
@@ -2461,7 +2461,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#fff896"
 	bitesize = 2
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/creamcheesebread
 
 /obj/item/chems/food/snacks/slice/creamcheesebread/filled
@@ -2473,7 +2473,7 @@
 	icon_state = "watermelonslice"
 	filling_color = "#ff3867"
 	bitesize = 2
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/snacks/sliceable/applecake
 	name = "apple cake"
@@ -2482,7 +2482,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/applecake
 	slices_num = 5
 	filling_color = "#ebf5b8"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "apple" = 15)
 	nutriment_amt = 15
 	nutriment_type = /datum/reagent/nutriment/bread/cake
@@ -2494,7 +2494,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#ebf5b8"
 	bitesize = 2
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/applecake
 
 /obj/item/chems/food/snacks/slice/applecake/filled
@@ -2507,7 +2507,7 @@
 	slice_path = /obj/item/chems/food/snacks/slice/pumpkinpie
 	slices_num = 5
 	filling_color = "#f5b951"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("pie" = 5, "cream" = 5, "pumpkin" = 5)
 	nutriment_amt = 15
 
@@ -2518,7 +2518,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#f5b951"
 	bitesize = 2
-	center_of_mass = "x=16;y=12"
+	center_of_mass = @"{'x':16,'y':12}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/pumpkinpie
 
 /obj/item/chems/food/snacks/slice/pumpkinpie/filled
@@ -2529,7 +2529,7 @@
 	desc = "It's a salted cracker."
 	icon_state = "cracker"
 	filling_color = "#f5deb8"
-	center_of_mass = "x=17;y=6"
+	center_of_mass = @"{'x':17,'y':6}"
 	nutriment_desc = list("salt" = 1, "cracker" = 2)
 	w_class = ITEM_SIZE_TINY
 	nutriment_amt = 1
@@ -2547,7 +2547,7 @@
 	icon_state = "pizzamargherita"
 	slice_path = /obj/item/chems/food/snacks/slice/margherita
 	slices_num = 6
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 15)
 	nutriment_amt = 35
 	bitesize = 2
@@ -2564,7 +2564,7 @@
 	icon_state = "pizzamargheritaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
-	center_of_mass = "x=18;y=13"
+	center_of_mass = @"{'x':18,'y':13}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/pizza/margherita
 
 /obj/item/chems/food/snacks/slice/margherita/filled
@@ -2576,7 +2576,7 @@
 	icon_state = "meatpizza"
 	slice_path = /obj/item/chems/food/snacks/slice/meatpizza
 	slices_num = 6
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 15)
 	nutriment_amt = 10
 	bitesize = 2
@@ -2593,7 +2593,7 @@
 	icon_state = "meatpizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
-	center_of_mass = "x=18;y=13"
+	center_of_mass = @"{'x':18,'y':13}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/pizza/meatpizza
 
 /obj/item/chems/food/snacks/slice/meatpizza/filled
@@ -2605,7 +2605,7 @@
 	icon_state = "mushroompizza"
 	slice_path = /obj/item/chems/food/snacks/slice/mushroompizza
 	slices_num = 6
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 5, "mushroom" = 10)
 	nutriment_amt = 35
 	bitesize = 2
@@ -2621,7 +2621,7 @@
 	icon_state = "mushroompizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
-	center_of_mass = "x=18;y=13"
+	center_of_mass = @"{'x':18,'y':13}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/pizza/mushroompizza
 
 /obj/item/chems/food/snacks/slice/mushroompizza/filled
@@ -2633,7 +2633,7 @@
 	icon_state = "vegetablepizza"
 	slice_path = /obj/item/chems/food/snacks/slice/vegetablepizza
 	slices_num = 6
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 5, "eggplant" = 5, "carrot" = 5, "corn" = 5)
 	nutriment_amt = 25
 	bitesize = 2
@@ -2651,7 +2651,7 @@
 	icon_state = "vegetablepizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
-	center_of_mass = "x=18;y=13"
+	center_of_mass = @"{'x':18,'y':13}"
 	whole_path = /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza
 
 /obj/item/chems/food/snacks/slice/vegetablepizza/filled
@@ -2842,7 +2842,7 @@
 	icon_state = "dionaroast"
 	trash = /obj/item/trash/plate
 	filling_color = "#75754b"
-	center_of_mass = "x=16;y=7"
+	center_of_mass = @"{'x':16,'y':7}"
 	nutriment_desc = list("a chorus of flavor" = 6)
 	nutriment_amt = 6
 	bitesize = 2
@@ -2861,7 +2861,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "dough"
 	bitesize = 2
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_desc = list("dough" = 3)
 	nutriment_amt = 3
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -2885,7 +2885,7 @@
 	icon_state = "flat dough"
 	slice_path = /obj/item/chems/food/snacks/doughslice
 	slices_num = 3
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 
 /obj/item/chems/food/snacks/sliceable/flatdough/Initialize()
 	.=..()
@@ -2900,7 +2900,7 @@
 	slice_path = /obj/item/chems/food/snacks/spagetti
 	slices_num = 1
 	bitesize = 2
-	center_of_mass = "x=17;y=19"
+	center_of_mass = @"{'x':17,'y':19}"
 	nutriment_desc = list("dough" = 1)
 	nutriment_amt = 1
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -2911,7 +2911,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "bun"
 	bitesize = 2
-	center_of_mass = "x=16;y=12"
+	center_of_mass = @"{'x':16,'y':12}"
 	nutriment_desc = list("bun" = 4)
 	nutriment_amt = 4
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -3021,7 +3021,7 @@
 	desc = "Take a bite!"
 	icon_state = "taco"
 	bitesize = 3
-	center_of_mass = "x=21;y=12"
+	center_of_mass = @"{'x':21,'y':12}"
 	nutriment_desc = list("cheese" = 2,"taco shell" = 2)
 	nutriment_amt = 4
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -3036,7 +3036,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawcutlet"
 	bitesize = 1
-	center_of_mass = "x=17;y=20"
+	center_of_mass = @"{'x':17,'y':20}"
 
 /obj/item/chems/food/snacks/rawcutlet/Initialize()
 	.=..()
@@ -3048,7 +3048,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "cutlet"
 	bitesize = 2
-	center_of_mass = "x=17;y=20"
+	center_of_mass = @"{'x':17,'y':20}"
 
 /obj/item/chems/food/snacks/cutlet/Initialize()
 	.=..()
@@ -3060,7 +3060,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawmeatball"
 	bitesize = 2
-	center_of_mass = "x=16;y=15"
+	center_of_mass = @"{'x':16,'y':15}"
 
 /obj/item/chems/food/snacks/rawmeatball/Initialize()
 	.=..()
@@ -3071,7 +3071,7 @@
 	desc = "Unrelated to dogs, maybe."
 	icon_state = "hotdog"
 	bitesize = 2
-	center_of_mass = "x=16;y=17"
+	center_of_mass = @"{'x':16,'y':17}"
 	nutriment_type = /datum/reagent/nutriment/bread
 
 /obj/item/chems/food/snacks/hotdog/Initialize()
@@ -3083,7 +3083,7 @@
 	desc = "Going literal."
 	icon_state = "hotcorgi"
 	bitesize = 6
-	center_of_mass = "x=16;y=17"
+	center_of_mass = @"{'x':16,'y':17}"
 
 /obj/item/chems/food/snacks/classichotdog/Initialize()
 	.=..()
@@ -3095,7 +3095,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flatbread"
 	bitesize = 2
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	nutriment_desc = list("bread" = 3)
 	nutriment_amt = 3
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -3115,7 +3115,7 @@
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawsticks"
 	bitesize = 2
-	center_of_mass = "x=16;y=12"
+	center_of_mass = @"{'x':16,'y':12}"
 	nutriment_desc = list("raw potato" = 3)
 	nutriment_amt = 3
 
@@ -3159,7 +3159,7 @@
 	desc = "Proteins carefully cloned from extinct stock of holstein in the meat foundries of Mars."
 	trash = /obj/item/trash/beef
 	filling_color = "#663300"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("beef" = 1)
 	bitesize = 3
 /obj/item/chems/food/snacks/canned/beef/Initialize()
@@ -3172,7 +3172,7 @@
 	desc = "Luna Colony beans. Carefully synthethized from soy."
 	trash = /obj/item/trash/beans
 	filling_color = "#ff6633"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("beans" = 1)
 	nutriment_amt = 12
 	bitesize = 3
@@ -3183,7 +3183,7 @@
 	desc = "Plain old unseasoned tomato soup. This can predates the formation of the SCG."
 	trash = /obj/item/trash/tomato
 	filling_color = "#ae0000"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("tomato" = 1)
 	bitesize = 3
 	eat_sound = 'sound/items/drink.ogg'
@@ -3202,7 +3202,7 @@
 	desc = "Wup-Az! Brand canned spinach. Notably has less iron in it than a watermelon."
 	trash = /obj/item/trash/spinach
 	filling_color = "#003300"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
 	bitesize = 20
 /obj/item/chems/food/snacks/canned/spinach/Initialize()
@@ -3220,7 +3220,7 @@
 	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt."
 	trash = /obj/item/trash/fishegg
 	filling_color = "#000000"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 6
 	bitesize = 1
@@ -3231,7 +3231,7 @@
 	desc = "Terran caviar, or space carp eggs. Banned by the Sol Food Health Administration for exceeding the legally set amount of carpotoxins in food stuffs."
 	trash = /obj/item/trash/carpegg
 	filling_color = "#330066"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
 	nutriment_amt = 6
 	bitesize = 1
@@ -3246,7 +3246,7 @@
 	desc = "Beef jerky made from the finest space cows."
 	trash = /obj/item/trash/sosjerky
 	filling_color = "#631212"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	bitesize = 2
 /obj/item/chems/food/snacks/sosjerky/Initialize()
 	.=..()
@@ -3258,7 +3258,7 @@
 	desc = "Best raisins in the universe. Not sure why."
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
-	center_of_mass = "x=15;y=4"
+	center_of_mass = @"{'x':15,'y':4}"
 	nutriment_desc = list("raisins" = 6)
 	nutriment_amt = 6
 
@@ -3267,7 +3267,7 @@
 	icon_state = "space_twinkie"
 	desc = "Guaranteed to survive longer then you will."
 	filling_color = "#ffe591"
-	center_of_mass = "x=15;y=11"
+	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/spacetwinkie/Initialize()
 	.=..()
@@ -3280,7 +3280,7 @@
 	desc = "Bite sized cheesie snacks that will honk all over your mouth."
 	trash = /obj/item/trash/cheesie
 	filling_color = "#ffa305"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("cheese" = 5, "chips" = 2)
 	nutriment_amt = 4
 	bitesize = 2
@@ -3290,7 +3290,7 @@
 	icon_state = "syndi_cakes"
 	desc = "An extremely moist snack cake that tastes just as good after being nuked."
 	filling_color = "#ff5d05"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	nutriment_desc = list("sweetness" = 3, "cake" = 1)
 	nutriment_amt = 4
 	trash = /obj/item/trash/syndi_cakes
@@ -3309,7 +3309,7 @@
 	desc = "Pistachios. There is absolutely nothing remarkable about these."
 	trash = /obj/item/trash/pistachios
 	filling_color = "#825d26"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("nuts" = 1)
 	nutriment_amt = 3
 	bitesize = 0.5
@@ -3320,7 +3320,7 @@
 	desc = "Sunflower seeds. A favorite among both birds and gopniks."
 	trash = /obj/item/trash/semki
 	filling_color = "#68645d"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("sunflower seeds" = 1)
 	nutriment_amt = 6
 	bitesize = 0.5
@@ -3331,7 +3331,7 @@
 	desc = "Space squid tentacles, Carefully removed (from the squid) then dried into strips of delicious rubbery goodness!"
 	trash = /obj/item/trash/squid
 	filling_color = "#c0a9d7"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 1
@@ -3345,7 +3345,7 @@
 	desc = "Fried bread cubes. Popular in Terran territories."
 	trash = /obj/item/trash/croutons
 	filling_color = "#c6b17f"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("bread" = 1, "salt" = 1)
 	nutriment_amt = 3
 	bitesize = 1
@@ -3357,7 +3357,7 @@
 	desc = "Pig fat. Salted. Just as good as it sounds."
 	trash = /obj/item/trash/salo
 	filling_color = "#e0bcbc"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("fat" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 2
@@ -3371,7 +3371,7 @@
 	desc = "Dried salted beer snack fish."
 	trash = /obj/item/trash/driedfish
 	filling_color = "#c8a5bb"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 1
@@ -3385,7 +3385,7 @@
 	icon_state = "liquidfood"
 	trash = /obj/item/trash/liquidfood
 	filling_color = "#a8a8a8"
-	center_of_mass = "x=16;y=15"
+	center_of_mass = @"{'x':16,'y':15}"
 	nutriment_desc = list("chalk" = 6)
 	nutriment_amt = 20
 	bitesize = 4
@@ -3398,7 +3398,7 @@
 	desc = "Fried, salted lean meat compressed into a cube. Not very appetizing."
 	icon_state = "meatcube"
 	filling_color = "#7a3d11"
-	center_of_mass = "x=16;y=16"
+	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 3
 /obj/item/chems/food/snacks/meatcube/Initialize()
 	.=..()
@@ -3410,7 +3410,7 @@
 	icon_state = "tastybread"
 	trash = /obj/item/trash/tastybread
 	filling_color = "#a66829"
-	center_of_mass = "x=17;y=16"
+	center_of_mass = @"{'x':17,'y':16}"
 	nutriment_desc = list("bread" = 2, "sweetness" = 3)
 	nutriment_amt = 6
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -3422,7 +3422,7 @@
 	icon_state = "candy"
 	trash = /obj/item/trash/candy
 	filling_color = "#7d5f46"
-	center_of_mass = "x=15;y=15"
+	center_of_mass = @"{'x':15,'y':15}"
 	nutriment_amt = 1
 	nutriment_desc = list("candy" = 1)
 	bitesize = 2
@@ -3458,7 +3458,7 @@
 	desc = "It's a handful of candy corn. Cannot be stored in a detective's hat, alas."
 	icon_state = "candy_corn"
 	filling_color = "#fffcb0"
-	center_of_mass = "x=14;y=10"
+	center_of_mass = @"{'x':14,'y':10}"
 	nutriment_amt = 4
 	nutriment_desc = list("candy corn" = 4)
 	bitesize = 2
@@ -3473,7 +3473,7 @@
 	icon_state = "chips"
 	trash = /obj/item/trash/chips
 	filling_color = "#e8c31e"
-	center_of_mass = "x=15;y=15"
+	center_of_mass = @"{'x':15,'y':15}"
 	nutriment_amt = 3
 	nutriment_desc = list("salt" = 1, "chips" = 2)
 	bitesize = 1
@@ -3484,7 +3484,7 @@
 	desc = "COOKIE!!!"
 	icon_state = "cookie"
 	filling_color = "#dbc94f"
-	center_of_mass = "x=17;y=18"
+	center_of_mass = @"{'x':17,'y':18}"
 	nutriment_amt = 5
 	nutriment_desc = list("sweetness" = 3, "cookie" = 2)
 	w_class = ITEM_SIZE_TINY
@@ -3496,7 +3496,7 @@
 	desc = "Such sweet, fattening food."
 	icon_state = "chocolatebar"
 	filling_color = "#7d5f46"
-	center_of_mass = "x=15;y=15"
+	center_of_mass = @"{'x':15,'y':15}"
 	nutriment_amt = 2
 	nutriment_desc = list("chocolate" = 5)
 	bitesize = 2
@@ -3510,7 +3510,7 @@
 	desc = "Such sweet, fattening food."
 	icon_state = "chocolateegg"
 	filling_color = "#7d5f46"
-	center_of_mass = "x=16;y=13"
+	center_of_mass = @"{'x':16,'y':13}"
 	nutriment_amt = 3
 	nutriment_desc = list("chocolate" = 5)
 	bitesize = 2
@@ -3526,7 +3526,7 @@
 	icon_state = "donut1"
 	filling_color = "#d9c386"
 	var/overlay_state = "box-donut1"
-	center_of_mass = "x=13;y=16"
+	center_of_mass = @"{'x':13,'y':16}"
 	nutriment_desc = list("sweetness", "donut")
 	nutriment_type = /datum/reagent/nutriment/bread
 
@@ -3547,7 +3547,7 @@
 		src.overlay_state = "box-donut2"
 		src.SetName("frosted donut")
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
-	center_of_mass = "x=19;y=16"
+	center_of_mass = @"{'x':19,'y':16}"
 
 /obj/item/chems/food/snacks/donut/chaos
 	name = "chaos donut"
@@ -3584,7 +3584,7 @@
 	desc = "You jelly?"
 	icon_state = "jdonut1"
 	filling_color = "#ed1169"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_amt = 3
 	bitesize = 5
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -3604,7 +3604,7 @@
 	desc = "You jelly?"
 	icon_state = "jdonut1"
 	filling_color = "#ed1169"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_amt = 3
 	bitesize = 5
 /obj/item/chems/food/snacks/donut/slimejelly/Initialize()
@@ -3622,7 +3622,7 @@
 	desc = "You jelly?"
 	icon_state = "jdonut1"
 	filling_color = "#ed1169"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_amt = 3
 	bitesize = 5
 /obj/item/chems/food/snacks/donut/cherryjelly/Initialize()
@@ -3643,7 +3643,7 @@ obj/item/chems/food/snacks/lunacake
 	desc = "Now with 20% less lawsuit enabling rhegolith!"
 	trash = /obj/item/trash/cakewrap
 	filling_color = "#ffffff"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("sweet" = 4, "vanilla" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -3671,7 +3671,7 @@ obj/item/chems/food/snacks/triton
 	desc = "Contains over 9000% of your daily recommended intake of salt."
 	trash = /obj/item/trash/tidegobs
 	filling_color = "#2556b0"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("salt" = 4, "seagull?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -3682,7 +3682,7 @@ obj/item/chems/food/snacks/saturn
 	desc = "A day ration of salt, styrofoam and possibly sawdust."
 	trash = /obj/item/trash/saturno
 	filling_color = "#dca319"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("salt" = 4, "peanut" = 2,  "wood?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -3693,7 +3693,7 @@ obj/item/chems/food/snacks/jupiter
 	desc = "By Joove! It's some kind of gel."
 	trash = /obj/item/trash/jupiter
 	filling_color = "#dc1919"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("sweet" = 4, "vanilla?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -3704,7 +3704,7 @@ obj/item/chems/food/snacks/pluto
 	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
 	trash = /obj/item/trash/pluto
 	filling_color = "#ffffff"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("chalk" = 4, "sad?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -3715,7 +3715,7 @@ obj/item/chems/food/snacks/mars
 	desc = "Celebrate founding day with a steaming self-heated bowl of sweet eggs and taters!"
 	trash = /obj/item/trash/mars
 	filling_color = "#d2c63f"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("eggs" = 4, "potato" = 4, "mustard" = 2)
 	nutriment_amt = 8
 	bitesize = 2
@@ -3726,7 +3726,7 @@ obj/item/chems/food/snacks/venus
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
 	trash = /obj/item/trash/venus
 	filling_color = "#d2c63f"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("heat" = 4, "burning!" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -3742,7 +3742,7 @@ obj/item/chems/food/snacks/oort
 	desc = "Pop rocks themed on the most important industrial sector in Sol, new formula guarantees fewer shrapnel induced oral injury."
 	trash = /obj/item/trash/oort
 	filling_color = "#3f7dd2"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = @"{'x':15,'y':9}"
 	nutriment_desc = list("fizz" = 4, "sweet?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -3807,7 +3807,7 @@ obj/item/chems/food/snacks/dango
 /obj/item/chems/food/snacks/old
 	name = "master old-food"
 	desc = "they're all inedible and potentially dangerous items"
-	center_of_mass = "x=15;y=12"
+	center_of_mass = @"{'x':15,'y':12}"
 	nutriment_desc = list("rot" = 5, "mold" = 5)
 	nutriment_amt = 10
 	bitesize = 3

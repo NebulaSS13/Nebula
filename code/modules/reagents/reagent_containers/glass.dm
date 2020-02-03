@@ -10,7 +10,7 @@
 	icon_state = "null"
 	item_state = "null"
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = "5;10;15;25;30;60"
+	possible_transfer_amounts = @"[5,10,15,25,30,60]"
 	volume = 60
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
@@ -112,7 +112,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker"
 	item_state = "beaker"
-	center_of_mass = "x=15;y=10"
+	center_of_mass = @"{'x':15,'y':10}"
 	material = MAT_GLASS
 	applies_material_name = TRUE
 	material_force_multiplier = 0.25
@@ -163,10 +163,10 @@
 	name = "large beaker"
 	desc = "A large beaker."
 	icon_state = "beakerlarge"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	volume = 120
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = "5;10;15;25;30;60;120"
+	possible_transfer_amounts = @"[5,10,15,25,30,60,120]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_force_multiplier = 2.5
 
@@ -175,10 +175,10 @@
 	desc = "A large mixing bowl."
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mixingbowl"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	volume = 180
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = "5;10;15;25;30;60;180"
+	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
 	material = MAT_STEEL
@@ -188,7 +188,7 @@
 	name = "cryostasis beaker"
 	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon_state = "beakernoreact"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	volume = 60
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
@@ -198,10 +198,10 @@
 	name = "bluespace beaker"
 	desc = "A bluespace beaker, powered by experimental bluespace technology."
 	icon_state = "beakerbluespace"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	volume = 300
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = "5;10;15;25;30;60;120;150;200;250;300"
+	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_force_multiplier = 2.5
 
@@ -209,11 +209,11 @@
 	name = "vial"
 	desc = "A small glass vial."
 	icon_state = "vial"
-	center_of_mass = "x=15;y=8"
+	center_of_mass = @"{'x':15,'y':8}"
 	volume = 30
 	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = "5;10;15;30"
+	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_force_multiplier = 0.1
 
@@ -221,9 +221,9 @@
 	name = "insulated beaker"
 	desc = "A glass beaker surrounded with black insulation."
 	icon_state = "insulated"
-	center_of_mass = "x=15;y=8"
+	center_of_mass = @"{'x':15,'y':8}"
 	matter = list(MAT_GLASS = 500, MAT_PLASTIC = 250)
-	possible_transfer_amounts = "5;10;15;30"
+	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = null
 	temperature_coefficient = 1
 	material = null
@@ -231,7 +231,7 @@
 /obj/item/chems/glass/beaker/insulated/large
 	name = "large insulated beaker"
 	icon_state = "insulatedlarge"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 	matter = list(MAT_GLASS = 5000, MAT_PLASTIC = 2500)
 	volume = 120
 
@@ -251,10 +251,10 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "bucket"
 	item_state = "bucket"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
-	possible_transfer_amounts = "10;20;30;60;120;150;180"
+	possible_transfer_amounts = @"[10,20,30,60,120,150,180]"
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0

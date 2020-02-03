@@ -6,7 +6,7 @@
 	desc = "A portable welding gun with a port for attaching fuel tanks."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	center_of_mass = "x=14;y=15"
+	center_of_mass = @"{'x':14,'y':15}"
 	waterproof = FALSE
 	force = 5
 	throwforce = 5

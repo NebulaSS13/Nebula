@@ -11,7 +11,7 @@
 	icon = 'icons/obj/drink_glasses/square.dmi'
 	icon_state = null
 	base_icon = "square" // Base icon name
-	filling_states = "20;40;60;80;100"
+	filling_states = @"[20,40,60,80,100]"
 	volume = 30
 	matter = list(MAT_GLASS = 65)
 
@@ -20,10 +20,10 @@
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
 	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
 
-	center_of_mass ="x=16;y=9"
+	center_of_mass =@"{'x':16,'y':9}"
 
 	amount_per_transfer_from_this = 5
-	possible_transfer_amounts = "5;10;15;30"
+	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	temperature_coefficient = 4
 
@@ -156,7 +156,7 @@
 			var/obj/FS = item
 			var/image/I = image(FS)
 
-			var/list/rim_pos_data = cached_key_number_decode(rim_pos)
+			var/list/rim_pos_data = cached_json_decode(rim_pos)
 			var/fsy = rim_pos_data["y"] - 20
 			var/fsx = rim_pos_data[side == "left" ? "x_left" : "x_right"] - 16
 
