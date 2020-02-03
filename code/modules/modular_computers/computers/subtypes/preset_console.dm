@@ -95,7 +95,6 @@
 
 /obj/machinery/computer/modular/preset/civilian
 	default_software = list(
-		/datum/computer_file/program/newsbrowser,
 		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/records,
 		/datum/computer_file/program/email_client,
@@ -144,7 +143,6 @@
 /obj/machinery/computer/modular/preset/library
 	default_software = list(
 		/datum/computer_file/program/nttransfer,
-		/datum/computer_file/program/newsbrowser,
 		/datum/computer_file/program/email_client,
 		/datum/computer_file/program/library,
 		/datum/computer_file/program/wordprocessor
