@@ -10,7 +10,7 @@
 	name = "\improper Space Cola"
 	desc = "Cola. in space."
 	icon_state = "cola"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/cola/Initialize()
 	. = ..()
@@ -20,7 +20,7 @@
 	name = "bottled water"
 	desc = "Pure drinking water, imported from the Martian poles."
 	icon_state = "waterbottle"
-	center_of_mass = "x=15;y=8"
+	center_of_mass = @"{'x':15,'y':8}"
 	matter = list(MAT_PLASTIC = 40)
 
 /obj/item/chems/food/drinks/cans/waterbottle/Initialize()
@@ -36,7 +36,7 @@
 	name = "\improper Space Mountain Wind"
 	desc = "Blows right through you like a space wind."
 	icon_state = "space_mountain_wind"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/space_mountain_wind/Initialize()
 	. = ..()
@@ -46,7 +46,7 @@
 	name = "\improper Thirteen Loko"
 	desc = "The CMO has advised crew members that consumption of Thirteen Loko may result in seizures, blindness, drunkeness, or even death. Please Drink Responsibly."
 	icon_state = "thirteen_loko"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 
 /obj/item/chems/food/drinks/cans/thirteenloko/Initialize()
 	. = ..()
@@ -56,7 +56,7 @@
 	name = "\improper Dr. Gibb"
 	desc = "A delicious mixture of 42 different flavors."
 	icon_state = "dr_gibb"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/dr_gibb/Initialize()
 	. = ..()
@@ -66,7 +66,7 @@
 	name = "\improper Star-kist"
 	desc = "The taste of a star in liquid form. And, a bit of tuna...?"
 	icon_state = "starkist"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 /obj/item/chems/food/drinks/cans/starkist/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/brownstar, 30)
@@ -75,7 +75,7 @@
 	name = "\improper Space-Up"
 	desc = "Tastes like a hull breach in your mouth."
 	icon_state = "space-up"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/space_up/Initialize()
 	. = ..()
@@ -85,7 +85,7 @@
 	name = "\improper Lemon-Lime"
 	desc = "You wanted ORANGE. It gave you Lemon Lime."
 	icon_state = "lemon-lime"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/lemon_lime/Initialize()
 	. = ..()
@@ -95,7 +95,7 @@
 	name = "\improper Vrisk Serket Iced Tea"
 	desc = "That sweet, refreshing southern earthy flavor. That's where it's from, right? South Earth?"
 	icon_state = "ice_tea_can"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/iced_tea/Initialize()
 	. = ..()
@@ -105,7 +105,7 @@
 	name = "\improper Grapel Juice"
 	desc = "500 pages of rules of how to appropriately enter into a combat with this juice!"
 	icon_state = "purple_can"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/grape_juice/Initialize()
 	. = ..()
@@ -115,7 +115,7 @@
 	name = "\improper T-Borg's Tonic Water"
 	desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
 	icon_state = "tonic"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/tonic/Initialize()
 	. = ..()
@@ -125,7 +125,7 @@
 	name = "soda water"
 	desc = "A can of soda water. Still water's more refreshing cousin."
 	icon_state = "sodawater"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/sodawater/Initialize()
 	. = ..()
@@ -135,7 +135,7 @@
 	name = "Beast Energy"
 	desc = "100% pure energy, and 150% pure liver disease."
 	icon_state = "beastenergy"
-	center_of_mass = "x=16;y=6"
+	center_of_mass = @"{'x':16,'y':6}"
 
 /obj/item/chems/food/drinks/cans/beastenergy/Initialize()
 	. = ..()
@@ -147,7 +147,7 @@
 	name = "\improper Red Army Twist!"
 	desc = "A taste of what keeps our glorious nation running! Served as Space Commissariat Stahlin prefers it! Luke warm."
 	icon_state = "syndi_cola_x"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/syndicolax/Initialize()
 	. = ..()
@@ -157,7 +157,7 @@
 	name = "\improper Arstotzka Bru"
 	desc = "Just what any bureaucrat needs to get through the day. Keep stamping those papers!"
 	icon_state = "art_bru"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/artbru/Initialize()
 	. = ..()
@@ -167,7 +167,7 @@
 	name = "\improper TerraCola"
 	desc = "A can of the only soft drink state approved for the benefit of the people. Served at room temperature regardless of ambient temperatures thanks to innovative Terran insulation technology."
 	icon_state = "syndi_cola"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/syndicola/Initialize()
 	. = ..()
@@ -177,7 +177,7 @@
 /obj/item/chems/food/drinks/glass2/square/boda
 	name = "boda"
 	desc = "A tall glass of refreshing Boda!"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/glass2/square/boda/Initialize()
 	. = ..()
@@ -186,7 +186,7 @@
 /obj/item/chems/food/drinks/glass2/square/bodaplus
 	name = "tri kopeiki sirop boda"
 	desc = "A tall glass of even more refreshing Boda! Now with Sok!"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/glass2/square/bodaplus/Initialize()
 	. = ..()
@@ -209,7 +209,7 @@
 	name = "\improper Space Beer"
 	desc = "Now in a can!"
 	icon_state = "beercan"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/speer/Initialize()
 	. = ..()
@@ -219,7 +219,7 @@
 	name = "\improper Magm-Ale"
 	desc = "Now in a can!"
 	icon_state = "alecan"
-	center_of_mass = "x=16;y=10"
+	center_of_mass = @"{'x':16,'y':10}"
 
 /obj/item/chems/food/drinks/cans/ale/Initialize()
 	. = ..()

@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(MAT_STEEL = 150)
-	center_of_mass = "x=17;y=16"
+	center_of_mass = @"{'x':17,'y':16}"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
 /obj/item/wrench/Initialize()

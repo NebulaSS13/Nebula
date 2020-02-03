@@ -123,7 +123,7 @@
 	charge_cost = 5
 	recharge_time = 3
 	volume = 60
-	possible_transfer_amounts = "5;10;20;30"
+	possible_transfer_amounts = @"[5,10,20,30]"
 	reagent_ids = list(
 		/datum/reagent/ethanol/beer,
 		/datum/reagent/ethanol/coffee/kahlua,

@@ -13,7 +13,7 @@
 	throw_range = 10
 	amount_per_transfer_from_this = 10
 	unacidable = 1 //plastic
-	possible_transfer_amounts = "5;10" //Set to null instead of list, if there is only one.
+	possible_transfer_amounts = @"[5,10]"
 	var/spray_size = 3
 	var/list/spray_sizes = list(1,3)
 	var/step_delay = 10 // lower is faster
@@ -73,7 +73,7 @@
 /obj/item/chems/spray/attack_self(var/mob/user)
 	if(!possible_transfer_amounts)
 		return
-	amount_per_transfer_from_this = next_in_list(amount_per_transfer_from_this, cached_number_list_decode(possible_transfer_amounts))
+	amount_per_transfer_from_this = next_in_list(amount_per_transfer_from_this, cached_json_decode(possible_transfer_amounts))
 	spray_size = next_in_list(spray_size, spray_sizes)
 	to_chat(user, "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>")
 

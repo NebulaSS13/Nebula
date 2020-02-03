@@ -10,7 +10,7 @@
 	var/initial_capacity = 1000
 	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/datum/reagent/water = 0.5) would fill the dispenser halfway to capacity.
 	var/amount_per_transfer_from_this = 10
-	var/possible_transfer_amounts = "10;25;50;100;500"
+	var/possible_transfer_amounts = @"[10,25,50,100,500]"
 
 	attackby(obj/item/W as obj, mob/user as mob)
 		return
@@ -45,7 +45,7 @@
 	if(!CanPhysicallyInteract(usr))
 		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
 		return
-	var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
+	var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_json_decode(possible_transfer_amounts)
 	if(!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
 		to_chat(usr, "<span class='notice'>You're in no condition to do that!'</span>")
 		return
@@ -86,7 +86,7 @@
 	amount_per_transfer_from_this = 10
 	var/modded = 0
 	var/fill_level = FLUID_SHALLOW // Can be adminbussed for silly room-filling tanks.
-	possible_transfer_amounts = "10;25;50;100"
+	possible_transfer_amounts = @"[10,25,50,100]"
 	initial_capacity = 50000
 	initial_reagent_types = list(/datum/reagent/water = 1)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE

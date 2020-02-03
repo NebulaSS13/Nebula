@@ -115,7 +115,7 @@ auto_align() will then place the sprite so the defined center_of_mass is at the 
 closest to where the cursor has clicked on.
 Note: This proc can be overwritten to allow for different types of auto-alignment.
 */
-/obj/item/var/center_of_mass = "x=16;y=16" //can be null for no exact placement behaviour
+/obj/item/var/center_of_mass = @"{'x':16,'y':16}" //can be null for no exact placement behaviour
 /obj/structure/table/proc/auto_align(obj/item/W, click_params)
 	if (!W.center_of_mass) // Clothing, material stacks, generally items with large sprites where exact placement would be unhandy.
 		W.pixel_x = rand(-W.randpixel, W.randpixel)
@@ -137,7 +137,7 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 	var/cell_x = Clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
 	var/cell_y = Clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
 
-	var/list/center = cached_key_number_decode(W.center_of_mass)
+	var/list/center = cached_json_decode(W.center_of_mass)
 
 	W.pixel_x = (CELLSIZE * (cell_x + 0.5)) - center["x"]
 	W.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]

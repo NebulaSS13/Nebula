@@ -90,7 +90,7 @@
 
 /obj/item/chems/food/drinks/proc/get_filling_state()
 	var/percent = round((reagents.total_volume / volume) * 100)
-	for(var/k in cached_number_list_decode(filling_states))
+	for(var/k in cached_json_decode(filling_states))
 		if(percent <= k)
 			return k
 
@@ -138,7 +138,7 @@
 	desc = "It's milk. White and nutritious goodness!"
 	icon_state = "milk"
 	item_state = "carton"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 
 /obj/item/chems/food/drinks/milk/Initialize()
 	. = ..()
@@ -149,7 +149,7 @@
 	desc = "It's soy milk. White and nutritious goodness!"
 	icon_state = "soymilk"
 	item_state = "carton"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 
 /obj/item/chems/food/drinks/soymilk/Initialize()
 	. = ..()
@@ -177,7 +177,7 @@
 	name = "\improper Robust Coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
-	center_of_mass = "x=15;y=10"
+	center_of_mass = @"{'x':15,'y':10}"
 
 /obj/item/chems/food/drinks/coffee/Initialize()
 	. = ..()
@@ -187,7 +187,7 @@
 	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
-	center_of_mass = "x=15;y=10"
+	center_of_mass = @"{'x':15,'y':10}"
 
 /obj/item/chems/food/drinks/ice/Initialize()
 	. = ..()
@@ -198,7 +198,7 @@
 	desc = "A tall plastic cup of creamy hot chocolate."
 	icon_state = "coffee"
 	item_state = "coffee"
-	center_of_mass = "x=15;y=13"
+	center_of_mass = @"{'x':15,'y':13}"
 
 /obj/item/chems/food/drinks/h_chocolate/Initialize()
 	. = ..()
@@ -209,7 +209,7 @@
 	gender = PLURAL
 	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
 	icon_state = "ramen"
-	center_of_mass = "x=16;y=11"
+	center_of_mass = @"{'x':16,'y':11}"
 
 /obj/item/chems/food/drinks/dry_ramen/Initialize()
 	. = ..()
@@ -222,7 +222,7 @@
 	icon_state = "water_cup_e"
 	possible_transfer_amounts = null
 	volume = 10
-	center_of_mass = "x=16;y=12"
+	center_of_mass = @"{'x':16,'y':12}"
 
 /obj/item/chems/food/drinks/sillycup/on_reagent_change()
 	if(reagents.total_volume)
@@ -243,7 +243,7 @@
 	item_state = "teapot"
 	amount_per_transfer_from_this = 10
 	volume = 120
-	center_of_mass = "x=17;y=7"
+	center_of_mass = @"{'x':17,'y':7}"
 
 /obj/item/chems/food/drinks/pitcher
 	name = "insulated pitcher"
@@ -251,8 +251,8 @@
 	icon_state = "pitcher"
 	volume = 120
 	amount_per_transfer_from_this = 10
-	center_of_mass = "x=16;y=9"
-	filling_states = "15;30;50;70;85;100"
+	center_of_mass = @"{'x':16,'y':9}"
+	filling_states = @"[15,30,50,70,85,100]"
 	base_icon = "pitcher"
 
 /obj/item/chems/food/drinks/flask
@@ -260,7 +260,7 @@
 	desc = "A metal flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
-	center_of_mass = "x=17;y=7"
+	center_of_mass = @"{'x':17,'y':7}"
 
 /obj/item/chems/food/drinks/flask/shiny
 	name = "shiny flask"
@@ -277,21 +277,21 @@
 	desc = "A metal flask with a leather band and golden badge belonging to the detective."
 	icon_state = "detflask"
 	volume = 60
-	center_of_mass = "x=17;y=8"
+	center_of_mass = @"{'x':17,'y':8}"
 
 /obj/item/chems/food/drinks/flask/barflask
 	name = "flask"
 	desc = "For those who can't be bothered to hang out at the bar to drink."
 	icon_state = "barflask"
 	volume = 60
-	center_of_mass = "x=17;y=7"
+	center_of_mass = @"{'x':17,'y':7}"
 
 /obj/item/chems/food/drinks/flask/vacuumflask
 	name = "vacuum flask"
 	desc = "Keeping your drinks at the perfect temperature since 1892."
 	icon_state = "vacuumflask"
 	volume = 60
-	center_of_mass = "x=15;y=4"
+	center_of_mass = @"{'x':15,'y':4}"
 
 //tea and tea accessories
 /obj/item/chems/food/drinks/tea
@@ -299,8 +299,8 @@
 	desc = "A tall plastic cup full of the concept and ideal of tea."
 	icon_state = "coffee"
 	item_state = "coffee"
-	center_of_mass = "x=16;y=14"
-	filling_states = "100"
+	center_of_mass = @"{'x':16,'y':14}"
+	filling_states = @"[100]"
 	base_name = "cup"
 	base_icon = "cup"
 

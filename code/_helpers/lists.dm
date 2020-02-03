@@ -756,3 +756,13 @@ proc/dd_sortedTextList(list/incoming)
 		var/atom/A = key
 		if(A.type == T)
 			return A
+
+GLOBAL_LIST_INIT(json_cache, new)
+/proc/cached_json_decode(var/json)
+	try
+		if(!GLOB.json_cache[json])
+			GLOB.json_cache[json] = json_decode(json)
+		. = GLOB.json_cache[json]
+	catch()
+		to_world_log("Malformed json: [json].")
+		return list()

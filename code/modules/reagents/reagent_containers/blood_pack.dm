@@ -11,7 +11,7 @@
 	icon_state = "empty"
 	w_class = ITEM_SIZE_TINY
 	volume = 120
-	possible_transfer_amounts = "0.2;1;2"
+	possible_transfer_amounts = @"[0.2,1,2]"
 	amount_per_transfer_from_this = REM
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 

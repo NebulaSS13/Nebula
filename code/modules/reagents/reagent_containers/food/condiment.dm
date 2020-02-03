@@ -11,8 +11,8 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "emptycondiment"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	possible_transfer_amounts = "1;5;10"
-	center_of_mass = "x=16;y=6"
+	possible_transfer_amounts = @"[1,5,10]"
+	center_of_mass = @"{'x':16,'y':6}"
 	volume = 50
 	var/list/starting_reagents
 	var/global/list/special_bottles = list(
@@ -164,7 +164,7 @@
 	starting_reagents = list(/datum/reagent/capsaicin = 50)
 
 /obj/item/chems/food/condiment/small
-	possible_transfer_amounts = "1;20"
+	possible_transfer_amounts = @"[1,20]"
 	amount_per_transfer_from_this = 1
 	volume = 20
 
@@ -175,21 +175,21 @@
 	name = "salt shaker"
 	desc = "Salt. From space oceans, presumably."
 	icon_state = "saltshakersmall"
-	center_of_mass = "x=16;y=9"
+	center_of_mass = @"{'x':16,'y':9}"
 	starting_reagents = list(/datum/reagent/sodiumchloride = 20)
 
 /obj/item/chems/food/condiment/small/peppermill
 	name = "pepper mill"
 	desc = "Often used to flavor food or make people sneeze."
 	icon_state = "peppermillsmall"
-	center_of_mass = "x=16;y=8"
+	center_of_mass = @"{'x':16,'y':8}"
 	starting_reagents = list(/datum/reagent/blackpepper = 20)
 
 /obj/item/chems/food/condiment/small/sugar
 	name = "sugar"
 	desc = "Sweetness in a bottle"
 	icon_state = "sugarsmall"
-	center_of_mass = "x=17;y=9"
+	center_of_mass = @"{'x':17,'y':9}"
 	starting_reagents = list(/datum/reagent/sugar = 20)
 
 //MRE condiments and drinks.
@@ -197,7 +197,7 @@
 /obj/item/chems/food/condiment/small/packet
 	icon_state = "packet_small"
 	w_class = ITEM_SIZE_TINY
-	possible_transfer_amounts = "1;5;10"
+	possible_transfer_amounts = @"[1,5,10]"
 	amount_per_transfer_from_this = 1
 	volume = 10
 

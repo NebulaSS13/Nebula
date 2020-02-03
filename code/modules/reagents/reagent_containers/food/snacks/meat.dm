@@ -7,7 +7,7 @@
 	slices_num = 3
 	health = 180
 	filling_color = "#ff1c1c"
-	center_of_mass = "x=16;y=14"
+	center_of_mass = @"{'x':16,'y':14}"
 
 /obj/item/chems/food/snacks/meat/Initialize()
 	. = ..()
