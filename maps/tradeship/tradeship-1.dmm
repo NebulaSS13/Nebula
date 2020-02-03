@@ -927,6 +927,10 @@
 	dir = 4
 	},
 /obj/machinery/r_n_d/destructive_analyzer,
+/obj/machinery/light_switch{
+	pixel_z = 23;
+	pixel_w = -1
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
 "ce" = (
@@ -2571,6 +2575,9 @@
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/light_switch{
+	pixel_w = -23
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science)
 "pb" = (
@@ -2878,10 +2885,6 @@
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
-/area/ship/scrap/cargo/lower)
-"AT" = (
-/obj/machinery/computer/mining,
-/turf/simulated/wall,
 /area/ship/scrap/cargo/lower)
 "Bb" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
@@ -3373,6 +3376,11 @@
 "WT" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/mining{
+	density = 0;
+	pixel_w = 32;
+	pixel_z = 0
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "WZ" = (
@@ -6942,7 +6950,7 @@ pr
 pr
 pr
 pr
-AT
+ao
 al
 al
 ao
