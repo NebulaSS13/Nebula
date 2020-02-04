@@ -216,19 +216,22 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window))
 	set_connections(dirs, other_dirs)
 	return TRUE
 
+/obj/structure/proc/create_dismantled_products(var/turf/T)
+	if(parts_type)
+		new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
+	else 
+		if(material)
+			material.place_dismantled_product(T)
+		if(reinf_material)
+			reinf_material.place_dismantled_product(T)
+
 /obj/structure/proc/dismantle(var/do_not_destroy)
 	if(!dismantled)
 		dismantled = TRUE
 		reset_mobs_offset()
 		var/turf/T = get_turf(src)
 		if(T)
-			if(parts_type)
-				new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
-			else 
-				if(material)
-					material.place_dismantled_product(T)
-				if(reinf_material)
-					reinf_material.place_dismantled_product(T)
+			create_dismantled_products(T)
 			T.fluid_update()
 		if(!do_not_destroy && !QDELETED(src))
 			qdel(src)

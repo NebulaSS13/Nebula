@@ -148,12 +148,21 @@
 
 	take_damage(damage*0.2)
 
+/obj/structure/grille/proc/cut_grille()
+	playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
+	if(destroyed)
+		qdel(src)
+	else
+		set_density(0)
+		new /obj/item/stack/material/rods(get_turf(src), 1, material.type)
+		destroyed = TRUE
+		update_icon()
+
 /obj/structure/grille/attackby(obj/item/W, mob/user)
 	if(isWirecutter(W))
 		if(!material.conductive || !shock(user, 100))
-			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/material/rods(get_turf(src), destroyed ? 1 : 2, material.type)
-			qdel(src)
+			cut_grille()
+
 	else if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
@@ -196,15 +205,10 @@
 /obj/structure/grille/proc/healthcheck()
 	if(health <= 0)
 		if(!destroyed)
-			set_density(0)
-			destroyed = 1
 			visible_message("<span class='notice'>\The [src] falls to pieces!</span>")
-			update_icon()
-			new /obj/item/stack/material/rods(get_turf(src), 1, material.type)
-
+			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		else
 			if(health <= -6)
-				new /obj/item/stack/material/rods(get_turf(src), 1, material.type)
 				qdel(src)
 				return
 	return
@@ -212,7 +216,7 @@
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 
-/obj/structure/grille/proc/shock(mob/user as mob, prb)
+/obj/structure/grille/proc/shock(mob/user, prb)
 	if(!anchored || destroyed)		// anchored/destroyed grilles are never connected
 		return 0
 	if(!(material.conductive))
@@ -287,3 +291,6 @@
 	to_chat(user, SPAN_NOTICE("You assemble a grille."))
 	ST.in_use = 0
 	F.add_fingerprint(user)
+
+/obj/structure/grille/create_dismantled_products(var/turf/T)
+	new /obj/item/stack/material/rods(get_turf(src), (destroyed ? 1 : 2), material.type)
