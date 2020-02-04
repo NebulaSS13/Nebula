@@ -48,9 +48,10 @@
 	var/decl/item_modifier/target_modification
 	var/target_species
 
-	var/mob/living/carbon/human/occupant = null
-	var/obj/item/clothing/suit/space/void/suit = null
-	var/obj/item/clothing/head/helmet/space/helmet = null
+	var/mob/living/carbon/human/occupant
+	var/obj/item/clothing/suit/space/void/suit
+	var/obj/item/clothing/head/helmet/space/helmet
+	var/obj/item/clothing/shoes/magboots/boots
 
 	wires = /datum/wires/suit_cycler
 
@@ -64,6 +65,8 @@
 			LAZYADD(new_overlays, image(icon, "helm"))
 		if(suit)
 			LAZYADD(new_overlays, image(icon, "suit"))
+		if(boots)
+			LAZYADD(new_overlays, image(icon, "storage"))
 
 	if(irradiating)
 		LAZYADD(new_overlays, image(icon, "light_radiation"))
@@ -89,6 +92,8 @@
 		suit = new suit(src)
 	if(ispath(helmet))
 		helmet = new helmet(src)
+	if(ispath(boots))
+		boots = new boots(src)
 
 	available_modifications = list_values(decls_repository.get_decls(available_modifications))
 
@@ -99,6 +104,7 @@
 	DROP_NULL(occupant)
 	DROP_NULL(suit)
 	DROP_NULL(helmet)
+	DROP_NULL(boots)
 	return ..()
 
 /obj/machinery/suit_cycler/MouseDrop_T(var/mob/target, var/mob/user)
@@ -112,7 +118,7 @@
 		to_chat(user, SPAN_WARNING("The suit cycler is locked."))
 		return FALSE
 
-	if(suit || helmet)
+	if(suit || helmet || boots)
 		to_chat(user, SPAN_WARNING("There is no room inside the cycler for \the [target]."))
 		return FALSE
 
@@ -160,6 +166,23 @@
 		update_icon()
 		updateUsrDialog()
 		return
+
+	else if(istype(I, /obj/item/clothing/shoes/magboots))
+		if(locked)
+			to_chat(user, SPAN_WARNING("The suit cycler is locked."))
+			return
+		if(boots)
+			to_chat(user, SPAN_WARNING("The cycler already contains some boots."))
+			return
+		if(I.icon_override == CUSTOM_ITEM_MOB)
+			to_chat(user, "You cannot refit a customised voidsuit.")
+			return
+		if(!user.unEquip(I, src))
+			return
+		to_chat(user, "You fit \the [I] into the suit cycler.")
+		boots = I
+		update_icon()
+		updateUsrDialog()
 
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
@@ -251,6 +274,7 @@
 		dat += "<h2>Maintenance</h2>"
 		dat += "<b>Helmet: </b> [helmet ? "\the [helmet]" : "no helmet stored" ]. <A href='?src=\ref[src];eject_helmet=1'>Eject</a><br/>"
 		dat += "<b>Suit: </b> [suit ? "\the [suit]" : "no suit stored" ]. <A href='?src=\ref[src];eject_suit=1'>Eject</a>"
+		dat += "<b>Boots: </b> [boots ? "\the [boots]" : "no boots stored" ]. <A href='?src=\ref[src];eject_boots=1'>Eject</a>"
 
 		if(can_repair && suit && istype(suit))
 			dat += "[(suit.damage ? " <A href='?src=\ref[src];repair_suit=1'>Repair</a>" : "")]"
@@ -279,6 +303,10 @@
 		if(!helmet) return
 		helmet.dropInto(loc)
 		helmet = null
+	else if(href_list["eject_boots"])
+		if(!boots) return
+		boots.dropInto(loc)
+		boots = null
 	else if(href_list["select_department"])
 		var/choice = input("Please select the target department paintjob.", "Suit cycler", target_modification) as null|anything in available_modifications
 		if(choice && CanPhysicallyInteract(usr))
@@ -345,6 +373,12 @@
 				suit.decontaminate()
 			if(radiation_level > 1)
 				suit.clean_blood()
+
+		if(boots)
+			if(radiation_level > 2)
+				boots.decontaminate()
+			if(radiation_level > 1)
+				boots.clean_blood()
 
 	update_icon()
 	updateUsrDialog()
@@ -425,10 +459,12 @@
 		return
 
 	if(helmet) helmet.refit_for_species(target_species)
-	if(suit) suit.refit_for_species(target_species)
+	if(suit)   suit.refit_for_species(target_species)
+	if(boots)  boots.refit_for_species(target_species)
 
 	target_modification.RefitItem(helmet)
 	target_modification.RefitItem(suit)
 
 	if(helmet) helmet.SetName("refitted [helmet.name]")
 	if(suit) suit.SetName("refitted [suit.name]")
+	if(boots) suit.SetName("refitted [initial(boots.name)]")
