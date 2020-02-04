@@ -71,10 +71,10 @@
 			if(ispath(mat, /material))
 				var/material/mat_instance = SSmaterials.get_material_datum(mat)
 				if(istype(mat_instance))
-					stored_substances_to_names[mat] = mat_instance.display_name
+					stored_substances_to_names[mat] =  lowertext(mat_instance.display_name)
 			else if(ispath(mat, /datum/reagent))
 				var/datum/reagent/reg = mat
-				stored_substances_to_names[mat] = initial(reg.name)
+				stored_substances_to_names[mat] = lowertext(initial(reg.name))
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()

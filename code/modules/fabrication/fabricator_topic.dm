@@ -32,6 +32,7 @@
 		qdel(order)
 
 /obj/machinery/fabricator/proc/try_dump_material(var/mat_name)
+	mat_name = lowertext(mat_name)
 	for(var/mat_path in stored_substances_to_names)
 		if(stored_substances_to_names[mat_path] == mat_name)
 			if(ispath(mat_path, /material))
