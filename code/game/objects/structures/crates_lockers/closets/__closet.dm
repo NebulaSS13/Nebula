@@ -527,8 +527,7 @@
 			if(!locked)
 				open()
 			else
-				src.req_access = list()
-				src.req_access += pick(get_all_station_access())
+				req_access = list(pick(get_all_station_access()))
 	..()
 
 /obj/structure/closet/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")

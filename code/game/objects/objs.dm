@@ -3,7 +3,7 @@
 	animate_movement = 2
 
 	var/obj_flags
-
+	var/list/req_access
 	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
 	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
