@@ -10,7 +10,7 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#007a00"
-	weight = 22
+	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	chem_products = list(
 				/datum/reagent/uranium = 20
@@ -91,7 +91,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#d1e6e3"
-	weight = 22
+	weight = 23
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	reflectiveness = MAT_VALUE_SHINY
 	stack_origin_tech = list(TECH_MATERIAL = 3)
@@ -115,6 +115,7 @@
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/steel
+	weight = 25
 	integrity = 150
 	brute_armor = 5
 	icon_base = "solid"

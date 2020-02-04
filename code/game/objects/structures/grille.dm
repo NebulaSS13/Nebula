@@ -1,39 +1,45 @@
 /obj/structure/grille
 	name = "grille"
-	desc = "A flimsy lattice of metal rods, with screws to secure it to the floor."
-	icon = 'icons/obj/grille.dmi'
+	desc = "A flimsy lattice of rods, with screws to secure it to the floor."
+	icon = 'icons/obj/structures/grille.dmi'
 	icon_state = "grille"
-	color = COLOR_STEEL
 	density = 1
 	anchored = 1
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
 	rad_resistance_modifier = 0.1
-	var/init_material = MAT_STEEL
+	color = COLOR_STEEL
+	material = MAT_STEEL
+	handle_generic_blending = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_ALL
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+
 	var/health = 10
 	var/destroyed = 0
+	var/list/connections
+	var/list/other_connections
+	
+/obj/structure/grille/clear_connections()
+	connections = null
+	other_connections = null
 
-	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
-	noblend_objects = list(/obj/machinery/door/window)
+/obj/structure/grille/set_connections(dirs, other_dirs)
+	connections = dirs_to_corner_states(dirs)
+	other_connections = dirs_to_corner_states(other_dirs)
 
-/obj/structure/grille/get_material()
-	return material
-
-/obj/structure/grille/Initialize(mapload, var/new_material)
+/obj/structure/grille/update_materials(var/keep_health)
 	..()
-	. = INITIALIZE_HINT_LATELOAD
-	if(!new_material)
-		new_material = init_material
-	material = SSmaterials.get_material_datum(new_material)
-	if(!istype(material))
-		..()
-		return INITIALIZE_HINT_QDEL
-
-	name = "[material.display_name] grille"
 	desc = "A lattice of [material.display_name] rods, with screws to secure it to the floor."
-	color =  material.icon_colour
-	health = max(1, round(material.integrity/15))
+	if(!keep_health)
+		health = max(1, round(material.integrity/15))
+	
+/obj/structure/grille/Initialize()
+	. = ..()
+	if(!istype(material))
+		. = INITIALIZE_HINT_QDEL
+	if(. != INITIALIZE_HINT_QDEL)
+		. = INITIALIZE_HINT_LATELOAD
 
 /obj/structure/grille/LateInitialize()
 	..()
@@ -44,8 +50,8 @@
 	qdel(src)
 
 /obj/structure/grille/on_update_icon()
+	..()
 	var/on_frame = is_on_frame()
-
 	overlays.Cut()
 	if(destroyed)
 		if(on_frame)
@@ -57,17 +63,19 @@
 		icon_state = ""
 		if(on_frame)
 			for(var/i = 1 to 4)
-				if(other_connections[i] != "0")
-					I = image(icon, "grille_other_onframe[connections[i]]", dir = 1<<(i-1))
+				var/conn = connections ? connections[i] : "0"
+				if(other_connections && other_connections[i] != "0")
+					I = image(icon, "grille_other_onframe[conn]", dir = 1<<(i-1))
 				else
-					I = image(icon, "grille_onframe[connections[i]]", dir = 1<<(i-1))
+					I = image(icon, "grille_onframe[conn]", dir = 1<<(i-1))
 				overlays += I
 		else
 			for(var/i = 1 to 4)
-				if(other_connections[i] != "0")
-					I = image(icon, "grille_other[connections[i]]", dir = 1<<(i-1))
+				var/conn = connections ? connections[i] : "0"
+				if(other_connections && other_connections[i] != "0")
+					I = image(icon, "grille_other[conn]", dir = 1<<(i-1))
 				else
-					I = image(icon, "grille[connections[i]]", dir = 1<<(i-1))
+					I = image(icon, "grille[conn]", dir = 1<<(i-1))
 				overlays += I
 
 /obj/structure/grille/Bumped(atom/user)
@@ -140,18 +148,18 @@
 
 	take_damage(damage*0.2)
 
-/obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/grille/attackby(obj/item/W, mob/user)
 	if(isWirecutter(W))
-		if(!shock(user, 100))
+		if(!material.conductive || !shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/material/rods(get_turf(src), destroyed ? 1 : 2)
+			new /obj/item/stack/material/rods(get_turf(src), destroyed ? 1 : 2, material.type)
 			qdel(src)
 	else if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			anchored = !anchored
-			user.visible_message("<span class='notice'>[user] [anchored ? "fastens" : "unfastens"] the grille.</span>", \
-								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.</span>")
+			user.visible_message(SPAN_NOTICE("[user] [anchored ? "fastens" : "unfastens"] the grille."), \
+								 SPAN_NOTICE("You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor."))
 			update_connections(1)
 			update_icon()
 			return
@@ -251,7 +259,7 @@
 /obj/structure/grille/cult
 	name = "cult grille"
 	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
-	init_material = MAT_CULT
+	material = MAT_CULT
 
 /obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
 	if(air_group)
@@ -268,7 +276,7 @@
 	if(ST.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 		return
-	to_chat(user, SPAN_NOTICE("Assembling grille..."))
+	to_chat(user, SPAN_NOTICE("You begin assembling a [ST.material.display_name] grille..."))
 	ST.in_use = 1
 	if (!do_after(user, 10))
 		ST.in_use = 0

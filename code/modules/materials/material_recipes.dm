@@ -34,6 +34,9 @@
 		. += new/datum/stack_recipe/spoon(src)
 		. += new/datum/stack_recipe/coin(src)
 
+	if(wall_support_value >= 10)
+		. += new/datum/stack_recipe/furniture/girder(src)
+
 	if(integrity >= 50 && hardness >= MAT_VALUE_FLEXIBLE + 10)
 		. += new/datum/stack_recipe/furniture/door(src)
 		. += new/datum/stack_recipe/furniture/barricade(src)
@@ -77,7 +80,6 @@
 	. += new/datum/stack_recipe/cannon(src)
 	. += create_recipe_list(/datum/stack_recipe/tile/metal)
 	. += new/datum/stack_recipe/furniture/computerframe(src)
-	. += new/datum/stack_recipe/furniture/girder(src)
 	. += new/datum/stack_recipe/furniture/machine(src)
 	. += new/datum/stack_recipe/furniture/turret(src)
 	. += new/datum/stack_recipe_list("airlock assemblies", create_recipe_list(/datum/stack_recipe/furniture/door_assembly))

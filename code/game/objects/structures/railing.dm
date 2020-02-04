@@ -10,6 +10,8 @@
 	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ROTATABLE
+	material = DEFAULT_FURNITURE_MATERIAL
+	material_alteration = MAT_FLAG_ALTERATION_ALL
 
 	var/broken =    FALSE
 	var/health =    70
@@ -37,21 +39,8 @@
 	for(var/mob/living/L in range(1,src))
 		L.apply_damage(round(material.radioactivity/20),IRRADIATE, damage_flags = DAM_DISPERSED)
 
-/obj/structure/railing/Initialize(mapload, var/material_key = DEFAULT_FURNITURE_MATERIAL)
+/obj/structure/railing/Initialize()
 	. = ..()
-
-	material = material_key
-	if(!isnull(material) && !istype(material))
-		material = SSmaterials.get_material_datum(material)
-	if(!istype(material))
-		return INITIALIZE_HINT_QDEL
-
-	name = "[material.display_name] [initial(name)]"
-	desc = "A simple [material.display_name] railing designed to protect against careless trespass."
-	maxhealth = round(material.integrity / 5)
-	health = maxhealth
-	color = material.icon_colour
-
 	if(material.products_need_process())
 		START_PROCESSING(SSobj, src)
 	if(material.conductive)
@@ -60,6 +49,13 @@
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 	if(anchored)
 		update_icon(FALSE)
+
+/obj/structure/railing/update_materials(var/keep_health)
+	..()
+	desc = "A simple [material.display_name] railing designed to protect against careless trespass."
+	if(!keep_health)
+		maxhealth = round(material.integrity / 5)
+		health = maxhealth
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE

@@ -6,6 +6,7 @@
 	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	origin_tech = list(TECH_BIO = 4)
+	material = MAT_PLASTIC
 	var/stasis_power
 
 /obj/item/bodybag/cryobag/attack_self(mob/user)
@@ -22,7 +23,7 @@
 	a hostile enviroment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
-
+	material = MAT_PLASTIC
 	storage_types = CLOSET_STORAGE_MOBS
 	var/datum/gas_mixture/airtank
 

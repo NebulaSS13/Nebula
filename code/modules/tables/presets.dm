@@ -17,13 +17,13 @@
 	icon_state = "reinf_preview"
 	color = COLOR_OFF_WHITE
 	material = DEFAULT_FURNITURE_MATERIAL
-	reinforced = MAT_STEEL
+	reinf_material = MAT_STEEL
 
 /obj/structure/table/steel_reinforced
 	icon_state = "reinf_preview"
 	color = COLOR_GRAY40
 	material = MAT_STEEL
-	reinforced = MAT_STEEL
+	reinf_material = MAT_STEEL
 
 /obj/structure/table/gamblingtable
 	icon_state = "gamble_preview"
@@ -73,34 +73,34 @@
 	icon_state = "reinf_preview"
 	color = WOOD_COLOR_GENERIC
 	material = MAT_WOOD
-	reinforced = MAT_WOOD
+	reinf_material = MAT_WOOD
 
 /obj/structure/table/woodentable_reinforced/walnut
 	icon_state = "reinf_preview"
 	color = WOOD_COLOR_CHOCOLATE
 	material = MAT_WALNUT
-	reinforced = MAT_WALNUT
+	reinf_material = MAT_WALNUT
 
 /obj/structure/table/woodentable_reinforced/walnut/maple
-	reinforced = MAT_MAPLE
+	reinf_material = MAT_MAPLE
 
 /obj/structure/table/woodentable_reinforced/mahogany
 	icon_state = "reinf_preview"
 	color = WOOD_COLOR_RICH
 	material = MAT_MAHOGANY
-	reinforced = MAT_MAHOGANY
+	reinf_material = MAT_MAHOGANY
 
 /obj/structure/table/woodentable_reinforced/mahogany/walnut
-	reinforced = MAT_WALNUT
+	reinf_material = MAT_WALNUT
 
 /obj/structure/table/woodentable_reinforced/ebony
 	icon_state = "reinf_preview"
 	color = WOOD_COLOR_BLACK
 	material = MAT_EBONY
-	reinforced = MAT_WALNUT
+	reinf_material = MAT_WALNUT
 
 /obj/structure/table/woodentable_reinforced/ebony/walnut
-	reinforced = MAT_WALNUT
+	reinf_material = MAT_WALNUT
 
 /obj/structure/table/woodentable/mahogany
 	color = WOOD_COLOR_RICH

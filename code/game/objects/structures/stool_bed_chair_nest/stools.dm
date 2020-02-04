@@ -1,6 +1,4 @@
 //Todo: add leather and cloth for arbitrary coloured stools.
-var/global/list/stool_cache = list() //haha stool
-
 /obj/item/stool
 	name = "stool"
 	desc = "Apply butt."
@@ -50,20 +48,14 @@ var/global/list/stool_cache = list() //haha stool
 	icon_state = ""
 	// Base icon.
 	var/list/noverlays = list()
-	var/cache_key = "[base_icon]-[material.type]"
-	if(isnull(stool_cache[cache_key]))
-		var/image/I = image(icon, "[base_icon]_base")
-		I.color = material.icon_colour
-		stool_cache[cache_key] = I
-	noverlays |= stool_cache[cache_key]
+	var/image/I = image(icon, "[base_icon]_base")
+	I.color = material.icon_colour
+	noverlays |= I
 	// Padding overlay.
 	if(padding_material)
-		var/padding_cache_key = "[base_icon]-padding-[padding_material.type]"
-		if(isnull(stool_cache[padding_cache_key]))
-			var/image/I =  image(icon, "[base_icon]_padding")
-			I.color = padding_material.icon_colour
-			stool_cache[padding_cache_key] = I
-		noverlays |= stool_cache[padding_cache_key]
+		I =  image(icon, "[base_icon]_padding")
+		I.color = padding_material.icon_colour
+		noverlays += I
 	overlays = noverlays
 	// Strings.
 	if(padding_material)

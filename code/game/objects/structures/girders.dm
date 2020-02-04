@@ -1,13 +1,16 @@
 /obj/structure/girder
+	name = "support"
+	icon = 'icons/obj/structures/girder.dmi'
 	icon_state = "girder"
 	anchored = 1
 	density = 1
 	layer = BELOW_OBJ_LAYER
 	w_class = ITEM_SIZE_NO_CONTAINER
+	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
+
 	var/state = 0
 	var/health = 100
 	var/cover = 50 //how much cover the girder provides against projectiles.
-	var/material/reinf_material
 	var/reinforcing = 0
 
 /obj/structure/girder/Initialize()
@@ -36,10 +39,8 @@
 	var/damage = Proj.get_structure_damage()
 	if(!damage)
 		return
-
 	if(!istype(Proj, /obj/item/projectile/beam))
 		damage *= 0.4 //non beams do reduced damage
-
 	..()
 	take_damage(damage)
 
@@ -146,34 +147,38 @@
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
 	if(S.get_amount() < 2)
-		to_chat(user, "<span class='notice'>There isn't enough material here to construct a wall.</span>")
+		to_chat(user, SPAN_WARNING("There isn't enough material here to construct a wall."))
 		return 0
 
 	if(!istype(S.material))
 		return 0
 
+	if(S.material.weight > max(material.wall_support_value, reinf_material && reinf_material.wall_support_value))
+		to_chat(user, SPAN_WARNING("You will need a support made of sturdier material to hold up [S.material.display_name] cladding."))
+		return FALSE
+
 	var/wall_fake
 	add_hiddenprint(usr)
 
 	if(S.material.integrity < 50)
-		to_chat(user, "<span class='notice'>This material is too soft for use in wall construction.</span>")
+		to_chat(user, SPAN_WARNING("This material is too soft for use in wall construction."))
 		return 0
 
-	to_chat(user, "<span class='notice'>You begin adding the plating...</span>")
+	to_chat(user, SPAN_NOTICE("You begin adding the [S.material.display_name] cladding..."))
 
 	if(!do_after(user,40,src) || !S.use(2))
 		return 1 //once we've gotten this far don't call parent attackby()
 
 	if(anchored)
-		to_chat(user, "<span class='notice'>You added the plating!</span>")
+		to_chat(user, SPAN_NOTICE("You added the [S.material.display_name] cladding!"))
 	else
-		to_chat(user, "<span class='notice'>You create a false wall! Push on it to open or close the passage.</span>")
+		to_chat(user, SPAN_NOTICE("You create a false wall! Push on it to open or close the passage."))
 		wall_fake = 1
 
 	var/turf/Tsrc = get_turf(src)
 	Tsrc.ChangeTurf(/turf/simulated/wall)
 	var/turf/simulated/wall/T = get_turf(src)
-	T.set_material(S.material, reinf_material)
+	T.set_material(S.material, reinf_material, material)
 	if(wall_fake)
 		T.can_open = 1
 	T.add_hiddenprint(usr)
@@ -210,10 +215,6 @@
 	icon_state = "reinforced"
 	reinforcing = 0
 
-/obj/structure/girder/proc/dismantle()
-	new /obj/item/stack/material/steel(get_turf(src))
-	qdel(src)
-
 /obj/structure/girder/attack_hand(mob/user as mob)
 	if (MUTATION_HULK in user.mutations)
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
@@ -244,8 +245,11 @@
 	health = 250
 	cover = 70
 
-/obj/structure/girder/cult/dismantle()
-	qdel(src)
+/obj/structure/girder/cult/dismantle(var/do_not_destroy)
+	material = null
+	reinf_material = null
+	parts_type = null
+	. = ..()
 
 /obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
@@ -271,3 +275,12 @@
 		if(do_after(user,40,src))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 			dismantle()
+
+/obj/structure/girder/wood
+	material = MAT_MAHOGANY
+
+/obj/structure/grille/wood
+	material = MAT_MAHOGANY
+
+/obj/structure/lattice/wood
+	material = MAT_MAHOGANY

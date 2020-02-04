@@ -80,6 +80,7 @@
 	var/shard_can_repair = 1              // Can shards be turned into sheets with a welder?
 	var/list/recipes                      // Holder for all recipes usable with a sheet of this material.
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
+	var/foam_state = "foam"
 
 	// Icons
 	var/icon_colour                                      // Colour applied to products of this material.
@@ -104,6 +105,7 @@
 	var/luminescence
 	var/list/alloy_materials     // If set, material can be produced via alloying these materials in these amounts.
 	var/units_per_sheet = SHEET_MATERIAL_AMOUNT
+	var/wall_support_value = 30
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/wire_product
@@ -247,10 +249,7 @@
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)
-	var/obj/structure/girder/G = new(target)
-	if(reinf_material)
-		G.reinf_material = reinf_material
-		G.reinforce_girder()
+	new /obj/structure/girder(target, type, reinf_material && reinf_material.type)
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.

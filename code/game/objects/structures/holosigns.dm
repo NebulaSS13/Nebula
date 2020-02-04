@@ -10,7 +10,7 @@
 	if(source_projector)
 		projector = source_projector
 		projector.signs += src
-	. =..()
+	. = ..(maploading)
 
 /obj/structure/holosign/Destroy()
 	if(projector)

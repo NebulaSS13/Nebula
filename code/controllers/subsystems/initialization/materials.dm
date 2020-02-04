@@ -61,9 +61,9 @@ SUBSYSTEM_DEF(materials)
 	. = materials_by_name[mat]
 	if(!.)
 		if(ispath(mat))
-			log_error("Unable to acquire material by path '[mat]'.")
+			crash_with("Unable to acquire material by path '[mat]'.")
 		else
-			log_error("Unable to acquire material by non-path key '[mat]'.")
+			crash_with("Unable to acquire material by non-path key '[mat]'.")
 
 /proc/material_display_name(var/mat)
 	var/material/material = SSmaterials.get_material_datum(mat)

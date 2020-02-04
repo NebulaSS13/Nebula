@@ -17,6 +17,7 @@
 				)
 	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
+	wall_support_value = 10
 
 /material/plastic/holographic
 	display_name = "holographic plastic"
@@ -45,6 +46,7 @@
 	conductive = 0
 	value = 0
 	reflectiveness = MAT_VALUE_DULL
+	wall_support_value = 0
 
 /material/cloth //todo
 	display_name = "cotton"
@@ -61,6 +63,7 @@
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
+	wall_support_value = 0
 
 /material/cloth/yellow
 	display_name ="yellow"
@@ -115,6 +118,7 @@
 	stack_type = null
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
+	wall_support_value = 0
 
 /material/skin
 	display_name = "skin"
@@ -131,8 +135,9 @@
 	hardness = MAT_VALUE_SOFT
 	weight = 5
 	explosion_resistance = 1
-	var/tans_to = MAT_LEATHER_GENERIC
 	reflectiveness = MAT_VALUE_DULL
+	wall_support_value = 0
+	var/tans_to = MAT_LEATHER_GENERIC
 
 /material/skin/lizard
 	display_name = "lizardskin"
@@ -223,6 +228,7 @@
 	weight = 18
 	value = 1
 	reflectiveness = MAT_VALUE_MATTE
+	wall_support_value = 22
 
 /material/bone/fish
 	display_name = "fishbone"
@@ -250,6 +256,7 @@
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = 10
 	reflectiveness = MAT_VALUE_MATTE
+	wall_support_value = 0
 
 /material/leather/lizard
 	display_name = "hide"
@@ -267,3 +274,4 @@
 	hardness = MAT_VALUE_HARD
 	weight = 18
 	brute_armor = 2
+	wall_support_value = 14

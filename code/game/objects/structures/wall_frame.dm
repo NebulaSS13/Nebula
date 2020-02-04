@@ -6,30 +6,37 @@
 	desc = "A low wall section which serves as the base of windows, amongst other things."
 	icon = 'icons/obj/wall_frame.dmi'
 	icon_state = "frame"
-
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	anchored = 1
 	density = 1
 	throwpass = 1
 	layer = TABLE_LAYER
+	rad_resistance_modifier = 0.5
+	material = DEFAULT_WALL_MATERIAL
+	handle_generic_blending = TRUE
 
 	var/health = 100
 	var/paint_color
 	var/stripe_color
-	rad_resistance_modifier = 0.5
+	var/list/connections
+	var/list/other_connections
+	
+/obj/structure/wall_frame/clear_connections()
+	connections = null
+	other_connections = null
 
-	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
-	noblend_objects = list(/obj/machinery/door/window)
-	material = DEFAULT_WALL_MATERIAL
+/obj/structure/wall_frame/set_connections(dirs, other_dirs)
+	connections = dirs_to_corner_states(dirs)
+	other_connections = dirs_to_corner_states(other_dirs)
 
-/obj/structure/wall_frame/Initialize(mapload, var/materialtype)
-	..(mapload)
-	. = INITIALIZE_HINT_LATELOAD
+/obj/structure/wall_frame/Initialize()
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		. = INITIALIZE_HINT_LATELOAD
 
-	if(!materialtype)
-		materialtype = DEFAULT_WALL_MATERIAL
-	material = SSmaterials.get_material_datum(materialtype)
-	health = material.integrity
+/obj/structure/wall_frame/update_materials(var/keep_health)
+	if(!keep_health)
+		health = material.integrity
 
 /obj/structure/wall_frame/LateInitialize()
 	..()
@@ -113,18 +120,20 @@
 	color = new_color
 
 	for(var/i = 1 to 4)
-		if(other_connections[i] != "0")
-			I = image('icons/obj/wall_frame.dmi', "frame_other[connections[i]]", dir = 1<<(i-1))
+		var/conn = connections ? connections[i] : "0"
+		if(other_connections && other_connections[i] != "0")
+			I = image('icons/obj/wall_frame.dmi', "frame_other[conn]", dir = 1<<(i-1))
 		else
-			I = image('icons/obj/wall_frame.dmi', "frame[connections[i]]", dir = 1<<(i-1))
+			I = image('icons/obj/wall_frame.dmi', "frame[conn]", dir = 1<<(i-1))
 		overlays += I
 
 	if(stripe_color)
 		for(var/i = 1 to 4)
-			if(other_connections[i] != "0")
-				I = image('icons/obj/wall_frame.dmi', "stripe_other[connections[i]]", dir = 1<<(i-1))
+			var/conn = connections ? connections[i] : "0"
+			if(other_connections && other_connections[i] != "0")
+				I = image('icons/obj/wall_frame.dmi', "stripe_other[conn]", dir = 1<<(i-1))
 			else
-				I = image('icons/obj/wall_frame.dmi', "stripe[connections[i]]", dir = 1<<(i-1))
+				I = image('icons/obj/wall_frame.dmi', "stripe[conn]", dir = 1<<(i-1))
 			I.color = stripe_color
 			overlays += I
 
@@ -166,10 +175,6 @@
 	health -= damage
 	if(health <= 0)
 		dismantle()
-
-/obj/structure/wall_frame/proc/dismantle()
-	new /obj/item/stack/material/steel(get_turf(src), 3)
-	qdel(src)
 
 //Subtypes
 /obj/structure/wall_frame/standard

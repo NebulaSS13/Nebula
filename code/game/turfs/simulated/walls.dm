@@ -16,6 +16,7 @@
 	var/can_open = 0
 	var/material/material
 	var/material/reinf_material
+	var/material/girder_material = MAT_STEEL
 	var/last_state
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
@@ -37,6 +38,8 @@
 	material = SSmaterials.get_material_datum(materialtype)
 	if(!isnull(rmaterialtype))
 		reinf_material = SSmaterials.get_material_datum(rmaterialtype)
+	if(ispath(girder_material, /material))
+		girder_material = SSmaterials.get_material_datum(girder_material)
 	update_material()
 	hitsound = material.hitsound
 
@@ -185,11 +188,11 @@
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	if(!no_product)
-		if(reinf_material)
-			reinf_material.place_dismantled_girder(src, reinf_material)
+		if(girder_material)
+			girder_material.place_dismantled_girder(src, reinf_material)
+			material.place_dismantled_product(src,devastated)
 		else
-			material.place_dismantled_girder(src)
-		material.place_dismantled_product(src,devastated)
+			material.place_dismantled_girder(src, reinf_material)
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
@@ -270,12 +273,11 @@
 /turf/simulated/wall/proc/burn(temperature)
 	if(material.combustion_effect(src, temperature, 0.7))
 		spawn(2)
-			new /obj/structure/girder(src)
-			src.ChangeTurf(/turf/simulated/floor)
 			for(var/turf/simulated/wall/W in range(3,src))
 				W.burn((temperature/4))
 			for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
 				D.ignite(temperature/4)
+			dismantle_wall(TRUE)
 
 /turf/simulated/wall/get_color()
 	return paint_color

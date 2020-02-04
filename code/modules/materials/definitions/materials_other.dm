@@ -7,6 +7,7 @@
 	ore_icon_overlay = "lump"
 	hidden_from_codex = TRUE
 	reflectiveness = MAT_VALUE_DULL
+	wall_support_value = 0
 
 /material/cult
 	display_name = "disturbing stone"

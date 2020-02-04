@@ -1,6 +1,6 @@
 /obj/structure/closet/debug/Initialize(var/maploading, var/newappearance)
 	closet_appearance = newappearance
-	. = ..()
+	. = ..(maploading)
 
 /decl/closet_appearance
 	var/color = COLOR_GRAY40

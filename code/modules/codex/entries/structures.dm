@@ -22,9 +22,9 @@
 	the buckles, instead."
 
 /datum/codex_entry/cheval
-	associated_paths = list(/obj/structure/barricade/spike)
+	associated_paths = list(/obj/structure/barricade, /obj/structure/barricade/spike)
 	lore_text = "The cheval de frise (Frisian horse) is an ancient anti-cavalry barricade so named because they were widely deployed by the Frisians, who lacked easy access to horses to field their own cavalry."
-	mechanics_text = "Constructed by adding rods of any material to a barricade constructed of any material, this structure will injure anyone who moves into it."
+	mechanics_text = "A simple barricade is crafted from any material. You can make it a cheval de frise by adding rods of any material to a barricade constructed of any material, this structure will injure anyone who moves into it."
 
 /datum/codex_entry/deity/altar
 	associated_paths = list(/obj/structure/deity/altar)
