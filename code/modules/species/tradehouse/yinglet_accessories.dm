@@ -10,16 +10,19 @@
 	name = "Large Tailpoof"
 	icon_state = "tailpoof"
 	body_parts = list(BP_GROIN)
+	flags = HAIR_LOSS_VULNERABLE
 
 /datum/sprite_accessory/marking/yinglet/small_tailpoof
 	name = "Small Tailpoof"
 	icon_state = "tailpoofsmall"
 	body_parts = list(BP_GROIN)
+	flags = HAIR_LOSS_VULNERABLE
 
 /datum/sprite_accessory/marking/yinglet/tailtuft
 	name = "Tailtuft"
 	icon_state = "tailtuft"
 	body_parts = list(BP_GROIN)
+	flags = HAIR_LOSS_VULNERABLE
 
 /datum/sprite_accessory/marking/yinglet/recolour_left_hand
 	name = "Body Colour (Left Arm)"

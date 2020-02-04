@@ -1832,3 +1832,21 @@
 			to_chat(src, SPAN_WARNING("Your [active_hand.name] doesn't have the dexterity to use that!"))
 		return FALSE
 	return TRUE
+
+
+/mob/living/carbon/human/lose_hair()
+	if(species.set_default_hair(src))
+		. = TRUE
+	if(species.handle_additional_hair_loss(src))
+		. = TRUE
+	for(var/obj/item/organ/external/E in organs)
+		for(var/mark in E.markings)
+			var/list/marking_data = E.markings[mark]
+			var/datum/sprite_accessory/marking/mark_datum = marking_data["datum"]
+			if(mark_datum.flags & HAIR_LOSS_VULNERABLE)
+				E.markings -= mark
+				marking_data.Cut()
+				. = TRUE
+	if(.)
+		update_body()
+		to_chat(src, SPAN_DANGER("You feel a chill and your skin feels lighter..."))

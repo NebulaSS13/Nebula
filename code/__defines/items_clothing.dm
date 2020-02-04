@@ -197,6 +197,7 @@
 #define VERY_SHORT 0x1
 #define HAIR_TIEABLE 0x2
 #define HAIR_BALD 0x4
+#define HAIR_LOSS_VULNERABLE 0x8
 
 //flags to determine if an eyepiece is a hud.
 #define HUD_SCIENCE 0x1
