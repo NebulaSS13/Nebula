@@ -578,9 +578,17 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	return Clamp(max(prescriptions, light), 0, 7)
 
 /datum/species/proc/set_default_hair(var/mob/living/carbon/human/H)
-	H.h_style = H.species.default_h_style
-	H.f_style = H.species.default_f_style
-	H.update_hair()
+	if(H.h_style != H.species.default_h_style)
+		H.h_style = H.species.default_h_style
+		. = TRUE
+	if(H.f_style != H.species.default_f_style)
+		H.f_style = H.species.default_f_style
+		. = TRUE
+	if(.)
+		H.update_hair()
+
+/datum/species/proc/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
+	return FALSE
 
 /datum/species/proc/get_blood_name()
 	return "blood"

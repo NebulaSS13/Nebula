@@ -738,9 +738,8 @@
 	heating_products = null
 	heating_point = null
 
-/datum/reagent/toxin/hair_remover/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
-	M.species.set_default_hair(M)
-	to_chat(M, "<span class='warning'>You feel a chill and your skin feels lighter..</span>")
+/datum/reagent/toxin/hair_remover/affect_touch(var/mob/M, var/alien, var/removed)
+	M.lose_hair()
 	remove_self(volume)
 
 /datum/reagent/toxin/zombie

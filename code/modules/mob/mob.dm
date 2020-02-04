@@ -1115,3 +1115,7 @@
 	. = has_dexterity(dex_level)
 	if(!. && !silent)
 		to_chat(src, FEEDBACK_YOU_LACK_DEXTERITY)
+
+
+/mob/proc/lose_hair()
+	return

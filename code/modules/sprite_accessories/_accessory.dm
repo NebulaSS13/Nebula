@@ -26,3 +26,4 @@
 	var/list/subspecies_allowed                    // Restrict some styles to specific species names
 	var/do_colouration = 1                         // Whether or not the accessory can be affected by colouration
 	var/blend = ICON_ADD
+	var/flags = 0

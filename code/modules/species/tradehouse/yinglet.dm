@@ -93,6 +93,9 @@
 		else
 			. = 8
 
+/datum/species/yinglet/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
+	. = H && H.change_skin_color(189, 171, 143)
+
 /datum/species/yinglet/handle_post_species_pref_set(var/datum/preferences/pref)
 	pref.body_markings = pref.body_markings || list()
 	if(!pref.body_markings["Ying Long Ears"])
