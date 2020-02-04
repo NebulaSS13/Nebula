@@ -182,6 +182,8 @@
 	if(wall_fake)
 		T.can_open = 1
 	T.add_hiddenprint(usr)
+	material = null
+	reinf_material = null
 	qdel(src)
 	return 1
 
