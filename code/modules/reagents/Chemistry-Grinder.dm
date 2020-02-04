@@ -37,7 +37,14 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/machinery/reagentgrinder/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/reagentgrinder/attackby(var/obj/item/O, var/mob/user)
+
+	if(!istype(O))
+		return
+
+	if(holdingitems && holdingitems.len >= limit)
+		to_chat(user, SPAN_NOTICE("\The [src] cannot hold any additional items."))
+		return 1
 
 	if (istype(O,/obj/item/chems/glass) || \
 		istype(O,/obj/item/chems/food/drinks/glass2) || \
@@ -81,16 +88,9 @@
 
 		src.updateUsrDialog()
 		return 0
-	
+
 	if(O.w_class > item_size_limit)
 		to_chat(user, SPAN_NOTICE("\The [src] cannot fit \the [O]."))
-		return
-
-	if(holdingitems && holdingitems.len >= limit)
-		to_chat(user, SPAN_NOTICE("\The [src] cannot hold any additional items."))
-		return 1
-
-	if(!istype(O))
 		return
 
 	if(istype(O,/obj/item/stack/material))

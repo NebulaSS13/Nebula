@@ -18,9 +18,9 @@
 			material_data["name"] =        mat_name
 			material_data["stored"] =      stored_material[material]
 			material_data["max"] =         storage_capacity[material]
-			material_data["eject_key"] = stored_substances_to_names[material]
-			material_data["eject_label"] =   ispath(material, /material) ? "Eject" : "Flush"
-			data["material_storage"] += list(material_data)
+			material_data["eject_key"] =   stored_substances_to_names[material]
+			material_data["eject_label"] = ispath(material, /material) ? "Eject" : "Flush"
+			data["material_storage"] +=    list(material_data)
 
 		var/list/current_build = list()
 		data["current_build"] = current_build

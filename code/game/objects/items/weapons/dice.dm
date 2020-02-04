@@ -11,6 +11,29 @@
 	. = ..()
 	icon_state = "[name][rand(1,sides)]"
 
+/obj/item/dice/proc/roll_die()
+	. = list(rand(1, sides), "")
+
+/obj/item/dice/proc/convert_result(var/res)
+	. = res
+
+/obj/item/dice/attack_self(mob/user)
+	var/list/roll_result = roll_die()
+	var/result = roll_result[1]
+	var/comment = roll_result[2]
+	icon_state = "[name][convert_result(result)]"
+	user.visible_message(SPAN_NOTICE("\The [user] has thrown [src]. It lands on [result]. [comment]"), \
+						 SPAN_NOTICE("You throw [src]. It lands on [result]. [comment]"), \
+						 SPAN_NOTICE("You hear [src] landing on [result]. [comment]"))
+
+/obj/item/dice/throw_impact()
+	..()
+	var/list/roll_result = roll_die()
+	var/result = roll_result[1]
+	var/comment = roll_result[2]
+	icon_state = "[name][convert_result(result)]"
+	src.visible_message(SPAN_NOTICE("\The [src] lands on [result]. [comment]"))
+
 /obj/item/dice/d4
 	name = "d4"
 	desc = "A dice with four sides."
@@ -41,16 +64,6 @@
 	icon_state = "d2020"
 	sides = 20
 
-/obj/item/dice/d100
-	name = "d100"
-	desc = "A dice with ten sides. This one is for the tens digit."
-	icon_state = "d10010"
-	sides = 10
-
-/obj/item/dice/proc/roll_die()
-	var/result = rand(1, sides)
-	return list(result, "")
-
 /obj/item/dice/d20/roll_die()
 	var/result = rand(1, sides)
 	var/comment = ""
@@ -58,21 +71,18 @@
 		comment = "Nat 20!"
 	else if(result == 1)
 		comment = "Ouch, bad luck."
-	return list(result, comment)
+	. = list(result, comment)
 
-/obj/item/dice/attack_self(mob/user as mob)
-	var/list/roll_result = roll_die()
-	var/result = roll_result[1]
-	var/comment = roll_result[2]
-	icon_state = "[name][result]"
-	user.visible_message("<span class='notice'>[user] has thrown [src]. It lands on [result]. [comment]</span>", \
-						 "<span class='notice'>You throw [src]. It lands on a [result]. [comment]</span>", \
-						 "<span class='notice'>You hear [src] landing on a [result]. [comment]</span>")
+/obj/item/dice/d100
+	name = "d100"
+	desc = "A dice with ten sides. This one is for the tens digit."
+	icon_state = "d10010"
+	sides = 10
 
-/obj/item/dice/throw_impact()
-	..()
-	var/list/roll_result = roll_die()
-	var/result = roll_result[1]
-	var/comment = roll_result[2]
-	icon_state = "[name][result]"
-	src.visible_message("<span class='notice'>\The [src] lands on [result]. [comment]</span>")
+/obj/item/dice/d100/roll_die()
+	var/list/res = ..()
+	res[1] = (res[1]-1)*10
+	. = res
+
+/obj/item/dice/d100/convert_result(var/res)
+	. = Floor(res/10)
