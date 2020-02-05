@@ -6,6 +6,8 @@
 	density = 0
 	anchored = 1
 	layer = ABOVE_WINDOW_LAYER
+	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
+
 	var/list/notices
 	var/base_icon_state = "nboard0"
 	var/const/max_notices = 5
@@ -85,44 +87,38 @@
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
 /obj/structure/noticeboard/attackby(var/obj/item/thing, var/mob/user)
-	if(isScrewdriver(thing))
-		var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
-		if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
-			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			switch(choice)
-				if("North")
-					pixel_x = 0
-					pixel_y = 32
-				if("South")
-					pixel_x = 0
-					pixel_y = -32
-				if("East")
-					pixel_x = 32
-					pixel_y = 0
-				if("West")
-					pixel_x = -32
-					pixel_y = 0
-		return
-	else if(isWrench(thing))
-		visible_message(SPAN_WARNING("\The [user] begins dismantling \the [src]."))
-		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 50, src))
-			visible_message(SPAN_DANGER("\The [user] has dismantled \the [src]!"))
-			dismantle()
-		return
-	else if(istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo))
-		if(jobban_isbanned(user, "Graffiti"))
-			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
-		else
-			if(LAZYLEN(notices) < max_notices && user.unEquip(thing, src))
-				add_fingerprint(user)
-				add_paper(thing)
-				to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
-				SSpersistence.track_value(thing, /datum/persistent/paper)
+	. = ..()
+	if(!.)
+		if(isScrewdriver(thing))
+			var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
+			if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
+				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				switch(choice)
+					if("North")
+						pixel_x = 0
+						pixel_y = 32
+					if("South")
+						pixel_x = 0
+						pixel_y = -32
+					if("East")
+						pixel_x = 32
+						pixel_y = 0
+					if("West")
+						pixel_x = -32
+						pixel_y = 0
+			return
+		else if(istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo))
+			if(jobban_isbanned(user, "Graffiti"))
+				to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
 			else
-				to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
-		return
-	..()
+				if(LAZYLEN(notices) < max_notices && user.unEquip(thing, src))
+					add_fingerprint(user)
+					add_paper(thing)
+					to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
+					SSpersistence.track_value(thing, /datum/persistent/paper)
+				else
+					to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
+			return
 
 /obj/structure/noticeboard/attack_ai(var/mob/user)
 	examine(user)

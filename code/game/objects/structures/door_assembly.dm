@@ -78,7 +78,8 @@
 		bound_width = world.icon_size
 		bound_height = width * world.icon_size
 
-/obj/structure/door_assembly/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/door_assembly/attackby(obj/item/W, mob/user)
+
 	if(istype(W, /obj/item/pen))
 		var/t = sanitizeSafe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
 		if(!t)	return
@@ -115,7 +116,6 @@
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
 			return
-
 	else if(isWrench(W) && state == 0)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		if(anchored)
@@ -127,6 +127,7 @@
 			if(!src) return
 			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured the airlock assembly!</span>")
 			anchored = !anchored
+
 
 	else if(isCoil(W) && state == 0 && anchored)
 		var/obj/item/stack/cable_coil/C = W

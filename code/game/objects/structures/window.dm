@@ -75,19 +75,19 @@
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
 	if(reinf_material)
-		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>")
+		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.display_name] lattice."))
 	if(health == maxhealth)
-		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
+		to_chat(user, SPAN_NOTICE("It looks fully intact."))
 	else
 		var/perc = health / maxhealth
 		if(perc > 0.75)
-			to_chat(user, "<span class='notice'>It has a few cracks.</span>")
+			to_chat(user, SPAN_NOTICE("It has a few cracks."))
 		else if(perc > 0.5)
-			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
+			to_chat(user, SPAN_WARNING("It looks slightly damaged."))
 		else if(perc > 0.25)
-			to_chat(user, "<span class='warning'>It looks moderately damaged.</span>")
+			to_chat(user, SPAN_WARNING("It looks moderately damaged."))
 		else
-			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
+			to_chat(user, SPAN_DANGER("It looks heavily damaged."))
 
 /obj/structure/window/CanFluidPass(var/coming_from)
 	return (!is_fulltile() && coming_from != dir)
@@ -160,7 +160,7 @@
 
 /obj/structure/window/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
-	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
+	visible_message(SPAN_DANGER("[src] was hit by [AM]."))
 	var/tforce = 0
 	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
 		var/mob/I = AM
@@ -178,7 +178,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(MUTATION_HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
-		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
+		user.visible_message(SPAN_DANGER("[user] smashes through [src]!"))
 		user.do_attack_animation(src)
 		shatter()
 
@@ -192,8 +192,8 @@
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		user.do_attack_animation(src)
-		user.visible_message("<span class='danger'>\The [user] bangs against \the [src]!</span>",
-							"<span class='danger'>You bang against \the [src]!</span>",
+		user.visible_message(SPAN_DANGER("\The [user] bangs against \the [src]!"),
+							SPAN_DANGER("You bang against \the [src]!"),
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
@@ -212,10 +212,10 @@
 	if(!damage)
 		return
 	if(damage >= 10)
-		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
+		visible_message(SPAN_DANGER("[user] [attack_verb] into [src]!"))
 		take_damage(damage)
 	else
-		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
 	return 1
 
 /obj/structure/window/do_simple_ranged_interaction(var/mob/user)
@@ -223,7 +223,7 @@
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 	return TRUE
 
-/obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/window/attackby(obj/item/W, mob/user)
 	if(!istype(W)) return//I really wish I did not need this
 
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
@@ -233,31 +233,31 @@
 			construction_state = 3 - construction_state
 			update_nearby_icons()
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (construction_state == 1 ? "<span class='notice'>You have unfastened the window from the frame.</span>" : "<span class='notice'>You have fastened the window to the frame.</span>"))
+			to_chat(user, (construction_state == 1 ? SPAN_NOTICE("You have unfastened the window from the frame.") : SPAN_NOTICE("You have fastened the window to the frame.")))
 		else if(reinf_material && construction_state == 0)
 			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? "<span class='notice'>You have fastened the frame to the floor.</span>" : "<span class='notice'>You have unfastened the frame from the floor.</span>"))
+			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the frame to the floor.") : SPAN_NOTICE("You have unfastened the frame from the floor.")))
 		else if(!reinf_material)
 			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>"))
+			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
 	else if(isCrowbar(W) && reinf_material && construction_state <= 1)
 		construction_state = 1 - construction_state
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
-		to_chat(user, (construction_state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>"))
+		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
 	else if(isWrench(W) && !anchored && (!construction_state || !reinf_material))
 		if(!material.stack_type)
-			to_chat(user, "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>")
+			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
+			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
 			var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 1)
 			if(S && reinf_material)
 				S.reinf_material = reinf_material
 				S.update_strings()
 				S.update_icon()
-			qdel(src)
+			dismantle()
 	else if(isCoil(W) && !polarized && is_fulltile())
 		var/obj/item/stack/cable_coil/C = W
 		if (C.use(1))
@@ -271,16 +271,16 @@
 			return
 		if (t)
 			src.id = t
-			to_chat(user, "<span class='notice'>The new ID of the window is [id]</span>")
+			to_chat(user, SPAN_NOTICE("The new ID of the window is [id]"))
 		return
 	else if(istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
 		var/obj/item/gun/energy/plasmacutter/cutter = W
 		if(!cutter.slice(user))
 			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
-		visible_message("<span class='notice'>[user] has started slicing through the window's frame!</span>")
+		visible_message(SPAN_NOTICE("[user] has started slicing through the window's frame!"))
 		if(do_after(user,20,src))
-			visible_message("<span class='warning'>[user] has sliced through the window's frame!</span>")
+			visible_message(SPAN_WARNING("[user] has sliced through the window's frame!"))
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			construction_state = 0
 			set_anchored(0)
@@ -301,17 +301,17 @@
 	if (G.assailant.a_intent != I_HURT)
 		return TRUE
 	if (!G.force_danger())
-		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
+		to_chat(G.assailant, SPAN_DANGER("You need a better grip to do that!"))
 		return TRUE
 	var/def_zone = ran_zone(BP_HEAD, 20)
 	if(G.damage_stage() < 2)
-		G.affecting.visible_message("<span class='danger'>[G.assailant] bashes [G.affecting] against \the [src]!</span>")
+		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
 		if (prob(50))
 			G.affecting.Weaken(1)
 		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
 		hit(25)
 	else
-		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
+		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
 		G.affecting.Weaken(5)
 		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
 		hit(50)
@@ -516,7 +516,7 @@
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
 			src.id = t
-			to_chat(user, "<span class='notice'>The new ID of the button is [id]</span>")
+			to_chat(user, SPAN_NOTICE("The new ID of the button is [id]"))
 		return
 	if(istype(W, /obj/item/screwdriver))
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
@@ -560,30 +560,30 @@
 /proc/place_window(mob/user, loc, dir_to_set, obj/item/stack/material/ST)
 	var/required_amount = (dir_to_set & (dir_to_set - 1)) ? 4 : 1
 	if (!ST.can_use(required_amount))
-		to_chat(user, "<span class='notice'>You do not have enough sheets.</span>")
+		to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
 		return
 	for(var/obj/structure/window/WINDOW in loc)
 		if(WINDOW.dir == dir_to_set)
-			to_chat(user, "<span class='notice'>There is already a window facing this way there.</span>")
+			to_chat(user, SPAN_NOTICE("There is already a window facing this way there."))
 			return
 		if(WINDOW.is_fulltile() && (dir_to_set & (dir_to_set - 1))) //two fulltile windows
-			to_chat(user, "<span class='notice'>There is already a window there.</span>")
+			to_chat(user, SPAN_NOTICE("There is already a window there."))
 			return
-	to_chat(user, "<span class='notice'>You start placing the window.</span>")
+	to_chat(user, SPAN_NOTICE("You start placing the window."))
 	if(do_after(user,20))
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
-				to_chat(user, "<span class='notice'>There is already a window facing this way there.</span>")
+				to_chat(user, SPAN_NOTICE("There is already a window facing this way there."))
 				return
 			if(WINDOW.is_fulltile() && (dir_to_set & (dir_to_set - 1)))
-				to_chat(user, "<span class='notice'>There is already a window there.</span>")
+				to_chat(user, SPAN_NOTICE("There is already a window there."))
 				return
 
 		if (ST.use(required_amount))
 			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.type, ST.reinf_material && ST.reinf_material.type)
-			to_chat(user, "<span class='notice'>You place [WD].</span>")
+			to_chat(user, SPAN_NOTICE("You place [WD]."))
 			WD.construction_state = 0
 			WD.set_anchored(FALSE)
 		else
-			to_chat(user, "<span class='notice'>You do not have enough sheets.</span>")
+			to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
 			return

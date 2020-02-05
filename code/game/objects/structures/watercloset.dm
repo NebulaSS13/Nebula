@@ -238,7 +238,7 @@
 		for (var/atom/movable/G in src.loc)
 			G.clean_blood()
 
-/obj/structure/hygiene/shower/attackby(obj/item/I as obj, var/mob/user)
+/obj/structure/hygiene/shower/attackby(obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/scanner/gas))
 		to_chat(user, "<span class='notice'>The water temperature seems to be [watertemp].</span>")
 		return
@@ -394,7 +394,7 @@
 		"<span class='notice'>You wash your hands using \the [src].</span>")
 
 
-/obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
+/obj/structure/hygiene/sink/attackby(obj/item/O, var/mob/living/user)
 
 	if(isPlunger(O) && clogged > 0)
 		return ..()
@@ -470,7 +470,7 @@
 	..()
 	icon_state = "puddle"
 
-/obj/structure/hygiene/sink/puddle/attackby(obj/item/O as obj, var/mob/user)
+/obj/structure/hygiene/sink/puddle/attackby(obj/item/O, var/mob/user)
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"

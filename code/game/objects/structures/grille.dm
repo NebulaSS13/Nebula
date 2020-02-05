@@ -277,17 +277,11 @@
 	if(ST.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 		return
-	to_chat(user, SPAN_NOTICE("You begin assembling a [ST.material.display_name] grille..."))
-	ST.in_use = 1
-	if (!do_after(user, 10))
-		ST.in_use = 0
-		return
-	if(!ST.use(2))
-		return
-	var/obj/structure/grille/F = new /obj/structure/grille(loc, ST.material.type)
-	to_chat(user, SPAN_NOTICE("You assemble a grille."))
-	ST.in_use = 0
-	F.add_fingerprint(user)
+	user.visible_message(SPAN_NOTICE("\The [user] begins assembling a [ST.material.display_name] grille."))
+	if(do_after(user, 1 SECOND, ST) && ST.use(2))
+		var/obj/structure/grille/F = new(loc, ST.material.type)
+		user.visible_message(SPAN_NOTICE("\The [user] finishes building \a [F]."))
+		F.add_fingerprint(user)
 
 /obj/structure/grille/create_dismantled_products(var/turf/T)
 	new /obj/item/stack/material/rods(get_turf(src), (destroyed ? 1 : 2), material.type)

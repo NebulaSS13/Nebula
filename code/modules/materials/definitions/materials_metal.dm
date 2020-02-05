@@ -19,6 +19,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	sale_price = 2
 	value = 100
+	removed_by_welder = TRUE
 
 /material/gold
 	display_name = "gold"
@@ -51,6 +52,7 @@
 	ore_icon_overlay = "nugget"
 	sale_price = 3
 	value = 40	
+	removed_by_welder = TRUE
 
 /material/gold/bronze //placeholder for ashtrays
 	display_name = "bronze"
@@ -84,6 +86,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "shiny"
 	sale_price = 1
+	removed_by_welder = TRUE
 
 /material/silver
 	display_name = "silver"
@@ -109,6 +112,7 @@
 	ore_icon_overlay = "shiny"
 	sale_price = 2
 	value = 35
+	removed_by_welder = TRUE
 
 /material/steel
 	display_name = "steel"
@@ -133,6 +137,7 @@
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_SHINY
 	value = 4
+	removed_by_welder = TRUE
 
 /material/steel/holographic
 	display_name = "holographic steel"
@@ -161,6 +166,7 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
+	removed_by_welder = TRUE
 
 /material/aluminium/holographic
 	display_name = "holoaluminium"
@@ -196,6 +202,7 @@
 	ore_smelts_to = MAT_PLASTEEL
 	value = 12
 	reflectiveness = MAT_VALUE_MATTE
+	removed_by_welder = TRUE
 
 /material/plasteel/titanium
 	display_name = "titanium"
@@ -248,6 +255,7 @@
 	ore_smelts_to = MAT_OSMIUM
 	value = 30
 	reflectiveness = MAT_VALUE_SHINY
+	removed_by_welder = TRUE
 
 /material/platinum
 	display_name = "platinum"
@@ -270,6 +278,7 @@
 	sale_price = 5
 	value = 80
 	reflectiveness = MAT_VALUE_SHINY
+	removed_by_welder = TRUE
 
 /material/iron
 	display_name = "iron"
@@ -288,6 +297,7 @@
 	sale_price = 1
 	value = 5
 	reflectiveness = MAT_VALUE_MATTE
+	removed_by_welder = TRUE
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -304,6 +314,7 @@
 	hidden_from_codex = TRUE
 	value = 100
 	reflectiveness = MAT_VALUE_SHINY
+	removed_by_welder = TRUE
 
 // Likewise.
 /material/voxalloy/elevatorium
@@ -326,6 +337,7 @@
 	stack_type = /obj/item/stack/material/aliumium
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	hidden_from_codex = TRUE
+	removed_by_welder = TRUE
 
 /material/aliumium/New()
 	icon_base = "metal"
@@ -354,6 +366,7 @@
 	ore_name = "hematite"
 	ore_icon_overlay = "lump"
 	sale_price = 1
+	removed_by_welder = TRUE
 
 /material/rutile
 	display_name = "rutile"
@@ -367,3 +380,4 @@
 	ore_name = "rutile"
 	ore_icon_overlay = "lump"
 	sale_price = 2
+	removed_by_welder = TRUE

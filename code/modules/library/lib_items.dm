@@ -18,40 +18,34 @@
 	density = 1
 	opacity = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
+	material = MAT_WOOD
+	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
+	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 
 /obj/structure/bookcase/Initialize()
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/book))
 			I.forceMove(src)
-	update_icon()
 	. = ..()
 
-/obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/book))
-		if(!user.unEquip(O, src))
-			return
-		update_icon()
-	else if(istype(O, /obj/item/pen))
-		var/newname = sanitizeSafe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
-		if(!newname)
-			return
-		else
-			SetName("bookcase ([newname])")
-	else if(isScrewdriver(O))
-		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-		to_chat(user, "<span class='notice'>You begin dismantling \the [src].</span>")
-		if(do_after(user,25,src))
-			to_chat(user, "<span class='notice'>You dismantle \the [src].</span>")
-			new/obj/item/stack/material/wood(get_turf(src), 5)
-			for(var/obj/item/book/b in contents)
-				b.dropInto(loc)
-			qdel(src)
+/obj/structure/bookcase/create_dismantled_products(var/turf/T)
+	for(var/obj/item/book/b in contents)
+		b.dropInto(T)
+	. = ..()
 
-	else
-		..()
-	return
+/obj/structure/bookcase/attackby(obj/O, mob/user)
+	. = ..()
+	if(!.)
+		if(istype(O, /obj/item/book) && user.unEquip(O, src))
+			update_icon()
+		else if(istype(O, /obj/item/pen))
+			var/newname = sanitizeSafe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
+			if(!newname)
+				return
+			else
+				SetName("bookcase ([newname])")
 
-/obj/structure/bookcase/attack_hand(var/mob/user as mob)
+/obj/structure/bookcase/attack_hand(var/mob/user)
 	if(contents.len)
 		var/obj/item/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
 		if(choice)
@@ -148,7 +142,7 @@
 	var/carved = 0	 // Has the book been hollowed out for use as a secret storage item?
 	var/obj/item/store	//What's in the book?
 
-/obj/item/book/attack_self(var/mob/user as mob)
+/obj/item/book/attack_self(var/mob/user)
 	if(carved)
 		if(store)
 			to_chat(user, "<span class='notice'>[store] falls out of [title]!</span>")
@@ -165,7 +159,7 @@
 	else
 		to_chat(user, "This book is completely blank!")
 
-/obj/item/book/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/book/attackby(obj/item/W, mob/user)
 	if(carved == 1)
 		if(!store)
 			if(W.w_class < ITEM_SIZE_NORMAL)
@@ -220,7 +214,7 @@
 	else
 		..()
 
-/obj/item/book/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/book/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(user.zone_sel.selecting == BP_EYES)
 		user.visible_message("<span class='notice'>You open up the book and show it to [M]. </span>", \
 			"<span class='notice'> [user] opens up a book and shows it to [M]. </span>")

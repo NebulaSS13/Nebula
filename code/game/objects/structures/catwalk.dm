@@ -63,10 +63,10 @@
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
 		if(1)
-			new /obj/item/stack/material/rods(src.loc)
+			new /obj/item/stack/material/rods(loc)
 			qdel(src)
 		if(2)
-			new /obj/item/stack/material/rods(src.loc)
+			new /obj/item/stack/material/rods(loc)
 			qdel(src)
 
 /obj/structure/catwalk/attack_hand(mob/user)
@@ -78,62 +78,46 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
-/obj/structure/catwalk/proc/deconstruct(mob/user)
-	playsound(src, 'sound/items/Welder.ogg', 100, 1)
-	to_chat(user, "<span class='notice'>Slicing \the [src] joints ...</span>")
-	new /obj/item/stack/material/rods(src.loc)
-	new /obj/item/stack/material/rods(src.loc)
-	//Lattice would delete itself, but let's save ourselves a new obj
-	if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
-		new /obj/structure/lattice/(src.loc)
-	if(plated_tile)
-		new plated_tile.build_type(src.loc)
-	qdel(src)
-
-/obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
-	if(isWelder(C))
-		var/obj/item/weldingtool/WT = C
-		if(WT.remove_fuel(0, user))
-			deconstruct(user)
-		return
-	if(istype(C, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = C
-		if(!cutter.slice(user))
-			return
-		deconstruct(user)
-		return
-	if(isCrowbar(C) && plated_tile)
-		hatch_open = !hatch_open
-		if(hatch_open)
-			playsound(src, 'sound/items/Crowbar.ogg', 100, 2)
-			to_chat(user, "<span class='notice'>You pry open \the [src]'s maintenance hatch.</span>")
-		else
-			playsound(src, 'sound/items/Deconstruct.ogg', 100, 2)
-			to_chat(user, "<span class='notice'>You shut \the [src]'s maintenance hatch.</span>")
-		update_icon()
-		return
-	if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
-		var/obj/item/stack/tile/floor/ST = C
-		if(!ST.in_use)
-			to_chat(user, "<span class='notice'>Placing tile...</span>")
-			ST.in_use = 1
-			if (!do_after(user, 10))
-				ST.in_use = 0
+/obj/structure/catwalk/attackby(obj/item/C, mob/user)
+	. = ..()
+	if(!.)
+		if(istype(C, /obj/item/gun/energy/plasmacutter))
+			var/obj/item/gun/energy/plasmacutter/cutter = C
+			if(!cutter.slice(user))
 				return
-			to_chat(user, "<span class='notice'>You plate \the [src]</span>")
-			name = "plated catwalk"
-			ST.in_use = 0
-			src.add_fingerprint(user)
-			if(ST.use(1))
-				var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
-				for(var/flooring_type in decls)
-					var/decl/flooring/F = decls[flooring_type]
-					if(!F.build_type)
-						continue
-					if(ispath(C.type, F.build_type))
-						plated_tile = F
-						break
-				update_icon()
+			dismantle(user)
+			return TRUE
+		if(isCrowbar(C) && plated_tile)
+			hatch_open = !hatch_open
+			if(hatch_open)
+				playsound(src, 'sound/items/Crowbar.ogg', 100, 2)
+				to_chat(user, "<span class='notice'>You pry open \the [src]'s maintenance hatch.</span>")
+			else
+				playsound(src, 'sound/items/Deconstruct.ogg', 100, 2)
+				to_chat(user, "<span class='notice'>You shut \the [src]'s maintenance hatch.</span>")
+			update_icon()
+			return TRUE
+		if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
+			var/obj/item/stack/tile/floor/ST = C
+			if(!ST.in_use)
+				to_chat(user, "<span class='notice'>Placing tile...</span>")
+				ST.in_use = 1
+				if (!do_after(user, 10))
+					ST.in_use = 0
+					return TRUE
+				to_chat(user, "<span class='notice'>You plate \the [src]</span>")
+				name = "plated catwalk"
+				ST.in_use = 0
+				if(ST.use(1))
+					var/list/decls = decls_repository.get_decls_of_subtype(/decl/flooring)
+					for(var/flooring_type in decls)
+						var/decl/flooring/F = decls[flooring_type]
+						if(!F.build_type)
+							continue
+						if(ispath(C.type, F.build_type))
+							plated_tile = F
+							break
+					update_icon()
 
 /obj/structure/catwalk/refresh_neighbors()
 	return

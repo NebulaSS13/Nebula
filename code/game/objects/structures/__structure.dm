@@ -23,6 +23,53 @@
 	if(!CanFluidPass())
 		fluid_update()
 
+/obj/structure/Destroy()
+	reset_mobs_offset()
+	var/turf/T = get_turf(src)
+	. = ..()
+	if(T)
+		T.fluid_update()
+
+/obj/structure/examine(mob/user, var/distance)
+	. = ..()
+	if(distance <= 3)
+
+		if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
+			if(anchored)
+				to_chat(user, SPAN_SUBTLE("Can be unanchored with a wrench, and moved around."))
+			else
+				to_chat(user, SPAN_SUBTLE("Can be anchored in place with a wrench."))
+
+		if(tool_interaction_flags & TOOL_INTERACTION_DECONSTRUCT)
+			var/removed_with = "a crowbar"
+			if(material && material.removed_by_welder)
+				removed_with = "a welding torch"
+			if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
+				if(anchored)
+					to_chat(user, SPAN_SUBTLE("Can be deconstructed with [removed_with]."))
+				else
+					to_chat(user, SPAN_SUBTLE("Can be deconstructed with [removed_with], if anchored down with a wrench first."))
+			else
+				to_chat(user, SPAN_SUBTLE("Can be deconstructed with [removed_with]."))
+
+		if(tool_interaction_flags & TOOL_INTERACTION_WIRING)
+			if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
+				if(wired)
+					if(anchored)
+						to_chat(user, SPAN_SUBTLE("Can have its wiring removed with wirecutters"))
+					else
+						to_chat(user, SPAN_SUBTLE("Can have its wiring removed with wirecutters, if anchored down with a wrench first."))
+				else
+					if(anchored)
+						to_chat(user, SPAN_SUBTLE("Can have wiring installed with a cable coil."))
+					else
+						to_chat(user, SPAN_SUBTLE("Can have wiring installed with a cable coil, if anchored down with a wrench first."))
+			else
+				if(wired)
+					to_chat(user, SPAN_SUBTLE("Can have its wiring removed with wirecutters"))
+				else
+					to_chat(user, SPAN_SUBTLE("Can have wiring installed with a cable coil."))
+
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	if(wallbreaker && damage && breakable)
 		visible_message(SPAN_DANGER("\The [user] smashes \the [src] to pieces!"))

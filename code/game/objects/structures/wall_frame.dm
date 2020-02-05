@@ -14,6 +14,7 @@
 	rad_resistance_modifier = 0.5
 	material = DEFAULT_WALL_MATERIAL
 	handle_generic_blending = TRUE
+	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 
 	var/health = 100
 	var/paint_color
@@ -47,61 +48,48 @@
 	. = ..()
 
 	if(health == material.integrity)
-		to_chat(user, "<span class='notice'>It seems to be in fine condition.</span>")
+		to_chat(user, SPAN_NOTICE("It seems to be in fine condition."))
 	else
 		var/dam = health / material.integrity
 		if(dam <= 0.3)
-			to_chat(user, "<span class='notice'>It's got a few dents and scratches.</span>")
+			to_chat(user, SPAN_NOTICE("It's got a few dents and scratches."))
 		else if(dam <= 0.7)
-			to_chat(user, "<span class='warning'>A few pieces of panelling have fallen off.</span>")
+			to_chat(user, SPAN_WARNING("A few pieces of panelling have fallen off."))
 		else
-			to_chat(user, "<span class='danger'>It's nearly falling to pieces.</span>")
+			to_chat(user, SPAN_DANGER("It's nearly falling to pieces."))
 	if(paint_color)
-		to_chat(user, "<span class='notice'>It has a smooth coat of paint applied.</span>")
+		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
 /obj/structure/wall_frame/attackby(var/obj/item/W, var/mob/user)
-	src.add_fingerprint(user)
 
-	//grille placing
-	if(istype(W, /obj/item/stack/material/rods))
-		for(var/obj/structure/window/WINDOW in loc)
-			if(WINDOW.dir == get_dir(src, user))
-				to_chat(user, "<span class='notice'>There is a window in the way.</span>")
+	. = ..()
+	if(!.)
+		//grille placing
+		if(istype(W, /obj/item/stack/material/rods))
+			for(var/obj/structure/window/WINDOW in loc)
+				if(WINDOW.dir == get_dir(src, user))
+					to_chat(user, SPAN_WARNING("There is a window in the way."))
+					return TRUE
+			place_grille(user, loc, W)
+			return TRUE
+
+		//window placing
+		if(istype(W,/obj/item/stack/material))
+			var/obj/item/stack/material/ST = W
+			if(ST.material.opacity <= 0.7)
+				place_window(user, loc, SOUTHWEST, ST)
+			return TRUE
+
+		if(istype(W, /obj/item/gun/energy/plasmacutter))
+			var/obj/item/gun/energy/plasmacutter/cutter = W
+			if(!cutter.slice(user))
 				return
-		place_grille(user, loc, W)
-		return
-
-	//window placing
-	else if(istype(W,/obj/item/stack/material))
-		var/obj/item/stack/material/ST = W
-		if(ST.material.opacity > 0.7)
-			return 0
-		place_window(user, loc, SOUTHWEST, ST)
-
-	if(isWrench(W))
-		for(var/obj/structure/S in loc)
-			if(istype(S, /obj/structure/window))
-				to_chat(user, "<span class='notice'>There is still a window on the low wall!</span>")
-				return
-			else if(istype(S, /obj/structure/grille))
-				to_chat(user, "<span class='notice'>There is still a grille on the low wall!</span>")
-				return
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now disassembling the low wall...</span>")
-		if(do_after(user, 40,src))
-			to_chat(user, "<span class='notice'>You dissasembled the low wall!</span>")
-			dismantle()
-
-	else if(istype(W, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = W
-		if(!cutter.slice(user))
-			return
-		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now slicing through the low wall...</span>")
-		if(do_after(user, 20,src))
-			to_chat(user, "<span class='warning'>You have sliced through the low wall!</span>")
-			dismantle()
-	return ..()
+			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
+			visible_message(SPAN_NOTICE("\The [user] begins slicing through \the [src] with \the [W]."))
+			if(do_after(user, 20,src))
+				visible_message(SPAN_NOTICE("\The [user] slices \the [src] apart with \the [W]."))
+				dismantle()
+			return TRUE
 
 /obj/structure/wall_frame/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -158,7 +146,7 @@
 	take_damage(damage)
 	return
 
-/obj/structure/wall_frame/hitby(AM as mob|obj, var/datum/thrownthing/TT)
+/obj/structure/wall_frame/hitby(AM, var/datum/thrownthing/TT)
 	..()
 	var/tforce = 0
 	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm

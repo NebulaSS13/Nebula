@@ -197,13 +197,29 @@
 		var/dismantle_verb
 		var/dismantle_sound
 
-		if(istype(W,/obj/item/weldingtool))
+		if(isWelder(W))
+
+			if(material && !material.removed_by_welder)
+				to_chat(user, SPAN_WARNING("\The [src] is too delicate to be dismantled with \the [W]; try a crowbar."))
+				return TRUE
+
 			var/obj/item/weldingtool/WT = W
 			if(!WT.remove_fuel(0,user))
 				return
 			dismantle_verb = "cutting"
 			dismantle_sound = 'sound/items/Welder.ogg'
 			cut_delay *= 0.7
+
+		else if(isCrowbar(W))
+
+			if(material && material.removed_by_welder)
+				to_chat(user, SPAN_WARNING("\The [src] is too robust to be dismantled with \the [W]; try a welding tool."))
+				return TRUE
+
+			dismantle_verb = "dismantling"
+			dismantle_sound = 'sound/items/Crowbar.ogg'
+			cut_delay *= 1.2
+
 		else if(istype(W,/obj/item/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master) || istype(W, /obj/item/gun/energy/plasmacutter))
 			if(istype(W, /obj/item/gun/energy/plasmacutter))
 				var/obj/item/gun/energy/plasmacutter/cutter = W
