@@ -1,21 +1,12 @@
-GLOBAL_LIST_INIT(default_blend_objects,   list(/obj/machinery/door, /turf/simulated/wall))
-GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window))
-
 /obj/structure
 	icon = 'icons/obj/structures.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER
 
-	var/handle_generic_blending
-	var/dismantled = FALSE
 	var/breakable
 	var/parts_type
 	var/footstep_type
 	var/mob_offset
-
-	var/material/material
-	var/material/reinf_material
-	var/material_alteration
 
 /obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat)
 	if(ispath(_mat, /material))
@@ -31,42 +22,6 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window))
 		update_materials()
 	if(!CanFluidPass())
 		fluid_update()
-
-/obj/structure/get_material()
-	. = material
-
-/obj/structure/on_update_icon()
-	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-		update_material_colour()
-	overlays.Cut()
-
-/obj/structure/proc/update_materials(var/keep_health)
-	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
-		update_material_name()
-	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
-		update_material_desc()
-	queue_icon_update()
-
-/obj/structure/proc/update_material_name(var/override_name)
-	var/base_name = override_name || initial(name)
-	if(istype(material))
-		SetName("[material.display_name] [base_name]")
-	else
-		SetName(base_name)
-
-/obj/structure/proc/update_material_desc(var/override_desc)
-	var/base_desc = override_desc || initial(desc)
-	if(istype(material))
-		desc = "[base_desc] This one is made of [material.display_name]."
-	else
-		desc = base_desc
-
-/obj/structure/proc/update_material_colour(var/override_colour)
-	var/base_colour = override_colour || initial(color)
-	if(istype(material))
-		color = material.icon_colour
-	else
-		color = base_colour
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	if(wallbreaker && damage && breakable)
@@ -159,80 +114,3 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window))
 				return
 		if(3.0)
 			return
-
-/obj/structure/proc/can_visually_connect()
-	return anchored && handle_generic_blending
-
-/obj/structure/proc/can_visually_connect_to(var/obj/structure/S)
-	return istype(S, src)
-
-/obj/structure/proc/clear_connections()
-	return
-
-/obj/structure/proc/set_connections(dirs, other_dirs)
-	return
-
-/obj/structure/proc/refresh_neighbors()
-	for(var/thing in RANGE_TURFS(src, 1))
-		var/turf/T = thing
-		T.update_icon()
-
-/obj/structure/proc/find_blendable_obj_in_turf(var/turf/T, var/propagate)
-	if(is_type_in_list(T, GLOB.default_blend_objects))
-		if(propagate && istype(T, /turf/simulated/wall))
-			var/turf/simulated/wall/W = T
-			W.update_connections(1)
-		return TRUE
-	for(var/obj/O in T)
-		if(!is_type_in_list(O, GLOB.default_blend_objects))
-			continue
-		if(is_type_in_list(O, GLOB.default_noblend_objects))
-			continue
-		return TRUE
-	return FALSE
-
-/obj/structure/proc/update_connections(propagate = 0)
-
-	if(!can_visually_connect())
-		clear_connections()
-		return FALSE
-
-	var/list/dirs
-	var/list/other_dirs
-	for(var/direction in GLOB.alldirs)
-		var/turf/T = get_step(src, direction)
-		if(T)
-			for(var/obj/structure/S in T)
-				if(can_visually_connect_to(S) && S.can_visually_connect())
-					if(propagate)
-						S.update_connections()
-						S.update_icon()
-					LAZYADD(dirs, direction)
-			if((direction in GLOB.cardinal) && find_blendable_obj_in_turf(T, propagate))
-				LAZYDISTINCTADD(dirs, direction)
-				LAZYADD(other_dirs, direction)
-
-	refresh_neighbors()
-	set_connections(dirs, other_dirs)
-	return TRUE
-
-/obj/structure/proc/create_dismantled_products(var/turf/T)
-	if(parts_type)
-		new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
-	else 
-		if(material)
-			material.place_dismantled_product(T)
-		if(reinf_material)
-			reinf_material.place_dismantled_product(T)
-
-/obj/structure/proc/dismantle(var/do_not_destroy)
-	if(!dismantled)
-		dismantled = TRUE
-		reset_mobs_offset()
-		var/turf/T = get_turf(src)
-		if(T)
-			create_dismantled_products(T)
-			T.fluid_update()
-		if(!do_not_destroy && !QDELETED(src))
-			qdel(src)
-	. = TRUE
