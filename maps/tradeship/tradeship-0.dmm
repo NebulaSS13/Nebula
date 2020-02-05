@@ -1835,7 +1835,6 @@
 /area/space)
 "IG" = (
 /obj/structure/bed/chair/comfy/green{
-	icon_state = "comfychair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,

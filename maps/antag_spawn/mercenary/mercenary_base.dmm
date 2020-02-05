@@ -185,7 +185,6 @@
 /area/map_template/merc_shuttle)
 "aq" = (
 /obj/structure/bed/chair/shuttle/blue{
-	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /obj/structure/cable{
@@ -296,7 +295,6 @@
 /area/map_template/merc_shuttle)
 "az" = (
 /obj/structure/bed/chair/shuttle/blue{
-	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -334,7 +332,6 @@
 /area/map_template/merc_shuttle)
 "aC" = (
 /obj/structure/bed/chair/shuttle/blue{
-	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -514,7 +511,6 @@
 /area/map_template/merc_shuttle)
 "aP" = (
 /obj/structure/bed/chair/shuttle/blue{
-	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -2202,7 +2198,6 @@
 /area/map_template/merc_spawn)
 "jE" = (
 /obj/structure/bed/chair/shuttle/blue{
-	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /obj/machinery/recharger/wallcharger{

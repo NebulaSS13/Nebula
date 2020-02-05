@@ -251,7 +251,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/light,
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -262,7 +261,6 @@
 	level = 2
 	},
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -3900,7 +3898,6 @@
 	dir = 4
 	},
 /obj/structure/bed/chair/comfy/brown{
-	icon_state = "comfychair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -5807,7 +5804,6 @@
 /area/ship/scrap/crew/kitchen)
 "DL" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 1
 	},
 /obj/machinery/power/apc{
@@ -6429,7 +6425,6 @@
 /area/space)
 "Mb" = (
 /obj/structure/bed/chair/comfy/brown{
-	icon_state = "comfychair_preview";
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/beige{
@@ -6541,7 +6536,6 @@
 	pixel_x = 32
 	},
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -7012,7 +7006,6 @@
 	pixel_x = 24
 	},
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,

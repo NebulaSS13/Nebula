@@ -1566,7 +1566,6 @@
 	pixel_y = 32
 	},
 /obj/structure/bed/chair/office/light{
-	icon_state = "officechair_white_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1715,7 +1714,6 @@
 /area/map_template/hydrobase/station/processing)
 "ei" = (
 /obj/structure/bed/chair/office/light{
-	icon_state = "officechair_white_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,

@@ -1914,7 +1914,6 @@
 /area/outpost/abandoned)
 "ga" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -2362,7 +2361,6 @@
 /area/outpost/abandoned)
 "hk" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2377,7 +2375,6 @@
 /area/outpost/abandoned)
 "hm" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,

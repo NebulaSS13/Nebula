@@ -89,7 +89,7 @@
 	if(health <= 0)
 		dismantle()
 
-/obj/structure/barricade/dismantle(var/do_not_destroy)
+/obj/structure/barricade/dismantle()
 	visible_message(SPAN_DANGER("The barricade is smashed apart!"))
 	. = ..()
 

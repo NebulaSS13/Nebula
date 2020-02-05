@@ -206,12 +206,9 @@
 	if(health <= 0)
 		if(!destroyed)
 			visible_message("<span class='notice'>\The [src] falls to pieces!</span>")
-			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		else
-			if(health <= -6)
-				qdel(src)
-				return
-	return
+			cut_grille()
+		else if(health <= -6)
+			qdel(src)
 
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise

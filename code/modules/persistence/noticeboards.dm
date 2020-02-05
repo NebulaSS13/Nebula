@@ -69,7 +69,7 @@
 		if(!skip_icon_update)
 			update_icon()
 
-/obj/structure/noticeboard/dismantle(var/do_not_destroy)
+/obj/structure/noticeboard/dismantle()
 	for(var/thing in notices)
 		remove_paper(thing, skip_icon_update = TRUE)
 	. = ..()

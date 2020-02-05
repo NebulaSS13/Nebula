@@ -247,7 +247,7 @@
 	health = 250
 	cover = 70
 
-/obj/structure/girder/cult/dismantle(var/do_not_destroy)
+/obj/structure/girder/cult/dismantle()
 	material = null
 	reinf_material = null
 	parts_type = null

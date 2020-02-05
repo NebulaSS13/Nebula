@@ -37,35 +37,33 @@
 
 /obj/structure/bed/chair/on_update_icon()
 	..()
-	if(buckled_mob)
-		var/new_overlays
-		var/image/I = image(icon, "[icon_state]_over")
-		I.layer = ABOVE_HUMAN_LAYER
+	var/new_overlays
+	var/image/I = image(icon, "[icon_state]_over")
+	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+		I.appearance_flags |= RESET_COLOR
+		I.color = material.icon_colour
+	LAZYADD(new_overlays, I)
+	I = image(icon, "[icon_state]_armrest")
+	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+		I.appearance_flags |= RESET_COLOR
+		I.color = material.icon_colour
+	LAZYADD(new_overlays, I)
+	if(reinf_material)
+		I =  image(icon, "[icon_state]_padding_over")
+		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = material.icon_colour
+			I.color = reinf_material.icon_colour
 		LAZYADD(new_overlays, I)
-		if(reinf_material)
-			I =  image(icon, "[icon_state]_padding_over")
-			I.layer = ABOVE_HUMAN_LAYER
-			if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-				I.appearance_flags |= RESET_COLOR
-				I.color = reinf_material.icon_colour
-			LAZYADD(new_overlays, I)
-		I = image(icon, "[icon_state]_armrest")
-		I.layer = ABOVE_HUMAN_LAYER
+		I = image(icon, "[icon_state]_padding_armrest")
+		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = material.icon_colour
+			I.color = reinf_material.icon_colour
 		LAZYADD(new_overlays, I)
-		if(reinf_material)
-			I = image(icon, "[icon_state]_padding_armrest")
-			I.layer = ABOVE_HUMAN_LAYER
-			if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-				I.appearance_flags |= RESET_COLOR
-				I.color = reinf_material.icon_colour
-			LAZYADD(new_overlays, I)
-		overlays += new_overlays
+	overlays += new_overlays
 
 /obj/structure/bed/chair/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -138,9 +136,13 @@
 
 /obj/structure/bed/chair/comfy/captain/on_update_icon()
 	..()
-	var/image/I = image(icon, "[icon_state]_special")
-	I.layer = ABOVE_HUMAN_LAYER
-	overlays |= I
+	if(buckled_mob)
+		var/image/I = image(icon, "[icon_state]_special")
+		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+			I.appearance_flags |= RESET_COLOR
+			I.color = material.icon_colour
+		overlays |= I
 
 /obj/structure/bed/chair/armchair
 	name = "armchair"
@@ -258,10 +260,11 @@
 
 /obj/structure/bed/chair/shuttle/on_update_icon()
 	..()
-	if(!buckled_mob)
+	if(buckled_mob)
 		var/image/I = image(icon, "[icon_state]_special")
-		I.layer = ABOVE_HUMAN_LAYER
+		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+			I.appearance_flags |= RESET_COLOR
 			I.color = material.icon_colour
 		overlays |= I
 

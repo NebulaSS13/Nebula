@@ -42,7 +42,10 @@
 	return
 
 /obj/structure/Destroy()
-	dismantle(do_not_destroy = TRUE)
+	reset_mobs_offset()
+	var/turf/T = get_turf(src)
+	if(T)
+		T.fluid_update()
 	. = ..()
 
 /obj/structure/Crossed(mob/living/M)
