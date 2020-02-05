@@ -44,14 +44,10 @@
 		if(reinf_material)
 			reinf_material.place_dismantled_product(T)
 
-/obj/structure/proc/dismantle(var/do_not_destroy)
+/obj/structure/proc/dismantle()
 	if(!dismantled)
 		dismantled = TRUE
-		reset_mobs_offset()
-		var/turf/T = get_turf(src)
-		if(T)
-			create_dismantled_products(T)
-			T.fluid_update()
-		if(!do_not_destroy && !QDELETED(src))
+		create_dismantled_products(get_turf(src))
+		if(!QDELETED(src))
 			qdel(src)
 	. = TRUE

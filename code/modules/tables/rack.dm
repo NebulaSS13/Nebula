@@ -30,7 +30,7 @@
 /obj/structure/table/rack/can_connect()
 	return FALSE
 
-/obj/structure/table/rack/holorack/dismantle(var/do_not_destroy)
+/obj/structure/table/rack/holorack/dismantle()
 	material = null
 	reinf_material = null
 	parts_type = null
