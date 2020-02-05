@@ -1360,7 +1360,6 @@
 "dB" = (
 /obj/item/material/kitchen/utensil/fork,
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1514,7 +1513,6 @@
 /area/lost_supply_base/common)
 "ef" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,

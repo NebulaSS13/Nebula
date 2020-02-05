@@ -203,7 +203,6 @@
 /area/casino/casino_maintenance)
 "aE" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -211,7 +210,6 @@
 "aF" = (
 /obj/structure/bed/chair{
 	dir = 4;
-	icon_state = "chair_preview"
 	},
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled,
@@ -1086,7 +1084,6 @@
 "cS" = (
 /obj/structure/bed/chair{
 	dir = 4;
-	icon_state = "chair_preview"
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
@@ -1330,14 +1327,12 @@
 /area/casino/casino_cutter)
 "dG" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /obj/machinery/door/window,
 /obj/item/key,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1380;
-	id_tag = "casino_cutter";
 	pixel_y = 25
 	},
 /turf/simulated/floor/shuttle/yellow,
@@ -4721,7 +4716,6 @@
 /area/casino/casino_bow)
 "ml" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood/splatter,
@@ -5501,7 +5495,6 @@
 "Fb" = (
 /obj/structure/bed/chair{
 	dir = 4;
-	icon_state = "chair_preview"
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/structure/cable{

@@ -63,7 +63,6 @@
 "aj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/bed/chair/comfy/brown{
-	icon_state = "comfychair_preview";
 	dir = 1
 	},
 /obj/effect/landmark/deadcap,
@@ -128,7 +127,6 @@
 /area/ship/scrap/command/bridge)
 "au" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 1
 	},
 /obj/machinery/power/apc/derelict{
@@ -153,7 +151,6 @@
 	pixel_x = 32
 	},
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/usedup,
@@ -1855,7 +1852,6 @@
 	dir = 4
 	},
 /obj/structure/bed/chair/comfy/brown{
-	icon_state = "comfychair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/usedup,

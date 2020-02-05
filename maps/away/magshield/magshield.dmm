@@ -1518,7 +1518,6 @@
 /area/magshield/north)
 "dP" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/airless,

@@ -7862,7 +7862,6 @@
 /area/map_template/colony/jail)
 "nD" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/red{

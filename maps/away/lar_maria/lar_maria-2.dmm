@@ -1234,7 +1234,6 @@
 /area/lar_maria/dorms)
 "db" = (
 /obj/structure/bed/chair/comfy/black{
-	icon_state = "comfychair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/wood,
@@ -1280,7 +1279,6 @@
 /area/lar_maria/library)
 "dj" = (
 /obj/structure/bed/chair/office/light{
-	icon_state = "officechair_white_preview";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,

@@ -117,7 +117,6 @@
 /area/icarus/open)
 "aA" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /obj/effect/landmark/corpse/bridgeofficer,
@@ -203,7 +202,6 @@
 /area/icarus/vessel)
 "aR" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -612,7 +610,6 @@
 /area/icarus/vessel)
 "cf" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /obj/effect/landmark/corpse/engineer,
@@ -1521,7 +1518,6 @@
 /area/icarus/open)
 "eK" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/white,
