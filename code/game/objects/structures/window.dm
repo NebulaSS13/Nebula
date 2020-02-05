@@ -42,12 +42,16 @@
 		if(reinf_material)
 			maxhealth += 0.5 * reinf_material.integrity
 		health = maxhealth
-	
-/obj/structure/window/Initialize()
-	. = ..()
+
+/obj/structure/window/Initialize(var/ml, var/dir_to_set, var/anchored, var/_mat, var/_reinf_mat)
+	. = ..(ml, _mat, _reinf_mat)
 	if(!istype(material))
 		. = INITIALIZE_HINT_QDEL
 	if(. != INITIALIZE_HINT_QDEL)
+		if(!isnull(anchored))
+			set_anchored(anchored)
+		if(!isnull(dir_to_set))
+			set_dir(dir_to_set)
 		if(is_fulltile())
 			layer = FULL_WINDOW_LAYER
 		. = INITIALIZE_HINT_LATELOAD
