@@ -81,7 +81,7 @@
 			return TRUE
 		bag.finish_bulk_removal()
 
-		if(!LAZYLEN(O.contents))
+		if(!length(O.contents))
 			to_chat(user, "You empty \the [O] into \the [src].")
 		else
 			to_chat(user, "You fill \the [src] from \the [O].")
@@ -118,11 +118,6 @@
 	return GLOB.physical_state
 
 /obj/machinery/reagentgrinder/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if(inoperable())
-		to_chat(user, SPAN_WARNING("\The [src] is too broken to use."))
-		return FALSE
-	user.set_machine(src)
-
 	var/list/data = list()
 	data["inuse"] = inuse
 	data["beaker"] = !!beaker
@@ -153,6 +148,11 @@
 				detach()
 		return TOPIC_REFRESH
 	return TOPIC_NOACTION
+
+/obj/machinery/reagentgrinder/CouldNotUseTopic(mob/user)
+	. = ..()
+	if(inoperable())
+		to_chat(user, SPAN_WARNING("\The [src] is too broken to use."))
 
 /obj/machinery/reagentgrinder/proc/detach()
 	if (!beaker)
@@ -245,18 +245,20 @@
 	else
 		user.take_blood(beaker, dam)
 	user.Stun(2)
-	addtimer(CALLBACK(src, .proc/shake, user, 40), 0)
+	shake(user, 40)
 
 /obj/machinery/reagentgrinder/proc/shake(mob/user, duration)
 	if(!user)
-		return FALSE
-	if((!Adjacent(user) || duration <= 0) && !user.is_jittery)
-		user.do_jitter(0) //resets the icon.
-		return FALSE
-	if(!user.is_jittery)
-		user.do_jitter(4)
+		return
+	for(var/i = 1 to duration)
+		sleep(1)
+		if(!Adjacent(user))
+			break
+		if(!user.is_jittery)
+			user.do_jitter(4)
 
-	addtimer(CALLBACK(src, .proc/shake, user, --duration), 1, TIMER_UNIQUE)
+	if(!user.is_jittery)
+		user.do_jitter(0)
 
 /obj/machinery/reagentgrinder/juicer
 	name = "blender"
