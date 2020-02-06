@@ -554,7 +554,7 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "by" = (
-/obj/structure/ladder/up,
+/obj/structure/ladder,
 /turf/simulated/floor,
 /area/unishi/engineering)
 "bz" = (

@@ -3439,7 +3439,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/structure/ladder/updown,
+/obj/structure/ladder,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/engineering)
 "ik" = (
@@ -5139,7 +5139,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/structure/ladder/up,
+/obj/structure/ladder,
 /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
 	dir = 1
 	},

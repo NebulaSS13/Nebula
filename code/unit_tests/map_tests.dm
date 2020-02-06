@@ -303,39 +303,23 @@ datum/unit_test/ladder_check
 	name = "MAP: Ladder Check"
 
 datum/unit_test/ladder_check/start_test()
-	var/succeeded = TRUE
+	var/failed
 	for(var/obj/structure/ladder/L)
-		if(L.allowed_directions & UP)
-			succeeded = check_direction(L, GetAbove(L), UP, DOWN) && succeeded
-		if(L.allowed_directions & DOWN)
-			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded
-			succeeded = check_open_space(L) && succeeded
-	if(succeeded)
-		pass("All ladders are correctly setup.")
+		if(HasAbove(L.z))
+			var/turf/T = GetAbove(L)
+			if(!istype(T, /turf/simulated/open) && (locate(/obj/structure/ladder) in T))
+				LAZYADD(failed, "[L.x],[L.y],[L.z]")
+				continue
+		if(HasBelow(L.z))
+			var/turf/T = GetBelow(L)
+			if(!istype(L.loc, /turf/simulated/open) && (locate(/obj/structure/ladder) in T))
+				LAZYADD(failed, "[L.x],[L.y],[L.z]")
+				continue
+	if(LAZYLEN(failed))
+		fail("[LAZYLEN(failed)] ladder\s are incorrectly setup: [english_list(failed)].")
 	else
-		fail("One or more ladders are incorrectly setup.")
-
+		pass("All ladders are correctly setup.")
 	return 1
-
-/datum/unit_test/ladder_check/proc/check_direction(var/obj/structure/ladder/L, var/turf/destination_turf, var/check_direction, var/other_ladder_direction)
-	if(!destination_turf)
-		log_bad("Unable to acquire turf in the [dir2text(check_direction)] for [log_info_line(L)]")
-		return FALSE
-	var/obj/structure/ladder/other_ladder = (locate(/obj/structure/ladder) in destination_turf)
-	if(!other_ladder)
-		log_bad("Unable to acquire ladder in the direction [dir2text(check_direction)] for [log_info_line(L)]")
-		return FALSE
-	if(!(other_ladder.allowed_directions & other_ladder_direction))
-		log_bad("The ladder in the direction [dir2text(check_direction)] is not allowed to connect to [log_info_line(L)]")
-		return FALSE
-	return TRUE
-
-/datum/unit_test/ladder_check/proc/check_open_space(var/obj/structure/ladder/L)
-	if(!istype(get_turf(L), /turf/simulated/open))
-		log_bad("There is a non-open turf blocking the way for [log_info_line(L)]")
-		return FALSE
-	return TRUE
-
 
 //=======================================================================================
 

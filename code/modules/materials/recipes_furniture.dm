@@ -185,6 +185,14 @@ ARMCHAIR(yellow)
 	req_amount = 5
 	time = 25
 
+/datum/stack_recipe/furniture/ladder
+	title = "ladder"
+	result_type = /obj/structure/ladder
+	req_amount = 5
+	time = 50
+	one_per_turf = TRUE
+	on_floor = FALSE
+
 /datum/stack_recipe/furniture/girder
 	title = "wall support"
 	result_type = /obj/structure/girder

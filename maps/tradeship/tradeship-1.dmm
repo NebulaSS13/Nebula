@@ -458,7 +458,7 @@
 	icon_state = "bulb1";
 	dir = 4
 	},
-/obj/structure/ladder/up,
+/obj/structure/ladder,
 /obj/effect/decal/cleanable/cobweb,
 /obj/structure/sign/deck/second{
 	pixel_x = -32
@@ -1795,7 +1795,7 @@
 	icon_state = "bulb1";
 	dir = 1
 	},
-/obj/structure/ladder/up,
+/obj/structure/ladder,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/sign/deck/second{
 	pixel_x = 0;
@@ -3066,7 +3066,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/cargo/lower)
 "HH" = (
-/obj/structure/ladder/up,
+/obj/structure/ladder,
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
 	dir = 6
