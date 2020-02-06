@@ -13,8 +13,8 @@
 	var/dried_type = null
 	var/dry = 0
 	var/nutriment_amt = 0
-	var/nutriment_type = /datum/reagent/nutriment
-	var/list/nutriment_desc = list("food" = 1)
+	var/nutriment_type = /datum/reagent/nutriment //Right now, used primarily to tell yinglets if its bread or clams
+	var/list/nutriment_desc = list("food" = 1) // List of flavours and flavour strengths. The flavour strength text is determined by the ratio of flavour strengths in the snack.
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
 	center_of_mass = @"{'x':16,'y':16}"
 	w_class = ITEM_SIZE_SMALL
@@ -240,14 +240,14 @@
 
 
 /obj/item/chems/food/snacks/aesirsalad
-	name = "\improper Aesir salad"
+	name = "\improper Aether salad"
 	desc = "Probably too incredible for mortal men to fully enjoy."
 	icon_state = "aesirsalad"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#468c00"
 	center_of_mass = @"{'x':17,'y':11}"
 	nutriment_amt = 8
-	nutriment_desc = list("apples" = 3,"salad" = 5)
+	nutriment_desc = list("apples" = 3,"salad" = 4, "quintessence" = 2)
 	bitesize = 3
 /obj/item/chems/food/snacks/aesirsalad/Initialize()
 	.=..()
@@ -373,7 +373,7 @@
 	filling_color = "#fffee0"
 	center_of_mass = @"{'x':17,'y':10}"
 //	nutriment_amt = 3
-	nutriment_desc = list("tofu" = 3, "goeyness" = 3)
+	nutriment_desc = list("tofu" = 3, "softness" = 3)
 	bitesize = 3
 
 /obj/item/chems/food/snacks/tofu/Initialize()
@@ -387,7 +387,7 @@
 	filling_color = "#fffee0"
 	center_of_mass = @"{'x':16,'y':8}"
 	nutriment_amt = 12
-	nutriment_desc = list("turkey" = 3, "tofu" = 5, "goeyness" = 4)
+	nutriment_desc = list("turkey" = 3, "tofu" = 5, "softness" = 4)
 	bitesize = 3
 
 /obj/item/chems/food/snacks/stuffing
@@ -917,18 +917,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
-/obj/item/chems/food/snacks/wingfangchu
-	name = "\improper Wing Fang Chu"
-	desc = "A savory dish of alien wing wang in soy."
-	icon_state = "wingfangchu"
-	trash = /obj/item/trash/snack_bowl
-	filling_color = "#43de18"
-	center_of_mass = @"{'x':17,'y':9}"
-	bitesize = 2
-/obj/item/chems/food/snacks/wingfangchu/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
-
 /obj/item/chems/food/snacks/meatkabob
 	name = "meat-kabob"
 	icon_state = "kabob"
@@ -992,8 +980,8 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
 
 /obj/item/chems/food/snacks/fries
-	name = "space fries"
-	desc = "AKA: French Fries, Freedom Fries, etc."
+	name = "chips"
+	desc = "Frenched potato, fried."
 	icon_state = "fries"
 	trash = /obj/item/trash/plate
 	filling_color = "#eddd00"
@@ -1118,13 +1106,13 @@
 	reagents.add_reagent(/datum/reagent/nutriment/garlicsauce, 2)
 
 /obj/item/chems/food/snacks/spacylibertyduff
-	name = "spacy liberty duff"
-	desc = "Jello gelatin, from Alfred Hubbard's cookbook."
+	name = "party jelly"
+	desc = "LoOk aT aLl tHe PrEtTy CoLoUrS"
 	icon_state = "spacylibertyduff"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#42b873"
 	center_of_mass = @"{'x':16,'y':8}"
-	nutriment_desc = list("mushroom" = 6)
+	nutriment_desc = list("mushroom" = 5, "rainbow" = 1)
 	nutriment_amt = 6
 	bitesize = 3
 /obj/item/chems/food/snacks/spacylibertyduff/Initialize()
@@ -1318,12 +1306,12 @@
 
 /obj/item/chems/food/snacks/hotchili
 	name = "hot chili"
-	desc = "A five alarm Texan chili!"
+	desc = "Sound the fire alarm!"
 	icon_state = "hotchili"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#ff3c00"
 	center_of_mass = @"{'x':15,'y':9}"
-	nutriment_desc = list("chilli peppers" = 3)
+	nutriment_desc = list("chilli peppers" = 2, "burning" = 1)
 	nutriment_amt = 3
 	bitesize = 5
 /obj/item/chems/food/snacks/hotchili/Initialize()
@@ -1418,7 +1406,7 @@
 
 /obj/item/chems/food/snacks/spellburger
 	name = "spell burger"
-	desc = "This is absolutely Ei Nath."
+	desc = "This is absolutely magical."
 	icon_state = "spellburger"
 	filling_color = "#d505ff"
 	nutriment_desc = list("magic" = 3, "buns" = 3)
@@ -1440,7 +1428,7 @@
 
 /obj/item/chems/food/snacks/enchiladas
 	name = "enchiladas"
-	desc = "Viva La Space Mexico!"
+	desc = "Not to be confused with an echidna, though I don't know how you would."
 	icon_state = "enchiladas"
 	trash = /obj/item/trash/tray
 	filling_color = "#a36a1f"
@@ -1470,11 +1458,11 @@
 
 /obj/item/chems/food/snacks/baguette
 	name = "baguette"
-	desc = "Bon appetit!"
+	desc = "Good for pretend sword fights."
 	icon_state = "baguette"
 	filling_color = "#e3d796"
 	center_of_mass = @"{'x':18,'y':12}"
-	nutriment_desc = list("french bread" = 6)
+	nutriment_desc = list("long bread" = 6)
 	nutriment_amt = 6
 	bitesize = 3
 	nutriment_type = /datum/reagent/nutriment/bread
@@ -1486,11 +1474,11 @@
 
 /obj/item/chems/food/snacks/fishandchips
 	name = "fish and chips"
-	desc = "I do say so myself chap."
+	desc = "Best enjoyed wrapped in a newspaper on a cold wet day."
 	icon_state = "fishandchips"
 	filling_color = "#e3d796"
 	center_of_mass = @"{'x':16,'y':16}"
-	nutriment_desc = list("salt" = 1, "chips" = 3)
+	nutriment_desc = list("salt" = 1, "chips" = 2, "fish" = 2)
 	nutriment_amt = 3
 	bitesize = 3
 /obj/item/chems/food/snacks/fishandchips/Initialize()
@@ -1499,7 +1487,7 @@
 
 /obj/item/chems/food/snacks/sandwich
 	name = "sandwich"
-	desc = "A grand creation of meat, cheese, bread, and several leaves of lettuce! Arthur Dent would be proud."
+	desc = "A grand creation of meat, cheese, bread, and several leaves of lettuce!"
 	icon_state = "sandwich"
 	trash = /obj/item/trash/plate
 	filling_color = "#d9be29"
@@ -1562,8 +1550,8 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 10)
 
 /obj/item/chems/food/snacks/rofflewaffles
-	name = "roffle waffles"
-	desc = "Waffles from Roffle. Co."
+	name = "waffles(?)"
+	desc = "There's something funny about these waffles."
 	icon_state = "rofflewaffles"
 	trash = /obj/item/trash/waffles
 	filling_color = "#ff00f7"
@@ -1661,7 +1649,7 @@
 
 /obj/item/chems/food/snacks/boiledspagetti
 	name = "boiled spaghetti"
-	desc = "A plain dish of noodles, this sucks."
+	desc = "A plain dish of pasta, just screaming for sauce."
 	icon_state = "spagettiboiled"
 	trash = /obj/item/trash/plate
 	filling_color = "#fcee81"
@@ -1672,7 +1660,7 @@
 
 /obj/item/chems/food/snacks/boiledrice
 	name = "boiled rice"
-	desc = "A boring dish of boring rice."
+	desc = "White rice, a very important staple food. Goes excellent with many many things."
 	icon_state = "boiledrice"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#fffbdb"
@@ -1713,7 +1701,7 @@
 
 /obj/item/chems/food/snacks/pastatomato
 	name = "spaghetti & tomato"
-	desc = "Spaghetti and crushed tomatoes. Just like your abusive father used to make!"
+	desc = "Spaghetti and crushed tomatoes."
 	icon_state = "pastatomato"
 	trash = /obj/item/trash/plate
 	filling_color = "#de4545"
@@ -1740,7 +1728,7 @@
 
 /obj/item/chems/food/snacks/meatballspagetti
 	name = "spaghetti & meatballs"
-	desc = "Now thats a nic'e meatball!"
+	desc = "Now thats a nice meatball!"
 	icon_state = "meatballspagetti"
 	trash = /obj/item/trash/plate
 	filling_color = "#de4545"
@@ -1753,8 +1741,8 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/spesslaw
-	name = "\improper Spesslaw"
-	desc = "A lawyers favourite."
+	name = "spaghetti & too many meatballs"
+	desc = "Do you want some pasta with those meatballs?"
 	icon_state = "spesslaw"
 	filling_color = "#de4545"
 	center_of_mass = @"{'x':16,'y':10}"
@@ -1866,16 +1854,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/cherryjelly, 5)
 
-/obj/item/chems/food/snacks/boiledslimecore
-	name = "boiled slime core"
-	desc = "A boiled red thing."
-	icon_state = "boiledslimecore"//nonexistant?
-	bitesize = 3
-/obj/item/chems/food/snacks/boiledslimecore/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/slimejelly, 5)
-
-
 /obj/item/chems/food/snacks/mint
 	name = "mint"
 	desc = "A tasty after-dinner mint. It is only wafer thin."
@@ -1902,7 +1880,7 @@
 
 /obj/item/chems/food/snacks/plumphelmetbiscuit
 	name = "plump helmet biscuit"
-	desc = "This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced dwarven wheat flour."
+	desc = "This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced wheat flour."
 	icon_state = "phelmbiscuit"
 	filling_color = "#cfb4c4"
 	center_of_mass = @"{'x':16,'y':13}"
@@ -2142,7 +2120,7 @@
 
 /obj/item/chems/food/snacks/sliceable/carrotcake
 	name = "carrot cake"
-	desc = "A favorite desert of a certain wascally wabbit. Not a lie."
+	desc = "A favorite desert of sophisticated rabbits."
 	icon_state = "carrotcake"
 	slice_path = /obj/item/chems/food/snacks/slice/carrotcake
 	slices_num = 5
@@ -2159,7 +2137,7 @@
 
 /obj/item/chems/food/snacks/slice/carrotcake
 	name = "carrot cake slice"
-	desc = "Carrotty slice of carrot cake, carrots are good for your eyes! Also not a lie."
+	desc = "Carrotty slice of carrot cake, carrots are good for your eyes! It's true! Probably!"
 	icon_state = "carrotcake_slice"
 	trash = /obj/item/trash/plate
 	filling_color = "#ffd675"
@@ -2232,7 +2210,7 @@
 
 /obj/item/chems/food/snacks/sliceable/plaincake
 	name = "vanilla cake"
-	desc = "A plain cake, not a lie."
+	desc = "A plain cake, but a good cake."
 	icon_state = "plaincake"
 	slice_path = /obj/item/chems/food/snacks/slice/plaincake
 	slices_num = 5
@@ -2412,7 +2390,7 @@
 
 /obj/item/chems/food/snacks/sliceable/bread
 	name = "bread"
-	desc = "Some plain old Earthen bread."
+	desc = "Some plain old bread."
 	icon_state = "bread"
 	slice_path = /obj/item/chems/food/snacks/slice/bread
 	slices_num = 5
@@ -2629,7 +2607,7 @@
 
 /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza
 	name = "vegetable pizza"
-	desc = "No one of Tomato Sapiens were harmed during making this pizza."
+	desc = "Vegetarian pizza huh? What about all the plants that were slaughtered to make this huh?? Hypocrite."
 	icon_state = "vegetablepizza"
 	slice_path = /obj/item/chems/food/snacks/slice/vegetablepizza
 	slices_num = 6
@@ -3111,7 +3089,7 @@
 
 /obj/item/chems/food/snacks/rawsticks
 	name = "raw potato sticks"
-	desc = "Raw fries, not very tasty."
+	desc = "Uncooked potato stick, not very tasty."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawsticks"
 	bitesize = 2
@@ -3156,7 +3134,7 @@
 /obj/item/chems/food/snacks/canned/beef
 	name = "quadrangled beefium"
 	icon_state = "beef"
-	desc = "Proteins carefully cloned from extinct stock of holstein in the meat foundries of Mars."
+	desc = "Proteins carefully cloned from an extinct species of cattle in a secret facility on the outer rim."
 	trash = /obj/item/trash/beef
 	filling_color = "#663300"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3169,7 +3147,7 @@
 /obj/item/chems/food/snacks/canned/beans
 	name = "baked beans"
 	icon_state = "beans"
-	desc = "Luna Colony beans. Carefully synthethized from soy."
+	desc = "Carefully synthethized from soy."
 	trash = /obj/item/trash/beans
 	filling_color = "#ff6633"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3180,7 +3158,7 @@
 /obj/item/chems/food/snacks/canned/tomato
 	name = "tomato soup"
 	icon_state = "tomato"
-	desc = "Plain old unseasoned tomato soup. This can predates the formation of the SCG."
+	desc = "Plain old unseasoned tomato soup. This can is older than you are!"
 	trash = /obj/item/trash/tomato
 	filling_color = "#ae0000"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3199,11 +3177,11 @@
 /obj/item/chems/food/snacks/canned/spinach
 	name = "spinach"
 	icon_state = "spinach"
-	desc = "Wup-Az! Brand canned spinach. Notably has less iron in it than a watermelon."
+	desc = "Notably has less iron in it than a watermelon."
 	trash = /obj/item/trash/spinach
 	filling_color = "#003300"
 	center_of_mass = @"{'x':15,'y':9}"
-	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
+	nutriment_desc = list("sogginess" = 1, "vegetable" = 1)
 	bitesize = 20
 /obj/item/chems/food/snacks/canned/spinach/Initialize()
 	.=..()
@@ -3215,9 +3193,9 @@
 //Vending Machine Foods should go here.
 
 /obj/item/chems/food/snacks/canned/caviar
-	name = "\improper Terran Caviar"
+	name = "canned caviar"
 	icon_state = "fisheggs"
-	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt."
+	desc = "Caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt."
 	trash = /obj/item/trash/fishegg
 	filling_color = "#000000"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3226,9 +3204,9 @@
 	bitesize = 1
 
 /obj/item/chems/food/snacks/canned/caviar/true
-	name = "\improper Terran Caviar"
+	name = "canned caviar"
 	icon_state = "carpeggs"
-	desc = "Terran caviar, or space carp eggs. Banned by the Sol Food Health Administration for exceeding the legally set amount of carpotoxins in food stuffs."
+	desc = "Caviar, or space carp eggs. Exceeds the recomended amount of heavy metals in your diet! But very posh."
 	trash = /obj/item/trash/carpegg
 	filling_color = "#330066"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3241,9 +3219,9 @@
 	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 1)
 
 /obj/item/chems/food/snacks/sosjerky
-	name = "\improper Scaredy's Private Reserve Beef Jerky"
+	name = "emergency meat jerky"
 	icon_state = "sosjerky"
-	desc = "Beef jerky made from the finest space cows."
+	desc = "For when you desperately want meat and you don't care what kind. Has the same texture as old leather boots."
 	trash = /obj/item/trash/sosjerky
 	filling_color = "#631212"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3253,9 +3231,9 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/no_raisin
-	name = "\improper 4no Raisins"
+	name = "raisins"
 	icon_state = "4no_raisins"
-	desc = "Best raisins in the universe. Not sure why."
+	desc = "Pouring water on these will not turn them back into grapes, unfortunately."
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
 	center_of_mass = @"{'x':15,'y':4}"
@@ -3263,9 +3241,9 @@
 	nutriment_amt = 6
 
 /obj/item/chems/food/snacks/spacetwinkie
-	name = "\improper Space Eclair"
+	name = "eclair"
 	icon_state = "space_twinkie"
-	desc = "Guaranteed to survive longer then you will."
+	desc = "So full of preservatives, it's guaranteed to survive longer then you will."
 	filling_color = "#ffe591"
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
@@ -3275,9 +3253,9 @@
 
 
 /obj/item/chems/food/snacks/cheesiehonkers
-	name = "\improper Cheesie Honkers"
+	name = "cheese puffs"
 	icon_state = "cheesie_honkers"
-	desc = "Bite sized cheesie snacks that will honk all over your mouth."
+	desc = "Bite sized cheese flavoured snacks that will leave your fingers coated in cheese dust."
 	trash = /obj/item/trash/cheesie
 	filling_color = "#ffa305"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3286,12 +3264,12 @@
 	bitesize = 2
 
 /obj/item/chems/food/snacks/syndicake
-	name = "\improper Syndi-Cakes"
+	name = "scav cakes"
 	icon_state = "syndi_cakes"
-	desc = "An extremely moist snack cake that tastes just as good after being nuked."
+	desc = "Made using extremely unethical labour, ingredients and marketing methods. Guess what it's made from?"
 	filling_color = "#ff5d05"
 	center_of_mass = @"{'x':16,'y':10}"
-	nutriment_desc = list("sweetness" = 3, "cake" = 1)
+	nutriment_desc = list("sweetness" = 3, "cake" = 1, "something that you hope is not yinglet" = 1)
 	nutriment_amt = 4
 	trash = /obj/item/trash/syndi_cakes
 	bitesize = 3
@@ -3315,9 +3293,9 @@
 	bitesize = 0.5
 
 /obj/item/chems/food/snacks/semki
-	name = "\improper Semki"
+	name = "sunflower seeds"
 	icon_state = "semki"
-	desc = "Sunflower seeds. A favorite among both birds and gopniks."
+	desc = "A favorite among birds."
 	trash = /obj/item/trash/semki
 	filling_color = "#68645d"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3340,9 +3318,9 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/croutons
-	name = "\improper Suhariki"
+	name = "croutons"
 	icon_state = "croutons"
-	desc = "Fried bread cubes. Popular in Terran territories."
+	desc = "Fried bread cubes. Good in salad but I guess you can just eat them as is."
 	trash = /obj/item/trash/croutons
 	filling_color = "#c6b17f"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3352,7 +3330,7 @@
 	nutriment_type = /datum/reagent/nutriment/bread
 
 /obj/item/chems/food/snacks/salo
-	name = "\improper Salo"
+	name = "salo"
 	icon_state = "salo"
 	desc = "Pig fat. Salted. Just as good as it sounds."
 	trash = /obj/item/trash/salo
@@ -3366,7 +3344,7 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
 
 /obj/item/chems/food/snacks/driedfish
-	name = "\improper Vobla"
+	name = "vobla"
 	icon_state = "driedfish"
 	desc = "Dried salted beer snack fish."
 	trash = /obj/item/trash/driedfish
@@ -3432,7 +3410,7 @@
 
 /obj/item/chems/food/snacks/candy/proteinbar
 	name = "protein bar"
-	desc = "SwoleMAX brand protein bars, guaranteed to get you feeling perfectly overconfident."
+	desc = "MuscleLopin brand protein bars, guaranteed to get you soSO strong!"
 	icon_state = "proteinbar"
 	trash = /obj/item/trash/candy/proteinbar
 	bitesize = 6
@@ -3455,7 +3433,7 @@
 
 /obj/item/chems/food/snacks/candy_corn
 	name = "candy corn"
-	desc = "It's a handful of candy corn. Cannot be stored in a detective's hat, alas."
+	desc = "It's a handful of candy corn. Not actually candied corn."
 	icon_state = "candy_corn"
 	filling_color = "#fffcb0"
 	center_of_mass = @"{'x':14,'y':10}"
@@ -3469,7 +3447,7 @@
 
 /obj/item/chems/food/snacks/chips
 	name = "chips"
-	desc = "Commander Riker's What-The-Crisps."
+	desc = "It is impossible to open the packet without rustling it loudly."
 	icon_state = "chips"
 	trash = /obj/item/trash/chips
 	filling_color = "#e8c31e"
@@ -3638,9 +3616,9 @@
 //Sol Vendor
 
 obj/item/chems/food/snacks/lunacake
-	name = "\improper Luna Cake"
+	name = "moon cake"
 	icon_state = "lunacake_wrapped"
-	desc = "Now with 20% less lawsuit enabling rhegolith!"
+	desc = "Now with 20% less lawsuit enabling regolith!"
 	trash = /obj/item/trash/cakewrap
 	filling_color = "#ffffff"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3650,14 +3628,14 @@ obj/item/chems/food/snacks/lunacake
 	nutriment_type = /datum/reagent/nutriment/bread/cake
 
 obj/item/chems/food/snacks/lunacake/mochicake
-	name = "\improper Mochi Cake"
+	name = "mochi"
 	icon_state = "mochicake_wrapped"
-	desc = "Konnichiwa! Many go lucky rice cakes in future!"
+	desc = "A type of rice cake with an extremely soft, glutinous texture."
 	trash = /obj/item/trash/mochicakewrap
 	nutriment_desc = list("sweet" = 4, "rice" = 1)
 
 obj/item/chems/food/snacks/lunacake/mooncake
-	name = "\improper Dark Side Luna Cake"
+	name = "dark side moon cake"
 	icon_state = "mooncake_wrapped"
 	desc = "Explore the dark side! May contain trace amounts of reconstituted cocoa."
 	trash = /obj/item/trash/mooncakewrap
@@ -3672,12 +3650,12 @@ obj/item/chems/food/snacks/triton
 	trash = /obj/item/trash/tidegobs
 	filling_color = "#2556b0"
 	center_of_mass = @"{'x':15,'y':9}"
-	nutriment_desc = list("salt" = 4, "seagull?" = 1)
+	nutriment_desc = list("salt" = 4, "ocean" = 1, "seagull" = 1)
 	nutriment_amt = 5
 	bitesize = 2
 
 obj/item/chems/food/snacks/saturn
-	name = "\improper Saturn-Os"
+	name = "snack rings"
 	icon_state = "saturno"
 	desc = "A day ration of salt, styrofoam and possibly sawdust."
 	trash = /obj/item/trash/saturno
@@ -3688,31 +3666,31 @@ obj/item/chems/food/snacks/saturn
 	bitesize = 2
 
 obj/item/chems/food/snacks/jupiter
-	name = "\improper Jove Gello"
+	name = "probably gelatin"
 	icon_state = "jupiter"
-	desc = "By Joove! It's some kind of gel."
+	desc = "Some kind of gel, maybe?"
 	trash = /obj/item/trash/jupiter
 	filling_color = "#dc1919"
 	center_of_mass = @"{'x':15,'y':9}"
-	nutriment_desc = list("sweet" = 4, "vanilla?" = 1)
+	nutriment_desc = list("jelly?" = 5)
 	nutriment_amt = 5
 	bitesize = 2
 
 obj/item/chems/food/snacks/pluto
-	name = "\improper Plutonian Rods"
+	name = "nutrient rods"
 	icon_state = "pluto"
-	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
+	desc = "Baseless tasteless nutrient rods to get you through the day. Now even less rash inducing!"
 	trash = /obj/item/trash/pluto
 	filling_color = "#ffffff"
 	center_of_mass = @"{'x':15,'y':9}"
-	nutriment_desc = list("chalk" = 4, "sad?" = 1)
+	nutriment_desc = list("chalk" = 4, "sadness" = 1)
 	nutriment_amt = 5
 	bitesize = 2
 
 obj/item/chems/food/snacks/mars
-	name = "\improper Frouka"
+	name = "instant potato and eggs"
 	icon_state = "mars"
-	desc = "Celebrate founding day with a steaming self-heated bowl of sweet eggs and taters!"
+	desc = "A steaming self-heated bowl of sweet eggs and taters!"
 	trash = /obj/item/trash/mars
 	filling_color = "#d2c63f"
 	center_of_mass = @"{'x':15,'y':9}"
@@ -3721,13 +3699,13 @@ obj/item/chems/food/snacks/mars
 	bitesize = 2
 
 obj/item/chems/food/snacks/venus
-	name = "\improper Venusian Hot Cakes"
+	name = "hot cakes"
 	icon_state = "venus"
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
 	trash = /obj/item/trash/venus
 	filling_color = "#d2c63f"
 	center_of_mass = @"{'x':15,'y':9}"
-	nutriment_desc = list("heat" = 4, "burning!" = 1)
+	nutriment_desc = list("heat" = 4, "burning" = 1)
 	nutriment_amt = 5
 	bitesize = 2
 	nutriment_type = /datum/reagent/nutriment/bread/cake
@@ -3737,13 +3715,13 @@ obj/item/chems/food/snacks/venus
 	reagents.add_reagent(/datum/reagent/capsaicin = 5)
 
 obj/item/chems/food/snacks/oort
-	name = "\improper Oort Cloud Rocks"
+	name = "\improper Cloud Rocks"
 	icon_state = "oort"
-	desc = "Pop rocks themed on the most important industrial sector in Sol, new formula guarantees fewer shrapnel induced oral injury."
+	desc = "Pop rocks. The new formula guarantees fewer shrapnel induced oral injuries."
 	trash = /obj/item/trash/oort
 	filling_color = "#3f7dd2"
 	center_of_mass = @"{'x':15,'y':9}"
-	nutriment_desc = list("fizz" = 4, "sweet?" = 1)
+	nutriment_desc = list("fizz" = 3, "sweet?" = 1, "shrapnel" = 1)
 	nutriment_amt = 5
 	bitesize = 2
 /obj/item/chems/food/snacks/oort/Initialize()
@@ -3753,27 +3731,26 @@ obj/item/chems/food/snacks/oort
 //weebo vend! So japanese it hurts
 
 obj/item/chems/food/snacks/ricecake
-	name = "rice cake"
+	name = "rice ball"
 	icon_state = "ricecake"
-	desc = "Ancient earth snack food made from balled up rice."
-	nutriment_desc = list("rice" = 4, "sweet?" = 1)
+	desc = "A snack food made from balled up rice."
+	nutriment_desc = list("rice" = 3, "sweet" = 1, "seaweed" = 1)
 	nutriment_amt = 5
 	bitesize = 2
-	nutriment_type = /datum/reagent/nutriment/bread/cake
 
 obj/item/chems/food/snacks/pokey
-	name = "pokeys"
+	name = "chocolate coated biscuit sticks"
 	icon_state = "pokeys"
-	desc = "A bundle of chocolate coated bisquit sticks."
-	nutriment_desc = list("chocolate" = 4, "bisquit" = 1)
+	desc = "A bundle of chocolate coated biscuit sticks. Not as exciting as they seem."
+	nutriment_desc = list("chocolate" = 1, "biscuit" = 2, "cardboard" = 2)
 	nutriment_amt = 5
 	bitesize = 2
 
 obj/item/chems/food/snacks/weebonuts
-	name = "\improper Red Alert Nuts!"
+	name = "spicy nuts"
 	icon_state = "weebonuts"
 	trash = /obj/item/trash/weebonuts
-	desc = "A bag of Red Alert! brand spicy nuts. Goes well with your beer!"
+	desc = "A bag of spicy nuts. Goes well with beer!"
 	nutriment_desc = list("nuts" = 4, "spicy!" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -3782,11 +3759,11 @@ obj/item/chems/food/snacks/weebonuts
 	reagents.add_reagent(/datum/reagent/capsaicin = 1)
 
 obj/item/chems/food/snacks/chocobanana
-	name = "\improper Choco Banang"
+	name = "choco banana"
 	icon_state = "chocobanana"
 	trash = /obj/item/trash/stick
 	desc = "A chocolate and sprinkles coated banana. On a stick."
-	nutriment_desc = list("chocolate" = 4, "wax?" = 1)
+	nutriment_desc = list("banana" = 3, "chocolate" = 1, "wax?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
 /obj/item/chems/food/snacks/chocobanana/Initialize()
@@ -3824,7 +3801,7 @@ obj/item/chems/food/snacks/dango
 
 
 /obj/item/chems/food/snacks/old/pizza
-	name = "\improper Pizza!"
+	name = "pizza"
 	desc = "It's so stale you could probably cut something with the cheese."
 	icon_state = "ancient_pizza"
 
@@ -3839,16 +3816,16 @@ obj/item/chems/food/snacks/dango
 	icon_state = "ancient_hburger"
 
 /obj/item/chems/food/snacks/old/fries
-	name = "\improper Space Fries!"
+	name = "chips"
 	desc = "The salt appears to have preserved these, still stale and gross."
 	icon_state = "ancient_fries"
 
 /obj/item/chems/food/snacks/old/hotdog
-	name = "\improper Space Dog!"
+	name = "hotdog"
 	desc = "This one is probably only marginally less safe to eat than when it was first created.."
 	icon_state = "ancient_hotdog"
 
 /obj/item/chems/food/snacks/old/taco
-	name = "\improper Taco!"
+	name = "taco"
 	desc = "Interestingly, the shell has gone soft and the contents have gone stale."
 	icon_state = "ancient_taco"

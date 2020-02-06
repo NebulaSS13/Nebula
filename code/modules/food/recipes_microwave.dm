@@ -311,13 +311,6 @@ I said no!
 	)
 	result = /obj/item/chems/food/snacks/berryclafoutis
 
-/datum/recipe/wingfangchu
-	reagents = list(/datum/reagent/nutriment/soysauce = 5)
-	items = list(
-		/obj/item/chems/food/snacks/xenomeat,
-	)
-	result = /obj/item/chems/food/snacks/wingfangchu
-
 /datum/recipe/chaosdonut
 	reagents = list(/datum/reagent/frostoil = 5, /datum/reagent/capsaicin = 5, /datum/reagent/sugar = 5)
 	items = list(
@@ -788,13 +781,6 @@ I said no!
 	reagents = list(/datum/reagent/water = 10, /datum/reagent/slimejelly = 5)
 	items = list()
 	result = /obj/item/chems/food/snacks/slimesoup
-
-/datum/recipe/boiledslimeextract
-	reagents = list(/datum/reagent/water = 10)
-	items = list(
-		/obj/item/slime_extract,
-	)
-	result = /obj/item/chems/food/snacks/boiledslimecore
 
 /datum/recipe/chocolateegg
 	items = list(
