@@ -1,0 +1,51 @@
+<h3>Reagent Grinder</h3>
+
+<div class="item">
+  <div class="itemLabel">
+    Status:
+  </div>
+  {{if !data.beaker}}
+    <div class="itemContent">
+      No beaker found!
+    </div>
+  {{else data.inuse}}
+    <div class="itemContent">
+      <span class="warning">Grinder running...</span>
+    </div>
+  {{else}}
+     <div class="itemContent">
+      Inactive.
+    </div>
+  {{/if}}
+</div>
+
+<table class='block' width='95%'>
+  <tr><th>Contents</th></tr>
+  {{if data.contents}}
+    {{for data.contents}}
+      <tr class='candystripe'><td align="center">{{:value}}</td></tr>
+    {{/for}}
+  {{else}}
+    <tr><td align="center">Nothing inserted.</td></tr>
+  {{/if}}
+</table>
+
+<table class='block' width='95%'>
+  <tr><th>Products</th></tr>
+  {{if data.beakercontents}}
+    {{for data.beakercontents}}
+      <tr class='candystripe'><td align="center">{{:value}}</td></tr>
+    {{/for}}
+  {{else}}
+    <tr><td align="center">Nothing.</td></tr>
+  {{/if}}
+</table>
+
+<table class='block' width='95%'>
+  <tr><th colspan='3'>Actions</th></tr>
+  <tr>
+    <th>{{:helper.link('Grind', null, {'action' : "grind"}, !data.inuse ? null : 'disabled')}}</th>
+    <th>{{:helper.link('Eject', 'circle-arrow-e', {'action' : "eject"}, data.contents ? null : 'disabled')}}</th>
+    <th>{{:helper.link('Detach', 'arrowreturnthick-1-s', {'action' : "detach"}, data.beaker ? null : 'disabled')}}</th>
+  </tr>
+</table>
