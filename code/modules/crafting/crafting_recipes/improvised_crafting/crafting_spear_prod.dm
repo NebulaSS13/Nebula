@@ -2,7 +2,7 @@
 	descriptor = "spear or stunprod"
 	begins_with_object_type = /obj/item/handcuffs/cable
 	item_icon_state = "wiredrod"
-	progress_message = "You wind the cable cuffs around the top of the steel rod."
+	progress_message = "You wind the cable cuffs around the top of the rod."
 	completion_trigger_type = /obj/item/stack/material/rods
 	stack_consume_amount = 1
 	next_stages = list(
