@@ -14,7 +14,7 @@
 		rotate(user)
 	return TRUE
 
-/obj/structure/bed/chair/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/bed/chair/attackby(obj/item/W, mob/user)
 	..()
 	if(!reinf_material && istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W

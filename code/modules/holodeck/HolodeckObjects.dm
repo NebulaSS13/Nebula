@@ -153,7 +153,7 @@
 /obj/structure/window/reinforced/holowindow/Destroy()
 	..()
 
-/obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/window/reinforced/holowindow/attackby(obj/item/W, mob/user)
 
 	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
@@ -222,7 +222,7 @@
 /obj/structure/bed/chair/holochair/Destroy()
 	..()
 
-/obj/structure/bed/chair/holochair/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/bed/chair/holochair/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/wrench))
 		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
 	return

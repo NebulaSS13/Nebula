@@ -129,6 +129,8 @@
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
 	var/construction_difficulty = MAT_VALUE_EASY_DIY
+	// Determines what is used to remove or dismantle this material.
+	var/removed_by_welder
 
 	// Mining behavior.
 	var/alloy_product

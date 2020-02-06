@@ -260,7 +260,7 @@
 
 	return
 
-/obj/structure/closet/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/closet/attackby(obj/item/W, mob/user)
 	if(src.opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W
@@ -325,7 +325,7 @@
 	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", \
 						 "<span class='notice'>You have cut \the [src] apart with \the [W].</span>", \
 						 "You hear welding.")
-	qdel(src)
+	dismantle(src)
 
 /obj/structure/closet/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
 	if(istype(O, /obj/screen))	//fix for HUD elements making their way into the world	-Pete

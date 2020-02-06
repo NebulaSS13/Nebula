@@ -6,11 +6,12 @@
 	density = 1
 	anchored = 1.0
 	w_class = ITEM_SIZE_NO_CONTAINER
+	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
+
 	var/oxygentanks = 10
 	var/phorontanks = 10
 	var/list/oxytanks = list()	//sorry for the similar var names
 	var/list/platanks = list()
-
 
 /obj/structure/dispenser/oxygen
 	phorontanks = 0
@@ -31,12 +32,12 @@
 		if(1 to 4)	overlays += "phoron-[phorontanks]"
 		if(5 to INFINITY) overlays += "phoron-5"
 
-/obj/structure/dispenser/attack_ai(mob/user as mob)
+/obj/structure/dispenser/attack_ai(mob/user)
 	if(user.Adjacent(src))
 		return attack_hand(user)
 	..()
 
-/obj/structure/dispenser/attack_hand(mob/user as mob)
+/obj/structure/dispenser/attack_hand(mob/user)
 	user.set_machine(src)
 	var/dat = "[src]<br><br>"
 	dat += "Oxygen tanks: [oxygentanks] - [oxygentanks ? "<A href='?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
@@ -46,41 +47,35 @@
 	return
 
 
-/obj/structure/dispenser/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air) || istype(I, /obj/item/tank/anesthetic))
-		if(oxygentanks < 10)
-			if(!user.unEquip(I, src))
-				return
-			oxytanks.Add(I)
-			oxygentanks++
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
-			if(oxygentanks < 5)
-				update_icon()
-		else
-			to_chat(user, "<span class='notice'>[src] is full.</span>")
-		updateUsrDialog()
-		return
-	if(istype(I, /obj/item/tank/phoron))
-		if(phorontanks < 10)
-			if(!user.unEquip(I, src))
-				return
-			platanks.Add(I)
-			phorontanks++
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
-			if(oxygentanks < 6)
-				update_icon()
-		else
-			to_chat(user, "<span class='notice'>[src] is full.</span>")
-		updateUsrDialog()
-		return
-	if(isWrench(I))
-		if(anchored)
-			to_chat(user, "<span class='notice'>You lean down and unwrench [src].</span>")
-			anchored = 0
-		else
-			to_chat(user, "<span class='notice'>You wrench [src] into place.</span>")
-			anchored = 1
-		return
+/obj/structure/dispenser/attackby(obj/item/I, mob/user)
+	. = ..()
+	if(!.)
+		if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air) || istype(I, /obj/item/tank/anesthetic))
+			if(oxygentanks < 10)
+				if(!user.unEquip(I, src))
+					return
+				oxytanks.Add(I)
+				oxygentanks++
+				to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+				if(oxygentanks < 5)
+					update_icon()
+			else
+				to_chat(user, "<span class='notice'>[src] is full.</span>")
+			updateUsrDialog()
+			return
+		if(istype(I, /obj/item/tank/phoron))
+			if(phorontanks < 10)
+				if(!user.unEquip(I, src))
+					return
+				platanks.Add(I)
+				phorontanks++
+				to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+				if(oxygentanks < 6)
+					update_icon()
+			else
+				to_chat(user, "<span class='notice'>[src] is full.</span>")
+			updateUsrDialog()
+			return
 
 /obj/structure/dispenser/Topic(href, href_list)
 	if(usr.stat || usr.restrained())

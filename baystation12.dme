@@ -1109,6 +1109,7 @@
 #include "code\game\objects\random\date_based.dm"
 #include "code\game\objects\random\random.dm"
 #include "code\game\objects\structures\__structure.dm"
+#include "code\game\objects\structures\_structure_construction.dm"
 #include "code\game\objects\structures\_structure_icon.dm"
 #include "code\game\objects\structures\_structure_materials.dm"
 #include "code\game\objects\structures\ai_decoy.dm"

@@ -9,7 +9,7 @@
 // Not used #define FIREDOOR_ALERT_LOWPRESS 4
 
 /obj/machinery/door/firedoor
-	name = "\improper Emergency Shutter"
+	name = "emergency shutter"
 	desc = "Emergency air-tight shutter, capable of sealing off breached areas."
 	icon = 'icons/obj/doors/hazard/door.dmi'
 	var/panel_file = 'icons/obj/doors/hazard/panel.dmi'

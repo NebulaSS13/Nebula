@@ -3,7 +3,6 @@
 	desc = "A strong door."
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "left"
-	var/base_state = "left"
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
@@ -13,10 +12,11 @@
 	uncreated_component_parts = null
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
-	var/obj/item/airlock_electronics/electronics = null
 	explosion_resistance = 5
 	air_properties_vary_with_direction = 1
 	pry_mod = 0.5
+	var/obj/item/airlock_electronics/electronics = null
+	var/base_state = "left"
 
 /obj/machinery/door/window/Initialize(mapload, obj/structure/windoor_assembly/assembly)
 	if(assembly)
@@ -172,7 +172,7 @@
 /obj/machinery/door/window/CanFluidPass(var/coming_from)
 	return ((dir in GLOB.cardinal) && coming_from != dir)
 
-/obj/machinery/door/window/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/door/window/attackby(obj/item/I, mob/user)
 
 	//If it's in the process of opening/closing, ignore the click
 	if (src.operating == 1)
@@ -186,7 +186,7 @@
 			spark_system.start()
 			playsound(src.loc, "sparks", 50, 1)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			visible_message("<span class='warning'>The glass door was sliced open by [user]!</span>")
+			visible_message(SPAN_WARNING("The glass door was sliced open by [user]!"))
 		return 1
 
 	//If it's emagged, crowbar can pry electronics out.
@@ -194,18 +194,18 @@
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
 		if (do_after(user,40,src))
-			to_chat(user, "<span class='notice'>You removed the windoor electronics!</span>")
+			to_chat(user, SPAN_NOTICE("You removed the windoor electronics!"))
 
 			var/obj/structure/windoor_assembly/wa = new/obj/structure/windoor_assembly(src.loc)
 			if (istype(src, /obj/machinery/door/window/brigdoor))
-				wa.secure = "secure_"
-				wa.SetName("Secure Wired Windoor Assembly")
+				wa.secure = TRUE
+				wa.SetName("secure wired windooraAssembly")
 			else
-				wa.SetName("Wired Windoor Assembly")
-			if (src.base_state == "right" || src.base_state == "rightsecure")
-				wa.facing = "r"
+				wa.SetName("wired windoor assembly")
+			wa.facing_left = !(src.base_state == "right" || src.base_state == "rightsecure")
 			wa.set_dir(src.dir)
-			wa.state = "02"
+			wa.wired = TRUE
+			wa.anchored = TRUE
 			wa.update_icon()
 
 			var/obj/item/airlock_electronics/ae
