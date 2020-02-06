@@ -541,7 +541,7 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
-/obj/structure/ladder/up,
+/obj/structure/ladder,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/scrap/loading_bay)
 "bh" = (

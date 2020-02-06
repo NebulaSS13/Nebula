@@ -98,6 +98,12 @@
 			update_icon()
 			return TRUE
 		if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
+
+			var/ladder = (locate(/obj/structure/ladder) in loc)
+			if(ladder)
+				to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
+				return TRUE
+
 			var/obj/item/stack/tile/floor/ST = C
 			if(!ST.in_use)
 				to_chat(user, "<span class='notice'>Placing tile...</span>")

@@ -60,7 +60,7 @@
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "o" = (
-/obj/structure/ladder/up,
+/obj/structure/ladder,
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "p" = (

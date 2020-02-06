@@ -104,7 +104,7 @@
 /turf/simulated/wall/r_wall,
 /area/lar_maria/cells)
 "ap" = (
-/obj/structure/ladder/up,
+/obj/structure/ladder,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)

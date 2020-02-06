@@ -36,6 +36,7 @@
 
 	if(wall_support_value >= 10)
 		. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/ladder(src)
 
 	if(integrity >= 50 && hardness >= MAT_VALUE_FLEXIBLE + 10)
 		. += new/datum/stack_recipe/furniture/door(src)
