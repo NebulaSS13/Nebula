@@ -15,8 +15,14 @@
 		reaction_info += "Fusion between [p_mat.display_name] and [s_mat.display_name] can be achieved with a plasma temperature of [reaction.minimum_reaction_temperature] Kelvin or higher." 
 		reaction_info += "This reaction consumes [initial(reaction.energy_consumption)] heat unit\s and produces [reaction.energy_production] heat unit\s."
 		reaction_info += "The process has an instability rating of [reaction.instability] and a radiation rating of [reaction.radiation]."
+
 		if(LAZYLEN(reaction.products))
-			reaction_info += "In the process of [p_mat.display_name]-[s_mat.display_name] fusion, [english_list(reaction.products)] [LAZYLEN(reaction.products) == 1 ? "is" : "are"] produced."
+			var/list/products_list = list()
+			for(var/P in reaction.products)
+				if(ispath(P, /material))
+					var/material/product_mat = SSmaterials.get_material_datum(P)
+					products_list |= product_mat.display_name
+			reaction_info += "In the process of [p_mat.display_name]-[s_mat.display_name] fusion, [english_list(products_list)] [LAZYLEN(products_list) == 1 ? "is" : "are"] produced."
 		else
 			reaction_info += "Nothing is produced in the process of [p_mat.display_name]-[s_mat.display_name] fusion."
 		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[p_mat.display_name]-[s_mat.display_name] (fusion reaction)")), _mechanics_text = jointext(reaction_info, "<br>"))
