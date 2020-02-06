@@ -56,7 +56,7 @@
 	new /obj/item/stack/material/rods(loc, 1, material.type)
 	qdel(src)
 
-/obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
+/obj/structure/lattice/attackby(obj/item/C, mob/user)
 
 	if (istype(C, /obj/item/stack/tile/floor))
 		var/turf/T = get_turf(src)
@@ -74,6 +74,12 @@
 		deconstruct(user)
 		return
 	if (istype(C, /obj/item/stack/material/rods))
+
+		var/ladder = (locate(/obj/structure/ladder) in loc)
+		if(ladder)
+			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
+			return TRUE
+
 		var/obj/item/stack/material/rods/R = C
 		if(R.use(2))
 			src.alpha = 0
@@ -82,7 +88,7 @@
 			qdel(src)
 			return
 		else
-			to_chat(user, "<span class='notice'>You require at least two rods to complete the catwalk.</span>")
+			to_chat(user, SPAN_WARNING("You require at least two rods to complete the catwalk."))
 
 /obj/structure/lattice/on_update_icon()
 	..()
