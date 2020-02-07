@@ -2563,7 +2563,7 @@
 /obj/item/chems/food/snacks/sliceable/pizza/meatpizza/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 34)
-	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 6)
+	reagents.add_reagent(/datum/reagent/nutriment/barbecue, 6)
 
 /obj/item/chems/food/snacks/slice/meatpizza
 	name = "meatpizza slice"
@@ -2620,7 +2620,7 @@
 /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
-	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 6)
+	reagents.add_reagent(/datum/reagent/nutriment/ketchup, 6)
 	reagents.add_reagent(/datum/reagent/imidazoline, 12)
 
 /obj/item/chems/food/snacks/slice/vegetablepizza
