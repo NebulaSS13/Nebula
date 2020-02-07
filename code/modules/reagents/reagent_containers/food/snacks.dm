@@ -3273,7 +3273,6 @@
 	nutriment_amt = 4
 	trash = /obj/item/trash/syndi_cakes
 	bitesize = 3
-	nutriment_type = /datum/reagent/nutriment/bread/cake
 
 /obj/item/chems/food/snacks/syndicake/Initialize()
 	.=..()
