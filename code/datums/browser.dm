@@ -14,7 +14,10 @@
 	var/head_content = ""
 	var/content = ""
 	var/title_buttons = ""
+	var/written_text = FALSE
 
+/datum/browser/written
+	written_text = TRUE
 
 /datum/browser/New(nuser, nwindow_id, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null)
 
@@ -98,11 +101,13 @@
 </html>"}
 
 /datum/browser/proc/get_content()
-	return {"
+	. = {"
 	[get_header()]
 	[content]
 	[get_footer()]
 	"}
+	if(written_text)
+		. = user.handle_reading_literacy(user, .)
 
 /datum/browser/proc/open(var/use_onclose = 1)
 	var/window_size = ""

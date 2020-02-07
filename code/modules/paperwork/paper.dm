@@ -80,12 +80,10 @@
 		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
 
 /obj/item/paper/proc/show_content(mob/user, forceshow)
-	var/can_read = (istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)) || forceshow
-	if(!forceshow && istype(user,/mob/living/silicon/ai))
-		var/mob/living/silicon/ai/AI = user
-		can_read = get_dist(src, AI.camera) < 2
-	user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[can_read ? info : stars(info)][stamps]</BODY></HTML>", "window=[name]")
-	onclose(user, "[name]")
+	var/show_info = user.handle_reading_literacy(user, info, FALSE, (forceshow || get_dist(src, user) <= 1))
+	if(show_info)
+		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[show_info][stamps]</BODY></HTML>", "window=[name]")
+		onclose(user, "[name]")
 
 /obj/item/paper/verb/rename()
 	set name = "Rename paper"
@@ -100,7 +98,9 @@
 	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/photo/rename()
 	if(!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
 		return
-	SetName(n_name)
+	n_name = usr.handle_writing_literacy(usr, n_name)
+	if(n_name)
+		SetName(n_name)
 	add_fingerprint(usr)
 
 /obj/item/paper/attack_self(mob/living/user as mob)
@@ -323,23 +323,25 @@
 			fields = last_fields_value
 			return
 
+		var/processed_text = usr.handle_writing_literacy(usr, t)
+
 		if(id!="end")
-			addtofield(text2num(id), t) // He wants to edit a field, let him.
+			addtofield(text2num(id), processed_text) // He wants to edit a field, let him.
 		else
-			info += t // Oh, he wants to edit to the end of the file, let him.
+			info += processed_text // Oh, he wants to edit to the end of the file, let him.
 			updateinfolinks()
 
 		last_modified_ckey = usr.ckey
 
 		update_space(t)
+		var/processed_info_links = usr.handle_reading_literacy(usr, info_links, TRUE)
+		if(processed_info_links)
+			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
+			playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 10)
+			update_icon()
 
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
 
-		playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 10)
-		update_icon()
-
-
-/obj/item/paper/attackby(obj/item/P as obj, mob/user as mob)
+/obj/item/paper/attackby(obj/item/P, mob/user)
 	..()
 	var/clown = 0
 	if(user.mind && (user.mind.assigned_role == "Clown"))
@@ -387,7 +389,9 @@
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
 		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]")
+			var/processed_info_links = user.handle_reading_literacy(user, info_links, length(info))
+			if(processed_info_links)
+				user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]")
 		return
 
 	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))

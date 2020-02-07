@@ -82,3 +82,8 @@ mob/observer/check_airflow_movable()
 		throwing = null
 		to_chat(src, "<span class='notice'>You cannot move further in this direction.</span>")
 
+/mob/observer/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+	. = text_content
+
+/mob/observer/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
+	. = text_content

@@ -145,17 +145,19 @@
 /obj/item/book/attack_self(var/mob/user)
 	if(carved)
 		if(store)
-			to_chat(user, "<span class='notice'>[store] falls out of [title]!</span>")
+			to_chat(user, "<span class='notice'>\A [store] falls out of [title]!</span>")
 			store.dropInto(loc)
 			store = null
 			return
 		else
 			to_chat(user, "<span class='notice'>The pages of [title] have been cut out!</span>")
 			return
-	if(src.dat)
-		user << browse(dat, "window=book;size=1000x550")
+	if(dat)
 		user.visible_message("[user] opens a book titled \"[src.title]\" and begins reading intently.")
-		onclose(user, "book")
+		var/processed_dat = user.handle_reading_literacy(user, dat)
+		if(processed_dat)
+			user << browse(processed_dat, "window=book;size=1000x550")
+			onclose(user, "book")
 	else
 		to_chat(user, "This book is completely blank!")
 
@@ -186,22 +188,29 @@
 					to_chat(usr, "The title is invalid.")
 					return
 				else
-					src.SetName(newtitle)
-					src.title = newtitle
+					newtitle = usr.handle_writing_literacy(usr, newtitle)
+					if(newtitle)
+						src.SetName(newtitle)
+						src.title = newtitle
 			if("Contents")
 				var/content = sanitize(input("Write your book's contents (HTML NOT allowed):") as message|null, MAX_BOOK_MESSAGE_LEN)
 				if(!content)
 					to_chat(usr, "The content is invalid.")
 					return
 				else
-					src.dat += content
+					content = usr.handle_writing_literacy(usr, content)
+					if(content)
+						dat += content
+
 			if("Author")
 				var/newauthor = sanitize(input(usr, "Write the author's name:"))
 				if(!newauthor)
 					to_chat(usr, "The name is invalid.")
 					return
 				else
-					src.author = newauthor
+					newauthor = usr.handle_writing_literacy(usr, newauthor)
+					if(newauthor)
+						author = newauthor
 			else
 				return
 	else if(istype(W, /obj/item/material/knife) || isWirecutter(W))
@@ -218,8 +227,10 @@
 	if(user.zone_sel.selecting == BP_EYES)
 		user.visible_message("<span class='notice'>You open up the book and show it to [M]. </span>", \
 			"<span class='notice'> [user] opens up a book and shows it to [M]. </span>")
-		M << browse("<i>Author: [author].</i><br><br>" + "[dat]", "window=book;size=1000x550")
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam
+		var/processed_dat = M.handle_reading_literacy(user, "<i>Author: [author].</i><br><br>" + "[dat]")
+		if(processed_dat)
+			M << browse(processed_dat, "window=book;size=1000x550")
 
 /*
  * Manual Base Object

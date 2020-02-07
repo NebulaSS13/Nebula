@@ -36,7 +36,9 @@
 
 /obj/effect/decal/writing/examine(mob/user)
 	. = ..(user)
-	to_chat(user,  "It reads \"[message]\".")
+	var/processed_message = user.handle_reading_literacy(user, message)
+	if(processed_message)
+		to_chat(user,  "It reads \"[processed_message]\".")
 
 /obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
 	if(isWelder(thing))

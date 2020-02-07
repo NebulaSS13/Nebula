@@ -1116,6 +1116,15 @@
 	if(!. && !silent)
 		to_chat(src, FEEDBACK_YOU_LACK_DEXTERITY)
 
-
 /mob/proc/lose_hair()
 	return
+
+/mob/proc/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+	if(!skip_delays)
+		to_chat(src, SPAN_WARNING("You can't make heads or tails of the words."))
+	. = stars(text_content, 5)
+
+/mob/proc/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
+	if(!skip_delays)
+		to_chat(src, SPAN_WARNING("You scrawl down some meaningless lines."))
+	. = stars(text_content, 5)

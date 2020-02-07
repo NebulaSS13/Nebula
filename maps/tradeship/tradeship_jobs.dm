@@ -49,7 +49,8 @@
 /datum/job/captain
 	supervisors = "your profit margin, your conscience, and the Trademaster"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/captain
-	min_skill = list(   SKILL_WEAPONS = SKILL_ADEPT,
+	min_skill = list(   SKILL_LITERACY    = SKILL_ADEPT,
+	                    SKILL_WEAPONS     = SKILL_ADEPT,
 	                    SKILL_SCIENCE     = SKILL_ADEPT,
 	                    SKILL_PILOT       = SKILL_ADEPT)
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
@@ -100,7 +101,7 @@
 	supervisors = "the Captain"
 	department_flag = ENG
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/chief_engineer
-	min_skill = list(   SKILL_BUREAUCRACY  = SKILL_BASIC,
+	min_skill = list(   SKILL_LITERACY     = SKILL_ADEPT,
 	                    SKILL_COMPUTER     = SKILL_ADEPT,
 	                    SKILL_EVA          = SKILL_ADEPT,
 	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
@@ -124,7 +125,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	hud_icon = "hudmedicaldoctor"
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	min_skill = list(   SKILL_LITERACY    = SKILL_ADEPT,
 	                    SKILL_MEDICAL     = SKILL_EXPERT,
 	                    SKILL_ANATOMY     = SKILL_EXPERT,
 	                    SKILL_CHEMISTRY   = SKILL_BASIC)
@@ -147,14 +148,14 @@
 	supervisors = "the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/mate
 	hud_icon = "hudheadofpersonnel"
-	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
+	min_skill = list(   SKILL_LITERACY    = SKILL_ADEPT,
+	                    SKILL_WEAPONS     = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_EXPERT,
-	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_PILOT       = SKILL_ADEPT)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_FINANCE     = SKILL_MAX,
-	                    SKILL_BUREAUCRACY = SKILL_EXPERT)
+	                    SKILL_FINANCE     = SKILL_MAX)
+
 	skill_points = 30
 	alt_titles = list()
 
@@ -175,7 +176,8 @@
 	spawn_positions = 2
 	hud_icon = "hudengineer"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
-	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
+	min_skill = list(   SKILL_LITERACY     = SKILL_ADEPT,
+	                    SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,
 	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
 	                    SKILL_ELECTRICAL   = SKILL_BASIC,
@@ -202,7 +204,7 @@
 	total_positions = 1
 	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	min_skill = list(   SKILL_LITERACY    = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_ADEPT,
 	                    SKILL_BOTANY      = SKILL_BASIC,
@@ -222,7 +224,7 @@
 	total_positions = 2
 	alt_titles = list()
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	min_skill = list(   SKILL_LITERACY    = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_DEVICES     = SKILL_BASIC,
 	                    SKILL_SCIENCE     = SKILL_ADEPT)
@@ -242,6 +244,11 @@
 	supervisors = "the Matriarch and the Patriarches"
 	outfit_type = /decl/hierarchy/outfit/job/yinglet
 	department_flag = CIV
+	max_skill = list(   SKILL_PILOT       = SKILL_ADEPT,
+	                    SKILL_SCIENCE     = SKILL_ADEPT,
+	                    SKILL_COMBAT      = SKILL_ADEPT,
+	                    SKILL_WEAPONS     = SKILL_ADEPT,
+						SKILL_LITERACY    = SKILL_BASIC)
 	var/required_gender
 
 /datum/job/yinglet/is_species_allowed(var/datum/species/S)
@@ -262,15 +269,15 @@
 	supervisors = "the Matriarch and the Patriarches"
 	outfit_type = /decl/hierarchy/outfit/job/yinglet/scout
 	access = list(access_eva, access_research)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_EVA         = SKILL_ADEPT,
+	min_skill = list(   SKILL_EVA         = SKILL_ADEPT,
 	                    SKILL_SCIENCE     = SKILL_ADEPT,
 	                    SKILL_PILOT       = SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX,
 	                    SKILL_COMBAT      = SKILL_EXPERT,
-	                    SKILL_WEAPONS     = SKILL_EXPERT)
+	                    SKILL_WEAPONS     = SKILL_EXPERT,
+						SKILL_LITERACY    = SKILL_BASIC)
 	skill_points = 22
 
 /datum/job/yinglet/patriarch
@@ -281,18 +288,16 @@
 	supervisors = "the Matriarch"
 	required_gender = MALE
 	outfit_type = /decl/hierarchy/outfit/job/yinglet/patriarch
-	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
-	                    SKILL_FINANCE     = SKILL_EXPERT,
-	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
-	                    SKILL_PILOT       = SKILL_ADEPT,
+	min_skill = list(   SKILL_WEAPONS      = SKILL_BASIC,
+	                    SKILL_FINANCE      = SKILL_EXPERT,
+	                    SKILL_PILOT        = SKILL_ADEPT,
 						SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,
 	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
 	                    SKILL_ELECTRICAL   = SKILL_BASIC)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_FINANCE     = SKILL_MAX,
-	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
+	max_skill = list(   SKILL_PILOT        = SKILL_MAX,
+	                    SKILL_FINANCE      = SKILL_MAX,
 						SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_ATMOS        = SKILL_MAX,
@@ -320,14 +325,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/yinglet/matriarch
 	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_EXPERT,
-	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_LITERACY    = SKILL_ADEPT,
 	                    SKILL_PILOT       = SKILL_ADEPT,
 						SKILL_MEDICAL     = SKILL_ADEPT
 						)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_FINANCE     = SKILL_MAX,
-	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
 						SKILL_MEDICAL     = SKILL_MAX,
 						SKILL_ANATOMY     = SKILL_EXPERT
 						)

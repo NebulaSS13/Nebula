@@ -22,6 +22,7 @@
 	)
 	emag = /obj/item/melee/energy/machete
 	skills = list(
+		SKILL_LITERACY  = SKILL_ADEPT,
 		SKILL_BOTANY    = SKILL_MAX,
 		SKILL_COMBAT    = SKILL_EXPERT,
 		SKILL_CHEMISTRY = SKILL_EXPERT,

@@ -6,7 +6,7 @@
 		LANGUAGE_HUMAN       = TRUE
 	)
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_PROF,
+		SKILL_LITERACY            = SKILL_ADEPT,
 		SKILL_FINANCE             = SKILL_PROF,
 		SKILL_COMPUTER            = SKILL_EXPERT,
 		SKILL_SCIENCE             = SKILL_EXPERT,
@@ -43,7 +43,7 @@
 	)
 	emag = /obj/item/chems/food/drinks/bottle/small/beer
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_PROF,
+		SKILL_LITERACY            = SKILL_ADEPT,
 		SKILL_COMPUTER            = SKILL_EXPERT,
 		SKILL_COOKING             = SKILL_PROF,
 		SKILL_BOTANY              = SKILL_PROF,
