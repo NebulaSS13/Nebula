@@ -3546,8 +3546,8 @@
 		/datum/reagent/toxin/phoron,
 		/datum/reagent/nutriment/coco,
 		/datum/reagent/slimejelly,
-		/datum/reagent/drink/juice/banana,
-		/datum/reagent/drink/juice/berry,
+		/datum/reagent/nutriment/banana_cream,
+		/datum/reagent/nutriment/cherryjelly,
 		/datum/reagent/fuel,
 		/datum/reagent/tricordrazine)), 3)
 	if(prob(30))
@@ -3569,7 +3569,7 @@
 /obj/item/chems/food/snacks/donut/jelly/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 1)
-	reagents.add_reagent(/datum/reagent/drink/juice/berry, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/cherryjelly, 5)
 	if(prob(30))
 		src.icon_state = "jdonut2"
 		src.overlay_state = "box-donut2"
