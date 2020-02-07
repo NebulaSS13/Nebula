@@ -1,8 +1,8 @@
 #! /bin/bash
 
-[[ -z $DME ]] && DME=baystation12 # DME file/BYOND project to compile and run
-[[ -z $PORT ]] && PORT=5000 # Port to run Dream Daemon on
-[[ -z $GIT ]] && GIT=false # true, false, or any valid command; return value decides whether git is called to update the code
+[[ -z $DME ]] && DME=scavstation # DME file/BYOND project to compile and run
+[[ -z $PORT ]] && PORT=9001 # Port to run Dream Daemon on
+[[ -z $GIT ]] && GIT=true # true, false, or any valid command; return value decides whether git is called to update the code
 [[ -z $REPO ]] && REPO=upstream # Repo to fetch and pull from when updating
 [[ -z $BRANCH ]] && BRANCH=dev # Branch to pull when updating
 [[ -z $GITDIR ]] && GITDIR=. # Directory of code or git repo, relative to $SERVERDIR

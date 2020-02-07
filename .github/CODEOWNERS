@@ -1,7 +1,6 @@
 # Require reviews from Core team for changes to CI or infra stuff
-.github/ @Baystation12/Core
-.azure-pipelines.yml @Baystation12/Core
-Dockerfile @Baystation12/Core
-flyway.conf @Baystation12/Core
-sql/ @Baystation12/Core
-LICENSE @Baystation12/Core
+.github/ @ScavStation/Core
+Dockerfile @ScavStation/Core
+flyway.conf @ScavStation/Core
+sql/ @ScavStation/Core
+LICENSE @ScavStation/Core

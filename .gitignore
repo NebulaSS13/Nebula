@@ -39,7 +39,7 @@ Session.vim
 
 # auto-generated tag files
 tags
-baystation12.code-workspace
+scavstation.code-workspace
 
 # ignore built libs
 lib/*.dll
