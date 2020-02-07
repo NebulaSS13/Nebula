@@ -33,7 +33,7 @@
 
 /obj/item/chems/food/snacks/variable/kebab
 	name = "kebab"
-	desc = "Remove this!"
+	desc = "Food is just tastier on a stick!"
 	icon_state = "kabob"
 
 /obj/item/chems/food/snacks/variable/waffles
