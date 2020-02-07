@@ -766,7 +766,7 @@
 	bitesize = 3
 /obj/item/chems/food/snacks/pie/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/drink/juice/banana,5)
+	reagents.add_reagent(/datum/reagent/nutriment/banana_cream,5)
 
 /obj/item/chems/food/snacks/pie/throw_impact(atom/hit_atom)
 	..()
@@ -2077,7 +2077,7 @@
 
 /obj/item/chems/food/snacks/sliceable/bananabread/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/drink/juice/banana, 20)
+	reagents.add_reagent(/datum/reagent/nutriment/banana_cream, 20)
 
 /obj/item/chems/food/snacks/slice/bananabread
 	name = "banana-nut bread slice"
@@ -2563,7 +2563,7 @@
 /obj/item/chems/food/snacks/sliceable/pizza/meatpizza/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 34)
-	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 6)
+	reagents.add_reagent(/datum/reagent/nutriment/barbecue, 6)
 
 /obj/item/chems/food/snacks/slice/meatpizza
 	name = "meatpizza slice"
@@ -2620,7 +2620,7 @@
 /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
-	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 6)
+	reagents.add_reagent(/datum/reagent/nutriment/ketchup, 6)
 	reagents.add_reagent(/datum/reagent/imidazoline, 12)
 
 /obj/item/chems/food/snacks/slice/vegetablepizza
@@ -3273,7 +3273,6 @@
 	nutriment_amt = 4
 	trash = /obj/item/trash/syndi_cakes
 	bitesize = 3
-	nutriment_type = /datum/reagent/nutriment/bread/cake
 
 /obj/item/chems/food/snacks/syndicake/Initialize()
 	.=..()
@@ -3547,8 +3546,8 @@
 		/datum/reagent/toxin/phoron,
 		/datum/reagent/nutriment/coco,
 		/datum/reagent/slimejelly,
-		/datum/reagent/drink/juice/banana,
-		/datum/reagent/drink/juice/berry,
+		/datum/reagent/nutriment/banana_cream,
+		/datum/reagent/nutriment/cherryjelly,
 		/datum/reagent/fuel,
 		/datum/reagent/tricordrazine)), 3)
 	if(prob(30))
@@ -3570,7 +3569,7 @@
 /obj/item/chems/food/snacks/donut/jelly/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 1)
-	reagents.add_reagent(/datum/reagent/drink/juice/berry, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/cherryjelly, 5)
 	if(prob(30))
 		src.icon_state = "jdonut2"
 		src.overlay_state = "box-donut2"
