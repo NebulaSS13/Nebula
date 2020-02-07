@@ -46,7 +46,6 @@
 							/obj/item/chems/food/snacks/slice/xenomeatbread/filled = TRADER_THIS_TYPE,
 							/obj/item/chems/food/snacks/soydope                    = TRADER_THIS_TYPE,
 							/obj/item/chems/food/snacks/stewedsoymeat              = TRADER_THIS_TYPE,
-							/obj/item/chems/food/snacks/wingfangchu                = TRADER_THIS_TYPE,
 							/obj/item/chems/food/drinks/dry_ramen                  = TRADER_THIS_TYPE
 							)
 
@@ -99,7 +98,6 @@
 							/obj/item/chems/food/drinks/cans                       = TRADER_SUBTYPES_ONLY,
 							/obj/item/chems/food/drinks/bottle                     = TRADER_SUBTYPES_ONLY,
 							/obj/item/chems/food/drinks/bottle/small               = TRADER_BLACKLIST,
-							/obj/item/chems/food/snacks/boiledslimecore            = TRADER_BLACKLIST,
 							/obj/item/chems/food/snacks/checker                    = TRADER_BLACKLIST_ALL,
 							/obj/item/chems/food/snacks/fruit_slice                = TRADER_BLACKLIST,
 							/obj/item/chems/food/snacks/slice                      = TRADER_BLACKLIST_ALL,
