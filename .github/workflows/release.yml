@@ -17,7 +17,7 @@ jobs:
         REG_PASS: ${{ secrets.REG_PASS }}
         REG_URL: ${{ secrets.REG_URL }}
     - name: Clone custom items
-      run: git clone --depth 1 https://github.com/Baystation12/custom-items
+      run: git clone --depth 1 https://github.com/ScavStation/custom-items
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg BUILD_ARGS=-Icustom-items/inc.dm
       env:

@@ -18,10 +18,10 @@ RUN mkdir to_copy;\
 
 FROM xales/byond:512-latest as builder
 ARG BUILD_ARGS
-COPY --from=byhttp /byhttp/to_copy /bs12/lib
-COPY . /bs12
-WORKDIR /bs12
-RUN scripts/dm.sh $BUILD_ARGS baystation12.dme
+COPY --from=byhttp /byhttp/to_copy /scav/lib
+COPY . /scav
+WORKDIR /scav
+RUN scripts/dm.sh $BUILD_ARGS scavstation.dme
 
 
 FROM xales/byond:512-latest as tester_prereqs
@@ -47,8 +47,8 @@ RUN git clone --recursive --shallow-submodules https://github.com/pyenv/pyenv.gi
  && pyenv global $PYENV_VERSION
 
 FROM pyenv as tester
-COPY --from=builder /bs12 /bs12
-WORKDIR /bs12
+COPY --from=builder /scav /scav
+WORKDIR /scav
 ENV TEST=CODE CI=true
 ENTRYPOINT ["test/run-test.sh"]
 
@@ -56,21 +56,21 @@ ENTRYPOINT ["test/run-test.sh"]
 FROM xales/byond:512-latest as spacestation
 RUN groupadd -r spaceman \
  && useradd -rm -d /home/spaceman --no-log-init -s /bin/bash -r -g spaceman spaceman \
- && mkdir -p /bs12/data /bs12/config /bs12/lib \
- && chown spaceman:spaceman /bs12 /bs12/config /bs12/data /bs12/lib
-COPY .git/HEAD /bs12/.git/HEAD
-COPY .git/logs/HEAD /bs12/.git/logs/HEAD
-COPY --from=builder --chown=spaceman:spaceman /bs12/config/example/* /bs12/config/
-COPY --from=builder --chown=spaceman:spaceman /bs12/config/names/* /bs12/config/names/
-COPY --from=builder --chown=spaceman:spaceman /bs12/lib/* /bs12/lib/
+ && mkdir -p /scav/data /scav/config /scav/lib \
+ && chown spaceman:spaceman /scav /scav/config /scav/data /scav/lib
+COPY .git/HEAD /scav/.git/HEAD
+COPY .git/logs/HEAD /scav/.git/logs/HEAD
+COPY --from=builder --chown=spaceman:spaceman /scav/config/example/* /scav/config/
+COPY --from=builder --chown=spaceman:spaceman /scav/config/names/* /scav/config/names/
+COPY --from=builder --chown=spaceman:spaceman /scav/lib/* /scav/lib/
 COPY --from=builder --chown=spaceman:spaceman \
-    /bs12/baystation12.rsc \
-    /bs12/baystation12.dmb \
-    /bs12/
-RUN chown -R spaceman:spaceman /home/spaceman /bs12
-WORKDIR /bs12
+    /scav/scavstation.rsc \
+    /scav/scavstation.dmb \
+    /scav/
+RUN chown -R spaceman:spaceman /home/spaceman /scav
+WORKDIR /scav
 EXPOSE 8000
-VOLUME /bs12/data/
-VOLUME /bs12/config/
-ENTRYPOINT ["DreamDaemon", "baystation12.dmb", "8000", "-home", "/bs12", "-safe", "-suidself"]
+VOLUME /scav/data/
+VOLUME /scav/config/
+ENTRYPOINT ["DreamDaemon", "scavstation.dmb", "8000", "-home", "/scav", "-safe", "-suidself"]
 CMD ["-verbose", "-invisible"]
