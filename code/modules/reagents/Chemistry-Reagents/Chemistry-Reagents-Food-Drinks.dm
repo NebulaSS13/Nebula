@@ -254,6 +254,12 @@
 	nutriment_factor = 5
 	color = "#731008"
 
+/datum/reagent/nutriment/banana_cream
+	name = "banana cream"
+	description = "A creamy confection that tastes of banana."
+	taste_description = "banana"
+	color = "#f6dfaa"
+
 /datum/reagent/nutriment/barbecue
 	name = "barbecue sauce"
 	description = "Barbecue sauce for barbecues and long shifts."

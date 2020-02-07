@@ -1472,6 +1472,13 @@
 	result_amount = 4
 	mix_message = "The solution thickens into a sweet-smelling red sauce."
 
+/datum/chemical_reaction/banana_cream
+	name = "Banana Cream"
+	result = /datum/reagent/nutriment/banana_cream
+	required_reagents = list(/datum/reagent/drink/juice/banana = 2, /datum/reagent/drink/milk/cream = 1)
+	result_amount = 3
+	mix_message = "The solution thickens into a creamy banana-scented substance."
+
 /datum/chemical_reaction/barbecue
 	name = "Barbecue Sauce"
 	result = /datum/reagent/nutriment/barbecue

@@ -766,7 +766,7 @@
 	bitesize = 3
 /obj/item/chems/food/snacks/pie/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/drink/juice/banana,5)
+	reagents.add_reagent(/datum/reagent/nutriment/banana_cream,5)
 
 /obj/item/chems/food/snacks/pie/throw_impact(atom/hit_atom)
 	..()
@@ -2077,7 +2077,7 @@
 
 /obj/item/chems/food/snacks/sliceable/bananabread/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/drink/juice/banana, 20)
+	reagents.add_reagent(/datum/reagent/nutriment/banana_cream, 20)
 
 /obj/item/chems/food/snacks/slice/bananabread
 	name = "banana-nut bread slice"
