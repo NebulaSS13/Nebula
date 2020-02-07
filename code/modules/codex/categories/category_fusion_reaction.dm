@@ -12,7 +12,7 @@
 		var/material/p_mat = SSmaterials.get_material_datum(reaction.p_react)
 		var/material/s_mat = SSmaterials.get_material_datum(reaction.s_react)
 		var/list/reaction_info = list()
-		reaction_info += "Fusion between [p_mat.display_name] and [s_mat.display_name] can be achieved with a plasma temperature of [reaction.minimum_reaction_temperature] Kelvin or higher." 
+		reaction_info += "Fusion between [p_mat.display_name] and [s_mat.display_name] can be achieved with a plasma temperature of [T0C + reaction.minimum_reaction_temperature] Kelvin or higher." 
 		reaction_info += "This reaction consumes [initial(reaction.energy_consumption)] heat unit\s and produces [reaction.energy_production] heat unit\s."
 		reaction_info += "The process has an instability rating of [reaction.instability] and a radiation rating of [reaction.radiation]."
 
