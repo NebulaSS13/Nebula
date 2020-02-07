@@ -221,7 +221,7 @@
 				t += "</div></form>"
 
 
-		var/datum/browser/popup = new(user, "ATM", machine_id)
+		var/datum/browser/written/popup = new(user, "ATM", machine_id)
 		popup.set_content(jointext(t,null))
 		popup.open()
 	else

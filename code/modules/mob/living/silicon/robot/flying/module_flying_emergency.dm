@@ -30,6 +30,7 @@
 	synths = list(/datum/matter_synth/medicine = 15000)
 	emag = /obj/item/chems/spray
 	skills = list(
+		SKILL_LITERACY     = SKILL_ADEPT,
 		SKILL_ANATOMY      = SKILL_BASIC,
 		SKILL_MEDICAL      = SKILL_PROF,
 		SKILL_EVA          = SKILL_EXPERT,

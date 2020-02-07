@@ -14,10 +14,10 @@
 		/obj/item/borg/upgrade/weaponcooler
 	)
 	skills = list(
+		SKILL_LITERACY    = SKILL_ADEPT,
 		SKILL_COMBAT      = SKILL_EXPERT,
 		SKILL_WEAPONS     = SKILL_EXPERT,
-		SKILL_FORENSICS   = SKILL_EXPERT,
-		SKILL_BUREAUCRACY = SKILL_ADEPT
+		SKILL_FORENSICS   = SKILL_EXPERT
 	)
 
 /obj/item/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)

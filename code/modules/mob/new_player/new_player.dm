@@ -573,4 +573,10 @@ mob/new_player/MayRespawn()
 		return
 	var/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
 	if(new_track)
-		new_track.play_to(src)
+		new_track.play_to(src) 
+
+/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+	. = text_content
+
+/mob/new_player/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
+	. = text_content

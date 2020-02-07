@@ -27,7 +27,7 @@
 	)
 	emag = /obj/item/gun/energy/laser/mounted
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_PROF,
+		SKILL_LITERACY            = SKILL_ADEPT,
 		SKILL_COMPUTER            = SKILL_EXPERT,
 		SKILL_FORENSICS           = SKILL_PROF,
 		SKILL_WEAPONS             = SKILL_EXPERT,

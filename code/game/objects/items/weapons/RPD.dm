@@ -77,7 +77,7 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/datum/fabricator_recipe/pipe/P
 	var/pipe_color = "white"
-	var/datum/browser/popup
+	var/datum/browser/written/popup
 
 /obj/item/rpd/Initialize()
 	. = ..()

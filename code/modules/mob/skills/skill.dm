@@ -76,34 +76,36 @@ GLOBAL_LIST_EMPTY(skills)
 
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational
-
-/decl/hierarchy/skill/organizational/bureaucracy
-	ID = "bureaucracy"
-	name = "Bureaucracy"
-	desc = "Your ability to write and complete paperwork, navigate complex organiztions, and understand laws and regulations."
-	levels = list( "Unskilled"			= "You can usually fill out basic paperwork, if with a few errors. You have a vague understanding of the law, gleaned mostly from the news and personal experience.",
-						"Basic"				= "You are familiar with the paperwork needed to do your job, and can navigate it well. You have some understanding of the law as it applies to you and those around you.",
-						"Trained"			= "You can navigate most paperwork thrown at you, even if you are unfamiliar with it. You have a good working understanding of the law and any regulations or procedures relevant to you.",
-						"Experienced"		= "With your experience, you can easily create paperwork for any eventuality, and write reports which are clear and understandable. You have an excellent knowledge of the law, possibly including formal legal training.<BR> - You can speak and understand legalese.",
-						"Master"		= "You can make paperwork dance to your bidding, and navigate the most byzantine bureaucratic structures with ease and familiarity. Your reports are works of literature. Your knowledge of the law is both broad and intimate, and you may be certified to practice law.")
-
-/decl/hierarchy/skill/organizational/bureaucracy/update_special_effects(mob/mob, level)
-	mob.remove_language(LANGUAGE_LEGALESE)
-	if(level >= SKILL_EXPERT)
-		mob.add_language(LANGUAGE_LEGALESE)
+/decl/hierarchy/skill/organizational/literacy
+	ID = "literacy"
+	name = "Literacy"
+	desc = "Your ability to read and write."
+	levels = list(
+		"Unskilled"   = "You are completely incapable of reading or writing.",
+		"Basic"       = "With time, effort and patience, you are able to read and write at a very simple level.",
+		"Trained"     = "You can read and write fluently, without delays or too many misunderstandings.",
+		"Experienced" = "You can quickly and easily digest complex information, and spend less time for a higher benefit from reading textbooks.",
+		"Master"      = "Your mastery of the written word is such that you are able to produce your own textbooks for others to use. You can write a textbook about any skill you have personally trained in."
+	)
 
 /decl/hierarchy/skill/organizational/finance
 	ID = "finance"
 	name = "Finance"
 	desc = "Your ability to manage money and investments."
-	levels = list( "Unskilled"			= "Your understanding of money starts and ends with personal finance. While you are able to perform basic transactions, you get lost in the details, and can find yourself ripped off on occasion.<br>- You get some starting money. Its amount increases with level.<br>- You can use the verb \"Appraise\" to see the value of different objects.",
-						"Basic"				= "You have some limited understanding of financial transactions, and will generally be able to keep accurate records. You have little experience with investment, and managing large sums of money will likely go poorly for you.",
-						"Trained"			= "You are good at managing accounts, keeping records, and arranging transactions. You have some familiarity with mortgages, insurance, stocks, and bonds, but may be stumped when facing more complicated financial devices.",
-						"Experienced"		= "With your experience, you are familiar with any financial entities you may run across, and are a shrewd judge of value. More often than not, investments you make will pan out well.",
-						"Master"		= "You have an excellent knowledge of finance, will often make brilliant investments, and have an instinctive feel for interstellar economics. Financial instruments are weapons in your hands. You likely have professional experience in the finance industry.")
+	levels = list(
+		"Unskilled"   = "Your understanding of money starts and ends with personal finance. While you are able to perform basic transactions, you get lost in the details, and can find yourself ripped off on occasion.<br>- You get some starting money. Its amount increases with level.<br>- You can use the verb \"Appraise\" to see the value of different objects.",
+		"Basic"       = "You have some limited understanding of financial transactions, and will generally be able to keep accurate records. You have little experience with investment, and managing large sums of money will likely go poorly for you.",
+		"Trained"     = "You are good at managing accounts, keeping records, and arranging transactions. You have some familiarity with mortgages, insurance, stocks, and bonds, but may be stumped when facing more complicated financial devices.",
+		"Experienced" = "With your experience, you are familiar with any financial entities you may run across, and are a shrewd judge of value. More often than not, investments you make will pan out well.<BR> - You can speak and understand Legalese.",
+		"Master"      = "You have an excellent knowledge of finance, will often make brilliant investments, and have an instinctive feel for interstellar economics. Financial instruments are weapons in your hands. You likely have professional experience in the finance industry."
+	)
+
+/decl/hierarchy/skill/organizational/finance/update_special_effects(mob/mob, level)
+	mob.remove_language(LANGUAGE_LEGALESE)
+	if(level >= SKILL_EXPERT)
+		mob.add_language(LANGUAGE_LEGALESE)
 
 // Category: General
-
 /decl/hierarchy/skill/general/EVA
 	ID = "EVA"
 	name = "Extra-vehicular activity"

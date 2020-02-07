@@ -34,7 +34,7 @@
 	)
 	emag = /obj/prefab/hand_teleporter
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_EXPERT,
+		SKILL_LITERACY            = SKILL_ADEPT,
 		SKILL_FINANCE             = SKILL_EXPERT,
 		SKILL_COMPUTER            = SKILL_PROF,
 		SKILL_SCIENCE             = SKILL_PROF,

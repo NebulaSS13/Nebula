@@ -874,3 +874,31 @@ default behaviour is:
 
 /mob/living/proc/eyecheck()
 	return FLASH_PROTECTION_NONE
+
+/mob/living/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+	if(skill_check(SKILL_LITERACY, SKILL_ADEPT))
+		. = text_content
+	else
+		if(!skip_delays)
+			to_chat(src, SPAN_NOTICE("You scan the writing..."))
+			if(user != src)
+				to_chat(user, SPAN_NOTICE("\The [src] scans the writing..."))
+		if(skill_check(SKILL_LITERACY, SKILL_BASIC))
+			if(skip_delays || do_after(src, 1 SECOND, user))
+				. = stars(text_content, 85)
+		else if(skip_delays || do_after(src, 3 SECONDS, user))
+			. = ..()
+
+/mob/living/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
+	if(skill_check(SKILL_LITERACY, SKILL_ADEPT))
+		. = text_content
+	else
+		if(!skip_delays)
+			to_chat(src, SPAN_NOTICE("You write laboriously..."))
+			if(user != src)
+				to_chat(user, SPAN_NOTICE("\The [src] writes laboriously..."))
+		if(skill_check(SKILL_LITERACY, SKILL_BASIC))
+			if(skip_delays || do_after(src, 3 SECONDS, user))
+				. = stars(text_content, 85)
+		else if(skip_delays || do_after(src, 5 SECONDS, user))
+			. = ..()

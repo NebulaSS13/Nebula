@@ -703,5 +703,5 @@ var/list/ai_verbs_default = list(
 	if(rig)
 		rig.force_rest(src)
 
-#undef AI_CHECK_WIRELESS
-#undef AI_CHECK_RADIO
+/mob/living/silicon/ai/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/ai_show)
+	. = ai_show ? ..(user, text_content, skip_delays) : stars(text_content)
