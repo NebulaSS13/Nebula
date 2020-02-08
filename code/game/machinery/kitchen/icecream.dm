@@ -141,7 +141,7 @@
 
 /obj/machinery/icecream_vat/OnTopic(user, href_list)
 	if(href_list["close"])
-		usr << browse(null,"window=icecreamvat")
+		close_browser(usr, "icecreamvat")
 		return TOPIC_HANDLED
 
 	if(href_list["select"])

@@ -36,12 +36,16 @@
 			if(!F)
 				to_chat(src, "<span class='warning'>Error: admin_investigate: [INVESTIGATE_DIR][subject] is an invalid path or cannot be accessed.</span>")
 				return
-			src << browse(F,"window=investigate[subject];size=800x300")
+			var/datum/browser/popup = new(src, "investigate[subject]", "Investigation - [subject]", 800, 300)
+			popup.set_content(F)
+			popup.open()
 
 		if("hrefs")				//persistant logs and stuff
 			if(config && config.log_hrefs)
 				if(href_logfile)
-					src << browse(href_logfile,"window=investigate[subject];size=800x300")
+					var/datum/browser/popup = new(src, "investigate[subject]", "Investigation - [subject]", 800, 300)
+					popup.set_content(href_logfile)
+					popup.open()
 				else
 					to_chat(src, "<span class='warning'>Error: admin_investigate: No href logfile found.</span>")
 					return

@@ -107,7 +107,6 @@
 
 
 /obj/machinery/computer/arcade/battle/interact(mob/user)
-	user.set_machine(src)
 	var/dat = "<a href='byond://?src=\ref[src];close=1'>Close</a>"
 	dat += "<center><h4>[src.enemy_name]</h4></center>"
 
@@ -121,12 +120,11 @@
 		dat += "<a href='byond://?src=\ref[src];attack=1'>Attack</a> | "
 		dat += "<a href='byond://?src=\ref[src];heal=1'>Heal</a> | "
 		dat += "<a href='byond://?src=\ref[src];charge=1'>Recharge Power</a>"
-
 	dat += "</b></center>"
+	var/datum/browser/written/popup = new(user, "arcade", "Arcade Cabinet")
+	popup.set_content(dat)
+	popup.open()
 
-	user << browse(dat, "window=arcade")
-	onclose(user, "arcade")
-	return
 
 /obj/machinery/computer/arcade/battle/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
 	if((blocked || gameover) && href_list && (href_list["attack"] || href_list["heal"] || href_list["charge"]))

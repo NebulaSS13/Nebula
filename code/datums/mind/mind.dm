@@ -131,7 +131,10 @@
 
 	var/datum/goal/ambition/ambition = SSgoals.ambitions[src]
 	out += "<b>Ambitions:</b> [ambition ? ambition.description : "None"] <a href='?src=\ref[src];amb_edit=\ref[src]'>\[edit\]</a></br>"
-	usr << browse(out, "window=edit_memory[src]")
+
+	var/datum/browser/popup = new(usr, "edit_memory[src]", "Edit Memory")
+	popup.set_content(out)
+	popup.open()
 
 /datum/mind/proc/get_goal_from_href(var/href)
 	var/ind = isnum(href) ? href : text2num(href)

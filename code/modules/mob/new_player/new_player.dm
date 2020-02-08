@@ -203,7 +203,7 @@
 			if("nostats")
 				option = "NOSTATS"
 			if("later")
-				usr << browse(null,"window=privacypoll")
+				close_browser(usr, "privacypoll")
 				return
 			if("abstain")
 				option = "ABSTAIN"
@@ -216,7 +216,7 @@
 			var/DBQuery/query_insert = dbcon.NewQuery(sql)
 			query_insert.Execute()
 			to_chat(usr, "<b>Thank you for your vote!</b>")
-			usr << browse(null,"window=privacypoll")
+			close_browser(usr, "privacypoll")
 
 	if(!ready && href_list["preference"])
 		if(client)

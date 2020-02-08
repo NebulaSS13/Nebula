@@ -238,10 +238,10 @@ var/global/floorIsLava = 0
 	body += {"<br>
 		</body></html>
 	"}
-
-	usr << browse(body, "window=adminplayeropts;size=550x515")
+	var/datum/browser/popup = new(usr, "adminplayeropts", "Player Panel", 500, 515)
+	popup.set_content(body)
+	popup.open()
 	SSstatistics.add_field_details("admin_verb","SPP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 
 /datum/player_info/var/author // admin who authored the information
 /datum/player_info/var/rank //rank of admin who made the notes
@@ -611,13 +611,9 @@ var/global/floorIsLava = 0
 		else
 			dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
 
-//	log_debug("Channelname: [src.admincaster_feed_channel.channel_name] [src.admincaster_feed_channel.author]")
-//	log_debug("Msg: [src.admincaster_feed_message.author] [src.admincaster_feed_message.body]")
-
-	usr << browse(dat, "window=admincaster_main;size=400x600")
-	onclose(usr, "admincaster_main")
-
-
+	var/datum/browser/popup = new(usr, "admincaster_main", "Admincaster", 400, 600)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/admins/proc/Jobbans()
 	if(!check_rights(R_BAN))	return
@@ -629,7 +625,9 @@ var/global/floorIsLava = 0
 			r = copytext( r, 1, findtext(r,"##") )//removes the description
 		dat += text("<tr><td>[t] (<A href='?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
 	dat += "</table>"
-	usr << browse(dat, "window=ban;size=400x400")
+	var/datum/browser/popup = new(usr, "ban", "Job Bans", 400, 400)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/admins/proc/Game()
 	if(!check_rights(0))	return
@@ -651,9 +649,9 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];vsc=phoron'>Edit Phoron Settings</A><br>
 		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
-
-	usr << browse(dat, "window=admin2;size=210x280")
-	return
+	var/datum/browser/popup = new(usr, "admin2", "Admin Panel", 210, 280)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/admins/proc/Secrets(var/datum/admin_secret_category/active_category = null)
 	if(!check_rights(0))	return
@@ -1232,7 +1230,9 @@ var/global/floorIsLava = 0
 		out += " None."
 	out += " <a href='?src=\ref[SSticker.mode];add_antag_type=1'>\[+\]</a><br/>"
 
-	usr << browse(out, "window=edit_mode[src]")
+	var/datum/browser/popup = new(usr, "edit_mode[src]", "Edit Mode")
+	popup.set_content(out)
+	popup.open()
 	SSstatistics.add_field_details("admin_verb","SGM")
 
 

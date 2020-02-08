@@ -24,8 +24,10 @@
 	origin_tech = "{'" + TECH_MAGNET + "':1}"
 	matter = list(MAT_ALUMINIUM = 400)
 
-/obj/item/locator/attack_self(mob/user as mob)
-	user.set_machine(src)
+/obj/item/locator/attack_self(mob/user)
+	interact(user)
+
+/obj/item/locator/interact(mob/user)
 	var/dat
 	if (src.temp)
 		dat = "[src.temp]<BR><BR><A href='byond://?src=\ref[src];temp=1'>Clear</A>"
@@ -37,11 +39,10 @@ Frequency:
 <A href='byond://?src=\ref[src];freq=-2'>-</A> [format_frequency(src.frequency)]
 <A href='byond://?src=\ref[src];freq=2'>+</A>
 <A href='byond://?src=\ref[src];freq=10'>+</A><BR>
-
 <A href='?src=\ref[src];refresh=1'>Refresh</A>"}
-	user << browse(dat, "window=radio")
-	onclose(user, "radio")
-	return
+	var/datum/browser/written/popup = new(user, "locator", "Locator")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/item/locator/Topic(href, href_list)
 	..()

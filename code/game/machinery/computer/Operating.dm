@@ -27,26 +27,17 @@
 			user.unset_machine()
 			close_browser(user, "op")
 			return
-
-	user.set_machine(src)
 	var/dat = "<HEAD><TITLE>Operating Computer</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
 	dat += "<A HREF='?src=\ref[user];mach_close=op'>Close</A><br><br>" //| <A HREF='?src=\ref[user];update=1'>Update</A>"
-	if(src.table && (src.table.check_victim()))
-		src.victim = src.table.victim
-		dat += {"
-<B>Patient Information:</B><BR>
-<BR>
-[medical_scan_results(victim, 1)]
-"}
+	if(table && (table.check_victim()))
+		victim = src.table.victim
+		dat += "<B>Patient Information:</B><BR><BR>[medical_scan_results(victim, 1)]"
 	else
-		src.victim = null
-		dat += {"
-<B>Patient Information:</B><BR>
-<BR>
-<B>No Patient Detected</B>
-"}
-	user << browse(dat, "window=op")
-	onclose(user, "op")
+		victim = null
+		dat += "<B>Patient Information:</B><BR><BR><B>No Patient Detected</B>"
+	var/datum/browser/written/popup = new(user, "op", "Operating Table")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/computer/operating/Process()
 	if(!inoperable())

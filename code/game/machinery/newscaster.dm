@@ -200,9 +200,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		var/mob/living/human_or_robot_user = user
 		var/dat
 		dat = text("<HEAD><TITLE>Newscaster</TITLE></HEAD><H3>Newscaster Unit #[src.unit_no]</H3>")
-
 		src.scan_user(human_or_robot_user) //Newscaster scans you
-
 		switch(screen)
 			if(0)
 				dat += "Welcome to Newscasting Unit #[src.unit_no].<BR> Interface & News networks Operational."
@@ -445,10 +443,9 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			else
 				dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
 
-		var/processed_dat = human_or_robot_user.handle_reading_literacy(human_or_robot_user, dat)
-		if(processed_dat)
-			human_or_robot_user << browse(processed_dat, "window=newscaster_main;size=400x600")
-		onclose(human_or_robot_user, "newscaster_main")
+		var/datum/browser/written/popup = new(human_or_robot_user, "newscaster_main", "Newscaster", 400, 600)
+		popup.set_content(dat)
+		popup.open()
 
 /obj/machinery/newscaster/Topic(href, href_list)
 	if(..())
@@ -855,13 +852,9 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+= "<HR><DIV STYLE='float:left;'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
 
 		dat+="<BR><HR><div align='center'>[src.curr_page+1]</div>"
-		var/processed_dat = human_user.handle_reading_literacy(human_user, dat)
-		if(processed_dat)
-			human_user << browse(processed_dat, "window=newspaper_main;size=300x400")
-			onclose(human_user, "newspaper_main")
-	else
-		to_chat(user, "The paper is full of unintelligible symbols!")
-
+		var/datum/browser/written/popup = new(human_user, "newspaper_main", "Newspaper", 300, 400)
+		popup.set_content(dat)
+		popup.open()
 
 /obj/item/newspaper/Topic(href, href_list)
 	var/mob/living/U = usr

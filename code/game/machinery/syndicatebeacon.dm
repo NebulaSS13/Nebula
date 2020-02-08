@@ -24,7 +24,6 @@
 	return TRUE
 
 /obj/machinery/syndicate_beacon/interact(var/mob/user)
-	user.set_machine(src)
 	var/dat = "<font color=#005500><i>Scanning [pick("retina pattern", "voice print", "fingerprints", "dna sequence")]...<br>Identity confirmed,<br></i></font>"
 	if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
 		if(is_special_character(user))
@@ -38,9 +37,9 @@
 			dat += "<font color=red><i>Identity not found in operative database. What can the Syndicate do for you today, [honorific] [user.name]?</i></font><br>"
 			if(!selfdestructing)
 				dat += "<br><br><A href='?src=\ref[src];betraitor=1;traitormob=\ref[user]'>\"[pick("I want to switch teams.", "I want to work for you.", "Let me join you.", "I can be of use to you.", "You want me working for you, and here's why...", "Give me an objective.", "How's the 401k over at the Syndicate?")]\"</A><BR>"
-	dat += temptext
-	user << browse(dat, "window=syndbeacon")
-	onclose(user, "syndbeacon")
+	var/datum/browser/popup = new(user, "syndbeacon", x)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/syndicate_beacon/Topic(href, href_list)
 	if(..())

@@ -41,20 +41,16 @@
 	return TRUE
 
 /obj/machinery/computer/cryopod/interact(mob/user)
-	user.set_machine(src)
-
-	var/dat
-
-	dat += "<hr/><br/><b>[storage_name]</b><br/>"
+	var/dat = "<hr/><br/><b>[storage_name]</b><br/>"
 	dat += "<i>Welcome, [user.real_name].</i><br/><br/><hr/>"
 	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
 	if(allow_items)
 		dat += "<a href='?src=\ref[src];view=1'>View objects</a>.<br>"
 		dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
 		dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
-
-	user << browse(dat, "window=cryopod_console")
-	onclose(user, "cryopod_console")
+	var/datum/browser/popup = new(user, "cryopod_console", "Cryopod Console")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/computer/cryopod/OnTopic(user, href_list, state)
 	if(href_list["log"])

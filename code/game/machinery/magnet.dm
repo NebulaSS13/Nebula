@@ -254,9 +254,9 @@
 	dat += "Path: {<a href='?src=\ref[src];operation=setpath'>[path]</a>}<br>"
 	dat += "Moving: <a href='?src=\ref[src];operation=togglemoving'>[moving ? "Enabled":"Disabled"]</a>"
 
-
-	user << browse(dat, "window=magnet;size=400x500")
-	onclose(user, "magnet")
+	var/datum/browser/written/popup = new(user, "magnet", "Target Magnet Control", 400, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/magnetic_controller/Topic(href, href_list)
 	if(..())

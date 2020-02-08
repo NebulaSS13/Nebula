@@ -50,10 +50,10 @@
 		else
 			to_chat(user, "There is enough charge for [get_amount()].")
 
-/obj/item/stack/attack_self(mob/user as mob)
+/obj/item/stack/attack_self(mob/user)
 	list_recipes(user)
 
-/obj/item/stack/proc/list_recipes(mob/user as mob, recipes_sublist)
+/obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)
 	if (!recipes)
 		return
 	if (!src || get_amount() <= 0)
@@ -106,8 +106,9 @@
 					t1 += " <A href='?src=\ref[src];make=[i];multiplier=[max_multiplier]'>[max_multiplier*R.res_amount]x</A>"
 
 	t1 += "</TT></body></HTML>"
-	user << browse(JOINTEXT(t1), "window=stack")
-	onclose(user, "stack")
+	var/datum/browser/popup = new(user, "stack", "Stack Crafting")
+	popup.set_content(JOINTEXT(t1))
+	popup.open()
 
 /obj/item/stack/proc/produce_recipe(datum/stack_recipe/recipe, var/quantity, mob/user)
 	var/required = quantity*recipe.req_amount
@@ -302,7 +303,7 @@
 	if (amount < max_amount)
 		. = ceil(. * amount / max_amount)
 
-/obj/item/stack/attack_hand(mob/user as mob)
+/obj/item/stack/attack_hand(mob/user)
 	if (user.get_inactive_hand() == src)
 		var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
 		if(N)
@@ -318,7 +319,7 @@
 		..()
 	return
 
-/obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stack/attackby(obj/item/W as obj, mob/user)
 	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W
 		src.transfer_to(S)

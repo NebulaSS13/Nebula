@@ -427,9 +427,9 @@ var/list/datum/power/changeling/powerinstances = list()
 		</script>
 	</body></html>
 	"}
-
-	usr << browse(dat, "window=powers;size=900x480")
-
+	var/datum/browser/popup = new(usr, "powers", "Changeling Powers", 900, 480)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/changeling/Topic(href, href_list)
 	..()

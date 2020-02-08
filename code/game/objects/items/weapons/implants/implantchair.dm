@@ -44,10 +44,10 @@
 	dat += "<B>Implants:</B> [src.implant_list.len ? "[implant_list.len]" : "<A href='?src=\ref[src];replenish=1'>Replenish</A>"]<BR>"
 	if(src.occupant)
 		dat += "[src.ready ? "<A href='?src=\ref[src];implant=1'>Implant</A>" : "Recharging"]<BR>"
-	user.set_machine(src)
-	user << browse(dat, "window=implant")
-	onclose(user, "implant")
 
+	var/datum/browser/written/popup = new(user, "implant", "Implant Chair")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/implantchair/Topic(href, href_list)
 	if((. = ..()))

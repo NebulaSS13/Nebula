@@ -403,7 +403,7 @@
 		insert_query.Execute()
 
 		to_chat(usr, "<span class='notice'>Vote successful.</span>")
-		usr << browse(null,"window=playerpoll")
+		close_browser(usr, "playerpoll")
 
 
 /mob/new_player/proc/log_text_poll_reply(var/pollid = -1, var/replytext = "")
@@ -461,7 +461,7 @@
 		insert_query.Execute()
 
 		to_chat(usr, "<span class='notice'>Feedback logging successful.</span>")
-		usr << browse(null,"window=playerpoll")
+		close_browser(usr, "playerpoll")
 
 
 /mob/new_player/proc/vote_on_numval_poll(var/pollid = -1, var/optionid = -1, var/rating = null)
@@ -523,4 +523,4 @@
 		insert_query.Execute()
 
 		to_chat(usr, "<span class='notice'>Vote successful.</span>")
-		usr << browse(null,"window=playerpoll")
+		close_browser(usr, "playerpoll")
