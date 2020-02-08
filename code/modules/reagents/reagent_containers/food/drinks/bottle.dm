@@ -213,15 +213,15 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/whiskey, 100)
 
-/obj/item/chems/food/drinks/bottle/DinnishFirewater
-	name = "Dinnish Firewater"
-	desc = "This astounding, special beverage was distilled in old Dinland.  I hope they're still producing under their new government."
+/obj/item/chems/food/drinks/bottle/dinnishfirewater
+	name = "Old Dinnish Firewater"
+	desc = "This rich, smooth, hideously expensive beverage was distilled in old Dinland.  I hope they're still producing under their new government."
 	icon_state = "whiskeybottle2"
 	center_of_mass = @"{'x':16,'y':3}"		
 
-/obj/item/chems/food/drinks/bottle/DinnishFirewater/Initialize()
+/obj/item/chems/food/drinks/bottle/dinnishfirewater/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/ethanol/DinnishFirewater, 100)
+	reagents.add_reagent(/datum/reagent/ethanol/aged_whiskey, 100)
 
 /obj/item/chems/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
