@@ -57,19 +57,19 @@
 		holder.update_icon()
 	update_beams()
 
-/obj/item/assembly/infra/interact(mob/user as mob)//TODO: change this this to the wire control panel
+/obj/item/assembly/infra/interact(mob/user)//TODO: change this this to the wire control panel
 	if(!secured)
 		return
 	if(!CanInteract(user, GLOB.physical_state))
 		return
 
-	user.set_machine(src)
 	var/dat = list()
 	dat += text("<TT><B>Infrared Laser</B>\n<B>Status</B>: []<BR>\n<B>Visibility</B>: []<BR>\n</TT>", (on ? text("<A href='?src=\ref[];state=0'>On</A>", src) : text("<A href='?src=\ref[];state=1'>Off</A>", src)), (src.visible ? text("<A href='?src=\ref[];visible=0'>Visible</A>", src) : text("<A href='?src=\ref[];visible=1'>Invisible</A>", src)))
 	dat += "<BR><BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><BR><A href='?src=\ref[src];close=1'>Close</A>"
-	user << browse(jointext(dat,null), "window=infra")
-	onclose(user, "infra")
+	var/datum/browser/popup = new(user, "infra", "Infrared Laser")
+	popup.set_content(jointext(dat,null))
+	popup.open()
 
 /obj/item/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)
 	if(..())

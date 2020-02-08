@@ -39,8 +39,9 @@
 
 	output += "</div>"
 
-	src << browse(output,"window=privacypoll;size=600x500")
-	return
+	var/datum/browser/popup = new(src, "privacypoll", "Privacy Poll", 600, 500)
+	popup.set_content(output)
+	popup.open()
 
 /datum/polloption
 	var/optionid
@@ -74,10 +75,9 @@
 			i++
 
 		output += "</table>"
-
-		src << browse(output,"window=playerpolllist;size=500x300")
-
-
+		var/datum/browser/popup = new(src, "playerpolllist", "Player Polls", 500, 300)
+		popup.set_content(output)
+		popup.open()
 
 /mob/new_player/proc/poll_player(var/pollid = -1)
 	if(pollid == -1) return
@@ -157,8 +157,9 @@
 					output += "</form>"
 
 				output += "</div>"
-
-				src << browse(output,"window=playerpoll;size=500x250")
+				var/datum/browser/popup = new(src, "playerpoll", "Player Poll", 500, 250)
+				popup.set_content(output)
+				popup.open()
 
 			//Polls with a text input
 			if("TEXT")
@@ -199,8 +200,9 @@
 					output += "</form>"
 				else
 					output += "[vote_text]"
-
-				src << browse(output,"window=playerpoll;size=500x500")
+				var/datum/browser/popup = new(src, "playerpoll", "Player Poll", 500, 500)
+				popup.set_content(output)
+				popup.open()
 
 			//Polls with a text input
 			if("NUMVAL")
@@ -271,7 +273,10 @@
 					output += "<p><input type='submit' value='Submit'>"
 					output += "</form>"
 
-				src << browse(output,"window=playerpoll;size=500x500")
+				var/datum/browser/popup = new(src, "playerpoll", "Player Poll", 500, 500)
+				popup.set_content(output)
+				popup.open()
+
 			if("MULTICHOICE")
 				var/DBQuery/voted_query = dbcon.NewQuery("SELECT optionid FROM erro_poll_vote WHERE pollid = [pollid] AND ckey = '[usr.ckey]'")
 				voted_query.Execute()
@@ -332,9 +337,9 @@
 					output += "</form>"
 
 				output += "</div>"
-
-				src << browse(output,"window=playerpoll;size=500x250")
-		return
+				var/datum/browser/popup = new(src, "playerpoll", "Player Poll", 500, 250)
+				popup.set_content(output)
+				popup.open()
 
 /mob/new_player/proc/vote_on_poll(var/pollid = -1, var/optionid = -1, var/multichoice = 0)
 	if(pollid == -1 || optionid == -1)

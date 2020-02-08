@@ -433,7 +433,9 @@
 		additional_dat += "<br>"
 		dat = additional_dat + dat
 	dat = header + dat
-	src << browse(jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
+	var/datum/browser/popup = new(src, "latechoices", "Latejoin Slots", 450, 640)
+	popup.set_content(jointext(dat, null))
+	popup.open()
 
 /mob/new_player/proc/create_character(var/turf/spawn_turf)
 	spawning = 1
@@ -507,7 +509,6 @@
 /mob/new_player/proc/ViewManifest()
 	var/dat = "<div align='center'>"
 	dat += html_crew_manifest(OOC = 1)
-	//src << browse(dat, "window=manifest;size=370x420;can_close=1")
 	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
 	popup.set_content(dat)
 	popup.open()

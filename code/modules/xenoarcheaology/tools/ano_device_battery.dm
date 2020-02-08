@@ -71,9 +71,9 @@
 
 	dat += "<hr>"
 	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
-
-	user << browse(dat, "window=anodevice;size=400x500")
-	onclose(user, "anodevice")
+	var/datum/browser/written/popup = new(user, "anodevice", "Device Analyzer", 400, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/item/anodevice/Process()
 	if(activated)

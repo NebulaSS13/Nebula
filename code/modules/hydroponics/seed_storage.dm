@@ -266,8 +266,9 @@
 			dat += "</tr>"
 		dat += "</table>"
 
-	user << browse(dat, "window=seedstorage;size=800x500")
-	onclose(user, "seedstorage")
+	var/datum/browser/written/popup = new(user, "seedstorage", "Seed Storage", 800, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/seed_storage/Topic(var/href, var/list/href_list)
 	if (..())

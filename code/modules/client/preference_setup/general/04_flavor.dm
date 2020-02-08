@@ -111,8 +111,9 @@
 	HTML += "<br>"
 	HTML += "<hr />"
 	HTML += "<tt>"
-	user << browse(HTML, "window=flavor_text;size=430x300")
-	return
+	var/datum/browser/popup = new(user, "flavor_text", "Flavor Text", 430, 300)
+	popup.set_content(HTML)
+	popup.open()
 
 /datum/category_item/player_setup_item/physical/flavor/proc/SetFlavourTextRobot(mob/user)
 	var/HTML = "<body>"
@@ -128,5 +129,6 @@
 		HTML += "<br>"
 	HTML += "<hr />"
 	HTML += "<tt>"
-	user << browse(HTML, "window=flavour_text_robot;size=430x300")
-	return
+	var/datum/browser/popup = new(user, "flavor_text_robot", "Robot Flavor Text", 430, 300)
+	popup.set_content(HTML)
+	popup.open()

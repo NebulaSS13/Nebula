@@ -9,4 +9,6 @@
 	var/dat = "<B>Bombing List</B>"
 	for(var/l in GLOB.bombers)
 		dat += text("[l]<BR>")
-	user << browse(dat, "window=bombers")
+	var/datum/browser/popup = new(user, "bombers", "Bombing List")
+	popup.set_content(dat)
+	popup.open()

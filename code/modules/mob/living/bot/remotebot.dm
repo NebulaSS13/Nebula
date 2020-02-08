@@ -115,9 +115,9 @@
 	var/is_looking = (user.client.eye == bot)
 	dat += "<a href='byond://?src=\ref[src];look=[is_looking];'>[is_looking ? "Stop" : "Start"] Looking</a><br>"
 	dat += "<a href='byond://?src=\ref[src];drop=1;'>Drop Item</a><br></center>"
-
-	user << browse(dat, "window=bot_controller")
-	onclose(user, "botcontroller")
+	var/datum/browser/written/popup = new(user, "botcontroller", "Bot Controller")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/item/bot_controller/check_eye()
 	return 0

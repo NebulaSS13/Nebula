@@ -10,4 +10,6 @@
 		dat += "<li>[l]</li>"
 	if(!GLOB.admin_log.len)
 		dat += "No-one has done anything this round!"
-	user << browse(dat, "window=admin_log")
+	var/datum/browser/popup = new(user, "admin_log", "Admin Log")
+	popup.set_content(dat)
+	popup.open()

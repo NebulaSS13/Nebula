@@ -212,22 +212,18 @@
 	set name = "Check Known Languages"
 	set category = "IC"
 	set src = usr
-
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
-
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
 			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
-
-	src << browse(dat, "window=checklanguage")
-	return
+	var/datum/browser/popup = new(src, "checklanguage", "Check Known Languages")
+	popup.set_content(dat)
+	popup.open()
 
 /mob/living/check_languages()
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
-
 	if(default_language)
 		dat += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
-
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
 			if(L == default_language)
@@ -236,8 +232,9 @@
 				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
 			else
 				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
-
-	src << browse(dat, "window=checklanguage")
+	var/datum/browser/popup = new(src, "checklanguage", "Known Languages")
+	popup.set_content(dat)
+	popup.open()
 
 /mob/living/OnSelfTopic(href_list)
 	if(href_list["default_lang"])

@@ -80,10 +80,9 @@
 
 	else
 		dat += "No local gravity generator detected!"
-
-	user << browse(dat, "window=gravgen")
-	onclose(user, "gravgen")
-
+	var/datum/browser/written/popup = new(user, "gravgen", "Gravity Generator")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/computer/gravity_control_computer/Topic(href, href_list)
 	set background = 1

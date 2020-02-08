@@ -42,7 +42,9 @@
 </body>
 </html>"}
 
-	usr << browse(output,"window=editrights;size=600x500")
+	var/datum/browser/popup = new(usr, "editrights", "Edit Rights", 600, 500)
+	popup.set_content(output)
+	popup.open()
 
 /datum/admins/proc/log_admin_rank_modification(var/adm_ckey, var/new_rank)
 	if(config.admin_legacy_system)	return

@@ -37,9 +37,9 @@
 	dat += "Current toner level: [toner]"
 	if(!toner)
 		dat +="<BR>Please insert a new toner cartridge!"
-	user << browse(dat, "window=copier")
-	onclose(user, "copier")
-	return
+	var/datum/browser/written/popup = new(user, "copier", "Photocopier")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/photocopier/Topic(href, href_list)
 	if(href_list["copy"])

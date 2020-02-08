@@ -455,5 +455,6 @@
 			dat += text("[module.emag]: <A HREF=?src=\ref[src];act=\ref[module.emag]>Activate</A><BR>")
 
 	dat += resources
-
-	src << browse(dat, "window=robotmod")
+	var/datum/browser/popup = new(src, "robotmod", "Robot Module")
+	popup.set_content(dat)
+	popup.open()

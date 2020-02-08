@@ -17,12 +17,11 @@
 /client/proc/view_chemical_reaction_logs()
 	set name = "Show Chemical Reactions"
 	set category = "Admin"
-
 	if(!check_rights(R_ADMIN))
 		return
-
 	var/html = ""
 	for(var/entry in chemical_reaction_logs)
 		html += "[entry]<br>"
-
-	usr << browse(html, "window=chemlogs")
+	var/datum/browser/popup = new(usr, "chemlogs", "Show Chemical Reactions")
+	popup.set_content(html)
+	popup.open()

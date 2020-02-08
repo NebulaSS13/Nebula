@@ -82,10 +82,9 @@
 		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
 
 /obj/item/paper/proc/show_content(mob/user, forceshow)
-	var/show_info = user.handle_reading_literacy(user, info, FALSE, (forceshow || get_dist(src, user) <= 1))
-	if(show_info)
-		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[show_info][stamps]</BODY></HTML>", "window=[name]")
-		onclose(user, "[name]")
+	var/datum/browser/written/popup = new(user, "[name]", "Paper")
+	popup.set_content("<BODY bgcolor='[color]'>[info][stamps]</BODY>")
+	popup.open()
 
 /obj/item/paper/verb/rename()
 	set name = "Rename paper"
@@ -334,14 +333,11 @@
 			updateinfolinks()
 
 		last_modified_ckey = usr.ckey
-
 		update_space(t)
-		var/processed_info_links = usr.handle_reading_literacy(usr, info_links, TRUE)
-		if(processed_info_links)
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
-			playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 10)
-			update_icon()
-
+		var/datum/browser/written/popup = new(usr, "[name]", "Paper")
+		popup.set_content("<BODY bgcolor='[color]'>[t][stamps]</BODY>")
+		popup.open()
+		update_icon()
 
 /obj/item/paper/attackby(obj/item/P, mob/user)
 	..()
@@ -386,14 +382,13 @@
 		if(icon_state == "scrap")
 			to_chat(usr, "<span class='warning'>\The [src] is too crumpled to write on.</span>")
 			return
-
 		var/obj/item/pen/robopen/RP = P
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
 		else
-			var/processed_info_links = user.handle_reading_literacy(user, info_links, length(info))
-			if(processed_info_links)
-				user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]")
+			var/datum/browser/written/popup = new(user, "[name]", "Paper")
+			popup.set_content("<BODY bgcolor='[color]'>[info_links][stamps]</BODY>")
+			popup.open()
 		return
 
 	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))

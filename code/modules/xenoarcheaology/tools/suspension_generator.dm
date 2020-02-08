@@ -70,8 +70,9 @@
 		dat += "<br>"
 	dat += "<A href='?src=\ref[src];refresh=1'>Refresh console</A><br>"
 	dat += "<A href='?src=\ref[src];close=1'>Close console</A>"
-	user << browse(dat, "window=suspension;size=500x400")
-	onclose(user, "suspension")
+	var/datum/browser/written/popup = new(user, "suspension", "Suspension Generator", 500, 400)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/suspension_gen/OnTopic(var/mob/user, href_list)
 	if(href_list["toggle_field"])

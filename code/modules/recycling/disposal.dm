@@ -261,13 +261,10 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		dat += "Pump: <A href='?src=\ref[src];pump=0'>Off</A> <B>On</B> (idle)<BR>"
 
 	var/per = 100* air_contents.return_pressure() / (SEND_PRESSURE)
-
 	dat += "Pressure: [round(per, 1)]%<BR></body>"
-
-
-	user.set_machine(src)
-	user << browse(dat, "window=disposal;size=360x170")
-	onclose(user, "disposal")
+	var/datum/browser/written/popup = new(user, "disposal", "Disposal Outlet", 360, 170)
+	popup.set_content(dat)
+	popup.open()
 
 // handle machine interaction
 

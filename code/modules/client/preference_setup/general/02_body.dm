@@ -333,7 +333,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/choice = input("Which species would you like to look at?") as null|anything in playable_species
 		if(choice)
 			var/datum/species/current_species = all_species[choice]
-			user << browse(current_species.get_description(), "window=species;size=700x400")
+			var/datum/browser/popup = new(user, "species", "Species Information", 700, 400)
+			popup.set_content(current_species.get_description())
+			popup.open()
 			return TOPIC_HANDLED
 
 	else if(href_list["set_species"])

@@ -57,10 +57,9 @@
 		<A href='byond://?src=\ref[src];code=5'>+</A><BR>
 		[t1]
 		</TT>"}
-	user << browse(dat, "window=radio")
-	onclose(user, "radio")
-	return
-
+	var/datum/browser/popup = new(user, "radio", "Signaller")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/item/assembly/signaler/Topic(href, href_list, state = GLOB.physical_state)
 	if((. = ..()))

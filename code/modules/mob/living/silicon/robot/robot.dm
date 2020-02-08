@@ -396,18 +396,16 @@
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Silicon Commands"
 	set name = "Self Diagnosis"
-
 	if(!is_component_functioning("diagnosis unit"))
 		to_chat(src, "<span class='warning'>Your self-diagnosis component isn't functioning.</span>")
 		return
-
 	var/datum/robot_component/CO = get_component("diagnosis unit")
 	if (!cell_use_power(CO.active_usage))
 		to_chat(src, "<span class='warning'>Low Power.</span>")
 		return
-	var/dat = self_diagnosis()
-	src << browse(dat, "window=robotdiagnosis")
-
+	var/datum/browser/popup = new(src, "robotdiagnosis", "Diagnostics")
+	popup.set_content(self_diagnosis())
+	popup.open()
 
 /mob/living/silicon/robot/verb/toggle_component()
 	set category = "Silicon Commands"
@@ -796,14 +794,9 @@
 			dat += text("[module.emag]: <B>Activated</B><BR>")
 		else
 			dat += text("[module.emag]: <A HREF=?src=\ref[src];act=\ref[module.emag]>Activate</A><BR>")
-/*
-		if(activated(obj))
-			dat += text("[obj]: \[<B>Activated</B> | <A HREF=?src=\ref[src];deact=\ref[obj]>Deactivate</A>\]<BR>")
-		else
-			dat += text("[obj]: \[<A HREF=?src=\ref[src];act=\ref[obj]>Activate</A> | <B>Deactivated</B>\]<BR>")
-*/
-	src << browse(dat, "window=robotmod")
-
+	var/datum/browser/popup = new(src, "robotmod", "Robot Modules")
+	popup.set_content(dat)
+	popup.open()
 
 /mob/living/silicon/robot/OnSelfTopic(href_list)
 	if (href_list["showalerts"])

@@ -11,4 +11,6 @@
 		if(H.dna && H.ckey)
 			dat += "<tr><td>[H]</td><td>[H.dna.unique_enzymes]</td><td>[H.b_type]</td></tr>"
 	dat += "</table>"
-	user << browse(dat, "window=DNA;size=440x410")
+	var/datum/browser/popup = new(user, "DNA", "List DNA", 440, 410)
+	popup.set_content(dat)
+	popup.open()

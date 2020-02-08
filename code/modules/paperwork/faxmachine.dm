@@ -91,10 +91,9 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 		if(copyitem)
 			dat += "<a href ='byond://?src=\ref[src];remove=1'>Remove Item</a><br>"
-
-	user << browse(dat, "window=copier")
-	onclose(user, "copier")
-	return
+	var/datum/browser/popup = new(user, "copied", "Photocopier")
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/photocopier/faxmachine/Topic(href, href_list)
 	if(href_list["send"])

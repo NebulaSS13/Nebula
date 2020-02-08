@@ -226,8 +226,9 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	dat += {"
 	<body>
 	"}
-
-	M << browse(dat, "window=paiRecruit;size=580x580;")
+	var/datum/browser/popup = new(M, "paiRecruit", "pAI Recruiting", 580, 580)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/paiController/proc/findPAI(var/obj/item/paicard/p, var/mob/user)
 	requestRecruits(user)
@@ -342,9 +343,9 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 			</body>
 		</html>
 	"}
-
-	user << browse(dat, "window=findPai")
-
+	var/datum/browser/popup = new(user, "findPai", "Find a pAI")
+	popup.set_content(dat)
+	popup.open()
 
 /datum/paiController/proc/requestRecruits(var/mob/user)
 	inquirer = user

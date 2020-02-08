@@ -9,4 +9,6 @@
 	dat += "<h4>Crew Manifest</h4>"
 	dat += html_crew_manifest()
 
-	user << browse(dat, "window=manifest;size=370x420;can_close=1")
+	var/datum/browser/popup = new(user, "manifest", "Crew Manifest", 370, 420)
+	popup.set_content(dat)
+	popup.open()

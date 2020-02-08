@@ -134,18 +134,15 @@
  * Inventory
  */
 /mob/living/simple_animal/hostile/retaliate/parrot/show_inv(mob/user as mob)
-	user.set_machine(src)
 	if(user.stat) return
-
 	var/dat = 	"<div align='center'><b>Inventory of [name]</b></div><p>"
 	if(ears)
 		dat +=	"<br><b>Headset:</b> [ears] (<a href='?src=\ref[src];remove_inv=ears'>Remove</a>)"
 	else
 		dat +=	"<br><b>Headset:</b> <a href='?src=\ref[src];add_inv=ears'>Nothing</a>"
-
-	user << browse(dat, text("window=mob[];size=325x500", name))
-	onclose(user, "mob[real_name]")
-	return
+	var/datum/browser/popup = new(user, "mob[name]", "Inventory", 325, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /mob/living/simple_animal/hostile/retaliate/parrot/DefaultTopicState()
 	return GLOB.physical_state

@@ -517,4 +517,6 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 			output += "</table></div>"
 
-	usr << browse(output,"window=lookupbans;size=900x700")
+	var/datum/browser/popup = new(usr, "lookupbans", "Ban Lookup", 900, 700)
+	popup.set_content(output)
+	popup.open()

@@ -16,4 +16,6 @@
 			else if(!H.dna)
 				dat += "<tr><td>[H]</td><td>H.dna = null</td></tr>"
 	dat += "</table>"
-	user << browse(dat, "window=fingerprints;size=440x410")
+	var/datum/browser/popup = new(user, "fingerprints", "List Fingerprints", 440, 410)
+	popup.set_content(dat)
+	popup.open()

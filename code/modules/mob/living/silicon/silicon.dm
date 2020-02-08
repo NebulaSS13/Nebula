@@ -171,17 +171,16 @@
 	dat += "<h4>Crew Manifest</h4>"
 	dat += html_crew_manifest(1) // make it monochrome
 	dat += "<br>"
-	src << browse(dat, "window=airoster")
-	onclose(src, "airoster")
+	var/datum/browser/popup = new(src, "airoster", "Crew Manifest")
+	popup.set_content(dat)
+	popup.open()
 
 //can't inject synths
 /mob/living/silicon/can_inject(var/mob/user, var/target_zone)
 	to_chat(user, "<span class='warning'>The armoured plating is too tough.</span>")
 	return 0
 
-
 //Silicon mob language procs
-
 /mob/living/silicon/can_speak(datum/language/speaking)
 	return universal_speak || (speaking in src.speech_synthesizer_langs)	//need speech synthesizer support to vocalize a language
 
@@ -223,9 +222,9 @@
 
 			var/synth = (L in speech_synthesizer_langs)
 			dat += "<b>[L.name] ([get_language_prefix()][L.key])</b>[synth ? default_str : null]<br/>Speech Synthesizer: <i>[synth ? "YES" : "NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
-
-	src << browse(dat, "window=checklanguage")
-	return
+	var/datum/browser/popup = new(src, "checklanguage", "Check Language")
+	popup.set_content(dat)
+	popup.open()
 
 /mob/living/silicon/proc/toggle_sensor_mode()
 	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")

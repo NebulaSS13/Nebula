@@ -84,11 +84,10 @@
 		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 	for(var/obj/item/photo/Ph in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
-
-	user << browse(dat, "window=clipboard")
-	onclose(user, "clipboard")
+	var/datum/browser/popup = new(user, "clipboard", "Clipboard")
+	popup.set_content(dat)
+	popup.open()
 	add_fingerprint(usr)
-	return
 
 /obj/item/material/clipboard/Topic(href, href_list)
 	..()
@@ -149,15 +148,10 @@
 
 		else if(href_list["read"])
 			var/obj/item/paper/P = locate(href_list["read"])
-
 			if(P && (P.loc == src) && istype(P, /obj/item/paper) )
-
-				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
-				else
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
+				var/datum/browser/popup = new(usr, "[P.name]", "Clipboard")
+				popup.set_content("[P.info][P.stamps]")
+				popup.open()
 
 		else if(href_list["look"])
 			var/obj/item/photo/P = locate(href_list["look"])

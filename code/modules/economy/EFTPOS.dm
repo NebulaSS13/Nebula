@@ -105,7 +105,9 @@
 			dat += "<a href='?src=\ref[src];choice=change_code'>Change access code</a><br>"
 			dat += "<a href='?src=\ref[src];choice=change_id'>Change EFTPOS ID</a><br>"
 			dat += "Scan card to reset access code <a href='?src=\ref[src];choice=reset'>\[------\]</a>"
-		user << browse(dat,"window=eftpos")
+		var/datum/browser/written/popup = new(user, "eftpos", "EFTPOS")
+		popup.set_content(dat)
+		popup.open()
 	else
 		close_browser(user, "eftpos")
 

@@ -65,8 +65,9 @@
 	//
 	dat += "<HR>"
 	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</A> <A href='?src=\ref[src];close=1'>Close<BR>"
-	user << browse(dat, "window=artharvester;size=450x500")
-	onclose(user, "artharvester")
+	var/datum/browser/written/popup = new(user, "artharvester", "Artifact Harvester", 450, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/artifact_harvester/Process()
 	if(stat & (NOPOWER|BROKEN))

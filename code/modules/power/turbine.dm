@@ -147,29 +147,19 @@
 	AutoUpdateAI(src)
 
 /obj/machinery/power/turbine/interact(mob/user)
-
 	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
 		user.machine = null
 		close_browser(user, "turbine")
 		return
-
-	user.machine = src
-
 	var/t = "<TT><B>Gas Turbine Generator</B><HR><PRE>"
-
 	t += "Generated power : [round(lastgen)] W<BR><BR>"
-
 	t += "Turbine: [round(compressor.rpm)] RPM<BR>"
-
 	t += "Starter: [ compressor.starter ? "<A href='?src=\ref[src];str=1'>Off</A> <B>On</B>" : "<B>Off</B> <A href='?src=\ref[src];str=1'>On</A>"]"
-
 	t += "</PRE><HR><A href='?src=\ref[src];close=1'>Close</A>"
-
 	t += "</TT>"
-	user << browse(t, "window=turbine")
-	onclose(user, "turbine")
-
-	return
+	var/datum/browser/written/popup = new(user, "turbine", "Turbine")
+	popup.set_content(t)
+	popup.open()
 
 /obj/machinery/power/turbine/CanUseTopic(var/mob/user, href_list)
 	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
@@ -214,7 +204,6 @@
 	return TRUE
 
 /obj/machinery/computer/turbine_computer/interact(var/mob/user)
-	user.machine = src
 	var/dat
 	if(src.compressor)
 		dat += {"<BR><B>Gas turbine remote control system</B><HR>
@@ -230,12 +219,9 @@
 		\n"}
 	else
 		dat += "<span class='danger'>No compatible attached compressor found.</span>"
-
-	user << browse(dat, "window=computer;size=400x500")
-	onclose(user, "computer")
-	return
-
-
+	var/datum/browser/written/popup = new(user, "computer", "Computer", 400, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/computer/turbine_computer/OnTopic(user, href_list)
 	if( href_list["view"] )

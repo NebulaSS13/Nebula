@@ -346,18 +346,16 @@
 
 /obj/item/destTagger/proc/openwindow(mob/user as mob)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
-
 	dat += "<table style='width:100%; padding:4px;'><tr>"
 	for(var/i = 1, i <= GLOB.tagger_locations.len, i++)
 		dat += "<td><a href='?src=\ref[src];nextTag=[GLOB.tagger_locations[i]]'>[GLOB.tagger_locations[i]]</a></td>"
-
 		if (i%4==0)
 			dat += "</tr><tr>"
-
 	dat += "</tr></table><br>Current Selection: [currTag ? currTag : "None"]</tt>"
 	dat += "<br><a href='?src=\ref[src];nextTag=CUSTOM'>Enter custom location.</a>"
-	user << browse(dat, "window=destTagScreen;size=450x375")
-	onclose(user, "destTagScreen")
+	var/datum/browser/written/popup = new(user, "destTagScreen", "Destination Tagger", 450, 375)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/item/destTagger/attack_self(mob/user as mob)
 	openwindow(user)

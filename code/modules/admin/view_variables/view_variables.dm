@@ -97,8 +97,9 @@
 		</body>
 		</html>
 		"}
-
-	usr << browse(html, "window=variables\ref[D];size=475x650")
+	var/datum/browser/popup = new(usr, "variables\ref[D]", "View Variables", 475, 650)
+	popup.set_content(html)
+	popup.open()
 
 /client
 	var/list/watched_variables = list()

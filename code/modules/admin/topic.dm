@@ -634,7 +634,9 @@
 	// Finalize and display.
 		body = "<body>[jobs]</body>"
 		dat = "<tt>[header][body]</tt>"
-		usr << browse(dat, "window=jobban2;size=800x490")
+		var/datum/browser/popup = new(usr, "jobban2", "Job Bans", 800, 490)
+		popup.set_content(dat)
+		popup.open()
 		return
 
 	//JOBBAN'S INNARDS
@@ -973,7 +975,10 @@
 		dat += {"<A href='?src=\ref[src];c_mode2=secret'>Secret</A><br>"}
 		dat += {"<A href='?src=\ref[src];c_mode2=random'>Random</A><br>"}
 		dat += {"Now: [SSticker.master_mode]"}
-		usr << browse(dat, "window=c_mode")
+		var/datum/browser/popup = new(usr, "c_mode", "Change Mode")
+		popup.set_content(dat)
+		popup.open()
+
 
 	else if(href_list["f_secret"])
 		if(!check_rights(R_ADMIN))	return
@@ -987,7 +992,9 @@
 			dat += {"<A href='?src=\ref[src];f_secret2=[mode]'>[config.mode_names[mode]]</A><br>"}
 		dat += {"<A href='?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
 		dat += {"Now: [secret_force_mode]"}
-		usr << browse(dat, "window=f_secret")
+		var/datum/browser/popup = new(usr, "f_secret", "Force Secret")
+		popup.set_content(dat)
+		popup.open()
 
 	else if(href_list["c_mode2"])
 		if(!check_rights(R_ADMIN|R_SERVER))	return
@@ -1499,8 +1506,10 @@
 			for (var/page = 1, page <= B.pages.len, page++)
 				var/obj/pageobj = B.pages[page]
 				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
+			var/datum/browser/popup = new(usr, B.name, "Paper Bundle")
+			popup.set_content(data)
+			popup.open()
 
-			usr << browse(data, "window=[B.name]")
 		else
 			to_chat(usr, "<span class='warning'>The faxed item is not viewable. This is probably a bug, and should be reported on the tracker: [fax.type]</span>")
 	else if (href_list["AdminFaxViewPage"])

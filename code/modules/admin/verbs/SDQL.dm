@@ -325,7 +325,9 @@
 					text += "<a href='?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t]<br>"
 
 				//text += "[t]<br>"
-			usr << browse(text, "window=sdql_result")
+			var/datum/browser/popup = new(usr, "sdql_result", "SDQL Result")
+			popup.set_content(text)
+			popup.open()
 
 /proc/SDQL_evaluate(datum/object, list/equation)
 	if(equation.len == 0)

@@ -39,7 +39,9 @@
 	Tile Update: [SSair.tiles_to_update.len]<BR>
 "}
 
-	usr << browse(output,"window=airreport")
+	var/datum/browser/popup = new(usr, "airreport", "Air Report")
+	popup.set_content(output)
+	popup.open()
 
 /client/proc/fix_next_move()
 	set category = "Debug"
@@ -95,7 +97,11 @@
 				else
 					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device]<br>"
 
-	usr << browse(output,"window=radioreport")
+	var/datum/browser/popup = new(usr, "radioreport", "Radio Report")
+	popup.set_content(output)
+	popup.open()
+
+
 	SSstatistics.add_field_details("admin_verb","RR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/reload_admins()

@@ -71,9 +71,9 @@
 	updateDisplay()
 
 obj/item/paper/admin/proc/updateDisplay()
-	usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
-
-
+	var/datum/browser/popup = new(usr, "[name]", "[name]")
+	popup.set_content("[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]")
+	popup.open()
 
 /obj/item/paper/admin/Topic(href, href_list)
 	if(href_list["write"])

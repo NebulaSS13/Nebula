@@ -56,23 +56,25 @@
 		updateUsrDialog()
 	else
 		..()
-
 /obj/structure/filingcabinet/attack_hand(mob/user)
+	interact(user)
+
+/obj/structure/filingcabinet/interact(mob/user)
 	if(contents.len <= 0)
 		to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
 		return
-
 	user.set_machine(src)
 	var/dat = list("<center><table>")
 	for(var/obj/item/P in src)
 		dat += "<tr><td><a href='?src=\ref[src];retrieve=\ref[P]'>[P.name]</a></td></tr>"
 	dat += "</table></center>"
-	user << browse("<html><head><title>[name]</title></head><body>[jointext(dat,null)]</body></html>", "window=filingcabinet;size=350x300")
+	var/datum/browser/popup = new(user, "filingcabinet", "Filing Cabinet", 350, 300)
+	popup.set_content(jointext(dat,null))
+	popup.open()
 
 /obj/structure/filingcabinet/Topic(href, href_list)
 	if(href_list["retrieve"])
-		usr << browse("", "window=filingcabinet") // Close the menu
-
+		close_browser(usr, "filingcabinet") // Close the menu
 		//var/retrieveindex = text2num(href_list["retrieve"])
 		var/obj/item/P = locate(href_list["retrieve"])//contents[retrieveindex]
 		if(istype(P) && (P.loc == src) && src.Adjacent(usr))

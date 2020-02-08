@@ -229,8 +229,6 @@
 			user.unset_machine()
 			close_browser(user, "pacontrol")
 			return
-	user.set_machine(src)
-
 	var/dat = ""
 	dat += "Particle Accelerator Control Panel<BR>"
 	dat += "<A href='?src=\ref[src];close=1'>Close</A><BR><BR>"
@@ -248,7 +246,6 @@
 		dat += "<A href='?src=\ref[src];togglep=1'>Toggle Power</A><BR><BR>"
 		dat += "Particle Strength: [src.strength] "
 		dat += "<A href='?src=\ref[src];strengthdown=1'>--</A>|<A href='?src=\ref[src];strengthup=1'>++</A><BR><BR>"
-
-	user << browse(dat, "window=pacontrol;size=420x500")
-	onclose(user, "pacontrol")
-	return
+	var/datum/browser/written/popup = new(user, "pacontrol", "Particle Accelerator Control", 420, 500)
+	popup.set_content(dat)
+	popup.open()

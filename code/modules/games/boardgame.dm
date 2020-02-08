@@ -98,8 +98,10 @@ obj/item/board/attackby(obj/item/I as obj, mob/user as mob)
 
 	if(selected >= 0 && !isobserver(user))
 		dat += "<br><A href='?src=\ref[src];remove=0'>Remove Selected Piece</A>"
-	user << browse(jointext(dat, null),"window=boardgame;size=430x500") // 50px * 8 squares + 30 margin
-	onclose(usr, "boardgame")
+
+	var/datum/browser/popup = new(user, "boardgame", "Boardgame", 430, 500)
+	popup.set_content(jointext(dat, null))
+	popup.open()
 
 /obj/item/board/Topic(href, href_list)
 	if(!usr.Adjacent(src))

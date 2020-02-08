@@ -53,14 +53,16 @@
 
 	if(!linkedholodeck)
 		dat += "<span class='danger'>Warning: Unable to locate holodeck.<br></span>"
-		user << browse(dat, "window=computer;size=400x500")
-		onclose(user, "computer")
+		var/datum/browser/written/popup = new(user, "computer", "Holodeck Control", 400, 500)
+		popup.set_content(dat)
+		popup.open()
 		return
 
 	if(!supported_programs.len)
 		dat += "<span class='danger'>Warning: No supported holo-programs loaded.<br></span>"
-		user << browse(dat, "window=computer;size=400x500")
-		onclose(user, "computer")
+		var/datum/browser/written/popup = new(user, "computer", "Holodeck Control", 400, 500)
+		popup.set_content(dat)
+		popup.open()
 		return
 
 	for(var/prog in supported_programs)
@@ -97,9 +99,9 @@
 		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=green>(ON)</font></A><BR>"
 	else
 		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=blue>(OFF)</font></A><BR>"
-	user << browse(dat, "window=computer;size=400x500")
-	onclose(user, "computer")
-	return
+	var/datum/browser/written/popup = new(user, "computer", "Holodeck Control", 400, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/computer/HolodeckControl/Topic(href, href_list)
 	if(..())

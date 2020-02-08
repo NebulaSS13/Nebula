@@ -210,12 +210,12 @@
 			dat += "<A href='?src=\ref[src];select=[index]'>[D.time], coords: [D.coords]</a><br>"
 	else
 		dat += "No entries recorded."
-
 	dat += "<hr>"
 	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</a><br>"
 	dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
-	user << browse(dat,"window=depth_scanner;size=300x500")
-	onclose(user, "depth_scanner")
+	var/datum/browser/written/popup = new(user, "depth_scanner", "Depth Scanner", 300, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/item/depth_scanner/OnTopic(user, href_list)
 	if(href_list["select"])
@@ -274,8 +274,9 @@
 				<A href='byond://?src=\ref[src];freq=2'>+</A>
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 				"}
-	user << browse(dat,"window=locater;size=300x150")
-	onclose(user, "locater")
+	var/datum/browser/written/popup = new(user, "locater", "Radio Frequency Tracker", 300, 150)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/item/pinpointer/radio/OnTopic(user, href_list)
 	if(href_list["toggle"])

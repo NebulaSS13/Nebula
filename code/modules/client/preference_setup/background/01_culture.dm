@@ -88,7 +88,9 @@
 			if(valid_values[choice])
 				var/decl/cultural_info/culture = SSculture.get_culture(choice)
 				if(check_href == 1)
-					user << browse(culture.get_description(), "window=[token];size=700x400")
+					var/datum/browser/popup = new(user, "token", "Culture Information", 700, 400)
+					popup.set_content(culture.get_description())
+					popup.open()
 				else
 					pref.cultural_info[token] = choice
 				return TOPIC_REFRESH

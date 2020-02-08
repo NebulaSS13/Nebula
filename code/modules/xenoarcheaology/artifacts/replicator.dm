@@ -121,10 +121,11 @@
 	dat += "<br>"
 	for(var/index=1, index<=construction.len, index++)
 		dat += "<A href='?src=\ref[src];activate=[index]'>\[[construction[index]]\]</a><br>"
+	var/datum/browser/popup = new(user, "alien_replicator", "Alien Replicator")
+	popup.set_content(dat)
+	popup.open()
 
-	user << browse(dat, "window=alien_replicator")
-
-/obj/machinery/replicator/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/machinery/replicator/attackby(obj/item/W, mob/living/user)
 	if(!user.unEquip(W, src))
 		return
 	stored_materials.Add(W)

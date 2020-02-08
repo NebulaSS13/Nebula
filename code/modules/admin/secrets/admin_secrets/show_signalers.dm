@@ -12,4 +12,7 @@
 	var/dat = "<B>Showing last [length(GLOB.lastsignalers)] signalers.</B><HR>"
 	for(var/sig in GLOB.lastsignalers)
 		dat += "[sig]<BR>"
-	user << browse(dat, "window=lastsignalers;size=800x500")
+
+	var/datum/browser/popup = new(user, "lastsignalers", "Last Signalers", 800, 500)
+	popup.set_content(dat)
+	popup.open()

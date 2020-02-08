@@ -404,15 +404,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		host.ckey = src.ckey
 		host.status_flags |= NO_ANTAG
 		to_chat(host, "<span class='info'>You are now a snaprat. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")
+
 /mob/observer/ghost/verb/view_manfiest()
 	set name = "Show Crew Manifest"
 	set category = "Ghost"
-
-	var/dat
-	dat += "<h4>Crew Manifest</h4>"
-	dat += html_crew_manifest()
-
-	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	var/datum/browser/popup = new(src, "manifest", "Crew Manifest", 370, 420)
+	popup.set_content("<h4>Crew Manifest</h4>[html_crew_manifest()]")
+	popup.open()
 
 //This is called when a ghost is drag clicked to something.
 /mob/observer/ghost/MouseDrop(atom/over)
