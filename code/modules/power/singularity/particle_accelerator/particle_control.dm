@@ -79,11 +79,11 @@
 	//Ignore input if we are broken, !silicon guy cant touch us, or nonai controlling from super far away
 	if(stat & (BROKEN|NOPOWER) || (get_dist(src, usr) > 1 && !istype(usr, /mob/living/silicon)) || (get_dist(src, usr) > 8 && !istype(usr, /mob/living/silicon/ai)))
 		usr.unset_machine()
-		usr << browse(null, "window=pacontrol")
+		close_browser(usr, "pacontrol")
 		return
 
 	if( href_list["close"] )
-		usr << browse(null, "window=pacontrol")
+		close_browser(usr, "pacontrol")
 		usr.unset_machine()
 		return
 
@@ -227,7 +227,7 @@
 	if((get_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
 		if(!istype(user, /mob/living/silicon))
 			user.unset_machine()
-			user << browse(null, "window=pacontrol")
+			close_browser(user, "pacontrol")
 			return
 	user.set_machine(src)
 

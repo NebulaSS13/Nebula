@@ -236,7 +236,7 @@
 			QDEL_NULL(current)
 		. = TOPIC_REFRESH
 	else if(href_list["close"])
-		close_browser(user, "window=depth_scanner")
+		close_browser(user, "depth_scanner")
 	updateSelfDialog()
 
 //Radio beacon locator

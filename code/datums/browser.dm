@@ -124,7 +124,7 @@
 		send_output(user, get_content(), "[window_id].browser")
 
 /datum/browser/proc/close()
-	user << browse(null, "window=[window_id]")
+	close_browser(user, window_id)
 
 // This will allow you to show an icon in the browse window
 // This is added to mob so that it can be used without a reference to the browser object

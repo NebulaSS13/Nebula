@@ -119,7 +119,7 @@
 		. = TOPIC_REFRESH
 
 	else if(href_list["close"])
-		close_browser(user, "window=artanalyser")
+		close_browser(user, "artanalyser")
 		return TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)

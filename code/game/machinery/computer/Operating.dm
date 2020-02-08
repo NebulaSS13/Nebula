@@ -25,7 +25,7 @@
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
 		if (!istype(user, /mob/living/silicon))
 			user.unset_machine()
-			user << browse(null, "window=op")
+			close_browser(user, "op")
 			return
 
 	user.set_machine(src)

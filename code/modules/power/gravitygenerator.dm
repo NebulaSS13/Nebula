@@ -88,7 +88,7 @@
 /obj/machinery/computer/gravity_control_computer/Topic(href, href_list)
 	set background = 1
 	if((. = ..()))
-		usr << browse(null, "window=air_alarm")
+		close_browser(usr, "air_alarm")
 		return
 
 	if(href_list["gentoggle"])

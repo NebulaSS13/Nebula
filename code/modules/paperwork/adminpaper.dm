@@ -120,7 +120,7 @@ obj/item/paper/admin/proc/updateDisplay()
 				if(footerOn)
 					info += footer
 				updateinfolinks()
-				usr << browse(null, "window=[name]")
+				close_browser(usr, name)
 				admindatum.faxCallback(src, destination)
 		return
 
@@ -131,7 +131,7 @@ obj/item/paper/admin/proc/updateDisplay()
 		return
 
 	if(href_list["cancel"])
-		usr << browse(null, "window=[name]")
+		close_browser(usr, name)
 		qdel(src)
 		return
 

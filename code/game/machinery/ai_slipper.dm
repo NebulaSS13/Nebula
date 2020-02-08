@@ -36,7 +36,7 @@
 			if (locked)
 				if (user.machine==src)
 					user.unset_machine()
-					user << browse(null, "window=ai_slipper")
+					close_browser(user, "ai_slipper")
 			else
 				if (user.machine==src)
 					interact(user)

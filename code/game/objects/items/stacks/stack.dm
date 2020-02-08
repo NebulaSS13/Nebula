@@ -39,7 +39,7 @@
 	if(uses_charge)
 		return 1
 	if (src && usr && usr.machine == src)
-		usr << browse(null, "window=stack")
+		close_browser(usr, "stack")
 	return ..()
 
 /obj/item/stack/examine(mob/user, distance)
@@ -57,7 +57,7 @@
 	if (!recipes)
 		return
 	if (!src || get_amount() <= 0)
-		user << browse(null, "window=stack")
+		close_browser(user, "stack")
 	user.set_machine(src) //for correct work of onclose
 	var/list/recipe_list = recipes
 	if (recipes_sublist && recipe_list[recipes_sublist] && istype(recipe_list[recipes_sublist], /datum/stack_recipe_list))

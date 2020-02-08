@@ -181,7 +181,7 @@
 		UpdateSprite()
 		. = TOPIC_REFRESH
 	if(href_list["close"])
-		close_browser(user, "window=anodevice")
+		close_browser(user, "anodevice")
 		. = TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)

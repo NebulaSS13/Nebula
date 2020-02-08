@@ -85,7 +85,7 @@ obj/structure/windoor_assembly/Destroy()
 		if(!electronics)
 			to_chat(user, SPAN_WARNING("\The [src] has no electronics installed."))
 			return TRUE
-		user << browse(null, "window=windoor_access")
+		close_browser(user, "windoor_access")
 		playsound(loc, 'sound/items/Crowbar.ogg', 100, 1)
 		visible_message(SPAN_NOTICE("\The [user] begins prying the windoor into its frame with \the [crowbar]."))
 		if(do_after(user, 4 SECONDS, src))

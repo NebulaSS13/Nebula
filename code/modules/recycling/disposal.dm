@@ -286,7 +286,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 /obj/machinery/disposal/OnTopic(user, href_list)
 	if(href_list["close"])
-		close_browser(user, "window=disposal")
+		close_browser(user, "disposal")
 		return TOPIC_HANDLED
 
 	if(href_list["pump"])

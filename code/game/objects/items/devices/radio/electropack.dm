@@ -73,7 +73,7 @@
 					if(M.client)
 						attack_self(M)
 	else
-		usr << browse(null, "window=radio")
+		close_browser(usr, "radio")
 		return
 	return
 

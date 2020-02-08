@@ -109,7 +109,7 @@
 		locked = 1
 		. = TOPIC_REFRESH
 	else if(href_list["close"])
-		close_browser(user, "window=suspension")
+		close_browser(user, "suspension")
 		return TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)

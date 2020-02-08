@@ -249,7 +249,7 @@
 		. = TOPIC_REFRESH
 
 	else if(href_list["close"])
-		close_browser(user, "window=artharvester")
+		close_browser(user, "artharvester")
 		return TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)

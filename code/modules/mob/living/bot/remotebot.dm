@@ -108,7 +108,7 @@
 /obj/item/bot_controller/interact(var/mob/user)
 	user.set_machine(src)
 	if(!(src in user) || !bot)
-		user << browse(null, "window=bot_controller")
+		close_browser(user, "bot_controller")
 		return
 	var/dat = "<center><TT><b>Remote Control: [bot.name]</b></TT><br>"
 	dat += "Currently Holding: [bot.holding ? bot.holding.name : "Nothing"]<br><br>"

@@ -137,7 +137,7 @@
 	set waitfor = 0
 
 	if (href_list["close"])
-		close_browser(user, "window=arcade")
+		close_browser(user, "arcade")
 		return TOPIC_HANDLED
 
 	if (href_list["attack"])

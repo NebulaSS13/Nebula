@@ -73,7 +73,7 @@
 
 /obj/item/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)
 	if(..())
-		usr << browse(null, "window=infra")
+		close_browser(usr, "infra")
 		onclose(usr, "infra")
 		return 1
 
@@ -85,7 +85,7 @@
 		update_icon()
 
 	if(href_list["close"])
-		usr << browse(null, "window=infra")
+		close_browser(usr, "infra")
 		return
 
 	if(usr)

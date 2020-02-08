@@ -132,7 +132,7 @@
 
 /obj/item/assembly/prox_sensor/Topic(href, href_list, state = GLOB.physical_state)
 	if((. = ..()))
-		usr << browse(null, "window=prox")
+		close_browser(usr, "prox")
 		onclose(usr, "prox")
 		return
 
@@ -154,7 +154,7 @@
 		range = min(max(range, 1), 5)
 
 	if(href_list["close"])
-		usr << browse(null, "window=prox")
+		close_browser(usr, "prox")
 		return
 
 	if(usr)
