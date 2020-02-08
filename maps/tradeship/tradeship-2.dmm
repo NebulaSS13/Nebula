@@ -6592,7 +6592,6 @@
 /area/space)
 "Oq" = (
 /obj/structure/bed/chair/comfy/teal{
-	icon_state = "comfychair_teal";
 	dir = 1
 	},
 /obj/effect/landmark/start{
