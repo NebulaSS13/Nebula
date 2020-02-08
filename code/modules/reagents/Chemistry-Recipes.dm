@@ -1642,10 +1642,10 @@
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled cafe latte."
 
-/datum/chemical_reaction/zhat_zhing_cola
-	name = "zhat_zhing_cola"
-	result = /datum/reagent/drink/zhat_zhing_cola
-	required_reagents = list(/datum/reagent/uranium = 1, /datum/reagent/drink/cola = 5)
+/datum/chemical_reaction/mutagen_cola
+	name = "Mutagen Cola"
+	result = /datum/reagent/drink/mutagencola
+	required_reagents = list(/datum/reagent/mutagen = 1, /datum/reagent/drink/cola = 5)
 	result_amount = 5
 	mix_message = "The solution bubbles and emits an eerie green glow."
 
@@ -1787,7 +1787,7 @@
 /datum/chemical_reaction/livergeist
 	name = "The Livergeist"
 	result = /datum/reagent/ethanol/livergeist
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/dinnishfirewater = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/juice/lime = 1)
+	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/aged_whiskey = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/juice/lime = 1)
 	result_amount = 6
 
 /datum/chemical_reaction/brave_bull
@@ -2096,7 +2096,7 @@
 /datum/chemical_reaction/aloe
 	name = "Aloe"
 	result = /datum/reagent/ethanol/aloe
-	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/dinnishfirewater = 1, /datum/reagent/drink/juice/watermelon = 1)
+	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/aged_whiskey = 1, /datum/reagent/drink/juice/watermelon = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/andalusia

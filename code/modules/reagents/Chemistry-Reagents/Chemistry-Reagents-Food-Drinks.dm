@@ -940,15 +940,15 @@
 
 /datum/reagent/drink/sodawater
 	name = "soda water"
-	description = "A can of soda."
-	taste_description = "carbonated water"
+	description = "Carbonated water, the most boring carbonated drink known to science."
+	taste_description = "bubbles"
 	color = "#619494"
 	adj_dizzy = -5
 	adj_drowsy = -3
 	adj_temp = -5
 
 	glass_name = "soda water"
-	glass_desc = "Soda water."
+	glass_desc = "A glass of fizzy soda water."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/grapesoda
@@ -987,25 +987,25 @@
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/citrusseltzer
-	name = "Citrus Seltzer"
+	name = "citrus seltzer"
 	description = "A tasty blend of fizz and citrus."
 	taste_description = "tart and tasty"
 	color = "#cccc99"
 	adj_temp = -5
 
-	glass_name = "Citrus Seltzer"
+	glass_name = "citrus seltzer"
 	glass_desc = "A tasty blend of fizz and citrus."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/indrelbreakfast
-	name = "Indrel Breakfast"
-	description = "It's not what it sounds like..."
-	taste_description = "orange and cola soda"
+	name = "orange cola"
+	description = "A traditional cola experience with a refreshing spritz of orange citrus flavour."
+	taste_description = "orange and cola"
 	color = "#9f3400"
 	adj_temp = -2
 
-	glass_name = "Indrel Breakfast"
-	glass_desc = "It's not what it sounds like..."
+	glass_name = "orange cola"
+	glass_desc = "It's an unpleasant shade of muddy brown, and smells like over-ripe citrus."
 
 /datum/reagent/drink/milkshake
 	name = "milkshake"
@@ -1031,19 +1031,19 @@
 	..()
 	M.make_jittery(5)
 
-/datum/reagent/drink/zhat_zhing_cola
-	name = "Zhat Zhing Cola"
-	description = "The energy of a yinglet in beverage form.  Effects on yinglets undocumented."
+/datum/reagent/drink/mutagencola
+	name = "mutagen cola"
+	description = "The energy of a yinglet in beverage form. Effects on yinglets undocumented."
 	taste_description = "the lifespan of a scav"
 	color = "#100800"
 	adj_temp = -5
 	adj_sleepy = -2
 
-	glass_name = "Zhat Zhing Cola"
-	glass_desc = "The energy of a yinglet in beverage form.  Effects on yinglets undocumented."
+	glass_name = "mutagen cola"
+	glass_desc = "The unstable energy of a yinglet in beverage form. Effects on yinglets undocumented."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/zhat_zhing_cola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/mutagencola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.make_jittery(20)
@@ -2075,15 +2075,15 @@
 	glass_name = "whiskey soda"
 	glass_desc = "Ultimate refreshment."
 
-/datum/reagent/ethanol/dinnishfirewater // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
-	name = "Old Dinnish Firewater"
-	description = "This astounding, special beverage was distilled in old Dinnlan.  I hope they're still producing under their new government."
+/datum/reagent/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
+	name = "aged whiskey"
+	description = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
 	taste_description = "liquid fire"
 	color = "#523600"
 	strength = 25
 
-	glass_name = "Old Dinnish Firewater"
-	glass_desc = "Just a sip'll do it, but that burn will leave you wanting more."
+	glass_name = "aged whiskey"
+	glass_desc = "A well-aged whiskey of high quality. Probably imported."
 
 //black tea
 /datum/reagent/drink/tea

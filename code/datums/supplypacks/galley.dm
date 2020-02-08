@@ -101,7 +101,7 @@
 			/obj/item/chems/food/drinks/flask/barflask,
 			/obj/item/chems/food/drinks/bottle/patron,
 			/obj/item/chems/food/drinks/bottle/goldschlager,
-			/obj/item/chems/food/drinks/bottle/specialwhiskey,
+			/obj/item/chems/food/drinks/bottle/dinnishfirewater,
 			/obj/item/storage/fancy/cigarettes/dromedaryco,
 			/obj/item/lipstick/random,
 			/obj/item/chems/food/drinks/bottle/small/ale = 2,
