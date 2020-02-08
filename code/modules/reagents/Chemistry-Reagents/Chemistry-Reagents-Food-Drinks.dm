@@ -58,7 +58,7 @@
 	name = "slime-meat"
 	description = "Mollusc meat, or slug meat - something slimy, anyway."
 	scannable = 1
-	taste_description = "cold, bitter slime"
+	taste_description = "cold, bitter slime... yum!"
 	overdose = 10
 	hydration_factor = 6
 
@@ -647,7 +647,7 @@
 /datum/reagent/drink/juice/potato
 	name = "potato juice"
 	description = "Juice of the potato. Bleh."
-	taste_description = "irish sadness and potatoes"
+	taste_description = "sadness and potatoes"
 	nutrition = 2
 	color = "#302000"
 
@@ -699,7 +699,7 @@
 /datum/reagent/drink/juice/turnip
 	name = "turnip juice"
 	description = "Delicious (?) juice made from turnips."
-	taste_description = "love of motherland and oppression"
+	taste_description = "turnip and uncertainty"
 	color = "#b1166e"
 
 	glass_name = "turnip juice"
@@ -727,7 +727,7 @@
 
 /datum/reagent/drink/milk
 	name = "milk"
-	description = "An opaque white liquid produced by the mammary glands of mammals."
+	description = "An opaque white liquid produced by tiplods."
 	taste_description = "milk"
 	color = "#dfdfdf"
 
@@ -750,7 +750,7 @@
 
 /datum/reagent/drink/milk/cream
 	name = "cream"
-	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
+	description = "The fatty, still liquid part of milk."
 	taste_description = "creamy milk"
 	color = "#dfd7af"
 
@@ -811,13 +811,13 @@
 
 /datum/reagent/drink/coffee/soy_latte
 	name = "soy latte"
-	description = "A nice and tasty beverage while you are reading your hippie books."
+	description = "A nice and tasty beverage while you are reading your nature books."
 	taste_description = "bitter creamy coffee"
 	color = "#c65905"
 	adj_temp = 5
 
 	glass_name = "soy latte"
-	glass_desc = "A nice and refreshing beverage while you are reading your hippie books."
+	glass_desc = "A nice and refreshing beverage while you are reading your nature books."
 
 /datum/reagent/drink/coffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -825,12 +825,12 @@
 
 /datum/reagent/drink/coffee/icecoffee/soy_latte
 	name = "iced soy latte"
-	description = "A nice and tasty beverage while you are reading your hippie books. This one's cold."
+	description = "A nice and tasty beverage while you are reading your nature books. This one's cold."
 	taste_description = "cold bitter creamy coffee"
 	color = "#c65905"
 
 	glass_name = "iced soy latte"
-	glass_desc = "A nice and refreshing beverage while you are reading your hippie books. This one's cold."
+	glass_desc = "A nice and refreshing beverage while you are reading your nature books. This one's cold."
 
 /datum/reagent/drink/coffee/icecoffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -940,7 +940,7 @@
 
 /datum/reagent/drink/sodawater
 	name = "soda water"
-	description = "A can of club soda. Why not make a scotch and soda?"
+	description = "A can of soda."
 	taste_description = "carbonated water"
 	color = "#619494"
 	adj_dizzy = -5
@@ -948,7 +948,7 @@
 	adj_temp = -5
 
 	glass_name = "soda water"
-	glass_desc = "Soda water. Why not make a scotch and soda?"
+	glass_desc = "Soda water."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/grapesoda
@@ -986,25 +986,25 @@
 	glass_desc = "Oh the nostalgia..."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/kiraspecial
-	name = "Kira Special"
-	description = "Long live the guy who everyone had mistaken for a girl. Baka!"
-	taste_description = "fruity sweetness"
+/datum/reagent/drink/citrusseltzer
+	name = "Citrus Seltzer"
+	description = "A tasty blend of fizz and citrus."
+	taste_description = "tart and tasty"
 	color = "#cccc99"
 	adj_temp = -5
 
-	glass_name = "Kira Special"
-	glass_desc = "Long live the guy who everyone had mistaken for a girl. Baka!"
+	glass_name = "Citrus Seltzer"
+	glass_desc = "A tasty blend of fizz and citrus."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/brownstar
-	name = "Brown Star"
+/datum/reagent/drink/indrelbreakfast
+	name = "Indrel Breakfast"
 	description = "It's not what it sounds like..."
 	taste_description = "orange and cola soda"
 	color = "#9f3400"
 	adj_temp = -2
 
-	glass_name = "Brown Star"
+	glass_name = "Indrel Breakfast"
 	glass_desc = "It's not what it sounds like..."
 
 /datum/reagent/drink/milkshake
@@ -1031,19 +1031,19 @@
 	..()
 	M.make_jittery(5)
 
-/datum/reagent/drink/nuka_cola
-	name = "Nuka Cola"
-	description = "Cola, cola never changes."
-	taste_description = "the future"
+/datum/reagent/drink/zhat_zhing_cola
+	name = "Zhat Zhing Cola"
+	description = "The energy of a yinglet in beverage form.  Effects on yinglets undocumented."
+	taste_description = "the lifespan of a scav"
 	color = "#100800"
 	adj_temp = -5
 	adj_sleepy = -2
 
-	glass_name = "Nuka-Cola"
-	glass_desc = "Don't cry, Don't raise your eye, It's only nuclear wasteland"
+	glass_name = "Zhat Zhing Cola"
+	glass_desc = "The energy of a yinglet in beverage form.  Effects on yinglets undocumented."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/nuka_cola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/zhat_zhing_cola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.make_jittery(20)
@@ -1120,13 +1120,13 @@
 
 /datum/reagent/drink/doctor_delight
 	name = "The Doctor's Delight"
-	description = "A gulp a day keeps the MediBot away. That's probably for the best."
+	description = "Tasty drink that keeps you healthy and doctors bored.  Just the way they like it."
 	taste_description = "homely fruit"
 	color = "#ff8cff"
 	nutrition = 1
 
 	glass_name = "The Doctor's Delight"
-	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
+	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next exile decides to put a few new holes in you."
 
 /datum/reagent/drink/doctor_delight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1673,16 +1673,16 @@
 	glass_name = "Erika Surprise"
 	glass_desc = "The surprise is, it's green!"
 
-/datum/reagent/ethanol/gargle_blaster
-	name = "Pan-Galactic Gargle Blaster"
-	description = "Whoah, this stuff looks volatile!"
-	taste_description = "your brains smashed out by a lemon wrapped around a gold brick"
+/datum/reagent/ethanol/livergeist
+	name = "The Livergeist"
+	description = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
+	taste_description = "your liver being ripped out of your body, but in the best, most delicious meaning of those words."
 	taste_mult = 5
 	color = "#7f00ff"
 	strength = 10
 
-	glass_name = "Pan-Galactic Gargle Blaster"
-	glass_desc = "Does... does this mean that Arthur and Ford are here? Oh joy."
+	glass_name = "The Livergeist"
+	glass_desc = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
 
 /datum/reagent/ethanol/gintonic
 	name = "gin and tonic"
@@ -2075,15 +2075,15 @@
 	glass_name = "whiskey soda"
 	glass_desc = "Ultimate refreshment."
 
-/datum/reagent/ethanol/specialwhiskey // I have no idea what this is and where it comes from
-	name = "special blend whiskey"
-	description = "Just when you thought regular whiskey was good... This silky, amber goodness has to come along and ruin everything."
+/datum/reagent/ethanol/dinnishfirewater // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
+	name = "Old Dinnish Firewater"
+	description = "This astounding, special beverage was distilled in old Dinnlan.  I hope they're still producing under their new government."
 	taste_description = "liquid fire"
 	color = "#523600"
 	strength = 25
 
-	glass_name = "special blend whiskey"
-	glass_desc = "Just when you thought regular whiskey was good... This silky, amber goodness has to come along and ruin everything."
+	glass_name = "Old Dinnish Firewater"
+	glass_desc = "Just a sip'll do it, but that burn will leave you wanting more."
 
 //black tea
 /datum/reagent/drink/tea
@@ -2353,15 +2353,15 @@
 	glass_name = "champagne"
 	glass_desc = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
 
-/datum/reagent/ethanol/jagerbomb
-	name = "Jagerbomb"
-	description = "A mix of energy drink and alcohol. Guaranteed to make you feel like an underage drinker again."
+/datum/reagent/ethanol/sawbonesdismay
+	name = "Sawbones' Dismay"
+	description = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
 	taste_description = "a pick-me-up and put-me-down"
 	color = "#996862"
 	strength = 10
 
-	glass_name = "jagerbomb"
-	glass_desc = "A mix of energy drink and alcohol. Guaranteed to make you feel like an underage drinker again."
+	glass_name = "Sawbones' Dismay"
+	glass_desc = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
 
 /datum/reagent/ethanol/jagermeister
 	name = "Jagermeister"
