@@ -325,13 +325,13 @@
 /// Syringes. END
 ////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/chems/syringe/inaprovaline
-	name = "Syringe (inaprovaline)"
-	desc = "Contains inaprovaline - used to stabilize patients."
+/obj/item/chems/syringe/adrenaline
+	name = "Syringe (adrenaline)"
+	desc = "Contains adrenaline - used to stabilize patients."
 
-/obj/item/chems/syringe/inaprovaline/Initialize()
+/obj/item/chems/syringe/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 15)
+	reagents.add_reagent(/datum/reagent/adrenaline, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 

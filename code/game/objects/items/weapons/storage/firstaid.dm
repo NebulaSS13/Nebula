@@ -261,11 +261,11 @@
 	startswith = list(/obj/item/chems/pill/antitoxins = 21)
 	wrapper_color = COLOR_GREEN
 
-/obj/item/storage/pill_bottle/inaprovaline
-	name = "pill bottle (Inaprovaline)"
+/obj/item/storage/pill_bottle/adrenaline
+	name = "pill bottle (adrenaline)"
 	desc = "Contains pills used to stabilize patients."
 
-	startswith = list(/obj/item/chems/pill/inaprovaline = 21)
+	startswith = list(/obj/item/chems/pill/adrenaline = 21)
 	wrapper_color = COLOR_PALE_BLUE_GRAY
 
 /obj/item/storage/pill_bottle/burn_meds
@@ -316,7 +316,7 @@
 	desc = "Commonly found on paramedics, these assorted pill bottles contain all the basics."
 
 	startswith = list(
-			/obj/item/chems/pill/inaprovaline = 6,
+			/obj/item/chems/pill/adrenaline = 6,
 			/obj/item/chems/pill/antitoxins = 6,
 			/obj/item/chems/pill/sugariron = 2,
 			/obj/item/chems/pill/painkillers = 2,

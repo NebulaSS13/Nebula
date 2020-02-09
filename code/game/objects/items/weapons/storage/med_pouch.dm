@@ -70,8 +70,8 @@ Single Use Emergency Pouches
 	color = COLOR_RED
 
 	startswith = list(
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline,
-	/obj/item/chems/pill/pouch_pill/inaprovaline,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
+	/obj/item/chems/pill/pouch_pill/adrenaline,
 	/obj/item/chems/pill/pouch_pill/painkillers,
 	/obj/item/stack/medical/bruise_pack = 2,
 		)
@@ -91,7 +91,7 @@ Single Use Emergency Pouches
 	color = COLOR_SEDONA
 
 	startswith = list(
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
 	/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
 	/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
 	/obj/item/chems/pill/pouch_pill/painkillers,
@@ -113,10 +113,10 @@ Single Use Emergency Pouches
 	color = COLOR_BLUE
 
 	startswith = list(
-		/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline,
+		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/oxygen,
 		/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
-		/obj/item/chems/pill/pouch_pill/inaprovaline,
+		/obj/item/chems/pill/pouch_pill/adrenaline,
 		/obj/item/chems/pill/pouch_pill/oxygen,
 	)
 	instructions = {"
@@ -173,8 +173,8 @@ Single Use Emergency Pouches
 	var/datum/reagent/chem_type
 	var/chem_amount = 15
 
-/obj/item/chems/pill/pouch_pill/inaprovaline
-	chem_type = /datum/reagent/inaprovaline
+/obj/item/chems/pill/pouch_pill/adrenaline
+	chem_type = /datum/reagent/adrenaline
 
 /obj/item/chems/pill/pouch_pill/antitoxins
 	chem_type = /datum/reagent/antitoxins
@@ -195,9 +195,9 @@ Single Use Emergency Pouches
 	name = "emergency autoinjector"
 	desc = "An emergency autoinjector from an emergency medical pouch"
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline
-	name = "emergency inaprovaline autoinjector"
-	starts_with = list(/datum/reagent/inaprovaline = 5)
+/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
+	name = "emergency adrenaline autoinjector"
+	starts_with = list(/datum/reagent/adrenaline = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers
 	name = "emergency painkiller autoinjector"

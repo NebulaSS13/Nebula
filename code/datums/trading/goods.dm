@@ -348,10 +348,9 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/circular_saw = TRADER_THIS_TYPE,
 								  /obj/item/bonegel = TRADER_THIS_TYPE,
 								  /obj/item/bonesetter = TRADER_THIS_TYPE,
-								  /obj/item/chems/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
+								  /obj/item/chems/glass/bottle/adrenaline = TRADER_THIS_TYPE,
 								  /obj/item/chems/glass/bottle/stoxin = TRADER_THIS_TYPE,
 								  /obj/item/chems/glass/bottle/antitoxin = TRADER_THIS_TYPE,
-								  /obj/item/chems/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
 								  /obj/item/bodybag/cryobag = TRADER_THIS_TYPE,
 								  /obj/item/sign/medipolma = TRADER_THIS_TYPE
 								)

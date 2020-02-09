@@ -143,13 +143,13 @@
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/inaprovaline
-	name = "Inaprovaline (30u)"
+/obj/item/chems/pill/adrenaline
+	name = "adrenaline (30u)"
 	desc = "Used to stabilize patients."
 	icon_state = "pill1"
-/obj/item/chems/pill/inaprovaline/Initialize()
+/obj/item/chems/pill/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 30)
+	reagents.add_reagent(/datum/reagent/adrenaline, 30)
 	color = reagents.get_color()
 
 

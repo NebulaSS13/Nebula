@@ -141,7 +141,7 @@
 /obj/random/medical/spawn_choices()
 	return list(/obj/random/medical/lite = 21,
 				/obj/item/bodybag = 2,
-				/obj/item/chems/glass/bottle/inaprovaline = 2,
+				/obj/item/chems/glass/bottle/adrenaline = 2,
 				/obj/item/chems/glass/bottle/antitoxin = 2,
 				/obj/item/storage/pill_bottle = 2,
 				/obj/item/storage/pill_bottle/painkillers = 1,
@@ -151,7 +151,7 @@
 				/obj/item/storage/pill_bottle/brute_meds = 1,
 				/obj/item/chems/syringe/antitoxin = 2,
 				/obj/item/chems/syringe/antiviral = 1,
-				/obj/item/chems/syringe/inaprovaline = 2,
+				/obj/item/chems/syringe/adrenaline = 2,
 				/obj/item/storage/box/freezer = 1,
 				/obj/item/stack/nanopaste = 1)
 

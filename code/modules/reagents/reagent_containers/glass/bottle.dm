@@ -60,17 +60,16 @@
 		overlays += lid
 
 
-/obj/item/chems/glass/bottle/inaprovaline
-	name = "inaprovaline bottle"
-	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
+/obj/item/chems/glass/bottle/adrenaline
+	name = "adrenaline bottle"
+	desc = "A small bottle. Contains adrenaline - used to stabilize patients."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/inaprovaline/Initialize()
+/obj/item/chems/glass/bottle/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
+	reagents.add_reagent(/datum/reagent/adrenaline, 60)
 	update_icon()
-
 
 /obj/item/chems/glass/bottle/toxin
 	name = "toxin bottle"

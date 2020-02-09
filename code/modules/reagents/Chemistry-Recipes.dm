@@ -79,12 +79,6 @@
 	return null
 
 /* Common reactions */
-/datum/chemical_reaction/inaprovaline
-	name = "Inaprovaline"
-	result = /datum/reagent/inaprovaline
-	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/carbon = 1, /datum/reagent/nutriment/sugar = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/antitoxins
 	name = "Antitoxins"
 	result = /datum/reagent/antitoxins
@@ -94,7 +88,7 @@
 /datum/chemical_reaction/painkillers
 	name = "Painkillers"
 	result = /datum/reagent/painkillers
-	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/ethanol = 1, /datum/reagent/acetone = 1)
+	required_reagents = list(/datum/reagent/adrenaline = 1, /datum/reagent/ethanol = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/antiseptic
@@ -160,7 +154,7 @@
 /datum/chemical_reaction/tricordrazine
 	name = "Tricordrazine"
 	result = /datum/reagent/tricordrazine
-	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/antitoxins = 1)
+	required_reagents = list(/datum/reagent/adrenaline = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/alkysine
@@ -172,8 +166,8 @@
 /datum/chemical_reaction/brute_meds
 	name = "Anti-Trauma Medication"
 	result = /datum/reagent/brute_meds
-	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/carbon = 1)
-	inhibitors = list(/datum/reagent/nutriment/sugar = 1) // Messes up with inaprovaline
+	required_reagents = list(/datum/reagent/adrenaline = 1, /datum/reagent/carbon = 1)
+	inhibitors = list(/datum/reagent/nutriment/sugar = 1) // Messes up with adrenaline
 	result_amount = 2
 
 /datum/chemical_reaction/amphetamines
@@ -182,9 +176,9 @@
 	required_reagents = list(/datum/reagent/nutriment/sugar = 1, /datum/reagent/phosphorus = 1, /datum/reagent/sulfur = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/ryetalyn
-	name = "Ryetalyn"
-	result = /datum/reagent/ryetalyn
+/datum/chemical_reaction/retrovirals
+	name = "Retrovirals"
+	result = /datum/reagent/retrovirals
 	required_reagents = list(/datum/reagent/entolimod = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
 
@@ -201,7 +195,7 @@
 /datum/chemical_reaction/antibiotics
 	name = "Antibiotics"
 	result = /datum/reagent/antibiotics
-	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/inaprovaline = 1)
+	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/adrenaline = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/imidazoline
@@ -300,12 +294,6 @@
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 
-/datum/chemical_reaction/rezadone
-	name = "Rezadone"
-	result = /datum/reagent/rezadone
-	required_reagents = list(/datum/reagent/toxin/carpotoxin = 1, /datum/reagent/cryptobiolin = 1, /datum/reagent/copper = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/stimulants
 	name = "Stimulants"
 	result = /datum/reagent/stimulants
@@ -335,7 +323,7 @@
 /datum/chemical_reaction/adrenaline
 	name = "Adrenaline"
 	result = /datum/reagent/adrenaline
-	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/amphetamines = 1, /datum/reagent/oxygen = 1)
+	required_reagents = list(/datum/reagent/nutriment/sugar = 1, /datum/reagent/amphetamines = 1, /datum/reagent/oxygen = 1)
 	result_amount = 3
 
 /* Solidification */

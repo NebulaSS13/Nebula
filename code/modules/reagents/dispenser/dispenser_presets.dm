@@ -26,8 +26,8 @@
 /obj/machinery/chemical_dispenser/ert
 	name = "medicine dispenser"
 	spawn_cartridges = list(
-			/obj/item/chems/chem_disp_cartridge/inaprov,
-			/obj/item/chems/chem_disp_cartridge/ryetalyn,
+			/obj/item/chems/chem_disp_cartridge/adrenaline,
+			/obj/item/chems/chem_disp_cartridge/retrovirals,
 			/obj/item/chems/chem_disp_cartridge/painkillers,
 			/obj/item/chems/chem_disp_cartridge/antiseptic,
 			/obj/item/chems/chem_disp_cartridge/burn_meds,
@@ -39,7 +39,6 @@
 			/obj/item/chems/chem_disp_cartridge/imidazoline,
 			/obj/item/chems/chem_disp_cartridge/brute_meds,
 			/obj/item/chems/chem_disp_cartridge/amphetamines,
-			/obj/item/chems/chem_disp_cartridge/rezadone,
 			/obj/item/chems/chem_disp_cartridge/antibiotics,
 			/obj/item/chems/chem_disp_cartridge/sleeptox,
 			/obj/item/chems/chem_disp_cartridge/chloral

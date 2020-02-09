@@ -119,7 +119,7 @@
 /datum/medical_effect/cramps
 	name = "Cramps"
 	triggers = list(/datum/reagent/antitoxins = 30, /datum/reagent/painkillers = 15)
-	cures = list(/datum/reagent/inaprovaline)
+	cures = list(/datum/reagent/adrenaline)
 	cure_message = "The cramps let up..."
 
 /datum/medical_effect/cramps/on_life(mob/living/carbon/human/H, strength)
@@ -137,7 +137,7 @@
 /datum/medical_effect/itch
 	name = "Itch"
 	triggers = list(/datum/reagent/psychoactives = 10)
-	cures = list(/datum/reagent/inaprovaline)
+	cures = list(/datum/reagent/adrenaline)
 	cure_message = "The itching stops..."
 
 /datum/medical_effect/itch/on_life(mob/living/carbon/human/H, strength)

@@ -329,31 +329,6 @@
 		M.emote(pick("giggle", "laugh"))
 	M.add_chemical_effect(CE_PULSE, -1)
 
-/datum/reagent/adrenaline
-	name = "adrenaline"
-	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
-	taste_description = "rush"
-	color = "#c8a5dc"
-	scannable = 1
-	overdose = 20
-	metabolism = 0.1
-	value = 2
-
-/datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(M.chem_doses[type] < 0.2)	//not that effective after initial rush
-		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
-		M.add_chemical_effect(CE_PULSE, 1)
-	else if(M.chem_doses[type] < 1)
-		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
-	M.add_chemical_effect(CE_PULSE, 2)
-	if(M.chem_doses[type] > 10)
-		M.make_jittery(5)
-	if(volume >= 5 && M.is_asystole())
-		remove_self(5)
-		if(M.resuscitate())
-			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
-			heart.take_internal_damage(heart.max_damage * 0.15)
-
 /datum/reagent/lactate
 	name = "lactate"
 	description = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."

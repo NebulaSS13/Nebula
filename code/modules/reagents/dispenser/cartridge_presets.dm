@@ -76,8 +76,8 @@
 	cream		spawn_reagent = /datum/reagent/drink/milk/cream
 
 	// ERT
-	inaprov		  spawn_reagent = /datum/reagent/inaprovaline
-	ryetalyn	  spawn_reagent = /datum/reagent/ryetalyn
+	adrenaline    spawn_reagent = /datum/reagent/adrenaline
+	retrovirals	  spawn_reagent = /datum/reagent/retrovirals
 	painkillers	  spawn_reagent = /datum/reagent/painkillers
 	antiseptic	  spawn_reagent = /datum/reagent/antiseptic
 	burn_meds	  spawn_reagent = /datum/reagent/burn_meds
@@ -89,7 +89,6 @@
 	imidazoline	  spawn_reagent = /datum/reagent/imidazoline
 	brute_meds	  spawn_reagent = /datum/reagent/brute_meds
 	amphetamines  spawn_reagent = /datum/reagent/amphetamines
-	rezadone 	  spawn_reagent = /datum/reagent/rezadone
 	antibiotics   spawn_reagent = /datum/reagent/antibiotics
 	sleeptox	  spawn_reagent = /datum/reagent/sedatives
 	chloral		  spawn_reagent = /datum/reagent/chloralhydrate

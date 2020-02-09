@@ -146,7 +146,7 @@
 
 	charges = list(
 		list("oxygen",       "oxygen",       /datum/reagent/oxygen,       80),
-		list("inaprovaline", "inaprovaline", /datum/reagent/inaprovaline, 80),
+		list("adrenaline",   "adrenaline",   /datum/reagent/adrenaline,   80),
 		list("antitoxins",   "antitoxins",   /datum/reagent/antitoxins,   80),
 		list("entolimod",    "entolimod",    /datum/reagent/entolimod,    80),
 		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,  80),
@@ -161,7 +161,7 @@
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
 		list("oxygen",       "oxygen",       /datum/reagent/oxygen,            20),
-		list("inaprovaline", "inaprovaline", /datum/reagent/inaprovaline,      20),
+		list("adrenaline",   "adrenaline",   /datum/reagent/adrenaline,        20),
 		list("antitoxins",   "antitoxins",   /datum/reagent/antitoxins,        20),
 		list("glucose",      "glucose",      /datum/reagent/nutriment/glucose, 80),
 		list("entolimod",    "entolimod",    /datum/reagent/entolimod,         20),

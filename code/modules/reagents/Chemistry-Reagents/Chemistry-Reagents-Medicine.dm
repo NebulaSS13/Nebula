@@ -1,27 +1,4 @@
 /* General medicine */
-
-/datum/reagent/inaprovaline
-	name = "Inaprovaline"
-	description = "Inaprovaline is a multipurpose neurostimulant and cardioregulator. Commonly used to slow bleeding and stabilize patients."
-	taste_description = "bitterness"
-	color = "#00bfff"
-	overdose = REAGENTS_OVERDOSE * 2
-	metabolism = REM * 0.5
-	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	value = 3.5
-
-/datum/reagent/inaprovaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_STABLE)
-	M.add_chemical_effect(CE_PAINKILLER, 10)
-
-/datum/reagent/inaprovaline/overdose(var/mob/living/carbon/M, var/alien)
-	M.add_chemical_effect(CE_SLOWDOWN, 1)
-	if(prob(5))
-		M.slurring = max(M.slurring, 10)
-	if(prob(2))
-		M.drowsyness = max(M.drowsyness, 5)
-
 /datum/reagent/tricordrazine
 	name = "Tricordrazine"
 	description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries."
@@ -52,56 +29,6 @@
 		var/mob/living/carbon/human/H = M
 		H.confused++
 		H.drowsyness++
-
-/datum/reagent/ryetalyn
-	name = "Ryetalyn"
-	description = "Ryetalyn can cure all genetic abnomalities via a catalytic process."
-	taste_description = "acid"
-	color = "#004000"
-	scannable = 1
-	overdose = REAGENTS_OVERDOSE
-	value = 3.6
-
-/datum/reagent/ryetalyn/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	var/needs_update = M.mutations.len > 0
-
-	M.disabilities = 0
-	M.sdisabilities = 0
-
-	if(needs_update && ishuman(M))
-		M.dna.ResetUI()
-		M.dna.ResetSE()
-		domutcheck(M, null, MUTCHK_FORCED)
-
-
-/datum/reagent/rezadone
-	name = "Rezadone"
-	description = "A powder with almost magical properties, this substance can effectively treat genetic damage in humanoids, though excessive consumption has side effects."
-	taste_description = "sickness"
-	color = "#669900"
-	overdose = REAGENTS_OVERDOSE
-	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	value = 5
-
-/datum/reagent/rezadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustCloneLoss(-20 * removed)
-	M.adjustOxyLoss(-2 * removed)
-	M.heal_organ_damage(20 * removed, 20 * removed)
-	M.adjustToxLoss(-20 * removed)
-	if(M.chem_doses[type] > 3 && ishuman(M))
-		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
-			E.status |= ORGAN_DISFIGURED //currently only matters for the head, but might as well disfigure them all.
-	if(M.chem_doses[type] > 10)
-		M.make_dizzy(5)
-		M.make_jittery(5)
-
-
-
-
-
-
 
 /datum/reagent/chloralhydrate
 	name = "chloral hydrate"

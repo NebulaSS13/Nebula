@@ -226,3 +226,59 @@
 	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)
 	if(prob(2))
 		M.immunity_norm = max(M.immunity_norm - 1, 0)
+
+/datum/reagent/retrovirals
+	name = "retrovirals"
+	description = "A combination of retroviral therapy compounds and a meta-polymerase that rapidly mends genetic damage and unwanted mutations with the power of dark science."
+	taste_description = "acid"
+	color = "#004000"
+	scannable = 1
+	overdose = REAGENTS_OVERDOSE
+	value = 3.6
+
+/datum/reagent/retrovirals/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.adjustCloneLoss(-20 * removed)
+	M.adjustOxyLoss(-2 * removed)
+	M.heal_organ_damage(20 * removed, 20 * removed)
+	M.adjustToxLoss(-20 * removed)
+	if(M.chem_doses[type] > 3 && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		for(var/obj/item/organ/external/E in H.organs)
+			E.status |= ORGAN_DISFIGURED //currently only matters for the head, but might as well disfigure them all.
+	if(M.chem_doses[type] > 10)
+		M.make_dizzy(5)
+		M.make_jittery(5)
+
+	var/needs_update = M.mutations.len > 0
+	M.disabilities = 0
+	M.sdisabilities = 0
+	if(needs_update && ishuman(M))
+		M.dna.ResetUI()
+		M.dna.ResetSE()
+		domutcheck(M, null, MUTCHK_FORCED)
+
+/datum/reagent/adrenaline
+	name = "adrenaline"
+	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
+	taste_description = "rush"
+	color = "#c8a5dc"
+	scannable = 1
+	overdose = 20
+	metabolism = 0.1
+	value = 2
+
+/datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_STABLE)
+	if(M.chem_doses[type] < 0.2)	//not that effective after initial rush
+		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
+		M.add_chemical_effect(CE_PULSE, 1)
+	else if(M.chem_doses[type] < 1)
+		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
+	M.add_chemical_effect(CE_PULSE, 2)
+	if(M.chem_doses[type] > 10)
+		M.make_jittery(5)
+	if(volume >= 5 && M.is_asystole())
+		remove_self(5)
+		if(M.resuscitate())
+			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
+			heart.take_internal_damage(heart.max_damage * 0.15)

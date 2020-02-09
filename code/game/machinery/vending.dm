@@ -900,7 +900,7 @@
 	base_type = /obj/machinery/vending/medical
 	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
 	req_access = list(access_medical_equip)
-	products = list(/obj/item/chems/glass/bottle/antitoxin = 4,/obj/item/chems/glass/bottle/inaprovaline = 4,
+	products = list(/obj/item/chems/glass/bottle/antitoxin = 4,/obj/item/chems/glass/bottle/adrenaline = 4,
 					/obj/item/chems/glass/bottle/stoxin = 4,/obj/item/chems/glass/bottle/toxin = 4,
 					/obj/item/chems/syringe/antiviral = 4,/obj/item/chems/syringe = 12,
 					/obj/item/scanner/health = 5,/obj/item/chems/glass/beaker = 4, /obj/item/chems/dropper = 2,

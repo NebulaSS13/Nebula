@@ -17,7 +17,7 @@
 #define IS_SLIME   1
 #define IS_YINGLET 2
 
-#define CE_STABLE        "stable"       // Inaprovaline
+#define CE_STABLE        "stable"       // Adrenaline effect
 #define CE_ANTIBIOTIC    "antibiotic"   // Spaceacilin
 #define CE_BLOODRESTORE  "bloodrestore" // Iron/nutriment
 #define CE_PAINKILLER    "painkiller"
