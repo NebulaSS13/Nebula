@@ -175,7 +175,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	. = ..()
 	reagents.add_reagent(pick(list(
 				/datum/reagent/oxygen,
-				/datum/reagent/tricordrazine,
+				/datum/reagent/regenerator,
 				/datum/reagent/amphetamines,
 				/datum/reagent/entolimod,
 				/datum/reagent/stimulants,
@@ -196,7 +196,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	var/datum/reagent/payload = pick(list(
 				/datum/reagent/antivirals,
 				/datum/reagent/painkillers,
-				/datum/reagent/tricordrazine,
+				/datum/reagent/regenerator,
 				/datum/reagent/antitoxins,
 				/datum/reagent/adrenaline))
 	reagents.add_reagent(payload, 15)

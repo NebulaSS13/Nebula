@@ -82,13 +82,13 @@
 	antiseptic	  spawn_reagent = /datum/reagent/antiseptic
 	burn_meds	  spawn_reagent = /datum/reagent/burn_meds
 	oxygen		  spawn_reagent = /datum/reagent/oxygen
-	tricord		  spawn_reagent = /datum/reagent/tricordrazine
+	regenerator	  spawn_reagent = /datum/reagent/regenerator
 	antitoxins	  spawn_reagent = /datum/reagent/antitoxins
 	entolimod	  spawn_reagent = /datum/reagent/entolimod
-	alkysine	  spawn_reagent = /datum/reagent/alkysine
-	imidazoline	  spawn_reagent = /datum/reagent/imidazoline
+	neuroannealer spawn_reagent = /datum/reagent/neuroannealer
+	eyedrops	  spawn_reagent = /datum/reagent/eyedrops
 	brute_meds	  spawn_reagent = /datum/reagent/brute_meds
 	amphetamines  spawn_reagent = /datum/reagent/amphetamines
 	antibiotics   spawn_reagent = /datum/reagent/antibiotics
-	sleeptox	  spawn_reagent = /datum/reagent/sedatives
+	sedatives	  spawn_reagent = /datum/reagent/sedatives
 	chloral		  spawn_reagent = /datum/reagent/chloralhydrate

@@ -56,3 +56,19 @@
 
 	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
+
+/datum/reagent/presyncopics
+	name = "presyncopics"
+	description = "A compound that causess presyncopic effects in the taker, including confusion and dizzyness."
+	taste_description = "sourness"
+	color = "#000055"
+	metabolism = REM * 0.5
+	overdose = REAGENTS_OVERDOSE
+	heating_point = 61 CELSIUS
+	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/nutriment/sugar)
+	value = 2
+
+/datum/reagent/presyncopics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/drug_strength = 4
+	M.make_dizzy(drug_strength)
+	M.confused = max(M.confused, drug_strength * 5)

@@ -29,7 +29,7 @@
 #define CE_NOPULSE       "heartstop"    // stops heartbeat
 #define CE_ANTITOX       "antitox"      // Removes toxins
 #define CE_OXYGENATED    "oxygen"       // Helps oxygenate the brain.
-#define CE_BRAIN_REGEN   "brainfix"     // Alkysine.
+#define CE_BRAIN_REGEN   "brainfix"     // Allows the brain to recover after injury
 #define CE_ANTIVIRAL     "antiviral"    // Anti-virus effect.
 #define CE_TOXIN         "toxins"       // Generic toxins, stops autoheal.
 #define CE_BREATHLOSS    "breathloss"   // Breathing depression, makes you need more air

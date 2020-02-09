@@ -143,23 +143,23 @@
 	result_amount = 2
 	log_is_important = 1
 
-/datum/chemical_reaction/cryptobiolin
-	name = "Cryptobiolin"
-	result = /datum/reagent/cryptobiolin
+/datum/chemical_reaction/presyncopics
+	name = "Presyncopics"
+	result = /datum/reagent/presyncopics
 	required_reagents = list(/datum/reagent/potassium = 1, /datum/reagent/acetone = 1, /datum/reagent/nutriment/sugar = 1)
 	minimum_temperature = 30 CELSIUS
 	maximum_temperature = 60 CELSIUS
 	result_amount = 3
 
-/datum/chemical_reaction/tricordrazine
-	name = "Tricordrazine"
-	result = /datum/reagent/tricordrazine
+/datum/chemical_reaction/regenerator
+	name = "Regenerative Serum"
+	result = /datum/reagent/regenerator
 	required_reagents = list(/datum/reagent/adrenaline = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/alkysine
-	name = "Alkysine"
-	result = /datum/reagent/alkysine
+/datum/chemical_reaction/neuroannealer
+	name = "Neuroannealer"
+	result = /datum/reagent/neuroannealer
 	required_reagents = list(/datum/reagent/acid/hydrochloric = 1, /datum/reagent/ammonia = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
@@ -195,12 +195,12 @@
 /datum/chemical_reaction/antibiotics
 	name = "Antibiotics"
 	result = /datum/reagent/antibiotics
-	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/adrenaline = 1)
+	required_reagents = list(/datum/reagent/presyncopics = 1, /datum/reagent/adrenaline = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/imidazoline
-	name = "Imidazoline"
-	result = /datum/reagent/imidazoline
+/datum/chemical_reaction/eyedrops
+	name = "Eye Drops"
+	result = /datum/reagent/eyedrops
 	required_reagents = list(/datum/reagent/carbon = 1, /datum/reagent/fuel/hydrazine = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
@@ -1366,7 +1366,7 @@
 /datum/chemical_reaction/doctor_delight
 	name = "The Doctor's Delight"
 	result = /datum/reagent/drink/doctor_delight
-	required_reagents = list(/datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/juice/tomato = 1, /datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/milk/cream = 2, /datum/reagent/tricordrazine = 1)
+	required_reagents = list(/datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/juice/tomato = 1, /datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/milk/cream = 2, /datum/reagent/regenerator = 1)
 	result_amount = 6
 
 /datum/chemical_reaction/irish_cream
@@ -2036,7 +2036,7 @@
 
 /datum/chemical_reaction/immunobooster
 	result = /datum/reagent/immunobooster
-	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/antitoxins = 1)
+	required_reagents = list(/datum/reagent/presyncopics = 1, /datum/reagent/antitoxins = 1)
 	minimum_temperature = 40 CELSIUS
 	result_amount = 2
 

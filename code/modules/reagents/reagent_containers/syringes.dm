@@ -363,7 +363,7 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/psychoactives, 5)
 	reagents.add_reagent(/datum/reagent/hallucinogenics, 5)
-	reagents.add_reagent(/datum/reagent/cryptobiolin, 5)
+	reagents.add_reagent(/datum/reagent/presyncopics, 5)
 	mode = SYRINGE_INJECT
 	update_icon()
 

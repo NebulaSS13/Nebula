@@ -1,4 +1,4 @@
-/datum/reagent/imidazoline
+/datum/reagent/eyedrops
 	name = "eye drops"
 	description = "A soothing balm that helps with minor eye damage."
 	taste_description = "a mild burn"
@@ -8,7 +8,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 4.2
 
-/datum/reagent/imidazoline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/eyedrops/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[BP_EYES]
@@ -282,3 +282,34 @@
 		if(M.resuscitate())
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
 			heart.take_internal_damage(heart.max_damage * 0.15)
+
+/datum/reagent/regenerator
+	name = "regenerative serum"
+	description = "A broad-spectrum cellular regenerator that heals both burns and physical trauma, albeit quite slowly."
+	taste_description = "metastasis"
+	color = "#8040ff"
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+	value = 6
+
+/datum/reagent/regenerator/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.heal_organ_damage(3 * removed, 3 * removed)
+
+/datum/reagent/neuroannealer
+	name = "neuroannealer"
+	description = "A neuroplasticity-assisting compound that helps to lessen damage to neurological tissue after a injury. Can aid in healing brain tissue."
+	taste_description = "bitterness"
+	color = "#ffff66"
+	metabolism = REM * 0.25
+	overdose = REAGENTS_OVERDOSE
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+	value = 5.9
+
+/datum/reagent/neuroannealer/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 10)
+	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.confused++
+		H.drowsyness++

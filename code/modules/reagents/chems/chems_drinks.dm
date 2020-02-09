@@ -61,7 +61,7 @@
 
 /datum/reagent/drink/juice/carrot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.reagents.add_reagent(/datum/reagent/imidazoline, removed * 0.2)
+	M.reagents.add_reagent(/datum/reagent/eyedrops, removed * 0.2)
 
 /datum/reagent/drink/juice/grape
 	name = "grape juice"
