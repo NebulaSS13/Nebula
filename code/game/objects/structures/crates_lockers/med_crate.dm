@@ -34,7 +34,7 @@
 /obj/structure/closet/crate/med_crate/oxyloss/WillContain()
 	return list(
 		/obj/item/scanner/health = 2,
-		/obj/item/storage/pill_bottle/dexalin = 2,
+		/obj/item/storage/pill_bottle/oxygen = 2,
 		/obj/item/storage/pill_bottle/inaprovaline
 	)
 /obj/structure/closet/crate/med_crate/toxin

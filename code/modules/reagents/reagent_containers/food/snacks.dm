@@ -444,7 +444,7 @@
 /obj/item/chems/food/snacks/bearmeat/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 12)
-	reagents.add_reagent(/datum/reagent/stimulants, 5)
+	reagents.add_reagent(/datum/reagent/amphetamines, 5)
 
 /obj/item/chems/food/snacks/spider
 	name = "giant spider leg"
@@ -514,7 +514,7 @@
 	name = "\improper Sin-pocket"
 	desc = "The food of choice for the veteran. Do <b>NOT</b> overconsume."
 	filling_color = "#6d6d00"
-	heated_reagents = list(/datum/reagent/drink/doctor_delight = 5, /datum/reagent/stimulants = 0.75, /datum/reagent/synaptizine = 0.25)
+	heated_reagents = list(/datum/reagent/drink/doctor_delight = 5, /datum/reagent/amphetamines = 0.75, /datum/reagent/synaptizine = 0.25)
 	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
 
 /obj/item/chems/food/snacks/donkpocket/sinpocket/attack_self(mob/user)
@@ -3187,7 +3187,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 5,
 						/datum/reagent/adrenaline, 5,
-						/datum/reagent/stimulants, 5,
+						/datum/reagent/amphetamines, 5,
 						/datum/reagent/iron, 5)
 
 //Vending Machine Foods should go here.

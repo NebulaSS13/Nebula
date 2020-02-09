@@ -28,7 +28,7 @@
 
 	var/static/list/chemical_types = list(
 		"anti-trauma" = /datum/reagent/brute_meds,
-		"stimulants" =  /datum/reagent/stimulants,
+		"amphetamines" =  /datum/reagent/amphetamines,
 		"painkillers" = /datum/reagent/painkillers
 	)
 

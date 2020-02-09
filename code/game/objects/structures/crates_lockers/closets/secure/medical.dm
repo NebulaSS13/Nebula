@@ -153,8 +153,8 @@
 		/obj/item/clothing/shoes/white,
 		/obj/item/chems/glass/bottle/stoxin,
 		/obj/item/chems/syringe,
-		/obj/item/storage/pill_bottle/citalopram,
-		/obj/item/chems/pill/methylphenidate,
+		/obj/item/storage/pill_bottle/antidepressants,
+		/obj/item/chems/pill/stimulants,
 		/obj/item/material/clipboard,
 		/obj/item/folder/white,
 		/obj/item/taperecorder,
@@ -201,9 +201,8 @@
 		/obj/item/clothing/suit/straight_jacket,
 		/obj/item/chems/glass/bottle/stoxin,
 		/obj/item/chems/syringe,
-		/obj/item/storage/pill_bottle/citalopram,
-		/obj/item/storage/pill_bottle/methylphenidate,
-		/obj/item/storage/pill_bottle/paroxetine,
+		/obj/item/storage/pill_bottle/antidepressants,
+		/obj/item/storage/pill_bottle/stimulants,
 		/obj/item/clothing/under/rank/psych/turtleneck,
 		/obj/item/clothing/under/rank/psych
 	)

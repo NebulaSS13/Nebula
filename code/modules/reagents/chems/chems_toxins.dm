@@ -227,7 +227,7 @@
 	strength = 3
 	target_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
-	heating_products = list(/datum/reagent/toxin/carpotoxin, /datum/reagent/soporific, /datum/reagent/copper)
+	heating_products = list(/datum/reagent/toxin/carpotoxin, /datum/reagent/sedatives, /datum/reagent/copper)
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()

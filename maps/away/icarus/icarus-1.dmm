@@ -1547,7 +1547,7 @@
 "fa" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/storage/pill_bottle/antidexafen,
+/obj/item/storage/pill_bottle/antivirals,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fb" = (

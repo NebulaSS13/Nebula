@@ -184,19 +184,6 @@
 	required_reagents = list(/datum/reagent/acid/hydrochloric = 1, /datum/reagent/ammonia = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/dexalin
-	name = "Dexalin"
-	result = /datum/reagent/dexalin
-	required_reagents = list(/datum/reagent/acetone = 2, /datum/reagent/toxin/phoron = 0.1)
-	inhibitors = list(/datum/reagent/water = 1)
-	result_amount = 1
-
-/datum/chemical_reaction/dexalinp
-	name = "Dexalin Plus"
-	result = /datum/reagent/dexalinp
-	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/carbon = 1, /datum/reagent/iron = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/brute_meds
 	name = "Anti-Trauma Medication"
 	result = /datum/reagent/brute_meds
@@ -204,9 +191,9 @@
 	inhibitors = list(/datum/reagent/nutriment/sugar = 1) // Messes up with inaprovaline
 	result_amount = 2
 
-/datum/chemical_reaction/stimulants
-	name = "Stimulants"
-	result = /datum/reagent/stimulants
+/datum/chemical_reaction/amphetamines
+	name = "Amphetamines"
+	result = /datum/reagent/amphetamines
 	required_reagents = list(/datum/reagent/nutriment/sugar = 1, /datum/reagent/phosphorus = 1, /datum/reagent/sulfur = 1)
 	result_amount = 3
 
@@ -238,9 +225,9 @@
 	required_reagents = list(/datum/reagent/carbon = 1, /datum/reagent/fuel/hydrazine = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/soporific
-	name = "Soporific"
-	result = /datum/reagent/soporific
+/datum/chemical_reaction/sedatives
+	name = "Sedatives"
+	result = /datum/reagent/sedatives
 	required_reagents = list(/datum/reagent/chloralhydrate = 1, /datum/reagent/nutriment/sugar = 4)
 	inhibitors = list(/datum/reagent/phosphorus) // Messes with the smoke
 	result_amount = 5
@@ -274,7 +261,7 @@
 /datum/chemical_reaction/zombiepowder
 	name = "Zombie Powder"
 	result = /datum/reagent/toxin/zombiepowder
-	required_reagents = list(/datum/reagent/toxin/carpotoxin = 5, /datum/reagent/soporific = 5, /datum/reagent/copper = 5)
+	required_reagents = list(/datum/reagent/toxin/carpotoxin = 5, /datum/reagent/sedatives = 5, /datum/reagent/copper = 5)
 	result_amount = 2
 	minimum_temperature = 90 CELSIUS
 	maximum_temperature = 99 CELSIUS
@@ -334,28 +321,16 @@
 	required_reagents = list(/datum/reagent/toxin/carpotoxin = 1, /datum/reagent/cryptobiolin = 1, /datum/reagent/copper = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/lexorin
-	name = "Lexorin"
-	result = /datum/reagent/lexorin
-	required_reagents = list(/datum/reagent/toxin/phoron = 1, /datum/reagent/fuel/hydrazine = 1, /datum/reagent/ammonia = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/methylphenidate
-	name = "Methylphenidate"
-	result = /datum/reagent/methylphenidate
+/datum/chemical_reaction/stimulants
+	name = "Stimulants"
+	result = /datum/reagent/stimulants
 	required_reagents = list(/datum/reagent/hallucinogenics = 1, /datum/reagent/lithium = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/citalopram
-	name = "Citalopram"
-	result = /datum/reagent/citalopram
+/datum/chemical_reaction/antidepressants
+	name = "Antidepressants"
+	result = /datum/reagent/antidepressants
 	required_reagents = list(/datum/reagent/hallucinogenics = 1, /datum/reagent/carbon = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/paroxetine
-	name = "Paroxetine"
-	result = /datum/reagent/paroxetine
-	required_reagents = list(/datum/reagent/hallucinogenics = 1, /datum/reagent/acetone = 1, /datum/reagent/inaprovaline = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/hair_remover
@@ -381,7 +356,7 @@
 /datum/chemical_reaction/adrenaline
 	name = "Adrenaline"
 	result = /datum/reagent/adrenaline
-	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/stimulants = 1, /datum/reagent/dexalinp = 1)
+	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/amphetamines = 1, /datum/reagent/oxygen = 1)
 	result_amount = 3
 
 /* Solidification */
@@ -1715,7 +1690,7 @@
 /datum/chemical_reaction/neurotoxin
 	name = "Neurotoxin"
 	result = /datum/reagent/ethanol/neurotoxin
-	required_reagents = list(/datum/reagent/ethanol/livergeist = 1, /datum/reagent/soporific = 1)
+	required_reagents = list(/datum/reagent/ethanol/livergeist = 1, /datum/reagent/sedatives = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/snowwhite
@@ -1850,16 +1825,16 @@
 	if(istype(T)) new /obj/item/stack/material/deuterium(T, created_volume)
 	return
 
-/datum/chemical_reaction/antidexafen
-	name = "Antidexafen"
-	result = /datum/reagent/antidexafen
+/datum/chemical_reaction/antivirals
+	name = "Antivirals"
+	result = /datum/reagent/antivirals
 	required_reagents = list(/datum/reagent/painkillers = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/nanoblood
 	name = "Nanoblood"
 	result = /datum/reagent/nanoblood
-	required_reagents = list(/datum/reagent/dexalinp = 1, /datum/reagent/iron = 1, /datum/reagent/blood = 1)
+	required_reagents = list(/datum/reagent/nanitefluid = 1, /datum/reagent/iron = 1, /datum/reagent/blood = 1)
 	result_amount = 3
 	mix_message = "The solution thickens slowly into a glossy liquid."
 

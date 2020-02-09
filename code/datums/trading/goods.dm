@@ -353,7 +353,6 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/chems/glass/bottle/antitoxin = TRADER_THIS_TYPE,
 								  /obj/item/chems/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
 								  /obj/item/bodybag/cryobag = TRADER_THIS_TYPE,
-								  /obj/item/chems/chem_disp_cartridge/dexalin/small = TRADER_THIS_TYPE,
 								  /obj/item/sign/medipolma = TRADER_THIS_TYPE
 								)
 

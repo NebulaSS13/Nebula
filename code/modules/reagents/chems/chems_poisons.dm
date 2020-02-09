@@ -26,6 +26,8 @@
 		M.co2_alert = 0
 	else
 		M.co2_alert = 0
+	if(dosage > 1 && M.losebreath < 15)
+		M.losebreath++
 	if(warning_message && prob(warning_prob))
 		to_chat(M, "<span class='warning'>You feel [warning_message].</span>")
 

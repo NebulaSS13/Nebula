@@ -174,12 +174,12 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli/meds/Initialize()
 	. = ..()
 	reagents.add_reagent(pick(list(
-				/datum/reagent/dexalinp,
+				/datum/reagent/oxygen,
 				/datum/reagent/tricordrazine,
-				/datum/reagent/stimulants,
+				/datum/reagent/amphetamines,
 				/datum/reagent/entolimod,
-				/datum/reagent/methylphenidate,
-				/datum/reagent/citalopram,
+				/datum/reagent/stimulants,
+				/datum/reagent/antidepressants,
 				/datum/reagent/antitoxins,
 				/datum/reagent/brute_meds,
 				/datum/reagent/burn_meds,
@@ -194,7 +194,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds/Initialize()
 	. = ..()
 	var/datum/reagent/payload = pick(list(
-				/datum/reagent/antidexafen,
+				/datum/reagent/antivirals,
 				/datum/reagent/painkillers,
 				/datum/reagent/tricordrazine,
 				/datum/reagent/antitoxins,

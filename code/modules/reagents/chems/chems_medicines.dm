@@ -114,3 +114,115 @@
 		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			M.reagents.remove_reagent(R.type, removing)
 			return
+
+
+/datum/reagent/antivirals
+	name = "Antivirals"
+	description = "An all-in-one antiviral agent. Fever, cough, sneeze, safe for babies."
+	taste_description = "cough syrup"
+	color = "#c8a5dc"
+	overdose = 60
+	scannable = 1
+	metabolism = REM * 0.05
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/antivirals/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 15)
+	M.add_chemical_effect(CE_ANTIVIRAL, 1)
+
+/datum/reagent/antivirals/overdose(var/mob/living/carbon/M, var/alien)
+	M.add_chemical_effect(CE_TOXIN, 1)
+	M.hallucination(60, 20)
+	M.druggy = max(M.druggy, 2)
+
+/datum/reagent/immunobooster
+	name = "immunobooster"
+	description = "A drug that helps restore the immune system. Will not replace a normal immunity."
+	taste_description = "chalky"
+	color = "#ffc0cb"
+	metabolism = REM
+	overdose = REAGENTS_OVERDOSE
+	value = 1.5
+	scannable = 1
+
+/datum/reagent/immunobooster/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(volume < REAGENTS_OVERDOSE && !M.chem_effects[CE_ANTIVIRAL])
+		M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.
+	if(M.chem_effects[CE_ANTIVIRAL]) //don't take with 'cillin
+		M.add_chemical_effect(CE_TOXIN, 4) // as strong as taking vanilla 'toxin'
+
+/datum/reagent/immunobooster/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.add_chemical_effect(CE_TOXIN, 1)
+	M.immunity -= 0.5 //inverse effects when abused
+
+/datum/reagent/stimulants
+	name = "stimulants"
+	description = "Improves the ability to concentrate."
+	taste_description = "sourness"
+	color = "#bf80bf"
+	scannable = 1
+	metabolism = 0.01
+	data = 0
+	value = 6
+
+/datum/reagent/stimulants/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + 5 MINUTES)
+		data = world.time
+		to_chat(M, "<span class='warning'>You lose focus...</span>")
+	else
+		M.drowsyness = max(M.drowsyness - 5, 0)
+		M.AdjustParalysis(-1)
+		M.AdjustStunned(-1)
+		M.AdjustWeakened(-1)
+		if(world.time > data + 5 MINUTES)
+			data = world.time
+			to_chat(M, "<span class='notice'>Your mind feels focused and undivided.</span>")
+
+/datum/reagent/antidepressants
+	name = "antidepressants"
+	description = "Stabilizes the mind a little."
+	taste_description = "bitterness"
+	color = "#ff80ff"
+	scannable = 1
+	metabolism = 0.01
+	data = 0
+	value = 6
+
+/datum/reagent/antidepressants/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + 5 MINUTES)
+		data = world.time
+		to_chat(M, "<span class='warning'>Your mind feels a little less stable...</span>")
+	else
+		M.add_chemical_effect(CE_MIND, 1)
+		M.adjust_hallucination(-10)
+		if(world.time > data + 5 MINUTES)
+			data = world.time
+			to_chat(M, "<span class='notice'>Your mind feels stable... a little stable.</span>")
+
+/datum/reagent/antibiotics
+	name = "antibiotics"
+	description = "An all-purpose antibiotic agent."
+	taste_description = "bitterness"
+	color = "#c1c1c1"
+	metabolism = REM * 0.1
+	overdose = REAGENTS_OVERDOSE/2
+	scannable = 1
+	value = 2.5
+
+/datum/reagent/antibiotics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.immunity = max(M.immunity - 0.1, 0)
+	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
+	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
+	if(volume > 10)
+		M.immunity = max(M.immunity - 0.3, 0)
+		M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
+	if(M.chem_doses[type] > 15)
+		M.immunity = max(M.immunity - 0.25, 0)
+
+/datum/reagent/antibiotics/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.immunity = max(M.immunity - 0.25, 0)
+	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)
+	if(prob(2))
+		M.immunity_norm = max(M.immunity_norm - 1, 0)

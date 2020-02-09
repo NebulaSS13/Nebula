@@ -366,16 +366,17 @@
 			M.UpdateAppearance()
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
 
-/datum/reagent/soporific
-	name = "soporifics"
-	description = "An effective hypnotic used to treat insomnia."
+/datum/reagent/sedatives
+	name = "sedatives"
+	description = "A mild sedative used to calm patients and induce sleep."
 	taste_description = "bitterness"
 	color = "#009ca8"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	value = 2.5
 
-/datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/sedatives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.make_jittery(-50)
 	var/threshold = 1
 	if(M.chem_doses[type] < 1 * threshold)
 		if(M.chem_doses[type] == metabolism * 2 || prob(5))
@@ -392,3 +393,194 @@
 		M.drowsyness = max(M.drowsyness, 60)
 		M.add_chemical_effect(CE_SEDATE, 1)
 	M.add_chemical_effect(CE_PULSE, -1)
+
+/datum/reagent/nitrous_oxide
+	name = "nitrous oxide"
+	description = "An ubiquitous sleeping agent also known as laughing gas."
+	taste_description = "dental surgery"
+	color = COLOR_GRAY80
+	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
+	var/do_giggle = TRUE
+
+/datum/reagent/nitrous_oxide/xenon
+	name = "xenon"
+	description = "A nontoxic gas used as a general anaesthetic."
+	do_giggle = FALSE
+	taste_description = "nothing"
+	color = COLOR_GRAY80
+
+/datum/reagent/nitrous_oxide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/dosage = M.chem_doses[type]
+	if(dosage >= 1)
+		if(prob(5)) M.Sleeping(3)
+		M.dizziness =  max(M.dizziness, 3)
+		M.confused =   max(M.confused, 3)
+	if(dosage >= 0.3)
+		if(prob(5)) M.Paralyse(1)
+		M.drowsyness = max(M.drowsyness, 3)
+		M.slurring =   max(M.slurring, 3)
+	if(do_giggle && prob(20))
+		M.emote(pick("giggle", "laugh"))
+	M.add_chemical_effect(CE_PULSE, -1)
+
+/datum/reagent/adrenaline
+	name = "adrenaline"
+	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
+	taste_description = "rush"
+	color = "#c8a5dc"
+	scannable = 1
+	overdose = 20
+	metabolism = 0.1
+	value = 2
+
+/datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(M.chem_doses[type] < 0.2)	//not that effective after initial rush
+		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
+		M.add_chemical_effect(CE_PULSE, 1)
+	else if(M.chem_doses[type] < 1)
+		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
+	M.add_chemical_effect(CE_PULSE, 2)
+	if(M.chem_doses[type] > 10)
+		M.make_jittery(5)
+	if(volume >= 5 && M.is_asystole())
+		remove_self(5)
+		if(M.resuscitate())
+			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
+			heart.take_internal_damage(heart.max_damage * 0.15)
+
+/datum/reagent/lactate
+	name = "lactate"
+	description = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
+	taste_description = "sourness"
+	color = "#eeddcc"
+	scannable = 1
+	overdose = REAGENTS_OVERDOSE
+	metabolism = REM
+
+/datum/reagent/lactate/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PULSE, 1)
+	M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
+	if(volume >= 5)
+		M.add_chemical_effect(CE_PULSE, 1)
+		M.add_chemical_effect(CE_SLOWDOWN, (volume/5) ** 2)
+	else if(M.chem_doses[type] > 20) //after prolonged exertion
+		M.make_jittery(10)
+
+/datum/reagent/nanoblood
+	name = "nanoblood"
+	description = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
+	taste_description = "blood with bubbles"
+	color = "#c10158"
+	scannable = 1
+	overdose = 5
+	metabolism = 1
+
+/datum/reagent/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
+		return
+	if(M.regenerate_blood(4 * removed))
+		M.immunity = max(M.immunity - 0.1, 0)
+		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
+			M.immunity = max(M.immunity - 0.5, 0)
+
+/datum/reagent/nicotine
+	name = "nicotine"
+	description = "A sickly yellow liquid sourced from tobacco leaves. Stimulates and relaxes the mind and body."
+	taste_description = "peppery bitterness"
+	color = "#efebaa"
+	metabolism = REM * 0.002
+	overdose = 6
+	scannable = 1
+	data = 0
+	value = 2
+
+/datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(prob(volume*20))
+		M.add_chemical_effect(CE_PULSE, 1)
+	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+		data = world.time
+		to_chat(M, "<span class='warning'>You feel antsy, your concentration wavers...</span>")
+	else
+		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+			data = world.time
+			to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
+
+/datum/reagent/nicotine/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.add_chemical_effect(CE_PULSE, 2)
+
+/datum/reagent/tobacco
+	name = "tobacco"
+	description = "Cut and processed tobacco leaves."
+	taste_description = "tobacco"
+	color = "#684b3c"
+	scannable = 1
+	value = 3
+	scent = "cigarette smoke"
+	scent_descriptor = SCENT_DESC_ODOR
+	scent_range = 4
+
+	var/nicotine = REM * 0.2
+
+/datum/reagent/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.reagents.add_reagent(/datum/reagent/nicotine, nicotine)
+
+/datum/reagent/tobacco/fine
+	name = "fine tobacco"
+	taste_description = "fine tobacco"
+	value = 5
+	scent = "fine tobacco smoke"
+	scent_descriptor = SCENT_DESC_FRAGRANCE
+
+/datum/reagent/tobacco/bad
+	name = "terrible tobacco"
+	taste_description = "acrid smoke"
+	value = 0
+	scent = "acrid tobacco smoke"
+	scent_intensity = /decl/scent_intensity/strong
+	scent_descriptor = SCENT_DESC_ODOR
+
+/datum/reagent/tobacco/liquid
+	name = "nicotine solution"
+	description = "A diluted nicotine solution."
+	taste_mult = 0
+	color = "#fcfcfc"
+	nicotine = REM * 0.1
+	scent = null
+	scent_intensity = null
+	scent_descriptor = null
+	scent_range = null
+
+/datum/reagent/menthol
+	name = "menthol"
+	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
+	taste_description = "mint"
+	color = "#80af9c"
+	metabolism = REM * 0.002
+	overdose = REAGENTS_OVERDOSE * 0.25
+	scannable = 1
+	data = 0
+
+/datum/reagent/menthol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
+		data = world.time
+		to_chat(M, "<span class='notice'>You feel faintly sore in the throat.</span>")
+
+/datum/reagent/nanitefluid
+	name = "Nanite Fluid"
+	description = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
+	taste_description = "metallic sludge"
+	color = "#c2c2d6"
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/nanitefluid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_CRYO, 1)
+	if(M.bodytemperature < 170)
+		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/organ/internal/I in H.internal_organs)
+				if(BP_IS_PROSTHETIC(I))
+					I.heal_damage(20*removed)

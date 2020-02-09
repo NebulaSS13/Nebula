@@ -113,7 +113,7 @@
 	seed_name = "death berry"
 	display_name = "death berry bush"
 	mutants = null
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/toxin = list(3,3), /datum/reagent/lexorin = list(1,5))
+	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/toxin = list(3,3), /datum/reagent/carbon_monoxide = list(1,5))
 
 /datum/seed/berry/poison/death/New()
 	..()
@@ -327,7 +327,14 @@
 	seed_name = "biteleaf deus"
 	display_name = "biteleaf deus"
 	mutants = null
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/brute_meds = list(1,8), /datum/reagent/synaptizine = list(1,8,1), /datum/reagent/stimulants = list(1,10,1), /datum/reagent/psychoactives = list(1,10))
+	chems = list(
+		/datum/reagent/nutriment = list(1), 
+		/datum/reagent/brute_meds = list(1,8), 
+		/datum/reagent/antidepressants = list(1,8,1), 
+		/datum/reagent/stimulants = list(1,8,1), 
+		/datum/reagent/amphetamines = list(1,10,1), 
+		/datum/reagent/psychoactives = list(1,10)
+	)
 	kitchen_tag = "biteleafdeus"
 
 /datum/seed/ambrosia/deus/New()
@@ -434,7 +441,7 @@
 	seed_name = "liberty cap"
 	display_name = "liberty cap mushrooms"
 	mutants = null
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/soporific = list(3,3), /datum/reagent/psychoactives = list(1,25))
+	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/sedatives = list(3,3), /datum/reagent/psychoactives = list(1,25))
 
 /datum/seed/mushroom/hallucinogenic/strong/New()
 	..()

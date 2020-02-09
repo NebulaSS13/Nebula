@@ -115,12 +115,12 @@
 	reagents.add_reagent(/datum/reagent/adminordrazine, 1)
 
 /obj/item/chems/pill/stox
-	name = "Soporific (15u)"
+	name = "sedatives (15u)"
 	desc = "Commonly used to treat insomnia."
 	icon_state = "pill3"
 /obj/item/chems/pill/stox/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/soporific, 15)
+	reagents.add_reagent(/datum/reagent/sedatives, 15)
 	color = reagents.get_color()
 
 
@@ -153,23 +153,13 @@
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/dexalin
-	name = "Dexalin (15u)"
+/obj/item/chems/pill/oxygen
+	name = "oxygen (15u)"
 	desc = "Used to treat oxygen deprivation."
 	icon_state = "pill1"
-/obj/item/chems/pill/dexalin/Initialize()
+/obj/item/chems/pill/oxygen/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dexalin, 15)
-	color = reagents.get_color()
-
-
-/obj/item/chems/pill/dexalin_plus
-	name = "Dexalin Plus (15u)"
-	desc = "Used to treat extreme oxygen deprivation."
-	icon_state = "pill2"
-/obj/item/chems/pill/dexalin_plus/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/dexalinp, 15)
+	reagents.add_reagent(/datum/reagent/oxygen, 15)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antitoxins
@@ -211,7 +201,7 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/impedrezene, 10)
 	reagents.add_reagent(/datum/reagent/synaptizine, 5)
-	reagents.add_reagent(/datum/reagent/stimulants, 5)
+	reagents.add_reagent(/datum/reagent/amphetamines, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/three_eye
@@ -243,47 +233,36 @@
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/antidexafen
-	name = "Antidexafen (15u)"
+/obj/item/chems/pill/antivirals
+	name = "antivirals (15u)"
 	desc = "Common cold mediciation. Safe for babies!"
 	icon_state = "pill4"
-/obj/item/chems/pill/antidexafen/Initialize()
+/obj/item/chems/pill/antivirals/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/antidexafen, 10)
+	reagents.add_reagent(/datum/reagent/antivirals, 10)
 	reagents.add_reagent(/datum/reagent/drink/juice/lemon, 5)
 	reagents.add_reagent(/datum/reagent/menthol, REM*0.2)
 	color = reagents.get_color()
 
 //Psychiatry pills.
-/obj/item/chems/pill/methylphenidate
-	name = "Methylphenidate (15u)"
+/obj/item/chems/pill/stimulants
+	name = "stimulants (15u)"
 	desc = "Improves the ability to concentrate."
 	icon_state = "pill2"
-/obj/item/chems/pill/methylphenidate/Initialize()
+/obj/item/chems/pill/stimulants/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/methylphenidate, 15)
+	reagents.add_reagent(/datum/reagent/stimulants, 15)
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/citalopram
-	name = "Citalopram (15u)"
+/obj/item/chems/pill/antidepressants
+	name = "antidepressants (15u)"
 	desc = "Mild anti-depressant."
 	icon_state = "pill4"
-/obj/item/chems/pill/citalopram/Initialize()
+/obj/item/chems/pill/antidepressants/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/citalopram, 15)
+	reagents.add_reagent(/datum/reagent/antidepressants, 15)
 	color = reagents.get_color()
-
-
-/obj/item/chems/pill/paroxetine
-	name = "Paroxetine (10u)"
-	desc = "Before you swallow a bullet: try swallowing this!"
-	icon_state = "pill4"
-/obj/item/chems/pill/paroxetine/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/paroxetine, 10)
-	color = reagents.get_color()
-
 
 /obj/item/chems/pill/entolimod
 	name = "entolimod (7u)"

@@ -324,10 +324,8 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 
 	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(species.total_health/2))
 	var/oxygenated_mult = 0
-	if(chem_effects[CE_OXYGENATED] == 1) // Dexalin.
+	if(chem_effects[CE_OXYGENATED])
 		oxygenated_mult = 0.5
-	else if(chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
-		oxygenated_mult = 0.8
 	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
 	blood_volume = blood_volume * blood_volume_mod
 	return min(blood_volume, 100)

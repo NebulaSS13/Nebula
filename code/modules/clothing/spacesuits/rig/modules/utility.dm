@@ -145,12 +145,12 @@
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
 
 	charges = list(
-		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
-		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      80),
-		list("antitoxins",      "antitoxins",      /datum/reagent/antitoxins,          80),
-		list("entolimod",     "entolimod",     /datum/reagent/entolimod,         80),
-		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,      80),
-		list("painkillers",   "painkillers",      /datum/reagent/painkillers,          80)
+		list("oxygen",       "oxygen",       /datum/reagent/oxygen,       80),
+		list("inaprovaline", "inaprovaline", /datum/reagent/inaprovaline, 80),
+		list("antitoxins",   "antitoxins",   /datum/reagent/antitoxins,   80),
+		list("entolimod",    "entolimod",    /datum/reagent/entolimod,    80),
+		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,  80),
+		list("painkillers",  "painkillers",  /datum/reagent/painkillers,  80)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -160,14 +160,14 @@
 
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
-		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          20),
-		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      20),
-		list("antitoxins",      "antitoxins",      /datum/reagent/antitoxins,          20),
-		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
-		list("entolimod",     "entolimod",     /datum/reagent/entolimod,         20),
-		list("regenerative",  "regenerative",  /datum/reagent/burn_meds,         20),
-		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,      20),
-		list("painkillers",   "painkillers",   /datum/reagent/painkillers,       20)
+		list("oxygen",       "oxygen",       /datum/reagent/oxygen,            20),
+		list("inaprovaline", "inaprovaline", /datum/reagent/inaprovaline,      20),
+		list("antitoxins",   "antitoxins",   /datum/reagent/antitoxins,        20),
+		list("glucose",      "glucose",      /datum/reagent/nutriment/glucose, 80),
+		list("entolimod",    "entolimod",    /datum/reagent/entolimod,         20),
+		list("regenerative", "regenerative", /datum/reagent/burn_meds,         20),
+		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,       20),
+		list("painkillers",  "painkillers",  /datum/reagent/painkillers,       20)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
@@ -251,10 +251,11 @@
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 
 	charges = list(
-		list("synaptizine", "synaptizine", /datum/reagent/synaptizine,       30),
-		list("stimulants",  "stimulants",  /datum/reagent/stimulants,        30),
-		list("painkillers", "painkillers", /datum/reagent/painkillers,       30),
-		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 80),
+		list("antidepressants", "antidepressants",  /datum/reagent/antidepressants,   30),
+		list("stimulants",      "stimulants",       /datum/reagent/stimulants,        30),
+		list("amphetamines",    "amphetamines",     /datum/reagent/amphetamines,      30),
+		list("painkillers",     "painkillers",      /datum/reagent/painkillers,       30),
+		list("glucose",         "glucose",          /datum/reagent/nutriment/glucose, 80)
 		)
 
 	interface_name = "combat chem dispenser"

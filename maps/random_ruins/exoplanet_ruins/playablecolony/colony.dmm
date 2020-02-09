@@ -2444,7 +2444,7 @@
 /obj/item/storage/pill_bottle/painkillers,
 /obj/item/storage/pill_bottle/painkillers,
 /obj/item/storage/pill_bottle/antibiotics,
-/obj/item/storage/pill_bottle/antidexafen,
+/obj/item/storage/pill_bottle/antivirals,
 /obj/item/chems/glass/beaker/large,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/medbay)

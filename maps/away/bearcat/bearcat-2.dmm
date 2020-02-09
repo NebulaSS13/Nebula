@@ -2274,7 +2274,7 @@
 	name = "pill cabinet";
 	pixel_x = 26
 	},
-/obj/item/storage/pill_bottle/antidexafen,
+/obj/item/storage/pill_bottle/antivirals,
 /obj/item/storage/pill_bottle/painkillers,
 /obj/item/storage/pill_bottle/antitox,
 /obj/item/storage/pill_bottle/burn_meds,

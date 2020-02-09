@@ -1,4 +1,4 @@
-/datum/reagent/stimulants
+/datum/reagent/amphetamines
 	name = "altrac extract"
 	description = "A crystalline powder refined from a number of different vegetable and plant sources. Serves a powerful, often illegal, stimulant."
 

@@ -27,7 +27,7 @@
 	startswith = list(
 		/obj/item/stack/medical/bruise_pack = 2,
 		/obj/item/stack/medical/ointment = 2,
-		/obj/item/storage/pill_bottle/antidexafen,
+		/obj/item/storage/pill_bottle/antivirals,
 		/obj/item/storage/pill_bottle/painkillers,
 		/obj/item/stack/medical/splint
 		)
@@ -106,7 +106,7 @@
 	startswith = list(
 		/obj/item/storage/pill_bottle/brute_meds,
 		/obj/item/storage/pill_bottle/burn_meds,
-		/obj/item/storage/pill_bottle/dexalin_plus,
+		/obj/item/storage/pill_bottle/oxygen,
 		/obj/item/storage/pill_bottle/antitoxins,
 		/obj/item/storage/pill_bottle/painkillers,
 		/obj/item/storage/pill_bottle/antibiotics,
@@ -247,18 +247,11 @@
 	startswith = list(/obj/item/chems/pill/brute_meds = 21)
 	wrapper_color = COLOR_MAROON
 
-/obj/item/storage/pill_bottle/dexalin_plus
-	name = "pill bottle (Dexalin Plus)"
-	desc = "Contains pills used to treat extreme cases of oxygen deprivation."
-
-	startswith = list(/obj/item/chems/pill/dexalin_plus = 14)
-	wrapper_color = COLOR_CYAN_BLUE
-
-/obj/item/storage/pill_bottle/dexalin
-	name = "pill bottle (Dexalin)"
+/obj/item/storage/pill_bottle/oxygen
+	name = "pill bottle (oxygen)"
 	desc = "Contains pills used to treat oxygen deprivation."
 
-	startswith = list(/obj/item/chems/pill/dexalin = 21)
+	startswith = list(/obj/item/chems/pill/oxygen = 21)
 	wrapper_color = COLOR_LIGHT_CYAN
 
 /obj/item/storage/pill_bottle/antitoxins
@@ -297,32 +290,25 @@
 	wrapper_color = COLOR_PURPLE_GRAY
 
 //Baycode specific Psychiatry pills.
-/obj/item/storage/pill_bottle/citalopram
-	name = "pill bottle (Citalopram)"
+/obj/item/storage/pill_bottle/antidepressants
+	name = "pill bottle (antidepressants)"
 	desc = "Mild antidepressant. For use in individuals suffering from depression or anxiety. 15u dose per pill."
 
-	startswith = list(/obj/item/chems/pill/citalopram = 21)
+	startswith = list(/obj/item/chems/pill/antidepressants = 21)
 	wrapper_color = COLOR_GRAY
 
-/obj/item/storage/pill_bottle/methylphenidate
-	name = "pill bottle (Methylphenidate)"
+/obj/item/storage/pill_bottle/stimulants
+	name = "pill bottle (stimulants)"
 	desc = "Mental stimulant. For use in individuals suffering from ADHD, or general concentration issues. 15u dose per pill."
 
-	startswith = list(/obj/item/chems/pill/methylphenidate = 21)
+	startswith = list(/obj/item/chems/pill/stimulants = 21)
 	wrapper_color = COLOR_GRAY
 
-/obj/item/storage/pill_bottle/paroxetine
-	name = "pill bottle (Paroxetine)"
-	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <span class='warning'>WARNING: side-effects may include hallucinations.</span>"
-
-	startswith = list(/obj/item/chems/pill/paroxetine = 14)
-	wrapper_color = COLOR_GRAY
-
-/obj/item/storage/pill_bottle/antidexafen
+/obj/item/storage/pill_bottle/antivirals
 	name = "pill bottle (cold medicine)"
 	desc = "All-in-one cold medicine. 15u dose per pill. Safe for babies like you!"
 
-	startswith = list(/obj/item/chems/pill/antidexafen = 21)
+	startswith = list(/obj/item/chems/pill/antivirals = 21)
 	wrapper_color = COLOR_VIOLET
 
 /obj/item/storage/pill_bottle/assorted
@@ -334,7 +320,7 @@
 			/obj/item/chems/pill/antitoxins = 6,
 			/obj/item/chems/pill/sugariron = 2,
 			/obj/item/chems/pill/painkillers = 2,
-			/obj/item/chems/pill/dexalin = 2,
+			/obj/item/chems/pill/oxygen = 2,
 			/obj/item/chems/pill/burn_meds = 2,
 			/obj/item/chems/pill/entolimod
 		)

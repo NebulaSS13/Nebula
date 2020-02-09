@@ -97,14 +97,14 @@
 
 
 /obj/item/chems/glass/bottle/stoxin
-	name = "soporific bottle"
-	desc = "A small bottle of soporific. Just the fumes make you sleepy."
+	name = "sedatives bottle"
+	desc = "A small bottle of soporific medication. Just the fumes make you sleepy."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
 /obj/item/chems/glass/bottle/stoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/soporific, 60)
+	reagents.add_reagent(/datum/reagent/sedatives, 60)
 	update_icon()
 
 
