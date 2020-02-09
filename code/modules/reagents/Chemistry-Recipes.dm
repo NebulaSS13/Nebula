@@ -85,9 +85,9 @@
 	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/carbon = 1, /datum/reagent/nutriment/sugar = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/dylovene
-	name = "Dylovene"
-	result = /datum/reagent/dylovene
+/datum/chemical_reaction/antitoxins
+	name = "Antitoxins"
+	result = /datum/reagent/antitoxins
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/potassium = 1, /datum/reagent/ammonia = 1)
 	result_amount = 3
 
@@ -100,7 +100,7 @@
 /datum/chemical_reaction/sterilizine
 	name = "Sterilizine"
 	result = /datum/reagent/sterilizine
-	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/dylovene = 1, /datum/reagent/acid/hydrochloric = 1)
+	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/antitoxins = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/mutagen
@@ -141,7 +141,7 @@
 /datum/chemical_reaction/entolimod
 	name = "Entolimod"
 	result = /datum/reagent/entolimod
-	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/impedrezene
@@ -175,20 +175,20 @@
 /datum/chemical_reaction/tricordrazine
 	name = "Tricordrazine"
 	result = /datum/reagent/tricordrazine
-	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/alkysine
 	name = "Alkysine"
 	result = /datum/reagent/alkysine
-	required_reagents = list(/datum/reagent/acid/hydrochloric = 1, /datum/reagent/ammonia = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/acid/hydrochloric = 1, /datum/reagent/ammonia = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/dexalin
 	name = "Dexalin"
 	result = /datum/reagent/dexalin
 	required_reagents = list(/datum/reagent/acetone = 2, /datum/reagent/toxin/phoron = 0.1)
-	inhibitors = list(/datum/reagent/water = 1) // Messes with cryox
+	inhibitors = list(/datum/reagent/water = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/dexalinp
@@ -216,19 +216,10 @@
 	required_reagents = list(/datum/reagent/entolimod = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/cryoxadone
-	name = "Cryoxadone"
-	result = /datum/reagent/cryoxadone
-	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/drink/ice = 1, /datum/reagent/acetone = 1)
-	result_amount = 3
-	minimum_temperature = (-25 CELSIUS) - 100
-	maximum_temperature = -25 CELSIUS
-	mix_message = "The solution becomes sludge-like."
-
 /datum/chemical_reaction/nanitefluid
 	name = "Nanite Fluid"
 	result = /datum/reagent/nanitefluid
-	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/aluminium = 1, /datum/reagent/lube = 1)
+	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/aluminium = 1, /datum/reagent/lube = 1)
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 3
 	minimum_temperature = (-25 CELSIUS) - 100
@@ -237,22 +228,12 @@
 
 /datum/chemical_reaction/venaxilin
 	name = "Venaxilin"
-	result = /datum/reagent/dylovene/venaxilin
-	required_reagents = list(/datum/reagent/dylovene = 1, /datum/reagent/spaceacillin = 1, /datum/reagent/toxin/venom = 1)
+	result = /datum/reagent/antitoxins/venaxilin
+	required_reagents = list(/datum/reagent/antitoxins = 1, /datum/reagent/spaceacillin = 1, /datum/reagent/toxin/venom = 1)
 	result_amount = 1
 	minimum_temperature = 50 CELSIUS
 	maximum_temperature = 100 CELSIUS
 	mix_message = "The solution steams and becomes cloudy."
-
-
-/datum/chemical_reaction/clonexadone
-	name = "Clonexadone"
-	result = /datum/reagent/clonexadone
-	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1)
-	result_amount = 2
-	minimum_temperature = -100 CELSIUS
-	maximum_temperature = -75 CELSIUS
-	mix_message = "The solution thickens into translucent slime."
 
 /datum/chemical_reaction/spaceacillin
 	name = "Spaceacillin"
@@ -263,7 +244,7 @@
 /datum/chemical_reaction/imidazoline
 	name = "Imidazoline"
 	result = /datum/reagent/imidazoline
-	required_reagents = list(/datum/reagent/carbon = 1, /datum/reagent/fuel/hydrazine = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/carbon = 1, /datum/reagent/fuel/hydrazine = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/soporific
@@ -311,7 +292,7 @@
 /datum/chemical_reaction/mindbreaker
 	name = "Mindbreaker Toxin"
 	result = /datum/reagent/mindbreaker
-	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/fuel/hydrazine = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/fuel/hydrazine = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 3
 	mix_message = "The solution takes on an iridescent sheen."
 	minimum_temperature = 75 CELSIUS
@@ -396,7 +377,7 @@
 /datum/chemical_reaction/noexcutite
 	name = "Noexcutite"
 	result = /datum/reagent/noexcutite
-	required_reagents = list(/datum/reagent/painkillers = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/painkillers = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/methyl_bromide
@@ -1225,7 +1206,7 @@
 /datum/chemical_reaction/syntiflesh
 	name = "Syntiflesh"
 	result = null
-	required_reagents = list(/datum/reagent/blood = 5, /datum/reagent/clonexadone = 1)
+	required_reagents = list(/datum/reagent/blood = 5, /datum/reagent/toxin/plasticide = 1)
 	result_amount = 1
 	mix_message = "The solution thickens disturbingly, taking on a meaty appearance."
 
@@ -2159,7 +2140,7 @@
 
 /datum/chemical_reaction/immunobooster
 	result = /datum/reagent/immunobooster
-	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/antitoxins = 1)
 	minimum_temperature = 40 CELSIUS
 	result_amount = 2
 

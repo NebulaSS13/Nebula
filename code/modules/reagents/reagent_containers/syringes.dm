@@ -341,7 +341,7 @@
 
 /obj/item/chems/syringe/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 15)
+	reagents.add_reagent(/datum/reagent/antitoxins, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 

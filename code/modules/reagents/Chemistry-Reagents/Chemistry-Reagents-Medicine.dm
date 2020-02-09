@@ -22,35 +22,7 @@
 	if(prob(2))
 		M.drowsyness = max(M.drowsyness, 5)
 
-/datum/reagent/dylovene
-	name = "Dylovene"
-	description = "Dylovene is a broad-spectrum antitoxin used to neutralize poisons before they can do significant harm."
-	taste_description = "a roll of gauze"
-	color = "#00a000"
-	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	value = 2.1
-	var/remove_generic = 1
-	var/list/remove_toxins = list(
-		/datum/reagent/toxin/zombiepowder
-	)
 
-/datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(remove_generic)
-		M.drowsyness = max(0, M.drowsyness - 6 * removed)
-		M.adjust_hallucination(-9 * removed)
-		M.add_up_to_chemical_effect(CE_ANTITOX, 1)
-
-	var/removing = (4 * removed)
-	var/datum/reagents/ingested = M.get_ingested_reagents()
-	for(var/datum/reagent/R in ingested.reagent_list)
-		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
-			ingested.remove_reagent(R.type, removing)
-			return
-	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
-			M.reagents.remove_reagent(R.type, removing)
-			return
 
 /datum/reagent/dexalin
 	name = "Dexalin"
@@ -92,56 +64,6 @@
 /datum/reagent/tricordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.heal_organ_damage(3 * removed, 3 * removed)
 
-/datum/reagent/cryoxadone
-	name = "Cryoxadone"
-	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
-	taste_description = "sludge"
-	color = "#8080ff"
-	metabolism = REM * 0.5
-	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	value = 3.9
-
-/datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_CRYO, 1)
-	if(M.bodytemperature < 170)
-		M.adjustCloneLoss(-100 * removed)
-		M.add_chemical_effect(CE_OXYGENATED, 1)
-		M.heal_organ_damage(30 * removed, 30 * removed)
-		M.add_chemical_effect(CE_PULSE, -2)
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(!BP_IS_PROSTHETIC(I))
-					I.heal_damage(20*removed)
-
-
-/datum/reagent/clonexadone
-	name = "Clonexadone"
-	description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' the cloning process when used in conjunction with a cryo tube."
-	taste_description = "slime"
-	color = "#80bfff"
-	metabolism = REM * 0.5
-	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	heating_products = list(/datum/reagent/cryoxadone, /datum/reagent/sodium)
-	heating_point = 50 CELSIUS
-	heating_message = "turns back to sludge."
-	value = 5.5
-
-/datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_CRYO, 1)
-	if(M.bodytemperature < 170)
-		M.adjustCloneLoss(-300 * removed)
-		M.add_chemical_effect(CE_OXYGENATED, 2)
-		M.heal_organ_damage(50 * removed, 50 * removed)
-		M.add_chemical_effect(CE_PULSE, -2)
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(!BP_IS_PROSTHETIC(I))
-					I.heal_damage(30*removed)
-
 /datum/reagent/nanitefluid
 	name = "Nanite Fluid"
 	description = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
@@ -182,7 +104,7 @@
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
 
-/datum/reagent/dylovene/venaxilin
+/datum/reagent/antitoxins/venaxilin
 	name = "Venaxilin"
 	description = "Venixalin is a strong, specialised antivenom for dealing with advanced toxins and venoms."
 	taste_description = "overpowering sweetness"

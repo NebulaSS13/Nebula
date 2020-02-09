@@ -8,7 +8,7 @@
 		breathe()
 
 /mob/living/carbon/proc/breathe(var/active_breathe = 1)
-	//if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
+
 	if(!need_breathe()) return
 
 	var/datum/gas_mixture/breath = null
@@ -58,7 +58,7 @@
 
 	var/datum/gas_mixture/environment
 	if(loc)
-		environment = loc.return_air_for_internal_lifeform()
+		environment = loc.return_air()
 
 	if(environment)
 		breath = environment.remove_volume(volume_needed)

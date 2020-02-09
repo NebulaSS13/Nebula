@@ -75,12 +75,12 @@
 
 //We lied - it's pills all the way down
 /obj/item/chems/pill/antitox
-	name = "Dylovene (25u)"
+	name = "antitoxins (25u)"
 	desc = "Neutralizes many common toxins."
 	icon_state = "pill1"
 /obj/item/chems/pill/antitox/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 25)
+	reagents.add_reagent(/datum/reagent/antitoxins, 25)
 	color = reagents.get_color()
 
 
@@ -172,13 +172,13 @@
 	reagents.add_reagent(/datum/reagent/dexalinp, 15)
 	color = reagents.get_color()
 
-/obj/item/chems/pill/dylovene
-	name = "Dylovene (15u)"
+/obj/item/chems/pill/antitoxins
+	name = "antitoxins (15u)"
 	desc = "A broad-spectrum anti-toxin."
 	icon_state = "pill1"
-/obj/item/chems/pill/dylovene/Initialize()
+/obj/item/chems/pill/antitoxins/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 15)
+	reagents.add_reagent(/datum/reagent/antitoxins, 15)
 	color = reagents.get_color()
 
 
@@ -301,7 +301,7 @@
 /obj/item/chems/pill/antirad/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/entolimod, 5)
-	reagents.add_reagent(/datum/reagent/dylovene, 10)
+	reagents.add_reagent(/datum/reagent/antitoxins, 10)
 
 
 /obj/item/chems/pill/sugariron

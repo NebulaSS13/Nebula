@@ -35,7 +35,7 @@
 			/obj/item/chems/chem_disp_cartridge/dexalin,
 			/obj/item/chems/chem_disp_cartridge/dexalin_p,
 			/obj/item/chems/chem_disp_cartridge/tricord,
-			/obj/item/chems/chem_disp_cartridge/dylovene,
+			/obj/item/chems/chem_disp_cartridge/antitoxins,
 			/obj/item/chems/chem_disp_cartridge/synaptizine,
 			/obj/item/chems/chem_disp_cartridge/entolimod,
 			/obj/item/chems/chem_disp_cartridge/alkysine,
@@ -45,9 +45,7 @@
 			/obj/item/chems/chem_disp_cartridge/rezadone,
 			/obj/item/chems/chem_disp_cartridge/spaceacillin,
 			/obj/item/chems/chem_disp_cartridge/sleeptox,
-			/obj/item/chems/chem_disp_cartridge/chloral,
-			/obj/item/chems/chem_disp_cartridge/cryoxadone,
-			/obj/item/chems/chem_disp_cartridge/clonexadone
+			/obj/item/chems/chem_disp_cartridge/chloral
 		)
 
 /obj/machinery/chemical_dispenser/bar_soft

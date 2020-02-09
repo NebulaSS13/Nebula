@@ -107,7 +107,7 @@
 		/obj/item/storage/pill_bottle/brute_meds,
 		/obj/item/storage/pill_bottle/burn_meds,
 		/obj/item/storage/pill_bottle/dexalin_plus,
-		/obj/item/storage/pill_bottle/dylovene,
+		/obj/item/storage/pill_bottle/antitoxins,
 		/obj/item/storage/pill_bottle/painkillers,
 		/obj/item/storage/pill_bottle/spaceacillin,
 		/obj/item/stack/medical/splint,
@@ -234,7 +234,7 @@
 		overlays += I
 
 /obj/item/storage/pill_bottle/antitox
-	name = "pill bottle (Dylovene)"
+	name = "pill bottle (antitoxins)"
 	desc = "Contains pills used to counter toxins."
 
 	startswith = list(/obj/item/chems/pill/antitox = 21)
@@ -261,11 +261,11 @@
 	startswith = list(/obj/item/chems/pill/dexalin = 21)
 	wrapper_color = COLOR_LIGHT_CYAN
 
-/obj/item/storage/pill_bottle/dylovene
-	name = "pill bottle (Dylovene)"
+/obj/item/storage/pill_bottle/antitoxins
+	name = "pill bottle (antitoxins)"
 	desc = "Contains pills used to treat toxic substances in the blood."
 
-	startswith = list(/obj/item/chems/pill/dylovene = 21)
+	startswith = list(/obj/item/chems/pill/antitoxins = 21)
 	wrapper_color = COLOR_GREEN
 
 /obj/item/storage/pill_bottle/inaprovaline
@@ -331,7 +331,7 @@
 
 	startswith = list(
 			/obj/item/chems/pill/inaprovaline = 6,
-			/obj/item/chems/pill/dylovene = 6,
+			/obj/item/chems/pill/antitoxins = 6,
 			/obj/item/chems/pill/sugariron = 2,
 			/obj/item/chems/pill/painkillers = 2,
 			/obj/item/chems/pill/dexalin = 2,

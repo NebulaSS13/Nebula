@@ -1127,7 +1127,7 @@
 	name = "kudzu"
 	seed_name = "kudzu"
 	display_name = "kudzu vines"
-	chems = list(/datum/reagent/nutriment = list(1,50), /datum/reagent/dylovene = list(1,25))
+	chems = list(/datum/reagent/nutriment = list(1,50), /datum/reagent/antitoxins = list(1,25))
 
 /datum/seed/kudzu/New()
 	..()

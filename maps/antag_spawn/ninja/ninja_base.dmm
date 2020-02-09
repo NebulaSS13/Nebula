@@ -93,7 +93,6 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "ao" = (
-/obj/machinery/atmospherics/unary/cryo_cell,
 /turf/unsimulated/floor{
 	dir = 2;
 	icon_state = "white"
@@ -108,10 +107,6 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aq" = (
-/obj/item/chems/glass/beaker/cryoxadone{
-	pixel_x = 0;
-	pixel_y = 0
-	},
 /obj/structure/table/glass,
 /turf/unsimulated/floor{
 	dir = 2;

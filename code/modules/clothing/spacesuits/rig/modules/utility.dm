@@ -147,7 +147,7 @@
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
 		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      80),
-		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          80),
+		list("antitoxins",      "antitoxins",      /datum/reagent/antitoxins,          80),
 		list("entolimod",     "entolimod",     /datum/reagent/entolimod,         80),
 		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      80),
 		list("painkillers",   "painkillers",      /datum/reagent/painkillers,          80)
@@ -162,7 +162,7 @@
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          20),
 		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      20),
-		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          20),
+		list("antitoxins",      "antitoxins",      /datum/reagent/antitoxins,          20),
 		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
 		list("entolimod",     "entolimod",     /datum/reagent/entolimod,         20),
 		list("regenerative",  "regenerative",  /datum/reagent/burn_meds,         20),

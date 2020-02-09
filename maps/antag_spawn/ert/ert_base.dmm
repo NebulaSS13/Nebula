@@ -3223,7 +3223,6 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gm" = (
-/obj/machinery/atmospherics/unary/cryo_cell,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -3236,10 +3235,6 @@
 /area/map_template/rescue_base/start)
 "go" = (
 /obj/structure/table/glass,
-/obj/item/chems/glass/beaker/cryoxadone{
-	pixel_x = 0;
-	pixel_y = 0
-	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gp" = (

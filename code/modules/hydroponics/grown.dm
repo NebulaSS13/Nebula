@@ -71,7 +71,7 @@
 		var/list/descriptors = list()
 		if(reagents.has_reagent(/datum/reagent/nutriment/sugar) || reagents.has_reagent(/datum/reagent/nutriment/cherryjelly) || reagents.has_reagent(/datum/reagent/nutriment/honey) || reagents.has_reagent(/datum/reagent/drink/juice/berry))
 			descriptors |= "sweet"
-		if(reagents.has_reagent(/datum/reagent/dylovene))
+		if(reagents.has_reagent(/datum/reagent/antitoxins))
 			descriptors |= "astringent"
 		if(reagents.has_reagent(/datum/reagent/frostoil))
 			descriptors |= "numbing"

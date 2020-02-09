@@ -180,7 +180,7 @@ obj/item/clothing/mask/chewable/Destroy()
 				/datum/reagent/entolimod,
 				/datum/reagent/methylphenidate,
 				/datum/reagent/citalopram,
-				/datum/reagent/dylovene,
+				/datum/reagent/antitoxins,
 				/datum/reagent/brute_meds,
 				/datum/reagent/burn_meds,
 				/datum/reagent/inaprovaline)), 10)
@@ -197,7 +197,7 @@ obj/item/clothing/mask/chewable/Destroy()
 				/datum/reagent/antidexafen,
 				/datum/reagent/painkillers,
 				/datum/reagent/tricordrazine,
-				/datum/reagent/dylovene,
+				/datum/reagent/antitoxins,
 				/datum/reagent/inaprovaline))
 	reagents.add_reagent(payload, 15)
 	color = reagents.get_color()

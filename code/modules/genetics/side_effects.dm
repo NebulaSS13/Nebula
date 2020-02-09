@@ -63,7 +63,7 @@
 /datum/genetics/side_effect/confuse
 	name = "Confuse"
 	symptom = "Subject starts drooling uncontrollably."
-	treatment = "Inject small dose of dylovene."
+	treatment = "Inject small dose of antitoxins."
 	effect = "Subject becomes confused."
 	duration = 30 SECONDS
 
@@ -71,6 +71,6 @@
 		H.visible_message("<B>\The [H]</B> drools.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent(/datum/reagent/dylovene))
+		if(!H.reagents.has_reagent(/datum/reagent/antitoxins))
 			H.confused += 100
 

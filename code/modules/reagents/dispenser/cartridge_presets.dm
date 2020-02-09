@@ -86,7 +86,7 @@
 	dexalin/small	volume = CARTRIDGE_VOLUME_SMALL // For the medicine cartridge crate, so it's not too easy to get large amounts of dexalin
 	dexalin_p	spawn_reagent = /datum/reagent/dexalinp
 	tricord		spawn_reagent = /datum/reagent/tricordrazine
-	dylovene	spawn_reagent = /datum/reagent/dylovene
+	antitoxins	spawn_reagent = /datum/reagent/antitoxins
 	synaptizine	spawn_reagent = /datum/reagent/synaptizine
 	entolimod	spawn_reagent = /datum/reagent/entolimod
 	alkysine	spawn_reagent = /datum/reagent/alkysine
@@ -97,5 +97,3 @@
 	spaceacillin spawn_reagent = /datum/reagent/spaceacillin
 	sleeptox	spawn_reagent = /datum/reagent/soporific
 	chloral		spawn_reagent = /datum/reagent/chloralhydrate
-	cryoxadone	spawn_reagent = /datum/reagent/cryoxadone
-	clonexadone	spawn_reagent = /datum/reagent/clonexadone

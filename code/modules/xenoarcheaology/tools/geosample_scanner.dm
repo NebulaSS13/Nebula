@@ -55,7 +55,6 @@
 	coolant_reagents_purity[/datum/reagent/sterilizine] = 0.7
 	coolant_reagents_purity[/datum/reagent/burn_meds] = 0.7
 	coolant_reagents_purity[/datum/reagent/stimulants] = 0.8
-	coolant_reagents_purity[/datum/reagent/cryoxadone] = 0.9
 	coolant_reagents_purity[/datum/reagent/adminordrazine] = 2
 
 /obj/machinery/radiocarbon_spectrometer/interface_interact(var/mob/user)

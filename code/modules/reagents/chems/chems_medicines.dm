@@ -84,3 +84,33 @@
 
 /datum/reagent/adminordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.rejuvenate()
+
+/datum/reagent/antitoxins
+	name = "antitoxins"
+	description = "A mix of broad-spectrum antitoxins used to neutralize poisons before they can do significant harm."
+	taste_description = "a roll of gauze"
+	color = "#00a000"
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+	value = 2.1
+	var/remove_generic = 1
+	var/list/remove_toxins = list(
+		/datum/reagent/toxin/zombiepowder
+	)
+
+/datum/reagent/antitoxins/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(remove_generic)
+		M.drowsyness = max(0, M.drowsyness - 6 * removed)
+		M.adjust_hallucination(-9 * removed)
+		M.add_up_to_chemical_effect(CE_ANTITOX, 1)
+
+	var/removing = (4 * removed)
+	var/datum/reagents/ingested = M.get_ingested_reagents()
+	for(var/datum/reagent/R in ingested.reagent_list)
+		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
+			ingested.remove_reagent(R.type, removing)
+			return
+	for(var/datum/reagent/R in M.reagents.reagent_list)
+		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
+			M.reagents.remove_reagent(R.type, removing)
+			return

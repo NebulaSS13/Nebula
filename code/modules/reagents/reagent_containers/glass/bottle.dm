@@ -121,14 +121,14 @@
 
 
 /obj/item/chems/glass/bottle/antitoxin
-	name = "dylovene bottle"
-	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."
+	name = "antitoxins bottle"
+	desc = "A small bottle of antitoxins. Counters poisons, and repairs damage. A wonder drug."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
 /obj/item/chems/glass/bottle/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 60)
+	reagents.add_reagent(/datum/reagent/antitoxins, 60)
 	update_icon()
 
 

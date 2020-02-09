@@ -161,6 +161,3 @@ obj/item/paper/prof2
 /datum/chemical_reaction/dexalin/nophoron
 	required_reagents = list(/datum/reagent/acetone = 2, /datum/reagent/toxin/phoron/safe = 0.1)
 
-/datum/chemical_reaction/clonexadone/nophoron
-	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1, /datum/reagent/toxin/phoron/safe = 0.1)
-

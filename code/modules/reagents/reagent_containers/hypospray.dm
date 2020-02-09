@@ -163,7 +163,7 @@
 /obj/item/chems/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
 	band_color = COLOR_GREEN
-	starts_with = list(/datum/reagent/dylovene = 5)
+	starts_with = list(/datum/reagent/antitoxins = 5)
 
 /obj/item/chems/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"

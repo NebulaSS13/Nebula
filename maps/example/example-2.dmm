@@ -143,7 +143,6 @@
 /area/medical/surgery)
 "w" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/atmospherics/unary/cryo_cell,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "x" = (
@@ -181,7 +180,6 @@
 "C" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
-/obj/item/chems/glass/beaker/cryoxadone,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "D" = (

@@ -24,9 +24,9 @@
 	desc = "A small bottle of Anti-toxins. Counters poisons, and repairs damage, a wonder drug."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
-	reagent = /datum/reagent/dylovene
+	reagent = /datum/reagent/antitoxins
 
 /obj/item/chems/glass/bottle/robot/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 60)
+	reagents.add_reagent(/datum/reagent/antitoxins, 60)
 	update_icon()

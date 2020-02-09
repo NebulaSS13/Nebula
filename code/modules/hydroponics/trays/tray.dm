@@ -48,7 +48,7 @@
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
 	var/global/list/toxic_reagents = list(
-		/datum/reagent/dylovene =         -2,
+		/datum/reagent/antitoxins =         -2,
 		/datum/reagent/toxin =             2,
 		/datum/reagent/fuel/hydrazine =         2.5,
 		/datum/reagent/acetone =	       1,
@@ -56,7 +56,6 @@
 		/datum/reagent/acid/hydrochloric = 1.5,
 		/datum/reagent/acid/polyacid =     3,
 		/datum/reagent/toxin/plantbgone =  3,
-		/datum/reagent/cryoxadone =       -3,
 		/datum/reagent/radium =            2,
 		/datum/reagent/three_eye =         2
 		)
@@ -110,7 +109,6 @@
 		/datum/reagent/acid/hydrochloric =               list( -1,    0,   0  ),
 		/datum/reagent/acid/polyacid =                   list( -2,    0,   0  ),
 		/datum/reagent/toxin/plantbgone =                list( -2,    0,   0.2),
-		/datum/reagent/cryoxadone =                      list(  3,    0,   0  ),
 		/datum/reagent/ammonia =                         list(  0.5,  0,   0  ),
 		/datum/reagent/nutriment =                       list(  0.5,  0.1, 0  ),
 		/datum/reagent/radium =                          list( -1.5,  0,   0.2),

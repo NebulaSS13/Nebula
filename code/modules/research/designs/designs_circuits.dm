@@ -74,13 +74,6 @@
 	build_path = /obj/item/stock_parts/circuitboard/sleeper
 	sort_string = "FACAE"
 
-/datum/design/circuit/cryo_cell
-	name = "cryo cell"
-	id = "cryo_cell"
-	req_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 5, TECH_DATA = 3)
-	build_path = /obj/item/stock_parts/circuitboard/cryo_cell
-	sort_string = "FACAF"
-
 /datum/design/circuit/crewconsole
 	name = "crew monitoring console"
 	id = "crewconsole"

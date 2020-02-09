@@ -126,7 +126,6 @@
 /obj/structure/closet/secure_closet/chemical/WillContain()
 	return list(
 		/obj/item/storage/box/pillbottles = 2,
-		/obj/item/chems/glass/beaker/cryoxadone,
 		/obj/random/medical = 12
 	)
 
