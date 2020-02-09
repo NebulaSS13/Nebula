@@ -103,9 +103,9 @@
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/antitoxins = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/mutagen
+/datum/chemical_reaction/mutagenics
 	name = "Unstable mutagen"
-	result = /datum/reagent/mutagen
+	result = /datum/reagent/mutagenics
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/phosphorus = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 
@@ -774,7 +774,7 @@
 
 /datum/chemical_reaction/slime/jam
 	name = "Slime Jam"
-	result = /datum/reagent/slimejelly
+	result = /datum/reagent/toxin/slimejelly
 	required_reagents = list(/datum/reagent/nutriment/sugar = 1)
 	result_amount = 10
 	required = /obj/item/slime_extract/purple
@@ -1751,7 +1751,7 @@
 /datum/chemical_reaction/hippiesdelight
 	name = "Hippies Delight"
 	result = /datum/reagent/ethanol/hippies_delight
-	required_reagents = list(/datum/reagent/psilocybin = 1, /datum/reagent/ethanol/livergeist = 1)
+	required_reagents = list(/datum/reagent/psychotropics = 1, /datum/reagent/ethanol/livergeist = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/bananahonk

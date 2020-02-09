@@ -92,3 +92,18 @@
 	meltdose = 8
 	max_damage = 30
 	value = 0.2 * 2
+
+/datum/reagent/acid/polyacid
+	name = "polytrinic acid"
+	description = "Polytrinic acid is a an extremely corrosive chemical substance."
+	taste_description = "acid"
+	color = "#8e18a9"
+	power = 10
+	meltdose = 4
+	max_damage = 60
+
+/datum/reagent/acid/stomach
+	name = "stomach acid"
+	taste_description = "coppery foulness"
+	power = 2
+	color = "#d8ff00"

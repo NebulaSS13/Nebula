@@ -120,9 +120,9 @@
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
-	var/global/list/mutagenic_reagents = list(
+	var/global/list/mutagenicsic_reagents = list(
 		/datum/reagent/radium =  8,
-		/datum/reagent/mutagen = 15,
+		/datum/reagent/mutagenics = 15,
 		/datum/reagent/toxin/fertilizer/left4zed = 30)
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()

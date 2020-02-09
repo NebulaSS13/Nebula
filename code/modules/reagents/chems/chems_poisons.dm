@@ -1,4 +1,3 @@
-
 /datum/reagent/carbon_monoxide
 	name = "carbon monoxide"
 	description = "A dangerous carbon comubstion byproduct."

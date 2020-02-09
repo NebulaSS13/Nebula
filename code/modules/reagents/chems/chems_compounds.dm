@@ -295,3 +295,100 @@
 /datum/reagent/hallucinogenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_MIND, -2)
 	M.hallucination(50, 50)
+
+/datum/reagent/psychotropics
+	name = "psychotropics"
+	description = "A strong psychotropic derived from certain species of mushroom."
+	taste_description = "mushroom"
+	color = "#e700e7"
+	overdose = REAGENTS_OVERDOSE
+	metabolism = REM * 0.5
+	value = 0.7
+
+/datum/reagent/psychotropics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/threshold = 1
+	M.druggy = max(M.druggy, 30)
+
+	if(M.chem_doses[type] < 1 * threshold)
+		M.apply_effect(3, STUTTER)
+		M.make_dizzy(5)
+		if(prob(5))
+			M.emote(pick("twitch", "giggle"))
+	else if(M.chem_doses[type] < 2 * threshold)
+		M.apply_effect(3, STUTTER)
+		M.make_jittery(5)
+		M.make_dizzy(5)
+		M.druggy = max(M.druggy, 35)
+		if(prob(10))
+			M.emote(pick("twitch", "giggle"))
+	else
+		M.add_chemical_effect(CE_MIND, -1)
+		M.apply_effect(3, STUTTER)
+		M.make_jittery(10)
+		M.make_dizzy(10)
+		M.druggy = max(M.druggy, 40)
+		if(prob(15))
+			M.emote(pick("twitch", "giggle"))
+
+/datum/reagent/mutagenics
+	name = "mutagenics"
+	description = "Might cause unpredictable mutations. Keep away from children."
+	taste_description = "slime"
+	taste_mult = 0.9
+	color = "#13bc5e"
+	value = 3.1
+
+/datum/reagent/mutagenics/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if(prob(33))
+		affect_blood(M, alien, removed)
+
+/datum/reagent/mutagenics/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(prob(67))
+		affect_blood(M, alien, removed)
+
+/datum/reagent/mutagenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+
+	if(M.isSynthetic())
+		return
+
+	var/mob/living/carbon/human/H = M
+	if(istype(H) && (H.species.species_flags & SPECIES_FLAG_NO_SCAN))
+		return
+
+	if(M.dna)
+		if(prob(removed * 0.1)) // Approx. one mutation per 10 injected/20 ingested/30 touching units
+			randmuti(M)
+			if(prob(98))
+				randmutb(M)
+			else
+				randmutg(M)
+			domutcheck(M, null)
+			M.UpdateAppearance()
+	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
+
+/datum/reagent/soporific
+	name = "soporifics"
+	description = "An effective hypnotic used to treat insomnia."
+	taste_description = "bitterness"
+	color = "#009ca8"
+	metabolism = REM * 0.5
+	overdose = REAGENTS_OVERDOSE
+	value = 2.5
+
+/datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/threshold = 1
+	if(M.chem_doses[type] < 1 * threshold)
+		if(M.chem_doses[type] == metabolism * 2 || prob(5))
+			M.emote("yawn")
+	else if(M.chem_doses[type] < 1.5 * threshold)
+		M.eye_blurry = max(M.eye_blurry, 10)
+	else if(M.chem_doses[type] < 5 * threshold)
+		if(prob(50))
+			M.Weaken(2)
+			M.add_chemical_effect(CE_SEDATE, 1)
+		M.drowsyness = max(M.drowsyness, 20)
+	else
+		M.sleeping = max(M.sleeping, 20)
+		M.drowsyness = max(M.drowsyness, 60)
+		M.add_chemical_effect(CE_SEDATE, 1)
+	M.add_chemical_effect(CE_PULSE, -1)

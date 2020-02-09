@@ -19,12 +19,29 @@
 	color = "#b8b8c0"
 	value = 9
 
+/datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_ingest(M, alien, removed)
+
+/datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
+
+/datum/reagent/uranium/touch_turf(var/turf/T)
+	if(volume >= 3)
+		if(!istype(T, /turf/space))
+			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
+			if(!glow)
+				new /obj/effect/decal/cleanable/greenglow(T)
+
 /datum/reagent/helium
 	name = "helium"
 	description = "A noble gas. It makes your voice squeaky."
 	taste_description = "nothing"
 	color = COLOR_GRAY80
 	metabolism = 0.05
+
+/datum/reagent/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.add_chemical_effect(CE_SQUEAKY, 1)
 
 /datum/reagent/oxygen
 	name = "oxygen"
@@ -55,12 +72,29 @@
 	taste_mult = 1.5
 	color = "#1c1300"
 
+/datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	var/datum/reagents/ingested = M.get_ingested_reagents()
+	if(ingested && ingested.reagent_list.len > 1) // Need to have at least 2 reagents - cabon and something to remove
+		var/effect = 1 / (ingested.reagent_list.len - 1)
+		for(var/datum/reagent/R in ingested.reagent_list)
+			if(R == src)
+				continue
+			ingested.remove_reagent(R.type, removed * effect)
+
+/datum/reagent/carbon/touch_turf(var/turf/T)
+	if(!istype(T, /turf/space))
+		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, T)
+		if (!dirtoverlay)
+			dirtoverlay = new/obj/effect/decal/cleanable/dirt(T)
+			dirtoverlay.alpha = volume * 30
+		else
+			dirtoverlay.alpha = min(dirtoverlay.alpha + volume * 30, 255)
+
 /datum/reagent/copper
 	name = "copper"
 	description = "A highly ductile metal."
 	taste_description = "copper"
 	color = "#6e3b08"
-
 
 /datum/reagent/iron
 	name = "iron"
@@ -79,12 +113,25 @@
 	color = "#808080"
 	value = 0.2
 
+/datum/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(istype(M.loc, /turf/space))
+		M.SelfMove(pick(GLOB.cardinal))
+	if(prob(5))
+		M.emote(pick("twitch", "drool", "moan"))
+
 /datum/reagent/mercury
 	name = "mercury"
 	description = "A chemical element."
 	taste_mult = 0 //mercury apparently is tasteless. IDK
 	color = "#484848"
 	value = 0.2
+
+/datum/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(istype(M.loc, /turf/space))
+		M.SelfMove(pick(GLOB.cardinal))
+	if(prob(5))
+		M.emote(pick("twitch", "drool", "moan"))
+	M.adjustBrainLoss(0.1)
 
 /datum/reagent/phosphorus
 	name = "phosphorus"
@@ -113,6 +160,16 @@
 	color = "#c7c7c7"
 	value = 0.2
 
+/datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
+
+/datum/reagent/radium/touch_turf(var/turf/T)
+	if(volume >= 3)
+		if(!istype(T, /turf/space))
+			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
+			if(!glow)
+				new /obj/effect/decal/cleanable/greenglow(T)
+
 /datum/reagent/silicon
 	name = "silicon"
 	description = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
@@ -140,76 +197,11 @@
 	color = "#dcdcdc"
 	value = 0.2
 
-
-
-
-
-
-/datum/reagent/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.add_chemical_effect(CE_SQUEAKY, 1)
-
-
-
-
-
-/datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_ingest(M, alien, removed)
-
-/datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
-
-/datum/reagent/uranium/touch_turf(var/turf/T)
-	if(volume >= 3)
-		if(!istype(T, /turf/space))
-			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
-			if(!glow)
-				new /obj/effect/decal/cleanable/greenglow(T)
-			return
-
-
-
-/datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if(ingested && ingested.reagent_list.len > 1) // Need to have at least 2 reagents - cabon and something to remove
-		var/effect = 1 / (ingested.reagent_list.len - 1)
-		for(var/datum/reagent/R in ingested.reagent_list)
-			if(R == src)
-				continue
-			ingested.remove_reagent(R.type, removed * effect)
-
-/datum/reagent/carbon/touch_turf(var/turf/T)
-	if(!istype(T, /turf/space))
-		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, T)
-		if (!dirtoverlay)
-			dirtoverlay = new/obj/effect/decal/cleanable/dirt(T)
-			dirtoverlay.alpha = volume * 30
-		else
-			dirtoverlay.alpha = min(dirtoverlay.alpha + volume * 30, 255)
-
-
-/datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
-
-/datum/reagent/radium/touch_turf(var/turf/T)
-	if(volume >= 3)
-		if(!istype(T, /turf/space))
-			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
-			if(!glow)
-				new /obj/effect/decal/cleanable/greenglow(T)
-			return
-
-
-
-/datum/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(istype(M.loc, /turf/space))
-		M.SelfMove(pick(GLOB.cardinal))
-	if(prob(5))
-		M.emote(pick("twitch", "drool", "moan"))
-
-/datum/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(istype(M.loc, /turf/space))
-		M.SelfMove(pick(GLOB.cardinal))
-	if(prob(5))
-		M.emote(pick("twitch", "drool", "moan"))
-	M.adjustBrainLoss(0.1)
+/datum/reagent/toxin/bromide
+	name = "bromide"
+	description = "A dark, nearly opaque, red-orange, toxic element."
+	taste_description = "pestkiller"
+	color = "#4c3b34"
+	strength = 3
+	heating_products = null
+	heating_point = null

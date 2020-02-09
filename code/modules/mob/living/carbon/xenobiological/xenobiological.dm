@@ -67,7 +67,7 @@
 	return toxloss
 
 /mob/living/carbon/slime/get_digestion_product()
-	return /datum/reagent/slimejelly
+	return /datum/reagent/toxin/slimejelly
 
 /mob/living/carbon/slime/adjustToxLoss(var/amount)
 	toxloss = Clamp(toxloss + amount, 0, maxHealth)

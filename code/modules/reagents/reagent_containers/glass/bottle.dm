@@ -132,15 +132,15 @@
 	update_icon()
 
 
-/obj/item/chems/glass/bottle/mutagen
+/obj/item/chems/glass/bottle/mutagenics
 	name = "unstable mutagen bottle"
 	desc = "A small bottle of unstable mutagen. Randomly changes the DNA structure of whoever comes in contact."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-1"
 
-/obj/item/chems/glass/bottle/mutagen/Initialize()
+/obj/item/chems/glass/bottle/mutagenics/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/mutagen, 60)
+	reagents.add_reagent(/datum/reagent/mutagenics, 60)
 	update_icon()
 
 

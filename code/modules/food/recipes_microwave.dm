@@ -55,7 +55,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/donut/jelly
 
 /datum/recipe/jellydonut/slime
-	reagents = list(/datum/reagent/slimejelly = 5, /datum/reagent/nutriment/sugar = 5)
+	reagents = list(/datum/reagent/toxin/slimejelly = 5, /datum/reagent/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/dough
 	)
@@ -457,7 +457,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza
 
 /datum/recipe/spacylibertyduff
-	reagents = list(/datum/reagent/water = 10, /datum/reagent/ethanol/vodka = 5, /datum/reagent/psilocybin = 5)
+	reagents = list(/datum/reagent/water = 10, /datum/reagent/ethanol/vodka = 5, /datum/reagent/psychotropics = 5)
 	result = /obj/item/chems/food/snacks/spacylibertyduff
 
 /datum/recipe/amanitajelly
@@ -601,7 +601,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/tomatosoup
 
 /datum/recipe/rofflewaffles
-	reagents = list(/datum/reagent/psilocybin = 5, /datum/reagent/nutriment/batter/cakebatter = 20)
+	reagents = list(/datum/reagent/psychotropics = 5, /datum/reagent/nutriment/batter/cakebatter = 20)
 	result = /obj/item/chems/food/snacks/rofflewaffles
 
 /datum/recipe/stew
@@ -611,7 +611,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/stew
 
 /datum/recipe/slimetoast
-	reagents = list(/datum/reagent/slimejelly = 5)
+	reagents = list(/datum/reagent/toxin/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/slice/bread,
 	)
@@ -729,7 +729,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/applepie
 
 /datum/recipe/slimeburger
-	reagents = list(/datum/reagent/slimejelly = 5)
+	reagents = list(/datum/reagent/toxin/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/bun
 	)
@@ -758,7 +758,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/threebread
 
 /datum/recipe/slimesandwich
-	reagents = list(/datum/reagent/slimejelly = 5)
+	reagents = list(/datum/reagent/toxin/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/slice/bread,
 		/obj/item/chems/food/snacks/slice/bread,
@@ -778,7 +778,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/bloodsoup
 
 /datum/recipe/slimesoup
-	reagents = list(/datum/reagent/water = 10, /datum/reagent/slimejelly = 5)
+	reagents = list(/datum/reagent/water = 10, /datum/reagent/toxin/slimejelly = 5)
 	items = list()
 	result = /obj/item/chems/food/snacks/slimesoup
 

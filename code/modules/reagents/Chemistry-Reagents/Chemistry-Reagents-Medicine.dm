@@ -562,3 +562,73 @@
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.immunity -= 0.5 //inverse effects when abused
+
+
+/datum/reagent/lexorin
+	name = "Lexorin"
+	description = "Lexorin temporarily stops respiration. Causes tissue damage."
+	taste_description = "acid"
+	color = "#c8a5dc"
+	overdose = REAGENTS_OVERDOSE
+	value = 2.4
+
+/datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.take_organ_damage(3 * removed, 0)
+	if(M.losebreath < 15)
+		M.losebreath++
+
+/datum/reagent/chloralhydrate
+	name = "chloral hydrate"
+	description = "A powerful sedative."
+	taste_description = "bitterness"
+	color = "#000067"
+	metabolism = REM * 0.5
+	overdose = REAGENTS_OVERDOSE * 0.5
+	value = 2.6
+
+/datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/threshold = 1
+	M.add_chemical_effect(CE_SEDATE, 1)
+	if(M.chem_doses[type] <= metabolism * threshold)
+		M.confused += 2
+		M.drowsyness += 2
+	if(M.chem_doses[type] < 2 * threshold)
+		M.Weaken(30)
+		M.eye_blurry = max(M.eye_blurry, 10)
+	else
+		M.sleeping = max(M.sleeping, 30)
+	if(M.chem_doses[type] > 1 * threshold)
+		M.adjustToxLoss(removed)
+
+/datum/reagent/cryptobiolin
+	name = "Cryptobiolin"
+	description = "Cryptobiolin causes confusion and dizzyness."
+	taste_description = "sourness"
+	color = "#000055"
+	metabolism = REM * 0.5
+	overdose = REAGENTS_OVERDOSE
+	heating_point = 61 CELSIUS
+	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/nutriment/sugar)
+	value = 2
+
+/datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/drug_strength = 4
+	M.make_dizzy(drug_strength)
+	M.confused = max(M.confused, drug_strength * 5)
+
+/datum/reagent/impedrezene
+	name = "Impedrezene"
+	description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
+	taste_description = "numbness"
+	color = "#c8a5dc"
+	overdose = REAGENTS_OVERDOSE
+	value = 1.8
+
+/datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.jitteriness = max(M.jitteriness - 5, 0)
+	if(prob(80))
+		M.adjustBrainLoss(5.25 * removed)
+	if(prob(50))
+		M.drowsyness = max(M.drowsyness, 3)
+	if(prob(10))
+		M.emote("drool")

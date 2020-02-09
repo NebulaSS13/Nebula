@@ -422,7 +422,7 @@
 	bitesize = 6
 /obj/item/chems/food/snacks/hugemushroomslice/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/psilocybin, 3)
+	reagents.add_reagent(/datum/reagent/psychotropics, 3)
 
 /obj/item/chems/food/snacks/tomatomeat
 	name = "tomato slice"
@@ -887,7 +887,7 @@
 /obj/item/chems/food/snacks/amanita_pie/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/toxin/amatoxin, 3)
-	reagents.add_reagent(/datum/reagent/psilocybin, 1)
+	reagents.add_reagent(/datum/reagent/psychotropics, 1)
 
 /obj/item/chems/food/snacks/plump_pie
 	name = "plump pie"
@@ -1117,7 +1117,7 @@
 	bitesize = 3
 /obj/item/chems/food/snacks/spacylibertyduff/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/psilocybin, 6)
+	reagents.add_reagent(/datum/reagent/psychotropics, 6)
 
 /obj/item/chems/food/snacks/amanitajelly
 	name = "amanita jelly"
@@ -1132,7 +1132,7 @@
 /obj/item/chems/food/snacks/amanitajelly/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/toxin/amatoxin, 6)
-	reagents.add_reagent(/datum/reagent/psilocybin, 3)
+	reagents.add_reagent(/datum/reagent/psychotropics, 3)
 
 /obj/item/chems/food/snacks/poppypretzel
 	name = "poppy pretzel"
@@ -1170,7 +1170,7 @@
 
 /obj/item/chems/food/snacks/slimesoup/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/slimejelly, 5)
+	reagents.add_reagent(/datum/reagent/toxin/slimejelly, 5)
 	reagents.add_reagent(/datum/reagent/water, 10)
 
 /obj/item/chems/food/snacks/bloodsoup
@@ -1274,7 +1274,7 @@
 			reagents.add_reagent(/datum/reagent/nutriment, 6)
 			reagents.add_reagent(/datum/reagent/blood, 10)
 		if(7)
-			reagents.add_reagent(/datum/reagent/slimejelly, 10)
+			reagents.add_reagent(/datum/reagent/toxin/slimejelly, 10)
 			reagents.add_reagent(/datum/reagent/water, 10)
 		if(8)
 			reagents.add_reagent(/datum/reagent/carbon, 10)
@@ -1561,7 +1561,7 @@
 	bitesize = 4
 /obj/item/chems/food/snacks/rofflewaffles/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/psilocybin, 8)
+	reagents.add_reagent(/datum/reagent/psychotropics, 8)
 
 /obj/item/chems/food/snacks/stew
 	name = "stew"
@@ -1599,7 +1599,7 @@
 /obj/item/chems/food/snacks/jelliedtoast/slime
 /obj/item/chems/food/snacks/jelliedtoast/slime/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/slimejelly, 5)
+	reagents.add_reagent(/datum/reagent/toxin/slimejelly, 5)
 
 /obj/item/chems/food/snacks/jellyburger
 	name = "jelly burger"
@@ -1614,7 +1614,7 @@
 /obj/item/chems/food/snacks/jellyburger/slime
 /obj/item/chems/food/snacks/jellyburger/slime/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/slimejelly, 5)
+	reagents.add_reagent(/datum/reagent/toxin/slimejelly, 5)
 
 /obj/item/chems/food/snacks/jellyburger/cherry
 /obj/item/chems/food/snacks/jellyburger/cherry/Initialize()
@@ -1847,7 +1847,7 @@
 /obj/item/chems/food/snacks/jellysandwich/slime
 /obj/item/chems/food/snacks/jellysandwich/slime/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/slimejelly, 5)
+	reagents.add_reagent(/datum/reagent/toxin/slimejelly, 5)
 
 /obj/item/chems/food/snacks/jellysandwich/cherry
 /obj/item/chems/food/snacks/jellysandwich/cherry/Initialize()
@@ -3545,7 +3545,7 @@
 		/datum/reagent/nutriment/sprinkles,
 		/datum/reagent/toxin/phoron,
 		/datum/reagent/nutriment/coco,
-		/datum/reagent/slimejelly,
+		/datum/reagent/toxin/slimejelly,
 		/datum/reagent/nutriment/banana_cream,
 		/datum/reagent/nutriment/cherryjelly,
 		/datum/reagent/fuel,
@@ -3587,7 +3587,7 @@
 /obj/item/chems/food/snacks/donut/slimejelly/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 1)
-	reagents.add_reagent(/datum/reagent/slimejelly, 5)
+	reagents.add_reagent(/datum/reagent/toxin/slimejelly, 5)
 	if(prob(30))
 		src.icon_state = "jdonut2"
 		src.overlay_state = "box-donut2"
@@ -3796,7 +3796,7 @@ obj/item/chems/food/snacks/dango
 				/datum/reagent/toxin/carpotoxin,
 				/datum/reagent/toxin/zombiepowder,
 				/datum/reagent/cryptobiolin,
-				/datum/reagent/psilocybin)), 5)
+				/datum/reagent/psychotropics)), 5)
 
 
 /obj/item/chems/food/snacks/old/pizza
