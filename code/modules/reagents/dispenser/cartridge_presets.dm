@@ -79,7 +79,7 @@
 	inaprov		  spawn_reagent = /datum/reagent/inaprovaline
 	ryetalyn	  spawn_reagent = /datum/reagent/ryetalyn
 	painkillers	  spawn_reagent = /datum/reagent/painkillers
-	sterilizine	  spawn_reagent = /datum/reagent/sterilizine
+	antiseptic	  spawn_reagent = /datum/reagent/antiseptic
 	leporazine	  spawn_reagent = /datum/reagent/leporazine
 	burn_meds	  spawn_reagent = /datum/reagent/burn_meds
 	oxygen		  spawn_reagent = /datum/reagent/oxygen

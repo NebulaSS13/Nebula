@@ -29,7 +29,7 @@
 			/obj/item/chems/chem_disp_cartridge/inaprov,
 			/obj/item/chems/chem_disp_cartridge/ryetalyn,
 			/obj/item/chems/chem_disp_cartridge/painkillers,
-			/obj/item/chems/chem_disp_cartridge/sterilizine,
+			/obj/item/chems/chem_disp_cartridge/antiseptic,
 			/obj/item/chems/chem_disp_cartridge/leporazine,
 			/obj/item/chems/chem_disp_cartridge/burn_meds,
 			/obj/item/chems/chem_disp_cartridge/oxygen,

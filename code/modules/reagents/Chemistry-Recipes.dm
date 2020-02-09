@@ -97,9 +97,9 @@
 	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/ethanol = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/sterilizine
-	name = "Sterilizine"
-	result = /datum/reagent/sterilizine
+/datum/chemical_reaction/antiseptic
+	name = "Antiseptic"
+	result = /datum/reagent/antiseptic
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/antitoxins = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 

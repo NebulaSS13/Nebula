@@ -627,7 +627,7 @@
 	pixel_x = -32
 	},
 /obj/item/chems/spray/cleaner,
-/obj/item/chems/spray/sterilizine,
+/obj/item/chems/spray/antiseptic,
 /obj/item/defibrillator/loaded,
 /obj/item/storage/firstaid/combat,
 /obj/item/clothing/gloves/latex,

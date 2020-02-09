@@ -584,3 +584,29 @@
 			for(var/obj/item/organ/internal/I in H.internal_organs)
 				if(BP_IS_PROSTHETIC(I))
 					I.heal_damage(20*removed)
+
+/datum/reagent/antiseptic
+	name = "antiseptic"
+	description = "Sterilizes surfaces (or wounds) in preparation for surgery, and thoroughly removes blood."
+	taste_description = "bitterness"
+	color = "#c8a5dc"
+	touch_met = 5
+	value = 2.2
+
+/datum/reagent/antiseptic/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
+		M.germ_level -= min(removed*20, M.germ_level)
+	for(var/obj/item/I in M.contents)
+		I.was_bloodied = null
+	M.was_bloodied = null
+
+/datum/reagent/antiseptic/touch_obj(var/obj/O)
+	O.germ_level -= min(volume*20, O.germ_level)
+	O.was_bloodied = null
+
+/datum/reagent/antiseptic/touch_turf(var/turf/T)
+	T.germ_level -= min(volume*20, T.germ_level)
+	for(var/obj/item/I in T.contents)
+		I.was_bloodied = null
+	for(var/obj/effect/decal/cleanable/blood/B in T)
+		qdel(B)

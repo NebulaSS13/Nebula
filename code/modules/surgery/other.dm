@@ -219,7 +219,7 @@
 
 /decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/chems/container)
 	if(istype(container) && ATOM_IS_OPEN_CONTAINER(container))
-		if(container.reagents.has_reagent(/datum/reagent/sterilizine))
+		if(container.reagents.has_reagent(/datum/reagent/antiseptic))
 			return TRUE
 		else
 			var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list

@@ -115,7 +115,7 @@
 /area/map_template/ninja_dojo/dojo)
 "ar" = (
 /obj/structure/table/glass,
-/obj/item/chems/spray/sterilizine,
+/obj/item/chems/spray/antiseptic,
 /obj/item/chems/spray/cleaner,
 /turf/unsimulated/floor{
 	dir = 2;
