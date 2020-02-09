@@ -45,9 +45,9 @@
 	if(reagents.has_reagent(/datum/reagent/acid))
 		log_and_message_admins("fired sulphuric acid from \a [src].", user)
 	if(reagents.has_reagent(/datum/reagent/acid/polyacid))
-		log_and_message_admins("fired Polyacid from \a [src].", user)
+		log_and_message_admins("fired polyacid from \a [src].", user)
 	if(reagents.has_reagent(/datum/reagent/lube))
-		log_and_message_admins("fired Space lube from \a [src].", user)
+		log_and_message_admins("fired lubricant from \a [src].", user)
 	return
 
 /obj/item/chems/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
@@ -102,15 +102,15 @@
 
 /obj/item/chems/spray/cleaner/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/space_cleaner, volume)
+	reagents.add_reagent(/datum/reagent/cleaner, volume)
 
-/obj/item/chems/spray/sterilizine
-	name = "sterilizine"
+/obj/item/chems/spray/antiseptic
+	name = "antiseptic spray"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
 
-/obj/item/chems/spray/sterilizine/Initialize()
+/obj/item/chems/spray/antiseptic/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/sterilizine, volume)
+	reagents.add_reagent(/datum/reagent/antiseptic, volume)
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"

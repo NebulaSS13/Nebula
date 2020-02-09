@@ -1961,7 +1961,7 @@
 	},
 /obj/structure/table/standard,
 /obj/item/implantpad,
-/obj/item/chems/pill/spaceacillin,
+/obj/item/chems/pill/antibiotics,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eY" = (

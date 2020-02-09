@@ -46,17 +46,14 @@
 /obj/machinery/radiocarbon_spectrometer/Initialize()
 	. = ..()
 	create_reagents(500)
-	coolant_reagents_purity[/datum/reagent/water] = 0.5
+	coolant_reagents_purity[/datum/reagent/water] = 1
 	coolant_reagents_purity[/datum/reagent/drink/coffee/icecoffee] = 0.6
 	coolant_reagents_purity[/datum/reagent/drink/tea/icetea] = 0.6
 	coolant_reagents_purity[/datum/reagent/drink/milkshake] = 0.6
-	coolant_reagents_purity[/datum/reagent/leporazine] = 0.7
-	coolant_reagents_purity[/datum/reagent/kelotane] = 0.7
-	coolant_reagents_purity[/datum/reagent/sterilizine] = 0.7
-	coolant_reagents_purity[/datum/reagent/dermaline] = 0.7
-	coolant_reagents_purity[/datum/reagent/hyperzine] = 0.8
-	coolant_reagents_purity[/datum/reagent/cryoxadone] = 0.9
-	coolant_reagents_purity[/datum/reagent/coolant] = 1
+	coolant_reagents_purity[/datum/reagent/burn_meds] = 0.7
+	coolant_reagents_purity[/datum/reagent/antiseptic] = 0.7
+	coolant_reagents_purity[/datum/reagent/burn_meds] = 0.7
+	coolant_reagents_purity[/datum/reagent/amphetamines] = 0.8
 	coolant_reagents_purity[/datum/reagent/adminordrazine] = 2
 
 /obj/machinery/radiocarbon_spectrometer/interface_interact(var/mob/user)

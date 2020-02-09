@@ -179,3 +179,7 @@
 
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)
+	return
+
+/obj/can_be_injected_by(var/atom/injector)
+	. = ATOM_IS_OPEN_CONTAINER(src) && ..()

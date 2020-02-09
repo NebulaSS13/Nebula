@@ -25,7 +25,6 @@
 		/obj/structure/closet,
 		/obj/structure/hygiene/sink,
 		/obj/item/storage,
-		/obj/machinery/atmospherics/unary/cryo_cell,
 		/obj/item/grenade/chem_grenade,
 		/mob/living/bot/medbot,
 		/obj/item/storage/secure/safe,
@@ -234,11 +233,6 @@
 	center_of_mass = @"{'x':16,'y':10}"
 	matter = list(MAT_GLASS = 5000, MAT_PLASTIC = 2500)
 	volume = 120
-
-/obj/item/chems/glass/beaker/cryoxadone/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/cryoxadone, 30)
-	update_icon()
 
 /obj/item/chems/glass/beaker/sulphuric/Initialize()
 	. = ..()

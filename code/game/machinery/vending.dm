@@ -773,7 +773,6 @@
 					/obj/item/storage/mre/random = 8,
 					/obj/item/storage/mre/menu9 = 4,
 					/obj/item/storage/mre/menu10 = 4,
-					/obj/item/chems/pill/diet = 8,
 					/obj/item/towel/random = 8)
 
 	prices = list(/obj/item/chems/food/drinks/milk/smallcarton = 3,
@@ -785,7 +784,6 @@
 					/obj/item/storage/mre/random = 50,
 					/obj/item/storage/mre/menu9 = 50,
 					/obj/item/storage/mre/menu10 = 50,
-					/obj/item/chems/pill/diet = 25,
 					/obj/item/towel/random = 40)
 
 	contraband = list(/obj/item/chems/syringe/steroid = 4)
@@ -902,15 +900,14 @@
 	base_type = /obj/machinery/vending/medical
 	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
 	req_access = list(access_medical_equip)
-	products = list(/obj/item/chems/glass/bottle/antitoxin = 4,/obj/item/chems/glass/bottle/inaprovaline = 4,
-					/obj/item/chems/glass/bottle/stoxin = 4,/obj/item/chems/glass/bottle/toxin = 4,
+	products = list(/obj/item/chems/glass/bottle/antitoxin = 4,/obj/item/chems/glass/bottle/adrenaline = 4,
+					/obj/item/chems/glass/bottle/sedatives = 4,/obj/item/chems/glass/bottle/toxin = 4,
 					/obj/item/chems/syringe/antiviral = 4,/obj/item/chems/syringe = 12,
 					/obj/item/scanner/health = 5,/obj/item/chems/glass/beaker = 4, /obj/item/chems/dropper = 2,
 					/obj/item/stack/medical/advanced/bruise_pack = 3, /obj/item/stack/medical/advanced/ointment = 3, /obj/item/stack/medical/splint = 2,
 					/obj/item/chems/hypospray/autoinjector/pain = 4)
 	contraband = list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
-					/obj/item/chems/pill/tox = 3,/obj/item/chems/pill/stox = 4,/obj/item/chems/pill/antitox = 6,
-					/obj/item/chems/hypospray/autoinjector/combatpain = 2)
+					/obj/item/chems/pill/tox = 3,/obj/item/chems/pill/stox = 4,/obj/item/chems/pill/antitox = 6)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 
@@ -935,7 +932,7 @@
 	products = list(
 		/obj/item/stack/medical/bruise_pack = 3,
 		/obj/item/stack/medical/ointment = 3,
-		/obj/item/chems/pill/paracetamol = 4,
+		/obj/item/chems/pill/painkillers = 4,
 		/obj/item/storage/med_pouch/trauma,
 		/obj/item/storage/med_pouch/burn,
 		/obj/item/storage/med_pouch/oxyloss,
@@ -995,7 +992,7 @@
 	base_type = /obj/machinery/vending/hydronutrients
 	products = list(/obj/item/chems/glass/bottle/eznutrient = 6,/obj/item/chems/glass/bottle/left4zed = 4,/obj/item/chems/glass/bottle/robustharvest = 3,/obj/item/plantspray/pests = 20,
 					/obj/item/chems/syringe = 5,/obj/item/storage/plants = 5)
-	premium = list(/obj/item/chems/glass/bottle/ammonia = 10,/obj/item/chems/glass/bottle/diethylamine = 5)
+	premium = list(/obj/item/chems/glass/bottle/ammonia = 10)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/hydronutrients/generic
@@ -1178,8 +1175,7 @@
 	icon_vend = "engi-vend"
 	base_type = /obj/machinery/vending/engineering
 	req_access = list(list(access_atmospherics,access_engine_equip))
-	products = list(/obj/item/chems/food/drinks/bottle/oiljug = 6,
-					/obj/item/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/insulated = 4, /obj/item/screwdriver = 12,
+	products = list(/obj/item/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/insulated = 4, /obj/item/screwdriver = 12,
 					/obj/item/crowbar = 12,/obj/item/wirecutters = 12,/obj/item/multitool = 12,/obj/item/wrench = 12,/obj/item/t_scanner = 12,
 					/obj/item/cell = 8, /obj/item/weldingtool = 8,/obj/item/clothing/head/welding = 8,
 					/obj/item/light/tube = 10,/obj/item/stock_parts/scanning_module = 5,/obj/item/stock_parts/micro_laser = 5,
@@ -1199,8 +1195,7 @@
 	icon_vend = "robotics-vend"
 	req_access = list(access_robotics)
 	base_type = /obj/machinery/vending/robotics
-	products = list(/obj/item/chems/food/drinks/bottle/oiljug = 5,
-					/obj/item/stack/cable_coil = 4,/obj/item/flash/synthetic = 4,/obj/item/cell = 4,/obj/item/scanner/health = 2,
+	products = list(/obj/item/stack/cable_coil = 4,/obj/item/flash/synthetic = 4,/obj/item/cell = 4,/obj/item/scanner/health = 2,
 					/obj/item/scalpel = 1,/obj/item/circular_saw = 1,/obj/item/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/screwdriver = 2,/obj/item/crowbar = 2)
 	contraband = list(/obj/item/flash = 2)

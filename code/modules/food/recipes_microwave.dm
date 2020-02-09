@@ -48,28 +48,28 @@ I said no!
 	result = /obj/item/chems/food/snacks/classichotdog
 
 /datum/recipe/jellydonut
-	reagents = list(/datum/reagent/drink/juice/berry = 5, /datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/drink/juice/berry = 5, /datum/reagent/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/dough
 	)
 	result = /obj/item/chems/food/snacks/donut/jelly
 
 /datum/recipe/jellydonut/slime
-	reagents = list(/datum/reagent/slimejelly = 5, /datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/toxin/slimejelly = 5, /datum/reagent/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/dough
 	)
 	result = /obj/item/chems/food/snacks/donut/slimejelly
 
 /datum/recipe/jellydonut/cherry
-	reagents = list(/datum/reagent/nutriment/cherryjelly = 5, /datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/nutriment/cherryjelly = 5, /datum/reagent/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/dough
 	)
 	result = /obj/item/chems/food/snacks/donut/cherryjelly
 
 /datum/recipe/donut
-	reagents = list(/datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/dough
 	)
@@ -229,7 +229,7 @@ I said no!
 
 /datum/recipe/bananabread
 	fruit = list("banana" = 2)
-	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/dough,
 		/obj/item/chems/food/snacks/dough,
@@ -292,13 +292,13 @@ I said no!
 
 /datum/recipe/bananapie
 	fruit = list("banana" = 1)
-	reagents = list(/datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/nutriment/sugar = 5)
 	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
 	result = /obj/item/chems/food/snacks/bananapie
 
 /datum/recipe/cherrypie
 	fruit = list("cherries" = 1)
-	reagents = list(/datum/reagent/sugar = 10)
+	reagents = list(/datum/reagent/nutriment/sugar = 10)
 	items = list(
 		/obj/item/chems/food/snacks/sliceable/flatdough,
 	)
@@ -312,7 +312,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/berryclafoutis
 
 /datum/recipe/chaosdonut
-	reagents = list(/datum/reagent/frostoil = 5, /datum/reagent/capsaicin = 5, /datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/frostoil = 5, /datum/reagent/capsaicin = 5, /datum/reagent/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/dough
 	)
@@ -379,7 +379,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/cookie
 
 /datum/recipe/fortunecookie
-	reagents = list(/datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/doughslice,
 		/obj/item/paper,
@@ -457,7 +457,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza
 
 /datum/recipe/spacylibertyduff
-	reagents = list(/datum/reagent/water = 10, /datum/reagent/ethanol/vodka = 5, /datum/reagent/psilocybin = 5)
+	reagents = list(/datum/reagent/water = 10, /datum/reagent/ethanol/vodka = 5, /datum/reagent/psychotropics = 5)
 	result = /obj/item/chems/food/snacks/spacylibertyduff
 
 /datum/recipe/amanitajelly
@@ -601,7 +601,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/tomatosoup
 
 /datum/recipe/rofflewaffles
-	reagents = list(/datum/reagent/psilocybin = 5, /datum/reagent/nutriment/batter/cakebatter = 20)
+	reagents = list(/datum/reagent/psychotropics = 5, /datum/reagent/nutriment/batter/cakebatter = 20)
 	result = /obj/item/chems/food/snacks/rofflewaffles
 
 /datum/recipe/stew
@@ -611,7 +611,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/stew
 
 /datum/recipe/slimetoast
-	reagents = list(/datum/reagent/slimejelly = 5)
+	reagents = list(/datum/reagent/toxin/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/slice/bread,
 	)
@@ -720,7 +720,7 @@ I said no!
 
 /datum/recipe/candiedapple
 	fruit = list("apple" = 1)
-	reagents = list(/datum/reagent/water = 10, /datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/water = 10, /datum/reagent/nutriment/sugar = 5)
 	result = /obj/item/chems/food/snacks/candiedapple
 
 /datum/recipe/applepie
@@ -729,7 +729,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/applepie
 
 /datum/recipe/slimeburger
-	reagents = list(/datum/reagent/slimejelly = 5)
+	reagents = list(/datum/reagent/toxin/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/bun
 	)
@@ -758,7 +758,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/threebread
 
 /datum/recipe/slimesandwich
-	reagents = list(/datum/reagent/slimejelly = 5)
+	reagents = list(/datum/reagent/toxin/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/slice/bread,
 		/obj/item/chems/food/snacks/slice/bread,
@@ -778,7 +778,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/bloodsoup
 
 /datum/recipe/slimesoup
-	reagents = list(/datum/reagent/water = 10, /datum/reagent/slimejelly = 5)
+	reagents = list(/datum/reagent/water = 10, /datum/reagent/toxin/slimejelly = 5)
 	items = list()
 	result = /obj/item/chems/food/snacks/slimesoup
 
@@ -824,7 +824,7 @@ I said no!
 
 /datum/recipe/pumpkinpie
 	fruit = list("pumpkin" = 1)
-	reagents = list(/datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/nutriment/sugar = 5)
 	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
 	result = /obj/item/chems/food/snacks/sliceable/pumpkinpie
 
@@ -949,7 +949,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/onionrings
 
 /datum/recipe/mint
-	reagents = list(/datum/reagent/sugar = 5, /datum/reagent/frostoil = 5)
+	reagents = list(/datum/reagent/nutriment/sugar = 5, /datum/reagent/frostoil = 5)
 	result = /obj/item/chems/food/snacks/mint
 
 // Cakes.
@@ -1001,7 +1001,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/sliceable/braincake
 
 /datum/recipe/cake/chocolatebar
-	reagents = list(/datum/reagent/drink/milk/chocolate = 10, /datum/reagent/nutriment/coco = 5, /datum/reagent/sugar = 5)
+	reagents = list(/datum/reagent/drink/milk/chocolate = 10, /datum/reagent/nutriment/coco = 5, /datum/reagent/nutriment/sugar = 5)
 	result = /obj/item/chems/food/snacks/chocolatebar
 
 /datum/recipe/boiledspiderleg

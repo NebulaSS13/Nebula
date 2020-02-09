@@ -13,15 +13,15 @@
 	var/charge_tick = 0
 	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
 
-	var/list/reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/spaceacillin)
+	var/list/reagent_ids = list(/datum/reagent/regenerator, /datum/reagent/adrenaline, /datum/reagent/antibiotics)
 	var/list/reagent_volumes = list()
 	var/list/reagent_names = list()
 
 /obj/item/chems/borghypo/surgeon
-	reagent_ids = list(/datum/reagent/bicaridine, /datum/reagent/dexalin, /datum/reagent/tramadol)
+	reagent_ids = list(/datum/reagent/brute_meds, /datum/reagent/oxygen, /datum/reagent/painkillers)
 
 /obj/item/chems/borghypo/crisis
-	reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/tramadol)
+	reagent_ids = list(/datum/reagent/regenerator, /datum/reagent/adrenaline, /datum/reagent/painkillers)
 
 /obj/item/chems/borghypo/Initialize()
 	. = ..()
@@ -138,7 +138,7 @@
 		/datum/reagent/ethanol/ale,
 		/datum/reagent/ethanol/mead,
 		/datum/reagent/water,
-		/datum/reagent/sugar,
+		/datum/reagent/nutriment/sugar,
 		/datum/reagent/drink/ice,
 		/datum/reagent/drink/tea,
 		/datum/reagent/drink/tea/icetea,

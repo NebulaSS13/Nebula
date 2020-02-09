@@ -31,7 +31,7 @@
 /datum/genetics/side_effect/genetic_burn
 	name = "Genetic Burn"
 	symptom = "Subject's skin turns unusualy red."
-	treatment = "Inject small dose of dexalin."
+	treatment = "Inject small dose of oxygen."
 	effect = "Subject's skin burns."
 	duration = 30 SECONDS
 
@@ -39,7 +39,7 @@
 	H.visible_message("<B>\The [H]</B> starts turning very red...")
 
 /datum/genetics/side_effect/genetic_burn/finish(mob/living/carbon/human/H)
-	if(!H.reagents.has_reagent(/datum/reagent/dexalin))
+	if(!H.reagents.has_reagent(/datum/reagent/oxygen))
 		for(var/organ_name in BP_ALL_LIMBS)
 			var/obj/item/organ/external/E = H.get_organ(organ_name)
 			E.take_external_damage(0, 5, 0)
@@ -47,14 +47,14 @@
 /datum/genetics/side_effect/bone_snap
 	name = "Bone Snap"
 	symptom = "Subject's limbs tremble notably."
-	treatment = "Inject small dose of bicaridine."
+	treatment = "Inject small dose of styptic medication."
 	effect = "Subject's bone breaks."
 	duration = 1 MINUTE
 
 /datum/genetics/side_effect/bone_snap/start(mob/living/carbon/human/H)
 	H.visible_message("<B>\The [H]</B>'s limbs start shivering uncontrollably.")
 /datum/genetics/side_effect/bone_snap/finish(mob/living/carbon/human/H)
-	if(!H.reagents.has_reagent(/datum/reagent/bicaridine))
+	if(!H.reagents.has_reagent(/datum/reagent/brute_meds))
 		var/organ_name = pick(BP_ALL_LIMBS)
 		var/obj/item/organ/external/E = H.get_organ(organ_name)
 		E.take_external_damage(20, 0, 0)
@@ -63,7 +63,7 @@
 /datum/genetics/side_effect/confuse
 	name = "Confuse"
 	symptom = "Subject starts drooling uncontrollably."
-	treatment = "Inject small dose of dylovene."
+	treatment = "Inject small dose of antitoxins."
 	effect = "Subject becomes confused."
 	duration = 30 SECONDS
 
@@ -71,6 +71,6 @@
 		H.visible_message("<B>\The [H]</B> drools.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent(/datum/reagent/dylovene))
+		if(!H.reagents.has_reagent(/datum/reagent/antitoxins))
 			H.confused += 100
 

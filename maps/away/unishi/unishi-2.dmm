@@ -283,7 +283,7 @@
 "aN" = (
 /obj/item/chems/chem_disp_cartridge/acetone,
 /obj/item/chems/chem_disp_cartridge/copper,
-/obj/item/chems/chem_disp_cartridge/imidazoline,
+/obj/item/chems/chem_disp_cartridge/eyedrops,
 /obj/structure/table/rack,
 /obj/item/chems/syringe/antitoxin,
 /turf/simulated/floor/tiled/white,

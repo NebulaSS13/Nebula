@@ -69,9 +69,9 @@
 		desc = SSplants.product_descs["[seed.uid]"]
 	else
 		var/list/descriptors = list()
-		if(reagents.has_reagent(/datum/reagent/sugar) || reagents.has_reagent(/datum/reagent/nutriment/cherryjelly) || reagents.has_reagent(/datum/reagent/nutriment/honey) || reagents.has_reagent(/datum/reagent/drink/juice/berry))
+		if(reagents.has_reagent(/datum/reagent/nutriment/sugar) || reagents.has_reagent(/datum/reagent/nutriment/cherryjelly) || reagents.has_reagent(/datum/reagent/nutriment/honey) || reagents.has_reagent(/datum/reagent/drink/juice/berry))
 			descriptors |= "sweet"
-		if(reagents.has_reagent(/datum/reagent/dylovene))
+		if(reagents.has_reagent(/datum/reagent/antitoxins))
 			descriptors |= "astringent"
 		if(reagents.has_reagent(/datum/reagent/frostoil))
 			descriptors |= "numbing"
@@ -87,9 +87,9 @@
 			descriptors |= "radioactive"
 		if(reagents.has_reagent(/datum/reagent/toxin/amatoxin) || reagents.has_reagent(/datum/reagent/toxin))
 			descriptors |= "poisonous"
-		if(reagents.has_reagent(/datum/reagent/psilocybin) || reagents.has_reagent(/datum/reagent/space_drugs))
+		if(reagents.has_reagent(/datum/reagent/psychotropics) || reagents.has_reagent(/datum/reagent/psychoactives))
 			descriptors |= "hallucinogenic"
-		if(reagents.has_reagent(/datum/reagent/bicaridine))
+		if(reagents.has_reagent(/datum/reagent/brute_meds))
 			descriptors |= "medicinal"
 		if(reagents.has_reagent(/datum/reagent/gold))
 			descriptors |= "shiny"

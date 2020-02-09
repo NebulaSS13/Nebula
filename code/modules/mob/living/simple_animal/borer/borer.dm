@@ -27,9 +27,9 @@
 	bleed_colour = "#816e12"
 
 	var/static/list/chemical_types = list(
-		"bicaridine" = /datum/reagent/bicaridine,
-		"hyperzine" =  /datum/reagent/hyperzine,
-		"tramadol" =   /datum/reagent/tramadol
+		"anti-trauma" = /datum/reagent/brute_meds,
+		"amphetamines" =  /datum/reagent/amphetamines,
+		"painkillers" = /datum/reagent/painkillers
 	)
 
 	var/generation = 1
@@ -149,7 +149,7 @@
 
 		if(!stat && !host.stat)
 
-			if(host.reagents.has_reagent(/datum/reagent/sugar))
+			if(host.reagents.has_reagent(/datum/reagent/nutriment/sugar))
 				if(!docile)
 					if(controlling)
 						to_chat(host, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))

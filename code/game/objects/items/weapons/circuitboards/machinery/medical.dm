@@ -55,18 +55,3 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
-
-/obj/item/stock_parts/circuitboard/cryo_cell
-	name = T_BOARD("cryo cell")
-	build_path = /obj/machinery/atmospherics/unary/cryo_cell
-	board_type = "machine"
-	origin_tech = list(TECH_ENGINEERING = 4, TECH_BIO = 6, TECH_DATA = 3)
-	req_components = list (
-		/obj/item/stock_parts/scanning_module = 1,
-		/obj/item/stock_parts/manipulator = 2,
-		/obj/item/pipe = 1)
-	additional_spawn_components = list(
-		/obj/item/stock_parts/console_screen = 1,
-		/obj/item/stock_parts/keyboard = 1,
-		/obj/item/stock_parts/power/apc/buildable = 1
-	)

@@ -30,7 +30,7 @@
 	. = ..()
 	SSstatistics.extracted_slime_cores_amount++
 	create_reagents(100)
-	reagents.add_reagent(/datum/reagent/slimejelly, 30)
+	reagents.add_reagent(/datum/reagent/toxin/slimejelly, 30)
 
 /obj/item/slime_extract/grey
 	name = "grey slime extract"

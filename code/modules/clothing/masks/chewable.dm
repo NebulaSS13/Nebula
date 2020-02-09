@@ -111,7 +111,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	slot_flags = SLOT_EARS | SLOT_MASK
 	chem_volume = 50
 	chewtime = 300
-	filling = list(/datum/reagent/sugar = 2)
+	filling = list(/datum/reagent/nutriment/sugar = 2)
 
 /obj/item/trash/cigbutt/spitgum
 	name = "old gum"
@@ -174,31 +174,31 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli/meds/Initialize()
 	. = ..()
 	reagents.add_reagent(pick(list(
-				/datum/reagent/dexalinp,
-				/datum/reagent/tricordrazine,
-				/datum/reagent/hyperzine,
-				/datum/reagent/hyronalin,
-				/datum/reagent/methylphenidate,
-				/datum/reagent/citalopram,
-				/datum/reagent/dylovene,
-				/datum/reagent/bicaridine,
-				/datum/reagent/kelotane,
-				/datum/reagent/inaprovaline)), 10)
+				/datum/reagent/oxygen,
+				/datum/reagent/regenerator,
+				/datum/reagent/amphetamines,
+				/datum/reagent/entolimod,
+				/datum/reagent/stimulants,
+				/datum/reagent/antidepressants,
+				/datum/reagent/antitoxins,
+				/datum/reagent/brute_meds,
+				/datum/reagent/burn_meds,
+				/datum/reagent/adrenaline)), 10)
 	color = reagents.get_color()
 
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds
 	name = "medicine lollipop"
 	desc = "A sucrose sphere on a small handle, it has been infused with medication."
-	filling = list(/datum/reagent/sugar = 6)
+	filling = list(/datum/reagent/nutriment/sugar = 6)
 
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds/Initialize()
 	. = ..()
 	var/datum/reagent/payload = pick(list(
-				/datum/reagent/antidexafen,
-				/datum/reagent/paracetamol,
-				/datum/reagent/tricordrazine,
-				/datum/reagent/dylovene,
-				/datum/reagent/inaprovaline))
+				/datum/reagent/antivirals,
+				/datum/reagent/painkillers,
+				/datum/reagent/regenerator,
+				/datum/reagent/antitoxins,
+				/datum/reagent/adrenaline))
 	reagents.add_reagent(payload, 15)
 	color = reagents.get_color()
 	desc = "[desc]. This one is labeled '[initial(payload.name)]'"

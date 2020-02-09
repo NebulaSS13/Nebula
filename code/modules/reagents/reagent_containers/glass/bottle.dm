@@ -60,17 +60,16 @@
 		overlays += lid
 
 
-/obj/item/chems/glass/bottle/inaprovaline
-	name = "inaprovaline bottle"
-	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
+/obj/item/chems/glass/bottle/adrenaline
+	name = "adrenaline bottle"
+	desc = "A small bottle. Contains adrenaline - used to stabilize patients."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/inaprovaline/Initialize()
+/obj/item/chems/glass/bottle/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
+	reagents.add_reagent(/datum/reagent/adrenaline, 60)
 	update_icon()
-
 
 /obj/item/chems/glass/bottle/toxin
 	name = "toxin bottle"
@@ -96,51 +95,39 @@
 	update_icon()
 
 
-/obj/item/chems/glass/bottle/stoxin
-	name = "soporific bottle"
-	desc = "A small bottle of soporific. Just the fumes make you sleepy."
+/obj/item/chems/glass/bottle/sedatives
+	name = "sedatives bottle"
+	desc = "A small bottle of soporific medication. Just the fumes make you sleepy."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/stoxin/Initialize()
+/obj/item/chems/glass/bottle/sedatives/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/soporific, 60)
-	update_icon()
-
-
-/obj/item/chems/glass/bottle/chloralhydrate
-	name = "Chloral Hydrate Bottle"
-	desc = "A small bottle of Choral Hydrate. Mickey's Favorite!"
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle-3"
-
-/obj/item/chems/glass/bottle/chloralhydrate/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/chloralhydrate, 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
+	reagents.add_reagent(/datum/reagent/sedatives, 60)
 	update_icon()
 
 
 /obj/item/chems/glass/bottle/antitoxin
-	name = "dylovene bottle"
-	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."
+	name = "antitoxins bottle"
+	desc = "A small bottle of antitoxins. Counters poisons, and repairs damage. A wonder drug."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
 /obj/item/chems/glass/bottle/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 60)
+	reagents.add_reagent(/datum/reagent/antitoxins, 60)
 	update_icon()
 
 
-/obj/item/chems/glass/bottle/mutagen
+/obj/item/chems/glass/bottle/mutagenics
 	name = "unstable mutagen bottle"
 	desc = "A small bottle of unstable mutagen. Randomly changes the DNA structure of whoever comes in contact."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-1"
 
-/obj/item/chems/glass/bottle/mutagen/Initialize()
+/obj/item/chems/glass/bottle/mutagenics/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/mutagen, 60)
+	reagents.add_reagent(/datum/reagent/mutagenics, 60)
 	update_icon()
 
 
@@ -190,19 +177,6 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/robustharvest, 60)
 	update_icon()
-
-
-/obj/item/chems/glass/bottle/diethylamine
-	name = "diethylamine bottle"
-	desc = "A small bottle."
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle-4"
-
-/obj/item/chems/glass/bottle/diethylamine/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/diethylamine, 60)
-	update_icon()
-
 
 /obj/item/chems/glass/bottle/pacid
 	name = "Polytrinic Acid Bottle"

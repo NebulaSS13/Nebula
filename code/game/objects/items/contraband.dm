@@ -13,21 +13,15 @@
 	wrapper_color = COLOR_BLUE
 	startswith = list(/obj/item/chems/pill/zoom = 10)
 
-/obj/item/storage/pill_bottle/three_eye
-	name = "bottle of Three Eye pills"
-	desc = "Highly illegal drug. Stimulates rarely used portions of the brain."
-	wrapper_color = COLOR_BLUE
-	startswith = list(/obj/item/chems/pill/three_eye = 10)
-
 /obj/item/chems/glass/beaker/vial/random
 	atom_flags = 0
-	var/list/random_reagent_list = list(list(/datum/reagent/water = 15) = 1, list(/datum/reagent/space_cleaner = 15) = 1)
+	var/list/random_reagent_list = list(list(/datum/reagent/water = 15) = 1, list(/datum/reagent/cleaner = 15) = 1)
 
 /obj/item/chems/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list(/datum/reagent/mindbreaker = 10, /datum/reagent/space_drugs = 20) = 3,
+		list(/datum/reagent/hallucinogenics = 10, /datum/reagent/psychoactives = 20) = 3,
 		list(/datum/reagent/toxin/carpotoxin = 15)                             = 2,
-		list(/datum/reagent/impedrezene = 15)                                  = 2,
+		list(/datum/reagent/narcotics = 15)                                  = 2,
 		list(/datum/reagent/toxin/zombiepowder = 10)                           = 1)
 
 /obj/item/chems/glass/beaker/vial/random/Initialize()

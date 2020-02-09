@@ -321,17 +321,23 @@
 		return
 	..()
 
+/obj/item/chems/syringe/ld50_syringe/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/toxin/heartstopper, 60)
+	mode = SYRINGE_INJECT
+	update_icon()
+
 ////////////////////////////////////////////////////////////////////////////////
 /// Syringes. END
 ////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/chems/syringe/inaprovaline
-	name = "Syringe (inaprovaline)"
-	desc = "Contains inaprovaline - used to stabilize patients."
+/obj/item/chems/syringe/adrenaline
+	name = "Syringe (adrenaline)"
+	desc = "Contains adrenaline - used to stabilize patients."
 
-/obj/item/chems/syringe/inaprovaline/Initialize()
+/obj/item/chems/syringe/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 15)
+	reagents.add_reagent(/datum/reagent/adrenaline, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -341,17 +347,17 @@
 
 /obj/item/chems/syringe/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 15)
+	reagents.add_reagent(/datum/reagent/antitoxins, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
 /obj/item/chems/syringe/antiviral
-	name = "Syringe (spaceacillin)"
+	name = "Syringe (antibiotics)"
 	desc = "Contains antiviral agents."
 
 /obj/item/chems/syringe/antiviral/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/spaceacillin, 15)
+	reagents.add_reagent(/datum/reagent/antibiotics, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -361,17 +367,9 @@
 
 /obj/item/chems/syringe/drugs/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/space_drugs, 5)
-	reagents.add_reagent(/datum/reagent/mindbreaker, 5)
-	reagents.add_reagent(/datum/reagent/cryptobiolin, 5)
-	mode = SYRINGE_INJECT
-	update_icon()
-
-/obj/item/chems/syringe/ld50_syringe/choral
-
-/obj/item/chems/syringe/ld50_syringe/choral/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/chloralhydrate, 60)
+	reagents.add_reagent(/datum/reagent/psychoactives, 5)
+	reagents.add_reagent(/datum/reagent/hallucinogenics, 5)
+	reagents.add_reagent(/datum/reagent/presyncopics, 5)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -382,7 +380,7 @@
 /obj/item/chems/syringe/steroid/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/adrenaline, 5)
-	reagents.add_reagent(/datum/reagent/hyperzine, 10)
+	reagents.add_reagent(/datum/reagent/amphetamines, 10)
 
 
 // TG ports

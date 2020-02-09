@@ -17,19 +17,19 @@
 #define IS_SLIME   1
 #define IS_YINGLET 2
 
-#define CE_STABLE        "stable"       // Inaprovaline
+#define CE_STABLE        "stable"       // Adrenaline effect
 #define CE_ANTIBIOTIC    "antibiotic"   // Spaceacilin
 #define CE_BLOODRESTORE  "bloodrestore" // Iron/nutriment
 #define CE_PAINKILLER    "painkiller"
 #define CE_ALCOHOL       "alcohol"      // Liver filtering
 #define CE_ALCOHOL_TOXIC "alcotoxic"    // Liver damage
-#define CE_SPEEDBOOST    "gofast"       // Hyperzine
+#define CE_SPEEDBOOST    "gofast"       // Stimulants
 #define CE_SLOWDOWN      "goslow"       // Slowdown
 #define CE_PULSE         "xcardic"      // increases or decreases heart rate
 #define CE_NOPULSE       "heartstop"    // stops heartbeat
-#define CE_ANTITOX       "antitox"      // Dylovene
-#define CE_OXYGENATED    "oxygen"       // Dexalin.
-#define CE_BRAIN_REGEN   "brainfix"     // Alkysine.
+#define CE_ANTITOX       "antitox"      // Removes toxins
+#define CE_OXYGENATED    "oxygen"       // Helps oxygenate the brain.
+#define CE_BRAIN_REGEN   "brainfix"     // Allows the brain to recover after injury
 #define CE_ANTIVIRAL     "antiviral"    // Anti-virus effect.
 #define CE_TOXIN         "toxins"       // Generic toxins, stops autoheal.
 #define CE_BREATHLOSS    "breathloss"   // Breathing depression, makes you need more air

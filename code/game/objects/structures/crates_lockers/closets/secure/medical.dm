@@ -23,7 +23,7 @@
 		/obj/item/storage/box/syringes,
 		/obj/item/chems/dropper = 2,
 		/obj/item/chems/glass/beaker = 2,
-		/obj/item/chems/glass/bottle/inaprovaline = 2,
+		/obj/item/chems/glass/bottle/adrenaline = 2,
 		/obj/item/chems/glass/bottle/antitoxin = 2,
 		/obj/random/firstaid,
 		/obj/item/storage/box/masks,
@@ -75,7 +75,7 @@
 	return list(
 	    /obj/item/storage/box/autoinjectors,
 	    /obj/item/storage/box/syringes,
-	    /obj/item/chems/glass/bottle/inaprovaline,
+	    /obj/item/chems/glass/bottle/adrenaline,
 	    /obj/item/chems/glass/bottle/antitoxin,
 	    /obj/item/storage/belt/medical/emt,
 	    /obj/item/clothing/mask/gas,
@@ -126,7 +126,6 @@
 /obj/structure/closet/secure_closet/chemical/WillContain()
 	return list(
 		/obj/item/storage/box/pillbottles = 2,
-		/obj/item/chems/glass/beaker/cryoxadone,
 		/obj/random/medical = 12
 	)
 
@@ -152,10 +151,10 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,
 		/obj/item/clothing/shoes/white,
-		/obj/item/chems/glass/bottle/stoxin,
+		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
-		/obj/item/storage/pill_bottle/citalopram,
-		/obj/item/chems/pill/methylphenidate,
+		/obj/item/storage/pill_bottle/antidepressants,
+		/obj/item/chems/pill/stimulants,
 		/obj/item/material/clipboard,
 		/obj/item/folder/white,
 		/obj/item/taperecorder,
@@ -177,8 +176,8 @@
 		/obj/item/storage/box/syringes,
 		/obj/item/chems/dropper = 2,
 		/obj/item/chems/glass/beaker = 2,
-		/obj/item/chems/glass/bottle/inaprovaline,
-		/obj/item/storage/pill_bottle/spaceacillin,
+		/obj/item/chems/glass/bottle/adrenaline,
+		/obj/item/storage/pill_bottle/antibiotics,
 		/obj/item/chems/syringe/antiviral,
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/storage/box/masks,
@@ -200,11 +199,10 @@
 /obj/structure/closet/secure_closet/psychiatry/WillContain()
 	return list(
 		/obj/item/clothing/suit/straight_jacket,
-		/obj/item/chems/glass/bottle/stoxin,
+		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
-		/obj/item/storage/pill_bottle/citalopram,
-		/obj/item/storage/pill_bottle/methylphenidate,
-		/obj/item/storage/pill_bottle/paroxetine,
+		/obj/item/storage/pill_bottle/antidepressants,
+		/obj/item/storage/pill_bottle/stimulants,
 		/obj/item/clothing/under/rank/psych/turtleneck,
 		/obj/item/clothing/under/rank/psych
 	)

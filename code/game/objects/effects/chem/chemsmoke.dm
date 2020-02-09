@@ -151,7 +151,7 @@
 
 //Runs the chem smoke effect
 // Spawns damage over time loop for each reagent held in the cloud.
-// Applies reagents to walls that affect walls (only thermite and plant-b-gone at the moment).
+// Applies reagents to walls that affect walls (only plant-b-gone at the moment).
 // Also calculates target locations to spawn the visual smoke effect on, so the whole area
 // is covered fairly evenly.
 /datum/effect/effect/system/smoke_spread/chem/start()

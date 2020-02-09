@@ -12,11 +12,11 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/mob/living/carbon/human/occupant = null
-	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Soporific" = /datum/reagent/soporific, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
+	var/list/base_chemicals = list("Adrenaline" = /datum/reagent/adrenaline, "Sedatives" = /datum/reagent/sedatives, "Painkillers" = /datum/reagent/painkillers, "Oxygen" = /datum/reagent/oxygen)
 	var/list/available_chemicals = list()
-	var/list/upgrade_chemicals = list("Kelotane" = /datum/reagent/kelotane)
-	var/list/upgrade2_chemicals = list("Hyronalin" = /datum/reagent/hyronalin)
-	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover, "Chloral Hydrate" = /datum/reagent/chloralhydrate)
+	var/list/upgrade_chemicals = list("Anti-Burn" = /datum/reagent/burn_meds)
+	var/list/upgrade2_chemicals = list("Anti-Rads" = /datum/reagent/entolimod)
+	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover)
 	var/obj/item/chems/glass/beaker = null
 	var/filtering = 0
 	var/pump

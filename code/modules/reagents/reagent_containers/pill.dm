@@ -75,12 +75,12 @@
 
 //We lied - it's pills all the way down
 /obj/item/chems/pill/antitox
-	name = "Dylovene (25u)"
+	name = "antitoxins (25u)"
 	desc = "Neutralizes many common toxins."
 	icon_state = "pill1"
 /obj/item/chems/pill/antitox/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 25)
+	reagents.add_reagent(/datum/reagent/antitoxins, 25)
 	color = reagents.get_color()
 
 
@@ -115,102 +115,70 @@
 	reagents.add_reagent(/datum/reagent/adminordrazine, 1)
 
 /obj/item/chems/pill/stox
-	name = "Soporific (15u)"
+	name = "sedatives (15u)"
 	desc = "Commonly used to treat insomnia."
 	icon_state = "pill3"
 /obj/item/chems/pill/stox/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/soporific, 15)
+	reagents.add_reagent(/datum/reagent/sedatives, 15)
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/kelotane
+/obj/item/chems/pill/burn_meds
 	name = "Kelotane (15u)"
 	desc = "Used to treat burns."
 	icon_state = "pill2"
-/obj/item/chems/pill/kelotane/Initialize()
+/obj/item/chems/pill/burn_meds/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/kelotane, 15)
+	reagents.add_reagent(/datum/reagent/burn_meds, 15)
 	color = reagents.get_color()
 
-
-/obj/item/chems/pill/paracetamol
-	name = "Paracetamol (15u)"
-	desc = "A painkiller for the ages. Chewables!"
-	icon_state = "pill3"
-/obj/item/chems/pill/paracetamol/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/paracetamol, 15)
-	color = reagents.get_color()
-
-
-/obj/item/chems/pill/tramadol
-	name = "Tramadol (15u)"
+/obj/item/chems/pill/painkillers
+	name = "painkillers (15u)"
 	desc = "A simple painkiller."
 	icon_state = "pill3"
-/obj/item/chems/pill/tramadol/Initialize()
+/obj/item/chems/pill/painkillers/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/tramadol, 15)
+	reagents.add_reagent(/datum/reagent/painkillers, 15)
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/inaprovaline
-	name = "Inaprovaline (30u)"
+/obj/item/chems/pill/adrenaline
+	name = "adrenaline (30u)"
 	desc = "Used to stabilize patients."
 	icon_state = "pill1"
-/obj/item/chems/pill/inaprovaline/Initialize()
+/obj/item/chems/pill/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 30)
+	reagents.add_reagent(/datum/reagent/adrenaline, 30)
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/dexalin
-	name = "Dexalin (15u)"
+/obj/item/chems/pill/oxygen
+	name = "oxygen (15u)"
 	desc = "Used to treat oxygen deprivation."
 	icon_state = "pill1"
-/obj/item/chems/pill/dexalin/Initialize()
+/obj/item/chems/pill/oxygen/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dexalin, 15)
+	reagents.add_reagent(/datum/reagent/oxygen, 15)
 	color = reagents.get_color()
 
-
-/obj/item/chems/pill/dexalin_plus
-	name = "Dexalin Plus (15u)"
-	desc = "Used to treat extreme oxygen deprivation."
-	icon_state = "pill2"
-/obj/item/chems/pill/dexalin_plus/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/dexalinp, 15)
-	color = reagents.get_color()
-
-
-/obj/item/chems/pill/dermaline
-	name = "Dermaline (15u)"
-	desc = "Used to treat burn wounds."
-	icon_state = "pill2"
-/obj/item/chems/pill/dermaline/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/dermaline, 15)
-	color = reagents.get_color()
-
-
-/obj/item/chems/pill/dylovene
-	name = "Dylovene (15u)"
+/obj/item/chems/pill/antitoxins
+	name = "antitoxins (15u)"
 	desc = "A broad-spectrum anti-toxin."
 	icon_state = "pill1"
-/obj/item/chems/pill/dylovene/Initialize()
+/obj/item/chems/pill/antitoxins/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 15)
+	reagents.add_reagent(/datum/reagent/antitoxins, 15)
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/bicaridine
-	name = "Bicaridine (20u)"
+/obj/item/chems/pill/brute_meds
+	name = "styptic (20u)"
 	desc = "Used to treat physical injuries."
 	icon_state = "pill2"
-/obj/item/chems/pill/bicaridine/Initialize()
+/obj/item/chems/pill/brute_meds/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/bicaridine, 20)
+	reagents.add_reagent(/datum/reagent/brute_meds, 20)
 	color = reagents.get_color()
 
 
@@ -220,8 +188,8 @@
 	icon_state = "pill4"
 /obj/item/chems/pill/happy/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/space_drugs, 15)
-	reagents.add_reagent(/datum/reagent/sugar, 15)
+	reagents.add_reagent(/datum/reagent/psychoactives, 15)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 15)
 	color = reagents.get_color()
 
 
@@ -231,100 +199,59 @@
 	icon_state = "pill4"
 /obj/item/chems/pill/zoom/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/impedrezene, 10)
-	reagents.add_reagent(/datum/reagent/synaptizine, 5)
-	reagents.add_reagent(/datum/reagent/hyperzine, 5)
+	reagents.add_reagent(/datum/reagent/narcotics, 5)
+	reagents.add_reagent(/datum/reagent/antidepressants, 5)
+	reagents.add_reagent(/datum/reagent/stimulants, 5)
+	reagents.add_reagent(/datum/reagent/amphetamines, 5)
 	color = reagents.get_color()
 
-/obj/item/chems/pill/three_eye
-	name = "strange pill"
-	desc = "The surface of this unlabelled pill crawls against your skin."
-	icon_state = "pill2"
-
-/obj/item/chems/pill/three_eye/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/three_eye, 10)
-	color = reagents.get_color()
-
-/obj/item/chems/pill/spaceacillin
-	name = "Spaceacillin (10u)"
+/obj/item/chems/pill/antibiotics
+	name = "antibiotics (10u)"
 	desc = "Contains antiviral agents."
 	icon_state = "pill3"
-/obj/item/chems/pill/spaceacillin/Initialize()
+/obj/item/chems/pill/antibiotics/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/spaceacillin, 10)
+	reagents.add_reagent(/datum/reagent/antibiotics, 10)
 	color = reagents.get_color()
 
-
-/obj/item/chems/pill/diet
-	name = "diet pill"
-	desc = "Guaranteed to get you slim!"
-	icon_state = "pill4"
-/obj/item/chems/pill/diet/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/lipozine, 2)
-	color = reagents.get_color()
-
-
-/obj/item/chems/pill/noexcutite
-	name = "Noexcutite (15u)"
-	desc = "Feeling jittery? This should calm you down."
-	icon_state = "pill4"
-/obj/item/chems/pill/noexcutite/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/noexcutite, 15)
-	color = reagents.get_color()
-
-
-/obj/item/chems/pill/antidexafen
-	name = "Antidexafen (15u)"
+/obj/item/chems/pill/antivirals
+	name = "antivirals (15u)"
 	desc = "Common cold mediciation. Safe for babies!"
 	icon_state = "pill4"
-/obj/item/chems/pill/antidexafen/Initialize()
+/obj/item/chems/pill/antivirals/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/antidexafen, 10)
+	reagents.add_reagent(/datum/reagent/antivirals, 10)
 	reagents.add_reagent(/datum/reagent/drink/juice/lemon, 5)
 	reagents.add_reagent(/datum/reagent/menthol, REM*0.2)
 	color = reagents.get_color()
 
 //Psychiatry pills.
-/obj/item/chems/pill/methylphenidate
-	name = "Methylphenidate (15u)"
+/obj/item/chems/pill/stimulants
+	name = "stimulants (15u)"
 	desc = "Improves the ability to concentrate."
 	icon_state = "pill2"
-/obj/item/chems/pill/methylphenidate/Initialize()
+/obj/item/chems/pill/stimulants/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/methylphenidate, 15)
+	reagents.add_reagent(/datum/reagent/stimulants, 15)
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/citalopram
-	name = "Citalopram (15u)"
+/obj/item/chems/pill/antidepressants
+	name = "antidepressants (15u)"
 	desc = "Mild anti-depressant."
 	icon_state = "pill4"
-/obj/item/chems/pill/citalopram/Initialize()
+/obj/item/chems/pill/antidepressants/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/citalopram, 15)
+	reagents.add_reagent(/datum/reagent/antidepressants, 15)
 	color = reagents.get_color()
 
-
-/obj/item/chems/pill/paroxetine
-	name = "Paroxetine (10u)"
-	desc = "Before you swallow a bullet: try swallowing this!"
-	icon_state = "pill4"
-/obj/item/chems/pill/paroxetine/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/paroxetine, 10)
-	color = reagents.get_color()
-
-
-/obj/item/chems/pill/hyronalin
-	name = "Hyronalin (7u)"
+/obj/item/chems/pill/entolimod
+	name = "entolimod (7u)"
 	desc = "Used to treat radiation poisoning."
 	icon_state = "pill1"
-/obj/item/chems/pill/hyronalin/Initialize()
+/obj/item/chems/pill/entolimod/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/hyronalin, 7)
+	reagents.add_reagent(/datum/reagent/entolimod, 7)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antirad
@@ -333,8 +260,8 @@
 	icon_state = "yellow"
 /obj/item/chems/pill/antirad/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/hyronalin, 5)
-	reagents.add_reagent(/datum/reagent/dylovene, 10)
+	reagents.add_reagent(/datum/reagent/entolimod, 5)
+	reagents.add_reagent(/datum/reagent/antitoxins, 10)
 
 
 /obj/item/chems/pill/sugariron
@@ -344,7 +271,7 @@
 /obj/item/chems/pill/sugariron/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/iron, 5)
-	reagents.add_reagent(/datum/reagent/sugar, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/detergent

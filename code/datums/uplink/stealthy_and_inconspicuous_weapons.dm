@@ -11,7 +11,7 @@
 
 /datum/uplink_item/item/stealthy_weapons/cigarette_kit
 	name = "Box of Tricky Cigarettes"
-	desc = "A box with some 'special' packs in the following order: 2x Flashes, 2x Smokes, 1x MindBreaker Toxin, and 1x Tricordrazine. Try not to mix them up!"
+	desc = "A box with some 'special' packs in the following order: 2x Flashes, 2x Smokes, 1x Hallucinogenics, and 1x Regenerative Serum. Try not to mix them up!"
 	item_cost = 8
 	path = /obj/item/storage/box/syndie_kit/cigarette
 

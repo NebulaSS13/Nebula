@@ -238,11 +238,6 @@
 		if(scan["worms"])
 			dat += "<tr><td colspan='2'><span class='bad'><center>Large growth detected in frontal lobe, possibly cancerous.</center></span></td></tr>"
 
-		//Reagent scan
-		/*
-			<tr><td colspan='2'>Beneficial reagents detected in subject's bloodstream:</td></tr>
-			<tr><td colspan='2'>10u dexalin plus</td></tr>
-		*/
 		var/other_reagent = FALSE
 
 		for(var/list/R in scan["reagents"])

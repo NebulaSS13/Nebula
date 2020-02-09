@@ -7,10 +7,10 @@
 
 	// Multiple
 	water		spawn_reagent = /datum/reagent/water
-	sugar		spawn_reagent = /datum/reagent/sugar
+	sugar		spawn_reagent = /datum/reagent/nutriment/sugar
 
 	// Chemistry
-	hydrazine	spawn_reagent = /datum/reagent/hydrazine
+	hydrazine	spawn_reagent = /datum/reagent/fuel/hydrazine
 	lithium		spawn_reagent = /datum/reagent/lithium
 	carbon		spawn_reagent = /datum/reagent/carbon
 	ammonia		spawn_reagent = /datum/reagent/ammonia
@@ -76,32 +76,18 @@
 	cream		spawn_reagent = /datum/reagent/drink/milk/cream
 
 	// ERT
-	inaprov		spawn_reagent = /datum/reagent/inaprovaline
-	ryetalyn	spawn_reagent = /datum/reagent/ryetalyn
-	paracetamol	spawn_reagent = /datum/reagent/paracetamol
-	tramadol	spawn_reagent = /datum/reagent/tramadol
-	oxycodone	spawn_reagent = /datum/reagent/tramadol/oxycodone
-	sterilizine	spawn_reagent = /datum/reagent/sterilizine
-	leporazine	spawn_reagent = /datum/reagent/leporazine
-	kelotane	spawn_reagent = /datum/reagent/kelotane
-	dermaline	spawn_reagent = /datum/reagent/dermaline
-	dexalin		spawn_reagent = /datum/reagent/dexalin
-	dexalin/small	volume = CARTRIDGE_VOLUME_SMALL // For the medicine cartridge crate, so it's not too easy to get large amounts of dexalin
-	dexalin_p	spawn_reagent = /datum/reagent/dexalinp
-	tricord		spawn_reagent = /datum/reagent/tricordrazine
-	dylovene	spawn_reagent = /datum/reagent/dylovene
-	synaptizine	spawn_reagent = /datum/reagent/synaptizine
-	hyronalin	spawn_reagent = /datum/reagent/hyronalin
-	arithrazine	spawn_reagent = /datum/reagent/arithrazine
-	alkysine	spawn_reagent = /datum/reagent/alkysine
-	imidazoline	spawn_reagent = /datum/reagent/imidazoline
-	peridaxon	spawn_reagent = /datum/reagent/peridaxon
-	bicaridine	spawn_reagent = /datum/reagent/bicaridine
-	hyperzine	spawn_reagent = /datum/reagent/hyperzine
-	rezadone	spawn_reagent = /datum/reagent/rezadone
-	spaceacillin	spawn_reagent = /datum/reagent/spaceacillin
-	ethylredox	spawn_reagent = /datum/reagent/ethylredoxrazine
-	sleeptox	spawn_reagent = /datum/reagent/soporific
-	chloral		spawn_reagent = /datum/reagent/chloralhydrate
-	cryoxadone	spawn_reagent = /datum/reagent/cryoxadone
-	clonexadone	spawn_reagent = /datum/reagent/clonexadone
+	adrenaline    spawn_reagent = /datum/reagent/adrenaline
+	retrovirals	  spawn_reagent = /datum/reagent/retrovirals
+	painkillers	  spawn_reagent = /datum/reagent/painkillers
+	antiseptic	  spawn_reagent = /datum/reagent/antiseptic
+	burn_meds	  spawn_reagent = /datum/reagent/burn_meds
+	oxygen		  spawn_reagent = /datum/reagent/oxygen
+	regenerator	  spawn_reagent = /datum/reagent/regenerator
+	antitoxins	  spawn_reagent = /datum/reagent/antitoxins
+	entolimod	  spawn_reagent = /datum/reagent/entolimod
+	neuroannealer spawn_reagent = /datum/reagent/neuroannealer
+	eyedrops	  spawn_reagent = /datum/reagent/eyedrops
+	brute_meds	  spawn_reagent = /datum/reagent/brute_meds
+	amphetamines  spawn_reagent = /datum/reagent/amphetamines
+	antibiotics   spawn_reagent = /datum/reagent/antibiotics
+	sedatives	  spawn_reagent = /datum/reagent/sedatives

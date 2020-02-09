@@ -88,7 +88,7 @@
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
-	poison_type = /datum/reagent/soporific
+	poison_type = /datum/reagent/sedatives
 	break_stuff_probability = 10
 	pry_time = 9 SECONDS
 

@@ -554,7 +554,6 @@
 /turf/simulated/wall/titanium,
 /area/map_template/merc_shuttle)
 "aS" = (
-/obj/machinery/atmospherics/unary/cryo_cell,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1";
@@ -564,7 +563,6 @@
 /area/map_template/merc_shuttle)
 "aT" = (
 /obj/machinery/atmospherics/unary/freezer,
-/obj/item/chems/glass/beaker/cryoxadone,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
@@ -629,7 +627,7 @@
 	pixel_x = -32
 	},
 /obj/item/chems/spray/cleaner,
-/obj/item/chems/spray/sterilizine,
+/obj/item/chems/spray/antiseptic,
 /obj/item/defibrillator/loaded,
 /obj/item/storage/firstaid/combat,
 /obj/item/clothing/gloves/latex,

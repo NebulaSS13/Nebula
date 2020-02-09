@@ -25,7 +25,7 @@
 		/datum/reagent/sodiumchloride = /obj/item/chems/food/condiment/small/saltshaker,
 		/datum/reagent/blackpepper = /obj/item/chems/food/condiment/small/peppermill,
 		/datum/reagent/nutriment/cornoil = /obj/item/chems/food/condiment/cornoil,
-		/datum/reagent/sugar = /obj/item/chems/food/condiment/sugar,
+		/datum/reagent/nutriment/sugar = /obj/item/chems/food/condiment/sugar,
 		/datum/reagent/nutriment/mayo = /obj/item/chems/food/condiment/mayo,
 		/datum/reagent/nutriment/vinegar = /obj/item/chems/food/condiment/vinegar
 		)
@@ -125,7 +125,7 @@
 /obj/item/chems/food/condiment/sugar
 	name = "sugar"
 	desc = "Cavities in a bottle."
-	starting_reagents = list(/datum/reagent/sugar = 50)
+	starting_reagents = list(/datum/reagent/nutriment/sugar = 50)
 
 /obj/item/chems/food/condiment/ketchup
 	name = "ketchup"
@@ -190,7 +190,7 @@
 	desc = "Sweetness in a bottle"
 	icon_state = "sugarsmall"
 	center_of_mass = @"{'x':17,'y':9}"
-	starting_reagents = list(/datum/reagent/sugar = 20)
+	starting_reagents = list(/datum/reagent/nutriment/sugar = 20)
 
 //MRE condiments and drinks.
 
@@ -217,7 +217,7 @@
 	name = "sugar packet"
 	desc = "Contains 5u of refined sugar."
 	icon_state = "packet_small_white"
-	starting_reagents = list(/datum/reagent/sugar = 5)
+	starting_reagents = list(/datum/reagent/nutriment/sugar = 5)
 
 /obj/item/chems/food/condiment/small/packet/jelly
 	name = "jelly packet"
@@ -228,7 +228,7 @@
 /obj/item/chems/food/condiment/small/packet/honey
 	name = "honey packet"
 	desc = "Contains 10u of honey."
-	starting_reagents = list(/datum/reagent/sugar = 10)
+	starting_reagents = list(/datum/reagent/nutriment/sugar = 10)
 	icon_state = "packet_medium"
 
 /obj/item/chems/food/condiment/small/packet/capsaicin
@@ -299,23 +299,23 @@
 /obj/item/chems/food/condiment/small/packet/crayon
 	name = "crayon powder packet"
 	desc = "Contains 10u of powdered crayon. Mix with 30u of water."
-	starting_reagents = list(/datum/reagent/crayon_dust = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust = 10)
 /obj/item/chems/food/condiment/small/packet/crayon/red
-	starting_reagents = list(/datum/reagent/crayon_dust/red = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust/red = 10)
 /obj/item/chems/food/condiment/small/packet/crayon/orange
-	starting_reagents = list(/datum/reagent/crayon_dust/orange = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust/orange = 10)
 /obj/item/chems/food/condiment/small/packet/crayon/yellow
-	starting_reagents = list(/datum/reagent/crayon_dust/yellow = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust/yellow = 10)
 /obj/item/chems/food/condiment/small/packet/crayon/green
-	starting_reagents = list(/datum/reagent/crayon_dust/green = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust/green = 10)
 /obj/item/chems/food/condiment/small/packet/crayon/blue
-	starting_reagents = list(/datum/reagent/crayon_dust/blue = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust/blue = 10)
 /obj/item/chems/food/condiment/small/packet/crayon/purple
-	starting_reagents = list(/datum/reagent/crayon_dust/purple = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust/purple = 10)
 /obj/item/chems/food/condiment/small/packet/crayon/grey
-	starting_reagents = list(/datum/reagent/crayon_dust/grey = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust/grey = 10)
 /obj/item/chems/food/condiment/small/packet/crayon/brown
-	starting_reagents = list(/datum/reagent/crayon_dust/brown = 10)
+	starting_reagents = list(/datum/reagent/pigment/crayon_dust/brown = 10)
 
 //End of MRE stuff.
 

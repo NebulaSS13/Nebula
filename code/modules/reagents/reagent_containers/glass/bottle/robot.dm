@@ -6,17 +6,16 @@
 	volume = 60
 	var/reagent = ""
 
-
-/obj/item/chems/glass/bottle/robot/inaprovaline
-	name = "internal inaprovaline bottle"
-	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
+/obj/item/chems/glass/bottle/robot/adrenaline
+	name = "internal adrenaline bottle"
+	desc = "A small bottle. Contains adrenaline - used to stabilize patients."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
-	reagent = /datum/reagent/inaprovaline
+	reagent = /datum/reagent/adrenaline
 
-/obj/item/chems/glass/bottle/robot/inaprovaline/Initialize()
+/obj/item/chems/glass/bottle/robot/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
+	reagents.add_reagent(/datum/reagent/adrenaline, 60)
 	update_icon()
 
 /obj/item/chems/glass/bottle/robot/antitoxin
@@ -24,9 +23,9 @@
 	desc = "A small bottle of Anti-toxins. Counters poisons, and repairs damage, a wonder drug."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
-	reagent = /datum/reagent/dylovene
+	reagent = /datum/reagent/antitoxins
 
 /obj/item/chems/glass/bottle/robot/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dylovene, 60)
+	reagents.add_reagent(/datum/reagent/antitoxins, 60)
 	update_icon()

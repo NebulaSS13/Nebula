@@ -12,8 +12,8 @@
 					/obj/item/storage/firstaid/adv,
 					/obj/item/storage/firstaid/stab,
 					/obj/item/chems/glass/bottle/antitoxin,
-					/obj/item/chems/glass/bottle/inaprovaline,
-					/obj/item/chems/glass/bottle/stoxin,
+					/obj/item/chems/glass/bottle/adrenaline,
+					/obj/item/chems/glass/bottle/sedatives,
 					/obj/item/storage/box/syringes,
 					/obj/item/storage/box/autoinjectors)
 	cost = 70

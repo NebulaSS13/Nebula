@@ -118,7 +118,7 @@
 	if(isnull(last_int_pressure))
 		last_int_pressure = breath_pressure
 		return
-	var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
+	var/datum/gas_mixture/environment = loc.return_air()
 	var/ext_pressure = environment && environment.return_pressure() // May be null if, say, our owner is in nullspace
 	var/int_pressure_diff = abs(last_int_pressure - breath_pressure)
 	var/ext_pressure_diff = abs(last_ext_pressure - ext_pressure) * owner.get_pressure_weakness(ext_pressure)
@@ -140,7 +140,7 @@
 	var/breath_pressure = breath.return_pressure()
 	check_rupturing(breath_pressure)
 
-	var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
+	var/datum/gas_mixture/environment = loc.return_air()
 	last_ext_pressure = environment && environment.return_pressure()
 	last_int_pressure = breath_pressure
 	if(breath.total_moles == 0)

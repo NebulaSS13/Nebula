@@ -24,15 +24,13 @@
 	name = "presence of acid"
 	required_chemicals = list(
 		/datum/reagent/acid,
-		/datum/reagent/acid/polyacid,
-		/datum/reagent/diethylamine
+		/datum/reagent/acid/polyacid
 	)
 
 /datum/artifact_trigger/chemical/volatile
 	name = "presence of volatile chemicals"
 	required_chemicals = list(
 		/datum/reagent/toxin/phoron,
-		/datum/reagent/thermite,
 		/datum/reagent/fuel
 	)
 

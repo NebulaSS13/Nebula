@@ -205,7 +205,7 @@
 	req_access = list(access_captain)
 
 /obj/structure/closet/secure_closet/injection/WillContain()
-	return list(/obj/item/chems/syringe/ld50_syringe/choral = 2)
+	return list(/obj/item/chems/syringe/ld50_syringe = 2)
 
 /obj/structure/closet/secure_closet/brig
 	name = "brig locker"

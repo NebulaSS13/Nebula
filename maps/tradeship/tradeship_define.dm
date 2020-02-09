@@ -8,7 +8,6 @@
 	contact_levels = list(1, 2, 3, 4)
 	player_levels = list(1, 2, 3, 4)
 
-
 	station_name  = "Tradeship Ivenmoth"
 	station_short = "Ivenmoth"
 

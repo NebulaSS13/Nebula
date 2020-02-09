@@ -35,9 +35,9 @@
 		if(ICECREAM_BANANA)
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/drink/juice/banana)
 		if(CONE_WAFFLE)
-			return list(/datum/reagent/nutriment/flour, /datum/reagent/sugar)
+			return list(/datum/reagent/nutriment/flour, /datum/reagent/nutriment/sugar)
 		if(CONE_CHOC)
-			return list(/datum/reagent/nutriment/flour, /datum/reagent/sugar, /datum/reagent/nutriment/coco)
+			return list(/datum/reagent/nutriment/flour, /datum/reagent/nutriment/sugar, /datum/reagent/nutriment/coco)
 		else
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice)
 
@@ -67,7 +67,7 @@
 		product_types.Add(5)
 	reagents.add_reagent(/datum/reagent/drink/milk, 5)
 	reagents.add_reagent(/datum/reagent/nutriment/flour, 5)
-	reagents.add_reagent(/datum/reagent/sugar, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 5)
 	reagents.add_reagent(/datum/reagent/drink/ice, 5)
 
 /obj/machinery/icecream_vat/interface_interact(mob/user)
@@ -110,7 +110,7 @@
 			//	if(beaker)
 			//		beaker.reagents.trans_to(I, 10)
 				if(I.reagents.total_volume < 10)
-					I.reagents.add_reagent(/datum/reagent/sugar, 10 - I.reagents.total_volume)
+					I.reagents.add_reagent(/datum/reagent/nutriment/sugar, 10 - I.reagents.total_volume)
 			else
 				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
 		else

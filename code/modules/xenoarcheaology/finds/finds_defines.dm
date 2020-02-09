@@ -1,7 +1,7 @@
 var/global/list/responsive_carriers = list(
 	/datum/reagent/carbon,
 	/datum/reagent/potassium,
-	/datum/reagent/hydrazine,
+	/datum/reagent/fuel/hydrazine,
 	"nitrogen",
 	/datum/reagent/mercury,
 	/datum/reagent/iron,

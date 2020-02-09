@@ -139,25 +139,17 @@
 //Damage
 
 /turf/simulated/wall/melt()
-
-	if(!can_melt())
-		return
-
-	src.ChangeTurf(/turf/simulated/floor/plating)
-
-	var/turf/simulated/floor/F = src
-	if(!F)
-		return
-	F.burn_tile()
-	F.icon_state = "wall_thermite"
-	visible_message("<span class='danger'>\The [src] spontaneously combusts!.</span>") //!!OH SHIT!!
-	return
+	if(can_melt())
+		var/turf/simulated/floor/F = ChangeTurf(/turf/simulated/floor/plating)
+		if(istype(F))
+			F.burn_tile()
+			F.icon_state = "wall_thermite"
+			visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
 
 /turf/simulated/wall/proc/take_damage(dam)
 	if(dam)
 		damage = max(0, damage + dam)
 		update_damage()
-	return
 
 /turf/simulated/wall/proc/update_damage()
 	var/cap = material.integrity
@@ -235,32 +227,6 @@
 	if(material.flags & MAT_FLAG_UNMELTABLE)
 		return 0
 	return 1
-
-/turf/simulated/wall/proc/thermitemelt(mob/user as mob)
-	if(!can_melt())
-		return
-	var/obj/effect/overlay/O = new/obj/effect/overlay( src )
-	O.SetName("Thermite")
-	O.desc = "Looks hot."
-	O.icon = 'icons/effects/fire.dmi'
-	O.icon_state = "2"
-	O.anchored = 1
-	O.set_density(1)
-	O.plane = LIGHTING_PLANE
-	O.layer = FIRE_LAYER
-
-	src.ChangeTurf(/turf/simulated/floor/plating)
-
-	var/turf/simulated/floor/F = src
-	F.burn_tile()
-	F.icon_state = "wall_thermite"
-	to_chat(user, "<span class='warning'>The thermite starts melting through the wall.</span>")
-
-	spawn(100)
-		if(O)
-			qdel(O)
-//	F.sd_LumReset()		//TODO: ~Carn
-	return
 
 /turf/simulated/wall/proc/radiate()
 	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity / 2 : 0)
