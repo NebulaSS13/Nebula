@@ -104,19 +104,6 @@
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
 
-/datum/reagent/antitoxins/venaxilin
-	name = "Venaxilin"
-	description = "Venixalin is a strong, specialised antivenom for dealing with advanced toxins and venoms."
-	taste_description = "overpowering sweetness"
-	color = "#dadd98"
-	scannable = 1
-	metabolism = REM * 2
-	remove_generic = 0
-	remove_toxins = list(
-		/datum/reagent/toxin/venom,
-		/datum/reagent/toxin/carpotoxin
-	)
-
 /datum/reagent/alkysine
 	name = "Alkysine"
 	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a injury. Can aid in healing brain tissue."

@@ -226,15 +226,6 @@
 	maximum_temperature = -25 CELSIUS
 	mix_message = "The solution becomes a metallic slime."
 
-/datum/chemical_reaction/venaxilin
-	name = "Venaxilin"
-	result = /datum/reagent/antitoxins/venaxilin
-	required_reagents = list(/datum/reagent/antitoxins = 1, /datum/reagent/spaceacillin = 1, /datum/reagent/toxin/venom = 1)
-	result_amount = 1
-	minimum_temperature = 50 CELSIUS
-	maximum_temperature = 100 CELSIUS
-	mix_message = "The solution steams and becomes cloudy."
-
 /datum/chemical_reaction/spaceacillin
 	name = "Spaceacillin"
 	result = /datum/reagent/spaceacillin
