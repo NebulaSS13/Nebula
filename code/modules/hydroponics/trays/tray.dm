@@ -56,8 +56,7 @@
 		/datum/reagent/acid/hydrochloric = 1.5,
 		/datum/reagent/acid/polyacid =     3,
 		/datum/reagent/toxin/plantbgone =  3,
-		/datum/reagent/radium =            2,
-		/datum/reagent/three_eye =         2
+		/datum/reagent/radium =            2
 		)
 	var/global/list/nutrient_reagents = list(
 		/datum/reagent/drink/milk =                     0.1,
@@ -114,13 +113,12 @@
 		/datum/reagent/radium =                          list( -1.5,  0,   0.2),
 		/datum/reagent/adminordrazine =                  list(  1,    1,   1  ),
 		/datum/reagent/toxin/fertilizer/robustharvest =  list(  0,    0.2, 0  ),
-		/datum/reagent/toxin/fertilizer/left4zed =       list(  0,    0,   0.2),
-		/datum/reagent/three_eye =                       list(  -1  , 0,   0.5)
+		/datum/reagent/toxin/fertilizer/left4zed =       list(  0,    0,   0.2)
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
-	var/global/list/mutagenicsic_reagents = list(
+	var/global/list/mutagenic_reagents = list(
 		/datum/reagent/radium =  8,
 		/datum/reagent/mutagenics = 15,
 		/datum/reagent/toxin/fertilizer/left4zed = 30)

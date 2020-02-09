@@ -4,7 +4,6 @@
 GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	/datum/reagent/adminordrazine,
 	/datum/reagent/water/holywater,
-	/datum/reagent/chloralhydrate/beer2,
 	/datum/reagent/tobacco,
 	/datum/reagent/drink,
 	/datum/reagent/pigment/crayon_dust,

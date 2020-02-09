@@ -466,8 +466,7 @@
 			/datum/reagent/adminordrazine,
 			/datum/reagent/nutriment,
 			/datum/reagent/water/holywater,
-			/datum/reagent/toxin/plantbgone,
-			/datum/reagent/chloralhydrate/beer2
+			/datum/reagent/toxin/plantbgone
 			)
 		banned_chems += subtypesof(/datum/reagent/ethanol)
 		banned_chems += subtypesof(/datum/reagent/tobacco)

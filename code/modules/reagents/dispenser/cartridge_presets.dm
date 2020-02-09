@@ -80,12 +80,10 @@
 	ryetalyn	  spawn_reagent = /datum/reagent/ryetalyn
 	painkillers	  spawn_reagent = /datum/reagent/painkillers
 	antiseptic	  spawn_reagent = /datum/reagent/antiseptic
-	leporazine	  spawn_reagent = /datum/reagent/leporazine
 	burn_meds	  spawn_reagent = /datum/reagent/burn_meds
 	oxygen		  spawn_reagent = /datum/reagent/oxygen
 	tricord		  spawn_reagent = /datum/reagent/tricordrazine
 	antitoxins	  spawn_reagent = /datum/reagent/antitoxins
-	synaptizine	  spawn_reagent = /datum/reagent/synaptizine
 	entolimod	  spawn_reagent = /datum/reagent/entolimod
 	alkysine	  spawn_reagent = /datum/reagent/alkysine
 	imidazoline	  spawn_reagent = /datum/reagent/imidazoline

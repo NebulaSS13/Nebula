@@ -154,10 +154,3 @@ obj/item/paper/prof2
 
 /datum/reagent/toxin/phoron/safe/touch_turf(var/turf/simulated/T)
 	return
-
-/datum/chemical_reaction/leporazine/nophoron
-	catalysts = list(/datum/reagent/toxin/phoron/safe = 5)
-
-/datum/chemical_reaction/dexalin/nophoron
-	required_reagents = list(/datum/reagent/acetone = 2, /datum/reagent/toxin/phoron/safe = 0.1)
-

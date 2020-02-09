@@ -130,14 +130,6 @@
 	required_reagents = list(/datum/reagent/acid = 1, /datum/reagent/acid/hydrochloric = 1, /datum/reagent/potassium = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/synaptizine
-	name = "Synaptizine"
-	result = /datum/reagent/synaptizine
-	required_reagents = list(/datum/reagent/nutriment/sugar = 1, /datum/reagent/lithium = 1, /datum/reagent/water = 1)
-	result_amount = 3
-	minimum_temperature = 30 CELSIUS
-	maximum_temperature = (30 CELSIUS) + 100
-
 /datum/chemical_reaction/entolimod
 	name = "Entolimod"
 	result = /datum/reagent/entolimod
@@ -156,13 +148,6 @@
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
 	log_is_important = 1
-
-/datum/chemical_reaction/leporazine
-	name = "Leporazine"
-	result = /datum/reagent/leporazine
-	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/copper = 1)
-	catalysts = list(/datum/reagent/toxin/phoron = 5)
-	result_amount = 2
 
 /datum/chemical_reaction/cryptobiolin
 	name = "Cryptobiolin"
@@ -339,12 +324,6 @@
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/potassium = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 	mix_message = "The solution thins out and emits an acrid smell."
-
-/datum/chemical_reaction/noexcutite
-	name = "Noexcutite"
-	result = /datum/reagent/noexcutite
-	required_reagents = list(/datum/reagent/painkillers = 1, /datum/reagent/antitoxins = 1)
-	result_amount = 2
 
 /datum/chemical_reaction/methyl_bromide
 	name = "Methyl Bromide"
@@ -1902,27 +1881,6 @@
 	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminium=5)
 	result_amount = 20
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
-
-// psi-altering drug
-/datum/chemical_reaction/three_eye
-	name = "Three Eye"
-	result = /datum/reagent/three_eye
-	result_amount = 2
-	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
-	minimum_temperature = 40 CELSIUS
-	reaction_sound = 'sound/effects/psi/power_used.ogg'
-	hidden_from_codex = TRUE
-
-	catalysts = list(
-		/datum/reagent/toxin/carpotoxin = 1,
-		/datum/reagent/enzyme = 1
-	)
-
-	required_reagents = list(
-		/datum/reagent/hallucinogenics = 2,
-		/datum/reagent/toxin/phoron = 1,
-		/datum/reagent/blood = 1
-	)
 
 // tea expansion pack content - black tea drinks
 /datum/chemical_reaction/icetea

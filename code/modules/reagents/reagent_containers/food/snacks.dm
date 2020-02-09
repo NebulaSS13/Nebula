@@ -514,7 +514,7 @@
 	name = "\improper Sin-pocket"
 	desc = "The food of choice for the veteran. Do <b>NOT</b> overconsume."
 	filling_color = "#6d6d00"
-	heated_reagents = list(/datum/reagent/drink/doctor_delight = 5, /datum/reagent/amphetamines = 0.75, /datum/reagent/synaptizine = 0.25)
+	heated_reagents = list(/datum/reagent/drink/doctor_delight = 5, /datum/reagent/amphetamines = 0.75, /datum/reagent/stimulants = 0.25)
 	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
 
 /obj/item/chems/food/snacks/donkpocket/sinpocket/attack_self(mob/user)

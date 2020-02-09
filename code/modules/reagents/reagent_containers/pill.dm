@@ -199,19 +199,10 @@
 	icon_state = "pill4"
 /obj/item/chems/pill/zoom/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/narcotics, 10)
-	reagents.add_reagent(/datum/reagent/synaptizine, 5)
+	reagents.add_reagent(/datum/reagent/narcotics, 5)
+	reagents.add_reagent(/datum/reagent/antidepressants, 5)
+	reagents.add_reagent(/datum/reagent/stimulants, 5)
 	reagents.add_reagent(/datum/reagent/amphetamines, 5)
-	color = reagents.get_color()
-
-/obj/item/chems/pill/three_eye
-	name = "strange pill"
-	desc = "The surface of this unlabelled pill crawls against your skin."
-	icon_state = "pill2"
-
-/obj/item/chems/pill/three_eye/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/three_eye, 10)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antibiotics
@@ -222,16 +213,6 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/antibiotics, 10)
 	color = reagents.get_color()
-
-/obj/item/chems/pill/noexcutite
-	name = "Noexcutite (15u)"
-	desc = "Feeling jittery? This should calm you down."
-	icon_state = "pill4"
-/obj/item/chems/pill/noexcutite/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/noexcutite, 15)
-	color = reagents.get_color()
-
 
 /obj/item/chems/pill/antivirals
 	name = "antivirals (15u)"

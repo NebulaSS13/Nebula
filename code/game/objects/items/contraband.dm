@@ -13,12 +13,6 @@
 	wrapper_color = COLOR_BLUE
 	startswith = list(/obj/item/chems/pill/zoom = 10)
 
-/obj/item/storage/pill_bottle/three_eye
-	name = "bottle of Three Eye pills"
-	desc = "Highly illegal drug. Stimulates rarely used portions of the brain."
-	wrapper_color = COLOR_BLUE
-	startswith = list(/obj/item/chems/pill/three_eye = 10)
-
 /obj/item/chems/glass/beaker/vial/random
 	atom_flags = 0
 	var/list/random_reagent_list = list(list(/datum/reagent/water = 15) = 1, list(/datum/reagent/cleaner = 15) = 1)

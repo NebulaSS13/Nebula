@@ -4507,7 +4507,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "kZ" = (
-/obj/item/chems/chem_disp_cartridge/synaptizine,
+/obj/item/chems/chem_disp_cartridge/stimulants,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "la" = (

@@ -72,7 +72,8 @@
 	E.reagents.add_reagent(/datum/reagent/enzyme, 2 * amount)
 	if(emag)
 		var/obj/item/chems/food/drinks/bottle/small/beer/B = emag
-		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
+		B.reagents.add_reagent(/datum/reagent/ethanol/iced_beer, amount)
+		B.reagents.add_reagent(/datum/reagent/chloralhydrate, amount)
 
 /obj/item/robot_module/clerical/general
 	name = "clerical robot module"

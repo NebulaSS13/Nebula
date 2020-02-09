@@ -443,7 +443,7 @@
 	data = 0
 
 /datum/reagent/menthol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
+	if(world.time > data + 3 MINUTES)
 		data = world.time
 		to_chat(M, "<span class='notice'>You feel faintly sore in the throat.</span>")
 

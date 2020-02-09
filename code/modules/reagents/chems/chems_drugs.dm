@@ -45,11 +45,11 @@
 /datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + 3 MINUTES)
 		data = world.time
 		to_chat(M, "<span class='warning'>You feel antsy, your concentration wavers...</span>")
 	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+		if(world.time > data + 3 MINUTES)
 			data = world.time
 			to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
 

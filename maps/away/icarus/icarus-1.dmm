@@ -807,7 +807,7 @@
 /area/icarus/vessel)
 "cP" = (
 /obj/structure/table/standard,
-/obj/item/chems/pill/dexalin,
+/obj/item/chems/pill/oxygen,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
