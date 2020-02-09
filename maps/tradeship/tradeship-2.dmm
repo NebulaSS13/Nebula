@@ -74,6 +74,7 @@
 	pixel_x = -24
 	},
 /obj/item/material/clipboard,
+/obj/random/single/textbook,
 /turf/simulated/floor/carpet,
 /area/ship/scrap/command/fmate)
 "aI" = (
@@ -5980,10 +5981,10 @@
 /obj/item/flashlight/lamp,
 /obj/random_multi/single_item/captains_spare_id,
 /obj/item/spacecash/bundle/c1000,
-/obj/item/storage/bible/booze,
 /obj/machinery/light_switch{
 	pixel_y = 25
 	},
+/obj/random/single/textbook,
 /turf/simulated/floor/plating,
 /area/ship/scrap/hidden)
 "Gb" = (

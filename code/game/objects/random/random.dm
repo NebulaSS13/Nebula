@@ -1352,3 +1352,11 @@ var/list/random_useful_
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "cola"
 	spawn_object = /obj/item/chems/food/drinks/cans/cola
+
+//textbooks
+/obj/random/single/textbook
+	name = "random textbook"
+	icon = 'icons/obj/library.dmi'
+	icon_state = "book"
+	spawn_object = /obj/item/book/skill //Further randomization of which book is handled inside the book initialization
+	spawn_nothing_percentage = 0
