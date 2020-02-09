@@ -475,7 +475,7 @@
 		banned_chems += typesof(/datum/reagent/drink)
 		banned_chems += typesof(/datum/reagent/nutriment)
 		banned_chems += typesof(/datum/reagent/toxin/fertilizer)
-		banned_chems += typesof(/datum/reagent/crayon_dust)
+		banned_chems += typesof(/datum/reagent/pigment/crayon_dust)
 
 		if(prob(30))	banned_chems |= typesof(/datum/reagent/toxin)
 

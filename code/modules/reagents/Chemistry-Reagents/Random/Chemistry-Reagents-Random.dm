@@ -8,7 +8,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	/datum/reagent/chloralhydrate/beer2,
 	/datum/reagent/tobacco,
 	/datum/reagent/drink,
-	/datum/reagent/crayon_dust,
+	/datum/reagent/pigment/crayon_dust,
 	/datum/reagent/random,
 	/datum/reagent/toxin/phoron,
 	/datum/reagent/ethanol // Includes alcoholic beverages
