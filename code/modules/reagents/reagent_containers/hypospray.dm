@@ -175,10 +175,10 @@
 	band_color = COLOR_AMBER
 	starts_with = list(/datum/reagent/entolimod = 5)
 
-/obj/item/chems/hypospray/autoinjector/mindbreaker
+/obj/item/chems/hypospray/autoinjector/hallucinogenics
 	name = "autoinjector"
 	band_color = COLOR_DARK_GRAY
-	starts_with = list(/datum/reagent/mindbreaker = 5)
+	starts_with = list(/datum/reagent/hallucinogenics = 5)
 
 /obj/item/chems/hypospray/autoinjector/empty
 	name = "autoinjector"

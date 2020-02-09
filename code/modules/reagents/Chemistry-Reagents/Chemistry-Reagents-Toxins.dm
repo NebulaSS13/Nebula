@@ -416,66 +416,9 @@
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
 
-/datum/reagent/vecuronium_bromide
-	name = "vecuronium bromide"
-	description = "A powerful paralytic."
-	taste_description = "metallic"
-	color = "#ff337d"
-	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE * 0.5
-	value = 2.6
-
-/datum/reagent/vecuronium_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	var/threshold = 2
-	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
-		M.confused = max(M.confused, 2)
-		M.add_chemical_effect(CE_VOICELOSS, 1)
-	if(M.chem_doses[type] > threshold * 0.5)
-		M.make_dizzy(3)
-		M.Weaken(2)
-	if(M.chem_doses[type] == round(threshold * 0.5, metabolism))
-		to_chat(M, SPAN_WARNING("Your muscles slacken and cease to obey you."))
-	if(M.chem_doses[type] >= threshold)
-		M.add_chemical_effect(CE_SEDATE, 1)
-		M.eye_blurry = max(M.eye_blurry, 10)
-
-	if(M.chem_doses[type] > 1 * threshold)
-		M.adjustToxLoss(removed)
-
 /* Drugs */
 
-/datum/reagent/space_drugs
-	name = "space drugs"
-	description = "An illegal chemical compound used as drug."
-	taste_description = "bitterness"
-	taste_mult = 0.4
-	color = "#60a584"
-	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
-	value = 2.8
 
-/datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	var/drug_strength = 15
-	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10))
-		M.SelfMove(pick(GLOB.cardinal))
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "giggle"))
-	M.add_chemical_effect(CE_PULSE, -1)
-
-/datum/reagent/serotrotium
-	name = "Serotrotium"
-	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans."
-	taste_description = "bitterness"
-	color = "#202040"
-	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
-	value = 2.5
-
-/datum/reagent/serotrotium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "gasp"))
-	return
 
 /datum/reagent/cryptobiolin
 	name = "Cryptobiolin"
@@ -509,19 +452,6 @@
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
 		M.emote("drool")
-
-/datum/reagent/mindbreaker
-	name = "mindbreaker toxin"
-	description = "A powerful hallucinogen, it can cause fatal effects in users."
-	taste_description = "sourness"
-	color = "#b31008"
-	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
-	value = 0.6
-
-/datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_MIND, -2)
-	M.hallucination(50, 50)
 
 /datum/reagent/psilocybin
 	name = "psilocybin"
@@ -630,94 +560,6 @@
 		to_chat(M, SPAN_DANGER("<font size = [rand(2,4)]>[pick(overdose_messages)]</font>"))
 	if(M.psi)
 		M.psi.check_latency_trigger(30, "a Three Eye overdose")
-
-/* Transformations */
-/datum/reagent/slimetoxin
-	name = "mutation toxin"
-	description = "A corruptive toxin produced by slimes."
-	taste_description = "sludge"
-	color = "#13bc5e"
-	metabolism = REM * 0.2
-	value = 2
-
-/*
-/datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
-	if(!istype(H))
-		return
-	H.adjustToxLoss(40 * removed)
-	if(H.chem_doses[type] < 1 || prob(30))
-		return
-	H.chem_doses[type] = 0
-	var/list/meatchunks = list()
-	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
-		var/obj/item/organ/external/E = H.get_organ(limb_tag)
-		if(E && !E.is_stump() && !BP_IS_PROSTHETIC(E) && E.species.name != SPECIES_PROMETHEAN)
-			meatchunks += E
-	if(!meatchunks.len)
-		if(prob(10))
-			to_chat(H, "<span class='danger'>Your flesh rapidly mutates!</span>")
-			H.set_species(SPECIES_PROMETHEAN)
-			H.shapeshifter_set_colour("#05ff9b")
-			H.verbs -= /mob/living/carbon/human/proc/shapeshifter_select_colour
-		return
-	var/obj/item/organ/external/O = pick(meatchunks)
-	to_chat(H, "<span class='danger'>Your [O.name]'s flesh mutates rapidly!</span>")
-	if(!wrapped_species_by_ref["\ref[H]"])
-		wrapped_species_by_ref["\ref[H]"] = H.species.name
-	meatchunks = list(O) | O.children
-	for(var/obj/item/organ/external/E in meatchunks)
-		E.species = all_species[SPECIES_PROMETHEAN]
-		E.s_tone = null
-		E.s_col = ReadRGB("#05ff9b")
-		E.s_col_blend = ICON_ADD
-		E.status &= ~ORGAN_BROKEN
-		E.status |= ORGAN_MUTATED
-		E.limb_flags &= ~ORGAN_FLAG_CAN_BREAK
-		E.dislocated = -1
-		E.max_damage = 5
-		E.update_icon(1)
-	O.max_damage = 15
-	if(prob(10))
-		to_chat(H, "<span class='danger'>Your slimy [O.name] plops off!</span>")
-		O.droplimb()
-	H.update_body()
-*/
-
-/datum/reagent/aslimetoxin
-	name = "advanced mutation toxin"
-	description = "An advanced corruptive toxin produced by slimes."
-	taste_description = "sludge"
-	color = "#13bc5e"
-
-/datum/reagent/aslimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // TODO: check if there's similar code anywhere else
-	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
-		return
-	to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
-	ADD_TRANSFORMATION_MOVEMENT_HANDLER(M)
-	M.icon = null
-	M.overlays.Cut()
-	M.set_invisibility(101)
-	for(var/obj/item/W in M)
-		if(istype(W, /obj/item/implant)) //TODO: Carn. give implants a dropped() or something
-			qdel(W)
-			continue
-		M.drop_from_inventory(W)
-	var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
-	new_mob.a_intent = "hurt"
-	new_mob.universal_speak = TRUE
-	if(M.mind)
-		M.mind.transfer_to(new_mob)
-	else
-		new_mob.key = M.key
-	qdel(M)
-
-/datum/reagent/nanites
-	name = "nanomachines"
-	description = "Microscopic construction robots."
-	taste_description = "slimey metal"
-	color = "#535e66"
-	hidden_from_codex = TRUE
-	value = 9
 
 /datum/reagent/xenomicrobes
 	name = "xenomicrobes"

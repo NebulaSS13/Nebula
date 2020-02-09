@@ -263,3 +263,35 @@
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(15, 30)
 	holder.remove_reagent(/datum/reagent/frostoil, 5)
+
+/datum/reagent/psychoactives
+	name = "psychoactives"
+	description = "An illegal chemical compound used as a psychoactive drug."
+	taste_description = "bitterness"
+	taste_mult = 0.4
+	color = "#60a584"
+	metabolism = REM * 0.5
+	overdose = REAGENTS_OVERDOSE
+	value = 2.8
+
+/datum/reagent/psychoactives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/drug_strength = 15
+	M.druggy = max(M.druggy, drug_strength)
+	if(prob(10))
+		M.SelfMove(pick(GLOB.cardinal))
+	if(prob(7))
+		M.emote(pick("twitch", "drool", "moan", "giggle"))
+	M.add_chemical_effect(CE_PULSE, -1)
+
+/datum/reagent/hallucinogenics
+	name = "hallucinogenics"
+	description = "A mix of powerful hallucinogens, they can cause fatal effects in users."
+	taste_description = "sourness"
+	color = "#b31008"
+	metabolism = REM * 0.25
+	overdose = REAGENTS_OVERDOSE
+	value = 0.6
+
+/datum/reagent/hallucinogenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_MIND, -2)
+	M.hallucination(50, 50)

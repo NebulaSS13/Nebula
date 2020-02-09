@@ -109,16 +109,16 @@
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/phosphorus = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/space_drugs
-	name = "Space Drugs"
-	result = /datum/reagent/space_drugs
+/datum/chemical_reaction/psychoactives
+	name = "Psychoactives"
+	result = /datum/reagent/psychoactives
 	required_reagents = list(/datum/reagent/mercury = 1, /datum/reagent/nutriment/sugar = 1, /datum/reagent/lithium = 1)
 	result_amount = 3
 	minimum_temperature = 50 CELSIUS
 	maximum_temperature = (50 CELSIUS) + 100
 
 /datum/chemical_reaction/lube
-	name = "Space Lube"
+	name = "Lubricant"
 	result = /datum/reagent/lube
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/silicon = 1, /datum/reagent/acetone = 1)
 	result_amount = 4
@@ -251,9 +251,9 @@
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/acid/hydrochloric = 3, /datum/reagent/water = 1)
 	result_amount = 1
 
-/datum/chemical_reaction/vecuronium_bromide
-	name = "Vecuronium Bromide"
-	result = /datum/reagent/vecuronium_bromide
+/datum/chemical_reaction/paralytics
+	name = "Paralytics"
+	result = /datum/reagent/paralytics
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/mercury = 2, /datum/reagent/fuel/hydrazine = 2)
 	result_amount = 1
 
@@ -280,9 +280,9 @@
 	maximum_temperature = 99 CELSIUS
 	mix_message = "The solution boils off to form a fine powder."
 
-/datum/chemical_reaction/mindbreaker
-	name = "Mindbreaker Toxin"
-	result = /datum/reagent/mindbreaker
+/datum/chemical_reaction/hallucinogenics
+	name = "Hallucinogenics"
+	result = /datum/reagent/hallucinogenics
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/fuel/hydrazine = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 3
 	mix_message = "The solution takes on an iridescent sheen."
@@ -343,19 +343,19 @@
 /datum/chemical_reaction/methylphenidate
 	name = "Methylphenidate"
 	result = /datum/reagent/methylphenidate
-	required_reagents = list(/datum/reagent/mindbreaker = 1, /datum/reagent/lithium = 1)
+	required_reagents = list(/datum/reagent/hallucinogenics = 1, /datum/reagent/lithium = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/citalopram
 	name = "Citalopram"
 	result = /datum/reagent/citalopram
-	required_reagents = list(/datum/reagent/mindbreaker = 1, /datum/reagent/carbon = 1)
+	required_reagents = list(/datum/reagent/hallucinogenics = 1, /datum/reagent/carbon = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/paroxetine
 	name = "Paroxetine"
 	result = /datum/reagent/paroxetine
-	required_reagents = list(/datum/reagent/mindbreaker = 1, /datum/reagent/acetone = 1, /datum/reagent/inaprovaline = 1)
+	required_reagents = list(/datum/reagent/hallucinogenics = 1, /datum/reagent/acetone = 1, /datum/reagent/inaprovaline = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/hair_remover
@@ -611,14 +611,6 @@
 	for(var/i = 1, i <= 3, i++)
 		new /obj/item/chems/food/snacks/monkeycube(get_turf(holder.my_atom))
 
-//Green
-/datum/chemical_reaction/slime/mutate
-	name = "Mutation Toxin"
-	result = /datum/reagent/slimetoxin
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
-	result_amount = 1
-	required = /obj/item/slime_extract/green
-
 //Metal
 /datum/chemical_reaction/slime/metal
 	name = "Slime Metal"
@@ -825,14 +817,6 @@
 /datum/chemical_reaction/slime/ppotion/on_reaction(var/datum/reagents/holder)
 	..()
 	new /obj/item/slimepotion(get_turf(holder.my_atom))
-
-//Black
-/datum/chemical_reaction/slime/mutate2
-	name = "Advanced Mutation Toxin"
-	result = /datum/reagent/aslimetoxin
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
-	result_amount = 1
-	required = /obj/item/slime_extract/black
 
 //Oil
 /datum/chemical_reaction/slime/explosion
@@ -1960,7 +1944,7 @@
 	)
 
 	required_reagents = list(
-		/datum/reagent/mindbreaker = 2,
+		/datum/reagent/hallucinogenics = 2,
 		/datum/reagent/toxin/phoron = 1,
 		/datum/reagent/blood = 1
 	)

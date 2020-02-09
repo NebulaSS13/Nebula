@@ -29,4 +29,4 @@
 
 /obj/item/pen/reagent/sleepy/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/vecuronium_bromide, 15)
+	reagents.add_reagent(/datum/reagent/paralytics, 15)

@@ -198,7 +198,7 @@
 	icon_state = "pill4"
 /obj/item/chems/pill/happy/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/space_drugs, 15)
+	reagents.add_reagent(/datum/reagent/psychoactives, 15)
 	reagents.add_reagent(/datum/reagent/nutriment/sugar, 15)
 	color = reagents.get_color()
 

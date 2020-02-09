@@ -33,7 +33,7 @@
 	startswith = list(
 		/obj/item/implanter/imprinting,
 		/obj/item/implantpad,
-		/obj/item/chems/hypospray/autoinjector/mindbreaker
+		/obj/item/chems/hypospray/autoinjector/hallucinogenics
 		)
 
 // Space suit uplink kit

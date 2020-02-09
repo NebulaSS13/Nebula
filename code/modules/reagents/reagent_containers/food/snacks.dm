@@ -687,7 +687,7 @@
 /obj/item/chems/food/snacks/roburger/Initialize()
 	.=..()
 	if(prob(5))
-		reagents.add_reagent(/datum/reagent/nanites, 2)
+		reagents.add_reagent(/datum/reagent/nanitefluid, 2)
 
 /obj/item/chems/food/snacks/roburgerbig
 	name = "roburger"
@@ -699,7 +699,7 @@
 	bitesize = 0.1
 /obj/item/chems/food/snacks/roburgerbig/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/nanites, 100)
+	reagents.add_reagent(/datum/reagent/nanitefluid, 100)
 
 /obj/item/chems/food/snacks/xenoburger
 	name = "xenoburger"
@@ -1724,7 +1724,7 @@
 	bitesize = 4
 /obj/item/chems/food/snacks/nanopasta/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/nanites, 10)
+	reagents.add_reagent(/datum/reagent/nanitefluid, 10)
 
 /obj/item/chems/food/snacks/meatballspagetti
 	name = "spaghetti & meatballs"

@@ -30,3 +30,28 @@
 	if(warning_message && prob(warning_prob))
 		to_chat(M, "<span class='warning'>You feel [warning_message].</span>")
 
+/datum/reagent/paralytics
+	name = "paralytics"
+	description = "A powerful paralytic agent."
+	taste_description = "metallic"
+	color = "#ff337d"
+	metabolism = REM * 0.5
+	overdose = REAGENTS_OVERDOSE * 0.5
+	value = 2.6
+
+/datum/reagent/paralytics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/threshold = 2
+	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
+		M.confused = max(M.confused, 2)
+		M.add_chemical_effect(CE_VOICELOSS, 1)
+	if(M.chem_doses[type] > threshold * 0.5)
+		M.make_dizzy(3)
+		M.Weaken(2)
+	if(M.chem_doses[type] == round(threshold * 0.5, metabolism))
+		to_chat(M, SPAN_WARNING("Your muscles slacken and cease to obey you."))
+	if(M.chem_doses[type] >= threshold)
+		M.add_chemical_effect(CE_SEDATE, 1)
+		M.eye_blurry = max(M.eye_blurry, 10)
+
+	if(M.chem_doses[type] > 1 * threshold)
+		M.adjustToxLoss(removed)
