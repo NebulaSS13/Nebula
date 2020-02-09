@@ -33,7 +33,7 @@
 
 /datum/reagent/brute_meds
 	name = "styptic powder"
-	description = "A contact analgesic and bleeding suppressant that helps with recovery from physical trauma. When injected, can assist with mending arteries, but will cause complications."
+	description = "An analgesic and bleeding suppressant that helps with recovery from physical trauma. Can assist with mending arteries if injected in large amounts, but will cause complications."
 	taste_description = "bitterness"
 	taste_mult = 3
 	color = "#bf0000"
@@ -42,7 +42,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 4.9
 
-/datum/reagent/brute_meds/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/brute_meds/overdose(mob/living/carbon/M, alien)
 	..()
 	if(ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + volume)/100)
@@ -51,13 +51,13 @@
 			if(E.status & ORGAN_ARTERY_CUT && prob(2))
 				E.status &= ~ORGAN_ARTERY_CUT
 
-/datum/reagent/brute_meds/affect_touch(mob/living/carbon/M, alien, removed)
+/datum/reagent/brute_meds/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.heal_organ_damage(6 * removed, 0)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /datum/reagent/burn_meds
 	name = "regenerative powder"
-	description = "A contact analgesic that encourages burned tissue to recover."
+	description = "An analgesic that encourages burned tissue to recover."
 	taste_description = "bitterness"
 	color = "#ffa800"
 	overdose = REAGENTS_OVERDOSE
@@ -65,7 +65,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 2.9
 
-/datum/reagent/burn_meds/affect_touch(mob/living/carbon/M, alien, removed)
+/datum/reagent/burn_meds/affect_blood(mob/living/carbon/M, alien, removed)
 	M.heal_organ_damage(0, 6 * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
