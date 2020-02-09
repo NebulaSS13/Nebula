@@ -151,7 +151,7 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,
 		/obj/item/clothing/shoes/white,
-		/obj/item/chems/glass/bottle/stoxin,
+		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
 		/obj/item/storage/pill_bottle/antidepressants,
 		/obj/item/chems/pill/stimulants,
@@ -199,7 +199,7 @@
 /obj/structure/closet/secure_closet/psychiatry/WillContain()
 	return list(
 		/obj/item/clothing/suit/straight_jacket,
-		/obj/item/chems/glass/bottle/stoxin,
+		/obj/item/chems/glass/bottle/sedatives,
 		/obj/item/chems/syringe,
 		/obj/item/storage/pill_bottle/antidepressants,
 		/obj/item/storage/pill_bottle/stimulants,

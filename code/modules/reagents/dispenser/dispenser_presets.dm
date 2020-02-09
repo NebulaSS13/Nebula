@@ -40,8 +40,7 @@
 			/obj/item/chems/chem_disp_cartridge/brute_meds,
 			/obj/item/chems/chem_disp_cartridge/amphetamines,
 			/obj/item/chems/chem_disp_cartridge/antibiotics,
-			/obj/item/chems/chem_disp_cartridge/sleeptox,
-			/obj/item/chems/chem_disp_cartridge/chloral
+			/obj/item/chems/chem_disp_cartridge/sedatives
 		)
 
 /obj/machinery/chemical_dispenser/bar_soft

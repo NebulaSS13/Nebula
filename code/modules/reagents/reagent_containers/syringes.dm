@@ -321,6 +321,12 @@
 		return
 	..()
 
+/obj/item/chems/syringe/ld50_syringe/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/toxin/heartstopper, 60)
+	mode = SYRINGE_INJECT
+	update_icon()
+
 ////////////////////////////////////////////////////////////////////////////////
 /// Syringes. END
 ////////////////////////////////////////////////////////////////////////////////
@@ -364,14 +370,6 @@
 	reagents.add_reagent(/datum/reagent/psychoactives, 5)
 	reagents.add_reagent(/datum/reagent/hallucinogenics, 5)
 	reagents.add_reagent(/datum/reagent/presyncopics, 5)
-	mode = SYRINGE_INJECT
-	update_icon()
-
-/obj/item/chems/syringe/ld50_syringe/choral
-
-/obj/item/chems/syringe/ld50_syringe/choral/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/chloralhydrate, 60)
 	mode = SYRINGE_INJECT
 	update_icon()
 

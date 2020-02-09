@@ -61,6 +61,5 @@
 		/obj/item/gun/launcher/syringe/rapid,
 		/obj/item/storage/box/syringegun,
 		/obj/item/storage/box/syringes,
-		/obj/item/chems/glass/bottle/chloralhydrate,
-		/obj/item/chems/glass/bottle/stoxin
+		/obj/item/chems/glass/bottle/sedatives
 	)

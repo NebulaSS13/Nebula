@@ -72,8 +72,8 @@
 	dir = 1;
 	pixel_y = 16
 	},
-/obj/item/chems/glass/bottle/stoxin,
-/obj/item/chems/glass/bottle/stoxin,
+/obj/item/chems/glass/bottle/sedatives,
+/obj/item/chems/glass/bottle/sedatives,
 /obj/item/chems/syringe,
 /turf/unsimulated/floor{
 	dir = 2;

@@ -151,9 +151,9 @@
 	..()
 	M.sleeping += 1
 
-/datum/reagent/toxin/taxine
-	name = "taxine"
-	description = "A potent cardiotoxin found in nearly every part of the common yew."
+/datum/reagent/toxin/heartstopper
+	name = "heartstopper"
+	description = "A potent cardiotoxin that paralyzes the heart."
 	taste_description = "intense bitterness"
 	color = "#6b833b"
 	strength = 16
@@ -163,51 +163,11 @@
 	heating_point = null
 	heating_products = null
 
-/datum/reagent/toxin/taxine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/heartstopper/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.confused += 1.5
 
-/datum/reagent/toxin/taxine/overdose(var/mob/living/carbon/M, var/alien)
-	..()
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.stat != UNCONSCIOUS)
-			H.Weaken(8)
-		M.add_chemical_effect(CE_NOPULSE, 1)
-
-/datum/reagent/toxin/potassium_chloride
-	name = "potassium chloride"
-	description = "A delicious salt that stops the heart when injected into cardiac muscle."
-	taste_description = "salt"
-	color = "#ffffff"
-	strength = 0
-	overdose = REAGENTS_OVERDOSE
-	heating_point = null
-	heating_products = null
-
-/datum/reagent/toxin/potassium_chloride/overdose(var/mob/living/carbon/M, var/alien)
-	..()
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.stat != 1)
-			if(H.losebreath >= 10)
-				H.losebreath = max(10, H.losebreath - 10)
-			H.adjustOxyLoss(2)
-			H.Weaken(10)
-		M.add_chemical_effect(CE_NOPULSE, 1)
-
-
-/datum/reagent/toxin/potassium_chlorophoride
-	name = "potassium chlorophoride"
-	description = "A specific chemical based on Potassium Chloride to stop the heart for surgery. Not safe to eat!"
-	taste_description = "salt"
-	color = "#ffffff"
-	strength = 10
-	overdose = 20
-	heating_point = null
-	heating_products = null
-
-/datum/reagent/toxin/potassium_chlorophoride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/heartstopper/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M

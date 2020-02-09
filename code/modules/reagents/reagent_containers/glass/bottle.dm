@@ -95,27 +95,15 @@
 	update_icon()
 
 
-/obj/item/chems/glass/bottle/stoxin
+/obj/item/chems/glass/bottle/sedatives
 	name = "sedatives bottle"
 	desc = "A small bottle of soporific medication. Just the fumes make you sleepy."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/chems/glass/bottle/stoxin/Initialize()
+/obj/item/chems/glass/bottle/sedatives/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/sedatives, 60)
-	update_icon()
-
-
-/obj/item/chems/glass/bottle/chloralhydrate
-	name = "Chloral Hydrate Bottle"
-	desc = "A small bottle of Choral Hydrate. Mickey's Favorite!"
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle-3"
-
-/obj/item/chems/glass/bottle/chloralhydrate/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/chloralhydrate, 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
 	update_icon()
 
 

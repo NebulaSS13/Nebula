@@ -100,5 +100,5 @@
 	chem_products = list(
 				/datum/reagent/carbon = 10,
 				/datum/reagent/water = 5,
-				/datum/reagent/toxin/taxine = 0.05
+				/datum/reagent/toxin/heartstopper = 0.05
 				)

@@ -606,7 +606,7 @@
 			if(sleeping)
 				handle_dreams()
 				if (mind)
-					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
+					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of sedatives or similar.
 					if(client || sleeping > 3)
 						AdjustSleeping(-1)
 				species.handle_sleeping(src)

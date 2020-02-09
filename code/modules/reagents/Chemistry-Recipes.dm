@@ -207,35 +207,15 @@
 /datum/chemical_reaction/sedatives
 	name = "Sedatives"
 	result = /datum/reagent/sedatives
-	required_reagents = list(/datum/reagent/chloralhydrate = 1, /datum/reagent/nutriment/sugar = 4)
+	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/nutriment/sugar = 4)
 	inhibitors = list(/datum/reagent/phosphorus) // Messes with the smoke
 	result_amount = 5
-
-/datum/chemical_reaction/chloralhydrate
-	name = "Chloral Hydrate"
-	result = /datum/reagent/chloralhydrate
-	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/acid/hydrochloric = 3, /datum/reagent/water = 1)
-	result_amount = 1
 
 /datum/chemical_reaction/paralytics
 	name = "Paralytics"
 	result = /datum/reagent/paralytics
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/mercury = 2, /datum/reagent/fuel/hydrazine = 2)
 	result_amount = 1
-
-/datum/chemical_reaction/potassium_chloride
-	name = "Potassium Chloride"
-	result = /datum/reagent/toxin/potassium_chloride
-	required_reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/potassium = 1)
-	minimum_temperature = 60 CELSIUS
-	maximum_temperature = (60 CELSIUS) + 100
-	result_amount = 2
-
-/datum/chemical_reaction/potassium_chlorophoride
-	name = "Potassium Chlorophoride"
-	result = /datum/reagent/toxin/potassium_chlorophoride
-	required_reagents = list(/datum/reagent/toxin/potassium_chloride = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/chloralhydrate = 1)
-	result_amount = 4
 
 /datum/chemical_reaction/zombiepowder
 	name = "Zombie Powder"

@@ -16,7 +16,7 @@
 	var/list/available_chemicals = list()
 	var/list/upgrade_chemicals = list("Anti-Burn" = /datum/reagent/burn_meds)
 	var/list/upgrade2_chemicals = list("Anti-Rads" = /datum/reagent/entolimod)
-	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover, "Chloral Hydrate" = /datum/reagent/chloralhydrate)
+	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover)
 	var/obj/item/chems/glass/beaker = null
 	var/filtering = 0
 	var/pump

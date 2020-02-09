@@ -3424,8 +3424,8 @@
 /obj/structure/closet/medical_wall{
 	pixel_x = -32
 	},
-/obj/item/chems/glass/bottle/stoxin,
-/obj/item/chems/glass/bottle/stoxin,
+/obj/item/chems/glass/bottle/sedatives,
+/obj/item/chems/glass/bottle/sedatives,
 /obj/item/chems/syringe,
 /obj/item/tank/anesthetic,
 /obj/item/clothing/mask/breath/medical,

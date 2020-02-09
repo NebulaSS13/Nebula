@@ -91,4 +91,3 @@
 	amphetamines  spawn_reagent = /datum/reagent/amphetamines
 	antibiotics   spawn_reagent = /datum/reagent/antibiotics
 	sedatives	  spawn_reagent = /datum/reagent/sedatives
-	chloral		  spawn_reagent = /datum/reagent/chloralhydrate
