@@ -150,3 +150,72 @@
 		M.druggy = max(M.druggy, 40)
 		if(prob(15))
 			M.emote(pick("twitch", "giggle"))
+
+// Welcome back, Three Eye
+/datum/reagent/glowsap/gleam
+	name = "Gleam"
+	description = "A powerful hallucinogenic and psychotropic derived from various species of glowing mushroom. Some say it can have permanent effects on the brains of those who over-indulge."
+	color = "#ccccff"
+	metabolism = REM
+	overdose = 25
+
+	// M A X I M U M C H E E S E
+	var/global/list/dose_messages = list(
+		"Your name is called. It is your time.",
+		"You are dissolving. Your hands are wax...",
+		"It all runs together. It all mixes.",
+		"It is done. It is over. You are done. You are over.",
+		"You won't forget. Don't forget. Don't forget.",
+		"Light seeps across the edges of your vision...",
+		"Something slides and twitches within your sinus cavity...",
+		"Your bowels roil. It waits within.",
+		"Your gut churns. You are heavy with potential.",
+		"Your heart flutters. It is winged and caged in your chest.",
+		"There is a precious thing, behind your eyes.",
+		"Everything is ending. Everything is beginning.",
+		"Nothing ends. Nothing begins.",
+		"Wake up. Please wake up.",
+		"Stop it! You're hurting them!",
+		"It's too soon for this. Please go back.",
+		"We miss you. Where are you?",
+		"Come back from there. Please."
+	)
+
+	var/global/list/overdose_messages = list(
+		"THE SIGNAL THE SIGNAL THE SIGNAL THE SIGNAL",
+		"IT CRIES IT CRIES IT WAITS IT CRIES",
+		"NOT YOURS NOT YOURS NOT YOURS NOT YOURS",
+		"THAT IS NOT FOR YOU",
+		"IT RUNS IT RUNS IT RUNS IT RUNS",
+		"THE BLOOD THE BLOOD THE BLOOD THE BLOOD",
+		"THE LIGHT THE DARK A STAR IN CHAINS"
+	)
+
+/datum/reagent/glowsap/gleam/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	. = ..()
+	M.add_client_color(/datum/client_color/thirdeye)
+	M.add_chemical_effect(CE_THIRDEYE, 1)
+	M.add_chemical_effect(CE_MIND, -2)
+	M.hallucination(50, 50)
+	M.make_jittery(3)
+	M.make_dizzy(3)
+	if(prob(0.1) && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.seizure()
+		H.adjustBrainLoss(rand(8, 12))
+	if(prob(5))
+		to_chat(M, SPAN_WARNING("<font size = [rand(1,3)]>[pick(dose_messages)]</font>"))
+
+/datum/reagent/glowsap/gleam/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
+	. = ..()
+	parent.remove_client_color(/datum/client_color/thirdeye)
+
+/datum/reagent/glowsap/gleam/overdose(var/mob/living/carbon/M, var/alien)
+	M.adjustBrainLoss(rand(1, 5))
+	if(ishuman(M) && prob(10))
+		var/mob/living/carbon/human/H = M
+		H.seizure()
+	if(prob(10))
+		to_chat(M, SPAN_DANGER("<font size = [rand(2,4)]>[pick(overdose_messages)]</font>"))
+	if(M.psi)
+		M.psi.check_latency_trigger(30, "a [name] overdose")

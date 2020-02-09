@@ -162,7 +162,7 @@ About Reagents:
 			Ditto when touching.
 
 		dose
-			How much of the reagent has been processed, limited by [max_dose]. Used for reagents with varying effects (e.g. ethanol or rezadone) and overdosing.
+			How much of the reagent has been processed, limited by [max_dose]. Used for reagents with varying effects (e.g. ethanol) and overdosing.
 
 		max_dose
 			Maximum amount of reagent that has ever been in a mob. Exists so dose won't grow infinitely when small amounts of reagent are added over time.

@@ -79,7 +79,7 @@
 
 /datum/reagent/glowsap
 	name = "glowsap"
-	description = "A popular party drug for adventurous types who want to BE the glowstick. May be hallucinogenic in high doses."
+	description = "A popular party drug for adventurous types who want to BE the glowstick. Rumoured to be hallucinogenic in high doses."
 	overdose = 15
 	color = "#9eefff"
 
