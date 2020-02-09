@@ -25,7 +25,7 @@
 		/datum/reagent/sodiumchloride = /obj/item/chems/food/condiment/small/saltshaker,
 		/datum/reagent/blackpepper = /obj/item/chems/food/condiment/small/peppermill,
 		/datum/reagent/nutriment/cornoil = /obj/item/chems/food/condiment/cornoil,
-		/datum/reagent/sugar = /obj/item/chems/food/condiment/sugar,
+		/datum/reagent/nutriment/sugar = /obj/item/chems/food/condiment/sugar,
 		/datum/reagent/nutriment/mayo = /obj/item/chems/food/condiment/mayo,
 		/datum/reagent/nutriment/vinegar = /obj/item/chems/food/condiment/vinegar
 		)
@@ -125,7 +125,7 @@
 /obj/item/chems/food/condiment/sugar
 	name = "sugar"
 	desc = "Cavities in a bottle."
-	starting_reagents = list(/datum/reagent/sugar = 50)
+	starting_reagents = list(/datum/reagent/nutriment/sugar = 50)
 
 /obj/item/chems/food/condiment/ketchup
 	name = "ketchup"
@@ -190,7 +190,7 @@
 	desc = "Sweetness in a bottle"
 	icon_state = "sugarsmall"
 	center_of_mass = @"{'x':17,'y':9}"
-	starting_reagents = list(/datum/reagent/sugar = 20)
+	starting_reagents = list(/datum/reagent/nutriment/sugar = 20)
 
 //MRE condiments and drinks.
 
@@ -217,7 +217,7 @@
 	name = "sugar packet"
 	desc = "Contains 5u of refined sugar."
 	icon_state = "packet_small_white"
-	starting_reagents = list(/datum/reagent/sugar = 5)
+	starting_reagents = list(/datum/reagent/nutriment/sugar = 5)
 
 /obj/item/chems/food/condiment/small/packet/jelly
 	name = "jelly packet"
@@ -228,7 +228,7 @@
 /obj/item/chems/food/condiment/small/packet/honey
 	name = "honey packet"
 	desc = "Contains 10u of honey."
-	starting_reagents = list(/datum/reagent/sugar = 10)
+	starting_reagents = list(/datum/reagent/nutriment/sugar = 10)
 	icon_state = "packet_medium"
 
 /obj/item/chems/food/condiment/small/packet/capsaicin

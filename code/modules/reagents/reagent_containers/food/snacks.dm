@@ -3249,7 +3249,7 @@
 	bitesize = 2
 /obj/item/chems/food/snacks/spacetwinkie/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/sugar, 4)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 4)
 
 
 /obj/item/chems/food/snacks/cheesiehonkers
@@ -3405,7 +3405,7 @@
 	bitesize = 2
 /obj/item/chems/food/snacks/candy/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/sugar, 3)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 3)
 
 /obj/item/chems/food/snacks/candy/proteinbar
 	name = "protein bar"
@@ -3417,7 +3417,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 9)
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
-	reagents.add_reagent(/datum/reagent/sugar, 4)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 4)
 
 /obj/item/chems/food/snacks/candy/donor
 	name = "donor candy"
@@ -3428,7 +3428,7 @@
 /obj/item/chems/food/snacks/candy/donor/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 10)
-	reagents.add_reagent(/datum/reagent/sugar, 3)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 3)
 
 /obj/item/chems/food/snacks/candy_corn
 	name = "candy corn"
@@ -3442,7 +3442,7 @@
 /obj/item/chems/food/snacks/candy_corn/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 4)
-	reagents.add_reagent(/datum/reagent/sugar, 2)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 2)
 
 /obj/item/chems/food/snacks/chips
 	name = "chips"
@@ -3479,7 +3479,7 @@
 	bitesize = 2
 /obj/item/chems/food/snacks/chocolatebar/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/sugar, 2)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 2)
 	reagents.add_reagent(/datum/reagent/nutriment/coco, 2)
 
 /obj/item/chems/food/snacks/chocolateegg
@@ -3494,7 +3494,7 @@
 
 /obj/item/chems/food/snacks/chocolateegg/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/sugar, 2)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 2)
 	reagents.add_reagent(/datum/reagent/nutriment/coco, 2)
 
 /obj/item/chems/food/snacks/donut

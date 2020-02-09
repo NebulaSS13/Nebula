@@ -28,3 +28,13 @@
 	else if(volume > 50)
 		explosion(T,-1,1,2)
 	remove_self(volume)
+
+/datum/reagent/fuel/hydrazine
+	name = "hydrazine"
+	description = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
+	taste_description = "sweet tasting metal"
+	color = "#808080"
+	metabolism = REM * 0.2
+	touch_met = 5
+	value = 0.2
+	fuel_value = 1.2

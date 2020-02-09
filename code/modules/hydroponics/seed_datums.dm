@@ -651,7 +651,7 @@
 	seed_name = "grape"
 	display_name = "grapevines"
 	mutants = list("greengrapes")
-	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape = list(10,10))
+	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/nutriment/sugar = list(1,5), /datum/reagent/drink/juice/grape = list(10,10))
 
 /datum/seed/grapes/New()
 	..()
@@ -934,7 +934,7 @@
 	name = "whitebeet"
 	seed_name = "white-beet"
 	display_name = "white-beets"
-	chems = list(/datum/reagent/nutriment = list(0,20), /datum/reagent/sugar = list(1,5))
+	chems = list(/datum/reagent/nutriment = list(0,20), /datum/reagent/nutriment/sugar = list(1,5))
 	kitchen_tag = "whitebeet"
 
 /datum/seed/whitebeets/New()
@@ -953,7 +953,7 @@
 	name = "sugarcane"
 	seed_name = "sugarcane"
 	display_name = "sugarcanes"
-	chems = list(/datum/reagent/sugar = list(4,5))
+	chems = list(/datum/reagent/nutriment/sugar = list(4,5))
 
 /datum/seed/sugarcane/New()
 	..()
@@ -1106,7 +1106,7 @@
 	seed_name = "cherry"
 	seed_noun = SEED_NOUN_PITS
 	display_name = "cherry tree"
-	chems = list(/datum/reagent/nutriment = list(1,15), /datum/reagent/sugar = list(1,15), /datum/reagent/nutriment/cherryjelly = list(10,15))
+	chems = list(/datum/reagent/nutriment = list(1,15), /datum/reagent/nutriment/sugar = list(1,15), /datum/reagent/nutriment/cherryjelly = list(10,15))
 	kitchen_tag = "cherries"
 
 /datum/seed/cherries/New()

@@ -485,7 +485,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	heating_point = 61 CELSIUS
-	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/sugar)
+	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/nutriment/sugar)
 	value = 2
 
 /datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

@@ -994,7 +994,7 @@
 	base_type = /obj/machinery/vending/hydronutrients
 	products = list(/obj/item/chems/glass/bottle/eznutrient = 6,/obj/item/chems/glass/bottle/left4zed = 4,/obj/item/chems/glass/bottle/robustharvest = 3,/obj/item/plantspray/pests = 20,
 					/obj/item/chems/syringe = 5,/obj/item/storage/plants = 5)
-	premium = list(/obj/item/chems/glass/bottle/ammonia = 10,/obj/item/chems/glass/bottle/diethylamine = 5)
+	premium = list(/obj/item/chems/glass/bottle/ammonia = 10)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/hydronutrients/generic
@@ -1177,8 +1177,7 @@
 	icon_vend = "engi-vend"
 	base_type = /obj/machinery/vending/engineering
 	req_access = list(list(access_atmospherics,access_engine_equip))
-	products = list(/obj/item/chems/food/drinks/bottle/oiljug = 6,
-					/obj/item/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/insulated = 4, /obj/item/screwdriver = 12,
+	products = list(/obj/item/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/insulated = 4, /obj/item/screwdriver = 12,
 					/obj/item/crowbar = 12,/obj/item/wirecutters = 12,/obj/item/multitool = 12,/obj/item/wrench = 12,/obj/item/t_scanner = 12,
 					/obj/item/cell = 8, /obj/item/weldingtool = 8,/obj/item/clothing/head/welding = 8,
 					/obj/item/light/tube = 10,/obj/item/stock_parts/scanning_module = 5,/obj/item/stock_parts/micro_laser = 5,
@@ -1198,8 +1197,7 @@
 	icon_vend = "robotics-vend"
 	req_access = list(access_robotics)
 	base_type = /obj/machinery/vending/robotics
-	products = list(/obj/item/chems/food/drinks/bottle/oiljug = 5,
-					/obj/item/stack/cable_coil = 4,/obj/item/flash/synthetic = 4,/obj/item/cell = 4,/obj/item/scanner/health = 2,
+	products = list(/obj/item/stack/cable_coil = 4,/obj/item/flash/synthetic = 4,/obj/item/cell = 4,/obj/item/scanner/health = 2,
 					/obj/item/scalpel = 1,/obj/item/circular_saw = 1,/obj/item/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/screwdriver = 2,/obj/item/crowbar = 2)
 	contraband = list(/obj/item/flash = 2)

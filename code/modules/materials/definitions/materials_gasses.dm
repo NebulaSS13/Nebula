@@ -241,7 +241,7 @@
 	gas_burn_product = MAT_STEAM
 	gas_symbol_html = "H<sub>2</sub>"
 	gas_symbol = "H2"
-	chem_products = list(/datum/reagent/hydrazine = 20)
+	chem_products = list(/datum/reagent/fuel/hydrazine = 20)
 
 /material/hydrogen/tritium
 	display_name = "tritium"

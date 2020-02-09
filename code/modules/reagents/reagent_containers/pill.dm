@@ -199,7 +199,7 @@
 /obj/item/chems/pill/happy/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/space_drugs, 15)
-	reagents.add_reagent(/datum/reagent/sugar, 15)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 15)
 	color = reagents.get_color()
 
 
@@ -322,7 +322,7 @@
 /obj/item/chems/pill/sugariron/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/iron, 5)
-	reagents.add_reagent(/datum/reagent/sugar, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/sugar, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/detergent

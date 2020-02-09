@@ -138,7 +138,7 @@
 		/datum/reagent/ethanol/ale,
 		/datum/reagent/ethanol/mead,
 		/datum/reagent/water,
-		/datum/reagent/sugar,
+		/datum/reagent/nutriment/sugar,
 		/datum/reagent/drink/ice,
 		/datum/reagent/drink/tea,
 		/datum/reagent/drink/tea/icetea,

@@ -50,7 +50,7 @@
 	var/global/list/toxic_reagents = list(
 		/datum/reagent/dylovene =         -2,
 		/datum/reagent/toxin =             2,
-		/datum/reagent/hydrazine =         2.5,
+		/datum/reagent/fuel/hydrazine =         2.5,
 		/datum/reagent/acetone =	       1,
 		/datum/reagent/acid =              1.5,
 		/datum/reagent/acid/hydrochloric = 1.5,
@@ -64,7 +64,7 @@
 		/datum/reagent/drink/milk =                     0.1,
 		/datum/reagent/ethanol/beer =                   0.25,
 		/datum/reagent/phosphorus =                     0.1,
-		/datum/reagent/sugar =                          0.1,
+		/datum/reagent/nutriment/sugar =                          0.1,
 		/datum/reagent/drink/sodawater =                0.1,
 		/datum/reagent/ammonia =                        1,
 		/datum/reagent/nutriment =                      1,
@@ -74,9 +74,9 @@
 		/datum/reagent/toxin/fertilizer/left4zed =      1
 		)
 	var/global/list/weedkiller_reagents = list(
-		/datum/reagent/hydrazine =          -4,
+		/datum/reagent/fuel/hydrazine =          -4,
 		/datum/reagent/phosphorus =         -2,
-		/datum/reagent/sugar =               2,
+		/datum/reagent/nutriment/sugar =               2,
 		/datum/reagent/acid =               -2,
 		/datum/reagent/acid/hydrochloric =  -2,
 		/datum/reagent/acid/polyacid =      -4,
@@ -84,7 +84,7 @@
 		/datum/reagent/adminordrazine =     -5
 		)
 	var/global/list/pestkiller_reagents = list(
-		/datum/reagent/sugar =                 2,
+		/datum/reagent/nutriment/sugar =                 2,
 		/datum/reagent/toxin/bromide =        -2,
 		/datum/reagent/toxin/methyl_bromide = -4,
 		/datum/reagent/adminordrazine =       -5
@@ -94,7 +94,7 @@
 		/datum/reagent/adminordrazine =  1,
 		/datum/reagent/drink/milk =      0.9,
 		/datum/reagent/ethanol/beer =    0.7,
-		/datum/reagent/hydrazine =      -2,
+		/datum/reagent/fuel/hydrazine =      -2,
 		/datum/reagent/phosphorus =     -0.5,
 		/datum/reagent/water =           1,
 		/datum/reagent/drink/sodawater = 1,
@@ -103,7 +103,7 @@
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
 	var/global/list/beneficial_reagents = list(
 		/datum/reagent/ethanol/beer =                    list( -0.05, 0,   0  ),
-		/datum/reagent/hydrazine =                       list( -2,    0,   0  ),
+		/datum/reagent/fuel/hydrazine =                       list( -2,    0,   0  ),
 		/datum/reagent/phosphorus =                      list( -0.75, 0,   0  ),
 		/datum/reagent/drink/sodawater =                 list(  0.1,  0,   0  ),
 		/datum/reagent/acid =                            list( -1,    0,   0  ),

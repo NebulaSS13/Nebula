@@ -902,3 +902,6 @@ default behaviour is:
 				. = stars(text_content, 85)
 		else if(skip_delays || do_after(src, 5 SECONDS, user))
 			. = ..()
+
+/mob/living/can_be_injected_by(var/atom/injector)
+	return ..() && (can_inject(null, 0, BP_CHEST) || can_inject(null, 0, BP_GROIN))

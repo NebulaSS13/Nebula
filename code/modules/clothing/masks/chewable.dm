@@ -111,7 +111,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	slot_flags = SLOT_EARS | SLOT_MASK
 	chem_volume = 50
 	chewtime = 300
-	filling = list(/datum/reagent/sugar = 2)
+	filling = list(/datum/reagent/nutriment/sugar = 2)
 
 /obj/item/trash/cigbutt/spitgum
 	name = "old gum"
@@ -189,7 +189,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds
 	name = "medicine lollipop"
 	desc = "A sucrose sphere on a small handle, it has been infused with medication."
-	filling = list(/datum/reagent/sugar = 6)
+	filling = list(/datum/reagent/nutriment/sugar = 6)
 
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds/Initialize()
 	. = ..()
