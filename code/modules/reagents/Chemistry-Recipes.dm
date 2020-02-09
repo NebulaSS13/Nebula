@@ -1708,7 +1708,7 @@
 
 /datum/chemical_reaction/indrelbreakfast
 	name = "Indrel Breakfast"
-	result = /datum/reagent/drink/indrelbreakfast
+	result = /datum/reagent/drink/orangecola
 	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 

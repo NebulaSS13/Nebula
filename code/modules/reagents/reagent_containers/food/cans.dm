@@ -70,7 +70,7 @@
 
 /obj/item/chems/food/drinks/cans/indrelbreakfast/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/indrelbreakfast, 30)
+	reagents.add_reagent(/datum/reagent/drink/orangecola, 30)
 
 /obj/item/chems/food/drinks/cans/space_up
 	name = "\improper Space-Up"

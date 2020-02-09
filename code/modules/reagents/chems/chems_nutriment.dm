@@ -57,13 +57,13 @@
 	name = "slime-meat"
 	description = "Mollusc meat, or slug meat - something slimy, anyway."
 	scannable = 1
-	taste_description = "cold, bitter slime"
+	taste_description = "cold, bitter slime... yum!"
 	overdose = 10
 	hydration_factor = 6
 
 /datum/reagent/nutriment/slime_meat/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_YINGLET)
-		M.reagents.add_reagent(/datum/reagent/psychoactives, 0.1)
+		M.reagents.add_reagent(/datum/reagent/space_drugs, 0.1)
 
 /datum/reagent/nutriment/slime_meat/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(alien == IS_YINGLET)

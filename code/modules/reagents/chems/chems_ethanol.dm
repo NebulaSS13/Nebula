@@ -575,16 +575,15 @@
 	glass_name = "Erika Surprise"
 	glass_desc = "The surprise is, it's green!"
 
-/datum/reagent/ethanol/gargle_blaster
-	name = "Pan-Galactic Gargle Blaster"
-	description = "Whoah, this stuff looks volatile!"
-	taste_description = "your brains smashed out by a lemon wrapped around a gold brick"
+/datum/reagent/ethanol/livergeist
+	name = "The Livergeist"
+	description = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
+	taste_description = "your liver being ripped out of your body, but in the best, most delicious meaning of those words."
 	taste_mult = 5
 	color = "#7f00ff"
 	strength = 10
-
-	glass_name = "Pan-Galactic Gargle Blaster"
-	glass_desc = "Does... does this mean that Arthur and Ford are here? Oh joy."
+	glass_name = "The Livergeist"
+	glass_desc = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
 
 /datum/reagent/ethanol/gintonic
 	name = "gin and tonic"
@@ -977,12 +976,80 @@
 	glass_name = "whiskey soda"
 	glass_desc = "Ultimate refreshment."
 
-/datum/reagent/ethanol/specialwhiskey // I have no idea what this is and where it comes from
-	name = "special blend whiskey"
-	description = "Just when you thought regular whiskey was good... This silky, amber goodness has to come along and ruin everything."
-	taste_description = "liquid fire"
+/datum/reagent/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
+	name = "aged whiskey"
+	description = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
 	color = "#523600"
 	strength = 25
 
-	glass_name = "special blend whiskey"
-	glass_desc = "Just when you thought regular whiskey was good... This silky, amber goodness has to come along and ruin everything."
+	glass_name = "aged whiskey"
+	glass_desc = "A well-aged whiskey of high quality. Probably imported."
+
+/datum/reagent/ethanol/applecider
+	name = "apple cider"
+	description = "A refreshing glass of apple cider."
+	taste_description = "cool apple cider"
+	color = "#cac089"
+	strength = 50
+
+	glass_name = "apple cider"
+	glass_desc = "A refreshing glass of apple cider."
+
+/datum/reagent/ethanol/arak
+	name = "Arak"
+	description = "An unsweetened aniseed and grape mixture."
+	taste_description = "oil and licorice"
+	color = "#f7f6e0"
+	strength = 20
+
+	glass_name = "arak"
+	glass_desc = "An unsweetened mixture of aniseed and grape."
+
+/datum/reagent/ethanol/champagne
+	name = "champagne"
+	description = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
+	taste_description = "a superior taste of sparkling wine"
+	color = "#e8dfc1"
+	strength = 25
+
+	glass_name = "champagne"
+	glass_desc = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
+
+/datum/reagent/ethanol/sawbonesdismay
+	name = "Sawbones' Dismay"
+	description = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
+	taste_description = "a pick-me-up and put-me-down"
+	color = "#996862"
+	strength = 10
+
+	glass_name = "Sawbones' Dismay"
+	glass_desc = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
+
+/datum/reagent/ethanol/jagermeister
+	name = "Jagermeister"
+	description = "A special blend of alcohol, herbs, and spices. It has remained a popular Earther drink."
+	taste_description = "herbs, spices, and alcohol"
+	color = "#596e3e"
+	strength = 20
+
+	glass_name = "jagermeister"
+	glass_desc = "A special blend of alcohol, herbs, and spaces. It has remained a popular Earther drink."
+
+/datum/reagent/ethanol/kvass
+	name = "kvass"
+	description = "An alcoholic drink commonly made from bread."
+	taste_description = "vkusnyy kvas, ypa!"
+	color = "#362f22"
+	strength = 30
+
+	glass_name = "kvass"
+	glass_desc = "An alcoholic drink commonly made from bread."
+
+/datum/reagent/ethanol/vodkacola
+	name = "vodka cola"
+	description = "A refreshing mix of vodka and cola."
+	taste_description = "vodka and cola"
+	color = "#474238"
+	strength = 15
+	glass_name = "vodka cola"
+	glass_desc = "A refreshing mix of vodka and cola."
