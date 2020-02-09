@@ -27,7 +27,7 @@
 	random_reagent_list = list(
 		list(/datum/reagent/hallucinogenics = 10, /datum/reagent/psychoactives = 20) = 3,
 		list(/datum/reagent/toxin/carpotoxin = 15)                             = 2,
-		list(/datum/reagent/impedrezene = 15)                                  = 2,
+		list(/datum/reagent/narcotics = 15)                                  = 2,
 		list(/datum/reagent/toxin/zombiepowder = 10)                           = 1)
 
 /obj/item/chems/glass/beaker/vial/random/Initialize()

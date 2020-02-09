@@ -203,4 +203,4 @@
 	starting_chems = list(/datum/reagent/burn_meds,/datum/reagent/brute_meds,/datum/reagent/antitoxins)
 
 /obj/item/gun/projectile/dartgun/vox/raider
-	starting_chems = list(/datum/reagent/psychoactives,/datum/reagent/sedatives,/datum/reagent/impedrezene)
+	starting_chems = list(/datum/reagent/psychoactives,/datum/reagent/sedatives,/datum/reagent/narcotics)

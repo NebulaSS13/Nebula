@@ -144,9 +144,9 @@
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/impedrezene
-	name = "Impedrezene"
-	result = /datum/reagent/impedrezene
+/datum/chemical_reaction/narcotics
+	name = "Narcotics"
+	result = /datum/reagent/narcotics
 	required_reagents = list(/datum/reagent/mercury = 1, /datum/reagent/acetone = 1, /datum/reagent/nutriment/sugar = 1)
 	result_amount = 2
 

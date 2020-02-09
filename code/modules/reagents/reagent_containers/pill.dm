@@ -199,7 +199,7 @@
 	icon_state = "pill4"
 /obj/item/chems/pill/zoom/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/impedrezene, 10)
+	reagents.add_reagent(/datum/reagent/narcotics, 10)
 	reagents.add_reagent(/datum/reagent/synaptizine, 5)
 	reagents.add_reagent(/datum/reagent/amphetamines, 5)
 	color = reagents.get_color()

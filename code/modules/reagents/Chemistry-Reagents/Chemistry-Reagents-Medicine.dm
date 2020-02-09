@@ -141,20 +141,3 @@
 	var/drug_strength = 4
 	M.make_dizzy(drug_strength)
 	M.confused = max(M.confused, drug_strength * 5)
-
-/datum/reagent/impedrezene
-	name = "Impedrezene"
-	description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
-	taste_description = "numbness"
-	color = "#c8a5dc"
-	overdose = REAGENTS_OVERDOSE
-	value = 1.8
-
-/datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.jitteriness = max(M.jitteriness - 5, 0)
-	if(prob(80))
-		M.adjustBrainLoss(5.25 * removed)
-	if(prob(50))
-		M.drowsyness = max(M.drowsyness, 3)
-	if(prob(10))
-		M.emote("drool")
