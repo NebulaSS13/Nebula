@@ -224,13 +224,13 @@
 	reagents.add_reagent(/datum/reagent/three_eye, 10)
 	color = reagents.get_color()
 
-/obj/item/chems/pill/spaceacillin
-	name = "Spaceacillin (10u)"
+/obj/item/chems/pill/antibiotics
+	name = "antibiotics (10u)"
 	desc = "Contains antiviral agents."
 	icon_state = "pill3"
-/obj/item/chems/pill/spaceacillin/Initialize()
+/obj/item/chems/pill/antibiotics/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/spaceacillin, 10)
+	reagents.add_reagent(/datum/reagent/antibiotics, 10)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/noexcutite

@@ -154,7 +154,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
 	var/virus_immunity = owner.virus_immunity() //reduces the amount of times we need to call this proc
-	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/spaceacillin)
+	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/antibiotics)
 
 	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(virus_immunity*0.3))
 		germ_level--

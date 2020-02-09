@@ -43,7 +43,7 @@
 			/obj/item/chems/chem_disp_cartridge/brute_meds,
 			/obj/item/chems/chem_disp_cartridge/stimulants,
 			/obj/item/chems/chem_disp_cartridge/rezadone,
-			/obj/item/chems/chem_disp_cartridge/spaceacillin,
+			/obj/item/chems/chem_disp_cartridge/antibiotics,
 			/obj/item/chems/chem_disp_cartridge/sleeptox,
 			/obj/item/chems/chem_disp_cartridge/chloral
 		)

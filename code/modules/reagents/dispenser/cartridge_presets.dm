@@ -94,6 +94,6 @@
 	brute_meds	spawn_reagent = /datum/reagent/brute_meds
 	stimulants  spawn_reagent = /datum/reagent/stimulants
 	rezadone	spawn_reagent = /datum/reagent/rezadone
-	spaceacillin spawn_reagent = /datum/reagent/spaceacillin
+	antibiotics spawn_reagent = /datum/reagent/antibiotics
 	sleeptox	spawn_reagent = /datum/reagent/soporific
 	chloral		spawn_reagent = /datum/reagent/chloralhydrate

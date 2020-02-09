@@ -109,7 +109,7 @@
 		/obj/item/storage/pill_bottle/dexalin_plus,
 		/obj/item/storage/pill_bottle/antitoxins,
 		/obj/item/storage/pill_bottle/painkillers,
-		/obj/item/storage/pill_bottle/spaceacillin,
+		/obj/item/storage/pill_bottle/antibiotics,
 		/obj/item/stack/medical/splint,
 		)
 
@@ -282,11 +282,11 @@
 	startswith = list(/obj/item/chems/pill/burn_meds = 21)
 	wrapper_color = COLOR_SUN
 
-/obj/item/storage/pill_bottle/spaceacillin
-	name = "pill bottle (Spaceacillin)"
+/obj/item/storage/pill_bottle/antibiotics
+	name = "pill bottle (antibiotics)"
 	desc = "A theta-lactam antibiotic. Effective against many diseases likely to be encountered in space."
 
-	startswith = list(/obj/item/chems/pill/spaceacillin = 14)
+	startswith = list(/obj/item/chems/pill/antibiotics = 14)
 	wrapper_color = COLOR_PALE_GREEN_GRAY
 
 /obj/item/storage/pill_bottle/painkillers

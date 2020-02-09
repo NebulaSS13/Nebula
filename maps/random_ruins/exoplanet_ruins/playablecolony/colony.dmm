@@ -2443,7 +2443,7 @@
 /obj/item/scanner/health,
 /obj/item/storage/pill_bottle/painkillers,
 /obj/item/storage/pill_bottle/painkillers,
-/obj/item/storage/pill_bottle/spaceacillin,
+/obj/item/storage/pill_bottle/antibiotics,
 /obj/item/storage/pill_bottle/antidexafen,
 /obj/item/chems/glass/beaker/large,
 /turf/simulated/floor/tiled/white,

@@ -143,8 +143,8 @@
 		M.dna.ResetSE()
 		domutcheck(M, null, MUTCHK_FORCED)
 
-/datum/reagent/spaceacillin
-	name = "Spaceacillin"
+/datum/reagent/antibiotics
+	name = "antibiotics"
 	description = "An all-purpose antiviral agent."
 	taste_description = "bitterness"
 	color = "#c1c1c1"
@@ -153,7 +153,7 @@
 	scannable = 1
 	value = 2.5
 
-/datum/reagent/spaceacillin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/antibiotics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.immunity = max(M.immunity - 0.1, 0)
 	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
 	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
@@ -163,7 +163,7 @@
 	if(M.chem_doses[type] > 15)
 		M.immunity = max(M.immunity - 0.25, 0)
 
-/datum/reagent/spaceacillin/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/antibiotics/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.immunity = max(M.immunity - 0.25, 0)
 	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)

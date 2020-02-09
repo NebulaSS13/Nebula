@@ -177,7 +177,7 @@
 		/obj/item/chems/dropper = 2,
 		/obj/item/chems/glass/beaker = 2,
 		/obj/item/chems/glass/bottle/inaprovaline,
-		/obj/item/storage/pill_bottle/spaceacillin,
+		/obj/item/storage/pill_bottle/antibiotics,
 		/obj/item/chems/syringe/antiviral,
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/storage/box/masks,

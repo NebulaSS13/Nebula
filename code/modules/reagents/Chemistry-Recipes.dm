@@ -226,9 +226,9 @@
 	maximum_temperature = -25 CELSIUS
 	mix_message = "The solution becomes a metallic slime."
 
-/datum/chemical_reaction/spaceacillin
-	name = "Spaceacillin"
-	result = /datum/reagent/spaceacillin
+/datum/chemical_reaction/antibiotics
+	name = "Antibiotics"
+	result = /datum/reagent/antibiotics
 	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/inaprovaline = 1)
 	result_amount = 2
 

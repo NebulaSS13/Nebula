@@ -149,7 +149,7 @@
 		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      80),
 		list("antitoxins",      "antitoxins",      /datum/reagent/antitoxins,          80),
 		list("entolimod",     "entolimod",     /datum/reagent/entolimod,         80),
-		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      80),
+		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,      80),
 		list("painkillers",   "painkillers",      /datum/reagent/painkillers,          80)
 		)
 
@@ -166,7 +166,7 @@
 		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
 		list("entolimod",     "entolimod",     /datum/reagent/entolimod,         20),
 		list("regenerative",  "regenerative",  /datum/reagent/burn_meds,         20),
-		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      20),
+		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,      20),
 		list("painkillers",   "painkillers",   /datum/reagent/painkillers,       20)
 		)
 

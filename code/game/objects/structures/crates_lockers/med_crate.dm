@@ -23,7 +23,7 @@
 		/obj/item/stack/medical/advanced/ointment = 10,
 		/obj/item/storage/pill_bottle/burn_meds,
 		/obj/item/storage/pill_bottle/painkillers = 2,
-		/obj/item/storage/pill_bottle/spaceacillin
+		/obj/item/storage/pill_bottle/antibiotics
 	)
 
 /obj/structure/closet/crate/med_crate/oxyloss
