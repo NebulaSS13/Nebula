@@ -773,7 +773,6 @@
 					/obj/item/storage/mre/random = 8,
 					/obj/item/storage/mre/menu9 = 4,
 					/obj/item/storage/mre/menu10 = 4,
-					/obj/item/chems/pill/diet = 8,
 					/obj/item/towel/random = 8)
 
 	prices = list(/obj/item/chems/food/drinks/milk/smallcarton = 3,
@@ -785,7 +784,6 @@
 					/obj/item/storage/mre/random = 50,
 					/obj/item/storage/mre/menu9 = 50,
 					/obj/item/storage/mre/menu10 = 50,
-					/obj/item/chems/pill/diet = 25,
 					/obj/item/towel/random = 40)
 
 	contraband = list(/obj/item/chems/syringe/steroid = 4)

@@ -1,5 +1,4 @@
 /* Food */
-
 /datum/reagent/nutriment
 	name = "nutriment"
 	description = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
@@ -129,9 +128,9 @@
 
 //vegetamarian alternative that is safe for vegans to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
 
-/datum/reagent/nutriment/softtofu
+/datum/reagent/nutriment/plant_protein
 	name = "plant protein"
-	description = "A gooey pale bean paste."
+	description = "A gooey pale paste."
 	taste_description = "healthy sadness"
 	color = "#ffffff"
 
@@ -307,18 +306,7 @@
 	color = "#302000"
 
 /datum/reagent/nutriment/cornoil/touch_turf(var/turf/simulated/T)
-	if(!istype(T))
-		return
-
-	var/hotspot = (locate(/obj/fire) in T)
-	if(hotspot && !istype(T, /turf/space))
-		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
-		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
-		lowertemp.react()
-		T.assume_air(lowertemp)
-		qdel(hotspot)
-
-	if(volume >= 3)
+	if(istype(T) && volume >= 3)
 		T.wet_floor()
 
 /datum/reagent/nutriment/sprinkles
@@ -334,19 +322,7 @@
 	taste_description = "sweet mint"
 	color = "#07aab2"
 
-/datum/reagent/lipozine // The anti-nutriment.
-	name = "lipozine"
-	description = "A chemical compound that causes a powerful fat-burning reaction."
-	taste_description = "mothballs"
-	color = "#bbeda4"
-	overdose = REAGENTS_OVERDOSE
-	value = 0.11
-
-/datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjust_nutrition(-10)
-
 /* Non-food stuff like condiments */
-
 /datum/reagent/sodiumchloride
 	name = "table salt"
 	description = "A salt made of sodium chloride. Commonly used to season food."

@@ -378,7 +378,7 @@
 
 /obj/item/chems/food/snacks/tofu/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/softtofu, 6)
+	reagents.add_reagent(/datum/reagent/nutriment/plant_protein, 6)
 
 /obj/item/chems/food/snacks/tofurkey
 	name = "\improper Tofurkey"

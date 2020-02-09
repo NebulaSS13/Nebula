@@ -233,17 +233,6 @@
 	reagents.add_reagent(/datum/reagent/spaceacillin, 10)
 	color = reagents.get_color()
 
-
-/obj/item/chems/pill/diet
-	name = "diet pill"
-	desc = "Guaranteed to get you slim!"
-	icon_state = "pill4"
-/obj/item/chems/pill/diet/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/lipozine, 2)
-	color = reagents.get_color()
-
-
 /obj/item/chems/pill/noexcutite
 	name = "Noexcutite (15u)"
 	desc = "Feeling jittery? This should calm you down."

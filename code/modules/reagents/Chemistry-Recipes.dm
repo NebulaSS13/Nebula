@@ -317,12 +317,6 @@
 	minimum_temperature = 75 CELSIUS
 	maximum_temperature = (75 CELSIUS) + 25
 
-/datum/chemical_reaction/lipozine
-	name = "Lipozine"
-	result = /datum/reagent/lipozine
-	required_reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/ethanol = 1, /datum/reagent/radium = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/surfactant
 	name = "Azosurfactant"
 	result = /datum/reagent/surfactant
@@ -1195,7 +1189,7 @@
 /datum/chemical_reaction/soydough
 	name = "Soy dough"
 	result = null
-	required_reagents = list(/datum/reagent/nutriment/softtofu = 3, /datum/reagent/nutriment/flour = 10, /datum/reagent/water = 10)
+	required_reagents = list(/datum/reagent/nutriment/plant_protein = 3, /datum/reagent/nutriment/flour = 10, /datum/reagent/water = 10)
 	result_amount = 1
 	mix_message = "The solution folds and thickens into a large ball of dough."
 
@@ -1224,7 +1218,7 @@
 /datum/chemical_reaction/soybatter
 	name = "Vegan Batter"
 	result = /datum/reagent/nutriment/batter
-	required_reagents = list(/datum/reagent/nutriment/softtofu = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk = 5)
+	required_reagents = list(/datum/reagent/nutriment/plant_protein = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk = 5)
 	result_amount = 10
 	mix_message = "The solution thickens into a glossy batter."
 
