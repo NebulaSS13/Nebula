@@ -550,7 +550,7 @@
 	startswith = list(/obj/item/chems/food/drinks/cans/dr_gibb = 7)
 
 /obj/item/storage/box/cola/starkist
-	startswith = list(/obj/item/chems/food/drinks/cans/starkist = 7)
+	startswith = list(/obj/item/chems/food/drinks/cans/indrelbreakfast = 7)
 
 /obj/item/storage/box/cola/spaceup
 	startswith = list(/obj/item/chems/food/drinks/cans/space_up = 7)

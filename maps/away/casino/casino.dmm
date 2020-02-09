@@ -4701,7 +4701,7 @@
 /area/casino/casino_patron_bathroom)
 "mj" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/drinks/bottle/specialwhiskey,
+/obj/item/chems/food/drinks/bottle/dinnishfirewater,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
 /obj/item/flame/lighter/zippo/random,

@@ -62,14 +62,15 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/cherrycola, 30)
 
-/obj/item/chems/food/drinks/cans/starkist
-	name = "\improper Star-kist"
-	desc = "The taste of a star in liquid form. And, a bit of tuna...?"
+/obj/item/chems/food/drinks/cans/indrelbreakfast
+	name = "\improper Indrel Breakfast"
+	desc = "It's not what it sounds like, but it sure looks like it. Can you taste a bit of tuna...?"
 	icon_state = "starkist"
 	center_of_mass = @"{'x':16,'y':10}"
-/obj/item/chems/food/drinks/cans/starkist/Initialize()
+
+/obj/item/chems/food/drinks/cans/indrelbreakfast/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/brownstar, 30)
+	reagents.add_reagent(/datum/reagent/drink/indrelbreakfast, 30)
 
 /obj/item/chems/food/drinks/cans/space_up
 	name = "\improper Space-Up"
@@ -192,7 +193,7 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/sodawater, 15)
 	reagents.add_reagent(pick(list(
-				/datum/reagent/drink/kiraspecial,
+				/datum/reagent/drink/citrusseltzer,
 				/datum/reagent/drink/juice/grape,
 				/datum/reagent/drink/juice/orange,
 				/datum/reagent/drink/juice/lemon,

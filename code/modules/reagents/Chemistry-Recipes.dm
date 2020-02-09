@@ -1642,10 +1642,10 @@
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled cafe latte."
 
-/datum/chemical_reaction/nuka_cola
-	name = "Nuka Cola"
-	result = /datum/reagent/drink/nuka_cola
-	required_reagents = list(/datum/reagent/uranium = 1, /datum/reagent/drink/cola = 5)
+/datum/chemical_reaction/mutagen_cola
+	name = "Mutagen Cola"
+	result = /datum/reagent/drink/mutagencola
+	required_reagents = list(/datum/reagent/mutagen = 1, /datum/reagent/drink/cola = 5)
 	result_amount = 5
 	mix_message = "The solution bubbles and emits an eerie green glow."
 
@@ -1784,10 +1784,10 @@
 	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/tomato = 3, /datum/reagent/drink/juice/lime = 1)
 	result_amount = 6
 
-/datum/chemical_reaction/gargle_blaster
-	name = "Pan-Galactic Gargle Blaster"
-	result = /datum/reagent/ethanol/gargle_blaster
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/specialwhiskey = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/juice/lime = 1)
+/datum/chemical_reaction/livergeist
+	name = "The Livergeist"
+	result = /datum/reagent/ethanol/livergeist
+	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/aged_whiskey = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/juice/lime = 1)
 	result_amount = 6
 
 /datum/chemical_reaction/brave_bull
@@ -2096,7 +2096,7 @@
 /datum/chemical_reaction/aloe
 	name = "Aloe"
 	result = /datum/reagent/ethanol/aloe
-	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/specialwhiskey = 1, /datum/reagent/drink/juice/watermelon = 1)
+	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/aged_whiskey = 1, /datum/reagent/drink/juice/watermelon = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/andalusia
@@ -2108,7 +2108,7 @@
 /datum/chemical_reaction/neurotoxin
 	name = "Neurotoxin"
 	result = /datum/reagent/ethanol/neurotoxin
-	required_reagents = list(/datum/reagent/ethanol/gargle_blaster = 1, /datum/reagent/soporific = 1)
+	required_reagents = list(/datum/reagent/ethanol/livergeist = 1, /datum/reagent/soporific = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/snowwhite
@@ -2144,7 +2144,7 @@
 /datum/chemical_reaction/hippiesdelight
 	name = "Hippies Delight"
 	result = /datum/reagent/ethanol/hippies_delight
-	required_reagents = list(/datum/reagent/psilocybin = 1, /datum/reagent/ethanol/gargle_blaster = 1)
+	required_reagents = list(/datum/reagent/psilocybin = 1, /datum/reagent/ethanol/livergeist = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/bananahonk
@@ -2171,15 +2171,15 @@
 	required_reagents = list(/datum/reagent/drink/juice/lemon = 1, /datum/reagent/sugar = 1, /datum/reagent/water = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/kiraspecial
-	name = "Kira Special"
-	result = /datum/reagent/drink/kiraspecial
+/datum/chemical_reaction/citrusseltzer
+	name = "Citrus Seltzer"
+	result = /datum/reagent/drink/citrusseltzer
 	required_reagents = list(/datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/sodawater = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/brownstar
-	name = "Brown Star"
-	result = /datum/reagent/drink/brownstar
+/datum/chemical_reaction/indrelbreakfast
+	name = "Indrel Breakfast"
+	result = /datum/reagent/drink/indrelbreakfast
 	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3
 
@@ -2538,9 +2538,9 @@
 	maximum_temperature = 0 CELSIUS
 	mix_message = "The aniseed ferments into a translucent white mixture"
 
-/datum/chemical_reaction/jagerbomb
-	name = "Jagerbomb"
-	result = /datum/reagent/ethanol/jagerbomb
+/datum/chemical_reaction/sawbonesdismay
+	name = "Sawbones' Dismay"
+	result = /datum/reagent/ethanol/sawbonesdismay
 	required_reagents = list(/datum/reagent/drink/beastenergy = 1, /datum/reagent/ethanol/jagermeister = 2)
 	result_amount = 3
 
