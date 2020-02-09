@@ -1174,7 +1174,7 @@
 /datum/chemical_reaction/mutagen_cola
 	name = "Mutagen Cola"
 	result = /datum/reagent/drink/mutagencola
-	required_reagents = list(/datum/reagent/mutagen = 1, /datum/reagent/drink/cola = 5)
+	required_reagents = list(/datum/reagent/mutagenics = 1, /datum/reagent/drink/cola = 5)
 	result_amount = 5
 	mix_message = "The solution bubbles and emits an eerie green glow."
 

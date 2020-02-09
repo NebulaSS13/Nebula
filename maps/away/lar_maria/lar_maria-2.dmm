@@ -1031,7 +1031,6 @@
 /area/lar_maria/library)
 "cw" = (
 /obj/structure/bookcase,
-/obj/item/book/manual/medical_cloning,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cx" = (
