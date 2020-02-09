@@ -68,3 +68,19 @@
 /datum/reagent/burn_meds/affect_touch(mob/living/carbon/M, alien, removed)
 	M.heal_organ_damage(0, 6 * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
+
+/datum/reagent/adminordrazine //An OP chemical for admins
+	name = "Adminordrazine"
+	description = "It's magic. We don't have to explain it."
+	taste_description = "100% abuse"
+	color = "#c8a5dc"
+	flags = AFFECTS_DEAD //This can even heal dead people.
+
+	glass_name = "liquid gold"
+	glass_desc = "It's magic. We don't have to explain it."
+
+/datum/reagent/adminordrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M, alien, removed)
+
+/datum/reagent/adminordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.rejuvenate()

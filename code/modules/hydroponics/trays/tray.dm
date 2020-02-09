@@ -67,7 +67,6 @@
 		/datum/reagent/sugar =                          0.1,
 		/datum/reagent/drink/sodawater =                0.1,
 		/datum/reagent/ammonia =                        1,
-		/datum/reagent/diethylamine =                   2,
 		/datum/reagent/nutriment =                      1,
 		/datum/reagent/adminordrazine =                 1,
 		/datum/reagent/toxin/fertilizer/eznutrient =    1,
@@ -86,7 +85,6 @@
 		)
 	var/global/list/pestkiller_reagents = list(
 		/datum/reagent/sugar =                 2,
-		/datum/reagent/diethylamine =         -2,
 		/datum/reagent/toxin/bromide =        -2,
 		/datum/reagent/toxin/methyl_bromide = -4,
 		/datum/reagent/adminordrazine =       -5
@@ -114,7 +112,6 @@
 		/datum/reagent/toxin/plantbgone =                list( -2,    0,   0.2),
 		/datum/reagent/cryoxadone =                      list(  3,    0,   0  ),
 		/datum/reagent/ammonia =                         list(  0.5,  0,   0  ),
-		/datum/reagent/diethylamine =                    list(  1,    0,   0  ),
 		/datum/reagent/nutriment =                       list(  0.5,  0.1, 0  ),
 		/datum/reagent/radium =                          list( -1.5,  0,   0.2),
 		/datum/reagent/adminordrazine =                  list(  1,    1,   1  ),

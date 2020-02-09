@@ -102,7 +102,7 @@
 
 /obj/item/chems/spray/cleaner/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/space_cleaner, volume)
+	reagents.add_reagent(/datum/reagent/cleaner, volume)
 
 /obj/item/chems/spray/sterilizine
 	name = "sterilizine"

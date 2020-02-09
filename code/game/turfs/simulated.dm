@@ -1,18 +1,13 @@
 /turf/simulated
 	name = "station"
+	initial_gas = list(MAT_OXYGEN = MOLES_O2STANDARD, MAT_NITROGEN = MOLES_N2STANDARD)
 	var/wet = 0
 	var/image/wet_overlay = null
-
-	//Mining resources (for the large drills).
-	var/has_resources
+	var/has_resources //Mining resources (for the large drills).
 	var/list/resources
-
-	var/thermite = 0
-	initial_gas = list(MAT_OXYGEN = MOLES_O2STANDARD, MAT_NITROGEN = MOLES_N2STANDARD)
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
-
 	var/timer_id
 
 // This is not great.

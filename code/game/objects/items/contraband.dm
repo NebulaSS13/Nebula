@@ -21,7 +21,7 @@
 
 /obj/item/chems/glass/beaker/vial/random
 	atom_flags = 0
-	var/list/random_reagent_list = list(list(/datum/reagent/water = 15) = 1, list(/datum/reagent/space_cleaner = 15) = 1)
+	var/list/random_reagent_list = list(list(/datum/reagent/water = 15) = 1, list(/datum/reagent/cleaner = 15) = 1)
 
 /obj/item/chems/glass/beaker/vial/random/toxin
 	random_reagent_list = list(

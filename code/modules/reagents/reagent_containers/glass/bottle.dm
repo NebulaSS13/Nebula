@@ -191,19 +191,6 @@
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/robustharvest, 60)
 	update_icon()
 
-
-/obj/item/chems/glass/bottle/diethylamine
-	name = "diethylamine bottle"
-	desc = "A small bottle."
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle-4"
-
-/obj/item/chems/glass/bottle/diethylamine/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/diethylamine, 60)
-	update_icon()
-
-
 /obj/item/chems/glass/bottle/pacid
 	name = "Polytrinic Acid Bottle"
 	desc = "A small bottle. Contains a small amount of Polytrinic Acid."

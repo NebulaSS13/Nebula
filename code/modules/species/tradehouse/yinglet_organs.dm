@@ -8,14 +8,9 @@
 	var/global/list/gains_nutriment_from_inedible_reagents = list(
 		/datum/reagent/woodpulp =      3,
 		/datum/reagent/anfo/plus =     2,
-		/datum/reagent/ultraglue =     1,
 		/datum/reagent/anfo =          1,
-		/datum/reagent/coolant =       1,
 		/datum/reagent/lube =          1,
-		/datum/reagent/lube/oil =      1,
-		/datum/reagent/space_cleaner = 1,
-		/datum/reagent/napalm =        1,
-		/datum/reagent/thermite =      1,
+		/datum/reagent/cleaner =       1,
 		/datum/reagent/foaming_agent = 1,
 		/datum/reagent/surfactant =    1,
 		/datum/reagent/paint =         1

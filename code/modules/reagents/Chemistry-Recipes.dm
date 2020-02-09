@@ -109,13 +109,6 @@
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/phosphorus = 1, /datum/reagent/acid/hydrochloric = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/thermite
-	name = "Thermite"
-	result = /datum/reagent/thermite
-	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/iron = 1, /datum/reagent/acetone = 1)
-	result_amount = 3
-	mix_message = "The solution thickens into a coarse metallic paste."
-
 /datum/chemical_reaction/space_drugs
 	name = "Space Drugs"
 	result = /datum/reagent/space_drugs
@@ -337,15 +330,9 @@
 	result_amount = 5
 	mix_message = "The solution begins to foam gently."
 
-/datum/chemical_reaction/diethylamine
-	name = "Diethylamine"
-	result = /datum/reagent/diethylamine
-	required_reagents = list (/datum/reagent/ammonia = 1, /datum/reagent/ethanol = 1)
-	result_amount = 2
-
 /datum/chemical_reaction/space_cleaner
 	name = "Space cleaner"
-	result = /datum/reagent/space_cleaner
+	result = /datum/reagent/cleaner
 	required_reagents = list(/datum/reagent/ammonia = 1, /datum/reagent/water = 1)
 	result_amount = 2
 
@@ -362,12 +349,6 @@
 	result_amount = 1
 	mix_message = "The solution begins to foam vigorously."
 
-/datum/chemical_reaction/glycerol
-	name = "Glycerol"
-	result = /datum/reagent/glycerol
-	required_reagents = list(/datum/reagent/nutriment/cornoil = 3, /datum/reagent/acid = 1)
-	result_amount = 1
-
 /datum/chemical_reaction/sodiumchloride
 	name = "Sodium Chloride"
 	result = /datum/reagent/sodiumchloride
@@ -380,14 +361,6 @@
 	required_reagents = list(/datum/reagent/capsaicin = 2)
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
-
-/datum/chemical_reaction/coolant
-	name = "Coolant"
-	result = /datum/reagent/coolant
-	required_reagents = list(/datum/reagent/tungsten = 1, /datum/reagent/acetone = 1, /datum/reagent/water = 1)
-	result_amount = 3
-	log_is_important = 1
-	mix_message = "The solution becomes thick and slightly slimy."
 
 /datum/chemical_reaction/rezadone
 	name = "Rezadone"
@@ -538,25 +511,6 @@
 	empulse(location, round(created_volume / 24), round(created_volume / 14), 1)
 	holder.clear_reagents()
 
-/datum/chemical_reaction/nitroglycerin
-	name = "Nitroglycerin"
-	result = /datum/reagent/nitroglycerin
-	required_reagents = list(/datum/reagent/glycerol = 1, /datum/reagent/acid/polyacid = 1, /datum/reagent/acid = 1)
-	result_amount = 2
-	log_is_important = 1
-
-/datum/chemical_reaction/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	..()
-	var/datum/effect/effect/system/reagents_explosion/e = new()
-	e.set_up(round (created_volume/2, 1), holder.my_atom, 0, 0)
-	if(isliving(holder.my_atom))
-		e.amount *= 0.5
-		var/mob/living/L = holder.my_atom
-		if(L.stat!=DEAD)
-			e.amount *= 0.5
-	e.start()
-	holder.clear_reagents()
-
 /datum/chemical_reaction/phlogiston
 	name = "Phlogiston"
 	result = null
@@ -570,20 +524,6 @@
 	for(var/turf/simulated/floor/target_tile in range(0,location))
 		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
-
-/datum/chemical_reaction/napalm
-	name = "Napalm"
-	result = /datum/reagent/napalm
-	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
-	result_amount = 2
-	mix_message = "The solution thickens and takes on a slimy sheen."
-
-/datum/chemical_reaction/napalmb
-	name = "Napalm B"
-	result = /datum/reagent/napalm
-	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/fuel = 1 )
-	result_amount = 2
-	mix_message = "The solution thickens and takes on a slimy sheen."
 
 /datum/chemical_reaction/chemsmoke
 	name = "Chemsmoke"
@@ -895,13 +835,6 @@
 	P.amount = 10
 
 //Red
-/datum/chemical_reaction/slime/glycerol
-	name = "Slime Glycerol"
-	result = /datum/reagent/glycerol
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
-	result_amount = 8
-	required = /obj/item/slime_extract/red
-
 /datum/chemical_reaction/slime/bloodlust
 	name = "Bloodlust"
 	result = null
@@ -1042,7 +975,7 @@
 /datum/chemical_reaction/soap_key
 	name = "Soap Key"
 	result = null
-	required_reagents = list(/datum/reagent/frostoil = 2, /datum/reagent/space_cleaner = 5)
+	required_reagents = list(/datum/reagent/frostoil = 2, /datum/reagent/cleaner = 5)
 	var/strength = 3
 
 /datum/chemical_reaction/soap_key/can_happen(var/datum/reagents/holder)
