@@ -1850,6 +1850,23 @@
 	result_amount = 20
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
+// psi-altering drug
+/datum/chemical_reaction/gleam
+	name = "Gleam"
+	result = /datum/reagent/glowsap/gleam
+	result_amount = 2
+	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
+	minimum_temperature = 40 CELSIUS
+	reaction_sound = 'sound/effects/psi/power_used.ogg'
+	hidden_from_codex = TRUE
+	catalysts = list(
+		/datum/reagent/enzyme = 1
+	)
+	required_reagents = list(
+		/datum/reagent/hallucinogenics = 2,
+		/datum/reagent/glowsap = 2
+	)
+
 // tea expansion pack content - black tea drinks
 /datum/chemical_reaction/icetea
 	name = "Iced Tea"

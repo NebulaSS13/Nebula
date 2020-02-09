@@ -205,6 +205,16 @@
 	reagents.add_reagent(/datum/reagent/amphetamines, 5)
 	color = reagents.get_color()
 
+/obj/item/chems/pill/gleam
+	name = "strange pill"
+	desc = "The surface of this unlabelled pill crawls against your skin."
+	icon_state = "pill2"
+
+/obj/item/chems/pill/gleam/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/glowsap/gleam, 10)
+	color = reagents.get_color()
+
 /obj/item/chems/pill/antibiotics
 	name = "antibiotics (10u)"
 	desc = "Contains antiviral agents."
