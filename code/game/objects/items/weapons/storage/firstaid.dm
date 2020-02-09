@@ -28,7 +28,7 @@
 		/obj/item/stack/medical/bruise_pack = 2,
 		/obj/item/stack/medical/ointment = 2,
 		/obj/item/storage/pill_bottle/antidexafen,
-		/obj/item/storage/pill_bottle/paracetamol,
+		/obj/item/storage/pill_bottle/painkillers,
 		/obj/item/stack/medical/splint
 		)
 
@@ -104,11 +104,11 @@
 	item_state = "firstaid-advanced"
 
 	startswith = list(
-		/obj/item/storage/pill_bottle/bicaridine,
-		/obj/item/storage/pill_bottle/dermaline,
+		/obj/item/storage/pill_bottle/brute_meds,
+		/obj/item/storage/pill_bottle/burn_meds,
 		/obj/item/storage/pill_bottle/dexalin_plus,
 		/obj/item/storage/pill_bottle/dylovene,
-		/obj/item/storage/pill_bottle/tramadol,
+		/obj/item/storage/pill_bottle/painkillers,
 		/obj/item/storage/pill_bottle/spaceacillin,
 		/obj/item/stack/medical/splint,
 		)
@@ -240,11 +240,11 @@
 	startswith = list(/obj/item/chems/pill/antitox = 21)
 	wrapper_color = COLOR_GREEN
 
-/obj/item/storage/pill_bottle/bicaridine
-	name = "pill bottle (Bicaridine)"
+/obj/item/storage/pill_bottle/brute_meds
+	name = "pill bottle (styptic)"
 	desc = "Contains pills used to stabilize the severely injured."
 
-	startswith = list(/obj/item/chems/pill/bicaridine = 21)
+	startswith = list(/obj/item/chems/pill/brute_meds = 21)
 	wrapper_color = COLOR_MAROON
 
 /obj/item/storage/pill_bottle/dexalin_plus
@@ -261,13 +261,6 @@
 	startswith = list(/obj/item/chems/pill/dexalin = 21)
 	wrapper_color = COLOR_LIGHT_CYAN
 
-/obj/item/storage/pill_bottle/dermaline
-	name = "pill bottle (Dermaline)"
-	desc = "Contains pills used to treat burn wounds."
-
-	startswith = list(/obj/item/chems/pill/dermaline = 14)
-	wrapper_color = "#e8d131"
-
 /obj/item/storage/pill_bottle/dylovene
 	name = "pill bottle (Dylovene)"
 	desc = "Contains pills used to treat toxic substances in the blood."
@@ -282,11 +275,11 @@
 	startswith = list(/obj/item/chems/pill/inaprovaline = 21)
 	wrapper_color = COLOR_PALE_BLUE_GRAY
 
-/obj/item/storage/pill_bottle/kelotane
+/obj/item/storage/pill_bottle/burn_meds
 	name = "pill bottle (Kelotane)"
 	desc = "Contains pills used to treat burns."
 
-	startswith = list(/obj/item/chems/pill/kelotane = 21)
+	startswith = list(/obj/item/chems/pill/burn_meds = 21)
 	wrapper_color = COLOR_SUN
 
 /obj/item/storage/pill_bottle/spaceacillin
@@ -296,11 +289,11 @@
 	startswith = list(/obj/item/chems/pill/spaceacillin = 14)
 	wrapper_color = COLOR_PALE_GREEN_GRAY
 
-/obj/item/storage/pill_bottle/tramadol
-	name = "pill bottle (Tramadol)"
+/obj/item/storage/pill_bottle/painkillers
+	name = "pill bottle (painkillers)"
 	desc = "Contains pills used to relieve pain."
 
-	startswith = list(/obj/item/chems/pill/tramadol = 14)
+	startswith = list(/obj/item/chems/pill/painkillers = 14)
 	wrapper_color = COLOR_PURPLE_GRAY
 
 //Baycode specific Psychiatry pills.
@@ -332,13 +325,6 @@
 	startswith = list(/obj/item/chems/pill/antidexafen = 21)
 	wrapper_color = COLOR_VIOLET
 
-/obj/item/storage/pill_bottle/paracetamol
-	name = "pill bottle (Paracetamol)"
-	desc = "Mild painkiller, also known as Tylenol. Won't fix the cause of your headache (unlike cyanide), but might make it bearable."
-
-	startswith = list(/obj/item/chems/pill/paracetamol = 21)
-	wrapper_color = "#a2819e"
-
 /obj/item/storage/pill_bottle/assorted
 	name = "pill bottle (assorted)"
 	desc = "Commonly found on paramedics, these assorted pill bottles contain all the basics."
@@ -347,8 +333,8 @@
 			/obj/item/chems/pill/inaprovaline = 6,
 			/obj/item/chems/pill/dylovene = 6,
 			/obj/item/chems/pill/sugariron = 2,
-			/obj/item/chems/pill/tramadol = 2,
+			/obj/item/chems/pill/painkillers = 2,
 			/obj/item/chems/pill/dexalin = 2,
-			/obj/item/chems/pill/kelotane = 2,
-			/obj/item/chems/pill/hyronalin
+			/obj/item/chems/pill/burn_meds = 2,
+			/obj/item/chems/pill/entolimod
 		)

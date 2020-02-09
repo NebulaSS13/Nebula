@@ -27,9 +27,9 @@
 	bleed_colour = "#816e12"
 
 	var/static/list/chemical_types = list(
-		"bicaridine" = /datum/reagent/bicaridine,
-		"hyperzine" =  /datum/reagent/hyperzine,
-		"tramadol" =   /datum/reagent/tramadol
+		"anti-trauma" = /datum/reagent/brute_meds,
+		"stimulants" =  /datum/reagent/stimulants,
+		"painkillers" = /datum/reagent/painkillers
 	)
 
 	var/generation = 1

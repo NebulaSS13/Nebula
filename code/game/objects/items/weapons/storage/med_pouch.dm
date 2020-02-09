@@ -72,7 +72,7 @@ Single Use Emergency Pouches
 	startswith = list(
 	/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline,
 	/obj/item/chems/pill/pouch_pill/inaprovaline,
-	/obj/item/chems/pill/pouch_pill/paracetamol,
+	/obj/item/chems/pill/pouch_pill/painkillers,
 	/obj/item/stack/medical/bruise_pack = 2,
 		)
 	instructions = {"
@@ -92,20 +92,19 @@ Single Use Emergency Pouches
 
 	startswith = list(
 	/obj/item/chems/hypospray/autoinjector/pouch_auto/inaprovaline,
-	/obj/item/chems/hypospray/autoinjector/pouch_auto/deletrathol,
+	/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers,
 	/obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline,
-	/obj/item/chems/pill/pouch_pill/paracetamol,
+	/obj/item/chems/pill/pouch_pill/painkillers,
 	/obj/item/stack/medical/ointment = 2,
 		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\
-	\t3) Apply the emergency deletrathol autoinjector to the injured party.\n\
-	\t4) Apply all remaining autoinjectors to the injured party.\n\
-	\t5) Force the injured party to swallow all pills.\n\
-	\t6) Use ointment on any burns if required\n\
-	\t7) Contact the medical team with your location.
-	8) Stay in place once they respond.\
+	\t3) Apply all autoinjectors to the injured party.\n\
+	\t4) Force the injured party to swallow all pills.\n\
+	\t5) Use ointment on any burns if required\n\
+	\t6) Contact the medical team with your location.
+	7) Stay in place once they respond.\
 		"}
 
 /obj/item/storage/med_pouch/oxyloss
@@ -183,8 +182,8 @@ Single Use Emergency Pouches
 /obj/item/chems/pill/pouch_pill/dexalin
 	chem_type = /datum/reagent/dexalin
 
-/obj/item/chems/pill/pouch_pill/paracetamol
-	chem_type = /datum/reagent/paracetamol
+/obj/item/chems/pill/pouch_pill/painkillers
+	chem_type = /datum/reagent/painkillers
 
 /obj/item/chems/pill/pouch_pill/Initialize()
 	. = ..()
@@ -200,9 +199,9 @@ Single Use Emergency Pouches
 	name = "emergency inaprovaline autoinjector"
 	starts_with = list(/datum/reagent/inaprovaline = 5)
 
-/obj/item/chems/hypospray/autoinjector/pouch_auto/deletrathol
-	name = "emergency deletrathol autoinjector"
-	starts_with = list(/datum/reagent/deletrathol = 5)
+/obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers
+	name = "emergency painkiller autoinjector"
+	starts_with = list(/datum/reagent/painkillers = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/dylovene
 	name = "emergency dylovene autoinjector"

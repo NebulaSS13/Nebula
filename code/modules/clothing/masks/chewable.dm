@@ -176,13 +176,13 @@ obj/item/clothing/mask/chewable/Destroy()
 	reagents.add_reagent(pick(list(
 				/datum/reagent/dexalinp,
 				/datum/reagent/tricordrazine,
-				/datum/reagent/hyperzine,
-				/datum/reagent/hyronalin,
+				/datum/reagent/stimulants,
+				/datum/reagent/entolimod,
 				/datum/reagent/methylphenidate,
 				/datum/reagent/citalopram,
 				/datum/reagent/dylovene,
-				/datum/reagent/bicaridine,
-				/datum/reagent/kelotane,
+				/datum/reagent/brute_meds,
+				/datum/reagent/burn_meds,
 				/datum/reagent/inaprovaline)), 10)
 	color = reagents.get_color()
 
@@ -195,7 +195,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	. = ..()
 	var/datum/reagent/payload = pick(list(
 				/datum/reagent/antidexafen,
-				/datum/reagent/paracetamol,
+				/datum/reagent/painkillers,
 				/datum/reagent/tricordrazine,
 				/datum/reagent/dylovene,
 				/datum/reagent/inaprovaline))

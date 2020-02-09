@@ -89,7 +89,7 @@
 			descriptors |= "poisonous"
 		if(reagents.has_reagent(/datum/reagent/psilocybin) || reagents.has_reagent(/datum/reagent/space_drugs))
 			descriptors |= "hallucinogenic"
-		if(reagents.has_reagent(/datum/reagent/bicaridine))
+		if(reagents.has_reagent(/datum/reagent/brute_meds))
 			descriptors |= "medicinal"
 		if(reagents.has_reagent(/datum/reagent/gold))
 			descriptors |= "shiny"

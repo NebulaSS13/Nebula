@@ -82,7 +82,6 @@
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
 /obj/item/chems/dropper,
-/obj/item/chems/chem_disp_cartridge/peridaxon,
 /obj/item/stack/nanopaste,
 /obj/machinery/light{
 	icon_state = "tube1";

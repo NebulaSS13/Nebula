@@ -307,7 +307,7 @@
 	seed_name = "biteleaf"
 	display_name = "biteleaf"
 	mutants = list("biteleafdeus")
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/space_drugs = list(1,8), /datum/reagent/kelotane = list(1,8,1), /datum/reagent/bicaridine = list(1,10,1), /datum/reagent/toxin = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/space_drugs = list(1,8), /datum/reagent/burn_meds = list(1,8,1), /datum/reagent/brute_meds = list(1,10,1), /datum/reagent/toxin = list(1,10))
 	kitchen_tag = "biteleaf"
 
 /datum/seed/ambrosia/New()
@@ -327,7 +327,7 @@
 	seed_name = "biteleaf deus"
 	display_name = "biteleaf deus"
 	mutants = null
-	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/bicaridine = list(1,8), /datum/reagent/synaptizine = list(1,8,1), /datum/reagent/hyperzine = list(1,10,1), /datum/reagent/space_drugs = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1), /datum/reagent/brute_meds = list(1,8), /datum/reagent/synaptizine = list(1,8,1), /datum/reagent/stimulants = list(1,10,1), /datum/reagent/space_drugs = list(1,10))
 	kitchen_tag = "biteleafdeus"
 
 /datum/seed/ambrosia/deus/New()
@@ -595,7 +595,7 @@
 	name = "poppies"
 	seed_name = "poppy"
 	display_name = "poppies"
-	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/tramadol = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/painkillers = list(1,10))
 	kitchen_tag = "poppy"
 
 /datum/seed/flower/poppy/New()
@@ -630,7 +630,7 @@
 	name = "lavender"
 	seed_name = "lavender"
 	display_name = "lavender"
-	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/bicaridine = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/brute_meds = list(1,10))
 
 /datum/seed/flower/lavender/New()
 	..()
@@ -672,7 +672,7 @@
 	seed_name = "green grape"
 	display_name = "green grapevines"
 	mutants = null
-	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/kelotane = list(3,5), /datum/reagent/drink/juice/grape = list(10,10))
+	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/burn_meds = list(3,5), /datum/reagent/drink/juice/grape = list(10,10))
 
 /datum/seed/grapes/green/New()
 	..()
@@ -1167,7 +1167,7 @@
 	name = "shand"
 	seed_name = "S'randar's hand"
 	display_name = "S'randar's hand leaves"
-	chems = list(/datum/reagent/bicaridine = list(0,10))
+	chems = list(/datum/reagent/brute_meds = list(0,10))
 	kitchen_tag = "shand"
 
 /datum/seed/shand/New()
@@ -1187,7 +1187,7 @@
 	name = "mtear"
 	seed_name = "Messa's tear"
 	display_name = "Messa's tear leaves"
-	chems = list(/datum/reagent/nutriment/honey = list(1,10), /datum/reagent/kelotane = list(3,5))
+	chems = list(/datum/reagent/nutriment/honey = list(1,10), /datum/reagent/burn_meds = list(3,5))
 	kitchen_tag = "mtear"
 
 /datum/seed/mtear/New()
@@ -1288,7 +1288,7 @@
 	name = "bruisegrass"
 	seed_name = "bruisegrass"
 	display_name = "bruisegrass"
-	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/tramadol = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/painkillers = list(1,10))
 	kitchen_tag = "bruisegrass"
 	exude_gasses = null
 

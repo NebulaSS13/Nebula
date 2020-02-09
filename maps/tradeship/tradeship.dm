@@ -7,6 +7,7 @@
 	#include "tradeship_antagonists.dm"
 	#include "tradeship_items.dm"
 	#include "tradeship_areas.dm"
+	#include "tradeship_chems.dm"
 	#include "tradeship_jobs.dm"
 	#include "tradeship_loadouts.dm"
 	#include "tradeship_spawnpoints.dm"

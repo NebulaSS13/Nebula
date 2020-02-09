@@ -8,7 +8,7 @@
 		/obj/item/stack/medical/splint = 2,
 		/obj/item/stack/medical/advanced/bruise_pack = 10,
 		/obj/item/chems/pill/sugariron = 6,
-		/obj/item/storage/pill_bottle/paracetamol = 2,
+		/obj/item/storage/pill_bottle/painkillers = 2,
 		/obj/item/storage/pill_bottle/inaprovaline
 		)
 
@@ -21,8 +21,8 @@
 	return list(
 		/obj/item/defibrillator/loaded,
 		/obj/item/stack/medical/advanced/ointment = 10,
-		/obj/item/storage/pill_bottle/kelotane,
-		/obj/item/storage/pill_bottle/tramadol = 2,
+		/obj/item/storage/pill_bottle/burn_meds,
+		/obj/item/storage/pill_bottle/painkillers = 2,
 		/obj/item/storage/pill_bottle/spaceacillin
 	)
 
@@ -46,5 +46,5 @@
 	return list(
 		/obj/item/storage/firstaid/surgery,
 		/obj/item/storage/pill_bottle/dylovene = 2,
-		/obj/item/chems/pill/hyronalin = 12
+		/obj/item/chems/pill/entolimod = 12
 			)

@@ -148,9 +148,9 @@
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
 		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      80),
 		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          80),
-		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         80),
+		list("entolimod",     "entolimod",     /datum/reagent/entolimod,         80),
 		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      80),
-		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          80)
+		list("painkillers",   "painkillers",      /datum/reagent/painkillers,          80)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -164,10 +164,10 @@
 		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      20),
 		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          20),
 		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
-		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         20),
-		list("dermaline",     "dermaline",     /datum/reagent/dermaline,         20),
+		list("entolimod",     "entolimod",     /datum/reagent/entolimod,         20),
+		list("regenerative",  "regenerative",  /datum/reagent/burn_meds,         20),
 		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      20),
-		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20)
+		list("painkillers",   "painkillers",   /datum/reagent/painkillers,       20)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
@@ -252,8 +252,8 @@
 
 	charges = list(
 		list("synaptizine", "synaptizine", /datum/reagent/synaptizine,       30),
-		list("hyperzine",   "hyperzine",   /datum/reagent/hyperzine,         30),
-		list("oxycodone",   "oxycodone",   /datum/reagent/tramadol/oxycodone,         30),
+		list("stimulants",  "stimulants",  /datum/reagent/stimulants,        30),
+		list("painkillers", "painkillers", /datum/reagent/painkillers,       30),
 		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 80),
 		)
 

@@ -82,8 +82,8 @@
 // ========
 /datum/medical_effect/headache
 	name = "Headache"
-	triggers = list(/datum/reagent/cryoxadone = 10, /datum/reagent/bicaridine = 15, /datum/reagent/tricordrazine = 15)
-	cures = list(/datum/reagent/alkysine, /datum/reagent/tramadol, /datum/reagent/paracetamol, /datum/reagent/tramadol/oxycodone)
+	triggers = list(/datum/reagent/cryoxadone = 10, /datum/reagent/brute_meds = 15, /datum/reagent/tricordrazine = 15)
+	cures = list(/datum/reagent/alkysine, /datum/reagent/painkillers)
 	cure_message = "Your head stops throbbing..."
 
 /datum/medical_effect/headache/on_life(mob/living/carbon/human/H, strength)
@@ -101,7 +101,7 @@
 // ===========
 /datum/medical_effect/bad_stomach
 	name = "Bad Stomach"
-	triggers = list(/datum/reagent/kelotane = 30, /datum/reagent/dermaline = 15)
+	triggers = list(/datum/reagent/burn_meds = 30)
 	cures = list(/datum/reagent/dylovene)
 	cure_message = "Your stomach feels a little better now..."
 
@@ -118,7 +118,7 @@
 // ======
 /datum/medical_effect/cramps
 	name = "Cramps"
-	triggers = list(/datum/reagent/dylovene = 30, /datum/reagent/tramadol = 15)
+	triggers = list(/datum/reagent/dylovene = 30, /datum/reagent/painkillers = 15)
 	cures = list(/datum/reagent/inaprovaline)
 	cure_message = "The cramps let up..."
 

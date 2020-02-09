@@ -909,8 +909,7 @@
 					/obj/item/stack/medical/advanced/bruise_pack = 3, /obj/item/stack/medical/advanced/ointment = 3, /obj/item/stack/medical/splint = 2,
 					/obj/item/chems/hypospray/autoinjector/pain = 4)
 	contraband = list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
-					/obj/item/chems/pill/tox = 3,/obj/item/chems/pill/stox = 4,/obj/item/chems/pill/antitox = 6,
-					/obj/item/chems/hypospray/autoinjector/combatpain = 2)
+					/obj/item/chems/pill/tox = 3,/obj/item/chems/pill/stox = 4,/obj/item/chems/pill/antitox = 6)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 
@@ -935,7 +934,7 @@
 	products = list(
 		/obj/item/stack/medical/bruise_pack = 3,
 		/obj/item/stack/medical/ointment = 3,
-		/obj/item/chems/pill/paracetamol = 4,
+		/obj/item/chems/pill/painkillers = 4,
 		/obj/item/storage/med_pouch/trauma,
 		/obj/item/storage/med_pouch/burn,
 		/obj/item/storage/med_pouch/oxyloss,

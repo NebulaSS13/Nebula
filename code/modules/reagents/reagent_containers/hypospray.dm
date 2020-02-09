@@ -168,17 +168,12 @@
 /obj/item/chems/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
 	band_color = COLOR_PURPLE
-	starts_with = list(/datum/reagent/tramadol = 5)
-
-/obj/item/chems/hypospray/autoinjector/combatpain
-	name = "autoinjector (oxycodone)"
-	band_color = COLOR_DARK_GRAY
-	starts_with = list(/datum/reagent/tramadol/oxycodone = 5)
+	starts_with = list(/datum/reagent/painkillers = 5)
 
 /obj/item/chems/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
 	band_color = COLOR_AMBER
-	starts_with = list(/datum/reagent/hyronalin = 5)
+	starts_with = list(/datum/reagent/entolimod = 5)
 
 /obj/item/chems/hypospray/autoinjector/mindbreaker
 	name = "autoinjector"

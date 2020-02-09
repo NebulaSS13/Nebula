@@ -91,24 +91,11 @@
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/potassium = 1, /datum/reagent/ammonia = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/tramadol
-	name = "Tramadol"
-	result = /datum/reagent/tramadol
+/datum/chemical_reaction/painkillers
+	name = "Painkillers"
+	result = /datum/reagent/painkillers
 	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/ethanol = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
-
-/datum/chemical_reaction/paracetamol
-	name = "Paracetamol"
-	result = /datum/reagent/paracetamol
-	required_reagents = list(/datum/reagent/tramadol = 1, /datum/reagent/sugar = 1, /datum/reagent/water = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/oxycodone
-	name = "Oxycodone"
-	result = /datum/reagent/tramadol/oxycodone
-	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/tramadol = 1)
-	catalysts = list(/datum/reagent/toxin/phoron = 5)
-	result_amount = 1
 
 /datum/chemical_reaction/sterilizine
 	name = "Sterilizine"
@@ -158,16 +145,10 @@
 	minimum_temperature = 30 CELSIUS
 	maximum_temperature = (30 CELSIUS) + 100
 
-/datum/chemical_reaction/hyronalin
-	name = "Hyronalin"
-	result = /datum/reagent/hyronalin
+/datum/chemical_reaction/entolimod
+	name = "Entolimod"
+	result = /datum/reagent/entolimod
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/dylovene = 1)
-	result_amount = 2
-
-/datum/chemical_reaction/arithrazine
-	name = "Arithrazine"
-	result = /datum/reagent/arithrazine
-	required_reagents = list(/datum/reagent/hyronalin = 1, /datum/reagent/hydrazine = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/impedrezene
@@ -176,19 +157,12 @@
 	required_reagents = list(/datum/reagent/mercury = 1, /datum/reagent/acetone = 1, /datum/reagent/sugar = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/kelotane
-	name = "Kelotane"
-	result = /datum/reagent/kelotane
+/datum/chemical_reaction/burn_meds
+	name = "Anti-Burn Medication"
+	result = /datum/reagent/burn_meds
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
 	log_is_important = 1
-
-/datum/chemical_reaction/peridaxon
-	name = "Peridaxon"
-	result = /datum/reagent/peridaxon
-	required_reagents = list(/datum/reagent/bicaridine = 2, /datum/reagent/clonexadone = 2)
-	catalysts = list(/datum/reagent/toxin/phoron = 5)
-	result_amount = 2
 
 /datum/chemical_reaction/leporazine
 	name = "Leporazine"
@@ -224,37 +198,29 @@
 	inhibitors = list(/datum/reagent/water = 1) // Messes with cryox
 	result_amount = 1
 
-/datum/chemical_reaction/dermaline
-	name = "Dermaline"
-	result = /datum/reagent/dermaline
-	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/phosphorus = 1, /datum/reagent/kelotane = 1)
-	result_amount = 3
-	minimum_temperature = (-50 CELSIUS) - 100
-	maximum_temperature = -50 CELSIUS
-
 /datum/chemical_reaction/dexalinp
 	name = "Dexalin Plus"
 	result = /datum/reagent/dexalinp
 	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/carbon = 1, /datum/reagent/iron = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/bicaridine
-	name = "Bicaridine"
-	result = /datum/reagent/bicaridine
+/datum/chemical_reaction/brute_meds
+	name = "Anti-Trauma Medication"
+	result = /datum/reagent/brute_meds
 	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/carbon = 1)
 	inhibitors = list(/datum/reagent/sugar = 1) // Messes up with inaprovaline
 	result_amount = 2
 
-/datum/chemical_reaction/hyperzine
-	name = "Hyperzine"
-	result = /datum/reagent/hyperzine
+/datum/chemical_reaction/stimulants
+	name = "Stimulants"
+	result = /datum/reagent/stimulants
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/phosphorus = 1, /datum/reagent/sulfur = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/ryetalyn
 	name = "Ryetalyn"
 	result = /datum/reagent/ryetalyn
-	required_reagents = list(/datum/reagent/arithrazine = 1, /datum/reagent/carbon = 1)
+	required_reagents = list(/datum/reagent/entolimod = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/cryoxadone
@@ -306,12 +272,6 @@
 	result = /datum/reagent/imidazoline
 	required_reagents = list(/datum/reagent/carbon = 1, /datum/reagent/hydrazine = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
-
-/datum/chemical_reaction/ethylredoxrazine
-	name = "Ethylredoxrazine"
-	result = /datum/reagent/ethylredoxrazine
-	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/dylovene = 1, /datum/reagent/carbon = 1)
-	result_amount = 3
 
 /datum/chemical_reaction/soporific
 	name = "Soporific"
@@ -469,7 +429,7 @@
 /datum/chemical_reaction/noexcutite
 	name = "Noexcutite"
 	result = /datum/reagent/noexcutite
-	required_reagents = list(/datum/reagent/tramadol/oxycodone = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/painkillers = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/methyl_bromide
@@ -482,7 +442,7 @@
 /datum/chemical_reaction/adrenaline
 	name = "Adrenaline"
 	result = /datum/reagent/adrenaline
-	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/hyperzine = 1, /datum/reagent/dexalinp = 1)
+	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/stimulants = 1, /datum/reagent/dexalinp = 1)
 	result_amount = 3
 
 /* Solidification */
@@ -2246,7 +2206,7 @@
 /datum/chemical_reaction/antidexafen
 	name = "Antidexafen"
 	result = /datum/reagent/antidexafen
-	required_reagents = list(/datum/reagent/paracetamol = 1, /datum/reagent/carbon = 1)
+	required_reagents = list(/datum/reagent/painkillers = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/nanoblood

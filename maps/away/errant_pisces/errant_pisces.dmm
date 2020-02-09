@@ -4583,7 +4583,7 @@
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/item/chems/chem_disp_cartridge/hyperzine,
+/obj/item/chems/chem_disp_cartridge/stimulants,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lm" = (

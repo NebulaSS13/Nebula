@@ -124,33 +124,22 @@
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/kelotane
+/obj/item/chems/pill/burn_meds
 	name = "Kelotane (15u)"
 	desc = "Used to treat burns."
 	icon_state = "pill2"
-/obj/item/chems/pill/kelotane/Initialize()
+/obj/item/chems/pill/burn_meds/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/kelotane, 15)
+	reagents.add_reagent(/datum/reagent/burn_meds, 15)
 	color = reagents.get_color()
 
-
-/obj/item/chems/pill/paracetamol
-	name = "Paracetamol (15u)"
-	desc = "A painkiller for the ages. Chewables!"
-	icon_state = "pill3"
-/obj/item/chems/pill/paracetamol/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/paracetamol, 15)
-	color = reagents.get_color()
-
-
-/obj/item/chems/pill/tramadol
-	name = "Tramadol (15u)"
+/obj/item/chems/pill/painkillers
+	name = "painkillers (15u)"
 	desc = "A simple painkiller."
 	icon_state = "pill3"
-/obj/item/chems/pill/tramadol/Initialize()
+/obj/item/chems/pill/painkillers/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/tramadol, 15)
+	reagents.add_reagent(/datum/reagent/painkillers, 15)
 	color = reagents.get_color()
 
 
@@ -183,17 +172,6 @@
 	reagents.add_reagent(/datum/reagent/dexalinp, 15)
 	color = reagents.get_color()
 
-
-/obj/item/chems/pill/dermaline
-	name = "Dermaline (15u)"
-	desc = "Used to treat burn wounds."
-	icon_state = "pill2"
-/obj/item/chems/pill/dermaline/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/dermaline, 15)
-	color = reagents.get_color()
-
-
 /obj/item/chems/pill/dylovene
 	name = "Dylovene (15u)"
 	desc = "A broad-spectrum anti-toxin."
@@ -204,13 +182,13 @@
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/bicaridine
-	name = "Bicaridine (20u)"
+/obj/item/chems/pill/brute_meds
+	name = "styptic (20u)"
 	desc = "Used to treat physical injuries."
 	icon_state = "pill2"
-/obj/item/chems/pill/bicaridine/Initialize()
+/obj/item/chems/pill/brute_meds/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/bicaridine, 20)
+	reagents.add_reagent(/datum/reagent/brute_meds, 20)
 	color = reagents.get_color()
 
 
@@ -233,7 +211,7 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/impedrezene, 10)
 	reagents.add_reagent(/datum/reagent/synaptizine, 5)
-	reagents.add_reagent(/datum/reagent/hyperzine, 5)
+	reagents.add_reagent(/datum/reagent/stimulants, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/three_eye
@@ -318,13 +296,13 @@
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/hyronalin
-	name = "Hyronalin (7u)"
+/obj/item/chems/pill/entolimod
+	name = "entolimod (7u)"
 	desc = "Used to treat radiation poisoning."
 	icon_state = "pill1"
-/obj/item/chems/pill/hyronalin/Initialize()
+/obj/item/chems/pill/entolimod/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/hyronalin, 7)
+	reagents.add_reagent(/datum/reagent/entolimod, 7)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antirad
@@ -333,7 +311,7 @@
 	icon_state = "yellow"
 /obj/item/chems/pill/antirad/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/hyronalin, 5)
+	reagents.add_reagent(/datum/reagent/entolimod, 5)
 	reagents.add_reagent(/datum/reagent/dylovene, 10)
 
 

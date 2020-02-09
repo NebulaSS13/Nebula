@@ -382,7 +382,7 @@
 /obj/item/chems/syringe/steroid/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/adrenaline, 5)
-	reagents.add_reagent(/datum/reagent/hyperzine, 10)
+	reagents.add_reagent(/datum/reagent/stimulants, 10)
 
 
 // TG ports
