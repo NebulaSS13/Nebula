@@ -3,7 +3,7 @@
 /datum/reagent/water
 	name = "water"
 	description = "A ubiquitous chemical substance composed of hydrogen and oxygen."
-	color = "#0064c877"
+	color = "#0064c8"
 	scannable = 1
 	metabolism = REM * 10
 	taste_description = "water"
