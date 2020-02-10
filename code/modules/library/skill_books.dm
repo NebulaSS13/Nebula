@@ -1,4 +1,33 @@
-//Skill books that increase your skills while you activate and hold them
+#define RANDOM_BOOK_TITLE(skill_name) pick(list("\"[skill_name] for Idiots\"", \
+										"\"How To Learn [skill_name] and Not Get Laughed At\"", \
+										"\"Teaching Yourself [skill_name]: Volume [rand(1,100)]\"", \
+										"\"Getting the Hands-Off Experience You Need with [skill_name]\"", \
+										"\"Master [skill_name] in [rand(100,999)] easy steps!\"", \
+										"\"[skill_name] Just Like Mum\"", \
+										"\"How To [skill_name] Good Enough For Your Father\"", \
+										"\"How To Win Your Dad's Approval With [skill_name]\"", \
+										"\"Make a Living with [skill_name] Like Your Old Man Always Wanted You To\"", \
+										"\"[skill_name]: Secret Techniques\"", \
+										"\"The Dos, Don'ts and Oh Gods Please Nos of [skill_name]\"", \
+										"\"The Death Of [skill_name]\"", \
+										"\"Everything You Never Wanted To Know About [skill_name] But Have Been Reluctantly Forced To Find Out\"", \
+										"\"[skill_name] For The Busy Yinglet\"", \
+										"\"Learning [skill_name] In A Hurry Because You Lied On Your Resume\"", \
+										"\"Help! My Life Suddenly Depends On [skill_name]\"", \
+										"\"What The Fuck is [capitalize(ADD_ARTICLE(capitalize(skill_name)))]?\"", \
+										"\"Starting [capitalize(ADD_ARTICLE(capitalize(skill_name)))] Business By Yourself\"", \
+										"\"Even a Scav Can Learn [skill_name]!\"", \
+										"\"How To Impress Your Matriarch with [skill_name]\"", \
+										"\"How To Become A Patriarch of [skill_name]\"", \
+										"\"Everything The Government Doesn't Want You To Know About [skill_name]\"", \
+										"\"[skill_name] For Younglets\"", \
+										"\"[skill_name]: Volume [rand(1,100)]\"", \
+										"\"Understanding [skill_name]: [rand(1,100)]\th Edition\"", \
+										"\"Dealing With Ungrateful Customers Dissatisfied With Your Perfectly Acceptable [skill_name] Services\""))
+
+/*
+Skill books that increase your skills while you activate and hold them
+*/
 
 /obj/item/book/skill
 	name = "default textbook" // requires default names for tradershop, cant rely in Initialize for names
@@ -15,26 +44,25 @@
 	var/custom = FALSE //To bypass init stuff, for player made textbooks and weird books
 	var/ez_read = FALSE //Set to TRUE if you can read it without basic literacy skills
 
+	var/skill_name = "missing skill name"
+
 /obj/item/book/skill/Initialize()
 	. = ..()
-	if(!custom && skill && skill_req)
-		var/skill_name = initial(skill.name)
+	if(!custom && skill && skill_req)// custom books should already have all they need
+		skill_name = initial(skill.name)
+		title = RANDOM_BOOK_TITLE(capitalize(initial(skill.name)))
 		switch(skill_req) // check what skill_req the book has
 			if(1) // none > basic
 				name = "beginner [skill_name] textbook"
-				title = pick("[skill_name] for Idiots", "Level 1 [skill_name]")
 				desc = "A copy of [title] by [author]. The only reason this book is so big is because all the words are printed very large! Presumably so you, an idiot, can read it."
 			if(2) // basic > adept
 				name = "intermediate [skill_name] textbook"
-				title = pick("Training Yourself in [skill_name]: Volume [rand(1,10)]","Level 2 [skill_name]")
 				desc = "A copy of [title] by [author]. Dry and long, but not unmanageable. Basic knowledge is required to understand the concepts written."
 			if(3) // adept > expert
 				name = "advanced [skill_name] textbook"
-				title = pick("Getting the Experience You Need with [skill_name]", "Level 3 [skill_name]")
 				desc = "A copy of [title] by [author]. Those not already trained in the subject will have a hard time reading this. Try not to drop it either, it will put a hole in the floor."
 			if(4) //expert > prof
 				name = "theoretical [skill_name] textbook"
-				title = pick("Treatise on Theoretical [skill_name]","Level 4 [skill_name]", "Master [skill_name] in [rand(100,999)] easy steps!")
 				desc = "A copy of [title] by [author]. Significant experience in the subject is required to read this incredibly information dense block of paper. Sadly, does not come in audio form."
 	if(!skill || !skill_req)//That's a bad book, so just grab ANY child to replace it.
 		if(subtypesof(src.type))
@@ -43,7 +71,7 @@
 			qdel_self()
 
 /datum/skill_buff/skill_book
-	limit = 1
+	limit = 1 // you can only read one book at a time nerd, therefore you can only get one buff at a time
 
 /obj/item/book/skill/attack_self(mob/user)
 	if(!ez_read &&!user.skill_check(SKILL_LITERACY, SKILL_BASIC))
@@ -479,11 +507,13 @@ ENGINEERING
 	name = "theoretical engines textbook"
 
 /obj/item/book/skill/engineering/engines/prof/magazine
-	name = "theoretical engines <s>textbook</s> magazine"
+	name = "theoretical engines magazine"
+	title = "\"Bad Baxxid\""
 	icon_state = "bookMagazine"
 	custom = TRUE
 	author = "Unknown"
 	desc = "Sure, it includes highly detailed information on extremely advanced engine and power generator systems... but why is it written in marker on a tentacle porn magazine?"
+	w_class = ITEM_SIZE_LARGE
 
 /* 
 RESEARCH
@@ -569,6 +599,10 @@ MEDICAL
 /obj/item/book/skill/medical/medicine/basic
 	skill_req = SKILL_NONE
 	name = "beginner medicine textbook"
+	title = "\"Instructional Guide on How Rubbing Dirt In Wounds Might Not Be The Right Approach To Stopping Bleeding Anymore\""
+	desc = "A copy of \"Instructional Guide on How Rubbing Dirt In Wounds Might Not Be The Right Approach To Stopping Bleeding Anymore\" by Dr. Merrs. Despite the information density of this heavy book, it lacks any and all teachings regarding bedside manner."
+	author = "Dr. Merrs"
+	custom = TRUE
 
 /obj/item/book/skill/medical/medicine/adept
 	skill_req = SKILL_BASIC
@@ -585,7 +619,7 @@ MEDICAL
 //anatomy
 /obj/item/book/skill/medical/anatomy
 	author = "Dr. Basil Cartwright"
-	skill = SKILL_MEDICAL
+	skill = SKILL_ANATOMY
 
 /obj/item/book/skill/medical/anatomy/basic
 	skill_req = SKILL_NONE
@@ -650,3 +684,5 @@ MEDICAL
 		for(var/real_book in subtypesof(category))
 			if(prob(20))
 				new real_book(src)
+
+#undef RANDOM_BOOK_TITLE
