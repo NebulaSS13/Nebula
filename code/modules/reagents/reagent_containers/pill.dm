@@ -159,7 +159,7 @@
 	icon_state = "pill1"
 /obj/item/chems/pill/oxygen/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/oxygen, 15)
+	reagents.add_reagent(/datum/reagent/oxy_meds, 15)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antitoxins

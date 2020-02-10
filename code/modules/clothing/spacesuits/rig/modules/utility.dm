@@ -145,7 +145,7 @@
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
 
 	charges = list(
-		list("oxygen",       "oxygen",       /datum/reagent/oxygen,       80),
+		list("oxygel",       "oxygel",       /datum/reagent/oxy_meds,       80),
 		list("adrenaline",   "adrenaline",   /datum/reagent/adrenaline,   80),
 		list("antitoxins",   "antitoxins",   /datum/reagent/antitoxins,   80),
 		list("entolimod",    "entolimod",    /datum/reagent/entolimod,    80),
@@ -160,7 +160,7 @@
 
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
-		list("oxygen",       "oxygen",       /datum/reagent/oxygen,            20),
+		list("oxygen",       "oxygel",       /datum/reagent/oxy_meds,            20),
 		list("adrenaline",   "adrenaline",   /datum/reagent/adrenaline,        20),
 		list("antitoxins",   "antitoxins",   /datum/reagent/antitoxins,        20),
 		list("glucose",      "glucose",      /datum/reagent/nutriment/glucose, 80),

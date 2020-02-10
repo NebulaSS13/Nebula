@@ -42,10 +42,6 @@
 	if(!istype(O))
 		return FALSE
 
-	if(LAZYLEN(holdingitems) >= limit)
-		to_chat(user, SPAN_NOTICE("\The [src] cannot hold any additional items."))
-		return TRUE
-
 	if (istype(O,/obj/item/chems/glass) || \
 		istype(O,/obj/item/chems/food/drinks/glass2) || \
 		istype(O,/obj/item/chems/food/drinks/shaker))
@@ -59,6 +55,10 @@
 			update_icon()
 			SSnano.update_uis(src)
 			return FALSE
+
+	if(LAZYLEN(holdingitems) >= limit)
+		to_chat(user, SPAN_NOTICE("\The [src] cannot hold any additional items."))
+		return TRUE
 
 	if(is_type_in_list(O, blacklisted_types))
 		to_chat(user, SPAN_NOTICE("\The [src] cannot grind \the [O]."))

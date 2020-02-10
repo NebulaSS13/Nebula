@@ -163,6 +163,12 @@
 	required_reagents = list(/datum/reagent/acid/hydrochloric = 1, /datum/reagent/ammonia = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
+/datum/chemical_reaction/oxy_meds
+	name = "Oxygen Deprivation Medication"
+	result = /datum/reagent/oxy_meds
+	required_reagents = list(/datum/reagent/acetone = 2, /datum/reagent/water = 1)
+	result_amount = 1
+
 /datum/chemical_reaction/brute_meds
 	name = "Anti-Trauma Medication"
 	result = /datum/reagent/brute_meds
@@ -303,7 +309,7 @@
 /datum/chemical_reaction/adrenaline
 	name = "Adrenaline"
 	result = /datum/reagent/adrenaline
-	required_reagents = list(/datum/reagent/nutriment/sugar = 1, /datum/reagent/amphetamines = 1, /datum/reagent/oxygen = 1)
+	required_reagents = list(/datum/reagent/nutriment/sugar = 1, /datum/reagent/amphetamines = 1, /datum/reagent/oxy_meds = 1)
 	result_amount = 3
 
 /* Solidification */

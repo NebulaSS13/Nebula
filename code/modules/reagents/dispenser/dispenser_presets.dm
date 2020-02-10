@@ -31,7 +31,7 @@
 			/obj/item/chems/chem_disp_cartridge/painkillers,
 			/obj/item/chems/chem_disp_cartridge/antiseptic,
 			/obj/item/chems/chem_disp_cartridge/burn_meds,
-			/obj/item/chems/chem_disp_cartridge/oxygen,
+			/obj/item/chems/chem_disp_cartridge/oxy_meds,
 			/obj/item/chems/chem_disp_cartridge/regenerator,
 			/obj/item/chems/chem_disp_cartridge/antitoxins,
 			/obj/item/chems/chem_disp_cartridge/entolimod,

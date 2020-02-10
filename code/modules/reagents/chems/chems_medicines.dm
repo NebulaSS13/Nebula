@@ -313,3 +313,13 @@
 		var/mob/living/carbon/human/H = M
 		H.confused++
 		H.drowsyness++
+
+/datum/reagent/oxy_meds
+	name = "oxygel"
+	description = "A biodegradable gel full of oxygen-laden synthetic molecules. Injected into suffocation victims to stave off the effects of oxygen deprivation."
+	taste_description = "tasteless slickness"
+	color = COLOR_GRAY80
+
+/datum/reagent/oxy_meds/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_OXYGENATED, 1)
+	holder.remove_reagent(/datum/reagent/carbon_monoxide, 2 * removed)
