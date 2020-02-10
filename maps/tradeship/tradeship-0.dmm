@@ -1046,6 +1046,7 @@
 /obj/random/trash,
 /obj/item/haircomb/random,
 /obj/random/tech_supply,
+/obj/random/single/textbook,
 /turf/simulated/floor,
 /area/ship/scrap/aft_starboard_underside_maint)
 "bV" = (
@@ -1354,6 +1355,15 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/ship/scrap/enclave)
+"ki" = (
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "trash_sort"
+	},
+/obj/random/trash,
+/obj/random/single/textbook,
+/turf/simulated/floor,
+/area/ship/scrap/loading_bay)
 "kO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -5678,7 +5688,7 @@ SC
 aU
 yO
 iD
-kS
+ki
 yO
 tD
 yO

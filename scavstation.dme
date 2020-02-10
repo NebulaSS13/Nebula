@@ -1820,6 +1820,7 @@
 #include "code\modules\library\lib_items.dm"
 #include "code\modules\library\lib_machines.dm"
 #include "code\modules\library\lib_readme.dm"
+#include "code\modules\library\skill_books.dm"
 #include "code\modules\library\manuals\engineering.dm"
 #include "code\modules\library\manuals\manuals.dm"
 #include "code\modules\library\manuals\medical.dm"

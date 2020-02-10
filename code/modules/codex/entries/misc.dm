@@ -20,3 +20,9 @@
 /datum/codex_entry/moneygun/New(_display_name, list/_associated_paths, list/_associated_strings, _lore_text, _mechanics_text, _antag_text)
 	. = ..()
 	antag_text = "Sliding a cryptographic sequencer into the receptacle will short the motors and override their speed. If you set the cannon to dispense 100 [GLOB.using_map.local_currency_name] or more, this might make a handy weapon."
+
+/datum/codex_entry/textbook
+	associated_paths = list(/obj/item/book/skill)
+	associated_strings = list("textbook","skill book")
+	lore_text = "Education, written down and made overly expensive."
+	mechanics_text = "Textbooks provide <span codexlink='Skills (category)'>skill</span> buffs, raising the relevant skill by one level. In order to use textbook, you must have the matching skill that the textbook teaches, at the level it can buff. To use a textbook, simply hold it in your active hand and click it. You must then wait for a short period of time, after which you will have the skill buff indefinitely. However, the skill buff will be removed the moment the textbook is closed (used again) or removed from your hand in any way (dropped, put in a container, destroyed, etc). This process can be repeated without consequence, though only one textbook can be used at any one time."
