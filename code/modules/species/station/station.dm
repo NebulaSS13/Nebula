@@ -18,7 +18,8 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_OTHER
+			CULTURE_OTHER,
+			CULTURE_HUMAN
 		)
 	)
 

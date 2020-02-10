@@ -1,6 +1,10 @@
 /decl/cultural_info/culture/generic
 	name = CULTURE_OTHER
 	description = "You are from one of the many small, relatively unknown cultures scattered across the galaxy."
+	secondary_langs = list(
+		LANGUAGE_HUMAN,
+		LANGUAGE_SIGN
+	)
 
 /decl/cultural_info/culture/human
 	name = CULTURE_HUMAN
