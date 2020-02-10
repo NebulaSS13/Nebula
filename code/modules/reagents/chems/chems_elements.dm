@@ -43,16 +43,6 @@
 	..()
 	M.add_chemical_effect(CE_SQUEAKY, 1)
 
-/datum/reagent/oxygen
-	name = "oxygen"
-	description = "An ubiquitous oxidizing agent."
-	taste_description = "nothing"
-	color = COLOR_GRAY80
-
-/datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_OXYGENATED, 1)
-	holder.remove_reagent(/datum/reagent/carbon_monoxide, 2 * removed)
-
 /datum/reagent/aluminium
 	name = "aluminium"
 	taste_description = "metal"

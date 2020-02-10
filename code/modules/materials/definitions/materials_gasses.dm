@@ -30,12 +30,10 @@
 /material/gas/oxygen
 	display_name = "oxygen"
 	lore_text = "An ubiquitous oxidizing agent."
-	chem_products = list(/datum/reagent/oxygen = 20)
 	is_fusion_fuel = TRUE
 	gas_specific_heat = 20	
 	gas_molar_mass = 0.032	
 	gas_flags = XGM_GAS_OXIDIZER | XGM_GAS_FUSION_FUEL
-	gas_breathed_product = /datum/reagent/oxygen
 	gas_symbol_html = "O<sub>2</sub>"
 	gas_symbol = "O2"
 

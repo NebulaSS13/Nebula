@@ -18,7 +18,7 @@
 	var/list/reagent_names = list()
 
 /obj/item/chems/borghypo/surgeon
-	reagent_ids = list(/datum/reagent/brute_meds, /datum/reagent/oxygen, /datum/reagent/painkillers)
+	reagent_ids = list(/datum/reagent/brute_meds, /datum/reagent/oxy_meds, /datum/reagent/painkillers)
 
 /obj/item/chems/borghypo/crisis
 	reagent_ids = list(/datum/reagent/regenerator, /datum/reagent/adrenaline, /datum/reagent/painkillers)

@@ -81,7 +81,7 @@
 	painkillers	  spawn_reagent = /datum/reagent/painkillers
 	antiseptic	  spawn_reagent = /datum/reagent/antiseptic
 	burn_meds	  spawn_reagent = /datum/reagent/burn_meds
-	oxygen		  spawn_reagent = /datum/reagent/oxygen
+	oxy_meds	  spawn_reagent = /datum/reagent/oxy_meds
 	regenerator	  spawn_reagent = /datum/reagent/regenerator
 	antitoxins	  spawn_reagent = /datum/reagent/antitoxins
 	entolimod	  spawn_reagent = /datum/reagent/entolimod

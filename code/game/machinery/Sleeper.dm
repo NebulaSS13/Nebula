@@ -12,7 +12,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/mob/living/carbon/human/occupant = null
-	var/list/base_chemicals = list("Adrenaline" = /datum/reagent/adrenaline, "Sedatives" = /datum/reagent/sedatives, "Painkillers" = /datum/reagent/painkillers, "Oxygen" = /datum/reagent/oxygen)
+	var/list/base_chemicals = list("Adrenaline" = /datum/reagent/adrenaline, "Sedatives" = /datum/reagent/sedatives, "Painkillers" = /datum/reagent/painkillers, "Oxygel" = /datum/reagent/oxy_meds)
 	var/list/available_chemicals = list()
 	var/list/upgrade_chemicals = list("Anti-Burn" = /datum/reagent/burn_meds)
 	var/list/upgrade2_chemicals = list("Anti-Rads" = /datum/reagent/entolimod)

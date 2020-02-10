@@ -174,7 +174,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli/meds/Initialize()
 	. = ..()
 	reagents.add_reagent(pick(list(
-				/datum/reagent/oxygen,
+				/datum/reagent/oxy_meds,
 				/datum/reagent/regenerator,
 				/datum/reagent/amphetamines,
 				/datum/reagent/entolimod,
