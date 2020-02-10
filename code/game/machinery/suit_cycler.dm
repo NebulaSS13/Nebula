@@ -467,4 +467,4 @@
 
 	if(helmet) helmet.SetName("refitted [helmet.name]")
 	if(suit) suit.SetName("refitted [suit.name]")
-	if(boots) suit.SetName("refitted [initial(boots.name)]")
+	if(boots) boots.SetName("refitted [initial(boots.name)]")
