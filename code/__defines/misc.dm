@@ -286,3 +286,6 @@
 #define TOOL_INTERACTION_DECONSTRUCT 2
 #define TOOL_INTERACTION_WIRING      4
 #define TOOL_INTERACTION_ALL         (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_WIRING)   
+
+//Inserts 'a' or 'an' before X in ways \a doesn't allow
+#define ADD_ARTICLE(X) "[(lowertext(copytext(X, 1, 2)) in list("a", "e", "i", "o", "u")) ? "an" : "a"] [X]"
