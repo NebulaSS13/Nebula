@@ -587,14 +587,6 @@
 	icon_state = "fridge_dark"
 	icon_deny = "fridge_dark-deny"
 	products = list(/obj/item/chems/food/drinks/glass2/square = 10,
-					/obj/item/chems/food/drinks/glass2/rocks = 10,
-					/obj/item/chems/food/drinks/glass2/shake = 10,
-					/obj/item/chems/food/drinks/glass2/cocktail = 10,
-					/obj/item/chems/food/drinks/glass2/shot = 10,
-					/obj/item/chems/food/drinks/glass2/pint = 10,
-					/obj/item/chems/food/drinks/glass2/mug = 10,
-					/obj/item/chems/food/drinks/glass2/wine = 10,
-					/obj/item/chems/food/drinks/glass2/coffeecup/metal = 8,
 					/obj/item/chems/food/drinks/flask/barflask = 5,
 					/obj/item/chems/food/drinks/flask/vacuumflask = 5,
 					/obj/item/chems/food/drinks/bottle/gin = 5,
@@ -611,7 +603,6 @@
 					/obj/item/chems/food/drinks/bottle/melonliquor = 5,
 					/obj/item/chems/food/drinks/bottle/bluecuracao = 5,
 					/obj/item/chems/food/drinks/bottle/absinthe = 5,
-					/obj/item/chems/food/drinks/bottle/dinnishfirewater = 5,
 					/obj/item/chems/food/drinks/bottle/bottleofnothing =5,
 					/obj/item/chems/food/drinks/bottle/champagne = 5,
 					/obj/item/chems/food/drinks/bottle/herbal = 5,
