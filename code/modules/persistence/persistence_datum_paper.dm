@@ -19,8 +19,7 @@
 	paper.last_modified_ckey = tokens["author"]
 	if(requires_noticeboard)
 		board.add_paper(paper)
-	SSpersistence.track_value(paper, type)
-	return paper
+	. = paper
 
 /datum/persistent/paper/GetEntryAge(var/atom/entry)
 	var/obj/item/paper/paper = entry
@@ -45,3 +44,9 @@
 	if(istype(board))
 		board.remove_paper(value)
 	qdel(value)
+
+/datum/persistent/paper/IsValidEntry(var/atom/entry)
+	. = ..()
+	if(.)
+		var/obj/item/paper/paper = entry
+		. = istype(paper) && paper.info && paper.last_modified_ckey

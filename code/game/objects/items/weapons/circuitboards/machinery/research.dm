@@ -45,6 +45,14 @@
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 1
 	)
+/obj/item/stock_parts/circuitboard/autolathe/book
+	name = T_BOARD("autobinder")
+	build_path = /obj/machinery/fabricator/book
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_DATA = 1)
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 1,
+		/obj/item/stock_parts/manipulator = 1
+	)
 /obj/item/stock_parts/circuitboard/replicator
 	name = T_BOARD("replicator")
 	build_path = /obj/machinery/fabricator/replicator

@@ -47,13 +47,16 @@ SUBSYSTEM_DEF(persistence)
 	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
 		return
 
-	if(!(T.z in GLOB.using_map.station_levels) || !initialized)
+	if(!(T.z in GLOB.using_map.station_levels))
 		return
 
 	if(!tracking_values[track_type])
 		tracking_values[track_type] = list()
-	tracking_values[track_type] += value
+	tracking_values[track_type] |= value
 
+/datum/controller/subsystem/persistence/proc/is_tracking(var/atom/value, var/track_type)
+	. = (value in tracking_values[track_type])
+	
 /datum/controller/subsystem/persistence/proc/forget_value(var/atom/value, var/track_type)
 	if(tracking_values[track_type])
 		tracking_values[track_type] -= value

@@ -140,14 +140,6 @@
 	. = ..()
 	emag_act(INFINITY)
 
-/obj/machinery/computer/modular/preset/library
-	default_software = list(
-		/datum/computer_file/program/nttransfer,
-		/datum/computer_file/program/email_client,
-		/datum/computer_file/program/library,
-		/datum/computer_file/program/wordprocessor
-	)
-
 /obj/machinery/computer/modular/preset/merchant
 	default_software = list(
 		/datum/computer_file/program/merchant,

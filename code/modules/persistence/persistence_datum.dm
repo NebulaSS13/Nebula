@@ -69,7 +69,7 @@
 /datum/persistent/proc/IsValidEntry(var/atom/entry)
 	if(!istype(entry))
 		return FALSE
-	if(GetEntryAge(entry) >= entries_expire_at)
+	if(!isnull(entries_expire_at) && GetEntryAge(entry) >= entries_expire_at)
 		return FALSE
 	var/turf/T = get_turf(entry)
 	if(!T || !(T.z in GLOB.using_map.station_levels) )
@@ -117,7 +117,8 @@
 	. = list("<tr><td colspan = 4><b>[capitalize(name)]</b></td></tr>")
 	. += "<tr><td colspan = 4><hr></td></tr>"
 	for(var/thing in SSpersistence.tracking_values[type])
-		. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
+		if(IsValidEntry(thing))
+			. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
 /datum/persistent/proc/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)

@@ -707,8 +707,6 @@ var/list/worths = list(
 					/obj/machinery/beehive = -500,
 					/obj/machinery/portable_atmospherics/hydroponics/soil = 1, //its dirt,
 					/obj/machinery/portable_atmospherics/hydroponics = -2300,
-					/obj/machinery/libraryscanner = -1000,
-					/obj/machinery/bookbinder = -1200,
 					/obj/machinery = -1000,
 //BOOKS,
 					/obj/item/book/skill = 60
