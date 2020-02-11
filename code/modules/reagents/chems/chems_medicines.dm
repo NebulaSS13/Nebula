@@ -56,8 +56,8 @@
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /datum/reagent/burn_meds
-	name = "regenerative powder"
-	description = "An analgesic that encourages burned tissue to recover."
+	name = "synthskin"
+	description = "A synthetic sealant, disinfectant and analgesic that encourages burned tissue to recover."
 	taste_description = "bitterness"
 	color = "#ffa800"
 	overdose = REAGENTS_OVERDOSE
