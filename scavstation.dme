@@ -2472,6 +2472,7 @@
 #include "code\modules\persistence\graffiti.dm"
 #include "code\modules\persistence\noticeboards.dm"
 #include "code\modules\persistence\persistence_datum.dm"
+#include "code\modules\persistence\persistence_datum_book.dm"
 #include "code\modules\persistence\persistence_datum_filth.dm"
 #include "code\modules\persistence\persistence_datum_filth_trash.dm"
 #include "code\modules\persistence\persistence_datum_graffiti.dm"

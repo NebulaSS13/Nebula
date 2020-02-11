@@ -1,3 +1,4 @@
+GLOBAL_LIST_INIT(station_bookcases, new)
 /* Library Items
  *
  * Contains:
@@ -26,6 +27,12 @@
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/book))
 			I.forceMove(src)
+	if(z in GLOB.using_map.station_levels)
+		GLOB.station_bookcases += src
+	. = ..()
+
+/obj/structure/bookcase/Destroy()
+	GLOB.station_bookcases -= src
 	. = ..()
 
 /obj/structure/bookcase/create_dismantled_products(var/turf/T)
@@ -140,6 +147,27 @@
 	var/title		 // The real name of the book.
 	var/carved = 0	 // Has the book been hollowed out for use as a secret storage item?
 	var/obj/item/store	//What's in the book?
+	var/last_modified_ckey
+
+/obj/item/book/Initialize(var/ml)
+	if(!ml && !unique)
+		SSpersistence.track_value(src, /datum/persistent/book)
+	. = ..()
+
+/obj/item/book/Destroy()
+	if(dat && SSpersistence.is_tracking(src, /datum/persistent/book))
+		// Create a new book in nullspace that is tracked by persistence.
+		// This is so destroying a book does not get rid of someone's 
+		// content, as books with null coords will get spawned in a random
+		// library bookcase.
+		var/obj/item/book/backup_book = new
+		backup_book.dat =                dat
+		backup_book.author =             author
+		backup_book.title =              title
+		backup_book.last_modified_ckey = last_modified_ckey
+		backup_book.unique =             TRUE
+	SSpersistence.forget_value(src, /datum/persistent/book)
+	. = ..()
 
 /obj/item/book/attack_self(var/mob/user)
 	if(carved)
@@ -189,8 +217,9 @@
 				else
 					newtitle = usr.handle_writing_literacy(usr, newtitle)
 					if(newtitle)
-						src.SetName(newtitle)
-						src.title = newtitle
+						last_modified_ckey = user.ckey
+						title = newtitle
+						SetName(title)
 			if("Contents")
 				var/content = sanitize(input("Write your book's contents (HTML NOT allowed):") as message|null, MAX_BOOK_MESSAGE_LEN)
 				if(!content)
@@ -199,6 +228,7 @@
 				else
 					content = usr.handle_writing_literacy(usr, content)
 					if(content)
+						last_modified_ckey = user.ckey
 						dat += content
 
 			if("Author")
@@ -209,6 +239,7 @@
 				else
 					newauthor = usr.handle_writing_literacy(usr, newauthor)
 					if(newauthor)
+						last_modified_ckey = user.ckey
 						author = newauthor
 			else
 				return

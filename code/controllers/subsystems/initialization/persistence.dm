@@ -54,6 +54,9 @@ SUBSYSTEM_DEF(persistence)
 		tracking_values[track_type] = list()
 	tracking_values[track_type] += value
 
+/datum/controller/subsystem/persistence/proc/is_tracking(var/atom/value, var/track_type)
+	. = (value in tracking_values[track_type])
+	
 /datum/controller/subsystem/persistence/proc/forget_value(var/atom/value, var/track_type)
 	if(tracking_values[track_type])
 		tracking_values[track_type] -= value

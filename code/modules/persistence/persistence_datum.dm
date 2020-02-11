@@ -69,7 +69,7 @@
 /datum/persistent/proc/IsValidEntry(var/atom/entry)
 	if(!istype(entry))
 		return FALSE
-	if(GetEntryAge(entry) >= entries_expire_at)
+	if(!isnull(entries_expire_at) && GetEntryAge(entry) >= entries_expire_at)
 		return FALSE
 	var/turf/T = get_turf(entry)
 	if(!T || !(T.z in GLOB.using_map.station_levels) )
