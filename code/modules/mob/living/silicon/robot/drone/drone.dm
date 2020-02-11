@@ -404,3 +404,13 @@ var/list/mob_hat_cache = list()
 	if(!controlling_ai)
 		return ..()
 	controlling_ai.open_subsystem(/datum/nano_module/law_manager)
+
+/mob/living/silicon/robot/drone/attack_hand(mob/user)
+	if(hat)
+		hat.forceMove(get_turf(src))
+		user.put_in_hands(hat)
+		user.visible_message(SPAN_DANGER("\The [user] removes \the [src]'s [hat]!"))
+		hat = null
+		update_icons()
+		return
+	. = ..()

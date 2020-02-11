@@ -81,18 +81,15 @@
 		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
 
-/mob/living/carbon/attack_hand(mob/M as mob)
-	if(!istype(M, /mob/living/carbon)) return
-	if (ishuman(M))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-		if (H.hand)
-			temp = H.organs_by_name[BP_L_HAND]
+/mob/living/carbon/attack_hand(var/mob/living/carbon/human/M)
+	if(istype(M)) 
+		var/obj/item/organ/external/temp = M.organs_by_name[BP_R_HAND]
+		if (M.hand)
+			temp = M.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
-			to_chat(H, "<span class='warning'>You can't use your [temp.name]</span>")
+			to_chat(M, SPAN_WARNING("You can't use your [temp.name]."))
 			return
-
-	return
+	. = ..()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
