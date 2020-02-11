@@ -228,7 +228,7 @@
 		return
 
 	if(beaker.volume > 0)
-		beaker.reagents.trans_to_mob(buckled_mob, beaker.amount_per_transfer_from_this, CHEM_BLOOD)
+		beaker.reagents.trans_to_mob(buckled_mob, beaker.amount_per_transfer_from_this, CHEM_INJECT)
 		queue_icon_update()
 
 /obj/structure/bed/roller/proc/remove_beaker(mob/user)

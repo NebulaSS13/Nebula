@@ -145,7 +145,7 @@
 	log_admin("[key_name(L)] was successfully injected with " + reagents.get_reagents() + " by \the [acting_object]")
 	L.visible_message("<span class='warning'>\The [acting_object] injects [L] with its needle!</span>", \
 					"<span class='warning'>\The [acting_object] injects you with its needle!</span>")
-	reagents.trans_to_mob(L, transfer_amount, CHEM_BLOOD)
+	reagents.trans_to_mob(L, transfer_amount, CHEM_INJECT)
 	activate_pin(2)
 
 /obj/item/integrated_circuit/reagent/injector/proc/draw_after(var/weakref/target, var/amount)

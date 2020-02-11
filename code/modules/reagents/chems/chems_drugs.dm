@@ -53,7 +53,7 @@
 			data = world.time
 			to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
 
-/datum/reagent/nicotine/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/nicotine/affect_overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
@@ -210,7 +210,7 @@
 	. = ..()
 	parent.remove_client_color(/datum/client_color/thirdeye)
 
-/datum/reagent/glowsap/gleam/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/glowsap/gleam/affect_overdose(var/mob/living/carbon/M, var/alien)
 	M.adjustBrainLoss(rand(1, 5))
 	if(ishuman(M) && prob(10))
 		var/mob/living/carbon/human/H = M

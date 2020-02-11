@@ -61,7 +61,7 @@
 	overdose = 10
 	hydration_factor = 6
 
-/datum/reagent/nutriment/slime_meat/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/nutriment/slime_meat/affect_overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_YINGLET)
 		M.reagents.add_reagent(/datum/reagent/psychoactives, 0.1)
 

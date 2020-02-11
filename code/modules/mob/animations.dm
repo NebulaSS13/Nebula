@@ -43,32 +43,30 @@ note dizziness decrements automatically in the mob's Life() proc.
 		client.pixel_y = 0
 
 // jitteriness - copy+paste of dizziness
-/mob/var/is_jittery = 0
+/mob/var/is_jittery = FALSE
 /mob/var/jitteriness = 0//Carbon
 
 /mob/proc/make_jittery(var/amount)
 	return //Only for living/carbon/human/
 
 /mob/living/carbon/human/make_jittery(var/amount)
-	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get jittery
-		return
-	if(!jittery_damage())
-		return //Robotic hearts don't get jittery.
-	jitteriness = min(1000, jitteriness + amount)	// store what will be new value
-													// clamped to max 1000
-	if(jitteriness > 100 && !is_jittery)
-		spawn(0)
+	if(jittery_damage())
+		jitteriness = Clamp(jitteriness + amount, 0, 1000)
+		if(jitteriness > 100)
 			jittery_process()
 
 // Typo from the original coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
 /mob/proc/jittery_process()
-	is_jittery = 1
+	set waitfor = 0
+	if(is_jittery)
+		return
+	is_jittery = TRUE
 	while(jitteriness > 100)
 		var/amplitude = min(4, jitteriness / 100)
 		do_jitter(amplitude)
 		sleep(1)
 	//endwhile - reset the pixel offsets to zero
-	is_jittery = 0
+	is_jittery = FALSE
 	do_jitter(0)
 
 /mob/proc/do_jitter(amplitude)

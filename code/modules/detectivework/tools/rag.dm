@@ -128,8 +128,8 @@
 					"You hear some struggling and muffled cries of surprise"
 					)
 
-				//it's inhaled, so... maybe CHEM_BLOOD doesn't make a whole lot of sense but it's the best we can do for now
-				reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
+				//it's inhaled, so... maybe CHEM_INJECT doesn't make a whole lot of sense but it's the best we can do for now
+				reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
 				update_name()
 			else
 				wipe_down(target, user)

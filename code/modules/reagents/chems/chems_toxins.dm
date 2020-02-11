@@ -167,7 +167,7 @@
 	..()
 	M.confused += 1.5
 
-/datum/reagent/toxin/heartstopper/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/toxin/heartstopper/affect_overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M

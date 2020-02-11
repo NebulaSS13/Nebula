@@ -98,7 +98,7 @@
 		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/update_eyes), 5 SECONDS)
 	. = ..()
 
-/datum/reagent/glowsap/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/glowsap/affect_overdose(var/mob/living/carbon/M, var/alien)
 	. = ..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.hallucination(60, 20)

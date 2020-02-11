@@ -1,6 +1,6 @@
 /mob/living/carbon/Initialize()
 	//setup reagent holders
-	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_BLOOD)
+	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
 	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 	reagents = bloodstr
 
@@ -378,13 +378,13 @@
 	Weaken(Floor(stun_duration/2))
 	return TRUE
 
-/mob/living/carbon/proc/add_chemical_effect(var/effect, var/magnitude = 1)
+/mob/living/carbon/add_chemical_effect(var/effect, var/magnitude = 1)
 	if(effect in chem_effects)
 		chem_effects[effect] += magnitude
 	else
 		chem_effects[effect] = magnitude
 
-/mob/living/carbon/proc/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
+/mob/living/carbon/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
 	if(effect in chem_effects)
 		chem_effects[effect] = max(magnitude, chem_effects[effect])
 	else
@@ -484,13 +484,13 @@
 /mob/living/carbon/proc/set_nutrition(var/amt)
 	nutrition = Clamp(amt, 0, initial(nutrition))
 
-/mob/living/carbon/proc/adjust_nutrition(var/amt)
+/mob/living/carbon/adjust_nutrition(var/amt)
 	set_nutrition(nutrition + amt)
 
 /mob/living/carbon/proc/set_hydration(var/amt)
 	hydration = Clamp(amt, 0, initial(hydration))
 
-/mob/living/carbon/proc/adjust_hydration(var/amt)
+/mob/living/carbon/adjust_hydration(var/amt)
 	set_hydration(hydration + amt)
 
 /mob/living/carbon/proc/set_internals(obj/item/tank/source, source_string)

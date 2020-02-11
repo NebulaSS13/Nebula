@@ -161,7 +161,7 @@
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
-/datum/reagent/ethanol/coffee/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/ethanol/coffee/affect_overdose(var/mob/living/carbon/M, var/alien)
 	M.make_jittery(5)
 
 /datum/reagent/ethanol/coffee/kahlua

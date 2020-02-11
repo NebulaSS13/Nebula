@@ -243,7 +243,7 @@
 		if(target != trackTarget && target.loc != trackTarget)
 			return
 	admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
-	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
+	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
 
 	if(target != user)
 		user.visible_message("<span class='warning'>\the [user] injects \the [target] with [visible_name]!</span>", "<span class='notice'>You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units.</span>")
@@ -289,7 +289,7 @@
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 	var/contained_reagents = reagents.get_reagents()
-	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
+	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_INJECT)
 	if(isnull(trans)) trans = 0
 	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 	break_syringe(target, user)

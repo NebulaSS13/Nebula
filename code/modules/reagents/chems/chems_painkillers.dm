@@ -39,7 +39,7 @@
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
 		M.add_chemical_effect(CE_BREATHLOSS, 0.1 * boozed) //drinking and opiating makes breathing kinda hard
 
-/datum/reagent/painkillers/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/painkillers/affect_overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.hallucination(120, 30)
 	M.druggy = max(M.druggy, 10)
