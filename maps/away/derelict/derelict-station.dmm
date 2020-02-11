@@ -944,7 +944,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cX" = (
-/obj/machinery/bookbinder,
+/obj/machinery/fabricator/book,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "cY" = (

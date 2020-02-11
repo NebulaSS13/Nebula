@@ -117,7 +117,8 @@
 	. = list("<tr><td colspan = 4><b>[capitalize(name)]</b></td></tr>")
 	. += "<tr><td colspan = 4><hr></td></tr>"
 	for(var/thing in SSpersistence.tracking_values[type])
-		. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
+		if(IsValidEntry(thing))
+			. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
 /datum/persistent/proc/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)

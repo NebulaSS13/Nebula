@@ -84,7 +84,7 @@
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "ap" = (
-/obj/machinery/bookbinder,
+/obj/machinery/fabricator/book,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "aq" = (

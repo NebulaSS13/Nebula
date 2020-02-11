@@ -194,7 +194,6 @@
 /area/map_template/wizard_station)
 "aD" = (
 /obj/structure/table/woodentable,
-/obj/machinery/computer/modular/preset/library,
 /obj/item/radio/intercom/syndicate{
 	dir = 4;
 	pixel_x = -22

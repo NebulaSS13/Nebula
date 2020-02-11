@@ -16,7 +16,6 @@
 		book.forceMove(case)
 		case.update_icon()
 	. = book
-	SSpersistence.track_value(., type)
 
 /datum/persistent/book/IsValidEntry(var/atom/entry)
 	. = ..()
@@ -46,3 +45,10 @@
 
 /datum/persistent/book/GetEntryAge(var/atom/entry)
 	. = -1
+
+/datum/persistent/book/GetAdminDataStringFor(var/thing, var/can_modify, var/mob/user)
+	var/obj/item/book/book = thing
+	if(can_modify)
+		. = "<td>[book.dat]</td><td>[book.title]</td><td>[book.last_modified_ckey]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"
+	else
+		. = "<td colspan = 2>[book.dat]</td><td>[book.title]</td><td>[book.last_modified_ckey]</td>"
