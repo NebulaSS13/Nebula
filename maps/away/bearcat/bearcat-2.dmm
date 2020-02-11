@@ -2274,7 +2274,7 @@
 	name = "pill cabinet";
 	pixel_x = 26
 	},
-/obj/item/storage/pill_bottle/antivirals,
+/obj/item/storage/pill_bottle/antibiotics,
 /obj/item/storage/pill_bottle/painkillers,
 /obj/item/storage/pill_bottle/antitox,
 /obj/item/storage/pill_bottle/burn_meds,
@@ -2818,7 +2818,7 @@
 /obj/item/storage/firstaid/adv,
 /obj/random/medical,
 /obj/item/stack/medical/advanced/bruise_pack,
-/obj/item/chems/syringe/antiviral,
+/obj/item/chems/syringe/antibiotic,
 /obj/item/scanner/health,
 /obj/machinery/light/small{
 	icon_state = "bulb1";

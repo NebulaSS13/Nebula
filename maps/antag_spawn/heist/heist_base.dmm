@@ -1875,8 +1875,8 @@
 /obj/item/bonesetter,
 /obj/item/bonegel,
 /obj/item/sutures,
-/obj/item/chems/syringe/antiviral,
-/obj/item/chems/syringe/antiviral,
+/obj/item/chems/syringe/antibiotic,
+/obj/item/chems/syringe/antibiotic,
 /turf/simulated/floor/shuttle/white,
 /area/map_template/skipjack_station/start)
 "ez" = (

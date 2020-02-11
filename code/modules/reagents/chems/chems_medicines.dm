@@ -115,26 +115,6 @@
 			M.reagents.remove_reagent(R.type, removing)
 			return
 
-
-/datum/reagent/antivirals
-	name = "Antivirals"
-	description = "An all-in-one antiviral agent. Fever, cough, sneeze, safe for babies."
-	taste_description = "cough syrup"
-	color = "#c8a5dc"
-	overdose = 60
-	scannable = 1
-	metabolism = REM * 0.05
-	flags = IGNORE_MOB_SIZE
-
-/datum/reagent/antivirals/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 15)
-	M.add_chemical_effect(CE_ANTIVIRAL, 1)
-
-/datum/reagent/antivirals/overdose(var/mob/living/carbon/M, var/alien)
-	M.add_chemical_effect(CE_TOXIN, 1)
-	M.hallucination(60, 20)
-	M.druggy = max(M.druggy, 2)
-
 /datum/reagent/immunobooster
 	name = "immunobooster"
 	description = "A drug that helps restore the immune system. Will not replace a normal immunity."
@@ -146,10 +126,8 @@
 	scannable = 1
 
 /datum/reagent/immunobooster/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(volume < REAGENTS_OVERDOSE && !M.chem_effects[CE_ANTIVIRAL])
+	if(volume < REAGENTS_OVERDOSE)
 		M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.
-	if(M.chem_effects[CE_ANTIVIRAL]) //don't take with 'cillin
-		M.add_chemical_effect(CE_TOXIN, 4) // as strong as taking vanilla 'toxin'
 
 /datum/reagent/immunobooster/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -212,18 +190,15 @@
 
 /datum/reagent/antibiotics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.immunity = max(M.immunity - 0.1, 0)
-	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
 	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
 	if(volume > 10)
 		M.immunity = max(M.immunity - 0.3, 0)
-		M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
 	if(M.chem_doses[type] > 15)
 		M.immunity = max(M.immunity - 0.25, 0)
 
 /datum/reagent/antibiotics/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.immunity = max(M.immunity - 0.25, 0)
-	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)
 	if(prob(2))
 		M.immunity_norm = max(M.immunity_norm - 1, 0)
 

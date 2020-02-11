@@ -153,17 +153,17 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
-	var/virus_immunity = owner.virus_immunity() //reduces the amount of times we need to call this proc
+	var/germ_immunity = owner.get_immunity() //reduces the amount of times we need to call this proc
 	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/antibiotics)
 
-	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(virus_immunity*0.3))
+	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(germ_immunity*0.3))
 		germ_level--
 
 	if (germ_level >= INFECTION_LEVEL_ONE/2)
 		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
 		if(antibiotics < 5 && prob(round(germ_level/6 * owner.immunity_weakness() * 0.01)))
-			if(virus_immunity > 0)
-				germ_level += Clamp(round(1/virus_immunity), 1, 10) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
+			if(germ_immunity > 0)
+				germ_level += Clamp(round(1/germ_immunity), 1, 10) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
 			else // Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
 				germ_level += 10
 
@@ -183,7 +183,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
-	if(owner.virus_immunity() < 10) //for now just having shit immunity will suppress it
+	if(owner.get_immunity() < 10) //for now just having shit immunity will suppress it
 		return
 	if(BP_IS_PROSTHETIC(src))
 		return

@@ -194,7 +194,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds/Initialize()
 	. = ..()
 	var/datum/reagent/payload = pick(list(
-				/datum/reagent/antivirals,
+				/datum/reagent/antibiotics,
 				/datum/reagent/painkillers,
 				/datum/reagent/regenerator,
 				/datum/reagent/antitoxins,

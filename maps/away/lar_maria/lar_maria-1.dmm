@@ -217,7 +217,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "ay" = (
-/obj/machinery/smartfridge/chemistry/virology,
+/obj/machinery/smartfridge/chemistry,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "az" = (
@@ -1924,7 +1924,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eX" = (
-/obj/machinery/smartfridge/chemistry/virology,
+/obj/machinery/smartfridge/chemistry,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)

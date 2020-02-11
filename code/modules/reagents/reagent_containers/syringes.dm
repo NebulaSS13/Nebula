@@ -351,11 +351,11 @@
 	mode = SYRINGE_INJECT
 	update_icon()
 
-/obj/item/chems/syringe/antiviral
+/obj/item/chems/syringe/antibiotic
 	name = "Syringe (antibiotics)"
-	desc = "Contains antiviral agents."
+	desc = "Contains antibiotic agents."
 
-/obj/item/chems/syringe/antiviral/Initialize()
+/obj/item/chems/syringe/antibiotic/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/antibiotics, 15)
 	mode = SYRINGE_INJECT

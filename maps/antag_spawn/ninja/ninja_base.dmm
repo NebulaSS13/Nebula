@@ -203,8 +203,8 @@
 /area/map_template/ninja_dojo/dojo)
 "aB" = (
 /obj/structure/table/glass,
-/obj/item/chems/syringe/antiviral,
-/obj/item/chems/syringe/antiviral,
+/obj/item/chems/syringe/antibiotic,
+/obj/item/chems/syringe/antibiotic,
 /obj/item/stack/medical/advanced/bruise_pack,
 /turf/unsimulated/floor{
 	dir = 2;
