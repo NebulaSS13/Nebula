@@ -84,7 +84,7 @@
 	oxy_meds	  spawn_reagent = /datum/reagent/oxy_meds
 	regenerator	  spawn_reagent = /datum/reagent/regenerator
 	antitoxins	  spawn_reagent = /datum/reagent/antitoxins
-	entolimod	  spawn_reagent = /datum/reagent/entolimod
+	antirads	  spawn_reagent = /datum/reagent/antirads
 	neuroannealer spawn_reagent = /datum/reagent/neuroannealer
 	eyedrops	  spawn_reagent = /datum/reagent/eyedrops
 	brute_meds	  spawn_reagent = /datum/reagent/brute_meds

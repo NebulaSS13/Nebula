@@ -255,13 +255,13 @@
 	reagents.add_reagent(/datum/reagent/antidepressants, 15)
 	color = reagents.get_color()
 
-/obj/item/chems/pill/entolimod
-	name = "entolimod (7u)"
+/obj/item/chems/pill/antirads
+	name = "antirads (7u)"
 	desc = "Used to treat radiation poisoning."
 	icon_state = "pill1"
-/obj/item/chems/pill/entolimod/Initialize()
+/obj/item/chems/pill/antirads/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/entolimod, 7)
+	reagents.add_reagent(/datum/reagent/antirads, 7)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antirad
@@ -270,7 +270,7 @@
 	icon_state = "yellow"
 /obj/item/chems/pill/antirad/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/entolimod, 5)
+	reagents.add_reagent(/datum/reagent/antirads, 5)
 	reagents.add_reagent(/datum/reagent/antitoxins, 10)
 
 

@@ -34,7 +34,7 @@
 			/obj/item/chems/chem_disp_cartridge/oxy_meds,
 			/obj/item/chems/chem_disp_cartridge/regenerator,
 			/obj/item/chems/chem_disp_cartridge/antitoxins,
-			/obj/item/chems/chem_disp_cartridge/entolimod,
+			/obj/item/chems/chem_disp_cartridge/antirads,
 			/obj/item/chems/chem_disp_cartridge/neuroannealer,
 			/obj/item/chems/chem_disp_cartridge/eyedrops,
 			/obj/item/chems/chem_disp_cartridge/brute_meds,

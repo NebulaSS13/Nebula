@@ -322,5 +322,5 @@
 			/obj/item/chems/pill/painkillers = 2,
 			/obj/item/chems/pill/oxygen = 2,
 			/obj/item/chems/pill/burn_meds = 2,
-			/obj/item/chems/pill/entolimod
+			/obj/item/chems/pill/antirads
 		)

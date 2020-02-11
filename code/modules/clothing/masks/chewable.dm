@@ -177,7 +177,7 @@ obj/item/clothing/mask/chewable/Destroy()
 				/datum/reagent/oxy_meds,
 				/datum/reagent/regenerator,
 				/datum/reagent/amphetamines,
-				/datum/reagent/entolimod,
+				/datum/reagent/antirads,
 				/datum/reagent/stimulants,
 				/datum/reagent/antidepressants,
 				/datum/reagent/antitoxins,

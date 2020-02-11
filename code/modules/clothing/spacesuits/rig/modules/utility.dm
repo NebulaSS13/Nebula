@@ -145,10 +145,10 @@
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
 
 	charges = list(
-		list("oxygel",       "oxygel",       /datum/reagent/oxy_meds,       80),
+		list("oxygel",       "oxygel",       /datum/reagent/oxy_meds,     80),
 		list("adrenaline",   "adrenaline",   /datum/reagent/adrenaline,   80),
 		list("antitoxins",   "antitoxins",   /datum/reagent/antitoxins,   80),
-		list("entolimod",    "entolimod",    /datum/reagent/entolimod,    80),
+		list("antirads",     "antirads",     /datum/reagent/antirads,     80),
 		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,  80),
 		list("painkillers",  "painkillers",  /datum/reagent/painkillers,  80)
 		)
@@ -160,11 +160,11 @@
 
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
-		list("oxygen",       "oxygel",       /datum/reagent/oxy_meds,            20),
+		list("oxygen",       "oxygel",       /datum/reagent/oxy_meds,          20),
 		list("adrenaline",   "adrenaline",   /datum/reagent/adrenaline,        20),
 		list("antitoxins",   "antitoxins",   /datum/reagent/antitoxins,        20),
 		list("glucose",      "glucose",      /datum/reagent/nutriment/glucose, 80),
-		list("entolimod",    "entolimod",    /datum/reagent/entolimod,         20),
+		list("antirads",    "antirads",      /datum/reagent/antirads,          20),
 		list("regenerative", "regenerative", /datum/reagent/burn_meds,         20),
 		list("antibiotics",  "antibiotics",  /datum/reagent/antibiotics,       20),
 		list("painkillers",  "painkillers",  /datum/reagent/painkillers,       20)
