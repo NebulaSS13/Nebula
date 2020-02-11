@@ -18,17 +18,3 @@
 	if(istype(D))
 		to_chat(src, "<span class='notice'>\The [D] acknowledges your signal.</span>")
 		D.flush_count = D.flush_every_ticks
-
-	return
-
-/mob/living/silicon/robot/drone/MouseDrop(atom/over_object)
-	var/mob/living/carbon/H = over_object
-
-	if(istype(H) && Adjacent(H) && (usr == H) && (H.a_intent == "grab") && hat && !(H.l_hand && H.r_hand))
-		H.put_in_hands(hat)
-		H.visible_message("<span class='danger'>\The [H] removes \the [src]'s [hat].</span>")
-		hat = null
-		update_icons()
-		return
-
-	return ..()
