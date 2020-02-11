@@ -17,9 +17,9 @@
 			M.eye_blind = max(M.eye_blind - 5, 0)
 			E.damage = max(E.damage - 5 * removed, 0)
 
-/datum/reagent/entolimod
-	name = "entolimod"
-	description = "A synthetic recombinant protein used in the treatment of radiation poisoning."
+/datum/reagent/antirads
+	name = "antirads"
+	description = "A synthetic recombinant protein, derived from entolimod, used in the treatment of radiation poisoning."
 	taste_description = "bitterness"
 	color = "#408000"
 	metabolism = REM * 0.25
@@ -28,7 +28,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 2.3
 
-/datum/reagent/entolimod/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/antirads/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.radiation = max(M.radiation - 30 * removed, 0)
 
 /datum/reagent/brute_meds

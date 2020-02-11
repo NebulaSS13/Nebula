@@ -15,7 +15,7 @@
 	var/list/base_chemicals = list("Adrenaline" = /datum/reagent/adrenaline, "Sedatives" = /datum/reagent/sedatives, "Painkillers" = /datum/reagent/painkillers, "Oxygel" = /datum/reagent/oxy_meds)
 	var/list/available_chemicals = list()
 	var/list/upgrade_chemicals = list("Anti-Burn" = /datum/reagent/burn_meds)
-	var/list/upgrade2_chemicals = list("Anti-Rads" = /datum/reagent/entolimod)
+	var/list/upgrade2_chemicals = list("Anti-Rads" = /datum/reagent/antirads)
 	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover)
 	var/obj/item/chems/glass/beaker = null
 	var/filtering = 0

@@ -46,5 +46,5 @@
 	return list(
 		/obj/item/storage/firstaid/surgery,
 		/obj/item/storage/pill_bottle/antitoxins = 2,
-		/obj/item/chems/pill/entolimod = 12
+		/obj/item/chems/pill/antirads = 12
 			)

@@ -124,9 +124,9 @@
 	required_reagents = list(/datum/reagent/acid = 1, /datum/reagent/acid/hydrochloric = 1, /datum/reagent/potassium = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/entolimod
-	name = "Entolimod"
-	result = /datum/reagent/entolimod
+/datum/chemical_reaction/antirads
+	name = "Anti-Radiation Medication"
+	result = /datum/reagent/antirads
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/antitoxins = 1)
 	result_amount = 2
 
@@ -185,7 +185,7 @@
 /datum/chemical_reaction/retrovirals
 	name = "Retrovirals"
 	result = /datum/reagent/retrovirals
-	required_reagents = list(/datum/reagent/entolimod = 1, /datum/reagent/carbon = 1)
+	required_reagents = list(/datum/reagent/antirads = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/nanitefluid

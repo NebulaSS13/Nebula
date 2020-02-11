@@ -173,7 +173,7 @@
 /obj/item/chems/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
 	band_color = COLOR_AMBER
-	starts_with = list(/datum/reagent/entolimod = 5)
+	starts_with = list(/datum/reagent/antirads = 5)
 
 /obj/item/chems/hypospray/autoinjector/hallucinogenics
 	name = "autoinjector"
