@@ -1714,6 +1714,7 @@
 #include "code\modules\fabrication\__fabricator_defines.dm"
 #include "code\modules\fabrication\_fabricator.dm"
 #include "code\modules\fabrication\_fabricator_build_order.dm"
+#include "code\modules\fabrication\fabricator_books.dm"
 #include "code\modules\fabrication\fabricator_build.dm"
 #include "code\modules\fabrication\fabricator_food.dm"
 #include "code\modules\fabrication\fabricator_hacked.dm"

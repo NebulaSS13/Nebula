@@ -1,11 +1,12 @@
 /obj/item/book
 	name = "book"
 	icon = 'icons/obj/library.dmi'
-	icon_state ="book"
+	icon_state = "book"
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
 	attack_verb = list("bashed", "whacked", "educated")
+	matter = list(MAT_PLASTIC = SHEET_MATERIAL_AMOUNT, MAT_WOOD = SHEET_MATERIAL_AMOUNT) // This is quite a lot of matter, but that's a reflection on the material system being buggered more than books being too big.
 	var/dat			 // Actual page content
 	var/author		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	var/unique = 0   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
@@ -15,12 +16,11 @@
 	var/last_modified_ckey
 
 /obj/item/book/Initialize(var/ml)
-	if(!ml && !unique)
-		SSpersistence.track_value(src, /datum/persistent/book)
+	SSpersistence.track_value(src, /datum/persistent/book)
 	. = ..()
 
 /obj/item/book/Destroy()
-	if(dat && SSpersistence.is_tracking(src, /datum/persistent/book))
+	if(dat && last_modified_ckey && SSpersistence.is_tracking(src, /datum/persistent/book))
 		// Create a new book in nullspace that is tracked by persistence.
 		// This is so destroying a book does not get rid of someone's 
 		// content, as books with null coords will get spawned in a random
@@ -31,6 +31,8 @@
 		backup_book.title =              title
 		backup_book.last_modified_ckey = last_modified_ckey
 		backup_book.unique =             TRUE
+		SSpersistence.track_value(backup_book, /datum/persistent/book)
+
 	SSpersistence.forget_value(src, /datum/persistent/book)
 	. = ..()
 
@@ -126,3 +128,20 @@
 		var/processed_dat = M.handle_reading_literacy(user, "<i>Author: [author].</i><br><br>" + "[dat]")
 		if(processed_dat)
 			M << browse(processed_dat, "window=book;size=1000x550")
+
+/obj/item/book/printable_black
+	icon_state = "book1"
+/obj/item/book/printable_red
+	icon_state = "book2"
+/obj/item/book/printable_yellow
+	icon_state = "book3"
+/obj/item/book/printable_blue
+	icon_state = "book4"
+/obj/item/book/printable_green
+	icon_state = "book5"
+/obj/item/book/printable_purple
+	icon_state = "book6"
+/obj/item/book/printable_light_blue
+	icon_state = "book7"
+/obj/item/book/printable_magazine
+	icon_state = "bookMagazine"

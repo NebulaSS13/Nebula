@@ -2431,7 +2431,9 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/machinery/computer/modular/preset/library,
+/obj/machinery/fabricator/book,
+/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/wood/ten,
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
