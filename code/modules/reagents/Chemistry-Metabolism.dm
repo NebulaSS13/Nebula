@@ -1,5 +1,5 @@
 /datum/reagents/metabolism
-	var/metabolism_class //CHEM_TOUCH, CHEM_INGEST, or CHEM_BLOOD
+	var/metabolism_class //CHEM_TOUCH, CHEM_INGEST, or CHEM_INJECT
 	var/mob/living/carbon/parent
 
 /datum/reagents/metabolism/del_reagent(var/reagent_type)

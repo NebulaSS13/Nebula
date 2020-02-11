@@ -74,7 +74,7 @@
 	if(!reagents.total_volume)
 		return
 
-	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_BLOOD)
+	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_INJECT)
 	update_icon()
 
 /obj/item/chems/ivbag/nanoblood/Initialize()

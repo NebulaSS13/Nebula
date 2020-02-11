@@ -1,6 +1,6 @@
 /mob/living/carbon/Initialize()
 	//setup reagent holders
-	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_BLOOD)
+	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_INJECT)
 	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 	reagents = bloodstr
 

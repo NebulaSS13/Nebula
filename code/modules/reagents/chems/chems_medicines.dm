@@ -42,7 +42,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 4.9
 
-/datum/reagent/brute_meds/overdose(mob/living/carbon/M, alien)
+/datum/reagent/brute_meds/affect_overdose(mob/living/carbon/M, alien)
 	..()
 	if(ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + volume)/100)
@@ -129,7 +129,7 @@
 	if(volume < REAGENTS_OVERDOSE)
 		M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.
 
-/datum/reagent/immunobooster/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/immunobooster/affect_overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.immunity -= 0.5 //inverse effects when abused
@@ -196,7 +196,7 @@
 	if(M.chem_doses[type] > 15)
 		M.immunity = max(M.immunity - 0.25, 0)
 
-/datum/reagent/antibiotics/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/antibiotics/affect_overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.immunity = max(M.immunity - 0.25, 0)
 	if(prob(2))

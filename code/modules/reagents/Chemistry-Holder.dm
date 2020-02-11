@@ -417,12 +417,12 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		perm = L.reagent_permeability()
 	return trans_to_mob(target, amount * perm, CHEM_TOUCH, 1, copy)
 
-/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
+/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_INJECT, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
 	if(!target || !istype(target) || !target.simulated)
 		return
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
-		if(type == CHEM_BLOOD)
+		if(type == CHEM_INJECT)
 			var/datum/reagents/R = C.reagents
 			return trans_to_holder(R, amount, multiplier, copy)
 		if(type == CHEM_INGEST)

@@ -30,7 +30,7 @@
 	if(!amount)
 		amount = rand(1,25)
 	var/mob/living/carbon/R = imp_in
-	reagents.trans_to_mob(R, amount, CHEM_BLOOD)
+	reagents.trans_to_mob(R, amount, CHEM_INJECT)
 	to_chat(R, "<span class='notice'>You hear a faint *beep*.</span>")
 
 /obj/item/implant/chem/attackby(obj/item/I, mob/user)

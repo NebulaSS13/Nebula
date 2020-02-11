@@ -269,7 +269,7 @@
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/drink/coffee/affect_overdose(var/mob/living/carbon/M, var/alien)
 	M.make_jittery(5)
 	M.add_chemical_effect(CE_PULSE, 1)
 

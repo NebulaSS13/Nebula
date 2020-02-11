@@ -195,7 +195,7 @@
 	var/datum/reagents/temp_reagents = new(amount, temp_holder)
 	container.reagents.trans_to_holder(temp_reagents, amount)
 
-	var/trans = temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_BLOOD) //technically it's contact, but the reagents are being applied to internal tissue
+	var/trans = temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_INJECT) //technically it's contact, but the reagents are being applied to internal tissue
 	if (trans > 0)
 		user.visible_message("<span class='notice'>[user] rubs [target]'s [affected.name] down with \the [tool]'s contents</span>.", \
 			"<span class='notice'>You rub [target]'s [affected.name] down with \the [tool]'s contents.</span>")
@@ -211,7 +211,7 @@
 
 	var/obj/item/chems/container = tool
 
-	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
+	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_INJECT)
 
 	user.visible_message("<span class='warning'>[user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>" , \
 	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")

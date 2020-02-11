@@ -77,7 +77,7 @@
 	update_icons()
 	if(do_mob(src, H, 30))
 		if(t == 1)
-			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_BLOOD)
+			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_INJECT)
 		else
 			H.reagents.add_reagent(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
