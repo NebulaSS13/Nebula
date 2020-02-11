@@ -875,6 +875,21 @@ default behaviour is:
 /mob/living/proc/eyecheck()
 	return FLASH_PROTECTION_NONE
 
+/mob/living/proc/adjust_nutrition(var/amt)
+	return
+
+/mob/living/proc/adjust_hydration(var/amt)
+	return
+
+/mob/living/proc/add_chemical_effect(var/effect, var/magnitude = 1)
+	return 
+
+/mob/living/proc/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
+	return 
+
+/mob/living/proc/adjust_immunity(var/amt)
+	return 
+
 /mob/living/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
 	if(skill_check(SKILL_LITERACY, SKILL_ADEPT))
 		. = text_content

@@ -3,11 +3,14 @@
 /mob/living/carbon/var/next_hallucination
 /mob/living/carbon/var/list/hallucinations = list()
 
+/mob/living/proc/adjust_hallucination(duration, power)
+	return
+
 /mob/living/carbon/proc/hallucination(duration, power)
 	hallucination_duration = max(hallucination_duration, duration)
 	hallucination_power = max(hallucination_power, power)
 
-/mob/living/carbon/proc/adjust_hallucination(duration, power)
+/mob/living/carbon/adjust_hallucination(duration, power)
 	hallucination_duration = max(0, hallucination_duration + duration)
 	hallucination_power = max(0, hallucination_power + power)
 
