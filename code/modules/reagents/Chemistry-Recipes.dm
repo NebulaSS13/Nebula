@@ -1778,12 +1778,6 @@
 	if(istype(T)) new /obj/item/stack/material/deuterium(T, created_volume)
 	return
 
-/datum/chemical_reaction/antivirals
-	name = "Antivirals"
-	result = /datum/reagent/antivirals
-	required_reagents = list(/datum/reagent/painkillers = 1, /datum/reagent/carbon = 1)
-	result_amount = 2
-
 /datum/chemical_reaction/nanoblood
 	name = "Nanoblood"
 	result = /datum/reagent/nanoblood

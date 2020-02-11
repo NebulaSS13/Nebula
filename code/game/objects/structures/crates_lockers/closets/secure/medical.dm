@@ -178,7 +178,7 @@
 		/obj/item/chems/glass/beaker = 2,
 		/obj/item/chems/glass/bottle/adrenaline,
 		/obj/item/storage/pill_bottle/antibiotics,
-		/obj/item/chems/syringe/antiviral,
+		/obj/item/chems/syringe/antibiotic,
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/storage/box/masks,
 		/obj/item/storage/box/gloves,

@@ -40,7 +40,7 @@
 #define     IMPCHEM_HUD 6 // Chemical implant.
 #define    IMPTRACK_HUD 7 // Tracking implant.
 #define SPECIALROLE_HUD 8 // AntagHUD image.
-#define  STATUS_HUD_OOC 9 // STATUS_HUD without virus DB check for someone being ill.
+#define  STATUS_HUD_OOC 9 // STATUS_HUD without check for someone being ill.
 #define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
 
 // Shuttle moving status.
@@ -196,12 +196,6 @@
 #define DEFAULT_SPAWNPOINT_ID "Default"
 
 #define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
-
-//Virus badness defines
-#define VIRUS_MILD			1
-#define VIRUS_COMMON		2	//Random events don't go higher (mutations aside)
-#define VIRUS_ENGINEERED	3
-#define VIRUS_EXOTIC		4	//Usually adminbus only
 
 //Error handler defines
 #define ERROR_USEFUL_LEN 2

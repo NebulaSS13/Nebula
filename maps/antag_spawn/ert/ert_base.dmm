@@ -3314,8 +3314,8 @@
 	pixel_y = 7
 	},
 /obj/item/chems/syringe,
-/obj/item/chems/syringe/antiviral,
-/obj/item/chems/syringe/antiviral,
+/obj/item/chems/syringe/antibiotic,
+/obj/item/chems/syringe/antibiotic,
 /obj/item/chems/ivbag/blood/OMinus,
 /obj/item/chems/ivbag/blood/OMinus,
 /turf/simulated/floor/tiled/white,
@@ -3548,8 +3548,8 @@
 /area/map_template/rescue_base/start)
 "hg" = (
 /obj/structure/table/glass,
-/obj/item/chems/syringe/antiviral,
-/obj/item/chems/syringe/antiviral,
+/obj/item/chems/syringe/antibiotic,
+/obj/item/chems/syringe/antibiotic,
 /obj/item/stack/medical/advanced/bruise_pack,
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)

@@ -150,7 +150,7 @@
 				/obj/item/storage/pill_bottle/burn_meds = 1,
 				/obj/item/storage/pill_bottle/brute_meds = 1,
 				/obj/item/chems/syringe/antitoxin = 2,
-				/obj/item/chems/syringe/antiviral = 1,
+				/obj/item/chems/syringe/antibiotic = 1,
 				/obj/item/chems/syringe/adrenaline = 2,
 				/obj/item/storage/box/freezer = 1,
 				/obj/item/stack/nanopaste = 1)
@@ -165,7 +165,7 @@
 /obj/random/medical/lite/spawn_choices()
 	return list(/obj/item/stack/medical/bruise_pack = 4,
 				/obj/item/stack/medical/ointment = 4,
-				/obj/item/storage/pill_bottle/antivirals = 2,
+				/obj/item/storage/pill_bottle/antibiotics = 2,
 				/obj/item/storage/pill_bottle/painkillers = 2,
 				/obj/item/stack/medical/advanced/bruise_pack = 2,
 				/obj/item/stack/medical/advanced/ointment = 2,

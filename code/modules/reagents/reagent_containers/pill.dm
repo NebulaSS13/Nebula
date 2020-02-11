@@ -217,22 +217,11 @@
 
 /obj/item/chems/pill/antibiotics
 	name = "antibiotics (10u)"
-	desc = "Contains antiviral agents."
+	desc = "Contains antibiotic agents."
 	icon_state = "pill3"
 /obj/item/chems/pill/antibiotics/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/antibiotics, 10)
-	color = reagents.get_color()
-
-/obj/item/chems/pill/antivirals
-	name = "antivirals (15u)"
-	desc = "Common cold mediciation. Safe for babies!"
-	icon_state = "pill4"
-/obj/item/chems/pill/antivirals/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/antivirals, 10)
-	reagents.add_reagent(/datum/reagent/drink/juice/lemon, 5)
-	reagents.add_reagent(/datum/reagent/menthol, REM*0.2)
 	color = reagents.get_color()
 
 //Psychiatry pills.

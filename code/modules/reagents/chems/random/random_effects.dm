@@ -296,13 +296,6 @@
 	beneficial = 1
 	desc = "neurological repair"
 
-/decl/random_chem_effect/random_properties/ce_antiviral
-	chem_effect_define = CE_ANTIVIRAL
-	beneficial = 1
-	maximum = VIRUS_EXOTIC
-	mode = RANDOM_CHEM_EFFECT_INT
-	desc = "antiviral action"
-
 /decl/random_chem_effect/random_properties/ce_toxins
 	chem_effect_define = CE_TOXIN
 	beneficial = -1

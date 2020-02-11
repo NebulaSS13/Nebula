@@ -27,7 +27,7 @@
 	startswith = list(
 		/obj/item/stack/medical/bruise_pack = 2,
 		/obj/item/stack/medical/ointment = 2,
-		/obj/item/storage/pill_bottle/antivirals,
+		/obj/item/storage/pill_bottle/antibiotics,
 		/obj/item/storage/pill_bottle/painkillers,
 		/obj/item/stack/medical/splint
 		)
@@ -303,13 +303,6 @@
 
 	startswith = list(/obj/item/chems/pill/stimulants = 21)
 	wrapper_color = COLOR_GRAY
-
-/obj/item/storage/pill_bottle/antivirals
-	name = "pill bottle (cold medicine)"
-	desc = "All-in-one cold medicine. 15u dose per pill. Safe for babies like you!"
-
-	startswith = list(/obj/item/chems/pill/antivirals = 21)
-	wrapper_color = COLOR_VIOLET
 
 /obj/item/storage/pill_bottle/assorted
 	name = "pill bottle (assorted)"
