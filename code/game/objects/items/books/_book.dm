@@ -7,13 +7,21 @@
 	w_class = ITEM_SIZE_NORMAL		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
 	attack_verb = list("bashed", "whacked", "educated")
 	matter = list(MAT_PLASTIC = SHEET_MATERIAL_AMOUNT, MAT_WOOD = SHEET_MATERIAL_AMOUNT) // This is quite a lot of matter, but that's a reflection on the material system being buggered more than books being too big.
+
 	var/dat			 // Actual page content
+	var/pencode_dat  // Cache pencode if input, so it can be edited later. 
 	var/author		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	var/unique = 0   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
 	var/title		 // The real name of the book.
 	var/carved = 0	 // Has the book been hollowed out for use as a secret storage item?
 	var/obj/item/store	//What's in the book?
 	var/last_modified_ckey
+
+	// Copied from paper. Todo: generalize.
+	var/const/deffont = "Verdana"
+	var/const/signfont = "Times New Roman"
+	var/const/crayonfont = "Comic Sans MS"
+	var/const/fancyfont = "Segoe Script"
 
 /obj/item/book/Initialize(var/ml)
 	if(!ml && !unique)
@@ -90,7 +98,8 @@
 						title = newtitle
 						SetName(title)
 			if("Contents")
-				var/content = sanitize(input(usr, "What would you like your book to say?", "Editing Book", dat) as message|null, MAX_BOOK_MESSAGE_LEN)
+
+				var/content = sanitize(input(usr, "What would you like your book to say?", "Editing Book", pencode_dat) as message|null, MAX_BOOK_MESSAGE_LEN)
 				if(!content)
 					to_chat(usr, "The content is invalid.")
 					return
@@ -98,7 +107,8 @@
 					content = usr.handle_writing_literacy(usr, content)
 					if(content)
 						last_modified_ckey = user.ckey
-						dat = content
+						pencode_dat = content
+						dat = formatpencode(usr, content, W)
 
 			if("Author")
 				var/newauthor = sanitize(input(usr, "Write the author's name:"))
@@ -130,6 +140,33 @@
 		var/processed_dat = M.handle_reading_literacy(user, "<i>Author: [author].</i><br><br>" + "[dat]")
 		if(processed_dat)
 			M << browse(processed_dat, "window=book;size=1000x550")
+
+// Copied from paper for the most part. TODO: generalize.
+/obj/item/book/proc/formatpencode(var/mob/user, var/t, var/obj/item/pen/P)
+	. = t
+	if(findtext(t, "\[sign\]"))
+		. = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[P ? P.get_signature(user) : "Anonymous"]</i></font>")
+	if(P)
+		if(P.iscrayon)
+			. = replacetext(t, "\[*\]", "")
+			. = replacetext(t, "\[hr\]", "")
+			. = replacetext(t, "\[small\]", "")
+			. = replacetext(t, "\[/small\]", "")
+			. = replacetext(t, "\[list\]", "")
+			. = replacetext(t, "\[/list\]", "")
+			. = replacetext(t, "\[table\]", "")
+			. = replacetext(t, "\[/table\]", "")
+			. = replacetext(t, "\[row\]", "")
+			. = replacetext(t, "\[cell\]", "")
+			. = replacetext(t, "\[logo\]", "")
+			. = "<font face=\"[crayonfont]\" color=\"[P.colour]\"><b>[.]</b></font>"
+		else if(P.isfancy)
+			. = "<font face=\"[fancyfont]\" color=\"[P.colour]\"><i>[.]</i></font>"
+		else
+			. = "<font face=\"[deffont]\" color=\"[P.colour]\">[.]</font>"
+	else
+		. = "<font face=\"[deffont]\" color=\"black\"]>[.]</font>"
+	. = pencode2html(.)
 
 /obj/item/book/printable_black
 	icon_state = "book1"
