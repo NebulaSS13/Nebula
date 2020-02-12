@@ -90,7 +90,7 @@
 						title = newtitle
 						SetName(title)
 			if("Contents")
-				var/content = sanitize(input("Write your book's contents (HTML NOT allowed):") as message|null, MAX_BOOK_MESSAGE_LEN)
+				var/content = sanitize(input(usr, "What would you like your book to say?", "Editing Book", dat) as message|null, MAX_BOOK_MESSAGE_LEN)
 				if(!content)
 					to_chat(usr, "The content is invalid.")
 					return
@@ -98,7 +98,7 @@
 					content = usr.handle_writing_literacy(usr, content)
 					if(content)
 						last_modified_ckey = user.ckey
-						dat += content
+						dat = content
 
 			if("Author")
 				var/newauthor = sanitize(input(usr, "Write the author's name:"))
