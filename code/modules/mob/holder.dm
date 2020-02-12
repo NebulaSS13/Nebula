@@ -191,6 +191,8 @@ var/list/holder_mob_icon_cache = list()
 	var/list/generate_for_slots = list(slot_l_hand_str, slot_r_hand_str, slot_back_str)
 
 /obj/item/holder/human/yinglet
+	sharp = 1
+	edge = 1
 	mob_blend_mode = ICON_MULTIPLY
 	generate_for_slots = list()
 
