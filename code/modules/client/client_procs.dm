@@ -414,6 +414,25 @@ client/verb/character_setup()
 	var/last_view_x_dim = 7
 	var/last_view_y_dim = 7
 
+/client/verb/force_onresize_view_update()
+	set name = "Force Client View Update"
+	set src = usr
+	set category = "Debug"
+	OnResize()
+
+/client/verb/show_winset_debug_values()
+	set name = "Show Client View Debug Values"
+	set src = usr
+	set category = "Debug"
+
+	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
+	var/winsize_string = winget(src, "mapwindow.map", "size")
+
+	to_chat(usr, "Current client view: [view]")
+	to_chat(usr, "Icon size: [divisor]")
+	to_chat(usr, "xDim: [round(text2num(winsize_string) / divisor)]")
+	to_chat(usr, "yDim: [round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor)]")
+
 /client/verb/OnResize()
 	set hidden = 1
 	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
