@@ -435,25 +435,30 @@ client/verb/character_setup()
 
 /client/verb/OnResize()
 	set hidden = 1
-	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
-	var/winsize_string = winget(src, "mapwindow.map", "size")
-	last_view_x_dim = round(text2num(winsize_string) / divisor)
-	last_view_y_dim = round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor)
-	view = "[last_view_x_dim]x[last_view_y_dim]"
+	addtimer(CALLBACK(GLOBAL_PROC, /proc/handle_resize, src), 5, TIMER_UNIQUE | TIMER_OVERRIDE)
+
+/proc/handle_resize(client/C)
+	if (!C)
+		return
+	var/divisor = text2num(winget(C, "mapwindow.map", "icon-size")) || world.icon_size
+	var/winsize_string = winget(C, "mapwindow.map", "size")
+	C.last_view_x_dim = Clamp(round(text2num(winsize_string) / divisor), 15, 42)
+	C.last_view_y_dim = Clamp(round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, 42)
+	C.view = "[C.last_view_x_dim]x[C.last_view_y_dim]"
 
 	// Reset eye/perspective
-	var/last_perspective = perspective
-	perspective = MOB_PERSPECTIVE
-	if(perspective != last_perspective)
-		perspective = last_perspective
-	var/last_eye = eye
-	eye = mob
-	if(eye != last_eye)
-		eye = last_eye
+	var/last_perspective = C.perspective
+	C.perspective = MOB_PERSPECTIVE
+	if(C.perspective != last_perspective)
+		C.perspective = last_perspective
+	var/last_eye = C.eye
+	C.eye = C.mob
+	if(C.eye != last_eye)
+		C.eye = last_eye
 
 	// Recenter skybox and lighting.
-	set_skybox_offsets(last_view_x_dim, last_view_y_dim)
-	if(mob)
-		if(mob.l_general)
-			mob.l_general.fit_to_client_view(last_view_x_dim, last_view_y_dim)
-		mob.reload_fullscreen()
+	C.set_skybox_offsets(C.last_view_x_dim, C.last_view_y_dim)
+	if(C.mob)
+		if(C.mob.l_general)
+			C.mob.l_general.fit_to_client_view(C.last_view_x_dim, C.last_view_y_dim)
+		C.mob.reload_fullscreen()
