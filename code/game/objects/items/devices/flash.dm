@@ -8,7 +8,7 @@
 	throw_speed = 4
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
+	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_COMBAT + "':1}"
 
 	var/times_used = 0 //Number of times it's been used.
 	var/broken = 0     //Is the flash burnt out?
@@ -210,6 +210,6 @@
 	name = "advanced flash"
 	desc = "A device that produces a very bright flash of light. This is an advanced and expensive version often issued to VIPs."
 	icon_state = "advflash"
-	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':2}"
 	str_min = 3
 	str_max = 8

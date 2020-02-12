@@ -2,7 +2,7 @@
 	name = T_BOARD("emergency floodlight")
 	build_path = /obj/machinery/floodlight
 	board_type = "machine"
-	origin_tech = list(TECH_ENGINEERING = 1)
+	origin_tech = "{'" + TECH_ENGINEERING + "':1}"
 	req_components = list(
 		/obj/item/stack/cable_coil = 10)
 	additional_spawn_components = list(
@@ -14,7 +14,7 @@
 	name = T_BOARD("pipe dispenser")
 	build_path = /obj/machinery/fabricator/pipe
 	board_type = "machine"
-	origin_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 5)
+	origin_tech = "{'" + TECH_ENGINEERING + "':6,'" + TECH_MATERIAL + "':5}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/matter_bin = 2,

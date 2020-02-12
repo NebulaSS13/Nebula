@@ -9,7 +9,7 @@
 	power_usage = 100
 	critical = 1
 	malfunction_probability = 1
-	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_ENGINEERING + "':2}"
 
 	var/processing_power = 2 // Used for DDoS speed calculations
 
@@ -20,7 +20,7 @@
 	hardware_size = 1
 	power_usage = 25
 	processing_power = 1
-	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_DATA + "':2,'" + TECH_ENGINEERING + "':2}"
 
 /obj/item/stock_parts/computer/processor_unit/photonic
 	name = "photonic processor"
@@ -29,7 +29,7 @@
 	hardware_size = 2
 	power_usage = 50
 	processing_power = 4
-	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
+	origin_tech = "{'" + TECH_DATA + "':5,'" + TECH_ENGINEERING + "':4}"
 
 /obj/item/stock_parts/computer/processor_unit/photonic/small
 	name = "photonic microprocessor"
@@ -38,4 +38,4 @@
 	hardware_size = 1
 	power_usage = 10
 	processing_power = 2
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':3}"

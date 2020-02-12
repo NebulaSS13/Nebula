@@ -9,7 +9,7 @@
 	throwforce = 2
 	throw_speed = 3
 	throw_range = 10
-	origin_tech = list(TECH_MAGNET = 1)
+	origin_tech = "{'" + TECH_MAGNET + "':1}"
 
 	var/secured = 1
 	var/list/attached_overlays = null

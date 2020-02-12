@@ -5,7 +5,7 @@
 	icon_state = "thermal"
 	item_state = "glasses"
 	action_button_name = "Toggle Goggles"
-	origin_tech = list(TECH_MAGNET = 3)
+	origin_tech = "{'" + TECH_MAGNET + "':3}"
 	toggleable = TRUE
 	vision_flags = SEE_MOBS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
@@ -19,7 +19,7 @@
 	name = "optical meson scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
-	origin_tech = list(TECH_MAGNET = 3, TECH_ESOTERIC = 4)
+	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_ESOTERIC + "':4}"
 
 /obj/item/clothing/glasses/thermal/plain
 	toggleable = FALSE

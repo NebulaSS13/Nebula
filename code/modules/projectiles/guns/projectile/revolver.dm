@@ -5,7 +5,7 @@
 	icon_state = "revolver"
 	item_state = "revolver"
 	caliber = CALIBER_PISTOL_MAGNUM
-	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2}"
 	handle_casings = CYCLE_CASINGS
 	max_shells = 6
 	fire_delay = 12 //Revolvers are naturally slower-firing
@@ -74,7 +74,7 @@
 	desc = "Looks almost like the real thing! Ages 8 and up."
 	icon_state = "revolver-toy"
 	caliber = CALIBER_CAPS
-	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
+	origin_tech = "{'" + TECH_COMBAT + "':1,'" + TECH_MATERIAL + "':1}"
 	ammo_type = /obj/item/ammo_casing/cap
 
 /obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)

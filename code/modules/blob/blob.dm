@@ -364,13 +364,13 @@ regen() will cover update_icon() for this proc
 				desc = "An incredibly dense, yet flexible, tendril, removed from an asteroclast."
 				force = 10
 				color = COLOR_BRONZE
-				origin_tech = list(TECH_MATERIAL = 2)
+				origin_tech = "{'" + TECH_MATERIAL + "':2}"
 			if("fire")
 				desc = "A tendril removed from an asteroclast. It's hot to the touch."
 				damtype = BURN
 				force = 15
 				color = COLOR_AMBER
-				origin_tech = list(TECH_POWER = 2)
+				origin_tech = "{'" + TECH_POWER + "':2}"
 
 /obj/item/blob_tendril/afterattack(obj/O, mob/user, proximity)
 	if(!proximity)
@@ -389,11 +389,11 @@ regen() will cover update_icon() for this proc
 	icon_state = "core_sample"
 	item_state = "blob_core"
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 5, TECH_BIO = 7)
+	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_BLUESPACE + "':5,'" + TECH_BIO + "':7}"
 	is_tendril = FALSE
 
 /obj/item/blob_tendril/core/aux
 	name = "asteroclast auxiliary nucleus sample"
 	desc = "A sample taken from an asteroclast's auxiliary nucleus."
 	icon_state = "core_sample_2"
-	origin_tech = list(TECH_MATERIAL = 2, TECH_BLUESPACE = 3, TECH_BIO = 4)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_BLUESPACE + "':3,'" + TECH_BIO + "':4}"

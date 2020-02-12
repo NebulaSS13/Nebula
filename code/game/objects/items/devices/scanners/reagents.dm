@@ -4,7 +4,7 @@
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 
-	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
+	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_BIO + "':2}"
 	scan_sound = 'sound/effects/scanbeep.ogg'
 	var/details = 0
 
@@ -30,4 +30,4 @@
 	name = "advanced reagent scanner"
 	icon_state = "adv_spectrometer"
 	details = 1
-	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
+	origin_tech = "{'" + TECH_MAGNET + "':4,'" + TECH_BIO + "':2}"

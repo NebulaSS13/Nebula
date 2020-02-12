@@ -70,7 +70,7 @@
 	singular_name = "gauze length"
 	desc = "Some sterile gauze to wrap around bloody stumps."
 	icon_state = "brutepack"
-	origin_tech = list(TECH_BIO = 1)
+	origin_tech = "{'" + TECH_BIO + "':1}"
 	animal_heal = 5
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
 	amount = 10
@@ -128,7 +128,7 @@
 	singular_name = "ointment"
 	icon_state = "ointment"
 	heal_burn = 1
-	origin_tech = list(TECH_BIO = 1)
+	origin_tech = "{'" + TECH_BIO + "':1}"
 	animal_heal = 4
 	apply_sounds = list('sound/effects/ointment.ogg')
 
@@ -162,7 +162,7 @@
 	desc = "An advanced trauma kit for severe injuries."
 	icon_state = "traumakit"
 	heal_brute = 0
-	origin_tech = list(TECH_BIO = 1)
+	origin_tech = "{'" + TECH_BIO + "':1}"
 	animal_heal = 12
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg','sound/effects/tape.ogg')
 	amount = 10
@@ -218,7 +218,7 @@
 	desc = "An advanced treatment kit for severe burns."
 	icon_state = "burnkit"
 	heal_burn = 5
-	origin_tech = list(TECH_BIO = 1)
+	origin_tech = "{'" + TECH_BIO + "':1}"
 	animal_heal = 7
 	apply_sounds = list('sound/effects/ointment.ogg')
 

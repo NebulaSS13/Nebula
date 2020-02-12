@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	slot_flags = SLOT_BACK
-	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
+	origin_tech = "{'" + TECH_COMBAT + "':8,'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':8}"
 	caliber = CALIBER_ANTIMATERIAL
 	screen_shake = 2 //extra kickback
 	handle_casings = HOLD_CASINGS
@@ -85,7 +85,7 @@
 	icon_state = "boltaction"
 	item_state = "boltaction"
 	w_class = ITEM_SIZE_LARGE
-	origin_tech = list(TECH_COMBAT = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2}"
 	caliber = CALIBER_RIFLE
 	ammo_type = /obj/item/ammo_casing/rifle
 	load_method = SINGLE_CASING|SPEEDLOADER

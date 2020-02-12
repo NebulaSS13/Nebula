@@ -11,7 +11,7 @@
 	icon_reinf = "reinf_stone"
 	icon_colour = "#007a00"
 	weight = 23
-	stack_origin_tech = list(TECH_MATERIAL = 5)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':5}"
 	chem_products = list(
 				/datum/reagent/uranium = 20
 				)
@@ -30,7 +30,7 @@
 	weight = 25
 	hardness = MAT_VALUE_FLEXIBLE + 5
 	integrity = 100
-	stack_origin_tech = list(TECH_MATERIAL = 4)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':4}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
@@ -71,7 +71,7 @@
 	weight = 15
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	reflectiveness = MAT_VALUE_SHINY
-	stack_origin_tech = list(TECH_MATERIAL = 2)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':2}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
@@ -97,7 +97,7 @@
 	weight = 23
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	reflectiveness = MAT_VALUE_SHINY
-	stack_origin_tech = list(TECH_MATERIAL = 3)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':3}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
@@ -193,7 +193,7 @@
 	burn_armor = 10
 	hardness = MAT_VALUE_VERY_HARD
 	weight = 23
-	stack_origin_tech = list(TECH_MATERIAL = 2)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':2}"
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	alloy_materials = list(MAT_STEEL = 2500, MAT_PLATINUM = 1250)
@@ -234,7 +234,7 @@
 	brute_armor = 4
 	burn_armor = 20
 	weight = 27
-	stack_origin_tech = list(TECH_MATERIAL = 3)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':3}"
 	alloy_materials = list(MAT_PLASTEEL = 7500, MAT_OSMIUM = 3750)
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_product = TRUE
@@ -247,7 +247,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999ff"
-	stack_origin_tech = list(TECH_MATERIAL = 5)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':5}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
@@ -264,7 +264,7 @@
 	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#deddff"
 	weight = 27
-	stack_origin_tech = list(TECH_MATERIAL = 2)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':2}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	construction_difficulty = MAT_VALUE_HARD_DIY

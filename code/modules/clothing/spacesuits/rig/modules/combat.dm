@@ -33,12 +33,12 @@
 	interface_name = "mounted flash"
 	interface_desc = "Disorientates your target by blinding them with this intense palm-mounted light."
 	device = /obj/item/flash
-	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
+	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':3,'" + TECH_ENGINEERING + "':5}"
 
 /obj/item/rig_module/device/flash/advanced
 	name = "advanced mounted flash"
 	device = /obj/item/flash/advanced
-	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
+	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MAGNET + "':3,'" + TECH_ENGINEERING + "':5}"
 
 /obj/item/rig_module/device/flash/installed()
 	. = ..()
@@ -248,7 +248,7 @@
 
 	interface_name = "mounted energy gun"
 	interface_desc = "A shoulder-mounted suit-powered energy gun."
-	origin_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
+	origin_tech = "{'" + TECH_POWER + "':6,'" + TECH_COMBAT + "':6,'" + TECH_ENGINEERING + "':6}"
 
 	gun = /obj/item/gun/energy/gun/mounted
 
@@ -263,7 +263,7 @@
 
 	interface_name = "mounted electrolaser"
 	interface_desc = "A shoulder-mounted, cell-powered electrolaser."
-	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
+	origin_tech = "{'" + TECH_POWER + "':5,'" + TECH_COMBAT + "':5,'" + TECH_ENGINEERING + "':6}"
 
 	gun = /obj/item/gun/energy/taser/mounted
 
@@ -278,7 +278,7 @@
 
 	interface_name = "mounted plasma cutter"
 	interface_desc = "A forearm-mounted suit-powered plasma cutter."
-	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 7, TECH_COMBAT = 5)
+	origin_tech = "{'" + TECH_MATERIAL + "':5,'" + TECH_PHORON + "':4,'" + TECH_ENGINEERING + "':7,'" + TECH_COMBAT + "':5}"
 
 	gun = /obj/item/gun/energy/plasmacutter/mounted
 

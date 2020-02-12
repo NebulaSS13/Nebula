@@ -12,7 +12,7 @@
 	force = 5
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
-	origin_tech = list(TECH_BIO = 4, TECH_POWER = 2)
+	origin_tech = "{'" + TECH_BIO + "':4,'" + TECH_POWER + "':2}"
 	action_button_name = "Remove/Replace Paddles"
 
 	var/obj/item/shockpaddles/linked/paddles
@@ -175,7 +175,7 @@
 	item_state = "defibcompact"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
-	origin_tech = list(TECH_BIO = 5, TECH_POWER = 3)
+	origin_tech = "{'" + TECH_BIO + "':5,'" + TECH_POWER + "':3}"
 
 /obj/item/defibrillator/compact/loaded
 	bcell = /obj/item/cell/high

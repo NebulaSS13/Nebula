@@ -6,7 +6,7 @@
 	item_state = "boombox"
 	force = 7
 	w_class = ITEM_SIZE_HUGE //forbid putting something that emits loud sounds forever into a backpack
-	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
+	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_COMBAT + "':1}"
 	var/playing = 0
 	var/track_num = 1
 	var/volume = 20

@@ -1,6 +1,6 @@
 /obj/item/pen/reagent
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 5)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':5}"
 
 /obj/item/pen/reagent/Initialize()
 	. = ..()
@@ -25,7 +25,7 @@
  */
 /obj/item/pen/reagent/sleepy
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\"."
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 5)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':5}"
 
 /obj/item/pen/reagent/sleepy/Initialize()
 	. = ..()

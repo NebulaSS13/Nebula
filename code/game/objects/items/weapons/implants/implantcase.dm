@@ -24,7 +24,7 @@
 		origin_tech = imp.origin_tech
 	else
 		desc = "A case for implants."
-		origin_tech.Cut()
+		origin_tech = null
 
 /obj/item/implantcase/on_update_icon()
 	if (imp)

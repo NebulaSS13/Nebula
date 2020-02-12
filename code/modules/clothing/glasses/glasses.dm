@@ -90,7 +90,7 @@
 	icon_state = "meson"
 	item_state = "glasses"
 	action_button_name = "Toggle Goggles"
-	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_ENGINEERING + "':2}"
 	toggleable = TRUE
 	vision_flags = SEE_TURFS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
@@ -128,7 +128,7 @@
 	desc = "You can totally see in the dark now!"
 	icon_state = "night"
 	item_state = "glasses"
-	origin_tech = list(TECH_MAGNET = 2)
+	origin_tech = "{'" + TECH_MAGNET + "':2}"
 	darkness_view = 7
 	action_button_name = "Toggle Goggles"
 	toggleable = TRUE
@@ -144,7 +144,7 @@
 	name = "tactical goggles"
 	desc = "Self-polarizing goggles with light amplification for dark environments. Made from durable synthetic."
 	icon_state = "swatgoggles"
-	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 4)
+	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_COMBAT + "':4}"
 	darkness_view = 5
 	action_button_name = "Toggle Goggles"
 	toggleable = TRUE
@@ -165,7 +165,7 @@
 	gender = NEUTER
 	icon_state = "material"
 	item_state = "glasses"
-	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
+	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_ENGINEERING + "':3}"
 	action_button_name = "Toggle Goggles"
 	toggleable = TRUE
 	vision_flags = SEE_OBJS

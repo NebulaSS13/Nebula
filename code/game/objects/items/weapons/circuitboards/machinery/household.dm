@@ -2,7 +2,7 @@
 	name = T_BOARD("microwave")
 	build_path = /obj/machinery/microwave
 	board_type = "machine"
-	origin_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_BIO + "':2,'" + TECH_ENGINEERING + "':2}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 2,
@@ -17,7 +17,7 @@
 	name = T_BOARD("meat gibber")
 	build_path = /obj/machinery/gibber
 	board_type = "machine"
-	origin_tech = list(TECH_BIO = 2, TECH_MATERIAL = 2)
+	origin_tech = "{'" + TECH_BIO + "':2,'" + TECH_MATERIAL + "':2}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 1,
@@ -31,7 +31,7 @@
 	name = T_BOARD("candy machine")
 	build_path = /obj/machinery/cooker/candy
 	board_type = "machine"
-	origin_tech = list(TECH_BIO = 1, TECH_MATERIAL = 1)
+	origin_tech = "{'" + TECH_BIO + "':1,'" + TECH_MATERIAL + "':1}"
 	buildtype_select = TRUE
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
@@ -50,7 +50,7 @@
 	name = T_BOARD("honey extractor")
 	build_path = /obj/machinery/honey_extractor
 	board_type = "machine"
-	origin_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
+	origin_tech = "{'" + TECH_BIO + "':2,'" + TECH_ENGINEERING + "':1}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 2)
@@ -64,7 +64,7 @@
 	name = T_BOARD("washing machine")
 	build_path = /obj/machinery/washing_machine
 	board_type = "machine"
-	origin_tech = list(TECH_ENGINEERING = 1)
+	origin_tech = "{'" + TECH_ENGINEERING + "':1}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 1,
@@ -75,7 +75,7 @@
 	name = T_BOARD("vending machine")
 	build_path = /obj/machinery/vending/assist
 	board_type = "machine"
-	origin_tech = list(TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_ENGINEERING + "':2}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 1

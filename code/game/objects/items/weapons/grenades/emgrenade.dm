@@ -2,7 +2,7 @@
 	name = "classic emp grenade"
 	icon_state = "emp"
 	item_state = "empgrenade"
-	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 3)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_MAGNET + "':3}"
 
 	detonate()
 		..()
@@ -15,7 +15,7 @@
 	desc = "A weaker variant of the classic emp grenade."
 	icon_state = "lyemp"
 	item_state = "lyempgrenade"
-	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 3)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_MAGNET + "':3}"
 
 	detonate()
 		..()

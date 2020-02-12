@@ -1,7 +1,7 @@
 /obj/item/stock_parts/circuitboard/shuttle_console
 	name = T_BOARD("basic shuttle console")
 	build_path = /obj/machinery/computer/shuttle_control
-	origin_tech = list(TECH_DATA = 3)
+	origin_tech = "{'" + TECH_DATA + "':3}"
 	var/shuttle_tag
 
 /obj/item/stock_parts/circuitboard/shuttle_console/construct(obj/machinery/computer/shuttle_control/M)

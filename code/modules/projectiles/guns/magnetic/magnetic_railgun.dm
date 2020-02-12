@@ -5,7 +5,7 @@
 	icon_state = "railgun"
 	removable_components = TRUE // Can swap out the capacitor for more shots, or cell for longer usage before recharge
 	load_type = /obj/item/rcd_ammo
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_MAGNET = 4)
+	origin_tech = "{'" + TECH_COMBAT + "':5,'" + TECH_MATERIAL + "':4,'" + TECH_MAGNET + "':4}"
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug
 	one_hand_penalty = 6
 	power_cost = 300
@@ -84,7 +84,7 @@
 	load_type = /obj/item/stack/material/rods // The Confederation learned that chunks of metal work just as well as fancy matter cartridges - actually they dont
 	projectile_type = /obj/item/projectile/bullet/magnetic
 	load_sheet_max = 6 // Fewer shots per "magazine", but more abundant than matter cartridges.
-	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 3, TECH_MAGNET = 5)
+	origin_tech = "{'" + TECH_COMBAT + "':6,'" + TECH_MATERIAL + "':3,'" + TECH_MAGNET + "':5}"
 	slowdown_worn = 3 // Little slower when worn
 
 /obj/item/gun/magnetic/railgun/tcc/show_ammo(var/mob/user)

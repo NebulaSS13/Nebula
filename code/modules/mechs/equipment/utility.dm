@@ -5,7 +5,7 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	var/obj/carrying
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_ENGINEERING + "':2}"
 
 /obj/item/mech_equipment/clamp/resolve_attackby(atom/A, mob/user, click_params)
 	if(istype(A, /obj/structure/closet) && owner)
@@ -98,7 +98,7 @@
 	var/l_max_bright = 0.9
 	var/l_inner_range = 1
 	var/l_outer_range = 6
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
+	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_ENGINEERING + "':1}"
 
 /obj/item/mech_equipment/light/attack_self(var/mob/user)
 	. = ..()
@@ -133,7 +133,7 @@
 	var/mode = CATAPULT_SINGLE
 	var/atom/movable/locked
 	equipment_delay = 30 //Stunlocks are not ideal
-	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
+	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_ENGINEERING + "':4,'" + TECH_MAGNET + "':4}"
 	require_adjacent = FALSE
 
 /obj/item/mech_equipment/catapult/get_hardpoint_maptext()
@@ -243,7 +243,7 @@
 
 	//Drill can have a head
 	var/obj/item/material/drill_head/drill_head
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_ENGINEERING + "':2}"
 
 /obj/item/mech_equipment/drill/Initialize()
 	. = ..()
@@ -367,7 +367,7 @@
 	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
+	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_PHORON + "':4,'" + TECH_ENGINEERING + "':6,'" + TECH_COMBAT + "':3}"
 
 /obj/item/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE

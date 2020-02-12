@@ -15,7 +15,7 @@
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASS_FLAG_TABLE
 	var/obj/item/master = null
-	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
+	var/origin_tech                    //Used by R&D to determine what research bonuses it grants.
 	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
@@ -217,9 +217,9 @@
 
 		if(origin_tech)
 			desc_comp += "<span class='notice'>Testing potentials:</span><BR>"
-			//var/list/techlvls = params2list(origin_tech)
-			for(var/T in origin_tech)
-				desc_comp += "Tech: Level [origin_tech[T]] [CallTechName(T)] <BR>"
+			var/list/techlvls = json_decode(origin_tech)
+			for(var/T in techlvls)
+				desc_comp += "Tech: Level [techlvls[T]] [CallTechName(T)] <BR>"
 		else
 			desc_comp += "No tech origins detected.<BR>"
 

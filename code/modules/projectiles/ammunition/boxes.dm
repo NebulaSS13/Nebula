@@ -133,7 +133,7 @@
 /obj/item/ammo_magazine/smg
 	name = "box magazine"
 	icon_state = "smg"
-	origin_tech = list(TECH_COMBAT = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
 	matter = list(MAT_STEEL = 1500)
@@ -147,7 +147,7 @@
 /obj/item/ammo_magazine/pistol
 	name = "pistol magazine"
 	icon_state = "pistol"
-	origin_tech = list(TECH_COMBAT = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
 	matter = list(MAT_STEEL = 750)
@@ -189,7 +189,7 @@
 /obj/item/ammo_magazine/magnum
 	name = "magazine"
 	icon_state = "magnum"
-	origin_tech = list(TECH_COMBAT = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL_MAGNUM
 	matter = list(MAT_STEEL = 1680)
@@ -203,7 +203,7 @@
 /obj/item/ammo_magazine/box/smallpistol
 	name = "ammunition box"
 	icon_state = "smallpistol"
-	origin_tech = list(TECH_COMBAT = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2}"
 	matter = list(MAT_STEEL = 1800)
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
@@ -212,7 +212,7 @@
 /obj/item/ammo_magazine/box/pistol
 	name = "ammunition box"
 	icon_state = "smallpistol"
-	origin_tech = list(TECH_COMBAT = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2}"
 	caliber = CALIBER_PISTOL
 	matter = list(MAT_STEEL = 2250)
 	ammo_type = /obj/item/ammo_casing/pistol
@@ -245,7 +245,7 @@
 /obj/item/ammo_magazine/proto_smg
 	name = "submachine gun magazine"
 	icon_state = CALIBER_PISTOL_FLECHETTE
-	origin_tech = list(TECH_COMBAT = 4)
+	origin_tech = "{'" + TECH_COMBAT + "':4}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL_FLECHETTE
 	matter = list(MAT_STEEL = 2000)
@@ -268,7 +268,7 @@
 /obj/item/ammo_magazine/box/machinegun
 	name = "magazine box"
 	icon_state = "machinegun"
-	origin_tech = list(TECH_COMBAT = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE
 	matter = list(MAT_STEEL = 4500)
@@ -292,7 +292,7 @@
 /obj/item/ammo_magazine/mil_rifle
 	name = "assault rifle magazine"
 	icon_state = "bullup"
-	origin_tech = list(TECH_COMBAT = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE_MILITARY
 	matter = list(MAT_STEEL = 1800)
