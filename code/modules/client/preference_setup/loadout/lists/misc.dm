@@ -112,12 +112,7 @@
 	plushes["spider plush"] = /obj/item/toy/plushie/spider
 	gear_tweaks += new /datum/gear_tweak/path(plushes)
 
-/datum/gear/workvisa
-	display_name = "work visa"
-	description = "A work visa issued by the Sol Central Government for the purpose of work."
-	path = /obj/item/paper/workvisa
-
-/datum/gear/mirror/
+/datum/gear/mirror
 	display_name = "handheld mirror"
 	sort_category = "Cosmetics"
 	path = /obj/item/mirror
