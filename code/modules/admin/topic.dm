@@ -1380,29 +1380,26 @@
 		to_chat(src.owner, "[special_role_description]")
 		to_chat(src.owner, "(<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[M]'>VV</A>) ([admin_jump_link(M, src)]) (<A HREF='?src=\ref[src];secretsadmin=check_antagonist'>CA</A>)")
 
-	else if(href_list["adminspawncookie"])
+	else if(href_list["adminspawnclam"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["adminspawncookie"])
+		var/mob/living/carbon/human/H = locate(href_list["adminspawnclam"])
 		if(!ishuman(H))
 			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
 			return
 
-		H.equip_to_slot_or_del( new /obj/item/chems/food/snacks/cookie(H), slot_l_hand )
-		if(!(istype(H.l_hand,/obj/item/chems/food/snacks/cookie)))
-			H.equip_to_slot_or_del( new /obj/item/chems/food/snacks/cookie(H), slot_r_hand )
-			if(!(istype(H.r_hand,/obj/item/chems/food/snacks/cookie)))
-				log_admin("[key_name(H)] has their hands full, so they did not receive their cookie, spawned by [key_name(src.owner)].")
-				message_admins("[key_name(H)] has their hands full, so they did not receive their cookie, spawned by [key_name(src.owner)].")
-				return
-			else
-				H.update_inv_r_hand()//To ensure the icon appears in the HUD
-		else
-			H.update_inv_l_hand()
-		log_admin("[key_name(H)] got their cookie, spawned by [key_name(src.owner)]")
-		message_admins("[key_name(H)] got their cookie, spawned by [key_name(src.owner)]")
-		SSstatistics.add_field("admin_cookies_spawned",1)
-		to_chat(H, "<span class='notice'>Your prayers have been answered!! You received the <b>best cookie</b>!</span>")
+		var/obj/item/mollusc/clam/C = new(get_turf(H))
+		H.put_in_hands(C)
+		if(C.loc !=H)
+			message_admins("[key_name(H)] has their hands full, so they did not receive their clam, spawned by [key_name(src.owner)].")
+			qdel(C)
+			return
+
+		log_admin("[key_name(H)] got their clam, spawned by [key_name(src.owner)]")
+		message_admins("[key_name(H)] got their clam, spawned by [key_name(src.owner)]")
+		SSstatistics.add_field("admin_clams_spawned",1)
+		to_chat(H, SPAN_NOTICE("Your prayers have been answered!! You received the <b>best clam</b>!"))
+		return
 
 	else if(href_list["BlueSpaceArtillery"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
