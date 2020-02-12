@@ -442,8 +442,10 @@ client/verb/character_setup()
 		return
 	var/divisor = text2num(winget(C, "mapwindow.map", "icon-size")) || world.icon_size
 	var/winsize_string = winget(C, "mapwindow.map", "size")
-	C.last_view_x_dim = Clamp(round(text2num(winsize_string) / divisor), 15, 42)
-	C.last_view_y_dim = Clamp(round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, 42)
+	C.last_view_x_dim = Clamp(round(text2num(winsize_string) / divisor), 9, 42)
+	C.last_view_y_dim = Clamp(round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 9, 42)
+	if(C.last_view_x_dim % 2 == 0) C.last_view_x_dim--
+	if(C.last_view_y_dim % 2 == 0) C.last_view_y_dim--
 	C.view = "[C.last_view_x_dim]x[C.last_view_y_dim]"
 
 	// Reset eye/perspective
