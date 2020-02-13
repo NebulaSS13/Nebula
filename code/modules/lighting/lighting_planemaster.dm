@@ -1,5 +1,5 @@
 /obj/lighting_plane
-	screen_loc = "1,1"
+	screen_loc = "LEFT+1,BOTTOM+1"
 	plane = LIGHTING_PLANE
 
 	blend_mode = BLEND_MULTIPLY

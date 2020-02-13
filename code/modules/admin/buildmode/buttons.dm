@@ -19,7 +19,7 @@
 
 /obj/effect/bmode/dir
 	icon_state = "build"
-	screen_loc = "NORTH,WEST"
+	screen_loc = "TOP,LEFT"
 
 /obj/effect/bmode/dir/Initialize()
 	. = ..()
@@ -41,13 +41,13 @@
 
 /obj/effect/bmode/help
 	icon_state = "buildhelp"
-	screen_loc = "NORTH,WEST+1"
+	screen_loc = "TOP,LEFT+1"
 
 /obj/effect/bmode/help/OnClick()
 	host.current_build_mode.Help()
 
 /obj/effect/bmode/mode
-	screen_loc = "NORTH,WEST+2"
+	screen_loc = "TOP,LEFT+2"
 
 /obj/effect/bmode/mode/Initialize()
 	. = ..()
@@ -67,7 +67,7 @@
 
 /obj/effect/bmode/quit
 	icon_state = "buildquit"
-	screen_loc = "NORTH,WEST+3"
+	screen_loc = "TOP,LEFT+3"
 
 /obj/effect/bmode/quit/OnClick()
 	usr.RemoveClickHandler(/datum/click_handler/build_mode)

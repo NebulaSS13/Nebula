@@ -368,7 +368,7 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 	for(var/i = 0, i<15, i++)
 		for(var/j = 0, j<15, j++)
 			var/obj/screen/click_catcher/CC = new()
-			CC.screen_loc = "NORTH-[i],EAST-[j]"
+			CC.screen_loc = "TOP-[i],RIGHT-[j]"
 			. += CC
 
 /obj/screen/click_catcher/Click(location, control, params)

@@ -17,7 +17,7 @@
 
 /obj/screen/intent/deity
 	var/list/desc_screens = list()
-	screen_loc = "EAST-5:122,SOUTH:8"
+	screen_loc = "RIGHT-5:122,BOTTOM:8"
 
 /obj/screen/intent/deity/Initialize()
 	. = ..()

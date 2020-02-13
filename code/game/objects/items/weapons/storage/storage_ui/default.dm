@@ -10,32 +10,33 @@
 	var/obj/screen/storage/stored_end
 	var/obj/screen/close/closer
 
+#define storage_ui_default "LEFT+7,BOTTOM+7 to LEFT+10,BOTTOM+8"
 /datum/storage_ui/default/New(var/storage)
 	..()
 	boxes = new /obj/screen/storage(  )
 	boxes.SetName("storage")
 	boxes.master = storage
 	boxes.icon_state = "block"
-	boxes.screen_loc = "7,7 to 10,8"
+	boxes.screen_loc = storage_ui_default
 	boxes.layer = HUD_BASE_LAYER
 
 	storage_start = new /obj/screen/storage(  )
 	storage_start.SetName("storage")
 	storage_start.master = storage
 	storage_start.icon_state = "storage_start"
-	storage_start.screen_loc = "7,7 to 10,8"
+	storage_start.screen_loc = storage_ui_default
 	storage_start.layer = HUD_BASE_LAYER
 	storage_continue = new /obj/screen/storage(  )
 	storage_continue.SetName("storage")
 	storage_continue.master = storage
 	storage_continue.icon_state = "storage_continue"
-	storage_continue.screen_loc = "7,7 to 10,8"
+	storage_continue.screen_loc = storage_ui_default
 	storage_continue.layer = HUD_BASE_LAYER
 	storage_end = new /obj/screen/storage(  )
 	storage_end.SetName("storage")
 	storage_end.master = storage
 	storage_end.icon_state = "storage_end"
-	storage_end.screen_loc = "7,7 to 10,8"
+	storage_end.screen_loc = storage_ui_default
 	storage_end.layer = HUD_BASE_LAYER
 
 	stored_start = new /obj //we just need these to hold the icon
@@ -155,15 +156,15 @@
 /datum/storage_ui/default/proc/orient_objs(tx, ty, mx, my)
 	var/cx = tx
 	var/cy = ty
-	boxes.screen_loc = "[tx]:,[ty] to [mx],[my]"
+	boxes.screen_loc = "LEFT+[tx],BOTTOM+[ty] to LEFT+[mx],BOTTOM+[my]"
 	for(var/obj/O in storage.contents)
-		O.screen_loc = "[cx],[cy]"
+		O.screen_loc = "LEFT+[cx],BOTTOM+[cy]"
 		O.hud_layerise()
 		cx++
 		if (cx > mx)
 			cx = tx
 			cy--
-	closer.screen_loc = "[mx+1],[my]"
+	closer.screen_loc = "LEFT+[mx+1],BOTTOM+[my]"
 	return
 
 //This proc determins the size of the inventory to be displayed. Please touch it only if you know what you're doing.
@@ -179,10 +180,10 @@
 /datum/storage_ui/default/proc/arrange_item_slots(var/rows, var/cols)
 	var/cx = 4
 	var/cy = 2+rows
-	boxes.screen_loc = "4:16,2:16 to [4+cols]:16,[2+rows]:16"
+	boxes.screen_loc = "LEFT+4:16,BOTTOM+2:16 to LEFT+[4+cols]:16,BOTTOM+[2+rows]:16"
 
 	for(var/obj/O in storage.contents)
-		O.screen_loc = "[cx]:16,[cy]:16"
+		O.screen_loc = "LEFT+[cx]:16,BOTTOM+[cy]:16"
 		O.maptext = ""
 		O.hud_layerise()
 		cx++
@@ -190,7 +191,7 @@
 			cx = 4
 			cy--
 
-	closer.screen_loc = "[4+cols+1]:16,2:16"
+	closer.screen_loc = "LEFT+[4+cols+1]:16,BOTTOM+2:16"
 
 /datum/storage_ui/default/proc/space_orient_objs()
 
@@ -205,9 +206,9 @@
 	M.Scale((storage_width-storage_cap_width*2+3)/32,1)
 	storage_continue.transform = M
 
-	storage_start.screen_loc = "4:16,2:16"
-	storage_continue.screen_loc = "4:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],2:16"
-	storage_end.screen_loc = "4:[19+storage_width-storage_cap_width],2:16"
+	storage_start.screen_loc = "LEFT+4:16,BOTTOM+2:16"
+	storage_continue.screen_loc = "LEFT+4:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],BOTTOM+2:16"
+	storage_end.screen_loc = "LEFT+4:[19+storage_width-storage_cap_width],BOTTOM+2:16"
 
 	var/startpoint = 0
 	var/endpoint = 1
@@ -230,11 +231,11 @@
 		storage_start.overlays += stored_continue
 		storage_start.overlays += stored_end
 
-		O.screen_loc = "4:[round((startpoint+endpoint)/2)+2],2:16"
+		O.screen_loc = "LEFT+4:[round((startpoint+endpoint)/2)+2],BOTTOM+2:16"
 		O.maptext = ""
 		O.hud_layerise()
 
-	closer.screen_loc = "4:[storage_width+19],2:16"
+	closer.screen_loc = "LEFT+4:[storage_width+19],BOTTOM+2:16"
 
 // Sets up numbered display to show the stack size of each stored mineral
 // NOTE: numbered display is turned off currently because it's broken

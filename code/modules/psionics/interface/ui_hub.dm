@@ -1,7 +1,7 @@
 /obj/screen/psi/hub
 	name = "Psi"
 	icon_state = "psi_suppressed"
-	screen_loc = "EAST-1:28,CENTER-3:11"
+	screen_loc = "RIGHT-1:28,CENTER-3:11"
 	hidden = FALSE
 	maptext_x = 6
 	maptext_y = -8
@@ -31,7 +31,7 @@
 	for(var/thing in components)
 		var/obj/screen/psi/component = thing
 		component.update_icon()
-		if(!component.invisibility) component.screen_loc = "EAST-[++offset]:28,CENTER-3:11"
+		if(!component.invisibility) component.screen_loc = "RIGHT-[++offset]:28,CENTER-3:11"
 
 /obj/screen/psi/hub/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
