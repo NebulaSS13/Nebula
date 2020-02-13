@@ -2952,6 +2952,7 @@
 #include "code\modules\turbolift\turbolift_floor.dm"
 #include "code\modules\turbolift\turbolift_map.dm"
 #include "code\modules\turbolift\turbolift_turfs.dm"
+#include "code\modules\valsalia\items\items_baxxid.dm"
 #include "code\modules\valsalia\items\items_tradeship.dm"
 #include "code\modules\valsalia\items\items_yinglet.dm"
 #include "code\modules\vehicles\bike.dm"
