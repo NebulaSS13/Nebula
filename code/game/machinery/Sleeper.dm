@@ -12,11 +12,26 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/mob/living/carbon/human/occupant = null
-	var/list/base_chemicals = list("Adrenaline" = /datum/reagent/adrenaline, "Sedatives" = /datum/reagent/sedatives, "Painkillers" = /datum/reagent/painkillers, "Oxygel" = /datum/reagent/oxy_meds)
 	var/list/available_chemicals = list()
-	var/list/upgrade_chemicals = list("Anti-Burn" = /datum/reagent/burn_meds)
-	var/list/upgrade2_chemicals = list("Anti-Rads" = /datum/reagent/antirads)
-	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover)
+	var/list/base_chemicals = list(
+		"Adrenaline" =    /datum/reagent/adrenaline, 
+		"Sedatives" =     /datum/reagent/sedatives, 
+		"Painkillers" =   /datum/reagent/painkillers, 
+		"Antitoxins" =    /datum/reagent/antitoxins,
+		"Oxygel" =        /datum/reagent/oxy_meds
+	)
+	var/list/upgrade_chemicals = list(
+		"Anti-Burn" =     /datum/reagent/burn_meds,
+		"Neuroannealer" = /datum/reagent/neuroannealer
+	)
+	var/list/upgrade2_chemicals = list(
+		"Anti-Rads" =     /datum/reagent/antirads,
+		"Retrovirals" =   /datum/reagent/retrovirals
+	)
+	var/list/antag_chemicals = list(
+		"Polyacid" = /datum/reagent/acid/polyacid,
+		"Mutagenics" =  /datum/reagent/mutagenics
+	)
 	var/obj/item/chems/glass/beaker = null
 	var/filtering = 0
 	var/pump
