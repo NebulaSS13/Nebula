@@ -27,7 +27,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 	cinematic_screen.plane = HUD_PLANE
 	cinematic_screen.layer = HUD_ABOVE_ITEM_LAYER
 	cinematic_screen.mouse_opacity = 0
-	cinematic_screen.screen_loc = "1,0"
+	cinematic_screen.screen_loc = "LEFT+1,BOTTOM"
 
 	//Let's not discuss how this worked previously.
 	var/list/viewers = list()

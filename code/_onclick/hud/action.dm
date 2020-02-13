@@ -118,7 +118,7 @@
 
 /obj/screen/movable/action_button
 	var/datum/action/owner
-	screen_loc = "WEST,NORTH"
+	screen_loc = "LEFT,TOP"
 
 /obj/screen/movable/action_button/Click(location,control,params)
 	var/list/modifiers = params2list(params)
@@ -200,7 +200,7 @@
 	var/coord_col_offset = AB_WEST_OFFSET+2*col
 	var/coord_row = "[-1 - row]"
 	var/coord_row_offset = AB_NORTH_OFFSET
-	return "WEST[coord_col]:[coord_col_offset],NORTH[coord_row]:[coord_row_offset]"
+	return "LEFT[coord_col]:[coord_col_offset],TOP[coord_row]:[coord_row_offset]"
 
 /datum/hud/proc/SetButtonCoords(var/obj/screen/button,var/number)
 	var/row = round((number-1)/AB_MAX_COLUMNS)

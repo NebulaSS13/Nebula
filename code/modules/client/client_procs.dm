@@ -424,17 +424,17 @@ client/verb/character_setup()
 
 /client/verb/OnResize()
 	set hidden = 1
-	addtimer(CALLBACK(GLOBAL_PROC, /proc/handle_resize, src), 5, TIMER_UNIQUE | TIMER_OVERRIDE)
+	handle_resize(src)
 
 /proc/handle_resize(client/C)
 	if (!C)
 		return
 	var/divisor = text2num(winget(C, "mapwindow.map", "icon-size")) || world.icon_size
 	var/winsize_string = winget(C, "mapwindow.map", "size")
-	C.last_view_x_dim = Clamp(round(text2num(winsize_string) / divisor), 9, 42)
-	C.last_view_y_dim = Clamp(round(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 9, 42)
-	if(C.last_view_x_dim % 2 == 0) C.last_view_x_dim--
-	if(C.last_view_y_dim % 2 == 0) C.last_view_y_dim--
+	C.last_view_x_dim = Clamp(ceil(text2num(winsize_string) / divisor), 15, 41)
+	C.last_view_y_dim = Clamp(ceil(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, 41)
+	if(C.last_view_x_dim % 2 == 0) C.last_view_x_dim++
+	if(C.last_view_y_dim % 2 == 0) C.last_view_y_dim++
 	C.view = "[C.last_view_x_dim]x[C.last_view_y_dim]"
 
 	// Reset eye/perspective

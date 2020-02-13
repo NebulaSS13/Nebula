@@ -7,4 +7,4 @@
 		var/list/screen_loc_params = splittext(PM["screen-loc"], ",")
 		var/list/x_data = splittext(screen_loc_params[1], ":")
 		var/list/y_data = splittext(screen_loc_params[2], ":")
-		screen_loc = "[x_data[1]]:[text2num(x_data[2])-16],[y_data[1]]:[text2num(y_data[2])-16]"
+		screen_loc = "LEFT+[x_data[1]]:[text2num(x_data[2])-16],BOTTOM+[y_data[1]]:[text2num(y_data[2])-16]"

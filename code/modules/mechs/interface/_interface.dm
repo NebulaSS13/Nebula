@@ -15,7 +15,7 @@
 		var/i = 1
 		for(var/hardpoint in hardpoints)
 			var/obj/screen/movable/exosuit/hardpoint/H = new(src, hardpoint)
-			H.screen_loc = "1:6,[15-i]" //temp
+			H.screen_loc = "LEFT+1:6,TOP-[i]" //temp
 			hud_elements |= H
 			hardpoint_hud_elements[hardpoint] = H
 			i++
@@ -36,7 +36,7 @@
 		var/pos = 7
 		for(var/additional_hud in additional_hud_elements)
 			var/obj/screen/movable/exosuit/M = new additional_hud(src)
-			M.screen_loc = "1:6,[pos]:[i * -12]"
+			M.screen_loc = "LEFT+1:6,BOTTOM+[pos]:[i * -12]"
 			hud_elements |= M
 			i++
 			if(i == 3)
@@ -44,11 +44,11 @@
 				i = 0
 
 		hud_health = new /obj/screen/movable/exosuit/health(src)
-		hud_health.screen_loc = "EAST-1:28,CENTER-3:11"
+		hud_health.screen_loc = "RIGHT-1:28,CENTER-3:11"
 		hud_elements |= hud_health
 		hud_open = locate(/obj/screen/movable/exosuit/toggle/hatch_open) in hud_elements
 		hud_power = new /obj/screen/movable/exosuit/power(src)
-		hud_power.screen_loc = "EAST-1:12,CENTER-4:25"
+		hud_power.screen_loc = "RIGHT-1:12,CENTER-4:25"
 		hud_elements |= hud_power
 
 	refresh_hud()
