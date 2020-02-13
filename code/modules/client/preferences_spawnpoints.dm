@@ -72,6 +72,17 @@ GLOBAL_VAR(spawntypes)
 	var/area/A = get_area(victim)
 	for(var/obj/machinery/cryopod/C in A)
 		if(!C.occupant)
+
+			// Store any held or equipped items.
+			var/obj/item/storage/backpack/pack = victim.back
+			if(istype(pack))
+				var/list/stuff_to_store = list()
+				if(victim.l_hand) stuff_to_store += victim.l_hand
+				if(victim.r_hand) stuff_to_store += victim.r_hand
+				for(var/atom/movable/thing in stuff_to_store)
+					victim.drop_from_inventory(thing)
+					pack.handle_item_insertion(thing)
+
 			C.set_occupant(victim, 1)
 			victim.Sleeping(rand(1,3))
 			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis aboard [GLOB.using_map.full_name]. It might take a few seconds."))
