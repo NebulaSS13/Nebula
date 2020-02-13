@@ -5,7 +5,7 @@
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
-	origin_tech = list(TECH_DATA = 2)
+	origin_tech = "{'" + TECH_DATA + "':2}"
 	var/obj/item/radio/radio
 	var/looking_for_personality = 0
 	var/mob/living/silicon/pai/pai

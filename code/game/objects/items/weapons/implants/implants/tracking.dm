@@ -1,7 +1,7 @@
 /obj/item/implant/tracking
 	name = "tracking implant"
 	desc = "Track with this."
-	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_BLUESPACE = 2)
+	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_BIO + "':2,'" + TECH_BLUESPACE + "':2}"
 	known = 1
 	var/id = 1
 

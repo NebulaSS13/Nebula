@@ -28,9 +28,10 @@
 				to_chat(user, "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down.")
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-				for(var/T in loaded_item.origin_tech)
-					files.UpdateTech(T, loaded_item.origin_tech[T])
-					to_chat(user, "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)].")
+				var/list/techlvls = loaded_item.origin_tech ? json_decode(loaded_item.origin_tech) : list()
+				for(var/T in techlvls)
+					files.UpdateTech(T, techlvls[T])
+					to_chat(user, "\The [loaded_item] had level [techlvls[T]] in [CallTechName(T)].")
 				loaded_item = null
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)

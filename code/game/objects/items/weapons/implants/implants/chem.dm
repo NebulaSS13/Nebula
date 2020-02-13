@@ -1,7 +1,7 @@
 /obj/item/implant/chem
 	name = "chemical implant"
 	desc = "Injects things."
-	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2)
+	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_BIO + "':2}"
 	known = 1
 
 /obj/item/implant/chem/get_data()

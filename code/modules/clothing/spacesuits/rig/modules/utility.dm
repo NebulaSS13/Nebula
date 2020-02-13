@@ -33,7 +33,7 @@
 	engage_string = "Display Readout"
 	usable = 1
 	use_power_cost = 200
-	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
+	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_BIO + "':3,'" + TECH_ENGINEERING + "':5}"
 	device = /obj/item/scanner/health
 
 /obj/item/rig_module/device/defib
@@ -57,7 +57,7 @@
 	suit_overlay_inactive = null
 	use_power_cost = 3600 //2 Wh per use
 	module_cooldown = 0
-	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
+	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_POWER + "':4,'" + TECH_ENGINEERING + "':6}"
 	device = /obj/item/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
@@ -71,7 +71,7 @@
 	usable = 1
 	selectable = 0
 	device = /obj/item/ano_scanner
-	origin_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+	origin_tech = "{'" + TECH_BLUESPACE + "':4,'" + TECH_MAGNET + "':4,'" + TECH_ENGINEERING + "':6}"
 
 /obj/item/rig_module/device/orescanner
 	name = "ore scanner module"
@@ -85,7 +85,7 @@
 	toggleable = 1
 	use_power_cost = 200
 	device = /obj/item/scanner/mining
-	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_MAGNET + "':4,'" + TECH_ENGINEERING + "':6}"
 
 /obj/item/rig_module/device/orescanner/activate()
 	if(!check() || !device)
@@ -103,7 +103,7 @@
 	usable = 1
 	engage_string = "Configure RCD"
 	use_power_cost = 300
-	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
+	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_MAGNET + "':5,'" + TECH_ENGINEERING + "':7}"
 	device = /obj/item/rcd/mounted
 
 /obj/item/rig_module/device/Initialize()
@@ -355,7 +355,7 @@
 
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
-	origin_tech = list(TECH_MATERIAL = 6,  TECH_ENGINEERING = 7)
+	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_ENGINEERING + "':7}"
 	var/obj/item/tank/jetpack/rig/jets
 
 /obj/item/rig_module/maneuvering_jets/engage()
@@ -470,13 +470,13 @@
 	icon_state = "ewar"
 	interface_name = "mounted matter decompiler"
 	interface_desc = "Eats trash like no one's business."
-	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
+	origin_tech = "{'" + TECH_MATERIAL + "':5,'" + TECH_ENGINEERING + "':5}"
 	device = /obj/item/matter_decompiler
 
 /obj/item/rig_module/cooling_unit
 	name = "mounted cooling unit"
 	toggleable = 1
-	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 5)
+	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_MATERIAL + "':2,'" + TECH_ENGINEERING + "':5}"
 	interface_name = "mounted cooling unit"
 	interface_desc = "A heat sink with a liquid cooled radiator."
 	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module

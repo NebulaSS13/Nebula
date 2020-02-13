@@ -10,7 +10,7 @@
 	desc = "A strange, ridged chunk of some glassy red material. Achingly cold to the touch."
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
-	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
+	origin_tech = "{'" + TECH_BLUESPACE + "':4,'" + TECH_MATERIAL + "':4}"
 
 	var/full = SOULSTONE_EMPTY
 	var/is_evil = 1

@@ -72,7 +72,7 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 	throw_speed = 1
 	throw_range = 3
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = list(TECH_ENGINEERING = 5, TECH_MATERIAL = 4)
+	origin_tech = "{'" + TECH_ENGINEERING + "':5,'" + TECH_MATERIAL + "':4}"
 
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/datum/fabricator_recipe/pipe/P

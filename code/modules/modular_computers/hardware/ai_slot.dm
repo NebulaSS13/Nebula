@@ -6,7 +6,7 @@
 	hardware_size = 1
 	critical = 0
 	power_usage = 100
-	origin_tech = list(TECH_POWER = 2, TECH_DATA = 3)
+	origin_tech = "{'" + TECH_POWER + "':2,'" + TECH_DATA + "':3}"
 	external_slot = TRUE
 	var/obj/item/aicard/stored_card
 	var/power_usage_idle = 100

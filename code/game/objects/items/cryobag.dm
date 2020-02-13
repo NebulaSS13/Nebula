@@ -5,7 +5,7 @@
 	a hostile enviroment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
-	origin_tech = list(TECH_BIO = 4)
+	origin_tech = "{'" + TECH_BIO + "':4}"
 	material = MAT_PLASTIC
 	var/stasis_power
 

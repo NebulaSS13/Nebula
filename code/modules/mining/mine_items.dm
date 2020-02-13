@@ -38,7 +38,7 @@
 	w_class = ITEM_SIZE_HUGE
 	matter = list(MAT_STEEL = 3750)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
+	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_ENGINEERING + "':1}"
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
@@ -64,7 +64,7 @@
 	icon_state = "handdrill"
 	item_state = "jackhammer"
 	digspeed = 30
-	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_POWER + "':3,'" + TECH_ENGINEERING + "':2}"
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
 
@@ -73,7 +73,7 @@
 	icon_state = "jackhammer"
 	item_state = "jackhammer"
 	digspeed = 20 //faster than drill, but cannot dig
-	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
+	origin_tech = "{'" + TECH_MATERIAL + "':3,'" + TECH_POWER + "':2,'" + TECH_ENGINEERING + "':2}"
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 	drill_verb = "hammering"
 
@@ -82,7 +82,7 @@
 	icon_state = "diamonddrill"
 	item_state = "jackhammer"
 	digspeed = 5 //Digs through walls, girders, and can dig up sand
-	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
+	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_POWER + "':4,'" + TECH_ENGINEERING + "':5}"
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
 
@@ -101,7 +101,7 @@
 	icon_state = "pick_preview"
 	item_state = "pickaxe"
 	digspeed = 30
-	origin_tech = list(TECH_MATERIAL = 3)
+	origin_tech = "{'" + TECH_MATERIAL + "':3}"
 	drill_verb = "picking"
 	sharp = 1
 	build_from_parts = TRUE
@@ -113,7 +113,7 @@
 	icon_state = "pick_preview"
 	item_state = "pickaxe"
 	digspeed = 20
-	origin_tech = list(TECH_MATERIAL = 4)
+	origin_tech = "{'" + TECH_MATERIAL + "':4}"
 	drill_verb = "picking"
 	sharp = 1
 	build_from_parts = TRUE
@@ -125,7 +125,7 @@
 	icon_state = "pick_preview"
 	item_state = "pickaxe"
 	digspeed = 10
-	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
+	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_ENGINEERING + "':4}"
 	drill_verb = "picking"
 	sharp = 1
 	build_from_parts = TRUE
@@ -144,7 +144,7 @@
 	throwforce = 4.0
 	item_state = "shovel"
 	w_class = ITEM_SIZE_HUGE
-	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
+	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_ENGINEERING + "':1}"
 	matter = list(MAT_STEEL = 50)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0

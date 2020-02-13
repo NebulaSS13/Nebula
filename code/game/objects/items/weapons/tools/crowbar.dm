@@ -12,7 +12,7 @@
 	throw_range = 3
 	item_state = "crowbar"
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = list(TECH_ENGINEERING = 1)
+	origin_tech = "{'" + TECH_ENGINEERING + "':1}"
 	matter = list(MAT_STEEL = 140)
 	center_of_mass = @"{'x':16,'y':20}"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")

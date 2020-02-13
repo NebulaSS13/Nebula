@@ -1,7 +1,7 @@
 /obj/item/implant/imprinting
 	name = "imprinting implant"
 	desc = "Latest word in training your peons."
-	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_DATA = 3)
+	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_BIO + "':2,'" + TECH_DATA + "':3}"
 	hidden = 1
 	var/list/instructions = list("Do your job.", "Respect your superiors.", "Wash you hands after using the toilet.")
 	var/brainwashing = 0

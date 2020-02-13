@@ -14,7 +14,7 @@
 	throw_range = 15
 	throw_speed = 3
 
-	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ESOTERIC = 3)
+	origin_tech = "{'" + TECH_DATA + "':1,'" + TECH_ENGINEERING + "':1,'" + TECH_ESOTERIC + "':3}"
 
 	var/obj/item/radio/spy/radio
 	var/obj/machinery/camera/spy/camera
@@ -59,7 +59,7 @@
 
 	w_class = ITEM_SIZE_SMALL
 
-	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ESOTERIC = 3)
+	origin_tech = "{'" + TECH_DATA + "':1,'" + TECH_ENGINEERING + "':1,'" + TECH_ESOTERIC + "':3}"
 
 	var/operating = 0
 	var/obj/item/radio/spy/radio

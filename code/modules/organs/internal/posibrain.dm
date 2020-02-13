@@ -11,7 +11,7 @@
 	throwforce = 1.0
 	throw_speed = 3
 	throw_range = 5
-	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2, TECH_DATA = 4)
+	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_MATERIAL + "':4,'" + TECH_BLUESPACE + "':2,'" + TECH_DATA + "':4}"
 	attack_verb = list("attacked", "slapped", "whacked")
 
 	relative_size = 60

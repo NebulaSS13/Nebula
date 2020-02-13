@@ -36,7 +36,7 @@
 	desc = "A rack of hollow darts."
 	icon_state = "darts"
 	item_state = "rcdammo"
-	origin_tech = list(TECH_MATERIAL = 2)
+	origin_tech = "{'" + TECH_MATERIAL + "':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_DART
 	ammo_type = /obj/item/ammo_casing/chemdart

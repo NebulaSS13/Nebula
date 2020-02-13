@@ -33,7 +33,7 @@
 	icon_state = "military"
 	item_state = "secgundark"
 	safety_icon = "safety"
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MATERIAL + "':2}"
 	fire_delay = 7
 	ammo_indicator = TRUE
 
@@ -42,7 +42,7 @@
 	icon = 'icons/obj/guns/military_pistol2.dmi'
 	icon_state = "military-alt"
 	safety_icon = "safety"
-	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
+	origin_tech = "{'" + TECH_COMBAT + "':4,'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':8}"
 	fire_delay = 8
 
 /obj/item/gun/projectile/pistol/sec
@@ -54,7 +54,7 @@
 	magazine_type = /obj/item/ammo_magazine/pistol/rubber
 	accuracy = -1
 	fire_delay = 6
-	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2}"
 
 /obj/item/gun/projectile/pistol/sec/lethal
 	magazine_type = /obj/item/ammo_magazine/pistol
@@ -89,7 +89,7 @@
 	one_hand_penalty = 2
 	fire_delay = 7
 	caliber = CALIBER_PISTOL_ANTIQUE
-	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2}"
 	var/base_icon = "pistol1"
 
 /obj/item/gun/projectile/pistol/throwback/Initialize()
@@ -111,7 +111,7 @@
 	icon_state = "gyropistol"
 	max_shells = 8
 	caliber = CALIBER_GYROJET
-	origin_tech = list(TECH_COMBAT = 3)
+	origin_tech = "{'" + TECH_COMBAT + "':3}"
 	magazine_type = /obj/item/ammo_magazine/gyrojet
 	allowed_magazines = /obj/item/ammo_magazine/gyrojet
 	handle_casings = CLEAR_CASINGS	//the projectile is the casing
@@ -139,7 +139,7 @@
 	caliber = CALIBER_PISTOL_SMALL
 	silenced = 0
 	fire_delay = 4
-	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ESOTERIC = 2)
+	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':8}"
 	magazine_type = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 

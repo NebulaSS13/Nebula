@@ -174,7 +174,7 @@
 	w_class = ITEM_SIZE_LARGE
 	possible_transfer_amounts = null
 	volume = 600
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MATERIAL + "':3,'" + TECH_ENGINEERING + "':3}"
 	step_delay = 8
 
 /obj/item/chems/spray/chemsprayer/Spray_at(atom/A as mob|obj)

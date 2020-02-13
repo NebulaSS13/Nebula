@@ -420,8 +420,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		to_chat(user, "<span class='notice'>The destructive analyzer appears to be empty.</span>")
 		screen = 1.0
 		return
-	for(var/T in linked_destroy.loaded_item.origin_tech)
-		files.UpdateTech(T, linked_destroy.loaded_item.origin_tech[T])
+	var/list/techlvls = linked_destroy.loaded_item.origin_tech ? json_decode(linked_destroy.loaded_item.origin_tech) : list()
+	for(var/T in techlvls)
+		files.UpdateTech(T, techlvls[T])
 	if(linked_lathe && linked_destroy.loaded_item.matter) // Also sends salvaged materials to a linked protolathe, if any.
 		for(var/t in linked_destroy.loaded_item.matter)
 			if(t in linked_lathe.materials)
@@ -670,8 +671,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 			dat += "Origin Tech:"
 			dat += "<UL>"
-			for(var/T in linked_destroy.loaded_item.origin_tech)
-				dat += "<LI>[CallTechName(T)] [linked_destroy.loaded_item.origin_tech[T]]"
+			var/list/techlvls = linked_destroy.loaded_item.origin_tech ? json_decode(linked_destroy.loaded_item.origin_tech) : list()
+			for(var/T in techlvls)
+				dat += "<LI>[CallTechName(T)] [techlvls[T]]"
 				for(var/datum/tech/F in files.known_tech)
 					if(F.name == CallTechName(T))
 						dat += " (Current: [F.level])"

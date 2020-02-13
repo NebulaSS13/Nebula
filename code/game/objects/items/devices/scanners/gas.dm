@@ -8,7 +8,7 @@
 	icon_state = "atmos"
 	item_state = "analyzer"
 
-	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
+	origin_tech = "{'" + TECH_MAGNET + "':1,'" + TECH_ENGINEERING + "':1}"
 	window_width = 350
 	window_height = 400
 	var/mode = DEFAULT_MODE

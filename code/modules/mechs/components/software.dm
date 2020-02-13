@@ -10,30 +10,30 @@
 /obj/item/circuitboard/exosystem/engineering
 	name = T_BOARD_MECH("engineering systems")
 	contains_software = list(MECH_SOFTWARE_ENGINEERING)
-	origin_tech = list(TECH_DATA = 1)
+	origin_tech = "{'" + TECH_DATA + "':1}"
 
 /obj/item/circuitboard/exosystem/utility
 	name = T_BOARD_MECH("utility systems")
 	contains_software = list(MECH_SOFTWARE_UTILITY)
 	icon_state = "mcontroller"
-	origin_tech = list(TECH_DATA = 1)
+	origin_tech = "{'" + TECH_DATA + "':1}"
 
 /obj/item/circuitboard/exosystem/medical
 	name = T_BOARD_MECH("medical systems")
 	contains_software = list(MECH_SOFTWARE_MEDICAL)
 	icon_state = "mcontroller"
-	origin_tech = list(TECH_DATA = 3,TECH_BIO = 2)
+	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_BIO + "':2}"
 
 /obj/item/circuitboard/exosystem/weapons
 	name = T_BOARD_MECH("basic weapon systems")
 	contains_software = list(MECH_SOFTWARE_WEAPONS)
 	icon_state = "mainboard"
-	origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 3)
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_COMBAT + "':3}"
 
 /obj/item/circuitboard/exosystem/advweapons
 	name = T_BOARD_MECH("advanced weapon systems")
 	contains_software = list(MECH_SOFTWARE_ADVWEAPONS)
 	icon_state = "mainboard"
-	origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 5)
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_COMBAT + "':5}"
 
 #undef T_BOARD_MECH

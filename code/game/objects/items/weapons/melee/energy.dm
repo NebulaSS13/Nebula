@@ -103,7 +103,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4)
+	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_COMBAT + "':4}"
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	inactive_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	sharp = 1
@@ -129,7 +129,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
-	origin_tech = list(TECH_MAGNET = 3, TECH_ESOTERIC = 4)
+	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_ESOTERIC + "':4}"
 	sharp = 1
 	edge = 1
 	base_parry_chance = 50
@@ -254,6 +254,6 @@
 	force = 3
 	throwforce = 1
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_MAGNET = 3)
+	origin_tech = "{'" + TECH_MAGNET + "':3}"
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'

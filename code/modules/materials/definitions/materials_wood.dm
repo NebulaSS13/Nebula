@@ -15,7 +15,7 @@
 	weight = 18
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
-	stack_origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
+	stack_origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_BIO + "':1}"
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 	door_icon_base = "wood"
 	destruction_desc = "splinters"

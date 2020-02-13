@@ -1,7 +1,7 @@
 /obj/item/clothing/glasses/hud
 	name = "HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
-	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 2)
+	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_BIO + "':2}"
 	var/list/icon/current = list() //the current hud icons
 	electric = 1
 	gender = NEUTER

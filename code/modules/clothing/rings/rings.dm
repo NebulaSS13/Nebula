@@ -43,7 +43,7 @@
 
 /obj/item/clothing/ring/reagent
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 4)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':4}"
 
 /obj/item/clothing/ring/reagent/Initialize()
 	. = ..()
@@ -66,7 +66,7 @@
 	name = "silver ring"
 	desc = "A ring made from what appears to be silver."
 	icon_state = "material"
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ESOTERIC = 5)
+	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':5}"
 
 /obj/item/clothing/ring/reagent/sleepy/Initialize()
 	. = ..()
