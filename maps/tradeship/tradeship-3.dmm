@@ -284,6 +284,14 @@
 /obj/machinery/ntnet_relay,
 /turf/simulated/floor/bluegrid,
 /area/ship/scrap/comms)
+"dN" = (
+/obj/structure/table/woodentable,
+/turf/simulated/floor/wood/bamboo,
+/area/space)
+"dX" = (
+/obj/structure/table/woodentable_reinforced,
+/turf/simulated/floor/wood/bamboo,
+/area/space)
 "fi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -346,6 +354,17 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/open,
 /area/ship/scrap/maintenance/solars)
+"iq" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "iz" = (
 /obj/structure/cable/yellow{
 	icon_state = "5-10"
@@ -489,6 +508,12 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/ship/scrap/bridge_unused)
+"pv" = (
+/obj/item/mollusc/barnacle{
+	pixel_x = 0
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "pC" = (
 /obj/item/wrench,
 /obj/structure/handrai{
@@ -498,6 +523,11 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"qh" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/hatch/autoname/command,
+/turf/simulated/floor/plating,
+/area/ship/scrap/command/bridge_upper)
 "qw" = (
 /obj/machinery/light_switch{
 	pixel_z = 0;
@@ -537,6 +567,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
+"sI" = (
+/obj/machinery/door/airlock/hatch/autoname/command,
+/turf/simulated/floor/tiled/monotile,
+/area/space)
 "sX" = (
 /obj/machinery/door/window/westleft,
 /obj/structure/cable{
@@ -576,6 +610,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/bridge_unused)
+"uX" = (
+/obj/structure/window/reinforced,
+/turf/simulated/floor/wood/bamboo,
+/area/space)
 "vi" = (
 /obj/structure/handrai{
 	tag = "icon-handrail (WEST)";
@@ -586,6 +624,9 @@
 /area/space)
 "vC" = (
 /obj/machinery/door/firedoor,
+/obj/structure/sign/warning/fall{
+	pixel_w = 32
+	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
 "wc" = (
@@ -715,6 +756,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
+"AM" = (
+/obj/item/mollusc/barnacle{
+	pixel_x = -14
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "BD" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
@@ -722,6 +769,9 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
+"CB" = (
+/turf/simulated/floor/tiled/monotile,
+/area/space)
 "Db" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -859,6 +909,9 @@
 /obj/machinery/message_server,
 /turf/simulated/floor/bluegrid,
 /area/ship/scrap/comms)
+"JD" = (
+/turf/simulated/wall/r_wall/hull,
+/area/space)
 "Ko" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -911,6 +964,10 @@
 /obj/machinery/light/small{
 	icon_state = "bulb_map";
 	dir = 8
+	},
+/obj/structure/sign/warning/fall{
+	pixel_z = 0;
+	pixel_w = -32
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
@@ -1065,6 +1122,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge_upper)
+"SF" = (
+/turf/space,
+/turf/simulated/open,
+/area/space)
 "SO" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1097,6 +1158,9 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"Tu" = (
+/turf/simulated/floor/wood/bamboo,
+/area/space)
 "Tx" = (
 /obj/machinery/r_n_d/server/core,
 /turf/simulated/floor/bluegrid,
@@ -1107,6 +1171,12 @@
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/airless,
+/area/space)
+"Uv" = (
+/obj/item/mollusc/barnacle{
+	pixel_w = 16
+	},
+/turf/simulated/floor/reinforced/airless,
 /area/space)
 "Ux" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -1152,6 +1222,12 @@
 "Xb" = (
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/command/bridge_upper)
+"Xp" = (
+/obj/item/mollusc/barnacle{
+	pixel_w = -17
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "Xu" = (
 /obj/structure/cable/yellow{
 	d1 = 2;
@@ -1205,6 +1281,10 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/command/bridge_upper)
+"YG" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/space,
+/area/space)
 "Zx" = (
 /obj/structure/handrai{
 	tag = "icon-handrail (EAST)";
@@ -3201,8 +3281,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+SF
+SF
 ax
 ax
 ax
@@ -3282,8 +3362,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+SF
+SF
 ax
 ax
 ax
@@ -3364,7 +3444,7 @@ aa
 aa
 aa
 aa
-aa
+SF
 ax
 ax
 ax
@@ -3934,7 +4014,7 @@ aa
 aa
 ax
 ax
-ax
+AM
 ax
 ax
 ax
@@ -4105,7 +4185,7 @@ KG
 ax
 ax
 ax
-ax
+Uv
 vi
 aV
 au
@@ -4206,7 +4286,7 @@ ax
 ax
 ax
 ax
-ax
+pv
 ax
 ax
 ax
@@ -4259,10 +4339,10 @@ ax
 ax
 ax
 ax
-ax
-ax
-ax
-ax
+JD
+JD
+YG
+JD
 ax
 Tt
 ax
@@ -4341,10 +4421,10 @@ ax
 aa
 aa
 aa
-ax
-ax
-ax
-ax
+JD
+Tu
+Tu
+uX
 ax
 Yq
 aV
@@ -4419,14 +4499,14 @@ RZ
 HN
 bE
 SQ
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+iq
+iq
+iq
+iq
+JD
+dX
+dX
+uX
 ax
 Tt
 Rk
@@ -4500,15 +4580,15 @@ YA
 rl
 fi
 PZ
-SQ
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+qh
+CB
+CB
+CB
+sI
+Tu
+Tu
+Tu
+uX
 ax
 Xu
 yt
@@ -4583,14 +4663,14 @@ wc
 nZ
 ZT
 SQ
-ax
-ax
-ax
-ax
-ax
-ax
-ax
-ax
+iq
+iq
+iq
+iq
+JD
+Tu
+Tu
+uX
 ax
 Yq
 aV
@@ -4669,15 +4749,15 @@ ax
 aa
 aa
 aa
-ax
-ax
-ax
-ax
+JD
+dN
+Tu
+uX
 ax
 br
 ax
 ax
-ax
+Xp
 aV
 aV
 xe
@@ -4691,7 +4771,7 @@ ax
 ax
 ax
 ax
-ax
+Xp
 ax
 ax
 ax
@@ -4751,10 +4831,10 @@ ax
 ax
 ax
 ax
-ax
-ax
-ax
-ax
+JD
+JD
+YG
+JD
 ax
 wf
 ax
@@ -5269,7 +5349,7 @@ ax
 ax
 ax
 ax
-ax
+pv
 ax
 aa
 aa
@@ -5577,8 +5657,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+SF
+SF
 ax
 ax
 ax
@@ -5660,7 +5740,7 @@ aa
 aa
 aa
 aa
-aa
+SF
 ax
 ax
 ax
@@ -5742,8 +5822,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+SF
+SF
 ax
 ax
 ax

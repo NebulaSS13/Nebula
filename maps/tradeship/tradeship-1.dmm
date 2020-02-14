@@ -810,6 +810,9 @@
 	dir = 8
 	},
 /obj/item/storage/firstaid/regular,
+/obj/structure/sign/warning/fall{
+	pixel_w = -31
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
 "bU" = (
@@ -2405,6 +2408,12 @@
 /obj/structure/railing/mapped,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/cargo/lower)
+"iR" = (
+/obj/item/mollusc/barnacle{
+	pixel_z = 19
+	},
+/turf/simulated/floor/plating,
+/area/space)
 "iW" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -2886,6 +2895,12 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/ship/scrap/cargo/lower)
+"AH" = (
+/obj/item/mollusc/barnacle{
+	pixel_w = 17
+	},
+/turf/space,
+/area/space)
 "Bb" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3230,6 +3245,10 @@
 "Qb" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/door/firedoor,
+/obj/structure/sign/warning/fall{
+	pixel_y = 0;
+	pixel_w = 32
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "Qc" = (
@@ -3242,6 +3261,12 @@
 /mob/living/simple_animal/cat/fluff/ran,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/science/fabricaton)
+"Qu" = (
+/obj/item/mollusc/barnacle{
+	pixel_z = 19
+	},
+/turf/space,
+/area/space)
 "Rb" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -5721,7 +5746,7 @@ aa
 aa
 aa
 aa
-aa
+AH
 aa
 aa
 aa
@@ -5813,7 +5838,7 @@ tf
 aa
 aa
 aa
-aa
+AH
 aa
 aa
 XF
@@ -7277,7 +7302,7 @@ aa
 aa
 aa
 aa
-Ei
+iR
 ap
 az
 qb
@@ -7294,7 +7319,7 @@ Nb
 dz
 Sb
 DX
-aa
+Qu
 er
 eH
 er
