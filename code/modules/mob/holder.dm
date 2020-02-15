@@ -126,7 +126,7 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/borer
 	origin_tech = "{'" + TECH_BIO + "':6}"
 
-//need own subtype to work with recipies
+//need own subtype to work with recipes
 /obj/item/holder/corgi
 	origin_tech = "{'" + TECH_BIO + "':4}"
 
