@@ -123,9 +123,8 @@
 	reagents.add_reagent(/datum/reagent/sedatives, 15)
 	color = reagents.get_color()
 
-
 /obj/item/chems/pill/burn_meds
-	name = "Kelotane (15u)"
+	name = "synthskin (15u)"
 	desc = "Used to treat burns."
 	icon_state = "pill2"
 /obj/item/chems/pill/burn_meds/Initialize()
