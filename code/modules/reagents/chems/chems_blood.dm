@@ -82,3 +82,4 @@
 	description = "When exposed to unsuitable conditions, such as the floor or an oven, blood becomes coagulated and useless for transfusions. It's great for making blood pudding, though."
 	glass_name = "tomato salsa"
 	glass_desc = "Are you sure this is tomato salsa?"
+	hidden_from_codex = TRUE

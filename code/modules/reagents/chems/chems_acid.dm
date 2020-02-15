@@ -107,3 +107,4 @@
 	taste_description = "coppery foulness"
 	power = 2
 	color = "#d8ff00"
+	hidden_from_codex = TRUE

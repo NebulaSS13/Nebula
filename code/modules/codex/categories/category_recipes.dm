@@ -1,6 +1,6 @@
-/datum/codex_category/recipes/
+/datum/codex_category/recipes
 	name = "Recipies"
-	desc = "Recipies for a variety of reagents."
+	desc = "Recipies for a variety of different kinds of foods and condiments."
 
 /datum/codex_category/recipes/Initialize()
 	for(var/datum/recipe/recipe in SScuisine.microwave_recipes)

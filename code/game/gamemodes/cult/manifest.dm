@@ -4,6 +4,7 @@
 	brute_mod = 2
 	burn_mod = 2
 	species_flags = SPECIES_FLAG_NO_SCAN
+	hidden_from_codex = TRUE
 	force_cultural_info = list(
 		TAG_CULTURE =   CULTURE_CULTIST,
 		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,

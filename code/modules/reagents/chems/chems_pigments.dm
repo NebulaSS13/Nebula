@@ -4,6 +4,7 @@
 	taste_description = "the back of class"
 	color = "#888888"
 	overdose = 5
+	hidden_from_codex = TRUE
 
 /datum/reagent/pigment/crayon_dust/red
 	name = "red crayon dust"

@@ -6,20 +6,22 @@
 
 	for(var/thing in subtypesof(/datum/reagent))
 		var/datum/reagent/reagent = thing
-		if(initial(reagent.hidden_from_codex))
+		if(!initial(reagent.name) || initial(reagent.hidden_from_codex))
 			continue
 		var/chem_name = lowertext(initial(reagent.name))
 		var/datum/codex_entry/entry = new( \
 		 _display_name = "[chem_name] (chemical)", \
 		 _associated_strings = list("[chem_name] pill"), \
-		 _lore_text = "[initial(reagent.description)] It apparently tastes of [initial(reagent.taste_description)].")
+		 _lore_text = initial(reagent.description)
+		 if(taste_description)
+		 	_lore_text = "[_lore_text] It apparently tastes of [initial(reagent.taste_description)].")
 
 		var/list/production_strings = list()
 		for(var/react in SSchemistry.chemical_reactions_by_result[thing])
 
 			var/datum/chemical_reaction/reaction = react
 
-			if(reaction.hidden_from_codex)
+			if(!reaction.name || reaction.hidden_from_codex)
 				continue
 
 			var/list/reactant_values = list()

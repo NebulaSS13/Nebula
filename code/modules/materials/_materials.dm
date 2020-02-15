@@ -248,6 +248,7 @@
 // Used by walls when qdel()ing to avoid neighbor merging.
 /material/placeholder
 	display_name = "placeholder"
+	hidden_from_codex = TRUE
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)

@@ -57,12 +57,14 @@
 	description = "A mass of wood fibers."
 	taste_description = "wood"
 	color = WOOD_COLOR_GENERIC
+	hidden_from_codex = TRUE
 
 /datum/reagent/bamboo
 	name = "bamboo pulp"
 	description = "A mass of bamboo fibers."
 	taste_description = "grass"
 	color = WOOD_COLOR_PALE2
+	hidden_from_codex = TRUE
 
 /datum/reagent/luminol
 	name = "luminol"
@@ -374,6 +376,7 @@
 	scent = "cigarette smoke"
 	scent_descriptor = SCENT_DESC_ODOR
 	scent_range = 4
+	hidden_from_codex = TRUE
 
 	var/nicotine = REM * 0.2
 
@@ -416,6 +419,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
 	data = 0
+	hidden_from_codex = TRUE
 
 /datum/reagent/menthol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(world.time > data + 3 MINUTES)

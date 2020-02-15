@@ -111,8 +111,10 @@ var/global/list/string_slot_flags = list(
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language
 	for(var/T in paths)
-		var/datum/language/L = new T
-		all_languages[L.name] = L
+		var/datum/language/L = T
+		var/langname = initial(L.name)
+		if(langname)
+			all_languages[langname] = new L
 
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
