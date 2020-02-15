@@ -14,11 +14,13 @@
 		var/mechanics_text
 		var/lore_text
 		var/product_name
+		var/category_name
 		if(istype(food, /datum/chemical_reaction/recipe/food))
 			var/datum/chemical_reaction/recipe/food/food_ref = food
 			var/obj/item/product = food_ref.obj_result
 			if(!product)
 				continue
+			category_name = "mix recipe"
 			product_name = initial(product.name)
 			lore_text = initial(product.desc)
 			mechanics_text = "This recipe produces \a [initial(product.name)].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
@@ -28,7 +30,12 @@
 				continue
 			product_name = initial(product.name)
 			lore_text = initial(product.description)
-			mechanics_text = "This recipe produces [food.result_amount]u [initial(product.name)].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
+			if(ispath(food.result, /datum/reagent/drink) || ispath(food.result, /datum/reagent/ethanol))
+				category_name = "drink recipe"
+				mechanics_text = "This recipe produces [food.result_amount]u [initial(product.name)].<br>It should be performed in a glass or shaker, and requires the following ingredients:"
+			else
+				category_name = "condiment recipe"
+				mechanics_text = "This recipe produces [food.result_amount]u [initial(product.name)].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
 
 		var/list/reactant_values = list()
 		for(var/reactant_id in food.required_reagents)
@@ -47,7 +54,7 @@
 			mechanics_text += "<br>The recipe will not succeed if the temperature is below [food.minimum_temperature]K."
 
 		entries_to_register += new /datum/codex_entry(            \
-		 _display_name =       "[lowertext(food.name)] (mix recipe)", \
+		 _display_name =       "[lowertext(food.name)] ([category_name])", \
 		 _associated_strings = list(                              \
 		 	lowertext(food.name),                                 \
 			lowertext(product_name)),                             \
