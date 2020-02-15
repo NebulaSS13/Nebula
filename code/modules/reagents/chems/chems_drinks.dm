@@ -2,6 +2,8 @@
 	name = "drink"
 	description = "Uh, some kind of drink."
 	color = "#e78108"
+	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
+
 	var/nutrition = 0 // Per unit
 	var/hydration = 6 // Per unit
 	var/adj_dizzy = 0 // Per tick
