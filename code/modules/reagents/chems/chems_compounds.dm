@@ -57,12 +57,14 @@
 	description = "A mass of wood fibers."
 	taste_description = "wood"
 	color = WOOD_COLOR_GENERIC
+	hidden_from_codex = TRUE
 
 /datum/reagent/bamboo
 	name = "bamboo pulp"
 	description = "A mass of bamboo fibers."
 	taste_description = "grass"
 	color = WOOD_COLOR_PALE2
+	hidden_from_codex = TRUE
 
 /datum/reagent/luminol
 	name = "luminol"
@@ -374,6 +376,7 @@
 	scent = "cigarette smoke"
 	scent_descriptor = SCENT_DESC_ODOR
 	scent_range = 4
+	hidden_from_codex = TRUE
 
 	var/nicotine = REM * 0.2
 
@@ -416,6 +419,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
 	data = 0
+	hidden_from_codex = TRUE
 
 /datum/reagent/menthol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(world.time > data + 3 MINUTES)
@@ -465,3 +469,52 @@
 		I.was_bloodied = null
 	for(var/obj/effect/decal/cleanable/blood/B in T)
 		qdel(B)
+
+/datum/reagent/crystal
+	name = "crystallizing agent"
+	taste_description = "sharpness"
+	color = "#13bc5e"
+
+/datum/reagent/crystal/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/result_mat = (M.psi || (M.mind && GLOB.wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : MAT_CRYSTAL
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		for(var/obj/item/organ/external/E in shuffle(H.organs.Copy()))
+			if(E.is_stump() || BP_IS_PROSTHETIC(E))
+				continue
+
+			if(BP_IS_CRYSTAL(E))
+				if((E.brute_dam + E.burn_dam) > 0)
+					if(prob(35))
+						to_chat(M, SPAN_NOTICE("You feel a crawling sensation as fresh crystal grows over your [E.name]."))
+					E.heal_damage(rand(5,8), rand(5,8))
+					break
+				if(BP_IS_BRITTLE(E))
+					E.status &= ~ORGAN_BRITTLE
+					break
+			else if(E.organ_tag != BP_CHEST && E.organ_tag != BP_GROIN && prob(15))
+				to_chat(H, SPAN_DANGER("Your [E.name] is being lacerated from within!"))
+				if(E.can_feel_pain())
+					H.emote("scream")
+				if(prob(25))
+					for(var/i = 1 to rand(3,5))
+						new /obj/item/material/shard(get_turf(E), result_mat)
+					E.droplimb(0, DROPLIMB_BLUNT)
+				else
+					E.take_external_damage(rand(20,30), 0)
+					E.status |= ORGAN_CRYSTAL
+					E.status |= ORGAN_BRITTLE
+				break
+
+		for(var/obj/item/organ/internal/I in shuffle(H.internal_organs.Copy()))
+			if(BP_IS_PROSTHETIC(I) || !BP_IS_CRYSTAL(I) || I.damage <= 0 || I.organ_tag == BP_BRAIN)
+				continue
+			if(prob(35))
+				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
+			I.heal_damage(rand(1,3))
+			break
+	else		
+		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
+		M.adjustBruteLoss(rand(3,6))
+		if(prob(10))
+			new /obj/item/material/shard(get_turf(M), result_mat)

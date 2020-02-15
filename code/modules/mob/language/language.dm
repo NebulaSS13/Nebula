@@ -5,7 +5,7 @@
 */
 
 /datum/language
-	var/name = "base language"  // Fluff name of language if any.
+	var/name                          // Fluff name of language if any.
 	var/desc = "You should not have this language." // Short description for 'Check Languages'.
 	var/speech_verb = "says"          // 'says', 'hisses', 'farts'.
 	var/ask_verb = "asks"             // Used when sentence ends in a ?

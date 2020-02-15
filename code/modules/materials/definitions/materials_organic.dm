@@ -119,6 +119,7 @@
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 0
+	hidden_from_codex = TRUE
 
 /material/skin
 	display_name = "skin"

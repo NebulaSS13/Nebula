@@ -5,6 +5,7 @@
 	color = "#404030"
 	touch_met = 5
 	fuel_value = 0.75
+	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 
 	var/nutriment_factor = 0
 	var/hydration_factor = 0

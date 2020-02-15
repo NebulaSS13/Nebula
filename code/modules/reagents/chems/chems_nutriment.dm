@@ -4,11 +4,12 @@
 	description = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 	taste_mult = 4
 	metabolism = REM * 4
+	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
+	color = "#664330"
+	value = 0.1
 	var/nutriment_factor = 10 // Per unit
 	var/hydration_factor = 0 // Per unit
 	var/injectable = 0
-	color = "#664330"
-	value = 0.1
 
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 

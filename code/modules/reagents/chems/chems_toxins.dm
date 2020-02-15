@@ -43,6 +43,7 @@
 	heating_point = null
 	target_organ = null
 	strength = 0
+	hidden_from_codex = TRUE
 
 /datum/reagent/toxin/slimejelly
 	name = "slime jelly"
@@ -214,6 +215,7 @@
 	color = "#664330"
 	heating_point = null
 	heating_products = null
+	hidden_from_codex = TRUE
 
 /datum/reagent/toxin/fertilizer/eznutrient
 	name = "EZ Nutrient"

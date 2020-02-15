@@ -91,6 +91,7 @@
 	chilling_message = "stops boiling."
 	heating_products =  list(null)
 	heating_point =    null
+	hidden_from_codex = TRUE
 
 // Ice is a drink for some reason.
 /datum/reagent/drink/ice

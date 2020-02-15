@@ -26,7 +26,7 @@
 	if(!recipes)
 		return
 
-	var/dat = "<center><b>Recipies</b></center><br><br><i>Item - [text_modifications["Cost"]] Cost</i><br>"
+	var/dat = "<center><b>Recipes</b></center><br><br><i>Item - [text_modifications["Cost"]] Cost</i><br>"
 	for(var/type in recipes)
 		var/atom/a = type
 		var/cost = recipes[type]

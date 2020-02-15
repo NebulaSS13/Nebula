@@ -269,7 +269,7 @@
 	wrapper_color = COLOR_PALE_BLUE_GRAY
 
 /obj/item/storage/pill_bottle/burn_meds
-	name = "pill bottle (Kelotane)"
+	name = "pill bottle (synthskin)"
 	desc = "Contains pills used to treat burns."
 
 	startswith = list(/obj/item/chems/pill/burn_meds = 21)
