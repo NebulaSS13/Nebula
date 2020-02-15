@@ -5,6 +5,7 @@ SUBSYSTEM_DEF(chemistry)
 
 	var/list/active_holders =               list()
 	var/list/chemical_reactions =           list()
+	var/list/chemical_reactions_by_type =   list()
 	var/list/chemical_reactions_by_id =     list()
 	var/list/chemical_reactions_by_result = list()
 	var/list/processing_holders =           list()
@@ -26,7 +27,7 @@ SUBSYSTEM_DEF(chemistry)
 
 	for(var/path in subtypesof(/datum/chemical_reaction))
 		var/datum/chemical_reaction/D = new path()
-		chemical_reactions += D
+		chemical_reactions[path] = D
 		if(!chemical_reactions_by_result[D.result])
 			chemical_reactions_by_result[D.result] = list()
 		chemical_reactions_by_result[D.result] += D

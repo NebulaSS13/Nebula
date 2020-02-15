@@ -1,4 +1,4 @@
-/datum/codex_category/reagents/
+/datum/codex_category/reagents
 	name = "Reagents"
 	desc = "Chemicals and reagents, both natural and artificial."
 
@@ -9,12 +9,13 @@
 		if(!initial(reagent.name) || initial(reagent.hidden_from_codex))
 			continue
 		var/chem_name = lowertext(initial(reagent.name))
-		var/datum/codex_entry/entry = new( \
-		 _display_name = "[chem_name] (chemical)", \
+		var/new_lore_text = initial(reagent.description) 
+		if(initial(reagent.taste_description))
+			new_lore_text = "[new_lore_text] It apparently tastes of [initial(reagent.taste_description)]."
+		var/datum/codex_entry/entry = new(               \
+		 _display_name = "[chem_name] (chemical)",       \
 		 _associated_strings = list("[chem_name] pill"), \
-		 _lore_text = initial(reagent.description)
-		 if(taste_description)
-		 	_lore_text = "[_lore_text] It apparently tastes of [initial(reagent.taste_description)].")
+		 _lore_text = new_lore_text)
 
 		var/list/production_strings = list()
 		for(var/react in SSchemistry.chemical_reactions_by_result[thing])
