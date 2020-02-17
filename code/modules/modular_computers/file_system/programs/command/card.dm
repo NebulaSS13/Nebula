@@ -41,12 +41,17 @@
 	data["mmode"] = mod_mode
 	data["centcom_access"] = is_centcom
 
-	var/list/dept_list = SSdepartments.departments
-	for(var/dept_key in dept_list)
-		var/datum/department/dept = dept_list[dept_key]
-		data["[dept.reference]_jobs"] = format_jobs(SSjobs.titles_by_department(dept.reference)) //get all jobs for all deparments
+	data["titles_by_dept"] = list()
+	for(var/dept_key in SSdepartments.departments)
+		var/datum/department/dept = SSdepartments.departments[dept_key]
+		var/list/map_jobs = SSjobs.titles_by_department(dept.reference)
+		if(LAZYLEN(map_jobs))
+			data["titles_by_dept"] += list(list(
+				"department_colour" =  dept.colour,
+				"department_name" =    capitalize(dept.reference),
+				"department_titles" =  format_jobs(map_jobs)
+			))
 	data["centcom_jobs"] = format_jobs(get_all_centcom_jobs())
-
 	data["all_centcom_access"] = is_centcom ? get_accesses(1) : null
 	data["regions"] = get_accesses()
 
