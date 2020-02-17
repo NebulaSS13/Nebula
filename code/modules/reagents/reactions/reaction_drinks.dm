@@ -23,8 +23,8 @@
 	required_reagents = list(/datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/sodawater = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/recipe/indrelbreakfast
-	name = "Indrel Breakfast"
+/datum/chemical_reaction/recipe/orangecola
+	name = "Orange Cola"
 	result = /datum/reagent/drink/orangecola
 	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/cola = 1)
 	result_amount = 3

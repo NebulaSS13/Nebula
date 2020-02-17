@@ -147,15 +147,6 @@
 	. += new/datum/stack_recipe/wooden_prosthetic/right_hand(src)
 	. += new/datum/stack_recipe/wooden_prosthetic/left_foot(src)
 	. += new/datum/stack_recipe/wooden_prosthetic/right_foot(src)
-	. += new/datum/stack_recipe/wooden_prosthetic/left_arm_ying(src)
-	. += new/datum/stack_recipe/wooden_prosthetic/right_arm_ying(src)
-	. += new/datum/stack_recipe/wooden_prosthetic/left_leg_ying(src)
-	. += new/datum/stack_recipe/wooden_prosthetic/right_leg_ying(src)
-	. += new/datum/stack_recipe/wooden_prosthetic/left_hand_ying(src)
-	. += new/datum/stack_recipe/wooden_prosthetic/right_hand_ying(src)
-	. += new/datum/stack_recipe/wooden_prosthetic/left_foot_ying(src)
-	. += new/datum/stack_recipe/wooden_prosthetic/right_foot_ying(src)
-
 
 /material/wood/mahogany/generate_recipes(var/reinforce_material)
 	. = ..()

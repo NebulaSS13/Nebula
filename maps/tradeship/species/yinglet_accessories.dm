@@ -2,7 +2,7 @@
 	name = "Shelltooth"
 	body_parts = list(BP_HEAD)
 	species_allowed = list(SPECIES_YINGLET, SPECIES_YINGLET_SOUTHERN)
-	icon = 'icons/mob/human_races/species/yinglet/markings.dmi'
+	icon = 'maps/tradeship/icons/species/yinglet/markings.dmi'
 	icon_state = "shelltooth"
 	blend = ICON_MULTIPLY
 
@@ -56,7 +56,7 @@
 	name = "Ying Messy"
 	icon_state = "hair_messy"
 	species_allowed = list(SPECIES_YINGLET, SPECIES_YINGLET_SOUTHERN)
-	icon = 'icons/mob/human_races/species/yinglet/hair.dmi'
+	icon = 'maps/tradeship/icons/species/yinglet/hair.dmi'
 	blend = ICON_MULTIPLY
 
 /datum/sprite_accessory/hair/yinglet/afro
@@ -90,3 +90,15 @@
 	name = "Ying Updo"
 	icon_state = "hair_updo"
 	flags = HAIR_TIEABLE
+
+/datum/category_item/underwear/bottom/yinglet_wraps
+	name = "Yinglet Wraps"
+	underwear_name = "wraps"
+	icon_state = "ying_wraps"
+	has_color = TRUE
+
+/datum/category_item/underwear/top/yinglet_wraps
+	name = "Yinglet Chestwrap"
+	underwear_name = "chestwrap"
+	icon_state = "ying_chestwrap"
+	has_color = TRUE

@@ -1,3 +1,22 @@
+/obj/item/clothing/gloves
+	sprite_sheets = list(SPECIES_YINGLET = 'maps/tradeship/icons/onmob_hands_yinglet.dmi')
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
+
+/obj/item/clothing/ears
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
+
+/obj/item/clothing/glasses
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
+
+/obj/item/clothing/head
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
+
+/obj/item/clothing/suit
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
+
+/obj/item/clothing/mask
+	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
+
 /obj/item/clothing/under/tradeship_plain
 	name = "plain clothes"
 	desc = "Some very boring clothes."
@@ -25,7 +44,6 @@
 	var/has_buttons
 	var/has_collar
 	var/has_buckle
-
 
 /obj/item/clothing/suit/storage/toggle/redcoat/Initialize()
 	update_icon()

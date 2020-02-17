@@ -47,7 +47,7 @@ var/list/lunchables_drinks_ = list(
 									/obj/item/chems/food/drinks/cans/waterbottle,
 									/obj/item/chems/food/drinks/cans/space_mountain_wind,
 									/obj/item/chems/food/drinks/cans/dr_gibb,
-									/obj/item/chems/food/drinks/cans/indrelbreakfast,
+									/obj/item/chems/food/drinks/cans/starkist,
 									/obj/item/chems/food/drinks/cans/space_up,
 									/obj/item/chems/food/drinks/cans/lemon_lime,
 									/obj/item/chems/food/drinks/cans/iced_tea,

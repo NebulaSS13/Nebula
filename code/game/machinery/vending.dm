@@ -731,14 +731,14 @@
 	product_slogans = "Robust Softdrinks: More robust than a toolbox to the head!"
 	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not cola?;Please, have a drink!;Drink up!;The best drinks in space."
 	products = list(/obj/item/chems/food/drinks/cans/cola = 10,/obj/item/chems/food/drinks/cans/space_mountain_wind = 10,
-					/obj/item/chems/food/drinks/cans/dr_gibb = 10,/obj/item/chems/food/drinks/cans/indrelbreakfast = 10,
+					/obj/item/chems/food/drinks/cans/dr_gibb = 10,/obj/item/chems/food/drinks/cans/starkist = 10,
 					/obj/item/chems/food/drinks/cans/waterbottle = 10,/obj/item/chems/food/drinks/cans/space_up = 10,
 					/obj/item/chems/food/drinks/cans/iced_tea = 10, /obj/item/chems/food/drinks/cans/grape_juice = 10,
 					/obj/item/chems/food/drinks/juicebox/apple = 10, /obj/item/chems/food/drinks/juicebox/orange = 10, 
 					/obj/item/chems/food/drinks/juicebox/grape = 10)
 	contraband = list(/obj/item/chems/food/drinks/cans/thirteenloko = 5, /obj/item/chems/food/snacks/liquidfood = 6)
 	prices = list(/obj/item/chems/food/drinks/cans/cola = 1,/obj/item/chems/food/drinks/cans/space_mountain_wind = 1,
-					/obj/item/chems/food/drinks/cans/dr_gibb = 1,/obj/item/chems/food/drinks/cans/indrelbreakfast = 1,
+					/obj/item/chems/food/drinks/cans/dr_gibb = 1,/obj/item/chems/food/drinks/cans/starkist = 1,
 					/obj/item/chems/food/drinks/cans/waterbottle = 2,/obj/item/chems/food/drinks/cans/space_up = 1,
 					/obj/item/chems/food/drinks/cans/iced_tea = 1,/obj/item/chems/food/drinks/cans/grape_juice = 1,
 					/obj/item/chems/food/drinks/juicebox/apple = 1, /obj/item/chems/food/drinks/juicebox/orange = 1, 

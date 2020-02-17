@@ -1,6 +1,6 @@
 /obj/item/organ/internal/eyes/yinglet
 	relative_size = 15
-	eye_icon = 'icons/mob/human_races/species/yinglet/eyes.dmi'
+	eye_icon = 'maps/tradeship/icons/species/yinglet/eyes.dmi'
 
 // Copied from vox stomach, upstream Baycode.
 /obj/item/organ/internal/stomach/yinglet

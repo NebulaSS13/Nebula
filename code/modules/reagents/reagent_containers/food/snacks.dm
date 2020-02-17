@@ -13,8 +13,8 @@
 	var/dried_type = null
 	var/dry = 0
 	var/nutriment_amt = 0
-	var/nutriment_type = /datum/reagent/nutriment //Right now, used primarily to tell yinglets if its bread or clams
-	var/list/nutriment_desc = list("food" = 1) // List of flavours and flavour strengths. The flavour strength text is determined by the ratio of flavour strengths in the snack.
+	var/nutriment_type = /datum/reagent/nutriment // Used to determine which base nutriment type is spawned for this item.
+	var/list/nutriment_desc = list("food" = 1)    // List of flavours and flavour strengths. The flavour strength text is determined by the ratio of flavour strengths in the snack.
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
 	center_of_mass = @"{'x':16,'y':16}"
 	w_class = ITEM_SIZE_SMALL
@@ -3264,12 +3264,12 @@
 	bitesize = 2
 
 /obj/item/chems/food/snacks/syndicake
-	name = "scav cakes"
+	name = "subversive cakes"
 	icon_state = "syndi_cakes"
-	desc = "Made using extremely unethical labour, ingredients and marketing methods. Guess what it's made from?"
+	desc = "Made using extremely unethical labour, ingredients and marketing methods."
 	filling_color = "#ff5d05"
 	center_of_mass = @"{'x':16,'y':10}"
-	nutriment_desc = list("sweetness" = 3, "cake" = 1, "something that you hope is not yinglet" = 1)
+	nutriment_desc = list("sweetness" = 3, "cake" = 1)
 	nutriment_amt = 4
 	trash = /obj/item/trash/syndi_cakes
 	bitesize = 3

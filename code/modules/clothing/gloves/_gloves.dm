@@ -10,8 +10,7 @@
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
 	blood_overlay_type = "bloodyhands"
-	sprite_sheets = list(SPECIES_YINGLET = 'icons/mob/species/yinglet/onmob_hands_yinglet.dmi')
-	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
+	species_restricted = list(SPECIES_HUMAN)
 
 	var/obj/item/clothing/ring/ring = null		//Covered ring
 	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping

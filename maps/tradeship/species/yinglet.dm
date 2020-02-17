@@ -8,14 +8,14 @@
 		"th" = list("z")
 	)
 
-	icobase =         'icons/mob/human_races/species/yinglet/body.dmi'
-	deform =          'icons/mob/human_races/species/yinglet/deformed_body.dmi'
-	preview_icon =    'icons/mob/human_races/species/yinglet/preview.dmi'
-	husk_icon =       'icons/mob/human_races/species/yinglet/husk.dmi'
-	damage_overlays = 'icons/mob/human_races/species/yinglet/damage_overlay.dmi'
-	damage_mask =     'icons/mob/human_races/species/yinglet/damage_mask.dmi'
-	blood_mask =      'icons/mob/human_races/species/yinglet/blood_mask.dmi'
-	lip_icon =        'icons/mob/human_races/species/yinglet/lips.dmi'
+	icobase =         'maps/tradeship/icons/species/yinglet/body.dmi'
+	deform =          'maps/tradeship/icons/species/yinglet/deformed_body.dmi'
+	preview_icon =    'maps/tradeship/icons/species/yinglet/preview.dmi'
+	husk_icon =       'maps/tradeship/icons/species/yinglet/husk.dmi'
+	damage_overlays = 'maps/tradeship/icons/species/yinglet/damage_overlay.dmi'
+	damage_mask =     'maps/tradeship/icons/species/yinglet/damage_mask.dmi'
+	blood_mask =      'maps/tradeship/icons/species/yinglet/blood_mask.dmi'
+	lip_icon =        'maps/tradeship/icons/species/yinglet/lips.dmi'
 	gluttonous = GLUT_SMALLER | GLUT_ITEM_TINY
 	metabolism_mod = 1.25
 
@@ -173,3 +173,20 @@
 		TAG_FACTION =   list(FACTION_SCAV, FACTION_OTHER),
 		TAG_RELIGION =  list(RELIGION_OTHER, RELIGION_ATHEISM, RELIGION_AGNOSTICISM)
 	)
+
+/obj/item/holder/human/yinglet
+	sharp = 1
+	edge = 1
+	mob_blend_mode = ICON_MULTIPLY
+	generate_for_slots = list()
+
+/obj/item/holder/human/yinglet/iscrowbar()
+	return TRUE
+	
+/obj/item/holder/human/yinglet/attack_self()
+	var/mob/owner = locate() in contents
+	if(owner.stat == CONSCIOUS)
+		var/turf/T = get_turf(owner)
+		T.visible_message(SPAN_WARNING("\icon[owner] Eee!"))
+		playsound(T, 'sound/effects/mousesqueek.ogg', 75, 1)
+	..()

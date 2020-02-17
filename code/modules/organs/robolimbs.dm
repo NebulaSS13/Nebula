@@ -127,21 +127,3 @@ var/datum/robolimb/basic_robolimb
 	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
 	movement_slowdown = 1
 	is_robotic = FALSE
-
-/datum/robolimb/ying_wooden
-	company = "scavenged prosthesis"
-	desc = "A stick, tied to the owner's body with rags. Very scav chic."
-	icon = 'icons/mob/human_races/cyberlimbs/yinglet/wooden_main.dmi'
-	allowed_bodytypes = list(SPECIES_YINGLET)
-	unavailable_at_fab = 1
-	modifier_string = "wooden"
-	hardiness = 0.75
-	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
-	movement_slowdown = 2
-	is_robotic = FALSE
-
-/datum/robolimb/ying_metal
-	company = "Lunar Transit"
-	desc = "A cheap robotic prosthetic designed for yinglet owners."
-	icon = 'icons/mob/human_races/cyberlimbs/yinglet/metal_main.dmi'
-	allowed_bodytypes = list(SPECIES_YINGLET)

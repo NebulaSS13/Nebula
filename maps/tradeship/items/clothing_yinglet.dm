@@ -82,3 +82,11 @@
 	icon_state = "cape"
 	color = COLOR_DARK_RED
 	sprite_sheets = list(SPECIES_YINGLET = 'maps/tradeship/icons/onmob_suit_yinglet.dmi')
+
+/obj/item/clothing/shoes/sandal/yinglet
+	name = "small sandals"
+	desc = "A pair of rather plain wooden sandals. They seem to be the right size and shape for a yinglet."
+	species_restricted = list(SPECIES_YINGLET)
+	item_icons = list(
+		slot_shoes_str = 'maps/tradeship/icons/onmob_shoes_yinglet.dmi'
+	)

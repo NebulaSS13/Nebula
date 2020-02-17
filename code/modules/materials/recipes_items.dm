@@ -313,35 +313,3 @@
 /datum/stack_recipe/wooden_prosthetic/right_foot
 	title = "right foot"
 	result_type = /obj/item/organ/external/foot/right/wooden
-
-/datum/stack_recipe/wooden_prosthetic/left_arm_ying
-	title = "small left arm"
-	result_type = /obj/item/organ/external/arm/yinglet/wooden
-
-/datum/stack_recipe/wooden_prosthetic/right_arm_ying
-	title = "small right arm"
-	result_type = /obj/item/organ/external/arm/right/yinglet/wooden
-
-/datum/stack_recipe/wooden_prosthetic/left_leg_ying
-	title = "small left leg"
-	result_type = /obj/item/organ/external/leg/yinglet/wooden
-
-/datum/stack_recipe/wooden_prosthetic/right_leg_ying
-	title = "small right leg"
-	result_type = /obj/item/organ/external/leg/right/yinglet/wooden
-
-/datum/stack_recipe/wooden_prosthetic/left_hand_ying
-	title = "small left hand"
-	result_type = /obj/item/organ/external/hand/yinglet/wooden
-
-/datum/stack_recipe/wooden_prosthetic/right_hand_ying
-	title = "small right hand"
-	result_type = /obj/item/organ/external/hand/right/yinglet/wooden
-
-/datum/stack_recipe/wooden_prosthetic/left_foot_ying
-	title = "small left foot"
-	result_type = /obj/item/organ/external/foot/yinglet/wooden
-
-/datum/stack_recipe/wooden_prosthetic/right_foot_ying
-	title = "small right foot"
-	result_type = /obj/item/organ/external/foot/right/yinglet/wooden

@@ -166,13 +166,3 @@
 /datum/gear/tactical/balaclava
 	display_name = "balaclava"
 	path = /obj/item/clothing/mask/balaclava
-
-/datum/gear/head/baxxid_hood
-	display_name = "baxxid hood"
-	path = /obj/item/clothing/head/baxxid/hood/long
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/head/baxxid_wig
-	display_name = "baxxid wig"
-	path = /obj/item/clothing/head/baxxid/big_wig
-	description = "A large blonde wig"

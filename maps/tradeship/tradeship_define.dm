@@ -22,7 +22,6 @@
 
 	// yingspace.png was remixed from Out-Of-Placers assets by Raptie and is included with kind permission.
 	lobby_screens = list('maps/tradeship/lobby/yingspace.png')
-	lobby_tracks = list(/music_track/zazie)
 
 	use_overmap = 1
 	num_exoplanets = 3
@@ -38,27 +37,7 @@
 	salary_modifier = 0.2
 
 	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Please move to a shielded area such as the cargo bay, dormitories or medbay until the radiation has passed."
-	
-	potential_theft_targets = list(
-		"the tradehouse accounting documents"	= /obj/item/documents/tradehouse/account,
-		"the tradehouse personnel data"			= /obj/item/documents/tradehouse/personnel,
-		"the Captain's spare ID"				= /obj/item/card/id/captains_spare,
-		"the ship's blueprints"					= /obj/item/blueprints,
-		"the Matriarch's robes"					= /obj/item/clothing/under/yinglet/matriarch,
-		"a jetpack"								= /obj/item/tank/jetpack/,
-		"a pump action shotgun"					= /obj/item/gun/projectile/shotgun/pump/,
-		"a health analyzer"						= /obj/item/scanner/health,
-		"the integrated circuit printer"		= /obj/item/integrated_circuit_printer,
-		"a whole uneaten mollusc"				= /obj/item/mollusc
-	)
 
 /datum/map/tradeship/get_map_info()
 	return "You're aboard the <b>[station_name],</b> a survey and mercantile vessel affiliated with <b>Tradehouse Ivenmoth</b>, a large merchant guild operating out of Val Salia Station. \
 	No meaningful authorities can claim the planets and resources in this uncharted sector, so their exploitation is entirely up to you - mine, poach and deforest all you want."
-
-/datum/map/tradeship/setup_map()
-	..()
-	SStrade.traders += new /datum/trader/xeno_shop
-	SStrade.traders += new /datum/trader/medical
-	SStrade.traders += new /datum/trader/mining
-	SStrade.traders += new /datum/trader/books

@@ -1,8 +1,8 @@
 /decl/submap_archetype
 	var/map
 	var/descriptor = "generic ship archetype"
-	var/list/whitelisted_species = UNRESTRICTED_SPECIES
-	var/list/blacklisted_species = RESTRICTED_SPECIES
+	var/list/whitelisted_species = list(SPECIES_HUMAN)
+	var/list/blacklisted_species = list(SPECIES_ALIEN, SPECIES_GOLEM)
 	var/call_webhook
 	var/list/crew_jobs = list(
 		/datum/job/submap

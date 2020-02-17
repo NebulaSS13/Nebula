@@ -114,34 +114,3 @@
 	required_reagents = list(/datum/reagent/nutriment/rice = 10, /datum/reagent/drink/tea/green = 1)
 	result_amount = 10
 	mix_message = "The tea mingles with the rice."
-
-/datum/chemical_reaction/recipe/soggy_food
-	name = "Soggy Bread"
-	result = /datum/reagent/nutriment/soggy_food
-	required_reagents = list(/datum/reagent/nutriment/bread = 1)
-	result_amount = 1
-	mix_message = "The food softens into a soggy mess."
-	hidden_from_codex = TRUE
-	var/global/list/can_make_soggy = list(
-		/datum/reagent/drink,
-		/datum/reagent/ethanol,
-		/datum/reagent/water
-	)
-
-/datum/chemical_reaction/recipe/soggy_food/can_happen(datum/reagents/holder)
-	. = ..()
-	if(.)
-		for(var/thing in can_make_soggy)
-			if(locate(thing) in holder.reagent_list)
-				return TRUE
-		return FALSE
-
-/datum/chemical_reaction/recipe/soggy_food/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
-	. = ..()
-	var/obj/item/chems/food/snacks/food = holder ? holder.my_atom : null
-	if(!QDELETED(food) && istype(food) && !findtext(lowertext(food.name), "soggy"))
-		food.name = "soggy [food.name]"
-
-/datum/chemical_reaction/recipe/soggy_food/cake
-	name = "Soggy Cake"
-	required_reagents = list(/datum/reagent/nutriment/bread/cake = 1)

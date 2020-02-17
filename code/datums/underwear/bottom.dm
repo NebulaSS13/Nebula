@@ -49,9 +49,3 @@
 	underwear_name = "long johns"
 	icon_state = "ljonb"
 	has_color = TRUE
-
-/datum/category_item/underwear/bottom/yinglet_wraps
-	name = "Yinglet Wraps"
-	underwear_name = "wraps"
-	icon_state = "ying_wraps"
-	has_color = TRUE

@@ -65,13 +65,3 @@
 		"shoes" =        list("loc" = ui_shoes,     "name" = "Shoes",        "slot" = slot_shoes,     "state" = "shoes",  "toggle" = 1),
 		"back" =         list("loc" = ui_sstore1,   "name" = "Back", "slot" = slot_back,      "state" = "back"),
 		)
-
-/datum/hud_data/baxxid
-	has_hands = FALSE
-	gear = list(
-		"id" =           list("loc" = ui_id,          "name" = "ID",   "slot" = slot_wear_id,   "state" = "id"),
-		"back" =         list("loc" = ui_sstore1,     "name" = "Back", "slot" = slot_back,      "state" = "back"),
-		"o_clothing" =   list("loc" = ui_iclothing,   "name" = "Suit", "slot" = slot_wear_suit, "state" = "suit", "toggle" = 1),
-		"head" =         list("loc" = ui_baxxid_head, "name" = "Hat",  "slot" = slot_head,      "state" = "hair", "toggle" = 1),
-		"mask" =         list("loc" = ui_glasses,     "name" = "Mask", "slot" = slot_wear_mask, "state" = "mask", "toggle" = 1)
-		)
