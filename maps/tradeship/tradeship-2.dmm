@@ -5427,6 +5427,12 @@
 	},
 /turf/simulated/wall,
 /area/ship/scrap/maintenance/atmos)
+"wL" = (
+/obj/item/mollusc/barnacle{
+	pixel_w = -15
+	},
+/turf/space,
+/area/space)
 "wP" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -5475,12 +5481,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
-"xx" = (
-/obj/item/mollusc/barnacle{
-	pixel_w = 17
-	},
-/turf/space,
-/area/space)
 "xL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	icon_state = "intact";
@@ -5498,6 +5498,12 @@
 "xS" = (
 /turf/simulated/floor/carpet,
 /area/ship/scrap/command/fmate)
+"xX" = (
+/obj/item/mollusc/barnacle{
+	pixel_w = 17
+	},
+/turf/space,
+/area/space)
 "xZ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -6050,6 +6056,9 @@
 /obj/item/clothing/accessory/stethoscope,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
+"Hs" = (
+/turf/simulated/floor/wood/yew,
+/area/ship/scrap/unused)
 "HF" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
@@ -6813,12 +6822,6 @@
 /obj/structure/handrai,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/crew/saloon)
-"RT" = (
-/obj/item/mollusc/barnacle{
-	pixel_w = -15
-	},
-/turf/space,
-/area/space)
 "RW" = (
 /obj/machinery/atmospherics/unary/engine{
 	icon_state = "nozzle";
@@ -6956,9 +6959,6 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall,
 /area/ship/scrap/crew/toilets)
-"UI" = (
-/turf/simulated/floor/wood/yew,
-/area/ship/scrap/unused)
 "UP" = (
 /obj/machinery/door/blast/regular{
 	id_tag = "scram"
@@ -9134,7 +9134,7 @@ aa
 aa
 aa
 aa
-xx
+xX
 aa
 aa
 aa
@@ -9621,7 +9621,7 @@ aa
 aa
 Lx
 aa
-xx
+xX
 aa
 Lx
 cy
@@ -9933,7 +9933,7 @@ aa
 aa
 aa
 aa
-xx
+xX
 aa
 aa
 nZ
@@ -11189,7 +11189,7 @@ Im
 ee
 NI
 rR
-UI
+Hs
 gQ
 sS
 sS
@@ -11922,7 +11922,7 @@ aa
 aa
 aa
 aa
-RT
+wL
 aa
 aa
 aa

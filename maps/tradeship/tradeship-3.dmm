@@ -6,6 +6,10 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
+"ad" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/space,
+/area/space)
 "ae" = (
 /turf/simulated/floor/airless,
 /area/space)
@@ -284,13 +288,9 @@
 /obj/machinery/ntnet_relay,
 /turf/simulated/floor/bluegrid,
 /area/ship/scrap/comms)
-"dN" = (
-/obj/structure/table/woodentable,
-/turf/simulated/floor/wood/bamboo,
-/area/space)
-"dX" = (
-/obj/structure/table/woodentable_reinforced,
-/turf/simulated/floor/wood/bamboo,
+"eX" = (
+/turf/space,
+/turf/simulated/open,
 /area/space)
 "fi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -354,17 +354,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/open,
 /area/ship/scrap/maintenance/solars)
-"iq" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/space)
 "iz" = (
 /obj/structure/cable/yellow{
 	icon_state = "5-10"
@@ -454,6 +443,12 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"mW" = (
+/obj/item/mollusc/barnacle{
+	pixel_w = -17
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "ne" = (
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/bridge_unused)
@@ -508,12 +503,6 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/ship/scrap/bridge_unused)
-"pv" = (
-/obj/item/mollusc/barnacle{
-	pixel_x = 0
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/space)
 "pC" = (
 /obj/item/wrench,
 /obj/structure/handrai{
@@ -523,11 +512,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
-"qh" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/hatch/autoname/command,
-/turf/simulated/floor/plating,
-/area/ship/scrap/command/bridge_upper)
 "qw" = (
 /obj/machinery/light_switch{
 	pixel_z = 0;
@@ -567,10 +551,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
-"sI" = (
-/obj/machinery/door/airlock/hatch/autoname/command,
-/turf/simulated/floor/tiled/monotile,
-/area/space)
 "sX" = (
 /obj/machinery/door/window/westleft,
 /obj/structure/cable{
@@ -590,6 +570,9 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/command/bridge_upper)
+"ut" = (
+/turf/simulated/wall/r_wall/hull,
+/area/space)
 "uM" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
 	id_tag = "solars_in"
@@ -610,10 +593,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/bridge_unused)
-"uX" = (
-/obj/structure/window/reinforced,
-/turf/simulated/floor/wood/bamboo,
-/area/space)
 "vi" = (
 /obj/structure/handrai{
 	tag = "icon-handrail (WEST)";
@@ -629,6 +608,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
+"vT" = (
+/obj/structure/window/reinforced,
+/turf/simulated/floor/wood/bamboo,
+/area/space)
 "wc" = (
 /obj/effect/floor_decal/steeldecal/steel_decals6,
 /obj/machinery/power/apc{
@@ -756,12 +739,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
-"AM" = (
-/obj/item/mollusc/barnacle{
-	pixel_x = -14
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/space)
 "BD" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
@@ -769,9 +746,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
-"CB" = (
-/turf/simulated/floor/tiled/monotile,
-/area/space)
 "Db" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -783,6 +757,12 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/bridge_unused)
+"Dl" = (
+/obj/item/mollusc/barnacle{
+	pixel_x = 0
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "Dr" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
@@ -821,6 +801,9 @@
 "DZ" = (
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/maintenance/solars)
+"Ez" = (
+/turf/simulated/floor/wood/bamboo,
+/area/space)
 "Fe" = (
 /obj/structure/railing/mapped{
 	icon_state = "railing0-1";
@@ -837,6 +820,17 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
+"Fv" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "FY" = (
 /obj/structure/railing/mapped{
 	icon_state = "railing0-1";
@@ -909,9 +903,6 @@
 /obj/machinery/message_server,
 /turf/simulated/floor/bluegrid,
 /area/ship/scrap/comms)
-"JD" = (
-/turf/simulated/wall/r_wall/hull,
-/area/space)
 "Ko" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -924,6 +915,12 @@
 	},
 /turf/simulated/open,
 /area/ship/scrap/maintenance/solars)
+"Ks" = (
+/obj/item/mollusc/barnacle{
+	pixel_x = -14
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "KG" = (
 /obj/structure/cable/yellow{
 	icon_state = "5-10"
@@ -1012,10 +1009,20 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/command/bridge_upper)
+"NY" = (
+/obj/item/mollusc/barnacle{
+	pixel_w = 16
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "Ob" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/comms)
+"Of" = (
+/obj/structure/table/woodentable,
+/turf/simulated/floor/wood/bamboo,
+/area/space)
 "Oy" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-10"
@@ -1039,9 +1046,18 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/solars)
+"PJ" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/hatch/autoname/command,
+/turf/simulated/floor/plating,
+/area/ship/scrap/command/bridge_upper)
 "PZ" = (
 /turf/simulated/floor/tiled/monotile,
 /area/ship/scrap/command/bridge_upper)
+"QJ" = (
+/obj/machinery/door/airlock/hatch/autoname/command,
+/turf/simulated/floor/tiled/monotile,
+/area/space)
 "QK" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -1122,10 +1138,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge_upper)
-"SF" = (
-/turf/space,
-/turf/simulated/open,
-/area/space)
 "SO" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1158,9 +1170,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
-"Tu" = (
-/turf/simulated/floor/wood/bamboo,
-/area/space)
 "Tx" = (
 /obj/machinery/r_n_d/server/core,
 /turf/simulated/floor/bluegrid,
@@ -1171,12 +1180,6 @@
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/airless,
-/area/space)
-"Uv" = (
-/obj/item/mollusc/barnacle{
-	pixel_w = 16
-	},
-/turf/simulated/floor/reinforced/airless,
 /area/space)
 "Ux" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -1222,11 +1225,9 @@
 "Xb" = (
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/command/bridge_upper)
-"Xp" = (
-/obj/item/mollusc/barnacle{
-	pixel_w = -17
-	},
-/turf/simulated/floor/reinforced/airless,
+"Xl" = (
+/obj/structure/table/woodentable_reinforced,
+/turf/simulated/floor/wood/bamboo,
 /area/space)
 "Xu" = (
 /obj/structure/cable/yellow{
@@ -1281,9 +1282,8 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/command/bridge_upper)
-"YG" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/space,
+"YW" = (
+/turf/simulated/floor/tiled/monotile,
 /area/space)
 "Zx" = (
 /obj/structure/handrai{
@@ -3281,8 +3281,8 @@ aa
 aa
 aa
 aa
-SF
-SF
+eX
+eX
 ax
 ax
 ax
@@ -3362,8 +3362,8 @@ aa
 aa
 aa
 aa
-SF
-SF
+eX
+eX
 ax
 ax
 ax
@@ -3444,7 +3444,7 @@ aa
 aa
 aa
 aa
-SF
+eX
 ax
 ax
 ax
@@ -4014,7 +4014,7 @@ aa
 aa
 ax
 ax
-AM
+Ks
 ax
 ax
 ax
@@ -4185,7 +4185,7 @@ KG
 ax
 ax
 ax
-Uv
+NY
 vi
 aV
 au
@@ -4286,7 +4286,7 @@ ax
 ax
 ax
 ax
-pv
+Dl
 ax
 ax
 ax
@@ -4339,10 +4339,10 @@ ax
 ax
 ax
 ax
-JD
-JD
-YG
-JD
+ut
+ut
+ad
+ut
 ax
 Tt
 ax
@@ -4421,10 +4421,10 @@ ax
 aa
 aa
 aa
-JD
-Tu
-Tu
-uX
+ut
+Ez
+Ez
+vT
 ax
 Yq
 aV
@@ -4499,14 +4499,14 @@ RZ
 HN
 bE
 SQ
-iq
-iq
-iq
-iq
-JD
-dX
-dX
-uX
+Fv
+Fv
+Fv
+Fv
+ut
+Xl
+Xl
+vT
 ax
 Tt
 Rk
@@ -4580,15 +4580,15 @@ YA
 rl
 fi
 PZ
-qh
-CB
-CB
-CB
-sI
-Tu
-Tu
-Tu
-uX
+PJ
+YW
+YW
+YW
+QJ
+Ez
+Ez
+Ez
+vT
 ax
 Xu
 yt
@@ -4663,14 +4663,14 @@ wc
 nZ
 ZT
 SQ
-iq
-iq
-iq
-iq
-JD
-Tu
-Tu
-uX
+Fv
+Fv
+Fv
+Fv
+ut
+Ez
+Ez
+vT
 ax
 Yq
 aV
@@ -4749,15 +4749,15 @@ ax
 aa
 aa
 aa
-JD
-dN
-Tu
-uX
+ut
+Of
+Ez
+vT
 ax
 br
 ax
 ax
-Xp
+mW
 aV
 aV
 xe
@@ -4771,7 +4771,7 @@ ax
 ax
 ax
 ax
-Xp
+mW
 ax
 ax
 ax
@@ -4831,10 +4831,10 @@ ax
 ax
 ax
 ax
-JD
-JD
-YG
-JD
+ut
+ut
+ad
+ut
 ax
 wf
 ax
@@ -5349,7 +5349,7 @@ ax
 ax
 ax
 ax
-pv
+Dl
 ax
 aa
 aa
@@ -5657,8 +5657,8 @@ aa
 aa
 aa
 aa
-SF
-SF
+eX
+eX
 ax
 ax
 ax
@@ -5740,7 +5740,7 @@ aa
 aa
 aa
 aa
-SF
+eX
 ax
 ax
 ax
@@ -5822,8 +5822,8 @@ aa
 aa
 aa
 aa
-SF
-SF
+eX
+eX
 ax
 ax
 ax
