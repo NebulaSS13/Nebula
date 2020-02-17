@@ -5,7 +5,8 @@
 	var/list/goals = list() 
 	var/min_goals = 1
 	var/max_goals = 2
-	
+	var/colour = "#808080"
+
 /datum/department/proc/Initialize()
 	if(!reference || LAZYLEN(goals) <= 0)
 		return
