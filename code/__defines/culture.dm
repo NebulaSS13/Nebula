@@ -12,7 +12,6 @@
 
 // Cultural IDs.
 #define FACTION_OTHER          "Other Faction"
-#define FACTION_SCAV           "Scav"
 
 #define HOME_SYSTEM_STATELESS  "Stateless"
 #define HOME_SYSTEM_OTHER      "Other System"
@@ -23,8 +22,6 @@
 #define CULTURE_MONKEY         "Test Subjects"
 #define CULTURE_ALIUM          "Mysterious Aliens"
 #define CULTURE_CULTIST        "Blood Cult"
-#define CULTURE_SCAV_ENCLAVE   "Enclave Yinglet"
-#define CULTURE_SCAV_TRIBE     "Tribal Yinglet"
 
 #define RELIGION_OTHER         "Other Religion"
 #define RELIGION_JUDAISM       "Judaism"

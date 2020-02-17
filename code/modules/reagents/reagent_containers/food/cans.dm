@@ -62,13 +62,13 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/cherrycola, 30)
 
-/obj/item/chems/food/drinks/cans/indrelbreakfast
-	name = "\improper Indrel Breakfast"
-	desc = "It's not what it sounds like, but it sure looks like it. Can you taste a bit of tuna...?"
+/obj/item/chems/food/drinks/cans/starkist
+	name = "\improper Star-Kist"
+	desc = "Can you taste a bit of tuna...?"
 	icon_state = "starkist"
 	center_of_mass = @"{'x':16,'y':10}"
 
-/obj/item/chems/food/drinks/cans/indrelbreakfast/Initialize()
+/obj/item/chems/food/drinks/cans/starkist/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/orangecola, 30)
 

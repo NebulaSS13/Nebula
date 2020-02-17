@@ -1,19 +1,29 @@
-/obj/item/clothing/head/baxxid/
+/datum/gear/head/baxxid_hood
+	display_name = "baxxid hood"
+	path = /obj/item/clothing/head/baxxid/hood/long
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/head/baxxid_wig
+	display_name = "baxxid wig"
+	path = /obj/item/clothing/head/baxxid/big_wig
+	description = "A large blonde wig"
+
+/obj/item/clothing/head/baxxid
 	name = "baxxid head clothing"
-	desc = "parent item for stuff you put on top of a baxxid"
+	desc = "A parent item for stuff you put on top of a baxxid."
 	species_restricted = list(SPECIES_BAXXID)
 	icon_state = "world"
 
 /obj/item/clothing/head/baxxid/hood
 	name = "short baxxid hood"
 	desc = "A large piece of cloth with holes in it, designed to be worn by baxxid."
-	icon = 'icons/clothing/head/hood_short_baxxid.dmi'
-	on_mob_icon = 'icons/clothing/head/hood_short_baxxid.dmi'
+	icon = 'maps/tradeship/icons/hood_short_baxxid.dmi'
+	on_mob_icon = 'maps/tradeship/icons/hood_short_baxxid.dmi'
 
 /obj/item/clothing/head/baxxid/hood/long
 	name = "baxxid hood"
-	icon = 'icons/clothing/head/hood_long_baxxid.dmi'
-	on_mob_icon = 'icons/clothing/head/hood_long_baxxid.dmi'
+	icon = 'maps/tradeship/icons/hood_long_baxxid.dmi'
+	on_mob_icon = 'maps/tradeship/icons/hood_long_baxxid.dmi'
 	color = COLOR_PURPLE
 
 /obj/item/clothing/head/baxxid/hood/long/on_update_icon()
@@ -32,5 +42,5 @@
 /obj/item/clothing/head/baxxid/big_wig
 	name = "big wig"
 	desc = "A really cool wig, which is unfortunately too large for a regular human."
-	icon = 'icons/clothing/head/wig_big_blonde.dmi'
-	on_mob_icon = 'icons/clothing/head/wig_big_blonde.dmi'
+	icon = 'maps/tradeship/icons/wig_big_blonde.dmi'
+	on_mob_icon = 'maps/tradeship/icons/wig_big_blonde.dmi'

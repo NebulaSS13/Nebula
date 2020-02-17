@@ -43,7 +43,7 @@
 	)
 
 	//Species that the suits can be configured to fit.
-	var/list/species = list(SPECIES_HUMAN, SPECIES_YINGLET)
+	var/list/species = list(SPECIES_HUMAN)
 
 	var/decl/item_modifier/target_modification
 	var/target_species

@@ -193,7 +193,6 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
-	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 	var/volume_multiplier = 1
 
 /obj/item/clothing/ears/update_clothing_icon()
@@ -227,7 +226,6 @@ BLIND     // can't see anything
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = EYES
 	slot_flags = SLOT_EYES
-	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2
 	var/see_invisible = -1
@@ -257,7 +255,6 @@ BLIND     // can't see anything
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL
-	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 
 	var/image/light_overlay_image
 	var/light_overlay = "helmet_light"
@@ -372,7 +369,6 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/obj_mask.dmi'
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
-	species_restricted = list(SPECIES_HUMAN, SPECIES_YINGLET)
 
 	var/voicechange = 0
 	var/list/say_messages
@@ -604,7 +600,6 @@ BLIND     // can't see anything
 	blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
-	species_restricted = list(SPECIES_HUMAN,SPECIES_YINGLET)
 
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))

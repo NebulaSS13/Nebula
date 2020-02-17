@@ -75,7 +75,7 @@
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
-		SPECIES_YINGLET = 'icons/scavs/are/bad'
+		SPECIES_FOO = 'icons/foo/onmob_foo.dmi'
 		)
 	If index term exists and icon_override is not set, this sprite sheet will be used.
 	*/
@@ -235,8 +235,8 @@
 	return ..(user, distance, "", desc_comp)
 
 // Partially copied from atom/MouseDrop()
-// This is going to need a solid go-over post-Baxxid to properly integrate all the movement procs
-// into each other and make sure everything is updating nicely. Snowflaking it for now. ~Jan 2020
+// This is going to need a solid go-over to properly integrate all the movement procs into each
+// other and make sure everything is updating nicely. Snowflaking it for now. ~Jan 2020
 /obj/item/MouseDrop(var/atom/over)
 	if(usr && over && Adjacent(usr))
 		if(over == usr)

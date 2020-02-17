@@ -69,16 +69,6 @@
 	shredding = 1
 	attack_name = "strong claws"
 
-/datum/unarmed_attack/claws/strong/baxxid
-	attack_verb = list("stabbed", "maimed", "impaled")
-	damage = 12
-	sharp = 1
-	edge = 1
-	delay = 15
-	eye_attack_text = "an enormous forelimb"
-	eye_attack_text_victim = "an enormous forelimb"
-	attack_name = "forelimb stab"
-
 /datum/unarmed_attack/claws/strong/gloves
 	blocked_by_gloves = FALSE
 

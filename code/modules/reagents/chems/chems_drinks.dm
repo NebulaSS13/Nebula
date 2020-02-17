@@ -510,14 +510,14 @@
 
 /datum/reagent/drink/mutagencola
 	name = "mutagen cola"
-	description = "The energy of a yinglet in beverage form. Effects on yinglets undocumented."
-	taste_description = "the lifespan of a scav"
+	description = "The energy of a radioactive isotope in beverage form."
+	taste_description = "cancer"
 	color = "#100800"
 	adj_temp = -5
 	adj_sleepy = -2
 
 	glass_name = "mutagen cola"
-	glass_desc = "The unstable energy of a yinglet in beverage form. Effects on yinglets undocumented."
+	glass_desc = "The unstable energy of a radioactive isotope in beverage form."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/mutagencola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)

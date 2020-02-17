@@ -237,7 +237,7 @@
 /obj/random/drinkbottle/spawn_choices()
 	return list(/obj/item/chems/food/drinks/bottle/whiskey,
 				/obj/item/chems/food/drinks/bottle/gin,
-				/obj/item/chems/food/drinks/bottle/dinnishfirewater,
+				/obj/item/chems/food/drinks/bottle/agedwhiskey,
 				/obj/item/chems/food/drinks/bottle/vodka,
 				/obj/item/chems/food/drinks/bottle/tequilla,
 				/obj/item/chems/food/drinks/bottle/absinthe,

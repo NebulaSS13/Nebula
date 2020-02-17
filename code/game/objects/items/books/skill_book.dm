@@ -11,12 +11,12 @@
 										"\"The Dos, Don'ts and Oh Gods Please Nos of [skill_name]\"", \
 										"\"The Death Of [skill_name]\"", \
 										"\"Everything You Never Wanted To Know About [skill_name] But Have Been Reluctantly Forced To Find Out\"", \
-										"\"[skill_name] For The Busy Yinglet\"", \
+										"\"[skill_name] For The Busy Professional\"", \
 										"\"Learning [skill_name] In A Hurry Because You Lied On Your Resume\"", \
 										"\"Help! My Life Suddenly Depends On [skill_name]\"", \
 										"\"What The Fuck is [capitalize(ADD_ARTICLE(capitalize(skill_name)))]?\"", \
 										"\"Starting [capitalize(ADD_ARTICLE(capitalize(skill_name)))] Business By Yourself\"", \
-										"\"Even a Scav Can Learn [skill_name]!\"", \
+										"\"Even You Can Learn [skill_name]!\"", \
 										"\"How To Impress Your Matriarch with [skill_name]\"", \
 										"\"How To Become A Patriarch of [skill_name]\"", \
 										"\"Everything The Government Doesn't Want You To Know About [skill_name]\"", \
@@ -144,18 +144,13 @@ ORGANIZATIONAL
 	skill = SKILL_LITERACY
 
 /obj/item/book/skill/organizational/literacy/basic
-	name = "younglet's alphabet book"
+	name = "alphabet book"
 	icon_state = "tb_literacy"
-	author = "Matriarch Ivalini"
+	author = "Dorothy Mulch"
 	skill_req = SKILL_NONE
 	custom = TRUE
 	w_class = ITEM_SIZE_LARGE // A little bit smaller c:
 	ez_read = TRUE
-
-/obj/item/book/skill/organizational/literacy/basic/Initialize()
-	. = ..()
-	title = pick("Younglet's First Human Letterz", "The Curious, Funny, Tasty Snaprat", "The Hungry Hungry Quilldog")
-	desc = "A copy of [title] by [author]. It's a thick book, mostly because the pages are made of cardboard. Looks like it's designed to teach juvenile yinglets basic literacy."
 
 //finance
 /obj/item/book/skill/organizational/finance
@@ -508,12 +503,13 @@ ENGINEERING
 
 /obj/item/book/skill/engineering/engines/prof/magazine
 	name = "theoretical engines magazine"
-	title = "\"Bad Baxxid\""
+	title = "\improper WetSkrell magazine"
 	icon_state = "bookMagazine"
 	custom = TRUE
 	author = "Unknown"
 	desc = "Sure, it includes highly detailed information on extremely advanced engine and power generator systems... but why is it written in marker on a tentacle porn magazine?"
 	w_class = ITEM_SIZE_LARGE
+
 
 /* 
 RESEARCH

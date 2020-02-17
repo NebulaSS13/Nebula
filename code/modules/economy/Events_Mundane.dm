@@ -151,7 +151,7 @@
 	"Man travels 7000 light years to retrieve lost hankie, 'It was my favourite'.",\
 	"New bowling lane that shoots mini-meteors at bowlers very popular.",\
 	"Spacer gets tattoo of Nyx on chest '[pick("[GLOB.using_map.boss_short]","star","starship","asteroid")] tickles most'.",\
-	"Yinglet marries computer; wedding attended by 100 modems.",\
+	"Long haul pilot marries nav computer; wedding attended by 100 modems.",\
 	"Chef reports successfully using harmonica as cheese grater.",\
 	"[GLOB.using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
 	"Clone accused of posing for other clones's school photo.",\
@@ -159,7 +159,7 @@
 	"Woman robs [station_name()] with hair dryer; crewmen love new style.",\
 	"This space for rent.",\
 	"[affected_dest.name] Baker Wins Pickled Crumpet Toss Three Years Running",\
-	"Yinglet Scientist Discovers Abacus Can Be Used To Dry Towels",\
+	"Scientist Discovers Abacus Can Be Used To Dry Towels",\
 	"Survey: 'Cheese Louise' Voted Best Pizza Restaurant In Nyx",\
 	"I Was Framed, jokes [affected_dest.name] artist",\
 	"Mysterious Loud Rumbling Noises In [affected_dest.name] Found To Be Mysterious Loud Rumblings",\
@@ -173,7 +173,7 @@
 	"[affected_dest.name] Phonebooks Print All Wrong Numbers; Results In 15 New Marriages",\
 	"Gibson Gazette Updates Frequently Absurd, Poll Indicates",\
 	"Esoteric Verbosity Culminates In Communicative Ennui, [affected_dest.name] Academics Note",\
-	"Survey: 3 Out Of 5 Yinglets Loathe Modern Art",\
+	"Survey: 3 Out Of 5 Rodents Loathe Modern Art",\
 	"Scientist Discovers Gravity While Falling Down Stairs",\
 	"Shipment Of Apples Overturns, [affected_dest.name] Diner Offers Applesauce Special",\
 	"Spotted Owl Spotted on [affected_dest.name]",\

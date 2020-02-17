@@ -213,13 +213,13 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/whiskey, 100)
 
-/obj/item/chems/food/drinks/bottle/dinnishfirewater
-	name = "Old Dinnish Firewater"
-	desc = "This rich, smooth, hideously expensive beverage was distilled in old Dinland.  I hope they're still producing under their new government."
+/obj/item/chems/food/drinks/bottle/agedwhiskey
+	name = "aged whiskey"
+	desc = "This rich, smooth, hideously expensive beverage was aged for decades."
 	icon_state = "whiskeybottle2"
 	center_of_mass = @"{'x':16,'y':3}"		
 
-/obj/item/chems/food/drinks/bottle/dinnishfirewater/Initialize()
+/obj/item/chems/food/drinks/bottle/agedwhiskey/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/aged_whiskey, 100)
 

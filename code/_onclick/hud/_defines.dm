@@ -100,7 +100,6 @@
 #define ui_mask "LEFT+1:8,BOTTOM+2:9"
 #define ui_l_ear "LEFT+2:10,BOTTOM+2:9"
 #define ui_r_ear "LEFT+2:10,BOTTOM+3:11"
-#define ui_baxxid_head "LEFT:6,BOTTOM+3:11"
 
 #define ui_head "LEFT+1:8,BOTTOM+3:11"
 
