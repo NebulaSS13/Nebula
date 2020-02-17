@@ -233,7 +233,7 @@
 	return 1
 
 /mob/living/exosuit/proc/sync_access()
-	access_card.access = saved_access.Copy()
+	access_card.access = saved_access?.Copy()
 	if(sync_access)
 		for(var/mob/pilot in pilots)
 			access_card.access |= pilot.GetAccess()
