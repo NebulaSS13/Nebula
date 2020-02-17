@@ -18,10 +18,10 @@ RUN mkdir to_copy;\
 
 FROM xales/byond:512-latest as builder
 ARG BUILD_ARGS
-COPY --from=byhttp /byhttp/to_copy /scav/lib
-COPY . /scav
-WORKDIR /scav
-RUN scripts/dm.sh $BUILD_ARGS scavstation.dme
+COPY --from=byhttp /byhttp/to_copy /nebula/lib
+COPY . /nebula
+WORKDIR /nebula
+RUN scripts/dm.sh $BUILD_ARGS nebula.dme
 
 
 FROM xales/byond:512-latest as tester_prereqs
@@ -47,8 +47,8 @@ RUN git clone --recursive --shallow-submodules https://github.com/pyenv/pyenv.gi
  && pyenv global $PYENV_VERSION
 
 FROM pyenv as tester
-COPY --from=builder /scav /scav
-WORKDIR /scav
+COPY --from=builder /nebula /nebula
+WORKDIR /nebula
 ENV TEST=CODE CI=true
 ENTRYPOINT ["test/run-test.sh"]
 
@@ -56,21 +56,21 @@ ENTRYPOINT ["test/run-test.sh"]
 FROM xales/byond:512-latest as spacestation
 RUN groupadd -r spaceman \
  && useradd -rm -d /home/spaceman --no-log-init -s /bin/bash -r -g spaceman spaceman \
- && mkdir -p /scav/data /scav/config /scav/lib \
- && chown spaceman:spaceman /scav /scav/config /scav/data /scav/lib
-COPY .git/HEAD /scav/.git/HEAD
-COPY .git/logs/HEAD /scav/.git/logs/HEAD
-COPY --from=builder --chown=spaceman:spaceman /scav/config/example/* /scav/config/
-COPY --from=builder --chown=spaceman:spaceman /scav/config/names/* /scav/config/names/
-COPY --from=builder --chown=spaceman:spaceman /scav/lib/* /scav/lib/
+ && mkdir -p /nebula/data /nebula/config /nebula/lib \
+ && chown spaceman:spaceman /nebula /nebula/config /nebula/data /nebula/lib
+COPY .git/HEAD /nebula/.git/HEAD
+COPY .git/logs/HEAD /nebula/.git/logs/HEAD
+COPY --from=builder --chown=spaceman:spaceman /nebula/config/example/* /nebula/config/
+COPY --from=builder --chown=spaceman:spaceman /nebula/config/names/* /nebula/config/names/
+COPY --from=builder --chown=spaceman:spaceman /nebula/lib/* /nebula/lib/
 COPY --from=builder --chown=spaceman:spaceman \
-    /scav/scavstation.rsc \
-    /scav/scavstation.dmb \
-    /scav/
-RUN chown -R spaceman:spaceman /home/spaceman /scav
-WORKDIR /scav
+    /nebula/nebula.rsc \
+    /nebula/nebula.dmb \
+    /nebula/
+RUN chown -R spaceman:spaceman /home/spaceman /nebula
+WORKDIR /nebula
 EXPOSE 8000
-VOLUME /scav/data/
-VOLUME /scav/config/
-ENTRYPOINT ["DreamDaemon", "scavstation.dmb", "8000", "-home", "/scav", "-safe", "-suidself"]
+VOLUME /nebula/data/
+VOLUME /nebula/config/
+ENTRYPOINT ["DreamDaemon", "nebula.dmb", "8000", "-home", "/nebula", "-safe", "-suidself"]
 CMD ["-verbose", "-invisible"]

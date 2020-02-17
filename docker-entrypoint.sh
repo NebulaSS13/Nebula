@@ -1,6 +1,6 @@
 #!/bin/sh
 
 mkdir /byond
-chown $RUNAS:$RUNAS /byond /scav scavstation.rsc
+chown $RUNAS:$RUNAS /byond /nebula nebula.rsc
 
-gosu $RUNAS DreamDaemon scavstation.dmb 8000 -trusted -verbose
+gosu $RUNAS DreamDaemon nebula.dmb 8000 -trusted -verbose

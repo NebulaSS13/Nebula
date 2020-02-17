@@ -1,6 +1,6 @@
 # Require reviews from Core team for changes to CI or infra stuff
-.github/ @ScavStation/Core
-Dockerfile @ScavStation/Core
-flyway.conf @ScavStation/Core
-sql/ @ScavStation/Core
-LICENSE @ScavStation/Core
+.github/ @Nebula/Core
+Dockerfile @Nebula/Core
+flyway.conf @Nebula/Core
+sql/ @Nebula/Core
+LICENSE @Nebula/Core

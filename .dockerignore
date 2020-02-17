@@ -1,11 +1,11 @@
 .git
 !.git/HEAD
 !.git/logs/HEAD
-scavstation.dmb
-scavstation.rsc
-scavstation.dyn.rsc
-scavstation.dyn.rsc.lk
-scavstation.int
+nebula.dmb
+nebula.rsc
+nebula.dyn.rsc
+nebula.dyn.rsc.lk
+nebula.int
 libmysql.dll
 .dockerignore
 Dockerfile

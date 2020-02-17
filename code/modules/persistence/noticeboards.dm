@@ -190,7 +190,7 @@
 
 	P = new()
 	P.SetName("Memo RE: materials gathering")
-	P.info = "Corasang,<br>the hands-on approach to gathering our samples may very well be slow at times, but it's safer than allowing the blundering miners to roll willy-nilly over our dig sites in their mechs, destroying everything in the process. And don't forget the escavation tools on your way out there!<br>- R.W"
+	P.info = "Corasang,<br>the hands-on approach to gathering our samples may very well be slow at times, but it's safer than allowing the blundering miners to roll willy-nilly over our dig sites in their mechs, destroying everything in the process. And don't forget the excavation tools on your way out there!<br>- R.W"
 	P.stamped = list(/obj/item/stamp/rd)
 	P.overlays = list("paper_stamped_rd")
 	add_paper(P, skip_icon_update = TRUE)
