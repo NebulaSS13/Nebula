@@ -128,7 +128,7 @@ var/global/datum/matchmaker/matchmaker = new()
 				continue
 			var/datum/job/coworker = SSjobs.get_by_title(M.job)
 			if(coworker && holder.assigned_job && other.holder.assigned_job)
-				if((coworker.department_flag & holder.assigned_job.department_flag) || (coworker.department_flag & other.holder.assigned_job.department_flag))
+				if(LAZYLEN(coworker.department_refs & holder.assigned_job.department_refs) || LAZYLEN(coworker.department_refs & other.holder.assigned_job.department_refs))
 					candidates[M] = 5	//coworkers are 5 times as likely to know about your relations
 
 		for(var/i=1 to 5)

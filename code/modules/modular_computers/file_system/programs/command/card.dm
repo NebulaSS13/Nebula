@@ -41,16 +41,10 @@
 	data["mmode"] = mod_mode
 	data["centcom_access"] = is_centcom
 
-	data["command_jobs"] = format_jobs(SSjobs.titles_by_department(COM))
-	data["support_jobs"] = format_jobs(SSjobs.titles_by_department(SPT))
-	data["engineering_jobs"] = format_jobs(SSjobs.titles_by_department(ENG))
-	data["medical_jobs"] = format_jobs(SSjobs.titles_by_department(MED))
-	data["science_jobs"] = format_jobs(SSjobs.titles_by_department(SCI))
-	data["security_jobs"] = format_jobs(SSjobs.titles_by_department(SEC))
-	data["exploration_jobs"] = format_jobs(SSjobs.titles_by_department(EXP))
-	data["service_jobs"] = format_jobs(SSjobs.titles_by_department(SRV))
-	data["supply_jobs"] = format_jobs(SSjobs.titles_by_department(SUP))
-	data["civilian_jobs"] = format_jobs(SSjobs.titles_by_department(CIV))
+	var/list/dept_list = SSdepartments.departments
+	for(var/dept_key in dept_list)
+		var/datum/department/dept = dept_list[dept_key]
+		data["[dept.reference]_jobs"] = format_jobs(SSjobs.titles_by_department(dept.reference)) //get all jobs for all deparments
 	data["centcom_jobs"] = format_jobs(get_all_centcom_jobs())
 
 	data["all_centcom_access"] = is_centcom ? get_accesses(1) : null

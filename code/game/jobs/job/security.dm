@@ -1,8 +1,7 @@
 /datum/job/hos
 	title = "Head of Security"
 	head_position = 1
-	department = "Security"
-	department_flag = SEC|COM
+	department_refs = list(DEPT_SECURITY, DEPT_COMMAND)
 
 	total_positions = 1
 	spawn_positions = 1
@@ -19,6 +18,9 @@
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_bridge, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
 	minimal_player_age = 14
+	guestbanned = 1	
+	must_fill = 1
+	not_random_selectable = 1
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
 
 /datum/job/hos/equip(var/mob/living/carbon/human/H)
@@ -28,8 +30,7 @@
 
 /datum/job/warden
 	title = "Warden"
-	department = "Security"
-	department_flag = SEC
+	department_refs = list(DEPT_SECURITY)
 
 	total_positions = 1
 	spawn_positions = 1
@@ -40,11 +41,11 @@
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
+	guestbanned = 1	
 
 /datum/job/detective
 	title = "Detective"
-	department = "Security"
-	department_flag = SEC
+	department_refs = list(DEPT_SECURITY)
 
 	total_positions = 2
 	spawn_positions = 2
@@ -56,11 +57,11 @@
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
+	guestbanned = 1	
 
 /datum/job/officer
 	title = "Security Officer"
-	department = "Security"
-	department_flag = SEC
+	department_refs = list(DEPT_SECURITY)
 
 	total_positions = 4
 	spawn_positions = 4
@@ -72,3 +73,4 @@
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
+	guestbanned = 1	

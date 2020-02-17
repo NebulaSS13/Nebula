@@ -1,6 +1,6 @@
 /datum/job/ai
 	title = "AI"
-	department_flag = MSC
+	department_refs = list(DEPT_MISC)
 
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
 	spawn_positions = 1
@@ -15,6 +15,8 @@
 	hud_icon = "hudblank"
 	skill_points = 0
 	no_skill_buffs = TRUE
+	guestbanned = 1	
+	not_random_selectable = 1
 
 /datum/job/ai/equip(var/mob/living/carbon/human/H)
 	if(!H)	return 0
@@ -28,7 +30,7 @@
 
 /datum/job/cyborg
 	title = "Robot"
-	department_flag = MSC
+	department_refs = list(DEPT_MISC)
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "your laws and the AI"
@@ -41,6 +43,8 @@
 	hud_icon = "hudblank"
 	skill_points = 0
 	no_skill_buffs = TRUE
+	guestbanned = 1	
+	not_random_selectable = 1
 
 /datum/job/cyborg/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 	if(H)

@@ -1,8 +1,7 @@
 /datum/job/rd
 	title = "Chief Science Officer"
 	head_position = 1
-	department = "Science"
-	department_flag = COM|SCI
+	department_refs = list(DEPT_SCIENCE, DEPT_COMMAND)
 
 	total_positions = 1
 	spawn_positions = 1
@@ -20,12 +19,14 @@
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
 	minimal_player_age = 14
 	ideal_character_age = 50
+	guestbanned = 1	
+	must_fill = 1
+	not_random_selectable = 1
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
 
 /datum/job/scientist
 	title = "Scientist"
-	department = "Science"
-	department_flag = SCI
+	department_refs = list(DEPT_SCIENCE)
 
 	total_positions = 5
 	spawn_positions = 3
@@ -40,8 +41,7 @@
 
 /datum/job/xenobiologist
 	title = "Xenobiologist"
-	department = "Science"
-	department_flag = SCI
+	department_refs = list(DEPT_SCIENCE)
 
 	total_positions = 3
 	spawn_positions = 2
@@ -56,8 +56,7 @@
 
 /datum/job/roboticist
 	title = "Roboticist"
-	department = "Science"
-	department_flag = SCI
+	department_refs = list(DEPT_SCIENCE)
 
 	total_positions = 2
 	spawn_positions = 2

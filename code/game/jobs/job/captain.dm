@@ -2,9 +2,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 /datum/job/captain
 	title = "Captain"
-	department = "Command"
 	head_position = 1
-	department_flag = COM
+	department_refs = list(DEPT_COMMAND)
 
 	total_positions = 1
 	spawn_positions = 1
@@ -18,6 +17,9 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 	ideal_character_age = 70 // Old geezer captains ftw
 	outfit_type = /decl/hierarchy/outfit/job/captain
+	guestbanned = 1	
+	must_fill = 1
+	not_random_selectable = 1	
 
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -30,7 +32,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/hop
 	title = "Head of Personnel"
 	head_position = 1
-	department_flag = COM|CIV
+	department_refs = list(DEPT_COMMAND, DEPT_CIVILIAN)
 
 	total_positions = 1
 	spawn_positions = 1
@@ -40,6 +42,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimal_player_age = 14
 	economic_power = 10
 	ideal_character_age = 50
+	guestbanned = 1	
+	not_random_selectable = 1
 
 	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers, access_heads,
 			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_bridge,

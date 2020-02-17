@@ -16,35 +16,19 @@ SUBSYSTEM_DEF(goals)
 		/datum/goal/clean,
 		/datum/goal/money
 	)
-	var/list/departments = list()
 	var/list/ambitions =   list()
-
-/datum/controller/subsystem/goals/Initialize()
-	var/list/all_depts = subtypesof(/datum/department)
-	//See if map is very particular about what depts it has
-	if(LAZYLEN(GLOB.using_map.departments))
-		all_depts = GLOB.using_map.departments
-	for(var/dtype in all_depts)
-		var/datum/department/dept = dtype
-		var/dept_flag = initial(dept.flag)
-		if(dept_flag)
-			departments["[dept_flag]"] = new dtype
-	for(var/thing in departments)
-		var/datum/department/dept = departments[thing]
-		dept.Initialize()
-	. = ..()
-
-/datum/controller/subsystem/goals/proc/update_department_goal(var/department_flag, var/goal_type, var/progress)
-	var/datum/department/dept = departments["[department_flag]"]
+/datum/controller/subsystem/goals/proc/update_department_goal(var/department_ref, var/goal_type, var/progress)
+	var/datum/department/dept = SSdepartments.departments[department_ref]
 	if(dept)
 		dept.update_progress(goal_type, progress)
 
 /datum/controller/subsystem/goals/proc/get_roundend_summary()
 	. = list()
-	for(var/thing in departments)
-		var/datum/department/dept = departments[thing]
-		. += "<b>[dept.name] had the following shift goals:</b>"
-		. += dept.summarize_goals(show_success = TRUE)
+	for(var/thing in SSdepartments.departments)
+		var/datum/department/dept = SSdepartments.departments[thing]
+		if (LAZYLEN(SSjobs.titles_by_department(dept)))
+			. += "<b>[dept.title] had the following shift goals:</b>"
+			. += dept.summarize_goals(show_success = TRUE)
 	if(LAZYLEN(.))
 		. = "<br>[jointext(., "<br>")]"
 	else

@@ -99,7 +99,6 @@
 /datum/job/chief_engineer
 	title = "Head Engineer"
 	supervisors = "the Captain"
-	department_flag = ENG
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/chief_engineer
 	min_skill = list(   SKILL_LITERACY     = SKILL_ADEPT,
 	                    SKILL_COMPUTER     = SKILL_ADEPT,
@@ -118,6 +117,7 @@
 
 /datum/job/doctor
 	title = "Head Doctor"
+	head_position = 1
 	supervisors = "the Captain and your own ethics"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/doc
 	alt_titles = list(
@@ -134,6 +134,9 @@
 	                    SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
 	skill_points = 28
+	guestbanned = 1	
+	must_fill = 1
+	not_random_selectable = 1
 
 /datum/job/doctor/junior
 	title = "Junior Doctor"
@@ -243,7 +246,7 @@
 	hud_icon = "hudying"
 	supervisors = "the Matriarch and the Patriarches"
 	outfit_type = /decl/hierarchy/outfit/job/yinglet
-	department_flag = CIV
+	department_refs = list(DEPT_ENCLAVE)
 	max_skill = list(   SKILL_PILOT       = SKILL_ADEPT,
 	                    SKILL_SCIENCE     = SKILL_ADEPT,
 	                    SKILL_COMBAT      = SKILL_ADEPT,
@@ -264,7 +267,7 @@
 	title = "Enclave Scout"
 	spawn_positions = 1
 	total_positions = 3
-	department_flag = EXP
+	department_refs = list(DEPT_ENCLAVE, DEPT_EXPLORATION)
 	hud_icon = "hudyingscout"
 	supervisors = "the Matriarch and the Patriarches"
 	outfit_type = /decl/hierarchy/outfit/job/yinglet/scout
@@ -304,7 +307,8 @@
 	                    SKILL_ENGINES      = SKILL_MAX)
 	skill_points = 26
 	head_position = 1
-	department_flag = COM|CIV
+	guestbanned = 1	
+	department_refs = list(DEPT_ENCLAVE)
 	access = list(
 		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge,
 		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
@@ -337,9 +341,12 @@
 						)
 	skill_points = 30
 	head_position = 1
-	department_flag = COM|CIV
+	department_refs = list(DEPT_ENCLAVE, DEPT_COMMAND)
 	selection_color = "#2f2f7f"
 	req_admin_notify = 1
+	guestbanned = 1	
+	must_fill = 1
+	not_random_selectable = 1
 	access = list(
 		access_heads, access_medical, access_engine, access_change_ids, access_eva, access_bridge,
 		access_maint_tunnels, access_bar, access_janitor, access_cargo, access_cargo_bot, access_research, access_heads_vault,
@@ -354,7 +361,7 @@
 	title = "Baxxid Advisor"
 	skill_points = 40
 	supervisors = "the elders of your family, the Captain and the Trademaster"
-	department_flag = COM|CIV
+	department_refs = list(DEPT_CIVILIAN, DEPT_COMMAND)
 	total_positions = 1
 	spawn_positions = 1
 

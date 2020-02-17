@@ -107,7 +107,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/starting_money = 75000		//Money in station account
 	var/department_money = 5000		//Money in department accounts
 	var/salary_modifier	= 1			//Multiplier to starting character money
-	var/station_departments = list()//Gets filled automatically depending on jobs allowed
+	var/list/station_departments = list()//Gets filled automatically depending on jobs allowed
 
 	var/supply_currency_name = "Credits"
 	var/supply_currency_name_short = "Cr."
@@ -161,9 +161,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		ACCESS_REGION_GENERAL = list(access_change_ids),
 		ACCESS_REGION_SUPPLY = list(access_change_ids)
 	)
-
-	// List of /datum/department types to instantiate at roundstart.
-	var/list/departments
 
 /datum/map/New()
 	if(!map_levels)
@@ -286,13 +283,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		station_account = create_account("[station_name()] Primary Account", "[station_name()]", starting_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	for(var/job in allowed_jobs)
-		var/datum/job/J = job
-		var/dept = initial(J.department)
-		if(dept)
+		var/datum/job/J = SSjobs.get_by_path(job)
+		var/list/dept = J.department_refs
+		if(LAZYLEN(dept))
 			station_departments |= dept
 
 	for(var/department in station_departments)
-		department_accounts[department] = create_account("[department] Account", "[department]", department_money, ACCOUNT_TYPE_DEPARTMENT)
+		department_accounts[department] = create_account("[SSdepartments.departments[department].title] Account", "[SSdepartments.departments[department].title]", department_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	department_accounts["Vendor"] = create_account("Vendor Account", "Vendor", 0, ACCOUNT_TYPE_DEPARTMENT)
 	vendor_account = department_accounts["Vendor"]

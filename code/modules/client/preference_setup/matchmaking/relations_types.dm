@@ -71,7 +71,7 @@
 			continue
 		if(R.holder.assigned_job == holder.assigned_job)
 			best += R
-		if(R.holder.assigned_job.department_flag & holder.assigned_job.department_flag)
+		if(LAZYLEN(R.holder.assigned_job.department_refs & holder.assigned_job.department_refs))
 			good += R
 	if(best.len)
 		return best

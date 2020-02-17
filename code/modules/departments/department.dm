@@ -1,12 +1,13 @@
 /datum/department
-	var/name
-	var/flag
-	var/list/goals
+	var/title = "Undefined"         // Player facing. Can be changed freely without breaking code or updating refrences in jobs.
+	var/reference = "undefined"     // Code facing. Jobs reference their department by this.
+	var/announce_channel = "Common" // The Channel for spawn annoncement. Leave as common if unsure. The channel will be selected based of the first deparment listed in a jobs .department_refs
+	var/list/goals = list() 
 	var/min_goals = 1
 	var/max_goals = 2
-
+	
 /datum/department/proc/Initialize()
-	if(!name || !flag || LAZYLEN(goals) <= 0)
+	if(!reference || LAZYLEN(goals) <= 0)
 		return
 	var/list/possible_goals = goals.Copy()
 	goals.Cut()

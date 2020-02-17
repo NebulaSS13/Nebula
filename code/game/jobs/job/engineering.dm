@@ -1,8 +1,7 @@
 /datum/job/chief_engineer
 	title = "Chief Engineer"
 	head_position = 1
-	department = "Engineering"
-	department_flag = ENG|COM
+	department_refs = list(DEPT_ENGINEERING, DEPT_COMMAND)
 
 	total_positions = 1
 	spawn_positions = 1
@@ -12,6 +11,9 @@
 	economic_power = 10
 
 	ideal_character_age = 50
+	guestbanned = 1	
+	must_fill = 1
+	not_random_selectable = 1
 
 
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_heads,
@@ -27,8 +29,7 @@
 
 /datum/job/engineer
 	title = "Engineer"
-	department = "Engineering"
-	department_flag = ENG
+	department_refs = list(DEPT_ENGINEERING)
 
 	total_positions = 8
 	spawn_positions = 7

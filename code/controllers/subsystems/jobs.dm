@@ -1,15 +1,3 @@
-var/const/ENG               =(1<<0)
-var/const/SEC               =(1<<1)
-var/const/MED               =(1<<2)
-var/const/SCI               =(1<<3)
-var/const/CIV               =(1<<4)
-var/const/COM               =(1<<5)
-var/const/MSC               =(1<<6)
-var/const/SRV               =(1<<7)
-var/const/SUP               =(1<<8)
-var/const/SPT               =(1<<9)
-var/const/EXP               =(1<<10)
-
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"
 	init_order = SS_INIT_JOBS
@@ -24,6 +12,7 @@ SUBSYSTEM_DEF(jobs)
 	var/list/positions_by_department = list()
 	var/list/job_icons =               list()
 	var/job_config_file = "config/jobs.txt"
+	var/list/must_fill_titles =			list()
 
 /datum/controller/subsystem/jobs/Initialize(timeofday)
 
@@ -34,6 +23,10 @@ SUBSYSTEM_DEF(jobs)
 		if(!job)
 			job = new jobtype
 		primary_job_datums += job
+
+	for(var/datum/job/job in primary_job_datums)
+		if(isnull(job.primary_department))
+			job.primary_department = job.department_refs[1]
 
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
@@ -99,6 +92,7 @@ SUBSYSTEM_DEF(jobs)
 	// Update valid job titles.
 	titles_to_datums = list()
 	types_to_datums = list()
+	must_fill_titles = list()
 	positions_by_department = list()
 	for(var/map_name in job_lists_by_map_name)
 		var/list/map_data = job_lists_by_map_name[map_name]
@@ -107,10 +101,12 @@ SUBSYSTEM_DEF(jobs)
 			titles_to_datums[job.title] = job
 			for(var/alt_title in job.alt_titles)
 				titles_to_datums[alt_title] = job
-			if(job.department_flag)
-				for (var/I in 1 to GLOB.bitflags.len)
-					if(job.department_flag & GLOB.bitflags[I])
-						LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.title)
+			if(job.must_fill)
+				must_fill_titles += job.title
+			if(job.department_refs)
+				for(var/dept_ref in job.department_refs)
+					if(dept_ref in SSdepartments.departments)
+						LAZYDISTINCTADD(positions_by_department[dept_ref], job.title)
 
 	// Set up syndicate phrases.
 	syndicate_code_phrase = generate_code_phrase()
@@ -122,10 +118,11 @@ SUBSYSTEM_DEF(jobs)
 	. = ..()
 
 /datum/controller/subsystem/jobs/proc/guest_jobbans(var/job)
-	for(var/dept in list(COM, MSC, SEC))
-		if(job in titles_by_department(dept))
-			return TRUE
+	var/datum/job/j = get_by_title(job)
+	if (j.guestbanned)
+		return TRUE
 	return FALSE
+
 
 /datum/controller/subsystem/jobs/proc/reset_occupations()
 	for(var/mob/new_player/player in GLOB.player_list)
@@ -240,7 +237,7 @@ SUBSYSTEM_DEF(jobs)
 			continue
 		if(job.is_restricted(player.client.prefs))
 			continue
-		if(job.title in titles_by_department(COM)) //If you want a command position, select it!
+		if(job.not_random_selectable) //If you want a command position, select it!
 			continue
 		if(jobban_isbanned(player, job.title))
 			continue
@@ -256,7 +253,7 @@ SUBSYSTEM_DEF(jobs)
 ///This proc is called before the level loop of divide_occupations() and will try to select a head, ignoring ALL non-head preferences for every level until it locates a head or runs out of levels to check
 /datum/controller/subsystem/jobs/proc/fill_head_position(var/datum/game_mode/mode)
 	for(var/level = 1 to 3)
-		for(var/command_position in titles_by_department(COM))
+		for(var/command_position in must_fill_titles)
 			var/datum/job/job = get_by_title(command_position)
 			if(!job)	continue
 			var/list/candidates = find_occupation_candidates(job, level)
@@ -290,7 +287,7 @@ SUBSYSTEM_DEF(jobs)
 
 ///This proc is called at the start of the level loop of divide_occupations() and will cause head jobs to be checked before any other jobs of the same level
 /datum/controller/subsystem/jobs/proc/CheckHeadPositions(var/level, var/datum/game_mode/mode)
-	for(var/command_position in titles_by_department(COM))
+	for(var/command_position in must_fill_titles)
 		var/datum/job/job = get_by_title(command_position)
 		if(!job)	continue
 		var/list/candidates = find_occupation_candidates(job, level)
@@ -505,7 +502,7 @@ SUBSYSTEM_DEF(jobs)
 	// If they're head, give them the account info for their department
 	if(H.mind && job.head_position)
 		var/remembered_info = ""
-		var/datum/money_account/department_account = department_accounts[job.department]
+		var/datum/money_account/department_account = department_accounts[job.primary_department]
 
 		if(department_account)
 			remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
@@ -558,7 +555,7 @@ SUBSYSTEM_DEF(jobs)
 	return H
 
 /datum/controller/subsystem/jobs/proc/titles_by_department(var/dept)
-	return positions_by_department["[dept]"] || list()
+	return positions_by_department[dept] || list()
 
 /datum/controller/subsystem/jobs/proc/spawn_empty_ai()
 	for(var/obj/effect/landmark/start/S in landmarks_list)

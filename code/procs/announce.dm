@@ -123,22 +123,6 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 		return "Common"
 
-	if(job.department_flag & (COM | CIV | MSC))
-		return "Common"
-	if(job.department_flag & SUP)
-		return "Supply"
-	if(job.department_flag & SPT)
-		return "Command"
-	if(job.department_flag & SEC)
-		return "Security"
-	if(job.department_flag & ENG)
-		return "Engineering"
-	if(job.department_flag & MED)
-		return "Medical"
-	if(job.department_flag & SCI)
-		return "Science"
-	if(job.department_flag & SRV)
-		return "Service"
-	if(job.department_flag & EXP)
-		return "Exploration"
+	if(LAZYLEN(job.department_refs & SSdepartments.departments))
+		return SSdepartments.departments[job.primary_department].announce_channel
 	return "Common"

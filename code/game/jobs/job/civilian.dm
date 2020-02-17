@@ -1,8 +1,7 @@
 //Food
 /datum/job/bartender
 	title = "Bartender"
-	department = "Service"
-	department_flag = SRV
+	department_refs = list(DEPT_SERVICE)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -13,8 +12,7 @@
 
 /datum/job/chef
 	title = "Chef"
-	department = "Service"
-	department_flag = SRV
+	department_refs = list(DEPT_SERVICE)
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
@@ -25,8 +23,7 @@
 
 /datum/job/hydro
 	title = "Gardener"
-	department = "Service"
-	department_flag = SRV
+	department_refs = list(DEPT_SERVICE)
 	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -38,8 +35,7 @@
 //Cargo
 /datum/job/qm
 	title = "Quartermaster"
-	department = "Supply"
-	department_flag = SUP
+	department_refs = list(DEPT_SUPPLY)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -52,8 +48,7 @@
 
 /datum/job/cargo_tech
 	title = "Cargo Technician"
-	department = "Supply"
-	department_flag = SUP
+	department_refs = list(DEPT_SUPPLY)
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the quartermaster and the head of personnel"
@@ -63,8 +58,7 @@
 
 /datum/job/mining
 	title = "Shaft Miner"
-	department = "Supply"
-	department_flag = SUP
+	department_refs = list(DEPT_SUPPLY)
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
@@ -76,8 +70,7 @@
 
 /datum/job/janitor
 	title = "Janitor"
-	department = "Service"
-	department_flag = SRV
+	department_refs = list(DEPT_SERVICE)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -89,8 +82,7 @@
 //More or less assistants
 /datum/job/librarian
 	title = "Librarian"
-	department = "Civilian"
-	department_flag = CIV
+	department_refs = list(DEPT_CIVILIAN)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -101,8 +93,7 @@
 
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
-	department = "Support"
-	department_flag = SPT
+	department_refs = list(DEPT_SUPPORT)
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"

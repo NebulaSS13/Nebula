@@ -144,7 +144,7 @@
 
 				var/title = job.title
 				var/title_link = length(job.alt_titles) ? "<a href='?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
-				if((title in SSjobs.titles_by_department(COM)) || (title == "AI"))//Bold head jobs
+				if((job.head_position) || (title == "AI"))//Bold head jobs
 					title_link = "<b>[title_link]</b>"
 
 				var/help_link = "</td><td width = '10%' align = 'center'><a href='?src=\ref[src];job_info=[title]'>?</a></td>"
@@ -405,8 +405,8 @@
 			dat += "<i><b>Alternative titles:</b> [english_list(job.alt_titles)].</i>"
 		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
 		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
-		if(job.department)
-			dat += "<b>Department:</b> [job.department]."
+		if(LAZYLEN(job.department_refs))
+			dat += "<b>Department:</b> [SSdepartments.departments[job.primary_department].title]."
 			if(job.head_position)
 				dat += "You are in charge of this department."
 

@@ -337,7 +337,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "<option value=''>--</option>"
 	for(var/j in SSjobs.titles_to_datums)
 		output += "<option value='[j]'>[j]</option>"
-	for(var/j in SSjobs.titles_by_department(MSC))
+	for(var/j in SSjobs.titles_by_department(DEPT_MISC))
 		output += "<option value='[j]'>[j]</option>"
 	var/list/bantypes = list("traitor","changeling","operative","revolutionary","cultist","wizard") //For legacy bans.
 	var/list/all_antag_types = GLOB.all_antag_types_

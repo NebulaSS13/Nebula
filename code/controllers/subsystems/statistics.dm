@@ -166,5 +166,5 @@ SUBSYSTEM_DEF(statistics)
 		death.overmap_location_name = cell ? cell.name : "Unknown"
 		LAZYADD(deaths, death)
 
-		if(!player_is_antag(dead.mind) && dead.mind.assigned_job && dead.mind.assigned_job.department_flag)
+		if(!player_is_antag(dead.mind) && dead.mind.assigned_job && LAZYLEN(dead.mind.assigned_job.department_refs))
 			crew_death_count++

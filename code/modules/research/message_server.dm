@@ -148,7 +148,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		if(!J)
 			continue
 
-		if(J.department_flag & department)
+		if(department in J.department_refs)
 			to_chat(H, "<span class='notice'>Your [pda.name] alerts you to the fact that somebody is requesting your presence at your department.</span>")
 			reached++
 

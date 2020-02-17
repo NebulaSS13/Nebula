@@ -1,9 +1,13 @@
 #if !defined(using_map_DATUM)
+
+	#define DEPT_ENCLAVE "enclave"
+
 	#include "tradeship_unit_testing.dm"
 
 	#include "../../code/datums/music_tracks/businessend.dm"
 	#include "../../code/datums/music_tracks/salutjohn.dm"
 
+	#include "tradeship_departments.dm"
 	#include "tradeship_antagonists.dm"
 	#include "tradeship_items.dm"
 	#include "tradeship_areas.dm"
