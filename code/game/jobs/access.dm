@@ -123,7 +123,7 @@
 	if(!priv_all_access)
 		priv_all_access = get_access_ids()
 
-	return priv_all_access.Copy()
+	return priv_all_access?.Copy()
 
 /var/list/priv_station_access
 /proc/get_all_station_access()

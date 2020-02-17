@@ -55,7 +55,7 @@
 	var/obj/PC = nano_host()
 	var/datum/extension/interactive/ntos/os = get_extension(PC, /datum/extension/interactive/ntos)
 	if(os && os.emagged())
-		user_access = user_access.Copy()
+		user_access = user_access ? user_access.Copy() : list()
 		user_access |= access_syndicate
 
 	return user_access

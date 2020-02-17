@@ -160,9 +160,9 @@
 
 /datum/job/proc/get_access()
 	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
-		return src.minimal_access.Copy()
+		return minimal_access?.Copy()
 	else
-		return src.access.Copy()
+		return access?.Copy()
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/C)

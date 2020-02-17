@@ -51,10 +51,10 @@
 	update_icons()
 
 	botcard = new /obj/item/card/id(src)
-	botcard.access = botcard_access.Copy()
+	botcard.access = botcard_access?.Copy()
 
 	access_scanner = new /obj(src)
-	access_scanner.req_access = req_access.Copy()
+	access_scanner.req_access = req_access?.Copy()
 
 /mob/living/bot/Initialize()
 	. = ..()
