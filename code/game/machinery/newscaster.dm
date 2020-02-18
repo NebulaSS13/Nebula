@@ -447,7 +447,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 		var/processed_dat = human_or_robot_user.handle_reading_literacy(human_or_robot_user, dat)
 		if(processed_dat)
-			human_or_robot_user << browse(processed_dat, "window=newscaster_main;size=400x600")
+			show_browser(human_or_robot_user, processed_dat, "window=newscaster_main;size=400x600")
 		onclose(human_or_robot_user, "newscaster_main")
 
 /obj/machinery/newscaster/Topic(href, href_list)
@@ -857,7 +857,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		dat+="<BR><HR><div align='center'>[src.curr_page+1]</div>"
 		var/processed_dat = human_user.handle_reading_literacy(human_user, dat)
 		if(processed_dat)
-			human_user << browse(processed_dat, "window=newspaper_main;size=300x400")
+			show_browser(human_user, processed_dat, "window=newspaper_main;size=300x400")
 			onclose(human_user, "newspaper_main")
 	else
 		to_chat(user, "The paper is full of unintelligible symbols!")

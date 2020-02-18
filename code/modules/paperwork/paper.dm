@@ -84,7 +84,7 @@
 /obj/item/paper/proc/show_content(mob/user, forceshow)
 	var/show_info = user.handle_reading_literacy(user, info, FALSE, (forceshow || get_dist(src, user) <= 1))
 	if(show_info)
-		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[show_info][stamps]</BODY></HTML>", "window=[name]")
+		show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[show_info][stamps]</BODY></HTML>", "window=[name]")
 		onclose(user, "[name]")
 
 /obj/item/paper/verb/rename()
@@ -338,7 +338,7 @@
 		update_space(t)
 		var/processed_info_links = usr.handle_reading_literacy(usr, info_links, TRUE)
 		if(processed_info_links)
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
+			show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
 			playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 10)
 			update_icon()
 
@@ -393,7 +393,7 @@
 		else
 			var/processed_info_links = user.handle_reading_literacy(user, info_links, length(info))
 			if(processed_info_links)
-				user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]")
+				show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[processed_info_links][stamps]</BODY></HTML>", "window=[name]")
 		return
 
 	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
