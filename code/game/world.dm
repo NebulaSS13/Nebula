@@ -73,20 +73,12 @@
 
 	//logs
 	SetupLogs()
-	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
-	href_logfile = file("data/logs/[date_string] hrefs.htm")
-	diary = file("data/logs/[date_string].log")
-	diary << "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
+
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
-
-	if(config && config.log_runtime)
-		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
-		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
-		log = runtime_log // Note that, as you can see, this is misnamed: this simply moves world.log into the runtime log file.
 
 	if(byond_version < RECOMMENDED_VERSION)
 		world.log << "Your server's byond version does not meet the recommended requirements for this server. Please update BYOND"
@@ -600,6 +592,15 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	GLOB.world_qdel_log = file("[GLOB.log_directory]/qdel.log")
 	WRITE_FILE(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
+
+	GLOB.world_href_log = file("[GLOB.log_directory]/href.log") // Used for config-optional total href logging
+	diary = file("[GLOB.log_directory]/main.log") // This is the primary log, containing attack, admin, and game logs.
+	WRITE_FILE(diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
+
+	if(config && config.log_runtime)
+		var/runtime_log = file("[GLOB.log_directory]/runtime.log")
+		WRITE_FILE(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
+		log = runtime_log // runtimes and some other output is logged directly to world.log, which is redirected here.
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
