@@ -1380,25 +1380,25 @@
 		to_chat(src.owner, "[special_role_description]")
 		to_chat(src.owner, "(<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[M]'>VV</A>) ([admin_jump_link(M, src)]) (<A HREF='?src=\ref[src];secretsadmin=check_antagonist'>CA</A>)")
 
-	else if(href_list["adminspawnclam"])
+	else if(href_list["adminspawnprayreward"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
-		var/mob/living/carbon/human/H = locate(href_list["adminspawnclam"])
+		var/mob/living/carbon/human/H = locate(href_list["adminspawnprayreward"])
 		if(!ishuman(H))
 			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
 			return
 
-		var/obj/item/mollusc/clam/C = new(get_turf(H))
+		var/obj/item/C = new GLOB.using_map.pray_reward_type(get_turf(H))
 		H.put_in_hands(C)
 		if(C.loc !=H)
-			message_admins("[key_name(H)] has their hands full, so they did not receive their clam, spawned by [key_name(src.owner)].")
+			message_admins("[key_name(H)] has their hands full, so they did not receive their [C.name], spawned by [key_name(src.owner)].")
 			qdel(C)
 			return
 
-		log_admin("[key_name(H)] got their clam, spawned by [key_name(src.owner)]")
-		message_admins("[key_name(H)] got their clam, spawned by [key_name(src.owner)]")
-		SSstatistics.add_field("admin_clams_spawned",1)
-		to_chat(H, SPAN_NOTICE("Your prayers have been answered!! You received the <b>best clam</b>!"))
+		log_admin("[key_name(H)] got their [C.name], spawned by [key_name(src.owner)]")
+		message_admins("[key_name(H)] got their [C.name], spawned by [key_name(src.owner)]")
+		SSstatistics.add_field("admin_pray_rewards_spawned",1)
+		to_chat(H, SPAN_NOTICE("Your prayers have been answered!! You received the <b>best [C.name]</b>!"))
 		return
 
 	else if(href_list["BlueSpaceArtillery"])
