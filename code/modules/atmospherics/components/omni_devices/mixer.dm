@@ -109,6 +109,8 @@
 	var/transfer_moles_max = INFINITY
 
 	for (var/datum/omni_port/P in inputs)
+		if(!P.concentration)
+			continue
 		transfer_moles += (set_flow_rate*P.concentration/P.air.volume)*P.air.total_moles
 		transfer_moles_max = min(transfer_moles_max, calculate_transfer_moles(P.air, output.air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0))
 	transfer_moles = between(0, transfer_moles, transfer_moles_max)
