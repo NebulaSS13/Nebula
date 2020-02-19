@@ -60,7 +60,7 @@
 		user.visible_message("[user] opens a book titled \"[src.title]\" and begins reading intently.")
 		var/processed_dat = user.handle_reading_literacy(user, dat)
 		if(processed_dat)
-			user << browse(processed_dat, "window=book;size=1000x550")
+			show_browser(user, processed_dat, "window=book;size=1000x550")
 			onclose(user, "book")
 	else
 		to_chat(user, "This book is completely blank!")
@@ -139,7 +139,7 @@
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam
 		var/processed_dat = M.handle_reading_literacy(user, "<i>Author: [author].</i><br><br>" + "[dat]")
 		if(processed_dat)
-			M << browse(processed_dat, "window=book;size=1000x550")
+			show_browser(M, processed_dat, "window=book;size=1000x550")
 
 // Copied from paper for the most part. TODO: generalize.
 /obj/item/book/proc/formatpencode(var/mob/user, var/t, var/obj/item/pen/P)
