@@ -171,6 +171,9 @@
 		return attack_self(user)
 	else if(adj)
 		setClickCooldown(arms ? arms.action_delay : 15)
+		if(ismob(A))
+			var/mob/target = A
+			admin_attack_log(user, target, "Attacked using \a [arms]", "Was attacked with \a [arms]", "used \a [arms] to attack")
 		return A.attack_generic(src, arms.melee_damage, "attacked")
 	return
 
