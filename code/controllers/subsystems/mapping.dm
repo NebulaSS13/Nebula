@@ -32,6 +32,17 @@ SUBSYSTEM_DEF(mapping)
 		map_templates[T.name] = T
 	preloadBlacklistableTemplates()
 
+/datum/controller/subsystem/mapping/proc/includeTemplate(var/datum/map_template/map_template, var/list/banned_maps)
+	if(!initial(map_template.id))
+		return FALSE
+	var/datum/map_template/MT = new map_template()
+	if(banned_maps)
+		for(var/mappath in MT.mappaths)
+			if(banned_maps.Find(mappath))
+				return FALSE
+	map_templates[MT.name] = MT
+	. = MT
+
 /datum/controller/subsystem/mapping/proc/preloadBlacklistableTemplates()
 	// Still supporting bans by filename
 	var/list/banned_exoplanet_dmms = generateMapList("config/exoplanet_ruin_blacklist.txt")
@@ -44,23 +55,9 @@ SUBSYSTEM_DEF(mapping)
 	var/list/banned_maps = list() + banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
 
 	for(var/item in sortList(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
-		var/datum/map_template/map_template_type = item
-		// screen out the abstract subtypes
-		if(!initial(map_template_type.id))
+		var/datum/map_template/MT = includeTemplate(item, banned_maps)
+		if(!MT)
 			continue
-		var/datum/map_template/MT = new map_template_type()
-
-		if (banned_maps)
-			var/is_banned = FALSE
-			for (var/mappath in MT.mappaths)
-				if(banned_maps.Find(mappath))
-					is_banned = TRUE
-					break
-			if (is_banned)
-				continue
-
-		map_templates[MT.name] = MT
-
 		// This is nasty..
 		if(istype(MT, /datum/map_template/ruin/exoplanet))
 			exoplanet_ruins_templates[MT.name] = MT

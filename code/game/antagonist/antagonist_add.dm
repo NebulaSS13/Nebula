@@ -1,14 +1,25 @@
+/datum/antagonist/proc/load_required_map()
+	if(!base_to_load)
+		return TRUE
+	. = FALSE
+	if(ispath(base_to_load))
+		var/datum/map_template/base = base_to_load
+		base_to_load = null
+		if(SSmapping.map_templates[initial(base.name)])
+			base = SSmapping.map_templates[initial(base.name)]
+		else
+			base = new base()
+		report_progress("Loading map template '[base]' for [role_text]...")
+		. = base.load_new_z()
+		if(.)
+			get_starting_locations()
+
 /datum/antagonist/proc/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance)
 
 	if(!add_antagonist_mind(player, ignore_role))
 		return
 
-	if(base_to_load)
-		var/datum/map_template/base = new base_to_load()
-		report_progress("Loading map template '[base]' for [role_text]...")
-		base_to_load = null
-		base.load_new_z()
-		get_starting_locations()
+	load_required_map()
 
 	//do this again, just in case
 	if(flags & ANTAG_OVERRIDE_JOB)

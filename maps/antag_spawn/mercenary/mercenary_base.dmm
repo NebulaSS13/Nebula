@@ -635,7 +635,6 @@
 /obj/item/bodybag/cryobag,
 /obj/item/chems/ivbag/nanoblood,
 /obj/item/storage/firstaid/adv,
-/obj/effect/gas_setup,
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bc" = (
@@ -645,7 +644,6 @@
 	},
 /obj/structure/iv_drip,
 /obj/item/chems/ivbag/nanoblood,
-/obj/effect/gas_setup,
 /obj/machinery/door/window{
 	dir = 4
 	},
@@ -751,7 +749,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	frequency = 1331
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle)
@@ -1375,7 +1372,6 @@
 "ch" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	frequency = 1331
 	},
 /obj/machinery/power/apc/hyper{
 	dir = 8;
@@ -2926,7 +2922,6 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Or" = (
-/obj/machinery/vending/medical/torch,
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-1";
 	dir = 4
