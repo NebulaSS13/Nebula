@@ -231,13 +231,13 @@
 // No consideration are made for a multi-character 'character' input
 /proc/pad_left(text, desired_length, character)
 	var/padding = generate_padding(length(text), desired_length, character)
-	return length(padding) ? "[text][padding]" : text
+	return length(padding) ? "[padding][text]" : text
 
 // Adds the required amount of 'character' after 'text' to extend the lengh to 'desired_length', if it is shorter
 // No consideration are made for a multi-character 'character' input
 /proc/pad_right(text, desired_length, character)
 	var/padding = generate_padding(length(text), desired_length, character)
-	return length(padding) ? "[padding][text]" : text
+	return length(padding) ? "[text][padding]" : text
 
 /proc/generate_padding(current_length, desired_length, character)
 	if(current_length >= desired_length)
