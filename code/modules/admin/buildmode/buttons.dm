@@ -6,9 +6,9 @@
 	icon = 'icons/misc/buildmode.dmi'
 	var/datum/click_handler/build_mode/host
 
-/obj/effect/bmode/Initialize()
-	. = ..()
-	src.host = loc
+/obj/effect/bmode/Initialize(mapload, _host)
+	. = ..(mapload)
+	host = _host
 
 /obj/effect/bmode/Destroy()
 	host = null

@@ -20,7 +20,7 @@
 
 	build_buttons = list()
 	for(var/button_type in subtypesof(/obj/effect/bmode))
-		var/obj/effect/bmode/build_button = new button_type(src)
+		var/obj/effect/bmode/build_button = new button_type(null, src)
 		build_buttons += build_button
 	StartTimer()
 	current_build_mode.Selected()
