@@ -75,10 +75,9 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	has_gravity = 0
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
 	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
-	secure = FALSE
 	show_starlight = TRUE
 
-area/space/atmosalert()
+/area/space/atmosalert()
 	return
 
 /area/space/fire_alert()
@@ -132,6 +131,7 @@ area/space/atmosalert()
 
 /area/security
 	req_access = list(access_sec_doors)
+	secure = TRUE
 
 /area/security/brig
 	name = "\improper Security - Brig"
