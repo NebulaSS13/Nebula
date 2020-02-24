@@ -43,11 +43,9 @@
 
 	var/datum/map_template/template = SSmapping.map_templates[map]
 
-	if (template.loaded && !(template.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
-		var/jesus_take_the_wheel = alert(usr, "That template has already been loaded and doesn't want to be loaded again. \
-			Proceeding may unpredictably break things and cause runtimes.", "Confirm load", "Cancel load", "Do you see any cops around?") == "Do you see any cops around?"
-		if (!jesus_take_the_wheel)
-			return
+	if(template.loaded && !(template.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+		to_chat(usr, SPAN_WARNING("That template has already been loaded and is flagged against being loaded again."))
+		return
 
 	var/new_z_centre = template.load_new_z(FALSE) // Don't skip changeturf
 	if (new_z_centre)
