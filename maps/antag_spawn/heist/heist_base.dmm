@@ -395,10 +395,6 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror/raider{
-	pixel_x = -28;
-	pixel_y = 0
-	},
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor";
 	dir = 2
