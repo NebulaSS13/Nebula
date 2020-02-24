@@ -208,14 +208,11 @@
 /atom/movable/get_log_info_line()
 	var/turf/t = get_turf(src)
 	if(t)
-		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
+		var/obj/effect/overmap/visitable/O = map_sectors["[t.z]"]
 		if(istype(O))
 			return "[..()] ([t]) ([t.x],[t.y],[t.z] - [O.name]) ([t.type])"
-		else
-			return "[..()] ([t]) ([t.x],[t.y],[t.z]) ([t.type])"
-
-	else
-		return "[..()] (NULL) ([t ? "[t.x],[t.y],[t.z]" : "0,0,0"]) (NULL)"
+		return "[..()] ([t]) ([t.x],[t.y],[t.z]) ([t.type])"
+	return "[..()] ([loc?.name || "NULL" ]) (NULL) ([loc?.type || "NULL"])"
 
 /mob/get_log_info_line()
 	return ckey ? "[..()] ([ckey])" : ..()

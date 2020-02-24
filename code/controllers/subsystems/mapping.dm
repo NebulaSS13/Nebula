@@ -34,12 +34,12 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/proc/includeTemplate(var/datum/map_template/map_template, var/list/banned_maps)
 	if(!initial(map_template.id))
-		return FALSE
+		return
 	var/datum/map_template/MT = new map_template()
 	if(banned_maps)
 		for(var/mappath in MT.mappaths)
 			if(banned_maps.Find(mappath))
-				return FALSE
+				return
 	map_templates[MT.name] = MT
 	. = MT
 
