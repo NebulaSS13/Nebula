@@ -531,18 +531,10 @@ var/world_topic_spam_protect_time = world.timeofday
 				D.associate(GLOB.ckey_directory[ckey])
 
 /world/proc/update_status()
-	var/s = ""
+	var/s = "<b>[station_name()]</b> (<a href=\"https://discord.gg/Ddw58yF\">Discord</a>)"
 
 	if (config && config.server_name)
-		s += "<b>[config.server_name]</b> &#8212; "
-
-	s += "<b>[station_name()]</b>";
-	s += " ("
-	s += "<a href=\"https://www.valsalia.com//\">" //Change this to wherever you want the hub to link to.
-//	s += "[game_version]"
-	s += "Forums"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
-	s += "</a>"
-	s += ")"
+		s = "<b>[config.server_name]</b> &#8212; [s]"
 
 	var/list/features = list()
 
