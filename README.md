@@ -1,6 +1,6 @@
 # Nebula 13
 
-[Website](https://www.valsalia.com/) - [Code](http://github.com/NebulaSS13/Nebula/)
+[Discord](https://discord.gg/Ddw58yF) - [Code](http://github.com/NebulaSS13/Nebula/)
 
 ---
 
