@@ -947,60 +947,108 @@ window "mainwindow"
 		size = 640x440
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
+		on-size = "OnResize"
 		is-maximized = true
 		icon = 'icons\\ss13_64.png'
 		macro = "macro"
 		menu = "menu"
-		on-size = "OnResize"
+	elem "ooc_toggle"
+		type = BUTTON
+		pos = 418,421
+		size = 60x17
+		anchor1 = 100,100
+		anchor2 = none
+		background-color = #8080ff
+		border = line
+		saved-params = "is-checked"
+		text = "OOC"
+		command = ".winset \"ooc_toggle.is-checked=true?input.command=\"!ooc \\\"\" macrobutton.is-checked=false:input.command=\""
+		group = "chat_options"
+		button-type = radio
+	elem "looc_toggle"
+		type = BUTTON
+		pos = 483,421
+		size = 60x17
+		anchor1 = 100,100
+		anchor2 = none
+		background-color = #98bde7
+		border = line
+		saved-params = "is-checked"
+		text = "LOOC"
+		command = ".winset \"looc_toggle.is-checked=true?input.command=\"!looc \\\"\" macrobutton.is-checked=false:input.command=\""
+		group = "chat_options"
+		button-type = radio
+	elem "say_toggle"
+		type = BUTTON
+		pos = 288,421
+		size = 60x17
+		anchor1 = 100,100
+		anchor2 = none
+		background-color = #00a653
+		border = line
+		saved-params = "is-checked"
+		text = "Chat"
+		command = ".winset \"say_toggle.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
+		is-checked = true
+		group = "chat_options"
+		button-type = radio
+	elem "me_toggle"
+		type = BUTTON
+		pos = 353,421
+		size = 60x17
+		anchor1 = 100,100
+		anchor2 = none
+		background-color = #f2e77d
+		border = line
+		saved-params = "is-checked"
+		text = "Me"
+		command = ".winset \"me_toggle.is-checked=true?input.command=\"!me \\\"\" macrobutton.is-checked=false:input.command=\""
+		group = "chat_options"
+		button-type = radio
 	elem "asset_cache_browser"
 		type = BROWSER
 		pos = 424,208
 		size = 1x1
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = ""
 	elem "hotkey_toggle"
 		type = BUTTON
-		pos = 560,420
-		size = 80x20
+		pos = 548,421
+		size = 90x17
 		anchor1 = 100,100
 		anchor2 = none
-		saved-params = ""
+		background-color = none
+		border = line
+		saved-params = "is-checked"
 		text = "Hotkey Toggle"
 		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5 : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
-		button-type = pushbox
+		button-type = checkbox
 	elem "mainvsplit"
 		type = CHILD
 		pos = 3,0
 		size = 634x416
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		right = "rpane"
 		is-vert = true
 	elem "input"
 		type = INPUT
 		pos = 3,420
-		size = 517x20
+		size = 280x20
 		anchor1 = 0,100
 		anchor2 = 100,100
 		background-color = #d3b5b5
 		is-default = true
 		border = sunken
 		saved-params = "command"
-	elem "saybutton"
-		type = BUTTON
-		pos = 520,420
-		size = 40x20
-		anchor1 = 100,100
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Chat"
-		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
-		button-type = pushbox
 
 window "mapwindow"
 	elem "mapwindow"
@@ -1034,7 +1082,6 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
