@@ -5,7 +5,6 @@
 	result_type = /obj/item/material/twohanded/baseballbat
 	req_amount = 10
 	time = 20
-	on_floor = 1
 	difficulty = 2
 	send_material_data = 1
 
@@ -21,7 +20,6 @@
 	result_type = /obj/item/material/ashtray
 	req_amount = 2
 	one_per_turf = 1
-	on_floor = 1
 	send_material_data = 1
 
 /datum/stack_recipe/improvised_armour
@@ -29,7 +27,6 @@
 	result_type = /obj/item/clothing/suit/armor/crafted
 	req_amount = 20
 	one_per_turf = 1
-	on_floor = 1
 	send_material_data = 1
 
 /datum/stack_recipe/coin
@@ -37,39 +34,33 @@
 	result_type = /obj/item/material/coin
 	req_amount = 2
 	one_per_turf = 1
-	on_floor = 1
 	send_material_data = 1
 
 /datum/stack_recipe/ring
 	title = "ring"
 	result_type = /obj/item/clothing/ring/material
-	on_floor = 1
 	send_material_data = 1
 
 /datum/stack_recipe/lock
 	title = "lock"
 	result_type = /obj/item/material/lock_construct
 	time = 20
-	on_floor = 1
 	send_material_data = 1
 
 /datum/stack_recipe/fork
 	title = "fork"
 	result_type = /obj/item/material/kitchen/utensil/fork/plastic
-	on_floor = 1
 	send_material_data = 1
 
 /datum/stack_recipe/knife
 	title = "table knife"
 	result_type = /obj/item/material/knife/table
-	on_floor = 1
 	difficulty = 2
 	send_material_data = 1
 
 /datum/stack_recipe/spoon
 	title = "spoon"
 	result_type = /obj/item/material/kitchen/utensil/spoon/plastic
-	on_floor = 1
 	send_material_data = 1
 
 /datum/stack_recipe/blade
@@ -77,7 +68,6 @@
 	result_type = /obj/item/material/butterflyblade
 	req_amount = 6
 	time = 20
-	on_floor = 1
 	difficulty = 1
 	send_material_data = 1
 
@@ -94,7 +84,6 @@
 	title = "key"
 	result_type = /obj/item/key
 	time = 10
-	on_floor = 1
 
 /datum/stack_recipe/cannon
 	title = "cannon frame"
