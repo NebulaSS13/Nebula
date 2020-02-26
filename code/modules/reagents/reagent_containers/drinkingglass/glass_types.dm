@@ -118,7 +118,7 @@
 	icon_state = "coffeecup"
 	item_state = "coffee"
 	volume = 30
-	center_of_mass = @"{'x'=15,'y':13}"
+	center_of_mass = @"{'x':15,'y':13}"
 	filling_states = @"[40,80,100]"
 	base_name = "cup"
 	base_icon = "coffeecup"
@@ -246,7 +246,6 @@
 	icon_state = "teacup"
 	item_state = "coffee"
 	volume = 20
-	center_of_mass = @"{'x'=15,'y':13}"
 	filling_states = @"[100]"
 	base_name = "teacup"
 	base_icon = "teacup"
