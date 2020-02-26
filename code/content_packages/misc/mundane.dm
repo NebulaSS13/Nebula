@@ -1,5 +1,8 @@
+#ifndef CONTENT_PACKAGE_MUNDANE
+#define CONTENT_PACKAGE_MUNDANE
+
 // Standard real-world terminology/concepts.
-/decl/content_package_strings/mundane
+/decl/content_package/mundane
 	credits_adjectives =    list("DRACONIC","GUN","DOG","NINJA","WIZARD","SOCRATIC","RADTACULAR SICKNASTY")
 	credits_holidays =      list("CHRISTMAS", "EASTER", "WEEKEND", "THURSDAY")
 	credits_crew_outcomes = list("RACIST", "AN INCURABLE DISEASE", "EMBROILED IN CIVIL WAR", "A BAD HANGOVER")
@@ -10,3 +13,5 @@
 		"melons","money","a beach","a smoky room","the rain","a frog","a lizard",
 		"a snake","a plant monster","a field of flowers","a needle","a blade","an ocean"
 	) 
+
+#endif

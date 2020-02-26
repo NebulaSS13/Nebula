@@ -50,9 +50,9 @@ SUBSYSTEM_DEF(lore)
 			dreams |= "\an ["\improper [title]"]"
 			credits_nouns |= uppertext("the [title]")
 
-	var/list/all_content_packages = decls_repository.get_decls_of_subtype(/decl/content_package_strings)
+	var/list/all_content_packages = decls_repository.get_decls_of_subtype(/decl/content_package)
 	for(var/package in all_content_packages)
-		var/decl/content_package_strings/manifest = all_content_packages[package]
+		var/decl/content_package/manifest = all_content_packages[package]
 		if(length(manifest.worths))
 			for(var/thing in manifest.worths)
 				worths[thing] = max(manifest.worths[thing], worths[thing])

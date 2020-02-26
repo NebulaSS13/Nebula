@@ -1,4 +1,4 @@
-/decl/content_package_strings
+/decl/content_package
 	var/list/dreams                  // A list of strings to be added to the random dream proc.
 	var/list/credits_other           // A list of strings that are used by the end of round credits roll.
 	var/list/credits_adventure_names // As above.

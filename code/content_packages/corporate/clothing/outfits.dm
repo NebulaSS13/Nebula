@@ -43,3 +43,17 @@
 	glasses = /obj/item/clothing/glasses/eyepatch
 	l_pocket = /obj/item/flame/lighter/zippo
 	id_pda_assignment = "Corporate Commander"
+
+/decl/hierarchy/outfit/death_command
+	name = "Spec Ops - Death commando"
+
+/decl/hierarchy/outfit/death_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+	GLOB.deathsquad.equip(H)
+	return 1
+
+/decl/hierarchy/outfit/syndicate_command
+	name = "Spec Ops - Syndicate commando"
+
+/decl/hierarchy/outfit/syndicate_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+	GLOB.commandos.equip(H)
+	return 1

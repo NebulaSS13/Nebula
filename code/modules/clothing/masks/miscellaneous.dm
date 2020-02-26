@@ -198,12 +198,6 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = HEAD|FACE|EYES
 
-/obj/item/clothing/mask/rubber/trasen
-	name = "Jack Trasen mask"
-	desc = "CEO of NanoTrasen corporation. Perfect for scaring the unionizing children."
-	icon_state = "trasen"
-	visible_name = "Jack Trasen"
-
 /obj/item/clothing/mask/rubber/barros
 	name = "Amaya Barros mask"
 	desc = "Current Secretary-General of Sol Cental Government. Not that the real thing would visit this pigsty."

@@ -1,3 +1,5 @@
+/datum/map/bearcat
+	default_law_type = /datum/ai_laws/corporate
 
 /datum/computer_file/program/merchant //wild capitalism
 	required_access = null

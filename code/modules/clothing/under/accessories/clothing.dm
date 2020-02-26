@@ -17,40 +17,6 @@
 	desc = "A fashionable tunic that EXO provides to their lab workers."
 	icon_state = "tunic"
 
-/obj/item/clothing/accessory/tunic/nanotrasen
-	name = "\improper NanoTrasen tunic"
-	desc = "A fashionable tunic that NanoTrasen provides to their lab workers."
-	icon_state = "tunic_nt"
-
-/obj/item/clothing/accessory/tunic/heph
-	name = "\improper Hephaestus Industries tunic"
-	desc = "A fashionable tunic that Hephaestus Industries provides to their lab workers."
-	icon_state = "tunic_heph"
-
-/obj/item/clothing/accessory/tunic/zeng
-	name = "\improper Zeng-Hu tunic"
-	desc = "A fashionable tunic that Zeng-Hu provides to their lab workers."
-	icon_state = "tunic_heph"
-
-/obj/item/clothing/accessory/tunic/exec
-	name = "executive tunic"
-	icon_state = "tunicblack"
-
-/obj/item/clothing/accessory/tunic/exec/nanotrasen
-	name = "\improper NanoTrasen executive tunic"
-	desc = "A fashionable tunic that NanoTrasen provides to their lab workers."
-	icon_state = "tunicblack_nt"
-
-/obj/item/clothing/accessory/tunic/exec/heph
-	name = "\improper Hephaestus Industries executive tunic"
-	desc = "A fashionable tunic that Hephaestus Industries provides to their lab workers."
-	icon_state = "tunicblack_heph"
-
-/obj/item/clothing/accessory/tunic/exec/zeng
-	name = "\improper Zeng-Hu executive tunic"
-	desc = "A fashionable tunic that Zeng-Hu provides to their lab workers."
-	icon_state = "tunicblack_zeng"
-
 /obj/item/clothing/accessory/dashiki
 	name = "black dashiki"
 	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is green and black."
@@ -187,26 +153,6 @@
 	name = "checkered suit jacket"
 	desc = "Lucky suit jacket."
 	icon_state = "checkered_jacket"
-
-/obj/item/clothing/accessory/toggleable/corpjacket
-	name = "corporate suit jacket"
-	desc = "A jacket that the EXO has their executives wear."
-	icon_state = "jacket_tl"
-
-/obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen
-	name = "\improper NanoTrasen suit jacket"
-	desc = "A jacket that NanoTrasen has their executives wear."
-	icon_state = "jacket_nt"
-
-/obj/item/clothing/accessory/toggleable/corpjacket/heph
-	name = "\improper Hephaestus Industries suit jacket"
-	desc = "A jacket that Hephaestus Industries has their executives wear."
-	icon_state = "jacket_heph"
-
-/obj/item/clothing/accessory/toggleable/corpjacket/zeng
-	name = "\improper Zeng-Hu suit jacket"
-	desc = "A jacket that Zeng-Hu has their executives wear."
-	icon_state = "jacket_zeng"
 
 /obj/item/clothing/accessory/toggleable/hawaii
 	name = "flower-pattern shirt"

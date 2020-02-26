@@ -86,11 +86,6 @@
 	desc = "It's a field cap in tasteful red color."
 	icon_state = "secsoft"
 
-/obj/item/clothing/head/soft/sec/corp
-	name = "corporate security cap"
-	desc = "It's field cap in corporate colors."
-	icon_state = "corpsoft"
-
 /obj/item/clothing/head/soft/mbill
 	name = "shipping cap"
 	desc = "It's a ballcap bearing the colors of Major Bill's Shipping."
@@ -100,8 +95,3 @@
 	name = "black cap"
 	desc = "It's a peaked cap in a tasteful black color."
 	icon_state = "blacksoft"
-
-/obj/item/clothing/head/soft/sec/corp/guard
-	name = "corporate security cap"
-	desc = "It's field cap in corporate colors."
-	icon_state = "corpsec_soft"

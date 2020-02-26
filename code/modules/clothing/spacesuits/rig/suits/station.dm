@@ -177,7 +177,7 @@
 /obj/item/rig/hazmat
 	name = "\improper AMI control module"
 	suit_type = "hazmat hardsuit"
-	desc = "An Anomalous Material Interaction hardsuit, a cutting-edge NanoTrasen design, protects the wearer against the strangest energies the universe can throw at it."
+	desc = "An Anomalous Material Interaction hardsuit, a cutting-edge design, protects the wearer against the strangest energies the universe can throw at it."
 	icon_state = "science_rig"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,

@@ -263,7 +263,7 @@
 			return I.rank
 
 		var/centcom = get_all_centcom_jobs()
-		if(I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
+		if(I.assignment	in centcom)
 			return "Centcom"
 		if(I.rank in centcom)
 			return "Centcom"

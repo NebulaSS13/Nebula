@@ -109,12 +109,6 @@
 	. = ..()
 	desc = "Across the balloon is printed: \"[desc]\""
 
-/obj/item/toy/balloon/nanotrasen
-	name = "\improper 'motivational' balloon"
-	desc = "Man, I love Profit soooo much. I use only Brand Name products. You have NO idea."
-	icon_state = "ntballoon"
-	item_state = "ntballoon"
-
 /*
  * Fake telebeacon
  */

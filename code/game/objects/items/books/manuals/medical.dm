@@ -50,6 +50,6 @@
 	name = "Guide to Medicines & Drugs"
 	desc = "A thick manual of chemistry, formulae and recipes useful for a Chemist."
 	icon_state = "bookChemistry"
-	author = "Zeng-Hu Pharmaceuticals"
+	author = "Big Pharma"
 	title = "Guide to Medicines & Drugs"
 	url = "List_of_Medical_Chemicals"

@@ -11,13 +11,9 @@
 		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
-
-
 /area/map_template/datacapsule
 	name = "\improper Ejected Data Capsule"
 	icon_state = "blue"
-
-
 
 /obj/effect/landmark/corpse/zombiescience
 	name = "Dead Scientist"
@@ -25,7 +21,7 @@
 
 /decl/hierarchy/outfit/zombie_science
 	name = OUTFIT_JOB_NAME("Dead Scientist")
-	uniform = /obj/item/clothing/under/rank/scientist
+	uniform = /obj/item/clothing/under/color/white
 	suit = /obj/item/clothing/suit/bio_suit/anomaly
 	head = /obj/item/clothing/head/bio_hood/anomaly
 

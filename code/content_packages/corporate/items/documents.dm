@@ -1,3 +1,17 @@
+/obj/item/documents/nanotrasen
+	name = "secret corporate documents"
+	desc = "\"Top Secret\" corporate documents, filled with complex diagrams, research procedures, and details on cloning or breeding rights to non-sapient species the Torch encounters. It seems like they will be auctioning them off to the highest private bidder."
+	description_antag = "A conglomerate of powerful corporations seems to be wanting to create weaponized xenobiological species. Probably as a form of WMD, by your best guess."
+	icon_state = "docs_verified"
+
+/obj/item/book/manual/nt_regs
+	name = "Corporate Regulations"
+	desc = "A set of corporate guidelines for employees of a megacorporation."
+	icon_state = "booknanoregs"
+	author = "Employee Materials"
+	title = "Corporate Regulations"
+	url = "Corporate_Regulations"
+
 /obj/item/book/union_charter
 	name = "\improper Union Charter"
 	title = "Union Charter of Workplace Rights"
@@ -92,3 +106,7 @@
 	</ul>
 	</body>
 	"}
+
+/obj/item/folder/nt
+	desc = "A corporate folder."
+	icon_state = "folder_nt"

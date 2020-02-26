@@ -55,7 +55,7 @@
 		"cyan" =           COLOR_CYAN,
 		"green" =          COLOR_GREEN,
 		"bottle green" =   COLOR_PALE_BTL_GREEN,
-		"nanotrasen red" = COLOR_NT_RED,
+		"capitalist red" = COLOR_NT_RED,
 		"orange" =         COLOR_ORANGE,
 		"pale orange" =    COLOR_PALE_ORANGE,
 		"red" =            COLOR_RED,

@@ -55,7 +55,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/combat
 	name = "combat shotgun"
-	desc = "Built for close quarters combat, the Hephaestus Industries KS-40 is widely regarded as a weapon of choice for repelling boarders."
+	desc = "Built for close quarters combat, the KS-40 is widely regarded as a weapon of choice for repelling boarders."
 	icon_state = "cshotgun"
 	item_state = "cshotgun"
 	wielded_item_state = "cshotgun-wielded"

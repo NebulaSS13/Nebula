@@ -11,13 +11,11 @@
 		/obj/item/clothing/suit/captunic/capjacket,
 		/obj/item/clothing/head/caphat/cap,
 		/obj/item/clothing/under/rank/captain,
-		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/head/helmet,
 		/obj/item/clothing/shoes/brown,
 		/obj/item/radio/headset/heads/captain,
 		/obj/item/clothing/gloves/captain,
 		/obj/item/gun/energy/gun,
-		/obj/item/clothing/suit/armor/captain,
 		/obj/item/melee/telebaton,
 		/obj/item/clothing/under/dress/dress_cap,
 		/obj/item/clothing/head/caphat/formal,
@@ -32,7 +30,6 @@
 /obj/structure/closet/secure_closet/hop/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/head/helmet,
 		/obj/item/radio/headset/heads/hop,
 		/obj/item/storage/box/ids = 2,
@@ -70,11 +67,8 @@
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
 		/obj/item/clothing/head/HoS,
-		/obj/item/clothing/head/helmet/nt,
-		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/suit/storage/vest/nt/hos,
 		/obj/item/clothing/under/rank/head_of_security/jensen,
-		/obj/item/clothing/under/rank/head_of_security/corp,
 		/obj/item/clothing/suit/armor/hos/jensen,
 		/obj/item/clothing/suit/armor/hos,
 		/obj/item/clothing/head/HoS/dermal,
@@ -89,7 +83,6 @@
 		/obj/item/gun/energy/gun,
 		/obj/item/clothing/accessory/storage/holster/waist,
 		/obj/item/melee/telebaton,
-		/obj/item/clothing/head/beret/sec/corporate/hos,
 		/obj/item/holowarrant
 	)
 
@@ -102,11 +95,8 @@
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/sec, 50),
-		/obj/item/clothing/head/helmet/nt,
-		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/suit/storage/vest/nt/warden,
 		/obj/item/clothing/under/rank/warden,
-		/obj/item/clothing/under/rank/warden/corp,
 		/obj/item/clothing/suit/armor/vest/warden,
 		/obj/item/clothing/head/warden,
 		/obj/item/radio/headset/headset_sec,
@@ -119,7 +109,6 @@
 		/obj/item/melee/baton/loaded,
 		/obj/item/gun/energy/gun,
 		/obj/item/storage/box/holobadge,
-		/obj/item/clothing/head/beret/sec/corporate/warden,
 		/obj/item/holowarrant
 	)
 
@@ -132,7 +121,6 @@
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/sec, 50),
-		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/head/helmet,
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/storage/belt/holster/security,
@@ -144,8 +132,6 @@
 		/obj/item/taperoll/police,
 		/obj/item/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/clothing/head/soft/sec/corp,
-		/obj/item/clothing/under/rank/security/corp,
 		/obj/item/gun/energy/taser,
 		/obj/item/holowarrant,
 	)

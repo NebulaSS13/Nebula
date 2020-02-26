@@ -6,7 +6,7 @@
 	holding_type = null //We must get the holding item externally
 	//Limited to robolimbs
 	augment_flags = AUGMENTATION_MECHANIC
-	desc = "A DIY modular assembly, courtesy of Xion Industrial. Circuitry not included"
+	desc = "A DIY modular assembly. Circuitry not included"
 
 
 /obj/item/organ/internal/augment/active/simple/circuit/attackby(obj/item/W, mob/user)

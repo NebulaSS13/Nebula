@@ -21,12 +21,6 @@
 	new /obj/item/clothing/head/soft/sec(src)
 	new /obj/item/clothing/head/soft/sec(src)
 	new /obj/item/clothing/head/soft/sec(src)
-	new /obj/item/clothing/head/beret/sec(src)
-	new /obj/item/clothing/head/beret/sec(src)
-	new /obj/item/clothing/head/beret/sec(src)
-	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
-	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
-	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
 
 /obj/structure/closet/wardrobe/pink
 	name = "pink wardrobe"
@@ -151,9 +145,6 @@
 	new /obj/item/clothing/head/hardhat/red(src)
 	new /obj/item/clothing/head/hardhat/red(src)
 	new /obj/item/clothing/head/hardhat/red(src)
-	new /obj/item/clothing/head/beret/engineering(src)
-	new /obj/item/clothing/head/beret/engineering(src)
-	new /obj/item/clothing/head/beret/engineering(src)
 
 /obj/structure/closet/wardrobe/engineering_yellow
 	name = "engineering wardrobe"
@@ -170,9 +161,6 @@
 	new /obj/item/clothing/head/hardhat(src)
 	new /obj/item/clothing/head/hardhat(src)
 	new /obj/item/clothing/head/hardhat(src)
-	new /obj/item/clothing/head/beret/engineering(src)
-	new /obj/item/clothing/head/beret/engineering(src)
-	new /obj/item/clothing/head/beret/engineering(src)
 
 /obj/structure/closet/wardrobe/white
 	name = "white wardrobe"
@@ -208,9 +196,9 @@
 
 /obj/structure/closet/wardrobe/science_white/Initialize()
 	. = ..()
-	new /obj/item/clothing/under/rank/scientist(src)
-	new /obj/item/clothing/under/rank/scientist(src)
-	new /obj/item/clothing/under/rank/scientist(src)
+	new /obj/item/clothing/under/color/white(src)
+	new /obj/item/clothing/under/color/white(src)
+	new /obj/item/clothing/under/color/white(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
