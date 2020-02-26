@@ -52,7 +52,7 @@
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()
 	for(var/token in tokens)
-		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
+		var/decl/cultural_info/culture = SSlore.get_culture(pref.cultural_info[token])
 		var/title = "<b>[tokens[token]]<a href='?src=\ref[src];set_[token]=1'><small>?</small></a>:</b><a href='?src=\ref[src];set_[token]=2'>[pref.cultural_info[token]]</a>"
 		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
 		. += culture.get_description(title, append_text, verbose = !hidden[token])
@@ -71,7 +71,7 @@
 
 			var/list/valid_values
 			if(check_href == 1)
-				valid_values = SSculture.get_all_entries_tagged_with(token)
+				valid_values = SSlore.get_all_entries_tagged_with(token)
 			else
 				GET_ALLOWED_VALUES(valid_values, token)
 
@@ -81,12 +81,12 @@
 
 			// Check if anything changed between now and then.
 			if(check_href == 1)
-				valid_values = SSculture.get_all_entries_tagged_with(token)
+				valid_values = SSlore.get_all_entries_tagged_with(token)
 			else
 				GET_ALLOWED_VALUES(valid_values, token)
 
 			if(valid_values[choice])
-				var/decl/cultural_info/culture = SSculture.get_culture(choice)
+				var/decl/cultural_info/culture = SSlore.get_culture(choice)
 				if(check_href == 1)
 					show_browser(user, culture.get_description(), "window=[token];size=700x400")
 				else

@@ -97,7 +97,7 @@ client
 	var/list/cast = list()
 	var/list/chunk = list()
 	var/chunksize = 0
-	titles += "<center><h1>EPISODE [rand(1,1000)]<br>[SSculture.get_end_credits_title()]<h1></h1></h1></center>"
+	titles += "<center><h1>EPISODE [rand(1,1000)]<br>[SSlore.get_end_credits_title()]<h1></h1></h1></center>"
 
 	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_|GLOB.dead_mob_list_)
 		if(findtext(H.real_name,"(mannequin)"))
@@ -121,9 +121,9 @@ client
 		if(H.ckey && H.client)			
 			if(H.client.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW)
 				showckey = 1
-		var/decl/cultural_info/actor_culture = SSculture.get_culture(H.get_cultural_value(TAG_CULTURE))
+		var/decl/cultural_info/actor_culture = SSlore.get_culture(H.get_cultural_value(TAG_CULTURE))
 		if(!actor_culture || !(H.species.spawn_flags & SPECIES_CAN_JOIN) || prob(10))
-			actor_culture = SSculture.get_culture(CULTURE_HUMAN)
+			actor_culture = SSlore.get_culture(CULTURE_HUMAN)
 		if(!showckey)
 			if(prob(90))
 				chunk += "[actor_culture.get_random_name(H.gender)]\t \t \t \t[uppertext(used_name)][job]"
@@ -164,7 +164,7 @@ client
 		if(!C.holder)
 			continue
 		if(C.holder.rights & (R_DEBUG|R_ADMIN))
-			var/decl/cultural_info/cult = SSculture.cultural_info_by_name[pick(SSculture.cultural_info_by_name)]
+			var/decl/cultural_info/cult = SSlore.cultural_info_by_name[pick(SSlore.cultural_info_by_name)]
 			staff += "[uppertext(pick(staffjobs))] - [cult.get_random_name(pick(MALE, FEMALE))] a.k.a. '[C.key]'"
 		else if(C.holder.rights & R_MOD)
 			goodboys += "[C.key]"

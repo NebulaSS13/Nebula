@@ -1,6 +1,6 @@
-SUBSYSTEM_DEF(culture)
-	name = "Culture"
-	init_order = SS_INIT_CULTURE
+SUBSYSTEM_DEF(lore)
+	name = "Lore"
+	init_order = SS_INIT_LORE
 	flags = SS_NO_FIRE
 
 	var/list/cultural_info_by_name =      list()
@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(culture)
 	var/list/credits_topics =          list("SACRED GEOMETRY","ABSTRACT MATHEMATICS","LOVE","DRUGS","CRIME","PRODUCTIVITY","LAUNDRY")
 	var/list/credits_nouns =           list("DIGNITY", "SANITY")
 
-/datum/controller/subsystem/culture/Initialize()
+/datum/controller/subsystem/lore/Initialize()
 
 	for(var/ftype in subtypesof(/decl/cultural_info))
 		var/decl/cultural_info/culture = ftype
@@ -77,16 +77,16 @@ SUBSYSTEM_DEF(culture)
 
 	. = ..()
 
-/datum/controller/subsystem/culture/proc/get_all_entries_tagged_with(var/token)
+/datum/controller/subsystem/lore/proc/get_all_entries_tagged_with(var/token)
 	return tagged_info[token]
 
-/datum/controller/subsystem/culture/proc/refresh_credits_from_departments()
+/datum/controller/subsystem/lore/proc/refresh_credits_from_departments()
 	for(var/thing in SSdepartments.departments)
 		var/datum/department/dept = SSdepartments.departments[thing]
 		if(dept.title)
 			credits_nouns |= uppertext(dept.title)
 
-/datum/controller/subsystem/culture/proc/get_end_credits_title(var/force)
+/datum/controller/subsystem/lore/proc/get_end_credits_title(var/force)
 	if(!GLOB.end_credits_title || force)
 		var/list/possible_titles = list()
 		refresh_credits_from_departments()
@@ -102,5 +102,5 @@ SUBSYSTEM_DEF(culture)
 		GLOB.end_credits_title = pick(possible_titles)
 	. = GLOB.end_credits_title
 
-/datum/controller/subsystem/culture/proc/get_culture(var/culture_ident)
+/datum/controller/subsystem/lore/proc/get_culture(var/culture_ident)
 	return cultural_info_by_name[culture_ident] ? cultural_info_by_name[culture_ident] : cultural_info_by_path[culture_ident]

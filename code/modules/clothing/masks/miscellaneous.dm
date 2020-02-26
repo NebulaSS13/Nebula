@@ -233,7 +233,7 @@
 	visible_name = species
 	var/datum/species/S = all_species[species]
 	if(istype(S))
-		var/decl/cultural_info/C = SSculture.get_culture(S.default_cultural_info[TAG_CULTURE])
+		var/decl/cultural_info/C = SSlore.get_culture(S.default_cultural_info[TAG_CULTURE])
 		if(istype(C))
 			visible_name = C.get_random_name(pick(MALE,FEMALE))
 
