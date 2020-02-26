@@ -2,6 +2,14 @@
 /var/datum/announcement/priority/command/command_announcement = new(do_log = 0, do_newscast = 1)
 /var/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/AI/commandreport.ogg',)
 
+/datum/news_announcement
+	var/round_time // time of the round at which this should be announced, in seconds
+	var/message // body of the message
+	var/author = "NanoTrasen Editor"
+	var/channel_name = "Nyx Daily"
+	var/can_be_redacted = 0
+	var/message_type = "Story"
+
 /datum/announcement
 	var/title = "Attention"
 	var/announcer = ""
@@ -29,7 +37,7 @@
 	title = "[command_name()] Update"
 	announcement_type = "[command_name()] Update"
 
-/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = GLOB.using_map.contact_levels)
+/datum/announcement/proc/Announce(var/message, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = GLOB.using_map.contact_levels)
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
@@ -53,23 +61,23 @@
 		log_say("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]")
 		message_admins("[key_name_admin(usr)] has made \a [announcement_type].", 1)
 
-datum/announcement/proc/FormMessage(message as text, message_title as text)
+/datum/announcement/proc/FormMessage(message, message_title)
 	. = "<h2 class='alert'>[message_title]</h2>"
 	. += "<br><span class='alert'>[message]</span>"
 	if (announcer)
 		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
 
-datum/announcement/minor/FormMessage(message as text, message_title as text)
+/datum/announcement/minor/FormMessage(message, message_title)
 	. = "<b>[message]</b>"
 
-datum/announcement/priority/FormMessage(message as text, message_title as text)
+/datum/announcement/priority/FormMessage(message, message_title)
 	. = "<h1 class='alert'>[message_title]</h1>"
 	. += "<br><span class='alert'>[message]</span>"
 	if(announcer)
 		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
 	. += "<br>"
 
-datum/announcement/priority/command/FormMessage(message as text, message_title as text)
+/datum/announcement/priority/command/FormMessage(message, message_title)
 	. = "<h1 class='alert'>[command_name()] Update</h1>"
 	if (message_title)
 		. += "<br><h2 class='alert'>[message_title]</h2>"
@@ -77,11 +85,11 @@ datum/announcement/priority/command/FormMessage(message as text, message_title a
 	. += "<br><span class='alert'>[message]</span><br>"
 	. += "<br>"
 
-datum/announcement/priority/security/FormMessage(message as text, message_title as text)
+/datum/announcement/priority/security/FormMessage(message, message_title)
 	. = "<font size=4 color='red'>[message_title]</font>"
 	. += "<br><font color='red'>[message]</font>"
 
-datum/announcement/proc/NewsCast(message as text, message_title as text)
+/datum/announcement/proc/NewsCast(message, message_title)
 	if(!newscast)
 		return
 
@@ -92,6 +100,25 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	news.message_type = announcement_type
 	news.can_be_redacted = 0
 	announce_newscaster_news(news)
+
+/datum/announcement/proc/announce_newscaster_news(datum/news_announcement/news)
+	var/datum/feed_channel/sendto
+	for(var/datum/feed_channel/FC in news_network.network_channels)
+		if(FC.channel_name == news.channel_name)
+			sendto = FC
+			break
+
+	if(!sendto)
+		sendto = new /datum/feed_channel
+		sendto.channel_name = news.channel_name
+		sendto.author = news.author
+		sendto.locked = 1
+		sendto.is_admin_channel = 1
+		news_network.network_channels += sendto
+
+	var/author = news.author ? news.author : sendto.author
+	news_network.SubmitArticle(news.message, author, news.channel_name, null, !news.can_be_redacted, news.message_type)
+
 
 /proc/GetNameAndAssignmentFromId(var/obj/item/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)
