@@ -16,7 +16,7 @@
 		/mob/living/simple_animal/mouse,
 		/mob/living/silicon/robot/drone
 		)
-	var/airtight = 0
+	var/airtight = FALSE
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
 	if(istype(A) && A.checkpass(PASS_FLAG_GLASS))
@@ -63,21 +63,23 @@
 			if (prob(5))
 				qdel(src)
 
+/obj/structure/plasticflaps/Initialize()
+	. = ..()
+	if(airtight)
+		become_airtight()
+
 /obj/structure/plasticflaps/Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
-	clear_airtight()
+	if(airtight)
+		clear_airtight()
 	. = ..()
 
 /obj/structure/plasticflaps/proc/become_airtight()
-	var/turf/T = get_turf(loc)
-	if(T)
-		T.blocks_air = 1
+	atmos_canpass = CANPASS_NEVER
+	update_nearby_tiles()
 
 /obj/structure/plasticflaps/proc/clear_airtight()
-	var/turf/T = get_turf(loc)
-	if(T)
-		if(istype(T, /turf/simulated/floor))
-			T.blocks_air = 0
-
+	atmos_canpass = CANPASS_ALWAYS
+	update_nearby_tiles()
 
 /obj/structure/plasticflaps/airtight // airtight defaults to on 
-	airtight = 1
+	airtight = TRUE
