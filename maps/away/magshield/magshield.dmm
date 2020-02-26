@@ -2938,7 +2938,7 @@
 /area/magshield/west)
 "hC" = (
 /obj/structure/table/woodentable,
-/obj/item/toy/torchmodel,
+/obj/item/toy/shipmodel,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "hD" = (

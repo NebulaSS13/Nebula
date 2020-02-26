@@ -11,7 +11,7 @@
 		/obj/item/flashlight/lamp/lava,
 		/obj/item/storage/fancy/crayons,
 		/obj/item/instrument/guitar,
-		/obj/item/toy/torchmodel,
+		/obj/item/toy/shipmodel,
 		/obj/item/clothing/accessory/locket,
 		/obj/item/binoculars,
 		/obj/item/camera,

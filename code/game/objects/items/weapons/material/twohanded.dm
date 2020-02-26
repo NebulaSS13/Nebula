@@ -141,8 +141,8 @@
 	melee_accuracy_bonus = -10
 
 //Predefined materials go here.
-/obj/item/material/twohanded/baseballbat/metal/Initialize(mapload)
-	..(mapload, MAT_ALUMINIUM)
+/obj/item/material/twohanded/baseballbat/aluminium/Initialize(mapload)
+	. = ..(mapload, MAT_ALUMINIUM)
 
 /obj/item/material/twohanded/baseballbat/uranium/Initialize(mapload)
 	. = ..(mapload, MAT_URANIUM)

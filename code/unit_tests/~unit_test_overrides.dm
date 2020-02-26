@@ -79,3 +79,8 @@ GLOBAL_LIST_EMPTY(unit_test_obj_random_weights_by_type)
 // Make is_date datums always return 6th of June during testing for ease of testing
 /datum/is_date/CurrentMonthAndDay()
 	return list(6, 6)
+
+/datum/controller/subsystem/mapping/includeTemplate(var/datum/map_template/map_template, var/banned_maps)
+	var/datum/map_template/MT = new map_template()
+	map_templates[MT.name] = MT
+	. = MT

@@ -199,11 +199,20 @@
 	return "[..()] ([isnum(z) ? "[x],[y],[z]" : "0,0,0"])"
 
 /turf/get_log_info_line()
-	return "[..()] ([x],[y],[z]) ([loc ? loc.type : "NULL"])"
+	var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
+	if(istype(O))
+		return "[..()] ([x],[y],[z] - [O.name]) ([loc ? loc.type : "NULL"])"
+	else
+		return "[..()] ([x],[y],[z]) ([loc ? loc.type : "NULL"])"
 
 /atom/movable/get_log_info_line()
 	var/turf/t = get_turf(src)
-	return "[..()] ([t ? t : "NULL"]) ([t ? "[t.x],[t.y],[t.z]" : "0,0,0"]) ([t ? t.type : "NULL"])"
+	if(t)
+		var/obj/effect/overmap/visitable/O = map_sectors["[t.z]"]
+		if(istype(O))
+			return "[..()] ([t]) ([t.x],[t.y],[t.z] - [O.name]) ([t.type])"
+		return "[..()] ([t]) ([t.x],[t.y],[t.z]) ([t.type])"
+	return "[..()] ([loc?.name || "NULL" ]) (NULL) ([loc?.type || "NULL"])"
 
 /mob/get_log_info_line()
 	return ckey ? "[..()] ([ckey])" : ..()

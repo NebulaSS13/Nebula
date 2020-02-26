@@ -1,5 +1,6 @@
 /datum/map_template/ruin/antag_spawn/heist
 	name = "Heist Base"
+	id = MODE_RAIDER + "_spawn"
 	suffixes = list("heist/heist_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/skipjack)
 	apc_test_exempt_areas = list(

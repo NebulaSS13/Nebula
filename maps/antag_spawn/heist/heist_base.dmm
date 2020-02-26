@@ -395,10 +395,6 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror/raider{
-	pixel_x = -28;
-	pixel_y = 0
-	},
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor";
 	dir = 2
@@ -657,24 +653,14 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bA" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/carapace,
-/obj/item/clothing/head/helmet/space/vox/carapace,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
 /obj/item/gun/launcher/alien/spikethrower,
-/obj/item/clothing/under/vox/vox_casual,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bB" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/carapace,
-/obj/item/clothing/head/helmet/space/vox/carapace,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
 /obj/item/gun/launcher/alien/spikethrower,
-/obj/item/clothing/under/vox/vox_robes,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -857,12 +843,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bU" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/medic,
-/obj/item/clothing/head/helmet/space/vox/medic,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/clothing/under/vox/vox_robes,
-/obj/item/gun/projectile/dartgun/vox/raider,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -882,25 +862,12 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bX" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/pressure,
-/obj/item/clothing/head/helmet/space/vox/pressure,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/gun/projectile/dartgun/vox/raider,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bY" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/stealth,
-/obj/item/clothing/head/helmet/space/vox/stealth,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/clothing/glasses/thermal/plain/monocle,
-/obj/item/clothing/under/vox/vox_robes,
-/obj/item/gun/projectile/dartgun/vox/medical,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1043,12 +1010,6 @@
 /obj/item/tank/nitrogen,
 /obj/item/tank/nitrogen,
 /obj/item/tank/nitrogen,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/mask/gas/swat/vox,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},

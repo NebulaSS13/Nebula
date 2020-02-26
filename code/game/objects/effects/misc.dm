@@ -106,17 +106,3 @@
 
 /obj/effect/paint/brown
 	color = COLOR_DARK_BROWN
-
-/obj/effect/gas_setup	//cryogenic
-	icon = 'icons/mob/screen1.dmi'
-	icon_state = "x3"
-	var/tempurature = 70
-	var/pressure = 20* ONE_ATMOSPHERE
-
-/obj/effect/gas_setup/Initialize()
-	var/obj/machinery/atmospherics/pipe/P = locate() in loc
-	if(P && !P.air_temporary)
-		P.air_temporary = new(P.volume, tempurature)
-		var/datum/gas_mixture/G = P.air_temporary
-		G.adjust_gas(MAT_OXYGEN,((pressure*P.volume)/(R_IDEAL_GAS_EQUATION*temperature)))
-	return INITIALIZE_HINT_QDEL

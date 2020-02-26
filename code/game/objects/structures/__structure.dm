@@ -23,13 +23,6 @@
 	if(!CanFluidPass())
 		fluid_update()
 
-/obj/structure/Destroy()
-	reset_mobs_offset()
-	var/turf/T = get_turf(src)
-	. = ..()
-	if(T)
-		T.fluid_update()
-
 /obj/structure/examine(mob/user, var/distance)
 	. = ..()
 	if(distance <= 3)
