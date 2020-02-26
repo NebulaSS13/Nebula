@@ -192,6 +192,9 @@ GUEST_BAN
 ## forum address
 # FORUMURL http://example.com
 
+## discord server permanent invite address
+# DISCORDURL https://discord.gg/example
+
 ## Wiki address
 # WIKIURL http://example.com
 
