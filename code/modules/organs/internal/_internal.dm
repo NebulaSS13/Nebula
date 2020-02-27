@@ -159,6 +159,12 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 			. = "decaying [.]"
 		else
 			. = "necrotic [.]"
+	if(BP_IS_CRYSTAL(src))
+		. = "crystalline "
+	else if(BP_IS_ASSISTED(src))
+		. = "assisted "
+	else if(BP_IS_PROSTHETIC(src))
+		. = "mechanical "
 	. = "[.][name]"
 
 /obj/item/organ/internal/Process()
