@@ -85,7 +85,7 @@
 	var/obj/item/aicard/card = ai_card
 
 	// Downloading from/loading to a terminal.
-	if(istype(input_device,/mob/living/silicon/ai) || istype(input_device,/obj/structure/AIcore/deactivated))
+	if(istype(input_device,/mob/living/silicon/ai) || istype(input_device,/obj/structure/aicore/deactivated))
 
 		// If we're stealing an AI, make sure we have a card for it.
 		if(!card)

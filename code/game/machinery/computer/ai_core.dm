@@ -1,6 +1,6 @@
 var/global/list/empty_playable_ai_cores = list()
 
-/obj/structure/AIcore
+/obj/structure/aicore
 	density = 1
 	anchored = 0
 	name = "\improper AI core"
@@ -17,18 +17,19 @@ var/global/list/empty_playable_ai_cores = list()
 	var/circuit_secured = FALSE
 	var/glass_installed = FALSE
 
-/obj/structure/AIcore/Initialize()
+/obj/structure/aicore/Initialize()
 	if(!laws)
 		laws = new GLOB.using_map.default_law_type
+	. = ..()
 
-/obj/structure/AIcore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
+/obj/structure/aicore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	if(!authorized)
 		to_chat(user, SPAN_WARNING("You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!"))
 		authorized = 1
 		return 1
 	. = ..()
 
-/obj/structure/AIcore/handle_default_screwdriver_attackby(var/mob/user, var/obj/item/screwdriver)
+/obj/structure/aicore/handle_default_screwdriver_attackby(var/mob/user, var/obj/item/screwdriver)
 	if(anchored && wired && circuit)
 		if(!glass_installed)
 			if(brain)
@@ -46,7 +47,7 @@ var/global/list/empty_playable_ai_cores = list()
 			to_chat(user, SPAN_NOTICE("You connect the monitor."))
 			if(!brain)
 				var/open_for_latejoin = alert(user, "Would you like this core to be open for latejoining AIs?", "Latejoin", "Yes", "Yes", "No") == "Yes"
-				var/obj/structure/AIcore/deactivated/D = new(loc)
+				var/obj/structure/aicore/deactivated/D = new(loc)
 				if(open_for_latejoin)
 					empty_playable_ai_cores += D
 			else
@@ -59,7 +60,7 @@ var/global/list/empty_playable_ai_cores = list()
 			return TRUE
 	. = ..()
 
-/obj/structure/AIcore/handle_default_crowbar_attackby(var/mob/user, var/obj/item/crowbar)
+/obj/structure/aicore/handle_default_crowbar_attackby(var/mob/user, var/obj/item/crowbar)
 	if(anchored)
 		if(glass_installed)
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
@@ -84,17 +85,17 @@ var/global/list/empty_playable_ai_cores = list()
 			return TRUE
 	. = ..()
 
-/obj/structure/AIcore/handle_default_cable_attackby(var/mob/user, var/obj/item/stack/cable_coil/coil)
+/obj/structure/aicore/handle_default_cable_attackby(var/mob/user, var/obj/item/stack/cable_coil/coil)
 	. = !glass_installed && ..()
 
-/obj/structure/AIcore/handle_default_wirecutter_attackby(var/mob/user, var/obj/item/wirecutters/wirecutters)
+/obj/structure/aicore/handle_default_wirecutter_attackby(var/mob/user, var/obj/item/wirecutters/wirecutters)
 	if(anchored && !glass_installed && wired)
 		if(brain)
 			to_chat(user, SPAN_WARNING("Get that brain out of there first."))
 			return TRUE
 		. = ..()
 
-/obj/structure/AIcore/on_update_icon()
+/obj/structure/aicore/on_update_icon()
 	if(glass_installed)
 		icon_state = "4"
 	else if(brain)
@@ -106,7 +107,7 @@ var/global/list/empty_playable_ai_cores = list()
 	else
 		icon_state = "0"
 
-/obj/structure/AIcore/attackby(obj/item/P, mob/user)
+/obj/structure/aicore/attackby(obj/item/P, mob/user)
 
 	. = ..()
 	if(.)
@@ -194,18 +195,18 @@ var/global/list/empty_playable_ai_cores = list()
 				to_chat(usr, "Law module applied.")
 				return TRUE
 
-/obj/structure/AIcore/deactivated
+/obj/structure/aicore/deactivated
 	name = "inactive AI"
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "ai-empty"
 	anchored = 1
 	tool_interaction_flags =  (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 
-/obj/structure/AIcore/deactivated/Destroy()
+/obj/structure/aicore/deactivated/Destroy()
 	empty_playable_ai_cores -= src
 	. = ..()
 
-/obj/structure/AIcore/deactivated/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/aicard/card, var/mob/user)
+/obj/structure/aicore/deactivated/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/aicard/card, var/mob/user)
 
 	if(!istype(transfer) || locate(/mob/living/silicon/ai) in src)
 		return
@@ -222,7 +223,7 @@ var/global/list/empty_playable_ai_cores = list()
 		card.clear()
 	qdel(src)
 
-/obj/structure/AIcore/deactivated/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/aicore/deactivated/attackby(var/obj/item/W, var/mob/user)
 	if(isWrench(W) || isWelder(W))
 		. = ..()
 	else if(istype(W, /obj/item/aicard))
@@ -239,13 +240,13 @@ var/global/list/empty_playable_ai_cores = list()
 	set category = "Admin"
 
 	var/list/cores = list()
-	for(var/obj/structure/AIcore/deactivated/D in world)
+	for(var/obj/structure/aicore/deactivated/D in world)
 		cores["[D] ([D.loc.loc])"] = D
 
 	var/id = input("Which core?", "Toggle AI Core Latejoin", null) as null|anything in cores
 	if(!id) return
 
-	var/obj/structure/AIcore/deactivated/D = cores[id]
+	var/obj/structure/aicore/deactivated/D = cores[id]
 	if(!D) return
 
 	if(D in empty_playable_ai_cores)

@@ -9,7 +9,7 @@
 
 /datum/stack_recipe/ai_core
 	title = "AI core"
-	result_type = /obj/structure/AIcore
+	result_type = /obj/structure/aicore
 	req_amount = 4
 	time = 50
 	one_per_turf = 1
