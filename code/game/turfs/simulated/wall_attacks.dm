@@ -83,9 +83,7 @@
 		toggle_open(user)
 	return 0
 
-
 /turf/simulated/wall/attack_hand(var/mob/user)
-
 	radiate()
 	add_fingerprint(user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -96,7 +94,12 @@
 		else
 			fail_smash(user)
 			return 1
-
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/obj/item/hand = H.hand ? H.organs_by_name[BP_L_HAND] : H.organs_by_name[BP_R_HAND]
+		if(hand && try_graffiti(H, hand))
+			return
+	. = ..()
 	try_touch(user, rotting)
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
