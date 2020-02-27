@@ -99,6 +99,10 @@ var/list/_client_preferences_by_type
 	else
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))
 
+/datum/client_preference/play_game_music
+	description = "Play in-game music"
+	key = "SOUND_GAMEMUSIC"
+
 /datum/client_preference/play_ambiance
 	description ="Play ambience"
 	key = "SOUND_AMBIENCE"
