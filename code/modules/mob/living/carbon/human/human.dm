@@ -27,7 +27,7 @@
 		else
 			set_species()
 
-	var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
+	var/decl/cultural_info/culture = SSlore.get_culture(cultural_info[TAG_CULTURE])
 	if(culture)
 		real_name = culture.get_random_name(gender, species.name)
 		name = real_name
@@ -1747,7 +1747,7 @@
 
 /mob/living/carbon/human/proc/set_cultural_value(var/token, var/decl/cultural_info/_culture, var/defer_language_update)
 	if(!istype(_culture))
-		_culture = SSculture.get_culture(_culture)
+		_culture = SSlore.get_culture(_culture)
 	if(istype(_culture))
 		cultural_info[token] = _culture
 		if(!defer_language_update)

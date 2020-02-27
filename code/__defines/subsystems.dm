@@ -26,7 +26,7 @@
 #define SS_INIT_MATERIALS        16
 #define SS_INIT_PLANTS           15
 #define SS_INIT_ANTAGS           14
-#define SS_INIT_CULTURE          13
+#define SS_INIT_LORE             13
 #define SS_INIT_MISC             12
 #define SS_INIT_SKYBOX           11
 #define SS_INIT_MAPPING          10
