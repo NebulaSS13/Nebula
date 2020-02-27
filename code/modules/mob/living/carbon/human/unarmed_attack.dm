@@ -102,9 +102,15 @@ var/global/list/sparring_attack_cache = list()
 		C.leave_evidence(user)
 
 /datum/unarmed_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/obj/item/organ/external/affecting = target.get_organ(zone)
-	user.visible_message("<span class='warning'>[user] [pick(attack_verb)] [target] in the [affecting.name]!</span>")
-	playsound(user.loc, attack_sound, 25, 1, -1)
+	var/msg = "\The [user] [pick(attack_verb)] \the [target]"
+	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	if(affecting)
+		msg = "[msg] in the [affecting.name]"
+	if(islist(attack_noun) && length(attack_noun))
+		msg = "[msg] with their [pick(attack_noun)]"
+	if(msg)
+		user.visible_message(SPAN_DANGER("[msg]!"))
+		playsound(user.loc, attack_sound, 25, 1, -1)
 
 /datum/unarmed_attack/proc/handle_eye_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target)
 	var/obj/item/organ/internal/eyes/eyes = target.internal_organs_by_name[BP_EYES]
@@ -153,7 +159,11 @@ var/global/list/sparring_attack_cache = list()
 	attack_name = "punch"
 
 /datum/unarmed_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/obj/item/organ/external/affecting = target.get_organ(zone)
+
+	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	if(!affecting)
+		return ..()
+
 	var/organ = affecting.name
 
 	attack_damage = Clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
@@ -220,11 +230,13 @@ var/global/list/sparring_attack_cache = list()
 	return damage + (shoes ? shoes.force : 0)
 
 /datum/unarmed_attack/kick/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/obj/item/organ/external/affecting = target.get_organ(zone)
+
+	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	if(!affecting)
+		return ..()
+
 	var/organ = affecting.name
-
 	attack_damage = Clamp(attack_damage, 1, 5)
-
 	switch(attack_damage)
 		if(1 to 2)	user.visible_message("<span class='danger'>[user] threw [target] a glancing [pick(attack_noun)] to the [organ]!</span>") //it's not that they're kicking lightly, it's that the kick didn't quite connect
 		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
@@ -259,10 +271,13 @@ var/global/list/sparring_attack_cache = list()
 	return damage + (shoes ? shoes.force : 0)
 
 /datum/unarmed_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/obj/item/organ/external/affecting = target.get_organ(zone)
+
+	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	if(!affecting)
+		return ..()
+	
 	var/organ = affecting.name
 	var/obj/item/clothing/shoes = user.shoes
-
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"
