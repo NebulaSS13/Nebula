@@ -23,28 +23,33 @@
 										"\"[skill_name] For Younglets\"", \
 										"\"[skill_name]: Volume [rand(1,100)]\"", \
 										"\"Understanding [skill_name]: [rand(1,100)]\th Edition\"", \
-										"\"Dealing With Ungrateful Customers Dissatisfied With Your Perfectly Acceptable [skill_name] Services\""))
+										"\"Dealing With Ungrateful Customers Dissatisfied With Your Perfectly Acceptable [skill_name] Services\"", \
+										"\"Really big book of [skill_name]\""))
+#define SKILLBOOK_PROG_NONE 0
+#define SKILLBOOK_PROG_FINISH 6
 
 /*
 Skill books that increase your skills while you activate and hold them
 */
 
 /obj/item/book/skill
-	name = "default textbook" // requires default names for tradershop, cant rely in Initialize for names
+	name = "default textbook" // requires default names for tradershop, cant rely on Initialize for names
 	desc = "A blank textbook. (Notify admin)"
 	author = "The Oracle of Bakersroof"
 	icon_state = "book2"
 	force = 4
-	w_class = ITEM_SIZE_HUGE //Skill books are THICC with knowledge. Just to stop people carrying around a library in a box
+	w_class = ITEM_SIZE_LARGE //Skill books are THICC with knowledge. Up one level from regular books to prevent library-in-a-bag silliness.
 	unique = 1
+	matter = list(MAT_PLASTIC = SHEET_MATERIAL_AMOUNT*1.2, MAT_WOOD = SHEET_MATERIAL_AMOUNT*1.2) //20% more than regular books. They're bigger and more valuable ok?
 
 	var/decl/hierarchy/skill/skill // e.g. SKILL_LITERACY
 	var/skill_req //The level the user needs in the skill to benefit from the book, e.g. SKILL_PROF
 	var/reading = FALSE //Tto check if the book is actively being used
-	var/custom = FALSE //To bypass init stuff, for player made textbooks and weird books
+	var/custom = FALSE //To bypass init stuff, for player made textbooks and weird books. If true must have details manually set
 	var/ez_read = FALSE //Set to TRUE if you can read it without basic literacy skills
 
 	var/skill_name = "missing skill name"
+	var/progress = SKILLBOOK_PROG_FINISH // used to track the progress of making a custom book. defaults as finished so, you know, you can read the damn thing
 
 /obj/item/book/skill/Initialize()
 	. = ..()
@@ -64,7 +69,7 @@ Skill books that increase your skills while you activate and hold them
 			if(4) //expert > prof
 				name = "theoretical [skill_name] textbook"
 				desc = "A copy of [title] by [author]. Significant experience in the subject is required to read this incredibly information dense block of paper. Sadly, does not come in audio form."
-	if(!skill || !skill_req)//That's a bad book, so just grab ANY child to replace it.
+	if((!skill || !skill_req) && !custom)//That's a bad book, so just grab ANY child to replace it. Custom books are fine though they can be bad if they want.
 		if(subtypesof(src.type))
 			var/new_book = pick(subtypesof(src.type))
 			new new_book(src.loc)
@@ -74,6 +79,12 @@ Skill books that increase your skills while you activate and hold them
 	limit = 1 // you can only read one book at a time nerd, therefore you can only get one buff at a time
 
 /obj/item/book/skill/attack_self(mob/user)
+	if(!skill || (custom && progress == SKILLBOOK_PROG_NONE))
+		to_chat(user, SPAN_WARNING("The textbook is blank!"))
+		return
+	if(custom && progress < SKILLBOOK_PROG_FINISH)
+		to_chat(user, SPAN_WARNING("The textbook is unfinished! You can't learn from it in this state!"))
+		return
 	if(!ez_read &&!user.skill_check(SKILL_LITERACY, SKILL_BASIC))
 		to_chat(user, SPAN_WARNING(pick("Haha, you know you can't read. Good joke. Put [title] back.","You open up [title], but there aren't any pictures, so you close it again.","You don't know how to read! What good is this [name] to you?!")))
 		return
@@ -134,8 +145,8 @@ Skill books that increase your skills while you activate and hold them
 //THIS IS WHERE THE BOOKS LIVE//
 ////////////////////////////////
 
-/* 
-ORGANIZATIONAL 
+/*
+ORGANIZATIONAL
 */
 /obj/item/book/skill/organizational
 
@@ -149,7 +160,7 @@ ORGANIZATIONAL
 	author = "Dorothy Mulch"
 	skill_req = SKILL_NONE
 	custom = TRUE
-	w_class = ITEM_SIZE_LARGE // A little bit smaller c:
+	w_class = ITEM_SIZE_NORMAL // A little bit smaller c:
 	ez_read = TRUE
 
 //finance
@@ -174,7 +185,7 @@ ORGANIZATIONAL
 	skill_req = SKILL_EXPERT
 	name = "theoretical finance textbook"
 
-/* 
+/*
 GENERAL
 */
 /obj/item/book/skill/general
@@ -289,7 +300,7 @@ GENERAL
 	skill_req = SKILL_EXPERT
 	name = "theoretical information technology textbook"
 
-/* 
+/*
 SERVICE
 */
 /obj/item/book/skill/service
@@ -338,7 +349,7 @@ SERVICE
 	skill_req = SKILL_EXPERT
 	name = "theoretical cooking textbook"
 
-/* 
+/*
 SECURITY
 */
 /obj/item/book/skill/security
@@ -410,8 +421,8 @@ SECURITY
 	skill_req = SKILL_EXPERT
 	name = "theoretical forensics textbook"
 
-/* 
-ENGINEERING 
+/*
+ENGINEERING
 */
 /obj/item/book/skill/engineering
 	icon_state = "bookEngineering"
@@ -508,10 +519,10 @@ ENGINEERING
 	custom = TRUE
 	author = "Unknown"
 	desc = "Sure, it includes highly detailed information on extremely advanced engine and power generator systems... but why is it written in marker on a tentacle porn magazine?"
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_NORMAL
 
 
-/* 
+/*
 RESEARCH
 */
 /obj/item/book/skill/research
@@ -633,11 +644,210 @@ MEDICAL
 	skill_req = SKILL_EXPERT
 	name = "theoretical anatomy textbook"
 
+
+//////////////////////
+//Custom Skill Books//
+//////////////////////
+
+//custom skill books made by players. Right now it is extremely dodgy and bad and i'm sorry
+/obj/item/book/skill/custom
+	name = "blank textbook"
+	desc = "A somewhat heftier blank book, just ready to filled with knowledge and sold at an unreasonable price."
+	custom = TRUE
+	author = null
+	progress = SKILLBOOK_PROG_NONE
+	icon_state = "tb_white"
+	var/skill_option_string = "Skill" //changes to "continue writing content" when the book is in progress
+	var/true_author //Used to keep track of who is actually writing the book.
+	var/list/failure_messages = list("Your hand slips and you accidentally rip your pen through several pages, ruining your hard work!","Your pen slips, dragging a haphazard line across both open pages! Now you need to do those again!")
+	var/list/progress_messages = list("Still quite a few blank pages left.","Feels like you're near halfway done.","You've made good progress.","Just needs a few finishing touches.","And then finish it. Done!") // Messages are in order of progress.
+	var/list/charge_messages = list("Your mind instantly recoils at the idea of having to write another textbook. No thank you!","You are far too mentally exhausted to write another textbook. Maybe another day.","Your hand aches in response to the very idea of more textbook writing.")
+	var/writing_time = 15 SECONDS // time it takes to write a segment of the book. This happens 6 times total
+
+//these all show up in the book fabricator
+/obj/item/book/skill/custom/circle
+	icon_state = "tb_white_circle"
+/obj/item/book/skill/custom/star
+	icon_state = "tb_white_star"
+/obj/item/book/skill/custom/hourglass
+	icon_state = "tb_white_hourglass"
+/obj/item/book/skill/custom/cracked
+	icon_state = "tb_white_cracked"
+/obj/item/book/skill/custom/gun
+	icon_state = "tb_white_gun"
+/obj/item/book/skill/custom/wrench
+	icon_state = "tb_white_wrench"
+/obj/item/book/skill/custom/glass
+	icon_state = "tb_white_glass"
+
+/obj/item/book/skill/custom/cross
+	icon_state = "tb_white_cross"
+/obj/item/book/skill/custom/text
+	icon_state = "tb_white_text"
+/obj/item/book/skill/custom/download
+	icon_state = "tb_white_download"
+/obj/item/book/skill/custom/uparrow
+	icon_state = "tb_white_uparrow"
+/obj/item/book/skill/custom/percent
+	icon_state = "tb_white_percent"
+/obj/item/book/skill/custom/flask
+	icon_state = "tb_white_flask"
+/obj/item/book/skill/custom/detective
+	icon_state = "tb_white_detective"
+/obj/item/book/skill/custom/device
+	icon_state = "tb_white_device"
+/obj/item/book/skill/custom/smile
+	icon_state = "tb_white_smile"
+/obj/item/book/skill/custom/exclamation
+	icon_state = "tb_white_exclamation"
+/obj/item/book/skill/custom/question
+	icon_state = "tb_white_question"
+
+/obj/item/book/skill/custom/attackby(obj/item/pen, mob/user)
+	if(istype(pen, /obj/item/pen))
+
+		if(!user.skill_check(SKILL_LITERACY, SKILL_BASIC))
+			to_chat(user, SPAN_WARNING("You can't even read, yet you want to write a whole educational textbook?"))
+			return
+		if(!user.skill_check(SKILL_LITERACY, SKILL_PROF))
+			to_chat(user, SPAN_WARNING("You have no clue as to how to write an entire textbook in a way that is actually useful. Maybe a regular book would be better?"))
+			return
+		var/state_check = skill_option_string // the state skill_option_string is in just before opening the input
+		var/choice = input(user, "What would you like to change?","Textbook editing") as null|anything in list("Title", "Author", skill_option_string)
+		if(!can_write(pen,user))
+			return
+
+		switch(choice)
+			if("Title")
+				edit_title(pen, user)
+
+			if("Skill")
+				if(state_check != "Skill") // make sure someone hasn't already started the book while we were staring at menus woops
+					to_chat(user, SPAN_WARNING("The skill has already been selected and the writing started."))
+					return
+				edit_skill(pen, user)
+
+			if("Continue writing content")
+				if(state_check != "Continue writing content")
+					return
+				continue_skill(pen, user)
+
+			if("Author")
+				edit_author(pen, user)
+
+			else
+				return
+
+		if(skill && title && author) // we have everything we need so lets set a good description
+			desc = "A handwritten textbook titled [title], by [author]. Looks like it teaches [skill_name]."
+		return
+	..()
+
+/obj/item/book/skill/custom/proc/can_write(var/obj/item/pen, var/mob/user)
+	if(user.get_active_hand() == pen && CanPhysicallyInteractWith(user,src) && !QDELETED(src) && !QDELETED(pen))
+		return TRUE
+	else
+		to_chat(user,SPAN_DANGER("How can you expect to write anything when you can't physically put pen to paper?"))
+		return FALSE
+
+/obj/item/book/skill/custom/proc/edit_title(var/obj/item/pen, var/mob/user)
+	var/newtitle = reject_bad_text(sanitizeSafe(input(user, "Write a new title:")))
+	if(!can_write(pen,user))
+		return
+	if(!newtitle)
+		to_chat(user, "The title is invalid.")
+		return
+	else
+		newtitle = user.handle_writing_literacy(user, newtitle)
+		if(newtitle)
+			title = newtitle
+			SetName(title)
+
+/obj/item/book/skill/custom/proc/edit_author(var/obj/item/pen, var/mob/user)
+	var/newauthor = sanitize(input(user, "Write the author's name:"))
+	if(!can_write(pen,user))
+		return
+	if(!newauthor)
+		to_chat(user, SPAN_WARNING("The author name is invalid."))
+		return
+	else
+		newauthor = user.handle_writing_literacy(user, newauthor)
+		if(newauthor)
+			author = newauthor
+
+/obj/item/book/skill/custom/proc/edit_skill(var/obj/item/pen, var/mob/user)
+	if(user.skillset.literacy_charges <= 0)
+		to_chat(user, SPAN_WARNING(pick(charge_messages)))
+		return
+
+	//Choosing the skill
+	var/list/skill_choices = list()
+	for(var/decl/hierarchy/skill/S in GLOB.skills)
+		if(user.skill_check(S.type, SKILL_BASIC))
+			LAZYADD(skill_choices, S)
+	var/decl/hierarchy/skill/skill_choice = input(user, "What subject does your textbook teach?", "Textbook skill selection") as null|anything in skill_choices
+	if(!can_write(pen,user) || progress == SKILLBOOK_PROG_FINISH)
+		return
+	if(!skill_choice)
+		to_chat(user, SPAN_WARNING("Textbook skill selection cancelled."))
+		return
+	var/newskill = skill_choice.type
+
+	//Choosing the level
+	var/list/skill_levels = skill_choice.levels.Copy()
+	for(var/SL in skill_levels)
+		if(!user.skill_check(newskill, skill_levels.Find(SL)))
+			LAZYREMOVE(skill_levels, SL)
+		else
+			skill_levels[SL] = skill_levels.Find(SL)
+	LAZYREMOVE(skill_levels,skill_levels[1])
+	var/newskill_level = input(user, "What level of education does it provide?","Textbook skill level") as null|anything in skill_levels
+	if(!can_write(pen,user) || progress == SKILLBOOK_PROG_FINISH)
+		return
+	if(!newskill_level)
+		to_chat(user, SPAN_WARNING("Textbook skill level selection cancelled."))
+		return
+	var/usable_level = skill_levels[newskill_level]
+	if(newskill && usable_level)
+		if(!do_after(user, writing_time, src))
+			to_chat(user, SPAN_DANGER(pick(failure_messages)))
+			return
+		//everything worked out so now we can put the learnings in the book
+		to_chat(user, SPAN_NOTICE("You start writing your book, getting a few pages in."))
+		skill = newskill
+		skill_name = skill_choice.name
+		skill_req = (usable_level - 1)
+		desc = "A handwritten textbook on [skill_choice]! Wow!"
+		progress += 1
+		skill_option_string = "Continue writing content"
+		true_author = user.name
+
+/obj/item/book/skill/custom/proc/continue_skill(var/obj/item/pen, var/mob/user)
+	if(user.skillset.literacy_charges <= 0)
+		to_chat(user, SPAN_WARNING(pick(charge_messages)))
+		return
+	if(progress >= SKILLBOOK_PROG_FINISH) // shouldn't happen but here just in case
+		to_chat(user, SPAN_WARNING("This book is already finished! There's no need to add anything else!"))
+		return
+	if(true_author != user.name)
+		to_chat(user, SPAN_WARNING("This isn't your work and you're not really sure how to continue it."))
+		return
+	else
+		if(!do_after(user, writing_time, src))
+			to_chat(user, SPAN_DANGER(pick(failure_messages)))
+			return
+		to_chat(user, SPAN_NOTICE("You continue writing your book. [progress_messages[progress]]"))
+		progress += 1
+		if(progress == SKILLBOOK_PROG_FINISH) // book is finished! yay!
+			user.skillset.literacy_charges -= 1
+			skill_option_string = "Cancel"
+
+
 //////////////////////
 // SHELF SHELF SHELF//
 //////////////////////
 
-/obj/structure/bookcase/skill_books/
+/obj/structure/bookcase/skill_books
 	name = "textbook bookcase"
 	// Contains a list of parent types but doesn't actually DO anything with them. Use a child of this book case
 	var/list/catalogue = list(/obj/item/book/skill/organizational/finance,
@@ -672,7 +882,7 @@ MEDICAL
 			new real_book(src)
 
 //Bookshelf with some random textbooks
-/obj/structure/bookcase/skill_books/random/
+/obj/structure/bookcase/skill_books/random
 
 /obj/structure/bookcase/skill_books/random/Initialize()
 	. = ..()
@@ -682,3 +892,5 @@ MEDICAL
 				new real_book(src)
 
 #undef RANDOM_BOOK_TITLE
+#undef SKILLBOOK_PROG_NONE
+#undef SKILLBOOK_PROG_FINISH

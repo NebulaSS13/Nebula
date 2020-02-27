@@ -16,7 +16,11 @@
 		. = TOPIC_REFRESH
 
 	if(href_list["color_select"])
-		var/choice = input(user, "What color do you want to select?") as null|anything in pipe_colors
+		var/choice
+		if(get_color_list())
+			choice = input(user, "What color do you want to select?") as null|anything in get_color_list()
+		else
+			choice = input(user, "What do you want to select?") as null|color
 		if(!choice)
 			return TOPIC_HANDLED
 		selected_color = choice
