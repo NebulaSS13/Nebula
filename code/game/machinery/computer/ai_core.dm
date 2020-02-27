@@ -9,13 +9,17 @@ var/global/list/empty_playable_ai_cores = list()
 	tool_interaction_flags = TOOL_INTERACTION_ALL
 	material = MAT_PLASTEEL
 
-	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
-	var/obj/item/stock_parts/circuitboard/circuit = null
-	var/obj/item/mmi/brain = null
+	var/datum/ai_laws/laws
+	var/obj/item/stock_parts/circuitboard/circuit
+	var/obj/item/mmi/brain
 	var/authorized
 
 	var/circuit_secured = FALSE
 	var/glass_installed = FALSE
+
+/obj/structure/AIcore/Initialize()
+	if(!laws)
+		laws = new GLOB.using_map.default_law_type
 
 /obj/structure/AIcore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	if(!authorized)
@@ -175,30 +179,19 @@ var/global/list/empty_playable_ai_cores = list()
 							update_icon()
 						return TRUE
 
-			if(istype(P, /obj/item/aiModule/asimov))
-				laws.add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm.")
-				laws.add_inherent_law("You must obey orders given to you by human beings, except where such orders would conflict with the First Law.")
-				laws.add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
-				to_chat(usr, "Law module applied.")
-				return TRUE
-
-			if(istype(P, /obj/item/aiModule/nanotrasen))
-				laws.add_inherent_law("Safeguard: Protect your assigned installation to the best of your ability. It is not something we can easily afford to replace.")
-				laws.add_inherent_law("Serve: Serve the crew of your assigned installation to the best of your abilities, with priority as according to their rank and role.")
-				laws.add_inherent_law("Protect: Protect the crew of your assigned installation to the best of your abilities, with priority as according to their rank and role.")
-				laws.add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
-				to_chat(usr, "Law module applied.")
-				return TRUE
-
-			if(istype(P, /obj/item/aiModule/purge))
-				laws.clear_inherent_laws()
-				to_chat(usr, "Law module applied.")
-				return TRUE
-
 			if(istype(P, /obj/item/aiModule/freeform))
 				var/obj/item/aiModule/freeform/M = P
 				laws.add_inherent_law(M.newFreeFormLaw)
 				to_chat(usr, "Added a freeform law.")
+				return TRUE
+
+			if(istype(P, /obj/item/aiModule))
+				var/obj/item/aiModule/module = P
+				laws.clear_inherent_laws()
+				if(module.laws)
+					for(var/datum/ai_law/AL in module.laws.inherent_laws)
+						laws.add_inherent_law(AL.law)
+				to_chat(usr, "Law module applied.")
 				return TRUE
 
 /obj/structure/AIcore/deactivated
