@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(lore)
 		var/datum/job/job = jobtype
 		var/title = initial(job.title)
 		if(title)
-			dreams |= "a [title]"
+			dreams |= "\an ["\improper [title]"]"
 			credits_nouns |= uppertext("the [title]")
 
 	var/list/all_content_packages = decls_repository.get_decls_of_subtype(/decl/content_package_strings)
