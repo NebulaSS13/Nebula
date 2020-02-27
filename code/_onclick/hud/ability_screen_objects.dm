@@ -24,16 +24,14 @@
 
 /obj/screen/movable/ability_master/Destroy()
 	. = ..()
-	//Get rid of the ability objects.
-	remove_all_abilities()
+	remove_all_abilities() //Get rid of the ability objects.
 	ability_objects.Cut()
-
-	// After that, remove ourselves from the mob seeing us, so we can qdel cleanly.
-	if(my_mob)
+	if(my_mob)             // After that, remove ourselves from the mob seeing us, so we can qdel cleanly.
 		my_mob.ability_master = null
 		if(my_mob.client && my_mob.client.screen)
 			my_mob.client.screen -= src
 		my_mob = null
+
 /obj/screen/movable/ability_master/MouseDrop()
 	if(showing)
 		return

@@ -14,7 +14,7 @@ var/list/floor_decals = list()
 
 // Have to wait for turfs to set up their flooring, so we can better guess at our layers.
 /obj/effect/floor_decal/Initialize()
-	atom_flags |= ATOM_FLAG_INITIALIZED
+	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/floor_decal/LateInitialize(mapload, var/newdir, var/newcolour, var/newappearance)
@@ -47,6 +47,7 @@ var/list/floor_decals = list()
 	name = "reset marker"
 
 /obj/effect/floor_decal/reset/Initialize()
+	..()
 	var/turf/T = get_turf(src)
 	T.remove_decals()
 	T.update_icon()

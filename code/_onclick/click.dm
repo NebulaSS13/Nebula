@@ -34,7 +34,7 @@
 
 /turf/allow_click_through(var/atom/A, var/params, var/mob/user)
 	return TRUE
-	
+
 /*
 	Standard mob ClickOn()
 	Handles exceptions: middle click, modified clicks, exosuit actions
@@ -361,6 +361,7 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 	screen_loc = "CENTER-7,CENTER-7"
 
 /obj/screen/click_catcher/Destroy()
+	SHOULD_CALL_PARENT(FALSE)
 	return QDEL_HINT_LETMELIVE
 
 /proc/create_click_catcher()
