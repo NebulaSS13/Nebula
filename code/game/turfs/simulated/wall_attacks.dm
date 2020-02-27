@@ -200,7 +200,7 @@
 			dismantle_sound = 'sound/items/Crowbar.ogg'
 			cut_delay *= 1.2
 
-		else if(istype(W,/obj/item/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master) || istype(W, /obj/item/gun/energy/plasmacutter))
+		else if(W.is_special_cutting_tool())
 			if(istype(W, /obj/item/gun/energy/plasmacutter))
 				var/obj/item/gun/energy/plasmacutter/cutter = W
 				if(!cutter.slice(user))
@@ -236,9 +236,9 @@
 		switch(construction_stage)
 			if(6)
 
-				if(istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
+				if(W.is_special_cutting_tool(TRUE))
 
-					to_chat(user, "<span class='notice'>You sink \the [W] into the wall and begin trying to rip out the support frame...</span>")
+					to_chat(user, "<span class='notice'>You drive \the [W] into the wall and begin trying to rip out the support frame...</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					. = TRUE
 
@@ -283,7 +283,7 @@
 						cut_cover=1
 					else
 						return
-				else if (istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master))
+				else if (W.is_special_cutting_tool())
 					if(istype(W, /obj/item/gun/energy/plasmacutter))
 						var/obj/item/gun/energy/plasmacutter/cutter = W
 						if(!cutter.slice(user))
@@ -329,7 +329,7 @@
 						cut_cover=1
 					else
 						return
-				else if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W,/obj/item/psychic_power/psiblade/master))
+				else if(W.is_special_cutting_tool())
 					if(istype(W, /obj/item/gun/energy/plasmacutter))
 						var/obj/item/gun/energy/plasmacutter/cutter = W
 						if(!cutter.slice(user))

@@ -1,7 +1,3 @@
-#define SOULSTONE_CRACKED -1
-#define SOULSTONE_EMPTY 0
-#define SOULSTONE_ESSENCE 1
-
 /obj/item/soulstone
 	name = "soul stone shard"
 	icon = 'icons/obj/wizard.dmi'
@@ -22,20 +18,9 @@
 	shade = new /mob/living/simple_animal/shade(src)
 	. = ..(mapload)
 
-/obj/item/soulstone/disrupts_psionics()
-	return (full == SOULSTONE_EMPTY) ? src : FALSE
-
 /obj/item/soulstone/shatter()
 	playsound(loc, "shatter", 70, 1)
-	for(var/i=1 to rand(2,5))
-		new /obj/item/material/shard(get_turf(src), MAT_NULLGLASS)
 	qdel(src)
-
-/obj/item/soulstone/withstand_psi_stress(var/stress, var/atom/source)
-	. = ..(stress, source)
-	if(. > 0)
-		. = max(0, . - rand(2,5))
-		shatter()
 
 /obj/item/soulstone/full
 	full = SOULSTONE_ESSENCE

@@ -954,3 +954,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/Value()
 	return material ? material.value * base_worth : base_worth
+
+/obj/item/proc/is_special_cutting_tool(var/high_power)
+	return FALSE

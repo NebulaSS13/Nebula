@@ -851,3 +851,6 @@ default behaviour is:
 
 /mob/living/CanUseTopicPhysical(mob/user)
 	. = CanUseTopic(user, GLOB.physical_no_access_state)
+
+/mob/living/proc/is_telekinetic()
+	return FALSE

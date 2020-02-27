@@ -475,8 +475,11 @@
 	taste_description = "sharpness"
 	color = "#13bc5e"
 
+/datum/reagent/crystal/proc/do_material_check(var/mob/living/carbon/M)
+	. = MAT_CRYSTAL
+
 /datum/reagent/crystal/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	var/result_mat = (M.psi || (M.mind && GLOB.wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : MAT_CRYSTAL
+	var/result_mat = do_material_check(M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in shuffle(H.organs.Copy()))

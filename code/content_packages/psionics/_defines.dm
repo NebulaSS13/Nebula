@@ -1,3 +1,6 @@
+#define MODE_PARAMOUNT     "paramount"
+#define MODE_FOUNDATION    "foundation agent"
+
 #define PSI_IMPLANT_AUTOMATIC  "Security Level Derived"
 #define PSI_IMPLANT_SHOCK      "Issue Neural Shock"
 #define PSI_IMPLANT_WARN       "Issue Reprimand"
@@ -15,3 +18,8 @@
 #define PSI_RANK_MASTER        3
 #define PSI_RANK_GRANDMASTER   4
 #define PSI_RANK_PARAMOUNT     5
+
+#define PSIONIC "psi"
+
+#define MAT_NULLGLASS  /material/nullglass
+#define COLOR_NULLGLASS        "#ff6088"

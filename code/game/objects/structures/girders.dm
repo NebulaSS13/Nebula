@@ -112,7 +112,7 @@
 	if(!.)
 
 		// Other methods of quickly destroying a girder.
-		if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
+		if(W.is_special_cutting_tool(TRUE))
 			if(istype(W, /obj/item/gun/energy/plasmacutter))
 				var/obj/item/gun/energy/plasmacutter/cutter = W
 				if(!cutter.slice(user))

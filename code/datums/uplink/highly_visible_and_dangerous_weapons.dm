@@ -108,14 +108,6 @@
 	path = /obj/item/storage/secure/briefcase/heavysniper
 	antag_roles = list(MODE_MERCENARY)
 
-/*
-/datum/uplink_item/item/visible_weapons/psi_amp
-	name = "Cerebroenergetic Psionic Amplifier"
-	item_cost = 50
-	path = /obj/item/clothing/head/helmet/space/psi_amp/lesser
-	desc = "A powerful, illegal psi-amp. Boosts latent psi-faculties to extremely high levels."
-*/
-
 /datum/uplink_item/item/visible_weapons/machine_pistol
 	name = "Standard Machine Pistol"
 	desc = "A high rate of fire weapon in a smaller form factor, able to sling standard ammunition almost as quick as a submachine gun."

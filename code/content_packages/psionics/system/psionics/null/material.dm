@@ -29,3 +29,6 @@
 
 /obj/item/material/shard/nullglass
 	material = MAT_NULLGLASS
+/datum/stack_recipe/tile/nullglass
+	title = "nullglass floor tile"
+	result_type = /obj/item/stack/tile/floor_nullglass
