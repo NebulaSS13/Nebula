@@ -12,7 +12,12 @@ var/list/floor_decals = list()
 	var/detail_overlay
 	var/detail_color
 
-/obj/effect/floor_decal/Initialize(mapload, var/newdir, var/newcolour, var/newappearance)
+// Have to wait for turfs to set up their flooring, so we can better guess at our layers.
+/obj/effect/floor_decal/Initialize()
+	atom_flags |= ATOM_FLAG_INITIALIZED
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/floor_decal/LateInitialize(mapload, var/newdir, var/newcolour, var/newappearance)
 	supplied_dir = newdir
 	if(newappearance) appearance = newappearance
 	if(newcolour) color = newcolour
@@ -36,8 +41,7 @@ var/list/floor_decals = list()
 		if(!T.decals) T.decals = list()
 		T.decals |= floor_decals[cache_key]
 		T.overlays |= floor_decals[cache_key]
-	atom_flags |= ATOM_FLAG_INITIALIZED
-	return INITIALIZE_HINT_QDEL
+	qdel(src)
 
 /obj/effect/floor_decal/reset
 	name = "reset marker"

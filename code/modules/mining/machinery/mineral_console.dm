@@ -4,6 +4,10 @@
 	icon_state = "console"
 	var/obj/machinery/mineral/connected
 
+// Apparently mapped on walls, so must do this to avoid being hidden behind them.
+/obj/machinery/computer/mining/hide()
+	return
+
 /obj/machinery/computer/mining/interface_interact(var/mob/user)
 	interact(user)
 	return TRUE
