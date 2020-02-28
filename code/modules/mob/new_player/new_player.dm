@@ -329,7 +329,7 @@
 		character = character.AIize(move=0) // AIize the character, but don't move them yet
 
 		// is_available for AI checks that there is an empty core available in this list
-		var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
+		var/obj/structure/aicore/deactivated/C = empty_playable_ai_cores[1]
 		empty_playable_ai_cores -= C
 
 		character.forceMove(C.loc)
