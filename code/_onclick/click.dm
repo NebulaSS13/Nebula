@@ -251,12 +251,6 @@
 /atom/proc/CtrlClick(var/mob/user)
 	return FALSE
 
-/atom/movable/CtrlClick(var/mob/user)
-	if(Adjacent(user))
-		user.start_pulling(src)
-		return TRUE
-	. = ..()
-
 /*
 	Alt click
 	Unused except for AI

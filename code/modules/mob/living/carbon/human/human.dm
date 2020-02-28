@@ -1786,11 +1786,6 @@
 	for(var/obj/item/clothing/ears/C in list(l_ear, r_ear))
 		. = min(., C.volume_multiplier)
 
-/mob/living/carbon/human/handle_pull_damage(mob/living/puller)
-	. = ..()
-	if(.)
-		drip(1)
-
 /mob/living/carbon/human/get_bullet_impact_effect_type(var/def_zone)
 	var/obj/item/organ/external/E = get_organ(def_zone)
 	if(!E || E.is_stump())

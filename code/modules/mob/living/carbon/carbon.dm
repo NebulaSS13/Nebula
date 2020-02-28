@@ -367,7 +367,6 @@
 		return FALSE
 	if(buckled)
 		return FALSE
-	stop_pulling()
 	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(Floor(stun_duration/2))

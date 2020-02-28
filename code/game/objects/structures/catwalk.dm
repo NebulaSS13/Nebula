@@ -75,11 +75,6 @@
 			new /obj/item/stack/material/rods(loc)
 			qdel(src)
 
-/obj/structure/catwalk/attack_hand(mob/user)
-	if(user.pulling)
-		do_pull_click(user, src)
-	..()
-
 /obj/structure/catwalk/attack_robot(var/mob/user)
 	if(Adjacent(user))
 		attack_hand(user)

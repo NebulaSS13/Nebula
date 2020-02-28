@@ -91,25 +91,6 @@
 		return
 	user.unequip_item(get_turf(src))
 
-// attack with hand, move pulled object onto conveyor
-/obj/machinery/conveyor/physical_attack_hand(mob/user)
-	if(!user.pulling)
-		return
-	if(user.pulling.anchored)
-		return
-	if((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
-		return
-	if(ismob(user.pulling))
-		var/mob/M = user.pulling
-		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		user.stop_pulling()
-		return TRUE
-	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		user.stop_pulling()
-		return TRUE
-
 // make the conveyor broken
 // also propagate inoperability to any connected conveyor with the same ID
 /obj/machinery/conveyor/set_broken(new_state)

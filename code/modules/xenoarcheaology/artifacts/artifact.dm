@@ -61,9 +61,6 @@
 	if(!istype(T)) 	// We're inside a container or on null turf, either way stop processing effects
 		return
 
-	if(pulledby)
-		check_triggers(/datum/artifact_trigger/proc/on_touch, pulledby)
-
 	var/datum/gas_mixture/enivonment = T.return_air()
 	if(enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
 		check_triggers(/datum/artifact_trigger/proc/on_gas_exposure, enivonment)

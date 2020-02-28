@@ -39,7 +39,6 @@
 
 	if(!user_can_move_target_inside(usr,usr))
 		return
-	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
 	usr.client.eye = src
 

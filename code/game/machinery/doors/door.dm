@@ -137,17 +137,6 @@
 				open()
 		return
 
-	if(istype(AM, /obj/structure/bed/chair/wheelchair))
-		var/obj/structure/bed/chair/wheelchair/wheel = AM
-		if(density)
-			if(wheel.pulling && (src.allowed(wheel.pulling)))
-				open()
-			else
-				do_animate("deny")
-		return
-	return
-
-
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return !block_air_zones
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))

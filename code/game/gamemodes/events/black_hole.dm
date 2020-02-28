@@ -77,7 +77,7 @@
 	var/turf/T = locate(x, y, z)
 	if(isnull(T))	return
 
-	//Pulling and/or ex_act-ing movable atoms in that turf
+	//Sucking in and/or ex_act-ing movable atoms in that turf
 	if( prob(pull_chance) )
 		for(var/obj/O in T.contents)
 			if(O.anchored)

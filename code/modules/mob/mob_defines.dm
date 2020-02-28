@@ -39,7 +39,6 @@
 	var/obj/screen/cells = null
 
 	var/obj/screen/hands = null
-	var/obj/screen/pullin = null
 	var/obj/screen/purged = null
 	var/obj/screen/internals = null
 	var/obj/screen/oxygen = null
@@ -77,7 +76,6 @@
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 
-	var/atom/movable/pulling = null
 	var/other_mobs = null
 	var/next_move = null
 	var/hand = null

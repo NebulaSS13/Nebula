@@ -108,13 +108,10 @@
 		mob.buckled.relaymove(mob, direction)
 		return MOVEMENT_HANDLED
 
-	if(mob.pulledby || mob.buckled) // Wheelchair driving!
+	if(mob.buckled) // Wheelchair driving!
 		if(istype(mob.loc, /turf/space))
 			return // No wheelchair driving in space
-		if(istype(mob.pulledby, /obj/structure/bed/chair/wheelchair))
-			. = MOVEMENT_HANDLED
-			mob.pulledby.DoMove(direction, mob)
-		else if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
+		if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
 			. = MOVEMENT_HANDLED
 			if(ishuman(mob))
 				var/mob/living/carbon/human/driver = mob
@@ -199,18 +196,7 @@
 			mob.ProcessGrabs()
 			return MOVEMENT_STOP
 
-	if(mob.restrained())
-		for(var/mob/M in range(mob, 1))
-			if(M.pulling == mob)
-				if(!M.incapacitated() && mob.Adjacent(M))
-					if(mover == mob)
-						to_chat(mob, "<span class='notice'>You're restrained! You can't move!</span>")
-					return MOVEMENT_STOP
-				else
-					M.stop_pulling()
-
 	return MOVEMENT_PROCEED
-
 
 /mob/living/ProcessGrabs()
 	//if we are being grabbed
@@ -219,7 +205,6 @@
 
 /mob/proc/ProcessGrabs()
 	return
-
 
 // Finally.. the last of the mob movement junk
 /datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
@@ -238,7 +223,7 @@
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
 
-	// Something with pulling things
+	// Something with dragging things
 	var/extra_delay = HandleGrabs(direction, old_turf)
 
 	if(QDELETED(mob)) // No idea why, but this was causing null check runtimes on live.
@@ -256,8 +241,6 @@
 	if(direction & (UP|DOWN))
 		var/txt_dir = direction & UP ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		if(mob.pulling)
-			mob.zPull(direction)
 
 	//Moving with objects stuck in you can cause bad times.
 	if(get_turf(mob) != old_turf)

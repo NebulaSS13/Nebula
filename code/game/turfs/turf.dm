@@ -93,12 +93,6 @@
 
 	if(user.restrained())
 		return 0
-	if (user.pulling)
-		if(user.pulling.anchored || !isturf(user.pulling.loc))
-			return 0
-		if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
-			return 0
-		do_pull_click(user, src)
 
 	. = handle_hand_interception(user)
 
@@ -217,7 +211,7 @@ var/const/enterloopsanity = 100
 			M.inertia_dir  = 0
 			return
 		spawn(5)
-			if(M && !(M.anchored) && !(M.pulledby) && (M.loc == src))
+			if(M && !M.anchored && !LAZYLEN(M.grabbed_by) && M.loc == src)
 				if(!M.inertia_dir)
 					M.inertia_dir = M.last_move
 				step(M, M.inertia_dir)
