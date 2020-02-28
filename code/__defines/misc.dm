@@ -176,6 +176,9 @@
 #define AI_RESTOREPOWER_CONNECTED 4
 #define AI_RESTOREPOWER_COMPLETED 5
 
+// AI button defines
+#define AI_BUTTON_PROC_BELONGS_TO_CALLER 1
+#define AI_BUTTON_INPUT_REQUIRES_SELECTION 2
 
 // Values represented as Oxyloss. Can be tweaked, but make sure to use integers only.
 #define AI_POWERUSAGE_LOWPOWER 1
@@ -270,7 +273,7 @@
 #define SURGERY_NO_ROBOTIC        1
 #define SURGERY_NO_CRYSTAL        2
 #define SURGERY_NO_STUMP          4
-#define SURGERY_NO_FLESH          8 
+#define SURGERY_NO_FLESH          8
 #define SURGERY_NEEDS_INCISION   16
 #define SURGERY_NEEDS_RETRACTED  32
 #define SURGERY_NEEDS_ENCASEMENT 64
@@ -279,7 +282,7 @@
 #define TOOL_INTERACTION_ANCHOR      1
 #define TOOL_INTERACTION_DECONSTRUCT 2
 #define TOOL_INTERACTION_WIRING      4
-#define TOOL_INTERACTION_ALL         (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_WIRING)   
+#define TOOL_INTERACTION_ALL         (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_WIRING)
 
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
 #define ADD_ARTICLE(X) "[(lowertext(copytext(X, 1, 2)) in list("a", "e", "i", "o", "u")) ? "an" : "a"] [X]"

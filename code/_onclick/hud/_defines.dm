@@ -124,3 +124,34 @@
 
 #define ui_spell_master "RIGHT-1:16,TOP-1:16"
 #define ui_genetic_master "RIGHT-1:16,TOP-3:16"
+
+// AI
+#define ui_ai_core "LEFT:6,BOTTOM:5"
+#define ui_ai_announcement "LEFT+1:10,BOTTOM:5"
+#define ui_ai_cam_track "LEFT+2:12,BOTTOM:5"
+#define ui_ai_cam_light "LEFT+3:14,BOTTOM:5"
+#define ui_ai_cam_change_network "LEFT+4:16,BOTTOM:5"
+#define ui_ai_sensor "CENTER-2:18,BOTTOM:5"
+#define ui_ai_crew_manifest "CENTER-1:20,BOTTOM:5"
+#define ui_ai_take_image "CENTER:22,BOTTOM:5"
+#define ui_ai_view_images "CENTER+1:24,BOTTOM:5"
+#define ui_ai_state_laws "CENTER+2:26,BOTTOM:5"
+#define ui_ai_call_shuttle "RIGHT-4:28,BOTTOM:5"
+
+#define ui_ai_up "RIGHT-1:30,BOTTOM+1:5"
+#define ui_ai_down "RIGHT-1:30,BOTTOM:5"
+
+// AI: Customization
+#define ui_ai_holo_change "RIGHT-1:30,BOTTOM+2:5"
+#define ui_ai_color "RIGHT-1:30,BOTTOM+3:5"
+#define ui_ai_core_icon "RIGHT-1:30,BOTTOM+4:5"
+#define ui_ai_status "RIGHT-1:30,BOTTOM+5:5"
+
+// AI: Tools
+#define ui_ai_power_override "LEFT:6,TOP:0"
+#define ui_ai_shutdown "LEFT+1:6,TOP:0"
+#define ui_ai_holo_mov "LEFT:6, TOP-1:0"
+
+// AI: Crew
+#define ui_ai_crew_mon "RIGHT-1:30,TOP:0"
+#define ui_ai_crew_rec "RIGHT-2:30, TOP:0"
