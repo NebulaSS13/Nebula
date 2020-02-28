@@ -10,7 +10,7 @@
 
 	var/ckeytext = ckey(key)
 
-	if(ckeytext in admin_datums)
+	if(admin_datums[ckeytext])
 		key_cache[key] = 0
 		return ..()
 
