@@ -66,29 +66,37 @@
 // This causes the assailant to crush the affecting mob. There is a chance that the crush will cause the
 // forelimb spikes to dig into the affecting mob, doing extra damage and likely causing them to bleed.
 /datum/grab/nab/proc/crush(var/obj/item/grab/G, var/attack_damage)
+	var/mob/affecting_mob = G.get_affecting_mob()
+	if(!affecting_mob)
+		return
 	var/obj/item/organ/external/damaging = G.get_targeted_organ()
 	var/hit_zone = G.target_zone
-	G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting]'s [damaging.name]!</span>")
-
+	if(damaging)
+		affecting_mob.visible_message("<span class='danger'>[G.assailant] crushes [affecting_mob]'s [damaging.name]!</span>")
+	else
+		affecting_mob.visible_message("<span class='danger'>[G.assailant] crushes [affecting_mob]!</span>")
 	if(prob(30))
 		var/hit_damage = max(attack_damage + 10, 15)
-		G.affecting.apply_damage(hit_damage, BRUTE, hit_zone, DAM_SHARP, used_weapon = "organic punctures")
-		var/armor = 100 * G.affecting.get_blocked_ratio(hit_zone, BRUTE, damage = hit_damage)
-		G.affecting.apply_effect(attack_damage, PAIN, armor)
-		G.affecting.visible_message("<span class='danger'>[G.assailant]'s spikes dig in painfully!</span>")
+		affecting_mob.apply_damage(hit_damage, BRUTE, hit_zone, DAM_SHARP, used_weapon = "organic punctures")
+		var/armor = 100 * affecting_mob.get_blocked_ratio(hit_zone, BRUTE, damage = hit_damage)
+		affecting_mob.apply_effect(attack_damage, PAIN, armor)
+		affecting_mob.visible_message("<span class='danger'>[G.assailant]'s spikes dig in painfully!</span>")
 	else
-		G.affecting.apply_damage(attack_damage, BRUTE, hit_zone, used_weapon = "crushing")
+		affecting_mob.apply_damage(attack_damage, BRUTE, hit_zone, used_weapon = "crushing")
 	playsound(get_turf(G.assailant), 'sound/weapons/bite.ogg', 25, 1, -1)
-
-	admin_attack_log(G.assailant, G.affecting, "Crushed their victim.", "Was crushed.", "crushed")
+	admin_attack_log(G.assailant, affecting_mob, "Crushed their victim.", "Was crushed.", "crushed")
 
 // This causes the assailant to chew on the affecting mob.
 /datum/grab/nab/proc/masticate(var/obj/item/grab/G, var/attack_damage)
+	var/mob/affecting_mob = G.get_affecting_mob()
+	if(!affecting_mob)
+		return
 	var/hit_zone = G.assailant.zone_sel.selecting
-	var/obj/item/organ/external/damaging = G.affecting.get_organ(hit_zone)
-
-	G.affecting.apply_damage(attack_damage, BRUTE, hit_zone, DAM_SHARP|DAM_EDGE, used_weapon = "mandibles")
-	G.affecting.visible_message("<span class='danger'>[G.assailant] chews on [G.affecting]'s [damaging.name]!</span>")
+	var/obj/item/organ/external/damaging = affecting_mob.get_organ(hit_zone)
+	affecting_mob.apply_damage(attack_damage, BRUTE, hit_zone, DAM_SHARP|DAM_EDGE, used_weapon = "mandibles")
+	if(damaging)
+		affecting_mob.visible_message("<span class='danger'>[G.assailant] chews on [affecting_mob]'s [damaging.name]!</span>")
+	else
+		affecting_mob.visible_message("<span class='danger'>[G.assailant] chews on [affecting_mob]!</span>")
 	playsound(get_turf(G.assailant), 'sound/weapons/bite.ogg', 25, 1, -1)
-
-	admin_attack_log(G.assailant, G.affecting, "Chews their victim.", "Was chewed.", "chewed")
+	admin_attack_log(G.assailant, affecting_mob, "Chews their victim.", "Was chewed.", "chewed")

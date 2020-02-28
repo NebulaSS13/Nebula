@@ -61,6 +61,11 @@
 	if(!istype(T)) 	// We're inside a container or on null turf, either way stop processing effects
 		return
 
+	for(var/obj/item/grab/G in grabbed_by)
+		var/mob/affecting_mob = G.get_affecting_mob()
+		if(affecting_mob)
+			check_triggers(/datum/artifact_trigger/proc/on_touch, affecting_mob)
+
 	var/datum/gas_mixture/enivonment = T.return_air()
 	if(enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
 		check_triggers(/datum/artifact_trigger/proc/on_gas_exposure, enivonment)

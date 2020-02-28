@@ -116,6 +116,11 @@
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
 		return TRUE
+
+	else if(istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
+		step(G.affecting, get_dir(G.affecting.loc, src))
+		return TRUE
 	return ..()
 
 /turf/Enter(atom/movable/mover, atom/forget)

@@ -99,11 +99,17 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 		TM = get_deepspace(M.x,M.y)
 	nz = pick(TM.map_z)
 
+	var/turf/dest = locate(nx,ny,nz)
+	if(dest && !dest.density)
+		A.forceMove(dest)
+		if(isliving(A))
+			var/mob/living/L = A
+			for(var/obj/item/grab/G in L.get_active_grabs())
+				G.affecting.forceMove(dest)
+
 	if(istype(M, /obj/effect/overmap/visitable/sector/temporary))
 		var/obj/effect/overmap/visitable/sector/temporary/source = M
 		if (source.can_die())
 			testing("Caching [M] for future use")
 			source.forceMove(null)
 			cached_space += source
-
-	A.forceMove(locate(nx, ny, nz))

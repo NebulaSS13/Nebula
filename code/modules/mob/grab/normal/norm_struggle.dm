@@ -61,7 +61,7 @@
 		G.downgrade()
 
 /datum/grab/normal/struggle/can_upgrade(var/obj/item/grab/G)
-	return G.done_struggle
+	. = ..() && G.done_struggle
 
 /datum/grab/normal/struggle/on_hit_disarm(var/obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to pin.</span>")

@@ -636,7 +636,7 @@ var/list/global/slot_flags_enumeration = list(
 				to_chat(user, "<span class='warning'>You're going to need to remove the eye covering first.</span>")
 				return
 
-	if(!M.has_eyes())
+	if(!M.check_has_eyes())
 		to_chat(user, "<span class='warning'>You cannot locate any eyes on [M]!</span>")
 		return
 

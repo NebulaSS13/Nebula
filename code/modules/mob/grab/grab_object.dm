@@ -1,9 +1,8 @@
-
 /obj/item/grab
 	name = "grab"
 	canremove = 0
 
-	var/mob/living/carbon/human/affecting = null
+	var/atom/movable/affecting = null
 	var/mob/living/carbon/human/assailant = null
 
 	var/datum/grab/current_grab
@@ -24,28 +23,30 @@
 /*
 	This section is for overrides of existing procs.
 */
-/obj/item/grab/Initialize(mapload, mob/living/carbon/human/victim)
+/obj/item/grab/Initialize(mapload, atom/movable/target)
 	. = ..(mapload)
 	current_grab = all_grabstates[start_grab_name]
 
 	assailant = loc
 	if(!istype(assailant))
 		return INITIALIZE_HINT_QDEL
-	affecting = victim
+	affecting = target
 	if(!istype(affecting))
 		return INITIALIZE_HINT_QDEL
 	target_zone = assailant.zone_sel.selecting
 	assailant.remove_cloaking_source(assailant.species)
 
-	if(!can_grab())
+	if(!target.can_be_grabbed(assailant, src))
 		return INITIALIZE_HINT_QDEL
 	if(!init())
 		return INITIALIZE_HINT_QDEL
 
 	var/obj/item/organ/O = get_targeted_organ()
-	SetName("[name] ([O.name])")
-	GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
+	if(O)
+		SetName("[name] ([O.name])")
+		GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
 	GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
+	GLOB.moved_event.register(affecting, src, .proc/on_affecting_move)
 
 /obj/item/grab/examine(mob/user)
 	. = ..()
@@ -94,8 +95,10 @@
 /obj/item/grab/Destroy()
 	if(affecting)
 		GLOB.dismembered_event.unregister(affecting, src)
+		GLOB.moved_event.unregister(affecting, src)
 		reset_position()
-		affecting.grabbed_by -= src
+		LAZYREMOVE(affecting.grabbed_by, src)
+		UNSETEMPTY(affecting.grabbed_by)
 		affecting.reset_plane_and_layer()
 		affecting = null
 	if(assailant)
@@ -131,49 +134,30 @@
 		return
 	current_grab.let_go(src)
 
+/obj/item/grab/proc/on_affecting_move()
+	if(!affecting || get_dist(affecting, assailant) > 1)
+		force_drop()
+
 /obj/item/grab/proc/force_drop()
 	assailant.drop_from_inventory(src)
 
-/obj/item/grab/proc/can_grab()
-	if(!assailant.Adjacent(affecting))
-		return 0
-	if(assailant.anchored || affecting.anchored || assailant.buckled || affecting.buckled)
-		return 0
-	if(assailant.get_active_hand())
-		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
-		return 0
-	if(assailant.grabbed_by.len)
-		to_chat(assailant, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
-		return 0
-	var/obj/item/organ/organ = get_targeted_organ()
-	if(!istype(organ))
-		to_chat(assailant, "<span class='notice'>\The [affecting] is missing that body part!</span>")
-		return 0
-	if(assailant == affecting)
-		if(!current_grab.can_grab_self)	//let's not nab ourselves
-			to_chat(assailant, "<span class='notice'>You can't grab yourself!</span>")
-			return 0
-		var/list/bad_parts = assailant.hand ? list(BP_L_ARM, BP_L_HAND) :  list(BP_R_ARM, BP_R_HAND)
-		if(organ.organ_tag in bad_parts)
-			to_chat(assailant, "<span class='notice'>You can't grab your own [organ.name] with itself!</span>")
-			return 0
-	for(var/obj/item/grab/G in affecting.grabbed_by)
-		if(G.assailant == assailant && G.target_zone == target_zone)
-			var/obj/O = G.get_targeted_organ()
-			to_chat(assailant, "<span class='notice'>You already grabbed [affecting]'s [O.name].</span>")
-			return 0
-	return 1
+/obj/item/grab/proc/get_affecting_mob()
+	. = ismob(affecting) && affecting
 
-// This will run from Initialize, after can_grab and other checks have succeeded. Must call parent; returning FALSE means failure and qdels the grab.
+// This will run from Initialize, after other checks have succeeded. Must call parent; returning FALSE means failure and qdels the grab.
 /obj/item/grab/proc/init()
 	if(!assailant.put_in_active_hand(src))
 		return FALSE // This should succeed as we checked the hand, but if not we abort here.
-	affecting.UpdateLyingBuckledAndVerbStatus()
-	affecting.grabbed_by += src // This is how we handle affecting being deleted.
+	var/mob/affecting_mob = get_affecting_mob()
+	if(affecting_mob)
+		affecting_mob.UpdateLyingBuckledAndVerbStatus()
+		if(ishuman(affecting_mob))
+			var/mob/living/carbon/human/H = affecting_mob
+			if(H.w_uniform)
+				H.w_uniform.add_fingerprint(assailant)
+	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
 	adjust_position()
 	action_used()
-	if(affecting.w_uniform)
-		affecting.w_uniform.add_fingerprint(assailant)
 	assailant.do_attack_animation(affecting)
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	update_icon()
@@ -181,13 +165,14 @@
 
 // Returns the organ of the grabbed person that the grabber is targeting
 /obj/item/grab/proc/get_targeted_organ()
-	return (affecting.get_organ(target_zone))
+	if(ishuman(affecting))
+		var/mob/living/carbon/human/affecting_mob = affecting
+		. = affecting_mob.get_organ(target_zone)
 
 /obj/item/grab/proc/resolve_item_attack(var/mob/living/M, var/obj/item/I, var/target_zone)
-	if((M && ishuman(M)) && I)
+	if(M && ishuman(M) && I)
 		return current_grab.resolve_item_attack(src, M, I, target_zone)
-	else
-		return 0
+	return 0
 
 /obj/item/grab/proc/action_used()
 	assailant.remove_cloaking_source(assailant.species)
@@ -201,15 +186,17 @@
 	return (world.time >= last_upgrade + current_grab.upgrade_cooldown)
 
 /obj/item/grab/proc/leave_forensic_traces()
-	var/obj/item/clothing/C = affecting.get_covering_equipped_item_by_zone(target_zone)
-	if(istype(C))
-		C.leave_evidence(assailant)
-		if(prob(50))
-			C.ironed_state = WRINKLES_WRINKLY
+	if(ishuman(affecting))
+		var/mob/living/carbon/human/affecting_mob = affecting
+		var/obj/item/clothing/C = affecting_mob.get_covering_equipped_item_by_zone(target_zone)
+		if(istype(C))
+			C.leave_evidence(assailant)
+			if(prob(50))
+				C.ironed_state = WRINKLES_WRINKLY
 
 /obj/item/grab/proc/upgrade(var/bypass_cooldown = FALSE)
 	if(!check_upgrade_cooldown() && !bypass_cooldown)
-		to_chat(assailant, "<span class='danger'>It's too soon to upgrade.</span>")
+		to_chat(assailant, SPAN_WARNING("It's too soon to upgrade."))
 		return
 
 	var/datum/grab/upgrab = current_grab.upgrade(src)
@@ -241,7 +228,6 @@
 	affecting.plane = assailant.plane
 	affecting.layer = assailant.layer - 0.01
 
-
 /obj/item/grab/proc/throw_held()
 	return current_grab.throw_held(src)
 
@@ -249,7 +235,8 @@
 	current_grab.handle_resist(src)
 
 /obj/item/grab/proc/adjust_position(var/force = 0)
-	if(force)	affecting.forceMove(assailant.loc)
+	if(force)	
+		affecting.forceMove(assailant.loc)
 
 	if(!assailant || !affecting || !assailant.Adjacent(affecting))
 		qdel(src)
@@ -304,5 +291,4 @@
 	return current_grab.restrains
 
 /obj/item/grab/proc/resolve_openhand_attack()
-		return current_grab.resolve_openhand_attack(src)
-
+	return current_grab.resolve_openhand_attack(src)

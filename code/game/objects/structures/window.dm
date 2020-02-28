@@ -304,16 +304,19 @@
 		to_chat(G.assailant, SPAN_DANGER("You need a better grip to do that!"))
 		return TRUE
 	var/def_zone = ran_zone(BP_HEAD, 20)
+	var/mob/affecting_mob = G.get_affecting_mob()
 	if(G.damage_stage() < 2)
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
-		if (prob(50))
-			G.affecting.Weaken(1)
-		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
+		if(affecting_mob)
+			if(prob(50))
+				affecting_mob.Weaken(1)
+			affecting_mob.apply_damage(10, BRUTE, def_zone, used_weapon = src)
 		hit(25)
 	else
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
-		G.affecting.Weaken(5)
-		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
+		if(affecting_mob)
+			affecting_mob.Weaken(5)
+			affecting_mob.apply_damage(20, BRUTE, def_zone, used_weapon = src)
 		hit(50)
 	return TRUE
 

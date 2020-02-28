@@ -176,23 +176,23 @@
 /datum/movement_handler/mob/physically_restrained/MayMove(var/mob/mover)
 	if(mob.anchored)
 		if(mover == mob)
-			to_chat(mob, "<span class='notice'>You're anchored down!</span>")
+			to_chat(mob, SPAN_WARNING("You're anchored down!"))
 		return MOVEMENT_STOP
 
 	if(istype(mob.buckled) && !mob.buckled.buckle_movable)
 		if(mover == mob)
-			to_chat(mob, "<span class='notice'>You're buckled to \the [mob.buckled]!</span>")
+			to_chat(mob, SPAN_WARNING("You're buckled to \the [mob.buckled]!"))
 		return MOVEMENT_STOP
 
 	if(LAZYLEN(mob.pinned))
 		if(mover == mob)
-			to_chat(mob, "<span class='notice'>You're pinned down by \a [mob.pinned[1]]!</span>")
+			to_chat(mob, SPAN_WARNING("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
 	for(var/obj/item/grab/G in mob.grabbed_by)
-		if(G.assailant != mob && G.stop_move())
+		if(G.assailant != mob && (mob.restrained() || G.stop_move()))
 			if(mover == mob)
-				to_chat(mob, "<span class='notice'>You're stuck in a grab!</span>")
+				to_chat(mob, SPAN_WARNING("You're restrained and cannot move!"))
 			mob.ProcessGrabs()
 			return MOVEMENT_STOP
 
@@ -200,11 +200,16 @@
 
 /mob/living/ProcessGrabs()
 	//if we are being grabbed
-	if(grabbed_by.len)
+	if(LAZYLEN(grabbed_by))
 		resist() //shortcut for resisting grabs
 
 /mob/proc/ProcessGrabs()
 	return
+
+/mob/proc/get_active_grabs()
+	. = list()
+	for(var/obj/item/grab/grab in list(l_hand, r_hand))
+		. += grab
 
 // Finally.. the last of the mob movement junk
 /datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
@@ -239,8 +244,26 @@
 		G.adjust_position()
 
 	if(direction & (UP|DOWN))
-		var/txt_dir = direction & UP ? "upwards" : "downwards"
+		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
+		for(var/obj/item/grab/G in mob.get_active_grabs())
+			var/turf/start = G.affecting.loc
+			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
+			if(!start.CanZPass(G.affecting, direction))
+				to_chat(mob, SPAN_WARNING("\The [start] blocked your pulled object!"))
+				mob.drop_from_inventory(G)
+				continue
+			if(!destination.CanZPass(G.affecting, direction))
+				to_chat(mob, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
+				mob.drop_from_inventory(G)
+				continue
+			for(var/atom/A in destination)
+				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
+					to_chat(mob, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
+					mob.drop_from_inventory(G)
+					continue
+			G.affecting.forceMove(destination)
+			continue
 
 	//Moving with objects stuck in you can cause bad times.
 	if(get_turf(mob) != old_turf)
@@ -270,32 +293,29 @@
 /datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction, var/old_turf)
 	. = 0
 	// TODO: Look into making grabs use movement events instead, this is a mess.
-	for (var/obj/item/grab/G in mob)
+	for(var/obj/item/grab/G in mob.get_active_grabs())
 		if(G.assailant == G.affecting)
 			return
 		. = max(., G.grab_slowdown())
 		var/list/L = mob.ret_grab()
-		if(istype(L, /list))
-			if(L.len == 2)
+		if(islist(L))
+			if(length(L) == 2)
 				L -= mob
-				var/mob/M = L[1]
-				if(M)
-					if (get_dist(old_turf, M) <= 1)
-						if (isturf(M.loc) && isturf(mob.loc))
-							if (mob.loc != old_turf && M.loc != mob.loc)
-								step(M, get_dir(M.loc, old_turf))
+				var/atom/movable/M = L[1]
+				if(M && get_dist(old_turf, M) <= 1 && isturf(M.loc) && isturf(mob.loc) && mob.loc != old_turf && M.loc != mob.loc)
+					step(M, get_dir(M.loc, old_turf))
 			else
-				for(var/mob/M in L)
-					M.other_mobs = 1
+				for(var/atom/movable/M in L)
+					M.movable_flags |= MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS
 					if(mob != M)
-						M.animate_movement = 3
-				for(var/mob/M in L)
+						M.animate_movement = SYNC_STEPS
+				for(var/atom/movable/M in L)
 					spawn( 0 )
 						step(M, direction)
 						return
 					spawn( 1 )
-						M.other_mobs = null
-						M.animate_movement = 2
+						M.movable_flags &= ~MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS
+						M.animate_movement = SLIDE_STEPS
 						return
 			G.adjust_position()
 

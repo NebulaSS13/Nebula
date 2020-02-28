@@ -6,13 +6,20 @@
 	if(!(. = ..()))
 		return
 	var/obj/O = get_targeted_organ()
-	if(affecting != assailant)
-		visible_message("<span class='warning'>[assailant] has grabbed [affecting]'s [O.name]!</span>")
+	var/datum/gender/T = gender_datums[assailant.get_gender()]
+	if(O)
+		if(affecting != assailant)
+			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting]'s [O.name]!"))
+		else
+			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.his] [O.name]!"))
 	else
-		var/datum/gender/T = gender_datums[assailant.get_gender()]
-		visible_message("<span class='notice'>[assailant] has grabbed [T.his] [O.name]!</span>")
+		if(affecting != assailant)
+			visible_message(SPAN_DANGER("\The [assailant] has grabbed \the [affecting]!"))
+		else
+			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.self]!"))
 
-	if(!(affecting.a_intent == I_HELP))
+	var/mob/affecting_mob = get_affecting_mob()
+	if(affecting_mob && affecting_mob.a_intent != I_HELP)
 		upgrade(TRUE)
 
 /datum/grab/normal
@@ -150,7 +157,7 @@
 		if(protection && (protection.body_parts_covered & EYES))
 			to_chat(attacker, "<span class='danger'>You're going to need to remove the eye covering first.</span>")
 			return
-	if(!target.has_eyes())
+	if(!target.check_has_eyes())
 		to_chat(attacker, "<span class='danger'>You cannot locate any eyes on [target]!</span>")
 		return
 
@@ -196,18 +203,19 @@
 
 // Handles special targeting like eyes and mouth being covered.
 /datum/grab/normal/special_target_effect(var/obj/item/grab/G)
-	if(G.special_target_functional)
+	var/mob/living/affecting_mob = G.get_affecting_mob()
+	if(istype(affecting_mob) && G.special_target_functional)
 		switch(G.target_zone)
 			if(BP_MOUTH)
-				if(G.affecting.silent < 2)
-					G.affecting.silent = 2
+				if(affecting_mob.silent < 2)
+					affecting_mob.silent = 2
 			if(BP_EYES)
-				if(G.affecting.eye_blind < 2)
-					G.affecting.eye_blind = 2
+				if(affecting_mob.eye_blind < 2)
+					affecting_mob.eye_blind = 2
 
 // Handles when they change targeted areas and something is supposed to happen.
 /datum/grab/normal/special_target_change(var/obj/item/grab/G, old_zone, new_zone)
-	if(old_zone != BP_HEAD && old_zone != BP_CHEST)
+	if(old_zone != BP_HEAD && old_zone != BP_CHEST || !G.get_affecting_mob())
 		return
 	switch(new_zone)
 		if(BP_MOUTH)
@@ -217,16 +225,19 @@
 
 
 /datum/grab/normal/check_special_target(var/obj/item/grab/G)
+	var/mob/affecting_mob = G.get_affecting_mob()
+	if(affecting_mob)
+		return FALSE
 	switch(G.target_zone)
 		if(BP_MOUTH)
-			if(!G.affecting.check_has_mouth())
+			if(!affecting_mob.check_has_mouth())
 				to_chat(G.assailant, "<span class='danger'>You cannot locate a mouth on [G.affecting]!</span>")
-				return 0
+				return FALSE
 		if(BP_EYES)
-			if(!G.affecting.has_eyes())
+			if(!affecting_mob.check_has_eyes())
 				to_chat(G.assailant, "<span class='danger'>You cannot locate any eyes on [G.affecting]!</span>")
-				return 0
-	return 1
+				return FALSE
+	return TRUE
 
 /datum/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I)
 	switch(G.target_zone)

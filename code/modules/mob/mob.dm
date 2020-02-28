@@ -193,7 +193,17 @@
 	. += encumbrance() * (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN)) //Varies between 0.5 and 2, depending on skill
 
 /mob/proc/encumbrance()
-	. = 0
+	for(var/obj/item/grab/G in get_active_grabs())
+		var/atom/movable/pulling = G.affecting
+		if(istype(pulling, /obj))
+			var/obj/O = pulling
+			. += between(0, O.w_class, ITEM_SIZE_GARGANTUAN) / 5
+		else if(istype(pulling, /mob))
+			var/mob/M = pulling
+			. += max(0, M.mob_size) / MOB_MEDIUM
+		else
+			. += 1
+	. *= (0.8 ** size_strength_mod())
 
 //Determines mob size/strength effects for slowdown purposes. Standard is 0; can be pos/neg.
 /mob/proc/size_strength_mod()
@@ -336,15 +346,14 @@
 /mob/proc/ret_grab(list/L)
 	if (!istype(l_hand, /obj/item/grab) && !istype(r_hand, /obj/item/grab))
 		return L
-	if (!L)
+	if(!L)
 		L = list(src)
-	for(var/A in list(l_hand,r_hand))
-		if (istype(A, /obj/item/grab))
-			var/obj/item/grab/G = A
-			if (!(G.affecting in L))
-				L += G.affecting
-				if (G.affecting)
-					G.affecting.ret_grab(L)
+	for(var/obj/item/grab/G in get_active_grabs())
+		if(G.affecting && !(G.affecting in L))
+			L += G.affecting
+			var/mob/affecting_mob = G.get_affecting_mob()
+			if(affecting_mob)
+				affecting_mob.ret_grab(L)
 	return L
 
 /mob/verb/mode()
@@ -458,16 +467,16 @@
 
 /mob/living/carbon/human/pull_damage()
 	if(!lying || getBruteLoss() + getFireLoss() < 100)
-		return 0
+		return FALSE
 	for(var/thing in organs)
 		var/obj/item/organ/external/e = thing
 		if(!e || e.is_stump())
 			continue
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
-			return 1
+			return TRUE
 		if(e.status & ORGAN_BLEEDING)
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /mob/MouseDrop(mob/M)
 	..()
@@ -1038,3 +1047,49 @@
 	if(!skip_delays)
 		to_chat(src, SPAN_WARNING("You scrawl down some meaningless lines."))
 	. = stars(text_content, 5)
+
+// mobs do not have mouths by default
+/mob/proc/check_has_mouth()
+	return FALSE
+/mob/proc/check_has_eyes()
+	return TRUE
+
+// Casting stubs for grabs, check /mob/living for full definition.
+/mob/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
+	return
+/mob/proc/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
+	return
+/mob/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+	return
+/mob/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+	return
+// See /mob/living/carbon/human for this one.
+/mob/proc/get_organ(var/zone)
+	return
+// End grab casting stubs.
+
+/mob/proc/try_grab(var/atom/movable/grabbing)
+	. = FALSE
+
+/mob/can_be_grabbed(var/mob/grabber, var/obj/item/grab/grab)
+	if(!grabber.can_pull_mobs)
+		to_chat(grabber, SPAN_WARNING("\The [src] won't budge!"))
+		return FALSE
+	. = ..() && !buckled
+	if(.)
+		if((grabber.mob_size < grabber.mob_size) && grabber.can_pull_mobs != MOB_PULL_LARGER)
+			to_chat(grabber, SPAN_WARNING("You are too small to move \the [src]!"))
+			return FALSE
+		if((grabber.mob_size == mob_size) && grabber.can_pull_mobs == MOB_PULL_SMALLER)
+			to_chat(grabber, SPAN_WARNING("\The [src] is too large for you to move!"))
+			return FALSE
+		if(grabber == src && !grab.current_grab?.can_grab_self)	//let's not nab ourselves
+			to_chat(grabber, SPAN_WARNING("You can't grab yourself!"))
+			return FALSE
+		inertia_dir = 0
+
+/mob/proc/handle_grab_damage()
+	set waitfor = 0
+
+/mob/proc/handle_grabs_after_move()
+	set waitfor = 0

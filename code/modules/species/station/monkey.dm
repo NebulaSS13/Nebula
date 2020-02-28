@@ -69,7 +69,7 @@
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
-	if(prob(33) && isturf(H.loc)) //won't move if being pulled
+	if(prob(33) && isturf(H.loc) && !LAZYLEN(H.grabbed_by)) //won't move if being pulled
 		H.SelfMove(pick(GLOB.cardinal))
 
 	var/obj/held = H.get_active_hand()

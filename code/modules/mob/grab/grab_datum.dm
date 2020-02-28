@@ -28,11 +28,11 @@
 
 	var/shift = 0
 
-	var/success_up = "You upgrade the grab."
-	var/success_down = "You downgrade the grab."
+	var/success_up = "You get a better grip on rep_affecting."
+	var/success_down = "You adjust your grip on rep_affecting."
 
-	var/fail_up = "You fail to upgrade the grab."
-	var/fail_down = "You fail to downgrade the grab."
+	var/fail_up = "You can't get a better grip on rep_affecting!"
+	var/fail_down = "You can't seem to shift your grip on rep_affecting!"
 
 	var/upgrab_name
 	var/downgrab_name
@@ -81,7 +81,7 @@
 	if(!upgrab)
 		return
 
-	if (can_upgrade(G))
+	if(can_upgrade(G))
 		upgrade_effect(G)
 		admin_attack_log(G.assailant, G.affecting, "tightens their grip on their victim to [upgrab.state_name]", "was grabbed more tightly to [upgrab.state_name]", "tightens grip to [upgrab.state_name] on")
 		return upgrab
@@ -122,7 +122,8 @@
 		. = affecting
 		var/mob/thrower = G.loc
 
-		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1)
+		if(ismob(affecting))
+			animate(affecting, pixel_x = initial(affecting.pixel_x), pixel_y = initial(affecting.pixel_y), 4, 1)
 		qdel(G)
 
 		// check if we're grabbing with our inactive hand
@@ -167,8 +168,9 @@
 
 
 /datum/grab/proc/adjust_position(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-	var/mob/living/carbon/human/assailant = G.assailant
+
+	var/atom/movable/affecting = G.affecting
+	var/mob/living/assailant = G.assailant
 	var/adir = get_dir(assailant, affecting)
 
 	if(same_tile)
@@ -176,28 +178,27 @@
 		adir = assailant.dir
 		affecting.set_dir(assailant.dir)
 
-	switch(adir)
-		if(NORTH)
-			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
-			G.draw_affecting_under()
-		if(SOUTH)
-			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
-			G.draw_affecting_over()
-		if(WEST)
-			animate(affecting, pixel_x = shift, pixel_y = 0, 5, 1, LINEAR_EASING)
-			G.draw_affecting_under()
-		if(EAST)
-			animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
-			G.draw_affecting_under()
-
-	affecting.reset_plane_and_layer()
+	if(ismob(affecting)) // Structures often have mapped pixel offsets - donut touch.
+		switch(adir)
+			if(NORTH)
+				animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
+				G.draw_affecting_under()
+			if(SOUTH)
+				animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
+				G.draw_affecting_over()
+			if(WEST)
+				animate(affecting, pixel_x = shift, pixel_y = 0, 5, 1, LINEAR_EASING)
+				G.draw_affecting_under()
+			if(EAST)
+				animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
+				G.draw_affecting_under()
+		affecting.reset_plane_and_layer()
 
 /datum/grab/proc/reset_position(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-
-	if(!affecting.buckled)
-		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
-	affecting.reset_plane_and_layer()
+	var/mob/affecting_mob = G.get_affecting_mob()
+	if(affecting_mob && !affecting_mob.buckled) // As above - only for mobs.
+		animate(affecting_mob, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
+	G.affecting.reset_plane_and_layer()
 
 // This is called whenever the assailant moves.
 /datum/grab/proc/assailant_moved(var/obj/item/grab/G)
@@ -216,8 +217,9 @@
 /datum/grab/proc/upgrade_effect(var/obj/item/grab/G)
 
 // Conditions to see if upgrading is possible
+// Only works on mobs.
 /datum/grab/proc/can_upgrade(var/obj/item/grab/G)
-	return 1
+	return !!G.get_affecting_mob()
 
 // What happens when you downgrade from one grab state to the next.
 /datum/grab/proc/downgrade_effect(var/obj/item/grab/G)
@@ -304,3 +306,4 @@
 	return mob_size_difference(A.mob_size, B.mob_size)
 
 /datum/grab/proc/moved_effect(var/obj/item/grab/G)
+	return

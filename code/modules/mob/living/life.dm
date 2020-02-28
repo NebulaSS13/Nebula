@@ -27,7 +27,7 @@
 	//Check if we're on fire
 	handle_fire()
 
-	for(var/obj/item/grab/G in src)
+	for(var/obj/item/grab/G in get_active_grabs())
 		G.Process()
 
 	handle_actions()

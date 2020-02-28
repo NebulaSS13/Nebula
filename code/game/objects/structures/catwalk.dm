@@ -82,6 +82,12 @@
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
 	. = ..()
 	if(!.)
+
+		if(istype(C, /obj/item/grab))
+			var/obj/item/grab/G = C
+			G.affecting.forceMove(get_turf(src))
+			return TRUE
+
 		if(istype(C, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = C
 			if(!cutter.slice(user))

@@ -6,16 +6,7 @@
 		return TRUE // Doesn't necessarily mean the mob physically moved
 
 /mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-
-	if(ismob(mover))
-		var/mob/moving_mob = mover
-		if ((other_mobs && moving_mob.other_mobs))
-			return 1
-		return (!mover.density || !density || lying)
-	else
-		return (!mover.density || !density || lying)
-	return
+	. = lying || ..()
 
 /mob/proc/SetMoveCooldown(var/timeout)
 	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)
@@ -67,10 +58,6 @@
 	else if(hand.can_be_dropped_by_client(src))
 		drop_item()
 
-//This gets called when you press the delete button.
-/client/verb/delete_key_pressed()
-	set hidden = 1
-
 /client/verb/swap_hand()
 	set hidden = 1
 	if(istype(mob, /mob/living/carbon))
@@ -80,14 +67,11 @@
 		R.cycle_modules()
 	return
 
-
-
 /client/verb/attack_self()
 	set hidden = 1
 	if(mob)
 		mob.mode()
 	return
-
 
 /client/verb/toggle_throw_mode()
 	set hidden = 1

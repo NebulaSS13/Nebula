@@ -257,13 +257,13 @@
 			spawn(100)
 				disabilities &= ~NEARSIGHTED
 
-/mob/living/carbon/human/proc/make_grab(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/victim, var/grab_tag)
+/mob/living/carbon/human/proc/make_grab(var/mob/living/carbon/human/attacker, var/atom/movable/target, var/grab_tag)
 	var/obj/item/grab/G
 	if(!grab_tag)
-		G = new attacker.current_grab_type(attacker, victim)
+		G = new attacker.current_grab_type(attacker, target)
 	else
 		var/obj/item/grab/given_grab_type = all_grabobjects[grab_tag]
-		G = new given_grab_type(attacker, victim)
+		G = new given_grab_type(attacker, target)
 	if(QDELETED(G))
 		return 0
 	return 1

@@ -647,10 +647,6 @@
 			xylophone=0
 	return
 
-/mob/living/proc/check_has_mouth()
-	// mobs do not have mouths by default
-	return 0
-
 /mob/living/carbon/human/check_has_mouth()
 	// Todo, check stomach organ when implemented.
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
@@ -1394,12 +1390,10 @@
 			return 1
 	return 0
 
-/mob/living/carbon/human/has_eyes()
+/mob/living/carbon/human/check_has_eyes()
 	if(internal_organs_by_name[BP_EYES])
 		var/obj/item/organ/internal/eyes = internal_organs_by_name[BP_EYES]
-		if(eyes && eyes.is_usable())
-			return 1
-	return 0
+		. = eyes && eyes.is_usable()
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
 	if((species.check_no_slip(src)) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))

@@ -466,3 +466,31 @@ meteor_act
 	if (was_burned)
 		fire_act(air, temperature)
 	return FALSE
+
+/mob/living/carbon/human/try_grab(var/atom/movable/grabbing)
+	. = species.attempt_grab(src, grabbing)
+
+/mob/living/carbon/human/can_be_grabbed(var/mob/grabber, var/obj/item/grab/grab)
+	. = ..()
+	if(.)
+		var/obj/item/organ/organ = grab.get_targeted_organ()
+		if(!istype(organ))
+			to_chat(grabber, SPAN_WARNING("\The [src] is missing that body part!"))
+			return FALSE
+		if(grabber == src)
+			var/list/bad_parts = hand ? list(BP_L_ARM, BP_L_HAND) : list(BP_R_ARM, BP_R_HAND)
+			if(organ && (organ.organ_tag in bad_parts))
+				to_chat(src, SPAN_WARNING("You can't grab your own [organ.name] with itself!"))
+				return FALSE
+		for(var/obj/item/grab/G in grabbed_by)
+			if(G.assailant == grabber && G.target_zone == grab.target_zone)
+				var/obj/O = G.get_targeted_organ()
+				if(O)
+					to_chat(grabber, SPAN_WARNING("You already grabbed [src]'s [O.name]."))
+					return FALSE
+		if(pull_damage())
+			to_chat(grabber, SPAN_DANGER("Pulling \the [src] in their current condition would probably be a bad idea."))
+		var/obj/item/clothing/C = get_covering_equipped_item_by_zone(grab.target_zone)
+		if(istype(C))
+			C.leave_evidence(grabber)
+

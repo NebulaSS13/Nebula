@@ -76,7 +76,6 @@
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 
-	var/other_mobs = null
 	var/next_move = null
 	var/hand = null
 	var/real_name = null
@@ -126,9 +125,6 @@
 	var/obj/item/back = null//Human/Monkey
 	var/obj/item/storage/s_active = null//Carbon
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
-
-	var/list/grabbed_by = list()
-
 	var/in_throw_mode = 0
 
 	var/inertia_dir = 0

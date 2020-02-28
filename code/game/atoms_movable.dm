@@ -19,6 +19,7 @@
 	var/moved_recently = 0
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
+	var/list/grabbed_by
 
 /atom/movable/Destroy()
 	. = ..()
@@ -227,3 +228,32 @@
 
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
+
+/atom/movable/attack_hand(mob/user)
+	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
+	if(!user.lying && user.a_intent == I_GRAB && !anchored)
+		if(user.try_grab(src))
+			user.face_atom(src)
+		return 0
+	. = ..()
+
+/atom/movable/proc/can_be_grabbed(var/mob/grabber, var/obj/item/grab/grab)
+	if(!istype(grabber) || !isturf(loc) || !isturf(grabber.loc))
+		return FALSE
+	if(!CanPhysicallyInteract(grabber))
+		return FALSE
+	if(grabber.anchored || grabber.buckled)
+		return FALSE
+	if(anchored)
+		to_chat(grabber, SPAN_WARNING("\The [src] won't budge!"))
+		return FALSE
+	if(grabber.get_active_hand())
+		to_chat(grabber, SPAN_WARNING("Your hand is full!"))
+		return FALSE
+	if(LAZYLEN(grabber.grabbed_by))
+		to_chat(grabber, SPAN_WARNING("You cannot start grappling while already being grappled!"))
+		return FALSE
+	return TRUE
+
+/atom/movable/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
+	. = ..() || (mover && (!mover.density || ((movable_flags & MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS) && (mover.movable_flags & MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS))))

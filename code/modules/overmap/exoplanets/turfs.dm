@@ -262,4 +262,11 @@
 		new_y = E.maxy - TRANSITIONEDGE - 1
 	else if (y >= (E.maxy - TRANSITIONEDGE))
 		new_y = TRANSITIONEDGE + 1
-	A.forceMove(locate(new_x, new_y, z))
+
+	var/turf/T = locate(new_x, new_y, A.z)
+	if(T && !T.density)
+		A.forceMove(T)
+		if(isliving(A))
+			var/mob/living/L = A
+			for(var/obj/item/grab/G in L.get_active_grabs())
+				G.affecting.forceMove(T)

@@ -66,7 +66,7 @@ default behaviour is:
 			var/mob/living/tmob = AM
 
 			for(var/mob/living/M in range(tmob, 1))
-				if(tmob.pinned.len || (locate(/obj/item/grab, tmob.grabbed_by.len)))
+				if(tmob.pinned.len || (locate(/obj/item/grab, LAZYLEN(tmob.grabbed_by))))
 					if ( !(world.time % 5) )
 						to_chat(src, "<span class='warning'>[tmob] is restrained, you cannot push past</span>")
 					now_pushing = 0
@@ -498,11 +498,21 @@ default behaviour is:
 
 	return
 
+/mob/living/handle_grabs_after_move()
+	..()
+	if(!skill_check(SKILL_MEDICAL, SKILL_BASIC))
+		for(var/obj/item/grab/grab in get_active_grabs())
+			var/mob/affecting_mob = grab.get_affecting_mob()
+			if(affecting_mob)
+				affecting_mob.handle_grab_damage()
+
 /mob/living/Move(a, b, flag)
 	if (buckled)
 		return
 
 	. = ..()
+
+	handle_grabs_after_move()
 
 	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
 		s_active.close(src)
@@ -611,9 +621,6 @@ default behaviour is:
 	return null
 
 /mob/living/proc/has_brain()
-	return 1
-
-/mob/living/proc/has_eyes()
 	return 1
 
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
@@ -830,3 +837,14 @@ default behaviour is:
 
 /mob/living/can_be_injected_by(var/atom/injector)
 	return ..() && (can_inject(null, 0, BP_CHEST) || can_inject(null, 0, BP_GROIN))
+
+/mob/living/handle_grab_damage()
+	..()
+	var/area/A = get_area(src)
+	if(!A.has_gravity)
+		return
+	if(isturf(loc) && pull_damage() && prob(getBruteLoss() / 6))
+		blood_splatter(loc, src, large = TRUE)
+		if(prob(25))
+			adjustBruteLoss(1)
+			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))

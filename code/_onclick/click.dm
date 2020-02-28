@@ -251,6 +251,13 @@
 /atom/proc/CtrlClick(var/mob/user)
 	return FALSE
 
+/atom/movable/CtrlClick(var/mob/user)
+	if(CanPhysicallyInteract(user) && !user.lying)
+		if(user.try_grab(src))
+			user.face_atom(src)
+		return TRUE
+	. = ..()
+
 /*
 	Alt click
 	Unused except for AI
