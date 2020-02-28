@@ -146,7 +146,7 @@
 	if(!CanPhysicallyInteractWith(usr, src))
 		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
 		return
-		
+
 	if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		rip_out()
 	else
