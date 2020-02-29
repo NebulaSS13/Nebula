@@ -37,8 +37,8 @@ exactly 26 "text2path uses" 'text2path'
 exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto uses" 'goto '
 exactly 468 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
-exactly 3 "obj/New uses" '^/obj.*/New\('
-exactly 0 "relatively pathed /New calls" '\tNew\('
+exactly 6 "atom/New uses" '^/(obj|atom|area|mob|turf).*/New\('
+exactly 0 "relatively pathed /New calls" '\t+/?New\('
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
 broken_files=0

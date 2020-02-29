@@ -27,5 +27,5 @@
 	. = ..()
 	. += new /datum/stack_recipe/tile/nullglass(src)
 
-/obj/item/material/shard/nullglass/New(var/newloc)
-	..(newloc, MAT_NULLGLASS)
+/obj/item/material/shard/nullglass
+	material = MAT_NULLGLASS

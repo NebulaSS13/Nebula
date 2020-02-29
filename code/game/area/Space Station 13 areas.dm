@@ -216,8 +216,8 @@ area/space/atmosalert()
 	requires_power = 0
 	var/sound/mysound = null
 
-/area/beach/New()
-	..()
+/area/beach/Initialize()
+	. = ..()
 	var/sound/S = new/sound()
 	mysound = S
 	S.file = 'sound/ambience/shore.ogg'
