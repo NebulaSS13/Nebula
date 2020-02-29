@@ -24,7 +24,7 @@ GLOBAL_LIST_INIT(rustle_sound,\
 		'sound/effects/rustle4.ogg',\
 		'sound/effects/rustle5.ogg'))
 
-GLOBAL_LIST_INIT(punch_sound,
+GLOBAL_LIST_INIT(punch_sound,\
 	list(\
 		'sound/weapons/punch1.ogg',\
 		'sound/weapons/punch2.ogg',\
@@ -102,7 +102,7 @@ GLOBAL_LIST_INIT(chop_sound,\
 		'sound/weapons/chop2.ogg',\
 		'sound/weapons/chop3.ogg'))
 
-GLOBAL_LIST_INIT(glasscrack_sound,
+GLOBAL_LIST_INIT(glasscrack_sound,\
 	list(\
 		'sound/effects/glass_crack1.ogg',\
 		'sound/effects/glass_crack2.ogg',\
