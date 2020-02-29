@@ -5,7 +5,6 @@
 // - Impaired messages do not do any substitutions.
 
 /decl/emote
-
 	var/key                            // Command to use emote ie. '*[key]'
 	var/emote_message_1p               // First person message ('You do a flip!')
 	var/emote_message_3p               // Third person message ('Urist McShitter does a flip!')
@@ -13,6 +12,10 @@
 
 	var/emote_message_1p_target        // 'You do a flip at Urist McTarget!'
 	var/emote_message_3p_target        // 'Urist McShitter does a flip at Urist McTarget!'
+
+	// Two-dimensional array
+	// First is list of genders, associated to a list of the sound effects to use
+	var/list/emote_sound = null
 
 	var/message_type = VISIBLE_MESSAGE // Audible/visual flag
 	var/targetted_emote                // Whether or not this emote needs a target.
@@ -30,7 +33,6 @@
 	return emote_message_3p
 
 /decl/emote/proc/do_emote(var/atom/user, var/extra_params)
-
 	if(ismob(user) && check_restraints)
 		var/mob/M = user
 		if(M.restrained())
@@ -78,17 +80,29 @@
 		use_3p = replacetext(use_3p, "USER", "<b>\the [user]</b>")
 		use_3p = capitalize(use_3p)
 
-	if(ismob(user))
-		var/mob/M = user
-		if(message_type == AUDIBLE_MESSAGE)
-			M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
-		else
-			M.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
+	if(message_type == AUDIBLE_MESSAGE)
+		if(isliving(user))
+			var/mob/living/L = user
+			if(!L.silent)
+				user.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
+			else
+				user.visible_message(message = "[user] opens their mouth silently!", self_message = "You cannot say anything!", blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
+	else
+		user.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
 
 	do_extra(user, target)
+	do_sound(user)
 
 /decl/emote/proc/do_extra(var/atom/user, var/atom/target)
 	return
+
+/decl/emote/proc/do_sound(var/atom/user)
+	if(emote_sound)
+		var/sound_to_play = emote_sound
+		if(islist(emote_sound))
+			sound_to_play = emote_sound[user.gender] || emote_sound
+			sound_to_play = pick(sound_to_play)
+		return playsound(user.loc, sound_to_play, 50, 0)
 
 /decl/emote/proc/check_user(var/atom/user)
 	return TRUE

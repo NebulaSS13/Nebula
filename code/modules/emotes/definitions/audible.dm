@@ -2,27 +2,22 @@
 	key = "burp"
 	emote_message_3p = "USER burps."
 	message_type = AUDIBLE_MESSAGE
-	var/emote_sound
-
-/decl/emote/audible/do_extra(var/atom/user)
-	if(emote_sound)
-		playsound(user.loc, emote_sound, 50, 0)
 
 /decl/emote/audible/deathgasp_alien
 	key = "deathgasp"
 	emote_message_3p = "USER lets out a waning guttural screech, green blood bubbling from its maw."
 
 /decl/emote/audible/whimper
-	key ="whimper"
+	key = "whimper"
 	emote_message_3p = "USER whimpers."
 
 /decl/emote/audible/gasp
-	key ="gasp"
+	key = "gasp"
 	emote_message_3p = "USER gasps."
 	conscious = 0
 
 /decl/emote/audible/scretch
-	key ="scretch"
+	key = "scretch"
 	emote_message_3p = "USER scretches."
 
 /decl/emote/audible/choke
@@ -31,16 +26,16 @@
 	conscious = 0
 
 /decl/emote/audible/gnarl
-	key ="gnarl"
+	key = "gnarl"
 	emote_message_3p = "USER gnarls and shows its teeth.."
 
 /decl/emote/audible/chirp
-	key ="chirp"
+	key = "chirp"
 	emote_message_3p = "USER chirps!"
 	emote_sound = 'sound/misc/nymphchirp.ogg'
 
 /decl/emote/audible/multichirp
-	key ="mchirp"
+	key = "mchirp"
 	emote_message_3p = "USER chirps a chorus of notes!"
 	emote_sound = 'sound/misc/multichirp.ogg'
 
