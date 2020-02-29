@@ -126,7 +126,7 @@
 	. = ..()
 	new /obj/item/tank/hydrogen(src)
 
-/obj/structure/fuel_port/attack_hand(mob/user as mob)
+/obj/structure/fuel_port/attack_hand(mob/user)
 	if(!opened)
 		to_chat(user, "<spawn class='notice'>The door is secured tightly. You'll need a crowbar to open it.")
 		return

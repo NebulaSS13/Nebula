@@ -35,13 +35,13 @@
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/chems/verb/set_amount_per_transfer_from_this
 
-/obj/item/chems/attack_self(mob/user as mob)
+/obj/item/chems/attack_self(mob/user)
 	return
 
 /obj/item/chems/afterattack(obj/target, mob/user, flag)
 	return
 
-/obj/item/chems/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/chems/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(length(tmp_label) > 10)

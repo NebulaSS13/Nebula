@@ -33,7 +33,7 @@
 			return
 		to_chat(user, "\The [src] is set for instant detonation.")
 
-/obj/item/grenade/attack_self(mob/user as mob)
+/obj/item/grenade/attack_self(mob/user)
 	if(!active)
 		if(clown_check(user))
 			to_chat(user, "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>")
@@ -60,7 +60,7 @@
 	if(T)
 		T.hotspot_expose(700,125)
 
-/obj/item/grenade/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/grenade/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		switch(det_time)
 			if (1)

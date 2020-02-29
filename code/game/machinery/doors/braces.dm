@@ -68,11 +68,11 @@
 
 
 // Interact with the electronics to set access requirements.
-/obj/item/airlock_brace/attack_self(mob/user as mob)
+/obj/item/airlock_brace/attack_self(mob/user)
 	electronics.attack_self(user)
 
 
-/obj/item/airlock_brace/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/airlock_brace/attackby(obj/item/W, mob/user)
 	..()
 	if (istype(W.GetIdCard(), /obj/item/card/id))
 		if(!airlock)

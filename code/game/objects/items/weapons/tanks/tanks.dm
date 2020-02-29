@@ -190,7 +190,7 @@ var/list/global/tank_gauge_cache = list()
 		master = F
 		F.tank = src
 
-/obj/item/tank/attack_self(mob/user as mob)
+/obj/item/tank/attack_self(mob/user)
 	add_fingerprint(user)
 	if (!air_contents)
 		return
@@ -582,7 +582,7 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/tankassemblyproxy/on_update_icon()
 	tank.update_icon()
 
-/obj/item/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/tankassemblyproxy/HasProximity(atom/movable/AM)
 	if(assembly)
 		assembly.HasProximity(AM)
 

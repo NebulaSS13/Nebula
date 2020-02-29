@@ -222,7 +222,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/smes/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/power/smes/attackby(var/obj/item/W, var/mob/user)
 	if(component_attackby(W, user))
 		return TRUE
 

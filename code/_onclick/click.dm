@@ -224,7 +224,7 @@
 
 // In case of use break glass
 /*
-/atom/proc/MiddleClick(var/mob/M as mob)
+/atom/proc/MiddleClick(var/mob/M)
 	return
 */
 

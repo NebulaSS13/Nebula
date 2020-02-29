@@ -151,7 +151,7 @@
 	else
 		return 1
 
-/obj/structure/window/CheckExit(atom/movable/O as mob|obj, target as turf)
+/obj/structure/window/CheckExit(atom/movable/O, target)
 	if(istype(O) && O.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(get_dir(O.loc, target) == dir)
@@ -174,7 +174,7 @@
 		step(src, get_dir(AM, src))
 	take_damage(tforce)
 
-/obj/structure/window/attack_hand(mob/user as mob)
+/obj/structure/window/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(MUTATION_HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
@@ -504,7 +504,7 @@
 		/obj/item/stock_parts/power/apc
 	)
 
-/obj/machinery/button/windowtint/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/button/windowtint/attackby(obj/item/W, mob/user)
 	if(isMultitool(W))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", src.name, id), MAX_NAME_LEN)
 		if(user.incapacitated() && !user.Adjacent(src))

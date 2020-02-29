@@ -89,7 +89,7 @@
 		H.update_inv_l_hand()
 
 /* Assembly by a roboticist */
-/obj/item/robot_parts/head/attackby(var/obj/item/assembly/S, mob/user as mob)
+/obj/item/robot_parts/head/attackby(var/obj/item/assembly/S, mob/user)
 	if ((!istype(S, /obj/item/assembly/infra)))
 		..()
 		return

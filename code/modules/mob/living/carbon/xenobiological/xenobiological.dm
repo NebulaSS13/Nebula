@@ -111,7 +111,7 @@
 
 	return tally + config.slime_delay
 
-/mob/living/carbon/slime/Bump(atom/movable/AM as mob|obj, yes)
+/mob/living/carbon/slime/Bump(atom/movable/AM, yes)
 	if ((!(yes) || now_pushing))
 		return
 	now_pushing = 1
@@ -206,13 +206,13 @@
 	updatehealth()
 
 
-/mob/living/carbon/slime/u_equip(obj/item/W as obj)
+/mob/living/carbon/slime/u_equip(obj/item/W)
 	return
 
 /mob/living/carbon/slime/attack_ui(slot)
 	return
 
-/mob/living/carbon/slime/attack_hand(mob/living/carbon/human/M as mob)
+/mob/living/carbon/slime/attack_hand(mob/living/carbon/human/M)
 
 	..()
 

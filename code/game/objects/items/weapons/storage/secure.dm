@@ -192,5 +192,5 @@
 	new /obj/item/paper(src)
 	new /obj/item/pen(src)
 
-/obj/item/storage/secure/safe/attack_hand(mob/user as mob)
+/obj/item/storage/secure/safe/attack_hand(mob/user)
 	return attack_self(user)

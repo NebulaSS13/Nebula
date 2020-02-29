@@ -16,7 +16,7 @@
 	. = ..()
 	files = new /datum/research/techonly(src) //Setup the research data holder.
 
-/obj/item/portable_destructive_analyzer/attack_self(user as mob)
+/obj/item/portable_destructive_analyzer/attack_self(user)
 	var/response = alert(user, 	"Analyzing the item inside will *DESTROY* the item for good.\n\
 							Syncing to the research server will send the data that is stored inside to research.\n\
 							Ejecting will place the loaded item onto the floor.",
@@ -196,7 +196,7 @@
 	name = "RoboTray"
 	desc = "An autoloading tray specialized for carrying refreshments."
 
-/obj/item/tray/robotray/afterattack(atom/target, mob/user as mob, proximity)
+/obj/item/tray/robotray/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
 	if ( !target )
@@ -280,7 +280,7 @@
 	name = "Printing Pen"
 	var/mode = 1
 
-/obj/item/pen/robopen/attack_self(mob/user as mob)
+/obj/item/pen/robopen/attack_self(mob/user)
 
 	var/choice = input("Would you like to change colour or mode?") as null|anything in list("Colour","Mode")
 	if(!choice) return
@@ -327,10 +327,10 @@
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
 
-/obj/item/form_printer/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/form_printer/attack(mob/living/carbon/M, mob/living/carbon/user)
 	return
 
-/obj/item/form_printer/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+/obj/item/form_printer/afterattack(atom/target, mob/living/user, flag, params)
 
 	if(!target || !flag)
 		return
@@ -338,7 +338,7 @@
 	if(istype(target,/obj/structure/table))
 		deploy_paper(get_turf(target))
 
-/obj/item/form_printer/attack_self(mob/user as mob)
+/obj/item/form_printer/attack_self(mob/user)
 	deploy_paper(get_turf(src))
 
 /obj/item/form_printer/proc/deploy_paper(var/turf/T)

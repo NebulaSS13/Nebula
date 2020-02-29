@@ -424,7 +424,7 @@
 		damage += proj_damage * config_bullet_energy
 	return 0
 
-/obj/machinery/power/supermatter/attack_robot(mob/user as mob)
+/obj/machinery/power/supermatter/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
 	else
@@ -437,7 +437,7 @@
 /obj/machinery/power/supermatter/attack_ghost(mob/user)
 	ui_interact(user)
 
-/obj/machinery/power/supermatter/attack_hand(mob/user as mob)
+/obj/machinery/power/supermatter/attack_hand(mob/user)
 	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
 		"<span class=\"danger\">You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
 		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
@@ -472,7 +472,7 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/supermatter/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/machinery/power/supermatter/attackby(obj/item/W, mob/living/user)
 	if(istype(W, /obj/item/tape_roll))
 		to_chat(user, "You repair some of the damage to \the [src] with \the [W].")
 		damage = max(damage -10, 0)
@@ -487,7 +487,7 @@
 	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 
-/obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
+/obj/machinery/power/supermatter/Bumped(atom/AM)
 	if(istype(AM, /obj/effect))
 		return
 	if(istype(AM, /mob/living))

@@ -13,7 +13,7 @@
 /obj/item/nullrod/disrupts_psionics()
 	return src
 
-/obj/item/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
+/obj/item/nullrod/attack(mob/M, mob/living/user) //Paste from old-code to decult with a null rod.
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -225,7 +225,7 @@
 	healthcheck()
 	return
 
-/obj/effect/energy_net/attackby(obj/item/W as obj, mob/user as mob)
+/obj/effect/energy_net/attackby(obj/item/W, mob/user)
 	health -= W.force
 	healthcheck()
 	..()
@@ -234,7 +234,7 @@ obj/effect/energy_net/user_unbuckle_mob(mob/user)
 	return escape_net(user)
 
 
-/obj/effect/energy_net/proc/escape_net(mob/user as mob)
+/obj/effect/energy_net/proc/escape_net(mob/user)
 	visible_message(
 		"<span class='warning'>\The [user] attempts to free themselves from \the [src]!</span>",
 		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"

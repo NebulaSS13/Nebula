@@ -26,7 +26,7 @@
 	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
 	return TRUE
 
-/obj/machinery/cablelayer/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/cablelayer/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/cable_coil))
 
 		var/result = load_cable(O)

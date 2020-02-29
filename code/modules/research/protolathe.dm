@@ -88,7 +88,7 @@
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
-/obj/machinery/r_n_d/protolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/r_n_d/protolathe/attackby(var/obj/item/O, var/mob/user)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1

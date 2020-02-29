@@ -274,7 +274,7 @@
 	. = ..()
 
 
-/obj/item/synthesized_instrument/attack_self(mob/user as mob)
+/obj/item/synthesized_instrument/attack_self(mob/user)
 	src.interact(user)
 
 

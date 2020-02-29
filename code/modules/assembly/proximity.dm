@@ -38,7 +38,7 @@
 	return secured
 
 
-/obj/item/assembly/prox_sensor/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/assembly/prox_sensor/HasProximity(atom/movable/AM)
 	if(!istype(AM))
 		log_debug("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
 		return
@@ -114,7 +114,7 @@
 	return
 
 
-/obj/item/assembly/prox_sensor/interact(mob/user as mob)//TODO: Change this to the wires thingy
+/obj/item/assembly/prox_sensor/interact(mob/user)//TODO: Change this to the wires thingy
 	if(!secured)
 		user.show_message("<span class='warning'>The [name] is unsecured!</span>")
 		return 0

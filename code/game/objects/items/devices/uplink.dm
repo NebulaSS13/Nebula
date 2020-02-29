@@ -97,7 +97,7 @@
 	active = !active
 
 // Directly trigger the uplink. Turn on if it isn't already.
-/obj/item/uplink/proc/trigger(mob/user as mob)
+/obj/item/uplink/proc/trigger(mob/user)
 	if(!active)
 		toggle()
 	interact(user)
@@ -105,7 +105,7 @@
 // Checks to see if the value meets the target. Like a frequency being a traitor_frequency, in order to unlock a headset.
 // If true, it accesses trigger() and returns 1. If it fails, it returns false. Use this to see if you need to close the
 // current item's menu.
-/obj/item/uplink/proc/check_trigger(mob/user as mob, var/value, var/target)
+/obj/item/uplink/proc/check_trigger(mob/user, var/value, var/target)
 	if(value == target)
 		trigger(user)
 		return 1
@@ -202,7 +202,7 @@
 // You place this in your uplinkable item to check if an uplink is active or not.
 // If it is, it will display the uplink menu and return 1, else it'll return false.
 // If it returns true, I recommend closing the item's normal menu with "close_browser(user, "window=name")"
-/obj/item/proc/active_uplink_check(mob/user as mob)
+/obj/item/proc/active_uplink_check(mob/user)
 	// Activates the uplink if it's active
 	if(src.hidden_uplink)
 		if(src.hidden_uplink.active)
@@ -221,7 +221,7 @@
 	hidden_uplink = new(src, owner, amount)
 	icon_state = "radio"
 
-/obj/item/radio/uplink/attack_self(mob/user as mob)
+/obj/item/radio/uplink/attack_self(mob/user)
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 
@@ -229,7 +229,7 @@
 	. = ..()
 	hidden_uplink = new(src, owner)
 
-/obj/item/multitool/uplink/attack_self(mob/user as mob)
+/obj/item/multitool/uplink/attack_self(mob/user)
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 

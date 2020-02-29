@@ -167,7 +167,7 @@ datum/track/proc/GetTrack()
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 	qdel(src)
 
-/obj/machinery/media/jukebox/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/media/jukebox/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
 		add_fingerprint(user)
 		wrench_floor_bolts(user, 0)

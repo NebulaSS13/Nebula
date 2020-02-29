@@ -9,7 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/stored_item = null
 
-/obj/item/evidencebag/MouseDrop(var/obj/item/I as obj)
+/obj/item/evidencebag/MouseDrop(var/obj/item/I)
 	if (!ishuman(usr))
 		return
 
@@ -81,7 +81,7 @@
 		icon_state = "evidenceobj"
 		desc = "An empty evidence bag."
 
-/obj/item/evidencebag/attack_self(mob/user as mob)
+/obj/item/evidencebag/attack_self(mob/user)
 	if(stored_item)
 		user.visible_message("[user] takes [stored_item] out of [src]", "You take [stored_item] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")

@@ -119,7 +119,7 @@
 /obj/item/projectile/proc/check_penetrate(var/atom/A)
 	return 1
 
-/obj/item/projectile/proc/check_fire(atom/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
+/obj/item/projectile/proc/check_fire(atom/target, var/mob/living/user)  //Checks if you can hit them or not.
 	check_trajectory(target, user, pass_flags, item_flags, obj_flags)
 
 //sets the click point of the projectile using mouse input params
@@ -242,7 +242,7 @@
 
 	return 1
 
-/obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
+/obj/item/projectile/Bump(atom/A, forced=0)
 	if(A == src)
 		return 0 //no
 
@@ -424,7 +424,7 @@
 	xo = null
 	var/result = 0 //To pass the message back to the gun.
 
-/obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area, forced=0)
+/obj/item/projectile/test/Bump(atom/A, forced=0)
 	if(A == firer)
 		forceMove(A.loc)
 		return //cannot shoot yourself
@@ -469,7 +469,7 @@
 				return 1
 
 //Helper proc to check if you can hit them or not.
-/proc/check_trajectory(atom/target as mob|obj, atom/firer as mob|obj, var/pass_flags=PASS_FLAG_TABLE|PASS_FLAG_GLASS|PASS_FLAG_GRILLE, item_flags = null, obj_flags = null)
+/proc/check_trajectory(atom/target, atom/firer, var/pass_flags=PASS_FLAG_TABLE|PASS_FLAG_GLASS|PASS_FLAG_GRILLE, item_flags, obj_flags)
 	if(!istype(target) || !istype(firer))
 		return 0
 

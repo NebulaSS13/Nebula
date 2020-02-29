@@ -92,7 +92,7 @@
 		I.color = has_handle
 		overlays += I
 
-/obj/item/material/shard/Crossed(AM as mob|obj)
+/obj/item/material/shard/Crossed(atom/movable/AM)
 	..()
 	if(isliving(AM))
 		var/mob/M = AM

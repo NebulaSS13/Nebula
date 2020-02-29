@@ -64,12 +64,12 @@
 	for(var/atom/movable/AM in contents)
 		underlays += AM.appearance
 
-/obj/structure/displaycase/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/displaycase/attackby(obj/item/W, mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	take_damage(W.force)
 	..()
 
-/obj/structure/displaycase/attack_hand(mob/user as mob)
+/obj/structure/displaycase/attack_hand(mob/user)
 	add_fingerprint(user)
 	if(!destroyed)
 		to_chat(usr, text("<span class='warning'>You kick the display case.</span>"))

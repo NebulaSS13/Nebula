@@ -46,7 +46,7 @@
 	to_chat(user, "The following channels are available:")
 	to_chat(user, radio_desc)
 
-/obj/item/radio/headset/handle_message_mode(mob/living/M as mob, message, channel)
+/obj/item/radio/headset/handle_message_mode(mob/living/M, message, channel)
 	if (channel == "special")
 		if (translate_binary)
 			var/datum/language/binary = all_languages[LANGUAGE_ROBOT_GLOBAL]
@@ -307,7 +307,7 @@
 	item_state = "headset"
 	ks1type = /obj/item/encryptionkey/specops
 
-/obj/item/radio/headset/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/radio/headset/attackby(obj/item/W, mob/user)
 //	..()
 	user.set_machine(src)
 	if (!( isScrewdriver(W) || (istype(W, /obj/item/encryptionkey/ ))))

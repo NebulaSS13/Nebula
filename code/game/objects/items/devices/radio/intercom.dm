@@ -101,12 +101,12 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/radio/intercom/attack_ai(mob/user as mob)
+/obj/item/radio/intercom/attack_ai(mob/user)
 	src.add_fingerprint(user)
 	spawn (0)
 		attack_self(user)
 
-/obj/item/radio/intercom/attack_hand(mob/user as mob)
+/obj/item/radio/intercom/attack_hand(mob/user)
 	src.add_fingerprint(user)
 	spawn (0)
 		attack_self(user)

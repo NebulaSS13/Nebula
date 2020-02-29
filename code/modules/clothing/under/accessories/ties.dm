@@ -65,11 +65,11 @@
 /obj/item/clothing/accessory/bowtie
 	var/tied = TRUE
 
-/obj/item/clothing/accessory/bowtie/on_attached(obj/item/clothing/under/S, mob/user as mob)
+/obj/item/clothing/accessory/bowtie/on_attached(obj/item/clothing/under/S, mob/user)
 	..()
 	has_suit.verbs += /obj/item/clothing/accessory/bowtie/verb/toggle
 
-/obj/item/clothing/accessory/bowtie/on_removed(mob/user as mob)
+/obj/item/clothing/accessory/bowtie/on_removed(mob/user)
 	if(has_suit)
 		has_suit.verbs -= /obj/item/clothing/accessory/bowtie/verb/toggle
 	..()

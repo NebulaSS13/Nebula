@@ -76,7 +76,7 @@ obj/machinery/gateway/centerstation/Process()
 		ready = 1
 
 
-/obj/machinery/gateway/centerstation/proc/toggleon(mob/user as mob)
+/obj/machinery/gateway/centerstation/proc/toggleon(mob/user)
 	if(!ready)			return
 	if(linked.len != 8)	return
 	if(!powered())		return
@@ -102,7 +102,7 @@ obj/machinery/gateway/centerstation/Process()
 	update_icon()
 
 
-/obj/machinery/gateway/centerstation/attack_hand(mob/user as mob)
+/obj/machinery/gateway/centerstation/attack_hand(mob/user)
 	if(!ready)
 		detect()
 		return
@@ -113,7 +113,7 @@ obj/machinery/gateway/centerstation/Process()
 
 
 //okay, here's the good teleporting stuff
-/obj/machinery/gateway/centerstation/Bumped(atom/movable/M as mob|obj)
+/obj/machinery/gateway/centerstation/Bumped(atom/movable/M)
 	if(!ready)		return
 	if(!active)		return
 	if(!awaygate)	return
@@ -128,7 +128,7 @@ obj/machinery/gateway/centerstation/Process()
 			M.set_dir(SOUTH)
 			use_power_oneoff(5000)
 
-/obj/machinery/gateway/centerstation/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/gateway/centerstation/attackby(obj/item/W, mob/user)
 	if(isMultitool(W))
 		to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 		return
@@ -178,7 +178,7 @@ obj/machinery/gateway/centerstation/Process()
 		ready = 1
 
 
-/obj/machinery/gateway/centeraway/proc/toggleon(mob/user as mob)
+/obj/machinery/gateway/centeraway/proc/toggleon(mob/user)
 	if(!ready)			return
 	if(linked.len != 8)	return
 	if(!stationgate)
@@ -200,7 +200,7 @@ obj/machinery/gateway/centerstation/Process()
 	update_icon()
 
 
-/obj/machinery/gateway/centeraway/attack_hand(mob/user as mob)
+/obj/machinery/gateway/centeraway/attack_hand(mob/user)
 	if(!ready)
 		detect()
 		return
@@ -209,7 +209,7 @@ obj/machinery/gateway/centerstation/Process()
 		return
 	toggleoff()
 
-/obj/machinery/gateway/centeraway/Bumped(atom/movable/M as mob|obj)
+/obj/machinery/gateway/centeraway/Bumped(atom/movable/M)
 	if(!ready)	return
 	if(!active)	return
 	if(istype(M, /mob/living/carbon))
@@ -220,7 +220,7 @@ obj/machinery/gateway/centerstation/Process()
 	M.forceMove(get_step(stationgate.loc, SOUTH))
 	M.set_dir(SOUTH)
 
-/obj/machinery/gateway/centeraway/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/gateway/centeraway/attackby(obj/item/W, mob/user)
 	if(isMultitool(W))
 		if(calibrated)
 			to_chat(user, "The gate is already calibrated, there is no work for you to do here.")

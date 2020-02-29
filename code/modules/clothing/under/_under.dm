@@ -153,7 +153,7 @@
 		if(3)
 			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
-/obj/item/clothing/under/proc/set_sensors(mob/user as mob)
+/obj/item/clothing/under/proc/set_sensors(mob/user)
 	var/mob/M = user
 	if (isobserver(M)) return
 	if (user.incapacitated()) return

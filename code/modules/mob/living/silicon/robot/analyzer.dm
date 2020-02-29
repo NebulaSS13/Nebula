@@ -16,7 +16,7 @@
 	matter = list(MAT_STEEL = 250, MAT_GLASS = 100, MAT_PLASTIC = 75)
 	var/mode = 1;
 
-/obj/item/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/robotanalyzer/attack(mob/living/M, mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, text("<span class='warning'>You try to analyze the floor's vitals!</span>"))
 		for(var/mob/O in viewers(M, null))

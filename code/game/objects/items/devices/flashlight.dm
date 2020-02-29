@@ -63,7 +63,7 @@
 	else
 		set_light(0)
 
-/obj/item/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/flashlight/attack(mob/living/M, mob/living/user)
 	add_fingerprint(user)
 	if(on && user.zone_sel.selecting == BP_EYES)
 

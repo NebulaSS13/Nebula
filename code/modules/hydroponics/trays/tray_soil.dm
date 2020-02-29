@@ -8,7 +8,7 @@
 	mechanical = 0
 	tray_light = 0
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/tank))
 		return
 	else

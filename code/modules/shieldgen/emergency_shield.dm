@@ -42,7 +42,7 @@
 	if(!height || air_group) return 0
 	else return ..()
 
-/obj/machinery/shield/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/shield/attackby(obj/item/W, mob/user)
 	if(!istype(W)) return
 
 	//Calculate damage
@@ -89,7 +89,7 @@
 				qdel(src)
 
 
-/obj/machinery/shield/hitby(AM as mob|obj, var/datum/thrownthing/TT)
+/obj/machinery/shield/hitby(AM, var/datum/thrownthing/TT)
 	//Let everyone know we've been hit!
 	visible_message("<span class='notice'><B>\[src] was hit by [AM].</B></span>")
 
@@ -250,7 +250,7 @@
 				malfunction = 1
 	checkhp()
 
-/obj/machinery/shieldgen/interface_interact(mob/user as mob)
+/obj/machinery/shieldgen/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	if(locked)
@@ -281,7 +281,7 @@
 		update_icon()
 		return 1
 
-/obj/machinery/shieldgen/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/shieldgen/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(is_open)

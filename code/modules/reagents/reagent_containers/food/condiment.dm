@@ -30,7 +30,7 @@
 		/datum/reagent/nutriment/vinegar = /obj/item/chems/food/condiment/vinegar
 		)
 
-/obj/item/chems/food/condiment/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/item/chems/food/condiment/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(tmp_label == label_text)
@@ -50,10 +50,10 @@
 
 
 
-/obj/item/chems/food/condiment/attack_self(var/mob/user as mob)
+/obj/item/chems/food/condiment/attack_self(var/mob/user)
 	return
 
-/obj/item/chems/food/condiment/attack(var/mob/M as mob, var/mob/user as mob, var/def_zone)
+/obj/item/chems/food/condiment/attack(var/mob/M, var/mob/user, var/def_zone)
 	if(standard_feed_mob(user, M))
 		return
 

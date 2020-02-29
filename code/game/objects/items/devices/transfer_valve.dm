@@ -69,13 +69,13 @@
 	return
 
 
-/obj/item/transfer_valve/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/transfer_valve/HasProximity(atom/movable/AM)
 	if(!attached_device)	return
 	attached_device.HasProximity(AM)
 	return
 
 
-/obj/item/transfer_valve/attack_self(mob/user as mob)
+/obj/item/transfer_valve/attack_self(mob/user)
 	ui_interact(user)
 
 /obj/item/transfer_valve/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
