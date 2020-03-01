@@ -158,7 +158,6 @@ What is the naming convention for planes or layers?
 	//OBSERVER
 	#define OBSERVER_LAYER              5.1
 
-	#define OBFUSCATION_LAYER           5.2
 	#define BASE_AREA_LAYER             999
 
 #define OBSERVER_PLANE             1
@@ -172,6 +171,7 @@ What is the naming convention for planes or layers?
 	#define EYE_GLOW_LAYER         1
 	#define BEAM_PROJECTILE_LAYER  2
 	#define SUPERMATTER_WALL_LAYER 3
+	#define OBFUSCATION_LAYER      4
 
 #define FULLSCREEN_PLANE                4 // for fullscreen overlays that do not cover the hud.
 

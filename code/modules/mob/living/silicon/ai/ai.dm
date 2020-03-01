@@ -25,6 +25,11 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/toggle_camera_light,
 	/mob/living/silicon/ai/proc/multitool_mode,
 	/mob/living/silicon/ai/proc/toggle_hologram_movement,
+	/mob/living/silicon/ai/proc/ai_view_images,
+	/mob/living/silicon/ai/proc/ai_take_image,
+	/mob/living/silicon/ai/proc/change_floor,
+	/mob/living/silicon/ai/proc/show_crew_monitor,
+	/mob/living/silicon/ai/proc/show_crew_records,
 	/mob/living/silicon/ai/proc/ai_power_override,
 	/mob/living/silicon/ai/proc/ai_shutdown
 )
@@ -705,3 +710,45 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/ai_show)
 	. = ai_show ? ..(user, text_content, skip_delays) : stars(text_content)
+
+/mob/living/silicon/ai/proc/ai_take_image()
+	set name = "Take Photo"
+	set desc = "Activates the given subsystem"
+	set category = "Silicon Commands"
+
+	silicon_camera.toggle_camera_mode()
+
+/mob/living/silicon/ai/proc/ai_view_images()
+	set name = "View Photo"
+	set desc = "Activates the given subsystem"
+	set category = "Silicon Commands"
+
+	silicon_camera.viewpictures()
+
+/mob/living/silicon/ai/proc/change_floor()
+	set name = "Change Grid Color"
+	set category = "Silicon Commands"
+
+	var/f_color = input("Choose your color, dark colors are not recommended!") as color
+	var/list/black_list = list("#000000","#080808", "#111111", "#1c1c1c", "#292929", "#333333","#4d4d4d")
+	if(f_color in black_list)
+		to_chat(usr, SPAN_WARNING("Color \"[f_color]\" is not allowed!"))
+		return
+	if(!f_color)
+		return
+	var/area/A = get_area(usr)
+	for(var/turf/simulated/floor/bluegrid/F in A)
+		F.color = f_color
+	to_chat(usr, SPAN_NOTICE("Proccessing strata color was change to [f_color]"))
+
+/mob/living/silicon/ai/proc/show_crew_monitor()
+	set category = "Silicon Commands"
+	set name = "Show Crew Lifesigns Monitor"
+
+	open_subsystem(/datum/nano_module/crew_monitor)
+
+/mob/living/silicon/ai/proc/show_crew_records()
+	set category = "Silicon Commands"
+	set name = "Show Crew Records"
+
+	open_subsystem(/datum/nano_module/records)
