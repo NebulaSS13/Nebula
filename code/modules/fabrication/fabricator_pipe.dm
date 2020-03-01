@@ -9,6 +9,7 @@
 	power_channel = EQUIP
 	anchored = 0
 	use_power = POWER_USE_OFF
+	color_selectable = TRUE
 
 /obj/machinery/fabricator/pipe/on_update_icon()
 
