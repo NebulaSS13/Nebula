@@ -29,7 +29,9 @@
 	return (!user.gloves || !blocked_by_gloves)
 
 /datum/unarmed_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/obj/item/organ/external/affecting = target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	if(!affecting)
+		return ..()
 
 	attack_damage = Clamp(attack_damage, 1, 5)
 
@@ -96,8 +98,11 @@
 	return damage
 
 /datum/unarmed_attack/stomp/weak/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/obj/item/organ/external/affecting = target.get_organ(zone)
-	user.visible_message("<span class='warning'>[user] jumped up and down on \the [target]'s [affecting.name]!</span>")
+	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	if(affecting)
+		user.visible_message(SPAN_WARNING("\The [user] jumped up and down on \the [target]'s [affecting.name]!"))
+	else
+		user.visible_message(SPAN_WARNING("\The [user] jumped up and down on \the [target]!"))
 	playsound(user.loc, attack_sound, 25, 1, -1)
 
 /datum/unarmed_attack/tail
@@ -128,7 +133,9 @@
 
 /datum/unarmed_attack/tail/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
-	var/obj/item/organ/external/affecting = target.get_organ(zone)
+	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
+	if(!affecting)
+		return ..()
 
 	var/organ = affecting.name
 	attack_damage = Clamp(attack_damage, 1, 6)

@@ -20,13 +20,34 @@
 				qdel(src)
 	return
 
+/obj/effect/spider/attack_hand(mob/living/user)
+
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src)
+	if(prob(50))
+		visible_message(SPAN_WARNING("\The [user] tries to squash \the [src], but misses!"))
+		disturbed()
+		return
+
+	var/showed_msg = FALSE
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/datum/unarmed_attack/attack = H.get_unarmed_attack(src)
+		if(attack)
+			attack.show_attack(H, src, H.zone_sel.selecting, 1)
+			showed_msg = TRUE
+	if(!showed_msg)
+		visible_message(SPAN_DANGER("\The [user] squashes \the [src] flat!"))
+
+	die()
+
 /obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(W.attack_verb.len)
-		visible_message("<span class='warning'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
+		visible_message("<span class='warning'>\The [src] has been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
 	else
-		visible_message("<span class='warning'>\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
+		visible_message("<span class='warning'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
 
 	var/damage = W.force / 4.0
 
@@ -112,6 +133,14 @@
 				O.implants += spiderling
 		qdel(src)
 
+/obj/effect/spider/proc/disturbed()
+	return
+
+/obj/effect/spider/proc/die()
+	visible_message("<span class='alert'>[src] dies!</span>")
+	new /obj/effect/decal/cleanable/spiderling_remains(loc)
+	qdel(src)
+
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
@@ -145,7 +174,7 @@
 		dormant = FALSE
 
 	if(dormant)
-		GLOB.moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.register(src, src, /obj/effect/spider/proc/disturbed)
 	else
 		START_PROCESSING(SSobj, src)
 
@@ -160,7 +189,7 @@
 
 /obj/effect/spider/spiderling/Destroy()
 	if(dormant)
-		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.unregister(src, src, /obj/effect/spider/proc/disturbed)
 	STOP_PROCESSING(SSobj, src)
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
@@ -174,12 +203,11 @@
 	if(dormant && istype(L) && L.mob_size > MOB_TINY)
 		disturbed()
 
-/obj/effect/spider/spiderling/proc/disturbed()
+/obj/effect/spider/spiderling/disturbed()
 	if(!dormant)
 		return
 	dormant = FALSE
-
-	GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+	GLOB.moved_event.unregister(src, src, /obj/effect/spider/proc/disturbed)
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/spider/spiderling/Bump(atom/user)
@@ -187,11 +215,6 @@
 		forceMove(user.loc)
 	else
 		..()
-
-/obj/effect/spider/spiderling/proc/die()
-	visible_message("<span class='alert'>[src] dies!</span>")
-	new /obj/effect/decal/cleanable/spiderling_remains(loc)
-	qdel(src)
 
 /obj/effect/spider/spiderling/healthcheck()
 	if(health <= 0)
