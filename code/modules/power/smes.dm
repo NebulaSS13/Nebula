@@ -44,9 +44,6 @@
 	var/last_chrg
 	var/last_onln
 
-	var/damage = 0
-	var/maxdamage = 500 // Relatively resilient, given how expensive it is, but once destroyed produces small explosion.
-
 	var/input_cut = 0
 	var/input_pulsed = 0
 	var/output_cut = 0
@@ -230,19 +227,6 @@
 		to_chat(user, "<span class='warning'>You need to open the access hatch on \the [src] first!</span>")
 		return TRUE
 
-	if(isWelder(W))
-		var/obj/item/weldingtool/WT = W
-		if(!WT.isOn())
-			to_chat(user, "Turn on \the [WT] first!")
-			return TRUE
-		if(!damage)
-			to_chat(user, "\The [src] is already fully repaired.")
-			return TRUE
-		if(WT.remove_fuel(0,user) && do_after(user, damage, src))
-			to_chat(user, "You repair all structural damage to \the [src]")
-			damage = 0
-		return TRUE
-
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
 	var/data[0]
@@ -332,20 +316,11 @@
 	if(!output_attempt)
 		outputting = 0
 
-/obj/machinery/power/smes/proc/take_damage(var/amount)
-	amount = max(0, round(amount))
-	damage += amount
-	if(damage > maxdamage)
-		visible_message("<span class='danger'>\The [src] explodes in large rain of sparks and smoke!</span>")
-		// Depending on stored charge percentage cause damage.
-		switch(Percentage())
-			if(75 to INFINITY)
-				explosion(get_turf(src), 1, 2, 4)
-			if(40 to 74)
-				explosion(get_turf(src), 0, 2, 3)
-			if(5 to 39)
-				explosion(get_turf(src), 0, 1, 2)
-		qdel(src) // Either way we want to ensure the SMES is deleted.
+/obj/machinery/power/smes/on_component_failure(var/obj/item/stock_parts/component)
+	..()
+	if(istype(component, /obj/item/stock_parts/smes_coil) && Percentage() > 50)
+		visible_message("<span class='danger'>\The [component] explodes in rain of sparks and smoke!</span>")
+		explosion(get_turf(src), 0, 0, 3)
 
 /obj/machinery/power/smes/emp_act(severity)
 	if(!num_terminals)
@@ -366,27 +341,6 @@
 	update_icon()
 	..()
 
-/obj/machinery/power/smes/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage_type == BRUTE || Proj.damage_type == BURN)
-		take_damage(Proj.damage)
-
-/obj/machinery/power/smes/ex_act(var/severity)
-	// Two strong explosions will destroy a SMES.
-	// Given the SMES creates another explosion on it's destruction it sounds fairly reasonable.
-	take_damage(250 / severity)
-
 /obj/machinery/power/smes/examine(mob/user)
 	. = ..()
 	to_chat(user, "The service hatch is [panel_open ? "open" : "closed"].")
-	if(!damage)
-		return
-	var/damage_percentage = round((damage / maxdamage) * 100)
-	switch(damage_percentage)
-		if(75 to INFINITY)
-			to_chat(user, "<span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span>")
-		if(50 to 74)
-			to_chat(user, "<span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span>")
-		if(25 to 49)
-			to_chat(user, "<span class='notice'>It's casing is quite seriously damaged.</span>")
-		if(0 to 24)
-			to_chat(user, "It's casing has some minor damage.")

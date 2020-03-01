@@ -1,7 +1,6 @@
 /obj/item/stock_parts
 	name = "stock part"
 	desc = "What?"
-	gender = PLURAL
 	icon = 'icons/obj/stock_parts.dmi'
 	randpixel = 5
 	w_class = ITEM_SIZE_SMALL
@@ -9,6 +8,7 @@
 	var/rating = 1
 	var/status = 0             // Flags using PART_STAT defines.
 	var/base_type              // Type representing parent of category for replacer usage.
+	health = 50
 
 /obj/item/stock_parts/attack_hand(mob/user)
 	if(istype(loc, /obj/machinery))
@@ -60,3 +60,35 @@
 
 // RefreshParts has been called, likely meaning other componenets were added/removed.
 /obj/item/stock_parts/proc/on_refresh(var/obj/machinery/machine)
+
+/obj/item/stock_parts/proc/take_damage(amount, damtype)
+	if(!is_functional())
+		return
+	var/taken = min(amount, health)
+	health -= taken
+	. = taken
+	if(!is_functional())
+		var/obj/machinery/machine = loc
+		if(istype(machine))
+			on_fail(machine, damtype)
+
+/obj/item/stock_parts/proc/on_fail(var/obj/machinery/machine, damtype)
+	machine.on_component_failure(src)
+	var/cause = "shatters"
+	switch(damtype)
+		if(BURN)
+			cause = "sizzles"
+		if(ELECTROCUTE)
+			cause = "sparks"
+	visible_message(SPAN_WARNING("Something [cause] inside \the [machine]."), range = 2)
+	SetName("broken [name]")
+
+/obj/item/stock_parts/proc/is_functional()
+	return health > 0
+	
+/obj/item/stock_parts/examine(mob/user)
+	. = ..()
+	if(!is_functional())
+		to_chat(user, SPAN_WARNING("It is completely broken."))
+	else if(health < initial(health))
+		to_chat(user, SPAN_NOTICE("It is showing signs of damage."))

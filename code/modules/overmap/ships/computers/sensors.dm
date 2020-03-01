@@ -30,11 +30,9 @@
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
-		data["health"] = sensors.health
-		data["max_health"] = sensors.max_health
 		data["heat"] = sensors.heat
 		data["critical_heat"] = sensors.critical_heat
-		if(sensors.health == 0)
+		if(sensors.is_broken())
 			data["status"] = "DESTROYED"
 		else if(!sensors.powered())
 			data["status"] = "NO POWER"
@@ -117,34 +115,16 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "sensors"
 	anchored = 1
-	var/max_health = 200
-	var/health = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
 	var/heat_reduction = 1.5 // mitigates this much heat per tick
 	var/heat = 0
 	var/range = 1
 	idle_power_usage = 5000
-
-/obj/machinery/shipsensors/attackby(obj/item/W, mob/user)
-	var/damage = max_health - health
-	if(damage && isWelder(W))
-
-		var/obj/item/weldingtool/WT = W
-
-		if(!WT.isOn())
-			return
-
-		if(WT.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
-				take_damage(-damage)
-		else
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-			return
-		return
-	..()
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = NOSCREEN | NOINPUT
+	frame_type = /obj/machinery/constructable_frame
+	base_type = /obj/machinery/shipsensors
 
 /obj/machinery/shipsensors/proc/in_vacuum()
 	var/turf/T=get_turf(src)
@@ -160,23 +140,8 @@
 	else
 		icon_state = "sensors_off"
 
-/obj/machinery/shipsensors/examine(mob/user)
-	. = ..()
-	if(health <= 0)
-		to_chat(user, "\The [src] is wrecked.")
-	else if(health < max_health * 0.25)
-		to_chat(user, "<span class='danger'>\The [src] looks like it's about to break!</span>")
-	else if(health < max_health * 0.5)
-		to_chat(user, "<span class='danger'>\The [src] looks seriously damaged!</span>")
-	else if(health < max_health * 0.75)
-		to_chat(user, "\The [src] shows signs of damage!")
-
-/obj/machinery/shipsensors/bullet_act(var/obj/item/projectile/Proj)
-	take_damage(Proj.get_structure_damage())
-	..()
-
 /obj/machinery/shipsensors/proc/toggle()
-	if(!use_power && (health == 0 || !in_vacuum()))
+	if(!use_power && (is_broken() || !in_vacuum()))
 		return // No turning on if broken or misplaced.
 	if(!use_power) //need some juice to kickstart
 		use_power_oneoff(idle_power_usage*5)
@@ -192,8 +157,7 @@
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
-
-			take_damage(rand(10,50))
+			take_damage(10, BURN)
 			toggle()
 		heat += idle_power_usage/15000
 
@@ -212,13 +176,8 @@
 /obj/machinery/shipsensors/emp_act(severity)
 	if(!use_power)
 		return
-	take_damage(20/severity)
 	toggle()
-
-/obj/machinery/shipsensors/proc/take_damage(value)
-	health = min(max(health - value, 0),max_health)
-	if(use_power && health == 0)
-		toggle()
+	..()
 
 /obj/machinery/shipsensors/weak
 	heat_reduction = 0.2

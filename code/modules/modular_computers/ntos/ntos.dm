@@ -63,10 +63,10 @@
 		if(hard_drive)
 			if(prob(10))
 				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(hard_drive.damage_malfunction)
+				hard_drive.take_damage(0.5 * hard_drive.health)
 			else if(prob(5))
 				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(hard_drive.damage_failure)
+				hard_drive.take_damage(hard_drive.health)
 	update_host_icon()
 
 /datum/extension/interactive/ntos/proc/system_boot()

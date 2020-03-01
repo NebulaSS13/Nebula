@@ -18,14 +18,14 @@
 	. += "[name] status: [stored_card ? "Card Inserted" : "Card Not Present"]\n"
 	if(stored_card)
 		. += "Testing card read...\n"
-		if( damage >= damage_failure )
+		if( !is_functional() )
 			. += "...FAILURE!\n"
 		else
 			var/read_string_stability
 			if(check_functionality())
 				read_string_stability = 100
 			else
-				read_string_stability = 100 - malfunction_probability
+				read_string_stability = 80
 			. += "Registered Name: [stars(stored_card.registered_name, read_string_stability)]\n"
 			. += "Registered Assignment: [stars(stored_card.assignment, read_string_stability)]\n"
 			. += "Registered Rank: [stars(stored_card.rank, read_string_stability)]\n"

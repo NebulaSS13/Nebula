@@ -1,5 +1,5 @@
 /obj/item/stock_parts/radio
-	part_flags = PART_FLAG_QDEL
+	part_flags = PART_FLAG_QDEL | PART_FLAG_NODAMAGE
 	var/datum/radio_frequency/radio
 	var/frequency
 	var/id_tag

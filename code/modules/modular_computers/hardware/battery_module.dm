@@ -5,7 +5,6 @@
 	desc = "A standard power cell, commonly seen in high-end portable microcomputers or low-end laptops. It's rating is 75 Wh."
 	icon_state = "battery_normal"
 	critical = 1
-	malfunction_probability = 1
 	origin_tech = "{'" + TECH_POWER + "':1,'" + TECH_ENGINEERING + "':1}"
 	var/battery_rating = 75
 	var/obj/item/cell/battery = /obj/item/cell

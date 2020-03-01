@@ -76,11 +76,12 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		return preset
 
 // Returns a list of subtypes of the given component type, with associated value = number of that component.
-/obj/machinery/proc/types_of_component(var/part_type)
+/obj/machinery/proc/types_of_component(var/part_type, var/only_functional)
 	. = list()
-	for(var/obj/component in component_parts)
+	for(var/obj/item/stock_parts/component in component_parts)
 		if(istype(component, part_type))
-			.[component.type]++
+			if(!only_functional || component.is_functional())
+				.[component.type]++
 	for(var/path in uncreated_component_parts)
 		if(ispath(path, part_type))
 			.[path] += uncreated_component_parts[path]
@@ -100,8 +101,21 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		if(ispath(path, part_type))
 			return force_init_component(path)
 
+/obj/machinery/proc/get_all_components_of_type(var/part_type, var/strict = FALSE)
+	var/list/results
+	for(var/obj/component in component_parts)
+		if(istype(component, part_type))
+			LAZYADD(results, component)
+	for(var/path in uncreated_component_parts)
+		if(ispath(path, part_type))
+			var/obj/component = force_init_component(path)
+			while(component)
+				LAZYADD(results, component)
+				component = force_init_component(path)
+	return results
+
 /obj/machinery/proc/force_init_component(var/path)
-	if(!uncreated_component_parts[path])
+	if(!LAZYACCESS(uncreated_component_parts, path))
 		return
 	uncreated_component_parts[path]-- //bookkeeping to make sure tally is correct.
 	if(!uncreated_component_parts[path])
@@ -180,17 +194,18 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	for(var/thing in component_parts)
 		if(istype(thing, part_type))
 			var/obj/item/stock_parts/part = thing
-			. += part.rating
+			if(part.is_functional())
+				. += part.rating
 	for(var/path in uncreated_component_parts)
 		if(ispath(path, part_type))
 			var/obj/item/stock_parts/comp = path
 			. += initial(comp.rating) * uncreated_component_parts[path]
 
-/obj/machinery/proc/number_of_components(var/part_type)
+/obj/machinery/proc/number_of_components(var/part_type, var/only_functional)
 	if(!ispath(part_type, /obj/item/stock_parts))
 		var/obj/item/stock_parts/building_material/material = get_component_of_type(/obj/item/stock_parts/building_material)
 		return material && material.number_of_type(part_type)
-	var/list/comps = types_of_component(part_type)
+	var/list/comps = types_of_component(part_type, only_functional)
 	. = 0
 	for(var/path in comps)
 		. += comps[path]
@@ -306,13 +321,13 @@ Standard helpers for users interacting with machinery parts.
 		user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
 		user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))
 
-/obj/machinery/proc/missing_parts()
+/obj/machinery/proc/missing_parts(var/only_functional)
 	if(!construct_state)
 		return
 	var/list/requirements = construct_state.get_requirements(src)
 	if(LAZYLEN(requirements))
 		for(var/required_type in requirements)
 			var/needed = requirements[required_type]
-			var/present = number_of_components(required_type)
+			var/present = number_of_components(required_type, only_functional)
 			if(present < needed)
 				LAZYSET(., required_type, needed - present)

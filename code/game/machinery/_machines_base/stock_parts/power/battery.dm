@@ -99,7 +99,7 @@
 	A.use_power_oneoff(give, charge_channel)
 
 /obj/item/stock_parts/power/battery/can_provide_power(var/obj/machinery/machine)
-	if(cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
+	if(is_functional() && cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
 		machine.update_power_channel(LOCAL)
 		set_status(machine, PART_STAT_ACTIVE)
 		return TRUE
