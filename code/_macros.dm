@@ -57,6 +57,8 @@
 
 #define isobj(A) istype(A, /obj)
 
+#define iseffect(A) istype(A, /obj/effect)
+
 #define isghost(A) istype(A, /mob/observer/ghost)
 
 #define isobserver(A) istype(A, /mob/observer)

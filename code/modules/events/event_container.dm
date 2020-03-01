@@ -174,7 +174,8 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Virology Breach",						/datum/event/prison_break/virology,		0,		list(ASSIGNMENT_MEDICAL = 100)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Xenobiology Breach",					/datum/event/prison_break/xenobiology,	0,		list(ASSIGNMENT_SCIENCE = 100)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Toilet Flooding",						/datum/event/toilet_clog/flood,			50, 	list(ASSIGNMENT_JANITOR = 20)),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Drone Uprising",						/datum/event/rogue_maint_drones/,		25,		list(ASSIGNMENT_ENGINEER = 30))
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Drone Uprising",						/datum/event/rogue_maint_drones/,		25,		list(ASSIGNMENT_ENGINEER = 30),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Wormholes",				 			/datum/event/wormholes, 				10))
 	)
 
 /datum/event_container/major
