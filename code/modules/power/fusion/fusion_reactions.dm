@@ -97,6 +97,8 @@
 	hidden_from_codex = TRUE
 
 /decl/fusion_reaction/phoron_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
+	new /datum/event/wormholes(new /datum/event_meta(EVENT_LEVEL_MAJOR))
+
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()
 	qdel(holder)

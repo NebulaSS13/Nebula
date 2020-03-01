@@ -22,12 +22,9 @@
 				continue
 			pick_turfs += T
 
-	for(var/i in 1 to number_of_wormholes)
-		var/turf/enter = pick(pick_turfs)
-		pick_turfs -= enter
-
-		var/turf/exit = pick(pick_turfs)
-		pick_turfs -= exit
+	for(var/i in 1 to min(length(pick_turfs), number_of_wormholes))
+		var/turf/enter = pick_n_take(pick_turfs)
+		var/turf/exit = pick_n_take(pick_turfs)
 
 		wormholes += create_wormhole(enter, exit)
 
