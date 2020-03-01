@@ -125,7 +125,7 @@ turf/attackby(obj/item/W as obj, mob/user as mob)
 			S.gather_all(src, user)
 	return ..()
 
-/turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
+/turf/Enter(atom/movable/mover, atom/forget)
 
 	..()
 
@@ -296,7 +296,7 @@ var/const/enterloopsanity = 100
 		decals = null
 
 // Called when turf is hit by a thrown object
-/turf/hitby(atom/movable/AM as mob|obj, var/datum/thrownthing/TT)
+/turf/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	if(src.density)
 		if(isliving(AM))
 			var/mob/living/M = AM

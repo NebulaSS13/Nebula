@@ -252,7 +252,7 @@ update_flag
 		healthcheck()
 	..()
 
-/obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W, var/mob/user)
 	if(!isWrench(W) && !istype(W, /obj/item/tank) && !istype(W, /obj/item/scanner/gas) && !istype(W, /obj/item/modular_computer/pda))
 		visible_message("<span class='warning'>\The [user] hits \the [src] with \a [W]!</span>")
 		src.health -= W.force

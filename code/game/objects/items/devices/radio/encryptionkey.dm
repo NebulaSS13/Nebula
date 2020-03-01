@@ -12,7 +12,8 @@
 	var/syndie = 0
 	var/list/channels = list()
 
-/obj/item/encryptionkey/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/encryptionkey/attackby(obj/item/W, mob/user)
+	return
 
 /obj/item/encryptionkey/syndicate
 	icon_state = "cypherkey"

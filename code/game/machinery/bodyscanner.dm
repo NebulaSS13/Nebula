@@ -18,7 +18,7 @@
 	if (occupant && user.Adjacent(src))
 		occupant.examine(arglist(args))
 
-/obj/machinery/bodyscanner/relaymove(mob/user as mob)
+/obj/machinery/bodyscanner/relaymove(mob/user)
 	..()
 	src.go_out()
 
@@ -65,7 +65,7 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
+/obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user)
 	if(istype(G))
 		var/mob/M = G.affecting
 		if(!user_can_move_target_inside(M, user))

@@ -68,7 +68,7 @@
 	update_nearby_tiles()
 	return ..()
 
-/obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
+/obj/machinery/door/window/Bumped(atom/movable/AM)
 	if (!( ismob(AM) ))
 		var/mob/living/bot/bot = AM
 		if(istype(bot))
@@ -98,7 +98,7 @@
 	else
 		return 1
 
-/obj/machinery/door/window/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+/obj/machinery/door/window/CheckExit(atom/movable/mover, turf/target)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(get_dir(loc, target) == dir)

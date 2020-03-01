@@ -101,7 +101,7 @@
 	. = ..()
 	CRASH("A [name] was examined")
 
-/obj/item/tank/jetpack/rig/allow_thrust(num, mob/living/user as mob)
+/obj/item/tank/jetpack/rig/allow_thrust(num, mob/living/user)
 
 	if(!(src.on))
 		return 0

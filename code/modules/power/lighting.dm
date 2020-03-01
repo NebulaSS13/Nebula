@@ -57,7 +57,7 @@
 		if(2) to_chat(user, "It's wired.")
 		if(3) to_chat(user, "The casing is closed.")
 
-/obj/machinery/light_construct/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/light_construct/attackby(obj/item/W, mob/user)
 	src.add_fingerprint(user)
 	if(isWrench(W))
 		if (src.stage == 1)

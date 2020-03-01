@@ -33,7 +33,7 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)
+/obj/item/anodevice/attackby(var/obj/I, var/mob/user)
 	if(istype(I, /obj/item/anobattery))
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
@@ -44,7 +44,7 @@
 	else
 		return ..()
 
-/obj/item/anodevice/attack_self(var/mob/user as mob)
+/obj/item/anodevice/attack_self(var/mob/user)
 	return src.interact(user)
 
 /obj/item/anodevice/interact(var/mob/user)
@@ -199,7 +199,7 @@
 	STOP_PROCESSING(SSobj, src)
 	..()
 
-/obj/item/anodevice/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
+/obj/item/anodevice/attack(mob/living/M, mob/living/user, def_zone)
 	if (!istype(M))
 		return
 

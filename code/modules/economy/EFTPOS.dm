@@ -81,7 +81,7 @@
 	D.wrapped = R
 	D.SetName("small parcel - 'EFTPOS access code'")
 
-/obj/item/eftpos/attack_self(mob/user as mob)
+/obj/item/eftpos/attack_self(mob/user)
 	if(get_dist(src,user) <= 1)
 		var/dat = "<b>[eftpos_name]</b><br>"
 		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting IT Support</i><br>"
@@ -109,7 +109,7 @@
 	else
 		close_browser(user, "window=eftpos")
 
-/obj/item/eftpos/attackby(obj/item/O as obj, user as mob)
+/obj/item/eftpos/attackby(obj/item/O, user)
 
 	var/obj/item/card/id/I = O.GetIdCard()
 

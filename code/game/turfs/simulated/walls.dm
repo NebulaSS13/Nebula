@@ -92,7 +92,7 @@
 	take_damage(damage)
 	return
 
-/turf/simulated/wall/hitby(AM as mob|obj, var/datum/thrownthing/TT)
+/turf/simulated/wall/hitby(AM, var/datum/thrownthing/TT)
 	if(!ismob(AM))
 		var/obj/O = AM
 		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)

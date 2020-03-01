@@ -177,7 +177,7 @@
 	hub = null
 	return ..()
 
-/proc/find_loc(obj/R as obj)
+/proc/find_loc(obj/R)
 	if (!R)	return null
 	var/turf/T = R.loc
 	while(!istype(T, /turf))
@@ -207,13 +207,13 @@
 	underlays.Cut()
 	underlays += image('icons/obj/stationobjs.dmi', icon_state = "tele-wires")
 
-/obj/machinery/teleport/hub/Bumped(M as mob|obj)
+/obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	spawn()
 		if (src.icon_state == "tele1")
 			teleport(M)
 			use_power_oneoff(5000)
 
-/obj/machinery/teleport/hub/proc/teleport(atom/movable/M as mob|obj)
+/obj/machinery/teleport/hub/proc/teleport(atom/movable/M)
 	do_teleport(M, com.locked)
 	if(com.one_time_use) //Make one-time-use cards only usable one time!
 		com.one_time_use = 0

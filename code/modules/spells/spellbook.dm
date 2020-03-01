@@ -45,7 +45,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	name = spellbook.name
 	desc = spellbook.desc
 
-/obj/item/spellbook/attack_self(mob/user as mob)
+/obj/item/spellbook/attack_self(mob/user)
 	if(!user.mind)
 		return
 	if (user.mind.special_role != ANTAG_WIZARD)
@@ -59,7 +59,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		to_chat(user, "You notice the apprentice-proof lock is on. Luckily you are beyond such things.")
 	interact(user)
 
-/obj/item/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, var/reagent)
+/obj/item/spellbook/proc/make_sacrifice(obj/item/I, mob/user, var/reagent)
 	if(has_sacrificed)
 		return
 	if(reagent)
@@ -77,7 +77,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
 
-/obj/item/spellbook/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/spellbook/attackby(obj/item/I, mob/user)
 	if(investing_time && !has_sacrificed)
 		var/list/objects = spellbook.sacrifice_objects
 		if(objects && objects.len)
@@ -95,7 +95,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 						return 1
 	..()
 
-/obj/item/spellbook/interact(mob/user as mob)
+/obj/item/spellbook/interact(mob/user)
 	var/dat = null
 	if(temp)
 		dat = "[temp]<br><a href='byond://?src=\ref[src];temp=1'>Return</a>"

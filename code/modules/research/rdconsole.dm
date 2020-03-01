@@ -99,7 +99,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	SyncRDevices()
 	. = ..()
 
-/obj/machinery/computer/rdconsole/attackby(var/obj/item/D as obj, var/mob/user as mob)
+/obj/machinery/computer/rdconsole/attackby(var/obj/item/D, var/mob/user)
 	//Loading a disk into it.
 	if(istype(D, /obj/item/disk))
 		if(t_disk || d_disk)

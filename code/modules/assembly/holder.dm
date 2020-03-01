@@ -214,7 +214,7 @@
 	return ..()
 
 
-/obj/item/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
+/obj/item/assembly_holder/hear_talk(mob/living/M, msg, verb, datum/language/speaking)
 	if(a_right)
 		a_right.hear_talk(M,msg,verb,speaking)
 	if(a_left)

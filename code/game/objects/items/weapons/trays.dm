@@ -23,7 +23,7 @@
 	else
 		. = ..()
 
-/obj/item/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/tray/attack(mob/living/carbon/M, mob/living/carbon/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	// Drop all the things. All of them.
 	overlays.Cut()
@@ -144,7 +144,7 @@
 
 /obj/item/tray/var/cooldown = 0	//shield bash cooldown. based on world.time
 
-/obj/item/tray/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/tray/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/material/kitchen/rollingpin))
 		if(cooldown < world.time - 25)
 			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")

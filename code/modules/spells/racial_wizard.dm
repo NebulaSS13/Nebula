@@ -38,7 +38,7 @@
 	startswith = list(/obj/item/spacecash/bundle/c1000 = 1)
 
 //HUMAN
-/obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W as obj, atom/new_location)
+/obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W, atom/new_location)
 	. = ..()
 	if(.)
 		if(istype(W,/obj/item/spacecash)) //only matters if its spacecash.

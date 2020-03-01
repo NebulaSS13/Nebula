@@ -183,7 +183,7 @@
 	else
 		icon_state = "scrubber:0"
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I, var/mob/user)
 	if(isWrench(I))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, "<span class='warning'>Turn \the [src] off first!</span>")
@@ -205,7 +205,7 @@
 	name = "Stationary Air Scrubber"
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I, var/mob/user)
 	if(isWrench(I))
 		to_chat(user, "<span class='warning'>The bolts are too tight for you to unscrew!</span>")
 		return

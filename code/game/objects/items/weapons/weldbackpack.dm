@@ -19,7 +19,7 @@
 
 	. = ..()
 
-/obj/item/weldpack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weldpack/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
 		var/obj/item/weldingtool/T = W
 		if(T.welding & prob(50))
@@ -48,7 +48,7 @@
 	to_chat(user, "<span class='warning'>The tank will accept only a welding tool or cartridge.</span>")
 	return
 
-/obj/item/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/weldpack/afterattack(obj/O, mob/user, proximity)
 	if(!proximity) // this replaces and improves the get_dist(src,O) <= 1 checks used previously
 		return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume < max_fuel)
@@ -60,7 +60,7 @@
 		to_chat(user, "<span class='warning'>The pack is already full!</span>")
 		return
 
-/obj/item/weldpack/attack_hand(mob/user as mob)
+/obj/item/weldpack/attack_hand(mob/user)
 	if(welder && user.get_inactive_hand() == src)
 		user.put_in_hands(welder)
 		user.visible_message("[user] removes \the [welder] from \the [src].", "You remove \the [welder] from \the [src].")

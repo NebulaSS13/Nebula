@@ -134,7 +134,7 @@
 		reagents.add_reagent(T, starts_with[T])
 	update_icon()
 
-/obj/item/chems/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
+/obj/item/chems/hypospray/autoinjector/attack(mob/M, mob/user)
 	if(user != M && !M.incapacitated())
 		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
 		if(!do_mob(user, M, time))

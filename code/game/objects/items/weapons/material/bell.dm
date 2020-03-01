@@ -11,7 +11,7 @@
 	hitsound = 'sound/items/oneding.ogg'
 	material = MAT_ALUMINIUM
 
-/obj/item/material/bell/attack_hand(mob/user as mob)
+/obj/item/material/bell/attack_hand(mob/user)
 	if (user.a_intent == I_GRAB)
 		return ..()
 	else if (user.a_intent == I_HURT)

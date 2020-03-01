@@ -96,7 +96,7 @@
 	adjustBruteLoss(maxHealth)  // Enough damage to kill
 	src.death()
 
-/mob/living/simple_animal/mouse/Crossed(AM as mob|obj)
+/mob/living/simple_animal/mouse/Crossed(AM)
 	if( ishuman(AM) )
 		if(!stat)
 			var/mob/M = AM

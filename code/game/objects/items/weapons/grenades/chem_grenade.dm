@@ -19,7 +19,7 @@
 	. = ..()
 	create_reagents(1000)
 
-/obj/item/grenade/chem_grenade/attack_self(mob/user as mob)
+/obj/item/grenade/chem_grenade/attack_self(mob/user)
 	if(!stage || stage==1)
 		if(detonator)
 //				detonator.loc=src.loc
@@ -46,7 +46,7 @@
 			var/mob/living/carbon/C = user
 			C.throw_mode_on()
 
-/obj/item/grenade/chem_grenade/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/grenade/chem_grenade/attackby(obj/item/W, mob/user)
 
 	if(istype(W,/obj/item/assembly_holder) && (!stage || stage==1) && path != 2)
 		var/obj/item/assembly_holder/det = W
@@ -113,7 +113,7 @@
 			else
 				to_chat(user, "<span class='warning'>\The [W] is empty.</span>")
 
-/obj/item/grenade/chem_grenade/activate(mob/user as mob)
+/obj/item/grenade/chem_grenade/activate(mob/user)
 	if(active) return
 
 	if(detonator)

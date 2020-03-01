@@ -12,13 +12,13 @@
  * * default /datum/recipe/ procs does not rely on this parameter.
  *
  *  Functions you need:
- *  /datum/recipe/proc/make(var/obj/container as obj)
+ *  /datum/recipe/proc/make(var/obj/container)
  *    Creates result inside container,
  *    deletes prerequisite reagents,
  *    transfers reagents from prerequisite objects,
  *    deletes all prerequisite objects (even not needed for recipe at the moment).
  *
- *  /proc/select_recipe(list/datum/recipe/avaiable_recipes, obj/obj as obj, exact = 1)
+ *  /proc/select_recipe(list/datum/recipe/avaiable_recipes, obj/obj, exact = 1)
  *    Wonderful function that select suitable recipe for you.
  *    obj is a machine (or magik hat) with prerequisites,
  *    exact = 0 forces algorithm to ignore superfluous stuff.
@@ -26,7 +26,7 @@
  *
  *  Functions you do not need to call directly but could:
  *  /datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents)
- *  /datum/recipe/proc/check_items(var/obj/container as obj)
+ *  /datum/recipe/proc/check_items(var/obj/container)
  *
  * */
 
@@ -74,7 +74,7 @@
 					break
 	return .
 
-/datum/recipe/proc/check_items(var/obj/container as obj)
+/datum/recipe/proc/check_items(var/obj/container)
 	. = 1
 	if (items && items.len)
 		var/list/checklist = list()
@@ -96,7 +96,7 @@
 	return .
 
 //general version
-/datum/recipe/proc/make(var/obj/container as obj)
+/datum/recipe/proc/make(var/obj/container)
 	var/obj/result_obj = new result(container)
 	for (var/obj/O in (container.InsertedContents()-result_obj))
 		O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
@@ -105,7 +105,7 @@
 	return result_obj
 
 // food-related
-/datum/recipe/proc/make_food(var/obj/container as obj)
+/datum/recipe/proc/make_food(var/obj/container)
 	if(!result)
 		log_error("<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>")
 		return
@@ -126,7 +126,7 @@
 		qdel(O)
 	return result_obj
 
-/proc/select_recipe(var/list/datum/recipe/avaiable_recipes, var/obj/obj as obj, var/exact)
+/proc/select_recipe(var/list/datum/recipe/avaiable_recipes, var/obj/obj, var/exact)
 	var/list/datum/recipe/possible_recipes = new
 	var/target = exact ? 0 : 1
 	for (var/datum/recipe/recipe in avaiable_recipes)

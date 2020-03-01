@@ -32,7 +32,7 @@
 	SSstatistics.add_field("cyborg_frames_built",1)
 	return TRUE
 
-/obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/robot_parts/robot_suit/attackby(obj/item/W, mob/user)
 
 	// Uninstall a robotic part.
 	if(isCrowbar(W))

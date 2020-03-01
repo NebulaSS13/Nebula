@@ -101,7 +101,7 @@
 		health -= 60 / severity
 		check_health()
 
-/obj/structure/closet/statue/attackby(obj/item/I as obj, mob/user as mob)
+/obj/structure/closet/statue/attackby(obj/item/I, mob/user)
 	health -= I.force
 	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] strikes [src] with [I].</span>")
@@ -122,7 +122,7 @@
 /obj/structure/closet/statue/on_update_icon()
 	return
 
-/obj/structure/closet/statue/proc/shatter(mob/user as mob)
+/obj/structure/closet/statue/proc/shatter(mob/user)
 	if (user)
 		user.dust()
 	dump_contents()

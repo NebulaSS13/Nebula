@@ -211,7 +211,7 @@
 		return MOB_LARGE
 	return 0
 
-/obj/structure/closet/proc/toggle(mob/user as mob)
+/obj/structure/closet/proc/toggle(mob/user)
 	if(locked)
 		togglelock(user)
 	else if(!(src.opened ? src.close() : src.open()))
@@ -327,7 +327,7 @@
 						 "You hear welding.")
 	dismantle(src)
 
-/obj/structure/closet/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
+/obj/structure/closet/MouseDrop_T(atom/movable/O, mob/user)
 	if(istype(O, /obj/screen))	//fix for HUD elements making their way into the world	-Pete
 		return
 	if(O.loc == user)
@@ -354,14 +354,14 @@
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
 		attack_hand(user)
 
-/obj/structure/closet/relaymove(mob/user as mob)
+/obj/structure/closet/relaymove(mob/user)
 	if(user.stat || !isturf(src.loc))
 		return
 
 	if(!src.open())
 		to_chat(user, "<span class='notice'>It won't budge!</span>")
 
-/obj/structure/closet/attack_hand(mob/user as mob)
+/obj/structure/closet/attack_hand(mob/user)
 	src.add_fingerprint(user)
 	src.toggle(user)
 

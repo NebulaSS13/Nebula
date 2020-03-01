@@ -85,7 +85,7 @@
 
 //return flags that should be added to the viewer's sight var.
 //Otherwise return a negative number to indicate that the view should be cancelled.
-/atom/proc/check_eye(user as mob)
+/atom/proc/check_eye(user)
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
 		return 0
 	return -1
@@ -100,7 +100,7 @@
 /atom/proc/on_reagent_change()
 	return
 
-/atom/proc/Bumped(AM as mob|obj)
+/atom/proc/Bumped(var/atom/movable/AM)
 	return
 
 /*//Convenience proc to see whether a container can be accessed in a certain way.
@@ -117,7 +117,7 @@
 
 // If you want to use this, the atom must have the PROXMOVE flag, and the moving
 // atom must also have the PROXMOVE flag currently to help with lag. ~ ComicIronic
-/atom/proc/HasProximity(atom/movable/AM as mob|obj)
+/atom/proc/HasProximity(atom/movable/AM)
 	return
 
 /atom/proc/emp_act(var/severity)
@@ -304,7 +304,7 @@ its easier to just keep the beam vertical.
 		M.apply_damage(TT.speed*5, BRUTE)
 
 //returns 1 if made bloody, returns 0 otherwise
-/atom/proc/add_blood(mob/living/carbon/human/M as mob)
+/atom/proc/add_blood(mob/living/carbon/human/M)
 	if(atom_flags & ATOM_FLAG_NO_BLOOD)
 		return 0
 

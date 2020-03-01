@@ -282,7 +282,7 @@
 	color = WOOD_COLOR_GENERIC
 	var/chair_material = MAT_WOOD
 
-/obj/structure/bed/chair/wood/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/bed/chair/wood/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/wirecutters))
 		return
 	..()

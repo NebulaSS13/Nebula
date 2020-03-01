@@ -100,7 +100,7 @@
 	if(distance <= 1 && maintenance)
 		to_chat(user, "<span class='notice'>The wires are exposed.</span>")
 
-/obj/item/taperecorder/hear_talk(mob/living/M as mob, msg, var/verb="says", datum/language/speaking=null)
+/obj/item/taperecorder/hear_talk(mob/living/M, msg, var/verb="says", datum/language/speaking=null)
 	if(mytape && recording)
 
 		if(speaking)
@@ -111,7 +111,7 @@
 			mytape.record_speech("[M.name] [verb], \"[msg]\"")
 
 
-/obj/item/taperecorder/see_emote(mob/M as mob, text, var/emote_type)
+/obj/item/taperecorder/see_emote(mob/M, text, var/emote_type)
 	if(emote_type != AUDIBLE_MESSAGE) //only hearable emotes
 		return
 	if(mytape && recording)

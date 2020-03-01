@@ -456,7 +456,7 @@ About the new airlock wires panel:
 *		one wire for controlling door speed.  When active, dor closes at normal rate.  When cut, door does not close manually.  When pulsed, door attempts to close every tick.
 */
 
-/obj/machinery/door/airlock/bumpopen(mob/living/user as mob) //Airlocks now zap you when you 'bump' them open when they're electrified. --NeoFite
+/obj/machinery/door/airlock/bumpopen(mob/living/user) //Airlocks now zap you when you 'bump' them open when they're electrified. --NeoFite
 	if(!issilicon(usr))
 		if(src.isElectrified())
 			if(!src.justzap)
@@ -476,7 +476,7 @@ About the new airlock wires panel:
 				return
 	..(user)
 
-/obj/machinery/door/airlock/bumpopen(mob/living/simple_animal/user as mob)
+/obj/machinery/door/airlock/bumpopen(mob/living/simple_animal/user)
 	..(user)
 
 /obj/machinery/door/airlock/proc/isElectrified()
@@ -813,7 +813,7 @@ About the new airlock wires panel:
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/door/airlock/proc/hack(mob/user as mob)
+/obj/machinery/door/airlock/proc/hack(mob/user)
 	if(src.aiHacking==0)
 		src.aiHacking=1
 		spawn(20)
@@ -1194,7 +1194,7 @@ About the new airlock wires panel:
 	qdel(src)
 
 	return da
-/obj/machinery/door/airlock/phoron/attackby(C as obj, mob/user as mob)
+/obj/machinery/door/airlock/phoron/attackby(C, mob/user)
 	if(C)
 		ignite(is_hot(C))
 	..()

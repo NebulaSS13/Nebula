@@ -132,7 +132,7 @@
 /obj/structure/hygiene/toilet/on_update_icon()
 	icon_state = "toilet[open][cistern]"
 
-/obj/structure/hygiene/toilet/attackby(obj/item/I as obj, var/mob/living/user)
+/obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/living/user)
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)

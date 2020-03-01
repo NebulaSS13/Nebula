@@ -44,7 +44,7 @@ var/bomb_set
 			addtimer(CALLBACK(src, .proc/explode), 0)
 		SSnano.update_uis(src)
 
-/obj/machinery/nuclearbomb/attackby(obj/item/O as obj, mob/user as mob, params)
+/obj/machinery/nuclearbomb/attackby(obj/item/O, mob/user, params)
 	if(isScrewdriver(O))
 		add_fingerprint(user)
 		if(auth)
@@ -157,7 +157,7 @@ var/bomb_set
 			flick("lock", src)
 			update_icon()	
 
-/obj/machinery/nuclearbomb/interface_interact(mob/user as mob)
+/obj/machinery/nuclearbomb/interface_interact(mob/user)
 	if(extended && !panel_open)
 		ui_interact(user)
 		return TRUE
@@ -467,7 +467,7 @@ var/bomb_set
 	for(var/obj/machinery/self_destruct/ch in get_area(src))
 		inserters += ch
 
-/obj/machinery/nuclearbomb/station/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/nuclearbomb/station/attackby(obj/item/O, mob/user)
 	if(isWrench(O))
 		return
 

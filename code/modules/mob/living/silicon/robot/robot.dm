@@ -486,7 +486,7 @@
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
 
-/mob/living/silicon/robot/attackby(obj/item/W as obj, mob/user as mob)
+/mob/living/silicon/robot/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/inducer)) return // inducer.dm afterattack handles this
 	if (istype(W, /obj/item/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do

@@ -130,7 +130,7 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/corgi
 	origin_tech = "{'" + TECH_BIO + "':4}"
 
-/obj/item/holder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/holder/attackby(obj/item/W, mob/user)
 	for(var/mob/M in src.contents)
 		M.attackby(W,user)
 

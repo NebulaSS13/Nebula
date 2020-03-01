@@ -43,7 +43,7 @@
 /obj/item/suit_sensor_jammer/get_cell()
 	return bcell
 
-/obj/item/suit_sensor_jammer/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/suit_sensor_jammer/attackby(obj/item/I, mob/user)
 	if(isCrowbar(I))
 		if(bcell)
 			to_chat(user, "<span class='notice'>You remove \the [bcell].</span>")

@@ -451,7 +451,7 @@ var/list/mining_floors = list()
 /turf/simulated/floor/asteroid/is_plating()
 	return !density
 
-/turf/simulated/floor/asteroid/attackby(obj/item/W as obj, mob/user as mob)
+/turf/simulated/floor/asteroid/attackby(obj/item/W, mob/user)
 	if(!W || !user)
 		return 0
 
@@ -545,7 +545,7 @@ var/list/mining_floors = list()
 				A = get_step(src, direction)
 				A.updateMineralOverlays()
 
-/turf/simulated/floor/asteroid/Entered(atom/movable/M as mob|obj)
+/turf/simulated/floor/asteroid/Entered(atom/movable/M)
 	..()
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M

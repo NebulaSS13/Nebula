@@ -323,7 +323,7 @@
 	return ..()
 	
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/W, var/mob/user)
 	if(isMultitool(W))
 		var/datum/browser/written/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))

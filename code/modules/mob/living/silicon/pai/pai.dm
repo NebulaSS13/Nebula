@@ -113,7 +113,7 @@
 	if (src.client.statpanel == "Status")
 		show_silenced()
 
-/mob/living/silicon/pai/check_eye(var/mob/user as mob)
+/mob/living/silicon/pai/check_eye(var/mob/user)
 	if (!src.current)
 		return -1
 	return 0
@@ -300,7 +300,7 @@
 		if(stat != 2) close_up()
 	return
 
-/mob/living/silicon/pai/attack_hand(mob/user as mob)
+/mob/living/silicon/pai/attack_hand(mob/user)
 	visible_message("<span class='danger'>[user] boops [src] on the head.</span>")
 	close_up()
 

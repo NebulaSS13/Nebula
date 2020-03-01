@@ -114,7 +114,7 @@
 
 	return 1
 
-/obj/machinery/clamp/MouseDrop(obj/over_object as obj)
+/obj/machinery/clamp/MouseDrop(obj/over_object)
 	if(!usr)
 		return
 
@@ -138,7 +138,7 @@
 	icon_state = "pclamp0"
 	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_MAGNET + "':4}"
 
-/obj/item/clamp/afterattack(var/atom/A, mob/user as mob, proximity)
+/obj/item/clamp/afterattack(var/atom/A, mob/user, proximity)
 	if(!proximity)
 		return
 

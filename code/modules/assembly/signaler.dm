@@ -35,7 +35,7 @@
 		holder.update_icon()
 	return
 
-/obj/item/assembly/signaler/interact(mob/user as mob, flag1)
+/obj/item/assembly/signaler/interact(mob/user, flag1)
 	var/t1 = "-------"
 	var/dat = {"
 		<TT>

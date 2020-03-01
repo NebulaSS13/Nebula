@@ -65,7 +65,7 @@
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
-/obj/item/chems/glass/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/chems/glass/attack(mob/M, mob/user, def_zone)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return	..()
 	if(standard_feed_mob(user, M))
@@ -263,7 +263,7 @@
 	volume = 200
 	material = MAT_WOOD
 
-/obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user as mob)
+/obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user)
 	if(istype(D, /obj/item/mop))
 		if(reagents.total_volume < 1)
 			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")

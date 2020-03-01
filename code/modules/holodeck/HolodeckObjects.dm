@@ -10,7 +10,7 @@
 /turf/simulated/floor/holofloor/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	return 0.8
 
-/turf/simulated/floor/holofloor/attackby(obj/item/W as obj, mob/user as mob)
+/turf/simulated/floor/holofloor/attackby(obj/item/W, mob/user)
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
@@ -184,7 +184,7 @@
 /obj/machinery/door/window/holowindoor/Destroy()
 	..()
 
-/obj/machinery/door/window/holowindoor/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/door/window/holowindoor/attackby(obj/item/I, mob/user)
 
 	if (src.operating == 1)
 		return
@@ -266,7 +266,7 @@
 	. = ..()
 	item_color = pick("red","blue","green","purple")
 
-/obj/item/holo/esword/attack_self(mob/living/user as mob)
+/obj/item/holo/esword/attack_self(mob/living/user)
 	active = !active
 	if (active)
 		force = 30
@@ -371,11 +371,11 @@
 	active_power_usage = 6
 	power_channel = ENVIRON
 
-/obj/machinery/readybutton/attack_ai(mob/user as mob)
+/obj/machinery/readybutton/attack_ai(mob/user)
 	to_chat(user, "The AI is not to interact with these devices!")
 	return
 
-/obj/machinery/readybutton/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/readybutton/attackby(obj/item/W, mob/user)
 	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
 
 /obj/machinery/readybutton/physical_attack_hand(mob/user)

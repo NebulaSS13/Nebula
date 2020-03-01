@@ -130,7 +130,7 @@
 		return ..()
 	return 0
 
-/obj/machinery/door/firedoor/attack_hand(mob/user as mob)
+/obj/machinery/door/firedoor/attack_hand(mob/user)
 	add_fingerprint(user)
 	if(operating)
 		return//Already doing something.
@@ -185,7 +185,7 @@
 				nextstate = FIREDOOR_CLOSED
 				close()
 
-/obj/machinery/door/firedoor/attackby(obj/item/C as obj, mob/user as mob)
+/obj/machinery/door/firedoor/attackby(obj/item/C, mob/user)
 	add_fingerprint(user, 0, C)
 	if(operating)
 		return//Already doing something.
