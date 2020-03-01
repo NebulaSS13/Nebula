@@ -33,23 +33,17 @@
 		return
 
 	var/turf/loc = get_turf(usr)
-	var/area/A = loc.loc
 	if (!istype(loc, /turf/simulated/floor))
 		to_chat(usr, "<span class='danger'>\The [src] cannot be placed on this spot.</span>")
-		return
-	if ((A.requires_power == 0 || A.name == "Space") && !isLightFrame())
-		to_chat(usr, "<span class='danger'>\The [src] cannot be placed in this area.</span>")
 		return
 
 	if(gotwallitem(loc, ndir))
 		to_chat(usr, "<span class='danger'>There's already an item on this wall!</span>")
 		return
 
-	new build_machine_type(loc, ndir, src)
+	var/obj/machinery/machine = new build_machine_type(loc, ndir, FALSE)
+	transfer_fingerprints_to(machine)
 	qdel(src)
-
-/obj/item/frame/proc/isLightFrame()
-	return FALSE
 
 /obj/item/frame/fire_alarm
 	name = "fire alarm frame"
@@ -70,9 +64,6 @@
 	icon_state = "tube-construct-item"
 	build_machine_type = /obj/machinery/light_construct
 	reverse = 1
-
-/obj/item/frame/light/isLightFrame()
-	return TRUE
 
 /obj/item/frame/light/small
 	name = "small light fixture frame"

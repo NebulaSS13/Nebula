@@ -11,8 +11,6 @@
 	//Has a list of items that it can hold.
 	var/list/can_hold = list(
 		/obj/item/cell,
-		/obj/item/firealarm_electronics,
-		/obj/item/airalarm_electronics,
 		/obj/item/airlock_electronics,
 		/obj/item/tracker_electronics,
 		/obj/item/module/power_control,

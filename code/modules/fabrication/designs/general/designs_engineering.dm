@@ -3,10 +3,10 @@
 	category = "Engineering"
 
 /datum/fabricator_recipe/engineering/airalarm
-	path = /obj/item/airalarm_electronics
+	path = /obj/item/stock_parts/circuitboard/air_alarm
 
 /datum/fabricator_recipe/engineering/firealarm
-	path = /obj/item/firealarm_electronics
+	path = /obj/item/stock_parts/circuitboard/fire_alarm
 
 /datum/fabricator_recipe/engineering/powermodule
 	path = /obj/item/module/power_control

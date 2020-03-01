@@ -3088,7 +3088,7 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/item/airalarm_electronics,
+/obj/item/stock_parts/circuitboard/air_alarm,
 /obj/item/airlock_electronics,
 /obj/item/airlock_electronics,
 /obj/structure/table/rack,
