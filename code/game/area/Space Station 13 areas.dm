@@ -216,8 +216,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	var/sound/mysound = null
 
-/area/beach/New()
-	..()
+/area/beach/Initialize()
+	. = ..()
 	var/sound/S = new/sound()
 	mysound = S
 	S.file = 'sound/ambience/shore.ogg'
