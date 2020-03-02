@@ -14,7 +14,7 @@
 		/obj/item/clothing/suit/space/void
 		)
 
-/obj/item/modkit/afterattack(obj/O, mob/user as mob, proximity)
+/obj/item/modkit/afterattack(obj/O, mob/user, proximity)
 	if(!proximity)
 		return
 

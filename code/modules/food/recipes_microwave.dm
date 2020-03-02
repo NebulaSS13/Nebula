@@ -188,7 +188,7 @@ I said no!
 /datum/recipe/donkpocket2/proc/warm_up(var/obj/item/chems/food/snacks/donkpocket/being_cooked)
 	being_cooked.heat()
 
-/datum/recipe/donkpocket2/make_food(var/obj/container as obj)
+/datum/recipe/donkpocket2/make_food(var/obj/container)
 	var/obj/item/chems/food/snacks/donkpocket/being_cooked = ..(container)
 	warm_up(being_cooked)
 	return being_cooked

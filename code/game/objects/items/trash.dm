@@ -185,5 +185,5 @@
 	desc = "a stick from some snack food item or a lollipop, not even useful as crafting material."
 	icon_state = "stick"
 
-/obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
+/obj/item/trash/attack(mob/M, mob/living/user)
 	return

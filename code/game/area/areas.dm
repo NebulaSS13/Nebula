@@ -13,11 +13,6 @@
 	icon_state = ""
 	uid = ++global_uid
 
-	if(!requires_power)
-		power_light = 0
-		power_equip = 0
-		power_environ = 0
-
 	if(dynamic_lighting)
 		luminosity = 0
 	else
@@ -237,6 +232,11 @@ var/list/mob/living/forced_ambiance_list = new
 	play_ambience(L)
 	L.lastarea = newarea
 
+/area/Exited(A)
+	if(isliving(A))
+		clear_ambience(A)
+	return ..()
+
 /area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
 	if(!(L && L.client && L.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))	return
@@ -257,16 +257,17 @@ var/list/mob/living/forced_ambiance_list = new
 			L.client.ambience_playing = 0
 			sound_to(L, sound(null, channel = GLOB.ambience_sound_channel))
 
-	if(L.lastarea != src)
-		if(LAZYLEN(forced_ambience))
-			forced_ambiance_list |= L
-			L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = GLOB.lobby_sound_channel))
-		else	//stop any old area's forced ambience, and try to play our non-forced ones
-			sound_to(L, sound(null, channel = GLOB.lobby_sound_channel))
-			forced_ambiance_list -= L
+	if(LAZYLEN(forced_ambience) && !(L in forced_ambiance_list))
+		forced_ambiance_list += L
+		L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = GLOB.lobby_sound_channel))
 	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
 		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.lobby_sound_channel))
 		L.client.played = world.time
+
+/area/proc/clear_ambience(var/mob/living/L)
+	if(L in forced_ambiance_list)
+		sound_to(L, sound(null, channel = GLOB.lobby_sound_channel))
+		forced_ambiance_list -= L
 
 /area/proc/gravitychange(var/gravitystate = 0)
 	has_gravity = gravitystate

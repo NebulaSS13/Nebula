@@ -40,7 +40,7 @@
 				qdel(src)
 				return
 
-/obj/machinery/chem_master/attackby(var/obj/item/B as obj, var/mob/user as mob)
+/obj/machinery/chem_master/attackby(var/obj/item/B, var/mob/user)
 
 	if(istype(B, /obj/item/chems/glass))
 

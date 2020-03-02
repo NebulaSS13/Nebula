@@ -15,7 +15,7 @@
 	var/usage_flags = PROGRAM_ALL
 	var/external_slot				// Whether attackby will be passed on it even with a closed panel
 
-/obj/item/stock_parts/computer/attackby(var/obj/item/W as obj, var/mob/living/user as mob)
+/obj/item/stock_parts/computer/attackby(var/obj/item/W, var/mob/living/user)
 	// Multitool. Runs diagnostics
 	if(isMultitool(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")

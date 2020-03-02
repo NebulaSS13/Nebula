@@ -64,7 +64,7 @@
 	else if(ishuman(over_object))
 		hook_up(over_object, usr)
 
-/obj/structure/iv_drip/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/iv_drip/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/chems))
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
@@ -121,7 +121,7 @@
 		if(attached.take_blood(beaker,amount))
 			queue_icon_update()
 
-/obj/structure/iv_drip/attack_hand(mob/user as mob)
+/obj/structure/iv_drip/attack_hand(mob/user)
 	if(attached)
 		drip_detach()
 	else if(beaker)
@@ -143,8 +143,8 @@
 	if(!attached)
 		return
 		
-	if(!usr.Adjacent(attached))
-		to_chat(usr, "<span class='warning'>You are too far away from the [attached]!</span>")
+	if(!CanPhysicallyInteractWith(usr, src))
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
 		return
 		
 	if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))

@@ -65,14 +65,14 @@
 
 	return ..()
 
-/obj/vehicle/train/cargo/trolley/attackby(obj/item/W as obj, mob/user as mob)
+/obj/vehicle/train/cargo/trolley/attackby(obj/item/W, mob/user)
 	if(open && isWirecutter(W))
 		passenger_allowed = !passenger_allowed
 		user.visible_message("<span class='notice'>[user] [passenger_allowed ? "cuts" : "mends"] a cable in [src].</span>","<span class='notice'>You [passenger_allowed ? "cut" : "mend"] the load limiter cable.</span>")
 	else
 		..()
 
-/obj/vehicle/train/cargo/engine/attackby(obj/item/W as obj, mob/user as mob)
+/obj/vehicle/train/cargo/engine/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/key/cargo_train))
 		if(!key)
 			if(!user.unEquip(W, src))

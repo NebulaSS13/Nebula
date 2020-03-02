@@ -188,10 +188,9 @@
 	edge = 0
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
-/obj/item/broken_bottle/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
-
 
 /obj/item/chems/food/drinks/bottle/gin
 	name = "Griffeater Gin"

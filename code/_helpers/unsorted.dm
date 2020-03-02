@@ -890,7 +890,7 @@ var/global/list/common_tools = list(
 		return 1
 	return 0
 
-/proc/is_hot(obj/item/W as obj)
+/proc/is_hot(obj/item/W)
 	switch(W.type)
 		if(/obj/item/weldingtool)
 			var/obj/item/weldingtool/WT = W
@@ -928,14 +928,14 @@ var/global/list/common_tools = list(
 	return 0
 
 //Whether or not the given item counts as sharp in terms of dealing damage
-/proc/is_sharp(obj/O as obj)
+/proc/is_sharp(obj/O)
 	if (!O) return 0
 	if (O.sharp) return 1
 	if (O.edge) return 1
 	return 0
 
 //Whether or not the given item counts as cutting with an edge in terms of removing limbs
-/proc/has_edge(obj/O as obj)
+/proc/has_edge(obj/O)
 	if (!O) return 0
 	if (O.edge) return 1
 	return 0
@@ -1097,6 +1097,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	virtual_mob = null
 
 /mob/dview/Destroy()
+	SHOULD_CALL_PARENT(FALSE)
 	crash_with("Prevented attempt to delete dview mob: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE // Prevents destruction
 

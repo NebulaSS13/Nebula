@@ -21,7 +21,7 @@
 	. = ..()
 	icon_state = "barrier[src.locked]"
 
-/obj/machinery/deployable/barrier/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/deployable/barrier/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/card/id))
 		if (src.allowed(user))
 			if	(src.emagged < 2.0)

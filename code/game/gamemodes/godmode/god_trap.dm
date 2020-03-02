@@ -16,7 +16,7 @@
 	. = ..()
 	GLOB.entered_event.register(get_turf(src), src, /obj/structure/deity/trap/proc/trigger)
 
-/obj/structure/deity/trap/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/deity/trap/attackby(obj/item/W, mob/user)
 	trigger(user)
 	return ..()
 

@@ -44,10 +44,10 @@
 	. = ..()
 	create_reagents(10)
 
-/obj/item/toy/water_balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+/obj/item/toy/water_balloon/attack(mob/living/carbon/human/M, mob/user)
 	return
 
-/obj/item/toy/water_balloon/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
+/obj/item/toy/water_balloon/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
 	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
 		A.reagents.trans_to_obj(src, 10)
@@ -56,7 +56,7 @@
 		src.update_icon()
 	return
 
-/obj/item/toy/water_balloon/attackby(obj/O as obj, mob/user as mob)
+/obj/item/toy/water_balloon/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/chems/glass))
 		if(O.reagents)
 			if(O.reagents.total_volume < 1)
@@ -321,7 +321,7 @@
 		playsound(src, 'sound/effects/snap.ogg', 50, 1)
 		qdel(src)
 
-/obj/item/toy/snappop/Crossed(H as mob|obj)
+/obj/item/toy/snappop/Crossed(H)
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
 		if(!MOVING_DELIBERATELY(M))
@@ -348,7 +348,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
-/obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
+/obj/item/toy/bosunwhistle/attack_self(mob/user)
 	if(cooldown < world.time - 35)
 		to_chat(user, "<span class='notice'>You blow on [src], creating an ear-splitting noise!</span>")
 		playsound(user, 'sound/misc/boatswain.ogg', 20, 1)
@@ -364,13 +364,13 @@
 	w_class = ITEM_SIZE_TINY
 
 //all credit to skasi for toy mech fun ideas
-/obj/item/toy/prize/attack_self(mob/user as mob)
+/obj/item/toy/prize/attack_self(mob/user)
 	if(cooldown < world.time - 8)
 		to_chat(user, "<span class='notice'>You play with [src].</span>")
 		playsound(user, 'sound/mecha/mechstep.ogg', 20, 1)
 		cooldown = world.time
 
-/obj/item/toy/prize/attack_hand(mob/user as mob)
+/obj/item/toy/prize/attack_hand(mob/user)
 	if(loc == user)
 		if(cooldown < world.time - 8)
 			to_chat(user, "<span class='notice'>You play with [src].</span>")
@@ -733,7 +733,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "nymphplushie"
 
-/obj/item/toy/plushie/attack_self(mob/user as mob)
+/obj/item/toy/plushie/attack_self(mob/user)
 	if(user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'><b>\The [user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
 	else if (user.a_intent == I_HURT)
@@ -805,7 +805,7 @@
 	set_light(0.6, 0.5, 2, 2, "#ff0000")
 	return ..()
 
-/obj/item/marshalling_wand/attack_self(mob/living/user as mob)
+/obj/item/marshalling_wand/attack_self(mob/living/user)
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
@@ -837,7 +837,7 @@
 	icon_state= "ringbell"
 	anchored = 1
 
-/obj/item/toy/ringbell/attack_hand(mob/user as mob)
+/obj/item/toy/ringbell/attack_hand(mob/user)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] rings \the [src], signalling the beginning of the contest.</span>")
 		playsound(user.loc, 'sound/items/oneding.ogg', 60)

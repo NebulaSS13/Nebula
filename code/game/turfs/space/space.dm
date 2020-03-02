@@ -68,7 +68,7 @@
 /turf/space/is_solid_structure()
 	return locate(/obj/structure/lattice, src) //counts as solid structure if it has a lattice
 
-/turf/space/attackby(obj/item/C as obj, mob/user as mob)
+/turf/space/attackby(obj/item/C, mob/user)
 
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
@@ -98,13 +98,13 @@
 
 // Ported from unstable r355
 
-/turf/space/Entered(atom/movable/A as mob|obj)
+/turf/space/Entered(atom/movable/A)
 	..()
 	if(A && A.loc == src)
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
 			A.touch_map_edge()
 
-/turf/space/proc/Sandbox_Spacemove(atom/movable/A as mob|obj)
+/turf/space/proc/Sandbox_Spacemove(atom/movable/A)
 	var/cur_x
 	var/cur_y
 	var/next_x

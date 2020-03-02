@@ -70,7 +70,7 @@
 		src.updateUsrDialog()
 		src.add_fingerprint(usr)
 
-/obj/machinery/implantchair/attackby(var/obj/item/G as obj, var/mob/user as mob)
+/obj/machinery/implantchair/attackby(var/obj/item/G, var/mob/user)
 	if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
 		if(!ismob(grab.affecting))
@@ -102,7 +102,7 @@
 	return
 
 
-/obj/machinery/implantchair/proc/put_mob(mob/living/carbon/M as mob)
+/obj/machinery/implantchair/proc/put_mob(mob/living/carbon/M)
 	if(!iscarbon(M))
 		to_chat(usr, "<span class='warning'>\The [src] cannot hold this!</span>")
 		return

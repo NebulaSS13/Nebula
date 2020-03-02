@@ -40,7 +40,7 @@
 	..()
 	update_icon()
 
-/obj/item/chems/syringe/attack_self(mob/user as mob)
+/obj/item/chems/syringe/attack_self(mob/user)
 	switch(mode)
 		if(SYRINGE_DRAW)
 			mode = SYRINGE_INJECT
@@ -54,7 +54,7 @@
 	..()
 	update_icon()
 
-/obj/item/chems/syringe/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/chems/syringe/attackby(obj/item/I, mob/user)
 	return
 
 /obj/item/chems/syringe/afterattack(obj/target, mob/user, proximity)

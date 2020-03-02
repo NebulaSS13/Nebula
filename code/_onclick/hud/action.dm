@@ -31,6 +31,7 @@
 /datum/action/Destroy()
 	if(owner)
 		Remove(owner)
+	return ..()
 
 /datum/action/proc/SetTarget(var/atom/Target)
 	target = Target
@@ -54,7 +55,6 @@
 	T.actions.Remove(src)
 	T.update_action_buttons()
 	owner = null
-	return
 
 /datum/action/proc/Trigger()
 	if(!Checks())

@@ -85,7 +85,7 @@
 	A.attack_ai(src)
 	return TRUE
 
-/atom/proc/attack_ai(mob/user as mob)
+/atom/proc/attack_ai(mob/user)
 	return
 
 /*

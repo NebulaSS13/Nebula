@@ -62,5 +62,5 @@
 	projectile_type=/obj/item/projectile/beam/pulse/destroy
 	charge_cost= 40
 
-/obj/item/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
+/obj/item/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user)
 	to_chat(user, "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>")

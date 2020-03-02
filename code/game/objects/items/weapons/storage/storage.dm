@@ -33,7 +33,7 @@
 	QDEL_NULL(storage_ui)
 	. = ..()
 
-/obj/item/storage/MouseDrop(obj/over_object as obj)
+/obj/item/storage/MouseDrop(obj/over_object)
 	if(!canremove)
 		return
 
@@ -72,15 +72,15 @@
 			L += G.gift:return_inv()
 	return L
 
-/obj/item/storage/proc/show_to(mob/user as mob)
+/obj/item/storage/proc/show_to(mob/user)
 	if(storage_ui)
 		storage_ui.show_to(user)
 
-/obj/item/storage/proc/hide_from(mob/user as mob)
+/obj/item/storage/proc/hide_from(mob/user)
 	if(storage_ui)
 		storage_ui.hide_from(user)
 
-/obj/item/storage/proc/open(mob/user as mob)
+/obj/item/storage/proc/open(mob/user)
 	if(!opened)
 		playsound(src.loc, src.open_sound, 50, 0, -5)
 		opened = 1
@@ -99,7 +99,7 @@
 /obj/item/storage/proc/prepare_ui()
 	storage_ui.prepare_ui()
 
-/obj/item/storage/proc/close(mob/user as mob)
+/obj/item/storage/proc/close(mob/user)
 	hide_from(user)
 	if(storage_ui)
 		storage_ui.after_close(user)
@@ -218,7 +218,7 @@
 		storage_ui.on_post_remove(usr)
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
-/obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, var/NoUpdate = 0)
+/obj/item/storage/proc/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
 	if(!istype(W)) return 0
 	new_location = new_location || get_turf(src)
 
@@ -259,7 +259,7 @@
 	update_icon()
 
 //This proc is called when you want to place an item into the storage item.
-/obj/item/storage/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/attackby(obj/item/W, mob/user)
 	. = ..()
 	if (.) //if the item was used as a crafting component, just return
 		return
@@ -273,7 +273,7 @@
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
 
-/obj/item/storage/attack_hand(mob/user as mob)
+/obj/item/storage/attack_hand(mob/user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
@@ -374,7 +374,7 @@
 			O.emp_act(severity)
 	..()
 
-/obj/item/storage/attack_self(mob/user as mob)
+/obj/item/storage/attack_self(mob/user)
 	//Clicking on itself will empty it, if it has the verb to do that.
 	if(user.get_active_hand() == src)
 		if(src.verbs.Find(/obj/item/storage/verb/quick_empty))

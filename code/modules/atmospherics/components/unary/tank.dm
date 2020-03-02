@@ -49,7 +49,7 @@
 /obj/machinery/atmospherics/unary/tank/return_air()
 	return air_contents
 
-/obj/machinery/atmospherics/unary/tank/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/tank/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/pipe_painter))
 		return
 

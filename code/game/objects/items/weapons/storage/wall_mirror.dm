@@ -21,7 +21,7 @@
 		/obj/item/chems/spray/cleaner/deodorant,
 		/obj/item/towel/random)
 
-/obj/item/storage/mirror/MouseDrop(obj/over_object as obj)
+/obj/item/storage/mirror/MouseDrop(obj/over_object)
 	if(!(. = ..()))
 		return
 	flick("mirror_open",src)
@@ -51,7 +51,7 @@
 			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
 	..()
 
-/obj/item/storage/mirror/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/mirror/attackby(obj/item/W, mob/user)
 	if(!(. = ..()))
 		return
 	flick("mirror_open",src)
@@ -84,7 +84,7 @@
 	icon_state = "mirror"
 	var/list/ui_users
 
-/obj/item/mirror/attack_self(mob/user as mob)
+/obj/item/mirror/attack_self(mob/user)
 	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", APPEARANCE_HAIR, src)
 
 /obj/item/mirror/Destroy()

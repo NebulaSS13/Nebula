@@ -65,7 +65,7 @@
 			radio_controller.remove_object(src, radiochannels[ch_name])
 	return ..()
 
-/obj/item/radio/attack_self(mob/user as mob)
+/obj/item/radio/attack_self(mob/user)
 	user.set_machine(src)
 	interact(user)
 
@@ -238,7 +238,7 @@
 	qdel(A)
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
-/obj/item/radio/proc/handle_message_mode(mob/living/M as mob, message, message_mode)
+/obj/item/radio/proc/handle_message_mode(mob/living/M, message, message_mode)
 	// If a channel isn't specified, send to common.
 	if(!message_mode || message_mode == "headset")
 		return radio_connection
@@ -487,7 +487,7 @@
 					  "[connection.frequency]", channel_color_presets["Menacing Maroon"])
 
 
-/obj/item/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
+/obj/item/radio/hear_talk(mob/M, msg, var/verb = "says", var/datum/language/speaking = null)
 
 	if (broadcasting)
 		if(get_dist(src, M) <= canhear_range)
@@ -495,7 +495,7 @@
 
 
 /*
-/obj/item/radio/proc/accept_rad(obj/item/radio/R as obj, message)
+/obj/item/radio/proc/accept_rad(obj/item/radio/R, message)
 
 	if ((R.frequency == frequency && message))
 		return 1
@@ -555,7 +555,7 @@
 		else
 			to_chat(user, "<span class='notice'>\The [src] can not be modified or attached!</span>")
 
-/obj/item/radio/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/radio/attackby(obj/item/W, mob/user)
 	..()
 	user.set_machine(src)
 	if(isScrewdriver(W))
@@ -631,7 +631,7 @@
 		var/datum/robot_component/C = R.components["radio"]
 		R.cell_use_power(C.active_usage)
 
-/obj/item/radio/borg/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/radio/borg/attackby(obj/item/W, mob/user)
 //	..()
 	user.set_machine(src)
 	if (!( isScrewdriver(W) || (istype(W, /obj/item/encryptionkey/ ))))
@@ -724,7 +724,7 @@
 	if(.)
 		SSnano.update_uis(src)
 
-/obj/item/radio/borg/interact(mob/user as mob)
+/obj/item/radio/borg/interact(mob/user)
 	if(!on)
 		return
 
@@ -782,8 +782,9 @@
 	cell = null
 
 /obj/item/radio/announcer/Destroy()
+	SHOULD_CALL_PARENT(FALSE)
 	crash_with("attempt to delete a [src.type] detected, and prevented.")
-	return 1
+	return QDEL_HINT_LETMELIVE
 
 /obj/item/radio/announcer/Initialize()
 	. = ..()

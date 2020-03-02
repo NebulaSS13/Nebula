@@ -26,7 +26,7 @@
 		src.pixel_y = rand(0, 4)
 	create_reagents(5)
 
-/obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/material/kitchen/utensil/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M))
 		return ..()
 
@@ -104,7 +104,7 @@
 	material_force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_material_force_multiplier = 1 // as above
 
-/obj/item/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/material/kitchen/rollingpin/attack(mob/living/M, mob/living/user)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>")
 		user.take_organ_damage(10)

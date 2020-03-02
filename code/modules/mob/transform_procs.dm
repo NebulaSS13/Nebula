@@ -86,7 +86,7 @@
 		if (!loc_landmark)
 			for(var/obj/effect/landmark/tripai in landmarks_list)
 				if (tripai.name == "tripai")
-					if((locate(/mob/living) in tripai.loc) || (locate(/obj/structure/AIcore) in tripai.loc))
+					if((locate(/mob/living) in tripai.loc) || (locate(/obj/structure/aicore) in tripai.loc))
 						continue
 					loc_landmark = tripai
 		if (!loc_landmark)

@@ -5,7 +5,7 @@
 /mob/living/silicon/ai/var/max_locations = 10
 /mob/living/silicon/ai/var/stored_locations[0]
 
-/proc/InvalidPlayerTurf(turf/T as turf)
+/proc/InvalidPlayerTurf(turf/T)
 	return !(T && (T.z in GLOB.using_map.player_levels))
 
 /mob/living/silicon/ai/proc/get_camera_list()
@@ -149,7 +149,7 @@
 	cameraFollow.tracking_cancelled()
 	cameraFollow = null
 
-/mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
+/mob/living/silicon/ai/proc/ai_actual_track(mob/living/target)
 	if(!istype(target))	return
 	var/mob/living/silicon/ai/U = usr
 
@@ -183,7 +183,7 @@
 				return
 			sleep(10)
 
-/obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
+/obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user)
 	if (!istype(user))
 		return
 	if (!src.can_use())
@@ -191,7 +191,7 @@
 	user.eyeobj.setLoc(get_turf(src))
 
 
-/mob/living/silicon/ai/attack_ai(var/mob/user as mob)
+/mob/living/silicon/ai/attack_ai(var/mob/user)
 	ai_camera_list()
 
 /proc/camera_sort(list/L)

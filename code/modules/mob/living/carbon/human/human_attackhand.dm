@@ -18,7 +18,7 @@
 			return u_attack
 	return null
 
-/mob/living/carbon/human/attack_hand(mob/living/carbon/M as mob)
+/mob/living/carbon/human/attack_hand(mob/living/carbon/M)
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
@@ -256,7 +256,7 @@
 
 	return
 
-/mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)
+/mob/living/carbon/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
 	return
 
 /mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message, var/environment_smash, var/damtype = BRUTE, var/armorcheck = "melee", dam_flags)

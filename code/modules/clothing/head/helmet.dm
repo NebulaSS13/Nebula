@@ -77,7 +77,7 @@
 	siemens_coefficient = 0.7
 	action_button_name = "Toggle Visor"
 
-/obj/item/clothing/head/helmet/riot/attack_self(mob/user as mob)
+/obj/item/clothing/head/helmet/riot/attack_self(mob/user)
 	if(src.icon_state == initial(icon_state))
 		src.icon_state = "[icon_state]_up"
 		to_chat(user, "You raise the visor on the [src].")

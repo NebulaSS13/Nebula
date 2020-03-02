@@ -9,6 +9,7 @@
 	power_channel = EQUIP
 	anchored = 0
 	use_power = POWER_USE_OFF
+	color_selectable = TRUE
 
 /obj/machinery/fabricator/pipe/on_update_icon()
 
@@ -38,7 +39,7 @@
 	base_type = /obj/machinery/fabricator/pipe/disposal
 
 //Allow you to drag-drop disposal pipes into it
-/obj/machinery/fabricator/pipe/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
+/obj/machinery/fabricator/pipe/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe, mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
 

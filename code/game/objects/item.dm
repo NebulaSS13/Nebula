@@ -333,7 +333,7 @@
 			pixel_x = 0
 			pixel_y = 0
 
-/obj/item/attack_ai(mob/user as mob)
+/obj/item/attack_ai(mob/user)
 	if (istype(src.loc, /obj/item/robot_module))
 		//If the item is part of a cyborg module, equip it
 		if(!isrobot(user))
@@ -359,14 +359,14 @@
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
 
-/obj/item/proc/talk_into(mob/M as mob, text)
+/obj/item/proc/talk_into(mob/M, text)
 	return
 
-/obj/item/proc/moved(mob/user as mob, old_loc as turf)
+/obj/item/proc/moved(mob/user, old_loc)
 	return
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
-/obj/item/proc/dropped(mob/user as mob)
+/obj/item/proc/dropped(mob/user)
 	if(randpixel)
 		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
 
@@ -382,15 +382,15 @@
 	return
 
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
-/obj/item/proc/on_exit_storage(obj/item/storage/S as obj)
+/obj/item/proc/on_exit_storage(obj/item/storage/S)
 	return
 
 // called when this item is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
-/obj/item/proc/on_enter_storage(obj/item/storage/S as obj)
+/obj/item/proc/on_enter_storage(obj/item/storage/S)
 	return
 
 // called when "found" in pockets and storage items. Returns 1 if the search should end.
-/obj/item/proc/on_found(mob/finder as mob)
+/obj/item/proc/on_found(mob/finder)
 	return
 
 // called after an item is placed in an equipment slot
@@ -434,7 +434,7 @@ var/list/global/slot_flags_enumeration = list(
 //Set disable_warning to 1 if you wish it to not give you outputs.
 //Should probably move the bulk of this into mob code some time, as most of it is related to the definition of slots and not item-specific
 //set force to ignore blocking overwear and occupied slots
-/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = 0, force = 0)
+/obj/item/proc/mob_can_equip(M, slot, disable_warning = 0, force = 0)
 	if(!slot) return 0
 	if(!M) return 0
 
@@ -627,7 +627,7 @@ var/list/global/slot_flags_enumeration = list(
 		L = L.loc
 	return loc
 
-/obj/item/proc/eyestab(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/proc/eyestab(mob/living/carbon/M, mob/living/carbon/user)
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
@@ -702,7 +702,7 @@ var/list/global/slot_flags_enumeration = list(
 		blood_overlay.color = COLOR_LUMINOL
 		update_icon()
 
-/obj/item/add_blood(mob/living/carbon/human/M as mob)
+/obj/item/add_blood(mob/living/carbon/human/M)
 	if (!..())
 		return 0
 

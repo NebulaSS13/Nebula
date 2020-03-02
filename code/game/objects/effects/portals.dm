@@ -11,10 +11,10 @@
 	var/dangerous = FALSE
 	var/failchance = 0
 
-/obj/effect/portal/Bumped(mob/M)
-	teleport(M)
+/obj/effect/portal/Bumped(atom/movable/AM)
+	teleport(AM)
 
-/obj/effect/portal/Crossed(AM)
+/obj/effect/portal/Crossed(atom/movable/AM)
 	teleport(AM)
 
 /obj/effect/portal/attack_hand(mob/user)

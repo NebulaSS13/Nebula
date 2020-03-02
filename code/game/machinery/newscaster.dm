@@ -706,7 +706,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 
 
-/obj/machinery/newscaster/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/newscaster/attackby(obj/item/I, mob/user)
 	if (stat & BROKEN)
 		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
 		for (var/mob/O in hearers(5, src.loc))
@@ -742,7 +742,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	is_synth = synth
 	photo = p
 
-/obj/machinery/newscaster/proc/AttachPhoto(mob/user as mob)
+/obj/machinery/newscaster/proc/AttachPhoto(mob/user)
 	if(photo_data)
 		qdel(photo_data)
 		photo_data = null
@@ -915,7 +915,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 ////////////////////////////////////helper procs
 
 
-/obj/machinery/newscaster/proc/scan_user(mob/living/user as mob)
+/obj/machinery/newscaster/proc/scan_user(mob/living/user)
 	if(istype(user,/mob/living/carbon/human))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
 		var/obj/item/card/id/id = human_user.GetIdCard()

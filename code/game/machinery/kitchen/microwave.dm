@@ -32,7 +32,7 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/microwave/attackby(var/obj/item/O, var/mob/user)
 	if(src.broken > 0)
 		if(src.broken == 2 && isScrewdriver(O)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
@@ -163,7 +163,7 @@
 /obj/machinery/microwave/InsertedContents()
 	return ingredients
 
-/obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
+/obj/machinery/microwave/interact(mob/user) // The microwave Menu
 	user.set_machine(src)
 	var/dat = list()
 	if(src.broken > 0)

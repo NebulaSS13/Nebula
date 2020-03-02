@@ -42,7 +42,7 @@
 	STOP_PROCESSING(SSobj, src) //so we don't continue turning to ash while gc'd
 	. = ..()
 
-/obj/item/chems/glass/rag/attack_self(mob/user as mob)
+/obj/item/chems/glass/rag/attack_self(mob/user)
 	if(on_fire && user.unEquip(src))
 		user.visible_message(SPAN_NOTICE("\The [user] stamps out [src]."), SPAN_NOTICE("You stamp out [src]."))
 		extinguish()
@@ -112,7 +112,7 @@
 			else
 				A.clean_blood()
 
-/obj/item/chems/glass/rag/attack(atom/target as obj|turf|area, mob/user as mob , flag)
+/obj/item/chems/glass/rag/attack(atom/target, mob/user , flag)
 	if(isliving(target))
 		var/mob/living/M = target
 		if(on_fire)
@@ -137,7 +137,7 @@
 
 	return ..()
 
-/obj/item/chems/glass/rag/afterattack(atom/A as obj|turf|area, mob/user as mob, proximity)
+/obj/item/chems/glass/rag/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
 		return
 

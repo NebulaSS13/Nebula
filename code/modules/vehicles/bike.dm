@@ -105,7 +105,7 @@
 /obj/vehicle/bike/insert_cell(var/obj/item/cell/C, var/mob/living/carbon/human/H)
 	return
 
-/obj/vehicle/bike/attackby(obj/item/W as obj, mob/user as mob)
+/obj/vehicle/bike/attackby(obj/item/W, mob/user)
 	if(open)
 		if(istype(W, /obj/item/engine))
 			if(engine)
@@ -122,12 +122,12 @@
 			return 1
 	return ..()
 
-/obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, mob/user as mob)
+/obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, mob/user)
 	if(!load(C))
 		to_chat(user, "<span class='warning'> You were unable to load \the [C] onto \the [src].</span>")
 		return
 
-/obj/vehicle/bike/attack_hand(var/mob/user as mob)
+/obj/vehicle/bike/attack_hand(var/mob/user)
 	if(user == load)
 		unload(load)
 		to_chat(user, "You unbuckle yourself from \the [src]")

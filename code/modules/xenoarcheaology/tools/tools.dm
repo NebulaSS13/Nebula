@@ -8,7 +8,7 @@
 	matter = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/gps/attack_self(var/mob/user as mob)
+/obj/item/gps/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
 
 /obj/item/gps/examine(mob/user)
@@ -183,7 +183,7 @@
 /obj/item/depth_scanner/attack_self(var/mob/living/user)
 	interact(user)
 
-/obj/item/depth_scanner/interact(var/mob/user as mob)
+/obj/item/depth_scanner/interact(var/mob/user)
 	var/dat = "<b>Coordinates with positive matches</b><br>"
 
 	dat += "<A href='?src=\ref[src];clear=0'>== Clear all ==</a><br>"
@@ -259,7 +259,7 @@
 				cur_dist = check_dist
 				. = weakref(R)
 
-/obj/item/pinpointer/radio/attack_self(var/mob/user as mob)
+/obj/item/pinpointer/radio/attack_self(var/mob/user)
 	interact(user)
 
 /obj/item/pinpointer/radio/interact(var/mob/user)

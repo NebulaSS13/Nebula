@@ -110,7 +110,7 @@
 		padding_material.place_sheet(get_turf(src))
 	qdel(src)
 
-/obj/item/stool/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stool/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		dismantle()
