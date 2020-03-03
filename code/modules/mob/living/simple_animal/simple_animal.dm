@@ -257,12 +257,13 @@
 		if(I_HURT)
 			var/dealt_damage = harm_intent_damage
 			var/harm_verb = response_harm
-			if(ishuman(M) && M.species)
-				var/datum/unarmed_attack/attack = M.get_unarmed_attack(src)
-				dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
-				harm_verb = pick(attack.attack_verb)
-				if(attack.sharp || attack.edge)
-					adjustBleedTicks(dealt_damage)
+			if(ishuman(M))
+				var/decl/natural_attack/attack = M.get_unarmed_attack(src)
+				if(istype(attack))
+					dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
+					harm_verb = pick(attack.attack_verb)
+					if(attack.sharp || attack.edge)
+						adjustBleedTicks(dealt_damage)
 
 			adjustBruteLoss(dealt_damage)
 			M.visible_message("<span class='warning'>[M] [harm_verb] \the [src]!</span>")

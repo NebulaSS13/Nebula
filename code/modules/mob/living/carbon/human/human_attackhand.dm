@@ -2,21 +2,30 @@
 	if(!hit_zone)
 		hit_zone = zone_sel.selecting
 
-	if(default_attack && default_attack.is_usable(src, target, hit_zone))
+	var/list/available_attacks = get_natural_attacks()
+	if(default_attack && default_attack.is_usable(src, target, hit_zone) && (default_attack.type in available_attacks))
 		if(pulling_punches)
-			var/datum/unarmed_attack/soft_type = default_attack.get_sparring_variant()
+			var/decl/natural_attack/soft_type = default_attack.get_sparring_variant()
 			if(soft_type)
 				return soft_type
 		return default_attack
 
-	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
+	for(var/u_attack_type in available_attacks)
+		var/decl/natural_attack/u_attack = decls_repository.get_decl(u_attack_type)
 		if(u_attack.is_usable(src, target, hit_zone))
+			default_attack = u_attack
 			if(pulling_punches)
-				var/datum/unarmed_attack/soft_variant = u_attack.get_sparring_variant()
+				var/decl/natural_attack/soft_variant = default_attack.get_sparring_variant()
 				if(soft_variant)
 					return soft_variant
-			return u_attack
+			return default_attack
 	return null
+
+/mob/living/carbon/human/proc/get_natural_attacks()
+	. = list()
+	for(var/obj/item/organ/external/limb in organs)
+		if(length(limb.unarmed_attacks) && limb.is_usable())
+			. |= limb.unarmed_attacks
 
 /mob/living/carbon/human/attack_hand(mob/living/carbon/M)
 
@@ -150,7 +159,7 @@
 			var/obj/item/organ/external/affecting = get_organ(hit_zone)
 
 			// See what attack they use
-			var/datum/unarmed_attack/attack = H.get_unarmed_attack(src, hit_zone)
+			var/decl/natural_attack/attack = H.get_unarmed_attack(src, hit_zone)
 			if(!attack)
 				return 0
 			if(world.time < H.last_attack + attack.delay)
@@ -339,12 +348,14 @@
 	set src = usr
 
 	var/list/choices = list()
-	for(var/thing in species.unarmed_attacks)
-		var/datum/unarmed_attack/u_attack = thing
-		choices[u_attack.attack_name] = u_attack
+	for(var/thing in get_natural_attacks())
+		var/decl/natural_attack/u_attack = decls_repository.get_decl(thing)
+		if(istype(u_attack))
+			choices[u_attack.attack_name] = u_attack
 
 	var/selection = input("Select a default attack (currently selected: [default_attack ? default_attack.attack_name : "none"]).", "Default Unarmed Attack") as null|anything in choices
-	if(selection && !(choices[selection] in species.unarmed_attacks))
+	var/decl/natural_attack/new_attack = choices[selection]
+	if(selection && !(new_attack.type in get_natural_attacks()))
 		return
 
 	default_attack = selection ? choices[selection] : null
