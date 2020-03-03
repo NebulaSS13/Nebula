@@ -216,7 +216,10 @@
 /mob/living/carbon/human/handle_speech_sound()
 	if(species.speech_sounds && prob(species.speech_chance))
 		var/list/returns[2]
-		returns[1] = sound(pick(species.speech_sounds))
+		var/sound_to_play = species.speech_sounds
+		if(islist(species.speech_sounds))
+			sound_to_play = species.speech_sounds[gender] || species.speech_sounds
+		returns[1] = sound(pick(sound_to_play))
 		returns[2] = 50
 		return returns
 	return ..()
