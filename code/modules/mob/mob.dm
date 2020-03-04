@@ -344,11 +344,12 @@
 
 //Gets the mob grab conga line.
 /mob/proc/ret_grab(list/L)
-	if (!istype(l_hand, /obj/item/grab) && !istype(r_hand, /obj/item/grab))
+	var/grabs = get_active_grabs()
+	if(!length(grabs))
 		return L
 	if(!L)
 		L = list(src)
-	for(var/obj/item/grab/G in get_active_grabs())
+	for(var/obj/item/grab/G in grabs)
 		if(G.affecting && !(G.affecting in L))
 			L += G.affecting
 			var/mob/affecting_mob = G.get_affecting_mob()
@@ -1093,3 +1094,14 @@
 
 /mob/proc/handle_grabs_after_move()
 	set waitfor = 0
+
+/mob/proc/add_grab(var/obj/item/grab/grab)
+	return FALSE
+
+/mob/proc/ProcessGrabs()
+	return
+
+/mob/proc/get_active_grabs()
+	. = list()
+	for(var/obj/item/grab/grab in contents)
+		. += grab

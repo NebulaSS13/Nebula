@@ -198,19 +198,6 @@
 
 	return MOVEMENT_PROCEED
 
-/mob/living/ProcessGrabs()
-	//if we are being grabbed
-	if(LAZYLEN(grabbed_by))
-		resist() //shortcut for resisting grabs
-
-/mob/proc/ProcessGrabs()
-	return
-
-/mob/proc/get_active_grabs()
-	. = list()
-	for(var/obj/item/grab/grab in list(l_hand, r_hand))
-		. += grab
-
 // Finally.. the last of the mob movement junk
 /datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
 	. = MOVEMENT_HANDLED

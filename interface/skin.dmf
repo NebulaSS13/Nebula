@@ -57,9 +57,6 @@ macro "borghotkeymode"
 		name = "Insert"
 		command = "a-intent right"
 	elem 
-		name = "Delete"
-		command = "delete-key-pressed"
-	elem 
 		name = "1"
 		command = "toggle-module 1"
 	elem 
@@ -284,9 +281,6 @@ macro "macro"
 		name = "Insert"
 		command = "a-intent right"
 	elem 
-		name = "Delete"
-		command = "delete-key-pressed"
-	elem 
 		name = "CTRL+1"
 		command = "a-intent help"
 	elem 
@@ -459,9 +453,6 @@ macro "hotkeymode"
 	elem 
 		name = "Insert"
 		command = "a-intent right"
-	elem 
-		name = "Delete"
-		command = "delete-key-pressed"
 	elem 
 		name = "1"
 		command = "a-intent help"
@@ -704,9 +695,6 @@ macro "borgmacro"
 	elem 
 		name = "Insert"
 		command = "a-intent right"
-	elem 
-		name = "Delete"
-		command = "delete-key-pressed"
 	elem 
 		name = "CTRL+1"
 		command = "toggle-module 1"

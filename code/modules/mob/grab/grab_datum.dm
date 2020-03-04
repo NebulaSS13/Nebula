@@ -178,8 +178,8 @@
 		adir = assailant.dir
 		affecting.set_dir(assailant.dir)
 
-	if(ismob(affecting)) // Structures often have mapped pixel offsets - donut touch.
-		switch(adir)
+	if(ismob(affecting) && !istype(affecting, /mob/living/exosuit)) // Structures often have mapped pixel offsets - donut touch.
+		switch(adir)                                                // Oh no, memories of mecha.dm :(
 			if(NORTH)
 				animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
 				G.draw_affecting_under()

@@ -74,9 +74,11 @@
 /mob/living/silicon/proc/show_laws()
 	return
 
-/mob/living/silicon/drop_item()
-	return
-
+/mob/living/silicon/drop_item(var/Target)
+	var/obj/item/grab/grab = locate() in contents
+	if(grab)
+		return drop_from_inventory(grab)
+	
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)

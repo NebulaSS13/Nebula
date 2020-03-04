@@ -467,7 +467,10 @@ meteor_act
 		fire_act(air, temperature)
 	return FALSE
 
-/mob/living/carbon/human/try_grab(var/atom/movable/grabbing)
+/mob/living/carbon/human/add_grab(var/obj/item/grab/grab)
+	. = put_in_active_hand(grab)
+
+/mob/living/carbon/try_grab(var/atom/movable/grabbing)
 	. = species.attempt_grab(src, grabbing)
 
 /mob/living/carbon/human/can_be_grabbed(var/mob/grabber, var/obj/item/grab/grab)

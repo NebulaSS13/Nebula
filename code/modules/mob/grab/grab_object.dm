@@ -3,7 +3,7 @@
 	canremove = 0
 
 	var/atom/movable/affecting = null
-	var/mob/living/carbon/human/assailant = null
+	var/mob/assailant = null
 
 	var/datum/grab/current_grab
 	var/type_name
@@ -33,19 +33,22 @@
 	affecting = target
 	if(!istype(affecting))
 		return INITIALIZE_HINT_QDEL
-	target_zone = assailant.zone_sel.selecting
-	assailant.remove_cloaking_source(assailant.species)
+	target_zone = assailant.zone_sel?.selecting
 
+	if(ishuman(assailant))
+		var/mob/living/carbon/human/H = assailant
+		H.remove_cloaking_source(H.species)
 	if(!target.can_be_grabbed(assailant, src))
 		return INITIALIZE_HINT_QDEL
 	if(!init())
 		return INITIALIZE_HINT_QDEL
 
+	if(assailant.zone_sel)
+		GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
 	var/obj/item/organ/O = get_targeted_organ()
 	if(O)
 		SetName("[name] ([O.name])")
 		GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
-	GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
 	GLOB.moved_event.register(affecting, src, .proc/on_affecting_move)
 
 /obj/item/grab/examine(mob/user)
@@ -84,6 +87,8 @@
 	return TRUE
 
 /obj/item/grab/dropped()
+	if(ismob(loc) && !QDELETED(src))
+		to_chat(loc, SPAN_NOTICE("You release your hold on \the [affecting]."))
 	..()
 	if(!QDELETED(src))
 		qdel(src)
@@ -102,7 +107,8 @@
 		affecting.reset_plane_and_layer()
 		affecting = null
 	if(assailant)
-		GLOB.zone_selected_event.unregister(assailant.zone_sel, src)
+		if(assailant.zone_sel)
+			GLOB.zone_selected_event.unregister(assailant.zone_sel, src)
 		assailant = null
 	return ..()
 
@@ -146,7 +152,7 @@
 
 // This will run from Initialize, after other checks have succeeded. Must call parent; returning FALSE means failure and qdels the grab.
 /obj/item/grab/proc/init()
-	if(!assailant.put_in_active_hand(src))
+	if(!assailant.add_grab(src))
 		return FALSE // This should succeed as we checked the hand, but if not we abort here.
 	var/mob/affecting_mob = get_affecting_mob()
 	if(affecting_mob)
@@ -175,7 +181,9 @@
 	return 0
 
 /obj/item/grab/proc/action_used()
-	assailant.remove_cloaking_source(assailant.species)
+	if(ishuman(assailant))
+		var/mob/living/carbon/human/H = assailant
+		H.remove_cloaking_source(H.species)
 	last_action = world.time
 	leave_forensic_traces()
 

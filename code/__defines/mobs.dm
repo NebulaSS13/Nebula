@@ -14,9 +14,10 @@
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
 
 // Grab Types
-#define GRAB_NORMAL			"normal"
-#define GRAB_NAB			"nab"
-#define GRAB_NAB_SPECIAL	"special nab"
+#define GRAB_SIMPLE      "simple"
+#define GRAB_NORMAL      "normal"
+#define GRAB_NAB         "nab"
+#define GRAB_NAB_SPECIAL "special nab"
 
 // Grab levels.
 #define NORM_PASSIVE    "normal passive"
@@ -25,9 +26,11 @@
 #define NORM_NECK       "normal neck"
 #define NORM_KILL       "normal kill"
 
-#define NAB_PASSIVE		"nab passive"
-#define NAB_AGGRESSIVE	"nab aggressive"
-#define NAB_KILL		"nab kill"
+#define SIMPLE_PASSIVE  "simple passive"
+
+#define NAB_PASSIVE     "nab passive"
+#define NAB_AGGRESSIVE  "nab aggressive"
+#define NAB_KILL        "nab kill"
 
 #define BORGMESON 0x1
 #define BORGTHERM 0x2

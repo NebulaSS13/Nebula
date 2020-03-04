@@ -51,6 +51,10 @@
 /mob/proc/hotkey_drop()
 	to_chat(src, "<span class='warning'>This mob type cannot drop items.</span>")
 
+/mob/living/hotkey_drop()
+	if(locate(/obj/item/grab) in contents)
+		drop_item()
+
 /mob/living/carbon/hotkey_drop()
 	var/obj/item/hand = get_active_hand()
 	if(!hand)
@@ -81,7 +85,6 @@
 		mob:toggle_throw_mode()
 	else
 		return
-
 
 /client/verb/drop_item()
 	set hidden = 1

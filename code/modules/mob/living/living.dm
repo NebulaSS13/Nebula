@@ -848,3 +848,35 @@ default behaviour is:
 		if(prob(25))
 			adjustBruteLoss(1)
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
+
+/mob/living/try_grab(var/atom/movable/grabbing)
+	if(grabbing != src)
+		to_chat(grabbing, SPAN_WARNING("\The [src] tries to grab you!"))
+		to_chat(src, SPAN_WARNING("You try to grab \the [grabbing]!"))
+	. = make_grab(src, grabbing, GRAB_SIMPLE)
+
+/mob/living/proc/make_grab(var/mob/living/attacker, var/atom/movable/target, var/grab_tag)
+	var/obj/item/grab/G
+	if(!grab_tag)
+		if(ishuman(attacker))
+			var/mob/living/carbon/human/H = attacker
+			G = new H.current_grab_type(H, target)
+		return FALSE
+	else
+		var/obj/item/grab/given_grab_type = all_grabobjects[grab_tag]
+		G = new given_grab_type(attacker, target)
+	if(QDELETED(G))
+		return FALSE
+	return TRUE
+
+/mob/living/add_grab(var/obj/item/grab/grab)
+	for(var/obj/item/grab/other_grab in contents)
+		if(other_grab != grab)
+			return FALSE
+	grab.forceMove(src)
+	return TRUE
+
+/mob/living/ProcessGrabs()
+	//if we are being grabbed
+	if(LAZYLEN(grabbed_by))
+		resist() //shortcut for resisting grabs
