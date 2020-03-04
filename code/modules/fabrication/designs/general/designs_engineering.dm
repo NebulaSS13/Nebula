@@ -8,6 +8,12 @@
 /datum/fabricator_recipe/engineering/firealarm
 	path = /obj/item/stock_parts/circuitboard/fire_alarm
 
+/datum/fabricator_recipe/engineering/airalarm_kit
+	path = /obj/item/frame/air_alarm/kit
+
+/datum/fabricator_recipe/engineering/firealarm_kit
+	path = /obj/item/frame/fire_alarm/kit
+
 /datum/fabricator_recipe/engineering/powermodule
 	path = /obj/item/module/power_control
 
