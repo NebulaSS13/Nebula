@@ -137,6 +137,8 @@
 	. = ..()
 
 	alarm_area = get_area(src)
+	if(!alarm_area)
+		return // spawned in nullspace, presumably as a prototype for construction purposes.
 	area_uid = alarm_area.uid
 	if (name == "alarm")
 		SetName("[alarm_area.name] Air Alarm")
