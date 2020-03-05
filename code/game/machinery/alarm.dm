@@ -303,7 +303,22 @@
 	return 0
 
 /obj/machinery/alarm/on_update_icon()
-	if(!istype(construct_state, /decl/machine_construction/wall_frame/panel_open))
+	// Set pixel offsets
+	pixel_x = 0
+	pixel_y = 0
+	var/turf/T = get_step(get_turf(src), turn(dir, 180))
+	if(istype(T) && T.density)
+		if(dir == NORTH)
+			pixel_y = -21
+		else if(dir == SOUTH)
+			pixel_y = 21
+		else if(dir == WEST)
+			pixel_x = 21
+		else if(dir == EAST)
+			pixel_x = -21
+
+	// Broken or deconstructed states
+	if(!istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
 		icon_state = "alarmx"
 		set_light(0)
 		return
@@ -312,6 +327,7 @@
 		set_light(0)
 		return
 
+	// Operational: state according to danger level, lights on
 	var/icon_level = danger_level
 	if (alarm_area.atmosalm)
 		icon_level = max(icon_level, 1)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
@@ -327,19 +343,6 @@
 		if (2)
 			icon_state = "alarm1"
 			new_color = COLOR_RED_LIGHT
-
-	pixel_x = 0
-	pixel_y = 0
-	var/turf/T = get_step(get_turf(src), turn(dir, 180))
-	if(istype(T) && T.density)
-		if(dir == NORTH)
-			pixel_y = -21
-		else if(dir == SOUTH)
-			pixel_y = 21
-		else if(dir == WEST)
-			pixel_x = 21
-		else if(dir == EAST)
-			pixel_x = -21
 
 	set_light(0.25, 0.1, 1, 2, new_color)
 

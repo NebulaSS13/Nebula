@@ -24,7 +24,7 @@
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = TRUE
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine], exposing the wiring."))
-		machine.update_icon()
+		machine.queue_icon_update()
 		return
 	if(istype(I, /obj/item/storage/part_replacer))
 		machine.display_parts(user)
@@ -63,7 +63,7 @@
 		user.visible_message(SPAN_WARNING("\The [user] has cut the wires inside \the [machine]!"), "You have cut the wires inside \the [machine].")
 		new /obj/item/stack/cable_coil(get_turf(machine), 5)
 		machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT)
-		machine.update_icon()
+		machine.queue_icon_update()
 		return
 
 	if(isScrewdriver(I))
@@ -71,7 +71,7 @@
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = FALSE
 		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
-		machine.update_icon()
+		machine.queue_icon_update()
 		return
 
 	if(istype(I, /obj/item/storage/part_replacer))
@@ -117,8 +117,8 @@
 			TRANSFER_STATE(/decl/machine_construction/wall_frame/panel_open)
 			A.use(5)
 			to_chat(user, SPAN_NOTICE("You wire the [machine]."))
-			machine.update_icon()
 			machine.set_broken(FALSE, MACHINE_BROKEN_CONSTRUCT)
+			machine.queue_icon_update()
 			return
 		else
 			to_chat(user, SPAN_WARNING("You need five pieces of cable to wire \the [machine]."))
@@ -129,7 +129,7 @@
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		to_chat(user, "You pry out the circuit!")
 		machine.uninstall_component(/obj/item/stock_parts/circuitboard)
-		machine.update_icon()
+		machine.queue_icon_update()
 		return
 
 	if(istype(I, /obj/item/storage/part_replacer))
@@ -173,11 +173,13 @@
 		if(board.build_path != (machine.base_type || machine.type))
 			to_chat(user, SPAN_WARNING("This circuitboard does not fit inside \the [machine]!"))
 			return TRUE
-		if(!user.canUnEquip(board) || !machine.can_add_component(board, user))
+		if(!user.canUnEquip(board))
 			return TRUE
 		TRANSFER_STATE(/decl/machine_construction/wall_frame/no_wires)
-		machine.part_insertion(user, board)
-		machine.update_icon()
+		user.unEquip(board, machine)
+		machine.install_component(board)
+		user.visible_message(SPAN_NOTICE("\The [user] inserts \the [board] into \the [machine]!"), SPAN_NOTICE("You insert \the [board] into \the [machine]!"))
+		machine.queue_icon_update()
 		return
 
 	if(isWrench(I))
