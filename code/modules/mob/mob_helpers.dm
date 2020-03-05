@@ -263,6 +263,16 @@ proc/slur(phrase)
 		p++//for each letter p is increased to find where the next letter will be.
 	return sanitize(t)
 
+/mob/proc/log_individual_message(message, message_type, client = key_name(src))
+	if(!LAZYLEN(message) || !message_type)
+		return
+
+	if(!islist(logging[message_type]))
+		logging[message_type] = list()
+
+	var/list/timestamped_message = list("[LAZYLEN(logging[message_type]) + 1]: \[[time_stamp()]\] [client]" = message)
+
+	logging[message_type] += timestamped_message
 
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
 	/* Turn text into complete gibberish! */

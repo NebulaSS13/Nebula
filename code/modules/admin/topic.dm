@@ -1558,6 +1558,17 @@
 		var/mob/M = locate(href_list["narrateto"])
 		usr.client.cmd_admin_direct_narrate(M)
 
+	else if(href_list["individuallog"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		var/mob/M = locate(href_list["individuallog"]) in SSmobs.mob_list
+		if(!ismob(M))
+			to_chat(usr, "This can only be used on instances of type /mob.")
+			return
+
+		show_individual_logging_panel(M, href_list["log_type"])
+
 	else if(href_list["traitor"])
 		if(!check_rights(R_ADMIN|R_MOD))	return
 

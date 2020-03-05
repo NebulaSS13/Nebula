@@ -3,6 +3,7 @@
 	set category = "OOC"
 
 	sanitize_and_communicate(/decl/communication_channel/ooc, src, message)
+	mob.log_individual_message(sanitize(message), INDIVIDUAL_OOC_LOG, key_name(src, include_name = FALSE))
 
 /client/verb/looc(message as text)
 	set name = "LOOC"

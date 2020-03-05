@@ -3,19 +3,21 @@ var/global/BSACooldown = 0
 var/global/floorIsLava = 0
 
 
-////////////////////////////////
+// Admin Messages
 /proc/message_admins(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
 	for(var/client/C in GLOB.admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
+
 /proc/message_staff(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">STAFF LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
 	for(var/client/C in GLOB.admins)
 		if(C && C.holder && (R_INVESTIGATE & C.holder.rights))
 			to_chat(C, msg)
+
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
@@ -24,16 +26,17 @@ var/global/floorIsLava = 0
 			if(C.get_preference_value(/datum/client_preference/staff/show_attack_logs) == GLOB.PREF_SHOW)
 				var/msg = rendered
 				to_chat(C, msg)
+
 /proc/admin_notice(var/message, var/rights)
 	for(var/mob/M in SSmobs.mob_list)
 		if(check_rights(rights, 0, M))
 			to_chat(M, message)
-///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
+// Panels
 /datum/admins/proc/show_player_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Show Player Panel"
-	set desc="Edit player (respawn, ban, heal, etc)"
+	set desc = "Edit player (respawn, ban, heal, etc)"
 
 	if(!M)
 		to_chat(usr, "You seem to be selecting a mob that doesn't exist anymore.")
@@ -105,7 +108,8 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];sendmob=\ref[M]'>Send To</A>
 		<br><br>
 		[check_rights(R_ADMIN|R_MOD,0) ? "<A href='?src=\ref[src];traitor=\ref[M]'>Traitor panel</A> | " : "" ]
-		[check_rights(R_INVESTIGATE,0) ? "<A href='?src=\ref[src];skillpanel=\ref[M]'>Skill panel</A>" : "" ]
+		[check_rights(R_INVESTIGATE,0) ? "<A href='?src=\ref[src];skillpanel=\ref[M]'>Skill panel</A> |" : "" ]
+		<A href='?src=\ref[src];individuallog=\ref[M]'>Individual Round Logs</A>
 	"}
 
 	if(M.mind)
@@ -1015,7 +1019,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn every possible custom closet. Do not do this on live."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN))	
+	if(!check_rights(R_SPAWN))
 		return
 
 	if((input(usr, "Are you sure you want to spawn all these closets?", "So Many Closets") as null|anything in list("No", "Yes")) == "Yes")
