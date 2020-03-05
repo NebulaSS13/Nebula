@@ -141,6 +141,9 @@
 /turf/simulated/wall/voxshuttle/attackby()
 	return
 
+/turf/simulated/wall/concrete
+	floor_type = null
+
 /turf/simulated/wall/concrete/Initialize(var/ml)
 	. = ..(ml,MAT_CONCRETE)
 

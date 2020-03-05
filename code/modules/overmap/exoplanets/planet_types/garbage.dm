@@ -218,6 +218,7 @@
 //Artifact containment lab
 /turf/simulated/wall/containment
 	paint_color = COLOR_GRAY20
+	floor_type = /turf/simulated/floor/fixed/alium/airless
 
 /turf/simulated/wall/containment/Initialize(var/ml)
 	. = ..(ml, MAT_CONCRETE, MAT_ALIENALLOY)
