@@ -135,3 +135,6 @@
 				M.place_sheet(get_turf(src), round(stored_material[mat] / M.units_per_sheet), M.type)
 	..()
 	return TRUE
+
+/obj/machinery/fabricator/proc/get_color_list()
+	return pipe_colors //override with null for hex color selections
