@@ -38,8 +38,10 @@
 /obj/structure/lattice/Destroy()
 	var/turf/old_loc = get_turf(src)
 	. = ..()
-	if(old_loc)
+	if(istype(old_loc))
 		update_neighbors(old_loc)
+		for(var/atom/movable/AM in old_loc)
+			AM.fall(old_loc)
 
 /obj/structure/lattice/proc/update_neighbors(var/location = loc)
 	for (var/dir in GLOB.cardinal)

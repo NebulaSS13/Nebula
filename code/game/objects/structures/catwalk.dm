@@ -9,6 +9,8 @@
 	footstep_type = /decl/footsteps/catwalk
 	obj_flags = OBJ_FLAG_NOFALL
 	handle_generic_blending = TRUE
+	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
+
 	var/hatch_open = FALSE
 	var/obj/item/stack/tile/mono/plated_tile
 	var/list/connections
@@ -36,8 +38,12 @@
 	update_icon()
 
 /obj/structure/catwalk/Destroy()
+	var/turf/oldloc = loc
 	redraw_nearby_catwalks()
-	return ..()
+	. = ..()
+	if(istype(oldloc))
+		for(var/atom/movable/AM in oldloc)
+			AM.fall(oldloc)
 
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
 	for(var/direction in GLOB.alldirs)
