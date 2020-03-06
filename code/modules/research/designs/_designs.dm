@@ -72,3 +72,7 @@ GLOBAL_LIST_INIT(build_path_to_design_datum_path, populate_design_datum_index())
 		var/datum/design/fake_design = path
 		if(initial(fake_design.build_path))
 			.[initial(fake_design.build_path)] = path
+	for(var/path in typesof(/datum/fabricator_recipe))
+		var/datum/fabricator_recipe/fake_recipe = path
+		if(initial(fake_recipe.path))
+			.[initial(fake_recipe.path)] = path

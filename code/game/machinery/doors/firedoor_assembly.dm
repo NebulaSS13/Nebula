@@ -10,7 +10,7 @@
 
 /obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
 	. = ..()
-	if(!. && istype(C, /obj/item/airalarm_electronics) && wired)
+	if(!. && istype(C, /obj/item/stock_parts/circuitboard/air_alarm) && wired)
 		if(!anchored)
 			to_chat(user, SPAN_WARNING("You must secure \the [src] first!"))
 		else

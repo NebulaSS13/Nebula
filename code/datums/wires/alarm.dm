@@ -18,7 +18,7 @@ var/const/AALARM_WIRE_AALARM = 16
 
 /datum/wires/alarm/CanUse(var/mob/living/L)
 	var/obj/machinery/alarm/A = holder
-	if(A.wiresexposed && A.buildstage == 2)
+	if(istype(A.construct_state, /decl/machine_construction/wall_frame/panel_open))
 		return 1
 	return 0
 
