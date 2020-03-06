@@ -143,9 +143,8 @@
 	var/mob/living/carbon/human/attacker = G.assailant
 	var/mob/living/carbon/human/target = G.affecting
 
-	var/datum/unarmed_attack/attack = attacker.get_unarmed_attack(target, BP_EYES)
-
-	if(!attack)
+	var/decl/natural_attack/attack = attacker.get_unarmed_attack(target, BP_EYES)
+	if(!istype(attack))
 		return
 	for(var/obj/item/protection in list(target.head, target.wear_mask, target.glasses))
 		if(protection && (protection.body_parts_covered & EYES))

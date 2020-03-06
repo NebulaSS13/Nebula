@@ -71,6 +71,9 @@
 	var/hatch_state = 0
 	var/stage = 0
 	var/cavity = 0
+
+	var/list/unarmed_attacks
+
 	var/atom/movable/applied_pressure
 	var/atom/movable/splinted
 
@@ -100,8 +103,12 @@
 		replaced(owner)
 		sync_colour_to_human(owner)
 	get_icon()
-
 	slowdown = species.get_slowdown(owner)
+	if(species)
+		for(var/attack_type in species.unarmed_attacks)
+			var/decl/natural_attack/attack = decls_repository.get_decl(attack_type)
+			if(istype(attack) && (organ_tag in attack.usable_with_limbs))
+				LAZYADD(unarmed_attacks, attack_type)
 
 /obj/item/organ/external/Destroy()
 
