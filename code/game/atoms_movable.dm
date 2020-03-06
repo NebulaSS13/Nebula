@@ -134,6 +134,9 @@
 	if (!target || speed <= 0 || QDELETED(src) || (target.z != src.z))
 		return FALSE
 
+	for(var/obj/item/grab/grab in grabbed_by)
+		qdel(grab)
+
 	var/datum/thrownthing/TT = new(src, target, range, speed, thrower, callback)
 	throwing = TT
 

@@ -44,8 +44,9 @@
 	if(istype(target, /obj/item/grab))
 		var/obj/item/grab/G = target
 		if(G.affecting)
-			var/mob/M = G.affecting
-			charged_item = mob_charge(M)
+			var/mob/M = G.get_affecting_mob()
+			if(M)
+				charged_item = mob_charge(M)
 
 	if(istype(target, /obj/item/cell/))
 		var/obj/item/cell/C = target

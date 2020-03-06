@@ -40,9 +40,10 @@
 		return O.inspect(G.assailant)
 
 /datum/grab/normal/on_hit_disarm(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-	var/mob/living/carbon/human/assailant = G.assailant
-
+	var/mob/living/affecting = G.get_affecting_mob()
+	var/mob/living/assailant = G.assailant
+	if(!affecting)
+		return
 	if(!G.attacking && !affecting.lying)
 
 		affecting.visible_message("<span class='notice'>[assailant] is trying to pin [affecting] to the ground!</span>")
@@ -64,13 +65,15 @@
 
 
 /datum/grab/normal/on_hit_grab(var/obj/item/grab/G)
-	var/obj/item/organ/external/O = G.get_targeted_organ()
-	var/mob/living/carbon/human/assailant = G.assailant
-	var/mob/living/carbon/human/affecting = G.affecting
+	var/mob/living/affecting = G.get_affecting_mob()
+	var/mob/living/assailant = G.assailant
+	if(!affecting)
+		return
 
 	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 		return
 
+	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O)
 		to_chat(assailant, "<span class='warning'>[affecting] is missing that body part!</span>")
 		return 0
@@ -95,13 +98,14 @@
 
 
 /datum/grab/normal/on_hit_harm(var/obj/item/grab/G)
-	var/obj/item/organ/external/O = G.get_targeted_organ()
-	var/mob/living/carbon/human/assailant = G.assailant
-	var/mob/living/carbon/human/affecting = G.affecting
-
+	var/mob/living/affecting = G.get_affecting_mob()
+	var/mob/living/assailant = G.assailant
+	if(!affecting)
+		return
 	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 		return
 
+	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O)
 		to_chat(assailant, "<span class='warning'>[affecting] is missing that body part!</span>")
 		return 0
@@ -147,9 +151,10 @@
 	return 0
 
 /datum/grab/normal/proc/attack_eye(var/obj/item/grab/G)
+	var/mob/living/carbon/human/target = G.get_affecting_mob()
 	var/mob/living/carbon/human/attacker = G.assailant
-	var/mob/living/carbon/human/target = G.affecting
-
+	if(!istype(target) || !istype(attacker))
+		return
 	var/decl/natural_attack/attack = attacker.get_unarmed_attack(target, BP_EYES)
 	if(!istype(attack))
 		return
@@ -167,9 +172,10 @@
 	return 1
 
 /datum/grab/normal/proc/headbutt(var/obj/item/grab/G)
+	var/mob/living/carbon/human/target = G.get_affecting_mob()
 	var/mob/living/carbon/human/attacker = G.assailant
-	var/mob/living/carbon/human/target = G.affecting
-
+	if(!istype(target)	 || !istype(attacker))
+		return
 	if(!attacker.skill_check(SKILL_COMBAT, SKILL_BASIC))
 		return
 
@@ -249,8 +255,9 @@
 
 
 /datum/grab/normal/proc/attack_throat(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user)
-	var/mob/living/carbon/human/affecting = G.affecting
-
+	var/mob/living/affecting = G.get_affecting_mob()
+	if(!affecting)
+		return
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
@@ -292,31 +299,26 @@
 	return 1
 
 /datum/grab/normal/proc/attack_tendons(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user, var/target_zone)
-	var/mob/living/carbon/human/affecting = G.affecting
-
+	var/mob/living/affecting = G.get_affecting_mob()
+	if(!affecting)
+		return
 	if(!user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 		return
-
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
-
 	if(!W.edge || !W.force || W.damtype != BRUTE)
 		return 0 //unsuitable weapon
-
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O || O.is_stump() || !(O.limb_flags & ORGAN_FLAG_HAS_TENDON) || (O.status & ORGAN_TENDON_CUT))
 		return FALSE
-
 	user.visible_message(SPAN_DANGER("\The [user] begins to cut \the [affecting]'s [O.tendon_name] with \the [W]!"))
 	user.next_move = world.time + 20
-
 	if(!do_after(user, 20, progress=0))
 		return 0
 	if(!(G && G.affecting == affecting)) //check that we still have a grab
 		return 0
 	if(!O || O.is_stump() || !O.sever_tendon())
 		return 0
-
 	user.visible_message(SPAN_DANGER("\The [user] cut \the [affecting]'s [O.tendon_name] with \the [W]!"))
 	if(W.hitsound) playsound(affecting.loc, W.hitsound, 50, 1, -1)
 	G.last_action = world.time

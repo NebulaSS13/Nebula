@@ -177,9 +177,10 @@ var/list/slot_equipment_priority = list( \
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
 	if(!Target && !l_hand && !r_hand)
-		var/obj/item/grab/grab = locate() in contents
-		if(grab)
-			return drop_from_inventory(grab)
+		for(var/obj/item/grab/grab in get_active_grabs())
+			qdel(grab)
+			. = TRUE
+		return
 	return hand ? drop_l_hand(Target) : drop_r_hand(Target)
 
 /*

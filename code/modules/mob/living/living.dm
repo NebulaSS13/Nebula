@@ -880,3 +880,6 @@ default behaviour is:
 	//if we are being grabbed
 	if(LAZYLEN(grabbed_by))
 		resist() //shortcut for resisting grabs
+
+/mob/living/CanUseTopicPhysical(mob/user)
+	. = CanUseTopic(user, GLOB.physical_no_access_state)

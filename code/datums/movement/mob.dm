@@ -234,20 +234,22 @@
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
 		for(var/obj/item/grab/G in mob.get_active_grabs())
+			if(!G.affecting)
+				continue
 			var/turf/start = G.affecting.loc
 			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
 			if(!start.CanZPass(G.affecting, direction))
 				to_chat(mob, SPAN_WARNING("\The [start] blocked your pulled object!"))
-				mob.drop_from_inventory(G)
+				qdel(G)
 				continue
 			if(!destination.CanZPass(G.affecting, direction))
 				to_chat(mob, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
-				mob.drop_from_inventory(G)
+				qdel(G)
 				continue
 			for(var/atom/A in destination)
 				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
 					to_chat(mob, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
-					mob.drop_from_inventory(G)
+					qdel(G)
 					continue
 			G.affecting.forceMove(destination)
 			continue

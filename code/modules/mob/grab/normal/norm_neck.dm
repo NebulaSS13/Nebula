@@ -25,7 +25,10 @@
 	break_chance_table = list(3, 18, 45, 100)
 
 /datum/grab/normal/neck/process_effect(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
+
+	var/mob/living/affecting = G.get_affecting_mob()
+	if(!istype(affecting))
+		return
 
 	affecting.drop_l_hand()
 	affecting.drop_r_hand()

@@ -87,8 +87,6 @@
 	return TRUE
 
 /obj/item/grab/dropped()
-	if(ismob(loc) && !QDELETED(src))
-		to_chat(loc, SPAN_NOTICE("You release your hold on \the [affecting]."))
 	..()
 	if(!QDELETED(src))
 		qdel(src)
@@ -99,11 +97,12 @@
 
 /obj/item/grab/Destroy()
 	if(affecting)
+		if(assailant)
+			to_chat(assailant, SPAN_NOTICE("You release your hold on \the [affecting]."))
 		GLOB.dismembered_event.unregister(affecting, src)
 		GLOB.moved_event.unregister(affecting, src)
 		reset_position()
 		LAZYREMOVE(affecting.grabbed_by, src)
-		UNSETEMPTY(affecting.grabbed_by)
 		affecting.reset_plane_and_layer()
 		affecting = null
 	if(assailant)
@@ -204,9 +203,7 @@
 
 /obj/item/grab/proc/upgrade(var/bypass_cooldown = FALSE)
 	if(!check_upgrade_cooldown() && !bypass_cooldown)
-		to_chat(assailant, SPAN_WARNING("It's too soon to upgrade."))
 		return
-
 	var/datum/grab/upgrab = current_grab.upgrade(src)
 	if(upgrab)
 		current_grab = upgrab

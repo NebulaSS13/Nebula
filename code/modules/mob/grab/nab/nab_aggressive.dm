@@ -14,6 +14,6 @@
 	process_effect(G)
 
 /datum/grab/nab/aggressive/process_effect(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-
-	affecting.Stun(3)
+	var/mob/living/affecting = G.get_affecting_mob()
+	if(affecting)
+		affecting.Stun(3)

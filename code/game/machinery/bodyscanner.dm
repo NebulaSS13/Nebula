@@ -66,8 +66,8 @@
 
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user)
 	if(istype(G))
-		var/mob/M = G.affecting
-		if(!user_can_move_target_inside(M, user))
+		var/mob/M = G.get_affecting_mob()
+		if(!M || !user_can_move_target_inside(M, user))
 			return
 		qdel(G)
 		return TRUE

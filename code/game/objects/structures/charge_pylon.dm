@@ -46,8 +46,9 @@
 /obj/structure/adherent_pylon/attackby(obj/item/grab/normal/G, mob/user)
 	if(!istype(G))
 		return
-	var/mob/M = G.affecting
-	charge_user(M)
+	var/mob/M = G.get_affecting_mob()
+	if(M)
+		charge_user(M)
 
 /obj/structure/adherent_pylon/Bumped(atom/AM)
 	if(ishuman(AM))

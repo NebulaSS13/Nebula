@@ -52,7 +52,7 @@
 	to_chat(src, "<span class='warning'>This mob type cannot drop items.</span>")
 
 /mob/living/hotkey_drop()
-	if(locate(/obj/item/grab) in contents)
+	if(length(get_active_grabs()))
 		drop_item()
 
 /mob/living/carbon/hotkey_drop()

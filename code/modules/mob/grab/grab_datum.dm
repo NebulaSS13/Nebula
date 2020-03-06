@@ -115,22 +115,16 @@
 /datum/grab/proc/throw_held(var/obj/item/grab/G)
 	if(G.assailant == G.affecting)
 		return
-
-	var/mob/living/carbon/human/affecting = G.affecting
-
 	if(can_throw)
-		. = affecting
+		. = G.affecting
 		var/mob/thrower = G.loc
-
-		if(ismob(affecting))
-			animate(affecting, pixel_x = initial(affecting.pixel_x), pixel_y = initial(affecting.pixel_y), 4, 1)
+		if(ismob(G.affecting))
+			animate(G.affecting, pixel_x = initial(G.affecting.pixel_x), pixel_y = initial(G.affecting.pixel_y), 4, 1)
 		qdel(G)
-
 		// check if we're grabbing with our inactive hand
 		G = thrower.get_inactive_hand()
-		if(!istype(G))	return
-		qdel(G)
-		return
+		if(istype(G))
+			qdel(G)
 
 /datum/grab/proc/hit_with_grab(var/obj/item/grab/G)
 	if(downgrade_on_action)
@@ -275,9 +269,10 @@
 	return 0
 
 /datum/grab/proc/handle_resist(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-	var/mob/living/carbon/human/assailant = G.assailant
-
+	var/mob/living/affecting = G.get_affecting_mob()
+	var/mob/living/assailant = G.assailant
+	if(!affecting)
+		return
 	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
 		to_chat(G.affecting, "<span class='warning'>You can't resist in your current state!</span>")
 	var/skill_mod = Clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)

@@ -18,11 +18,11 @@
 	process_effect(G)
 
 /datum/grab/nab/kill/process_effect(var/obj/item/grab/G)
-	var/mob/living/carbon/human/assailant = G.assailant
-	var/mob/living/carbon/human/affecting = G.affecting
-
+	var/mob/living/assailant = G.assailant
+	var/mob/living/affecting = G.get_affecting_mob()
+	if(!affecting)
+		return
 	affecting.Stun(3)
-
 	switch(assailant.a_intent)
 		if(I_GRAB)
 			on_hit_grab(G)

@@ -25,18 +25,20 @@
 
 
 /datum/grab/normal/struggle/process_effect(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-	var/mob/living/carbon/human/assailant = G.assailant
-
+	var/mob/living/affecting = G.get_affecting_mob()
+	var/mob/living/assailant = G.assailant
+	if(!affecting)
+		return
 	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
 		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
 
 /datum/grab/normal/struggle/enter_as_up(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-	var/mob/living/carbon/human/assailant = G.assailant
-
+	var/mob/living/affecting = G.get_affecting_mob()
+	var/mob/living/assailant = G.assailant
+	if(!affecting)
+		return
 	if(affecting == assailant)
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)

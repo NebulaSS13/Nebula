@@ -27,9 +27,10 @@
 	can_grab_self = 0
 
 /datum/grab/nab/on_hit_grab(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-	var/mob/living/carbon/human/assailant = G.assailant
-
+	var/mob/living/affecting = G.get_affecting_mob()
+	var/mob/living/assailant = G.assailant
+	if(!affecting)
+		return
 	var/crush_damage = rand(8,14)
 
 	affecting.visible_message("<span class='danger'>[assailant] begins crushing [affecting]!</span>")
@@ -45,8 +46,10 @@
 		return 0
 
 /datum/grab/nab/on_hit_harm(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-	var/mob/living/carbon/human/assailant = G.assailant
+	var/mob/living/affecting = G.get_affecting_mob()
+	var/mob/living/assailant = G.assailant
+	if(!affecting)
+		return
 
 	var/masticate_damage = rand(15,20)
 

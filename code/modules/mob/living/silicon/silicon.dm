@@ -75,9 +75,9 @@
 	return
 
 /mob/living/silicon/drop_item(var/Target)
-	var/obj/item/grab/grab = locate() in contents
-	if(grab)
-		return drop_from_inventory(grab)
+	for(var/obj/item/grab/grab in get_active_grabs())
+		qdel(grab)
+		. = TRUE
 	
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
