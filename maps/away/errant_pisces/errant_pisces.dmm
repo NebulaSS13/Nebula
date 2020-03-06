@@ -1414,9 +1414,8 @@
 "dA" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 4;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "n2_in";
+	id_tag = "n2_in";
 	use_power = 1
 	},
 /turf/simulated/floor/airless,

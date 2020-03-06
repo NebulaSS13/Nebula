@@ -511,11 +511,10 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bt" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
+/obj/machinery/atmospherics/unary/outlet_injector/engine{
 	dir = 1;
-	frequency = 1438;
 	icon_state = "map_injector";
-	id = "unishi_fuel_in";
+	id_tag = "unishi_fuel_in";
 	use_power = 1
 	},
 /turf/simulated/floor,

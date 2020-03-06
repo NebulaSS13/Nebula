@@ -1082,9 +1082,7 @@
 /area/map_template/merc_shuttle/rear)
 "bN" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 1441;
-	id = "fuel_in";
-	id_tag = null;
+	id_tag = "fuel_in";
 	use_power = 0
 	},
 /obj/machinery/sparker{
