@@ -1054,9 +1054,8 @@
 "cG" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "n2o_in";
+	id_tag = "n2o_in";
 	pixel_y = 1;
 	use_power = 1
 	},
@@ -2396,9 +2395,8 @@
 "fX" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "d_n2_in";
+	id_tag = "d_n2_in";
 	use_power = 1
 	},
 /turf/simulated/floor/airless,

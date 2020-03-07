@@ -1017,8 +1017,7 @@
 "ce" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 1441;
-	id = "cn2n"
+	id_tag = "cn2n"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/map_template/colony/atmospherics)
@@ -1280,8 +1279,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 1441;
-	id = "co2n"
+	id_tag = "co2n"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/map_template/colony/atmospherics)
@@ -1297,8 +1295,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 1441;
-	id = "cco2n"
+	id_tag = "cco2n"
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
 /area/map_template/colony/atmospherics)
@@ -6375,8 +6372,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 1441;
-	id = "cn2n"
+	id_tag = "cn2n"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/map_template/colony/atmospherics)

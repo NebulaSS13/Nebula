@@ -156,14 +156,14 @@ obj/machinery/computer/air_control/Destroy()
 		refreshing_input = TRUE
 		input_flow_setting = input("What would you like to set the rate limit to?", "Set Volume", input_flow_setting) as num|null
 		input_flow_setting = between(0, input_flow_setting, ATMOS_DEFAULT_VOLUME_PUMP+500)
-		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
+		signal.data = list ("tag" = input_tag, "set_volume_rate" = input_flow_setting)
 		. = 1
 
 	if(href_list["in_set_max"])
 		input_info = null
 		refreshing_input = TRUE
 		input_flow_setting = ATMOS_DEFAULT_VOLUME_PUMP+500
-		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
+		signal.data = list ("tag" = input_tag, "set_volume_rate" = input_flow_setting)
 		. = 1
 
 	if(href_list["out_refresh_status"])

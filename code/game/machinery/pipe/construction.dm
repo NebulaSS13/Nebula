@@ -188,30 +188,6 @@ Buildable meters
 		"You hear ratchet.")
 	qdel(src)	// remove the pipe item
 
-/obj/item/pipe/injector
-	name = "Injector"
-	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
-	connect_types =  CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
-	icon = 	'icons/atmos/injector.dmi'
-	icon_state = "map_injector"
-	constructed_path = /obj/machinery/atmospherics/unary/outlet_injector
-	pipe_class = PIPE_CLASS_UNARY
-
-	var/frequency
-	var/id
-
-/obj/item/pipe/injector/Initialize(mapload, obj/machinery/atmospherics/P)
-	. = ..(mapload)
-	var/obj/machinery/atmospherics/unary/outlet_injector/I = P
-	if(!I)
-		return
-	frequency = I.frequency
-	id = I.id
-	set_dir(I.dir)
-	name = I.name
-	desc = I.desc
-	connect_types = I.connect_types
-
 /obj/item/machine_chassis
 	var/build_type
 

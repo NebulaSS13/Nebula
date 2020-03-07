@@ -2854,11 +2854,10 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 6
 	},
-/obj/machinery/atmospherics/unary/outlet_injector{
+/obj/machinery/atmospherics/unary/outlet_injector/engine{
 	dir = 1;
-	frequency = 1438;
 	icon_state = "map_injector";
-	id = "unishi_cooling_in";
+	id_tag = "unishi_cooling_in";
 	name = "Coolant Injector";
 	pixel_y = 1;
 	power_rating = 30000;

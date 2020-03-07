@@ -17,11 +17,6 @@
 
 	var/volume_rate = 50	//flow rate limit
 
-	var/frequency = 1439
-	var/id = null
-	var/datum/radio_frequency/radio_connection
-
-
 	level = 1
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
@@ -29,18 +24,39 @@
 	build_icon = 'icons/atmos/injector.dmi'
 	build_icon_state = "map_injector"
 
+	identifier = "AO"
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/radio/receiver/buildable,
+		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/input_toggle,
+		/decl/public_access/public_variable/identifier,
+		/decl/public_access/public_variable/use_power,
+		/decl/public_access/public_variable/volume_rate
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_power,
+		/decl/public_access/public_method/inject,
+		/decl/public_access/public_method/refresh
+	)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/outlet_injector = 1,
+		/decl/stock_part_preset/radio/event_transmitter/outlet_injector = 1
+	)
+
+	frame_type = /obj/item/pipe
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	base_type = /obj/machinery/atmospherics/unary/vent_pump/buildable
+
+/obj/machinery/atmospherics/unary/vent_pump/buildable
+	uncreated_component_parts = null
+
 /obj/machinery/atmospherics/unary/outlet_injector/Initialize()
 	. = ..()
 	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	
-
-/obj/machinery/atmospherics/unary/outlet_injector/Initialize()
-	. = ..()
-	set_frequency(frequency)
-
-/obj/machinery/atmospherics/unary/outlet_injector/Destroy()
-	unregister_radio(src, frequency)
-	. = ..()
 
 /obj/machinery/atmospherics/unary/outlet_injector/on_update_icon()	
 	if (!node)
@@ -70,12 +86,6 @@
 	. += "<table>"
 	. += "<tr><td><b>Name:</b></td><td>[name]</td>"
 	. += "<tr><td><b>Power:</b></td><td>[use_power?("<font color = 'green'>Injecting</font>"):("<font color = 'red'>Offline</font>")]</td><td><a href='?src=\ref[src];toggle_power=\ref[src]'>Toggle</a></td></tr>"
-	. += "<tr><td><b>ID Tag:</b></td><td>[id]</td><td><a href='?src=\ref[src];settag=\ref[id]'>Set ID Tag</a></td></td></tr>"
-	if(frequency%10)
-		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10]</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
-	else
-		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10].0</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
-	.+= "</table>"
 	. = JOINTEXT(.)
 
 /obj/machinery/atmospherics/unary/outlet_injector/OnTopic(mob/user, href_list, datum/topic_state/state)
@@ -86,20 +96,6 @@
 		queue_icon_update()
 		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
 		return TOPIC_REFRESH
-	if(href_list["settag"])
-		var/t = sanitizeSafe(input(user, "Enter the ID tag for [src.name]", src.name, id), MAX_NAME_LEN)
-		if(t && CanInteract(user, state))
-			id = t
-			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
-			return TOPIC_REFRESH
-		return TOPIC_HANDLED
-	if(href_list["setfreq"])
-		var/freq = input(user, "Enter the Frequency for [src.name]. Decimal will automatically be inserted", src.name, frequency) as num|null
-		if(CanInteract(user, state))
-			set_frequency(freq)
-			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
-			return TOPIC_REFRESH
-		return TOPIC_HANDLED
 
 /obj/machinery/atmospherics/unary/outlet_injector/Process()
 	..()
@@ -147,58 +143,6 @@
 
 	flick("inject", src)
 
-/obj/machinery/atmospherics/unary/outlet_injector/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
-
-/obj/machinery/atmospherics/unary/outlet_injector/proc/broadcast_status()
-	if(!radio_connection)
-		return 0
-
-	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
-	signal.source = src
-
-	signal.data = list(
-		"tag" = id,
-		"device" = "AO",
-		"power" = use_power,
-		"volume_rate" = volume_rate,
-		"sigtype" = "status"
-	 )
-
-	radio_connection.post_signal(src, signal)
-
-	return 1
-
-/obj/machinery/atmospherics/unary/outlet_injector/receive_signal(datum/signal/signal)
-	if(!signal.data["tag"] || signal.data["tag"] != id || signal.data["sigtype"]!="command")
-		return 0
-
-	if(signal.data["power"])
-		update_use_power(sanitize_integer(text2num(signal.data["power"]), POWER_USE_OFF, POWER_USE_ACTIVE, use_power))
-
-	if(signal.data["power_toggle"] || signal.data["command"] == "valve_toggle") // some atmos buttons use "valve_toggle" as a command
-		update_use_power(!use_power)
-
-	if(signal.data["inject"])
-		inject()
-		return
-
-	if(signal.data["set_volume_rate"])
-		var/number = text2num(signal.data["set_volume_rate"])
-		volume_rate = between(0, number, air_contents.volume)
-
-	if(signal.data["status"])
-		addtimer(CALLBACK(src, .proc/broadcast_status), 2, TIMER_UNIQUE)
-		return //do not update_icon
-
-	addtimer(CALLBACK(src, .proc/broadcast_status), 2, TIMER_UNIQUE)
-
-	queue_icon_update()
-
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)
 	update_underlays()
 
@@ -208,9 +152,62 @@
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
 		return
-		
-	if(isWrench(O))
-		new /obj/item/pipe(loc, src)
-		qdel(src)
-		return
 	return ..()
+
+/decl/public_access/public_variable/volume_rate
+	expected_type = /obj/machinery/atmospherics/unary/outlet_injector
+	name = "volume_rate"
+	desc = "The rate at which the machine pumps (a number)."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/volume_rate/access_var(obj/machinery/atmospherics/unary/outlet_injector/machine)
+	return machine.volume_rate
+
+/decl/public_access/public_variable/volume_rate/write_var(obj/machinery/atmospherics/unary/outlet_injector/machine, new_value)
+	new_value = sanitize_integer(new_value, 0, machine.air_contents.volume, machine.volume_rate)
+	. = ..()
+	if(.)
+		machine.volume_rate = new_value
+
+/decl/public_access/public_method/inject
+	name = "inject"
+	desc = "Injects gas into its environment."
+	call_proc = /obj/machinery/atmospherics/unary/outlet_injector/proc/inject
+
+/decl/stock_part_preset/radio/event_transmitter/outlet_injector
+	frequency = ATMOS_TANK_FREQ
+	filter = RADIO_ATMOSIA
+	event = /decl/public_access/public_variable/input_toggle
+	transmit_on_event = list(
+		"device" = /decl/public_access/public_variable/identifier,
+		"power" = /decl/public_access/public_variable/use_power,
+		"volume_rate" = /decl/public_access/public_variable/volume_rate
+	)
+
+/decl/stock_part_preset/radio/receiver/outlet_injector
+	frequency = ATMOS_TANK_FREQ
+	filter = RADIO_ATMOSIA
+	receive_and_call = list(
+		"power_toggle" = /decl/public_access/public_method/toggle_power,
+		"valve_toggle" = /decl/public_access/public_method/toggle_power,
+		"inject" = /decl/public_access/public_method/inject,
+		"status" = /decl/public_access/public_method/refresh
+	) // power_toggle and valve_toggle are used by different senders
+	receive_and_write = list(
+		"set_power" = /decl/public_access/public_variable/use_power,
+		"set_volume_rate" = /decl/public_access/public_variable/volume_rate
+	)
+
+/decl/stock_part_preset/radio/event_transmitter/outlet_injector/engine
+	frequency = ATMOS_ENGINE_FREQ
+
+/decl/stock_part_preset/radio/receiver/outlet_injector/engine
+	frequency = ATMOS_ENGINE_FREQ
+
+/obj/machinery/atmospherics/unary/outlet_injector/engine
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/outlet_injector/engine = 1,
+		/decl/stock_part_preset/radio/event_transmitter/outlet_injector/engine = 1
+	)
