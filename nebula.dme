@@ -1944,7 +1944,6 @@
 #include "code\modules\mob\grab\normal\norm_neck.dm"
 #include "code\modules\mob\grab\normal\norm_passive.dm"
 #include "code\modules\mob\grab\normal\norm_struggle.dm"
-#include "code\modules\mob\grab\simple\grab_simple.dm"
 #include "code\modules\mob\grab\simple\simple_passive.dm"
 #include "code\modules\mob\language\generic.dm"
 #include "code\modules\mob\language\language.dm"

@@ -1,32 +1,30 @@
 /obj/item/grab
 	name = "grab"
 	canremove = 0
+	item_flags = ITEM_FLAG_NO_BLUDGEON
+	w_class = ITEM_SIZE_NO_CONTAINER
 
 	var/atom/movable/affecting = null
 	var/mob/assailant = null
-
-	var/datum/grab/current_grab
-	var/type_name
-	var/start_grab_name
-
+	var/decl/grab/current_grab
 	var/last_action
 	var/last_upgrade
-
 	var/special_target_functional = 1
-
 	var/attacking = 0
 	var/target_zone
 	var/done_struggle = FALSE // Used by struggle grab datum to keep track of state.
 
-	item_flags = ITEM_FLAG_NO_BLUDGEON
-	w_class = ITEM_SIZE_NO_CONTAINER
 /*
 	This section is for overrides of existing procs.
 */
-/obj/item/grab/Initialize(mapload, atom/movable/target)
+/obj/item/grab/Initialize(mapload, atom/movable/target, var/use_grab_state)
 	. = ..(mapload)
-	current_grab = all_grabstates[start_grab_name]
+	if(. == INITIALIZE_HINT_QDEL)
+		return
 
+	current_grab = decls_repository.get_decl(use_grab_state)
+	if(!istype(current_grab))
+		return INITIALIZE_HINT_QDEL
 	assailant = loc
 	if(!istype(assailant) || !assailant.add_grab(src))
 		return INITIALIZE_HINT_QDEL
@@ -50,13 +48,27 @@
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	update_icon()
 
+	GLOB.moved_event.register(affecting, src, .proc/on_affecting_move)
 	if(assailant.zone_sel)
 		GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
 	var/obj/item/organ/O = get_targeted_organ()
+
+	var/datum/gender/T = gender_datums[assailant.get_gender()]
 	if(O)
 		SetName("[name] ([O.name])")
 		GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
-	GLOB.moved_event.register(affecting, src, .proc/on_affecting_move)
+		if(affecting != assailant)
+			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting]'s [O.name]!"))
+		else
+			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.his] [O.name]!"))
+	else
+		if(affecting != assailant)
+			visible_message(SPAN_DANGER("\The [assailant] has grabbed \the [affecting]!"))
+		else
+			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.self]!"))
+
+	if(affecting_mob && affecting_mob.a_intent != I_HELP)
+		upgrade(TRUE)
 
 /obj/item/grab/examine(mob/user)
 	. = ..()
@@ -148,7 +160,7 @@
 	current_grab.let_go(src)
 
 /obj/item/grab/proc/on_affecting_move()
-	if(!affecting || get_dist(affecting, assailant) > 1)
+	if(!affecting || !isturf(affecting.loc) || get_dist(affecting, assailant) > 1)
 		force_drop()
 
 /obj/item/grab/proc/force_drop()
@@ -193,7 +205,7 @@
 /obj/item/grab/proc/upgrade(var/bypass_cooldown = FALSE)
 	if(!check_upgrade_cooldown() && !bypass_cooldown)
 		return
-	var/datum/grab/upgrab = current_grab.upgrade(src)
+	var/decl/grab/upgrab = current_grab.upgrade(src)
 	if(upgrab)
 		current_grab = upgrab
 		last_upgrade = world.time
@@ -203,7 +215,7 @@
 		current_grab.enter_as_up(src)
 
 /obj/item/grab/proc/downgrade()
-	var/datum/grab/downgrab = current_grab.downgrade(src)
+	var/decl/grab/downgrab = current_grab.downgrade(src)
 	if(downgrab)
 		current_grab = downgrab
 		update_icon()
@@ -226,10 +238,13 @@
 	if(!assailant || !affecting || !assailant.Adjacent(affecting))
 		qdel(src)
 		return 0
+	var/adir = get_dir(assailant, affecting)
+	if(assailant)
+		assailant.set_dir(adir)
 	if(current_grab.same_tile)
 		affecting.forceMove(get_turf(assailant))
 		affecting.set_dir(assailant.dir)
-	affecting.adjust_pixel_offsets_for_grab(src, get_dir(assailant, affecting))
+	affecting.adjust_pixel_offsets_for_grab(src, adir)
 
 /obj/item/grab/proc/reset_position()
 	affecting.reset_pixel_offsets_for_grab(src)
@@ -239,9 +254,6 @@
 */
 /obj/item/grab/proc/stop_move()
 	return current_grab.stop_move
-
-/obj/item/grab/proc/force_stand()
-	return current_grab.force_stand
 
 /obj/item/grab/attackby(obj/W, mob/user)
 	if(user == assailant)
@@ -267,9 +279,6 @@
 
 /obj/item/grab/proc/grab_slowdown()
 	return current_grab.grab_slowdown
-
-/obj/item/grab/proc/ladder_carry()
-	return current_grab.ladder_carry
 
 /obj/item/grab/proc/assailant_moved()
 	current_grab.assailant_moved(src)

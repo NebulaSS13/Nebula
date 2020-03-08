@@ -9,24 +9,23 @@
 		if(G.assailant != src)
 			continue
 		if(!target_zone || !ismob(target))
-			to_chat(src, SPAN_WARNING("You already have a grip on \the [src]!"))
+			to_chat(src, SPAN_WARNING("You already have a grip on \the [target]!"))
 			return FALSE
 		if(G.target_zone == target_zone)
 			var/obj/O = G.get_targeted_organ()
 			if(O)
-				to_chat(src, SPAN_WARNING("You already have a grip on \the [src]'s [O.name]."))
+				to_chat(src, SPAN_WARNING("You already have a grip on \the [target]'s [O.name]."))
 				return FALSE
 	return TRUE
 
-/mob/living/proc/make_grab(var/atom/movable/target, var/grab_tag = GRAB_SIMPLE)
+/mob/living/proc/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple)
 	face_atom(target)
 	if(target != src && ismob(target))
 		to_chat(target, SPAN_WARNING("\The [src] tries to grab you!"))
 		to_chat(src, SPAN_WARNING("You try to grab \the [target]!"))
-	if(can_grab(target, zone_sel?.selecting) && target.can_be_grabbed(src, zone_sel?.selecting))
-		var/obj/item/grab/given_grab_type = grab_tag && all_grabobjects[grab_tag]
-		if(given_grab_type)
-			. = !QDELETED(new given_grab_type(src, target))
+	if(ispath(grab_tag, /decl/grab) && can_grab(target, zone_sel?.selecting) && target.can_be_grabbed(src, zone_sel?.selecting))
+		var/obj/item/grab/grab = new(src, target, grab_tag)
+		. = !QDELETED(grab)
 
 /mob/living/add_grab(var/obj/item/grab/grab)
 	for(var/obj/item/grab/other_grab in contents)

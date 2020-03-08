@@ -1,12 +1,8 @@
-/datum/grab/normal/aggressive
-	state_name = NORM_AGGRESSIVE
-
-	upgrab_name = NORM_NECK
-	downgrab_name = NORM_PASSIVE
-
+/decl/grab/normal/aggressive
+	name = "aggressive grab"
+	upgrab =   /decl/grab/normal/neck
+	downgrab = /decl/grab/normal/passive
 	shift = 12
-
-
 	stop_move = 1
 	reverse_facing = 0
 	can_absorb = 0
@@ -20,7 +16,7 @@
 	icon_state = "reinforce1"
 	break_chance_table = list(5, 20, 40, 80, 100)
 
-/datum/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
+/decl/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
 	var/mob/affecting_mob = G.get_affecting_mob()
 	if(istype(affecting_mob))
 		if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
@@ -30,7 +26,7 @@
 		if(affecting_mob.lying)
 			affecting_mob.Weaken(4)
 
-/datum/grab/normal/aggressive/can_upgrade(var/obj/item/grab/G)
+/decl/grab/normal/aggressive/can_upgrade(var/obj/item/grab/G)
 	. = ..()
 	if(.)
 		if(!ishuman(G.affecting))

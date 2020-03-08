@@ -286,27 +286,11 @@
 		if(G.assailant == G.affecting)
 			return
 		. = max(., G.grab_slowdown())
-		var/list/L = mob.ret_grab()
-		if(islist(L))
-			if(length(L) == 2)
-				L -= mob
-				var/atom/movable/M = L[1]
-				if(M && get_dist(old_turf, M) <= 1 && isturf(M.loc) && isturf(mob.loc) && mob.loc != old_turf && M.loc != mob.loc)
+		if(isturf(mob.loc) && mob.loc != old_turf)
+			for(var/atom/movable/M in (mob.ret_grab()-mob))
+				if(isturf(M.loc) && M.loc != mob.loc && get_dist(old_turf, M) <= 1)
 					step(M, get_dir(M.loc, old_turf))
-			else
-				for(var/atom/movable/M in L)
-					M.movable_flags |= MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS
-					if(mob != M)
-						M.animate_movement = SYNC_STEPS
-				for(var/atom/movable/M in L)
-					spawn( 0 )
-						step(M, direction)
-						return
-					spawn( 1 )
-						M.movable_flags &= ~MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS
-						M.animate_movement = SLIDE_STEPS
-						return
-			G.adjust_position()
+		G.adjust_position()
 
 // Misc. helpers
 /mob/proc/MayEnterTurf(var/turf/T)

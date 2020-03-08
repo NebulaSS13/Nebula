@@ -27,12 +27,11 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define MOVABLE_FLAG_Z_INTERACT           0x0002 // Should attackby and attack_hand be relayed through ladders and open spaces?
 #define MOVABLE_FLAG_EFFECTMOVE           0x0004 // Is this an effect that should move?
 #define MOVABLE_FLAG_DEL_SHUTTLE          0x0008 // Shuttle transistion will delete this.
-#define MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS 0x0010 // Modifies CanPass() checks for grab moves.
 
 #define OBJ_FLAG_ANCHORABLE               0x0001 // This object can be stuck in place with a tool
 #define OBJ_FLAG_CONDUCTIBLE              0x0002 // Conducts electricity. (metal etc.)
 #define OBJ_FLAG_ROTATABLE                0x0004 // Can be rotated with alt-click
-#define OBJ_FLAG_NOFALL		              0x0008 // Will prevent mobs from falling
+#define OBJ_FLAG_NOFALL                   0x0008 // Will prevent mobs from falling
 
 //Flags for items (equipment)
 #define ITEM_FLAG_NO_BLUDGEON             0x0001 // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.

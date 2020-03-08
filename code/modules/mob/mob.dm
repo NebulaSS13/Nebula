@@ -7,8 +7,7 @@
 	QDEL_NULL(hud_used)
 	if(istype(skillset))
 		QDEL_NULL(skillset)
-	for(var/obj/item/grab/G in grabbed_by)
-		qdel(G)
+	QDEL_NULL_LIST(grabbed_by)
 	clear_fullscreen()
 	if(client)
 		remove_screen_obj_references()
@@ -200,7 +199,7 @@
 			. += between(0, O.w_class, ITEM_SIZE_GARGANTUAN) / 5
 		else if(istype(pulling, /mob))
 			var/mob/M = pulling
-			. += max(0, M.mob_size) / MOB_MEDIUM
+			. += max(0, M.mob_size) / MOB_SIZE_MEDIUM
 		else
 			. += 1
 	. *= (0.8 ** size_strength_mod())
@@ -598,10 +597,6 @@
 	else
 		set_density(initial(density))
 	reset_layer()
-
-	for(var/obj/item/grab/G in grabbed_by)
-		if(G.force_stand())
-			lying = 0
 
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.

@@ -218,11 +218,8 @@
 		return FALSE
 	var/carry_count = 0
 	for(var/obj/item/grab/G in get_active_grabs())
-		if(!G.ladder_carry())
-			to_chat(src, SPAN_WARNING("You can't carry [G.affecting] up \the [ladder]."))
-			return FALSE
-		else
-			carry_count++
+		to_chat(src, SPAN_WARNING("You can't carry \the [G.affecting] up \the [ladder]."))
+		return FALSE
 	if(carry_count > 1)
 		to_chat(src, SPAN_WARNING("You can't carry more than one person up \the [ladder]."))
 		return FALSE

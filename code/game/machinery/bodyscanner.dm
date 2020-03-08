@@ -64,7 +64,7 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user)
+/obj/machinery/bodyscanner/attackby(obj/item/grab/G, user)
 	if(istype(G))
 		var/mob/M = G.get_affecting_mob()
 		if(!M || !user_can_move_target_inside(M, user))

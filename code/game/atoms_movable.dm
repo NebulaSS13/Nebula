@@ -134,8 +134,7 @@
 	if (!target || speed <= 0 || QDELETED(src) || (target.z != src.z))
 		return FALSE
 
-	for(var/obj/item/grab/grab in grabbed_by)
-		qdel(grab)
+	QDEL_NULL_LIST(grabbed_by)
 
 	var/datum/thrownthing/TT = new(src, target, range, speed, thrower, callback)
 	throwing = TT
@@ -240,4 +239,4 @@
 	. = ..()
 
 /atom/movable/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-	. = ..() || (mover && (!mover.density || ((movable_flags & MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS) && (mover.movable_flags & MOVABLE_FLAG_ALLOW_MUTUAL_CANPASS))))
+	. = ..() || (mover && !mover.density)
