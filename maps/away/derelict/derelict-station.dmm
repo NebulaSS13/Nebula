@@ -2301,9 +2301,7 @@
 	},
 /area/constructionsite/atmospherics)
 "hu" = (
-/obj/machinery/light_construct{
-	dir = 1
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hv" = (
