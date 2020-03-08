@@ -28,20 +28,27 @@
 	current_grab = all_grabstates[start_grab_name]
 
 	assailant = loc
-	if(!istype(assailant))
+	if(!istype(assailant) || !assailant.add_grab(src))
 		return INITIALIZE_HINT_QDEL
 	affecting = target
 	if(!istype(affecting))
 		return INITIALIZE_HINT_QDEL
 	target_zone = assailant.zone_sel?.selecting
 
-	if(ishuman(assailant))
-		var/mob/living/carbon/human/H = assailant
-		H.remove_cloaking_source(H.species)
-	if(!target.can_be_grabbed(assailant, src))
-		return INITIALIZE_HINT_QDEL
-	if(!init())
-		return INITIALIZE_HINT_QDEL
+	var/mob/affecting_mob = get_affecting_mob()
+	if(affecting_mob)
+		affecting_mob.UpdateLyingBuckledAndVerbStatus()
+		if(ishuman(affecting_mob))
+			var/mob/living/carbon/human/H = affecting_mob
+			if(H.w_uniform)
+				H.w_uniform.add_fingerprint(assailant)
+
+	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
+	adjust_position()
+	action_used()
+	assailant.do_attack_animation(affecting)
+	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+	update_icon()
 
 	if(assailant.zone_sel)
 		GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
@@ -54,7 +61,10 @@
 /obj/item/grab/examine(mob/user)
 	. = ..()
 	var/obj/item/O = get_targeted_organ()
-	to_chat(user, "A grab on \the [affecting]'s [O.name].")
+	if(O)
+		to_chat(user, "A grip on \the [affecting]'s [O.name].")
+	else
+		to_chat(user, "A grip on \the [affecting].")
 
 /obj/item/grab/Process()
 	current_grab.process(src)
@@ -97,8 +107,6 @@
 
 /obj/item/grab/Destroy()
 	if(affecting)
-		if(assailant)
-			to_chat(assailant, SPAN_NOTICE("You release your hold on \the [affecting]."))
 		GLOB.dismembered_event.unregister(affecting, src)
 		GLOB.moved_event.unregister(affecting, src)
 		reset_position()
@@ -148,25 +156,6 @@
 
 /obj/item/grab/proc/get_affecting_mob()
 	. = ismob(affecting) && affecting
-
-// This will run from Initialize, after other checks have succeeded. Must call parent; returning FALSE means failure and qdels the grab.
-/obj/item/grab/proc/init()
-	if(!assailant.add_grab(src))
-		return FALSE // This should succeed as we checked the hand, but if not we abort here.
-	var/mob/affecting_mob = get_affecting_mob()
-	if(affecting_mob)
-		affecting_mob.UpdateLyingBuckledAndVerbStatus()
-		if(ishuman(affecting_mob))
-			var/mob/living/carbon/human/H = affecting_mob
-			if(H.w_uniform)
-				H.w_uniform.add_fingerprint(assailant)
-	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
-	adjust_position()
-	action_used()
-	assailant.do_attack_animation(affecting)
-	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-	update_icon()
-	return TRUE
 
 // Returns the organ of the grabbed person that the grabber is targeting
 /obj/item/grab/proc/get_targeted_organ()
@@ -225,14 +214,6 @@
 	if(current_grab.icon_state)
 		icon_state = current_grab.icon_state
 
-/obj/item/grab/proc/draw_affecting_over()
-	affecting.plane = assailant.plane
-	affecting.layer = assailant.layer + 0.01
-
-/obj/item/grab/proc/draw_affecting_under()
-	affecting.plane = assailant.plane
-	affecting.layer = assailant.layer - 0.01
-
 /obj/item/grab/proc/throw_held()
 	return current_grab.throw_held(src)
 
@@ -242,15 +223,16 @@
 /obj/item/grab/proc/adjust_position(var/force = 0)
 	if(force)	
 		affecting.forceMove(assailant.loc)
-
 	if(!assailant || !affecting || !assailant.Adjacent(affecting))
 		qdel(src)
 		return 0
-	else
-		current_grab.adjust_position(src)
+	if(current_grab.same_tile)
+		affecting.forceMove(get_turf(assailant))
+		affecting.set_dir(assailant.dir)
+	affecting.adjust_pixel_offsets_for_grab(src, get_dir(assailant, affecting))
 
 /obj/item/grab/proc/reset_position()
-	current_grab.reset_position(src)
+	affecting.reset_pixel_offsets_for_grab(src)
 
 /*
 	This section is for the simple procs used to return things from current_grab.

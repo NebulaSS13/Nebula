@@ -504,8 +504,3 @@
 
 /mob/living/carbon/has_dexterity(var/dex_level)
 	. = ..() && (species.manual_dexterity >= dex_level)
-
-/mob/living/carbon/get_active_grabs()
-	. = list()
-	for(var/obj/item/grab/grab in list(l_hand, r_hand))
-		. += grab

@@ -47,8 +47,6 @@
 	var/list/break_chance_table = list(100)
 	var/breakability = 2
 
-	var/can_grab_self = 1
-
 	// The names of different intents for use in attack logs
 	var/help_action = "help intent"
 	var/disarm_action = "disarm intent"
@@ -160,43 +158,9 @@
 /datum/grab/proc/make_log(var/obj/item/grab/G, var/action)
 	admin_attack_log(G.assailant, G.affecting, "[action]s their victim", "was [action]ed", "used [action] on")
 
-
-/datum/grab/proc/adjust_position(var/obj/item/grab/G)
-
-	var/atom/movable/affecting = G.affecting
-	var/mob/living/assailant = G.assailant
-	var/adir = get_dir(assailant, affecting)
-
-	if(same_tile)
-		affecting.forceMove(assailant.loc)
-		adir = assailant.dir
-		affecting.set_dir(assailant.dir)
-
-	if(ismob(affecting) && !istype(affecting, /mob/living/exosuit)) // Structures often have mapped pixel offsets - donut touch.
-		switch(adir)                                                // Oh no, memories of mecha.dm :(
-			if(NORTH)
-				animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
-				G.draw_affecting_under()
-			if(SOUTH)
-				animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
-				G.draw_affecting_over()
-			if(WEST)
-				animate(affecting, pixel_x = shift, pixel_y = 0, 5, 1, LINEAR_EASING)
-				G.draw_affecting_under()
-			if(EAST)
-				animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
-				G.draw_affecting_under()
-		affecting.reset_plane_and_layer()
-
-/datum/grab/proc/reset_position(var/obj/item/grab/G)
-	var/mob/affecting_mob = G.get_affecting_mob()
-	if(affecting_mob && !affecting_mob.buckled) // As above - only for mobs.
-		animate(affecting_mob, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
-	G.affecting.reset_plane_and_layer()
-
 // This is called whenever the assailant moves.
 /datum/grab/proc/assailant_moved(var/obj/item/grab/G)
-	adjust_position(G)
+	G.adjust_position()
 	moved_effect(G)
 	if(downgrade_on_move)
 		G.downgrade()

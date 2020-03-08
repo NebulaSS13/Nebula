@@ -16,8 +16,6 @@
 // Grab Types
 #define GRAB_SIMPLE      "simple"
 #define GRAB_NORMAL      "normal"
-#define GRAB_NAB         "nab"
-#define GRAB_NAB_SPECIAL "special nab"
 
 // Grab levels.
 #define NORM_PASSIVE    "normal passive"
@@ -27,10 +25,6 @@
 #define NORM_KILL       "normal kill"
 
 #define SIMPLE_PASSIVE  "simple passive"
-
-#define NAB_PASSIVE     "nab passive"
-#define NAB_AGGRESSIVE  "nab aggressive"
-#define NAB_KILL        "nab kill"
 
 #define BORGMESON 0x1
 #define BORGTHERM 0x2

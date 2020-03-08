@@ -27,8 +27,3 @@
 			I.has_embedded()
 
 	return 1
-
-/mob/living/carbon/can_be_grabbed(var/mob/grabber, var/obj/item/grab/grab)
-	. = ..()
-	if(.)
-		LAssailant = iscarbon(grabber) && grabber

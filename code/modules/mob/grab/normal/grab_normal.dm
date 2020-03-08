@@ -2,25 +2,24 @@
 	type_name = GRAB_NORMAL
 	start_grab_name = NORM_PASSIVE
 
-/obj/item/grab/normal/init()
-	if(!(. = ..()))
-		return
-	var/obj/O = get_targeted_organ()
-	var/datum/gender/T = gender_datums[assailant.get_gender()]
-	if(O)
-		if(affecting != assailant)
-			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting]'s [O.name]!"))
+/obj/item/grab/normal/Initialize(mapload, atom/movable/target)
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		var/obj/O = get_targeted_organ()
+		var/datum/gender/T = gender_datums[assailant.get_gender()]
+		if(O)
+			if(affecting != assailant)
+				visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting]'s [O.name]!"))
+			else
+				visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.his] [O.name]!"))
 		else
-			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.his] [O.name]!"))
-	else
-		if(affecting != assailant)
-			visible_message(SPAN_DANGER("\The [assailant] has grabbed \the [affecting]!"))
-		else
-			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.self]!"))
-
-	var/mob/affecting_mob = get_affecting_mob()
-	if(affecting_mob && affecting_mob.a_intent != I_HELP)
-		upgrade(TRUE)
+			if(affecting != assailant)
+				visible_message(SPAN_DANGER("\The [assailant] has grabbed \the [affecting]!"))
+			else
+				visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.self]!"))
+		var/mob/affecting_mob = get_affecting_mob()
+		if(affecting_mob && affecting_mob.a_intent != I_HELP)
+			upgrade(TRUE)
 
 /datum/grab/normal
 	type_name = GRAB_NORMAL

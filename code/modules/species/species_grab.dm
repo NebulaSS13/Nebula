@@ -1,5 +1,0 @@
-/datum/species/proc/attempt_grab(var/mob/living/carbon/human/grabber, var/atom/movable/target, var/grab_type)
-	if(grabber != target)
-		to_chat(target, SPAN_WARNING("\The [grabber] tries to grab you!"))
-		to_chat(grabber, SPAN_WARNING("You try to grab \the [target]!"))
-	return grabber.make_grab(grabber, target, grab_type)
