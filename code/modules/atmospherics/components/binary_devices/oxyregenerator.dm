@@ -117,8 +117,8 @@
 			if (power_draw >= 0)
 				last_power_draw = power_draw
 				use_power_oneoff(power_draw)
-				if(network1)
-					network1.update = 1
+			if(network1 && (transfer_moles > 0))
+				network1.update = 1
 		if (air1.return_pressure() < 0.1 * ONE_ATMOSPHERE || inner_tank.return_pressure() >= target_pressure * 0.95)//if pipe is good as empty or tank is full
 			phase = "processing"
 
@@ -151,8 +151,8 @@
 			if (power_draw >= 0)
 				last_power_draw = power_draw
 				use_power_oneoff(power_draw)
-				if(network2)
-					network2.update = 1
+			if(network2 && (transfer_moles > 0))
+				network2.update = 1
 		else//can't push outside harder than target pressure. Device is not intended to be used as a pump after all
 			phase = "filling"
 		if (inner_tank.return_pressure() <= 0.1)

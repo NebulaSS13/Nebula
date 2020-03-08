@@ -105,15 +105,16 @@ Thus, the two variables affect pump operation are set in New():
 		var/transfer_moles = calculate_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0)
 		power_draw = pump_gas(src, air1, air2, transfer_moles, power_rating)
 
+		if(transfer_moles > 0)
+			if(network1)
+				network1.update = 1
+
+			if(network2)
+				network2.update = 1
+
 	if (power_draw >= 0)
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
-
-		if(network1)
-			network1.update = 1
-
-		if(network2)
-			network2.update = 1
 
 	return 1
 

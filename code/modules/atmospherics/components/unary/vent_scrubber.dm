@@ -157,7 +157,7 @@
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
 
-	if(network)
+	if(network && (transfer_moles > 0))
 		network.update = 1
 
 	return 1

@@ -119,16 +119,16 @@
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
 		power_draw = mix_gas(src, mixing_inputs, output.air, transfer_moles, power_rating)
 
-	if (power_draw >= 0)
-		last_power_draw = power_draw
-		use_power_oneoff(power_draw)
-
 		for(var/datum/omni_port/P in inputs)
 			if(P.concentration && P.network)
 				P.network.update = 1
 
 		if(output.network)
 			output.network.update = 1
+
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power_oneoff(power_draw)
 
 	return 1
 

@@ -65,10 +65,10 @@
 
 		update_icon()
 
-	if (network1)
-		network1.update = 1
-	if (network2)
-		network2.update = 1
+		if (network1)
+			network1.update = 1
+		if (network2)
+			network2.update = 1
 
 /obj/machinery/atmospherics/pipeturbine/on_update_icon()
 	overlays.Cut()
