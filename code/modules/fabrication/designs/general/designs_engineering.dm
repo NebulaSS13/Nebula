@@ -14,6 +14,12 @@
 /datum/fabricator_recipe/engineering/firealarm_kit
 	path = /obj/item/frame/fire_alarm/kit
 
+/datum/fabricator_recipe/engineering/spotlight
+	path = /obj/item/frame/light/spot
+
+/datum/fabricator_recipe/engineering/navlight
+	path = /obj/item/frame/light/nav
+
 /datum/fabricator_recipe/engineering/powermodule
 	path = /obj/item/module/power_control
 

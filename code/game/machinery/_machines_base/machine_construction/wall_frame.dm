@@ -2,6 +2,11 @@
 
 /decl/machine_construction/wall_frame
 	needs_board = "wall"
+	var/active_state = /decl/machine_construction/wall_frame/panel_closed
+	var/open_state = /decl/machine_construction/wall_frame/panel_open
+	var/diconnected_state = /decl/machine_construction/wall_frame/no_wires
+	var/bottom_state = /decl/machine_construction/wall_frame/no_circuit
+	var/newly_built_state = /decl/machine_construction/wall_frame/no_circuit
 
 // Fully built
 
@@ -12,15 +17,15 @@
 	. = ..()
 	if(!.)
 		if(machine.get_component_of_type(/obj/item/stock_parts/circuitboard))
-			try_change_state(machine, /decl/machine_construction/wall_frame/panel_open)
+			try_change_state(machine, open_state)
 		else
-			try_change_state(machine, /decl/machine_construction/wall_frame/no_circuit)
+			try_change_state(machine, newly_built_state)
 
 /decl/machine_construction/wall_frame/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isScrewdriver(I))
-		TRANSFER_STATE(/decl/machine_construction/wall_frame/panel_open)
+		TRANSFER_STATE(open_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = TRUE
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine], exposing the wiring."))
@@ -36,7 +41,7 @@
 	. += "Use a parts replacer to view installed parts."
 
 /decl/machine_construction/wall_frame/panel_closed/post_construct(obj/machinery/machine)
-	try_change_state(machine, /decl/machine_construction/wall_frame/no_circuit)
+	try_change_state(machine, newly_built_state)
 	machine.panel_open = TRUE
 	machine.queue_icon_update()
 
@@ -49,16 +54,16 @@
 	. = ..()
 	if(!.)
 		if(machine.panel_open)
-			try_change_state(machine, /decl/machine_construction/wall_frame/no_circuit)
+			try_change_state(machine, bottom_state)
 		else
-			try_change_state(machine, /decl/machine_construction/wall_frame/panel_closed)
+			try_change_state(machine, active_state)
 
 /decl/machine_construction/wall_frame/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 
 	if(isWirecutter(I))
-		TRANSFER_STATE(/decl/machine_construction/wall_frame/no_wires)
+		TRANSFER_STATE(diconnected_state)
 		playsound(get_turf(machine), 'sound/items/Wirecutter.ogg', 50, 1)
 		user.visible_message(SPAN_WARNING("\The [user] has cut the wires inside \the [machine]!"), "You have cut the wires inside \the [machine].")
 		new /obj/item/stack/cable_coil(get_turf(machine), 5)
@@ -67,7 +72,7 @@
 		return
 
 	if(isScrewdriver(I))
-		TRANSFER_STATE(/decl/machine_construction/wall_frame/panel_closed)
+		TRANSFER_STATE(active_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = FALSE
 		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
@@ -103,9 +108,9 @@
 	. = ..()
 	if(!.)
 		if(machine.panel_open)
-			try_change_state(machine, /decl/machine_construction/wall_frame/no_circuit)
+			try_change_state(machine, bottom_state)
 		else
-			try_change_state(machine, /decl/machine_construction/wall_frame/panel_closed)
+			try_change_state(machine, active_state)
 
 /decl/machine_construction/wall_frame/no_wires/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
@@ -114,7 +119,7 @@
 	if(isCoil(I))
 		var/obj/item/stack/cable_coil/A = I
 		if (A.can_use(5))
-			TRANSFER_STATE(/decl/machine_construction/wall_frame/panel_open)
+			TRANSFER_STATE(open_state)
 			A.use(5)
 			to_chat(user, SPAN_NOTICE("You wire the [machine]."))
 			machine.set_broken(FALSE, MACHINE_BROKEN_CONSTRUCT)
@@ -125,7 +130,7 @@
 			return TRUE
 
 	if(isCrowbar(I))
-		TRANSFER_STATE(/decl/machine_construction/wall_frame/no_circuit)
+		TRANSFER_STATE(bottom_state)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		to_chat(user, "You pry out the circuit!")
 		machine.uninstall_component(/obj/item/stock_parts/circuitboard)
@@ -160,9 +165,9 @@
 	. = ..()
 	if(!.)
 		if(machine.panel_open)
-			try_change_state(machine, /decl/machine_construction/wall_frame/panel_open)
+			try_change_state(machine, open_state)
 		else
-			try_change_state(machine, /decl/machine_construction/wall_frame/panel_closed)
+			try_change_state(machine, active_state)
 
 /decl/machine_construction/wall_frame/no_circuit/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
@@ -175,7 +180,7 @@
 			return TRUE
 		if(!user.canUnEquip(board))
 			return TRUE
-		TRANSFER_STATE(/decl/machine_construction/wall_frame/no_wires)
+		TRANSFER_STATE(diconnected_state)
 		user.unEquip(board, machine)
 		machine.install_component(board)
 		user.visible_message(SPAN_NOTICE("\The [user] inserts \the [board] into \the [machine]!"), SPAN_NOTICE("You insert \the [board] into \the [machine]!"))
