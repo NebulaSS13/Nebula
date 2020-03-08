@@ -62,3 +62,4 @@
 	required_reagents = list(/datum/reagent/drink/milk = 2, /datum/reagent/nutriment/coco = 2, /datum/reagent/nutriment/sugar = 2)
 	mix_message = "The solution thickens and hardens into a glossy brown substance."
 	obj_result = /obj/item/chems/food/snacks/chocolatebar
+	minimum_temperature = 70 CELSIUS
