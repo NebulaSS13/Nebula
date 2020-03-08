@@ -11,7 +11,6 @@
 	desc = "A one-way air valve that can be used to regulate input or output pressure, and flow rate. Does not require power."
 
 	use_power = POWER_USE_OFF
-	uncreated_component_parts = null
 	interact_offline = 1
 	var/unlocked = 0	//If 0, then the valve is locked closed, otherwise it is open(-able, it's a one-way valve so it closes if gas would flow backwards).
 	var/target_pressure = ONE_ATMOSPHERE
@@ -21,12 +20,31 @@
 
 	var/flowing = 0	//for icons - becomes zero if the valve closes itself due to regulation mode
 
-	var/frequency = 0
-	var/id = null
-	var/datum/radio_frequency/radio_connection
-
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "passivegate"
+
+	identifier = "AGP"
+	uncreated_component_parts = null // Does not need power components; does not come with radio stuff, have to install it manually.
+	public_variables = list(
+		/decl/public_access/public_variable/input_toggle,
+		/decl/public_access/public_variable/identifier,
+		/decl/public_access/public_variable/passive_gate_unlocked,
+		/decl/public_access/public_variable/passive_gate_flow_rate,
+		/decl/public_access/public_variable/passive_gate_mode,
+		/decl/public_access/public_variable/passive_gate_target_pressure
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_unlocked,
+		/decl/public_access/public_method/refresh	
+	) // Does come with suggested stock configurations, though.
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/passive_gate = 1,
+		/decl/stock_part_preset/radio/event_transmitter/passive_gate = 1
+	)
+
+	frame_type = /obj/item/pipe
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	base_type = /obj/machinery/atmospherics/binary/passive_gate
 
 /obj/machinery/atmospherics/binary/passive_gate/on
 	unlocked = 1
@@ -100,79 +118,6 @@
 
 	update_icon()
 
-
-//Radio remote control
-
-/obj/machinery/atmospherics/binary/passive_gate/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency, object_filter = RADIO_ATMOSIA)
-
-/obj/machinery/atmospherics/binary/passive_gate/proc/broadcast_status()
-	if(!radio_connection)
-		return 0
-
-	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
-	signal.source = src
-
-	signal.data = list(
-		"tag" = id,
-		"device" = "AGP",
-		"power" = unlocked,
-		"target_output" = target_pressure,
-		"regulate_mode" = regulate_mode,
-		"set_flow_rate" = set_flow_rate,
-		"sigtype" = "status"
-	)
-
-	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
-
-	return 1
-
-/obj/machinery/atmospherics/binary/passive_gate/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
-
-/obj/machinery/atmospherics/binary/passive_gate/Destroy()
-	unregister_radio(src, frequency)
-	. = ..()
-
-/obj/machinery/atmospherics/binary/passive_gate/receive_signal(datum/signal/signal)
-	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
-		return 0
-
-	if("set_power" in signal.data)
-		unlocked = text2num(signal.data["set_power"])
-
-	if("power_toggle" in signal.data)
-		unlocked = !unlocked
-
-	if("set_target_pressure" in signal.data)
-		target_pressure = between(
-			0,
-			text2num(signal.data["set_target_pressure"]),
-			max_pressure_setting
-		)
-
-	if("set_regulate_mode" in signal.data)
-		regulate_mode = text2num(signal.data["set_regulate_mode"])
-
-	if("set_flow_rate" in signal.data)
-		regulate_mode = text2num(signal.data["set_flow_rate"])
-
-	if("status" in signal.data)
-		spawn(2)
-			broadcast_status()
-		return //do not update_icon
-
-	spawn(2)
-		broadcast_status()
-	update_icon()
-	return
-
 /obj/machinery/atmospherics/binary/passive_gate/interface_interact(mob/user)
 	ui_interact(user)
 	return
@@ -238,27 +183,117 @@
 	src.add_fingerprint(usr)
 	return
 
-/obj/machinery/atmospherics/binary/passive_gate/attackby(var/obj/item/W, var/mob/user)
-	if(!isWrench(W))
-		return ..()
-	if (unlocked)
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
-		return 1
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear ratchet.")
-		new /obj/item/pipe(loc, src)
-		qdel(src)
+/obj/machinery/atmospherics/binary/passive_gate/proc/toggle_unlocked()
+	unlocked = !unlocked
+
+/obj/machinery/atmospherics/binary/passive_gate/cannot_transition_to(state_path, mob/user)
+	if(state_path == /decl/machine_construction/default/deconstructed)
+		if (unlocked)
+			return SPAN_WARNING("You cannot take this [src] apart, close the valve first.")
+		var/datum/gas_mixture/int_air = return_air()
+		var/datum/gas_mixture/env_air = loc.return_air()
+		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
+	return ..()
+
+/decl/public_access/public_variable/passive_gate_unlocked
+	expected_type = /obj/machinery/atmospherics/binary/passive_gate
+	name = "valve open"
+	desc = "Whether or not the valve is open, allowing gas to pass in one direction."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_BOOLEAN
+
+/decl/public_access/public_variable/passive_gate_unlocked/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
+	return machine.unlocked
+
+/decl/public_access/public_variable/passive_gate_unlocked/write_var(obj/machinery/atmospherics/binary/passive_gate/machine, new_value)
+	new_value = !!new_value
+	. = ..()
+	if(.)
+		machine.unlocked = new_value
+
+/decl/public_access/public_variable/passive_gate_flow_rate
+	expected_type = /obj/machinery/atmospherics/binary/passive_gate
+	name = "flow rate cap"
+	desc = "A cap on the volume flow rate of the gate."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/passive_gate_flow_rate/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
+	return machine.set_flow_rate
+
+/decl/public_access/public_variable/passive_gate_flow_rate/write_var(obj/machinery/atmospherics/binary/passive_gate/machine, new_value)
+	new_value = Clamp(new_value, 0, machine.air1?.volume)
+	. = ..()
+	if(.)
+		machine.set_flow_rate = new_value
+
+/decl/public_access/public_variable/passive_gate_mode
+	expected_type = /obj/machinery/atmospherics/binary/passive_gate
+	name = "regulation mode"
+	desc = "A number describing the form of regulation the gate is attempting. The possible values are 0 (no air passed), 1 (regulates input pressure), or 2 (regulates output pressure)."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/passive_gate_mode/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
+	return machine.regulate_mode
+
+/decl/public_access/public_variable/passive_gate_mode/write_var(obj/machinery/atmospherics/binary/passive_gate/machine, new_value)
+	new_value = sanitize_integer(new_value, 0, 2, machine.regulate_mode)
+	. = ..()
+	if(.)
+		machine.regulate_mode = new_value
+
+/decl/public_access/public_variable/passive_gate_target_pressure
+	expected_type = /obj/machinery/atmospherics/binary/passive_gate
+	name = "target pressure"
+	desc = "The input or output pressure the gate aims to stay below."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/passive_gate_target_pressure/access_var(obj/machinery/atmospherics/binary/passive_gate/machine)
+	return machine.target_pressure
+
+/decl/public_access/public_variable/passive_gate_target_pressure/write_var(obj/machinery/atmospherics/binary/passive_gate/machine, new_value)
+	new_value = Clamp(new_value, 0, machine.max_pressure_setting)
+	. = ..()
+	if(.)
+		machine.target_pressure = new_value
+
+/decl/public_access/public_method/toggle_unlocked
+	name = "toggle valve"
+	desc = "Open or close the valve."
+	call_proc = /obj/machinery/atmospherics/binary/passive_gate/proc/toggle_unlocked
+
+/decl/stock_part_preset/radio/event_transmitter/passive_gate
+	frequency = PUMP_FREQ
+	filter = RADIO_ATMOSIA
+	event = /decl/public_access/public_variable/input_toggle
+	transmit_on_event = list(
+		"device" = /decl/public_access/public_variable/identifier,
+		"power" = /decl/public_access/public_variable/passive_gate_unlocked,
+		"target_output" = /decl/public_access/public_variable/passive_gate_target_pressure,
+		"regulate_mode" = /decl/public_access/public_variable/passive_gate_mode,
+		"set_flow_rate" = /decl/public_access/public_variable/passive_gate_flow_rate
+	)
+
+/decl/stock_part_preset/radio/receiver/passive_gate
+	frequency = PUMP_FREQ
+	filter = RADIO_ATMOSIA
+	receive_and_call = list(
+		"power_toggle" = /decl/public_access/public_method/toggle_unlocked,
+		"status" = /decl/public_access/public_method/refresh
+	)
+	receive_and_write = list(
+		"set_power" = /decl/public_access/public_variable/passive_gate_unlocked,
+		"set_regulate_mode" = /decl/public_access/public_variable/passive_gate_mode,
+		"set_target_pressure" = /decl/public_access/public_variable/passive_gate_target_pressure,
+		"set_volume_rate" = /decl/public_access/public_variable/passive_gate_flow_rate
+	)
 
 #undef REGULATE_NONE
 #undef REGULATE_INPUT
