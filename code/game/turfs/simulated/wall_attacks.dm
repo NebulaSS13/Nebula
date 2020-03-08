@@ -67,21 +67,20 @@
 		dismantle_wall(1)
 
 /turf/simulated/wall/proc/try_touch(var/mob/user, var/rotting)
-
+	. = TRUE
 	if(rotting)
 		if(reinf_material)
 			to_chat(user, "<span class='danger'>\The [reinf_material.display_name] feels porous and crumbly.</span>")
 		else
 			to_chat(user, "<span class='danger'>\The [material.display_name] crumbles under your touch!</span>")
 			dismantle_wall()
-			return 1
+			return
 
 	if(!can_open)
 		to_chat(user, "<span class='notice'>You push \the [src], but nothing happens.</span>")
 		playsound(src, hitsound, 25, 1)
 	else
 		toggle_open(user)
-	return 0
 
 /turf/simulated/wall/attack_hand(var/mob/user)
 	radiate()
@@ -93,14 +92,15 @@
 			success_smash(user)
 		else
 			fail_smash(user)
-			return 1
+		return TRUE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/hand = H.hand ? H.organs_by_name[BP_L_HAND] : H.organs_by_name[BP_R_HAND]
 		if(hand && try_graffiti(H, hand))
-			return
+			return TRUE
 	. = ..()
-	try_touch(user, rotting)
+	if(!.)
+		return try_touch(user, rotting)
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
@@ -129,7 +129,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(!construction_stage && try_graffiti(user, W))
-		return
+		return TRUE
 
 	if (!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
 		return
@@ -150,11 +150,11 @@
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
-				return
+				return TRUE
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
 			to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [W.name].</span>")
 			src.dismantle_wall(1)
-			return
+			return TRUE
 
 	var/turf/T = user.loc	//get user's location for delay checks
 
@@ -168,7 +168,7 @@
 			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				take_damage(-damage)
-		return
+		return TRUE
 
 	// Basic dismantling.
 	if(isnull(construction_stage) || !reinf_material)
@@ -204,7 +204,7 @@
 			if(istype(W, /obj/item/gun/energy/plasmacutter))
 				var/obj/item/gun/energy/plasmacutter/cutter = W
 				if(!cutter.slice(user))
-					return
+					return TRUE
 			dismantle_sound = "sparks"
 			dismantle_verb = "slicing"
 			cut_delay *= 0.5
@@ -215,7 +215,7 @@
 			cut_delay -= P.digspeed
 
 		if(dismantle_verb)
-
+			. = TRUE
 			to_chat(user, "<span class='notice'>You begin [dismantle_verb] through the outer plating.</span>")
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
@@ -240,6 +240,7 @@
 
 					to_chat(user, "<span class='notice'>You sink \the [W] into the wall and begin trying to rip out the support frame...</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
+					. = TRUE
 
 					if(!do_after(user, 60, src))
 						return
@@ -255,11 +256,12 @@
 					new /obj/item/stack/material/rods( src )
 					to_chat(user, "<span class='notice'>You cut the outer grille.</span>")
 					update_icon()
-					return
+					return TRUE
 			if(5)
 				if(isScrewdriver(W))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
+					. = TRUE
 					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
 						return
 					construction_stage = 4
@@ -272,7 +274,7 @@
 						construction_stage = 6
 						update_icon()
 						to_chat(user, "<span class='notice'>You replace the outer grille.</span>")
-						return
+						return TRUE
 			if(4)
 				var/cut_cover
 				if(istype(W,/obj/item/weldingtool))
@@ -290,6 +292,7 @@
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
+					. = TRUE
 					if(!do_after(user, 60, src) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
 						return
 					construction_stage = 3
@@ -300,6 +303,7 @@
 				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
+					. = TRUE
 					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
 						return
 					construction_stage = 2
@@ -310,6 +314,7 @@
 				if(isWrench(W))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
+					. = TRUE
 					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
 						return
 					construction_stage = 1
@@ -333,6 +338,7 @@
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
+					. = TRUE
 					if(!do_after(user,70,src) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
 						return
 					construction_stage = 0
@@ -344,6 +350,7 @@
 				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
+					. = TRUE
 					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
 					if(user.loc == T && user.get_active_hand() == W )
 						to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
@@ -353,23 +360,29 @@
 	if(istype(W,/obj/item/frame))
 		var/obj/item/frame/F = W
 		F.try_build(src)
-		return
+		return TRUE
 
-	else if(!istype(W,/obj/item/rcd) && !istype(W, /obj/item/chems))
-		if(!W.force)
-			return attack_hand(user)
-		var/dam_threshhold = material.integrity
-		if(reinf_material)
-			dam_threshhold = ceil(max(dam_threshhold,reinf_material.integrity)/2)
-		var/dam_prob = min(100,material.hardness*1.5)
-		if(dam_prob < 100 && W.force > (dam_threshhold/10))
-			playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
-			if(!prob(dam_prob))
-				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W] and it [material.destruction_desc]!</span>")
-				dismantle_wall(1)
-			else
-				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
-		else
-			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
-			playsound(src, hitsound, 25, 1)
+	// Attack the wall with items
+	if(istype(W,/obj/item/rcd) || !istype(W, /obj/item/chems))
 		return
+	if(!W.force)
+		return
+	if(isliving(user))
+		var/mob/living/L = user
+		if(L.a_intent == I_HELP)
+			return
+	var/dam_threshhold = material.integrity
+	if(reinf_material)
+		dam_threshhold = ceil(max(dam_threshhold,reinf_material.integrity)/2)
+	var/dam_prob = min(100,material.hardness*1.5)
+	if(dam_prob < 100 && W.force > (dam_threshhold/10))
+		playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
+		if(!prob(dam_prob))
+			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W] and it [material.destruction_desc]!</span>")
+			dismantle_wall(1)
+		else
+			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
+	else
+		visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
+		playsound(src, hitsound, 25, 1)
+	return TRUE

@@ -74,6 +74,7 @@
 	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
 
 	Consume(user)
+	return TRUE
 
 /turf/unsimulated/wall/supermatter/attackby(obj/item/W, mob/living/user)
 	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
@@ -84,6 +85,7 @@
 
 	user.drop_from_inventory(W)
 	Consume(W)
+	return TRUE
 
 #define MayConsume(A) (istype(A) && A.simulated && !isobserver(A))
 
