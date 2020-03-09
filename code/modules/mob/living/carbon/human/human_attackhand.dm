@@ -1,25 +1,14 @@
 /mob/living/carbon/human/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
 	if(!hit_zone)
 		hit_zone = zone_sel.selecting
-
 	var/list/available_attacks = get_natural_attacks()
-	if(default_attack && default_attack.is_usable(src, target, hit_zone) && (default_attack.type in available_attacks))
-		if(pulling_punches)
-			var/decl/natural_attack/soft_type = default_attack.get_sparring_variant()
-			if(soft_type)
-				return soft_type
-		return default_attack
-
-	for(var/u_attack_type in available_attacks)
-		var/decl/natural_attack/u_attack = decls_repository.get_decl(u_attack_type)
-		if(u_attack.is_usable(src, target, hit_zone))
-			default_attack = u_attack
-			if(pulling_punches)
-				var/decl/natural_attack/soft_variant = default_attack.get_sparring_variant()
-				if(soft_variant)
-					return soft_variant
-			return default_attack
-	return null
+	if(!default_attack || !default_attack.is_usable(src, target, hit_zone) || !(default_attack.type in available_attacks))
+		for(var/u_attack_type in available_attacks)
+			var/decl/natural_attack/u_attack = decls_repository.get_decl(u_attack_type)
+			if(u_attack.is_usable(src, target, hit_zone))
+				default_attack = u_attack
+				break
+	. = default_attack && default_attack.resolve_to_soft_variant(src)
 
 /mob/living/carbon/human/proc/get_natural_attacks()
 	. = list()
@@ -44,33 +33,6 @@
 	if(istype(H))
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
-			return TRUE
-
-		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
-			H.do_attack_animation(src)
-			var/damage = rand(0, 9)
-			if(!damage)
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message("<span class='danger'>\The [H] has attempted to punch \the [src]!</span>")
-				return TRUE
-			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-
-			if(MUTATION_HULK in H.mutations)
-				damage += 5
-
-			playsound(loc, "punch", 25, 1, -1)
-
-			update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
-			H.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
-
-			visible_message("<span class='danger'>[H] has punched \the [src]!</span>")
-
-			apply_damage(damage, PAIN, affecting)
-			if(damage >= 9)
-				visible_message("<span class='danger'>[H] has weakened \the [src]!</span>")
-				var/armor_block = 100 * get_blocked_ratio(affecting, BRUTE, damage = damage)
-				apply_effect(4, WEAKEN, armor_block)
-
 			return TRUE
 
 		for (var/obj/item/grab/G in H)
