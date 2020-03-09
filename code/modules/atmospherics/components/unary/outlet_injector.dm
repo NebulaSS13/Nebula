@@ -58,10 +58,7 @@
 	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	
 
-/obj/machinery/atmospherics/unary/outlet_injector/on_update_icon()	
-	if (!node)
-		update_use_power(POWER_USE_OFF)
-
+/obj/machinery/atmospherics/unary/outlet_injector/on_update_icon()
 	if(stat & NOPOWER)
 		icon_state = "off"
 	else
@@ -92,7 +89,7 @@
 	if((. = ..()))
 		return
 	if(href_list["toggle_power"])
-		use_power = update_use_power(!use_power)
+		update_use_power(!use_power)
 		queue_icon_update()
 		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
 		return TOPIC_REFRESH
