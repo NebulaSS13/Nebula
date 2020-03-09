@@ -3,11 +3,18 @@
 		hit_zone = zone_sel.selecting
 	var/list/available_attacks = get_natural_attacks()
 	if(!default_attack || !default_attack.is_usable(src, target, hit_zone) || !(default_attack.type in available_attacks))
+		default_attack = null
+		var/list/other_attacks = list()
 		for(var/u_attack_type in available_attacks)
 			var/decl/natural_attack/u_attack = decls_repository.get_decl(u_attack_type)
-			if(u_attack.is_usable(src, target, hit_zone))
+			if(!u_attack.is_usable(src, target, hit_zone))
+				continue
+			if(u_attack.is_starting_default)
 				default_attack = u_attack
 				break
+			other_attacks += u_attack
+		if(!default_attack && length(other_attacks))
+			default_attack = pick(other_attacks)
 	. = default_attack && default_attack.resolve_to_soft_variant(src)
 
 /mob/living/carbon/human/proc/get_natural_attacks()

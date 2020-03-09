@@ -17,6 +17,7 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text_victim
 	var/attack_name = "fist"
 	var/list/usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
+	var/is_starting_default = FALSE
 
 /decl/natural_attack/proc/get_damage_type()
 	if(deal_halloss)
@@ -170,6 +171,7 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 	attack_name = "punch"
 	sparring_variant_type = /decl/natural_attack/light_strike/punch
+	is_starting_default = TRUE
 
 /decl/natural_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
