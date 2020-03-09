@@ -875,7 +875,7 @@ var/global/floorIsLava = 0
 		to_world("<B>New players may no longer enter the game.</B>")
 	else
 		to_world("<B>New players may now enter the game.</B>")
-	log_and_message_admins("[key_name_admin(usr)] toggled new player game entering.")
+	log_and_message_admins("toggled new player game entering.")
 	world.update_status()
 	SSstatistics.add_field_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -952,7 +952,7 @@ var/global/floorIsLava = 0
 	set desc="Toggle admin jumping"
 	set name="Toggle Jump"
 	config.allow_admin_jump = !(config.allow_admin_jump)
-	log_and_message_admins("Toggled admin jumping to [config.allow_admin_jump].")
+	log_and_message_admins("toggled admin jumping to [config.allow_admin_jump].")
 	SSstatistics.add_field_details("admin_verb","TJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adspawn()
@@ -1033,7 +1033,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn every possible custom closet. Do not do this on live."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN))	
+	if(!check_rights(R_SPAWN))
 		return
 
 	if((input(usr, "Are you sure you want to spawn all these closets?", "So Many Closets") as null|anything in list("No", "Yes")) == "Yes")
