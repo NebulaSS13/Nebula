@@ -3,7 +3,7 @@
 	icon_state = "lump"
 	icon = 'icons/obj/materials/ore.dmi'
 	randpixel = 8
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	var/datum/geosample/geologic_data
 
 /obj/item/ore/attackby(obj/item/W, mob/user)

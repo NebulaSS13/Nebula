@@ -144,7 +144,7 @@
 
 	var/list/obj/item/choices = list()
 	for(var/obj/item/I in range(1))
-		if(I.w_class <= 2)
+		if(I.w_class <= ITEM_SIZE_SMALL)
 			choices += I
 
 	if(!choices.len)
@@ -152,7 +152,7 @@
 		return
 
 	var/obj/item/choice = input(src, "What item would you like to pull?") as null|anything in choices
-	if(!choice || !(choice in range(1)) || choice.w_class > 2)
+	if(!choice || !(choice in range(1)) || choice.w_class > ITEM_SIZE_SMALL)
 		return
 
 	if(!ghost_ability_check())

@@ -165,7 +165,7 @@
 		if(I.w_class > ITEM_SIZE_NORMAL)
 			to_chat(user, "<span class='warning'>\The [I] does not fit.</span>")
 			return
-		if(w_items + I.w_class > 5)
+		if(w_items + I.w_class > ITEM_SIZE_HUGE)
 			to_chat(user, "<span class='warning'>The cistern is full.</span>")
 			return
 		if(!user.unEquip(I, src))

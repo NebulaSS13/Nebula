@@ -17,7 +17,7 @@
 
 /obj/item/a_gift/Initialize()
 	. = ..()
-	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
+	if(w_class >= ITEM_SIZE_MIN && w_class < ITEM_SIZE_HUGE)
 		icon_state = "gift[w_class]"
 	else
 		icon_state = "gift[pick(1, 2, 3)]"

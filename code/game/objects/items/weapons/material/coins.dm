@@ -9,7 +9,7 @@
 	max_force = 5
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	var/string_colour
 	var/can_flip = TRUE

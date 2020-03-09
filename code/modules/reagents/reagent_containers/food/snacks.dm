@@ -184,7 +184,7 @@
 				return
 
 			var/slices_lost = 0
-			if (W.w_class > 3)
+			if (W.w_class > ITEM_SIZE_NORMAL)
 				user.visible_message("<span class='notice'>\The [user] crudely slices \the [src] with [W]!</span>", "<span class='notice'>You crudely slice \the [src] with your [W]!</span>")
 				slices_lost = rand(1,min(1,round(slices_num/2)))
 			else

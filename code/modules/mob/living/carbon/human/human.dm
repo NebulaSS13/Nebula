@@ -980,7 +980,7 @@
 			if(organ.splinted)
 				continue
 			for(var/obj/item/O in organ.implants)
-				if(!istype(O,/obj/item/implant) && O.w_class > 1 && prob(5)) //Moving with things stuck in you could be bad.
+				if(!istype(O,/obj/item/implant) && O.w_class > ITEM_SIZE_TINY && prob(5)) //Moving with things stuck in you could be bad.
 					jostle_internal_object(organ, O)
 
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]

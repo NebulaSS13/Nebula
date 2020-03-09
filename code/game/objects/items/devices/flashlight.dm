@@ -320,7 +320,7 @@
 /obj/item/flashlight/flare/glowstick
 	name = "green glowstick"
 	desc = "A military-grade glowstick."
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	color = "#49f37c"
 	icon_state = "glowstick"
 	item_state = "glowstick"
