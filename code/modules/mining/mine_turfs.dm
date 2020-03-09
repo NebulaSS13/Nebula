@@ -160,19 +160,19 @@ var/list/mining_floors = list()
 		geologic_data.UpdateNearbyArtifactInfo(src)
 		var/obj/item/core_sampler/C = W
 		C.sample_item(src, user)
-		return
+		return TRUE
 
 	if (istype(W, /obj/item/depth_scanner))
 		var/obj/item/depth_scanner/C = W
 		C.scan_atom(user, src)
-		return
+		return TRUE
 
 	if (istype(W, /obj/item/measuring_tape))
 		var/obj/item/measuring_tape/P = W
 		user.visible_message("<span class='notice'>\The [user] extends [P] towards [src].</span>","<span class='notice'>You extend [P] towards [src].</span>")
 		if(do_after(user,10, src))
 			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>")
-		return
+		return TRUE
 
 	if (istype(W, /obj/item/pickaxe))
 		if(!istype(user.loc, /turf))
@@ -184,6 +184,7 @@ var/list/mining_floors = list()
 		last_act = world.time
 
 		playsound(user, P.drill_sound, 20, 1)
+		. = TRUE
 
 		var/newDepth = excavation_level + P.excavation_amount // Used commonly below
 		//handle any archaeological finds we might uncover
@@ -471,7 +472,7 @@ var/list/mining_floors = list()
 	if(valid_tool)
 		if (dug)
 			to_chat(user, "<span class='warning'>This area has already been dug</span>")
-			return
+			return TRUE
 
 		var/turf/T = user.loc
 		if (!(istype(T)))
@@ -479,6 +480,7 @@ var/list/mining_floors = list()
 
 		to_chat(user, "<span class='warning'>You start digging.</span>")
 		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
+		. = TRUE
 
 		if(!do_after(user,40, src)) return
 
@@ -489,18 +491,15 @@ var/list/mining_floors = list()
 		var/obj/item/storage/ore/S = W
 		if(S.collection_mode)
 			for(var/obj/item/ore/O in contents)
-				O.attackby(W,user)
-				return
+				return O.attackby(W,user)
 	else if(istype(W,/obj/item/storage/bag/fossils))
 		var/obj/item/storage/bag/fossils/S = W
 		if(S.collection_mode)
 			for(var/obj/item/fossil/F in contents)
-				F.attackby(W,user)
-				return
+				return F.attackby(W,user)
 
 	else
-		..(W,user)
-	return
+		return ..(W,user)
 
 /turf/simulated/floor/asteroid/proc/gets_dug()
 

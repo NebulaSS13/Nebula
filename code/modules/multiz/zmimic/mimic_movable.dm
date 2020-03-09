@@ -183,19 +183,3 @@
 /atom/movable/openspace/overlay/proc/owning_turf_changed()
 	if (!destruction_timer)
 		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
-
-// This one's a little different because it's mimicing a turf.
-/atom/movable/openspace/turf_overlay
-	plane = OPENTURF_MAX_PLANE
-
-/atom/movable/openspace/turf_overlay/attackby(obj/item/W, mob/user)
-	loc.attackby(W, user)
-
-/atom/movable/openspace/turf_overlay/attack_hand(mob/user)
-	loc.attack_hand(user)
-
-/atom/movable/openspace/turf_overlay/attack_generic(mob/user)
-	loc.attack_generic(user)
-
-/atom/movable/openspace/turf_overlay/examine(mob/examiner)
-	loc.examine(examiner)

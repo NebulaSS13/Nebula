@@ -100,9 +100,7 @@
 			return 0
 		do_pull_click(user, src)
 
-	.=handle_hand_interception(user)
-	if (!.)
-		return 1
+	. = handle_hand_interception(user)
 
 /turf/proc/handle_hand_interception(var/mob/user)
 	var/datum/extension/turf_hand/THE
@@ -118,11 +116,12 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
-turf/attackby(obj/item/W, mob/user)
+/turf/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
+		return TRUE
 	return ..()
 
 /turf/Enter(atom/movable/mover, atom/forget)
