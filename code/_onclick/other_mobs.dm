@@ -23,7 +23,7 @@
 	A.attack_hand(src)
 
 /atom/proc/attack_hand(mob/user)
-	return
+	. = FALSE
 
 /mob/proc/attack_empty_hand(var/bp_hand)
 	return

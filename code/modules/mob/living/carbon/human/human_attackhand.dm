@@ -29,22 +29,17 @@
 
 /mob/living/carbon/human/attack_hand(mob/living/carbon/M)
 
-	var/mob/living/carbon/human/H = M
-	if(istype(H))
-		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-		if(H.hand)
-			temp = H.organs_by_name[BP_L_HAND]
-		if(!temp || !temp.is_usable())
-			to_chat(H, "<span class='warning'>You can't use your hand.</span>")
-			return
+	. = ..()
+	if(.)
+		return
 
-	..()
 	remove_cloaking_source(species)
 	// Should this all be in Touch()?
+	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
-			return 0
+			return TRUE
 
 		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
 			H.do_attack_animation(src)
@@ -52,7 +47,7 @@
 			if(!damage)
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message("<span class='danger'>\The [H] has attempted to punch \the [src]!</span>")
-				return 0
+				return TRUE
 			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
 
 			if(MUTATION_HULK in H.mutations)
@@ -71,20 +66,18 @@
 				var/armor_block = 100 * get_blocked_ratio(affecting, BRUTE, damage = damage)
 				apply_effect(4, WEAKEN, armor_block)
 
-			return
+			return TRUE
 
-	if(istype(H))
 		for (var/obj/item/grab/G in H)
 			if (G.assailant == H && G.affecting == src)
 				if(G.resolve_openhand_attack())
-					return 1
-
+					return TRUE
 
 	switch(M.a_intent)
 		if(I_HELP)
 			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath))
 				if (!cpr_time)
-					return 0
+					return TRUE
 
 				var/pumping_skill = max(M.get_skill_value(SKILL_MEDICAL),M.get_skill_value(SKILL_ANATOMY))
 				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2)
@@ -94,7 +87,7 @@
 
 				if(!do_after(H, cpr_delay, src))
 					cpr_time = 1
-					return
+					return TRUE
 				cpr_time = 1
 
 				H.visible_message("<span class='notice'>\The [H] performs CPR on \the [src]!</span>")
@@ -114,21 +107,21 @@
 
 				if(!H.check_has_mouth())
 					to_chat(H, "<span class='warning'>You don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
-					return
+					return TRUE
 				if(!check_has_mouth())
 					to_chat(H, "<span class='warning'>They don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
-					return
+					return TRUE
 				if((H.head && (H.head.body_parts_covered & FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & FACE)))
 					to_chat(H, "<span class='warning'>You need to remove your mouth covering for mouth-to-mouth resuscitation!</span>")
-					return 0
+					return TRUE
 				if((head && (head.body_parts_covered & FACE)) || (wear_mask && (wear_mask.body_parts_covered & FACE)))
 					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!</span>")
-					return 0
+					return TRUE
 				if (!H.internal_organs_by_name[H.species.breathing_organ])
 					to_chat(H, "<span class='danger'>You need lungs for mouth-to-mouth resuscitation!</span>")
-					return
+					return TRUE
 				if(!need_breathe())
-					return
+					return TRUE
 				var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
 				if(L)
 					var/datum/gas_mixture/breath = H.get_breath_from_environment()
@@ -138,7 +131,7 @@
 
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
-			return 1
+			return TRUE
 
 		if(I_GRAB)
 			return H.species.attempt_grab(H, src)
@@ -146,11 +139,11 @@
 		if(I_HURT)
 			if(H.incapacitated())
 				to_chat(H, "<span class='notice'>You can't attack while incapacitated.</span>")
-				return
+				return TRUE
 
 			if(!istype(H))
 				attack_generic(H,rand(1,3),"punched")
-				return
+				return TRUE
 
 			var/rand_damage = rand(1, 5)
 			var/block = 0
@@ -161,16 +154,16 @@
 			// See what attack they use
 			var/decl/natural_attack/attack = H.get_unarmed_attack(src, hit_zone)
 			if(!attack)
-				return 0
+				return TRUE
 			if(world.time < H.last_attack + attack.delay)
 				to_chat(H, "<span class='notice'>You can't attack again so soon.</span>")
-				return 0
+				return TRUE
 			else
 				H.last_attack = world.time
 
 			if(!affecting || affecting.is_stump())
 				to_chat(M, "<span class='danger'>They are missing that limb!</span>")
-				return 1
+				return TRUE
 
 			switch(src.a_intent)
 				if(I_HELP)
@@ -242,7 +235,7 @@
 			admin_attack_log(H, src, "[miss_type ? (miss_type == 1 ? "Has missed" : "Was blocked by") : "Has [pick(attack.attack_verb)]"] their victim.", "[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] their attacker", "[miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"]")
 
 			if(miss_type)
-				return 0
+				return TRUE
 
 			var/real_damage = rand_damage
 			real_damage += attack.get_unarmed_damage(H)
@@ -254,16 +247,15 @@
 			real_damage = max(1, real_damage)
 			// Apply additional unarmed effects.
 			attack.apply_effects(H, src, rand_damage, hit_zone)
-
 			// Finally, apply damage to target
 			apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
+			return TRUE
 
 		if(I_DISARM)
 			if(H.species)
 				admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
 				H.species.disarm_attackhand(H, src)
-
-	return
+				return TRUE
 
 /mob/living/carbon/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
 	return
