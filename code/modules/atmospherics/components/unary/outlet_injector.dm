@@ -163,7 +163,7 @@
 	return machine.volume_rate
 
 /decl/public_access/public_variable/volume_rate/write_var(obj/machinery/atmospherics/unary/outlet_injector/machine, new_value)
-	new_value = sanitize_integer(new_value, 0, machine.air_contents.volume, machine.volume_rate)
+	new_value = Clamp(new_value, 0, machine.air_contents.volume)
 	. = ..()
 	if(.)
 		machine.volume_rate = new_value
