@@ -22,7 +22,7 @@
 	maxHealth = 500
 	melee_damage_lower = 35
 	melee_damage_upper = 55
-	mob_size = MOB_LARGE
+	mob_size = MOB_SIZE_LARGE
 	mob_bump_flag = HEAVY
 	can_escape = TRUE
 	move_to_delay = 3

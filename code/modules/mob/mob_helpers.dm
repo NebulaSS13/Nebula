@@ -1,7 +1,7 @@
 /proc/issmall(A)
 	if(A && istype(A, /mob/living))
 		var/mob/living/L = A
-		return L.mob_size <= MOB_SMALL
+		return L.mob_size <= MOB_SIZE_SMALL
 	return 0
 
 //returns the number of size categories between two mob_sizes, rounded. Positive means A is larger than B

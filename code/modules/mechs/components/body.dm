@@ -14,8 +14,8 @@
 	var/hatch_descriptor = "cockpit"
 	var/list/pilot_positions
 	var/pilot_coverage = 100
-	var/min_pilot_size = MOB_SMALL
-	var/max_pilot_size = MOB_LARGE
+	var/min_pilot_size = MOB_SIZE_SMALL
+	var/max_pilot_size = MOB_SIZE_LARGE
 	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	var/climb_time = 25
 

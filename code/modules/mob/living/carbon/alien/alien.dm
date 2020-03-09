@@ -4,7 +4,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	health = 100
 	maxHealth = 100
-	mob_size = 4
+	mob_size = MOB_SIZE_TINY
 	var/dead_icon
 	var/language
 	var/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."

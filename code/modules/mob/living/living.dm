@@ -696,7 +696,7 @@ default behaviour is:
 		return 1
 
 /mob/living/proc/cannot_use_vents()
-	if(mob_size > MOB_SMALL)
+	if(mob_size > MOB_SIZE_SMALL)
 		return "You can't fit into that vent."
 	return null
 

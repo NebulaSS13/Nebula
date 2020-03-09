@@ -90,7 +90,7 @@
 	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
 		return
 	if(overdose && (location != CHEM_TOUCH))
-		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_MEDIUM/M.mob_size)
+		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_SIZE_MEDIUM/M.mob_size)
 		if(volume > overdose_threshold)
 			affect_overdose(M, alien)
 
@@ -105,7 +105,7 @@
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
 	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
-		effective *= (MOB_MEDIUM/M.mob_size)
+		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
 
 	M.chem_doses[type] = M.chem_doses[type] + effective
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it

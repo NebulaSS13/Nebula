@@ -8,7 +8,7 @@
 	power_efficiency = 0.75
 
 	// They are not very heavy or strong.
-	mob_size =       MOB_SMALL
+	mob_size =       MOB_SIZE_SMALL
 	mob_bump_flag =  SIMPLE_ANIMAL
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL

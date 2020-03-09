@@ -7,7 +7,7 @@
 	faction = "fishes"
 	maxHealth = 10
 	health = 10
-	mob_size = MOB_TINY
+	mob_size = MOB_SIZE_TINY
 
 	meat_amount = 1
 	bone_amount = 3

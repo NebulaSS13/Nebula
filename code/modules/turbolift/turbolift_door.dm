@@ -32,7 +32,7 @@
 /obj/machinery/door/airlock/lift/close(var/forced=0)
 	for(var/turf/turf in locs)
 		for(var/mob/living/LM in turf)
-			if(LM.mob_size <= MOB_TINY)
+			if(LM.mob_size <= MOB_SIZE_TINY)
 				var/moved = 0
 				for(dir in shuffle(GLOB.cardinal.Copy()))
 					var/dest = get_step(LM,dir)

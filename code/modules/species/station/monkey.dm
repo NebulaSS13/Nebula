@@ -13,7 +13,7 @@
 	blood_mask =      'icons/mob/human_races/species/monkey/blood_mask.dmi'
 
 	greater_form = SPECIES_HUMAN
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 	show_ssd = null
 	health_hud_intensity = 1.75
 

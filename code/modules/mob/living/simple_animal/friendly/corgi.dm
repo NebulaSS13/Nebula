@@ -16,7 +16,7 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 	see_in_dark = 5
-	mob_size = 8
+	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE

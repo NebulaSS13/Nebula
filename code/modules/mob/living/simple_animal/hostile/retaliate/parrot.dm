@@ -33,7 +33,7 @@
 	icon_living = "parrot_fly"
 	icon_dead = "parrot_dead"
 	pass_flags = PASS_FLAG_TABLE
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 
 	speak = list("Hi","Hello!","Cracker?")
 	speak_emote = list("squawks","says","yells")

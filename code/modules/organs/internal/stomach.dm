@@ -52,7 +52,7 @@
 /obj/item/organ/internal/stomach/proc/get_devour_time(var/atom/movable/food)
 	if(iscarbon(food) || isanimal(food))
 		var/mob/living/L = food
-		if((species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(food)) // Anything MOB_TINY or smaller
+		if((species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_SIZE_TINY) && !ishuman(food)) // Anything MOB_SIZE_TINY or smaller
 			return DEVOUR_SLOW
 		else if((species.gluttonous & GLUT_SMALLER) && owner.mob_size > L.mob_size) // Anything we're larger than
 			return DEVOUR_SLOW
