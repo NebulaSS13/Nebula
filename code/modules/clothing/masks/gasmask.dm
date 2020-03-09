@@ -222,4 +222,4 @@
 	icon_state = "halfgas"
 	filter_water = TRUE
 	body_parts_covered = FACE
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
