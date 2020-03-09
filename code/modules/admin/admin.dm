@@ -856,7 +856,7 @@ var/global/floorIsLava = 0
 		return
 
 	if(GAME_STATE != RUNLEVEL_GAME)
-		to_chat(usr, "<span class='bigdanger'>You can use this only with the active round.</span>")
+		to_chat(usr, "<span class='bigdanger'>The round has not started yet!</span>")
 		return
 
 	var/confirm = alert("End the game round?", "Game Ending", "Yes", "Cancel")
