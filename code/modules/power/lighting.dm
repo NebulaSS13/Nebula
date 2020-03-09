@@ -119,7 +119,7 @@
 			icon_state = "[base_state]-construct-stage2"
 			return
 
-	icon_state = "[base_state]-empty"
+	icon_state = "[base_state]_empty"
 
 	// Extra overlays if we're active
 	var/_state
@@ -136,7 +136,7 @@
 			on = 0
 
 	if(istype(lightbulb, /obj/item/light))
-		var/image/I = image(icon, src, _state)
+		var/image/I = image(icon, _state)
 		I.color = lightbulb.b_colour
 		overlays += I
 
