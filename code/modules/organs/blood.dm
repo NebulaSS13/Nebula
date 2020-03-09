@@ -51,14 +51,21 @@
 	var/bled = 0
 	spawn(0)
 		for(var/i = 1 to BLOOD_SPRAY_DISTANCE)
+			var/turf/old_sprayloc = sprayloc
 			sprayloc = get_step(sprayloc, spraydir)
 			if(!istype(sprayloc) || sprayloc.density)
 				break
+			var/hit_dense_obj
 			var/hit_mob
 			for(var/thing in sprayloc)
 				var/atom/A = thing
 				if(!A.simulated)
 					continue
+
+				if(isobj(A))
+					if(A.density == 1)
+						hit_dense_obj = TRUE
+						break
 
 				if(ishuman(A))
 					var/mob/living/carbon/human/H = A
@@ -83,7 +90,11 @@
 				if(hit_mob || !A.CanPass(src, sprayloc))
 					break
 
-			drip(amt, sprayloc, spraydir)
+			if(hit_dense_obj)
+				drip(amt, old_sprayloc, spraydir)
+				sprayloc = old_sprayloc
+			else
+				drip(amt, sprayloc, spraydir)
 			bled += amt
 			if(hit_mob) break
 			sleep(1)
