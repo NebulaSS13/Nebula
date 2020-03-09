@@ -84,11 +84,23 @@
 	desc = "Used for building lights."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-item"
-	build_machine_type = /obj/machinery/light_construct
+	build_machine_type = /obj/machinery/light/buildable
 	reverse = 1
 
 /obj/item/frame/light/small
 	name = "small light fixture frame"
 	icon_state = "bulb-construct-item"
 	matter = list(MAT_STEEL = 2000)
-	build_machine_type = /obj/machinery/light_construct/small
+	build_machine_type = /obj/machinery/light/small/buildable
+
+/obj/item/frame/light/spot
+	name = "spotlight fixture frame"
+	icon_state = "tube-construct-item"
+	matter = list(MAT_STEEL = 4000, MAT_PLASTIC = 2000)
+	build_machine_type = /obj/machinery/light/spot/buildable
+
+/obj/item/frame/light/nav
+	name = "navigation light fixture frame"
+	icon_state = "tube-construct-item"
+	matter = list(MAT_STEEL = 4000, MAT_PLASTIC = 2000)
+	build_machine_type = /obj/machinery/light/navigation/buildable

@@ -16,121 +16,6 @@
 #define LIGHTMODE_EMERGENCY "emergency_lighting"
 #define LIGHTMODE_READY "ready"
 
-/obj/machinery/light_construct
-	name = "light fixture frame"
-	desc = "A light fixture under construction."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "tube-construct-stage1"
-	anchored = 1
-	layer = ABOVE_HUMAN_LAYER
-
-	var/stage = 1
-	var/fixture_type = /obj/machinery/light
-	var/sheets_refunded = 2
-
-/obj/machinery/light_construct/Initialize(mapload, var/newdir, atom/fixture = null)
-	. = ..(mapload)
-
-	if(newdir)
-		set_dir(newdir)
-
-	if(istype(fixture))
-		if(istype(fixture, /obj/machinery/light))
-			fixture_type = fixture.type
-		fixture.transfer_fingerprints_to(src)
-
-	update_icon()
-
-/obj/machinery/light_construct/on_update_icon()
-	switch(stage)
-		if(1) icon_state = "tube-construct-stage1"
-		if(2) icon_state = "tube-construct-stage2"
-		if(3) icon_state = "tube-empty"
-
-/obj/machinery/light_construct/examine(mob/user, distance)
-	. = ..()
-	if(distance > 2)
-		return
-
-	switch(src.stage)
-		if(1) to_chat(user, "It's an empty frame.")
-		if(2) to_chat(user, "It's wired.")
-		if(3) to_chat(user, "The casing is closed.")
-
-/obj/machinery/light_construct/attackby(obj/item/W, mob/user)
-	src.add_fingerprint(user)
-	if(isWrench(W))
-		if (src.stage == 1)
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			to_chat(usr, "You begin deconstructing \a [src].")
-			if (!do_after(usr, 30,src))
-				return
-			new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
-			user.visible_message("[user.name] deconstructs [src].", \
-				"You deconstruct [src].", "You hear a noise.")
-			playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
-			qdel(src)
-		if (src.stage == 2)
-			to_chat(usr, "You have to remove the wires first.")
-			return
-
-		if (src.stage == 3)
-			to_chat(usr, "You have to unscrew the case first.")
-			return
-
-	if(isWirecutter(W))
-		if (src.stage != 2) return
-		src.stage = 1
-		src.update_icon()
-		new /obj/item/stack/cable_coil(get_turf(src.loc), 1, "red")
-		user.visible_message("[user.name] removes the wiring from [src].", \
-			"You remove the wiring from [src].", "You hear a noise.")
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		return
-
-	if(istype(W, /obj/item/stack/cable_coil))
-		if (src.stage != 1) return
-		var/obj/item/stack/cable_coil/coil = W
-		if (coil.use(1))
-			src.stage = 2
-			src.update_icon()
-			user.visible_message("[user.name] adds wires to [src].", \
-				"You add wires to [src].")
-		return
-
-	if(isScrewdriver(W))
-		if (src.stage == 2)
-			src.stage = 3
-			src.update_icon()
-			user.visible_message("[user.name] closes [src]'s casing.", \
-				"You close [src]'s casing.", "You hear a noise.")
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 75, 1)
-
-			var/obj/machinery/light/newlight = new fixture_type(src.loc, src)
-			newlight.set_dir(src.dir)
-
-			src.transfer_fingerprints_to(newlight)
-			qdel(src)
-			return
-	..()
-
-/obj/machinery/light_construct/small
-	name = "small light fixture frame"
-	desc = "A small light fixture under construction."
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "bulb-construct-stage1"
-	anchored = 1
-	layer = ABOVE_HUMAN_LAYER
-	stage = 1
-	fixture_type = /obj/machinery/light/small
-	sheets_refunded = 1
-
-/obj/machinery/light_construct/small/on_update_icon()
-	switch(stage)
-		if(1) icon_state = "bulb-construct-stage1"
-		if(2) icon_state = "bulb-construct-stage2"
-		if(3) icon_state = "bulb-empty"
-
 // the standard tube light fixture
 /obj/machinery/light
 	name = "light fixture"
@@ -148,13 +33,21 @@
 	var/on = 0					// 1 if on, 0 if off
 	var/flickering = 0
 	var/light_type = /obj/item/light/tube		// the type of light item
-	var/construct_type = /obj/machinery/light_construct
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 
 	var/obj/item/light/lightbulb
 
 	var/current_mode = null
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable
+	)
+	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
+	base_type = /obj/machinery/light/buildable
+	frame_type = /obj/item/frame/light
+
+/obj/machinery/light/buildable
+	uncreated_component_parts = null
 
 // the smaller bulb light fixture
 /obj/machinery/light/small
@@ -162,7 +55,11 @@
 	base_state = "bulb"
 	desc = "A small lighting fixture."
 	light_type = /obj/item/light/bulb
-	construct_type = /obj/machinery/light_construct/small
+	base_type = /obj/machinery/light/small/buildable
+	frame_type = /obj/item/frame/light/small
+
+/obj/machinery/light/small/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/light/small/emergency
 	light_type = /obj/item/light/bulb/red
@@ -174,18 +71,19 @@
 	name = "spotlight"
 	desc = "A more robust socket for light tubes that demand more power."
 	light_type = /obj/item/light/tube/large
+	base_type = /obj/machinery/light/spot/buildable
+	frame_type = /obj/item/frame/light/spot
+
+/obj/machinery/light/spot/buildable
+	uncreated_component_parts = null
 
 // create a new lighting fixture
-/obj/machinery/light/Initialize(mapload, obj/machinery/light_construct/construct = null)
-	. = ..(mapload)
+/obj/machinery/light/Initialize(mapload, d=0, populate_parts = TRUE)
+	. = ..()
 
 	s.set_up(1, 1, src)
 
-	if(construct)
-		construct_type = construct.type
-		construct.transfer_fingerprints_to(src)
-		set_dir(construct.dir)
-	else
+	if(populate_parts)
 		lightbulb = new light_type(src)
 		if(prob(lightbulb.broken_chance))
 			broken(1)
@@ -199,8 +97,7 @@
 	. = ..()
 
 /obj/machinery/light/on_update_icon(var/trigger = 1)
-	overlays.Cut()
-	icon_state = "[base_state]_empty" //Never use the initial state. That'll just reset it to the mapping icon.
+	// Handle pixel offsets
 	pixel_y = 0
 	pixel_x = 0
 	var/turf/T = get_step(get_turf(src), src.dir)
@@ -212,6 +109,19 @@
 		else if(src.dir == WEST)
 			pixel_x = -10
 
+	// Update icon state
+	overlays.Cut()
+	switch(construct_state.type) //Never use the initial state. That'll just reset it to the mapping icon.
+		if(/decl/machine_construction/wall_frame/no_wires/simple)
+			icon_state = "[base_state]-construct-stage1"
+			return
+		if(/decl/machine_construction/wall_frame/panel_open/simple)
+			icon_state = "[base_state]-construct-stage2"
+			return
+
+	icon_state = "[base_state]-empty"
+
+	// Extra overlays if we're active
 	var/_state
 	switch(get_status())		// set icon_states
 		if(LIGHT_OK)
@@ -225,7 +135,7 @@
 			_state = "[base_state]_broken"
 			on = 0
 
-	if(istype(lightbulb, /obj/item/light/))
+	if(istype(lightbulb, /obj/item/light))
 		var/image/I = image(icon, src, _state)
 		I.color = lightbulb.b_colour
 		overlays += I
@@ -330,7 +240,15 @@
 	lightbulb = null
 	update_icon()
 
+/obj/machinery/light/cannot_transition_to(state_path, mob/user)
+	if(lightbulb && !ispath(state_path, /decl/machine_construction/wall_frame/panel_closed))
+		return SPAN_WARNING("You must first remove the lightbulb!")
+	return ..()
+
 /obj/machinery/light/attackby(obj/item/W, mob/user)
+	. = ..()
+	if(. || panel_open)
+		return
 
 	// attempt to insert light
 	if(istype(W, /obj/item/light))
@@ -364,13 +282,6 @@
 
 	// attempt to stick weapon into light socket
 	else if(!lightbulb)
-		if(istype(W, /obj/item/screwdriver)) //If it's a screwdriver open it.
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			user.visible_message("[user.name] opens [src]'s casing.", "You open [src]'s casing.", "You hear a noise.")
-			new construct_type(src.loc, src.dir, src)
-			qdel(src)
-			return
-
 		to_chat(user, "You stick \the [W] into the light socket!")
 		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -527,19 +438,36 @@
 	base_state = "nav1"
 	light_type = /obj/item/light/tube/large
 	on = TRUE
+	var/delay = 1
+	base_type = /obj/machinery/light/navigation/buildable
+	frame_type = /obj/item/frame/light/nav
+
+/obj/machinery/light/navigation/on_update_icon()
+	. = ..() // this will handle pixel offsets
+	overlays.Cut()
+	icon_state = "[delay][!!(lightbulb && on)]"	
+
+/obj/machinery/light/navigation/attackby(obj/item/W, mob/user)
+	. = ..()
+	if(!. && isMultitool(W))
+		delay = 5 + ((delay + 1) % 5)
+		to_chat(user, SPAN_NOTICE("You adjust the delay on \the [src]"))
+		return TRUE
+
+/obj/machinery/light/navigation/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/light/navigation/delay2
-		icon_state = "nav20"
-		base_state = "nav2"
+	delay = 2
+
 /obj/machinery/light/navigation/delay3
-		icon_state = "nav30"
-		base_state = "nav3"
+	delay = 3
+
 /obj/machinery/light/navigation/delay4
-		icon_state = "nav40"
-		base_state = "nav4"
+	delay = 4
+
 /obj/machinery/light/navigation/delay5
-		icon_state = "nav50"
-		base_state = "nav5"
+	delay = 5
 
 /obj/machinery/light/navigation/powered()
 	return TRUE
