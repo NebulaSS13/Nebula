@@ -83,12 +83,10 @@
 
 /mob/living/carbon/attack_hand(var/mob/living/carbon/human/M)
 	if(istype(M)) 
-		var/obj/item/organ/external/temp = M.organs_by_name[BP_R_HAND]
-		if (M.hand)
-			temp = M.organs_by_name[BP_L_HAND]
-		if(temp && !temp.is_usable())
+		var/obj/item/organ/external/temp = M.organs_by_name[M.hand ? BP_L_HAND : BP_R_HAND]
+		if(!temp || !temp.is_usable())
 			to_chat(M, SPAN_WARNING("You can't use your [temp.name]."))
-			return
+			return TRUE
 	. = ..()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)

@@ -175,8 +175,8 @@ var/list/holder_mob_icon_cache = list()
 		var/mob/living/carbon/H = user
 		if(H.a_intent == I_GRAB && scoop_check(user))
 			get_scooped(user, FALSE)
-			return
-	return ..()
+			return TRUE
+	. = ..()
 
 /mob/living/proc/scoop_check(var/mob/living/scooper)
 	. = TRUE
