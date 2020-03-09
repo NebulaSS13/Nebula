@@ -4,7 +4,7 @@
 	icon_state = "bluecrab"
 	icon_living = "bluecrab"
 	icon_dead = "bluecrab_dead"
-	mob_size = MOB_LARGE
+	mob_size = MOB_SIZE_LARGE
 	speak_emote = list("clicks")
 	emote_hear = list("clicks")
 	emote_see = list("clacks")

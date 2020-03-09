@@ -19,7 +19,7 @@
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
 	holder_type = /obj/item/holder/cat
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
 

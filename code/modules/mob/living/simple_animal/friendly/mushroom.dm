@@ -4,7 +4,7 @@
 	icon_state = "mushroom"
 	icon_living = "mushroom"
 	icon_dead = "mushroom_dead"
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 	speak_chance = 0
 	turns_per_move = 1
 	maxHealth = 5

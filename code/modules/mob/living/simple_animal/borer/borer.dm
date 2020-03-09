@@ -21,7 +21,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	universal_understand = TRUE
 	holder_type = /obj/item/holder/borer
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 	can_escape = TRUE
 
 	bleed_colour = "#816e12"

@@ -15,7 +15,7 @@
 	icon_living = "crow"
 	icon_dead = "crow_dead"
 	pass_flags = PASS_FLAG_TABLE
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 
 	speak = list("Caw.", "Caw?", "Caw!", "CAW.")
 	speak_emote = list("caws")

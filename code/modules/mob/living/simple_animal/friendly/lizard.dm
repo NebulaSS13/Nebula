@@ -14,7 +14,7 @@
 	response_help  = "pets"
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
-	mob_size = MOB_MINISCULE
+	mob_size = MOB_SIZE_MINISCULE
 	possession_candidate = 1
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE

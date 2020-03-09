@@ -213,7 +213,7 @@
 /obj/structure/closet/crate/large
 	name = "large crate"
 	desc = "A hefty metal crate."
-	storage_capacity = 2 * MOB_LARGE
+	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
 	closet_appearance = /decl/closet_appearance/large_crate
 
@@ -225,7 +225,7 @@
 	desc = "A hefty metal crate with an electronic locking system."
 	closet_appearance = /decl/closet_appearance/large_crate/secure
 
-	storage_capacity = 2 * MOB_LARGE
+	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
 
 /obj/structure/closet/crate/secure/large/phoron
@@ -257,7 +257,7 @@
 	close_sound = 'sound/items/Deconstruct.ogg'
 	req_access = list(access_xenobiology)
 	closet_appearance = /decl/closet_appearance/cart/biohazard
-	storage_capacity = 2 * MOB_LARGE
+	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
 
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()

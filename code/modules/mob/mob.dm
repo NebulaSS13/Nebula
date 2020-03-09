@@ -202,14 +202,14 @@
 			. += between(0, O.w_class, ITEM_SIZE_GARGANTUAN) / 5
 		else if(istype(pulling, /mob))
 			var/mob/M = pulling
-			. += max(0, M.mob_size) / MOB_MEDIUM
+			. += max(0, M.mob_size) / MOB_SIZE_MEDIUM
 		else
 			. += 1
 	. *= (0.8 ** size_strength_mod())
 
 //Determines mob size/strength effects for slowdown purposes. Standard is 0; can be pos/neg.
 /mob/proc/size_strength_mod()
-	return log(2, mob_size / MOB_MEDIUM)
+	return log(2, mob_size / MOB_SIZE_MEDIUM)
 
 /mob/proc/Life()
 //	if(organStructure)

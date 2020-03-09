@@ -5,7 +5,7 @@
 	icon_state = "antlion" // these are placeholders, as otherwise the mob is complete
 	icon_living = "antlion" 
 	icon_dead = "antlion_dead" 
-	mob_size = MOB_MEDIUM
+	mob_size = MOB_SIZE_MEDIUM
 	speak_emote = list("clicks") 
 	emote_hear = list("clicks its mandibles")
 	emote_see = list("shakes the sand off itself")
@@ -112,7 +112,7 @@
 	icon_state = "queen"
 	icon_living = "queen"
 	icon_dead = "queen_dead"
-	mob_size = MOB_LARGE
+	mob_size = MOB_SIZE_LARGE
 	health = 275
 	maxHealth = 275
 	melee_damage_lower = 21

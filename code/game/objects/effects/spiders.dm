@@ -200,7 +200,7 @@
 		disturbed()
 
 /obj/effect/spider/spiderling/Crossed(var/mob/living/L)
-	if(dormant && istype(L) && L.mob_size > MOB_TINY)
+	if(dormant && istype(L) && L.mob_size > MOB_SIZE_TINY)
 		disturbed()
 
 /obj/effect/spider/spiderling/disturbed()

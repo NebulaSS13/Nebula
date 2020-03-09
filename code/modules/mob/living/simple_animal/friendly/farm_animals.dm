@@ -176,7 +176,7 @@
 	attacktext = "kicked"
 	health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
-	mob_size = MOB_MINISCULE
+	mob_size = MOB_SIZE_MINISCULE
 
 	meat_type = /obj/item/chems/food/snacks/meat/chicken
 	meat_amount = 1
@@ -221,7 +221,7 @@ var/global/chicken_count = 0
 	attacktext = "kicked"
 	health = 10
 	pass_flags = PASS_FLAG_TABLE
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 
 	meat_type = /obj/item/chems/food/snacks/meat/chicken
 	meat_amount = 2

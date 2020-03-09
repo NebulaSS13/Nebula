@@ -59,5 +59,5 @@
 
 /obj/structure/diona_gestalt/proc/get_max_mob_rollup_size()
 	if(nymphs.len >= 20)
-		return MOB_MEDIUM
-	return MOB_SMALL
+		return MOB_SIZE_MEDIUM
+	return MOB_SIZE_SMALL

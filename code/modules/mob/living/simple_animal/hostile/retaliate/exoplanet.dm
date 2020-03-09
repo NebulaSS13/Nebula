@@ -110,7 +110,7 @@
 	speak = list("Awrr?","Aowrl!","Worrl")
 	emote_see = list("sniffs the air cautiously","looks around")
 	emote_hear = list("snuffles")
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak
 	name = "shantak"
@@ -145,7 +145,7 @@
 	icon_state = "yithian"
 	icon_living = "yithian"
 	icon_dead = "yithian_dead"
-	mob_size = MOB_TINY
+	mob_size = MOB_SIZE_TINY
 
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
@@ -153,7 +153,7 @@
 	icon_state = "tindalos"
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
-	mob_size = MOB_TINY
+	mob_size = MOB_SIZE_TINY
 
 /mob/living/simple_animal/thinbug
 	name = "taki"
@@ -163,7 +163,7 @@
 	icon_dead = "thinbug_dead"
 	speak_chance = 1
 	emote_hear = list("scratches the ground","chitters")
-	mob_size = MOB_MINISCULE
+	mob_size = MOB_SIZE_MINISCULE
 
 /mob/living/simple_animal/hostile/retaliate/royalcrab
 	name = "cragenoy"
@@ -191,7 +191,7 @@
 	icon_state = "char"
 	icon_living = "char"
 	icon_dead = "char_dead"
-	mob_size = MOB_LARGE
+	mob_size = MOB_SIZE_LARGE
 	damtype = BURN
 	health = 45
 	maxHealth = 45
