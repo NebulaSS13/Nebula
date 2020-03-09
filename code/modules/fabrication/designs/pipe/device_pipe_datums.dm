@@ -1,9 +1,16 @@
 /datum/fabricator_recipe/pipe/device
 	category = "Devices"
 	colorable = FALSE
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	pipe_color = PIPE_COLOR_WHITE
 
+	name = "connector"
+	desc = "a connector for canisters."
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+	build_icon_state = "connector"
+	constructed_path = /obj/machinery/atmospherics/portables_connector
+	pipe_class = PIPE_CLASS_UNARY
+
+/datum/fabricator_recipe/pipe/device/adapter
 	name = "universal pipe adapter"
 	desc = "an adapter designed to fit any type of pipe."
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
@@ -11,14 +18,6 @@
 	constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden/universal
 	pipe_class = PIPE_CLASS_BINARY
 	rotate_class = PIPE_ROTATE_TWODIR
-
-/datum/fabricator_recipe/pipe/device/connector
-	name = "connector"
-	desc = "a connector for canisters."
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
-	build_icon_state = "connector"
-	constructed_path = /obj/machinery/atmospherics/portables_connector
-	pipe_class = PIPE_CLASS_UNARY
 
 /datum/fabricator_recipe/pipe/device/unaryvent
 	name = "unary vent"
