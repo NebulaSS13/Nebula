@@ -102,7 +102,7 @@
 #define MIN_SUPPLIED_LAW_NUMBER 15
 #define MAX_SUPPLIED_LAW_NUMBER 50
 
-// NT's alignment towards the character
+// Corporate alignment for the character
 #define COMPANY_LOYAL 			"Loyal"
 #define COMPANY_SUPPORTATIVE	"Supportive"
 #define COMPANY_NEUTRAL 		"Neutral"

@@ -165,7 +165,3 @@
 	name = "Tank top, Expeditionary Corps, Female"
 	underwear_name = "tank top"
 	icon_state = "tank_expedition_female"
-
-/datum/category_item/underwear/undershirt/polo_corp
-	name = "Polo, corporate"
-	icon_state = "corp_polo"

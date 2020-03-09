@@ -160,7 +160,6 @@
 								/obj/item/clothing/gloves/chameleon       = TRADER_BLACKLIST,
 								/obj/item/clothing/head                   = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/head/HoS               = TRADER_BLACKLIST_ALL,
-								/obj/item/clothing/head/beret/centcom     = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/head/bio_hood          = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/head/bomb_hood         = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/head/caphat            = TRADER_BLACKLIST_ALL,
@@ -272,7 +271,7 @@ Sells devices, odds and ends, and medical stuff
 	name = "Xenolife Collector"
 	origin = "CSV Not a Poacher"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
-	possible_origins = list("XenoHugs", "Xynergy Specimen Acquisition", "Skinner Catering Reseller", "NanoTrasen Companionship Division", "Lonely Pete's Exotic Companionship","Space Wei's Exotic Cuisine")
+	possible_origins = list("XenoHugs", "Exotic Specimen Acquisition", "Skinner Catering Reseller", "Corporate Companionship Division", "Lonely Pete's Exotic Companionship","Space Wei's Exotic Cuisine")
 	speech = list("hail_generic"    = "Welcome! We are always looking to acquire more exotic life forms.",
 				"hail_deny"         = "We no longer wish to speak to you. Please contact our legal representative if you wish to rectify this.",
 

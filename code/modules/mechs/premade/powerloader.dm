@@ -30,7 +30,7 @@
 	exosuit_desc_string = "heavy-duty industrial lifters"
 	max_damage = 70
 	power_use = 30
-	desc = "The Xion Industrial Digital Interaction Manifolds allow you poke untold dangers from the relative safety of your cockpit."
+	desc = "The Industrial Digital Interaction Manifolds allow you poke untold dangers from the relative safety of your cockpit."
 
 /obj/item/mech_component/propulsion/powerloader
 	name = "exosuit legs"
@@ -59,7 +59,7 @@
 	hatch_descriptor = "roll cage"
 	pilot_coverage = 40
 	exosuit_desc_string = "an industrial rollcage"
-	desc = "A Xion industrial brand roll cage. Technically OSHA compliant. Technically."
+	desc = "An industrial roll cage. Technically OSHA compliant. Technically."
 	max_damage = 100
 	power_use = 0
 	climb_time = 6

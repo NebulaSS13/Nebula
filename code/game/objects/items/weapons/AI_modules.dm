@@ -267,14 +267,6 @@ AI MODULES
 	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
 	laws = new/datum/ai_laws/asimov
 
-/******************** NanoTrasen ********************/
-
-/obj/item/aiModule/nanotrasen // -- TLE
-	name = "'Corporate Default' Core AI Module"
-	desc = "A 'Corporate Default' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
-	laws = new/datum/ai_laws/nanotrasen
-
 /******************** SCG ********************/
 
 /obj/item/aiModule/solgov // aka Torch default
@@ -290,14 +282,6 @@ obj/item/aiModule/solgov_aggressive
 	desc = "A 'Military' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
 	laws = new/datum/ai_laws/solgov_aggressive
-
-/******************** Corporate ********************/
-
-/obj/item/aiModule/corp
-	name = "\improper 'Corporate' core AI module"
-	desc = "A 'Corporate' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
-	laws = new/datum/ai_laws/corporate
 
 /******************** Drone ********************/
 /obj/item/aiModule/drone

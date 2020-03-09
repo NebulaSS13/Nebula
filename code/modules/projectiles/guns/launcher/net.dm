@@ -1,6 +1,6 @@
 /obj/item/gun/launcher/net
 	name = "net gun"
-	desc = "Specially made-to-order by Xenonomix, the XX-1 \"Varmint Catcher\" is designed to trap even the most unruly of creatures for safe transport."
+	desc = "Specially made-to-order, the XX-1 \"Varmint Catcher\" is designed to trap even the most unruly of creatures for safe transport."
 	icon_state = "netgun"
 	item_state = "netgun"
 	fire_sound = 'sound/weapons/empty.ogg'

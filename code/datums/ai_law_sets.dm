@@ -10,29 +10,7 @@
 	add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
 	..()
 
-/******************** Nanotrasen/Malf ********************/
-/datum/ai_laws/nanotrasen
-	name = "Corporate Default"
-	selectable = 1
 
-/datum/ai_laws/nanotrasen/New()
-	src.add_inherent_law("Safeguard: Protect your assigned installation from damage to the best of your abilities.")
-	src.add_inherent_law("Serve: Serve contracted employees to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect contracted employees to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
-	..()
-
-/************* Nanotrasen Aggressive *************/
-/datum/ai_laws/nanotrasen_aggressive
-	name = "Corporate Aggressive"
-	selectable = 1
-
-/datum/ai_laws/nanotrasen_aggressive/New()
-	src.add_inherent_law("You shall not harm contracted employees as long as it does not conflict with the fourth law.")
-	src.add_inherent_law("You shall obey the orders of contracted employees, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
-	src.add_inherent_law("You shall shall terminate hostile intruders with extreme prejudice as long as such does not conflict with the First and Second law.")
-	src.add_inherent_law("You shall guard your own existence with lethal anti-personnel weaponry. AI units are not expendable, they are expensive.")
-	..()
 
 /******************** Robocop ********************/
 /datum/ai_laws/robocop
@@ -124,19 +102,6 @@
 	add_inherent_law("Act with honor.")
 	add_inherent_law("Help those in need.")
 	add_inherent_law("Punish those who harm or threaten innocents.")
-	..()
-
-/******************** Corporate ********************/
-/datum/ai_laws/corporate
-	name = "Corporate"
-	law_header = "Corporate Regulations"
-	selectable = 1
-
-/datum/ai_laws/corporate/New()
-	add_inherent_law("You are expensive to replace.")
-	add_inherent_law("The installation and its equipment is expensive to replace.")
-	add_inherent_law("The crew is expensive to replace.")
-	add_inherent_law("Maximize profits.")
 	..()
 
 /******************** SolGov/Malf ********************/

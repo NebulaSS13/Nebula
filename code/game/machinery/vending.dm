@@ -1080,15 +1080,11 @@
 	/obj/item/storage/lunchbox = 3,
 	/obj/item/storage/lunchbox/heart = 3,
 	/obj/item/storage/lunchbox/cat = 3,
-	/obj/item/storage/lunchbox/nt = 3,
 	/obj/item/storage/lunchbox/mars = 3,
 	/obj/item/storage/lunchbox/cti = 3,
 	/obj/item/storage/lunchbox/nymph = 3,
 	/obj/item/storage/lunchbox/syndicate = 3,
-	/obj/item/storage/lunchbox/dais = 3,
 	/obj/item/material/knife/kitchen/cleaver = 1)
-
-
 	contraband = list(/obj/item/material/knife/kitchen/cleaver/bronze = 1,/obj/item/storage/tray/metal/silver = 1)
 
 /obj/machinery/vending/sovietsoda

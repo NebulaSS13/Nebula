@@ -13,8 +13,6 @@
 	company_short = "LC"
 	overmap_event_areas = 11
 
-	default_law_type = /datum/ai_laws/corporate
-
 	evac_controller_type = /datum/evacuation_controller/lifepods
 	lobby_screens = list('maps/bearcat/lobby/bloodmoney.png','maps/bearcat/lobby/vapormoney.png')
 

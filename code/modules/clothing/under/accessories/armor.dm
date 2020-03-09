@@ -293,21 +293,6 @@
 	slot = ACCESSORY_SLOT_ARMOR_M
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/clothing/accessory/armor/tag/nt
-	name = "\improper CORPORATE SECURITY tag"
-	desc = "An armor tag with the words CORPORATE SECURITY printed in bottle green lettering on it."
-	icon_state = "nanotag"
-
-/obj/item/clothing/accessory/armor/tag/pcrc
-	name = "\improper PCRC tag"
-	desc = "An armor tag with the words PROXIMA CENTAURI RISK CONTROL printed in cyan lettering on it."
-	icon_state = "pcrctag"
-
-/obj/item/clothing/accessory/armor/tag/saare
-	name = "\improper SAARE tag"
-	desc = "An armor tag with the acronym SAARE printed in olive-green lettering on it."
-	icon_state = "saaretag"
-
 /obj/item/clothing/accessory/armor/tag/press
 	name = "\improper PRESS tag"
 	desc = "A tag with the word PRESS printed in white lettering on it."
@@ -382,11 +367,6 @@
 	name = "tan helmet cover"
 	desc = "A fabric cover for armored helmets. This one has a desert camouflage pattern."
 	icon_state = "helmcover_tan"
-
-/obj/item/clothing/accessory/armor/helmcover/nt
-	name = "corporate helmet cover"
-	desc = "A fabric cover for armored helmets. This one has corporate colors."
-	icon_state = "helmcover_nt"
 
 /obj/item/clothing/accessory/armor/helmcover/pcrc
 	name = "\improper PCRC helmet cover"

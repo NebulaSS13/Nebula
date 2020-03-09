@@ -133,15 +133,6 @@
 /obj/effect/landmark/corpse/miner/rig
 	corpse_outfits = list(/decl/hierarchy/outfit/job/cargo/mining/void)
 
-
-/obj/effect/landmark/corpse/bridgeofficer
-	name = "Bridge Officer"
-	corpse_outfits = list(/decl/hierarchy/outfit/nanotrasen/officer)
-
-/obj/effect/landmark/corpse/commander
-	name = "Commander"
-	corpse_outfits = list(/decl/hierarchy/outfit/nanotrasen/commander)
-
 /obj/effect/landmark/corpse/pirate
 	name = "Pirate"
 	corpse_outfits = list(/decl/hierarchy/outfit/pirate/norm)

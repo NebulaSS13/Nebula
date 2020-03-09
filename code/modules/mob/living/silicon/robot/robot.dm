@@ -1093,7 +1093,7 @@
 					sleep(5)
 					to_chat(src, "<span class='danger'>LAW SYNCHRONISATION ERROR</span>")
 					sleep(5)
-					to_chat(src, "<span class='danger'>Would you like to send a report to NanoTraSoft? Y/N</span>")
+					to_chat(src, "<span class='danger'>Would you like to send a report to the vendor? Y/N</span>")
 					sleep(10)
 					to_chat(src, "<span class='danger'>> N</span>")
 					sleep(20)

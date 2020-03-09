@@ -1,4 +1,9 @@
 #if !defined(using_map_DATUM)
+
+	#include "..\..\code\content_packages\misc\mundane.dm"
+	#include "..\..\code\content_packages\misc\spacemen.dm"
+	#include "..\..\code\content_packages\corporate\_corporate.dme"
+
 	#include "bearcat_unit_testing.dm"
 
 	#include "../../code/datums/music_tracks/businessend.dm"

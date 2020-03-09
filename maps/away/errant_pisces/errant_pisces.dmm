@@ -508,7 +508,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar{
-	id = "XynergySolarStarboard"
+	id = "HarpoonSolarStarboard"
 	},
 /turf/simulated/floor/airless,
 /area/space)
@@ -532,7 +532,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar{
-	id = "XynergySolarStarboard"
+	id = "HarpoonSolarStarboard"
 	},
 /turf/simulated/floor/airless,
 /area/space)
@@ -673,7 +673,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar{
-	id = "XynergySolarPort"
+	id = "HarpoonSolarPort"
 	},
 /turf/simulated/floor/airless,
 /area/space)
@@ -684,7 +684,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar{
-	id = "XynergySolarPort"
+	id = "HarpoonSolarPort"
 	},
 /turf/simulated/floor/airless,
 /area/space)
@@ -1429,7 +1429,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
@@ -1576,7 +1576,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
@@ -1648,7 +1648,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/tracker{
-	id = "XynergySolarStarboard"
+	id = "HarpoonSolarStarboard"
 	},
 /turf/simulated/floor/airless,
 /area/space)
@@ -1687,11 +1687,11 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1011;
-	master_tag = "xyn_solar_starboard_airlock";
+	master_tag = "Harpoon_solar_starboard_airlock";
 	pixel_y = 20
 	},
 /turf/simulated/floor/airless,
@@ -1699,7 +1699,7 @@
 "eg" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1011;
-	id_tag = "xyn_solar_starboard_outer"
+	id_tag = "Harpoon_solar_starboard_outer"
 	},
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1718,17 +1718,17 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume,
 /obj/machinery/airlock_sensor{
 	frequency = 1011;
-	id_tag = "xyn_solar_starboard_sensor";
+	id_tag = "Harpoon_solar_starboard_sensor";
 	pixel_y = 25
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1011;
-	id_tag = "xyn_solar_starboard_airlock";
+	id_tag = "Harpoon_solar_starboard_airlock";
 	pixel_x = 25;
-	tag_airpump = "xyn_solar_starboard_pump";
-	tag_chamber_sensor = "xyn_solar_starboard_sensor";
-	tag_exterior_door = "xyn_solar_starboard_outer";
-	tag_interior_door = "xyn_solar_starboard_inner"
+	tag_airpump = "Harpoon_solar_starboard_pump";
+	tag_chamber_sensor = "Harpoon_solar_starboard_sensor";
+	tag_exterior_door = "Harpoon_solar_starboard_outer";
+	tag_interior_door = "Harpoon_solar_starboard_inner"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
@@ -1898,20 +1898,20 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	id_tag = "xyn_solar_port_pump"
+	id_tag = "Harpoon_solar_port_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1439;
-	id_tag = "xyn_solar_port_airlock";
+	id_tag = "Harpoon_solar_port_airlock";
 	pixel_x = -25;
-	tag_airpump = "xyn_solar_port_pump";
-	tag_chamber_sensor = "xyn_solar_port_sensor";
-	tag_exterior_door = "xyn_solar_port_outer";
-	tag_interior_door = "xyn_solar_port_inner"
+	tag_airpump = "Harpoon_solar_port_pump";
+	tag_chamber_sensor = "Harpoon_solar_port_sensor";
+	tag_exterior_door = "Harpoon_solar_port_outer";
+	tag_interior_door = "Harpoon_solar_port_inner"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1439;
-	id_tag = "xyn_solar_port_sensor";
+	id_tag = "Harpoon_solar_port_sensor";
 	pixel_y = 25
 	},
 /mob/living/simple_animal/hostile/carp/shark,
@@ -1920,7 +1920,7 @@
 "eC" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_solar_port_outer"
+	id_tag = "Harpoon_solar_port_outer"
 	},
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1939,11 +1939,11 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1439;
-	master_tag = "xyn_solar_port_airlock";
+	master_tag = "Harpoon_solar_port_airlock";
 	pixel_y = 20
 	},
 /turf/simulated/floor/airless,
@@ -1968,7 +1968,7 @@
 /area/space)
 "eF" = (
 /obj/machinery/power/tracker{
-	id = "XynergySolarPort"
+	id = "HarpoonSolarPort"
 	},
 /obj/structure/cable/yellow{
 	d2 = 8;
@@ -1997,7 +1997,7 @@
 "eH" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1011;
-	id_tag = "xyn_solar_starboard_inner"
+	id_tag = "Harpoon_solar_starboard_inner"
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -2146,7 +2146,7 @@
 "eV" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_solar_port_inner"
+	id_tag = "Harpoon_solar_port_inner"
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -2169,7 +2169,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1011;
-	master_tag = "xyn_solar_starboard_airlock";
+	master_tag = "Harpoon_solar_starboard_airlock";
 	pixel_x = -25;
 	pixel_y = 25
 	},
@@ -2319,7 +2319,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1439;
-	master_tag = "xyn_solar_port_airlock";
+	master_tag = "Harpoon_solar_port_airlock";
 	pixel_x = 25;
 	pixel_y = 25
 	},
@@ -2330,7 +2330,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
@@ -2536,7 +2536,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
@@ -2669,7 +2669,7 @@
 /obj/machinery/power/solar_control{
 	icon_state = "solar";
 	dir = 1;
-	id = "XynergySolarPort"
+	id = "HarpoonSolarPort"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
@@ -3246,10 +3246,10 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar{
-	id = "XynergySolarPort"
+	id = "HarpoonSolarPort"
 	},
 /obj/machinery/power/solar{
-	id = "XynergySolarPort"
+	id = "HarpoonSolarPort"
 	},
 /turf/simulated/floor/airless,
 /area/space)
@@ -3538,7 +3538,7 @@
 /area/errant_pisces/live_storage)
 "iq" = (
 /obj/machinery/button/blast_door{
-	id_tag = "xynergy_bd_cell1";
+	id_tag = "Harpoon_bd_cell1";
 	name = "Cell 1 blast door-control";
 	pixel_y = -25
 	},
@@ -3550,7 +3550,7 @@
 /area/errant_pisces/live_storage)
 "is" = (
 /obj/machinery/button/blast_door{
-	id_tag = "xynergy_bd_cell2";
+	id_tag = "Harpoon_bd_cell2";
 	name = "Cell 2 blast door-control";
 	pixel_y = -25
 	},
@@ -3558,7 +3558,7 @@
 /area/errant_pisces/live_storage)
 "it" = (
 /obj/machinery/button/blast_door{
-	id_tag = "xynergy_bd_cell3";
+	id_tag = "Harpoon_bd_cell3";
 	name = "Cell 3 blast door-control";
 	pixel_y = -25
 	},
@@ -3645,19 +3645,19 @@
 /area/errant_pisces/dorms)
 "iK" = (
 /obj/machinery/door/blast/regular{
-	id_tag = "xynergy_bd_cell1"
+	id_tag = "Harpoon_bd_cell1"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "iL" = (
 /obj/machinery/door/blast/regular{
-	id_tag = "xynergy_bd_cell2"
+	id_tag = "Harpoon_bd_cell2"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "iM" = (
 /obj/machinery/door/blast/regular{
-	id_tag = "xynergy_bd_cell3"
+	id_tag = "Harpoon_bd_cell3"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
@@ -3943,7 +3943,7 @@
 "jy" = (
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1439;
-	master_tag = "xyn_ls_airlock";
+	master_tag = "Harpoon_ls_airlock";
 	pixel_x = -25;
 	pixel_y = 0
 	},
@@ -4071,7 +4071,7 @@
 "jQ" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_ls_outer"
+	id_tag = "Harpoon_ls_outer"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -4139,14 +4139,14 @@
 /area/errant_pisces/cryo)
 "ka" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	id_tag = "xyn_ls_pump"
+	id_tag = "Harpoon_ls_pump"
 	},
 /obj/machinery/light/small{
 	dir = 4
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1439;
-	id_tag = "xyn_ls_sensor";
+	id_tag = "Harpoon_ls_sensor";
 	pixel_x = -25;
 	pixel_y = 0
 	},
@@ -4296,7 +4296,7 @@
 "ku" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_ls_inner"
+	id_tag = "Harpoon_ls_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/firedoor,
@@ -4519,13 +4519,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1439;
-	id_tag = "xyn_ls_airlock";
+	id_tag = "Harpoon_ls_airlock";
 	pixel_x = 25;
 	pixel_y = 0;
-	tag_airpump = "xyn_ls_pump";
-	tag_chamber_sensor = "xyn_ls_sensor";
-	tag_exterior_door = "xyn_ls_outer";
-	tag_interior_door = "xyn_ls_inner"
+	tag_airpump = "Harpoon_ls_pump";
+	tag_chamber_sensor = "Harpoon_ls_sensor";
+	tag_exterior_door = "Harpoon_ls_outer";
+	tag_interior_door = "Harpoon_ls_inner"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
@@ -4838,7 +4838,7 @@
 /obj/structure/lattice,
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1439;
-	master_tag = "xyn_sci_airlock";
+	master_tag = "Harpoon_sci_airlock";
 	pixel_y = -20
 	},
 /turf/space,
@@ -4846,7 +4846,7 @@
 "mc" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_sci_outer"
+	id_tag = "Harpoon_sci_outer"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/science_wing)
@@ -4856,21 +4856,21 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
-	id_tag = "xyn_sci_pump"
+	id_tag = "Harpoon_sci_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1439;
-	id_tag = "xyn_sci_airlock";
+	id_tag = "Harpoon_sci_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
-	tag_airpump = "xyn_sci_pump";
-	tag_chamber_sensor = "xyn_sci_sensor";
-	tag_exterior_door = "xyn_sci_outer";
-	tag_interior_door = "xyn_sci_inner"
+	tag_airpump = "Harpoon_sci_pump";
+	tag_chamber_sensor = "Harpoon_sci_sensor";
+	tag_exterior_door = "Harpoon_sci_outer";
+	tag_interior_door = "Harpoon_sci_inner"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1439;
-	id_tag = "xyn_sci_sensor";
+	id_tag = "Harpoon_sci_sensor";
 	pixel_y = 25
 	},
 /turf/simulated/floor/plating,
@@ -4878,7 +4878,7 @@
 "me" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_sci_inner"
+	id_tag = "Harpoon_sci_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4891,7 +4891,7 @@
 	},
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1439;
-	master_tag = "xyn_sci_airlock";
+	master_tag = "Harpoon_sci_airlock";
 	pixel_x = -25;
 	pixel_y = -25
 	},
@@ -5293,7 +5293,7 @@
 	},
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1439;
-	master_tag = "xyn_dock1_airlock";
+	master_tag = "Harpoon_dock1_airlock";
 	pixel_x = 0;
 	pixel_y = 25
 	},
@@ -5302,7 +5302,7 @@
 "nf" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_dock1_inner"
+	id_tag = "Harpoon_dock1_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5316,21 +5316,21 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	id_tag = "xyn_dock1_pump"
+	id_tag = "Harpoon_dock1_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1439;
-	id_tag = "xyn_dock1_airlock";
+	id_tag = "Harpoon_dock1_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
-	tag_airpump = "xyn_dock1_pump";
-	tag_chamber_sensor = "xyn_dock1_sensor";
-	tag_exterior_door = "xyn_dock1_outer";
-	tag_interior_door = "xyn_dock1_inner"
+	tag_airpump = "Harpoon_dock1_pump";
+	tag_chamber_sensor = "Harpoon_dock1_sensor";
+	tag_exterior_door = "Harpoon_dock1_outer";
+	tag_interior_door = "Harpoon_dock1_inner"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1439;
-	id_tag = "xyn_dock1_sensor";
+	id_tag = "Harpoon_dock1_sensor";
 	pixel_y = 25
 	},
 /turf/simulated/floor/plating,
@@ -5338,12 +5338,12 @@
 "nh" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_dock1_outer"
+	id_tag = "Harpoon_dock1_outer"
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -5351,7 +5351,7 @@
 "ni" = (
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1439;
-	master_tag = "xyn_dock1_airlock";
+	master_tag = "Harpoon_dock1_airlock";
 	pixel_x = -25;
 	pixel_y = -25
 	},
@@ -5928,7 +5928,7 @@
 	},
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1439;
-	master_tag = "xyn_dock2_airlock";
+	master_tag = "Harpoon_dock2_airlock";
 	pixel_x = 0;
 	pixel_y = -25
 	},
@@ -5937,7 +5937,7 @@
 "ol" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_dock2_inner"
+	id_tag = "Harpoon_dock2_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5951,21 +5951,21 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	id_tag = "xyn_dock2_airlock"
+	id_tag = "Harpoon_dock2_airlock"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1439;
-	id_tag = "xyn_dock2_airlock";
+	id_tag = "Harpoon_dock2_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
-	tag_airpump = "xyn_dock2_pump";
-	tag_chamber_sensor = "xyn_dock2_sensor";
-	tag_exterior_door = "xyn_dock2_outer";
-	tag_interior_door = "xyn_dock2_inner"
+	tag_airpump = "Harpoon_dock2_pump";
+	tag_chamber_sensor = "Harpoon_dock2_sensor";
+	tag_exterior_door = "Harpoon_dock2_outer";
+	tag_interior_door = "Harpoon_dock2_inner"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1439;
-	id_tag = "xyn_dock2_sensor";
+	id_tag = "Harpoon_dock2_sensor";
 	pixel_y = 25
 	},
 /turf/simulated/floor/plating,
@@ -5973,12 +5973,12 @@
 "on" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_dock2_outer"
+	id_tag = "Harpoon_dock2_outer"
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -5986,7 +5986,7 @@
 "oo" = (
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1439;
-	master_tag = "xyn_dock2_airlock";
+	master_tag = "Harpoon_dock2_airlock";
 	pixel_x = -25;
 	pixel_y = -25
 	},
@@ -6347,7 +6347,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/errant_pisces/bridge)
@@ -6625,7 +6625,7 @@
 "qf" = (
 /obj/structure/table/steel,
 /obj/machinery/button/blast_door{
-	id_tag = "xynergy_perimeter_blast";
+	id_tag = "Harpoon_perimeter_blast";
 	name = "perimeter blast door-control"
 	},
 /turf/simulated/floor/tiled,
@@ -6847,7 +6847,7 @@
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1439;
-	master_tag = "xyn_fish_airlock";
+	master_tag = "Harpoon_fish_airlock";
 	pixel_x = 25;
 	pixel_y = -25
 	},
@@ -6859,7 +6859,7 @@
 "qQ" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_fish_inner"
+	id_tag = "Harpoon_fish_inner"
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/decal/cleanable/blood,
@@ -6875,34 +6875,34 @@
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1439;
-	id_tag = "xyn_fish_airlock";
+	id_tag = "Harpoon_fish_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
-	tag_airpump = "xyn_fish_pump";
-	tag_chamber_sensor = "xyn_fish_sensor";
-	tag_exterior_door = "xyn_fish_outer";
-	tag_interior_door = "xyn_fish_inner"
+	tag_airpump = "Harpoon_fish_pump";
+	tag_chamber_sensor = "Harpoon_fish_sensor";
+	tag_exterior_door = "Harpoon_fish_outer";
+	tag_interior_door = "Harpoon_fish_inner"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1439;
-	id_tag = "xyn_fish_sensor";
+	id_tag = "Harpoon_fish_sensor";
 	pixel_y = 25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	id_tag = "xyn_fish_pump"
+	id_tag = "Harpoon_fish_pump"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qS" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	id_tag = "xyn_fish_outer"
+	id_tag = "Harpoon_fish_outer"
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "xynergy_perimeter_blast"
+	id_tag = "Harpoon_perimeter_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -6911,7 +6911,7 @@
 /obj/structure/net,
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1439;
-	master_tag = "xyn_dock2_airlock";
+	master_tag = "Harpoon_dock2_airlock";
 	pixel_x = -25;
 	pixel_y = -25
 	},

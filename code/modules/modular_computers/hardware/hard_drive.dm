@@ -58,7 +58,7 @@
 /obj/item/stock_parts/computer/hard_drive/diagnostics()
 	. = ..()
 	// 999 is a byond limit that is in place. It's unlikely someone will reach that many files anyway, since you would sooner run out of space.
-	. += "NT-NFS File Table Status: [stored_files.len]/999"
+	. += "NFS File Table Status: [stored_files.len]/999"
 	. += "Storage capacity: [used_capacity]/[max_capacity]GQ"
 
 // Use this proc to add file to the drive. Returns 1 on success and 0 on failure. Contains necessary sanity checks.

@@ -21,10 +21,6 @@
 	desc = "A white folder."
 	icon_state = "folder_white"
 
-/obj/item/folder/nt
-	desc = "A corporate folder."
-	icon_state = "folder_nt"
-
 /obj/item/folder/on_update_icon()
 	overlays.Cut()
 	if(contents.len)

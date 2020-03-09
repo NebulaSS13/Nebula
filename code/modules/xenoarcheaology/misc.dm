@@ -20,11 +20,9 @@
 	. = ..()
 	if(prob(50))
 		new /obj/item/storage/backpack/toxins(src)
-	else
-		new /obj/item/storage/backpack/satchel/tox(src)
 	if(prob(50))
 		new /obj/item/storage/backpack/dufflebag(src)
-	new /obj/item/clothing/under/rank/scientist(src)
+	new /obj/item/clothing/under/color/white(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/glasses/science(src)

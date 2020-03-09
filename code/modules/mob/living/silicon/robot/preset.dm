@@ -20,8 +20,3 @@
 	spawn_sound = 'sound/mecha/nominalsyndi.ogg'
 	cell = /obj/item/cell/super
 	pitch_toggle = 0
-
-/mob/living/silicon/robot/combat/nt
-	laws = /datum/ai_laws/nanotrasen_aggressive
-	idcard = /obj/item/card/id/centcom/ERT
-	silicon_radio = /obj/item/radio/borg/ert
