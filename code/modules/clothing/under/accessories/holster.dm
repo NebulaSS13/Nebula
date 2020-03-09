@@ -86,3 +86,16 @@
 	)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
+
+/obj/item/clothing/accessory/storage/holster/knife
+	name = "leather knife sheath"
+	desc = "A synthetic leather knife sheath which you can strap on your leg."
+	icon_state = "sheath_leather"
+	can_holster = list(/obj/item/material/knife)
+	sound_in = 'sound/effects/holster/sheathin.ogg'
+	sound_out = 'sound/effects/holster/sheathout.ogg'
+
+/obj/item/clothing/accessory/storage/holster/knife/polymer
+	name = "polymer knife sheath"
+	desc = "A rigid polymer sheath which you can strap on your leg."
+	icon_state = "sheath_polymer"

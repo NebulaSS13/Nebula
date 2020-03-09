@@ -61,20 +61,20 @@
 	path = /obj/item/chems/food/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/knife
-	display_name = "folding knife"
-	path = /obj/item/material/knife/folding
-	cost = 3
+/datum/gear/knives
+	display_name = "knives selection"
+	description = "A selection of knives."
+	path = /obj/item/material/knife
 
-/datum/gear/knife_wood
-	display_name = "peasant knife"
-	path = /obj/item/material/knife/folding/wood
-	cost = 3
-
-/datum/gear/knife_tacticool
-	display_name = "tactical folding knife"
-	path = /obj/item/material/knife/folding/tacticool
-	cost = 3
+/datum/gear/knives/New()
+	..()
+	var/knives = list()
+	knives["folding knife"] = /obj/item/material/knife/folding
+	knives["peasant folding knife"] = /obj/item/material/knife/folding/wood
+	knives["tactical folding knife"] = /obj/item/material/knife/folding/tacticool
+	knives["utility knife"] = /obj/item/material/knife/utility
+	knives["lightweight utility knife"] = /obj/item/material/knife/utility/lightweight
+	gear_tweaks += new/datum/gear_tweak/path(knives)
 
 /datum/gear/lunchbox
 	display_name = "lunchbox"
