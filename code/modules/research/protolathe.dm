@@ -9,12 +9,12 @@
 	base_type = /obj/machinery/r_n_d/protolathe
 	construct_state = /decl/machine_construction/default/panel_closed
 
-	var/max_material_storage = 250000
+	var/max_material_storage = 100 * SHEET_MATERIAL_AMOUNT
 
 	var/list/datum/design/queue = list()
 	var/progress = 0
 
-	var/mat_efficiency = 1
+	var/mat_efficiency = 2
 	var/speed = 1
 
 /obj/machinery/r_n_d/protolathe/Initialize()
@@ -61,7 +61,7 @@
 	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
 
 	T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 6)
-	mat_efficiency = 1 - (T - 2) / 8
+	mat_efficiency = Clamp(initial(mat_efficiency) - (T - 2) / 8, 1, 6)
 	speed = T / 2
 	..()
 
@@ -163,8 +163,4 @@
 		reagents.remove_reagent(C, D.chemicals[C] * mat_efficiency)
 
 	if(D.build_path)
-		var/obj/new_item = D.Fabricate(loc, src)
-		if(mat_efficiency != 1) // No matter out of nowhere
-			if(new_item.matter && new_item.matter.len > 0)
-				for(var/i in new_item.matter)
-					new_item.matter[i] = new_item.matter[i] * mat_efficiency
+		D.Fabricate(loc, src)

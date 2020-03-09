@@ -694,7 +694,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=3.2'>Material Storage</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.3'>Chemical Storage</A><HR>"
 			dat += "Protolathe Menu:<BR><BR>"
-			dat += "<B>Material Amount:</B> [linked_lathe.TotalMaterials()] cm<sup>3</sup> (MAX: [linked_lathe.max_material_storage])<BR>"
+			dat += "<B>Material Amount:</B> [linked_lathe.TotalMaterials()][SHEET_UNIT] (MAX: [linked_lathe.max_material_storage])<BR>"
 			dat += "<B>Chemical Volume:</B> [linked_lathe.reagents.total_volume] (MAX: [linked_lathe.reagents.maximum_volume])<HR>"
 			dat += "<UL>"
 			for(var/datum/design/D in files.known_designs)
@@ -723,7 +723,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			for(var/M in linked_lathe.materials)
 				var/material/mat = SSmaterials.get_material_datum(M)
 				var/amount = linked_lathe.materials[M]
-				dat += "<LI><B>[capitalize(mat.display_name)]</B>: [amount] cm<sup>3</sup>"
+				dat += "<LI><B>[capitalize(mat.display_name)]</B>: [amount][SHEET_UNIT]"
 				if(amount >= SHEET_MATERIAL_AMOUNT)
 					dat += " || Eject "
 					for (var/C in list(1, 3, 5, 10, 15, 20, 25, 30, 40))
@@ -776,7 +776,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=4.3'>Material Storage</A> || "
 			dat += "<A href='?src=\ref[src];menu=4.2'>Chemical Storage</A><HR>"
 			dat += "Circuit Imprinter Menu:<BR><BR>"
-			dat += "Material Amount: [linked_imprinter.TotalMaterials()] cm<sup>3</sup><BR>"
+			dat += "Material Amount: [linked_imprinter.TotalMaterials()][SHEET_UNIT]<BR>"
 			dat += "Chemical Volume: [linked_imprinter.reagents.total_volume]<HR>"
 			dat += "<UL>"
 			for(var/datum/design/D in files.known_designs)
@@ -815,7 +815,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			for(var/M in linked_imprinter.materials)
 				var/material/mat = SSmaterials.get_material_datum(M)
 				var/amount = linked_imprinter.materials[M]
-				dat += "<LI><B>[capitalize(mat.display_name)]</B>: [amount] cm<sup>3</sup>"
+				dat += "<LI><B>[capitalize(mat.display_name)]</B>: [amount][SHEET_UNIT]"
 				if(amount >= SHEET_MATERIAL_AMOUNT)
 					dat += " || Eject: "
 					for (var/C in list(1, 3, 5, 10, 15, 20, 25, 30, 40))
