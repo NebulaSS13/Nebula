@@ -12,9 +12,9 @@
 	icon_state = "wirer-wire"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
+	material = MAT_ALUMINIUM
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
-	matter = list(MAT_ALUMINIUM = 1500, MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 500)
 
 /obj/item/integrated_electronics/wirer/on_update_icon()
 	icon_state = "wirer-[mode]"

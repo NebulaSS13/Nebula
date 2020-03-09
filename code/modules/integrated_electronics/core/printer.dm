@@ -46,14 +46,15 @@
 /obj/item/integrated_circuit_printer/proc/recycle(obj/item/O, mob/user, obj/item/electronic_assembly/assembly)
 	if(!O.canremove) //in case we have an augment circuit
 		return
-	for(var/material in O.matter)
-		if(materials[material] + O.matter[material] > metal_max)
+	var/list/matter = O.get_matter()
+	for(var/material in matter)
+		if(materials[material] + matter[material] > metal_max)
 			var/material/material_datum = SSmaterials.get_material_datum(material)
 			if(material_datum)
 				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.display_name]!</span>")
 			return
-	for(var/material in O.matter)
-		materials[material] += O.matter[material]
+	for(var/material in matter)
+		materials[material] += matter[material]
 	if(assembly)
 		assembly.remove_component(O)
 	if(user)
@@ -218,10 +219,10 @@
 		var/list/cost
 		if(ispath(build_type, /obj/item/electronic_assembly))
 			var/obj/item/electronic_assembly/E = SScircuit.cached_assemblies[build_type]
-			cost = E.matter
+			cost = E.get_matter()
 		else if(ispath(build_type, /obj/item/integrated_circuit))
 			var/obj/item/integrated_circuit/IC = SScircuit.cached_components[build_type]
-			cost = IC.matter
+			cost = IC.get_matter()
 		else if(!(build_type in SScircuit.circuit_fabricator_recipe_list["Tools"]))
 			return
 

@@ -30,10 +30,11 @@
 		for(var/obj/item/I in recursive_content_check(input_turf, sight_check = FALSE, include_mobs = FALSE))
 			if(QDELETED(I) || !I.simulated || I.anchored)
 				continue
-			if(LAZYLEN(I.matter))
-				for(var/o_material in I.matter)
+			var/list/matter = I.get_matter()
+			if(LAZYLEN(matter))
+				for(var/o_material in matter)
 					if(!isnull(ores_stored[o_material]))
-						ores_stored[o_material] += I.matter[o_material]
+						ores_stored[o_material] += matter[o_material]
 			qdel(I)
 
 	if(!active)

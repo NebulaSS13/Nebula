@@ -8,7 +8,6 @@
 	icon = 'icons/obj/assemblies/electronic_setups.dmi'
 	icon_state = "setup_small"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	matter = list()		// To be filled later
 	var/list/assembly_components = list()
 	var/list/ckeys_allowed_to_scan = list() // Players who built the circuit can scan it as a ghost.
 	var/max_components = IC_MAX_SIZE_BASE
@@ -95,7 +94,6 @@
 /obj/item/electronic_assembly/Initialize()
 	.=..()
 	START_PROCESSING(SScircuit, src)
-	matter[MAT_STEEL] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
 
 /obj/item/electronic_assembly/Destroy()
 	STOP_PROCESSING(SScircuit, src)

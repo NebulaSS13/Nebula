@@ -1,6 +1,3 @@
-/datum/design/item/implant
-	materials = list(MAT_ALUMINIUM = 50, MAT_GLASS = 50)
-
 /datum/design/item/implant/AssembleDesignName()
 	..()
 	name = "Implantable biocircuit design ([item_name])"

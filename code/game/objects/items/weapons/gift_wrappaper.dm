@@ -118,19 +118,17 @@
 
 /obj/item/gift/Initialize(mapload, obj/item/wrapped = null)
 	. = ..(mapload)
-
 	if(istype(wrapped))
 		gift = wrapped
 		w_class = gift.w_class
 		gift.forceMove(src)
-
-		//a good example of where we don't want to use the w_class defines
 		switch(gift.w_class)
-			if(1) icon_state = "gift1"
-			if(2) icon_state = "gift1"
-			if(3) icon_state = "gift2"
-			if(4) icon_state = "gift2"
-			if(5) icon_state = "gift3"
+			if(ITEM_SIZE_TINY, ITEM_SIZE_SMALL)
+				icon_state = "gift1"
+			if(ITEM_SIZE_NORMAL, ITEM_SIZE_LARGE)
+				icon_state = "gift2"
+			else
+				icon_state = "gift3"
 
 /obj/item/gift/attack_self(mob/user)
 	user.drop_item()
@@ -147,7 +145,7 @@
 	desc = "You can use this to wrap items in."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrap_paper"
-	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
+	var/amount = 2**ITEM_SIZE_HUGE
 
 /obj/item/wrapping_paper/attackby(obj/item/W, mob/user)
 	..()

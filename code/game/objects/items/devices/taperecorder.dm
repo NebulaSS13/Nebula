@@ -4,8 +4,7 @@
 	icon_state = "taperecorder"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
-
-	matter = list(MAT_ALUMINIUM = 60,MAT_GLASS = 30)
+	material = MAT_ALUMINIUM
 
 	var/emagged = 0.0
 	var/recording = 0.0
@@ -384,7 +383,7 @@
 	icon_state = "tape_white"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_TINY
-	matter = list(MAT_PLASTIC=20, MAT_STEEL=5, MAT_GLASS=5)
+	material = MAT_PLASTIC
 	force = 1
 	throwforce = 0
 	var/max_capacity = 600

@@ -468,17 +468,20 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	amount = MAXCOIL
 	max_amount = MAXCOIL
 	color = COLOR_MAROON
-	desc = "A coil of wiring, for delicate electronics use aswell as the more basic cable laying."
+	desc = "A coil of wiring for delicate electronics use, as well as more basic cable laying."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
 	throw_range = 5
-	matter = list(MAT_STEEL = 50, MAT_GLASS = 20, MAT_PLASTIC = 20)
+	material = MAT_STEEL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = /obj/item/stack/cable_coil
+
+/obj/item/stack/cable_coil/get_matter_multiplier()
+	. = ..() * 0.1 // Significantly less than a sheet per unit, it's wire!
 
 /obj/item/stack/cable_coil/single
 	amount = 1
@@ -487,7 +490,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	name = "cable coil synthesizer"
 	desc = "A device that makes cable."
 	gender = NEUTER
-	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
 

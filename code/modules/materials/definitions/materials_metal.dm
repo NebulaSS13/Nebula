@@ -130,7 +130,7 @@
 				/datum/reagent/iron = 19.6,
 				/datum/reagent/carbon = 0.4
 				)
-	alloy_materials = list(MAT_IRON = 1875, MAT_GRAPHITE = 1875)
+	alloy_materials = list(MAT_IRON = SHEET_MATERIAL_AMOUNT * 0.66, MAT_GRAPHITE = SHEET_MATERIAL_AMOUNT * 0.66)
 	alloy_product = TRUE
 	sale_price = 1
 	ore_smelts_to = MAT_STEEL
@@ -196,7 +196,7 @@
 	stack_origin_tech = "{'" + TECH_MATERIAL + "':2}"
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	alloy_materials = list(MAT_STEEL = 2500, MAT_PLATINUM = 1250)
+	alloy_materials = list(MAT_STEEL = SHEET_MATERIAL_AMOUNT, MAT_PLATINUM = SHEET_MATERIAL_AMOUNT * 0.5)
 	alloy_product = TRUE
 	sale_price = 2
 	ore_smelts_to = MAT_PLASTEEL
@@ -235,7 +235,7 @@
 	burn_armor = 20
 	weight = 27
 	stack_origin_tech = "{'" + TECH_MATERIAL + "':3}"
-	alloy_materials = list(MAT_PLASTEEL = 7500, MAT_OSMIUM = 3750)
+	alloy_materials = list(MAT_PLASTEEL = SHEET_MATERIAL_AMOUNT * 3, MAT_OSMIUM = SHEET_MATERIAL_AMOUNT * 1.5)
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_product = TRUE
 	sale_price = 3

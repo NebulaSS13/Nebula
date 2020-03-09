@@ -10,7 +10,7 @@
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
 	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MAGNET + "':2}"
-	matter = list(MAT_STEEL = 2000)
+	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/midlaser
 	wielded_item_state = "laser-wielded"
 
@@ -163,7 +163,7 @@ obj/item/gun/energy/retro
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = "{'" + TECH_COMBAT + "':1,'" + TECH_MAGNET + "':2}"
 	self_recharge = 1
-	matter = list(MAT_STEEL = 2000)
+	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 

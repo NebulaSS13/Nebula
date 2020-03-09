@@ -221,17 +221,16 @@
 	desc = "A glass beaker surrounded with black insulation."
 	icon_state = "insulated"
 	center_of_mass = @"{'x':15,'y':8}"
-	matter = list(MAT_GLASS = 500, MAT_PLASTIC = 250)
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = null
 	temperature_coefficient = 1
-	material = null
+	material = MAT_PLASTIC
 
 /obj/item/chems/glass/beaker/insulated/large
 	name = "large insulated beaker"
 	icon_state = "insulatedlarge"
 	center_of_mass = @"{'x':16,'y':10}"
-	matter = list(MAT_GLASS = 5000, MAT_PLASTIC = 2500)
+	material = MAT_GLASS
 	volume = 120
 
 /obj/item/chems/glass/beaker/sulphuric/Initialize()

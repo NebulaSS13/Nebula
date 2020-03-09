@@ -262,8 +262,7 @@
 	blocks["max_space"] = assembly.max_components
 
 	// Start keeping track of total metal cost
-	blocks["cost"] = assembly.matter.Copy()
-
+	blocks["cost"] = assembly.get_matter()
 
 	// Block 2. Components.
 	if(!islist(blocks["components"]) || !length(blocks["components"]))
@@ -293,8 +292,9 @@
 		// Update estimated assembly complexity, taken space and material cost
 		blocks["complexity"] += component.complexity
 		blocks["used_space"] += component.size
-		for(var/material in component.matter)
-			blocks["cost"][material] += component.matter[material]
+		var/list/matter = component.get_matter()
+		for(var/material in matter)
+			blocks["cost"][material] += matter ? matter[material] : 0
 
 		// Check if the assembly requires printer upgrades
 		if(!(component.spawn_flags & IC_SPAWN_DEFAULT))

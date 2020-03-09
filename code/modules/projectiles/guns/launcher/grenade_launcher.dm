@@ -13,18 +13,16 @@
 	throw_distance = 7
 	release_force = 5
 	combustion = 1
+	material = MAT_STEEL
 
 	var/obj/item/grenade/chambered
 	var/list/grenades = new/list()
 	var/max_grenades = 5 //holds this + one in the chamber
 	var/whitelisted_grenades = list(
 		/obj/item/grenade/frag/shell)
-
 	var/blacklisted_grenades = list(
 		/obj/item/grenade/flashbang/clusterbang,
 		/obj/item/grenade/frag)
-
-	matter = list(MAT_STEEL = 2000)
 
 //revolves the magazine, allowing players to choose between multiple grenade types
 /obj/item/gun/launcher/grenade/proc/pump(mob/M)

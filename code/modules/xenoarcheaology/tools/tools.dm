@@ -5,7 +5,7 @@
 	icon_state = "locator"
 	item_state = "locator"
 	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_DATA + "':2,'" + TECH_BLUESPACE + "':2}"
-	matter = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)
+	material = MAT_ALUMINIUM
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/gps/attack_self(var/mob/user)
@@ -32,7 +32,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "measuring"
 	origin_tech = "{'" + TECH_MATERIAL + "':1}"
-	matter = list(MAT_STEEL = 100)
+	material = MAT_STEEL
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/storage/bag/fossils
@@ -65,7 +65,7 @@
 	icon_state = "flashgun"
 	item_state = "lampgreen"
 	origin_tech = "{'" + TECH_BLUESPACE + "':3,'" + TECH_MAGNET + "':3}"
-	matter = list(MAT_STEEL = 5000, MAT_ALUMINIUM = 5000, MAT_GLASS = 5000)
+	material = MAT_ALUMINIUM
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 
@@ -122,7 +122,7 @@
 	icon_state = "crap"
 	item_state = "analyzer"
 	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_ENGINEERING + "':2,'" + TECH_BLUESPACE + "':2}"
-	matter = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_ALUMINIUM = 150)
+	material = MAT_STEEL
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	var/list/positive_locations = list()
@@ -244,7 +244,7 @@
 	name = "locator device"
 	desc = "Used to scan and locate signals on a particular frequency."
 	var/tracking_freq = PUB_FREQ
-	matter = list(MAT_ALUMINIUM = 1000, MAT_GLASS = 500)
+	material = MAT_ALUMINIUM
 
 /obj/item/pinpointer/radio/acquire_target()
 	var/turf/T = get_turf(src)

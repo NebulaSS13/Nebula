@@ -13,7 +13,7 @@
 	base_icon = "square" // Base icon name
 	filling_states = @"[20,40,60,80,100]"
 	volume = 30
-	matter = list(MAT_GLASS = 65)
+	material = MAT_GLASS
 
 	var/list/extras = list() // List of extras. Two extras maximum
 

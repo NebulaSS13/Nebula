@@ -12,9 +12,9 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	matter = list(MAT_ALUMINIUM = 3000)
+	material = MAT_ALUMINIUM
 	var/list/carrying = list() // List of things on the tray. - Doohl
-	var/max_carry = 2*BASE_STORAGE_COST(ITEM_SIZE_NORMAL)
+	var/max_carry = 2**ITEM_SIZE_HUGE
 
 /obj/item/tray/resolve_attackby(var/atom/A, mob/user)
 	if(istype(A, /obj/item/storage/)) // There used to be here where it would just deny the tray storage if it had contents. It seems wiser, considering just how useful this tray is as a weapon, to deny it backpacks entirely without actually raising its weight class.

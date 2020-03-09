@@ -184,7 +184,7 @@
 	icon_state = "welding-g"
 	item_state = "welding-g"
 	action_button_name = "Flip Welding Goggles"
-	matter = list(MAT_STEEL = 1500, MAT_GLASS = 1000)
+	material = MAT_STEEL
 	use_alt_layer = TRUE
 	var/up = FALSE
 	flash_protection = FLASH_PROTECTION_MAJOR

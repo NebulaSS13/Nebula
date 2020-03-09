@@ -29,7 +29,7 @@
 	name = "metal rod synthesizer"
 	desc = "A device that makes metal rods."
 	gender = NEUTER
-	matter = null
+	material = null
 	uses_charge = 1
 	charge_costs = list(500)
 

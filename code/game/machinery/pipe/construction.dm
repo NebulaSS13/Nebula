@@ -17,6 +17,7 @@ Buildable meters
 	level = 2
 	obj_flags = OBJ_FLAG_ROTATABLE 
 	dir = SOUTH
+	material = MAT_STEEL
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden
 	var/pipe_class = PIPE_CLASS_BINARY
 	var/rotate_class = PIPE_ROTATE_STANDARD
@@ -24,8 +25,8 @@ Buildable meters
 /obj/item/pipe/Initialize(var/mapload, var/obj/machinery/atmospherics/P)
 	. = ..(mapload, null)
 	set_extension(src, /datum/extension/parts_stash)
-	if(!P)
-		return
+	if(!istype(P))
+		return INITIALIZE_HINT_QDEL
 	if(!P.dir)
 		set_dir(SOUTH)
 	else

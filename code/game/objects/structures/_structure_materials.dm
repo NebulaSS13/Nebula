@@ -38,11 +38,14 @@
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	if(parts_type)
 		new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
-	else 
-		if(material)
-			material.place_dismantled_product(T)
-		if(reinf_material)
-			reinf_material.place_dismantled_product(T)
+	else
+		var/list/matter = get_matter()
+		for(var/mat in matter)
+			var/material/mat_ref = SSmaterials.get_material_datum(mat)
+			if(mat_ref.stack_type)
+				var/amt = Clamp(round((matter[mat] * 0.75)/SHEET_MATERIAL_AMOUNT), 1, 50)
+				if(amt)
+					new mat_ref.stack_type(get_turf(src), amt, mat)
 
 /obj/structure/proc/dismantle()
 	if(!dismantled)

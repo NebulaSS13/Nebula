@@ -3,6 +3,8 @@
 	w_class = ITEM_SIZE_HUGE
 	gender = PLURAL
 	color = COLOR_GUNMETAL
+	material = MAT_STEEL
+	dir = SOUTH
 
 	var/on_mech_icon = 'icons/mecha/mech_parts.dmi'
 	var/exosuit_desc_string
@@ -14,8 +16,6 @@
 	var/list/has_hardpoints = list()
 	var/decal
 	var/power_use = 0
-	matter = list(MAT_STEEL = 15000, MAT_PLASTIC = 1000, MAT_OSMIUM = 500)
-	dir = SOUTH
 
 /obj/item/mech_component/proc/set_colour(new_colour)
 	var/last_colour = color

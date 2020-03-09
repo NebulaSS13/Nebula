@@ -5,11 +5,8 @@
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
 	w_class = ITEM_SIZE_SMALL //It should be tiny! -Agouri
-
-	matter = list(MAT_STEEL = 50,MAT_GLASS = 50)
-
+	material = MAT_GLASS
 	req_access = list(access_engine)
-
 	var/secure = 0 //if set, then wires will be randomized and bolts will drop if the door is broken
 	var/list/conf_access = list()
 	var/one_access = 0 //if set to 1, door would receive OR instead of AND on the access restrictions.

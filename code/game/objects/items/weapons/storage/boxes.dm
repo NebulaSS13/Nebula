@@ -67,10 +67,9 @@
 	// Now make the cardboard
 	to_chat(user, "<span class='notice'>You fold [src] flat.</span>")
 	if(ispath(foldable, /obj/item/stack))
-		var/stack_amt = max(2**(w_class - 3), 1)
-		new src.foldable(get_turf(src), stack_amt)
+		new src.foldable(get_turf(src), max(Floor(material[MAT_CARDBOARD] / SHEET_MATERIAL_AMOUNT), 1), MAT_CARDBOARD)
 	else
-		new src.foldable(get_turf(src))
+		new src.foldable(get_turf(src), MAT_CARDBOARD)
 	qdel(src)
 
 /obj/item/storage/box/make_exact_fit()

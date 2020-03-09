@@ -13,11 +13,8 @@
 	throwforce = 5.0
 	throw_range = 15
 	throw_speed = 3
-
-	matter = list(MAT_PLASTIC = 50, MAT_GLASS = 20, MAT_STEEL = 5)
-
+	material = MAT_PLASTIC
 	origin_tech = "{'" + TECH_MAGNET + "':1,'" + TECH_ENGINEERING + "':1}"
-
 	var/buffer_name
 	var/atom/buffer_object
 

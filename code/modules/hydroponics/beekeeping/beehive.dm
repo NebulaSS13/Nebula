@@ -262,13 +262,12 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "wax"
 
+GLOBAL_LIST_INIT(wax_recipes, new)
 /obj/item/stack/wax/Initialize()
 	. = ..()
-	recipes = wax_recipes
-
-var/global/list/datum/stack_recipe/wax_recipes = list(
-	new/datum/stack_recipe/candle
-)
+	if(!GLOB.wax_recipes)
+		GLOB.wax_recipes = list(new /datum/stack_recipe/candle)
+	recipes = GLOB.wax_recipes
 
 /obj/item/bee_pack
 	name = "bee pack"

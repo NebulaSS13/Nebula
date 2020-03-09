@@ -5,7 +5,7 @@
 	icon_state = "secguncomp"
 	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2}"
 	w_class = ITEM_SIZE_NORMAL
-	matter = list(MAT_STEEL = 1000)
+	material = MAT_STEEL
 	screen_shake = 1
 	combustion = 1
 

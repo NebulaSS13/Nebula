@@ -7,9 +7,9 @@
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	matter = list(MAT_ALUMINIUM = 150)
 	origin_tech = "{'" + TECH_MAGNET + "':1,'" + TECH_ENGINEERING + "':1}"
 	action_button_name = "Toggle T-Ray scanner"
+	material = MAT_ALUMINIUM
 
 	var/scan_range = 3
 

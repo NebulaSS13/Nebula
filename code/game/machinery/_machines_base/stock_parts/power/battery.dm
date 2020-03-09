@@ -182,12 +182,10 @@
 
 /obj/item/stock_parts/power/battery/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	matter = list(MAT_STEEL = 400)
 
 /obj/item/stock_parts/power/battery/buildable/crap
 	name = "battery backup (weak)"
 	desc = "The BAT84 is an all-in-one battery backup system sold at an affordable price."
-	matter = list(MAT_STEEL = 100)
 	charge_rate = 0.25
 	charge_wait_counter = 15
 
@@ -207,7 +205,6 @@
 	name = "battery backup (rapid)"
 	desc = "The Xcharge state-of-the-art battery backup claims to charge over ten times as fast as its competitors."
 	charge_rate = 5
-	matter = list(MAT_STEEL = 1000, MAT_ALUMINIUM = 400, MAT_PLASTIC = 400)
 
 /obj/item/stock_parts/power/battery/buildable/turbo/get_lore_info()
 	return "The latest in battery charging technology deploys advanced composites and semiorganic interfaces to attain previously unheard-of charge rates. \
@@ -218,7 +215,6 @@
 	desc = "The Focal Point FOXUS is a battery backup device marketed for its fast startup time."
 	charge_wait_counter = 2
 	charge_rate = 0.8
-	matter = list(MAT_STEEL = 400, MAT_ALUMINIUM = 400, MAT_PLASTIC = 400)
 
 /obj/item/stock_parts/power/battery/buildable/responsive/get_lore_info()
 	return "Unable to compete on price with the larger conglomerates, Focal Point's FOXUS instead sacrifices a bit of charge rate for drastically better responsiveness. \

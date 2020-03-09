@@ -36,7 +36,7 @@
 	icon_state = "drill"
 	item_state = "jackhammer"
 	w_class = ITEM_SIZE_HUGE
-	matter = list(MAT_STEEL = 3750)
+	material = MAT_STEEL
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_ENGINEERING + "':1}"
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
@@ -145,7 +145,7 @@
 	item_state = "shovel"
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_ENGINEERING + "':1}"
-	matter = list(MAT_STEEL = 50)
+	material = MAT_STEEL
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0
 	edge = 1

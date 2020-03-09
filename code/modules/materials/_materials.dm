@@ -104,7 +104,7 @@
 	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
 	var/luminescence
 	var/list/alloy_materials     // If set, material can be produced via alloying these materials in these amounts.
-	var/units_per_sheet = SHEET_MATERIAL_AMOUNT
+	
 	var/wall_support_value = 30
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.

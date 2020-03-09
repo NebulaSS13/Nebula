@@ -46,6 +46,6 @@
 	wire_product = null
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	alloy_product = TRUE
-	alloy_materials = list(MAT_GLASS = 2500, MAT_PLATINUM = 1250)
+	alloy_materials = list(MAT_GLASS = SHEET_MATERIAL_AMOUNT, MAT_PLATINUM = SHEET_MATERIAL_AMOUNT * 0.5)
 	sale_price = 2
 	value = 40

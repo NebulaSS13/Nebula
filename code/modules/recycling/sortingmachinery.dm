@@ -342,7 +342,7 @@
 	item_state = "electronic"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	matter = list(MAT_STEEL = 100, MAT_GLASS = 34)
+	material = MAT_ALUMINIUM
 
 /obj/item/destTagger/proc/openwindow(mob/user)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
@@ -503,7 +503,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "deliveryPaper"
 	gender = NEUTER
-	matter = null
+	material = null
 	uses_charge = 1
 	charge_costs = list(1)
 	stacktype = /obj/item/stack/package_wrap

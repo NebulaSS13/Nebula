@@ -50,9 +50,11 @@ research holder datum.
 	var/list/known_designs = list()			//List of available designs.
 
 /datum/research/New()		//Insert techs into possible_tech here. Known_tech automatically updated.
-	for(var/T in typesof(/datum/tech) - /datum/tech)
+
+/datum/research/proc/Initialize()
+	for(var/T in subtypesof(/datum/tech))
 		known_tech += new T(src)
-	for(var/D in typesof(/datum/design) - /datum/design)
+	for(var/D in subtypesof(/datum/design))
 		possible_designs += new D(src)
 	RefreshResearch()
 
@@ -204,7 +206,7 @@ research holder datum.
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_PLASTIC = 30, MAT_STEEL = 30, MAT_GLASS = 10)
+	material = MAT_PLASTIC
 	var/datum/tech/stored
 
 
@@ -215,5 +217,5 @@ research holder datum.
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_PLASTIC = 30, MAT_STEEL = 30, MAT_GLASS = 10)
+	material = MAT_PLASTIC
 	var/datum/design/blueprint

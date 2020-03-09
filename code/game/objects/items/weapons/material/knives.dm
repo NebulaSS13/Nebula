@@ -8,7 +8,7 @@
 	max_force = 15
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	matter = list(MAT_STEEL = 12000)
+	material = MAT_STEEL
 	origin_tech = "{'" + TECH_MATERIAL + "':1}"
 	unbreakable = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -110,4 +110,3 @@
 	name = "lightweight utility knife"
 	desc = "A lightweight utility knife made out of a titanium alloy."
 	icon_state = "titanium"
-	matter = list(MATERIAL_TITANIUM = 12000)

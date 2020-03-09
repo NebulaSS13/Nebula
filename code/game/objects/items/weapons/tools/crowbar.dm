@@ -13,7 +13,7 @@
 	item_state = "crowbar"
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'" + TECH_ENGINEERING + "':1}"
-	matter = list(MAT_STEEL = 140)
+	material = MAT_STEEL
 	center_of_mass = @"{'x':16,'y':20}"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
@@ -30,7 +30,7 @@
 	throwforce = 6
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_STEEL = 80)
+	material = MAT_STEEL
 
 	var/prybar_types = list("1","2","3","4","5")
 	var/valid_colours = list(COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_BOTTLE_GREEN, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_VIOLET, COLOR_GRAY20)
@@ -51,7 +51,7 @@
 	throwforce = 6
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_STEEL = 150)
+	material = MAT_STEEL
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked", "attacked", "slashed", "torn", "ripped", "cut")
 
 /obj/item/crowbar/prybar/cheap
@@ -59,7 +59,7 @@
 	desc = "A plastic bar with a wedge. It looks so poorly manufactured that you're sure it will break if you try to use it."
 	force = 2
 	throwforce = 4
-	matter = list(MAT_PLASTIC = 60)
+	material = MAT_PLASTIC
 	obj_flags = null
 	w_class = ITEM_SIZE_TINY
 	

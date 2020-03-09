@@ -4,14 +4,12 @@
 	uses_charge = 1
 	charge_costs = list(1000)
 	gender = NEUTER
-	matter = null // Don't shove it in the autholathe.
 
 /obj/item/stack/material/cyborg/Initialize()
 	. = ..()
 	if(material)
 		name = "[material.display_name] synthesiser"
 		desc = "A device that synthesises [material.display_name]."
-		matter = null
 
 /obj/item/stack/material/cyborg/plastic
 	icon_state = "sheet"

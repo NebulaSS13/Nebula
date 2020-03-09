@@ -4,7 +4,6 @@
 
 	var/obj_flags
 	var/list/req_access
-	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
 	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
 	var/throwforce = 1
@@ -183,3 +182,20 @@
 
 /obj/can_be_injected_by(var/atom/injector)
 	. = ATOM_IS_OPEN_CONTAINER(src) && ..()
+
+/obj/proc/get_matter_multiplier()
+	. = (w_class * 0.5)
+
+/obj/proc/get_matter()
+	var/material/mat = get_material()
+	. = mat ? mat.get_matter() : list()
+	var/mult = Clamp(get_matter_multiplier(), 1, 10)
+	for(var/mat_type in .)
+		.[mat_type] *= mult
+	// TODO trace materials, additional materials.
+
+/obj/proc/building_cost()
+	. = get_matter() || list()
+	if(reagents && length(reagents.reagent_list))
+		for(var/datum/reagent/R in reagents.reagent_list)
+			.[R.type] = R.volume

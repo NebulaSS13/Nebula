@@ -206,7 +206,7 @@
 		return M.mob_size
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
-		return (I.w_class / 2)
+		return (I.w_class/2)
 	if(istype(AM, /obj/structure) || istype(AM, /obj/machinery))
 		return MOB_SIZE_LARGE
 	return 0

@@ -4,7 +4,6 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm_bitem"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	matter = list(MAT_STEEL = 4000)
 	var/build_machine_type
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 	var/fully_construct = FALSE // Results in a machine with all parts auto-installed and ready to go if TRUE; if FALSE, the machine will spawn without removable expected parts
@@ -19,6 +18,7 @@
 
 /obj/item/frame/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
+		var/list/matter = get_matter()
 		for(var/key in matter)
 			var/material/material = SSmaterials.get_material_datum(key)
 			material.place_sheet(get_turf(src), matter[key]/SHEET_MATERIAL_AMOUNT)
@@ -90,17 +90,14 @@
 /obj/item/frame/light/small
 	name = "small light fixture frame"
 	icon_state = "bulb-construct-item"
-	matter = list(MAT_STEEL = 2000)
 	build_machine_type = /obj/machinery/light/small/buildable
 
 /obj/item/frame/light/spot
 	name = "spotlight fixture frame"
 	icon_state = "tube-construct-item"
-	matter = list(MAT_STEEL = 4000, MAT_PLASTIC = 2000)
 	build_machine_type = /obj/machinery/light/spot/buildable
 
 /obj/item/frame/light/nav
 	name = "navigation light fixture frame"
 	icon_state = "tube-construct-item"
-	matter = list(MAT_STEEL = 4000, MAT_PLASTIC = 2000)
 	build_machine_type = /obj/machinery/light/navigation/buildable

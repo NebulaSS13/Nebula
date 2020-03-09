@@ -10,7 +10,6 @@
 	icon = 'icons/obj/materials.dmi'
 
 	var/material/reinf_material
-	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 	var/matter_multiplier = 1
 
@@ -54,15 +53,6 @@
 
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
-	matter = material.get_matter()
-	for(var/mat in matter)
-		matter[mat] = round(matter[mat]*matter_multiplier*amount)
-	if(reinf_material)
-		var/list/rmatter = reinf_material.get_matter()
-		for(var/mat in rmatter)
-			rmatter[mat] = round(0.5*rmatter[mat]*matter_multiplier*amount)
-			matter[mat] += rmatter[mat]
-
 	if(material_flags & USE_MATERIAL_SINGULAR_NAME)
 		singular_name = material.sheet_singular_name
 

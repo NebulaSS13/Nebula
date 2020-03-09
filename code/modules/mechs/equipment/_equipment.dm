@@ -4,8 +4,9 @@
 	name = "exosuit hardpoint system"
 	icon = 'icons/mecha/mech_equipment.dmi'
 	icon_state = ""
-	matter = list(MAT_STEEL = 10000, MAT_PLASTIC = 5000, MAT_OSMIUM = 500)
+	material = MAT_STEEL
 	force = 10
+	w_class = ITEM_SIZE_LARGE
 
 	var/restricted_hardpoints
 	var/mob/living/exosuit/owner
@@ -72,6 +73,14 @@
 	var/holding_type
 	var/obj/item/holding
 
+/obj/item/mech_equipment/mounted_system/get_matter_multiplier()
+	. = 1 // See get_matter()
+
+/obj/item/mech_equipment/mounted_system/get_matter()
+	. = istype(holding) ? holding.get_matter() : ..()
+	for(var/mat in .)
+		.[mat] *= w_class
+
 /obj/item/mech_equipment/mounted_system/attack_self(var/mob/user)
 	. = ..()
 	if(. && holding)
@@ -81,7 +90,8 @@
 	if(holding) //It'd be strange for this to be called with this var unset
 		GLOB.destroyed_event.unregister(holding, src, .proc/forget_holding)
 		holding = null
-		qdel(src)
+		if(!QDELETED(src))
+			qdel(src)
 
 /obj/item/mech_equipment/mounted_system/Initialize()
 	. = ..()
@@ -101,7 +111,6 @@
 		QDEL_NULL(holding)
 	. = ..()
 	
-
 /obj/item/mech_equipment/mounted_system/get_effective_obj()
 	return (holding ? holding : src)
 

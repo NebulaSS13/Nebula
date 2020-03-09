@@ -1,15 +1,13 @@
 /obj/item/radio/electropack
 	name = "electropack"
-	desc = "Dance my monkeys! DANCE!!!"
+	desc = "Dance, my monkeys! DANCE!"
 	icon_state = "electropack0"
 	item_state = "electropack"
 	frequency = 1449
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
-
-	matter = list(MAT_STEEL = 10000,MAT_GLASS = 2500)
-
+	material = MAT_STEEL
 	var/code = 2
 
 /obj/item/radio/electropack/attack_hand(mob/user)

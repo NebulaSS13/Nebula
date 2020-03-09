@@ -4,7 +4,7 @@
 	icon_state = "health"
 	item_state = "analyzer"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	matter = list(MAT_ALUMINIUM = 200)
+	material = MAT_ALUMINIUM
 	origin_tech = "{'" + TECH_MAGNET + "':1,'" + TECH_BIO + "':1}"
 	printout_color = "#deebff"
 	var/mode = 1

@@ -6,7 +6,7 @@
 	var/label = null
 	var/labels_left = 30
 	var/mode = 0	//off or on.
-	matter = list(MAT_PLASTIC = 100)
+	material = MAT_PLASTIC
 
 /obj/item/hand_labeler/attack()
 	return

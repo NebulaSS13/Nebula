@@ -36,17 +36,6 @@
 			resources[path] = building_cost[path] * FABRICATOR_EXTRA_COST_FACTOR
 	qdel(I)
 
-/obj/proc/building_cost()
-	. = list()
-	if(length(matter))
-		for(var/material in matter)
-			var/material/M = SSmaterials.get_material_datum(material)
-			if(istype(M))
-				.[M.type] = matter[material]
-	if(reagents && length(reagents.reagent_list))
-		for(var/datum/reagent/R in reagents.reagent_list)
-			.[R.type] = R.volume
-
 /datum/fabricator_recipe/proc/build(var/turf/location, var/amount = 1)
 	if(ispath(path, /obj/item/stack))
 		new path(location, amount)

@@ -1,5 +1,5 @@
 /obj/item/frame_holder
-	matter = list(MAT_STEEL = 175000, MAT_PLASTIC = 50000, MAT_OSMIUM = 30000)
+	material = MAT_STEEL
 
 /obj/item/frame_holder/Initialize(mapload, var/newloc)
 	..()

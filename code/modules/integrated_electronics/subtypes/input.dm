@@ -1078,12 +1078,15 @@
 
 /obj/item/integrated_circuit/input/matscan/do_work()
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 1, /obj)
-	if(!O || !O.matter) //Invalid input
+	if(!O) //Invalid input
+		return
+	var/list/matter = O.get_matter()
+	if(!length(matter))
 		return
 	var/turf/T = get_turf(src)
 	if(O in view(T)) // This is a camera. It can't examine thngs,that it can't see.
 		for(var/I in 1 to mtypes.len)
-			var/amount = O.matter[mtypes[I]]
+			var/amount = matter[mtypes[I]]
 			if(amount)
 				set_pin_data(IC_OUTPUT, I, amount)
 			else

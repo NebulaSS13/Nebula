@@ -377,7 +377,7 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':8}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	matter = list()
+	material = null
 
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	projectile_type = /obj/item/projectile/chameleon

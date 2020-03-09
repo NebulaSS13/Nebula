@@ -9,7 +9,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_HEAD | SLOT_MASK
 	hitsound = 'sound/effects/plunger.ogg'
-	matter = list(MAT_PLASTIC = 500)
+	material = MAT_PLASTIC
 
 /obj/item/plunger/robot
 	name = "plunger"
@@ -21,3 +21,4 @@
 	force = 1
 	w_class = ITEM_SIZE_NORMAL
 	hitsound = 'sound/effects/plunger.ogg'
+	material = MAT_PLASTIC

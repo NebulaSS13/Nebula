@@ -11,10 +11,10 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
+	material = MAT_STEEL
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 50, MAT_PLASTIC = 20)
 
 /obj/item/cell/Initialize()
 	. = ..()
@@ -130,7 +130,6 @@
 	throw_speed = 5
 	throw_range = 7
 	maxcharge = 100
-	matter = list(MAT_STEEL = 70, MAT_GLASS = 5)
 
 /obj/item/cell/device/variable/Initialize(mapload, charge_amount)
 	maxcharge = charge_amount
@@ -145,14 +144,12 @@
 	desc = "A small power cell designed to power more energy-demanding devices."
 	icon_state = "hdevice"
 	maxcharge = 100
-	matter = list(MAT_STEEL = 70, MAT_GLASS = 6)
 
 /obj/item/cell/crap
 	name = "old power cell"
 	desc = "A cheap old power cell. It's probably been in use for quite some time now."
 	origin_tech = "{'" + TECH_POWER + "':0}"
 	maxcharge = 100
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 40, MAT_PLASTIC = 20)
 
 /obj/item/cell/crap/empty
 	charge = 0
@@ -162,15 +159,12 @@
 	desc = "A standard and relatively cheap power cell, commonly used."
 	origin_tech = "{'" + TECH_POWER + "':0}"
 	maxcharge = 250
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 40, MAT_PLASTIC = 20)
 
 /obj/item/cell/apc
 	name = "APC power cell"
 	desc = "A special power cell designed for heavy-duty use in area power controllers."
 	origin_tech = "{'" + TECH_POWER + "':1}"
 	maxcharge = 500
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 50, MAT_PLASTIC = 20)
-
 
 /obj/item/cell/high
 	name = "advanced power cell"
@@ -178,7 +172,6 @@
 	origin_tech = "{'" + TECH_POWER + "':2}"
 	icon_state = "hcell"
 	maxcharge = 1000
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 60, MAT_PLASTIC = 20)
 
 /obj/item/cell/high/empty
 	charge = 0
@@ -189,8 +182,6 @@
 	origin_tech = "{'" + TECH_POWER + "':3}"
 	icon_state = "hcell"
 	maxcharge = 1500
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 70, MAT_ALUMINIUM = 20)
-
 
 /obj/item/cell/super
 	name = "enhanced power cell"
@@ -198,7 +189,6 @@
 	origin_tech = "{'" + TECH_POWER + "':5}"
 	icon_state = "scell"
 	maxcharge = 2000
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 70, MAT_ALUMINIUM = 20)
 
 /obj/item/cell/super/empty
 	charge = 0
@@ -209,7 +199,6 @@
 	origin_tech = "{'" + TECH_POWER + "':6}"
 	icon_state = "hpcell"
 	maxcharge = 3000
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 80, MAT_ALUMINIUM = 20)
 
 /obj/item/cell/hyper/empty
 	charge = 0
@@ -220,14 +209,12 @@
 	icon_state = "icell"
 	origin_tech =  null
 	maxcharge = 3000
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 80, MAT_ALUMINIUM = 20)
 
 /obj/item/cell/infinite/check_charge()
 	return 1
 
 /obj/item/cell/infinite/use()
 	return 1
-
 
 /obj/item/cell/potato
 	name = "potato battery"
@@ -237,7 +224,6 @@
 	icon_state = "potato_cell" //"potato_battery"
 	maxcharge = 20
 
-
 /obj/item/cell/slime
 	name = "charged slime core"
 	desc = "A yellow slime core infused with phoron, it crackles with power."
@@ -245,4 +231,4 @@
 	icon = 'icons/mob/simple_animal/slimes.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "yellow slime extract" //"potato_battery"
 	maxcharge = 200
-	matter = null
+	material = MAT_SKIN_GENERIC

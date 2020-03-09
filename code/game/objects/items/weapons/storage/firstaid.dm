@@ -181,7 +181,7 @@
 	allow_quick_gather = 1
 	use_to_pickup = 1
 	use_sound = 'sound/effects/storage/pillbottle.ogg'
-	matter = list(MAT_PLASTIC = 250)
+	material = MAT_PLASTIC
 	var/wrapper_color
 	var/label
 

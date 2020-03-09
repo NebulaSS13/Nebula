@@ -16,8 +16,6 @@
 /obj/item/ore/set_material(var/new_material)
 	. = ..()
 	if(istype(material))
-		matter = list()
-		matter[material.type] = SHEET_MATERIAL_AMOUNT
 		name =       material.ore_name
 		desc =       material.ore_desc ? material.ore_desc : "A lump of ore."
 		color =      material.icon_colour

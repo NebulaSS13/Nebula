@@ -13,7 +13,6 @@
 	slot_flags = SLOT_BELT
 	material = MAT_WOOD
 	applies_material_name = FALSE
-	matter = list(MAT_WOOD = 70)
 
 /obj/item/material/clipboard/Initialize()
 	. = ..()
@@ -180,16 +179,12 @@
 
 /obj/item/material/clipboard/steel
 	material = MAT_STEEL
-	matter = list(MAT_STEEL = 70)
 
 /obj/item/material/clipboard/aluminium
 	material = MAT_ALUMINIUM
-	matter = list(MAT_ALUMINIUM = 70)
 
 /obj/item/material/clipboard/glass
 	material = MAT_GLASS
-	matter = list(MAT_GLASS = 70)
 
 /obj/item/material/clipboard/plastic
 	material = MAT_PLASTIC
-	matter = list(MAT_PLASTIC = 70)

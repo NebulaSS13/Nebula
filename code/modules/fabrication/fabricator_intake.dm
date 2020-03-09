@@ -31,17 +31,18 @@
 	. = SUBSTANCE_TAKEN_NONE
 	var/stacks_used = 1
 	var/mat_colour = thing.color
-	for(var/mat in thing.matter)
+	var/list/matter = thing.get_matter()
+	for(var/mat in matter)
 		var/material/material_def = SSmaterials.get_material_datum(mat)
 		if(!material_def || !base_storage_capacity[material_def.type])
 			continue
-		var/taking_material = min(thing.matter[mat], storage_capacity[material_def.type] - stored_material[material_def.type])
+		var/taking_material = min(matter[mat], storage_capacity[material_def.type] - stored_material[material_def.type])
 		if(taking_material <= 0)
 			continue
 		if(!mat_colour)
 			mat_colour = material_def.icon_colour
 		stored_material[material_def.type] += taking_material
-		stacks_used = max(stacks_used, ceil(taking_material/material_def.units_per_sheet))
+		stacks_used = max(stacks_used, ceil(taking_material/SHEET_MATERIAL_AMOUNT))
 		if(storage_capacity[material_def.type] == stored_material[material_def.type])
 			. = SUBSTANCE_TAKEN_FULL
 		else if(. != SUBSTANCE_TAKEN_FULL)
