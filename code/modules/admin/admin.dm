@@ -848,6 +848,24 @@ var/global/floorIsLava = 0
 		to_chat(usr, "<span class='bigwarning'>Error: Start Now: Game has already started.</span>")
 		return 0
 
+/datum/admins/proc/endnow()
+	set category = "Server"
+	set desc = "Ending game round"
+	set name = "End Round"
+	if(!usr.client.holder || !check_rights(R_ADMIN))
+		return
+
+	if(GAME_STATE != RUNLEVEL_GAME)
+		to_chat(usr, "<span class='bigdanger'>The round has not started yet!</span>")
+		return
+
+	var/confirm = alert("End the game round?", "Game Ending", "Yes", "Cancel")
+	if(confirm == "Yes")
+		SSticker.force_ending = 1
+		log_and_message_admins("initiated a game ending.")
+		to_world("<span class='danger'>Game ending!</span> <span class='notice'>Initiated by [usr.key]!</span>")
+		SSstatistics.add_field("admin_verb","ER") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/admins/proc/toggleenter()
 	set category = "Server"
 	set desc="People can't enter"
@@ -857,7 +875,7 @@ var/global/floorIsLava = 0
 		to_world("<B>New players may no longer enter the game.</B>")
 	else
 		to_world("<B>New players may now enter the game.</B>")
-	log_and_message_admins("[key_name_admin(usr)] toggled new player game entering.")
+	log_and_message_admins("toggled new player game entering.")
 	world.update_status()
 	SSstatistics.add_field_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -934,7 +952,7 @@ var/global/floorIsLava = 0
 	set desc="Toggle admin jumping"
 	set name="Toggle Jump"
 	config.allow_admin_jump = !(config.allow_admin_jump)
-	log_and_message_admins("Toggled admin jumping to [config.allow_admin_jump].")
+	log_and_message_admins("toggled admin jumping to [config.allow_admin_jump].")
 	SSstatistics.add_field_details("admin_verb","TJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adspawn()
@@ -1015,7 +1033,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn every possible custom closet. Do not do this on live."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN))	
+	if(!check_rights(R_SPAWN))
 		return
 
 	if((input(usr, "Are you sure you want to spawn all these closets?", "So Many Closets") as null|anything in list("No", "Yes")) == "Yes")
