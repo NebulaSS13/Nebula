@@ -294,8 +294,8 @@
 	max_keys = 3
 
 /obj/item/radio/headset/entertainment
-	name = "actor's radio headset"
-	desc = "specially made to make you sound less cheesy."
+	name = "entertainment radio headset"
+	desc = "Especially made to make you sound less cheesy."
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks1type = /obj/item/encryptionkey/entertainment
