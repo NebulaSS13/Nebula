@@ -85,7 +85,7 @@
 /datum/chemical_reaction/oxy_meds
 	name = "Oxygen Deprivation Medication"
 	result = /datum/reagent/oxy_meds
-	required_reagents = list(/datum/reagent/acetone = 2, /datum/reagent/water = 1)
+	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/water = 1, /datum/reagent/sulfur = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/brute_meds
