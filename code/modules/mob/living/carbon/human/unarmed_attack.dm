@@ -17,11 +17,27 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text_victim
 	var/attack_name = "fist"
 	var/list/usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
+	var/is_starting_default = FALSE
 
 /decl/natural_attack/proc/get_damage_type()
 	if(deal_halloss)
 		return PAIN
 	return BRUTE
+
+/decl/natural_attack/proc/padded_by_user_gear(var/mob/living/carbon/human/user)
+	if(istype(user) && length(usable_with_limbs))
+		for(var/bp in usable_with_limbs)
+			var/obj/item/gear = user.get_covering_equipped_item_by_zone(bp)
+			if(istype(gear) && (gear.item_flags & ITEM_FLAG_PADDED))
+				return TRUE
+	return FALSE
+
+/decl/natural_attack/proc/resolve_to_soft_variant(var/mob/living/carbon/human/user)
+	. = src
+	if(istype(user) && (user.pulling_punches || padded_by_user_gear(user)))
+		var/decl/natural_attack/soft_variant = get_sparring_variant()
+		if(soft_variant)
+			. = soft_variant
 
 /decl/natural_attack/proc/get_sparring_variant()
 	return sparring_variant_type && decls_repository.get_decl(sparring_variant_type)
@@ -122,6 +138,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/bite
 	attack_verb = list("bit")
+	attack_noun = list("mouth")
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
 	damage = 0
@@ -153,6 +170,8 @@ var/global/list/sparring_attack_cache = list()
 	eye_attack_text_victim = "digits"
 	damage = 0
 	attack_name = "punch"
+	sparring_variant_type = /decl/natural_attack/light_strike/punch
+	is_starting_default = TRUE
 
 /decl/natural_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
@@ -199,12 +218,13 @@ var/global/list/sparring_attack_cache = list()
 		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>") //why do we have a separate set of verbs for lying targets?
 
 /decl/natural_attack/kick
-	attack_verb = list("kicked", "kicked", "kicked", "kneed")
-	attack_noun = list("kick", "kick", "kick", "knee strike")
+	attack_verb = list("struck")
+	attack_noun = list("foot", "knee")
 	attack_sound = "swing_hit"
 	damage = 0
 	attack_name = "kick"
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
+	sparring_variant_type = /decl/natural_attack/light_strike/kick
 
 /decl/natural_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
@@ -241,7 +261,7 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/stomp
 	attack_verb = list("stomped on")
-	attack_noun = list("stomp")
+	attack_noun = list("foot")
 	attack_sound = "swing_hit"
 	damage = 0
 	attack_name = "stomp"
@@ -291,12 +311,21 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/light_strike
 	deal_halloss = 3
-	attack_noun = list("tap","light strike")
+	attack_noun = list("limb")
 	attack_verb = list("tapped", "lightly struck")
 	damage = 2
 	shredding = 0
 	damage = 0
 	sharp = 0
 	edge = 0
-	attack_name = "light hit"
-	usable_with_limbs = list(BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)
+	attack_name = "light strike"
+
+/decl/natural_attack/light_strike/punch
+	attack_name = "light punch"
+	attack_noun = list("fist")
+	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
+
+/decl/natural_attack/light_strike/kick
+	attack_name = "light kick"
+	attack_noun = list("foot")
+	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
