@@ -41,9 +41,9 @@
 		if(stored_substances_to_names[mat_path] == mat_name)
 			if(ispath(mat_path, /material))
 				var/material/mat = SSmaterials.get_material_datum(mat_path)
-				if(mat && stored_material[mat_path] > mat.units_per_sheet && mat.stack_type)
-					var/sheet_count = Floor(stored_material[mat_path]/mat.units_per_sheet)
-					stored_material[mat_path] -= sheet_count * mat.units_per_sheet
+				if(mat && stored_material[mat_path] > SHEET_MATERIAL_AMOUNT && mat.stack_type)
+					var/sheet_count = Floor(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
+					stored_material[mat_path] -= sheet_count * SHEET_MATERIAL_AMOUNT
 					mat.place_sheet(get_turf(src), sheet_count)
 			else if(!isnull(stored_material[mat_path]))
 				stored_material[mat_path] = 0

@@ -9,8 +9,8 @@
 	base_type = /obj/machinery/fabricator/book
 	fabricator_class = FABRICATOR_CLASS_BOOKS
 	base_storage_capacity = list(
-		/material/wood =      20000,
-		/material/plastic =   20000
+		MAT_WOOD =      SHEET_MATERIAL_AMOUNT * 20,
+		MAT_PLASTIC =   SHEET_MATERIAL_AMOUNT * 20
 	)
 	color_selectable = TRUE
 

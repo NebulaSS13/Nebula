@@ -31,10 +31,10 @@
 	var/list/stored_material
 	var/list/storage_capacity
 	var/list/base_storage_capacity = list(
-		/material/steel =     25000,
-		/material/aluminium = 25000,
-		/material/glass =     12500,
-		/material/plastic =   12500
+		MAT_STEEL =     SHEET_MATERIAL_AMOUNT * 20,
+		MAT_ALUMINIUM = SHEET_MATERIAL_AMOUNT * 20,
+		MAT_GLASS =     SHEET_MATERIAL_AMOUNT * 10,
+		MAT_PLASTIC =   SHEET_MATERIAL_AMOUNT * 10
 	)
 
 	var/show_category = "All"
@@ -131,8 +131,8 @@
 		if(ispath(mat, /material))
 			var/mat_name = stored_substances_to_names[mat]
 			var/material/M = SSmaterials.get_material_datum(mat_name)
-			if(stored_material[mat] > M.units_per_sheet)
-				M.place_sheet(get_turf(src), round(stored_material[mat] / M.units_per_sheet), M.type)
+			if(stored_material[mat] > SHEET_MATERIAL_AMOUNT)
+				M.place_sheet(get_turf(src), round(stored_material[mat] / SHEET_MATERIAL_AMOUNT), M.type)
 	..()
 	return TRUE
 
