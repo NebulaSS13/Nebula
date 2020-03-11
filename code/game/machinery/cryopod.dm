@@ -541,7 +541,6 @@
 		SetName(initial(name))
 		return
 
-	occupant.stop_pulling()
 	if(occupant.client)
 		if(!silent)
 			to_chat(occupant, "<span class='notice'>[on_enter_occupant_message]</span>")

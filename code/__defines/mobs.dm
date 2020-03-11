@@ -13,22 +13,6 @@
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
 
-// Grab Types
-#define GRAB_NORMAL			"normal"
-#define GRAB_NAB			"nab"
-#define GRAB_NAB_SPECIAL	"special nab"
-
-// Grab levels.
-#define NORM_PASSIVE    "normal passive"
-#define NORM_STRUGGLE   "normal struggle"
-#define NORM_AGGRESSIVE "normal aggressive"
-#define NORM_NECK       "normal neck"
-#define NORM_KILL       "normal kill"
-
-#define NAB_PASSIVE		"nab passive"
-#define NAB_AGGRESSIVE	"nab aggressive"
-#define NAB_KILL		"nab kill"
-
 #define BORGMESON 0x1
 #define BORGTHERM 0x2
 #define BORGXRAY  0x4

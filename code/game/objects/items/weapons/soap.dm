@@ -35,9 +35,7 @@
 	reagents.add_reagent(/datum/reagent/cleaner, 15)
 
 /obj/item/soap/Crossed(var/mob/living/AM)
-	if (istype(AM))
-		if(AM.pulledby)
-			return
+	if(istype(AM))
 		AM.slip("the [src.name]",3)
 
 /obj/item/soap/afterattack(atom/target, mob/user, proximity)

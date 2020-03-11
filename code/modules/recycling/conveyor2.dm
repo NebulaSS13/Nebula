@@ -81,6 +81,10 @@
 
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
+		step(G.affecting, get_dir(G.affecting.loc, src))
+		return
 	if(isCrowbar(I))
 		if(!(stat & BROKEN))
 			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
@@ -90,25 +94,6 @@
 		qdel(src)
 		return
 	user.unequip_item(get_turf(src))
-
-// attack with hand, move pulled object onto conveyor
-/obj/machinery/conveyor/physical_attack_hand(mob/user)
-	if(!user.pulling)
-		return
-	if(user.pulling.anchored)
-		return
-	if((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
-		return
-	if(ismob(user.pulling))
-		var/mob/M = user.pulling
-		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		user.stop_pulling()
-		return TRUE
-	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		user.stop_pulling()
-		return TRUE
 
 // make the conveyor broken
 // also propagate inoperability to any connected conveyor with the same ID

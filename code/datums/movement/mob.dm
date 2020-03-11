@@ -108,13 +108,10 @@
 		mob.buckled.relaymove(mob, direction)
 		return MOVEMENT_HANDLED
 
-	if(mob.pulledby || mob.buckled) // Wheelchair driving!
+	if(mob.buckled) // Wheelchair driving!
 		if(istype(mob.loc, /turf/space))
 			return // No wheelchair driving in space
-		if(istype(mob.pulledby, /obj/structure/bed/chair/wheelchair))
-			. = MOVEMENT_HANDLED
-			mob.pulledby.DoMove(direction, mob)
-		else if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
+		if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
 			. = MOVEMENT_HANDLED
 			if(ishuman(mob))
 				var/mob/living/carbon/human/driver = mob
@@ -179,47 +176,27 @@
 /datum/movement_handler/mob/physically_restrained/MayMove(var/mob/mover)
 	if(mob.anchored)
 		if(mover == mob)
-			to_chat(mob, "<span class='notice'>You're anchored down!</span>")
+			to_chat(mob, SPAN_WARNING("You're anchored down!"))
 		return MOVEMENT_STOP
 
 	if(istype(mob.buckled) && !mob.buckled.buckle_movable)
 		if(mover == mob)
-			to_chat(mob, "<span class='notice'>You're buckled to \the [mob.buckled]!</span>")
+			to_chat(mob, SPAN_WARNING("You're buckled to \the [mob.buckled]!"))
 		return MOVEMENT_STOP
 
 	if(LAZYLEN(mob.pinned))
 		if(mover == mob)
-			to_chat(mob, "<span class='notice'>You're pinned down by \a [mob.pinned[1]]!</span>")
+			to_chat(mob, SPAN_WARNING("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
 	for(var/obj/item/grab/G in mob.grabbed_by)
-		if(G.assailant != mob && G.stop_move())
+		if(G.assailant != mob && (mob.restrained() || G.stop_move()))
 			if(mover == mob)
-				to_chat(mob, "<span class='notice'>You're stuck in a grab!</span>")
+				to_chat(mob, SPAN_WARNING("You're restrained and cannot move!"))
 			mob.ProcessGrabs()
 			return MOVEMENT_STOP
 
-	if(mob.restrained())
-		for(var/mob/M in range(mob, 1))
-			if(M.pulling == mob)
-				if(!M.incapacitated() && mob.Adjacent(M))
-					if(mover == mob)
-						to_chat(mob, "<span class='notice'>You're restrained! You can't move!</span>")
-					return MOVEMENT_STOP
-				else
-					M.stop_pulling()
-
 	return MOVEMENT_PROCEED
-
-
-/mob/living/ProcessGrabs()
-	//if we are being grabbed
-	if(grabbed_by.len)
-		resist() //shortcut for resisting grabs
-
-/mob/proc/ProcessGrabs()
-	return
-
 
 // Finally.. the last of the mob movement junk
 /datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
@@ -238,7 +215,7 @@
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
 
-	// Something with pulling things
+	// Something with dragging things
 	var/extra_delay = HandleGrabs(direction, old_turf)
 
 	if(QDELETED(mob)) // No idea why, but this was causing null check runtimes on live.
@@ -254,10 +231,28 @@
 		G.adjust_position()
 
 	if(direction & (UP|DOWN))
-		var/txt_dir = direction & UP ? "upwards" : "downwards"
+		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		if(mob.pulling)
-			mob.zPull(direction)
+		for(var/obj/item/grab/G in mob.get_active_grabs())
+			if(!G.affecting)
+				continue
+			var/turf/start = G.affecting.loc
+			var/turf/destination = (direction == UP) ? GetAbove(G.affecting) : GetBelow(G.affecting)
+			if(!start.CanZPass(G.affecting, direction))
+				to_chat(mob, SPAN_WARNING("\The [start] blocked your pulled object!"))
+				qdel(G)
+				continue
+			if(!destination.CanZPass(G.affecting, direction))
+				to_chat(mob, SPAN_WARNING("The [G.affecting] you were pulling bumps up against \the [destination]."))
+				qdel(G)
+				continue
+			for(var/atom/A in destination)
+				if(!A.CanMoveOnto(G.affecting, start, 1.5, direction))
+					to_chat(mob, SPAN_WARNING("\The [A] blocks the [G.affecting] you were pulling."))
+					qdel(G)
+					continue
+			G.affecting.forceMove(destination)
+			continue
 
 	//Moving with objects stuck in you can cause bad times.
 	if(get_turf(mob) != old_turf)
@@ -287,34 +282,15 @@
 /datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction, var/old_turf)
 	. = 0
 	// TODO: Look into making grabs use movement events instead, this is a mess.
-	for (var/obj/item/grab/G in mob)
+	for(var/obj/item/grab/G in mob.get_active_grabs())
 		if(G.assailant == G.affecting)
 			return
 		. = max(., G.grab_slowdown())
-		var/list/L = mob.ret_grab()
-		if(istype(L, /list))
-			if(L.len == 2)
-				L -= mob
-				var/mob/M = L[1]
-				if(M)
-					if (get_dist(old_turf, M) <= 1)
-						if (isturf(M.loc) && isturf(mob.loc))
-							if (mob.loc != old_turf && M.loc != mob.loc)
-								step(M, get_dir(M.loc, old_turf))
-			else
-				for(var/mob/M in L)
-					M.other_mobs = 1
-					if(mob != M)
-						M.animate_movement = 3
-				for(var/mob/M in L)
-					spawn( 0 )
-						step(M, direction)
-						return
-					spawn( 1 )
-						M.other_mobs = null
-						M.animate_movement = 2
-						return
-			G.adjust_position()
+		if(isturf(mob.loc) && mob.loc != old_turf)
+			for(var/atom/movable/M in (mob.ret_grab()-mob))
+				if(isturf(M.loc) && M.loc != mob.loc && get_dist(old_turf, M) <= 1)
+					step(M, get_dir(M.loc, old_turf))
+		G.adjust_position()
 
 // Misc. helpers
 /mob/proc/MayEnterTurf(var/turf/T)

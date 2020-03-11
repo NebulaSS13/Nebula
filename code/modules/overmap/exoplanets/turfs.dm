@@ -268,6 +268,5 @@
 		A.forceMove(T)
 		if(isliving(A))
 			var/mob/living/L = A
-			if(L.pulling)
-				var/atom/movable/AM = L.pulling
-				AM.forceMove(T)
+			for(var/obj/item/grab/G in L.get_active_grabs())
+				G.affecting.forceMove(T)

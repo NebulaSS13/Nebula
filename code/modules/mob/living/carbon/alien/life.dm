@@ -68,7 +68,7 @@
 				adjustHalLoss(-1)
 
 		// Eyes and blindness.
-		if(!has_eyes())
+		if(!check_has_eyes())
 			eye_blind =  1
 			blinded =    1
 			eye_blurry = 1

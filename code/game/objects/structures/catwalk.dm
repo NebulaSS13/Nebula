@@ -75,11 +75,6 @@
 			new /obj/item/stack/material/rods(loc)
 			qdel(src)
 
-/obj/structure/catwalk/attack_hand(mob/user)
-	if(user.pulling)
-		do_pull_click(user, src)
-	..()
-
 /obj/structure/catwalk/attack_robot(var/mob/user)
 	if(Adjacent(user))
 		attack_hand(user)
@@ -87,6 +82,12 @@
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
 	. = ..()
 	if(!.)
+
+		if(istype(C, /obj/item/grab))
+			var/obj/item/grab/G = C
+			G.affecting.forceMove(get_turf(src))
+			return TRUE
+
 		if(istype(C, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = C
 			if(!cutter.slice(user))

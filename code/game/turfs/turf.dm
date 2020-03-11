@@ -93,12 +93,6 @@
 
 	if(user.restrained())
 		return 0
-	if (user.pulling)
-		if(user.pulling.anchored || !isturf(user.pulling.loc))
-			return 0
-		if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
-			return 0
-		do_pull_click(user, src)
 
 	. = handle_hand_interception(user)
 
@@ -121,6 +115,11 @@
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
+		return TRUE
+
+	else if(istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
+		step(G.affecting, get_dir(G.affecting.loc, src))
 		return TRUE
 	return ..()
 
@@ -217,7 +216,7 @@ var/const/enterloopsanity = 100
 			M.inertia_dir  = 0
 			return
 		spawn(5)
-			if(M && !(M.anchored) && !(M.pulledby) && (M.loc == src))
+			if(M && !M.anchored && !LAZYLEN(M.grabbed_by) && M.loc == src)
 				if(!M.inertia_dir)
 					M.inertia_dir = M.last_move
 				step(M, M.inertia_dir)

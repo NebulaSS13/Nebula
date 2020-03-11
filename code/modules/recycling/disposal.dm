@@ -111,8 +111,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	var/obj/item/grab/G = I
 	if(istype(G))	// handle grabbed mob
-		if(ismob(G.affecting))
-			var/mob/GM = G.affecting
+		var/mob/GM = G.get_affecting_mob()
+		if(GM)
 			usr.visible_message(SPAN_DANGER("\The [usr] starts putting [GM.name] into the disposal."))
 			if(do_after(usr, 20, src))
 				if (GM.client)

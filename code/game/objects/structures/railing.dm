@@ -190,6 +190,7 @@
 	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
 		var/obj/item/grab/G = W
 		if(istype(G.affecting, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = G.get_affecting_mob()
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
 				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
@@ -197,19 +198,19 @@
 
 			if(G.force_danger())
 				if(user.a_intent == I_HURT)
-					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
+					visible_message("<span class='danger'>[G.assailant] slams [H]'s face against \the [src]!</span>")
 					playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
+					var/blocked = H.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 					if (prob(30 * (1 - blocked)))
-						G.affecting.Weaken(5)
-					G.affecting.apply_damage(8, BRUTE, BP_HEAD)
+						H.Weaken(5)
+					H.apply_damage(8, BRUTE, BP_HEAD)
 				else
-					if (get_turf(G.affecting) == get_turf(src))
-						G.affecting.forceMove(get_step(src, src.dir))
+					if (get_turf(H) == get_turf(src))
+						H.forceMove(get_step(src, src.dir))
 					else
-						G.affecting.dropInto(loc)
-					G.affecting.Weaken(5)
-					visible_message("<span class='danger'>[G.assailant] throws \the [G.affecting] over \the [src].</span>")
+						H.dropInto(loc)
+					H.Weaken(5)
+					visible_message("<span class='danger'>[G.assailant] throws \the [H] over \the [src].</span>")
 			else
 				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 			return

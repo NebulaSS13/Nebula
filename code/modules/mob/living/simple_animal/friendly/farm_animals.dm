@@ -65,7 +65,7 @@
 				src.visible_message("<span class='notice'>\The [src] chews on the plants.</span>")
 			return
 
-		if(!pulledby)
+		if(!LAZYLEN(grabbed_by))
 			var/obj/effect/vine/food
 			food = locate(/obj/effect/vine) in oview(5,loc)
 			if(food)

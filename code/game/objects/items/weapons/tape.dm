@@ -12,7 +12,7 @@
 			if(!H.organs_by_name[BP_HEAD])
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a head.</span>")
 				return
-			if(!H.has_eyes())
+			if(!H.check_has_eyes())
 				to_chat(user, "<span class='warning'>\The [H] doesn't have any eyes.</span>")
 				return
 			if(H.glasses)
@@ -27,7 +27,7 @@
 				return
 
 			// Repeat failure checks.
-			if(!H || !src || !H.organs_by_name[BP_HEAD] || !H.has_eyes() || H.glasses || (H.head && (H.head.body_parts_covered & FACE)))
+			if(!H || !src || !H.organs_by_name[BP_HEAD] || !H.check_has_eyes() || H.glasses || (H.head && (H.head.body_parts_covered & FACE)))
 				return
 
 			playsound(src, 'sound/effects/tape.ogg',25)

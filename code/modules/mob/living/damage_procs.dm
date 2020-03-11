@@ -7,7 +7,7 @@
 	Returns
 	standard 0 if fail
 */
-/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
+/mob/living/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
 	if(!damage)
 		return FALSE
 
@@ -49,7 +49,6 @@
 	radiation += damage
 	return TRUE
 
-
 /mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/damage_flags = 0)
 	if(brute)	apply_damage(brute, BRUTE, def_zone)
 	if(burn)	apply_damage(burn, BURN, def_zone)
@@ -59,8 +58,7 @@
 	if(halloss) apply_damage(halloss, PAIN, def_zone)
 	return TRUE
 
-
-/mob/living/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+/mob/living/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	if(!effect || (blocked >= 100))	return FALSE
 
 	switch(effecttype)
