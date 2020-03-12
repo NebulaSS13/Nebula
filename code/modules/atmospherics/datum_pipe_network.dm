@@ -61,6 +61,8 @@
 	for(var/datum/pipeline/line_member in giver.line_members)
 		line_member.network = src
 
+	qdel(giver)
+
 	update_network_gases()
 	return 1
 

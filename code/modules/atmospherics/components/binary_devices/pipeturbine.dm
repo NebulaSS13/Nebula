@@ -137,18 +137,15 @@
 
 //Goddamn copypaste from binary base class because atmospherics machinery API is not damn flexible
 /obj/machinery/atmospherics/pipeturbine/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	if(reference == node1)
+	if((reference == node1) && (new_network != network1))
+		qdel(network1)
 		network1 = new_network
 
-	else if(reference == node2)
+	if((reference == node2) && (new_network != network2))
+		qdel(network2)
 		network2 = new_network
 
-	if(new_network.normal_members.Find(src))
-		return 0
-
-	new_network.normal_members += src
-
-	return null
+	new_network.normal_members |= src
 
 /obj/machinery/atmospherics/pipeturbine/atmos_init()
 	..()

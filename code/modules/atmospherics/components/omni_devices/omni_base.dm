@@ -213,16 +213,11 @@
 
 /obj/machinery/atmospherics/omni/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	for(var/datum/omni_port/P in ports)
-		if(reference == P.node)
+		if((reference == P.node) && (new_network != P.network))
+			qdel(P.network)
 			P.network = new_network
-			break
 
-	if(new_network.normal_members.Find(src))
-		return 0
-
-	new_network.normal_members += src
-
-	return null
+	new_network.normal_members |= src
 
 /obj/machinery/atmospherics/omni/Destroy()
 	for(var/datum/omni_port/P in ports)
