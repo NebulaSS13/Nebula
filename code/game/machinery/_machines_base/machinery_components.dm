@@ -165,6 +165,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(R)
 		R.remove_from_storage(new_part, src)
 		R.handle_item_insertion(old_part, 1)
+		R.part_replacement_sound()
 	install_component(new_part)
 	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
 
