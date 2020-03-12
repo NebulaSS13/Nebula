@@ -196,7 +196,7 @@
 	reinf_material = null
 	update_connections(1)
 
-	ChangeTurf(floor_type)
+	ChangeTurf(floor_type || get_base_turf_by_area(src))
 
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)

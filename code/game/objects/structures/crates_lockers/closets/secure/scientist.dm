@@ -5,8 +5,7 @@
 
 /obj/structure/closet/secure_closet/scientist/WillContain()
 	return list(
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger/tox, /obj/item/storage/backpack/satchel/tox)),
-		/obj/item/clothing/under/rank/scientist,
+		/obj/item/clothing/under/color/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/radio/headset/headset_sci,
@@ -21,8 +20,7 @@
 
 /obj/structure/closet/secure_closet/xenobio/WillContain()
 	return list(
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger/tox, /obj/item/storage/backpack/satchel/tox)),
-		/obj/item/clothing/under/rank/scientist,
+		/obj/item/clothing/under/color/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/radio/headset/headset_sci,

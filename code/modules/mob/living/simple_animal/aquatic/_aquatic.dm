@@ -4,7 +4,7 @@
 	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
 	speed = 4
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 	emote_see = list("glubs", "blubs", "bloops")
 
 	// They only really care if there's water around them or not.

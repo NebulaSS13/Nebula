@@ -22,6 +22,7 @@ SUBSYSTEM_DEF(ticker)
 	var/delay_end = 0               //Can be set true to postpone restart.
 	var/delay_notified = 0          //Spam prevention.
 	var/restart_timeout = 1 MINUTE
+	var/force_ending = 0            //Overriding this variable will force game end. Can be used for  adminbuse.
 
 	var/list/minds = list()         //Minds of everyone in the game.
 	var/list/antag_pool = list()
@@ -329,19 +330,21 @@ Helpers
 			return 1
 		else
 			if(antag.initial_spawn_req > 1)
-				to_world("Failed to find enough [antag.role_text_plural].")
+				log_and_message_admins("Failed to find enough [antag.role_text_plural].")
 
 			else
-				to_world("Failed to find a [antag.role_text].")
+				log_and_message_admins("Failed to find a [antag.role_text].")
 
 			antag_choices -= antag
 			if(length(antag_choices))
 				antag = antag_choices[1]
 				if(antag)
-					to_world("Attempting to spawn [antag.role_text_plural].")
+					log_and_message_admins("Attempting to spawn [antag.role_text_plural].")
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
+	if(force_ending)
+		return 1
 	if(mode.explosion_in_progress)
 		return 0
 	if(config.continous_rounds)

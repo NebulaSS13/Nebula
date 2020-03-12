@@ -279,7 +279,6 @@
 		update_use_power(POWER_USE_IDLE)
 		return
 	occupant.forceMove(src)
-	occupant.stop_pulling()
 	if(occupant.client)
 		occupant.client.perspective = EYE_PERSPECTIVE
 		occupant.client.eye = src

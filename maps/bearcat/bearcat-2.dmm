@@ -3535,8 +3535,7 @@
 	icon_state = "map_injector";
 	dir = 8;
 	use_power = 1;
-	frequency = 1441;
-	id = "n2_in"
+	id_tag = "n2_in"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/ship/bearcat/maintenance/atmos)
@@ -3829,9 +3828,8 @@
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 4;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "n2_in";
+	id_tag = "n2_in";
 	use_power = 1
 	},
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -4110,8 +4108,7 @@
 	icon_state = "map_injector";
 	dir = 8;
 	use_power = 1;
-	frequency = 1441;
-	id = "n2_in"
+	id_tag = "n2_in"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/ship/bearcat/maintenance/atmos)

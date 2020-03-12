@@ -1,6 +1,6 @@
 /obj/item/radio/electropack
 	name = "electropack"
-	desc = "Dance my monkeys! DANCE!!!"
+	desc = "Dance, my monkeys! DANCE!"
 	icon_state = "electropack0"
 	item_state = "electropack"
 	frequency = 1449

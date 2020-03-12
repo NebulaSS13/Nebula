@@ -311,8 +311,8 @@
 /mob/living/carbon/slime/toggle_throw_mode()
 	return
 
-/mob/living/carbon/slime/has_eyes()
-	return 0
+/mob/living/carbon/slime/check_has_eyes()
+	return FALSE
 
 /mob/living/carbon/slime/check_has_mouth()
 	return 0

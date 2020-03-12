@@ -178,7 +178,7 @@
 /obj/item/frame/air_alarm,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/airalarm_electronics,
+/obj/item/stock_parts/circuitboard/air_alarm,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "az" = (

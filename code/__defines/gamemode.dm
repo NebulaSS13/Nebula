@@ -52,8 +52,6 @@
 #define MODE_DEITY         "deity"
 #define MODE_GODCULTIST    "god cultist"
 #define MODE_THRALL        "mind thrall"
-#define MODE_PARAMOUNT     "paramount"
-#define MODE_FOUNDATION    "foundation agent"
 #define MODE_MISC_AGITATOR "provocateur"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 130

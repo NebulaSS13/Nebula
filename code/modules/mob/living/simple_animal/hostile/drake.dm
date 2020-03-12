@@ -5,7 +5,7 @@
 	icon_state = "drake"
 	icon_living = "drake"
 	icon_dead = "drake_dead"
-	mob_size = MOB_LARGE
+	mob_size = MOB_SIZE_LARGE
 	speak_emote = list("hisses")
 	emote_hear = list("clicks")
 	emote_see = list("flaps its wings idly")

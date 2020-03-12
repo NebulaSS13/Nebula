@@ -14,17 +14,16 @@
 
 
 /obj/unit_test_light
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/unit_test_medium
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/unit_test_heavy
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 
 /obj/random/unit_test/spawn_choices()
 	return list(/obj/unit_test_light, /obj/unit_test_heavy, /obj/unit_test_medium)
-
 
 /area/test_area/powered_non_dynamic_lighting
 	name = "\improper Test Area - Powered - Non-Dynamic Lighting"

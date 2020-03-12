@@ -52,7 +52,7 @@
 	var/antaghud_offset_x = 0                 // As above, but specifically for the antagHUD indicator.
 	var/antaghud_offset_y = 0                 // As above, but specifically for the antagHUD indicator.
 
-	var/mob_size	= MOB_MEDIUM
+	var/mob_size	= MOB_SIZE_MEDIUM
 	var/strength    = STR_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/short_sighted                         // Permanent weldervision.
@@ -74,8 +74,8 @@
 	// Combat vars.
 	var/total_health = 200                   // Point at which the mob will enter crit.
 	var/list/unarmed_attacks = list(           // Possible unarmed attacks that the mob will use in combat,
-		/datum/unarmed_attack,
-		/datum/unarmed_attack/bite
+		/decl/natural_attack,
+		/decl/natural_attack/bite
 		)
 
 	var/list/natural_armour_values            // Armour values used if naked.
@@ -152,7 +152,7 @@
 	var/hud_type
 	var/health_hud_intensity = 1
 
-	var/grab_type = GRAB_NORMAL		// The species' default grab type.
+	var/grab_type = /decl/grab/normal/passive // The species' default grab type.
 
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
@@ -323,11 +323,6 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	//If the species has lungs, they are the default breathing organ
 	if(!breathing_organ && has_organ[BP_LUNGS])
 		breathing_organ = BP_LUNGS
-
-	var/list/unarmed_types = unarmed_attacks.Copy()
-	unarmed_attacks = list()
-	for(var/u_type in unarmed_types)
-		unarmed_attacks += new u_type()
 
 	// Modify organ lists if necessary.
 	if(islist(override_organ_types))
@@ -505,12 +500,12 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if(!ignore_antag && H.mind && !player_is_antag(H.mind))
 		return 0
 
-	for(var/datum/unarmed_attack/attack in unarmed_attacks)
-		if(!attack.is_usable(H))
+	for(var/attack_type in unarmed_attacks)
+		var/decl/natural_attack/attack = decls_repository.get_decl(attack_type)
+		if(!istype(attack) || !attack.is_usable(H))
 			continue
 		if(attack.shredding)
 			return 1
-
 	return 0
 
 // Called in life() when the mob has no client.

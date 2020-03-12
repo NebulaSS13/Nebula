@@ -217,5 +217,3 @@
 		H.seizure()
 	if(prob(10))
 		to_chat(M, SPAN_DANGER("<font size = [rand(2,4)]>[pick(overdose_messages)]</font>"))
-	if(M.psi)
-		M.psi.check_latency_trigger(30, "a [name] overdose")

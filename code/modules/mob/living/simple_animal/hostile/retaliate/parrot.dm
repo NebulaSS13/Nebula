@@ -33,7 +33,7 @@
 	icon_living = "parrot_fly"
 	icon_dead = "parrot_dead"
 	pass_flags = PASS_FLAG_TABLE
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 
 	speak = list("Hi","Hello!","Cracker?")
 	speak_emote = list("squawks","says","yells")
@@ -291,13 +291,6 @@
 
 	if(simple_parrot)
 		return FALSE
-
-	//Sprite and AI update for when a parrot gets pulled
-	if(pulledby && stat == CONSCIOUS)
-		icon_state = "[icon_set]_fly"
-		if(!client)
-			parrot_state = PARROT_WANDER
-		return
 
 	if(client || stat)
 		return //Lets not force players or dead/incap parrots to move

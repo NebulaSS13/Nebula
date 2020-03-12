@@ -9,9 +9,9 @@
 	base_type = /obj/machinery/fabricator/micro
 	fabricator_class = FABRICATOR_CLASS_MICRO
 	base_storage_capacity = list(
-		/material/aluminium = 5000,
-		/material/plastic =   5000,
-		/material/glass   = 5000
+		MAT_ALUMINIUM = SHEET_MATERIAL_AMOUNT * 5,
+		MAT_PLASTIC =   SHEET_MATERIAL_AMOUNT * 5,
+		MAT_GLASS   =   SHEET_MATERIAL_AMOUNT * 5
 	)
 
 //Subtype for mapping, starts preloaded with glass and set to print glasses
@@ -20,4 +20,4 @@
 
 /obj/machinery/fabricator/micro/bartender/Initialize()
 	. = ..()
-	stored_material[/material/glass] = base_storage_capacity[/material/glass]
+	stored_material[MAT_GLASS] = base_storage_capacity[MAT_GLASS]

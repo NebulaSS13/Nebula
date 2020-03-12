@@ -144,9 +144,8 @@
 
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
-
-		if(isliving(G.affecting))
-			var/mob/living/GM = G.affecting
+		var/mob/living/GM = G.get_affecting_mob()
+		if(GM)
 			if(!GM.loc == get_turf(src))
 				to_chat(user, "<span class='warning'>\The [GM] needs to be on the toilet.</span>")
 				return
@@ -165,7 +164,7 @@
 		if(I.w_class > ITEM_SIZE_NORMAL)
 			to_chat(user, "<span class='warning'>\The [I] does not fit.</span>")
 			return
-		if(w_items + I.w_class > 5)
+		if(w_items + I.w_class > ITEM_SIZE_HUGE)
 			to_chat(user, "<span class='warning'>The cistern is full.</span>")
 			return
 		if(!user.unEquip(I, src))
@@ -187,10 +186,10 @@
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
-		if(isliving(G.affecting))
-			var/mob/living/GM = G.affecting
+		var/mob/living/GM = G.get_affecting_mob()
+		if(GM)
 			if(!GM.loc == get_turf(src))
-				to_chat(user, "<span class='warning'>[GM.name] needs to be on the urinal.</span>")
+				to_chat(user, "<span class='warning'>[GM.name] needs to be on \the [src].</span>")
 				return
 			user.visible_message("<span class='danger'>[user] slams [GM.name] into the [src]!</span>")
 			GM.adjustBruteLoss(8)

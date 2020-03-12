@@ -401,7 +401,6 @@
 /obj/item/proc/equipped(var/mob/user, var/slot)
 	hud_layerise()
 	if(user.client)	user.client.screen |= src
-	if(user.pulling == src) user.stop_pulling()
 
 	//Update two-handing status
 	var/mob/M = loc
@@ -637,7 +636,7 @@ var/list/global/slot_flags_enumeration = list(
 				to_chat(user, "<span class='warning'>You're going to need to remove the eye covering first.</span>")
 				return
 
-	if(!M.has_eyes())
+	if(!M.check_has_eyes())
 		to_chat(user, "<span class='warning'>You cannot locate any eyes on [M]!</span>")
 		return
 
@@ -955,3 +954,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/Value()
 	return material ? material.value * base_worth : base_worth
+
+/obj/item/proc/is_special_cutting_tool(var/high_power)
+	return FALSE

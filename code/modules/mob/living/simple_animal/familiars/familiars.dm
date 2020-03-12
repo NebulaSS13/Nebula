@@ -105,7 +105,7 @@
 	icon_dead   = "baby roro dead"
 
 	speak_emote = list("entones")
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 
 	health = 25
 	maxHealth = 25
@@ -139,7 +139,7 @@
 	speak_emote = list("squeeks")
 	holder_type = /obj/item/holder/mouse
 	pass_flags = PASS_FLAG_TABLE
-	mob_size = MOB_MINISCULE
+	mob_size = MOB_SIZE_MINISCULE
 
 	response_harm = "stamps on"
 
@@ -169,7 +169,7 @@
 
 	speak_emote = list("meows", "purrs")
 	holder_type = /obj/item/holder/cat
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 
 	health = 25
 	maxHealth = 25

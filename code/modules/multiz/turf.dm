@@ -79,6 +79,7 @@
 			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.type)
+			return TRUE
 		return
 
 	if (istype(C, /obj/item/stack/tile))
@@ -96,15 +97,15 @@
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			ChangeTurf(/turf/simulated/floor/airless)
-			return
 		else
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
+		return TRUE
 
 	//To lay cable.
 	if(isCoil(C))
 		var/obj/item/stack/cable_coil/coil = C
 		coil.turf_place(src, user)
-		return
+		return TRUE
 
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)

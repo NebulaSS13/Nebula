@@ -5,7 +5,7 @@
 
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	pass_flags = PASS_FLAG_TABLE
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
@@ -315,7 +315,6 @@
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
 
-	stop_pulling()
 	if(client)
 		client.perspective = EYE_PERSPECTIVE
 		client.eye = card

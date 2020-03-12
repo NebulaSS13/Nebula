@@ -17,10 +17,6 @@ var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playa
 
 var/list/mannequins_
 
-// Grabs
-var/global/list/all_grabstates[0]
-var/global/list/all_grabobjects[0]
-
 // Uplinks
 var/list/obj/item/uplink/world_uplinks = list()
 
@@ -136,21 +132,5 @@ var/global/list/string_slot_flags = list(
 		all_species[S.name] = S
 		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
 			playable_species += S.name
-
-	//Grabs
-	paths = typesof(/datum/grab) - /datum/grab
-	for(var/T in paths)
-		var/datum/grab/G = new T
-		if(G.state_name)
-			all_grabstates[G.state_name] = G
-
-	paths = typesof(/obj/item/grab) - /obj/item/grab
-	for(var/T in paths)
-		var/obj/item/grab/G = T
-		all_grabobjects[initial(G.type_name)] = T
-
-	for(var/grabstate_name in all_grabstates)
-		var/datum/grab/G = all_grabstates[grabstate_name]
-		G.refresh_updown()
 
 	return 1

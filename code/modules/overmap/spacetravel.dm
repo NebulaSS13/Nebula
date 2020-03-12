@@ -100,12 +100,12 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	nz = pick(TM.map_z)
 
 	var/turf/dest = locate(nx,ny,nz)
-	if(dest)
+	if(dest && !dest.density)
 		A.forceMove(dest)
-		if(ismob(A))
-			var/mob/D = A
-			if(D.pulling)
-				D.pulling.forceMove(dest)
+		if(isliving(A))
+			var/mob/living/L = A
+			for(var/obj/item/grab/G in L.get_active_grabs())
+				G.affecting.forceMove(dest)
 
 	if(istype(M, /obj/effect/overmap/visitable/sector/temporary))
 		var/obj/effect/overmap/visitable/sector/temporary/source = M

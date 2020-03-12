@@ -2274,9 +2274,8 @@
 "hp" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "h2_in";
+	id_tag = "h2_in";
 	pixel_y = 1;
 	use_power = 1
 	},
@@ -2377,9 +2376,8 @@
 "hC" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "h2_in";
+	id_tag = "h2_in";
 	pixel_y = 1;
 	use_power = 1
 	},

@@ -8,7 +8,6 @@
 # there are 4 test groups:
 # - ALL: Run all tests
 # - CODE: Run code quality checks
-# - WEB: Run tgui tests
 # - MAP: Run map tests (notably, only this one compiles!)
 #
 # Additionally, the MAP group requires an additional environent variable,
@@ -71,9 +70,6 @@ FAILED=0
 FAILED_BYNAME=()
 # Global counter of passed tests
 PASSED=0
-
-# Version of Node to install for tgui
-NODE_VERSION=4
 
 function msg {
     echo -e "\t\e[34mtest\e[0m: $*"
@@ -167,11 +163,6 @@ function find_code_deps {
     need_cmd pyenv
 }
 
-function find_web_deps {
-    need_cmd npm
-    [[ "$CI" != "true" ]] && need_cmd gulp
-}
-
 function find_byond_deps {
     [[ "$CI" != "true" ]] && need_cmd DreamDaemon
 }
@@ -251,7 +242,7 @@ function run_all_tests {
 
 function run_configured_tests {
     if [[ -z ${TEST+z} ]]; then
-        msg_bad "You must provide TEST in environment; valid options ALL,MAP,WEB,CODE"
+        msg_bad "You must provide TEST in environment; valid options ALL,MAP,CODE"
         msg_meh "Note: map tests require MAP_PATH set"
         exit 1
     fi

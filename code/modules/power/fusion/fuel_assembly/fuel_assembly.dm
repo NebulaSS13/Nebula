@@ -12,7 +12,7 @@
 
 /obj/item/fuel_assembly/Initialize(mapload, var/_material, var/_colour)
 	. = ..(mapload, _material)
-	initial_amount = material.units_per_sheet * 5 // Fuel compressor eats 5 sheets.
+	initial_amount = SHEET_MATERIAL_AMOUNT * 5 // Fuel compressor eats 5 sheets.
 	SetName("[material.use_name] fuel rod assembly")
 	desc = "A fuel rod for a fusion reactor. This one is made from [material.use_name]."
 	if(material.radioactivity)

@@ -212,7 +212,7 @@
 	var/mob/living/carbon/human/dummy/held_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Held Mob")
 	var/mob/living/carbon/human/dummy/holding_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Holding Mob")
 
-	held_mob.mob_size = MOB_SMALL
+	held_mob.mob_size = MOB_SIZE_SMALL
 	held_mob.put_in_active_hand(held_item)
 	held_mob.get_scooped(holding_mob)
 

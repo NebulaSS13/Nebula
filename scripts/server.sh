@@ -8,7 +8,6 @@
 [[ -z $GITDIR ]] && GITDIR=. # Directory of code or git repo, relative to $SERVERDIR
 [[ -z $EXTRA_DM_SH_ARGS ]] && EXTRA_DM_SH_ARGS="" # Extra args to pass to dm.sh
 [[ -z $SERVERDIR ]] && SERVERDIR=../ # Location of the server, relative to the directory this script is called with a pwd of
-[[ -z $GULP_PATH ]] && GULP_PATH=gulp # Location of gulp executable
 
 cd $SERVERDIR
 
@@ -55,17 +54,6 @@ while [[ ! -e stopserver ]]; do
 		echo "Compilation failed; saving log to 'data/logs/compile_failure_$d.txt'!"
 		echo $DMoutput >> "data/logs/compile_failure_$d.txt"
 		UPDATE_FAIL=1 # this is probably fatal
-	else
-		echo "Compilation successful; running gulp..."
-		cd "$GITDIR/tgui"
-		Goutput="$($GULP_PATH | tee /dev/fd/5)"
-		Gret=$?
-		cd - # from $GITDIR/tgui
-		if [[ $Gret != 0 ]]; then # tgui might be borked but it shouldn't totally break stuff, so no UPDATE_FAIL here
-			d="$(date '+%X %x')"
-			echo "Gulp failed; saving log to 'data/logs/compile_failure_$d.txt'!"
-			echo $Goutput >> "data/logs/compile_failure_$d.txt"
-		fi
 	fi
 
 	[[ $UPDATE_FAIL != 0 ]] && exit $UPDATE_FAIL
@@ -76,8 +64,6 @@ while [[ ! -e stopserver ]]; do
 		cp "$GITDIR/$DME.rsc" .
 		cp -r "$GITDIR/nano" .
 		[[ ! -e btime.so && -e "$GITDIR/btime.so" ]] && cp "$GITDIR/btime.so" .
-		[[ ! -e tgui/assets ]] && mkdir -p tgui/assets
-		cp -r "$GITDIR/tgui/assets" ./tgui
 		[[ ! -e .git/logs ]] && mkdir -p .git/logs
 		cp "$GITDIR/.git/HEAD" ./.git/HEAD
 		cp "$GITDIR/.git/logs/HEAD" ./.git/logs/HEAD

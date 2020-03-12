@@ -77,9 +77,6 @@
 	icon_state = "droid-science"
 	backpack_type = /obj/item/storage/backpack/toxins
 
-/decl/cardborg_appearance/science/satchel
-	backpack_type = /obj/item/storage/backpack/satchel/tox
-
 /decl/cardborg_appearance/security
 	icon_state = "securityrobot"
 	backpack_type = /obj/item/storage/backpack/security

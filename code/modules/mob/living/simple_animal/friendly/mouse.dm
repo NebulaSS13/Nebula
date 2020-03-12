@@ -25,7 +25,7 @@
 	universal_speak = FALSE
 	universal_understand = TRUE
 	holder_type = /obj/item/holder/mouse
-	mob_size = MOB_MINISCULE
+	mob_size = MOB_SIZE_MINISCULE
 	possession_candidate = 1
 	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_TINY

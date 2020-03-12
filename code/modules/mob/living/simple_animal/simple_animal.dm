@@ -31,7 +31,7 @@
 	var/turns_since_move = 0
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = 1	// Does the mob wander around when idle?
-	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
+	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is grabbing it.
 
 	//Interaction
 	var/response_help   = "tries to help"
@@ -139,10 +139,9 @@
 	if(!client && !stop_automated_movement && wander && !anchored)
 		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
-			if(turns_since_move >= turns_per_move)
-				if(!(stop_automated_movement_when_pulled && pulledby)) //Some animals don't move when pulled
-					SelfMove(pick(GLOB.cardinal))
-					turns_since_move = 0
+			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
+				SelfMove(pick(GLOB.cardinal))
+				turns_since_move = 0
 
 	//Speaking
 	if(!client && speak_chance)
@@ -257,12 +256,13 @@
 		if(I_HURT)
 			var/dealt_damage = harm_intent_damage
 			var/harm_verb = response_harm
-			if(ishuman(M) && M.species)
-				var/datum/unarmed_attack/attack = M.get_unarmed_attack(src)
-				dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
-				harm_verb = pick(attack.attack_verb)
-				if(attack.sharp || attack.edge)
-					adjustBleedTicks(dealt_damage)
+			if(ishuman(M))
+				var/decl/natural_attack/attack = M.get_unarmed_attack(src)
+				if(istype(attack))
+					dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
+					harm_verb = pick(attack.attack_verb)
+					if(attack.sharp || attack.edge)
+						adjustBleedTicks(dealt_damage)
 
 			adjustBruteLoss(dealt_damage)
 			M.visible_message("<span class='warning'>[M] [harm_verb] \the [src]!</span>")
@@ -449,7 +449,7 @@
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
 				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
 				B.basecolor = bleed_colour
-				var/scale = min(1, round(mob_size / MOB_MEDIUM, 0.1))
+				var/scale = min(1, round(mob_size / MOB_SIZE_MEDIUM, 0.1))
 				var/matrix/M = new()
 				B.transform = M.Scale(scale)
 				B.update_icon()

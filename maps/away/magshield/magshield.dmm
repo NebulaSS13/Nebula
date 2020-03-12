@@ -1054,9 +1054,8 @@
 "cG" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "n2o_in";
+	id_tag = "n2o_in";
 	pixel_y = 1;
 	use_power = 1
 	},
@@ -2006,7 +2005,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "eO" = (
-/obj/machinery/light_construct/small,
+/obj/item/frame/light/small,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "eP" = (
@@ -2217,9 +2216,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fy" = (
@@ -2229,9 +2226,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fz" = (
-/obj/machinery/light_construct{
-	dir = 4
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fA" = (
@@ -2241,9 +2236,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
 "fC" = (
-/obj/machinery/light_construct{
-	dir = 1
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
 "fD" = (
@@ -2263,9 +2256,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
 "fF" = (
-/obj/machinery/light_construct{
-	dir = 1
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "fG" = (
@@ -2396,9 +2387,8 @@
 "fX" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "d_n2_in";
+	id_tag = "d_n2_in";
 	use_power = 1
 	},
 /turf/simulated/floor/airless,
@@ -2495,9 +2485,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "gn" = (
@@ -2556,9 +2544,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/magshield/west)
 "gx" = (
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "gy" = (
@@ -2858,9 +2844,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "ho" = (
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hp" = (
@@ -3018,9 +3002,7 @@
 /area/magshield/east)
 "hQ" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/machinery/light_construct{
-	dir = 4
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "hR" = (
@@ -3214,9 +3196,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "io" = (
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "ip" = (
@@ -3285,9 +3265,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iz" = (
-/obj/machinery/light_construct{
-	dir = 1
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iA" = (
@@ -3327,7 +3305,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iG" = (
-/obj/machinery/light_construct,
+/obj/item/frame/light,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "iH" = (
@@ -3436,9 +3414,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/light_construct{
-	dir = 4
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "iW" = (
@@ -3938,9 +3914,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "ku" = (
@@ -4275,9 +4249,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "lr" = (
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "ls" = (

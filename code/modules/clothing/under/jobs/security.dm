@@ -58,14 +58,6 @@
 		)
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/rank/security/corp
-	icon_state = "sec_corporate"
-	worn_state = "sec_corporate"
-
-/obj/item/clothing/under/rank/warden/corp
-	icon_state = "warden_corporate"
-	worn_state = "warden_corporate"
-
 /obj/item/clothing/under/tactical
 	name = "tactical jumpsuit"
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
@@ -147,10 +139,6 @@
 		melee = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.8
-
-/obj/item/clothing/under/rank/head_of_security/corp
-	icon_state = "hos_corporate"
-	worn_state = "hos_corporate"
 
 /obj/item/clothing/head/HoS
 	name = "Head of Security Hat"

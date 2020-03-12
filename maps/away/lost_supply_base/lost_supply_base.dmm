@@ -288,9 +288,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "aH" = (
-/obj/machinery/light_construct{
-	dir = 1
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "aI" = (
@@ -1100,9 +1098,7 @@
 /turf/space,
 /area/lost_supply_base/common)
 "cN" = (
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cO" = (
@@ -1122,9 +1118,7 @@
 /turf/simulated/wall,
 /area/lost_supply_base)
 "cR" = (
-/obj/machinery/light_construct{
-	dir = 8
-	},
+/obj/item/frame/light,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -1255,7 +1249,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dl" = (
-/obj/machinery/light_construct,
+/obj/item/frame/light,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)

@@ -17,9 +17,9 @@
 	var/throw_speed = 2
 	var/throw_range = 7
 	var/moved_recently = 0
-	var/mob/pulledby = null
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
+	var/list/grabbed_by
 
 /atom/movable/Destroy()
 	. = ..()
@@ -27,10 +27,6 @@
 		qdel(AM)
 
 	forceMove(null)
-	if (pulledby)
-		if (pulledby.pulling == src)
-			pulledby.pulling = null
-		pulledby = null
 
 	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
 		QDEL_NULL_LIST(movement_handlers)
@@ -138,8 +134,7 @@
 	if (!target || speed <= 0 || QDELETED(src) || (target.z != src.z))
 		return FALSE
 
-	if (pulledby)
-		pulledby.stop_pulling()
+	QDEL_NULL_LIST(grabbed_by)
 
 	var/datum/thrownthing/TT = new(src, target, range, speed, thrower, callback)
 	throwing = TT
@@ -235,3 +230,13 @@
 
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
+
+/atom/movable/attack_hand(mob/living/user)
+	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
+	if(istype(user) && !user.lying && user.a_intent == I_GRAB && !anchored)
+		user.make_grab(src)
+		return 0
+	. = ..()
+
+/atom/movable/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
+	. = ..() || (mover && !mover.density)

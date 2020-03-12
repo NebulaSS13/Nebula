@@ -20,11 +20,14 @@
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
 		if(G.force_danger())
-			G.affecting.dropInto(loc)
-			G.affecting.Weaken(1)
-			user.visible_message("<span class='warning'>\The [user] throws \the [G.affecting] onto \the [src]!</span>")
-			qdel(G)
-	else ..()
+			var/mob/affecting_mob = G.get_affecting_mob()
+			if(affecting_mob)
+				affecting_mob.dropInto(loc)
+				affecting_mob.Weaken(1)
+				user.visible_message("<span class='warning'>\The [user] throws \the [affecting_mob] onto \the [src]!</span>")
+				qdel(G)
+				return
+	..()
 
 /obj/structure/deity/altar/Process()
 	if(!target || world.time < next_cycle)

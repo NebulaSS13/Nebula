@@ -1,5 +1,10 @@
 #if !defined(using_map_DATUM)
 
+	#include "..\..\code\content_packages\misc\mundane.dm"
+	#include "..\..\code\content_packages\misc\spacemen.dm"
+	#include "..\..\code\content_packages\corporate\_corporate.dme"
+	#include "..\..\code\content_packages\psionics\_psionics.dme"
+
 	#include "example_areas.dm"
 	#include "example_shuttles.dm"
 	#include "example_unit_testing.dm"

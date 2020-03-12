@@ -47,6 +47,7 @@
 	required_reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/coco = 1)
 	result_amount = 5
 	mix_message = "The solution thickens into a creamy brown beverage."
+	maximum_temperature = 70 CELSIUS
 
 /datum/chemical_reaction/recipe/nothing
 	name = "Nothing"
@@ -83,5 +84,5 @@
 	result = /datum/reagent/drink/kefir
 	required_reagents = list(/datum/reagent/drink/milk = 2, /datum/reagent/drink/milk/cream = 1)
 	result_amount = 3
-	catalysts = list(/datum/reagent/nutriment)
+	catalysts = list(/datum/reagent/nutriment = 1)
 	mix_message = "The milk ferments into kefir"

@@ -13,7 +13,7 @@
 	blood_mask =      'icons/mob/human_races/species/monkey/blood_mask.dmi'
 
 	greater_form = SPECIES_HUMAN
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 	show_ssd = null
 	health_hud_intensity = 1.75
 
@@ -22,7 +22,7 @@
 	death_message = "lets out a faint chimper as it collapses and stops moving..."
 	tail = "chimptail"
 
-	unarmed_attacks = list(/datum/unarmed_attack/bite, /datum/unarmed_attack/claws, /datum/unarmed_attack/punch)
+	unarmed_attacks = list(/decl/natural_attack/bite, /decl/natural_attack/claws, /decl/natural_attack/punch)
 	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	hud_type = /datum/hud_data/monkey
 	meat_type = /obj/item/chems/food/snacks/meat/monkey
@@ -69,7 +69,7 @@
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
-	if(prob(33) && isturf(H.loc) && !H.pulledby) //won't move if being pulled
+	if(prob(33) && isturf(H.loc) && !LAZYLEN(H.grabbed_by)) //won't move if being pulled
 		H.SelfMove(pick(GLOB.cardinal))
 
 	var/obj/held = H.get_active_hand()

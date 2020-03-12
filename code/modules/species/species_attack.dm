@@ -1,4 +1,4 @@
-/datum/unarmed_attack/bite/sharp //eye teeth
+/decl/natural_attack/bite/sharp //eye teeth
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
@@ -6,14 +6,15 @@
 	edge = 1
 	attack_name = "sharp bite"
 
-/datum/unarmed_attack/diona
+/decl/natural_attack/diona
 	attack_verb = list("lashed", "bludgeoned")
 	attack_noun = list("tendril")
 	eye_attack_text = "a tendril"
 	eye_attack_text_victim = "a tendril"
 	attack_name = "tendrils"
+	usable_with_limbs = list(BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)
 
-/datum/unarmed_attack/claws
+/decl/natural_attack/claws
 	attack_verb = list("scratched", "clawed", "slashed")
 	attack_noun = list("claws")
 	eye_attack_text = "claws"
@@ -23,12 +24,13 @@
 	sharp = 1
 	edge = 1
 	attack_name = "claws"
+	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 	var/blocked_by_gloves = TRUE
 
-/datum/unarmed_attack/claws/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/decl/natural_attack/claws/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	return (!user.gloves || !blocked_by_gloves)
 
-/datum/unarmed_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
 	if(!affecting)
 		return ..()
@@ -65,39 +67,40 @@
 						))
 				if(5)		user.visible_message("<span class='danger'>[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.name]!</span>")
 
-/datum/unarmed_attack/claws/strong
+/decl/natural_attack/claws/strong
 	attack_verb = list("slashed")
 	damage = 5
 	shredding = 1
 	attack_name = "strong claws"
 
-/datum/unarmed_attack/claws/strong/gloves
+/decl/natural_attack/claws/strong/gloves
 	blocked_by_gloves = FALSE
 
-/datum/unarmed_attack/bite/strong
+/decl/natural_attack/bite/strong
 	attack_verb = list("mauled")
 	damage = 8
 	shredding = 1
 	attack_name = "strong bite"
 
-/datum/unarmed_attack/slime_glomp
+/decl/natural_attack/slime_glomp
 	attack_verb = list("glomped")
 	attack_noun = list("body")
 	damage = 2
 	attack_name = "glomp"
+	usable_with_limbs = list(BP_CHEST, BP_GROIN)
 
-/datum/unarmed_attack/slime_glomp/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
+/decl/natural_attack/slime_glomp/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
 	..()
 	user.apply_stored_shock_to(target)
 
-/datum/unarmed_attack/stomp/weak
+/decl/natural_attack/stomp/weak
 	attack_verb = list("jumped on")
 	attack_name = "weak stomp"
 
-/datum/unarmed_attack/stomp/weak/get_unarmed_damage()
+/decl/natural_attack/stomp/weak/get_unarmed_damage()
 	return damage
 
-/datum/unarmed_attack/stomp/weak/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/stomp/weak/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
 	if(affecting)
 		user.visible_message(SPAN_WARNING("\The [user] jumped up and down on \the [target]'s [affecting.name]!"))
@@ -105,12 +108,13 @@
 		user.visible_message(SPAN_WARNING("\The [user] jumped up and down on \the [target]!"))
 	playsound(user.loc, attack_sound, 25, 1, -1)
 
-/datum/unarmed_attack/tail
+/decl/natural_attack/tail
 	attack_verb = list ("bludgeoned", "lashed", "smacked", "whapped")
 	attack_noun = list ("tail")
 	attack_name = "tail swipe"
+	usable_with_limbs = list(BP_GROIN)
 
-/datum/unarmed_attack/tail/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone) //ensures that you can't tail someone in the skull
+/decl/natural_attack/tail/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone) //ensures that you can't tail someone in the skull
 
 	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
 
@@ -131,7 +135,7 @@
 
 	return 0
 
-/datum/unarmed_attack/tail/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
+/decl/natural_attack/tail/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 
 	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
 	if(!affecting)
@@ -148,7 +152,7 @@
 
 		if(8)		user.visible_message("<span class='danger'>[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [organ]!</span>")
 
-/datum/unarmed_attack/nabber
+/decl/natural_attack/nabber
 	attack_verb = list("mauled", "slashed", "struck", "pierced")
 	attack_noun = list("forelimb")
 	damage = 8
@@ -159,25 +163,26 @@
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"
 	attack_name = "forelimb slash"
+	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 
-/datum/unarmed_attack/punch/weak
+/decl/natural_attack/punch/weak
 	attack_verb = list("swiped", "smacked", "smecked")
 	attack_name = "smek"
 
-/datum/unarmed_attack/punch/starborn
+/decl/natural_attack/punch/starborn
 	attack_verb = list("scorched", "burned", "fried")
 	shredding = 1
 	attack_name = "starborn strike"
 
-/datum/unarmed_attack/punch/starborn/get_damage_type()
+/decl/natural_attack/punch/starborn/get_damage_type()
 	return BURN
 
-/datum/unarmed_attack/bite/venom
+/decl/natural_attack/bite/venom
 	attack_verb = list("bit", "sank their fangs into")
 	attack_sound = 'sound/weapons/bite.ogg'
 	damage = 5
 	delay = 120
 	attack_name = "venomous bite"
 
-/datum/unarmed_attack/bite/venom/get_damage_type()
+/decl/natural_attack/bite/venom/get_damage_type()
 	return TOX

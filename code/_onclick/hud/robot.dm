@@ -122,12 +122,6 @@ var/obj/screen/robot_inventory
 	R.oxygen.SetName("oxygen")
 	R.oxygen.screen_loc = ui_oxygen
 
-	R.pullin = new /obj/screen()
-	R.pullin.icon = 'icons/mob/screen1_robot.dmi'
-	R.pullin.icon_state = "pull0"
-	R.pullin.SetName("pull")
-	R.pullin.screen_loc = ui_borg_pull
-
 	R.fire = new /obj/screen()
 	R.fire.icon = 'icons/mob/screen1_robot.dmi'
 	R.fire.icon_state = "fire0"
@@ -146,7 +140,7 @@ var/obj/screen/robot_inventory
 	R.radio_use_icon = new /obj/screen/gun/radio(null)
 
 	R.client.screen = list()
-	R.client.screen += list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.hands, R.healths, R.cells, R.pullin, robot_inventory, R.gun_setting_icon)
+	R.client.screen += list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
 	R.client.screen += adding + other
 
 /datum/hud/proc/toggle_show_robot_modules()

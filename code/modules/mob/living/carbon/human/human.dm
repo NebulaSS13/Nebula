@@ -647,10 +647,6 @@
 			xylophone=0
 	return
 
-/mob/living/proc/check_has_mouth()
-	// mobs do not have mouths by default
-	return 0
-
 /mob/living/carbon/human/check_has_mouth()
 	// Todo, check stomach organ when implemented.
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
@@ -980,7 +976,7 @@
 			if(organ.splinted)
 				continue
 			for(var/obj/item/O in organ.implants)
-				if(!istype(O,/obj/item/implant) && O.w_class > 1 && prob(5)) //Moving with things stuck in you could be bad.
+				if(!istype(O,/obj/item/implant) && O.w_class > ITEM_SIZE_TINY && prob(5)) //Moving with things stuck in you could be bad.
 					jostle_internal_object(organ, O)
 
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
@@ -1113,9 +1109,6 @@
 
 	species = all_species[new_species]
 	species.handle_pre_spawn(src)
-
-	if(species.grab_type)
-		current_grab_type = all_grabobjects[species.grab_type]
 
 	if(species.base_color && default_colour)
 		//Apply colour.
@@ -1394,12 +1387,10 @@
 			return 1
 	return 0
 
-/mob/living/carbon/human/has_eyes()
+/mob/living/carbon/human/check_has_eyes()
 	if(internal_organs_by_name[BP_EYES])
 		var/obj/item/organ/internal/eyes = internal_organs_by_name[BP_EYES]
-		if(eyes && eyes.is_usable())
-			return 1
-	return 0
+		. = eyes && eyes.is_usable()
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
 	if((species.check_no_slip(src)) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))
@@ -1785,11 +1776,6 @@
 	. = ..()
 	for(var/obj/item/clothing/ears/C in list(l_ear, r_ear))
 		. = min(., C.volume_multiplier)
-
-/mob/living/carbon/human/handle_pull_damage(mob/living/puller)
-	. = ..()
-	if(.)
-		drip(1)
 
 /mob/living/carbon/human/get_bullet_impact_effect_type(var/def_zone)
 	var/obj/item/organ/external/E = get_organ(def_zone)

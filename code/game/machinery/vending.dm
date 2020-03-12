@@ -1080,15 +1080,11 @@
 	/obj/item/storage/lunchbox = 3,
 	/obj/item/storage/lunchbox/heart = 3,
 	/obj/item/storage/lunchbox/cat = 3,
-	/obj/item/storage/lunchbox/nt = 3,
 	/obj/item/storage/lunchbox/mars = 3,
 	/obj/item/storage/lunchbox/cti = 3,
 	/obj/item/storage/lunchbox/nymph = 3,
 	/obj/item/storage/lunchbox/syndicate = 3,
-	/obj/item/storage/lunchbox/dais = 3,
 	/obj/item/material/knife/kitchen/cleaver = 1)
-
-
 	contraband = list(/obj/item/material/knife/kitchen/cleaver/bronze = 1,/obj/item/storage/tray/metal/silver = 1)
 
 /obj/machinery/vending/sovietsoda
@@ -1153,7 +1149,7 @@
 	vend_delay = 21
 	base_type = /obj/machinery/vending/engivend
 	req_access = list(list(access_atmospherics,access_engine_equip))
-	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/multitool = 4,/obj/item/geiger = 4,/obj/item/airlock_electronics = 10,/obj/item/module/power_control = 10,/obj/item/airalarm_electronics = 10,/obj/item/cell = 10,/obj/item/clamp = 10)
+	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/multitool = 4,/obj/item/geiger = 4,/obj/item/airlock_electronics = 10,/obj/item/module/power_control = 10,/obj/item/stock_parts/circuitboard/air_alarm = 10,/obj/item/cell = 10,/obj/item/clamp = 10)
 	contraband = list(/obj/item/cell/high = 3)
 	premium = list(/obj/item/storage/belt/utility = 3)
 

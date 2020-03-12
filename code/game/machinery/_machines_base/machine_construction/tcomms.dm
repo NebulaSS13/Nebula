@@ -74,7 +74,7 @@
 		to_chat(user, "You remove the cables.")
 		var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( user.loc )
 		A.amount = 5
-		machine.set_broken(TRUE, TRUE) // the machine's been borked!
+		machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT) // the machine's been borked!
 
 /decl/machine_construction/tcomms/panel_open/unwrenched/mechanics_info()
 	. = list()
@@ -88,7 +88,7 @@
 			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/unwrenched)
 			A.use(5)
 			to_chat(user, "<span class='notice'>You insert the cables.</span>")
-			machine.set_broken(FALSE, TRUE) // the machine's not borked anymore!
+			machine.set_broken(FALSE, MACHINE_BROKEN_CONSTRUCT) // the machine's not borked anymore!
 			return
 		else
 			to_chat(user, "<span class='warning'>You need five coils of wire for this.</span>")

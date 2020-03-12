@@ -26,7 +26,7 @@
 	
 /obj/item/gun/projectile/pistol/military
 	name = "military pistol"
-	desc = "The Hephaestus Industries P20 - a mass produced kinetic sidearm in widespread service with the SCGDF."
+	desc = "The P20 - a mass produced kinetic sidearm in widespread service with the SCGDF."
 	magazine_type = /obj/item/ammo_magazine/pistol/double
 	allowed_magazines = /obj/item/ammo_magazine/pistol/double
 	icon = 'icons/obj/guns/military_pistol.dmi'
@@ -47,7 +47,7 @@
 
 /obj/item/gun/projectile/pistol/sec
 	name = "pistol"
-	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are."
+	desc = "The Mk58 is a cheap, ubiquitous sidearm, produced by a subsidiary of one of the larger manufacturers. Found pretty much everywhere humans are."
 	icon = 'icons/obj/guns/pistol.dmi'
 	icon_state = "secguncomp"
 	safety_icon = "safety"

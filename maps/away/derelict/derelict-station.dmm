@@ -2301,9 +2301,7 @@
 	},
 /area/constructionsite/atmospherics)
 "hu" = (
-/obj/machinery/light_construct{
-	dir = 1
-	},
+/obj/item/frame/light,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hv" = (
@@ -2648,9 +2646,8 @@
 "iH" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "d_air_in";
+	id_tag = "d_air_in";
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced/airmix,
@@ -2746,9 +2743,8 @@
 "iU" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "d_o2_in";
+	id_tag = "d_o2_in";
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -2895,9 +2891,8 @@
 "jr" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1441;
 	icon_state = "map_injector";
-	id = "d_n2_in";
+	id_tag = "d_n2_in";
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced/nitrogen,

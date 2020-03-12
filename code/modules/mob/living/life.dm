@@ -27,9 +27,7 @@
 	//Check if we're on fire
 	handle_fire()
 
-	update_pulling()
-
-	for(var/obj/item/grab/G in src)
+	for(var/obj/item/grab/G in get_active_grabs())
 		G.Process()
 
 	handle_actions()
@@ -54,11 +52,6 @@
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
 	return
-
-/mob/living/proc/update_pulling()
-	if(pulling)
-		if(incapacitated())
-			stop_pulling()
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
 /mob/living/proc/handle_regular_status_updates()

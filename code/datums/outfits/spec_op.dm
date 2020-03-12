@@ -5,7 +5,7 @@
 	l_ear = /obj/item/radio/headset/ert
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/havana
-	head = /obj/item/clothing/head/beret/deathsquad
+	head = /obj/item/clothing/head/beret
 	belt = /obj/item/gun/energy/pulse_rifle/pistol
 	back = /obj/item/storage/backpack/satchel
 	shoes = /obj/item/clothing/shoes/combat
@@ -36,20 +36,6 @@
 
 	id_slot = slot_wear_id
 	id_type = /obj/item/card/id/centcom/ERT
-
-/decl/hierarchy/outfit/death_command
-	name = "Spec Ops - Death commando"
-
-/decl/hierarchy/outfit/death_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
-	GLOB.deathsquad.equip(H)
-	return 1
-
-/decl/hierarchy/outfit/syndicate_command
-	name = "Spec Ops - Syndicate commando"
-
-/decl/hierarchy/outfit/syndicate_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
-	GLOB.commandos.equip(H)
-	return 1
 
 /decl/hierarchy/outfit/mercenary
 	name = "Spec Ops - Mercenary"
@@ -84,13 +70,3 @@
 	head = /obj/item/clothing/head/helmet/space/void/merc
 	back = /obj/item/tank/jetpack/oxygen
 	l_pocket = /obj/item/tank/emergency/oxygen
-
-/decl/hierarchy/outfit/foundation
-	name = "Cuchulain Foundation Agent"
-	glasses =  /obj/item/clothing/glasses/sunglasses
-	uniform =  /obj/item/clothing/under/suit_jacket/charcoal
-	shoes =    /obj/item/clothing/shoes/black
-	l_hand =   /obj/item/storage/briefcase/foundation
-	l_ear =    /obj/item/radio/headset/foundation
-	holster =  /obj/item/clothing/accessory/storage/holster/armpit
-	id_slot =  slot_wear_id

@@ -385,7 +385,7 @@
 	storage_slots = contents.len
 
 	can_hold.Cut()
-	max_w_class = 0
+	max_w_class = ITEM_SIZE_MIN
 	max_storage_space = 0
 	for(var/obj/item/I in src)
 		can_hold[I.type]++

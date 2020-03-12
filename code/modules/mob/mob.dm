@@ -7,8 +7,7 @@
 	QDEL_NULL(hud_used)
 	if(istype(skillset))
 		QDEL_NULL(skillset)
-	for(var/obj/item/grab/G in grabbed_by)
-		qdel(G)
+	QDEL_NULL_LIST(grabbed_by)
 	clear_fullscreen()
 	if(client)
 		remove_screen_obj_references()
@@ -25,7 +24,6 @@
 
 /mob/proc/remove_screen_obj_references()
 	hands = null
-	pullin = null
 	purged = null
 	internals = null
 	oxygen = null
@@ -193,23 +191,22 @@
 	. += move_intent.move_delay
 	. += encumbrance() * (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN)) //Varies between 0.5 and 2, depending on skill
 
-//How much the stuff the mob is pulling contributes to its movement delay.
 /mob/proc/encumbrance()
-	. = 0
-	if(pulling)
+	for(var/obj/item/grab/G in get_active_grabs())
+		var/atom/movable/pulling = G.affecting
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
 			. += between(0, O.w_class, ITEM_SIZE_GARGANTUAN) / 5
 		else if(istype(pulling, /mob))
 			var/mob/M = pulling
-			. += max(0, M.mob_size) / MOB_MEDIUM
+			. += max(0, M.mob_size) / MOB_SIZE_MEDIUM
 		else
 			. += 1
 	. *= (0.8 ** size_strength_mod())
 
 //Determines mob size/strength effects for slowdown purposes. Standard is 0; can be pos/neg.
 /mob/proc/size_strength_mod()
-	return log(2, mob_size / MOB_MEDIUM)
+	return log(2, mob_size / MOB_SIZE_MEDIUM)
 
 /mob/proc/Life()
 //	if(organStructure)
@@ -327,36 +324,36 @@
 	set category = "Object"
 
 	if(!src || !isturf(src.loc) || !(A in view(src.loc)))
-		return 0
+		return FALSE
 	if(istype(A, /obj/effect/decal/point))
-		return 0
+		return FALSE
 
 	var/tile = get_turf(A)
 	if (!tile)
-		return 0
+		return FALSE
 
 	var/obj/P = new /obj/effect/decal/point(tile)
 	P.set_invisibility(invisibility)
-	spawn (20)
-		if(P)
-			qdel(P)	// qdel
+	P.pixel_x = A.pixel_x
+	P.pixel_y = A.pixel_y
+	QDEL_IN(P, 2 SECONDS)
 
 	face_atom(A)
-	return 1
+	return TRUE
 
 //Gets the mob grab conga line.
 /mob/proc/ret_grab(list/L)
-	if (!istype(l_hand, /obj/item/grab) && !istype(r_hand, /obj/item/grab))
+	var/grabs = get_active_grabs()
+	if(!length(grabs))
 		return L
-	if (!L)
+	if(!L)
 		L = list(src)
-	for(var/A in list(l_hand,r_hand))
-		if (istype(A, /obj/item/grab))
-			var/obj/item/grab/G = A
-			if (!(G.affecting in L))
-				L += G.affecting
-				if (G.affecting)
-					G.affecting.ret_grab(L)
+	for(var/obj/item/grab/G in grabs)
+		if(G.affecting && !(G.affecting in L))
+			L += G.affecting
+			var/mob/affecting_mob = G.get_affecting_mob()
+			if(affecting_mob)
+				affecting_mob.ret_grab(L)
 	return L
 
 /mob/verb/mode()
@@ -470,16 +467,16 @@
 
 /mob/living/carbon/human/pull_damage()
 	if(!lying || getBruteLoss() + getFireLoss() < 100)
-		return 0
+		return FALSE
 	for(var/thing in organs)
 		var/obj/item/organ/external/e = thing
 		if(!e || e.is_stump())
 			continue
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
-			return 1
+			return TRUE
 		if(e.status & ORGAN_BLEEDING)
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /mob/MouseDrop(mob/M)
 	..()
@@ -488,84 +485,6 @@
 	if(!Adjacent(usr)) return
 	if(istype(M,/mob/living/silicon/ai)) return
 	show_inv(usr)
-
-
-/mob/verb/stop_pulling()
-
-	set name = "Stop Pulling"
-	set category = "IC"
-
-	if(pulling)
-		pulling.pulledby = null
-		pulling = null
-		if(pullin)
-			pullin.icon_state = "pull0"
-
-/mob/proc/start_pulling(var/atom/movable/AM)
-
-	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
-		return
-
-	if (AM.anchored)
-		to_chat(src, "<span class='warning'>It won't budge!</span>")
-		return
-
-	var/mob/M = AM
-	if(ismob(AM))
-
-		if(!can_pull_mobs || !can_pull_size)
-			to_chat(src, "<span class='warning'>It won't budge!</span>")
-			return
-
-		if((mob_size < M.mob_size) && (can_pull_mobs != MOB_PULL_LARGER))
-			to_chat(src, "<span class='warning'>It won't budge!</span>")
-			return
-
-		if((mob_size == M.mob_size) && (can_pull_mobs == MOB_PULL_SMALLER))
-			to_chat(src, "<span class='warning'>It won't budge!</span>")
-			return
-
-		// If your size is larger than theirs and you have some
-		// kind of mob pull value AT ALL, you will be able to pull
-		// them, so don't bother checking that explicitly.
-
-		if(!iscarbon(src))
-			M.LAssailant = null
-		else
-			M.LAssailant = usr
-
-	else if(isobj(AM))
-		var/obj/I = AM
-		if(!can_pull_size || can_pull_size < I.w_class)
-			to_chat(src, "<span class='warning'>It won't budge!</span>")
-			return
-
-	if(pulling)
-		var/pulling_old = pulling
-		stop_pulling()
-		// Are we pulling the same thing twice? Just stop pulling.
-		if(pulling_old == AM)
-			return
-
-	src.pulling = AM
-	AM.pulledby = src
-
-	if(pullin)
-		pullin.icon_state = "pull1"
-
-	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
-		if(H.pull_damage())
-			to_chat(src, "<span class='danger'>Pulling \the [H] in their current condition would probably be a bad idea.</span>")
-
-		var/obj/item/clothing/C = H.get_covering_equipped_item_by_zone(BP_CHEST)
-		if(istype(C))
-			C.leave_evidence(src)
-
-	//Attempted fix for people flying away through space when cuffed and dragged.
-	if(ismob(AM))
-		var/mob/pulled = AM
-		pulled.inertia_dir = 0
 
 /mob/proc/can_use_hands()
 	return
@@ -678,10 +597,6 @@
 	else
 		set_density(initial(density))
 	reset_layer()
-
-	for(var/obj/item/grab/G in grabbed_by)
-		if(G.force_stand())
-			lying = 0
 
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.
@@ -1128,3 +1043,9 @@
 	if(!skip_delays)
 		to_chat(src, SPAN_WARNING("You scrawl down some meaningless lines."))
 	. = stars(text_content, 5)
+
+// mobs do not have mouths by default
+/mob/proc/check_has_mouth()
+	return FALSE
+/mob/proc/check_has_eyes()
+	return TRUE

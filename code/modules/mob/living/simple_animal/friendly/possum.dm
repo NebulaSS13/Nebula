@@ -25,7 +25,7 @@
 	maxbodytemp = 323
 	universal_speak = FALSE
 	universal_understand = TRUE
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_SMALL

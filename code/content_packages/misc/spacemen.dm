@@ -1,5 +1,8 @@
+#ifndef CONTENT_PACKAGE_SPACEMEN
+#define CONTENT_PACKAGE_SPACEMEN
+
 // SS13/spacetech related concepts.
-/decl/content_package_strings/spacemen
+/decl/content_package/spacemen
 	credits_topics = list("SPACE", "ANCIENT AMERICAN CARTOONS", "SPACEBALL", "DECOMPRESSION PROCEDURES", "XENIC SENSITIVITY", "RADIATION PROTECTION", "XENO MATING RITUALS", "CARBON MONOXIDE")
 	dreams = list(
 		"deep space",                 "blinking lights",         "pirates",            "mercenaries",
@@ -15,6 +18,7 @@
 	credits_crew_names = list("THE CREW")
 	credits_nouns = list("SPACEMEN", "THE VENDOMAT PRICES", "THE SUPERMATTER CRYSTAL")
 
-/decl/content_package_strings/spacemen/New()
+/decl/content_package/spacemen/New()
 	credits_other += "THE LEGEND OF THE ALIEN ARTIFACT: PART [pick("I","II","III","IV","V","VI","VII","VIII","IX", "X", "C","M","L")]"
 	..()
+#endif

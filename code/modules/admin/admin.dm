@@ -116,26 +116,14 @@ var/global/floorIsLava = 0
 		body += "<br>"
 		body += "<a href='?src=\ref[M.mind];add_goal=1'>Add Random Goal</a>"
 
-	body += "<br><br>"
-	body += "<b>Psionics:</b><br/>"
-	if(isliving(M))
-		var/mob/living/psyker = M
-		if(psyker.psi)
-			body += "<a href='?src=\ref[psyker.psi];remove_psionics=1'>Remove psionics.</a><br/><br/>"
-			body += "<a href='?src=\ref[psyker.psi];trigger_psi_latencies=1'>Trigger latencies.</a><br/>"
-		body += "<table width = '100%'>"
-		for(var/faculty in list(PSI_COERCION, PSI_PSYCHOKINESIS, PSI_REDACTION, PSI_ENERGISTICS))
-			var/decl/psionic_faculty/faculty_decl = SSpsi.get_faculty(faculty)
-			var/faculty_rank = psyker.psi ? psyker.psi.get_rank(faculty) : 0
-			body += "<tr><td><b>[faculty_decl.name]</b></td>"
-			for(var/i = 1 to LAZYLEN(GLOB.psychic_ranks_to_strings))
-				var/psi_title = GLOB.psychic_ranks_to_strings[i]
-				if(i == faculty_rank)
-					psi_title = "<b>[psi_title]</b>"
-				body += "<td><a href='?src=\ref[psyker.mind];set_psi_faculty_rank=[i];set_psi_faculty=[faculty]'>[psi_title]</a></td>"
-			body += "</tr>"
-		body += "</table>"
-
+	var/list/all_content_packages = decls_repository.get_decls_of_subtype(/decl/content_package)
+	for(var/package in all_content_packages)
+		var/decl/content_package/manifest = all_content_packages[package]
+		var/extra_body = manifest.get_player_panel_options(M)
+		if(extra_body)
+			body += "<br><br>"
+			body += extra_body
+			
 	if (M.client)
 		if(!istype(M, /mob/new_player))
 			body += "<br><br>"
@@ -848,6 +836,24 @@ var/global/floorIsLava = 0
 		to_chat(usr, "<span class='bigwarning'>Error: Start Now: Game has already started.</span>")
 		return 0
 
+/datum/admins/proc/endnow()
+	set category = "Server"
+	set desc = "Ending game round"
+	set name = "End Round"
+	if(!usr.client.holder || !check_rights(R_ADMIN))
+		return
+
+	if(GAME_STATE != RUNLEVEL_GAME)
+		to_chat(usr, "<span class='bigdanger'>The round has not started yet!</span>")
+		return
+
+	var/confirm = alert("End the game round?", "Game Ending", "Yes", "Cancel")
+	if(confirm == "Yes")
+		SSticker.force_ending = 1
+		log_and_message_admins("initiated a game ending.")
+		to_world("<span class='danger'>Game ending!</span> <span class='notice'>Initiated by [usr.key]!</span>")
+		SSstatistics.add_field("admin_verb","ER") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/admins/proc/toggleenter()
 	set category = "Server"
 	set desc="People can't enter"
@@ -857,7 +863,7 @@ var/global/floorIsLava = 0
 		to_world("<B>New players may no longer enter the game.</B>")
 	else
 		to_world("<B>New players may now enter the game.</B>")
-	log_and_message_admins("[key_name_admin(usr)] toggled new player game entering.")
+	log_and_message_admins("toggled new player game entering.")
 	world.update_status()
 	SSstatistics.add_field_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -934,7 +940,7 @@ var/global/floorIsLava = 0
 	set desc="Toggle admin jumping"
 	set name="Toggle Jump"
 	config.allow_admin_jump = !(config.allow_admin_jump)
-	log_and_message_admins("Toggled admin jumping to [config.allow_admin_jump].")
+	log_and_message_admins("toggled admin jumping to [config.allow_admin_jump].")
 	SSstatistics.add_field_details("admin_verb","TJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adspawn()
@@ -1015,7 +1021,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn every possible custom closet. Do not do this on live."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN))	
+	if(!check_rights(R_SPAWN))
 		return
 
 	if((input(usr, "Are you sure you want to spawn all these closets?", "So Many Closets") as null|anything in list("No", "Yes")) == "Yes")

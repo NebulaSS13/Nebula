@@ -29,10 +29,10 @@ var/list/default_material_composition = list(MAT_STEEL = 0, MAT_ALUMINIUM = 0, M
 	if(!(material in materials))
 		return
 	var/material/mat = SSmaterials.get_material_datum(material)
-	var/eject = Clamp(round(materials[material] / mat.units_per_sheet), 0, amount)
+	var/eject = Clamp(round(materials[material] / SHEET_MATERIAL_AMOUNT), 0, amount)
 	if(eject > 0)
 		mat.place_sheet(loc, eject)
-		materials[material] -= eject * mat.units_per_sheet
+		materials[material] -= eject * SHEET_MATERIAL_AMOUNT
 
 /obj/machinery/r_n_d/proc/TotalMaterials()
 	for(var/f in materials)

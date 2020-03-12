@@ -47,7 +47,7 @@ var/list/mob_hat_cache = list()
 	mob_push_flags = SIMPLE_ANIMAL
 	mob_always_swap = 1
 
-	mob_size = MOB_MEDIUM // Small mobs can't open doors, it's a huge pain for drones.
+	mob_size = MOB_SIZE_MEDIUM // Small mobs can't open doors, it's a huge pain for drones.
 
 	laws = /datum/ai_laws/drone
 
@@ -144,7 +144,7 @@ var/list/mob_hat_cache = list()
 	additional_law_channels["Drone"] = ":d"
 	if(!module) module = new module_type(src)
 
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[GLOB.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with a logo and the subscript: '[GLOB.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...

@@ -32,8 +32,8 @@
 	var/showed_msg = FALSE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		var/datum/unarmed_attack/attack = H.get_unarmed_attack(src)
-		if(attack)
+		var/decl/natural_attack/attack = H.get_unarmed_attack(src)
+		if(istype(attack))
 			attack.show_attack(H, src, H.zone_sel.selecting, 1)
 			showed_msg = TRUE
 	if(!showed_msg)
@@ -200,7 +200,7 @@
 		disturbed()
 
 /obj/effect/spider/spiderling/Crossed(var/mob/living/L)
-	if(dormant && istype(L) && L.mob_size > MOB_TINY)
+	if(dormant && istype(L) && L.mob_size > MOB_SIZE_TINY)
 		disturbed()
 
 /obj/effect/spider/spiderling/disturbed()

@@ -45,7 +45,7 @@
 
 /obj/item/mech_equipment/shields
 	name = "exosuit shield droid"
-	desc = "The Hephaestus Armature system is a well liked energy deflector system designed to stop any projectile before it has a chance to become a threat."
+	desc = "The Armature system is a well-liked energy deflector designed to stop any projectile before it has a chance to become a threat."
 	icon_state = "shield_droid"
 	var/obj/aura/mechshield/aura = null
 	var/max_charge = 250

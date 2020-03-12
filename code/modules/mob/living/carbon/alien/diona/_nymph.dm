@@ -94,7 +94,7 @@
 /mob/living/carbon/alien/diona/proc/handle_npc(var/mob/living/carbon/alien/diona/D)
 	if(D.stat != CONSCIOUS)
 		return
-	if(prob(wander_prob) && isturf(D.loc) && !D.pulledby) //won't move if being pulled
+	if(prob(wander_prob) && !LAZYLEN(grabbed_by) && isturf(D.loc)) //won't move if being pulled
 		SelfMove(pick(GLOB.cardinal))
 	if(prob(emote_prob))
 		D.emote(pick("scratch","jump","chirp","tail"))

@@ -59,8 +59,8 @@
 				if(SSmaterials.alloy_components[metal])
 					attempt_to_alloy[metal] = TRUE
 				else
-					result = min(sheets_per_tick - sheets, Floor(ores_processing[metal] / M.units_per_sheet))
-					ores_processing[metal] -= result * M.units_per_sheet
+					result = min(sheets_per_tick - sheets, Floor(ores_processing[metal] / SHEET_MATERIAL_AMOUNT))
+					ores_processing[metal] -= result * SHEET_MATERIAL_AMOUNT
 					result = -(result)
 			else if(ore_mode == ORE_COMPRESS)
 				result = attempt_compression(M, sheets_per_tick - sheets)
@@ -101,8 +101,8 @@
 					break
 
 /obj/machinery/mineral/processing_unit/proc/attempt_smelt(var/material/metal, var/max_result)
-	. = Clamp(Floor(ores_stored[metal.type]/metal.units_per_sheet),1,max_result)
-	ores_stored[metal.type] -= . * metal.units_per_sheet
+	. = Clamp(Floor(ores_stored[metal.type]/SHEET_MATERIAL_AMOUNT),1,max_result)
+	ores_stored[metal.type] -= . * SHEET_MATERIAL_AMOUNT
 	var/material/M = SSmaterials.get_material_datum(metal.ore_smelts_to)
 	if(istype(M))
 		M.place_sheet(output_turf, .)
@@ -110,9 +110,9 @@
 		. = -(.)
 
 /obj/machinery/mineral/processing_unit/proc/attempt_compression(var/material/metal, var/max_result)
-	var/making = Clamp(Floor(ores_stored[metal.type]/metal.units_per_sheet),1,max_result)
+	var/making = Clamp(Floor(ores_stored[metal.type]/SHEET_MATERIAL_AMOUNT),1,max_result)
 	if(making >= 2)
-		ores_stored[metal.type] -= making * metal.units_per_sheet
+		ores_stored[metal.type] -= making * SHEET_MATERIAL_AMOUNT
 		. = Floor(making * 0.5)
 		var/material/M = SSmaterials.get_material_datum(metal.ore_compresses_to)
 		if(istype(M))
@@ -128,7 +128,7 @@
 	for(var/ore in ores_processing)
 		if(!ores_stored[ore] && !report_all_ores) continue
 		var/material/M = SSmaterials.get_material_datum(ore)
-		var/line = "[capitalize(M.display_name)]</td><td>[Floor(ores_stored[ore] / M.units_per_sheet)] ([ores_stored[ore]]u)"
+		var/line = "[capitalize(M.display_name)]</td><td>[Floor(ores_stored[ore] / SHEET_MATERIAL_AMOUNT)] ([ores_stored[ore]]u)"
 		var/status_string
 		if(ores_processing[ore])
 			switch(ores_processing[ore])

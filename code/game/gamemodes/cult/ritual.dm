@@ -4,7 +4,7 @@
 	icon_state = "tome"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	unique = 1
 	carved = 2 // Don't carve it
 

@@ -11,6 +11,8 @@
 	var/datum/nano_module/skill_ui/NM
 	var/list/nm_viewing
 
+	var/literacy_charges = 2 //used to limit the number of books a master literate mob can make
+
 /datum/skillset/New(mob/mob)
 	owner = mob
 	for(var/datum/skill_verb/SV in GLOB.skill_verbs)
@@ -78,7 +80,7 @@
 //Skill-related mob helper procs
 
 /mob/proc/get_skill_value(skill_path)
-	return skillset.get_value(skill_path)
+	return skillset?.get_value(skill_path)
 
 /mob/proc/reset_skillset()
 	qdel(skillset)
@@ -102,8 +104,8 @@
 /mob/proc/get_skill_difference(skill_path, mob/opponent)
 	return get_skill_value(skill_path) - opponent.get_skill_value(skill_path)
 
-// A generic way of modifying times via skill values	
-/mob/proc/skill_delay_mult(skill_path, factor = 0.3) 
+// A generic way of modifying times via skill values
+/mob/proc/skill_delay_mult(skill_path, factor = 0.3)
 	var/points = get_skill_value(skill_path)
 	switch(points)
 		if(SKILL_BASIC)
@@ -117,7 +119,7 @@
 	return do_after(src, base_delay * skill_delay_mult(skill_path, factor), target)
 
 // A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_NONE.
-/mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1) 
+/mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
 	var/points = get_skill_value(skill_path)
 	if(points >= no_more_fail)
 		return 0

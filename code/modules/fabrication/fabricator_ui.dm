@@ -16,7 +16,7 @@
 			var/list/material_data = list()
 			var/mat_name = capitalize(stored_substances_to_names[material])
 			material_data["name"] =        mat_name
-			material_data["stored"] =      stored_material[material]
+			material_data["stored"] =      "[stored_material[material]][SHEET_UNIT]"
 			material_data["max"] =         storage_capacity[material]
 			material_data["eject_key"] =   stored_substances_to_names[material]
 			material_data["eject_label"] = ispath(material, /material) ? "Eject" : "Flush"
@@ -68,7 +68,7 @@
 						max_sheets = sheets
 					if(stored_material[material] < round(R.resources[material]*mat_efficiency))
 						build_option["unavailable"] = 1
-					material_components += "[round(R.resources[material] * mat_efficiency)] [stored_substances_to_names[material]]"
+					material_components += "[round(R.resources[material] * mat_efficiency)][SHEET_UNIT] [stored_substances_to_names[material]]"
 				build_option["cost"] = "[capitalize(jointext(material_components, ", "))]."
 			if(R.max_amount >= PRINT_MULTIPLIER_DIVISOR && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
 				build_option["multiplier"] = list()

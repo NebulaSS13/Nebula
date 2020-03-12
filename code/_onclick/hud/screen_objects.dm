@@ -284,8 +284,6 @@
 		if("act_intent")
 			usr.a_intent_change("right")
 
-		if("pull")
-			usr.stop_pulling()
 		if("throw")
 			if(!usr.stat && isturf(usr.loc) && !usr.restrained())
 				usr.toggle_throw_mode()
@@ -296,9 +294,6 @@
 		if("module")
 			if(isrobot(usr))
 				var/mob/living/silicon/robot/R = usr
-//				if(R.module)
-//					R.hud_used.toggle_show_robot_modules()
-//					return 1
 				R.pick_module()
 
 		if("inventory")

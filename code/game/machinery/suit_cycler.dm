@@ -154,7 +154,6 @@
 			return
 
 		if(try_move_inside(G.affecting, user))
-			user.drop_from_inventory(G)
 			qdel(G)
 			updateUsrDialog()
 			return

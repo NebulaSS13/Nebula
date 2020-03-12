@@ -83,12 +83,10 @@
 
 /mob/living/carbon/attack_hand(var/mob/living/carbon/human/M)
 	if(istype(M)) 
-		var/obj/item/organ/external/temp = M.organs_by_name[BP_R_HAND]
-		if (M.hand)
-			temp = M.organs_by_name[BP_L_HAND]
-		if(temp && !temp.is_usable())
+		var/obj/item/organ/external/temp = M.organs_by_name[M.hand ? BP_L_HAND : BP_R_HAND]
+		if(!temp || !temp.is_usable())
 			to_chat(M, SPAN_WARNING("You can't use your [temp.name]."))
-			return
+			return TRUE
 	. = ..()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
@@ -315,7 +313,7 @@
 	if(!src.lastarea)
 		src.lastarea = get_area(src.loc)
 	if((istype(src.loc, /turf/space)) || (src.lastarea.has_gravity == 0))
-		if(prob((itemsize * itemsize * 10) * MOB_MEDIUM/src.mob_size))
+		if(prob((itemsize * itemsize * 10) * MOB_SIZE_MEDIUM/src.mob_size))
 			src.inertia_dir = get_dir(target, src)
 			step(src, inertia_dir)
 
@@ -369,7 +367,6 @@
 		return FALSE
 	if(buckled)
 		return FALSE
-	stop_pulling()
 	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(Floor(stun_duration/2))

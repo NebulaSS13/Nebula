@@ -4,9 +4,9 @@
 
 /datum/news_announcement
 	var/round_time // time of the round at which this should be announced, in seconds
-	var/message // body of the message
-	var/author = "NanoTrasen Editor"
-	var/channel_name = "Nyx Daily"
+	var/message    // body of the message
+	var/author = "Editor"
+	var/channel_name = "News Daily"
 	var/can_be_redacted = 0
 	var/message_type = "Story"
 
@@ -118,7 +118,6 @@
 
 	var/author = news.author ? news.author : sendto.author
 	news_network.SubmitArticle(news.message, author, news.channel_name, null, !news.can_be_redacted, news.message_type)
-
 
 /proc/GetNameAndAssignmentFromId(var/obj/item/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)

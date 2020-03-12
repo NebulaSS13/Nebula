@@ -21,7 +21,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	universal_understand = TRUE
 	holder_type = /obj/item/holder/borer
-	mob_size = MOB_SMALL
+	mob_size = MOB_SIZE_SMALL
 	can_escape = TRUE
 
 	bleed_colour = "#816e12"
@@ -38,7 +38,6 @@
 		"Septenary", "Octonary", "Novenary", "Decenary", "Undenary", "Duodenary",
 		)
 
-	var/image/aura_image
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
 	var/truename                            // Name used for brainworm-speak.
 	var/controlling                         // Used in human death check.
@@ -94,24 +93,7 @@
 	if(!roundstart) 
 		request_player()
 
-	aura_image = create_aura_image(src)
-	aura_image.color = "#aaffaa"
-	aura_image.blend_mode = BLEND_SUBTRACT
-	aura_image.alpha = 125
-	var/matrix/M = matrix()
-	M.Scale(0.33)
-	aura_image.transform = M
-
-/mob/living/simple_animal/borer/death(gibbed, deathmessage, show_dead_message)
-	if(aura_image)
-		destroy_aura_image(aura_image)
-		aura_image = null
-	. = ..()
-
 /mob/living/simple_animal/borer/Destroy()
-	if(aura_image)
-		destroy_aura_image(aura_image)
-		aura_image = null
 	if(client)
 		client.screen -= hud_elements
 		client.screen -= hud_intent_selector

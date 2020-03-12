@@ -982,10 +982,7 @@
 /area/ship/scrap/broken2)
 "bX" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/light_construct/small{
-	icon_state = "bulb-construct-stage1";
-	dir = 1
-	},
+/obj/item/frame/light/small,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/broken2)
 "bY" = (
@@ -2154,7 +2151,7 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/item/airalarm_electronics,
+/obj/item/stock_parts/circuitboard/air_alarm,
 /obj/item/airlock_electronics,
 /obj/item/airlock_electronics,
 /obj/structure/table/rack,

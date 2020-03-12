@@ -1,81 +1,57 @@
 /mob/living/carbon/human/proc/get_unarmed_attack(var/mob/target, var/hit_zone = null)
 	if(!hit_zone)
 		hit_zone = zone_sel.selecting
+	var/list/available_attacks = get_natural_attacks()
+	if(!default_attack || !default_attack.is_usable(src, target, hit_zone) || !(default_attack.type in available_attacks))
+		default_attack = null
+		var/list/other_attacks = list()
+		for(var/u_attack_type in available_attacks)
+			var/decl/natural_attack/u_attack = decls_repository.get_decl(u_attack_type)
+			if(!u_attack.is_usable(src, target, hit_zone))
+				continue
+			if(u_attack.is_starting_default)
+				default_attack = u_attack
+				break
+			other_attacks += u_attack
+		if(!default_attack && length(other_attacks))
+			default_attack = pick(other_attacks)
+	. = default_attack && default_attack.resolve_to_soft_variant(src)
 
-	if(default_attack && default_attack.is_usable(src, target, hit_zone))
-		if(pulling_punches)
-			var/datum/unarmed_attack/soft_type = default_attack.get_sparring_variant()
-			if(soft_type)
-				return soft_type
-		return default_attack
-
-	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
-		if(u_attack.is_usable(src, target, hit_zone))
-			if(pulling_punches)
-				var/datum/unarmed_attack/soft_variant = u_attack.get_sparring_variant()
-				if(soft_variant)
-					return soft_variant
-			return u_attack
-	return null
+/mob/living/carbon/human/proc/get_natural_attacks()
+	. = list()
+	for(var/obj/item/organ/external/limb in organs)
+		if(length(limb.unarmed_attacks) && limb.is_usable())
+			. |= limb.unarmed_attacks
 
 /mob/living/carbon/human/attack_hand(mob/living/carbon/M)
 
-	var/mob/living/carbon/human/H = M
-	if(istype(H))
-		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-		if(H.hand)
-			temp = H.organs_by_name[BP_L_HAND]
-		if(!temp || !temp.is_usable())
-			to_chat(H, "<span class='warning'>You can't use your hand.</span>")
-			return
+	. = ..()
+	if(.)
+		return
 
-	..()
 	remove_cloaking_source(species)
+
+	// Grabs are handled at a lower level.
+	if(istype(M) && M.a_intent == I_GRAB)
+		return 0
+
 	// Should this all be in Touch()?
+	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
-			return 0
+			return TRUE
 
-		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
-			H.do_attack_animation(src)
-			var/damage = rand(0, 9)
-			if(!damage)
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message("<span class='danger'>\The [H] has attempted to punch \the [src]!</span>")
-				return 0
-			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-
-			if(MUTATION_HULK in H.mutations)
-				damage += 5
-
-			playsound(loc, "punch", 25, 1, -1)
-
-			update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
-			H.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
-
-			visible_message("<span class='danger'>[H] has punched \the [src]!</span>")
-
-			apply_damage(damage, PAIN, affecting)
-			if(damage >= 9)
-				visible_message("<span class='danger'>[H] has weakened \the [src]!</span>")
-				var/armor_block = 100 * get_blocked_ratio(affecting, BRUTE, damage = damage)
-				apply_effect(4, WEAKEN, armor_block)
-
-			return
-
-	if(istype(H))
 		for (var/obj/item/grab/G in H)
 			if (G.assailant == H && G.affecting == src)
 				if(G.resolve_openhand_attack())
-					return 1
-
+					return TRUE
 
 	switch(M.a_intent)
 		if(I_HELP)
 			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath))
 				if (!cpr_time)
-					return 0
+					return TRUE
 
 				var/pumping_skill = max(M.get_skill_value(SKILL_MEDICAL),M.get_skill_value(SKILL_ANATOMY))
 				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2)
@@ -85,7 +61,7 @@
 
 				if(!do_after(H, cpr_delay, src))
 					cpr_time = 1
-					return
+					return TRUE
 				cpr_time = 1
 
 				H.visible_message("<span class='notice'>\The [H] performs CPR on \the [src]!</span>")
@@ -105,21 +81,21 @@
 
 				if(!H.check_has_mouth())
 					to_chat(H, "<span class='warning'>You don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
-					return
+					return TRUE
 				if(!check_has_mouth())
 					to_chat(H, "<span class='warning'>They don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
-					return
+					return TRUE
 				if((H.head && (H.head.body_parts_covered & FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & FACE)))
 					to_chat(H, "<span class='warning'>You need to remove your mouth covering for mouth-to-mouth resuscitation!</span>")
-					return 0
+					return TRUE
 				if((head && (head.body_parts_covered & FACE)) || (wear_mask && (wear_mask.body_parts_covered & FACE)))
 					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!</span>")
-					return 0
+					return TRUE
 				if (!H.internal_organs_by_name[H.species.breathing_organ])
 					to_chat(H, "<span class='danger'>You need lungs for mouth-to-mouth resuscitation!</span>")
-					return
+					return TRUE
 				if(!need_breathe())
-					return
+					return TRUE
 				var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
 				if(L)
 					var/datum/gas_mixture/breath = H.get_breath_from_environment()
@@ -129,19 +105,16 @@
 
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
-			return 1
-
-		if(I_GRAB)
-			return H.species.attempt_grab(H, src)
+			return TRUE
 
 		if(I_HURT)
 			if(H.incapacitated())
 				to_chat(H, "<span class='notice'>You can't attack while incapacitated.</span>")
-				return
+				return TRUE
 
 			if(!istype(H))
 				attack_generic(H,rand(1,3),"punched")
-				return
+				return TRUE
 
 			var/rand_damage = rand(1, 5)
 			var/block = 0
@@ -150,18 +123,18 @@
 			var/obj/item/organ/external/affecting = get_organ(hit_zone)
 
 			// See what attack they use
-			var/datum/unarmed_attack/attack = H.get_unarmed_attack(src, hit_zone)
+			var/decl/natural_attack/attack = H.get_unarmed_attack(src, hit_zone)
 			if(!attack)
-				return 0
+				return TRUE
 			if(world.time < H.last_attack + attack.delay)
 				to_chat(H, "<span class='notice'>You can't attack again so soon.</span>")
-				return 0
+				return TRUE
 			else
 				H.last_attack = world.time
 
 			if(!affecting || affecting.is_stump())
 				to_chat(M, "<span class='danger'>They are missing that limb!</span>")
-				return 1
+				return TRUE
 
 			switch(src.a_intent)
 				if(I_HELP)
@@ -173,11 +146,11 @@
 					if(MayMove() && src!=H && prob(20))
 						block = 1
 
-			if (M.grabbed_by.len)
+			if (LAZYLEN(M.grabbed_by))
 				// Someone got a good grip on them, they won't be able to do much damage
 				rand_damage = max(1, rand_damage - 2)
 
-			if(src.grabbed_by.len || !src.MayMove() || src==H || H.species.species_flags & SPECIES_FLAG_NO_BLOCK)
+			if(LAZYLEN(grabbed_by) || !src.MayMove() || src==H || H.species.species_flags & SPECIES_FLAG_NO_BLOCK)
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
 				rand_damage = 5
 
@@ -233,7 +206,7 @@
 			admin_attack_log(H, src, "[miss_type ? (miss_type == 1 ? "Has missed" : "Was blocked by") : "Has [pick(attack.attack_verb)]"] their victim.", "[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] their attacker", "[miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"]")
 
 			if(miss_type)
-				return 0
+				return TRUE
 
 			var/real_damage = rand_damage
 			real_damage += attack.get_unarmed_damage(H)
@@ -245,16 +218,15 @@
 			real_damage = max(1, real_damage)
 			// Apply additional unarmed effects.
 			attack.apply_effects(H, src, rand_damage, hit_zone)
-
 			// Finally, apply damage to target
 			apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
+			return TRUE
 
 		if(I_DISARM)
 			if(H.species)
 				admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
 				H.species.disarm_attackhand(H, src)
-
-	return
+				return TRUE
 
 /mob/living/carbon/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
 	return
@@ -276,11 +248,6 @@
 //Breaks all grips and pulls that the mob currently has.
 /mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
 	var/success = 0
-	if(pulling)
-		visible_message("<span class='danger'>[user] has broken [src]'s grip on [pulling]!</span>")
-		success = 1
-		stop_pulling()
-
 	if(istype(l_hand, /obj/item/grab))
 		var/obj/item/grab/lgrab = l_hand
 		if(lgrab.affecting)
@@ -339,12 +306,14 @@
 	set src = usr
 
 	var/list/choices = list()
-	for(var/thing in species.unarmed_attacks)
-		var/datum/unarmed_attack/u_attack = thing
-		choices[u_attack.attack_name] = u_attack
+	for(var/thing in get_natural_attacks())
+		var/decl/natural_attack/u_attack = decls_repository.get_decl(thing)
+		if(istype(u_attack))
+			choices[u_attack.attack_name] = u_attack
 
 	var/selection = input("Select a default attack (currently selected: [default_attack ? default_attack.attack_name : "none"]).", "Default Unarmed Attack") as null|anything in choices
-	if(selection && !(choices[selection] in species.unarmed_attacks))
+	var/decl/natural_attack/new_attack = choices[selection]
+	if(selection && !(new_attack.type in get_natural_attacks()))
 		return
 
 	default_attack = selection ? choices[selection] : null

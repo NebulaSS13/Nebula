@@ -27,11 +27,6 @@
 		bomb = ARMOR_BOMB_MINOR
 		)
 
-/obj/item/clothing/suit/armor/vest/old/security
-	name = "security armor"
-	desc = "An armored vest that protects against some damage. This one has a corporate badge."
-	icon_state = "armorsec"
-
 /obj/item/clothing/suit/armor/vest/warden
 	name = "warden's jacket"
 	desc = "An armoured jacket with silver rank pips and livery."
@@ -130,39 +125,6 @@
 	src.item_state = "reactiveoff"
 	..()
 
-//Non-hardsuit ERT armor.
-//Commander
-/obj/item/clothing/suit/armor/vest/ert
-	name = "asset protection command armor"
-	desc = "A set of armor worn by many corporate and private asset protection forces. Has blue highlights."
-	icon_state = "ertarmor_cmd"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED
-		)
-
-//Security
-/obj/item/clothing/suit/armor/vest/ert/security
-	name = "asset protection security armor"
-	desc = "A set of armor worn by many corporate and private asset protection forces. Has red highlights."
-	icon_state = "ertarmor_sec"
-
-//Engineer
-/obj/item/clothing/suit/armor/vest/ert/engineer
-	name = "asset protection engineering armor"
-	desc = "A set of armor worn by many corporate and private asset protection forces. Has orange highlights."
-	icon_state = "ertarmor_eng"
-
-//Medical
-/obj/item/clothing/suit/armor/vest/ert/medical
-	name = "asset protection medical armor"
-	desc = "A set of armor worn by many corporate and private asset protection forces. Has red and white highlights."
-	icon_state = "ertarmor_med"
-
 //New Vests
 /obj/item/clothing/suit/armor/vest
 	name = "armored vest"
@@ -176,11 +138,6 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
-
-/obj/item/clothing/suit/armor/vest/nt
-	name = "corporate armored vest"
-	desc = "A synthetic armor vest. This one is marked with a corporate logo."
-	icon_state = "ntvest"
 
 /obj/item/clothing/suit/armor/vest/detective
 	name = "brown armored vest"
@@ -217,11 +174,6 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
-
-/obj/item/clothing/suit/storage/vest/nt
-	name = "corporate security heavy armored vest"
-	desc = "A synthetic armor vest with CORPORATE SECURITY printed in red lettering on the chest. This one has added webbing and ballistic plates."
-	icon_state = "ntwebvest"
 
 /obj/item/clothing/suit/storage/vest/nt/warden
 	name = "warden heavy armored vest"
@@ -279,17 +231,11 @@
 /obj/item/clothing/suit/armor/pcarrier/light
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate)
 
-/obj/item/clothing/suit/armor/pcarrier/light/nt
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/nt)
-
 /obj/item/clothing/suit/armor/pcarrier/light/press
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/press)
 
 /obj/item/clothing/suit/armor/pcarrier/medium
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate/medium, /obj/item/clothing/accessory/storage/pouches)
-
-/obj/item/clothing/suit/armor/pcarrier/medium/nt
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate/medium, /obj/item/clothing/accessory/storage/pouches, /obj/item/clothing/accessory/armor/tag/nt)
 
 /obj/item/clothing/suit/armor/pcarrier/blue
 	name = "blue plate carrier"
@@ -442,8 +388,3 @@
 	desc = "Pukish armor."
 	icon_state = "tdgreen"
 	siemens_coefficient = 1
-
-/obj/item/clothing/suit/storage/vest/tactical/mirania
-	name = "bundeforz armored vest"
-	desc = "A heavy armored vest in a light grey urban camo. It is surprisingly flexible and light, even with the extra webbing and advanced ceramic plates."
-	icon_state = "m_vest"

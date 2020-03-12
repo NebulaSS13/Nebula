@@ -458,16 +458,6 @@
 		"research" = COLOR_CLOSET_GOLD
 	)
 
-/decl/closet_appearance/secure_closet/corporate
-	color = COLOR_GREEN_GRAY
-	decals = list(
-		"lower_holes"
-	)
-	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_GRAY80,
-		"research" = COLOR_OFF_WHITE
-	)
-
 /decl/closet_appearance/secure_closet/hydroponics
 	color = COLOR_GREEN_GRAY
 	decals = list(

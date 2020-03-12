@@ -12,7 +12,6 @@
 	allowed_ranks = null
 	allowed_branches = null
 	skill_points = 25
-	give_psionic_implant_on_join = FALSE
 	max_skill = list(   SKILL_LITERACY = SKILL_MAX,
 	                    SKILL_FINANCE = SKILL_MAX,
 	                    SKILL_EVA = SKILL_MAX,

@@ -118,13 +118,19 @@
 	if (!G.force_danger())
 		to_chat(G.assailant, SPAN_WARNING("You need a better grip to do that!"))
 		return TRUE
+	var/mob/affecting_mob = G.get_affecting_mob()
 	if (G.assailant.a_intent == I_HURT)
+
+		if(!affecting_mob)
+			to_chat(G.assailant, SPAN_WARNING("You need to be grabbing a living creature to do that!"))
+			return TRUE
+
 		// Slam their face against the table.
-		var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
+		var/blocked = affecting_mob.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 		if (prob(30 * (1 - blocked)))
-			G.affecting.Weaken(5)
-		G.affecting.apply_damage(8, BRUTE, BP_HEAD)
-		visible_message(SPAN_DANGER("[G.assailant] slams [G.affecting]'s face against \the [src]!"))
+			affecting_mob.Weaken(5)
+		affecting_mob.apply_damage(8, BRUTE, BP_HEAD)
+		visible_message(SPAN_DANGER("[G.assailant] slams [affecting_mob]'s face against \the [src]!"))
 		if (material)
 			playsound(loc, material.tableslam_noise, 50, 1)
 		else
@@ -132,8 +138,8 @@
 		var/list/L = take_damage(rand(1,5))
 		for(var/obj/item/material/shard/S in L)
 			if(S.sharp && prob(50))
-				G.affecting.visible_message(SPAN_DANGER("\The [S] slices into [G.affecting]'s face!"), SPAN_DANGER("\The [S] slices into your face!"))
-				G.affecting.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)
+				affecting_mob.visible_message(SPAN_DANGER("\The [S] slices into [affecting_mob]'s face!"), SPAN_DANGER("\The [S] slices into your face!"))
+				affecting_mob.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)
 		qdel(G)
 	else if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		var/obj/occupied = turf_is_crowded()
@@ -141,7 +147,8 @@
 			to_chat(G.assailant, SPAN_WARNING("There's \a [occupied] in the way."))
 			return TRUE
 		G.affecting.forceMove(src.loc)
-		G.affecting.Weaken(rand(2,5))
+		if(affecting_mob)
+			affecting_mob.Weaken(rand(2,5))
 		visible_message(SPAN_DANGER("[G.assailant] puts [G.affecting] on \the [src]."))
 		qdel(G)
 		return TRUE

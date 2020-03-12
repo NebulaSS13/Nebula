@@ -9,6 +9,8 @@
 	footstep_type = /decl/footsteps/catwalk
 	obj_flags = OBJ_FLAG_NOFALL
 	handle_generic_blending = TRUE
+	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
+
 	var/hatch_open = FALSE
 	var/obj/item/stack/tile/mono/plated_tile
 	var/list/connections
@@ -36,8 +38,12 @@
 	update_icon()
 
 /obj/structure/catwalk/Destroy()
+	var/turf/oldloc = loc
 	redraw_nearby_catwalks()
-	return ..()
+	. = ..()
+	if(istype(oldloc))
+		for(var/atom/movable/AM in oldloc)
+			AM.fall(oldloc)
 
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
 	for(var/direction in GLOB.alldirs)
@@ -69,11 +75,6 @@
 			new /obj/item/stack/material/rods(loc)
 			qdel(src)
 
-/obj/structure/catwalk/attack_hand(mob/user)
-	if(user.pulling)
-		do_pull_click(user, src)
-	..()
-
 /obj/structure/catwalk/attack_robot(var/mob/user)
 	if(Adjacent(user))
 		attack_hand(user)
@@ -81,6 +82,12 @@
 /obj/structure/catwalk/attackby(obj/item/C, mob/user)
 	. = ..()
 	if(!.)
+
+		if(istype(C, /obj/item/grab))
+			var/obj/item/grab/G = C
+			G.affecting.forceMove(get_turf(src))
+			return TRUE
+
 		if(istype(C, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = C
 			if(!cutter.slice(user))

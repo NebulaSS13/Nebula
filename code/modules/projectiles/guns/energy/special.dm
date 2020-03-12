@@ -1,6 +1,6 @@
 /obj/item/gun/energy/ionrifle
 	name = "ion rifle"
-	desc = "The NT Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats, produced by NT. Not the best of its type."
+	desc = "The Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats. Not the best of its type."
 	icon = 'icons/obj/guns/ion_rifle.dmi'
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
@@ -22,7 +22,7 @@
 
 /obj/item/gun/energy/ionrifle/small
 	name = "ion pistol"
-	desc = "The NT Mk72 EW Preston is a personal defense weapon designed to disable mechanical threats."
+	desc = "The Mk72 EW Preston is a personal defense weapon designed to disable mechanical threats."
 	icon = 'icons/obj/guns/ion_pistol.dmi'
 	icon_state = "ionpistol"
 	item_state = "ionpistol"
@@ -187,6 +187,9 @@
 		return 1
 	handle_click_empty(M)
 	return 0
+
+/obj/item/gun/energy/plasmacutter/is_special_cutting_tool()
+	return TRUE
 
 /obj/item/gun/energy/incendiary_laser
 	name = "dispersive blaster"

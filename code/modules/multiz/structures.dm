@@ -160,7 +160,7 @@
 
 	add_fingerprint(M)
 
-	for(var/obj/item/grab/G in M)
+	for(var/obj/item/grab/G in M.get_active_grabs())
 		G.adjust_position()
 
 	var/direction = target_ladder == target_up ? "up" : "down"
@@ -217,12 +217,9 @@
 		to_chat(src, SPAN_WARNING("You are physically unable to climb \the [ladder]."))
 		return FALSE
 	var/carry_count = 0
-	for(var/obj/item/grab/G in src)
-		if(!G.ladder_carry())
-			to_chat(src, SPAN_WARNING("You can't carry [G.affecting] up \the [ladder]."))
-			return FALSE
-		else
-			carry_count++
+	for(var/obj/item/grab/G in get_active_grabs())
+		to_chat(src, SPAN_WARNING("You can't carry \the [G.affecting] up \the [ladder]."))
+		return FALSE
 	if(carry_count > 1)
 		to_chat(src, SPAN_WARNING("You can't carry more than one person up \the [ladder]."))
 		return FALSE
@@ -297,8 +294,8 @@
 		A.forceMove(target)
 		if(isliving(A))
 			var/mob/living/L = A
-			if(L.pulling)
-				L.pulling.forceMove(target)
+			for(var/obj/item/grab/G in L.get_active_grabs())
+				G.affecting.forceMove(target)
 		if(ishuman(A))
 			var/mob/living/carbon/human/H = A
 			if(H.has_footsteps())

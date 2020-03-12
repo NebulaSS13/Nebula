@@ -46,7 +46,7 @@
 	blood_color = "#ffff00"
 	flesh_color = "#ffff00"
 
-	unarmed_attacks = list(/datum/unarmed_attack/punch/starborn)
+	unarmed_attacks = list(/decl/natural_attack/punch/starborn)
 
 	cold_discomfort_level = 300
 	cold_discomfort_strings = list("You feel your fire dying out...",

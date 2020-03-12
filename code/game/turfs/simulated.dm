@@ -158,7 +158,7 @@
 	if(isCoil(thing) && can_build_cable(user))
 		var/obj/item/stack/cable_coil/coil = thing
 		coil.turf_place(src, user)
-		return
+		return TRUE
 	return ..()
 
 /turf/simulated/Initialize()

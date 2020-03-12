@@ -251,10 +251,9 @@
 /atom/proc/CtrlClick(var/mob/user)
 	return FALSE
 
-/atom/movable/CtrlClick(var/mob/user)
-	if(Adjacent(user))
-		user.start_pulling(src)
-		return TRUE
+/atom/movable/CtrlClick(var/mob/living/user)
+	if(istype(user) && CanPhysicallyInteract(user) && !user.lying)
+		return user.make_grab(src)
 	. = ..()
 
 /*

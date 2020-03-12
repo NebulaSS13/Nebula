@@ -21,14 +21,6 @@
 	display_name = "poncho, engineering"
 	path = /obj/item/clothing/suit/poncho/roles/engineering
 
-/datum/gear/suit/science_poncho
-	display_name = "poncho, science"
-	path = /obj/item/clothing/suit/poncho/roles/science
-
-/datum/gear/suit/nanotrasen_poncho
-	display_name = "poncho, NanoTrasen"
-	path = /obj/item/clothing/suit/poncho/roles/science/nanotrasen
-
 /datum/gear/suit/cargo_poncho
 	display_name = "poncho, supply"
 	path = /obj/item/clothing/suit/poncho/roles/cargo
@@ -69,7 +61,6 @@
 	var/hoodies = list()
 	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/cti
 	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/mu
-	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/nt
 	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/smw
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(hoodies)
 
@@ -81,11 +72,6 @@
 /datum/gear/suit/labcoat_blue
 	display_name = "blue trimmed labcoat"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
-
-/datum/gear/suit/labcoat_corp
-	display_name = "labcoat, corporate colors"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
-	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/suit/coat
 	display_name = "coat, colour select"
@@ -100,8 +86,6 @@
 	..()
 	var/jackets = list()
 	jackets += /obj/item/clothing/suit/storage/toggle/bomber
-	jackets += /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
-	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	jackets += /obj/item/clothing/suit/storage/leather_jacket
 	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket
 	jackets += /obj/item/clothing/suit/storage/mbill

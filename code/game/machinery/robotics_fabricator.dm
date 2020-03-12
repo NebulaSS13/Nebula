@@ -14,7 +14,7 @@
 	stat_immune = 0
 
 	var/speed = 1
-	var/mat_efficiency = 1
+	var/mat_efficiency = 2
 	var/list/materials = list(
 		MAT_STEEL =     0, 
 		MAT_ALUMINIUM = 0, 
@@ -26,7 +26,7 @@
 		MAT_URANIUM =   0, 
 		MAT_DIAMOND =   0
 	)
-	var/res_max_amount = 200000
+	var/res_max_amount = 100 * SHEET_MATERIAL_AMOUNT
 
 	var/datum/research/files
 	var/list/datum/design/queue = list()
@@ -73,7 +73,7 @@
 	res_max_amount = 100000 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
 
 	var/T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 4)
-	mat_efficiency = 1 - (T - 1) / 4 // 1 -> 0.5
+	mat_efficiency = Clamp(initial(mat_efficiency) - (T - 1) / 4, 1, 4)
 
 	T += total_component_rating_of_type(/obj/item/stock_parts/micro_laser)// Not resetting T is intended; speed is affected by both
 	speed = T / 2 // 1 -> 3
@@ -161,7 +161,6 @@
 	var/material = stack.material.type
 	var/stack_singular = "[stack.material.use_name] [stack.material.sheet_singular_name]" // eg "steel sheet", "wood plank"
 	var/stack_plural = "[stack.material.use_name] [stack.material.sheet_plural_name]" // eg "steel sheets", "wood planks"
-	var/amnt = stack.perunit
 
 	if(stack.uses_charge)
 		return
@@ -170,14 +169,14 @@
 		to_chat(user, "<span class=warning>\The [src] does not accept [stack_plural]!</span>")
 		return
 
-	if(materials[material] + amnt <= res_max_amount)
+	if(materials[material] + SHEET_MATERIAL_AMOUNT <= res_max_amount)
 		if(stack && stack.can_use(1))
 			var/count = 0
 			overlays += "fab-load-metal"
 			spawn(10)
 				overlays -= "fab-load-metal"
-			while(materials[material] + amnt <= res_max_amount && stack.amount >= 1)
-				materials[material] += amnt
+			while(materials[material] + SHEET_MATERIAL_AMOUNT <= res_max_amount && stack.amount >= 1)
+				materials[material] += SHEET_MATERIAL_AMOUNT
 				stack.use(1)
 				count++
 			to_chat(user, "You insert [count] [count==1 ? stack_singular : stack_plural] into the fabricator.")// 0 steel sheets, 1 steel sheet, 2 steel sheets, etc
@@ -245,12 +244,8 @@
 	for(var/M in D.materials)
 		materials[M] = max(0, materials[M] - D.materials[M] * mat_efficiency)
 	if(D.build_path)
-		var/obj/new_item = D.Fabricate(loc, src)
+		D.Fabricate(loc, src)
 		visible_message("\The [src] pings, indicating that \the [D] is complete.", "You hear a ping.")
-		if(mat_efficiency != 1)
-			if(new_item.matter && new_item.matter.len > 0)
-				for(var/i in new_item.matter)
-					new_item.matter[i] = new_item.matter[i] * mat_efficiency
 	remove_from_queue(1)
 
 /obj/machinery/robotics_fabricator/proc/get_queue_names()
@@ -283,13 +278,13 @@
 		if(!D.build_path || !(D.build_type & MECHFAB))
 			continue
 		categories |= D.category
-	if(!category || !(category in categories))
+	if(length(categories) && (!category || !(category in categories)))
 		category = categories[1]
 
 /obj/machinery/robotics_fabricator/proc/get_materials()
 	. = list()
 	for(var/T in materials)
-		. += list(list("mat" = "[T]", "amt" = materials[T]))
+		. += list(list("mat" = "[T]", "amt" = "[materials[T]][SHEET_UNIT]"))
 
 /obj/machinery/robotics_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
 	var/recursive = amount == -1 ? 1 : 0
@@ -299,13 +294,13 @@
 	var/obj/item/stack/material/S = new mat.stack_type(loc, 0, material)
 	if(amount <= 0)
 		amount = S.max_amount
-	var/ejected = min(round(materials[material] / S.perunit), amount)
+	var/ejected = min(round(materials[material] / SHEET_MATERIAL_AMOUNT), amount)
 	S.amount = min(ejected, amount)
 	if(S.amount <= 0)
 		qdel(S)
 		return
-	materials[material] -= ejected * S.perunit
-	if(recursive && materials[material] >= S.perunit)
+	materials[material] -= ejected * SHEET_MATERIAL_AMOUNT
+	if(recursive && materials[material] >= SHEET_MATERIAL_AMOUNT)
 		eject_materials(material, -1)
 	update_busy()
 
