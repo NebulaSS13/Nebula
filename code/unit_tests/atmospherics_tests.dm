@@ -293,6 +293,26 @@
 		pass("All pipes belonged to a unique pipeline.")
 	return 1
 
+/datum/unit_test/pipelines_shall_belong_to_unique_pipenets
+	name = "ATMOS MACHINERY: all pipelines shall belong to a unique pipenet"
+
+/datum/unit_test/pipelines_shall_belong_to_unique_pipenets/start_test()
+	var/list/checked_pipelines = list()
+	var/list/bad_pipenets = list()
+	for(var/datum/pipe_network/network)
+		for(var/thing in network.line_members)
+			if(!checked_pipelines[thing])
+				checked_pipelines[thing] = network
+				continue
+			LAZYDISTINCTADD(bad_pipenets[network], thing)
+			LAZYDISTINCTADD(bad_pipenets[checked_pipelines[thing]], thing)
+
+	if(length(bad_pipenets))
+		fail("There were [length(bad_pipenets)] which shared at least one pipeline with another pipenet.")
+	else
+		pass("All pipelines belonged to a unique pipenet.")
+	return 1
+
 /datum/unit_test/atmos_machinery_shall_not_have_conflicting_connections
 	name = "ATMOS MACHINERY: all mapped atmos machinery shall not have more than one connection of each type per dir."
 
