@@ -56,6 +56,7 @@
 	var/list/accesses = list()
 	var/giv_name = "NOT SPECIFIED"
 	var/reason = "NOT SPECIFIED"
+	var/duration_max = 60
 	var/duration = 5
 
 	var/list/internal_log = list()
@@ -101,7 +102,7 @@
 				"selected" = (A in accesses))))
 
 		data["giver_access"] = giver_access
-		
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "guestpass.tmpl", "Guest Pass Terminal", 600, 800)
@@ -126,10 +127,10 @@
 			. = TOPIC_REFRESH
 
 	else if (href_list["duration"])
-		var/dur = input(user, "Duration (in minutes) during which pass is valid (up to 60 minutes).", "Duration") as num|null
+		var/dur = input(user, "Duration (in minutes) during which pass is valid (up to [duration_max] minutes).", "Duration") as num|null
 		if (dur && CanUseTopic(user, state))
-			if (dur > 0 && dur <= 30)
-				duration = dur
+			if (dur > 0 && dur <= duration_max)
+				duration = round(dur, 1)
 				. = TOPIC_REFRESH
 			else
 				to_chat(user, SPAN_WARNING("Invalid duration."))
