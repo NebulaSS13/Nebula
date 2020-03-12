@@ -24,7 +24,7 @@ Buildable meters
 /obj/item/pipe/Initialize(var/mapload, var/obj/machinery/atmospherics/P)
 	. = ..(mapload, null)
 	set_extension(src, /datum/extension/parts_stash)
-	if(!P)
+	if(!istype(P))
 		return
 	if(!P.dir)
 		set_dir(SOUTH)
