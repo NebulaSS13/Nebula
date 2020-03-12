@@ -32,6 +32,9 @@
 		machine.queue_icon_update()
 		return
 	if(istype(I, /obj/item/storage/part_replacer))
+		var/obj/item/storage/part_replacer/replacer = I
+		if(replacer.remote_interaction)
+			machine.part_replacement(user, replacer)
 		machine.display_parts(user)
 		return TRUE
 

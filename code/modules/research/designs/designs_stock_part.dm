@@ -123,6 +123,15 @@
 	build_path = /obj/item/storage/part_replacer
 	sort_string = "CBAAA"
 
+/datum/design/item/stock_part/RPED_BS
+	name = "bluespace Rapid Part Exchange Device"
+	desc = "Powered by bluespace technology, this RPED variant can upgrade buildings from a distance, without needing to remove the panel first."
+	id = "rped_bs"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_MATERIAL = 5, TECH_BLUESPACE = 4)
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_GLASS = 5000, MATERIAL_SILVER = 2000)
+	build_path = /obj/item/storage/part_replacer/bluespace
+	sort_string = "CBAAB"
+
 /datum/design/item/stock_part/subspace_ansible
 	id = "s-ansible"
 	req_tech = list(TECH_DATA = 3, TECH_MAGNET = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
