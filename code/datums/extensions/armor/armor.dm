@@ -94,8 +94,6 @@
 				key = "bio" // Otherwise just not blocked by default.
 		if(IRRADIATE)
 			key = "rad"
-		if(PSIONIC)
-			key = PSIONIC
 	return key
 
 /datum/extension/armor/toggle

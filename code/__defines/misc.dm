@@ -286,3 +286,7 @@
 
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
 #define ADD_ARTICLE(X) "[(lowertext(copytext(X, 1, 2)) in list("a", "e", "i", "o", "u")) ? "an" : "a"] [X]"
+
+#define SOULSTONE_CRACKED -1
+#define SOULSTONE_EMPTY 0
+#define SOULSTONE_ESSENCE 1

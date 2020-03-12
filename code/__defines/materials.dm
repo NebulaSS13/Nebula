@@ -59,7 +59,6 @@
 #define MAT_CARPET                  /material/carpet
 #define MAT_ALUMINIUM               /material/aluminium
 #define MAT_ALUMINIUM_HOLOGRAPHIC   /material/aluminium/holographic
-#define MAT_NULLGLASS               /material/nullglass
 // gasses
 #define MAT_CO2                     /material/gas/carbon_dioxide
 #define MAT_CO                      /material/gas/carbon_monoxide

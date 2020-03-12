@@ -3,6 +3,7 @@
 	#include "..\..\code\content_packages\misc\mundane.dm"
 	#include "..\..\code\content_packages\misc\spacemen.dm"
 	#include "..\..\code\content_packages\corporate\_corporate.dme"
+	#include "..\..\code\content_packages\psionics\_psionics.dme"
 
 	#include "example_areas.dm"
 	#include "example_shuttles.dm"

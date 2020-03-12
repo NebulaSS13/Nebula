@@ -18,8 +18,6 @@
 	var/natural_armor = get_extension(src, /datum/extension/armor)
 	if(natural_armor)
 		. += natural_armor
-	if(psi)
-		. += get_extension(psi, /datum/extension/armor)
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 

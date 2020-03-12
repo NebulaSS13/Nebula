@@ -184,8 +184,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	description = "This procedure patches physical damage to a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/weldingtool = 100,
-		/obj/item/gun/energy/plasmacutter = 50,
-		/obj/item/psychic_power/psiblade/master = 100
+		/obj/item/gun/energy/plasmacutter = 50
 	)
 
 	min_duration = 50

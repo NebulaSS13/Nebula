@@ -222,11 +222,6 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		to_chat(user, "<span class='warning'>You shouldn't have this spell! Something's wrong.</span>")
 		return 0
 
-	var/spell_leech = user.disrupts_psionics()
-	if(spell_leech)
-		to_chat(user, SPAN_WARNING("You try to marshal your energy, but find it leeched away by \the [spell_leech]!"))
-		return 0
-
 	var/turf/user_turf = get_turf(user)
 	if(!user_turf)
 		to_chat(user, "<span class='warning'>You cannot cast spells in null space!</span>")

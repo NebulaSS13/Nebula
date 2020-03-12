@@ -218,6 +218,9 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
+/obj/item/melee/energy/blade/is_special_cutting_tool(var/high_power)
+	return TRUE
+
 /obj/item/melee/energy/blade/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 

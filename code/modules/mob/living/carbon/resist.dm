@@ -29,6 +29,9 @@
 	if(handcuffed)
 		spawn() escape_handcuffs()
 
+/mob/living/carbon/proc/get_cuff_breakout_mod()
+	return 1
+
 /mob/living/carbon/proc/escape_handcuffs()
 	//if(!(last_special <= world.time)) return
 
@@ -49,9 +52,7 @@
 	if(istype(H) && H.gloves && istype(H.gloves,/obj/item/clothing/gloves/rig))
 		breakouttime /= 2
 
-	if(psi && psi.can_use())
-		var/psi_mod = (1 - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2))
-		breakouttime = max(5, breakouttime * psi_mod)
+	breakouttime = max(5, breakouttime * get_cuff_breakout_mod())
 
 	visible_message(
 		"<span class='danger'>\The [src] attempts to remove \the [HC]!</span>",
@@ -97,7 +98,7 @@
 	return
 
 /mob/living/proc/can_break_cuffs()
-	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= 5)
+	. = FALSE
 
 /mob/living/carbon/can_break_cuffs()
 	. = ..() || (MUTATION_HULK in mutations)
@@ -129,6 +130,9 @@
 /mob/living/carbon/human/can_break_cuffs()
 	. = ..() || species.can_shred(src,1)
 
+/mob/living/carbon/proc/get_special_resist_time()
+	return 0
+
 /mob/living/carbon/escape_buckle()
 	var/unbuckle_time
 	if(src.handcuffed && istype(src.buckled, /obj/effect/energy_net))
@@ -141,9 +145,7 @@
 		..()
 	else
 		setClickCooldown(100)
-		unbuckle_time = 2 MINUTES
-		if(psi && psi.can_use())
-			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))
+		unbuckle_time = max(0, (2 MINUTES) - get_special_resist_time())
 
 		visible_message(
 			"<span class='danger'>[src] attempts to unbuckle themself!</span>",

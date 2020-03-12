@@ -188,6 +188,9 @@
 	handle_click_empty(M)
 	return 0
 
+/obj/item/gun/energy/plasmacutter/is_special_cutting_tool()
+	return TRUE
+
 /obj/item/gun/energy/incendiary_laser
 	name = "dispersive blaster"
 	desc = "The A&M 'Shayatin' was the first of a now-banned class of dispersive laser weapons which, instead of firing a focused beam, scan over a target rapidly with the goal of setting it ablaze."
