@@ -216,8 +216,12 @@
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
+	if(get_preference_value(/datum/client_preference/fullscreen_mode) == GLOB.PREF_YES)
+		toggle_fullscreen(src, TRUE)
+
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
+
 	//////////////
 	//DISCONNECT//
 	//////////////
@@ -393,7 +397,7 @@ client/verb/character_setup()
 	var/mob/living/M = mob
 	if(istype(M))
 		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
-	
+
 /client/verb/SetWindowIconSize(var/val as num|text)
 	set hidden = 1
 	winset(src, "mapwindow.map", "icon-size=[val]")
@@ -453,3 +457,15 @@ client/verb/character_setup()
 		if(C.mob.l_general)
 			C.mob.l_general.fit_to_client_view(C.last_view_x_dim, C.last_view_y_dim)
 		C.mob.reload_fullscreen()
+
+/proc/toggle_fullscreen(client/C, new_value)
+	if(!C)
+		return
+	if(new_value == TRUE)
+		winset(C, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=menu")
+		winset(C, "mainwindow.mainvsplit", "pos=0x0")
+	else
+		winset(C, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
+		winset(C, "mainwindow.mainvsplit", "pos=3x0")
+	winset(C, "mainwindow", "is-maximized=true")
+	C.OnResize()
