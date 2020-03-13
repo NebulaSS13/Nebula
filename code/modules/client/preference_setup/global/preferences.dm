@@ -191,7 +191,8 @@ var/list/_client_preferences_by_type
 	default_value = GLOB.PREF_NO
 
 /datum/client_preference/fullscreen_mode/changed(mob/preference_mob, new_value)
-	toggle_fullscreen(preference_mob.client, new_value == GLOB.PREF_YES)
+	if(preference_mob.client)
+		preference_mob.client.toggle_fullscreen(new_value == GLOB.PREF_YES)
 
 /datum/client_preference/autohiss
 	description = "Autohiss"
