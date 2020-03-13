@@ -168,6 +168,7 @@
 	if(holder)
 		GLOB.admins += src
 		holder.owner = src
+		handle_staff_login()
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = SScharacter_setup.preferences_datums[ckey]
@@ -226,6 +227,7 @@
 	if(src && watched_variables_window)
 		STOP_PROCESSING(SSprocessing, watched_variables_window)
 	if(holder)
+		handle_staff_logout()
 		holder.owner = null
 		GLOB.admins -= src
 	GLOB.ckey_directory -= ckey
@@ -331,6 +333,19 @@
 
 #undef UPLOAD_LIMIT
 
+/client/proc/handle_staff_login()
+	if(admin_datums[ckey] && SSticker)
+		message_staff("\[[holder.rank]\] [key_name(src)] logged in.")
+
+/client/proc/handle_staff_logout()
+	if(admin_datums[ckey] && GAME_STATE == RUNLEVEL_GAME) //Only report this stuff if we are currently playing.
+		message_staff("\[[holder.rank]\] [key_name(src)] logged out.")
+		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
+			send2adminirc("[key_name(src)] logged out - no more staff online.")
+			if(config.delist_when_no_admins && GLOB.visibility_pref)
+				world.update_hub_visibility()
+				send2adminirc("Toggled hub visibility. The server is now invisible ([GLOB.visibility_pref]).")
+
 //checks if a client is afk
 //3000 frames = 5 minutes
 /client/proc/is_afk(duration=3000)
@@ -393,7 +408,7 @@ client/verb/character_setup()
 	var/mob/living/M = mob
 	if(istype(M))
 		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
-	
+
 /client/verb/SetWindowIconSize(var/val as num|text)
 	set hidden = 1
 	winset(src, "mapwindow.map", "icon-size=[val]")
