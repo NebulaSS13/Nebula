@@ -44,6 +44,7 @@ var/list/airlock_overlays = list()
 	var/mineral = null
 	var/justzap = 0
 	var/safe = 1
+	var/speaker = 1
 	normalspeed = 1
 	var/obj/item/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
@@ -456,7 +457,8 @@ About the new airlock wires panel:
 			set_airlock_overlays(AIRLOCK_DENY)
 			if(density && arePowerSystemsOn())
 				flick("deny", src)
-				playsound(loc, open_failure_access_denied, 50, 0)
+				if(speaker)
+					playsound(loc, open_failure_access_denied, 50, 0)
 			update_icon(AIRLOCK_CLOSED)
 		if("emag")
 			set_airlock_overlays(AIRLOCK_EMAG)
