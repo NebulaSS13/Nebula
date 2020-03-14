@@ -9,6 +9,7 @@ var/list/client_preference_stats_
 	if(!client_preference_stats_)
 		client_preference_stats_ = list()
 		for(var/datum/client_preference/client_pref in get_client_preferences())
+			ADD_SORTED(client_preference_stats_, client_pref.description, /proc/cmp_text_asc)
 			client_preference_stats_[client_pref.description] = new /stat_client_preference(null, client_pref)
 
 	for(var/client_pref_description in client_preference_stats_)
