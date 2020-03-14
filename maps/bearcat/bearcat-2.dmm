@@ -54,7 +54,7 @@
 /turf/space,
 /area/space)
 "ar" = (
-/obj/machinery/door/blast/regular,
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/command/captain)
 "as" = (

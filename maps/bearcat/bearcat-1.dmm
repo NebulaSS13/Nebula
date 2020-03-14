@@ -29,9 +29,7 @@
 /turf/simulated/wall,
 /area/ship/bearcat/escape_port)
 "ai" = (
-/obj/machinery/door/blast/regular{
-	dir = 4
-	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/escape_port)
 "aj" = (
@@ -64,9 +62,7 @@
 /turf/simulated/wall,
 /area/ship/bearcat/cargo/lower)
 "ap" = (
-/obj/machinery/door/blast/regular{
-	dir = 8
-	},
+/obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/escape_star)
 "aq" = (
@@ -121,10 +117,6 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light_switch{
-	pixel_x = 0;
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled,
 /area/ship/bearcat/cargo/lower)
 "ax" = (
@@ -1336,6 +1328,13 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/bearcat/cargo/lower)
+"dg" = (
+/obj/machinery/light_switch{
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled,
+/area/ship/bearcat/cargo/lower)
 "dh" = (
 /obj/structure/stairs/east,
 /obj/effect/floor_decal/industrial/warning{
@@ -2427,7 +2426,7 @@
 "ob" = (
 /obj/structure/mopbucket,
 /obj/structure/table/rack{
-	dir = 8;
+	dir = 8
 	},
 /obj/item/storage/toolbox/mechanical,
 /obj/item/multitool{
@@ -6329,7 +6328,7 @@ pr
 lE
 al
 al
-aU
+dg
 aU
 bf
 bw
