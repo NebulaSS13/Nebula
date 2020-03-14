@@ -2,12 +2,12 @@
 
 /datum/wires/airlock/secure
 	random = 1
-	wire_count = 14
+	wire_count = 15
 	window_y = 680
 
 /datum/wires/airlock
 	holder_type = /obj/machinery/door/airlock
-	wire_count = 12
+	wire_count = 13
 	window_y = 570
 	descriptions = list(
 		new /datum/wire_description(AIRLOCK_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERT),
@@ -21,7 +21,8 @@
 		new /datum/wire_description(AIRLOCK_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
 		new /datum/wire_description(AIRLOCK_WIRE_SAFETY, "This wire connects to a safety override."),
 		new /datum/wire_description(AIRLOCK_WIRE_SPEED, "This wire appears to connect to the airlock's proximity detector modules."),
-		new /datum/wire_description(AIRLOCK_WIRE_LIGHT, "This wire powers the airlock's built-in lighting.", SKILL_EXPERT)
+		new /datum/wire_description(AIRLOCK_WIRE_LIGHT, "This wire powers the airlock's built-in lighting.", SKILL_EXPERT),
+		new /datum/wire_description(AIRLOCK_WIRE_SPEAKER, "This wire connects to the door speaker.")
 	)
 
 var/const/AIRLOCK_WIRE_IDSCAN = 1
@@ -36,6 +37,7 @@ var/const/AIRLOCK_WIRE_ELECTRIFY = 256
 var/const/AIRLOCK_WIRE_SAFETY = 512
 var/const/AIRLOCK_WIRE_SPEED = 1024
 var/const/AIRLOCK_WIRE_LIGHT = 2048
+var/const/AIRLOCK_WIRE_SPEAKER = 4096
 
 /datum/wires/airlock/CanUse(var/mob/living/L)
 	var/obj/machinery/door/airlock/A = holder
@@ -52,7 +54,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 	var/haspower = A.arePowerSystemsOn() //If there's no power, then no lights will be on.
 
 	. += ..()
-	. += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]",
+	. += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]",
 	(A.locked ? "The door bolts have fallen!" : "The door bolts look up."),
 	((A.lights && haspower) ? "The door bolt lights are on." : "The door bolt lights are off!"),
 	((haspower) ? "The test light is on." : "The test light is off!"),
@@ -60,10 +62,10 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 	((A.aiControlDisabled==0 && !A.emagged && haspower)? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),
 	((A.safe==0 && haspower)? "The 'Check Wiring' light is on." : "The 'Check Wiring' light is off."),
 	((A.normalspeed==0 && haspower)? "The 'Check Timing Mechanism' light is on." : "The 'Check Timing Mechanism' light is off."),
-	((A.aiDisabledIdScanner==0 && haspower)? "The IDScan light is on." : "The IDScan light is off."))
+	((A.aiDisabledIdScanner==0 && haspower)? "The IDScan light is on." : "The IDScan light is off."),
+	((A.speaker && haspower) ? "The door speaker is on." : "The door speaker is off."))
 
 /datum/wires/airlock/UpdateCut(var/index, var/mended)
-
 	var/obj/machinery/door/airlock/A = holder
 	switch(index)
 		if(AIRLOCK_WIRE_IDSCAN)
@@ -131,9 +133,10 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 			A.lights = mended
 			A.update_icon()
 
+		if(AIRLOCK_WIRE_SPEAKER)
+			A.speaker = mended
 
 /datum/wires/airlock/UpdatePulsed(var/index)
-
 	var/obj/machinery/door/airlock/A = holder
 	switch(index)
 		if(AIRLOCK_WIRE_IDSCAN)
@@ -188,3 +191,6 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 		if(AIRLOCK_WIRE_LIGHT)
 			A.lights = !A.lights
 			A.update_icon()
+
+		if(AIRLOCK_WIRE_SPEAKER)
+			A.speaker = !A.speaker
