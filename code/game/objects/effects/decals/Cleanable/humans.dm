@@ -63,6 +63,7 @@ var/global/list/image/splatter_cache=list()
 	for(var/obj/effect/decal/cleanable/blood/B in loc)
 		if(B != src && B.blood_size != BLOOD_SIZE_NO_MERGE)
 			if(B.blood_DNA)
+				blood_size = BLOOD_SIZE_NO_MERGE
 				B.blood_DNA |= blood_DNA.Copy()
 			return TRUE
 
