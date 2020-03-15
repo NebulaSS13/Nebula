@@ -66,3 +66,7 @@
 /datum/fabricator_recipe/arms_ammo/hidden/stunshell
 	name = "ammunition (stun cartridge, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/stunshell
+
+/datum/fabricator_recipe/arms_ammo/hidden/speedloader_laser
+	name = "ammunition (speedloader, laserbulb)"
+	path = /obj/item/ammo_magazine/laser_revolver

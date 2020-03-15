@@ -3,6 +3,8 @@
 #define CALIBER_PISTOL_MAGNUM 	"15mm"
 #define CALIBER_PISTOL_FLECHETTE "4mm"
 
+#define CALIBER_PISTOL_LASBULB 	"11mm lasbulb"
+
 #define CALIBER_RIFLE  			"5mmR"
 #define CALIBER_ANTIMATERIAL    "15mmR"
 
