@@ -72,6 +72,7 @@
 	has_base_range = 3
 	damage_temperature = T0C+80
 	can_engrave = FALSE
+	footstep_type = /decl/footsteps/grass
 
 /decl/flooring/asteroid
 	name = "coarse sand"
@@ -81,6 +82,7 @@
 	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
 	build_type = null
 	can_engrave = FALSE
+	footstep_type = /decl/footsteps/asteroid
 
 /decl/flooring/carpet
 	name = "brown carpet"
@@ -356,3 +358,14 @@
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	color = "#00ffe1"
+
+/decl/flooring/snow
+	name = "snow"
+	desc = "Let is sno-ow... Let is snow..."
+	icon = 'icons/turf/snow.dmi'
+	icon_base = "snow"
+	has_base_range = 12
+	flags = TURF_REMOVE_SHOVEL
+	build_type = null
+	can_engrave = FALSE
+	footstep_type = /decl/footsteps/snow
