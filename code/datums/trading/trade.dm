@@ -130,15 +130,24 @@
 
 /datum/trader/proc/get_item_value(var/trading_num, skill = SKILL_MAX)
 	if(!trading_items[trading_items[trading_num]])
-		var/type = trading_items[trading_num]
-		var/value = get_value(type)
+		var/item_type = trading_items[trading_num]
+		var/atom/movable/thing = new item_type
+		var/value = thing.get_combined_monetary_worth()
+		if(!QDELETED(thing))
+			qdel(thing)
 		value = round(rand(100 - price_rng,100 + price_rng)/100 * value) //For some reason rand doesn't like decimals.
-		trading_items[type] = value
+		trading_items[item_type] = value
 	. = trading_items[trading_items[trading_num]]
 	. *= 1 + (margin - 1) * skill_curve(skill) //Trader will overcharge at lower skill.
 
-/datum/trader/proc/get_buy_price(item, is_wanted, skill = SKILL_MAX)
-	. = get_value(item)
+/datum/trader/proc/get_buy_price(var/atom/movable/item, is_wanted, skill = SKILL_MAX)
+	if(ispath(item, /atom/movable))
+		var/atom/movable/thing = new item
+		. = thing.get_combined_monetary_worth()
+		if(!QDELETED(thing))
+			qdel(thing)
+	else if(istype(item))
+		. = item.get_combined_monetary_worth()
 	if(is_wanted)
 		. *= want_multiplier
 	. *= max(1 - (margin - 1) * skill_curve(skill), 0.1) //Trader will underpay at lower skill.

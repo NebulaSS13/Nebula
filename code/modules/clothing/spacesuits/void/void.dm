@@ -18,7 +18,6 @@
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	min_pressure_protection = 0
 	siemens_coefficient = 0.4
-
 	light_overlay = "helmet_light"
 
 /obj/item/clothing/suit/space/void

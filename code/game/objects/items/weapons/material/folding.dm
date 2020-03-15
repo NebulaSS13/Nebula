@@ -97,7 +97,6 @@
 	material_force_multiplier = 0.25
 	thrown_material_force_multiplier = 0.25
 	takes_colour = FALSE
-	base_worth = 8
 
 /obj/item/material/knife/folding/combat/balisong
 	name = "butterfly knife"

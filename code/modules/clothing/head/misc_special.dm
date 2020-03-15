@@ -20,7 +20,6 @@
 		slot_r_hand_str = "welding",
 		)
 	matter = list(MAT_STEEL = 3000, MAT_GLASS = 1000)
-	var/up = 0
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
@@ -29,9 +28,10 @@
 	action_button_name = "Flip Welding Mask"
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
-	var/base_state
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
+	var/up = 0
+	var/base_state
 
 /obj/item/clothing/head/welding/attack_self()
 	if(!base_state)

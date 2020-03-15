@@ -14,10 +14,10 @@
 	amount_per_transfer_from_this = 10
 	unacidable = 1 //plastic
 	possible_transfer_amounts = @"[5,10]"
+	volume = 250
 	var/spray_size = 3
 	var/list/spray_sizes = list(1,3)
 	var/step_delay = 10 // lower is faster
-	volume = 250
 
 /obj/item/chems/spray/Initialize()
 	. = ..()

@@ -14,7 +14,6 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	base_parry_chance = 50
 	melee_accuracy_bonus = 10
-	base_worth = 30
 
 /obj/item/material/sword/replica
 	max_force = 10
@@ -22,7 +21,6 @@
 	sharp = 0
 	material_force_multiplier = 0.2
 	thrown_material_force_multiplier = 0.2
-	base_worth = 15
 
 /obj/item/material/sword/katana
 	name = "katana"
