@@ -10,6 +10,9 @@
 /obj/item/inflatable/attack_self(mob/user)
 	if(!deploy_path)
 		return
+	if(!isturf(user.loc))
+		to_chat(user, SPAN_WARNING("\The [src] cannot be inflated here."))
+		return
 	user.visible_message("[user] starts inflating \the [src].", "You start inflating \the [src].")
 	if(!do_after(user, 1 SECOND, src))
 		return
