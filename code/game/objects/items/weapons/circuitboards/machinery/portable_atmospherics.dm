@@ -50,3 +50,19 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
+
+/obj/item/stock_parts/circuitboard/dehumidifier
+	name = T_BOARD("emergency dehumidifier")
+	board_type = "machine"
+	build_path = /obj/machinery/dehumidifier
+	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_POWER + "':4}"
+	req_components = list(
+		/obj/item/stock_parts/capacitor = 2,
+		/obj/item/stock_parts/matter_bin = 2,
+		/obj/item/pipe = 2)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/battery/buildable/stock = 1,
+		/obj/item/cell = 1
+	)
