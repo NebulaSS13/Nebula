@@ -661,6 +661,7 @@
 #include "code\game\machinery\constructable_frame.dm"
 #include "code\game\machinery\cracker.dm"
 #include "code\game\machinery\cryopod.dm"
+#include "code\game\machinery\dehumidifier.dm"
 #include "code\game\machinery\deployable.dm"
 #include "code\game\machinery\doppler_array.dm"
 #include "code\game\machinery\flasher.dm"
