@@ -273,7 +273,7 @@
 	name = "floor"
 	icon_state = "techfloor_grid"
 	initial_flooring = /decl/flooring/tiling/tech/grid
-	
+
 /turf/simulated/floor/lino
 	name = "lino"
 	icon = 'icons/turf/flooring/linoleum.dmi'
@@ -324,10 +324,7 @@
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
-
-/turf/simulated/floor/snow/Initialize()
-	. = ..()
-	icon_state = pick("snow[rand(1,12)]","snow0")
+	initial_flooring = /decl/flooring/snow
 
 /turf/simulated/floor/light
 /turf/simulated/floor/airless/ceiling
