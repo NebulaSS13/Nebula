@@ -1,6 +1,7 @@
 /obj/screen/ai_button
 	var/mob/living/silicon/ai/ai_verb
-	var/list/input_procs = list()
+	var/list/input_procs
+	var/list/input_args
 	icon = 'icons/mob/screen_ai.dmi'
 	var/list/template_icon = list(null, "template")
 	var/image/template_undelay
@@ -12,7 +13,7 @@
 	if(!(ai_verb in A.verbs))
 		return TRUE
 
-	var/input_args = list()
+	var/input_arguments = list()
 	for(var/input_proc in input_procs)
 		var/input_flags = input_procs[input_proc]
 		var/input_arg
@@ -29,21 +30,27 @@
 		if(!(ai_verb in A.verbs) || A.incapacitated())
 			return
 
-		input_args += input_arg
+		input_arguments += input_arg
 
-	call(A, ai_verb)(arglist(input_args))
+	if(length(input_args))
+		input_arguments |= input_args
+
+	call(A, ai_verb)(arglist(input_arguments))
 	return TRUE
 
-/obj/screen/ai_button/Initialize(var/ml, var/nscreen_loc, var/nname, var/nicon_state, var/nai_verb, var/list/ninput_procs = null)
+/obj/screen/ai_button/Initialize(maploading, screen_loc, name, icon_state, ai_verb, list/input_procs = null, list/input_args = null)
 	. = ..()
 	if(!LAZYLEN(template_icon))
 		template_icon = list(icon)
 
-	name = nname
-	icon_state = nicon_state
-	screen_loc = nscreen_loc
-	ai_verb = nai_verb
-	if(ninput_procs) input_procs.Add(ninput_procs)
+	src.name = name
+	src.icon_state = icon_state
+	src.screen_loc = screen_loc
+	src.ai_verb = ai_verb
+	if(input_procs)
+		src.input_procs = input_procs.Copy()
+	if(input_args)
+		src.input_args = input_args.Copy()
 
 	template_undelay = image(template_icon[1], template_icon[2])
 	underlays += template_undelay

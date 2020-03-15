@@ -57,7 +57,9 @@
 			ui_ai_crew_manifest,
 			"Show Crew Manifest",
 			"manifest",
-			/mob/living/silicon/ai/proc/ai_roster
+			/mob/living/silicon/proc/open_subsystem,
+			null,
+			list(/datum/computer_file/program/crew_manifest)
 			)
 
 	adding += new /obj/screen/ai_button(null,
