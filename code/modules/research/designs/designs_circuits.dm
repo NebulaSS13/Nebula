@@ -788,3 +788,9 @@
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_path = /obj/item/stock_parts/circuitboard/modular_computer
 	sort_string = "XAAAD"
+
+/datum/design/circuit/shipsensors
+	name = "ship sensors"
+	id = "shipsensors"
+	build_path = /obj/item/stock_parts/circuitboard/shipsensors
+	sort_string = "XAAAE"

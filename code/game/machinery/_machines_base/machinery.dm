@@ -147,32 +147,6 @@ Class Procs:
 /obj/machinery/Process()
 	return PROCESS_KILL // Only process if you need to.
 
-/obj/machinery/emp_act(severity)
-	if(use_power && stat == 0)
-		use_power_oneoff(7500/severity)
-
-		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
-		pulse2.icon = 'icons/effects/effects.dmi'
-		pulse2.icon_state = "empdisable"
-		pulse2.SetName("emp sparks")
-		pulse2.anchored = 1
-		pulse2.set_dir(pick(GLOB.cardinal))
-
-		spawn(10)
-			qdel(pulse2)
-	..()
-
-/obj/machinery/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-		if(2.0)
-			if (prob(50))
-				qdel(src)
-		if(3.0)
-			if (prob(25))
-				qdel(src)
-
 /obj/machinery/proc/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
 	if(stat_immune & BROKEN)
 		return FALSE
@@ -325,7 +299,7 @@ Class Procs:
 	for(var/thing in component_parts)
 		var/obj/item/stock_parts/part = thing
 		part.on_refresh(src)
-	var/list/missing = missing_parts()
+	var/list/missing = missing_parts(TRUE)
 	set_broken(!!missing, MACHINE_BROKEN_NO_PARTS)
 
 /obj/machinery/proc/state(var/msg)
@@ -409,14 +383,19 @@ Class Procs:
 /obj/machinery/proc/display_parts(mob/user)
 	to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
 	for(var/obj/item/C in component_parts)
-		to_chat(user, "<span class='notice'>	[C.name]</span>")
+		var/line = "<span class='notice'>	[C.name]</span>"
+		if(!C.health)
+			line = "<span class='warning'>	[C.name] (destroyed)</span>"
+		else if(C.health < initial(C.health))
+			line = "<span class='warning'>	[C.name] (damaged)</span>"
+		to_chat(user, line)
 	for(var/path in uncreated_component_parts)
 		var/obj/item/thing = path
 		to_chat(user, "<span class='notice'>	[initial(thing.name)] ([uncreated_component_parts[path] || 1])</span>")
 
 /obj/machinery/examine(mob/user)
 	. = ..()
-	if(component_parts && hasHUD(user, HUD_SCIENCE))
+	if(component_parts && (hasHUD(user, HUD_SCIENCE) || (construct_state && construct_state.visible_components)))
 		display_parts(user)
 	if(stat & NOSCREEN)
 		to_chat(user, "It is missing a screen, making it hard to interact with.")

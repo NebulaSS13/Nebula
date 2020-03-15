@@ -143,6 +143,7 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define PART_FLAG_LAZY_INIT   1 // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
 #define PART_FLAG_QDEL        2 // Will delete on uninstall
 #define PART_FLAG_HAND_REMOVE 4 // Can be removed by hand
+#define PART_FLAG_NODAMAGE    8 // Cannot be damaged
 
 // Machinery process flags, for use with START_PROCESSING_MACHINE
 #define MACHINERY_PROCESS_SELF       1

@@ -2,9 +2,10 @@
 /obj/item/stock_parts/building_material
 	name = "building materials"
 	desc = "Various standard wires, pipes, and other materials."
+	gender = PLURAL
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
-	part_flags = PART_FLAG_QDEL
+	part_flags = PART_FLAG_QDEL | PART_FLAG_NODAMAGE
 	var/list/materials
 
 /obj/item/stock_parts/building_material/Destroy()

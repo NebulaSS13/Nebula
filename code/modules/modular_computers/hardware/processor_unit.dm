@@ -8,7 +8,6 @@
 	hardware_size = 2
 	power_usage = 100
 	critical = 1
-	malfunction_probability = 1
 	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_ENGINEERING + "':2}"
 
 	var/processing_power = 2 // Used for DDoS speed calculations

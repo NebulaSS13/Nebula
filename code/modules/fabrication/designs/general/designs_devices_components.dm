@@ -76,3 +76,12 @@
 
 /datum/fabricator_recipe/device_component/conveyor_switch_oneway_construct
 	path = /obj/item/conveyor_switch_construct/oneway
+
+/datum/fabricator_recipe/device_component/fusebox
+	path = /obj/item/stock_parts/shielding/electric
+
+/datum/fabricator_recipe/device_component/armor
+	path = /obj/item/stock_parts/shielding/kinetic
+
+/datum/fabricator_recipe/device_component/heatsink
+	path = /obj/item/stock_parts/shielding/heat

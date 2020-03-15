@@ -130,7 +130,7 @@
 	new /obj/effect/temporary(get_turf(src), 2 SECONDS,'icons/obj/machines/shielding.dmi',"shield_impact")
 
 	var/list/field_segments = gen.field_segments
-	switch(gen.take_damage(damage, damtype))
+	switch(gen.take_shield_damage(damage, damtype))
 		if(SHIELD_ABSORBED)
 			return
 		if(SHIELD_BREACHED_MINOR)

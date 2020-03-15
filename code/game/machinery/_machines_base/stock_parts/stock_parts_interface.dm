@@ -6,10 +6,16 @@
 	matter = list(MAT_GLASS = 200)
 	base_type = /obj/item/stock_parts/console_screen
 	part_flags = PART_FLAG_HAND_REMOVE
+	health = 20
 
 /obj/item/stock_parts/console_screen/on_refresh(obj/machinery/machine)
 	..()
-	machine.set_noscreen(FALSE)
+	if(is_functional())
+		machine.set_noscreen(FALSE)
+
+/obj/item/stock_parts/console_screen/on_fail(var/obj/machinery/machine, damtype)
+	..()
+	playsound(src, "shatter", 10, 1)
 
 /obj/item/stock_parts/keyboard
 	name = "input controller"
@@ -22,4 +28,6 @@
 
 /obj/item/stock_parts/keyboard/on_refresh(obj/machinery/machine)
 	..()
-	machine.set_noinput(FALSE)
+	if(is_functional())
+		machine.set_noinput(FALSE)
+		

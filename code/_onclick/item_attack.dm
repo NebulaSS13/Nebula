@@ -34,6 +34,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return
 
 /atom/movable/attackby(obj/item/W, mob/user)
+	bash(W,user)
+
+/atom/movable/proc/bash(obj/item/W, mob/user)
 	if(!(W.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
 

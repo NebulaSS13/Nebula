@@ -21,23 +21,6 @@
 <div class='block'>
 	<div class='item'>
 		<div class="itemLabel">
-			Integrity:
-		</div>
-		<div class="itemContent">
-			{{if data.health < (data.max_health * 0.25)}}
-				{{:helper.displayBar(data.health, 0, data.max_health, 'bad')}}
-				<br><span class="bad">{{:data.health}}/{{:data.max_health}}</span>
-			{{else data.health < data.max_health *.75}}
-				{{:helper.displayBar(data.health, 0, data.max_health, 'average')}}
-				<br><span class="average">{{:data.health}}/{{:data.max_health}}</span>
-			{{else}}
-				{{:helper.displayBar(data.health, 0, data.max_health, 'good')}}
-				<br><span class="good">{{:data.health}}/{{:data.max_health}}</span>
-			{{/if}}
-		</div>
-	</div>
-	<div class='item'>
-		<div class="itemLabel">
 			Temperature:
 		</div>
 		<div class="itemContent">
