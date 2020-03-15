@@ -116,6 +116,7 @@ default behaviour is:
 		now_pushing = 0
 		spawn(0)
 			..()
+			var/saved_dir = AM.dir
 			if (!istype(AM, /atom/movable) || AM.anchored)
 				if(confused && prob(50) && !MOVING_DELIBERATELY(src))
 					Weaken(2)
@@ -142,6 +143,8 @@ default behaviour is:
 					for(var/obj/item/grab/G in M.grabbed_by)
 						step(G.assailant, get_dir(G.assailant, AM))
 						G.adjust_position()
+				if(saved_dir)
+					AM.set_dir(saved_dir)
 				now_pushing = 0
 
 /proc/swap_density_check(var/mob/swapper, var/mob/swapee)
@@ -155,7 +158,9 @@ default behaviour is:
 			return 1
 
 /mob/living/proc/can_swap_with(var/mob/living/tmob)
-	if(tmob.buckled || buckled)
+	if(!tmob)
+		return
+	if(tmob.buckled || buckled || tmob.anchored)
 		return 0
 	//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
 	if(!(tmob.mob_always_swap || (tmob.a_intent == I_HELP || tmob.restrained()) && (a_intent == I_HELP || src.restrained())))
@@ -799,13 +804,13 @@ default behaviour is:
 	return
 
 /mob/living/proc/add_chemical_effect(var/effect, var/magnitude = 1)
-	return 
+	return
 
 /mob/living/proc/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
-	return 
+	return
 
 /mob/living/proc/adjust_immunity(var/amt)
-	return 
+	return
 
 /mob/living/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
 	if(skill_check(SKILL_LITERACY, SKILL_ADEPT))
