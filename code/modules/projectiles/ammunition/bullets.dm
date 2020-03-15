@@ -40,24 +40,6 @@
 	icon_state = "magnumcasing"
 	spent_icon = "magnumcasing-spent"
 
-/obj/item/ammo_casing/pistol/throwback
-	desc = "An antique pistol bullet casing. Somewhere between 9 and 11 mm in caliber."
-	caliber = CALIBER_PISTOL_ANTIQUE
-
-/obj/item/ammo_casing/gyrojet
-	desc = "A minirocket casing."
-	caliber = CALIBER_GYROJET
-	projectile_type = /obj/item/projectile/bullet/gyro
-	icon_state = "lcasing"
-	spent_icon = "lcasing-spent"
-
-/obj/item/ammo_casing/flechette
-	desc = "A flechette casing."
-	caliber = CALIBER_PISTOL_FLECHETTE
-	projectile_type = /obj/item/projectile/bullet/flechette
-	icon_state = "flechette-casing"
-	spent_icon = "flechette-casing-spent"
-
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"
 	desc = "A shotgun slug."
@@ -124,13 +106,6 @@
 	projectile_type = /obj/item/projectile/energy/flash/flare
 	matter = list(MAT_STEEL = 90, MAT_GLASS = 90)
 
-/obj/item/ammo_casing/rifle
-	desc = "A rifle bullet casing."
-	caliber = CALIBER_RIFLE
-	projectile_type = /obj/item/projectile/bullet/rifle
-	icon_state = "riflecasing"
-	spent_icon = "riflecasing-spent"
-
 /obj/item/ammo_casing/shell
 	name = "shell casing"
 	desc = "An antimaterial shell casing."
@@ -145,16 +120,16 @@
 	desc = "An Armour Piercing Discarding Sabot shell."
 	projectile_type = /obj/item/projectile/bullet/rifle/shell/apds
 
-/obj/item/ammo_casing/rifle/military
+/obj/item/ammo_casing/rifle
 	desc = "A military rifle bullet casing."
-	caliber = CALIBER_RIFLE_MILITARY
-	projectile_type = /obj/item/projectile/bullet/rifle/military
+	caliber = CALIBER_RIFLE
+	projectile_type = /obj/item/projectile/bullet/rifle
 	icon_state = "rifle_mil"
 	spent_icon = "rifle_mil-spent"
 
-/obj/item/ammo_casing/rifle/military/practice
+/obj/item/ammo_casing/rifle/practice
 	desc = "A military rifle practice bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/military/practice
+	projectile_type = /obj/item/projectile/bullet/rifle/practice
 	icon_state = "rifle_mil_p"
 
 /obj/item/ammo_casing/rocket

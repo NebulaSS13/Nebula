@@ -1051,7 +1051,7 @@
 /obj/structure/catwalk,
 /obj/random/toolbox,
 /obj/structure/table/rack,
-/obj/item/gun/projectile/pirate,
+/obj/item/gun/projectile/zipgun,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
 "cH" = (

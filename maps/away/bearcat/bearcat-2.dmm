@@ -489,7 +489,7 @@
 /obj/item/radio/intercom{
 	pixel_x = -32
 	},
-/obj/item/gun/projectile/shotgun/pump/combat{
+/obj/item/gun/projectile/shotgun/pump{
 	desc = "When words don't strike hard enough.";
 	name = "Solid Argument"
 	},

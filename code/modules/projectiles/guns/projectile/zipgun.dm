@@ -1,5 +1,5 @@
 
-/obj/item/gun/projectile/pirate
+/obj/item/gun/projectile/zipgun
 	name = "zip gun"
 	desc = "Little more than a barrel, handle, and firing mechanism, cheap makeshift firearms like this one are not uncommon in frontier systems."
 	icon = 'icons/obj/guns/zipgun.dmi'
@@ -21,18 +21,18 @@
 		/obj/item/ammo_casing/shotgun/beanbag ,
 		/obj/item/ammo_casing/shotgun/stunshell,
 		/obj/item/ammo_casing/shotgun/flash,
-		/obj/item/ammo_casing/rifle/military,
+		/obj/item/ammo_casing/rifle,
 		/obj/item/ammo_casing/rifle
 		)
 
-/obj/item/gun/projectile/pirate/toggle_safety(var/mob/user)
+/obj/item/gun/projectile/zipgun/toggle_safety(var/mob/user)
 	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
 
-/obj/item/gun/projectile/pirate/Initialize()
+/obj/item/gun/projectile/zipgun/Initialize()
 	var/obj/item/ammo_casing/ammo = pick(ammo_types)
 	caliber = initial(ammo.caliber)
 	desc += " Uses [caliber] rounds."
 	. = ..()
 
-/obj/item/gun/projectile/pirate/unloaded
+/obj/item/gun/projectile/zipgun/unloaded
 	starts_loaded = FALSE

@@ -37,14 +37,6 @@
 	head = /obj/item/clothing/head/beret 
 	l_pocket = /obj/item/material/knife/folding/combat/switchblade 
  
-/obj/item/gun/projectile/revolver/medium/marooned
-	name = "worn-out revolver"
-
-/obj/item/gun/projectile/revolver/medium/marooned/Initialize()
-	. = ..()
-	consume_next_projectile()
-	handle_post_fire()
-
 /area/map_template/marooned
 	name = "\improper Crashed Dropship"
 	icon_state = "A"

@@ -76,21 +76,3 @@
 	if(!bolt_open)
 		return
 	..()
-
-
-/obj/item/gun/projectile/heavysniper/boltaction
-	name = "bolt action rifle"
-	desc = "An old bolt action rifle from some forgotten war, still commonplace among farmers and colonists as an anti-varmint rifle."
-	icon = 'icons/obj/guns/boltaction.dmi'
-	icon_state = "boltaction"
-	item_state = "boltaction"
-	w_class = ITEM_SIZE_LARGE
-	origin_tech = "{'" + TECH_COMBAT + "':2}"
-	caliber = CALIBER_RIFLE
-	ammo_type = /obj/item/ammo_casing/rifle
-	load_method = SINGLE_CASING|SPEEDLOADER
-	max_shells = 5
-	accuracy = 4
-	scope_zoom = 0
-	scoped_accuracy = 0
-	wielded_item_state = "boltaction-wielded"

@@ -30,20 +30,10 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 		/obj/item/gun/energy/gun,
 		/obj/item/gun/energy/crossbow,
 		/obj/item/gun/energy/pulse_rifle/pistol,
-		/obj/item/gun/projectile/automatic,
-		/obj/item/gun/projectile/automatic/machine_pistol,
-		/obj/item/gun/projectile/automatic/sec_smg,
-		/obj/item/gun/projectile/pistol/magnum_pistol,
-		/obj/item/gun/projectile/pistol/military,
-		/obj/item/gun/projectile/pistol/military/alt,
-		/obj/item/gun/projectile/pistol/sec/lethal,
+		/obj/item/gun/projectile/automatic/smg,
 		/obj/item/gun/projectile/pistol/holdout,
 		/obj/item/gun/projectile/revolver,
-		/obj/item/gun/projectile/revolver/medium,
-		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
-		/obj/item/gun/projectile/pistol/magnum_pistol,
-		/obj/item/gun/projectile/revolver/holdout,
-		/obj/item/gun/projectile/pistol/throwback
+		/obj/item/gun/projectile/shotgun/doublebarrel/sawn
 		)
 
 /datum/antagonist/renegade/create_objectives(var/datum/mind/player)

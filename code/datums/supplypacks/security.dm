@@ -157,7 +157,7 @@
 
 /decl/hierarchy/supply_pack/security/shotgun
 	name = "Weapons - Shotgun"
-	contains = list(/obj/item/gun/projectile/shotgun/pump/combat = 2)
+	contains = list(/obj/item/gun/projectile/shotgun/pump = 2)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "shotgun crate"
@@ -200,7 +200,7 @@
 
 /decl/hierarchy/supply_pack/security/pdwammo
 	name = "Ammunition - SMG top mounted"
-	contains = list(/obj/item/ammo_magazine/smg_top = 4)
+	contains = list(/obj/item/ammo_magazine/smg = 4)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "SMG ammunition crate"
@@ -209,7 +209,7 @@
 
 /decl/hierarchy/supply_pack/security/pdwammorubber
 	name = "Ammunition - SMG top mounted rubber"
-	contains = list(/obj/item/ammo_magazine/smg_top/rubber = 4)
+	contains = list(/obj/item/ammo_magazine/smg/rubber = 4)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "SMG rubber ammunition crate"
@@ -217,7 +217,7 @@
 
 /decl/hierarchy/supply_pack/security/pdwammopractice
 	name = "Ammunition - SMG top mounted practice"
-	contains = list(/obj/item/ammo_magazine/smg_top/practice = 8)
+	contains = list(/obj/item/ammo_magazine/smg/practice = 8)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "SMG practice ammunition crate"
@@ -225,7 +225,7 @@
 
 /decl/hierarchy/supply_pack/security/bullpupammo
 	name = "Ammunition - military rifle"
-	contains = list(/obj/item/ammo_magazine/mil_rifle = 4)
+	contains = list(/obj/item/ammo_magazine/rifle = 4)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "military rifle ammunition crate"
@@ -234,7 +234,7 @@
 
 /decl/hierarchy/supply_pack/security/bullpupammopractice
 	name = "Ammunition - military rifle practice"
-	contains = list(/obj/item/ammo_magazine/mil_rifle/practice = 8)
+	contains = list(/obj/item/ammo_magazine/rifle/practice = 8)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "military rifle practice ammunition crate"
