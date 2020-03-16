@@ -167,7 +167,7 @@
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
 	GLOB.meteor_list -= src
-	return ..()
+	. = ..()
 
 /obj/effect/meteor/Initialize()
 	. = ..()
@@ -212,9 +212,9 @@
 	..()
 
 /obj/effect/meteor/proc/make_debris()
-	for(var/throws = dropamt, throws > 0, throws--)
-		var/obj/item/O = new meteordrop(get_turf(src))
-		O.throw_at(dest, 5, 10)
+	if(meteordrop && dropamt)
+		for(var/throws = dropamt, throws > 0, throws--)
+			addtimer(CALLBACK(new meteordrop(get_turf(src)), /atom/movable/proc/throw_at, dest, 5, 10), 0)
 
 /obj/effect/meteor/proc/meteor_effect()
 	if(heavy)
