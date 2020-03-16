@@ -165,3 +165,12 @@
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		fluid_update()
 	. = ..()
+
+/turf/simulated/Destroy()
+	if (zone)
+		if (can_safely_remove_from_zone())
+			c_copy_air()
+			zone.remove(src)
+		else
+			zone.rebuild()
+	. = ..() 

@@ -88,12 +88,6 @@
 	input_level = input_level_max
 	output_level = output_level_max
 
-
-/obj/machinery/power/smes/buildable/Destroy()
-	for(var/datum/nano_module/rcon/R in world)
-		R.FindDevices()
-	return ..()
-
 // Proc: process()
 // Parameters: None
 // Description: Uses parent process, but if grounding wire is cut causes sparks to fly around.
