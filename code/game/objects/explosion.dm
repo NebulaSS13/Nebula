@@ -1,94 +1,261 @@
 //TODO: Flash range does nothing currently
+/proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
+	if(config.use_iterative_explosions)
+		. = explosion_iter(epicenter, (devastation_range * 2 + heavy_impact_range + light_impact_range), shaped)
+	else
+		. = explosion_basic(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, z_transfer, shaped)
 
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
-	var/multi_z_scalar = 0.35
+/proc/explosion_basic(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
+	set waitfor = 0
 	UNLINT(src = null)	//so we don't abort once src is deleted
-	spawn(0)
-		var/start = world.timeofday
-		epicenter = get_turf(epicenter)
-		if(!epicenter) return
 
-		// Handles recursive propagation of explosions.
-		if(z_transfer)
-			var/adj_dev   = max(0, (multi_z_scalar * devastation_range) - (shaped ? 2 : 0) )
-			var/adj_heavy = max(0, (multi_z_scalar * heavy_impact_range) - (shaped ? 2 : 0) )
-			var/adj_light = max(0, (multi_z_scalar * light_impact_range) - (shaped ? 2 : 0) )
-			var/adj_flash = max(0, (multi_z_scalar * flash_range) - (shaped ? 2 : 0) )
+	epicenter = get_turf(epicenter)
+	if(!epicenter) 
+		return
 
+	var/start_time = world.timeofday
+	// Handles recursive propagation of explosions.
+	if(z_transfer)
+		var/multi_z_scalar = 0.35
+		var/adj_dev   = max(0, (multi_z_scalar * devastation_range) - (shaped ? 2 : 0) )
+		var/adj_heavy = max(0, (multi_z_scalar * heavy_impact_range) - (shaped ? 2 : 0) )
+		var/adj_light = max(0, (multi_z_scalar * light_impact_range) - (shaped ? 2 : 0) )
+		var/adj_flash = max(0, (multi_z_scalar * flash_range) - (shaped ? 2 : 0) )
+		if(adj_dev > 0 || adj_heavy > 0)
+			if((z_transfer & UP) && HasAbove(epicenter.z))
+				explosion_basic(GetAbove(epicenter), adj_dev, adj_heavy, adj_light, adj_flash, 0, UP, shaped)
+			if((z_transfer & DOWN) && HasBelow(epicenter.z))
+				explosion_basic(GetBelow(epicenter), adj_dev, adj_heavy, adj_light, adj_flash, 0, DOWN, shaped)
 
-			if(adj_dev > 0 || adj_heavy > 0)
-				if(HasAbove(epicenter.z) && z_transfer & UP)
-					explosion(GetAbove(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(adj_flash), 0, UP, shaped)
-				if(HasBelow(epicenter.z) && z_transfer & DOWN)
-					explosion(GetBelow(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(adj_flash), 0, DOWN, shaped)
+	var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
 
-		var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
+	// Play sounds; we want sounds to be different depending on distance so we will manually do it ourselves.
+	// Stereo users will also hear the direction of the explosion!
+	// Calculate far explosion sound range. Only allow the sound effect for heavy/devastating explosions.
+	// 3/7/14 will calculate to 80 + 35
+	var/far_dist = 0
+	far_dist += heavy_impact_range * 5
+	far_dist += devastation_range * 20
+	var/frequency = get_rand_frequency()
+	for(var/mob/M in GLOB.player_list)
+		if(M.z == epicenter.z)
+			var/turf/M_turf = get_turf(M)
+			var/dist = get_dist(M_turf, epicenter)
+			// If inside the blast radius + world.view - 2
+			if(dist <= round(max_range + world.view - 2, 1))
+				M.playsound_local(epicenter, get_sfx("explosion"), 100, 1, frequency, falloff = 5) // get_sfx() is so that everyone gets the same sound
+			else if(dist <= far_dist)
+				var/far_volume = Clamp(far_dist, 30, 50) // Volume is based on explosion size and dist
+				far_volume += (dist <= far_dist * 0.5 ? 50 : 0) // add 50 volume if the mob is pretty close to the explosion
+				M.playsound_local(epicenter, 'sound/effects/explosionfar.ogg', far_volume, 1, frequency, falloff = 5)
 
-		// Play sounds; we want sounds to be different depending on distance so we will manually do it ourselves.
-		// Stereo users will also hear the direction of the explosion!
-		// Calculate far explosion sound range. Only allow the sound effect for heavy/devastating explosions.
-		// 3/7/14 will calculate to 80 + 35
-		var/far_dist = 0
-		far_dist += heavy_impact_range * 5
-		far_dist += devastation_range * 20
-		var/frequency = get_rand_frequency()
-		for(var/mob/M in GLOB.player_list)
-			if(M.z == epicenter.z)
-				var/turf/M_turf = get_turf(M)
-				var/dist = get_dist(M_turf, epicenter)
-				// If inside the blast radius + world.view - 2
-				if(dist <= round(max_range + world.view - 2, 1))
-					M.playsound_local(epicenter, get_sfx("explosion"), 100, 1, frequency, falloff = 5) // get_sfx() is so that everyone gets the same sound
-				else if(dist <= far_dist)
-					var/far_volume = Clamp(far_dist, 30, 50) // Volume is based on explosion size and dist
-					far_volume += (dist <= far_dist * 0.5 ? 50 : 0) // add 50 volume if the mob is pretty close to the explosion
-					M.playsound_local(epicenter, 'sound/effects/explosionfar.ogg', far_volume, 1, frequency, falloff = 5)
+	if(adminlog)
+		log_and_message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
 
-		if(adminlog)
-			log_and_message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
-		var/approximate_intensity = (devastation_range * 3) + (heavy_impact_range * 2) + light_impact_range
-		// Large enough explosion. For performance reasons, powernets will be rebuilt manually
-		if(!defer_powernet_rebuild && (approximate_intensity > 25))
-			defer_powernet_rebuild = 1
+	var/approximate_intensity = (devastation_range * 3) + (heavy_impact_range * 2) + light_impact_range
+	// Large enough explosion. For performance reasons, powernets will be rebuilt manually
+	if(!defer_powernet_rebuild && (approximate_intensity > 25))
+		defer_powernet_rebuild = 1
 
-		if(heavy_impact_range > 1)
-			var/datum/effect/system/explosion/E = new/datum/effect/system/explosion()
-			E.set_up(epicenter)
-			E.start()
+	if(heavy_impact_range > 1)
+		var/datum/effect/system/explosion/E = new/datum/effect/system/explosion()
+		E.set_up(epicenter)
+		E.start()
 
-		var/x0 = epicenter.x
-		var/y0 = epicenter.y
-		var/z0 = epicenter.z
-		if(config.use_recursive_explosions)
-			var/power = devastation_range * 2 + heavy_impact_range + light_impact_range //The ranges add up, ie light 14 includes both heavy 7 and devestation 3. So this calculation means devestation counts for 4, heavy for 2 and light for 1 power, giving us a cap of 27 power.
-			explosion_rec(epicenter, power, shaped)
+	var/x0 = epicenter.x
+	var/y0 = epicenter.y
+	var/z0 = epicenter.z
+	for(var/turf/T in trange(max_range, epicenter))
+		var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
+		if(dist < devastation_range)
+			dist = 1
+		else if(dist < heavy_impact_range)
+			dist = 2
+		else if(dist < light_impact_range)
+			dist = 3
 		else
-			for(var/turf/T in trange(max_range, epicenter))
-				var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
+			continue
 
-				if(dist < devastation_range)		dist = 1
-				else if(dist < heavy_impact_range)	dist = 2
-				else if(dist < light_impact_range)	dist = 3
-				else								continue
-
-				T.ex_act(dist)
-				if(!T)
-					T = locate(x0,y0,z0)
-				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
-					var/atom/movable/AM = atom_movable
-					if(AM && AM.simulated && !T.protects_atom(AM))
-						AM.ex_act(dist)
-
-		var/took = (world.timeofday-start)/10
-		//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes  to explosion code using this please so we can compare
-		if(Debug2) to_world_log("## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds.")
-
-		sleep(8)
-
+		T.ex_act(dist)
+		if(!T)
+			T = locate(x0,y0,z0)
+		if(T)
+			for(var/atom_movable in T.contents)
+				var/atom/movable/AM = atom_movable
+				if(AM && AM.simulated && !T.protects_atom(AM))
+					AM.ex_act(dist)
+	var/took = (world.timeofday-start_time)/10
+	if(Debug2) 
+		to_world_log("## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds.")
 	return 1
 
+#define EXPLFX_BOTH 3
+#define EXPLFX_SOUND 2
+#define EXPLFX_SHAKE 1
+#define EXPLFX_NONE 0
 
+// All the vars used on the turf should be on unsimulated turfs too, we just don't care about those generally.
+#define SEARCH_DIR(dir) \
+	search_direction = dir;\
+	search_turf = get_step(current_turf, search_direction);\
+	if (istype(search_turf, /turf/simulated)) {\
+		turf_queue += search_turf;\
+		dir_queue += search_direction;\
+		power_queue += current_power;\
+	}
 
-proc/secondaryexplosion(turf/epicenter, range)
-	for(var/turf/tile in range(range, epicenter))
-		tile.ex_act(2)
+/proc/explosion_iter(turf/epicenter, power, z_transfer)
+	set waitfor=0
+	if(power <= 0)
+		return
+	epicenter = get_turf(epicenter)
+	if(!epicenter)
+		return
+	message_admins("Explosion with size ([power]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z])")
+	log_game("Explosion with size ([power]) in area [epicenter.loc.name] ")
+	log_debug("iexpl: Beginning discovery phase.")
+	var/time = world.time
+	var/list/act_turfs = list()
+	act_turfs[epicenter] = power
+
+	power -= epicenter.explosion_resistance
+	for (var/obj/O in epicenter)
+		if (O.explosion_resistance)
+			power -= O.explosion_resistance
+
+	if (power >= config.iterative_explosives_z_threshold)
+		if ((z_transfer & UP) && HasAbove(epicenter.z))
+			explosion_iter(GetAbove(epicenter), power * config.iterative_explosives_z_multiplier, UP)
+		if ((z_transfer & DOWN) && HasBelow(epicenter.z))
+			explosion_iter(GetBelow(epicenter), power * config.iterative_explosives_z_multiplier, DOWN)
+
+	// These three lists must always be the same length.
+	var/list/turf_queue = list(epicenter, epicenter, epicenter, epicenter)
+	var/list/dir_queue = list(NORTH, SOUTH, EAST, WEST)
+	var/list/power_queue = list(power, power, power, power)
+
+	var/turf/simulated/current_turf
+	var/turf/search_turf
+	var/origin_direction
+	var/search_direction
+	var/current_power
+	var/index = 1
+	while (index <= turf_queue.len)
+		current_turf = turf_queue[index]
+		origin_direction = dir_queue[index]
+		current_power = power_queue[index]
+		++index
+
+		if (!istype(current_turf) || current_power <= 0)
+			CHECK_TICK
+			continue
+
+		if (act_turfs[current_turf] >= current_power && current_turf != epicenter)
+			CHECK_TICK
+			continue
+
+		act_turfs[current_turf] = current_power
+		current_power -= current_turf.explosion_resistance
+
+		// Attempt to shortcut on empty tiles: if a turf only has a LO on it, we don't need to check object resistance. Some turfs might not have LOs, so we need to check it actually has one.
+		if (current_turf.contents.len > !!current_turf.lighting_overlay)
+			for (var/thing in current_turf)
+				var/atom/movable/AM = thing
+				if (AM.simulated && AM.explosion_resistance)
+					current_power -= AM.explosion_resistance
+
+		if (current_power <= 0)
+			CHECK_TICK
+			continue
+
+		SEARCH_DIR(origin_direction)
+		SEARCH_DIR(turn(origin_direction, 90))
+		SEARCH_DIR(turn(origin_direction, -90))
+
+		CHECK_TICK
+
+	log_debug("iexpl: Discovery completed in [(world.time-time)/10] seconds.")
+	log_debug("iexpl: Beginning SFX phase.")
+	time = world.time
+
+	var/volume = 10 + (power * 20)
+
+	var/frequency = get_rand_frequency()
+	var/close_dist = round(power + world.view - 2, 1)
+
+	var/sound/explosion_sound = sound(get_sfx("explosion"))
+
+	for (var/thing in GLOB.player_list)
+		var/mob/M = thing
+		var/reception = EXPLFX_BOTH
+		var/turf/T = isturf(M.loc) ? M.loc : get_turf(M)
+
+		if (!T)
+			CHECK_TICK
+			continue
+
+		if (!ARE_Z_CONNECTED(T.z, epicenter.z))
+			CHECK_TICK
+			continue
+
+		if (T.type == /turf/space)	// Equality is faster than istype.
+			reception = EXPLFX_NONE
+
+			for (var/turf/simulated/THING in RANGE_TURFS(M, 1))
+				reception |= EXPLFX_SHAKE
+				break
+
+			if (!reception)
+				CHECK_TICK
+				continue
+
+		var/dist = get_dist(M, epicenter) || 1
+		if ((reception & EXPLFX_SOUND) && M.ear_deaf <= 0)
+			if (dist <= close_dist)
+				M.playsound_local(epicenter, explosion_sound, min(100, volume), 1, frequency, falloff = 5)
+				//You hear a far explosion if you're outside the blast radius. Small bombs shouldn't be heard all over the station.
+			else
+				volume = M.playsound_local(epicenter, 'sound/effects/explosionfar.ogg', volume, 1, frequency, falloff = 1000)
+
+		if ((reception & EXPLFX_SHAKE) && volume > 0)
+			shake_camera(M, min(30, max(2,(power*2) / dist)), min(3.5, ((power/3) / dist)),0.05)
+			//Maximum duration is 3 seconds, and max strength is 3.5
+			//Becuse values higher than those just get really silly
+
+		CHECK_TICK
+
+	log_debug("iexpl: SFX phase completed in [(world.time-time)/10] seconds.")
+	log_debug("iexpl: Beginning application phase.")
+	time = world.time
+
+	var/turf_tally = 0
+	var/movable_tally = 0
+	for (var/thing in act_turfs)
+		var/turf/T = thing
+		if (act_turfs[T] <= 0)
+			CHECK_TICK
+			continue
+
+		var/severity = 4 - round(max(min( 3, ((act_turfs[T] - T.explosion_resistance) / (max(3,(power/3)))) ) ,1), 1)
+		//sanity			effective power on tile				divided by either 3 or one third the total explosion power
+		//															One third because there are three power levels and I
+		//															want each one to take up a third of the crater
+		if (T.simulated)
+			T.ex_act(severity)
+		if (T.contents.len > !!T.lighting_overlay)
+			for (var/subthing in T)
+				var/atom/movable/AM = subthing
+				if (AM.simulated)
+					AM.ex_act(severity)
+					movable_tally++
+				CHECK_TICK
+		else
+			CHECK_TICK
+	turf_tally++
+	log_debug("iexpl: Application completed in [(world.time-time)/10] seconds; processed [turf_tally] turfs and [movable_tally] movables.")
+
+#undef SEARCH_DIR
+#undef EXPLFX_BOTH
+#undef EXPLFX_SOUND
+#undef EXPLFX_SHAKE
+#undef EXPLFX_NONE

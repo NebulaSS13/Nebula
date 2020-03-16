@@ -152,7 +152,9 @@ var/list/gamemode_cache = list()
 
 	var/simultaneous_pm_warning_timeout = 100
 
-	var/use_recursive_explosions //Defines whether the server uses recursive or circular explosions.
+	var/use_iterative_explosions //Defines whether the server uses iterative or circular explosions.
+	var/iterative_explosives_z_threshold = 10
+	var/iterative_explosives_z_multiplier = 0.75
 
 	var/assistant_maint = 0 //Do assistants get maint access?
 	var/gateway_delay = 18000 //How long the gateway takes before it activates. Default is half an hour.
@@ -296,8 +298,14 @@ var/list/gamemode_cache = list()
 				if ("jobs_have_minimal_access")
 					config.jobs_have_minimal_access = 1
 
-				if ("use_recursive_explosions")
-					use_recursive_explosions = 1
+				if ("use_iterative_explosions")
+					use_iterative_explosions = 1
+
+				if ("explosion_z_threshold")
+					iterative_explosives_z_threshold = text2num(value)
+
+				if ("explosion_z_mult")
+					iterative_explosives_z_multiplier = text2num(value)
 
 				if ("log_ooc")
 					config.log_ooc = 1

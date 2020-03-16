@@ -94,7 +94,7 @@
 			return
 		if(!(current_network in C.network))
 			return
-		if(!AreConnectedZLevels(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
+		if(!ARE_Z_CONNECTED(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
 			to_chat(usr, "Unable to establish a connection.")
 			return
 

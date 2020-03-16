@@ -249,14 +249,9 @@
 	else
 		explosion_resistance = 0
 
-/obj/effect/shield/get_explosion_resistance()
-	return explosion_resistance
-
 // Shield collision checks below
-
 /atom/movable/proc/can_pass_shield(var/obj/machinery/power/shield_generator/gen)
 	return 1
-
 
 // Other mobs
 /mob/living/can_pass_shield(var/obj/machinery/power/shield_generator/gen)

@@ -650,7 +650,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/flash = input("Range of flash. -1 to none", text("Input"))  as num|null
 	if(flash == null) return
 	var/shaped = 0
-	if(config.use_recursive_explosions)
+	if(config.use_iterative_explosions)
 		if(alert(src, "Shaped explosion?", "Shape", "Yes", "No") == "Yes")
 			shaped = input("Shaped where to?", "Input")  as anything in list("NORTH","SOUTH","EAST","WEST")
 			shaped = text2dir(shaped)

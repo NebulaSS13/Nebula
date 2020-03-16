@@ -206,7 +206,7 @@
 			var/turf/T = get_turf(src)
 			for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
 				var/turf/ST = get_turf(S)
-				if((istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin) || (ST && !AreConnectedZLevels(ST.z, T.z)))
+				if((istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin) || (ST && !ARE_Z_CONNECTED(ST.z, T.z)))
 					continue
 				dat += "[S.name] || "
 				dat += "<A href='?src=\ref[src];access=[S.server_id]'> Access Rights</A> | "

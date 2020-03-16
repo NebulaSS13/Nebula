@@ -347,7 +347,7 @@ Helpers
 /datum/controller/subsystem/ticker/proc/game_finished()
 	if(force_ending)
 		return 1
-	if(mode.explosion_in_progress)
+	if(mode.station_explosion_in_progress)
 		return 0
 	if(config.continous_rounds)
 		return SSevac.evacuation_controller.round_over() || mode.station_was_nuked

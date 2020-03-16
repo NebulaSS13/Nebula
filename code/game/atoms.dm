@@ -13,6 +13,7 @@
 	var/datum/reagents/reagents // chemical contents.
 	var/list/climbers
 	var/climb_speed_mult = 1
+	var/explosion_resistance = 0
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
