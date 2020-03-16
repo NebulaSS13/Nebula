@@ -161,7 +161,6 @@
 	icon = 'maps/away/icarus/icarus_sprites.dmi'
 	icon_state = "model"
 
-//to pass tests and make vesrion not depending on Torch code. Sol gov floor decal had to go though :(
 /obj/structure/sign/icarus/solgov
 	name = "\improper SolGov Seal"
 	desc = "A familiar seal showing this vessel is SolGov property."

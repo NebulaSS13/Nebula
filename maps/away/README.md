@@ -14,19 +14,19 @@ It's a datum you can define in the code (`/datum/map_template`) which points at 
 
 ## How do I make away sites?
 
-tl;dr you make your .dmm files, then you write a new map template datum (`/datum/map_template/ruin/away_site/insert_your_away_site_name_here`), then you include whatever file you defined that datum in into `torch.dm` and `away_sites_testing.dm`, and you're all set.
+tl;dr you make your .dmm files, then you write a new map template datum (`/datum/map_template/ruin/away_site/insert_your_away_site_name_here`), then you include whatever file you defined that datum in into the main map definition and `away_sites_testing.dm`, and you're all set.
 
 BUT HEED MY RUMINATIONS
 
 ## While mapping
 
-### Don't use Torch-specific types
+### Don't use map-specific types
 
-Away maps are expected to work whether you're on Torch, the example map, the Bearcat, or anything else you might want to load as the server's main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map.
+Away maps are expected to work whether you're on a specific main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map. You can use content packages to define content that is only included for particular maps, as the away sites are tested with all packages enabled.
 
-e.g. you can use `/area/space`, or `/turf/simulated/wall`, because neither are specific to Torch. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use `/obj/random_multi/single_item/punitelly`, because Punitelli only exists when Torch is compiled.
+e.g. you can use `/area/space`, or `/turf/simulated/wall`, because neither are specific to a given map. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use `/obj/random_multi/single_item/punitelly`, because Punitelli only exists when `punitelli.dm` is compiled.
 
-To make life easier, you can uncheck maps/torch/torch.dm (or your regional equivalent), then recompile, to make sure these types aren't available while you're mapping.
+To make life easier, you can uncheck your main map definition then recompile, to make sure these types aren't available while you're mapping.
 
 ### Don't re-use area types from other maps
 
@@ -40,7 +40,7 @@ If in doubt, ask #codershuttle on IRC/#coding on Discord.
 
 ### If you're doing multi-z, make a different .dmm file for each zlevel
 
-Not exactly a technical requirement, but it makes things easier in terms of collaboration. See how it's done with `torch-1.dmm`, `torch-2.dmm`, etc.
+Not exactly a technical requirement, but it makes things easier in terms of collaboration. See how it's done with `example-1.dmm`, `example-2.dmm`, etc.
 
 ## Afterwards (or during, I'm not a cop)
 
@@ -54,7 +54,7 @@ The game will read this to learn about your new shiny away sites, including what
 
 ### Include your .dm file in any main map file, and away sites testing
 
-That's `maps/away_sites_testing/away_sites_testing.dm`, and probably `maps/torch/torch.dm`. It goes in the testing one to make sure Travis runs it through unit testing, and it goes in the Torch one to make it available while we play Torch. If we have since changed map, yell at someone to update this doc.
+That's `maps/away_sites_testing/away_sites_testing.dm` plus your main map definition. It goes in the testing one to make sure Travis runs it through unit testing, and it goes in the primary map to make it available during real play.
 
 ### Don't include it, or the .dmms, in the .dme
 

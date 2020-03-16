@@ -1159,7 +1159,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/ntlogo
 	icon_state = "ntlogo"
 
-/obj/effect/floor_decal/torchltdlogo
+/obj/effect/floor_decal/exologo
 	alpha = 230
 	icon = 'icons/turf/flooring/corp_floor.dmi'
 	icon_state = "bottomleft"

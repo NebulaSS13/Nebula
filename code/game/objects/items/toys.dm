@@ -822,7 +822,7 @@
 	name = "table-top spaceship model"
 	desc = "This is a 1:250th scale spaceship model on a handsome wooden stand. Small lights blink on the hull and at the engine exhaust."
 	icon = 'icons/obj/toy.dmi'
-	icon_state = "torch_model_figure"
+	icon_state = "shipmodel"
 
 /obj/item/toy/ringbell
 	name = "ringside bell"

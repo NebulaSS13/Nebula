@@ -25,7 +25,7 @@
 	electric = TRUE
 	flash_protection = FLASH_PROTECTION_MODERATE
 
-/obj/item/clothing/glasses/sunglasses/sechud/goggles //now just a more "military" set of HUDglasses for the Torch
+/obj/item/clothing/glasses/sunglasses/sechud/goggles
 	name = "HUD goggles"
 	desc = "A pair of goggles with an inbuilt heads up display. The lenses provide some flash protection."
 	icon_state = "goggles"

@@ -269,7 +269,7 @@ AI MODULES
 
 /******************** SCG ********************/
 
-/obj/item/aiModule/solgov // aka Torch default
+/obj/item/aiModule/solgov
 	name = "'SCG Expeditionary' Core AI Module"
 	desc = "An 'SCG Expeditionary' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
