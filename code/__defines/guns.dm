@@ -2,14 +2,11 @@
 #define CALIBER_PISTOL_SMALL 	"7mm"
 #define CALIBER_PISTOL_MAGNUM 	"15mm"
 #define CALIBER_PISTOL_FLECHETTE "4mm"
-#define CALIBER_PISTOL_ANTIQUE	"~10mm"
 
-#define CALIBER_RIFLE			"7mmR"
-#define CALIBER_RIFLE_MILITARY  "5mmR"
+#define CALIBER_RIFLE  			"5mmR"
 #define CALIBER_ANTIMATERIAL    "15mmR"
 
 #define CALIBER_SHOTGUN			"12g"
-#define CALIBER_GYROJET			"20mmG"
 #define CALIBER_CAPS			"caps"
 #define CALIBER_DART			"darts"
 

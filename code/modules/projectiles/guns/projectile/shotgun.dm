@@ -53,25 +53,6 @@
 
 	update_icon()
 
-/obj/item/gun/projectile/shotgun/pump/combat
-	name = "combat shotgun"
-	desc = "Built for close quarters combat, the KS-40 is widely regarded as a weapon of choice for repelling boarders."
-	icon_state = "cshotgun"
-	item_state = "cshotgun"
-	wielded_item_state = "cshotgun-wielded"
-	origin_tech = "{'" + TECH_COMBAT + "':5,'" + TECH_MATERIAL + "':2}"
-	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
-	ammo_type = /obj/item/ammo_casing/shotgun
-	one_hand_penalty = 8
-
-/obj/item/gun/projectile/shotgun/pump/combat/on_update_icon()
-	..()
-	if(length(loaded) > 3)
-		for(var/i = 0 to length(loaded) - 4)
-			var/image/I = image(icon, "shell")
-			I.pixel_x = i * 2
-			overlays += I
-
 /obj/item/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
 	desc = "A true classic."
@@ -99,14 +80,6 @@
 		list(mode_name="fire one barrel at a time", burst=1),
 		list(mode_name="fire both barrels at once", burst=2),
 		)
-
-/obj/item/gun/projectile/shotgun/doublebarrel/pellet
-	ammo_type = /obj/item/ammo_casing/shotgun/pellet
-
-/obj/item/gun/projectile/shotgun/doublebarrel/flare
-	name = "signal shotgun"
-	desc = "A double-barreled shotgun meant to fire signal flash shells."
-	ammo_type = /obj/item/ammo_casing/shotgun/flash
 
 /obj/item/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
 	..(user, allow_dump=1)

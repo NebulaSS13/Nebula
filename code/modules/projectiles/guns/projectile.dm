@@ -2,7 +2,7 @@
 	name = "gun"
 	desc = "A gun that fires bullets."
 	icon = 'icons/obj/guns/pistol.dmi'
-	icon_state = "secguncomp"
+	icon_state = "pistol"
 	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2}"
 	w_class = ITEM_SIZE_NORMAL
 	matter = list(MAT_STEEL = 1000)

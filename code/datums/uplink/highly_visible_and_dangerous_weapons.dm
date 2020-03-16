@@ -8,19 +8,13 @@
 	name = "Zip Gun"
 	desc = "A pipe attached to crude wooden stock with firing mechanism, holds one round."
 	item_cost = 8
-	path = /obj/item/gun/projectile/pirate
+	path = /obj/item/gun/projectile/zipgun
 
 /datum/uplink_item/item/visible_weapons/smallenergy_gun
 	name = "Small Energy Gun"
 	desc = "A pocket-sized energy based sidearm with three different lethality settings."
 	item_cost = 16
 	path = /obj/item/gun/energy/gun/small
-
-/datum/uplink_item/item/visible_weapons/ancient
-	name = "Replica Pistol"
-	desc = "A cheap replica of an earth handgun. To reload, buy another."
-	item_cost = 16
-	path = /obj/item/gun/projectile/pistol/throwback
 
 /datum/uplink_item/item/visible_weapons/dartgun
 	name = "Dart Gun"
@@ -81,11 +75,11 @@
 	path = /obj/item/gun/launcher/grenade/loaded
 
 //These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
-/datum/uplink_item/item/visible_weapons/submachinegun
+/datum/uplink_item/item/visible_weapons/smg
 	name = "Standard Submachine Gun"
 	desc = "A quick-firing weapon with three togglable fire modes."
 	item_cost = 52
-	path = /obj/item/gun/projectile/automatic/merc_smg
+	path = /obj/item/gun/projectile/automatic/smg
 	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/assaultrifle
@@ -108,17 +102,11 @@
 	path = /obj/item/storage/secure/briefcase/heavysniper
 	antag_roles = list(MODE_MERCENARY)
 
-/datum/uplink_item/item/visible_weapons/machine_pistol
-	name = "Standard Machine Pistol"
-	desc = "A high rate of fire weapon in a smaller form factor, able to sling standard ammunition almost as quick as a submachine gun."
-	item_cost = 45
-	path = /obj/item/gun/projectile/automatic/machine_pistol
-
 /datum/uplink_item/item/visible_weapons/combat_shotgun
-	name = "Combat Shotgun"
+	name = "Pump Shotgun"
 	desc = "A high compacity, pump-action shotgun regularly used for repelling boarding parties in close range scenarios."
 	item_cost = 52
-	path = /obj/item/gun/projectile/shotgun/pump/combat
+	path = /obj/item/gun/projectile/shotgun/pump
 	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/sawnoff
@@ -126,24 +114,6 @@
 	desc = "A shortened double-barrel shotgun, able to fire either one, or both, barrels at once."
 	item_cost = 45
 	path = /obj/item/gun/projectile/shotgun/doublebarrel/sawn
-
-/datum/uplink_item/item/visible_weapons/deagle
-	name = "Magnum Pistol"
-	desc = "A high-caliber pistol that uses 15mm ammunition."
-	item_cost = 52
-	path = /obj/item/gun/projectile/pistol/magnum_pistol
-
-/datum/uplink_item/item/visible_weapons/sigsauer
-	name = "Standard Military Pistol"
-	desc = "A regularly used and reliable weapon that is standard issue in the Navy."
-	item_cost = 40
-	path = /obj/item/gun/projectile/pistol/military/alt
-
-/datum/uplink_item/item/visible_weapons/detective_revolver
-	name = "Small Revolver"
-	desc = "A pocket-sized holdout revolver. Easily concealable.."
-	item_cost = 24
-	path = /obj/item/gun/projectile/revolver/holdout
 
 /datum/uplink_item/item/visible_weapons/pulserifle
 	name = "Pulse Rifle"
@@ -186,10 +156,3 @@
 			Most of these blasters were swiftly bought back and destroyed - but not this one."
 	item_cost = 40
 	path = /obj/item/gun/energy/incendiary_laser
-
-/datum/uplink_item/item/visible_weapons/boltaction
-	name = "Bolt Action Rifle"
-	desc = "For arming your comrades on the cheap!"
-	item_cost = 12
-	path = /obj/item/gun/projectile/heavysniper/boltaction
-	antag_roles = list(MODE_REVOLUTIONARY)

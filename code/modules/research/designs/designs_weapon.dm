@@ -142,21 +142,14 @@
 	id = "wt550"
 	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	materials = list(MAT_STEEL = 8000, MAT_SILVER = 3000, MAT_DIAMOND = 1500)
-	build_path = /obj/item/gun/projectile/automatic/sec_smg
+	build_path = /obj/item/gun/projectile/automatic/smg
 	sort_string = "TAPAA"
-
-/datum/design/item/weapon/smg
-	id = "smg"
-	req_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4)
-	materials = list(MAT_STEEL = 8000, MAT_SILVER = 2000, MAT_DIAMOND = 2000)
-	build_path = /obj/item/gun/projectile/automatic
-	sort_string = "TAPAB"
 
 /datum/design/item/weapon/bullpup
 	id = "bullpup"
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
 	materials = list(MAT_STEEL = 10000, MAT_SILVER = 5000, MAT_DIAMOND = 3000)
-	build_path = /obj/item/gun/projectile/automatic/bullpup_rifle
+	build_path = /obj/item/gun/projectile/automatic/assault_rifle
 	sort_string = "TAPAC"
 
 /datum/design/item/weapon/ammunition/AssembleDesignName()
@@ -170,14 +163,6 @@
 	materials = list(MAT_STEEL = 3750, MAT_SILVER = 100)
 	build_path = /obj/item/ammo_magazine/box/smallpistol
 	sort_string = "TBAAA"
-
-/datum/design/item/weapon/ammunition/ammo_flechette
-	id = "ammo_flechette"
-	desc = "A high capacity magazine of armor piercing flechette."
-	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4)
-	materials = list(MAT_STEEL = 2000, MAT_SILVER = 500, MAT_DIAMOND = 200)
-	build_path = /obj/item/ammo_magazine/proto_smg
-	sort_string = "TBAAB"
 
 /datum/design/item/weapon/ammunition/stunshell
 	desc = "A stunning shell for a shotgun."

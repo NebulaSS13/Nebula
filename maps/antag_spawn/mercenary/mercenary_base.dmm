@@ -2078,10 +2078,8 @@
 /area/space)
 "hX" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/revolver/medium,
-/obj/item/gun/projectile/revolver/medium,
-/obj/item/ammo_magazine/speedloader,
-/obj/item/ammo_magazine/speedloader,
+/obj/item/gun/projectile/revolver,
+/obj/item/gun/projectile/revolver,
 /obj/item/ammo_magazine/speedloader,
 /obj/item/ammo_magazine/speedloader,
 /obj/effect/landmark/delete_on_shuttle{
@@ -2102,12 +2100,12 @@
 /area/map_template/merc_spawn)
 "iB" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/pistol/throwback,
-/obj/item/gun/projectile/pistol/throwback,
-/obj/item/ammo_magazine/pistol/throwback,
-/obj/item/ammo_magazine/pistol/throwback,
-/obj/item/ammo_magazine/pistol/throwback,
-/obj/item/ammo_magazine/pistol/throwback,
+/obj/item/gun/projectile/pistol,
+/obj/item/gun/projectile/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
 /obj/effect/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
@@ -3118,12 +3116,12 @@
 /area/map_template/merc_spawn)
 "Zl" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/pistol/military,
-/obj/item/gun/projectile/pistol/military/alt,
-/obj/item/ammo_magazine/pistol/double,
-/obj/item/ammo_magazine/pistol/double,
-/obj/item/ammo_magazine/pistol/double,
-/obj/item/ammo_magazine/pistol/double,
+/obj/item/gun/projectile/pistol,
+/obj/item/gun/projectile/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
 /obj/effect/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},

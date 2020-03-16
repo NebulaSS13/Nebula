@@ -6227,7 +6227,7 @@
 	dir = 1
 	},
 /obj/structure/closet,
-/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/projectile/shotgun/pump,
 /obj/item/lipstick/random,
 /obj/random/ammo,
 /obj/random/cash,

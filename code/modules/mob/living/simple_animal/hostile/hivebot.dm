@@ -120,8 +120,16 @@ Special projectiles
 */
 /obj/item/projectile/bullet/gyro/megabot
 	name = "microrocket"
-	gyro_light_impact = 1
 	distance_falloff = 1.3
+	fire_sound = 'sound/effects/Explosion1.ogg'
+	var/gyro_devastation = -1
+	var/gyro_heavy_impact = 0
+	var/gyro_light_impact = 1
+
+/obj/item/projectile/bullet/gyro/megabot/on_hit(var/atom/target, var/blocked = 0)
+	if(isturf(target))
+		explosion(target, gyro_devastation, gyro_heavy_impact, gyro_light_impact)
+	..()
 
 /obj/item/projectile/beam/megabot
 	damage = 45

@@ -4555,7 +4555,7 @@
 /obj/structure/table/rack,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/item/gun/projectile/pistol/holdout,
-/obj/item/gun/projectile/pistol/sec/lethal,
+/obj/item/gun/projectile/pistol,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 8
@@ -5954,9 +5954,9 @@
 /area/map_template/colony/airlock)
 "kr" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/pirate,
-/obj/item/gun/projectile/pirate,
-/obj/item/gun/projectile/pirate,
+/obj/item/gun/projectile/zipgun,
+/obj/item/gun/projectile/zipgun,
+/obj/item/gun/projectile/zipgun,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},

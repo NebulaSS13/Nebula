@@ -206,8 +206,8 @@
 /area/map_template/rescue_base/base)
 "aE" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/shotgun/pump/combat,
-/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
 /obj/item/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
@@ -357,10 +357,6 @@
 /area/map_template/rescue_base/base)
 "aT" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/box/machinegun,
-/obj/item/ammo_magazine/box/machinegun,
-/obj/item/ammo_magazine/box/machinegun,
-/obj/item/ammo_magazine/box/machinegun,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -390,9 +386,9 @@
 /area/map_template/rescue_base/base)
 "aW" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/automatic/sec_smg,
-/obj/item/gun/projectile/automatic/sec_smg,
-/obj/item/gun/projectile/automatic/sec_smg,
+/obj/item/gun/projectile/automatic/smg,
+/obj/item/gun/projectile/automatic/smg,
+/obj/item/gun/projectile/automatic/smg,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -448,7 +444,7 @@
 /area/map_template/rescue_base/base)
 "bd" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/automatic/l6_saw,
+/obj/item/gun/projectile/automatic/assault_rifle,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -475,15 +471,15 @@
 /area/map_template/rescue_base/base)
 "bf" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/ammo_magazine/smg_top/rubber,
+/obj/item/ammo_magazine/smg/rubber,
+/obj/item/ammo_magazine/smg/rubber,
+/obj/item/ammo_magazine/smg/rubber,
+/obj/item/ammo_magazine/smg/rubber,
+/obj/item/ammo_magazine/smg/rubber,
+/obj/item/ammo_magazine/smg/rubber,
+/obj/item/ammo_magazine/smg/rubber,
+/obj/item/ammo_magazine/smg/rubber,
+/obj/item/ammo_magazine/smg/rubber,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -575,16 +571,16 @@
 /area/map_template/rescue_base/base)
 "bp" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
-/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -711,8 +707,8 @@
 /area/map_template/rescue_base/base)
 "bD" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/automatic/bullpup_rifle,
-/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/gun/projectile/automatic/assault_rifle,
+/obj/item/gun/projectile/automatic/assault_rifle,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -782,12 +778,12 @@
 /area/map_template/rescue_base/base)
 "bL" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1

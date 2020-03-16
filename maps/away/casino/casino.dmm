@@ -418,15 +418,15 @@
 /area/casino/casino_maintenance)
 "bj" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/pistol/sec/MK{
+/obj/item/gun/projectile/pistol{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/gun/projectile/pistol/sec/MK{
+/obj/item/gun/projectile/pistol{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/gun/projectile/pistol/sec/MK,
+/obj/item/gun/projectile/pistol,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bk" = (
@@ -763,7 +763,7 @@
 /area/casino/casino_hangar)
 "bU" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bV" = (
@@ -5391,7 +5391,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "Ab" = (
-/obj/item/gun/projectile/pistol/sec/MK,
+/obj/item/gun/projectile/pistol,
 /obj/item/ammo_casing/pistol/magnum/used,
 /obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
@@ -5467,7 +5467,7 @@
 /area/casino/casino_kitchen)
 "Eb" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/gun/projectile/pistol/magnum_pistol,
+/obj/item/gun/projectile/revolver,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;

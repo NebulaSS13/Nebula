@@ -19,6 +19,6 @@
 
 /obj/item/storage/briefcase/foundation/Initialize()
 	. = ..()
-	new /obj/item/ammo_magazine/speedloader/magnum/nullglass(src)
+	new /obj/item/ammo_magazine/speedloader/nullglass(src)
 	new /obj/item/gun/projectile/revolver/foundation(src)
 	make_exact_fit()

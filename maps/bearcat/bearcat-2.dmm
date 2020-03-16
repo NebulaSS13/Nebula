@@ -6294,7 +6294,7 @@
 /turf/space,
 /area/space)
 "Pb" = (
-/obj/item/gun/projectile/shotgun/pump/combat{
+/obj/item/gun/projectile/shotgun/pump{
 	desc = "When words don't strike hard enough.";
 	name = "Solid Argument"
 	},

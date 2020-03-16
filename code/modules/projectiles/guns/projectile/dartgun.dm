@@ -1,48 +1,3 @@
-/obj/item/projectile/bullet/chemdart
-	name = "dart"
-	icon_state = "dart"
-	damage = 5
-	sharp = 1
-	embed = 1 //the dart is shot fast enough to pierce space suits, so I guess splintering inside the target can be a thing. Should be rare due to low damage.
-	var/reagent_amount = 15
-	life_span = 15 //shorter range
-	unacidable = 1
-
-	muzzle_type = null
-
-/obj/item/projectile/bullet/chemdart/Initialize()
-	. = ..()
-	create_reagents(reagent_amount)
-
-/obj/item/projectile/bullet/chemdart/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
-	if(blocked < 100 && isliving(target))
-		var/mob/living/L = target
-		if(L.can_inject(null, def_zone))
-			reagents.trans_to_mob(L, reagent_amount, CHEM_INJECT)
-
-/obj/item/ammo_casing/chemdart
-	name = "chemical dart"
-	desc = "A small hardened, hollow dart."
-	icon_state = "dart"
-	caliber = CALIBER_DART
-	projectile_type = /obj/item/projectile/bullet/chemdart
-	leaves_residue = 0
-
-/obj/item/ammo_casing/chemdart/expend()
-	qdel(src)
-
-/obj/item/ammo_magazine/chemdart
-	name = "dart cartridge"
-	desc = "A rack of hollow darts."
-	icon_state = "darts"
-	item_state = "rcdammo"
-	origin_tech = "{'" + TECH_MATERIAL + "':2}"
-	mag_type = MAGAZINE
-	caliber = CALIBER_DART
-	ammo_type = /obj/item/ammo_casing/chemdart
-	max_ammo = 5
-	multiple_sprites = 1
-
 /obj/item/gun/projectile/dartgun
 	name = "dart gun"
 	desc = "The Artemis is a gas-powered dart gun capable of delivering chemical cocktails swiftly across short distances."
@@ -195,12 +150,8 @@
 
 	Interact(usr)
 
-/obj/item/gun/projectile/dartgun/vox
-	name = "alien dart gun"
-	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
-
-/obj/item/gun/projectile/dartgun/vox/medical
+/obj/item/gun/projectile/dartgun/medical
 	starting_chems = list(/datum/reagent/burn_meds,/datum/reagent/brute_meds,/datum/reagent/antitoxins)
 
-/obj/item/gun/projectile/dartgun/vox/raider
+/obj/item/gun/projectile/dartgun/raider
 	starting_chems = list(/datum/reagent/psychoactives,/datum/reagent/sedatives,/datum/reagent/narcotics)
