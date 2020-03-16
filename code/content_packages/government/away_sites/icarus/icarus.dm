@@ -1,3 +1,4 @@
+#include "../../_government.dme"
 #include "icarus_areas.dm"
 
 /obj/effect/overmap/visitable/sector/icarus
@@ -113,7 +114,6 @@
 			\[WARN\]: Impact imminent... Preparing blackbox backup... Ready.<br>\
 			\[LOG\]: Emergency shutdown!<br>\
 			\[LOG\]: Now you can you safely turn off your computer.<br>"
-
 
 /obj/item/paper/icarus/crew_roster
 	name = "Printed piece of paper"

@@ -1,3 +1,4 @@
+#include "../../_corporate.dme"
 #include "lar_maria_areas.dm"
 
 /obj/effect/overmap/visitable/sector/lar_maria

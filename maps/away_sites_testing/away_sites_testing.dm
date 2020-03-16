@@ -1,11 +1,10 @@
 #if !defined(using_map_DATUM)
 
-	#include "..\..\code\content_packages\misc\mundane.dm"
-	#include "..\..\code\content_packages\misc\spacemen.dm"
-	#include "..\..\code\content_packages\corporate\_corporate.dme"
-	#include "..\..\code\content_packages\psionics\_psionics.dme"
 	#include "away_sites_testing_lobby.dm"
 	#include "blank.dmm"
+
+	#include "code/content_modules/government/away_sites/icarus/icarus.dm"
+	#include "code/content_modules/corporate/away_sites/lar_maria/lar_maria.dm"
 
 	#include "../away/empty.dmm"
 	#include "../away/mining/mining.dm"
@@ -19,7 +18,6 @@
 	#include "../away/blueriver/blueriver.dm"
 	#include "../away/mobius_rift/mobius_rift.dm"
 	#include "../away/errant_pisces/errant_pisces.dm"
-	#include "../away/lar_maria/lar_maria.dm"
 	#include "../away/unishi/unishi.dm"
 
 	#define using_map_DATUM /datum/map/away_sites_testing
