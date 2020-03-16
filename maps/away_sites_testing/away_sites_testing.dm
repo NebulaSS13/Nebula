@@ -3,8 +3,8 @@
 	#include "away_sites_testing_lobby.dm"
 	#include "blank.dmm"
 
-	#include "code/content_modules/government/away_sites/icarus/icarus.dm"
-	#include "code/content_modules/corporate/away_sites/lar_maria/lar_maria.dm"
+	#include "../../code/content_packages/government/away_sites/icarus/icarus.dm"
+	#include "../../code/content_packages/corporate/away_sites/lar_maria/lar_maria.dm"
 
 	#include "../away/empty.dmm"
 	#include "../away/mining/mining.dm"

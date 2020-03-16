@@ -25,7 +25,7 @@
 /mob/living/simple_animal/hostile/lar_maria
 	name = "Lar Maria hostile mob"
 	desc = "You shouldn't see me!"
-	icon = 'maps/away/lar_maria/lar_maria_sprites.dmi'
+	icon = 'code/content_packages/corporate/away_sites/lar_maria/lar_maria_sprites.dmi'
 	unsuitable_atmos_damage = 15
 	environment_smash = 1
 	faction = "lar_maria"
@@ -123,10 +123,10 @@
 
 /obj/item/clothing/head/soft/lar_maria/zhp_cap
 	name = "Zeng-Hu Pharmaceuticals cap"
-	icon = 'maps/away/lar_maria/lar_maria_sprites.dmi'
+	icon = 'code/content_packages/corporate/away_sites/lar_maria/lar_maria_sprites.dmi'
 	desc = "A green cap with Zeng-Hu Pharmaceuticals symbol on it."
 	icon_state = "zhp_cap"
-	item_icons = list(slot_head_str = 'maps/away/lar_maria/lar_maria_clothing_sprites.dmi')
+	item_icons = list(slot_head_str = 'code/content_packages/corporate/away_sites/lar_maria/lar_maria_clothing_sprites.dmi')
 
 /mob/living/simple_animal/hostile/lar_maria/virologist
 	name = "\improper virologist"

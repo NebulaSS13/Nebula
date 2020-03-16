@@ -72,7 +72,7 @@
 /obj/item/icarus/dead_personnel
 	name = "partial skeleton remains"
 	desc = "Human bones wrapped in the shredded remnants of a familiar black uniform."
-	icon = 'maps/away/icarus/icarus_sprites.dmi'
+	icon = 'code/content_packages/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "dead_personnel"
 	w_class = ITEM_SIZE_LARGE//pile of bones
 
@@ -158,13 +158,13 @@
 /obj/item/toy/ship_model
 	name = "table-top SEV Icarus model"
 	desc = "A small model of a spaceship mounted on a wooden stand. On the stand is engraved: \"SEV Icarus 1:278th scale\". The small lights on the hull and the engine exhaust still light up and blink."
-	icon = 'maps/away/icarus/icarus_sprites.dmi'
+	icon = 'code/content_packages/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "model"
 
 /obj/structure/sign/icarus/solgov
 	name = "\improper SolGov Seal"
 	desc = "A familiar seal showing this vessel is SolGov property."
-	icon = 'maps/away/icarus/icarus_sprites.dmi'
+	icon = 'code/content_packages/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "solgovseal"
 
 /obj/item/clothing/under/icarus/ec_uniform
@@ -172,13 +172,13 @@
 	desc = "An older model of the utility uniform of the SCG Expeditionary Corps. It has a patch on the left sleeve signifying the wearer served on the SEV Icarus."
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
-	icon = 'maps/away/icarus/icarus_sprites.dmi'
-	item_icons = list(slot_w_uniform_str = 'maps/away/icarus/icarus_sprites.dmi')
+	icon = 'code/content_packages/government/away_sites/icarus/icarus_sprites.dmi'
+	item_icons = list(slot_w_uniform_str = 'code/content_packages/government/away_sites/icarus/icarus_sprites.dmi')
 
 /obj/structure/sign/double/icarus/solgovflag
 	name = "Sol Central Government Flag"
 	desc = "The iconic flag of the Sol Central Government, a symbol with many different meanings."
-	icon = 'maps/away/icarus/icarus_sprites.dmi'
+	icon = 'code/content_packages/government/away_sites/icarus/icarus_sprites.dmi'
 
 /obj/structure/sign/double/icarus/solgovflag/left
 	icon_state = "solgovflag-left"

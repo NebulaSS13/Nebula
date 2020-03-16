@@ -95,10 +95,6 @@
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 
-/datum/gear/suit/wintercoat_dais
-	display_name = "winter coat, DAIS"
-	path = /obj/item/clothing/suit/storage/hooded/wintercoat/dais
-
 /datum/gear/suit/track
 	display_name = "track jacket selection"
 	path = /obj/item/clothing/suit/storage/toggle/track

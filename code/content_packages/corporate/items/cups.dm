@@ -9,3 +9,9 @@
 	desc = "A tasteful coffee cup in Expeditionary Corps Organisation corporate colours."
 	icon_state = "coffeecup_corp"
 	base_name = "\improper EXO cup"
+
+/obj/item/chems/food/drinks/glass2/coffeecup/dais
+	name = "\improper DAIS coffee cup"
+	desc = "A coffee cup imprinted with the stylish logo of Deimos Advanced Information Systems."
+	icon_state = "coffeecup_dais"
+	base_name = "\improper DAIS cup"

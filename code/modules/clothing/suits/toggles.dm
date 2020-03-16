@@ -135,16 +135,6 @@
 	name = "atmospherics winter coat"
 	icon_state = "coatatmos"
 
-/obj/item/clothing/suit/storage/hooded/wintercoat/dais
-	name = "\improper DAIS winter coat"
-	icon_state = "coat_dais"
-	siemens_coefficient = 0.5
-	armor = list(
-		melee = ARMOR_MELEE_SMALL, 
-		energy = ARMOR_ENERGY_MINOR
-		)
-	desc = "A hooded winter coat colored blue and white and bearing the logo of Deimos Advanced Information Systems."
-
 /obj/item/clothing/suit/storage/hooded/wintercoat/hydro
 	name = "hydroponics winter coat"
 	icon_state = "coathydro"

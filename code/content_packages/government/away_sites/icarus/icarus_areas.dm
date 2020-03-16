@@ -1,5 +1,5 @@
 /area/icarus
-	icon = 'maps/away/icarus/icarus_sprites.dmi'
+	icon = 'code/content_packages/government/away_sites/icarus/icarus_sprites.dmi'
 
 /area/icarus/vessel
 	name = "SEV Icarus"

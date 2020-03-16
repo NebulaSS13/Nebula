@@ -215,12 +215,6 @@
 	base_name = "tall cup"
 	base_icon = "coffeecup_tall"
 
-/obj/item/chems/food/drinks/glass2/coffeecup/dais
-	name = "\improper DAIS coffee cup"
-	desc = "A coffee cup imprinted with the stylish logo of Deimos Advanced Information Systems."
-	icon_state = "coffeecup_dais"
-	base_name = "\improper DAIS cup"
-
 /obj/item/chems/food/drinks/glass2/coffeecup/teacup
 	name = "teacup"
 	desc = "A plain white porcelain teacup."

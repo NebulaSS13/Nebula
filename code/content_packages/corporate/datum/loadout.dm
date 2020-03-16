@@ -89,3 +89,7 @@
 /datum/gear/suit/hoodie_nt
 	display_name = "hoodie, NanoTrasen"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie/nt
+
+/datum/gear/suit/wintercoat_dais
+	display_name = "winter coat, DAIS"
+	path = /obj/item/clothing/suit/storage/hooded/wintercoat/dais
