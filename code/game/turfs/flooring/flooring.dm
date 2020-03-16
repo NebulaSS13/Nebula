@@ -361,7 +361,7 @@
 
 /decl/flooring/snow
 	name = "snow"
-	desc = "Let is sno-ow... Let is snow..."
+	desc = "Let it sno-ow... Let it snow..."
 	icon = 'icons/turf/snow.dmi'
 	icon_base = "snow"
 	has_base_range = 12
