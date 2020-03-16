@@ -68,12 +68,15 @@
 		update_icon()
 
 	return
-
 /obj/structure/fireaxecabinet/Destroy()
-	if(fireaxe)
+	QDEL_NULL(fireaxe)
+	. = ..()
+
+/obj/structure/fireaxecabinet/dismantle()
+	if(loc && !dismantled && !QDELETED(fireaxe))
 		fireaxe.dropInto(loc)
 		fireaxe = null
-	return ..()
+	. = ..()
 
 /obj/structure/fireaxecabinet/attackby(var/obj/item/O, var/mob/user)
 
