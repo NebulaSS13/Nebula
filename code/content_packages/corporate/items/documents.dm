@@ -15,21 +15,21 @@
 /obj/item/book/union_charter
 	name = "\improper Union Charter"
 	title = "Union Charter of Workplace Rights"
-	author = "Expeditionary Corps Organisation Corporate Union"
-	dat = {"<head><title>Expeditionary Corps Organisation Union Charter of Workplace Rights</title></head>
+	author = "Corporate Union"
+	dat = {"<head><title>Corporate Union Charter of Workplace Rights</title></head>
 	<body>
 	<h2>0. Summary</h2>
 	<hr>
 	<p>As a union representative, you are required to uphold the interests of contracted workers on your station or vessel. You are empowered to inspect workplaces and instigate cessation of contracted work when on green alert, with diminishing powers during a state of emergency. You do not have authority or jurisdiction over government or military workers, or any workers who are not card-carrying signatories to this Charter.</p>
 	<h2>1. Introduction</h2>
-	<p>This Charter of Rights sets out the rights and responsibilities of all workplace parties in the provision of decent and fair health, safety, compensation and rehabilitation systems and practices within Sol-affiliated workplaces. Regardless of jurisdiction, changes to occupational health and safety, compensation and rehabilitation law must not result in a diminution of the rights and entitlements of any worker.</p>
-	<p>This Charter does not apply to staff who are not signatory to the Solar Employee General Award, or are signatory to other workplace regulatory documents such as the internal protocols of the Expeditionary Corps or the Sol Defense Fleet. Union representatives must take care to ensure that their operations on mixed jurisdiction stations and vessels are restricted to those areas that have a union worker, contractor or labourer presence.</p>
+	<p>This Charter of Rights sets out the rights and responsibilities of all workplace parties in the provision of decent and fair health, safety, compensation and rehabilitation systems and practices within affiliated workplaces. Regardless of jurisdiction, changes to occupational health and safety, compensation and rehabilitation law must not result in a diminution of the rights and entitlements of any worker.</p>
+	<p>This Charter does not apply to staff who are not signatory to the Solar Employee General Award, or are signatory to other workplace regulatory documents such as the internal protocols of your local legislative body. Union representatives must take care to ensure that their operations on mixed jurisdiction stations and vessels are restricted to those areas that have a union worker, contractor or labourer presence.</p>
 	<p>Workers must not be adversely affected by any employer moving between jurisdictions in relation to their OHS and workers compensation entitlements. Any proposed move between jurisdictions will only occur following genuine consultation and agreement with workers and their representatives and a process of public review, including public tribunal hearings.</p>
 	<p>Consistent with OHS and Worker Compensation Policy and interstellar standards, Solar law must ensure healthy and safe workplaces and a compensation and rehabilitation system which ensures that no worker is disadvantaged should they be injured at work.</p>
 	<p>All workers have the right to join a genuine trade union. Union organised workplaces are safer workplaces.</p>
 	<h2>2. Security Levels</h2>
 	<hr>
-	<p>On stations or vessels employing the standard SCG Alert Level protocol, the following conditions apply:</p>
+	<p>On stations or vessels employing the standard Security Alert Level protocol, the following conditions apply:</p>
 	<ul>
 	<li>On green alert, all particulars of this charter are considered valid and applicable.</li>
 	<li>Above green alert, union representatives are not permitted to conduct workplace inspections and are advised, but not required, to cease all union meetings or strike proceedings.</li>

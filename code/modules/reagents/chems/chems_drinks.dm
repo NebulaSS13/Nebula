@@ -912,11 +912,11 @@
 
 /datum/reagent/drink/gingerbeer
 	name = "ginger beer"
-	description = "A hearty, non-alcoholic beverage extremely popular around the SCG."
+	description = "A hearty, non-alcoholic beverage brewed from ginger."
 	taste_description = "carbonated ginger"
 	color = "#44371f"
 	glass_name = "ginger beer"
-	glass_desc = "A hearty, non-alcoholic beverage extremely popular around the SCG."
+	glass_desc = "A hearty, non-alcoholic beverage brewed from ginger."
 
 /datum/reagent/drink/beastenergy
 	name = "Beast Energy"

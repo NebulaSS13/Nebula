@@ -30,4 +30,4 @@
 	max_damage = 70
 	power_use = 5
 	has_hardpoints = list(HARDPOINT_BACK)
-	desc = "The Katamari series cockpits have won a massive tender by SCG few years back. No one is sure why, but these terrible things keep popping up on every government facility."
+	desc = "The Katamari series cockpits won a massive government tender a few years back. No one is sure why, but these terrible things keep popping up on every government-run facility."

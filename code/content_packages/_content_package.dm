@@ -11,3 +11,4 @@
 	var/list/worths                  // Associative (type = number) list that is added to the global item worth list.
 
 /decl/content_package/proc/get_player_panel_options(var/mob/M)
+	return

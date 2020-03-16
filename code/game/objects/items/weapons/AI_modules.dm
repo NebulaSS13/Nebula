@@ -267,22 +267,6 @@ AI MODULES
 	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
 	laws = new/datum/ai_laws/asimov
 
-/******************** SCG ********************/
-
-/obj/item/aiModule/solgov
-	name = "'SCG Expeditionary' Core AI Module"
-	desc = "An 'SCG Expeditionary' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
-	laws = new/datum/ai_laws/solgov
-
-/******************** SCG Aggressive ********************/
-
-obj/item/aiModule/solgov_aggressive
-	name = "\improper 'Military' Core AI Module"
-	desc = "A 'Military' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
-	laws = new/datum/ai_laws/solgov_aggressive
-
 /******************** Drone ********************/
 /obj/item/aiModule/drone
 	name = "\improper 'Drone' core AI module"

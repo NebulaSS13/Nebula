@@ -1,0 +1,10 @@
+#ifndef CONTENT_PACKAGE_GOVERNMENT
+#define CONTENT_PACKAGE_GOVERNMENT
+// BEGIN INCLUDE
+#include "government.dm"
+#include "datum\ai_holo.dm"
+#include "datum\ai_laws.dm"
+#include "items\cups.dm"
+#include "items\documents.dm"
+#endif
+// END_INCLUDE
