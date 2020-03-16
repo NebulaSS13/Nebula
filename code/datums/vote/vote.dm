@@ -22,9 +22,10 @@
 	var/win_x = 450
 	var/win_y = 740                // Vote window size.
 
-	var/show_leading = 0
+	var/show_leading = 0           // Colours leading choice based on votes count.
 	var/manual_allowed = 1         // Whether humans can start it.
-	var/percent_votes = FALSE      // Total votes in current choose. If FALSE - shows total num of voted people for this choose.
+	var/percent_votes = TRUE       // Total votes in current choose. If FALSE - shows total num of voted people for this choose.
+	var/show_votes_count = TRUE    // Show total votes for something. Staff with R_INVESTIGATE can bypass this.
 
 //Expected to be run immediately after creation; a false return means that the vote could not be run and the datum will be deleted.
 /datum/vote/proc/setup(mob/creator, automatic)
@@ -158,7 +159,8 @@
 		. += "<h2>Vote: [capitalize(name)]</h2>"
 	. += "Time Left: [time_remaining] s<hr>"
 	. += "<div class='statusDisplay'>"
-	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='[priorities.len]' align = 'center'><b>Votex</b></td>[check_rights(R_INVESTIGATE, 0, user) ? "<td align = 'center'><b>Votes</b></td>" : null]"
+	var/votes_count =  show_votes_count || check_rights(R_INVESTIGATE, 0, user) ? "<td align = 'center'><b>Votes</b></td>" : null
+	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='[priorities.len]' align = 'center'><b>Votex</b></td>[votes_count]"
 	. += additional_header
 
 	var/totalvotes = 0
