@@ -111,7 +111,7 @@ SUBSYSTEM_DEF(vote)
 	. += "<a href='?src=\ref[src];close=1' style='position:absolute;right:50px'>Close</a></body></html>"
 	return JOINTEXT(.)
 
-/datum/controller/subsystem/vote/proc/show_panel(mob/user)
+/datum/controller/subsystem/vote/proc/show_panel(mob/user, force_open)
 	var/win_x = 450
 	var/win_y = 740
 	if(active_vote)
@@ -119,11 +119,10 @@ SUBSYSTEM_DEF(vote)
 		win_y = active_vote.win_y
 	var/datum/browser/popup = new(user, "vote", "Voting Panel", win_x, win_y)
 	popup.set_content(interface(user.client))
-	popup.open(use_onclose = TRUE)
-	onclose(user, "vote", src)
+	popup.update(force_open, TRUE)
 
 /datum/controller/subsystem/vote/proc/close_panel(mob/user)
-	show_browser(user, null, "window=vote")
+	close_browser(user, "window=vote")
 	if(user)
 		voting -= user.client
 
@@ -139,7 +138,7 @@ SUBSYSTEM_DEF(vote)
 		return	//not necessary but meh...just in-case somebody does something stupid
 
 	if(href_list["vote_panel"])
-		show_panel(usr)
+		show_panel(usr, force_open = TRUE)
 		return
 	if(href_list["cancel"])
 		cancel_vote(usr)
@@ -161,7 +160,8 @@ SUBSYSTEM_DEF(vote)
 			show_panel(usr)
 			return
 
-		initiate_vote(vote_path, usr, 0) // Additional permission checking happens in here.
+		if(initiate_vote(vote_path, usr, 0)) // Additional permission checking happens in here.
+			show_panel(usr)
 
 //Helper for certain votes.
 /datum/controller/subsystem/vote/proc/restart_world()
@@ -194,4 +194,4 @@ SUBSYSTEM_DEF(vote)
 	if(GAME_STATE < RUNLEVEL_LOBBY)
 		to_chat(src, "It's too soon to do any voting!")
 		return
-	SSvote.show_panel(src)
+	SSvote.show_panel(src, force_open = TRUE)

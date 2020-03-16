@@ -11,7 +11,7 @@
 
 	var/start_time
 	var/time_remaining
-	var/time_set
+	var/time_set                   // Custom length of voting period
 	var/status = VOTE_STATUS_PREVOTE
 
 	var/list/result                // The results; format is list(choice = votes).
@@ -51,8 +51,8 @@
 
 /datum/vote/proc/start_vote()
 	start_time = world.time
-	time_set = (time_set ? time_set : config.vote_period) SECONDS
-	time_remaining = time_set
+	time_set = (time_set ? time_set : config.vote_period)
+	time_remaining = round(time_set / 10)
 	status = VOTE_STATUS_ACTIVE
 
 	var/text = get_start_text()
