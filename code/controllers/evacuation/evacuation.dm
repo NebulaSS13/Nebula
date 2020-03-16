@@ -152,6 +152,7 @@
 	state = EVAC_COMPLETE
 
 /datum/evacuation_controller/proc/process()
+	SHOULD_NOT_SLEEP(TRUE)
 
 	if(state == EVAC_PREPPING && recall && world.time >= auto_recall_time)
 		cancel_evacuation()

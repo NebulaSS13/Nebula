@@ -211,9 +211,7 @@
 	return log(2, mob_size / MOB_SIZE_MEDIUM)
 
 /mob/proc/Life()
-//	if(organStructure)
-//		organStructure.ProcessOrgans()
-	return
+	SHOULD_NOT_SLEEP(TRUE)
 
 #define UNBUCKLED 0
 #define PARTIALLY_BUCKLED 1

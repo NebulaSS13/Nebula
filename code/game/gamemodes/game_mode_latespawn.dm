@@ -6,6 +6,7 @@
 ///process()
 ///Called by the gameticker
 /datum/game_mode/proc/process()
+	SHOULD_NOT_SLEEP(TRUE)
 	if(shall_process_autoantag())
 		process_autoantag()
 

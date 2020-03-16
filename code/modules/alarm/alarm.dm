@@ -32,6 +32,7 @@
 	set_source_data(source, duration, severity)
 
 /datum/alarm/proc/process()
+	SHOULD_NOT_SLEEP(TRUE)
 	// Has origin gone missing?
 	if(!origin && !end_time)
 		end_time = world.time + ALARM_RESET_DELAY
