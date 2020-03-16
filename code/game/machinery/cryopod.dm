@@ -26,6 +26,13 @@
 	var/storage_name = "Cryogenic Oversight Control"
 	var/allow_items = 1
 
+/obj/machinery/computer/cryopod/Destroy()
+	for(var/obj/machinery/cryopod/C in SSmachines.machinery)
+		if(C.control_computer == src)
+			C.control_computer = null
+	QDEL_NULL_LIST(frozen_items)
+	. = ..()
+
 /obj/machinery/computer/cryopod/robot
 	name = "robotic storage console"
 	desc = "An interface between crew and the robotic storage systems."
@@ -244,6 +251,7 @@
 	..()
 
 /obj/machinery/cryopod/Destroy()
+	control_computer = null
 	if(occupant)
 		occupant.forceMove(loc)
 		occupant.resting = 1

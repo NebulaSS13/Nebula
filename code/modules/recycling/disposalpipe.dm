@@ -97,11 +97,18 @@ obj/structure/disposalpipe/Destroy()
 	if(!istype(H))
 		return
 
+	// Turf may have been exploded due to async calls.
+	if(!istype(T))
+		T = get_turf(src)
+		if(!T && !QDELETED(H))
+			qdel(H)
+			return
+
 	// Empty the holder if it is expelled into a dense turf.
 	// Leaving it intact and sitting in a wall is stupid.
 	if(T.density)
 		for(var/atom/movable/AM in H)
-			AM.loc = T
+			AM.dropInto(T)
 			AM.pipe_eject(0)
 		qdel(H)
 		return
