@@ -43,7 +43,7 @@
 		if(WT.isOn())
 			cutting = TRUE
 		else
-			to_chat(user, SPAN_WARNING("Turn \the [src] on, first."))
+			to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
 	else if(istype(W, /obj/item/gun/energy/plasmacutter))
 		cutting = TRUE
 

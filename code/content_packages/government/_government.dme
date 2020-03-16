@@ -7,5 +7,6 @@
 #include "items\clutter.dm"
 #include "items\cups.dm"
 #include "items\documents.dm"
+#include "ruins\ec_old_crash\ec_old_crash.dm")
 #endif
 // END_INCLUDE
