@@ -11,17 +11,20 @@
 
 	var/start_time
 	var/time_remaining
+	var/time_set
 	var/status = VOTE_STATUS_PREVOTE
 
 	var/list/result                // The results; format is list(choice = votes).
-	var/results_length = 3         // How many choices to show in the result. Setting to -1 will show all choices.
+	var/results_length = 3         // How many choices to show in the result. Setting to INFINITY will show all choices.
 	var/list/weights = list(3,2,1) // Controls how many things a person can vote for and how they will be weighed.
 	var/list/voted = list()        // Format is list(ckey = list(a, b, ...)); a, b, ... are ordered by order of preference and are numbers, referring to the index in choices
 
 	var/win_x = 450
 	var/win_y = 740                // Vote window size.
 
+	var/show_leading = 0
 	var/manual_allowed = 1         // Whether humans can start it.
+	var/percent_votes = FALSE      // Total votes in current choose. If FALSE - shows total num of voted people for this choose.
 
 //Expected to be run immediately after creation; a false return means that the vote could not be run and the datum will be deleted.
 /datum/vote/proc/setup(mob/creator, automatic)
@@ -47,13 +50,14 @@
 
 /datum/vote/proc/start_vote()
 	start_time = world.time
+	time_set = (time_set ? time_set : config.vote_period) SECONDS
+	time_remaining = time_set
 	status = VOTE_STATUS_ACTIVE
-	time_remaining = round(config.vote_period/10)
 
 	var/text = get_start_text()
 
 	log_vote(text)
-	to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>")
+	to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.\nYou have [time_set/10] seconds to vote.</font>")
 	to_world(sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = GLOB.vote_sound_channel))
 
 /datum/vote/proc/get_start_text()
@@ -79,7 +83,7 @@
 
 	var/text = get_result_announcement()
 	log_vote(text)
-	to_world("<font color='purple'>[text]</font>")	
+	to_world("<font color='purple'>[text]</font>")
 
 	if(!(result[result[1]] > 0))
 		return 1
@@ -89,11 +93,11 @@
 	if(!(result[result[1]] > 0)) // No one voted.
 		text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 	else
-		text += "<b>Vote Result: [display_choices[result[1]]]</b>"
-		if(length(result) >= 2)
-			text += "\nSecond place: [display_choices[result[2]]]"
-		if(length(result) >= 3)
-			text += ", third place: [display_choices[result[3]]]"
+		text += "<b>Vote Result: [display_choices[result[1]]][choices[result[1]] >= 1 ? " - \"[choices[result[1]]]\"" : null]</b>"
+		if(length(result) >= 2 && result[result[2]])
+			text += "\nSecond place: [display_choices[result[2]]][choices[result[2]] >= 1 ? " - \"[choices[result[2]]]\"" : null]"
+		if(length(result) >= 3 && result[result[3]])
+			text += "\nThird place: [display_choices[result[3]]][choices[result[3]] >= 1 ? " - \"[choices[result[3]]]\"" : null]"
 
 	return JOINTEXT(text)
 
@@ -136,7 +140,7 @@
 /datum/vote/Process()
 	if(status == VOTE_STATUS_ACTIVE)
 		if(time_remaining > 0)
-			time_remaining = round((start_time + config.vote_period - world.time)/10)
+			time_remaining = round((start_time + time_set - world.time)/10)
 			return VOTE_PROCESS_ONGOING
 		else
 			status = VOTE_STATUS_COMPLETE
@@ -153,7 +157,8 @@
 	else
 		. += "<h2>Vote: [capitalize(name)]</h2>"
 	. += "Time Left: [time_remaining] s<hr>"
-	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='3' align = 'center'><b>Votex</b></td><td align = 'center'><b>Votes</b></td>"
+	. += "<div class='statusDisplay'>"
+	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='[priorities.len]' align = 'center'><b>Votex</b></td>[check_rights(R_INVESTIGATE, 0, user) ? "<td align = 'center'><b>Votes</b></td>" : null]"
 	. += additional_header
 
 	var/totalvotes = 0
@@ -165,24 +170,36 @@
 		var/number_of_votes = choices[choice] || 0
 		var/votepercent = 0
 		if(totalvotes)
-			votepercent = round((number_of_votes/totalvotes)*100)
+			votepercent = percent_votes ? "[round((number_of_votes/totalvotes)*100)]%" : number_of_votes
 
-		. += "<tr><td>"
-		. += "[display_choices[choice]]"
+		. += "<tr><td align = 'center'>"
+
+		if(show_leading && number_of_votes > 0)
+			if(number_of_votes >= 15)
+				. += "<font color='#a30000'><b>[display_choices[choice]]</b></font>"
+			else if(number_of_votes >= 10)
+				. += "<font color='#ffa700'><b>[display_choices[choice]]</b></font>"
+			else if(number_of_votes >= 5)
+				. += "<font color='#00cc00'><b>[display_choices[choice]]</b></font>"
+			else if(number_of_votes >= 1)
+				. += "<b>[display_choices[choice]]</b>"
+		else
+			. += "[display_choices[choice]]"
 		. += "</td>"
 
 		for(var/i = 1, i <= length(priorities), i++)
-			. += "<td>"
+			. += "<td align = 'center'>"
 			if(voted[user.ckey] && (voted[user.ckey][i] == j)) //We have this jth choice chosen at priority i.
 				. += "<b><a href='?src=\ref[src];choice=[j];priority=[i]'>[priorities[i]]</a></b>"
 			else
 				. += "<a href='?src=\ref[src];choice=[j];priority=[i]'>[priorities[i]]</a>"
 			. += "</td>"
-		. += "</td><td align = 'center'>[votepercent]%</td>"
+		if(check_rights(R_INVESTIGATE, 0, user))
+			. += "</td><td align = 'center'>[votepercent]</td>"
 		if (additional_text[choice])
 			. += "[additional_text[choice]]" //Note lack of cell wrapper, to allow for dynamic formatting.
 		. += "</tr>"
-	. += "</table><hr>"
+	. += "</table></div><hr>"
 
 /datum/vote/Topic(href, href_list, hsrc)
 	var/mob/user = usr
