@@ -40,20 +40,20 @@ var/list/z_levels = list()// Each bit re... haha just kidding this is a list of 
 
 var/list/connected_z_cache = list()
 /proc/AreConnectedZLevels(var/zA, var/zB)
-    if (zA <= 0 || zB <= 0 || zA > world.maxz || zB > world.maxz)
-        return FALSE
-    if (zA == zB)
-        return TRUE
-    if (global.connected_z_cache.len >= zA && global.connected_z_cache[zA])
-        return global.connected_z_cache[zA][zB]
-    var/list/levels = GetConnectedZlevels(zA)
-    var/list/new_entry = new(world.maxz)
-    for (var/entry in levels)
-        new_entry[entry] = TRUE
-    if (global.connected_z_cache.len < zA)
-        global.connected_z_cache.len = zA
-    global.connected_z_cache[zA] = new_entry
-    return new_entry[zB]
+	if (zA <= 0 || zB <= 0 || zA > world.maxz || zB > world.maxz)
+		return FALSE
+	if (zA == zB)
+		return TRUE
+	if (global.connected_z_cache.len >= zA && global.connected_z_cache[zA])
+		return global.connected_z_cache[zA][zB]
+	var/list/levels = GetConnectedZlevels(zA)
+	var/list/new_entry = new(world.maxz)
+	for (var/entry in levels)
+		new_entry[entry] = TRUE
+	if (global.connected_z_cache.len < zA)
+		global.connected_z_cache.len = zA
+	global.connected_z_cache[zA] = new_entry
+	return new_entry[zB]
 
 /proc/get_zstep(ref, dir)
 	if(dir == UP)

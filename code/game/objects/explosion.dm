@@ -13,7 +13,7 @@
 	if(!epicenter) 
 		return
 
-	var/start_time = world.timeofday
+	var/start_time = REALTIMEOFDAY
 	// Handles recursive propagation of explosions.
 	if(z_transfer)
 		var/multi_z_scalar = 0.35
@@ -76,15 +76,20 @@
 		else
 			continue
 
+		var/throw_dist = 9/dist
 		T.ex_act(dist)
 		if(!T)
 			T = locate(x0,y0,z0)
 		if(T)
+			var/throw_target = get_edge_target_turf(T, get_dir(epicenter,T))
 			for(var/atom_movable in T.contents)
 				var/atom/movable/AM = atom_movable
 				if(AM && AM.simulated && !T.protects_atom(AM))
 					AM.ex_act(dist)
-	var/took = (world.timeofday-start_time)/10
+					if(!QDELETED(AM) && !AM.anchored)
+						addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, throw_dist, throw_dist), 0)
+
+	var/took = (REALTIMEOFDAY-start_time)/10
 	if(Debug2) 
 		to_world_log("## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds.")
 	return 1
@@ -105,7 +110,7 @@
 	}
 
 /proc/explosion_iter(turf/epicenter, power, z_transfer)
-	set waitfor=0
+	set waitfor = FALSE
 	if(power <= 0)
 		return
 	epicenter = get_turf(epicenter)
@@ -114,7 +119,7 @@
 	message_admins("Explosion with size ([power]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z])")
 	log_game("Explosion with size ([power]) in area [epicenter.loc.name] ")
 	log_debug("iexpl: Beginning discovery phase.")
-	var/time = world.time
+	var/time = REALTIMEOFDAY
 	var/list/act_turfs = list()
 	act_turfs[epicenter] = power
 
@@ -174,9 +179,9 @@
 
 		CHECK_TICK
 
-	log_debug("iexpl: Discovery completed in [(world.time-time)/10] seconds.")
+	log_debug("iexpl: Discovery completed in [(REALTIMEOFDAY-time)/10] seconds.")
 	log_debug("iexpl: Beginning SFX phase.")
-	time = world.time
+	time = REALTIMEOFDAY
 
 	var/volume = 10 + (power * 20)
 
@@ -224,9 +229,9 @@
 
 		CHECK_TICK
 
-	log_debug("iexpl: SFX phase completed in [(world.time-time)/10] seconds.")
+	log_debug("iexpl: SFX phase completed in [(REALTIMEOFDAY-time)/10] seconds.")
 	log_debug("iexpl: Beginning application phase.")
-	time = world.time
+	time = REALTIMEOFDAY
 
 	var/turf_tally = 0
 	var/movable_tally = 0
@@ -240,6 +245,8 @@
 		//sanity			effective power on tile				divided by either 3 or one third the total explosion power
 		//															One third because there are three power levels and I
 		//															want each one to take up a third of the crater
+		var/throw_target = get_edge_target_turf(T, get_dir(epicenter,T))
+		var/throw_dist = 9/severity
 		if (T.simulated)
 			T.ex_act(severity)
 		if (T.contents.len > !!T.lighting_overlay)
@@ -247,12 +254,14 @@
 				var/atom/movable/AM = subthing
 				if (AM.simulated)
 					AM.ex_act(severity)
-					movable_tally++
+					if(!QDELETED(AM) && !AM.anchored)
+						addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, throw_dist, throw_dist), 0)
+				movable_tally++
 				CHECK_TICK
 		else
 			CHECK_TICK
 	turf_tally++
-	log_debug("iexpl: Application completed in [(world.time-time)/10] seconds; processed [turf_tally] turfs and [movable_tally] movables.")
+	log_debug("iexpl: Application completed in [(REALTIMEOFDAY-time)/10] seconds; processed [turf_tally] turfs and [movable_tally] movables.")
 
 #undef SEARCH_DIR
 #undef EXPLFX_BOTH
