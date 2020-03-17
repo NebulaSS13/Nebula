@@ -12,6 +12,10 @@
 				UNSETEMPTY(pilots)
 		update_pilots()
 
+	if(!body && !QDELETED(src))
+		qdel(src)
+		return
+
 	if(radio)
 		radio.on = (head && head.radio && head.radio.is_functional())
 
