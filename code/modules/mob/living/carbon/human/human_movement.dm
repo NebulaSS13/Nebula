@@ -121,6 +121,10 @@
 	if(.) //We moved
 		handle_exertion()
 		handle_leg_damage()
+	
+		if(client)
+			var/turf/B = GetAbove(src)
+			up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"
 
 /mob/living/carbon/human/proc/handle_exertion()
 	if(isSynthetic())

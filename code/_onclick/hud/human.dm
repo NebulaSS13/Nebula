@@ -241,6 +241,14 @@
 		mymob.hydration_icon.screen_loc = ui_nutrition_small
 		hud_elements |= mymob.hydration_icon
 
+	if(hud_data.has_up_hint)
+		mymob.up_hint = new /obj/screen()
+		mymob.up_hint.icon = ui_style
+		mymob.up_hint.icon_state = "uphint0"
+		mymob.up_hint.SetName("up hint")
+		mymob.up_hint.screen_loc = ui_up_hint
+		hud_elements |= mymob.up_hint
+
 	mymob.pain = new /obj/screen/fullscreen/pain( null )
 	hud_elements |= mymob.pain
 

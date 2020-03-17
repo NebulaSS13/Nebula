@@ -128,6 +128,12 @@ var/obj/screen/robot_inventory
 	R.fire.SetName("fire")
 	R.fire.screen_loc = ui_fire
 
+	R.up_hint = new /obj/screen()
+	R.up_hint.icon = 'icons/mob/screen1_robot.dmi'
+	R.up_hint.icon_state = "uphint0"
+	R.up_hint.SetName("up hint")
+	R.up_hint.screen_loc = ui_up_hint
+
 	R.zone_sel = new /obj/screen/zone_sel()
 	R.zone_sel.icon = 'icons/mob/screen1_robot.dmi'
 	R.zone_sel.overlays.Cut()
@@ -140,7 +146,7 @@ var/obj/screen/robot_inventory
 	R.radio_use_icon = new /obj/screen/gun/radio(null)
 
 	R.client.screen = list()
-	R.client.screen += list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
+	R.client.screen += list(R.throw_icon, R.zone_sel, R.oxygen, R.fire, R.up_hint, R.hands, R.healths, R.cells, robot_inventory, R.gun_setting_icon)
 	R.client.screen += adding + other
 
 /datum/hud/proc/toggle_show_robot_modules()

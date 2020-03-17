@@ -859,3 +859,24 @@ default behaviour is:
 
 /mob/living/proc/is_telekinetic()
 	return FALSE
+
+/mob/living/verb/lookup()
+	set name = "Look Up"
+	set desc = "If you want to know what's above."
+	set category = "IC"
+
+	if(!is_physically_disabled())
+		var/turf/above = GetAbove(src)
+		if(bound_overlay)
+			if(client.eye == bound_overlay)
+				reset_view(0)
+				return
+			if(above.is_open())
+				to_chat(src, "<span class='notice'>You look up.</span>")
+				if(client)
+					reset_view(bound_overlay)
+				return
+		to_chat(src, "<span class='notice'>You can see \the [above ? above : "ceiling"].</span>")
+	else
+		to_chat(src, "<span class='notice'>You can't look up right now.</span>")
+	return

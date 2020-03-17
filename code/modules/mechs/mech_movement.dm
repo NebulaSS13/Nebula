@@ -6,8 +6,16 @@
 
 /mob/living/exosuit/Move()
 	. = ..()
-	if(. && !istype(loc, /turf/space))
-		playsound(src.loc, mech_step_sound, 40, 1)
+	if(.)
+		if(!istype(loc, /turf/space))
+			playsound(src.loc, mech_step_sound, 40, 1)
+
+		var/turf/B = GetAbove(src)
+
+		for(var/thing in pilots)
+			var/mob/pilot = thing
+			if(pilot.up_hint)
+				pilot.up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"
 
 //Override this and space move once a way to travel vertically is in 
 ///mob/living/exosuit/can_ztravel()

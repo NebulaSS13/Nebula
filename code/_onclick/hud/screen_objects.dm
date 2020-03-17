@@ -207,6 +207,12 @@
 
 		if("Reset Machine")
 			usr.unset_machine()
+		
+		if("up hint")
+			if(isliving(usr))
+				var/mob/living/L = usr
+				L.lookup()
+
 		if("internal")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr

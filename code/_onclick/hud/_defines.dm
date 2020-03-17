@@ -69,7 +69,8 @@
 #define ui_gun_select "RIGHT-1:28,BOTTOM+2:7"
 #define ui_gun4 "RIGHT-3:24,BOTTOM+2:7"
 
-//Upper-middle right (damage indicators)
+//Upper-middle right (damage indicators and up hint)
+#define ui_up_hint "RIGHT-1:28,TOP-1:29"
 #define ui_toxin "RIGHT-1:28,TOP-2:27"
 #define ui_fire "RIGHT-1:28,TOP-3:25"
 #define ui_oxygen "RIGHT-1:28,TOP-4:23"
