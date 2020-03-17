@@ -160,7 +160,7 @@
 	. += "Time Left: [time_remaining] s<hr>"
 	. += "<div class='statusDisplay'>"
 	var/votes_count =  show_votes_count || check_rights(R_INVESTIGATE, 0, user) ? "<td align = 'center'><b>Votes</b></td>" : null
-	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='[priorities.len]' align = 'center'><b>Votex</b></td>[votes_count]"
+	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='[priorities.len]' align = 'center'></td>[votes_count]"
 	. += additional_header
 
 	var/totalvotes = 0
