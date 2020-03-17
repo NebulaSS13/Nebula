@@ -53,6 +53,8 @@
 	update_icon()
 	update_verbs()
 	update_name()
+	if(enabled_by_default)
+		enable_computer()
 	. = ..()
 
 /obj/item/modular_computer/Destroy()
@@ -121,7 +123,7 @@
 
 	if(loud)
 		visible_message("\The [src] shuts down.", range = 1)
-		
+
 	enabled = 0
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
