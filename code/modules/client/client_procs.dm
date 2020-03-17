@@ -223,6 +223,8 @@
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
 
+	SetWindowIconSize(48)
+
 	//////////////
 	//DISCONNECT//
 	//////////////
