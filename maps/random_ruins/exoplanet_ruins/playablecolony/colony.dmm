@@ -6050,7 +6050,7 @@
 	icon_state = "techfloor_edges";
 	dir = 5
 	},
-/obj/structure/closet/secure_closet/hydroponics_torch,
+/obj/structure/closet/secure_closet/hydroponics,
 /obj/item/chems/glass/bucket,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/hydroponics)

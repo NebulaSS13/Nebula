@@ -273,7 +273,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 
 /datum/map/proc/setup_economy()
-	news_network.CreateFeedChannel("Nyx Daily", "SolGov Minister of Information", 1, 1)
+	news_network.CreateFeedChannel("News Daily", "Minister of Information", 1, 1)
 	news_network.CreateFeedChannel("The Gibson Gazette", "Editor Mike Hammers", 1, 1)
 
 	for(var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)
@@ -304,16 +304,16 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return "No map information available"
 
 /datum/map/proc/bolt_saferooms()
-	return // overriden by torch
+	return
 
 /datum/map/proc/unbolt_saferooms()
-	return // overriden by torch
+	return
 
-/datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
+/datum/map/proc/make_maint_all_access(var/radstorm = 0)
 	maint_all_access = 1
 	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
 
-/datum/map/proc/revoke_maint_all_access(var/radstorm = 0) // parameter used by torch
+/datum/map/proc/revoke_maint_all_access(var/radstorm = 0)
 	maint_all_access = 0
 	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
 

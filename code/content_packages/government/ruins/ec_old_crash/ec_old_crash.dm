@@ -2,6 +2,7 @@
 	name = "Expeditionary Ship"
 	id = "ec_old_wreck"
 	description = "An abandoned ancient STL exploration ship."
+	prefix = list("code/content_packages/government/ruins/")
 	suffixes = list("ec_old_crash/ec_old_crash.dmm")
 	cost = 0.5
 	apc_test_exempt_areas = list(
@@ -72,7 +73,7 @@
 /obj/item/paper/ecrashlog/Initialize()
 	. = ..()
 	var/shipname = "TEV [pick("Magellan", "Gagarin", "Drake", "Horizon", "Aurora")]"
-	var/decl/cultural_info/S = SSlore.get_culture(CULTURE_HUMAN_EARTH)
+	var/decl/cultural_info/S = SSlore.get_culture(CULTURE_HUMAN)
 	var/new_info = {"
 	I am Lieutenant Hao Ru, captain of [shipname], of the Terran Commonwealth Expeditionary Corps.<br>
 	We are dying. The Ran Mission has failed.<br>

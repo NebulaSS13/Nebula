@@ -27,7 +27,7 @@ exec 5>&1 # duplicate fd 5 to fd 1 (stdout); this allows us to echo the log duri
 
 [[ -e stopserver ]] && rm stopserver
 while [[ ! -e stopserver ]]; do
-	MAP="$(cat use_map || echo "torch")"
+	MAP="$(cat use_map || echo "example")"
 
 	# Any part of the update process can set this to immediately halt all further updating and kill the script
 	# This is NOT for trivial errors; only set this if the error is such that the server should NOT be started

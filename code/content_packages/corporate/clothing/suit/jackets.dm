@@ -24,3 +24,13 @@
 	name = "\improper Zeng-Hu suit jacket"
 	desc = "A jacket that Zeng-Hu has their executives wear."
 	icon_state = "jacket_zeng"
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/dais
+	name = "\improper DAIS winter coat"
+	icon_state = "coat_dais"
+	siemens_coefficient = 0.5
+	armor = list(
+		melee = ARMOR_MELEE_SMALL, 
+		energy = ARMOR_ENERGY_MINOR
+		)
+	desc = "A hooded winter coat colored blue and white and bearing the logo of Deimos Advanced Information Systems."

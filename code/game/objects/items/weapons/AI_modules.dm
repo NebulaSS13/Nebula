@@ -267,22 +267,6 @@ AI MODULES
 	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
 	laws = new/datum/ai_laws/asimov
 
-/******************** SCG ********************/
-
-/obj/item/aiModule/solgov // aka Torch default
-	name = "'SCG Expeditionary' Core AI Module"
-	desc = "An 'SCG Expeditionary' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
-	laws = new/datum/ai_laws/solgov
-
-/******************** SCG Aggressive ********************/
-
-obj/item/aiModule/solgov_aggressive
-	name = "\improper 'Military' Core AI Module"
-	desc = "A 'Military' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_MATERIAL + "':4}"
-	laws = new/datum/ai_laws/solgov_aggressive
-
 /******************** Drone ********************/
 /obj/item/aiModule/drone
 	name = "\improper 'Drone' core AI module"
@@ -378,11 +362,3 @@ obj/item/aiModule/solgov_aggressive
 	desc = "An 'Antimov' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = "{'" + TECH_DATA + "':4}"
 	laws = new/datum/ai_laws/antimov()
-
-/******************** DAIS ********************/
-
-/obj/item/aiModule/dais
-	name = "\improper 'DAIS Experimental' core AI module"
-	desc = "A 'DAIS Experimental' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = "{'" + TECH_DATA + "':4}"
-	laws = new/datum/ai_laws/dais()

@@ -149,12 +149,6 @@
 	icon_state = "coffeecup_heart"
 	base_name = "heart cup"
 
-/obj/item/chems/food/drinks/glass2/coffeecup/SCG
-	name = "\improper SCG coffee cup"
-	desc = "A blue coffee cup emblazoned with the crest of the Sol Central Government."
-	icon_state = "coffeecup_SCG"
-	base_name = "\improper SCG cup"
-
 /obj/item/chems/food/drinks/glass2/coffeecup/one
 	name = "#1 coffee cup"
 	desc = "A white coffee cup, prominently featuring a #1."
@@ -220,12 +214,6 @@
 	filling_states = @"[50,70,90,100]"
 	base_name = "tall cup"
 	base_icon = "coffeecup_tall"
-
-/obj/item/chems/food/drinks/glass2/coffeecup/dais
-	name = "\improper DAIS coffee cup"
-	desc = "A coffee cup imprinted with the stylish logo of Deimos Advanced Information Systems."
-	icon_state = "coffeecup_dais"
-	base_name = "\improper DAIS cup"
 
 /obj/item/chems/food/drinks/glass2/coffeecup/teacup
 	name = "teacup"

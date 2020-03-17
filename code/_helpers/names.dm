@@ -47,7 +47,7 @@ var/religion_name = null
 	return GLOB.using_map.system_name ? GLOB.using_map.system_name : generate_system_name()
 
 /proc/generate_system_name()
-	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD", "SCGECO")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
+	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
 
 /proc/generate_planet_name()
 	return "[capitalize(pick(GLOB.last_names))]-[pick(GLOB.greek_letters)]"

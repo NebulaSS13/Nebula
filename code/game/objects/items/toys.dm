@@ -704,13 +704,13 @@
 
 /obj/structure/plushie/drone
 	name = "plush drone"
-	desc = "A plushie of a happy drone! It appears to be smiling, and has a small tag which reads \"N.D.V. Icarus Gift Shop\"."
+	desc = "A plushie of a happy drone! It appears to be smiling."
 	icon_state = "droneplushie"
 	phrase = "Beep boop!"
 
 /obj/structure/plushie/carp
 	name = "plush carp"
-	desc = "A plushie of an elated carp! Straight from the wilds of the Nyx frontier, now right here in your hands."
+	desc = "A plushie of an elated carp! Straight from the wilds of the frontier, now right here in your hands."
 	icon_state = "carpplushie"
 	phrase = "Glorf!"
 
@@ -822,7 +822,7 @@
 	name = "table-top spaceship model"
 	desc = "This is a 1:250th scale spaceship model on a handsome wooden stand. Small lights blink on the hull and at the engine exhaust."
 	icon = 'icons/obj/toy.dmi'
-	icon_state = "torch_model_figure"
+	icon_state = "shipmodel"
 
 /obj/item/toy/ringbell
 	name = "ringside bell"

@@ -883,18 +883,13 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/spacecash/bundle/c100 = 2,
 				/obj/item/spacecash/bundle/c1000 = 1)
 
-/obj/random/documents // top secret documents for SCG eyes only
+/obj/random/documents // top secret documents, mostly overriden by maps
 	name = "random secret documents"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "docs_generic"
 
 /obj/random/documents/spawn_choices()
-	return list (
-		/obj/item/documents/scg/verified = 7,
-		/obj/item/documents/scg/red =      7,
-		/obj/item/documents/scg/blue =     7,
-		/obj/item/documents/scg/brains =   7
-	)
+	return list(/obj/item/documents)
 
 /obj/random/maintenance //Clutter and loot for maintenance and away missions
 	name = "random maintenance item"
