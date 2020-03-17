@@ -12,6 +12,7 @@
 
 /decl/machine_construction/wall_frame/panel_closed
 	visible_components = FALSE
+	locked = TRUE
 
 /decl/machine_construction/wall_frame/panel_closed/state_is_valid(obj/machinery/machine)
 	return !machine.panel_open

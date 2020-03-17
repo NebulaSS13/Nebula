@@ -722,6 +722,7 @@
 #include "code\game\machinery\_machines_base\machine_construction\wall_frame.dm"
 #include "code\game\machinery\_machines_base\machine_construction\wall_frame_simple.dm"
 #include "code\game\machinery\_machines_base\stock_parts\_stock_parts.dm"
+#include "code\game\machinery\_machines_base\stock_parts\access_lock.dm"
 #include "code\game\machinery\_machines_base\stock_parts\building_material.dm"
 #include "code\game\machinery\_machines_base\stock_parts\legacy_parts.dm"
 #include "code\game\machinery\_machines_base\stock_parts\shielding.dm"
