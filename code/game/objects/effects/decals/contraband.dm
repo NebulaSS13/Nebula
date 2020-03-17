@@ -27,7 +27,7 @@
 	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
 
-	return ..()
+	return ..(mapload)
 
 //Places the poster on a wall
 /obj/item/contraband/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
