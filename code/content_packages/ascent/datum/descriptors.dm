@@ -21,7 +21,6 @@
 		"easily twice your length"
 		)
 
-
 /datum/mob_descriptor/body_length/get_first_person_message_start()
 	return "Your body is"
 

@@ -246,7 +246,7 @@
 
 /obj/item/melee/energy/machete
 	name = "energy machete"
-	desc = "A machete handle that extends out into a long, purple machete blade. It appears to be Skrellian in origin."
+	desc = "A machete handle that extends out into a long, purple machete blade."
 	icon_state = "machete_skrell_x"
 	active_icon = "machete_skrell"
 	active_force = 16		//In line with standard machetes at time of creation.

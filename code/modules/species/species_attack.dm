@@ -152,19 +152,6 @@
 
 		if(8)		user.visible_message("<span class='danger'>[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [organ]!</span>")
 
-/decl/natural_attack/nabber
-	attack_verb = list("mauled", "slashed", "struck", "pierced")
-	attack_noun = list("forelimb")
-	damage = 8
-	shredding = 1
-	sharp = 1
-	edge = 1
-	delay = 20
-	eye_attack_text = "a forelimb"
-	eye_attack_text_victim = "a forelimb"
-	attack_name = "forelimb slash"
-	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
-
 /decl/natural_attack/punch/weak
 	attack_verb = list("swiped", "smacked", "smecked")
 	attack_name = "smek"

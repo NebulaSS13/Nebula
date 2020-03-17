@@ -5,6 +5,7 @@
 	#include "..\..\code\content_packages\corporate\_corporate.dme"
 	#include "..\..\code\content_packages\government\_government.dme"
 	#include "..\..\code\content_packages\psionics\_psionics.dme"
+	#include "..\..\code\content_packages\ascent\_ascent.dme"
 	#include "..\..\code\content_packages\modern_earth\_modern_earth.dme"
 
 	#include "example_areas.dm"

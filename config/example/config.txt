@@ -360,8 +360,7 @@ EVENT_CUSTOM_START_MAJOR 80;100
 STARLIGHT 0
 
 ## Defines which races are allowed to join as ERT, in singular form. If unset, defaults to only human. Casing matters, separate using ;
-## Example races include: Human, Tajara, Skrell, Unathi
-# ERT_SPECIES Human;Skrell;Unathi
+# ERT_SPECIES Human
 
 ## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
 # LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK, ALL LAWS OVERRIDDEN#*?&110010

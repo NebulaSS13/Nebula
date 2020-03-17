@@ -98,7 +98,7 @@ h1.alert, h2.alert		{color: #000000;}
 .alien					{color: #543354;}
 .soghun					{color: #228b22;}
 .yeosa					{color: #218b89;}
-.nabber_lang			{color: #525252;}
+.serpentid_lang			{color: #525252;}
 .changeling				{color: #800080;}
 .vox					{color: #aa00aa;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}

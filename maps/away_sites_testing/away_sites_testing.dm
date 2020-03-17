@@ -5,6 +5,7 @@
 
 	#include "../../code/content_packages/government/away_sites/icarus/icarus.dm"
 	#include "../../code/content_packages/corporate/away_sites/lar_maria/lar_maria.dm"
+	#include "../../code/content_packages/ascent/away_sites/ascent/ascent.dm"
 
 	#include "../away/empty.dmm"
 	#include "../away/mining/mining.dm"
