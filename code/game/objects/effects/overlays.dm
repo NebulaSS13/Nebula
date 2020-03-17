@@ -53,3 +53,14 @@
 	. = ..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)
+
+/obj/effect/overlay/holoray
+	name = "holoray"
+	icon = 'icons/effects/96x96.dmi'
+	icon_state = "holoray"
+	layer = FLY_LAYER
+	anchored = TRUE
+	mouse_opacity = FALSE
+	pixel_x = -32
+	pixel_y = -32
+	alpha = 120

@@ -54,6 +54,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	var/holopadType = HOLOPAD_SHORT_RANGE //Whether the holopad is short-range or long-range.
 	var/base_icon = "holopad-B"
 
+	var/obj/effect/overlay/holoray/holoray
+
 	var/allow_ai = TRUE
 
 /obj/machinery/hologram/holopad/Initialize()
@@ -263,10 +265,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, mob/living/carbon/caller_id, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
+	holoray = new(T) //The link between the projection and the projector.
 	if(caller_id)
-		var/datum/computer_file/report/crew_record/R = get_crewmember_record(caller_id.name)
-		if(R)
-			hologram.overlays += getHologramIcon(icon(R.photo_front), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
+		hologram.overlays += getHologramIcon(icon(getFlatIcon(caller_id, SOUTH, always_use_defdir = 1)), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
 	else if(A)
 		if(holopadType == HOLOPAD_LONG_RANGE)
 			hologram.overlays += A.holo_icon_longrange
@@ -275,6 +276,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(A)
 		if(A.holo_icon_malf == TRUE)
 			hologram.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
+			holoray.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
 	hologram.mouse_opacity = 0//So you can't click on it.
 	hologram.layer = ABOVE_HUMAN_LAYER //Above all the other objects/mobs. Or the vast majority of them.
 	hologram.anchored = 1//So space wind cannot drag it.
@@ -286,9 +288,24 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		hologram.SetName("[A.name] (Hologram)") //If someone decides to right click.
 		A.holo = src
 		masters[A] = hologram
-	hologram.set_light(1, 0.1, 2)	//hologram lighting
-	hologram.color = color //painted holopad gives coloured holograms
-	set_light(1, 0.1, 2)			//pad lighting
+
+	//painted holopad gives coloured holograms
+	var/new_color = holopadType == HOLOPAD_LONG_RANGE ? "#e1df7d" : "#7db4e1"
+
+	//pad lighting
+	light_color = new_color
+	set_light(1, 0.1, 2)
+
+	//hologram lighting
+	hologram.light_color = new_color
+	hologram.set_light(1, 0.1, 2)
+
+	//holoray lighting
+	holoray.color = new_color
+	holoray.light_color = new_color
+	holoray.set_light(0.3, 1, 2, 2)
+	update_holoray(hologram, T)
+
 	icon_state = "[base_icon]1"
 	return 1
 
@@ -300,6 +317,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(caller_id)
 		qdel(masters[caller_id])//Get rid of user's hologram
 		masters -= caller_id //Discard the caller from the list of those who use holopad
+	if(holoray)
+		QDEL_NULL(holoray)
 	if (!masters.len)//If no users left
 		set_light(0)			//pad lighting (hologram lighting will be handled automatically since its owner was deleted)
 		icon_state = "[base_icon]0"
@@ -329,7 +348,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		end_call()
 	if (caller_id&&sourcepad)
 		if(caller_id.loc!=sourcepad.loc)
-			sourcepad.to_chat(caller_id, "Severing connection to distant holopad.")
+			to_chat(sourcepad.caller_id, "Severing connection to distant holopad.")
 			end_call()
 			audible_message("The connection has been terminated by the caller.")
 	return 1
@@ -340,6 +359,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		var/obj/effect/overlay/H = masters[user]
 		H.dropInto(user.eyeobj)
 		masters[user] = H
+		update_holoray(H, get_turf(user.eyeobj))
 
 		if(!(H in view(src)))
 			clear_holo(user)
@@ -361,7 +381,31 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		var/obj/effect/overlay/hologram = masters[user]
 		hologram.dir = new_dir
 
+/obj/machinery/hologram/holopad/proc/update_holoray(obj/effect/overlay/holo, turf/new_turf)
+	var/turf/T = get_turf(holo)
+	var/turf/dest = new_turf
 
+	var/disty = holo.y - holoray.y
+	var/distx = holo.x - holoray.x
+	var/newangle
+
+	if(!disty)
+		if(distx >= 0)
+			newangle = 90
+		else
+			newangle = 270
+	else
+		newangle = arctan(distx/disty)
+		if(disty < 0)
+			newangle += 180
+		else if(distx < 0)
+			newangle += 360
+
+	var/matrix/M = matrix()
+	if(get_dist(T, dest) <= 1)
+		animate(holoray, transform = turn(M.Scale(1, sqrt(distx * distx + disty * disty)), newangle), time = 4)
+	else
+		holoray.transform = turn(M.Scale(1, sqrt(distx * distx + disty * disty)), newangle)
 
 /*
  * Hologram
