@@ -844,14 +844,6 @@ menu "menu"
 		name = "&Size"
 		command = ""
 		saved-params = "is-checked"
-	elem "stretch"
-		name = "&Stretch to fit"
-		command = "SetWindowIconSize 0"
-		category = "&Size"
-		is-checked = true
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
 	elem "icon128"
 		name = "&128x128"
 		command = "SetWindowIconSize 128"
@@ -877,6 +869,7 @@ menu "menu"
 		name = "&48x48"
 		command = "SetWindowIconSize 48"
 		category = "&Size"
+		is-checked = true
 		can-check = true
 		group = "size"
 		saved-params = "is-checked"
