@@ -2734,6 +2734,7 @@
 #include "code\modules\research\designs\designs_medical.dm"
 #include "code\modules\research\designs\designs_mining.dm"
 #include "code\modules\research\designs\designs_modular_computer.dm"
+#include "code\modules\research\designs\designs_organs.dm"
 #include "code\modules\research\designs\designs_powercell.dm"
 #include "code\modules\research\designs\designs_rig_modules.dm"
 #include "code\modules\research\designs\designs_singletons.dm"
