@@ -166,7 +166,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 /obj/machinery/newscaster/Destroy()
 	allCasters -= src
-	..()
+	. = ..()
 
 /obj/machinery/newscaster/on_update_icon()
 	if(inoperable())

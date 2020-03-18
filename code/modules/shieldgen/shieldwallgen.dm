@@ -290,7 +290,7 @@
 
 /obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()
-	..()
+	. = ..()
 
 /obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary

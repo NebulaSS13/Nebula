@@ -14,7 +14,7 @@ GLOBAL_LIST_INIT(all_objectives, new)
 
 /datum/objective/Destroy()
 	GLOB.all_objectives -= src
-	..()
+	. = ..()
 
 /datum/objective/proc/find_target()
 	var/list/possible_targets = list()
