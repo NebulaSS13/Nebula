@@ -159,7 +159,7 @@
 
 /obj/screen/intent
 	name = "intent"
-	icon = 'icons/mob/screen1_White.dmi'
+	icon = 'icons/mob/screen/white.dmi'
 	icon_state = "intent_help"
 	screen_loc = ui_acti
 	var/intent = I_HELP
