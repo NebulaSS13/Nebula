@@ -11,11 +11,11 @@
 /datum/medical_effect/proc/manifest(mob/living/carbon/human/H)
 	for(var/R in cures)
 		if(!H.reagents || H.reagents.has_reagent(R))
-			return 0
+			return FALSE
 	for(var/R in triggers)
 		if(H.reagents.get_reagent_amount(R) >= triggers[R])
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /datum/medical_effect/proc/on_life(mob/living/carbon/human/H, strength)
 	return
@@ -24,10 +24,9 @@
 	for(var/R in cures)
 		if(H.reagents.has_reagent(R))
 			if (cure_message)
-				to_chat(H, "<span class='notice'>[cure_message]</span>")
-			return 1
-	return 0
-
+				to_chat(H, SPAN_NOTICE("[cure_message]"))
+			return TRUE
+	return FALSE
 
 // MOB HELPERS
 // ===========
@@ -40,23 +39,21 @@
 			M.start = life_tick
 			return
 
-
-	var/T = side_effects[name]
-	if (!T)
-		return
-
-	var/datum/medical_effect/M = new T
-	if(M.name == name)
-		M.strength = strength
-		M.start = life_tick
-		side_effects += M
+	var/list/L = subtypesof(/datum/medical_effect)
+	for(var/T in L)
+		var/datum/medical_effect/M = new T
+		if(M.name == name)
+			M.strength = strength
+			M.start = life_tick
+			side_effects += M
+			break
 
 /mob/living/carbon/human/proc/handle_medical_side_effects()
 	//Going to handle those things only every few ticks.
 	if(life_tick % 15 != 0)
-		return 0
+		return FALSE
 
-	var/list/L = typesof(/datum/medical_effect)-/datum/medical_effect
+	var/list/L = subtypesof(/datum/medical_effect)
 	for(var/T in L)
 		var/datum/medical_effect/M = new T
 		if (M.manifest(src))
@@ -87,15 +84,21 @@
 	cure_message = "Your head stops throbbing..."
 
 /datum/medical_effect/headache/on_life(mob/living/carbon/human/H, strength)
-	var/obj/item/organ/external/head/head = H.get_organ("head")
-	if(istype(head))
+	var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD)
+	if(head)
 		switch(strength)
 			if(1 to 10)
-				H.custom_pain("You feel a light pain in your head.",0, affecting = head)
+				H.custom_pain("You feel a light pain in your head.", 5, affecting = head)
 			if(11 to 30)
-				H.custom_pain("You feel a throbbing pain in your head!",1, affecting = head)
+				H.custom_pain("You feel a throbbing pain in your head!", 15, affecting = head)
+				H.eye_blurry += rand(3,6)
+				H.stamina -= rand(10,20)
+				shake_camera(H, 7, 0.5)
 			if(31 to INFINITY)
-				H.custom_pain("You feel an excrutiating pain in your head!",1, affecting = head)
+				H.custom_pain("You feel an excrutiating pain in your head!", 40, affecting = head)
+				H.eye_blurry += rand(10,20)
+				H.stamina -= rand(20,35)
+				shake_camera(H, 7, 1)
 
 // BAD STOMACH
 // ===========
@@ -106,13 +109,15 @@
 	cure_message = "Your stomach feels a little better now..."
 
 /datum/medical_effect/bad_stomach/on_life(mob/living/carbon/human/H, strength)
-	switch(strength)
-		if(1 to 10)
-			H.custom_pain("You feel a bit light around the stomach.",0)
-		if(11 to 30)
-			H.custom_pain("Your stomach hurts.",0)
-		if(31 to INFINITY)
-			H.custom_pain("You feel sick.",1)
+	var/obj/item/organ/external/head/groin = H.get_organ(BP_GROIN) //INF
+	if(groin)
+		switch(strength)
+			if(1 to 10)
+				H.custom_pain("You feel a bit light around the stomach.", 10, affecting = groin)
+			if(11 to 30)
+				H.custom_pain("Your stomach hurts.", 20, affecting = groin)
+			if(31 to INFINITY)
+				H.custom_pain("You feel sick.", 30, affecting = groin)
 
 // CRAMPS
 // ======
@@ -125,12 +130,13 @@
 /datum/medical_effect/cramps/on_life(mob/living/carbon/human/H, strength)
 	switch(strength)
 		if(1 to 10)
-			H.custom_pain("The muscles in your body hurt a little.",0)
+			H.custom_pain("The muscles in your body hurt a little.", 20)
 		if(11 to 30)
-			H.custom_pain("The muscles in your body cramp up painfully.",0)
+			H.custom_pain("The muscles in your body cramp up painfully.", 30)
 		if(31 to INFINITY)
 			H.visible_message("<B>\The [src]</B> flinches as all the muscles in their body cramp up.")
-			H.custom_pain("There's pain all over your body.",1)
+			H.custom_pain("There's pain all over your body.", 70)
+			shake_camera(H, 10, 1)
 
 // ITCH
 // ====
@@ -143,9 +149,10 @@
 /datum/medical_effect/itch/on_life(mob/living/carbon/human/H, strength)
 	switch(strength)
 		if(1 to 10)
-			H.custom_pain("You feel a slight itch.",0)
+			H.custom_pain("You feel a slight itch.", 10)
 		if(11 to 30)
-			H.custom_pain("You want to scratch your itch badly.",0)
+			H.custom_pain("You want to scratch your itch badly.", 15)
 		if(31 to INFINITY)
 			H.visible_message("<B>\The [src]</B> shivers slightly.")
-			H.custom_pain("This itch makes it really hard to concentrate.",1)
+			H.custom_pain("This itch makes it really hard to concentrate.", 20)
+			shake_camera(H, 20, 4)
