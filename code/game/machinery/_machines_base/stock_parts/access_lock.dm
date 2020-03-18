@@ -5,6 +5,7 @@
 	part_flags = PART_FLAG_QDEL | PART_FLAG_NODAMAGE
 	req_access = list(access_engine_equip) // set req_access on this to impose access requirements.
 	var/locked = FALSE
+	var/emagged = FALSE
 
 /obj/machinery/cannot_transition_to(state_path, mob/user)
 	var/decl/machine_construction/state = decls_repository.get_decl(state_path)
@@ -14,9 +15,18 @@
 				return SPAN_WARNING("\The [lock] flashes red! You lack the access to unlock this.")
 	return ..()
 
+/obj/item/stock_parts/access_lock/emag_act(remaining_charges, mob/user, emag_source)
+	. = ..()
+	if(length(req_access) && locked && istype(loc, /obj/machinery)) // Don't emag it outside; you can just cut access without it anyway.
+		locked = FALSE
+		emagged = TRUE
+		to_chat(user, SPAN_NOTICE("You slide the card into \the [src]. It flashes purple briefly, then disengages."))
+		. = max(., 1)
+
 /obj/item/stock_parts/access_lock/on_install(obj/machinery/machine)
 	. = ..()
-	locked = TRUE
+	if(!emagged)
+		locked = TRUE
 
 /obj/item/stock_parts/access_lock/on_uninstall(obj/machinery/machine)
 	. = ..()
@@ -30,10 +40,12 @@
 	. = ..()
 	if(locked)
 		to_chat(user, "The lock is engaged.")
+	if(emagged && user.skill_check_multiple(list(SKILL_FORENSICS = SKILL_EXPERT, SKILL_COMPUTER = SKILL_EXPERT)))
+		to_chat(user, SPAN_WARNING("On close inspection, there is something odd about the interface. You suspect it may have been tampered with."))
 
 /obj/item/stock_parts/access_lock/attackby(obj/item/W, mob/user)
 	var/obj/machinery/machine = loc
-	if(istype(machine))
+	if(!emagged && istype(machine))
 		if(check_access(W))
 			locked = !locked
 			visible_message(SPAN_NOTICE("\The [src] beeps and flashes green twice: it is now [locked ? "" : "un"]locked."))

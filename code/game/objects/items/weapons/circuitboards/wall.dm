@@ -28,3 +28,23 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
+
+/obj/item/stock_parts/circuitboard/apc
+	name = T_BOARD("area power controller")
+	desc = "Heavy-duty switching circuits for power control."
+	icon = 'icons/obj/module.dmi'
+	icon_state = "power_mod"
+	item_state = "electronic"
+	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
+	w_class = ITEM_SIZE_SMALL
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	build_path = /obj/machinery/power/apc/buildable
+	board_type = "wall"
+	origin_tech = "{'" + TECH_DATA + "':1,'" + TECH_ENGINEERING + "':1}"
+	req_components = list()
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/battery/buildable = 1,
+		/obj/item/stock_parts/power/terminal/buildable = 1,
+	)

@@ -24,8 +24,10 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "ano10"
 	update_state = 0 //Don't pixelshift us on wall
-	cell_type = /obj/item/cell/alien
 	autoname = 0
+	uncreated_component_parts = list(
+		/obj/item/cell/alien
+	)
 	
 /obj/machinery/power/apc/alien/on_update_icon()
 	check_updates()
