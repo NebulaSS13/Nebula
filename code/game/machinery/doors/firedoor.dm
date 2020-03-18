@@ -39,6 +39,9 @@
 	var/list/users_to_open = new
 	var/next_process_time = 0
 
+	var/sound_open = 'sound/machines/airlock_ext_open.ogg'
+	var/sound_close = 'sound/machines/airlock_ext_close.ogg'
+
 	var/hatch_open = 0
 
 	power_channel = ENVIRON
@@ -389,8 +392,10 @@
 	switch(animation)
 		if("opening")
 			flick("opening", src)
+			playsound(src, sound_open, 45, 1)
 		if("closing")
 			flick("closing", src)
+			playsound(src, sound_close, 45, 1)
 	return
 
 
