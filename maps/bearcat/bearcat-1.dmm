@@ -26,7 +26,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/cargo/lower)
 "ah" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/escape_port)
 "ai" = (
 /obj/machinery/door/blast/regular/escape_pod,
@@ -56,10 +56,10 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/cargo/lower)
 "al" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/cargo/lower)
 "ao" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/cargo/lower)
 "ap" = (
 /obj/machinery/door/blast/regular/escape_pod,
@@ -67,7 +67,7 @@
 /area/ship/bearcat/escape_star)
 "aq" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/escape_star)
 "ar" = (
 /obj/machinery/cryopod/lifepod,
@@ -147,7 +147,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/escape_star)
 "aA" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/escape_star)
 "aC" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -253,10 +253,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/escape_star)
 "aO" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/gambling)
 "aP" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/gambling)
 "aR" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -307,10 +307,10 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/bearcat/cargo/lower)
 "aX" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/crew/dorms1)
 "aY" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/crew/dorms1)
 "aZ" = (
 /obj/item/flashlight/lamp,
@@ -475,12 +475,15 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/gambling)
 "bn" = (
@@ -642,12 +645,15 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/crew/dorms1)
 "bG" = (
@@ -845,7 +851,7 @@
 /area/ship/bearcat/maintenance/lower)
 "ca" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/broken2)
 "cb" = (
 /obj/machinery/light/small/red{
@@ -890,7 +896,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/broken2)
 "ce" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/broken2)
 "cf" = (
 /obj/machinery/light/small{
@@ -971,7 +977,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/lower)
 "cm" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/crew/dorms2)
 "cn" = (
 /obj/structure/cable{
@@ -1010,18 +1016,21 @@
 /area/ship/bearcat/crew/dorms2)
 "cq" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/crew/dorms2)
 "cr" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/broken2)
 "cs" = (
@@ -1127,12 +1136,15 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/crew/dorms2)
 "cI" = (
@@ -1197,7 +1209,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/broken1)
 "cS" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/broken1)
 "cU" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1298,7 +1310,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/storage)
 "dd" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/broken1)
 "de" = (
 /obj/machinery/light/small{
@@ -1384,7 +1396,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/lower)
 "dl" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/crew/dorms3)
 "dm" = (
 /obj/structure/cable{
@@ -1429,12 +1441,15 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/broken1)
 "dq" = (
@@ -1525,12 +1540,15 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/crew/dorms3)
 "dD" = (
@@ -1559,7 +1577,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/lower)
 "dI" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/crew/dorms3)
 "dJ" = (
 /obj/machinery/alarm{
@@ -1726,13 +1744,13 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/lower)
 "dZ" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/maintenance/techstorage)
 "ea" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/maintenance/storage)
 "eb" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/maintenance/storage)
 "ec" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1751,13 +1769,13 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/bearcat/maintenance/techstorage)
 "ed" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/maintenance/eva)
 "ee" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/maintenance/eva)
 "ef" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/maintenance/techstorage)
 "ek" = (
 /obj/structure/closet/crate/plastic,
@@ -2250,15 +2268,14 @@
 /area/ship/bearcat/maintenance/eva)
 "fd" = (
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
 	density = 0;
-	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/ship/bearcat/maintenance/storage)
 "fe" = (
@@ -2325,7 +2342,7 @@
 /area/ship/bearcat/cargo/lower)
 "iW" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/broken1)
 "jb" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2365,7 +2382,7 @@
 /area/ship/bearcat/maintenance/lower)
 "kP" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/crew/dorms1)
 "lb" = (
 /obj/structure/cable{
@@ -2388,7 +2405,7 @@
 /area/ship/bearcat/gambling)
 "lE" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/cargo/lower)
 "lK" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2513,7 +2530,7 @@
 /area/ship/bearcat/escape_port)
 "se" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/maintenance/techstorage)
 "sY" = (
 /obj/effect/paint/brown,
@@ -2551,7 +2568,7 @@
 /area/ship/bearcat/broken2)
 "uh" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/maintenance/eva)
 "vb" = (
 /obj/machinery/alarm{
@@ -2565,12 +2582,15 @@
 "vw" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/crew/dorms1)
 "vW" = (
@@ -2590,11 +2610,11 @@
 /area/ship/bearcat/escape_star)
 "wI" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/crew/dorms3)
 "xa" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/crew/dorms2)
 "xb" = (
 /obj/effect/shuttle_landmark/below_deck_starboardastern,
@@ -2648,7 +2668,7 @@
 /area/ship/bearcat/cargo/lower)
 "AT" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/cargo/lower)
 "Bb" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
@@ -2669,7 +2689,7 @@
 /area/ship/bearcat/crew/dorms1)
 "BO" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/crew/dorms3)
 "Cb" = (
 /obj/machinery/firealarm{
@@ -2702,12 +2722,15 @@
 "Dl" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/gambling)
 "Eb" = (
@@ -2726,11 +2749,11 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/lower)
 "Ep" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/escape_port)
 "Eq" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/gambling)
 "Fb" = (
 /obj/machinery/floodlight,
@@ -2865,7 +2888,7 @@
 /area/ship/bearcat/maintenance/lower)
 "Mx" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/escape_port)
 "Nb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -2938,7 +2961,7 @@
 /area/ship/bearcat/cargo/lower)
 "Rq" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/maintenance/storage)
 "Sb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2993,20 +3016,19 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/lower)
 "Vh" = (
+/obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
 	density = 0;
-	dir = 4;
 	icon_state = "pdoor0";
 	id_tag = "scraplock";
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/ship/bearcat/maintenance/storage)
 "VM" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/gambling)
 "Wb" = (
 /obj/structure/cable{
@@ -3023,7 +3045,7 @@
 /area/ship/bearcat/maintenance/storage)
 "WZ" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/ship/bearcat/broken1)
 "Xb" = (
 /obj/item/stock_parts/circuitboard/pacman,
