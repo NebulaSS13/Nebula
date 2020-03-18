@@ -324,3 +324,5 @@
 #define DEXTERITY_WEAPONS         5
 #define DEXTERITY_COMPLEX_TOOLS   6
 #define DEXTERITY_FULL            7
+
+#define GLIDE_SIZE_CONSTANT world.tick_lag

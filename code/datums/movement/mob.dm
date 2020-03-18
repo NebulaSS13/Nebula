@@ -144,9 +144,11 @@
 
 /datum/movement_handler/mob/delay/proc/SetDelay(var/delay)
 	next_move = max(next_move, world.time + delay)
+	mob.glide_size = world.icon_size / max((delay-GLIDE_SIZE_CONSTANT), world.tick_lag) * world.tick_lag
 
 /datum/movement_handler/mob/delay/proc/AddDelay(var/delay)
 	next_move += max(0, delay)
+	mob.glide_size = world.icon_size / max((next_move-world.time)-GLIDE_SIZE_CONSTANT, world.tick_lag) * world.tick_lag
 
 // Stop effect
 /datum/movement_handler/mob/stop_effect/DoMove()
