@@ -1,5 +1,5 @@
 /obj/item/stock_parts/access_lock
-	name = "access_lock"
+	name = "access lock"
 	desc = "An id-based access lock preventing tampering with a machine's hardware."
 	icon_state = "scan_module"
 	part_flags = PART_FLAG_QDEL | PART_FLAG_NODAMAGE
@@ -54,8 +54,6 @@
 
 	if(isMultitool(W)) // This is a non-machine interaction only; doing this within a machine will likely lead to interaction clashes.
 		var/list/accesses = user.GetAccess()
-		if(!LAZYLEN(accesses))
-			return
 		var/list/choices = list()
 		for(var/key in accesses)
 			choices[get_access_desc(key)] = key

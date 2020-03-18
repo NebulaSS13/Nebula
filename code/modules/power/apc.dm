@@ -133,7 +133,7 @@
 	base_type = /obj/machinery/power/apc/buildable
 	stat_immune = 0
 	frame_type = /obj/item/frame/apc
-	construct_state = /decl/machine_construction/wall_frame/panel_closed
+	construct_state = /decl/machine_construction/wall_frame/panel_closed/hackable
 	uncreated_component_parts = list(
 		/obj/item/cell/apc
 	)
@@ -304,6 +304,8 @@
 			icon_state = "apc-b"
 		else if(update_state & UPDATE_BLUESCREEN)
 			icon_state = "apcemag"
+		else if(update_state & UPDATE_WIREEXP)
+			icon_state = "apcewires"
 
 	if(!(update_state & UPDATE_ALLGOOD))
 		if(overlays.len)
@@ -360,6 +362,8 @@
 			update_state |= UPDATE_OPENED2
 	else if(emagged || (hacker && !hacker.hacked_apcs_hidden) || failure_timer)
 		update_state |= UPDATE_BLUESCREEN
+	else if(istype(construct_state, /decl/machine_construction/wall_frame/panel_closed/hackable/hacking))
+		update_state |= UPDATE_WIREEXP
 	if(update_state <= 1)
 		update_state |= UPDATE_ALLGOOD
 
@@ -392,6 +396,12 @@
 		results += 2
 	return results
 
+/obj/machinery/power/apc/set_broken(new_state, cause)
+	. = ..()
+	if(. && (stat & BROKEN))
+		operating = 0
+		update()
+
 /obj/machinery/power/apc/cannot_transition_to(state_path, mob/user)
 	if(ispath(state_path, /decl/machine_construction/wall_frame/panel_closed) && cover_removed)
 		return SPAN_NOTICE("You cannot close the cover: it was completely removed!")
@@ -411,7 +421,7 @@
 	queue_icon_update()
 
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
-	if (!panel_open && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/assembly/signaler)))
+	if (istype(construct_state, /decl/machine_construction/wall_frame/panel_closed/hackable/hacking) && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/assembly/signaler)))
 		return wires.Interact(user)
 	return ..()
 
