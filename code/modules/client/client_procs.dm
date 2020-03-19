@@ -217,8 +217,11 @@
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
-	if(get_preference_value(/datum/client_preference/fullscreen_mode) == GLOB.PREF_YES)
-		toggle_fullscreen(TRUE)
+	if(mob.get_preference_value(/datum/client_preference/chat_position) == GLOB.PREF_YES)
+		update_chat_position(TRUE)
+
+	if(get_preference_value(/datum/client_preference/fullscreen_mode) != GLOB.PREF_OFF)
+		toggle_fullscreen(get_preference_value(/datum/client_preference/fullscreen_mode))
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
@@ -475,12 +478,58 @@ client/verb/character_setup()
 			C.mob.l_general.fit_to_client_view(C.last_view_x_dim, C.last_view_y_dim)
 		C.mob.reload_fullscreen()
 
+/client/proc/update_chat_position(use_alternative)
+	var/input_height = 0
+	input_height = winget(src, "input", "size")
+	input_height = text2num(splittext(input_height, "x")[2])
+
+	// Hell
+
+	if (use_alternative == TRUE)
+		winset(src, "input_alt", "is-visible=true;is-disabled=false;is-default=true")
+		winset(src, "hotkey_toggle_alt", "is-visible=true;is-disabled=false;is-default=true")
+		winset(src, "saybutton_alt", "is-visible=true;is-disabled=false;is-default=true")
+
+		winset(src, "input", "is-visible=false;is-disabled=true;is-default=false")
+		winset(src, "hotkey_toggle", "is-visible=false;is-disabled=true;is-default=false")
+		winset(src, "saybutton", "is-visible=false;is-disabled=true;is-default=false")
+
+		var/current_size = splittext(winget(src, "outputwindow.output", "size"), "x")
+		var/new_size = "[current_size[1]]x[text2num(current_size[2]) - input_height]"
+		winset(src, "outputwindow.output", "size=[new_size]")
+		winset(src, "outputwindow.browseroutput", "size=[new_size]")
+
+		current_size = splittext(winget(src, "mainwindow.mainvsplit", "size"), "x")
+		new_size = "[current_size[1]]x[text2num(current_size[2]) + input_height]"
+		winset(src, "mainwindow.mainvsplit", "size=[new_size]")
+	else
+		winset(src, "input_alt", "is-visible=false;is-disabled=true;is-default=false")
+		winset(src, "hotkey_toggle_alt", "is-visible=false;is-disabled=true;is-default=false")
+		winset(src, "saybutton_alt", "is-visible=false;is-disabled=true;is-default=false")
+
+		winset(src, "input", "is-visible=true;is-disabled=false;is-default=true")
+		winset(src, "hotkey_toggle", "is-visible=true;is-disabled=false;is-default=true")
+		winset(src, "saybutton", "is-visible=true;is-disabled=false;is-default=true")
+
+		var/current_size = splittext(winget(src, "outputwindow.output", "size"), "x")
+		var/new_size = "[current_size[1]]x[text2num(current_size[2]) + input_height]"
+		winset(src, "outputwindow.output", "size=[new_size]")
+		winset(src, "outputwindow.browseroutput", "size=[new_size]")
+
+		current_size = splittext(winget(src, "mainwindow.mainvsplit", "size"), "x")
+		new_size = "[current_size[1]]x[text2num(current_size[2]) - input_height]"
+		winset(src, "mainwindow.mainvsplit", "size=[new_size]")
+	OnResize()
+
 /client/proc/toggle_fullscreen(new_value)
-	if(new_value == TRUE)
-		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=menu")
+	if((new_value == GLOB.PREF_BASIC) || (new_value == GLOB.PREF_FULL))
+		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false")
+		if(new_value == GLOB.PREF_FULL)
+			winset(src, "mainwindow", "menu=null;statusbar=false")
 		winset(src, "mainwindow.mainvsplit", "pos=0x0")
 	else
-		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
+		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true")
+		winset(src, "mainwindow", "menu=menu;statusbar=true")
 		winset(src, "mainwindow.mainvsplit", "pos=3x0")
 	winset(src, "mainwindow", "is-maximized=true")
 	OnResize()
