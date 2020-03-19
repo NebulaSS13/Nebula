@@ -12,7 +12,7 @@
 /obj/item/stack
 	gender = PLURAL
 	origin_tech = "{'" + TECH_MATERIAL + "':1}"
-	var/list/datum/stack_recipe/recipes
+
 	var/singular_name
 	var/plural_name
 	var/base_state
@@ -20,17 +20,23 @@
 	var/max_icon_state
 	var/amount = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
-	var/stacktype //determines whether different stack types can merge
-	var/build_type = null //used when directly applied to a turf
-	var/uses_charge = 0
-	var/list/charge_costs = null
-	var/list/datum/matter_synth/synths = null
+	var/stacktype  //determines whether different stack types can merge
+	var/build_type //used when directly applied to a turf
+	var/uses_charge
+	var/list/charge_costs
+	var/list/datum/matter_synth/synths
+	var/list/datum/stack_recipe/recipes
 
 /obj/item/stack/Initialize(mapload, amount, material)
+
+	if(ispath(amount, /material))
+		crash_with("Stack initialized with material ([amount]) instead of amount.")
+		material = amount
+
 	. = ..(mapload, material)
 	if (!stacktype)
 		stacktype = type
-	if (amount >= 1)
+	if (isnum(amount) && amount >= 1)
 		src.amount = amount
 	if(!plural_name)
 		plural_name = "[singular_name]s"
