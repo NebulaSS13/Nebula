@@ -178,11 +178,7 @@
 	else if(eyeobj)
 		if(eyeobj.owner != src)
 			reset_view(null)
-	else if(bound_overlay && client && client.eye == bound_overlay && !is_physically_disabled())
-		if(isturf(bound_overlay.loc))
-			var/turf/T = bound_overlay.loc
-			if(!T.is_open())
-				reset_view(null)
+	else if(z_eye) return
 	else if(!client.adminobs)
 		reset_view(null)
 

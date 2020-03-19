@@ -1122,11 +1122,8 @@
 			reset_view(null)
 	else
 		var/isRemoteObserve = 0
-		if(bound_overlay && client && client.eye == bound_overlay && !is_physically_disabled())
-			if(isturf(bound_overlay.loc))
-				var/turf/T = bound_overlay.loc
-				if(T.is_open())
-					isRemoteObserve = 1
+		if(z_eye)
+			isRemoteObserve = 1
 		else if((mRemote in mutations) && remoteview_target)
 			if(remoteview_target.stat == CONSCIOUS)
 				isRemoteObserve = 1
