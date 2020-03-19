@@ -81,7 +81,8 @@
 	if(holding) //It'd be strange for this to be called with this var unset
 		GLOB.destroyed_event.unregister(holding, src, .proc/forget_holding)
 		holding = null
-		qdel(src)
+		if(!QDELETED(src))
+			qdel(src)
 
 /obj/item/mech_equipment/mounted_system/Initialize()
 	. = ..()
