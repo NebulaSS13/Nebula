@@ -15,8 +15,10 @@
 /obj/item/mech_equipment/clamp/attack_hand(mob/user)
 	if(owner && LAZYISIN(owner.pilots, user))
 		if(!owner.hatch_closed && carrying)
+			if(!do_after(user, 20, owner)) return
 			if(user.put_in_active_hand(carrying))
 				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [carrying] from \the [src]."))
+				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 				carrying = null
 	. = ..()
 
@@ -44,7 +46,7 @@
 				O.forceMove(src)
 				carrying = O
 				owner.visible_message(SPAN_NOTICE("\The [owner] loads \the [O] into its cargo compartment."))
-
+				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 
 		//attacking - Cannot be carrying something, cause then your clamp would be full
 		else if(istype(target,/mob/living))
@@ -71,6 +73,7 @@
 			to_chat(user, SPAN_WARNING("You are not carrying anything in \the [src]."))
 		else
 			owner.visible_message(SPAN_NOTICE("\The [owner] unloads \the [carrying]."))
+			playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 			carrying.forceMove(get_turf(src))
 			carrying = null
 
@@ -84,7 +87,7 @@
 		carrying.dropInto(loc)
 		carrying = null
 	. = ..()
-	
+
 // A lot of this is copied from floodlights.
 /obj/item/mech_equipment/light
 	name = "floodlight"
@@ -120,7 +123,7 @@
 	on = FALSE
 	update_icon()
 	. = ..()
-	
+
 #define CATAPULT_SINGLE 1
 #define CATAPULT_AREA   2
 
@@ -182,7 +185,7 @@
 						locked = null
 						to_chat(user, SPAN_NOTICE("Lock on [locked] disengaged."))
 			if(CATAPULT_AREA)
-				
+
 				var/list/atoms = list()
 				if(isturf(target))
 					atoms = range(target,3)
@@ -227,9 +230,9 @@
 		descriptor = "shows some signs of wear"
 	if(percentage > 95)
 		descriptor = "shows no wear"
-		
+
 	to_chat(user, "It [descriptor].")
-	
+
 /obj/item/material/drill_head/Initialize()
 	. = ..()
 	durability = 2 * material.integrity
@@ -255,7 +258,7 @@
 	if(.)
 		if(drill_head)
 			owner.visible_message(SPAN_WARNING("[owner] revs the [drill_head], menancingly."))
-			playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
+			playsound(src, 'sound/mecha/mechdrill.ogg', 50, 1)
 
 /obj/item/mech_equipment/drill/get_hardpoint_maptext()
 	if(drill_head)
@@ -276,7 +279,7 @@
 		visible_message(SPAN_NOTICE("\The [user] mounts the [drill_head] on the [src]."))
 		return
 	. = ..()
-	
+
 /obj/item/mech_equipment/drill/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 	if(.)
@@ -292,20 +295,22 @@
 			DH.forceMove(src)
 			drill_head = DH
 			owner.visible_message(SPAN_NOTICE("\The [owner] mounts the [drill_head] on the [src]."))
+			playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
 			return
 
 		if(drill_head == null)
 			to_chat(user, SPAN_WARNING("Your drill doesn't have a head!"))
 			return
-		
+
 		var/obj/item/cell/C = owner.get_cell()
 		if(istype(C))
 			C.use(active_power_use * CELLRATE)
 		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
+		playsound(src, 'sound/mecha/mechdrill.ogg', 50, 1)
 
 		var/T = target.loc
 
-		//Better materials = faster drill! 
+		//Better materials = faster drill!
 		var/delay = max(5, 20 - drill_head.material.brute_armor)
 		owner.setClickCooldown(delay) //Don't spamclick!
 		if(do_after(owner, delay, target) && drill_head)
@@ -336,9 +341,9 @@
 					drill_head.durability -= 1
 					log_and_message_admins("[src] used to drill [target].", user, owner.loc)
 
-				
 
-	
+
+
 				if(owner.hardpoints.len) //if this isn't true the drill should not be working to be fair
 					for(var/hardpoint in owner.hardpoints)
 						var/obj/item/I = owner.hardpoints[hardpoint]
@@ -350,14 +355,12 @@
 								if(get_dir(owner,ore)&owner.dir)
 									ore.Move(ore_box)
 
-				playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
-		
 		else
-			to_chat(user, "You must stay still while the drill is engaged!")		
+			to_chat(user, "You must stay still while the drill is engaged!")
 
-				
+
 		return 1
-		
+
 
 
 
@@ -374,5 +377,5 @@
 /obj/item/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
-	
+
 
