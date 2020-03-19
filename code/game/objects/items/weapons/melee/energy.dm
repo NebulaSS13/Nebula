@@ -81,9 +81,7 @@
 	return
 
 /obj/item/melee/energy/get_storage_cost()
-	if(active)
-		return ITEM_SIZE_NO_CONTAINER
-	return ..()
+	. = active ? ITEM_SIZE_NO_CONTAINER : ..()
 
 /*
  * Energy Axe

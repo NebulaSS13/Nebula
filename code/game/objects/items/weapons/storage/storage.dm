@@ -165,7 +165,7 @@
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
-	if(total_storage_space == ITEM_SIZE_NO_CONTAINER)
+	if(total_storage_space >= ITEM_SIZE_NO_CONTAINER)
 		if(!stop_messages)
 			to_chat(user, "<span class='notice'>\The [W] cannot be placed in [src].</span>")
 		return 0

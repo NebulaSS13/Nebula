@@ -4,7 +4,6 @@
 	icon = 'icons/obj/closets/bases/closet.dmi'
 	icon_state = "base"
 	density = 1
-	w_class = ITEM_SIZE_NO_CONTAINER
 
 	var/welded = 0
 	var/large = 1

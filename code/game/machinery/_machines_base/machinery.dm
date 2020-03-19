@@ -79,7 +79,7 @@ Class Procs:
 /obj/machinery
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
-	w_class = ITEM_SIZE_NO_CONTAINER
+	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER // Layer under items
 
 	var/stat = 0

@@ -195,7 +195,7 @@
 /obj/fall_damage()
 	if(w_class == ITEM_SIZE_TINY)
 		return 0
-	if(w_class == ITEM_SIZE_NO_CONTAINER)
+	if(w_class >= ITEM_SIZE_NO_CONTAINER)
 		return 100
 	return BASE_STORAGE_COST(w_class)
 
