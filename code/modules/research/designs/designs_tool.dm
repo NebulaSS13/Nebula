@@ -9,7 +9,6 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 4)
 	materials = list(MAT_STEEL = 1500, MAT_SILVER = 150, MAT_GLASS = 3000)
 	build_path = /obj/item/lightreplacer
-	sort_string = "VAGAB"
 
 /datum/design/item/tool/airlock_brace
 	name = "airlock brace"
@@ -18,7 +17,6 @@
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MAT_STEEL = 2000, MAT_GLASS = 50)
 	build_path = /obj/item/airlock_brace
-	sort_string = "VAGAC"
 
 /datum/design/item/tool/brace_jack
 	name = "maintenance jack"
@@ -27,7 +25,6 @@
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MAT_STEEL = 120)
 	build_path = /obj/item/crowbar/brace_jack
-	sort_string = "VAGAD"
 
 /datum/design/item/tool/clamp
 	name = "stasis clamp"
@@ -36,7 +33,6 @@
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MAGNET = 4)
 	materials = list(MAT_STEEL = 500, MAT_GLASS = 500)
 	build_path = /obj/item/clamp
-	sort_string = "VAGAE"
 
 /datum/design/item/tool/inducer
 	name = "inducer"
@@ -53,7 +49,6 @@
 	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	materials = list(MAT_STEEL = 3000, MAT_GLASS = 3000, MAT_SILVER = 250)
 	build_path = /obj/item/scanner/price
-	sort_string = "VAGAF"
 
 /datum/design/item/tool/experimental_welder
 	name = "experimental welding tool"
@@ -62,7 +57,6 @@
 	req_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4)
 	materials = list(MAT_STEEL = 120, MAT_GLASS = 50)
 	build_path = /obj/item/weldingtool/experimental
-	sort_string = "VAGAG"
 
 /datum/design/item/tool/shield_diffuser
 	name = "portable shield diffuser"
@@ -71,7 +65,6 @@
 	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ESOTERIC = 2)
 	materials = list(MAT_STEEL = 5000, MAT_GLASS = 5000, MAT_GOLD = 2000, MAT_SILVER = 2000)
 	build_path = /obj/item/shield_diffuser
-	sort_string = "VAGAH"
 
 /datum/design/item/tool/rpd
 	name = "rapid piping device"
@@ -80,7 +73,6 @@
 	req_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 6)
 	materials = list(MAT_STEEL = 15000, MAT_GLASS = 10000, MAT_SILVER = 2000)
 	build_path = /obj/item/rpd
-	sort_string = "VAGAI"
 
 /datum/design/item/tool/oxycandle
 	name = "oxycandle"
@@ -90,4 +82,3 @@
 	materials = list(MAT_STEEL = 3000)
 	chemicals = list(/datum/reagent/sodiumchloride = 20, /datum/reagent/acetone = 20)
 	build_path = /obj/item/oxycandle
-	sort_string = "VAGAJ"

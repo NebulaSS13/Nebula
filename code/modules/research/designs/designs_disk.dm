@@ -9,7 +9,6 @@
 	id = "design_disk"
 	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/disk/design_disk
-	sort_string = "AAAAA"
 
 /datum/design/item/disk/tech
 	name = "technology data"
@@ -17,4 +16,3 @@
 	id = "tech_disk"
 	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/disk/tech_disk
-	sort_string = "AAAAB"

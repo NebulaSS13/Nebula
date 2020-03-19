@@ -8,7 +8,6 @@
 	req_tech = list(TECH_MATERIAL = 2)
 	materials = list(MAT_STEEL = 3000)
 	build_path = /obj/item/chems/glass/beaker/noreact
-	sort_string = "MCAAA"
 
 /datum/design/item/beaker/bluespace
 	name = TECH_BLUESPACE
@@ -17,4 +16,3 @@
 	req_tech = list(TECH_BLUESPACE = 2, TECH_MATERIAL = 6)
 	materials = list(MAT_STEEL = 3000, MAT_PHORON = 3000, MAT_DIAMOND = 500)
 	build_path = /obj/item/chems/glass/beaker/bluespace
-	sort_string = "MCAAB"

@@ -8,7 +8,6 @@
 	req_tech = list(TECH_BLUESPACE = 1)
 	materials = list (MAT_ALUMINIUM = 20, MAT_GLASS = 10)
 	build_path = /obj/item/radio/beacon
-	sort_string = "VADAA"
 
 /datum/design/item/bluespace/gps
 	name = "triangulating device"
@@ -17,7 +16,6 @@
 	req_tech = list(TECH_MATERIAL = 2, TECH_DATA = 2, TECH_BLUESPACE = 2)
 	materials = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)
 	build_path = /obj/item/gps
-	sort_string = "VADAB"
 
 /datum/design/item/bluespace/beacon_locator
 	name = "beacon tracking pinpointer"
@@ -26,7 +24,6 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
 	materials = list(MAT_ALUMINIUM = 1000, MAT_GLASS = 500)
 	build_path = /obj/item/pinpointer/radio
-	sort_string = "VADAC"
 
 /datum/design/item/bluespace/ano_scanner
 	name = "Alden-Saraspova counter"
@@ -35,7 +32,6 @@
 	req_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
 	materials = list(MAT_STEEL = 5000, MAT_ALUMINIUM = 5000, MAT_GLASS = 5000)
 	build_path = /obj/item/ano_scanner
-	sort_string = "VAEAA"
 
 /datum/design/item/bluespace/bag_holding
 	name = "bag of holding"
@@ -44,7 +40,6 @@
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
 	materials = list(MAT_GOLD = 3000, MAT_DIAMOND = 1500, MAT_URANIUM = 250, MAT_PLASTIC = 250)
 	build_path = /obj/item/storage/backpack/holding
-	sort_string = "VAFAA"
 
 /datum/design/item/dufflebag_holding
 	name = "dufflebag of holding"
@@ -53,4 +48,3 @@
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
 	materials = list(MAT_GOLD = 3000, MAT_DIAMOND = 1500, MAT_URANIUM = 250, MAT_PLASTIC = 250)
 	build_path = /obj/item/storage/backpack/holding/duffle
-	sort_string = "VAFAB"

@@ -8,7 +8,6 @@
 	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 4)
 	materials = list(MAT_GLASS = 2000, MAT_GOLD = 1000, MAT_PLASTIC = 500)
 	build_path = /obj/item/chems/syringe/noreact
-	sort_string = "MCAAC"
 
 /datum/design/item/syringe/bluespacesyringe
 	name = "Bluespace Syringe"
@@ -17,4 +16,3 @@
 	req_tech = list(TECH_BIO = 3, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
 	materials = list(MAT_GLASS = 2000, MAT_PHORON = 1000, MAT_DIAMOND = 1000)
 	build_path = /obj/item/chems/syringe/bluespace
-	sort_string = "MCAAD"

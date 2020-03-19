@@ -10,7 +10,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 400, MAT_GLASS = 100)
 	build_path = /obj/item/stock_parts/computer/hard_drive/
-	sort_string = "VBAAA"
 
 /datum/design/item/modularcomponent/disk/advanced
 	name = "advanced hard drive"
@@ -19,7 +18,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 800, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/hard_drive/advanced
-	sort_string = "VBAAB"
 
 /datum/design/item/modularcomponent/disk/super
 	name = "super hard drive"
@@ -28,7 +26,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 1600, MAT_GLASS = 400)
 	build_path = /obj/item/stock_parts/computer/hard_drive/super
-	sort_string = "VBAAC"
 
 /datum/design/item/modularcomponent/disk/cluster
 	name = "cluster hard drive"
@@ -37,7 +34,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 3200, MAT_GLASS = 800)
 	build_path = /obj/item/stock_parts/computer/hard_drive/cluster
-	sort_string = "VBAAD"
 
 /datum/design/item/modularcomponent/disk/micro
 	name = "micro hard drive"
@@ -46,7 +42,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 400, MAT_GLASS = 100)
 	build_path = /obj/item/stock_parts/computer/hard_drive/micro
-	sort_string = "VBAAE"
 
 /datum/design/item/modularcomponent/disk/small
 	name = "small hard drive"
@@ -55,7 +50,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 800, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/hard_drive/small
-	sort_string = "VBAAF"
 
 // Network cards
 /datum/design/item/modularcomponent/netcard/AssembleDesignName()
@@ -70,7 +64,6 @@
 	materials = list(MAT_STEEL = 250, MAT_GLASS = 100)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/network_card
-	sort_string = "VBABA"
 
 /datum/design/item/modularcomponent/netcard/advanced
 	name = "advanced network card"
@@ -80,7 +73,6 @@
 	materials = list(MAT_STEEL = 500, MAT_GLASS = 200)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/network_card/advanced
-	sort_string = "VBABB"
 
 /datum/design/item/modularcomponent/netcard/wired
 	name = "wired network card"
@@ -90,7 +82,6 @@
 	materials = list(MAT_STEEL = 2500, MAT_GLASS = 400)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/network_card/wired
-	sort_string = "VBABC"
 
 // Data crystals (USB flash drives)
 /datum/design/item/modularcomponent/portabledrive/AssembleDesignName()
@@ -105,7 +96,6 @@
 	materials = list(MAT_GLASS = 800)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/hard_drive/portable
-	sort_string = "VBACA"
 
 /datum/design/item/modularcomponent/portabledrive/advanced
 	name = "advanced data crystal"
@@ -115,7 +105,6 @@
 	materials = list(MAT_GLASS = 1600)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/hard_drive/portable/advanced
-	sort_string = "VBACB"
 
 /datum/design/item/modularcomponent/portabledrive/super
 	name = "super data crystal"
@@ -125,7 +114,6 @@
 	materials = list(MAT_GLASS = 3200)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/hard_drive/portable/super
-	sort_string = "VBACC"
 
 // Card slot
 /datum/design/item/modularcomponent/accessory/AssembleDesignName()
@@ -139,7 +127,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600)
 	build_path = /obj/item/stock_parts/computer/card_slot
-	sort_string = "VBADA"
 
 // Card Broadcaster
 /datum/design/item/modularcomponent/accessory/cardbroadcaster
@@ -149,7 +136,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600)
 	build_path = /obj/item/stock_parts/computer/card_slot/broadcaster
-	sort_string = "VBADB"
 
 // inteliCard Slot
 /datum/design/item/modularcomponent/accessory/aislot
@@ -160,7 +146,6 @@
 	materials = list(MAT_STEEL = 2000)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/ai_slot
-	sort_string = "VBADC"
 
 // Nano printer
 /datum/design/item/modularcomponent/accessory/nanoprinter
@@ -170,7 +155,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600)
 	build_path = /obj/item/stock_parts/computer/nano_printer
-	sort_string = "VBADD"
 
 // Tesla Link
 /datum/design/item/modularcomponent/accessory/teslalink
@@ -180,7 +164,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 2000)
 	build_path = /obj/item/stock_parts/computer/tesla_link
-	sort_string = "VBADE"
 
 //Scanners
 /datum/design/item/modularcomponent/accessory/reagent_scanner
@@ -190,7 +173,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/scanner/reagent
-	sort_string = "VBADF"
 
 /datum/design/item/modularcomponent/accessory/paper_scanner
 	name = "paper scanner module"
@@ -199,7 +181,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/scanner/paper
-	sort_string = "VBADG"
 
 /datum/design/item/modularcomponent/accessory/atmos_scanner
 	name = "atmospheric scanner module"
@@ -208,7 +189,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/scanner/atmos
-	sort_string = "VBADH"
 
 /datum/design/item/modularcomponent/accessory/medical_scanner
 	name = "medical scanner module"
@@ -217,7 +197,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
 	build_path = /obj/item/stock_parts/computer/scanner/medical
-	sort_string = "VBADI"
 
 // Batteries
 /datum/design/item/modularcomponent/battery/AssembleDesignName()
@@ -231,7 +210,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 400)
 	build_path = /obj/item/stock_parts/computer/battery_module
-	sort_string = "VBAEA"
 
 /datum/design/item/modularcomponent/battery/advanced
 	name = "advanced battery module"
@@ -240,7 +218,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 800)
 	build_path = /obj/item/stock_parts/computer/battery_module/advanced
-	sort_string = "VBAEB"
 
 /datum/design/item/modularcomponent/battery/super
 	name = "super battery module"
@@ -249,7 +226,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 1600)
 	build_path = /obj/item/stock_parts/computer/battery_module/super
-	sort_string = "VBAEC"
 
 /datum/design/item/modularcomponent/battery/ultra
 	name = "ultra battery module"
@@ -258,7 +234,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 3200)
 	build_path = /obj/item/stock_parts/computer/battery_module/ultra
-	sort_string = "VBAED"
 
 /datum/design/item/modularcomponent/battery/nano
 	name = "nano battery module"
@@ -267,7 +242,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 200)
 	build_path = /obj/item/stock_parts/computer/battery_module/nano
-	sort_string = "VBAEE"
 
 /datum/design/item/modularcomponent/battery/micro
 	name = "micro battery module"
@@ -276,7 +250,6 @@
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 400)
 	build_path = /obj/item/stock_parts/computer/battery_module/micro
-	sort_string = "VBAEF"
 
 // Processor unit
 /datum/design/item/modularcomponent/cpu/AssembleDesignName()
@@ -291,7 +264,6 @@
 	materials = list(MAT_STEEL = 1600)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/processor_unit
-	sort_string = "VBAFA"
 
 /datum/design/item/modularcomponent/cpu/small
 	name = "computer microprocessor unit"
@@ -301,7 +273,6 @@
 	materials = list(MAT_STEEL = 800)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/processor_unit/small
-	sort_string = "VBAFB"
 
 /datum/design/item/modularcomponent/cpu/photonic
 	name = "computer photonic processor unit"
@@ -311,7 +282,6 @@
 	materials = list(MAT_STEEL = 6400, glass = 2000)
 	chemicals = list(/datum/reagent/acid = 40)
 	build_path = /obj/item/stock_parts/computer/processor_unit/photonic
-	sort_string = "VBAFC"
 
 /datum/design/item/modularcomponent/cpu/photonic/small
 	name = "computer photonic microprocessor unit"
@@ -321,4 +291,3 @@
 	materials = list(MAT_STEEL = 3200, glass = 1000)
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/processor_unit/photonic/small
-	sort_string = "VBAFD"

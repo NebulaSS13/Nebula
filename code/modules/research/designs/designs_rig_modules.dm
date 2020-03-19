@@ -10,7 +10,6 @@
 	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 5)
 	materials = list(MAT_STEEL = 100, MAT_GLASS = 200, MAT_PLASTIC = 300)
 	build_path = /obj/item/rig_module/vision/meson
-	sort_string = "WCAAA"
 
 /datum/design/item/rig/medhud
 	name = "Medical HUD"
@@ -19,7 +18,6 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
 	materials = list(MAT_STEEL = 100, MAT_GLASS = 200,  MAT_PLASTIC = 300)
 	build_path = /obj/item/rig_module/vision/medhud
-	sort_string = "WCAAB"
 
 /datum/design/item/rig/sechud
 	name = "Security HUD"
@@ -28,7 +26,6 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
 	materials = list(MAT_STEEL = 100, MAT_GLASS = 200,  MAT_PLASTIC = 300)
 	build_path = /obj/item/rig_module/vision/sechud
-	sort_string = "WCAAC"
 
 /datum/design/item/rig/nvg
 	name = "Night Vision"
@@ -37,7 +34,6 @@
 	req_tech = list(TECH_MAGNET = 6, TECH_ENGINEERING = 6)
 	materials = list(MAT_PLASTIC = 500, MAT_STEEL = 300, MAT_GLASS = 200, MAT_URANIUM = 200)
 	build_path = /obj/item/rig_module/vision/nvg
-	sort_string = "WCAAD"
 
 /datum/design/item/rig/healthscanner
 	name = "Medical Scanner"
@@ -46,7 +42,6 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
 	materials = list(MAT_PLASTIC = 1000, MAT_STEEL = 700, MAT_GLASS = 500)
 	build_path = /obj/item/rig_module/device/healthscanner
-	sort_string = "WCBAA"
 
 /datum/design/item/rig/drill
 	name = "Mining Drill"
@@ -55,7 +50,6 @@
 	req_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
 	materials = list(MAT_STEEL = 3500, MAT_GLASS = 1500, MAT_DIAMOND = 2000, MAT_PLASTIC = 1000)
 	build_path = /obj/item/rig_module/device/drill
-	sort_string = "WCCAA"
 
 /datum/design/item/rig/plasmacutter
 	name = "Plasma Cutter"
@@ -64,7 +58,6 @@
 	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
 	materials = list(MAT_STEEL = 2000, MAT_GLASS = 1000, MAT_PLASTIC = 1000, MAT_GOLD = 700, MAT_PHORON = 500)
 	build_path = /obj/item/rig_module/mounted/plasmacutter
-	sort_string = "VCCAB"
 
 /datum/design/item/rig/orescanner
 	name = "Ore Scanner"
@@ -73,7 +66,6 @@
 	req_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 	materials = list(MAT_PLASTIC = 1000, MAT_STEEL = 800, MAT_GLASS = 500)
 	build_path = /obj/item/rig_module/device/orescanner
-	sort_string = "WCDAA"
 
 /datum/design/item/rig/anomaly_scanner
 	name = "Anomaly Scanner"
@@ -82,7 +74,6 @@
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 	materials = list(MAT_PLASTIC = 1000, MAT_STEEL = 800, MAT_GLASS = 500)
 	build_path = /obj/item/rig_module/device/anomaly_scanner
-	sort_string = "WCDAB"
 
 /datum/design/item/rig/rcd
 	name = "RCD"
@@ -91,7 +82,6 @@
 	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
 	materials = list(MAT_STEEL = 2000, MAT_GLASS = 1000, MAT_PLASTIC = 1000,MAT_GOLD = 700, MAT_SILVER = 700)
 	build_path = /obj/item/rig_module/device/rcd
-	sort_string = "WCEAA"
 
 /datum/design/item/rig/jets
 	name = "Maneuvering Jets"
@@ -100,7 +90,6 @@
 	req_tech = list(TECH_MATERIAL = 6,  TECH_ENGINEERING = 7)
 	materials = list(MAT_STEEL = 3000, MAT_PLASTIC = 2000, MAT_GLASS = 1000)
 	build_path = /obj/item/rig_module/maneuvering_jets
-	sort_string = "WCFAA"
 
 //I think this is like a janitor thing but seems like it could be useful for engis
 /datum/design/item/rig/decompiler
@@ -110,7 +99,6 @@
 	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
 	materials = list(MAT_STEEL = 3000, MAT_PLASTIC = 2000, MAT_GLASS = 1000)
 	build_path = /obj/item/rig_module/device/decompiler
-	sort_string = "WCGAA"
 
 /datum/design/item/rig/powersink
 	name = "Power Sink"
@@ -119,7 +107,6 @@
 	req_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 6)
 	materials = list(MAT_STEEL = 2000, MAT_GLASS = 2000, MAT_GOLD = 1000, MAT_PLASTIC = 1000)
 	build_path = /obj/item/rig_module/power_sink
-	sort_string = "WCHAA"
 
 /datum/design/item/rig/ai_container
 	name = "IIS"
@@ -128,7 +115,6 @@
 	req_tech = list(TECH_DATA = 6, TECH_MATERIAL = 5, TECH_ENGINEERING = 6)
 	materials = list(MAT_STEEL = 1000, MAT_GLASS = 1000, MAT_PLASTIC = 1000, MAT_GOLD = 500)
 	build_path = /obj/item/rig_module/ai_container
-	sort_string = "WCIAA"
 
 /datum/design/item/rig/flash
 	name = "Flash"
@@ -137,7 +123,6 @@
 	req_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 	materials = list(MAT_PLASTIC = 1500, MAT_STEEL = 1000, MAT_GLASS = 500)
 	build_path = /obj/item/rig_module/device/flash
-	sort_string = "WCJAA"
 
 /datum/design/item/rig/taser
 	name = "Electrolaser"
@@ -146,7 +131,6 @@
 	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 	materials = list(MAT_STEEL = 4000, MAT_PLASTIC = 2500, MAT_GLASS = 2000, MAT_GOLD = 1000)
 	build_path = /obj/item/rig_module/mounted/taser
-	sort_string = "WCKAA"
 
 /datum/design/item/rig/egun
 	name = "Energy Gun"
@@ -155,7 +139,6 @@
 	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
 	materials = list(MAT_STEEL = 6000, MAT_GLASS = 3000, MAT_PLASTIC = 2500, MAT_GOLD = 2000, MAT_SILVER = 1000)
 	build_path = /obj/item/rig_module/mounted/egun
-	sort_string = "WCKAB"
 
 /datum/design/item/rig/enet
 	name = "Energy Net"
@@ -164,7 +147,6 @@
 	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ESOTERIC = 4, TECH_ENGINEERING = 6)
 	materials = list(MAT_STEEL = 6000, MAT_GLASS = 3000, MAT_DIAMOND = 2000, MAT_PLASTIC = 2000)
 	build_path = /obj/item/rig_module/fabricator/energy_net
-	sort_string = "WCKAC"
 
 /datum/design/item/rig/stealth
 	name = "Active Camouflage"
@@ -173,7 +155,6 @@
 	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ESOTERIC = 6, TECH_ENGINEERING = 7)
 	materials = list(MAT_STEEL = 6000, MAT_GLASS = 3000, MAT_DIAMOND = 2000, MAT_SILVER = 2000, MAT_URANIUM = 2000, MAT_GOLD = 2000, MAT_PLASTIC = 2000)
 	build_path = /obj/item/rig_module/stealth_field
-	sort_string = "WCLAA"
 
 /datum/design/item/rig/cooling_unit
 	name = "Cooling Unit"
@@ -182,7 +163,6 @@
 	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_ENGINEERING = 5)
 	materials = list(MAT_STEEL = 3000, MAT_GLASS = 3500, MAT_PLASTIC = 2000)
 	build_path = /obj/item/rig_module/cooling_unit
-	sort_string = "WCLAB"
 
 /datum/design/item/integrated_printer
 	name = "Integrated Circuit Printer"
@@ -191,7 +171,6 @@
 	req_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 1)
 	materials = list(MAT_STEEL = 10000, MAT_GLASS = 5000)
 	build_path = /obj/item/integrated_circuit_printer
-	sort_string = "WCLAC"
 
 /datum/design/item/integrated_printer_upgrade_advanced
 	name = "Integrated Circuit Printer Upgrade Disk"
@@ -200,7 +179,6 @@
 	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	materials = list(MAT_STEEL = 10000, MAT_GLASS = 10000)
 	build_path = /obj/item/disk/integrated_circuit/upgrade/advanced
-	sort_string = "WCLAD"
 
 /datum/design/item/integrated_printer_upgrade_clone
 	name = "Integrated Circuit Printer Clone Disk"
@@ -209,4 +187,3 @@
 	req_tech = list(TECH_DATA = 3, TECH_MATERIAL = 5)
 	materials = list(MAT_STEEL = 10000, MAT_GLASS = 10000)
 	build_path = /obj/item/disk/integrated_circuit/upgrade/clone
-	sort_string = "WCLAE"

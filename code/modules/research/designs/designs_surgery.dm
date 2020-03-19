@@ -9,7 +9,6 @@
 	req_tech = list(TECH_BIO = 2, TECH_MATERIAL = 2, TECH_MAGNET = 2)
 	materials = list(MAT_STEEL = 12500, MAT_GLASS = 7500)
 	build_path = /obj/item/scalpel/laser1
-	sort_string = "MBEAA"
 
 /datum/design/item/surgery/scalpel_laser2
 	name = "Improved Laser Scalpel"
@@ -18,7 +17,6 @@
 	req_tech = list(TECH_BIO = 3, TECH_MATERIAL = 4, TECH_MAGNET = 4)
 	materials = list(MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 2500)
 	build_path = /obj/item/scalpel/laser2
-	sort_string = "MBEAB"
 
 /datum/design/item/surgery/scalpel_laser3
 	name = "Advanced Laser Scalpel"
@@ -27,7 +25,6 @@
 	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 6, TECH_MAGNET = 5)
 	materials = list(MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 2000, MAT_GOLD = 1500)
 	build_path = /obj/item/scalpel/laser3
-	sort_string = "MBEAC"
 
 /datum/design/item/surgery/scalpel_manager
 	name = "Incision Management System"
@@ -36,4 +33,3 @@
 	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 7, TECH_MAGNET = 5, TECH_DATA = 4)
 	materials = list (MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 1500, MAT_GOLD = 1500, MAT_DIAMOND = 750)
 	build_path = /obj/item/scalpel/manager
-	sort_string = "MBEAD"

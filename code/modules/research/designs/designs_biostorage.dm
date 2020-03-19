@@ -10,7 +10,6 @@
 	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500)
 	build_path = /obj/item/mmi
 	category = "Misc"
-	sort_string = "VACCA"
 
 /datum/design/item/biostorage/mmi_radio
 	name = "radio-enabled man-machine interface"
@@ -20,4 +19,3 @@
 	materials = list(MAT_ALUMINIUM = 1200, MAT_GLASS = 500)
 	build_path = /obj/item/mmi/radio_enabled
 	category = "Misc"
-	sort_string = "VACCB"

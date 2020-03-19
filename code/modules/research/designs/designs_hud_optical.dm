@@ -13,21 +13,18 @@
 	id = "health_hud"
 	req_tech = list(TECH_BIO = 2, TECH_MAGNET = 3)
 	build_path = /obj/item/clothing/glasses/hud/health
-	sort_string = "GAAAA"
 
 /datum/design/item/hud/security
 	name = "security records"
 	id = "security_hud"
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2)
 	build_path = /obj/item/clothing/glasses/hud/security
-	sort_string = "GAAAB"
 
 /datum/design/item/hud/janitor
 	name = "filth scanner"
 	id = "janitor_hud"
 	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
 	build_path = /obj/item/clothing/glasses/hud/janitor
-	sort_string = "GAAAC"
 
 /datum/design/item/optical/AssembleDesignName()
 	..()
@@ -40,14 +37,12 @@
 	id = "mesons"
 	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/clothing/glasses/meson
-	sort_string = "GBAAA"
 
 /datum/design/item/optical/material
 	name = "material"
 	id = "mesons_material"
 	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
 	build_path = /obj/item/clothing/glasses/material
-	sort_string = "GAAAB"
 
 /datum/design/item/optical/tactical
 	name = "tactical"
@@ -55,4 +50,3 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 5)
 	materials = list(MAT_STEEL = 50, MAT_GLASS = 50, MAT_SILVER = 50, MAT_GOLD = 50)
 	build_path = /obj/item/clothing/glasses/tacgoggles
-	sort_string = "GAAAC"

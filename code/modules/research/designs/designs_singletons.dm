@@ -9,7 +9,6 @@
 	req_tech = list(TECH_ESOTERIC = 2)
 	materials = list(MAT_STEEL = 300, MAT_GLASS = 300)
 	build_path = /obj/item/encryptionkey/binary
-	sort_string = "VASAA"
 
 /datum/design/item/camouflage/AssembleDesignName()
 	..()
@@ -22,7 +21,6 @@
 	req_tech = list(TECH_ESOTERIC = 2)
 	materials = list(MAT_STEEL = 500, MAT_ALUMINIUM = 500, MAT_PLASTIC = 500)
 	build_path = /obj/item/storage/backpack/chameleon/sydie_kit
-	sort_string = "VASBA"
 
 /datum/design/item/advmop
 	name = "Advanced Mop"
