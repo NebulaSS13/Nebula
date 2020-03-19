@@ -43,9 +43,11 @@
 		. = get_decls(subtypesof(decl_prototype))
 		fetched_decl_subtypes[decl_prototype] = .
 
+/decl/New()
+	SHOULD_NOT_OVERRIDE(TRUE)
+
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
-	return
 
 /decl/Destroy()
 	SHOULD_CALL_PARENT(FALSE)

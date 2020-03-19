@@ -15,6 +15,8 @@
 	var/climb_speed_mult = 1
 
 /atom/New(loc, ...)
+	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_OVERRIDE(TRUE)
 	//atom creation method that preloads variables at creation
 	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		GLOB._preloader.load(src)
