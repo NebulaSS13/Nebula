@@ -5,7 +5,6 @@
 	icon_state = "dispenser"
 	density = 1
 	anchored = 1.0
-	w_class = ITEM_SIZE_NO_CONTAINER
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 
 	var/oxygentanks = 10

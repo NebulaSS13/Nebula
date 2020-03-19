@@ -5,7 +5,6 @@
 	anchored = FALSE
 	density =  TRUE
 	layer =    BELOW_OBJ_LAYER
-	w_class =  ITEM_SIZE_NO_CONTAINER
 	material_alteration =    MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	var/health = 100

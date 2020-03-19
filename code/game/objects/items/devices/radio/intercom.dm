@@ -4,7 +4,7 @@
 	icon_state = "intercom"
 	randpixel = 0
 	anchored = 1
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_STRUCTURE
 	canhear_range = 2
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -13,9 +13,6 @@
 	power_usage = 0
 	var/number = 0
 	var/last_tick //used to delay the powercheck
-
-/obj/item/radio/intercom/get_storage_cost()
-	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/radio/intercom/custom
 	name = "intercom (Custom)"
