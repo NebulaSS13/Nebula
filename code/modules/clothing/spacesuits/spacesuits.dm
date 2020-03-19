@@ -27,14 +27,12 @@
 	center_of_mass = null
 	randpixel = 0
 	flash_protection = FLASH_PROTECTION_MAJOR
-
-	var/obj/machinery/camera/camera
-
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 0.5
 	on = 0
 
+	var/obj/machinery/camera/camera
 	var/tinted = null	//Set to non-null for toggleable tint helmets
 
 /obj/item/clothing/head/helmet/space/Destroy()

@@ -53,9 +53,6 @@ SUBSYSTEM_DEF(lore)
 	var/list/all_content_packages = decls_repository.get_decls_of_subtype(/decl/content_package)
 	for(var/package in all_content_packages)
 		var/decl/content_package/manifest = all_content_packages[package]
-		if(length(manifest.worths))
-			for(var/thing in manifest.worths)
-				worths[thing] = max(manifest.worths[thing], worths[thing])
 		if(length(manifest.dreams))
 			dreams |= manifest.dreams
 		if(length(manifest.credits_other))

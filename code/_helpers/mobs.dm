@@ -294,3 +294,43 @@ proc/age2agedescription(age)
 		var/list/vals = splittext(val, "x")
 		return Floor(max(text2num(vals[1]), text2num(vals[2]))/2)
 	return 0
+
+// If all of these flags are present, it should come out at exactly 1. Yes, this
+// is horrible. TODO: unify coverage flags with limbs and use organ_rel_size.
+GLOBAL_LIST_INIT(bodypart_coverage_cache, new)
+
+/proc/get_percentage_body_cover(var/checking_flags)
+	var/key = "[checking_flags]"
+	if(isnull(GLOB.bodypart_coverage_cache[key]))
+		var/coverage = 0
+		if(checking_flags & FULL_BODY)
+			coverage = 1
+		else
+			if(checking_flags & HEAD)
+				coverage += 0.1
+			if(checking_flags & FACE)
+				coverage += 0.05
+			if(checking_flags & EYES)
+				coverage += 0.05
+			if(checking_flags & UPPER_TORSO)
+				coverage += 0.15
+			if(checking_flags & LOWER_TORSO)
+				coverage += 0.15
+			if(checking_flags & LEG_LEFT)
+				coverage += 0.075
+			if(checking_flags & LEG_RIGHT)
+				coverage += 0.075
+			if(checking_flags & FOOT_LEFT)
+				coverage += 0.05
+			if(checking_flags & FOOT_RIGHT)
+				coverage += 0.05
+			if(checking_flags & ARM_LEFT)
+				coverage += 0.075
+			if(checking_flags & ARM_RIGHT)
+				coverage += 0.075
+			if(checking_flags & HAND_LEFT)
+				coverage += 0.05
+			if(checking_flags & HAND_RIGHT)
+				coverage += 0.05
+		GLOB.bodypart_coverage_cache[key] = coverage
+	. = GLOB.bodypart_coverage_cache[key]

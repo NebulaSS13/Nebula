@@ -159,3 +159,6 @@
 
 /datum/reagent/proc/custom_temperature_effects(var/temperature)
 	return
+
+/datum/reagent/proc/get_value()
+	. = value * volume

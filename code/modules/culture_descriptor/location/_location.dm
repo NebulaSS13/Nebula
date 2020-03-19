@@ -5,6 +5,10 @@
 	var/ruling_body = FACTION_OTHER
 	var/capital
 
+	// Used by the random news generator. Populate with subtypes of /decl/location_event. 
+	var/list/viable_random_events = list()
+	var/list/viable_mundane_events = list()
+
 /decl/cultural_info/location/get_text_details()
 	. = list()
 	if(!isnull(capital))

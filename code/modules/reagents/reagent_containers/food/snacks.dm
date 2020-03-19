@@ -588,9 +588,9 @@
 	bitesize = 2
 
 /obj/item/chems/food/snacks/human
+	filling_color = "#d63c3c"
 	var/hname = ""
 	var/job = null
-	filling_color = "#d63c3c"
 
 /obj/item/chems/food/snacks/human/burger
 	name = "-burger"
@@ -1972,7 +1972,6 @@
 
 /obj/item/chems/food/snacks/sliceable
 	w_class = ITEM_SIZE_NORMAL //whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
-
 /**
  *  A food item slice
  *

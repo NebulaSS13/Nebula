@@ -1,6 +1,5 @@
 /obj/item/material/kitchen
 	icon = 'icons/obj/kitchen.dmi'
-	base_worth = 1.1
 
 /*
  * Utensils

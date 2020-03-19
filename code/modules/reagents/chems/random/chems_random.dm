@@ -142,7 +142,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 			dat += JOINTEXT(interactions)
 	return jointext(dat, "<br>")
 
-/datum/reagent/random/Value()
+/datum/reagent/random/get_value()
 	. = 0
 	FOR_ALL_EFFECTS
 		. += effect.get_value(data[effect.type])

@@ -29,6 +29,9 @@
 	var/unwielded_material_force_multiplier = 0.25
 	var/wielded_parry_bonus = 15
 
+/obj/item/material/twohanded/get_max_weapon_value()
+	return force_wielded
+
 /obj/item/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
 	if(istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
@@ -80,7 +83,6 @@
 	edge = 1
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
-	base_worth = 31
 
 /obj/item/material/twohanded/fireaxe/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
@@ -116,7 +118,6 @@
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	material = MAT_GLASS
 	does_spin = FALSE
-	base_worth = 7
 
 /obj/item/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
