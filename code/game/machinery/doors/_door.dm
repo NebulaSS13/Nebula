@@ -181,8 +181,6 @@
 
 
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
-
-	..()
 	visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
 	var/tforce = 0
 	if(ismob(AM))
@@ -191,7 +189,6 @@
 		tforce = AM:throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	playsound(src.loc, hitsound, 100, 1)
 	take_damage(tforce)
-	return
 
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/interface_interact(user)
@@ -437,11 +434,11 @@
 		qdel(fire)
 	return
 
-/obj/machinery/door/proc/toggle(forced = 0)
-	if(density)
-		open(forced)
+/obj/machinery/door/proc/toggle(to_open = density)
+	if(to_open)
+		open()
 	else
-		close(forced)
+		close()
 
 /obj/machinery/door/proc/requiresID()
 	return 1
@@ -569,3 +566,14 @@
 	name = "toggle door"
 	desc = "Toggles whether the door is open or not, if possible."
 	call_proc = /obj/machinery/door/proc/toggle
+
+/decl/public_access/public_method/toggle_door_to
+	name = "toggle door to"
+	desc = "Toggles the door, depending on the supplied argument, to open (if 1) or closed (if 0)."
+	call_proc = /obj/machinery/door/proc/toggle
+	forward_args = TRUE
+
+/decl/public_access/public_method/close_door
+	name = "close door"
+	desc = "Closes the door if possible."
+	call_proc = /obj/machinery/door/proc/close
