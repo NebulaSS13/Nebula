@@ -27,3 +27,4 @@
 	fully_construct = TRUE
 	name = "APC kit"
 	desc = "An all-in-one APC kit, comes preassembled."
+	build_machine_type = /obj/machinery/power/apc

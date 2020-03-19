@@ -47,5 +47,5 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/battery/buildable = 1,
 		/obj/item/stock_parts/power/terminal/buildable = 1,
-		/obj/item/stock_parts/access_lock = 1
+		/obj/item/stock_parts/access_lock/buildable = 1
 	)
