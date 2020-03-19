@@ -324,3 +324,8 @@
 #define DEXTERITY_WEAPONS         5
 #define DEXTERITY_COMPLEX_TOOLS   6
 #define DEXTERITY_FULL            7
+
+// used in /mob/living/carbon/human/can_inject, and by various callers of that proc
+#define CAN_INJECT 1
+#define INJECTION_PORT 2
+#define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
