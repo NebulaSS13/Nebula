@@ -54,8 +54,8 @@ var/list/outfits_decls_by_type_
 	var/list/backpack_overrides
 	var/flags = OUTFIT_RESET_EQUIPMENT
 
-/decl/hierarchy/outfit/New()
-	..()
+/decl/hierarchy/outfit/Initialize()
+	. = ..()
 	backpack_overrides = backpack_overrides || list()
 
 	if(is_hidden_category())

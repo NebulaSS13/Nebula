@@ -99,13 +99,14 @@
 	var/ui_state
 	var/datum/nano_module/subsystem
 
-/stat_silicon_subsystem/New(var/mob/living/silicon/loc, var/subsystem_type, var/ui_state)
-	if(!istype(loc))
-		CRASH("Unexpected location. Expected /mob/living/silicon, was [loc.type].")
+/stat_silicon_subsystem/Initialize(var/maploading, var/subsystem_type, var/ui_state)
+	. = ..()
+	if(!istype(loc, /mob/living/silicon))
+		crash_with("Unexpected location. Expected /mob/living/silicon, was [loc.type].")
+		return INITIALIZE_HINT_QDEL
 	src.ui_state = ui_state
 	subsystem = new subsystem_type(loc)
 	name = subsystem.name
-	..()
 
 /stat_silicon_subsystem/Destroy()
 	qdel(subsystem)

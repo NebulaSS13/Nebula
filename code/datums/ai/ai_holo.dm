@@ -13,8 +13,8 @@
 /decl/ai_holo/proc/may_be_used_by_ai(var/mob/living/silicon/ai/AI)
 	return AI.is_traitor()
 
-/decl/ai_holo/New()
-	..()
+/decl/ai_holo/Initialize()
+	. = ..()
 	name = icon_state
 
 /decl/ai_holo/default

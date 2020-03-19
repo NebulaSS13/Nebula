@@ -2,8 +2,8 @@
 	var/priority = 15
 	var/list/appearance_sources
 
-/decl/appearance_handler/New()
-	..()
+/decl/appearance_handler/Initialize()
+	. = ..()
 	appearance_sources = list()
 
 /decl/appearance_handler/proc/AddAltAppearance(var/source, var/list/images, var/list/viewers = list())

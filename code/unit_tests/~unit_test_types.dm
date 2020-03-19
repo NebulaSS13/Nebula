@@ -12,6 +12,17 @@
 		fake_client = new()
 	return fake_client
 
+/obj/test
+	name = "A test object. You shall never see this."
+	desc = "A test object. You shall never see this."
+
+/obj/test/Initialize(maploading, is_test)
+	. = ..()
+	if(!is_test)
+		error("[src] as created at [loc] - [loc.x]-[loc.y]-[loc.z]")
+		log_and_message_admins("created \a [src] at [loc]")
+		return INITIALIZE_HINT_QDEL
+
 
 /obj/unit_test_light
 	w_class = ITEM_SIZE_TINY

@@ -14,7 +14,7 @@
 	var/hidden_from_codex
 	var/list/qualifications
 
-/decl/cultural_info/New()
+/decl/cultural_info/Initialize()
 
 	if(!default_language)
 		default_language = language
@@ -37,7 +37,7 @@
 			secondary_langs -= additional_langs
 		UNSETEMPTY(secondary_langs)
 
-	..()
+	return ..()
 
 /decl/cultural_info/proc/get_random_name(var/gender)
 	var/datum/language/_language

@@ -289,9 +289,9 @@
 	var/module_mode = ""
 	var/obj/item/rig_module/module
 
-/stat_rig_module/New(var/obj/item/rig_module/module)
-	..()
-	src.module = module
+/stat_rig_module/Initialize()
+	. = ..()
+	src.module = loc
 
 /stat_rig_module/proc/AddHref(var/list/href_list)
 	return
@@ -311,8 +311,8 @@
 /stat_rig_module/DblClick()
 	return Click()
 
-/stat_rig_module/activate/New(var/obj/item/rig_module/module)
-	..()
+/stat_rig_module/activate/Initialize()
+	. = ..()
 	name = module.activate_string
 	if(module.active_power_cost)
 		name += " ([module.active_power_cost*10]A)"
@@ -343,8 +343,8 @@
 /stat_rig_module/engage/CanUse()
 	return module.usable
 
-/stat_rig_module/select/New()
-	..()
+/stat_rig_module/select/Initialize()
+	. = ..()
 	name = "Select"
 	module_mode = "select"
 
@@ -354,8 +354,8 @@
 		return 1
 	return 0
 
-/stat_rig_module/charge/New()
-	..()
+/stat_rig_module/charge/Initialize()
+	. = ..()
 	name = "Change Charge"
 	module_mode = "select_charge_type"
 

@@ -18,7 +18,7 @@
 	credits_crew_names = list("THE CREW")
 	credits_nouns = list("SPACEMEN", "THE VENDOMAT PRICES", "THE SUPERMATTER CRYSTAL")
 
-/decl/content_package/spacemen/New()
+/decl/content_package/spacemen/Initialize()
 	credits_other += "THE LEGEND OF THE ALIEN ARTIFACT: PART [pick("I","II","III","IV","V","VI","VII","VIII","IX", "X", "C","M","L")]"
-	..()
+	return ..()
 #endif

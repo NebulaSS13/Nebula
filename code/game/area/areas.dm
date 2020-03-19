@@ -9,7 +9,7 @@
 	var/area_flags
 	var/show_starlight = FALSE
 
-/area/New()
+/area/Initialize()
 	icon_state = ""
 	uid = ++global_uid
 
@@ -17,10 +17,6 @@
 		luminosity = 0
 	else
 		luminosity = 1
-
-	..()
-
-/area/Initialize()
 	. = ..()
 	if(!requires_power || !apc)
 		power_light = 0

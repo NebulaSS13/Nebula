@@ -78,7 +78,6 @@
 
 	var/mode = AALARM_MODE_SCRUBBING
 	var/screen = AALARM_SCREEN_MAIN
-	var/area_uid
 	var/area/alarm_area
 
 	var/target_temperature = T0C+20
@@ -134,12 +133,11 @@
 	return ..()
 
 /obj/machinery/alarm/Initialize(mapload, var/dir)
-	. = ..()
+	..()
 
 	alarm_area = get_area(src)
 	if(!alarm_area)
 		return // spawned in nullspace, presumably as a prototype for construction purposes.
-	area_uid = alarm_area.uid
 	if (name == "alarm")
 		SetName("[alarm_area.name] Air Alarm")
 
@@ -156,8 +154,8 @@
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 
-	set_frequency(frequency)
 	update_icon()
+	set_frequency(frequency)
 
 /obj/machinery/alarm/get_req_access()
 	if(!locked)
@@ -358,7 +356,7 @@
 	var/id_tag = signal.data["tag"]
 	if (!id_tag)
 		return
-	if (signal.data["area"] != area_uid)
+	if (signal.data["area"] != alarm_area.uid)
 		return
 
 	var/dev_type = signal.data["device"]
@@ -508,7 +506,7 @@
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
 		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 		for(var/gas_id in env_info.important_gasses)
-			var/material/mat = SSmaterials.get_material_datum(gas_id)	
+			var/material/mat = SSmaterials.get_material_datum(gas_id)
 			environment_data[++environment_data.len] = list(
 				"name" =  capitalize(mat.display_name),
 				"value" = environment.gas[gas_id] / total * 100,

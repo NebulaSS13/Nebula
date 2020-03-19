@@ -14,7 +14,7 @@
 	var/decal_icon = 'icons/obj/closets/decals/closet.dmi'
 	var/can_lock = FALSE
 
-/decl/closet_appearance/New()
+/decl/closet_appearance/Initialize()
 	// Build our colour and decal lists.
 	if(LAZYLEN(extra_decals))
 		if(!decals)
@@ -93,6 +93,7 @@
 
 	// Set icon!
 	icon = new_icon
+	return ..()
 
 /decl/closet_appearance/tactical
 	color = COLOR_RED_GRAY

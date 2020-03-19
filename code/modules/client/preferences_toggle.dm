@@ -42,10 +42,10 @@ var/list/client_preference_stats_
 	simulated = 0
 	var/datum/client_preference/client_preference
 
-/stat_client_preference/New(var/loc, var/preference)
+/stat_client_preference/Initialize(var/maploading, var/preference)
 	client_preference = preference
 	update_name(usr)
-	..()
+	return ..()
 
 /stat_client_preference/Destroy()
 	client_preference = null

@@ -4,8 +4,8 @@ var/decl/appearance_manager/appearance_manager = new()
 	var/list/appearances_
 	var/list/appearance_handlers_
 
-/decl/appearance_manager/New()
-	..()
+/decl/appearance_manager/Initialize()
+	. = ..()
 	appearances_ = list()
 	appearance_handlers_ = list()
 	for(var/entry in subtypesof(/decl/appearance_handler))
