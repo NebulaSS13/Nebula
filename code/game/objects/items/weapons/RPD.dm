@@ -81,12 +81,13 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 
 /obj/item/rpd/Initialize()
 	. = ..()
+	if(!length(GLOB.rpd_pipe_selection))
+		return INITIALIZE_HINT_QDEL
 	spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 	var/list/L = GLOB.rpd_pipe_selection[GLOB.rpd_pipe_selection[1]]
 	P = L[1]
-	//if there's no pipe selected randomize it
 
 /obj/item/rpd/Destroy()
 	QDEL_NULL(spark_system)
