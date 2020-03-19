@@ -14,6 +14,7 @@
 	if(fully_construct)
 		var/obj/machinery/machine = new build_machine_type
 		var/list/cost = machine.building_cost()
+		qdel(machine) // It's likely queued for processing; it won't delete automatically.
 		for(var/key in cost)
 			.[key] += cost[key]
 

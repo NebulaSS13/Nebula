@@ -84,12 +84,18 @@
 	base_turf = /turf/simulated/floor
 
 /obj/machinery/power/apc/derelict
-	cell_type = /obj/item/cell/crap/empty
 	lighting = 0
 	equipment = 0
 	environ = 0
 	locked = 0
-	coverlocked = 0
+	uncreated_component_parts = list(
+		/obj/item/cell/crap/empty
+	)
+
+/obj/machinery/power/apc/derelict/full
+	uncreated_component_parts = list(
+		/obj/item/cell/crap
+	)
 
 /obj/machinery/door/airlock/autoname/command
 	door_color = COLOR_COMMAND_BLUE

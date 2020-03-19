@@ -169,6 +169,8 @@
 		var/area/A = get_area(src)
 		//if area isn't specified use current
 		area = A
+	if(!area)
+		return ..() // Spawned in nullspace means it's a test entity or prototype.
 	if(autoname)
 		SetName("\improper [area.name] APC")
 	area.apc = src
@@ -186,12 +188,13 @@
 	power_change()
 
 /obj/machinery/power/apc/Destroy()
-	src.update()
-	area.apc = null
-	area.power_light = 0
-	area.power_equip = 0
-	area.power_environ = 0
-	area.power_change()
+	if(area)
+		update()
+		area.apc = null
+		area.power_light = 0
+		area.power_equip = 0
+		area.power_environ = 0
+		area.power_change()
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
@@ -694,6 +697,8 @@
 	if(autoflag)
 		return lastused_total // If not, we need to do something more sophisticated: compute how much power we would need in order to come back online.
 	. = 0
+	if(!area)
+		return
 	if(autoset(lighting, 2) >= POWERCHAN_ON)
 		. += area.usage(LIGHT)
 	if(autoset(equipment, 2) >= POWERCHAN_ON)
