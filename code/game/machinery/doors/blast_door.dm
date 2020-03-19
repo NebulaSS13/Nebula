@@ -45,8 +45,10 @@
 	// To be fleshed out and moved to parent door, but staying minimal for now.
 	public_methods = list(
 		/decl/public_access/public_method/open_door,
+		/decl/public_access/public_method/close_door,
 		/decl/public_access/public_method/close_door_delayed,
-		/decl/public_access/public_method/toggle_door
+		/decl/public_access/public_method/toggle_door,
+		/decl/public_access/public_method/toggle_door_to
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/blast_door = 1)
 
@@ -125,8 +127,8 @@
 // Proc: force_toggle()
 // Parameters: None
 // Description: Opens or closes the door, depending on current state. No checks are done inside this proc.
-/obj/machinery/door/blast/proc/force_toggle()
-	if(density)
+/obj/machinery/door/blast/proc/force_toggle(to_open = density)
+	if(to_open)
 		force_open()
 	else
 		force_close()
@@ -192,10 +194,10 @@
 		return
 	force_close()
 
-/obj/machinery/door/blast/toggle()
+/obj/machinery/door/blast/toggle(to_open = density)
 	if (operating || (stat & BROKEN || stat & NOPOWER))
 		return
-	force_toggle()
+	force_toggle(to_open)
 
 // Proc: repair()
 // Parameters: None
@@ -224,8 +226,10 @@
 	frequency = BLAST_DOORS_FREQ
 	receive_and_call = list(
 		"open_door" = /decl/public_access/public_method/open_door,
+		"close_door" = /decl/public_access/public_method/close_door,
 		"close_door_delayed" = /decl/public_access/public_method/close_door_delayed,
-		"toggle_door" = /decl/public_access/public_method/toggle_door
+		"toggle_door" = /decl/public_access/public_method/toggle_door,
+		"toggle_door_to" = /decl/public_access/public_method/toggle_door_to
 	)
 
 /obj/machinery/button/blast_door
@@ -233,11 +237,36 @@
 	name = "remote blast door-control"
 	desc = "It controls blast doors, remotely."
 	icon_state = "blastctrl"
-	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/blast_door_button = 1)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/event_transmitter/blast_door_button = 1,
+		/decl/stock_part_preset/radio/receiver/blast_door_button = 1
+	)
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/radio/transmitter/on_event,
+		/obj/item/stock_parts/radio/receiver
+	)
 
-/decl/stock_part_preset/radio/basic_transmitter/blast_door_button
-	transmit_on_change = list(
-		"toggle_door" = /decl/public_access/public_variable/button_active,
+/obj/machinery/button/blast_door/Initialize(mapload)
+	. = ..()
+	if(mapload && id_tag) // This is a mapping convenience: makes mapped buttons guess their doors' starting state.
+		for(var/obj/machinery/door/blast/blast in SSmachines.machinery)
+			if(blast.id_tag == id_tag)
+				state = !blast.density
+				break
+
+// Button pressed toggles button_active event, toggles state, and sends a state update to everything, including other buttons.
+/decl/stock_part_preset/radio/event_transmitter/blast_door_button
+	event = /decl/public_access/public_variable/button_active
+	transmit_on_event = list(
+		"toggle_door_to" = /decl/public_access/public_variable/button_state
+	)
+	frequency = BLAST_DOORS_FREQ
+
+// Doors will toggle state if it doesn't match, while other buttons update their tracked state using the received signal.
+/decl/stock_part_preset/radio/receiver/blast_door_button
+	receive_and_write = list(
+		"toggle_door_to" = /decl/public_access/public_variable/button_state
 	)
 	frequency = BLAST_DOORS_FREQ
 
