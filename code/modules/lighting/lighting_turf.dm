@@ -104,3 +104,5 @@
 			opaque_counter--
 			if(old_counter && !opaque_counter)
 				reconsider_lights()
+		if(opaque_counter < 2) //went 0->1 or 1->0
+			GLOB.opacity_set_event.raise_event(src, opaque_counter > 1, !!opaque_counter)

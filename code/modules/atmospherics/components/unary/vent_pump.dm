@@ -41,6 +41,8 @@
 
 	var/controlled = TRUE  //if we should register with an air alarm on spawn
 	build_icon_state = "uvent"
+	var/sound_id
+	var/datum/sound_token/sound_token
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/power/apc/buildable,
@@ -102,8 +104,10 @@
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	icon = null
+	update_sound()
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
+	QDEL_NULL(sound_token)
 	var/area/A = get_area(src)
 	if(A)
 		A.air_vent_info -= id_tag
@@ -553,6 +557,19 @@
 /obj/machinery/atmospherics/unary/vent_pump/engine/Initialize()
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
+	
+/obj/machinery/atmospherics/unary/vent_pump/power_change()
+	. = ..()
+	if(.)
+		update_sound()
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/update_sound()
+	if(!sound_id)
+		sound_id = "[sequential_id("vent_z[z]")]"
+	if(can_pump())
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/machines/vent_hum.ogg', 15, range = 14, falloff = 4)
+	else
+		QDEL_NULL(sound_token)
 
 #undef DEFAULT_PRESSURE_DELTA
 

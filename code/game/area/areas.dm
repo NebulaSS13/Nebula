@@ -242,20 +242,6 @@ var/list/mob/living/forced_ambiance_list = new
 	if(!(L && L.client && L.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))	return
 
 	var/turf/T = get_turf(L)
-	var/hum = 0
-	if(L.get_sound_volume_multiplier() >= 0.2 && !always_unpowered && power_environ)
-		for(var/obj/machinery/atmospherics/unary/vent_pump/vent in src)
-			if(vent.can_pump())
-				hum = 1
-				break
-	if(hum)
-		if(!L.client.ambience_playing)
-			L.client.ambience_playing = 1
-			L.playsound_local(T,sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 20, channel = GLOB.ambience_sound_channel))
-	else
-		if(L.client.ambience_playing)
-			L.client.ambience_playing = 0
-			sound_to(L, sound(null, channel = GLOB.ambience_sound_channel))
 
 	if(LAZYLEN(forced_ambience) && !(L in forced_ambiance_list))
 		forced_ambiance_list += L
