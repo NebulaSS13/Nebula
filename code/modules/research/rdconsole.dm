@@ -215,10 +215,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(!d_disk)
 			screen = 1
 			return
-		for(var/datum/design/D in files.known_designs)
-			if(href_list["copy_design_ID"] == D.id)
-				d_disk.blueprint = D
-				break
+
+		var/datum/design/locate_design = locate(href_list["copy_design_ID"])
+		if(istype(locate_design) && (locate_design in files.known_designs))
+			d_disk.blueprint = locate_design
 		screen = 1.4
 
 	else if(href_list["eject_item"]) //Eject the item inside the destructive analyzer.
@@ -290,24 +290,16 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	else if(href_list["build"]) //Causes the Protolathe to build something.
 		. = TOPIC_REFRESH
 		CHECK_LATHE
-		var/datum/design/being_built = null
-		for(var/datum/design/D in files.known_designs)
-			if(D.id == href_list["build"])
-				being_built = D
-				break
-		if(being_built)
+		var/datum/design/being_built = locate(href_list["build"])
+		if(istype(being_built) && (being_built in files.known_designs))
 			linked_lathe.addToQueue(being_built)
 		screen = 3.1
 
 	else if(href_list["imprint"]) //Causes the Circuit Imprinter to build something.
 		. = TOPIC_REFRESH
 		CHECK_IMPRINTER
-		var/datum/design/being_built = null
-		for(var/datum/design/D in files.known_designs)
-			if(D.id == href_list["imprint"])
-				being_built = D
-				break
-		if(being_built)
+		var/datum/design/being_built = locate(href_list["imprint"])
+		if(istype(being_built) && (being_built in files.known_designs))
 			linked_imprinter.addToQueue(being_built)
 		screen = 4.1
 
@@ -616,7 +608,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			for(var/datum/design/D in files.known_designs)
 				if(D.build_path)
 					dat += "<LI>[D.name] "
-					dat += "<A href='?src=\ref[src];copy_design=1;copy_design_ID=[D.id]'>\[copy to disk\]</A>"
+					dat += "<A href='?src=\ref[src];copy_design=1;copy_design_ID=\ref[D]'>\[copy to disk\]</A>"
 			dat += "</UL>"
 
 		if(1.6) //R&D console settings
@@ -709,7 +701,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				if(temp_dat)
 					temp_dat = " \[[copytext(temp_dat, 3)]\]"
 				if(linked_lathe.canBuild(D))
-					dat += "<LI><B><A href='?src=\ref[src];build=[D.id]'>[D.name]</A></B>[temp_dat]"
+					dat += "<LI><B><A href='?src=\ref[src];build=\ref[D]'>[D.name]</A></B>[temp_dat]"
 				else
 					dat += "<LI><B>[D.name]</B>[temp_dat]"
 			dat += "</UL>"
@@ -791,7 +783,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				if(temp_dat)
 					temp_dat = " \[[copytext(temp_dat,3)]\]"
 				if(linked_imprinter.canBuild(D))
-					dat += "<LI><B><A href='?src=\ref[src];imprint=[D.id]'>[D.name]</A></B>[temp_dat]"
+					dat += "<LI><B><A href='?src=\ref[src];imprint=\ref[D]'>[D.name]</A></B>[temp_dat]"
 				else
 					dat += "<LI><B>[D.name]</B>[temp_dat]"
 			dat += "</UL>"

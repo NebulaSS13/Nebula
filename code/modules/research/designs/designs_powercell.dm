@@ -21,32 +21,27 @@
 
 /datum/design/item/powercell/basic
 	name = "basic"
-	id = "basic_cell"
 	req_tech = list(TECH_POWER = 1)
 	build_path = /obj/item/cell
 
 /datum/design/item/powercell/high
 	name = "high-capacity"
-	id = "high_cell"
 	req_tech = list(TECH_POWER = 2)
 	build_path = /obj/item/cell/high
 
 /datum/design/item/powercell/super
 	name = "super-capacity"
-	id = "super_cell"
 	req_tech = list(TECH_POWER = 3, TECH_MATERIAL = 2)
 	build_path = /obj/item/cell/super
 
 /datum/design/item/powercell/hyper
 	name = "hyper-capacity"
-	id = "hyper_cell"
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
 	materials = list(MAT_STEEL = 400, MAT_GOLD = 150, MAT_SILVER = 150, MAT_GLASS = 70, MAT_ALUMINIUM = 25)
 	build_path = /obj/item/cell/hyper
 
 /datum/design/item/powercell/device/standard
 	name = "basic"
-	id = "device_cell_standard"
 	req_tech = list(TECH_POWER = 1)
 	materials = list(MAT_STEEL = 70, MAT_GLASS = 5)
 	build_path = /obj/item/cell/device/standard
@@ -54,7 +49,6 @@
 /datum/design/item/powercell/device/high
 	name = "high-capacity"
 	build_type = PROTOLATHE | MECHFAB
-	id = "device_cell_high"
 	req_tech = list(TECH_POWER = 2)
 	materials = list(MAT_STEEL = 70, MAT_GLASS = 6)
 	build_path = /obj/item/cell/device/high

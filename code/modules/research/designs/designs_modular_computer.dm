@@ -5,7 +5,6 @@
 
 /datum/design/item/modularcomponent/disk/normal
 	name = "basic hard drive"
-	id = "hdd_basic"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 400, MAT_GLASS = 100)
@@ -13,7 +12,6 @@
 
 /datum/design/item/modularcomponent/disk/advanced
 	name = "advanced hard drive"
-	id = "hdd_advanced"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 800, MAT_GLASS = 200)
@@ -21,7 +19,6 @@
 
 /datum/design/item/modularcomponent/disk/super
 	name = "super hard drive"
-	id = "hdd_super"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 1600, MAT_GLASS = 400)
@@ -29,7 +26,6 @@
 
 /datum/design/item/modularcomponent/disk/cluster
 	name = "cluster hard drive"
-	id = "hdd_cluster"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 3200, MAT_GLASS = 800)
@@ -37,7 +33,6 @@
 
 /datum/design/item/modularcomponent/disk/micro
 	name = "micro hard drive"
-	id = "hdd_micro"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 400, MAT_GLASS = 100)
@@ -45,7 +40,6 @@
 
 /datum/design/item/modularcomponent/disk/small
 	name = "small hard drive"
-	id = "hdd_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 800, MAT_GLASS = 200)
@@ -58,7 +52,6 @@
 
 /datum/design/item/modularcomponent/netcard/basic
 	name = "basic network card"
-	id = "netcard_basic"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = IMPRINTER
 	materials = list(MAT_STEEL = 250, MAT_GLASS = 100)
@@ -67,7 +60,6 @@
 
 /datum/design/item/modularcomponent/netcard/advanced
 	name = "advanced network card"
-	id = "netcard_advanced"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
 	materials = list(MAT_STEEL = 500, MAT_GLASS = 200)
@@ -76,7 +68,6 @@
 
 /datum/design/item/modularcomponent/netcard/wired
 	name = "wired network card"
-	id = "netcard_wired"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 3)
 	build_type = IMPRINTER
 	materials = list(MAT_STEEL = 2500, MAT_GLASS = 400)
@@ -90,7 +81,6 @@
 
 /datum/design/item/modularcomponent/portabledrive/basic
 	name = "basic data crystal"
-	id = "portadrive_basic"
 	req_tech = list(TECH_DATA = 1)
 	build_type = IMPRINTER
 	materials = list(MAT_GLASS = 800)
@@ -99,7 +89,6 @@
 
 /datum/design/item/modularcomponent/portabledrive/advanced
 	name = "advanced data crystal"
-	id = "portadrive_advanced"
 	req_tech = list(TECH_DATA = 2)
 	build_type = IMPRINTER
 	materials = list(MAT_GLASS = 1600)
@@ -108,7 +97,6 @@
 
 /datum/design/item/modularcomponent/portabledrive/super
 	name = "super data crystal"
-	id = "portadrive_super"
 	req_tech = list(TECH_DATA = 4)
 	build_type = IMPRINTER
 	materials = list(MAT_GLASS = 3200)
@@ -122,7 +110,6 @@
 
 /datum/design/item/modularcomponent/accessory/cardslot
 	name = "RFID card slot"
-	id = "cardslot"
 	req_tech = list(TECH_DATA = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600)
@@ -131,7 +118,6 @@
 // Card Broadcaster
 /datum/design/item/modularcomponent/accessory/cardbroadcaster
 	name = "RFID card broadcaster"
-	id = "cardbroadcaster"
 	req_tech = list(TECH_DATA = 3)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600)
@@ -140,7 +126,6 @@
 // inteliCard Slot
 /datum/design/item/modularcomponent/accessory/aislot
 	name = "inteliCard slot"
-	id = "aislot"
 	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
 	build_type = IMPRINTER
 	materials = list(MAT_STEEL = 2000)
@@ -150,7 +135,6 @@
 // Nano printer
 /datum/design/item/modularcomponent/accessory/nanoprinter
 	name = "nano printer"
-	id = "nanoprinter"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600)
@@ -159,7 +143,6 @@
 // Tesla Link
 /datum/design/item/modularcomponent/accessory/teslalink
 	name = "tesla link"
-	id = "teslalink"
 	req_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 2000)
@@ -168,7 +151,6 @@
 //Scanners
 /datum/design/item/modularcomponent/accessory/reagent_scanner
 	name = "reagent scanner module"
-	id = "scan_reagent"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_BIO = 2, TECH_MAGNET = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
@@ -176,7 +158,6 @@
 
 /datum/design/item/modularcomponent/accessory/paper_scanner
 	name = "paper scanner module"
-	id = "scan_paper"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
@@ -184,7 +165,6 @@
 
 /datum/design/item/modularcomponent/accessory/atmos_scanner
 	name = "atmospheric scanner module"
-	id = "scan_atmos"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
@@ -192,7 +172,6 @@
 
 /datum/design/item/modularcomponent/accessory/medical_scanner
 	name = "medical scanner module"
-	id = "scan_medical"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2, TECH_BIO = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 600, MAT_GLASS = 200)
@@ -205,7 +184,6 @@
 
 /datum/design/item/modularcomponent/battery/normal
 	name = "standard battery module"
-	id = "bat_normal"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 400)
@@ -213,7 +191,6 @@
 
 /datum/design/item/modularcomponent/battery/advanced
 	name = "advanced battery module"
-	id = "bat_advanced"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 800)
@@ -221,7 +198,6 @@
 
 /datum/design/item/modularcomponent/battery/super
 	name = "super battery module"
-	id = "bat_super"
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 1600)
@@ -229,7 +205,6 @@
 
 /datum/design/item/modularcomponent/battery/ultra
 	name = "ultra battery module"
-	id = "bat_ultra"
 	req_tech = list(TECH_POWER = 5, TECH_ENGINEERING = 4)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 3200)
@@ -237,7 +212,6 @@
 
 /datum/design/item/modularcomponent/battery/nano
 	name = "nano battery module"
-	id = "bat_nano"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 200)
@@ -245,7 +219,6 @@
 
 /datum/design/item/modularcomponent/battery/micro
 	name = "micro battery module"
-	id = "bat_micro"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 400)
@@ -258,7 +231,6 @@
 
 /datum/design/item/modularcomponent/cpu/
 	name = "computer processor unit"
-	id = "cpu_normal"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
 	materials = list(MAT_STEEL = 1600)
@@ -267,7 +239,6 @@
 
 /datum/design/item/modularcomponent/cpu/small
 	name = "computer microprocessor unit"
-	id = "cpu_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
 	materials = list(MAT_STEEL = 800)
@@ -276,7 +247,6 @@
 
 /datum/design/item/modularcomponent/cpu/photonic
 	name = "computer photonic processor unit"
-	id = "pcpu_normal"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
 	build_type = IMPRINTER
 	materials = list(MAT_STEEL = 6400, glass = 2000)
@@ -285,7 +255,6 @@
 
 /datum/design/item/modularcomponent/cpu/photonic/small
 	name = "computer photonic microprocessor unit"
-	id = "pcpu_small"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
 	build_type = IMPRINTER
 	materials = list(MAT_STEEL = 3200, glass = 1000)

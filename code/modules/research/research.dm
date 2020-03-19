@@ -91,16 +91,8 @@ research holder datum.
 	return
 
 /datum/research/proc/AddDesign2Known(var/datum/design/D)
-	if(!length(known_designs))
-		known_designs.Add(D)
-		return
-	for(var/i = 1 to known_designs.len)
-		var/datum/design/A = known_designs[i]
-		if(A.name != D.name && "[A.name]" > "[D.name]")
-			known_designs.Insert(i, D)
-			return
-	known_designs.Add(D)
-	return
+	if(!(D in known_designs))
+		ADD_SORTED(known_designs, D, /proc/cmp_name_asc)
 
 //Refreshes known_tech and known_designs list
 //Input/Output: n/a

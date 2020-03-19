@@ -75,42 +75,34 @@
 
 /datum/design/circuit/fusion
 	name = "fusion core control console"
-	id = "fusion_core_control"
 	build_path = /obj/item/stock_parts/circuitboard/fusion/core_control
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 
 /datum/design/circuit/fusion/fuel_compressor
 	name = "fusion fuel compressor"
-	id = "fusion_fuel_compressor"
 	build_path = /obj/item/stock_parts/circuitboard/fusion_fuel_compressor
 
 /datum/design/circuit/fusion/fuel_control
 	name = "fusion fuel control console"
-	id = "fusion_fuel_control"
 	build_path = /obj/item/stock_parts/circuitboard/fusion_fuel_control
 
 /datum/design/circuit/fusion/gyrotron_control
 	name = "gyrotron control console"
-	id = "gyrotron_control"
 	build_path = /obj/item/stock_parts/circuitboard/gyrotron_control
 
 /datum/design/circuit/fusion/core
 	name = "fusion core"
-	id = "fusion_core"
 	build_path = /obj/item/stock_parts/circuitboard/fusion_core
 
 /datum/design/circuit/fusion/injector
 	name = "fusion fuel injector"
-	id = "fusion_injector"
 	build_path = /obj/item/stock_parts/circuitboard/fusion_injector
 
 /datum/design/circuit/fusion/kinetic_harvester
 	name = "fusion toroid kinetic harvester"
-	id = "fusion_kinetic_harvester"
 	build_path = /obj/item/stock_parts/circuitboard/kinetic_harvester
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4, TECH_MATERIAL = 4)
 
 /datum/design/circuit/fusion/gyrotron
 	name = "gyrotron"
-	id = "gyrotron"
 	build_path = /obj/item/stock_parts/circuitboard/gyrotron
