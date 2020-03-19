@@ -29,7 +29,6 @@
 #include "datum\appearances.dm"
 #include "datum\loadout.dm"
 #include "datum\robolimbs.dm"
-#include "datum\trade_destinations.dm"
 #include "datum\antagonists\commando.dm"
 #include "datum\antagonists\deathsquad.dm"
 #include "datum\antagonists\uplink.dm"
