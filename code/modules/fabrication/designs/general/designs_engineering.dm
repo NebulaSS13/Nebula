@@ -20,6 +20,9 @@
 /datum/fabricator_recipe/engineering/navlight
 	path = /obj/item/frame/light/nav
 
+/datum/fabricator_recipe/engineering/button_frame
+	path = /obj/item/frame/button
+
 /datum/fabricator_recipe/engineering/powermodule
 	path = /obj/item/module/power_control
 

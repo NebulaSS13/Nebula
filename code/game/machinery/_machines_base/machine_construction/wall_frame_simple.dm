@@ -48,3 +48,10 @@
 	. += "Insert a new part to install it."
 	. += "Remove installed parts with a wrench."
 	. += "Use a crowbar to pry the frame off the wall."
+
+/decl/machine_construction/wall_frame/no_wires/simple/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
+	if(isCrowbar(I))
+		TRANSFER_STATE(bottom_state)
+		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
+		to_chat(user, "You pry \the [machine] off the wall!")
+		machine.dismantle()

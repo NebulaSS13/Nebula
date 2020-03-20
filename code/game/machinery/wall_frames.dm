@@ -26,7 +26,7 @@
 		return TRUE
 	. = ..()
 
-/obj/item/frame/proc/try_build(turf/on_wall)
+/obj/item/frame/proc/try_build(turf/on_wall, click_params)
 	if(!build_machine_type)
 		return
 
@@ -52,10 +52,13 @@
 		return
 
 	var/obj/machinery/machine = new build_machine_type(loc, ndir, fully_construct)
+	modify_positioning(machine, ndir, click_params)
 	if(istype(machine) && machine.construct_state && !fully_construct)
 		machine.construct_state.post_construct(machine)
 	transfer_fingerprints_to(machine)
 	qdel(src)
+
+/obj/item/frame/proc/modify_positioning(var/obj/machinery/product, _dir, click_params)
 
 /obj/item/frame/fire_alarm
 	name = "fire alarm frame"
@@ -104,3 +107,30 @@
 	icon_state = "tube-construct-item"
 	matter = list(MAT_STEEL = 4000, MAT_PLASTIC = 2000)
 	build_machine_type = /obj/machinery/light/navigation/buildable
+
+/obj/item/frame/button
+	name = "button frame"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "launcherbtt"
+	matter = list(MAT_STEEL = 200, MAT_PLASTIC = 100)
+	build_machine_type = /obj/machinery/button/buildable
+
+/obj/item/frame/button/modify_positioning(var/obj/machinery/button/product, _dir, click_params)
+	var/list/params = params2list(click_params)
+	var/_pixel_x = text2num(params["icon-x"]) - WORLD_ICON_SIZE/2 //Make it relative to center instead of bottom left
+	var/_pixel_y = text2num(params["icon-y"]) - WORLD_ICON_SIZE/2
+	switch(_dir)
+		if(NORTH)
+			_pixel_y = max(_pixel_y, WORLD_ICON_SIZE/4)
+			_pixel_y -= WORLD_ICON_SIZE
+		if(SOUTH)
+			_pixel_y = min(_pixel_y, WORLD_ICON_SIZE/4)
+			_pixel_y += WORLD_ICON_SIZE
+		if(EAST)
+			_pixel_x = max(_pixel_x, 0)
+			_pixel_x -= WORLD_ICON_SIZE
+		if(WEST)
+			_pixel_x = min(_pixel_x, 0)
+			_pixel_x += WORLD_ICON_SIZE
+	product.pixel_x = _pixel_x
+	product.pixel_y = _pixel_y
