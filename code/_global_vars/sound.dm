@@ -110,4 +110,4 @@ GLOBAL_LIST_INIT(glasscrack_sound,\
 		'sound/effects/glass_crack4.ogg'))
 
 //This is a global list in interest of optimization; list init is expensive enough for this to be worth doing, even with playsound() not being very hot.
-GLOBAL_LIST_INIT(echo_list, list(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null))
+GLOBAL_LIST_INIT(echo_list, new(18))
