@@ -24,6 +24,10 @@
 	disruptive = 0
 	var/obj/item/device
 
+/obj/item/rig_module/device/Destroy()
+	QDEL_NULL(device)
+	. = ..()
+
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
 	desc = "A hardsuit-mounted health scanner."
