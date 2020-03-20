@@ -121,9 +121,10 @@ var/const/FALLOFF_SOUNDS = 0.5
 			var/area/A = get_area(src)
 			S.environment = A.sound_env
 
-	GLOB.echo_list[ECHO_DIRECT] = envdry
-	GLOB.echo_list[ECHO_ROOM] = envwet
-	S.echo = GLOB.echo_list
+	var/list/echo_list = new(18)
+	echo_list[ECHO_DIRECT] = envdry
+	echo_list[ECHO_ROOM] = envwet
+	S.echo = echo_list
 
 	sound_to(src, S)
 
