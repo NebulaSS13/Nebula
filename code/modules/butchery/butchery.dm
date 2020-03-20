@@ -65,6 +65,10 @@
 	density =  TRUE
 	icon = 'icons/obj/butchery.dmi'
 	icon_state = "spike"
+	material = MAT_STEEL
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	matter = list(MAT_STEEL = 20000)
+	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 
 	var/mob/living/occupant
 	var/occupant_state =   CARCASS_EMPTY
@@ -102,6 +106,10 @@
 
 /obj/structure/kitchenspike/proc/try_spike(var/mob/living/target, var/mob/living/user)
 	if(!istype(target) || !Adjacent(user) || user.incapacitated())
+		return
+
+	if(!anchored)
+		to_chat(user, SPAN_WARNING("Anchor \the [src] in place first!"))
 		return
 
 	if(!target.stat)
@@ -215,7 +223,7 @@
 			if(CARCASS_JOINTED)
 				do_butchery_step(user, CARCASS_EMPTY,   "butchering")
 		busy = FALSE
-
+		return TRUE
 #undef CARCASS_EMPTY
 #undef CARCASS_FRESH
 #undef CARCASS_SKINNED

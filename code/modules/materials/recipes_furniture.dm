@@ -3,7 +3,6 @@
 	one_per_turf = 1
 	on_floor = 1
 	difficulty = 2
-	send_material_data = 1
 	time = 5
 
 /datum/stack_recipe/furniture/chair
@@ -119,7 +118,6 @@ ARMCHAIR(yellow)
 	result_type = /obj/machinery/door/unpowered/simple
 	req_amount = 10
 	time = 50
-	send_material_data = 0
 
 /datum/stack_recipe/furniture/barricade
 	title = "barricade"
@@ -170,14 +168,12 @@ ARMCHAIR(yellow)
 	result_type = /obj/machinery/portable_atmospherics/canister
 	req_amount = 10
 	time = 10
-	send_material_data = 0
 
 /datum/stack_recipe/furniture/tank
-	title = "Pressure Tank"
+	title = "pressure tank"
 	result_type = /obj/item/pipe/tank
 	req_amount = 30
 	time = 20
-	send_material_data = 0
 
 /datum/stack_recipe/furniture/computerframe
 	title = "computer frame"
@@ -210,14 +206,12 @@ ARMCHAIR(yellow)
 	result_type = /obj/machinery/constructable_frame/machine_frame
 	req_amount = 5
 	time = 25
-	send_material_data = 0
 
 /datum/stack_recipe/furniture/turret
 	title = "turret frame"
 	result_type = /obj/machinery/porta_turret_construct
 	req_amount = 5
 	time = 25
-	send_material_data = 0
 
 /datum/stack_recipe/furniture/door_assembly
 	req_amount = 4
@@ -285,7 +279,6 @@ ARMCHAIR(yellow)
 	result_type = /obj/machinery/portable_atmospherics/hydroponics/soil
 	req_amount = 3
 	time = 10
-	send_material_data = 0
 
 /datum/stack_recipe/furniture/fullwindow
 	title = "full-tile window"
@@ -303,7 +296,7 @@ ARMCHAIR(yellow)
 				return FALSE
 
 /datum/stack_recipe/furniture/fullwindow/spawn_result(mob/user, location, amount)
-	return new result_type(user.loc, SOUTHWEST, 1, use_material, use_reinf_material)
+	return new result_type(user?.loc, SOUTHWEST, 1, use_material, use_reinf_material)
 
 /datum/stack_recipe/furniture/borderwindow
 	title = "border window"
@@ -321,7 +314,7 @@ ARMCHAIR(yellow)
 				return FALSE
 
 /datum/stack_recipe/furniture/borderwindow/spawn_result(mob/user, location, amount)
-	return new result_type(user.loc, user.dir, 1, use_material, use_reinf_material)
+	return new result_type(user?.loc, user.dir, 1, use_material, use_reinf_material)
 
 /datum/stack_recipe/furniture/windoor
 	title = "windoor assembly"
@@ -338,4 +331,4 @@ ARMCHAIR(yellow)
 			return FALSE
 
 /datum/stack_recipe/furniture/windoor/spawn_result(mob/user, location, amount)
-	return new result_type(user.loc, user.dir, 1, use_material, use_reinf_material)
+	return new result_type(user?.loc, user.dir, 1, use_material, use_reinf_material)

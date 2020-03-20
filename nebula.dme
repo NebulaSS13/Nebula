@@ -1873,6 +1873,7 @@
 #include "code\modules\maps\reader.dm"
 #include "code\modules\maps\ruins.dm"
 #include "code\modules\materials\_materials.dm"
+#include "code\modules\materials\_stack_recipe.dm"
 #include "code\modules\materials\material_recipes.dm"
 #include "code\modules\materials\material_sheets.dm"
 #include "code\modules\materials\material_synth.dm"
