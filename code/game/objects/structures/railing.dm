@@ -41,12 +41,11 @@
 
 /obj/structure/railing/Initialize()
 	. = ..()
-	if(material.products_need_process())
-		START_PROCESSING(SSobj, src)
-	if(material.conductive)
-		obj_flags |= OBJ_FLAG_CONDUCTIBLE
-	else
-		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
+	if(material)
+		if(material.products_need_process())
+			START_PROCESSING(SSobj, src)
+		if(material.conductive)
+			obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	if(anchored)
 		update_icon(FALSE)
 

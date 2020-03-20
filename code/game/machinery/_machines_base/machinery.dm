@@ -115,6 +115,11 @@ Class Procs:
 	var/processing_flags         // What is being processed
 
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
+
+	// TODO - temporary - convert machinery to use the material var.
+	if(!matter)
+		LAZYSET(matter, MAT_STEEL, ceil(w_class * INITIAL_MATTER_W_CLASS_MULT * SHEET_MATERIAL_AMOUNT))
+		
 	. = ..()
 	if(d)
 		set_dir(d)

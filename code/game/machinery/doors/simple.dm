@@ -18,12 +18,14 @@
 	take_damage(100*material.combustion_effect(get_turf(src),temperature, 0.3))
 
 /obj/machinery/door/unpowered/simple/Initialize(mapload, var/material_name, var/locked)
-	. = ..(mapload)
 	if(!material_name)
 		material_name = MAT_STEEL
 	material = SSmaterials.get_material_datum(material_name)
+	. = ..(mapload)
 	if(!material)
 		return INITIALIZE_HINT_QDEL
+	if(!matter)
+		LAZYSET(matter, material.type, ceil(w_class * INITIAL_MATTER_W_CLASS_MULT * SHEET_MATERIAL_AMOUNT))
 	maxhealth = max(100, material.integrity*10)
 	health = maxhealth
 	if(!icon_base)

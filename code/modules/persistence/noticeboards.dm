@@ -28,10 +28,13 @@
 	if(pixel_x == 0 && pixel_y == 0)
 
 		var/turf/here = get_turf(src)
+		if(!here)
+			return
+
 		var/placing = 0
 		for(var/checkdir in GLOB.cardinal)
 			var/turf/T = get_step(here, checkdir)
-			if(T.density)
+			if(T && T.density)
 				placing = checkdir
 				break
 			for(var/thing in T)

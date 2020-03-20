@@ -254,9 +254,8 @@
 	new /obj/structure/girder(target, type, reinf_material && reinf_material.type)
 
 // General wall debris product placement.
-// Not particularly necessary aside from snowflakey cult girders.
-/material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
-	place_sheet(target, is_devastated ? 1 : 2)
+/material/proc/place_dismantled_product(var/turf/target,var/is_devastated,var/sheet_amount = 2)
+	place_sheet(target, is_devastated ? Floor(sheet_amount/2) : sheet_amount)
 
 // Debris product. Used ALL THE TIME.
 /material/proc/place_sheet(var/turf/target, var/amount = 1)

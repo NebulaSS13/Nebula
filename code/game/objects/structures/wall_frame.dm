@@ -36,6 +36,7 @@
 		. = INITIALIZE_HINT_LATELOAD
 
 /obj/structure/wall_frame/update_materials(var/keep_health)
+	..()
 	if(!keep_health)
 		health = material.integrity
 

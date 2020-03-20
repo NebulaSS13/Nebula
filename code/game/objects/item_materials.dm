@@ -69,4 +69,6 @@
 		update_force()
 		if(applies_material_name)
 			SetName("[material.display_name] [initial(name)]")
+		LAZYSET(matter, material.type, max(matter[material.type], ceil(w_class * INITIAL_MATTER_W_CLASS_MULT * SHEET_MATERIAL_AMOUNT)))
+
 	queue_icon_update()

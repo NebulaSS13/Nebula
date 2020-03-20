@@ -52,6 +52,7 @@
 	update_desc()
 
 /obj/structure/table/update_materials(var/keep_health)
+	..()
 	var/old_maxhealth = maxhealth
 	if(!material)
 		maxhealth = 10

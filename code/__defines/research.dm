@@ -1,5 +1,6 @@
 #define SHEET_MATERIAL_AMOUNT 2000
 #define SHEET_UNIT "<small>cm<sup>3</sup></small>"
+#define INITIAL_MATTER_W_CLASS_MULT 0.1
 
 #define TECH_MATERIAL "materials"
 #define TECH_ENGINEERING "engineering"

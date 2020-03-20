@@ -35,6 +35,7 @@
 	other_connections = dirs_to_corner_states(other_dirs)
 
 /obj/structure/window/update_materials(var/keep_health)
+	..()
 	name = "[reinf_material ? "reinforced " : ""][material.display_name] window"
 	desc = "A window pane made from [material.display_name]."
 	if(!keep_health)
