@@ -287,18 +287,18 @@
 
 /obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
 	var/list/stacks = list()
-	if(check_hands)
+	if(check_hands && user)
 		if(isstack(user.l_hand))
 			stacks += user.l_hand
 		if(isstack(user.r_hand))
 			stacks += user.r_hand
-	for (var/obj/item/stack/item in user.loc)
+	for (var/obj/item/stack/item in user?.loc)
 		stacks += item
 	for (var/obj/item/stack/item in stacks)
 		if (item==src)
 			continue
 		var/transfer = src.transfer_to(item)
-		if (transfer)
+		if(user && transfer)
 			to_chat(user, "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>")
 		if(!amount)
 			break

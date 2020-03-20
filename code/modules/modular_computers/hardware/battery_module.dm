@@ -6,6 +6,8 @@
 	icon_state = "battery_normal"
 	critical = 1
 	origin_tech = "{'" + TECH_POWER + "':1,'" + TECH_ENGINEERING + "':1}"
+	matter = list(MAT_STEEL = 400)
+
 	var/battery_rating = 75
 	var/obj/item/cell/battery = /obj/item/cell
 
@@ -16,6 +18,7 @@
 	origin_tech = "{'" + TECH_POWER + "':2,'" + TECH_ENGINEERING + "':2}"
 	hardware_size = 2
 	battery_rating = 110
+	matter = list(MAT_STEEL = 800)
 
 /obj/item/stock_parts/computer/battery_module/super
 	name = "super battery"
@@ -24,6 +27,7 @@
 	origin_tech = "{'" + TECH_POWER + "':3,'" + TECH_ENGINEERING + "':3}"
 	hardware_size = 2
 	battery_rating = 150
+	matter = list(MAT_STEEL = 1600)
 
 /obj/item/stock_parts/computer/battery_module/ultra
 	name = "ultra battery"
@@ -32,6 +36,7 @@
 	origin_tech = "{'" + TECH_POWER + "':5,'" + TECH_ENGINEERING + "':4}"
 	hardware_size = 3
 	battery_rating = 200
+	matter = list(MAT_STEEL = 3200)
 
 /obj/item/stock_parts/computer/battery_module/micro
 	name = "micro battery"
@@ -39,6 +44,7 @@
 	icon_state = "battery_micro"
 	origin_tech = "{'" + TECH_POWER + "':2,'" + TECH_ENGINEERING + "':2}"
 	battery_rating = 50
+	matter = list(MAT_STEEL = 400)
 
 /obj/item/stock_parts/computer/battery_module/nano
 	name = "nano battery"
@@ -46,6 +52,7 @@
 	icon_state = "battery_nano"
 	origin_tech = "{'" + TECH_POWER + "':1,'" + TECH_ENGINEERING + "':1}"
 	battery_rating = 30
+	matter = list(MAT_STEEL = 200)
 
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
 /obj/item/stock_parts/computer/battery_module/lambda

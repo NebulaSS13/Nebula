@@ -15,6 +15,8 @@
 	origin_tech = "{'" + TECH_MATERIAL + "':7,'" + TECH_POWER + "':7,'" + TECH_ENGINEERING + "':5}"
 	base_type = /obj/item/stock_parts/smes_coil
 	part_flags = PART_FLAG_HAND_REMOVE
+	matter = list(MAT_STEEL = 2000, MAT_GLASS = 2000, MAT_GOLD = 1000, MAT_SILVER = 1000, MAT_ALUMINIUM = 500)
+
 	var/ChargeCapacity = 50 KILOWATTS
 	var/IOCapacity = 250 KILOWATTS
 

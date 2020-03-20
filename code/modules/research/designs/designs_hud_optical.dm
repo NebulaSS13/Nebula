@@ -1,12 +1,8 @@
-/datum/design/item/hud
-	materials = list(MAT_ALUMINIUM = 50, MAT_GLASS = 50)
-
-/datum/design/item/hud/AssembleDesignName()
-	..()
-	name = "HUD glasses design ([item_name])"
+/datum/design/item/hud/ModifyDesignName()
+	name = "HUD glasses design ([name])"
 
 /datum/design/item/hud/AssembleDesignDesc()
-	desc = "Allows for the construction of \a [item_name] HUD glasses."
+	desc = "Allows for the construction of \a [name] HUD glasses."
 
 /datum/design/item/hud/health
 	name = "health scanner"
@@ -23,10 +19,8 @@
 	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
 	build_path = /obj/item/clothing/glasses/hud/janitor
 
-/datum/design/item/optical/AssembleDesignName()
-	..()
-	name = "Optical glasses design ([item_name])"
-	materials = list(MAT_STEEL = 50, MAT_GLASS = 50)
+/datum/design/item/optical/ModifyDesignName()
+	name = "Optical glasses design ([name])"
 
 /datum/design/item/optical/mesons
 	name = "mesons"
@@ -42,5 +36,4 @@
 /datum/design/item/optical/tactical
 	name = "tactical"
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 5)
-	materials = list(MAT_STEEL = 50, MAT_GLASS = 50, MAT_SILVER = 50, MAT_GOLD = 50)
 	build_path = /obj/item/clothing/glasses/tacgoggles

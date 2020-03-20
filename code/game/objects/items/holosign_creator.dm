@@ -9,6 +9,8 @@
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 7
+	matter = list(MAT_STEEL = 2000, MAT_GLASS = 1000)
+
 	var/list/signs = list()
 	var/max_signs = 10
 	var/creation_time = 0 //time to create a holosign in deciseconds.

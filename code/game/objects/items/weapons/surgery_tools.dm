@@ -94,6 +94,7 @@
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
 	damtype = "fire"
+	matter = list(MAT_STEEL = 12500, MAT_GLASS = 7500)
 
 /obj/item/scalpel/laser2
 	name = "laser scalpel"
@@ -101,6 +102,7 @@
 	icon_state = "scalpel_laser2_on"
 	damtype = "fire"
 	force = 12.0
+	matter = list(MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 2500)
 
 /obj/item/scalpel/laser3
 	name = "laser scalpel"
@@ -108,12 +110,14 @@
 	icon_state = "scalpel_laser3_on"
 	damtype = "fire"
 	force = 15.0
+	matter = list(MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 2000, MAT_GOLD = 1500)
 
 /obj/item/scalpel/manager
 	name = "incision management system"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	icon_state = "scalpel_manager_on"
 	force = 7.5
+	matter = list (MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 1500, MAT_GOLD = 1500, MAT_DIAMOND = 750)
 
 /*
  * Circular Saw

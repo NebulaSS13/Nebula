@@ -391,6 +391,7 @@
 	amount_per_transfer_from_this = 20
 	volume = 60
 	icon_state = "bs"
+	matter = list(MAT_GLASS = 2000, MAT_PHORON = 1000, MAT_DIAMOND = 1000)
 
 /obj/item/chems/syringe/noreact
 	name = "cryostasis syringe"
@@ -398,4 +399,4 @@
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	icon_state = "cs"
-
+	matter = list(MAT_GLASS = 2000, MAT_GOLD = 1000, MAT_PLASTIC = 500)

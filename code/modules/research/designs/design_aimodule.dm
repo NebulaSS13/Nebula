@@ -1,8 +1,7 @@
 /datum/design/aimodule
 	build_type = IMPRINTER
-	materials = list(MAT_GLASS = 2000, MAT_GOLD = 100)
 
-/datum/design/aimodule/AssembleDesignName()
+/datum/design/aimodule/ModifyDesignName()
 	name = "AI module design ([name])"
 
 /datum/design/aimodule/AssembleDesignDesc()
@@ -57,7 +56,7 @@
 /datum/design/aimodule/core
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 6)
 
-/datum/design/aimodule/core/AssembleDesignName()
+/datum/design/aimodule/core/ModifyDesignName()
 	name = "AI core module design ([name])"
 
 /datum/design/aimodule/core/AssembleDesignDesc()

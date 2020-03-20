@@ -12,6 +12,7 @@
 	collection_mode = 1
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 100
+	matter = list(MAT_STEEL = 15000, MAT_GLASS = 5000)
 
 	var/replace_sound = 'sound/items/rped.ogg'
 	var/remote_interaction = FALSE
@@ -32,13 +33,12 @@
 	name = "bluespace rapid part exchange device"
 	desc = "A version of the RPED that allows for replacement of parts and scanning from a distance, along with higher capacity for parts."
 	icon_state = "RPED_BS"
-
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 400
 	max_storage_space = 200
-
 	replace_sound = 'sound/items/PSHOOM.ogg'
 	remote_interaction = TRUE
+	matter = list(MAT_STEEL = 20000, MAT_GLASS = 5000, MAT_SILVER = 2000)
 
 /obj/item/research
 	name = "research debugging device"

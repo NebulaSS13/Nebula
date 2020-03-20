@@ -1,24 +1,22 @@
 /datum/design/circuit
 	build_type = IMPRINTER
 	req_tech = list(TECH_DATA = 2)
-	materials = list(MAT_PLASTIC = 1000, MAT_ALUMINIUM = 1000)
 	chemicals = list(/datum/reagent/acid = 20)
 	time = 5
 
-/datum/design/circuit/AssembleDesignName()
-	..()
+/datum/design/circuit/ModifyDesignName()
 	if(build_path)
 		var/obj/item/stock_parts/circuitboard/C = build_path
 		if(initial(C.board_type) == "machine")
-			name = "Machine circuit design ([item_name])"
+			name = "Machine circuit design ([name])"
 		else if(initial(C.board_type) == "computer")
-			name = "Computer circuit design ([item_name])"
+			name = "Computer circuit design ([name])"
 		else
-			name = "Circuit design ([item_name])"
+			name = "Circuit design ([name])"
 
 /datum/design/circuit/AssembleDesignDesc()
 	if(!desc)
-		desc = "Allows for the construction of \a [item_name] circuit board."
+		desc = "Allows for the construction of \a [name] circuit board."
 
 /datum/design/circuit/arcademachine
 	name = "battle arcade machine"
@@ -447,8 +445,9 @@
 /datum/design/circuit/tcom
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
-/datum/design/circuit/tcom/AssembleDesignName()
+/datum/design/circuit/tcom/ModifyDesignName()
 	name = "Telecommunications machinery circuit design ([name])"
+
 /datum/design/circuit/tcom/AssembleDesignDesc()
 	desc = "Allows for the construction of a telecommunications [name] circuit board."
 
@@ -556,7 +555,6 @@
 /datum/design/circuit/ionengine
 	name = "ion propulsion system"
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
-	materials = list(MAT_GOLD = 250, MAT_DIAMOND = 250, MAT_URANIUM = 250, MAT_PLASTIC = 1000, MAT_ALUMINIUM = 1000)
 	build_path = /obj/item/stock_parts/circuitboard/engine/ion
 
 /datum/design/circuit/vitals

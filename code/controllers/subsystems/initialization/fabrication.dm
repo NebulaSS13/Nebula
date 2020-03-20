@@ -7,22 +7,42 @@ SUBSYSTEM_DEF(fabrication)
 	var/list/categories = list()
 	var/list/crafting_procedures_by_type = list()
 
+	// These should be removed after rewriting research networks to respect init order.
+	var/list/rnd_to_init = list()
+	var/post_recipe_init = FALSE
+
 /datum/controller/subsystem/fabrication/Initialize()
+
+	// Fab recipes.
 	for(var/R in subtypesof(/datum/fabricator_recipe))
 		var/datum/fabricator_recipe/recipe = new R
 		for(var/fab_type in recipe.fabricator_types)
 			LAZYADD(recipes[fab_type], recipe)
 			LAZYDISTINCTADD(categories[fab_type], recipe.category)
+
+	// Slapcrafting trees.
 	var/list/all_crafting_handlers = decls_repository.get_decls_of_subtype(/decl/crafting_stage)
 	for(var/hid in all_crafting_handlers)
 		var/decl/crafting_stage/handler = all_crafting_handlers[hid]
 		if(ispath(handler.begins_with_object_type))
 			LAZYDISTINCTADD(crafting_procedures_by_type[handler.begins_with_object_type], handler)
+
+	// R&D designs.
+	for(var/datum/design/design in rnd_to_init)
+		design.AssembleDesignMaterials()
+	rnd_to_init.Cut()
+
 	init_rpd_lists()
 	. = ..()
 
 /datum/controller/subsystem/fabrication/proc/get_categories(var/fab_type)
 	. = categories[fab_type]
+
+/datum/controller/subsystem/fabrication/proc/init_rnd_design(var/datum/design/design)
+	if(post_recipe_init)
+		design.AssembleDesignMaterials()
+	else
+		rnd_to_init |= design
 
 /datum/controller/subsystem/fabrication/proc/get_recipes(var/fab_type)
 	. = recipes[fab_type]

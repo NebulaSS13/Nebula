@@ -5,15 +5,16 @@
 	icon_state = "inducer-sci"
 	item_state = "inducer-sci"
 	force = 7
+	origin_tech = "{'" + TECH_POWER + "':6,'" + TECH_ENGINEERING + "':4}"
+	matter = list(MAT_STEEL = 2000, MAT_GLASS = 100)
+	slot_flags = SLOT_BELT
+
 	var/powertransfer = 500
 	var/coefficient = 0.9
 	var/opened = FALSE
 	var/failsafe = 0
 	var/obj/item/cell/cell = /obj/item/cell
 	var/recharging = FALSE
-	origin_tech = "{'" + TECH_POWER + "':6,'" + TECH_ENGINEERING + "':4}"
-	matter = list(MAT_STEEL = 1000, MAT_GLASS = 700)
-	slot_flags = SLOT_BELT
 
 /obj/item/inducer/Initialize()
 	. = ..()

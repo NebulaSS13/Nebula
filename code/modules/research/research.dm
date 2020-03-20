@@ -187,6 +187,9 @@ research holder datum.
 	id = TECH_ESOTERIC
 	level = 0
 
+/obj/item/disk
+	matter = list(MAT_PLASTIC = 30, MAT_STEEL = 30, MAT_GLASS = 10)
+
 /obj/item/disk/tech_disk
 	name = "fabricator data disk"
 	desc = "A disk for storing fabricator learning data for backup."
@@ -194,7 +197,6 @@ research holder datum.
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_PLASTIC = 30, MAT_STEEL = 30, MAT_GLASS = 10)
 	var/datum/tech/stored
 
 
@@ -205,5 +207,4 @@ research holder datum.
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_PLASTIC = 30, MAT_STEEL = 30, MAT_GLASS = 10)
 	var/datum/design/blueprint

@@ -1,5 +1,4 @@
-
-/obj/item/encryptionkey/
+/obj/item/encryptionkey
 	name = "standard encryption key"
 	desc = "An encryption key for a radio headset. Contains cypherkeys."
 	icon = 'icons/obj/radio.dmi'
@@ -7,6 +6,8 @@
 	item_state = ""
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
+	matter = list(MAT_STEEL = 300, MAT_GLASS = 300)
+
 	var/translate_binary = 0
 	var/translate_hive = 0
 	var/syndie = 0

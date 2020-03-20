@@ -13,6 +13,7 @@
 	icon_state = "backbone"
 	density = 1
 	pixel_x = -8
+	matter = list(MAT_STEEL = 20000)
 
 	// Holders for the final product.
 	var/obj/item/mech_component/manipulators/arms

@@ -18,40 +18,65 @@ other types of metals and chemistry for reagents).
 */
 //Note: More then one of these can be added to a design.
 
-/datum/design                   //Datum for object designs, used in construction
-	var/name = "design"         //Name of the created object. If null it will be 'guessed' from build_path if possible.
-	var/desc                    //Description of the created object. If null it will use group_desc and name where applicable.
-	var/item_name               //An item name before it is modified by various name-modifying procs
-	var/build_type              //Flag as to what kind machine the design is built in. See defines.
-	var/build_path              //The path of the object that gets created.
-	var/time = 10               //How many ticks it requires to build
-	var/category                //Primarily used for Mech Fabricators, but can be used for anything.
-	var/list/req_tech = list()  //IDs of that techs the object originated from and the minimum level requirements.
-	var/list/materials = list() //List of materials. Format: "id" = amount.
-	var/list/chemicals = list() //List of chemicals.
+/datum/design                   // Datum for object designs, used in construction
+	var/name                    // Name of the created object. If null it will be 'guessed' from build_path if possible.
+	var/desc                    // Description of the created object. If null it will use group_desc and name where applicable.
+	var/build_type              // Flag as to what kind machine the design is built in. See defines.
+	var/build_path              // The path of the object that gets created.
+	var/time = 10               // How many ticks it requires to build
+	var/category                // Primarily used for Mech Fabricators, but can be used for anything.
+	var/list/req_tech = list()  // IDs of that techs the object originated from and the minimum level requirements.
+	var/list/materials          // List of materials. Format: "id" = amount.
+	var/list/chemicals = list() // List of chemicals.
 
 /datum/design/New()
 	..()
-	item_name = name
+	// Needs to be handled during New() because R&D network code is a mess.
+	// Only accesses initial() on paths so should be more or less safe.
 	AssembleDesignInfo()
+	// Queue material update.
+	SSfabrication.init_rnd_design(src)
 
 //These procs are used in subtypes for assigning names and descriptions dynamically
 /datum/design/proc/AssembleDesignInfo()
 	AssembleDesignName()
 	AssembleDesignDesc()
+	ModifyDesignName()
+
+// Grab materials from our build path if not already set.
+/datum/design/proc/AssembleDesignMaterials()
+	if(build_path && !materials)
+		materials = list()
+		var/obj/item/I = new build_path
+		var/list/building_cost = I.building_cost()
+		for(var/path in building_cost)
+			materials[path] = building_cost[path] * FABRICATOR_EXTRA_COST_FACTOR
+		if(istype(I, /obj/item/ammo_magazine) || istype(I, /obj/item/storage))
+			for(var/obj/thing in I)
+				var/list/thing_matter = thing.building_cost()
+				for(var/mat in thing_matter)
+					materials[mat] += thing_matter[mat] * FABRICATOR_EXTRA_COST_FACTOR
+		for(var/mat in materials)
+			materials[mat] = ceil(materials[mat])
+		if(!QDELETED(I))
+			qdel(I)
+
+//Adjust name, if needed.
+/datum/design/proc/ModifyDesignName()
 	return
 
+//Get name from build path if posible
 /datum/design/proc/AssembleDesignName()
-	if(!name && build_path)					//Get name from build path if posible
+	if(!name && build_path)
 		var/atom/movable/A = build_path
 		name = initial(A.name)
-		item_name = name
-	return
+	if(!name)
+		name = "unnamed design"
 
+//Try to make up a nice description if we don't have one
 /datum/design/proc/AssembleDesignDesc()
-	if(!desc)								//Try to make up a nice description if we don't have one
-		desc = "Allows for the construction of \a [item_name]."
-	return
+	if(!desc)
+		desc = "Allows for the construction of \a [name]."
 
 //Returns a new instance of the item for this design
 //This is to allow additional initialization to be performed, including possibly additional contructor arguments.

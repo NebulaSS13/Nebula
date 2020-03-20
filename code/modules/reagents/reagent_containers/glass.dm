@@ -191,6 +191,7 @@
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 	material = null
+	matter = list(MAT_STEEL = 3000)
 
 /obj/item/chems/glass/beaker/bluespace
 	name = "bluespace beaker"
@@ -202,6 +203,7 @@
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_force_multiplier = 2.5
+	matter = list(MAT_STEEL = 3000, MAT_PHORON = 3000, MAT_DIAMOND = 500)
 
 /obj/item/chems/glass/beaker/vial
 	name = "vial"

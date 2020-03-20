@@ -14,6 +14,8 @@
 	icon_state = "armor-chest"
 	desc = "Nanomachines, son."
 	action_button_name = "Toggle Nanomachines"
+	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000, MAT_GOLD = 100, MAT_URANIUM = 500)
+
 	var/obj/aura/nanoaura/aura = null
 	var/charges = 4
 

@@ -1,5 +1,5 @@
 // These are basically USB data sticks and may be used to transfer files between devices
-/obj/item/stock_parts/computer/hard_drive/portable/
+/obj/item/stock_parts/computer/hard_drive/portable
 	name = "basic data crystal"
 	desc = "Small crystal with imprinted photonic circuits that can be used to store data. Its capacity is 16 GQ."
 	power_usage = 10
@@ -7,6 +7,7 @@
 	hardware_size = 1
 	max_capacity = 16
 	origin_tech = "{'" + TECH_DATA + "':1}"
+	matter = list(MAT_GLASS = 800)
 
 /obj/item/stock_parts/computer/hard_drive/portable/advanced
 	name = "advanced data crystal"
@@ -16,6 +17,7 @@
 	hardware_size = 1
 	max_capacity = 64
 	origin_tech = "{'" + TECH_DATA + "':2}"
+	matter = list(MAT_GLASS = 1600)
 
 /obj/item/stock_parts/computer/hard_drive/portable/super
 	name = "super data crystal"
@@ -25,6 +27,7 @@
 	hardware_size = 1
 	max_capacity = 256
 	origin_tech = "{'" + TECH_DATA + "':4}"
+	matter = list(MAT_GLASS = 3200)
 
 /obj/item/stock_parts/computer/hard_drive/portable/Initialize()
 	. = ..()

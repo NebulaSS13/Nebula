@@ -33,6 +33,7 @@
 	action_delay = 15
 	max_damage = 90
 	power_use = 60
+	matter = list(MAT_STEEL = 20000)
 
 /obj/item/mech_component/propulsion/heavy
 	name = "heavy legs"
@@ -43,6 +44,7 @@
 	turn_delay = 5
 	max_damage = 160
 	power_use = 100
+	matter = list(MAT_STEEL = 20000)
 
 /obj/item/mech_component/sensors/heavy
 	name = "heavy sensors"
@@ -51,6 +53,7 @@
 	icon_state = "heavy_head"
 	max_damage = 120
 	power_use = 0
+	matter = list(MAT_STEEL = 16000)
 
 /obj/item/mech_component/sensors/heavy/prebuild()
 	..()
@@ -68,6 +71,7 @@
 	mech_health = 500
 	power_use = 50
 	has_hardpoints = list(HARDPOINT_BACK)
+	matter = list(MAT_STEEL = 70000, MAT_URANIUM = 10000)
 
 /obj/item/mech_component/chassis/heavy/prebuild()
 	. = ..()
