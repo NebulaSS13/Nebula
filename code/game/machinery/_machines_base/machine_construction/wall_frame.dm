@@ -135,12 +135,7 @@
 			to_chat(user, SPAN_WARNING("You need five pieces of cable to wire \the [machine]."))
 			return TRUE
 
-	if(isCrowbar(I))
-		TRANSFER_STATE(bottom_state)
-		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
-		to_chat(user, "You pry out the circuit!")
-		machine.uninstall_component(/obj/item/stock_parts/circuitboard)
-		machine.queue_icon_update()
+	if((. = down_interaction(I, user, machine)))
 		return
 
 	if(istype(I, /obj/item/storage/part_replacer))
@@ -151,6 +146,14 @@
 
 	if(istype(I))
 		return machine.part_insertion(user, I)
+
+/decl/machine_construction/wall_frame/no_wires/proc/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
+	if(isCrowbar(I))
+		TRANSFER_STATE(bottom_state)
+		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
+		to_chat(user, "You pry out the circuit!")
+		machine.uninstall_component(/obj/item/stock_parts/circuitboard)
+		machine.queue_icon_update()
 
 /decl/machine_construction/wall_frame/no_wires/mechanics_info()
 	. = list()
