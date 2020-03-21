@@ -12,6 +12,9 @@
 	// * Other things *
 	var/datum/preferences/prefs = null
 
+	///datum that controls the displaying and hiding of tooltips
+	var/datum/tooltip/tooltips
+
 	/*
 	As of byond 512, due to how broken preloading is, preload_rsc MUST be set to 1 at compile time if resource URLs are *not* in use,
 	BUT you still want resource preloading enabled (from the server itself). If using resource URLs, it should be set to 0 and
