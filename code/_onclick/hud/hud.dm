@@ -62,7 +62,7 @@
 		var/stamina = mymob.get_stamina()
 		if(stamina < 100)
 			stamina_bar.invisibility = 0
-			stamina_bar.icon_state = "prog_bar_[Floor(stamina/5)*5]"
+			stamina_bar.icon_state = "prog_bar_[Floor(stamina/5)*5][(stamina >= 5) && (stamina <= 25) ? "_fail" : null]"
 
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
@@ -270,7 +270,7 @@
 
 /obj/screen/stamina
 	name = "stamina"
-	icon = 'icons/effects/progessbar.dmi'
+	icon = 'icons/effects/progressbar.dmi'
 	icon_state = "prog_bar_100"
 	invisibility = INVISIBILITY_MAXIMUM
 	screen_loc = ui_stamina
