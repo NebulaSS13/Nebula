@@ -105,7 +105,6 @@
 /datum/gear/plush_toy/New()
 	..()
 	var/plushes = list()
-	plushes["diona nymph plush"] = /obj/item/toy/plushie/nymph
 	plushes["mouse plush"] = /obj/item/toy/plushie/mouse
 	plushes["kitten plush"] = /obj/item/toy/plushie/kitten
 	plushes["lizard plush"] = /obj/item/toy/plushie/lizard

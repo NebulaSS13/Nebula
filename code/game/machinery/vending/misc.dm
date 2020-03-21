@@ -40,7 +40,6 @@
 		/obj/item/storage/lunchbox/cat = 3,
 		/obj/item/storage/lunchbox/mars = 3,
 		/obj/item/storage/lunchbox/cti = 3,
-		/obj/item/storage/lunchbox/nymph = 3,
 		/obj/item/storage/lunchbox/syndicate = 3,
 		/obj/item/material/knife/kitchen/cleaver = 1
 	)

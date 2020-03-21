@@ -44,7 +44,6 @@
 		/obj/item/seeds/cornseed = 3, 
 		/obj/item/seeds/eggplantseed = 3, 
 		/obj/item/seeds/potatoseed = 3, 
-		/obj/item/seeds/replicapod = 3,
 		/obj/item/seeds/soyaseed = 3,
 		/obj/item/seeds/sunflowerseed = 3,
 		/obj/item/seeds/tomatoseed = 3,

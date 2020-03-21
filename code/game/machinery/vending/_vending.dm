@@ -18,7 +18,6 @@
 
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access
-	var/diona_spawn_chance = 0.1
 
 	// Power
 	idle_power_usage = 10
@@ -452,25 +451,24 @@
 	use_power_oneoff(vend_power_usage)	//actuators and stuff
 	if (src.icon_vend) //Show the vending animation if needed
 		flick(src.icon_vend,src)
-	spawn(src.vend_delay) //Time to vend
-		if(prob(diona_spawn_chance)) //Hehehe
-			var/turf/T = get_turf(src)
-			var/mob/living/carbon/alien/diona/S = new(T)
-			src.visible_message("<span class='notice'>\The [src] makes an odd grinding noise before coming to a halt as \a [S.name] slurmps out from the receptacle.</span>")
-		else //Just a normal vend, then
-			R.get_product(get_turf(src))
-			src.visible_message("\The [src] clunks as it vends \the [R.item_name].")
-			playsound(src, 'sound/machines/vending_machine.ogg', 25, 1)
-			if(prob(1)) //The vending gods look favorably upon you
-				sleep(3)
-				if(R.get_product(get_turf(src)))
-					src.visible_message("<span class='notice'>\The [src] clunks as it vends an additional [R.item_name].</span>")
+	addtimer(CALLBACK(src, /obj/machinery/vending/proc/finish_vending, R), vend_delay)
 
-		src.status_message = ""
-		src.status_error = 0
-		src.vend_ready = 1
-		currently_vending = null
-		SSnano.update_uis(src)
+/obj/machinery/vending/proc/finish_vending(var/datum/stored_items/vending_products/product)
+	set waitfor = FALSE
+	if(!product)
+		return
+	product.get_product(get_turf(src))
+	visible_message("\The [src] clunks as it vends \the [product.item_name].")
+	playsound(src, 'sound/machines/vending_machine.ogg', 25, 1)
+	if(prob(1)) //The vending gods look favorably upon you
+		sleep(3)
+		if(product.get_product(get_turf(src)))
+			visible_message("<span class='notice'>\The [src] clunks as it vends an additional [product.item_name].</span>")
+	status_message = ""
+	status_error = 0
+	vend_ready = 1
+	currently_vending = null
+	SSnano.update_uis(src)
 
 /**
  * Add item to the machine

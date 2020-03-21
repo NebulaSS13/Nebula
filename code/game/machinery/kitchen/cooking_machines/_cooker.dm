@@ -1,6 +1,6 @@
 // This folder contains code that was originally ported from Apollo Station and then refactored/optimized/changed.
 
-// Tracks precooked food to stop deep fried baked grilled grilled grilled diona nymph cereal.
+// Tracks precooked food to stop deep fried baked grilled grilled grilled monkey cereal.
 /obj/item/chems/food/snacks/var/list/cooked
 
 // Root type for cooking machines. See following files for specific implementations.

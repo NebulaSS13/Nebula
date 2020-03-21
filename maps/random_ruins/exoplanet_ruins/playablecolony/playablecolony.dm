@@ -1,3 +1,5 @@
+#include "../../../code/content_packages/dionaea/_dionaea.dme"
+
 /datum/map_template/ruin/exoplanet/playablecolony
 	name = "established colony"
 	id = "playablecolony"

@@ -772,7 +772,7 @@
 					clr = get_trait(TRAIT_BIOLUM_COLOUR)
 				product.set_light(0.5, 0.1, 3, l_color = clr)
 
-			//Handle spawning in living, mobile products (like dionaea).
+			//Handle spawning in living, mobile products.
 			if(istype(product,/mob/living))
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)

@@ -6,14 +6,6 @@
 	edge = 1
 	attack_name = "sharp bite"
 
-/decl/natural_attack/diona
-	attack_verb = list("lashed", "bludgeoned")
-	attack_noun = list("tendril")
-	eye_attack_text = "a tendril"
-	eye_attack_text_victim = "a tendril"
-	attack_name = "tendrils"
-	usable_with_limbs = list(BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)
-
 /decl/natural_attack/claws
 	attack_verb = list("scratched", "clawed", "slashed")
 	attack_noun = list("claws")
