@@ -7,27 +7,22 @@
 	unacidable = 1//Can't destroy energy portals.
 	var/obj/item/target = null
 	var/creator = null
-	anchored = 1.0
+	anchored = TRUE
 	var/dangerous = 0
 	var/failchance = 0
 
+// Spawns hack around call ordering; don't replace with waitfor without testing.
 /obj/effect/portal/Bumped(mob/M)
 	spawn(0)
-		src.teleport(M)
-		return
-	return
+		teleport(M)
 
 /obj/effect/portal/Crossed(atom/movable/AM)
 	spawn(0)
-		src.teleport(AM)
-		return
-	return
+		teleport(AM)
 
 /obj/effect/portal/attack_hand(mob/user)
-	spawn(0)
-		src.teleport(user)
-		return
-	return
+	teleport(user)
+	return TRUE
 
 /obj/effect/portal/Initialize(mapload, var/end, var/delete_after = 300, var/failure_rate)
 	. = ..()
@@ -38,12 +33,14 @@
 			dangerous = 1
 	playsound(src, 'sound/effects/phasein.ogg', 25, 1)
 	target = end
+	GLOB.moved_event.register(src, src, /datum/proc/qdel_self)
 
 	if(delete_after)
 		QDEL_IN(src, delete_after)
 
 /obj/effect/portal/Destroy()
 	target = null
+	GLOB.moved_event.unregister(src, src)
 	. = ..()
 
 /obj/effect/portal/proc/teleport(atom/movable/M)
