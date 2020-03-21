@@ -1,13 +1,12 @@
 //TODO: Flash range does nothing currently
-/proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
+/proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN)
 	if(config.use_iterative_explosions)
-		. = explosion_iter(epicenter, (devastation_range * 2 + heavy_impact_range + light_impact_range), shaped)
+		. = explosion_iter(epicenter, (devastation_range * 2 + heavy_impact_range + light_impact_range))
 	else
-		. = explosion_basic(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, z_transfer, shaped)
+		. = explosion_basic(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, z_transfer)
 
-/proc/explosion_basic(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
-	set waitfor = 0
-	UNLINT(src = null)	//so we don't abort once src is deleted
+/proc/explosion_basic(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN)
+	set waitfor = FALSE
 
 	epicenter = get_turf(epicenter)
 	if(!epicenter) 
@@ -17,15 +16,15 @@
 	// Handles recursive propagation of explosions.
 	if(z_transfer)
 		var/multi_z_scalar = 0.35
-		var/adj_dev   = max(0, (multi_z_scalar * devastation_range) - (shaped ? 2 : 0) )
-		var/adj_heavy = max(0, (multi_z_scalar * heavy_impact_range) - (shaped ? 2 : 0) )
-		var/adj_light = max(0, (multi_z_scalar * light_impact_range) - (shaped ? 2 : 0) )
-		var/adj_flash = max(0, (multi_z_scalar * flash_range) - (shaped ? 2 : 0) )
+		var/adj_dev   = max(0, (multi_z_scalar * devastation_range))
+		var/adj_heavy = max(0, (multi_z_scalar * heavy_impact_range))
+		var/adj_light = max(0, (multi_z_scalar * light_impact_range))
+		var/adj_flash = max(0, (multi_z_scalar * flash_range))
 		if(adj_dev > 0 || adj_heavy > 0)
 			if((z_transfer & UP) && HasAbove(epicenter.z))
-				explosion_basic(GetAbove(epicenter), adj_dev, adj_heavy, adj_light, adj_flash, 0, UP, shaped)
+				explosion_basic(GetAbove(epicenter), adj_dev, adj_heavy, adj_light, adj_flash, 0, UP)
 			if((z_transfer & DOWN) && HasBelow(epicenter.z))
-				explosion_basic(GetBelow(epicenter), adj_dev, adj_heavy, adj_light, adj_flash, 0, DOWN, shaped)
+				explosion_basic(GetBelow(epicenter), adj_dev, adj_heavy, adj_light, adj_flash, 0, DOWN)
 
 	var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
 
@@ -65,7 +64,7 @@
 	var/x0 = epicenter.x
 	var/y0 = epicenter.y
 	var/z0 = epicenter.z
-	for(var/turf/T in trange(max_range, epicenter))
+	for(var/turf/T in RANGE_TURFS(epicenter, max_range))
 		var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 		if(dist < devastation_range)
 			dist = 1
