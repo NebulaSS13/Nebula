@@ -105,6 +105,7 @@
 	..()
 	min_bruised_damage += 5
 	min_broken_damage += 10
+	LAZYINITLIST(matter)
 	var/mat_amt = 0
 	for(var/mat in matter)
 		mat_amt += matter[mat]
