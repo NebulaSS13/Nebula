@@ -5,9 +5,10 @@
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
-	var/flush = null
 	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_MATERIAL + "':4}"
+	matter = list(MAT_GLASS = 1000, MAT_GOLD = 200)
 
+	var/flush
 	var/mob/living/silicon/ai/carded_ai
 
 /obj/item/aicard/attack_self(mob/user)

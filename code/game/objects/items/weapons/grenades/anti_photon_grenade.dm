@@ -6,6 +6,7 @@
 	item_state = "emp"
 	det_time = 20
 	origin_tech = "{'" + TECH_BLUESPACE + "':4,'" + TECH_MATERIAL + "':4}"
+	matter = list(MAT_STEEL = 3000, MAT_GLASS = 1000, MAT_DIAMOND = 1000)
 
 /obj/item/grenade/anti_photon/detonate()
 	playsound(src.loc, 'sound/effects/phasein.ogg', 50, 1, 5)

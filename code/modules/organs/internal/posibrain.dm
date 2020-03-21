@@ -13,15 +13,13 @@
 	throw_range = 5
 	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_MATERIAL + "':4,'" + TECH_BLUESPACE + "':2,'" + TECH_DATA + "':4}"
 	attack_verb = list("attacked", "slapped", "whacked")
-
+	matter = list(MAT_STEEL = 2000, MAT_GLASS = 1000, MAT_SILVER = 1000, MAT_GOLD = 500, MAT_PHORON = 500, MAT_DIAMOND = 100)
 	relative_size = 60
-
-	var/mob/living/silicon/sil_brainmob/brainmob = null
-
-	var/searching = 0
-	var/askDelay = 10 * 60 * 1
 	req_access = list(access_robotics)
 
+	var/mob/living/silicon/sil_brainmob/brainmob = null
+	var/searching = 0
+	var/askDelay = 10 * 60 * 1
 	var/list/shackled_verbs = list(
 		/obj/item/organ/internal/posibrain/proc/show_laws_brain,
 		/obj/item/organ/internal/posibrain/proc/brain_checklaws

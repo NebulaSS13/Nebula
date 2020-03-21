@@ -2,15 +2,15 @@
 	name = "head"
 	icon_state = "loader_head"
 	gender = NEUTER
+	has_hardpoints = list(HARDPOINT_HEAD)
+	power_use = 15
 
 	var/vision_flags = 0
 	var/see_invisible = 0
 	var/obj/item/robot_parts/robot_component/radio/radio
 	var/obj/item/robot_parts/robot_component/camera
 	var/obj/item/mech_component/control_module/software
-	has_hardpoints = list(HARDPOINT_HEAD)
 	var/active_sensors = 0
-	power_use = 15
 
 /obj/item/mech_component/sensors/Destroy()
 	QDEL_NULL(camera)
@@ -80,6 +80,8 @@
 	icon_state = "control"
 	icon = 'icons/mecha/mech_equipment.dmi'
 	gender = NEUTER
+	matter = list(MAT_STEEL = 5000)
+
 	var/list/installed_software = list()
 	var/max_installed_software = 2
 

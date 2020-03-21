@@ -91,6 +91,7 @@ obj/item/gun/energy/retro
 	accuracy = 2
 	fire_delay = 20
 	wielded_item_state = "gun_wielded"
+	matter = list(MAT_STEEL = 10000, MAT_GLASS = 1000, MAT_DIAMOND = 2000)
 
 /obj/item/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
@@ -116,6 +117,7 @@ obj/item/gun/energy/retro
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
 	combustion = 0
+	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000, MAT_URANIUM = 1000)
 
 /obj/item/gun/energy/xray/pistol
 	name = "x-ray laser gun"
@@ -128,6 +130,7 @@ obj/item/gun/energy/retro
 	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
+	matter = list(MAT_STEEL = 4000, MAT_GLASS = 500, MAT_URANIUM = 500)
 
 /obj/item/gun/energy/sniperrifle
 	name = "marksman energy rifle"

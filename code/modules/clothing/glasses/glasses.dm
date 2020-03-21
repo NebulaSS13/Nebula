@@ -1,6 +1,8 @@
 /obj/item/clothing/glasses
 	name = "glasses"
 	icon = 'icons/obj/clothing/obj_eyes.dmi'
+	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
+
 	var/hud_type
 	var/prescription = FALSE
 	var/toggleable = FALSE
@@ -151,6 +153,7 @@
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	siemens_coefficient = 0.6
 	electric = TRUE
+	matter = list(MAT_STEEL = 50, MAT_GLASS = 50, MAT_SILVER = 50, MAT_GOLD = 50)
 
 /obj/item/clothing/glasses/monocle
 	name = "monocle"

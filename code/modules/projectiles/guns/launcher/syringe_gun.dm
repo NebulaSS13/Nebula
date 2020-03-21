@@ -135,6 +135,7 @@
 	icon_state = "rapidsyringegun"
 	item_state = "rapidsyringegun"
 	max_darts = 5
+	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000)
 
 /obj/item/gun/launcher/syringe/disguised
 	name = "deluxe electronic cigarette"

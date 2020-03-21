@@ -29,6 +29,7 @@
 
 	suit_overlay_active =   "stealth_active"
 	suit_overlay_inactive = "stealth_inactive"
+	matter = list(MAT_STEEL = 6000, MAT_GLASS = 3000, MAT_DIAMOND = 2000, MAT_SILVER = 2000, MAT_URANIUM = 2000, MAT_GOLD = 2000, MAT_PLASTIC = 2000)
 
 /obj/item/rig_module/stealth_field/activate()
 
@@ -145,6 +146,7 @@
 	fabrication_type = /obj/item/energy_net
 	use_power_cost = 20 KILOWATTS
 	origin_tech = "{'" + TECH_MATERIAL + "':5,'" + TECH_POWER + "':6,'" + TECH_MAGNET + "':5,'" + TECH_ESOTERIC + "':4,'" + TECH_ENGINEERING + "':6}"
+	matter = list(MAT_STEEL = 6000, MAT_GLASS = 3000, MAT_DIAMOND = 2000, MAT_PLASTIC = 2000)
 
 /obj/item/rig_module/fabricator/energy_net/engage(atom/target)
 

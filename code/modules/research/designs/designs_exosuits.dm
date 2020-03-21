@@ -1,5 +1,6 @@
-/datum/design/circuit/exosuit/AssembleDesignName()
+/datum/design/circuit/exosuit/ModifyDesignName()
 	name = "Exosuit software design ([name])"
+
 /datum/design/circuit/exosuit/AssembleDesignDesc()
 	desc = "Allows for the construction of \a [name] module."
 

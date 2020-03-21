@@ -1,7 +1,5 @@
-/datum/design/item/disk/AssembleDesignName()
-	..()
-	name = "Storage disk ([item_name])"
-	materials = list(MAT_PLASTIC = 30, MAT_STEEL = 30, MAT_GLASS = 10)
+/datum/design/item/disk/ModifyDesignName()
+	name = "Storage disk ([name])"
 
 /datum/design/item/disk/design
 	name = "research design"

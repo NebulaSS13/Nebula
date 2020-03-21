@@ -8,6 +8,8 @@
 	power_usage = 100
 	origin_tech = "{'" + TECH_POWER + "':2,'" + TECH_DATA + "':3}"
 	external_slot = TRUE
+	matter = list(MAT_STEEL = 2000)
+
 	var/obj/item/aicard/stored_card
 	var/power_usage_idle = 100
 	var/power_usage_occupied = 2 KILOWATTS

@@ -45,6 +45,7 @@
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
 	combustion = 0
+	matter = list(MAT_GOLD = 5000, MAT_URANIUM = 10000)
 
 /obj/item/gun/energy/floragun
 	name = "floral somatoray"
@@ -58,14 +59,14 @@
 	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_BIO + "':3,'" + TECH_POWER + "':3}"
 	modifystate = "floramut"
 	self_recharge = 1
-	var/decl/plantgene/gene = null
+	matter = list(MAT_STEEL = 2000, MAT_GLASS = 500, MAT_URANIUM = 500)
 	combustion = 0
-
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
 		list(mode_name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, modifystate="florayield"),
 		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
+	var/decl/plantgene/gene = null
 
 /obj/item/gun/energy/floragun/resolve_attackby(atom/A)
 	if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
@@ -142,6 +143,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'" + TECH_COMBAT + "':5,'" + TECH_PHORON + "':4}"
 	projectile_type = /obj/item/projectile/energy/phoron
+	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000, MAT_PHORON = 3000)
 
 /obj/item/gun/energy/plasmacutter
 	name = "plasma cutter"
@@ -159,6 +161,7 @@
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
 	self_recharge = 1
+	matter = list(MAT_STEEL = 1500, MAT_GLASS = 500, MAT_GOLD = 500, MAT_PHORON = 500)
 	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/gun/energy/plasmacutter/mounted
