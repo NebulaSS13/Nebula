@@ -26,9 +26,12 @@
 	if(anchored != last_anchored)
 		find_connections()
 
-/obj/structure/ladder/Initialize(var/ml, var/_mat)
-	. = ..()
-	if(ml)
+/obj/structure/ladder/Initialize(maploading, material)
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/ladder/LateInitialize(maploading, material)
+	if(maploading)
 		for(var/obj/structure/ladder/ladder in loc)
 			if(ladder != src)
 				qdel(ladder)
@@ -64,7 +67,7 @@
 						target_down = ladder
 						target_down.target_up = src
 						target_down.update_icon()
-						break 
+						break
 		if(HasAbove(z))
 			var/turf/T = GetAbove(src)
 			if(istype(T, /turf/simulated/open))
