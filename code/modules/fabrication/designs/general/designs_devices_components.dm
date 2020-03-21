@@ -36,6 +36,9 @@
 /datum/fabricator_recipe/device_component/terminal
 	path = /obj/item/stock_parts/power/terminal/buildable
 
+/datum/fabricator_recipe/device_component/access_lock
+	path = /obj/item/stock_parts/access_lock/buildable
+
 /datum/fabricator_recipe/device_component/igniter
 	path = /obj/item/assembly/igniter
 

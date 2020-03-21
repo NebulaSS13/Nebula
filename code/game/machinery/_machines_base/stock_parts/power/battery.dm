@@ -27,6 +27,16 @@
 		remove_cell()
 	..()
 
+/obj/item/stock_parts/power/battery/take_damage(amount, damtype)
+	. = ..()
+	switch(damtype)
+		if(ELECTROCUTE)
+			if(prob(50) && cell && health < initial(health)/2)
+				cell.emp_act(3)
+		if(BRUTE)
+			if(prob(20) && cell && health < initial(health)/2)
+				cell.ex_act(3)
+
 // None of these helpers actually change the cell's loc. They only manage internal references and state.
 /obj/item/stock_parts/power/battery/proc/add_cell(var/obj/machinery/machine, var/obj/item/cell/new_cell)
 	if(cell)

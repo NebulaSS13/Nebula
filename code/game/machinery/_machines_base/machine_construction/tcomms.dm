@@ -3,8 +3,9 @@
 /decl/machine_construction/tcomms
 	needs_board = "machine"
 
-/decl/machine_construction/tcomms/panel_closed/
+/decl/machine_construction/tcomms/panel_closed
 	visible_components = FALSE
+	locked = TRUE
 
 /decl/machine_construction/tcomms/panel_closed/state_is_valid(obj/machinery/machine)
 	return !machine.panel_open

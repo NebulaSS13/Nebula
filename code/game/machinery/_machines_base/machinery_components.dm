@@ -212,6 +212,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 // Use to block interactivity if panel is not open, etc.
 /obj/machinery/proc/components_are_accessible(var/path)
+	if(ispath(path, /obj/item/stock_parts/access_lock))
+		return TRUE
 	return panel_open
 
 // Installation. Returns number of such components which can be inserted, or 0.

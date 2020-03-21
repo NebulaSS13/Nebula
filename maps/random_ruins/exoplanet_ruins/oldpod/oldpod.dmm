@@ -255,7 +255,7 @@
 /obj/item/frame/apc,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/cell/crap/empty,
-/obj/item/module/power_control,
+/obj/item/stock_parts/circuitboard/apc,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aI" = (
