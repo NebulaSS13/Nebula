@@ -2884,6 +2884,7 @@
 #include "code\modules\submaps\_submap.dm"
 #include "code\modules\submaps\submap_archetype.dm"
 #include "code\modules\submaps\submap_job.dm"
+#include "code\modules\submaps\submap_join.dm"
 #include "code\modules\submaps\submap_landmark.dm"
 #include "code\modules\supermatter\setup_supermatter.dm"
 #include "code\modules\supermatter\supermatter.dm"
