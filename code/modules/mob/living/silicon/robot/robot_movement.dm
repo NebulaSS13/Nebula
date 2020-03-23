@@ -16,6 +16,13 @@
 	. = ..()
 
 
+/mob/living/silicon/robot/Move()
+	. = ..()
+	if(. && client)
+
+		var/turf/B = GetAbove(src)
+		up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"
+
  //No longer needed, but I'll leave it here incase we plan to re-use it.
 /mob/living/silicon/robot/movement_delay()
 	var/tally = ..() //Incase I need to add stuff other than "speed" later

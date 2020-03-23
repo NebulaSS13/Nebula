@@ -4,6 +4,7 @@
 	icon_state = "price_scanner"
 	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_MAGNET + "':4}"
 	scan_sound = 'sound/effects/checkout.ogg'
+	matter = list(MAT_STEEL = 3000, MAT_GLASS = 3000, MAT_SILVER = 250)
 
 /obj/item/scanner/price/is_valid_scan_target(atom/movable/target)
 	return istype(target) && target.get_combined_monetary_worth() > 0

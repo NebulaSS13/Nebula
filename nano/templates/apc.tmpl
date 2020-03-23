@@ -7,21 +7,13 @@
 </div>
 {{else}}
 <div class='notice'>
-	{{if data.siliconUser}}
-		<div class="itemContentSmall">
-			Interface Lock:
-		</div>
-		<div class="itemContentFull">
-			{{:helper.link('Engaged', 'locked', {'toggleaccess' : 1}, data.locked ? 'selected' : null)}}{{:helper.link('Disengaged', 'unlocked', {'toggleaccess' : 1}, data.malfStatus >= 2 ? 'linkOff' : (data.locked ? null : 'selected'))}}
-		</div>
-		<div class="clearBoth"></div>
-	{{else}}
-		{{if data.locked}}
-			Swipe an ID card to unlock this interface
-		{{else}}
-			Swipe an ID card to lock this interface
-		{{/if}}
-	{{/if}}
+	<div class="itemContentSmall">
+		Interface Lock:
+	</div>
+	<div class="itemContentFull">
+		{{:helper.link('Engaged', 'locked', {'toggleaccess' : 1}, data.locked ? 'selected' : null)}}{{:helper.link('Disengaged', 'unlocked', {'toggleaccess' : 1}, data.malfStatus >= 2 ? 'linkOff' : (data.locked ? null : 'selected'))}}
+	</div>
+	<div class="clearBoth"></div>
 </div>
 
 <div style="min-width: 480px">

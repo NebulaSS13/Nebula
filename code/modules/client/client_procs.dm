@@ -223,6 +223,9 @@
 	if(get_preference_value(/datum/client_preference/fullscreen_mode) != GLOB.PREF_OFF)
 		toggle_fullscreen(get_preference_value(/datum/client_preference/fullscreen_mode))
 
+	if(!tooltips)
+		tooltips = new /datum/tooltip(src)
+
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
 

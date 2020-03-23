@@ -12,7 +12,7 @@
 /obj/item/stack
 	gender = PLURAL
 	origin_tech = "{'" + TECH_MATERIAL + "':1}"
-	var/list/datum/stack_recipe/recipes
+
 	var/singular_name
 	var/plural_name
 	var/base_state
@@ -20,17 +20,23 @@
 	var/max_icon_state
 	var/amount = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
-	var/stacktype //determines whether different stack types can merge
-	var/build_type = null //used when directly applied to a turf
-	var/uses_charge = 0
-	var/list/charge_costs = null
-	var/list/datum/matter_synth/synths = null
+	var/stacktype  //determines whether different stack types can merge
+	var/build_type //used when directly applied to a turf
+	var/uses_charge
+	var/list/charge_costs
+	var/list/datum/matter_synth/synths
+	var/list/datum/stack_recipe/recipes
 
 /obj/item/stack/Initialize(mapload, amount, material)
+
+	if(ispath(amount, /material))
+		crash_with("Stack initialized with material ([amount]) instead of amount.")
+		material = amount
+
 	. = ..(mapload, material)
 	if (!stacktype)
 		stacktype = type
-	if (amount >= 1)
+	if (isnum(amount) && amount >= 1)
 		src.amount = amount
 	if(!plural_name)
 		plural_name = "[singular_name]s"
@@ -281,18 +287,18 @@
 
 /obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
 	var/list/stacks = list()
-	if(check_hands)
+	if(check_hands && user)
 		if(isstack(user.l_hand))
 			stacks += user.l_hand
 		if(isstack(user.r_hand))
 			stacks += user.r_hand
-	for (var/obj/item/stack/item in user.loc)
+	for (var/obj/item/stack/item in user?.loc)
 		stacks += item
 	for (var/obj/item/stack/item in stacks)
 		if (item==src)
 			continue
 		var/transfer = src.transfer_to(item)
-		if (transfer)
+		if(user && transfer)
 			to_chat(user, "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>")
 		if(!amount)
 			break

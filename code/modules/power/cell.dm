@@ -11,10 +11,10 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
+	matter = list(MAT_STEEL = 700, MAT_GLASS = 50, MAT_PLASTIC = 20)
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 50, MAT_PLASTIC = 20)
 
 /obj/item/cell/Initialize()
 	. = ..()
@@ -209,7 +209,7 @@
 	origin_tech = "{'" + TECH_POWER + "':6}"
 	icon_state = "hpcell"
 	maxcharge = 3000
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 80, MAT_ALUMINIUM = 20)
+	matter = list(MAT_STEEL = 400, MAT_GOLD = 150, MAT_SILVER = 150, MAT_GLASS = 70, MAT_ALUMINIUM = 25)
 
 /obj/item/cell/hyper/empty
 	charge = 0

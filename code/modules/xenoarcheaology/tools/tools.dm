@@ -7,6 +7,7 @@
 	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_DATA + "':2,'" + TECH_BLUESPACE + "':2}"
 	matter = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)
 	w_class = ITEM_SIZE_SMALL
+	matter = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)
 
 /obj/item/gps/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
@@ -243,8 +244,8 @@
 /obj/item/pinpointer/radio
 	name = "locator device"
 	desc = "Used to scan and locate signals on a particular frequency."
-	var/tracking_freq = PUB_FREQ
 	matter = list(MAT_ALUMINIUM = 1000, MAT_GLASS = 500)
+	var/tracking_freq = PUB_FREQ
 
 /obj/item/pinpointer/radio/acquire_target()
 	var/turf/T = get_turf(src)

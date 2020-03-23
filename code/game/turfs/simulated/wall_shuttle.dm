@@ -10,6 +10,7 @@
 	opacity = 1
 	density = 1
 	blocks_air = 1
+	explosion_resistance = 10
 
 /turf/simulated/shuttle/wall/corner
 	var/corner_overlay_state = "diagonalWall"

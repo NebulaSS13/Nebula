@@ -4,6 +4,7 @@
 	name = "Modular Computer"
 	desc = "A modular computer. You shouldn't see this."
 
+	var/enabled_by_default = FALSE							// Start enabled durint Initialization
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
 	var/hardware_flag = 0									// A flag that describes this device type

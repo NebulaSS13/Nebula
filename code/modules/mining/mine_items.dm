@@ -67,6 +67,7 @@
 	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_POWER + "':3,'" + TECH_ENGINEERING + "':2}"
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
+	matter = list(MAT_STEEL = 6000, MAT_GLASS = 1000)
 
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
@@ -85,6 +86,7 @@
 	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_POWER + "':4,'" + TECH_ENGINEERING + "':5}"
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
+	matter = list(MAT_STEEL = 3000, MAT_GLASS = 1000, MAT_DIAMOND = 2000)
 
 /obj/item/pickaxe/borgdrill
 	name = "cyborg mining drill"
@@ -130,6 +132,7 @@
 	sharp = 1
 	build_from_parts = TRUE
 	hardware_color = COLOR_DIAMOND
+	matter = list(MAT_DIAMOND = 3000)
 
 /*****************************Shovel********************************/
 

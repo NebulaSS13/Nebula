@@ -73,6 +73,7 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 	throw_range = 3
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'" + TECH_ENGINEERING + "':5,'" + TECH_MATERIAL + "':4}"
+	matter = list(MAT_STEEL = 15000, MAT_GLASS = 10000, MAT_SILVER = 2000)
 
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/datum/fabricator_recipe/pipe/P
@@ -81,12 +82,13 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 
 /obj/item/rpd/Initialize()
 	. = ..()
+	if(!length(GLOB.rpd_pipe_selection))
+		return INITIALIZE_HINT_QDEL
 	spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 	var/list/L = GLOB.rpd_pipe_selection[GLOB.rpd_pipe_selection[1]]
 	P = L[1]
-	//if there's no pipe selected randomize it
 
 /obj/item/rpd/Destroy()
 	QDEL_NULL(spark_system)

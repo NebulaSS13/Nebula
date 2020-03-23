@@ -47,14 +47,16 @@
 	name = "exosuit shield droid"
 	desc = "The Armature system is a well-liked energy deflector designed to stop any projectile before it has a chance to become a threat."
 	icon_state = "shield_droid"
+	restricted_hardpoints = list(HARDPOINT_BACK)
+	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+	matter = list(MAT_STEEL = 20000, MAT_SILVER = 12000, MAT_GOLD = 12000)
+
 	var/obj/aura/mechshield/aura = null
 	var/max_charge = 250
 	var/charge = 250
 	var/last_recharge = 0
 	var/charging_rate = 7500 * CELLRATE
 	var/cooldown = 3.5 SECONDS //Time until we can recharge again after a blocked impact
-	restricted_hardpoints = list(HARDPOINT_BACK)
-	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
 /obj/item/mech_equipment/shields/installed(var/mob/living/exosuit/_owner)
 	. = ..()

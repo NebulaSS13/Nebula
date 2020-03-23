@@ -20,8 +20,14 @@
 /datum/fabricator_recipe/engineering/navlight
 	path = /obj/item/frame/light/nav
 
+/datum/fabricator_recipe/engineering/button_frame
+	path = /obj/item/frame/button
+
 /datum/fabricator_recipe/engineering/powermodule
-	path = /obj/item/module/power_control
+	path = /obj/item/stock_parts/circuitboard/apc
+
+/datum/fabricator_recipe/engineering/powermodule_kit
+	path = /obj/item/frame/apc/kit
 
 /datum/fabricator_recipe/engineering/rcd_ammo
 	path = /obj/item/rcd_ammo

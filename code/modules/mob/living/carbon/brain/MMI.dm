@@ -35,7 +35,7 @@
 	icon_state = "mmi_empty"
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'" + TECH_BIO + "':3}"
-
+	matter = list(MAT_STEEL = 1000, MAT_GLASS = 500)
 	req_access = list(access_robotics)
 
 	//Revised. Brainmob is now contained directly within object of transfer. MMI in this case.
@@ -142,7 +142,7 @@
 	name = "radio-enabled man-machine interface"
 	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity. This one comes with a built-in radio."
 	origin_tech = "{'" + TECH_BIO + "':4}"
-
+	matter = list(MAT_STEEL = 1200, MAT_GLASS = 500)
 	var/obj/item/radio/radio = null//Let's give it a radio.
 
 /obj/item/mmi/radio_enabled/Initialize()

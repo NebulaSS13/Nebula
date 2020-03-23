@@ -14,21 +14,28 @@
 	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button = 1)
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc,
-		/obj/item/stock_parts/radio/transmitter/basic
+		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/radio/transmitter/basic/buildable
 	)
+	base_type = /obj/machinery/button/buildable
+	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
+	frame_type = /obj/item/frame/button
 
 	var/active = FALSE
 	var/operating = FALSE
 	var/state = FALSE
 	var/cooldown = 1 SECOND
 
+/obj/machinery/button/buildable
+	uncreated_component_parts = null
+
 /obj/machinery/button/Initialize()
 	. = ..()
 	update_icon()
 
 /obj/machinery/button/attackby(obj/item/W, mob/user)
-	return attack_hand(user)
+	if(!(. = component_attackby(W, user)))
+		return attack_hand(user)
 
 /obj/machinery/button/interface_interact(user)
 	if(!CanInteract(user, DefaultTopicState()))

@@ -22,6 +22,7 @@
 	holding_type = /obj/item/material/armblade
 	//Limited to robolimbs
 	augment_flags = AUGMENTATION_MECHANIC
+	matter = list(MAT_STEEL = 4000, MAT_GLASS = 750)
 
 /obj/item/material/armblade/claws
 	icon_state = "wolverine"
@@ -40,3 +41,4 @@
 	holding_type = /obj/item/material/armblade/claws
 	//Limited to robolimbs
 	augment_flags = AUGMENTATION_MECHANIC
+	matter = list(MAT_STEEL = 6000, MAT_DIAMOND = 250)

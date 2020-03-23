@@ -6,6 +6,8 @@
 	desc = "Protected by FRM."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "cyborg_upgrade"
+	matter = list(MAT_STEEL = 10000)
+
 	var/locked = 0
 	var/require_module = 0
 	var/installed = 0
@@ -15,7 +17,6 @@
 		to_chat(usr, "<span class='warning'>The [src] will not function on a deceased robot.</span>")
 		return 1
 	return 0
-
 
 /obj/item/borg/upgrade/reset
 	name = "robotic module reset board"
@@ -51,6 +52,7 @@
 	name = "\improper Madhouse Productions Official Party Module"
 	desc = "A weird-looking chip with third-party additions crudely soldered in. It feels cheap and chintzy in the hand. Inscribed into the cheap-feeling circuit is the logo of Madhouse Productions, a group that arranges parties and entertainment venues."
 	new_module = "Party"
+	matter = list(MAT_STEEL = 7500, MAT_ALUMINIUM = 5000, MAT_DIAMOND = 2000)
 
 /obj/item/borg/upgrade/uncertified/combat
 	name = "ancient module"
@@ -96,7 +98,7 @@
 	name = "robot emergency restart module"
 	desc = "Used to force a restart of a disabled-but-repaired robot, bringing it back online."
 	icon_state = "cyborg_upgrade1"
-
+	matter = list(MAT_STEEL = 60000, MAT_GLASS = 5000)
 
 /obj/item/borg/upgrade/restart/action(var/mob/living/silicon/robot/R)
 	if(R.health < 0)
@@ -119,6 +121,7 @@
 	desc = "Used to kick in a robot's VTEC systems, increasing their speed."
 	icon_state = "cyborg_upgrade2"
 	require_module = 1
+	matter = list(MAT_STEEL = 80000, MAT_GLASS = 6000, MAT_GOLD = 5000)
 
 /obj/item/borg/upgrade/vtec/action(var/mob/living/silicon/robot/R)
 	if(..()) return FALSE
@@ -136,7 +139,7 @@
 	desc = "Used to cool a mounted energy gun, increasing the potential current in it and thus its recharge rate."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
-
+	matter = list(MAT_STEEL = 80000, MAT_GLASS = 6000, MAT_GOLD = 2000, MAT_DIAMOND = 500)
 
 /obj/item/borg/upgrade/weaponcooler/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
@@ -168,6 +171,7 @@
 	desc = "A carbon dioxide jetpack suitable for low-gravity mining operations."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
+	matter = list(MAT_STEEL = 10000, MAT_PHORON = 15000, MAT_URANIUM = 20000)
 
 /obj/item/borg/upgrade/jetpack/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
@@ -188,6 +192,7 @@
 	desc = "A rapid construction device module for use during construction operations."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
+	matter = list(MAT_STEEL = 25000, MAT_PHORON = 10000, MAT_GOLD = 1000, MAT_SILVER = 1000)
 
 /obj/item/borg/upgrade/rcd/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
@@ -200,11 +205,12 @@
 		R.module.equipment += new/obj/item/rcd/borg(R.module)
 		return 1
 
-/obj/item/borg/upgrade/syndicate/
+/obj/item/borg/upgrade/syndicate
 	name = "illegal equipment module"
 	desc = "Unlocks the hidden, deadlier functions of a robot."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
+	matter = list(MAT_STEEL = 10000, MAT_GLASS = 15000, MAT_DIAMOND = 10000)
 
 /obj/item/borg/upgrade/syndicate/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0

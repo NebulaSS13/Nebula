@@ -74,12 +74,13 @@
 	name = "hypospray"
 	item_state = "autoinjector"
 	desc = "A sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
-	var/obj/item/chems/glass/beaker/vial/loaded_vial
 	possible_transfer_amounts = @"[1,2,5,10,15,20,30]"
 	amount_per_transfer_from_this = 5
 	volume = 0
 	time = 0 // hyposprays are instant for conscious people
 	single_use = FALSE
+	matter = list(MAT_STEEL = 8000, MAT_GLASS = 8000, MAT_SILVER = 2000)
+	var/obj/item/chems/glass/beaker/vial/loaded_vial
 
 /obj/item/chems/hypospray/vial/Initialize()
 	. = ..()

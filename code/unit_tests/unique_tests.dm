@@ -25,25 +25,17 @@
 	name = "UNIQUENESS: Research Designs Shall Be Unique"
 
 /datum/unit_test/research_designs_shall_be_unique/start_test()
-	var/list/ids = list()
 	var/list/build_paths = list()
-
 	for(var/design_type in subtypesof(/datum/design))
 		var/datum/design/design = design_type
-		if(initial(design.id) == "id")
-			continue
-
-		group_by(ids, initial(design.id), design)
-		group_by(build_paths, initial(design.build_path), design)
-
-	var/number_of_issues = number_of_issues(ids, "IDs")
-	number_of_issues += number_of_issues(build_paths, "Build Paths")
-
+		var/build_path = initial(design.build_path)
+		if(build_path)
+			group_by(build_paths, build_path, design)
+	var/number_of_issues = number_of_issues(build_paths, "Build Paths")
 	if(number_of_issues)
 		fail("[number_of_issues] issues with research designs found.")
 	else
 		pass("All research designs are unique.")
-
 	return 1
 
 /datum/unit_test/player_preferences_shall_have_unique_key

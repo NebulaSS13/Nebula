@@ -64,7 +64,7 @@
 	finalize_synths(R)
 
 	R.set_module_sprites(sprites)
-	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
+	R.choose_icon(R.module_sprites)
 
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
@@ -75,7 +75,7 @@
 			var/obj/item/I = thing
 			I.forceMove(src)
 			created_equipment |= I
-		else 
+		else
 			log_debug("Invalid var type in [type] equipment creation - [thing]")
 	equipment = created_equipment
 
@@ -93,7 +93,7 @@
 				created_synths += new thing
 		else if(istype(thing, /datum/matter_synth))
 			created_synths |= thing
-		else 
+		else
 			log_debug("Invalid var type in [type] synth creation - [thing]")
 	synths = created_synths
 
@@ -120,7 +120,7 @@
 
 	if(R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
-	R.choose_icon(0, R.set_module_sprites(list("Default" = initial(R.icon_state))))
+	R.choose_icon(R.set_module_sprites(list("Default" = initial(R.icon_state))))
 
 /obj/item/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)

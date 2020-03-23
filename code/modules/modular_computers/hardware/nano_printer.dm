@@ -6,6 +6,8 @@
 	critical = 0
 	icon_state = "printer"
 	hardware_size = 1
+	matter = list(MAT_STEEL = 600)
+
 	var/stored_paper = 50
 	var/max_paper = 50
 	var/last_print

@@ -53,6 +53,7 @@
 	var/obj/screen/hydration_icon = null
 	var/obj/screen/pressure = null
 	var/obj/screen/pain = null
+	var/obj/screen/up_hint = null
 	var/obj/screen/gun/item/item_use_icon = null
 	var/obj/screen/gun/radio/radio_use_icon = null
 	var/obj/screen/gun/move/gun_move_icon = null
@@ -184,5 +185,6 @@
 
 	var/datum/skillset/skillset = /datum/skillset
 
-
 	var/list/additional_vision_handlers = list() //Basically a list of atoms from which additional vision data is retrieved
+
+	var/list/progressbars = null //for stacking do_after bars

@@ -24,6 +24,10 @@
 	disruptive = 0
 	var/obj/item/device
 
+/obj/item/rig_module/device/Destroy()
+	QDEL_NULL(device)
+	. = ..()
+
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
 	desc = "A hardsuit-mounted health scanner."
@@ -35,6 +39,7 @@
 	use_power_cost = 200
 	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_BIO + "':3,'" + TECH_ENGINEERING + "':5}"
 	device = /obj/item/scanner/health
+	matter = list(MAT_PLASTIC = 1000, MAT_STEEL = 700, MAT_GLASS = 500)
 
 /obj/item/rig_module/device/defib
 	name = "mounted defibrillator"
@@ -59,6 +64,7 @@
 	module_cooldown = 0
 	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_POWER + "':4,'" + TECH_ENGINEERING + "':6}"
 	device = /obj/item/pickaxe/diamonddrill
+	matter = list(MAT_STEEL = 3500, MAT_GLASS = 1500, MAT_DIAMOND = 2000, MAT_PLASTIC = 1000)
 
 /obj/item/rig_module/device/anomaly_scanner
 	name = "anomaly scanner module"
@@ -72,6 +78,7 @@
 	selectable = 0
 	device = /obj/item/ano_scanner
 	origin_tech = "{'" + TECH_BLUESPACE + "':4,'" + TECH_MAGNET + "':4,'" + TECH_ENGINEERING + "':6}"
+	matter = list(MAT_PLASTIC = 1000, MAT_STEEL = 800, MAT_GLASS = 500)
 
 /obj/item/rig_module/device/orescanner
 	name = "ore scanner module"
@@ -86,6 +93,7 @@
 	use_power_cost = 200
 	device = /obj/item/scanner/mining
 	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_MAGNET + "':4,'" + TECH_ENGINEERING + "':6}"
+	matter = list(MAT_PLASTIC = 1000, MAT_STEEL = 800, MAT_GLASS = 500)
 
 /obj/item/rig_module/device/orescanner/activate()
 	if(!check() || !device)
@@ -105,7 +113,8 @@
 	use_power_cost = 300
 	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_MAGNET + "':5,'" + TECH_ENGINEERING + "':7}"
 	device = /obj/item/rcd/mounted
-
+	matter = list(MAT_STEEL = 2000, MAT_GLASS = 1000, MAT_PLASTIC = 1000,MAT_GOLD = 700, MAT_SILVER = 700)
+	
 /obj/item/rig_module/device/Initialize()
 	. = ..()
 	if(ispath(device))
@@ -356,6 +365,7 @@
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
 	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_ENGINEERING + "':7}"
+	matter = list(MAT_STEEL = 3000, MAT_PLASTIC = 2000, MAT_GLASS = 1000)
 	var/obj/item/tank/jetpack/rig/jets
 
 /obj/item/rig_module/maneuvering_jets/engage()
@@ -472,6 +482,7 @@
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = "{'" + TECH_MATERIAL + "':5,'" + TECH_ENGINEERING + "':5}"
 	device = /obj/item/matter_decompiler
+	matter = list(MAT_STEEL = 3000, MAT_PLASTIC = 2000, MAT_GLASS = 1000)
 
 /obj/item/rig_module/cooling_unit
 	name = "mounted cooling unit"
@@ -480,6 +491,7 @@
 	interface_name = "mounted cooling unit"
 	interface_desc = "A heat sink with a liquid cooled radiator."
 	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module
+	matter = list(MAT_STEEL = 3000, MAT_GLASS = 3500, MAT_PLASTIC = 2000)
 	var/charge_consumption = 0.5 KILOWATTS
 	var/max_cooling = 12
 	var/thermostat = T20C

@@ -10,10 +10,8 @@
 	matter = list(MAT_ALUMINIUM = 30,MAT_GLASS = 20)
 	var/scan_title
 	var/scan_data
-	//For displaying scans
 	var/window_width = 450
 	var/window_height = 600
-
 	var/use_delay
 	var/scan_sound
 	var/printout_color

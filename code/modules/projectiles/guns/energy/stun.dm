@@ -55,6 +55,7 @@
 	projectile_type = /obj/item/projectile/energy/electrode
 	max_shots = 6
 	combustion = 0
+	matter = list(MAT_STEEL = 4000)
 
 /obj/item/gun/energy/stunrevolver/rifle
 	name = "stun rifle"
@@ -71,6 +72,7 @@
 	accuracy = 1
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 	wielded_item_state = "stunrifle-wielded"
+	matter = list(MAT_STEEL = 4000, MAT_GLASS = 1000, MAT_SILVER = 500)
 
 /obj/item/gun/energy/crossbow
 	name = "mini energy-crossbow"
@@ -131,3 +133,4 @@
 	max_shots = 4
 	projectile_type = /obj/item/projectile/beam/confuseray
 	combustion = 0
+	matter = list(MAT_STEEL = 3000, MAT_GLASS = 1000)

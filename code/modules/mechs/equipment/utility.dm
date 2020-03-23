@@ -371,6 +371,7 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_PHORON + "':4,'" + TECH_ENGINEERING + "':6,'" + TECH_COMBAT + "':3}"
+	matter = list(MAT_STEEL = 20000)
 
 /obj/item/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE

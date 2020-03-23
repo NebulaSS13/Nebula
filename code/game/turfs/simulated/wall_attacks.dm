@@ -124,7 +124,7 @@
 		return success_smash(user)
 	return fail_smash(user)
 
-/turf/simulated/wall/attackby(var/obj/item/W, var/mob/user)
+/turf/simulated/wall/attackby(var/obj/item/W, var/mob/user, click_params)
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
@@ -359,7 +359,7 @@
 
 	if(istype(W,/obj/item/frame))
 		var/obj/item/frame/F = W
-		F.try_build(src)
+		F.try_build(src, click_params)
 		return TRUE
 
 	// Attack the wall with items

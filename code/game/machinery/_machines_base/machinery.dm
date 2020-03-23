@@ -215,7 +215,7 @@ Class Procs:
 	return TRUE
 
 /obj/machinery/CanUseTopicPhysical(var/mob/user)
-	if(stat & BROKEN)
+	if((stat & BROKEN) && (reason_broken & MACHINE_BROKEN_GENERIC))
 		return STATUS_CLOSE
 
 	return GLOB.physical_state.can_use_topic(nano_host(), user)
@@ -437,3 +437,8 @@ Class Procs:
 		var/list/part_costs = part.building_cost()
 		for(var/key in part_costs)
 			.[key] += part_costs[key] * component_types[path]
+
+/obj/machinery/emag_act(remaining_charges, mob/user, emag_source)
+	. = ..()
+	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
+		. = max(., lock.emag_act())

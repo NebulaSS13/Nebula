@@ -33,7 +33,9 @@
 	interface_name = "mounted flash"
 	interface_desc = "Disorientates your target by blinding them with this intense palm-mounted light."
 	device = /obj/item/flash
+
 	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':3,'" + TECH_ENGINEERING + "':5}"
+	matter = list(MAT_PLASTIC = 1500, MAT_STEEL = 1000, MAT_GLASS = 500)
 
 /obj/item/rig_module/device/flash/advanced
 	name = "advanced mounted flash"
@@ -209,11 +211,19 @@
 
 	var/obj/item/gun/gun
 
+/obj/item/rig_module/mounted/Destroy()
+	QDEL_NULL(gun)
+	. = ..()
+
 /obj/item/rig_module/mounted/Initialize()
 	. = ..()
 	if(ispath(gun))
 		gun = new gun(src)
 		gun.canremove = 0
+
+/obj/item/rig_module/mounted/Destroy()
+	QDEL_NULL(gun)
+	. = ..()
 
 /obj/item/rig_module/mounted/engage(atom/target)
 
@@ -249,6 +259,7 @@
 	interface_name = "mounted energy gun"
 	interface_desc = "A shoulder-mounted suit-powered energy gun."
 	origin_tech = "{'" + TECH_POWER + "':6,'" + TECH_COMBAT + "':6,'" + TECH_ENGINEERING + "':6}"
+	matter = list(MAT_STEEL = 6000, MAT_GLASS = 3000, MAT_PLASTIC = 2500, MAT_GOLD = 2000, MAT_SILVER = 1000)
 
 	gun = /obj/item/gun/energy/gun/mounted
 
@@ -264,7 +275,7 @@
 	interface_name = "mounted electrolaser"
 	interface_desc = "A shoulder-mounted, cell-powered electrolaser."
 	origin_tech = "{'" + TECH_POWER + "':5,'" + TECH_COMBAT + "':5,'" + TECH_ENGINEERING + "':6}"
-
+	matter = list(MAT_STEEL = 4000, MAT_PLASTIC = 2500, MAT_GLASS = 2000, MAT_GOLD = 1000)
 	gun = /obj/item/gun/energy/taser/mounted
 
 /obj/item/rig_module/mounted/plasmacutter
@@ -281,7 +292,8 @@
 	origin_tech = "{'" + TECH_MATERIAL + "':5,'" + TECH_PHORON + "':4,'" + TECH_ENGINEERING + "':7,'" + TECH_COMBAT + "':5}"
 
 	gun = /obj/item/gun/energy/plasmacutter/mounted
-
+	matter = list(MAT_STEEL = 2000, MAT_GLASS = 1000, MAT_PLASTIC = 1000, MAT_GOLD = 700, MAT_PHORON = 500)
+	
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
 
 	if(!check() || !gun)

@@ -11,12 +11,24 @@
 	desc = "A soft cotton towel."
 
 /obj/item/towel/attack_self(mob/living/user)
-	user.visible_message("<span class='notice'>[user] uses [src] to towel themselves off.</span>")
+	if(user.a_intent == I_GRAB)
+		lay_out()
+		return
+
+	user.visible_message(SPAN_NOTICE("[user] uses [src] to towel themselves off."))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 
 /obj/item/towel/random/Initialize()
 	. = ..()
 	color = get_random_colour()
+
+/obj/item/towel/black
+	name = "black towel"
+	color = "#222222"
+
+/obj/item/towel/brown
+	name = "black towel"
+	color = "#854636"
 
 /obj/item/towel/fleece // loot from the king of goats. it's a golden towel
 	name = "golden fleece"
@@ -24,3 +36,28 @@
 	color = "#ffd700"
 	force = 1
 	attack_verb = list("smote")
+
+/obj/item/towel/verb/lay_out()
+	set name = "Lay Out Towel"
+	set category = "Object"
+
+	if(usr.incapacitated())
+		return
+
+	if(usr.drop_from_inventory(src))
+		usr.visible_message(
+			SPAN_NOTICE("[usr] lay out \the [src] on the ground."),
+			SPAN_NOTICE("You lay out \the [src] on the ground."))
+		desc = "A soft cotton towel."
+		icon_state = "towel_mask"
+		pixel_x = 0
+		pixel_y = 0
+		pixel_z = 0
+
+/obj/item/towel/pickup(mob/user)
+	if((icon_state != initial(icon_state)))
+		desc = initial(desc)
+		icon_state = initial(icon_state)
+		user.visible_message(
+			SPAN_NOTICE("[user] rolled up \the [src]."),
+			SPAN_NOTICE("You pick up and fold \the [src]."))

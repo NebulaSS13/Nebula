@@ -2,6 +2,8 @@
 	name = "body"
 	icon_state = "loader_body"
 	gender = NEUTER
+	matter = list(MAT_STEEL = 20000)
+	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 
 	var/mech_health = 300
 	var/obj/item/cell/cell
@@ -16,7 +18,6 @@
 	var/pilot_coverage = 100
 	var/min_pilot_size = MOB_SIZE_SMALL
 	var/max_pilot_size = MOB_SIZE_LARGE
-	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	var/climb_time = 25
 
 /obj/item/mech_component/chassis/Initialize()

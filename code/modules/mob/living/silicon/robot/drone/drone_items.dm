@@ -13,7 +13,6 @@
 		/obj/item/cell,
 		/obj/item/airlock_electronics,
 		/obj/item/tracker_electronics,
-		/obj/item/module/power_control,
 		/obj/item/stock_parts,
 		/obj/item/frame,
 		/obj/item/camera_assembly,

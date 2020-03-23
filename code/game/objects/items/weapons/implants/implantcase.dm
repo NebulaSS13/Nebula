@@ -9,6 +9,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_TINY
+	matter = list(MAT_ALUMINIUM = 50, MAT_GLASS = 50)
 	var/obj/item/implant/imp = null
 
 /obj/item/implantcase/Initialize()
@@ -17,6 +18,10 @@
 		imp = new imp(src)
 		update_description()
 	update_icon()
+
+/obj/item/implantcase/Destroy()
+	QDEL_NULL(imp)
+	. = ..()
 
 /obj/item/implantcase/proc/update_description()
 	if (imp)

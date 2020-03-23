@@ -21,7 +21,7 @@
 
 /datum/wires/apc/CanUse(var/mob/living/L)
 	var/obj/machinery/power/apc/A = holder
-	if(A.wiresexposed && !(A.stat & BROKEN))
+	if(istype(A.construct_state, /decl/machine_construction/wall_frame/panel_closed/hackable/hacking) && !(A.stat & BROKEN))
 		return 1
 	return 0
 

@@ -13,6 +13,7 @@
 	throw_distance = 7
 	release_force = 5
 	combustion = 1
+	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000)
 
 	var/obj/item/grenade/chambered
 	var/list/grenades = new/list()

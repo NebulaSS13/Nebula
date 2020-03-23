@@ -310,6 +310,7 @@
 
 /obj/item/weldingtool/experimental
 	tank = /obj/item/welder_tank/experimental
+	matter = list(MAT_STEEL = 120, MAT_GLASS = 50)
 
 ///////////////////////
 //Welding tool tanks//

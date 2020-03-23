@@ -1,16 +1,15 @@
 /turf/space
+	name = "\proper space"
 	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
-
-	name = "\proper space"
+	explosion_resistance = 3
 	icon_state = "default"
 	dynamic_lighting = 0
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
-	var/static/list/dust_cache
 	permit_ao = FALSE
-
 	z_eventually_space = TRUE
+	var/static/list/dust_cache
 
 /turf/space/proc/build_dust_cache()
 	LAZYINITLIST(dust_cache)

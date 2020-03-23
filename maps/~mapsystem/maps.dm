@@ -128,22 +128,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			CULTURE_OTHER
 		),
 		TAG_RELIGION = list(
-			RELIGION_OTHER,
-			RELIGION_JUDAISM,
-			RELIGION_HINDUISM,
-			RELIGION_BUDDHISM,
-			RELIGION_SIKHISM,
-			RELIGION_JAINISM,
-			RELIGION_ISLAM,
-			RELIGION_CHRISTIANITY,
-			RELIGION_BAHAI_FAITH,
-			RELIGION_AGNOSTICISM,
-			RELIGION_DEISM,
-			RELIGION_ATHEISM,
-			RELIGION_THELEMA,
-			RELIGION_SPIRITUALISM,
-			RELIGION_SHINTO,
-			RELIGION_TAOISM
+			RELIGION_OTHER
 		)
 	)
 
@@ -151,7 +136,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		TAG_HOMEWORLD = HOME_SYSTEM_OTHER,
 		TAG_FACTION =   FACTION_OTHER,
 		TAG_CULTURE =   CULTURE_OTHER,
-		TAG_RELIGION =  RELIGION_AGNOSTICISM
+		TAG_RELIGION =  RELIGION_OTHER
 	)
 
 	var/access_modify_region = list(
@@ -235,7 +220,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	for(var/i = 0, i < num_exoplanets, i++)
 		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
-		world.maxz++
+		INCREMENT_WORLD_Z_SIZE
 		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
 		new_planet.build_level(planet_size[1], planet_size[2])
 
@@ -267,7 +252,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/get_empty_zlevel()
 	if(empty_levels == null)
-		world.maxz++
+		INCREMENT_WORLD_Z_SIZE
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
 

@@ -12,6 +12,7 @@
 
 /decl/machine_construction/wall_frame/panel_closed
 	visible_components = FALSE
+	locked = TRUE
 
 /decl/machine_construction/wall_frame/panel_closed/state_is_valid(obj/machinery/machine)
 	return !machine.panel_open
@@ -27,19 +28,21 @@
 /decl/machine_construction/wall_frame/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
-	if(isScrewdriver(I))
-		TRANSFER_STATE(open_state)
-		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
-		machine.panel_open = TRUE
-		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine], exposing the wiring."))
-		machine.queue_icon_update()
-		return
 	if(istype(I, /obj/item/storage/part_replacer))
 		var/obj/item/storage/part_replacer/replacer = I
 		if(replacer.remote_interaction)
 			machine.part_replacement(user, replacer)
 		machine.display_parts(user)
 		return TRUE
+	return down_interaction(I, user, machine)
+
+/decl/machine_construction/wall_frame/panel_closed/proc/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
+	if(isScrewdriver(I))
+		TRANSFER_STATE(open_state)
+		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
+		machine.panel_open = TRUE
+		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine], exposing the wiring."))
+		machine.queue_icon_update()
 
 /decl/machine_construction/wall_frame/panel_closed/mechanics_info()
 	. = list()
@@ -77,12 +80,7 @@
 		machine.queue_icon_update()
 		return
 
-	if(isScrewdriver(I))
-		TRANSFER_STATE(active_state)
-		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
-		machine.panel_open = FALSE
-		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
-		machine.queue_icon_update()
+	if((. = up_interaction(I, user, machine)))
 		return
 
 	if(istype(I, /obj/item/storage/part_replacer))
@@ -94,7 +92,13 @@
 	if(istype(I))
 		return machine.part_insertion(user, I)
 
-// Wires removed
+/decl/machine_construction/wall_frame/panel_open/proc/up_interaction(obj/item/I, mob/user, obj/machinery/machine)
+	if(isScrewdriver(I))
+		TRANSFER_STATE(active_state)
+		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
+		machine.panel_open = FALSE
+		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
+		machine.queue_icon_update()
 
 /decl/machine_construction/wall_frame/panel_open/mechanics_info()
 	. = list()
@@ -104,6 +108,7 @@
 	. += "Remove installed parts with a wrench."
 	. += "Use a wirecutter to disconnect the wires and expose the circuit board."
 
+// Wires removed
 
 /decl/machine_construction/wall_frame/no_wires
 
@@ -135,12 +140,7 @@
 			to_chat(user, SPAN_WARNING("You need five pieces of cable to wire \the [machine]."))
 			return TRUE
 
-	if(isCrowbar(I))
-		TRANSFER_STATE(bottom_state)
-		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
-		to_chat(user, "You pry out the circuit!")
-		machine.uninstall_component(/obj/item/stock_parts/circuitboard)
-		machine.queue_icon_update()
+	if((. = down_interaction(I, user, machine)))
 		return
 
 	if(istype(I, /obj/item/storage/part_replacer))
@@ -151,6 +151,14 @@
 
 	if(istype(I))
 		return machine.part_insertion(user, I)
+
+/decl/machine_construction/wall_frame/no_wires/proc/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
+	if(isCrowbar(I))
+		TRANSFER_STATE(bottom_state)
+		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
+		to_chat(user, "You pry out the circuit!")
+		machine.uninstall_component(/obj/item/stock_parts/circuitboard)
+		machine.queue_icon_update()
 
 /decl/machine_construction/wall_frame/no_wires/mechanics_info()
 	. = list()

@@ -11,6 +11,7 @@
 /decl/machine_construction/default/panel_closed
 	down_state = /decl/machine_construction/default/panel_open
 	visible_components = FALSE
+	locked = TRUE
 
 /decl/machine_construction/default/panel_closed/state_is_valid(obj/machinery/machine)
 	return !machine.panel_open

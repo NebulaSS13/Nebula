@@ -4,6 +4,7 @@
 	icon_state = "beacon"
 	item_state = "signaler"
 	origin_tech = "{'" + TECH_BLUESPACE + "':1}"
+	matter = list (MAT_ALUMINIUM = 20, MAT_GLASS = 10)
 
 	var/code = "electronic"
 	var/functioning = TRUE

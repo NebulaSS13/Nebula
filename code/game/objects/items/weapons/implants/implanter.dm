@@ -15,6 +15,10 @@
 		imp = new imp(src)
 	update_icon()
 
+/obj/item/implanter/Destroy()
+	QDEL_NULL(imp)
+	. = ..()
+
 /obj/item/implanter/on_update_icon()
 	if (imp)
 		icon_state = "implanter1"

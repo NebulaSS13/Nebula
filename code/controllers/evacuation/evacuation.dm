@@ -41,9 +41,8 @@
 	recall = _recall
 
 /datum/evacuation_controller/proc/set_up()
-	set waitfor=0
-	set background=1
-	return
+	set waitfor = FALSE
+	set background = TRUE
 
 /datum/evacuation_controller/proc/get_cooldown_message()
 	return "An evacuation cannot be called at this time. Please wait another [round((evac_cooldown_time-world.time)/600)] minute\s before trying again."

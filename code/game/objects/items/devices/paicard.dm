@@ -6,6 +6,9 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = "{'" + TECH_DATA + "':2}"
+	matter = list(MAT_GLASS = 500, MAT_STEEL = 500)
+
+	var/current_emotion = 1
 	var/obj/item/radio/radio
 	var/looking_for_personality = 0
 	var/mob/living/silicon/pai/pai
@@ -287,8 +290,6 @@
 	src.overlays.Cut()
 	src.overlays += "pai-off"
 
-/obj/item/paicard
-	var/current_emotion = 1
 /obj/item/paicard/proc/setEmotion(var/emotion)
 	if(pai)
 		src.overlays.Cut()

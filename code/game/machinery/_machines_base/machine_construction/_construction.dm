@@ -24,6 +24,7 @@
 	var/needs_board  // Type of circuitboard expected, if any. Used in unit testing.
 	var/cannot_print // If false, unit testing will attempt to guarantee that the machine is buildable in-round. This inverts that behavior.
 	var/visible_components = TRUE // Whether user can see installed components on examine
+	var/locked = FALSE // Affects how the access lock views the machine.
 
 // Run on unit testing. Should return a fail message or null.
 /decl/machine_construction/proc/fail_unit_test(obj/machinery/machine)

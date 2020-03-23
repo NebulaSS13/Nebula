@@ -4,6 +4,7 @@
 	name = "\improper Engineering toolset"
 	action_button_name = "Deploy Engineering Tool"
 	desc = "A lightweight augmentation for the engineer on-the-go. This one comes with a series of common tools."
+	matter = list(MAT_STEEL = 3000, MAT_GLASS = 1000)
 	paths = list(
 		/obj/item/screwdriver/finger,
 		/obj/item/wrench/finger,
