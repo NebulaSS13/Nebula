@@ -153,7 +153,7 @@ SUBSYSTEM_DEF(jobs)
 	if(!config.enter_allowed)
 		to_chat(joining, "<span class='warning'>There is an administrative lock on entering the game!</span>")
 		return FALSE
-	if(SSticker.mode && SSticker.mode.explosion_in_progress)
+	if(SSticker.mode && SSticker.mode.station_explosion_in_progress)
 		to_chat(joining, "<span class='warning'>The [station_name()] is currently exploding. Joining would go poorly.</span>")
 		return FALSE
 	return TRUE

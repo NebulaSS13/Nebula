@@ -820,7 +820,6 @@
 #include "code\game\objects\buckling.dm"
 #include "code\game\objects\empulse.dm"
 #include "code\game\objects\explosion.dm"
-#include "code\game\objects\explosion_recursive.dm"
 #include "code\game\objects\item.dm"
 #include "code\game\objects\item_materials.dm"
 #include "code\game\objects\munition.dm"

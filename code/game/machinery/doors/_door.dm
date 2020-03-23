@@ -120,6 +120,11 @@
 		return 0
 	return 1
 
+/obj/machinery/door/set_density(new_density)
+	. = ..()
+	if(.)
+		explosion_resistance = density ? initial(explosion_resistance) : 0
+
 /obj/machinery/door/Bumped(atom/AM)
 	if(p_open || operating) return
 	if(ismob(AM))
