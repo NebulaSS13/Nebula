@@ -1,5 +1,5 @@
 /obj/item/chems/chem_disp_cartridge
-	name = "chemical dispenser cartridge"
+	name = "cartridge"
 	desc = "This goes in a chemical dispenser."
 	icon_state = "cartridge"
 

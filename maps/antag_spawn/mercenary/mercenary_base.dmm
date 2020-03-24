@@ -870,7 +870,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle)
 "bv" = (
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	dir = 1
 	},
 /obj/structure/window/reinforced/crescent{

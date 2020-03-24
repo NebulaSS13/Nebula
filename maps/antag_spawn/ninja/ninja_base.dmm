@@ -495,7 +495,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bf" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -1374,7 +1374,7 @@
 	},
 /area/map_template/ninja_dojo/start)
 "cS" = (
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
