@@ -269,7 +269,7 @@ datum/unit_test/correct_allowed_spawn_test/start_test()
 		if(!spawnpoint)
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
 			failed = TRUE
-		else if(!spawnpoint.turfs.len)
+		else if(!length(spawnpoint.turfs))
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
 			failed = TRUE
 
