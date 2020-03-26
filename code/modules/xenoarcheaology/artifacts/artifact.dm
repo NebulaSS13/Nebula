@@ -45,15 +45,17 @@
 /obj/structure/artifact/Destroy()
 	QDEL_NULL(my_effect)
 	QDEL_NULL(secondary_effect)
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 /obj/structure/artifact/proc/check_triggers(trigger_proc)
 	. = FALSE
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
 		var/triggered = call(effect.trigger, trigger_proc)(arglist(args.Copy(2)))
-		if(effect.trigger.toggle && triggered)
-			effect.ToggleActivate(1)
-			. = TRUE
+		if(effect.trigger.toggle)
+			if(triggered)
+				effect.ToggleActivate(1)
+				. = TRUE
 		else if(effect.activated != triggered)
 			effect.ToggleActivate(1)
 			. = TRUE
@@ -64,9 +66,8 @@
 		return
 
 	for(var/obj/item/grab/G in grabbed_by)
-		var/mob/affecting_mob = G.get_affecting_mob()
-		if(affecting_mob)
-			check_triggers(/datum/artifact_trigger/proc/on_touch, affecting_mob)
+		if(G.assailant)
+			check_triggers(/datum/artifact_trigger/proc/on_touch, G.assailant)
 
 	var/datum/gas_mixture/enivonment = T.return_air()
 	if(enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
