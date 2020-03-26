@@ -223,7 +223,7 @@
 			if(!T || T.z != src.z)
 				continue
 			var/dist = get_dist(M.loc, src.loc)
-			shake_camera(M, dist > 20 ? 3 : 5, dist > 20 ? 1 : 3)
+			shake_camera(M, (dist > 20 ? 0.5 SECONDS : 1 SECOND), (dist > 20 ? 1 : 3))
 
 
 ///////////////////////

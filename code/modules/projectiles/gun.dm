@@ -53,8 +53,7 @@
 	var/burst = 1
 	var/can_autofire = FALSE
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1]
-	var/burst_delay = 2	//delay between shots, if firing in bursts
-	var/move_delay = 1
+	var/burst_delay = 1	//delay between shots, if firing in bursts
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/fire_anim = null
@@ -214,7 +213,6 @@
 	last_safety_check = world.time
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
-	user.SetMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
 	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
@@ -244,9 +242,9 @@
 			pointblank = 0
 
 	//update timing
-	var/delay = max(burst_delay+1, fire_delay)
-	user.setClickCooldown(min(delay, DEFAULT_QUICK_COOLDOWN))
-	user.SetMoveCooldown(move_delay)
+	var/delay = min(max(burst_delay+1, fire_delay), DEFAULT_QUICK_COOLDOWN)
+	if(delay)
+		user.setClickCooldown(delay)
 	next_fire_time = world.time + delay
 
 //obtains the next projectile to fire
@@ -309,8 +307,7 @@
 					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 	if(screen_shake)
-		spawn()
-			shake_camera(user, screen_shake+1, screen_shake)
+		shake_camera(user, max(burst_delay*burst, fire_delay), screen_shake)
 
 	if(combustion)
 		var/turf/curloc = get_turf(src)
