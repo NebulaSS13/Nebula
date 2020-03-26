@@ -14,7 +14,6 @@
 	multi_aim = 1
 	burst_delay = 3
 	burst = 3
-	move_delay = 4
 	accuracy = -1
 	wielded_item_state = "particle_rifle-wielded"
 	charge_meter = 0
@@ -33,7 +32,6 @@
 	force = 12
 	max_shots = 9
 	burst = 1
-	move_delay = 2
 	one_hand_penalty = 0
 	charge_state = "prsmall"
 	w_class = ITEM_SIZE_NORMAL
