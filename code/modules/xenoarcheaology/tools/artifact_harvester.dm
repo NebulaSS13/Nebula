@@ -8,7 +8,7 @@
 	active_power_usage = 750
 	var/harvesting = 0
 	var/obj/item/anobattery/inserted_battery
-	var/obj/machinery/artifact/cur_artifact
+	var/obj/structure/artifact/cur_artifact
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/last_process = 0
 
@@ -125,8 +125,8 @@
 			//locate artifact on analysis pad
 			cur_artifact = null
 			var/articount = 0
-			var/obj/machinery/artifact/analysed
-			for(var/obj/machinery/artifact/A in get_turf(owned_scanner))
+			var/obj/structure/artifact/analysed
+			for(var/obj/structure/artifact/A in get_turf(owned_scanner))
 				analysed = A
 				articount++
 

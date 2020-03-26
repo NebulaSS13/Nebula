@@ -980,7 +980,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/storage/firstaid/surgery = 4,
 				/obj/item/cell/infinite = 1,
 				/obj/item/archaeological_find = 2,
-				/obj/machinery/artifact = 1,
+				/obj/structure/artifact = 1,
 				/obj/item/multitool/hacktool = 2,
 				/obj/item/surgicaldrill = 7,
 				/obj/item/sutures = 7,

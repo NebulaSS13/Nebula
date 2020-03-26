@@ -128,7 +128,7 @@
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "z" = (
-/obj/machinery/artifact{
+/obj/structure/artifact{
 	alpha = 123;
 	anchored = 0;
 	color = "BLUE"

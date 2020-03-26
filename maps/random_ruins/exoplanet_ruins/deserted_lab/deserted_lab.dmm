@@ -51,7 +51,7 @@
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
 "ak" = (
-/obj/machinery/artifact,
+/obj/structure/artifact,
 /obj/effect/decal/cleanable/cobweb2,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
