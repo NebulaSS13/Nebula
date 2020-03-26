@@ -503,4 +503,4 @@
 		internals.icon_state = "internal[!!internal]"
 
 /mob/living/carbon/has_dexterity(var/dex_level)
-	. = ..() && (species.manual_dexterity >= dex_level)
+	. = ..() && (species.get_manual_dexterity() >= dex_level)
