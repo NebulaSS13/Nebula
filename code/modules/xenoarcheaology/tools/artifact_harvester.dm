@@ -12,12 +12,42 @@
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/last_process = 0
 
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+	base_type = /obj/machinery/artifact_harvester
+
 /obj/machinery/artifact_harvester/Initialize()
 	. = ..()
 	//connect to a nearby scanner pad
 	owned_scanner = locate(/obj/machinery/artifact_scanpad) in get_step(src, dir)
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
+	if(owned_scanner)
+		GLOB.destroyed_event.register(owned_scanner, src, /obj/machinery/artifact_harvester/proc/clear_scanner)
+
+/obj/machinery/artifact_harvester/Destroy()
+	clear_scanner()
+	inserted_battery = null
+	. = ..()
+
+/obj/machinery/artifact_harvester/proc/clear_scanner()
+	if(owned_scanner)
+		GLOB.destroyed_event.unregister(owned_scanner, src)
+		owned_scanner = null
+		clear_artifact() // It was probably on the scanner; if not deleted, still want to clear it.
+
+/obj/machinery/artifact_harvester/proc/clear_artifact()
+	if(cur_artifact)
+		GLOB.destroyed_event.unregister(cur_artifact, src)
+		cur_artifact = null
+
+/obj/machinery/artifact_harvester/proc/set_artifact(var/obj/structure/artifact/new_artifact)
+	if(cur_artifact == new_artifact || !new_artifact)
+		return
+	clear_artifact()
+	GLOB.destroyed_event.register(new_artifact, src, /obj/machinery/artifact_harvester/proc/clear_artifact)
+	cur_artifact = new_artifact
 
 /obj/machinery/artifact_harvester/attackby(var/obj/I, var/mob/user)
 	if(istype(I,/obj/item/anobattery))
@@ -32,9 +62,9 @@
 	else
 		return..()
 
-/obj/machinery/artifact_harvester/attack_hand(var/mob/user)
-	..()
+/obj/machinery/artifact_harvester/interface_interact(user)
 	interact(user)
+	return TRUE
 
 /obj/machinery/artifact_harvester/interact(var/mob/user)
 	if(stat & (NOPOWER|BROKEN))
@@ -83,7 +113,7 @@
 			harvesting = 0
 			cur_artifact.anchored = 0
 			cur_artifact.being_used = 0
-			cur_artifact = null
+			clear_artifact()
 			src.visible_message("<b>[name]</b> states, \"Battery is full.\"")
 			icon_state = "incubator"
 
@@ -123,7 +153,7 @@
 		else
 
 			//locate artifact on analysis pad
-			cur_artifact = null
+			clear_artifact()
 			var/articount = 0
 			var/obj/structure/artifact/analysed
 			for(var/obj/structure/artifact/A in get_turf(owned_scanner))
@@ -141,7 +171,7 @@
 				if(articount > 1)
 					state("Cannot harvest. Too many artifacts on the pad.")
 				else if(analysed)
-					cur_artifact = analysed
+					set_artifact(analysed)
 
 					//if both effects are active, we can't harvest either
 					if(cur_artifact.my_effect && cur_artifact.my_effect.activated && cur_artifact.secondary_effect && cur_artifact.secondary_effect.activated)
@@ -218,7 +248,7 @@
 			harvesting = 0
 			cur_artifact.anchored = 0
 			cur_artifact.being_used = 0
-			cur_artifact = null
+			clear_artifact()
 			src.visible_message("<b>[name]</b> states, \"Energy harvesting interrupted.\"")
 			icon_state = "incubator"
 		. = TOPIC_REFRESH
