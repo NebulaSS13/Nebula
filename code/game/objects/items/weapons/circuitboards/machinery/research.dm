@@ -136,3 +136,44 @@
 		/obj/item/stock_parts/power/battery/buildable/stock = 1,
 		/obj/item/cell/high = 1
 	)
+
+/obj/item/stock_parts/circuitboard/artifact_harvester
+	name = T_BOARD("artifact harvester")
+	build_path = /obj/machinery/artifact_harvester
+	board_type = "machine"
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':3}"
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 2,
+		/obj/item/stock_parts/manipulator = 1,
+		/obj/item/stock_parts/micro_laser = 1)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+
+/obj/item/stock_parts/circuitboard/artifact_analyser
+	name = T_BOARD("artifact analyser")
+	build_path = /obj/machinery/artifact_analyser
+	board_type = "machine"
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':3}"
+	req_components = list(
+		/obj/item/stock_parts/manipulator = 2,
+		/obj/item/stock_parts/micro_laser = 2)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+
+/obj/item/stock_parts/circuitboard/artifact_scanner
+	name = T_BOARD("artifact scanpad")
+	build_path = /obj/machinery/artifact_scanpad
+	board_type = "machine"
+	origin_tech = "{'" + TECH_DATA + "':2,'" + TECH_ENGINEERING + "':2,'" + TECH_MAGNET + "':2}"
+	req_components = list(
+		/obj/item/stock_parts/manipulator = 1,
+		/obj/item/stock_parts/micro_laser = 1)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)

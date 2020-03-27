@@ -7,12 +7,16 @@
 	density = 1
 	var/scan_in_progress = 0
 	var/scan_num = 0
-	var/obj/scanned_obj
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/scan_completion_time = 0
 	var/scan_duration = 50
 	var/obj/scanned_object
 	var/report_num = 0
+
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+	base_type = /obj/machinery/artifact_analyser
 
 /obj/machinery/artifact_analyser/Initialize()
 	. = ..()
@@ -20,9 +24,33 @@
 
 /obj/machinery/artifact_analyser/proc/reconnect_scanner()
 	//connect to a nearby scanner pad
+	clear_scanner()
 	owned_scanner = locate(/obj/machinery/artifact_scanpad) in get_step(src, dir)
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
+	if(owned_scanner)
+		GLOB.destroyed_event.register(owned_scanner, src, /obj/machinery/artifact_analyser/proc/clear_scanner)
+
+/obj/machinery/artifact_analyser/proc/clear_scanner()
+	if(owned_scanner)
+		GLOB.destroyed_event.unregister(owned_scanner, src)
+		owned_scanner = null
+
+/obj/machinery/artifact_analyser/proc/set_object(var/obj/O)
+	if(O != scanned_object && O)
+		clear_object()
+		GLOB.destroyed_event.register(O, src, /obj/machinery/artifact_analyser/proc/clear_object)
+		scanned_object = O
+
+/obj/machinery/artifact_analyser/proc/clear_object()
+	if(scanned_object)
+		GLOB.destroyed_event.unregister(scanned_object, src)
+		scanned_object = null
+
+/obj/machinery/artifact_analyser/Destroy()
+	clear_scanner()
+	clear_object()
+	. = ..()
 
 /obj/machinery/artifact_analyser/DefaultTopicState()
 	return GLOB.physical_state
@@ -81,7 +109,7 @@
 			var/obj/structure/artifact/A = scanned_object
 			A.anchored = 0
 			A.being_used = 0
-			scanned_object = null
+			clear_object()
 
 /obj/machinery/artifact_analyser/OnTopic(user, href_list)
 	if(href_list["begin_scan"])
@@ -105,7 +133,7 @@
 				if(artifact_in_use)
 					src.visible_message("<b>[name]</b> states, \"Cannot scan. Too much interference.\"")
 				else
-					scanned_object = O
+					set_object(O)
 					scan_in_progress = 1
 					scan_completion_time = world.time + scan_duration
 					src.visible_message("<b>[name]</b> states, \"Scanning begun.\"")

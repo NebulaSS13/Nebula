@@ -195,9 +195,24 @@
 	build_path = /obj/item/stock_parts/circuitboard/mining_stacker
 
 /datum/design/circuit/suspension_gen
-	name = "suspension generator"
+	name = "suspension generator board"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_MAGNET = 4)
 	build_path = /obj/item/stock_parts/circuitboard/suspension_gen
+
+/datum/design/circuit/artifact_analyser
+	name = "suspension generator board"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
+	build_path = /obj/item/stock_parts/circuitboard/artifact_analyser
+
+/datum/design/circuit/artifact_harvester
+	name = "artifact harvester board"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
+	build_path = /obj/item/stock_parts/circuitboard/artifact_harvester
+
+/datum/design/circuit/artifact_scanner
+	name = "artifact scanner board"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	build_path = /obj/item/stock_parts/circuitboard/artifact_scanner
 
 /datum/design/circuit/rdservercontrol
 	name = "R&D server control console"
