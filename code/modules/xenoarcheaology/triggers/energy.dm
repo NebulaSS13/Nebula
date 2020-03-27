@@ -1,7 +1,6 @@
 /datum/artifact_trigger/energy
 	name = "applied high energy"
 	var/global/list/energetic_things = list(
-		/obj/item/melee/cultblade,
 		/obj/item/card/emag,
 		/obj/item/multitool
 	)

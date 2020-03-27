@@ -33,9 +33,7 @@
 	water_type = /turf/simulated/floor/exoplanet/water/shallow/tar
 	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/royalcrab,
 					   /mob/living/simple_animal/hostile/retaliate/jelly/alt,
-					   /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt,
-					   /mob/living/simple_animal/hostile/leech)
-	megafauna_types = list(/obj/structure/leech_spawner)
+					   /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt)
 
 /area/exoplanet/shrouded
 	forced_ambience = list("sound/ambience/spookyspace1.ogg", "sound/ambience/spookyspace2.ogg")
@@ -52,7 +50,6 @@
 
 /turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(var/mob/caller)
 	return get_footstep(/decl/footsteps/water, caller)
-
 
 /turf/simulated/floor/exoplanet/shrouded
 	name = "packed sand"

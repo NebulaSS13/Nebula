@@ -127,8 +127,7 @@
 				"bribe_refusal"  = "Alas, traveler - I could stay all eve, but I've an client in waiting, and they are not known for patience.",
 				"bribe_accept"   = "Mayhaps I could set a spell longer, and rest my weary feet.",
 				)
-	possible_trading_items = list(/obj/item/clothing/head/wizard/magus = TRADER_THIS_TYPE,
-								/obj/item/shield/buckler        = TRADER_THIS_TYPE,
+	possible_trading_items = list(/obj/item/shield/buckler        = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/redcoat        = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/powdered_wig   = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/hasturhood     = TRADER_THIS_TYPE,
@@ -140,8 +139,6 @@
 								/obj/item/clothing/suit/hastur         = TRADER_THIS_TYPE,
 								/obj/item/clothing/suit/imperium_monk  = TRADER_THIS_TYPE,
 								/obj/item/clothing/suit/judgerobe      = TRADER_THIS_TYPE,
-								/obj/item/clothing/suit/wizrobe/magusred=TRADER_THIS_TYPE,
-								/obj/item/clothing/suit/wizrobe/magusblue=TRADER_THIS_TYPE,
 								/obj/item/clothing/under/gladiator     = TRADER_THIS_TYPE,
 								/obj/item/clothing/under/kilt          = TRADER_THIS_TYPE,
 								/obj/item/clothing/under/redcoat       = TRADER_THIS_TYPE,

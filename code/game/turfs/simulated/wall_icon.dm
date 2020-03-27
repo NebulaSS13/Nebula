@@ -160,7 +160,4 @@
 		if((reinf_material && W.reinf_material) || (!reinf_material && !W.reinf_material))
 			return 1
 		return 2
-	for(var/wb_type in blend_turfs)
-		if(istype(W, wb_type))
-			return 2
 	return 0

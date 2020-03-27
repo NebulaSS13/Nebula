@@ -251,47 +251,22 @@
  * This also gives a place to explain -why- players shouldnt be turn into certain mobs and hopefully someone can fix them.
  */
 /mob/proc/safe_animal(var/MP)
-
-//Bad mobs! - Remember to add a comment explaining what's wrong with the mob
-	if(!MP)
-		return 0	//Sanity, this should never happen.
-
-	if(ispath(MP, /mob/living/simple_animal/construct/behemoth))
-		return 0 //I think this may have been an unfinished WiP or something. These constructs should really have their own class simple_animal/construct/subtype
-
-	if(ispath(MP, /mob/living/simple_animal/construct/armoured))
-		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
-
-	if(ispath(MP, /mob/living/simple_animal/construct/wraith))
-		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
-
-	if(ispath(MP, /mob/living/simple_animal/construct/builder))
-		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
-
-//Good mobs!
-	if(ispath(MP, /mob/living/simple_animal/cat))
-		return 1
-	if(ispath(MP, /mob/living/simple_animal/corgi))
-		return 1
-	if(ispath(MP, /mob/living/simple_animal/crab))
-		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/carp))
-		return 1
-	if(ispath(MP, /mob/living/simple_animal/mushroom))
-		return 1
-	if(ispath(MP, /mob/living/simple_animal/shade))
-		return 1
-	if(ispath(MP, /mob/living/simple_animal/tomato))
-		return 1
-	if(ispath(MP, /mob/living/simple_animal/mouse))
-		return 1 //It is impossible to pull up the player panel for mice (Fixed! - Nodrak)
-	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
-		return 1 //Bears will auto-attack mobs, even if they're player controlled (Fixed! - Nodrak)
-	if(ispath(MP, /mob/living/simple_animal/hostile/retaliate/parrot))
-		return 1 //Parrots are no longer unfinished! -Nodrak
-
-	//Not in here? Must be untested!
-	return 0
+	var/list/good_mobs = list(
+		/mob/living/simple_animal/cat,
+		/mob/living/simple_animal/corgi,
+		/mob/living/simple_animal/crab,
+		/mob/living/simple_animal/hostile/carp,
+		/mob/living/simple_animal/mushroom,
+		/mob/living/simple_animal/shade,
+		/mob/living/simple_animal/tomato,
+		/mob/living/simple_animal/mouse,
+		/mob/living/simple_animal/hostile/bear,
+		/mob/living/simple_animal/hostile/retaliate/parrot
+	)
+	for(var/thing in good_mobs)
+		if(ispath(MP, thing))
+			return TRUE
+	return FALSE 
 
 
 /mob/living/carbon/human/proc/zombify()

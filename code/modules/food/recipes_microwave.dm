@@ -117,13 +117,6 @@ I said no!
 	)
 	result = /obj/item/chems/food/snacks/tofuburger
 
-/datum/recipe/ghostburger
-	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/ectoplasm //where do you even find this stuff
-	)
-	result = /obj/item/chems/food/snacks/ghostburger
-
 /datum/recipe/clownburger
 	items = list(
 		/obj/item/chems/food/snacks/bun,
@@ -510,13 +503,6 @@ I said no!
 	fruit = list("plumphelmet" = 1)
 	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
 	result = /obj/item/chems/food/snacks/plump_pie
-
-/datum/recipe/spellburger
-	items = list(
-		/obj/item/chems/food/snacks/meatburger,
-		/obj/item/clothing/head/wizard,
-	)
-	result = /obj/item/chems/food/snacks/spellburger
 
 /datum/recipe/bigbiteburger
 	items = list(

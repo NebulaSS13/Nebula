@@ -577,16 +577,6 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
 	reagents.add_reagent(/datum/reagent/neuroannealer, 6)
 
-/obj/item/chems/food/snacks/ghostburger
-	name = "ghost burger"
-	desc = "Spooky! It doesn't look very filling."
-	icon_state = "ghostburger"
-	filling_color = "#fff2ff"
-	center_of_mass = @"{'x':16,'y':11}"
-	nutriment_desc = list("buns" = 3, "spookiness" = 3)
-	nutriment_amt = 2
-	bitesize = 2
-
 /obj/item/chems/food/snacks/human
 	filling_color = "#d63c3c"
 	var/hname = ""
@@ -1403,15 +1393,6 @@
 /obj/item/chems/food/snacks/monkeycube/wrapped/spidercube
 	name = "spider cube"
 	monkey_type = /obj/effect/spider/spiderling
-
-/obj/item/chems/food/snacks/spellburger
-	name = "spell burger"
-	desc = "This is absolutely magical."
-	icon_state = "spellburger"
-	filling_color = "#d505ff"
-	nutriment_desc = list("magic" = 3, "buns" = 3)
-	nutriment_amt = 6
-	bitesize = 2
 
 /obj/item/chems/food/snacks/bigbiteburger
 	name = "big bite burger"

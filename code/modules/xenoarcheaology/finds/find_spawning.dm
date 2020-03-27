@@ -301,10 +301,7 @@
 
 /obj/item/archaeological_find/crystal/spawn_item()
 	var/obj/item/new_item
-	if(prob(25))
-		new_item = new /obj/item/soulstone(loc)
-	else
-		new_item = new(loc)
+	new_item = new(loc)
 	apply_image_decorations = 1
 	additional_desc = pick("It shines faintly as it catches the light.","It appears to have a faint inner glow.","It seems to draw you inward as you look it at.","Something twinkles faintly as you look at it.","It's mesmerizing to behold.")
 
@@ -318,16 +315,6 @@
 	else
 		item_type = "rough red crystal"
 		new_item.icon_state = "changerock"
-
-/obj/item/archaeological_find/blade
-	item_type = "blade"
-	find_type = ARCHAEO_CULTBLADE
-	apply_prefix = 0
-	apply_material_decorations = 0
-	apply_image_decorations = 0
-
-/obj/item/archaeological_find/blade/spawn_item()
-	return new /obj/item/melee/cultblade(loc)
 
 /obj/item/archaeological_find/beacon
 	item_type = "device"
@@ -346,18 +333,6 @@
 
 /obj/item/archaeological_find/sword/spawn_item()
 	return new /obj/item/material/sword(loc)
-
-/obj/item/archaeological_find/robes
-	item_type = "garments"
-	find_type = ARCHAEO_CULTROBES
-
-/obj/item/archaeological_find/robes/spawn_item()
-	var/list/possible_spawns = list(/obj/item/clothing/head/culthood,
-	/obj/item/clothing/head/culthood/magus,
-	/obj/item/clothing/head/culthood/alt,
-	/obj/item/clothing/head/helmet/space/cult)
-	var/new_type = pick(possible_spawns)
-	return new new_type(loc)
 
 /obj/item/archaeological_find/katana
 	item_type = "blade"

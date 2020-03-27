@@ -1,33 +1,3 @@
-/*
-Holds the proc for backstabbing.
-
-usage:
-
-/obj/item/attack(mob/living/target, mob/user, var/target_zone)
-	backstab(target, user, 60, BRUTE, DAM_SHARP, target_zone)
-	..()
-May also be used as:
-
-/obj/item/attack(mob/living/target, mob/user, var/target_zone)
-	..()
-	if(backstab(target, user, 60, BRUTE, DAM_SHARP, target_zone))
-		[insert code here]
----------------
-The proc itself:
-
-backstab(mob/living/target, mob/user, damage, damage_type, damage_flags, target_zone, location_check )
-
-Expected inputs per arg:
-target: Mob
-user: mob/user
-damage: Num. Defaults to 30 if not set. Can be zero, if you just want the backstab check itself. This is the flat damage done to SIMPLE MOBS. Humans recieve organ damage instead.
-damtype: Expects a damage type macro. Can accept the damage strings, but it is recommended you use the macro instead.
-target_zone: target zone intent.
-location_check: bool. allows facestabs if set to false, skipping the check for both mob's locations. Automatically set to false if the target is lying down -AND- lying face down.
----------------
-Proc returns a boolean if successful.
-*/
-
 /obj/item/proc/backstab(var/mob/living/target, mob/user, var/damage = 30, var/damage_type = BRUTE, var/damage_flags, var/target_zone = BP_CHEST, var/location_check = TRUE)
 
 	//Runtime prevention.

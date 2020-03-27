@@ -64,10 +64,6 @@
 			if(target)
 				var/obj/item/item = target
 				item.ui_action_click()
-		//if(AB_SPELL)
-		//	if(target)
-		//		var/obj/effect/proc_holder/spell = target
-		//		spell.Click()
 		if(AB_INNATE)
 			if(!active)
 				Activate()

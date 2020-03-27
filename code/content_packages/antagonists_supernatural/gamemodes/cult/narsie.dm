@@ -15,7 +15,6 @@ var/global/list/narsie_list = list()
 	grav_pull = 10 //How many tiles out do we pull?
 	consume_range = 3 //How many tiles out do we eat
 
-
 /obj/singularity/narsie/Initialize()
 	. = ..()
 	narsie_list.Add(src)
@@ -357,3 +356,10 @@ var/global/list/narsie_list = list()
 	sleep(11)
 	move_self = 1
 	icon = initial(icon)
+
+/obj/singularity/narsie/large/exit
+	announce=0
+	cause_hell=0
+
+/obj/singularity/narsie/large/exit/acquire(var/mob/food)
+	return

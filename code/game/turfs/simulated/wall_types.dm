@@ -86,35 +86,30 @@
 	. = ..(ml,MAT_RUTILE)
 
 /turf/simulated/wall/wood
-	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/wood/Initialize(var/ml)
 	. = ..(ml,MAT_WOOD)
 
 /turf/simulated/wall/mahogany
-	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/mahogany/Initialize(var/ml)
 	. = ..(ml,MAT_MAHOGANY)
 
 /turf/simulated/wall/maple
-	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/maple/Initialize(var/ml)
 	. = ..(ml,MAT_MAPLE)
 
 /turf/simulated/wall/ebony
-	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/ebony/Initialize(var/ml)
 	. = ..(ml,MAT_EBONY)
 
 /turf/simulated/wall/walnut
-	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
 /turf/simulated/wall/walnut/Initialize(var/ml)
@@ -160,25 +155,3 @@
 	if(prob(explosion_resistance))
 		return
 	..()
-
-//Cult wall
-/turf/simulated/wall/cult
-	icon_state = "cult"
-	blend_turfs = list(/turf/simulated/wall)
-
-/turf/simulated/wall/cult/Initialize(var/ml, var/reinforce)
-	. = ..(ml, MAT_CULT, reinforce ? MAT_REINFORCED_CULT : null)
-
-/turf/simulated/wall/cult/reinf/Initialize(var/ml)
-	. = ..(ml, 1)
-
-/turf/simulated/wall/cult/dismantle_wall()
-	GLOB.cult.remove_cultiness(CULTINESS_PER_TURF)
-	..()
-
-/turf/simulated/wall/cult/can_join_with(var/turf/simulated/wall/W)
-	if(material && W.material && material.icon_base == W.material.icon_base)
-		return 1
-	else if(istype(W, /turf/simulated/wall))
-		return 1
-	return 0

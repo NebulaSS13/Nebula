@@ -11,3 +11,6 @@
 
 /decl/content_package/proc/get_player_panel_options(var/mob/M)
 	return
+
+/decl/content_package/proc/get_spookiness()
+	. = 0

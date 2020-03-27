@@ -547,4 +547,9 @@ datum/projectile_data
 	return seconds * 10
 
 /proc/round_is_spooky(var/spookiness_threshold = config.cult_ghostwriter_req_cultists)
-	return (GLOB.cult.current_antagonists.len > spookiness_threshold)
+	. = 0
+	var/list/all_content_packages = decls_repository.get_decls_of_subtype(/decl/content_package)
+	for(var/package in all_content_packages)
+		var/decl/content_package/manifest = all_content_packages[package]
+		. += manifest.get_spookiness()
+	. = . > spookiness_threshold

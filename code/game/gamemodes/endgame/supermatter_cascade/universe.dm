@@ -51,9 +51,6 @@ var/global/universe_has_ended = 0
 	APCSet()
 	OverlayAndAmbientSet()
 
-	// Disable Nar-Sie.
-	GLOB.cult.allow_narsie = 0
-
 	PlayerSet()
 	SSskybox.change_skybox("cascade", new_use_stars = FALSE, new_use_overmap_details = FALSE)
 

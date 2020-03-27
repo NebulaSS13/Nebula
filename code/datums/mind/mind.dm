@@ -91,9 +91,6 @@
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
 
-	if(learned_spells && learned_spells.len)
-		restore_spells(new_character)
-
 	if(changeling)
 		new_character.make_changeling()
 

@@ -25,3 +25,12 @@
 	head = /obj/item/clothing/head/wizard/marisa
 	suit = /obj/item/clothing/suit/wizrobe/marisa
 	shoes = /obj/item/clothing/shoes/sandal/marisa
+
+/obj/effect/landmark/costume/marisawizard/fake/make_costumes()
+	new /obj/item/clothing/head/wizard/marisa/fake(src.loc)
+	new/obj/item/clothing/suit/wizrobe/marisa/fake(src.loc)
+
+/obj/effect/landmark/costume/fakewizard/make_costumes()
+	new /obj/item/clothing/suit/wizrobe/fake(src.loc)
+	new /obj/item/clothing/head/wizard/fake(src.loc)
+	new /obj/item/staff/(src.loc)

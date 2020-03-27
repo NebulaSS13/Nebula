@@ -18,13 +18,6 @@
 	else
 		spirit_board_pick_letter(user)
 
-
-//ATTACK GHOST IGNORING PARENT RETURN VALUE
-/obj/item/spirit_board/attack_ghost(var/mob/observer/ghost/user)
-	if(GLOB.cult.max_cult_rating >= CULT_GHOSTS_2)
-		spirit_board_pick_letter(user)
-	return ..()
-
 /obj/item/spirit_board/proc/spirit_board_pick_letter(mob/M)
 	if(!spirit_board_checks(M))
 		return 0

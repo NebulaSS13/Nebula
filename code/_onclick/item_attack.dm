@@ -64,16 +64,19 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
 /obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone)
+
 	if(item_flags & ITEM_FLAG_NO_BLUDGEON)
 		return 0
+
+	if (!user.check_dexterity(DEXTERITY_WEAPONS))
+		return 0
+
 	if(M == user && user.a_intent != I_HURT)
 		return 0
 
-	/////////////////////////
-
 	if(!no_attack_log)
 		admin_attack_log(user, M, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
-	/////////////////////////
+
 	user.setClickCooldown(attack_cooldown + w_class)
 	user.do_attack_animation(M)
 	if(!user.aura_check(AURA_TYPE_WEAPON, src, user))

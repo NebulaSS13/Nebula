@@ -161,18 +161,7 @@
 /turf/simulated/floor/reinforced/n20
 	initial_gas = list(MAT_N2O = ATMOSTANK_NITROUSOXIDE)
 
-
-/turf/simulated/floor/cult
-	name = "engraved floor"
-	icon = 'icons/turf/flooring/cult.dmi'
-	icon_state = "cult"
-	initial_flooring = /decl/flooring/reinforced/cult
-
-/turf/simulated/floor/cult/cultify()
-	return
-
 //Tiled floor + sub-types
-
 /turf/simulated/floor/tiled
 	name = "steel floor"
 	icon = 'icons/turf/flooring/tiles.dmi'

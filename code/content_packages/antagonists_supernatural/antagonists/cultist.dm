@@ -45,7 +45,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 	var/allow_narsie = 1
 	var/powerless = 0
 	var/datum/mind/sacrifice_target
-	var/list/obj/effect/rune/teleport/teleport_runes = list()
+	var/list/obj/effect/decal/cleanable/rune/teleport/teleport_runes = list()
 	var/list/rune_strokes = list()
 	var/list/sacrificed = list()
 	var/cult_rating = 0

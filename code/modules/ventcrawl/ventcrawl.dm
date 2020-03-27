@@ -10,12 +10,8 @@ var/list/ventcrawl_machinery = list(
 	/obj/item/holder,
 	/obj/machinery/camera,
 	/mob/living/simple_animal/borer,
-	/obj/item/clothing/head/culthood,
-	/obj/item/clothing/suit/cultrobes,
-	/obj/item/book/tome,
-	/obj/item/paper/,
-	/obj/item/melee/cultblade
-	)
+	/obj/item/paper
+)
 
 /mob/living/var/list/icon/pipes_shown = list()
 /mob/living/var/last_played_vent
