@@ -1,4 +1,4 @@
-/obj/machinery/artifact
+/obj/structure/artifact
 	name = "alien artifact"
 	desc = "A large alien device."
 	icon = 'icons/obj/xenoarchaeology.dmi'
@@ -9,7 +9,7 @@
 	var/datum/artifact_effect/secondary_effect
 	var/being_used = 0
 
-/obj/machinery/artifact/Initialize()
+/obj/structure/artifact/Initialize()
 	. = ..()
 
 	var/effecttype = pick(typesof(/datum/artifact_effect) - /datum/artifact_effect)
@@ -20,6 +20,8 @@
 		secondary_effect = new effecttype(src)
 		if(prob(75))
 			secondary_effect.ToggleActivate(0)
+
+	START_PROCESSING(SSobj, src)
 
 	icon_num = rand(0, 11)
 
@@ -40,31 +42,32 @@
 		name = "sealed alien pod"
 		desc = "A strange alien device."
 
-/obj/machinery/artifact/Destroy()
+/obj/structure/artifact/Destroy()
 	QDEL_NULL(my_effect)
 	QDEL_NULL(secondary_effect)
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/machinery/artifact/proc/check_triggers(trigger_proc)
+/obj/structure/artifact/proc/check_triggers(trigger_proc)
 	. = FALSE
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
 		var/triggered = call(effect.trigger, trigger_proc)(arglist(args.Copy(2)))
-		if(effect.trigger.toggle && triggered)
-			effect.ToggleActivate(1)
-			. = TRUE
+		if(effect.trigger.toggle)
+			if(triggered)
+				effect.ToggleActivate(1)
+				. = TRUE
 		else if(effect.activated != triggered)
 			effect.ToggleActivate(1)
 			. = TRUE
 
-/obj/machinery/artifact/Process()
+/obj/structure/artifact/Process()
 	var/turf/T = loc
 	if(!istype(T)) 	// We're inside a container or on null turf, either way stop processing effects
 		return
 
 	for(var/obj/item/grab/G in grabbed_by)
-		var/mob/affecting_mob = G.get_affecting_mob()
-		if(affecting_mob)
-			check_triggers(/datum/artifact_trigger/proc/on_touch, affecting_mob)
+		if(G.assailant)
+			check_triggers(/datum/artifact_trigger/proc/on_touch, G.assailant)
 
 	var/datum/gas_mixture/enivonment = T.return_air()
 	if(enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
@@ -73,28 +76,28 @@
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
 		effect.process()
 
-/obj/machinery/artifact/attack_robot(mob/living/user)
+/obj/structure/artifact/attack_robot(mob/living/user)
 	if(!CanPhysicallyInteract(user))
 		return
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 
-/obj/machinery/artifact/attack_hand(mob/living/user)
+/obj/structure/artifact/attack_hand(mob/living/user)
 	. = ..()
 	visible_message("[user] touches \the [src].")
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 
-/obj/machinery/artifact/attackby(obj/item/W, mob/living/user)
+/obj/structure/artifact/attackby(obj/item/W, mob/living/user)
 	. = ..()
 	check_triggers(/datum/artifact_trigger/proc/on_hit, W, user)
 
-/obj/machinery/artifact/Bumped(M)
+/obj/structure/artifact/Bumped(M)
 	..()
 	check_triggers(/datum/artifact_trigger/proc/on_bump, M)
 
-/obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)
+/obj/structure/artifact/bullet_act(var/obj/item/projectile/P)
 	check_triggers(/datum/artifact_trigger/proc/on_hit, P)
 
-/obj/machinery/artifact/ex_act(severity)
+/obj/structure/artifact/ex_act(severity)
 	if(check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
 		return
 	switch(severity)
@@ -104,7 +107,7 @@
 			if (prob(50))
 				qdel(src)
 
-/obj/machinery/artifact/Move()
+/obj/structure/artifact/Move()
 	..()
 	if(my_effect)
 		my_effect.UpdateMove()
