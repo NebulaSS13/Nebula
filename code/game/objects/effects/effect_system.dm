@@ -121,6 +121,11 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 
+/proc/spark_at(turf/location)
+	var/datum/effect/effect/system/sparks = new /datum/effect/effect/system/spark_spread()
+	sparks.set_up(3, 0, location)
+	sparks.start()
+
 /datum/effect/effect/system/spark_spread
 
 /datum/effect/effect/system/spark_spread/set_up(n = 3, c = 0, loca)

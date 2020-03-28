@@ -34,7 +34,7 @@
 		if(3)
 			//large range, long charge time
 			chargelevelmax = rand(20, 120)
-			effectrange = rand(20, 200)
+			effectrange = rand(20, 40)
 
 /datum/artifact_effect/Destroy()
 	QDEL_NULL(trigger)
