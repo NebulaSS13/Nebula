@@ -135,3 +135,10 @@
 			_pixel_x += WORLD_ICON_SIZE
 	product.pixel_x = _pixel_x
 	product.pixel_y = _pixel_y
+
+/obj/item/frame/button/wall_charger
+	name = "wall charger frame"
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "wrecharger0"
+	matter = list(MAT_STEEL = 400, MAT_PLASTIC = 200)
+	build_machine_type = /obj/machinery/button/buildable
