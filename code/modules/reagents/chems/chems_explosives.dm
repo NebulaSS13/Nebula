@@ -23,8 +23,8 @@
 		var/gas_moles = 3 * volume
 		products.adjust_multi(MAT_CO2, 0.5 * gas_moles, MAT_NITROGEN, 0.3 * gas_moles, MAT_STEAM, 0.2 * gas_moles)
 		T.assume_air(products)
-		explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)
 		remove_self(activated_volume)
+		explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)
 
 /datum/reagent/anfo/plus
 	name = "ANFO+"
