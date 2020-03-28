@@ -18,3 +18,8 @@
 
 /datum/artifact_trigger/proc/on_bump(atom/movable/AM)
 	return FALSE
+
+// Used by effect copying
+
+/datum/artifact_trigger/proc/copy()
+	return new type()

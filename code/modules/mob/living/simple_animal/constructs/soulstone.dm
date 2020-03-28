@@ -140,6 +140,9 @@
 		qdel(S)
 		qdel(src)
 
+/obj/structure/constructshell/get_artifact_scan_data()
+	return "Tribal idol - subject resembles statues/emblems built by superstitious pre-warp civilisations to honour their gods. Material appears to be a rock/plastcrete composite."
+
 #undef SOULSTONE_CRACKED
 #undef SOULSTONE_EMPTY
 #undef SOULSTONE_ESSENCE

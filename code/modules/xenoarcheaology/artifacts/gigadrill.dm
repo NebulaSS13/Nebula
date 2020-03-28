@@ -33,3 +33,6 @@
 					forceMove(M)
 				drilling_turf = null
 				anchored = 0
+
+/obj/machinery/giga_drill/get_artifact_scan_data()
+	return "Automated mining drill - structure composed of titanium-carbide alloy, with tip and drill lines edged in an alloy of diamond and phoron."

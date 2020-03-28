@@ -32,4 +32,7 @@
 		new /obj/item/material/shard(src.loc)
 	return ..()
 
+/obj/structure/crystal/get_artifact_scan_data()
+	return "Crystal formation - pseudo-organic crystalline matrix, unlikely to have formed naturally. No known technology exists to synthesize this exact composition."
+
 //todo: laser_act

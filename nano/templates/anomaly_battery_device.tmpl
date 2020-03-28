@@ -1,0 +1,69 @@
+{{if data.battery}}
+<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+	<legend style="text-align:center">Battery status</legend> 
+	<div class='item'>
+		<div class="itemLabel">
+			Anomaly ID:
+		</div>
+		<div class="itemContent">
+			{{if data.effect_id}}
+				{{:data.effect_id}}
+			{{else}}
+				N/A
+			{{/if}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			Status:
+		</div>
+		<div class="itemContent">
+			{{if data.activated}}
+				Active
+			{{else}}
+				Inactive
+			{{/if}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			Battery charge:
+		</div>
+		<div class="itemContent">
+			{{:helper.displayBar(data.charge, 0, data.max_charge, 'good')}} {{:data.charge}}/{{:data.max_charge}}
+		</div>
+	</div>
+	{{:helper.link('Eject battery', 'eject', {'ejectbattery' : 1})}}
+</fieldset>
+<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+	<legend style="text-align:center">Controls</legend> 
+	<div class="item">
+		<div class="itemLabelWide">
+			Total Duration: <span class='white'>{{:data.duration}}</span> cycles
+		</div>
+		<div class="itemContentNarrow">
+			{{:helper.link('--', null, {'duration' : -10})}}
+			{{:helper.link('-', null, {'duration' : -1})}}
+			{{:helper.link('+', null, {'duration' : 1})}}
+			{{:helper.link('++', null, {'duration' : 10})}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabelWide">
+			Interval: <span class='white'>{{:data.interval}}</span> cycles
+		</div>
+		<div class="itemContentNarrow">
+			{{:helper.link('--', null, {'interval' : -10})}}
+			{{:helper.link('-', null, {'interval' : -1})}}
+			{{:helper.link('+', null, {'interval' : 1})}}
+			{{:helper.link('++', null, {'interval' : 10})}}
+		</div>
+	</div>
+	{{if data.activated}}
+		{{:helper.link('Shutdown', 'power', {'shutdown' : 1})}}
+	{{else}}
+		{{:helper.link('Activate', 'power', {'startup' : 1})}}
+	{{/if}}
+</fieldset>
+{{else}}
+{{/if}}

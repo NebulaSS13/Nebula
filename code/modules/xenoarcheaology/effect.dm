@@ -144,3 +144,14 @@
 		protected += 0.1
 
 	return 1 - protected
+
+//used by anomaly power harvesters
+/datum/artifact_effect/proc/copy()
+	var/datum/artifact_effect/E = new type()
+	E.effectrange = effectrange
+	E.artifact_id = artifact_id
+	E.effect = effect
+	E.effect = effect
+	E.chargelevelmax = chargelevelmax
+	E.trigger = trigger.copy()
+	return E
