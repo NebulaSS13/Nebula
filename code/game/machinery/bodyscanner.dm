@@ -115,27 +115,6 @@
 	if(!user_can_move_target_inside(target, user))
 		return
 
-/obj/machinery/bodyscanner/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			for(var/atom/movable/A as mob|obj in src)
-				A.dropInto(loc)
-				A.ex_act(severity)
-			qdel(src)
-		if(2.0)
-			if (prob(50))
-				for(var/atom/movable/A as mob|obj in src)
-					A.dropInto(loc)
-					A.ex_act(severity)
-				qdel(src)
-		if(3.0)
-			if (prob(25))
-				for(var/atom/movable/A as mob|obj in src)
-					A.dropInto(loc)
-					A.ex_act(severity)
-				qdel(src)
-
-
 /obj/machinery/bodyscanner/Destroy()
 	if(occupant)
 		occupant.dropInto(loc)

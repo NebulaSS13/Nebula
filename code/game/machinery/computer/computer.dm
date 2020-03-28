@@ -28,29 +28,6 @@
 
 /obj/machinery/computer/get_codex_value()
 	return "computer"
-	
-/obj/machinery/computer/emp_act(severity)
-	if(prob(20/severity)) set_broken(TRUE)
-	..()
-
-/obj/machinery/computer/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(25))
-				qdel(src)
-				return
-			if (prob(50))
-				for(var/x in verbs)
-					verbs -= x
-				set_broken(TRUE)
-		if(3.0)
-			if (prob(25))
-				for(var/x in verbs)
-					verbs -= x
-				set_broken(TRUE)
 
 /obj/machinery/computer/on_update_icon()
 	overlays.Cut()

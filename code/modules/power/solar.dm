@@ -477,19 +477,6 @@ var/list/solars_list = list()
 		S.update_icon() //update it
 	update_icon()
 
-/obj/machinery/power/solar_control/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			//SN src = null
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				set_broken(TRUE)
-		if(3.0)
-			if (prob(25))
-				set_broken(TRUE)
-
 // Used for mapping in solar array which automatically starts itself (telecomms, for example)
 /obj/machinery/power/solar_control/autostart
 	track = 2 // Auto tracking mode

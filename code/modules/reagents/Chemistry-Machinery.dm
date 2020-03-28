@@ -30,16 +30,6 @@
 	. = ..()
 	create_reagents(120)
 
-/obj/machinery/chem_master/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				qdel(src)
-				return
-
 /obj/machinery/chem_master/attackby(var/obj/item/B, var/mob/user)
 
 	if(istype(B, /obj/item/chems/glass))

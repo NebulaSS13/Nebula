@@ -395,15 +395,13 @@
 
 /obj/machinery/light/ex_act(severity)
 	switch(severity)
-		if(1)
-			qdel(src)
-			return
 		if(2)
 			if (prob(75))
 				broken()
 		if(3)
 			if (prob(50))
 				broken()
+	..()
 
 // timed process
 // use power

@@ -63,7 +63,17 @@
 	..()
 
 /obj/machinery/ex_act(severity)
-	take_damage(100/severity, BRUTE, TRUE)
+	switch(severity)
+		if(1)
+			take_damage(rand(150,300), BRUTE, TRUE)
+			if(prob(75))
+				dismantle()
+		if(2)
+			take_damage(rand(50,150), BRUTE, TRUE)
+			if(prob(50))
+				dismantle()
+		if(3)
+			take_damage(rand(0,50), BRUTE, TRUE)
 
 /obj/machinery/bullet_act(obj/item/projectile/P, def_zone)
 	. = ..()

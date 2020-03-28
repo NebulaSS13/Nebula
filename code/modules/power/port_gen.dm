@@ -79,6 +79,7 @@
 		to_chat(usr, "<span class='notice'>The generator is on.</span>")
 	else
 		to_chat(usr, "<span class='notice'>The generator is off.</span>")
+
 /obj/machinery/power/port_gen/emp_act(severity)
 	if(!active)
 		return

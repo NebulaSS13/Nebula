@@ -100,9 +100,6 @@
 	var/skill_modifier = 0.8 * (SKILL_MAX - operator_skill)/(SKILL_MAX - SKILL_MIN) //How much randomness is added
 	efficiency *= 1 + (rand() - 1) * skill_modifier //subtract off between 0.8 and 0, depending on skill and luck.
 
-/obj/machinery/power/emitter/emp_act(var/severity)
-	return 1
-
 /obj/machinery/power/emitter/Process()
 	if(stat & (BROKEN))
 		return
