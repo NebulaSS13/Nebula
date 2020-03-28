@@ -369,8 +369,7 @@
 	icon_state = "nymphplushie"
 
 /obj/random/plushie/spawn_choices()
-	return list(/obj/item/toy/plushie/nymph,
-				/obj/item/toy/plushie/mouse,
+	return list(/obj/item/toy/plushie/mouse,
 				/obj/item/toy/plushie/kitten,
 				/obj/item/toy/plushie/lizard)
 
@@ -417,7 +416,7 @@
 				/obj/item/remains/robot)
 
 
-obj/random/closet //A couple of random closets to spice up maint
+/obj/random/closet //A couple of random closets to spice up maint
 	name = "random closet"
 	desc = "This is a random closet."
 	icon = 'icons/obj/closets/bases/closet.dmi'
@@ -425,8 +424,7 @@ obj/random/closet //A couple of random closets to spice up maint
 	var/vermin_chance = 0.1
 	var/list/locker_vermin = list(
 		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/opossum,
-		/mob/living/carbon/alien/diona
+		/mob/living/simple_animal/opossum
 	)
 
 /obj/random/closet/spawn_choices()

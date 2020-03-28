@@ -192,12 +192,6 @@
 	icon_state = "coffeecup_pawn"
 	base_name = "pawn cup"
 
-/obj/item/chems/food/drinks/glass2/coffeecup/diona
-	name = "diona nymph coffee cup"
-	desc = "A green coffee cup featuring the image of a diona nymph."
-	icon_state = "coffeecup_diona"
-	base_name = "diona cup"
-
 /obj/item/chems/food/drinks/glass2/coffeecup/britcup
 	name = "british coffee cup"
 	desc = "A coffee cup with the British flag emblazoned on it."

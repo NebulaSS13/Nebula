@@ -1,6 +1,6 @@
 var/list/holder_mob_icon_cache = list()
 
-//Helper object for picking dionaea (and other creatures) up.
+//Helper object for picking creatures up.
 /obj/item/holder
 	name = "holder"
 	desc = "You shouldn't ever see this."

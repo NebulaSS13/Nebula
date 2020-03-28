@@ -29,11 +29,6 @@
 	key = "gnarl"
 	emote_message_3p = "USER gnarls and shows its teeth.."
 
-/decl/emote/audible/chirp
-	key = "chirp"
-	emote_message_3p = "USER chirps!"
-	emote_sound = 'sound/misc/nymphchirp.ogg'
-
 /decl/emote/audible/multichirp
 	key = "mchirp"
 	emote_message_3p = "USER chirps a chorus of notes!"

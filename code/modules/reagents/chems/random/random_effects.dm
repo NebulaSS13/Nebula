@@ -188,7 +188,7 @@
 /decl/random_chem_effect/random_properties/cooling_act(var/datum/reagent/random/reagent, var/datum/reagents/reagents)
 
 /decl/random_chem_effect/random_properties/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
-	if(chem_effect_define) // screw diona
+	if(chem_effect_define)
 		M.add_chemical_effect(chem_effect_define, value)
 
 /decl/random_chem_effect/random_properties/get_interactions(var/datum/reagent/random/reagent, var/sci_skill, var/chem_skill)

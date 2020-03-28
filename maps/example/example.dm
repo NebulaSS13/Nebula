@@ -7,6 +7,7 @@
 	#include "..\..\code\content_packages\psionics\_psionics.dme"
 	#include "..\..\code\content_packages\ascent\_ascent.dme"
 	#include "..\..\code\content_packages\modern_earth\_modern_earth.dme"
+	#include "..\..\code\content_packages\dionaea\_dionaea.dme"
 
 	#include "example_areas.dm"
 	#include "example_shuttles.dm"

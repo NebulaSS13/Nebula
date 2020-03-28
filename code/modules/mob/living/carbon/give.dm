@@ -42,5 +42,5 @@
 		return
 
 	if(usr.unEquip(I))
-		target.put_in_hands(I) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
+		target.put_in_hands(I) // If this fails it will just end up on the floor.
 		usr.visible_message(SPAN_NOTICE("\The [usr] handed \the [I] to \the [target]."), SPAN_NOTICE("You give \the [I] to \the [target]."))
