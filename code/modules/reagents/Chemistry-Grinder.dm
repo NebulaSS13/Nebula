@@ -24,6 +24,10 @@
 	var/skill_to_check = SKILL_CHEMISTRY
 	var/grind_sound = 'sound/machines/grinder.ogg'
 
+	stat_immune = 0
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+
 /obj/machinery/reagentgrinder/Initialize()
 	. = ..()
 	beaker = new /obj/item/chems/glass/beaker/large(src)
@@ -38,6 +42,8 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/machinery/reagentgrinder/attackby(var/obj/item/O, var/mob/user)
+	if((. = ..()))
+		return
 
 	if(!istype(O))
 		return FALSE

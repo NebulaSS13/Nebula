@@ -570,3 +570,28 @@
 /datum/design/circuit/shipsensors
 	name = "ship sensors"
 	build_path = /obj/item/stock_parts/circuitboard/shipsensors
+
+/datum/design/circuit/grinder
+	name = "industrial grinder board"
+	req_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 4, TECH_ENGINEERING = 4)
+	build_path = /obj/item/stock_parts/circuitboard/grinder
+
+/datum/design/circuit/juicer
+	name = "blender board"
+	req_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/stock_parts/circuitboard/juicer
+
+/datum/design/circuit/recharger
+	name = "recharger board"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/stock_parts/circuitboard/recharger
+
+/datum/design/circuit/wall_recharger
+	name = "wall recharger board"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/stock_parts/circuitboard/recharger/wall
+
+/datum/design/circuit/cell_charger
+	name = "cell charger board"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/stock_parts/circuitboard/cell_charger

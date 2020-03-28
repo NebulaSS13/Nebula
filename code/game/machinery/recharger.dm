@@ -15,12 +15,21 @@
 	var/icon_state_idle = "recharger0" //also when unpowered
 	var/portable = 1
 
+	stat_immune = 0
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
+
+/obj/machinery/recharger/Destroy()
+	charging = null
+	. = ..()
+
 /obj/machinery/recharger/attackby(obj/item/G, mob/user)
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
 		if (istype(G, allowed_type)) allowed = 1
 
 	if(allowed)
+		. = TRUE
 		if(charging)
 			to_chat(user, "<span class='warning'>\A [charging] is already charging here.</span>")
 			return
@@ -41,13 +50,19 @@
 			G.forceMove(src)
 			charging = G
 			update_icon()
-	else if(portable && isWrench(G))
+		return
+
+	if(portable && isWrench(G) && !panel_open)
+		. = TRUE
 		if(charging)
 			to_chat(user, "<span class='warning'>Remove [charging] first!</span>")
 			return
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "attached" : "detached"] the recharger.")
 		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
+		return
+
+	return ..()
 
 /obj/machinery/recharger/physical_attack_hand(mob/user)
 	if(charging)
@@ -113,3 +128,6 @@
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"
 	portable = 0
+
+	construct_state = /decl/machine_construction/wall_frame/panel_closed
+	frame_type = /obj/item/frame/button/wall_charger
