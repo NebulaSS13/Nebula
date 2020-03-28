@@ -106,6 +106,11 @@
 	req_tech = list(TECH_DATA = 5)
 	build_path = /obj/item/stock_parts/circuitboard/message_monitor
 
+/datum/design/circuit/message_server
+	name = "message server board"
+	build_path = /obj/item/stock_parts/circuitboard/telecomms/message_server
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
+
 /datum/design/circuit/guestpass
 	name = "guest pass terminal"
 	build_path = /obj/item/stock_parts/circuitboard/guestpass
@@ -610,3 +615,17 @@
 	name = "cell charger board"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/stock_parts/circuitboard/cell_charger
+/datum/design/circuit/suit_cycler
+	name = "suit cycler board (selectable options)"
+	build_path = /obj/item/stock_parts/circuitboard/suit_cycler
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4)
+
+/datum/design/circuit/seed_storage
+	name = "seed storage"
+	build_path = /obj/item/stock_parts/circuitboard/seed_storage
+	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 3)
+
+/datum/design/circuit/seed_storage_xeno
+	name = "advanced seed storage"
+	build_path = /obj/item/stock_parts/circuitboard/seed_storage/advanced
+	req_tech = list(TECH_BIO = 6, TECH_ENGINEERING = 3)

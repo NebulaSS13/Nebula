@@ -53,6 +53,10 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			//Messages having theese tokens will be rejected by server. Case sensitive
 	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
 
+	stat_immune = 0
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
+
 /obj/machinery/message_server/Initialize()
 	. = ..()
 	message_servers += src
@@ -124,7 +128,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		qdel(O)
 		to_chat(user, "You install additional memory and processors into message server. Its filtering capabilities been enhanced.")
 	else
-		..(O, user)
+		return ..()
 
 /obj/machinery/message_server/on_update_icon()
 	if((stat & (BROKEN|NOPOWER)))

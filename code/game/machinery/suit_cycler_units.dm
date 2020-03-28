@@ -11,6 +11,7 @@
 		/decl/item_modifier/space_suit/atmos/alt,
 		/decl/item_modifier/space_suit/hazard
 	)
+	buildable = FALSE
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
@@ -32,6 +33,7 @@
 
 /obj/machinery/suit_cycler/security/alt
 	available_modifications = list(/decl/item_modifier/space_suit/security/alt)
+	buildable = FALSE
 
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
@@ -41,6 +43,7 @@
 
 /obj/machinery/suit_cycler/medical/alt
 	available_modifications = list(/decl/item_modifier/space_suit/medical/alt)
+	buildable = FALSE
 
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
@@ -48,6 +51,7 @@
 	req_access = list(access_syndicate)
 	available_modifications = list(/decl/item_modifier/space_suit/mercenary)
 	can_repair = 1
+	buildable = FALSE
 
 /obj/machinery/suit_cycler/pilot
 	name = "Pilot suit cycler"
