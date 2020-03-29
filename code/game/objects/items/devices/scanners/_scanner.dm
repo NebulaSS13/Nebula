@@ -1,6 +1,7 @@
 /obj/item/scanner
 	name = "handheld scanner"
 	desc = "A hand-held scanner of some sort. You shouldn't be seeing it."
+	icon = 'icons/obj/items/device/scanner/atmos_scanner.dmi'
 	icon_state = "atmos"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL

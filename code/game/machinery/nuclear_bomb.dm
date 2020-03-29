@@ -155,7 +155,7 @@ var/bomb_set
 		extended = 1
 		if(!src.lighthack)
 			flick("lock", src)
-			update_icon()	
+			update_icon()
 
 /obj/machinery/nuclearbomb/interface_interact(mob/user)
 	if(extended && !panel_open)
@@ -359,7 +359,7 @@ var/bomb_set
 /obj/item/disk/nuclear
 	name = "nuclear authentication disk"
 	desc = "Better keep this safe."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/device/diskette.dmi'
 	icon_state = "nucleardisk"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_TINY

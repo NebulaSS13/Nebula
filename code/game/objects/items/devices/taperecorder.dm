@@ -1,6 +1,7 @@
 /obj/item/taperecorder
 	name = "universal recorder"
 	desc = "A device that can record to cassette tapes, and play them. It automatically translates the content in playback."
+	icon = 'icons/obj/items/device/tape_recorder.dmi'
 	icon_state = "taperecorder"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
@@ -381,6 +382,7 @@
 /obj/item/tape
 	name = "tape"
 	desc = "A magnetic tape that can hold up to ten minutes of content."
+	icon = 'icons/obj/items/device/tape_casette.dmi'
 	icon_state = "tape_white"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_TINY
@@ -525,6 +527,7 @@
 /obj/item/tape/loose
 	name = "magnetic tape"
 	desc = "Quantum-enriched self-repairing nanotape, used for magnetic storage of information."
+	icon = 'icons/obj/items/device/tape_casette.dmi'
 	icon_state = "magtape"
 	ruined = 1
 

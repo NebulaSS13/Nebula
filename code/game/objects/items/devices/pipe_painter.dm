@@ -1,6 +1,6 @@
 /obj/item/pipe_painter
 	name = "pipe painter"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/device/pipe_painter.dmi'
 	icon_state = "pipainter"
 	item_state = "flight"
 	desc = "A long, slender device consisting of a pigment synthesizer, dual applicators, and a small battery, all hooked up to a long extendable rod."

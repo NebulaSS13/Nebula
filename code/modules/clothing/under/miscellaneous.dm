@@ -158,12 +158,6 @@
 	worn_state = "rainbow"
 	gender_icons = 1
 
-/obj/item/clothing/under/cloud
-	name = "cloud"
-	icon_state = "cloud"
-	worn_state = "cloud"
-	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-
 /obj/item/clothing/under/psysuit
 	name = "dark undersuit"
 	desc = "A thick, layered grey undersuit lined with power cables. Feels a little like wearing an electrical storm."

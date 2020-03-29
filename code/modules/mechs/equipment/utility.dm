@@ -208,6 +208,7 @@
 /obj/item/material/drill_head
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
+	icon = 'icons/obj/items/tool/drill_head.dmi'
 	icon_state = "drill_head"
 	var/durability = 0
 

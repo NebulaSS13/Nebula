@@ -1,7 +1,7 @@
 /obj/item/robot_module
 	name = "robot module"
 	icon = 'icons/obj/module.dmi'
-	icon_state = "std_module"
+	icon_state = "std_mod"
 	item_state = "electronic"
 	w_class = ITEM_SIZE_NO_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

@@ -200,43 +200,9 @@
 	desc = "A long, thick black leather coat."
 	icon_state = "leathercoat"
 
-/obj/item/clothing/suit/browncoat
-	name = "brown leather coat"
-	desc = "A long, brown leather coat."
-	icon_state = "browncoat"
-
-/obj/item/clothing/suit/neocoat
-	name = "black coat"
-	desc = "A flowing, black coat."
-	icon_state = "neocoat"
-
 //stripper
 /obj/item/clothing/under/stripper
 	body_parts_covered = 0
-
-/obj/item/clothing/under/stripper/stripper_pink
-	name = "pink swimsuit"
-	desc = "A rather skimpy pink swimsuit."
-	icon_state = "stripper_p_under"
-	siemens_coefficient = 1
-
-/obj/item/clothing/under/stripper/stripper_green
-	name = "green swimsuit"
-	desc = "A rather skimpy green swimsuit."
-	icon_state = "stripper_g_under"
-	siemens_coefficient = 1
-
-/obj/item/clothing/suit/stripper/stripper_pink
-	name = "pink skimpy dress"
-	desc = "A rather skimpy pink dress."
-	icon_state = "stripper_p_over"
-	siemens_coefficient = 1
-
-/obj/item/clothing/suit/stripper/stripper_green
-	name = "green skimpy dress"
-	desc = "A rather skimpy green dress."
-	icon_state = "stripper_g_over"
-	siemens_coefficient = 1
 
 /obj/item/clothing/under/stripper/mankini
 	name = "mankini"

@@ -2,7 +2,7 @@
 /obj/item/scanner/plant
 	name = "plant analyzer"
 	desc = "A hand-held botanical scanner used to analyze plants."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/device/scanner/plant_scanner.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/fastbeep.ogg'

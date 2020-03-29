@@ -1,7 +1,7 @@
 /obj/item/storage/wallet
 	name = "wallet"
 	desc = "It can hold a few small and personal things."
-	icon = 'icons/obj/wallet.dmi'
+	icon = 'icons/obj/items/wallet.dmi'
 	icon_state = "wallet-white"
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_SMALL //Don't worry, see can_hold[]

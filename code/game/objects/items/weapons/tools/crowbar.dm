@@ -1,7 +1,7 @@
 /obj/item/crowbar
 	name = "crowbar"
 	desc = "A heavy crowbar of solid steel, good and solid in your hand."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/items/tool/crowbar.dmi'
 	icon_state = "crowbar"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
@@ -26,6 +26,7 @@
 	desc = "A steel bar with a wedge. It comes in a variety of configurations and colours - collect them all."
 	icon_state = "prybar_preview"
 	item_state = "crowbar"
+	icon = 'icons/obj/items/tool/prybar.dmi'
 	force = 4
 	throwforce = 6
 	throw_range = 5
@@ -45,6 +46,7 @@
 /obj/item/crowbar/emergency_forcing_tool
 	name = "emergency forcing tool"
 	desc = "This is an emergency forcing tool, made of steel bar with a wedge on one end, and a hatchet on the other end. It has a blue plastic grip"
+	icon = 'icons/obj/items/tool/forcing_tool.dmi'
 	icon_state = "emergency_forcing_tool"
 	item_state = "emergency_forcing_tool"
 	force = 10
@@ -62,7 +64,7 @@
 	matter = list(MAT_PLASTIC = 60)
 	obj_flags = null
 	w_class = ITEM_SIZE_TINY
-	
+
 //List of things prybar has high chance of breaking on. Global for optimzation
 var/global/list/prybar_break_chances = list(
 	/obj/machinery/door = 80,

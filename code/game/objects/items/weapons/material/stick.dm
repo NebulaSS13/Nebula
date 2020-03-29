@@ -1,6 +1,7 @@
 /obj/item/material/stick
 	name = "stick"
 	desc = "You feel the urge to poke someone with this."
+	icon = 'icons/obj/items/stick.dmi'
 	icon_state = "stick"
 	item_state = "stickmat"
 	max_force = 10

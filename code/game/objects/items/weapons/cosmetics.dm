@@ -2,7 +2,7 @@
 	gender = PLURAL
 	name = "red lipstick"
 	desc = "A generic brand of lipstick."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/lipstick.dmi'
 	icon_state = "lipstick"
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
@@ -78,7 +78,7 @@
 	desc = "A pristine comb made from flexible plastic."
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/comb.dmi'
 	icon_state = "comb"
 	item_state = "comb"
 
@@ -93,6 +93,7 @@
 /obj/item/haircomb/brush
 	name = "hairbrush"
 	desc = "A surprisingly decent hairbrush with a false wood handle and semi-soft bristles."
+	icon = 'icons/obj/items/hairbrush.dmi'
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = null
 	icon_state = "brush"

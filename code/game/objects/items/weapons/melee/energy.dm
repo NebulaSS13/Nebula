@@ -89,6 +89,7 @@
 /obj/item/melee/energy/axe
 	name = "energy axe"
 	desc = "An energised battle axe."
+	icon = 'icons/obj/items/weapon/e_axe.dmi'
 	icon_state = "axe0"
 	active_icon = "axe1"
 	lighting_color = COLOR_SABER_AXE
@@ -118,6 +119,7 @@
 /obj/item/melee/energy/sword
 	name = "energy sword"
 	desc = "May the force be within you."
+	icon = 'icons/obj/items/weapon/e_sword.dmi'
 	icon_state = "sword0"
 	active_force = 30
 	active_throwforce = 20
@@ -175,6 +177,7 @@
 /obj/item/melee/energy/sword/pirate
 	name = "energy cutlass"
 	desc = "Arrrr matey."
+	icon = 'icons/obj/items/weapon/e_cutlass.dmi'
 	icon_state = "cutlass0"
 	active_icon = "cutlass1"
 	lighting_color = COLOR_SABER_CUTLASS
@@ -186,6 +189,7 @@
 /obj/item/melee/energy/blade
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
+	icon = 'icons/obj/items/weapon/energy_blade.dmi'
 	icon_state = "blade"
 	active_icon = "blade"	//It's all energy, so it should always be visible.
 	lighting_color = COLOR_SABER_GREEN
@@ -247,6 +251,7 @@
 /obj/item/melee/energy/machete
 	name = "energy machete"
 	desc = "A machete handle that extends out into a long, purple machete blade."
+	icon = 'icons/obj/items/weapon/e_machete.dmi'
 	icon_state = "machete_skrell_x"
 	active_icon = "machete_skrell"
 	active_force = 16		//In line with standard machetes at time of creation.

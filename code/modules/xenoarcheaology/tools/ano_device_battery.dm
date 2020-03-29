@@ -31,7 +31,7 @@
 	name = "anomaly power utilizer"
 	desc = "APU allows users to safely (relatively) harness powers beyond their understanding, as long as they've been stored in anomaly power cells."
 	icon = 'icons/obj/xenoarchaeology.dmi'
-	icon_state = "anodev"
+	icon_state = "anodev_empty"
 	var/activated = 0
 	var/duration = 1
 	var/interval = 1

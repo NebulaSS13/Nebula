@@ -79,7 +79,7 @@
 /obj/item/disk/icarus
 	name = "black box backup disk"
 	desc = "Digital storage. Inscription says: \"Deliver to Sol Goverment Expeditionary Corps Command!\". Content is encrypted with quantum crypthography methods."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/device/diskette.dmi'
 	icon_state = "nucleardisk"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_TINY

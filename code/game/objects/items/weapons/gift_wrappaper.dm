@@ -10,7 +10,7 @@
 /obj/item/a_gift
 	name = "gift"
 	desc = "PRESENTS!!!! eek!"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/gift_wrapped.dmi'
 	icon_state = "gift1"
 	item_state = "gift1"
 	randpixel = 10
@@ -109,7 +109,7 @@
 /obj/item/gift
 	name = "gift"
 	desc = "A wrapped item."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/gift_wrapped.dmi'
 	icon_state = "gift3"
 	var/size = 3.0
 	var/obj/item/gift = null
@@ -145,7 +145,7 @@
 /obj/item/wrapping_paper
 	name = "wrapping paper"
 	desc = "You can use this to wrap items in."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/gift_wrapper.dmi'
 	icon_state = "wrap_paper"
 	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 

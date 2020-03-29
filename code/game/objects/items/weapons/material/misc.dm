@@ -3,6 +3,7 @@
 	desc = "A short throwing spear with a deep barb, specifically designed to embed itself in its target."
 	sharp = 1
 	edge = 1
+	icon = 'icons/obj/items/weapon/harpoon.dmi'
 	icon_state = "harpoon"
 	item_state = "harpoon"
 	max_force = 20
@@ -44,7 +45,7 @@
 /obj/item/material/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/tool/hatchet.dmi'
 	icon_state = "hatchet"
 	max_force = 15
 	material_force_multiplier = 0.2 // 12 with hardness 60 (steel)
@@ -63,6 +64,7 @@
 /obj/item/material/hatchet/machete
 	name = "machete"
 	desc = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
+	icon = 'icons/obj/items/weapon/machete.dmi'
 	item_state = "machete"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
@@ -96,7 +98,7 @@
 /obj/item/material/minihoe // -- Numbers
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/tool/hoe.dmi'
 	icon_state = "hoe"
 	item_state = "hoe"
 	max_force = 5
@@ -109,9 +111,10 @@
 	unbreakable = TRUE
 
 /obj/item/material/scythe
-	icon_state = "scythe0"
 	name = "scythe"
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
+	icon = 'icons/obj/items/tool/scythe.dmi'
+	icon_state = "scythe0"
 	max_force = 15
 	material_force_multiplier = 0.275 // 16 with hardness 60 (steel)
 	thrown_material_force_multiplier = 0.25 // 5 with weight 20 (steel)
@@ -127,6 +130,7 @@
 /obj/item/material/cross
 	name = "cross"
 	desc = "It's a cross, commonly used as a holy symbol by Christians."
+	icon = 'icons/obj/items/cross.dmi'
 	icon_state = "cross"
 	max_force = 5
 	material_force_multiplier = 0.1

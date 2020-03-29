@@ -4,7 +4,7 @@
 	density = 1
 	anchored = 1
 	layer = OBJ_LAYER
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/weapon/landmine.dmi'
 	icon_state = "uglymine"
 	var/triggerproc = "explode" //name of the proc thats called when the mine is triggered
 	var/triggered = 0

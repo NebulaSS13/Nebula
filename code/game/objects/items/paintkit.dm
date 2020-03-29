@@ -1,6 +1,6 @@
 /obj/item/kit
 	icon_state = "modkit"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/modkit.dmi'
 	var/new_name = "exosuit"    //What is the variant called?
 	var/new_desc = "An exosuit." //How is the new exosuit described?
 	var/new_icon = "ripley"  //What base icon will the new exosuit use?

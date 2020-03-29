@@ -1,3 +1,6 @@
+/obj/item/stack/animalhide
+	icon = 'icons/obj/items/sheet_hide.dmi'
+
 /obj/item/stack/animalhide/human
 	name = "human skin"
 	desc = "The by-product of human farming."
@@ -58,12 +61,14 @@
 	name = "hairless hide"
 	desc = "This hide was stripped of it's hair, but still needs tanning."
 	singular_name = "hairless hide piece"
+	icon = 'icons/obj/items/sheet_leather.dmi'
 	icon_state = "sheet-hairlesshide"
 
 /obj/item/stack/wetleather
 	name = "wet leather"
 	desc = "This leather has been cleaned but still needs to be dried."
 	singular_name = "wet leather piece"
+	icon = 'icons/obj/items/sheet_leather.dmi'
 	icon_state = "sheet-wetleather"
 	var/wetness = 30 //Reduced when exposed to high temperautres
 	var/drying_threshold_temperature = 500 //Kelvin to start drying

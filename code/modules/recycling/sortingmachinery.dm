@@ -236,7 +236,7 @@
 	desc = "Heavy duty brown paper used to wrap packages to protect them during shipping."
 	singular_name = "sheet"
 	max_amount = 25
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/gift_wrapper.dmi'
 	icon_state = "deliveryPaper"
 	w_class = ITEM_SIZE_NORMAL
 
@@ -247,7 +247,7 @@
 /obj/item/c_tube
 	name = "cardboard tube"
 	desc = "A tube... of cardboard."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/gift_wrapper.dmi'
 	icon_state = "c_tube"
 	throwforce = 1
 	w_class = ITEM_SIZE_SMALL
@@ -336,6 +336,7 @@
 /obj/item/destTagger
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
+	icon = 'icons/obj/items/device/destination_tagger.dmi'
 	icon_state = "dest_tagger"
 	var/currTag = 0
 	w_class = ITEM_SIZE_SMALL
@@ -417,7 +418,7 @@
 			if(AM.loc.y != src.loc.y-1) return
 		if(WEST)
 			if(AM.loc.x != src.loc.x-1) return
-			
+
 	var/mob/living/L = AM
 	if (istype(L) && L.ckey)
 		log_and_message_admins("has flushed themselves down \the [src].", L)
@@ -500,7 +501,7 @@
 
 /obj/item/stack/package_wrap/cyborg
 	name = "package wrapper synthesizer"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/gift_wrapper.dmi'
 	icon_state = "deliveryPaper"
 	gender = NEUTER
 	matter = null

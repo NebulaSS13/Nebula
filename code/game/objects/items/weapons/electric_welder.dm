@@ -1,6 +1,7 @@
 /obj/item/weldingtool/electric
 	name = "arc welder"
 	desc = "A man-portable arc welding tool."
+	icon = 'icons/obj/items/tool/arc_welder.dmi'
 	icon_state = "welder_arc"
 	welding_resource = "stored charge"
 	tank = null

@@ -3,7 +3,7 @@
 /obj/item/arrow
 	name = "bolt"
 	desc = "It's got a tip for you - get the point?"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/weapon/crossbow_bolt.dmi'
 	icon_state = "bolt"
 	item_state = "bolt"
 	throwforce = 8
@@ -22,14 +22,13 @@
 	edge = 0
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/weapon/crossbow_bolt.dmi'
 	icon_state = "metal-rod"
 	item_state = "bolt"
 
 /obj/item/arrow/quill
 	name = "vox quill"
 	desc = "A wickedly barbed quill from some bizarre animal."
-	icon = 'icons/obj/items.dmi'
 	icon_state = "quill"
 	item_state = "quill"
 	throwforce = 5

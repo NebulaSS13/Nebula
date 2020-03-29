@@ -1,7 +1,7 @@
 /obj/item/cane
 	name = "cane"
 	desc = "A cane used by a true gentlemen. Or a clown."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/cane.dmi'
 	icon_state = "cane"
 	item_state = "stick"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
