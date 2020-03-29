@@ -93,6 +93,7 @@
 	var/material_force_multiplier = 0.5	       // Multiplier to material's generic damage value for this specific type of weapon
 	var/thrown_material_force_multiplier = 0.5 // As above, but for throwing the weapon.
 	var/unbreakable = FALSE                    // Whether or not this weapon degrades.
+	var/anomaly_shielding					   // 0..1 value of how well it shields against xenoarch anomalies
 
 /obj/item/Initialize(var/ml, var/material_key)
 	if(!material_key)

@@ -116,32 +116,11 @@
 	if(!istype(H))
 		return 1
 
-	var/protected = 0
+	. = 1
+	for(var/obj/item/I in H.get_equipped_items())
+		. -= I.anomaly_shielding
 
-	//anomaly suits give best protection, but excavation suits are almost as good
-	if(istype(H.back,/obj/item/rig/hazmat) || istype(H.back, /obj/item/rig/hazard))
-		var/obj/item/rig/rig = H.back
-		if(rig.suit_is_deployed() && !rig.offline)
-			protected += 1
-
-	if(istype(H.wear_suit,/obj/item/clothing/suit/bio_suit/anomaly))
-		protected += 0.7
-	else if(istype(H.wear_suit,/obj/item/clothing/suit/space/void/excavation))
-		protected += 0.6
-
-	if(istype(H.head,/obj/item/clothing/head/bio_hood/anomaly))
-		protected += 0.3
-	else if(istype(H.head,/obj/item/clothing/head/helmet/space/void/excavation))
-		protected += 0.2
-
-	//latex gloves and science goggles also give a bit of bonus protection
-	if(istype(H.gloves,/obj/item/clothing/gloves/latex))
-		protected += 0.1
-
-	if(istype(H.glasses,/obj/item/clothing/glasses/science))
-		protected += 0.1
-
-	return 1 - protected
+	return max(0, .)
 
 //used by anomaly power harvesters
 /datum/artifact_effect/proc/copy()
