@@ -9,6 +9,11 @@
 		min_temp = rand(T0C - 100, T0C + 200)
 		max_temp = min_temp + rand(10, 30)
 
+/datum/artifact_trigger/temperature/copy()
+	var/datum/artifact_trigger/temperature/C = ..()
+	C.min_temp = min_temp
+	C.max_temp = max_temp
+
 /datum/artifact_trigger/temperature/on_gas_exposure(datum/gas_mixture/gas)
 	return gas.temperature >= min_temp && gas.temperature <= max_temp
 

@@ -70,6 +70,9 @@
 		icon_state = "pylon"
 		set_light(0.5)
 
+/obj/structure/cult/pylon/get_artifact_scan_data()
+	return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
+
 /obj/structure/cult/tome
 	name = "Desk"
 	desc = "A desk covered in arcane manuscripts and tomes in unknown languages. Looking at the text makes your skin crawl."

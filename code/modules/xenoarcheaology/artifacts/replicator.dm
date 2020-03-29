@@ -147,3 +147,6 @@
 			else
 				src.visible_message(fail_message)
 		. = TOPIC_REFRESH
+
+/obj/machinery/replicator/get_artifact_scan_data()
+	return "Automated construction unit - subject appears to be able to synthesize various objects given a material, some with simple internal circuitry. Method unknown."

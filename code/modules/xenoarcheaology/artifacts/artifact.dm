@@ -108,3 +108,15 @@
 		my_effect.UpdateMove()
 	if(secondary_effect)
 		secondary_effect.UpdateMove()
+
+/obj/structure/artifact/get_artifact_scan_data()
+	var/out = "Anomalous alien device - composed of an unknown alloy.<br><br>"
+
+	if(my_effect)
+		out += my_effect.getDescription()
+
+	if(secondary_effect && secondary_effect.activated)
+		out += "<br><br>Internal scans indicate ongoing secondary activity operating independently from primary systems.<br><br>"
+		out += secondary_effect.getDescription()
+
+	return out

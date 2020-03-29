@@ -1,0 +1,40 @@
+
+
+
+{{if data.error}}
+<span class='bad'>ERROR: {{:data.error}}</span>
+{{else}}
+<div class='item'>
+	<div class="itemLabel">
+		Scan progress:
+	</div>
+	<div class="itemContent">
+		{{:helper.displayBar(data.scan_progress, 0, data.scan_duration, 'good')}}
+	</div>
+</div>
+{{if data.scan_progress < data.scan_duration}}
+	{{:helper.link("Halt scan", null, { 'halt_scan' : 1}, null, null)}}
+{{else}}
+	{{:helper.link("Start scan", null, { 'begin_scan' : 1}, null, null)}}
+{{/if}}
+<div class='item'>
+	<h4>Scan results:</h4>
+	{{if data.stored_scan}}
+	<div class='item'>
+		<div class="itemLabel">
+			Object:
+		</div>
+		<div class="itemContent">
+			{{:data.stored_scan.name}}
+		</div>
+	</div>
+	<div class='block'>		
+			{{:data.stored_scan.data}}
+	</div>
+	{{else}}
+		<div class='item'>N/A</div>
+	{{/if}}
+	{{:helper.link("Print", null, { 'print' : 1}, data.stored_scan ? null : 'disabled', null)}}
+</div>
+{{/if}}
+

@@ -1,0 +1,54 @@
+{{if data.error}}
+<span class='bad'>ERROR: {{:data.error}}</span>
+{{else}}
+	<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+		<legend style="text-align:center">Anomaly Battery</legend> 
+	<div class='item'>
+		<div class="itemLabel">
+			Battery charge:
+		</div>
+		<div class="itemContent">
+			{{if data.battery}}
+				{{:helper.displayBar(data.stored_charge, 0, data.capacity, 'good')}} {{:data.stored_charge}}/{{:data.capacity}}
+			{{else}}
+				N/A
+			{{/if}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabelWide">
+			Anomaly Signature ID:
+		</div>
+		<div class="itemContentNarrow">
+			{{if data.signature}}
+				{{:data.signature}}
+			{{else}}
+				N/A
+			{{/if}}
+		</div>
+	</div>
+	{{:helper.link('Eject battery', 'eject', {'ejectbattery' : 1}, data.battery ? null : 'disabled')}}
+	</fieldset>
+	<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+		<legend style="text-align:center">Controls</legend> 
+	<div class='item'>
+		{{if data.harvesting}}
+			<div class='notice'>
+				Energy harvesting in progress
+			</div>
+			{{:helper.link('Halt', 'cancel', {'stopharvest' : 1})}}
+		{{else data.dumping}}
+			<div class='notice'>
+				Energy dumping in progress
+			</div>
+			{{:helper.link('Halt', 'cancel', {'stopharvest' : 1})}}
+		{{else}}
+			<div class='white'>
+				Harvester ready
+			</div>
+			{{:helper.link('Harvest energy', 'plus', {'harvest' : 1}, data.battery ? null : 'disabled')}}
+			{{:helper.link('Dump energy', 'minus', {'drainbattery' : 1}, data.battery ? null : 'disabled')}}
+		{{/if}}
+	</div>
+	</fieldset>
+{{/if}}

@@ -1,23 +1,23 @@
 /obj/machinery/artifact_analyser
-	name = "Anomaly Analyser"
+	name = "anomaly analyser"
 	desc = "Studies the emissions of anomalous materials to discover their uses."
 	icon = 'icons/obj/xenoarchaeology.dmi'
-	icon_state = "xenoarch_console"
-	anchored = 1
-	density = 1
-	var/scan_in_progress = 0
-	var/scan_num = 0
-	var/obj/machinery/artifact_scanpad/owned_scanner = null
-	var/scan_completion_time = 0
-	var/scan_duration = 50
+	icon_state = "xenoarch_analyser1"
 	var/obj/scanned_object
+	var/obj/machinery/artifact_scanpad/owned_scanner
+	var/scanning_counter = 0
+	var/scan_duration = 5
 	var/report_num = 0
+	var/list/stored_scan = list()
 
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 	base_type = /obj/machinery/artifact_analyser
 
+/obj/machinery/artifact_analyser/on_update_icon()
+	icon_state = "xenoarch_analyser[operable()]"
+	
 /obj/machinery/artifact_analyser/Initialize()
 	. = ..()
 	reconnect_scanner()
@@ -55,132 +55,94 @@
 /obj/machinery/artifact_analyser/DefaultTopicState()
 	return GLOB.physical_state
 
-/obj/machinery/artifact_analyser/interface_interact(var/mob/user)
-	interact(user)
+/obj/machinery/artifact_analyser/interface_interact(user)
+	ui_interact(user)
 	return TRUE
 
-/obj/machinery/artifact_analyser/interact(mob/user)
-	var/dat = "<B>Anomalous material analyser</B><BR>"
-	dat += "<HR>"
+/obj/machinery/artifact_analyser/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/data[0]
+
 	if(!owned_scanner)
 		reconnect_scanner()
-
 	if(!owned_scanner)
-		dat += "<b><font color=red>Unable to locate analysis pad.</font></b><br>"
-	else if(scan_in_progress)
-		dat += "Please wait. Analysis in progress.<br>"
-		dat += "<a href='?src=\ref[src];halt_scan=1'>Halt scanning.</a><br>"
+		data["error"] = "Unable to locate the scanner pad."
 	else
-		dat += "Scanner is ready.<br>"
-		dat += "<a href='?src=\ref[src];begin_scan=1'>Begin scanning.</a><br>"
+		data["scan_progress"] = scan_duration - scanning_counter
+		data["scan_duration"] = scan_duration
+		if(length(stored_scan))
+			data["stored_scan"] = stored_scan
 
-	dat += "<br>"
-	dat += "<hr>"
-	dat += "<a href='?src=\ref[src]'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
-	show_browser(user, dat, "window=artanalyser;size=450x500")
-	user.set_machine(src)
-	onclose(user, "artanalyser")
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "anomaly_scanner.tmpl", "Anomaly Analyzer Console", 360, 500)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
+
+/obj/machinery/artifact_analyser/proc/stop_scan()
+	scanning_counter = 0
+	clear_object()
 
 /obj/machinery/artifact_analyser/Process()
-	if(scan_in_progress && world.time > scan_completion_time)
-		scan_in_progress = 0
+	if(!scanning_counter)
+		return
+
+	if(!owned_scanner)
+		reconnect_scanner()
+	if(!owned_scanner)
+		state("Error communicating with the scanner pad.")
+		stop_scan()
+		return
+	
+	if(!scanned_object || scanned_object.loc != owned_scanner.loc)
+		state("Unable to locate scanned object. Ensure it was not moved in the process.")
+		stop_scan()
+		return
+
+	scanning_counter--
+	if(!scanning_counter)
 		updateDialog()
 
-		var/results = ""
-		if(!owned_scanner)
-			reconnect_scanner()
-		if(!owned_scanner)
-			results = "Error communicating with scanner."
-		else if(!scanned_object || scanned_object.loc != owned_scanner.loc)
-			results = "Unable to locate scanned object. Ensure it was not moved in the process."
-		else
-			results = get_scan_info(scanned_object)
+		ping("Scanning complete.")
 
-		src.visible_message("<b>[name]</b> states, \"Scanning complete.\"")
-		var/obj/item/paper/P = new(src.loc)
-		P.SetName("[src] report #[++report_num]")
-		P.info = "<b>[src] analysis report #[report_num]</b><br>"
-		P.info += "<br>"
-		P.info += "\icon[scanned_object] [results]"
-		P.stamped = list(/obj/item/stamp)
-		P.queue_icon_update()
-
-		if(scanned_object && istype(scanned_object, /obj/structure/artifact))
-			var/obj/structure/artifact/A = scanned_object
-			A.anchored = 0
-			A.being_used = 0
-			clear_object()
+		stored_scan["name"] = scanned_object.name
+		stored_scan["data"] = scanned_object.get_artifact_scan_data()
+		clear_object()
 
 /obj/machinery/artifact_analyser/OnTopic(user, href_list)
+	if(..())
+		return TOPIC_HANDLED
+
 	if(href_list["begin_scan"])
 		if(!owned_scanner)
 			reconnect_scanner()
-		if(owned_scanner)
-			var/artifact_in_use = 0
-			for(var/obj/O in owned_scanner.loc)
-				if(O == owned_scanner)
-					continue
-				if(O.invisibility)
-					continue
-				if(istype(O, /obj/structure/artifact))
-					var/obj/structure/artifact/A = O
-					if(A.being_used)
-						artifact_in_use = 1
-					else
-						A.anchored = 1
-						A.being_used = 1
-
-				if(artifact_in_use)
-					src.visible_message("<b>[name]</b> states, \"Cannot scan. Too much interference.\"")
-				else
-					set_object(O)
-					scan_in_progress = 1
-					scan_completion_time = world.time + scan_duration
-					src.visible_message("<b>[name]</b> states, \"Scanning begun.\"")
-				break
-			if(!scanned_object)
-				src.visible_message("<b>[name]</b> states, \"Unable to isolate scan target.\"")
+		if(!owned_scanner)
+			state("Unable to locate the scanner pad.")
+			return
+		for(var/obj/O in owned_scanner.loc)
+			if(O == owned_scanner || O.invisibility || !O.simulated)
+				continue
+			set_object(O)
+			scanning_counter = scan_duration	
+			state("Scanning of \the [O] initiated.")
+			playsound(loc, "sound/effects/ping.ogg", 50, 1)
+			break
+		if(!scanned_object)
+			state("Unable to isolate a scan target.")
 		. = TOPIC_REFRESH
-	else if(href_list["halt_scan"])
-		scan_in_progress = 0
-		src.visible_message("<b>[name]</b> states, \"Scanning halted.\"")
+	
+	if(href_list["halt_scan"])
+		stop_scan()
+		state("Scanning halted.")
 		. = TOPIC_REFRESH
+	
+	if(href_list["print"])
+		if(length(stored_scan))
+			playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
+			var/paper_content = "<h3>[src] analysis report</h3>[stored_scan["data"]]"
+			new/obj/item/paper(get_turf(src), paper_content, "artifact report ([stored_scan["name"]])")
+		. = TOPIC_HANDLED
 
-	else if(href_list["close"])
-		close_browser(user, "window=artanalyser")
-		return TOPIC_HANDLED
-
-	if(. == TOPIC_REFRESH)
-		interact(user)
-
-//hardcoded responses, oh well
-/obj/machinery/artifact_analyser/proc/get_scan_info(var/obj/scanned_obj)
-	switch(scanned_obj.type)
-		if(/obj/machinery/auto_cloner)
-			return "Automated cloning pod - appears to rely on an artificial ecosystem formed by semi-organic nanomachines and the contained liquid.<br>The liquid resembles protoplasmic residue supportive of unicellular organism developmental conditions.<br>The structure is composed of a titanium alloy."
-		if(/obj/machinery/power/supermatter)
-			return "Superdense phoron clump - appears to have been shaped or hewn, structure is composed of matter aproximately 20 times denser than ordinary refined phoron."
-		if(/obj/structure/constructshell)
-			return "Tribal idol - subject resembles statues/emblems built by superstitious pre-warp civilisations to honour their gods. Material appears to be a rock/plastcrete composite."
-		if(/obj/machinery/giga_drill)
-			return "Automated mining drill - structure composed of titanium-carbide alloy, with tip and drill lines edged in an alloy of diamond and phoron."
-		if(/obj/structure/cult/pylon)
-			return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
-		if(/obj/machinery/replicator)
-			return "Automated construction unit - subject appears to be able to synthesize various objects given a material, some with simple internal circuitry. Method unknown."
-		if(/obj/structure/crystal)
-			return "Crystal formation - pseudo-organic crystalline matrix, unlikely to have formed naturally. No known technology exists to synthesize this exact composition."
-		if(/obj/structure/artifact)
-			var/obj/structure/artifact/A = scanned_obj
-			var/out = "Anomalous alien device - composed of an unknown alloy.<br><br>"
-
-			if(A.my_effect)
-				out += A.my_effect.getDescription()
-
-			if(A.secondary_effect && A.secondary_effect.activated)
-				out += "<br><br>Internal scans indicate ongoing secondary activity operating independently from primary systems.<br><br>"
-				out += A.secondary_effect.getDescription()
-
-			return out
-		else
-			return "[scanned_obj.name] - mundane application."
+//Overriden by subtypes to provide fluff description of object function.
+/obj/proc/get_artifact_scan_data()
+	return "[name] - mundane application."

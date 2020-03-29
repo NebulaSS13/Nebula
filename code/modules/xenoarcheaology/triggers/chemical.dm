@@ -6,6 +6,10 @@
 	if(isnull(required_chemicals))
 		required_chemicals = list(pick(/datum/reagent/acid, /datum/reagent/toxin, /datum/reagent/water))
 
+/datum/artifact_trigger/chemical/copy()
+	var/datum/artifact_trigger/chemical/C = ..()
+	C.required_chemicals = required_chemicals.Copy()
+
 /datum/artifact_trigger/chemical/on_hit(obj/O, mob/user)
 	. = ..()
 	if(istype(O, /obj/item/chems))
