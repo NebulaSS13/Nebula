@@ -82,6 +82,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/sound_id       // The associated sound id, used for cleanup
 	var/status = 0     // Paused, muted, running? Global for all listeners
 	var/listener_status// Paused, muted, running? Specific for the given listener.
+	var/base_volume    // Volume of sound before environment effects
 	var/const/SOUND_STOPPED = 0x8000
 
 	var/datum/proximity_trigger/square/proxy_listener
@@ -106,6 +107,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	src.sound       = sound
 	src.sound_id    = sound_id
 	src.preference  = preference
+	base_volume = sound.volume
 
 	if(sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token
 		var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
@@ -130,9 +132,9 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 /datum/sound_token/proc/SetVolume(var/new_volume)
 	new_volume = Clamp(new_volume, 0, 100)
-	if(sound.volume == new_volume)
+	if(base_volume == new_volume)
 		return
-	sound.volume = new_volume
+	base_volume = new_volume
 	PrivUpdateListeners()
 
 /datum/sound_token/proc/Mute()
@@ -232,6 +234,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	else if(prefer_mute)
 		listener_status[listener] &= ~SOUND_MUTE
 
+	sound.volume = adjust_volume_for_hearer(base_volume, source_turf, listener)
 	sound.x = source_turf.x - listener_turf.x
 	sound.z = source_turf.y - listener_turf.y
 	sound.y = 1
@@ -249,6 +252,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 		PrivRemoveListener(listener)
 		return
 
+	sound.volume = adjust_volume_for_hearer(base_volume, get_turf(source), listener)
 	sound.environment = PrivGetEnvironment(listener)
 	sound.status = status|listener_status[listener]
 	if(update_sound)
