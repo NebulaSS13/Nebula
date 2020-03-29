@@ -10,7 +10,7 @@
 		/datum/reagent/nutriment = 100
 	)
 
-/obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/datum/language/speaking)
+/obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/decl/language/speaking)
 	if(speaking && !speaking.machine_understands)
 		return ..()
 	var/true_text = lowertext(html_decode(text))

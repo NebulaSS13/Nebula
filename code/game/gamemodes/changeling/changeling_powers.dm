@@ -61,7 +61,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
 
 	verbs += /datum/changeling/proc/EvolutionMenu
-	add_language(LANGUAGE_CHANGELING_GLOBAL)
+	add_language(/decl/language/ling)
 
 	var/lesser_form = !ishuman(src)
 
@@ -137,7 +137,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		languages += language
 
 	//This isn't strictly necessary but just to be safe...
-	add_language(LANGUAGE_CHANGELING_GLOBAL)
+	add_language(/decl/language/ling)
 
 	return
 

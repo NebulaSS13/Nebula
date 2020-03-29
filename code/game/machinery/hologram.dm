@@ -194,7 +194,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 /*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
 For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 // Note that speaking may be null here, presumably due to echo effects/non-mob transmission.
-/obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb, datum/language/speaking)
+/obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb, decl/language/speaking)
 	if(M)
 		for(var/mob/living/silicon/ai/master in masters)
 			var/ai_text = text
@@ -227,7 +227,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			return
 		sourcepad.audible_message(message)
 
-/obj/machinery/hologram/holopad/proc/get_hear_message(name_used, text, verb, datum/language/speaking, prefix = "")
+/obj/machinery/hologram/holopad/proc/get_hear_message(name_used, text, verb, decl/language/speaking, prefix = "")
 	if(speaking)
 		return "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span>[prefix] [speaking.format_message(text, verb)]</span></i>"
 	return "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span>[prefix] [verb], <span class='message'>\"[text]\"</span></span></i>"

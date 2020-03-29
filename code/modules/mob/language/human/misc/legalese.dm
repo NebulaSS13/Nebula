@@ -1,5 +1,5 @@
-/datum/language/legal
-	name = LANGUAGE_LEGALESE
+/decl/language/legal
+	name = "Legalese"
 	desc = "A cryptic language used by interstellar bureaucrats and lawyers."
 	speech_verb = "states"
 	exclaim_verb = "objects"
@@ -7,7 +7,7 @@
 	space_chance = 100
 	key = "u"
 	partial_understanding = list(
-		LANGUAGE_HUMAN = 10
+		/decl/language/human/common = 10
 	)
 	syllables = list(
 		"hitherto", "whereof", "hereunto", "deed", "hereinbefore", "whereas", "consensus", "nonwithstanding",

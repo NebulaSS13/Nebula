@@ -1,5 +1,5 @@
 //base human language
-/datum/language/human
+/decl/language/human
 	name = "proto-sapien"
 	desc = "This is the human root language. If you have this, please tell a developer."
 	speech_verb = "says"
@@ -8,9 +8,9 @@
 	flags = WHITELISTED
 	shorthand = "???"
 	space_chance = 40
-	category = /datum/language/human
+	category = /decl/language/human
 
-/datum/language/human/get_spoken_verb(var/msg_end)
+/decl/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)
 		if("!")
 			return pick("exclaims","shouts","yells")
@@ -18,7 +18,7 @@
 			return ask_verb
 	return speech_verb
 
-/datum/language/human/get_random_name(var/gender)
+/decl/language/human/get_random_name(var/gender)
 	if (prob(80))
 		if(gender==FEMALE)
 			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
@@ -34,8 +34,8 @@
 						https://www.sttmedia.com/syllablefrequency-german
 *///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/datum/language/human/common
-	name = LANGUAGE_HUMAN
+/decl/language/human/common
+	name = "Common"
 	desc = "The common language of most human settlements."
 	speech_verb = "says"
 	whisper_verb = "whispers"

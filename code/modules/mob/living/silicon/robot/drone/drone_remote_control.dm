@@ -32,8 +32,8 @@
 	silicon_radio = new /obj/item/radio/headset/heads/ai_integrated(src)
 	//silicon_radio.recalculateChannels()
 
-	add_language(LANGUAGE_DRONE_GLOBAL, 1)
-	add_language(LANGUAGE_ROBOT_GLOBAL, 1)
+	add_language(/decl/language/binary/drone, 1)
+	add_language(/decl/language/binary, 1)
 	default_language = controlling_ai.default_language
 
 	stat = CONSCIOUS
@@ -106,7 +106,7 @@
 	QDEL_NULL(silicon_radio)
 	silicon_radio = drone_silicon_radio
 	drone_silicon_radio = null
-	default_language = all_languages[LANGUAGE_DRONE_GLOBAL]
+	default_language = /decl/language/binary/drone
 
 	verbs -= /mob/living/silicon/robot/drone/proc/release_ai_control_verb
 	full_law_reset()

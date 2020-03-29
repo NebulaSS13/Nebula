@@ -1,7 +1,6 @@
 #ifndef CONTENT_PACKAGE_DIONAEA
 #define CONTENT_PACKAGE_DIONAEA
 // BEGIN_INCLUDE
-#include "dionaea.dm"
 #include "datums\ghosttrap.dm"
 #include "datums\language.dm"
 #include "datums\loadout.dm"

@@ -25,7 +25,7 @@
 	reagents = new/datum/reagents(1000, src)
 	if(istype(loc, /obj/item/organ/internal/posibrain))
 		container = loc
-	add_language(LANGUAGE_ROBOT_GLOBAL)
+	add_language(/decl/language/binary)
 
 /mob/living/silicon/sil_brainmob/Destroy()
 	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.

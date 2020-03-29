@@ -39,13 +39,13 @@
 /obj/item/organ/internal/controller/replaced(mob/living/carbon/human/target, obj/item/organ/external/affected)
 	. = ..()
 	if(owner)
-		owner.add_language(LANGUAGE_MANTID_BROADCAST)
+		owner.add_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/removed(mob/living/user, drop_organ, detach)
 	var/mob/living/carbon/H = owner
 	. = ..()
 	if(istype(H) && H != owner && !(locate(type) in H.internal_organs))
-		H.remove_language(LANGUAGE_MANTID_BROADCAST)
+		H.remove_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/Initialize()
 	if(ispath(id_card))

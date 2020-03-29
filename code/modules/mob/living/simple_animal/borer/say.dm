@@ -20,7 +20,7 @@
 	if (copytext(message, 1, 2) == "*")
 		return emote(copytext(message, 2))
 
-	var/datum/language/L = parse_language(message)
+	var/decl/language/L = parse_language(message)
 	if(L && L.flags & HIVEMIND)
 		L.broadcast(src,trim(copytext(message,3)),src.truename)
 		return

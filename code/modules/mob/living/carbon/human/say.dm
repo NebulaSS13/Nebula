@@ -1,4 +1,4 @@
-/mob/living/carbon/human/say(var/message, var/datum/language/speaking = null, whispering)
+/mob/living/carbon/human/say(var/message, var/decl/language/speaking = null, whispering)
 	if(name != GetVoice())
 		if(get_id_name("Unknown") == GetVoice())
 			SetName(get_id_name("Unknown"))
@@ -73,7 +73,7 @@
 					say(temp)
 				winset(client, "input", "text=[null]")
 
-/mob/living/carbon/human/say_understands(var/mob/other,var/datum/language/speaking = null)
+/mob/living/carbon/human/say_understands(var/mob/other,var/decl/language/speaking = null)
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return 1
@@ -128,7 +128,7 @@
 		return mind.changeling.mimicing
 	return real_name
 
-/mob/living/carbon/human/say_quote(var/message, var/datum/language/speaking = null)
+/mob/living/carbon/human/say_quote(var/message, var/decl/language/speaking = null)
 	var/verb = "says"
 	var/ending = copytext(message, length(message))
 
@@ -221,7 +221,9 @@
 		return returns
 	return ..()
 
-/mob/living/carbon/human/can_speak(datum/language/speaking)
+/mob/living/carbon/human/can_speak(decl/language/speaking)
+	if(ispath(speaking, /decl/language))
+		speaking = decls_repository.get_decl(speaking)
 	if(species && speaking && (speaking.name in species.assisted_langs))
 		for(var/obj/item/organ/internal/voicebox/I in src.internal_organs)
 			if(I.is_usable() && I.assists_languages[speaking])
@@ -232,11 +234,11 @@
 /mob/living/carbon/human/parse_language(var/message)
 	var/prefix = copytext(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
-		return all_languages["Noise"]
+		return decls_repository.get_decl(/decl/language/noise)
 
 	if(length(message) >= 2 && is_language_prefix(prefix))
 		var/language_prefix = lowertext(copytext(message, 2 ,3))
-		var/datum/language/L = language_keys[language_prefix]
+		var/decl/language/L = SSlore.get_language_by_key(language_prefix)
 		if (can_speak(L))
 			return L
 

@@ -3,7 +3,7 @@
 		"Service" = TRUE
 	)
 	languages = list(
-		LANGUAGE_HUMAN       = TRUE
+		/decl/language/human/common = TRUE
 	)
 	skills = list(
 		SKILL_LITERACY            = SKILL_ADEPT,

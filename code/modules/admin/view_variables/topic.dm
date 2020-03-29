@@ -343,7 +343,8 @@
 			to_chat(usr, "This can only be done to instances of type /mob")
 			return
 
-		var/new_language = input("Please choose a language to add.","Language",null) as null|anything in all_languages
+		var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
+		var/new_language = input("Please choose a language to add.","Language",null) as null|anything in language_types
 
 		if(!new_language)
 			return
@@ -369,7 +370,7 @@
 			to_chat(usr, "This mob knows no languages.")
 			return
 
-		var/datum/language/rem_language = input("Please choose a language to remove.","Language",null) as null|anything in H.languages
+		var/decl/language/rem_language = input("Please choose a language to remove.","Language",null) as null|anything in H.languages
 
 		if(!rem_language)
 			return

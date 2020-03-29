@@ -51,9 +51,9 @@
 	)
 
 	languages = list(
-		LANGUAGE_MANTID_VOCAL     = TRUE,
-		LANGUAGE_MANTID_NONVOCAL  = TRUE,
-		LANGUAGE_MANTID_BROADCAST = TRUE
+		/decl/language/mantid          = TRUE,
+		/decl/language/mantid/nonvocal = TRUE,
+		/decl/language/mantid/worldnet = TRUE
 	)
 
 	skills = list(
@@ -155,8 +155,8 @@
 
 /mob/living/silicon/robot/flying/ascent/Initialize()
 	. = ..()
-	remove_language(LANGUAGE_ROBOT_GLOBAL)
-	default_language = all_languages[LANGUAGE_MANTID_NONVOCAL]
+	remove_language(/decl/language/binary)
+	default_language = /decl/language/mantid/nonvocal
 
 /mob/living/silicon/robot/flying/ascent/initialize_components()
 	components["actuator"] =       new/datum/robot_component/actuator/ascent(src)

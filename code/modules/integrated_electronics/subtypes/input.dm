@@ -876,7 +876,7 @@
 	GLOB.listening_objects -= src
 	. = ..()
 
-/obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M, text, verb, datum/language/speaking)
+/obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M, text, verb, decl/language/speaking)
 	var/translated = TRUE
 	if(M && text)
 		if(speaking && !speaking.machine_understands)
@@ -887,7 +887,7 @@
 
 	push_data()
 	activate_pin(1)
-	if(translated && !(speaking.name == LANGUAGE_HUMAN))
+	if(translated && !(speaking.type == /decl/language/human/common))
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/sensor

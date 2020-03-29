@@ -49,7 +49,7 @@
 
 	to_chat(worm, SPAN_DANGER("You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system."))
 	to_chat(worm.host, SPAN_DANGER("You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours."))
-	worm.host.add_language(LANGUAGE_BORER_GLOBAL)
+	worm.host.add_language(/decl/language/corticalborer)
 
 	// host -> brain
 	var/h2b_id = worm.host.computer_id

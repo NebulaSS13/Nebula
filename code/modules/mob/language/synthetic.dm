@@ -1,5 +1,5 @@
-/datum/language/binary
-	name = LANGUAGE_ROBOT_GLOBAL
+/decl/language/binary
+	name = "Robot Talk"
 	desc = "Most human facilities support free-use communications protocols and routing hubs for synthetic use."
 	colour = "say_quote"
 	speech_verb = "states"
@@ -10,7 +10,7 @@
 	shorthand = "N/A"
 	var/drone_only
 
-/datum/language/binary/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/decl/language/binary/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
 	if(!speaker.binarycheck())
 		return
@@ -52,8 +52,8 @@
 		var/datum/robot_component/C = R.components["comms"]
 		R.cell_use_power(C.active_usage)
 
-/datum/language/binary/drone
-	name = LANGUAGE_DRONE_GLOBAL
+/decl/language/binary/drone
+	name = "Drone Talk"
 	desc = "A heavily encoded damage control coordination stream."
 	speech_verb = "transmits"
 	ask_verb = "transmits"

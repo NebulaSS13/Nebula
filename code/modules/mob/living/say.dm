@@ -86,7 +86,7 @@ proc/get_radio_key_from_channel(var/channel)
 		if(dongle.translate_binary) return 1
 
 /mob/living/proc/get_default_language()
-	return default_language
+	. = ispath(default_language, /decl/language) && decls_repository.get_decl(default_language)
 
 /mob/proc/is_muzzled()
 	return istype(wear_mask, /obj/item/clothing/mask/muzzle)
@@ -152,7 +152,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 	return html_encode(message)
 
-/mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", whispering)
+/mob/living/say(var/message, var/decl/language/speaking = null, var/verb="says", var/alt_name="", whispering)
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
 			to_chat(src, "<span class='warning'>You cannot speak in IC (Muted).</span>")
@@ -330,7 +330,7 @@ proc/get_radio_key_from_channel(var/channel)
 		log_say("[name]/[key] : [message]")
 	return 1
 
-/mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
+/mob/living/proc/say_signlang(var/message, var/verb="gestures", var/decl/language/language)
 	for (var/mob/O in viewers(src, null))
 		O.hear_signlang(message, verb, language, src)
 	return 1

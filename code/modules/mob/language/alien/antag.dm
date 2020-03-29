@@ -1,5 +1,5 @@
-/datum/language/ling
-	name = LANGUAGE_CHANGELING_GLOBAL
+/decl/language/ling
+	name = "Changeling"
 	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
 	speech_verb = "says"
 	colour = "changeling"
@@ -8,15 +8,15 @@
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 
-/datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/decl/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
 	if(speaker.mind && speaker.mind.changeling)
 		..(speaker,message,speaker.mind.changeling.changelingID)
 	else
 		..(speaker,message)
 
-/datum/language/corticalborer
-	name = LANGUAGE_BORER_GLOBAL
+/decl/language/corticalborer
+	name = "Cortical Link"
 	desc = "Cortical borers possess a strange link between their tiny minds."
 	speech_verb = "sings"
 	ask_verb = "sings"
@@ -27,7 +27,7 @@
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 
-/datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/decl/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
 	var/mob/living/simple_animal/borer/B
 
@@ -46,8 +46,8 @@
 		speaker_mask = B.truename
 	..(speaker,message,speaker_mask)
 
-/datum/language/cultcommon
-	name = LANGUAGE_CULT
+/decl/language/cultcommon
+	name = "Cult"
 	desc = "The chants of the occult, the incomprehensible."
 	speech_verb = "intones"
 	ask_verb = "intones"
@@ -67,8 +67,8 @@
 	shorthand = "CT"
 	hidden_from_codex = TRUE
 
-/datum/language/cult
-	name = LANGUAGE_CULT_GLOBAL
+/decl/language/cult
+	name = "Occult"
 	desc = "The initiated can share their thoughts by means defying all reason."
 	speech_verb = "intones"
 	ask_verb = "intones"
@@ -79,8 +79,8 @@
 	shorthand = "N/A"
 	hidden_from_codex = TRUE
 
-/datum/language/alium
-	name = LANGUAGE_ALIUM
+/decl/language/alium
+	name = "Alium"
 	colour = "cult"
 	speech_verb = "hisses"
 	key = "c"
@@ -92,11 +92,11 @@
 	shorthand = "AL"
 	hidden_from_codex = TRUE
 
-/datum/language/alium/New()
+/decl/language/alium/New()
 	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
 	..()
 
-/datum/language/alium/get_random_name()
+/decl/language/alium/get_random_name()
 	var/new_name = ""
 	var/length = rand(1,3)
 	for(var/i=0 to length)

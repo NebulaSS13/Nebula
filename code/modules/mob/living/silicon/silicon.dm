@@ -47,8 +47,8 @@
 	if(silicon_camera)
 		silicon_camera = new silicon_camera(src)
 
-	add_language(LANGUAGE_HUMAN)
-	default_language = all_languages[LANGUAGE_HUMAN]
+	add_language(/decl/language/human/common)
+	default_language = /decl/language/human/common
 	init_id()
 	init_subsystems()
 
@@ -175,11 +175,13 @@
 
 //Silicon mob language procs
 
-/mob/living/silicon/can_speak(datum/language/speaking)
+/mob/living/silicon/can_speak(decl/language/speaking)
 	return universal_speak || (speaking in src.speech_synthesizer_langs)	//need speech synthesizer support to vocalize a language
 
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
-	var/datum/language/added_language = all_languages[language]
+	if(!ispath(language, /decl/language))
+		return
+	var/decl/language/added_language = decls_repository.get_decl(language)
 	if(!added_language)
 		return
 
@@ -189,7 +191,9 @@
 		return 1
 
 /mob/living/silicon/remove_language(var/rem_language)
-	var/datum/language/removed_language = all_languages[rem_language]
+	if(!ispath(rem_language, /decl/language))
+		return
+	var/decl/language/removed_language = decls_repository.get_decl(rem_language)
 	if(!removed_language)
 		return
 
@@ -204,9 +208,10 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	if(default_language)
-		dat += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
+		var/decl/language/lang = decls_repository.get_decl(default_language)
+		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
-	for(var/datum/language/L in languages)
+	for(var/decl/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
 			var/default_str
 			if(L == default_language)

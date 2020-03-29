@@ -213,8 +213,9 @@ var/global/floorIsLava = 0
 	// language toggles
 	body += "<br><br><b>Languages:</b><br>"
 	var/f = 1
-	for(var/k in all_languages)
-		var/datum/language/L = all_languages[k]
+	var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
+	for(var/k in language_types)
+		var/decl/language/L = language_types[k]
 		if(!(L.flags & INNATE))
 			if(!f) body += " | "
 			else f = 0

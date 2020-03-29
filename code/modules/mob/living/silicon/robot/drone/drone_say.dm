@@ -14,7 +14,7 @@
 			return emote(copytext(message,2))
 
 		if(copytext(message,1,2) == ";")
-			var/datum/language/L = all_languages[LANGUAGE_DRONE_GLOBAL]
+			var/decl/language/L = decls_repository.get_decl(/decl/language/binary/drone)
 			if(istype(L))
 				return L.broadcast(src,trim(copytext(message,2)))
 

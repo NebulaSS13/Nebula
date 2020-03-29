@@ -10,7 +10,7 @@
 	var/channels = list()
 	var/networks = list()
 	var/languages = list(
-		LANGUAGE_HUMAN = 1
+		/decl/language/human/common = 1
 		)
 	var/sprites = list()
 	var/can_be_pushed = 1
@@ -159,7 +159,7 @@
 
 /obj/item/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
 	// Stores the languages as they were before receiving the module, and whether they could be synthezized.
-	for(var/datum/language/language_datum in R.languages)
+	for(var/decl/language/language_datum in R.languages)
 		original_languages[language_datum] = (language_datum in R.speech_synthesizer_langs)
 
 	for(var/language in languages)
@@ -172,7 +172,7 @@
 
 	// Then add back all the original languages, and the relevant synthezising ability
 	for(var/original_language in original_languages)
-		var/datum/language/language_datum = original_language
+		var/decl/language/language_datum = original_language
 		R.add_language(language_datum.name, original_languages[original_language])
 	original_languages.Cut()
 

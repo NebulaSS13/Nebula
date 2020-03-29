@@ -62,8 +62,8 @@ var/list/whitelist = list()
 	if(check_rights(R_ADMIN, 0, M))
 		return 1
 
-	if(istype(species,/datum/language))
-		var/datum/language/L = species
+	if(istype(species,/decl/language))
+		var/decl/language/L = species
 		if(!(L.flags & (WHITELISTED|RESTRICTED)))
 			return 1
 		return whitelist_lookup(L.name, M.ckey)
