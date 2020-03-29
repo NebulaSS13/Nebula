@@ -1,0 +1,37 @@
+
+
+<div class='item'>
+	<div class="itemLabel">
+		Cell charge:
+	</div>
+	<div class="itemContent">
+		{{if (data.charge < 33)}}
+			{{:helper.displayBar(data.charge, 0, 100, 'bad')}}
+		{{else (data.charge < 66)}}
+			{{:helper.displayBar(data.charge, 0, 100, 'average')}}
+		{{else}}
+			{{:helper.displayBar(data.charge, 0, 100, 'good')}}
+		{{/if}}
+		{{:data.charge}}%
+	</div>
+</div><div class='item'>
+	<div class="itemLabel">
+		Field status:
+	</div>
+	<div class="itemContent">
+		{{if data.active}}
+			Active
+		{{else}}
+			Disabled
+		{{/if}}
+	</div>
+</div>
+<div class='item'>
+	{{:helper.link('Toggle Field', 'power' ,{ 'toggle_field' : 1 }, data.locked ? 'redButton' : null, null)}}
+	{{if data.locked}}
+		<div class='bad'>
+			Controls ID locked.
+		</div>
+	{{/if}}
+</div>
+<div class='footer'>Always wear safety gear and consult a field manual before operation.</div>

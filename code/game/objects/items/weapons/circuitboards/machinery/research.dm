@@ -134,7 +134,8 @@
 		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/battery/buildable/stock = 1,
-		/obj/item/cell/high = 1
+		/obj/item/cell/high = 1,
+		/obj/item/stock_parts/access_lock/buildable = 1
 	)
 
 /obj/item/stock_parts/circuitboard/artifact_harvester
