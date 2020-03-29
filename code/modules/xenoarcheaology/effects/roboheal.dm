@@ -7,34 +7,28 @@
 	effect_type = pick(EFFECT_ELECTRO, EFFECT_PARTICLE)
 
 /datum/artifact_effect/roboheal/DoEffectTouch(var/mob/user)
-	if(user)
-		if (istype(user, /mob/living/silicon/robot))
-			var/mob/living/silicon/robot/R = user
-			to_chat(R, "<span class='notice'>Your systems report damaged components mending by themselves!</span>")
-			R.adjustBruteLoss(rand(-10,-30))
-			R.adjustFireLoss(rand(-10,-30))
-			return 1
+	if(istype(user, /mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = user
+		to_chat(R, "<span class='notice'>Your systems report damaged components mending by themselves!</span>")
+		R.heal_overall_damage(rand(10,30), rand(10,30))
+		return 1
 
 /datum/artifact_effect/roboheal/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/silicon/robot/M in range(src.effectrange,T))
+		for (var/mob/living/silicon/robot/M in range(effectrange,T))
 			if(world.time - last_message > 200)
 				to_chat(M, "<span class='notice'>SYSTEM ALERT: Beneficial energy field detected!</span>")
 				last_message = world.time
-			M.adjustBruteLoss(-1)
-			M.adjustFireLoss(-1)
-			M.updatehealth()
+			M.heal_overall_damage(1, 1)
 		return 1
 
 /datum/artifact_effect/roboheal/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/silicon/robot/M in range(src.effectrange,T))
+		for (var/mob/living/silicon/robot/M in range(effectrange,T))
 			if(world.time - last_message > 200)
 				to_chat(M, "<span class='notice'>SYSTEM ALERT: Structural damage has been repaired by energy pulse!</span>")
 				last_message = world.time
-			M.adjustBruteLoss(-10)
-			M.adjustFireLoss(-10)
-			M.updatehealth()
+			M.heal_overall_damage(10, 10)
 		return 1

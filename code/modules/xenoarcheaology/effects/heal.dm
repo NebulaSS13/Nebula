@@ -3,61 +3,34 @@
 	effect_type = EFFECT_ORGANIC
 
 /datum/artifact_effect/heal/DoEffectTouch(var/mob/toucher)
-	//todo: check over this properly
-	if(toucher && iscarbon(toucher))
-		var/weakness = GetAnomalySusceptibility(toucher)
-		if(prob(weakness * 100))
-			var/mob/living/carbon/C = toucher
-			to_chat(C, "<span class='notice'>You feel a soothing energy invigorate you.</span>")
-
-			if(ishuman(toucher))
-				var/mob/living/carbon/human/H = toucher
-				for(var/obj/item/organ/external/affecting in H.organs)
-					if(affecting && istype(affecting))
-						affecting.heal_damage(25 * weakness, 25 * weakness)
-				//H:heal_organ_damage(25, 25)
-				H.vessel.add_reagent(/datum/reagent/blood,5)
-				H.adjust_nutrition(50 * weakness)
-				H.adjustBrainLoss(-25 * weakness)
-				H.radiation -= min(H.radiation, 25 * weakness)
-				H.bodytemperature = initial(H.bodytemperature)
-				H.fixblood()
-			//
-			C.adjustOxyLoss(-25 * weakness)
-			C.adjustToxLoss(-25 * weakness)
-			C.adjustBruteLoss(-25 * weakness)
-			C.adjustFireLoss(-25 * weakness)
-			//
-			C.regenerate_icons()
-			return 1
+	if(iscarbon(toucher))
+		heal(toucher, 25, 1)
+		return 1
 
 /datum/artifact_effect/heal/DoEffectAura()
-	//todo: check over this properly
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/C in range(src.effectrange,T))
-			var/weakness = GetAnomalySusceptibility(C)
-			if(prob(weakness * 100))
-				if(prob(10))
-					to_chat(C, "<span class='notice'>You feel a soothing energy radiating from something nearby.</span>")
-				C.adjustBruteLoss(-1 * weakness)
-				C.adjustFireLoss(-1 * weakness)
-				C.adjustToxLoss(-1 * weakness)
-				C.adjustOxyLoss(-1 * weakness)
-				C.adjustBrainLoss(-1 * weakness)
-				C.updatehealth()
+			heal(C, 1)
 
 /datum/artifact_effect/heal/DoEffectPulse()
-	//todo: check over this properly
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(src.effectrange,T))
-			var/weakness = GetAnomalySusceptibility(C)
-			if(prob(weakness * 100))
-				to_chat(C, "<span class='notice'>A wave of energy invigorates you.</span>")
-				C.adjustBruteLoss(-5 * weakness)
-				C.adjustFireLoss(-5 * weakness)
-				C.adjustToxLoss(-5 * weakness)
-				C.adjustOxyLoss(-5 * weakness)
-				C.adjustBrainLoss(-5 * weakness)
-				C.updatehealth()
+		for (var/mob/living/carbon/C in range(effectrange,T))
+			heal(C, 5)
+
+//todo: check over this properly
+/datum/artifact_effect/heal/proc/heal(mob/living/carbon/C, amount, strong)
+	var/weakness = GetAnomalySusceptibility(C)
+	if(prob(weakness * 100))
+		to_chat(C, "<span class='notice'>A wave of energy invigorates you.</span>")
+		var/force = amount * weakness
+		C.apply_damages(-force, -force, -force, -force)
+		C.adjustBrainLoss(-force)
+		if(strong)
+			C.apply_radiation(-25 * weakness)
+			C.bodytemperature = initial(C.bodytemperature)
+			C.adjust_nutrition(50 * weakness)
+			if(ishuman(C))
+				var/mob/living/carbon/human/H = C
+				H.regenerate_blood(5 * weakness)
