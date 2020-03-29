@@ -2956,6 +2956,7 @@
 #include "code\modules\xenoarcheaology\misc.dm"
 #include "code\modules\xenoarcheaology\sampling.dm"
 #include "code\modules\xenoarcheaology\artifacts\artifact.dm"
+#include "code\modules\xenoarcheaology\artifacts\artifact_appearance.dm"
 #include "code\modules\xenoarcheaology\artifacts\artifact_find.dm"
 #include "code\modules\xenoarcheaology\artifacts\autocloner.dm"
 #include "code\modules\xenoarcheaology\artifacts\crystal.dm"
