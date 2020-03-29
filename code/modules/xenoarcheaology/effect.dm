@@ -19,7 +19,7 @@
 	trigger = new triggertype
 
 	//this will be replaced by the excavation code later, but it's here just in case
-	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
+	artifact_id = "[pick(GLOB.greek_letters)]-[rand(100,999)]"
 
 	//random charge time and distance
 	switch(pick(100;1, 50;2, 25;3))
@@ -48,9 +48,7 @@
 		else
 			activated = 1
 		if(reveal_toggle && holder)
-			if(istype(holder, /obj/structure/artifact))
-				var/obj/structure/artifact/A = holder
-				A.icon_state = "ano[A.icon_num][activated]"
+			holder.update_icon()
 			var/display_msg
 			if(activated)
 				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")

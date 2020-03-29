@@ -3,7 +3,7 @@
 	desc = "A large alien device."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "ano00"
-	var/icon_num = 0
+	var/base_icon = "ano0"
 	density = 1
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
@@ -12,35 +12,30 @@
 /obj/structure/artifact/Initialize()
 	. = ..()
 
-	var/effecttype = pick(typesof(/datum/artifact_effect) - /datum/artifact_effect)
+	var/effecttype = pick(subtypesof(/datum/artifact_effect))
 	my_effect = new effecttype(src)
 
 	if(prob(75))
-		effecttype = pick(typesof(/datum/artifact_effect) - /datum/artifact_effect)
+		effecttype = pick(subtypesof(/datum/artifact_effect))
 		secondary_effect = new effecttype(src)
 		if(prob(75))
 			secondary_effect.ToggleActivate(0)
 
 	START_PROCESSING(SSobj, src)
 
-	icon_num = rand(0, 11)
+	var/list/styles = decls_repository.get_decls_of_type(/decl/artifact_appearance)
+	var/decl/artifact_appearance/style = pick(styles)
+	style = styles[style]
+	style.apply_to(src)
 
-	icon_state = "ano[icon_num]0"
-	if(icon_num == 7 || icon_num == 8)
-		name = "large crystal"
-		desc = pick("It shines faintly as it catches the light.",
-		"It appears to have a faint inner glow.",
-		"It seems to draw you inward as you look it at.",
-		"Something twinkles faintly as you look at it.",
-		"It's mesmerizing to behold.")
-	else if(icon_num == 9)
-		name = "alien computer"
-		desc = "It is covered in strange markings."
-	else if(icon_num == 10)
-		desc = "A large alien device, there appear to be some kind of vents in the side."
-	else if(icon_num == 11)
-		name = "sealed alien pod"
-		desc = "A strange alien device."
+/obj/structure/artifact/proc/is_active()
+	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
+		if(effect.activated)
+			return TRUE
+	return FALSE
+
+/obj/structure/artifact/on_update_icon()
+	icon_state = "[base_icon][is_active()]"
 
 /obj/structure/artifact/Destroy()
 	QDEL_NULL(my_effect)
