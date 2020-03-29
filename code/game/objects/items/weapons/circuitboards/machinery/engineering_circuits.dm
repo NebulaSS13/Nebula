@@ -26,3 +26,23 @@
 /obj/item/stock_parts/circuitboard/pipedispensor/disposal
 	name = T_BOARD("disposal pipe dispenser")
 	build_path = /obj/machinery/fabricator/pipe/disposal
+
+/obj/item/stock_parts/circuitboard/suit_cycler
+	name = T_BOARD("suit cycler")
+	build_path = /obj/machinery/suit_cycler
+	board_type = "machine"
+	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_MATERIAL + "':4}"
+	req_components = list()
+	additional_spawn_components = list(
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+	buildtype_select = TRUE
+
+/obj/item/stock_parts/circuitboard/suit_cycler/get_buildable_types()
+	. = list()
+	for(var/path in typesof(/obj/machinery/suit_cycler))
+		var/obj/machinery/suit_cycler/suit = path
+		if(initial(suit.buildable))
+			. |= path

@@ -55,6 +55,12 @@
 
 	wires = /datum/wires/suit_cycler
 
+	stat_immune = 0
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	base_type = /obj/machinery/suit_cycler
+	var/buildable = TRUE // Whether this subtype shows up as an option when multitooling circuitboards
+
 /obj/machinery/suit_cycler/on_update_icon()
 
 	var/new_overlays
@@ -82,18 +88,19 @@
 
 	overlays = new_overlays
 
-/obj/machinery/suit_cycler/Initialize()
+/obj/machinery/suit_cycler/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(!length(available_modifications) || !length(species))
 		crash_with("Invalid setup: [log_info_line(src)]")
 		return INITIALIZE_HINT_QDEL
 
-	if(ispath(suit))
-		suit = new suit(src)
-	if(ispath(helmet))
-		helmet = new helmet(src)
-	if(ispath(boots))
-		boots = new boots(src)
+	if(populate_parts)
+		if(ispath(suit))
+			suit = new suit(src)
+		if(ispath(helmet))
+			helmet = new helmet(src)
+		if(ispath(boots))
+			boots = new boots(src)
 
 	available_modifications = list_values(decls_repository.get_decls(available_modifications))
 
@@ -158,14 +165,6 @@
 			updateUsrDialog()
 			return
 
-	else if(isScrewdriver(I))
-
-		panel_open = !panel_open
-		to_chat(user, "You [panel_open ?  "open" : "close"] the maintenance panel.")
-		update_icon()
-		updateUsrDialog()
-		return
-
 	else if(istype(I, /obj/item/clothing/shoes/magboots))
 		if(locked)
 			to_chat(user, SPAN_WARNING("The suit cycler is locked."))
@@ -225,7 +224,7 @@
 		updateUsrDialog()
 		return
 
-	..()
+	return ..()
 
 /obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged)

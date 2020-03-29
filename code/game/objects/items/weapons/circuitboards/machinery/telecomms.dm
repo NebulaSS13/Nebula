@@ -72,3 +72,13 @@
 							/obj/item/stock_parts/subspace/analyzer = 1,
 							/obj/item/stock_parts/subspace/amplifier = 1,
 							/obj/item/stock_parts/subspace/crystal = 1)
+
+/obj/item/stock_parts/circuitboard/telecomms/message_server
+	name = T_BOARD("message server")
+	build_path = /obj/machinery/message_server
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':4}";
+	req_components = list(
+							/obj/item/stock_parts/subspace/ansible = 1,
+							/obj/item/stock_parts/subspace/filter = 1,
+							/obj/item/stock_parts/subspace/treatment = 2,
+							/obj/item/stock_parts/subspace/analyzer = 1)

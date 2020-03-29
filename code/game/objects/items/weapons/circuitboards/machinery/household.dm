@@ -60,6 +60,25 @@
 	build_path = /obj/machinery/seed_extractor
 	board_type = "machine"
 
+/obj/item/stock_parts/circuitboard/seed_storage
+	name = T_BOARD("seed storage")
+	build_path = /obj/machinery/seed_storage
+	board_type = "machine"
+	origin_tech = "{'" + TECH_BIO + "':2,'" + TECH_ENGINEERING + "':3}"
+	req_components = list(
+		/obj/item/stock_parts/manipulator = 2,
+		/obj/item/stock_parts/matter_bin = 2)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+
+/obj/item/stock_parts/circuitboard/seed_storage/advanced
+	name = T_BOARD("seed storage (scientific)")
+	build_path = /obj/machinery/seed_storage/xenobotany/buildable
+	origin_tech = "{'" + TECH_BIO + "':6,'" + TECH_ENGINEERING + "':3}"
+
 /obj/item/stock_parts/circuitboard/washer
 	name = T_BOARD("washing machine")
 	build_path = /obj/machinery/washing_machine

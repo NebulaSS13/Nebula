@@ -17,6 +17,10 @@
 		return 1
 	return 0
 
+/datum/seed_pile/Destroy()
+	seeds = null
+	. = ..()
+
 /obj/machinery/seed_storage
 	name = "Seed storage"
 	desc = "It stores, sorts, and dispenses seeds."
@@ -25,6 +29,12 @@
 	density = 1
 	anchored = 1
 	idle_power_usage = 100
+	obj_flags = OBJ_FLAG_ANCHORABLE
+
+	base_type = /obj/machinery/seed_storage
+	stat_immune = 0
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/list/datum/seed_pile/piles = list()
 	var/list/starting_seeds = list()
@@ -39,6 +49,10 @@
 		for (var/i = 1 to amount)
 			var/O = new typepath
 			add(O)
+
+/obj/machinery/seed_storage/Destroy()
+	QDEL_NULL_LIST(piles)
+	. = ..()	
 
 /obj/machinery/seed_storage/random // This is mostly for testing, but I guess admins could spawn it
 	name = "Random seed storage"
@@ -101,6 +115,7 @@
 /obj/machinery/seed_storage/xenobotany
 	name = "Xenobotany seed storage"
 	scanner = list("stats", "produce", "soil", "temperature", "light")
+	base_type = /obj/machinery/seed_storage/xenobotany/buildable
 	starting_seeds = list(
 		/obj/item/seeds/appleseed = 15,
 		/obj/item/seeds/bananaseed = 15,
@@ -151,6 +166,9 @@
 		/obj/item/seeds/algaeseed = 15,
 		/obj/item/seeds/random = 2
 	)
+
+/obj/machinery/seed_storage/xenobotany/buildable
+	starting_seeds = list()
 
 /obj/machinery/seed_storage/interface_interact(mob/user)
 	interact(user)
@@ -301,7 +319,7 @@
 		add(O)
 		user.visible_message("[user] puts \the [O.name] into \the [src].", "You put \the [O] into \the [src].")
 		return
-	else if (istype(O, /obj/item/storage/plants))
+	if (istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/P = O
 		var/loaded = 0
 		for(var/obj/item/seeds/G in P.contents)
@@ -314,10 +332,7 @@
 		else
 			to_chat(user, "<span class='notice'>There are no seeds in \the [O.name].</span>")
 		return
-	else if(isWrench(O))
-		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-		anchored = !anchored
-		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
+	return ..()
 
 /obj/machinery/seed_storage/proc/add(var/obj/item/seeds/O, bypass_removal = 0)
 	if(!bypass_removal)
@@ -343,3 +358,15 @@
 	piles += new /datum/seed_pile(O, newID)
 	flick("[initial(icon_state)]-vend", src)
 	return
+
+/obj/machinery/seed_storage/cannot_transition_to(state_path, mob/user)
+	if(state_path == /decl/machine_construction/default/deconstructed)
+		var/alert = alert(user, "Are you certain you wish to deconstruct this? It will destroy all seeds stored inside!", "Deconstruct Warning", "Yes",  "No")
+		if(alert != "Yes" || !CanPhysicallyInteract(user))
+			return MCS_BLOCK
+	return ..()
+
+/obj/machinery/seed_storage/dismantle()
+	for(var/obj/item/seeds/seed in src)
+		qdel(seed) // ..() would dump them; this would cause lots of client lag. We did warn them above...
+	return ..()
