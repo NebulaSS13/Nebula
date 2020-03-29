@@ -15,7 +15,7 @@
 	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/custom_emote))
 		return emote(copytext(message,2))
 
-	var/datum/language/speaking = parse_language(message)
+	var/decl/language/speaking = parse_language(message)
 
 	message = trim(message)
 

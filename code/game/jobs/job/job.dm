@@ -73,10 +73,10 @@
 
 	if (required_language)
 		H.add_language(required_language)
-		H.set_default_language(all_languages[required_language])
+		H.set_default_language(required_language)
 
-	H.add_language(LANGUAGE_HUMAN)
-	H.set_default_language(all_languages[LANGUAGE_HUMAN])
+	H.add_language(/decl/language/human/common)
+	H.set_default_language(/decl/language/human/common)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit) . = outfit.equip(H, title, alt_title)
 

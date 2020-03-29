@@ -6,7 +6,7 @@
 		"Supply" = TRUE
 		)
 	languages = list(
-		LANGUAGE_HUMAN     = TRUE
+		/decl/language/human/common = TRUE
 	)
 	sprites = list("Drone" = "drone-service")
 	equipment = list(

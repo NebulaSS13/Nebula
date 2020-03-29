@@ -55,7 +55,7 @@
 		. = TOPIC_REFRESH
 	. = ..()
 
-/obj/structure/deity/pylon/hear_talk(mob/M, text, verb, datum/language/speaking)
+/obj/structure/deity/pylon/hear_talk(mob/M, text, verb, decl/language/speaking)
 	if(!linked_god)
 		return
 	if(linked_god.pylon != src)

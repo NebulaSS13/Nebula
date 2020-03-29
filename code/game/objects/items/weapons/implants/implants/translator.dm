@@ -16,17 +16,17 @@
 	. = ..()
 	GLOB.listening_objects += src
 
-/obj/item/implant/translator/hear_talk(mob/M, msg, verb, datum/language/speaking)
+/obj/item/implant/translator/hear_talk(mob/M, msg, verb, decl/language/speaking)
 	if(!imp_in)
 		return
-	if (languages.len == max_languages)
+	if(length(languages) == max_languages)
 		return
 	if(!languages[speaking.name])
 		languages[speaking.name] = 1
 	languages[speaking.name] = languages[speaking.name] + 1
 	if(!imp_in.say_understands(M, speaking) && languages[speaking.name] > learning_threshold)
 		to_chat(imp_in, SPAN_NOTICE("You feel like you can understand [speaking.name] now..."))
-		imp_in.add_language(speaking.name)
+		imp_in.add_language(speaking.type)
 
 /obj/item/implant/translator/implanted(mob/target)
 	return TRUE

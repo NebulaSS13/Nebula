@@ -82,7 +82,7 @@
 	card = loc
 
 	//As a human made device, we'll understand sol common without the need of the translator
-	add_language(LANGUAGE_HUMAN, 1)
+	add_language(/decl/language/human/common, 1)
 
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs

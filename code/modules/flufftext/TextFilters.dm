@@ -90,9 +90,7 @@ distortion - starting distortion.
 english_only - whether to use traditional english letters only (for use in NanoUI)
 */
 proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_speed = 1, distortion = 1, english_only = 0)
-	var/datum/language/language
-	if(user)
-		language = user.get_default_language()
+	var/decl/language/language = user?.get_default_language()
 	message = html_decode(message)
 	var/new_message = ""
 	var/input_size = length(message)

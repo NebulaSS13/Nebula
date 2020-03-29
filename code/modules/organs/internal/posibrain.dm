@@ -41,7 +41,7 @@
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
-		brainmob.add_language(LANGUAGE_HUMAN)
+		brainmob.add_language(/decl/language/human/common)
 
 /obj/item/organ/internal/posibrain/Destroy()
 	QDEL_NULL(brainmob)

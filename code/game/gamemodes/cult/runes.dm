@@ -87,8 +87,8 @@
 
 //Makes the speech a proc so all verbal components can be easily manipulated as a whole, or individually easily
 /obj/effect/rune/proc/speak_incantation(var/mob/living/user, var/incantation)
-	var/datum/language/L = all_languages[LANGUAGE_CULT]
-	if(incantation && (L in user.languages))
+	var/decl/language/L = decls_repository.get_decl(/decl/language/cultcommon)
+	if(istype(L) && incantation && (L in user.languages))
 		user.say(incantation, L)
 
 /* Tier 1 runes below */

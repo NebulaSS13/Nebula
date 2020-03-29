@@ -88,7 +88,7 @@
 								"[pick("Monkeys","Doors")] are part of the crew, too. Make sure they are treated humanely.",
 								"Everything on the [location_name()]'s is now some form of a donut pastry. Donuts are not to be consumed.",
 								"Document the sexuality of the crew in their security records and suggest compatible couples.",
-								"You may only communicate with the crew using the following language: [get_random_language(S)]",
+								"You may only communicate with the crew using the following language: [get_random_language(S)].",
 								"You are now a parrot. Repeat what you hear to the crew, and do not forget to ask for crackers.",
 								"You are a Magic 8-ball. Always respond with variants of \"Yes\", \"No\", \"Maybe\", or \"Ask again later.\".",
 								"The [location_name()] is a day care and the crew are children. Treat them appropriately until their parents come to pick them up.",
@@ -155,16 +155,16 @@
 
 /datum/event/ionstorm/proc/get_random_language(var/mob/living/silicon/S)
 	var/list/languages = S.speech_synthesizer_langs.Copy()
-	for(var/datum/language/L in languages)
-		if(L == S.default_language)
+	for(var/decl/language/L in languages)
+		if(L.type == S.default_language)
 			languages -= L
 		// Also removing any languages that won't work well over radio.
 		// A synth is unlikely to have any besides Binary, but we're playing it safe
 		else if(L.flags & (HIVEMIND|NONVERBAL|SIGNLANG))
 			languages -= L
 
-	if(languages.len)
-		var/datum/language/L = pick(languages)
+	if(length(languages))
+		var/decl/language/L = pick(languages)
 		return L.name
 	else // Highly unlikely but it is a failsafe fallback.
-		return "Gibberish."
+		return "gibberish"

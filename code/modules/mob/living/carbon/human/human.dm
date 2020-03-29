@@ -1200,32 +1200,30 @@
 		var/decl/cultural_info/check = cultural_info[thing]
 		if(istype(check))
 			if(check.default_language)
-				free_languages    |= all_languages[check.default_language]
-				default_languages |= all_languages[check.default_language]
+				free_languages    |= check.default_language
+				default_languages |= check.default_language
 			if(check.language)
-				free_languages    |= all_languages[check.language]
+				free_languages    |= check.language
 			if(check.name_language)
-				free_languages    |= all_languages[check.name_language]
+				free_languages    |= check.name_language
 			for(var/lang in check.additional_langs)
-				free_languages    |= all_languages[lang]
+				free_languages    |= lang
 			for(var/lang in check.get_spoken_languages())
-				permitted_languages |= all_languages[lang]
+				permitted_languages |= lang
 
-	for(var/thing in languages)
-		var/datum/language/lang = thing
-		if(lang in permitted_languages)
+	for(var/decl/language/lang in languages)
+		if(lang.type in permitted_languages)
 			continue
 		if(!(lang.flags & RESTRICTED) && (lang.flags & WHITELISTED) && is_alien_whitelisted(src, lang))
 			continue
-		if(lang == default_language)
+		if(lang.type == default_language)
 			default_language = null
-		remove_language(lang.name)
+		remove_language(lang.type)
 
 	for(var/thing in free_languages)
-		var/datum/language/lang = thing
-		add_language(lang.name)
+		add_language(thing)
 
-	if(LAZYLEN(default_languages) && isnull(default_language))
+	if(length(default_languages) && isnull(default_language))
 		default_language = default_languages[1]
 
 /mob/living/carbon/human/proc/bloody_doodle()

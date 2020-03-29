@@ -1,31 +1,32 @@
 /mob/living
-	var/datum/language/default_language
+	var/default_language
 
-/mob/living/verb/set_default_language(language as null|anything in languages)
-	set name = "Set Default Language"
-	set category = "IC"
+/mob/living/proc/set_default_language(var/decl/language/language)
 
-	if (only_species_language && language != all_languages[src.species_language])
-		to_chat(src, "<span class='notice'>You can only speak your species language, [src.species_language].</span>")
-		return 0
+	if(ispath(language, /decl/language))
+		language = decls_repository.get_decl(language)
 
-	if(language == all_languages[src.species_language])
-		to_chat(src, "<span class='notice'>You will now speak your standard default language, [language], if you do not specify a language when speaking.</span>")
-	else if (language)
+	if(species_language)
+		var/decl/language/species_lang = decls_repository.get_decl(species_language)
+		if(only_species_language && language != species_lang)
+			to_chat(src, "<span class='notice'>You can only speak your species language, [src.species_language].</span>")
+			return 0
+		if(language == species_lang)
+			to_chat(src, "<span class='notice'>You will now speak your standard default language, [language.name], if you do not specify a language when speaking.</span>")
+			default_language = species_language
+			return 1
 
-		if(language && !can_speak(language))
+	if(language)
+		if(!can_speak(language))
 			to_chat(src, "<span class='notice'>You are unable to speak that language.</span>")
 			return
-
-		to_chat(src, "<span class='notice'>You will now speak [language] if you do not specify a language when speaking.</span>")
+		to_chat(src, "<span class='notice'>You will now speak [language.name] if you do not specify a language when speaking.</span>")
 	else
-
 		to_chat(src, "<span class='notice'>You will now speak whatever your standard default language is if you do not specify one when speaking.</span>")
-
-	default_language = language
+	default_language = language?.type
 
 // Silicons can't neccessarily speak everything in their languages list
-/mob/living/silicon/set_default_language(language as null|anything in speech_synthesizer_langs)
+/mob/living/silicon/set_default_language(language)
 	..()
 
 /mob/living/verb/check_default_language()
@@ -33,6 +34,7 @@
 	set category = "IC"
 
 	if(default_language)
-		to_chat(src, "<span class='notice'>You are currently speaking [default_language] by default.</span>")
+		var/decl/language/lang = decls_repository.get_decl(default_language)
+		to_chat(src, "<span class='notice'>You are currently speaking [lang.name] by default.</span>")
 	else
 		to_chat(src, "<span class='notice'>Your current default language is your species or mob type default.</span>")

@@ -98,8 +98,8 @@
 /datum/unit_test/languages_shall_have_unique_names/start_test()
 	var/list/languages_by_name = list()
 
-	for(var/lt in subtypesof(/datum/language))
-		var/datum/language/l = lt
+	for(var/lt in subtypesof(/decl/language))
+		var/decl/language/l = lt
 		group_by(languages_by_name, initial(l.name), lt)
 
 	var/number_of_issues = number_of_issues(languages_by_name, "Language Names")
@@ -115,8 +115,8 @@
 /datum/unit_test/languages_shall_have_no_or_unique_keys/start_test()
 	var/list/languages_by_key = list()
 
-	for(var/lt in subtypesof(/datum/language))
-		var/datum/language/l = lt
+	for(var/lt in subtypesof(/decl/language))
+		var/decl/language/l = lt
 		var/language_key = initial(l.key)
 		if(!language_key)
 			continue

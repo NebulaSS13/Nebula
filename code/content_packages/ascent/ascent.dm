@@ -1,7 +1,3 @@
-#define LANGUAGE_MANTID_NONVOCAL   "Ascent-Glow"
-#define LANGUAGE_MANTID_VOCAL      "Ascent-Voc"
-#define LANGUAGE_MANTID_BROADCAST  "Worldnet"
-
 #define SPECIES_SERPENTID      "Serpentid"
 #define SPECIES_MANTID_ALATE   "Kharmaan Alate"
 #define SPECIES_MANTID_GYNE    "Kharmaan Gyne"

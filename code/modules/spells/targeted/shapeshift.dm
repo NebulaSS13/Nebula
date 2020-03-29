@@ -39,7 +39,7 @@
 				trans.vars[varName] = newVars[varName]
 		//Give them our languages
 		for(var/l in M.languages)
-			var/datum/language/L = l
+			var/decl/language/L = l
 			trans.add_language(L.name)
 
 		trans.SetName("[trans.name] ([M])")

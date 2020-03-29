@@ -11,8 +11,6 @@ var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mob
 
 //Languages/species/whitelist.
 var/global/list/all_species[0]
-var/global/list/datum/language/all_languages = list()
-var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
 var/list/mannequins_
@@ -103,19 +101,6 @@ var/global/list/string_slot_flags = list(
 	for(var/path in paths)
 		var/datum/sprite_accessory/marking/M = new path()
 		GLOB.body_marking_styles_list[M.name] = M
-
-	//Languages and species.
-	paths = typesof(/datum/language)-/datum/language
-	for(var/T in paths)
-		var/datum/language/L = T
-		var/langname = initial(L.name)
-		if(langname)
-			all_languages[langname] = new L
-
-	for (var/language_name in all_languages)
-		var/datum/language/L = all_languages[language_name]
-		if(!(L.flags & NONGLOBAL))
-			language_keys[lowertext(L.key)] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)

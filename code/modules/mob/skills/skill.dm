@@ -101,9 +101,9 @@ GLOBAL_LIST_EMPTY(skills)
 	)
 
 /decl/hierarchy/skill/organizational/finance/update_special_effects(mob/mob, level)
-	mob.remove_language(LANGUAGE_LEGALESE)
+	mob.remove_language(/decl/language/legal)
 	if(level >= SKILL_EXPERT)
-		mob.add_language(LANGUAGE_LEGALESE)
+		mob.add_language(/decl/language/legal)
 
 // Category: General
 /decl/hierarchy/skill/general/EVA

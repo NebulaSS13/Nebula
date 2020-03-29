@@ -5,7 +5,7 @@
 	reagents = bloodstr
 
 	if (!default_language && species_language)
-		default_language = all_languages[species_language]
+		default_language = species_language
 	. = ..()
 
 /mob/living/carbon/Destroy()
@@ -385,13 +385,14 @@
 		chem_effects[effect] = magnitude
 
 /mob/living/carbon/get_default_language()
-	if(default_language && can_speak(default_language))
-		return default_language
+	. = ..()
+	if(. && !can_speak(.))
+		. = null
 
 /mob/living/carbon/proc/get_any_good_language(set_default=FALSE)
-	var/datum/language/result = get_default_language()
+	var/decl/language/result = get_default_language()
 	if (!result)
-		for (var/datum/language/L in languages)
+		for (var/decl/language/L in languages)
 			if (can_speak(L))
 				result = L
 				if (set_default)

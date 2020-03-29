@@ -1,5 +1,5 @@
-/datum/language/mantid
-	name = LANGUAGE_MANTID_VOCAL
+/decl/language/mantid
+	name = "Ascent-Voc"
 	desc = "A curt, sharp language developed by the insectoid Ascent for use over comms."
 	speech_verb = "clicks"
 	ask_verb = "chirps"
@@ -17,7 +17,7 @@
 		SPECIES_SERPENTID
 	)
 
-/datum/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
+/decl/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
 	var/mob/living/S = speaker
 	if(!istype(S))
 		return FALSE
@@ -29,7 +29,7 @@
 			return TRUE
 	return FALSE
 
-/datum/language/mantid/muddle(var/message)
+/decl/language/mantid/muddle(var/message)
 	message = replacetext(message, "...",  ".")
 	message = replacetext(message, "!?",   ".")
 	message = replacetext(message, "?!",   ".")
@@ -42,12 +42,12 @@
 	message = replacetext(message, "&#39", "'")
 	return message
 
-/datum/language/mantid/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/decl/language/mantid/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	. = ..(speaker, message, speaker.real_name)
 
-/datum/language/mantid/nonvocal
+/decl/language/mantid/nonvocal
 	key = "]"
-	name = LANGUAGE_MANTID_NONVOCAL
+	name = "Ascent-Glow"
 	desc = "A complex visual language of bright bio-luminescent flashes, 'spoken' natively by the Kharmaani of the Ascent."
 	colour = "alien"
 	speech_verb = "flashes"
@@ -57,7 +57,7 @@
 	shorthand = "KNV"
 
 #define MANTID_SCRAMBLE_CACHE_LEN 20
-/datum/language/mantid/nonvocal/scramble(var/input)
+/decl/language/mantid/nonvocal/scramble(var/input)
 	if(input in scramble_cache)
 		var/n = scramble_cache[input]
 		scramble_cache -= input
@@ -74,7 +74,7 @@
 	return scrambled_text
 #undef MANTID_SCRAMBLE_CACHE_LEN
 
-/datum/language/mantid/nonvocal/can_speak_special(var/mob/living/speaker)
+/decl/language/mantid/nonvocal/can_speak_special(var/mob/living/speaker)
 	if(istype(speaker) && speaker.isSynthetic())
 		return TRUE
 	else if(ishuman(speaker))
@@ -82,9 +82,9 @@
 		return (H.species.name == SPECIES_MANTID_ALATE || H.species.name == SPECIES_MANTID_GYNE)
 	return FALSE
 
-/datum/language/mantid/worldnet
+/decl/language/mantid/worldnet
 	key = "\["
-	name = LANGUAGE_MANTID_BROADCAST
+	name = "Worldnet"
 	desc = "The mantid aliens of the Ascent maintain an extensive self-supporting broadcast network for use in team communications."
 	colour = "alien"
 	speech_verb = "flashes"
@@ -93,7 +93,7 @@
 	flags = RESTRICTED | NO_STUTTER | NONVERBAL | HIVEMIND
 	shorthand = "KB"
 
-/datum/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)
+/decl/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)
 	if(istype(other, /mob/living/silicon/robot/flying/ascent))
 		return TRUE
 	if(istype(other) && (locate(/obj/item/organ/internal/controller) in other.internal_organs))

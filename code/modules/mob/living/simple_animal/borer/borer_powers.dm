@@ -39,7 +39,7 @@
 
 	to_chat(src, SPAN_DANGER("You settle into the empty brainpan and begin to expand, fusing inextricably with the dead flesh of [H]."))
 
-	H.add_language(LANGUAGE_BORER_GLOBAL)
+	H.add_language(/decl/language/corticalborer)
 
 	if(host.stat == DEAD)
 		H.verbs |= /mob/living/carbon/human/proc/jumpstart

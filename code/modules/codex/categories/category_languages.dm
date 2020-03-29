@@ -4,8 +4,9 @@
 
 /datum/codex_category/languages/Initialize()
 	var/example_line = "This is just some random words. What did you expect here? Hah hah!"
-	for(var/langname in all_languages)
-		var/datum/language/L = all_languages[langname]
+	var/language_types = decls_repository.get_decls_of_subtype(/decl/language)
+	for(var/langname in language_types)
+		var/decl/language/L = language_types[langname]
 		if(L.hidden_from_codex)
 			continue
 		if(L.type == L.category)

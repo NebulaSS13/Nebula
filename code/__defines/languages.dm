@@ -1,20 +1,3 @@
-//Human
-#define LANGUAGE_HUMAN             "Common"
-
-#define LANGUAGE_LEGALESE          "Legalese"
-//Antag
-#define LANGUAGE_CULT              "Cult"
-#define LANGUAGE_CULT_GLOBAL       "Occult"
-#define LANGUAGE_ALIUM             "Alium"
-
-//Other
-#define LANGUAGE_PRIMITIVE         "Primitive"
-#define LANGUAGE_SIGN              "Sign Language"
-#define LANGUAGE_ROBOT_GLOBAL      "Robot Talk"
-#define LANGUAGE_DRONE_GLOBAL      "Drone Talk"
-#define LANGUAGE_CHANGELING_GLOBAL "Changeling"
-#define LANGUAGE_BORER_GLOBAL      "Cortical Link"
-
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
 #define RESTRICTED   2   // Language can only be acquired by spawning or an admin.
