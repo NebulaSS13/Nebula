@@ -195,9 +195,8 @@
 		dat += "Anomaly depth: [current.depth] cm<br>"
 		dat += "Anomaly size: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
-		var/index = responsive_carriers.Find(current.material)
-		if(index > 0 && index <= finds_as_strings.len)
-			dat += "Anomaly material: [finds_as_strings[index]]<br>"
+		if(current.material in responsive_carriers)
+			dat += "Anomaly material: [responsive_carriers[current.material]]<br>"
 		else
 			dat += "Anomaly material: Unknown<br>"
 		dat += "<A href='?src=\ref[src];clear=[current.record_index]'>clear entry</a><br>"

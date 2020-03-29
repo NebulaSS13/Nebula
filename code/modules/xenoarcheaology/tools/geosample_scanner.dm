@@ -31,7 +31,6 @@
 	var/coolant_purity = 0
 	var/datum/reagents/coolant_reagents
 	var/used_coolant = 0
-	var/list/coolant_reagents_purity = list()
 	//
 	var/maser_wavelength = 0
 	var/optimal_wavelength = 0
@@ -42,19 +41,21 @@
 	var/radiation = 0				//0-100 mSv
 	var/t_left_radspike = 0
 	var/rad_shield = 0
+	var/global/list/coolant_reagents_purity = list(
+		/datum/reagent/water = 1,
+		/datum/reagent/drink/coffee/icecoffee = 0.6,
+		/datum/reagent/drink/tea/icetea = 0.6,
+		/datum/reagent/drink/milkshake = 0.6,
+		/datum/reagent/burn_meds = 0.7,
+		/datum/reagent/antiseptic = 0.7,
+		/datum/reagent/burn_meds = 0.7,
+		/datum/reagent/amphetamines = 0.8,
+		/datum/reagent/adminordrazine = 2
+	)
 
 /obj/machinery/radiocarbon_spectrometer/Initialize()
 	. = ..()
 	create_reagents(500)
-	coolant_reagents_purity[/datum/reagent/water] = 1
-	coolant_reagents_purity[/datum/reagent/drink/coffee/icecoffee] = 0.6
-	coolant_reagents_purity[/datum/reagent/drink/tea/icetea] = 0.6
-	coolant_reagents_purity[/datum/reagent/drink/milkshake] = 0.6
-	coolant_reagents_purity[/datum/reagent/burn_meds] = 0.7
-	coolant_reagents_purity[/datum/reagent/antiseptic] = 0.7
-	coolant_reagents_purity[/datum/reagent/burn_meds] = 0.7
-	coolant_reagents_purity[/datum/reagent/amphetamines] = 0.8
-	coolant_reagents_purity[/datum/reagent/adminordrazine] = 2
 
 /obj/machinery/radiocarbon_spectrometer/interface_interact(var/mob/user)
 	ui_interact(user)
@@ -261,64 +262,59 @@
 	src.visible_message("<span class='notice'>\icon[src] makes an insistent chime.</span>", 2)
 
 	if(scanned_item)
+		last_scan_data = get_scan_data()
 		//create report
-		var/obj/item/paper/P = new(src)
-		P.SetName("[src] report #[++report_num]: [scanned_item.name]")
-		P.stamped = list(/obj/item/stamp)
-		P.queue_icon_update()
-
-		//work out data
-		var/data = " - Mundane object: [scanned_item.desc ? scanned_item.desc : "No information on record."]<br>"
-		var/datum/geosample/G
-		switch(scanned_item.type)
-			if(/obj/item/ore)
-				var/obj/item/ore/O = scanned_item
-				if(O.geologic_data)
-					G = O.geologic_data
-
-			if(/obj/item/rocksliver)
-				var/obj/item/rocksliver/O = scanned_item
-				if(O.geological_data)
-					G = O.geological_data
-
-			if(/obj/item/archaeological_find)
-				data = " - Mundane object (archaic xenos origins)<br>"
-
-				var/obj/item/archaeological_find/A = scanned_item
-				if(A.talking_atom)
-					data = " - Exhibits properties consistent with sonic reproduction and audio capture technologies.<br>"
-
-		var/anom_found = 0
-		if(G)
-			data = " - Spectometric analysis on mineral sample has determined type [finds_as_strings[responsive_carriers.Find(G.source_mineral)]]<br>"
-			if(G.age_billion > 0)
-				data += " - Radiometric dating shows age of [G.age_billion].[G.age_million] billion years<br>"
-			else if(G.age_million > 0)
-				data += " - Radiometric dating shows age of [G.age_million].[G.age_thousand] million years<br>"
-			else
-				data += " - Radiometric dating shows age of [G.age_thousand * 1000 + G.age] years<br>"
-			data += " - Chromatographic analysis shows the following materials present:<br>"
-			for(var/carrier in G.find_presence)
-				if(G.find_presence[carrier])
-					var/index = responsive_carriers.Find(carrier)
-					if(index > 0 && index <= finds_as_strings.len)
-						data += "	> [100 * G.find_presence[carrier]]% [finds_as_strings[index]]<br>"
-
-			if(G.artifact_id && G.artifact_distance >= 0)
-				anom_found = 1
-				data += " - Hyperspectral imaging reveals exotic energy wavelength detected with ID: [G.artifact_id]<br>"
-				data += " - Fourier transform analysis on anomalous energy absorption indicates energy source located inside emission radius of [G.artifact_distance]m<br>"
-
-		if(!anom_found)
-			data += " - No anomalous data<br>"
-
-		P.info = "<b>[src] analysis report #[report_num]</b><br>"
-		P.info += "<b>Scanned item:</b> [scanned_item.name]<br><br>" + data
-		last_scan_data = P.info
-		P.dropInto(loc)
-
+		new/obj/item/paper(loc, last_scan_data, "[src] report #[++report_num]: [scanned_item.name]")
 		scanned_item.dropInto(loc)
 		scanned_item = null
+
+/obj/machinery/radiocarbon_spectrometer/proc/get_scan_data()
+	var/data = "<b>[src] analysis report #[report_num]</b><br>"
+	data += "<b>Scanned item:</b> [scanned_item.name]<br><br>"
+	var/datum/geosample/G
+	switch(scanned_item.type)
+		if(/obj/item/ore)
+			var/obj/item/ore/O = scanned_item
+			if(O.geologic_data)
+				G = O.geologic_data
+
+		if(/obj/item/rocksliver)
+			var/obj/item/rocksliver/O = scanned_item
+			if(O.geological_data)
+				G = O.geological_data
+
+		if(/obj/item/archaeological_find)
+			data += " - Mundane object (archaic xenos origins)<br>"
+
+			var/obj/item/archaeological_find/A = scanned_item
+			if(A.talking_atom)
+				data += " - Exhibits properties consistent with sonic reproduction and audio capture technologies.<br>"
+		else
+			data += " - Mundane object: [scanned_item.desc ? scanned_item.desc : "No information on record."]<br>"
+
+	var/anom_found = 0
+	if(G)
+		data = " - Spectometric analysis on mineral sample has determined type [responsive_carriers[G.source_mineral]]<br>"
+		if(G.age_billion > 0)
+			data += " - Radiometric dating shows age of [G.age_billion].[G.age_million] billion years<br>"
+		else if(G.age_million > 0)
+			data += " - Radiometric dating shows age of [G.age_million].[G.age_thousand] million years<br>"
+		else
+			data += " - Radiometric dating shows age of [G.age_thousand * 1000 + G.age] years<br>"
+		data += " - Chromatographic analysis shows the following materials present:<br>"
+		for(var/carrier in G.find_presence)
+			if(G.find_presence[carrier])
+				data += "	> [100 * G.find_presence[carrier]]% [responsive_carriers[carrier]]<br>"
+
+		if(G.artifact_id && G.artifact_distance >= 0)
+			anom_found = 1
+			data += " - Hyperspectral imaging reveals exotic energy wavelength detected with ID: [G.artifact_id]<br>"
+			data += " - Fourier transform analysis on anomalous energy absorption indicates energy source located inside emission radius of [G.artifact_distance]m<br>"
+
+	if(!anom_found)
+		data += " - No anomalous data<br>"
+	
+	return data
 
 /obj/machinery/radiocarbon_spectrometer/OnTopic(user, href_list)
 	if(href_list["scanItem"])
