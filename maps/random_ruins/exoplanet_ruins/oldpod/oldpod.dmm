@@ -431,7 +431,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "aZ" = (
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -493,7 +493,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "bg" = (
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{

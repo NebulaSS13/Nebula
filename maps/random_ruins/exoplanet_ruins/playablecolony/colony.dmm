@@ -2580,7 +2580,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/colony/dorms)
 "eY" = (
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{

@@ -233,7 +233,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "aB" = (
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
@@ -257,7 +257,7 @@
 /turf/simulated/wall,
 /area/map_template/crashed_pod)
 "aE" = (
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/blue,

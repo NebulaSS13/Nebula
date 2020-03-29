@@ -66,6 +66,12 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	construct_state = /decl/machine_construction/default/no_deconstruct
 	base_type = /obj/machinery/bodyscanner
 
+MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
+/obj/item/chems/chem_disp_cartridge/ascent/crystal
+	spawn_reagent = /datum/reagent/crystal
+/obj/item/chems/chem_disp_cartridge/ascent/bromide
+	spawn_reagent = /datum/reagent/toxin/bromide
+
 /obj/machinery/sleeper/ascent
 	name = "mantid sleeper"
 	desc = "Some kind of strange alien sleeper technology."
@@ -75,8 +81,8 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
 /obj/machinery/sleeper/ascent/Initialize(mapload, d, populate_parts)
 	. = ..()
-	base_chemicals["Crystalizing Agent"] = /datum/reagent/crystal
-	base_chemicals["Bromide"] = /datum/reagent/toxin/bromide
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/ascent/crystal()) 
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/ascent/bromide())
 
 /obj/machinery/fabricator/ascent
 	name = "\improper Ascent nanofabricator"

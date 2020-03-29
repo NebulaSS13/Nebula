@@ -1577,7 +1577,7 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/crew/hallway/starboard)
 "es" = (
-/obj/machinery/sleeper,
+/obj/machinery/sleeper/standard,
 /obj/structure/sign/warning/nosmoking_2{
 	pixel_y = 28
 	},

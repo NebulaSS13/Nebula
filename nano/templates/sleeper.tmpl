@@ -22,6 +22,8 @@
 				<div class="itemContent">
 				{{:helper.link(data.pump ? "Stomach pump active" : "Stomach pump inactive", null, {'pump' : !data.pump})}}
 				</div>
+			{{else}}
+				There are a few buttons here, but the labels don't make any sense to you.
 			{{/if}}
 			<div class="itemContent">
 				{{:helper.link("Eject occupant", null, {'eject' : 0})}}
@@ -37,22 +39,33 @@
 			Stasis setting:
 		</div>
 		<div class="itemContent">
-			{{:helper.link("Off", null,  {'stasis' : 1}, null, data.stasis == 1 ? 'yellowButton' : null)}}
-			{{:helper.link("2x", null,  {'stasis' : 2}, null, data.stasis == 2 ? 'yellowButton' : null)}}
-			{{:helper.link("5x", null,  {'stasis' : 5}, null, data.stasis == 5 ? 'yellowButton' : null)}}
-			{{:helper.link("10x", null,  {'stasis' : 10}, null, data.stasis == 10 ? 'yellowButton' : null)}}
+			{{:helper.link("Off", null, {'stasis' : 1},  null, data.stasis == 1  ? 'yellowButton' : null)}}
+			{{:helper.link("2x",  null, {'stasis' : 2},  null, data.stasis == 2  ? 'yellowButton' : null)}}
+			{{:helper.link("5x",  null, {'stasis' : 5},  null, data.stasis == 5  ? 'yellowButton' : null)}}
+			{{:helper.link("10x", null, {'stasis' : 10}, null, data.stasis == 10 ? 'yellowButton' : null)}}
 		</div>
 	</div>
 	<div class="item">
 	{{for data.reagents}}
 		<div class="itemLabel">
-		{{:value.name}}
+			{{:value.name}} ({{:value.amount}}u)
 		</div>
 		<div class="itemContent">
-			{{if data.occupant}}Occupant: {{:value.amount}} units{{/if}}
-			{{:helper.link('Inject 5', null, {'chemical' : value.name, 'amount' : 5}, data.occupant ? null : 'disabled')}}{{:helper.link('Inject 10', null, {'chemical' : value.name, 'amount' : 10}, data.occupant ? null : 'disabled')}}
+			{{:helper.link('Inject 5',  null, {'chemical' : value.id, 'amount' : 5},  data.occupant ? null : 'disabled')}}
+			{{:helper.link('Inject 10', null, {'chemical' : value.id, 'amount' : 10}, data.occupant ? null : 'disabled')}}
+			{{:helper.link('Spray 5',   null, {'chemical' : value.id, 'amount' : 5,   'contact_chem' : 1}, data.occupant ? null : 'disabled')}}
+			{{:helper.link('Spray 10',  null, {'chemical' : value.id, 'amount' : 10,  'contact_chem' : 1}, data.occupant ? null : 'disabled')}}
+			{{:helper.link('Eject Canister', null, {'chemical' : value.id, 'eject_canister' : 1}, null)}}
 		</div>
 	{{/for}}
+	{{if data.empty_canisters > 0}}
+		<div class="itemLabel">
+			{{:data.empty_canisters}} empty canisters
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Eject', null, {'eject_empties' : 1}, null)}}
+		</div>
+	{{/if}}
 	</div>
 	{{if data.beaker != -1}}
 		<div class="item">

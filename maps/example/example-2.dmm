@@ -108,7 +108,7 @@
 /area/medical/surgery)
 "r" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/standard{
 	icon_state = "sleeper_0";
 	dir = 8
 	},

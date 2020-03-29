@@ -52,10 +52,17 @@
 	anchored = 0
 	idle_power_usage = 0
 	active_power_usage = 0 //It'd be hard to handle, so for now all power is consumed by mech sleeper object
-	synth_modifier = 0
 	stasis_power = 0
 	interact_offline = TRUE
 	stat_immune = NOPOWER
+
+/obj/machinery/sleeper/mounted/standard/Initialize(mapload, d, populate_parts)
+	. = ..()
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/adrenaline()) 
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/sedatives())
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/painkillers())
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/antitoxins())
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/oxy_meds())
 
 /obj/machinery/sleeper/mounted/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
 	. = ..()

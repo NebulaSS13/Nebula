@@ -2078,7 +2078,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/crew/hallway/starboard)
 "dO" = (
-/obj/machinery/sleeper,
+/obj/machinery/sleeper/standard,
 /obj/structure/sign/warning/nosmoking_2{
 	pixel_y = 28
 	},
