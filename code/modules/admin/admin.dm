@@ -116,9 +116,9 @@ var/global/floorIsLava = 0
 		body += "<br>"
 		body += "<a href='?src=\ref[M.mind];add_goal=1'>Add Random Goal</a>"
 
-	var/list/all_content_packages = decls_repository.get_decls_of_subtype(/decl/content_package)
-	for(var/package in all_content_packages)
-		var/decl/content_package/manifest = all_content_packages[package]
+	var/list/all_modpacks = decls_repository.get_decls_of_subtype(/decl/modpack)
+	for(var/package in all_modpacks)
+		var/decl/modpack/manifest = all_modpacks[package]
 		var/extra_body = manifest.get_player_panel_options(M)
 		if(extra_body)
 			body += "<br><br>"

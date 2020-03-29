@@ -1,7 +1,0 @@
-#ifndef CONTENT_PACKAGE_MODERN_EARTH
-#define CONTENT_PACKAGE_MODERN_EARTH
-// BEGIN_INCLUDE
-#include "modern_earth.dm"
-#include "datum\religions.dm"
-// END_INCLUDE
-#endif

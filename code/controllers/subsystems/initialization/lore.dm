@@ -46,35 +46,12 @@ SUBSYSTEM_DEF(lore)
 			var/list/tag_list = tagged_info[culture.category]
 			tag_list[culture.name] = culture
 
-
 	for(var/jobtype in subtypesof(/datum/job))
 		var/datum/job/job = jobtype
 		var/title = initial(job.title)
 		if(title)
 			dreams |= "\an ["\improper [title]"]"
 			credits_nouns |= uppertext("the [title]")
-
-	var/list/all_content_packages = decls_repository.get_decls_of_subtype(/decl/content_package)
-	for(var/package in all_content_packages)
-		var/decl/content_package/manifest = all_content_packages[package]
-		if(length(manifest.dreams))
-			dreams |= manifest.dreams
-		if(length(manifest.credits_other))
-			credits_other |= manifest.credits_other
-		if(length(manifest.credits_adventure_names))
-			credits_adventure_names |= manifest.credits_adventure_names
-		if(length(manifest.credits_crew_names))
-			credits_crew_names |= manifest.credits_crew_names
-		if(length(manifest.credits_holidays))
-			credits_holidays |= manifest.credits_holidays
-		if(length(manifest.credits_adjectives))
-			credits_adjectives |= manifest.credits_adjectives
-		if(length(manifest.credits_crew_outcomes))
-			credits_crew_outcomes |= manifest.credits_crew_outcomes
-		if(length(manifest.credits_topics))
-			credits_topics |= manifest.credits_topics
-		if(length(manifest.credits_nouns))
-			credits_nouns |= manifest.credits_nouns
 
 	. = ..()
 

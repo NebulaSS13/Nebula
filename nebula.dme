@@ -156,7 +156,7 @@
 #include "code\_onclick\hud\robot.dm"
 #include "code\_onclick\hud\screen_objects.dm"
 #include "code\_onclick\hud\skybox.dm"
-#include "code\content_packages\_content_package.dm"
+#include "code\controllers\subsystems\initialization\modpacks.dm"
 #include "code\controllers\admin.dm"
 #include "code\controllers\autotransfer.dm"
 #include "code\controllers\communications.dm"
@@ -3103,5 +3103,6 @@
 #include "maps\~mapsystem\maps_jobs.dm"
 #include "maps\~mapsystem\maps_unit_testing.dm"
 #include "maps\~unit_tests\unit_testing.dm"
+#include "mods\_modpack.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE

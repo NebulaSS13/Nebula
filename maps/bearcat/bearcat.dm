@@ -1,8 +1,8 @@
 #if !defined(using_map_DATUM)
 
-	#include "..\..\code\content_packages\misc\mundane.dm"
-	#include "..\..\code\content_packages\misc\spacemen.dm"
-	#include "..\..\code\content_packages\corporate\_corporate.dme"
+	#include "..\..\mods\misc\mundane.dm"
+	#include "..\..\mods\misc\spacemen.dm"
+	#include "..\..\mods\corporate\_corporate.dme"
 
 	#include "bearcat_unit_testing.dm"
 
