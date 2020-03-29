@@ -6,11 +6,12 @@
 	randpixel = 8
 	w_class = ITEM_SIZE_TINY
 	sharp = 1
-	var/datum/geosample/geological_data
+	var/datum/geosample/geologic_data
 
-/obj/item/rocksliver/Initialize()
+/obj/item/rocksliver/Initialize(mapload, geodata)
 	. = ..()
 	icon_state = "sliver[rand(1, 3)]"
+	geologic_data = geodata
 
 /datum/geosample
 	var/age = 0
@@ -87,80 +88,49 @@
 	item_state = "screwdriver_brown"
 	w_class = ITEM_SIZE_TINY
 
-	var/sampled_turf = ""
-	var/num_stored_bags = 10
 	var/obj/item/evidencebag/filled_bag
 
 /obj/item/core_sampler/examine(mob/user, distance)
 	. = ..(user)
 	if(distance <= 2)
-		to_chat(user, "<span class='notice'>Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining.</span>")
-
-/obj/item/core_sampler/attackby(var/obj/item/I, var/mob/living/user)
-	if(istype(I, /obj/item/evidencebag))
-		if(I.contents.len)
-			to_chat(user, "<span class='warning'>\The [I] is full.</span>")
-			return
-		if(num_stored_bags < 10)
-			qdel(I)
-			num_stored_bags += 1
-			to_chat(user, "<span class='notice'>You insert \the [I] into \the [src].</span>")
-		else
-			to_chat(user, "<span class='warning'>\The [src] can not fit any more bags.</span>")
-	else
-		return ..()
+		to_chat(user, SPAN_NOTICE("This one is [filled_bag ? "full" : "empty"]"))
 
 /obj/item/core_sampler/proc/sample_item(var/item_to_sample, var/mob/user)
 	var/datum/geosample/geo_data
 
 	if(istype(item_to_sample, /turf/simulated/mineral))
 		var/turf/simulated/mineral/T = item_to_sample
-		T.geologic_data.UpdateNearbyArtifactInfo(T)
-		geo_data = T.geologic_data
+		geo_data = T.get_geodata()
 	else if(istype(item_to_sample, /obj/item/ore))
 		var/obj/item/ore/O = item_to_sample
 		geo_data = O.geologic_data
 
 	if(geo_data)
 		if(filled_bag)
-			to_chat(user, "<span class='warning'>The core sampler is full.</span>")
-		else if(num_stored_bags < 1)
-			to_chat(user, "<span class='warning'>The core sampler is out of sample bags.</span>")
+			to_chat(user, SPAN_WARNING("The core sampler is full."))
 		else
 			//create a new sample bag which we'll fill with rock samples
-			filled_bag = new /obj/item/evidencebag(src)
-			filled_bag.SetName("sample bag")
-			filled_bag.desc = "a bag for holding research samples."
+			filled_bag = new /obj/item/evidencebag/sample(src)
+			var/obj/item/rocksliver/R = new(filled_bag, geo_data)
+			filled_bag.store_item(R)
+			update_icon()
 
-			icon_state = "sampler1"
-			--num_stored_bags
-
-			//put in a rock sliver
-			var/obj/item/rocksliver/R = new(filled_bag)
-			R.geological_data = geo_data
-
-			//update the sample bag
-			filled_bag.icon_state = "evidence"
-			var/image/I = image("icon"=R, "layer"=FLOAT_LAYER)
-			filled_bag.overlays += I
-			filled_bag.overlays += "evidence"
-			filled_bag.w_class = ITEM_SIZE_TINY
-			filled_bag.stored_item = R
-
-			to_chat(user, "<span class='notice'>You take a core sample of the [item_to_sample].</span>")
+			to_chat(user, SPAN_NOTICE("You take a core sample of the [item_to_sample]."))
 	else
-		to_chat(user, "<span class='warning'>You are unable to take a sample of [item_to_sample].</span>")
+		to_chat(user, SPAN_WARNING("You are unable to take a geological sample of [item_to_sample]."))
+
+/obj/item/core_sampler/on_update_icon()
+	icon_state = "sampler[!!filled_bag]"
 
 /obj/item/core_sampler/attack_self(var/mob/living/user)
 	if(filled_bag)
-		to_chat(user, "<span class='notice'>You eject the full sample bag.</span>")
-		var/success = 0
-		if(istype(src.loc, /mob))
-			var/mob/M = src.loc
-			success = M.put_in_inactive_hand(filled_bag)
-		if(!success)
-			filled_bag.dropInto(loc)
+		to_chat(user, SPAN_NOTICE("You eject the full sample bag."))
+		user.put_in_hands(filled_bag)
 		filled_bag = null
-		icon_state = "sampler0"
+		update_icon()
 	else
-		to_chat(user, "<span class='warning'>The core sampler is empty.</span>")
+		to_chat(user, SPAN_WARNING("The core sampler is empty."))
+
+/obj/item/evidencebag/sample
+	name = "sample bag"
+	desc = "A bag for holding research samples."

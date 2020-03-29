@@ -57,6 +57,9 @@
 	"You hear a rustle as someone puts something into a plastic bag.")
 	if(!user.skill_check(SKILL_FORENSICS, SKILL_BASIC))
 		I.add_fingerprint(user)
+	store_item(I)
+
+/obj/item/evidencebag/proc/store_item(obj/item/I)
 	I.forceMove(src)
 	stored_item = I
 	w_class = I.w_class
