@@ -19,7 +19,7 @@
 	var/age_billion = 0
 	var/artifact_id = ""
 	var/artifact_distance = -1
-	var/source_mineral = "chlorine"
+	var/source_mineral = /datum/reagent/toxin/chlorine
 	var/list/find_presence = list()
 
 /datum/geosample/New(var/turf/simulated/mineral/container)
@@ -50,7 +50,7 @@
 		find_presence[/datum/reagent/phosphorus] = rand(1, 500) / 100
 	if(prob(25))
 		find_presence[/datum/reagent/mercury] = rand(1, 500) / 100
-	find_presence["chlorine"] = rand(500, 2500) / 100
+	find_presence[/datum/reagent/toxin/chlorine] = rand(500, 2500) / 100
 
 	for(var/datum/find/F in container.finds)
 		var/responsive_reagent = get_responsive_reagent(F.find_type)
