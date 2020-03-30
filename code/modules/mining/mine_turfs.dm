@@ -159,7 +159,6 @@ var/list/mining_floors = list()
 		return
 
 	if (istype(W, /obj/item/core_sampler))
-		geologic_data.UpdateNearbyArtifactInfo(src)
 		var/obj/item/core_sampler/C = W
 		C.sample_item(src, user)
 		return TRUE
@@ -276,11 +275,16 @@ var/list/mining_floors = list()
 			while(next_rock > 50)
 				next_rock -= 50
 				var/obj/item/ore/O = new(src)
-				geologic_data.UpdateNearbyArtifactInfo(src)
-				O.geologic_data = geologic_data
+				O.geologic_data = get_geodata()
 
 	else
 		return ..()
+
+/turf/simulated/mineral/proc/get_geodata()
+	if(!geologic_data)
+		geologic_data = new /datum/geosample(src)
+	geologic_data.UpdateNearbyArtifactInfo(src)
+	return geologic_data
 
 /turf/simulated/mineral/proc/clear_ore_effects()
 	overlays -= ore_overlay
@@ -292,9 +296,8 @@ var/list/mining_floors = list()
 
 	clear_ore_effects()
 	var/obj/item/ore/O = new(src, mineral.type)
-	if(geologic_data && istype(O))
-		geologic_data.UpdateNearbyArtifactInfo(src)
-		O.geologic_data = geologic_data
+	if(istype(O))
+		O.geologic_data = get_geodata()
 	return O
 
 /turf/simulated/mineral/proc/GetDrilled(var/artifact_fail = 0)
@@ -347,8 +350,7 @@ var/list/mining_floors = list()
 		new find(src)
 	else
 		var/obj/item/ore/strangerock/rock = new(src, F.find_type)
-		geologic_data.UpdateNearbyArtifactInfo(src)
-		rock.geologic_data = geologic_data
+		rock.geologic_data = get_geodata()
 
 	finds.Remove(F)
 
