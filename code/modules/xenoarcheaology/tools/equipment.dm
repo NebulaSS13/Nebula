@@ -2,12 +2,14 @@
 	name = "Anomaly suit"
 	desc = "A suit that protects against exotic alien energies and biological contamination."
 	icon_state = "bio_anom"
+	anomaly_shielding = 0.7
 
 /obj/item/clothing/head/bio_hood/anomaly
 	name = "Anomaly hood"
 	desc = "A hood that protects the head and face from exotic alien energies and biological contamination."
 	icon_state = "bio_anom"
 	item_state = "bio_anom"
+	anomaly_shielding = 0.3
 
 /obj/item/clothing/suit/space/void/excavation
 	name = "excavation voidsuit"
@@ -20,6 +22,7 @@
 		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_SHIELDED
 	)
+	anomaly_shielding = 0.6
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/excavation,/obj/item/pickaxe,/obj/item/scanner/health,/obj/item/measuring_tape,/obj/item/ano_scanner,/obj/item/depth_scanner,/obj/item/core_sampler,/obj/item/gps,/obj/item/pinpointer/radio,/obj/item/radio/beacon,/obj/item/pickaxe/xeno,/obj/item/storage/bag/fossils)
 
 /obj/item/clothing/head/helmet/space/void/excavation
@@ -34,6 +37,7 @@
 		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_SHIELDED
 	)
+	anomaly_shielding = 0.2
 	light_overlay = "hardhat_light"
 
 /obj/item/clothing/suit/space/void/excavation/prepared

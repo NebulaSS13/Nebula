@@ -115,6 +115,7 @@
 	hud_type = HUD_SCIENCE
 	toggleable = TRUE
 	electric = TRUE
+	anomaly_shielding = 0.1
 
 /obj/item/clothing/glasses/science/prescription
 	name = "prescription science goggles"

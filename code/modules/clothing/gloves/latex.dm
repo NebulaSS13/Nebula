@@ -8,6 +8,7 @@
 	on_mob_icon = 'icons/clothing/hands/gloves_generic.dmi'
 	icon_state = "world"
 	sprite_sheets = null
+	anomaly_shielding = 0.1
 
 /obj/item/clothing/gloves/latex/nitrile
 	name = "nitrile gloves"
