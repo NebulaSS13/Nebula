@@ -23,6 +23,10 @@
 
 	var/list/mixing_inputs = list()
 	build_icon_state = "omni_mixer"
+	base_type = /obj/machinery/atmospherics/omni/mixer/buildable
+
+/obj/machinery/atmospherics/omni/mixer/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/omni/mixer/Initialize()
 	. = ..()

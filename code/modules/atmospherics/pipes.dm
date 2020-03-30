@@ -7,7 +7,6 @@
 	var/volume = 0
 	var/leaking = 0		// Do not set directly, use set_leaking(TRUE/FALSE)
 	use_power = POWER_USE_OFF
-	uncreated_component_parts = null // No apc connection
 
 	var/maximum_pressure = 210 * ONE_ATMOSPHERE
 	var/fatigue_pressure = 170 * ONE_ATMOSPHERE
@@ -22,6 +21,10 @@
 	build_icon_state = "simple"
 	build_icon = 'icons/obj/pipe-item.dmi'
 	pipe_class = PIPE_CLASS_BINARY
+
+	frame_type = /obj/item/pipe
+	uncreated_component_parts = null // No apc connection
+	construct_state = /decl/machine_construction/pipe
 
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
@@ -102,41 +105,26 @@
 
 	. = ..()
 
-/obj/machinery/atmospherics/pipe/attackby(var/obj/item/W, var/mob/user)
-	if (istype(src, /obj/machinery/atmospherics/unary/tank))
-		return ..()
-	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
-		return ..()
+/obj/machinery/atmospherics/pipe/deconstruction_pressure_check()
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
 
-	if(istype(W,/obj/item/pipe_painter))
-		return 0
+	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		return FALSE
+	return TRUE
 
-	if(isWrench(W))
-		var/turf/T = src.loc
+/obj/machinery/atmospherics/pipe/cannot_transition_to(state_path, mob/user)
+	if(state_path == /decl/machine_construction/default/deconstructed)
+		var/turf/T = get_turf(src)
 		if (level==1 && isturf(T) && !T.is_plating())
-			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
-			return 1
+			return SPAN_WARNING("You must remove the plating first.")
+	return ..()
 
-		var/datum/gas_mixture/int_air = return_air()
-		var/datum/gas_mixture/env_air = loc.return_air()
-
-		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
-			add_fingerprint(user)
-			return 1
-
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-
-		if (do_after(user, 40, src))
-			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")
-
-			new /obj/item/pipe(loc, src)
-
-			for (var/obj/machinery/meter/meter in T)
-				if (meter.target == src)
-					meter.dismantle()
-			qdel(src)
+/obj/machinery/atmospherics/pipe/dismantle()
+	for (var/obj/machinery/meter/meter in get_turf(src))
+		if (meter.target == src)
+			meter.dismantle()
+	..()
 
 /obj/machinery/atmospherics/proc/change_color(var/new_color)
 	//only pass valid pipe colors please ~otherwise your pipe will turn invisible

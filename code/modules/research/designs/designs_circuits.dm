@@ -629,3 +629,33 @@
 	name = "advanced seed storage"
 	build_path = /obj/item/stock_parts/circuitboard/seed_storage/advanced
 	req_tech = list(TECH_BIO = 6, TECH_ENGINEERING = 3)
+
+/datum/design/circuit/turbine
+	name = "small turbine board"
+	build_path = /obj/item/stock_parts/circuitboard/turbine
+	req_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4)
+
+/datum/design/circuit/turbine_motor
+	name = "small turbine motor board"
+	build_path = /obj/item/stock_parts/circuitboard/turbine/motor
+	req_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4)
+
+/datum/design/circuit/turbine_big
+	name = "turbine board"
+	build_path = /obj/item/stock_parts/circuitboard/big_turbine
+	req_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4)
+
+/datum/design/circuit/turbine_motor_big
+	name = "turbine motor board"
+	build_path = /obj/item/stock_parts/circuitboard/big_turbine/center
+	req_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4)
+
+/datum/design/circuit/turbine_teg
+	name = "TEG turbine board"
+	build_path = /obj/item/stock_parts/circuitboard/teg_turbine
+	req_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4)
+
+/datum/design/circuit/turbine_motor_teg
+	name = "TEG motor board"
+	build_path = /obj/item/stock_parts/circuitboard/teg_turbine/motor
+	req_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4)

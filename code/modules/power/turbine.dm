@@ -14,6 +14,9 @@
 	var/capacity = 1e6
 	var/comp_id = 0
 
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
+
 /obj/machinery/power/turbine
 	name = "gas turbine generator"
 	desc = "A gas turbine used for backup power generation."
@@ -24,6 +27,10 @@
 	var/obj/machinery/compressor/compressor
 	var/turf/simulated/outturf
 	var/lastgen
+
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
+	stat_immune = 0
 
 /obj/machinery/computer/turbine_computer
 	name = "Gas turbine control computer"

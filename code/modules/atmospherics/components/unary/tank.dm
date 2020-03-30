@@ -19,6 +19,10 @@
 	build_icon = 'icons/atmos/tank.dmi'
 	build_icon_state = "air"
 
+	construct_state = /decl/machine_construction/pipe
+	uncreated_component_parts = null // don't use power
+	frame_type = /obj/item/pipe/tank
+
 /obj/machinery/atmospherics/unary/tank/Initialize()
 	. = ..()
 	if(filling)
@@ -49,23 +53,10 @@
 /obj/machinery/atmospherics/unary/tank/return_air()
 	return air_contents
 
-/obj/machinery/atmospherics/unary/tank/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/pipe_painter))
-		return
-
-	if(isWrench(W))		
-		if (air_contents.return_pressure() > 2*ONE_ATMOSPHERE)
-			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
-			add_fingerprint(user)
-			return 1
-
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-
-		if (do_after(user, 40, src))
-			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")		
-			new /obj/item/pipe/tank(loc, src)
-			qdel(src)
+/obj/machinery/atmospherics/unary/tank/deconstruction_pressure_check()
+	if (air_contents.return_pressure() > 2*ONE_ATMOSPHERE)
+		return FALSE
+	return TRUE
 
 /obj/machinery/atmospherics/unary/tank/air
 	name = "Pressure Tank (Air)"

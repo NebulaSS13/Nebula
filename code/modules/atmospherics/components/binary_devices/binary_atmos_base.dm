@@ -120,3 +120,38 @@
 	node2 = null
 
 	. = ..()
+
+/obj/machinery/atmospherics/binary/deconstruction_pressure_check()
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		return FALSE
+	return TRUE
+
+// Will only be used if you set the anchorable obj flag.
+/obj/machinery/atmospherics/binary/wrench_floor_bolts(user)
+	. = ..()
+	if(anchored)
+		if(dir & (NORTH|SOUTH))
+			initialize_directions = NORTH|SOUTH
+		else if(dir & (EAST|WEST))
+			initialize_directions = EAST|WEST
+
+		atmos_init()
+		build_network()
+		if (node1)
+			node1.atmos_init()
+			node1.build_network()
+		if (node2)
+			node2.atmos_init()
+			node2.build_network()
+	else
+		if(node1)
+			node1.disconnect(src)
+			qdel(network1)
+		if(node2)
+			node2.disconnect(src)
+			qdel(network2)
+
+		node1 = null
+		node2 = null

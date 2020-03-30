@@ -27,6 +27,15 @@
 	pipe_class = PIPE_CLASS_OMNI
 	connect_dir_type = SOUTH | NORTH | EAST | WEST
 
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/keyboard,
+		/obj/item/stock_parts/console_screen
+	)
+	stat_immune = 0
+	frame_type = /obj/item/pipe
+
 /obj/machinery/atmospherics/omni/Initialize()
 	. = ..()
 	icon_state = "base"
@@ -75,27 +84,14 @@
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/omni/attackby(var/obj/item/W, var/mob/user)
-	if(!isWrench(W))
-		return ..()
-
+/obj/machinery/atmospherics/omni/deconstruction_pressure_check(state_path, mob/user)
 	var/int_pressure = 0
 	for(var/datum/omni_port/P in ports)
 		int_pressure += P.air.return_pressure()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if ((int_pressure - env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(do_after(user, 40, src))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear a ratchet.")
-		new /obj/item/pipe(loc, src)
-		qdel(src)
+		return FALSE
+	return TRUE
 
 /obj/machinery/atmospherics/omni/interface_interact(mob/user)
 	ui_interact(user)

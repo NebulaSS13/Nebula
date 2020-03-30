@@ -7,6 +7,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "circ-unassembled"
 	anchored = 0
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 
 	var/kinetic_efficiency = 0.04 //combined kinetic and kinetic-to-electric efficiency
 	var/volume_ratio = 0.2
@@ -22,6 +23,8 @@
 	var/temperature_overlay
 
 	density = 1
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/atmospherics/binary/circulator/Initialize()
 	. = ..()
@@ -90,63 +93,6 @@
 
 	return 1
 
-/obj/machinery/atmospherics/binary/circulator/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		anchored = !anchored
-		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
-					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
-					"You hear a ratchet")
-
-		if(anchored)
-			temperature_overlay = null
-			if(dir & (NORTH|SOUTH))
-				initialize_directions = NORTH|SOUTH
-			else if(dir & (EAST|WEST))
-				initialize_directions = EAST|WEST
-
-			atmos_init()
-			build_network()
-			if (node1)
-				node1.atmos_init()
-				node1.build_network()
-			if (node2)
-				node2.atmos_init()
-				node2.build_network()
-		else
-			if(node1)
-				node1.disconnect(src)
-				qdel(network1)
-			if(node2)
-				node2.disconnect(src)
-				qdel(network2)
-
-			node1 = null
-			node2 = null
-		update_icon()
-
-	else
-		..()
-
-/obj/machinery/atmospherics/binary/circulator/verb/rotate_clockwise()
-	set category = "Object"
-	set name = "Rotate Circulator (Clockwise)"
-	set src in view(1)
-
-	if (usr.stat || usr.restrained() || anchored)
-		return
-
-	src.set_dir(turn(src.dir, 90))
-	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."
-
-
-/obj/machinery/atmospherics/binary/circulator/verb/rotate_anticlockwise()
-	set category = "Object"
-	set name = "Rotate Circulator (Counterclockwise)"
-	set src in view(1)
-
-	if (usr.stat || usr.restrained() || anchored)
-		return
-
-	src.set_dir(turn(src.dir, -90))
+/obj/machinery/atmospherics/binary/circulator/set_dir(new_dir)
+	. = ..()
 	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."
