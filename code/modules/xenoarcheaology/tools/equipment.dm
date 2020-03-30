@@ -49,7 +49,6 @@
 	icon_state = "gearbelt"
 	item_state = ACCESSORY_SLOT_UTILITY
 	can_hold = list(
-		/obj/item/storage/box/samplebags,
 		/obj/item/core_sampler,
 		/obj/item/pinpointer/radio,
 		/obj/item/radio/beacon,
