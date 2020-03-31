@@ -106,3 +106,5 @@
 		add_fingerprint(user)
 	return M
 
+/obj/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
+	. = ..() || (buckled_mob == mover)
