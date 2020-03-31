@@ -5,6 +5,7 @@
 	anchored = 0
 	buckle_movable = 1
 	movement_handlers = list(/datum/movement_handler/delay = list(2), /datum/movement_handler/move_relay_self)
+	movable_flags = MOVABLE_FLAG_NONDENSE_COLLISION
 	var/driving = 0
 	var/bloodiness
 
