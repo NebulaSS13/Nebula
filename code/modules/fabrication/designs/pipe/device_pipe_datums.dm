@@ -186,7 +186,17 @@
 	build_icon = 'icons/atmos/tank.dmi'
 	build_icon_state = "air"
 	path = /obj/item/pipe/tank
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	constructed_path = /obj/machinery/atmospherics/unary/tank
 	pipe_class = PIPE_CLASS_UNARY
 	colorable = TRUE
+
+/datum/fabricator_recipe/pipe/device/tank
+	name = "thermal plate"
+	desc = "A device which transfers heat to and from an area."
+	build_icon = 'icons/obj/atmospherics/cold_sink.dmi'
+	build_icon_state = "exposed"
+	path = /obj/item/pipe
+	connect_types = CONNECT_TYPE_REGULAR
+	constructed_path = /obj/machinery/atmospherics/unary/thermal_plate
+	pipe_class = PIPE_CLASS_UNARY

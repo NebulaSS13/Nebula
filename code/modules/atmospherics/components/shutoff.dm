@@ -8,6 +8,10 @@
 	level = 1
 	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR | CONNECT_TYPE_FUEL
 	build_icon_state = "svalve"
+	base_type = /obj/machinery/atmospherics/valve/shutoff/buildable
+
+/obj/machinery/atmospherics/valve/shutoff/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[open]"

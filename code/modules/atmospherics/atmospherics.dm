@@ -61,13 +61,6 @@ Pipelines + Other Objects -> Pipe network
 	else
 		reset_plane_and_layer()
 
-/obj/machinery/atmospherics/attackby(atom/A, mob/user)
-	if(istype(A, /obj/item/pipe_painter))
-		return
-	if(istype(A, /obj/item/scanner/gas))
-		return
-	..()
-
 /obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type)
 	if(node)
 		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))			
@@ -171,3 +164,16 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 	var/turf/T = get_turf(src)
 	if(T)
 		level = (!T.is_plating() ? 2 : 1)
+
+/obj/machinery/atmospherics/proc/deconstruction_pressure_check()
+	return TRUE
+
+/obj/machinery/atmospherics/cannot_transition_to(state_path, mob/user)
+	if(state_path == /decl/machine_construction/default/deconstructed)
+		if(!deconstruction_pressure_check())
+			return SPAN_WARNING("You cannot unwrench \the [src], the internal pressure is too extreme compared to the environment.")
+
+		to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
+		if(!do_after(user, 4 SECONDS, src))
+			return MCS_BLOCK
+	return ..()

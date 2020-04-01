@@ -23,6 +23,10 @@
 	var/effective_gen = 0
 	var/lastgenlev = 0
 
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
+	stat_immune = 0
+
 /obj/machinery/power/generator/Initialize()
 	. = ..()
 	desc = initial(desc) + " Rated for [round(max_power/1000)] kW."

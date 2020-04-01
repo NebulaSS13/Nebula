@@ -18,6 +18,11 @@
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
 	build_icon_state = "omni_filter"
+	base_type = /obj/machinery/atmospherics/omni/filter/buildable
+
+/obj/machinery/atmospherics/omni/filter/buildable
+	uncreated_component_parts = null
+
 /obj/machinery/atmospherics/omni/filter/Initialize()
 	. = ..()
 	rebuild_filtering_list()

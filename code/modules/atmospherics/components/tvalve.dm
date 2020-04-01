@@ -26,6 +26,16 @@
 	build_icon = 'icons/atmos/tvalve.dmi'
 	build_icon_state = "map_tvalve0"
 
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable
+	)
+	frame_type = /obj/item/pipe
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	base_type = /obj/machinery/atmospherics/tvalve/buildable
+
+/obj/machinery/atmospherics/tvalve/buildable
+	uncreated_component_parts = null
+
 /obj/machinery/atmospherics/tvalve/on_update_icon(animation)
 	if(animation)
 		flick("tvalve[src.state][!src.state]",src)
@@ -264,24 +274,12 @@
 
 	return null
 
-/obj/machinery/atmospherics/tvalve/attackby(var/obj/item/W, var/mob/user)
-	if(!isWrench(W))
-		return ..()
+/obj/machinery/atmospherics/tvalve/deconstruction_pressure_check()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, "<span class='warnng'>You cannot unwrench \the [src], it too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear a ratchet.")
-		new /obj/item/pipe(loc, src)
-		qdel(src)
+		return FALSE
+	return TRUE
 
 /decl/public_access/public_variable/tvalve_state
 	expected_type = /obj/machinery/atmospherics/tvalve
@@ -323,6 +321,10 @@
 	
 	connect_dir_type = SOUTH | EAST | NORTH
 	build_icon_state = "map_tvalvem0"
+	base_type = /obj/machinery/atmospherics/tvalve/mirrored/buildable
+
+/obj/machinery/atmospherics/tvalve/mirrored/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/tvalve/mirrored/atmos_init()
 	..()
@@ -354,8 +356,8 @@
 	build_icon_state = "map_tvalve0"
 
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/radio/receiver,
-		/obj/item/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver/buildable,
+		/obj/item/stock_parts/power/apc/buildable
 	)
 	public_variables = list(/decl/public_access/public_variable/tvalve_state)
 	public_methods = list(
@@ -364,6 +366,10 @@
 		/decl/public_access/public_method/tvalve_toggle
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/tvalve = 1)
+	base_type = /obj/machinery/atmospherics/tvalve/digital/buildable
+
+/obj/machinery/atmospherics/tvalve/digital/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/tvalve/digital/on_update_icon()
 	..()
@@ -389,8 +395,8 @@
 	build_icon_state = "map_tvalvem0"
 
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/radio/receiver,
-		/obj/item/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver/buildable,
+		/obj/item/stock_parts/power/apc/buildable
 	)
 	public_variables = list(/decl/public_access/public_variable/tvalve_state)
 	public_methods = list(
@@ -399,6 +405,10 @@
 		/decl/public_access/public_method/tvalve_toggle
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/tvalve = 1)
+	base_type = /obj/machinery/atmospherics/tvalve/mirrored/digital/buildable
+
+/obj/machinery/atmospherics/tvalve/mirrored/digital/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/on_update_icon()
 	..()

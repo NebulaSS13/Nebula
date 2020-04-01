@@ -5,6 +5,7 @@
 	icon_state = "turbine"
 	anchored = 0
 	density = 1
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 
 	var/efficiency = 0.4
 	var/kin_energy = 0
@@ -17,6 +18,9 @@
 
 	var/datum/pipe_network/network1
 	var/datum/pipe_network/network2
+
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/atmospherics/pipeturbine/Initialize()
 	. = ..()
@@ -80,60 +84,6 @@
 		overlays += image('icons/obj/pipeturbine.dmi', "med-turb")
 	if (kin_energy > 1000000)
 		overlays += image('icons/obj/pipeturbine.dmi', "hi-turb")
-
-/obj/machinery/atmospherics/pipeturbine/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
-		anchored = !anchored
-		to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
-
-		if(anchored)
-			if(dir & (NORTH|SOUTH))
-				initialize_directions = EAST|WEST
-			else if(dir & (EAST|WEST))
-				initialize_directions = NORTH|SOUTH
-
-			atmos_init()
-			build_network()
-			if (node1)
-				node1.atmos_init()
-				node1.build_network()
-			if (node2)
-				node2.atmos_init()
-				node2.build_network()
-		else
-			if(node1)
-				node1.disconnect(src)
-				qdel(network1)
-			if(node2)
-				node2.disconnect(src)
-				qdel(network2)
-
-			node1 = null
-			node2 = null
-
-	else
-		..()
-
-/obj/machinery/atmospherics/pipeturbine/verb/rotate_clockwise()
-	set category = "Object"
-	set name = "Rotate Circulator (Clockwise)"
-	set src in view(1)
-
-	if (usr.stat || usr.restrained() || anchored)
-		return
-
-	src.set_dir(turn(src.dir, -90))
-
-
-/obj/machinery/atmospherics/pipeturbine/verb/rotate_anticlockwise()
-	set category = "Object"
-	set name = "Rotate Circulator (Counterclockwise)"
-	set src in view(1)
-
-	if (usr.stat || usr.restrained() || anchored)
-		return
-
-	src.set_dir(turn(src.dir, 90))
 
 //Goddamn copypaste from binary base class because atmospherics machinery API is not damn flexible
 /obj/machinery/atmospherics/pipeturbine/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
@@ -224,9 +174,13 @@
 	icon_state = "motor"
 	anchored = 0
 	density = 1
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 
 	var/kin_to_el_ratio = 0.1	//How much kinetic energy will be taken from turbine and converted into electricity
 	var/obj/machinery/atmospherics/pipeturbine/turbine
+
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/power/turbinemotor/Initialize()
 	. = ..()
@@ -239,34 +193,9 @@
 		if (turbine.stat & (BROKEN) || !turbine.anchored || turn(turbine.dir,180) != dir)
 			turbine = null
 
-/obj/machinery/power/turbinemotor/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/wrench))
-		anchored = !anchored
-		turbine = null
-		to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
-		updateConnection()
-	else
-		..()
-
-/obj/machinery/power/turbinemotor/verb/rotate_clock()
-	set category = "Object"
-	set name = "Rotate Motor Clockwise"
-	set src in view(1)
-
-	if (usr.stat || usr.restrained()  || anchored)
-		return
-
-	src.set_dir(turn(src.dir, -90))
-
-/obj/machinery/power/turbinemotor/verb/rotate_anticlock()
-	set category = "Object"
-	set name = "Rotate Motor Counterclockwise"
-	set src in view(1)
-
-	if (usr.stat || usr.restrained()  || anchored)
-		return
-
-	src.set_dir(turn(src.dir, 90))
+/obj/machinery/power/turbinemotor/wrench_floor_bolts(user)
+	. = ..()
+	updateConnection()
 
 /obj/machinery/power/turbinemotor/Process()
 	updateConnection()

@@ -65,6 +65,8 @@
 		return
 	if(isCrowbar(I))
 		TRANSFER_STATE(down_state)
+		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
+		machine.visible_message(SPAN_NOTICE("\The [user] deconstructs \the [machine]."))
 		machine.dismantle()
 		return
 	if(isScrewdriver(I))
