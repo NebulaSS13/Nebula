@@ -79,37 +79,21 @@
 			qdel(src)
 
 /obj/structure/rubble/house
-	loot = list(/obj/item/archaeological_find/bowl,
-	/obj/item/archaeological_find/remains,
-	/obj/item/archaeological_find/bowl/urn,
-	/obj/item/archaeological_find/cutlery,
-	/obj/item/archaeological_find/statuette,
-	/obj/item/archaeological_find/instrument,
-	/obj/item/archaeological_find/container,
-	/obj/item/archaeological_find/mask,
-	/obj/item/archaeological_find/coin,
-	/obj/item/archaeological_find,
-	/obj/item/archaeological_find/material = 5,
-	/obj/item/archaeological_find/material/exotic = 2,
-	/obj/item/archaeological_find/parts = 3
+	loot = list(
+		/obj/item/archaeological_find/house,
+		/obj/item/archaeological_find/construction = 2
 	)
 
 /obj/structure/rubble/lab
 	emptyprob = 30
 	loot = list(
-	/obj/item/archaeological_find/statuette,
-	/obj/item/archaeological_find/instrument,
-	/obj/item/archaeological_find/mask,
-	/obj/item/archaeological_find,
-	/obj/item/archaeological_find/material = 10,
-	/obj/item/archaeological_find/material/exotic = 10,
-	/obj/item/archaeological_find/parts = 10
+		/obj/item/archaeological_find/lab,
+		/obj/item/archaeological_find/construction = 6
 	)
 
 /obj/structure/rubble/war
 	emptyprob = 95 //can't have piles upon piles of guns
-	loot = list(/obj/item/archaeological_find/knife,
-	/obj/item/archaeological_find/gun,
-	/obj/item/archaeological_find/laser,
-	/obj/item/archaeological_find/sword,
-	/obj/item/archaeological_find/katana)
+	loot = list(
+		/obj/item/archaeological_find/blade,
+		/obj/item/archaeological_find/gun
+	)

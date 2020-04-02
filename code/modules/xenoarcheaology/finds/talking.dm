@@ -9,9 +9,6 @@
 
 /datum/talking_atom/New(atom/holder)
 	holder_atom = holder
-	init()
-
-/datum/talking_atom/proc/init()
 	if(holder_atom)
 		START_PROCESSING(SSprocessing, src)
 
