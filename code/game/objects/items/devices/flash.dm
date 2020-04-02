@@ -1,6 +1,7 @@
 /obj/item/flash
 	name = "flash"
 	desc = "A device that produces a bright flash of light, designed to stun and disorient an attacker."
+	icon = 'icons/obj/items/device/flash.dmi'
 	icon_state = "flash"
 	item_state = "flashtool"
 	throwforce = 5

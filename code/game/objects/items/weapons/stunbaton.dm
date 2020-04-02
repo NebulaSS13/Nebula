@@ -2,6 +2,7 @@
 /obj/item/melee/baton
 	name = "stunbaton"
 	desc = "A stun baton for incapacitating people with."
+	icon = 'icons/obj/items/weapon/stunbaton.dmi'
 	icon_state = "stunbaton"
 	item_state = "baton"
 	slot_flags = SLOT_BELT
@@ -231,7 +232,7 @@
 // Traitor variant for Engineering synthetics.
 /obj/item/melee/baton/robot/electrified_arm
 	name = "electrified arm"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/borg_module/electrified_arm.dmi'
 	icon_state = "electrified_arm"
 
 /obj/item/melee/baton/robot/electrified_arm/on_update_icon()
@@ -246,6 +247,7 @@
 /obj/item/melee/baton/cattleprod
 	name = "stunprod"
 	desc = "An improvised stun baton."
+	icon = 'icons/obj/items/weapon/stunprod.dmi'
 	icon_state = "stunprod_nocell"
 	item_state = "prod"
 	force = 3

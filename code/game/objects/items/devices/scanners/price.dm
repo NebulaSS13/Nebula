@@ -1,6 +1,7 @@
 /obj/item/scanner/price
 	name = "price scanner"
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
+	icon = 'icons/obj/items/device/scanner/price_scanner.dmi'
 	icon_state = "price_scanner"
 	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_MAGNET + "':4}"
 	scan_sound = 'sound/effects/checkout.ogg'

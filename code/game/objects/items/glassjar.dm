@@ -1,14 +1,14 @@
 /obj/item/glass_jar
 	name = "glass jar"
 	desc = "A small empty jar."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/jar.dmi'
 	icon_state = "jar"
 	w_class = ITEM_SIZE_SMALL
 	material = MAT_GLASS
 	material_force_multiplier = 0.1
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	var/list/accept_mobs = list(
-		/mob/living/simple_animal/lizard, 
+		/mob/living/simple_animal/lizard,
 		/mob/living/simple_animal/mouse,
 		/mob/living/simple_animal/borer
 	)
@@ -94,7 +94,7 @@
 			for(var/obj/item/spacecash/S in src)
 				var/list/moneyImages = S.getMoneyImages()
 				for(var/A in moneyImages)
-					var/image/money = image('icons/obj/items.dmi', A)
+					var/image/money = image('icons/obj/items/money.dmi', A)
 					money.pixel_x = rand(-2, 3)
 					money.pixel_y = rand(-6, 6)
 					money.transform *= 0.6

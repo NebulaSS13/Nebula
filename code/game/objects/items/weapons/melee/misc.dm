@@ -1,6 +1,7 @@
 /obj/item/melee/whip
 	name = "whip"
 	desc = "A generic whip."
+	icon = 'icons/obj/items/weapon/whip.dmi'
 	icon_state = "chain"
 	item_state = "chain"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -44,6 +45,7 @@
 /obj/item/material/sword/replica/officersword
 	name = "fleet officer's sword"
 	desc = "A polished sword issued to officers of the fleet."
+	icon = 'icons/obj/items/weapon/parade_sword.dmi'
 	icon_state = "officersword"
 	item_state = "officersword"
 	slot_flags = SLOT_BELT

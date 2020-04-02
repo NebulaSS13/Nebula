@@ -1,6 +1,6 @@
 /obj/item/towel
 	name = "towel"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/towel.dmi'
 	icon_state = "towel"
 	item_flags = ITEM_FLAG_IS_BELT
 	slot_flags = SLOT_HEAD | SLOT_BELT | SLOT_OCLOTHING

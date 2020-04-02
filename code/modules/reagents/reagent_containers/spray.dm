@@ -123,7 +123,7 @@
 /obj/item/chems/spray/pepper
 	name = "pepperspray"
 	desc = "Manufactured by Uhang Inc., it fires a mist of condensed capsaicin to blind and down an opponent quickly."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/weapon/pepperspray.dmi'
 	icon_state = "pepperspray"
 	item_state = "pepperspray"
 	possible_transfer_amounts = null
@@ -153,7 +153,7 @@
 /obj/item/chems/spray/waterflower
 	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/sunflower.dmi'
 	icon_state = "sunflower"
 	item_state = "sunflower"
 	amount_per_transfer_from_this = 1
@@ -167,7 +167,7 @@
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"
 	desc = "A utility used to spray large amounts of reagent in a given area."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/device/chemsprayer.dmi'
 	icon_state = "chemsprayer"
 	item_state = "chemsprayer"
 	throwforce = 3
@@ -223,6 +223,6 @@
 	desc = "A can of Gold Standard spray deodorant - for when you're too lazy to shower."
 	gender = PLURAL
 	volume = 35
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/deodorant.dmi'
 	icon_state = "deodorant"
 	item_state = "deodorant"

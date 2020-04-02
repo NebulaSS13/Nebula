@@ -125,6 +125,7 @@
 /obj/item/spaceflare
 	name = "bluespace flare"
 	desc = "Burst transmitter used to broadcast all needed information for shuttle navigation systems. Has a flare attached for marking the spot where you probably shouldn't be standing."
+	icon = 'icons/obj/items/device/bluespace_flare.dmi'
 	icon_state = "bluflare"
 	light_color = "#3728ff"
 	var/active

@@ -2,7 +2,7 @@
 	name = "0 thalers"
 	desc = "It's worth 0 thalers."
 	gender = PLURAL
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/money.dmi'
 	icon_state = "spacecash1"
 	opacity = 0
 	density = 0
@@ -75,7 +75,7 @@
 	var/list/images = src.getMoneyImages()
 
 	for(var/A in images)
-		var/image/banknote = image('icons/obj/items.dmi', A)
+		var/image/banknote = image(icon, A)
 		var/matrix/M = matrix()
 		M.Translate(rand(-6, 6), rand(-4, 8))
 		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
@@ -176,6 +176,7 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user)
 
 /obj/item/spacecash/ewallet
 	name = "Charge card"
+	icon = 'icons/obj/items/e_funds.dmi'
 	icon_state = "efundcard"
 	desc = "A card that holds an amount of money."
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.

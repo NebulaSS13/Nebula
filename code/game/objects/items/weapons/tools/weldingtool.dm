@@ -1,6 +1,6 @@
 /obj/item/weldingtool
 	name = "welding tool"
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/items/tool/welder.dmi'
 	icon_state = "welder"
 	item_state = "welder"
 	desc = "A portable welding gun with a port for attaching fuel tanks."
@@ -218,9 +218,9 @@
 	..()
 	overlays.Cut()
 	if(tank)
-		overlays += image('icons/obj/tools.dmi', "welder_[tank.icon_state]")
+		overlays += image(icon, "welder_[tank.icon_state]")
 	if(welding)
-		overlays += image('icons/obj/tools.dmi', "welder_on")
+		overlays += image(icon, "welder_on")
 		set_light(0.6, 0.5, 2.5, l_color =COLOR_PALE_ORANGE)
 	else
 		set_light(0)
@@ -318,7 +318,7 @@
 /obj/item/welder_tank
 	name = "\improper welding fuel tank"
 	desc = "An interchangeable fuel tank meant for a welding tool."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/items/tool/welder_tank.dmi'
 	icon_state = "tank_normal"
 	w_class = ITEM_SIZE_SMALL
 	force = 5

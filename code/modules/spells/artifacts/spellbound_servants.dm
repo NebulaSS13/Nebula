@@ -232,6 +232,7 @@
 /obj/item/summoning_stone
 	name = "summoning stone"
 	desc = "a small non-descript stone of dubious origin."
+	icon = 'icons/obj/items/summoning_stone.dmi'
 	icon_state = "stone"
 	throw_speed = 5
 	throw_range = 10

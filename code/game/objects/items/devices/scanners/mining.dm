@@ -7,6 +7,7 @@
 /obj/item/scanner/mining
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
+	icon = 'icons/obj/items/device/scanner/ore_scanner.dmi'
 	icon_state = "ore"
 	origin_tech = "{'" + TECH_MAGNET + "':1,'" + TECH_ENGINEERING + "':1}"
 	use_delay = 50
@@ -62,7 +63,7 @@
 
 /obj/item/disk/survey
 	name = "survey data disk"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/device/diskette.dmi'
 	icon_state = "nucleardisk"
 	var/data
 
@@ -119,7 +120,7 @@
 			if(76 to INFINITY) result = "huge quantities"
 
 		scandata += "- [result] of [ore_type]."
-	
+
 	return list(jointext(scandata, "<br>"), new_data)
 
 #undef  ORE_SURFACE

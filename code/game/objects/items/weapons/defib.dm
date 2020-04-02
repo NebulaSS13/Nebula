@@ -622,7 +622,7 @@
 /obj/item/shockpaddles/standalone/traitor
 	name = "defibrillator paddles"
 	desc = "A pair of unusual looking paddles powered by an experimental miniaturized reactor. It possesses both the ability to penetrate armor and to deliver powerful shocks."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/defibrillator.dmi'
 	icon_state = "defibpaddles0"
 	item_state = "defibpaddles0"
 	combat = 1

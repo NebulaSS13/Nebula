@@ -71,10 +71,11 @@
  * Fireaxe
  */
 /obj/item/material/twohanded/fireaxe  // DEM AXES MAN, marker -Agouri
-	icon_state = "fireaxe0"
-	base_icon = "fireaxe"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
+	icon = 'icons/obj/items/tool/fireaxe.dmi'
+	icon_state = "fireaxe0"
+	base_icon = "fireaxe"
 
 	max_force = 60	//for wielded
 	material_force_multiplier = 0.6
@@ -102,10 +103,11 @@
 
 //spears, bay edition
 /obj/item/material/twohanded/spear
-	icon_state = "spearglass0"
-	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
+	icon = 'icons/obj/items/weapon/spear.dmi'
+	icon_state = "spearglass0"
+	base_icon = "spearglass"
 	max_force = 20	//for wielded
 	applies_material_colour = 0
 	material_force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
@@ -128,6 +130,7 @@
 /obj/item/material/twohanded/baseballbat
 	name = "bat"
 	desc = "HOME RUN!"
+	icon = 'icons/obj/items/weapon/bat.dmi'
 	icon_state = "metalbat0"
 	base_icon = "metalbat"
 	item_state = "metalbat"

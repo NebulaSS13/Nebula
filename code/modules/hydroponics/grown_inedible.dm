@@ -4,7 +4,6 @@
 
 /obj/item/grown // Grown weapons
 	name = "grown_weapon"
-	icon = 'icons/obj/items.dmi'
 	var/plantname
 	var/potency = 1
 
@@ -53,7 +52,7 @@
 /obj/item/bananapeel
 	name = "banana peel"
 	desc = "A peel from a banana."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/banana.dmi'
 	icon_state = "banana_peel"
 	item_state = "banana_peel"
 	w_class = ITEM_SIZE_SMALL

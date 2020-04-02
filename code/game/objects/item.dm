@@ -1,6 +1,5 @@
 /obj/item
 	name = "item"
-	icon = 'icons/obj/items.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	pass_flags = PASS_FLAG_TABLE
@@ -245,7 +244,7 @@
 		else if(usr.client && istype(over, /obj/screen/inventory) && (over in usr.client.screen))
 			var/obj/screen/inventory/inv = over
 			if(!inv.slot_id)
-				return 
+				return
 			if(!usr.check_dexterity(DEXTERITY_GRIP, silent = TRUE))
 				to_chat(usr, SPAN_NOTICE("You begin putting on \the [src]..."))
 				if(!do_after(usr, 3 SECONDS, src) || QDELETED(over) || QDELETED(src) || QDELETED(usr))
@@ -301,7 +300,7 @@
 
 		to_chat(user, SPAN_WARNING("You are not dexterous enough to pick up \the [src]."))
 		return
-	
+
 	var/old_loc = loc
 	pickup(user)
 	if (istype(loc, /obj/item/storage))
@@ -862,7 +861,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return mob_state
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
-	
+
 	if(on_mob_icon)
 		return experimental_mob_overlay(user_mob, slot)
 

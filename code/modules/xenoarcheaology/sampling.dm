@@ -83,7 +83,7 @@
 /obj/item/core_sampler
 	name = "core sampler"
 	desc = "Used to extract geological core samples."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/geologic_sampler.dmi'
 	icon_state = "sampler0"
 	item_state = "screwdriver_brown"
 	w_class = ITEM_SIZE_TINY

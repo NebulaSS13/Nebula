@@ -1,6 +1,6 @@
 /obj/item/book/tome
 	name = "arcane tome"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/tome.dmi'
 	icon_state = "tome"
 	throw_speed = 1
 	throw_range = 5

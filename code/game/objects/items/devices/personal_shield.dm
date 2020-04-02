@@ -1,7 +1,7 @@
 /obj/item/personal_shield
 	name = "personal shield"
 	desc = "Truely a life-saver: this device protects its user from being hit by objects moving very, very fast, though only for a few shots."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/weapon/batterer.dmi'
 	icon_state = "batterer"
 	var/uses = 5
 	var/obj/aura/personal_shield/device/shield

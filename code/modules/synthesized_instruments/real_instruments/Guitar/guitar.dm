@@ -1,7 +1,7 @@
 /obj/item/synthesized_instrument/guitar
 	name = "guitar"
 	desc = "A wooden musical instrument with six strings. This one looks like it may actually work."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/guitar.dmi'
 	icon_state = "guitar"
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar/clean_crisis

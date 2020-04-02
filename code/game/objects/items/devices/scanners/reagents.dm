@@ -1,6 +1,7 @@
 /obj/item/scanner/reagent
 	name = "reagent scanner"
 	desc = "A hand-held reagent scanner which identifies chemical agents."
+	icon = 'icons/obj/items/device/scanner/spectrometer.dmi'
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 

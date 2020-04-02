@@ -65,7 +65,7 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 /obj/item/rpd
 	name = "rapid piping device"
 	desc = "Portable, complex and deceptively heavy, it's the cousin of the RCD, use to dispense piping on the move."
-	icon = 'icons/obj/tools.dmi'//Needs proper icon
+	icon = 'icons/obj/items/device/rpd.dmi'
 	icon_state = "rpd"
 	force = 12
 	throwforce = 15

@@ -1,7 +1,7 @@
 /obj/item/spy_bug
 	name = "bug"
 	desc = ""	// Nothing to see here
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/shield/e_shield.dmi'
 	icon_state = "eshield0"
 	item_state = "nothing"
 	layer = BELOW_TABLE_LAYER

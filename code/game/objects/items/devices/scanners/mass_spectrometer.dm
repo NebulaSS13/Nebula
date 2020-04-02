@@ -1,6 +1,7 @@
 /obj/item/scanner/spectrometer
 	name = "mass spectrometer"
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample or analyzes unusual chemicals."
+	icon = 'icons/obj/items/device/scanner/spectrometer.dmi'
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 

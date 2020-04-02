@@ -1,6 +1,6 @@
 /obj/machinery/ai_slipper
 	name = "\improper AI Liquid Dispenser"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/device/motion_detector.dmi'
 	icon_state = "motion0"
 	anchored = 1.0
 	idle_power_usage = 10

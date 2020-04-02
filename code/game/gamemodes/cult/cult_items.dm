@@ -1,6 +1,7 @@
 /obj/item/melee/cultblade
 	name = "cult blade"
 	desc = "An arcane weapon wielded by the followers of Nar-Sie."
+	icon = 'icons/obj/items/weapon/broadswords.dmi'
 	icon_state = "cultblade"
 	item_state = "cultblade"
 	edge = 1

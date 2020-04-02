@@ -214,7 +214,7 @@
 
 /obj/item/archaeological_find/trap
 	item_type = "trap"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/items/beartrap.dmi'
 	icon_state = "beartrap0"
 	find_type = ARCHAEO_BEARTRAP
 	apply_prefix = 0

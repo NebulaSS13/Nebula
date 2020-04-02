@@ -33,6 +33,7 @@
 
 /obj/item/implanter/compressed
 	name = "implanter (C)"
+	icon = 'icons/obj/items/implant/compressed_implant.dmi'
 	icon_state = "cimplanter1"
 	desc = "The matter compressor safety is on."
 	var/safe = 1
