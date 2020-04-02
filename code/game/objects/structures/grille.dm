@@ -12,7 +12,6 @@
 	color = COLOR_STEEL
 	material = MAT_STEEL
 	handle_generic_blending = TRUE
-	material_alteration = MAT_FLAG_ALTERATION_ALL
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 	var/health = 10

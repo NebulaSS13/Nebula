@@ -7,7 +7,8 @@ SUBSYSTEM_DEF(fabrication)
 	var/list/categories = list()
 	var/list/crafting_procedures_by_type = list()
 
-	// These should be removed after rewriting research networks to respect init order.
+	// These should be removed after rewriting research networks and crafting to respect init order.
+	var/list/crafting_recipes_to_init = list()
 	var/list/rnd_to_init = list()
 	var/post_recipe_init = FALSE
 
@@ -27,13 +28,24 @@ SUBSYSTEM_DEF(fabrication)
 		if(ispath(handler.begins_with_object_type))
 			LAZYDISTINCTADD(crafting_procedures_by_type[handler.begins_with_object_type], handler)
 
+	for(var/datum/stack_recipe/recipe in crafting_recipes_to_init)
+		recipe.InitializeMaterials()
+	crafting_recipes_to_init.Cut()
+
 	// R&D designs.
 	for(var/datum/design/design in rnd_to_init)
 		design.AssembleDesignMaterials()
 	rnd_to_init.Cut()
+	post_recipe_init = TRUE
 
 	init_rpd_lists()
 	. = ..()
+
+/datum/controller/subsystem/fabrication/proc/init_crafting_recipe(var/datum/stack_recipe/recipe)
+	if(post_recipe_init)
+		recipe.InitializeMaterials()
+	else
+		crafting_recipes_to_init |= recipe
 
 /datum/controller/subsystem/fabrication/proc/get_categories(var/fab_type)
 	. = categories[fab_type]

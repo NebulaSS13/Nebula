@@ -6,62 +6,52 @@
 	req_amount = 10
 	time = 20
 	difficulty = 2
-	send_material_data = 1
 
 /datum/stack_recipe/bell
 	title = "bell"
 	result_type = /obj/item/material/bell
 	req_amount = 5
 	time = 20
-	send_material_data = 1
 
 /datum/stack_recipe/ashtray
 	title = "ashtray"
 	result_type = /obj/item/material/ashtray
 	req_amount = 2
 	one_per_turf = 1
-	send_material_data = 1
 
 /datum/stack_recipe/improvised_armour
 	title = "improvised armour"
 	result_type = /obj/item/clothing/suit/armor/crafted
 	req_amount = 20
 	one_per_turf = 1
-	send_material_data = 1
 
 /datum/stack_recipe/coin
 	title = "coin"
 	result_type = /obj/item/material/coin
 	req_amount = 2
 	one_per_turf = 1
-	send_material_data = 1
 
 /datum/stack_recipe/ring
 	title = "ring"
 	result_type = /obj/item/clothing/ring/material
-	send_material_data = 1
 
 /datum/stack_recipe/lock
 	title = "lock"
 	result_type = /obj/item/material/lock_construct
 	time = 20
-	send_material_data = 1
 
 /datum/stack_recipe/fork
 	title = "fork"
 	result_type = /obj/item/material/kitchen/utensil/fork/plastic
-	send_material_data = 1
 
 /datum/stack_recipe/knife
 	title = "table knife"
 	result_type = /obj/item/material/knife/table
 	difficulty = 2
-	send_material_data = 1
 
 /datum/stack_recipe/spoon
 	title = "spoon"
 	result_type = /obj/item/material/kitchen/utensil/spoon/plastic
-	send_material_data = 1
 
 /datum/stack_recipe/blade
 	title = "knife"
@@ -69,7 +59,6 @@
 	req_amount = 6
 	time = 20
 	difficulty = 1
-	send_material_data = 1
 
 /datum/stack_recipe/grip
 	title = "knife grip"
@@ -78,7 +67,6 @@
 	time = 20
 	on_floor = 1
 	difficulty = 1
-	send_material_data = 1
 
 /datum/stack_recipe/key
 	title = "key"
@@ -208,7 +196,6 @@
 /datum/stack_recipe/stick
 	title = "stick"
 	result_type = /obj/item/material/stick
-	send_material_data = 1
 	difficulty = 0
 
 /datum/stack_recipe/crossbowframe
@@ -247,19 +234,16 @@
 	title = "clipboard"
 	result_type = /obj/item/material/clipboard
 	req_amount = 5
-	send_material_data = 1
 
 /datum/stack_recipe/urn
 	title = "urn"
 	result_type = /obj/item/material/urn
 	req_amount = 5
-	send_material_data = 1
 
 /datum/stack_recipe/drill_head
 	title = "drill head"
 	result_type = /obj/item/material/drill_head
 	req_amount = 3
-	send_material_data = 1
 	difficulty = 0
 
 /datum/stack_recipe/cross
@@ -267,7 +251,6 @@
 	result_type = /obj/item/material/cross
 	req_amount = 2
 	on_floor = 1
-	send_material_data = 1
 
 /datum/stack_recipe/wooden_prosthetic
 	title = "left arm"
