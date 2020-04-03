@@ -5461,7 +5461,7 @@
 /area/map_template/colony)
 "jC" = (
 /obj/machinery/conveyor{
-	id = "colonymine"
+	id_tag = "colonymine"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/colony/mineralprocessing)
@@ -6427,7 +6427,7 @@
 	tag = "icon-railing0 (EAST)"
 	},
 /obj/machinery/conveyor_switch{
-	id = "colonymine"
+	id_tag = "colonymine"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/decal/cleanable/dirt,
