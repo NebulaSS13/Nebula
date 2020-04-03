@@ -271,45 +271,24 @@
 /obj/machinery/radiocarbon_spectrometer/proc/get_scan_data()
 	var/data = "<b>[src] analysis report #[report_num]</b><br>"
 	data += "<b>Scanned item:</b> [scanned_item.name]<br><br>"
-	var/datum/geosample/G
-	switch(scanned_item.type)
-		if(/obj/item/ore)
-			var/obj/item/ore/O = scanned_item
-			if(O.geologic_data)
-				G = O.geologic_data
-
-		if(/obj/item/rocksliver)
-			var/obj/item/rocksliver/O = scanned_item
-			if(O.geologic_data)
-				G = O.geologic_data
-
-		if(/obj/item/archaeological_find)
-			data += " - Mundane object (archaic xenos origins)<br>"
-
-			var/obj/item/archaeological_find/A = scanned_item
-			if(A.talking_atom)
-				data += " - Exhibits properties consistent with sonic reproduction and audio capture technologies.<br>"
-		else
-			data += " - Mundane object: [scanned_item.desc ? scanned_item.desc : "No information on record."]<br>"
+	data += " - Mundane object: [scanned_item.desc ? scanned_item.desc : "No information on record."]<br>"
+	if(scanned_item.talking_atom)
+		data += " - Exhibits properties consistent with sonic reproduction and audio capture technologies.<br>"
 
 	var/anom_found = 0
-	if(G)
-		data = " - Spectometric analysis on mineral sample has determined type [responsive_carriers[G.source_mineral]]<br>"
-		if(G.age_billion > 0)
-			data += " - Radiometric dating shows age of [G.age_billion].[G.age_million] billion years<br>"
-		else if(G.age_million > 0)
-			data += " - Radiometric dating shows age of [G.age_million].[G.age_thousand] million years<br>"
-		else
-			data += " - Radiometric dating shows age of [G.age_thousand * 1000 + G.age] years<br>"
+	var/datum/extension/geological_data/GD = get_extension(scanned_item, /datum/extension/geological_data)
+	if(GD && GD.geodata)
+		data = " - Spectometric analysis on mineral sample has determined type [responsive_carriers[GD.geodata.source_mineral]]<br>"
+		data += " - Radiometric dating shows age of [GD.geodata.age * 1000] years<br>"
 		data += " - Chromatographic analysis shows the following materials present:<br>"
-		for(var/carrier in G.find_presence)
-			if(G.find_presence[carrier])
-				data += "	> [100 * G.find_presence[carrier]]% [responsive_carriers[carrier]]<br>"
+		for(var/carrier in GD.geodata.find_presence)
+			if(GD.geodata.find_presence[carrier])
+				data += "	> [100 * GD.geodata.find_presence[carrier]]% [responsive_carriers[carrier]]<br>"
 
-		if(G.artifact_id && G.artifact_distance >= 0)
+		if(GD.geodata.artifact_id && GD.geodata.artifact_distance >= 0)
 			anom_found = 1
-			data += " - Hyperspectral imaging reveals exotic energy wavelength detected with ID: [G.artifact_id]<br>"
-			data += " - Fourier transform analysis on anomalous energy absorption indicates energy source located inside emission radius of [G.artifact_distance]m<br>"
+			data += " - Hyperspectral imaging reveals exotic energy wavelength detected with ID: [GD.geodata.artifact_id]<br>"
+			data += " - Fourier transform analysis on anomalous energy absorption indicates energy source located inside emission radius of [GD.geodata.artifact_distance]m<br>"
 
 	if(!anom_found)
 		data += " - No anomalous data<br>"

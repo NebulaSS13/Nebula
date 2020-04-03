@@ -145,8 +145,7 @@
 	var/value = 1
 
 	// Xenoarch behavior.
-	var/list/xarch_ages = list("thousand" = 999, "million" = 999)
-	var/xarch_source_mineral = "iron"
+	var/xarch_source_mineral = /datum/reagent/iron
 
 	// Gas behavior.
 	var/gas_overlay_limit

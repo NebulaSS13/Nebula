@@ -55,11 +55,6 @@
 				W.remove_fuel(1)
 			return
 
-	else if(istype(I, /obj/item/core_sampler))
-		var/obj/item/core_sampler/S = I
-		S.sample_item(src, user)
-		return
-
 	..()
 
 	if(prob(33))

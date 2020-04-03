@@ -101,6 +101,18 @@ SUBSYSTEM_DEF(xenoarch)
 	for(var/turf/simulated/mineral/artifact_turf in artifact_spawning_turfs)
 		artifact_turf.artifact_find = new()
 
+/datum/controller/subsystem/xenoarch/proc/get_nearest_artifact(var/turf/source)
+	var/artifact_distance = INFINITY
+	var/artifact_id 
+	for(var/turf/simulated/mineral/T in artifact_spawning_turfs)
+		if(T.artifact_find)
+			var/cur_dist = get_dist(source, T) * 2
+			if(cur_dist < artifact_distance)
+				artifact_distance = cur_dist + rand() * 2 - 1
+				artifact_id = T.artifact_find.artifact_id
+	if(artifact_id)
+		return list(artifact_id, artifact_distance)
+
 #undef XENOARCH_SPAWN_CHANCE
 #undef DIGSITESIZE_LOWER
 #undef DIGSITESIZE_UPPER

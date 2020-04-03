@@ -25,16 +25,10 @@
 		var/nearestSimpleTargetDist = -1
 		var/turf/cur_turf = get_turf(src)
 
-		for(var/A in SSxenoarch.artifact_spawning_turfs)
-			var/turf/simulated/mineral/T = A
-			if(T.density && T.artifact_find)
-				if(T.z == cur_turf.z)
-					var/cur_dist = get_dist(cur_turf, T) * 2
-					if(nearestTargetDist < 0 || cur_dist < nearestTargetDist)
-						nearestTargetDist = cur_dist + rand() * 2 - 1
-						nearestTargetId = T.artifact_find.artifact_id
-			else
-				SSxenoarch.artifact_spawning_turfs.Remove(T)
+		var/list/artifact = SSxenoarch.get_nearest_artifact(cur_turf)
+		if(artifact)
+			nearestTargetId = artifact[1]
+			nearestTargetDist = artifact[2]
 
 		for(var/A in SSxenoarch.digsite_spawning_turfs)
 			var/turf/simulated/mineral/T = A

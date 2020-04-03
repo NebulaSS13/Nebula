@@ -4,14 +4,6 @@
 	icon = 'icons/obj/materials/ore.dmi'
 	randpixel = 8
 	w_class = ITEM_SIZE_SMALL
-	var/datum/geosample/geologic_data
-
-/obj/item/ore/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/core_sampler))
-		var/obj/item/core_sampler/C = W
-		C.sample_item(src, user)
-	else
-		return ..()
 
 /obj/item/ore/set_material(var/new_material)
 	. = ..()

@@ -28,7 +28,6 @@ var/list/mining_floors = list()
 	var/last_act = 0
 	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
 
-	var/datum/geosample/geologic_data
 	var/excavation_level = 0
 	var/list/finds
 	var/next_rock = 0
@@ -47,6 +46,7 @@ var/list/mining_floors = list()
 	mining_walls["[src.z]"] += src
 	MineralSpread()
 	update_icon(1)
+	set_extension(src, /datum/extension/geological_data)
 
 /turf/simulated/mineral/Destroy()
 	if (mining_walls["[src.z]"])
@@ -158,11 +158,6 @@ var/list/mining_floors = list()
 	if (!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return
 
-	if (istype(W, /obj/item/core_sampler))
-		var/obj/item/core_sampler/C = W
-		C.sample_item(src, user)
-		return TRUE
-
 	if (istype(W, /obj/item/depth_scanner))
 		var/obj/item/depth_scanner/C = W
 		C.scan_atom(user, src)
@@ -221,10 +216,11 @@ var/list/mining_floors = list()
 					if( excavation_level > 0 || prob(15) )
 						//boulder with an artifact inside
 						B = new(src)
-						if(artifact_find)
-							B.artifact_find = artifact_find
+						B.artifact_find = artifact_find
 					else
 						artifact_debris(1)
+					artifact_find = null
+					SSxenoarch.artifact_spawning_turfs -= src
 				else if(prob(5))
 					//empty boulder
 					B = new(src)
@@ -275,16 +271,9 @@ var/list/mining_floors = list()
 			while(next_rock > 50)
 				next_rock -= 50
 				var/obj/item/ore/O = new(src)
-				O.geologic_data = get_geodata()
-
+				pass_geodata_to(O)
 	else
 		return ..()
-
-/turf/simulated/mineral/proc/get_geodata()
-	if(!geologic_data)
-		geologic_data = new /datum/geosample(src)
-	geologic_data.UpdateNearbyArtifactInfo(src)
-	return geologic_data
 
 /turf/simulated/mineral/proc/clear_ore_effects()
 	overlays -= ore_overlay
@@ -296,9 +285,16 @@ var/list/mining_floors = list()
 
 	clear_ore_effects()
 	var/obj/item/ore/O = new(src, mineral.type)
-	if(istype(O))
-		O.geologic_data = get_geodata()
+	pass_geodata_to(O)
 	return O
+
+/turf/simulated/mineral/proc/pass_geodata_to(obj/O)
+	var/datum/extension/geological_data/ours = get_extension(src, /datum/extension/geological_data)
+	ours.geodata.UpdateNearbyArtifactInfo(src)
+
+	set_extension(O, /datum/extension/geological_data)
+	var/datum/extension/geological_data/newdata = get_extension(O, /datum/extension/geological_data)
+	newdata.set_data(ours.geodata.get_copy())
 
 /turf/simulated/mineral/proc/GetDrilled(var/artifact_fail = 0)
 	//var/destroyed = 0 //used for breaking strange rocks
@@ -350,7 +346,7 @@ var/list/mining_floors = list()
 		new find(src)
 	else
 		var/obj/item/ore/strangerock/rock = new(src, F.find_type)
-		rock.geologic_data = get_geodata()
+		pass_geodata_to(rock)
 
 	finds.Remove(F)
 
