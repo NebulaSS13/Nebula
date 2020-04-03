@@ -60,7 +60,7 @@
 /obj/item/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	if(user == M || !ishuman(user) || !ishuman(M))
 		return
-	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+	if(user?.mind?.assigned_job?.is_holy)
 		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
 		if(do_after(user, 5 SECONDS) && user.Adjacent(M))
 			user.visible_message("\The [user] finishes reciting \his prayer, removing \the [src] from \the [M]'s forehead.", "You finish reciting your prayer, removing \the [src] from \the [M]'s forehead.")
@@ -72,7 +72,7 @@
 
 /obj/item/storage/bible/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
-	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+	if(user?.mind?.assigned_job?.is_holy)
 		if(A.reagents && A.reagents.has_reagent(/datum/reagent/water)) //blesses all the water in the holder
 			to_chat(user, "<span class='notice'>You bless \the [A].</span>") // I wish it was this easy in nethack
 			var/water2holy = A.reagents.get_reagent_amount(/datum/reagent/water)
@@ -87,7 +87,7 @@
 /obj/item/storage/bible/attack_self(mob/living/carbon/human/user)
 	if(!ishuman(user))
 		return
-	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+	if(user?.mind?.assigned_job?.is_holy)
 		user.visible_message("\The [user] begins to read a passage from \the [src]...", "You begin to read a passage from \the [src]...")
 		if(do_after(user, 5 SECONDS))
 			user.visible_message("\The [user] reads a passage from \the [src].", "You read a passage from \the [src].")
