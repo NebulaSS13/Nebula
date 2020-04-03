@@ -2,6 +2,7 @@
 	name = "Example"
 	full_name = "The Example"
 	path = "example"
+	default_species = SPECIES_HUMAN
 
 	lobby_screens = list('maps/example/lobby.png')
 	lobby_tracks = list(/music_track/absconditus)

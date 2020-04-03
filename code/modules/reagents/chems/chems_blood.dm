@@ -1,7 +1,7 @@
 /datum/reagent/blood
 	data = new/list(
 		"donor" = null,
-		"species" = SPECIES_HUMAN,
+		"species" = null,
 		"blood_DNA" = null,
 		"blood_type" = null,
 		"blood_colour" = COLOR_BLOOD_HUMAN,
@@ -30,8 +30,11 @@
 
 /datum/reagent/blood/initialize_data(var/newdata)
 	..()
-	if(data && data["blood_colour"])
-		color = data["blood_colour"]
+	if(data)
+		if(isnull(data["species"]))
+			data["species"] = GLOB.using_map.default_species
+		if(data["blood_colour"])
+			color = data["blood_colour"]
 	return
 
 /datum/reagent/blood/proc/sync_to(var/mob/living/carbon/C)

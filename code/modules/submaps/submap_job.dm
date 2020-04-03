@@ -42,9 +42,11 @@
 	var/list/spawnpoints
 	var/datum/submap/owner
 	var/list/blacklisted_species = list(SPECIES_ALIEN, SPECIES_GOLEM)
-	var/list/whitelisted_species = list(SPECIES_HUMAN)
+	var/list/whitelisted_species = list()
 
 /datum/job/submap/New(var/datum/submap/_owner, var/abstract_job = FALSE)
+	if(!length(whitelisted_species))
+		whitelisted_species = list(GLOB.using_map.default_species)
 	if(!abstract_job)
 		spawnpoints = list()
 		owner = _owner
@@ -64,8 +66,8 @@
 
 /datum/job/submap/is_restricted(var/datum/preferences/prefs, var/feedback)
 	var/datum/species/S = all_species[prefs.species]
-	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
-		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]].</span>")
+	if(LAZYACCESS(minimum_character_age, S.get_root_species_name()) && (prefs.age < minimum_character_age[S.get_root_species_name()]))
+		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_root_species_name()]].</span>")
 		return TRUE
 	if(LAZYLEN(whitelisted_species) && !(prefs.species in whitelisted_species))
 		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor].</span>")

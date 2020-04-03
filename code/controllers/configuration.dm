@@ -201,8 +201,6 @@ var/list/gamemode_cache = list()
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
-	var/list/ert_species = list(SPECIES_HUMAN)
-
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
 
 	var/aggressive_changelog = 0
@@ -704,11 +702,6 @@ var/list/gamemode_cache = list()
 				if("starlight")
 					value = text2num(value)
 					config.starlight = value >= 0 ? value : 0
-
-				if("ert_species")
-					config.ert_species = splittext(value, ";")
-					if(!config.ert_species.len)
-						config.ert_species += SPECIES_HUMAN
 
 				if("law_zero")
 					law_zero = value

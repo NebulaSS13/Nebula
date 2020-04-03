@@ -3,7 +3,6 @@
 	model_text = "Engineering"
 	req_access = list(access_construction)
 	available_modifications = list(/decl/item_modifier/space_suit/engineering, /decl/item_modifier/space_suit/atmos)
-	species = list(SPECIES_HUMAN)
 
 /obj/machinery/suit_cycler/engineering/alt
 	available_modifications = list(

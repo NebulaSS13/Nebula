@@ -70,7 +70,7 @@ var/list/organ_cache = list()
 	if (given_dna)
 		set_dna(given_dna)
 	if (!species)
-		species = all_species[SPECIES_HUMAN]
+		species = all_species[GLOB.using_map.default_species]
 	species.resize_organ(src)
 
 	create_reagents(5 * (w_class-1)**2)

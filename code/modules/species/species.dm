@@ -20,6 +20,8 @@
 	var/lip_icon =     'icons/mob/human_races/species/human/lips.dmi'
 	var/husk_icon =    'icons/mob/human_races/species/default_husk.dmi'
 	var/bandages_icon
+	var/bodytype = BODYTYPE_OTHER
+	var/limb_icon_intensity = 1.5
 
 	// Damage overlay and masks.
 	var/damage_overlays = 'icons/mob/human_races/species/human/damage_overlay.dmi'
@@ -677,7 +679,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		LAZYSET(hair_styles, type, L)
 		for(var/hairstyle in GLOB.hair_styles_list)
 			var/datum/sprite_accessory/S = GLOB.hair_styles_list[hairstyle]
-			if(S.species_allowed && !(get_bodytype() in S.species_allowed))
+			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
 			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue
@@ -702,7 +704,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				continue
 			if(gender == FEMALE && S.gender == MALE)
 				continue
-			if(S.species_allowed && !(get_bodytype() in S.species_allowed))
+			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
 			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue

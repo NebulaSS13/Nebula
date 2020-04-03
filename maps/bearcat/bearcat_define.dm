@@ -2,6 +2,7 @@
 	name = "Bearcat"
 	full_name = "Bearcat"
 	path = "overmap_example"
+	default_species = SPECIES_HUMAN
 
 	station_name  = "FTV Bearcat"
 	station_short = "Bearcat"

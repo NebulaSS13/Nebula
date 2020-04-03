@@ -7,7 +7,6 @@ var/global/list/side_effects = list()				//list of all medical sideeffects types
 
 //Languages/species/whitelist.
 var/global/list/all_species[0]
-var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
 var/list/mannequins_
 
@@ -98,14 +97,20 @@ var/global/list/string_slot_flags = list(
 		var/datum/sprite_accessory/marking/M = new path()
 		GLOB.body_marking_styles_list[M.name] = M
 
-	paths = typesof(/datum/species)
-	for(var/T in paths)
-		var/datum/species/S = T
-		if(!initial(S.name))
-			continue
-		S = new T
-		all_species[S.name] = S
-		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
-			playable_species += S.name
-
 	return 1
+
+var/list/playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise.
+/proc/get_playable_species()
+	if(!global.playable_species)
+		global.playable_species = list()
+		for(var/species_type in typesof(/datum/species))
+			var/datum/species/species = species_type
+			var/species_name = initial(species.name)
+			if(species_name)
+				all_species[species_name] = new species
+				species = all_species[species_name]
+				if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
+					global.playable_species += species.name
+		if(GLOB.using_map.default_species)
+			global.playable_species |= GLOB.using_map.default_species
+	return global.playable_species

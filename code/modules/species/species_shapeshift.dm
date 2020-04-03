@@ -13,7 +13,12 @@ var/list/wrapped_species_by_ref = list()
 
 	var/list/valid_transform_species = list()
 	var/monochromatic
-	var/default_form = SPECIES_HUMAN
+	var/default_form
+
+/datum/species/shapeshifter/New()
+	default_form = GLOB.using_map.default_species
+	valid_transform_species |= default_form
+	..()
 
 /datum/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
 	return valid_transform_species

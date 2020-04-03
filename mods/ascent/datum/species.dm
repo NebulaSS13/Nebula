@@ -13,6 +13,7 @@
 	damage_overlays =         'mods/ascent/icons/species/body/alate/damage_mask.dmi'
 	blood_mask =              'mods/ascent/icons/species/body/alate/blood_mask.dmi'
 	organs_icon =             'mods/ascent/icons/species/body/organs.dmi'
+	bodytype = BODYTYPE_MANTID_SMALL
 
 	blood_color =             "#660066"
 	flesh_color =             "#009999"
@@ -135,6 +136,7 @@
 	icon_template =           'mods/ascent/icons/species/body/gyne/template.dmi'
 	damage_overlays =         'mods/ascent/icons/species/body/gyne/damage_mask.dmi'
 	blood_mask =              'mods/ascent/icons/species/body/gyne/blood_mask.dmi'
+	bodytype = BODYTYPE_MANTID_LARGE
 
 	gluttonous =              3
 	slowdown =                2
@@ -261,6 +263,7 @@
 	total_health = 200
 	brute_mod = 0.9
 	burn_mod =  1.35
+	bodytype = BODYTYPE_SNAKE
 	natural_armour_values = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_MINOR,

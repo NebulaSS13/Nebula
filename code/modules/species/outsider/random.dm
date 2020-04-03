@@ -3,6 +3,7 @@
 	name_plural = "Humanoids"
 	description = "Some alien humanoid species, unknown to humanity. How exciting."
 	rarity_value = 5
+	bodytype = BODYTYPE_HUMANOID
 
 	species_flags = SPECIES_FLAG_NO_SCAN
 	spawn_flags = SPECIES_IS_RESTRICTED
@@ -84,9 +85,6 @@
 		species_flags |= SPECIES_FLAG_NO_PAIN
 
 	..()
-
-/datum/species/alium/get_bodytype(var/mob/living/carbon/human/H)
-	return SPECIES_HUMAN
 
 /datum/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
 	var/temp_comfort_shift = atmosphere.temperature - body_temperature

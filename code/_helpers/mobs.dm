@@ -24,7 +24,8 @@
 
 	return mobs
 
-proc/random_hair_style(gender, species = SPECIES_HUMAN)
+proc/random_hair_style(gender, species)
+	species = species || GLOB.using_map.default_species
 	var/h_style = "Bald"
 
 	var/datum/species/mob_species = all_species[species]
@@ -34,7 +35,8 @@ proc/random_hair_style(gender, species = SPECIES_HUMAN)
 
 	return h_style
 
-proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
+proc/random_facial_hair_style(gender, var/species)
+	species = species || GLOB.using_map.default_species
 	var/f_style = "Shaved"
 	var/datum/species/mob_species = all_species[species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
@@ -42,7 +44,7 @@ proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 		f_style = pick(valid_facialhairstyles)
 		return f_style
 
-proc/random_name(gender, species = SPECIES_HUMAN)
+proc/random_name(gender, species)
 	if(species)
 		var/datum/species/current_species = all_species[species]
 		if(current_species)

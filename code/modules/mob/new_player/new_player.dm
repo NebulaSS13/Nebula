@@ -538,7 +538,7 @@
 		chosen_species = all_species[client.prefs.species]
 
 	if(!chosen_species || !check_species_allowed(chosen_species, 0))
-		return SPECIES_HUMAN
+		return GLOB.using_map.default_species
 
 	return chosen_species.name
 

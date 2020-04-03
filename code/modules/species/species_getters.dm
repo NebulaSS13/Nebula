@@ -37,7 +37,7 @@
 	return icon_cache_uid
 
 /datum/species/proc/get_bodytype(var/mob/living/carbon/human/H)
-	return name
+	return bodytype
 
 /datum/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
@@ -104,3 +104,6 @@
 
 /datum/species/proc/get_slowdown(var/mob/living/carbon/human/H)
 	. = (H && H.isSynthetic() ? 0 : slowdown)
+
+/datum/species/proc/get_root_species_name(var/mob/living/carbon/human/H)
+	return name

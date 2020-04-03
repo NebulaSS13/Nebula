@@ -272,4 +272,4 @@ var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		return pref.client.mob
 
 /datum/category_item/player_setup_item/proc/preference_species()
-	return all_species[pref.species] || all_species[SPECIES_HUMAN]
+	return all_species[pref.species] || all_species[GLOB.using_map.default_species]

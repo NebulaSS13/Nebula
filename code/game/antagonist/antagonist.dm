@@ -54,7 +54,7 @@
 	var/decl/language/required_language
 
 	// Used for setting appearance.
-	var/list/valid_species = list(SPECIES_HUMAN)
+	var/list/valid_species
 	var/min_player_age = 14
 
 	// Runtime vars.
@@ -84,6 +84,8 @@
 	var/datum/map_template/base_to_load
 
 /datum/antagonist/New()
+	if(!valid_species)
+		valid_species = list(GLOB.using_map.default_species)
 	GLOB.all_antag_types_[id] = src
 	GLOB.all_antag_spawnpoints_[landmark_id] = list()
 	GLOB.antag_names_to_ids_[role_text] = id

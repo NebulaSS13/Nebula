@@ -42,11 +42,11 @@
 		/decl/item_modifier/space_suit/mercenary/emag
 	)
 
-	//Species that the suits can be configured to fit.
-	var/list/species = list(SPECIES_HUMAN)
+	//Bodytypes that the suits can be configured to fit.
+	var/list/available_bodytypes = list(BODYTYPE_HUMANOID)
 
 	var/decl/item_modifier/target_modification
-	var/target_species
+	var/target_bodytype
 
 	var/mob/living/carbon/human/occupant
 	var/obj/item/clothing/suit/space/void/suit
@@ -90,7 +90,7 @@
 
 /obj/machinery/suit_cycler/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
-	if(!length(available_modifications) || !length(species))
+	if(!length(available_modifications) || !length(available_bodytypes))
 		crash_with("Invalid setup: [log_info_line(src)]")
 		return INITIALIZE_HINT_QDEL
 
@@ -105,7 +105,7 @@
 	available_modifications = list_values(decls_repository.get_decls(available_modifications))
 
 	target_modification = available_modifications[1]
-	target_species = species[1]
+	target_bodytype = available_bodytypes[1]
 
 /obj/machinery/suit_cycler/Destroy()
 	DROP_NULL(occupant)
@@ -282,7 +282,7 @@
 		dat += "<A href='?src=\ref[src];select_rad_level=1'>Select power level</a> <A href='?src=\ref[src];begin_decontamination=1'>Begin decontamination cycle</a><br><hr>"
 
 		dat += "<h2>Customisation</h2>"
-		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_species=1'>[target_species]</a>."
+		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_bodytype=1'>[target_bodytype]</a>."
 		dat += "<br><A href='?src=\ref[src];apply_paintjob=1'>Apply customisation routine</a><br><hr>"
 
 	var/datum/browser/written/popup = new(user, "suit_cycler", "Suit Cycler")
@@ -309,10 +309,10 @@
 		var/choice = input("Please select the target department paintjob.", "Suit cycler", target_modification) as null|anything in available_modifications
 		if(choice && CanPhysicallyInteract(usr))
 			target_modification = choice
-	else if(href_list["select_species"])
-		var/choice = input("Please select the target species configuration.","Suit cycler",null) as null|anything in species
+	else if(href_list["select_bodytype"])
+		var/choice = input("Please select the target body configuration.","Suit cycler",null) as null|anything in available_bodytypes
 		if(choice && CanPhysicallyInteract(usr))
-			target_species = choice
+			target_bodytype = choice
 	else if(href_list["select_rad_level"])
 		var/choices = list(1,2,3)
 		if(emagged)
@@ -453,12 +453,12 @@
 	return
 
 /obj/machinery/suit_cycler/proc/apply_paintjob()
-	if(!target_species || !target_modification)
+	if(!target_bodytype || !target_modification)
 		return
 
-	if(helmet) helmet.refit_for_species(target_species)
-	if(suit)   suit.refit_for_species(target_species)
-	if(boots)  boots.refit_for_species(target_species)
+	if(helmet) helmet.refit_for_bodytype(target_bodytype)
+	if(suit)   suit.refit_for_bodytype(target_bodytype)
+	if(boots)  boots.refit_for_bodytype(target_bodytype)
 
 	target_modification.RefitItem(helmet)
 	target_modification.RefitItem(suit)

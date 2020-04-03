@@ -574,7 +574,7 @@
 	desc = "How... minimalist."
 	icon_state = "gear_harness"
 	worn_state = "gear_harness"
-	species_restricted = null
+	bodytype_restricted = null
 	body_parts_covered = 0
 
 // Replace this with actual uniform when someone wants to sprite one
@@ -595,16 +595,16 @@
 	desc = "It looks like it was tailored for a monkey."
 	icon_state = "punpun"
 	worn_state = "punpun"
-	species_restricted = list(SPECIES_MONKEY)
-	sprite_sheets = list(SPECIES_MONKEY = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
+	bodytype_restricted = list(BODYTYPE_MONKEY)
+	sprite_sheets = list(BODYTYPE_MONKEY = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/punpants
 	name = "monkey pants"
 	desc = "It looks like it was tailored for a monkey."
 	icon_state = "jeansmustang"
 	worn_state = "jeansmustang"
-	species_restricted = list(SPECIES_MONKEY)
-	sprite_sheets = list(SPECIES_MONKEY = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
+	bodytype_restricted = list(BODYTYPE_MONKEY)
+	sprite_sheets = list(BODYTYPE_MONKEY = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	desc = "A warm looking sweater and a pair of dark blue slacks."

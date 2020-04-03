@@ -1065,14 +1065,14 @@
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
 	if(!dna)
 		if(!new_species)
-			new_species = SPECIES_HUMAN
+			new_species = GLOB.using_map.default_species
 	else
 		if(!new_species)
 			new_species = dna.species
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
 	if(!all_species[new_species])
-		new_species = SPECIES_HUMAN
+		new_species = GLOB.using_map.default_species
 	if(dna)
 		dna.species = new_species
 

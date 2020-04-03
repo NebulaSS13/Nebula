@@ -8,18 +8,23 @@
 	icon = 'icons/obj/items/modkit.dmi'
 	icon_state = "modkit"
 	var/parts = MODKIT_FULL
-	var/target_species = SPECIES_HUMAN
+	var/target_bodytype
 
 	var/list/permitted_types = list(
 		/obj/item/clothing/head/helmet/space/void,
 		/obj/item/clothing/suit/space/void
 		)
 
+/obj/item/modkit/Initialize(ml, material_key)
+	if(!target_bodytype)
+		target_bodytype = GLOB.using_map.default_species
+	. = ..()
+	
 /obj/item/modkit/afterattack(obj/O, mob/user, proximity)
 	if(!proximity)
 		return
 
-	if (!target_species)
+	if (!target_bodytype)
 		return	//it shouldn't be null, okay?
 
 	if(!parts)
@@ -37,8 +42,8 @@
 		to_chat(user, "<span class='notice'>[src] is unable to modify that.</span>")
 		return
 
-	var/excluding = ("exclude" in I.species_restricted)
-	var/in_list = (target_species in I.species_restricted)
+	var/excluding = ("exclude" in I.bodytype_restricted)
+	var/in_list = (target_bodytype in I.bodytype_restricted)
 	if (excluding ^ in_list)
 		to_chat(user, "<span class='notice'>[I] is already modified.</span>")
 		return
@@ -51,7 +56,7 @@
 
 	user.visible_message("<span class='notice'>\The [user] opens \the [src] and modifies \the [O].</span>","<span class='notice'>You open \the [src] and modify \the [O].</span>")
 
-	I.refit_for_species(target_species)
+	I.refit_for_bodytype(target_bodytype)
 
 	if (istype(I, /obj/item/clothing/head/helmet))
 		parts &= ~MODKIT_HELMET
@@ -63,4 +68,4 @@
 
 /obj/item/modkit/examine(mob/user)
 	. = ..(user)
-	to_chat(user, "It looks as though it modifies hardsuits to fit [target_species] users.")
+	to_chat(user, "It looks as though it modifies hardsuits to fit [target_bodytype] users.")

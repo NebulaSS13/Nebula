@@ -276,6 +276,10 @@
 #define SPECIES_ALIEN            "Humanoid"
 #define SPECIES_GOLEM            "Golem"
 
+#define BODYTYPE_HUMANOID        "Humanoid Body"
+#define BODYTYPE_OTHER           "Alien Body"
+#define BODYTYPE_MONKEY          "Small Humanoid Body"
+
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
 #define SURGERY_RETRACTED 2

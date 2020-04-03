@@ -8,7 +8,7 @@
 		laser = ARMOR_LASER_MINOR,
 		energy = ARMOR_ENERGY_MINOR
 		)
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 /obj/item/clothing/suit/infilsuit
 	name = "immaculate suit"
@@ -25,7 +25,7 @@
 	name = "formal outfit"
 	desc = "A white dress shirt and navy pants. Snazzy."
 	icon_state = "inf_mob"
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 /obj/item/clothing/shoes/dress/infilshoes
 	name = "black leather shoes"

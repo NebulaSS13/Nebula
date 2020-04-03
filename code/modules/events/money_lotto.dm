@@ -12,7 +12,7 @@
 
 			deposit_success = D.deposit(winner_sum, "Nyx Daily Loan Lottery winner!", "Biesel TCD Terminal #[rand(111,333)]")
 	else
-		winner_name = random_name(pick(MALE,FEMALE), species = SPECIES_HUMAN)
+		winner_name = random_name(pick(MALE,FEMALE), species = GLOB.using_map.default_species)
 		deposit_success = pick(0,1)
 
 /datum/event/money_lotto/announce()

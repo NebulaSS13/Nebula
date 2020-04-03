@@ -8,7 +8,7 @@
 	origin_tech = "{'" + TECH_ESOTERIC + "':3}"
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
-	species_restricted = null
+	bodytype_restricted = null
 
 /obj/item/clothing/shoes/mime
 	name = "mime shoes"
@@ -129,7 +129,7 @@
 	desc = "A pair of rather plain wooden sandals."
 	name = "sandals"
 	icon_state = "wizard"
-	species_restricted = null
+	bodytype_restricted = null
 	body_parts_covered = 0
 	wizard_garb = 1
 	can_add_hidden_item = FALSE
@@ -148,7 +148,7 @@
 	item_state = "clown"
 	force = 0
 	var/footstep = 1	//used for squeeks whilst walking
-	species_restricted = null
+	bodytype_restricted = null
 	can_add_hidden_item = FALSE
 
 /obj/item/clothing/shoes/clown_shoes/Initialize()
@@ -177,7 +177,7 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
-	species_restricted = null
+	bodytype_restricted = null
 
 /obj/item/clothing/shoes/cyborg
 	name = "cyborg boots"
@@ -190,7 +190,7 @@
 	icon_state = "slippers"
 	item_state = "slippers"
 	force = 0
-	species_restricted = null
+	bodytype_restricted = null
 	w_class = ITEM_SIZE_SMALL
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
@@ -213,7 +213,7 @@
 	name = "swimming fins"
 	icon_state = "flippers"
 	item_flags = ITEM_FLAG_NOSLIP
-	species_restricted = null
+	bodytype_restricted = null
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
 

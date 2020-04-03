@@ -81,7 +81,7 @@
 	var/list/sprite_sheets = list()
 
 	// Species-specific sprite sheets for inventory sprites
-	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
+	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_bodytype() proc is called.
 	var/list/sprite_sheets_obj = list()
 
 	// Material handling for material weapons (not used by default, unless material is supplied or set)

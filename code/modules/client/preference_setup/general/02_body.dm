@@ -1,7 +1,7 @@
 var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
 
 /datum/preferences
-	var/species = SPECIES_HUMAN
+	var/species
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
@@ -108,8 +108,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.b_eyes			= sanitize_integer(pref.b_eyes, 0, 255, initial(pref.b_eyes))
 	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
 
-	if(!pref.species || !(pref.species in playable_species))
-		pref.species = SPECIES_HUMAN
+	if(!pref.species || !(pref.species in get_playable_species()))
+		pref.species = GLOB.using_map.default_species
 
 	var/datum/species/mob_species = all_species[pref.species]
 
@@ -330,7 +330,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH
 
 	else if(href_list["show_species"])
-		var/choice = input("Which species would you like to look at?") as null|anything in playable_species
+		var/choice = input("Which species would you like to look at?") as null|anything in get_playable_species()
 		if(choice)
 			var/datum/species/current_species = all_species[choice]
 			show_browser(user, current_species.get_description(), "window=species;size=700x400")
@@ -339,7 +339,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["set_species"])
 
 		var/list/species_to_pick = list()
-		for(var/species in playable_species)
+		for(var/species in get_playable_species())
 			if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
 				var/datum/species/current_species = all_species[species]
 				if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
@@ -469,7 +469,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/list/usable_markings = pref.body_markings.Copy() ^ GLOB.body_marking_styles_list.Copy()
 		for(var/M in usable_markings)
 			var/datum/sprite_accessory/S = usable_markings[M]
-			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_bodytype() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
+			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_root_species_name() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
 				usable_markings -= M
 
 		var/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
@@ -557,18 +557,18 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.rlimb_data[second_limb] = null
 
 			if("Prosthesis")
-				var/datum/species/temp_species = pref.species ? all_species[pref.species] : all_species[SPECIES_HUMAN]
-				var/tmp_species = temp_species.get_bodytype(user)
+				var/datum/species/temp_species = pref.species ? all_species[pref.species] : all_species[GLOB.using_map.default_species]
+				var/tmp_bodytype = temp_species.get_bodytype(user)
 				var/list/usable_manufacturers = list()
 				for(var/company in chargen_robolimbs)
 					var/datum/robolimb/M = chargen_robolimbs[company]
-					if(tmp_species in M.species_cannot_use)
+					if(tmp_bodytype in M.bodytypes_cannot_use)
 						continue
-					if(M.restricted_to.len && !(tmp_species in M.restricted_to))
+					if(M.restricted_to.len && !(tmp_bodytype in M.restricted_to))
 						continue
 					if(M.applies_to_part.len && !(limb in M.applies_to_part))
 						continue
-					if(M.allowed_bodytypes && !(tmp_species in M.allowed_bodytypes))
+					if(M.allowed_bodytypes && !(tmp_bodytype in M.allowed_bodytypes))
 						continue
 					usable_manufacturers[company] = M
 				if(!usable_manufacturers.len)

@@ -1108,11 +1108,15 @@ obj/item/organ/external/proc/remove_clamps()
 
 	if(company)
 		var/datum/robolimb/R = all_robolimbs[company]
-		if(!istype(R) || (species && (species.name in R.species_cannot_use)) || \
-		 (species && !(species.get_bodytype(owner) in R.allowed_bodytypes)) || \
-		 (R.applies_to_part.len && !(organ_tag in R.applies_to_part)))
-			R = basic_robolimb
-		else
+		var/can_apply = TRUE
+		if(!istype(R))
+			can_apply = FALSE
+		else if(species && ((species.get_bodytype() in R.bodytypes_cannot_use) || !(species.get_bodytype(owner) in R.allowed_bodytypes)))
+			can_apply = FALSE
+		else if(length(R.applies_to_part) && !(organ_tag in R.applies_to_part))
+			can_apply = FALSE
+
+		if(can_apply)
 			model = company
 			force_icon = R.icon
 			name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
@@ -1120,6 +1124,8 @@ obj/item/organ/external/proc/remove_clamps()
 			slowdown = R.movement_slowdown
 			max_damage *= R.hardiness
 			min_broken_damage *= R.hardiness
+		else
+			R = basic_robolimb
 
 	dislocated = -1
 	remove_splint()
