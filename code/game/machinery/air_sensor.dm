@@ -1,9 +1,8 @@
 /obj/machinery/air_sensor
+	name = "gas sensor"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "gsensor1"
-	name = "Gas Sensor"
-
-	anchored = 1
+	anchored = TRUE
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/transmitter/basic/buildable,

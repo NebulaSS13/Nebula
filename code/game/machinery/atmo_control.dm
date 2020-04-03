@@ -1,9 +1,8 @@
 /obj/machinery/computer/air_control
+	name = "atmospherics control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "atmos_key"
 	icon_screen = "tank"
-
-	name = "Atmospherics Control Console"
 
 	var/frequency = 1441
 	var/datum/radio_frequency/radio_connection

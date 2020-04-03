@@ -115,7 +115,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
-	name = "Large Air Vent"
+	name = "large air vent"
 	power_channel = EQUIP
 	power_rating = 45000
 
