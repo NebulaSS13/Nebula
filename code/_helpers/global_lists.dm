@@ -102,18 +102,12 @@ var/global/list/string_slot_flags = list(
 		var/datum/sprite_accessory/marking/M = new path()
 		GLOB.body_marking_styles_list[M.name] = M
 
-	var/rkey = 0
 	paths = typesof(/datum/species)
 	for(var/T in paths)
-
-		rkey++
-
 		var/datum/species/S = T
 		if(!initial(S.name))
 			continue
-
 		S = new T
-		S.race_key = rkey //Used in mob icon caching.
 		all_species[S.name] = S
 		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
 			playable_species += S.name

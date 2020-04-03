@@ -388,7 +388,7 @@
 			return
 		if(SKIN_THREAT)
 
-			var/image_key = "[H.species.get_race_key(src)]"
+			var/image_key = "[H.species.get_icon_cache_uid(H)]"
 
 			for(var/organ_tag in H.species.has_limbs)
 				var/obj/item/organ/external/part = H.organs_by_name[organ_tag]
@@ -396,7 +396,7 @@
 					image_key += "0"
 					continue
 				if(part)
-					image_key += "[part.species.get_race_key(part.owner)]"
+					image_key += "[part.species.get_icon_cache_uid(part.owner)]"
 					image_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
 				if(BP_IS_PROSTHETIC(part))
 					image_key += "2[part.model ? "-[part.model]": ""]"

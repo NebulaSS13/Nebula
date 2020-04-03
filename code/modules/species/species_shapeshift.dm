@@ -23,8 +23,10 @@ var/list/wrapped_species_by_ref = list()
 	var/datum/species/S = all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_icobase(H, get_deform)
 
-/datum/species/shapeshifter/get_race_key(var/mob/living/carbon/human/H)
-	return "[..()]-[wrapped_species_by_ref["\ref[H]"]]"
+/datum/species/shapeshifter/get_icon_cache_uid(var/mob/H)
+	. = ..()
+	if(H)
+		. = "[.]-[wrapped_species_by_ref["\ref[H]"]]"
 
 /datum/species/shapeshifter/get_bodytype(var/mob/living/carbon/human/H)
 	if(!H) return ..()

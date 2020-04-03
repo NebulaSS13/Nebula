@@ -31,8 +31,10 @@
 /datum/species/proc/get_station_variant()
 	return name
 
-/datum/species/proc/get_race_key(var/mob/living/carbon/human/H)
-	return race_key
+/datum/species/proc/get_icon_cache_uid(var/mob/H)
+	if(!icon_cache_uid)
+		icon_cache_uid = sequential_id(/datum/species)
+	return icon_cache_uid
 
 /datum/species/proc/get_bodytype(var/mob/living/carbon/human/H)
 	return name

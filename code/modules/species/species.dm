@@ -44,7 +44,7 @@
 	var/default_h_style = "Bald"
 	var/default_f_style = "Shaved"
 
-	var/race_key = 0                          // Used for mob icon cache string.
+	var/icon_cache_uid                        // Used for mob icon cache string.
 	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
 	var/pixel_offset_x = 0                    // Used for offsetting large icons.
 	var/pixel_offset_y = 0                    // Used for offsetting large icons.
