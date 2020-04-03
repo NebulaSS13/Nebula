@@ -27,8 +27,8 @@
 	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
 	var/is_semi_antagonist = FALSE        // Whether or not this job is given semi-antagonist status.
 	var/account_allowed = 1               // Does this job type come with a station account?
-	var/economic_power = 2             // With how much does this job modify the initial account amount?
-
+	var/economic_power = 2                // With how much does this job modify the initial account amount?
+	var/is_holy = FALSE                   // Can this role perform blessings?
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
 	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
