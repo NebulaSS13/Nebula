@@ -8,11 +8,7 @@
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
 	stack_origin_tech = "{'" + TECH_MATERIAL + "':5}"
-	xarch_ages = list(
-		"thousand" = 999,
-		"million" = 704
-		)
-	xarch_source_mineral = "potassium"
+	xarch_source_mineral = /datum/reagent/phosphorus
 	ore_icon_overlay = "nugget"
 	chem_products = list(
 		/datum/reagent/radium = 10,
@@ -238,13 +234,7 @@
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_uncommon"
-	xarch_ages = list(
-		"thousand" = 999,
-		"million" = 999,
-		"billion" = 13,
-		"billion_lower" = 10
-		)
-	xarch_source_mineral = MAT_PHORON
+	xarch_source_mineral = /datum/reagent/toxin/phoron
 	ore_icon_overlay = "gems"
 	sale_price = 5
 	value = 200

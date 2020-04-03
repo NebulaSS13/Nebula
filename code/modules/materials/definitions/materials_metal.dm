@@ -43,12 +43,6 @@
 	ore_name = "native gold"
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_uncommon"
-	xarch_ages = list(
-		"thousand" = 999,
-		"million" = 999,
-		"billion" = 4,
-		"billion_lower" = 3
-		)
 	ore_icon_overlay = "nugget"
 	sale_price = 3
 	value = 40	

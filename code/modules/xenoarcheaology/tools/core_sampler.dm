@@ -14,22 +14,14 @@
 		to_chat(user, SPAN_NOTICE("This one is [filled_bag ? "full" : "empty"]"))
 
 /obj/item/core_sampler/proc/sample_item(var/item_to_sample, var/mob/user)
-	var/datum/geosample/geo_data
-
-	if(istype(item_to_sample, /turf/simulated/mineral))
-		var/turf/simulated/mineral/T = item_to_sample
-		geo_data = T.get_geodata()
-	else if(istype(item_to_sample, /obj/item/ore))
-		var/obj/item/ore/O = item_to_sample
-		geo_data = O.geologic_data
-
-	if(geo_data)
+	var/datum/extension/geological_data/GD = get_extension(item_to_sample, /datum/extension/geological_data)
+	if(GD)
 		if(filled_bag)
 			to_chat(user, SPAN_WARNING("The core sampler is full."))
 		else
 			//create a new sample bag which we'll fill with rock samples
 			filled_bag = new /obj/item/evidencebag/sample(src)
-			var/obj/item/rocksliver/R = new(filled_bag, geo_data)
+			var/obj/item/rocksliver/R = new(filled_bag, GD.geodata)
 			filled_bag.store_item(R)
 			update_icon()
 
@@ -49,6 +41,11 @@
 	else
 		to_chat(user, SPAN_WARNING("The core sampler is empty."))
 
+/obj/item/core_sampler/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(proximity_flag && has_extension(target, /datum/extension/geological_data))
+		sample_item(target, user)
+
 /obj/item/evidencebag/sample
 	name = "sample bag"
 	desc = "A bag for holding research samples."
@@ -61,9 +58,8 @@
 	randpixel = 8
 	w_class = ITEM_SIZE_TINY
 	sharp = 1
-	var/datum/geosample/geologic_data
 
 /obj/item/rocksliver/Initialize(mapload, geodata)
 	. = ..()
 	icon_state = "sliver[rand(1, 3)]"
-	geologic_data = geodata
+	set_extension(src, /datum/extension/geological_data, geodata)

@@ -7,7 +7,6 @@
 	opacity = 1
 	anchored = 1
 	var/excavation_level = 0
-	var/datum/geosample/geologic_data
 	var/datum/artifact_find/artifact_find
 	var/last_act = 0
 
@@ -17,19 +16,10 @@
 	excavation_level = rand(5, 50)
 
 /obj/structure/boulder/Destroy()
-	QDEL_NULL(geologic_data)
 	QDEL_NULL(artifact_find)
 	..()
 
 /obj/structure/boulder/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/core_sampler))
-		src.geologic_data.artifact_distance = rand(-100,100) / 100
-		src.geologic_data.artifact_id = artifact_find.artifact_id
-
-		var/obj/item/core_sampler/C = I
-		C.sample_item(src, user)
-		return
-
 	if(istype(I, /obj/item/depth_scanner))
 		var/obj/item/depth_scanner/C = I
 		C.scan_atom(user, src)
