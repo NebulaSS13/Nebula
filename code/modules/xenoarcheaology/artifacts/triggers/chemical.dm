@@ -13,8 +13,9 @@
 /datum/artifact_trigger/chemical/on_hit(obj/O, mob/user)
 	. = ..()
 	if(istype(O, /obj/item/chems))
-		if(O.reagents.has_any_reagent(required_chemicals))
-			return TRUE
+		for(var/reagent in required_chemicals)
+			if(O.reagents.remove_reagent(reagent, 5))
+				return TRUE
 
 /datum/artifact_trigger/chemical/water
 	name = "presence of water"

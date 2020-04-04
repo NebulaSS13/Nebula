@@ -41,23 +41,21 @@
 	. = ..()
 	
 /datum/artifact_effect/proc/ToggleActivate(var/reveal_toggle = 1)
-	//so that other stuff happens first
-	spawn(0)
+	if(activated)
+		activated = 0
+	else
+		activated = 1
+	if(reveal_toggle && holder)
+		holder.update_icon()
+		var/display_msg
 		if(activated)
-			activated = 0
+			display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
 		else
-			activated = 1
-		if(reveal_toggle && holder)
-			holder.update_icon()
-			var/display_msg
-			if(activated)
-				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
-			else
-				display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
-			var/atom/toplevelholder = holder
-			while(!istype(toplevelholder.loc, /turf))
-				toplevelholder = toplevelholder.loc
-			toplevelholder.visible_message("<span class='warning'>\icon[toplevelholder] [toplevelholder] [display_msg]</span>")
+			display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
+		var/atom/toplevelholder = holder
+		while(!istype(toplevelholder.loc, /turf))
+			toplevelholder = toplevelholder.loc
+		toplevelholder.visible_message("<span class='warning'>\icon[toplevelholder] [toplevelholder] [display_msg]</span>")
 
 /datum/artifact_effect/proc/DoEffectTouch(var/mob/user)
 /datum/artifact_effect/proc/DoEffectAura(var/atom/holder)
@@ -65,15 +63,14 @@
 /datum/artifact_effect/proc/UpdateMove()
 
 /datum/artifact_effect/proc/process()
-	if(chargelevel < chargelevelmax)
-		chargelevel++
-
 	if(activated)
 		if(effect == EFFECT_AURA)
 			DoEffectAura()
-		else if(effect == EFFECT_PULSE && chargelevel >= chargelevelmax)
-			chargelevel = 0
-			DoEffectPulse()
+		if(effect == EFFECT_PULSE)
+			chargelevel++
+			if(chargelevel >= chargelevelmax)
+				chargelevel = 0
+				DoEffectPulse()
 
 /datum/artifact_effect/proc/getDescription()
 	. = "<b>"

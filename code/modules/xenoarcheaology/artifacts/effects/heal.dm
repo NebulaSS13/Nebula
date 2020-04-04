@@ -11,7 +11,7 @@
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/C in range(src.effectrange,T))
-			heal(C, 1)
+			heal(C, 1, msg_prob = 5)
 
 /datum/artifact_effect/heal/DoEffectPulse()
 	if(holder)
@@ -20,10 +20,11 @@
 			heal(C, 5)
 
 //todo: check over this properly
-/datum/artifact_effect/heal/proc/heal(mob/living/carbon/C, amount, strong)
+/datum/artifact_effect/heal/proc/heal(mob/living/carbon/C, amount, strong, msg_prob = 100)
 	var/weakness = GetAnomalySusceptibility(C)
 	if(prob(weakness * 100))
-		to_chat(C, "<span class='notice'>A wave of energy invigorates you.</span>")
+		if(prob(msg_prob))
+			to_chat(C, "<span class='notice'>A wave of energy invigorates you.</span>")
 		var/force = amount * weakness
 		C.apply_damages(-force, -force, -force, -force)
 		C.adjustBrainLoss(-force)
