@@ -6,49 +6,41 @@
 	item_state = "screwdriver_brown"
 	w_class = ITEM_SIZE_TINY
 
-	var/obj/item/evidencebag/filled_bag
+	var/obj/item/sample
 
 /obj/item/core_sampler/examine(mob/user, distance)
 	. = ..(user)
 	if(distance <= 2)
-		to_chat(user, SPAN_NOTICE("This one is [filled_bag ? "full" : "empty"]"))
+		to_chat(user, SPAN_NOTICE("This one is [sample ? "full" : "empty"]"))
 
 /obj/item/core_sampler/proc/sample_item(var/item_to_sample, var/mob/user)
 	var/datum/extension/geological_data/GD = get_extension(item_to_sample, /datum/extension/geological_data)
 	if(GD)
-		if(filled_bag)
+		if(sample)
 			to_chat(user, SPAN_WARNING("The core sampler is full."))
 		else
-			//create a new sample bag which we'll fill with rock samples
-			filled_bag = new /obj/item/evidencebag/sample(src)
-			var/obj/item/rocksliver/R = new(filled_bag, null, GD.geodata)
-			filled_bag.store_item(R)
+			sample = new /obj/item/rocksliver(src, null, GD.geodata)
 			update_icon()
-
 			to_chat(user, SPAN_NOTICE("You take a core sample of the [item_to_sample]."))
 	else
 		to_chat(user, SPAN_WARNING("You are unable to take a geological sample of [item_to_sample]."))
 
 /obj/item/core_sampler/on_update_icon()
-	icon_state = "sampler[!!filled_bag]"
+	icon_state = "sampler[!!sample]"
 
 /obj/item/core_sampler/attack_self(var/mob/living/user)
-	if(filled_bag)
-		to_chat(user, SPAN_NOTICE("You eject the full sample bag."))
-		user.put_in_hands(filled_bag)
-		filled_bag = null
+	if(sample)
+		to_chat(user, SPAN_NOTICE("You eject the sample."))
+		user.put_in_hands(sample)
+		sample = null
 		update_icon()
 	else
 		to_chat(user, SPAN_WARNING("The core sampler is empty."))
 
 /obj/item/core_sampler/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
-	if(proximity_flag && has_extension(target, /datum/extension/geological_data))
+	if(proximity_flag)
 		sample_item(target, user)
-
-/obj/item/evidencebag/sample
-	name = "sample bag"
-	desc = "A bag for holding research samples."
 	
 /obj/item/rocksliver
 	name = "rock sliver"

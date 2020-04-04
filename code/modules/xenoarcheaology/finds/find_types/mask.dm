@@ -1,7 +1,7 @@
 
 /decl/archaeological_find/mask
 	item_type = "mask"
-	modification_flags = XENOFIND_APPLY_PREFIX | XENOFIND_APPLY_DECOR
+	new_icon_state = "gasmask"
 	possible_types = list(
 		/obj/item/clothing/mask/gas = 4,
 		/obj/item/clothing/mask/gas/poltergeist
@@ -10,6 +10,8 @@
 //a talking gas mask!
 
 /obj/item/clothing/mask/gas/poltergeist
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "gasmask"
 	var/list/heard_talk = list()
 	var/last_twitch = 0
 	var/max_stored_messages = 100
