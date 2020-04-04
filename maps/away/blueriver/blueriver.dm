@@ -166,3 +166,8 @@
 
 /turf/unsimulated/wall/supermatter/no_spread/Process()
 	return PROCESS_KILL
+
+/obj/structure/crystal_static
+	name = "crystal"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "crystal"

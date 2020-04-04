@@ -342,8 +342,7 @@ var/list/mining_floors = list()
 	//with skill and luck, players can cleanly extract finds
 	//otherwise, they come out inside a chunk of rock
 	if(prob_clean)
-		var/find = get_archeological_find_by_findtype(F.find_type)
-		new find(src)
+		F.spawn_find_item(src)
 	else
 		var/obj/item/ore/strangerock/rock = new(src, F.find_type)
 		pass_geodata_to(rock)

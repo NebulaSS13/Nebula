@@ -1,53 +1,18 @@
+/decl/archaeological_find/statuette
+	item_type = "statuette"
+	new_icon_state = "statuette"
+	possible_types = list(
+		/obj/item = 4,
+		/obj/item/vampiric
+		)
 
+/decl/archaeological_find/statuette/get_additional_description()
+	return "It depicts a [pick("small","ferocious","wild","pleasing","hulking")] \
+	[pick("alien figure","rodent-like creature","reptilian alien","primate","unidentifiable object")] \
+	[pick("performing unspeakable acts","posing heroically","in a fetal position","cheering","sobbing","making a plaintive gesture","making a rude gesture")]."
 
+// Vampiric statuette
 
-//endless reagents!
-/obj/item/chems/glass/replenishing
-	var/spawning_id
-
-/obj/item/chems/glass/replenishing/Initialize()
-	. = ..()
-	spawning_id = pick(/datum/reagent/blood,/datum/reagent/water/holywater,/datum/reagent/lube,/datum/reagent/sedatives,/datum/reagent/ethanol,/datum/reagent/drink/ice,/datum/reagent/fuel,/datum/reagent/cleaner)
-	START_PROCESSING(SSobj, src)
-
-/obj/item/chems/glass/replenishing/Process()
-	reagents.add_reagent(spawning_id, 0.3)
-
-
-
-//a talking gas mask!
-/obj/item/clothing/mask/gas/poltergeist
-	var/list/heard_talk = list()
-	var/last_twitch = 0
-	var/max_stored_messages = 100
-
-/obj/item/clothing/mask/gas/poltergeist/Initialize()
-	START_PROCESSING(SSobj, src)
-	GLOB.listening_objects += src
-	. = ..()
-
-/obj/item/clothing/mask/gas/poltergeist/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	GLOB.listening_objects -= src
-	return ..()
-
-/obj/item/clothing/mask/gas/poltergeist/Process()
-	if(heard_talk.len && istype(src.loc, /mob/living) && prob(10))
-		var/mob/living/M = src.loc
-		M.say(pick(heard_talk))
-
-/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/M, text)
-	..()
-	if(heard_talk.len > max_stored_messages)
-		heard_talk.Remove(pick(heard_talk))
-	heard_talk.Add(text)
-	if(istype(src.loc, /mob/living) && world.time - last_twitch > 50)
-		last_twitch = world.time
-
-
-
-//a vampiric statuette
-//todo: cult integration
 /obj/item/vampiric
 	name = "statuette"
 	icon_state = "statuette"

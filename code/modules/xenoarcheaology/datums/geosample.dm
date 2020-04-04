@@ -32,7 +32,7 @@
 
 	var/total_presence = 0
 	for(var/datum/find/F in container.finds)
-		var/responsive_reagent = get_responsive_reagent(F.find_type)
+		var/responsive_reagent = F.get_responsive_reagent()
 		find_presence[responsive_reagent] = F.dissonance_spread
 		total_presence += F.dissonance_spread
 	for(var/carrier in find_presence)

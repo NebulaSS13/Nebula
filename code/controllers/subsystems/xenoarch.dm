@@ -13,6 +13,7 @@ SUBSYSTEM_DEF(xenoarch)
 	flags = SS_NO_FIRE
 	var/list/artifact_spawning_turfs = list()
 	var/list/digsite_spawning_turfs = list()
+	var/list/digsite_types_weighted = list()
 
 /datum/controller/subsystem/xenoarch/Initialize(timeofday)
 	SetupXenoarch()
@@ -23,6 +24,14 @@ SUBSYSTEM_DEF(xenoarch)
 		artifact_spawning_turfs = SSxenoarch.artifact_spawning_turfs
 	if (istype(SSxenoarch.digsite_spawning_turfs))
 		digsite_spawning_turfs = SSxenoarch.digsite_spawning_turfs
+
+/datum/controller/subsystem/xenoarch/proc/get_random_digsite_type()
+	if(!digsite_types_weighted.len)
+		var/list/digsites = decls_repository.get_decls_of_type(/decl/xenoarch_digsite)
+		for(var/D in digsites)
+			var/decl/xenoarch_digsite/digsite = digsites[D]
+			digsite_types_weighted[D] = digsite.weight
+	return pickweight(digsite_types_weighted)
 
 /datum/controller/subsystem/xenoarch/proc/SetupXenoarch()
 	for(var/turf/simulated/mineral/M in world)
@@ -88,7 +97,9 @@ SUBSYSTEM_DEF(xenoarch)
 					archeo_turf.update_icon()
 
 			//have a chance for an artifact to spawn here, but not in animal or plant digsites
-			if(isnull(M.artifact_find) && digsite != DIGSITE_GARDEN && digsite != DIGSITE_ANIMAL)
+			
+			var/decl/xenoarch_digsite/D = decls_repository.get_decl(digsite)
+			if(isnull(M.artifact_find) && D.can_have_anomalies)
 				artifact_spawning_turfs.Add(archeo_turf)
 		CHECK_TICK
 

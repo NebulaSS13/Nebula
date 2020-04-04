@@ -39,7 +39,7 @@
 				var/datum/find/F = M.finds[1]
 				D.depth = "[F.excavation_required - F.clearance_range] - [F.excavation_required]"
 				D.clearance = F.clearance_range
-				D.material = get_responsive_reagent(F.find_type)
+				D.material = F.get_responsive_reagent()
 
 			positive_locations.Add(D)
 

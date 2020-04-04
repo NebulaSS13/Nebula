@@ -11,7 +11,7 @@
 /turf/unsimulated/wall/away/blueriver/livingwall,
 /area/bluespaceriver/underground)
 "e" = (
-/obj/machinery/crystal_static{
+/obj/structure/crystal_static{
 	alpha = 120;
 	anchored = 1;
 	color = "BLUE";
@@ -112,7 +112,7 @@
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "x" = (
-/obj/machinery/crystal_static{
+/obj/structure/crystal_static{
 	alpha = 120;
 	anchored = 1;
 	color = "BLUE";
