@@ -9,7 +9,7 @@
 
 /datum/artifact_effect/sleepy/New()
 	..()
-	effect_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
+	origin_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
 
 /datum/artifact_effect/sleepy/DoEffectTouch(var/mob/living/toucher)
 	if(istype(toucher))
@@ -20,14 +20,14 @@
 /datum/artifact_effect/sleepy/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(effectrange,T))
+		for(var/mob/living/carbon/human/H in range(effect_range,T))
 			sleepify(H, 2, 25, 10)
 		return 1
 
 /datum/artifact_effect/sleepy/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(effectrange, T))
+		for(var/mob/living/carbon/human/H in range(effect_range, T))
 			sleepify(H, rand(5,15), 50, 50)
 		return 1
 

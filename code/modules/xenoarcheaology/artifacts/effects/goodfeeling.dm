@@ -1,6 +1,6 @@
 /datum/artifact_effect/goodfeeling
 	name = "good feeling"
-	effect_type = EFFECT_PSIONIC
+	origin_type = EFFECT_PSIONIC
 	var/global/list/messages = list("You feel good.",
 		"Everything seems to be going alright",
 		"You've got a good feeling about this",
@@ -31,14 +31,14 @@
 /datum/artifact_effect/goodfeeling/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/human/H in range(effectrange,T))
+		for (var/mob/living/carbon/human/H in range(effect_range,T))
 			affect_human(H, 5, 5)
 		return 1
 
 /datum/artifact_effect/goodfeeling/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/human/H in range(effectrange,T))
+		for (var/mob/living/carbon/human/H in range(effect_range,T))
 			affect_human(H, 50, 50)
 		return 1
 

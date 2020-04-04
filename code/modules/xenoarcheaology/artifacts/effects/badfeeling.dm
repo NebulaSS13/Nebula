@@ -1,6 +1,6 @@
 /datum/artifact_effect/badfeeling
 	name = "badfeeling"
-	effect_type = EFFECT_PSIONIC
+	origin_type = EFFECT_PSIONIC
 	var/global/list/messages = list("You feel worried.",
 		"Something doesn't feel right.",
 		"You get a strange feeling in your gut.",
@@ -33,14 +33,14 @@
 /datum/artifact_effect/badfeeling/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/human/H in range(effectrange,T))
+		for (var/mob/living/carbon/human/H in range(effect_range,T))
 			affect_human(H, 5, 10)
 		return 1
 
 /datum/artifact_effect/badfeeling/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/human/H in range(effectrange,T))
+		for (var/mob/living/carbon/human/H in range(effect_range,T))
 			affect_human(H, 50, 50)
 		return 1
 

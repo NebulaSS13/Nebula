@@ -131,7 +131,7 @@
 			inserted_battery.battery_effect.process()
 
 			//if the effect works by touch, activate it on anyone near the console
-			if(inserted_battery.battery_effect.effect == EFFECT_TOUCH)
+			if(inserted_battery.battery_effect.operation_type == EFFECT_TOUCH)
 				for(var/mob/M in hearers(1, src))
 					inserted_battery.battery_effect.DoEffectTouch(M)
 

@@ -7,8 +7,8 @@
 
 /datum/artifact_effect/temperature/New()
 	..()
-	effect = pick(EFFECT_TOUCH, EFFECT_AURA)
-	effect_type = pick(EFFECT_ORGANIC, EFFECT_BLUESPACE, EFFECT_SYNTH)
+	operation_type = pick(EFFECT_TOUCH, EFFECT_AURA)
+	origin_type = pick(EFFECT_ORGANIC, EFFECT_BLUESPACE, EFFECT_SYNTH)
 	if(!direction)
 		direction = pick(ANOM_EFFECT_COOLING, ANOM_EFFECT_HEATING)
 	switch(direction)
@@ -40,7 +40,11 @@
 			return air.temperature < target_temp
 	
 /datum/artifact_effect/temperature/proc/change_air_temp(datum/gas_mixture/air, degrees)
-	var/new_temp = min(target_temp, air.temperature + degrees)
+	var/new_temp = air.temperature + degrees
+	if(ANOM_EFFECT_COOLING)
+		new_temp = max(target_temp, new_temp)
+	else
+		new_temp = min(target_temp, new_temp)
 	air.add_thermal_energy(air.get_thermal_energy_change(new_temp))
 
 /datum/artifact_effect/temperature/heat

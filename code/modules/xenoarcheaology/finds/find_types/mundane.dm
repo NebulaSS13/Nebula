@@ -3,10 +3,12 @@
 /decl/archaeological_find/beacon
 	item_type = "device"
 	possible_types = list(/obj/item/radio/beacon)
+	modification_flags = XENOFIND_APPLY_PREFIX | XENOFIND_APPLY_DECOR
 
 // Cutlery
 /decl/archaeological_find/cutlery
 	item_type = "cutlery"
+	modification_flags = XENOFIND_APPLY_PREFIX | XENOFIND_APPLY_DECOR
 	possible_types = list(
 		/obj/item/material/kitchen/utensil/fork,
 		/obj/item/material/knife/table,

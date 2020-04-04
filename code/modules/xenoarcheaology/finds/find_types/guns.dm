@@ -57,7 +57,7 @@
 
 	return new_gun
 
-/decl/archaeological_find/gun/new_icon_state()
+/decl/archaeological_find/laser/new_icon_state()
 	return "egun[rand(1,6)]"
 
 /decl/archaeological_find/laser/get_additional_description()
