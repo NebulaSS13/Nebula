@@ -56,7 +56,7 @@
 			booty = new booty(loc)
 			lootleft--
 			update_icon()
-			to_chat(user, "<span class='notice'>You find \a [booty] and pull it carefully out of \the [src].</span>")
+			to_chat(user, "<span class='notice'>You find something and pull it carefully out of \the [src].</span>")
 		is_rummaging = 0
 	else
 		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")

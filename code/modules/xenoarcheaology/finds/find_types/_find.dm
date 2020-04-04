@@ -44,6 +44,9 @@ var/global/list/responsive_carriers = list(
 	I.desc = jointext(descriptors, "\n")
 	I.forceMove(location)
 	I.set_material(MAT_ALIENALLOY)
+	if(modification_flags & XENOFIND_APPLY_PREFIX)
+		new_name = "[pick(name_prefixes)] [new_name]"
+	I.SetName(new_name)
 	if(prob(5))
 		I.talking_atom = new(I)
 	
@@ -71,7 +74,7 @@ var/global/list/responsive_carriers = list(
 	if(istype(E))
 		. += E.get_engravings()
 	else
-		. = "[pick("an alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")] \
+		. += "[pick("an alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")] \
 		[pick("surrounded by","being held aloft by","being struck by","being examined by","communicating with")] \
 		[pick("alien humanoids","amorphic blobs","short, hairy beings","rodent-like creatures","robots","primates","reptilian aliens")]"
 		if(prob(50))
@@ -82,7 +85,7 @@ var/global/list/responsive_carriers = list(
 	var/material_descriptor
 	if(prob(40))
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
-	var/result = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of an alien alloy, all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality."
+	var/result = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of an alien alloy, all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality"
 	var/list/descriptors = list()
 	if(prob(30))
 		descriptors.Add("is encrusted with [pick("","synthetic ","multi-faceted ","uncut ","sparkling ") + pick("rubies","emeralds","diamonds","opals","lapiz lazuli")]")
