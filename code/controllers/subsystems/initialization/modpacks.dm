@@ -15,7 +15,7 @@ SUBSYSTEM_DEF(modpacks)
 			crash_with("Modpack of type [package] is null or queued for deletion.")
 			continue
 		if(fail_msg)
-			crash_with("Modpack [manifest.name] failed to pre-initialize: [fail_msg].")
+			crash_with("Modpack [manifest.name] ([package]) failed to pre-initialize: [fail_msg].")
 			continue
 		if(loaded_modpacks[manifest.name])
 			crash_with("Attempted to register duplicate modpack name [manifest.name].")
