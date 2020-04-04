@@ -21,7 +21,7 @@
 		else
 			//create a new sample bag which we'll fill with rock samples
 			filled_bag = new /obj/item/evidencebag/sample(src)
-			var/obj/item/rocksliver/R = new(filled_bag, GD.geodata)
+			var/obj/item/rocksliver/R = new(filled_bag, null, GD.geodata)
 			filled_bag.store_item(R)
 			update_icon()
 
@@ -58,8 +58,8 @@
 	randpixel = 8
 	w_class = ITEM_SIZE_TINY
 	sharp = 1
-
-/obj/item/rocksliver/Initialize(mapload, geodata)
+	
+/obj/item/rocksliver/Initialize(ml, material_key, geodata)
 	. = ..()
 	icon_state = "sliver[rand(1, 3)]"
 	set_extension(src, /datum/extension/geological_data, geodata)
