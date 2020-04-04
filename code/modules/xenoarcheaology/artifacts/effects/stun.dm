@@ -3,7 +3,7 @@
 
 /datum/artifact_effect/stun/New()
 	..()
-	effect_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
+	origin_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
 
 /datum/artifact_effect/stun/DoEffectTouch(var/mob/toucher)
 	if(iscarbon(toucher))
@@ -17,7 +17,7 @@
 /datum/artifact_effect/stun/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(effectrange,T))
+		for (var/mob/living/carbon/C in range(effect_range,T))
 			var/susceptibility = GetAnomalySusceptibility(C)
 			if(prob(10 * susceptibility))
 				to_chat(C, "<span class='warning'>Your body goes numb for a moment.</span>")
@@ -29,7 +29,7 @@
 /datum/artifact_effect/stun/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(effectrange,T))
+		for (var/mob/living/carbon/C in range(effect_range,T))
 			var/susceptibility = GetAnomalySusceptibility(C)
 			if(prob(100 * susceptibility))
 				to_chat(C, "<span class='warning'>A wave of energy overwhelms your senses!</span>")

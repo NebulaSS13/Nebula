@@ -1,7 +1,7 @@
 /datum/artifact_effect/forcefield
 	name = "force field"
 	var/list/created_field
-	effect_type = EFFECT_PARTICLE
+	origin_type = EFFECT_PARTICLE
 	// x-y configuration of the field, as offsets from source coordinates
 	var/global/field_offsets = list(
 		"-2" = list(-2, -1, 0, 1, 2), 

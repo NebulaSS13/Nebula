@@ -92,16 +92,16 @@
 		//make sure the effect is active
 		if(!inserted_battery.battery_effect.activated)
 			inserted_battery.battery_effect.ToggleActivate(1)
-		switch(inserted_battery.battery_effect.effect)
+		switch(inserted_battery.battery_effect.operation_type)
 			if(EFFECT_TOUCH)
 				visible_message("The [src] shudders.")
 				if(ismob(loc))
 					inserted_battery.battery_effect.DoEffectTouch(loc)
 				inserted_battery.use_power(energy_consumed_on_touch)
 			if(EFFECT_PULSE)
-				inserted_battery.battery_effect.chargelevel = inserted_battery.battery_effect.chargelevelmax
+				inserted_battery.battery_effect.pulse_tick = inserted_battery.battery_effect.pulse_period
 				//consume power relative to the time the artifact takes to charge and the effect range
-				inserted_battery.use_power(inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.chargelevelmax)
+				inserted_battery.use_power(inserted_battery.battery_effect.effect_range * inserted_battery.battery_effect.effect_range * inserted_battery.battery_effect.pulse_period)
 			else
 				inserted_battery.use_power(energy_consumed_on_tick)
 
@@ -177,7 +177,7 @@
 	if (!istype(M))
 		return
 
-	if(activated && inserted_battery?.battery_effect?.effect == EFFECT_TOUCH)
+	if(activated && inserted_battery?.battery_effect?.operation_type == EFFECT_TOUCH)
 		inserted_battery.battery_effect.DoEffectTouch(M)
 		inserted_battery.use_power(energy_consumed_on_touch)
 		user.visible_message("<span class='notice'>[user] taps [M] with [src], and it shudders on contact.</span>")

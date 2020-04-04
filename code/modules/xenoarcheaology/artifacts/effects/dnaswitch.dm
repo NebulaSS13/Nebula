@@ -1,7 +1,7 @@
 //todo
 /datum/artifact_effect/dnaswitch
 	name = "dnaswitch"
-	effect_type = EFFECT_ORGANIC
+	origin_type = EFFECT_ORGANIC
 	var/severity
 	var/list/global/feels = list(
 		"You feel a little different.",
@@ -15,7 +15,7 @@
 
 /datum/artifact_effect/dnaswitch/New()
 	..()
-	if(effect == EFFECT_AURA)
+	if(operation_type == EFFECT_AURA)
 		severity = rand(5,30)
 	else
 		severity = rand(25,95)
@@ -28,14 +28,14 @@
 /datum/artifact_effect/dnaswitch/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(effectrange,T))
+		for(var/mob/living/carbon/human/H in range(effect_range,T))
 			mess_dna(H, 100, 50, 30)
 		return 1
 
 /datum/artifact_effect/dnaswitch/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for(var/mob/living/carbon/human/H in range(effectrange, T))
+		for(var/mob/living/carbon/human/H in range(effect_range, T))
 			mess_dna(H, 25, 75, 75)
 		return 1
 

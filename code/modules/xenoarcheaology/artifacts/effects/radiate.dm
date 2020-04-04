@@ -6,7 +6,7 @@
 /datum/artifact_effect/radiate/New()
 	..()
 	radiation_strength = rand(10, 50)
-	effect_type = pick(EFFECT_PARTICLE, EFFECT_ORGANIC)
+	origin_type = pick(EFFECT_PARTICLE, EFFECT_ORGANIC)
 
 /datum/artifact_effect/radiate/DoEffectTouch(var/mob/living/user)
 	if(istype(user))

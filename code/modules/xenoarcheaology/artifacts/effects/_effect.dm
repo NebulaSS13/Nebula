@@ -1,20 +1,20 @@
 /datum/artifact_effect
 	var/name = "unknown"
-	var/effect = EFFECT_TOUCH
-	var/effectrange = 4
+	var/operation_type = EFFECT_TOUCH
+	var/effect_range = 4
 	var/atom/holder
 	var/activated = 0
-	var/chargelevel = 0
-	var/chargelevelmax = 10
-	var/artifact_id = ""
-	var/effect_type = 0
+	var/pulse_tick = 0
+	var/pulse_period = 10
+	var/artifact_id
+	var/origin_type
 
 	var/datum/artifact_trigger/trigger
 
 /datum/artifact_effect/New(var/atom/location)
 	..()
 	holder = location
-	effect = rand(0, MAX_EFFECT)
+	operation_type = rand(0, MAX_EFFECT)
 	var/triggertype = pick(subtypesof(/datum/artifact_trigger))
 	trigger = new triggertype
 
@@ -25,16 +25,16 @@
 	switch(pick(100;1, 50;2, 25;3))
 		if(1)
 			//short range, short charge time
-			chargelevelmax = rand(3, 20)
-			effectrange = rand(1, 3)
+			pulse_period = rand(3, 20)
+			effect_range = rand(1, 3)
 		if(2)
 			//medium range, medium charge time
-			chargelevelmax = rand(15, 40)
-			effectrange = rand(5, 15)
+			pulse_period = rand(15, 40)
+			effect_range = rand(5, 15)
 		if(3)
 			//large range, long charge time
-			chargelevelmax = rand(20, 120)
-			effectrange = rand(20, 40)
+			pulse_period = rand(20, 120)
+			effect_range = rand(20, 40)
 
 /datum/artifact_effect/Destroy()
 	QDEL_NULL(trigger)
@@ -64,17 +64,17 @@
 
 /datum/artifact_effect/proc/process()
 	if(activated)
-		if(effect == EFFECT_AURA)
+		if(operation_type == EFFECT_AURA)
 			DoEffectAura()
-		if(effect == EFFECT_PULSE)
-			chargelevel++
-			if(chargelevel >= chargelevelmax)
-				chargelevel = 0
+		if(operation_type == EFFECT_PULSE)
+			pulse_tick++
+			if(pulse_tick >= pulse_period)
+				pulse_tick = 0
 				DoEffectPulse()
 
 /datum/artifact_effect/proc/getDescription()
 	. = "<b>"
-	switch(effect_type)
+	switch(origin_type)
 		if(EFFECT_ENERGY)
 			. += "Concentrated energy emissions"
 		if(EFFECT_PSIONIC)
@@ -94,7 +94,7 @@
 
 	. += "</b> have been detected <b>"
 
-	switch(effect)
+	switch(operation_type)
 		if(EFFECT_TOUCH)
 			. += "interspersed throughout substructure and shell."
 		if(EFFECT_AURA)
@@ -122,10 +122,9 @@
 //used by anomaly power harvesters
 /datum/artifact_effect/proc/copy()
 	var/datum/artifact_effect/E = new type()
-	E.effectrange = effectrange
+	E.effect_range = effect_range
 	E.artifact_id = artifact_id
-	E.effect = effect
-	E.effect = effect
-	E.chargelevelmax = chargelevelmax
+	E.operation_type = operation_type
+	E.pulse_period = pulse_period
 	E.trigger = trigger.copy()
 	return E

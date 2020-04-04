@@ -6,8 +6,8 @@
 	..()
 	if(!spawned_gas)
 		spawned_gas = pick(SSmaterials.all_gasses)
-	effect = pick(EFFECT_TOUCH, EFFECT_AURA)
-	effect_type = pick(EFFECT_BLUESPACE, EFFECT_SYNTH)
+	operation_type = pick(EFFECT_TOUCH, EFFECT_AURA)
+	origin_type = pick(EFFECT_BLUESPACE, EFFECT_SYNTH)
 
 /datum/artifact_effect/gas/DoEffectTouch(var/mob/user)
 	if(holder)

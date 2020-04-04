@@ -1,6 +1,6 @@
 /datum/artifact_effect/teleport
 	name = "teleport"
-	effect_type = EFFECT_BLUESPACE
+	origin_type = EFFECT_BLUESPACE
 
 /datum/artifact_effect/teleport/DoEffectTouch(var/mob/user)
 	teleport_away(user)
@@ -8,13 +8,13 @@
 /datum/artifact_effect/teleport/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/M in range(effectrange,T))
+		for (var/mob/living/M in range(effect_range,T))
 			teleport_away(M)
 
 /datum/artifact_effect/teleport/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/M in range(effectrange, T))
+		for (var/mob/living/M in range(effect_range, T))
 			teleport_away(M)
 
 /datum/artifact_effect/teleport/proc/teleport_away(mob/living/M)
@@ -26,5 +26,5 @@
 		if(M.anchored)
 			return
 		spark_at(get_turf(M))
-		M.forceMove(pick(trange(effectrange * 2, get_turf(holder))))
+		M.forceMove(pick(trange(effect_range * 2, get_turf(holder))))
 		spark_at(get_turf(M))

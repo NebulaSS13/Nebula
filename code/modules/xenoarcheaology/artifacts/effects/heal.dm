@@ -1,6 +1,6 @@
 /datum/artifact_effect/heal
 	name = "heal"
-	effect_type = EFFECT_ORGANIC
+	origin_type = EFFECT_ORGANIC
 
 /datum/artifact_effect/heal/DoEffectTouch(var/mob/toucher)
 	if(iscarbon(toucher))
@@ -10,13 +10,13 @@
 /datum/artifact_effect/heal/DoEffectAura()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(src.effectrange,T))
+		for (var/mob/living/carbon/C in range(src.effect_range,T))
 			heal(C, 1, msg_prob = 5)
 
 /datum/artifact_effect/heal/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)
-		for (var/mob/living/carbon/C in range(effectrange,T))
+		for (var/mob/living/carbon/C in range(effect_range,T))
 			heal(C, 5)
 
 //todo: check over this properly
