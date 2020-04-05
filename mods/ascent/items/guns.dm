@@ -54,7 +54,7 @@
 
 /obj/item/gun/energy/particle/get_mob_overlay(var/mob/living/carbon/human/user, var/slot)
 	if(istype(user) && (slot == slot_l_hand_str || slot == slot_r_hand_str))
-		var/bodytype = user.species.get_root_species_name(user)
+		var/bodytype = user.species.get_bodytype(user)
 		if(bodytype in list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE, BODYTYPE_SNAKE))
 			if(slot == slot_l_hand_str)
 				if(bodytype == BODYTYPE_MANTID_SMALL)

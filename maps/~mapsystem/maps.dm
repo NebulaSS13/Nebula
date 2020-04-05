@@ -111,7 +111,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/salary_modifier	= 1			//Multiplier to starting character money
 	var/list/station_departments = list()//Gets filled automatically depending on jobs allowed
 
-	var/default_species
+	var/default_species = SPECIES_HUMAN
 
 	var/supply_currency_name = "Credits"
 	var/supply_currency_name_short = "Cr."
