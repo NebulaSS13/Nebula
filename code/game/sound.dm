@@ -27,6 +27,38 @@
 
 var/const/FALLOFF_SOUNDS = 0.5
 
+//Applies mob-specific and environment specific adjustments to volume value given
+/proc/adjust_volume_for_hearer(var/volume, var/turf/turf_source, var/atom/listener)
+	if(ismob(listener))
+		var/mob/M = listener
+		if(M.ear_deaf)
+			return 0
+		volume *= M.get_sound_volume_multiplier()
+
+	var/turf/T = get_turf(listener)
+	var/datum/gas_mixture/hearer_env = T.return_air()
+	var/datum/gas_mixture/source_env = turf_source.return_air()
+
+	var/pressure_factor = 1.0
+	if (hearer_env && source_env)
+		var/pressure = min(hearer_env.return_pressure(), source_env.return_pressure())
+		if (pressure < ONE_ATMOSPHERE)
+			pressure_factor = max((pressure - SOUND_MINIMUM_PRESSURE)/(ONE_ATMOSPHERE - SOUND_MINIMUM_PRESSURE), 0)
+	else //in space
+		pressure_factor = 0
+
+	if (get_dist(T, turf_source) <= 1)
+		pressure_factor = max(pressure_factor, 0.15)	//hearing through contact
+
+	volume *= pressure_factor
+
+	if(istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
+		var/turf/simulated/sim_source = turf_source
+		var/turf/simulated/sim_destination = T
+		if(sim_destination.zone != sim_source.zone)
+			volume -= 30
+	return volume
+
 /mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)
 	if(!src.client || ear_deaf > 0)
 		return
@@ -44,40 +76,15 @@ var/const/FALLOFF_SOUNDS = 0.5
 		else if (vary)
 			S.frequency = get_rand_frequency()
 
-	//sound volume falloff with pressure
-	var/pressure_factor = 1.0
-
-	S.volume *= get_sound_volume_multiplier()
-
 	var/turf/T = get_turf(src)
+	S.volume = adjust_volume_for_hearer(S.volume, turf_source, src)
 	// 3D sounds, the technology is here!
+
 	if(isturf(turf_source))
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
 		S.volume -= max(distance - (world.view + extrarange), 0) * 2 //multiplicative falloff to add on top of natural audio falloff.
-
-		var/datum/gas_mixture/hearer_env = T.return_air()
-		var/datum/gas_mixture/source_env = turf_source.return_air()
-
-		if (hearer_env && source_env)
-			var/pressure = min(hearer_env.return_pressure(), source_env.return_pressure())
-
-			if (pressure < ONE_ATMOSPHERE)
-				pressure_factor = max((pressure - SOUND_MINIMUM_PRESSURE)/(ONE_ATMOSPHERE - SOUND_MINIMUM_PRESSURE), 0)
-		else //in space
-			pressure_factor = 0
-
-		if (distance <= 1)
-			pressure_factor = max(pressure_factor, 0.15)	//hearing through contact
-
-		S.volume *= pressure_factor
-
-		if(istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
-			var/turf/simulated/sim_source = turf_source
-			var/turf/simulated/sim_destination = T
-			if(sim_destination.zone != sim_source.zone)
-				S.volume -= 30
 
 		if (S.volume <= 0)
 			return //no volume means no sound
@@ -109,15 +116,11 @@ var/const/FALLOFF_SOUNDS = 0.5
 				S.environment = UNDERWATER
 			else if (T?.is_flooded(M.lying))
 				S.environment = UNDERWATER
-			else if (pressure_factor < 0.5)
-				S.environment = SPACE
 			else
 				var/area/A = get_area(src)
 				S.environment = A.sound_env
 
-		else if (pressure_factor < 0.5)
-			S.environment = SPACE
-		else
+		else 
 			var/area/A = get_area(src)
 			S.environment = A.sound_env
 
