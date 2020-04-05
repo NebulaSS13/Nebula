@@ -14,6 +14,15 @@
 /datum/fabricator_recipe/engineering/firealarm_kit
 	path = /obj/item/frame/fire_alarm/kit
 
+/datum/fabricator_recipe/engineering/wallcharger
+	path = /obj/item/frame/button/wall_charger/kit
+
+/datum/fabricator_recipe/engineering/light_switch
+	path = /obj/item/frame/button/light_switch/kit
+
+/datum/fabricator_recipe/engineering/window_tint
+	path = /obj/item/frame/button/light_switch/windowtint/kit
+
 /datum/fabricator_recipe/engineering/spotlight
 	path = /obj/item/frame/light/spot
 

@@ -97,14 +97,14 @@
 	difficulty = 2
 
 /datum/stack_recipe/light_switch
-	title = "light switch"
-	result_type = /obj/item/frame/light_switch
+	title = "light switch frame"
+	result_type = /obj/item/frame/button/light_switch
 	req_amount = 1
 	difficulty = 2
 
 /datum/stack_recipe/light_switch/windowtint
-	title = "window tint switch"
-	result_type = /obj/item/frame/light_switch/windowtint
+	title = "window tint switch frame"
+	result_type = /obj/item/frame/button/light_switch/windowtint
 	req_amount = 1
 	difficulty = 2
 

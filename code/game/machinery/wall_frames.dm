@@ -141,4 +141,8 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "wrecharger0"
 	matter = list(MAT_STEEL = 400, MAT_PLASTIC = 200)
-	build_machine_type = /obj/machinery/button/buildable
+	build_machine_type = /obj/machinery/recharger/wallcharger
+
+/obj/item/frame/button/wall_charger/kit
+	fully_construct = TRUE
+	name = "wall charger kit"

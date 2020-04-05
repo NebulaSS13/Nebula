@@ -14,6 +14,16 @@
 	var/other_area = null
 	var/image/overlay
 
+	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
+	frame_type = /obj/item/frame/button/light_switch
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable
+	)
+	base_type = /obj/machinery/light_switch/buildable
+
+/obj/machinery/light_switch/buildable
+	uncreated_component_parts = null
+
 /obj/machinery/light_switch/Initialize()
 	. = ..()
 	if(other_area)
@@ -65,25 +75,3 @@
 		playsound(src, "switch", 30)
 		set_state(!on)
 		return TRUE
-
-/obj/machinery/light_switch/attackby(obj/item/tool, mob/user)
-	if(istype(tool, /obj/item/screwdriver))
-		new /obj/item/frame/light_switch(user.loc, 1)
-		qdel(src)
-
-
-/obj/machinery/light_switch/powered()
-	. = ..(power_channel, connected_area) //tie our powered status to the connected area
-
-/obj/machinery/light_switch/power_change()
-	. = ..()
-	//synch ourselves to the new state
-	if(connected_area) //If an APC initializes before we do it will force a power_change() before we can get our connected area
-		sync_state()
-
-/obj/machinery/light_switch/emp_act(severity)
-	if(stat & (BROKEN|NOPOWER))
-		..(severity)
-		return
-	power_change()
-	..(severity)
