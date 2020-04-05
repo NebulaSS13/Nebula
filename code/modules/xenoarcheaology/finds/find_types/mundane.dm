@@ -8,7 +8,6 @@
 // Cutlery
 /decl/archaeological_find/cutlery
 	item_type = "cutlery"
-	modification_flags = XENOFIND_APPLY_PREFIX | XENOFIND_APPLY_DECOR
 	possible_types = list(
 		/obj/item/material/kitchen/utensil/fork,
 		/obj/item/material/knife/table,
@@ -16,7 +15,7 @@
 	)
 
 /decl/archaeological_find/cutlery/new_icon_state()
-	return
+	return "cutlery[rand(1,3)]"
 
 /decl/archaeological_find/cutlery/get_additional_description()
 	return pick(
@@ -27,10 +26,13 @@
 // Coin
 /decl/archaeological_find/coin
 	item_type = "coin"
-	modification_flags = 0
+	modification_flags = XENOFIND_REPLACE_ICON
 	engraving_chance = 100
 	responsive_reagent = /datum/reagent/iron
 	possible_types = list(/obj/item/material/coin)
+
+/decl/archaeological_find/coin/new_icon_state()
+	return "coin[rand(1,3)]"
 
 // Musical Instrument
 /decl/archaeological_find/instrument
@@ -101,3 +103,9 @@
 		"It seems to draw you inward as you look it at.",
 		"Something twinkles faintly as you look at it.",
 		"It's mesmerizing to behold.")
+
+/client/verb/spawn_find()
+	var/list/finds = decls_repository.get_decls_of_type(/decl/archaeological_find)
+	var/find = input("What find") as anything in finds
+	var/decl/archaeological_find/F = finds[find]
+	F.create_find(get_turf(mob))
