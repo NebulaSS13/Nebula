@@ -12,6 +12,7 @@
 	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
+	var/is_crystalline = FALSE
 
 	// Icon/appearance vars.
 	var/icobase =      'icons/mob/human_races/species/human/body.dmi'          // Normal icon set.
@@ -803,7 +804,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		else			. = 8
 
 /datum/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	return
+	if(org && (org.species ? org.species.is_crystalline : is_crystalline))
+		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
 
 /datum/species/proc/check_no_slip(var/mob/living/carbon/human/H)
 	if(can_overcome_gravity(H))
