@@ -196,7 +196,6 @@
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
 		return 1
-	return 0
 
 /obj/item/stack/proc/add(var/extra)
 	if(!uses_charge)
@@ -205,7 +204,7 @@
 		else
 			amount += extra
 			update_icon()
-		return 1
+			return 1
 	else if(!synths || synths.len < uses_charge)
 		return 0
 	else

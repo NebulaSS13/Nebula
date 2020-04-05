@@ -112,7 +112,7 @@
 				else
 					bar.color = "#ff0000"
 				GLOB.hardpoint_bar_cache += bar
-		for(var/i=i;i<=value;i++)
+		for(var/i=1;i<=value;i++)
 			new_overlays += GLOB.hardpoint_bar_cache[i]
 	overlays = new_overlays
 

@@ -190,7 +190,9 @@
 
 	if(holder)
 		add_admin_verbs()
+#ifdef ADMIN_MEMO
 		admin_memo_show()
+#endif
 
 	// Forcibly enable hardware-accelerated graphics, as we need them for the lighting overlays.
 	// (but turn them off first, since sometimes BYOND doesn't turn them on properly otherwise)
