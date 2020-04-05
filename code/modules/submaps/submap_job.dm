@@ -41,12 +41,16 @@
 	var/branch
 	var/list/spawnpoints
 	var/datum/submap/owner
-	var/list/blacklisted_species = list(SPECIES_ALIEN, SPECIES_GOLEM)
+	var/list/blacklisted_species = list()
 	var/list/whitelisted_species = list()
 
 /datum/job/submap/New(var/datum/submap/_owner, var/abstract_job = FALSE)
-	if(!length(whitelisted_species))
-		whitelisted_species = list(GLOB.using_map.default_species)
+
+	if(islist(whitelisted_species) && !length(whitelisted_species))
+		whitelisted_species |= SSmodpacks.default_submap_whitelisted_species
+	if(islist(blacklisted_species) && !length(blacklisted_species))
+		blacklisted_species |= SSmodpacks.default_submap_blacklisted_species
+
 	if(!abstract_job)
 		spawnpoints = list()
 		owner = _owner
