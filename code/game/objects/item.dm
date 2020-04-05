@@ -178,22 +178,8 @@
 				qdel(src)
 
 /obj/item/examine(mob/user, distance)
-	var/size
-	switch(src.w_class)
-		if(ITEM_SIZE_TINY)
-			size = "tiny"
-		if(ITEM_SIZE_SMALL)
-			size = "small"
-		if(ITEM_SIZE_NORMAL)
-			size = "normal-sized"
-		if(ITEM_SIZE_LARGE)
-			size = "large"
-		if(ITEM_SIZE_HUGE)
-			size = "bulky"
-		if(ITEM_SIZE_HUGE + 1 to INFINITY)
-			size = "huge"
 	var/desc_comp = "" //For "description composite"
-	desc_comp += "It is a [size] item."
+	desc_comp += "It is a [w_class_description()] item."
 
 	var/list/available_recipes = list()
 	for(var/decl/crafting_stage/initial_stage in SSfabrication.find_crafting_recipes(type))
@@ -953,3 +939,31 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/is_special_cutting_tool(var/high_power)
 	return FALSE
+
+/obj/item/proc/w_class_description()
+	switch(w_class)
+		if(ITEM_SIZE_TINY)
+			return "tiny"
+		if(ITEM_SIZE_SMALL)
+			return "small"
+		if(ITEM_SIZE_NORMAL)
+			return "normal-sized"
+		if(ITEM_SIZE_LARGE)
+			return "large"
+		if(ITEM_SIZE_HUGE)
+			return "bulky"
+		if(ITEM_SIZE_HUGE + 1 to INFINITY)
+			return "huge"
+
+/obj/item/proc/get_autopsy_descriptors()
+	var/list/descriptors = list()
+	descriptors += w_class_description()
+	if(sharp)
+		descriptors += "sharp"
+	if(edge)
+		descriptors += "edged"
+	if(force >= 10 && !sharp && !edge)
+		descriptors += "heavy"
+	if(material)
+		descriptors += "made of [material.display_name]"
+	return descriptors

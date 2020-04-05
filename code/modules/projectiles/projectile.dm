@@ -511,3 +511,6 @@
 		SP.SetName((name != "shrapnel")? "[name] shrapnel" : "shrapnel")
 		SP.desc += " It looks like it was fired from [shot_from]."
 		return SP
+	
+/obj/item/projectile/get_autopsy_descriptors()
+	return list(name)

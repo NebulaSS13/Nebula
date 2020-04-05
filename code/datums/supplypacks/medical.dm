@@ -232,7 +232,7 @@
 	contains = list(/obj/item/folder/white,
 					/obj/item/camera,
 					/obj/item/camera_film = 2,
-					/obj/item/autopsy_scanner,
+					/obj/item/scanner/autopsy,
 					/obj/item/scalpel,
 					/obj/item/storage/box/masks,
 					/obj/item/storage/box/gloves,

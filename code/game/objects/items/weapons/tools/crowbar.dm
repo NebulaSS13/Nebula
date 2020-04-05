@@ -17,6 +17,10 @@
 	center_of_mass = @"{'x':16,'y':20}"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
+/obj/item/crowbar/get_autopsy_descriptors()
+	. = ..()
+	. += "narrow"
+
 /obj/item/crowbar/red
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"

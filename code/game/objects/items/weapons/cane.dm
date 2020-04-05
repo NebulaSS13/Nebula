@@ -12,6 +12,10 @@
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 	base_parry_chance = 30
 
+/obj/item/cane/get_autopsy_descriptors()
+	. = ..()
+	. += "narrow"
+
 /obj/item/cane/concealed
 	var/concealed_blade
 

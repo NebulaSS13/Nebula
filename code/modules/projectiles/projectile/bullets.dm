@@ -9,12 +9,18 @@
 	embed = 1
 	penetration_modifier = 1.0
 	var/mob_passthrough_check = 0
+	var/caliber
 
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 	miss_sounds = list('sound/weapons/guns/miss1.ogg','sound/weapons/guns/miss2.ogg','sound/weapons/guns/miss3.ogg','sound/weapons/guns/miss4.ogg')
 	ricochet_sounds = list('sound/weapons/guns/ricochet1.ogg', 'sound/weapons/guns/ricochet2.ogg',
 							'sound/weapons/guns/ricochet3.ogg', 'sound/weapons/guns/ricochet4.ogg')
 	impact_sounds = list(BULLET_IMPACT_MEAT = SOUNDS_BULLET_MEAT, BULLET_IMPACT_METAL = SOUNDS_BULLET_METAL)
+
+/obj/item/projectile/bullet/get_autopsy_descriptors()
+	. = ..()
+	if(caliber)
+		. += "matching caliber [caliber]"
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))

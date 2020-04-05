@@ -19,6 +19,9 @@
 /obj/item/ammo_casing/Initialize()
 	if(ispath(projectile_type))
 		BB = new projectile_type(src)
+		if(caliber && istype(BB, /obj/item/projectile/bullet))
+			var/obj/item/projectile/bullet/B = BB
+			B.caliber = caliber
 	if(randpixel)
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)

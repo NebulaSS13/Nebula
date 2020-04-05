@@ -52,6 +52,10 @@
 	applies_material_colour = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
+/obj/item/material/knife/table/primitive/get_autopsy_descriptors()
+	. = ..()
+	. += "serrated"
+
 //kitchen knives
 /obj/item/material/knife/kitchen
 	name = "kitchen knife"
@@ -81,6 +85,10 @@
 	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
 
+/obj/item/material/knife/combat/get_autopsy_descriptors()
+	. = ..()
+	. += "serrated"
+
 //random stuff
 /obj/item/material/knife/hook
 	name = "meat hook"
@@ -96,6 +104,10 @@
 	icon_state = "render"
 	applies_material_colour = FALSE
 	applies_material_name = FALSE
+
+/obj/item/material/knife/ritual/get_autopsy_descriptors()
+	. = ..()
+	. += "curved"
 
 //Utility knives
 /obj/item/material/knife/utility

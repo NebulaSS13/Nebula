@@ -140,6 +140,10 @@
 	sharp = 1
 	edge = 1
 
+/obj/item/circular_saw/get_autopsy_descriptors()
+	. = ..()
+	. += "serrated"
+
 //misc, formerly from code/defines/weapons.dm
 /obj/item/bonegel
 	name = "bone gel"
