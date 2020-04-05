@@ -3,7 +3,7 @@
 
 /datum/unit_test/culture/start_test()
 	var/fails = 0
-	for(var/species_name in all_species)
+	for(var/species_name in get_all_species())
 		var/datum/species/species = get_species_by_key(species_name)
 		if(!islist(species.default_cultural_info))
 			fails++

@@ -144,7 +144,7 @@ var/list/wrapped_species_by_ref = list()
 	last_special = world.time + 50
 
 	var/new_species = input("Please select a species to emulate.", "Shapeshifter Body") as null|anything in species.get_valid_shapeshifter_forms(src)
-	if(!new_species || !get_species_by_key(new_species] || wrapped_species_by_ref["\ref[src]") == new_species)
+	if(!new_species || !get_species_by_key(new_species) || wrapped_species_by_ref["\ref[src]"] == new_species)
 		return
 
 	wrapped_species_by_ref["\ref[src]"] = new_species

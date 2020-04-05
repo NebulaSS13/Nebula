@@ -349,7 +349,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			species_to_pick += species
 
 		var/choice = input("Select a species to play as.") as null|anything in species_to_pick
-		if(!choice || !(choice in all_species))
+		if(!choice || !(choice in get_all_species()))
 			return
 
 		var/prev_species = pref.species
@@ -557,7 +557,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.rlimb_data[second_limb] = null
 
 			if("Prosthesis")
-				var/datum/species/temp_species = pref.species ? get_species_by_key(pref.species] : all_species[GLOB.using_map.default_species)
+				var/datum/species/temp_species = get_species_by_key(pref.species || GLOB.using_map.default_species)
 				var/tmp_bodytype = temp_species.get_bodytype(user)
 				var/list/usable_manufacturers = list()
 				for(var/company in chargen_robolimbs)

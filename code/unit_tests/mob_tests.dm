@@ -26,7 +26,7 @@
 
 	if(!istype(T, /turf/space))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
-	for(var/species_name in all_species)
+	for(var/species_name in get_all_species())
 		var/datum/species/S = get_species_by_key(species_name)
 		var/mob/living/carbon/human/H = new(T, S.name)
 		if(H.need_breathe())
@@ -302,7 +302,7 @@ datum/unit_test/mob_damage/halloss
 	var/failcount = 0
 
 /datum/unit_test/species_base_skin/start_test()
-	for(var/species_name in all_species)
+	for(var/species_name in get_all_species())
 		var/datum/species/S = get_species_by_key(species_name)
 		if(S.base_skin_colours)
 			if(!(S.appearance_flags & HAS_BASE_SKIN_COLOURS))
@@ -352,7 +352,7 @@ datum/unit_test/mob_damage/halloss
 
 /datum/unit_test/mob_nullspace/start_test()
 	// Simply create one of each species type in nullspace
-	for(var/species_name in all_species)
+	for(var/species_name in get_all_species())
 		var/test_subject = new/mob/living/carbon/human(null, species_name)
 		test_subjects += test_subject
 	return TRUE
@@ -373,7 +373,7 @@ datum/unit_test/mob_damage/halloss
 
 /datum/unit_test/mob_organ_size/start_test()
 	var/failed = FALSE
-	for(var/species_name in all_species)
+	for(var/species_name in get_all_species())
 		var/mob/living/carbon/human/H = new(null, species_name)
 		for(var/obj/item/organ/external/E in H.organs)
 			for(var/obj/item/organ/internal/I in E.internal_organs)
