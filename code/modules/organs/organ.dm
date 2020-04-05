@@ -70,7 +70,7 @@ var/list/organ_cache = list()
 	if (given_dna)
 		set_dna(given_dna)
 	if (!species)
-		species = all_species[GLOB.using_map.default_species]
+		species = get_species_by_key(GLOB.using_map.default_species)
 	species.resize_organ(src)
 
 	create_reagents(5 * (w_class-1)**2)
@@ -85,7 +85,7 @@ var/list/organ_cache = list()
 			blood_DNA = list()
 		blood_DNA.Cut()
 		blood_DNA[dna.unique_enzymes] = dna.b_type
-		species = all_species[dna.species]
+		species = get_species_by_key(dna.species)
 		if (!species)
 			crash_with("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
 

@@ -4,10 +4,6 @@
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
-
-//Languages/species/whitelist.
-var/global/list/all_species[0]
-
 var/list/mannequins_
 
 // Uplinks
@@ -99,18 +95,24 @@ var/global/list/string_slot_flags = list(
 
 	return 1
 
+var/list/all_species
 var/list/playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise.
 /proc/get_playable_species()
-	if(!global.playable_species)
+	if(!global.all_species)
 		global.playable_species = list()
+		global.all_species = list()
 		for(var/species_type in typesof(/datum/species))
 			var/datum/species/species = species_type
 			var/species_name = initial(species.name)
 			if(species_name)
-				all_species[species_name] = new species
-				species = all_species[species_name]
+				global.all_species[species_name] = new species
+				species = get_species_by_key(species_name)
 				if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
 					global.playable_species += species.name
 		if(GLOB.using_map.default_species)
 			global.playable_species |= GLOB.using_map.default_species
 	return global.playable_species
+
+/proc/get_species_by_key(var/species_key)
+	get_playable_species() // Build the relevant lists.
+	. = global.all_species[species_key]
