@@ -81,22 +81,11 @@
 // Space movement
 /datum/movement_handler/mob/space/DoMove(var/direction, var/mob/mover)
 	if(!mob.check_solid_ground())
-		var/allowmove = mob.Allow_Spacemove(0)
+		var/allowmove = mob.Process_Spacemove(direction)
 		if(!allowmove)
 			return MOVEMENT_HANDLED
 		else if(allowmove == -1 && mob.handle_spaceslipping()) //Check to see if we slipped
 			return MOVEMENT_HANDLED
-		else
-			mob.inertia_dir = 0 //If not then we can reset inertia and move
-
-/datum/movement_handler/mob/space/MayMove(var/mob/mover, var/is_external)
-	if(IS_NOT_SELF(mover) && is_external)
-		return MOVEMENT_PROCEED
-
-	if(!mob.check_solid_ground())
-		if(!mob.Allow_Spacemove(0))
-			return MOVEMENT_STOP
-	return MOVEMENT_PROCEED
 
 // Buckle movement
 /datum/movement_handler/mob/buckle_relay/DoMove(var/direction, var/mover)

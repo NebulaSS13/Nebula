@@ -99,23 +99,12 @@
 
 	if(!mob.check_solid_ground())
 		mob.anchored = FALSE
-		var/allowmove = mob.Allow_Spacemove(0)
+		var/allowmove = mob.Process_Spacemove(direction)
 		if(!allowmove)
 			return MOVEMENT_HANDLED
 		else if(allowmove == -1 && mob.handle_spaceslipping()) //Check to see if we slipped
 			return MOVEMENT_HANDLED
-		else
-			mob.inertia_dir = 0 //If not then we can reset inertia and move
 	else mob.anchored = TRUE
-
-/datum/movement_handler/mob/space/exosuit/MayMove(var/mob/mover, var/is_external)
-	if((mover != host) && is_external)
-		return MOVEMENT_PROCEED
-
-	if(!mob.check_solid_ground())
-		if(!mob.Allow_Spacemove(0))
-			return MOVEMENT_STOP
-	return MOVEMENT_PROCEED
 
 /mob/living/exosuit/lost_in_space()
 	for(var/atom/movable/AM in contents)

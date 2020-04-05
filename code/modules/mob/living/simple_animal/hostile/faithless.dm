@@ -34,7 +34,7 @@
 	skin_material = null
 	skin_amount =   0
 
-/mob/living/simple_animal/hostile/faithless/Allow_Spacemove(var/check_drift = 0)
+/mob/living/simple_animal/hostile/faithless/Process_Spacemove()
 	return 1
 
 /mob/living/simple_animal/hostile/faithless/FindTarget()

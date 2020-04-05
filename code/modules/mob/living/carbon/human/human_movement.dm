@@ -71,11 +71,7 @@
 	. = ..()
 	. += species.strength
 
-/mob/living/carbon/human/Allow_Spacemove(var/check_drift = 0)
-	. = ..()
-	if(.)
-		return
-
+/mob/living/carbon/human/Process_Spacemove(var/movement_dir)
 	//Do we have a working jetpack?
 	var/obj/item/tank/jetpack/thrust
 	if(back)
@@ -87,15 +83,10 @@
 				thrust = module.jets
 				break
 
-	if(thrust && thrust.on)
-		if(prob(skill_fail_chance(SKILL_EVA, 10, SKILL_ADEPT)))
-			to_chat(src, "<span class='warning'>You fumble with [thrust] controls!</span>")
-			inertia_dir = pick(GLOB.cardinal)
-			return 0
+	if(thrust && thrust.on && (movement_dir || thrust.stabilization_on) && thrust.allow_thrust(0.01, src))
+		return 1
 
-		if(((!check_drift) || (check_drift && thrust.stabilization_on)) && (!lying) && (thrust.allow_thrust(0.01, src)))
-			inertia_dir = 0
-			return 1
+	. = ..()
 
 /mob/living/carbon/human/slip_chance(var/prob_slip = 5)
 	if(!..())

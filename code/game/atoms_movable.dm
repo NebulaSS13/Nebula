@@ -18,6 +18,50 @@
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
 	var/list/grabbed_by
 
+	var/inertia_dir = 0
+	var/atom/inertia_last_loc
+	var/inertia_moving = 0
+	var/inertia_next_move = 0
+	var/inertia_move_delay = 5
+
+//call this proc to start space drifting
+/atom/movable/proc/space_drift(direction)//move this down
+	if(!loc || direction & (UP|DOWN) || Process_Spacemove(0))
+		inertia_dir = 0
+		return 0
+
+	inertia_dir = direction
+	if(!direction)
+		return 1
+	inertia_last_loc = loc
+	SSspacedrift.processing[src] = src
+	return 1
+
+//return 0 to space drift, 1 to stop, -1 for mobs to handle space slips
+/atom/movable/proc/Process_Spacemove(var/movement_dir)
+	if(!simulated)
+		return 1
+
+	if(has_gravity(src))
+		return 1
+
+	if(length(grabbed_by))
+		return 1
+
+	if(throwing)
+		return 1
+
+	if(anchored)
+		return 1
+
+	if(!isturf(loc))
+		return 1
+
+	if(locate(/obj/structure/lattice) in range(1, get_turf(src))) //Not realistic but makes pushing things in space easier
+		return -1
+
+	return 0
+
 /atom/movable/Destroy()
 	. = ..()
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))

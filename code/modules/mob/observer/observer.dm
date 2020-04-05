@@ -78,7 +78,6 @@ mob/observer/check_airflow_movable()
 	var/turf/T = locate(new_x, new_y, z)
 	if(T)
 		forceMove(T)
-		inertia_dir = 0
 		throwing = null
 		to_chat(src, "<span class='notice'>You cannot move further in this direction.</span>")
 

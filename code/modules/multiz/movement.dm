@@ -68,7 +68,7 @@
 	return 0
 
 /mob/living/carbon/human/can_ztravel()
-	if(Allow_Spacemove())
+	if(Process_Spacemove())
 		return 1
 
 	if(Check_Shoegrip())	//scaling hull with magboots
@@ -77,7 +77,7 @@
 				return 1
 
 /mob/living/silicon/robot/can_ztravel()
-	if(Allow_Spacemove()) //Checks for active jetpack
+	if(Process_Spacemove()) //Checks for active jetpack
 		return 1
 
 	for(var/turf/simulated/T in trange(1,src)) //Robots get "magboots"

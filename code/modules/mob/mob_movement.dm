@@ -139,6 +139,9 @@
 		src.m_flag = 1
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
+			if (!inertia_moving)
+				inertia_next_move = world.time + inertia_move_delay
+				space_drift(last_move)
 
 /client/Move(n, direction)
 	if(!user_acted(src))
@@ -147,17 +150,41 @@
 		return // Moved here to avoid nullrefs below
 	return mob.SelfMove(direction)
 
-// Checks whether this mob is allowed to move in space
-// Return 1 for movement, 0 for none,
-// -1 to allow movement but with a chance of slipping
-/mob/proc/Allow_Spacemove(var/check_drift = 0)
-	if(!Check_Dense_Object()) //Nothing to push off of so end here
-		return 0
+/mob/Process_Spacemove(var/movement_dir)
+	. = ..()
+	if(.)
+		return
 
-	if(restrained()) //Check to see if we can do things
-		return 0
+	var/atom/movable/backup = get_spacemove_backup()
+	if(backup)
+		if(istype(backup) && movement_dir && !backup.anchored)
+			if(step(backup,turn(movement_dir, 180)))
+				to_chat(src, "<span class='info'>You push off of [backup] to propel yourself.</span>")
+		return -1
 
-	return -1
+/mob/proc/get_spacemove_backup()//rename this
+	var/shoegrip = Check_Shoegrip()
+
+	for(var/thing in trange(1,src))//checks for walls or grav turf first
+		var/turf/T = thing
+		if(T.density || T.is_wall() || (T.is_floor() && (shoegrip || has_gravity(src))))
+			return T
+
+	for(var/A in orange(1, get_turf(src)))
+		if(istype(A,/atom/movable))
+			var/atom/movable/AM = A
+			if(AM == buckled)
+				continue
+			if(ismob(AM))
+				var/mob/M = AM
+				if(M.buckled)
+					continue
+			if(AM.density || !AM.CanPass(src))
+				if(AM.anchored)
+					return AM
+				//if(pulling == AM) solve this
+				//	continue
+				. = AM
 
 //Checks if a mob has solid ground to stand on
 //If there's no gravity then there's no up or down so naturally you can't stand on anything.
@@ -200,8 +227,8 @@
 /mob/proc/handle_spaceslipping()
 	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERT)))
 		to_chat(src, "<span class='warning'>You slipped!</span>")
-		src.inertia_dir = src.last_move
-		step(src, src.inertia_dir)
+		step(src, last_move)
+		space_drift(last_move)
 		return 1
 	return 0
 

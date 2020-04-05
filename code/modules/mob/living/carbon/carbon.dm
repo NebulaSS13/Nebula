@@ -314,8 +314,9 @@
 		src.lastarea = get_area(src.loc)
 	if((istype(src.loc, /turf/space)) || (src.lastarea.has_gravity == 0))
 		if(prob((itemsize * itemsize * 10) * MOB_SIZE_MEDIUM/src.mob_size))
-			src.inertia_dir = get_dir(target, src)
-			step(src, inertia_dir)
+			var/direction = get_dir(target, src)
+			step(src,direction)
+			space_drift(direction)
 
 	item.throw_at(target, throw_range, item.throw_speed * skill_mod, src)
 
