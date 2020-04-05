@@ -40,11 +40,8 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 
-/mob/living/simple_animal/corgi/Ian/Life()
-	. = ..()
-	if(!.)
-		return FALSE
-
+/mob/living/simple_animal/corgi/Ian/do_delayed_life_action()
+	..()
 	//Feeding, chasing food, FOOOOODDDD
 	if(!resting && !buckled)
 		turns_since_scan++
@@ -87,10 +84,11 @@
 
 		if(prob(1))
 			visible_emote(pick("dances around.","chases their tail."))
-			spawn(0)
-				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					set_dir(i)
-					sleep(1)
+			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
+				set_dir(i)
+				sleep(1)
+				if(QDELETED(src) || client)
+					return
 
 /obj/item/chems/food/snacks/meat/corgi
 	name = "Corgi meat"
@@ -170,11 +168,8 @@
 		return TOPIC_HANDLED
 	return ..()
 
-/mob/living/simple_animal/corgi/Lisa/Life()
-	. = ..()
-	if(!.)
-		return FALSE
-
+/mob/living/simple_animal/corgi/Lisa/do_delayed_life_action()
+	..()
 	if(!resting && !buckled)
 		turns_since_scan++
 		if(turns_since_scan > 15)
@@ -199,7 +194,8 @@
 
 		if(prob(1))
 			visible_emote(pick("dances around","chases her tail"))
-			spawn(0)
-				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					set_dir(i)
-					sleep(1)
+			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
+				set_dir(i)
+				sleep(1)
+				if(QDELETED(src) || client)
+					return

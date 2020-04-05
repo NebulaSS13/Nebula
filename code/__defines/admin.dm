@@ -48,5 +48,3 @@
 
 #define LAST_CKEY(M) (M.ckey || M.last_ckey)
 #define LAST_KEY(M)  (M.key || M.last_ckey)
-
-#define ENABLE_MEMOS				// Enables admin memo system if set. Remove/comment to disable.

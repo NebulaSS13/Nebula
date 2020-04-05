@@ -46,11 +46,8 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
 
-/mob/living/simple_animal/hostile/bear/Life()
-	. = ..()
-	if(!.)
-		return FALSE
-
+/mob/living/simple_animal/hostile/bear/do_delayed_life_action()
+	..()
 	if(loc && istype(loc,/turf/space))
 		icon_state = "bear"
 	else

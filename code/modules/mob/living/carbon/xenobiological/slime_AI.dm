@@ -203,6 +203,7 @@
 		regenerate_icons()
 
 /mob/living/carbon/slime/proc/handle_speech_and_mood()
+	set waitfor = FALSE // Called from Life, and say procs might sleep.
 	UpdateFace()
 
 	//Speech understanding starts here

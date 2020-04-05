@@ -73,8 +73,7 @@
 	paralysis = 0
 
 	if(on && !client && !busy)
-		spawn(0)
-			handleAI()
+		handleAI()
 
 /mob/living/bot/updatehealth()
 	if(status_flags & GODMODE)
@@ -211,6 +210,7 @@
 	return 0
 
 /mob/living/bot/proc/handleAI()
+	set waitfor = FALSE
 	if(ignore_list.len)
 		for(var/atom/A in ignore_list)
 			if(!A || !A.loc || prob(1))

@@ -8,8 +8,7 @@
 		remove_antagonist(target)
 		return 0
 	if(flags & ANTAG_CHOOSE_NAME)
-		spawn(1)
-			set_antag_name(target.current)
+		INVOKE_ASYNC(src, .proc/set_antag_name, target.current)
 	if(move)
 		place_mob(target.current)
 	update_leader()

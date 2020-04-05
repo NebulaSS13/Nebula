@@ -58,7 +58,7 @@
 			icon_state = "mouse_[body_color]"
 			wander = 1
 		else if(prob(5))
-			audible_emote("snuffles.")
+			INVOKE_ASYNC(src, .proc/audible_emote, "snuffles.")
 
 /mob/living/simple_animal/mouse/lay_down()
 	..()

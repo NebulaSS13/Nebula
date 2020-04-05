@@ -1,4 +1,3 @@
-#ifdef ENABLE_MEMOS
 #define MEMOFILE "data/memo.sav"	//where the memos are saved
 
 //switch verb so we don't spam up the verb lists with like, 3 verbs for this feature.
@@ -51,4 +50,3 @@
 			to_chat(src, "<b>Removed Memo created by [ckey].</b>")
 
 #undef MEMOFILE
-#endif

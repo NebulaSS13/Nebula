@@ -2,8 +2,9 @@
 
 // This is the main power restoration sequence. Only one sequence per AI can exist.
 /mob/living/silicon/ai/proc/handle_power_failure()
+	set waitfor = FALSE
 	// Power restoration routine already running in other spawn(). Don't start it again.
-	if(aiRestorePowerRoutine != 1)
+	if(aiRestorePowerRoutine != AI_RESTOREPOWER_STARTING)
 		return
 
 	to_chat(src, "<span class='danger'>Main power lost. System switched to internal capacitor. Beginning diagnostics.</span>")

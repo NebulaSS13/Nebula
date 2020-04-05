@@ -281,23 +281,17 @@
 /*
  * AI - Not really intelligent, but I'm calling it AI anyway.
  */
-/mob/living/simple_animal/hostile/retaliate/parrot/Life()
-	. = ..()
-	if(!.)
-		return FALSE
 
+// This has the potential to sleep in various emote and damage procs; shoving it all into here for safety.
+/mob/living/simple_animal/hostile/retaliate/parrot/do_delayed_life_action()
+	..()
+	if(!isturf(src.loc) || stat)
+		return // Let's not bother in nullspace
 	if(enemies.len && prob(relax_chance))
 		give_up()
 
 	if(simple_parrot)
 		return FALSE
-
-	if(client || stat)
-		return //Lets not force players or dead/incap parrots to move
-
-	if(!isturf(src.loc))
-		return // Let's not bother in nullspace
-
 
 //-----SPEECH
 	/* Parrot speech mimickry!

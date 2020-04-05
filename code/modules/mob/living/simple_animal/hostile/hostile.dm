@@ -164,9 +164,9 @@
 	. = ..()
 	if(!.)
 		walk(src, 0)
-		return 0
-	if(client)
-		return 0
+
+/mob/living/simple_animal/hostile/do_delayed_life_action()
+	..()
 	if(!can_act())
 		walk(src, 0)
 		kick_stance()

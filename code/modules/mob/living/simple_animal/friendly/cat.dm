@@ -29,10 +29,8 @@
 	var/mob/living/simple_animal/mouse/movement_target
 	var/mob/flee_target
 
-/mob/living/simple_animal/cat/Life()
-	. = ..()
-	if(!.)
-		return FALSE
+/mob/living/simple_animal/cat/do_delayed_life_action()
+	..()
 	//MICE!
 	if((src.loc) && isturf(src.loc))
 		if(!resting && !buckled)
@@ -168,10 +166,8 @@
 	if (!friend || movement_target != friend)
 		..()
 
-/mob/living/simple_animal/cat/fluff/Life()
-	. = ..()
-	if(!.)
-		return FALSE
+/mob/living/simple_animal/cat/fluff/do_delayed_life_action()
+	..()
 	if (stat || !friend)
 		return
 	if (get_dist(src, friend) <= 1)

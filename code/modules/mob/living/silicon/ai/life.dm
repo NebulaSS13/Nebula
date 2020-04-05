@@ -25,8 +25,7 @@
 		// AI's restore power routine is not running. Start it automatically.
 		if(aiRestorePowerRoutine == AI_RESTOREPOWER_IDLE)
 			aiRestorePowerRoutine = AI_RESTOREPOWER_STARTING
-			spawn(0)
-				handle_power_failure()
+			handle_power_failure()
 
 	handle_impaired_vision()
 	update_power_usage()

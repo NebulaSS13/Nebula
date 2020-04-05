@@ -55,11 +55,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Life()
 	. = ..()
-
-	process_grab()
-
 	if(!.)
-		return FALSE
+		return
 	
 	if((health > maxHealth / 1.5) && enemies.len && prob(10))
 		if(victim)
@@ -67,6 +64,10 @@
 		enemies = list()
 		LoseTarget()
 		visible_message("<span class='notice'>\The [src] lowers its pincer.</span>")
+
+/mob/living/simple_animal/hostile/retaliate/giant_crab/do_delayed_life_action()
+	..()
+	process_grab()
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/AttackingTarget()
 	. = ..()
