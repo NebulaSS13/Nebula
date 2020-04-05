@@ -45,11 +45,9 @@
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
 	if (istype(I, /obj/item/handcuffs))
 		add_cuffs(I, user)
-		return
-	else
-		add_hidden(I, user)
-		return
-	. = ..()
+		return TRUE
+	add_hidden(I, user)
+	return TRUE
 
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/handcuffs/cuffs, var/mob/user)
 	if (!can_add_cuffs)

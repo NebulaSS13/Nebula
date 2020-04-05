@@ -24,10 +24,10 @@
 
 	//if there's no power, recieve the signal but just don't do anything. This allows airlocks to continue to work normally once power is restored
 	if(arePowerSystemsOn())
-		spawn()
-			execute_current_command()
+		execute_current_command()
 
 /obj/machinery/door/airlock/proc/execute_current_command()
+	set waitfor = FALSE
 	if(operating)
 		return //emagged or busy doing something else
 

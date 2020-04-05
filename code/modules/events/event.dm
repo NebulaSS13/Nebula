@@ -110,6 +110,7 @@
 //Do not override this proc, instead use the appropiate procs.
 //This proc will handle the calls to the appropiate procs.
 /datum/event/proc/process()
+	SHOULD_NOT_SLEEP(TRUE)
 	if(activeFor > startWhen && activeFor < endWhen)
 		tick()
 

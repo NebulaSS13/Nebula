@@ -87,6 +87,8 @@
 	var/return_damage_min
 	var/return_damage_max
 
+	var/performing_delayed_life_action = FALSE
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	if(LAZYLEN(natural_armor))
@@ -126,6 +128,22 @@
 	if(can_bleed && bleed_ticks > 0)
 		handle_bleeding()
 
+	delayed_life_action()
+	return 1
+
+// Handles timed stuff in Life()
+/mob/living/simple_animal/proc/delayed_life_action()
+	set waitfor = FALSE
+	if(performing_delayed_life_action)
+		return
+	if(client)
+		return
+	performing_delayed_life_action = TRUE
+	do_delayed_life_action()
+	performing_delayed_life_action = FALSE
+
+// For saner overriding; only override this.
+/mob/living/simple_animal/proc/do_delayed_life_action()
 	if(buckled && can_escape)
 		if(istype(buckled, /obj/effect/energy_net))
 			var/obj/effect/energy_net/Net = buckled
@@ -136,7 +154,7 @@
 			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
 
 	//Movement
-	if(!client && !stop_automated_movement && wander && !anchored)
+	if(!stop_automated_movement && wander && !anchored)
 		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
@@ -144,7 +162,7 @@
 				turns_since_move = 0
 
 	//Speaking
-	if(!client && speak_chance)
+	if(speak_chance)
 		if(rand(0,200) < speak_chance)
 			var/action = pick(
 				speak.len;      "speak",
@@ -159,7 +177,6 @@
 					audible_emote("[pick(emote_hear)].")
 				if("emote_see")
 					visible_emote("[pick(emote_see)].")
-	return 1
 
 /mob/living/simple_animal/proc/handle_atmos(var/atmos_suitable = 1)
 	//Atmos

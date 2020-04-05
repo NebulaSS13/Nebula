@@ -41,7 +41,7 @@
 	
 /datum/artifact_effect/temperature/proc/change_air_temp(datum/gas_mixture/air, degrees)
 	var/new_temp = air.temperature + degrees
-	if(ANOM_EFFECT_COOLING)
+	if(direction == ANOM_EFFECT_COOLING)
 		new_temp = max(target_temp, new_temp)
 	else
 		new_temp = min(target_temp, new_temp)

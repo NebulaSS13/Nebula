@@ -135,6 +135,7 @@ Class Procs:
 	. = ..()
 
 /obj/machinery/proc/ProcessAll(var/wait)
+	SHOULD_NOT_SLEEP(TRUE)
 	if(processing_flags & MACHINERY_PROCESS_COMPONENTS)
 		for(var/thing in processing_parts)
 			var/obj/item/stock_parts/part = thing

@@ -47,5 +47,5 @@
 	return QDEL_HINT_QUEUE
 
 /datum/proc/Process()
-	set waitfor = 0
+	SHOULD_NOT_SLEEP(TRUE)
 	return PROCESS_KILL

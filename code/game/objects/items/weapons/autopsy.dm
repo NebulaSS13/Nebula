@@ -28,7 +28,7 @@
 	var/hits = 0
 	var/time_inflicted = 0
 
-	proc/copy()
+/datum/autopsy_data/proc/copy()
 		var/datum/autopsy_data/W = new()
 		W.weapon = weapon
 		W.pretend_weapon = pretend_weapon
@@ -44,13 +44,8 @@
 		var/datum/autopsy_data/W = O.autopsy_data[V]
 
 		if(!W.pretend_weapon)
-			/*
 			// the more hits, the more likely it is that we get the right weapon type
 			if(prob(50 + W.hits * 10 + W.damage))
-			*/
-
-			// Buffing this stuff up for now!
-			if(1)
 				W.pretend_weapon = W.weapon
 			else
 				W.pretend_weapon = pick("mechanical toolbox", "wirecutters", "revolver", "crowbar", "fire extinguisher", "tomato soup", "oxygen tank", "emergency oxygen tank", "laser", "bullet")
