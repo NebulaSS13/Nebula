@@ -31,6 +31,8 @@
 	else
 		src.connected_area = get_area(src)
 
+	if(!connected_area)
+		return // Test instance spawned in nullspace
 	if(name == initial(name))
 		SetName("light switch ([connected_area.name])")
 
