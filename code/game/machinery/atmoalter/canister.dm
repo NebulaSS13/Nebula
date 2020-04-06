@@ -6,7 +6,11 @@
 	var/health = 100.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
-	construct_state = null
+	construct_state = /decl/machine_construction/pipe/welder
+	uncreated_component_parts = null
+	matter = list(
+		MAT_STEEL = 10 * SHEET_MATERIAL_AMOUNT
+	)
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE
@@ -19,6 +23,12 @@
 	volume = 1000
 	interact_offline = 1 // Allows this to be used when not in powered area.
 	var/update_flag = 0
+
+/obj/machinery/portable_atmospherics/canister/Initialize(mapload, material)
+	if(ispath(material))
+		matter = list()
+		matter[material] = 10 * SHEET_MATERIAL_AMOUNT
+	. = ..(mapload)
 
 /obj/machinery/portable_atmospherics/canister/drain_power()
 	return -1
@@ -198,6 +208,15 @@ update_flag
 	else
 		return 1
 
+/obj/machinery/portable_atmospherics/canister/dismantle()
+	var/turf/T = get_turf(src)
+	if(T)
+		T.assume_air(air_contents)
+	for(var/path in matter)
+		var/material/material = SSmaterials.get_material_datum(path)
+		if(material)
+			material.place_sheet(get_turf(src), round(matter[path]/SHEET_MATERIAL_AMOUNT))
+
 /obj/machinery/portable_atmospherics/canister/Process()
 	if (destroyed)
 		return
@@ -252,14 +271,18 @@ update_flag
 		healthcheck()
 	..()
 
-/obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W, var/mob/user)
-	if(!isWrench(W) && !istype(W, /obj/item/tank) && !istype(W, /obj/item/scanner/gas) && !istype(W, /obj/item/modular_computer/pda))
-		visible_message("<span class='warning'>\The [user] hits \the [src] with \a [W]!</span>")
-		src.health -= W.force
+/obj/machinery/portable_atmospherics/canister/bash(var/obj/item/W, var/mob/user)
+	. = ..()
+	if(.)
+		health -= W.force
 		healthcheck()
 
+/obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W, var/mob/user)
 	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/tank/jetpack))
-		var/datum/gas_mixture/thejetpack = W:air_contents
+		var/obj/item/tank/jetpack/pack = W
+		var/datum/gas_mixture/thejetpack = pack.air_contents
+		if(!thejetpack)
+			return FALSE
 		var/env_pressure = thejetpack.return_pressure()
 		var/pressure_delta = min(10*ONE_ATMOSPHERE - env_pressure, (air_contents.return_pressure() - env_pressure)/2)
 		//Can not have a pressure delta that would cause environment pressure > tank pressure
@@ -269,9 +292,10 @@ update_flag
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 			thejetpack.merge(removed)
 			to_chat(user, "You pulse-pressurize your jetpack from the tank.")
-		return
+			return TRUE
+		return FALSE
 
-	..()
+	. = ..()
 
 	SSnano.update_uis(src) // Update all NanoUIs attached to src
 
