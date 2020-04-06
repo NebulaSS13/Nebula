@@ -6,6 +6,7 @@
 	var/min_goals = 1
 	var/max_goals = 2
 	var/colour = "#808080"
+	var/request_console_flags = 0   // use RC_ASSIST etc here to control department console behavior
 
 /datum/department/proc/Initialize()
 	if(!reference || LAZYLEN(goals) <= 0)
@@ -21,6 +22,12 @@
 			goals_to_pick--
 		else
 			qdel(deptgoal)
+	if (request_console_flags & RC_ASSIST)
+		req_console_assistance |= reference
+	if (request_console_flags & RC_SUPPLY)
+		req_console_supplies |= reference
+	if (request_console_flags & RC_INFO)
+		req_console_information |= reference
 
 /datum/department/proc/summarize_goals(var/show_success = FALSE)
 	. = list()

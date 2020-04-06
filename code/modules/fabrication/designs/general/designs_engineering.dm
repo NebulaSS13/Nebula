@@ -38,6 +38,15 @@
 /datum/fabricator_recipe/engineering/powermodule_kit
 	path = /obj/item/frame/apc/kit
 
+/datum/fabricator_recipe/engineering/requests_console_board
+	path = /obj/item/stock_parts/circuitboard/requests_console
+
+/datum/fabricator_recipe/engineering/requests_console_frame
+	path = /obj/item/frame/request_console
+
+/datum/fabricator_recipe/engineering/requests_console_kit
+	path = /obj/item/frame/request_console/kit
+
 /datum/fabricator_recipe/engineering/rcd_ammo
 	path = /obj/item/rcd_ammo
 

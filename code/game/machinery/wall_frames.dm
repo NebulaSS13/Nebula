@@ -146,3 +146,15 @@
 /obj/item/frame/button/wall_charger/kit
 	fully_construct = TRUE
 	name = "wall charger kit"
+
+/obj/item/frame/request_console
+	name = "request console frame"
+	desc = "Used for building request consoles."
+	icon = 'icons/obj/terminals.dmi'
+	icon_state = "req_comp0"
+	build_machine_type = /obj/machinery/requests_console
+
+/obj/item/frame/request_console/kit
+	fully_construct = TRUE
+	name = "request console kit"
+	desc = "An all-in-one request console kit, comes preassembled."
