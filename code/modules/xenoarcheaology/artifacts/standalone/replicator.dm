@@ -5,8 +5,9 @@
 	icon_state = "borgcharger0(old)"
 	density = 1
 
-	idle_power_usage = 100
-	active_power_usage = 1000
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/noninteractive
+	stat_immune = NOPOWER | NOSCREEN | NOINPUT
 
 	var/spawn_progress_time = 0
 	var/max_spawn_time = 50
@@ -82,7 +83,7 @@
 		[pick("front","side","top","bottom","rear","inside")].</span>"
 
 /obj/machinery/replicator/Process()
-	if(spawning_types.len && !(stat & NOPOWER))
+	if(spawning_types.len)
 		spawn_progress_time += world.time - last_process_time
 		if(spawn_progress_time > max_spawn_time)
 			src.visible_message("<span class='notice'>\icon[src] [src] pings!</span>")
@@ -104,7 +105,6 @@
 			max_spawn_time = rand(30,100)
 
 			if(!spawning_types.len || !stored_materials.len)
-				update_use_power(POWER_USE_IDLE)
 				icon_state = "borgcharger0(old)"
 
 		else if(prob(5))
@@ -142,7 +142,6 @@
 
 				spawning_types.Add(construction[construction[index]])
 				spawn_progress_time = 0
-				update_use_power(POWER_USE_ACTIVE)
 				icon_state = "borgcharger1(old)"
 			else
 				src.visible_message(fail_message)
