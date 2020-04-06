@@ -12,6 +12,9 @@
 	var/obj/item/stock_parts/power/terminal/master
 	anchored = 1
 
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/noninteractive // Axiliary entity; all interactions pass through owner machine part instead.
+
 /obj/machinery/power/terminal/Initialize()
 	. = ..()
 	var/turf/T = src.loc

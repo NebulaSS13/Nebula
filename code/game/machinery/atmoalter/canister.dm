@@ -216,6 +216,7 @@ update_flag
 		var/material/material = SSmaterials.get_material_datum(path)
 		if(material)
 			material.place_sheet(get_turf(src), round(matter[path]/SHEET_MATERIAL_AMOUNT))
+	qdel(src)
 
 /obj/machinery/portable_atmospherics/canister/Process()
 	if (destroyed)
