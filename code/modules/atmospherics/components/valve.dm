@@ -295,7 +295,6 @@
 
 /decl/stock_part_preset/radio/receiver/valve
 	frequency = FUEL_FREQ
-	filter = RADIO_ATMOSIA
 	receive_and_call = list(
 		"valve_open" = /decl/public_access/public_method/open_valve,
 		"valve_close" = /decl/public_access/public_method/close_valve,

@@ -50,12 +50,11 @@
 	density = 0
 	unacidable = 1
 	var/frequency = 1379
-	var/radio_filter = null
 	var/datum/radio_frequency/radio_connection
 
 /obj/machinery/embedded_controller/radio/Initialize()
-	set_frequency(frequency)
 	. = ..()
+	set_frequency(frequency)
 
 obj/machinery/embedded_controller/radio/Destroy()
 	if(radio_controller)
@@ -94,4 +93,6 @@ obj/machinery/embedded_controller/radio/Destroy()
 /obj/machinery/embedded_controller/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, radio_filter)
+	var/list/filters = program?.get_receive_filters()
+	for(var/filter in filters)
+		radio_connection = radio_controller.add_object(src, frequency, filter)

@@ -24,7 +24,7 @@
 	signal.encryption = encryption
 	signal.data = buffer
 	signal.data["tag"] = id_tag
-	radio.post_signal(src, signal, filter, range)
+	radio.post_signal(src, signal, filter || id_tag || RADIO_DEFAULT, range)
 	buffer = null
 
 // Standard variant can either transmit on var change or transmit every tick. Latter is not encouraged for premade variants.
