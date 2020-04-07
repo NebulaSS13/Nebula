@@ -261,7 +261,6 @@
 "aR" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/handrai{
-	tag = "icon-handrail (EAST)";
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -300,7 +299,6 @@
 /obj/random/accessory,
 /obj/item/chems/glass/paint,
 /obj/structure/handrai{
-	tag = "icon-handrail (WEST)";
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -371,7 +369,6 @@
 	d2 = 2
 	},
 /obj/structure/handrai{
-	tag = "icon-handrail (EAST)";
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -414,7 +411,6 @@
 	},
 /obj/random/closet,
 /obj/structure/handrai{
-	tag = "icon-handrail (WEST)";
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -2491,7 +2487,6 @@
 /area/ship/bearcat/escape_star)
 "ql" = (
 /obj/structure/handrai{
-	tag = "icon-handrail (NORTH)";
 	icon_state = "handrail";
 	dir = 1
 	},
@@ -2511,7 +2506,6 @@
 /area/ship/bearcat/maintenance/techstorage)
 "rP" = (
 /obj/structure/handrai{
-	tag = "icon-handrail (EAST)";
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -3069,7 +3063,6 @@
 /area/ship/bearcat/maintenance/techstorage)
 "XF" = (
 /obj/structure/handrai{
-	tag = "icon-handrail (WEST)";
 	icon_state = "handrail";
 	dir = 8
 	},

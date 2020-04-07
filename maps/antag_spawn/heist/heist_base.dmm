@@ -658,13 +658,6 @@
 	icon_state = "asteroid"
 	},
 /area/map_template/syndicate_mothership/raider_base)
-"bB" = (
-/obj/structure/table/rack,
-/obj/item/gun/launcher/alien/spikethrower,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/map_template/syndicate_mothership/raider_base)
 "bC" = (
 /obj/effect/decal/cleanable/cobweb2{
 	icon_state = "spiderling";
@@ -858,18 +851,6 @@
 /obj/item/stool/padded,
 /turf/unsimulated/floor{
 	icon_state = "wood"
-	},
-/area/map_template/syndicate_mothership/raider_base)
-"bX" = (
-/obj/structure/table/rack,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/map_template/syndicate_mothership/raider_base)
-"bY" = (
-/obj/structure/table/rack,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bZ" = (
@@ -1177,7 +1158,6 @@
 /area/map_template/skipjack_station/start)
 "cL" = (
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (WEST)";
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/red,
@@ -1226,7 +1206,7 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 4
+	dir = 4;
 	id_tag = "skipjack_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
@@ -2808,7 +2788,7 @@ aq
 aq
 bA
 bU
-bX
+bU
 aq
 aq
 aq
@@ -2950,9 +2930,9 @@ aq
 aq
 aq
 aq
-bB
 bA
-bY
+bA
+bU
 aq
 aq
 cq

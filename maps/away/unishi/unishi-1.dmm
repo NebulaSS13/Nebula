@@ -752,7 +752,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4;
 	icon_state = "intact";
-	tag = "icon-intact (WEST)"
+	
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
