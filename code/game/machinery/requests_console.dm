@@ -64,7 +64,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			pixel_y = - WORLD_ICON_SIZE
 		if(EAST)
 			pixel_x = WORLD_ICON_SIZE
-		if(NORTH)
+		if(WEST)
 			pixel_x = - WORLD_ICON_SIZE
 	d = null
 
