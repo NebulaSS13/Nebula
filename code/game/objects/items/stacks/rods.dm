@@ -19,6 +19,10 @@
 	stacktype = /obj/item/stack/material/rods
 	material = MAT_STEEL
 
+/obj/item/stack/material/rods/get_autopsy_descriptors()
+	. = ..()
+	. += "narrow"
+
 /obj/item/stack/material/rods/ten
 	amount = 10
 

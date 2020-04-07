@@ -1368,11 +1368,17 @@ obj/item/organ/external/proc/remove_clamps()
 
 //Adds autopsy data for used_weapon.
 /obj/item/organ/external/proc/add_autopsy_data(var/used_weapon, var/damage)
-	var/datum/autopsy_data/W = autopsy_data[used_weapon]
+	var/key = used_weapon
+	var/data = used_weapon
+	if(istype(used_weapon, /obj/item))
+		var/obj/item/I = used_weapon
+		key = I.name
+		data = english_list(I.get_autopsy_descriptors())
+	var/datum/autopsy_data/W = autopsy_data[key]
 	if(!W)
 		W = new()
-		W.weapon = used_weapon
-		autopsy_data[used_weapon] = W
+		W.weapon = data
+		autopsy_data[key] = W
 
 	W.hits += 1
 	W.damage += damage

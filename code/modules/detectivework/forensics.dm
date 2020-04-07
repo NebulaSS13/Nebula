@@ -193,8 +193,12 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		return 1 //I'll admit I am just imitating examine.dm
 
 
+	if(istype(A, /obj/item) && skill_check(SKILL_FORENSICS, SKILL_ADEPT) && get_dist(src, A) <= 1)
+		var/obj/item/I = A
+		to_chat(src, SPAN_INFO("As a murder weapon, it's [english_list(I.get_autopsy_descriptors())]."))
+
 	//Detective is on the case
-	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
+	if(skill_check(SKILL_FORENSICS, SKILL_EXPERT) && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
 		var/clue
 		if(LAZYLEN(A.suit_fibers))
 			to_chat(src, "<span class='notice'>You notice some fibers embedded in \the [A].</span>")
@@ -206,7 +210,7 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 			to_chat(src, "<span class='notice'>You notice a faint acrid smell coming from \the [A].</span>")
 			clue = 1
 		//Noticing wiped blood is a bit harder
-		if((get_skill_value(SKILL_FORENSICS) >= SKILL_PROF) && LAZYLEN(A.blood_DNA))
+		if(skill_check(SKILL_FORENSICS, SKILL_PROF) && LAZYLEN(A.blood_DNA))
 			to_chat(src, "<span class='warning'>You notice faint blood traces on \The [A].</span>")
 			clue = 1
 		if(clue && has_client_color(/datum/client_color/noir))

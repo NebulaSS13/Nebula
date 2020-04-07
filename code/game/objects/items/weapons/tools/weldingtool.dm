@@ -299,6 +299,11 @@
 	else
 		return ..()
 
+/obj/item/weldingtool/get_autopsy_descriptors()
+	if(isOn())
+		return list("jet of flame")
+	return ..()
+
 /obj/item/weldingtool/mini
 	tank = /obj/item/welder_tank/mini
 
