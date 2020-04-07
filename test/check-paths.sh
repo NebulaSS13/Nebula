@@ -4,13 +4,14 @@ set -eo pipefail
 FAILED=0
 shopt -s globstar
 
-exactly() { # exactly N name search [mode]
+exactly() { # exactly N name search [mode] [filter]
 	count="$1"
 	name="$2"
 	search="$3"
 	mode="${4:--E}"
+	filter="${5:-**/*.dm}"
 
-	num="$(grep "$mode" "$search" **/*.dm | wc -l || true)"
+	num="$(grep "$mode" "$search" $filter | wc -l || true)"
 
 	if [ $num -eq $count ]; then
 		echo "$num $name"
@@ -38,6 +39,7 @@ exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto uses" 'goto '
 exactly 446 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 6 "atom/New uses" '^/(obj|atom|area|mob|turf).*/New\('
+exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
 broken_files=0
