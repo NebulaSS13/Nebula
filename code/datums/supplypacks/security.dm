@@ -244,7 +244,7 @@
 	name = "Forensics - Auxiliary tools"
 	contains = list(/obj/item/forensics/sample_kit,
 					/obj/item/forensics/sample_kit/powder,
-					/obj/item/storage/box/swabs = 3,
+					/obj/item/forensics/sample_kit/swabs = 3,
 					/obj/item/chems/spray/luminol)
 	cost = 30
 	containername = "auxiliary forensic tools crate"

@@ -12,7 +12,7 @@
 		"Eyebot" = "eyebot-security"
 	)
 	equipment = list(
-		/obj/item/swabber,
+		/obj/item/forensics/sample_kit/swabs,
 		/obj/item/storage/evidence,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,

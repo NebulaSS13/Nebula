@@ -332,9 +332,12 @@ its easier to just keep the beam vertical.
 	fluorescent = 0
 	germ_level = 0
 	blood_color = null
-	gunshot_residue = null
 	if(istype(blood_DNA, /list))
 		blood_DNA = null
+		var/datum/extension/forensic_evidence/forensics = get_extension(src, /datum/extension/forensic_evidence)
+		if(forensics)
+			forensics.remove_data(/datum/forensics/blood_dna)
+			forensics.remove_data(/datum/forensics/gunshot_residue)
 		return 1
 
 /atom/proc/get_global_map_pos()

@@ -22,7 +22,7 @@
 		/obj/item/folder,
 		/obj/item/photo,
 		/obj/item/paper_bundle,
-		/obj/item/sample)
+		/obj/item/forensics/sample)
 
 /obj/structure/filingcabinet/chestdrawer
 	name = "chest drawer"

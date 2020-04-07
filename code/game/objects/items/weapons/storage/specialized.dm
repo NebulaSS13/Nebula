@@ -36,7 +36,7 @@
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(
-		/obj/item/sample,
+		/obj/item/forensics/sample,
 		/obj/item/evidencebag,
 		/obj/item/forensics,
 		/obj/item/photo,

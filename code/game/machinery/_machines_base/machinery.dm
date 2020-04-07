@@ -230,7 +230,7 @@ Class Procs:
 
 /obj/machinery/Topic(href, href_list, datum/topic_state/state)
 	if(href_list["mechanics_text"] && construct_state) // This is an OOC examine thing handled via Topic; specifically bypass all checks, but do nothing other than message to chat.
-		var/list/info = construct_state.mechanics_info()
+		var/list/info = get_tool_manipulation_info()
 		if(info)
 			to_chat(usr, jointext(info, "<br>"))
 			return TOPIC_HANDLED
@@ -239,6 +239,9 @@ Class Procs:
 	if(. == TOPIC_REFRESH)
 		updateUsrDialog() // Update legacy UIs to the extent possible.
 
+/obj/machinery/proc/get_tool_manipulation_info()
+	return construct_state?.mechanics_info()
+	
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_ai(mob/user)

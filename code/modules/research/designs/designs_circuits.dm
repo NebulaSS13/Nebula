@@ -699,3 +699,18 @@
 	name = "jukebox board"
 	build_path = /obj/item/stock_parts/circuitboard/jukebox
 	req_tech = list(TECH_DATA = 5)
+
+/datum/design/circuit/forensic
+	name = "forensic omnianalyzer board"
+	build_path = /obj/item/stock_parts/circuitboard/forensic
+	req_tech = list(TECH_DATA = 6, TECH_ENGINEERING = 6, TECH_BIO = 6)
+
+/datum/design/circuit/forensic_microscope
+	name = "forensic microscope board"
+	build_path = /obj/item/stock_parts/circuitboard/forensic_microscope
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3, TECH_BIO = 3)
+
+/datum/design/circuit/forensic_dna_analyzer
+	name = "forensic DNA analyzer board"
+	build_path = /obj/item/stock_parts/circuitboard/forensic_dna_analyzer
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3, TECH_BIO = 3)

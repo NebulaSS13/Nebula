@@ -1,0 +1,96 @@
+/datum/forensics/fingerprints
+	name = "fingerprints"
+	remove_on_transfer = TRUE
+
+/datum/forensics/fingerprints/Destroy()
+	. = ..()
+	QDEL_NULL_LIST(data)
+
+/datum/forensics/fingerprints/add_from_atom(mob/M)
+	var/datum/fingerprint/F = new(M)
+	if(F.completeness > 0)
+		add_data(F)
+
+/datum/forensics/fingerprints/add_data(var/datum/fingerprint/newprint)
+	if(newprint.completeness <= 0)
+		return
+	for(var/datum/fingerprint/F in data)
+		if(F.merge(newprint))
+			return
+	..()
+
+/datum/forensics/fingerprints/copy()
+	var/datum/forensics/fingerprints/F = new()
+	for(var/datum/fingerprint/print in data)
+		F.add_data(print.copy())
+	return F
+
+/datum/forensics/fingerprints/get_formatted_data()
+	. = list("<h4>Fingerpints scan</h4>")
+	for(var/datum/fingerprint/F in data)
+		if(F.completeness > 80)
+			. += "<li>[F.full_print]"
+		else
+			. += "<li>INCOMPLETE FINGERPRINT ([F.completeness]%)"
+	return jointext(., "<br>")
+
+// Single (possibly partial) fingerprint
+/datum/fingerprint
+	var/full_print
+	var/completeness = 0
+
+/datum/fingerprint/proc/copy()
+	var/datum/fingerprint/C = new()
+	C.full_print = full_print
+	C.completeness = completeness
+	return C
+
+/datum/fingerprint/New(mob/M, ignore_gloves)
+	if(!istype(M))
+		return
+	full_print = M.get_full_print()
+	if(!full_print)
+		return
+
+	//Using prints from severed hand items!
+	var/obj/item/organ/external/E = M.get_active_hand()
+	if(src != E && istype(E) && E.get_fingerprint())
+		full_print = E.get_fingerprint()
+		ignore_gloves = 1
+
+	if(!ignore_gloves)
+		var/obj/item/cover = M.get_covering_equipped_item(M.hand ? HAND_LEFT : HAND_RIGHT)
+		if(cover)
+			cover.add_fingerprint(M)
+			return
+
+	var/extra_crispy = 0
+	if(!M.skill_check(SKILL_FORENSICS, SKILL_BASIC))
+		extra_crispy = 10
+
+	completeness = Clamp(rand(10, 70) + extra_crispy, 0, 100)
+
+/datum/fingerprint/proc/merge(datum/fingerprint/other)
+	if(full_print != other.full_print)
+		return
+	if(completeness >= 100)
+		return TRUE
+	completeness = Clamp(max(completeness, other.completeness) + 0.2 * min(completeness, other.completeness), 0, 100)
+	return TRUE
+
+// Mob fingerprint getters
+/mob/proc/get_full_print()
+	return FALSE
+
+/mob/living/carbon/get_full_print()
+	if (!dna || (mFingerprints in mutations))
+		return FALSE
+	return md5(dna.uni_identity)
+
+/mob/living/carbon/human/get_full_print()
+	if(!..())
+		return FALSE
+
+	var/obj/item/organ/external/E = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
+	if(E)
+		return E.get_fingerprint()

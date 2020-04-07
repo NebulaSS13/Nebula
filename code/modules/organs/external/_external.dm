@@ -93,7 +93,11 @@
 /obj/item/organ/external/afterattack(atom/A, mob/user, proximity)
 	..()
 	if(proximity && get_fingerprint())
-		A.add_partial_print(get_fingerprint())
+		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
+		var/datum/fingerprint/F = new()
+		F.full_print = get_fingerprint()
+		F.completeness = rand(10,90)
+		forensics.add_data(/datum/forensics/fingerprints, F)
 
 /obj/item/organ/external/Initialize()
 	. = ..()
