@@ -1,3 +1,5 @@
+var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
+
 #define SHIP_MOVE_RESOLUTION 0.00001
 #define MOVING(speed) abs(speed) >= min_speed
 #define SANITIZE_SPEED(speed) SIGN(speed) * Clamp(abs(speed), 0, max_speed)
@@ -13,18 +15,19 @@
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "ship"
+
 	var/moving_state = "ship_moving"
 
-	var/vessel_mass = 10000             //tonnes, arbitrary number, affects acceleration provided by engines
-	var/vessel_size = SHIP_SIZE_LARGE	//arbitrary number, affects how likely are we to evade meteors
-	var/max_speed = 1/(1 SECOND)        //"speed of light" for the ship, in turfs/tick.
+	var/vessel_mass = 10000             // tonnes, arbitrary number, affects acceleration provided by engines
+	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
+	var/max_speed = 1/(1 SECOND)        // "speed of light" for the ship, in turfs/tick.
 	var/min_speed = 1/(2 MINUTES)       // Below this, we round speed to 0 to avoid math errors.
 
-	var/list/speed = list(0,0)          //speed in x,y direction
-	var/last_burn = 0                   //worldtime when ship last acceleated
-	var/burn_delay = 1 SECOND           //how often ship can do burns
-	var/list/last_movement = list(0,0)  //worldtime when ship last moved in x,y direction
-	var/fore_dir = NORTH                //what dir ship flies towards for purpose of moving stars effect procs
+	var/list/speed = list(0,0)          // speed in x,y direction
+	var/list/position = list(0,0)       // position within a tile.
+	var/last_burn = 0                   // worldtime when ship last acceleated
+	var/burn_delay = 1 SECOND           // how often ship can do burns
+	var/fore_dir = NORTH                // what dir ship flies towards for purpose of moving stars effect procs
 
 	var/list/engines = list()
 	var/engines_state = 0 //global on/off toggle for all engines
@@ -35,6 +38,7 @@
 
 /obj/effect/overmap/visitable/ship/Initialize()
 	. = ..()
+	glide_size = world.icon_size
 	min_speed = round(min_speed, SHIP_MOVE_RESOLUTION)
 	max_speed = round(max_speed, SHIP_MOVE_RESOLUTION)
 	SSshuttle.ships += src
@@ -134,12 +138,19 @@
 /obj/effect/overmap/visitable/ship/Process()
 	if(!halted && !is_still())
 		var/list/deltas = list(0,0)
-		for(var/i=1, i<=2, i++)
-			if(MOVING(speed[i]) && world.time > last_movement[i] + 1/abs(speed[i]))
-				deltas[i] = SIGN(speed[i])
-				last_movement[i] = world.time
+		for(var/i = 1 to 2)
+			if(MOVING(speed[i]))
+				position[i] += speed[i] * OVERMAP_SPEED_CONSTANT
+				if(position[i] < 0)
+					deltas[i] = ceil(position[i])
+				else if(position[i] > 0)
+					deltas[i] = Floor(position[i])
+				if(deltas[i] != 0)
+					position[i] -= deltas[i]
+					position[i] += (deltas[i] > 0) ? -1 : 1
+
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
-		if(newloc)
+		if(newloc && loc != newloc)
 			Move(newloc)
 			handle_wraparound()
 		update_icon()
@@ -150,6 +161,8 @@
 		dir = get_heading()
 	else
 		icon_state = initial(icon_state)
+	pixel_x = position[1] * (world.icon_size/2)
+	pixel_y = position[2] * (world.icon_size/2)
 	..()
 
 /obj/effect/overmap/visitable/ship/proc/burn()
@@ -171,10 +184,13 @@
 //deciseconds to next step
 /obj/effect/overmap/visitable/ship/proc/ETA()
 	. = INFINITY
-	for(var/i=1, i<=2, i++)
+	for(var/i = 1 to 2)
 		if(MOVING(speed[i]))
-			. = min(last_movement[i] - world.time + 1/abs(speed[i]), .)
-	. = max(.,0)
+			if(speed[i] > 0)
+				. = min(., ( 1 - position[i]) / speed[i])
+			else if(speed[i] < 0)
+				. = min(., (-1 + position[i]) / speed[i])
+	. = max(ceil(.),0)
 
 /obj/effect/overmap/visitable/ship/proc/handle_wraparound()
 	var/nx = x
