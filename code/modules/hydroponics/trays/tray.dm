@@ -142,7 +142,7 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/Initialize()
 	if(!mechanical)
-		construct_state = null
+		construct_state = /decl/machine_construction/noninteractive
 	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)

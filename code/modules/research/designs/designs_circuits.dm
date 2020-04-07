@@ -659,3 +659,8 @@
 	name = "TEG motor board"
 	build_path = /obj/item/stock_parts/circuitboard/teg_turbine/motor
 	req_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4)
+
+/datum/design/circuit/cryopod
+	name = "cryo unit board"
+	build_path = /obj/item/stock_parts/circuitboard/cryopod
+	req_tech = list(TECH_DATA = 6, TECH_ENGINEERING = 6, TECH_BLUESPACE = 6)

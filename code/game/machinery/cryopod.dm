@@ -27,9 +27,6 @@
 	var/allow_items = 1
 
 /obj/machinery/computer/cryopod/Destroy()
-	for(var/obj/machinery/cryopod/C in SSmachines.machinery)
-		if(C.control_computer == src)
-			C.control_computer = null
 	QDEL_NULL_LIST(frozen_items)
 	. = ..()
 
@@ -182,6 +179,10 @@
 		/obj/item/storage/internal
 	)
 
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+
 /obj/machinery/cryopod/robot
 	name = "robotic storage unit"
 	desc = "A storage unit for robots."
@@ -251,7 +252,7 @@
 	..()
 
 /obj/machinery/cryopod/Destroy()
-	control_computer = null
+	clear_control_computer()
 	if(occupant)
 		occupant.forceMove(loc)
 		occupant.resting = 1
@@ -262,19 +263,16 @@
 	announce = new /obj/item/radio/intercom(src)
 	find_control_computer()
 
-/obj/machinery/cryopod/proc/find_control_computer(urgent=0)
-	// Workaround for http://www.byond.com/forum/?post=2007448
-	for(var/obj/machinery/computer/cryopod/C in src.loc.loc)
-		control_computer = C
-		break
-	// control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc
+/obj/machinery/cryopod/proc/find_control_computer()
+	if(!control_computer)
+		control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc
+		GLOB.destroyed_event.register(control_computer, src, .proc/clear_control_computer)
+	return control_computer
 
-	// Don't send messages unless we *need* the computer, and less than five minutes have passed since last time we messaged
-	if(!control_computer && urgent && last_no_computer_message + 5*60*10 < world.time)
-		log_and_message_admins("Cryopod in [src.loc.loc] could not find control computer!")
-		last_no_computer_message = world.time
-
-	return control_computer != null
+/obj/machinery/cryopod/proc/clear_control_computer()
+	if(control_computer)
+		GLOB.destroyed_event.unregister(control_computer, src)
+		control_computer = null
 
 /obj/machinery/cryopod/proc/check_occupant_allowed(mob/M)
 	var/correct_type = 0
@@ -310,7 +308,7 @@
 
 		if(!occupant.client && occupant.stat<2) //Occupant is living and has no client.
 			if(!control_computer)
-				if(!find_control_computer(urgent=1))
+				if(!find_control_computer())
 					return
 
 			despawn_occupant()
@@ -469,6 +467,7 @@
 			return
 
 		attempt_enter(grab.affecting, user)
+	return ..()
 
 /obj/machinery/cryopod/verb/eject()
 	set name = "Eject Pod"

@@ -501,36 +501,35 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
 	desc = "A remote control switch for electrochromic windows."
-	var/id
 	var/range = 7
 	stock_part_presets = null // This isn't a radio-enabled button; it communicates with nearby structures in view.
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc
+		/obj/item/stock_parts/power/apc/buildable
 	)
+	frame_type = /obj/item/frame/button/light_switch/windowtint
+	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
+	base_type = /obj/machinery/button/windowtint/buildable
+
+/obj/machinery/button/windowtint/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/button/windowtint/attackby(obj/item/W, mob/user)
 	if(isMultitool(W))
-		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", src.name, id), MAX_NAME_LEN)
-		if(user.incapacitated() && !user.Adjacent(src))
-			return
-		if (user.get_active_hand() != W)
-			return
-		if (!in_range(src, user) && src.loc != user)
-			return
+		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", name, id_tag), MAX_NAME_LEN)
+		if(!CanPhysicallyInteract(user))
+			return TRUE
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
-			src.id = t
-			to_chat(user, SPAN_NOTICE("The new ID of the button is [id]"))
-		return
-	if(istype(W, /obj/item/screwdriver))
-		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
-		qdel(src)
+			id_tag = t
+			to_chat(user, SPAN_NOTICE("The new ID of the button is [id_tag]"))
+		return TRUE
+	return ..()
 
 /obj/machinery/button/windowtint/activate()
 	if(operating)
 		return
 	for(var/obj/structure/window/W in range(src,range))
-		if(W.polarized && (W.id == src.id || !W.id))
+		if(W.polarized && (W.id == id_tag || !W.id))
 			W.toggle()
 	..()
 

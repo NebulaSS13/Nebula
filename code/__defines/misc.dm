@@ -293,3 +293,8 @@
 
 #define INCREMENT_WORLD_Z_SIZE world.maxz++; global.connected_z_cache.Cut()
 #define ARE_Z_CONNECTED(ZA, ZB) (ZA > 0 && ZB > 0 && ZA <= world.maxz && ZB <= world.maxz && ((ZA == ZB) || ((global.connected_z_cache.len >= ZA && global.connected_z_cache[ZA]) ? global.connected_z_cache[ZA][ZB] : AreConnectedZLevels(ZA, ZB))))
+
+//Request Console Department Types
+#define RC_ASSIST 1		//Request Assistance
+#define RC_SUPPLY 2		//Request Supplies
+#define RC_INFO   4		//Relay Info

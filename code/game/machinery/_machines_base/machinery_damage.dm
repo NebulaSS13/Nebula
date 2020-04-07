@@ -70,8 +70,9 @@
 	take_damage(P.damage, P.damage_type)
 
 /obj/machinery/bash(obj/item/W, mob/user)
-	..()
-	//bash the mash, harm only to avoid overlaps with interactions
-	if(user && user.a_intent == I_HURT && !(W.item_flags & ITEM_FLAG_NO_BLUDGEON) && W.force > 5)
+	if(W.force <= 5)
+		return FALSE
+	. = ..()
+	if(.)
 		user.setClickCooldown(W.attack_cooldown + W.w_class)
 		take_damage(W.force, W.damtype)

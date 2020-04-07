@@ -49,3 +49,16 @@
 		/obj/item/stock_parts/power/terminal/buildable = 1,
 		/obj/item/stock_parts/access_lock/buildable = 1
 	)
+
+/obj/item/stock_parts/circuitboard/requests_console
+	name = T_BOARD("requests console")
+	build_path = /obj/machinery/requests_console
+	board_type = "wall"
+	origin_tech = "{'" + TECH_DATA + "':1,'" + TECH_ENGINEERING + "':1}"
+	req_components = list()
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1,
+	)
+	var/department
