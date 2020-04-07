@@ -440,3 +440,6 @@ Class Procs:
 	. = ..()
 	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
 		. = max(., lock.emag_act())
+
+/obj/machinery/proc/on_user_login(var/mob/M)
+	return

@@ -17,6 +17,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	icon_state = "ship"
 
 	var/moving_state = "ship_moving"
+	var/list/consoles
 
 	var/vessel_mass = 10000             // tonnes, arbitrary number, affects acceleration provided by engines
 	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
@@ -47,6 +48,11 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	SSshuttle.ships -= src
+	if(LAZYLEN(consoles))
+		for(var/obj/machinery/computer/ship/machine in consoles)
+			if(machine.linked == src)
+				machine.linked = null
+		consoles = null
 	. = ..()
 
 /obj/effect/overmap/visitable/ship/relaymove(mob/user, direction, accel_limit)
@@ -149,20 +155,30 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 					position[i] -= deltas[i]
 					position[i] += (deltas[i] > 0) ? -1 : 1
 
+		update_icon()
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc && loc != newloc)
 			Move(newloc)
 			handle_wraparound()
-		update_icon()
 
 /obj/effect/overmap/visitable/ship/on_update_icon()
+
+	pixel_x = position[1] * (world.icon_size/2)
+	pixel_y = position[2] * (world.icon_size/2)
+
 	if(!is_still())
 		icon_state = moving_state
 		dir = get_heading()
 	else
 		icon_state = initial(icon_state)
-	pixel_x = position[1] * (world.icon_size/2)
-	pixel_y = position[2] * (world.icon_size/2)
+
+	for(var/obj/machinery/computer/ship/machine in consoles)
+		if(machine.z in map_z)
+			for(var/weakref/W in machine.viewers)
+				var/mob/M = W.resolve()
+				if(istype(M) && M.client)
+					M.client.pixel_x = pixel_x
+					M.client.pixel_y = pixel_y
 	..()
 
 /obj/effect/overmap/visitable/ship/proc/burn()
@@ -186,10 +202,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	. = INFINITY
 	for(var/i = 1 to 2)
 		if(MOVING(speed[i]))
-			if(speed[i] > 0)
-				. = min(., ( 1 - position[i]) / speed[i])
-			else if(speed[i] < 0)
-				. = min(., (-1 + position[i]) / speed[i])
+			. = min(., ((speed[i] > 0 ? 1 : -1) - position[i]) / speed[i])
 	. = max(ceil(.),0)
 
 /obj/effect/overmap/visitable/ship/proc/handle_wraparound()
