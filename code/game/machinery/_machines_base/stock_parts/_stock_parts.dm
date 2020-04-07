@@ -9,6 +9,7 @@
 	var/status = 0             // Flags using PART_STAT defines.
 	var/base_type              // Type representing parent of category for replacer usage.
 	health = 50
+	var/tightened			   // Tightened parts cannot be uninstalled.
 
 /obj/item/stock_parts/attack_hand(mob/user)
 	if(istype(loc, /obj/machinery))
@@ -85,7 +86,7 @@
 
 /obj/item/stock_parts/proc/is_functional()
 	return health > 0
-	
+
 /obj/item/stock_parts/examine(mob/user)
 	. = ..()
 	if(!is_functional())

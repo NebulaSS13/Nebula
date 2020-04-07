@@ -6,12 +6,11 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "folder-collapsed"
 	size = 8
-	requires_ntnet = 0
-	available_on_ntnet = 0
+	requires_exonet = 0
 	undeletable = 1
 	nanomodule_path = /datum/nano_module/program/computer_filemanager/
 	var/open_file
-	var/error
+	var/file_server = "local"
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
 
@@ -19,6 +18,23 @@
 	if(..())
 		return 1
 
+	var/obj/item/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+	if(file_server != "local" && !network_card)
+		error = "Hardware error. No connection to network found."
+		return 1
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+
+	if(href_list["PRG_changefileserver"])
+		. = 1
+		var/list/file_servers = list("local")
+
+		if(!network_card)
+			return 1
+		for(var/obj/machinery/computer/exonet/mainframe/mainframe in exonet.get_mainframes())
+			LAZYDISTINCTADD(file_servers, exonet.get_network_tag(mainframe))
+		file_server = sanitize(input(usr, "Choose a fileserver to view files on:", "Select File Server") as null|anything in file_servers)
+		if(!file_server)
+			file_server = "local" // Safety check.
 	if(href_list["PRG_openfile"])
 		. = 1
 		open_file = href_list["PRG_openfile"]
@@ -27,11 +43,24 @@
 		var/newname = sanitize(input(usr, "Enter file name or leave blank to cancel:", "File rename"))
 		if(!newname)
 			return 1
-		if(computer.create_file(newname, file_type = /datum/computer_file/data/text))
-			return 1
+		if(file_server == "local")
+			if(computer.create_file(newname, file_type = /datum/computer_file/data/text))
+				return 1
+		else
+			var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
+			if(!mainframe)
+				var/datum/computer_file/data/text/new_file = new()
+				new_file.filename = newname
+				mainframe.store_file(new_file)
+				return 1
 	if(href_list["PRG_deletefile"])
 		. = 1
-		computer.delete_file(href_list["PRG_deletefile"])
+		if(file_server == "local")
+			computer.delete_file(href_list["PRG_deletefile"])
+		else
+			var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
+			if(!mainframe)
+				mainframe.delete_file_by_name(href_list["PRG_deletefile"])
 	if(href_list["PRG_usbdeletefile"])
 		. = 1
 		var/obj/item/stock_parts/computer/hard_drive/RHDD = computer.get_component(PART_DRIVE)
@@ -98,48 +127,62 @@
 
 /datum/nano_module/program/computer_filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
-	var/datum/computer_file/program/filemanager/PRG
-	PRG = program
+	var/datum/computer_file/program/filemanager/PRG = program
 
 	if(PRG.error)
 		data["error"] = PRG.error
+
+	data["file_server"] = PRG.file_server
+	var/list/stored_files = list()
+	var/obj/machinery/computer/exonet/mainframe/mainframe
+	if(PRG.file_server == "local")
+		// using local file system
+		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
+			data["error"] = "I/O ERROR: Unable to access hard drive."
+		else
+			stored_files = PRG.computer.get_all_files()
+	else
+		var/datum/extension/exonet_device/exonet = get_exonet_device()
+		mainframe = exonet.get_device_by_tag(PRG.file_server)
+		if(!mainframe)
+			data["error"] = "NETWORK ERROR: Remote device is not available."
+		else
+			stored_files = mainframe.stored_files
+
 	if(PRG.open_file)
 		var/datum/computer_file/data/F
-
-		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
-			data["error"] = "I/O ERROR: Unable to access hard drive."
+		if(mainframe)
+			F = mainframe.find_file_by_name(PRG.open_file)
 		else
-			F = PRG.computer.get_file(PRG.open_file)
-			if(!istype(F))
-				data["error"] = "I/O ERROR: Unable to open file."
-			else
-				data["filedata"] = F.generate_file_data(user)
-				data["filename"] = "[F.filename].[F.filetype]"
+			F = program.computer.get_file(PRG.open_file)
+		if(!istype(F))
+			data["error"] = "I/O ERROR: Unable to open file."
+		else
+			data["filedata"] = F.generate_file_data(user)
+			data["filename"] = "[F.filename].[F.filetype]"
 	else
-		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
-			data["error"] = "I/O ERROR: Unable to access hard drive."
-		else
-			var/list/files[0]
-			for(var/datum/computer_file/F in PRG.computer.get_all_files())
-				files.Add(list(list(
+		var/list/files[0]
+		for(var/datum/computer_file/F in stored_files)
+			files.Add(list(list(
+				"name" = F.filename,
+				"type" = F.filetype,
+				"size" = F.size,
+				"undeletable" = F.undeletable
+			)))
+		data["files"] = files
+		var/obj/item/stock_parts/computer/hard_drive/portable/RHDD = program.computer.get_component(PART_DRIVE)
+		if(RHDD)
+			data["usbconnected"] = 1
+			var/list/usbfiles[0]
+			for(var/datum/computer_file/F in program.computer.get_all_files(RHDD))
+				usbfiles.Add(list(list(
 					"name" = F.filename,
 					"type" = F.filetype,
 					"size" = F.size,
 					"undeletable" = F.undeletable
 				)))
-			data["files"] = files
-			var/obj/item/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
-			if(RHDD)
-				data["usbconnected"] = 1
-				var/list/usbfiles[0]
-				for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD))
-					usbfiles.Add(list(list(
-						"name" = F.filename,
-						"type" = F.filetype,
-						"size" = F.size,
-						"undeletable" = F.undeletable
-					)))
-				data["usbfiles"] = usbfiles
+			data["usbfiles"] = usbfiles
+
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

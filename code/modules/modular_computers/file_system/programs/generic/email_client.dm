@@ -6,8 +6,7 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "mail-closed"
 	size = 7
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_exonet = 1
 	var/stored_login = ""
 	var/stored_password = ""
 	usage_flags = PROGRAM_ALL
@@ -47,7 +46,7 @@
 	var/datum/nano_module/email_client/NME = NM
 	if(!istype(NME))
 		return
-	NME.relayed_process(ntnet_speed)
+	NME.relayed_process(net_speed)
 
 	var/check_count = NME.check_for_new_messages()
 	if(check_count)
@@ -117,7 +116,7 @@
 		id_login = id.associated_email_login.Copy()
 
 	var/datum/computer_file/data/email_account/target
-	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+	for(var/datum/computer_file/data/email_account/account in list()) // julie fix pls ntnet_global.email_accounts
 		if(!account || !account.can_login)
 			continue
 		if(id_login && id_login["login"] == account.login)
@@ -205,7 +204,7 @@
 		data["current_account"] = current_account.login
 		if(addressbook)
 			var/list/all_accounts = list()
-			for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+			for(var/datum/computer_file/data/email_account/account in list()) // julie fix pls ntnet_global.email_accounts
 				if(!account.can_login)
 					continue
 				all_accounts.Add(list(list(

@@ -17,6 +17,9 @@
 /datum/fabricator_recipe/device_component/radio_receiver
 	path = /obj/item/stock_parts/radio/receiver/buildable
 
+/datum/fabricator_recipe/device_component/exonet_lock
+	path = /obj/item/stock_parts/exonet_lock/buildable
+
 /datum/fabricator_recipe/device_component/battery_backup_crap
 	name = "battery backup (weak)"
 	path = /obj/item/stock_parts/power/battery/buildable/crap

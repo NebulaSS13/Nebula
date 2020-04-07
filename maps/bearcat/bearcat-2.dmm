@@ -69,7 +69,11 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/comms)
 "aD" = (
-/obj/machinery/ntnet_relay,
+/obj/machinery/computer/exonet/access_directory{
+	dir = 4;
+	error = "bearcat";
+	icon_state = ""
+	},
 /turf/simulated/floor/bluegrid,
 /area/ship/bearcat/comms)
 "aE" = (
@@ -103,7 +107,11 @@
 /turf/simulated/wall/titanium,
 /area/ship/bearcat/shuttle/outgoing)
 "aP" = (
-/obj/machinery/message_server,
+/obj/machinery/computer/exonet/broadcaster/router{
+	dir = 4;
+	ennid = "bearcat";
+	icon_state = ""
+	},
 /turf/simulated/floor/bluegrid,
 /area/ship/bearcat/comms)
 "aQ" = (
@@ -171,8 +179,10 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/obj/machinery/computer/message_monitor{
-	dir = 4
+/obj/machinery/computer/exonet/mainframe{
+	dir = 4;
+	ennid = "bearcat";
+	icon_state = ""
 	},
 /turf/simulated/floor/bluegrid,
 /area/ship/bearcat/comms)

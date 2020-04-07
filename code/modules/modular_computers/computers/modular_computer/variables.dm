@@ -4,7 +4,6 @@
 	name = "Modular Computer"
 	desc = "A modular computer. You shouldn't see this."
 
-	var/enabled_by_default = FALSE							// Start enabled durint Initialization
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
 	var/hardware_flag = 0									// A flag that describes this device type
@@ -37,7 +36,7 @@
 
 	// Important hardware (must be installed for computer to work)
 	var/obj/item/stock_parts/computer/processor_unit/processor_unit				// CPU. Without it the computer won't run. Better CPUs can run more programs at once.
-	var/obj/item/stock_parts/computer/network_card/network_card					// Network Card component of this computer. Allows connection to NTNet
+	var/obj/item/stock_parts/computer/network_card/network_card					// Network Card component of this computer. Allows connection to EXONET
 	var/obj/item/stock_parts/computer/hard_drive/hard_drive						// Hard Drive component of this computer. Stores programs and files.
 
 	// Optional hardware (improves functionality, but is not critical for computer to work in most cases)
@@ -48,6 +47,7 @@
 	var/obj/item/stock_parts/computer/ai_slot/ai_slot							// AI slot, an intellicard housing that allows modifications of AIs.
 	var/obj/item/stock_parts/computer/tesla_link/tesla_link						// Tesla Link, Allows remote charging from nearest APC.
 	var/obj/item/stock_parts/computer/scanner/scanner							// One of several optional scanner attachments.
+	var/obj/item/stock_parts/computer/rfid_programmer/programmer					// Programmers for editing devices in game.
 
 	var/modifiable = TRUE	// can't be modified or damaged if false
 
@@ -56,3 +56,6 @@
 
 	var/interact_sounds
 	var/interact_sound_volume = 40
+
+	var/initial_ennid										// For auto-configurating a modular computer with a specific exonetwork
+	var/initial_keydata										// For auto-configuration a modular computer to a specific exonetwork that's encrypted.

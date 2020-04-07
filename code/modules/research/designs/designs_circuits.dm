@@ -546,11 +546,6 @@
 	req_tech = list(TECH_COMBAT = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/stock_parts/circuitboard/pointdefense_control
 
-/datum/design/circuit/ntnet_relay
-	name = "NTNet Quantum Relay"
-	req_tech = list(TECH_DATA = 4)
-	build_path = /obj/item/stock_parts/circuitboard/ntnet_relay
-
 /datum/design/circuit/washer
 	name = "washing machine"
 	req_tech = list(TECH_ENGINEERING = 1)

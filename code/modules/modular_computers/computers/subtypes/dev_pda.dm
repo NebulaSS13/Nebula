@@ -13,8 +13,10 @@
 	stored_pen = /obj/item/pen/retractable
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
-	item_flags = ITEM_FLAG_NO_BLUDGEON
-	enabled_by_default = TRUE
+
+/obj/item/modular_computer/pda/Initialize()
+	. = ..()
+	enable_computer()
 
 /obj/item/modular_computer/pda/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -25,13 +27,13 @@
 		..()
 
 // PDA box
-/obj/item/storage/box/PDAs
+/obj/item/weapon/storage/box/PDAs
 	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"
 
-/obj/item/storage/box/PDAs/Initialize()
+/obj/item/weapon/storage/box/PDAs/Initialize()
 	. = ..()
 
 	new /obj/item/modular_computer/pda(src)

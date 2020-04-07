@@ -12,8 +12,7 @@
 	program_menu_icon = "clock"
 	extended_desc = "A tool for managing shuttles, filling out flight plans, and submitting flight-related paperwork."
 	size = 18
-	available_on_ntnet = 1
-	requires_ntnet = 1
+	requires_exonet = 1
 	category = PROG_SUPPLY
 
 /datum/nano_module/deck_management
@@ -326,8 +325,8 @@
 		var/crew = selected_mission.flight_plan.manifest.get_value(in_line = 1)
 		var/time = selected_mission.flight_plan.planned_depart.get_value()
 		if(!crew || !time)
-			to_chat(user, "<span class='warning'>Please fill in the crew manifest and departure time first.</span>")
 			return 1
+			to_chat(user, "<span class='warning'>Please fill in the crew manifest and departure time first.</span>")
 		var/place = selected_shuttle.name
 		if(alert(user, "Would you like to choose a custom gathering point, or just use [place]?", "Announcement Creation", "Default", "Custom") == "Custom")
 			var/list/areas = area_repository.get_areas_by_name()

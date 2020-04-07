@@ -50,11 +50,12 @@
 		install_default_programs()
 	if(scanner)
 		scanner.do_after_install(null, src)
+	if(network_card)
+		network_card.ennid = initial_ennid
+		network_card.keydata = initial_keydata
 	update_icon()
 	update_verbs()
 	update_name()
-	if(enabled_by_default)
-		enable_computer()
 	. = ..()
 
 /obj/item/modular_computer/Destroy()

@@ -90,7 +90,8 @@ var/list/airlock_overlays = list()
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver,
-		/obj/item/stock_parts/power/apc
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/exonet_lock/buildable
 	)
 	// To be fleshed out and moved to parent door, but staying minimal for now.
 	public_methods = list(

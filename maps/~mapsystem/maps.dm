@@ -58,6 +58,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/company_short = "BM"
 	var/system_name = "Uncharted System"
 	var/ground_noun = "ground"
+	var/station_ennid				// When this is specified, there is one exonet that's considered the primary exonet for the map. All characters will be given emails on this exonet.
 
 	var/map_admin_faxes = list()
 
@@ -320,7 +321,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/show_titlescreen(client/C)
 	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
-	
+
 	show_browser(C, current_lobby_screen, "file=titlescreen.png;display=0")
 	show_browser(C, file('html/lobby_titlescreen.html'), "window=lobbybrowser")
 

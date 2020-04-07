@@ -13,6 +13,36 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/icon/photo_front = null
 	var/icon/photo_side = null
 	//More variables below.
+	var/list/grants = list()
+	var/user_id							// A unique identifier linking a mob/player/user to this access record and their grants.
+	var/ennid							// The exonet network ID this access record is associated with.
+
+/datum/computer_file/report/crew_record/proc/add_grant(var/datum/computer_file/data/grant_record/grant)
+	LAZYDISTINCTADD(grants, grant)
+
+/datum/computer_file/report/crew_record/proc/remove_grant(var/grant_name)
+	for(var/datum/computer_file/data/grant_record/GR in grants)
+		if(GR.stored_data == grant_name)
+			grants.Remove(GR)
+			return
+
+/datum/computer_file/report/crew_record/proc/calculate_size()
+	size = max(1, round((length(user_id) + length(ennid)) / 20))
+
+/datum/computer_file/report/crew_record/proc/get_access()
+	var/list/access_grants = list()
+	for(var/datum/computer_file/data/grant_record/grant in get_valid_grants())
+		LAZYDISTINCTADD(access_grants, uppertext("[ennid].[grant.stored_data]"))
+	return access_grants
+
+/datum/computer_file/report/crew_record/proc/get_valid_grants()
+	var/list/valid_grants = list()
+	for(var/datum/computer_file/data/grant_record/grant in grants)
+		if(grant.holder != holder)
+			grants.Remove(grant)
+			continue // This is a bad grant. File is gone or moved.
+		LAZYDISTINCTADD(valid_grants, grant)
+	return valid_grants
 
 /datum/computer_file/report/crew_record/New()
 	..()

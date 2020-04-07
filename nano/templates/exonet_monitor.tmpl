@@ -1,0 +1,127 @@
+{{if data.skill_fail}}
+	{{for data.skill_fail}}
+	<div class="item">
+		<div class="itemLabelWide">
+    		{{:value.key}}
+		</div>
+		<div class="itemContentNarrow">
+			{{:value.value}}
+		</div>
+	</div>
+	{{/for}}
+{{else}}
+	<h1>WIRELESS CONNECTIVITY</h1>
+		<div class="item">
+			<div class="itemLabelWide">
+						Active EXONET Broadcasters: 
+			</div>
+			{{if length(data.exonet_broadcasters) > 0}}
+				<div class="itemContentNarrow">
+					<table>
+						<tr>
+							<th>BROADCASTER
+							<th>STATUS
+							<th>CONTROL
+						{{for data.exonet_broadcasters}}
+							<tr>
+								<td>{{:value.get_network_tag}}
+								<td>{{:value.operable() ? 'OPERATIONAL' : 'OFFLINE'}}
+								<td>BUTTONS
+						{{/for}}
+					</table>
+				</div>
+				</div>
+				<i>Caution - Disabling wireless transmitters when using wireless device may prevent you from re-enabling them again!</i>
+			{{else}}
+				</div>
+				<br><p>Wireless coverage unavailable, no relays are connected.</p>
+			{{/if}}
+	<h1>SERVER CONFIGURATION</h1>
+	<table>
+		<tr>
+			<th>SERVER
+			<th>STATUS
+			<th>CONTROL
+		<tr>
+			<td>Logging Server
+			<td>{{:data.logging_server ? (data.logging_server.operable() ? 'ONLINE' : 'OFFLINE') : 'UNSET'}}
+			<td>{{:helper.link(data.logging_server.get_network_tag(), null, { 'change_logging_server' : 1 })}}
+		<tr>
+			<td>Email Server
+			<td>{{:data.email_server ? (data.email_server.operable() ? 'ONLINE' : 'OFFLINE') : 'UNSET'}}
+			<td>{{:helper.link(data.email_server.get_network_tag(), null, { 'change_email_server' : 1 })}}
+		<tr>
+			<td>Report Server
+			<td>{{:data.report_server ? (data.report_server.operable() ? 'ONLINE' : 'OFFLINE') : 'UNSET'}}
+			<td>{{:helper.link(data.report_server.get_network_tag(), null, { 'change_report_server' : 1 })}}
+	</table>
+
+	<h1>FIREWALL CONFIGURATION</h1>
+	<table>
+		<tr>
+			<th>PROTOCOL
+			<th>STATUS
+			<th>CONTROL
+		<tr>
+			<td>Software Downloads
+			<td>{{:data.config_softwaredownload ? 'ENABLED' : 'DISABLED'}}
+			<td>{{:helper.link('TOGGLE', null, {'toggle_function' : 1})}}
+		<tr>
+			<td>Peer to Peer Traffic
+			<td>{{:data.config_peertopeer ? 'ENABLED' : 'DISABLED'}}
+			<td>{{:helper.link('TOGGLE', null, {'toggle_function' : 2})}}
+		<tr>
+			<td>Communication Systems
+			<td>{{:data.config_communication ? 'ENABLED' : 'DISABLED'}}
+			<td>{{:helper.link('TOGGLE', null, {'toggle_function' : 3})}}
+		<tr>
+			<td>Remote System Control
+			<td>{{:data.config_systemcontrol ? 'ENABLED' : 'DISABLED'}}
+			<td>{{:helper.link('TOGGLE', null, {'toggle_function' : 4})}}
+	</table>
+
+	<h1>SECURITY SYSTEMS</h1>
+		<div class="item">
+			<div class="itemLabelWide">
+				Maximal Log Count: 
+			</div>
+			<div class="itemContentNarrow">
+				<b>{{:data.exonet_maxlogs}}</b>
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabelWide">
+				Blacklisted NIDs: 
+			</div>
+			<div class="itemContentNarrow">
+				{{:data.banned_nids}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabelWide">
+				Controls: 
+			</div>
+			<div class="itemContentNarrow">
+				<table>
+					<tr><td>{{:helper.link('SET LOG LIMIT', null, {'updatemaxlogs' : 1})}}
+					<tr><td>{{:helper.link('PURGE LOGS', null, {'purgelogs' : 1})}}
+					<tr><td>{{:helper.link('ADD BLACKLIST ENTRY', null, {'ban_nid' : 1})}}
+					<tr><td>{{:helper.link('REMOVE BLACKLIST ENTRY', null, {'unban_nid' : 1})}}
+				</table>
+			</div>
+		</div>
+		<b>System Logs</b>
+		<div class="statusDisplay" style="overflow: auto;">
+			<div class="item">
+				<div class="itemContent" style="width: 100%;">
+					{{for data.exonet_logs}}
+						{{:value}}<br>
+					{{/for}}
+				</div>
+			</div>
+		</div>
+{{/if}}
+{{if data.terminal}}
+	<h1>MANUAL SYSTEM ACCESS</h1>
+	{{:helper.link('ACTIVATE TERMINAL', null, {'PC_terminal' : 1})}}
+{{/if}}

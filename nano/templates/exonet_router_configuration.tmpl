@@ -1,0 +1,42 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Back', null, { "PRG_back" : 1 })}}
+{{else}}
+	<i>Welcome to the EXONET Router configuration utility. Please consult your system administrator if you have any questions about your device.</i><hr>
+	<h2>Power Supply</h2>
+	<div class="itemLabel">
+		Power Usage: 
+	</div>
+	<div class="itemContent">
+		{{:data.power_usage}}kW
+	</div>
+	<h2>Network Configuration</h2>
+	<div class="itemLabel">
+		Network Status:
+	</div>
+	<div class="itemContent">
+		{{:data.broadcasting_status}}
+	</div>
+	<div class="itemLabel">
+		Signal Strength:
+	</div>
+	<div class="itemContent">
+		{{:data.signal_strength}}MP
+	</div>
+	<div class="itemLabel">
+		Broadcasting Network ENNID:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.ennid, null, { "PRG_newennid" : 1 })}}
+	</div>
+	<div class="itemLabel">
+		Broadcasting Network KEY:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.key, null, { "PRG_newkey" : 1 })}}
+	</div>
+	<hr>
+	<i>EXONET Firmware v110.04.4h Copyright EXONETWORKS INC</i>
+{{/if}}

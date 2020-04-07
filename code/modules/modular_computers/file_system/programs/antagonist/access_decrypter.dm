@@ -6,8 +6,7 @@
 	program_menu_icon = "unlocked"
 	extended_desc = "This highly advanced script can very slowly decrypt operational codes used in almost any network. These codes can be downloaded to an ID card to expand the available access. The system administrator will probably notice this."
 	size = 34
-	requires_ntnet = 1
-	available_on_ntnet = 0
+	requires_exonet = 1
 	available_on_syndinet = 1
 	nanomodule_path = /datum/nano_module/program/access_decrypter/
 	var/message = ""
@@ -78,7 +77,7 @@
 			return
 
 		var/access = href_list["PRG_execute"]
-		var/obj/item/card/id/id_card = RFID.stored_card
+		var/obj/item/weapon/card/id/id_card = RFID.stored_card
 		if(access in id_card.access)
 			return 1
 		if(access in restricted_access_codes)
@@ -133,7 +132,7 @@
 			strings.Add(string)
 		data["dos_strings"] = strings
 	else if(RFID && RFID.stored_card)
-		var/obj/item/card/id/id_card = RFID.stored_card
+		var/obj/item/weapon/card/id/id_card = RFID.stored_card
 		var/list/regions = list()
 		for(var/i = ACCESS_REGION_MIN; i <= ACCESS_REGION_MAX; i++)
 			var/list/accesses = list()

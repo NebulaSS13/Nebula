@@ -7,9 +7,9 @@
 	program_menu_icon = "power"
 	extended_desc = "This program allows remote control of power distribution systems. This program can not be run on tablet computers."
 	required_access = access_engine
-	requires_ntnet = 1
+	requires_exonet = 1
 	network_destination = "RCON remote control system"
-	requires_ntnet_feature = NTNET_SYSTEMCONTROL
+	requires_exonet_feature = NETWORK_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 19
 	category = PROG_ENG
@@ -125,10 +125,10 @@
 /datum/nano_module/rcon/proc/FindDevices()
 	known_SMESs = new /list()
 	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
-		if(ARE_Z_CONNECTED(get_host_z(), get_z(SMES)) && SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
+		if(AreConnectedZLevels(get_host_z(), get_z(SMES)) && SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
 			known_SMESs.Add(SMES)
 
 	known_breakers = new /list()
 	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
-		if(ARE_Z_CONNECTED(get_host_z(), get_z(breaker)) && breaker.RCon_tag != "NO_TAG")
+		if(AreConnectedZLevels(get_host_z(), get_z(breaker)) && breaker.RCon_tag != "NO_TAG")
 			known_breakers.Add(breaker)

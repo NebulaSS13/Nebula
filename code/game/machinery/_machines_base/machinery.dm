@@ -438,8 +438,16 @@ Class Procs:
 
 /obj/machinery/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()
+	for(var/obj/item/stock_parts/exonet_lock/lock in get_all_components_of_type(/obj/item/stock_parts/exonet_lock))
+		. = max(., lock.emag_act())
 	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
 		. = max(., lock.emag_act())
 
 /obj/machinery/proc/on_user_login(var/mob/M)
 	return
+
+	/obj/machinery/get_req_access()
+	var/obj/item/stock_parts/exonet_lock/lock = get_component_of_type(/obj/item/stock_parts/exonet_lock)
+	if(lock)
+		return lock.get_req_access()
+	return ..()

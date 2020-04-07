@@ -6,8 +6,7 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "mail-open"
 	size = 12
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_exonet = 1
 	nanomodule_path = /datum/nano_module/program/email_administration
 	required_access = access_network
 	category = PROG_ADMIN
@@ -50,7 +49,7 @@
 		data["messagecount"] = all_messages.len
 	else
 		var/list/all_accounts = list()
-		for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+		for(var/datum/computer_file/data/email_account/account in list()) // julie pls fix ntnet_global.email_accounts
 			if(!account.can_login)
 				continue
 			all_accounts.Add(list(list(
@@ -100,7 +99,7 @@
 			return 1
 
 		current_account.suspended = !current_account.suspended
-		ntnet_global.add_log_with_ids_check("EMAIL LOG: SA-EDIT Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended by SA [I.registered_name] ([I.assignment]).")
+		//ntnet_global.add_log_with_ids_check("EMAIL LOG: SA-EDIT Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended by SA [I.registered_name] ([I.assignment]).")
 		error = "Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended."
 		return 1
 
@@ -112,7 +111,7 @@
 		if(!newpass)
 			return 1
 		current_account.password = newpass
-		ntnet_global.add_log_with_ids_check("EMAIL LOG: SA-EDIT Password for account [current_account.login] has been changed by SA [I.registered_name] ([I.assignment]).")
+		//ntnet_global.add_log_with_ids_check("EMAIL LOG: SA-EDIT Password for account [current_account.login] has been changed by SA [I.registered_name] ([I.assignment]).")
 		return 1
 
 	if(href_list["viewmail"])
@@ -126,7 +125,7 @@
 		return 1
 
 	if(href_list["viewaccount"])
-		for(var/datum/computer_file/data/email_account/email_account in ntnet_global.email_accounts)
+		for(var/datum/computer_file/data/email_account/email_account in list()) // ntnet_global.email_accounts julie pls fix
 			if(email_account.uid == text2num(href_list["viewaccount"]))
 				current_account = email_account
 				break
@@ -141,9 +140,9 @@
 			return 1
 
 		var/complete_login = "[newlogin]@[newdomain]"
-		if(ntnet_global.find_email_by_name(complete_login))
-			error = "Error creating account: An account with same address already exists."
-			return 1
+		//if(ntnet_global.find_email_by_name(complete_login))
+		//	error = "Error creating account: An account with same address already exists."
+		//	return 1
 
 		var/datum/computer_file/data/email_account/new_account = new/datum/computer_file/data/email_account()
 		new_account.login = complete_login

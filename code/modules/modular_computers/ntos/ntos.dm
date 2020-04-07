@@ -11,7 +11,7 @@
 	var/screensaver_icon = "standby"
 
 	// Used for deciding if various tray icons need to be updated
-	var/last_battery_percent							
+	var/last_battery_percent
 	var/last_world_time
 	var/list/last_header_icons
 
@@ -37,7 +37,7 @@
 		process_updates()
 		return
 	for(var/datum/computer_file/program/P in running_programs)
-		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
+		if(P.requires_exonet && !get_exonet_status(P.requires_exonet_feature))
 			P.event_networkfailure(P != active_program)
 		else
 			P.process_tick()
@@ -50,10 +50,11 @@
 	on = FALSE
 	for(var/datum/computer_file/program/P in running_programs)
 		kill_program(P, 1)
-	
+
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
-		ntnet_global.unregister(network_card.identification_id)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		exonet.disconnect_network()
 
 	if(updating)
 		updating = FALSE
@@ -63,10 +64,10 @@
 		if(hard_drive)
 			if(prob(10))
 				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(0.5 * hard_drive.health)
+				hard_drive.take_damage(20)
 			else if(prob(5))
 				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(hard_drive.health)
+				hard_drive.take_damage(50)
 	update_host_icon()
 
 /datum/extension/interactive/ntos/proc/system_boot()
@@ -76,7 +77,8 @@
 		run_program(autorun.stored_data)
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
-		ntnet_global.register(network_card.identification_id, src)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		exonet.connect_network(null, network_card.ennid, network_card.get_netspeed(), network_card.keydata)
 	update_host_icon()
 
 /datum/extension/interactive/ntos/proc/kill_program(var/datum/computer_file/program/P, var/forced = 0)
@@ -132,9 +134,13 @@
 		create_file("autorun", "[program]")
 
 /datum/extension/interactive/ntos/proc/add_log(var/text)
-	if(!get_ntnet_status())
+	if(!get_exonet_status())
 		return 0
-	return ntnet_global.add_log(text, get_component(PART_NETWORK))
+	var/network_card = get_component(PART_NETWORK)
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+	var/datum/exonet/network = exonet.get_local_network()
+	if(network)
+		return network.add_log(text, network_card)
 
 /datum/extension/interactive/ntos/proc/get_physical_host()
 	var/atom/A = holder

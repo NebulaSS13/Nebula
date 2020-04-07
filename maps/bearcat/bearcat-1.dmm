@@ -264,6 +264,11 @@
 	icon_state = "handrail";
 	dir = 4
 	},
+/obj/machinery/computer/exonet/broadcaster/relay{
+	dir = 4;
+	ennid = "bearcat";
+	icon_state = ""
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/bearcat/cargo/lower)
 "aS" = (

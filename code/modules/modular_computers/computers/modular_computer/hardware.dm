@@ -59,6 +59,12 @@
 			return
 		found = 1
 		tesla_link = H
+	else if(istype(H, /obj/item/stock_parts/computer/rfid_programmer))
+		if(programmer)
+			to_chat(user, "This computer's programmer slot is already occupied by \the [programmer].")
+			return
+		found = 1
+		programmer = H
 	else if(istype(H, /obj/item/stock_parts/computer/scanner))
 		if(scanner)
 			to_chat(user, "This computer's scanner slot is already occupied by \the [scanner].")
@@ -105,6 +111,9 @@
 		scanner.do_before_uninstall()
 		scanner = null
 		found = 1
+	if(programmer == H)
+		programmer = null
+		found = 1
 	if(found)
 		if(user)
 			to_chat(user, "You remove \the [H] from \the [src].")
@@ -141,6 +150,8 @@
 		return tesla_link
 	if(scanner && (scanner.name == name))
 		return scanner
+	if(programmer && (programmer.name == name))
+		return programmer
 	return null
 
 // Returns list of all components
@@ -166,4 +177,6 @@
 		all_components.Add(tesla_link)
 	if(scanner)
 		all_components.Add(scanner)
+	if(programmer)
+		all_components.Add(programmer)
 	return all_components

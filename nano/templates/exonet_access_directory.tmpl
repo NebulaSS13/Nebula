@@ -1,0 +1,76 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Back to menu', null, { "PRG_back" : 1 })}}
+{{else}}
+	<h2>Viewing File System:</h2>
+	<div class='item'>
+		{{:helper.link(data.file_server, null, { "PRG_changefileserver" : 1 })}}
+	</div><hr>
+	{{if data.editing_user}}
+		<h2>Viewing User Record: {{:data.desired_name}}</h2>
+		<div class='item'>
+			<div class='itemLabel'>NAME:</div>
+			<div class='itemBody'>{{:data.desired_name}}</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>USER ID:</div>
+			<div class='itemBody'>{{:data.user_id}}</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>GRANT COUNT:</div>
+			<div class='itemBody'>{{:data.grant_count}}</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>RECORD SIZE:</div>
+			<div class='itemBody'>{{:data.size}}GQ</div>
+		</div>
+		<div class='item'>
+			{{:helper.link('CREATE GRANT', null, { "PRG_creategrant" : data.user_id })}}
+			{{if data.is_admin}}
+				{{:helper.link('REMOVE ADMIN', null, { "PRG_removeadmin": 1})}}
+			{{else}}
+				{{:helper.link('GRANT ADMIN', null, { "PRG_addadmin": 1})}}
+			{{/if}}
+			{{:helper.link('WRITE ID', null, { "PRG_printid": 1}, !data.card_inserted ? 'disabled' : null)}}
+			{{:helper.link('EJECT ID', null, { "PRG_ejectid": 1}, !data.card_inserted ? 'disabled' : null)}}
+		</div>
+		<hr>
+		<table>
+			<tr><th>Grant
+			<th>Operations
+			{{for data.grants}}
+				<tr><td>{{:value.grant_name}}
+				<td>
+					{{if value.assigned}}
+						{{:helper.link('REMOVE', null, { "PRG_removegrant" : value.grant_name })}}
+					{{else}}
+						{{:helper.link('ASSIGN', null, { "PRG_assigngrant" : value.grant_name })}}
+					{{/if}}
+					{{:helper.link('DELETE', null, { "PRG_deletegrant" : value.grant_name })}}
+			{{/for}}
+		</table>
+		{{:helper.link('Back to menu', null, { "PRG_back" : 1 })}}
+	{{else}}
+		<h2>Available Users ({{:data.file_server}}):</h2>
+		<div class='item'>
+			{{:helper.link('ADD USER', null, { "PRG_adduser" : 1 })}}
+		</div>
+		<table>
+			<tr><th>User ID
+			<th>Grants
+			<th>File size (GQ)
+			<th>Operations
+			{{for data.users}}
+				<tr><td>{{:value.desired_name}}
+				<td>{{:value.grant_count}}
+				<td>{{:value.size}}GQ
+				<td>
+					{{:helper.link('VIEW', null, { "PRG_viewuser" : value.user_id })}}
+					{{:helper.link('DELETE', null, { "PRG_deleteuser" : value.user_id })}}
+					{{:helper.link('RENAME', null, { "PRG_rename" : value.user_id })}}
+			{{/for}}
+		</table>
+	{{/if}}
+{{/if}}
