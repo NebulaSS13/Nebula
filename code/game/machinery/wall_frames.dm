@@ -48,7 +48,7 @@
 		to_chat(usr, "<span class='danger'>\The [src] cannot be placed on this spot.</span>")
 		return
 
-	if(gotwallitem(loc, ndir))
+	if(gotwallitem(loc, get_dir(usr,on_wall))) // Use actual dir, not the new machine's dir
 		to_chat(usr, "<span class='danger'>There's already an item on this wall!</span>")
 		return
 
@@ -153,6 +153,7 @@
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
 	build_machine_type = /obj/machinery/requests_console
+	reverse = TRUE
 
 /obj/item/frame/request_console/kit
 	fully_construct = TRUE
