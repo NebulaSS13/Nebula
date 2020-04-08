@@ -18,7 +18,7 @@
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/meter = 1)
 
-	frame_type = /obj/item/machine_chassis/pipe_meter
+	frame_type = /obj/item/machine_chassis/pipe_meter/base
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
 	base_type = /obj/machinery/meter/buildable
 

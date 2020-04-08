@@ -47,6 +47,9 @@
 /datum/fabricator_recipe/engineering/requests_console_kit
 	path = /obj/item/frame/request_console/kit
 
+/datum/fabricator_recipe/engineering/sparker
+	path = /obj/item/frame/button/sparker
+
 /datum/fabricator_recipe/engineering/rcd_ammo
 	path = /obj/item/rcd_ammo
 

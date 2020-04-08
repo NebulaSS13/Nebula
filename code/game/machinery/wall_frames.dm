@@ -159,3 +159,11 @@
 	fully_construct = TRUE
 	name = "request console kit"
 	desc = "An all-in-one request console kit, comes preassembled."
+
+/obj/item/frame/button/sparker
+	name = "mounted igniter"
+	desc = "A wall-mounted ignition device."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "migniter"
+	matter = list(MAT_STEEL = 400, MAT_PLASTIC = 200)
+	build_machine_type = /obj/machinery/sparker/buildable

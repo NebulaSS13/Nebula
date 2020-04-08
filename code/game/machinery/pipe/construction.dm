@@ -195,10 +195,15 @@ Buildable meters
 	. = ..()
 	set_extension(src, /datum/extension/parts_stash)
 
+/obj/item/machine_chassis/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 2)
+		to_chat(user, "Use a wrench to secure \the [src] here.")
+
 /obj/item/machine_chassis/attackby(var/obj/item/W, var/mob/user)
 	if(!isWrench(W))
 		return ..()
-	var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)
+	var/obj/machinery/machine = new build_type(get_turf(src), dir, TRUE)
 	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
 	if(stash)
 		stash.install_into(machine)
@@ -216,6 +221,9 @@ Buildable meters
 	w_class = ITEM_SIZE_LARGE
 	build_type = /obj/machinery/air_sensor
 
+/obj/item/machine_chassis/air_sensor/base
+	build_type = /obj/machinery/air_sensor/buildable
+
 /obj/item/machine_chassis/pipe_meter
 	name = "meter"
 	desc = "A meter that can measure gas inside pipes or in the general area."
@@ -224,3 +232,17 @@ Buildable meters
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_LARGE
 	build_type = /obj/machinery/meter
+
+/obj/item/machine_chassis/pipe_meter/base
+	build_type = /obj/machinery/meter/buildable
+
+/obj/item/machine_chassis/igniter
+	name = "igniter"
+	desc = "A device which will ignite surrounding gasses."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "igniter1"
+	w_class = ITEM_SIZE_NORMAL
+	build_type = /obj/machinery/igniter
+
+/obj/item/machine_chassis/igniter/base
+	build_type = /obj/machinery/igniter/buildable
