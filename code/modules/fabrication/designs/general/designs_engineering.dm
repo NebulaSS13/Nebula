@@ -83,3 +83,6 @@
 
 /datum/fabricator_recipe/engineering/solars
 	path = /obj/item/solar_assembly
+
+/datum/fabricator_recipe/engineering/power_sensor
+	path = /obj/item/machine_chassis/power_sensor

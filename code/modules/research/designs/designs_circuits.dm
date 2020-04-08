@@ -684,3 +684,8 @@
 	name = "cryo unit board"
 	build_path = /obj/item/stock_parts/circuitboard/cryopod
 	req_tech = list(TECH_DATA = 6, TECH_ENGINEERING = 6, TECH_BLUESPACE = 6)
+
+/datum/design/circuit/breaker_box
+	name = "breaker box board"
+	build_path = /obj/item/stock_parts/circuitboard/breaker
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)

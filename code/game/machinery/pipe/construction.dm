@@ -246,3 +246,11 @@ Buildable meters
 
 /obj/item/machine_chassis/igniter/base
 	build_type = /obj/machinery/igniter/buildable
+
+/obj/item/machine_chassis/power_sensor
+	name = "power sensor"
+	desc = "A small machine which transmits data about specific powernet."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
+	w_class = ITEM_SIZE_NORMAL
+	build_type = /obj/machinery/power/sensor

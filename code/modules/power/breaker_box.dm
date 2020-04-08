@@ -19,6 +19,11 @@
 	var/RCon_tag = "NO_TAG"
 	var/update_locked = 0
 
+	construct_state = /decl/machine_construction/default/panel_closed
+	stat_immune = 0
+	uncreated_component_parts = null
+	base_type = /obj/machinery/power/breakerbox
+
 /obj/machinery/power/breakerbox/activated
 	icon_state = "bbox_on"
 
@@ -54,7 +59,6 @@
 			update_locked = 0
 	busy = 0
 
-
 /obj/machinery/power/breakerbox/physical_attack_hand(mob/user)
 	if(update_locked)
 		to_chat(user, "<span class='warning'>System locked. Please try again later.</span>")
@@ -82,13 +86,14 @@
 /obj/machinery/power/breakerbox/attackby(var/obj/item/W, var/mob/user)
 	if(isMultitool(W))
 		var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
+		if(!CanPhysicallyInteract(user))
+			return TRUE
 		if(newtag)
 			RCon_tag = newtag
 			to_chat(user, "<span class='notice'>You changed the RCON tag to: [newtag]</span>")
+		return TRUE
 
-
-
-
+	return ..()
 
 /obj/machinery/power/breakerbox/proc/set_state(var/state)
 	on = state

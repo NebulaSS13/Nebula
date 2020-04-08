@@ -3475,8 +3475,7 @@
 /area/ship/bearcat/maintenance/power)
 "ip" = (
 /obj/machinery/power/sensor{
-	long_range = 1;
-	name_tag = "Main Grid"
+	id_tag = "Main Grid"
 	},
 /obj/structure/cable{
 	d2 = 8;
