@@ -10,7 +10,7 @@
 /obj/item/stock_parts/circuitboard/exonet/router
 	name = T_BOARD("exonet router")
 	build_path = /obj/machinery/computer/exonet/broadcaster/router
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':4}"
 	req_components = list(
 		/obj/item/stack/cable_coil = 5
 	)
@@ -18,7 +18,7 @@
 /obj/item/stock_parts/circuitboard/exonet/uplink
 	name = T_BOARD("exonet uplink")
 	build_path = /obj/machinery/computer/exonet/uplink
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':4}"
 	req_components = list(
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/stock_parts/subspace/filter = 2
@@ -27,7 +27,7 @@
 /obj/item/stock_parts/circuitboard/exonet/access_directory
 	name = T_BOARD("exonet directory controller")
 	build_path = /obj/machinery/computer/exonet/access_directory
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':4}"
 	req_components = list(
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/stock_parts/computer/scanner = 1,
@@ -42,7 +42,7 @@
 /obj/item/stock_parts/circuitboard/exonet/mainframe
 	name = T_BOARD("exonet mainframe")
 	build_path = /obj/machinery/computer/exonet/mainframe
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':4}"
 	req_components = list(
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/stock_parts/computer/hard_drive = 2
@@ -51,7 +51,7 @@
 /obj/item/stock_parts/circuitboard/exonet/relay
 	name = T_BOARD("exonet relay")
 	build_path = /obj/machinery/computer/exonet/broadcaster/relay
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
+	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':4}"
 	req_components = list(
 		/obj/item/stack/cable_coil = 5
 	)
