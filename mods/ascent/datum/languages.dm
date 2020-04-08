@@ -12,9 +12,9 @@
 	shorthand = "KV"
 	machine_understands = FALSE
 	var/list/correct_mouthbits = list(
-		SPECIES_MANTID_ALATE,
-		SPECIES_MANTID_GYNE,
-		SPECIES_SERPENTID
+		/decl/species/mantid,
+		/decl/species/mantid/gyne,
+		/decl/species/serpentid
 	)
 
 /decl/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
@@ -79,7 +79,7 @@
 		return TRUE
 	else if(ishuman(speaker))
 		var/mob/living/carbon/human/H = speaker
-		return (H.species.name == SPECIES_MANTID_ALATE || H.species.name == SPECIES_MANTID_GYNE)
+		return (istype(H.species, /decl/species/mantid))
 	return FALSE
 
 /decl/language/mantid/worldnet

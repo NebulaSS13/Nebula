@@ -1,5 +1,5 @@
-/datum/species/alium
-	name = SPECIES_ALIEN
+/decl/species/alium
+	name = "Humanoid"
 	name_plural = "Humanoids"
 	description = "Some alien humanoid species, unknown to humanity. How exciting."
 	rarity_value = 5
@@ -18,7 +18,7 @@
 		TAG_CULTURE = CULTURE_ALIUM
 	)
 
-/datum/species/alium/New()
+/decl/species/alium/New()
 	//Coloring
 	blood_color = RANDOM_RGB
 	flesh_color = RANDOM_RGB
@@ -86,7 +86,7 @@
 
 	..()
 
-/datum/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
+/decl/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
 	var/temp_comfort_shift = atmosphere.temperature - body_temperature
 
 	cold_level_1 += temp_comfort_shift
@@ -135,18 +135,18 @@
 	if(!istype(user))
 		to_chat(user, "You got no business touching this.")
 		return
-	if(user.species.name == SPECIES_ALIEN)
-		to_chat(user, "You're already a [SPECIES_ALIEN].")
+	if(user.species.type == /decl/species/alium)
+		to_chat(user, "You're already a mysterious humanoid.")
 		return
 	if(alert("Are you sure you want to be an alien?", "Mom Look I'm An Alien!", "Yes", "No") == "No")
 		to_chat(user, "Okie dokie.")
 		return
-	if(user && user.species.name == SPECIES_ALIEN) //no spamming it to get free implants
+	if(user && user.species.type == /decl/species/alium) //no spamming it to get free implants
 		return
 	to_chat(user, "You're now an alien humanoid of some undiscovered species. Make up what lore you want, no one knows a thing about your species! You can check info about your traits with Check Species Info verb in IC tab.")
 	to_chat(user, "You can't speak GalCom or any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
 	new/obj/item/implanter/translator(get_turf(src))
-	user.set_species(SPECIES_ALIEN)
+	user.set_species(/decl/species/alium)
 	var/decl/cultural_info/culture = user.get_cultural_value(TAG_CULTURE)
 	user.fully_replace_character_name(culture.get_random_name(user.gender))
 	user.rename_self("Humanoid Alien", 1)

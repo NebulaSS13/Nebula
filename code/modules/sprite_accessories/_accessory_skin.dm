@@ -8,9 +8,9 @@
 /datum/sprite_accessory/skin/human
 	name = "Default human skin"
 	icon_state = "default"
-	species_allowed = list(SPECIES_HUMAN)
+	species_allowed = list(/decl/species/human)
 
 /datum/sprite_accessory/skin/human_tatt01
 	name = "Tatt01 human skin"
 	icon_state = "tatt1"
-	species_allowed = list(SPECIES_HUMAN)
+	species_allowed = list(/decl/species/human)

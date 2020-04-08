@@ -65,6 +65,7 @@
 /obj/item/organ/internal/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
 
 	if(!istype(target))
+		world.log << "[name] replace fail"
 		return 0
 
 	if(status & ORGAN_CUT_AWAY)

@@ -26,11 +26,11 @@
 	. = ..()
 	if(. && istype(job, /datum/job/submap/ascent))
 		var/datum/job/submap/ascent/ascent_job = job
-		if(ascent_job.set_species_on_join == SPECIES_MANTID_GYNE && !is_species_whitelisted(joining, SPECIES_MANTID_GYNE))
-			to_chat(joining, SPAN_WARNING("You are not whitelisted to play a [SPECIES_MANTID_GYNE]."))
+		if(ascent_job.set_species_on_join == /decl/species/mantid/gyne && !is_species_whitelisted(joining, /decl/species/mantid/gyne))
+			to_chat(joining, SPAN_WARNING("You are not whitelisted to play a Kharmaani Gyne."))
 			return FALSE
-		if(ascent_job.set_species_on_join == SPECIES_SERPENTID && !is_species_whitelisted(joining, SPECIES_SERPENTID))
-			to_chat(joining, SPAN_WARNING("You are not  whitelisted to play a [SPECIES_SERPENTID]."))
+		if(ascent_job.set_species_on_join == /decl/species/serpentid && !is_species_whitelisted(joining, /decl/species/serpentid))
+			to_chat(joining, SPAN_WARNING("You are not  whitelisted to play a Serpentid."))
 			return FALSE
 
 /mob/living/carbon/human/proc/gyne_rename_lineage()
@@ -38,7 +38,7 @@
 	set category = "IC"
 	set desc = "Rename yourself and your alates."
 
-	if(species.name == SPECIES_MANTID_GYNE && mind && istype(mind.assigned_job, /datum/job/submap/ascent))
+	if(species.type ==  /decl/species/mantid/gyne && mind && istype(mind.assigned_job, /datum/job/submap/ascent))
 		var/datum/job/submap/ascent/ascent_job = mind.assigned_job
 		var/datum/submap/ascent/cutter = ascent_job.owner
 		if(istype(cutter))
@@ -51,7 +51,7 @@
 			if(!new_name)
 				return
 
-			if(species.name != SPECIES_MANTID_GYNE || !mind || mind.assigned_job != ascent_job)
+			if(species.type !=  /decl/species/mantid/gyne || !mind || mind.assigned_job != ascent_job)
 				return
 
 			// Rename ourselves.
@@ -60,14 +60,14 @@
 			// Rename our alates (and only our alates).
 			cutter.gyne_name = new_name
 			for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
-				if(!H.mind || H.species.name != SPECIES_MANTID_ALATE)
+				if(!H.mind || H.species.type !=  /decl/species/mantid)
 					continue
 				var/datum/job/submap/ascent/temp_ascent_job = H.mind.assigned_job
 				if(!istype(temp_ascent_job) || temp_ascent_job.owner != ascent_job.owner)
 					continue
 
 
-				var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/datum/species/mantid, 1000, 9999) : random_id(/datum/species/mantid, 10000, 99999)
+				var/new_alate_number = is_species_whitelisted(H, /decl/species/mantid/gyne) ? random_id(/decl/species/mantid, 1000, 9999) : random_id(/decl/species/mantid, 10000, 99999)
 				H.fully_replace_character_name("[new_alate_number] [new_name]")
 				to_chat(H, SPAN_NOTICE("<font size = 3>Your gyne, [real_name], has awakened, and you recall your place in the nest-lineage: <b>[H.real_name]</b>.</font>"))
 
@@ -85,7 +85,7 @@
 	loadout_allowed = FALSE
 	is_semi_antagonist = TRUE
 	var/requires_supervisor = FALSE
-	var/set_species_on_join = SPECIES_MANTID_GYNE
+	var/set_species_on_join = /decl/species/mantid/gyne
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_EVA =      SKILL_ADEPT,
@@ -112,10 +112,10 @@
 	. = ..()
 	if(.)
 		switch(set_species_on_join)
-			if(SPECIES_MANTID_GYNE)
-				. = is_species_whitelisted(caller.mob, SPECIES_MANTID_GYNE)
-			if(SPECIES_SERPENTID)
-				. = is_species_whitelisted(caller.mob, SPECIES_SERPENTID)
+			if(/decl/species/mantid/gyne)
+				. = is_species_whitelisted(caller.mob, /decl/species/mantid/gyne)
+			if(/decl/species/serpentid)
+				. = is_species_whitelisted(caller.mob, /decl/species/serpentid)
 
 /datum/job/submap/ascent/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 
@@ -134,12 +134,12 @@
 
 	if(set_species_on_join)
 		H.set_species(set_species_on_join)
-	switch(H.species.name)
-		if(SPECIES_MANTID_GYNE)
-			H.real_name = "[random_id(/datum/species/mantid, 1, 99)] [cutter.gyne_name]"
+	switch(H.species.type)
+		if(/decl/species/mantid/gyne)
+			H.real_name = "[random_id(/decl/species/mantid, 1, 99)] [cutter.gyne_name]"
 			H.verbs |= /mob/living/carbon/human/proc/gyne_rename_lineage
-		if(SPECIES_MANTID_ALATE)
-			var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/datum/species/mantid, 1000, 9999) : random_id(/datum/species/mantid, 10000, 99999)
+		if(/decl/species/mantid)
+			var/new_alate_number = is_species_whitelisted(H, /decl/species/mantid/gyne) ? random_id(/decl/species/mantid, 1000, 9999) : random_id(/decl/species/mantid, 10000, 99999)
 			H.real_name = "[new_alate_number] [cutter.gyne_name]"
 	H.name = H.real_name
 	if(H.mind)
@@ -151,7 +151,7 @@
 	total_positions = 4
 	supervisors = "the Gyne"
 	info = "You are an Alate of an independent Ascent vessel. Your Gyne has directed you to this remote sector full of crawling primitives. Follow her instructions and bring prosperity to your nest-lineage."
-	set_species_on_join = SPECIES_MANTID_ALATE
+	set_species_on_join = /decl/species/mantid
 	outfit_type = /decl/hierarchy/outfit/job/ascent/tech
 	requires_supervisor = "Ascent Gyne"
 	min_skill = list(

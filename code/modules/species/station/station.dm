@@ -1,7 +1,7 @@
-/datum/species/human
-	name = SPECIES_HUMAN
+/decl/species/human
+	name = "Human"
 	name_plural = "Humans"
-	primitive_form = SPECIES_MONKEY
+	primitive_form = /decl/species/monkey
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch, /decl/natural_attack/bite)
 	description = "Humans are so big, and strong, and smart, and rich sometimes. Oooooh."
 	min_age = 17
@@ -25,10 +25,10 @@
 		)
 	)
 
-/datum/species/human/get_root_species_name(var/mob/living/carbon/human/H)
-	return SPECIES_HUMAN
+/decl/species/human/get_root_name(var/mob/living/carbon/human/H)
+	return "Human"
 
-/datum/species/human/handle_npc(var/mob/living/carbon/human/H)
+/decl/species/human/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
 
@@ -72,7 +72,7 @@
 				var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)
 				H.custom_emote("clutches [T.his] [parent.name]!")
 
-/datum/species/human/get_ssd(var/mob/living/carbon/human/H)
+/decl/species/human/get_ssd(var/mob/living/carbon/human/H)
 	if(H.stat == CONSCIOUS)
 		return "staring blankly, not reacting to your presence"
 	return ..()

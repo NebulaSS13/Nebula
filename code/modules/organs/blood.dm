@@ -24,7 +24,7 @@
 		if(B.type == /datum/reagent/blood)
 			B.data = list(
 				"donor" = weakref(src),
-				"species" = species.name,
+				"species" = species.type,
 				"blood_DNA" = dna.unique_enzymes,
 				"blood_colour" = species.get_blood_colour(src),
 				"blood_type" = dna.b_type,
@@ -178,8 +178,8 @@
 	. = ..(container || vessel)
 
 /mob/living/carbon/human/proc/blood_incompatible(blood_type, blood_species)
-	if(blood_species && species.name)
-		if(blood_species != species.name)
+	if(blood_species && species.type)
+		if(blood_species != species.type)
 			return 1
 
 	var/donor_antigen = copytext(blood_type, 1, length(blood_type))
@@ -211,7 +211,7 @@
 	data["donor"] = weakref(src)
 	data["blood_DNA"] = dna.unique_enzymes
 	data["blood_type"] = dna.b_type
-	data["species"] = species.name
+	data["species"] = species.type
 	data["has_oxy"] = species.blood_oxy
 	var/list/temp_chem = list()
 	for(var/datum/reagent/R in reagents.reagent_list)

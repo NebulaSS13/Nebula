@@ -1,5 +1,5 @@
-/datum/species/monkey
-	name = SPECIES_MONKEY
+/decl/species/monkey
+	name = "Monkey"
 	name_plural = "Monkeys"
 	description = "Ook."
 	codex_description = "Monkeys and other similar creatures tend to be found on science stations and vessels as \
@@ -13,7 +13,7 @@
 	damage_mask =     'icons/mob/human_races/species/monkey/damage_mask.dmi'
 	blood_mask =      'icons/mob/human_races/species/monkey/blood_mask.dmi'
 
-	greater_form = SPECIES_HUMAN
+	greater_form = /decl/species/human
 	mob_size = MOB_SIZE_SMALL
 	show_ssd = null
 	health_hud_intensity = 1.75
@@ -57,7 +57,7 @@
 	var/list/no_touchie = list(/obj/item/mirror,
 							   /obj/item/storage/mirror)
 
-/datum/species/monkey/New()
+/decl/species/monkey/New()
 	equip_adjust = list(
 		slot_l_hand_str = list("[NORTH]" = list("x" = 1, "y" = 3), "[EAST]" = list("x" = -3, "y" = 2), "[SOUTH]" = list("x" = -1, "y" = 3), "[WEST]" = list("x" = 3, "y" = 2)),
 		slot_r_hand_str = list("[NORTH]" = list("x" = -1, "y" = 3), "[EAST]" = list("x" = 3, "y" = 2), "[SOUTH]" = list("x" = 1, "y" = 3), "[WEST]" = list("x" = -3, "y" = 2)),
@@ -67,7 +67,7 @@
 	)
 	..()
 
-/datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
+/decl/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
 	if(prob(33) && isturf(H.loc) && !LAZYLEN(H.grabbed_by)) //won't move if being pulled

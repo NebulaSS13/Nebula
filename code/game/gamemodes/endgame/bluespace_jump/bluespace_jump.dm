@@ -118,7 +118,7 @@
 	return daddy.examine(arglist(args))
 
 /obj/effect/bluegoast/proc/blueswitch()
-	var/mob/living/carbon/human/H = new(get_turf(src), daddy.species.name)
+	var/mob/living/carbon/human/H = new(get_turf(src), daddy.species.type)
 	H.real_name = daddy.real_name
 	H.dna = daddy.dna.Clone()
 	H.sync_organ_dna()

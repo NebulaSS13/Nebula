@@ -1,6 +1,6 @@
-/datum/species/mantid
+/decl/species/mantid
 
-	name =                   SPECIES_MANTID_ALATE
+	name =                   "Kharmaan Alate"
 	name_plural =            "Kharmaan Alates"
 	show_ssd =               "quiescent"
 
@@ -113,21 +113,21 @@
 			list(/decl/emote/visible/ascent_flicker, /decl/emote/visible/ascent_glint) = 20,
 		)
 
-/datum/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
+/decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 
-/datum/species/mantid/get_blood_name()
+/decl/species/mantid/get_blood_name()
 	return "hemolymph"
 
-/datum/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+/decl/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= ORGAN_CRYSTAL
 
-/datum/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
+/decl/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
 	return
 
-/datum/species/mantid/gyne
+/decl/species/mantid/gyne
 
-	name =                    SPECIES_MANTID_GYNE
+	name =                    "Kharmaan Gyne"
 	name_plural =             "Kharmaan Gynes"
 
 	genders =                 list(FEMALE)
@@ -171,7 +171,7 @@
 		TAG_RELIGION =  RELIGION_KHARMAANI
 	)
 
-/datum/species/mantid/gyne/New()
+/decl/species/mantid/gyne/New()
 	equip_adjust = list(
 		slot_l_hand_str = list(
 			"[NORTH]" = list("x" = -4, "y" = 12),
@@ -201,8 +201,8 @@
 		"belt" =         list("loc" = ui_belt,      "name" = "Belt",         "slot" = slot_belt,      "state" = "belt")
 		)
 
-/datum/species/serpentid
-	name = SPECIES_SERPENTID
+/decl/species/serpentid
+	name = "Serpentid"
 	name_plural = "Serpentids"
 	spawn_flags = SPECIES_IS_RESTRICTED
 	has_organ = list(
@@ -301,7 +301,7 @@
 			list(/decl/emote/audible/bug_hiss) = 40
 	)
 
-/datum/species/serpentid/New()
+/decl/species/serpentid/New()
 	equip_adjust = list(
 		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
 		slot_back_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
@@ -310,10 +310,10 @@
 	)
 	..()
 
-/datum/species/serpentid/get_blood_name()
+/decl/species/serpentid/get_blood_name()
 	return "haemolymph"
 
-/datum/species/serpentid/can_overcome_gravity(var/mob/living/carbon/human/H)
+/decl/species/serpentid/can_overcome_gravity(var/mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 
 	if(mixture)
@@ -326,12 +326,12 @@
 
 	return FALSE
 
-/datum/species/serpentid/handle_environment_special(var/mob/living/carbon/human/H)
+/decl/species/serpentid/handle_environment_special(var/mob/living/carbon/human/H)
 	if(!H.on_fire && H.fire_stacks < 2)
 		H.fire_stacks += 0.2
 	return
 
-/datum/species/serpentid/can_fall(var/mob/living/carbon/human/H)
+/decl/species/serpentid/can_fall(var/mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 	var/turf/T = GetBelow(H.loc)
 	for(var/obj/O in T)
@@ -343,7 +343,7 @@
 			return FALSE
 	return TRUE
 
-/datum/species/serpentid/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
+/decl/species/serpentid/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 	var/turf/T = GetBelow(H.loc)
@@ -364,13 +364,13 @@
 	return FALSE
 
 
-/datum/species/serpentid/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
+/decl/species/serpentid/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
 	if(!H.handcuffed || H.buckled)
 		return ..(H, ignore_intent, TRUE)
 	else
 		return 0
 
-/datum/species/serpentid/handle_movement_delay_special(var/mob/living/carbon/human/H)
+/decl/species/serpentid/handle_movement_delay_special(var/mob/living/carbon/human/H)
 	var/tally = 0
 
 	H.remove_cloaking_source(src)
@@ -381,7 +381,7 @@
 		tally += N.lowblood_tally * 2
 	return tally
 
-/datum/species/serpentid/update_skin(var/mob/living/carbon/human/H)
+/decl/species/serpentid/update_skin(var/mob/living/carbon/human/H)
 
 	if(H.stat)
 		H.skin_state = SKIN_NORMAL
@@ -420,7 +420,7 @@
 			return(threat_image)
 	return
 
-/datum/species/serpentid/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+/decl/species/serpentid/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
 	if(attacker.pulling_punches || target.lying || attacker == target)
 		return ..(attacker, target)
 	if(world.time < attacker.last_attack + 20)
@@ -437,21 +437,21 @@
 	if(prob(50))
 		target.set_dir(GLOB.reverse_dir[target.dir])
 
-/datum/species/serpentid/get_additional_examine_text(var/mob/living/carbon/human/H)
+/decl/species/serpentid/get_additional_examine_text(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	if(H.pulling_punches)
 		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
 	else
 		return "\n<span class='warning'>[T.His] upper arms are raised and [T.he] looks ready to attack!</span>"
 
-/datum/species/serpentid/handle_post_spawn(var/mob/living/carbon/human/H)
+/decl/species/serpentid/handle_post_spawn(var/mob/living/carbon/human/H)
 	..()
 	H.pulling_punches = TRUE
 
-/datum/species/serpentid/get_manual_dexterity(var/mob/living/carbon/human/H)
+/decl/species/serpentid/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = (H && H.pulling_punches) ? ..() : DEXTERITY_SIMPLE_MACHINES
 
-/datum/species/serpentid/toggle_stance(var/mob/living/carbon/human/H)
+/decl/species/serpentid/toggle_stance(var/mob/living/carbon/human/H)
 	if(H.incapacitated())
 		return FALSE
 	var/datum/gender/T = gender_datums[H.get_gender()]
@@ -466,7 +466,7 @@
 		to_chat(H, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")
 	return TRUE
 
-/datum/species/serpentid/proc/arm_swap(var/mob/living/carbon/human/H, var/forced)
+/decl/species/serpentid/proc/arm_swap(var/mob/living/carbon/human/H, var/forced)
 	H.unEquip(H.l_hand)
 	H.unEquip(H.r_hand)
 	var/hidden = H.is_cloaked()
@@ -489,7 +489,7 @@
 			H.visible_message("<span class='warning'>[H] tenses as [T.he] brings [T.his] smaller arms in close to [T.his] body. [T.His] two massive spiked arms reach \
 			out. [T.He] looks ready to attack.</span>")
 
-/datum/species/serpentid/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
+/decl/species/serpentid/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
 		if(0 to 18) 	. = 8
 		if(19 to 27) 	. = 2

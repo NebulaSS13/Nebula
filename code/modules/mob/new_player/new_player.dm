@@ -173,7 +173,7 @@
 		if(!SSjobs.check_general_join_blockers(src, job))
 			return FALSE
 
-		var/datum/species/S = get_species_by_key(client.prefs.species)
+		var/decl/species/S = decls_repository.get_decl(client.prefs.species)
 		if(!check_species_allowed(S))
 			return 0
 
@@ -443,9 +443,9 @@
 
 	var/mob/living/carbon/human/new_character
 
-	var/datum/species/chosen_species
+	var/decl/species/chosen_species
 	if(client.prefs.species)
-		chosen_species = get_species_by_key(client.prefs.species)
+		chosen_species = decls_repository.get_decl(client.prefs.species)
 
 	if(!spawn_turf)
 		var/datum/job/job = SSjobs.get_by_title(mind.assigned_role)
@@ -458,7 +458,7 @@
 		if(!check_species_allowed(chosen_species))
 			spawning = 0 //abort
 			return null
-		new_character = new(spawn_turf, chosen_species.name)
+		new_character = new(spawn_turf, chosen_species.type)
 		if(chosen_species.has_organ[BP_POSIBRAIN] && client && client.prefs.is_shackled)
 			var/obj/item/organ/internal/posibrain/B = new_character.internal_organs_by_name[BP_POSIBRAIN]
 			if(B)	B.shackle(client.prefs.get_lawset())
@@ -521,7 +521,7 @@
 	close_browser(src, "window=latechoices") //closes late choices window
 	panel.close()
 
-/mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
+/mob/new_player/proc/check_species_allowed(decl/species/S, var/show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
 		if(show_alert)
 			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
@@ -531,16 +531,6 @@
 			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
 		return 0
 	return 1
-
-/mob/new_player/get_species()
-	var/datum/species/chosen_species
-	if(client.prefs.species)
-		chosen_species = get_species_by_key(client.prefs.species)
-
-	if(!chosen_species || !check_species_allowed(chosen_species, 0))
-		return GLOB.using_map.default_species
-
-	return chosen_species.name
 
 /mob/new_player/get_gender()
 	if(!client || !client.prefs) ..()

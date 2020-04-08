@@ -329,6 +329,7 @@
 
 		if(limb_flags & ORGAN_FLAG_CAN_GRASP) owner.grasp_limbs[src] = TRUE
 		if(limb_flags & ORGAN_FLAG_CAN_STAND) owner.stance_limbs[src] = TRUE
+
 		owner.organs_by_name[organ_tag] = src
 		owner.organs |= src
 

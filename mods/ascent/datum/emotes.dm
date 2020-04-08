@@ -1,4 +1,4 @@
-/datum/species/mantid
+/decl/species/mantid
 	default_emotes = list(
 		/decl/emote/audible/ascent_purr,
 		/decl/emote/audible/ascent_hiss,

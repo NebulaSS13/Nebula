@@ -143,12 +143,12 @@
 			if(prob(15))
 				to_chat(owner, "<span class='warning'>You're almost unable to move!</span>")
 				if(!owner.pulling_punches)
-					var/datum/species/serpentid/nab = species
+					var/decl/species/serpentid/nab = species
 					nab.arm_swap(owner, TRUE)
 		if(-(INFINITY) to BLOOD_VOLUME_SURVIVE)
 			lowblood_tally = 10
 			if(prob(30) && !owner.pulling_punches)
-				var/datum/species/serpentid/nab = species
+				var/decl/species/serpentid/nab = species
 				nab.arm_swap(owner, TRUE)
 			if(prob(10))
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")

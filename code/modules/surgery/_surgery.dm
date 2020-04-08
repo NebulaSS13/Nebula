@@ -45,12 +45,12 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	if(allowed_species)
 		for(var/species in allowed_species)
-			if(target.species.get_root_species_name(target) == species)
+			if(target.species.get_root_type(target) == species)
 				return 1
 
 	if(disallowed_species)
 		for(var/species in disallowed_species)
-			if(target.species.get_root_species_name(target) == species)
+			if(target.species.get_root_type(target) == species)
 				return 0
 
 	return 1

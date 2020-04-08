@@ -26,16 +26,15 @@
 
 	if(!istype(T, /turf/space))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
-	for(var/species_name in get_all_species())
-		var/datum/species/S = get_species_by_key(species_name)
-		var/mob/living/carbon/human/H = new(T, S.name)
+	for(var/species_type in decls_repository.get_decls_of_type(/decl/species))
+		var/mob/living/carbon/human/H = new(T, species_type)
 		if(H.need_breathe())
 			var/species_organ = H.species.breathing_organ
 			var/obj/item/organ/internal/lungs/L
 			H.apply_effect(20, STUN, 0)
 			L = H.internal_organs_by_name[species_organ]
 			L.last_successful_breath = -INFINITY
-			test_subjects[S.name] = list(H, damage_check(H, OXY))
+			test_subjects[species_type] = list(H, damage_check(H, OXY))
 	return 1
 
 /datum/unit_test/human_breath/check_result()
@@ -302,8 +301,9 @@ datum/unit_test/mob_damage/halloss
 	var/failcount = 0
 
 /datum/unit_test/species_base_skin/start_test()
-	for(var/species_name in get_all_species())
-		var/datum/species/S = get_species_by_key(species_name)
+	var/list/all_species = decls_repository.get_decls_of_type(/decl/species)
+	for(var/species_type in all_species)
+		var/decl/species/S = all_species[species_type]
 		if(S.base_skin_colours)
 			if(!(S.appearance_flags & HAS_BASE_SKIN_COLOURS))
 				log_unit_test("[S.name] has a skin colour list but no HAS_BASE_SKIN_COLOURS flag.")
@@ -352,8 +352,8 @@ datum/unit_test/mob_damage/halloss
 
 /datum/unit_test/mob_nullspace/start_test()
 	// Simply create one of each species type in nullspace
-	for(var/species_name in get_all_species())
-		var/test_subject = new/mob/living/carbon/human(null, species_name)
+	for(var/species_type in decls_repository.get_decls_of_type(/decl/species))
+		var/test_subject = new/mob/living/carbon/human(null, species_type)
 		test_subjects += test_subject
 	return TRUE
 
@@ -373,13 +373,13 @@ datum/unit_test/mob_damage/halloss
 
 /datum/unit_test/mob_organ_size/start_test()
 	var/failed = FALSE
-	for(var/species_name in get_all_species())
-		var/mob/living/carbon/human/H = new(null, species_name)
+	for(var/species_type in decls_repository.get_decls_of_type(/decl/species))
+		var/mob/living/carbon/human/H = new(null, species_type)
 		for(var/obj/item/organ/external/E in H.organs)
 			for(var/obj/item/organ/internal/I in E.internal_organs)
 				if(I.w_class > E.cavity_max_w_class)
 					failed = TRUE
-					log_bad("Internal organ [I] inside external organ [E] on species [species_name] was too large to fit.")
+					log_bad("Internal organ [I] inside external organ [E] on [E.species] was too large to fit.")
 	if(failed)
 		fail("A mob had an internal organ too large for its external organ.")
 	else

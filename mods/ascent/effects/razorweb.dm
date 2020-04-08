@@ -30,9 +30,9 @@
 	var/image/gleam
 	var/image/web
 	var/global/species_immunity_list = list(
-		SPECIES_MANTID_ALATE   = TRUE,
-		SPECIES_MANTID_GYNE    = TRUE,
-		SPECIES_SERPENTID      = TRUE
+		/decl/species/mantid      = TRUE,
+		/decl/species/mantid/gyne = TRUE,
+		/decl/species/serpentid   = TRUE
 	)
 
 /obj/effect/razorweb/Destroy()

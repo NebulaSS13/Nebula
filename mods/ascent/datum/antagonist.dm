@@ -22,14 +22,14 @@ GLOBAL_DATUM_INIT(hunters, /datum/antagonist/hunter, new)
 	. = ..()
 	if(ishuman(player.current))
 		var/mob/living/carbon/human/H = player.current
-		if(!leader && is_species_whitelisted(player.current, SPECIES_MANTID_GYNE))
+		if(!leader && is_species_whitelisted(player.current, /decl/species/mantid/gyne))
 			leader = player
-			if(H.species.get_root_species_name() != SPECIES_MANTID_GYNE)
-				H.set_species(SPECIES_MANTID_GYNE)
+			if(H.species.type != /decl/species/mantid/gyne)
+				H.set_species(/decl/species/mantid/gyne)
 			H.gender = FEMALE
 		else
-			if(H.species.get_root_species_name() != SPECIES_MANTID_ALATE)
-				H.set_species(SPECIES_MANTID_ALATE)
+			if(H.species.type != /decl/species/mantid)
+				H.set_species(/decl/species/mantid)
 			H.gender = MALE
 		var/decl/cultural_info/culture/ascent/ascent_culture = SSlore.get_culture(CULTURE_ASCENT)
 		H.real_name = ascent_culture.get_random_name(H.gender)
@@ -38,7 +38,7 @@ GLOBAL_DATUM_INIT(hunters, /datum/antagonist/hunter, new)
 /datum/antagonist/hunter/equip(var/mob/living/carbon/human/player)
 	. = ..()
 	if(.)
-		if(player.species.get_root_species_name(player) == SPECIES_MANTID_GYNE)
+		if(player.species.get_root_type(player) == /decl/species/mantid/gyne)
 			equip_rig(/obj/item/rig/mantid/gyne, player)
 		else
 			equip_rig(/obj/item/rig/mantid, player)

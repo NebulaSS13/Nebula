@@ -185,13 +185,13 @@
 		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])].</span>")
 		return TRUE
 
-	var/datum/species/S = get_species_by_key(prefs.species)
+	var/decl/species/S = decls_repository.get_decl(prefs.species)
 	if(!is_species_allowed(S))
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
 
-	if(LAZYACCESS(minimum_character_age, S.get_root_species_name()) && (prefs.age < minimum_character_age[S.get_root_species_name()]))
-		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_root_species_name()]].</span>")
+	if(LAZYACCESS(minimum_character_age, S.get_root_name()) && (prefs.age < minimum_character_age[S.get_root_name()]))
+		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_root_name()]].</span>")
 		return TRUE
 
 	if(!S.check_background(src, prefs))
@@ -225,7 +225,7 @@
 			active++
 	return active
 
-/datum/job/proc/is_species_allowed(var/datum/species/S)
+/datum/job/proc/is_species_allowed(var/decl/species/S)
 	if(GLOB.using_map.is_species_job_restricted(S, src))
 		return FALSE
 	// We also make sure that there is at least one valid branch-rank combo for the species.
@@ -234,7 +234,7 @@
 	return LAZYLEN(get_branch_rank(S))
 
 // Don't use if the map doesn't use branches but jobs do.
-/datum/job/proc/get_branch_rank(var/datum/species/S)
+/datum/job/proc/get_branch_rank(var/decl/species/S)
 	. = species_branch_rank_cache_[S]
 	if(.)
 		return
@@ -350,7 +350,7 @@
 		reasons["Your branch of service does not allow it."] = TRUE
 	else if(!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
 		reasons["Your rank choice does not allow it."] = TRUE
-	var/datum/species/S = get_species_by_key(caller.prefs.species)
+	var/decl/species/S = decls_repository.get_decl(caller.prefs.species)
 	if(S)
 		if(!is_species_allowed(S))
 			reasons["Your species choice does not allow it."] = TRUE

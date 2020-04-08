@@ -1,8 +1,4 @@
-#define SPECIES_SERPENTID      "Serpentid"
-#define SPECIES_MANTID_ALATE   "Kharmaan Alate"
-#define SPECIES_MANTID_GYNE    "Kharmaan Gyne"
-
-#define BODYTYPE_SNAKE "Snakelike Body"
+#define BODYTYPE_SNAKE        "Snakelike Body"
 #define BODYTYPE_MANTID_SMALL "Small Mantid Body"
 #define BODYTYPE_MANTID_LARGE "Large Mantid Body"
 
@@ -22,7 +18,7 @@
 ##_thing/ascent/desc = "Some kind of strange alien " + _desc + " technology."; \
 ##_thing/ascent/color = COLOR_PURPLE;
 
-#define ALL_ASCENT_SPECIES list(SPECIES_MANTID_ALATE, SPECIES_MANTID_GYNE, SPECIES_SERPENTID)
+#define ALL_ASCENT_SPECIES list(/decl/species/mantid, /decl/species/mantid/gyne, /decl/species/serpentid)
 
 /decl/modpack/ascent
 	name = "The Ascent"

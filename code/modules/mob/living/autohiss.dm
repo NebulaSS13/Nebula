@@ -9,12 +9,12 @@
 		return message
 	return species.handle_autohiss(message, L, get_preference_value(/datum/client_preference/autohiss))
 
-/datum/species
+/decl/species
 	var/list/autohiss_basic_map = null
 	var/list/autohiss_extra_map = null
 	var/list/autohiss_exempt = null
 
-/datum/species/proc/handle_autohiss(message, decl/language/lang, mode)
+/decl/species/proc/handle_autohiss(message, decl/language/lang, mode)
 	if(!autohiss_basic_map)
 		return message
 	if(lang.flags & NO_STUTTER)	// Currently prevents EAL, Sign language, and emotes from autohissing

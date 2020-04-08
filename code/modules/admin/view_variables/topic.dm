@@ -324,7 +324,11 @@
 			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
 			return
 
-		var/new_species = input("Please choose a new species.","Species",null) as null|anything in get_all_species()
+		var/list/all_species = decls_repository.get_decls_of_type(/decl/species)
+		var/list/species_choices = list()
+		for(var/t in all_species)
+			species_choices += all_species[t]
+		var/new_species = input("Please choose a new species.","Species",null) as null|anything in species_choices
 
 		if(!H)
 			to_chat(usr, "Mob doesn't exist anymore")

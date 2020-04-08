@@ -177,12 +177,12 @@
 	name = "human mask"
 	desc = "A rubber human mask."
 	icon_state = "manmet"
-	var/species = SPECIES_HUMAN
+	var/species = /decl/species/human
 
 /obj/item/clothing/mask/rubber/species/Initialize()
 	. = ..()
 	visible_name = species
-	var/datum/species/S = get_species_by_key(species)
+	var/decl/species/S = decls_repository.get_decl(species)
 	if(istype(S))
 		var/decl/cultural_info/C = SSlore.get_culture(S.default_cultural_info[TAG_CULTURE])
 		if(istype(C))

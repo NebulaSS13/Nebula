@@ -271,11 +271,6 @@
 #define CORPSE_CAN_REENTER 1
 #define CORPSE_CAN_REENTER_AND_RESPAWN 2
 
-#define SPECIES_HUMAN            "Human"
-#define SPECIES_MONKEY           "Monkey"
-#define SPECIES_ALIEN            "Humanoid"
-#define SPECIES_GOLEM            "Golem"
-
 #define BODYTYPE_HUMANOID        "Humanoid Body"
 #define BODYTYPE_OTHER           "Alien Body"
 #define BODYTYPE_MONKEY          "Small Humanoid Body"

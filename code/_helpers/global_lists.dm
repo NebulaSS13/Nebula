@@ -95,30 +95,19 @@ var/global/list/string_slot_flags = list(
 
 	return 1
 
-// This is all placeholder procs for an eventual PR to change them to use decls.
-var/list/all_species
-var/list/playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise.
+var/list/playable_species
 /proc/build_species_lists()
-	if(global.all_species && global.playable_species)
+	if(global.playable_species)
 		return
 	global.playable_species = list()
-	global.all_species = list()
-	for(var/species_type in typesof(/datum/species))
-		var/datum/species/species = species_type
+	var/list/all_species = decls_repository.get_decls_of_type(/decl/species)
+	for(var/species_type in all_species)
+		var/decl/species/species = all_species[species_type]
 		var/species_name = initial(species.name)
-		if(species_name)
-			global.all_species[species_name] = new species
-			species = get_species_by_key(species_name)
-			if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
-				global.playable_species += species.name
+		if(species_name && !(species.spawn_flags & SPECIES_IS_RESTRICTED))
+			global.playable_species += species.type
 	if(GLOB.using_map.default_species)
 		global.playable_species |= GLOB.using_map.default_species
-/proc/get_species_by_key(var/species_key)
-	build_species_lists()
-	. = global.all_species[species_key]
-/proc/get_all_species()
-	build_species_lists()
-	. = global.all_species
 /proc/get_playable_species()
 	build_species_lists()
 	. = global.playable_species

@@ -29,7 +29,7 @@
 
 	var/decl/cultural_info/culture = SSlore.get_culture(cultural_info[TAG_CULTURE])
 	if(culture)
-		real_name = culture.get_random_name(gender, species.name)
+		real_name = culture.get_random_name(gender)
 		name = real_name
 		if(mind)
 			mind.name = real_name
@@ -632,11 +632,6 @@
 	dna.check_integrity(src)
 	return
 
-/mob/living/carbon/human/get_species()
-	if(!species)
-		set_species()
-	return species.name
-
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
 		visible_message("<span class='warning'>\The [src] begins playing \his ribcage like a xylophone. It's quite spooky.</span>","<span class='notice'>You begin to play a spooky refrain on your ribcage.</span>","<span class='warning'>You hear a spooky xylophone melody.</span>")
@@ -1063,22 +1058,16 @@
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
 
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
-	if(!dna)
-		if(!new_species)
-			new_species = GLOB.using_map.default_species
-	else
-		if(!new_species)
-			new_species = dna.species
 
-	// No more invisible screaming wheelchairs because of set_species() typos.
-	if(!get_species_by_key(new_species))
-		new_species = GLOB.using_map.default_species
+	if(!ispath(new_species, /decl/species))
+		new_species = dna?.species || GLOB.using_map.default_species
+
 	if(dna)
 		dna.species = new_species
 
 	if(species)
 
-		if(species.name && species.name == new_species)
+		if(species.type == new_species)
 			return
 
 		// Clear out their species abilities.
@@ -1086,7 +1075,7 @@
 		species.remove_inherent_verbs(src)
 		holder_type = null
 
-	species = get_species_by_key(new_species)
+	species = decls_repository.get_decl(new_species)
 	species.handle_pre_spawn(src)
 
 	if(species.base_color && default_colour)

@@ -1,5 +1,5 @@
-/datum/species/golem
-	name = SPECIES_GOLEM
+/decl/species/golem
+	name = "Golem"
 	name_plural = "Golems"
 
 	icobase = 'icons/mob/human_races/species/golem/body.dmi'
@@ -44,7 +44,7 @@
 		TAG_FACTION =   FACTION_OTHER
 	)
 
-/datum/species/golem/handle_post_spawn(var/mob/living/carbon/human/H)
+/decl/species/golem/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(H.mind)
 		H.mind.reset()
 		H.mind.assigned_role = "Golem"

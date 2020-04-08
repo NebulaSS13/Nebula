@@ -10,7 +10,7 @@
 	throw_range = 3
 	force = 15
 	var/list/potentials = list(
-		SPECIES_HUMAN = /obj/item/storage/bag/cash/infinite
+		/decl/species/human = /obj/item/storage/bag/cash/infinite
 	)
 
 /obj/item/magic_rock/attack_self(mob/user)
@@ -18,7 +18,7 @@
 		to_chat(user, "\The [src] can do nothing for such a simple being.")
 		return
 	var/mob/living/carbon/human/H = user
-	var/reward = potentials[H.species.get_root_species_name(H)] //we get body type because that lets us ignore subspecies.
+	var/reward = potentials[H.species.get_root_type(H)] 
 	if(!reward)
 		to_chat(user, "\The [src] does not know what to make of you.")
 		return

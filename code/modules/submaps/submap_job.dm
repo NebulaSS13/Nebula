@@ -56,7 +56,7 @@
 		owner = _owner
 		..()
 
-/datum/job/submap/is_species_allowed(var/datum/species/S)
+/datum/job/submap/is_species_allowed(var/decl/species/S)
 	if(LAZYLEN(whitelisted_species) && !(S.name in whitelisted_species))
 		return FALSE
 	if(S.name in blacklisted_species)
@@ -69,9 +69,9 @@
 	return TRUE
 
 /datum/job/submap/is_restricted(var/datum/preferences/prefs, var/feedback)
-	var/datum/species/S = get_species_by_key(prefs.species)
-	if(LAZYACCESS(minimum_character_age, S.get_root_species_name()) && (prefs.age < minimum_character_age[S.get_root_species_name()]))
-		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_root_species_name()]].</span>")
+	var/decl/species/S = decls_repository.get_decl(prefs.species)
+	if(LAZYACCESS(minimum_character_age, S.get_root_name()) && (prefs.age < minimum_character_age[S.get_root_name()]))
+		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_root_name()]].</span>")
 		return TRUE
 	if(LAZYLEN(whitelisted_species) && !(prefs.species in whitelisted_species))
 		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor].</span>")

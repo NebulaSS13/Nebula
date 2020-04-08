@@ -45,7 +45,7 @@
 		/obj/item/rig_module/maneuvering_jets
 		)
 	req_access = list(access_ascent)
-	var/mantid_caste = SPECIES_MANTID_ALATE
+	var/mantid_caste = /decl/species/mantid
 
 // Renamed blade.
 /obj/item/rig_module/mounted/energy_blade/mantid
@@ -226,7 +226,7 @@
 		rad = ARMOR_RAD_SHIELDED
 	)
 	icon_override = 'mods/ascent/icons/species/mantid/onmob_back_gyne.dmi'
-	mantid_caste = SPECIES_MANTID_GYNE
+	mantid_caste = /decl/species/mantid/gyne
 	initial_modules = list(
 		/obj/item/rig_module/vision/thermal,
 		/obj/item/rig_module/ai_container,
@@ -246,7 +246,7 @@
 /obj/item/rig/mantid/serpentid
 	name = "serpentid support exosuit"
 	icon_override = 'mods/ascent/icons/species/serpentid/onmob_back_serpentid.dmi'
-	mantid_caste = SPECIES_SERPENTID
+	mantid_caste = /decl/species/serpentid
 	air_type =   /obj/item/tank/mantid/reactor/oxygen
 	chest_type = /obj/item/clothing/suit/space/rig/mantid/serpentid
 	boot_type =  null
@@ -258,7 +258,7 @@
 	. = ..()
 	if(. && slot == slot_back)
 		var/mob/living/carbon/human/H = M
-		if(!istype(H) || H.species.get_root_species_name(H) != mantid_caste)
+		if(!istype(H) || H.species.get_root_type(H) != mantid_caste)
 			to_chat(H, "<span class='danger'>Your species cannot wear \the [src].</span>")
 			. = 0
 

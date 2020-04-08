@@ -41,4 +41,4 @@
 
 /mob/living/carbon/human/monkey/Initialize(mapload)
 	gender = pick(MALE, FEMALE)
-	. = ..(mapload, SPECIES_MONKEY)
+	. = ..(mapload, /decl/species/monkey)

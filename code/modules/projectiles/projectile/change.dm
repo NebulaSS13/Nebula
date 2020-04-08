@@ -30,12 +30,15 @@
 		var/mob/living/new_mob
 
 		var/options = list("robot", "slime")
-		for(var/t in get_all_species())
-			options += t
+		var/list/t_species = decls_repository.get_decls_of_type(/decl/species)
+		for(var/t in t_species)
+			var/decl/species/S = t_species[t]
+			if(S.name)
+				options += S.type
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.species)
-				options -= H.species.name
+				options -= H.species.type
 		else if(isrobot(M))
 			options -= "robot"
 		else if(isslime(M))

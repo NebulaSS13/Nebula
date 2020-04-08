@@ -17,10 +17,10 @@
 
 ///////////////////////////////////crew and prisoners
 /obj/effect/landmark/corpse/lar_maria
-	eye_colors_per_species = list(SPECIES_HUMAN = list(COLOR_RED))//red eyes
-	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
-	facial_styles_per_species = list(SPECIES_HUMAN = list("Shaved"))
-	genders_per_species = list(SPECIES_HUMAN = list(MALE))
+	eye_colors_per_species = list(/decl/species/human = list(COLOR_RED))//red eyes
+	skin_tones_per_species = list(/decl/species/human = list(-15))
+	facial_styles_per_species = list(/decl/species/human = list("Shaved"))
+	genders_per_species = list(/decl/species/human = list(MALE))
 
 /mob/living/simple_animal/hostile/lar_maria
 	name = "Lar Maria hostile mob"
@@ -80,10 +80,10 @@
 /obj/effect/landmark/corpse/lar_maria/zhp_guard
 	name = "dead guard"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_guard)
-	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
+	skin_tones_per_species = list(/decl/species/human = list(-15))
 
 /obj/effect/landmark/corpse/lar_maria/zhp_guard/dark
-	skin_tones_per_species = list(SPECIES_HUMAN = list(-115))
+	skin_tones_per_species = list(/decl/species/human = list(-115))
 
 /decl/hierarchy/outfit/corpse/zhp_guard
 	name = "Dead ZHP guard"
@@ -161,9 +161,9 @@
 /obj/effect/landmark/corpse/lar_maria/virologist_female
 	name = "dead virologist"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_virologist_female)
-	hair_styles_per_species = list(SPECIES_HUMAN = list("Flaired Hair"))
-	hair_colors_per_species = list(SPECIES_HUMAN = list("#ae7b48"))
-	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
+	hair_styles_per_species = list(/decl/species/human = list("Flaired Hair"))
+	hair_colors_per_species = list(/decl/species/human = list("#ae7b48"))
+	genders_per_species = list(/decl/species/human = list(FEMALE))
 
 /decl/hierarchy/outfit/corpse/zhp_virologist_female
 	name = "Dead female ZHP virologist"

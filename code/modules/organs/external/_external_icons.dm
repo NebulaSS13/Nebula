@@ -21,7 +21,7 @@ var/list/limb_icon_cache = list()
 		var/datum/robolimb/franchise = all_robolimbs[model]
 		if(!(franchise && franchise.skintone))
 			return
-	if(species && human.species && species.name != human.species.name)
+	if(species && human.species && species != human.species)
 		return
 	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
 		s_tone = human.s_tone

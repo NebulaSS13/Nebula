@@ -59,7 +59,7 @@
 	var/mob/M = targets[target]
 
 	if(isghost(M) || M.stat == DEAD)
-		to_chat(src, "<span class='warning'>Not even a [src.species.name] can speak to the dead.</span>")
+		to_chat(src, "<span class='warning'>Not even \a [species] can speak to the dead.</span>")
 		return
 
 	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
@@ -67,7 +67,7 @@
 	to_chat(M, "<span class='notice'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i></span>")
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(H.species.name == src.species.name)
+		if(H.species == species)
 			return
 		if(prob(75))
 			to_chat(H, "<span class='warning'>Your nose begins to bleed...</span>")
