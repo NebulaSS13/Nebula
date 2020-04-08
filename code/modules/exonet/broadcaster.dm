@@ -1,8 +1,7 @@
 /obj/machinery/computer/exonet/broadcaster
 	ui_template = "exonet_router_configuration.tmpl"
 
-	var/datum/exonet/network	// This is a hard reference back to the attached network. Primarily for serialization purposes on persistence.
-	var/error					// Error to display on the interface.
+	var/datum/exonet/network				// This is a hard reference back to the attached network. Primarily for serialization purposes on persistence.
 	var/signal_strength	= 20				// The range in tiles that the broadcaster is capable of transmitting.
 	var/broadcasting_ennid					// The exonet network id being broadcast.
 

@@ -6,20 +6,13 @@
 	// These are program stateful variables.
 	var/file_server							// What file_server we're viewing. This is a net_tag or other.
 	var/editing_user						// If we're editing a user, it's assigned here.
-	var/error								// Currently displayed error.
 	var/obj/item/card/id/stored_card	// The ID card currently stored.
-
-/obj/machinery/computer/exonet/access_directory/on_update_icon()
-	if(operable())
-		icon_state = "bus"
-	else
-		icon_state = "bus_off"
 
 /obj/machinery/computer/exonet/access_directory/proc/get_default_mainframe()
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 	var/list/mainframes = exonet.get_mainframes()
 	if(length(mainframes) <= 0)
-		.["error"] = "NETWORK ERROR: No mainframes are available for storing security records."
+		error = "NETWORK ERROR: No mainframes are available for storing security records."
 		return .
 	var/obj/machinery/computer/exonet/mainframe/MF = mainframes[1]
 	return MF
@@ -61,15 +54,16 @@
 		return
 	return ..()
 
-/obj/machinery/computer/exonet/access_directory/Topic(href, href_list)
+/obj/machinery/computer/exonet/access_directory/clear_errors()
+	..()
+	editing_user = null
+
+/obj/machinery/computer/exonet/access_directory/OnTopic(var/mob/user, href_list)
 	if(..())
-		return TOPIC_HANDLED
+		return TOPIC_REFRESH
+	. = TOPIC_REFRESH
 
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-
-	if(href_list["PRG_back"])
-		error = null
-		editing_user = null
 
 	if(href_list["PRG_changefileserver"])
 		var/old_value = file_server
@@ -91,46 +85,46 @@
 		var/datum/computer_file/report/crew_record/AR = get_access_record()
 		if(!AR)
 			error = "ERROR: Access record not found."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		AR.add_grant(grant) // Add the grant to the record.
 	if(href_list["PRG_removegrant"])
 		var/datum/computer_file/report/crew_record/AR = get_access_record()
 		if(!AR)
 			error = "ERROR: Access record not found."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		AR.remove_grant(href_list["PRG_removegrant"]) // Add the grant to the record.
 	if(href_list["PRG_creategrant"])
 		var/new_grant_name = uppertext(sanitize(input(usr, "Enter the name of the new grant:", "Create Grant")))
 		if(!new_grant_name)
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
 		if(!mainframe)
 			error = "NETWORK ERROR: Lost connection to mainframe. Unable to save new grant."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		var/datum/computer_file/data/grant_record/new_grant = new()
 		new_grant.stored_data = new_grant_name
 		new_grant.filename = new_grant_name
 		new_grant.calculate_size()
 		if(!mainframe.store_file(new_grant))
 			error = "MAINFRAME ERROR: Unable to store grant on mainframe."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 	if(href_list["PRG_deletegrant"])
 		var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
 		if(!mainframe)
 			error = "NETWORK ERROR: Lost connection to mainframe."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		mainframe.delete_file_by_name(href_list["PRG_deletegrant"])
 	if(href_list["PRG_adduser"])
 		var/new_user_id = new_guid()
 		var/new_user_name = sanitize(input(usr, "Enter user's desired name or leave blank to cancel:", "Add New User"))
 		if(!new_user_name)
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		// TODO: Add a check to see if this user actually exists if PLEXUS is online.
 		// Add the record.
 		var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
 		if(!mainframe)
 			error = "NETWORK ERROR: Lost connection to mainframe. Unable to save user access record."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		var/datum/computer_file/report/crew_record/new_record = new()
 		new_record.filename = "[replacetext(new_user_name, " ", "_")]"
 		new_record.user_id = new_user_id
@@ -139,7 +133,7 @@
 		new_record.calculate_size()
 		if(!mainframe.store_file(new_record))
 			error = "MAINFRAME ERROR: Unable to store record on mainframe."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		editing_user = new_user_id
 	if(href_list["PRG_viewuser"])
 		editing_user = href_list["PRG_viewuser"]
@@ -147,28 +141,28 @@
 		var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
 		if(!mainframe)
 			error = "NETWORK ERROR: Lost connection to mainframe."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		var/datum/computer_file/report/crew_record/AR = get_access_record(href_list["PRG_rename"])
 		if(!AR)
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		mainframe.delete_file_by_name(AR.filename)
 	if(href_list["PRG_rename"])
 		var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
 		if(!mainframe)
 			error = "NETWORK ERROR: Lost connection to mainframe."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		var/new_user_name = sanitize(input(usr, "Enter user's new desired name or leave blank to cancel:", "Rename User"))
 		if(!new_user_name)
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		var/datum/computer_file/report/crew_record/AR = get_access_record(href_list["PRG_rename"])
 		if(!AR)
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		AR.set_name(new_user_name)
 	if(href_list["PRG_printid"])
 		var/obj/item/card/id/exonet/card = stored_card
 		if(!card)
 			error = "HARDWARE ERROR: No valid card inserted."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		// Write to the card.
 		var/datum/computer_file/report/crew_record/AR = get_access_record()
 		card.ennid = AR.ennid
@@ -179,7 +173,7 @@
 	if(href_list["PRG_ejectid"])
 		if(!stored_card)
 			error = "HARDWARE ERROR: No valid card inserted."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		visible_message(SPAN_NOTICE("\The [src] clunks noisily as it ejects \a [stored_card]."))
 		stored_card.dropInto(loc)
 		stored_card = null
@@ -187,22 +181,19 @@
 		var/datum/exonet/network = exonet.get_local_network()
 		if(!network)
 			error = "NETWORK ERROR: Connection lost."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		network.administrators += editing_user
 	if(href_list["PRG_removeadmin"])
 		var/datum/exonet/network = exonet.get_local_network()
 		if(!network)
 			error = "NETWORK ERROR: Connection lost."
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		network.administrators -= editing_user
-	. = TOPIC_REFRESH
-
 
 /obj/machinery/computer/exonet/access_directory/build_ui_data()
 	. = ..()
 
 	if(error)
-		.["error"] = error
 		return .
 
 	.["card_inserted"] = !!stored_card

@@ -179,17 +179,5 @@
 	for(var/datum/computer_file/program/P in running_programs)
 		P.event_idremoved(P != active_program)
 
-/datum/extension/interactive/ntos/proc/has_terminal(mob/user)
-	for(var/datum/terminal/terminal in terminals)
-		if(terminal.get_user() == user)
-			return terminal
-
-/datum/extension/interactive/ntos/proc/open_terminal(mob/user)
-	if(!on)
-		return
-	if(has_terminal(user))
-		return
-	LAZYADD(terminals, new /datum/terminal/(user, src))
-
 /datum/extension/interactive/ntos/proc/emagged()
 	return FALSE

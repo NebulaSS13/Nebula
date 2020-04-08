@@ -3,6 +3,52 @@
 	var/ennid 		// Exonet network id. This is the name of the network we're connected to.
 	var/netspeed	// How this device has connected to the network.
 
+// Convenience function for OnTopic usages when we need to prompt the user to change their network ennid. DRY impl.
+/datum/extension/exonet_device/proc/do_change_ennid(var/mob/user)
+	var/list/result = list()
+
+	var/new_ennid = sanitize(input(user, "Enter exonet ennid or leave blank to cancel:", "Change ENNID"))
+	if(!new_ennid)
+		return
+	var/new_key = sanitize(input(user, "Enter exonet keypass or leave blank if none:", "Change Key"))
+
+	var/found = FALSE
+	for(var/datum/exonet/network in get_nearby_networks(netspeed))
+		if(network.ennid == new_ennid)
+			// We found our network.
+			result["ennid"] = new_ennid
+			result["key"] = new_key
+			found = TRUE
+	if(!found)
+		var/network_list = list()
+		for(var/datum/exonet/network in get_nearby_networks(netspeed))
+			network_list |= network.ennid
+		if(!length(network_list))
+			network_list |= "None"
+		result["error"] = "Unable to find network with ennid '[new_ennid]'. Available networks: [jointext(network_list, ", ")]."
+	return result
+
+/datum/extension/exonet_device/proc/do_change_net_tag(var/mob/user)
+	var/list/result = list()
+
+	var/new_tag = sanitize(input(user, "Enter exonet network tag or leave blank to cancel:", "Change Network Tag"))
+	if(!new_tag)
+		return
+
+	var/datum/exonet/network = get_local_network()
+	if(!network)
+		result["error"] = "Cannot change network tag while disconnected from network."
+		return result
+	for(var/network_device in network.network_devices)
+		if(lowertext(get_network_tag(network_device)) == lowertext(new_tag))
+			result["error"] = "Network tags must be unique."
+			return result
+	result["net_tag"] = new_tag
+	return result
+
+/datum/extension/exonet_device/proc/do_change_key(var/mob/user)
+
+
 /datum/extension/exonet_device/proc/connect_network(var/mob/user, var/new_ennid, var/nic_netspeed, var/keydata)
 	if(ennid == new_ennid)
 		return "\The [holder] is already part of the '[ennid]' network."

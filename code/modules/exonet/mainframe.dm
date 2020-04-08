@@ -1,6 +1,7 @@
 /obj/machinery/computer/exonet/mainframe
 	name = "EXONET Mainframe"
 	desc = "A very complex mainframe capable of storing massive amounts of data. Looks fragile."
+	ui_template = "exonet_mainframe.tmpl"
 	active_power_usage = 10 KILOWATTS
 	maximum_component_parts = list(
 		/obj/item/stock_parts = 10,
@@ -154,3 +155,8 @@
 /obj/machinery/computer/exonet/mainframe/RefreshParts()
 	recalculate_size()
 	..()
+
+/obj/machinery/computer/exonet/mainframe/OnTopic(href, href_list)
+	if(..())
+		return TOPIC_HANDLED
+	

@@ -109,10 +109,6 @@
 		set_autorun(href_list["PC_setautorun"])
 		return TOPIC_REFRESH
 
-	if( href_list["PC_terminal"] )
-		open_terminal(usr)
-		return TOPIC_HANDLED
-
 /datum/extension/interactive/ntos/proc/regular_ui_update()
 	var/ui_update_needed = 0
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)

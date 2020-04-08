@@ -107,13 +107,6 @@
 			extra_power += part.power_usage
 	change_power_consumption(initial(active_power_usage) + extra_power, POWER_USE_ACTIVE)
 
-/obj/machinery/computer/modular/CtrlAltClick(mob/user)
-	if(!CanPhysicallyInteract(user))
-		return
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		os.open_terminal(user)
-
 /obj/machinery/computer/modular/verb/emergency_shutdown()
 	set name = "Forced Shutdown"
 	set category = "Object"

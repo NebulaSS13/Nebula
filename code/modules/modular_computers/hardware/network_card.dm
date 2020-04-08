@@ -50,14 +50,7 @@
 	hardware_size = 3
 
 // Returns a string identifier of this network card
-/obj/item/stock_parts/computer/network_card/proc/get_network_tag(list/routed_through) // Argument is a safety parameter for internal calls. Don't use manually.
-	// if(proxy_id && !(src in routed_through))
-	// 	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
-	// 	if(comp) // If not we default to exposing ourselves, but it means there was likely a logic error elsewhere.
-	// 		LAZYADD(routed_through, src)
-	// 		var/obj/item/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
-	// 		if(network_card)
-	// 			return network_card.get_network_tag(routed_through)
+/obj/item/stock_parts/computer/network_card/proc/get_network_tag()
 	return "[identification_string] (NID [identification_id])"
 
 /obj/item/stock_parts/computer/network_card/proc/is_banned()
@@ -75,7 +68,7 @@
 	return strength
 
 // 0 - No signal, 1 - Low signal, 2 - High signal. 3 - Wired Connection
-/obj/item/stock_parts/computer/network_card/proc/get_signal(var/specific_action = 0, list/routed_through)
+/obj/item/stock_parts/computer/network_card/proc/get_signal(var/specific_action = 0)
 	. = 0
 	if(!enabled || !check_functionality())
 		return

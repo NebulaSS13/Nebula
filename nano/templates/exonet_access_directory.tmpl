@@ -2,8 +2,14 @@
 	<h2>An error has occured:</h2>
 	Additional information: {{:data.error}}<br>
 	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
-	{{:helper.link('Back to menu', null, { "PRG_back" : 1 })}}
+	<div class="item">
+		{{:helper.link('Refresh', null, { "refresh" : 1 })}}
+		{{:helper.link('Options', null, { "options" : 1 })}}
+	</div>
 {{else}}
+	<div class="itemContent">
+		{{:helper.link('Options', null, { "options" : 1 })}}
+	</div>
 	<h2>Viewing File System:</h2>
 	<div class='item'>
 		{{:helper.link(data.file_server, null, { "PRG_changefileserver" : 1 })}}
