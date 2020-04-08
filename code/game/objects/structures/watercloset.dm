@@ -498,7 +498,7 @@
 /obj/item/taperoll/bog
 	name = "toilet paper roll"
 	icon = 'icons/obj/watercloset.dmi'
-	desc = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to SolGov's 'Abuse Of The Trees Act'."
+	desc = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to the government's 'Abuse Of The Trees Act'."
 	tape_type = /obj/item/tape/bog
 	icon_state = "bogroll"
 	item_state = "mummy_poor"
@@ -513,27 +513,20 @@
 	detail_overlay = "stripes"
 	detail_color = COLOR_WHITE
 
-/obj/item/tape/bog
-	name = "toilet paper"
-	desc = "A length of toilet paper. Seems like custodia is marking their territory again."
-	icon_base = "stripetape"
-	color = COLOR_WHITE
-	detail_overlay = "stripes"
-	detail_color = COLOR_WHITE
-
 /obj/item/taperoll/bog/verb/tear_sheet()
 	set category = "Object"
 	set name = "Tear Sheet"
 	set desc = "Tear a sheet of toilet paper."
+	set src in usr
 	if (usr.incapacitated())
 		return
 	if(sheets > 0)
-		visible_message("\The [usr] tears a sheet from \the [src].", "You tear a sheet from \the [src].")
+		visible_message(SPAN_NOTICE("\The [usr] tears a sheet from \the [src]."), SPAN_NOTICE("You tear a sheet from \the [src]."))
 		var/obj/item/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
 		sheets--
 	if (sheets < 1)
-		to_chat(usr, "\The [src] is depleted.")
+		to_chat(usr, SPAN_WARNING("\The [src] is depleted."))
 		qdel(src)
 
 /obj/item/paper/crumpled/bog
