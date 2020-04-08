@@ -79,7 +79,7 @@ var/list/limb_icon_cache = list()
 	if(species.base_skin_colours && !isnull(species.base_skin_colours[s_base]))
 		icon_state += species.base_skin_colours[s_base]
 
-	icon_cache_key = "[icon_state]_[species ? species.name : SPECIES_HUMAN]"
+	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"]"
 
 	if(force_icon)
 		icon = force_icon
@@ -166,8 +166,8 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 
 	if(species.limbs_are_nonsolid)
 		applying.MapColors("#4d4d4d","#969696","#1c1c1c", "#000000")
-		if(species && species.get_bodytype(owner) != SPECIES_HUMAN)
-			applying.SetIntensity(1.5)
+		if(species)
+			applying.SetIntensity(species.limb_icon_intensity)
 		else
 			applying.SetIntensity(0.7)
 		applying += rgb(,,,180) // Makes the icon translucent, SO INTUITIVE TY BYOND

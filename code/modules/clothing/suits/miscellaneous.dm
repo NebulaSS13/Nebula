@@ -255,31 +255,31 @@
 /obj/item/clothing/suit/poncho/colored
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "classicponcho"
 
 /obj/item/clothing/suit/poncho/colored/green
 	name = "green poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is green."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "greenponcho"
 
 /obj/item/clothing/suit/poncho/colored/red
 	name = "red poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is red."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "redponcho"
 
 /obj/item/clothing/suit/poncho/colored/purple
 	name = "purple poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is purple."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "purpleponcho"
 
 /obj/item/clothing/suit/poncho/colored/blue
 	name = "blue poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is blue."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "blueponcho"
 
 /obj/item/clothing/suit/storage/toggle/bomber
@@ -360,25 +360,25 @@
 /obj/item/clothing/suit/poncho/roles/security
 	name = "security poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is black and red, which are standard Security colors."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "secponcho"
 
 /obj/item/clothing/suit/poncho/roles/medical
 	name = "medical poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is white with a blue tint, which are standard Medical colors."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "medponcho"
 
 /obj/item/clothing/suit/poncho/roles/engineering
 	name = "engineering poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, which are standard Engineering colors."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "engiponcho"
 
 /obj/item/clothing/suit/poncho/roles/cargo
 	name = "cargo poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, which are standard Cargo colors."
-	species_restricted = null
+	bodytype_restricted = null
 	icon_state = "cargoponcho"
 
 /*

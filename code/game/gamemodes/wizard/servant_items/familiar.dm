@@ -12,7 +12,7 @@
 		laser = ARMOR_LASER_MINOR, 
 		energy = ARMOR_ENERGY_SMALL
 	)
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 /obj/item/clothing/under/familiargard/Initialize()
 	. = ..()

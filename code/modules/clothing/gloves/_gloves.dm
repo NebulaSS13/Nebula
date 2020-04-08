@@ -10,7 +10,7 @@
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
 	blood_overlay_type = "bloodyhands"
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 	var/obj/item/clothing/ring/ring = null		//Covered ring
 	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping

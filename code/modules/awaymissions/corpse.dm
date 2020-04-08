@@ -22,7 +22,7 @@
 
 /obj/effect/landmark/corpse
 	name = "Unknown"
-	var/species = list(SPECIES_HUMAN)                 // List of species to pick from.
+	var/species                                       // List of species to pick from.
 	var/corpse_outfits = list(/decl/hierarchy/outfit) // List of outfits to pick from. Uses pickweight()
 	var/spawn_flags = (~0)
 
@@ -36,7 +36,8 @@
 
 /obj/effect/landmark/corpse/Initialize()
 	..()
-	var/species_choice = pickweight(species)
+	if(!species) species = GLOB.using_map.default_species
+	var/species_choice = islist(species) ? pickweight(species) : species 
 	new/mob/living/carbon/human/corpse (loc, species_choice, src)
 	return INITIALIZE_HINT_QDEL
 

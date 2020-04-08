@@ -55,7 +55,7 @@
 		to_chat(user, "You set about modifying the helmet into [src].")
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			species_restricted = list(H.species.get_bodytype(H))
+			bodytype_restricted = list(H.species.get_bodytype(H))
 		kit.use(1,user)
 		return 1
 	return ..()
@@ -74,7 +74,7 @@
 		to_chat(user, "You set about modifying the suit into [src].")
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			species_restricted = list(H.species.get_bodytype(H))
+			bodytype_restricted = list(H.species.get_bodytype(H))
 		kit.use(1,user)
 		return 1
 	return ..()

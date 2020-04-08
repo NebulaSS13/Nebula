@@ -9,7 +9,7 @@
 		energy = ARMOR_ENERGY_SMALL, 
 		rad = ARMOR_RAD_SHIELDED
 	)
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 	flags_inv = HIDEEARS | BLOCKHAIR
 
 /obj/item/clothing/suit/caretakercloak
@@ -28,7 +28,7 @@
 	name = "caretaker's jumpsuit"
 	desc = "A holy jumpsuit. Treat it well."
 	icon_state = "caretaker"
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 /obj/item/clothing/shoes/dress/caretakershoes
 	name = "black leather shoes"

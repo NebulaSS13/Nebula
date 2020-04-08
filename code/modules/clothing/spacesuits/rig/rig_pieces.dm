@@ -10,7 +10,7 @@
 	heat_protection =    HEAD|FACE|EYES
 	cold_protection =    HEAD|FACE|EYES
 	brightness_on = 0.5
-	species_restricted = null
+	bodytype_restricted = null
 
 /obj/item/clothing/gloves/rig
 	name = "gauntlets"
@@ -18,7 +18,7 @@
 	body_parts_covered = HANDS
 	heat_protection =    HANDS
 	cold_protection =    HANDS
-	species_restricted = null
+	bodytype_restricted = null
 	gender = PLURAL
 
 /obj/item/clothing/shoes/magboots/rig
@@ -27,7 +27,7 @@
 	body_parts_covered = FEET
 	cold_protection = FEET
 	heat_protection = FEET
-	species_restricted = null
+	bodytype_restricted = null
 	gender = PLURAL
 	icon_base = null
 
@@ -131,7 +131,7 @@
 	body_parts_covered = FEET
 	cold_protection = FEET
 	heat_protection = FEET
-	species_restricted = null
+	bodytype_restricted = null
 	gender = PLURAL
 
 /obj/item/clothing/gloves/lightrig
@@ -140,5 +140,5 @@
 	body_parts_covered = HANDS
 	heat_protection =    HANDS
 	cold_protection =    HANDS
-	species_restricted = null
+	bodytype_restricted = null
 	gender = PLURAL

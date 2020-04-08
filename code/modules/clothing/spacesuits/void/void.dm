@@ -85,12 +85,12 @@ else if(##equipment_var) {\
 	if(tank && distance <= 1)
 		to_chat(user, "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>")
 
-/obj/item/clothing/suit/space/void/refit_for_species(var/target_species)
+/obj/item/clothing/suit/space/void/refit_for_bodytype(var/target_bodytype)
 	..()
 	if(istype(helmet))
-		helmet.refit_for_species(target_species)
+		helmet.refit_for_bodytype(target_bodytype)
 	if(istype(boots))
-		boots.refit_for_species(target_species)
+		boots.refit_for_bodytype(target_bodytype)
 
 /obj/item/clothing/suit/space/void/equipped(mob/M)
 	..()

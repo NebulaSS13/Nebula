@@ -31,11 +31,13 @@
 /datum/species/proc/get_station_variant()
 	return name
 
-/datum/species/proc/get_race_key(var/mob/living/carbon/human/H)
-	return race_key
+/datum/species/proc/get_icon_cache_uid(var/mob/H)
+	if(!icon_cache_uid)
+		icon_cache_uid = sequential_id(/datum/species)
+	return icon_cache_uid
 
 /datum/species/proc/get_bodytype(var/mob/living/carbon/human/H)
-	return name
+	return bodytype
 
 /datum/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
@@ -102,3 +104,6 @@
 
 /datum/species/proc/get_slowdown(var/mob/living/carbon/human/H)
 	. = (H && H.isSynthetic() ? 0 : slowdown)
+
+/datum/species/proc/get_root_species_name(var/mob/living/carbon/human/H)
+	return name

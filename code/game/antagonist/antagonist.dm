@@ -54,7 +54,7 @@
 	var/decl/language/required_language
 
 	// Used for setting appearance.
-	var/list/valid_species = list(SPECIES_HUMAN)
+	var/list/valid_species
 	var/min_player_age = 14
 
 	// Runtime vars.

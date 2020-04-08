@@ -9,7 +9,7 @@
 		energy = ARMOR_ENERGY_SMALL, 
 		rad = ARMOR_RAD_SHIELDED
 	)
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 	flags_inv = HIDEEARS | BLOCKHAIR
 
 /obj/item/clothing/suit/fiendcowl
@@ -29,7 +29,7 @@
 	name = "black suit"
 	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
 	icon_state = "fiendsuit"
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 /obj/item/clothing/shoes/dress/devilshoes
 	name = "dress shoes"

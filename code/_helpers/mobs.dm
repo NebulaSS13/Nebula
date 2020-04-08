@@ -24,27 +24,29 @@
 
 	return mobs
 
-proc/random_hair_style(gender, species = SPECIES_HUMAN)
+proc/random_hair_style(gender, species)
+	species = species || GLOB.using_map.default_species
 	var/h_style = "Bald"
 
-	var/datum/species/mob_species = all_species[species]
+	var/datum/species/mob_species = get_species_by_key(species)
 	var/list/valid_hairstyles = mob_species.get_hair_styles()
 	if(valid_hairstyles.len)
 		h_style = pick(valid_hairstyles)
 
 	return h_style
 
-proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
+proc/random_facial_hair_style(gender, var/species)
+	species = species || GLOB.using_map.default_species
 	var/f_style = "Shaved"
-	var/datum/species/mob_species = all_species[species]
+	var/datum/species/mob_species = get_species_by_key(species)
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
 	if(valid_facialhairstyles.len)
 		f_style = pick(valid_facialhairstyles)
 		return f_style
 
-proc/random_name(gender, species = SPECIES_HUMAN)
+proc/random_name(gender, species)
 	if(species)
-		var/datum/species/current_species = all_species[species]
+		var/datum/species/current_species = get_species_by_key(species)
 		if(current_species)
 			var/decl/cultural_info/current_culture = SSlore.get_culture(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)

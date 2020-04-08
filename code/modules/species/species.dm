@@ -12,6 +12,7 @@
 	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
+	var/is_crystalline = FALSE
 
 	// Icon/appearance vars.
 	var/icobase =      'icons/mob/human_races/species/human/body.dmi'          // Normal icon set.
@@ -20,6 +21,8 @@
 	var/lip_icon =     'icons/mob/human_races/species/human/lips.dmi'
 	var/husk_icon =    'icons/mob/human_races/species/default_husk.dmi'
 	var/bandages_icon
+	var/bodytype = BODYTYPE_OTHER
+	var/limb_icon_intensity = 1.5
 
 	// Damage overlay and masks.
 	var/damage_overlays = 'icons/mob/human_races/species/human/damage_overlay.dmi'
@@ -44,7 +47,7 @@
 	var/default_h_style = "Bald"
 	var/default_f_style = "Shaved"
 
-	var/race_key = 0                          // Used for mob icon cache string.
+	var/icon_cache_uid                        // Used for mob icon cache string.
 	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
 	var/pixel_offset_x = 0                    // Used for offsetting large icons.
 	var/pixel_offset_y = 0                    // Used for offsetting large icons.
@@ -677,7 +680,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		LAZYSET(hair_styles, type, L)
 		for(var/hairstyle in GLOB.hair_styles_list)
 			var/datum/sprite_accessory/S = GLOB.hair_styles_list[hairstyle]
-			if(S.species_allowed && !(get_bodytype() in S.species_allowed))
+			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
 			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue
@@ -702,7 +705,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				continue
 			if(gender == FEMALE && S.gender == MALE)
 				continue
-			if(S.species_allowed && !(get_bodytype() in S.species_allowed))
+			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
 			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue
@@ -801,7 +804,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		else			. = 8
 
 /datum/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
-	return
+	if(org && (org.species ? org.species.is_crystalline : is_crystalline))
+		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
 
 /datum/species/proc/check_no_slip(var/mob/living/carbon/human/H)
 	if(can_overcome_gravity(H))

@@ -10,7 +10,7 @@
 	item_state = "apron"
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
-	species_restricted = null
+	bodytype_restricted = null
 	allowed = list (/obj/item/chems/spray/plantbgone,/obj/item/scanner/plant,/obj/item/seeds,/obj/item/chems/glass/bottle,/obj/item/material/minihoe)
 
 //Captain
@@ -58,7 +58,7 @@
 	name = "classic chef's apron"
 	desc = "A basic, dull, white chef's apron."
 	icon_state = "apronchef"
-	species_restricted = null
+	bodytype_restricted = null
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
 
@@ -135,7 +135,7 @@
 	desc = "A high-visibility vest used in work zones."
 	icon_state = "hazard"
 	blood_overlay_type = "armor"
-	species_restricted = null
+	bodytype_restricted = null
 	allowed = list (/obj/item/scanner/gas, /obj/item/flashlight, /obj/item/multitool, /obj/item/pipe_painter, /obj/item/radio, /obj/item/t_scanner, \
 	/obj/item/crowbar, /obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/tank/emergency, \
 	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)

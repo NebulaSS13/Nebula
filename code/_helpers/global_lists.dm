@@ -4,15 +4,6 @@
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
-var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
-
-#define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
-#define all_genders_text_list list("Male","Female","Plural","Neuter")
-
-//Languages/species/whitelist.
-var/global/list/all_species[0]
-var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
-
 var/list/mannequins_
 
 // Uplinks
@@ -102,20 +93,32 @@ var/global/list/string_slot_flags = list(
 		var/datum/sprite_accessory/marking/M = new path()
 		GLOB.body_marking_styles_list[M.name] = M
 
-	var/rkey = 0
-	paths = typesof(/datum/species)
-	for(var/T in paths)
-
-		rkey++
-
-		var/datum/species/S = T
-		if(!initial(S.name))
-			continue
-
-		S = new T
-		S.race_key = rkey //Used in mob icon caching.
-		all_species[S.name] = S
-		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
-			playable_species += S.name
-
 	return 1
+
+// This is all placeholder procs for an eventual PR to change them to use decls.
+var/list/all_species
+var/list/playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise.
+/proc/build_species_lists()
+	if(global.all_species && global.playable_species)
+		return
+	global.playable_species = list()
+	global.all_species = list()
+	for(var/species_type in typesof(/datum/species))
+		var/datum/species/species = species_type
+		var/species_name = initial(species.name)
+		if(species_name)
+			global.all_species[species_name] = new species
+			species = get_species_by_key(species_name)
+			if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
+				global.playable_species += species.name
+	if(GLOB.using_map.default_species)
+		global.playable_species |= GLOB.using_map.default_species
+/proc/get_species_by_key(var/species_key)
+	build_species_lists()
+	. = global.all_species[species_key]
+/proc/get_all_species()
+	build_species_lists()
+	. = global.all_species
+/proc/get_playable_species()
+	build_species_lists()
+	. = global.playable_species

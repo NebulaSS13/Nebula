@@ -1,12 +1,19 @@
 /decl/submap_archetype
 	var/map
 	var/descriptor = "generic ship archetype"
-	var/list/whitelisted_species = list(SPECIES_HUMAN)
-	var/list/blacklisted_species = list(SPECIES_ALIEN, SPECIES_GOLEM)
+	var/list/whitelisted_species = list()
+	var/list/blacklisted_species = list()
 	var/call_webhook
 	var/list/crew_jobs = list(
 		/datum/job/submap
 	)
+
+/decl/submap_archetype/New()
+	if(islist(whitelisted_species) && !length(whitelisted_species))
+		whitelisted_species |= SSmodpacks.default_submap_whitelisted_species
+	if(islist(blacklisted_species) && !length(blacklisted_species))
+		blacklisted_species |= SSmodpacks.default_submap_blacklisted_species
+	..()
 
 /decl/submap_archetype/Destroy()
 	if(SSmapping.submap_archetypes[descriptor] == src)

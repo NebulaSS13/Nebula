@@ -8,6 +8,8 @@
 	max_age = 100
 	hidden_from_codex = FALSE
 	bandages_icon = 'icons/mob/bandage.dmi'
+	bodytype = BODYTYPE_HUMANOID
+	limb_icon_intensity = 0.7
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
@@ -23,7 +25,7 @@
 		)
 	)
 
-/datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
+/datum/species/human/get_root_species_name(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
 /datum/species/human/handle_npc(var/mob/living/carbon/human/H)

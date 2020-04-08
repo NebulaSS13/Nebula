@@ -2,6 +2,10 @@
 #define SPECIES_MANTID_ALATE   "Kharmaan Alate"
 #define SPECIES_MANTID_GYNE    "Kharmaan Gyne"
 
+#define BODYTYPE_SNAKE "Snakelike Body"
+#define BODYTYPE_MANTID_SMALL "Small Mantid Body"
+#define BODYTYPE_MANTID_LARGE "Large Mantid Body"
+
 #define CULTURE_ASCENT           "The Ascent"
 #define HOME_SYSTEM_KHARMAANI    "Core"
 #define FACTION_ASCENT_GYNE      "Ascent Gyne"

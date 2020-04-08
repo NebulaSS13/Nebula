@@ -24,11 +24,12 @@
 	icon_state = "ascent_mask"
 	item_state = "ascent_mask"
 	sprite_sheets = list(
-		SPECIES_SERPENTID =    'mods/ascent/icons/species/serpentid/onmob_mask_serpentid.dmi',
-		SPECIES_MANTID_GYNE =  'mods/ascent/icons/species/mantid/onmob_mask_gyne.dmi',
-		SPECIES_MANTID_ALATE = 'mods/ascent/icons/species/mantid/onmob_mask_alate.dmi'
+		BODYTYPE_SNAKE =        'mods/ascent/icons/species/serpentid/onmob_mask_serpentid.dmi',
+		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/species/mantid/onmob_mask_gyne.dmi',
+		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_mask_alate.dmi'
 	)
-	species_restricted = list(SPECIES_MANTID_ALATE, SPECIES_MANTID_GYNE)
+
+	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)
 	filtered_gases = list(MAT_PHORON,MAT_N2O,MAT_CHLORINE,MAT_AMMONIA,MAT_CO,MAT_METHANE)
 	flags_inv = 0
 
@@ -36,23 +37,23 @@
 	name = "serpentid facemask"
 	desc = "An alien facemask with chunky gas filters and a breathing valve."
 	filtered_gases = list(MAT_PHORON,MAT_N2O,MAT_CHLORINE,MAT_AMMONIA,MAT_CO,MAT_METHYL_BROMIDE,MAT_METHANE)
-	species_restricted = list(SPECIES_SERPENTID)
+	bodytype_restricted = list(BODYTYPE_SNAKE)
 
 /obj/item/clothing/shoes/magboots/ascent
 	name = "mantid mag-claws"
 	desc = "A set of powerful gripping claws."
 	icon_state = "ascent_boots0"
 	icon_base = "ascent_boots"
-	species_restricted = list(SPECIES_MANTID_ALATE, SPECIES_MANTID_GYNE)
+	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)
 	sprite_sheets = list(
-		SPECIES_MANTID_GYNE =  'mods/ascent/icons/species/mantid/onmob_shoes_gyne.dmi',
-		SPECIES_MANTID_ALATE = 'mods/ascent/icons/species/mantid/onmob_shoes_alate.dmi'
+		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/species/mantid/onmob_shoes_gyne.dmi',
+		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_shoes_alate.dmi'
 	)
 
 /obj/item/clothing/under/ascent
 	name = "mantid undersuit"
 	desc = "A ribbed, spongy undersuit of some sort. It has a big sleeve for a tail, so it probably isn't for humans."
-	species_restricted = ALL_ASCENT_SPECIES
+	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL, BODYTYPE_SNAKE)
 	icon_state = "ascent"
 	worn_state = "ascent"
 	color = COLOR_DARK_GUNMETAL
@@ -60,7 +61,7 @@
 /obj/item/clothing/suit/storage/ascent
 	name = "mantid gear harness"
 	desc = "A complex tangle of articulated cables and straps."
-	species_restricted = ALL_ASCENT_SPECIES
+	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL, BODYTYPE_SNAKE)
 	icon_state = "ascent_harness"
 	body_parts_covered = 0
 	slot_flags = SLOT_OCLOTHING | SLOT_BELT

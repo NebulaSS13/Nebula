@@ -79,7 +79,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for changelings,
 
 	// New stuff
-	var/species = SPECIES_HUMAN
+	var/species
 	var/s_base = ""
 	var/list/body_markings = list()
 
@@ -90,7 +90,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.unique_enzymes=unique_enzymes
 	new_dna.b_type=b_type
 	new_dna.real_name=real_name
-	new_dna.species=species
+	new_dna.species=species || GLOB.using_map.default_species
 	new_dna.body_markings=body_markings.Copy()
 	new_dna.s_base=s_base
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)

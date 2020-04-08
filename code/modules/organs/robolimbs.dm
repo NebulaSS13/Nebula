@@ -21,10 +21,10 @@ var/datum/robolimb/basic_robolimb
 	var/has_eyes = TRUE
 	var/can_feel_pain
 	var/skintone
-	var/list/species_cannot_use = list()
+	var/list/bodytypes_cannot_use = list()
 	var/list/restricted_to = list()
 	var/list/applies_to_part = list() //TODO.
-	var/list/allowed_bodytypes = list(SPECIES_HUMAN)
+	var/list/allowed_bodytypes = list(BODYTYPE_HUMANOID)
 	var/modifier_string = "robotic"
 	var/hardiness = 1
 	var/manual_dexterity = DEXTERITY_FULL

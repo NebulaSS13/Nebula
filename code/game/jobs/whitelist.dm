@@ -50,7 +50,7 @@ var/list/whitelist = list()
 	return 1
 
 /proc/is_species_whitelisted(mob/M, var/species_name)
-	var/datum/species/S = all_species[species_name]
+	var/datum/species/S = get_species_by_key(species_name)
 	return is_alien_whitelisted(M, S)
 
 //todo: admin aliens
@@ -72,7 +72,7 @@ var/list/whitelist = list()
 		var/datum/species/S = species
 		if(!(S.spawn_flags & (SPECIES_IS_WHITELISTED|SPECIES_IS_RESTRICTED)))
 			return 1
-		return whitelist_lookup(S.get_bodytype(S), M.ckey)
+		return whitelist_lookup(S.get_root_species_name(M), M.ckey)
 
 	return 0
 

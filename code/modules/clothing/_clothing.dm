@@ -5,7 +5,7 @@
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
 	var/tint = TINT_NONE							  // Sets the item's level of visual impairment tint.
-	var/list/species_restricted = list(SPECIES_HUMAN) //everyone except for these species can wear this kit.
+	var/list/bodytype_restricted = list(BODYTYPE_HUMANOID)
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
@@ -92,32 +92,31 @@
 			var/obj/item/clothing/accessory/tie = new T(src)
 			src.attach_accessory(null, tie)
 
-//BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M, slot, disable_warning = 0)
 
-	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
+	//if we can't equip the item anyway, don't bother with bodytype_restricted (cuts down on spam)
 	if (!..())
 		return 0
 
-	if(species_restricted && istype(M,/mob/living/carbon/human))
+	if(bodytype_restricted && istype(M,/mob/living/carbon/human))
 		var/exclusive = null
 		var/wearable = null
 		var/mob/living/carbon/human/H = M
 
-		if("exclude" in species_restricted)
+		if("exclude" in bodytype_restricted)
 			exclusive = 1
 
 		if(H.species)
 			if(exclusive)
-				if(!(H.species.get_bodytype(H) in species_restricted))
+				if(!(H.species.get_bodytype(H) in bodytype_restricted))
 					wearable = 1
 			else
-				if(H.species.get_bodytype(H) in species_restricted)
+				if(H.species.get_bodytype(H) in bodytype_restricted)
 					wearable = 1
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
 				if(!disable_warning)
-					to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
+					to_chat(H, SPAN_WARNING("\The [src] does not fit you."))
 				return 0
 	return 1
 
@@ -126,27 +125,21 @@
 		update_vision()
 	return ..()
 
-/obj/item/clothing/proc/refit_for_species(var/target_species)
-	if(!species_restricted)
-		return //this item doesn't use the species_restricted system
-
-	//Set species_restricted list
-	species_restricted = list(target_species)
-
-	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
-		icon = sprite_sheets_obj[target_species]
+/obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)
+	if(!bodytype_restricted)
+		return
+	bodytype_restricted = list(target_bodytype)
+	if (sprite_sheets_obj && (target_bodytype in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_bodytype]
 	else
 		icon = initial(icon)
 
-/obj/item/clothing/head/helmet/refit_for_species(var/target_species)
-	if(!species_restricted)
-		return //this item doesn't use the species_restricted system
-
-	//Set species_restricted list
-	species_restricted = list(target_species)
-
-	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
-		icon = sprite_sheets_obj[target_species]
+/obj/item/clothing/head/helmet/refit_for_bodytype(var/target_bodytype)
+	if(!bodytype_restricted)
+		return
+	bodytype_restricted = list(target_bodytype)
+	if (sprite_sheets_obj && (target_bodytype in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_bodytype]
 	else
 		icon = initial(icon)
 

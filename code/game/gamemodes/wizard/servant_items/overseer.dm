@@ -12,7 +12,7 @@
 	item_flags = ITEM_FLAG_AIRTIGHT
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	min_pressure_protection = 0
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 	flags_inv = HIDEEARS | BLOCKHAIR
 
 /obj/item/clothing/suit/straight_jacket/overseercloak
@@ -35,7 +35,7 @@
 	name = "black hoodie"
 	desc = "A generic black hoodie. There's a pattern akin to splattered blood along the bottom."
 	icon_state = "grimhoodie"
-	species_restricted = list(SPECIES_HUMAN)
+	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 //These are the ones that it gets when they toggle it off
 /obj/item/clothing/shoes/sandal/grimboots

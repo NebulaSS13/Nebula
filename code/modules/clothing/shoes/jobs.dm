@@ -4,7 +4,7 @@
 	icon_state = "galoshes"
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP
-	species_restricted = null
+	bodytype_restricted = null
 
 /obj/item/clothing/shoes/galoshes/Initialize()
 	. = ..()
@@ -56,4 +56,4 @@
 	name = "toe-less workboots"
 	desc = "A pair of toeless work boots designed for use in industrial settings. Modified for species whose toes have claws."
 	icon_state = "workbootstoeless"
-	species_restricted = null
+	bodytype_restricted = null
