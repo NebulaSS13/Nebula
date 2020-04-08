@@ -442,6 +442,11 @@
 	req_tech = list(TECH_ENGINEERING = 1)
 	build_path = /obj/item/stock_parts/circuitboard/ice_cream
 
+/datum/design/circuit/smartfridge
+	name = "smartfridge (selectable type)"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/fridge
+
 /datum/design/circuit/miningdrill
 	name = "mining drill head"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)

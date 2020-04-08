@@ -150,3 +150,21 @@
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/pipe = 1
 	)
+
+/obj/item/stock_parts/circuitboard/fridge
+	name = T_BOARD("smartfridge")
+	build_path = /obj/machinery/smartfridge
+	board_type = "machine"
+	origin_tech = "{'" + TECH_ENGINEERING + "':3}"
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 3
+	)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+	buildtype_select = TRUE
+
+/obj/item/stock_parts/circuitboard/vending/get_buildable_types()
+	return typesof(/obj/machinery/smartfridge)
