@@ -3,8 +3,6 @@
 #define TRANSFER_FUNDS 2
 #define VIEW_TRANSACTION_LOGS 3
 
-/obj/item/card/id/var/money = 2000
-
 /obj/machinery/atm
 	name = "automatic teller machine"
 	desc = "For all your monetary needs!"
@@ -25,12 +23,22 @@
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/account_security_level = 0
 
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/wall_frame/panel_closed
+	frame_type = /obj/item/frame/stock_offset/atm
+
 /obj/machinery/atm/Initialize()
 	. = ..()
 	machine_id = "[station_name()] ATM #[num_financial_terminals++]"
 	spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
+
+/obj/machinery/atm/Destroy()
+	QDEL_NULL(spark_system)
+	QDEL_NULL(held_card)
+	authenticated_account = null
+	. = ..()
 
 /obj/machinery/atm/Process()
 	if(stat & NOPOWER)

@@ -107,7 +107,7 @@
 		update_icon()
 		return
 
-	else if(isWrench(W))
+	else if(isWrench(W) && !panel_open)
 		if(connected_port)
 			disconnect()
 			to_chat(user, "<span class='notice'>You disconnect \the [src] from the port.</span>")

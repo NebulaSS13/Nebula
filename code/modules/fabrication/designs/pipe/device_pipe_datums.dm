@@ -191,7 +191,7 @@
 	pipe_class = PIPE_CLASS_UNARY
 	colorable = TRUE
 
-/datum/fabricator_recipe/pipe/device/tank
+/datum/fabricator_recipe/pipe/device/plate
 	name = "thermal plate"
 	desc = "A device which transfers heat to and from an area."
 	build_icon = 'icons/obj/atmospherics/cold_sink.dmi'
@@ -200,3 +200,15 @@
 	connect_types = CONNECT_TYPE_REGULAR
 	constructed_path = /obj/machinery/atmospherics/unary/thermal_plate
 	pipe_class = PIPE_CLASS_UNARY
+
+/datum/fabricator_recipe/pipe/device/igniter
+	name = "igniter"
+	desc = "A device which will ignite surrounding gasses."
+	build_icon = 'icons/obj/stationobjs.dmi'
+	build_icon_state = "igniter1"
+	path = /obj/item/machine_chassis/igniter
+	pipe_color = null
+	connect_types = null
+	colorable = FALSE
+	constructed_path = /obj/machinery/igniter
+	pipe_class = PIPE_CLASS_OTHER

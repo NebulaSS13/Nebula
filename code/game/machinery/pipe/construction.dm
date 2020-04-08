@@ -39,7 +39,7 @@ Buildable meters
 	icon_state = P.build_icon_state
 	pipe_class = P.pipe_class
 	rotate_class = P.rotate_class
-	constructed_path = P.type
+	constructed_path = P.base_type || P.type
 
 //called when a turf is attacked with a pipe item
 /obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)
@@ -195,10 +195,15 @@ Buildable meters
 	. = ..()
 	set_extension(src, /datum/extension/parts_stash)
 
+/obj/item/machine_chassis/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 2)
+		to_chat(user, "Use a wrench to secure \the [src] here.")
+
 /obj/item/machine_chassis/attackby(var/obj/item/W, var/mob/user)
 	if(!isWrench(W))
 		return ..()
-	var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)
+	var/obj/machinery/machine = new build_type(get_turf(src), dir, TRUE)
 	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
 	if(stash)
 		stash.install_into(machine)
@@ -216,6 +221,9 @@ Buildable meters
 	w_class = ITEM_SIZE_LARGE
 	build_type = /obj/machinery/air_sensor
 
+/obj/item/machine_chassis/air_sensor/base
+	build_type = /obj/machinery/air_sensor/buildable
+
 /obj/item/machine_chassis/pipe_meter
 	name = "meter"
 	desc = "A meter that can measure gas inside pipes or in the general area."
@@ -224,3 +232,25 @@ Buildable meters
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_LARGE
 	build_type = /obj/machinery/meter
+
+/obj/item/machine_chassis/pipe_meter/base
+	build_type = /obj/machinery/meter/buildable
+
+/obj/item/machine_chassis/igniter
+	name = "igniter"
+	desc = "A device which will ignite surrounding gasses."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "igniter1"
+	w_class = ITEM_SIZE_NORMAL
+	build_type = /obj/machinery/igniter
+
+/obj/item/machine_chassis/igniter/base
+	build_type = /obj/machinery/igniter/buildable
+
+/obj/item/machine_chassis/power_sensor
+	name = "power sensor"
+	desc = "A small machine which transmits data about specific powernet."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
+	w_class = ITEM_SIZE_NORMAL
+	build_type = /obj/machinery/power/sensor

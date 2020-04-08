@@ -13,7 +13,7 @@
 	. = ..()
 
 // Called on state transition; can intercept, but must call parent.
-/obj/machinery/proc/state_transition(var/decl/machine_construction/new_state)
+/obj/machinery/proc/state_transition(var/decl/machine_construction/new_state, var/mob/user)
 	construct_state = new_state
 
 // Return a change state define or a fail message to block transition.
@@ -68,7 +68,7 @@
 	if(state)
 		var/fail = machine.cannot_transition_to(path, user)
 		if(fail == MCS_CHANGE)
-			machine.state_transition(state)
+			machine.state_transition(state, user)
 			return MCS_CHANGE
 		if(istext(fail))
 			to_chat(user, fail)

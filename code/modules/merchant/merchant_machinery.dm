@@ -6,6 +6,9 @@
 	anchored = 1
 	density = 0
 
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/panel_closed
+
 /obj/machinery/merchant_pad/proc/get_target()
 	var/turf/T = get_turf(src)
 	for(var/a in T)

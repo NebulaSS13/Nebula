@@ -28,6 +28,10 @@ datum/track/proc/GetTrack()
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	pixel_x = -8
 
+	uncreated_component_parts = null
+	stat_immune = 0
+	construct_state = /decl/machine_construction/default/panel_closed
+
 	var/playing = 0
 	var/volume = 20
 
@@ -168,7 +172,7 @@ datum/track/proc/GetTrack()
 	qdel(src)
 
 /obj/machinery/media/jukebox/attackby(obj/item/W, mob/user)
-	if(isWrench(W))
+	if(isWrench(W) && !panel_open)
 		add_fingerprint(user)
 		wrench_floor_bolts(user, 0)
 		power_change()

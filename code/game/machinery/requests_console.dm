@@ -46,7 +46,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
-	frame_type = /obj/item/frame/request_console
+	frame_type = /obj/item/frame/stock_offset/request_console
 
 /obj/machinery/requests_console/on_update_icon()
 	if(stat & NOPOWER)
@@ -57,17 +57,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			icon_state = "req_comp[newmessagepriority]"
 
 /obj/machinery/requests_console/Initialize(mapload, d)
-	switch(d) // doesn't have reasonable directional sprites, so don't set dir.
-		if(NORTH)
-			pixel_y = WORLD_ICON_SIZE
-		if(SOUTH)
-			pixel_y = - WORLD_ICON_SIZE
-		if(EAST)
-			pixel_x = WORLD_ICON_SIZE
-		if(WEST)
-			pixel_x = - WORLD_ICON_SIZE
-	d = null
-
 	. = ..()
 	announcement.newscast = 1
 	allConsoles += src

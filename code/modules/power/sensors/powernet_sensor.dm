@@ -16,8 +16,10 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
 
-	var/name_tag = "#UNKN#" // ID tag displayed in list of powernet sensors. Each sensor should have it's own tag!
-	var/long_range = 0		// If 1, sensor reading will show on all computers, regardless of Zlevel
+	uncreated_component_parts = null
+	stat_immune = NOINPUT | NOSCREEN | NOPOWER
+	construct_state = /decl/machine_construction/pipe
+	frame_type = /obj/item/machine_chassis/power_sensor
 
 // Proc: New()
 // Parameters: None
@@ -30,7 +32,12 @@
 // Parameters: None
 // Description: Sets name of this sensor according to the ID tag.
 /obj/machinery/power/sensor/proc/auto_set_name()
-	name = "[name_tag] - Powernet Sensor"
+	if(!id_tag)
+		var/area/A = get_area(src)
+		if(!A)
+			return // in nullspace
+		id_tag = "[A.name] #[sequential_id(A.name + "power/sensor")]"
+	name = "[id_tag] - Powernet Sensor"
 
 // Proc: check_grid_warning()
 // Parameters: None
@@ -135,7 +142,7 @@
 	if(!powernet)
 		connect_to_network()
 	var/list/data = list()
-	data["name"] = name_tag
+	data["name"] = id_tag
 	if(!powernet)
 		data["error"] = "# SYSTEM ERROR - NO POWERNET #"
 		data["alarm"] = 0 // Runtime Prevention

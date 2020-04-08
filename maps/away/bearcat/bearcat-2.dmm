@@ -4581,8 +4581,7 @@
 /area/ship/scrap/maintenance/power)
 "hK" = (
 /obj/machinery/power/sensor{
-	long_range = 1;
-	name_tag = "Main Grid"
+	id_tag = "Main Grid"
 	},
 /obj/structure/cable{
 	d2 = 8;

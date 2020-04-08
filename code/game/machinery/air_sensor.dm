@@ -16,7 +16,7 @@
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/air_sensor = 1)
 	use_power = POWER_USE_IDLE
 
-	frame_type = /obj/item/machine_chassis/air_sensor
+	frame_type = /obj/item/machine_chassis/air_sensor/base
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
 	base_type = /obj/machinery/air_sensor/buildable
 

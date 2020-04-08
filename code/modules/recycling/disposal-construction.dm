@@ -42,7 +42,7 @@
 			anchored = D.anchored
 			set_density(D.density)
 			turn = D.turn
-			constructed_path = D.type
+			constructed_path = D.base_type || D.type
 			set_dir(D.dir)
 	if(loc)
 		update_icon()
@@ -211,6 +211,10 @@
 /obj/structure/disposalconstruct/machine
 	obj_flags = 0 // No rotating
 
+/obj/structure/disposalconstruct/machine/Initialize(mapload, P)
+	. = ..()
+	set_extension(src, /datum/extension/parts_stash)
+
 /obj/structure/disposalconstruct/machine/update_verbs()
 	return // No flipping
 
@@ -220,10 +224,14 @@
 	update_icon()
 
 /obj/structure/disposalconstruct/machine/build(obj/structure/disposalpipe/CP)
-	var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
-	transfer_fingerprints_to(P)
-	P.set_dir(dir)
-	P.mode = 0 // start with pump off
+	var/obj/machinery/disposal/machine = new /obj/machinery/disposal(get_turf(src), dir)
+	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
+	if(stash)
+		stash.install_into(machine)
+	if(machine.construct_state)
+		machine.construct_state.post_construct(machine)
+	transfer_fingerprints_to(machine)
+	machine.mode = 0 // start with pump off
 
 /obj/structure/disposalconstruct/machine/on_update_icon()
 	if(anchored)
@@ -237,3 +245,6 @@
 	P.set_dir(dir)
 	var/obj/structure/disposalpipe/trunk/Trunk = CP
 	Trunk.linked = P
+
+/obj/structure/disposalconstruct/machine/chute
+	obj_flags = OBJ_FLAG_ROTATABLE

@@ -147,15 +147,59 @@
 	fully_construct = TRUE
 	name = "wall charger kit"
 
-/obj/item/frame/request_console
+/obj/item/frame/button/sparker
+	name = "mounted igniter"
+	desc = "A wall-mounted ignition device."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "migniter"
+	matter = list(MAT_STEEL = 400, MAT_PLASTIC = 200)
+	build_machine_type = /obj/machinery/sparker/buildable
+
+// Shifts it dead center of the turf you are looking at. Useful for items with antiquated icons.
+/obj/item/frame/stock_offset
+	reverse = TRUE
+
+/obj/item/frame/stock_offset/modify_positioning(var/obj/machinery/product, _dir, click_params)
+	switch(_dir)
+		if(NORTH)
+			product.pixel_y = WORLD_ICON_SIZE
+		if(SOUTH)
+			product.pixel_y = - WORLD_ICON_SIZE
+		if(EAST)
+			product.pixel_x = WORLD_ICON_SIZE
+		if(WEST)
+			product.pixel_x = - WORLD_ICON_SIZE
+
+/obj/item/frame/stock_offset/request_console
 	name = "request console frame"
 	desc = "Used for building request consoles."
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
 	build_machine_type = /obj/machinery/requests_console
-	reverse = TRUE
 
-/obj/item/frame/request_console/kit
+/obj/item/frame/stock_offset/request_console/kit
 	fully_construct = TRUE
 	name = "request console kit"
 	desc = "An all-in-one request console kit, comes preassembled."
+
+/obj/item/frame/stock_offset/atm
+	name = "automatic teller machine frame"
+	desc = "Used to build an ATM terminal on a wall."
+	icon = 'icons/obj/terminals.dmi'
+	icon_state = "atm"
+	build_machine_type = /obj/machinery/atm
+
+/obj/item/frame/stock_offset/atm/kit
+	name = "automatic teller machine kit"
+	fully_construct = TRUE
+
+/obj/item/frame/stock_offset/newscaster
+	name = "newscaster frame"
+	desc = "Used to build a newscaster on a wall."
+	icon = 'icons/obj/terminals.dmi'
+	icon_state = "newscaster_off"
+	build_machine_type = /obj/machinery/newscaster
+
+/obj/item/frame/stock_offset/newscaster/kit
+	name = "newscaster kit"
+	fully_construct = TRUE

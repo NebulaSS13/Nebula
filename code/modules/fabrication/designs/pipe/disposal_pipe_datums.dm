@@ -95,6 +95,7 @@
 	build_icon = 'icons/obj/pipes/disposal.dmi'
 	build_icon_state = "intake"
 	constructed_path = /obj/machinery/disposal/deliveryChute
+	path = /obj/structure/disposalconstruct/machine/chute
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/sorting
 	name = "disposal sorter"
@@ -103,6 +104,7 @@
 	build_icon_state = "pipe-j1s"
 	turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
 	constructed_path = /obj/structure/disposalpipe/sortjunction
+	path = /obj/structure/disposalconstruct
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/sorting/wildcard
 	name = "wildcard disposal sorter"
@@ -111,6 +113,7 @@
 	build_icon_state = "pipe-j1s"
 	turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
 	constructed_path = /obj/structure/disposalpipe/sortjunction/wildcard
+	path = /obj/structure/disposalconstruct
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/sorting/untagged
 	name = "untagged disposal sorter"
@@ -119,6 +122,7 @@
 	build_icon_state = "pipe-j1s"
 	turn = DISPOSAL_FLIP_RIGHT|DISPOSAL_FLIP_FLIP
 	constructed_path = /obj/structure/disposalpipe/sortjunction/untagged
+	path = /obj/structure/disposalconstruct
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/sortingm
 	name = "disposal sorter (mirrored)"
@@ -127,6 +131,7 @@
 	build_icon_state = "pipe-j2s"
 	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_FLIP
 	constructed_path = /obj/structure/disposalpipe/sortjunction/flipped
+	path = /obj/structure/disposalconstruct
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/sorting/wildcardm
 	name = "wildcard disposal sorter (mirrored)"
@@ -135,6 +140,7 @@
 	build_icon_state = "pipe-j2s"
 	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_FLIP
 	constructed_path = /obj/structure/disposalpipe/sortjunction/wildcard/flipped
+	path = /obj/structure/disposalconstruct
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/sorting/untaggedm
 	name = "untagged disposal sorter (mirrored)"
@@ -143,6 +149,7 @@
 	build_icon_state = "pipe-j2s"
 	turn = DISPOSAL_FLIP_LEFT|DISPOSAL_FLIP_FLIP
 	constructed_path = /obj/structure/disposalpipe/sortjunction/untagged/flipped
+	path = /obj/structure/disposalconstruct
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/tagger
 	name = "disposal tagger"
@@ -151,6 +158,7 @@
 	build_icon_state = "pipe-tagger"
 	turn = DISPOSAL_FLIP_FLIP
 	constructed_path = /obj/structure/disposalpipe/tagger
+	path = /obj/structure/disposalconstruct
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/tagger/partial
 	name = "disposal partial tagger"
@@ -159,6 +167,7 @@
 	build_icon_state = "pipe-tagger-partial"
 	turn = DISPOSAL_FLIP_FLIP
 	constructed_path = /obj/structure/disposalpipe/tagger/partial
+	path = /obj/structure/disposalconstruct
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/device/diversion
 	name = "disposal diverter"
@@ -167,3 +176,4 @@
 	build_icon_state = "pipe-j1s"
 	turn = DISPOSAL_FLIP_FLIP | DISPOSAL_FLIP_RIGHT
 	constructed_path = /obj/structure/disposalpipe/diversion_junction
+	path = /obj/structure/disposalconstruct

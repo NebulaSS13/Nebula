@@ -22,6 +22,10 @@
 	var/scan_id = 1
 	var/is_secure = 0
 
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+
 /obj/machinery/smartfridge/secure
 	is_secure = 1
 
@@ -217,7 +221,7 @@
 		is_off = "-off"
 
 	// Fridge contents
-	switch(contents.len)
+	switch(contents.len - LAZYLEN(component_parts))
 		if(0)
 			I = image(icon, "empty[is_off]")
 		if(1 to 2)
@@ -236,23 +240,21 @@
 	I.layer = ABOVE_WINDOW_LAYER
 	overlays += I
 
+/obj/machinery/smartfridge/dismantle()
+	for(var/datum/stored_items/I in item_records)
+		while(I.amount > 0)
+			I.get_product(get_turf(src)) // They'd get dumped anyway, but this makes things GC properly.
+	..()
+
 /*******************
 *   Item Adding
 ********************/
 
+/obj/machinery/smartfridge/state_transition(decl/machine_construction/new_state, mob/user)
+	. = ..()
+	update_icon()
+
 /obj/machinery/smartfridge/attackby(var/obj/item/O, var/mob/user)
-	if(isScrewdriver(O))
-		panel_open = !panel_open
-		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
-		update_icon()
-		SSnano.update_uis(src)
-		return
-
-	if(isMultitool(O) || isWirecutter(O))
-		if(panel_open)
-			attack_hand(user)
-		return
-
 	if(stat & NOPOWER)
 		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
 		return

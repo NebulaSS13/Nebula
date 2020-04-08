@@ -140,3 +140,49 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
+
+/obj/item/stock_parts/circuitboard/ice_cream
+	name = T_BOARD("ice cream vat")
+	build_path = /obj/machinery/icecream_vat
+	board_type = "machine"
+	origin_tech = "{'" + TECH_ENGINEERING + "':1}"
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 1,
+		/obj/item/pipe = 1
+	)
+
+/obj/item/stock_parts/circuitboard/fridge
+	name = T_BOARD("smartfridge")
+	build_path = /obj/machinery/smartfridge
+	board_type = "machine"
+	origin_tech = "{'" + TECH_ENGINEERING + "':3}"
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 3
+	)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+	buildtype_select = TRUE
+
+/obj/item/stock_parts/circuitboard/fridge/get_buildable_types()
+	return typesof(/obj/machinery/smartfridge)
+
+/obj/item/stock_parts/circuitboard/jukebox
+	name = T_BOARD("jukebox")
+	build_path = /obj/machinery/media/jukebox
+	board_type = "machine"
+	origin_tech = "{'" + TECH_DATA + "':5}"
+	req_components = list(
+		/obj/item/stock_parts/subspace/amplifier = 2
+	)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+	buildtype_select = TRUE
+
+/obj/item/stock_parts/circuitboard/jukebox/get_buildable_types()
+	return typesof(/obj/machinery/media/jukebox)

@@ -427,6 +427,26 @@
 	req_tech = list(TECH_BIO = 3, TECH_MATERIAL = 2, TECH_DATA = 1)
 	build_path = /obj/item/stock_parts/circuitboard/tray
 
+/datum/design/circuit/dehumidifier
+	name = "dehumidifier"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	build_path = /obj/item/stock_parts/circuitboard/dehumidifier
+
+/datum/design/circuit/space_heater
+	name = "space heater"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	build_path = /obj/item/stock_parts/circuitboard/space_heater
+
+/datum/design/circuit/ice_cream
+	name = "ice cream vat"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/ice_cream
+
+/datum/design/circuit/smartfridge
+	name = "smartfridge (selectable type)"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/fridge
+
 /datum/design/circuit/miningdrill
 	name = "mining drill head"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
@@ -664,3 +684,18 @@
 	name = "cryo unit board"
 	build_path = /obj/item/stock_parts/circuitboard/cryopod
 	req_tech = list(TECH_DATA = 6, TECH_ENGINEERING = 6, TECH_BLUESPACE = 6)
+
+/datum/design/circuit/breaker_box
+	name = "breaker box board"
+	build_path = /obj/item/stock_parts/circuitboard/breaker
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+
+/datum/design/circuit/merchant_pad
+	name = "merchant pad board"
+	build_path = /obj/item/stock_parts/circuitboard/merchant_pad
+	req_tech = list(TECH_DATA = 6, TECH_BLUESPACE = 6, TECH_ESOTERIC = 1)
+
+/datum/design/circuit/jukebox
+	name = "jukebox board"
+	build_path = /obj/item/stock_parts/circuitboard/jukebox
+	req_tech = list(TECH_DATA = 5)

@@ -340,10 +340,8 @@ Class Procs:
 		circuit.deconstruct(src)
 
 	var/obj/frame
-	if(ispath(frame_type, /obj/item/pipe))
-		var/obj/item/pipe/pipe = new frame_type(get_turf(src), src)
-		frame = pipe
-		pipe.constructed_path = base_type
+	if(ispath(frame_type, /obj/item/pipe) || ispath(frame_type, /obj/structure/disposalconstruct))
+		frame = new frame_type(get_turf(src), src)
 	else
 		frame = new frame_type(get_turf(src), dir)
 

@@ -9,8 +9,8 @@
 	active_power_usage = 1000
 
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/radio/receiver,
-		/obj/item/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver/buildable,
+		/obj/item/stock_parts/power/apc/buildable
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/igniter_on
@@ -19,6 +19,13 @@
 		/decl/public_access/public_method/igniter_toggle
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/igniter = 1)
+
+	frame_type = /obj/item/machine_chassis/igniter/base
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	base_type = /obj/machinery/igniter/buildable
+
+/obj/machinery/igniter/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/igniter/Initialize()
 	. = ..()
@@ -85,13 +92,20 @@
 	active_power_usage = 1000
 
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/radio/receiver,
-		/obj/item/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver/buildable,
+		/obj/item/stock_parts/power/apc/buildable
 	)
 	public_methods = list(
 		/decl/public_access/public_method/sparker_spark
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/sparker = 1)
+
+	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
+	frame_type = /obj/item/frame/button/sparker
+	base_type = /obj/machinery/sparker/buildable
+
+/obj/machinery/sparker/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/sparker/on_update_icon()
 	..()
