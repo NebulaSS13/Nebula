@@ -162,8 +162,6 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		return
 
 	if(istype(part))
-		if(part.tightened)
-			return
 		part.on_uninstall(src)
 		LAZYREMOVE(component_parts, part)
 		if(refresh_parts)

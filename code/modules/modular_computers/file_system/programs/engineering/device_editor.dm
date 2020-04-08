@@ -78,10 +78,6 @@
 			return 1
 		lock.keydata = new_key
 		lock.grants = list()
-	if(href_list["PRG_disable"])
-		lock.tightened = FALSE
-	if(href_list["PRG_enable"])
-		lock.tightened = TRUE
 	if(href_list["PRG_allowall"])
 		lock.auto_deny_all = FALSE
 	if(href_list["PRG_denyall"])
@@ -124,7 +120,6 @@
 			data["ennid"] = lock.ennid ? lock.ennid : "Not Set"
 			data["key"] = lock.keydata ? lock.keydata : "Not Set"
 			data["status"] = "High Strength"
-			data["enabled"] = lock.tightened
 			data["default_state"] = lock.auto_deny_all
 			var/list/grants = list()
 			for(var/datum/computer_file/data/grant_record/GR in get_all_grants())
