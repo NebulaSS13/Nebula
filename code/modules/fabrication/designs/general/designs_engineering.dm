@@ -56,6 +56,15 @@
 /datum/fabricator_recipe/engineering/atm_kit
 	path = /obj/item/frame/stock_offset/atm/kit
 
+/datum/fabricator_recipe/engineering/newscaster_board
+	path = /obj/item/stock_parts/circuitboard/requests_console/newscaster
+
+/datum/fabricator_recipe/engineering/newscaster_frame
+	path = /obj/item/frame/stock_offset/newscaster
+
+/datum/fabricator_recipe/engineering/newscaster_kit
+	path = /obj/item/frame/stock_offset/newscaster/kit
+
 /datum/fabricator_recipe/engineering/sparker
 	path = /obj/item/frame/button/sparker
 

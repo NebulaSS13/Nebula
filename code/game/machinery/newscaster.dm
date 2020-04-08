@@ -152,6 +152,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	anchored = 1
 	layer = ABOVE_WINDOW_LAYER
 
+	construct_state = /decl/machine_construction/wall_frame/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+	frame_type = /obj/item/frame/stock_offset/newscaster
+
 /obj/machinery/newscaster/security_unit                   //Security unit
 	name = "Security Newscaster"
 	securityCaster = 1
@@ -159,10 +164,9 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 /obj/machinery/newscaster/Initialize()
 	. = ..()
 	allCasters += src
-	src.paper_remaining = 15            // Will probably change this to something better
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters) // Let's give it an appropriate unit number
-		src.unit_no++
-	src.update_icon() //for any custom ones on the map...
+	paper_remaining = 15            // Will probably change this to something better
+	unit_no = sequential_id("/obj/machinery/newscaster")
+	queue_icon_update()
 
 /obj/machinery/newscaster/Destroy()
 	allCasters -= src
@@ -171,7 +175,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 /obj/machinery/newscaster/on_update_icon()
 	if(inoperable())
 		icon_state = "newscaster_off"
-		if(stat & BROKEN) //If the thing is smashed, add crack overlay on top of the unpowered sprite.
+		if(reason_broken & MACHINE_BROKEN_GENERIC) //If the thing is smashed, add crack overlay on top of the unpowered sprite.
 			overlays.Cut()
 			overlays += image(src.icon, "crack3")
 		return
@@ -702,36 +706,6 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 		else if(href_list["refresh"])
 			src.updateUsrDialog()
-
-
-
-/obj/machinery/newscaster/attackby(obj/item/I, mob/user)
-	if (stat & BROKEN)
-		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
-		for (var/mob/O in hearers(5, src.loc))
-			O.show_message("<EM>[user.name]</EM> further abuses the shattered [src.name].")
-	else
-		if(istype(I, /obj/item) )
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			var/obj/item/W = I
-			if(W.force <15)
-				for (var/mob/O in hearers(5, src.loc))
-					O.show_message("[user.name] hits the [src.name] with the [W.name] with no visible effect." )
-					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
-			else
-				src.hitstaken++
-				if(hitstaken==3)
-					for (var/mob/O in hearers(5, src.loc))
-						O.show_message("[user.name] smashes the [src.name]!" )
-					set_broken(TRUE)
-					playsound(src.loc, 'sound/effects/Glassbr3.ogg', 100, 1)
-				else
-					for (var/mob/O in hearers(5, src.loc))
-						O.show_message("[user.name] forcefully slams the [src.name] with the [I.name]!" )
-					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		else
-			to_chat(user, "<span class='notice'>This does nothing.</span>")
-	queue_icon_update()
 
 /datum/news_photo
 	var/is_synth = 0

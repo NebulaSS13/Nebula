@@ -192,3 +192,14 @@
 /obj/item/frame/stock_offset/atm/kit
 	name = "automatic teller machine kit"
 	fully_construct = TRUE
+
+/obj/item/frame/stock_offset/newscaster
+	name = "newscaster frame"
+	desc = "Used to build a newscaster on a wall."
+	icon = 'icons/obj/terminals.dmi'
+	icon_state = "newscaster_off"
+	build_machine_type = /obj/machinery/newscaster
+
+/obj/item/frame/stock_offset/newscaster/kit
+	name = "newscaster kit"
+	fully_construct = TRUE
