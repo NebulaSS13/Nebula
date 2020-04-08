@@ -39,7 +39,7 @@ Buildable meters
 	icon_state = P.build_icon_state
 	pipe_class = P.pipe_class
 	rotate_class = P.rotate_class
-	constructed_path = P.type
+	constructed_path = P.base_type || P.type
 
 //called when a turf is attacked with a pipe item
 /obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)

@@ -33,6 +33,16 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	var/turn = DISPOSAL_FLIP_NONE
 	throwpass = TRUE
 
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable
+	)
+	frame_type = /obj/structure/disposalconstruct/machine
+	base_type = /obj/machinery/disposal/buildable
+
+/obj/machinery/disposal/buildable
+	uncreated_component_parts = null
+
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
 /obj/machinery/disposal/Initialize()
@@ -54,47 +64,22 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		trunk.linked = null
 	return ..()
 
+/obj/machinery/disposal/bash()
+	return FALSE
+
+/obj/machinery/disposal/cannot_transition_to(state_path, mob/user)
+	if(mode > 0)
+		return SPAN_NOTICE("Turn off the pump first.")
+	if(contents.len > LAZYLEN(component_parts))
+		return SPAN_NOTICE("Eject the items first!")
+	return ..()
+
 // attack by item places it in to disposal
 /obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
+	if((. = ..()))
+		return
 	if(stat & BROKEN || !I || !user)
 		return
-
-	add_fingerprint(user, 0, I)
-	if(mode<=0) // It's off
-		if(isScrewdriver(I))
-			if(contents.len > LAZYLEN(component_parts))
-				to_chat(user, "Eject the items first!")
-				return
-			if(mode==0) // It's off but still not unscrewed
-				mode=-1 // Set it to doubleoff l0l
-				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				to_chat(user, "You remove the screws around the power connection.")
-				return
-			else if(mode==-1)
-				mode=0
-				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				to_chat(user, "You attach the screws around the power connection.")
-				return
-		else if(isWelder(I) && mode==-1)
-			if(contents.len > LAZYLEN(component_parts))
-				to_chat(user, "Eject the items first!")
-				return
-			var/obj/item/weldingtool/W = I
-			if(W.remove_fuel(0,user))
-				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				to_chat(user, "You start slicing the floorweld off the disposal unit.")
-
-				if(do_after(user,20,src))
-					if(!src || !W.isOn()) return
-					to_chat(user, "You sliced the floorweld off the disposal unit.")
-					var/obj/structure/disposalconstruct/machine/C = new (loc, src)
-					src.transfer_fingerprints_to(C)
-					C.update()
-					qdel(src)
-				return
-			else
-				to_chat(user, "You need more welding fuel to complete this task.")
-				return
 
 	if(istype(I, /obj/item/melee/energy/blade))
 		to_chat(user, "You can't place that item inside the disposal unit.")
@@ -122,11 +107,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in the [src] by \the [user]."))
 				qdel(G)
 				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
-		return
-
-	if(isrobot(user))
-		return
-	if(!I)
 		return
 
 	if(!user.unEquip(I, src))

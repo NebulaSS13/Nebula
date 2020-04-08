@@ -392,8 +392,13 @@
 	desc = "A chute for big and small packages alike!"
 	density = 1
 	icon_state = "intake"
+	base_type = /obj/machinery/disposal/deliveryChute/buildable
+	frame_type = /obj/structure/disposalconstruct/machine/chute
 
 	var/c_mode = 0
+
+/obj/machinery/disposal/deliveryChute/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/disposal/deliveryChute/Initialize()
 	. = ..()
