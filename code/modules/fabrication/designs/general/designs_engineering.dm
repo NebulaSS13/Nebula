@@ -42,10 +42,19 @@
 	path = /obj/item/stock_parts/circuitboard/requests_console
 
 /datum/fabricator_recipe/engineering/requests_console_frame
-	path = /obj/item/frame/request_console
+	path = /obj/item/frame/stock_offset/request_console
 
 /datum/fabricator_recipe/engineering/requests_console_kit
-	path = /obj/item/frame/request_console/kit
+	path = /obj/item/frame/stock_offset/request_console/kit
+
+/datum/fabricator_recipe/engineering/atm_board
+	path = /obj/item/stock_parts/circuitboard/requests_console/atm
+
+/datum/fabricator_recipe/engineering/atm_frame
+	path = /obj/item/frame/stock_offset/atm
+
+/datum/fabricator_recipe/engineering/atm_kit
+	path = /obj/item/frame/stock_offset/atm/kit
 
 /datum/fabricator_recipe/engineering/sparker
 	path = /obj/item/frame/button/sparker

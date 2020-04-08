@@ -61,4 +61,7 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1,
 	)
-	var/department
+
+/obj/item/stock_parts/circuitboard/requests_console/atm
+	name = T_BOARD("atm")
+	build_path = /obj/machinery/atm
