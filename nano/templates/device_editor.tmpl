@@ -1,0 +1,42 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Refresh', null, { "PRG_refresh" : 1 })}}
+{{else}}
+	<h2>Editing Access Requirements:</h2>
+	<div class='item'>
+		<div class='itemLabel'>ENNID:</div>
+		<div class='itemBody'>{{:helper.link(data.ennid, null, { "PRG_ennid" : 1 })}}</div>
+	</div>
+	<div class='item'>
+		<div class='itemLabel'>ENNID Key:</div>
+		<div class='itemBody'>{{:helper.link(data.key, null, { "PRG_key" : 1 })}}</div>
+	</div>
+	<div class='item'>
+		<div class='itemLabel'>Network Status:</div>
+		<div class='itemBody'>{{:data.status}}</div>
+	</div>
+	<div class='item'>
+		<div class='itemLabel'>Device Default State:</div>
+		<div class='itemBody'>
+			{{:helper.link('ALLOW ALL', null, { "PRG_allowall" : 1 }, !data.default_state ? 'disabled' : null)}}
+			{{:helper.link('DENY ALL', null, { "PRG_denyall" : 1 }, data.default_state ? 'disabled' : null)}}
+		</div>
+	</div>
+	<hr>
+	<h2>Grants:</h2>
+	<table>
+		<tr><th>Grant
+		<th>Operations
+		{{for data.grants}}
+			<tr><td>{{:value.grant_name}}
+			<td>
+				{{if value.assigned}}
+					{{:helper.link('REMOVE', null, { "PRG_removegrant" : value.grant_name })}}
+				{{else}}
+					{{:helper.link('ASSIGN', null, { "PRG_assigngrant" : value.grant_name })}}
+				{{/if}}
+		{{/for}}
+	</table>
+{{/if}}
