@@ -427,6 +427,16 @@
 	req_tech = list(TECH_BIO = 3, TECH_MATERIAL = 2, TECH_DATA = 1)
 	build_path = /obj/item/stock_parts/circuitboard/tray
 
+/datum/design/circuit/dehumidifier
+	name = "dehumidifier"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	build_path = /obj/item/stock_parts/circuitboard/dehumidifier
+
+/datum/design/circuit/space_heater
+	name = "space heater"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	build_path = /obj/item/stock_parts/circuitboard/space_heater
+
 /datum/design/circuit/miningdrill
 	name = "mining drill head"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
