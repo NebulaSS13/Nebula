@@ -33,7 +33,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/list/access_grants = list()
 	for(var/datum/computer_file/data/grant_record/grant in get_valid_grants())
 		LAZYDISTINCTADD(access_grants, uppertext("[ennid].[grant.stored_data]"))
-	return access_grants
+	return list(access_grants) // LIST on lists because lists in lists are for OR type access configurations.
 
 /datum/computer_file/report/crew_record/proc/get_valid_grants()
 	var/list/valid_grants = list()

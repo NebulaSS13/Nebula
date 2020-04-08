@@ -47,7 +47,7 @@
 			if(grant in MF.stored_files)
 				resulting_grants.Add(uppertext("[ennid].[grant.stored_data]"))
 				break
-	return resulting_grants
+	return list(resulting_grants) // List of lists is an OR type access configuration.
 
 /obj/item/stock_parts/exonet_lock/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/modular_computer))
