@@ -201,4 +201,3 @@
 /decl/stock_part_preset/radio/basic_transmitter/button/atmosia
 	transmit_on_change = list("valve_toggle" = /decl/public_access/public_variable/button_active)
 	frequency = FUEL_FREQ
-	filter = RADIO_ATMOSIA

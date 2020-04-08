@@ -128,7 +128,9 @@
 /obj/machinery/computer/air_control/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+	radio_connection = radio_controller.add_object(src, frequency, sensor_tag)
+	radio_connection = radio_controller.add_object(src, frequency, input_tag)
+	radio_connection = radio_controller.add_object(src, frequency, output_tag)
 
 /obj/machinery/computer/air_control/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(..())
@@ -218,6 +220,7 @@
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
 			src.input_tag = t
+			set_frequency(frequency)
 		return TOPIC_REFRESH
 
 	if(href_list["set_output_tag"])
@@ -225,6 +228,7 @@
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
 			src.output_tag = t
+			set_frequency(frequency)
 		return TOPIC_REFRESH
 
 	if(href_list["set_sensor_tag"])
@@ -232,6 +236,7 @@
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if(t)
 			src.sensor_tag = t
+			set_frequency(frequency)
 		return TOPIC_REFRESH
 	
 	if(href_list["set_sensor_name"])
@@ -252,9 +257,8 @@
 	if(!radio_connection)
 		return TOPIC_HANDLED
 
-	signal.data["sigtype"] = "command"
 	signal.data["status"] = TRUE
-	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
+	radio_connection.post_signal(src, signal, signal.data["tag"])
 
 /obj/machinery/computer/air_control/fuel_injection
 	icon = 'icons/obj/computer.dmi'
@@ -267,6 +271,10 @@
 
 	var/cutoff_temperature = 2000
 	var/on_temperature = 1200
+
+/obj/machinery/computer/air_control/fuel_injection/set_frequency()
+	..()
+	radio_connection = radio_controller.add_object(src, frequency, device_tag)
 
 /obj/machinery/computer/air_control/fuel_injection/receive_signal(datum/signal/signal)
 	if(!signal || signal.encryption) return
@@ -291,9 +299,9 @@
 		signal.data = list(
 			"tag" = device_tag,
 			"power_toggle" = 1,
-			"sigtype" = "command"
 		)
-		..()
+		radio_connection.post_signal(src, signal, device_tag)
+		return TOPIC_REFRESH
 
 /obj/machinery/computer/air_control/fuel_injection/Process()
 	if(automation)
@@ -314,11 +322,10 @@
 
 		signal.data = list(
 			"tag" = device_tag,
-			"set_power" = injecting,
-			"sigtype" = "command"
+			"set_power" = injecting
 		)
 
-		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, device_tag)
 
 	..()
 

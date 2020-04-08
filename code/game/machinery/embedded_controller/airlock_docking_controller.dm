@@ -76,6 +76,11 @@
 	airlock_program.process()
 	..()
 
+/datum/computer/file/embedded_program/docking/airlock/get_receive_filters()
+	. = ..()
+	if(istype(airlock_program))
+		. |= airlock_program.get_receive_filters()
+
 /datum/computer/file/embedded_program/docking/airlock/receive_signal(datum/signal/signal, receive_method, receive_param)
 	airlock_program.receive_signal(signal, receive_method, receive_param)	//pass along to subprograms
 	..(signal, receive_method, receive_param)

@@ -308,7 +308,6 @@
 
 /decl/stock_part_preset/radio/receiver/tvalve
 	frequency = FUEL_FREQ
-	filter = RADIO_ATMOSIA
 	receive_and_call = list(
 		"valve_open" = /decl/public_access/public_method/tvalve_go_side,
 		"valve_close" = /decl/public_access/public_method/tvalve_go_straight,

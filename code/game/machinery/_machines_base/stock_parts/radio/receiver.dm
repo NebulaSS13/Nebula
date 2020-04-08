@@ -20,6 +20,9 @@
 		var/decl/public_access/public_variable/thing = variable
 		return thing.can_write
 
+/obj/item/stock_parts/radio/receiver/get_receive_filter()
+	return filter || id_tag || RADIO_DEFAULT
+
 /obj/item/stock_parts/radio/receiver/receive_signal(datum/signal/signal, receive_method, receive_param)
 	if(!id_tag)
 		return

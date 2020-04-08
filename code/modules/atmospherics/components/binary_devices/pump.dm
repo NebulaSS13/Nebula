@@ -201,7 +201,6 @@ Thus, the two variables affect pump operation are set in New():
 
 /decl/stock_part_preset/radio/event_transmitter/pump
 	frequency = PUMP_FREQ
-	filter = RADIO_ATMOSIA
 	event = /decl/public_access/public_variable/input_toggle
 	transmit_on_event = list(
 		"device" = /decl/public_access/public_variable/identifier,
@@ -211,7 +210,6 @@ Thus, the two variables affect pump operation are set in New():
 
 /decl/stock_part_preset/radio/receiver/pump
 	frequency = PUMP_FREQ
-	filter = RADIO_ATMOSIA
 	receive_and_call = list(
 		"power_toggle" = /decl/public_access/public_method/toggle_power,
 		"status" = /decl/public_access/public_method/refresh

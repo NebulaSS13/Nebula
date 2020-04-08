@@ -227,6 +227,8 @@ var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, MED_FREQ, SEC_FREQ, SCI
 
 //This filter is special because devices belonging to default also recieve signals sent to any other filter.
 var/const/RADIO_DEFAULT = "radio_default"
+//This filter is special because devices belonging to it do not recieve any signals at all. Useful for devices which only transmit.
+var/const/RADIO_NULL = "radio_null"
 
 var/const/RADIO_TO_AIRALARM = "radio_airalarm" //air alarms
 var/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in recieving signals from air alarms
@@ -304,7 +306,7 @@ var/global/datum/controller/radio/radio_controller
 	return frequency
 
 /datum/radio_frequency
-	var/frequency as num
+	var/frequency // numerical frequency value
 	var/list/list/obj/devices = list()
 
 /datum/radio_frequency/proc/post_signal(obj/source, datum/signal/signal, var/radio_filter, var/range)
@@ -342,6 +344,8 @@ var/global/datum/controller/radio/radio_controller
 		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
 /datum/radio_frequency/proc/add_listener(obj/device, var/radio_filter)
+	if(radio_filter == RADIO_NULL)
+		return // Just don't add them
 	if (!radio_filter)
 		radio_filter = RADIO_DEFAULT
 	var/list/obj/devices_line = devices[radio_filter]

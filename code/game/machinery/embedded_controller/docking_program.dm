@@ -87,6 +87,9 @@
 		receive_signal(signal)
 		return TRUE
 
+/datum/computer/file/embedded_program/docking/get_receive_filters()
+	return list(id_tag)
+
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
 	var/command = signal.data["command"]
@@ -282,13 +285,13 @@
 	signal.data["command"] = command
 	signal.data["recipient"] = recipient
 	signal.data["code"] = docking_codes
-	post_signal(signal)
+	post_signal(signal, recipient)
 
 /datum/computer/file/embedded_program/docking/proc/broadcast_docking_status()
 	var/datum/signal/signal = new
 	signal.data["tag"] = id_tag
 	signal.data["dock_status"] = get_docking_status()
-	post_signal(signal)
+	post_signal(signal, tag)
 
 //this is mostly for NanoUI
 /datum/computer/file/embedded_program/docking/proc/get_docking_status()

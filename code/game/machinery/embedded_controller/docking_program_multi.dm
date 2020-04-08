@@ -29,6 +29,9 @@
 	for (var/child_tag in children_tags)
 		children_ready[child_tag] = 0
 
+/datum/computer/file/embedded_program/docking/multi/get_receive_filters()
+	return ..() + children_tags
+
 /datum/computer/file/embedded_program/docking/multi/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
 	var/command = signal.data["command"]
@@ -135,6 +138,9 @@
 	if (!docking_enabled|| override_enabled)	//only allow the port to be used as an airlock if nothing is docked here or the override is enabled
 		return ..(command)
 
+/datum/computer/file/embedded_program/airlock/multi_docking/get_receive_filters()
+	return ..() + master_tag // master_tag is specifically to get "dock_status"
+
 /datum/computer/file/embedded_program/airlock/multi_docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	..()
 
@@ -216,10 +222,10 @@
 	signal.data["tag"] = id_tag
 	signal.data["command"] = command
 	signal.data["recipient"] = master_tag
-	post_signal(signal)
+	post_signal(signal, master_tag)
 
 /datum/computer/file/embedded_program/airlock/multi_docking/proc/broadcast_override_status()
 	var/datum/signal/signal = new
 	signal.data["tag"] = id_tag
 	signal.data["override_status"] = override_enabled? "enabled" : "disabled"
-	post_signal(signal)
+	post_signal(signal, master_tag)

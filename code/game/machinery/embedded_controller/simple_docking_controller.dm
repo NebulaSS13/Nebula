@@ -39,6 +39,8 @@
 		spawn(10)
 			signal_door("update")		//signals connected doors to update their status
 
+/datum/computer/file/embedded_program/docking/simple/get_receive_filters()
+	return ..() + tag_door
 
 /datum/computer/file/embedded_program/docking/simple/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]
@@ -72,7 +74,7 @@
 	var/datum/signal/signal = new
 	signal.data["tag"] = tag_door
 	signal.data["command"] = command
-	post_signal(signal)
+	post_signal(signal, tag_door)
 
 ///datum/computer/file/embedded_program/docking/simple/proc/signal_mech_sensor(var/command)
 //	signal_door(command)

@@ -64,6 +64,19 @@
 			signalDoor(tag_exterior_door, "update")		//signals connected doors to update their status
 			signalDoor(tag_interior_door, "update")
 
+/datum/computer/file/embedded_program/airlock/get_receive_filters()
+	. = list(
+		id_tag,
+		tag_exterior_door,
+		tag_interior_door,
+		tag_airpump,
+		tag_chamber_sensor,
+		tag_exterior_sensor,
+		tag_interior_sensor
+	)
+	if(cycle_to_external_air)
+		. += tag_pump_out_internal
+
 /datum/computer/file/embedded_program/airlock/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]
 	if(!receive_tag) return
@@ -321,7 +334,7 @@
 	var/datum/signal/signal = new
 	signal.data["tag"] = tag
 	signal.data["command"] = command
-	post_signal(signal, RADIO_AIRLOCK)
+	post_signal(signal, tag)
 
 /datum/computer/file/embedded_program/airlock/proc/shutAlarm()
 	var/datum/signal/signal = new
@@ -339,7 +352,7 @@
 		"set_external_pressure" = pressure,
 		"status" = TRUE
 	)
-	post_signal(signal, RADIO_FROM_AIRALARM)
+	post_signal(signal, tag)
 
 //this is called to set the appropriate door state at the end of a cycling process, or for the exterior buttons
 /datum/computer/file/embedded_program/airlock/proc/cycleDoors(var/target)
@@ -362,7 +375,7 @@ datum/computer/file/embedded_program/airlock/proc/signal_mech_sensor(var/command
 	var/datum/signal/signal = new
 	signal.data["tag"] = sensor
 	signal.data["command"] = command
-	post_signal(signal)
+	post_signal(signal, tag)
 
 /datum/computer/file/embedded_program/airlock/proc/enable_mech_regulation()
 	signal_mech_sensor("enable", tag_shuttle_mech_sensor)

@@ -17,13 +17,20 @@
 /obj/item/stock_parts/radio/on_install(obj/machinery/machine)
 	..()
 	if(!id_tag)
-		id_tag = machine.id_tag
+		set_id_tag(machine.id_tag)
+
+/obj/item/stock_parts/radio/proc/set_id_tag(new_tag)
+	id_tag = new_tag
+	set_frequency(frequency, filter)
+
+/obj/item/stock_parts/radio/proc/get_receive_filter() // what filter should we register with to recieve updates on?
+	return RADIO_NULL
 
 /obj/item/stock_parts/radio/proc/set_frequency(new_frequency, new_filter)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
 	filter = new_filter
-	radio = radio_controller.add_object(src, frequency, filter)
+	radio = radio_controller.add_object(src, frequency, get_receive_filter())
 
 /obj/item/stock_parts/radio/Destroy()
 	radio_controller.remove_object(src, frequency)

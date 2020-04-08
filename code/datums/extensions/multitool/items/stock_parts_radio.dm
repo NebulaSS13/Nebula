@@ -66,10 +66,10 @@
 		new_id_tag = sanitize(new_id_tag)
 		if(new_id_tag == radio.id_tag)
 			return MT_NOACTION
-		radio.id_tag = new_id_tag
+		radio.set_id_tag(new_id_tag)
 		return MT_REFRESH
 	if(href_list["filter"])
-		var/new_filter = input(user, "Select a new radio filter:", "Filter Selection", radio.filter) as null|anything in GLOB.all_selectable_radio_filters
+		var/new_filter = input(user, "Select a new radio filter (usually signals are sent to listeners on your id_tag; this will override that behavior):", "Filter Selection", radio.filter) as null|anything in GLOB.all_selectable_radio_filters
 		if(!new_filter || (extension_status(user) != STATUS_INTERACTIVE))
 			return MT_NOACTION
 		if(new_filter == radio.filter)

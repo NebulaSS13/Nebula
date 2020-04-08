@@ -13,7 +13,7 @@
 	if(encryption)
 		part.encryption = encryption
 	if(id_tag_modifier)
-		part.id_tag += id_tag_modifier
+		part.set_id_tag(part.id_tag + id_tag_modifier)
 
 /decl/stock_part_preset/radio/basic_transmitter
 	expected_part_type = /obj/item/stock_parts/radio/transmitter/basic

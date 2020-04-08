@@ -460,11 +460,11 @@
 
 /decl/stock_part_preset/radio/receiver/vent_pump/tank
 	frequency = ATMOS_TANK_FREQ
-	filter = RADIO_ATMOSIA
+	filter = null
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/tank
 	frequency = ATMOS_TANK_FREQ
-	filter = RADIO_ATMOSIA
+	filter = null
 
 /obj/machinery/atmospherics/unary/vent_pump/tank
 	controlled = FALSE
@@ -482,10 +482,11 @@
 
 /decl/stock_part_preset/radio/receiver/vent_pump/external_air
 	frequency = EXTERNAL_AIR_FREQ
+	filter = null
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/external_air
 	frequency = EXTERNAL_AIR_FREQ
-	filter = RADIO_AIRLOCK
+	filter = null
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air
 	controlled = FALSE
@@ -496,10 +497,11 @@
 
 /decl/stock_part_preset/radio/receiver/vent_pump/shuttle
 	frequency = SHUTTLE_AIR_FREQ
+	filter = null
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle
 	frequency = SHUTTLE_AIR_FREQ
-	filter = RADIO_AIRLOCK
+	filter = null
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle
 	controlled = FALSE
@@ -520,10 +522,11 @@
 
 /decl/stock_part_preset/radio/receiver/vent_pump/airlock
 	frequency = AIRLOCK_AIR_FREQ
+	filter = null
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock
 	frequency = AIRLOCK_AIR_FREQ
-	filter = RADIO_AIRLOCK
+	filter = null
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock
 	controlled = FALSE
@@ -534,9 +537,11 @@
 
 /decl/stock_part_preset/radio/receiver/vent_pump/engine
 	frequency = ATMOS_ENGINE_FREQ
+	filter = null
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/engine
 	frequency = ATMOS_ENGINE_FREQ
+	filter = null
 
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"

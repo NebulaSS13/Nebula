@@ -267,7 +267,6 @@
 
 /decl/stock_part_preset/radio/event_transmitter/passive_gate
 	frequency = PUMP_FREQ
-	filter = RADIO_ATMOSIA
 	event = /decl/public_access/public_variable/input_toggle
 	transmit_on_event = list(
 		"device" = /decl/public_access/public_variable/identifier,
@@ -279,7 +278,6 @@
 
 /decl/stock_part_preset/radio/receiver/passive_gate
 	frequency = PUMP_FREQ
-	filter = RADIO_ATMOSIA
 	receive_and_call = list(
 		"power_toggle" = /decl/public_access/public_method/toggle_unlocked,
 		"status" = /decl/public_access/public_method/refresh

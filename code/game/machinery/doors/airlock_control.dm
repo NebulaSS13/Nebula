@@ -104,7 +104,7 @@
 		if (bumped)
 			signal.data["bumped_with_access"] = 1
 
-		radio_connection.post_signal(src, signal, RADIO_AIRLOCK, AIRLOCK_CONTROL_RANGE)
+		radio_connection.post_signal(src, signal, id_tag, AIRLOCK_CONTROL_RANGE)
 
 
 /obj/machinery/door/airlock/open(surpress_send)
@@ -120,8 +120,7 @@
 	radio_controller.remove_object(src, frequency)
 	if(new_frequency)
 		frequency = new_frequency
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
-
+		radio_connection = radio_controller.add_object(src, frequency, id_tag)
 
 /obj/machinery/door/airlock/Initialize()
 	. = ..()
@@ -170,7 +169,7 @@
 	signal.data["tag"] = master_tag
 	signal.data["command"] = command
 
-	radio_connection.post_signal(src, signal, RADIO_AIRLOCK, AIRLOCK_CONTROL_RANGE)
+	radio_connection.post_signal(src, signal, master_tag, AIRLOCK_CONTROL_RANGE)
 	flick("airlock_sensor_cycle", src)
 	return TRUE
 
@@ -186,7 +185,7 @@
 			signal.data["timestamp"] = world.time
 			signal.data["pressure"] = num2text(pressure)
 
-			radio_connection.post_signal(src, signal, RADIO_AIRLOCK, AIRLOCK_CONTROL_RANGE)
+			radio_connection.post_signal(src, signal, id_tag, AIRLOCK_CONTROL_RANGE)
 
 			previousPressure = pressure
 
@@ -197,7 +196,7 @@
 /obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
+	radio_connection = radio_controller.add_object(src, frequency, RADIO_NULL)
 
 /obj/machinery/airlock_sensor/Initialize()
 	set_frequency(frequency)
@@ -254,14 +253,14 @@
 		signal.data["tag"] = master_tag
 		signal.data["command"] = command
 
-		radio_connection.post_signal(src, signal, RADIO_AIRLOCK, AIRLOCK_CONTROL_RANGE)
+		radio_connection.post_signal(src, signal, master_tag, AIRLOCK_CONTROL_RANGE)
 	flick("access_button_cycle", src)
 	return TRUE
 
 /obj/machinery/access_button/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
+	radio_connection = radio_controller.add_object(src, frequency, RADIO_NULL)
 
 
 /obj/machinery/access_button/Initialize()
