@@ -1,5 +1,8 @@
 /obj/effect/overmap/visitable/sector/exoplanet
 	name = "exoplanet"
+	icon = 'icons/obj/overmap64.dmi'
+	bound_height = 64
+	bound_width = 64
 	icon_state = "globe"
 	in_space = 0
 	var/area/planetary_area
