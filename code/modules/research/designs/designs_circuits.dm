@@ -694,3 +694,8 @@
 	name = "merchant pad board"
 	build_path = /obj/item/stock_parts/circuitboard/merchant_pad
 	req_tech = list(TECH_DATA = 6, TECH_BLUESPACE = 6, TECH_ESOTERIC = 1)
+
+/datum/design/circuit/jukebox
+	name = "jukebox board"
+	build_path = /obj/item/stock_parts/circuitboard/jukebox
+	req_tech = list(TECH_DATA = 5)
