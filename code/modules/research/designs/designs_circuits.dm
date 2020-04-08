@@ -437,6 +437,11 @@
 	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
 	build_path = /obj/item/stock_parts/circuitboard/space_heater
 
+/datum/design/circuit/ice_cream
+	name = "ice cream vat"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/ice_cream
+
 /datum/design/circuit/miningdrill
 	name = "mining drill head"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)

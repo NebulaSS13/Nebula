@@ -140,3 +140,13 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
+
+/obj/item/stock_parts/circuitboard/ice_cream
+	name = T_BOARD("ice cream vat")
+	build_path = /obj/machinery/icecream_vat
+	board_type = "machine"
+	origin_tech = "{'" + TECH_ENGINEERING + "':1}"
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 1,
+		/obj/item/pipe = 1
+	)

@@ -17,10 +17,14 @@
 	density = 1
 	anchored = 0
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
+	idle_power_usage = 100
 
 	var/list/product_types = list()
 	var/dispense_flavour = ICECREAM_VANILLA
 	var/flavour_name = "vanilla"
+
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
 
 /obj/machinery/icecream_vat/proc/get_ingredient_list(var/type)
 	switch(type)
@@ -60,15 +64,16 @@
 		else
 			return "vanilla"
 
-/obj/machinery/icecream_vat/Initialize()
+/obj/machinery/icecream_vat/Initialize(mapload, d, populate_parts)
 	. = ..()
 	create_reagents(100)
 	while(product_types.len < 8)
 		product_types.Add(5)
-	reagents.add_reagent(/datum/reagent/drink/milk, 5)
-	reagents.add_reagent(/datum/reagent/nutriment/flour, 5)
-	reagents.add_reagent(/datum/reagent/nutriment/sugar, 5)
-	reagents.add_reagent(/datum/reagent/drink/ice, 5)
+	if(populate_parts)
+		reagents.add_reagent(/datum/reagent/drink/milk, 5)
+		reagents.add_reagent(/datum/reagent/nutriment/flour, 5)
+		reagents.add_reagent(/datum/reagent/nutriment/sugar, 5)
+		reagents.add_reagent(/datum/reagent/drink/ice, 5)
 
 /obj/machinery/icecream_vat/interface_interact(mob/user)
 	interact(user)
