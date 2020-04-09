@@ -78,6 +78,7 @@
 	icon = 'icons/obj/stickynotes.dmi'
 	color = COLOR_YELLOW
 	slot_flags = 0
+	layer = ABOVE_WINDOW_LAYER
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
