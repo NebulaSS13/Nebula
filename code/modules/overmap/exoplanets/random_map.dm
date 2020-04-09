@@ -13,14 +13,9 @@
 	var/intended_y = 150
 	var/large_flora_prob = 30
 	var/flora_prob = 10
-	var/flora_diversity = 4
 	var/fauna_prob = 2
 	var/megafauna_spawn_prob = 0.5 //chance that a given fauna mob will instead be a megafauna
 
-	var/list/fauna_types = list()
-	var/list/megafauna_types = list()
-	var/list/small_flora_types = list()
-	var/list/big_flora_types = list()
 	var/list/plantcolors = list("RANDOM")
 	var/list/grass_cache
 
@@ -34,7 +29,6 @@
 	fauna_prob *= size_mod
 	if(_plant_colors)
 		plantcolors = _plant_colors
-	generate_flora()
 	..()
 
 	GLOB.using_map.base_turf_by_z[num2text(tz)] = land_type
@@ -80,49 +74,10 @@
 				spawn_flora(T, 1)
 
 /datum/random_map/noise/exoplanet/proc/spawn_fauna(var/turf/T)
-	if(prob(megafauna_spawn_prob) && LAZYLEN(megafauna_types))
-		var/beastie = pick(megafauna_types)
-		new beastie(T)
-		return
-
-	if(LAZYLEN(fauna_types))
-		var/beastie = pick(fauna_types)
-		new beastie(T)
-
-/datum/random_map/noise/exoplanet/proc/generate_flora()
-	for(var/i = 1 to flora_diversity)
-		var/datum/seed/S = new()
-		S.randomize()
-		var/planticon = "alien[rand(1,4)]"
-		S.set_trait(TRAIT_PRODUCT_ICON,planticon)
-		S.set_trait(TRAIT_PLANT_ICON,planticon)
-		var/color = pick(plantcolors)
-		if(color == "RANDOM")
-			color = get_random_colour(0,75,190)
-		S.set_trait(TRAIT_PLANT_COLOUR,color)
-		var/carnivore_prob = rand(100)
-		if(carnivore_prob < 10)
-			S.set_trait(TRAIT_CARNIVOROUS,2)
-			S.set_trait(TRAIT_SPREAD,1)
-		else if(carnivore_prob < 20)
-			S.set_trait(TRAIT_CARNIVOROUS,1)
-		small_flora_types += S
-	if(large_flora_prob)
-		var/tree_diversity = max(1,flora_diversity/2)
-		for(var/i = 1 to tree_diversity)
-			var/datum/seed/S = new()
-			S.randomize()
-			S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
-			S.set_trait(TRAIT_PLANT_ICON,"tree")
-			S.set_trait(TRAIT_SPREAD,0)
-			S.set_trait(TRAIT_HARVEST_REPEAT,1)
-			S.set_trait(TRAIT_LARGE,1)
-			var/color = pick(plantcolors)
-			if(color == "RANDOM")
-				color = get_random_colour(0,75,190)
-			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems[/datum/reagent/woodpulp] = 1
-			big_flora_types += S
+	if(prob(megafauna_spawn_prob))
+		new /obj/effect/landmark/exoplanet_spawn/megafauna(T)
+	else
+		new /obj/effect/landmark/exoplanet_spawn(T)
 
 /datum/random_map/noise/exoplanet/proc/get_grass_overlay()
 	var/grass_num = "[rand(1,6)]"
@@ -137,14 +92,12 @@
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
 	if(big)
-		if(LAZYLEN(big_flora_types))
-			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(T, pick(big_flora_types), 1)
+		new /obj/effect/landmark/exoplanet_spawn/large_plant(T)
 		for(var/turf/neighbor in trange(1,T))
 			spawn_grass(neighbor)
 	else
-		if(LAZYLEN(small_flora_types))
-			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(T, pick(small_flora_types), 1)
-			spawn_grass(T)
+		new /obj/effect/landmark/exoplanet_spawn/plant(T)
+		spawn_grass(T)
 
 /datum/random_map/noise/exoplanet/proc/spawn_grass(var/turf/T)
 	if(istype(T, water_type))

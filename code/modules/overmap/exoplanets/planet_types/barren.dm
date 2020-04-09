@@ -10,7 +10,13 @@
 	features_budget = 6
 	surface_color = "#807d7a"
 	water_color = null
+	has_trees = FALSE
 
+/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora()
+	if(prob(10))
+		flora_diversity = 1
+	..()
+	
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_habitability()
 	return HABITABILITY_BAD
 
@@ -24,13 +30,7 @@
 	land_type = /turf/simulated/floor/exoplanet/barren
 	flora_prob = 0.1
 	large_flora_prob = 0
-	flora_diversity = 0
 	fauna_prob = 0
-
-/datum/random_map/noise/exoplanet/barren/New()
-	if(prob(10))
-		flora_diversity = 1
-	..()
 
 /turf/simulated/floor/exoplanet/barren
 	name = "ground"
