@@ -481,12 +481,11 @@ client/verb/character_setup()
 
 /client/proc/update_chat_position(use_alternative)
 	var/input_height = 0
-	input_height = winget(src, "input", "size")
-	input_height = text2num(splittext(input_height, "x")[2])
-
 	// Hell
+	if(use_alternative == TRUE)
+		input_height = winget(src, "input", "size")
+		input_height = text2num(splittext(input_height, "x")[2])
 
-	if (use_alternative == TRUE)
 		winset(src, "input_alt", "is-visible=true;is-disabled=false;is-default=true")
 		winset(src, "hotkey_toggle_alt", "is-visible=true;is-disabled=false;is-default=true")
 		winset(src, "saybutton_alt", "is-visible=true;is-disabled=false;is-default=true")
@@ -504,6 +503,9 @@ client/verb/character_setup()
 		new_size = "[current_size[1]]x[text2num(current_size[2]) + input_height]"
 		winset(src, "mainwindow.mainvsplit", "size=[new_size]")
 	else
+		input_height = winget(src, "input_alt", "size")
+		input_height = text2num(splittext(input_height, "x")[2])
+
 		winset(src, "input_alt", "is-visible=false;is-disabled=true;is-default=false")
 		winset(src, "hotkey_toggle_alt", "is-visible=false;is-disabled=true;is-default=false")
 		winset(src, "saybutton_alt", "is-visible=false;is-disabled=true;is-default=false")
@@ -520,7 +522,6 @@ client/verb/character_setup()
 		current_size = splittext(winget(src, "mainwindow.mainvsplit", "size"), "x")
 		new_size = "[current_size[1]]x[text2num(current_size[2]) - input_height]"
 		winset(src, "mainwindow.mainvsplit", "size=[new_size]")
-	OnResize()
 
 /client/proc/toggle_fullscreen(new_value)
 	if((new_value == GLOB.PREF_BASIC) || (new_value == GLOB.PREF_FULL))
@@ -533,7 +534,6 @@ client/verb/character_setup()
 		winset(src, "mainwindow", "menu=menu;statusbar=true")
 		winset(src, "mainwindow.mainvsplit", "pos=3x0")
 	winset(src, "mainwindow", "is-maximized=true")
-	OnResize()
 
 /client/verb/fit_viewport()
 	set name = "Fit Viewport"
