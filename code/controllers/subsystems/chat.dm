@@ -9,7 +9,7 @@ SUBSYSTEM_DEF(chat)
 /datum/controller/subsystem/chat/fire()
 	for(var/i in payload)
 		var/client/C = i
-		C << output(payload[C], "browseroutput:output")
+		send_output(C, payload[C], "browseroutput:output")
 		payload -= C
 
 		if(MC_TICK_CHECK)
@@ -49,7 +49,7 @@ SUBSYSTEM_DEF(chat)
 				return
 
 			//Send it to the old style output window.
-			legacy_chat(C, original_message)
+			to_legacy_chat(C, original_message)
 
 			if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
 				continue
@@ -67,7 +67,7 @@ SUBSYSTEM_DEF(chat)
 			return
 
 		//Send it to the old style output window.
-		legacy_chat(C, original_message)
+		to_legacy_chat(C, original_message)
 
 		if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
 			return
