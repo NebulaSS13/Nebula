@@ -14,6 +14,9 @@
 
 	///datum that controls the displaying and hiding of tooltips
 	var/datum/tooltip/tooltips
+	
+	///goonchat chatoutput of the client
+	var/datum/chatOutput/chatOutput
 
 	/*
 	As of byond 512, due to how broken preloading is, preload_rsc MUST be set to 1 at compile time if resource URLs are *not* in use,

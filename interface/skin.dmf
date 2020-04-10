@@ -1053,6 +1053,16 @@ window "outputwindow"
 		saved-params = "max-lines"
 		style = ".system {color:#ff0000;}"
 		max-lines = 0
+	elem "browseroutput"
+		type = BROWSER
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #ffffff
+		is-visible = false
+		saved-params = ""
+		auto-format = false
 	elem "saybutton_alt"
 		type = BUTTON
 		pos = 519,460

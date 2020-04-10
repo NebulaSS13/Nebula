@@ -87,6 +87,11 @@
 		if("usr")		hsrc = mob
 		if("prefs")		return prefs.process_link(usr,href_list)
 		if("vars")		return view_var_Topic(href,href_list,hsrc)
+		if("chat")		return chatOutput.Topic(href, href_list)
+
+	switch(href_list["action"])
+		if("openLink")
+			open_link(src, href_list["link"])
 
 	if(codex_topic(href, href_list))
 		return
@@ -119,6 +124,9 @@
 	///////////
 /client/New(TopicData)
 	TopicData = null							//Prevent calls to client.Topic from connect
+
+	// Load goonchat
+	chatOutput = new(src)
 
 	switch (connection)
 		if ("seeker", "web") // check for invalid connection type. do nothing if valid
@@ -216,6 +224,9 @@
 
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
+
+	if(get_preference_value(/datum/client_preference/goonchat) == GLOB.PREF_YES)
+		chatOutput.start()
 
 	if(mob.get_preference_value(/datum/client_preference/chat_position) == GLOB.PREF_YES)
 		update_chat_position(TRUE)

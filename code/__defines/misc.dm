@@ -298,3 +298,7 @@
 #define RC_ASSIST 1		//Request Assistance
 #define RC_SUPPLY 2		//Request Supplies
 #define RC_INFO   4		//Relay Info
+
+//Misc text define. Does 4 spaces. Used as a makeshift tabulator.
+#define FOURSPACES "&nbsp;&nbsp;&nbsp;&nbsp;"
+#define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (istype(I, /client) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
