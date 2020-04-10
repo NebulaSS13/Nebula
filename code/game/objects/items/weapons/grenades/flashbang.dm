@@ -15,18 +15,21 @@
 	for(var/mob/living/carbon/M in victims)
 		bang(T, M)
 
-	for(var/obj/effect/blob/B in objs)       		//Blob damage here
+	for(var/obj/effect/blob/B in objs) //Blob damage here
 		var/damage = round(30/(get_dist(B,T)+1))
 		B.take_damage(damage)
 
-	new /obj/effect/sparks(src.loc)
+	new /obj/effect/sparks(loc)
 	new /obj/effect/effect/smoke/illumination(loc, 5, 30, 1, "#ffffff")
 	qdel(src)
 
-/obj/item/grenade/flashbang/proc/bang(var/turf/T , var/mob/living/carbon/M)					// Added a new proc called 'bang' that takes a location and a person to be banged.
-	to_chat(M, "<span class='danger'>BANG</span>")// Called during the loop that bangs people in lockers/containers and when banging
-	playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 30)		// people in normal view.  Could theroetically be called during other explosions.
-																// -- Polymorph
+// Added a new proc called 'bang' that takes a location and a person to be banged.
+// Called during the loop that bangs people in lockers/containers and when banging
+// people in normal view.  Could theroetically be called during other explosions.
+// -- Polymorph
+/obj/item/grenade/flashbang/proc/bang(var/turf/T , var/mob/living/carbon/M)
+	to_chat(M, SPAN_DANGER("BANG"))
+	playsound(src, 'sound/weapons/flashbang.ogg', 100)
 
 	//Checking for protections
 	var/eye_safety = 0
@@ -73,11 +76,14 @@
 		M.ear_deaf = max(M.ear_deaf,5)
 
 	//This really should be in mob not every check
-	if (M.ear_damage >= 15)
-		to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
-	else
-		if (M.ear_damage >= 5)
+	switch(M.ear_damage)
+		if(1 to 14)
 			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
+		if(15 to INFINITY)
+			to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
+
+	if(!ear_safety)
+		sound_to(M, 'sound/weapons/flash_ring.ogg')
 
 /obj/item/grenade/flashbang/Destroy()
 	walk(src, 0) // Because we might have called walk_away, we must stop the walk loop or BYOND keeps an internal reference to us forever.
