@@ -5,7 +5,11 @@
 	planetary_area = /area/exoplanet/volcanic
 	rock_colors = list(COLOR_DARK_GRAY)
 	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#7a5b3a","#120309")
-	possible_themes = list()
+	max_themes = 1
+	possible_themes = list(
+		/datum/exoplanet_theme = 100,
+		/datum/exoplanet_theme/robotic_guardians = 10
+	)
 	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#261e19"

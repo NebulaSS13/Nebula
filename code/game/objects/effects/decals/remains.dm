@@ -17,6 +17,9 @@
 	desc = "They look like the remains of something... alien. They have a strange aura about them."
 	icon_state = "remainsxeno"
 
+/obj/item/remains/xeno/charred
+	color = COLOR_DARK_GRAY
+
 /obj/item/remains/robot
 	desc = "They look like the remains of something mechanical. They have a strange aura about them."
 	icon = 'icons/mob/robots_gibs.dmi'
