@@ -11,7 +11,7 @@
 	var/obj/linked_device			// What device we're editing the permissions for.
 
 /obj/item/stock_parts/computer/rfid_programmer/proc/link_device(var/mob/usr, var/obj/target)
-	linked_device = target
+	linked_device = weakref(target)
 	if(target)
 		to_chat(usr, "\The [src] chirps in acknowledgement as it's linked to \a [target].")
 
@@ -21,4 +21,4 @@
 		return
 	if(get_dist(get_turf(src), get_turf(linked_device)) > 1)
 		return
-	return linked_device
+	return linked_device.resolve()
