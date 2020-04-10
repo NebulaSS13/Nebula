@@ -93,7 +93,7 @@
 			return
 		if(!(current_network in C.network))
 			return
-		if(!AreConnectedZLevels(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
+		if(!ARE_Z_CONNECTED(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
 			to_chat(usr, "Unable to establish a connection.")
 			return
 
@@ -148,7 +148,7 @@
 			L.tracking_cancelled()
 	current_camera = null
 
-/datum/nano_module/camera_monitor/check_eye(var/mob/user as mob)
+/datum/nano_module/camera_monitor/check_eye(var/mob/user)
 	if(!current_camera)
 		return 0
 	var/viewflag = current_camera.check_eye(user)

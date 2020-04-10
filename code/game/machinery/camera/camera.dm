@@ -39,7 +39,7 @@
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
 	if(stat & BROKEN)
-		to_chat(user, "<span class='warning'>It is completely demolished.</span>")
+		to_chat(user, SPAN_WARNING("It is completely demolished."))
 
 /obj/machinery/camera/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()
@@ -148,7 +148,7 @@
 	if (istype(AM, /obj))
 		var/obj/O = AM
 		if (O.throwforce >= src.toughness)
-			visible_message("<span class='warning'><B>[src] was hit by [O].</B></span>")
+			visible_message(SPAN_WARNING("<B>[src] was hit by [O].</B>"))
 		take_damage(O.throwforce)
 
 /obj/machinery/camera/proc/setViewRange(var/num = 7)
@@ -161,7 +161,7 @@
 	if(user.species.can_shred(user))
 		set_status(0)
 		user.do_attack_animation(src)
-		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
+		visible_message(SPAN_WARNING("\The [user] slashes at [src]!"))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		add_hiddenprint(user)
 		destroy()
@@ -175,8 +175,8 @@
 //		to_chat(user, "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>")
 		//if(toggle_panel(user)) // No delay because no one likes screwdrivers trying to be hip and have a duration cooldown
 		panel_open = !panel_open
-		user.visible_message("<span class='warning'>[user] screws the camera's panel [panel_open ? "open" : "closed"]!</span>",
-		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
+		user.visible_message(SPAN_WARNING("[user] screws the camera's panel [panel_open ? "open" : "closed"]!"),
+		SPAN_NOTICE("You screw the camera's panel [panel_open ? "open" : "closed"]."))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
 	else if((isWirecutter(W) || isMultitool(W)) && panel_open)
@@ -193,11 +193,11 @@
 				assembly.dir = src.dir
 				if(stat & BROKEN)
 					assembly.state = 2
-					to_chat(user, "<span class='notice'>You repaired \the [src] frame.</span>")
+					to_chat(user, SPAN_NOTICE("You repaired \the [src] frame."))
 					cancelCameraAlarm()
 				else
 					assembly.state = 1
-					to_chat(user, "<span class='notice'>You cut \the [src] free from the wall.</span>")
+					to_chat(user, SPAN_NOTICE("You cut \the [src] free from the wall."))
 					new /obj/item/stack/cable_coil(loc, 2)
 				assembly = null //so qdel doesn't eat it.
 			qdel(src)
@@ -220,7 +220,7 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (W.force >= src.toughness)
 			user.do_attack_animation(src)
-			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
+			visible_message(SPAN_WARNING("<b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b>"))
 			if (istype(W, /obj/item)) //is it even possible to get into attackby() with non-items?
 				var/obj/item/I = W
 				if (I.hitsound)
@@ -241,17 +241,17 @@
 	set_status(!src.status)
 	if (!(src.status))
 		if(user)
-			visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
+			visible_message(SPAN_NOTICE(" [user] has deactivated [src]!"))
 		else
-			visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
+			visible_message(SPAN_NOTICE(" [src] clicks and shuts down. "))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = "[initial(icon_state)]1"
 		add_hiddenprint(user)
 	else
 		if(user)
-			visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+			visible_message(SPAN_NOTICE(" [user] has reactivated [src]!"))
 		else
-			visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
+			visible_message(SPAN_NOTICE(" [src] clicks and reactivates itself. "))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = initial(icon_state)
 		add_hiddenprint(user)
@@ -375,7 +375,7 @@
 		return 0
 
 	if(WT.remove_fuel(0, user))
-		to_chat(user, "<span class='notice'>You start to weld \the [src]..</span>")
+		to_chat(user, SPAN_NOTICE("You start to weld \the [src].."))
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		busy = 1
 		if(do_after(user, 100, src) && WT.isOn())
