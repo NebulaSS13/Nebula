@@ -26,8 +26,7 @@
 	if(ethernet)
 		. += "OpenEth (Physical Connection) - Physical network connection port"
 
-/obj/item/stock_parts/computer/network_card/New(var/l)
-	..(l)
+/obj/item/stock_parts/computer/network_card/Initialize()
 	if(!identification_id)
 		identification_id = new_guid()
 
