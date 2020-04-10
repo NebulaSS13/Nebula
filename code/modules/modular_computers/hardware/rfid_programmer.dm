@@ -8,7 +8,7 @@
 	origin_tech = list(TECH_DATA = 4)
 	// usage_flags = PROGRAM_PDA & PROGRAM_TABLET
 
-	var/obj/linked_device			// What device we're editing the permissions for.
+	var/weakref/linked_device			// What device we're editing the permissions for.
 
 /obj/item/stock_parts/computer/rfid_programmer/proc/link_device(var/mob/usr, var/obj/target)
 	linked_device = weakref(target)
