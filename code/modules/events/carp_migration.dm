@@ -68,7 +68,7 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 			GLOB.destroyed_event.register(M,src,/datum/event/carp_migration/proc/reduce_carp_count)
 			LAZYADD(GLOB.carp_count["[Z]"], M)
 			spawned_carp ++
-			M.throw_at(get_random_edge_turf(GLOB.reverse_dir[dir],TRANSITIONEDGE + 2, Z), 5, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
+			M.throw_at(get_random_edge_turf(GLOB.reverse_dir[dir],TRANSITIONEDGE + 2, Z), 250, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
 		I++
 		if(no_show)
 			break

@@ -62,6 +62,44 @@
 
 	return 0
 
+/atom/movable/hitby(atom/movable/AM, var/datum/thrownthing/TT)
+	. = ..()
+	process_momentum(AM,TT)
+
+/atom/movable/proc/process_momentum(atom/movable/AM, var/datum/thrownthing/TT)
+	if(anchored) return
+	var/power = (AM.get_mass()*TT.speed)/get_mass()
+
+	var/direction = TT.init_dir
+
+	if(power > 0.75)		//blown backward, also calls being pinned to walls
+		throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5))
+
+	else if(power > 0.5)	//knocks them back and changes their direction
+		step(src, direction)
+		space_drift(direction)
+
+	else if(power > 0.25)	//glancing change in direction
+		var/drift_dir
+		if(direction & (NORTH|SOUTH))
+			if(inertia_dir & (NORTH|SOUTH))
+				drift_dir |= (direction & (NORTH|SOUTH)) & (inertia_dir & (NORTH|SOUTH))
+			else
+				drift_dir |= direction & (NORTH|SOUTH)
+		else
+			drift_dir |= inertia_dir & (NORTH|SOUTH)
+		if(direction & (EAST|WEST))
+			if(inertia_dir & (EAST|WEST))
+				drift_dir |= (direction & (EAST|WEST)) & (inertia_dir & (EAST|WEST))
+			else
+				drift_dir |= direction & (EAST|WEST)
+		else
+			drift_dir |= inertia_dir & (EAST|WEST)
+		space_drift(drift_dir)
+
+/atom/movable/proc/get_mass()
+	return 1.5
+
 /atom/movable/Destroy()
 	. = ..()
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))

@@ -274,9 +274,12 @@ var/const/enterloopsanity = 100
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, TT.speed)
-		var/intial_dir = TT.init_dir
-		spawn(2)
-			step(AM, turn(intial_dir, 180))
+			if(M.pinned)
+				return
+		addtimer(CALLBACK(src, /turf/proc/bounce_off, AM, TT.init_dir), 2)
+
+/turf/proc/bounce_off(var/atom/movable/AM, var/direction)
+	step(AM, turn(direction, 180))
 
 /turf/proc/can_engrave()
 	return FALSE
