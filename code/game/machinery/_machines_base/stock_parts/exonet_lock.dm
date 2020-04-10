@@ -50,15 +50,13 @@
 	return list(resulting_grants) // List of lists is an OR type access configuration.
 
 /obj/item/stock_parts/exonet_lock/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/modular_computer))
-		// Being attacked by a modular computer. Check to see if it has anything interesting...
-		var/datum/extension/interactive/ntos/os = get_extension(I, /datum/extension/interactive/ntos)
-		if(os)
-			// See if we can get a special device...
-			var/obj/item/stock_parts/computer/rfid_programmer/programmer = os.get_component(/obj/item/stock_parts/computer/rfid_programmer)
-			if(programmer && programmer.check_functionality())
-				programmer.link_device(user, src)
-				return TRUE
+	var/datum/extension/interactive/ntos/os = get_extension(I, /datum/extension/interactive/ntos)
+	if(os)
+		// See if we can get a special device...
+		var/obj/item/stock_parts/computer/rfid_programmer/programmer = os.get_component(/obj/item/stock_parts/computer/rfid_programmer)
+		if(programmer && programmer.check_functionality())
+			programmer.link_device(user, src)
+			return TRUE
 
 
 /obj/item/stock_parts/exonet_lock/proc/get_default_access()

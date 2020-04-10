@@ -56,6 +56,8 @@
 	update_icon()
 	update_verbs()
 	update_name()
+	if(enabled_by_default)
+		enable_computer()
 	. = ..()
 
 /obj/item/modular_computer/Destroy()

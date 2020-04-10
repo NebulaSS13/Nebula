@@ -62,22 +62,40 @@
 	var/datum/nano_module/program/device_editor/NMM = NM
 	var/obj/item/stock_parts/computer/rfid_programmer/programmer = NMM.get_functional_component(/obj/item/stock_parts/computer/rfid_programmer)
 	var/obj/item/stock_parts/exonet_lock/lock = programmer.get_device()
+	var/datum/extension/exonet_device/exonet = NMM.get_exonet_device()
 
 	if(href_list["PRG_refresh"])
 		error = null
 		return TOPIC_HANDLED
 	if(href_list["ennid"])
-		var/new_ennid = sanitize(input(usr, "Enter exonet ennid or leave blank to cancel:", "Change ENNID"))
-		if(!new_ennid)
-			return 1
-		lock.ennid = new_ennid
+		var/list/result = exonet.do_change_ennid(usr)
+		// Guard statements.
+		if(!result)
+			return TOPIC_REFRESH
+		if("error" in result)
+			error = result["error"]
+			return TOPIC_REFRESH
+
+		// Success.
+		exonet.disconnect_network()
+		lock.ennid = result["ennid"]
+		lock.keydata = result["key"]
 		lock.grants = list()
+		exonet.connect_network(usr, lock.ennid, NETWORKSPEED_ETHERNET, lock.keydata)
 	if(href_list["key"])
-		var/new_key = sanitize(input(usr, "Enter exonet keypass or leave blank to cancel:", "Change key"))
-		if(!new_key)
-			return 1
-		lock.keydata = new_key
+		var/list/result = exonet.do_change_key(usr)
+		// Guard statements.
+		if(!result)
+			return TOPIC_REFRESH
+		if("error" in result)
+			error = result["error"]
+			return TOPIC_REFRESH
+
+		// Success.
+		exonet.disconnect_network()
+		lock.keydata = result["key"]
 		lock.grants = list()
+		exonet.connect_network(usr, lock.ennid, NETWORKSPEED_ETHERNET, lock.keydata)
 	if(href_list["PRG_allowall"])
 		lock.auto_deny_all = FALSE
 	if(href_list["PRG_denyall"])
