@@ -6,6 +6,7 @@
 	critical = 0
 	icon_state = "netcard_basic"
 	hardware_size = 1
+	matter = list(MAT_STEEL = 250, MAT_GLASS = 100)
 	var/identification_id = null	// Identification ID. Technically MAC address of this device. Can't be changed by user.
 	var/identification_string = "" 	// Identification string, technically nickname seen in the network. Can be set by user.
 	var/long_range = 0
