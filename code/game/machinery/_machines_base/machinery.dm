@@ -255,7 +255,7 @@ Class Procs:
 /obj/machinery/attack_ghost(mob/user)
 	interface_interact(user)
 
-// If you don't call parent in this proc, you must make all appropriate checks yourself. 
+// If you don't call parent in this proc, you must make all appropriate checks yourself.
 // If you do, you must respect the return value.
 /obj/machinery/attack_hand(mob/user)
 	if((. = ..())) // Buckling, climbers; unlikely to return true.
@@ -446,7 +446,7 @@ Class Procs:
 /obj/machinery/proc/on_user_login(var/mob/M)
 	return
 
-	/obj/machinery/get_req_access()
+/obj/machinery/get_req_access()
 	var/obj/item/stock_parts/exonet_lock/lock = get_component_of_type(/obj/item/stock_parts/exonet_lock)
 	if(lock)
 		return lock.get_req_access()
