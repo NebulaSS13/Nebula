@@ -52,6 +52,13 @@
 	return result
 
 /datum/extension/exonet_device/proc/do_change_key(var/mob/user)
+	var/list/result = list()
+	var/new_key = sanitize(input(user, "Enter exonet keypass or leave blank if none:", "Change Key"))
+	
+	if(!new_key)
+		return
+	result["key"] = new_key
+	return result		
 
 /datum/extension/exonet_device/proc/connect_network(var/mob/user, var/new_ennid, var/nic_netspeed, var/keydata)
 	if(ennid == new_ennid)
