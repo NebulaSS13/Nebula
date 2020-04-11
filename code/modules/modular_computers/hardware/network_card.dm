@@ -30,7 +30,7 @@
 /obj/item/stock_parts/computer/network_card/Initialize()
 	if(!identification_id)
 		identification_id = new_guid()
-	set_extension(src, /datum/extension/exonet_device, ennid, get_netspeed())
+	set_extension(src, /datum/extension/exonet_device, null, get_netspeed())
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/item/stock_parts/computer/network_card/LateInitialize()
@@ -45,6 +45,7 @@
 	power_usage = 100 // Better range but higher power usage.
 	icon_state = "netcard_advanced"
 	hardware_size = 1
+	matter = list(MAT_STEEL = 500, MAT_GLASS = 200)
 
 /obj/item/stock_parts/computer/network_card/wired
 	name = "wired EXONET network card"
@@ -54,6 +55,7 @@
 	power_usage = 100 // Better range but higher power usage.
 	icon_state = "netcard_ethernet"
 	hardware_size = 3
+	matter = list(MAT_STEEL = 2500, MAT_GLASS = 400)
 
 // Returns a string identifier of this network card
 /obj/item/stock_parts/computer/network_card/proc/get_network_tag()

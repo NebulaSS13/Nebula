@@ -30,7 +30,7 @@
 	. = ..()
 	overlay_layer = layer
 	update_icon()
-	set_extension(src, /datum/extension/exonet_device, ennid, NETWORKSPEED_ETHERNET)
+	set_extension(src, /datum/extension/exonet_device, null, NETWORKSPEED_ETHERNET)
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/computer/LateInitialize()

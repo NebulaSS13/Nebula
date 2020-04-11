@@ -82,8 +82,10 @@
 		return TOPIC_HANDLED
 
 	if(href_list["quit_options"])
+		clear_errors()
 		current_ui_template = ui_template
-		return TOPIC_REFRESH
+		rebuild_ui = TRUE
+		return TOPIC_HANDLED
 
 	if(href_list["refresh"])
 		clear_errors()
@@ -104,7 +106,9 @@
 		exonet.disconnect_network()
 		ennid = result["ennid"]
 		keydata = result["key"]
-		exonet.connect_network(user, ennid, NETWORKSPEED_ETHERNET, keydata)
+		var/conn_result = exonet.connect_network(user, ennid, NETWORKSPEED_ETHERNET, keydata)
+		if(conn_result)
+			error = conn_result
 
 	if(href_list["change_net_tag"])
 		var/list/result = exonet.do_change_net_tag(user)
@@ -131,7 +135,9 @@
 
 		exonet.disconnect_network()
 		keydata = result["key"]
-		exonet.connect_network(user, ennid, NETWORKSPEED_ETHERNET, keydata)
+		var/conn_result = exonet.connect_network(user, ennid, NETWORKSPEED_ETHERNET, keydata)
+		if(conn_result)
+			error = conn_result
 
 
 /obj/machinery/computer/exonet/proc/clear_errors()

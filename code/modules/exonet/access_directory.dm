@@ -65,7 +65,7 @@
 /obj/machinery/computer/exonet/access_directory/OnTopic(var/mob/user, href_list)
 	if(..())
 		return TOPIC_HANDLED
-	. = TOPIC_REFRESH
+	. = TOPIC_HANDLED
 
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 

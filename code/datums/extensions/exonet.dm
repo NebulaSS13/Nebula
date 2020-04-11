@@ -69,7 +69,6 @@
 		if(disconnect_result)
 			return disconnect_result // There was a problem.
 
-
 	var/datum/exonet/exonet = GLOB.exonets[new_ennid]
 	if(!exonet)
 		return "Error encountered when trying to register \the [holder] to the '[new_ennid]' network."
@@ -90,6 +89,7 @@
 	var/datum/exonet/old_exonet = GLOB.exonets[ennid]
 	if(old_exonet)
 		old_exonet.remove_device(holder)
+		ennid = null
 	return FALSE // This is a success.
 
 /datum/extension/exonet_device/proc/broadcast_network(var/b_ennid, var/key)

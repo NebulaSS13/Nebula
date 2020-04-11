@@ -89,23 +89,23 @@ GLOBAL_LIST_EMPTY(exonets)
 		return 0 // Authentication failed.
 
 	if(istype(device, /obj/machinery/computer/exonet/mainframe))
-		LAZYDISTINCTADD(mainframes, device)
+		mainframes |= device
 	else if(istype(device, /obj/machinery/computer/exonet/broadcaster))
-		LAZYDISTINCTADD(broadcasters, device)
+		broadcasters |= device
 	else if(istype(device, /obj/machinery/computer/exonet/uplink))
-		LAZYDISTINCTADD(modems, device)
+		modems |= device
 	else if(istype(device, /obj/machinery/computer/exonet/broadcaster/router) && !router)
 		router = device // Special setty-uppy-timy for routers.
-	LAZYDISTINCTADD(network_devices, device)
+	network_devices |= device
 
 /datum/exonet/proc/remove_device(var/device)
 	if(istype(device, /obj/machinery/computer/exonet/mainframe))
-		LAZYREMOVE(mainframes, device)
+		mainframes -= device
 	else if(istype(device, /obj/machinery/computer/exonet/broadcaster))
-		LAZYREMOVE(broadcasters, device)
+		broadcasters -= device
 	else if(istype(device, /obj/machinery/computer/exonet/uplink))
-		LAZYREMOVE(modems, device)
-	LAZYREMOVE(network_devices, device)
+		modems -= device
+	network_devices -= device
 
 /datum/exonet/proc/set_router(var/device)
 	if(router)
