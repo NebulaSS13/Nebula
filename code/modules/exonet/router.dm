@@ -1,5 +1,5 @@
 /obj/machinery/computer/exonet/broadcaster/router
-	name = "EXONET Router"
+	name = "\improper EXONET Router"
 	desc = "A very complex router and transmitter capable of connecting electronic devices together. Looks fragile."
 	active_power_usage = 8 KILOWATTS
 	ui_template = "exonet_router_configuration.tmpl"

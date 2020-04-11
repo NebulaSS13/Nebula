@@ -1,5 +1,5 @@
 /obj/machinery/computer/exonet/access_directory
-	name = "EXONET Access Controller"
+	name = "\improper EXONET Access Controller"
 	desc = "A very complex machine that manages the security for an EXONET system. Looks fragile."
 	active_power_usage = 4 KILOWATTS
 	ui_template = "exonet_access_directory.tmpl"
@@ -74,9 +74,11 @@
 		var/list/file_servers = list()
 		for(var/obj/machinery/computer/exonet/mainframe/mainframe in exonet.get_mainframes())
 			LAZYDISTINCTADD(file_servers, exonet.get_network_tag(mainframe))
-		file_server = sanitize(input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers)
-		if(!file_server)
-			file_server = old_value // Safety check.
+		var/new_file_server = sanitize(input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers)
+		if(CanInteract(user, GLOB.default_state))
+			file_server = new_file_server
+			if(!file_server)
+				file_server = old_value // Safety check.
 
 	if(href_list["PRG_assigngrant"])
 		var/list/all_grants = get_all_grants()
@@ -99,6 +101,8 @@
 		AR.remove_grant(href_list["PRG_removegrant"]) // Add the grant to the record.
 	if(href_list["PRG_creategrant"])
 		var/new_grant_name = uppertext(sanitize(input(usr, "Enter the name of the new grant:", "Create Grant")))
+		if(!CanInteract(user, GLOB.default_state))
+			return TOPIC_REFRESH
 		if(!new_grant_name)
 			return TOPIC_REFRESH
 		var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
@@ -121,6 +125,8 @@
 	if(href_list["PRG_adduser"])
 		var/new_user_id = new_guid()
 		var/new_user_name = sanitize(input(usr, "Enter user's desired name or leave blank to cancel:", "Add New User"))
+		if(!CanInteract(user, GLOB.default_state))
+			return TOPIC_REFRESH
 		if(!new_user_name)
 			return TOPIC_REFRESH
 		// TODO: Add a check to see if this user actually exists if PLEXUS is online.
@@ -156,6 +162,8 @@
 			error = "NETWORK ERROR: Lost connection to mainframe."
 			return TOPIC_REFRESH
 		var/new_user_name = sanitize(input(usr, "Enter user's new desired name or leave blank to cancel:", "Rename User"))
+		if(!CanInteract(user, GLOB.default_state))
+			return TOPIC_REFRESH
 		if(!new_user_name)
 			return TOPIC_REFRESH
 		var/datum/computer_file/report/crew_record/AR = get_access_record(href_list["PRG_rename"])

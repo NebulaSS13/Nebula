@@ -1,5 +1,5 @@
 /obj/machinery/computer/exonet/mainframe
-	name = "EXONET Mainframe"
+	name = "\improper EXONET Mainframe"
 	desc = "A very complex mainframe capable of storing massive amounts of data. Looks fragile."
 	ui_template = "exonet_mainframe.tmpl"
 	active_power_usage = 10 KILOWATTS
@@ -156,7 +156,7 @@
 	recalculate_size()
 	..()
 
-/obj/machinery/computer/exonet/mainframe/OnTopic(href, href_list)
+/obj/machinery/computer/exonet/mainframe/OnTopic(var/mob/user, href_list)
 	if(..())
 		return TOPIC_HANDLED
 	

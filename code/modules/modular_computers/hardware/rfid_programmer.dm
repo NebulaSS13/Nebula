@@ -19,6 +19,9 @@
 /obj/item/stock_parts/computer/rfid_programmer/proc/get_device()
 	if(!linked_device)
 		return
-	if(get_dist(get_turf(src), get_turf(linked_device)) > 1)
+	var/obj/result = linked_device.resolve()
+	if(!result)
 		return
-	return linked_device.resolve()
+	if(get_dist(get_turf(src), get_turf(result)) > 1)
+		return
+	return result

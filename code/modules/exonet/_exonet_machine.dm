@@ -13,7 +13,6 @@
 		/obj/item/stock_parts = 8,
 		/obj/item/stock_parts/exonet_lock/buildable = 1
 	)
-	// var/enabled = 1				// Set to 0 if the device was turned off
 	var/ui_template					// If interacted with by a multitool, what UI (if any) to display.
 	var/current_ui_template 		// Do not set this. This is for the 'options' window of exonet systems. It'll be set automatically.
 	var/error						// Error to display on the interface.
@@ -70,11 +69,6 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/computer/exonet/Destroy()
-	..()
-	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	exonet.disconnect_network()
-
 /obj/machinery/computer/exonet/OnTopic(var/mob/user, href_list)
 	if(..())
 		return TOPIC_HANDLED
@@ -97,6 +91,8 @@
 
 	if(href_list["change_ennid"])
 		var/list/result = exonet.do_change_ennid(user)
+		if(!CanInteract(user, GLOB.default_state))
+			return TOPIC_REFRESH
 		// Guard statements.
 		if(!result)
 			return TOPIC_REFRESH
@@ -112,6 +108,8 @@
 
 	if(href_list["change_net_tag"])
 		var/list/result = exonet.do_change_net_tag(user)
+		if(!CanInteract(user, GLOB.default_state))
+			return TOPIC_REFRESH
 		// Guard statements.
 		if(!result)
 			return TOPIC_REFRESH
@@ -122,6 +120,8 @@
 
 	if(href_list["change_key"])
 		var/list/result = exonet.do_change_key(user)
+		if(!CanInteract(user, GLOB.default_state))
+			return TOPIC_REFRESH
 		// Guard statements.
 		if(!result)
 			return TOPIC_REFRESH
