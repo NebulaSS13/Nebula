@@ -44,6 +44,9 @@
 	completion_trigger_type = /obj/item/clothing/head/helmet
 	item_icon_state = "ed209_5"
 
+/decl/crafting_stage/ed209_helmet/is_appropriate_tool(obj/item/thing)
+	. = istype(thing, completion_trigger_type)
+
 /decl/crafting_stage/ed209_proximity
 	progress_message = "You add the proximity sensor to the frame."
 	next_stages = list(/decl/crafting_stage/wiring/ed209)
