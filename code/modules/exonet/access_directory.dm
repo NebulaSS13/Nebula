@@ -12,8 +12,7 @@
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 	var/list/mainframes = exonet.get_mainframes()
 	if(length(mainframes) <= 0)
-		error = "NETWORK ERROR: No mainframes are available for storing security records."
-		return .
+		return
 	var/obj/machinery/computer/exonet/mainframe/MF = mainframes[1]
 	return MF
 
@@ -57,10 +56,15 @@
 /obj/machinery/computer/exonet/access_directory/clear_errors()
 	..()
 	editing_user = null
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	if(!file_server)
+		var/obj/machinery/computer/exonet/mainframe/MF = get_default_mainframe()
+		if(MF)
+			file_server = exonet.get_network_tag(MF)
 
 /obj/machinery/computer/exonet/access_directory/OnTopic(var/mob/user, href_list)
 	if(..())
-		return TOPIC_REFRESH
+		return TOPIC_HANDLED
 	. = TOPIC_REFRESH
 
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
@@ -196,16 +200,22 @@
 	if(error)
 		return .
 
+	if(current_ui_template != ui_template)
+		return
+
 	.["card_inserted"] = !!stored_card
-	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	clear_errors() // This refreshes the file server if it's broken.
+
 	if(!file_server)
-		var/obj/machinery/computer/exonet/mainframe/MF = get_default_mainframe()
-		file_server = exonet.get_network_tag(MF)
+		error = "NETWORK ERROR: No mainframes are available for storing security records."
+		.["error"] = error
+		return .
 
 	.["file_server"] = file_server
 	.["editing_user"] = editing_user
 
 	// Let's build some data.
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 	var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
 	if(!mainframe || !mainframe.operable())
 		file_server = null

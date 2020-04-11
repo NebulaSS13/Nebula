@@ -108,6 +108,10 @@ GLOBAL_LIST_EMPTY(exonets)
 	LAZYREMOVE(network_devices, device)
 
 /datum/exonet/proc/set_router(var/device)
+	if(router)
+		// THERE CAN BE ONLY ONE!!!
+		LAZYREMOVE(network_devices, router)
+		LAZYREMOVE(broadcasters, router)
 	router = device
 	LAZYADD(network_devices, device)
 	LAZYADD(broadcasters, device)

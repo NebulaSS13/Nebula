@@ -17,6 +17,7 @@
 	var/ui_template					// If interacted with by a multitool, what UI (if any) to display.
 	var/current_ui_template 		// Do not set this. This is for the 'options' window of exonet systems. It'll be set automatically.
 	var/error						// Error to display on the interface.
+	var/rebuild_ui = FALSE			
 
 /obj/machinery/computer/exonet/Process()
 	if(operable())
@@ -33,6 +34,11 @@
 /obj/machinery/computer/exonet/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!current_ui_template)
 		current_ui_template = ui_template
+
+	if(rebuild_ui)
+		rebuild_ui = FALSE
+		ui.close()
+		ui = null
 
 	if(current_ui_template)
 		var/list/data = build_ui_data()
@@ -70,12 +76,16 @@
 	exonet.disconnect_network()
 
 /obj/machinery/computer/exonet/OnTopic(var/mob/user, href_list)
-	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	if(..())
+		return TOPIC_HANDLED
 	. = TOPIC_REFRESH
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 	
 	if(href_list["options"])
+		clear_errors()
 		current_ui_template = "exonet_options.tmpl"
-		return TOPIC_REFRESH
+		rebuild_ui = TRUE
+		return TOPIC_HANDLED
 
 	if(href_list["quit_options"])
 		current_ui_template = ui_template
@@ -99,7 +109,6 @@
 		ennid = result["ennid"]
 		keydata = result["key"]
 		exonet.connect_network(user, ennid, NETWORKSPEED_ETHERNET, keydata)
-		return TOPIC_REFRESH
 
 	if(href_list["change_net_tag"])
 		var/list/result = exonet.do_change_net_tag(user)
@@ -109,9 +118,7 @@
 		if("error" in result)
 			error = result["error"]
 			return TOPIC_REFRESH
-
 		net_tag = result["net_tag"]
-		return TOPIC_REFRESH
 
 	if(href_list["change_key"])
 		var/list/result = exonet.do_change_key(user)
@@ -125,7 +132,6 @@
 		exonet.disconnect_network()
 		keydata = result["key"]
 		exonet.connect_network(user, ennid, NETWORKSPEED_ETHERNET, keydata)
-		return TOPIC_REFRESH
 
 
 /obj/machinery/computer/exonet/proc/clear_errors()

@@ -62,7 +62,7 @@
 	return
 
 
-/obj/item/assembly/signaler/Topic(href, href_list, state = GLOB.physical_state)
+/obj/item/assembly/signaler/Topic(var/mob/user, href_list, state = GLOB.physical_state)
 	if((. = ..()))
 		close_browser(usr, "window=radio")
 		onclose(usr, "radio")

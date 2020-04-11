@@ -29,6 +29,12 @@
 /obj/item/stock_parts/computer/network_card/Initialize()
 	if(!identification_id)
 		identification_id = new_guid()
+	set_extension(src, /datum/extension/exonet_device, ennid, get_netspeed())
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/stock_parts/computer/network_card/LateInitialize()
+	if(ennid)
+		set_ennid(ennid, keydata)
 
 /obj/item/stock_parts/computer/network_card/advanced
 	name = "advanced EXONET network card"
@@ -109,15 +115,6 @@
 /obj/item/stock_parts/computer/network_card/on_uninstall(var/obj/machinery/machine, var/temporary = FALSE)
 	..()
 	on_disable()
-
-/obj/item/stock_parts/computer/network_card/Initialize()
-	..()
-	set_extension(src, /datum/extension/exonet_device)
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/item/stock_parts/computer/network_card/LateInitialize()
-	if(ennid)
-		set_ennid(ennid)
 
 /obj/item/stock_parts/computer/network_card/proc/set_ennid(var/new_ennid, var/new_keydata)
 	ennid = new_ennid

@@ -1,7 +1,12 @@
 /datum/extension/exonet_device
 	base_type = /datum/extension/exonet_device
-	var/ennid 		// Exonet network id. This is the name of the network we're connected to.
-	var/netspeed	// How this device has connected to the network.
+	var/ennid 		= "" 	// Exonet network id. This is the name of the network we're connected to.
+	var/netspeed	= 1		// How this device has connected to the network.
+
+/datum/extension/exonet_device/New(datum/holder, var/_ennid, var/_netspeed)
+	..()
+	ennid = _ennid
+	netspeed = _netspeed
 
 // Convenience function for OnTopic usages when we need to prompt the user to change their network ennid. DRY impl.
 /datum/extension/exonet_device/proc/do_change_ennid(var/mob/user)
@@ -48,7 +53,6 @@
 
 /datum/extension/exonet_device/proc/do_change_key(var/mob/user)
 
-
 /datum/extension/exonet_device/proc/connect_network(var/mob/user, var/new_ennid, var/nic_netspeed, var/keydata)
 	if(ennid == new_ennid)
 		return "\The [holder] is already part of the '[ennid]' network."
@@ -87,18 +91,10 @@
 	var/datum/exonet/exonet = GLOB.exonets[b_ennid]
 	if(!exonet)
 		exonet = new(b_ennid)
-		if(istype(holder, /obj/machinery/computer/exonet/broadcaster/router))
-			exonet.set_router(holder)
-		else
-			exonet.add_device(holder)
-	else
-		if(!exonet.router)
-			if(istype(holder, /obj/machinery/computer/exonet/broadcaster/router))
-				exonet.set_router(holder)
-			return
-		if(exonet.router.keydata != key)
-			return // Security fail.
-		exonet.add_device(holder)
+		exonet.set_router(holder)
+	else if(exonet.router.keydata != key)
+		return // Security fail.	
+	exonet.add_device(holder)
 	ennid = b_ennid
 	netspeed = NETWORKSPEED_ETHERNET
 

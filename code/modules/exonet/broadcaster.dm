@@ -4,13 +4,22 @@
 	var/datum/exonet/network				// This is a hard reference back to the attached network. Primarily for serialization purposes on persistence.
 	var/signal_strength	= 20				// The range in tiles that the broadcaster is capable of transmitting.
 	var/broadcasting_ennid					// The exonet network id being broadcast.
+	var/delay_broadcasting = FALSE			// Whether or not to delay broadcasting to late init.
 
 /obj/machinery/computer/exonet/broadcaster/Initialize()
 	. = ..()
 	if(!broadcasting_ennid)
 		broadcasting_ennid = ennid
-	if(broadcasting_ennid)
+	if(broadcasting_ennid && !delay_broadcasting)
 		// Sets up the network before anything else can. go go go go
+		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+		exonet.broadcast_network(broadcasting_ennid, keydata)
+		network = exonet.get_local_network()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/computer/exonet/broadcaster/LateInitialize()
+	. = ..()
+	if(broadcasting_ennid && delay_broadcasting)
 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 		exonet.broadcast_network(broadcasting_ennid, keydata)
 		network = exonet.get_local_network()
@@ -40,19 +49,19 @@
 		.["broadcasting_status"] = "Down"
 	.["power_usage"] = active_power_usage / 1000
 
-/obj/machinery/computer/exonet/broadcaster/Topic(href, href_list)
+/obj/machinery/computer/exonet/broadcaster/OnTopic(var/mob/user, href_list)
 	if(..())
 		return TOPIC_HANDLED
 	if(href_list["PRG_newennid"])
 		// When a router's ennid changes, so does the network. Breaking *literally everything*.
 		var/new_ennid = sanitize(input(usr, "Enter a new ennid or leave blank to cancel:", "Change ENNID"))
 		if(!new_ennid)
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		// Do a unique check...
 		for(var/datum/exonet/E in GLOB.exonets)
 			if(E.ennid == new_ennid)
 				error = "Invalid ENNID. This ENNID is already registered."
-				return TOPIC_HANDLED
+				return TOPIC_REFRESH
 		// time to break everything..
 		update_ennid(new_ennid)
 	if(href_list["PRG_back"])
