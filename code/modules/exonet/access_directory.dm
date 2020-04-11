@@ -73,7 +73,7 @@
 		var/old_value = file_server
 		var/list/file_servers = list()
 		for(var/obj/machinery/computer/exonet/mainframe/mainframe in exonet.get_mainframes())
-			LAZYDISTINCTADD(file_servers, exonet.get_network_tag(mainframe))
+			file_servers |= exonet.get_network_tag(mainframe)
 		var/new_file_server = sanitize(input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers)
 		if(CanInteract(user, GLOB.default_state))
 			file_server = new_file_server
@@ -214,6 +214,13 @@
 	.["card_inserted"] = !!stored_card
 	clear_errors() // This refreshes the file server if it's broken.
 
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	if(!exonet.get_local_network())
+		// Not connected to a network.
+		error = "NETWORK ERROR: Not connected to a network."
+		.["error"] = error
+		return .
+
 	if(!file_server)
 		error = "NETWORK ERROR: No mainframes are available for storing security records."
 		.["error"] = error
@@ -223,7 +230,6 @@
 	.["editing_user"] = editing_user
 
 	// Let's build some data.
-	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 	var/obj/machinery/computer/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
 	if(!mainframe || !mainframe.operable())
 		file_server = null
