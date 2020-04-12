@@ -7,6 +7,7 @@
 /obj/item/card/id/exonet/Initialize()
 	if(!access_record)
 		refresh_access_record()
+	return ..()
 
 /obj/item/card/id/exonet/GetAccess()
 	if(broken)

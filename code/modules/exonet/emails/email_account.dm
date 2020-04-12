@@ -58,22 +58,22 @@
 	inbox.Add(received_message)
 	return 1
 	// Spam filters may occassionally let something through, or mark something as spam that isn't spam.
-	var/mark_spam = FALSE
-	if(received_message.spam)
-		if(prob(98))
-			mark_spam = TRUE
-	else
-		if(prob(1))
-			mark_spam = TRUE
+	// var/mark_spam = FALSE
+	// if(received_message.spam)
+	// 	if(prob(98))
+	// 		mark_spam = TRUE
+	// else
+	// 	if(prob(1))
+	// 		mark_spam = TRUE
 
-	if(mark_spam)
-		spam.Add(received_message)
-	else
-		inbox.Add(received_message)
-		for(var/datum/nano_module/email_client/ec in connected_clients)
-			ec.mail_received(received_message)
+	// if(mark_spam)
+	// 	spam.Add(received_message)
+	// else
+	// 	inbox.Add(received_message)
+	// 	for(var/datum/nano_module/email_client/ec in connected_clients)
+	// 		ec.mail_received(received_message)
 
-	return 1
+	// return 1
 
 // Address namespace (@internal-services.net) for email addresses with special purpose only!.
 /datum/computer_file/data/email_account/service/

@@ -28,6 +28,8 @@
 		. += "OpenEth (Physical Connection) - Physical network connection port"
 
 /obj/item/stock_parts/computer/network_card/Initialize()
+	..()
+	
 	if(!identification_id)
 		identification_id = new_guid()
 	set_extension(src, /datum/extension/exonet_device, null, get_netspeed())
