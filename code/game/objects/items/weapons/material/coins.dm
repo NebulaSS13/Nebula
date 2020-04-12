@@ -12,17 +12,26 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
+	var/currency_worth
 	var/absolute_worth
 	var/currency
-	var/string_colour
 	var/can_flip = TRUE
 
 /obj/item/coin/Initialize()
 	. = ..()
-	if(isnull(absolute_worth))
-		absolute_worth = pick(1, 2, 5)
+
+	// Grab a coin from our currency to use for our worth/coin flipping.
 	if(!ispath(currency, /decl/currency))
 		currency = GLOB.using_map.default_currency
+	if(isnull(absolute_worth))
+		var/decl/currency/local_currency = decls_repository.get_decl(currency)
+		if(length(local_currency.denomination_is_coin))
+			currency_worth = local_currency.denominations[pick(local_currency.denomination_is_coin)]
+			absolute_worth = currency_worth * local_currency.absolute_value
+			currency_worth = "[currency_worth]"
+		if(!absolute_worth || !currency_worth)
+			return INITIALIZE_HINT_QDEL
+
 	icon_state = "coin[rand(1,10)]"
 	if(material)
 		desc = "A rather thick coin stamped out of [material.display_name]."
@@ -36,32 +45,7 @@
 	. = ..()
 	if((distance <= 1 || loc == user) && user.skill_check(SKILL_FINANCE, SKILL_ADEPT))
 		var/decl/currency/local_currency = decls_repository.get_decl(currency)
-		to_chat(user, "It looks like an antiquated minting of a [min(1, Floor(absolute_worth / local_currency.absolute_value))]-[local_currency.name_singular] coin.")
-
-/obj/item/coin/on_update_icon()
-	..()
-	if(!isnull(string_colour))
-		var/image/I = image(icon = icon, icon_state = "coin_string_overlay")
-		I.appearance_flags |= RESET_COLOR
-		I.color = string_colour
-		overlays += I
-	else
-		overlays.Cut()
-
-/obj/item/coin/attackby(var/obj/item/W, var/mob/user)
-	if(isCoil(W) && isnull(string_colour))
-		var/obj/item/stack/cable_coil/CC = W
-		if(CC.use(1))
-			string_colour = CC.color
-			to_chat(user, "<span class='notice'>You attach a string to the coin.</span>")
-			update_icon()
-			return
-	else if(isWirecutter(W) && !isnull(string_colour))
-		new /obj/item/stack/cable_coil/single(get_turf(user))
-		string_colour = null
-		to_chat(user, "<span class='notice'>You detach the string from the coin.</span>")
-		update_icon()
-	else ..()
+		to_chat(user, "It looks like an antiquated minting of a [currency_worth] [local_currency.name_singular] [local_currency.denomination_has_name[currency_worth] || "piece"].")
 
 // "Coin Flipping, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
 /obj/item/coin/attack_self(var/mob/user)
@@ -71,14 +55,21 @@
 	coin_flip(user)
 
 /obj/item/coin/proc/coin_flip(var/mob/user)
+
 	if(!can_flip)
 		return
+
+	var/decl/currency/local_currency = decls_repository.get_decl(currency)
+	if(!length(local_currency.denomination_is_coin[currency_worth]))
+		to_chat(user, SPAN_WARNING("\The [src] is not the right shape to be flipped."))
+		return
+
 	can_flip = FALSE
 	playsound(usr.loc, 'sound/effects/coin_flip.ogg', 75, 1)
 	user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air."))
 	sleep(1.5 SECOND)
 	if(!QDELETED(user) && !QDELETED(src) && loc == user)
-		user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [(prob(50) && "tails") || "heads"]!"))
+		user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [pick(local_currency.denomination_is_coin[currency_worth])]!"))
 	can_flip = TRUE
 
 // Subtypes.

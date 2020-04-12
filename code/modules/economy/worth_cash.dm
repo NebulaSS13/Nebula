@@ -13,7 +13,7 @@
 	w_class = ITEM_SIZE_TINY
 	var/currency
 	var/absolute_worth = 0
-	var/can_flip = FALSE // Cooldown tracker for single-coin flips.
+	var/can_flip = TRUE // Cooldown tracker for single-coin flips.
 
 /obj/item/cash/Initialize(ml, material_key)
 	. = ..()
@@ -61,16 +61,13 @@
 	var/list/adding_notes
 	var/decl/currency/local_currency = decls_repository.get_decl(currency)
 	for(var/denomination in local_currency.denominations)
-		if(draw_worth < denomination)
-			continue
-		var/denomination_string = "[denomination]"
-		while(draw_worth >= denomination)
-			draw_worth -= denomination
-			var/image/banknote = image(local_currency.icon, local_currency.denomination_has_state[denomination_string] || "cash")
+		while(draw_worth >= local_currency.denominations[denomination])
+			draw_worth -= local_currency.denominations[denomination]
+			var/image/banknote = image(local_currency.icon, local_currency.denomination_has_state[denomination] || "cash")
 			banknote.appearance_flags |= RESET_COLOR
-			banknote.color = local_currency.denomination_has_colour[denomination_string] || COLOR_PALE_BTL_GREEN
-			if(local_currency.denomination_has_mark[denomination_string])
-				var/image/mark = image(local_currency.icon, local_currency.denomination_has_mark[denomination_string])
+			banknote.color = local_currency.denomination_has_colour[denomination] || COLOR_PALE_BTL_GREEN
+			if(local_currency.denomination_has_mark[denomination])
+				var/image/mark = image(local_currency.icon, local_currency.denomination_has_mark[denomination])
 				mark.appearance_flags |= RESET_COLOR
 				banknote.overlays |= mark
 			var/matrix/M = matrix()
@@ -86,7 +83,7 @@
 	matter[local_currency.material] = absolute_worth * max(1, round(SHEET_MATERIAL_AMOUNT/10))
 	var/current_worth = get_worth()
 	if(current_worth in local_currency.denominations) // Single piece.
-		SetName("[current_worth] [local_currency.name_singular] [local_currency.denomination_has_name[current_worth] || "piece"]")
+		SetName("[current_worth] [local_currency.name_singular] [local_currency.denomination_has_name["[current_worth]"] || "piece"]")
 		desc = "[initial(desc)] It's worth [current_worth] [current_worth == 1 ? local_currency.name_singular : local_currency.name]."
 		w_class = ITEM_SIZE_TINY
 	else
@@ -101,16 +98,16 @@
 	var/current_worth = get_worth()
 
 	// Handle coin flipping. Mostly copied from /obj/item/coin.
-	if((current_worth in local_currency.denomination_is_coin) && alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip")
+	if(length(local_currency.denomination_is_coin["[current_worth]"]) && alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip")
 		if(!can_flip)
 			to_chat(user, SPAN_WARNING("\The [src] is already being flipped!"))
 			return
 		can_flip = FALSE
-		playsound(usr.loc, 'sound/effects/coin_flip.ogg', 75, 1)
+		playsound(user.loc, 'sound/effects/coin_flip.ogg', 75, 1)
 		user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air."))
 		sleep(1.5 SECOND)
 		if(!QDELETED(user) && !QDELETED(src) && loc == user && get_worth() == current_worth)
-			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [(prob(50) && "tails") || "heads"]!"))
+			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [pick(local_currency.denomination_is_coin["[current_worth]"])]!"))
 		can_flip = TRUE
 		return TRUE
 	// End coin flipping.

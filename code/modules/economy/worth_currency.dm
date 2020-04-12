@@ -7,20 +7,20 @@
 	var/absolute_value = 1 // Divisor for cash pile worth. Should never be <1 or non-integer (think of it like cents).
 	// Sort denominations by highest to lowest for the purposes of money
 	// icon generation not producing a pile of 2000 $1 coin overlays.
-	var/list/denomination_is_coin = list(
-		1,
-		2
-	)
 	var/list/denominations = list(
-		1000,
-		500,
-		100,
-		50,
-		20,
-		10,
-		5,
-		2,
-		1
+		"1000" = 1000,
+		"500" =  500,
+		"100" =  100,
+		"50" =   50,
+		"20" =   20,
+		"10" =   10,
+		"5" =    5,
+		"2" =    2,
+		"1" =    1
+	)
+	var/list/denomination_is_coin = list(
+		"1" = list("heads", "tails"),
+		"2" = list("heads", "tails")
 	)
 	var/list/denomination_has_name = list(
 		"500" =  "bundle",
@@ -65,14 +65,14 @@
 	name_short =    "T"
 	material =      MAT_COPPER
 	denominations = list(
-		10,
-		5,
-		1
+		"10" = 10,
+		"5" =  5,
+		"1" =  1
 	)
 	denomination_is_coin = list(
-		10,
-		5,
-		1
+		"10" = list("heads", "tails"),
+		"5" =  list("heads", "tails"),
+		"1" =  list("heads", "tails")
 	)
 	denomination_has_name = list(
 		"1" =  "coin",
