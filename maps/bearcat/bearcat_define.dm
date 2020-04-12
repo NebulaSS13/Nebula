@@ -16,10 +16,11 @@
 	evac_controller_type = /datum/evacuation_controller/lifepods
 	lobby_screens = list('maps/bearcat/lobby/bloodmoney.png','maps/bearcat/lobby/vapormoney.png')
 
+	planet_size = list(129,129)
 	allowed_spawns = list("Cryogenic Storage")
 	default_spawn = "Cryogenic Storage"
 	use_overmap = 1
-	num_exoplanets = 3
+	num_exoplanets = 2
 	welcome_sound = 'sound/effects/cowboysting.ogg'
 
 	emergency_shuttle_leaving_dock = "Attention all hands: the escape pods have been launched, maintaining burn for %ETA%."
