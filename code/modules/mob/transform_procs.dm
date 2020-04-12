@@ -72,7 +72,7 @@
 	if(mind)
 		mind.transfer_to(O)
 		O.mind.original = O
-	else
+	else if(O.key != key)
 		O.key = key
 
 	if(move)
