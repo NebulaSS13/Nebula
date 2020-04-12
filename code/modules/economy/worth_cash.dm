@@ -1,6 +1,6 @@
 /obj/item/cash
 	name = "cash"
-	desc = "It's some cold hard cash."
+	desc = "Some cold hard cash."
 	icon = 'icons/obj/items/money.dmi'
 	icon_state = "cash"
 	opacity = FALSE
@@ -13,6 +13,7 @@
 	w_class = ITEM_SIZE_TINY
 	var/currency
 	var/absolute_worth = 0
+	var/can_flip = FALSE // Cooldown tracker for single-coin flips.
 
 /obj/item/cash/Initialize(ml, material_key)
 	. = ..()
@@ -80,27 +81,49 @@
 	overlays = adding_notes
 
 /obj/item/cash/proc/update_from_worth()
-	update_icon()
 	var/decl/currency/local_currency = decls_repository.get_decl(currency)
-	if(get_worth() == 1)
-		SetName("[get_worth()] [local_currency.name_singular]")
-		desc = "It's a single [local_currency.name_singular]."
-		w_class = ITEM_SIZE_TINY
-	else
-		SetName("pile of [get_worth()] [local_currency.name]")
-		desc = "It's cold, hard cash, totalling [get_worth()] [local_currency.name]."
-		w_class = ITEM_SIZE_SMALL
 	matter = list()
 	matter[local_currency.material] = absolute_worth * max(1, round(SHEET_MATERIAL_AMOUNT/10))
+	var/current_worth = get_worth()
+	if(current_worth in local_currency.denominations) // Single piece.
+		SetName("[current_worth] [local_currency.name_singular] [local_currency.denomination_has_name[current_worth] || "piece"]")
+		desc = "[initial(desc)] It's worth [current_worth] [current_worth == 1 ? local_currency.name_singular : local_currency.name]."
+		w_class = ITEM_SIZE_TINY
+	else
+		SetName("pile of [local_currency.name]")
+		desc = "[initial(desc)] It totals up to [current_worth] [current_worth == 1 ? local_currency.name_singular : local_currency.name]."
+		w_class = ITEM_SIZE_SMALL
+	update_icon()
 
 /obj/item/cash/attack_self(var/mob/user)
-	if(get_worth() <= 1)
-		return TRUE
+
 	var/decl/currency/local_currency = decls_repository.get_decl(currency)
+	var/current_worth = get_worth()
+
+	// Handle coin flipping. Mostly copied from /obj/item/coin.
+	if((current_worth in local_currency.denomination_is_coin) && alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip")
+		if(!can_flip)
+			to_chat(user, SPAN_WARNING("\The [src] is already being flipped!"))
+			return
+		can_flip = FALSE
+		playsound(usr.loc, 'sound/effects/coin_flip.ogg', 75, 1)
+		user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air."))
+		sleep(1.5 SECOND)
+		if(!QDELETED(user) && !QDELETED(src) && loc == user && get_worth() == current_worth)
+			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [(prob(50) && "tails") || "heads"]!"))
+		can_flip = TRUE
+		return TRUE
+	// End coin flipping.
+
+	if(QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
+		return TRUE
+
 	var/amount = input(usr, "How many [local_currency.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
 	amount = round(Clamp(amount, 0, Floor(get_worth() - 1)))
-	if(!amount || get_worth() <= 1 || user.incapacitated() || loc != user)
+
+	if(!amount || QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
+
 	amount = Floor(amount * local_currency.absolute_value)
 	adjust_worth(-(amount))
 	var/obj/item/cash/cash = new(get_turf(src))

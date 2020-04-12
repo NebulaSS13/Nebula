@@ -80,7 +80,6 @@
 	if(!QDELETED(user) && !QDELETED(src) && loc == user)
 		user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [(prob(50) && "tails") || "heads"]!"))
 	can_flip = TRUE
-	return
 
 // Subtypes.
 /obj/item/coin/gold

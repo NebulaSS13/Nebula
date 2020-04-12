@@ -5,9 +5,12 @@
 	var/icon =           'icons/obj/items/money.dmi'
 	var/material =       MAT_PLASTIC
 	var/absolute_value = 1 // Divisor for cash pile worth. Should never be <1 or non-integer (think of it like cents).
-
 	// Sort denominations by highest to lowest for the purposes of money
 	// icon generation not producing a pile of 2000 $1 coin overlays.
+	var/list/denomination_is_coin = list(
+		1,
+		2
+	)
 	var/list/denominations = list(
 		1000,
 		500,
@@ -19,7 +22,16 @@
 		2,
 		1
 	)
-
+	var/list/denomination_has_name = list(
+		"500" =  "bundle",
+		"100" =  "note", 
+		"50" =   "note",
+		"20" =   "note",
+		"10" =   "note",
+		"5" =    "note",
+		"2" =    "coin",
+		"1" =    "coin"
+	)
 	var/list/denomination_has_mark = list(
 		"500" =  "mark_x_5",
 		"100" =  "mark", 
@@ -43,6 +55,38 @@
 	)
 
 /decl/currency/supply
-	name =               "supply credits"
-	name_singular =      "supply credit"
-	name_short =         "supply"
+	name =          "supply credits"
+	name_singular = "supply credit"
+	name_short =    "supply"
+
+/decl/currency/trader
+	name =          "scrip"
+	name_singular = "scrip"
+	name_short =    "T"
+	material =      MAT_COPPER
+	denominations = list(
+		10,
+		5,
+		1
+	)
+	denomination_is_coin = list(
+		10,
+		5,
+		1
+	)
+	denomination_has_name = list(
+		"1" =  "coin",
+		"5" =  "coin",
+		"10" = "coin"
+	)
+	denomination_has_mark = list()
+	denomination_has_colour = list(
+		"1" =  COLOR_BRONZE,
+		"5" =  COLOR_SILVER,
+		"10" = COLOR_GOLD
+	)
+	denomination_has_state = list(
+		"1" =  "coin",
+		"5" =  "coin_medium",
+		"10" = "coin_large"
+	)
