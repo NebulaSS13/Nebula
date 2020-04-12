@@ -2853,8 +2853,8 @@
 	icon_state = "bulb1";
 	dir = 1
 	},
-/obj/item/material/coin/gold,
-/obj/item/material/coin/silver,
+/obj/item/coin/gold,
+/obj/item/coin/silver,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;

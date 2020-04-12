@@ -1,4 +1,4 @@
-/obj/item/material/coin
+/obj/item/coin
 	name = "coin"
 	icon = 'icons/obj/coin.dmi'
 	icon_state = "coin1"
@@ -11,14 +11,34 @@
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
+
+	var/absolute_worth
+	var/currency
 	var/string_colour
 	var/can_flip = TRUE
 
-/obj/item/material/coin/Initialize()
+/obj/item/coin/Initialize()
 	. = ..()
+	if(isnull(absolute_worth))
+		absolute_worth = pick(1, 2, 5)
+	if(!ispath(currency, /decl/currency))
+		currency = GLOB.using_map.default_currency
 	icon_state = "coin[rand(1,10)]"
+	if(material)
+		desc = "A rather thick coin stamped out of [material.display_name]."
+	else
+		desc = "A rather thick coin."
 
-/obj/item/material/coin/on_update_icon()
+/obj/item/coin/get_single_monetary_worth()
+	. = max(..(), absolute_worth)
+	
+/obj/item/coin/examine(mob/user, distance)
+	. = ..()
+	if((distance <= 1 || loc == user) && user.skill_check(SKILL_FINANCE, SKILL_ADEPT))
+		var/decl/currency/local_currency = decls_repository.get_decl(currency)
+		to_chat(user, "It looks like an antiquated minting of a [min(1, Floor(absolute_worth / local_currency.absolute_value))]-[local_currency.name_singular] coin.")
+
+/obj/item/coin/on_update_icon()
 	..()
 	if(!isnull(string_colour))
 		var/image/I = image(icon = icon, icon_state = "coin_string_overlay")
@@ -28,7 +48,7 @@
 	else
 		overlays.Cut()
 
-/obj/item/material/coin/attackby(var/obj/item/W, var/mob/user)
+/obj/item/coin/attackby(var/obj/item/W, var/mob/user)
 	if(isCoil(W) && isnull(string_colour))
 		var/obj/item/stack/cable_coil/CC = W
 		if(CC.use(1))
@@ -44,13 +64,13 @@
 	else ..()
 
 // "Coin Flipping, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
-/obj/item/material/coin/attack_self(var/mob/user)
+/obj/item/coin/attack_self(var/mob/user)
 	if(!can_flip)
 		to_chat(user, SPAN_WARNING("\The [src] is already being flipped!"))
 		return
 	coin_flip(user)
 
-/obj/item/material/coin/proc/coin_flip(var/mob/user)
+/obj/item/coin/proc/coin_flip(var/mob/user)
 	if(!can_flip)
 		return
 	can_flip = FALSE
@@ -63,23 +83,23 @@
 	return
 
 // Subtypes.
-/obj/item/material/coin/gold
+/obj/item/coin/gold
 	material = MAT_GOLD
 
-/obj/item/material/coin/silver
+/obj/item/coin/silver
 	material = MAT_SILVER
 
-/obj/item/material/coin/diamond
+/obj/item/coin/diamond
 	material = MAT_DIAMOND
 
-/obj/item/material/coin/iron
+/obj/item/coin/iron
 	material = MAT_IRON
 
-/obj/item/material/coin/uranium
+/obj/item/coin/uranium
 	material = MAT_URANIUM
 
-/obj/item/material/coin/platinum
+/obj/item/coin/platinum
 	material = MAT_PLATINUM
 
-/obj/item/material/coin/phoron
+/obj/item/coin/phoron
 	material = MAT_PHORON

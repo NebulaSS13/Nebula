@@ -27,7 +27,7 @@
 
 /datum/stack_recipe/coin
 	title = "coin"
-	result_type = /obj/item/material/coin
+	result_type = /obj/item/coin
 	req_amount = 2
 	one_per_turf = 1
 

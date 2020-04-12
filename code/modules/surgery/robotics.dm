@@ -37,7 +37,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	description = "This procedure unsecures the maintenance hatch of a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
-		/obj/item/material/coin = 50,
+		/obj/item/coin = 50,
 		/obj/item/material/knife = 50
 	)
 	min_duration = 90
@@ -73,7 +73,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	description = "This procedure screws shut the maintenance hatch of a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
-		/obj/item/material/coin = 50,
+		/obj/item/coin = 50,
 		/obj/item/material/knife = 50
 	)
 	min_duration = 90
