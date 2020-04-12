@@ -1063,7 +1063,7 @@
 /area/template_noop)
 "cj" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/cash/c1000,
+/obj/item/spacecash/bundle/c1000,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -1081,7 +1081,7 @@
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
-/obj/item/cash/c1000,
+/obj/item/spacecash/bundle/c1000,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/tcomms)
 "ck" = (
@@ -4165,7 +4165,7 @@
 "hz" = (
 /obj/machinery/vending/cola{
 	name = "hacked Robust Softdrinks";
-	prices = list()
+	markup = 0
 	},
 /obj/machinery/light,
 /obj/effect/floor_decal/spline/fancy/wood,
@@ -4219,7 +4219,7 @@
 "hD" = (
 /obj/machinery/vending/snack{
 	name = "hacked Getmore Chocolate Corp";
-	prices = list()
+	markup = 0
 	},
 /obj/effect/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/wood,
@@ -4227,7 +4227,7 @@
 "hE" = (
 /obj/machinery/vending/fitness{
 	name = "hacked SweatMAX";
-	prices = list()
+	markup = 0
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
@@ -5641,7 +5641,7 @@
 	},
 /obj/machinery/vending/lavatory{
 	name = "hacked Lavatory Essentials";
-	prices = list()
+	markup = 0
 	},
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
@@ -6066,7 +6066,7 @@
 	},
 /obj/machinery/vending/coffee{
 	name = "hacked Hot Drinks machine";
-	prices = list()
+	markup = 0
 	},
 /obj/item/radio/intercom{
 	dir = 4;
@@ -6474,7 +6474,7 @@
 	},
 /obj/machinery/vending/cigarette{
 	name = "hacked Cigarette machine";
-	prices = list()
+	markup = 0
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony)

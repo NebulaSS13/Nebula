@@ -21,7 +21,7 @@ var/repository/atom_info/atom_info_repository = new()
 
 /repository/atom_info/proc/update_cached_info_for(var/path, var/material, var/amount, var/key)
 	var/atom/instance
-	if(matter_cache[key])
+	if(!matter_cache[key])
 		instance = get_instance_of(path, material, amount)
 		var/matter_list = instance.building_cost()
 		if(istype(instance, /obj/item/ammo_magazine) || istype(instance, /obj/item/storage))
@@ -32,7 +32,7 @@ var/repository/atom_info/atom_info_repository = new()
 		matter_cache[key] = matter_list
 	if(!worth_cache[key])
 		instance = instance || get_instance_of(path, material, amount)
-		worth_cache[key] = instance.
+		worth_cache[key] = instance.get_combined_monetary_worth()
 	if(!QDELETED(instance))
 		qdel(instance)
 

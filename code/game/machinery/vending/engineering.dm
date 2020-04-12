@@ -2,6 +2,7 @@
 /obj/machinery/vending/tool
 	name = "YouTool"
 	desc = "Tools for tools."
+	markup = 0
 	icon_state = "tool"
 	icon_deny = "tool-deny"
 	icon_vend = "tool-vend"
@@ -57,6 +58,7 @@
 	icon_state = "engivend"
 	icon_deny = "engivend-deny"
 	icon_vend = "engivend-vend"
+	markup = 0
 	vend_delay = 21
 	base_type = /obj/machinery/vending/engivend
 	req_access = list(list(access_atmospherics,access_engine_equip))
@@ -81,6 +83,7 @@
 	icon_deny = "engi-deny"
 	icon_vend = "engi-vend"
 	base_type = /obj/machinery/vending/engineering
+	markup = 0
 	req_access = list(list(access_atmospherics,access_engine_equip))
 	products = list(
 		/obj/item/storage/belt/utility = 4,

@@ -109,8 +109,7 @@
 			var/obj/item/seeds/S = new entry(src)
 			var/name = S.name
 			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry, name)
-
-			product.price = (entry in src.prices) ? src.prices[entry] : 0
+			product.price = atom_info_repository.get_worth_for(entry) * markup
 			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
 			product.category = category
 

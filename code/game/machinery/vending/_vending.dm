@@ -39,9 +39,9 @@
 		These are used for initialization only, and so are optional if
 		product_records is specified
 	*/
+	var/markup
 	var/list/products	= list() // For each, use the following pattern:
 	var/list/contraband	= list() // list(/type/path = amount,/type/path2 = amount2)
-	var/list/prices     = list() // Prices for each item, list(/type/path = price), items not in the list don't have a price.
 
 	// List of vending_product items available.
 	var/list/product_records = list()
@@ -70,6 +70,8 @@
 
 /obj/machinery/vending/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
+	if(isnull(markup))
+		markup = 1 + (rand() * 2)
 	if(!ispath(vendor_currency, /decl/currency))
 		vendor_currency = GLOB.using_map.default_currency
 	if(product_slogans)
@@ -88,8 +90,8 @@
 /**
  *  Build produdct_records from the products lists
  *
- *  products, contraband and prices allow specifying
- *  products that the vending machine is to carry without manually populating
+ *  products and contraband lists allow specifying products that
+ *  the vending machine is to carry without manually populating
  *  product_records.
  */
 /obj/machinery/vending/proc/build_inventory(populate_parts = FALSE)
@@ -97,18 +99,14 @@
 		list(products, CAT_NORMAL),
 		list(contraband, CAT_HIDDEN)
 	)
-
 	for(var/current_list in all_products)
 		var/category = current_list[2]
-
 		for(var/entry in current_list[1])
 			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry)
-
-			product.price = (entry in prices) ? prices[entry] : 0
+			product.price = atom_info_repository.get_worth_for(entry) * markup
 			if(populate_parts)
 				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
 			product.category = category
-
 			product_records.Add(product)
 
 /obj/machinery/vending/Destroy()
