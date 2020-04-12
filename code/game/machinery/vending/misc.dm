@@ -65,8 +65,11 @@
 		/obj/item/lipstick/jade = 3,
 		/obj/item/storage/wallet/poly = 2
 	)
-	contraband = list(/obj/item/clothing/glasses/eyepatch = 2, /obj/item/clothing/accessory/horrible = 2)
-	premium = list(/obj/item/clothing/mask/smokable/pipe = 3)
+	contraband = list(
+		/obj/item/clothing/glasses/eyepatch = 2, 
+		/obj/item/clothing/accessory/horrible = 2,
+		/obj/item/clothing/mask/smokable/pipe = 3
+	)
 	prices = list(
 		/obj/item/mirror = 60,
 		/obj/item/haircomb = 40,
@@ -117,8 +120,13 @@
 		/obj/item/storage/box/checkers/chess = 10, 
 		/obj/item/board = 2
 	)
-	premium = list(/obj/item/spirit_board = 1, /obj/item/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
-	contraband = list(/obj/item/chems/spray/waterflower = 2, /obj/item/storage/box/snappops = 3)
+	contraband = list(
+		/obj/item/chems/spray/waterflower = 2, 
+		/obj/item/storage/box/snappops = 3,
+		/obj/item/spirit_board = 1, 
+		/obj/item/gun/projectile/revolver/capgun = 1, 
+		/obj/item/ammo_magazine/caps = 4
+	)
 
 //Cajoes/Kyos/BloodyMan's Lavatory Articles Dispensiary
 

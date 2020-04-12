@@ -59,9 +59,12 @@
 		/obj/item/chems/ecig_cartridge/coffee = 5,
 		/obj/item/chems/ecig_cartridge/blanknico = 2
 	)
-	contraband = list(/obj/item/flame/lighter/zippo = 4,
-					/obj/item/clothing/mask/smokable/cigarette/rolled/sausage = 3)
-	premium = list(/obj/item/storage/fancy/cigar = 5,/obj/item/storage/fancy/cigarettes/killthroat = 5)
+	contraband = list(
+		/obj/item/flame/lighter/zippo = 4,
+		/obj/item/clothing/mask/smokable/cigarette/rolled/sausage = 3,
+		/obj/item/storage/fancy/cigar = 5,
+		/obj/item/storage/fancy/cigarettes/killthroat = 5
+	)
 
 	prices = list(
 		/obj/item/storage/chewables/tobacco = 40,

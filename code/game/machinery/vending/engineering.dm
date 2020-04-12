@@ -18,10 +18,13 @@
 		/obj/item/screwdriver = 5,
 		/obj/item/flashlight/flare/glowstick = 3, 
 		/obj/item/flashlight/flare/glowstick/red = 3, 
-		/obj/item/tape_roll = 8
+		/obj/item/tape_roll = 8,
+		/obj/item/clothing/gloves/insulated/cheap = 2
 	)
-	contraband = list(/obj/item/weldingtool/hugetank = 2,/obj/item/clothing/gloves/insulated/cheap = 2)
-	premium = list(/obj/item/clothing/gloves/insulated = 1)
+	contraband = list(
+		/obj/item/weldingtool/hugetank = 2,
+		/obj/item/clothing/gloves/insulated = 1
+	)
 
 /obj/machinery/vending/tool/adherent
 	name = "Adherent Tool Dispenser"
@@ -65,10 +68,10 @@
 		/obj/item/stock_parts/circuitboard/apc = 10,
 		/obj/item/stock_parts/circuitboard/air_alarm = 10,
 		/obj/item/cell = 10,
-		/obj/item/clamp = 10
+		/obj/item/clamp = 10,
+		/obj/item/storage/belt/utility
 	)
 	contraband = list(/obj/item/cell/high = 3)
-	premium = list(/obj/item/storage/belt/utility = 3)
 
 //This one's from bay12
 /obj/machinery/vending/engineering

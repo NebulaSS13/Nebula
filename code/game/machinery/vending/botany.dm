@@ -15,9 +15,9 @@
 		/obj/item/chems/glass/bottle/robustharvest = 3,
 		/obj/item/plantspray/pests = 20,
 		/obj/item/chems/syringe = 5,
-		/obj/item/storage/plants = 5
+		/obj/item/storage/plants = 5,
+		/obj/item/chems/glass/bottle/ammonia = 10
 	)
-	premium = list(/obj/item/chems/glass/bottle/ammonia = 10)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/hydronutrients/generic
@@ -78,9 +78,9 @@
 		/obj/item/seeds/nettleseed = 2,
 		/obj/item/seeds/reishimycelium = 2,
 		/obj/item/seeds/reishimycelium = 2,
-		/obj/item/seeds/shandseed = 2
+		/obj/item/seeds/shandseed = 2,
+		/obj/item/chems/spray/waterflower = 1
 	)
-	premium = list(/obj/item/chems/spray/waterflower = 1)
 
 /obj/machinery/vending/hydroseeds/vend(var/datum/stored_items/vending_products/R, mob/user)
 	..()
@@ -101,7 +101,6 @@
 	var/list/all_products = list(
 		list(src.products, CAT_NORMAL),
 		list(src.contraband, CAT_HIDDEN),
-		list(src.premium, CAT_COIN))
 
 	for(var/current_list in all_products)
 		var/category = current_list[2]
