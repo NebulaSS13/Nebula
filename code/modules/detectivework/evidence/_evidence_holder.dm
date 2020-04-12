@@ -5,7 +5,9 @@
 
 /datum/extension/forensic_evidence/Destroy()
 	. = ..()
-	QDEL_NULL_LIST(evidence)
+	for(var/T in evidence)
+		qdel(evidence[T])
+	evidence = null
 
 /datum/extension/forensic_evidence/proc/add_data(evidence_type, data)
 	if(!LAZYACCESS(evidence, evidence_type))
