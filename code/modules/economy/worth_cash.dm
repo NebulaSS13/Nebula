@@ -42,7 +42,7 @@
 	if(istype(W, /obj/item/cash))
 		var/obj/item/cash/cash = W
 		if(cash.currency != currency)
-			to_chat(W, SPAN_WARNING("You can't mix currencies, it would be uncivilized."))
+			to_chat(user, SPAN_WARNING("You can't mix two different currencies, it would be uncivilized."))
 			return
 		if(user.unEquip(W))
 			adjust_worth(cash.absolute_worth)
@@ -72,7 +72,8 @@
 				banknote.overlays |= mark
 			var/matrix/M = matrix()
 			M.Translate(rand(-6, 6), rand(-4, 8))
-			M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
+			if(local_currency.rotate_icons)
+				M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 			banknote.transform = M
 			LAZYADD(adding_notes, banknote)
 	overlays = adding_notes
@@ -82,8 +83,8 @@
 	matter = list()
 	matter[local_currency.material] = absolute_worth * max(1, round(SHEET_MATERIAL_AMOUNT/10))
 	var/current_worth = get_worth()
-	if(current_worth in local_currency.denominations) // Single piece.
-		SetName("[current_worth] [local_currency.name_singular] [local_currency.denomination_has_name["[current_worth]"] || "piece"]")
+	if(local_currency.denominations["[current_worth]"]) // Single piece.
+		SetName("[local_currency.worth_has_name["[current_worth]"] || current_worth] [local_currency.name_singular] [local_currency.denomination_has_name["[current_worth]"] || "piece"]")
 		desc = "[initial(desc)] It's worth [current_worth] [current_worth == 1 ? local_currency.name_singular : local_currency.name]."
 		w_class = ITEM_SIZE_TINY
 	else
@@ -151,6 +152,10 @@
 
 /obj/item/cash/c1000
 	absolute_worth = 1000
+
+/obj/item/cash/scrip
+	currency = /decl/currency/trader
+	absolute_worth = 200
 
 /obj/item/charge_card
 	name = "charge card"

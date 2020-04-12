@@ -5,6 +5,7 @@
 	var/icon =           'icons/obj/items/money.dmi'
 	var/material =       MAT_PLASTIC
 	var/absolute_value = 1 // Divisor for cash pile worth. Should never be <1 or non-integer (think of it like cents).
+	var/rotate_icons = TRUE
 	// Sort denominations by highest to lowest for the purposes of money
 	// icon generation not producing a pile of 2000 $1 coin overlays.
 	var/list/denominations = list(
@@ -18,11 +19,23 @@
 		"2" =    2,
 		"1" =    1
 	)
+	var/list/worth_has_name = list(
+		"1000" = "one thousand",
+		"500" =  "five hundred",
+		"100" =  "one hundred",
+		"50" =   "fifty",
+		"20" =   "twenty",
+		"10" =   "ten",
+		"5" =    "five",
+		"2" =    "two",
+		"1" =    "one"
+	)
 	var/list/denomination_is_coin = list(
 		"1" = list("heads", "tails"),
 		"2" = list("heads", "tails")
 	)
 	var/list/denomination_has_name = list(
+		"1000" = "bundle",
 		"500" =  "bundle",
 		"100" =  "note", 
 		"50" =   "note",
@@ -33,6 +46,7 @@
 		"1" =    "coin"
 	)
 	var/list/denomination_has_mark = list(
+		"1000" = "mark_x_5",
 		"500" =  "mark_x_5",
 		"100" =  "mark", 
 		"50" =   "mark",
@@ -51,7 +65,8 @@
 	var/list/denomination_has_state = list(
 		"1" =    "coin",
 		"2" =    "coin",
-		"500" =  "cash_x_5"
+		"500" =  "cash_x_5",
+		"1000" = "cash_x_5"
 	)
 
 /decl/currency/supply
@@ -63,6 +78,7 @@
 	name =          "scrip"
 	name_singular = "scrip"
 	name_short =    "T"
+	rotate_icons = FALSE
 	material =      MAT_COPPER
 	denominations = list(
 		"10" = 10,
