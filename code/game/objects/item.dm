@@ -677,7 +677,9 @@ var/list/global/slot_flags_enumeration = list(
 	if(istype(src, /obj/item/clothing/gloves))
 		var/obj/item/clothing/gloves/G = src
 		G.transfer_blood = 0
-	trace_DNA = null
+	var/datum/extension/forensic_evidence/forensics = get_extension(src, /datum/extension/forensic_evidence)
+	if(forensics)
+		forensics.remove_data(/datum/forensics/trace_dna)
 
 /obj/item/reveal_blood()
 	if(was_bloodied && !fluorescent)
@@ -707,6 +709,8 @@ var/list/global/slot_flags_enumeration = list(
 		if(blood_DNA[M.dna.unique_enzymes])
 			return 0 //already bloodied with this blood. Cannot add more.
 		blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
+		forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
 	return 1 //we applied blood to the item
 
 GLOBAL_LIST_EMPTY(blood_overlay_cache)

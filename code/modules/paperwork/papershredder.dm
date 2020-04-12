@@ -17,7 +17,7 @@
 		/obj/item/newspaper = 3,
 		/obj/item/card/id = 3,
 		/obj/item/paper_bundle = 3,
-		/obj/item/sample/print = 1
+		/obj/item/forensics/sample/print = 1
 		)
 
 /obj/machinery/papershredder/attackby(var/obj/item/W, var/mob/user)

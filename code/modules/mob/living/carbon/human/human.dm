@@ -925,6 +925,8 @@
 	if(istype(M))
 		if(!blood_DNA[M.dna.unique_enzymes])
 			blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
+		forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
 	hand_blood_color = blood_color
 	src.update_inv_gloves()	//handles bloody hands overlays and updating
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
@@ -944,7 +946,9 @@
 
 	for(var/obj/item/organ/external/organ in organs)
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
-			organ.gunshot_residue = null
+			var/datum/extension/forensic_evidence/forensics = get_extension(organ, /datum/extension/forensic_evidence)
+			if(forensics)
+				forensics.remove_data(/datum/forensics/gunshot_residue)
 
 	if(clean_feet && !shoes)
 		feet_blood_color = null

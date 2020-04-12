@@ -274,6 +274,8 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 			B.blood_DNA[source.data["blood_DNA"]] = source.data["blood_type"]
 		else
 			B.blood_DNA[source.data["blood_DNA"]] = "O+"
+		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)
+		forensics.add_data(/datum/forensics/blood_dna, source.data["blood_DNA"])
 
 	B.fluorescent  = 0
 	B.set_invisibility(0)
