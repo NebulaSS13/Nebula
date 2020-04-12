@@ -13,6 +13,7 @@
 	uncreated_component_parts = null
 	idle_power_usage = 15
 	active_power_usage = 1 KILOWATTS //builtin health analyzer, dialysis machine, injectors.
+	pixel_z = -8
 
 	var/mob/living/carbon/human/occupant
 	var/obj/item/chems/glass/beaker = null
@@ -79,7 +80,7 @@
 	. = ..()
 	if(populate_parts)
 		beaker = new /obj/item/chems/glass/beaker/large(src)
-	icon = 'icons/obj/cryogenics_split.dmi'
+	icon = 'icons/obj/cryogenics_coffin.dmi'
 	update_icon()
 
 /obj/machinery/sleeper/examine(mob/user, distance)
@@ -127,28 +128,15 @@
 		occupant.SetStasis(stasis)
 
 /obj/machinery/sleeper/on_update_icon()
-
 	overlays.Cut()
-
-	var/on = (occupant && !(stat & (BROKEN|NOPOWER))) ? 1 : 0
-	icon_state = "pod[on]"
-
-	var/image/I = image(icon, "pod[on]_top")
-	I.pixel_z = 32
-	overlays += I
-
+	icon_state = "pod"
 	if(occupant)
 		var/image/pickle = new
 		pickle.appearance = occupant
 		pickle.layer = FLOAT_LAYER
-		pickle.pixel_z = 18
+		pickle.pixel_z = 12
 		overlays += pickle
-
-	I = image(icon, "lid[on]")
-	overlays += I
-
-	I = image(icon, "lid[on]_top")
-	I.pixel_z = 32
+	var/image/I = image(icon, "lid[!!(occupant && !(stat & (BROKEN|NOPOWER)))]")
 	overlays += I
 
 /obj/machinery/sleeper/DefaultTopicState()
