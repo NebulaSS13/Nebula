@@ -3420,7 +3420,7 @@
 "iy" = (
 /obj/structure/table/woodentable,
 /obj/item/paper{
-	info = "<center><b> Contract </b></center> <br>This contract describes exchanging of monetary pieces for the right o? the ownership for following examples: <list><*> Human, age 17. Price - 1500 thalers. <*> Human, age 49. Price - 1100 thalers. <*> Human, age 28. Good fist fighter. Price - 2400 thalers. <*> Human, age 34. Expirienced medic. Price - 6800 thalers. </list> <b> Overall price: 11800 thalers</b><br><small>Place for signatures</small>";
+	info = "<center><b> Contract </b></center> <br>This contract describes exchanging of monetary pieces for the right o? the ownership for following examples: <list><*> Human, age 17. Price - 1500cr. <*> Human, age 49. Price - 1100cr. <*> Human, age 28. Good fist fighter. Price - 2400cr. <*> Human, age 34. Expirienced medic. Price - 6800cr. </list> <b> Overall price: 11800cr</b><br><small>Place for signatures</small>";
 	name = "Contract"
 	},
 /turf/simulated/floor/tiled/airless,

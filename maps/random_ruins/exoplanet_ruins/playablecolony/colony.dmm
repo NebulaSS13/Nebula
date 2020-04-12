@@ -1063,7 +1063,7 @@
 /area/template_noop)
 "cj" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/cash/c1000,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -1081,7 +1081,7 @@
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/cash/c1000,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/tcomms)
 "ck" = (

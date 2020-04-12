@@ -35,14 +35,14 @@
 	qdel(src)
 
 /obj/item/storage/bag/cash/infinite
-	startswith = list(/obj/item/spacecash/bundle/c1000 = 1)
+	startswith = list(/obj/item/cash/c1000 = 1)
 
 //HUMAN
 /obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W, atom/new_location)
 	. = ..()
 	if(.)
-		if(istype(W,/obj/item/spacecash)) //only matters if its spacecash.
-			var/obj/item/I = new /obj/item/spacecash/bundle/c1000()
+		if(istype(W,/obj/item/cash)) //only matters if its spacecash.
+			var/obj/item/I = new /obj/item/cash/c1000()
 			src.handle_item_insertion(I,1)
 
 /spell/messa_shroud/choose_targets()

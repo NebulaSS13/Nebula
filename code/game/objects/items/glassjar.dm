@@ -70,15 +70,15 @@
 			return
 
 /obj/item/glass_jar/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/spacecash))
+	if(istype(W, /obj/item/cash))
 		if(contains == 0)
 			contains = 1
 		if(contains != 1)
 			return
 		if(!user.unEquip(W, src))
 			return
-		var/obj/item/spacecash/S = W
-		user.visible_message("<span class='notice'>[user] puts [S.worth] [S.worth > 1 ? GLOB.using_map.local_currency_name : GLOB.using_map.local_currency_name_singular] into \the [src].</span>")
+		var/obj/item/cash/S = W
+		user.visible_message("<span class='notice'>[user] puts \the [S] into \the [src].</span>")
 		update_icon()
 
 /obj/item/glass_jar/on_update_icon() // Also updates name and desc
@@ -91,14 +91,15 @@
 		if(1)
 			SetName("tip jar")
 			desc = "A small jar with money inside."
-			for(var/obj/item/spacecash/S in src)
-				var/list/moneyImages = S.getMoneyImages()
-				for(var/A in moneyImages)
-					var/image/money = image('icons/obj/items/money.dmi', A)
-					money.pixel_x = rand(-2, 3)
-					money.pixel_y = rand(-6, 6)
-					money.transform *= 0.6
-					underlays += money
+			for(var/obj/item/cash/S in src)
+				var/image/cash = new
+				cash.appearance = S
+				cash.pixel_x = rand(-2, 3)
+				cash.pixel_y = rand(-6, 6)
+				var/matrix/M = cash.transform || matrix()
+				M.Scale(0.6)
+				cash.transform = M
+				underlays += cash
 		if(2)
 			for(var/mob/M in src)
 				var/image/victim = image(M.icon, M.icon_state)

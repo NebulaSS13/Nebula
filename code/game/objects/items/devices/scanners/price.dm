@@ -12,7 +12,8 @@
 
 /obj/item/scanner/price/scan(atom/movable/target, mob/user)
 	scan_title = "Price estimations"
-	var/data = "\The [target]: [target.get_combined_monetary_worth()] [GLOB.using_map.local_currency_name]"
+	var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
+	var/data = "\The [target]: [target.get_combined_monetary_worth()] [local_currency.name]"
 	if(!scan_data)
 		scan_data = data
 	else

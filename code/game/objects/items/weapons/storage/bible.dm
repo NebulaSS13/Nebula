@@ -19,8 +19,8 @@
 
 	startswith = list(
 		/obj/item/chems/food/drinks/bottle/small/beer,
-		/obj/item/spacecash/bundle/c50,
-		/obj/item/spacecash/bundle/c50,
+		/obj/item/cash/c50,
+		/obj/item/cash/c50,
 		)
 
 /obj/item/storage/bible/bible

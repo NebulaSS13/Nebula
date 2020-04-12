@@ -19,8 +19,9 @@
 	var/author = "[GLOB.using_map.company_name] Editor"
 	var/channel = "Nyx Daily"
 
-	var/body = "Nyx Daily wishes to congratulate <b>[winner_name]</b> for recieving the Nyx Stellar Slam Lottery, and receiving the out of this world sum of [winner_sum] [GLOB.using_map.local_currency_name]!"
+	var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
+	var/body = "Nyx Daily wishes to congratulate <b>[winner_name]</b> for recieving the Nyx Stellar Slam Lottery, and receiving the out of this world sum of [winner_sum] [local_currency.name]!"
 	if(!deposit_success)
-		body += "<br>Unfortunately, we were unable to verify the account details provided, so we were unable to transfer the money. In order to have your winnings re-sent, send a cheque containing a processing fee of 5000 [GLOB.using_map.local_currency_name] to the ND 'Stellar Slam' office on the Nyx gateway with your updated details."
+		body += "<br>Unfortunately, we were unable to verify the account details provided, so we were unable to transfer the money. In order to have your winnings re-sent, send a cheque containing a processing fee of 5000 [local_currency.name] to the ND 'Stellar Slam' office on the Nyx gateway with your updated details."
 
 	news_network.SubmitArticle(body, author, channel, null, 1)

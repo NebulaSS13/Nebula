@@ -60,8 +60,11 @@
 		data["request_length"] = SSsupply.requestlist.len
 	data["screen"] = screen
 	data["credits"] = "[SSsupply.points]"
-	data["currency"] = GLOB.using_map.supply_currency_name
-	data["currency_short"] = GLOB.using_map.supply_currency_name_short
+
+	var/decl/currency/supply_currency = decls_repository.get_decl(GLOB.using_map.supply_currency)
+	data["currency"] = supply_currency.name
+	data["currency_short"] = supply_currency.name_short
+
 	switch(screen)
 		if(1)// Main ordering menu
 			data["categories"] = category_names

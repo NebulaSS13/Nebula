@@ -108,8 +108,10 @@
 		. = default
 	. = replacetext(., "MERCHANT", name)
 	. = replacetext(., "ORIGIN", origin)
-	. = replacetext(.,"CURRENCY_SINGULAR", GLOB.using_map.local_currency_name_singular)
-	. = replacetext(.,"CURRENCY", GLOB.using_map.local_currency_name)
+
+	var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
+	. = replacetext(.,"CURRENCY_SINGULAR", local_currency.name_singular)
+	. = replacetext(.,"CURRENCY", local_currency.name)
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = Clamp(num,1,trading_items.len)
@@ -176,7 +178,7 @@
 		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
 			return 0
 
-		if(istype(offer,/obj/item/spacecash))
+		if(istype(offer,/obj/item/cash))
 			if(!(trade_flags & TRADER_MONEY))
 				return TRADER_NO_MONEY
 		else

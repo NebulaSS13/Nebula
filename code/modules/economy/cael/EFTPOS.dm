@@ -72,11 +72,12 @@
 	if(get_dist(src,user) <= 1)
 		var/dat = "<b>[eftpos_name]</b><br>"
 		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting IT Support</i><br>"
+		var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
 		if(transaction_locked)
 			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Back[transaction_paid ? "" : " (authentication required)"]</a><br><br>"
 
 			dat += "Transaction purpose: <b>[transaction_purpose]</b><br>"
-			dat += "Value: <b>[GLOB.using_map.local_currency_name_short][transaction_amount]</b><br>"
+			dat += "Value: <b>[local_currency.name_short][transaction_amount]</b><br>"
 			dat += "Linked account: <b>[linked_account ? linked_account.owner_name : "None"]</b><hr>"
 			if(transaction_paid)
 				dat += "<i>This transaction has been processed successfully.</i><hr>"
@@ -87,7 +88,7 @@
 			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Lock in new transaction</a><br><br>"
 
 			dat += "<a href='?src=\ref[src];choice=trans_purpose'>Transaction purpose: [transaction_purpose]</a><br>"
-			dat += "Value: <a href='?src=\ref[src];choice=trans_value'>[GLOB.using_map.local_currency_name_short][transaction_amount]</a><br>"
+			dat += "Value: <a href='?src=\ref[src];choice=trans_value'>[local_currency.name_short][transaction_amount]</a><br>"
 			dat += "Linked account: <a href='?src=\ref[src];choice=link_account'>[linked_account ? linked_account.owner_name : "None"]</a><hr>"
 			dat += "<a href='?src=\ref[src];choice=change_code'>Change access code</a><br>"
 			dat += "<a href='?src=\ref[src];choice=change_id'>Change EFTPOS ID</a><br>"
@@ -105,20 +106,18 @@
 			scan_card(I, O)
 		else
 			to_chat(usr, "\icon[src]<span class='warning'>Unable to connect to linked account.</span>")
-	else if (istype(O, /obj/item/spacecash/ewallet))
-		var/obj/item/spacecash/ewallet/E = O
+	else if (istype(O, /obj/item/charge_card))
+		var/obj/item/charge_card/E = O
 		if (linked_account)
 			if(transaction_locked && !transaction_paid)
-				if(transaction_amount <= E.worth)
+				if(transaction_amount <= E.loaded_worth)
 					//transfer the money
 					var/purpose = (transaction_purpose ? transaction_purpose : "None supplied.")
 					purpose += ", paid by [E.owner_name]"
-
 					if(linked_account.deposit(transaction_amount, purpose, machine_id))
-						E.worth -= transaction_amount
-
+						E.adjust_worth(-(transaction_amount))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						src.visible_message("\icon[src] \The [src] chimes.")
+						visible_message("\icon[src] \The [src] chimes.")
 						transaction_paid = 1
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>Transaction failed! Please try again.</span>")
