@@ -26,11 +26,7 @@
 
 /obj/structure/catwalk/Initialize()
 	. = ..()
-	if(. != INITIALIZE_HINT_QDEL)
-		for(var/obj/structure/catwalk/C in get_turf(src))
-			if(C != src)
-				qdel(C)
-		. = INITIALIZE_HINT_LATELOAD
+	DELETE_IF_DUPLICATE_OF(/obj/structure/catwalk)
 
 /obj/structure/catwalk/LateInitialize()
 	..()
