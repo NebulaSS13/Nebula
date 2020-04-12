@@ -78,7 +78,7 @@
 		if(CanInteract(user, GLOB.default_state))
 			file_server = new_file_server
 			if(!file_server)
-				file_server = old_value // Safety check. 
+				file_server = old_value // Safety check.
 
 	if(href_list["PRG_assigngrant"])
 		var/list/all_grants = get_all_grants()
