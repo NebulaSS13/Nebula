@@ -29,15 +29,13 @@
 
 /datum/fabricator_recipe/proc/get_resources()
 	resources = list()
-	var/obj/item/I = new path
-	var/list/building_cost = I.building_cost()
-	for(var/path in building_cost)
-		if(!ignore_materials[path])
-			resources[path] = building_cost[path] * FABRICATOR_EXTRA_COST_FACTOR
-	qdel(I)
+	var/list/building_cost = atom_info_repository.get_matter_for(path)
+	for(var/mat in building_cost)
+		if(!ignore_materials[mat])
+			resources[mat] = building_cost[mat] * FABRICATOR_EXTRA_COST_FACTOR
 
-/obj/proc/building_cost()
-	. = list()
+/obj/building_cost()
+	. = ..()
 	if(length(matter))
 		for(var/material in matter)
 			var/material/M = SSmaterials.get_material_datum(material)

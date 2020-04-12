@@ -100,8 +100,8 @@
 /obj/machinery/vending/hydroseeds/build_inventory()
 	var/list/all_products = list(
 		list(src.products, CAT_NORMAL),
-		list(src.contraband, CAT_HIDDEN),
-
+		list(src.contraband, CAT_HIDDEN)
+	)
 	for(var/current_list in all_products)
 		var/category = current_list[2]
 

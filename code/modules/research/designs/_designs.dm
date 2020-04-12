@@ -47,19 +47,9 @@ other types of metals and chemistry for reagents).
 /datum/design/proc/AssembleDesignMaterials()
 	if(build_path && !materials)
 		materials = list()
-		var/obj/item/I = new build_path
-		var/list/building_cost = I.building_cost()
-		for(var/path in building_cost)
-			materials[path] = building_cost[path] * FABRICATOR_EXTRA_COST_FACTOR
-		if(istype(I, /obj/item/ammo_magazine) || istype(I, /obj/item/storage))
-			for(var/obj/thing in I)
-				var/list/thing_matter = thing.building_cost()
-				for(var/mat in thing_matter)
-					materials[mat] += thing_matter[mat] * FABRICATOR_EXTRA_COST_FACTOR
-		for(var/mat in materials)
-			materials[mat] = ceil(materials[mat])
-		if(!QDELETED(I))
-			qdel(I)
+		var/list/build_mats = atom_info_repository.get_matter_for(build_path)
+		for(var/mat in build_mats)
+			materials[mat] = ceil(build_mats[mat] * FABRICATOR_EXTRA_COST_FACTOR)
 
 //Adjust name, if needed.
 /datum/design/proc/ModifyDesignName()
