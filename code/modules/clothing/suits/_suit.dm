@@ -9,6 +9,8 @@
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
 
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_OVER)
+
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
