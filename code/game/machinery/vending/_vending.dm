@@ -66,12 +66,16 @@
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
 	var/shooting_chance = 2 //The chance that items are being shot per tick
 
+	var/vendor_currency
+
 	var/scan_id = 1
-	var/obj/item/material/coin/coin
+	var/obj/item/coin/coin
 	wires = /datum/wires/vending
 
 /obj/machinery/vending/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
+	if(!ispath(vendor_currency, /decl/currency))
+		vendor_currency = GLOB.using_map.default_currency
 	if(product_slogans)
 		slogan_list += splittext(product_slogans, ";")
 
@@ -182,7 +186,7 @@
 		if(src.panel_open)
 			attack_hand(user)
 			return TRUE
-	if(istype(W, /obj/item/material/coin) && premium.len > 0)
+	if(istype(W, /obj/item/coin) && premium.len > 0)
 		if(!user.unEquip(W, src))
 			return FALSE
 		coin = W
@@ -313,12 +317,12 @@
  */
 /obj/machinery/vending/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
-
+	var/decl/currency/local_currency = decls_repository.get_decl(vendor_currency)
 	var/list/data = list()
 	if(currently_vending)
 		data["mode"] = 1
 		data["product"] = currently_vending.item_name
-		data["price"] = currently_vending.price
+		data["price"] = "[ceil(currently_vending.price / local_currency.absolute_value)][local_currency.name_short]"
 		data["message_err"] = 0
 		data["message"] = src.status_message
 		data["message_err"] = src.status_error
@@ -335,7 +339,7 @@
 			listed_products.Add(list(list(
 				"key" = key,
 				"name" = I.item_name,
-				"price" = I.price,
+				"price" = "[ceil(I.price / local_currency.absolute_value)][local_currency.name_short]",
 				"color" = I.display_color,
 				"amount" = I.get_amount())))
 
