@@ -192,7 +192,7 @@ nanoui is used to open and update nano browser uis
 /datum/nanoui/proc/get_config_data()
 	var/name = "[src_object]"
 	name = sanitize(name)
-	var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
+	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
 	var/list/config_data = list(
 			"title" = title,
 			"srcObject" = list("name" = name),
@@ -205,7 +205,7 @@ nanoui is used to open and update nano browser uis
 			"mapZLevel" = map_z_level,
 			"mapZLevels" = GLOB.using_map.map_levels,
 			"user" = list("name" = user.name),
-			"currency" = local_currency.name,
+			"currency" = cur.name,
 		)
 	return config_data
 

@@ -6,6 +6,7 @@
 	var/trade_flags = TRADER_MONEY                              //Flags
 	var/name_language                                                //If this is set to a language name this will generate a name from the language
 	var/icon/portrait                                           //The icon that shows up in the menu @TODO
+	var/trader_currency
 
 	var/list/wanted_items = list()                              //What items they enjoy trading for. Structure is (type = known/unknown)
 	var/list/possible_wanted_items                              //List of all possible wanted items. Structure is (type = mode)
@@ -43,6 +44,8 @@
 
 /datum/trader/New()
 	..()
+	if(!ispath(trader_currency, /decl/currency))
+		trader_currency = GLOB.using_map.default_currency
 	if(name_language)
 		if(name_language == TRADER_DEFAULT_NAME)
 			name = capitalize(pick(GLOB.first_names_female + GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
@@ -109,9 +112,9 @@
 	. = replacetext(., "MERCHANT", name)
 	. = replacetext(., "ORIGIN", origin)
 
-	var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
-	. = replacetext(.,"CURRENCY_SINGULAR", local_currency.name_singular)
-	. = replacetext(.,"CURRENCY", local_currency.name)
+	var/decl/currency/cur = decls_repository.get_decl(trader_currency)
+	. = replacetext(.,"CURRENCY_SINGULAR", cur.name_singular)
+	. = replacetext(.,"CURRENCY", cur.name)
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = Clamp(num,1,trading_items.len)

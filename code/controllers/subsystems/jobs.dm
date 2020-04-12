@@ -507,9 +507,7 @@ SUBSYSTEM_DEF(jobs)
 		if(department_account)
 			remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
 			remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-
-			var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
-			remembered_info += "<b>Your department's account funds are:</b> [local_currency.name_short][department_account.money]<br>"
+			remembered_info += "<b>Your department's account funds are:</b> [department_account.format_value_by_currency(department_account.money)]<br>"
 
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 

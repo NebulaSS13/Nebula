@@ -144,7 +144,6 @@
 				if(authenticated_account.suspended)
 					t += "<span class='bad'><b>Access to this account has been suspended, and the funds within frozen.</b></span></div>"
 				else
-					var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
 					switch(view_screen)
 						if(CHANGE_SECURITY_LEVEL)
 							t += "Select a new security level for this account:<br><hr>"
@@ -180,13 +179,13 @@
 								t += "<td>[T.time]</td>"
 								t += "<td>[T.get_target_name()]</td>"
 								t += "<td>[T.purpose]</td>"
-								t += "<td>[local_currency.name_short][T.amount]</td>"
+								t += "<td>[authenticated_account.format_value_by_currency(T.amount)]</td>"
 								t += "<td>[T.get_source_name()]</td>"
 								t += "</tr>"
 							t += "</table>"
 							t += "<A href='?src=\ref[src];choice=print_transaction'>Print</a><br>"
 						if(TRANSFER_FUNDS)
-							t += "<b>Account balance:</b> [local_currency.name_short][authenticated_account.money]<br>"
+							t += "<b>Account balance:</b> [authenticated_account.format_value_by_currency(authenticated_account.money)]<br>"
 							t += "<form name='transfer' action='?src=\ref[src]' method='get'>"
 							t += "<input type='hidden' name='src' value='\ref[src]'>"
 							t += "<input type='hidden' name='choice' value='transfer'>"
@@ -196,7 +195,7 @@
 							t += "<input type='submit' value='Transfer funds'><br>"
 							t += "</form>"
 						else
-							t += "<b>Account balance:</b> [local_currency.name_short][authenticated_account.money]"
+							t += "<b>Account balance:</b> [authenticated_account.format_value_by_currency(authenticated_account.money)]"
 							t += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
 							t += "<input type='hidden' name='src' value='\ref[src]'>"
 							t += "<input type='radio' name='choice' value='withdrawal' checked> Cash  <input type='radio' name='choice' value='e_withdrawal'> Chargecard<br>"
@@ -355,13 +354,12 @@
 						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("balance_statement")
 				if(authenticated_account)
-					var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
 					var/obj/item/paper/R = new(src.loc)
 					R.SetName("Account balance: [authenticated_account.owner_name]")
 					R.info = "<b>Automated Teller Account Statement</b><br><br>"
 					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
 					R.info += "<i>Account number:</i> [authenticated_account.account_number]<br>"
-					R.info += "<i>Balance:</i> [local_currency.name_short][authenticated_account.money]<br>"
+					R.info += "<i>Balance:</i> [authenticated_account.format_value_by_currency(authenticated_account.money)]<br>"
 					R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
 					R.info += "<i>Service terminal ID:</i> [machine_id]<br>"
 
@@ -396,14 +394,13 @@
 					R.info += "<td><b>Value</b></td>"
 					R.info += "<td><b>Source terminal ID</b></td>"
 					R.info += "</tr>"
-					var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
 					for(var/datum/transaction/T in authenticated_account.transaction_log)
 						R.info += "<tr>"
 						R.info += "<td>[T.date]</td>"
 						R.info += "<td>[T.time]</td>"
 						R.info += "<td>[T.get_target_name()]</td>"
 						R.info += "<td>[T.purpose]</td>"
-						R.info += "<td>[local_currency.name_short][T.amount]</td>"
+						R.info += "<td>[authenticated_account.format_value_by_currency(T.amount)]</td>"
 						R.info += "<td>[T.get_source_name()]</td>"
 						R.info += "</tr>"
 					R.info += "</table>"

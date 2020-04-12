@@ -94,6 +94,8 @@
 			for(var/obj/item/cash/S in src)
 				var/image/cash = new
 				cash.appearance = S
+				cash.plane = FLOAT_PLANE
+				cash.layer = FLOAT_LAYER
 				cash.pixel_x = rand(-2, 3)
 				cash.pixel_y = rand(-6, 6)
 				var/matrix/M = cash.transform || matrix()

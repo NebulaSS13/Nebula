@@ -10,9 +10,16 @@
 							//1 - require manual login / account number and pin
 							//2 - require card and manual login
 	var/account_type = ACCOUNT_TYPE_PERSONAL
+	var/currency
 
 /datum/money_account/New(var/account_type)
 	account_type = account_type ? account_type : ACCOUNT_TYPE_PERSONAL
+	if(!ispath(currency, /decl/currency))
+		currency = GLOB.using_map.default_currency
+
+/datum/money_account/proc/format_value_by_currency(var/amt)
+	var/decl/currency/cur = decls_repository.get_decl(currency)
+	. = cur.format_value(amt)
 
 // is_source inverts the amount.
 /datum/money_account/proc/add_transaction(var/datum/transaction/T, is_source = FALSE)
@@ -64,14 +71,13 @@
 		//create a sealed package containing the account details
 		var/obj/item/smallDelivery/P = new /obj/item/smallDelivery(source_db.loc)
 		var/obj/item/paper/R = new /obj/item/paper(P)
-		var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
 		P.wrapped = R
 		R.SetName("Account information: [M.account_name]")
 		R.info = "<b>Account details (confidential)</b><br><hr><br>"
 		R.info += "<i>Account holder:</i> [M.owner_name]<br>"
 		R.info += "<i>Account number:</i> [M.account_number]<br>"
 		R.info += "<i>Account pin:</i> [M.remote_access_pin]<br>"
-		R.info += "<i>Starting balance:</i> [local_currency.name_short][M.money]<br>"
+		R.info += "<i>Starting balance:</i> [M.format_value_by_currency(M.money)]<br>"
 		R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
 		R.info += "<i>Creation terminal ID:</i> [source_db.machine_id]<br>"
 		R.info += "<i>Authorised officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"

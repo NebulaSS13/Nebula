@@ -288,12 +288,12 @@
  */
 /obj/machinery/vending/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
-	var/decl/currency/local_currency = decls_repository.get_decl(vendor_currency)
+	var/decl/currency/cur = decls_repository.get_decl(vendor_currency)
 	var/list/data = list()
 	if(currently_vending)
 		data["mode"] = 1
 		data["product"] = currently_vending.item_name
-		data["price"] = "[ceil(currently_vending.price / local_currency.absolute_value)][local_currency.name_short]"
+		data["price"] = cur.format_value(currently_vending.price)
 		data["message_err"] = 0
 		data["message"] = status_message
 		data["message_err"] = status_error
@@ -308,10 +308,10 @@
 				continue
 
 			listed_products.Add(list(list(
-				"key" = key,
-				"name" = I.item_name,
-				"price" = "[ceil(I.price / local_currency.absolute_value)][local_currency.name_short]",
-				"color" = I.display_color,
+				"key" =    key,
+				"name" =   I.item_name,
+				"price" =  cur.format_value(I.price),
+				"color" =  I.display_color,
 				"amount" = I.get_amount())))
 
 		data["products"] = listed_products

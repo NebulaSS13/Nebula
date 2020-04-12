@@ -84,3 +84,6 @@
 
 /proc/cmp_planelayer(atom/A, atom/B)
 	return (B.plane - A.plane) || (B.layer - A.layer)
+
+/proc/cmp_currency_denomination_des(var/datum/denomination/A, var/datum/denomination/B)
+	. = B.marked_value - A.marked_value

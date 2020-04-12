@@ -168,15 +168,13 @@
 
 				var/text
 				var/obj/item/paper/P = new(loc)
-				var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
-
 				if (detailed_account_view)
 					P.SetName("account #[detailed_account_view.account_number] details")
 					var/title = "Account #[detailed_account_view.account_number] Details"
 					text = {"
 						[accounting_letterhead(title)]
 						<u>Holder:</u> [detailed_account_view.owner_name]<br>
-						<u>Balance:</u> [local_currency.name_short][detailed_account_view.money]<br>
+						<u>Balance:</u> [detailed_account_view.format_value_by_currency(detailed_account_view.money)]<br>
 						<u>Status:</u> [detailed_account_view.suspended ? "Suspended" : "Active"]<br>
 						<u>Transactions:</u> ([detailed_account_view.transaction_log.len])<br>
 						<table>
@@ -231,7 +229,7 @@
 								<tr>
 									<td>#[D.account_number]</td>
 									<td>[D.owner_name]</td>
-									<td>[local_currency.name_short][D.money]</td>
+									<td>[D.format_value_by_currency(D.money)]</td>
 									<td>[D.suspended ? "Suspended" : "Active"]</td>
 								</tr>
 						"}

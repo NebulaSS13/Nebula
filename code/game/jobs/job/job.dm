@@ -126,9 +126,7 @@
 		var/remembered_info = ""
 		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
 		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
-
-		var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
-		remembered_info += "<b>Your account funds are:</b> [local_currency.name_short][M.money]<br>"
+		remembered_info += "<b>Your account funds are:</b> [M.format_value_by_currency(M.money)]<br>"
 
 		if(M.transaction_log.len)
 			var/datum/transaction/T = M.transaction_log[1]

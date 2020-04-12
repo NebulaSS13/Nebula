@@ -35,8 +35,8 @@
 		update_from_worth()
 
 /obj/item/cash/proc/get_worth()
-	var/decl/currency/local_currency = decls_repository.get_decl(currency)
-	. = Floor(absolute_worth / local_currency.absolute_value)
+	var/decl/currency/cur = decls_repository.get_decl(currency)
+	. = Floor(absolute_worth / cur.absolute_value)
 
 /obj/item/cash/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cash))
@@ -46,9 +46,9 @@
 			return
 		if(user.unEquip(W))
 			adjust_worth(cash.absolute_worth)
-			var/decl/currency/local_currency = decls_repository.get_decl(currency)
-			to_chat(user, SPAN_NOTICE("You add [cash.get_worth()] [local_currency.name] to the pile."))
-			to_chat(user, SPAN_NOTICE("It holds [get_worth()] [local_currency.name] now."))
+			var/decl/currency/cur = decls_repository.get_decl(currency)
+			to_chat(user, SPAN_NOTICE("You add [cash.get_worth()] [cur.name] to the pile."))
+			to_chat(user, SPAN_NOTICE("It holds [get_worth()] [cur.name] now."))
 			qdel(W)
 		return TRUE
 	else if(istype(W, /obj/item/gun/launcher/money))
@@ -59,47 +59,46 @@
 	icon_state = ""
 	var/draw_worth = get_worth()
 	var/list/adding_notes
-	var/decl/currency/local_currency = decls_repository.get_decl(currency)
-	for(var/denomination in local_currency.denominations)
-		while(draw_worth >= local_currency.denominations[denomination])
-			draw_worth -= local_currency.denominations[denomination]
-			var/image/banknote = image(local_currency.icon, local_currency.denomination_has_state[denomination] || "cash")
-			banknote.appearance_flags |= RESET_COLOR
-			banknote.color = local_currency.denomination_has_colour[denomination] || COLOR_PALE_BTL_GREEN
-			if(local_currency.denomination_has_mark[denomination])
-				var/image/mark = image(local_currency.icon, local_currency.denomination_has_mark[denomination])
-				mark.appearance_flags |= RESET_COLOR
-				banknote.overlays |= mark
+	var/decl/currency/cur = decls_repository.get_decl(currency)
+	for(var/datum/denomination/denomination in cur.denominations)
+		while(draw_worth >= denomination.marked_value)
+			draw_worth -= denomination.marked_value
+			var/image/banknote = new
+			banknote.appearance = denomination.overlay
+			banknote.plane = FLOAT_PLANE
+			banknote.layer = FLOAT_LAYER
 			var/matrix/M = matrix()
 			M.Translate(rand(-6, 6), rand(-4, 8))
-			if(local_currency.rotate_icons)
+			if(denomination.rotate_icon)
 				M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 			banknote.transform = M
 			LAZYADD(adding_notes, banknote)
 	overlays = adding_notes
 
 /obj/item/cash/proc/update_from_worth()
-	var/decl/currency/local_currency = decls_repository.get_decl(currency)
+	var/decl/currency/cur = decls_repository.get_decl(currency)
 	matter = list()
-	matter[local_currency.material] = absolute_worth * max(1, round(SHEET_MATERIAL_AMOUNT/10))
+	matter[cur.material] = absolute_worth * max(1, round(SHEET_MATERIAL_AMOUNT/10))
 	var/current_worth = get_worth()
-	if(local_currency.denominations["[current_worth]"]) // Single piece.
-		SetName("[local_currency.worth_has_name["[current_worth]"] || current_worth] [local_currency.name_singular] [local_currency.denomination_has_name["[current_worth]"] || "piece"]")
-		desc = "[initial(desc)] It's worth [current_worth] [current_worth == 1 ? local_currency.name_singular : local_currency.name]."
+	if(cur.denominations_by_value["[current_worth]"]) // Single piece.
+		var/datum/denomination/denomination = cur.denominations_by_value["[current_worth]"]
+		SetName(denomination.name)
+		desc = "[initial(desc)] It's worth [current_worth] [current_worth == 1 ? cur.name_singular : cur.name]."
 		w_class = ITEM_SIZE_TINY
 	else
-		SetName("pile of [local_currency.name]")
-		desc = "[initial(desc)] It totals up to [current_worth] [current_worth == 1 ? local_currency.name_singular : local_currency.name]."
+		SetName("pile of [cur.name]")
+		desc = "[initial(desc)] It totals up to [current_worth] [current_worth == 1 ? cur.name_singular : cur.name]."
 		w_class = ITEM_SIZE_SMALL
 	update_icon()
 
 /obj/item/cash/attack_self(var/mob/user)
 
-	var/decl/currency/local_currency = decls_repository.get_decl(currency)
+	var/decl/currency/cur = decls_repository.get_decl(currency)
 	var/current_worth = get_worth()
 
 	// Handle coin flipping. Mostly copied from /obj/item/coin.
-	if(length(local_currency.denomination_is_coin["[current_worth]"]) && alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip")
+	var/datum/denomination/denomination = cur.denominations_by_value["[current_worth]"]
+	if(denomination && length(denomination.faces) && alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip")
 		if(!can_flip)
 			to_chat(user, SPAN_WARNING("\The [src] is already being flipped!"))
 			return
@@ -108,7 +107,7 @@
 		user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air."))
 		sleep(1.5 SECOND)
 		if(!QDELETED(user) && !QDELETED(src) && loc == user && get_worth() == current_worth)
-			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [pick(local_currency.denomination_is_coin["[current_worth]"])]!"))
+			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [pick(denomination.faces)]!"))
 		can_flip = TRUE
 		return TRUE
 	// End coin flipping.
@@ -116,13 +115,13 @@
 	if(QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
 
-	var/amount = input(usr, "How many [local_currency.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
+	var/amount = input(usr, "How many [cur.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
 	amount = round(Clamp(amount, 0, Floor(get_worth() - 1)))
 
 	if(!amount || QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
 
-	amount = Floor(amount * local_currency.absolute_value)
+	amount = Floor(amount * cur.absolute_value)
 	adjust_worth(-(amount))
 	var/obj/item/cash/cash = new(get_turf(src))
 	cash.set_currency(currency)
@@ -157,6 +156,11 @@
 	currency = /decl/currency/trader
 	absolute_worth = 200
 
+
+/obj/item/cash/scavbucks
+	currency = /decl/currency/scav
+	absolute_worth = 10
+
 /obj/item/charge_card
 	name = "charge card"
 	icon = 'icons/obj/items/e_funds.dmi'
@@ -182,8 +186,8 @@
 	. = ..(user)
 	if(distance <= 2 || user == loc)
 		to_chat(user, SPAN_NOTICE("<b>Owner:</b> [owner_name]."))
-		var/decl/currency/local_currency = decls_repository.get_decl(currency)
-		to_chat(user, SPAN_NOTICE("<b>[capitalize(local_currency.name)]</b> remaining: [Floor(loaded_worth / local_currency.absolute_value)]."))
+		var/decl/currency/cur = decls_repository.get_decl(currency)
+		to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
 
 /obj/item/charge_card/get_single_monetary_worth()
 	. = loaded_worth

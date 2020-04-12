@@ -39,8 +39,8 @@
 		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] blasts themselves full in the face with \the [src]!</span>")
 		playsound(T, "sound/weapons/gunshot/money_launcher_jackpot.ogg", 100, 1)
 	else
-		var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
-		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] ejects a few [local_currency.name] into their face.</span>")
+		var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] ejects a few [cur.name] into their face.</span>")
 		playsound(T, 'sound/weapons/gunshot/money_launcher.ogg', 100, 1)
 
 	receptacle_value = 0
@@ -64,8 +64,8 @@
 	var/obj/item/cash/bling = new
 	bling.adjust_worth(receptacle_value)
 	user.put_in_hands(bling)
-	var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
-	to_chat(user, "<span class='notice'>You eject [receptacle_value] [local_currency.name_singular] from [src]'s receptacle.</span>")
+	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+	to_chat(user, "<span class='notice'>You eject [receptacle_value] [cur.name_singular] from [src]'s receptacle.</span>")
 	receptacle_value = 0
 
 /obj/item/gun/launcher/money/proc/absorb_cash(var/obj/item/cash/bling, mob/user)
@@ -99,13 +99,13 @@
 	return bling
 
 /obj/item/gun/launcher/money/attack_self(mob/user)
-	var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
-	var/disp_amount = min(input(user, "How many [local_currency.name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
+	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+	var/disp_amount = min(input(user, "How many [cur.name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
 	if (disp_amount < 1)
-		to_chat(user, "<span class='warning'>You have to dispense at least one [local_currency.name_singular] at a time!</span>")
+		to_chat(user, "<span class='warning'>You have to dispense at least one [cur.name_singular] at a time!</span>")
 		return
 	src.dispensing = disp_amount
-	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [local_currency.name_singular] at a time.</span>")
+	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [cur.name_singular] at a time.</span>")
 
 /obj/item/gun/launcher/money/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
@@ -120,13 +120,13 @@
 			to_chat(user, "<span class='warning'>You can't seem to get \the [bling] to slide into the receptacle.</span>")
 			return
 
-		var/decl/currency/local_currency = decls_repository.get_decl(bling.currency)
+		var/decl/currency/cur = decls_repository.get_decl(bling.currency)
 		if(bling.currency != GLOB.using_map.default_currency)
-			to_chat(user, SPAN_WARNING("Due to local legislation and budget cuts, \the [src] will only accept [local_currency.name]."))
+			to_chat(user, SPAN_WARNING("Due to local legislation and budget cuts, \the [src] will only accept [cur.name]."))
 			return
 
 		receptacle_value += bling.absolute_worth
-		to_chat(user, "<span class='notice'>You slide [bling.get_worth()] [local_currency.name_singular] into [src]'s receptacle.</span>")
+		to_chat(user, "<span class='notice'>You slide [bling.get_worth()] [cur.name_singular] into [src]'s receptacle.</span>")
 		qdel(bling)
 
 	else
@@ -134,11 +134,11 @@
 
 /obj/item/gun/launcher/money/examine(mob/user)
 	. = ..(user)
-	var/decl/currency/local_currency = decls_repository.get_decl(GLOB.using_map.default_currency)
-	to_chat(user, "It is configured to dispense [dispensing] [local_currency.name_singular] at a time.")
+	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+	to_chat(user, "It is configured to dispense [dispensing] [cur.name_singular] at a time.")
 
 	if(receptacle_value >= 1)
-		to_chat(user, "The receptacle is loaded with [receptacle_value] [local_currency.name_singular].")
+		to_chat(user, "The receptacle is loaded with [receptacle_value] [cur.name_singular].")
 
 	else
 		to_chat(user, "The receptacle is empty.")

@@ -24,10 +24,15 @@
 	if(!ispath(currency, /decl/currency))
 		currency = GLOB.using_map.default_currency
 	if(isnull(absolute_worth))
-		var/decl/currency/local_currency = decls_repository.get_decl(currency)
-		if(length(local_currency.denomination_is_coin))
-			currency_worth = local_currency.denominations[pick(local_currency.denomination_is_coin)]
-			absolute_worth = currency_worth * local_currency.absolute_value
+		var/decl/currency/cur = decls_repository.get_decl(currency)
+		var/list/coins = list()
+		for(var/datum/denomination/denomination in cur.denominations)
+			if(denomination.faces)
+				coins += denomination
+		if(length(coins))
+			var/datum/denomination/denomination = pick(coins)
+			currency_worth = denomination.marked_value
+			absolute_worth = Floor(denomination.marked_value / cur.absolute_value)
 			currency_worth = "[currency_worth]"
 		if(!absolute_worth || !currency_worth)
 			return INITIALIZE_HINT_QDEL
@@ -44,8 +49,9 @@
 /obj/item/coin/examine(mob/user, distance)
 	. = ..()
 	if((distance <= 1 || loc == user) && user.skill_check(SKILL_FINANCE, SKILL_ADEPT))
-		var/decl/currency/local_currency = decls_repository.get_decl(currency)
-		to_chat(user, "It looks like an antiquated minting of a [currency_worth] [local_currency.name_singular] [local_currency.denomination_has_name[currency_worth] || "piece"].")
+		var/decl/currency/cur = decls_repository.get_decl(currency)
+		var/datum/denomination/denomination = cur.denominations_by_value[currency_worth]
+		to_chat(user, "It looks like an antiquated minting of \a [denomination.name].")
 
 // "Coin Flipping, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
 /obj/item/coin/attack_self(var/mob/user)
@@ -59,8 +65,11 @@
 	if(!can_flip)
 		return
 
-	var/decl/currency/local_currency = decls_repository.get_decl(currency)
-	if(!length(local_currency.denomination_is_coin[currency_worth]))
+
+	var/decl/currency/cur = decls_repository.get_decl(currency)
+	var/datum/denomination/denomination = cur.denominations_by_value[currency_worth]
+
+	if(!denomination || !length(denomination.faces))
 		to_chat(user, SPAN_WARNING("\The [src] is not the right shape to be flipped."))
 		return
 
@@ -69,7 +78,7 @@
 	user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air."))
 	sleep(1.5 SECOND)
 	if(!QDELETED(user) && !QDELETED(src) && loc == user)
-		user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [pick(local_currency.denomination_is_coin[currency_worth])]!"))
+		user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [pick(denomination.faces)]!"))
 	can_flip = TRUE
 
 // Subtypes.
