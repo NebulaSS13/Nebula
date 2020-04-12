@@ -23,11 +23,13 @@
 	var/inertia_moving = 0
 	var/inertia_next_move = 0
 	var/inertia_move_delay = 5
+	var/atom/movable/inertia_ignore
 
 //call this proc to start space drifting
 /atom/movable/proc/space_drift(direction)//move this down
 	if(!loc || direction & (UP|DOWN) || Process_Spacemove(0))
 		inertia_dir = 0
+		inertia_ignore = null
 		return 0
 
 	inertia_dir = direction
@@ -77,7 +79,6 @@
 
 	else if(power > 0.5)	//knocks them back and changes their direction
 		step(src, direction)
-		space_drift(direction)
 
 	else if(power > 0.25)	//glancing change in direction
 		var/drift_dir
@@ -123,6 +124,9 @@
 /atom/movable/Bump(var/atom/A, yes)
 	if(!QDELETED(throwing))
 		throwing.hit_atom(A)
+
+	if(inertia_dir)
+		inertia_dir = 0
 
 	if (A && yes)
 		A.last_bumped = world.time

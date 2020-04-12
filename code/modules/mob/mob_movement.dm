@@ -139,9 +139,10 @@
 		src.m_flag = 1
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
-			if (!inertia_moving)
-				inertia_next_move = world.time + inertia_move_delay
-				space_drift(last_move)
+	
+	if (!inertia_moving && !(direct & (UP|DOWN)))
+		inertia_next_move = world.time + inertia_move_delay
+		space_drift(direct)
 
 /client/Move(n, direction)
 	if(!user_acted(src))
@@ -158,8 +159,12 @@
 	var/atom/movable/backup = get_spacemove_backup()
 	if(backup)
 		if(istype(backup) && movement_dir && !backup.anchored)
-			if(step(backup,turn(movement_dir, 180)))
+			var/direction = turn(movement_dir, 180)
+			if(step(backup,direction))
 				to_chat(src, "<span class='info'>You push off of [backup] to propel yourself.</span>")
+				inertia_ignore = backup
+				backup.inertia_ignore = src
+				backup.space_drift(direction)
 		return -1
 
 /mob/proc/get_spacemove_backup()//rename this
@@ -182,6 +187,8 @@
 			if(AM.density || !AM.CanPass(src))
 				if(AM.anchored)
 					return AM
+				if(AM == inertia_ignore)
+					continue
 				//if(pulling == AM) solve this
 				//	continue
 				. = AM
@@ -227,8 +234,7 @@
 /mob/proc/handle_spaceslipping()
 	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERT)))
 		to_chat(src, "<span class='warning'>You slipped!</span>")
-		step(src, last_move)
-		space_drift(last_move)
+		step(turn(last_move, pick(45,-45)))
 		return 1
 	return 0
 

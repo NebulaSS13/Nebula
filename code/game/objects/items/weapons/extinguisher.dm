@@ -144,7 +144,6 @@
 
 		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
 			step(user, direction)
-			space_drift(direction)
 	else
 		return ..()
 	return

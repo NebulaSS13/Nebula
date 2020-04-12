@@ -36,6 +36,8 @@ SUBSYSTEM_DEF(spacedrift)
 
 		if (!AM.loc || AM.loc != AM.inertia_last_loc || AM.Process_Spacemove(0))
 			AM.inertia_dir = 0
+		
+		AM.inertia_ignore = null
 
 		if (!AM.inertia_dir)
 			AM.inertia_last_loc = null
