@@ -195,4 +195,4 @@
 	. = ATOM_IS_OPEN_CONTAINER(src) && ..()
 
 /obj/get_mass()
-	return w_class
+	return min(2^(w_class-1), 100)

@@ -64,13 +64,16 @@
 
 	return 0
 
-/atom/movable/hitby(atom/movable/AM, var/datum/thrownthing/TT)
+/atom/movable/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
 	process_momentum(AM,TT)
 
-/atom/movable/proc/process_momentum(atom/movable/AM, var/datum/thrownthing/TT)
+/atom/movable/proc/process_momentum(var/atom/movable/AM, var/datum/thrownthing/TT, var/power)//physic isn't an exact science
 	if(anchored) return
-	var/power = (AM.get_mass()*TT.speed)/get_mass()
+	if(!power)
+		power = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
+		if(has_gravity())
+			power *= 0.5
 
 	var/direction = TT.init_dir
 
