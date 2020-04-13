@@ -94,6 +94,10 @@
  *  the vending machine is to carry without manually populating
  *  product_records.
  */
+
+/obj/machinery/vending/proc/get_product_name(var/entry)
+	return
+
 /obj/machinery/vending/proc/build_inventory(populate_parts = FALSE)
 	var/list/all_products = list(
 		list(products, CAT_NORMAL),
@@ -102,11 +106,11 @@
 	for(var/current_list in all_products)
 		var/category = current_list[2]
 		for(var/entry in current_list[1])
-			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry)
+			var/datum/stored_items/vending_products/product = new(src, entry, get_product_name(entry))
 			product.price = atom_info_repository.get_worth_for(entry) * markup
-			if(populate_parts)
-				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
 			product.category = category
+			if(product && populate_parts)
+				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
 			product_records.Add(product)
 
 /obj/machinery/vending/Destroy()

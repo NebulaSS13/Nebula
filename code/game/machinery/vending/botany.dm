@@ -19,6 +19,7 @@
 		/obj/item/chems/glass/bottle/ammonia = 10
 	)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+	markup = 0
 
 /obj/machinery/vending/hydronutrients/generic
 	icon_state = "nutri_generic"
@@ -35,6 +36,7 @@
 	icon_deny = "seeds-deny"
 	vend_delay = 13
 	base_type = /obj/machinery/vending/hydroseeds
+	markup = 0
 	products = list(
 		/obj/item/seeds/bananaseed = 3,
 		/obj/item/seeds/berryseed = 3,
@@ -91,26 +93,5 @@
 	icon_vend = "seeds_generic-vend"
 	icon_deny = "seeds_generic-deny"
 
-/**
- *  Populate hydroseeds product_records
- *
- *  This needs to be customized to fetch the actual names of the seeds, otherwise
- *  the machine would simply list "packet of seeds" times 20
- */
-/obj/machinery/vending/hydroseeds/build_inventory()
-	var/list/all_products = list(
-		list(src.products, CAT_NORMAL),
-		list(src.contraband, CAT_HIDDEN)
-	)
-	for(var/current_list in all_products)
-		var/category = current_list[2]
-
-		for(var/entry in current_list[1])
-			var/obj/item/seeds/S = new entry(src)
-			var/name = S.name
-			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry, name)
-			product.price = atom_info_repository.get_worth_for(entry) * markup
-			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
-			product.category = category
-
-			src.product_records.Add(product)
+/obj/machinery/vending/hydroseeds/get_product_name(var/entry)
+	. = atom_info_repository.get_name_for(entry)
