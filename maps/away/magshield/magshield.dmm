@@ -164,7 +164,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/access_button{
+/obj/machinery/button/access{
 	pixel_x = -25;
 	pixel_y = -25
 	},
@@ -1926,7 +1926,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "eG" = (
-/obj/machinery/access_button{
+/obj/machinery/button/access{
 	pixel_x = -25;
 	pixel_y = 25
 	},
@@ -2029,7 +2029,7 @@
 "eT" = (
 /obj/machinery/door/airlock/external/bolted_open,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/access_button{
+/obj/machinery/button/access{
 	pixel_x = -25;
 	pixel_y = 25
 	},
@@ -2205,7 +2205,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "fw" = (
-/obj/machinery/access_button{
+/obj/machinery/button/access{
 	pixel_x = -25;
 	pixel_y = 25
 	},
@@ -2805,7 +2805,7 @@
 /turf/space,
 /area/magshield/east)
 "hj" = (
-/obj/machinery/access_button{
+/obj/machinery/button/access{
 	pixel_x = -25;
 	pixel_y = -25
 	},

@@ -2947,10 +2947,8 @@
 /area/map_template/rescue_base/start)
 "fH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "rescue_shuttle";
+/obj/machinery/button/access/shuttle/interior{
+	id_tag = "rescue_shuttle";
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;

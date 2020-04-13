@@ -49,7 +49,7 @@
 	power_channel = ENVIRON
 	density = 0
 	unacidable = 1
-	var/frequency = 1379
+	var/frequency = 1380
 	var/datum/radio_frequency/radio_connection
 
 /obj/machinery/embedded_controller/radio/Initialize()

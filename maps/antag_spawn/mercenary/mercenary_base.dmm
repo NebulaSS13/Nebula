@@ -2000,9 +2000,8 @@
 /obj/machinery/pointdefense{
 	initial_id_tag = "merc_pd"
 	},
-/obj/machinery/access_button/airlock_exterior{
-	frequency = 1380;
-	master_tag = "merc_shuttle";
+/obj/machinery/button/access/exterior{;
+	id_tag = "merc_shuttle";
 	pixel_x = 37;
 	pixel_y = -32;
 	req_access = list("ACCESS_SYNDICATE")

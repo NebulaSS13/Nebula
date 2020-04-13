@@ -1535,7 +1535,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "eO" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
 	id_tag = "bridgeport_pump"
 	},

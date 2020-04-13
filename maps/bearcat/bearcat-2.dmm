@@ -475,8 +475,8 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/access_button/airlock_interior{
-	master_tag = "bearcat_starboard_dock";
+/obj/machinery/button/access/interior{
+	id_tag = "bearcat_starboard_dock";
 	pixel_x = -12;
 	pixel_y = 20
 	},
@@ -524,7 +524,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/dock)
 "bZ" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "dock_star_pump"
 	},
@@ -537,8 +537,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/dock)
 "ca" = (
-/obj/machinery/access_button/airlock_exterior{
-	master_tag = "bearcat_starboard_dock";
+/obj/machinery/button/access/exterior{
+	id_tag = "bearcat_starboard_dock";
 	pixel_x = 18;
 	pixel_y = 20
 	},
@@ -3857,9 +3857,8 @@
 	frequency = 1380;
 	id_tag = "bearcat_shuttle_out"
 	},
-/obj/machinery/access_button/airlock_exterior{
-	frequency = 1380;
-	master_tag = "bearcat_shuttle";
+/obj/machinery/button/access/exterior{
+	id_tag = "bearcat_shuttle";
 	pixel_x = 18;
 	pixel_y = -20
 	},
@@ -4635,9 +4634,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/bearcat/command/bridge)
 "lc" = (
-/obj/machinery/access_button/airlock_exterior{
-	frequency = 1380;
-	master_tag = "bearcat_dock_port";
+/obj/machinery/button/access/exterior{
+	id_tag = "bearcat_dock_port";
 	pixel_x = -18;
 	pixel_y = 20
 	},
@@ -4851,9 +4849,8 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/access_button/airlock_interior{
-	frequency = 1380;
-	master_tag = "bearcat_dock_port";
+/obj/machinery/button/access/interior{
+	id_tag = "bearcat_dock_port";
 	pixel_x = 12;
 	pixel_y = 20
 	},
@@ -6766,9 +6763,8 @@
 /obj/structure/cable{
 	icon_state = "4-10"
 	},
-/obj/machinery/access_button/airlock_interior{
-	frequency = 1380;
-	master_tag = "bearcat_shuttle";
+/obj/machinery/button/access/interior{
+	id_tag = "bearcat_shuttle";
 	pixel_x = -12;
 	pixel_y = 20
 	},

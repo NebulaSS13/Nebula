@@ -1045,10 +1045,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cy" = (
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1331;
-	master_tag = "vox_west_control";
+/obj/machinery/button/access/shuttle/exterior{
+	id_tag = "vox_west_control";
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/effect/paint/black,
@@ -1267,10 +1265,8 @@
 /area/map_template/skipjack_station/start)
 "cZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "vox_west_control";
+/obj/machinery/button/access/shuttle/interior{
+	id_tag = "vox_west_control";
 	pixel_x = -22;
 	req_access = list("ACCESS_SYNDICATE")
 	},
@@ -1383,10 +1379,8 @@
 /area/map_template/skipjack_station/start)
 "dk" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1380;
-	master_tag = "skipjack_shuttle";
+/obj/machinery/button/access/interior{
+	id_tag = "skipjack_shuttle";
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;

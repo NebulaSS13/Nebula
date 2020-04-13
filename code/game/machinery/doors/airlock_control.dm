@@ -143,7 +143,7 @@
 	power_channel = ENVIRON
 
 	var/master_tag
-	var/frequency = 1379
+	var/frequency = 1380
 	var/command = "cycle"
 
 	var/datum/radio_frequency/radio_connection
@@ -213,69 +213,70 @@
 /obj/machinery/airlock_sensor/airlock_exterior
 	command = "cycle_exterior"
 
-/obj/machinery/access_button
+/obj/machinery/button/access
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "access_button_standby"
 	name = "access button"
+	interact_offline = TRUE
+	public_variables = list(
+		/decl/public_access/public_variable/button_active,
+		/decl/public_access/public_variable/button_state,
+		/decl/public_access/public_variable/input_toggle,
+		/decl/public_access/public_variable/button_command
+	)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/event_transmitter/access_button = 1
+	)
 
-	anchored = 1
-	power_channel = ENVIRON
-
-	var/master_tag
-	var/frequency = 1449
 	var/command = "cycle"
 
-	var/datum/radio_frequency/radio_connection
-
-	var/on = 1
-	interact_offline = TRUE
-
-
-/obj/machinery/access_button/on_update_icon()
-	if(on)
-		icon_state = "access_button_standby"
-	else
+/obj/machinery/button/access/on_update_icon()
+	if(stat & NOPOWER | BROKEN)
 		icon_state = "access_button_off"
+	else if(operating)
+		icon_state = "access_button_cycle"
+	else
+		icon_state = "access_button_standby"
 
-/obj/machinery/access_button/attackby(obj/item/I, mob/user)
-	//Swiping ID on the access button
-	if (istype(I, /obj/item/card/id) || istype(I, /obj/item/modular_computer))
-		attack_hand(user)
-		return
-	..()
-
-/obj/machinery/access_button/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
-		return FALSE
-	if(radio_connection)
-		var/datum/signal/signal = new
-		signal.transmission_method = 1 //radio signal
-		signal.data["tag"] = master_tag
-		signal.data["command"] = command
-
-		radio_connection.post_signal(src, signal, master_tag, AIRLOCK_CONTROL_RANGE)
-	flick("access_button_cycle", src)
-	return TRUE
-
-/obj/machinery/access_button/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_NULL)
-
-
-/obj/machinery/access_button/Initialize()
-	. = ..()
-	set_frequency(frequency)
-
-/obj/machinery/access_button/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
-	return ..()
-
-/obj/machinery/access_button/airlock_interior
-	frequency = 1379
+/obj/machinery/button/access/interior
 	command = "cycle_interior"
 
-/obj/machinery/access_button/airlock_exterior
-	frequency = 1379
+/obj/machinery/button/access/exterior
 	command = "cycle_exterior"
+
+/obj/machinery/button/access/shuttle
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/event_transmitter/access_button/shuttle = 1
+	)
+
+/obj/machinery/button/access/shuttle/interior
+	command = "cycle_interior"
+
+/obj/machinery/button/access/shuttle/exterior
+	command = "cycle_exterior"
+
+/decl/public_access/public_variable/button_command
+	expected_type = /obj/machinery/button/access
+	name = "button command"
+	desc = "The command this access button sends when pressed."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_STRING
+
+/decl/public_access/public_variable/button_command/access_var(obj/machinery/button/access/button)
+	return button.command
+
+/decl/public_access/public_variable/button_command/write_var(obj/machinery/button/access/button, new_val)
+	. = ..()
+	if(.)
+		button.command = new_val
+
+/decl/stock_part_preset/radio/event_transmitter/access_button
+	frequency = EXTERNAL_AIR_FREQ
+	event = /decl/public_access/public_variable/button_active
+	transmit_on_event = list(
+		"command" = /decl/public_access/public_variable/button_command
+	)
+
+/decl/stock_part_preset/radio/event_transmitter/access_button/shuttle
+	frequency = SHUTTLE_AIR_FREQ

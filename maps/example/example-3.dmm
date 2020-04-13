@@ -66,7 +66,7 @@
 /area/maintenance/fsmaint2)
 "n" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1379
+	frequency = 1380
 	},
 /turf/simulated/floor,
 /area/maintenance/fsmaint2)

@@ -166,7 +166,7 @@
 	locked = TRUE
 
 /obj/machinery/door/airlock/external/bolted/cycling
-	frequency = 1379
+	frequency = 1380
 
 /obj/machinery/door/airlock/external/bolted_open
 	density = FALSE
@@ -183,7 +183,7 @@
 	locked = TRUE
 
 /obj/machinery/door/airlock/external/glass/bolted/cycling
-	frequency = 1379
+	frequency = 1380
 
 /obj/machinery/door/airlock/external/glass/bolted_open
 	density = FALSE

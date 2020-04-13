@@ -1395,10 +1395,8 @@
 	dir = 5;
 	icon_state = "intact"
 	},
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "ninja_shuttle";
+/obj/machinery/button/access/shuttle/interior{
+	id_tag = "ninja_shuttle";
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;
