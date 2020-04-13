@@ -133,56 +133,56 @@ SUBSYSTEM_DEF(overlays)
 	if(NOT_QUEUED_ALREADY && need_compile)
 		QUEUE_FOR_COMPILE
 
-/atom/proc/cut_overlay(list/overlays, priority)
-	if(!overlays)
+/atom/proc/cut_overlay(list/overlays_list, priority)
+	if(!overlays_list)
 		return
 
-	overlays = build_appearance_list(overlays)
+	overlays_list = build_appearance_list(overlays_list)
 
 	var/list/cached_overlays = our_overlays	//sanic
 	var/list/cached_priority = priority_overlays
 	var/init_o_len = LAZYLEN(cached_overlays)
 	var/init_p_len = LAZYLEN(cached_priority)  //starter pokemon
 
-	LAZYREMOVE(cached_overlays, overlays)
+	LAZYREMOVE(cached_overlays, overlays_list)
 	if(priority)
-		LAZYREMOVE(cached_priority, overlays)
+		LAZYREMOVE(cached_priority, overlays_list)
 
 	if(NOT_QUEUED_ALREADY && ((init_o_len != LAZYLEN(cached_priority)) || (init_p_len != LAZYLEN(cached_overlays))))
 		QUEUE_FOR_COMPILE
 
-/atom/proc/add_overlay(list/overlays, priority = FALSE)
-	if(!overlays)
+/atom/proc/add_overlay(list/overlays_list, priority = FALSE)
+	if(!overlays_list)
 		return
 
-	overlays = build_appearance_list(overlays)
+	overlays_list = build_appearance_list(overlays_list)
 
-	if (!overlays || (islist(overlays) && !overlays.len))
+	if (!overlays_list || (islist(overlays_list) && !overlays_list.len))
 		// No point trying to compile if we don't have any overlays.
 		return
 
 	if(priority)
-		LAZYADD(priority_overlays, overlays)
+		LAZYADD(priority_overlays, overlays_list)
 	else
-		LAZYADD(our_overlays, overlays)
+		LAZYADD(our_overlays, overlays_list)
 
 	if(NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE
 
-/atom/proc/set_overlays(list/overlays, priority = FALSE)	// Sets overlays to a list, equivalent to cut_overlays() + add_overlays().
-	if (!overlays)
+/atom/proc/set_overlays(list/overlays_list, priority = FALSE)	// Sets overlays to a list, equivalent to cut_overlays() + add_overlays().
+	if (!overlays_list)
 		return
 
-	overlays = build_appearance_list(overlays)
+	overlays_list = build_appearance_list(overlays_list)
 
 	if (priority)
 		LAZYCLEARLIST(priority_overlays)
-		if (overlays)
-			LAZYADD(priority_overlays, overlays)
+		if (overlays_list)
+			LAZYADD(priority_overlays, overlays_list)
 	else
 		LAZYCLEARLIST(our_overlays)
-		if (overlays)
-			LAZYADD(our_overlays, overlays)
+		if (overlays_list)
+			LAZYADD(our_overlays, overlays_list)
 
 	if (NOT_QUEUED_ALREADY)
 		QUEUE_FOR_COMPILE

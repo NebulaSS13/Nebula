@@ -6,7 +6,7 @@
 #define SS_PRIORITY_DEFAULT 50         // Default priority for all processes levels
 
 // SS_TICKER
-#define SS_PRIORITY_OVERLAY        200 // Applies overlays. May cause overlay pop-in if it gets behind.
+#define SS_PRIORITY_OVERLAY        100 // Applies overlays. May cause overlay pop-in if it gets behind.
 #define SS_PRIORITY_TIMER          20
 #define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
 
