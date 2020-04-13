@@ -15,14 +15,11 @@
 /obj/structure/lattice/Initialize()
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
+		DELETE_IF_DUPLICATE_OF(/obj/structure/lattice)
 		if(!istype(material))
 			return INITIALIZE_HINT_QDEL
 		if(!istype(src.loc, /turf/space) && !istype(src.loc, /turf/simulated/open))
 			return INITIALIZE_HINT_QDEL
-		for(var/obj/structure/lattice/LAT in loc)
-			if(LAT != src)
-				crash_with("Found multiple lattices at '[log_info_line(loc)]'")
-				qdel(LAT)
 		. = INITIALIZE_HINT_LATELOAD
 
 /obj/structure/lattice/LateInitialize()
