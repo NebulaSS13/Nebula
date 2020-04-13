@@ -10,8 +10,7 @@
 
 	tally += species.handle_movement_delay_special(src)
 
-	var/area/a = get_area(src)
-	if(a && !a.has_gravity())
+	if(!has_gravity())
 		if(skill_check(SKILL_EVA, SKILL_PROF))
 			tally -= 2
 		tally -= 1

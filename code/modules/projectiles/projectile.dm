@@ -105,10 +105,16 @@
 		if(T)
 			T.hotspot_expose(700, 5)
 
-	if(space_knockback && ismovable(A) && !has_gravity(A))
+	if(space_knockback && ismovable(A))
 		var/atom/movable/AM = A
-		if(!AM.anchored)
+		if(!AM.anchored && !AM.has_gravity())
+			if(ismob(AM))
+				var/mob/M = AM
+				if(M.check_space_footing())
+					return
+			var/old_dir = AM.dir
 			step(AM,get_dir(firer,AM))
+			AM.set_dir(old_dir)
 
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
 /obj/item/projectile/can_embed()

@@ -80,7 +80,7 @@
 
 // Space movement
 /datum/movement_handler/mob/space/DoMove(var/direction, var/mob/mover)
-	if(!mob.check_solid_ground())
+	if(!mob.has_gravity())
 		var/allowmove = mob.Process_Spacemove(direction)
 		if(!allowmove)
 			return MOVEMENT_HANDLED
@@ -261,7 +261,7 @@
 /mob/living/carbon/human/get_stamina_used_per_step()
 	var/mod = (1-((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)))
 	if(species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
-		if(has_gravity(src))
+		if(has_gravity())
 			mod *= 1.2
 		else
 			mod *= 0.8

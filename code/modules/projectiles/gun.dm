@@ -323,7 +323,7 @@
 				S.deactivate()
 	
 	if(space_recoil)
-		if(!has_gravity(user) && !user.anchored)
+		if(!user.check_space_footing())
 			var/old_dir = user.dir
 			user.inertia_ignore = projectile
 			step(user,get_dir(target,user))

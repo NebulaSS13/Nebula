@@ -96,8 +96,7 @@
 
 // Space movement
 /datum/movement_handler/mob/space/exosuit/DoMove(var/direction, var/mob/mover)
-
-	if(!mob.check_solid_ground())
+	if(!mob.has_gravity())
 		mob.anchored = FALSE
 		var/allowmove = mob.Process_Spacemove(direction)
 		if(!allowmove)

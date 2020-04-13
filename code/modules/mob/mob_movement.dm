@@ -160,11 +160,10 @@
 	if(backup)
 		if(istype(backup) && movement_dir && !backup.anchored)
 			var/direction = turn(movement_dir, 180)
+			backup.inertia_ignore = src
 			if(step(backup,direction))
 				to_chat(src, "<span class='info'>You push off of [backup] to propel yourself.</span>")
 				inertia_ignore = backup
-				backup.inertia_ignore = src
-				backup.space_drift(direction)
 		return -1
 
 /mob/proc/get_spacemove_backup()//rename this
@@ -172,7 +171,7 @@
 
 	for(var/thing in trange(1,src))//checks for walls or grav turf first
 		var/turf/T = thing
-		if(T.density || T.is_wall() || (T.is_floor() && (shoegrip || has_gravity(T))))
+		if(T.density || T.is_wall() || (T.is_floor() && (shoegrip || T.has_gravity())))
 			return T
 
 	var/obj/item/grab/G = locate() in src
@@ -192,36 +191,16 @@
 					continue
 				. = AM
 
-//Checks if a mob has solid ground to stand on
-//If there's no gravity then there's no up or down so naturally you can't stand on anything.
-//For the same reason lattices in space don't count - those are things you grip, presumably.
-/mob/proc/check_solid_ground()
-	if(istype(loc, /turf/space))
+/mob/proc/check_space_footing()	//checks for gravity or maglockable turfs to prevent space related movement
+	if(has_gravity() || anchored || buckled)
+		return 1
+
+	if(!Check_Shoegrip())
 		return 0
 
-	if(!lastarea)
-		lastarea = get_area(src)
-	if(!lastarea || !lastarea.has_gravity)
-		return 0
-
-	return 1
-
-/mob/proc/Check_Dense_Object() //checks for anything to push off or grip in the vicinity. also handles magboots on gravity-less floors tiles
-
-	var/shoegrip = Check_Shoegrip()
-
-	for(var/turf/simulated/T in trange(1,src)) //we only care for non-space turfs
-		if(T.density)	//walls work
-			return 1
-		else
-			var/area/A = T.loc
-			if(A.has_gravity || shoegrip)
-				return 1
-
-	for(var/obj/O in orange(1, src))
-		if(istype(O, /obj/structure/lattice))
-			return 1
-		if(O && O.density && O.anchored)
+	for(var/thing in trange(1,src))	//checks for turfs that one can maglock to
+		var/turf/T = thing
+		if(T.density || T.is_wall() || T.is_floor())
 			return 1
 
 	return 0

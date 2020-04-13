@@ -100,8 +100,7 @@
 		return
 
 	// No gravity in space, apparently.
-	var/area/area = get_area(src)
-	if(!area.has_gravity())
+	if(!has_gravity())
 		return
 
 	if(throwing)
@@ -241,8 +240,7 @@
 	var/turf/T = get_turf(A)
 	var/turf/above = GetAbove(src)
 	if(above && T.Adjacent(bound_overlay) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
-		var/area/location = get_area(loc)
-		if(location.has_gravity && !can_overcome_gravity())
+		if(loc.has_gravity() && !can_overcome_gravity())
 			return FALSE
 
 		visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")

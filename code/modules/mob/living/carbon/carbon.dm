@@ -312,7 +312,7 @@
 
 	if(!src.lastarea)
 		src.lastarea = get_area(src.loc)
-	if((istype(src.loc, /turf/space)) || (src.lastarea.has_gravity == 0))
+	if(!check_space_footing())
 		if(prob((itemsize * itemsize * 10) * MOB_SIZE_MEDIUM/src.mob_size))
 			var/direction = get_dir(target, src)
 			step(src,direction)
@@ -363,8 +363,7 @@
 	..()
 
 /mob/living/carbon/slip(slipped_on, stun_duration = 8)
-	var/area/A = get_area(src)
-	if(!A.has_gravity())
+	if(!has_gravity())
 		return FALSE
 	if(buckled)
 		return FALSE

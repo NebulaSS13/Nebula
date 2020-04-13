@@ -44,7 +44,7 @@
 	if(!simulated)
 		return 1
 
-	if(has_gravity(src))
+	if(has_gravity())
 		return 1
 
 	if(length(grabbed_by))

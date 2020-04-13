@@ -53,7 +53,7 @@
 		return
 
 	// don't need to step as often when you hop around
-	if((step_count % 3) && !has_gravity(src))
+	if((step_count % 3) && !has_gravity())
 		return
 
 	var/turf/simulated/T = get_turf(src)

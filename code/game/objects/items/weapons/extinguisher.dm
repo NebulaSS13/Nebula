@@ -142,7 +142,7 @@
 
 		addtimer(CALLBACK(src, .proc/do_spray, target), 0)
 
-		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
+		if(!user.check_space_footing())
 			step(user, direction)
 	else
 		return ..()
