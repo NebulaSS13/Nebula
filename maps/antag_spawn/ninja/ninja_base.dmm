@@ -1355,9 +1355,8 @@
 	},
 /area/map_template/ninja_dojo/start)
 "cR" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/shuttle{
 	density = 1;
-	frequency = 1331;
 	id_tag = "ninja_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -1411,8 +1410,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/machinery/door/airlock/external{
-	frequency = 1331;
+/obj/machinery/door/airlock/external/shuttle{
 	id_tag = "ninja_shuttle_inner";
 	name = "Ship External Access"
 	},

@@ -1317,7 +1317,6 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "yacht_outer"
 	},
 /turf/simulated/floor/airless,
@@ -1360,7 +1359,6 @@
 	icon_state = "intact"
 	},
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "yacht_inner"
 	},
 /turf/simulated/floor/plating,

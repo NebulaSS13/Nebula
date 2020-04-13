@@ -134,7 +134,7 @@ var/list/escape_pods_by_name = list()
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/arm()
 	if(!armed)
 		armed = 1
-		open_door()
+		toggleDoor(memory["door_status"], tag_door, TRUE, "open")
 
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/receive_user_command(command)
@@ -145,7 +145,7 @@ var/list/escape_pods_by_name = list()
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/process()
 	..()
 	if (eject_time && world.time >= eject_time && !closing)
-		close_door()
+		toggleDoor(memory["door_status"], tag_door, TRUE, "close")
 		closing = 1
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/prepare_for_docking()

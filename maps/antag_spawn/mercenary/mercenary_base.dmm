@@ -810,7 +810,6 @@
 /area/map_template/merc_shuttle)
 "bp" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "merc_shuttle_inner";
 	name = "Ship External Access"
 	},
@@ -836,7 +835,6 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	dir = 2;
-	frequency = 1380;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -969,7 +967,6 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	dir = 4;
-	frequency = 1380;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},

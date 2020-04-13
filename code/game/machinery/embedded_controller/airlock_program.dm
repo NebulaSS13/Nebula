@@ -61,8 +61,8 @@
 		memory["secure"] = controller.tag_secure
 
 		spawn(10)
-			signalDoor(tag_exterior_door, "update")		//signals connected doors to update their status
-			signalDoor(tag_interior_door, "update")
+			signalDoor(tag_exterior_door)		//signals connected doors to update their status
+			signalDoor(tag_interior_door)
 
 /datum/computer/file/embedded_program/airlock/get_receive_filters()
 	. = list(
@@ -172,13 +172,9 @@
 				target_state = TARGET_NONE
 
 		if("secure")
+			toggleDoor(memory["exterior_status"], tag_exterior_door, !memory["secure"])
+			toggleDoor(memory["interior_status"], tag_interior_door, !memory["secure"])
 			memory["secure"] = !memory["secure"]
-			if(memory["secure"])
-				signalDoor(tag_interior_door, "lock")
-				signalDoor(tag_exterior_door, "lock")
-			else
-				signalDoor(tag_interior_door, "unlock")
-				signalDoor(tag_exterior_door, "unlock")
 		else
 			. = FALSE
 
@@ -330,10 +326,12 @@
 	var/int_closed = check_interior_door_secured()
 	return (ext_closed && int_closed)
 
-/datum/computer/file/embedded_program/airlock/proc/signalDoor(var/tag, var/command)
+/datum/computer/file/embedded_program/proc/signalDoor(var/tag, var/list/commands)
 	var/datum/signal/signal = new
 	signal.data["tag"] = tag
-	signal.data["command"] = command
+	if(length(commands))
+		signal.data += commands
+	signal.data["status"] = TRUE
 	post_signal(signal, tag)
 
 /datum/computer/file/embedded_program/airlock/proc/shutAlarm()
@@ -364,12 +362,6 @@
 		if(TARGET_INOPEN)
 			toggleDoor(memory["exterior_status"], tag_exterior_door, memory["secure"], "close")
 			toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "open")
-		if(TARGET_NONE)
-			var/command = "unlock"
-			if(memory["secure"])
-				command = "lock"
-			signalDoor(tag_exterior_door, command)
-			signalDoor(tag_interior_door, command)
 
 datum/computer/file/embedded_program/airlock/proc/signal_mech_sensor(var/command, var/sensor)
 	var/datum/signal/signal = new
@@ -397,46 +389,25 @@ Only sends a command if it is needed, i.e. if the door is
 already open, passing an open command to this proc will not
 send an additional command to open the door again.
 ----------------------------------------------------------*/
-/datum/computer/file/embedded_program/airlock/proc/toggleDoor(var/list/doorStatus, var/doorTag, var/secure, var/command)
-	var/doorCommand = null
+/datum/computer/file/embedded_program/proc/toggleDoor(var/list/doorStatus, var/doorTag, var/secure, var/command)
+	. = list()
 
 	if(command == "toggle")
-		if(doorStatus["state"] == "open")
-			command = "close"
-		else if(doorStatus["state"] == "closed")
-			command = "open"
+		command = doorStatus["state"] == "open" ? "close" : "open"
 
-	switch(command)
-		if("close")
-			if(secure)
-				if(doorStatus["state"] == "open")
-					doorCommand = "secure_close"
-				else if(doorStatus["lock"] == "unlocked")
-					doorCommand = "lock"
-			else
-				if(doorStatus["state"] == "open")
-					if(doorStatus["lock"] == "locked")
-						signalDoor(doorTag, "unlock")
-					doorCommand = "close"
-				else if(doorStatus["lock"] == "locked")
-					doorCommand = "unlock"
+	var/toggle = command && ((doorStatus["state"] == "open") ^ (command == "open"))
+	var/locked = (doorStatus["lock"] == "locked")
+	if(toggle)
+		if(locked) // need to unlock before opening
+			.["unlock"] = TRUE
+		.["[command]"] = TRUE
+		if(secure)
+			.["lock"] = TRUE
+	else if(locked ^ !!secure) // don't need to open, but do need to toggle lock state
+		.[secure ? "lock" : "unlock"] = TRUE
 
-		if("open")
-			if(secure)
-				if(doorStatus["state"] == "closed")
-					doorCommand = "secure_open"
-				else if(doorStatus["lock"] == "unlocked")
-					doorCommand = "lock"
-			else
-				if(doorStatus["state"] == "closed")
-					if(doorStatus["lock"] == "locked")
-						signalDoor(doorTag,"unlock")
-					doorCommand = "open"
-				else if(doorStatus["lock"] == "locked")
-					doorCommand = "unlock"
-
-	if(doorCommand)
-		signalDoor(doorTag, doorCommand)
+	if(length(.))
+		signalDoor(doorTag, .)
 
 
 #undef STATE_IDLE

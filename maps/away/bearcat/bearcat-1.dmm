@@ -19,14 +19,14 @@
 /turf/simulated/floor/usedup,
 /area/space)
 "ad" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_out"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/cargo/lower)
 "ae" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_out"
 	},
 /obj/machinery/button/access/exterior{
@@ -243,14 +243,14 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "aD" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_in"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/cargo/lower)
 "aE" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_in"
 	},
 /obj/machinery/button/access/interior{
@@ -2417,7 +2417,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "eva_in"
 	},
 /obj/machinery/button/access/interior{
@@ -2476,7 +2476,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/eva)
 "eD" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "eva_out"
 	},
 /obj/machinery/button/access/exterior{

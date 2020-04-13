@@ -1697,7 +1697,6 @@
 /area/errant_pisces/solar_starboard)
 "eg" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_solar_starboard_outer"
 	},
 /obj/structure/cable/yellow{
@@ -1918,7 +1917,6 @@
 /area/errant_pisces/solar_port)
 "eC" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_solar_port_outer"
 	},
 /obj/structure/cable/yellow{
@@ -1994,7 +1992,6 @@
 /area/space)
 "eH" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_solar_starboard_inner"
 	},
 /obj/structure/cable/yellow{
@@ -2143,7 +2140,6 @@
 /area/errant_pisces/head_m)
 "eV" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_solar_port_inner"
 	},
 /obj/structure/cable/yellow{
@@ -4065,7 +4061,6 @@
 /area/errant_pisces/dorms)
 "jQ" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_ls_outer"
 	},
 /obj/machinery/door/firedoor,
@@ -4289,7 +4284,6 @@
 /area/errant_pisces/prod_storage)
 "ku" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_ls_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4838,7 +4832,6 @@
 /area/errant_pisces/science_wing)
 "mc" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_sci_outer"
 	},
 /turf/simulated/floor/plating,
@@ -4869,7 +4862,6 @@
 /area/errant_pisces/science_wing)
 "me" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_sci_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5291,7 +5283,6 @@
 /area/errant_pisces/aft_hallway)
 "nf" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_dock1_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5326,7 +5317,6 @@
 /area/errant_pisces/aft_hallway)
 "nh" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_dock1_outer"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -5923,7 +5913,6 @@
 /area/errant_pisces/aft_hallway)
 "ol" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_dock2_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5958,7 +5947,6 @@
 /area/errant_pisces/aft_hallway)
 "on" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_dock2_outer"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -6842,7 +6830,6 @@
 /area/errant_pisces/fishing_wing)
 "qQ" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_fish_inner"
 	},
 /obj/machinery/door/firedoor,
@@ -6879,7 +6866,6 @@
 /area/errant_pisces/fishing_wing)
 "qS" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "Harpoon_fish_outer"
 	},
 /obj/machinery/door/blast/regular/open{

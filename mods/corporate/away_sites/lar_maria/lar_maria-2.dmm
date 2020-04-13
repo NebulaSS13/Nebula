@@ -269,7 +269,6 @@
 "aF" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "ZHPWestSolar_outer"
 	},
 /obj/structure/cable/yellow{
@@ -307,7 +306,6 @@
 "aH" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "ZHPWestSolar_inner"
 	},
 /obj/structure/cable/yellow{
@@ -367,7 +365,6 @@
 "aL" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "ZHPEastSolar_inner"
 	},
 /obj/structure/cable/yellow{
@@ -407,7 +404,6 @@
 "aN" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "ZHPEastSolar_outer"
 	},
 /obj/structure/cable/yellow{
@@ -3349,7 +3345,6 @@
 /area/lar_maria/hallway)
 "ji" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "ZHPDock_airlock_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3357,7 +3352,6 @@
 /area/lar_maria/hallway)
 "jj" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "ZHPDock_airlock_inner"
 	},
 /obj/machinery/door/firedoor,
@@ -3392,7 +3386,6 @@
 /area/lar_maria/hallway)
 "jo" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1380;
 	id_tag = "ZHPDock_airlock_outer"
 	},
 /turf/simulated/floor/plating,

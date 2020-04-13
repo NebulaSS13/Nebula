@@ -732,7 +732,7 @@
 	pixel_x = -18;
 	pixel_y = 20
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "dock_port_out"
 	},
 /obj/machinery/shield_diffuser,
@@ -802,7 +802,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "dock_port_in"
 	},
 /obj/structure/cable{
@@ -923,7 +923,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "dock_star_in"
 	},
 /obj/structure/cable{
@@ -981,7 +981,7 @@
 	pixel_x = 18;
 	pixel_y = 20
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "dock_star_out"
 	},
 /obj/machinery/shield_diffuser,

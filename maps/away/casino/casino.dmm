@@ -193,7 +193,6 @@
 /area/casino/casino_maintenance)
 "aD" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_closed";
 	id_tag = "casino_dock_outer";
 	locked = 0;
@@ -289,7 +288,6 @@
 "aU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_closed";
 	id_tag = "casino_dock_inner";
 	locked = 0;
@@ -2491,7 +2489,6 @@
 /area/space)
 "gy" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "casino_solar_outer";
 	locked = 1;
@@ -2594,7 +2591,6 @@
 /area/space)
 "gL" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "casino_solar_inner";
 	locked = 1;
@@ -4977,7 +4973,6 @@
 /area/casino/casino_bow)
 "na" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "escape_pod";
 	locked = 1;

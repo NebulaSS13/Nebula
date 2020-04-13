@@ -46,8 +46,7 @@
 	switch(command)
 		if("toggle_door_safety")
 			door_safety = !door_safety
-			if(!door_safety)
-				signalDoor(tag_exterior_door, "unlock")
+			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety)
 		if("evacuate_atmos")
 			if(state == STATE_EVACUATE)
 				return
@@ -74,11 +73,8 @@
 
 /datum/computer/file/embedded_program/airlock/tin_can/process()
 	if(door_safety)
-		var/safe_to_open = safe_to_open()
-		if(safe_to_open && memory["exterior_status"]["lock"] == "locked")
-			signalDoor(tag_exterior_door, "unlock")
-		else if(!safe_to_open && memory["exterior_status"]["lock"] == "unlocked")
-			signalDoor(tag_exterior_door, "secure_close") // close and lock
+		var/safe_to_open = safe_to_open() // If safe, unlock; if not, close and lock
+		toggleDoor(memory["exterior_status"], tag_exterior_door, !safe_to_open, !safe_to_open ? "close" : null)
 
 /datum/computer/file/embedded_program/airlock/tin_can/proc/safe_to_open()
 	. = TRUE

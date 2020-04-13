@@ -248,7 +248,6 @@
 /area/mine/explored)
 "kb" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "lp_north_outer";
 	locked = 1
@@ -281,7 +280,6 @@
 /area/djstation)
 "ob" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "lp_north_inner";
 	locked = 1
@@ -291,7 +289,6 @@
 /area/djstation)
 "pb" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "lp_north_inner";
 	locked = 1
@@ -350,7 +347,6 @@
 /area/mine/explored)
 "wb" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "lp_east_inner";
 	locked = 1
@@ -381,7 +377,6 @@
 /area/djstation)
 "zb" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "lp_east_outer";
 	locked = 1
@@ -397,7 +392,6 @@
 /area/djstation)
 "Bb" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "closed";
 	id_tag = "lp_east_inner";
 	locked = 1

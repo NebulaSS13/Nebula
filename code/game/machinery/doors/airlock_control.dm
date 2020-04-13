@@ -1,138 +1,94 @@
-#define AIRLOCK_CONTROL_RANGE 22
 
-// This code allows for airlocks to be controlled externally by setting an id_tag and comm frequency (disables ID access)
+// Public access
+
 /obj/machinery/door/airlock
-	var/frequency
-	var/shockedby = list()
-	var/datum/radio_frequency/radio_connection
-	var/cur_command = null	//the command the door is currently attempting to complete
+	public_methods = list(
+		/decl/public_access/public_method/toggle_door,
+		/decl/public_access/public_method/airlock_toggle_bolts,
+		/decl/public_access/public_method/open_door,
+		/decl/public_access/public_method/close_door,
+		/decl/public_access/public_method/airlock_unlock,
+		/decl/public_access/public_method/airlock_lock,
+		/decl/public_access/public_method/toggle_input_toggle
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/input_toggle,
+		/decl/public_access/public_variable/airlock_door_state,
+		/decl/public_access/public_variable/airlock_bolt_state
+	)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/airlock = 1,
+		/decl/stock_part_preset/radio/event_transmitter/airlock =1
+	)
 
-/obj/machinery/door/airlock/Process()
-	if (arePowerSystemsOn())
-		execute_current_command()
-	return ..()
+/decl/stock_part_preset/radio/receiver/airlock
+	frequency = AIRLOCK_FREQ
+	receive_and_call = list(
+		"toggle_door" = /decl/public_access/public_method/toggle_door,
+		"toggle_bolts" = /decl/public_access/public_method/airlock_toggle_bolts,
+		"open" = /decl/public_access/public_method/open_door,
+		"close" = /decl/public_access/public_method/close_door,
+		"unlock" = /decl/public_access/public_method/airlock_unlock,
+		"lock" = /decl/public_access/public_method/airlock_lock,
+		"status" = /decl/public_access/public_method/toggle_input_toggle
+	)
 
-/obj/machinery/door/airlock/receive_signal(datum/signal/signal)
-	if(!signal || signal.encryption) return
+/decl/stock_part_preset/radio/event_transmitter/airlock
+	frequency = AIRLOCK_FREQ
+	event = /decl/public_access/public_variable/input_toggle
+	transmit_on_event = list(
+		"door_status" = /decl/public_access/public_variable/airlock_door_state,
+		"lock_status" = /decl/public_access/public_variable/airlock_bolt_state
+	)
 
-	if(id_tag != signal.data["tag"] || !signal.data["command"]) return
+/decl/stock_part_preset/radio/receiver/airlock/external_air
+	frequency = EXTERNAL_AIR_FREQ
 
-	command(signal.data["command"])
+/decl/stock_part_preset/radio/event_transmitter/airlock/external_air
+	frequency = EXTERNAL_AIR_FREQ
 
-/obj/machinery/door/airlock/proc/command(var/new_command)
-	cur_command = new_command
+/decl/stock_part_preset/radio/receiver/airlock/shuttle
+	frequency = SHUTTLE_AIR_FREQ
 
-	//if there's no power, recieve the signal but just don't do anything. This allows airlocks to continue to work normally once power is restored
-	if(arePowerSystemsOn())
-		execute_current_command()
+/decl/stock_part_preset/radio/event_transmitter/airlock/shuttle
+	frequency = SHUTTLE_AIR_FREQ
 
-/obj/machinery/door/airlock/proc/execute_current_command()
-	set waitfor = FALSE
-	if(operating)
-		return //emagged or busy doing something else
+/decl/public_access/public_method/airlock_lock
+	name = "engage bolts"
+	desc = "Bolts the airlock, if possible."
+	call_proc = /obj/machinery/door/airlock/proc/lock
 
-	if (!cur_command)
-		return
+/decl/public_access/public_method/airlock_unlock
+	name = "disengage bolts"
+	desc = "Unbolts the airlock, if possible."
+	call_proc = /obj/machinery/door/airlock/proc/unlock
 
-	do_command(cur_command)
-	if (command_completed(cur_command))
-		cur_command = null
+/decl/public_access/public_method/airlock_toggle_bolts
+	name = "toggle bolts"
+	desc = "Toggles whether the airlock is bolted or not, if possible."
+	call_proc = /obj/machinery/door/airlock/proc/toggle_lock
 
-/obj/machinery/door/airlock/proc/do_command(var/command)
-	switch(command)
-		if("open")
-			open()
+/decl/public_access/public_variable/airlock_door_state
+	expected_type = /obj/machinery/door/airlock
+	name = "airlock door state"
+	desc = "Whether the door is closed (\"closed\") or not (\"open\")."
+	can_write = FALSE
+	has_updates = FALSE
+	var_type = IC_FORMAT_STRING
 
-		if("close")
-			close()
+/decl/public_access/public_variable/airlock_door_state/access_var(obj/machinery/door/airlock/door)
+	return door.density ? "closed" : "open"
 
-		if("unlock")
-			unlock()
+/decl/public_access/public_variable/airlock_bolt_state
+	expected_type = /obj/machinery/door/airlock
+	name = "airlock bolt state"
+	desc = "Whether the door is bolted (\"locked\") or not (\"unlocked\")."
+	can_write = FALSE
+	has_updates = FALSE
+	var_type = IC_FORMAT_STRING
 
-		if("lock")
-			lock()
-
-		if("secure_open")
-			unlock()
-
-			sleep(2)
-			open()
-
-			lock()
-
-		if("secure_close")
-			unlock()
-			close()
-
-			lock()
-			sleep(2)
-
-	send_status()
-
-/obj/machinery/door/airlock/proc/command_completed(var/command)
-	switch(command)
-		if("open")
-			return (!density)
-
-		if("close")
-			return density
-
-		if("unlock")
-			return !locked
-
-		if("lock")
-			return locked
-
-		if("secure_open")
-			return (locked && !density)
-
-		if("secure_close")
-			return (locked && density)
-
-	return 1	//Unknown command. Just assume it's completed.
-
-/obj/machinery/door/airlock/proc/send_status(var/bumped = 0)
-	if(radio_connection)
-		var/datum/signal/signal = new
-		signal.transmission_method = 1 //radio signal
-		signal.data["tag"] = id_tag
-		signal.data["timestamp"] = world.time
-
-		signal.data["door_status"] = density?("closed"):("open")
-		signal.data["lock_status"] = locked?("locked"):("unlocked")
-
-		if (bumped)
-			signal.data["bumped_with_access"] = 1
-
-		radio_connection.post_signal(src, signal, id_tag, AIRLOCK_CONTROL_RANGE)
-
-
-/obj/machinery/door/airlock/open(surpress_send)
-	. = ..()
-	if(!surpress_send) send_status()
-
-
-/obj/machinery/door/airlock/close(surpress_send)
-	. = ..()
-	if(!surpress_send) send_status()
-
-/obj/machinery/door/airlock/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	if(new_frequency)
-		frequency = new_frequency
-		radio_connection = radio_controller.add_object(src, frequency, id_tag)
-
-/obj/machinery/door/airlock/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
-
-	update_icon()
-
-/obj/machinery/door/airlock/Destroy()
-	if(frequency && radio_controller)
-		radio_controller.remove_object(src,frequency)
-	return ..()
+/decl/public_access/public_variable/airlock_bolt_state/access_var(obj/machinery/door/airlock/door)
+	return door.locked ? "locked" : "unlocked"
 
 /obj/machinery/airlock_sensor
 	icon = 'icons/obj/airlock_machines.dmi'

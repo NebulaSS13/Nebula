@@ -274,7 +274,6 @@
 /area/smugglers/base)
 "aI" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "asteroid_base_east_inner";
 	locked = 1;
@@ -304,7 +303,6 @@
 /area/smugglers/base)
 "aK" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "asteroid_base_east_outer";
 	locked = 1

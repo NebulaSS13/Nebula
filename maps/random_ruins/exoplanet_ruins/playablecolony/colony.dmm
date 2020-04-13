@@ -6410,7 +6410,6 @@
 /area/map_template/colony/mineralprocessing)
 "lh" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "playablecolonymain_exterior_door";
 	locked = 1
 	},
@@ -7007,7 +7006,6 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "playablecolonymain_interior_door"
 	},
 /obj/effect/decal/cleanable/dirt,

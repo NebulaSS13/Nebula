@@ -83,12 +83,16 @@ obj/machinery/embedded_controller/radio/Destroy()
 		else
 			overlays += image(icon, "screen_fill")
 
+#define AIRLOCK_CONTROL_RANGE 22
+
 /obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal, var/radio_filter = null)
 	signal.transmission_method = TRANSMISSION_RADIO
 	if(radio_connection)
 		return radio_connection.post_signal(src, signal, radio_filter, AIRLOCK_CONTROL_RANGE)
 	else
 		qdel(signal)
+
+#undef AIRLOCK_CONTROL_RANGE
 
 /obj/machinery/embedded_controller/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)

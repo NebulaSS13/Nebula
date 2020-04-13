@@ -122,6 +122,10 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 /obj/machinery/door/airlock/external/bolted/ascent
 	door_color = COLOR_PURPLE
 	stripe_color = COLOR_GRAY40
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/airlock/shuttle = 1,
+		/decl/stock_part_preset/radio/event_transmitter/airlock/shuttle = 1
+	)
 
 /obj/machinery/power/apc/hyper/ascent/north
 	name = "north bump"

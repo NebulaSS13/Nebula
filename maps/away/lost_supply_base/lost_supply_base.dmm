@@ -204,7 +204,6 @@
 /area/lost_supply_base/solar)
 "ay" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "solar_outer";
 	locked = 1;
@@ -254,7 +253,6 @@
 /area/lost_supply_base)
 "aB" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "solar_inner";
 	locked = 1;
@@ -591,7 +589,6 @@
 /area/lost_supply_base)
 "br" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	glass = 1380;
 	icon_state = "door_locked";
 	id_tag = "centcom_shuttle_bay_door";
@@ -1362,7 +1359,6 @@
 /area/lost_supply_base/common)
 "dE" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "centcom_shuttle_hatch";
 	locked = 1;

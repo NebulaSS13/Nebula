@@ -253,7 +253,7 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aL" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	dir = 4;
 	id_tag = "unishi_inner"
 	},
@@ -268,7 +268,7 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aN" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	dir = 4;
 	id_tag = "unishi_outer"
 	},

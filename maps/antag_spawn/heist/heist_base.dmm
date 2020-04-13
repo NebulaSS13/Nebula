@@ -1019,7 +1019,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "cu" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "skipjack_base_hatch"
 	},
 /turf/unsimulated/floor{
@@ -1035,8 +1034,7 @@
 /turf/simulated/wall/voxshuttle,
 /area/map_template/skipjack_station/start)
 "cx" = (
-/obj/machinery/door/airlock/hatch{
-	frequency = 1331;
+/obj/machinery/door/airlock/external{
 	icon_state = "door_closed";
 	id_tag = "vox_northwest_lock";
 	locked = 0
@@ -1067,7 +1065,6 @@
 "cA" = (
 /obj/machinery/door/airlock/external{
 	density = 1;
-	frequency = 1380;
 	id_tag = "skipjack_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -1219,8 +1216,7 @@
 /turf/simulated/wall/voxshuttle,
 /area/map_template/skipjack_station/start)
 "cS" = (
-/obj/machinery/door/airlock/hatch{
-	frequency = 1331;
+/obj/machinery/door/airlock/external{
 	icon_state = "door_closed";
 	id_tag = "vox_southwest_lock";
 	locked = 0
@@ -1255,7 +1251,6 @@
 "cY" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "skipjack_shuttle_inner";
 	name = "Ship External Access"
 	},

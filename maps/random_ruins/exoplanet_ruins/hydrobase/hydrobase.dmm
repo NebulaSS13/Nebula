@@ -1896,7 +1896,6 @@
 	icon_state = "intact"
 	},
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "solars_inner";
 	locked = 1;
@@ -1964,7 +1963,6 @@
 /area/map_template/hydrobase/station/solarlock)
 "eH" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "solars_outer";
 	locked = 1;
@@ -2766,7 +2764,6 @@
 "go" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "hydrodock_inner";
 	locked = 1;
@@ -2984,7 +2981,6 @@
 /area/map_template/hydrobase/station/dockport)
 "gK" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "hydrodock_outer";
 	locked = 1;

@@ -1538,7 +1538,6 @@
 /area/constructionsite/hallway/fore)
 "eR" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_outer";
 	locked = 1
@@ -1557,7 +1556,6 @@
 /area/constructionsite/teleporter)
 "eU" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_inner";
 	locked = 1
@@ -1635,7 +1633,6 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_inner";
 	locked = 1
