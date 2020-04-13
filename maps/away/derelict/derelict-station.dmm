@@ -1225,7 +1225,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "ed" = (
-/obj/machinery/robotics_fabricator,
+/obj/machinery/fabricator/industrial,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "ee" = (
@@ -1811,22 +1811,20 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "fy" = (
-/obj/machinery/r_n_d/circuit_imprinter,
+/obj/machinery/fabricator/imprinter,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/storage)
 "fz" = (
-/obj/machinery/r_n_d/destructive_analyzer,
+/obj/machinery/destructive_analyzer,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "fA" = (
-/obj/machinery/r_n_d/protolathe{
-	icon_state = "protolathe_t";
+/obj/machinery/fabricator/protolathe{
 	stat = 1
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "fB" = (
-/obj/machinery/r_n_d/server/centcom,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "fC" = (

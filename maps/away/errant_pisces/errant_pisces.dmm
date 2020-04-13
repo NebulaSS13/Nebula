@@ -4362,7 +4362,6 @@
 "kB" = (
 /obj/structure/bookcase,
 /obj/item/book/manual/mass_spectrometry,
-/obj/item/book/manual/research_and_development,
 /obj/item/book/manual/engineering_guide,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -6158,7 +6157,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "oR" = (
-/obj/structure/bookcase/manuals/research_and_development,
+/obj/structure/bookcase,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "oS" = (

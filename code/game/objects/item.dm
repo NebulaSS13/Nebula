@@ -203,7 +203,8 @@
 			desc_comp += "<span class='notice'>Testing potentials:</span><BR>"
 			var/list/techlvls = cached_json_decode(origin_tech)
 			for(var/T in techlvls)
-				desc_comp += "Tech: Level [techlvls[T]] [CallTechName(T)] <BR>"
+				var/decl/research_field/field = SSfabrication.get_research_field_by_id(T)
+				desc_comp += "Tech: Level [techlvls[T]] [field.name] <BR>"
 		else
 			desc_comp += "No tech origins detected.<BR>"
 

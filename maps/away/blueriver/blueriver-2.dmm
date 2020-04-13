@@ -161,11 +161,10 @@
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
 "aD" = (
-/obj/machinery/computer/rdconsole,
+/obj/machinery/design_database,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aE" = (
-/obj/machinery/r_n_d/server,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -217,7 +216,7 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aM" = (
-/obj/machinery/r_n_d/protolathe,
+/obj/machinery/fabricator/protolathe,
 /obj/item/paper{
 	info = "Well, it only took three weeks... this trip... but we finally found something worth investigating! An energy signature, just on or under the planet's surface. It's bizarre, similar to a bluespace signature, but... not. I'll need to get down there to really get a reading on it, but this could be the kind of discovery that makes a career. We've identified a landing site, so our pilot is setting the ship down there in the next couple of hours. it'll take some more time after that to set up a base camp and such."
 	},
@@ -252,7 +251,7 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aT" = (
-/obj/machinery/r_n_d/destructive_analyzer,
+/obj/machinery/destructive_analyzer,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aU" = (
@@ -297,7 +296,7 @@
 /turf/simulated/floor/plating,
 /area/bluespaceriver/ship)
 "bb" = (
-/obj/machinery/r_n_d/circuit_imprinter,
+/obj/machinery/fabricator/imprinter,
 /obj/item/ano_scanner,
 /obj/item/paper{
 	info = "I don't understand where they could have gone, but one of the researchers and a guard disappeared last night. We've started looking for them, figuring maybe they got trapped somewhere in the ruins, maybe a booby trap or something that was still functioning, but we haven't seen any sign of them. their equipment, both of their equipment, is still in the ship, and there's no signs of anything grabbing them in the night, they're just... Gone.  Tomorrow morning we head back into space to go resupply and submit what we've found so far, but when we come back we'll have more than enough manpower to really dig into this place."
@@ -531,7 +530,7 @@
 /turf/simulated/floor/reinforced,
 /area/bluespaceriver/ship)
 "bH" = (
-/obj/structure/bookcase/manuals/research_and_development,
+/obj/structure/bookcase,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bI" = (

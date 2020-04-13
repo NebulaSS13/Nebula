@@ -1,6 +1,6 @@
 /obj/machinery/network/mainframe
 	name = "network mainframe"
-	icon = 'icons/obj/machines/research.dmi'
+	icon = 'icons/obj/machines/server.dmi'
 	icon_state = "server"
 	network_device_type =  /datum/extension/network_device/mainframe
 	main_template = "network_mainframe.tmpl"

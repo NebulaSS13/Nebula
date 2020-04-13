@@ -1,8 +1,3 @@
-// Wire datums. Created by Giacomand.
-// Was created to replace a horrible case of copy and pasted code with no care for maintability.
-// Goodbye Door wires, Cyborg wires, Vending Machine wires, Autolathe wires
-// Protolathe wires, APC wires and Camera wires!
-
 #define MAX_FLAG 65535
 
 var/list/same_wires = list()

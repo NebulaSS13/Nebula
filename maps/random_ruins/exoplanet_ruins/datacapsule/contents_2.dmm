@@ -13,10 +13,6 @@
 /turf/template_noop,
 /area/template_noop)
 "d" = (
-/obj/machinery/r_n_d/server/core{
-	id_with_upload_string = "";
-	id_with_download_string = ""
-	},
 /obj/structure/foamedmetal,
 /turf/template_noop,
 /area/template_noop)

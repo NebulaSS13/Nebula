@@ -36,7 +36,7 @@
 			return "Machine [log_info_line(machine)] lacked a circuitboard."
 		if(C.board_type != needs_board)
 			return "Machine [log_info_line(machine)] had a circuitboard of an unexpected type: was [C.board_type], should be [needs_board]."
-		var/design = GLOB.build_path_to_design_datum_path[C.type]
+		var/design = SSfabrication.recipes_by_product_type[C.type]
 		if(!design && !cannot_print)
 			return "Machine [log_info_line(machine)] had a circuitboard which could not be printed."
 		else if(design && cannot_print)

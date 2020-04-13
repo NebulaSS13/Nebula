@@ -109,11 +109,3 @@ GLOBAL_LIST_INIT(station_bookcases, new)
 	new /obj/item/book/manual/evaguide(src)
 	new /obj/item/book/manual/rust_engine(src)
 	update_icon()
-
-/obj/structure/bookcase/manuals/research_and_development
-	name = "R&D Manuals bookcase"
-
-/obj/structure/bookcase/manuals/research_and_development/Initialize()
-	. = ..()
-	new /obj/item/book/manual/research_and_development(src)
-	update_icon()

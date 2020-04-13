@@ -3,7 +3,6 @@
 
 /datum/unit_test/items_shall_use_tech_levels_in_origin_tech/start_test()
 	var/list/failures
-	var/list/all_tech_levels = ALL_TECH_LEVELS
 	for(var/subtype in typesof(/obj/item))
 		var/obj/item/test = subtype
 		var/check_json = initial(test.origin_tech)
@@ -15,8 +14,12 @@
 				LAZYADD(failures, check_json)
 			else
 				for(var/tech in output)
-					if(!isnum(output[tech]) || output[tech] < 1 || !(tech in all_tech_levels))
+					if(!isnum(output[tech]) || output[tech] < 1)
 						LAZYADD(failures, check_json)
+					else
+						var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
+						if(!istype(field) || !field.name)
+							LAZYADD(failures, check_json)
 		catch()
 			LAZYADD(failures, check_json)
 	if(LAZYLEN(failures))
