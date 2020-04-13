@@ -43,6 +43,17 @@
 	throwforce = round(0.25*material.get_edge_damage())
 	force = round(0.5*material.get_blunt_damage())
 
+/obj/item/stack/material/on_update_icon()
+	if(material_flags & USE_MATERIAL_COLOR)
+		color = material.icon_colour
+		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+	if(max_icon_state && amount > 0.5*max_amount)
+		icon_state = max_icon_state
+	else if(plural_icon_state && amount >= 2)
+		icon_state = plural_icon_state
+	else
+		icon_state = base_state
+
 /obj/item/stack/material/rods/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
