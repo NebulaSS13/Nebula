@@ -462,13 +462,13 @@
 	icon_state = "coin1"
 
 /obj/random/coin/spawn_choices()
-	return list(/obj/item/material/coin/gold = 3,
-				/obj/item/material/coin/silver = 4,
-				/obj/item/material/coin/diamond = 2,
-				/obj/item/material/coin/iron = 4,
-				/obj/item/material/coin/uranium = 3,
-				/obj/item/material/coin/platinum = 1,
-				/obj/item/material/coin/phoron = 1)
+	return list(/obj/item/coin/gold = 3,
+				/obj/item/coin/silver = 4,
+				/obj/item/coin/diamond = 2,
+				/obj/item/coin/iron = 4,
+				/obj/item/coin/uranium = 3,
+				/obj/item/coin/platinum = 1,
+				/obj/item/coin/phoron = 1)
 
 /obj/random/toy
 	name = "random toy"
@@ -874,12 +874,12 @@ obj/random/obstruction/spawn_choices()
 	icon_state = "spacecash1"
 
 /obj/random/cash/spawn_choices()
-	return list(/obj/item/spacecash/bundle/c1 = 4,
-				/obj/item/spacecash/bundle/c10 = 3,
-				/obj/item/spacecash/bundle/c20 = 3,
-				/obj/item/spacecash/bundle/c50 = 2,
-				/obj/item/spacecash/bundle/c100 = 2,
-				/obj/item/spacecash/bundle/c1000 = 1)
+	return list(/obj/item/cash/c1 = 4,
+				/obj/item/cash/c10 = 3,
+				/obj/item/cash/c20 = 3,
+				/obj/item/cash/c50 = 2,
+				/obj/item/cash/c100 = 2,
+				/obj/item/cash/c1000 = 1)
 
 /obj/random/documents // top secret documents, mostly overriden by maps
 	name = "random secret documents"

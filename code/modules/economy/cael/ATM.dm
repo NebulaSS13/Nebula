@@ -53,7 +53,7 @@
 		if(ticks_left_locked_down <= 0)
 			number_incorrect_tries = 0
 
-	for(var/obj/item/spacecash/S in src)
+	for(var/obj/item/cash/S in src)
 		S.dropInto(loc)
 		if(prob(50))
 			playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
@@ -66,7 +66,9 @@
 		//short out the machine, shoot sparks, spew money!
 		emagged = 1
 		spark_system.start()
-		spawn_money(rand(100,500),src.loc)
+		var/obj/item/cash/cash = new(get_turf(src))
+		cash.adjust_worth(rand(100,500))
+
 		//we don't want to grief people by locking their id in an emagged ATM
 		release_held_id(user)
 
@@ -95,11 +97,11 @@
 			attack_hand(user)
 
 	else if(authenticated_account)
-		if(istype(I,/obj/item/spacecash))
-			var/obj/item/spacecash/dolla = I
+		if(istype(I,/obj/item/cash))
+			var/obj/item/cash/dolla = I
 
 			//deposit the cash
-			if(authenticated_account.deposit(dolla.worth, "Credit deposit", machine_id))
+			if(authenticated_account.deposit(dolla.absolute_worth, "Credit deposit", machine_id))
 				if(prob(50))
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
 				else
@@ -177,13 +179,13 @@
 								t += "<td>[T.time]</td>"
 								t += "<td>[T.get_target_name()]</td>"
 								t += "<td>[T.purpose]</td>"
-								t += "<td>[GLOB.using_map.local_currency_name_short][T.amount]</td>"
+								t += "<td>[authenticated_account.format_value_by_currency(T.amount)]</td>"
 								t += "<td>[T.get_source_name()]</td>"
 								t += "</tr>"
 							t += "</table>"
 							t += "<A href='?src=\ref[src];choice=print_transaction'>Print</a><br>"
 						if(TRANSFER_FUNDS)
-							t += "<b>Account balance:</b> [GLOB.using_map.local_currency_name_short][authenticated_account.money]<br>"
+							t += "<b>Account balance:</b> [authenticated_account.format_value_by_currency(authenticated_account.money)]<br>"
 							t += "<form name='transfer' action='?src=\ref[src]' method='get'>"
 							t += "<input type='hidden' name='src' value='\ref[src]'>"
 							t += "<input type='hidden' name='choice' value='transfer'>"
@@ -193,7 +195,7 @@
 							t += "<input type='submit' value='Transfer funds'><br>"
 							t += "</form>"
 						else
-							t += "<b>Account balance:</b> [GLOB.using_map.local_currency_name_short][authenticated_account.money]"
+							t += "<b>Account balance:</b> [authenticated_account.format_value_by_currency(authenticated_account.money)]"
 							t += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
 							t += "<input type='hidden' name='src' value='\ref[src]'>"
 							t += "<input type='radio' name='choice' value='withdrawal' checked> Cash  <input type='radio' name='choice' value='e_withdrawal'> Chargecard<br>"
@@ -330,7 +332,10 @@
 					//create an entry in the account transaction log
 					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						spawn_ewallet(amount,src.loc,usr)
+						var/obj/item/charge_card/E = new(loc)
+						E.adjust_worth(amount)
+						E.owner_name = authenticated_account.owner_name
+						usr.put_in_hands(E)
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("withdrawal")
@@ -342,7 +347,9 @@
 					//remove the money
 					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						spawn_money(amount,src.loc,usr)
+						var/obj/item/cash/cash = new(get_turf(usr))
+						cash.adjust_worth(amount)
+						usr.put_in_hands(src)
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("balance_statement")
@@ -352,7 +359,7 @@
 					R.info = "<b>Automated Teller Account Statement</b><br><br>"
 					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
 					R.info += "<i>Account number:</i> [authenticated_account.account_number]<br>"
-					R.info += "<i>Balance:</i> [GLOB.using_map.local_currency_name_short][authenticated_account.money]<br>"
+					R.info += "<i>Balance:</i> [authenticated_account.format_value_by_currency(authenticated_account.money)]<br>"
 					R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
 					R.info += "<i>Service terminal ID:</i> [machine_id]<br>"
 
@@ -393,7 +400,7 @@
 						R.info += "<td>[T.time]</td>"
 						R.info += "<td>[T.get_target_name()]</td>"
 						R.info += "<td>[T.purpose]</td>"
-						R.info += "<td>[GLOB.using_map.local_currency_name_short][T.amount]</td>"
+						R.info += "<td>[authenticated_account.format_value_by_currency(T.amount)]</td>"
 						R.info += "<td>[T.get_source_name()]</td>"
 						R.info += "</tr>"
 					R.info += "</table>"
@@ -449,11 +456,3 @@
 	if(ishuman(human_user) && !human_user.get_active_hand())
 		human_user.put_in_hands(held_card)
 	held_card = null
-
-
-/obj/machinery/atm/proc/spawn_ewallet(var/sum, loc, mob/living/carbon/human/human_user)
-	var/obj/item/spacecash/ewallet/E = new /obj/item/spacecash/ewallet(loc)
-	if(ishuman(human_user) && !human_user.get_active_hand())
-		human_user.put_in_hands(E)
-	E.worth = sum
-	E.owner_name = authenticated_account.owner_name

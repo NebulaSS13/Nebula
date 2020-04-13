@@ -12,6 +12,11 @@
 	var/renamed = 0
 	var/icon_changed = 0
 
+/obj/item/storage/bible/Initialize()
+	. = ..()
+	if(length(startswith))
+		make_exact_fit()
+
 /obj/item/storage/bible/booze
 	name = "bible"
 	desc = "To be applied to the head repeatedly."
@@ -19,9 +24,9 @@
 
 	startswith = list(
 		/obj/item/chems/food/drinks/bottle/small/beer,
-		/obj/item/spacecash/bundle/c50,
-		/obj/item/spacecash/bundle/c50,
-		)
+		/obj/item/cash/c50,
+		/obj/item/cash/c50,
+	)
 
 /obj/item/storage/bible/bible
 	name = "\improper Bible"

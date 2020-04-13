@@ -12,9 +12,7 @@
 /obj/item/frame/building_cost()
 	. = ..()
 	if(fully_construct)
-		var/obj/machinery/machine = new build_machine_type
-		var/list/cost = machine.building_cost()
-		qdel(machine) // It's likely queued for processing; it won't delete automatically.
+		var/list/cost = atom_info_repository.get_matter_for(build_machine_type)
 		for(var/key in cost)
 			.[key] += cost[key]
 

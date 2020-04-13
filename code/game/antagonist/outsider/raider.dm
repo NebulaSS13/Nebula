@@ -168,7 +168,9 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	var/obj/item/storage/wallet/W = new(player)
 	W.handle_item_insertion(id)
 	if(player.equip_to_slot_or_del(W, slot_wear_id))
-		spawn_money(rand(50,150)*10,W)
+		var/obj/item/cash/cash = new(get_turf(player))
+		cash.adjust_worth(rand(50,150)*10)
+		player.put_in_hands(cash)
 	create_radio(RAID_FREQ, player)
 
 	return 1

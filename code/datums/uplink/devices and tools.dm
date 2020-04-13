@@ -23,7 +23,7 @@
 	path = /obj/item/storage/secure/briefcase/money
 /datum/uplink_item/item/tools/money/New()
 	. = ..()
-	desc = "A briefcase with 10,000 untraceable [GLOB.using_map.local_currency_name]. Makes a great bribe if they're willing to take you up on your offer."
+	desc = "A briefcase with a very large sum of untraceable local currency. Makes a great bribe if they're willing to take you up on your offer."
 
 /datum/uplink_item/item/tools/clerical
 	name = "Morphic Clerical Kit"

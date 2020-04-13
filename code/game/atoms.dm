@@ -568,3 +568,6 @@ its easier to just keep the beam vertical.
 
 /atom/proc/get_cell()
 	return
+
+/atom/proc/building_cost()
+	. = list()

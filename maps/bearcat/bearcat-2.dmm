@@ -2143,8 +2143,8 @@
 	icon_state = "bulb1";
 	dir = 1
 	},
-/obj/item/material/coin/gold,
-/obj/item/material/coin/silver,
+/obj/item/coin/gold,
+/obj/item/coin/silver,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -5356,7 +5356,7 @@
 "yS" = (
 /obj/structure/closet/crate,
 /obj/random/coin,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/cash/c1000,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/hidden)
 "zb" = (
@@ -5760,7 +5760,7 @@
 /obj/structure/table/reinforced,
 /obj/item/flashlight/lamp,
 /obj/random_multi/single_item/captains_spare_id,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/cash/c1000,
 /obj/item/storage/bible/booze,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/hidden)

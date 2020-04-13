@@ -60,8 +60,10 @@
 		data["request_length"] = SSsupply.requestlist.len
 	data["screen"] = screen
 	data["credits"] = "[SSsupply.points]"
-	data["currency"] = GLOB.using_map.supply_currency_name
-	data["currency_short"] = GLOB.using_map.supply_currency_name_short
+
+	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+	data["currency"] = cur.name
+
 	switch(screen)
 		if(1)// Main ordering menu
 			data["categories"] = category_names
@@ -77,7 +79,7 @@
 			for(var/tag in SSsupply.point_source_descriptions)
 				var/entry = list()
 				entry["desc"] = SSsupply.point_source_descriptions[tag]
-				entry["points"] = SSsupply.point_sources[tag] || 0
+				entry["points"] = cur.format_value(SSsupply.point_sources[tag] || 0)
 				point_breakdown += list(entry) //Make a list of lists, don't flatten
 			data["point_breakdown"] = point_breakdown
 			data["can_print"] = can_print()
@@ -91,7 +93,6 @@
 				data["shuttle_location"] = "No Connection"
 			data["shuttle_status"] = get_shuttle_status()
 			data["shuttle_can_control"] = shuttle.can_launch()
-
 
 		if(4)// Order processing
 			if(is_admin) // No bother sending all of this if the user can't see it.
@@ -296,6 +297,7 @@
 	category_names.Cut()
 	category_contents.Cut()
 	var/decl/hierarchy/supply_pack/root = decls_repository.get_decl(/decl/hierarchy/supply_pack)
+	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
 	for(var/decl/hierarchy/supply_pack/sp in root.children)
 		if(!sp.is_category())
 			continue // No children
@@ -306,7 +308,7 @@
 				continue
 			category.Add(list(list(
 				"name" = spc.name,
-				"cost" = spc.cost,
+				"cost" = cur.format_value(spc.cost),
 				"ref" = "\ref[spc]"
 			)))
 		category_contents[sp.name] = category

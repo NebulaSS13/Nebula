@@ -9,32 +9,22 @@
 	icon_deny = "snack-deny"
 	vend_delay = 25
 	base_type = /obj/machinery/vending/snack
-	products = list(/obj/item/clothing/mask/chewable/candy/lolli = 8,
-					/obj/item/storage/chewables/candy/gum = 4,
-					/obj/item/storage/chewables/candy/cookies = 4,
-					/obj/item/chems/food/snacks/candy = 6,
-					/obj/item/chems/food/drinks/dry_ramen = 6,
-					/obj/item/chems/food/snacks/chips = 6,
-					/obj/item/chems/food/snacks/sosjerky = 6,
-					/obj/item/chems/food/snacks/no_raisin = 6,
-					/obj/item/chems/food/snacks/spacetwinkie = 6,
-					/obj/item/chems/food/snacks/cheesiehonkers = 6, 
-					/obj/item/chems/food/snacks/tastybread = 6
-					)
-	contraband = list(/obj/item/chems/food/snacks/syndicake = 6)
-	prices = list(/obj/item/clothing/mask/chewable/candy/lolli = 2,
-					/obj/item/storage/chewables/candy/gum = 4,
-					/obj/item/storage/chewables/candy/cookies = 4,
-					/obj/item/chems/food/snacks/candy = 1,
-					/obj/item/chems/food/drinks/dry_ramen = 5,
-					/obj/item/chems/food/snacks/chips = 1,
-					/obj/item/chems/food/snacks/sosjerky = 2,
-					/obj/item/chems/food/snacks/no_raisin = 1,
-					/obj/item/chems/food/snacks/spacetwinkie = 1,
-					/obj/item/chems/food/snacks/cheesiehonkers = 1, 
-					/obj/item/chems/food/snacks/tastybread = 2
-					)
-
+	products = list(
+		/obj/item/clothing/mask/chewable/candy/lolli = 8,
+		/obj/item/storage/chewables/candy/gum = 4,
+		/obj/item/storage/chewables/candy/cookies = 4,
+		/obj/item/chems/food/snacks/candy = 6,
+		/obj/item/chems/food/drinks/dry_ramen = 6,
+		/obj/item/chems/food/snacks/chips = 6,
+		/obj/item/chems/food/snacks/sosjerky = 6,
+		/obj/item/chems/food/snacks/no_raisin = 6,
+		/obj/item/chems/food/snacks/spacetwinkie = 6,
+		/obj/item/chems/food/snacks/cheesiehonkers = 6, 
+		/obj/item/chems/food/snacks/tastybread = 6
+	)
+	contraband = list(
+		/obj/item/chems/food/snacks/syndicake = 6
+	)
 
 //a food variant of the boda machine - It carries slavic themed foods.. Mostly beer snacks
 /obj/machinery/vending/snix
@@ -71,28 +61,17 @@
 	icon_state = "solsnack"
 	icon_vend = "solsnack-vend"
 	icon_deny = "solsnack-deny"
-	products = list(/obj/item/chems/food/snacks/lunacake = 8,
-					/obj/item/chems/food/snacks/lunacake/mochicake = 8,
-					/obj/item/chems/food/snacks/lunacake/mooncake = 8,
-					/obj/item/chems/food/snacks/pluto = 8,
-					/obj/item/chems/food/snacks/triton = 8,
-					/obj/item/chems/food/snacks/saturn = 8,
-					/obj/item/chems/food/snacks/jupiter = 8,
-					/obj/item/chems/food/snacks/mars = 8,
-					/obj/item/chems/food/snacks/venus = 8,
-					/obj/item/chems/food/snacks/oort = 8
-					)
-
-	prices = list(/obj/item/chems/food/snacks/lunacake = 12,
-					/obj/item/chems/food/snacks/lunacake/mochicake = 12,
-					/obj/item/chems/food/snacks/lunacake/mooncake = 12,
-					/obj/item/chems/food/snacks/pluto = 12,
-					/obj/item/chems/food/snacks/triton = 12,
-					/obj/item/chems/food/snacks/saturn = 12,
-					/obj/item/chems/food/snacks/jupiter = 12,
-					/obj/item/chems/food/snacks/mars = 12,
-					/obj/item/chems/food/snacks/venus = 12,
-					/obj/item/chems/food/snacks/oort = 12
+	products = list(
+		/obj/item/chems/food/snacks/lunacake = 8,
+		/obj/item/chems/food/snacks/lunacake/mochicake = 8,
+		/obj/item/chems/food/snacks/lunacake/mooncake = 8,
+		/obj/item/chems/food/snacks/pluto = 8,
+		/obj/item/chems/food/snacks/triton = 8,
+		/obj/item/chems/food/snacks/saturn = 8,
+		/obj/item/chems/food/snacks/jupiter = 8,
+		/obj/item/chems/food/snacks/mars = 8,
+		/obj/item/chems/food/snacks/venus = 8,
+		/obj/item/chems/food/snacks/oort = 8
 	)
 
 /obj/machinery/vending/weeb
@@ -103,18 +82,12 @@
 	icon_state = "weeb"
 	icon_vend = "weeb-vend"
 	icon_deny = "weeb-deny"
-	products = list(/obj/item/chems/food/snacks/weebonuts = 8,
-					/obj/item/chems/food/snacks/ricecake = 8,
-					/obj/item/chems/food/snacks/dango = 8,
-					/obj/item/chems/food/snacks/pokey = 8,
-					/obj/item/chems/food/snacks/chocobanana = 8
-					)
-
-	prices = list(/obj/item/chems/food/snacks/weebonuts = 80,
-					/obj/item/chems/food/snacks/ricecake = 80,
-					/obj/item/chems/food/snacks/dango = 80,
-					/obj/item/chems/food/snacks/pokey = 80,
-					/obj/item/chems/food/snacks/chocobanana = 80
+	products = list(
+		/obj/item/chems/food/snacks/weebonuts = 8,
+		/obj/item/chems/food/snacks/ricecake = 8,
+		/obj/item/chems/food/snacks/dango = 8,
+		/obj/item/chems/food/snacks/pokey = 8,
+		/obj/item/chems/food/snacks/chocobanana = 8
 	)
 
 /obj/machinery/vending/weeb/on_update_icon()
@@ -231,20 +204,6 @@
 		/obj/item/chems/food/drinks/ice = 10
 	)
 
-	prices = list(
-		/obj/item/chems/food/drinks/coffee = 10,
-		/obj/item/chems/food/drinks/tea/black = 10,
-		/obj/item/chems/food/drinks/tea/green = 10,
-		/obj/item/chems/food/drinks/tea/chai = 10,
-		/obj/item/chems/food/drinks/h_chocolate = 15,
-		/obj/item/chems/food/condiment/small/packet/sugar = 1,
-		/obj/item/chems/pill/pod/cream = 5,
-		/obj/item/chems/pill/pod/cream_soy = 5,
-		/obj/item/chems/pill/pod/orange = 5,
-		/obj/item/chems/pill/pod/mint = 5,
-		/obj/item/chems/food/drinks/ice = 1
-	)
-
 /obj/machinery/vending/coffee/on_update_icon()
 	..()
 	if(stat & BROKEN && prob(20))
@@ -279,19 +238,6 @@
 		/obj/item/chems/food/drinks/cans/thirteenloko = 5, 
 		/obj/item/chems/food/snacks/liquidfood = 6
 	)
-	prices = list(
-		/obj/item/chems/food/drinks/cans/cola = 1,
-		/obj/item/chems/food/drinks/cans/space_mountain_wind = 1,
-		/obj/item/chems/food/drinks/cans/dr_gibb = 1,
-		/obj/item/chems/food/drinks/cans/starkist = 1,
-		/obj/item/chems/food/drinks/cans/waterbottle = 2,
-		/obj/item/chems/food/drinks/cans/space_up = 1,
-		/obj/item/chems/food/drinks/cans/iced_tea = 1,
-		/obj/item/chems/food/drinks/cans/grape_juice = 1,
-		/obj/item/chems/food/drinks/juicebox/apple = 1, 
-		/obj/item/chems/food/drinks/juicebox/orange = 1, 
-		/obj/item/chems/food/drinks/juicebox/grape = 1
-	)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/fitness
@@ -316,20 +262,6 @@
 		/obj/item/storage/mre/menu10 = 4,
 		/obj/item/towel/random = 8
 	)
-
-	prices = list(
-		/obj/item/chems/food/drinks/milk/smallcarton = 3,
-		/obj/item/chems/food/drinks/milk/smallcarton/chocolate = 3,
-		/obj/item/chems/food/drinks/cans/waterbottle = 2,
-		/obj/item/chems/food/drinks/glass2/fitnessflask/proteinshake = 20,
-		/obj/item/chems/food/drinks/glass2/fitnessflask = 5,
-		/obj/item/chems/food/snacks/candy/proteinbar = 5,
-		/obj/item/storage/mre/random = 50,
-		/obj/item/storage/mre/menu9 = 50,
-		/obj/item/storage/mre/menu10 = 50,
-		/obj/item/towel/random = 40
-	)
-
 	contraband = list(/obj/item/chems/syringe/steroid = 4)
 
 /obj/machinery/vending/fitness/on_update_icon()

@@ -5,8 +5,8 @@
 		return 0.1*data
 	return 0.15*data
 
-/obj/item/spacecash/get_single_monetary_worth()
-	. = worth
+/obj/item/cash/get_single_monetary_worth()
+	. = absolute_worth
 
 /obj/item/slime_extract/get_single_monetary_worth()
 	. = ..() * Uses

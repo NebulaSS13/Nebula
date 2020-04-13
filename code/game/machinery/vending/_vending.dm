@@ -15,12 +15,14 @@
 	base_type = /obj/machinery/vending/assist
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
+	idle_power_usage = 10
+	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
+	wires = /datum/wires/vending
 
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access
 
 	// Power
-	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
 
 	// Vending-related
@@ -37,14 +39,12 @@
 		These are used for initialization only, and so are optional if
 		product_records is specified
 	*/
+	var/markup
 	var/list/products	= list() // For each, use the following pattern:
 	var/list/contraband	= list() // list(/type/path = amount,/type/path2 = amount2)
-	var/list/premium 	= list() // No specified amount = only one in stock
-	var/list/prices     = list() // Prices for each item, list(/type/path = price), items not in the list don't have a price.
 
 	// List of vending_product items available.
 	var/list/product_records = list()
-
 
 	// Variables used to initialize advertising
 	var/product_slogans = "" //String of slogans spoken out loud, separated by semicolons
@@ -61,17 +61,19 @@
 	var/slogan_delay = 6000 //How long until we can pitch again?
 
 	// Things that can go wrong
-	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0 //Shock customers like an airlock.
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
 	var/shooting_chance = 2 //The chance that items are being shot per tick
 
+	var/vendor_currency
 	var/scan_id = 1
-	var/obj/item/material/coin/coin
-	wires = /datum/wires/vending
 
 /obj/machinery/vending/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
+	if(isnull(markup))
+		markup = 1 + (rand() * 2)
+	if(!ispath(vendor_currency, /decl/currency))
+		vendor_currency = GLOB.using_map.default_currency
 	if(product_slogans)
 		slogan_list += splittext(product_slogans, ";")
 
@@ -86,34 +88,32 @@
 	build_inventory(populate_parts)
 
 /**
- *  Build src.produdct_records from the products lists
+ *  Build produdct_records from the products lists
  *
- *  src.products, src.contraband, src.premium, and src.prices allow specifying
- *  products that the vending machine is to carry without manually populating
- *  src.product_records.
+ *  products and contraband lists allow specifying products that
+ *  the vending machine is to carry without manually populating
+ *  product_records.
  */
+
+/obj/machinery/vending/proc/get_product_name(var/entry)
+	return
+
 /obj/machinery/vending/proc/build_inventory(populate_parts = FALSE)
 	var/list/all_products = list(
-		list(src.products, CAT_NORMAL),
-		list(src.contraband, CAT_HIDDEN),
-		list(src.premium, CAT_COIN))
-
+		list(products, CAT_NORMAL),
+		list(contraband, CAT_HIDDEN)
+	)
 	for(var/current_list in all_products)
 		var/category = current_list[2]
-
 		for(var/entry in current_list[1])
-			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry)
-
-			product.price = (entry in src.prices) ? src.prices[entry] : 0
-			if(populate_parts)
-				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+			var/datum/stored_items/vending_products/product = new(src, entry, get_product_name(entry))
+			product.price = atom_info_repository.get_worth_for(entry) * markup
 			product.category = category
-
-			src.product_records.Add(product)
+			if(product && populate_parts)
+				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+			product_records.Add(product)
 
 /obj/machinery/vending/Destroy()
-	qdel(coin)
-	coin = null
 	for(var/datum/stored_items/vending_products/R in product_records)
 		qdel(R)
 	product_records = null
@@ -121,25 +121,12 @@
 
 /obj/machinery/vending/get_codex_value()
 	return "vendomat"
-	
 
 /obj/machinery/vending/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				qdel(src)
-				return
-		if(3.0)
-			if (prob(25))
-				spawn(0)
-					src.malfunction()
-					return
-				return
-		else
-	return
+	if(severity == 1 || (severity == 2 && prob(50)))
+		qdel(src)
+	else if(prob(25))
+		malfunction()
 
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
@@ -159,37 +146,29 @@
 		if (I) //for IDs and PDAs and wallets with IDs
 			paid = pay_with_card(I,W)
 			handled = 1
-		else if (istype(W, /obj/item/spacecash/ewallet))
-			var/obj/item/spacecash/ewallet/C = W
-			paid = pay_with_ewallet(C)
+		else if (istype(W, /obj/item/charge_card))
+			var/obj/item/charge_card/C = W
+			paid = pay_with_charge_card(C)
 			handled = 1
-		else if (istype(W, /obj/item/spacecash/bundle))
-			var/obj/item/spacecash/bundle/C = W
+		else if (istype(W, /obj/item/cash))
+			var/obj/item/cash/C = W
 			paid = pay_with_cash(C)
 			handled = 1
 
 		if(paid)
-			src.vend(currently_vending, usr)
+			vend(currently_vending, usr)
 			return TRUE
 		else if(handled)
 			SSnano.update_uis(src)
-			return TRUE // don't smack that machine with your 2 thalers
+			return TRUE // don't smack that machine with your $2
 
-	if (I || istype(W, /obj/item/spacecash))
+	if (I || istype(W, /obj/item/cash))
 		attack_hand(user)
 		return TRUE
 	if(isMultitool(W) || isWirecutter(W))
-		if(src.panel_open)
+		if(panel_open)
 			attack_hand(user)
 			return TRUE
-	if(istype(W, /obj/item/material/coin) && premium.len > 0)
-		if(!user.unEquip(W, src))
-			return FALSE
-		coin = W
-		categories |= CAT_COIN
-		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
-		SSnano.update_uis(src)
-		return TRUE
 	if((user.a_intent == I_HELP) && attempt_to_stock(W, user))
 		return TRUE
 	if((. = component_attackby(W, user)))
@@ -217,21 +196,14 @@
 /**
  *  Receive payment with cashmoney.
  */
-/obj/machinery/vending/proc/pay_with_cash(var/obj/item/spacecash/bundle/cashmoney)
-	if(currently_vending.price > cashmoney.worth)
+/obj/machinery/vending/proc/pay_with_cash(var/obj/item/cash/cashmoney)
+	if(currently_vending.price > cashmoney.absolute_worth)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
 		to_chat(usr, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
 		return 0
-
 	visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
-	cashmoney.worth -= currently_vending.price
-
-	if(cashmoney.worth <= 0)
-		qdel(cashmoney)
-	else
-		cashmoney.update_icon()
-
+	cashmoney.adjust_worth(-(currently_vending.price))
 	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")
 	return 1
@@ -242,14 +214,14 @@
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed.
  */
-/obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/spacecash/ewallet/wallet)
+/obj/machinery/vending/proc/pay_with_charge_card(var/obj/item/charge_card/wallet)
 	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
-	if(currently_vending.price > wallet.worth)
-		src.status_message = "Insufficient funds on chargecard."
-		src.status_error = 1
+	if(currently_vending.price > wallet.loaded_worth)
+		status_message = "Insufficient funds on chargecard."
+		status_error = 1
 		return 0
 	else
-		wallet.worth -= currently_vending.price
+		wallet.adjust_worth(-(currently_vending.price))
 		credit_purchase("[wallet.owner_name] (chargecard)")
 		return 1
 
@@ -266,13 +238,13 @@
 		visible_message("<span class='info'>\The [usr] swipes \the [ID_container] through \the [src].</span>")
 	var/datum/money_account/customer_account = get_account(I.associated_account_number)
 	if (!customer_account)
-		src.status_message = "Error: Unable to access account. Please contact technical support if problem persists."
-		src.status_error = 1
+		status_message = "Error: Unable to access account. Please contact technical support if problem persists."
+		status_error = 1
 		return 0
 
 	if(customer_account.suspended)
-		src.status_message = "Unable to access account: account suspended."
-		src.status_error = 1
+		status_message = "Unable to access account: account suspended."
+		status_error = 1
 		return 0
 
 	// Have the customer punch in the PIN before checking if there's enough money. Prevents people from figuring out acct is
@@ -282,13 +254,13 @@
 		customer_account = attempt_account_access(I.associated_account_number, attempt_pin, 2)
 
 		if(!customer_account)
-			src.status_message = "Unable to access account: incorrect credentials."
-			src.status_error = 1
+			status_message = "Unable to access account: incorrect credentials."
+			status_error = 1
 			return 0
 
 	if(currently_vending.price > customer_account.money)
-		src.status_message = "Insufficient funds in account."
-		src.status_error = 1
+		status_message = "Insufficient funds in account."
+		status_error = 1
 		return 0
 	else
 		// Okay to move the money at this point
@@ -305,8 +277,8 @@
 	vendor_account.deposit(currently_vending.price, "Purchase of [currently_vending.item_name]", target)
 
 /obj/machinery/vending/physical_attack_hand(mob/user)
-	if(src.seconds_electrified != 0)
-		if(src.shock(user, 100))
+	if(seconds_electrified != 0)
+		if(shock(user, 100))
 			return TRUE
 
 /obj/machinery/vending/interface_interact(mob/user)
@@ -320,62 +292,47 @@
  */
 /obj/machinery/vending/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
-
+	var/decl/currency/cur = decls_repository.get_decl(vendor_currency)
 	var/list/data = list()
 	if(currently_vending)
 		data["mode"] = 1
 		data["product"] = currently_vending.item_name
-		data["price"] = currently_vending.price
+		data["price"] = cur.format_value(currently_vending.price)
 		data["message_err"] = 0
-		data["message"] = src.status_message
-		data["message_err"] = src.status_error
+		data["message"] = status_message
+		data["message_err"] = status_error
 	else
 		data["mode"] = 0
 		var/list/listed_products = list()
 
-		for(var/key = 1 to src.product_records.len)
-			var/datum/stored_items/vending_products/I = src.product_records[key]
+		for(var/key = 1 to product_records.len)
+			var/datum/stored_items/vending_products/I = product_records[key]
 
-			if(!(I.category & src.categories))
+			if(!(I.category & categories))
 				continue
 
 			listed_products.Add(list(list(
-				"key" = key,
-				"name" = I.item_name,
-				"price" = I.price,
-				"color" = I.display_color,
+				"key" =    key,
+				"name" =   I.item_name,
+				"price" =  cur.format_value(I.price),
+				"color" =  I.display_color,
 				"amount" = I.get_amount())))
 
 		data["products"] = listed_products
 
-	if(src.coin)
-		data["coin"] = src.coin.name
-
-	if(src.panel_open)
+	if(panel_open)
 		data["panel"] = 1
-		data["speaker"] = src.shut_up ? 0 : 1
+		data["speaker"] = shut_up ? 0 : 1
 	else
 		data["panel"] = 0
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "vending_machine.tmpl", src.name, 440, 600)
+		ui = new(user, src, ui_key, "vending_machine.tmpl", name, 440, 600)
 		ui.set_initial_data(data)
 		ui.open()
 
 /obj/machinery/vending/OnTopic(mob/user, href_list, datum/topic_state/state)
-	if(href_list["remove_coin"] && !istype(usr,/mob/living/silicon))
-		if(!coin)
-			to_chat(user, "There is no coin in this machine.")
-			return TOPIC_HANDLED
-
-		coin.forceMove(loc)
-		if(!user.get_active_hand())
-			user.put_in_hands(coin)
-		to_chat(user, "<span class='notice'>You remove \the [coin] from \the [src]</span>")
-		coin = null
-		categories &= ~CAT_COIN
-		return TOPIC_HANDLED
 
 	if (href_list["vend"] && vend_ready && !currently_vending)
 		var/key = text2num(href_list["vend"])
@@ -419,40 +376,26 @@
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
 	if((!allowed(user)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		to_chat(user, "<span class='warning'>Access denied.</span>")//Unless emagged of course
-		flick(src.icon_deny,src)
+		flick(icon_deny,src)
 		return
-	src.vend_ready = 0 //One thing at a time!!
-	src.status_message = "Vending..."
-	src.status_error = 0
+	vend_ready = 0 //One thing at a time!!
+	status_message = "Vending..."
+	status_error = 0
 	SSnano.update_uis(src)
 
-	if (R.category & CAT_COIN)
-		if(!coin)
-			to_chat(user, "<span class='notice'>You need to insert a coin to get this item.</span>")
-			return
-		if(!isnull(coin.string_colour))
-			if(prob(50))
-				to_chat(user, "<span class='notice'>You successfully pull the coin out before \the [src] could swallow it.</span>")
-			else
-				to_chat(user, "<span class='notice'>You weren't able to pull the coin out fast enough, the machine ate it, string and all.</span>")
-				qdel(coin)
-				coin = null
-				categories &= ~CAT_COIN
-		else
-			qdel(coin)
-			coin = null
-			categories &= ~CAT_COIN
-
-	if(((src.last_reply + (src.vend_delay + 200)) <= world.time) && src.vend_reply)
-		spawn(0)
-			src.speak(src.vend_reply)
-			src.last_reply = world.time
+	do_vending_reply()
 
 	use_power_oneoff(vend_power_usage)	//actuators and stuff
-	if (src.icon_vend) //Show the vending animation if needed
-		flick(src.icon_vend,src)
+	if (icon_vend) //Show the vending animation if needed
+		flick(icon_vend,src)
 	addtimer(CALLBACK(src, /obj/machinery/vending/proc/finish_vending, R), vend_delay)
 
+/obj/machinery/vending/proc/do_vending_reply()
+	set waitfor = FALSE
+	if(vend_reply && last_reply + vend_delay + 200 <= world.time)
+		speak(vend_reply)
+		last_reply = world.time
+	
 /obj/machinery/vending/proc/finish_vending(var/datum/stored_items/vending_products/product)
 	set waitfor = FALSE
 	if(!product)
@@ -491,20 +434,20 @@
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	if(!src.active)
+	if(!active)
 		return
 
-	if(src.seconds_electrified > 0)
-		src.seconds_electrified--
+	if(seconds_electrified > 0)
+		seconds_electrified--
 
 	//Pitch to the people!  Really sell it!
-	if(((src.last_slogan + src.slogan_delay) <= world.time) && (src.slogan_list.len > 0) && (!src.shut_up) && prob(5))
-		var/slogan = pick(src.slogan_list)
-		src.speak(slogan)
-		src.last_slogan = world.time
+	if(((last_slogan + slogan_delay) <= world.time) && (slogan_list.len > 0) && (!shut_up) && prob(5))
+		var/slogan = pick(slogan_list)
+		speak(slogan)
+		last_slogan = world.time
 
-	if(src.shoot_inventory && prob(shooting_chance))
-		src.throw_item()
+	if(shoot_inventory && prob(shooting_chance))
+		throw_item()
 
 	return
 
@@ -530,13 +473,14 @@
 		icon_state = initial(icon_state)
 	else
 		spawn(rand(0, 15))
-			src.icon_state = "[initial(icon_state)]-off"
+			icon_state = "[initial(icon_state)]-off"
 	if(panel_open)
-		overlays += image(src.icon, "[initial(icon_state)]-panel")
+		overlays += image(icon, "[initial(icon_state)]-panel")
 
 //Oh no we're malfunctioning!  Dump out some product and break.
 /obj/machinery/vending/proc/malfunction()
-	for(var/datum/stored_items/vending_products/R in src.product_records)
+	set waitfor = FALSE
+	for(var/datum/stored_items/vending_products/R in product_records)
 		while(R.get_amount()>0)
 			R.get_product(loc)
 		break
@@ -549,7 +493,7 @@
 	if(!target)
 		return 0
 
-	for(var/datum/stored_items/vending_products/R in shuffle(src.product_records))
+	for(var/datum/stored_items/vending_products/R in shuffle(product_records))
 		throw_item = R.get_product(loc)
 		if (throw_item)
 			break
@@ -557,5 +501,5 @@
 		return 0
 	spawn(0)
 		throw_item.throw_at(target, rand(1,2), 3)
-	src.visible_message("<span class='warning'>\The [src] launches \a [throw_item] at \the [target]!</span>")
+	visible_message("<span class='warning'>\The [src] launches \a [throw_item] at \the [target]!</span>")
 	return 1

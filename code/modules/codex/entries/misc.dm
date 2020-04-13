@@ -19,7 +19,7 @@
 
 /datum/codex_entry/moneygun/New(_display_name, list/_associated_paths, list/_associated_strings, _lore_text, _mechanics_text, _antag_text)
 	. = ..()
-	antag_text = "Sliding a cryptographic sequencer into the receptacle will short the motors and override their speed. If you set the cannon to dispense 100 [GLOB.using_map.local_currency_name] or more, this might make a handy weapon."
+	antag_text = "Sliding a cryptographic sequencer into the receptacle will short the motors and override their speed. If you set the cannon to dispense 100 units or more, this might make a handy weapon."
 
 /datum/codex_entry/textbook
 	associated_paths = list(/obj/item/book/skill)

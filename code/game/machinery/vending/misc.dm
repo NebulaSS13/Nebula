@@ -65,19 +65,12 @@
 		/obj/item/lipstick/jade = 3,
 		/obj/item/storage/wallet/poly = 2
 	)
-	contraband = list(/obj/item/clothing/glasses/eyepatch = 2, /obj/item/clothing/accessory/horrible = 2)
-	premium = list(/obj/item/clothing/mask/smokable/pipe = 3)
-	prices = list(
-		/obj/item/mirror = 60,
-		/obj/item/haircomb = 40,
-		/obj/item/clothing/glasses/monocle = 700,
-		/obj/item/clothing/glasses/sunglasses = 500,
-		/obj/item/lipstick = 100,
-		/obj/item/lipstick/black = 100,
-		/obj/item/lipstick/purple = 100,
-		/obj/item/lipstick/jade = 100,
-		/obj/item/storage/wallet/poly = 600
+	contraband = list(
+		/obj/item/clothing/glasses/eyepatch = 2, 
+		/obj/item/clothing/accessory/horrible = 2,
+		/obj/item/clothing/mask/smokable/pipe = 3
 	)
+
 // eliza's attempt at a new vending machine
 /obj/machinery/vending/games
 	name = "Good Clean Fun"
@@ -103,22 +96,13 @@
 		/obj/item/storage/box/checkers/chess = 2, 
 		/obj/item/board = 2
 	)
-	prices = list(
-		/obj/item/toy/blink = 3, 
-		/obj/item/toy/eightball = 10, 
-		/obj/item/deck/tarot = 3, 
-		/obj/item/deck/cards = 3, 
-		/obj/item/pack/cardemon = 5, 
-		/obj/item/pack/spaceball = 5, 
-		/obj/item/storage/pill_bottle/dice_nerd = 6, 
-		/obj/item/storage/pill_bottle/dice = 6, 
-		/obj/item/storage/box/checkers = 10, 
-		/obj/item/storage/box/checkers/chess/red = 10, 
-		/obj/item/storage/box/checkers/chess = 10, 
-		/obj/item/board = 2
+	contraband = list(
+		/obj/item/chems/spray/waterflower = 2, 
+		/obj/item/storage/box/snappops = 3,
+		/obj/item/spirit_board = 1, 
+		/obj/item/gun/projectile/revolver/capgun = 1, 
+		/obj/item/ammo_magazine/caps = 4
 	)
-	premium = list(/obj/item/spirit_board = 1, /obj/item/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
-	contraband = list(/obj/item/chems/spray/waterflower = 2, /obj/item/storage/box/snappops = 3)
 
 //Cajoes/Kyos/BloodyMan's Lavatory Articles Dispensiary
 
@@ -140,12 +124,6 @@
 		/obj/item/towel/random = 6,
 		/obj/item/chems/spray/cleaner/deodorant = 5
 	)
-	contraband = list(/obj/item/inflatable_duck = 1)
-	prices = list(
-		/obj/item/soap = 20,
-		/obj/item/mirror = 40,
-		/obj/item/haircomb/random = 40,
-		/obj/item/haircomb/brush = 80,
-		/obj/item/towel/random = 50,
-		/obj/item/chems/spray/cleaner/deodorant = 30
+	contraband = list(
+		/obj/item/inflatable_duck = 1
 	)

@@ -29,7 +29,7 @@
 	modification_flags = XENOFIND_REPLACE_ICON
 	engraving_chance = 100
 	responsive_reagent = /datum/reagent/iron
-	possible_types = list(/obj/item/material/coin)
+	possible_types = list(/obj/item/coin)
 
 /decl/archaeological_find/coin/new_icon_state()
 	return "coin[rand(1,3)]"

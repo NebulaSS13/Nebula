@@ -7,7 +7,7 @@
 	max_w_class = ITEM_SIZE_SMALL //Don't worry, see can_hold[]
 	max_storage_space = 8
 	can_hold = list(
-		/obj/item/spacecash,
+		/obj/item/cash,
 		/obj/item/card,
 		/obj/item/clothing/mask/smokable,
 		/obj/item/lipstick,
@@ -18,7 +18,7 @@
 		/obj/item/flashlight/pen,
 		/obj/item/flashlight/slime,
 		/obj/item/seeds,
-		/obj/item/material/coin,
+		/obj/item/coin,
 		/obj/item/dice,
 		/obj/item/disk,
 		/obj/item/implant,
@@ -91,11 +91,11 @@
 
 /obj/item/storage/wallet/random/Initialize()
 	. = ..()
-	var/item1_type = pick( /obj/item/spacecash/bundle/c10,/obj/item/spacecash/bundle/c100,/obj/item/spacecash/bundle/c1000,/obj/item/spacecash/bundle/c20,/obj/item/spacecash/bundle/c200,/obj/item/spacecash/bundle/c50, /obj/item/spacecash/bundle/c500)
+	var/item1_type = pick( /obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)
 	var/item2_type
 	if(prob(50))
-		item2_type = pick( /obj/item/spacecash/bundle/c10,/obj/item/spacecash/bundle/c100,/obj/item/spacecash/bundle/c1000,/obj/item/spacecash/bundle/c20,/obj/item/spacecash/bundle/c200,/obj/item/spacecash/bundle/c50, /obj/item/spacecash/bundle/c500)
-	var/item3_type = pick( /obj/item/material/coin/silver, /obj/item/material/coin/silver, /obj/item/material/coin/gold, /obj/item/material/coin/iron, /obj/item/material/coin/iron, /obj/item/material/coin/iron )
+		item2_type = pick( /obj/item/cash/c10,/obj/item/cash/c100,/obj/item/cash/c1000,/obj/item/cash/c20,/obj/item/cash/c200,/obj/item/cash/c50, /obj/item/cash/c500)
+	var/item3_type = pick( /obj/item/coin/silver, /obj/item/coin/silver, /obj/item/coin/gold, /obj/item/coin/iron, /obj/item/coin/iron, /obj/item/coin/iron )
 
 	if(item1_type)
 		new item1_type(src)

@@ -21,12 +21,10 @@
 
 /datum/fabricator_recipe/pipe/get_resources()
 	resources = list()
-	var/obj/item/I = new constructed_path
-	var/list/building_cost = I.building_cost()
+	var/list/building_cost = atom_info_repository.get_matter_for(constructed_path)
 	for(var/path in building_cost)
 		if(!ignore_materials[path])
 			resources[path] = building_cost[path] * FABRICATOR_EXTRA_COST_FACTOR
-	qdel(I)
 
 /datum/fabricator_recipe/pipe/build(var/turf/location, var/amount = 1, var/color = PIPE_COLOR_WHITE)
 	for(var/i = 1, i <= amount, i++)

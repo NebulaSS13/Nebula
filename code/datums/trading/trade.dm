@@ -6,6 +6,7 @@
 	var/trade_flags = TRADER_MONEY                              //Flags
 	var/name_language                                                //If this is set to a language name this will generate a name from the language
 	var/icon/portrait                                           //The icon that shows up in the menu @TODO
+	var/trader_currency
 
 	var/list/wanted_items = list()                              //What items they enjoy trading for. Structure is (type = known/unknown)
 	var/list/possible_wanted_items                              //List of all possible wanted items. Structure is (type = mode)
@@ -43,6 +44,8 @@
 
 /datum/trader/New()
 	..()
+	if(!ispath(trader_currency, /decl/currency))
+		trader_currency = GLOB.using_map.default_currency
 	if(name_language)
 		if(name_language == TRADER_DEFAULT_NAME)
 			name = capitalize(pick(GLOB.first_names_female + GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
@@ -108,8 +111,10 @@
 		. = default
 	. = replacetext(., "MERCHANT", name)
 	. = replacetext(., "ORIGIN", origin)
-	. = replacetext(.,"CURRENCY_SINGULAR", GLOB.using_map.local_currency_name_singular)
-	. = replacetext(.,"CURRENCY", GLOB.using_map.local_currency_name)
+
+	var/decl/currency/cur = decls_repository.get_decl(trader_currency)
+	. = replacetext(.,"CURRENCY_SINGULAR", cur.name_singular)
+	. = replacetext(.,"CURRENCY", cur.name)
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = Clamp(num,1,trading_items.len)
@@ -131,10 +136,7 @@
 /datum/trader/proc/get_item_value(var/trading_num, skill = SKILL_MAX)
 	if(!trading_items[trading_items[trading_num]])
 		var/item_type = trading_items[trading_num]
-		var/atom/movable/thing = new item_type
-		var/value = thing.get_combined_monetary_worth()
-		if(!QDELETED(thing))
-			qdel(thing)
+		var/value = atom_info_repository.get_worth_for(item_type)
 		value = round(rand(100 - price_rng,100 + price_rng)/100 * value) //For some reason rand doesn't like decimals.
 		trading_items[item_type] = value
 	. = trading_items[trading_items[trading_num]]
@@ -142,10 +144,7 @@
 
 /datum/trader/proc/get_buy_price(var/atom/movable/item, is_wanted, skill = SKILL_MAX)
 	if(ispath(item, /atom/movable))
-		var/atom/movable/thing = new item
-		. = thing.get_combined_monetary_worth()
-		if(!QDELETED(thing))
-			qdel(thing)
+		. = atom_info_repository.get_worth_for(item)
 	else if(istype(item))
 		. = item.get_combined_monetary_worth()
 	if(is_wanted)
@@ -176,7 +175,7 @@
 		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
 			return 0
 
-		if(istype(offer,/obj/item/spacecash))
+		if(istype(offer,/obj/item/cash))
 			if(!(trade_flags & TRADER_MONEY))
 				return TRADER_NO_MONEY
 		else

@@ -1072,7 +1072,7 @@
 "dC" = (
 /obj/machinery/vending/coffee{
 	icon_state = "coffee-broken";
-	prices = list()
+	markup = 0
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)

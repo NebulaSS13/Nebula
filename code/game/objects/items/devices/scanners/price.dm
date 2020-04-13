@@ -6,13 +6,20 @@
 	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_MAGNET + "':4}"
 	scan_sound = 'sound/effects/checkout.ogg'
 	matter = list(MAT_STEEL = 3000, MAT_GLASS = 3000, MAT_SILVER = 250)
+	var/scanner_currency
+
+/obj/item/scanner/price/Initialize(ml, material_key)
+	. = ..()
+	if(!ispath(scanner_currency, /decl/currency))
+		scanner_currency = GLOB.using_map.default_currency
 
 /obj/item/scanner/price/is_valid_scan_target(atom/movable/target)
 	return istype(target) && target.get_combined_monetary_worth() > 0
 
 /obj/item/scanner/price/scan(atom/movable/target, mob/user)
 	scan_title = "Price estimations"
-	var/data = "\The [target]: [target.get_combined_monetary_worth()] [GLOB.using_map.local_currency_name]"
+	var/decl/currency/cur = decls_repository.get_decl(scanner_currency)
+	var/data = "\The [target]: [cur.format_value(target.get_combined_monetary_worth())]"
 	if(!scan_data)
 		scan_data = data
 	else

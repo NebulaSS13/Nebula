@@ -978,7 +978,7 @@
 "ct" = (
 /obj/structure/table/standard,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/spacecash/bundle/c10,
+/obj/item/cash/c10,
 /obj/random/smokes,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
