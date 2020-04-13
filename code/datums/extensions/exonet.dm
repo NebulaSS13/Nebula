@@ -1,21 +1,26 @@
 /datum/extension/exonet_device
 	base_type = /datum/extension/exonet_device
+	flags = EXTENSION_FLAG_IMMEDIATE
 	var/ennid 		= "" 	// Exonet network id. This is the name of the network we're connected to.
+	var/key			= null	// Exonet netowrk keycode. This is the password to join the network.
+	var/net_tag		= null	// A user-set unique name for an exonet device.
+	var/nid			= null	// A unique system-generated GUID that serves as a mac-address. Cannot be changed.
 	var/netspeed	= 1		// How this device has connected to the network.
 
-/datum/extension/exonet_device/New(datum/holder, var/_ennid, var/_netspeed)
+/datum/extension/exonet_device/New(datum/holder, var/_netspeed)
 	..()
-	ennid = _ennid
 	netspeed = _netspeed
+	nid = new_guid()
 
 // Convenience function for OnTopic usages when we need to prompt the user to change their network ennid. DRY impl.
 /datum/extension/exonet_device/proc/do_change_ennid(var/mob/user)
 	var/list/result = list()
 
-	var/new_ennid = sanitize(input(user, "Enter exonet ennid or leave blank to cancel:", "Change ENNID"))
+	var/new_ennid = sanitize(input(user, "Enter exonet ennid:", "Change ENNID"))
 	if(!new_ennid)
-		return
-	var/new_key = sanitize(input(user, "Enter exonet keypass or leave blank if none:", "Change Key"))
+		result["ennid"] = null
+		return result
+	var/new_key = sanitize(input(user, "Enter exonet keypass:", "Change Key"))
 
 	var/found = FALSE
 	for(var/datum/exonet/network in get_nearby_networks(netspeed))
@@ -45,7 +50,7 @@
 		result["error"] = "Cannot change network tag while disconnected from network."
 		return result
 	for(var/network_device in network.network_devices)
-		if(lowertext(get_network_tag(network_device)) == lowertext(new_tag))
+		if(lowertext(get_net_tag(network_device)) == lowertext(new_tag))
 			result["error"] = "Network tags must be unique."
 			return result
 	result["net_tag"] = new_tag
@@ -53,37 +58,35 @@
 
 /datum/extension/exonet_device/proc/do_change_key(var/mob/user)
 	var/list/result = list()
-	var/new_key = sanitize(input(user, "Enter exonet keypass or leave blank if none:", "Change Key"))
-	
-	if(!new_key)
-		return
+	var/new_key = sanitize(input(user, "Enter exonet keypass:", "Change Key"))
 	result["key"] = new_key
-	return result		
+	return result
 
-/datum/extension/exonet_device/proc/connect_network(var/mob/user, var/new_ennid, var/nic_netspeed, var/keydata)
-	if(ennid == new_ennid)
-		return "\The [holder] is already part of the '[ennid]' network."
-
+/datum/extension/exonet_device/proc/connect_network(var/mob/user)
 	if(ennid)
+		var/datum/exonet/existing_network = get_local_network()
+		if(existing_network && existing_network.ennid == ennid)
+			return "\The [holder] is already part of the '[ennid]' network."
+
 		var/disconnect_result = disconnect_network(user)
 		if(disconnect_result)
 			return disconnect_result // There was a problem.
 
-	var/datum/exonet/exonet = GLOB.exonets[new_ennid]
+	var/datum/exonet/exonet = GLOB.exonets[ennid]
 	if(!exonet)
-		return "Error encountered when trying to register \the [holder] to the '[new_ennid]' network."
+		return "Error encountered when trying to register \the [holder] to the '[ennid]' network."
 	else
 		if(!exonet.router)
-			return "Error encountered when trying to register \the [holder] to the '[new_ennid]' network."
-		if(exonet.router.keydata != keydata)
+			return "Error encountered when trying to register \the [holder] to the '[ennid]' network."
+		if(exonet.lock != key)
 			return "Invalid key. Unable to connect to network."
-		exonet.add_device(holder, keydata)
-		ennid = new_ennid
-		netspeed = nic_netspeed
+		exonet.add_device(holder, key)
 	return FALSE // This is a success.
 
 /datum/extension/exonet_device/proc/disconnect_network(var/mob/user)
-	if(!ennid)
+	net_tag = null
+
+	if(!ennid || !(ennid in GLOB.exonets))
 		return
 
 	var/datum/exonet/old_exonet = GLOB.exonets[ennid]
@@ -92,17 +95,16 @@
 		ennid = null
 	return FALSE // This is a success.
 
-/datum/extension/exonet_device/proc/broadcast_network(var/b_ennid, var/key)
+/datum/extension/exonet_device/proc/broadcast_network()
 	// Broadcasts an ENNID. If the network doesn't exist, it will create it.
 	// If the network does exist, this will attempt to be added as a relay.
-	var/datum/exonet/exonet = GLOB.exonets[b_ennid]
+	var/datum/exonet/exonet = GLOB.exonets[ennid]
 	if(!exonet)
-		exonet = new(b_ennid)
-		exonet.set_router(holder)
-	else if(exonet.router.keydata != key)
-		return // Security fail.	
+		exonet = new(ennid)
+		exonet.set_router(holder, key)
+	else if(exonet.lock != key)
+		return // Security fail.
 	exonet.add_device(holder)
-	ennid = b_ennid
 	netspeed = NETWORKSPEED_ETHERNET
 
 /datum/extension/exonet_device/proc/get_nearby_networks(var/nic_netspeed)
@@ -120,6 +122,18 @@
 	if(network.get_signal_strength(holder, netspeed) > 0)
 		return network
 
+/datum/extension/exonet_device/proc/get_signal_wordlevel()
+	var/datum/exonet/network = GLOB.exonets[ennid]
+	if(!network)
+		return "Not Connected"
+	var/signal_strength = network.get_signal_strength(holder, netspeed)
+	if(signal_strength <= 0)
+		return "Not Connected"
+	else if(signal_strength <= 6)
+		return "Low Signal"
+	else
+		return "High Signal"
+
 /datum/extension/exonet_device/proc/get_all_networks()
 	return GLOB.exonets
 
@@ -129,17 +143,12 @@
 		return
 	return network.mainframes
 
-/datum/extension/exonet_device/proc/get_network_tag(var/obj/device)
+/datum/extension/exonet_device/proc/get_net_tag(var/obj/device)
 	// Gets a friendly, unique name for a device on a local network.
-	var/datum/exonet/network = get_local_network()
-	if(!network)
-		return
-	if(istype(device, /obj/machinery/computer/exonet))
-		var/obj/machinery/computer/exonet/exonet_machine = device
-		if(exonet_machine.net_tag)
-			return exonet_machine.net_tag
-	var/index = network.network_devices.Find(device)
-	return replacetext("[device.name].[index]", " ", "_")
+	var/datum/extension/exonet_device/exonet = get_extension(device, /datum/extension/exonet_device)
+	if(exonet.net_tag)
+		return "[exonet.net_tag] (NID#[exonet.nid])"
+	return "[device.name] (NID#[exonet.nid])"
 
 /datum/extension/exonet_device/proc/get_device_by_tag(var/net_tag)
 	if(!net_tag)
@@ -147,14 +156,23 @@
 	var/datum/exonet/network = get_local_network()
 	if(!network)
 		return
-	for(var/obj/machinery/computer/exonet/exonet_machine in network.network_devices)
-		if(!exonet_machine.net_tag)
-			continue
-		if(exonet_machine.net_tag == net_tag)
-			return exonet_machine
-	var/list/tokens = splittext(net_tag, ".")
-	var/index = text2num(tokens[length(tokens)])
-	return network.network_devices[index]
+	for(var/datum/device in network.network_devices)
+		var/datum/extension/exonet_device/exonet = get_extension(device, /datum/extension/exonet_device)
+		if(exonet.get_net_tag() == net_tag)
+			return device
+
+/datum/extension/exonet_device/proc/set_ennid(var/new_ennid)
+	if(ennid)
+		disconnect_network()
+	ennid = new_ennid
+
+/datum/extension/exonet_device/proc/set_key(var/new_key)
+	if(ennid)
+		disconnect_network()
+	key = new_key
+
+/datum/extension/exonet_device/proc/set_net_tag(var/new_tag)
+	net_tag = new_tag
 
 /datum/extension/exonet_device/Destroy()
 	disconnect_network()

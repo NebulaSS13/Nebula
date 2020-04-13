@@ -160,3 +160,15 @@
 	if(..())
 		return TOPIC_HANDLED
 	
+/obj/machinery/computer/exonet/mainframe/mapped
+	base_type = /obj/machinery/computer/exonet/mainframe
+	var/ennid
+	var/key
+
+/obj/machinery/computer/exonet/mainframe/mapped/LateInitialize()
+	. = ..()
+	if(ennid)
+		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+		exonet.set_ennid(ennid)
+		exonet.set_key(key)
+		exonet.connect_network()

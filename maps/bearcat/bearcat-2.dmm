@@ -69,9 +69,9 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/comms)
 "aD" = (
-/obj/machinery/computer/exonet/access_directory{
+/obj/machinery/computer/exonet/access_directory/mapped{
 	dir = 4;
-	error = "bearcat";
+	ennid = "bearcat";
 	icon_state = ""
 	},
 /turf/simulated/floor/bluegrid,
@@ -108,8 +108,8 @@
 /area/ship/bearcat/shuttle/outgoing)
 "aP" = (
 /obj/machinery/computer/exonet/broadcaster/router{
+	broadcasting_ennid = "bearcat";
 	dir = 4;
-	ennid = "bearcat";
 	icon_state = ""
 	},
 /turf/simulated/floor/bluegrid,
@@ -179,7 +179,7 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/obj/machinery/computer/exonet/mainframe{
+/obj/machinery/computer/exonet/mainframe/mapped{
 	dir = 4;
 	ennid = "bearcat";
 	icon_state = ""

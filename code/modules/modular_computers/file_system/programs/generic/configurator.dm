@@ -20,31 +20,37 @@
 /datum/computer_file/program/computerconfig/Topic(href, href_list)
 	if(..())
 		return TOPIC_HANDLED
+	. = TOPIC_REFRESH
+	
+	var/obj/item/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
 	if(href_list["PRG_back"])
 		error = null
+		return TOPIC_REFRESH
 	if(href_list["PRG_newennid"])
-		. = TOPIC_HANDLED
-		var/obj/item/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
-		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
-
 		var/list/result = exonet.do_change_ennid(usr)
 		// Guard statements.
 		if(!result)
-			return TOPIC_HANDLED
+			return TOPIC_REFRESH
 		if("error" in result)
 			error = result["error"]
-			return TOPIC_HANDLED
-		
+			return TOPIC_REFRESH
+
 		// Success.
-		network_card.set_ennid(result["ennid"], result["key"])
+		exonet.set_ennid(result["ennid"])
+		exonet.set_key(result["key"])
+		exonet.connect_network()
 	else if(href_list["PRG_newkey"])
-		. = TOPIC_HANDLED
-		var/new_key = sanitize(input(usr, "Enter exonet keypass or leave blank to cancel:", "Change key"))
-		if(!new_key)
-			return TOPIC_HANDLED
-		var/obj/item/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
-		error = network_card.set_keydata(new_key)
-		return TOPIC_HANDLED
+		var/list/result = exonet.do_change_key(usr)
+		// Guard statements.
+		if(!result)
+			return TOPIC_REFRESH
+		if("error" in result)
+			error = result["error"]
+			return TOPIC_REFRESH
+
+		exonet.set_key(result["key"])
+		exonet.connect_network()
 	if(.)
 		SSnano.update_uis(NM)
 
@@ -70,25 +76,9 @@
 	data["nic_exists"] = !!network_card
 	if(network_card)
 		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
-		var/datum/exonet/network = exonet.get_local_network()
-		if(!network)
-			data["signal_strength"] = "Not Connected"
-		else
-			var/signal_strength = network.get_signal_strength(network_card, network_card.get_netspeed())
-			if(signal_strength <= 0)
-				data["signal_strength"] = "Not Connected"
-			else if(signal_strength <= 6)
-				data["signal_strength"] = "Low Signal"
-			else
-				data["signal_strength"] = "High Signal"
-		if(network_card.ennid)
-			data["ennid"] = network_card.ennid
-		else
-			data["ennid"] = "Not Set"
-		if(network_card.keydata)
-			data["key"] = network_card.keydata
-		else
-			data["key"] = "Not Set"
+		data["signal_strength"] = exonet.get_signal_wordlevel()
+		data["ennid"] = exonet.ennid ? exonet.ennid : "Not Set"
+		data["key"] = exonet.key ? "************" : "Not Set"
 
 	var/list/all_entries[0]
 	var/list/hardware = program.computer.get_all_components()

@@ -3,25 +3,25 @@
 
 	var/datum/exonet/network				// This is a hard reference back to the attached network. Primarily for serialization purposes on persistence.
 	var/signal_strength	= 20				// The range in tiles that the broadcaster is capable of transmitting.
-	var/broadcasting_ennid					// The exonet network id being broadcast.
-	var/delay_broadcasting = FALSE			// Whether or not to delay broadcasting to late init.
+	var/broadcasting_ennid					// The exonet network id being broadcast. This is a mapping var.
+	var/broadcasting_key					// The exonet network key for the network being broadcast. This is a mapping var.
+	var/delay_broadcasting = FALSE			// Whether or not to delay broadcasting to late init. This is a mapping var.
 
 /obj/machinery/computer/exonet/broadcaster/Initialize()
 	. = ..()
-	if(!broadcasting_ennid)
-		broadcasting_ennid = ennid
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	if(broadcasting_ennid)
+		exonet.set_ennid(broadcasting_ennid)
+		exonet.set_key(broadcasting_key)
 	if(broadcasting_ennid && !delay_broadcasting)
-		// Sets up the network before anything else can. go go go go
-		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		exonet.broadcast_network(broadcasting_ennid, keydata)
+		exonet.broadcast_network()
 		network = exonet.get_local_network()
-	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/computer/exonet/broadcaster/LateInitialize()
 	. = ..()
 	if(broadcasting_ennid && delay_broadcasting)
 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		exonet.broadcast_network(broadcasting_ennid, keydata)
+		exonet.broadcast_network()
 		network = exonet.get_local_network()
 
 /obj/machinery/computer/exonet/broadcaster/build_ui_data()
@@ -31,19 +31,9 @@
 		.["error"] = error
 		return .
 
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 	.["signal_strength"] = signal_strength
-	if(broadcasting_ennid)
-		.["ennid"] = broadcasting_ennid
-	else
-		.["ennid"] = "Not Set"
-	if(keydata)
-		if(emagged)
-			.["key"] = keydata
-		else
-			.["key"] = "******************"
-	else
-		.["key"] = "Not Set"
-	if(broadcasting_ennid && operable())
+	if(exonet.get_local_network() && operable())
 		.["broadcasting_status"] = "Active"
 	else
 		.["broadcasting_status"] = "Down"
@@ -69,7 +59,7 @@
 
 /obj/machinery/computer/exonet/broadcaster/proc/update_ennid(var/new_ennid)
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	var/result = exonet.connect_network(null, new_ennid, NETWORKSPEED_ETHERNET, keydata)
+	var/result = exonet.connect_network(null, new_ennid, NETWORKSPEED_ETHERNET, broadcasting_key)
 	broadcasting_ennid = new_ennid
 	if(result)
 		error = result

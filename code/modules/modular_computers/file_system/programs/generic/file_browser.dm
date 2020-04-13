@@ -31,7 +31,7 @@
 		if(!network_card)
 			return 1
 		for(var/obj/machinery/computer/exonet/mainframe/mainframe in exonet.get_mainframes())
-			LAZYDISTINCTADD(file_servers, exonet.get_network_tag(mainframe))
+			LAZYDISTINCTADD(file_servers, exonet.get_net_tag(mainframe))
 		file_server = sanitize(input(usr, "Choose a fileserver to view files on:", "Select File Server") as null|anything in file_servers)
 		if(!file_server)
 			file_server = "local" // Safety check.

@@ -265,8 +265,8 @@
 	dir = 4
 	},
 /obj/machinery/computer/exonet/broadcaster/relay{
+	broadcasting_ennid = "bearcat";
 	dir = 4;
-	ennid = "bearcat";
 	icon_state = ""
 	},
 /turf/simulated/floor/tiled/monotile,

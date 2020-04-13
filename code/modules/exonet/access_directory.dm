@@ -60,7 +60,7 @@
 	if(!file_server)
 		var/obj/machinery/computer/exonet/mainframe/MF = get_default_mainframe()
 		if(MF)
-			file_server = exonet.get_network_tag(MF)
+			file_server = exonet.get_net_tag(MF)
 
 /obj/machinery/computer/exonet/access_directory/OnTopic(var/mob/user, href_list)
 	if(..())
@@ -73,7 +73,7 @@
 		var/old_value = file_server
 		var/list/file_servers = list()
 		for(var/obj/machinery/computer/exonet/mainframe/mainframe in exonet.get_mainframes())
-			file_servers |= exonet.get_network_tag(mainframe)
+			file_servers |= exonet.get_net_tag(mainframe)
 		var/new_file_server = sanitize(input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers)
 		if(CanInteract(user, GLOB.default_state))
 			file_server = new_file_server
@@ -139,7 +139,7 @@
 		new_record.filename = "[replacetext(new_user_name, " ", "_")]"
 		new_record.user_id = new_user_id
 		new_record.set_name(new_user_name)
-		new_record.ennid = ennid
+		new_record.ennid = exonet.ennid
 		new_record.calculate_size()
 		if(!mainframe.store_file(new_record))
 			error = "MAINFRAME ERROR: Unable to store record on mainframe."
@@ -263,3 +263,16 @@
 				"size" = AR.size
 			)))
 		.["users"] = users
+
+/obj/machinery/computer/exonet/access_directory/mapped
+	var/ennid
+	var/key
+	base_type = /obj/machinery/computer/exonet/access_directory
+
+/obj/machinery/computer/exonet/access_directory/mapped/LateInitialize()
+	. = ..()
+	if(ennid)
+		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+		exonet.set_ennid(ennid)
+		exonet.set_key(key)
+		exonet.connect_network()

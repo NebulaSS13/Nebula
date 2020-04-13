@@ -16,14 +16,14 @@
 	var/ui_template					// If interacted with by a multitool, what UI (if any) to display.
 	var/current_ui_template 		// Do not set this. This is for the 'options' window of exonet systems. It'll be set automatically.
 	var/error						// Error to display on the interface.
-	var/rebuild_ui = FALSE			
+	var/rebuild_ui = FALSE
 
 /obj/machinery/computer/exonet/Process()
 	if(operable())
 		update_use_power(POWER_USE_ACTIVE)
 	else
 		update_use_power(POWER_USE_IDLE)
-	..()
+	. = ..()
 
 /obj/machinery/computer/exonet/on_update_icon()
 	..()
@@ -58,9 +58,9 @@
 
 	data["name"] = name
 	data["status"] = exonet.get_local_network() && operable() ? "Connected" : "Offline"
-	data["ennid"] = ennid ? ennid : "Not Set"
-	data["key"] = keydata ? (emagged ? keydata : "********") : "Not Set"
-	data["net_tag"] = net_tag ? net_tag : "Not Set"
+	data["ennid"] = exonet.ennid ? exonet.ennid : "Not Set"
+	data["key"] = exonet.key ? (emagged ? exonet.key : "********") : "Not Set"
+	data["net_tag"] = exonet.tag ? exonet.tag : "Not Set"
 	data["power_usage"] = active_power_usage / 1000
 
 	. = data
@@ -72,8 +72,8 @@
 /obj/machinery/computer/exonet/OnTopic(var/mob/user, href_list)
 	if(..())
 		return TOPIC_HANDLED
-	. = TOPIC_REFRESH
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	. = TOPIC_REFRESH
 	
 	if(href_list["options"])
 		clear_errors()
@@ -94,21 +94,28 @@
 	if(href_list["change_ennid"])
 		var/list/result = exonet.do_change_ennid(user)
 		if(!CanInteract(user, GLOB.default_state))
+			to_world_log("can interact fail")
 			return TOPIC_REFRESH
 		// Guard statements.
 		if(!result)
+			to_world_log("null result")
 			return TOPIC_REFRESH
 		if("error" in result)
+			to_world_log("error")
 			error = result["error"]
 			return TOPIC_REFRESH
 
 		// Success.
-		exonet.disconnect_network()
-		ennid = result["ennid"]
-		keydata = result["key"]
-		var/conn_result = exonet.connect_network(user, ennid, NETWORKSPEED_ETHERNET, keydata)
+		to_world_log("setting ennid to [result["ennid"]]")
+		exonet.set_ennid(result["ennid"])
+		to_world_log("setting key to [result["key"]]")
+		exonet.set_key(result["key"])
+		var/conn_result = exonet.connect_network(user)
 		if(conn_result)
+			to_world_log("failed to connect")
 			error = conn_result
+			return TOPIC_REFRESH
+		to_world_log("connect success?")
 
 	if(href_list["change_net_tag"])
 		var/list/result = exonet.do_change_net_tag(user)
@@ -120,7 +127,7 @@
 		if("error" in result)
 			error = result["error"]
 			return TOPIC_REFRESH
-		net_tag = result["net_tag"]
+		exonet.set_net_tag(result["net_tag"])
 
 	if(href_list["change_key"])
 		var/list/result = exonet.do_change_key(user)
@@ -133,9 +140,8 @@
 			error = result["error"]
 			return TOPIC_REFRESH
 
-		exonet.disconnect_network()
-		keydata = result["key"]
-		var/conn_result = exonet.connect_network(user, ennid, NETWORKSPEED_ETHERNET, keydata)
+		exonet.set_key(result["key"])
+		var/conn_result = exonet.connect_network(user)
 		if(conn_result)
 			error = conn_result
 

@@ -21,25 +21,12 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	clicksound = "keyboard"
 
-	var/ennid												// For auto-configurating a modular computer with a specific exonetwork
-	var/keydata												// For auto-configuration a modular computer to a specific exonetwork that's encrypted.
-	var/identification_id = null							// Identification ID. Technically MAC address of this device. Can't be changed by user.
-	var/net_tag												// A user-settable friendly identifier for this machine on EXONET networks.
-
 /obj/machinery/computer/Initialize()
 	. = ..()
 	overlay_layer = layer
 	update_icon()
-	set_extension(src, /datum/extension/exonet_device, null, NETWORKSPEED_ETHERNET)
+	set_extension(src, /datum/extension/exonet_device, NETWORKSPEED_ETHERNET)
 	return INITIALIZE_HINT_LATELOAD
-
-/obj/machinery/computer/LateInitialize()
-	. = ..()
-	if(!identification_id)
-		identification_id = new_guid()
-	if(ennid)
-		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		exonet.connect_network(null, ennid, NETWORKSPEED_ETHERNET, keydata)
 
 /obj/machinery/computer/get_codex_value()
 	return "computer"

@@ -21,8 +21,9 @@
 
 /datum/extension/interactive/ntos/proc/get_network_tag()
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
-	if(network_card)
-		return network_card.get_network_tag()
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+	if(network_card && exonet)
+		return exonet.get_net_tag()
 	else
 		return "N/A"
 

@@ -2,6 +2,7 @@ GLOBAL_LIST_EMPTY(exonets)
 
 /datum/exonet
 	var/ennid										// This is the name of the network. Its unique ID.
+	var/lock										// This is the keycode required to join the network.
 
 	var/list/network_devices 	= list()			// Devices utilizing the network.
 	var/list/mainframes 		= list()			// File servers serving files.
@@ -85,7 +86,7 @@ GLOBAL_LIST_EMPTY(exonets)
 /datum/exonet/proc/add_device(var/device, var/keydata)
 	if(!router)
 		return 0 // Uh?? No router? Guess the network is busted.
-	if(router.keydata != keydata)
+	if(lock != keydata)
 		return 0 // Authentication failed.
 
 	if(istype(device, /obj/machinery/computer/exonet/mainframe))
@@ -107,12 +108,13 @@ GLOBAL_LIST_EMPTY(exonets)
 		modems -= device
 	network_devices -= device
 
-/datum/exonet/proc/set_router(var/device)
+/datum/exonet/proc/set_router(var/device, var/router_lock)
 	if(router)
 		// THERE CAN BE ONLY ONE!!!
 		LAZYREMOVE(network_devices, router)
 		LAZYREMOVE(broadcasters, router)
 	router = device
+	lock = router_lock
 	LAZYADD(network_devices, device)
 	LAZYADD(broadcasters, device)
 
@@ -129,7 +131,8 @@ GLOBAL_LIST_EMPTY(exonets)
 
 	var/log_text = "[stationtime2text()] - "
 	if(source)
-		log_text += "[source.get_network_tag()] - "
+		var/datum/extension/exonet_device/exonet = get_extension(source, /datum/extension/exonet_device)
+		log_text += "[exonet.get_net_tag()] - "
 	else
 		log_text += "*SYSTEM* - "
 	log_text += log_string

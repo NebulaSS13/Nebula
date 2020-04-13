@@ -7,19 +7,16 @@
 	icon_state = "netcard_basic"
 	hardware_size = 1
 	matter = list(MAT_STEEL = 250, MAT_GLASS = 100)
-	var/identification_id = null	// Identification ID. Technically MAC address of this device. Can't be changed by user.
-	var/identification_string = "" 	// Identification string, technically nickname seen in the network. Can be set by user.
 	var/long_range = 0
 	var/ethernet = 0 // Hard-wired, therefore always on, ignores NTNet wireless checks.
 	var/proxy_id     // If set, uses the value to funnel connections through another network card.
-	var/ennid		// Associated EXONET ENNID.
-	var/keydata		// encryption key to access ennid.
 
 /obj/item/stock_parts/computer/network_card/diagnostics()
 	. = ..()
-	. += "NIX Unique ID: [identification_id]"
-	. += "NIX User Tag: [identification_string]"
-	. += "EXONET ennid: [ennid]"
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	. += "NIX Unique ID: [exonet.nid]"
+	. += "NIX User Tag: [exonet.net_tag]"
+	. += "EXONET ennid: [exonet.ennid]"
 	. += "Supported protocols:"
 	. += "511.m SFS (Subspace) - Standard Frequency Spread"
 	if(long_range)
@@ -28,16 +25,8 @@
 		. += "OpenEth (Physical Connection) - Physical network connection port"
 
 /obj/item/stock_parts/computer/network_card/Initialize()
-	..()
-	
-	if(!identification_id)
-		identification_id = new_guid()
-	set_extension(src, /datum/extension/exonet_device, null, get_netspeed())
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/item/stock_parts/computer/network_card/LateInitialize()
-	if(ennid)
-		set_ennid(ennid, keydata)
+	. = ..()
+	set_extension(src, /datum/extension/exonet_device, get_netspeed())
 
 /obj/item/stock_parts/computer/network_card/advanced
 	name = "advanced EXONET network card"
@@ -59,15 +48,12 @@
 	hardware_size = 3
 	matter = list(MAT_STEEL = 2500, MAT_GLASS = 400)
 
-// Returns a string identifier of this network card
-/obj/item/stock_parts/computer/network_card/proc/get_network_tag()
-	return "[identification_string] (NID [identification_id])"
-
 /obj/item/stock_parts/computer/network_card/proc/is_banned()
-	var/datum/exonet/network = get_network()
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	var/datum/exonet/network = exonet.get_local_network()
 	if(!network)
 		return
-	return network.check_banned(identification_id)
+	return network.check_banned(exonet.nid)
 
 /obj/item/stock_parts/computer/network_card/proc/get_netspeed()
 	var/strength = 1
@@ -83,7 +69,8 @@
 	if(!enabled || !check_functionality())
 		return
 
-	var/datum/exonet/network = get_network()
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	var/datum/exonet/network = exonet.get_local_network()
 	if(!network || is_banned())
 		return
 
@@ -105,11 +92,11 @@
 
 /obj/item/stock_parts/computer/network_card/on_disable()
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	exonet.connect_network(null, ennid, get_netspeed(), keydata)
+	exonet.disconnect_network()
 
 /obj/item/stock_parts/computer/network_card/on_enable(var/datum/extension/interactive/ntos/os)
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	exonet.disconnect_network()
+	exonet.connect_network()
 
 /obj/item/stock_parts/computer/network_card/on_install(var/obj/machinery/machine)
 	..()
@@ -120,18 +107,3 @@
 /obj/item/stock_parts/computer/network_card/on_uninstall(var/obj/machinery/machine, var/temporary = FALSE)
 	..()
 	on_disable()
-
-/obj/item/stock_parts/computer/network_card/proc/set_ennid(var/new_ennid, var/new_keydata)
-	ennid = new_ennid
-	keydata = new_keydata
-	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	return exonet.connect_network(null, ennid, get_netspeed(), keydata)
-
-/obj/item/stock_parts/computer/network_card/proc/set_keydata(var/new_keydata)
-	keydata = new_keydata
-	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	return exonet.connect_network(null, ennid, get_netspeed(), keydata)
-
-/obj/item/stock_parts/computer/network_card/proc/get_network()
-	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	return exonet.get_local_network()

@@ -78,7 +78,7 @@
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
-		exonet.connect_network(null, network_card.ennid, network_card.get_netspeed(), network_card.keydata)
+		exonet.connect_network()
 	update_host_icon()
 
 /datum/extension/interactive/ntos/proc/kill_program(var/datum/computer_file/program/P, var/forced = 0)
