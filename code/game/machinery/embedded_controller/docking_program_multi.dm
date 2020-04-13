@@ -174,11 +174,9 @@
 			if (!override_enabled)
 				stop_cycling()
 				close_doors()
-				disable_mech_regulation()
 
 		if ("finish_docking")
 			if (!override_enabled)
-				enable_mech_regulation()
 				open_doors()
 
 		if ("finish_undocking")

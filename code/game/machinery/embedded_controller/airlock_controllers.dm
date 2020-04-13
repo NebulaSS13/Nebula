@@ -8,8 +8,6 @@
 	var/tag_chamber_sensor
 	var/tag_exterior_sensor
 	var/tag_interior_sensor
-	var/tag_airlock_mech_sensor
-	var/tag_shuttle_mech_sensor
 	var/tag_secure = 0
 	var/tag_air_alarm
 	var/list/dummy_terminals = list()
