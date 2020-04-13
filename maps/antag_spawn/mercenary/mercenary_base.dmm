@@ -687,7 +687,6 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "merc_shuttle_sensor";
 	pixel_x = 0;
 	pixel_y = 25
@@ -1984,8 +1983,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "merc_shuttle_pump_out_external"
 	},
-/obj/machinery/airlock_sensor/airlock_exterior{
-	frequency = 1380;
+/obj/machinery/airlock_sensor{
 	id_tag = "merc_shuttle_exterior_sensor";
 	pixel_x = 0;
 	pixel_y = -28

@@ -234,7 +234,6 @@
 	id_tag = "solar_starboard_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "solar_starboard_sensor";
 	pixel_x = 24;
 	pixel_y = 12
@@ -754,7 +753,6 @@
 	tag_interior_door = "solar_starboard_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "solar_starboard_sensor";
 	pixel_x = 24;
 	pixel_y = 12
@@ -2149,7 +2147,6 @@
 	tag_interior_door = "solar_starboard_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "solar_starboard_sensor";
 	pixel_x = 24;
 	pixel_y = 12

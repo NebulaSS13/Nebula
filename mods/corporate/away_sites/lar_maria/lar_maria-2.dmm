@@ -290,9 +290,7 @@
 	id_tag = "ZHPWestSolar_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "ZHPWestSolar_sensor";
-	master_tag = "ZHPWestSolar";
 	pixel_y = 25
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -401,9 +399,7 @@
 	tag_interior_door = "ZHPEastSolar_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "ZHPEastSolar_sensor";
-	master_tag = "ZHPWestSolar";
 	pixel_y = 25
 	},
 /turf/simulated/floor/plating,
@@ -3388,9 +3384,7 @@
 /area/lar_maria/hallway)
 "jn" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "ZHPDock_airlock_sensor";
-	master_tag = "ZHPWestSolar";
 	pixel_x = 25;
 	pixel_y = 0
 	},

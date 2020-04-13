@@ -141,19 +141,28 @@
 
 	anchored = 1
 	power_channel = ENVIRON
+	public_variables = list(
+		/decl/public_access/public_variable/airlock_pressure,
+		/decl/public_access/public_variable/input_toggle
+	)
+	public_methods = list(/decl/public_access/public_method/toggle_input_toggle)
+	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor = 1)
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/radio/transmitter/basic/buildable
+	)
+	base_type = /obj/machinery/airlock_sensor/buildable
+	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
+	frame_type = /obj/item/frame/button/airlock_sensor
 
-	var/master_tag
-	var/frequency = 1380
-	var/command = "cycle"
-
-	var/datum/radio_frequency/radio_connection
-
-	var/on = 1
 	var/alert = 0
-	var/previousPressure
+	var/pressure
+
+/obj/machinery/airlock_sensor/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/airlock_sensor/on_update_icon()
-	if(on)
+	if(!(stat & (NOPOWER | BROKEN)))
 		if(alert)
 			icon_state = "airlock_sensor_alert"
 		else
@@ -161,57 +170,47 @@
 	else
 		icon_state = "airlock_sensor_off"
 
-/obj/machinery/airlock_sensor/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
-		return FALSE
-	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
-	signal.data["tag"] = master_tag
-	signal.data["command"] = command
-
-	radio_connection.post_signal(src, signal, master_tag, AIRLOCK_CONTROL_RANGE)
-	flick("airlock_sensor_cycle", src)
-	return TRUE
-
 /obj/machinery/airlock_sensor/Process()
-	if(on)
+	if(!(stat & (NOPOWER | BROKEN)))
 		var/datum/gas_mixture/air_sample = return_air()
-		var/pressure = round(air_sample.return_pressure(),0.1)
+		var/new_pressure = round(air_sample.return_pressure(),0.1)
 
-		if(abs(pressure - previousPressure) > 0.001 || previousPressure == null)
-			var/datum/signal/signal = new
-			signal.transmission_method = 1 //radio signal
-			signal.data["tag"] = id_tag
-			signal.data["timestamp"] = world.time
-			signal.data["pressure"] = num2text(pressure)
+		if(abs(pressure - new_pressure) > 0.001 || pressure == null)
+			var/decl/public_access/public_variable/airlock_pressure/pressure_var = decls_repository.get_decl(/decl/public_access/public_variable/airlock_pressure)
+			pressure_var.write_var(src, pressure)
 
-			radio_connection.post_signal(src, signal, id_tag, AIRLOCK_CONTROL_RANGE)
+			var/new_alert = (pressure < ONE_ATMOSPHERE*0.8)
+			if(new_alert != alert)
+				alert = new_alert
+				update_icon()
 
-			previousPressure = pressure
+/decl/public_access/public_variable/airlock_pressure
+	expected_type = /obj/machinery/airlock_sensor
+	name = "airlock sensor pressure"
+	desc = "The pressure of the location where the sensor is placed."
+	can_write = FALSE
+	has_updates = TRUE
+	var_type = IC_FORMAT_NUMBER
 
-			alert = (pressure < ONE_ATMOSPHERE*0.8)
+/decl/public_access/public_variable/airlock_pressure/access_var(obj/machinery/airlock_sensor/sensor)
+	return sensor.pressure
 
-			update_icon()
-
-/obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_NULL)
-
-/obj/machinery/airlock_sensor/Initialize()
-	set_frequency(frequency)
+/decl/public_access/public_variable/airlock_pressure/write_var(obj/machinery/airlock_sensor/sensor, new_val)
 	. = ..()
+	if(.)
+		sensor.pressure = new_val
 
-/obj/machinery/airlock_sensor/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src,frequency)
-	return ..()
+/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor
+	frequency = EXTERNAL_AIR_FREQ
+	transmit_on_change = list(
+		"pressure" = /decl/public_access/public_variable/airlock_pressure
+	)
 
-/obj/machinery/airlock_sensor/airlock_interior
-	command = "cycle_interior"
+/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor/shuttle
+	frequency = SHUTTLE_AIR_FREQ
 
-/obj/machinery/airlock_sensor/airlock_exterior
-	command = "cycle_exterior"
+/obj/machinery/airlock_sensor/shuttle
+	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/airlock_sensor/shuttle = 1)
 
 /obj/machinery/button/access
 	icon = 'icons/obj/airlock_machines.dmi'
@@ -227,11 +226,14 @@
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/event_transmitter/access_button = 1
 	)
-
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/radio/transmitter/on_event/buildable
+	)
 	var/command = "cycle"
 
 /obj/machinery/button/access/on_update_icon()
-	if(stat & NOPOWER | BROKEN)
+	if(stat & (NOPOWER | BROKEN))
 		icon_state = "access_button_off"
 	else if(operating)
 		icon_state = "access_button_cycle"

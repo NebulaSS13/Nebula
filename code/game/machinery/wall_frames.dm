@@ -201,3 +201,10 @@
 /obj/item/frame/stock_offset/newscaster/kit
 	name = "newscaster kit"
 	fully_construct = TRUE
+
+/obj/item/frame/button/airlock_sensor
+	icon = 'icons/obj/airlock_machines.dmi'
+	icon_state = "airlock_sensor_off"
+	name = "airlock sensor"
+	desc = "An airlock sensor frame."
+	build_machine_type = /obj/machinery/airlock_sensor/buildable

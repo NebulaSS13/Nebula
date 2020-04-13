@@ -1343,7 +1343,6 @@
 	id_tag = "yacht_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "yacht_sensor";
 	pixel_y = -24
 	},

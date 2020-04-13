@@ -1619,7 +1619,6 @@
 "fb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue,
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "constructionsite_sensor";
 	pixel_x = 0;
 	pixel_y = -25

@@ -10,7 +10,6 @@
 /area/ship/bearcat/shuttle/outgoing)
 "ac" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "bearcat_shuttle_sensor";
 	pixel_y = -24
 	},
@@ -4789,7 +4788,6 @@
 	dir = 1
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "dock_port_sensor";
 	pixel_y = 36
 	},

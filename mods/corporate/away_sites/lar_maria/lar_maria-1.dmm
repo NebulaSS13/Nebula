@@ -2912,9 +2912,7 @@
 "gR" = (
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "ZHPvirology_access_airlock_sensor";
-	master_tag = "ZHPvirology_access_airlock";
 	pixel_x = 25;
 	pixel_y = 0
 	},

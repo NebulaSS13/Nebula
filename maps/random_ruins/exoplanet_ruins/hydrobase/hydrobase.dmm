@@ -1951,7 +1951,6 @@
 	dir = 4
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "solars_sensor";
 	pixel_x = 0;
 	pixel_y = 25
@@ -2822,7 +2821,6 @@
 	dir = 1
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "hydrodock_sensor";
 	pixel_x = 0;
 	pixel_y = 25

@@ -275,7 +275,6 @@
 "nb" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "lp_north_sensor";
-	master_tag = "lp_north_airlock";
 	pixel_x = 24
 	},
 /turf/simulated/floor/airless,
@@ -361,7 +360,6 @@
 "xb" = (
 /obj/random/trash,
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "lp_east_sensor";
 	pixel_x = 0;
 	pixel_y = 24

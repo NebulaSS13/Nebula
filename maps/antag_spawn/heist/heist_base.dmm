@@ -1083,8 +1083,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cC" = (
-/obj/machinery/airlock_sensor{
-	frequency = 1331;
+/obj/machinery/airlock_sensor/shuttle{
 	id_tag = "vox_west_sensor";
 	pixel_x = 25
 	},
@@ -1106,7 +1105,6 @@
 "cG" = (
 /obj/random/trash,
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "skipjack_shuttle_sensor";
 	pixel_x = 8;
 	pixel_y = 25

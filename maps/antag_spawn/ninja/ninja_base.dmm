@@ -1422,8 +1422,7 @@
 	},
 /area/map_template/ninja_dojo/start)
 "cW" = (
-/obj/machinery/airlock_sensor{
-	frequency = 1331;
+/obj/machinery/airlock_sensor/shuttle{
 	id_tag = "ninja_shuttle_sensor";
 	pixel_x = 8;
 	pixel_y = -25

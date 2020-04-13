@@ -1718,7 +1718,6 @@
 	id_tag = "Harpoon_solar_starboard_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "Harpoon_solar_starboard_sensor";
 	pixel_y = 25
 	},
@@ -1911,7 +1910,6 @@
 	tag_interior_door = "Harpoon_solar_port_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "Harpoon_solar_port_sensor";
 	pixel_y = 25
 	},
@@ -4142,7 +4140,6 @@
 	dir = 4
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "Harpoon_ls_sensor";
 	pixel_x = -25;
 	pixel_y = 0
@@ -4865,7 +4862,6 @@
 	tag_interior_door = "Harpoon_sci_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "Harpoon_sci_sensor";
 	pixel_y = 25
 	},
@@ -5323,7 +5319,6 @@
 	tag_interior_door = "Harpoon_dock1_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "Harpoon_dock1_sensor";
 	pixel_y = 25
 	},
@@ -5956,7 +5951,6 @@
 	tag_interior_door = "Harpoon_dock2_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "Harpoon_dock2_sensor";
 	pixel_y = 25
 	},
@@ -6874,7 +6868,6 @@
 	tag_interior_door = "Harpoon_fish_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "Harpoon_fish_sensor";
 	pixel_y = 25
 	},

@@ -52,8 +52,7 @@
 /area/smugglers/base)
 "am" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
-	master_tag = "asteroid_base_dock_airlock";
+	id_tag = "asteroid_base_dock_airlock";
 	pixel_x = 25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -293,8 +292,7 @@
 	icon_state = "beartrap1"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
-	master_tag = "asteroid_base_east_airlock";
+	id_tag = "asteroid_base_east_airlock";
 	pixel_y = -25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{

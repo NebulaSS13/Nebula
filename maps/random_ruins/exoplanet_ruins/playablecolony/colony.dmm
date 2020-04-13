@@ -6723,7 +6723,6 @@
 /area/map_template/colony/atmospherics)
 "lM" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "playablecolonymain_sensor_chamber";
 	pixel_x = 22
 	},
@@ -6785,8 +6784,7 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/machinery/airlock_sensor/airlock_interior{
-	frequency = 1380;
+/obj/machinery/airlock_sensor{
 	id_tag = "playablecolonymain_sensor_interior";
 	pixel_x = -22
 	},
@@ -6910,8 +6908,7 @@
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "ma" = (
-/obj/machinery/airlock_sensor/airlock_exterior{
-	frequency = 1380;
+/obj/machinery/airlock_sensor{
 	id_tag = "playablecolonymain_sensor_external";
 	pixel_x = 22
 	},

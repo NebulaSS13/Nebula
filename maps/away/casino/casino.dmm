@@ -220,7 +220,6 @@
 	dir = 9
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "casino_dock_sensor";
 	pixel_x = -30;
 	pixel_y = -8
@@ -2517,7 +2516,6 @@
 	tag_interior_door = "casino_solar_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "casino_solar_sensor";
 	pixel_x = 24;
 	pixel_y = 12
