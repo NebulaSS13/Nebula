@@ -68,38 +68,46 @@
 	. = ..()
 	process_momentum(AM,TT)
 
-/atom/movable/proc/process_momentum(var/atom/movable/AM, var/datum/thrownthing/TT, var/power)//physic isn't an exact science
-	if(anchored) return
-	if(!power)
-		power = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
-		if(has_gravity())
-			power *= 0.5
+/atom/movable/proc/process_momentum(var/atom/movable/AM, var/datum/thrownthing/TT)//physic isn't an exact science
+	. = momentum_power(AM,TT)
 
+	if(.)
+		momentum_do(.,TT,AM)
+
+/atom/movable/proc/momentum_power(var/atom/movable/AM, var/datum/thrownthing/TT)
+	if(anchored)
+		return 0
+	
+	. = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
+	if(has_gravity())
+		. *= 0.5
+
+/atom/movable/proc/momentum_do(var/power, var/datum/thrownthing/TT)
 	var/direction = TT.init_dir
+	switch(power)
+		if(0.75 to INFINITY)		//blown backward, also calls being pinned to walls
+			throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5))
 
-	if(power > 0.75)		//blown backward, also calls being pinned to walls
-		throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5))
+		if(0.5 to 0.75)	//knocks them back and changes their direction
+			step(src, direction)
 
-	else if(power > 0.5)	//knocks them back and changes their direction
-		step(src, direction)
-
-	else if(power > 0.25)	//glancing change in direction
-		var/drift_dir
-		if(direction & (NORTH|SOUTH))
-			if(inertia_dir & (NORTH|SOUTH))
-				drift_dir |= (direction & (NORTH|SOUTH)) & (inertia_dir & (NORTH|SOUTH))
+		if(0.25 to 0.5)	//glancing change in direction
+			var/drift_dir	
+			if(direction & (NORTH|SOUTH))
+				if(inertia_dir & (NORTH|SOUTH))
+					drift_dir |= (direction & (NORTH|SOUTH)) & (inertia_dir & (NORTH|SOUTH))
+				else
+					drift_dir |= direction & (NORTH|SOUTH)
 			else
-				drift_dir |= direction & (NORTH|SOUTH)
-		else
-			drift_dir |= inertia_dir & (NORTH|SOUTH)
-		if(direction & (EAST|WEST))
-			if(inertia_dir & (EAST|WEST))
-				drift_dir |= (direction & (EAST|WEST)) & (inertia_dir & (EAST|WEST))
+				drift_dir |= inertia_dir & (NORTH|SOUTH)
+			if(direction & (EAST|WEST))
+				if(inertia_dir & (EAST|WEST))
+					drift_dir |= (direction & (EAST|WEST)) & (inertia_dir & (EAST|WEST))
+				else
+					drift_dir |= direction & (EAST|WEST)
 			else
-				drift_dir |= direction & (EAST|WEST)
-		else
-			drift_dir |= inertia_dir & (EAST|WEST)
-		space_drift(drift_dir)
+				drift_dir |= inertia_dir & (EAST|WEST)
+			space_drift(drift_dir)
 
 /atom/movable/proc/get_mass()
 	return 1.5

@@ -4,6 +4,7 @@
 
 SUBSYSTEM_DEF(throwing)
 	name = "Throwing"
+	priority = SS_PRIORITY_THROWING
 	wait = 1
 	flags = SS_NO_INIT|SS_KEEP_TIMING
 

@@ -97,7 +97,7 @@ var/datum/controller/subsystem/fluids/SSfluids
 
 		REMOVE_ACTIVE_FLUID(F) // This will be refreshed if our level changes at all in this iteration of the subsystem.
 		UPDATE_FLUID_BLOCKED_DIRS(T)
-		if(!(T.fluid_blocked_dirs & DOWN) && istype(T, /turf/simulated/open) && has_gravity(F))
+		if(!(T.fluid_blocked_dirs & DOWN) && T.is_open() && T.has_gravity())
 			var/turf/below = GetBelow(T)
 			if(below)
 				UPDATE_FLUID_BLOCKED_DIRS(below)

@@ -304,9 +304,6 @@ var/list/mob/living/forced_ambiance_list = new
 	return 0
 
 /mob/has_gravity()
-	if(istype(loc, /turf/space))
-		return 0
-
 	if(!lastarea)
 		lastarea = get_area(src)
 	if(!lastarea || !lastarea.has_gravity())
