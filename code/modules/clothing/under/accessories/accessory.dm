@@ -24,18 +24,22 @@
 
 /obj/item/clothing/accessory/proc/get_inv_overlay()
 	if(!inv_overlay)
-		var/tmp_icon_state = overlay_state? overlay_state : icon_state
-		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
-			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
-		else if("[tmp_icon_state]_tie" in icon_states(default_onmob_icons[slot_tie_str]))
-			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
+		if(on_mob_icon)
+			inv_overlay = image(on_mob_icon, "inventory")
+			inv_overlay.color = color
 		else
-			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
+			var/tmp_icon_state = overlay_state? overlay_state : icon_state
+			if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
+				inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
+			else if("[tmp_icon_state]_tie" in icon_states(default_onmob_icons[slot_tie_str]))
+				inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
+			else
+				inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
 	inv_overlay.color = color
 	return inv_overlay
 
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
-	if(!istype(loc,/obj/item/clothing/))	//don't need special handling if it's worn as normal item.
+	if(!istype(loc,/obj/item/clothing) || on_mob_icon)	//don't need special handling if it's worn as normal item.
 		return ..()
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
