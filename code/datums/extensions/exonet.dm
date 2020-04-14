@@ -92,7 +92,6 @@
 	var/datum/exonet/old_exonet = GLOB.exonets[ennid]
 	if(old_exonet)
 		old_exonet.remove_device(holder)
-		ennid = null
 	return FALSE // This is a success.
 
 /datum/extension/exonet_device/proc/broadcast_network()
@@ -119,7 +118,7 @@
 	var/datum/exonet/network = GLOB.exonets[ennid]
 	if(!network)
 		return
-	if(network.get_signal_strength(holder, netspeed) > 0)
+	if(network.get_signal_strength(holder, netspeed) > 0 && holder in network.network_devices)
 		return network
 
 /datum/extension/exonet_device/proc/get_signal_wordlevel()

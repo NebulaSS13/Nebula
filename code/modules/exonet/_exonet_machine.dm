@@ -74,7 +74,7 @@
 		return TOPIC_HANDLED
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 	. = TOPIC_REFRESH
-	
+
 	if(href_list["options"])
 		clear_errors()
 		current_ui_template = "exonet_options.tmpl"
@@ -94,28 +94,21 @@
 	if(href_list["change_ennid"])
 		var/list/result = exonet.do_change_ennid(user)
 		if(!CanInteract(user, GLOB.default_state))
-			to_world_log("can interact fail")
 			return TOPIC_REFRESH
 		// Guard statements.
 		if(!result)
-			to_world_log("null result")
 			return TOPIC_REFRESH
 		if("error" in result)
-			to_world_log("error")
 			error = result["error"]
 			return TOPIC_REFRESH
 
 		// Success.
-		to_world_log("setting ennid to [result["ennid"]]")
 		exonet.set_ennid(result["ennid"])
-		to_world_log("setting key to [result["key"]]")
 		exonet.set_key(result["key"])
 		var/conn_result = exonet.connect_network(user)
 		if(conn_result)
-			to_world_log("failed to connect")
 			error = conn_result
 			return TOPIC_REFRESH
-		to_world_log("connect success?")
 
 	if(href_list["change_net_tag"])
 		var/list/result = exonet.do_change_net_tag(user)
