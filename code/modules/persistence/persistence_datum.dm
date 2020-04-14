@@ -95,7 +95,7 @@
 
 /datum/persistent/proc/Initialize()
 	if(fexists(filename))
-		var/list/token_sets = json_decode(file2text(filename))
+		var/list/token_sets = cached_json_decode(file2text(filename))
 		for(var/tokens in token_sets)
 			tokens = FinalizeTokens(tokens)
 			if(CheckTokenSanity(tokens))

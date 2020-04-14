@@ -230,7 +230,7 @@
 // The following parameters area calculated during validation and added to the returned save list:
 // "requires_upgrades", "unsupported_circuit", "cost", "complexity", "max_complexity", "used_space", "max_space"
 /datum/controller/subsystem/processing/circuit/proc/validate_electronic_assembly(program)
-	var/list/blocks = json_decode(program)
+	var/list/blocks = cached_json_decode(program)
 	if(!blocks)
 		return
 

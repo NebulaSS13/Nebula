@@ -115,7 +115,7 @@
 		activate_pin(3)
 		return
 
-	var/list/Pl = json_decode(result)
+	var/list/Pl = cached_json_decode(result)
 	if(Pl&&islist(Pl))
 		idc.access = Pl
 	var/turf/a_loc = get_turf(assembly)

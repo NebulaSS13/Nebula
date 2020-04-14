@@ -763,12 +763,12 @@ proc/dd_sortedTextList(list/incoming)
 		if(A.type == T)
 			return A
 
-GLOBAL_LIST_INIT(json_cache, new)
-/proc/cached_json_decode(var/json)
+var/list/json_cache = list()
+/proc/cached_json_decode(var/json_to_decode)
 	try
-		if(!GLOB.json_cache[json])
-			GLOB.json_cache[json] = json_decode(json)
-		. = GLOB.json_cache[json]
+		if(isnull(global.json_cache[json_to_decode]))
+			global.json_cache[json_to_decode] = json_decode(json_to_decode)
+		. = global.json_cache[json_to_decode]
 	catch()
-		to_world_log("Malformed json: [json].")
+		log_error("Malformed json: [json_to_decode].")
 		return list()
