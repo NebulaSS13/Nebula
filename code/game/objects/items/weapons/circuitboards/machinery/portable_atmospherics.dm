@@ -2,7 +2,7 @@
 	name = T_BOARD("portable scrubber")
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/powered/scrubber
-	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_POWER + "':4}"
+	origin_tech = "{'engineering':4,'powerstorage':4}"
 	req_components = list(
 		/obj/item/stock_parts/capacitor = 2,
 		/obj/item/stock_parts/matter_bin = 2,
@@ -24,7 +24,7 @@
 	name = T_BOARD("large portable scrubber")
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/powered/scrubber/huge
-	origin_tech = "{'" + TECH_ENGINEERING + "':5,'" + TECH_POWER + "':5,'" + TECH_MATERIAL + "':5}"
+	origin_tech = "{'engineering':5,'powerstorage':5,'materials':5}"
 	req_components = list(
 							/obj/item/stock_parts/capacitor = 4,
 							/obj/item/stock_parts/matter_bin = 2,
@@ -39,7 +39,7 @@
 	name = T_BOARD("hydroponics tray")
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/hydroponics
-	origin_tech = "{'" + TECH_BIO + "':3,'" + TECH_MATERIAL + "':2,'" + TECH_DATA + "':1}"
+	origin_tech = "{'biotech':3,'materials':2,'programming':1}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/chems/glass/beaker = 1,
@@ -55,7 +55,7 @@
 	name = T_BOARD("emergency dehumidifier")
 	board_type = "machine"
 	build_path = /obj/machinery/dehumidifier
-	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_POWER + "':4}"
+	origin_tech = "{'engineering':4,'powerstorage':4}"
 	req_components = list(
 		/obj/item/stock_parts/capacitor = 2,
 		/obj/item/stock_parts/matter_bin = 2,
@@ -71,7 +71,7 @@
 	name = T_BOARD("space heater")
 	board_type = "machine"
 	build_path = /obj/machinery/space_heater
-	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_POWER + "':4}"
+	origin_tech = "{'engineering':4,'powerstorage':4}"
 	req_components = list(
 		/obj/item/stock_parts/capacitor = 2,
 		/obj/item/stock_parts/matter_bin = 2)

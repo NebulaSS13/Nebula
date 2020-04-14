@@ -10,7 +10,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_LARGE
-	origin_tech = "{'" + TECH_COMBAT + "':1}"
+	origin_tech = "{'combat':1}"
 	matter = list(MAT_STEEL = 500)
 	var/status = 0
 	var/throw_amount = 100

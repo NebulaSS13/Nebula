@@ -9,7 +9,7 @@
 	force = 10
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
-	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MAGNET + "':2}"
+	origin_tech = "{'combat':3,'magnets':2}"
 	matter = list(MAT_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
 	wielded_item_state = "laser-wielded"
@@ -81,7 +81,7 @@ obj/item/gun/energy/retro
 	icon_state = "lasercannon"
 	icon = 'icons/obj/guns/laser_cannon.dmi'
 	item_state = null
-	origin_tech = "{'" + TECH_COMBAT + "':4,'" + TECH_MATERIAL + "':3,'" + TECH_POWER + "':3}"
+	origin_tech = "{'combat':4,'materials':3,'powerstorage':3}"
 	slot_flags = SLOT_BELT|SLOT_BACK
 	one_hand_penalty = 6 //large and heavy
 	w_class = ITEM_SIZE_HUGE
@@ -109,7 +109,7 @@ obj/item/gun/energy/retro
 	icon_state = "xray"
 	item_state = "xray"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	origin_tech = "{'" + TECH_COMBAT + "':5,'" + TECH_MATERIAL + "':3,'" + TECH_MAGNET + "':2,'" + TECH_ESOTERIC + "':2}"
+	origin_tech = "{'combat':5,'materials':3,'magnets':2,'esoteric':2}"
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	one_hand_penalty = 2
 	w_class = ITEM_SIZE_LARGE
@@ -125,7 +125,7 @@ obj/item/gun/energy/retro
 	icon_state = "oldxray"
 	item_state = "oldxray"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	origin_tech = "{'" + TECH_COMBAT + "':4,'" + TECH_MATERIAL + "':3,'" + TECH_MAGNET + "':2,'" + TECH_ESOTERIC + "':2}"
+	origin_tech = "{'combat':4,'materials':3,'magnets':2,'esoteric':2}"
 	projectile_type = /obj/item/projectile/beam/xray
 	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL
@@ -138,7 +138,7 @@ obj/item/gun/energy/retro
 	icon = 'icons/obj/guns/laser_sniper.dmi'
 	icon_state = "sniper"
 	item_state = "laser"
-	origin_tech = "{'" + TECH_COMBAT + "':6,'" + TECH_MATERIAL + "':5,'" + TECH_POWER + "':4}"
+	origin_tech = "{'combat':6,'materials':5,'powerstorage':4}"
 	projectile_type = /obj/item/projectile/beam/sniper
 	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
@@ -164,7 +164,7 @@ obj/item/gun/energy/retro
 	icon_state = "bluetag"
 	item_state = "laser"
 	desc = "Standard issue weapon of the Imperial Guard."
-	origin_tech = "{'" + TECH_COMBAT + "':1,'" + TECH_MAGNET + "':2}"
+	origin_tech = "{'combat':1,'magnets':2}"
 	self_recharge = 1
 	matter = list(MAT_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/lastertag/blue

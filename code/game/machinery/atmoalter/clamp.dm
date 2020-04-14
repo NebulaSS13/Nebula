@@ -136,7 +136,7 @@
 	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "pclamp0"
-	origin_tech = "{'" + TECH_ENGINEERING + "':4,'" + TECH_MAGNET + "':4}"
+	origin_tech = "{'engineering':4,'magnets':4}"
 	matter = list(MAT_STEEL = 500, MAT_GLASS = 500)
 
 /obj/item/clamp/afterattack(var/atom/A, mob/user, proximity)

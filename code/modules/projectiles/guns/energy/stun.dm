@@ -51,7 +51,7 @@
 	icon = 'icons/obj/guns/stunrevolver.dmi'
 	icon_state = "stunrevolver"
 	item_state = "stunrevolver"
-	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MATERIAL + "':3,'" + TECH_POWER + "':2}"
+	origin_tech = "{'combat':3,'materials':3,'powerstorage':2}"
 	projectile_type = /obj/item/projectile/energy/electrode
 	max_shots = 6
 	combustion = 0
@@ -66,7 +66,7 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	one_hand_penalty = 6
-	origin_tech = "{'" + TECH_COMBAT + "':4,'" + TECH_MATERIAL + "':3,'" + TECH_POWER + "':3}"
+	origin_tech = "{'combat':4,'materials':3,'powerstorage':3}"
 	force = 10
 	max_shots = 10
 	accuracy = 1
@@ -81,7 +81,7 @@
 	icon_state = "crossbow"
 	w_class = ITEM_SIZE_NORMAL
 	item_state = "crossbow"
-	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':2,'" + TECH_ESOTERIC + "':5}"
+	origin_tech = "{'combat':2,'magnets':2,'esoteric':5}"
 	matter = list(MAT_STEEL = 2000)
 	slot_flags = SLOT_BELT
 	silenced = 1
@@ -116,7 +116,7 @@
 	icon = 'icons/obj/guns/plasma_stun.dmi'
 	icon_state = "plasma_stun"
 	item_state = "plasma_stun"
-	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2,'" + TECH_POWER + "':3}"
+	origin_tech = "{'combat':2,'materials':2,'powerstorage':3}"
 	fire_delay = 20
 	max_shots = 4
 	projectile_type = /obj/item/projectile/energy/plasmastun
@@ -128,7 +128,7 @@
 	icon = 'icons/obj/guns/confuseray.dmi'
 	icon_state = "confuseray"
 	safety_icon = "safety"
-	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':2,'" + TECH_POWER + "':2}"
+	origin_tech = "{'combat':2,'materials':2,'powerstorage':2}"
 	w_class = ITEM_SIZE_SMALL
 	max_shots = 4
 	projectile_type = /obj/item/projectile/beam/confuseray

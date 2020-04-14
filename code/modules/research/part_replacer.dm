@@ -45,4 +45,4 @@
 	desc = "Instant research tool. For testing purposes only."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"
-	origin_tech = "{'" + TECH_MATERIAL + "':19,'" + TECH_ENGINEERING + "':19,'" + TECH_PHORON + "':19,'" + TECH_POWER + "':19,'" + TECH_BLUESPACE + "':19,'" + TECH_BIO + "':19,'" + TECH_COMBAT + "':19,'" + TECH_MAGNET + "':19,'" + TECH_DATA + "':19,'" + TECH_ESOTERIC + "':19}"
+	origin_tech = "{'materials':19,'engineering':19,'phorontech':19,'powerstorage':19,'bluespace':19,'biotech':19,'combat':19,'magnets':19,'programming':19,'esoteric':19}"

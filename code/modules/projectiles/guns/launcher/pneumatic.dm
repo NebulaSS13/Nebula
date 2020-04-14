@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/pneumatic.dmi'
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
-	origin_tech = "{'" + TECH_COMBAT + "':4,'" + TECH_MATERIAL + "':3}"
+	origin_tech = "{'combat':4,'materials':3}"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_HUGE
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE

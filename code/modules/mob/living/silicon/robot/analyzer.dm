@@ -13,7 +13,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
 	throw_range = 10
-	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_BIO + "':1,'" + TECH_ENGINEERING + "':2}"
+	origin_tech = "{'magnets':2,'biotech':1,'engineering':2}"
 	matter = list(MAT_STEEL = 500, MAT_GLASS = 200, MAT_PLASTIC = 150)
 	var/mode = 1;
 

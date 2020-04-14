@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/device/locator.dmi'
 	icon_state = "locator"
 	item_state = "locator"
-	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_DATA + "':2,'" + TECH_BLUESPACE + "':2}"
+	origin_tech = "{'materials':2,'programming':2,'bluespace':2}"
 	matter = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)
 	w_class = ITEM_SIZE_SMALL
 	matter = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)

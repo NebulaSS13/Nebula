@@ -4,7 +4,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "flashgun"
 	item_state = "lampgreen"
-	origin_tech = "{'" + TECH_BLUESPACE + "':3,'" + TECH_MAGNET + "':3}"
+	origin_tech = "{'bluespace':3,'magnets':3}"
 	matter = list(MAT_STEEL = 5000, MAT_ALUMINIUM = 5000, MAT_GLASS = 5000)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT

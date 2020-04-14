@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_TINY
 	max_amount = 50
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_BLUESPACE + "':4}"
+	origin_tech = "{'materials':6,'bluespace':4}"
 
 /obj/item/stack/telecrystal/afterattack(var/obj/item/I, mob/user, proximity)
 	if(!proximity)

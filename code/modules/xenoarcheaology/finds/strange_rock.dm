@@ -4,7 +4,7 @@
 	desc = "Seems to have some unusal strata evident throughout it."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "strange"
-	origin_tech = "{'" + TECH_MATERIAL + "':5}"
+	origin_tech = "{'materials':5}"
 	var/obj/item/inside
 
 /obj/item/ore/strangerock/Initialize(mapload, var/find_type = 0)

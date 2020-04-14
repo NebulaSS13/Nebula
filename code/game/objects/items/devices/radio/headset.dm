@@ -65,7 +65,7 @@
 	return -1
 
 /obj/item/radio/headset/syndicate
-	origin_tech = "{'" + TECH_ESOTERIC + "':3}"
+	origin_tech = "{'esoteric':3}"
 	syndie = 1
 	ks1type = /obj/item/encryptionkey/syndicate
 
@@ -78,7 +78,7 @@
 	set_frequency(SYND_FREQ)
 
 /obj/item/radio/headset/raider
-	origin_tech = "{'" + TECH_ESOTERIC + "':2}"
+	origin_tech = "{'esoteric':2}"
 	syndie = 1
 	ks1type = /obj/item/encryptionkey/raider
 
@@ -87,7 +87,7 @@
 	set_frequency(RAID_FREQ)
 
 /obj/item/radio/headset/binary
-	origin_tech = "{'" + TECH_ESOTERIC + "':3}"
+	origin_tech = "{'esoteric':3}"
 	ks1type = /obj/item/encryptionkey/binary
 
 /obj/item/radio/headset/headset_sec

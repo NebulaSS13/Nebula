@@ -187,7 +187,7 @@
 	desc = "An oversized grenade that affects a larger area."
 	icon_state = "large_grenade"
 	allowed_containers = list(/obj/item/chems/glass)
-	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MATERIAL + "':3}"
+	origin_tech = "{'combat':3,'materials':3}"
 	affected_area = 4
 	matter = list(MAT_STEEL = 3000)
 
