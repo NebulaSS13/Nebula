@@ -57,6 +57,9 @@
 		var/check_json = initial(test.center_of_mass)
 		if(!isnull(check_json))
 			LAZYSET(json_to_check, "[subtype].center_of_mass", check_json)
+		check_json = initial(test.origin_tech)
+		if(!isnull(check_json))
+			LAZYSET(json_to_check, "[subtype].origin_tech", check_json)
 	for(var/subtype in typesof(/obj/item/chems))
 		var/obj/item/chems/test = subtype
 		var/check_json = initial(test.possible_transfer_amounts)
@@ -80,7 +83,9 @@
 	// Validate JSON.
 	for(var/check_key in json_to_check)
 		try
-			to_chat(null, cached_json_decode(json_to_check[check_key])) // to_chat() so compiler doesn't complain about useless line
+			var/list/output = cached_json_decode(json_to_check[check_key])
+			if(!islist(output) || !length(output))
+				LAZYADD(failures, check_key)
 		catch()
 			LAZYADD(failures, check_key)
 	if(LAZYLEN(failures))

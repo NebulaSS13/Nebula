@@ -2973,7 +2973,7 @@
 	desc = "A small bread monkey fashioned from two burger buns."
 	icon_state = "bunbun"
 	bitesize = 2
-	center_of_mass = list("x"=16, "y"=8)
+	center_of_mass = @"{'x':16,'y':8}"
 	nutriment_desc = list("bun" = 8)
 	nutriment_amt = 8
 	nutriment_type = /datum/reagent/nutriment/bread
