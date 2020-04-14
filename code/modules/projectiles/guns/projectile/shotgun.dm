@@ -10,7 +10,7 @@
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	caliber = CALIBER_SHOTGUN
-	origin_tech = "{'" + TECH_COMBAT + "':4,'" + TECH_MATERIAL + "':2}"
+	//origin_tech = "{'" + TECH_COMBAT + "':4,'" + TECH_MATERIAL + "':2}"
 	load_method = SINGLE_CASING
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	handle_casings = HOLD_CASINGS

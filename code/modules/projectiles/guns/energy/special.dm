@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/ion_rifle.dmi'
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
-	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':4}"
+	//origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':4}"
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
@@ -156,7 +156,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
-	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_PHORON + "':4,'" + TECH_ENGINEERING + "':6,'" + TECH_COMBAT + "':3}"
+	//origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_PHORON + "':4,'" + TECH_ENGINEERING + "':6,'" + TECH_COMBAT + "':3}"
 	matter = list(MAT_STEEL = 4000)
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
