@@ -9,7 +9,7 @@
 	desc = "A complex device used to locate ore deep underground."
 	icon = 'icons/obj/items/device/scanner/ore_scanner.dmi'
 	icon_state = "ore"
-	origin_tech = "{'" + TECH_MAGNET + "':1,'" + TECH_ENGINEERING + "':1}"
+	origin_tech = "{'magnets':1,'engineering':1}"
 	use_delay = 50
 	printout_color = "#fff7f0"
 	var/survey_data = 0

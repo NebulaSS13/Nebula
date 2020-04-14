@@ -15,7 +15,7 @@
 
 /obj/item/organ/internal/stomach/Initialize()
 	. = ..()
-	ingested = new/datum/reagents/metabolism(240, owner, CHEM_INGEST)
+	ingested = new/datum/reagents/metabolism(240, (owner || src), CHEM_INGEST)
 	if(!ingested.my_atom)
 		ingested.my_atom = src
 	if(species.gluttonous)

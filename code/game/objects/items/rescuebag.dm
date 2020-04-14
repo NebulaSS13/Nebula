@@ -5,7 +5,7 @@
 	a hostile enviroment."
 	icon = 'icons/obj/closets/rescuebag.dmi'
 	icon_state = "folded"
-	origin_tech = "{'" + TECH_BIO + "':2}"
+	origin_tech = "{'biotech':2}"
 	var/obj/item/tank/airtank
 
 /obj/item/bodybag/rescue/loaded

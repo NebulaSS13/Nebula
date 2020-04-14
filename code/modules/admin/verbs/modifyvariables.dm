@@ -548,7 +548,7 @@
 		if("json")
 			var/json_str = input("JSON string", "JSON", json_encode(O.get_variable_value(variable))) as null | message
 			try
-				var_value = json_decode(json_str)
+				var_value = cached_json_decode(json_str)
 			catch
 				return
 

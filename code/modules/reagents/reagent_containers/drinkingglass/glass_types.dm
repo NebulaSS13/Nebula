@@ -40,7 +40,7 @@
 	filling_states = @"[33,66,100]"
 	volume = 15
 	possible_transfer_amounts = @"[5,10,15]"
-	rim_pos = @"{'y':22,'x_left':13,'x_right':21"
+	rim_pos = @"{'y':22,'x_left':13,'x_right':21}"
 
 /obj/item/chems/food/drinks/glass2/shot
 	name = "shot glass"

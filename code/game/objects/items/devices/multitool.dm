@@ -17,7 +17,7 @@
 
 	matter = list(MAT_PLASTIC = 50, MAT_GLASS = 20, MAT_STEEL = 5)
 
-	origin_tech = "{'" + TECH_MAGNET + "':1,'" + TECH_ENGINEERING + "':1}"
+	origin_tech = "{'magnets':1,'engineering':1}"
 
 	var/buffer_name
 	var/atom/buffer_object

@@ -8,7 +8,7 @@
 	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 
 	projectile_type = /obj/item/projectile/beam/stun
-	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MAGNET + "':2}"
+	origin_tech = "{'combat':3,'magnets':2}"
 	modifystate = "energystun"
 
 	firemodes = list(
@@ -44,7 +44,7 @@
 	desc = "An energy gun with an experimental miniaturized reactor."
 	icon = 'icons/obj/guns/adv_egun.dmi'
 	icon_state = "nucgun"
-	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MATERIAL + "':5,'" + TECH_POWER + "':3}"
+	origin_tech = "{'combat':3,'materials':5,'powerstorage':3}"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_LARGE
 	force = 8 //looks heavier than a pistol

@@ -4,7 +4,7 @@
 	desc = "A tube of paste containing swarms of repair nanites. Very effective in repairing robotic machinery."
 	icon = 'icons/obj/nanopaste.dmi'
 	icon_state = "tube"
-	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'materials':4,'engineering':3}"
 	amount = 10
 	matter = list(MAT_STEEL = 7000, MAT_GLASS = 7000)
 

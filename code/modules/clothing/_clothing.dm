@@ -166,7 +166,7 @@
 
 /obj/item/clothing/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)
 	if(href_list["list_ungabunga"])
-		if(accessories.len)
+		if(length(accessories))
 			var/list/ties = list()
 			for(var/accessory in accessories)
 				ties += "\icon[accessory] \a [accessory]"

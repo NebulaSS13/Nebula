@@ -32,7 +32,7 @@
 			to_chat(user, "<span class='warning'>You cannot attach more accessories of this type to [src].</span>")
 		return
 
-	if(accessories.len)
+	if(length(accessories))
 		for(var/obj/item/clothing/accessory/A in accessories)
 			A.attackby(I, user)
 		return
@@ -134,7 +134,7 @@
 		src.verbs -= /obj/item/clothing/proc/removetie_verb
 
 /obj/item/clothing/emp_act(severity)
-	if(accessories.len)
+	if(length(accessories))
 		for(var/obj/item/clothing/accessory/A in accessories)
 			A.emp_act(severity)
 	..()

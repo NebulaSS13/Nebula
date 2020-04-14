@@ -1,7 +1,7 @@
 /obj/item/clothing/glasses/hud
 	name = "HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
-	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_BIO + "':2}"
+	origin_tech = "{'magnets':3,'biotech':2}"
 	electric = 1
 	gender = NEUTER
 	matter = list(MAT_ALUMINIUM = 50, MAT_GLASS = 50)

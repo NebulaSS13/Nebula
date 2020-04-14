@@ -2,7 +2,7 @@
 	name = T_BOARD("R&D server")
 	build_path = /obj/machinery/r_n_d/server
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':3}"
+	origin_tech = "{'programming':3}"
 	req_components = list(
 							/obj/item/stack/cable_coil = 2,
 							/obj/item/stock_parts/scanning_module = 1)
@@ -14,7 +14,7 @@
 	name = T_BOARD("destructive analyzer")
 	build_path = /obj/machinery/r_n_d/destructive_analyzer
 	board_type = "machine"
-	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_ENGINEERING + "':2,'" + TECH_DATA + "':2}"
+	origin_tech = "{'magnets':2,'engineering':2,'programming':2}"
 	req_components = list(
 							/obj/item/stock_parts/scanning_module = 1,
 							/obj/item/stock_parts/manipulator = 1,
@@ -27,7 +27,7 @@
 	name = T_BOARD("autolathe")
 	build_path = /obj/machinery/fabricator
 	board_type = "machine"
-	origin_tech = "{'" + TECH_ENGINEERING + "':2,'" + TECH_DATA + "':2}"
+	origin_tech = "{'engineering':2,'programming':2}"
 	req_components = list(
 							/obj/item/stock_parts/matter_bin = 3,
 							/obj/item/stock_parts/manipulator = 1)
@@ -40,7 +40,7 @@
 /obj/item/stock_parts/circuitboard/autolathe/micro
 	name = T_BOARD("microlathe")
 	build_path = /obj/machinery/fabricator/micro
-	origin_tech = "{'" + TECH_ENGINEERING + "':1,'" + TECH_DATA + "':1}"
+	origin_tech = "{'engineering':1,'programming':1}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 1
@@ -48,7 +48,7 @@
 /obj/item/stock_parts/circuitboard/autolathe/book
 	name = T_BOARD("autobinder")
 	build_path = /obj/machinery/fabricator/book
-	origin_tech = "{'" + TECH_ENGINEERING + "':1,'" + TECH_DATA + "':1}"
+	origin_tech = "{'engineering':1,'programming':1}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 1
@@ -57,7 +57,7 @@
 	name = T_BOARD("replicator")
 	build_path = /obj/machinery/fabricator/replicator
 	board_type = "machine"
-	origin_tech = "{'" + TECH_ENGINEERING + "':3,'" + TECH_DATA + "':2,'" + TECH_BIO + "':2}"
+	origin_tech = "{'engineering':3,'programming':2,'biotech':2}"
 	req_components = list(
 							/obj/item/stock_parts/matter_bin = 3,
 							/obj/item/stock_parts/manipulator = 1)
@@ -71,7 +71,7 @@
 	name = T_BOARD("protolathe")
 	build_path = /obj/machinery/r_n_d/protolathe
 	board_type = "machine"
-	origin_tech = "{'" + TECH_ENGINEERING + "':2,'" + TECH_DATA + "':2}"
+	origin_tech = "{'engineering':2,'programming':2}"
 	req_components = list(
 							/obj/item/stock_parts/matter_bin = 2,
 							/obj/item/stock_parts/manipulator = 2,
@@ -84,7 +84,7 @@
 	name = T_BOARD("circuit imprinter")
 	build_path = /obj/machinery/r_n_d/circuit_imprinter
 	board_type = "machine"
-	origin_tech = "{'" + TECH_ENGINEERING + "':2,'" + TECH_DATA + "':2}"
+	origin_tech = "{'engineering':2,'programming':2}"
 	req_components = list(
 							/obj/item/stock_parts/matter_bin = 1,
 							/obj/item/stock_parts/manipulator = 1,
@@ -97,7 +97,7 @@
 	name = "Circuit board (Exosuit Fabricator)"
 	build_path = /obj/machinery/robotics_fabricator
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'programming':3,'engineering':3}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/manipulator = 1,
@@ -112,7 +112,7 @@
 	name = "Circuit board (NTNet Quantum Relay)"
 	build_path = /obj/machinery/ntnet_relay
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':4}"
+	origin_tech = "{'programming':4}"
 	req_components = list(/obj/item/stack/cable_coil = 15)
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
@@ -125,7 +125,7 @@
 	name = T_BOARD("suspension generator")
 	build_path = /obj/machinery/suspension_gen
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':3,'" + TECH_MAGNET + "':4}"
+	origin_tech = "{'programming':4,'engineering':3,'magnets':4}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/manipulator = 1,
@@ -142,7 +142,7 @@
 	name = T_BOARD("artifact harvester")
 	build_path = /obj/machinery/artifact_harvester
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'programming':4,'engineering':3}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/manipulator = 1,
@@ -157,7 +157,7 @@
 	name = T_BOARD("artifact analyser")
 	build_path = /obj/machinery/artifact_analyser
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'programming':4,'engineering':3}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/micro_laser = 2)
@@ -171,7 +171,7 @@
 	name = T_BOARD("artifact scanpad")
 	build_path = /obj/machinery/artifact_scanpad
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':2,'" + TECH_ENGINEERING + "':2,'" + TECH_MAGNET + "':2}"
+	origin_tech = "{'programming':2,'engineering':2,'magnets':2}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 1)
@@ -183,7 +183,7 @@
 	name = T_BOARD("cryo pod")
 	build_path = /obj/machinery/cryopod
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':6,'" + TECH_ENGINEERING + "':6,'" + TECH_BLUESPACE + "':6}"
+	origin_tech = "{'programming':6,'engineering':6,'bluespace':6}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 4,
 		/obj/item/stock_parts/manipulator = 1,
@@ -203,7 +203,7 @@
 	name = T_BOARD("merchant pad")
 	build_path = /obj/machinery/merchant_pad
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':6,'" + TECH_BLUESPACE + "':6,'" + TECH_ESOTERIC + "':1}"
+	origin_tech = "{'programming':6,'bluespace':6,'esoteric':1}"
 	req_components = list(/obj/item/stack/cable_coil = 15)
 	req_components = list(
 		/obj/item/stock_parts/subspace/amplifier = 1,

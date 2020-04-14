@@ -10,4 +10,4 @@ obj/item/nuclear_cylinder
 	throwforce = 15.0
 	throw_speed = 2
 	throw_range = 4
-	origin_tech = "{'" + TECH_MATERIAL + "':3,'" + TECH_ENGINEERING + "':4}"
+	origin_tech = "{'materials':3,'engineering':4}"

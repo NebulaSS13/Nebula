@@ -1,7 +1,7 @@
 /obj/item/implant/adrenalin
 	name = "adrenalin implant"
 	desc = "Removes all stuns and knockdowns."
-	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_BIO + "':2,'" + TECH_ESOTERIC + "':2}"
+	origin_tech = "{'materials':1,'biotech':2,'esoteric':2}"
 	hidden = 1
 	var/uses
 

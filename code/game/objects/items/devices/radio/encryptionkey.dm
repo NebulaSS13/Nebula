@@ -19,19 +19,19 @@
 /obj/item/encryptionkey/syndicate
 	icon_state = "cypherkey"
 	channels = list("Mercenary" = 1)
-	origin_tech = "{'" + TECH_ESOTERIC + "':3}"
+	origin_tech = "{'esoteric':3}"
 	syndie = 1//Signifies that it de-crypts Syndicate transmissions
 
 /obj/item/encryptionkey/raider
 	icon_state = "cypherkey"
 	channels = list("Raider" = 1)
-	origin_tech = "{'" + TECH_ESOTERIC + "':2}"
+	origin_tech = "{'esoteric':2}"
 	syndie = 1
 
 /obj/item/encryptionkey/binary
 	icon_state = "cypherkey"
 	translate_binary = 1
-	origin_tech = "{'" + TECH_ESOTERIC + "':3}"
+	origin_tech = "{'esoteric':3}"
 
 /obj/item/encryptionkey/headset_sec
 	name = "security radio encryption key"
@@ -122,7 +122,7 @@
 	name = "special operations radio encryption key"
 	icon_state = "bin_cypherkey"
 	channels = list("Special Ops" = 1)
-	origin_tech = "{'" + TECH_ESOTERIC + "':2}"
+	origin_tech = "{'esoteric':2}"
 
 /obj/item/encryptionkey/entertainment
 	name = "entertainment radio key"

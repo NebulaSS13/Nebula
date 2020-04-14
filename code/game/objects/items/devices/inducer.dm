@@ -5,7 +5,7 @@
 	icon_state = "inducer-sci"
 	item_state = "inducer-sci"
 	force = 7
-	origin_tech = "{'" + TECH_POWER + "':6,'" + TECH_ENGINEERING + "':4}"
+	origin_tech = "{'powerstorage':6,'engineering':4}"
 	matter = list(MAT_STEEL = 2000, MAT_GLASS = 100)
 	slot_flags = SLOT_BELT
 

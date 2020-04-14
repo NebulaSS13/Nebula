@@ -5,7 +5,7 @@
 	item_state = "brown"
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP
-	origin_tech = "{'" + TECH_ESOTERIC + "':3}"
+	origin_tech = "{'esoteric':3}"
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
 	bodytype_restricted = null

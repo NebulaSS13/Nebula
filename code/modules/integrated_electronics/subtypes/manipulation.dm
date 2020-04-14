@@ -555,7 +555,7 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
 
-	origin_tech = "{'" + TECH_MAGNET + "':1,'" + TECH_BLUESPACE + "':3}"
+	origin_tech = "{'magnets':1,'bluespace':3}"
 	matter = list(MAT_STEEL = 10000, MAT_SILVER = 2000, MAT_GOLD = 200)
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
@@ -599,7 +599,7 @@
 	power_draw_per_use = 20
 	var/obj/item/aicard
 	activators = list("Upwards" = IC_PINTYPE_PULSE_OUT, "Downwards" = IC_PINTYPE_PULSE_OUT, "Left" = IC_PINTYPE_PULSE_OUT, "Right" = IC_PINTYPE_PULSE_OUT)
-	origin_tech = "{'" + TECH_DATA + "':4}"
+	origin_tech = "{'programming':4}"
 	spawn_flags = IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/manipulation/ai/verb/open_menu()
@@ -674,7 +674,7 @@
 	cooldown_per_use = 2 SECOND
 	power_draw_per_use = 50
 	spawn_flags = IC_SPAWN_DEFAULT
-	origin_tech = "{'" + TECH_ENGINEERING + "':2}"
+	origin_tech = "{'engineering':2}"
 
 /obj/item/integrated_circuit/manipulation/anchoring/do_work(ord)
 	if(!isturf(assembly.loc))
@@ -717,7 +717,7 @@
 	cooldown_per_use = 2 SECOND
 	power_draw_per_use = 50
 	spawn_flags = IC_SPAWN_DEFAULT
-	origin_tech = "{'" + TECH_ENGINEERING + "':2}"
+	origin_tech = "{'engineering':2}"
 
 	var/lock_enabled = FALSE
 

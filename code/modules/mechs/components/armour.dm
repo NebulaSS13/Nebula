@@ -8,7 +8,7 @@
 		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_SHIELDED
 		)
-	origin_tech = "{'" + TECH_MATERIAL + "':1}"
+	origin_tech = "{'materials':1}"
 	matter = list(MAT_STEEL = 7500)
 
 /obj/item/robot_parts/robot_component/armour/exosuit/radproof
@@ -23,7 +23,7 @@
 		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_SHIELDED
 		)
-	origin_tech = "{'" + TECH_MATERIAL + "':3}"
+	origin_tech = "{'materials':3}"
 	matter = list(MAT_STEEL = 12500)
 
 /obj/item/robot_parts/robot_component/armour/exosuit/em
@@ -38,7 +38,7 @@
 		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_SMALL
 		)
-	origin_tech = "{'" + TECH_MATERIAL + "':3}"
+	origin_tech = "{'materials':3}"
 	matter = list(MAT_STEEL = 12500, MAT_SILVER = 1000)
 
 /obj/item/robot_parts/robot_component/armour/exosuit/combat
@@ -52,7 +52,7 @@
 		bomb = ARMOR_BOMB_RESISTANT, 
 		bio = ARMOR_BIO_SHIELDED
 		)
-	origin_tech = "{'" + TECH_MATERIAL + "':5}"
+	origin_tech = "{'materials':5}"
 	matter = list(MAT_STEEL = 20000, MAT_DIAMOND = 5000)
 
 /obj/item/robot_parts/robot_component/armour/exosuit/Initialize()

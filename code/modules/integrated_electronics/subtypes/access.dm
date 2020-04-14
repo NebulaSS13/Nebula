@@ -67,7 +67,7 @@
 		return FALSE
 	
 	if(length(result) > 1)
-		result = json_decode(result)
+		result = cached_json_decode(result)
 	else
 		result = list(result)
 	access = result

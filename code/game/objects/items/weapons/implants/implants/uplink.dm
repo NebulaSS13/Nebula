@@ -1,7 +1,7 @@
 /obj/item/implant/uplink
 	name = "uplink implant"
 	desc = "Summon things."
-	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_BIO + "':2,'" + TECH_ESOTERIC + "':3}"
+	origin_tech = "{'materials':1,'biotech':2,'esoteric':3}"
 	hidden = 1
 	var/activation_emote
 

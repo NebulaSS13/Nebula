@@ -9,7 +9,7 @@
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	matter = list(MAT_STEEL = 12000)
-	origin_tech = "{'" + TECH_MATERIAL + "':1}"
+	origin_tech = "{'materials':1}"
 	unbreakable = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	sharp = TRUE

@@ -121,7 +121,7 @@
 	desc = "A translucent toolbox made out of an odd crystalline material that is surprisingly light."
 	icon_state = "crystal"
 	item_state = "toolbox_crystal"
-	origin_tech = "{'" + TECH_COMBAT + "':1,'" + TECH_MATERIAL + "':3}"
+	origin_tech = "{'combat':1,'materials':3}"
 	attack_cooldown = 15
 
 /obj/item/storage/toolbox/crystal/Initialize()

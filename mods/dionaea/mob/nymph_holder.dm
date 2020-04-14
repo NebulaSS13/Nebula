@@ -1,5 +1,5 @@
 /obj/item/holder/diona
-	origin_tech = "{'" + TECH_MAGNET + "':3,'" + TECH_BIO + "':5}"
+	origin_tech = "{'magnets':3,'biotech':5}"
 	slot_flags = SLOT_HEAD | SLOT_OCLOTHING | SLOT_HOLSTER
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT, 

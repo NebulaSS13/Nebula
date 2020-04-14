@@ -43,7 +43,7 @@
 	interface_desc = "A socket that supports a range of artificial intelligence systems."
 
 	matter = list(MAT_STEEL = 1000, MAT_GLASS = 1000, MAT_PLASTIC = 1000, MAT_GOLD = 500)
-	origin_tech = "{'" + TECH_DATA + "':6,'" + TECH_MATERIAL + "':5,'" + TECH_ENGINEERING + "':6}"
+	origin_tech = "{'programming':6,'materials':5,'engineering':6}"
 
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, inteliCard or pAI card previously holding the AI.
@@ -243,10 +243,6 @@
 	interface_desc = "An induction-powered high-throughput datalink suitable for hacking encrypted networks."
 	var/list/stored_research
 
-/obj/item/rig_module/datajack/Initialize()
-	. =..()
-	stored_research = list()
-
 /obj/item/rig_module/datajack/engage(atom/target)
 
 	if(!..())
@@ -311,7 +307,7 @@
 					current_data.level = new_data.level
 				break
 		if(!data_found)
-			stored_research += incoming_data
+			LAZYADD(stored_research, incoming_data)
 		return 1
 	return 0
 
@@ -362,7 +358,7 @@
 	interface_name = "niling d-sink"
 	interface_desc = "Colloquially known as a power siphon, this module drains power through the suit hands into the suit battery."
 
-	origin_tech = "{'" + TECH_POWER + "':6,'" + TECH_ENGINEERING + "':6}"
+	origin_tech = "{'powerstorage':6,'engineering':6}"
 	matter = list(MAT_STEEL = 2000, MAT_GLASS = 2000, MAT_GOLD = 1000, MAT_PLASTIC = 1000)
 
 	var/atom/interfaced_with // Currently draining power from this device.

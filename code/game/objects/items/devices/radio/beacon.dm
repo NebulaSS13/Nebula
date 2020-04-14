@@ -3,7 +3,7 @@
 	desc = "A beacon used by a teleporter."
 	icon_state = "beacon"
 	item_state = "signaler"
-	origin_tech = "{'" + TECH_BLUESPACE + "':1}"
+	origin_tech = "{'bluespace':1}"
 	matter = list (MAT_ALUMINIUM = 20, MAT_GLASS = 10)
 
 	var/code = "electronic"

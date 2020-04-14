@@ -87,7 +87,7 @@
 /obj/item/ammo_magazine/pistol
 	name = "pistol magazine"
 	icon_state = "pistol"
-	origin_tech = "{'" + TECH_COMBAT + "':2}"
+	origin_tech = "{'combat':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
 	matter = list(MAT_STEEL = 750)
@@ -115,7 +115,7 @@
 /obj/item/ammo_magazine/box/smallpistol
 	name = "ammunition box"
 	icon_state = "smallpistol"
-	origin_tech = "{'" + TECH_COMBAT + "':2}"
+	origin_tech = "{'combat':2}"
 	matter = list(MAT_STEEL = 1800)
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
@@ -124,7 +124,7 @@
 /obj/item/ammo_magazine/box/pistol
 	name = "ammunition box"
 	icon_state = "smallpistol"
-	origin_tech = "{'" + TECH_COMBAT + "':2}"
+	origin_tech = "{'combat':2}"
 	caliber = CALIBER_PISTOL
 	matter = list(MAT_STEEL = 2250)
 	ammo_type = /obj/item/ammo_casing/pistol
@@ -152,7 +152,7 @@
 /obj/item/ammo_magazine/rifle
 	name = "assault rifle magazine"
 	icon_state = "bullup"
-	origin_tech = "{'" + TECH_COMBAT + "':2}"
+	origin_tech = "{'combat':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE
 	matter = list(MAT_STEEL = 1800)

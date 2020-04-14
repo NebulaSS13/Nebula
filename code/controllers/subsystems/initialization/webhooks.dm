@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(webhooks)
 	webhook_decls.Cut()
 	var/webhook_config = return_file_text("config/webhooks.json")
 	if(webhook_config)
-		for(var/webhook_data in json_decode(webhook_config))
+		for(var/webhook_data in cached_json_decode(webhook_config))
 			var/wid = webhook_data["id"]
 			var/wurl = webhook_data["url"]
 			var/wmention = webhook_data["mentions"]

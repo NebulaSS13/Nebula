@@ -7,7 +7,7 @@
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
-	stack_origin_tech = "{'" + TECH_MATERIAL + "':5}"
+	stack_origin_tech = "{'materials':5}"
 	xarch_source_mineral = /datum/reagent/phosphorus
 	ore_icon_overlay = "nugget"
 	chem_products = list(
@@ -220,7 +220,7 @@
 	icon_colour = "#e37108"
 	shard_type = SHARD_SHARD
 	hardness = MAT_VALUE_RIGID
-	stack_origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_PHORON + "':2}"
+	stack_origin_tech = "{'materials':2,'phorontech':2}"
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
@@ -257,7 +257,7 @@
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
 	radioactivity = 20
-	stack_origin_tech = "{'" + TECH_BLUESPACE + "':2,'" + TECH_MATERIAL + "':6,'" + TECH_PHORON + "':4}"
+	stack_origin_tech = "{'bluespace':2,'materials':6,'phorontech':4}"
 	stack_type = null
 	luminescence = 3
 	ore_compresses_to = null
