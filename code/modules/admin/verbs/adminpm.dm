@@ -139,6 +139,7 @@
 		receiver_message += ": <span class='message'>[msg]</span>"
 	receiver_message += "</span></span>"
 	to_chat(C, receiver_message)
+	window_flash(C)
 
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
