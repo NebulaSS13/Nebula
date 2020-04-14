@@ -39,10 +39,10 @@
 			M.start = life_tick
 			return
 
-	var/list/L = subtypesof(/datum/medical_effect)
-	for(var/T in L)
-		var/datum/medical_effect/M = new T
-		if(M.name == name)
+	for(var/T in subtypesof(/datum/medical_effect))
+		var/datum/medical_effect/M = T
+		if(initial(M.name) == name)
+			M = new T
 			M.strength = strength
 			M.start = life_tick
 			side_effects += M
@@ -58,6 +58,8 @@
 		var/datum/medical_effect/M = new T
 		if (M.manifest(src))
 			src.add_side_effect(M.name)
+		else
+			qdel(M)
 
 	// One full cycle(in terms of strength) every 10 minutes
 	for (var/datum/medical_effect/M in side_effects)
@@ -88,14 +90,14 @@
 	if(head)
 		switch(strength)
 			if(1 to 10)
-				H.custom_pain("You feel a light pain in your head.", 5, affecting = head)
+				H.custom_pain("You feel a light pain in your [head.name].", 5, affecting = head)
 			if(11 to 30)
-				H.custom_pain("You feel a throbbing pain in your head!", 15, affecting = head)
+				H.custom_pain("You feel a throbbing pain in your [head.name]!", 15, affecting = head)
 				H.eye_blurry += rand(3,6)
 				H.stamina -= rand(10,20)
 				shake_camera(H, 7, 0.5)
 			if(31 to INFINITY)
-				H.custom_pain("You feel an excrutiating pain in your head!", 40, affecting = head)
+				H.custom_pain("You feel an excrutiating pain in your [head.name]!", 40, affecting = head)
 				H.eye_blurry += rand(10,20)
 				H.stamina -= rand(20,35)
 				shake_camera(H, 7, 1)
@@ -109,15 +111,15 @@
 	cure_message = "Your stomach feels a little better now..."
 
 /datum/medical_effect/bad_stomach/on_life(mob/living/carbon/human/H, strength)
-	var/obj/item/organ/external/head/groin = H.get_organ(BP_GROIN) //INF
-	if(groin)
+	var/obj/item/organ/internal/stomach/stomach = H.get_organ(BP_STOMACH) //INF
+	if(stomach)
 		switch(strength)
 			if(1 to 10)
-				H.custom_pain("You feel a bit light around the stomach.", 10, affecting = groin)
+				H.custom_pain("You feel a bit light around \the [stomach.name].", 10, affecting = stomach)
 			if(11 to 30)
-				H.custom_pain("Your stomach hurts.", 20, affecting = groin)
+				H.custom_pain("Your [stomach.name] hurts.", 20, affecting = stomach)
 			if(31 to INFINITY)
-				H.custom_pain("You feel sick.", 30, affecting = groin)
+				H.custom_pain("You feel sick.", 30, affecting = stomach)
 
 // CRAMPS
 // ======
