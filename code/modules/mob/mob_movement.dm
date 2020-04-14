@@ -140,7 +140,7 @@
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
 	
-	if (!inertia_moving && !(direct & (UP|DOWN)))
+	if(!inertia_moving)
 		inertia_next_move = world.time + inertia_move_delay
 		space_drift(direct)
 
@@ -172,13 +172,14 @@
 
 	for(var/thing in trange(1,src))//checks for walls or grav turf first
 		var/turf/T = thing
-		if(T.density || T.is_wall() || (T.is_floor() && (shoegrip || has_gravity(src))))
+		if(T.density || T.is_wall() || (T.is_floor() && (shoegrip || has_gravity(T))))
 			return T
 
+	var/obj/item/grab/G = locate() in src
 	for(var/A in orange(1, get_turf(src)))
 		if(istype(A,/atom/movable))
 			var/atom/movable/AM = A
-			if(AM == buckled)
+			if(AM == inertia_ignore || !AM.simulated || !AM.mouse_opacity || AM == buckled)	//mouse_opacity is hacky as hell, need better solution
 				continue
 			if(ismob(AM))
 				var/mob/M = AM
@@ -187,10 +188,8 @@
 			if(AM.density || !AM.CanPass(src))
 				if(AM.anchored)
 					return AM
-				if(AM == inertia_ignore)
+				if(G && AM == G.affecting)
 					continue
-				//if(pulling == AM) solve this
-				//	continue
 				. = AM
 
 //Checks if a mob has solid ground to stand on
@@ -234,7 +233,7 @@
 /mob/proc/handle_spaceslipping()
 	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERT)))
 		to_chat(src, "<span class='warning'>You slipped!</span>")
-		step(turn(last_move, pick(45,-45)))
+		step(src,turn(last_move, pick(45,-45)))
 		return 1
 	return 0
 
