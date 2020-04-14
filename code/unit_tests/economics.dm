@@ -3,7 +3,7 @@
 
 /datum/unit_test/currency_validation/start_test()
 	var/list/failures = list()
-	var/list/currencies = decls_repository.get_decls_of_type(/decl/currency)
+	var/list/currencies = decls_repository.get_decls_of_subtype(/decl/currency)
 	for(var/cid in currencies)
 
 		var/decl/currency/currency = currencies[cid]
@@ -39,7 +39,7 @@
 				failures |= cid
 
 	if(length(failures))
-		log_bad("[failures] currency types failed validation.")
+		fail("[length(failures)] currency type\s failed validation.")
 	else
 		pass("All currency types were validated successfully.")
 	return 1
