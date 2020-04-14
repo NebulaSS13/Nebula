@@ -599,3 +599,6 @@
 			var/picked = pick(targets)
 			afterattack(picked, user)
 			return 1
+
+/obj/item/gun/proc/gun_name()
+	return name

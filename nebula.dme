@@ -1680,6 +1680,7 @@
 #include "code\modules\detectivework\tools\sample_kits\fingerprinting.dm"
 #include "code\modules\detectivework\tools\sample_kits\swabs.dm"
 #include "code\modules\economy\_worth.dm"
+#include "code\modules\economy\worth_ammo.dm"
 #include "code\modules\economy\worth_cash.dm"
 #include "code\modules\economy\worth_clothing.dm"
 #include "code\modules\economy\worth_currency.dm"

@@ -33,11 +33,6 @@ SUBSYSTEM_DEF(fabrication)
 	var/const/base_armour_worth =                          50
 	var/const/item_flag_value =                            15
 	var/const/flash_protection_value =                     25
-	// Projectile values.
-	var/const/distance_falloff_base_value =                5
-	var/const/projectile_status_multiplier =               0.2
-	var/const/projectile_penetration_modifier_multiplier = 0.1
-	var/const/projectile_penetration_multiplier =          0.2
 	// Misc other values.
 	var/const/data_value_modifier =                        5
 

@@ -191,3 +191,6 @@
 
 /obj/item/charge_card/get_single_monetary_worth()
 	. = holographic ? 0 : loaded_worth
+
+/obj/item/coin/get_single_monetary_worth()
+	. = max(..(), holographic ? 0 : absolute_worth)
