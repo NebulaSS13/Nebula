@@ -45,7 +45,7 @@ Thus, the two variables affect pump operation are set in New():
 	)
 	public_methods = list(
 		/decl/public_access/public_method/toggle_power,
-		/decl/public_access/public_method/refresh
+		/decl/public_access/public_method/toggle_input_toggle
 	)
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/pump = 1,
@@ -212,7 +212,7 @@ Thus, the two variables affect pump operation are set in New():
 	frequency = PUMP_FREQ
 	receive_and_call = list(
 		"power_toggle" = /decl/public_access/public_method/toggle_power,
-		"status" = /decl/public_access/public_method/refresh
+		"status" = /decl/public_access/public_method/toggle_input_toggle
 	)
 	receive_and_write = list(
 		"set_power" = /decl/public_access/public_variable/use_power,

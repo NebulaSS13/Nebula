@@ -26,9 +26,9 @@
 	receive_and_call = list(
 		"toggle_door" = /decl/public_access/public_method/toggle_door,
 		"toggle_bolts" = /decl/public_access/public_method/airlock_toggle_bolts,
+		"unlock" = /decl/public_access/public_method/airlock_unlock,
 		"open" = /decl/public_access/public_method/open_door,
 		"close" = /decl/public_access/public_method/close_door,
-		"unlock" = /decl/public_access/public_method/airlock_unlock,
 		"lock" = /decl/public_access/public_method/airlock_lock,
 		"status" = /decl/public_access/public_method/toggle_input_toggle
 	)
@@ -133,7 +133,7 @@
 
 		if(abs(pressure - new_pressure) > 0.001 || pressure == null)
 			var/decl/public_access/public_variable/airlock_pressure/pressure_var = decls_repository.get_decl(/decl/public_access/public_variable/airlock_pressure)
-			pressure_var.write_var(src, pressure)
+			pressure_var.write_var(src, new_pressure)
 
 			var/new_alert = (pressure < ONE_ATMOSPHERE*0.8)
 			if(new_alert != alert)

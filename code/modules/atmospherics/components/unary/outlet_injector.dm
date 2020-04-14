@@ -39,7 +39,7 @@
 	public_methods = list(
 		/decl/public_access/public_method/toggle_power,
 		/decl/public_access/public_method/inject,
-		/decl/public_access/public_method/refresh
+		/decl/public_access/public_method/toggle_input_toggle
 	)
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/outlet_injector = 1,
@@ -187,7 +187,7 @@
 		"power_toggle" = /decl/public_access/public_method/toggle_power,
 		"valve_toggle" = /decl/public_access/public_method/toggle_power,
 		"inject" = /decl/public_access/public_method/inject,
-		"status" = /decl/public_access/public_method/refresh
+		"status" = /decl/public_access/public_method/toggle_input_toggle
 	) // power_toggle and valve_toggle are used by different senders
 	receive_and_write = list(
 		"set_power" = /decl/public_access/public_variable/use_power,

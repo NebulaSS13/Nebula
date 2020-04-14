@@ -91,6 +91,7 @@ var/list/airlock_overlays = list()
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/radio/transmitter/on_event,
 		/obj/item/stock_parts/power/apc
 	)
 

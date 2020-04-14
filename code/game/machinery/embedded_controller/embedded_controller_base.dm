@@ -130,9 +130,10 @@ obj/machinery/embedded_controller/radio/Destroy()
 		for(var/tag in tags)
 			. += "<tr>"
 			. += "<td>[tags[tag]]</td>"
-			. += "<td>tag</td>"
+			. += "<td>[tag]</td>"
 			. += "</tr>"
 		. += "</table>"
+	. = JOINTEXT(.)
 
 /datum/extension/interactive/multitool/embedded_controller/on_topic(href, href_list, user)
 	var/obj/machinery/embedded_controller/radio/controller = holder

@@ -588,7 +588,6 @@
 /area/lost_supply_base)
 "br" = (
 /obj/machinery/door/airlock/external{
-	glass = 1380;
 	icon_state = "door_locked";
 	id_tag = "centcom_shuttle_bay_door";
 	locked = 1;
