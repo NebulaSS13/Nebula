@@ -33,7 +33,7 @@
 	return
 
 /obj/item/proc/experimental_mob_overlay(var/mob/user_mob, var/slot)
-	var/bodytype = lowertext(user_mob.get_bodytype()) || "human"
+	var/bodytype = lowertext(user_mob?.get_bodytype()) || BODYTYPE_HUMANOID
 	var/image/I = image(get_icon_for_bodytype(bodytype), "[bodytype]-[slot]")
 	I.color = color
 	. = apply_offsets(user_mob, I, slot)
@@ -50,9 +50,3 @@
 
 /obj/item/proc/apply_offsets(var/mob/user_mob, var/image/overlay, var/slot)
 	. = overlay
-
-// EXPERIMENTAL MAGIC HAT
-//	/obj/item/testhat
-//		name = "test hat"
-//		slot_flags = SLOT_FEET | SLOT_HEAD | SLOT_GLOVES
-//		on_mob_icon = 'icons/clothing/head/testhat.dmi'
