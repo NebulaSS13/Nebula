@@ -164,11 +164,15 @@ var/list/escape_pods_by_name = list()
 /datum/computer/file/embedded_program/docking/simple/escape_pod
 	var/tag_pump
 
-/datum/computer/file/embedded_program/docking/simple/escape_pod/New(var/obj/machinery/embedded_controller/M)
-	..(M)
-	if (istype(M, /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod))
-		var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller = M
-		tag_pump = controller.tag_pump ? controller.tag_pump : "[id_tag]_pump"
+/datum/computer/file/embedded_program/docking/simple/escape_pod/reset_id_tags(base_tag)
+	. = ..()
+	if (istype(master, /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod))
+		var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller = master
+		tag_pump = (!base_tag && controller.tag_pump) || "[id_tag]_pump"
+
+/datum/computer/file/embedded_program/docking/simple/escape_pod/get_receive_filters()
+	. = ..()
+	.[tag_pump] = "main pumps"
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/finish_undocking()
 	. = ..()

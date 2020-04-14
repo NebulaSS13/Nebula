@@ -31,16 +31,19 @@
 	..(M)
 	memory["door_status"] = list(state = "closed", lock = "locked")		//assume closed and locked in case the doors dont report in
 
-	if (istype(M, /obj/machinery/embedded_controller/radio/simple_docking_controller))
-		var/obj/machinery/embedded_controller/radio/simple_docking_controller/controller = M
+/datum/computer/file/embedded_program/docking/simple/reset_id_tags(base_tag)
+	. = ..()
+	if (istype(master, /obj/machinery/embedded_controller/radio/simple_docking_controller))
+		var/obj/machinery/embedded_controller/radio/simple_docking_controller/controller = master
 
-		tag_door = controller.tag_door? controller.tag_door : "[id_tag]_hatch"
+		tag_door = (!base_tag && controller.tag_door) || "[id_tag]_hatch"
 
 		spawn(10)
 			signalDoor()		//signals connected doors to update their status
 
 /datum/computer/file/embedded_program/docking/simple/get_receive_filters()
-	return ..() + tag_door
+	. = ..()
+	.[tag_door] = "doors"
 
 /datum/computer/file/embedded_program/docking/simple/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]

@@ -219,7 +219,6 @@
 /area/lost_supply_base/solar)
 "az" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "solar_starboard_airlock";
 	pixel_x = 24;
 	req_access = newlist();
@@ -740,7 +739,6 @@
 /area/lost_supply_base/office)
 "bJ" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "solar_starboard_airlock";
 	pixel_x = 24;
 	req_access = newlist();
@@ -2133,7 +2131,6 @@
 	icon_state = "intact"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "solar_starboard_airlock";
 	pixel_x = 24;
 	req_access = newlist();

@@ -2011,7 +2011,6 @@
 	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "ZHPsec_access_airlock";
 	pixel_x = 0;
 	pixel_y = 0;
@@ -2754,7 +2753,6 @@
 	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "ZHPvirology_access_airlock";
 	pixel_x = 0;
 	pixel_y = 25;
@@ -3636,7 +3634,6 @@
 "iB" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "ZHPCells_airlock";
 	pixel_x = 0;
 	pixel_y = 0;

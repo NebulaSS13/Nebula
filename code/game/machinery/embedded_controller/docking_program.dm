@@ -62,8 +62,11 @@
 	var/docking_codes			//would only allow docking when receiving signal with these, if set
 	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 
-/datum/computer/file/embedded_program/docking/New(var/obj/machinery/embedded_controller/M)
-	..()
+/datum/computer/file/embedded_program/docking/reset_id_tags(base_tag)
+	if(SSshuttle.docking_registry[base_tag])
+		return SPAN_WARNING("The tag [base_tag] is already registered and cannot be used.")
+	SSshuttle.docking_registry -= id_tag
+	. = ..()
 	if(id_tag)
 		if(SSshuttle.docking_registry[id_tag])
 			crash_with("Docking controller tag [id_tag] had multiple associated programs.")
@@ -88,7 +91,7 @@
 		return TRUE
 
 /datum/computer/file/embedded_program/docking/get_receive_filters()
-	return list(id_tag)
+	return list("[id_tag]" = "primary controller")
 
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id

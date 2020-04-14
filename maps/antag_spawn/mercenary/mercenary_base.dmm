@@ -1038,7 +1038,6 @@
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
 	dir = 1;
-	frequency = 1380;
 	id_tag = "merc_shuttle";
 	pixel_x = 0;
 	pixel_y = -25;

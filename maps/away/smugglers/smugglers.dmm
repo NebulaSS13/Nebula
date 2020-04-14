@@ -108,7 +108,6 @@
 "av" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "asteroid_base_dock_airlock";
 	name = "Dock Airlock Controller";
 	pixel_x = -25;
@@ -253,7 +252,6 @@
 /area/smugglers/base)
 "aH" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "asteroid_base_east_airlock";
 	pixel_y = 25;
 	tag_airpump = "asteroid_base_east_pump";

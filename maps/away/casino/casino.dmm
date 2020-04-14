@@ -350,7 +350,6 @@
 /area/space)
 "bc" = (
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1380;
 	id_tag = "casino_dock_airlock";
 	pixel_x = -24;
 	pixel_y = 6;
@@ -1329,7 +1328,6 @@
 /obj/machinery/door/window,
 /obj/item/key,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1380;
 	pixel_y = 25
 	},
 /turf/simulated/floor/shuttle/yellow,
@@ -2503,7 +2501,6 @@
 /area/casino/casino_solar_control)
 "gz" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "casino_solar_airlock";
 	pixel_x = 24;
 	req_access = newlist();
@@ -5053,7 +5050,6 @@
 	pixel_y = 0
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
-	frequency = 1380;
 	id_tag = "Casino_escape_pod_3";
 	name = "Casino escape pod Three controller";
 	pixel_x = 24;
@@ -5069,7 +5065,6 @@
 	pixel_y = 0
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
-	frequency = 1380;
 	id_tag = "Casino_escape_pod_2";
 	name = "Casino escape pod Two controller";
 	pixel_x = 24;
@@ -5085,7 +5080,6 @@
 	pixel_y = 0
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
-	frequency = 1380;
 	id_tag = "Casino_escape_pod_1";
 	name = "Casino escape pod One controller";
 	pixel_x = 24;

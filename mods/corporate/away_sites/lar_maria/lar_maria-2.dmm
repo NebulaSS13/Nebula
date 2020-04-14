@@ -293,7 +293,6 @@
 	pixel_y = 25
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "ZHPWestSolar";
 	pixel_y = -25;
 	tag_airpump = "ZHPWestSolar_pump";
@@ -387,7 +386,6 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "ZHPEastSolar";
 	pixel_y = -25;
 	tag_airpump = "ZHPEastSolar_pump";

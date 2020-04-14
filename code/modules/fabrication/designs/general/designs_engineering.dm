@@ -35,6 +35,9 @@
 /datum/fabricator_recipe/engineering/airlock_sensor
 	path = /obj/item/frame/button/airlock_sensor
 
+/datum/fabricator_recipe/engineering/airlock_controller
+	path = /obj/item/stock_parts/circuitboard/airlock_controller
+
 /datum/fabricator_recipe/engineering/powermodule
 	path = /obj/item/stock_parts/circuitboard/apc
 

@@ -974,7 +974,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "co" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
-	frequency = 1380;
 	id_tag = "skipjack_base";
 	pixel_x = -25;
 	pixel_y = -5
@@ -1192,7 +1191,6 @@
 "cP" = (
 /obj/machinery/light/small,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1380;
 	id_tag = "skipjack_shuttle";
 	pixel_x = -25;
 	pixel_y = 8;

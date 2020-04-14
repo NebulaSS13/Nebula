@@ -1919,7 +1919,6 @@
 	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "solars_airlock";
 	name = "EVA Airlock Console";
 	pixel_y = -24;
@@ -2904,7 +2903,6 @@
 	id_tag = "hydrodock_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "hydrodock_airlock";
 	name = "Shipping Airlock Console";
 	pixel_x = 24;

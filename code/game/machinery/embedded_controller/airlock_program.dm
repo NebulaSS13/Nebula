@@ -40,38 +40,48 @@
 	memory["target_pressure"] = ONE_ATMOSPHERE
 	memory["purge"] = 0
 	memory["secure"] = 0
-
-	if (istype(M, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
-		var/obj/machinery/embedded_controller/radio/airlock/controller = M
-		cycle_to_external_air = controller.cycle_to_external_air
-		if(cycle_to_external_air)
-			tag_pump_out_external = "[id_tag]_pump_out_external"
-			tag_pump_out_internal = "[id_tag]_pump_out_internal"
-		tag_exterior_door = controller.tag_exterior_door? controller.tag_exterior_door : "[id_tag]_outer"
-		tag_interior_door = controller.tag_interior_door? controller.tag_interior_door : "[id_tag]_inner"
-		tag_airpump = controller.tag_airpump? controller.tag_airpump : "[id_tag]_pump"
-		tag_chamber_sensor = controller.tag_chamber_sensor? controller.tag_chamber_sensor : "[id_tag]_sensor"
-		tag_exterior_sensor = controller.tag_exterior_sensor || "[id_tag]_exterior_sensor"
-		tag_interior_sensor = controller.tag_interior_sensor || "[id_tag]_interior_sensor"
-		tag_air_alarm = controller.tag_air_alarm || "[id_tag]_alarm"
+	if (istype(master, /obj/machinery/embedded_controller/radio/airlock))
+		var/obj/machinery/embedded_controller/radio/airlock/controller = master
 		memory["secure"] = controller.tag_secure
+		cycle_to_external_air = controller.cycle_to_external_air
+
+#define SET_AIRLOCK_TAG(FROM_CONTROLLER, FROM_SRC) (base_tag ? FROM_SRC : (FROM_CONTROLLER || FROM_SRC))
+
+/datum/computer/file/embedded_program/airlock/reset_id_tags(base_tag)
+	. = ..()
+	if(cycle_to_external_air)
+		tag_pump_out_external = "[id_tag]_pump_out_external"
+		tag_pump_out_internal = "[id_tag]_pump_out_internal"
+	if(istype(master, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
+		var/obj/machinery/embedded_controller/radio/airlock/controller = master
+		tag_exterior_door = SET_AIRLOCK_TAG(controller.tag_exterior_door, "[id_tag]_outer")
+		tag_interior_door = SET_AIRLOCK_TAG(controller.tag_interior_door, "[id_tag]_inner")
+		tag_airpump = SET_AIRLOCK_TAG(controller.tag_airpump, "[id_tag]_pump")
+		tag_chamber_sensor = SET_AIRLOCK_TAG(controller.tag_chamber_sensor, "[id_tag]_sensor")
+		tag_exterior_sensor = SET_AIRLOCK_TAG(controller.tag_exterior_sensor, "[id_tag]_exterior_sensor")
+		tag_interior_sensor = SET_AIRLOCK_TAG(controller.tag_interior_sensor, "[id_tag]_interior_sensor")
+		tag_air_alarm = SET_AIRLOCK_TAG(controller.tag_air_alarm, "[id_tag]_alarm")
 
 		spawn(10)
 			signalDoor(tag_exterior_door)		//signals connected doors to update their status
 			signalDoor(tag_interior_door)
 
-/datum/computer/file/embedded_program/airlock/get_receive_filters()
+/datum/computer/file/embedded_program/airlock/get_receive_filters(for_ui = FALSE)
 	. = list(
-		id_tag,
-		tag_exterior_door,
-		tag_interior_door,
-		tag_airpump,
-		tag_chamber_sensor,
-		tag_exterior_sensor,
-		tag_interior_sensor
+		"[id_tag]" = "primary controller",
+		"[tag_exterior_door]" = "exterior airlock",
+		"[tag_interior_door]" = "interior airlock",
+		"[tag_airpump]" = "main pumps",
+		"[tag_chamber_sensor]" = "chamber sensor",
+		"[tag_exterior_sensor]" = "exterior sensor",
+		"[tag_interior_sensor]" = "interior sensor"
 	)
+	if(for_ui)
+		.[tag_air_alarm] = "air alarm within airlock"
 	if(cycle_to_external_air)
-		. += tag_pump_out_internal
+		.[tag_pump_out_internal] = "airlock vent pumps to exterior"
+		if(for_ui)
+			.[tag_pump_out_external] = "external vent pumps"
 
 /datum/computer/file/embedded_program/airlock/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]

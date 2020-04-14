@@ -4790,7 +4790,6 @@
 	pixel_y = 36
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1380;
 	id_tag = "bearcat_dock_port";
 	pixel_y = 25;
 	tag_airpump = "dock_port_pump";
@@ -6821,7 +6820,6 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
-	frequency = 1380;
 	id_tag = "bearcat_shuttle";
 	pixel_x = 0;
 	pixel_y = -24;

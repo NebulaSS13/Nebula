@@ -4,6 +4,7 @@
 	program = /datum/computer/file/embedded_program/docking/airlock
 	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 	tag_secure = 1
+	base_type = /obj/machinery/embedded_controller/radio/airlock/docking_port
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/Initialize()
 	. = ..()
@@ -80,6 +81,11 @@
 	. = ..()
 	if(istype(airlock_program))
 		. |= airlock_program.get_receive_filters()
+
+/datum/computer/file/embedded_program/docking/airlock/reset_id_tags(base_tag)
+	. = ..()
+	if(!. && istype(airlock_program))
+		return airlock_program.reset_id_tags(base_tag)
 
 /datum/computer/file/embedded_program/docking/airlock/receive_signal(datum/signal/signal, receive_method, receive_param)
 	airlock_program.receive_signal(signal, receive_method, receive_param)	//pass along to subprograms

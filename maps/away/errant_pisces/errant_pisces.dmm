@@ -1721,7 +1721,6 @@
 	pixel_y = 25
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "Harpoon_solar_starboard_airlock";
 	pixel_x = 25;
 	tag_airpump = "Harpoon_solar_starboard_pump";
@@ -1900,7 +1899,6 @@
 	id_tag = "Harpoon_solar_port_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "Harpoon_solar_port_airlock";
 	pixel_x = -25;
 	tag_airpump = "Harpoon_solar_port_pump";
@@ -4506,7 +4504,6 @@
 "lc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "Harpoon_ls_airlock";
 	pixel_x = 25;
 	pixel_y = 0;
@@ -4845,7 +4842,6 @@
 	id_tag = "Harpoon_sci_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "Harpoon_sci_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -5300,7 +5296,6 @@
 	id_tag = "Harpoon_dock1_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "Harpoon_dock1_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -5930,7 +5925,6 @@
 	id_tag = "Harpoon_dock2_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "Harpoon_dock2_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -6845,7 +6839,6 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "Harpoon_fish_airlock";
 	pixel_x = 0;
 	pixel_y = -25;

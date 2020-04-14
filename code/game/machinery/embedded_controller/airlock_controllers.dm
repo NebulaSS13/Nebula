@@ -2,6 +2,7 @@
 /obj/machinery/embedded_controller/radio/airlock
 	// Setup parameters only
 	program = /datum/computer/file/embedded_program/airlock
+	base_type = /obj/machinery/embedded_controller/radio/airlock/airlock_controller
 	var/tag_exterior_door
 	var/tag_interior_door
 	var/tag_airpump

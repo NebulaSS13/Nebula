@@ -1329,7 +1329,6 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "yacht_airlock";
 	pixel_y = 24;
 	tag_airpump = "yacht_pump";

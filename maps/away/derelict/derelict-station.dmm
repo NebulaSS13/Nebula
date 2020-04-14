@@ -1598,7 +1598,6 @@
 	},
 /obj/machinery/light/small,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
 	id_tag = "constructionsite_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
