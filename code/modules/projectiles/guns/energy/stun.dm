@@ -21,7 +21,7 @@
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BELT|SLOT_BACK
 	one_hand_penalty = 3
-	//origin_tech = "{'" + TECH_COMBAT + "':4,'" + TECH_MATERIAL + "':3,'" + TECH_POWER + "':3}"
+	origin_tech = "{'combat':4,'materials':3,'powerstorage':3}"
 	force = 8
 	max_shots = 12
 	accuracy = 1
