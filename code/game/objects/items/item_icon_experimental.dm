@@ -33,7 +33,7 @@
 	return
 
 /obj/item/proc/experimental_mob_overlay(var/mob/user_mob, var/slot)
-	var/bodytype = lowertext(user_mob?.get_bodytype()) || BODYTYPE_HUMANOID
+	var/bodytype = lowertext(user_mob?.get_bodytype() || BODYTYPE_HUMANOID)
 	var/image/I = image(get_icon_for_bodytype(bodytype), "[bodytype]-[slot]")
 	I.color = color
 	. = apply_offsets(user_mob, I, slot)
