@@ -4,7 +4,7 @@
 	icon = 'icons/obj/auto_cpr.dmi'
 	icon_state = "pumper"
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_BIO + "':2}"
+	origin_tech = "{'magnets':2,'biotech':2}"
 	slot_flags = SLOT_OCLOTHING
 	var/last_pump
 	var/skilled_setup

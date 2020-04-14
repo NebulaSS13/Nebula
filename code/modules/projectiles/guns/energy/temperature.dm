@@ -7,7 +7,7 @@
 	desc = "A gun that changes temperatures. It has a small label on the side, 'More extreme temperatures will cost more charge!'"
 	matter = list(MAT_STEEL = 5000, MAT_GLASS = 500, MAT_SILVER = 3000)
 	charge_cost = 10
-	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MATERIAL + "':4,'" + TECH_POWER + "':3,'" + TECH_MAGNET + "':2}"
+	origin_tech = "{'combat':3,'materials':4,'powerstorage':3,'magnets':2}"
 	slot_flags = SLOT_BELT|SLOT_BACK
 	one_hand_penalty = 2
 	wielded_item_state = "gun_wielded"

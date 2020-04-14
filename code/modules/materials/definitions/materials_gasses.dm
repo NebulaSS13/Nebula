@@ -247,7 +247,7 @@
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
-	stack_origin_tech = "{'" + TECH_MATERIAL + "':5}"
+	stack_origin_tech = "{'materials':5}"
 	value = 300
 	gas_symbol_html = "T"
 	gas_symbol = "T"
@@ -258,7 +258,7 @@
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
 	stack_type = /obj/item/stack/material/deuterium
 	icon_colour = "#999999"
-	stack_origin_tech = "{'" + TECH_MATERIAL + "':3}"
+	stack_origin_tech = "{'materials':3}"
 	gas_symbol_html = "D"
 	gas_symbol = "D"
 
@@ -268,7 +268,7 @@
 	display_name = "metallic hydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#e6c5de"
-	stack_origin_tech = "{'" + TECH_MATERIAL + "':6,'" + TECH_POWER + "':6,'" + TECH_MAGNET + "':5}"
+	stack_origin_tech = "{'materials':6,'powerstorage':6,'magnets':5}"
 	ore_smelts_to = MAT_TRITIUM
 	ore_compresses_to = MAT_METALLIC_HYDROGEN
 	ore_name = "raw hydrogen"

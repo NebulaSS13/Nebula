@@ -1,7 +1,7 @@
 /obj/item/implant/death_alarm
 	name = "death alarm implant"
 	desc = "An alarm which monitors host vital signs and transmits a radio message upon death."
-	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_BIO + "':2,'" + TECH_DATA + "':3}"
+	origin_tech = "{'materials':1,'biotech':2,'programming':3}"
 	known = 1
 	var/mobname = "John Doe"
 

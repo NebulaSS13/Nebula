@@ -202,7 +202,7 @@
 
 		if(origin_tech)
 			desc_comp += "<span class='notice'>Testing potentials:</span><BR>"
-			var/list/techlvls = json_decode(origin_tech)
+			var/list/techlvls = cached_json_decode(origin_tech)
 			for(var/T in techlvls)
 				desc_comp += "Tech: Level [techlvls[T]] [CallTechName(T)] <BR>"
 		else

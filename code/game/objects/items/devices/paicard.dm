@@ -5,7 +5,7 @@
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
-	origin_tech = "{'" + TECH_DATA + "':2}"
+	origin_tech = "{'programming':2}"
 	matter = list(MAT_GLASS = 500, MAT_STEEL = 500)
 
 	var/current_emotion = 1

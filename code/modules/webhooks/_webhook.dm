@@ -12,7 +12,7 @@
 
 	var/result = call(HTTP_POST_DLL_LOCATION, "send_post_request")(target_url, payload, json_encode(list("Content-Type" = "application/json")))
 
-	result = json_decode(result)
+	result = cached_json_decode(result)
 	if (result["error_code"])
 		log_debug("byhttp error: [result["error"]] ([result["error_code"]])")
 		return result["error_code"]

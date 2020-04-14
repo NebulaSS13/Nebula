@@ -3,7 +3,7 @@
 	desc = "A small handheld device designed to disrupt energy barriers."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "hdiffuser_off"
-	origin_tech = "{'" + TECH_MAGNET + "':5,'" + TECH_POWER + "':5,'" + TECH_ESOTERIC + "':2}"
+	origin_tech = "{'magnets':5,'powerstorage':5,'esoteric':2}"
 	matter = list(MAT_STEEL = 5000, MAT_GLASS = 5000, MAT_GOLD = 2000, MAT_SILVER = 2000)
 
 	var/obj/item/cell/device/cell

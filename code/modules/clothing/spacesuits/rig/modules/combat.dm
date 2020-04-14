@@ -34,13 +34,13 @@
 	interface_desc = "Disorientates your target by blinding them with this intense palm-mounted light."
 	device = /obj/item/flash
 
-	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':3,'" + TECH_ENGINEERING + "':5}"
+	origin_tech = "{'combat':2,'magnets':3,'engineering':5}"
 	matter = list(MAT_PLASTIC = 1500, MAT_STEEL = 1000, MAT_GLASS = 500)
 
 /obj/item/rig_module/device/flash/advanced
 	name = "advanced mounted flash"
 	device = /obj/item/flash/advanced
-	origin_tech = "{'" + TECH_COMBAT + "':3,'" + TECH_MAGNET + "':3,'" + TECH_ENGINEERING + "':5}"
+	origin_tech = "{'combat':3,'magnets':3,'engineering':5}"
 
 /obj/item/rig_module/device/flash/installed()
 	. = ..()
@@ -258,7 +258,7 @@
 
 	interface_name = "mounted energy gun"
 	interface_desc = "A shoulder-mounted suit-powered energy gun."
-	origin_tech = "{'" + TECH_POWER + "':6,'" + TECH_COMBAT + "':6,'" + TECH_ENGINEERING + "':6}"
+	origin_tech = "{'powerstorage':6,'combat':6,'engineering':6}"
 	matter = list(MAT_STEEL = 6000, MAT_GLASS = 3000, MAT_PLASTIC = 2500, MAT_GOLD = 2000, MAT_SILVER = 1000)
 
 	gun = /obj/item/gun/energy/gun/mounted
@@ -274,7 +274,7 @@
 
 	interface_name = "mounted electrolaser"
 	interface_desc = "A shoulder-mounted, cell-powered electrolaser."
-	origin_tech = "{'" + TECH_POWER + "':5,'" + TECH_COMBAT + "':5,'" + TECH_ENGINEERING + "':6}"
+	origin_tech = "{'powerstorage':5,'combat':5,'engineering':6}"
 	matter = list(MAT_STEEL = 4000, MAT_PLASTIC = 2500, MAT_GLASS = 2000, MAT_GOLD = 1000)
 	gun = /obj/item/gun/energy/taser/mounted
 
@@ -289,7 +289,7 @@
 
 	interface_name = "mounted plasma cutter"
 	interface_desc = "A forearm-mounted suit-powered plasma cutter."
-	origin_tech = "{'" + TECH_MATERIAL + "':5,'" + TECH_PHORON + "':4,'" + TECH_ENGINEERING + "':7,'" + TECH_COMBAT + "':5}"
+	origin_tech = "{'materials':5,'phorontech':4,'engineering':7,'combat':5}"
 
 	gun = /obj/item/gun/energy/plasmacutter/mounted
 	matter = list(MAT_STEEL = 2000, MAT_GLASS = 1000, MAT_PLASTIC = 1000, MAT_GOLD = 700, MAT_PHORON = 500)

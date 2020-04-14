@@ -4,7 +4,7 @@
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "crap"
 	item_state = "analyzer"
-	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_ENGINEERING + "':2,'" + TECH_BLUESPACE + "':2}"
+	origin_tech = "{'magnets':2,'engineering':2,'bluespace':2}"
 	matter = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_ALUMINIUM = 150)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT

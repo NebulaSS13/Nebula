@@ -21,7 +21,7 @@
 	item_state = "electronic"
 	throw_speed = 4
 	throw_range = 20
-	origin_tech = "{'" + TECH_MAGNET + "':1}"
+	origin_tech = "{'magnets':1}"
 	matter = list(MAT_ALUMINIUM = 400)
 
 /obj/item/locator/attack_self(mob/user)

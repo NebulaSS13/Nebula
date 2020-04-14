@@ -10,7 +10,7 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'" + TECH_MATERIAL + "':1,'" + TECH_ENGINEERING + "':1}"
+	origin_tech = "{'materials':1,'engineering':1}"
 	matter = list(MAT_STEEL = 80)
 	center_of_mass = @"{'x':18,'y':10}"
 	attack_verb = list("pinched", "nipped")

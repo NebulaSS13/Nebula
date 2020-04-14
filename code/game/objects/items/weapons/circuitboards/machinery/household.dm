@@ -2,7 +2,7 @@
 	name = T_BOARD("microwave")
 	build_path = /obj/machinery/microwave
 	board_type = "machine"
-	origin_tech = "{'" + TECH_BIO + "':2,'" + TECH_ENGINEERING + "':2}"
+	origin_tech = "{'biotech':2,'engineering':2}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 2,
@@ -17,7 +17,7 @@
 	name = T_BOARD("meat gibber")
 	build_path = /obj/machinery/gibber
 	board_type = "machine"
-	origin_tech = "{'" + TECH_BIO + "':2,'" + TECH_MATERIAL + "':2}"
+	origin_tech = "{'biotech':2,'materials':2}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 1,
@@ -31,7 +31,7 @@
 	name = T_BOARD("candy machine")
 	build_path = /obj/machinery/cooker/candy
 	board_type = "machine"
-	origin_tech = "{'" + TECH_BIO + "':1,'" + TECH_MATERIAL + "':1}"
+	origin_tech = "{'biotech':1,'materials':1}"
 	buildtype_select = TRUE
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
@@ -50,7 +50,7 @@
 	name = T_BOARD("honey extractor")
 	build_path = /obj/machinery/honey_extractor
 	board_type = "machine"
-	origin_tech = "{'" + TECH_BIO + "':2,'" + TECH_ENGINEERING + "':1}"
+	origin_tech = "{'biotech':2,'engineering':1}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 2)
@@ -64,7 +64,7 @@
 	name = T_BOARD("seed storage")
 	build_path = /obj/machinery/seed_storage
 	board_type = "machine"
-	origin_tech = "{'" + TECH_BIO + "':2,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'biotech':2,'engineering':3}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 2)
@@ -77,13 +77,13 @@
 /obj/item/stock_parts/circuitboard/seed_storage/advanced
 	name = T_BOARD("seed storage (scientific)")
 	build_path = /obj/machinery/seed_storage/xenobotany/buildable
-	origin_tech = "{'" + TECH_BIO + "':6,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'biotech':6,'engineering':3}"
 
 /obj/item/stock_parts/circuitboard/washer
 	name = T_BOARD("washing machine")
 	build_path = /obj/machinery/washing_machine
 	board_type = "machine"
-	origin_tech = "{'" + TECH_ENGINEERING + "':1}"
+	origin_tech = "{'engineering':1}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/micro_laser = 1,
@@ -94,7 +94,7 @@
 	name = T_BOARD("vending machine")
 	build_path = /obj/machinery/vending/assist
 	board_type = "machine"
-	origin_tech = "{'" + TECH_ENGINEERING + "':2}"
+	origin_tech = "{'engineering':2}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 1
@@ -117,7 +117,7 @@
 	name = T_BOARD("industrial grinder")
 	build_path = /obj/machinery/reagentgrinder
 	board_type = "machine"
-	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_MATERIAL + "':4,'" + TECH_ENGINEERING + "':4}"
+	origin_tech = "{'magnets':2,'materials':4,'engineering':4}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 2)
@@ -131,7 +131,7 @@
 	name = T_BOARD("blender")
 	build_path = /obj/machinery/reagentgrinder/juicer
 	board_type = "machine"
-	origin_tech = "{'" + TECH_MAGNET + "':2,'" + TECH_MATERIAL + "':2,'" + TECH_ENGINEERING + "':2}"
+	origin_tech = "{'magnets':2,'materials':2,'engineering':2}"
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stock_parts/matter_bin = 1)
@@ -145,7 +145,7 @@
 	name = T_BOARD("ice cream vat")
 	build_path = /obj/machinery/icecream_vat
 	board_type = "machine"
-	origin_tech = "{'" + TECH_ENGINEERING + "':1}"
+	origin_tech = "{'engineering':1}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/pipe = 1
@@ -155,7 +155,7 @@
 	name = T_BOARD("smartfridge")
 	build_path = /obj/machinery/smartfridge
 	board_type = "machine"
-	origin_tech = "{'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'engineering':3}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 3
 	)
@@ -173,7 +173,7 @@
 	name = T_BOARD("jukebox")
 	build_path = /obj/machinery/media/jukebox
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':5}"
+	origin_tech = "{'programming':5}"
 	req_components = list(
 		/obj/item/stock_parts/subspace/amplifier = 2
 	)

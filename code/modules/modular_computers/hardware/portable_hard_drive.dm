@@ -6,7 +6,7 @@
 	icon_state = "flashdrive_basic"
 	hardware_size = 1
 	max_capacity = 16
-	origin_tech = "{'" + TECH_DATA + "':1}"
+	origin_tech = "{'programming':1}"
 	matter = list(MAT_GLASS = 800)
 
 /obj/item/stock_parts/computer/hard_drive/portable/advanced
@@ -16,7 +16,7 @@
 	icon_state = "flashdrive_advanced"
 	hardware_size = 1
 	max_capacity = 64
-	origin_tech = "{'" + TECH_DATA + "':2}"
+	origin_tech = "{'programming':2}"
 	matter = list(MAT_GLASS = 1600)
 
 /obj/item/stock_parts/computer/hard_drive/portable/super
@@ -26,7 +26,7 @@
 	icon_state = "flashdrive_super"
 	hardware_size = 1
 	max_capacity = 256
-	origin_tech = "{'" + TECH_DATA + "':4}"
+	origin_tech = "{'programming':4}"
 	matter = list(MAT_GLASS = 3200)
 
 /obj/item/stock_parts/computer/hard_drive/portable/Initialize()

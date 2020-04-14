@@ -3,7 +3,7 @@
 	desc = "A bulky pump-action grenade launcher. Holds up to 6 grenades in a revolving magazine."
 	icon_state = "riotgun"
 	item_state = "riotgun"
-	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MATERIAL + "':3}"
+	origin_tech = "{'combat':2,'materials':3}"
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 

@@ -6,7 +6,7 @@
 	hardware_size = 1
 	critical = 0
 	power_usage = 100
-	origin_tech = "{'" + TECH_POWER + "':2,'" + TECH_DATA + "':3}"
+	origin_tech = "{'powerstorage':2,'programming':3}"
 	external_slot = TRUE
 	matter = list(MAT_STEEL = 2000)
 

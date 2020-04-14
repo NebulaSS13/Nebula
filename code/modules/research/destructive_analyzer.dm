@@ -69,7 +69,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 		if(!O.origin_tech)
 			to_chat(user, "<span class='notice'>This doesn't seem to have a tech origin.</span>")
 			return
-		var/list/techlvls = json_decode(O.origin_tech)
+		var/list/techlvls = cached_json_decode(O.origin_tech)
 		if(!length(techlvls) || O.holographic)
 			to_chat(user, "<span class='notice'>You cannot deconstruct this item.</span>")
 			return

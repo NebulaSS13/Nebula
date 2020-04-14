@@ -5,7 +5,7 @@
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
-	origin_tech = "{'" + TECH_DATA + "':4,'" + TECH_MATERIAL + "':4}"
+	origin_tech = "{'programming':4,'materials':4}"
 	matter = list(MAT_GLASS = 1000, MAT_GOLD = 200)
 
 	var/flush

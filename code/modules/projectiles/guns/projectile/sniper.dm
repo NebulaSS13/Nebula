@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	slot_flags = SLOT_BACK
-	origin_tech = "{'" + TECH_COMBAT + "':8,'" + TECH_MATERIAL + "':2,'" + TECH_ESOTERIC + "':8}"
+	origin_tech = "{'combat':7,'materials':2,'esoteric':8}"
 	caliber = CALIBER_ANTIMATERIAL
 	screen_shake = 2 //extra kickback
 	handle_casings = HOLD_CASINGS

@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/ion_rifle.dmi'
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
-	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':4}"
+	origin_tech = "{'combat':2,'magnets':4}"
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
@@ -26,7 +26,7 @@
 	icon = 'icons/obj/guns/ion_pistol.dmi'
 	icon_state = "ionpistol"
 	item_state = "ionpistol"
-	origin_tech = "{'" + TECH_COMBAT + "':2,'" + TECH_MAGNET + "':4}"
+	origin_tech = "{'combat':2,'magnets':4}"
 	w_class = ITEM_SIZE_NORMAL
 	force = 5
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
@@ -41,7 +41,7 @@
 	icon = 'icons/obj/guns/decloner.dmi'
 	icon_state = "decloner"
 	item_state = "decloner"
-	origin_tech = "{'" + TECH_COMBAT + "':5,'" + TECH_MATERIAL + "':4,'" + TECH_POWER + "':3}"
+	origin_tech = "{'combat':5,'materials':4,'powerstorage':3}"
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
 	combustion = 0
@@ -56,7 +56,7 @@
 	charge_cost = 10
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
-	origin_tech = "{'" + TECH_MATERIAL + "':2,'" + TECH_BIO + "':3,'" + TECH_POWER + "':3}"
+	origin_tech = "{'materials':2,'biotech':3,'powerstorage':3}"
 	modifystate = "floramut"
 	self_recharge = 1
 	matter = list(MAT_STEEL = 2000, MAT_GLASS = 500, MAT_URANIUM = 500)
@@ -132,7 +132,7 @@
 	desc = "A custom-built weapon of some kind."
 	icon = 'icons/obj/guns/xray.dmi'
 	icon_state = "xray"
-	origin_tech = "{'" + TECH_COMBAT + "':5,'" + TECH_MAGNET + "':4}"
+	origin_tech = "{'combat':5,'magnets':4}"
 	projectile_type = /obj/item/projectile/beam/mindflayer
 
 /obj/item/gun/energy/toxgun
@@ -141,7 +141,7 @@
 	icon = 'icons/obj/guns/toxgun.dmi'
 	icon_state = "toxgun"
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'" + TECH_COMBAT + "':5,'" + TECH_PHORON + "':4}"
+	origin_tech = "{'combat':5,'phorontech':4}"
 	projectile_type = /obj/item/projectile/energy/phoron
 	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000, MAT_PHORON = 3000)
 
@@ -156,7 +156,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
-	origin_tech = "{'" + TECH_MATERIAL + "':4,'" + TECH_PHORON + "':4,'" + TECH_ENGINEERING + "':6,'" + TECH_COMBAT + "':3}"
+	origin_tech = "{'materials':4,'phorontech':4,'engineering':6,'combat':3}"
 	matter = list(MAT_STEEL = 4000)
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
@@ -201,7 +201,7 @@
 	icon_state = "incen"
 	item_state = "incen"
 	safety_icon = "safety"
-	origin_tech = "{'" + TECH_COMBAT + "':7,'" + TECH_MAGNET + "':4,'" + TECH_ESOTERIC + "':4}"
+	origin_tech = "{'combat':7,'magnets':4,'esoteric':4}"
 	matter = list(MAT_ALUMINIUM = 1000, MAT_PLASTIC = 500, MAT_DIAMOND = 500)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser
 	max_shots = 4

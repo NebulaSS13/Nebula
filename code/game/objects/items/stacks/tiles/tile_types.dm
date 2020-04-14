@@ -31,7 +31,7 @@
 	singular_name = "grass floor tile"
 	desc = "A patch of grass like they often use on golf courses."
 	icon_state = "tile_grass"
-	origin_tech = "{'" + TECH_BIO + "':1}"
+	origin_tech = "{'biotech':1}"
 
 /*
  * Wood
