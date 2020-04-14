@@ -243,10 +243,6 @@
 	interface_desc = "An induction-powered high-throughput datalink suitable for hacking encrypted networks."
 	var/list/stored_research
 
-/obj/item/rig_module/datajack/Initialize()
-	. =..()
-	stored_research = list()
-
 /obj/item/rig_module/datajack/engage(atom/target)
 
 	if(!..())
@@ -311,7 +307,7 @@
 					current_data.level = new_data.level
 				break
 		if(!data_found)
-			stored_research += incoming_data
+			LAZYADD(stored_research, incoming_data)
 		return 1
 	return 0
 
