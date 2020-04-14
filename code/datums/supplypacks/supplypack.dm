@@ -1,12 +1,14 @@
+#define CARGO_PRICE_MARKUP 2.5
+
 /decl/hierarchy/supply_pack
 	name = "Supply Packs"
 	hierarchy_type = /decl/hierarchy/supply_pack
 	var/list/contains = list()
 	var/manifest = ""
-	var/cost = null
+	var/cost
 	var/containertype = /obj/structure/closet/crate
-	var/containername = null
-	var/access = null
+	var/containername
+	var/access
 	var/hidden = 0
 	var/contraband = 0
 	var/num_contained = 0 //number of items picked to be contained in a randomised crate
@@ -18,6 +20,10 @@
 	if(!num_contained)
 		for(var/entry in contains)
 			num_contained += max(1, contains[entry])
+	cost = 0
+	for(var/entry in contains)
+		cost += atom_info_repository.get_worth_for(entry) * max(1, contains[entry])
+	cost *= CARGO_PRICE_MARKUP
 
 	var/decl/supply_method/sm = get_supply_method(supply_method)
 	manifest = sm.setup_manifest(src)
@@ -89,3 +95,5 @@ var/list/supply_methods_
 
 /decl/supply_method/randomized/setup_manifest(var/decl/hierarchy/supply_pack/sp)
 	return "Contains any [sp.num_contained] of:" + ..()
+
+#undef CARGO_PRICE_MARKUP
