@@ -66,7 +66,7 @@ GLOBAL_LIST_EMPTY(exonets)
 			user.StoreMemory("Your email account address is [EA.login] and the password is [EA.password].", /decl/memory_options/system)
 		if(issilicon(user))
 			var/mob/living/silicon/S = user
-			var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
+			var/datum/nano_module/program/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/program/email_client)
 			if(my_client)
 				my_client.stored_login = EA.login
 				my_client.stored_password = EA.password
@@ -76,6 +76,12 @@ GLOBAL_LIST_EMPTY(exonets)
 		if(A.login == login)
 			return A
 	return 0
+/datum/exonet/proc/get_email_accounts()
+	var/list/email_accounts = list()
+	for(var/obj/machinery/computer/exonet/mainframe/MF in mainframes)
+		for(var/datum/computer_file/data/email_account/email_account in MF.stored_files)
+			email_accounts |= email_account
+	return email_accounts
 
 /datum/exonet/proc/is_connected_plexus()
 	for(var/obj/machinery/computer/exonet/uplink/modem in modems)
@@ -213,7 +219,7 @@ GLOBAL_LIST_EMPTY(exonets)
 		user.StoreMemory("Your email account address has been changed to [new_login].", /decl/memory_options/system)
 	if(issilicon(user))
 		var/mob/living/silicon/S = user
-		var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
+		var/datum/nano_module/program/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/program/email_client)
 		if(my_client)
 			my_client.stored_login = new_login
 

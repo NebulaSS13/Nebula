@@ -16,7 +16,6 @@
 	available_to_ai = TRUE
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
-	var/error = ""
 
 /datum/nano_module/program/email_administration/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -27,8 +26,8 @@
 		data["skill_fail"] = fake_data.update_and_return_data()
 	data["terminal"] = !!program
 
-	if(error)
-		data["error"] = error
+	if(program.error)
+		data["error"] = program.error
 	else if(istype(current_message))
 		data["msg_title"] = current_message.title
 		data["msg_body"] = digitalPencode2html(current_message.stored_data)
@@ -49,7 +48,9 @@
 		data["messagecount"] = all_messages.len
 	else
 		var/list/all_accounts = list()
-		for(var/datum/computer_file/data/email_account/account in list()) // julie pls fix ntnet_global.email_accounts
+		var/network_card = program.computer.get_component(PART_NETWORK)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		for(var/datum/computer_file/data/email_account/account in exonet.get_email_accounts())
 			if(!account.can_login)
 				continue
 			all_accounts.Add(list(list(
@@ -86,8 +87,8 @@
 		return 1
 
 	if(href_list["back"])
-		if(error)
-			error = ""
+		if(program.error)
+			program.error = ""
 		else if(current_message)
 			current_message = null
 		else
@@ -99,8 +100,7 @@
 			return 1
 
 		current_account.suspended = !current_account.suspended
-		//ntnet_global.add_log_with_ids_check("EMAIL LOG: SA-EDIT Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended by SA [I.registered_name] ([I.assignment]).")
-		error = "Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended."
+		program.error = "Account [current_account.login] has been [current_account.suspended ? "" : "un" ]suspended."
 		return 1
 
 	if(href_list["changepass"])
@@ -111,7 +111,6 @@
 		if(!newpass)
 			return 1
 		current_account.password = newpass
-		//ntnet_global.add_log_with_ids_check("EMAIL LOG: SA-EDIT Password for account [current_account.login] has been changed by SA [I.registered_name] ([I.assignment]).")
 		return 1
 
 	if(href_list["viewmail"])
@@ -125,7 +124,9 @@
 		return 1
 
 	if(href_list["viewaccount"])
-		for(var/datum/computer_file/data/email_account/email_account in list()) // ntnet_global.email_accounts julie pls fix
+		var/network_card = program.computer.get_component(PART_NETWORK)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		for(var/datum/computer_file/data/email_account/email_account in exonet.get_email_accounts())
 			if(email_account.uid == text2num(href_list["viewaccount"]))
 				current_account = email_account
 				break
@@ -140,12 +141,16 @@
 			return 1
 
 		var/complete_login = "[newlogin]@[newdomain]"
-		//if(ntnet_global.find_email_by_name(complete_login))
-		//	error = "Error creating account: An account with same address already exists."
-		//	return 1
+		var/network_card = program.computer.get_component(PART_NETWORK)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		if(!exonet)
+			return 1
+		if(exonet.find_email_by_name(complete_login))
+			program.error = "Error creating account: An account with same address already exists."
+			return 1
 
 		var/datum/computer_file/data/email_account/new_account = new/datum/computer_file/data/email_account()
 		new_account.login = complete_login
 		new_account.password = GenerateKey()
-		error = "Email [new_account.login] has been created, with generated password [new_account.password]"
+		program.error = "Email [new_account.login] has been created, with generated password [new_account.password]"
 		return 1

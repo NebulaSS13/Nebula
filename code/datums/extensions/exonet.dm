@@ -173,6 +173,27 @@
 /datum/extension/exonet_device/proc/set_net_tag(var/new_tag)
 	net_tag = new_tag
 
+// Gets all email accounts available on this network, and all networks with PLEXUS connections.
+/datum/extension/exonet_device/proc/get_email_accounts(var/require_online = TRUE)
+	var/list/email_accounts = list()
+	// Generate for this network.
+	var/datum/exonet/local_network = get_local_network()
+	if(!local_network)
+		return email_accounts
+	var/is_online = local_network.is_connected_plexus()
+	for(var/ennid in GLOB.exonets)
+		var/datum/exonet/network = GLOB.exonets[ennid]
+		if(local_network.ennid == ennid || (!require_online || (is_online && network.is_connected_plexus()))) // Online check.
+			email_accounts |= network.get_email_accounts()
+	return email_accounts
+
+/datum/extension/exonet_device/proc/find_email_by_name(var/login)
+	for(var/ennid in GLOB.exonets)
+		var/datum/exonet/network = GLOB.exonets[ennid]
+		var/email = network.find_email_by_name(login)
+		if(email)
+			return email
+
 /datum/extension/exonet_device/Destroy()
 	disconnect_network()
 	..()

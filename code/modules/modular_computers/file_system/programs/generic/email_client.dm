@@ -12,12 +12,12 @@
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE
 
-	nanomodule_path = /datum/nano_module/email_client
+	nanomodule_path = /datum/nano_module/program/email_client
 
 // Persistency. Unless you log out, or unless your password changes, this will pre-fill the login data when restarting the program
 /datum/computer_file/program/email_client/on_shutdown()
 	if(NM)
-		var/datum/nano_module/email_client/NME = NM
+		var/datum/nano_module/program/email_client/NME = NM
 		if(NME.current_account)
 			stored_login = NME.stored_login
 			stored_password = NME.stored_password
@@ -31,11 +31,11 @@
 	. = ..()
 
 	if(NM)
-		var/datum/nano_module/email_client/NME = NM
+		var/datum/nano_module/program/email_client/NME = NM
 		NME.stored_login = stored_login
 		NME.stored_password = stored_password
 		NME.log_in()
-		NME.error = ""
+		error = ""
 		NME.check_for_new_messages(1)
 
 /datum/computer_file/program/email_client/proc/new_mail_notify()
@@ -43,7 +43,7 @@
 
 /datum/computer_file/program/email_client/process_tick()
 	..()
-	var/datum/nano_module/email_client/NME = NM
+	var/datum/nano_module/program/email_client/NME = NM
 	if(!istype(NME))
 		return
 	NME.relayed_process(net_speed)
@@ -56,11 +56,10 @@
 	else
 		ui_header = "ntnrc_idle.gif"
 
-/datum/nano_module/email_client/
+/datum/nano_module/program/email_client
 	name = "Email Client"
 	var/stored_login = ""
 	var/stored_password = ""
-	var/error = ""
 
 	var/msg_title = ""
 	var/msg_body = ""
@@ -80,15 +79,15 @@
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 
-/datum/nano_module/email_client/proc/get_functional_drive()
+/datum/nano_module/program/email_client/proc/get_functional_drive()
 	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
 	var/obj/item/stock_parts/computer/hard_drive/drive = os && os.get_component(/obj/item/stock_parts/computer/hard_drive)
 	if(!drive || !drive.check_functionality())
-		error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
+		program.error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
 		return
 	return drive
 
-/datum/nano_module/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
+/datum/nano_module/program/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
 	var/mob/living/L = get_holder_of_type(host, /mob/living)
 	if(L)
 		var/list/msg = list()
@@ -101,11 +100,11 @@
 		msg += "*--*"
 		to_chat(L, jointext(msg, null))
 
-/datum/nano_module/email_client/Destroy()
+/datum/nano_module/program/email_client/Destroy()
 	log_out()
 	. = ..()
 
-/datum/nano_module/email_client/proc/log_in()
+/datum/nano_module/program/email_client/proc/log_in()
 	var/list/id_login
 	var/atom/movable/A = nano_host()
 	var/obj/item/card/id/id = A.GetIdCard()
@@ -116,7 +115,9 @@
 		id_login = id.associated_email_login.Copy()
 
 	var/datum/computer_file/data/email_account/target
-	for(var/datum/computer_file/data/email_account/account in list()) // julie fix pls ntnet_global.email_accounts
+	var/network_card = program.computer.get_component(PART_NETWORK)
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+	for(var/datum/computer_file/data/email_account/account in exonet.get_email_accounts())
 		if(!account || !account.can_login)
 			continue
 		if(id_login && id_login["login"] == account.login)
@@ -127,11 +128,11 @@
 			break
 
 	if(!target)
-		error = "Invalid Login"
+		program.error = "Invalid Login"
 		return 0
 
 	if(target.suspended)
-		error = "This account has been suspended. Please contact the system administrator for assistance."
+		program.error = "This account has been suspended. Please contact the system administrator for assistance."
 		return 0
 
 	var/use_pass
@@ -145,12 +146,12 @@
 		current_account.connected_clients |= src
 		return 1
 	else
-		error = "Invalid Password"
+		program.error = "Invalid Password"
 		return 0
 
 // Returns 0 if no new messages were received, 1 if there is an unread message but notification has already been sent.
 // and 2 if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
-/datum/nano_module/email_client/proc/check_for_new_messages(var/messages_read = FALSE)
+/datum/nano_module/program/email_client/proc/check_for_new_messages(var/messages_read = FALSE)
 	if(!current_account)
 		return 0
 
@@ -168,7 +169,7 @@
 		read_message_count = allmails.len
 
 
-/datum/nano_module/email_client/proc/log_out()
+/datum/nano_module/program/email_client/proc/log_out()
 	if(current_account)
 		current_account.connected_clients -= src
 	current_account = null
@@ -177,7 +178,7 @@
 	last_message_count = 0
 	read_message_count = 0
 
-/datum/nano_module/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	// Password has been changed by other client connected to this email account
@@ -185,14 +186,14 @@
 		if(current_account.password != stored_password)
 			if(!log_in())
 				log_out()
-				error = "Invalid Password"
+				program.error = "Invalid Password"
 		// Banned.
 		else if(current_account.suspended)
 			log_out()
-			error = "This account has been suspended. Please contact the system administrator for assistance."
+			program.error = "This account has been suspended. Please contact the system administrator for assistance."
 
-	if(error)
-		data["error"] = error
+	if(program.error)
+		data["error"] = program.error
 	else if(downloading)
 		data["downloading"] = 1
 		data["down_filename"] = "[downloading.filename].[downloading.filetype]"
@@ -204,7 +205,9 @@
 		data["current_account"] = current_account.login
 		if(addressbook)
 			var/list/all_accounts = list()
-			for(var/datum/computer_file/data/email_account/account in list()) // julie fix pls ntnet_global.email_accounts
+			var/network_card = program.computer.get_component(PART_NETWORK)
+			var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+			for(var/datum/computer_file/data/email_account/account in exonet.get_email_accounts())
 				if(!account.can_login)
 					continue
 				all_accounts.Add(list(list(
@@ -274,7 +277,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/email_client/proc/find_message_by_fuid(var/fuid)
+/datum/nano_module/program/email_client/proc/find_message_by_fuid(var/fuid)
 	if(!istype(current_account))
 		return
 
@@ -286,7 +289,7 @@
 		if(message.uid == fuid)
 			return message
 
-/datum/nano_module/email_client/proc/clear_message()
+/datum/nano_module/program/email_client/proc/clear_message()
 	new_message = FALSE
 	msg_title = ""
 	msg_body = ""
@@ -294,7 +297,7 @@
 	msg_attachment = null
 	current_message = null
 
-/datum/nano_module/email_client/proc/relayed_process(var/netspeed)
+/datum/nano_module/program/email_client/proc/relayed_process(var/netspeed)
 	download_speed = netspeed
 	if(!downloading)
 		return
@@ -307,15 +310,15 @@
 			return 1
 
 		if(drive.store_file(downloading))
-			error = "File successfully downloaded to local device."
+			program.error = "File successfully downloaded to local device."
 		else
-			error = "Error saving file: I/O Error: The hard drive may be full or nonfunctional."
+			program.error = "Error saving file: I/O Error: The hard drive may be full or nonfunctional."
 		downloading = null
 		download_progress = 0
 	return 1
 
 
-/datum/nano_module/email_client/Topic(href, href_list)
+/datum/nano_module/program/email_client/Topic(href, href_list)
 	if(..())
 		return 1
 	var/mob/living/user = usr
@@ -333,7 +336,7 @@
 		return 1
 
 	if(href_list["reset"])
-		error = ""
+		program.error = ""
 		return 1
 
 	if(href_list["new_message"])
@@ -416,7 +419,7 @@
 		if(!current_account)
 			return 1
 		if((msg_body == "") || (msg_recipient == ""))
-			error = "Error sending mail: Message body is empty!"
+			program.error = "Error sending mail: Message body is empty!"
 			return 1
 		if(!length(msg_title))
 			msg_title = "No subject"
@@ -427,10 +430,10 @@
 		message.source = current_account.login
 		message.attachment = msg_attachment
 		if(!current_account.send_mail(msg_recipient, message))
-			error = "Error sending email: this address doesn't exist."
+			program.error = "Error sending email: this address doesn't exist."
 			return 1
 		else
-			error = "Email successfully sent."
+			program.error = "Email successfully sent."
 			clear_message()
 			return 1
 
@@ -442,7 +445,7 @@
 		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["reply"])
 		if(!istype(M))
 			return 1
-		error = null
+		program.error = null
 		new_message = TRUE
 		msg_recipient = M.source
 		msg_title = "Re: [M.title]"
@@ -470,20 +473,20 @@
 			return 1
 
 		if(!istype(current_account))
-			error = "Please log in before proceeding."
+			program.error = "Please log in before proceeding."
 			return 1
 
 		if(current_account.password != oldpassword)
-			error = "Incorrect original password"
+			program.error = "Incorrect original password"
 			return 1
 
 		if(newpassword1 != newpassword2)
-			error = "The entered passwords do not match."
+			program.error = "The entered passwords do not match."
 			return 1
 
 		current_account.password = newpassword1
 		stored_password = newpassword1
-		error = "Your password has been successfully changed!"
+		program.error = "Your password has been successfully changed!"
 		return 1
 
 	// The following entries are Modular Computer framework only, and therefore won't do anything in other cases (like AI View)
@@ -506,9 +509,9 @@
 
 		drive = get_functional_drive()
 		if(!drive || !drive.store_file(mail))
-			error = "Internal I/O error when writing file, the hard drive may be full."
+			program.error = "Internal I/O error when writing file, the hard drive may be full."
 		else
-			error = "Email exported successfully"
+			program.error = "Email exported successfully"
 		return 1
 
 	if(href_list["addattachment"])
@@ -539,14 +542,14 @@
 				break
 		if(!istype(msg_attachment))
 			msg_attachment = null
-			error = "Unknown error when uploading attachment."
+			program.error = "Unknown error when uploading attachment."
 			return 1
 
 		if(msg_attachment.size > 32)
-			error = "Error uploading attachment: File exceeds maximal permitted file size of 32GQ."
+			program.error = "Error uploading attachment: File exceeds maximal permitted file size of 32GQ."
 			msg_attachment = null
 		else
-			error = "File [msg_attachment.filename].[msg_attachment.filetype] has been successfully uploaded."
+			program.error = "File [msg_attachment.filename].[msg_attachment.filetype] has been successfully uploaded."
 		return 1
 
 	if(href_list["downloadattachment"])
