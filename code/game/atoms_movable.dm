@@ -40,7 +40,7 @@
 	return 1
 
 //return 0 to space drift, 1 to stop, -1 for mobs to handle space slips
-/atom/movable/proc/Process_Spacemove(var/movement_dir)
+/atom/movable/proc/Process_Spacemove(var/allow_movement)
 	if(!simulated)
 		return 1
 

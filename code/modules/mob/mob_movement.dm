@@ -142,7 +142,7 @@
 	
 	if(!inertia_moving)
 		inertia_next_move = world.time + inertia_move_delay
-		space_drift(direct)
+		space_drift(direct ? direct : last_move)
 
 /client/Move(n, direction)
 	if(!user_acted(src))
@@ -151,20 +151,40 @@
 		return // Moved here to avoid nullrefs below
 	return mob.SelfMove(direction)
 
-/mob/Process_Spacemove(var/movement_dir)
+/mob/Process_Spacemove(var/allow_movement)
 	. = ..()
 	if(.)
 		return
 
 	var/atom/movable/backup = get_spacemove_backup()
 	if(backup)
-		if(istype(backup) && movement_dir && !backup.anchored)
-			var/direction = turn(movement_dir, 180)
-			backup.inertia_ignore = src
-			if(step(backup,direction))
-				to_chat(src, "<span class='info'>You push off of [backup] to propel yourself.</span>")
-				inertia_ignore = backup
+		if(istype(backup) && allow_movement)
+			return backup
 		return -1
+
+/mob/proc/space_do_move(var/allow_move, var/direction)	
+	if(ismovable(allow_move))//push off things in space
+		handle_space_pushoff(allow_move, direction)
+		allow_move = -1
+
+	if(allow_move == -1 && handle_spaceslipping())
+		return 0
+
+	return 1
+
+/mob/proc/handle_space_pushoff(var/atom/movable/AM, var/direction)
+	if(AM.anchored)
+		return
+
+	if(ismob(AM))
+		var/mob/M = AM
+		if(M.check_space_footing())
+			return
+
+	AM.inertia_ignore = src
+	if(step(AM, turn(direction, 180)))
+		to_chat(src, "<span class='info'>You push off of [AM] to propel yourself.</span>")
+		inertia_ignore = AM
 
 /mob/proc/get_spacemove_backup()//rename this
 	var/shoegrip = Check_Shoegrip()
@@ -195,13 +215,11 @@
 	if(has_gravity() || anchored || buckled)
 		return 1
 
-	if(!Check_Shoegrip())
-		return 0
-
-	for(var/thing in trange(1,src))	//checks for turfs that one can maglock to
-		var/turf/T = thing
-		if(T.density || T.is_wall() || T.is_floor())
-			return 1
+	if(Check_Shoegrip())
+		for(var/thing in trange(1,src))	//checks for turfs that one can maglock to
+			var/turf/T = thing
+			if(T.density || T.is_wall() || T.is_floor())
+				return 1
 
 	return 0
 

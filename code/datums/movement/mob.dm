@@ -78,14 +78,27 @@
 		return MOVEMENT_PROCEED
 	return (MOVEMENT_PROCEED|MOVEMENT_HANDLED)
 
+/datum/movement_handler/mob/space
+	var/allow_move
+
 // Space movement
 /datum/movement_handler/mob/space/DoMove(var/direction, var/mob/mover)
 	if(!mob.has_gravity())
-		var/allowmove = mob.Process_Spacemove(direction)
-		if(!allowmove)
+		if(!allow_move)
 			return MOVEMENT_HANDLED
-		else if(allowmove == -1 && mob.handle_spaceslipping()) //Check to see if we slipped
+		if(!mob.space_do_move(allow_move, direction))
 			return MOVEMENT_HANDLED
+
+/datum/movement_handler/mob/space/MayMove(var/mob/mover, var/is_external)
+	if(IS_NOT_SELF(mover) && is_external)
+		return MOVEMENT_PROCEED
+
+	if(!mob.has_gravity())
+		allow_move = mob.Process_Spacemove(1)
+		if(!allow_move)
+			return MOVEMENT_STOP
+
+	return MOVEMENT_PROCEED
 
 // Buckle movement
 /datum/movement_handler/mob/buckle_relay/DoMove(var/direction, var/mover)
