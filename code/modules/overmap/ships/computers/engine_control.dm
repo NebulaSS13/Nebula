@@ -6,7 +6,7 @@
 	icon_screen = "engines"
 	var/display_state = "status"
 
-/obj/machinery/computer/ship/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	if(!linked)
 		display_reconnect_dialog(user, "ship control systems")
 		return

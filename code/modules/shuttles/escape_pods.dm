@@ -53,7 +53,7 @@ var/list/escape_pods_by_name = list()
 	var/datum/shuttle/autodock/ferry/escape_pod/pod
 	var/tag_pump
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	var/data[0]
 	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 
@@ -91,7 +91,7 @@ var/list/escape_pods_by_name = list()
 	name = "escape pod berth controller"
 	program = /datum/computer/file/embedded_program/docking/simple/escape_pod_berth
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	var/data[0]
 	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 

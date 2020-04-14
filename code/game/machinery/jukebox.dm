@@ -91,7 +91,7 @@ datum/track/proc/GetTrack()
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/media/jukebox/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/media/jukebox/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	var/list/juke_tracks = new
 	for(var/datum/track/T in tracks)
 		juke_tracks.Add(list(list("track"=T.title)))

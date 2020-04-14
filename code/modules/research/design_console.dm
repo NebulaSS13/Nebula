@@ -51,7 +51,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/computer/design_console/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/design_console/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 
 	var/list/data = list()
 	var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)

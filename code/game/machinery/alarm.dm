@@ -469,7 +469,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = NANOUI_FOCUS, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	var/remote_connection = 0
 	var/remote_access = 0
@@ -508,7 +508,7 @@
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
 		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 		for(var/gas_id in env_info.important_gasses)
-			var/material/mat = SSmaterials.get_material_datum(gas_id)	
+			var/material/mat = SSmaterials.get_material_datum(gas_id)
 			environment_data[++environment_data.len] = list(
 				"name" =  capitalize(mat.display_name),
 				"value" = environment.gas[gas_id] / total * 100,

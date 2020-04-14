@@ -23,7 +23,7 @@ var/global/list/minor_air_alarms = list()
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/computer/atmos_alert/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/atmos_alert/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	var/data[0]
 	var/major_alarms[0]
 	var/minor_alarms[0]

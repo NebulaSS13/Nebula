@@ -107,7 +107,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/portable_atmospherics/powered/pump/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
+/obj/machinery/portable_atmospherics/powered/pump/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open = NANOUI_FOCUS)
 	var/list/data[0]
 	var/obj/item/cell/cell = get_cell()
 	data["portConnected"] = connected_port ? 1 : 0

@@ -1,6 +1,6 @@
 #define PRINT_MULTIPLIER_DIVISOR 5
 
-/obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
+/obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=NANOUI_FOCUS)
 	var/list/data = list()
 
 	var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)

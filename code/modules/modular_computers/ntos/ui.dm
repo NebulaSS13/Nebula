@@ -1,6 +1,6 @@
 
 // Operates NanoUI
-/datum/extension/interactive/ntos/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/datum/extension/interactive/ntos/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	if(!on || !host_status())
 		if(ui)
 			ui.close()

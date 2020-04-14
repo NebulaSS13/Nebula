@@ -66,7 +66,7 @@
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/body_scanconsole/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/body_scanconsole/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	if(connected && connected.occupant)
 		data["scanEnabled"] = TRUE
 		if(ishuman(connected.occupant))

@@ -42,7 +42,7 @@
 	data["name"] = name
 	. = data
 
-/obj/machinery/computer/fusion/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/fusion/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	if(ui_template)
 		var/list/data = build_ui_data()
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

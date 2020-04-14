@@ -97,7 +97,7 @@ GLOBAL_LIST_INIT(science_strings, list(
 /datum/nano_module/program/folding
 	name = "FOLDING@SPACE"
 
-/datum/nano_module/program/folding/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/folding/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/datum/computer_file/program/folding/prog = program
 	if(!prog.computer)

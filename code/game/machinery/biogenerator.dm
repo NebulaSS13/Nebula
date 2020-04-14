@@ -120,7 +120,7 @@
  *
  *  See NanoUI documentation for details.
  */
-/obj/machinery/biogenerator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/biogenerator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	user.set_machine(src)
 	var/list/data = list()
 	data["state"] = state

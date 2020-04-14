@@ -59,7 +59,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/artifact_analyser/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/artifact_analyser/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	var/data[0]
 
 	if(!owned_scanner)

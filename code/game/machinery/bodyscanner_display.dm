@@ -41,7 +41,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/body_scan_display/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open=1)
+/obj/machinery/body_scan_display/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	var/list/data = list()
 	data["scans"] = bodyscans
 	data["selected"] = selected

@@ -152,7 +152,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/door_timer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/door_timer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = NANOUI_FOCUS)
 	var/list/data = list()
 
 	var/timeval = timing ? timeleft() : timetoset/10
