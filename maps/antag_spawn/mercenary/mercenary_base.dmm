@@ -1994,7 +1994,7 @@
 /obj/machinery/pointdefense{
 	initial_id_tag = "merc_pd"
 	},
-/obj/machinery/button/access/exterior{;
+/obj/machinery/button/access/exterior{
 	id_tag = "merc_shuttle";
 	pixel_x = 37;
 	pixel_y = -32;

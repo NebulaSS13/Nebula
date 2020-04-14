@@ -3572,7 +3572,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/button/access/shuttle/interior{;
+/obj/machinery/button/access/shuttle/interior{
 	id_tag = "ascent_port_shuttle_dock";
 	pixel_x = 4;
 	pixel_y = 24

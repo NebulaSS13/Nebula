@@ -35,7 +35,7 @@
 	apc_test_exempt_areas = list(
 		/area/casino/casino_hangar = NO_SCRUBBER,
 		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
-		/area/casino/casino_solar_control = NO_SCRUBBER,
+		/area/casino/casino_solar_control = NO_SCRUBBER|NO_VENT,
 		/area/casino/casino_maintenance = NO_SCRUBBER|NO_VENT
 	)
 
