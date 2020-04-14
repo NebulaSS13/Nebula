@@ -1063,7 +1063,7 @@ window "outputwindow"
 		is-disabled = true
 		saved-params = "is-checked"
 		text = "Chat"
-		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
+		command = ".winset \"saybutton_alt.is-checked=true?input_alt.command=\"!say \\\"\" macrobutton.is-checked=false:input_alt.command=\""
 		button-type = pushbox
 	elem "input_alt"
 		type = INPUT
@@ -1087,7 +1087,7 @@ window "outputwindow"
 		is-disabled = true
 		saved-params = ""
 		text = "Hotkey Toggle"
-		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
+		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle_alt.is-checked=false input_alt.focus=true : mainwindow.macro=hotkeymode hotkey_toggle_alt.is-checked=true mapwindow.map.focus=true\""
 		button-type = pushbox
 
 window "rpane"
