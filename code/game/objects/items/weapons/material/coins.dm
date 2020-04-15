@@ -100,6 +100,7 @@
 		animate(src, transform = flipit, time = 2, easing = QUAD_EASING)
 
 	playsound(src, 'sound/effects/coin_flip.ogg', 75, 1)
+
 	if(user && !thrown)
 		user.visible_message(
 			SPAN_NOTICE("[user] flips \the [src] into the air."),
@@ -110,9 +111,9 @@
 
 	if(!QDELETED(src))
 		if(!QDELETED(user) && loc == user && !thrown)
-			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [pick(denomination.faces)]!"))
+			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [rigged ? "on the side" : pick(denomination.faces)]!"))
 		else
-			visible_message(SPAN_NOTICE("\The [src] landed on [pick(denomination.faces)]!"))
+			visible_message(SPAN_NOTICE("\The [src] landed on [rigged ? "on the side" : pick(denomination.faces)]!"))
 
 	can_flip = TRUE
 
