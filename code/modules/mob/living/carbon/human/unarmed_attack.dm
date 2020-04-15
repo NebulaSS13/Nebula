@@ -293,7 +293,7 @@ var/global/list/sparring_attack_cache = list()
 	var/obj/item/organ/external/affecting = istype(target) && zone && target.get_organ(zone)
 	if(!affecting)
 		return ..()
-	
+
 	var/organ = affecting.name
 	var/obj/item/clothing/shoes = user.shoes
 	attack_damage = Clamp(attack_damage, 1, 5)
@@ -313,12 +313,12 @@ var/global/list/sparring_attack_cache = list()
 	deal_halloss = 3
 	attack_noun = list("limb")
 	attack_verb = list("tapped", "lightly struck")
-	damage = 2
 	shredding = 0
 	damage = 0
 	sharp = 0
 	edge = 0
 	attack_name = "light strike"
+	attack_sound = "light_strike"
 
 /decl/natural_attack/light_strike/punch
 	attack_name = "light punch"

@@ -108,3 +108,8 @@ GLOBAL_LIST_INIT(glasscrack_sound,\
 		'sound/effects/glass_crack2.ogg',\
 		'sound/effects/glass_crack3.ogg',\
 		'sound/effects/glass_crack4.ogg'))
+
+GLOBAL_LIST_INIT(light_strike_sound,\
+	list(\
+		'sound/effects/hit_kick.ogg',
+		'sound/effects/hit_punch.ogg'))
