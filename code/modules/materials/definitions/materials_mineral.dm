@@ -16,7 +16,6 @@
 		)
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	sale_price = 2
 
 /material/graphite
 	display_name = "graphite"
@@ -32,7 +31,6 @@
 		/decl/reagent/toxin/plasticide = 5,
 		/decl/reagent/acetone = 5
 		)
-	sale_price = 1
 
 /material/quartz
 	display_name = "quartz"
@@ -53,7 +51,6 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
 	reflectiveness = MAT_VALUE_SHINY
 
 /material/pyrite
@@ -75,7 +72,6 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	ore_compresses_to = MAT_PYRITE
-	sale_price = 2
 	reflectiveness = MAT_VALUE_SHINY
 
 /material/spodumene
@@ -96,7 +92,6 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
 
 /material/cinnabar
 	display_name = "cinnabar"
@@ -116,7 +111,6 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
 
 /material/phosphorite
 	display_name = "phosphorite"
@@ -136,7 +130,6 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
 
 /material/rocksalt
 	display_name = "rock salt"
@@ -156,7 +149,6 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
 
 /material/potash
 	display_name = "potash"
@@ -176,7 +168,6 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
 
 /material/bauxite
 	display_name = "bauxite"
@@ -197,7 +188,6 @@
 	icon_reinf = "reinf_stone"
 	ore_smelts_to = MAT_ALUMINIUM
 	ore_compresses_to = MAT_BAUXITE
-	sale_price = 1
 
 /material/sand
 	display_name = "sand"
@@ -244,7 +234,6 @@
 	ore_scan_icon = "mineral_uncommon"
 	xarch_source_mineral = /decl/reagent/toxin/phoron
 	ore_icon_overlay = "gems"
-	sale_price = 5
 	value = 200
 	//Note that this has a significant impact on TTV yield.
 	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.
@@ -269,7 +258,6 @@
 	stack_type = null
 	luminescence = 3
 	ore_compresses_to = null
-	sale_price = null
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)

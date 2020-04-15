@@ -7,7 +7,6 @@
 	conductive = 0
 	alloy_materials = null
 	alloy_product = FALSE
-	sale_price = null
 	hidden_from_codex = FALSE
 	value = 0
 	gas_burn_product = MAT_CO2
@@ -274,7 +273,6 @@
 	ore_name = "raw hydrogen"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "gems"
-	sale_price = 5
 	value = 100
 	gas_symbol_html = "H*"
 	gas_symbol = "H*"

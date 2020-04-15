@@ -40,11 +40,9 @@
 /datum/unit_test/cargo_sufficient_cost_test/start_test()
 	var/fail = FALSE
 	for(var/decl/hierarchy/supply_pack/supply_pack in SSsupply.master_supply_list)
-		var/sell_price = 0
-		if(ispath(supply_pack.containertype, /obj/structure/closet/crate))
-			var/obj/structure/closet/crate/crate = supply_pack.containertype
-			sell_price += initial(crate.points_per_crate)
-		sell_price += SSsupply.points_per_slip
+		var/sell_price = supply_pack.cost * SSsupply.slip_return_rebate
+		if(supply_pack.containertype)
+			sell_price += atom_info_repository.get_worth_for(supply_pack.containertype) * SSsupply.crate_return_rebate
 		if(supply_pack.cost <= sell_price)
 			log_bad("[supply_pack.name] ([supply_pack.type]) costs [supply_pack.cost], but can be sold for [sell_price].")
 			fail = TRUE

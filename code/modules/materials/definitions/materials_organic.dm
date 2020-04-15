@@ -15,7 +15,6 @@
 	chem_products = list(
 				/decl/reagent/toxin/plasticide = 20
 				)
-	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
 	wall_support_value = 10
 
@@ -23,7 +22,6 @@
 	display_name = "holographic plastic"
 	stack_type = null
 	shard_type = SHARD_NONE
-	sale_price = null
 	hidden_from_codex = TRUE
 
 /material/plastic/holographic/get_recipes(reinf_mat)

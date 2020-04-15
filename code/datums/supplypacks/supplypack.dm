@@ -1,4 +1,4 @@
-#define CARGO_PRICE_MARKUP 2.5
+#define CARGO_PRICE_MARKUP 1.5
 
 /decl/hierarchy/supply_pack
 	name = "Supply Packs"
@@ -23,7 +23,9 @@
 	cost = 0
 	for(var/entry in contains)
 		cost += atom_info_repository.get_worth_for(entry) * max(1, contains[entry])
-	cost *= CARGO_PRICE_MARKUP
+	if(containertype)
+		cost += atom_info_repository.get_worth_for(containertype)
+	cost = max(1, round(cost * CARGO_PRICE_MARKUP))
 
 	var/decl/supply_method/sm = get_supply_method(supply_method)
 	manifest = sm.setup_manifest(src)

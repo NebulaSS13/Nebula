@@ -17,7 +17,6 @@
 				)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_MATTE
-	sale_price = 2
 	value = 100
 	removed_by_welder = TRUE
 
@@ -44,7 +43,6 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "nugget"
-	sale_price = 3
 	value = 40	
 	removed_by_welder = TRUE
 
@@ -56,7 +54,6 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = null
 	ore_compresses_to = null
-	sale_price = null
 
 /material/copper
 	display_name = "copper"
@@ -79,7 +76,6 @@
 	ore_name = "tetrahedrite"
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "shiny"
-	sale_price = 1
 	removed_by_welder = TRUE
 
 /material/silver
@@ -104,7 +100,6 @@
 	ore_name = "native silver"
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "shiny"
-	sale_price = 2
 	value = 35
 	removed_by_welder = TRUE
 
@@ -126,7 +121,6 @@
 				)
 	alloy_materials = list(MAT_IRON = 1875, MAT_GRAPHITE = 1875)
 	alloy_product = TRUE
-	sale_price = 1
 	ore_smelts_to = MAT_STEEL
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_SHINY
@@ -140,7 +134,6 @@
 	conductive = 0
 	alloy_materials = null
 	alloy_product = FALSE
-	sale_price = null
 	hidden_from_codex = TRUE
 	value = 0
 
@@ -161,7 +154,6 @@
 	icon_reinf = "reinf_over"
 	icon_colour = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
-	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
 
@@ -172,7 +164,6 @@
 	conductive = 0
 	alloy_materials = null
 	alloy_product = FALSE
-	sale_price = null
 	hidden_from_codex = TRUE
 
 /material/aluminium/holographic/get_recipes(reinf_mat)
@@ -198,7 +189,6 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	alloy_materials = list(MAT_STEEL = 2500, MAT_PLATINUM = 1250)
 	alloy_product = TRUE
-	sale_price = 2
 	ore_smelts_to = MAT_PLASTEEL
 	value = 12
 	reflectiveness = MAT_VALUE_MATTE
@@ -238,7 +228,6 @@
 	alloy_materials = list(MAT_PLASTEEL = 7500, MAT_OSMIUM = 3750)
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_product = TRUE
-	sale_price = 3
 	reflectiveness = MAT_VALUE_SHINY
 
 /material/osmium
@@ -251,7 +240,6 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
-	sale_price = 3
 	ore_smelts_to = MAT_OSMIUM
 	value = 30
 	reflectiveness = MAT_VALUE_SHINY
@@ -275,7 +263,6 @@
 	ore_name = "raw platinum"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "shiny"
-	sale_price = 5
 	value = 80
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
@@ -294,7 +281,6 @@
 	chem_products = list(
 				/decl/reagent/iron = 20
 				)
-	sale_price = 1
 	value = 5
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE
@@ -365,7 +351,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_name = "hematite"
 	ore_icon_overlay = "lump"
-	sale_price = 1
 	removed_by_welder = TRUE
 
 /material/rutile
@@ -379,5 +364,4 @@
 	ore_scan_icon = "mineral_uncommon"
 	ore_name = "rutile"
 	ore_icon_overlay = "lump"
-	sale_price = 2
 	removed_by_welder = TRUE

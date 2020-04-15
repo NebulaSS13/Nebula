@@ -7,6 +7,9 @@
 
 /obj/item/get_single_monetary_worth()
 
+	if(holographic)
+		return 0
+
 	. = ..()
 
 	if(force)

@@ -190,4 +190,4 @@
 		to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
 
 /obj/item/charge_card/get_single_monetary_worth()
-	. = loaded_worth
+	. = holographic ? 0 : loaded_worth

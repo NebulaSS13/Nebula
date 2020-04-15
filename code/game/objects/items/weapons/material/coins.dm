@@ -43,7 +43,7 @@
 		desc = "A rather thick coin."
 
 /obj/item/coin/get_single_monetary_worth()
-	. = max(..(), absolute_worth)
+	. = max(..(), holographic ? 0 : absolute_worth)
 
 /obj/item/coin/examine(mob/user, distance)
 	. = ..()

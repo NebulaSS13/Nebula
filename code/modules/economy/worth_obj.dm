@@ -1,4 +1,6 @@
 /obj/get_single_monetary_worth()
+	if(holographic)
+		return 0
 	var/mult = 1
 	if(length(matter))
 		var/total_matter = 0
