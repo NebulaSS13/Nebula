@@ -253,6 +253,7 @@ var/const/POWER = 8
 	if(IsIndexCut(index))
 		return
 	UpdatePulsed(index)
+	playsound(holder, 'sound/items/multitool_pulse.ogg', 75, 1, ignore_walls = FALSE)
 
 /datum/wires/proc/GetIndex(var/colour)
 	if(wires[colour])
@@ -331,6 +332,7 @@ var/const/POWER = 8
 	else
 		wires_status |= index
 		UpdateCut(index, 0)
+	playsound(holder, 'sound/items/Wirecutter.ogg', 75, 1, ignore_walls = FALSE)
 
 /datum/wires/proc/RandomCut()
 	var/r = rand(1, wires.len)
