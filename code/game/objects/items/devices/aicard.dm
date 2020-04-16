@@ -6,7 +6,10 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = "{'programming':4,'materials':4}"
-	matter = list(MAT_GLASS = 1000, MAT_GOLD = 200)
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_PRIMARY,
+		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 	var/flush
 	var/mob/living/silicon/ai/carded_ai

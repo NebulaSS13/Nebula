@@ -19,7 +19,10 @@ AI MODULES
 	throw_speed = 3
 	throw_range = 15
 	origin_tech = "{'programming':3}"
-	matter = list(MAT_GLASS = 2000, MAT_GOLD = 100)
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_PRIMARY,
+		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT
+	)
 	var/datum/ai_laws/laws = null
 
 /obj/item/aiModule/proc/install(obj/machinery/computer/upload/comp, mob/user)

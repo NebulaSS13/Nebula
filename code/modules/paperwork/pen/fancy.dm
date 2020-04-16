@@ -4,7 +4,9 @@
 	icon_state = "fancy"
 	throwforce = 1 //pointy
 	colour = "#1c1713" //dark ashy brownish
-	matter = list(MAT_STEEL = 15)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 	isfancy = TRUE
 
 /obj/item/pen/fancy/quill

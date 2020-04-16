@@ -188,7 +188,11 @@ research holder datum.
 	level = 0
 
 /obj/item/disk
-	matter = list(MAT_PLASTIC = 30, MAT_STEEL = 30, MAT_GLASS = 10)
+	matter = list(
+		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
+		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GLASS = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/disk/tech_disk
 	name = "fabricator data disk"

@@ -16,7 +16,9 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'engineering':4,'materials':2}"
-	matter = list(MAT_STEEL = 50000)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/stored_matter = 0
 	var/max_stored_matter = 120
@@ -130,7 +132,10 @@
 	item_state = "rcdammo"
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':2}"
-	matter = list(MAT_STEEL = 15000,MAT_GLASS = 7500)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 	var/remaining = 30
 
 /obj/item/rcd_ammo/examine(mob/user, distance)
@@ -142,7 +147,10 @@
 	name = "high-capacity matter cartridge"
 	desc = "Do not ingest."
 	icon_state = "rcdlarge"
-	matter = list(MAT_STEEL = 45000,MAT_GLASS = 22500)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 	remaining = 120
 	origin_tech = "{'materials':4}"
 

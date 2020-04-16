@@ -12,7 +12,9 @@
 	throw_speed = 2
 	throw_range = 5
 	origin_tech = "{'materials':1}"
-	matter = list(MAT_STEEL = 500)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes

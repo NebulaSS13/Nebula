@@ -11,7 +11,9 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	matter = list(MAT_STEEL = 75)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 	center_of_mass = @"{'x':16,'y':7}"
 	attack_verb = list("stabbed")
 	lock_picking_level = 5

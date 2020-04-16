@@ -59,6 +59,9 @@
 /obj/item/stack/attack_self(mob/user)
 	list_recipes(user)
 
+/obj/item/stack/get_matter_amount_modifier()
+	. = amount
+
 /obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)
 	if (!recipes)
 		return

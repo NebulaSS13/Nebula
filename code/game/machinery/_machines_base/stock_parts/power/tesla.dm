@@ -28,4 +28,6 @@
 
 /obj/item/stock_parts/power/apc/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	matter = list(MAT_STEEL = 200)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)

@@ -80,7 +80,9 @@
 	icon_state = "control"
 	icon = 'icons/mecha/mech_equipment.dmi'
 	gender = NEUTER
-	matter = list(MAT_STEEL = 5000)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 
 	var/list/installed_software = list()
 	var/max_installed_software = 2

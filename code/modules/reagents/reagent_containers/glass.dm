@@ -191,7 +191,9 @@
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 	material = null
-	matter = list(MAT_STEEL = 3000)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 
 /obj/item/chems/glass/beaker/bluespace
 	name = "bluespace beaker"
@@ -203,7 +205,11 @@
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_force_multiplier = 2.5
-	matter = list(MAT_STEEL = 3000, MAT_PHORON = 3000, MAT_DIAMOND = 500)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/chems/glass/beaker/vial
 	name = "vial"
@@ -222,7 +228,10 @@
 	desc = "A glass beaker surrounded with black insulation."
 	icon_state = "insulated"
 	center_of_mass = @"{'x':15,'y':8}"
-	matter = list(MAT_GLASS = 500, MAT_PLASTIC = 250)
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_PRIMARY,
+		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT
+	)
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = null
 	temperature_coefficient = 1
@@ -232,7 +241,10 @@
 	name = "large insulated beaker"
 	icon_state = "insulatedlarge"
 	center_of_mass = @"{'x':16,'y':10}"
-	matter = list(MAT_GLASS = 5000, MAT_PLASTIC = 2500)
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_PRIMARY,
+		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT
+	)
 	volume = 120
 
 /obj/item/chems/glass/beaker/sulphuric/Initialize()

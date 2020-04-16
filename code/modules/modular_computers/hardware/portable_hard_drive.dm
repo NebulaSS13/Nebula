@@ -7,7 +7,9 @@
 	hardware_size = 1
 	max_capacity = 16
 	origin_tech = "{'programming':1}"
-	matter = list(MAT_GLASS = 800)
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_PRIMARY
+	)
 
 /obj/item/stock_parts/computer/hard_drive/portable/advanced
 	name = "advanced data crystal"
@@ -17,7 +19,9 @@
 	hardware_size = 1
 	max_capacity = 64
 	origin_tech = "{'programming':2}"
-	matter = list(MAT_GLASS = 1600)
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_PRIMARY
+	)
 
 /obj/item/stock_parts/computer/hard_drive/portable/super
 	name = "super data crystal"
@@ -27,7 +31,9 @@
 	hardware_size = 1
 	max_capacity = 256
 	origin_tech = "{'programming':4}"
-	matter = list(MAT_GLASS = 3200)
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_PRIMARY
+	)
 
 /obj/item/stock_parts/computer/hard_drive/portable/Initialize()
 	. = ..()

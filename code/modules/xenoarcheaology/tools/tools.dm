@@ -4,7 +4,9 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "measuring"
 	origin_tech = "{'materials':1}"
-	matter = list(MAT_STEEL = 100)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/storage/bag/fossils

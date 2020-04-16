@@ -5,7 +5,10 @@
 	icon_state = "hdd_normal"
 	hardware_size = 1
 	origin_tech = "{'programming':1,'engineering':1}"
-	matter = list(MAT_STEEL = 400, MAT_GLASS = 100)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 	var/max_capacity = 128
 	var/used_capacity = 0
 	var/list/stored_files = list()		// List of stored files on this drive. DO NOT MODIFY DIRECTLY!
@@ -18,7 +21,10 @@
 	power_usage = 50 					// Hybrid, medium capacity and medium power storage
 	icon_state = "hdd_advanced"
 	hardware_size = 2
-	matter = list(MAT_STEEL = 800, MAT_GLASS = 200)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/stock_parts/computer/hard_drive/super
 	name = "super hard drive"
@@ -28,7 +34,10 @@
 	power_usage = 100					// High-capacity but uses lots of power, shortening battery life. Best used with APC link.
 	icon_state = "hdd_super"
 	hardware_size = 2
-	matter = list(MAT_STEEL = 1600, MAT_GLASS = 400)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/stock_parts/computer/hard_drive/cluster
 	name = "cluster hard drive"
@@ -38,7 +47,10 @@
 	max_capacity = 2048
 	icon_state = "hdd_cluster"
 	hardware_size = 3
-	matter = list(MAT_STEEL = 3200, MAT_GLASS = 800)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 // For tablets, etc. - highly power efficient.
 /obj/item/stock_parts/computer/hard_drive/small
@@ -49,7 +61,10 @@
 	max_capacity = 64
 	icon_state = "hdd_small"
 	hardware_size = 1
-	matter = list(MAT_STEEL = 800, MAT_GLASS = 200)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/stock_parts/computer/hard_drive/micro
 	name = "micro hard drive"
@@ -59,7 +74,10 @@
 	max_capacity = 32
 	icon_state = "hdd_micro"
 	hardware_size = 1
-	matter = list(MAT_STEEL = 400, MAT_GLASS = 100)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/stock_parts/computer/hard_drive/diagnostics()
 	. = ..()

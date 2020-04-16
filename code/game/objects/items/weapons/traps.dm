@@ -10,7 +10,9 @@
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'materials':1}"
-	matter = list(MAT_STEEL = 18750)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 	can_buckle = 0 //disallow manual un/buckling
 	var/deployed = 0
 

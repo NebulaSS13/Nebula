@@ -102,10 +102,8 @@
 	. = ..()
 	if(istype(material))
 		matter = material.get_matter()
-		if(matter.len)
-			for(var/material_type in matter)
-				if(!isnull(matter[material_type]))
-					matter[material_type] *= material_force_multiplier
+		if(length(matter))
+			matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
 	else
 		material = null
 	if(islist(armor))

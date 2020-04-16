@@ -7,7 +7,9 @@
 	base_icon = "fitness-cup"
 	icon = 'icons/obj/drink_glasses/fitness.dmi'
 	volume = 100
-	matter = list(MAT_PLASTIC = 2000)
+	matter = list(
+		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY
+	)
 	filling_states = @"[10,20,30,40,50,60,70,80,90,100]"
 	possible_transfer_amounts = @"[5,10,15,25]"
 	rim_pos = null // no fruit slices

@@ -291,7 +291,9 @@
 	name = "wooden tip"
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
 	icon_state = "woodbutt"
-	matter = list(MAT_WOOD = 1)
+	matter = list(
+		MAT_WOOD = MATTER_AMOUNT_PRIMARY
+	)
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/W, var/mob/user)
 	..()

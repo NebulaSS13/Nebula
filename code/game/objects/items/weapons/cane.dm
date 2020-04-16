@@ -8,7 +8,9 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_ALUMINIUM = 50)
+	matter = list(
+		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY
+	)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 	base_parry_chance = 30
 

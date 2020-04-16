@@ -18,7 +18,7 @@
 /datum/stack_recipe/railing
 	title = "railing"
 	result_type = /obj/structure/railing
-	req_amount = 3
+	req_amount = 5
 	time = 40
 	on_floor = 1
 	difficulty = 2

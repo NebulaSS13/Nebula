@@ -8,6 +8,7 @@
 /datum/stack_recipe/furniture/chair
 	title = "chair"
 	result_type = /obj/structure/bed/chair
+	req_amount = 5
 	time = 10
 	var/list/modifiers
 
@@ -15,7 +16,6 @@
 	return modifiers ? jointext(modifiers + ..(), " ") : ..()
 
 /datum/stack_recipe/furniture/chair/padded
-	req_amount = 2
 
 #define PADDED_CHAIR(color) /datum/stack_recipe/furniture/chair/padded/##color{\
 	result_type = /obj/structure/bed/chair/padded/##color;\
@@ -128,29 +128,32 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/stool
 	title = "stool"
 	result_type = /obj/item/stool
+	req_amount = 2
 
 /datum/stack_recipe/furniture/bar_stool
 	title = "bar stool"
 	result_type = /obj/item/stool/bar
+	req_amount = 2
 
 /datum/stack_recipe/furniture/bed
 	title = "bed"
 	result_type = /obj/structure/bed
-	req_amount = 2
+	req_amount = 5
 
 /datum/stack_recipe/furniture/pew
 	title = "pew, right"
 	result_type = /obj/structure/bed/chair/pew
-	req_amount = 4
+	req_amount = 5
 
 /datum/stack_recipe/furniture/pew_left
 	title = "pew, left"
 	result_type = /obj/structure/bed/chair/pew/left
-	req_amount = 4
+	req_amount = 5
 
 /datum/stack_recipe/furniture/table_frame
 	title = "table frame"
 	result_type = /obj/structure/table
+	req_amount = 5
 	time = 10
 
 /datum/stack_recipe/furniture/rack
@@ -192,7 +195,7 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/girder
 	title = "wall support"
 	result_type = /obj/structure/girder
-	req_amount = 2
+	req_amount = 5
 	time = 50
 
 /datum/stack_recipe/furniture/wall_frame
@@ -200,6 +203,7 @@ ARMCHAIR(yellow)
 	result_type = /obj/structure/wall_frame
 	req_amount = 3
 	time = 50
+	req_amount = 5
 
 /datum/stack_recipe/furniture/machine
 	title = "machine frame"

@@ -6,7 +6,9 @@
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	matter = list(MAT_STEEL = 500)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 	var/weakref/target
 	var/active = 0
 	var/beeping = 2
@@ -116,7 +118,10 @@
 /obj/item/pinpointer/radio
 	name = "locator device"
 	desc = "Used to scan and locate signals on a particular frequency."
-	matter = list(MAT_ALUMINIUM = 1000, MAT_GLASS = 500)
+	matter = list(
+		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 	var/tracking_freq = PUB_FREQ
 
 /obj/item/pinpointer/radio/acquire_target()

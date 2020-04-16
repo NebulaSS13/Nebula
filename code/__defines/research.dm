@@ -1,6 +1,10 @@
 #define SHEET_MATERIAL_AMOUNT 2000
 #define SHEET_UNIT "<small>cm<sup>3</sup></small>"
 
+#define MATTER_AMOUNT_PRIMARY       SHEET_MATERIAL_AMOUNT
+#define MATTER_AMOUNT_REINFORCEMENT (MATTER_AMOUNT_PRIMARY * 0.5)
+#define MATTER_AMOUNT_TRACE         (MATTER_AMOUNT_PRIMARY * 0.1)
+
 #define TECH_MATERIAL    "materials"
 #define TECH_ENGINEERING "engineering"
 #define TECH_PHORON      "phorontech"

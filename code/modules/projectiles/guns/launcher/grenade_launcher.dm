@@ -13,7 +13,10 @@
 	throw_distance = 7
 	release_force = 5
 	combustion = 1
-	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 	var/obj/item/grenade/chambered
 	var/list/grenades = new/list()
@@ -25,7 +28,9 @@
 		/obj/item/grenade/flashbang/clusterbang,
 		/obj/item/grenade/frag)
 
-	matter = list(MAT_STEEL = 2000)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 
 //revolves the magazine, allowing players to choose between multiple grenade types
 /obj/item/gun/launcher/grenade/proc/pump(mob/M)

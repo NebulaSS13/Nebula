@@ -9,7 +9,10 @@
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 7
-	matter = list(MAT_STEEL = 2000, MAT_GLASS = 1000)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 	var/list/signs = list()
 	var/max_signs = 10

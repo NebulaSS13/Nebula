@@ -11,7 +11,9 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = "{'combat':1}"
-	matter = list(MAT_STEEL = 500)
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_PRIMARY
+	)
 	var/status = 0
 	var/throw_amount = 100
 	var/lit = 0	//on or off

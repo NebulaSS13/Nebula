@@ -12,7 +12,9 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	matter = list(MAT_ALUMINIUM = 3000)
+	matter = list(
+		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY
+	)
 	var/list/carrying = list() // List of things on the tray. - Doohl
 	var/max_carry = 2*BASE_STORAGE_COST(ITEM_SIZE_NORMAL)
 
