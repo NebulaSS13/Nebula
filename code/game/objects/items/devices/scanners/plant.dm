@@ -53,7 +53,7 @@
 		grown_seed.scanned = TRUE
 		var/area/map = locate(/area/overmap)
 		for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
-			if(grown_seed in P.seeds)
+			if(grown_seed in P.small_flora_types)
 				SSstatistics.add_field(STAT_XENOPLANTS_SCANNED, 1)
 				break
 

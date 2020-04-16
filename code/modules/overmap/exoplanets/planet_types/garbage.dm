@@ -9,6 +9,10 @@
 	plant_colors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
 	surface_color = "#a5a18b"
 	water_color = null
+	has_trees = FALSE
+	flora_diversity = 2
+	fauna_types = list(/mob/living/simple_animal/hostile/hivebot, /mob/living/simple_animal/hostile/hivebot/range, /mob/living/simple_animal/hostile/viscerator/hive)
+	megafauna_types = list(/mob/living/simple_animal/hostile/hivebot/mega)
 
 /obj/effect/overmap/visitable/sector/exoplanet/garbage/generate_map()
 	if(prob(50))
@@ -21,9 +25,9 @@
 		atmosphere.temperature = T20C + rand(20, 100)
 		atmosphere.update_values()
 
-/obj/effect/overmap/visitable/sector/exoplanet/garbage/update_biome()
+/obj/effect/overmap/visitable/sector/exoplanet/garbage/generate_flora()
 	..()
-	for(var/datum/seed/S in seeds)
+	for(var/datum/seed/S in small_flora_types)
 		if(prob(90))
 			S.set_trait(TRAIT_REQUIRES_WATER,0)
 		else
@@ -47,10 +51,7 @@
 	land_type = /turf/simulated/floor/exoplanet/desert
 	flora_prob = 1
 	large_flora_prob = 0
-	flora_diversity = 2
-	fauna_types = list(/mob/living/simple_animal/hostile/hivebot, /mob/living/simple_animal/hostile/hivebot/range, /mob/living/simple_animal/hostile/viscerator/hive)
 	fauna_prob = 4
-	megafauna_types = list(/mob/living/simple_animal/hostile/hivebot/mega)
 	var/fallout = 0
 
 /datum/random_map/noise/exoplanet/garbage/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
