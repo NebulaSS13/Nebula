@@ -176,4 +176,4 @@
 #define MAT_VALUE_VERY_SHINY        60
 #define MAT_VALUE_MIRRORED          80
 
-#define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+#define STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)

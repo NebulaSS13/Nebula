@@ -4,45 +4,39 @@
 	icon_state = "metal"
 	hitsound = 'sound/weapons/genhit.ogg'
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_COLOR
+	maxhealth = 50
+	density =  TRUE
+	anchored = TRUE
+	opacity =  TRUE
 
 	var/changing_state = FALSE
 	var/icon_base
 	var/datum/lock/lock
-	var/initial_lock_value //for mapping purposes. Basically if this value is set, it sets the lock to this value.
 
 /obj/structure/door/Initialize()
 	. = ..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
-	if(initial_lock_value)
-		locked = initial_lock_value
-	if(locked)
-		lock = new(src,locked)
+	if(lock)
+		lock = new /datum/lock(src, lock)
+	if(!icon_base)
+		icon_base = material.door_icon_base
+	update_nearby_tiles(need_rebuild=TRUE)
 
 /obj/structure/door/Destroy()
+	update_nearby_tiles()
 	QDEL_NULL(lock)
 	return ..()
 
-/obj/structure/door/update_from_materials()
-	. = ..()
-	if(material)
-		maxhealth = max(100, material.integrity*10)
-		hitsound = material.hitsound
-	else
-		maxhealth = initial(maxhealth)
-		hitsound = initial(hitsound)
-	health = min(health, maxhealth)
+/obj/structure/door/get_material_health_modifier()
+	. = 10
 
 /obj/structure/door/on_update_icon()
+	..()
 	if(density)
 		icon_state = "[icon_base]"
 	else
 		icon_state = "[icon_base]open"
-
-/obj/structure/door/bullet_act(var/obj/item/projectile/Proj)
-	var/damage = Proj.get_structure_damage()
-	if(damage)
-		take_damage(min(damage, 100))
 
 /obj/structure/door/proc/post_change_state()
 	update_nearby_tiles()
@@ -50,19 +44,12 @@
 	changing_state = FALSE
 
 /obj/structure/door/attack_hand(var/mob/user)
-	if(user.a_intent == I_HURT)
-		. = ..()
-	else
-		if(density)
-			open()
-		else
-			close()
-		return TRUE
+	return density ? open() : close()
 
 /obj/structure/door/proc/close()
 	set waitfor = 0
-	if(!can_close(forced))
-		return
+	if(!can_close())
+		return FALSE
 	flick("[icon_base]closing", src)
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 
@@ -71,11 +58,12 @@
 	set_density(TRUE)
 	set_opacity(initial(opacity) && material.opacity > 0.5)
 	post_change_state()
+	return TRUE
 
 /obj/structure/door/proc/open()
 	set waitfor = 0
-	if(!can_open(forced))
-		return
+	if(!can_open())
+		return FALSE
 	flick("[icon_base]opening", src)
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	
@@ -84,6 +72,7 @@
 	set_density(FALSE)
 	set_opacity(FALSE)
 	post_change_state()
+	return TRUE
 
 /obj/structure/door/proc/can_open()
 	if(lock && lock.isLocked())
@@ -142,6 +131,16 @@
 	else
 		close()
 
+/obj/structure/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(air_group)
+		return !density
+	if(istype(mover, /obj/effect/beam))
+		return !opacity
+	return !density
+
+/obj/structure/door/CanFluidPass(var/coming_from)
+	return !density
+
 /obj/structure/door/Bumped(atom/AM)
 	if(!density || changing_state)
 		return
@@ -193,5 +192,4 @@
 	opacity = FALSE
 
 /obj/structure/door/shuttle
-	icon_base = "saloon"
 	material = MAT_STEEL

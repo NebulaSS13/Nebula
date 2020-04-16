@@ -13,8 +13,8 @@
 	material = MAT_STEEL
 	handle_generic_blending = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
+	maxhealth = 20
 
-	var/health = 10
 	var/destroyed = 0
 	var/list/connections
 	var/list/other_connections
@@ -23,16 +23,19 @@
 	connections = null
 	other_connections = null
 
+/obj/structure/grille/get_material_health_modifier()
+	. = (1/15)
+
 /obj/structure/grille/set_connections(dirs, other_dirs)
 	connections = dirs_to_corner_states(dirs)
 	other_connections = dirs_to_corner_states(other_dirs)
 
-/obj/structure/grille/update_materials(var/keep_health)
-	..()
-	desc = "A lattice of [material.display_name] rods, with screws to secure it to the floor."
-	if(!keep_health)
-		health = max(1, round(material.integrity/15))
-	
+/obj/structure/grille/update_material_desc(override_desc)
+	if(material)
+		desc = "A lattice of [material.display_name] rods, with screws to secure it to the floor."
+	else
+		..()
+
 /obj/structure/grille/Initialize()
 	. = ..()
 	if(!istype(material))
@@ -201,13 +204,10 @@
 				take_damage(W.force * 0.1)
 	..()
 
-/obj/structure/grille/proc/healthcheck()
-	if(health <= 0)
-		if(!destroyed)
-			visible_message("<span class='notice'>\The [src] falls to pieces!</span>")
-			cut_grille()
-		else if(health <= -6)
-			qdel(src)
+/obj/structure/grille/destroyed()
+	if(!destroyed)
+		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))
+	cut_grille()
 
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
@@ -241,10 +241,6 @@
 		if(exposed_temperature > material.melting_point)
 			take_damage(1)
 	..()
-
-/obj/structure/grille/take_damage(damage)
-	health -= damage
-	healthcheck()
 
 // Used in mapping to avoid
 /obj/structure/grille/broken

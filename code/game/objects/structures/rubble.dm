@@ -7,11 +7,11 @@
 	opacity = 1
 	density = 1
 	anchored = 1
+	maxhealth = 50
 
 	var/list/loot = list(/obj/item/cell,/obj/item/stack/material/iron,/obj/item/stack/material/rods)
 	var/lootleft = 1
 	var/emptyprob = 95
-	var/health = 40
 	var/is_rummaging = 0
 
 /obj/structure/rubble/Initialize()
@@ -71,12 +71,12 @@
 				var/obj/item/booty = pickweight(loot)
 				booty = new booty(loc)
 			qdel(src)
-	else 
-		..()
-		health -= I.force
-		if(health < 1)
-			visible_message("[user] clears away \the [src].")
-			qdel(src)
+		return TRUE
+	. = ..()
+
+/obj/structure/rubble/destroyed()
+	visible_message(SPAN_NOTICE("\The [src] is cleared away."))
+	qdel(src)
 
 /obj/structure/rubble/house
 	loot = list(

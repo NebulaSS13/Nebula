@@ -7,7 +7,7 @@
 	layer =    BELOW_OBJ_LAYER
 	material_alteration =    MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
-	var/health = 100
+	maxhealth = 100
 	var/cover = 50
 	var/prepped_for_fakewall
 
@@ -84,12 +84,6 @@
 	..()
 	if(damage)
 		take_damage(damage)
-
-/obj/structure/girder/take_damage(damage)
-	health -= damage
-	..()
-	if(health <= 0)
-		dismantle()
 
 /obj/structure/girder/CanFluidPass(var/coming_from)
 	return TRUE
@@ -231,7 +225,7 @@
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
-	health = 250
+	maxhealth = 150
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()
