@@ -1143,6 +1143,7 @@
 #include "code\game\objects\structures\_structure_materials.dm"
 #include "code\game\objects\structures\ai_decoy.dm"
 #include "code\game\objects\structures\barricade.dm"
+#include "code\game\objects\structures\barrier.dm"
 #include "code\game\objects\structures\barsign.dm"
 #include "code\game\objects\structures\bedsheet_bin.dm"
 #include "code\game\objects\structures\bookcase.dm"
