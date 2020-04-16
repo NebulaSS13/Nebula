@@ -21,21 +21,6 @@
 	var/active = FALSE
 	var/list/resource_field = list()
 
-	var/ore_types = list(
-		MAT_IRON     =          /obj/item/ore/iron,
-		MAT_URANIUM =           /obj/item/ore/uranium,
-		MAT_GOLD =              /obj/item/ore/gold,
-		MAT_SILVER =            /obj/item/ore/silver,
-		MAT_DIAMOND =           /obj/item/ore/diamond,
-		MAT_PHORON =            /obj/item/ore/phoron,
-		MAT_OSMIUM =            /obj/item/ore/osmium,
-		MAT_METALLIC_HYDROGEN = /obj/item/ore/hydrogen,
-		MAT_SAND =              /obj/item/ore/glass,
-		MAT_GRAPHITE =          /obj/item/ore/coal,
-		MAT_ALUMINIUM =         /obj/item/ore/aluminium,
-		MAT_RUTILE =            /obj/item/ore/rutile
-		)
-
 	//Upgrades
 	var/harvest_speed
 	var/capacity
@@ -84,7 +69,7 @@
 		T.ex_act(2.0)
 
 	//Dig out the tasty ores.
-	if(resource_field.len)
+	if(length(resource_field))
 		var/turf/simulated/harvesting = pick(resource_field)
 
 		while(resource_field.len && !harvesting.resources)
@@ -98,9 +83,7 @@
 			return
 
 		var/total_harvest = harvest_speed //Ore harvest-per-tick.
-		var/found_resource = 0 //If this doesn't get set, the area is depleted and the drill errors out.
-
-		for(var/metal in ore_types)
+		for(var/metal in harvesting.resources)
 
 			if(contents.len >= capacity)
 				system_error("insufficient storage space")
@@ -112,26 +95,23 @@
 			if(contents.len + total_harvest >= capacity)
 				total_harvest = capacity - contents.len
 
-			if(total_harvest <= 0) break
-			if(harvesting.resources[metal])
+			if(total_harvest <= 0) 
+				break
 
-				found_resource  = 1
+			var/create_ore = 0
+			if(harvesting.resources[metal] >= total_harvest)
+				harvesting.resources[metal] -= total_harvest
+				create_ore = total_harvest
+				total_harvest = 0
+			else
+				total_harvest -= harvesting.resources[metal]
+				create_ore = harvesting.resources[metal]
+				harvesting.resources -= metal
 
-				var/create_ore = 0
-				if(harvesting.resources[metal] >= total_harvest)
-					harvesting.resources[metal] -= total_harvest
-					create_ore = total_harvest
-					total_harvest = 0
-				else
-					total_harvest -= harvesting.resources[metal]
-					create_ore = harvesting.resources[metal]
-					harvesting.resources[metal] = 0
+			for(var/i=1, i <= create_ore, i++)
+				new /obj/item/ore(src, metal)
 
-				for(var/i=1, i <= create_ore, i++)
-					var/oretype = ore_types[metal]
-					new oretype(src)
-
-		if(!found_resource)
+		if(!length(harvesting.resources))
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
