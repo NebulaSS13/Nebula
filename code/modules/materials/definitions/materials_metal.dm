@@ -144,6 +144,9 @@
 	hidden_from_codex = TRUE
 	value = 0
 
+/material/steel/holographic/get_recipes(reinf_mat)
+	return list()
+
 /material/aluminium
 	display_name = "aluminium"
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
@@ -171,6 +174,9 @@
 	alloy_product = FALSE
 	sale_price = null
 	hidden_from_codex = TRUE
+
+/material/aluminium/holographic/get_recipes(reinf_mat)
+	return list()
 
 /material/plasteel
 	display_name = "plasteel"

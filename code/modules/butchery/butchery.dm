@@ -67,7 +67,7 @@
 	icon_state = "spike"
 	material = MAT_STEEL
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
-	matter = list(MAT_STEEL = 20000)
+	matter = list(DEFAULT_FURNITURE_MATERIAL = 20000)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 
 	var/mob/living/occupant
