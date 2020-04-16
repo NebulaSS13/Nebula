@@ -29,9 +29,6 @@
 /obj/structure/railing/mapped/no_density
 	density = 0
 
-/obj/structure/railing/mapped/no_density/Initialize()
-	. = ..()
-	update_icon()
 
 /obj/structure/railing/Process()
 	if(!material || !material.radioactivity)
@@ -41,6 +38,8 @@
 
 /obj/structure/railing/Initialize()
 	. = ..()
+	if(!material)
+		return INITIALIZE_HINT_QDEL
 	if(material.products_need_process())
 		START_PROCESSING(SSobj, src)
 	if(material.conductive)
@@ -59,7 +58,7 @@
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE
-	atom_flags = 0
+	atom_flags &= ~ATOM_FLAG_CHECKS_BORDER
 	broken = TRUE
 	for(var/thing in trange(1, src))
 		var/turf/T = thing

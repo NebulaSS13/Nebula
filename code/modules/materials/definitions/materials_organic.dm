@@ -26,6 +26,9 @@
 	sale_price = null
 	hidden_from_codex = TRUE
 
+/material/plastic/holographic/get_recipes(reinf_mat)
+	return list()
+
 /material/cardboard
 	display_name = "cardboard"
 	lore_text = "What with the difficulties presented by growing plants in orbit, a stock of cardboard in space is probably more valuable than gold."

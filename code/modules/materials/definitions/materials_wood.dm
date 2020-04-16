@@ -41,6 +41,9 @@
 	value = 0
 	hidden_from_codex = TRUE
 
+/material/wood/holographic/get_recipes(reinf_mat)
+	return list()
+
 /material/wood/mahogany
 	display_name = "mahogany"
 	adjective_name = "mahogany"

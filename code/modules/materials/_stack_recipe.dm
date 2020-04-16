@@ -52,7 +52,16 @@
 	else
 		O = new result_type(location)
 	if(user)
-		O.set_dir(user.dir)
+		O.set_dir(user?.dir)
+
+	// Temp block pending material/matter rework
+	if(use_material && use_material != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
+		var/obj/struct = O
+		if(LAZYACCESS(struct.matter, DEFAULT_FURNITURE_MATERIAL) > 0)
+			struct.matter[use_material] = max(struct.matter[use_material], struct.matter[DEFAULT_FURNITURE_MATERIAL])
+			struct.matter -= DEFAULT_FURNITURE_MATERIAL
+	// End temp block
+
 	return O
 
 /datum/stack_recipe/proc/can_make(mob/user)

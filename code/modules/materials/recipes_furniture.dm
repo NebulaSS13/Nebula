@@ -314,7 +314,7 @@ ARMCHAIR(yellow)
 				return FALSE
 
 /datum/stack_recipe/furniture/borderwindow/spawn_result(mob/user, location, amount)
-	return new result_type(user?.loc, user.dir, 1, use_material, use_reinf_material)
+	return new result_type(user?.loc, user?.dir, 1, use_material, use_reinf_material)
 
 /datum/stack_recipe/furniture/windoor
 	title = "windoor assembly"
@@ -331,4 +331,4 @@ ARMCHAIR(yellow)
 			return FALSE
 
 /datum/stack_recipe/furniture/windoor/spawn_result(mob/user, location, amount)
-	return new result_type(user?.loc, user.dir, 1, use_material, use_reinf_material)
+	return new result_type(user?.loc, user?.dir, 1, use_material, use_reinf_material)
