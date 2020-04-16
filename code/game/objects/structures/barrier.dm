@@ -15,8 +15,8 @@
 
 /obj/structure/defensive_barrier/Initialize()
 	. = ..()
-	update_layers()
 	queue_icon_update()
+	GLOB.dir_set_event.register(src, src, .proc/update_layers)
 
 /obj/structure/defensive_barrier/examine(user)
 	. = ..()
@@ -32,10 +32,12 @@
 
 /obj/structure/defensive_barrier/Destroy()
 	if(health <= 0)
-		visible_message(SPAN_DANGER("[src] was destroyed!"))
+		visible_message(SPAN_DANGER("\The [src] was destroyed!"))
 		playsound(src, 'sound/effects/clang.ogg', 100, 1)
 		new /obj/item/stack/material/steel(loc)
 		new /obj/item/stack/material/steel(loc)
+
+	GLOB.dir_set_event.unregister(src, src, .proc/update_layers)
 	return ..()
 
 /obj/structure/defensive_barrier/proc/update_layers()
@@ -54,11 +56,9 @@
 	if(deployed)
 		icon_state = "barrier_deployed"
 
-/obj/structure/defensive_barrier/set_dir()
-	..()
 	update_layers()
 
-/obj/structure/defensive_barrier/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+/obj/structure/defensive_barrier/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
 	if(!density)
 		return TRUE
 
@@ -96,13 +96,12 @@
 		return
 
 	if(deployed)
-		to_chat(user, SPAN_NOTICE("[src] is already deployed. You can't move it."))
+		to_chat(user, SPAN_NOTICE("\The [src] is already deployed. You can't move it."))
 	else
 		if(do_after(user, 5, src))
 			playsound(src, 'sound/effects/extout.ogg', 100, 1)
 			density = !density
-			to_chat(user, SPAN_NOTICE("You're getting [density ? "up" : "down"] [src]."))
-			update_layers()
+			to_chat(user, SPAN_NOTICE("You're getting [density ? "up" : "down"] \the [src]."))
 			update_icon()
 
 /obj/structure/defensive_barrier/attackby(obj/item/W, mob/user)
@@ -111,20 +110,28 @@
 		if(health == maxhealth)
 			to_chat(user, SPAN_NOTICE("\The [src] is fully repaired."))
 			return
+
 		if(!WT.isOn())
-			to_chat(user, SPAN_NOTICE("[W] should be turned on firstly."))
+			to_chat(user, SPAN_NOTICE("\The [W] should be turned on firstly."))
 			return
+
 		if(WT.remove_fuel(0,user))
-			visible_message(SPAN_WARNING("[user] is repairing \the [src]..."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
+			user.visible_message(
+				SPAN_NOTICE("[user] starts to repair \the [src]."),
+				SPAN_NOTICE("You begin to repair \the [src]."))
+
 			if(do_after(user, max(5, health / 5), src) && WT?.isOn())
-				to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
 				playsound(src, 'sound/items/Welder2.ogg', 100, 1)
+				user.visible_message(
+					SPAN_NOTICE("[user] finished repairing \the [src]."),
+					SPAN_NOTICE("You finish repair \the [src]."))
 				health = maxhealth
 		else
 			to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
 		update_icon()
 		return
+
 	if(isScrewdriver(W))
 		if(density)
 			user.visible_message(SPAN_DANGER("[user] begins to [deployed ? "un" : ""]deploy \the [src]..."))
@@ -138,19 +145,20 @@
 					basic_chance = 50
 		update_icon()
 		return
+
 	if(isCrowbar(W))
 		if(!deployed && !density)
 			visible_message(SPAN_DANGER("[user] is begins disassembling \the [src]..."))
 			playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 			if(do_after(user, 60, src))
-				var/obj/item/barrier/B = new /obj/item/barrier(get_turf(user))
+				var/obj/item/defensive_barrier/B = new /obj/item/defensive_barrier(get_turf(user))
 				visible_message(SPAN_NOTICE("[user] dismantled \the [src]."))
 				playsound(src, 'sound/items/Deconstruct.ogg', 100, 1)
 				B.health = health
 				B.add_fingerprint(user)
 				qdel(src)
 		else
-			to_chat(user, SPAN_NOTICE("You should unsecure \the [src] firstly. Use a screwdriver."))
+			to_chat(user, SPAN_NOTICE("You should unsecure \the [src] first. Use a screwdriver."))
 		update_icon()
 		return
 	else
@@ -225,7 +233,7 @@
 		else
 	return
 
-/obj/item/barrier
+/obj/item/defensive_barrier
 	name = "portable barrier"
 	desc = "A portable barrier. Usually, you can see it on defensive positions or in storages at important areas"
 	icon = 'icons/obj/structures/barrier.dmi'
@@ -233,14 +241,14 @@
 	w_class = ITEM_SIZE_LARGE
 	health = 200
 
-/obj/item/barrier/proc/turf_check(mob/user)
+/obj/item/defensive_barrier/proc/turf_check(mob/user)
 	for(var/obj/structure/defensive_barrier/D in user.loc.contents)
 		if((D.dir == user.dir))
 			to_chat(user, SPAN_WARNING("There is no more space."))
 			return 1
 	return 0
 
-/obj/item/barrier/attack_self(mob/user)
+/obj/item/defensive_barrier/attack_self(mob/user)
 	if(!isturf(user.loc))
 		to_chat(user, SPAN_WARNING("You can't place it here."))
 		return
@@ -255,7 +263,7 @@
 		user.drop_item()
 		qdel(src)
 
-/obj/item/barrier/attackby(obj/item/W, mob/user)
+/obj/item/defensive_barrier/attackby(obj/item/W, mob/user)
 	if(health != 200 && isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.isOn())
