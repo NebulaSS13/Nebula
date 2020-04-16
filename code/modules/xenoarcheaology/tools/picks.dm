@@ -6,9 +6,7 @@
 	force = 3
 	throwforce = 0
 	attack_verb = list("stabbed", "jabbed", "spiked", "attacked")
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 	w_class = ITEM_SIZE_SMALL
 	drill_verb = "delicately picking"
 	digspeed = 20
@@ -75,9 +73,7 @@
 	excavation_amount = 30
 	drill_sound = 'sound/items/Crowbar.ogg'
 	drill_verb = "clearing"
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 	w_class = ITEM_SIZE_NORMAL
 	force = 6
 	throwforce = 3

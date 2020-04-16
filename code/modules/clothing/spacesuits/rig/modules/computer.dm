@@ -42,8 +42,8 @@
 	interface_name = "integrated intelligence system"
 	interface_desc = "A socket that supports a range of artificial intelligence systems."
 
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE
@@ -364,8 +364,8 @@
 	interface_desc = "Colloquially known as a power siphon, this module drains power through the suit hands into the suit battery."
 
 	origin_tech = "{'powerstorage':6,'engineering':6}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE

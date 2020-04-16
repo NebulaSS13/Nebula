@@ -233,10 +233,8 @@ var/list/all_conveyor_switches = list()
 	name = "conveyor belt assembly"
 	desc = "A conveyor belt assembly. Must be linked to a conveyor control switch assembly before placement."
 	w_class = ITEM_SIZE_HUGE
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
-		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_STEEL
+	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	var/id_tag
 
 /obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
@@ -268,9 +266,7 @@ var/list/all_conveyor_switches = list()
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	w_class = ITEM_SIZE_HUGE
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 	var/id_tag
 
 /obj/item/conveyor_switch_construct/Initialize()

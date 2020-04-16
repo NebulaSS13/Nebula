@@ -10,9 +10,7 @@
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
 	origin_tech = "{'combat':3,'magnets':2}"
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/midlaser
 	wielded_item_state = "laser-wielded"
 
@@ -93,8 +91,8 @@ obj/item/gun/energy/retro
 	accuracy = 2
 	fire_delay = 20
 	wielded_item_state = "gun_wielded"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)
@@ -123,8 +121,8 @@ obj/item/gun/energy/retro
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
 	combustion = 0
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE
 	)
@@ -140,8 +138,8 @@ obj/item/gun/energy/retro
 	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE
 	)
@@ -180,9 +178,7 @@ obj/item/gun/energy/retro
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = "{'combat':1,'magnets':2}"
 	self_recharge = 1
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 

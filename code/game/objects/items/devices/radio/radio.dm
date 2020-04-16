@@ -24,10 +24,8 @@
 	throw_range = 9
 	w_class = ITEM_SIZE_SMALL
 
-	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_PRIMARY,
-		MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_GLASS
+	matter = list(MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT)
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 

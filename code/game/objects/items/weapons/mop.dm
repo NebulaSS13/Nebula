@@ -77,8 +77,8 @@
 	force = 6
 	throwforce = 11
 	mopspeed = 20
+	material = MAT_ALUMINIUM
 	matter = list(
-		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE
 	)

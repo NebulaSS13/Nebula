@@ -161,8 +161,8 @@
 	projectile_type = /obj/item/projectile/bullet/magnetic/flechette
 	loaded = /obj/item/magnetic_ammo
 	wielded_item_state = "z8carbine-wielded"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_SILVER = MATTER_AMOUNT_TRACE,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE

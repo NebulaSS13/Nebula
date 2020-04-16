@@ -47,9 +47,7 @@
 	vision_flags = SEE_MOBS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	power_use = 200
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 
 /obj/item/mech_component/sensors/combat/prebuild()
 	..()
@@ -64,9 +62,7 @@
 	exosuit_desc_string = "an armoured chassis"
 	icon_state = "combat_body"
 	power_use = 40
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 
 /obj/item/mech_component/chassis/combat/prebuild()
 	. = ..()

@@ -14,8 +14,8 @@
 	throw_speed = 5
 	throw_range = 10
 	origin_tech = "{'magnets':2,'biotech':1,'engineering':2}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE
 	)

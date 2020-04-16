@@ -324,8 +324,8 @@
 	online_slowdown = 0
 	offline_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY //You're wearing a flash protective space suit without light compensation, think it makes sense
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_SILVER = MATTER_AMOUNT_TRACE
 	)

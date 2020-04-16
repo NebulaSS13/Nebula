@@ -14,8 +14,8 @@
 	icon_state = "armor-chest"
 	desc = "Nanomachines, son."
 	action_button_name = "Toggle Nanomachines"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE

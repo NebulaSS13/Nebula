@@ -9,9 +9,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_HEAD | SLOT_MASK
 	hitsound = 'sound/effects/plunger.ogg'
-	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_PLASTIC
 
 /obj/item/plunger
 	name = "plunger"

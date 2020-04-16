@@ -188,8 +188,8 @@ research holder datum.
 	level = 0
 
 /obj/item/disk
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)

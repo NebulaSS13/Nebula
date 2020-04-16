@@ -5,8 +5,8 @@
 	icon_state = "price_scanner"
 	origin_tech = "{'materials':6,'magnets':4}"
 	scan_sound = 'sound/effects/checkout.ogg'
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_SILVER = MATTER_AMOUNT_TRACE
 	)

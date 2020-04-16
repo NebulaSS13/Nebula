@@ -39,9 +39,7 @@
 	item_state = "gun"
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 	w_class = ITEM_SIZE_NORMAL
 	throwforce = 5
 	throw_speed = 4

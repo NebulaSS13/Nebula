@@ -3,8 +3,8 @@
 	holding_type = /obj/item/rcd/mounted
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_SILVER = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE

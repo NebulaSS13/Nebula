@@ -15,8 +15,8 @@
 	origin_tech = "{'materials':7,'powerstorage':7,'engineering':5}"
 	base_type = /obj/item/stock_parts/smes_coil
 	part_flags = PART_FLAG_HAND_REMOVE
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
 		MAT_SILVER = MATTER_AMOUNT_TRACE,

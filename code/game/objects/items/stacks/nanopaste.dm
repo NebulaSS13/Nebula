@@ -6,10 +6,8 @@
 	icon_state = "tube"
 	origin_tech = "{'materials':4,'engineering':3}"
 	amount = 10
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stack/nanopaste/attack(mob/living/M, mob/user)
 	if (!istype(M) || !istype(user))

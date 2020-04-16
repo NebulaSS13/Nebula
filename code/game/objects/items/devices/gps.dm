@@ -5,14 +5,14 @@
 	icon_state = "locator"
 	item_state = "locator"
 	origin_tech = "{'materials':2,'programming':2,'bluespace':2}"
+	material = MAT_ALUMINIUM
 	matter = list(
-		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)
 	w_class = ITEM_SIZE_SMALL
+	material = MAT_ALUMINIUM
 	matter = list(
-		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)

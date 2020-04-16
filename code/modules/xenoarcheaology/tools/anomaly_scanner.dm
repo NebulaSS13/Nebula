@@ -5,8 +5,8 @@
 	icon_state = "flashgun"
 	item_state = "lampgreen"
 	origin_tech = "{'bluespace':3,'magnets':3}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)

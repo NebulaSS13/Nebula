@@ -29,8 +29,8 @@
 
 	suit_overlay_active =   "stealth_active"
 	suit_overlay_inactive = "stealth_inactive"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE,
 		MAT_SILVER = MATTER_AMOUNT_TRACE,
@@ -154,8 +154,8 @@
 	fabrication_type = /obj/item/energy_net
 	use_power_cost = 20 KILOWATTS
 	origin_tech = "{'materials':5,'powerstorage':6,'magnets':5,'esoteric':4,'engineering':6}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE

@@ -51,8 +51,8 @@
 	self_recharge = 1
 	modifystate = null
 	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE
 	)

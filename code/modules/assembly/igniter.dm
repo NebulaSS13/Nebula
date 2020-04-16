@@ -3,8 +3,8 @@
 	desc = "A small electronic device able to ignite combustable substances."
 	icon_state = "igniter"
 	origin_tech = "{'magnets':1}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_WASTE = MATTER_AMOUNT_TRACE
 	)

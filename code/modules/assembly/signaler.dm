@@ -4,8 +4,8 @@
 	icon_state = "signaller"
 	item_state = "signaler"
 	origin_tech = "{'magnets':1}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_WASTE = MATTER_AMOUNT_TRACE
 	)

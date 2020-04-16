@@ -1,6 +1,6 @@
 /obj/item/frame_holder
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_OSMIUM = MATTER_AMOUNT_TRACE
 	)
@@ -17,9 +17,7 @@
 	icon_state = "backbone"
 	density = 1
 	pixel_x = -8
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 
 	// Holders for the final product.
 	var/obj/item/mech_component/manipulators/arms

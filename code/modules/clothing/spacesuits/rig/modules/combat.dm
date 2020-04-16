@@ -35,8 +35,8 @@
 	device = /obj/item/flash
 
 	origin_tech = "{'combat':2,'magnets':3,'engineering':5}"
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)
@@ -263,8 +263,8 @@
 	interface_name = "mounted energy gun"
 	interface_desc = "A shoulder-mounted suit-powered energy gun."
 	origin_tech = "{'powerstorage':6,'combat':6,'engineering':6}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
@@ -285,8 +285,8 @@
 	interface_name = "mounted electrolaser"
 	interface_desc = "A shoulder-mounted, cell-powered electrolaser."
 	origin_tech = "{'powerstorage':5,'combat':5,'engineering':6}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE
@@ -307,8 +307,8 @@
 	origin_tech = "{'materials':5,'phorontech':4,'engineering':7,'combat':5}"
 
 	gun = /obj/item/gun/energy/plasmacutter/mounted
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,

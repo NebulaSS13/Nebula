@@ -6,10 +6,8 @@
 	item_state = ""
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/translate_binary = 0
 	var/translate_hive = 0

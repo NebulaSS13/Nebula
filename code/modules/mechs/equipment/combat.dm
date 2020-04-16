@@ -49,8 +49,8 @@
 	icon_state = "shield_droid"
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE
 	)

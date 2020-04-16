@@ -73,8 +73,8 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 	throw_range = 3
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'engineering':5,'materials':4}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_SILVER = MATTER_AMOUNT_TRACE
 	)

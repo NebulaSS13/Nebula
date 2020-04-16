@@ -11,9 +11,7 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "rg0"
 	icon_state = "rg"
-	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_GLASS
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[1,2,5]"
 	volume = 15
@@ -406,8 +404,8 @@
 	amount_per_transfer_from_this = 20
 	volume = 60
 	icon_state = "bs"
+	material = MAT_GLASS
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_PRIMARY,
 		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)
@@ -418,8 +416,8 @@
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	icon_state = "cs"
+	material = MAT_GLASS
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_PRIMARY,
 		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE
 	)

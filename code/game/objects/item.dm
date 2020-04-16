@@ -101,9 +101,8 @@
 		set_material(material_key)
 	. = ..()
 	if(istype(material))
-		matter = material.get_matter()
-		if(length(matter))
-			matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
+		LAZYINITLIST(matter)
+		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
 	else
 		material = null
 	if(islist(armor))

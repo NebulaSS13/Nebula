@@ -6,9 +6,7 @@
 	icon = 'icons/obj/trash.dmi'
 	w_class = ITEM_SIZE_SMALL
 	desc = "This is rubbish."
-	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_PLASTIC
 	var/age = 0
 
 /obj/item/trash/Initialize(mapload, var/_age)

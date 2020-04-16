@@ -4,10 +4,8 @@
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "syringe-cartridge"
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 3
@@ -70,9 +68,7 @@
 	item_state = "syringegun"
 	w_class = ITEM_SIZE_LARGE
 	force = 7
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 	slot_flags = SLOT_BELT
 
 	fire_sound = 'sound/weapons/empty.ogg'
@@ -140,10 +136,8 @@
 	icon_state = "rapidsyringegun"
 	item_state = "rapidsyringegun"
 	max_darts = 5
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/gun/launcher/syringe/disguised
 	name = "deluxe electronic cigarette"

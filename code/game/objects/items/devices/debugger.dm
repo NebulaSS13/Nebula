@@ -17,8 +17,8 @@
 	throw_speed = 3
 	desc = "You can use this on airlocks or APCs to try to hack them without cutting wires."
 
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)

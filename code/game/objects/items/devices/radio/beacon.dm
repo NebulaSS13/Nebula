@@ -4,10 +4,8 @@
 	icon_state = "beacon"
 	item_state = "signaler"
 	origin_tech = "{'bluespace':1}"
-	matter = list(
-		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_ALUMINIUM
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/code = "electronic"
 	var/functioning = TRUE

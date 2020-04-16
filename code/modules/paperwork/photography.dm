@@ -147,10 +147,8 @@ var/global/photo_count = 0
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	matter = list(
-		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY,
-		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_ALUMINIUM
+	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	var/pictures_max = 10
 	var/pictures_left = 10
 	var/on = 1

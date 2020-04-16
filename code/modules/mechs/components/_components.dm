@@ -14,8 +14,8 @@
 	var/list/has_hardpoints = list()
 	var/decal
 	var/power_use = 0
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_OSMIUM = MATTER_AMOUNT_TRACE
 	)

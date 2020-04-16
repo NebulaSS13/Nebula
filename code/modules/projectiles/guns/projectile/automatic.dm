@@ -19,8 +19,8 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)
@@ -67,8 +67,8 @@
 	wielded_item_state = "z8carbine-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)

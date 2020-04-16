@@ -4,8 +4,8 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "hdiffuser_off"
 	origin_tech = "{'magnets':5,'powerstorage':5,'esoteric':2}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
 		MAT_SILVER = MATTER_AMOUNT_TRACE

@@ -6,9 +6,7 @@
 	desc = "Protected by FRM."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "cyborg_upgrade"
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 
 	var/locked = 0
 	var/require_module = 0
@@ -54,8 +52,8 @@
 	name = "\improper Madhouse Productions Official Party Module"
 	desc = "A weird-looking chip with third-party additions crudely soldered in. It feels cheap and chintzy in the hand. Inscribed into the cheap-feeling circuit is the logo of Madhouse Productions, a group that arranges parties and entertainment venues."
 	new_module = "Party"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)
@@ -104,10 +102,8 @@
 	name = "robot emergency restart module"
 	desc = "Used to force a restart of a disabled-but-repaired robot, bringing it back online."
 	icon_state = "cyborg_upgrade1"
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/borg/upgrade/restart/action(var/mob/living/silicon/robot/R)
 	if(R.health < 0)
@@ -130,8 +126,8 @@
 	desc = "Used to kick in a robot's VTEC systems, increasing their speed."
 	icon_state = "cyborg_upgrade2"
 	require_module = 1
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE
 	)
@@ -152,8 +148,8 @@
 	desc = "Used to cool a mounted energy gun, increasing the potential current in it and thus its recharge rate."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
@@ -189,8 +185,8 @@
 	desc = "A carbon dioxide jetpack suitable for low-gravity mining operations."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE
 	)
@@ -214,8 +210,8 @@
 	desc = "A rapid construction device module for use during construction operations."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
 		MAT_SILVER = MATTER_AMOUNT_TRACE
@@ -237,8 +233,8 @@
 	desc = "Unlocks the hidden, deadlier functions of a robot."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)

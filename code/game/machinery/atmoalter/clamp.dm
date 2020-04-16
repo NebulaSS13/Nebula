@@ -137,10 +137,8 @@
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "pclamp0"
 	origin_tech = "{'engineering':4,'magnets':4}"
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clamp/afterattack(var/atom/A, mob/user, proximity)
 	if(!proximity)

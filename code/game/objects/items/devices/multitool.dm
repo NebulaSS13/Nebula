@@ -15,8 +15,8 @@
 	throw_range = 15
 	throw_speed = 3
 
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_STEEL = MATTER_AMOUNT_TRACE
 	)

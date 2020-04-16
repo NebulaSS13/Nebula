@@ -556,8 +556,8 @@
 	action_flags = IC_ACTION_LONG_RANGE
 
 	origin_tech = "{'magnets':1,'bluespace':3}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE
 	)

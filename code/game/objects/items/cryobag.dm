@@ -7,8 +7,8 @@
 	icon_state = "bodybag_folded"
 	origin_tech = "{'biotech':4}"
 	material = MAT_PLASTIC
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_SILVER = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE

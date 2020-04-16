@@ -84,8 +84,8 @@
 							/obj/item/stack/cable_coil = 2,
 							/obj/item/stock_parts/matter_bin = 1,
 							/obj/item/stock_parts/capacitor = 2)
+	material = MAT_GOLD
 	matter = list(
-		MAT_GOLD = MATTER_AMOUNT_PRIMARY,
 		MAT_DIAMOND = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE,

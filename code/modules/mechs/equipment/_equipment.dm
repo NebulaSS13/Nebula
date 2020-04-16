@@ -4,8 +4,8 @@
 	name = "exosuit hardpoint system"
 	icon = 'icons/mecha/mech_equipment.dmi'
 	icon_state = ""
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_OSMIUM = MATTER_AMOUNT_TRACE
 	)

@@ -39,8 +39,8 @@
 	use_power_cost = 200
 	origin_tech = "{'magnets':3,'biotech':3,'engineering':5}"
 	device = /obj/item/scanner/health
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)
@@ -68,8 +68,8 @@
 	module_cooldown = 0
 	origin_tech = "{'materials':6,'powerstorage':4,'engineering':6}"
 	device = /obj/item/pickaxe/diamonddrill
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE
@@ -87,8 +87,8 @@
 	selectable = 0
 	device = /obj/item/ano_scanner
 	origin_tech = "{'bluespace':4,'magnets':4,'engineering':6}"
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)
@@ -106,8 +106,8 @@
 	use_power_cost = 200
 	device = /obj/item/scanner/mining
 	origin_tech = "{'materials':4,'magnets':4,'engineering':6}"
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)
@@ -130,8 +130,8 @@
 	use_power_cost = 300
 	origin_tech = "{'materials':6,'magnets':5,'engineering':7}"
 	device = /obj/item/rcd/mounted
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
@@ -388,8 +388,8 @@
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
 	origin_tech = "{'materials':6,'engineering':7}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)
@@ -509,8 +509,8 @@
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = "{'materials':5,'engineering':5}"
 	device = /obj/item/matter_decompiler
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE
 	)
@@ -522,8 +522,8 @@
 	interface_name = "mounted cooling unit"
 	interface_desc = "A heat sink with a liquid cooled radiator."
 	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE
 	)

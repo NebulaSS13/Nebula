@@ -7,9 +7,7 @@
 	//Limited to robolimbs
 	augment_flags = AUGMENTATION_MECHANIC
 	desc = "A DIY modular assembly. Circuitry not included"
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 
 
 /obj/item/organ/internal/augment/active/simple/circuit/attackby(obj/item/W, mob/user)

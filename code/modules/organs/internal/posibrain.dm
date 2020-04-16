@@ -13,8 +13,8 @@
 	throw_range = 5
 	origin_tech = "{'engineering':4,'materials':4,'bluespace':2,'programming':4}"
 	attack_verb = list("attacked", "slapped", "whacked")
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_SILVER = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,

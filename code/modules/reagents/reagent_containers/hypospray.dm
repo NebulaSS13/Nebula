@@ -79,8 +79,8 @@
 	volume = 0
 	time = 0 // hyposprays are instant for conscious people
 	single_use = FALSE
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_SILVER = MATTER_AMOUNT_TRACE
 	)
@@ -205,7 +205,5 @@
 	name = "autoinjector"
 	band_color = COLOR_WHITE
 	starts_with = list()
-	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_PLASTIC
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)

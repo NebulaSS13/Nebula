@@ -55,8 +55,8 @@
 	engage_string = "Cycle Visor Mode"
 	activate_string = "Enable Visor"
 	deactivate_string = "Disable Visor"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE
 	)
@@ -124,8 +124,8 @@
 	interface_desc = "An integrated night vision system."
 
 	vision_modes = list(/datum/rig_vision/nvg)
+	material = MAT_PLASTIC
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE

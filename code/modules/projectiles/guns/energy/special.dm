@@ -45,10 +45,8 @@
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
 	combustion = 0
-	matter = list(
-		MAT_GOLD = MATTER_AMOUNT_PRIMARY,
-		MAT_URANIUM = MATTER_AMOUNT_REINFORCEMENT
-	)
+	material = MAT_GOLD
+	matter = list(MAT_URANIUM = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/gun/energy/floragun
 	name = "floral somatoray"
@@ -62,8 +60,8 @@
 	origin_tech = "{'materials':2,'biotech':3,'powerstorage':3}"
 	modifystate = "floramut"
 	self_recharge = 1
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE
 	)
@@ -150,8 +148,8 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':5,'phorontech':4}"
 	projectile_type = /obj/item/projectile/energy/phoron
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PHORON = MATTER_AMOUNT_TRACE
 	)
@@ -168,14 +166,12 @@
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
 	origin_tech = "{'materials':4,'phorontech':4,'engineering':6,'combat':3}"
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
 	self_recharge = 1
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
 		MAT_PHORON = MATTER_AMOUNT_TRACE
@@ -220,8 +216,8 @@
 	item_state = "incen"
 	safety_icon = "safety"
 	origin_tech = "{'combat':7,'magnets':4,'esoteric':4}"
+	material = MAT_ALUMINIUM
 	matter = list(
-		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY,
 		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)

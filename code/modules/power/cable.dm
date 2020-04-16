@@ -473,8 +473,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
 	throw_range = 5
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE
 	)

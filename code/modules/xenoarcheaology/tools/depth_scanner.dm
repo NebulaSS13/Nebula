@@ -5,8 +5,8 @@
 	icon_state = "crap"
 	item_state = "analyzer"
 	origin_tech = "{'magnets':2,'engineering':2,'bluespace':2}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_ALUMINIUM = MATTER_AMOUNT_TRACE
 	)

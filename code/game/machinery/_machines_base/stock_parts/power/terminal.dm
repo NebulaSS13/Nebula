@@ -178,9 +178,7 @@
 
 /obj/item/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY
-	)
+	material = MAT_STEEL
 
 /decl/stock_part_preset/terminal_setup
 	expected_part_type = /obj/item/stock_parts/power/terminal

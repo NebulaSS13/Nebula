@@ -6,8 +6,8 @@
 	item_state = "emp"
 	det_time = 20
 	origin_tech = "{'bluespace':4,'materials':4}"
+	material = MAT_STEEL
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)

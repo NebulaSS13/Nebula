@@ -14,8 +14,8 @@
 	w_class = ITEM_SIZE_SMALL
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
+	material = MAT_ALUMINIUM
 	matter = list(
-		MAT_ALUMINIUM = MATTER_AMOUNT_PRIMARY,
 		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GLASS = MATTER_AMOUNT_TRACE,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE
