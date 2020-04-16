@@ -38,7 +38,7 @@
 		new /obj/item/stack/material/steel(loc)
 
 	GLOB.dir_set_event.unregister(src, src, .proc/update_layers)
-	return ..()
+	. = ..()
 
 /obj/structure/defensive_barrier/proc/update_layers()
 	if(dir != SOUTH)
@@ -58,8 +58,8 @@
 
 	update_layers()
 
-/obj/structure/defensive_barrier/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
-	if(!density)
+/obj/structure/defensive_barrier/CanPass(atom/movable/mover, turf/target, height, air_group)
+	if(!density || air_group)
 		return TRUE
 
 	if(istype(mover, /obj/item/projectile))
@@ -78,6 +78,7 @@
 
 	if(get_dir(get_turf(src), target) == dir && density)//turned in front of barrier
 		return FALSE
+
 	return TRUE
 
 /obj/structure/defensive_barrier/CheckExit(atom/movable/O, target)
