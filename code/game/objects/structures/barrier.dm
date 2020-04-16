@@ -86,8 +86,6 @@
 		return TRUE
 	if (get_dir(loc, target) == dir)
 		return !density
-	else
-		return TRUE
 	return TRUE
 
 /obj/structure/defensive_barrier/attack_hand(mob/living/carbon/human/user)
