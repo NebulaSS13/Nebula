@@ -6,8 +6,8 @@
 	. = ..()
 	QDEL_NULL_LIST(data)
 
-/datum/forensics/fingerprints/add_from_atom(mob/M)
-	var/datum/fingerprint/F = new(M)
+/datum/forensics/fingerprints/add_from_atom(mob/M, ignore_gloves)
+	var/datum/fingerprint/F = new(M, ignore_gloves)
 	if(F.completeness > 0)
 		add_data(F)
 
@@ -54,14 +54,14 @@
 
 	//Using prints from severed hand items!
 	var/obj/item/organ/external/E = M.get_active_hand()
-	if(src != E && istype(E) && E.get_fingerprint())
+	if(istype(E) && E.get_fingerprint())
 		full_print = E.get_fingerprint()
 		ignore_gloves = 1
 
 	if(!ignore_gloves)
 		var/obj/item/cover = M.get_covering_equipped_item(M.hand ? HAND_LEFT : HAND_RIGHT)
 		if(cover)
-			cover.add_fingerprint(M)
+			cover.add_fingerprint(M, 1)
 			return
 
 	var/extra_crispy = 0

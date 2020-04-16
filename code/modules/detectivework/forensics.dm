@@ -28,7 +28,7 @@
 		return
 
 	var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
-	forensics.add_from_atom(/datum/forensics/fingerprints, M)
+	forensics.add_from_atom(/datum/forensics/fingerprints, M, ignoregloves)
 	forensics.add_from_atom(/datum/forensics/fibers, M)
 
 	add_hiddenprint(M)
