@@ -12,6 +12,10 @@
 		update_material_name()
 	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
 		update_material_desc()
+	if(material.opacity < 0.5)
+		set_opacity(FALSE)
+	else
+		set_opacity(initial(opacity))
 	queue_icon_update()
 
 /obj/structure/proc/update_material_name(var/override_name)

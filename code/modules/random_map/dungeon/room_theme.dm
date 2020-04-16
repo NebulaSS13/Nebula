@@ -2,7 +2,7 @@
 /datum/room_theme
 	var/wall_type
 	var/floor_type
-	var/door_type = /obj/machinery/door/unpowered/simple/iron
+	var/door_type = /obj/structure/door/iron
 	var/xorigin = 1
 	var/yorigin = 1
 	var/zorigin = 1
@@ -53,7 +53,7 @@
 					return 0
 	if(!T)
 		return 0
-	if(ispath(door_type,/obj/machinery/door/unpowered/simple))
+	if(ispath(door_type,/obj/structure/door))
 		new door_type(T,null,lock_data)
 	else
 		new door_type(T)

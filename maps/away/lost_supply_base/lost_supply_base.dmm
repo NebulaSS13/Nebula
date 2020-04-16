@@ -1609,7 +1609,7 @@
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "ew" = (
-/obj/machinery/door/unpowered/shuttle,
+/obj/structure/door/shuttle,
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "ex" = (

@@ -99,6 +99,18 @@
 		return FALSE
 	return TRUE
 
+/obj/structure/proc/can_repair_with(var/obj/item/tool)
+	. = istype(tool, /obj/item/stack/material) && tool.get_material_type() == get_material_type()
+
+/obj/structure/proc/handle_repair(mob/user, obj/item/tool)
+	var/obj/item/stack/stack = tool
+	var/amount_needed = ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
+	var/used = min(amount_needed,stack.amount)
+	if(used)
+		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))
+		stack.use(used)
+		health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
+
 /obj/structure/attackby(obj/item/O, mob/user)
 	if(isWrench(O))
 		. = handle_default_wrench_attackby(user, O)
@@ -112,5 +124,7 @@
 		. = handle_default_cable_attackby(user, O)
 	else if(isWirecutter(O))
 		. = handle_default_wirecutter_attackby(user, O)
+	else if(can_repair_with(I) && can_repair(user))
+		. = handle_repair(user, I)
 	if(.)
 		add_fingerprint(user)

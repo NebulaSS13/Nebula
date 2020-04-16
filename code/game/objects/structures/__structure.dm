@@ -91,6 +91,10 @@
 /obj/structure/proc/take_damage(var/damage)
 	return
 
+/obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	. = ..()
+	take_damage(100*material.combustion_effect(get_turf(src),temperature, 0.3))
+
 /obj/structure/Destroy()
 	reset_mobs_offset()
 	var/turf/T = get_turf(src)
@@ -174,3 +178,9 @@
 				return
 		if(3.0)
 			return
+
+/obj/structure/proc/can_repair(var/mob/user)
+	if(health >= maxhealth)
+		to_chat(user, SPAN_NOTICE("\The [src] does not need repairs."))
+		return FALSE
+	return TRUE

@@ -3,7 +3,7 @@
 /turf/simulated/wall/iron,
 /area/template_noop)
 "c" = (
-/obj/machinery/door/unpowered/simple/uranium,
+/obj/structure/door/uranium,
 /turf/template_noop,
 /area/template_noop)
 "d" = (
