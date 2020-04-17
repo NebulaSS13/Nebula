@@ -211,6 +211,14 @@
 		/datum/reagent/silicon = 20
 		)
 
+/material/sand/clay
+	display_name = "clay"
+	icon_colour = COLOR_OFF_WHITE
+	ore_name = "clay"
+	ore_icon_overlay = "lump"
+	ore_smelts_to = MAT_CERAMIC
+	ore_compresses_to = MAT_CLAY
+
 /material/phoron
 	display_name = "phoron"
 	stack_type = /obj/item/stack/material/phoron

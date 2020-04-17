@@ -60,6 +60,12 @@
 	sale_price = 1
 	value = 4
 
+/material/stone/ceramic
+	display_name = "ceramic"
+	lore_text = "A hard substance produced by firing clay in a kiln."
+	stack_type = /obj/item/stack/material/generic
+	icon_colour = COLOR_OFF_WHITE
+
 /material/stone/marble
 	display_name = "marble"
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
