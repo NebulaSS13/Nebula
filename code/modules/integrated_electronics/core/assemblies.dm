@@ -92,10 +92,13 @@
 		if(D.check_access(src))
 			D.open()
 
+/obj/item/electronic_assembly/create_matter()
+	..()
+	LAZYSET(matter, MAT_STEEL, round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier)
+
 /obj/item/electronic_assembly/Initialize()
-	.=..()
+	. = ..()
 	START_PROCESSING(SScircuit, src)
-	matter[MAT_STEEL] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
 
 /obj/item/electronic_assembly/Destroy()
 	STOP_PROCESSING(SScircuit, src)

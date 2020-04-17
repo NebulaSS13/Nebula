@@ -104,7 +104,7 @@ ARMCHAIR(yellow)
 #undef ARMCHAIR
 
 /datum/stack_recipe/furniture/chair/wood
-	req_amount = 3
+	req_amount = 5
 
 /datum/stack_recipe/furniture/chair/wood/normal
 	result_type = /obj/structure/bed/chair/wood
@@ -158,18 +158,19 @@ ARMCHAIR(yellow)
 
 /datum/stack_recipe/furniture/rack
 	title = "rack"
+	req_amount = 5
 	result_type = /obj/structure/table/rack
 
 /datum/stack_recipe/furniture/closet
 	title = "closet"
 	result_type = /obj/structure/closet
-	req_amount = 2
+	req_amount = 5
 	time = 15
 
 /datum/stack_recipe/furniture/canister
 	title = "canister"
 	result_type = /obj/machinery/portable_atmospherics/canister
-	req_amount = 10
+	req_amount = 20
 	time = 10
 
 /datum/stack_recipe/furniture/tank
@@ -335,4 +336,4 @@ ARMCHAIR(yellow)
 			return FALSE
 
 /datum/stack_recipe/furniture/windoor/spawn_result(mob/user, location, amount)
-	return new result_type(user?.loc, user?.dir, 1, use_material, use_reinf_material)
+	return new result_type(user?.loc, use_material, use_reinf_material)

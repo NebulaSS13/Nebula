@@ -94,17 +94,19 @@
 	var/unbreakable = FALSE                    // Whether or not this weapon degrades.
 	var/anomaly_shielding					   // 0..1 value of how well it shields against xenoarch anomalies
 
+/obj/item/create_matter()
+	..()
+	LAZYINITLIST(matter)
+	if(istype(material))
+		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
+	UNSETEMPTY(matter)
+
 /obj/item/Initialize(var/ml, var/material_key)
-	if(!material_key)
+	if(!ispath(material_key, /material))
 		material_key = material
 	if(material_key)
 		set_material(material_key)
 	. = ..()
-	if(istype(material))
-		LAZYINITLIST(matter)
-		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
-	else
-		material = null
 	if(islist(armor))
 		for(var/type in armor)
 			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.

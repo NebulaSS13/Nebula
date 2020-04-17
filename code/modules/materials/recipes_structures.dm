@@ -10,7 +10,7 @@
 /datum/stack_recipe/ai_core
 	title = "AI core"
 	result_type = /obj/structure/aicore
-	req_amount = 4
+	req_amount = 5
 	time = 50
 	one_per_turf = 1
 	difficulty = 2

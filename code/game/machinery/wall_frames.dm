@@ -99,14 +99,12 @@
 	name = "spotlight fixture frame"
 	icon_state = "tube-construct-item"
 	material = MAT_STEEL
-	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	build_machine_type = /obj/machinery/light/spot/buildable
 
 /obj/item/frame/light/nav
 	name = "navigation light fixture frame"
 	icon_state = "tube-construct-item"
 	material = MAT_STEEL
-	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	build_machine_type = /obj/machinery/light/navigation/buildable
 
 /obj/item/frame/button
@@ -114,7 +112,6 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "launcherbtt"
 	material = MAT_STEEL
-	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	build_machine_type = /obj/machinery/button/buildable
 
 /obj/item/frame/button/modify_positioning(var/obj/machinery/button/product, _dir, click_params)
@@ -142,7 +139,6 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "wrecharger0"
 	material = MAT_STEEL
-	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	build_machine_type = /obj/machinery/recharger/wallcharger
 
 /obj/item/frame/button/wall_charger/kit
@@ -155,7 +151,6 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "migniter"
 	material = MAT_STEEL
-	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	build_machine_type = /obj/machinery/sparker/buildable
 
 // Shifts it dead center of the turf you are looking at. Useful for items with antiquated icons.

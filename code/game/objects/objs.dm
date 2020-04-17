@@ -16,11 +16,11 @@
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 
-/obj/Initialize()
-	. = ..()
+/obj/proc/create_matter()
 	if(length(matter))
 		for(var/mat in matter)
 			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
+	UNSETEMPTY(matter)
 
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)

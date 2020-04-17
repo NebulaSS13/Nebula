@@ -11,7 +11,6 @@
 
 	var/material/reinf_material
 	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
-	var/matter_multiplier = 1
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
 	. = ..(mapload, amount, _material)
@@ -50,9 +49,6 @@
 
 /obj/item/stack/material/get_material()
 	return material
-
-/obj/item/stack/material/get_matter_amount_modifier()
-	. = ..() * matter_multiplier
 
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
