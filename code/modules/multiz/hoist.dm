@@ -52,13 +52,13 @@
 		"You hear something clamp into place.")
 
 /obj/structure/hoist/proc/attach_hoistee(atom/movable/AM)
-	if (get_turf(AM) != get_turf(source_hook))
-		AM.forceMove(get_turf(source_hook))
 	hoistee = AM
 	if(ismob(AM))
 		source_hook.buckle_mob(AM)
 	AM.anchored = TRUE // why isn't this being set by buckle_mob for silicons?
 	source_hook.layer = AM.layer + 0.1
+	if (get_turf(AM) != get_turf(source_hook))
+		AM.forceMove(get_turf(source_hook))
 
 /obj/effect/hoist_hook/MouseDrop(atom/dest)
 	..()
