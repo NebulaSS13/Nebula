@@ -120,7 +120,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 				var/area/A = get_area(src)
 				S.environment = A.sound_env
 
-		else 
+		else
 			var/area/A = get_area(src)
 			S.environment = A.sound_env
 
@@ -146,6 +146,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 			if ("sparks") soundin = pick(GLOB.spark_sound)
 			if ("rustle") soundin = pick(GLOB.rustle_sound)
 			if ("punch") soundin = pick(GLOB.punch_sound)
+			if ("light_strike") soundin = pick(GLOB.light_strike_sound)
 			if ("clownstep") soundin = pick(GLOB.clown_sound)
 			if ("swing_hit") soundin = pick(GLOB.swing_hit_sound)
 			if ("hiss") soundin = pick(GLOB.hiss_sound)
