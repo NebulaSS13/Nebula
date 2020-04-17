@@ -14,7 +14,8 @@
 	if (!do_after(usr, (2 SECONDS), src))
 		return
 
-	new /obj/structure/hoist(get_turf(user), user.dir)
+	var/obj/structure/hoist/hoist = new (get_turf(user), user.dir)
+	transfer_fingerprints_to(hoist)
 	user.visible_message(
 		SPAN_NOTICE("[user] deploys the hoist kit!"),
 		SPAN_NOTICE("You deploy the hoist kit!"),
@@ -59,6 +60,8 @@
 	source_hook.layer = AM.layer + 0.1
 	if (get_turf(AM) != get_turf(source_hook))
 		AM.forceMove(get_turf(source_hook))
+
+	GLOB.destroyed_event.register(AM, src, .proc/release_hoistee)
 
 /obj/effect/hoist_hook/MouseDrop(atom/dest)
 	..()
@@ -141,6 +144,7 @@
 		source_hook.unbuckle_mob(hoistee)
 	else
 		hoistee.anchored = FALSE
+	GLOB.destroyed_event.unregister(hoistee, src)
 	hoistee = null
 	layer = initial(layer)
 
@@ -231,8 +235,10 @@
 	if (do_after(user, (1 SECONDS) * size / 4, src))
 		move_dir(movedir, 1)
 
-/obj/structure/hoist/proc/collapse_kit()
-	new /obj/item/hoist_kit(get_turf(src))
+/obj/structure/hoist/proc/collapse_kit(mob/user)
+	var/obj/item/hoist_kit/kit = new (get_turf(src))
+	if(user)
+		transfer_fingerprints_to(kit)
 	qdel(src)
 
 /obj/structure/hoist/verb/collapse_hoist()
@@ -245,8 +251,7 @@
 
 	if (isobserver(usr) || usr.incapacitated())
 		return
-	if (!usr.check_dexterity(DEXTERITY_GRIP, silent = TRUE)) // thanks nanacode
-		to_chat(usr, SPAN_NOTICE("You stare cluelessly at \the [src]."))
+	if (!usr.check_dexterity(DEXTERITY_GRIP))
 		return
 
 	if (hoistee)
