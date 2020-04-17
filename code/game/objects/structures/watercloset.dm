@@ -17,13 +17,15 @@
 	. = ..()
 
 /obj/structure/hygiene/proc/clog(var/severity)
-	if(clogged) //We can only clog if our state is zero, aka completely unclogged and cloggable
+	if(clogged || !anchored) //We can only clog if our state is zero, aka completely unclogged and cloggable
 		return FALSE
 	clogged = severity
+	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
 	return TRUE
 
 /obj/structure/hygiene/proc/unclog()
 	clogged = 0
+	tool_interaction_flags = initial(tool_interaction_flags)
 
 /obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
 	if(clogged > 0 && isPlunger(thing))
@@ -96,6 +98,8 @@
 	icon_state = "toilet00"
 	density = 0
 	anchored = 1
+	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
+
 	var/open = 0			//if the lid is up
 	var/cistern = 0			//if the cistern bit is open
 	var/w_items = 0			//the combined w_class of all the items in the cistern
@@ -108,14 +112,16 @@
 
 /obj/structure/hygiene/toilet/attack_hand(var/mob/living/user)
 	if(swirlie)
-		usr.visible_message("<span class='danger'>[user] slams the toilet seat onto [swirlie.name]'s head!</span>", "<span class='notice'>You slam the toilet seat onto [swirlie.name]'s head!</span>", "You hear reverberating porcelain.")
+		usr.visible_message(
+			"<span class='danger'>[user] slams the toilet seat onto [swirlie.name]'s head!</span>",
+			"<span class='notice'>You slam the toilet seat onto [swirlie.name]'s head!</span>",
+			"You hear reverberating porcelain.")
 		swirlie.adjustBruteLoss(8)
 		return
 
 	if(cistern && !open)
 		if(!contents.len)
 			to_chat(user, "<span class='notice'>The cistern is empty.</span>")
-			return
 		else
 			var/obj/item/I = pick(contents)
 			if(ishuman(user))
@@ -124,7 +130,7 @@
 				I.dropInto(loc)
 			to_chat(user, "<span class='notice'>You find \an [I] in the cistern.</span>")
 			w_items -= I.w_class
-			return
+		return
 
 	open = !open
 	update_icon()
@@ -137,14 +143,18 @@
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
 		if(do_after(user, 30, src))
-			user.visible_message("<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>", "<span class='notice'>You [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>", "You hear grinding porcelain.")
+			user.visible_message(
+				"<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>",
+				"<span class='notice'>You [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>",
+				"You hear grinding porcelain.")
 			cistern = !cistern
 			update_icon()
-			return
+		return
 
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
 		var/mob/living/GM = G.get_affecting_mob()
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(GM)
 			if(!GM.loc == get_turf(src))
 				to_chat(user, "<span class='warning'>\The [GM] needs to be on the toilet.</span>")
@@ -157,8 +167,12 @@
 					GM.adjustOxyLoss(5)
 				swirlie = null
 			else
-				user.visible_message("<span class='danger'>\The [user] slams [GM.name] into the [src]!</span>", "<span class='notice'>You slam [GM.name] into the [src]!</span>")
+				user.visible_message(
+				"<span class='danger'>\The [user] slams [GM.name] into the [src]!</span>",
+				"<span class='notice'>You slam [GM.name] into the [src]!</span>")
 				GM.adjustBruteLoss(8)
+				playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
+		return
 
 	if(cistern && !istype(user,/mob/living/silicon/robot)) //STOP PUTTING YOUR MODULES IN THE TOILET.
 		if(I.w_class > ITEM_SIZE_NORMAL)
@@ -248,7 +262,9 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 50, src))
 			watertemp = newtemp
-			user.visible_message("<span class='notice'>\The [user] adjusts \the [src] with \the [I].</span>", "<span class='notice'>You adjust the shower with \the [I].</span>")
+			user.visible_message(
+				"<span class='notice'>\The [user] adjusts \the [src] with \the [I].</span>",
+				"<span class='notice'>You adjust the shower with \the [I].</span>")
 			add_fingerprint(user)
 			return
 	. = ..()
