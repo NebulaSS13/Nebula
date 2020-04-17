@@ -131,7 +131,8 @@
 /obj/structure/catwalk/hoist_act(turf/dest)
 	for(var/A in loc)
 		var/atom/movable/AM = A
-		AM.forceMove(dest)
+		if (AM.simulated && !AM.anchored)
+			AM.forceMove(dest)
 	..()
 
 /obj/structure/catwalk/refresh_neighbors()

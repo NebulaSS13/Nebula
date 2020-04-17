@@ -16,9 +16,9 @@
 
 	new /obj/structure/hoist(get_turf(user), user.dir)
 	user.visible_message(
-		SPAN_WARNING("[user] deploys the hoist kit!"),
+		SPAN_NOTICE("[user] deploys the hoist kit!"),
 		SPAN_NOTICE("You deploy the hoist kit!"),
-		SPAN_NOTICE("You hear the sound of parts snapping into place."))
+		"You hear the sound of parts snapping into place.")
 	qdel(src)
 
 /obj/effect/hoist_hook
@@ -28,6 +28,7 @@
 	icon_state = "hoist_hook"
 	can_buckle = TRUE
 	anchored = TRUE
+	simulated = FALSE
 
 	var/obj/structure/hoist/source_hoist
 
@@ -39,16 +40,16 @@
 		return
 
 	if (!AM.simulated || AM.anchored)
-		to_chat(user, SPAN_NOTICE("You can't do that."))
+		to_chat(user, SPAN_WARNING("You can't do that with \the [AM]."))
 		return
 	if (source_hoist.hoistee)
 		to_chat(user, SPAN_NOTICE("\The [source_hoist.hoistee] is already attached to \the [src]!"))
 		return
 	source_hoist.attach_hoistee(AM)
 	user.visible_message(
-		SPAN_DANGER("[user] attaches \the [AM] to \the [src]."),
-		SPAN_DANGER("You attach \the [AM] to \the [src]."),
-		SPAN_DANGER("You hear something clamp into place."))
+		SPAN_NOTICE("[user] attaches \the [AM] to \the [src]."),
+		SPAN_NOTICE("You attach \the [AM] to \the [src]."),
+		"You hear something clamp into place.")
 
 /obj/structure/hoist/proc/attach_hoistee(atom/movable/AM)
 	if (get_turf(AM) != get_turf(source_hook))
@@ -67,11 +68,10 @@
 		return
 
 	if (usr.incapacitated())
-		to_chat(usr, SPAN_NOTICE("You can't do that while incapacitated."))
+		to_chat(usr, SPAN_WARNING("You can't do that while incapacitated."))
 		return
 
-	if (!usr.check_dexterity(DEXTERITY_GRIP, silent = TRUE))
-		to_chat(usr, SPAN_NOTICE("You stare cluelessly at \the [src]."))
+	if (!usr.check_dexterity(DEXTERITY_GRIP))
 		return
 
 	if (!source_hoist.hoistee)
@@ -86,9 +86,9 @@
 	var/turf/desturf = dest
 	source_hoist.hoistee.forceMove(desturf)
 	usr.visible_message(
-		SPAN_DANGER("[usr] detaches \the [source_hoist.hoistee] from the hoist clamp."),
-		SPAN_DANGER("You detach \the [source_hoist.hoistee] from the hoist clamp."),
-		SPAN_DANGER("You hear something unclamp."))
+		SPAN_NOTICE("[usr] detaches \the [source_hoist.hoistee] from the hoist clamp."),
+		SPAN_NOTICE("You detach \the [source_hoist.hoistee] from the hoist clamp."),
+		"You hear something unclamp.")
 	source_hoist.release_hoistee()
 
 // This will handle mobs unbuckling themselves.
@@ -97,7 +97,7 @@
 	if (. && !QDELETED(source_hoist))
 		var/mob/M = .
 		source_hoist.hoistee = null
-		fall(M)	// fuck you, you fall now!
+		M.fall(get_turf(src))	// fuck you, you fall now!
 
 /obj/structure/hoist
 	name = "hoist"
@@ -142,7 +142,7 @@
 	else
 		hoistee.anchored = FALSE
 	hoistee = null
-	layer = NORMAL_LAYER
+	layer = initial(layer)
 
 /obj/structure/hoist/proc/break_hoist()
 	if(broken)
@@ -190,11 +190,10 @@
 		return
 
 	if (user.incapacitated())
-		to_chat(user, SPAN_NOTICE("You can't do that while incapacitated."))
+		to_chat(user, SPAN_WARNING("You can't do that while incapacitated."))
 		return
 
-	if (!user.check_dexterity(DEXTERITY_GRIP, silent = TRUE))
-		to_chat(user, SPAN_NOTICE("You stare cluelessly at \the [src]."))
+	if (!user.check_dexterity(DEXTERITY_GRIP))
 		return
 
 	if(broken)
