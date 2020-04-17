@@ -223,15 +223,47 @@
 	var/on = 0
 	var/obj/effect/mist/mymist = null
 	var/ismist = 0				//needs a var so we can make it linger~
-	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/is_washing = 0
+	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
+
+	var/sound_id
+	var/datum/sound_token/sound_token
+
+//add heat controls? when emagged, you can freeze to death in it?
 
 /obj/structure/hygiene/shower/Initialize()
 	. = ..()
 	create_reagents(50)
+	sound_id = "[type]_[sequential_id(type)]"
 
-//add heat controls? when emagged, you can freeze to death in it?
+/obj/structure/hygiene/shower/Destroy()
+	QDEL_NULL(sound_token)
+	. = ..()
+
+/obj/structure/hygiene/shower/attack_hand(mob/M)
+	switch_state(!on, M)
+
+/obj/structure/hygiene/shower/proc/switch_state(new_state, mob/user)
+	if(new_state == on)
+		return
+
+	on = new_state
+	if(on && user)
+		if(user.loc == loc)
+			wash(user)
+			process_heat(user)
+		for(var/atom/movable/G in loc)
+			G.clean_blood()
+
+	update_icon()
+	update_sound()
+
+/obj/structure/hygiene/shower/proc/update_sound()
+	playsound(src, on ? 'sound/effects/shower_start.ogg' : 'sound/effects/shower_end.ogg', 40)
+	QDEL_NULL(sound_token)
+	if(on)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/effects/shower_mid3.ogg', volume = 20, range = 7, falloff = 4, prefer_mute = TRUE)
 
 /obj/effect/mist
 	name = "mist"
@@ -240,16 +272,6 @@
 	layer = MOB_LAYER + 1
 	anchored = 1
 	mouse_opacity = 0
-
-/obj/structure/hygiene/shower/attack_hand(var/mob/M)
-	on = !on
-	update_icon()
-	if(on)
-		if (M.loc == loc)
-			wash(M)
-			process_heat(M)
-		for (var/atom/movable/G in src.loc)
-			G.clean_blood()
 
 /obj/structure/hygiene/shower/attackby(obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/scanner/gas))
