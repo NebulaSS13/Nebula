@@ -16,6 +16,12 @@
 	// maximum size dimensions, if less than world's dimensions, invisible walls will be spawned
 	var/maxx
 	var/maxy
+	//realworld coordinates taking in account the fake world's edge
+	var/x_origin
+	var/y_origin
+	var/x_size
+	var/y_size
+
 	var/landmark_type = /obj/effect/shuttle_landmark/automatic
 
 	var/list/rock_colors = list(COLOR_ASTEROID_ROCK)
@@ -45,9 +51,13 @@
 	var/list/big_flora_types = list()	// seeds of tree-tier flora
 
 	// themes are datums affecting various parameters of the planet and spawning their own maps
+	var/max_themes = 2
 	var/list/possible_themes = list(
-		/datum/exoplanet_theme/mountains,
-		/datum/exoplanet_theme
+		/datum/exoplanet_theme = 30,
+		/datum/exoplanet_theme/mountains = 100,
+		/datum/exoplanet_theme/radiation_bombing = 10, 
+		/datum/exoplanet_theme/ruined_city = 5,
+		/datum/exoplanet_theme/robotic_guardians = 10
 		)
 	var/list/themes = list()	// themes that have been picked to be applied to this planet
 
@@ -70,25 +80,27 @@
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level(max_x, max_y)
 	maxx = max_x ? max_x : world.maxx
 	maxy = max_y ? max_y : world.maxy
+	x_origin = TRANSITIONEDGE + 1
+	y_origin = TRANSITIONEDGE + 1
+	x_size = maxx - 2 * (TRANSITIONEDGE + 1)
+	y_size = maxy - 2 * (TRANSITIONEDGE + 1)
 	planetary_area = new planetary_area()
-	if(LAZYLEN(possible_themes))
-		var/datum/exoplanet_theme/T = pick(possible_themes)
+	var/themes_num = rand(1, max_themes)
+	for(var/i = 1 to themes_num)
+		var/datum/exoplanet_theme/T = pickweight(possible_themes)
 		themes += new T
-
+		possible_themes -= T
 	name = "[generate_planet_name()], \a [name]"
 
-	for(var/T in subtypesof(/datum/map_template/ruin/exoplanet))
-		var/datum/map_template/ruin/exoplanet/ruin = T
-		if(ruin_tags_whitelist && !(ruin_tags_whitelist & initial(ruin.ruin_tags)))
-			continue
-		if(ruin_tags_blacklist & initial(ruin.ruin_tags))
-			continue
-		possible_features += new ruin
 	generate_habitability()
 	generate_atmosphere()
+	for(var/datum/exoplanet_theme/T in themes)
+		T.adjust_atmosphere(src)
 	generate_flora()
 	generate_map()
 	generate_features()
+	for(var/datum/exoplanet_theme/T in themes)
+		T.after_map_generation(src)
 	generate_landing(2)
 	generate_daycycle()
 	generate_planet_image()
@@ -151,14 +163,20 @@
 		edges |= block(locate(1, maxy-TRANSITIONEDGE, zlevel),locate(maxx, maxy, zlevel))
 		for(var/turf/T in edges)
 			T.ChangeTurf(/turf/simulated/planet_edge)
-		var/padding = TRANSITIONEDGE
 		for(var/map_type in map_generators)
 			if(ispath(map_type, /datum/random_map/noise/exoplanet))
-				new map_type(null,padding,padding,zlevel,maxx-2*padding,maxy-2*padding,0,1,1,planetary_area, plant_colors)
+				new map_type(null,x_origin,y_origin,zlevel,x_size,y_size,0,1,1,planetary_area, plant_colors)
 			else
-				new map_type(null,padding,padding,zlevel,maxx-2*padding,maxy-2*padding,0,1,1,planetary_area)
+				new map_type(null,x_origin,y_origin,zlevel,x_size,y_size,0,1,1,planetary_area)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_features()
+	for(var/T in subtypesof(/datum/map_template/ruin/exoplanet))
+		var/datum/map_template/ruin/exoplanet/ruin = T
+		if(ruin_tags_whitelist && !(ruin_tags_whitelist & initial(ruin.ruin_tags)))
+			continue
+		if(ruin_tags_blacklist & initial(ruin.ruin_tags))
+			continue
+		possible_features += new ruin
 	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
@@ -230,6 +248,9 @@
 		if(ruin_num)
 			extra_data += "<br>[ruin_num] possible artificial structure\s detected."
 
+	for(var/datum/exoplanet_theme/T in themes)
+		if(T.get_sensor_data())
+			extra_data += T.get_sensor_data()
 	. += jointext(extra_data, "<br>")
 
 /area/exoplanet

@@ -55,6 +55,8 @@
 	else
 		A.min_gas = null
 		A.max_gas = null
+	for(var/datum/exoplanet_theme/T in themes)
+		T.adapt_animal(src, A)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_random_species_name()
 	return pick("nol","shan","can","fel","xor")+pick("a","e","o","t","ar")+pick("ian","oid","ac","ese","inian","rd")
