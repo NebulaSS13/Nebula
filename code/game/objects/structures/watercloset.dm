@@ -227,7 +227,7 @@
 	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
 
-	var/sound_id
+	var/sound_id = /obj/structure/hygiene/shower
 	var/datum/sound_token/sound_token
 
 //add heat controls? when emagged, you can freeze to death in it?
@@ -235,7 +235,6 @@
 /obj/structure/hygiene/shower/Initialize()
 	. = ..()
 	create_reagents(50)
-	sound_id = "[type]_[sequential_id(type)]"
 
 /obj/structure/hygiene/shower/Destroy()
 	QDEL_NULL(sound_token)
