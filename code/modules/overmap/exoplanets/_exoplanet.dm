@@ -85,7 +85,7 @@
 	x_size = maxx - 2 * (TRANSITIONEDGE + 1)
 	y_size = maxy - 2 * (TRANSITIONEDGE + 1)
 	planetary_area = new planetary_area()
-	var/themes_num = rand(1, max_themes)
+	var/themes_num = min(length(possible_themes), rand(1, max_themes))
 	for(var/i = 1 to themes_num)
 		var/datum/exoplanet_theme/T = pickweight(possible_themes)
 		themes += new T
