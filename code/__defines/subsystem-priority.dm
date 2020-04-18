@@ -3,11 +3,12 @@
 // SS_BACKGROUND handles high server load differently than Normal and SS_TICKER do.
 // Higher priority also means a larger share of a given tick before sleep checks.
 
-#define SS_PRIORITY_DEFAULT 50          // Default priority for all processes levels
+#define SS_PRIORITY_DEFAULT 50         // Default priority for all processes levels
 
 // SS_TICKER
+#define SS_PRIORITY_OVERLAY        100 // Applies overlays. May cause overlay pop-in if it gets behind.
 #define SS_PRIORITY_TIMER          20
-#define SS_PRIORITY_ICON_UPDATE    20	// Queued icon updates. Mostly used by APCs and tables.
+#define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
 
 // Normal
 #define SS_PRIORITY_TICKER         100 // Gameticker.
@@ -28,7 +29,7 @@
 #define SS_PRIORITY_SUPPLY         10  // Supply point accumulation.
 #define SS_PRIORITY_TRADE          10  // Adds/removes traders.
 #define SS_PRIORITY_GHOST_IMAGES   10  // Updates ghost client images.
-#define SS_PRIORITY_ZCOPY          10   // Builds appearances for Z-Mimic.
+#define SS_PRIORITY_ZCOPY          10  // Builds appearances for Z-Mimic.
 
 // SS_BACKGROUND
 #define SS_PRIORITY_OBJECTS       100  // processing_objects processing.
