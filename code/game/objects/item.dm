@@ -89,8 +89,8 @@
 	var/applies_material_colour = FALSE        // Whether or not the material recolours this icon.
 	var/applies_material_name = FALSE          // If true, item becomes 'material item' ie. 'steel hatchet'.
 	var/max_force = 40	                       // any damage above this is added to armor penetration value
-	var/material_force_multiplier = 0.5	       // Multiplier to material's generic damage value for this specific type of weapon
-	var/thrown_material_force_multiplier = 0.5 // As above, but for throwing the weapon.
+	var/material_force_multiplier = 0.1	       // Multiplier to material's generic damage value for this specific type of weapon
+	var/thrown_material_force_multiplier = 0.1 // As above, but for throwing the weapon.
 	var/unbreakable = FALSE                    // Whether or not this weapon degrades.
 	var/anomaly_shielding					   // 0..1 value of how well it shields against xenoarch anomalies
 
