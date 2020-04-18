@@ -15,7 +15,7 @@
 	var/obj/item/stack/tile/mono/plated_tile
 	var/list/connections
 	var/list/other_connections
-	
+
 /obj/structure/catwalk/clear_connections()
 	connections = null
 	other_connections = null
@@ -127,6 +127,13 @@
 							plated_tile = F
 							break
 					update_icon()
+
+/obj/structure/catwalk/hoist_act(turf/dest)
+	for(var/A in loc)
+		var/atom/movable/AM = A
+		if (AM.simulated && !AM.anchored)
+			AM.forceMove(dest)
+	..()
 
 /obj/structure/catwalk/refresh_neighbors()
 	return
