@@ -2,7 +2,7 @@
 	name = "body"
 	icon_state = "loader_body"
 	gender = NEUTER
-	matter = list(MAT_STEEL = 20000)
+	material = MAT_STEEL
 	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 
 	var/mech_health = 300

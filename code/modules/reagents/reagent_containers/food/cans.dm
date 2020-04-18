@@ -2,7 +2,7 @@
 	volume = 40 //just over one and a half cups
 	amount_per_transfer_from_this = 5
 	atom_flags = 0 //starts closed
-	matter = list(MAT_ALUMINIUM = 30)
+	material = MAT_ALUMINIUM
 
 //DRINKS
 
@@ -21,7 +21,7 @@
 	desc = "Pure drinking water, imported from the Martian poles."
 	icon_state = "waterbottle"
 	center_of_mass = @"{'x':15,'y':8}"
-	matter = list(MAT_PLASTIC = 40)
+	material = MAT_PLASTIC
 
 /obj/item/chems/food/drinks/cans/waterbottle/Initialize()
 	. = ..()

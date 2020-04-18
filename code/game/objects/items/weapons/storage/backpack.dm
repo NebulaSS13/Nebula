@@ -49,7 +49,12 @@
 	icon_state = "holdingpack"
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
-	matter = list(MAT_GOLD = 3000, MAT_DIAMOND = 1500, MAT_URANIUM = 250, MAT_PLASTIC = 250)
+	material = MAT_GOLD
+	matter = list(
+		MAT_DIAMOND = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_URANIUM = MATTER_AMOUNT_TRACE,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/storage/backpack/holding/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
@@ -68,7 +73,12 @@
 	name = "dufflebag of holding"
 	icon_state = "holdingduffle"
 	item_state_slots = list(slot_l_hand_str = "duffle", slot_r_hand_str = "duffle")
-	matter = list(MAT_GOLD = 3000, MAT_DIAMOND = 1500, MAT_URANIUM = 250, MAT_PLASTIC = 250)
+	material = MAT_GOLD
+	matter = list(
+		MAT_DIAMOND = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_URANIUM = MATTER_AMOUNT_TRACE,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/storage/backpack/santabag
 	name = "\improper Santa's gift bag"

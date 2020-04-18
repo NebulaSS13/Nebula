@@ -6,7 +6,7 @@
 	icon_state = "battery_normal"
 	critical = 1
 	origin_tech = "{'powerstorage':1,'engineering':1}"
-	matter = list(MAT_STEEL = 400)
+	material = MAT_STEEL
 
 	var/battery_rating = 75
 	var/obj/item/cell/battery = /obj/item/cell
@@ -18,7 +18,7 @@
 	origin_tech = "{'powerstorage':2,'engineering':2}"
 	hardware_size = 2
 	battery_rating = 110
-	matter = list(MAT_STEEL = 800)
+	material = MAT_STEEL
 
 /obj/item/stock_parts/computer/battery_module/super
 	name = "super battery"
@@ -27,7 +27,7 @@
 	origin_tech = "{'powerstorage':3,'engineering':3}"
 	hardware_size = 2
 	battery_rating = 150
-	matter = list(MAT_STEEL = 1600)
+	material = MAT_STEEL
 
 /obj/item/stock_parts/computer/battery_module/ultra
 	name = "ultra battery"
@@ -36,7 +36,7 @@
 	origin_tech = "{'powerstorage':5,'engineering':4}"
 	hardware_size = 3
 	battery_rating = 200
-	matter = list(MAT_STEEL = 3200)
+	material = MAT_STEEL
 
 /obj/item/stock_parts/computer/battery_module/micro
 	name = "micro battery"
@@ -44,7 +44,7 @@
 	icon_state = "battery_micro"
 	origin_tech = "{'powerstorage':2,'engineering':2}"
 	battery_rating = 50
-	matter = list(MAT_STEEL = 400)
+	material = MAT_STEEL
 
 /obj/item/stock_parts/computer/battery_module/nano
 	name = "nano battery"
@@ -52,7 +52,7 @@
 	icon_state = "battery_nano"
 	origin_tech = "{'powerstorage':1,'engineering':1}"
 	battery_rating = 30
-	matter = list(MAT_STEEL = 200)
+	material = MAT_STEEL
 
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
 /obj/item/stock_parts/computer/battery_module/lambda

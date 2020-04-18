@@ -49,7 +49,11 @@
 	icon_state = "shield_droid"
 	restricted_hardpoints = list(HARDPOINT_BACK)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
-	matter = list(MAT_STEEL = 20000, MAT_SILVER = 12000, MAT_GOLD = 12000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GOLD = MATTER_AMOUNT_TRACE
+	)
 
 	var/obj/aura/mechshield/aura = null
 	var/max_charge = 250

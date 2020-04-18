@@ -343,7 +343,8 @@
 	item_state = "electronic"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	matter = list(MAT_STEEL = 100, MAT_GLASS = 34)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/destTagger/proc/openwindow(mob/user)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"

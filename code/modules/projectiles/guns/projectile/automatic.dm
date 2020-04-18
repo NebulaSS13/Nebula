@@ -19,7 +19,11 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	matter = list(MAT_STEEL = 8000, MAT_SILVER = 3000, MAT_DIAMOND = 1500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+	)
 
 	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
@@ -63,7 +67,11 @@
 	wielded_item_state = "z8carbine-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
-	matter = list(MAT_STEEL = 10000, MAT_SILVER = 5000, MAT_DIAMOND = 3000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+	)
 	firemodes = list(
 		list(mode_name="semi auto",      burst=1,    fire_delay=null, use_launcher=null, one_hand_penalty=8,  burst_accuracy=null,          dispersion=null),
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, use_launcher=null, one_hand_penalty=9,  burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),

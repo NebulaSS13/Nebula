@@ -16,11 +16,21 @@
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 
+/obj/proc/create_matter()
+	if(length(matter))
+		for(var/mat in matter)
+			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
+	UNSETEMPTY(matter)
+
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+/obj/proc/get_matter_amount_modifier()
+	. = ceil(w_class * 0.25)
+
 /obj/item/proc/is_used_on(obj/O, mob/user)
+	return
 
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)

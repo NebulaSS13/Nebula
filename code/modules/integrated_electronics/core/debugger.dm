@@ -9,7 +9,12 @@
 	w_class = ITEM_SIZE_SMALL
 	var/data_to_write = null
 	var/accepting_refs = FALSE
-	matter = list(MAT_ALUMINIUM = 1500, MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 500)
+	material = MAT_ALUMINIUM
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GLASS = MATTER_AMOUNT_TRACE,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/integrated_electronics/debugger/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")

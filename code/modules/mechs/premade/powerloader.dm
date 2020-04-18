@@ -40,7 +40,7 @@
 	move_delay = 4
 	turn_delay = 4
 	power_use = 10
-	matter = list(MAT_STEEL = 6000)
+	material = MAT_STEEL
 
 /obj/item/mech_component/sensors/powerloader
 	name = "exosuit sensors"

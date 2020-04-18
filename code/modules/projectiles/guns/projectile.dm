@@ -5,7 +5,7 @@
 	icon_state = "pistol"
 	origin_tech = "{'combat':2,'materials':2}"
 	w_class = ITEM_SIZE_NORMAL
-	matter = list(MAT_STEEL = 1000)
+	material = MAT_STEEL
 	screen_shake = 1
 	combustion = 1
 

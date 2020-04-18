@@ -51,7 +51,11 @@
 	self_recharge = 1
 	modifystate = null
 	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
-	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000, MAT_URANIUM = 500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_URANIUM = MATTER_AMOUNT_TRACE
+	)
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),

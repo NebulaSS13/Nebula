@@ -10,7 +10,7 @@
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
 	origin_tech = "{'combat':3,'magnets':2}"
-	matter = list(MAT_STEEL = 2000)
+	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/midlaser
 	wielded_item_state = "laser-wielded"
 
@@ -91,7 +91,11 @@ obj/item/gun/energy/retro
 	accuracy = 2
 	fire_delay = 20
 	wielded_item_state = "gun_wielded"
-	matter = list(MAT_STEEL = 10000, MAT_GLASS = 1000, MAT_DIAMOND = 2000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
@@ -117,7 +121,11 @@ obj/item/gun/energy/retro
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
 	combustion = 0
-	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000, MAT_URANIUM = 1000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_URANIUM = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/gun/energy/xray/pistol
 	name = "x-ray laser gun"
@@ -130,7 +138,11 @@ obj/item/gun/energy/retro
 	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
-	matter = list(MAT_STEEL = 4000, MAT_GLASS = 500, MAT_URANIUM = 500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_URANIUM = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/gun/energy/sniperrifle
 	name = "marksman energy rifle"
@@ -166,7 +178,7 @@ obj/item/gun/energy/retro
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = "{'combat':1,'magnets':2}"
 	self_recharge = 1
-	matter = list(MAT_STEEL = 2000)
+	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 

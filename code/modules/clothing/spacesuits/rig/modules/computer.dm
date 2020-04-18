@@ -42,7 +42,12 @@
 	interface_name = "integrated intelligence system"
 	interface_desc = "A socket that supports a range of artificial intelligence systems."
 
-	matter = list(MAT_STEEL = 1000, MAT_GLASS = 1000, MAT_PLASTIC = 1000, MAT_GOLD = 500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
+		MAT_GOLD = MATTER_AMOUNT_TRACE
+	)
 	origin_tech = "{'programming':6,'materials':5,'engineering':6}"
 
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
@@ -359,7 +364,12 @@
 	interface_desc = "Colloquially known as a power siphon, this module drains power through the suit hands into the suit battery."
 
 	origin_tech = "{'powerstorage':6,'engineering':6}"
-	matter = list(MAT_STEEL = 2000, MAT_GLASS = 2000, MAT_GOLD = 1000, MAT_PLASTIC = 1000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GOLD = MATTER_AMOUNT_TRACE,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 	var/atom/interfaced_with // Currently draining power from this device.
 	var/total_power_drained = 0

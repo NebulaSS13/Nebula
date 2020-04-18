@@ -176,7 +176,8 @@
 	volume = 600
 	origin_tech = "{'combat':3,'materials':3,'engineering':3}"
 	step_delay = 8
-	matter = list(MAT_STEEL = 5000, MAT_GLASS = 1000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/chems/spray/chemsprayer/Spray_at(atom/A)
 	var/direction = get_dir(src, A)

@@ -4,7 +4,7 @@
 	var/radio_desc = ""
 	icon_state = "headset"
 	item_state = "headset"
-	matter = list(MAT_ALUMINIUM = 75)
+	material = MAT_ALUMINIUM
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
 

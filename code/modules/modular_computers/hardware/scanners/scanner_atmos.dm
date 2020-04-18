@@ -2,7 +2,8 @@
 	name = "atmospheric scanner module"
 	desc = "An atmospheric scanner module. It can scan the surroundings and report the composition of gases."
 	can_run_scan = 1
-	matter = list(MAT_STEEL = 600, MAT_GLASS = 200)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/scanner/atmos/can_use_scanner(mob/user, atom/target, proximity = TRUE)
 	if(!..())

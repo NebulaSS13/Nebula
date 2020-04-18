@@ -5,9 +5,17 @@
 	icon_state = "locator"
 	item_state = "locator"
 	origin_tech = "{'materials':2,'programming':2,'bluespace':2}"
-	matter = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)
+	material = MAT_ALUMINIUM
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GLASS = MATTER_AMOUNT_TRACE
+	)
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_ALUMINIUM = 250, MAT_STEEL = 250, MAT_GLASS = 50)
+	material = MAT_ALUMINIUM
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GLASS = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/gps/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[get_coordinates()]</i>.</span>")

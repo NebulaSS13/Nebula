@@ -6,7 +6,8 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_ALUMINIUM = 1000, MAT_GLASS = 1000)
+	material = MAT_ALUMINIUM
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	var/obj/item/implant/imp = null
 
 /obj/item/implanter/Initialize()

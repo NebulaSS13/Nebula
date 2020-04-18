@@ -1,7 +1,8 @@
 /obj/item/stock_parts/computer/scanner/reagent
 	name = "reagent scanner module"
 	desc = "A reagent scanner module. It can scan and analyze various reagents."
-	matter = list(MAT_STEEL = 600, MAT_GLASS = 200)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/scanner/reagent/can_use_scanner(mob/user, obj/target, proximity = TRUE)
 	if(!..(user, target, proximity))

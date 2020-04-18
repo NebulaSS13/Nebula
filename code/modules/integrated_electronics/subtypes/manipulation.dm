@@ -556,7 +556,11 @@
 	action_flags = IC_ACTION_LONG_RANGE
 
 	origin_tech = "{'magnets':1,'bluespace':3}"
-	matter = list(MAT_STEEL = 10000, MAT_SILVER = 2000, MAT_GOLD = 200)
+	material = MAT_STEEL
+	matter = list(
+		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GOLD = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
 	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)

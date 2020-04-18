@@ -7,7 +7,11 @@
 	scan_sound = 'sound/effects/scanbeep.ogg'
 	printout_color = "#f3e6ff"
 	origin_tech = "{'magnets':1,'biotech':1}"
-	matter = list(MAT_STEEL = 200, MAT_GLASS = 100, MAT_PLASTIC = 150)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 	var/list/valid_targets = list(
 		/mob/living/carbon/human,

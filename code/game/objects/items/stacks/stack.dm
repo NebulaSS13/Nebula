@@ -19,6 +19,8 @@
 	var/plural_icon_state
 	var/max_icon_state
 	var/amount = 1
+	var/list/initial_matter
+	var/matter_multiplier = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
 	var/stacktype  //determines whether different stack types can merge
 	var/build_type //used when directly applied to a turf
@@ -32,12 +34,11 @@
 	if(ispath(amount, /material))
 		crash_with("Stack initialized with material ([amount]) instead of amount.")
 		material = amount
-
+	if (isnum(amount) && amount >= 1)
+		src.amount = amount
 	. = ..(mapload, material)
 	if (!stacktype)
 		stacktype = type
-	if (isnum(amount) && amount >= 1)
-		src.amount = amount
 	if(!plural_name)
 		plural_name = "[singular_name]s"
 
@@ -58,6 +59,9 @@
 
 /obj/item/stack/attack_self(mob/user)
 	list_recipes(user)
+
+/obj/item/stack/get_matter_amount_modifier()
+	. = amount * matter_multiplier
 
 /obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)
 	if (!recipes)
@@ -179,6 +183,14 @@
 		return 0
 	return 1
 
+/obj/item/stack/create_matter()
+	..()
+	initial_matter = matter?.Copy()
+
+/obj/item/stack/proc/update_matter()
+	matter = initial_matter?.Copy()
+	create_matter()
+
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))
 		return 0
@@ -188,6 +200,7 @@
 			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 		else
 			update_icon()
+			update_matter()
 		return 1
 	else
 		if(get_amount() < used)
@@ -204,6 +217,7 @@
 		else
 			amount += extra
 			update_icon()
+			update_matter()
 			return 1
 	else if(!synths || synths.len < uses_charge)
 		return 0

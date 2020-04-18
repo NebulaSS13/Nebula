@@ -12,7 +12,8 @@
 	collection_mode = 1
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 100
-	matter = list(MAT_STEEL = 15000, MAT_GLASS = 5000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/replace_sound = 'sound/items/rped.ogg'
 	var/remote_interaction = FALSE
@@ -38,7 +39,11 @@
 	max_storage_space = 200
 	replace_sound = 'sound/items/PSHOOM.ogg'
 	remote_interaction = TRUE
-	matter = list(MAT_STEEL = 20000, MAT_GLASS = 5000, MAT_SILVER = 2000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/research
 	name = "research debugging device"

@@ -5,7 +5,11 @@
 	item_state = "freezegun"
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	desc = "A gun that changes temperatures. It has a small label on the side, 'More extreme temperatures will cost more charge!'"
-	matter = list(MAT_STEEL = 5000, MAT_GLASS = 500, MAT_SILVER = 3000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE
+	)
 	charge_cost = 10
 	origin_tech = "{'combat':3,'materials':4,'powerstorage':3,'magnets':2}"
 	slot_flags = SLOT_BELT|SLOT_BACK

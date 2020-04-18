@@ -10,7 +10,8 @@
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	origin_tech = "{'magnets':2,'combat':1}"
-	matter = list(MAT_STEEL = 750, MAT_GLASS = 750)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/times_used = 0 //Number of times it's been used.
 	var/broken = 0     //Is the flash burnt out?
@@ -215,4 +216,8 @@
 	origin_tech = "{'combat':2,'magnets':2}"
 	str_min = 3
 	str_max = 8
-	matter = list(MAT_STEEL = 2000, MAT_GLASS = 2000, MAT_SILVER = 500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE
+	)

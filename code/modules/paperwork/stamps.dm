@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_TINY
 	throw_speed = 7
 	throw_range = 15
-	matter = list(MAT_STEEL = 60)
+	material = MAT_STEEL
 	attack_verb = list("stamped")
 
 /obj/item/stamp/captain

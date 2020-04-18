@@ -324,7 +324,11 @@
 	online_slowdown = 0
 	offline_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY //You're wearing a flash protective space suit without light compensation, think it makes sense
-	matter = list(MAT_STEEL = 30000, MAT_GLASS = 5000, MAT_SILVER = 1000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE
+	)
 
 	chest_type = /obj/item/clothing/suit/space/rig/zero
 	helm_type = /obj/item/clothing/head/helmet/space/rig/zero

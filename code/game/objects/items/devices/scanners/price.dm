@@ -5,7 +5,11 @@
 	icon_state = "price_scanner"
 	origin_tech = "{'materials':6,'magnets':4}"
 	scan_sound = 'sound/effects/checkout.ogg'
-	matter = list(MAT_STEEL = 3000, MAT_GLASS = 3000, MAT_SILVER = 250)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE
+	)
 	var/scanner_currency
 
 /obj/item/scanner/price/Initialize(ml, material_key)

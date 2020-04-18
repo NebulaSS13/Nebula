@@ -189,7 +189,7 @@
 	allowed_containers = list(/obj/item/chems/glass)
 	origin_tech = "{'combat':3,'materials':3}"
 	affected_area = 4
-	matter = list(MAT_STEEL = 3000)
+	material = MAT_STEEL
 
 /obj/item/grenade/chem_grenade/metalfoam
 	name = "metal-foam grenade"

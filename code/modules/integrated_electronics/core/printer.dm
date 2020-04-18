@@ -6,7 +6,8 @@
 	icon = 'icons/obj/assemblies/electronic_tools.dmi'
 	icon_state = "circuit_printer"
 	w_class = ITEM_SIZE_LARGE
-	matter = list(MAT_STEEL = 10000, MAT_GLASS = 5000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/upgraded = FALSE		// When hit with an upgrade disk, will turn true, allowing it to print the higher tier circuits.
 	var/can_clone = TRUE		// Allows the printer to clone circuits, either instantly or over time depending on upgrade. Set to FALSE to disable entirely.
@@ -343,10 +344,12 @@
 /obj/item/disk/integrated_circuit/upgrade/advanced
 	name = "integrated circuit printer upgrade disk - advanced designs"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one adds new, advanced designs to the printer."
-	matter = list(MAT_STEEL = 10000, MAT_GLASS = 10000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/disk/integrated_circuit/upgrade/clone
 	name = "integrated circuit printer upgrade disk - instant cloner"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one allows the printer to duplicate assemblies instantaneously."
 	icon_state = "upgrade_disk_clone"
-	matter = list(MAT_STEEL = 10000, MAT_GLASS = 10000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)

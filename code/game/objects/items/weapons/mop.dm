@@ -77,7 +77,11 @@
 	force = 6
 	throwforce = 11
 	mopspeed = 20
-	matter = list(MAT_ALUMINIUM = 2500, MAT_STEEL = 500, MAT_PLASTIC = 200)
+	material = MAT_ALUMINIUM
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 	var/refill_enabled = TRUE //Self-refill toggle for when a janitor decides to mop with something other than water.
 	var/refill_rate = 1 //Rate per process() tick mop refills itself
 	var/refill_reagent = /datum/reagent/cleaner //Determins what reagent to use for refilling, just in case someone wanted to make a HOLY MOP OF PURGING

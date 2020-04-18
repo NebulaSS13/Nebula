@@ -8,7 +8,8 @@ var/global/ntnet_card_uid = 1
 	critical = 0
 	icon_state = "netcard_basic"
 	hardware_size = 1
-	matter = list(MAT_STEEL = 250, MAT_GLASS = 100)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/identification_id = null	// Identification ID. Technically MAC address of this device. Can't be changed by user.
 	var/identification_string = "" 	// Identification string, technically nickname seen in the network. Can be set by user.
@@ -40,7 +41,8 @@ var/global/ntnet_card_uid = 1
 	power_usage = 100 // Better range but higher power usage.
 	icon_state = "netcard_advanced"
 	hardware_size = 1
-	matter = list(MAT_STEEL = 500, MAT_GLASS = 200)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/network_card/wired
 	name = "wired NTNet network card"
@@ -50,7 +52,8 @@ var/global/ntnet_card_uid = 1
 	power_usage = 100 // Better range but higher power usage.
 	icon_state = "netcard_ethernet"
 	hardware_size = 3
-	matter = list(MAT_STEEL = 2500, MAT_GLASS = 400)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/network_card/Destroy()
 	ntnet_global.unregister(identification_id)

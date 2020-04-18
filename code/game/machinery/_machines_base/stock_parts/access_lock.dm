@@ -77,7 +77,8 @@
 
 /obj/item/stock_parts/access_lock/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	matter = list(MAT_STEEL = 400, MAT_GLASS = 200)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /decl/stock_part_preset/access_lock
 	expected_part_type = /obj/item/stock_parts/access_lock

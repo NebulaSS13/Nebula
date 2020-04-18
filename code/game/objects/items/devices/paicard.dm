@@ -6,7 +6,8 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = "{'programming':2}"
-	matter = list(MAT_GLASS = 500, MAT_STEEL = 500)
+	material = MAT_GLASS
+	matter = list(MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/current_emotion = 1
 	var/obj/item/radio/radio

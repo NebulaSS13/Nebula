@@ -55,7 +55,7 @@
 	projectile_type = /obj/item/projectile/energy/electrode
 	max_shots = 6
 	combustion = 0
-	matter = list(MAT_STEEL = 4000)
+	material = MAT_STEEL
 
 /obj/item/gun/energy/stunrevolver/rifle
 	name = "stun rifle"
@@ -72,7 +72,11 @@
 	accuracy = 1
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 	wielded_item_state = "stunrifle-wielded"
-	matter = list(MAT_STEEL = 4000, MAT_GLASS = 1000, MAT_SILVER = 500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/gun/energy/crossbow
 	name = "mini energy-crossbow"
@@ -82,7 +86,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	item_state = "crossbow"
 	origin_tech = "{'combat':2,'magnets':2,'esoteric':5}"
-	matter = list(MAT_STEEL = 2000)
+	material = MAT_STEEL
 	slot_flags = SLOT_BELT
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
@@ -107,7 +111,7 @@
 	w_class = ITEM_SIZE_LARGE
 	force = 10
 	one_hand_penalty = 1
-	matter = list(MAT_STEEL = 200000)
+	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/energy/bolt/large
 
 /obj/item/gun/energy/plasmastun
@@ -133,4 +137,5 @@
 	max_shots = 4
 	projectile_type = /obj/item/projectile/beam/confuseray
 	combustion = 0
-	matter = list(MAT_STEEL = 3000, MAT_GLASS = 1000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)

@@ -11,7 +11,11 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 50, MAT_PLASTIC = 20)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
@@ -130,7 +134,8 @@
 	throw_speed = 5
 	throw_range = 7
 	maxcharge = 100
-	matter = list(MAT_STEEL = 70, MAT_GLASS = 5)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/cell/device/variable/Initialize(mapload, charge_amount)
 	maxcharge = charge_amount
@@ -145,14 +150,19 @@
 	desc = "A small power cell designed to power more energy-demanding devices."
 	icon_state = "hdevice"
 	maxcharge = 100
-	matter = list(MAT_STEEL = 70, MAT_GLASS = 6)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/cell/crap
 	name = "old power cell"
 	desc = "A cheap old power cell. It's probably been in use for quite some time now."
 	origin_tech = "{'powerstorage':1}"
 	maxcharge = 100
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 40, MAT_PLASTIC = 20)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/cell/crap/empty
 	charge = 0
@@ -162,14 +172,22 @@
 	desc = "A standard and relatively cheap power cell, commonly used."
 	origin_tech = "{'powerstorage':1}"
 	maxcharge = 250
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 40, MAT_PLASTIC = 20)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/cell/apc
 	name = "APC power cell"
 	desc = "A special power cell designed for heavy-duty use in area power controllers."
 	origin_tech = "{'powerstorage':1}"
 	maxcharge = 500
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 50, MAT_PLASTIC = 20)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 
 /obj/item/cell/high
@@ -178,7 +196,11 @@
 	origin_tech = "{'powerstorage':2}"
 	icon_state = "hcell"
 	maxcharge = 1000
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 60, MAT_PLASTIC = 20)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/cell/high/empty
 	charge = 0
@@ -189,7 +211,11 @@
 	origin_tech = "{'powerstorage':3}"
 	icon_state = "hcell"
 	maxcharge = 1500
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 70, MAT_ALUMINIUM = 20)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_ALUMINIUM = MATTER_AMOUNT_TRACE
+	)
 
 
 /obj/item/cell/super
@@ -198,7 +224,11 @@
 	origin_tech = "{'powerstorage':5}"
 	icon_state = "scell"
 	maxcharge = 2000
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 70, MAT_ALUMINIUM = 20)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_ALUMINIUM = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/cell/super/empty
 	charge = 0
@@ -209,7 +239,13 @@
 	origin_tech = "{'powerstorage':6}"
 	icon_state = "hpcell"
 	maxcharge = 3000
-	matter = list(MAT_STEEL = 400, MAT_GOLD = 150, MAT_SILVER = 150, MAT_GLASS = 70, MAT_ALUMINIUM = 25)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE,
+		MAT_GLASS = MATTER_AMOUNT_TRACE,
+		MAT_ALUMINIUM = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/cell/hyper/empty
 	charge = 0
@@ -220,7 +256,11 @@
 	icon_state = "icell"
 	origin_tech =  null
 	maxcharge = 3000
-	matter = list(MAT_STEEL = 700, MAT_GLASS = 80, MAT_ALUMINIUM = 20)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_ALUMINIUM = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/cell/infinite/check_charge()
 	return 1

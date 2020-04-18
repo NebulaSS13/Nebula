@@ -8,6 +8,17 @@
 	var/footstep_type
 	var/mob_offset
 
+/obj/structure/create_matter()
+	..()
+	if(material || reinf_material)
+		LAZYINITLIST(matter)
+		var/matter_mult = get_matter_amount_modifier()
+		if(material)
+			matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * matter_mult))
+		if(reinf_material)
+			matter[reinf_material.type] = max(matter[reinf_material.type], round(MATTER_AMOUNT_REINFORCEMENT * matter_mult))
+		UNSETEMPTY(matter)
+
 /obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat)
 	if(ispath(_mat, /material))
 		material = _mat
@@ -18,8 +29,7 @@
 	if(ispath(reinf_material, /material))
 		reinf_material = SSmaterials.get_material_datum(reinf_material)
 	. = ..()
-	if(material || reinf_material)
-		update_materials()
+	update_materials()
 	if(!CanFluidPass())
 		fluid_update()
 

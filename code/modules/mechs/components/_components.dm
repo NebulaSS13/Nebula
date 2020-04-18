@@ -14,7 +14,11 @@
 	var/list/has_hardpoints = list()
 	var/decal
 	var/power_use = 0
-	matter = list(MAT_STEEL = 15000, MAT_PLASTIC = 1000, MAT_OSMIUM = 500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_OSMIUM = MATTER_AMOUNT_TRACE
+	)
 	dir = SOUTH
 
 /obj/item/mech_component/proc/set_colour(new_colour)

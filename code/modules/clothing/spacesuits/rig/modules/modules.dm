@@ -13,7 +13,11 @@
 	desc = "It looks pretty sciency."
 	icon = 'icons/obj/rig_modules.dmi'
 	icon_state = "module"
-	matter = list(MAT_STEEL = 20000, MAT_PLASTIC = 30000, MAT_GLASS = 5000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GLASS = MATTER_AMOUNT_TRACE
+	)
 
 	var/damage = 0
 	var/obj/item/rig/holder

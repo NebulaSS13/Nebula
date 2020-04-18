@@ -13,7 +13,8 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_STEEL = 70, MAT_GLASS = 30)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'engineering':1}"
 
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
@@ -315,7 +316,8 @@
 
 /obj/item/weldingtool/experimental
 	tank = /obj/item/welder_tank/experimental
-	matter = list(MAT_STEEL = 120, MAT_GLASS = 50)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 ///////////////////////
 //Welding tool tanks//

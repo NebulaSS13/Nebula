@@ -16,7 +16,8 @@
 	desc = "Retracts stuff."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
-	matter = list(MAT_STEEL = 10000, MAT_GLASS = 5000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':1,'biotech':1}"
@@ -29,7 +30,8 @@
 	desc = "You think you have seen this before."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
-	matter = list(MAT_STEEL = 5000, MAT_GLASS = 2500)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':1,'biotech':1}"
@@ -43,7 +45,11 @@
 	desc = "This stops bleeding."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
-	matter = list(MAT_STEEL = 5000, MAT_GLASS = 2500, MAT_ALUMINIUM = 1000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_ALUMINIUM = MATTER_AMOUNT_TRACE
+	)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':1,'biotech':1}"
@@ -58,7 +64,8 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "drill"
 	hitsound = 'sound/weapons/circsawhit.ogg'
-	matter = list(MAT_STEEL = 15000, MAT_GLASS = 10000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 15.0
 	w_class = ITEM_SIZE_NORMAL
@@ -83,7 +90,8 @@
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = "{'materials':1,'biotech':1}"
-	matter = list(MAT_STEEL = 10000, MAT_GLASS = 5000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /*
@@ -94,7 +102,8 @@
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
 	damtype = "fire"
-	matter = list(MAT_STEEL = 12500, MAT_GLASS = 7500)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/scalpel/laser2
 	name = "laser scalpel"
@@ -102,7 +111,11 @@
 	icon_state = "scalpel_laser2_on"
 	damtype = "fire"
 	force = 12.0
-	matter = list(MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 2500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/scalpel/laser3
 	name = "laser scalpel"
@@ -110,14 +123,25 @@
 	icon_state = "scalpel_laser3_on"
 	damtype = "fire"
 	force = 15.0
-	matter = list(MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 2000, MAT_GOLD = 1500)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE,
+		MAT_GOLD = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/scalpel/manager
 	name = "incision management system"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	icon_state = "scalpel_manager_on"
 	force = 7.5
-	matter = list (MAT_STEEL = 12500, MAT_GLASS = 7500, MAT_SILVER = 1500, MAT_GOLD = 1500, MAT_DIAMOND = 750)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE,
+		MAT_GOLD = MATTER_AMOUNT_TRACE,
+		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+	)
 
 /*
  * Circular Saw
@@ -135,7 +159,8 @@
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = "{'materials':1,'biotech':1}"
-	matter = list(MAT_STEEL = 20000,MAT_GLASS = 10000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
 	sharp = 1
 	edge = 1

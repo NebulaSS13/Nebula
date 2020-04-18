@@ -100,7 +100,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
-	matter = list(MAT_STEEL = 500)
+	material = MAT_STEEL
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4

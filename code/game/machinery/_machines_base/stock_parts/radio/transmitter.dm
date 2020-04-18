@@ -112,11 +112,11 @@
 	name = "basic radio transmitter"
 	desc = "A stock radio transmitter machine component. Can transmit updates regularly or on change."
 	color = COLOR_RED
-	matter = list(MAT_STEEL = 400)
+	material = MAT_STEEL
 
 /obj/item/stock_parts/radio/transmitter/on_event/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
 	name = "event radio transmitter"
 	desc = "A radio transmitter machine component which transmits when activated by an event."
 	color = COLOR_ORANGE
-	matter = list(MAT_STEEL = 400)
+	material = MAT_STEEL

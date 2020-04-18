@@ -2,7 +2,8 @@
 	name = "surgical toolset"
 	action_button_name = "Deploy Surgical Tool"
 	desc = "Part of a line of biomedical augmentations, this device contains the full set of tools any surgeon would ever need."
-	matter = list(MAT_STEEL = 2000, MAT_GLASS = 2000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	paths = list(
 		/obj/item/bonesetter,
 		/obj/item/cautery,

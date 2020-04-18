@@ -18,7 +18,7 @@
 	turn_delay = 7
 	power_use = 150
 	color = COLOR_WHITE
-	matter = list(MAT_STEEL = 25000)
+	material = MAT_STEEL
 
 /obj/item/mech_component/chassis/pod
 	name = "spherical exosuit chassis"
@@ -32,4 +32,4 @@
 	power_use = 5
 	has_hardpoints = list(HARDPOINT_BACK)
 	desc = "The Katamari series cockpits won a massive government tender a few years back. No one is sure why, but these terrible things keep popping up on every government-run facility."
-	matter = list(MAT_STEEL = 18000)
+	material = MAT_STEEL

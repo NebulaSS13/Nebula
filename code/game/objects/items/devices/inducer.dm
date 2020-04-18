@@ -6,7 +6,8 @@
 	item_state = "inducer-sci"
 	force = 7
 	origin_tech = "{'powerstorage':6,'engineering':4}"
-	matter = list(MAT_STEEL = 2000, MAT_GLASS = 100)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	slot_flags = SLOT_BELT
 
 	var/powertransfer = 500

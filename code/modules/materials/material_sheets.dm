@@ -11,7 +11,6 @@
 
 	var/material/reinf_material
 	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
-	var/matter_multiplier = 1
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
 	. = ..(mapload, amount, _material)
@@ -53,14 +52,11 @@
 
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
-	matter = material.get_matter()
-	for(var/mat in matter)
-		matter[mat] = round(matter[mat]*matter_multiplier*amount)
+	var/matter_mod = get_matter_amount_modifier()
+	matter = list()
+	matter[material.type] = MATTER_AMOUNT_PRIMARY * matter_mod
 	if(reinf_material)
-		var/list/rmatter = reinf_material.get_matter()
-		for(var/mat in rmatter)
-			rmatter[mat] = round(0.5*rmatter[mat]*matter_multiplier*amount)
-			matter[mat] += rmatter[mat]
+		matter[reinf_material.type] = MATTER_AMOUNT_REINFORCEMENT * matter_mod
 
 	if(material_flags & USE_MATERIAL_SINGULAR_NAME)
 		singular_name = material.sheet_singular_name

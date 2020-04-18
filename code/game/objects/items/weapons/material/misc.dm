@@ -81,7 +81,8 @@
 	desc = "A long, machine-stamped blade with a somewhat ungainly handle. Found in military surplus stores, malls, and horror movies since before interstellar travel."
 	material = MAT_STEEL
 	base_parry_chance = 40
-	matter = list(MAT_STEEL = 15000, MAT_PLASTIC = 2500)
+	material = MAT_STEEL
+	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/material/hatchet/machete/Initialize()
 	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"

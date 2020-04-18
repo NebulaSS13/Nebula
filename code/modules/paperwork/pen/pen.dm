@@ -9,7 +9,7 @@
 	w_class = ITEM_SIZE_TINY
 	throw_speed = 7
 	throw_range = 15
-	matter = list(MAT_PLASTIC = 10)
+	material = MAT_PLASTIC
 	var/colour = "black"	//what colour the ink is!
 	var/color_description = "black ink"
 

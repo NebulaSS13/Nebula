@@ -10,7 +10,7 @@
 /datum/stack_recipe/ai_core
 	title = "AI core"
 	result_type = /obj/structure/aicore
-	req_amount = 4
+	req_amount = 5
 	time = 50
 	one_per_turf = 1
 	difficulty = 2
@@ -18,7 +18,7 @@
 /datum/stack_recipe/railing
 	title = "railing"
 	result_type = /obj/structure/railing
-	req_amount = 3
+	req_amount = 5
 	time = 40
 	on_floor = 1
 	difficulty = 2

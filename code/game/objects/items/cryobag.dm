@@ -7,7 +7,12 @@
 	icon_state = "bodybag_folded"
 	origin_tech = "{'biotech':4}"
 	material = MAT_PLASTIC
-	matter = list(MAT_PLASTIC = 15000, MAT_GLASS = 15000, MAT_SILVER = 5000, MAT_GOLD = 1000)
+	material = MAT_PLASTIC
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_SILVER = MATTER_AMOUNT_TRACE,
+		MAT_GOLD = MATTER_AMOUNT_TRACE
+	)
 	var/stasis_power
 
 /obj/item/bodybag/cryobag/attack_self(mob/user)

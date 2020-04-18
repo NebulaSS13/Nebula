@@ -9,7 +9,7 @@
 	power_usage = 100
 	critical = 1
 	origin_tech = "{'programming':3,'engineering':2}"
-	matter = list(MAT_STEEL = 1600)
+	material = MAT_STEEL
 
 	var/processing_power = 2 // Used for DDoS speed calculations
 
@@ -21,7 +21,7 @@
 	power_usage = 25
 	processing_power = 1
 	origin_tech = "{'programming':2,'engineering':2}"
-	matter = list(MAT_STEEL = 800)
+	material = MAT_STEEL
 
 /obj/item/stock_parts/computer/processor_unit/photonic
 	name = "photonic processor"
@@ -31,7 +31,8 @@
 	power_usage = 50
 	processing_power = 4
 	origin_tech = "{'programming':5,'engineering':4}"
-	matter = list(MAT_STEEL = 6400, MAT_GLASS = 2000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/processor_unit/photonic/small
 	name = "photonic microprocessor"
@@ -41,4 +42,5 @@
 	power_usage = 10
 	processing_power = 2
 	origin_tech = "{'programming':4,'engineering':3}"
-	matter = list(MAT_STEEL = 3200, MAT_GLASS = 1000)
+	material = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)

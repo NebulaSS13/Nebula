@@ -4,7 +4,12 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "hdiffuser_off"
 	origin_tech = "{'magnets':5,'powerstorage':5,'esoteric':2}"
-	matter = list(MAT_STEEL = 5000, MAT_GLASS = 5000, MAT_GOLD = 2000, MAT_SILVER = 2000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GOLD = MATTER_AMOUNT_TRACE,
+		MAT_SILVER = MATTER_AMOUNT_TRACE
+	)
 
 	var/obj/item/cell/device/cell
 	var/enabled = 0

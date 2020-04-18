@@ -5,7 +5,11 @@
 	icon_state = "flashgun"
 	item_state = "lampgreen"
 	origin_tech = "{'bluespace':3,'magnets':3}"
-	matter = list(MAT_STEEL = 5000, MAT_ALUMINIUM = 5000, MAT_GLASS = 5000)
+	material = MAT_STEEL
+	matter = list(
+		MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_GLASS = MATTER_AMOUNT_TRACE
+	)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 
