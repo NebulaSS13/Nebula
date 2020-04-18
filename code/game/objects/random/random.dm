@@ -514,7 +514,7 @@
 /obj/random/tank/spawn_choices()
 	return list(/obj/item/tank/oxygen = 5,
 				/obj/item/tank/oxygen/yellow = 4,
-				/obj/item/tank/oxygen/red = 4,
+				/obj/item/tank/emergency/oxygen/double/red = 4,
 				/obj/item/tank/air = 3,
 				/obj/item/tank/emergency/oxygen = 4,
 				/obj/item/tank/emergency/oxygen/engi = 3,

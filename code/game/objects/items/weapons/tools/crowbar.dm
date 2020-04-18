@@ -53,12 +53,29 @@
 	icon = 'icons/obj/items/tool/forcing_tool.dmi'
 	icon_state = "emergency_forcing_tool"
 	item_state = "emergency_forcing_tool"
-	force = 10
+	force = 12
 	throwforce = 6
 	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
+	sharp = 1
+	edge = 1
+	w_class = ITEM_SIZE_NORMAL
 	material = MAT_STEEL
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked", "attacked", "slashed", "torn", "ripped", "cut")
+
+/obj/item/crowbar/emergency_forcing_tool/resolve_attackby(atom/A)//extra dmg against glass, it's an emergency forcing tool, it's gotta be good at something
+	if(istype(A, /obj/structure/window))
+		force = initial(force) * 2
+	else
+		force = initial(force)
+	. = ..()
+
+/obj/item/crowbar/emergency_forcing_tool/iscrowbar()//go ham
+	if(ismob(loc))
+		var/mob/M = loc
+		if(M.a_intent && M.a_intent == I_HURT)
+			return FALSE
+
+	return TRUE
 
 /obj/item/crowbar/prybar/cheap
 	name = "discount pry bar"

@@ -284,7 +284,7 @@
 /obj/item/stock_parts/circuitboard/unary_atmos/cooler,
 /obj/item/stock_parts/circuitboard/unary_atmos/heater,
 /obj/item/stock_parts/circuitboard/oxyregenerator,
-/obj/item/tank/oxygen/red,
+/obj/item/tank/emergency/oxygen/double/red,
 /obj/structure/cable,
 /obj/item/stack/material/uranium/ten,
 /obj/item/stack/material/uranium/ten,

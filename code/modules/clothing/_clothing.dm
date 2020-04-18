@@ -179,3 +179,8 @@
 		for(var/key in damages)
 			to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
 		return TOPIC_HANDLED
+
+/obj/item/clothing/get_pressure_weakness(pressure,zone)
+	. = ..()
+	for(var/obj/item/clothing/accessory/A in accessories)
+		. = min(., A.get_pressure_weakness(pressure,zone))
