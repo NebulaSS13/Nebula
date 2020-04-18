@@ -1698,6 +1698,7 @@
 #include "code\modules\economy\worth_obj.dm"
 #include "code\modules\economy\worth_stacks.dm"
 #include "code\modules\economy\worth_structures.dm"
+#include "code\modules\economy\worth_vendomat.dm"
 #include "code\modules\economy\cael\_economy_misc.dm"
 #include "code\modules\economy\cael\Accounts.dm"
 #include "code\modules\economy\cael\Accounts_DB.dm"
