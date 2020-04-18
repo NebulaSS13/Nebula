@@ -43,9 +43,14 @@
 	var/build_time_multiplier = 1
 	var/global/list/stored_substances_to_names = list()
 
+	var/sound_id
+	var/datum/sound_token/sound_token
+	var/fabricator_sound = 'sound/machines/fabricator_loop.ogg'
+
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)
 	QDEL_NULL_LIST(queued_orders)
+	QDEL_NULL(sound_token)
 	. = ..()
 
 /obj/machinery/fabricator/examine(mob/user)
@@ -61,6 +66,7 @@
 /obj/machinery/fabricator/Initialize()
 	panel_image = image(icon, "[base_icon_state]_panel")
 	. = ..()
+	sound_id = "[fabricator_sound]"
 	// Initialize material storage lists.
 	stored_material = list()
 	for(var/mat in base_storage_capacity)

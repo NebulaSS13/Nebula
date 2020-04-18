@@ -22,12 +22,14 @@
 		fab_status_flags |= FAB_BUSY
 		update_use_power(POWER_USE_ACTIVE)
 		update_icon()
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, fabricator_sound, volume = 30)
 
 /obj/machinery/fabricator/proc/stop_building()
 	if(fab_status_flags & FAB_BUSY)
 		fab_status_flags &= ~FAB_BUSY
 		update_use_power(POWER_USE_IDLE)
 		update_icon()
+		QDEL_NULL(sound_token)
 
 /obj/machinery/fabricator/proc/get_next_build()
 	currently_building = null
