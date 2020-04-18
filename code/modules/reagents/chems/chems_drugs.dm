@@ -6,7 +6,7 @@
 	color = "#ff3300"
 	metabolism = REM * 0.15
 	overdose = REAGENTS_OVERDOSE * 0.5
-	value = 3.9
+	value = 2
 
 /datum/reagent/amphetamines/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(5))
@@ -20,7 +20,7 @@
 	taste_description = "numbness"
 	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
-	value = 1.8
+	value = 2
 
 /datum/reagent/narcotics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.jitteriness = max(M.jitteriness - 5, 0)
@@ -64,7 +64,7 @@
 	color = "#009ca8"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
-	value = 2.5
+	value = 2
 
 /datum/reagent/sedatives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.make_jittery(-50)
@@ -93,7 +93,7 @@
 	color = "#60a584"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
-	value = 2.8
+	value = 2
 
 /datum/reagent/psychoactives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/drug_strength = 15
@@ -111,7 +111,7 @@
 	color = "#b31008"
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
-	value = 0.6
+	value = 2
 
 /datum/reagent/hallucinogenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_MIND, -2)
@@ -124,7 +124,7 @@
 	color = "#e700e7"
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
-	value = 0.7
+	value = 2
 
 /datum/reagent/psychotropics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/threshold = 1

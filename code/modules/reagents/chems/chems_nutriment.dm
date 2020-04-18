@@ -6,7 +6,7 @@
 	metabolism = REM * 4
 	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 	color = "#664330"
-	value = 0.1
+	value = 1.2
 	var/nutriment_factor = 10 // Per unit
 	var/hydration_factor = 0 // Per unit
 	var/injectable = 0
@@ -294,7 +294,6 @@
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	glass_icon = DRINK_ICON_NOISY
-	value = 0.2
 
 /datum/reagent/nutriment/vinegar
 	name = "vinegar"

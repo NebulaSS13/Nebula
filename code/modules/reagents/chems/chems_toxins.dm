@@ -8,7 +8,7 @@
 	heating_products = list(/datum/reagent/toxin/denatured)
 	heating_point = 100 CELSIUS
 	heating_message = "goes clear."
-	value = 2
+	value = 1.5
 
 	var/target_organ
 	var/strength = 4 // How much damage it deals per unit
@@ -51,7 +51,6 @@
 	taste_description = "slime"
 	taste_mult = 1.3
 	color = "#801e28"
-	value = 1.2
 	strength = 10
 
 /datum/reagent/toxin/plasticide
@@ -110,6 +109,7 @@
 	touch_met = 5
 	heating_point = null
 	heating_products = null
+	value = 4
 	fuel_value = 5
 
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
@@ -325,3 +325,11 @@
 						qdel(spider)
 						break
 
+/datum/reagent/toxin/bromide
+	name = "bromide"
+	description = "A dark, nearly opaque, red-orange, toxic element."
+	taste_description = "pestkiller"
+	color = "#4c3b34"
+	strength = 3
+	heating_products = null
+	heating_point = null

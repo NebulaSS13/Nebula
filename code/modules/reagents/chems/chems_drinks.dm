@@ -3,6 +3,7 @@
 	description = "Uh, some kind of drink."
 	color = "#e78108"
 	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
+	value = 1.2
 
 	var/nutrition = 0 // Per unit
 	var/hydration = 6 // Per unit
@@ -10,7 +11,6 @@
 	var/adj_drowsy = 0
 	var/adj_sleepy = 0
 	var/adj_temp = 0
-	value = 0.1
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though

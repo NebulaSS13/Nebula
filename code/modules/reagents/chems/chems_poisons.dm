@@ -38,7 +38,7 @@
 	color = "#ff337d"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
-	value = 2.6
+	value = 1.5
 
 /datum/reagent/paralytics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/threshold = 2
@@ -66,7 +66,7 @@
 	overdose = REAGENTS_OVERDOSE
 	heating_point = 61 CELSIUS
 	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/nutriment/sugar)
-	value = 2
+	value = 1.5
 
 /datum/reagent/presyncopics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/drug_strength = 4

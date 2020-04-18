@@ -18,7 +18,7 @@
 	taste_mult = 1.3
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
-	value = 2
+	value = 2.5
 
 	chilling_products = list(/datum/reagent/coagulated_blood)
 	chilling_point = 249
@@ -86,3 +86,4 @@
 	glass_name = "tomato salsa"
 	glass_desc = "Are you sure this is tomato salsa?"
 	hidden_from_codex = TRUE
+	value = 0

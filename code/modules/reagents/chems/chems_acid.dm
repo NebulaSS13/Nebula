@@ -5,10 +5,10 @@
 	color = "#db5008"
 	metabolism = REM * 2
 	touch_met = 50 // It's acid!
+	value = 1.2
 	var/power = 5
 	var/meltdose = 10 // How much is needed to melt
 	var/max_damage = 40
-	value = 0.2
 
 /datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * power)
@@ -91,7 +91,7 @@
 	power = 3
 	meltdose = 8
 	max_damage = 30
-	value = 0.2 * 2
+	value = 1.5
 
 /datum/reagent/acid/polyacid
 	name = "polytrinic acid"
@@ -101,6 +101,7 @@
 	power = 10
 	meltdose = 4
 	max_damage = 60
+	value = 1.8
 
 /datum/reagent/acid/stomach
 	name = "stomach acid"
@@ -108,3 +109,4 @@
 	power = 2
 	color = "#d8ff00"
 	hidden_from_codex = TRUE
+	value = 0

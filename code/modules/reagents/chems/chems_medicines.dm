@@ -6,7 +6,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	value = 4.2
+	value = 1.5
 
 /datum/reagent/eyedrops/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
@@ -26,7 +26,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	value = 2.3
+	value = 1.5
 
 /datum/reagent/antirads/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.radiation = max(M.radiation - 30 * removed, 0)
@@ -40,7 +40,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	value = 4.9
+	value = 1.5
 
 /datum/reagent/brute_meds/affect_overdose(mob/living/carbon/M, alien)
 	..()
@@ -63,7 +63,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	value = 2.9
+	value = 1.5
 
 /datum/reagent/burn_meds/affect_blood(mob/living/carbon/M, alien, removed)
 	M.heal_organ_damage(0, 6 * removed)
@@ -92,7 +92,7 @@
 	color = "#00a000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	value = 2.1
+	value = 1.5
 	var/remove_generic = 1
 	var/list/remove_toxins = list(
 		/datum/reagent/toxin/zombiepowder
@@ -142,7 +142,7 @@
 	scannable = 1
 	metabolism = 0.01
 	data = 0
-	value = 6
+	value = 1.5
 
 /datum/reagent/stimulants/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + 5 MINUTES)
@@ -165,7 +165,7 @@
 	scannable = 1
 	metabolism = 0.01
 	data = 0
-	value = 6
+	value = 1.5
 
 /datum/reagent/antidepressants/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + 5 MINUTES)
@@ -186,7 +186,7 @@
 	metabolism = REM * 0.1
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
-	value = 2.5
+	value = 1.5
 
 /datum/reagent/antibiotics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.immunity = max(M.immunity - 0.1, 0)
@@ -209,7 +209,7 @@
 	color = "#004000"
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
-	value = 3.6
+	value = 1.5
 
 /datum/reagent/retrovirals/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustCloneLoss(-20 * removed)
@@ -240,7 +240,7 @@
 	scannable = 1
 	overdose = 20
 	metabolism = 0.1
-	value = 2
+	value = 1.5
 
 /datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_STABLE)
@@ -265,7 +265,7 @@
 	color = "#8040ff"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	value = 6
+	value = 1.5
 
 /datum/reagent/regenerator/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.heal_organ_damage(3 * removed, 3 * removed)
@@ -279,7 +279,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	value = 5.9
+	value = 1.5
 
 /datum/reagent/neuroannealer/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
