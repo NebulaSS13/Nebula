@@ -42,12 +42,26 @@
 	..()
 	take_damage(Proj.get_structure_damage())
 
+/obj/structure/proc/subtract_matter(var/obj/subtracting)
+	if(!length(matter))
+		return
+	if(!istype(subtracting) || !length(subtracting.matter))
+		return
+	for(var/mat in matter)
+		if(!subtracting[mat])
+			continue
+		matter[mat] -= subtracting[mat]
+		if(matter[mat] <= 0)
+			matter -= mat
+	UNSETEMPTY(matter)
+
 /obj/structure/displaycase/destroyed()
 	if(destroyed)
 		return
 	set_density(0)
 	destroyed = TRUE
-	new /obj/item/material/shard(loc)
+	
+	subtract_matter(new /obj/item/material/shard(get_turf(src), material?.type))
 	for(var/atom/movable/AM in src)
 		AM.dropInto(loc)
 	playsound(src, "shatter", 70, 1)

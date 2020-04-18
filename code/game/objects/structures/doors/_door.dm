@@ -9,6 +9,7 @@
 	anchored = TRUE
 	opacity =  TRUE
 
+	var/has_window = FALSE
 	var/changing_state = FALSE
 	var/icon_base
 	var/datum/lock/lock
@@ -21,6 +22,7 @@
 		lock = new /datum/lock(src, lock)
 	if(!icon_base)
 		icon_base = material.door_icon_base
+	changing_state = FALSE
 	update_nearby_tiles(need_rebuild=TRUE)
 
 /obj/structure/door/Destroy()
@@ -56,7 +58,7 @@
 	changing_state = TRUE
 	sleep(1 SECOND)
 	set_density(TRUE)
-	set_opacity(initial(opacity) && material.opacity > 0.5)
+	set_opacity(!has_window && material.opacity > 0.5)
 	post_change_state()
 	return TRUE
 

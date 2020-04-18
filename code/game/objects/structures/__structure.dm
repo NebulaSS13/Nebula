@@ -220,16 +220,12 @@
 		return TRUE
 
 /obj/structure/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if(prob(50))
-				qdel(src)
-				return
-		if(3.0)
-			return
+	if(severity == 1)
+		destroyed()
+	else if(severity == 2)
+		take_damage(rand(20, 30))
+	else
+		take_damage(rand(5, 15))
 
 /obj/structure/proc/can_repair(var/mob/user)
 	if(health >= maxhealth)
@@ -238,6 +234,4 @@
 	return TRUE
 
 /obj/structure/bullet_act(var/obj/item/projectile/Proj)
-	var/damage = Proj.get_structure_damage()
-	if(damage)
-		take_damage(min(damage, 100))
+	take_damage(Proj.get_structure_damage())
