@@ -1,0 +1,20 @@
+#ifndef CONTENT_PACK_BORERS
+#define CONTENT_PACK_BORERS
+// BEGIN_INCLUDE
+#include "borer.dm"
+#include "datum\antagonist.dm"
+#include "datum\ghost_trap.dm"
+#include "datum\language.dm"
+#include "datum\objective_borer.dm"
+#include "datum\symbiote.dm"
+#include "mob\organ.dm"
+#include "mob\overrides.dm"
+#include "mob\powers.dm"
+#include "mob\borer\borer.dm"
+#include "mob\borer\borer_attacks.dm"
+#include "mob\borer\borer_captive.dm"
+#include "mob\borer\borer_hud.dm"
+#include "mob\borer\borer_powers.dm"
+#include "mob\borer\say.dm"
+// END_INCLUDE
+#endif

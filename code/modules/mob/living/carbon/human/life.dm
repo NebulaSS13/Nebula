@@ -964,21 +964,12 @@
 		var/image/holder = hud_list[STATUS_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
-
-		else if(has_brain_worms())
-			var/mob/living/simple_animal/borer/B = has_brain_worms()
-			if(B.controlling)
-				holder.icon_state = "hudbrainworm"
-			else
-				holder.icon_state = "hudhealthy"
 		else
 			holder.icon_state = "hudhealthy"
 
 		var/image/holder2 = hud_list[STATUS_HUD_OOC]
 		if(stat == DEAD)
 			holder2.icon_state = "huddead"
-		else if(has_brain_worms())
-			holder2.icon_state = "hudbrainworm"
 		else
 			holder2.icon_state = "hudhealthy"
 

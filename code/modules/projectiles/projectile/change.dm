@@ -13,8 +13,8 @@
 	if(istype(M, /mob/living) && M.stat != DEAD)
 		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 			return
-		if(M.has_brain_worms())
-			return //Borer stuff - RR
+
+		M.handle_pre_transformation()
 
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/Robot = M

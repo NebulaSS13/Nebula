@@ -9,8 +9,7 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	var/list/accept_mobs = list(
 		/mob/living/simple_animal/lizard,
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/borer
+		/mob/living/simple_animal/mouse
 	)
 	var/contains = 0 // 0 = nothing, 1 = money, 2 = animal, 3 = spiderling
 

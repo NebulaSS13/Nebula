@@ -1,3 +1,6 @@
+/mob/living/simple_animal/borer/can_do_special_ranged_attack(var/check_flag = TRUE)
+	. = can_use_borer_ability(requires_host_value = check_flag)
+
 /mob/living/simple_animal/borer/proc/can_use_borer_ability(var/silent = FALSE, var/requires_host_value = TRUE, var/usable_while_docile = FALSE, var/check_last_special = TRUE)
 
 	if(controlling)

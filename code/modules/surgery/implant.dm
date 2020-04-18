@@ -204,18 +204,7 @@
 			user.visible_message("<span class='notice'>[user] takes something out of incision on [target]'s [affected.name] with \the [tool].</span>", \
 			"<span class='notice'>You take \the [obj] out of incision on \the [target]'s [affected.name] with \the [tool].</span>" )
 			target.remove_implant(obj, TRUE, affected)
-
 			BITSET(target.hud_updateflag, IMPLOYAL_HUD)
-
-			//Handle possessive brain borers.
-			if(istype(obj,/mob/living/simple_animal/borer))
-				var/mob/living/simple_animal/borer/worm = obj
-				if(worm.controlling)
-					target.release_control()
-				worm.detatch()
-				worm.leave_host()
-
-
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 		else
 			user.visible_message("<span class='notice'>[user] removes \the [tool] from [target]'s [affected.name].</span>", \

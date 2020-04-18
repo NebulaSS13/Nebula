@@ -2,6 +2,11 @@
 	var/image/aura_image
 
 /mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
+
+	if(!SSmodpacks.loaded_modpacks["Cortical Borers"]) // Borer module not included.
+		log_debug("Attempted spawn of stubbed mobtype [type].")
+		return INITIALIZE_HINT_QDEL
+
 	. = ..()
 	aura_image = create_aura_image(src)
 	aura_image.color = "#aaffaa"
@@ -25,9 +30,9 @@
 
 /mob/living/simple_animal/borer/RangedAttack(atom/A, var/params)
 	. = ..()
-	if(!. && a_intent == I_DISARM && !host && isliving(A) && !neutered && can_use_borer_ability(requires_host_value = FALSE))
+	if(!. && a_intent == I_DISARM && isliving(A) && !neutered && can_do_special_ranged_attack(FALSE))
 		var/mob/living/M = A
-		if(M.has_brain_worms())
+		if(locate(/mob/living/simple_animal/borer) in M.contents)
 			to_chat(src, SPAN_WARNING("You cannot dominate a host who already has a passenger!"))
 		else
 			visible_message(SPAN_DANGER("\The [src] extends a writhing pseudopod towards \the [M]..."))
