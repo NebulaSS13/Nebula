@@ -166,7 +166,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	material_force_multiplier = 2.5
+	material_force_multiplier = 0.5
 
 /obj/item/chems/glass/beaker/bowl
 	name = "mixing bowl"
