@@ -11,7 +11,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	req_access = list(list(access_heads, access_security))
-	var/datum/computer_file/data/warrant/active
+	var/datum/computer_file/report/warrant/active
 
 //look at it
 /obj/item/holowarrant/examine(mob/user, distance)
@@ -37,31 +37,58 @@
 
 //hit yourself with it
 /obj/item/holowarrant/attack_self(mob/living/user)
-	active = null
-	var/list/warrants = list()
-	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-		if(!W.archived)
-			warrants += W.fields["namewarrant"]
-	if(warrants.len == 0)
-		to_chat(user,"<span class='notice'>There are no warrants available</span>")
+	ui_interact(user)
+
+/obj/item/holowarrant/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
+	var/list/data = list()
+	if(active)
+		data["text"] += active.get_formatted_version()
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data)
+	if (!ui)
+		ui = new(user, src, ui_key, "holowarrant.tmpl", "Holowarrant Settings", 540, 326)
+		ui.set_initial_data(data)
+		ui.open()
+
+/obj/item/holowarrant/OnTopic(mob/user, href_list, datum/topic_state/state)
+	. = ..()
+	if(.)
 		return
-	var/temp
-	temp = input(user, "Which warrant would you like to load?") as null|anything in warrants
-	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-		if(W.fields["namewarrant"] == temp)
-			active = W
-	update_icon()
+	if(href_list["clear"])
+		active = null
+		update_icon()
+		return TOPIC_REFRESH
+	
+	if(href_list["select"])
+		var/list/active_warrants = list()
+		for(var/datum/computer_file/report/warrant/W in GLOB.all_warrants)
+			if(!W.archived)
+				active_warrants["[capitalize(W.get_category())] - [W.get_name()]"] = W
+		if(!length(active_warrants))
+			to_chat(user,SPAN_WARNING("There are no active warrants available."))
+			return TOPIC_HANDLED
+
+		var/selected_name = input(user, "Which warrant would you like to load?") as null|anything in active_warrants
+		if(!selected_name)
+			return TOPIC_HANDLED
+		var/datum/computer_file/report/warrant/selected = active_warrants[selected_name]
+		if(selected.archived || !(selected in GLOB.all_warrants))
+			to_chat(user,SPAN_WARNING("Invalid selection, try again."))
+			return TOPIC_HANDLED
+		active = selected
+		update_icon()
+		return TOPIC_REFRESH
 
 /obj/item/holowarrant/attackby(obj/item/W, mob/user)
 	if(active)
 		var/obj/item/card/id/I = W.GetIdCard()
 		if(I && check_access_list(I.GetAccess()))
 			var/choice = alert(user, "Would you like to authorize this warrant?","Warrant authorization","Yes","No")
+			var/datum/report_field/signature/auth = active.field_from_name("Authorized by")
 			if(choice == "Yes")
-				active.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
-			user.visible_message("<span class='notice'>You swipe \the [I] through the [src].</span>", \
-					"<span class='notice'>[user] swipes \the [I] through the [src].</span>")
-			broadcast_security_hud_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [I.assignment ? I.assignment+" " : ""][I.registered_name].", src)
+				auth.ask_value(user)
+			user.visible_message(SPAN_NOTICE("You swipe \the [I] through the [src]."), 
+								 SPAN_NOTICE("[user] swipes \the [I] through the [src]."))
+			broadcast_security_hud_message("[active.get_broadcast_summary()] has been authorized by [auth.get_value()].", src)
 		else
 			to_chat(user, "<span class='notice'>A red \"Access Denied\" light blinks on \the [src]</span>")
 		return 1
@@ -82,52 +109,4 @@
 /obj/item/holowarrant/proc/show_content(mob/user, forceshow)
 	if(!active)
 		return
-	if(active.fields["arrestsearch"] == "arrest")
-		var/output = {"
-		<HTML><HEAD><TITLE>[active.fields["namewarrant"]]</TITLE></HEAD>
-		<BODY bgcolor='#ffffff'><center><large><b>Warrant Tracker System</b></large></br>
-		</br>
-		Issued in the jurisdiction of the</br>
-		[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
-		</br>
-		<b>ARREST WARRANT</b></center></br>
-		</br>
-		This document serves as authorization and notice for the arrest of _<u>[active.fields["namewarrant"]]</u>____ for the crime(s) of:</br>[active.fields["charges"]]</br>
-		</br>
-		Vessel or habitat: _<u>[GLOB.using_map.station_name]</u>____</br>
-		</br>_<u>[active.fields["auth"]]</u>____</br>
-		<small>Person authorizing arrest</small></br>
-		</BODY></HTML>
-		"}
-
-		show_browser(user, output, "window=Warrant for the arrest of [active.fields["namewarrant"]]")
-	if(active.fields["arrestsearch"] ==  "search")
-		var/output= {"
-		<HTML><HEAD><TITLE>Search Warrant: [active.fields["namewarrant"]]</TITLE></HEAD>
-		<BODY bgcolor='#ffffff'><center><large><b>Warrant Tracker System</b></large></br>
-		</br>
-		Issued in the jurisdiction of the</br>
-		[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
-		</br>
-		<b>SEARCH WARRANT</b></center></br>
-		</br>
-		<b>Suspect's/location name: </b>[active.fields["namewarrant"]]</br>
-		</br>
-		<b>For the following reasons: </b> [active.fields["charges"]]</br>
-		</br>
-		<b>Warrant issued by: </b> [active.fields ["auth"]]</br>
-		</br>
-		Vessel or habitat: _<u>[GLOB.using_map.station_name]</u>____</br>
-		</br>
-		<center><small><i>The Security Officer(s) bearing this Warrant are hereby authorized by the Issuer to conduct a one time lawful search of the Suspect's person/belongings/premises and/or Department for any items and materials that could be connected to the suspected criminal act described below, pending an investigation in progress.</br>
-		</br>
-		The Security Officer(s) are obligated to remove any and all such items from the Suspects posession and/or Department and file it as evidence.</br>
-		</br>
-		The Suspect/Department staff is expected to offer full co-operation.</br>
-		</br>
-		In the event of the Suspect/Department staff attempting to resist/impede this search or flee, they must be taken into custody immediately! </br>
-		</br>
-		All confiscated items must be filed and taken to Evidence!</small></i></center></br>
-		</BODY></HTML>
-		"}
-		show_browser(user, output, "window=Search warrant for [active.fields["namewarrant"]]")
+	show_browser(user, active.get_formatted_version(), "window=Warrant")

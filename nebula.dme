@@ -2354,6 +2354,7 @@
 #include "code\modules\modular_computers\file_system\reports\people.dm"
 #include "code\modules\modular_computers\file_system\reports\report.dm"
 #include "code\modules\modular_computers\file_system\reports\report_field.dm"
+#include "code\modules\modular_computers\file_system\reports\warrant.dm"
 #include "code\modules\modular_computers\hardware\_hardware.dm"
 #include "code\modules\modular_computers\hardware\ai_slot.dm"
 #include "code\modules\modular_computers\hardware\battery_module.dm"
