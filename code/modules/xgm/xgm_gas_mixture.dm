@@ -353,10 +353,9 @@
 //Two lists can be passed by reference if you need know specifically which graphics were added and removed.
 /datum/gas_mixture/proc/check_tile_graphic(list/graphic_add = null, list/graphic_remove = null)
 	for(var/obj/effect/gas_overlay/O in graphic)
-		var/material/mat = SSmaterials.get_material_datum(O.material.type)
-		if(gas[O.material.type] <= mat.gas_overlay_limit)
+		if(gas[O.material.type] <= O.material.gas_overlay_limit)
 			LAZYADD(graphic_remove, O)
-	for(var/g in SSmaterials.all_gasses)
+	for(var/g in gas)
 		//Overlay isn't applied for this gas, check if it's valid and needs to be added.
 		var/material/mat = SSmaterials.get_material_datum(g)
 		if(!isnull(mat.gas_overlay_limit) && gas[g] > mat.gas_overlay_limit)
