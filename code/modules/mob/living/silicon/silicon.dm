@@ -34,6 +34,13 @@
 
 	var/list/access_rights
 	var/obj/item/card/id/idcard = /obj/item/card/id/synthetic
+	// Various machinery stock parts used by stuff like NTOS (should be merged with above at some point)
+	var/list/stock_parts = list()
+	var/list/starting_stock_parts = list(
+		/obj/item/stock_parts/computer/processor_unit,
+		/obj/item/stock_parts/computer/hard_drive/silicon,
+		/obj/item/stock_parts/computer/network_card
+	)
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -46,6 +53,9 @@
 		silicon_radio = new silicon_radio(src)
 	if(silicon_camera)
 		silicon_camera = new silicon_camera(src)
+	for(var/T in starting_stock_parts)
+		stock_parts += new T(src)
+	set_extension(src, /datum/extension/interactive/ntos/silicon)
 
 	add_language(/decl/language/human/common)
 	default_language = /decl/language/human/common

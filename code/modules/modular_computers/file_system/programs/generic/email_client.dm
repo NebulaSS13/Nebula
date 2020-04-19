@@ -13,12 +13,12 @@
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE
 
-	nanomodule_path = /datum/nano_module/email_client
+	nanomodule_path = /datum/nano_module/program/email_client
 
 // Persistency. Unless you log out, or unless your password changes, this will pre-fill the login data when restarting the program
 /datum/computer_file/program/email_client/on_shutdown()
 	if(NM)
-		var/datum/nano_module/email_client/NME = NM
+		var/datum/nano_module/program/email_client/NME = NM
 		if(NME.current_account)
 			stored_login = NME.stored_login
 			stored_password = NME.stored_password
@@ -32,7 +32,7 @@
 	. = ..()
 
 	if(NM)
-		var/datum/nano_module/email_client/NME = NM
+		var/datum/nano_module/program/email_client/NME = NM
 		NME.stored_login = stored_login
 		NME.stored_password = stored_password
 		NME.log_in()
@@ -44,7 +44,7 @@
 
 /datum/computer_file/program/email_client/process_tick()
 	..()
-	var/datum/nano_module/email_client/NME = NM
+	var/datum/nano_module/program/email_client/NME = NM
 	if(!istype(NME))
 		return
 	NME.relayed_process(ntnet_speed)
@@ -57,7 +57,7 @@
 	else
 		ui_header = "ntnrc_idle.gif"
 
-/datum/nano_module/email_client/
+/datum/nano_module/program/email_client/
 	name = "Email Client"
 	var/stored_login = ""
 	var/stored_password = ""
@@ -81,15 +81,10 @@
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 
-/datum/nano_module/email_client/proc/get_functional_drive()
-	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
-	var/obj/item/stock_parts/computer/hard_drive/drive = os && os.get_component(/obj/item/stock_parts/computer/hard_drive)
-	if(!drive || !drive.check_functionality())
-		error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
-		return
-	return drive
+/datum/nano_module/program/email_client/proc/get_functional_drive()
+	return program.computer.get_component(/obj/item/stock_parts/computer/hard_drive)
 
-/datum/nano_module/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
+/datum/nano_module/program/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
 	var/mob/living/L = get_holder_of_type(host, /mob/living)
 	if(L)
 		var/list/msg = list()
@@ -102,11 +97,11 @@
 		msg += "*--*"
 		to_chat(L, jointext(msg, null))
 
-/datum/nano_module/email_client/Destroy()
+/datum/nano_module/program/email_client/Destroy()
 	log_out()
 	. = ..()
 
-/datum/nano_module/email_client/proc/log_in()
+/datum/nano_module/program/email_client/proc/log_in()
 	var/list/id_login
 	var/atom/movable/A = nano_host()
 	var/obj/item/card/id/id = A.GetIdCard()
@@ -151,7 +146,7 @@
 
 // Returns 0 if no new messages were received, 1 if there is an unread message but notification has already been sent.
 // and 2 if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
-/datum/nano_module/email_client/proc/check_for_new_messages(var/messages_read = FALSE)
+/datum/nano_module/program/email_client/proc/check_for_new_messages(var/messages_read = FALSE)
 	if(!current_account)
 		return 0
 
@@ -169,7 +164,7 @@
 		read_message_count = allmails.len
 
 
-/datum/nano_module/email_client/proc/log_out()
+/datum/nano_module/program/email_client/proc/log_out()
 	if(current_account)
 		current_account.connected_clients -= src
 	current_account = null
@@ -178,7 +173,7 @@
 	last_message_count = 0
 	read_message_count = 0
 
-/datum/nano_module/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	// Password has been changed by other client connected to this email account
@@ -275,7 +270,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/email_client/proc/find_message_by_fuid(var/fuid)
+/datum/nano_module/program/email_client/proc/find_message_by_fuid(var/fuid)
 	if(!istype(current_account))
 		return
 
@@ -287,7 +282,7 @@
 		if(message.uid == fuid)
 			return message
 
-/datum/nano_module/email_client/proc/clear_message()
+/datum/nano_module/program/email_client/proc/clear_message()
 	new_message = FALSE
 	msg_title = ""
 	msg_body = ""
@@ -295,7 +290,7 @@
 	msg_attachment = null
 	current_message = null
 
-/datum/nano_module/email_client/proc/relayed_process(var/netspeed)
+/datum/nano_module/program/email_client/proc/relayed_process(var/netspeed)
 	download_speed = netspeed
 	if(!downloading)
 		return
@@ -316,7 +311,7 @@
 	return 1
 
 
-/datum/nano_module/email_client/Topic(href, href_list)
+/datum/nano_module/program/email_client/Topic(href, href_list)
 	if(..())
 		return 1
 	var/mob/living/user = usr

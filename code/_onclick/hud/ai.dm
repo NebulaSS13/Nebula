@@ -57,9 +57,9 @@
 			ui_ai_crew_manifest,
 			"Show Crew Manifest",
 			"manifest",
-			/mob/living/silicon/proc/open_subsystem,
+			/mob/living/silicon/ai/proc/run_program,
 			null,
-			list(/datum/computer_file/program/crew_manifest)
+			list("crewmanifest")
 			)
 
 	adding += new /obj/screen/ai_button(null,
@@ -122,7 +122,9 @@
 			ui_ai_crew_mon,
 			"Crew Monitor",
 			"crew_monitor",
-			/mob/living/silicon/ai/proc/show_crew_monitor
+			/mob/living/silicon/ai/proc/run_program,
+			null,
+			list("sensormonitor")
 			)
 
 	adding += new /obj/screen/ai_button(null,
@@ -162,10 +164,9 @@
 
 	adding += new /obj/screen/ai_button(null,
 			ui_ai_crew_rec,
-			"Crew Records",
+			"Inbuilt Computer",
 			"ai_crew_rec",
-			/mob/living/silicon/ai/proc/show_crew_records
+			/mob/living/silicon/ai/proc/access_computer
 			)
-
 	A.client.screen = list()
 	A.client.screen.Add(adding)

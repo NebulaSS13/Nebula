@@ -176,3 +176,11 @@
 /obj/item/stock_parts/computer/hard_drive/Initialize()
 	. = ..()
 	install_default_programs()
+
+// Preset for borgs and AIs
+/obj/item/stock_parts/computer/hard_drive/silicon/install_default_programs()
+	..()
+	store_file(new/datum/computer_file/program/records())
+	store_file(new/datum/computer_file/program/crew_manifest())
+	store_file(new/datum/computer_file/program/email_client())
+	store_file(new/datum/computer_file/program/suit_sensors())

@@ -50,11 +50,16 @@
 <br><br>
 <h2>Available records:</h2>
 <table style="width:100%">
-<tr><td style="width:40%">Name<th>Position<th>Rank
+<tr><td style="width:40%">Name<th>Position
+{{if data.show_milrank}}
+	<th>Rank
+{{/if}}
 {{for data.all_records}}
 	<tr class="candystripe"><td>{{:helper.link(value.name, '', {'set_active' : value.id})}}
 	<td>{{:value.rank}}
-	<td>{{:value.milrank}}
+	{{if data.show_milrank}}
+		<td>{{:value.milrank}}
+	{{/if}}
 {{/for}}
 </table>
 {{/if}}
