@@ -14,7 +14,7 @@
 		)
 	permeability_coefficient = 0
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED, 
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
@@ -114,7 +114,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/suit_cooling_unit)
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED, 
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
@@ -125,7 +125,7 @@
 	siemens_coefficient = 0.9
 	center_of_mass = null
 	randpixel = 0
-	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_OVER)
 
 /obj/item/clothing/suit/space/Initialize()
 	. = ..()

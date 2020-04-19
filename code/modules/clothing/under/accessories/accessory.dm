@@ -26,6 +26,7 @@
 	if(!inv_overlay)
 		if(on_mob_icon)
 			inv_overlay = image(icon, "inventory")
+			inv_overlay.color = color
 		else
 			var/tmp_icon_state = overlay_state? overlay_state : icon_state
 			if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
