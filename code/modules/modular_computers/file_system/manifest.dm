@@ -7,27 +7,10 @@
 		dept_data += list(list("names" = list(), "header" = dept.title, "ref" = dept.reference))
 	
 	
-	/*var/list/dept_data = list(
-		list("names" = list(), "header" = "Heads of Staff", "flag" = COM),
-		list("names" = list(), "header" = "Command Support", "flag" = SPT),
-		list("names" = list(), "header" = "Research", "flag" = SCI),
-		list("names" = list(), "header" = "Security", "flag" = SEC),
-		list("names" = list(), "header" = "Medical", "flag" = MED),
-		list("names" = list(), "header" = "Engineering", "flag" = ENG),
-		list("names" = list(), "header" = "Supply", "flag" = SUP),
-		list("names" = list(), "header" = "Exploration", "flag" = EXP),
-		list("names" = list(), "header" = "Service", "flag" = SRV),
-		list("names" = list(), "header" = "Civilian", "flag" = CIV),
-		list("names" = list(), "header" = "Miscellaneous", "flag" = MSC),
-		list("names" = list(), "header" = "Silicon")
-	)*/
 	var/list/misc //Special departments for easier access
-	var/list/bot
 	for(var/list/department in dept_data)
 		if(department["ref"] == "misc")
 			misc = department["names"]
-		if(isnull(department["ref"]))
-			bot = department["names"]
 
 	var/list/isactive = new()
 	var/list/mil_ranks = list() // HTML to prepend to name
@@ -77,17 +60,6 @@
 					found_place = 1
 		if(!found_place)
 			misc[name] = rank
-
-	// Synthetics don't have actual records, so we will pull them from here.
-	for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
-		bot[ai.name] = "Artificial Intelligence"
-
-	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
-		// No combat/syndicate cyborgs, no drones.
-		if(robot.module && robot.module.hide_on_manifest)
-			continue
-
-		bot[robot.name] = "[robot.modtype] [robot.braintype]"
 
 	for(var/list/department in dept_data)
 		var/list/names = department["names"]

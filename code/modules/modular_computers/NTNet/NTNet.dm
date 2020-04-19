@@ -233,7 +233,7 @@ var/global/datum/ntnet/ntnet_global = new()
 		user.StoreMemory("Your email account address has been changed to [new_login].", /decl/memory_options/system)
 	if(issilicon(user))
 		var/mob/living/silicon/S = user
-		var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
+		var/datum/nano_module/program/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/program/email_client)
 		if(my_client)
 			my_client.stored_login = new_login
 
@@ -258,7 +258,7 @@ var/global/datum/ntnet/ntnet_global = new()
 			user.StoreMemory("Your email account address is [EA.login] and the password is [EA.password].", /decl/memory_options/system)
 		if(issilicon(user))
 			var/mob/living/silicon/S = user
-			var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
+			var/datum/nano_module/program/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/program/email_client)
 			if(my_client)
 				my_client.stored_login = EA.login
 				my_client.stored_password = EA.password

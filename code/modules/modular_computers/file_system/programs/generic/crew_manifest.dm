@@ -7,14 +7,14 @@
 	size = 4
 	requires_ntnet = 1
 	available_on_ntnet = 1
-	nanomodule_path = /datum/nano_module/crew_manifest
+	nanomodule_path = /datum/nano_module/program/crew_manifest
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE
 
-/datum/nano_module/crew_manifest
+/datum/nano_module/program/crew_manifest
 	name = "Crew Manifest"
 
-/datum/nano_module/crew_manifest/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+/datum/nano_module/program/crew_manifest/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	data["crew_manifest"] = html_crew_manifest(TRUE)

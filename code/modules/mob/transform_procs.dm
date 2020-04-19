@@ -94,7 +94,7 @@
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
-		O.forceMove(loc_landmark.loc)
+		O.forceMove(loc_landmark ? loc_landmark.loc : get_turf(src))
 		O.on_mob_init()
 
 	O.add_ai_verbs()
