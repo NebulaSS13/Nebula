@@ -580,3 +580,14 @@ client/verb/character_setup()
 
 		pct += delta
 		winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
+	addtimer(CALLBACK(src, .proc/update_initial_icon_size), 0)
+
+/client/proc/update_initial_icon_size()
+	set waitfor = 0
+	var/set_initial_window_size = 48
+	for(var/check_icon_size in list(32, 48, 64, 96, 128))
+		if(winget(src, "menu.icon[check_icon_size]", "is-checked") == "true")
+			set_initial_window_size = check_icon_size
+			break
+	winset(src, "menu.icon[set_initial_window_size]", "is-checked=true")
+	SetWindowIconSize(set_initial_window_size)
