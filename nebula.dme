@@ -991,6 +991,7 @@
 #include "code\game\objects\items\weapons\flame.dm"
 #include "code\game\objects\items\weapons\flamethrower.dm"
 #include "code\game\objects\items\weapons\gift_wrappaper.dm"
+#include "code\game\objects\items\weapons\hair_care.dm"
 #include "code\game\objects\items\weapons\handcuffs.dm"
 #include "code\game\objects\items\weapons\ironing_iron.dm"
 #include "code\game\objects\items\weapons\janitor_sign.dm"

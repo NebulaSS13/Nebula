@@ -1814,8 +1814,8 @@
 /obj/structure/table/woodentable,
 /obj/item/haircomb/brush,
 /obj/item/lipstick/black,
-/obj/item/lipstick/jade,
-/obj/item/lipstick/purple,
+/obj/item/lipstick/green,
+/obj/item/lipstick/violet,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood,
 /area/unishi/living)

@@ -16,7 +16,8 @@
 		/obj/item/haircomb/random,
 		/obj/item/haircomb/brush,
 		/obj/random/medical/lite,
-		/obj/item/lipstick/random,
+		/obj/item/lipstick,
+		/obj/random/lipstick,
 		/obj/random/soap,
 		/obj/item/chems/spray/cleaner/deodorant,
 		/obj/item/towel/random)
