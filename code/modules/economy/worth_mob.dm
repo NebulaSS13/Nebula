@@ -1,10 +1,22 @@
-#define MOB_BASE_VALUE 20
 /mob/get_base_value()
-	. = MOB_BASE_VALUE * mob_size
+	. = 0.5 * mob_size
 	if(stat != DEAD)
 		. *= 1.5
 	. = max(round(.), mob_size)
 
 /mob/living/carbon/human/get_base_value()
 	. = round(..() * species.rarity_value)
-#undef MOB_BASE_VALUE
+
+/mob/living/get_base_value()
+	. = ..()
+	if(meat_type)
+		. += atom_info_repository.get_worth_for(meat_type) * meat_amount
+	if(skin_material)
+		var/material/M = SSmaterials.get_material_datum(skin_material)
+		. += skin_amount * M.value * 10
+	if(bone_material)
+		var/material/M = SSmaterials.get_material_datum(bone_material)
+		. += bone_amount * M.value * 10
+	if(skull_type)
+		.+= atom_info_repository.get_worth_for(skull_type)
+	. = round(.)
