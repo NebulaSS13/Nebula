@@ -106,7 +106,7 @@
 /turf/simulated/floor/fixed/alium/airless,
 /area/mine/explored)
 "aN" = (
-/obj/machinery/door/unpowered/simple/sandstone{
+/obj/structure/door/sandstone{
 	desc = "It opens and closes. It's absolutely dominated by a huge engraving of some kind of bird.";
 	name = "engraved door"
 	},
@@ -116,7 +116,7 @@
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
 "aQ" = (
-/obj/machinery/door/unpowered/simple/sandstone,
+/obj/structure/door/sandstone,
 /turf/simulated/floor/airless/stone,
 /area/mine/explored)
 "aR" = (

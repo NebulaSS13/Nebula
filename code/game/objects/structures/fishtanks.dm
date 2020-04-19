@@ -26,8 +26,8 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 	density = 1
 	atom_flags = ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	mob_offset = TRUE
+	maxhealth = 50
 
-	var/health = 50
 	var/deleting
 	var/fill_type
 	var/fill_amt
@@ -62,22 +62,13 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 	visible_message(SPAN_NOTICE("\The [user] taps on \the [src]."))
 
 /obj/structure/glass_tank/attackby(var/obj/item/W, var/mob/user)
-	attack_animation(user)
-	if(W.force >= 5 && user.a_intent == I_HURT)
-		health -= W.force
-		visible_message(SPAN_DANGER("\The [user] strikes \the [src] with \the [W]!"))
-		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, 1)
-		check_health()
-	else
+	if(W.force < 5 || user.a_intent != I_HURT)
+		attack_animation(user)
 		visible_message(SPAN_NOTICE("\The [user] taps \the [src] with \the [W]."))
+	else
+		. = ..()
 
-/obj/structure/glass_tank/proc/check_health()
-	//Todo damage overlays.
-	if(health <= 0)
-		shatter()
-
-/obj/structure/glass_tank/proc/shatter(var/silent)
-	//Todo leave wreckage based on remaining health.
+/obj/structure/glass_tank/destroyed(var/silent)
 	deleting = 1
 	var/turf/T = get_turf(src)
 	playsound(T, "shatter", 70, 1)
@@ -90,7 +81,7 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 	dump_contents()
 	for(var/obj/structure/glass_tank/A in orange(1, src))
 		if(!A.deleting && A.type == type)
-			A.shatter(1)
+			A.destroyed(TRUE)
 	qdel(src)
 
 /obj/structure/glass_tank/proc/dump_contents()

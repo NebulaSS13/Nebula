@@ -15,8 +15,8 @@
 	material = DEFAULT_WALL_MATERIAL
 	handle_generic_blending = TRUE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
+	maxhealth = 100
 
-	var/health = 100
 	var/paint_color
 	var/stripe_color
 	var/list/connections
@@ -35,10 +35,6 @@
 	if(. != INITIALIZE_HINT_QDEL)
 		. = INITIALIZE_HINT_LATELOAD
 
-/obj/structure/wall_frame/update_materials(var/keep_health)
-	if(!keep_health)
-		health = material.integrity
-
 /obj/structure/wall_frame/LateInitialize()
 	..()
 	update_connections(1)
@@ -46,19 +42,18 @@
 
 /obj/structure/wall_frame/examine(mob/user)
 	. = ..()
-
-	if(health == material.integrity)
-		to_chat(user, SPAN_NOTICE("It seems to be in fine condition."))
-	else
-		var/dam = health / material.integrity
-		if(dam <= 0.3)
-			to_chat(user, SPAN_NOTICE("It's got a few dents and scratches."))
-		else if(dam <= 0.7)
-			to_chat(user, SPAN_WARNING("A few pieces of panelling have fallen off."))
-		else
-			to_chat(user, SPAN_DANGER("It's nearly falling to pieces."))
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
+
+/obj/structure/wall_frame/show_examined_damage(mob/user, var/perc)
+	if(maxhealth == -1)
+		return
+	if(perc > 0.7)
+		to_chat(user, SPAN_NOTICE("It's got a few dents and scratches."))
+	else if(perc > 0.3)
+		to_chat(user, SPAN_WARNING("A few pieces of panelling have fallen off."))
+	else
+		to_chat(user, SPAN_DANGER("It's nearly falling to pieces."))
 
 /obj/structure/wall_frame/attackby(var/obj/item/W, var/mob/user)
 
@@ -158,11 +153,6 @@
 	if (tforce < 15)
 		return
 	take_damage(tforce)
-
-/obj/structure/wall_frame/take_damage(damage)
-	health -= damage
-	if(health <= 0)
-		dismantle()
 
 //Subtypes
 /obj/structure/wall_frame/standard

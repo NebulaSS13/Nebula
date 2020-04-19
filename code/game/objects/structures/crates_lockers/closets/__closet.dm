@@ -4,11 +4,11 @@
 	icon = 'icons/obj/closets/bases/closet.dmi'
 	icon_state = "base"
 	density = 1
+	maxhealth = 100
 
 	var/welded = 0
 	var/large = 1
 	var/wall_mounted = 0 //never solid (You can always pass over it)
-	var/health = 100
 	var/breakout = 0 //if someone is currently breaking out. mutex
 	var/storage_capacity = 2 * MOB_SIZE_MEDIUM //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
@@ -237,29 +237,30 @@
 					A.forceMove(src.loc)
 				qdel(src)
 
-/obj/structure/closet/proc/damage(var/damage)
-	health -= damage
-	if(health <= 0)
-		for(var/atom/movable/A in src)
-			A.forceMove(src.loc)
-		qdel(src)
+/obj/structure/closet/destroyed()
+	dump_contents()
+	. = ..()
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
-	var/proj_damage = Proj.get_structure_damage()
-	if(proj_damage)
-		..()
-		damage(proj_damage)
-
 	if(Proj.penetrating)
 		var/distance = get_dist(Proj.starting, get_turf(loc))
 		for(var/mob/living/L in contents)
 			Proj.attack_mob(L, distance)
 			if(!(--Proj.penetrating))
 				break
-
-	return
+	var/proj_damage = Proj.get_structure_damage()
+	if(proj_damage)
+		..()
+		take_damage(proj_damage)
 
 /obj/structure/closet/attackby(obj/item/W, mob/user)
+	
+	if(user.a_intent == I_HURT && W.force)
+		return ..()
+
+	if(!opened && istype(W, /obj/item/stack/material))
+		return ..()
+
 	if(src.opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W
@@ -397,12 +398,6 @@
 			else
 				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
 			overlays.Cut()
-
-/obj/structure/closet/take_damage(damage)
-	health -= damage
-	if(health <= 0)
-		dump_contents()
-		qdel(src)
 
 /obj/structure/closet/proc/req_breakout()
 	if(opened)

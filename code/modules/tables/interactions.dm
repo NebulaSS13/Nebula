@@ -76,7 +76,15 @@
 	return
 
 /obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
-	if (!W) return
+
+	if(!W)
+		return
+
+	if(user.a_intent == I_HURT && W.force)
+		return ..()
+
+	if(health != maxhealth && user.a_intent == I_HELP && istype(W, /obj/item/stack/material))
+		return ..()
 
 	// Handle dismantling or placing things on the table from here on.
 	if(isrobot(user))

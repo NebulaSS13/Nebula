@@ -7,11 +7,28 @@
 /obj/structure/get_material()
 	. = material
 
+/obj/structure/proc/get_material_health_modifier()
+	. = 1
+
 /obj/structure/proc/update_materials(var/keep_health)
 	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
 		update_material_name()
 	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
 		update_material_desc()
+	if(material?.opacity < 0.5)
+		set_opacity(FALSE)
+	else
+		set_opacity(initial(opacity))
+	hitsound = material?.hitsound || initial(hitsound)
+	if(maxhealth != -1)
+		maxhealth = initial(maxhealth) + material?.integrity*get_material_health_modifier()
+		if(reinf_material)
+			var/bonus_health = reinf_material.integrity * get_material_health_modifier()
+			maxhealth += bonus_health
+			if(!keep_health)
+				health += bonus_health
+		health = keep_health ? min(health, maxhealth) : maxhealth
+
 	queue_icon_update()
 
 /obj/structure/proc/update_material_name(var/override_name)

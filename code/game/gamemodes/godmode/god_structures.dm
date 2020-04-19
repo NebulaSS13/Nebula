@@ -17,14 +17,15 @@
 
 /obj/structure/deity
 	icon = 'icons/obj/cult.dmi'
-	var/mob/living/deity/linked_god
-	var/health = 10
-	var/power_adjustment = 1 //How much power we get/lose
-	var/build_cost = 0 //How much it costs to build this item.
-	var/deity_flags = DEITY_STRUCTURE_NEAR_IMPORTANT
+	maxhealth = 10
 	density = 1
 	anchored = 1
 	icon_state = "tomealtar"
+
+	var/mob/living/deity/linked_god
+	var/power_adjustment = 1 //How much power we get/lose
+	var/build_cost = 0 //How much it costs to build this item.
+	var/deity_flags = DEITY_STRUCTURE_NEAR_IMPORTANT
 
 /obj/structure/deity/Initialize(mapload, var/god)
 	. = ..(mapload)
@@ -50,11 +51,9 @@
 		)
 	take_damage(W.force)
 
-/obj/structure/deity/take_damage(var/amount)
-	health -= amount
-	if(health < 0)
-		src.visible_message("\The [src] crumbles!")
-		qdel(src)
+/obj/structure/deity/destroyed()
+	visible_message(SPAN_DANGER("\The [src] crumbles!"))
+	qdel(src)
 
 /obj/structure/deity/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)

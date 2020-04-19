@@ -513,7 +513,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bh" = (
-/obj/machinery/door/unpowered/simple/wood,
+/obj/structure/door/wood,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

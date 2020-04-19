@@ -10,10 +10,9 @@
 	throwpass = 1
 	mob_offset = 12
 	handle_generic_blending = TRUE
+	maxhealth = 10
 
 	var/flipped = 0
-	var/maxhealth = 10
-	var/health = 10
 
 	// For racks.
 	var/can_reinforce = 1
@@ -51,29 +50,13 @@
 	update_icon()
 	update_desc()
 
-/obj/structure/table/update_materials(var/keep_health)
-	var/old_maxhealth = maxhealth
-	if(!material)
-		maxhealth = 10
-	else
-		maxhealth = material.integrity / 2
-		if(reinf_material)
-			maxhealth += reinf_material.integrity / 2
-	health += maxhealth - old_maxhealth
+/obj/structure/table/get_material_health_modifier()
+	. = 0.5
 
-/obj/structure/table/take_damage(amount)
-	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
-	if(material && material.is_brittle())
-		if(reinf_material)
-			if(reinf_material.is_brittle())
-				amount *= TABLE_BRITTLE_MATERIAL_MULTIPLIER
-		else
-			amount *= TABLE_BRITTLE_MATERIAL_MULTIPLIER
-	health -= amount
-	if(health <= 0)
-		visible_message("<span class='warning'>\The [src] breaks down!</span>")
-		return break_to_parts() // if we break and form shards, return them to the caller to do !FUN! things with
-
+/obj/structure/table/destroyed()
+	visible_message(SPAN_DANGER("\The [src] breaks down!"))
+	. = break_to_parts()
+	
 /obj/structure/table/Destroy()
 	material = null
 	reinf_material = null
@@ -82,18 +65,8 @@
 		T.update_icon()
 	. = ..()
 
-/obj/structure/table/examine(mob/user)
-	. = ..()
-	if(health < maxhealth)
-		switch(health / maxhealth)
-			if(0.0 to 0.5)
-				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
-			if(0.25 to 0.5)
-				to_chat(user, "<span class='warning'>It looks damaged!</span>")
-			if(0.5 to 1.0)
-				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
-
 /obj/structure/table/attackby(obj/item/W, mob/user)
+
 	if(reinf_material && isScrewdriver(W))
 		remove_reinforced(W, user)
 		if(!reinf_material)
@@ -120,6 +93,7 @@
 			return 1
 		else
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
+
 	if(!reinf_material && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
 		remove_material(W, user)
 		if(!material)
@@ -143,18 +117,6 @@
 		user.visible_message(SPAN_NOTICE("\The [user] dismantles \the [src]."))
 		dismantle()
 		return 1
-
-	if(health < maxhealth && isWelder(W))
-		var/obj/item/weldingtool/F = W
-		if(F.welding)
-			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
-			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-			if(!do_after(user, 20, src) || !F.remove_fuel(1, user))
-				return
-			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
-			                              "<span class='notice'>You repair some damage to \the [src].</span>")
-			health = max(health+(maxhealth/5), maxhealth) // 20% repair per application
-			return 1
 
 	if(!material && can_plate && istype(W, /obj/item/stack/material))
 		material = common_material_add(W, user, "plat")

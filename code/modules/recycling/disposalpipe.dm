@@ -6,13 +6,12 @@
 	desc = "An underfloor disposal pipe."
 	anchored = 1
 	density = 0
-
+	maxhealth = 10
 	level = 1			// underfloor only
-	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
-	var/health = 10 	// health points 0-10
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
 	layer = DISPOSALS_PIPE_LAYER
+	var/dpdir = 0		// bitmask of pipe directions
 	var/base_icon_state	// initial icon state on map
 	var/sort_type = ""
 	var/turn = DISPOSAL_FLIP_NONE
@@ -189,32 +188,13 @@ obj/structure/disposalpipe/Destroy()
 
 // pipe affected by explosion
 /obj/structure/disposalpipe/ex_act(severity)
-
-	switch(severity)
-		if(1.0)
-			broken(0)
-			return
-		if(2.0)
-			health -= rand(5,15)
-			healthcheck()
-			return
-		if(3.0)
-			health -= rand(0,15)
-			healthcheck()
-			return
-
-
-	// test health for brokenness
-/obj/structure/disposalpipe/proc/healthcheck()
-	if(health < -2)
+	if(severity == 1)
 		broken(0)
-	else if(health<1)
-		broken(1)
-	return
+	else
+		take_damage(rand(5,15))
 
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct
-
 /obj/structure/disposalpipe/attackby(var/obj/item/I, var/mob/user)
 
 	var/turf/T = src.loc

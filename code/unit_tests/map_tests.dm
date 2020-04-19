@@ -191,11 +191,14 @@
 
 /datum/unit_test/closet_containment_test
 	name = "MAP: Closet Containment Test Player Z levels"
+	var/list/exceptions = list()
 
 /datum/unit_test/closet_containment_test/start_test()
 	var/bad_tests = 0
 
 	for(var/obj/structure/closet/C in world)
+		if(exceptions[C.type])
+			continue
 		if(!C.opened && isPlayerLevel(C.z))
 			var/contents_pre_open = C.contents.Copy()
 			C.dump_contents()

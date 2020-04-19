@@ -45,18 +45,16 @@
 
 /obj/machinery/portable_atmospherics/canister/airlock_crush(var/crush_damage)
 	. = ..()
-	health -= crush_damage
-	healthcheck()
+	take_damage(crush_damage)
 
 /obj/effect/energy_field/airlock_crush(var/crush_damage)
 	Stress(crush_damage)
 
 /obj/structure/closet/airlock_crush(var/crush_damage)
 	..()
-	damage(crush_damage)
+	take_damage(crush_damage)
 	for(var/atom/movable/AM in src)
 		AM.airlock_crush()
-	return
 
 /mob/living/airlock_crush(var/crush_damage)
 	. = ..()

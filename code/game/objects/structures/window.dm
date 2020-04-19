@@ -14,9 +14,9 @@
 	rad_resistance_modifier = 0.5
 	atmos_canpass = CANPASS_PROC
 	handle_generic_blending = TRUE
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 100
 
-	var/maxhealth
-	var/health
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2
 	var/id
@@ -35,13 +35,9 @@
 	other_connections = dirs_to_corner_states(other_dirs)
 
 /obj/structure/window/update_materials(var/keep_health)
+	. = ..()
 	name = "[reinf_material ? "reinforced " : ""][material.display_name] window"
 	desc = "A window pane made from [material.display_name]."
-	if(!keep_health)
-		maxhealth = material.integrity
-		if(reinf_material)
-			maxhealth += 0.5 * reinf_material.integrity
-		health = maxhealth
 
 /obj/structure/window/Initialize(var/ml, var/dir_to_set, var/anchored, var/_mat, var/_reinf_mat)
 	. = ..(ml, _mat, _reinf_mat)
@@ -72,46 +68,15 @@
 	for(var/obj/structure/window/W in orange(location, 1))
 		W.update_icon()
 
-/obj/structure/window/examine(mob/user)
-	. = ..(user)
-	if(reinf_material)
-		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.display_name] lattice."))
-	if(health == maxhealth)
-		to_chat(user, SPAN_NOTICE("It looks fully intact."))
-	else
-		var/perc = health / maxhealth
-		if(perc > 0.75)
-			to_chat(user, SPAN_NOTICE("It has a few cracks."))
-		else if(perc > 0.5)
-			to_chat(user, SPAN_WARNING("It looks slightly damaged."))
-		else if(perc > 0.25)
-			to_chat(user, SPAN_WARNING("It looks moderately damaged."))
-		else
-			to_chat(user, SPAN_DANGER("It looks heavily damaged."))
-
 /obj/structure/window/CanFluidPass(var/coming_from)
 	return (!is_fulltile() && coming_from != dir)
 
-/obj/structure/window/take_damage(damage = 0,  var/sound_effect = 1)
-	var/initialhealth = health
+/obj/structure/window/destroyed()
+	. = shatter()
 
-	health = max(0, health - damage)
-
-	if(health <= 0)
-		shatter()
-	else
-		if(sound_effect)
-			playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
-			visible_message(SPAN_DANGER("\The [src] looks like it's about to shatter!"))
-			playsound(loc, "glasscrack", 100, 1)
-		else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
-			visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
-			playsound(loc, "glasscrack", 100, 1)
-		else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
-			visible_message(SPAN_WARNING("Cracks begin to appear in \the [src]!"))
-			playsound(loc, "glasscrack", 100, 1)
-	return
+/obj/structure/window/take_damage(damage = 0)
+	. = ..()
+	playsound(loc, "glasscrack", 100, 1)
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
@@ -351,6 +316,11 @@
 		return 1
 	return 0
 
+/obj/structure/window/examine(mob/user)
+	. = ..(user)
+	if(reinf_material)
+		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.display_name] lattice."))
+		
 /obj/structure/window/proc/set_anchored(var/new_anchored)
 	if(anchored == new_anchored)
 		return

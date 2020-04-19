@@ -2,10 +2,9 @@
 	name = "inflatable"
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/inflatable.dmi'
+	atmos_canpass = CANPASS_DENSITY
 	var/deploy_path = null
 	var/inflatable_health
-
-	atmos_canpass = CANPASS_DENSITY
 
 /obj/item/inflatable/attack_self(mob/user)
 	if(!deploy_path)
@@ -24,7 +23,6 @@
 	if(inflatable_health)
 		R.health = inflatable_health
 	qdel(src)
-
 
 /obj/item/inflatable/wall
 	name = "inflatable wall"
@@ -47,9 +45,10 @@
 	opacity = 0
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
+	maxhealth = 20
+	hitsound = 'sound/effects/Glasshit.ogg'
 
 	var/undeploy_path = null
-	var/health = 10
 	var/taped
 
 	var/max_pressure_diff = RIG_MAX_PRESSURE
@@ -69,8 +68,21 @@
 	STOP_PROCESSING(SSobj,src)
 	return ..()
 
+/obj/structure/inflatable/examine(mob/user, distance)
+	. = ..()
+	if(taped)
+		to_chat(user, SPAN_NOTICE("It's been duct taped in few places."))
+
 /obj/structure/inflatable/Process()
 	check_environment()
+
+/obj/structure/inflatable/show_examined_damage(mob/user, var/perc)
+	if(perc >= 1)
+		to_chat(user, SPAN_NOTICE("It's undamaged."))
+	else if(perc > 0.5)
+		to_chat(user, SPAN_WARNING("It's showing signs of damage."))
+	else if(perc > 0)
+		to_chat(user, SPAN_DANGER("It's heavily damaged!"))
 
 /obj/structure/inflatable/proc/check_environment()
 	var/min_pressure = INFINITY
@@ -87,27 +99,13 @@
 
 	if(prob(50) && (max_pressure - min_pressure > max_pressure_diff || max_local_temp > max_temp))
 		take_damage(1)
-		if(health == round(0.7*initial(health)))
-			visible_message(SPAN_WARNING("\The [src] is taking damage!"))
-		if(health == round(0.3*initial(health)))
-			visible_message(SPAN_WARNING("\The [src] is barely holding up!"))
-
-/obj/structure/inflatable/examine(mob/user)
-	. = ..()
-	if(health >= initial(health))
-		to_chat(user, SPAN_NOTICE("It's undamaged."))
-	else if(health >= 0.5 * initial(health))
-		to_chat(user, SPAN_WARNING("It's showing signs of damage."))
-	else if(health >= 0)
-		to_chat(user, SPAN_DANGER("It's heavily damaged!"))
-	to_chat(user, SPAN_NOTICE("It's been duct taped in few places."))
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
 
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
 	take_damage(Proj.get_structure_damage())
-	if(health <= 0)
+	if(QDELETED(src))
 		return PROJECTILE_CONTINUE
 
 /obj/structure/inflatable/ex_act(severity)
@@ -127,34 +125,32 @@
 	add_fingerprint(user)
 	return
 
+/obj/structure/inflatable/can_repair_with(obj/item/tool)
+	. = istype(tool, /obj/item/tape_roll) && (health < maxhealth)
+
+/obj/structure/inflatable/handle_repair(mob/user, obj/item/tool)
+	if(taped)
+		to_chat(user, SPAN_WARNING("You cannot tape up \the [src] any further."))
+		return
+	last_damage_message = null
+	to_chat(user, SPAN_NOTICE("You tape up some of the damage to \the [src]."))
+	health = Clamp(health + 3, 0, maxhealth)
+	taped = TRUE
+
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
-	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
 
-	if(istype(W, /obj/item/tape_roll) && health < initial(health) - 3)
-		if(taped)
-			to_chat(user, SPAN_NOTICE("\The [src] can't be patched any more with \the [W]!"))
-			return TRUE
-		else
-			taped = TRUE
-			to_chat(user, SPAN_NOTICE("You patch some damage in \the [src] with \the [W]!"))
-			take_damage(-3)
-			return TRUE
-	else if((W.damtype == BRUTE || W.damtype == BURN) && (W.can_puncture() || W.force > 10))
-		..()
-		if(hit(W.force))
-			visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")
-	return
+	if((W.damtype == BRUTE || W.damtype == BURN) && (W.can_puncture() || W.force > 10))
+		visible_message(SPAN_DANGER("\The [user] pierces \the [src] with \the [W]!"))
+		deflate(TRUE)
+		return TRUE
 
-/obj/structure/inflatable/proc/hit(var/damage, var/sound_effect = 1)
-	take_damage(damage)
-	if(sound_effect)
-		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
-	return health <= 0
+	if(!istype(W, /obj/item/inflatable_dispenser))
+		return ..()
 
-/obj/structure/inflatable/take_damage(damage)
-	health = max(0, health - damage)
-	if(health <= 0)
-		deflate(1)
+	return FALSE
+
+/obj/structure/inflatable/destroyed()
+	. = deflate(1)
 
 /obj/structure/inflatable/CtrlClick()
 	return hand_deflate()
@@ -187,16 +183,6 @@
 	verbs -= /obj/structure/inflatable/verb/hand_deflate
 	deflate()
 	return TRUE
-
-/obj/structure/inflatable/attack_generic(var/mob/user, var/damage, var/attack_verb)
-	health -= damage
-	attack_animation(user)
-	if(health <= 0)
-		user.visible_message("<span class='danger'>[user] [attack_verb] open the [src]!</span>")
-		spawn(1) deflate(1)
-	else
-		user.visible_message("<span class='danger'>[user] [attack_verb] at [src]!</span>")
-	return 1
 
 /obj/structure/inflatable/CanFluidPass(var/coming_from)
 	return !density

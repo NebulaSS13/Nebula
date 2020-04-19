@@ -7,7 +7,8 @@
 	anchored = 1
 	unacidable = 1//Dissolving the case would also delete the gun.
 	alpha = 150
-	var/health = 14
+	maxhealth = 100
+	hitsound = 'sound/effects/Glasshit.ogg'
 	var/destroyed = 0
 
 /obj/structure/displaycase/Initialize()
@@ -41,19 +42,30 @@
 	..()
 	take_damage(Proj.get_structure_damage())
 
-/obj/structure/displaycase/take_damage(damage)
-	health -= damage
-	if(health <= 0)
-		if (!destroyed)
-			set_density(0)
-			destroyed = 1
-			new /obj/item/material/shard(loc)
-			for(var/atom/movable/AM in src)
-				AM.dropInto(loc)
-			playsound(src, "shatter", 70, 1)
-			update_icon()
-	else
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+/obj/structure/proc/subtract_matter(var/obj/subtracting)
+	if(!length(matter))
+		return
+	if(!istype(subtracting) || !length(subtracting.matter))
+		return
+	for(var/mat in matter)
+		if(!subtracting[mat])
+			continue
+		matter[mat] -= subtracting[mat]
+		if(matter[mat] <= 0)
+			matter -= mat
+	UNSETEMPTY(matter)
+
+/obj/structure/displaycase/destroyed()
+	if(destroyed)
+		return
+	set_density(0)
+	destroyed = TRUE
+	
+	subtract_matter(new /obj/item/material/shard(get_turf(src), material?.type))
+	for(var/atom/movable/AM in src)
+		AM.dropInto(loc)
+	playsound(src, "shatter", 70, 1)
+	update_icon()
 
 /obj/structure/displaycase/on_update_icon()
 	if(destroyed)

@@ -7,8 +7,8 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 	material_alteration = MAT_FLAG_ALTERATION_ALL
-	var/health = 100
-	var/maxhealth = 100
+	maxhealth = 100
+
 	var/spike_damage //how badly it smarts when you run into this like a rube
 	var/list/poke_description = list("gored", "spiked", "speared", "stuck", "stabbed")
 
@@ -28,11 +28,8 @@
 		return INITIALIZE_HINT_QDEL
 
 /obj/structure/barricade/update_materials(var/keep_health)
-	..()
-	if(!keep_health)
-		maxhealth = material.integrity
-		health = maxhealth
-	spike_damage = reinf_material ? (reinf_material.hardness * 0.85) : 0
+	. = ..()
+	spike_damage = reinf_material?.hardness * 0.85
 
 /obj/structure/barricade/update_material_name()
 	..(reinf_material ? "cheval-de-frise" : "barricade")
@@ -62,51 +59,18 @@
 				visible_message(SPAN_NOTICE("\The [user] fastens \the [R] to \the [src]."))
 				reinf_material = R.material
 				update_materials(TRUE)
-		return
-
-	if(istype(W, /obj/item/stack))
-		var/obj/item/stack/D = W
-		if(D.get_material_type() == material.type && health < maxhealth)
-			if (D.get_amount() < 1)
-				to_chat(user, SPAN_WARNING("You need one sheet of [material.display_name] to repair \the [src]."))
-				return
-			visible_message(SPAN_NOTICE("\The [user] begins to repair \the [src]."))
-			if(do_after(user,20,src) && health < maxhealth && D.use(1))
-				health = maxhealth
-				visible_message(SPAN_NOTICE("\The [user] repairs \the [src]."))
-		return
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	switch(W.damtype)
-		if(BURN)
-			take_damage(W.force * 1)
-		if(BRUTE)
-			take_damage(W.force * 0.75)
-	..()
-
-/obj/structure/barricade/take_damage(amount)
-	health -= amount
-	if(health <= 0)
-		dismantle()
+	. = ..()
 
 /obj/structure/barricade/dismantle()
 	visible_message(SPAN_DANGER("The barricade is smashed apart!"))
 	. = ..()
 
 /obj/structure/barricade/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			visible_message(SPAN_DANGER("\The [src] is blown apart!"))
-			parts_type = null
-			dismantle(src)
-			return
-		if(2.0)
-			src.health -= 25
-			if (src.health <= 0)
-				visible_message(SPAN_DANGER("\The [src] is blown apart!"))
-				parts_type = null
-				dismantle(src)
-			return
+	if(severity == 1)
+		parts_type = null
+		dismantle(src)
+	else if(severity == 2)
+		take_damage(25)
 
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 	if(air_group || (height==0))

@@ -89,9 +89,9 @@
 	icon_state = "net_f"
 	anchored = 1
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
-	var/health = 100
+	maxhealth = 100
 
-obj/structure/net/Initialize(var/mapload)
+/obj/structure/net/Initialize(var/mapload)
 	. = ..()
 	update_connections()
 	if (!mapload)//if it's not mapped object but rather created during round, we should update visuals of adjacent net objects
@@ -102,14 +102,17 @@ obj/structure/net/Initialize(var/mapload)
 					continue
 				N.update_connections()
 
-/obj/structure/net/examine(mob/user)
-	. = ..()
-	if (health < 20)
-		to_chat(user, "\The [src] is barely hanging on a few last threads.")
-	else if (health < 50)
-		to_chat(user, "Many ribbons of \the [src] are cut away.")
-	else if (health < 90)
-		to_chat(user, "Few ribbons of \the [src] are cut away.")
+/obj/structure/net/show_examined_damage(mob/user, var/perc)
+	if(maxhealth == -1)
+		return
+	if(perc >= 1)
+		to_chat(user, SPAN_NOTICE("It looks fully intact."))
+	else if (perc < 0.2)
+		to_chat(perc, SPAN_DANGER("\The [src] is barely hanging on by the last few threads."))
+	else if (perc < 0.5)
+		to_chat(user, SPAN_WARNING("Large swathes of \the [src] have been cut."))
+	else if (perc < 0.9)
+		to_chat(user, SPAN_NOTICE("A few strands of \the [src] have been severed."))
 
 /obj/structure/net/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/material)) //sharp objects can cut thorugh
@@ -118,24 +121,24 @@ obj/structure/net/Initialize(var/mapload)
 			to_chat(user,"<span class='warning'>You can't cut throught \the [src] with \the [W], it's too dull.</span>")
 			return
 		visible_message("<span class='warning'>[user] starts to cut through \the [src] with \the [W]!</span>")
-		while (health > 0)
+		while(health > 0 && !QDELETED(src) && !QDELETED(user))
 			if (!do_after(user, 20, src))
 				visible_message("<span class='warning'>[user] stops cutting through \the [src] with \the [W]!</span>")
 				return
-			health -= 20 * (1 + (SH.force-10)/10)//the sharper the faster, every point of force above 10 adds 10 % to damage
-		visible_message("<span class='warning'>[user] cuts through \the [src]!</span>")
+			take_damage(20 * (1 + (SH.force-10)/10)) //the sharper the faster, every point of force above 10 adds 10 % to damage
 		new /obj/item/stack/net(src.loc)
 		qdel(src)
+
+/obj/structure/net/destroyed()
+	visible_message("<span class='warning'>\The [src] is torn apart!</span>")
+	qdel(src)
 
 /obj/structure/net/bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
 	if(P.damage_type != BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
 		return
 	visible_message("<span class='warning'>\The [P] hits \the [src] and tears it!</span>")
-	health -= P.damage
-	if (health < 0)
-		visible_message("<span class='warning'>\The [src] is torn apart!</span>")
-		qdel(src)
+	take_damage(P.damage)
 
 /obj/structure/net/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
 	overlays.Cut()

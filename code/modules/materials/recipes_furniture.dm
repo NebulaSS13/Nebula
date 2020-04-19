@@ -115,7 +115,7 @@ ARMCHAIR(yellow)
 
 /datum/stack_recipe/furniture/door
 	title = "door"
-	result_type = /obj/machinery/door/unpowered/simple
+	result_type = /obj/structure/door
 	req_amount = 10
 	time = 50
 

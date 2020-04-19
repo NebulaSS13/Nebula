@@ -1566,7 +1566,7 @@
 /area/casino/casino_security)
 "eo" = (
 /obj/effect/shuttle_landmark/nav_casino/cutter_hangar,
-/obj/machinery/door/unpowered/shuttle{
+/obj/structure/door/shuttle{
 	desc = "Cutter door. It opens and closes. It has no safety devices so be careful";
 	name = "cutter door"
 	},
@@ -4128,7 +4128,7 @@
 /area/casino/casino_crew_atmos)
 "kQ" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/unpowered/simple/wood{
+/obj/structure/door/wood{
 	name = "VIP Private room"
 	},
 /obj/structure/cable{
@@ -4145,7 +4145,7 @@
 /area/casino/casino_private_vip)
 "kS" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/unpowered/simple/wood{
+/obj/structure/door/wood{
 	name = "Private room 1"
 	},
 /obj/structure/cable{
@@ -4162,7 +4162,7 @@
 /area/casino/casino_private1)
 "kU" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/unpowered/simple/wood{
+/obj/structure/door/wood{
 	name = "Private room 2"
 	},
 /obj/structure/cable{

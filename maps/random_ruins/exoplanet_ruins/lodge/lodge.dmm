@@ -195,7 +195,7 @@
 /turf/simulated/floor/wood,
 /area/template_noop)
 "H" = (
-/obj/machinery/door/unpowered/simple/wood,
+/obj/structure/door/wood,
 /turf/simulated/floor/wood,
 /area/template_noop)
 "I" = (
