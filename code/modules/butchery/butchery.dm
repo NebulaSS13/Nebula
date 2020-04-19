@@ -13,6 +13,19 @@
 	var/skull_type
 	var/butchery_rotation = 90
 
+/mob/living/get_base_value()
+	. = ..()
+	if(meat_type)
+		. += atom_info_repository.get_worth_for(meat_type) * meat_amount
+	if(skin_material)
+		var/material/M = SSmaterials.get_material_datum(skin_material)
+		. += skin_amount * SHEET_MATERIAL_AMOUNT * M.value
+	if(bone_material)
+		var/material/M = SSmaterials.get_material_datum(bone_material)
+		. += bone_amount * SHEET_MATERIAL_AMOUNT * M.value
+	if(skull_type)
+		.+= atom_info_repository.get_worth_for(skull_type)
+
 /mob/living/carbon/human
 	butchery_rotation = 180
 
