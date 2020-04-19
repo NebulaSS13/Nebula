@@ -1,4 +1,4 @@
-/obj/item/projectile/get_single_monetary_worth()
+/obj/item/projectile/get_base_monetary_worth()
 	. = damage
 	. += max(0, 5 - distance_falloff)
 	. += penetrating * 0.2
@@ -8,8 +8,8 @@
 
 // Can't think of a good way to get gun price from projectile (due to 
 // firemodes, projectile types, etc) so this'll have to  do for now.
-/obj/item/gun/get_base_value()
+/obj/item/gun/get_base_monetary_worth()
 	. = 100
 
-/obj/item/gun/energy/get_base_value()
+/obj/item/gun/energy/get_base_monetary_worth()
 	. = 150

@@ -43,9 +43,6 @@
 	else
 		desc = "A rather thick coin."
 
-/obj/item/coin/get_single_monetary_worth()
-	. = max(..(), absolute_worth)
-	
 /obj/item/coin/examine(mob/user, distance)
 	. = ..()
 	if((distance <= 1 || loc == user) && user.skill_check(SKILL_FINANCE, SKILL_ADEPT))

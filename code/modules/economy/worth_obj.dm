@@ -1,4 +1,5 @@
-/obj/get_single_monetary_worth()
+/obj/get_base_monetary_worth()
+	. = ..()
 	var/mult = 1
 	if(length(matter))
 		var/total_matter = 0

@@ -2,7 +2,7 @@
 #define MUNDANE_ARMOUR_VALUE 20
 #define BASE_ARMOUR_WORTH    50
 
-/obj/item/get_single_monetary_worth()
+/obj/item/get_base_monetary_worth()
 	. = apply_additional_item_value(..())
 
 /obj/item/proc/get_max_weapon_value()

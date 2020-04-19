@@ -189,5 +189,8 @@
 		var/decl/currency/cur = decls_repository.get_decl(currency)
 		to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
 
-/obj/item/charge_card/get_single_monetary_worth()
+/obj/item/charge_card/get_base_monetary_worth()
 	. = loaded_worth
+
+/obj/item/coin/get_base_monetary_worth()
+	. = max(..(), absolute_worth)
