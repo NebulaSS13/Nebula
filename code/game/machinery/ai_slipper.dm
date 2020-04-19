@@ -49,7 +49,7 @@
 
 /obj/machinery/ai_slipper/interact(mob/user)
 	var/area/area = get_area(src)
-	if(!area || isturf(loc))
+	if(!area || !isturf(loc))
 		return
 	var/t = "<TT><B>AI Liquid Dispenser</B> ([area.name])<HR>"
 
