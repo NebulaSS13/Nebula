@@ -19,7 +19,7 @@
 
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
-	value = 0.2
+	value = 1.2
 
 /datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed * 2 * toxicity)

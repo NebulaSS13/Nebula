@@ -8,7 +8,7 @@
 
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
-	value = 6.8
+	value = 1.5
 
 /datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(2 * removed)
@@ -36,5 +36,5 @@
 	color = "#808080"
 	metabolism = REM * 0.2
 	touch_met = 5
-	value = 0.2
+	value = 1.2
 	fuel_value = 1.2

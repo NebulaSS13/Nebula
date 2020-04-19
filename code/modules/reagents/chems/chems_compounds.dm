@@ -4,7 +4,7 @@
 	taste_description = "acid"
 	color = "#808080"
 	metabolism = REM * 0.2
-	value = 0.2
+	value = 0.1
 
 /datum/reagent/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed * 3)
@@ -27,24 +27,25 @@
 	return
 
 /datum/reagent/surfactant // Foam precursor
-	name = "azosurfactant"
+	name = "surfacant"
 	description = "A isocyanate liquid that forms a foam when mixed with water."
 	taste_description = "metal"
 	color = "#9e6b38"
-	value = 0.05
+	value = 0.1
 
 /datum/reagent/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
 	name = "foaming agent"
 	description = "A agent that yields metallic foam when mixed with light metal and a strong acid."
 	taste_description = "metal"
 	color = "#664b63"
+	value = 0.1
 
 /datum/reagent/lube
 	name = "lubricant"
 	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
 	taste_description = "slime"
 	color = "#009ca8"
-	value = 0.6
+	value = 0.1
 
 /datum/reagent/lube/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -71,7 +72,6 @@
 	description = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
 	color = "#f2f3f4"
-	value = 1.4
 
 /datum/reagent/luminol/touch_obj(var/obj/O)
 	O.reveal_blood()
@@ -112,7 +112,7 @@
 	taste_description = "salt"
 	color = "#ffffff"
 	overdose = REAGENTS_OVERDOSE
-	value = 0.11
+	value = 0.1
 
 /datum/reagent/blackpepper
 	name = "black pepper"
@@ -128,7 +128,6 @@
 	taste_mult = 0.7
 	color = "#365e30"
 	overdose = REAGENTS_OVERDOSE
-	value = 0.2
 
 /datum/reagent/frostoil
 	name = "chilly oil"
@@ -136,7 +135,7 @@
 	taste_description = "arctic mint"
 	taste_mult = 1.5
 	color = "#07aab2"
-	value = 0.2
+	value = 2
 
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
@@ -156,7 +155,6 @@
 	var/agony_amount = 2
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
 	var/slime_temp_adj = 10
-	value = 0.2
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(0.5 * removed)
@@ -189,6 +187,7 @@
 	agony_amount = 4
 	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
 	slime_temp_adj = 15
+	value = 2
 
 /datum/reagent/capsaicin/condensed/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	var/eyes_covered = 0
@@ -272,7 +271,6 @@
 	taste_description = "slime"
 	taste_mult = 0.9
 	color = "#13bc5e"
-	value = 3.1
 
 /datum/reagent/mutagenics/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(33))
@@ -372,7 +370,6 @@
 	taste_description = "tobacco"
 	color = "#684b3c"
 	scannable = 1
-	value = 3
 	scent = "cigarette smoke"
 	scent_descriptor = SCENT_DESC_ODOR
 	scent_range = 4
@@ -387,14 +384,14 @@
 /datum/reagent/tobacco/fine
 	name = "fine tobacco"
 	taste_description = "fine tobacco"
-	value = 5
+	value = 1.5
 	scent = "fine tobacco smoke"
 	scent_descriptor = SCENT_DESC_FRAGRANCE
 
 /datum/reagent/tobacco/bad
 	name = "terrible tobacco"
 	taste_description = "acrid smoke"
-	value = 0
+	value = 0.5
 	scent = "acrid tobacco smoke"
 	scent_intensity = /decl/scent_intensity/strong
 	scent_descriptor = SCENT_DESC_ODOR
@@ -450,7 +447,6 @@
 	taste_description = "bitterness"
 	color = "#c8a5dc"
 	touch_met = 5
-	value = 2.2
 
 /datum/reagent/antiseptic/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
