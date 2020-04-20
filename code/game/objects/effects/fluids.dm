@@ -10,11 +10,8 @@
 	color = COLOR_OCEAN
 
 	var/fluid_amount = 0
-	var/turf/start_loc
-	var/list/equalizing_fluids = list()
-	var/equalize_avg_depth = 0
-	var/equalize_avg_temp = 0
-	var/flow_amount = 0
+	var/list/neighbors = list()
+	var/last_flow_strength = 0
 
 /obj/effect/fluid/ex_act()
 	return
@@ -22,26 +19,33 @@
 /obj/effect/fluid/airlock_crush()
 	qdel(src)
 
+/obj/effect/fluid/Move()
+	crash_with("A fluid overlay had Move() called!")
+	return FALSE
+
 /obj/effect/fluid/Initialize()
 	. = ..()
-	start_loc = get_turf(src)
-	if(!istype(start_loc) || start_loc.flooded)
-		qdel(src)
-		return
-	var/turf/simulated/T = start_loc
-	if(istype(T))
-		T.unwet_floor(FALSE)
-	forceMove(start_loc)
-	update_icon()
+	var/turf/simulated/T = get_turf(src)
+	if(!istype(T) || T.flooded)
+		return INITIALIZE_HINT_QDEL
+	T.unwet_floor(FALSE)
+	for(var/checkdir in GLOB.cardinal)
+		var/obj/effect/fluid/F = locate() in get_step(src, checkdir)
+		if(F)
+			LAZYSET(neighbors, F, TRUE)
+			LAZYSET(F.neighbors, src, TRUE)
+			ADD_ACTIVE_FLUID(F)
+	ADD_ACTIVE_FLUID(src)
 
 /obj/effect/fluid/Destroy()
-	if(start_loc)
-		var/turf/simulated/T = start_loc
-		if(istype(T))
-			T.wet_floor()
-		start_loc = null
-	if(islist(equalizing_fluids))
-		equalizing_fluids.Cut()
+	var/turf/simulated/T = loc
+	if(istype(T))
+		T.wet_floor()
+	for(var/thing in neighbors)
+		var/obj/effect/fluid/F = thing
+		LAZYREMOVE(F.neighbors, src)
+		ADD_ACTIVE_FLUID(F)
+	neighbors = null
 	REMOVE_ACTIVE_FLUID(src)
 	. = ..()
 
@@ -59,7 +63,7 @@
 	else
 		alpha = min(FLUID_MAX_ALPHA,max(FLUID_MIN_ALPHA,ceil(255*(fluid_amount/FLUID_DEEP))))
 
-	if(fluid_amount > FLUID_DELETING && fluid_amount <= FLUID_EVAPORATION_POINT)
+	if(fluid_amount <= FLUID_EVAPORATION_POINT)
 		APPLY_FLUID_OVERLAY("shallow_still")
 	else if(fluid_amount > FLUID_EVAPORATION_POINT && fluid_amount < FLUID_SHALLOW)
 		APPLY_FLUID_OVERLAY("mid_still")
