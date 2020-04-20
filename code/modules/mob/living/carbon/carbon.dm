@@ -82,7 +82,7 @@
 	..()
 
 /mob/living/carbon/attack_hand(var/mob/living/carbon/human/M)
-	if(istype(M)) 
+	if(istype(M))
 		var/obj/item/organ/external/temp = M.organs_by_name[M.hand ? BP_L_HAND : BP_R_HAND]
 		if(!temp || !temp.is_usable())
 			to_chat(M, SPAN_WARNING("You can't use your [temp.name]."))
