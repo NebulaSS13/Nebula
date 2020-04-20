@@ -1,0 +1,9 @@
+{{:helper.link('Select Warrant', null, {'select' : 1})}}
+<h2>Current warrant</h2>
+{{if data.text}}
+	<div class="statusDisplay">
+		{{:data.text}}
+	</div>
+{{else}}
+	NONE
+{{/if}}

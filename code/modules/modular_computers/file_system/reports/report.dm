@@ -66,6 +66,11 @@ If the override option is set to 0, the access supplied will instead be added as
 		if(field.display_name() == name)
 			return field
 
+/datum/computer_file/report/proc/value_by_field_name(name)
+	var/datum/report_field/field = field_from_name(name)
+	if(field)
+		return field.get_value()
+
 //The place to enter fields for report subtypes, via add_field.
 /datum/computer_file/report/proc/generate_fields()
 	return
