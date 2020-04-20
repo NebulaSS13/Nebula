@@ -12,7 +12,7 @@
 		MAT_NITROGEN,
 		MAT_CO2,
 		MAT_N2O,
-		MAT_PHORON
+		MAT_HYDROGEN
 	)
 
 ////////////////////////////////////////

@@ -29,7 +29,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 	if(locate(/obj/fire) in src)
 		return 1
 	var/datum/gas_mixture/air_contents = return_air()
-	if(!air_contents || exposed_temperature < PHORON_MINIMUM_BURN_TEMPERATURE)
+	if(!air_contents || exposed_temperature < MINIMUM_BURN_TEMPERATURE)
 		return 0
 
 	var/igniting = 0
@@ -223,7 +223,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 //Returns the firelevel
 /datum/gas_mixture/proc/react(zone/zone, force_burn, no_check = 0)
 	. = 0
-	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
+	if((temperature > MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
 
 		#ifdef FIREDBG
 		log_debug("***************** FIREDBG *****************")

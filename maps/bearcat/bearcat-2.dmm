@@ -3917,7 +3917,7 @@
 /area/ship/bearcat/maintenance/engine/aft)
 "ji" = (
 /obj/machinery/atmospherics/portables_connector,
-/obj/machinery/portable_atmospherics/canister/phoron,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/engine/aft)
 "jj" = (
@@ -4170,11 +4170,11 @@
 /area/ship/bearcat/maintenance/engine/aft)
 "jJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 8
 	},
@@ -4185,7 +4185,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 6
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 1
 	},
@@ -4200,18 +4200,18 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/bearcat/maintenance/engine/aft)
 "jM" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/reinforced_borosilicate,
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
@@ -4312,7 +4312,7 @@
 /area/ship/bearcat/maintenance/engine/aft)
 "jW" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 8
 	},
@@ -4395,25 +4395,25 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/engine/aft)
 "ki" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 5
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
 /area/ship/bearcat/maintenance/engine/aft)
 "kj" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
 /turf/simulated/floor/reinforced,
 /area/ship/bearcat/maintenance/engine/aft)
 "kk" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/reinforced_borosilicate,
 /obj/machinery/atmospherics/unary/vent_pump/engine{
 	dir = 4;
 	external_pressure_bound = 4000;
@@ -4425,7 +4425,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 4
 	},
@@ -4435,7 +4435,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	icon_state = "rwindow";
 	dir = 1
 	},

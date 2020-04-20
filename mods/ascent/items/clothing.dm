@@ -30,13 +30,13 @@
 	)
 
 	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)
-	filtered_gases = list(MAT_PHORON,MAT_N2O,MAT_CHLORINE,MAT_AMMONIA,MAT_CO,MAT_METHANE)
+	filtered_gases = list(MAT_N2O,MAT_CHLORINE,MAT_AMMONIA,MAT_CO,MAT_METHANE)
 	flags_inv = 0
 
 /obj/item/clothing/mask/gas/ascent/monarch
 	name = "serpentid facemask"
 	desc = "An alien facemask with chunky gas filters and a breathing valve."
-	filtered_gases = list(MAT_PHORON,MAT_N2O,MAT_CHLORINE,MAT_AMMONIA,MAT_CO,MAT_METHYL_BROMIDE,MAT_METHANE)
+	filtered_gases = list(MAT_N2O,MAT_CHLORINE,MAT_AMMONIA,MAT_CO,MAT_METHYL_BROMIDE,MAT_METHANE)
 	bodytype_restricted = list(BODYTYPE_SNAKE)
 
 /obj/item/clothing/shoes/magboots/ascent

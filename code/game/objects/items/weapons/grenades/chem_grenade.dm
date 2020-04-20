@@ -225,7 +225,7 @@
 
 	B1.reagents.add_reagent(/datum/reagent/aluminium, 15)
 	B1.reagents.add_reagent(/datum/reagent/fuel,20)
-	B2.reagents.add_reagent(/datum/reagent/toxin/phoron, 15)
+	B2.reagents.add_reagent(/datum/reagent/fuel/hydrazine, 15)
 	B2.reagents.add_reagent(/datum/reagent/acid, 15)
 	B1.reagents.add_reagent(/datum/reagent/fuel,20)
 

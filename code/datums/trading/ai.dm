@@ -27,14 +27,16 @@ They sell generic supplies and ask for generic supplies.
 
 				"bribe_refusal"     = "You have given me money to stay, however, I am a station. I do not leave.",
 				)
-	possible_wanted_items = list(/obj/item/                       = TRADER_SUBTYPES_ONLY,
-								/obj/item/assembly                = TRADER_BLACKLIST_ALL,
-								/obj/item/assembly_holder         = TRADER_BLACKLIST_ALL,
-								/obj/item/encryptionkey/syndicate = TRADER_BLACKLIST,
-								/obj/item/tank/phoron/onetankbomb = TRADER_BLACKLIST,
-								/obj/item/radio                   = TRADER_BLACKLIST_ALL,
-								/obj/item/modular_computer/pda                     = TRADER_BLACKLIST_SUB,
-								/obj/item/uplink                  = TRADER_BLACKLIST)
+	possible_wanted_items = list(
+		/obj/item                           = TRADER_SUBTYPES_ONLY,
+		/obj/item/assembly                  = TRADER_BLACKLIST_ALL,
+		/obj/item/assembly_holder           = TRADER_BLACKLIST_ALL,
+		/obj/item/encryptionkey/syndicate   = TRADER_BLACKLIST,
+		/obj/item/tank/hydrogen/onetankbomb = TRADER_BLACKLIST,
+		/obj/item/radio                     = TRADER_BLACKLIST_ALL,
+		/obj/item/modular_computer/pda      = TRADER_BLACKLIST_SUB,
+		/obj/item/uplink                    = TRADER_BLACKLIST
+	)
 	possible_trading_items = list(/obj/item/storage/bag                       = TRADER_SUBTYPES_ONLY,
 								/obj/item/storage/bag/cash/infinite           = TRADER_BLACKLIST,
 								/obj/item/storage/backpack                    = TRADER_ALL,
@@ -79,7 +81,6 @@ They sell generic supplies and ask for generic supplies.
 								/obj/item/stack/material/marble           = TRADER_THIS_TYPE,
 								/obj/item/stack/material/diamond          = TRADER_THIS_TYPE,
 								/obj/item/stack/material/uranium          = TRADER_THIS_TYPE,
-								/obj/item/stack/material/phoron           = TRADER_THIS_TYPE,
 								/obj/item/stack/material/plastic          = TRADER_THIS_TYPE,
 								/obj/item/stack/material/gold             = TRADER_THIS_TYPE,
 								/obj/item/stack/material/silver           = TRADER_THIS_TYPE,

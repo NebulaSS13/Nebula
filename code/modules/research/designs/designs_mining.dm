@@ -10,7 +10,7 @@
 	build_path = /obj/item/pickaxe/drill
 
 /datum/design/item/mining/plasmacutter
-	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
+	req_tech = list(TECH_MATERIAL = 4, TECH_EXOTIC = 3, TECH_ENGINEERING = 3)
 	build_path = /obj/item/gun/energy/plasmacutter
 
 /datum/design/item/mining/pick_diamond

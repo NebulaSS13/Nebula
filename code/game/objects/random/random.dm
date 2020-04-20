@@ -468,7 +468,7 @@
 				/obj/item/coin/iron = 4,
 				/obj/item/coin/uranium = 3,
 				/obj/item/coin/platinum = 1,
-				/obj/item/coin/phoron = 1)
+				/obj/item/coin/hydrogen = 1)
 
 /obj/random/toy
 	name = "random toy"
@@ -964,15 +964,14 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/suit/straight_jacket = 6,
 				/obj/item/clothing/head/helmet/merc = 3,
 				/obj/item/stack/material/diamond/ten = 7,
-				/obj/item/stack/material/glass/phoronrglass/ten = 7,
+				/obj/item/stack/material/glass/borosilicate_reinf/ten = 7,
 				/obj/item/stack/material/marble/ten = 8,
-				/obj/item/stack/material/phoron/ten = 7,
-				/obj/item/stack/material/gold/ten = 7,
-				/obj/item/stack/material/silver/ten = 7,
-				/obj/item/stack/material/osmium/ten = 7,
-				/obj/item/stack/material/platinum/ten = 8,
-				/obj/item/stack/material/tritium/ten = 7,
-				/obj/item/stack/material/mhydrogen/ten = 6,
+				/obj/item/stack/material/gold/ten = 9,
+				/obj/item/stack/material/silver/ten = 9,
+				/obj/item/stack/material/osmium/ten = 9,
+				/obj/item/stack/material/platinum/ten = 9,
+				/obj/item/stack/material/tritium/ten = 9,
+				/obj/item/stack/material/mhydrogen/ten = 9,
 				/obj/item/stack/material/plasteel/ten = 9,
 				/obj/item/storage/box/monkeycubes = 5,
 				/obj/item/storage/firstaid/surgery = 4,

@@ -1017,7 +1017,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "bI" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
@@ -1127,7 +1127,7 @@
 /turf/simulated/wall/ocp_wall,
 /area/map_template/merc_shuttle/rear)
 "bR" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -1139,7 +1139,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "bS" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
@@ -1407,7 +1407,7 @@
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/borosilicate_reinf/ten,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -1804,7 +1804,7 @@
 	icon_state = "1-4"
 	},
 /obj/item/storage/toolbox/syndicate,
-/obj/item/stack/material/phoron/fifty,
+/obj/item/stack/material/graphite/fifty,
 /obj/item/storage/backpack/dufflebag/syndie/ammo,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -2081,13 +2081,13 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "iv" = (
-/obj/structure/closet/crate/secure/phoron,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
+/obj/structure/closet/crate/secure/bomb,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
 /obj/structure/railing/mapped/no_density,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
@@ -2583,13 +2583,13 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Fy" = (
-/obj/structure/closet/crate/secure/phoron,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
+/obj/structure/closet/crate/secure/bomb,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
+/obj/item/stack/material/graphite/ten,
 /obj/machinery/light/spot{
 	icon_state = "tube_map";
 	dir = 1
@@ -2775,9 +2775,9 @@
 /obj/item/stack/material/ocp/ten,
 /obj/item/stack/material/ocp/ten,
 /obj/item/stack/material/ocp/ten,
-/obj/item/stack/material/glass/phoronrglass/ten,
-/obj/item/stack/material/glass/phoronrglass/ten,
-/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/borosilicate_reinf/ten,
+/obj/item/stack/material/glass/borosilicate_reinf/ten,
+/obj/item/stack/material/glass/borosilicate_reinf/ten,
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-1";
 	dir = 8

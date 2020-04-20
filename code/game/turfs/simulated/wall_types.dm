@@ -76,9 +76,6 @@
 /turf/simulated/wall/silver/Initialize(var/ml)
 	. = ..(ml,MAT_SILVER)
 
-/turf/simulated/wall/phoron/Initialize(var/ml)
-	. = ..(ml,MAT_PHORON)
-
 /turf/simulated/wall/sandstone/Initialize(var/ml)
 	. = ..(ml,MAT_SANDSTONE)
 
@@ -119,9 +116,6 @@
 
 /turf/simulated/wall/walnut/Initialize(var/ml)
 	. = ..(ml,MAT_WALNUT)
-
-/turf/simulated/wall/ironphoron/Initialize(var/ml)
-	. = ..(ml,MAT_IRON,MAT_PHORON)
 
 /turf/simulated/wall/golddiamond/Initialize(var/ml)
 	. = ..(ml,MAT_GOLD,MAT_DIAMOND)

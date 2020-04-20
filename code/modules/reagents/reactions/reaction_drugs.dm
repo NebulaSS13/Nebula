@@ -111,7 +111,7 @@
 	name = "Nanite Fluid"
 	result = /datum/reagent/nanitefluid
 	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/aluminium = 1, /datum/reagent/lube = 1)
-	catalysts = list(/datum/reagent/toxin/phoron = 5)
+	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 3
 	minimum_temperature = (-25 CELSIUS) - 100
 	maximum_temperature = -25 CELSIUS
@@ -196,7 +196,7 @@
 	name = "Condensed Capsaicin"
 	result = /datum/reagent/capsaicin/condensed
 	required_reagents = list(/datum/reagent/capsaicin = 2)
-	catalysts = list(/datum/reagent/toxin/phoron = 5)
+	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 1
 
 /datum/chemical_reaction/stimulants

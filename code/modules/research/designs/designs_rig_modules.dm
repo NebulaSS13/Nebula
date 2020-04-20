@@ -41,7 +41,7 @@
 /datum/design/item/rig/plasmacutter
 	name = "Plasma Cutter"
 	desc = "A rock cutter that projects bursts of hot plasma, mountable on a RIG."
-	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
+	req_tech = list(TECH_MATERIAL = 4, TECH_EXOTIC = 3, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
 	build_path = /obj/item/rig_module/mounted/plasmacutter
 
 /datum/design/item/rig/orescanner

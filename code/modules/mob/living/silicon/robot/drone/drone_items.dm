@@ -63,7 +63,7 @@
 		/obj/item/chems/glass,
 		/obj/item/chems/pill,
 		/obj/item/chems/ivbag,
-		/obj/item/stack/material/phoron,
+		/obj/item/stack/material/mhydrogen,
 		/obj/item/storage/pill_bottle,
 		)
 

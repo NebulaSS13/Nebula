@@ -219,69 +219,24 @@
 	ore_smelts_to = MAT_CERAMIC
 	ore_compresses_to = MAT_CLAY
 
-/material/phoron
-	display_name = "phoron"
-	stack_type = /obj/item/stack/material/phoron
-	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
+/material/supermatter
+	display_name = "exotic matter"
+	ignition_point = MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_colour = "#e37108"
 	shard_type = SHARD_SHARD
 	hardness = MAT_VALUE_RIGID
-	stack_origin_tech = "{'materials':2,'phorontech':2}"
+	stack_origin_tech = "{'materials':2,'exotictech':2}"
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
-	is_fusion_fuel = 1
-	chem_products = list(
-		/datum/reagent/toxin/phoron = 20
-		)
-	construction_difficulty = MAT_VALUE_HARD_DIY
-	ore_name = "phoron"
-	ore_compresses_to = MAT_PHORON
-	ore_result_amount = 5
-	ore_spread_chance = 25
-	ore_scan_icon = "mineral_uncommon"
-	xarch_source_mineral = /datum/reagent/toxin/phoron
-	ore_icon_overlay = "gems"
-	sale_price = 5
-	value = 200
-	//Note that this has a significant impact on TTV yield.
-	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.
-	gas_specific_heat = 200	// J/(mol*K)
-	//Hypothetical group 14 (same as carbon), period 8 element.
-	//Using multiplicity rule, it's atomic number is 162
-	//and following a N/Z ratio of 1.5, the molar mass of a monatomic gas is:
-	gas_molar_mass = 0.405	// kg/mol
-	gas_overlay_limit = 0.7
-	gas_flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL
-	gas_breathed_product = /datum/reagent/toxin/phoron
-	gas_symbol_html = "Ph"
-	gas_symbol = "Ph"
-	reflectiveness = MAT_VALUE_SHINY
-
-/material/phoron/supermatter
-	display_name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
 	radioactivity = 20
-	stack_origin_tech = "{'bluespace':2,'materials':6,'phorontech':4}"
+	stack_origin_tech = "{'bluespace':2,'materials':6,'exotictech':4}"
 	stack_type = null
 	luminescence = 3
 	ore_compresses_to = null
 	sale_price = null
-
-//Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
-/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
-	if(isnull(ignition_point))
-		return 0
-	if(temperature < ignition_point)
-		return 0
-	var/totalPhoron = 0
-	for(var/turf/simulated/floor/target_tile in range(2,T))
-		var/phoronToDeduce = (temperature/30) * effect_multiplier
-		totalPhoron += phoronToDeduce
-		target_tile.assume_gas(MAT_PHORON, phoronToDeduce, 200+T0C)
-		spawn (0)
-			target_tile.hotspot_expose(temperature, 400)
-	return round(totalPhoron/100)
+	value = 200

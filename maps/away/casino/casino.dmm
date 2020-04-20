@@ -4110,7 +4110,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "kP" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "kQ" = (
@@ -4208,7 +4208,7 @@
 /area/casino/casino_bow)
 "ld" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/portable_atmospherics/canister/phoron,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "le" = (
@@ -4459,7 +4459,7 @@
 /turf/simulated/floor/reinforced,
 /area/casino/casino_bow)
 "ly" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -4599,7 +4599,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "lW" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/reinforced,
 /area/casino/casino_bow)
 "lX" = (

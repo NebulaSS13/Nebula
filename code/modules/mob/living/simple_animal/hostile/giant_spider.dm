@@ -31,7 +31,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
 	speed = 1
-	max_gas = list(MAT_PHORON = 1, MAT_CO2 = 5, MAT_METHYL_BROMIDE = 1)
+	max_gas = list(MAT_CO2 = 5, MAT_METHYL_BROMIDE = 1)
 	bleed_colour = "#0d5a71"
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS

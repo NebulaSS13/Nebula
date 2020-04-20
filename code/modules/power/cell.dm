@@ -280,7 +280,7 @@
 
 /obj/item/cell/slime
 	name = "charged slime core"
-	desc = "A yellow slime core infused with phoron, it crackles with power."
+	desc = "A yellow slime core infused with strange substances, it crackles with power."
 	origin_tech = "{'powerstorage':2,'biotech':4}"
 	icon = 'icons/mob/simple_animal/slimes.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "yellow slime extract" //"potato_battery"

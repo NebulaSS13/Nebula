@@ -264,8 +264,8 @@
 
 		if(spawnees & 128)
 			C = new(src.loc)
-			C.SetName("Drone phoron overcharge counter")
-			C.origin_tech = "{'[TECH_PHORON]':[rand(3, 6)]}"
+			C.SetName("Drone anti-gravity controller")
+			C.origin_tech = "{'[TECH_EXOTIC]':[rand(3, 6)]}"
 
 		if(spawnees & 256)
 			C = new(src.loc)

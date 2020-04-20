@@ -8,8 +8,6 @@
 	else //let the fuckery commence
 		var/list/newgases = SSmaterials.all_gasses
 		newgases = newgases.Copy() // So we don't mutate the global list.
-		if(prob(90)) //all phoron planet should be rare
-			newgases -= MAT_PHORON
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= MAT_ALIEN_GAS
 		newgases -= MAT_STEAM

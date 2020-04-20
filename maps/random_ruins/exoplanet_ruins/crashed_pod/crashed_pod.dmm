@@ -17,7 +17,7 @@
 	},
 /obj/structure/wall_frame,
 /obj/structure/grille,
-/obj/structure/window/phoronreinforced/full,
+/obj/structure/window/reinforced_borosilicate/full,
 /obj/effect/submap_landmark/joinable_submap/crashed_pod,
 /turf/simulated/floor/plating,
 /area/map_template/crashed_pod)
@@ -28,7 +28,7 @@
 	},
 /obj/structure/wall_frame,
 /obj/structure/grille,
-/obj/structure/window/phoronreinforced/full,
+/obj/structure/window/reinforced_borosilicate/full,
 /turf/simulated/floor/plating,
 /area/map_template/crashed_pod)
 "af" = (
@@ -45,7 +45,7 @@
 	},
 /obj/structure/wall_frame,
 /obj/structure/grille,
-/obj/structure/window/phoronreinforced/full,
+/obj/structure/window/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 10
 	},

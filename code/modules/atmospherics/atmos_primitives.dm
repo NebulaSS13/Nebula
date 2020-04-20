@@ -460,7 +460,7 @@
 // - Is between 80 and 120kPa
 // - Has between 17% and 30% oxygen
 // - Has temperature between -10C and 50C
-// - Has no or only minimal phoron or N2O
+// - Has no or only minimal contaminants or N2O
 /proc/get_atmosphere_issues(datum/gas_mixture/atmosphere, var/returntext = 0)
 	var/list/status = list()
 	if(!atmosphere)
@@ -477,26 +477,29 @@
 
 	// Gas concentration checks
 	var/oxygen = 0
-	var/phoron = 0
+	var/contaminants = 0
 	var/carbondioxide = 0
 	var/nitrousoxide = 0
 	var/hydrogen = 0
 	if(atmosphere.total_moles) // Division by zero prevention
 		oxygen = (atmosphere.gas[MAT_OXYGEN] / atmosphere.total_moles) * 100 // Percentage of the gas
-		phoron = (atmosphere.gas[MAT_PHORON] / atmosphere.total_moles) * 100
 		carbondioxide = (atmosphere.gas[MAT_CO2] / atmosphere.total_moles) * 100
 		nitrousoxide = (atmosphere.gas[MAT_N2O] / atmosphere.total_moles) * 100
 		hydrogen = (atmosphere.gas[MAT_HYDROGEN] / atmosphere.total_moles) * 100
+
+		for(var/mat in atmosphere.gas)
+			var/material/M = SSmaterials.get_material_datum(mat)
+			if(M.flags & XGM_GAS_CONTAMINANT)
+				contaminants += atmosphere.gas[mat]
+				if(contaminants > 0.1)
+					break
 
 	if(!oxygen)
 		status.Add("No oxygen.")
 	else if((oxygen > 30) || (oxygen < 17))
 		status.Add("Oxygen too [oxygen > 30 ? "high" : "low"].")
-
-
-
-	if(phoron > 0.1)		// Toxic even in small amounts.
-		status.Add("Phoron contamination.")
+	if(contaminants > 0.1)		// Toxic even in small amounts.
+		status.Add("Toxic gas contamination.")
 	if(nitrousoxide > 0.1)	// Probably slightly less dangerous but still.
 		status.Add("N2O contamination.")
 	if(hydrogen > 2.5)	// Not too dangerous, but flammable.

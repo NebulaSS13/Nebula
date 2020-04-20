@@ -17,7 +17,7 @@
 	melee_damage_upper = 10
 	can_escape = TRUE
 
-	max_gas = list(MAT_PHORON = 2, MAT_CO2 = 5)
+	max_gas = list(MAT_CO2 = 5)
 
 	response_help = "pets"
 	response_harm = "hits"

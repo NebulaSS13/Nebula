@@ -28,7 +28,7 @@
 	var/stripe_color
 	var/global/list/wall_stripe_cache = list()
 	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut, /turf/simulated/wall/maple, /turf/simulated/wall/mahogany, /turf/simulated/wall/ebony)
-	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/phoronbasic/full, /obj/structure/window/phoronreinforced/full) // Objects which to blend with
+	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/borosilicate/full, /obj/structure/window/reinforced_borosilicate/full) // Objects which to blend with
 	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
 /turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
@@ -239,9 +239,7 @@
 	if(material.combustion_effect(src, temperature, 0.7))
 		spawn(2)
 			for(var/turf/simulated/wall/W in range(3,src))
-				W.burn((temperature/4))
-			for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
-				D.ignite(temperature/4)
+				W.burn(temperature/4)
 			dismantle_wall(TRUE)
 
 /turf/simulated/wall/get_color()

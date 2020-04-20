@@ -592,7 +592,7 @@
 	update_icon()
 
 // attack bulb/tube with object
-// if a syringe, can inject phoron to make it explode
+// if a syringe, can inject fuel to make it explode
 /obj/item/light/attackby(var/obj/item/I, var/mob/user)
 	..()
 	if(istype(I, /obj/item/chems/syringe))
@@ -600,11 +600,11 @@
 
 		to_chat(user, "You inject the solution into the [src].")
 
-		if(S.reagents.has_reagent(/datum/reagent/toxin/phoron, 5))
-
-			log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
-
-			rigged = 1
+		for(var/datum/reagent/R in S.reagents.reagent_list)
+			if(R.fuel_value > 0)
+				log_and_message_admins("injected a light with volatiles, rigging it to explode.", user)
+				rigged = 1
+				break
 
 		S.reagents.clear_reagents()
 	else

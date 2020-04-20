@@ -462,7 +462,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "bl" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "bm" = (

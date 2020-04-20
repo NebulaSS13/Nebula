@@ -3,17 +3,6 @@
 	result = null
 	result_amount = 1
 
-/datum/chemical_reaction/synthesis/phoronsolidification
-	name = "Solid Phoron"
-	required_reagents = list(/datum/reagent/iron = 5, /datum/reagent/toxin/phoron = 20)
-	minimum_temperature = (-80 CELSIUS) - 100
-	maximum_temperature = -80 CELSIUS
-	mix_message = "The solution hardens and begins to crystallize."
-
-/datum/chemical_reaction/synthesis/phoronsolidification/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	..()
-	new /obj/item/stack/material/phoron(get_turf(holder.my_atom), created_volume)
-
 /datum/chemical_reaction/synthesis/plastication
 	name = "Plastic"
 	required_reagents = list(/datum/reagent/acid/polyacid = 1, /datum/reagent/toxin/plasticide = 2)
@@ -30,7 +19,7 @@
 		/datum/reagent/silicon = 2
 	)
 	catalysts = list(
-		/datum/reagent/toxin/phoron = 1
+		/datum/reagent/enzyme = 1
 	)
 	result_amount = 3
 	mix_message = "The solution hardens and begins to crystallize."

@@ -78,7 +78,7 @@
 			target = MAT_PLASTEEL
 			target_amount = 100
 		if(4)
-			target = MAT_PHORON
+			target = MAT_SUPERMATTER
 			target_amount = 100
 		if(5)
 			target = MAT_SILVER

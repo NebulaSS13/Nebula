@@ -75,8 +75,8 @@
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 4, TECH_MAGNET = 4)
 	build_path = /obj/item/gun/magnetic/railgun/flechette
 
-/datum/design/item/weapon/phoronpistol
-	req_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
+/datum/design/item/weapon/plasmapistol
+	req_tech = list(TECH_COMBAT = 5, TECH_EXOTIC = 4)
 	build_path = /obj/item/gun/energy/toxgun
 
 /datum/design/item/weapon/decloner

@@ -8,7 +8,6 @@
 #define MAT_GOLD                    /material/gold
 #define MAT_SILVER                  /material/silver
 #define MAT_DIAMOND                 /material/diamond
-#define MAT_PHORON                  /material/phoron
 #define MAT_URANIUM                 /material/uranium
 #define MAT_CRYSTAL                 /material/diamond/crystal
 #define MAT_SANDSTONE               /material/stone
@@ -16,7 +15,7 @@
 #define MAT_IRON                    /material/iron
 #define MAT_PLATINUM                /material/platinum
 #define MAT_BRONZE                  /material/gold/bronze
-#define MAT_PHORON_GLASS            /material/glass/phoron
+#define MAT_GLASS_BOROSILICATE      /material/glass/borosilicate
 #define MAT_MARBLE                  /material/stone/marble
 #define MAT_CULT                    /material/cult
 #define MAT_REINFORCED_CULT         /material/cult/reinf
@@ -34,7 +33,7 @@
 #define MAT_METALLIC_HYDROGEN       /material/hydrogen/metallic
 #define MAT_DEUTERIUM               /material/hydrogen/deuterium
 #define MAT_TRITIUM                 /material/hydrogen/tritium
-#define MAT_SUPERMATTER             /material/phoron/supermatter
+#define MAT_SUPERMATTER             /material/supermatter
 #define MAT_PITCHBLENDE             /material/pitchblende
 #define MAT_HEMATITE                /material/hematite
 #define MAT_QUARTZ                  /material/quartz

@@ -162,7 +162,7 @@
 	return purify(reagent, reagents, value)
 
 /decl/random_chem_effect/random_properties/proc/purify(var/datum/reagent/random/reagent, var/datum/reagents/reagents, var/value)
-	var/target = reagents.has_reagent(/datum/reagent/toxin/phoron) ? minimum : maximum
+	var/target =  maximum
 	if(target == value)
 		return
 	var/rate = reaction_rate_cache[reagent.type]

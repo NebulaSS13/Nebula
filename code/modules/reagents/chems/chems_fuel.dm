@@ -17,7 +17,7 @@
 	if(volume <= 50)
 		return
 	var/turf/T = get_turf(holder)
-	var/datum/gas_mixture/products = new(_temperature = 5 * PHORON_FLASHPOINT)
+	var/datum/gas_mixture/products = new(_temperature = 5 * FLASHPOINT_TEMPERATURE)
 	var/gas_moles = 3 * volume
 	products.adjust_multi(MAT_NO, 0.1 * gas_moles, MAT_NO2, 0.1 * gas_moles, MAT_NITROGEN, 0.6 * gas_moles, MAT_HYDROGEN, 0.02 * gas_moles)
 	T.assume_air(products)

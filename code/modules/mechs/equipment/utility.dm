@@ -371,7 +371,7 @@
 	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	origin_tech = "{'materials':4,'phorontech':4,'engineering':6,'combat':3}"
+	origin_tech = "{'materials':4,'exotictech':4,'engineering':6,'combat':3}"
 	material = MAT_STEEL
 
 /obj/item/gun/energy/plasmacutter/mounted/mech

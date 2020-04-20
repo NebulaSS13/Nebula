@@ -348,7 +348,7 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/Process()
 	//Allow for reactions
-	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
+	air_contents.react() //cooking up air tanks - add hydrogen and oxygen, then heat above MINIMUM_BURN_TEMPERATURE
 	check_status()
 
 /obj/item/tank/on_update_icon(var/override)
@@ -491,7 +491,7 @@ var/list/global/tank_gauge_cache = list()
 ///Prewelded tanks
 /////////////////////////////////
 
-/obj/item/tank/phoron/welded
+/obj/item/tank/hydrogen/welded
 	valve_welded = 1
 /obj/item/tank/oxygen/welded
 	valve_welded = 1
@@ -501,14 +501,14 @@ var/list/global/tank_gauge_cache = list()
 /////////////////////////////////
 
 /obj/item/tank/proc/onetankbomb()
-	var/phoron_amt = 4 + rand(4)
+	var/hydrogen_amt = 4 + rand(4)
 	var/oxygen_amt = 6 + rand(8)
 
-	air_contents.gas[MAT_PHORON] = phoron_amt
+	air_contents.gas[MAT_HYDROGEN] = hydrogen_amt
 	air_contents.gas[MAT_OXYGEN] = oxygen_amt
 	air_contents.update_values()
 	valve_welded = 1
-	air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
+	air_contents.temperature = MINIMUM_BURN_TEMPERATURE-1
 
 	wired = 1
 
@@ -519,7 +519,7 @@ var/list/global/tank_gauge_cache = list()
 	H.update_icon()
 	update_icon(TRUE)
 
-/obj/item/tank/phoron/onetankbomb/Initialize()
+/obj/item/tank/hydrogen/onetankbomb/Initialize()
 	. = ..()
 	onetankbomb()
 

@@ -183,10 +183,14 @@
 		return
 
 	//also copied from matches
-	if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
+	var/fuel_val = 0
+	for(var/datum/reagent/R in reagents.reagent_list)
+		if(R.fuel_value > 0)
+			fuel_val += R.volume
+	if(fuel_val)
 		visible_message(SPAN_DANGER("\The [src] explodes!"))
 		var/datum/effect/effect/system/reagents_explosion/e = new()
-		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
+		e.set_up(round(fuel_val / 2.5), get_turf(src), 0, 0)
 		e.start()
 		qdel(src)
 		return

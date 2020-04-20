@@ -22,7 +22,7 @@
 		MAT_GLASS =     0, 
 		MAT_GOLD =      0, 
 		MAT_SILVER =    0, 
-		MAT_PHORON =    0, 
+		MAT_METALLIC_HYDROGEN =    0, 
 		MAT_URANIUM =   0, 
 		MAT_DIAMOND =   0
 	)

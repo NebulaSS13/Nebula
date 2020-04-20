@@ -24,13 +24,13 @@
 /datum/chemical_reaction/slime/spawn
 	name = "Slime Spawn"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/grey
 
 /datum/chemical_reaction/slime/spawn/on_reaction(var/datum/reagents/holder)
 	..()
-	holder.my_atom.visible_message("<span class='warning'>Infused with phoron, the core begins to quiver and grow, and soon a new baby slime emerges from it!</span>")
+	holder.my_atom.visible_message("<span class='warning'>Infused with enzymes, the core begins to quiver and grow, and soon a new baby slime emerges from it!</span>")
 	new /mob/living/carbon/slime(get_turf(holder.my_atom))
 
 /datum/chemical_reaction/slime/monkey
@@ -49,7 +49,7 @@
 /datum/chemical_reaction/slime/metal
 	name = "Slime Metal"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/metal
 
@@ -64,7 +64,7 @@
 /datum/chemical_reaction/slime/crit
 	name = "Slime Crit"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/gold
 	var/list/possible_mobs = list(
@@ -86,7 +86,7 @@
 /datum/chemical_reaction/slime/bork
 	name = "Slime Bork"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/silver
 
@@ -110,7 +110,7 @@
 /datum/chemical_reaction/slime/frost
 	name = "Slime Frost Oil"
 	result = /datum/reagent/frostoil
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 10
 	required = /obj/item/slime_extract/blue
 
@@ -118,7 +118,7 @@
 /datum/chemical_reaction/slime/freeze
 	name = "Slime Freeze"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/darkblue
 	mix_message = "The slime extract begins to vibrate violently!"
@@ -143,7 +143,7 @@
 /datum/chemical_reaction/slime/fire
 	name = "Slime fire"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/orange
 	mix_message = "The slime extract begins to vibrate violently!"
@@ -156,7 +156,8 @@
 		return
 
 	var/turf/location = get_turf(holder.my_atom)
-	location.assume_gas(MAT_PHORON, 250, 1400)
+	location.assume_gas(MAT_HYDROGEN, 125, 1400)
+	location.assume_gas(MAT_OXYGEN,   125, 1400)
 	location.hotspot_expose(700, 400)
 
 //Yellow
@@ -174,7 +175,7 @@
 /datum/chemical_reaction/slime/cell
 	name = "Slime Powercell"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/yellow
 
@@ -198,7 +199,7 @@
 /datum/chemical_reaction/slime/psteroid
 	name = "Slime Steroid"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/purple
 
@@ -217,13 +218,13 @@
 /datum/chemical_reaction/slime/plasma
 	name = "Slime Plasma"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/darkpurple
 
 /datum/chemical_reaction/slime/plasma/on_reaction(var/datum/reagents/holder)
 	..()
-	var/obj/item/stack/material/phoron/P = new (get_turf(holder.my_atom))
+	var/obj/item/stack/material/mhydrogen/P = new (get_turf(holder.my_atom))
 	P.amount = 10
 
 //Red
@@ -244,7 +245,7 @@
 /datum/chemical_reaction/slime/ppotion
 	name = "Slime Potion"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/pink
 
@@ -256,7 +257,7 @@
 /datum/chemical_reaction/slime/explosion
 	name = "Slime Explosion"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/oil
 	mix_message = "The slime extract begins to vibrate violently!"
@@ -273,7 +274,7 @@
 	result = null
 	result_amount = 1
 	required = /obj/item/slime_extract/lightpink
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 
 /datum/chemical_reaction/slime/potion2/on_reaction(var/datum/reagents/holder)
 	..()
@@ -283,7 +284,7 @@
 /datum/chemical_reaction/slime/golem
 	name = "Slime Golem"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/adamantine
 
@@ -308,7 +309,7 @@
 /datum/chemical_reaction/slime/camera
 	name = "Slime Camera"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/sepia
 
@@ -320,7 +321,7 @@
 /datum/chemical_reaction/slime/teleport
 	name = "Slime Teleport"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	required = /obj/item/slime_extract/bluespace
 	reaction_sound = 'sound/effects/teleport.ogg'
 
@@ -338,7 +339,7 @@
 /datum/chemical_reaction/slime/paint
 	name = "Slime Paint"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	required = /obj/item/slime_extract/pyrite
 
 /datum/chemical_reaction/slime/paint/on_reaction(var/datum/reagents/holder)
@@ -349,7 +350,7 @@
 /datum/chemical_reaction/slime/extract_enhance
 	name = "Extract Enhancer"
 	result = null
-	required_reagents = list(/datum/reagent/toxin/phoron = 1)
+	required_reagents = list(/datum/reagent/enzyme = 1)
 	required = /obj/item/slime_extract/cerulean
 
 /datum/chemical_reaction/slime/extract_enhance/on_reaction(var/datum/reagents/holder)

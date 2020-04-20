@@ -51,8 +51,6 @@
 	material = MAT_METALLIC_HYDROGEN
 /obj/item/ore/slag
 	material = MAT_WASTE
-/obj/item/ore/phoron
-	material = MAT_PHORON
 /obj/item/ore/aluminium
 	material = MAT_BAUXITE
 /obj/item/ore/rutile

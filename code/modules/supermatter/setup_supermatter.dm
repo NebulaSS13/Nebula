@@ -7,7 +7,6 @@
 #define ENERGY_NITROGEN 115			// Roughly 8 emitter shots.
 #define ENERGY_CARBONDIOXIDE 150	// Roughly 10 emitter shots.
 #define ENERGY_HYDROGEN 300			// Roughly 20 emitter shots.
-#define ENERGY_PHORON 500			// Roughly 40 emitter shots.
 
 
 /datum/admins/proc/setup_supermatter()
@@ -41,9 +40,6 @@
 			if("CO2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup/
 				continue
-			if("PH")
-				C.canister_type = /obj/machinery/portable_atmospherics/canister/phoron/engine_setup/
-				continue
 			if("H2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup/
 				continue
@@ -55,9 +51,6 @@
 				continue
 			if("CO2")
 				C.energy_setting = ENERGY_CARBONDIOXIDE
-				continue
-			if("PH")
-				C.energy_setting = ENERGY_PHORON
 				continue
 			if("H2")
 				C.energy_setting = ENERGY_HYDROGEN
@@ -233,10 +226,7 @@
 		for(var/datum/omni_port/P in F.ports)
 			if(P.mode != ATM_CO2)
 				continue
-			if(coolant == "PH")
-				P.mode = ATM_P
-				break
-			else if(coolant == "N2")
+			if(coolant == "N2")
 				P.mode = ATM_N2
 				break
 			else if(coolant == "H2")
@@ -259,4 +249,3 @@
 #undef ENERGY_NITROGEN
 #undef ENERGY_CARBONDIOXIDE
 #undef ENERGY_HYDROGEN
-#undef ENERGY_PHORON

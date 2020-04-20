@@ -141,17 +141,17 @@
 	projectile_type = /obj/item/projectile/beam/mindflayer
 
 /obj/item/gun/energy/toxgun
-	name = "phoron pistol"
-	desc = "A specialized firearm designed to fire lethal bolts of phoron."
+	name = "plasma pistol"
+	desc = "A specialized firearm designed to fire lethal bolts of radiation."
 	icon = 'icons/obj/guns/toxgun.dmi'
 	icon_state = "toxgun"
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'combat':5,'phorontech':4}"
-	projectile_type = /obj/item/projectile/energy/phoron
+	origin_tech = "{'combat':5,'exotictech':4}"
+	projectile_type = /obj/item/projectile/energy/plasma
 	material = MAT_STEEL
 	matter = list(
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_PHORON = MATTER_AMOUNT_TRACE
+		MAT_METALLIC_HYDROGEN = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/gun/energy/plasmacutter
@@ -165,7 +165,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
-	origin_tech = "{'materials':4,'phorontech':4,'engineering':6,'combat':3}"
+	origin_tech = "{'materials':4,'exotictech':4,'engineering':6,'combat':3}"
 	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
@@ -174,7 +174,7 @@
 	matter = list(
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
-		MAT_PHORON = MATTER_AMOUNT_TRACE
+		MAT_METALLIC_HYDROGEN = MATTER_AMOUNT_TRACE
 	)
 	var/datum/effect/effect/system/spark_spread/spark_system
 

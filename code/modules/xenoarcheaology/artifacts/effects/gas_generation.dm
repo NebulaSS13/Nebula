@@ -25,9 +25,9 @@
 	name = "O2 creation"
 	spawned_gas = MAT_OXYGEN
 
-/datum/artifact_effect/gas/phoron
-	name = "phoron creation"
-	spawned_gas = MAT_PHORON
+/datum/artifact_effect/gas/chlorine
+	name = "chlorine creation"
+	spawned_gas = MAT_CHLORINE
 
 /datum/artifact_effect/gas/sleeping
 	name = "N2O creation"

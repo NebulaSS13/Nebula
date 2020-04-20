@@ -3,13 +3,13 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector
 	name = "radiation collector array"
-	desc = "A device which uses radiation and phoron to produce power."
+	desc = "A device which uses radiation and hydrogen to produce power."
 	icon = 'icons/obj/machines/rad_collector.dmi'
 	icon_state = "ca"
 	anchored = 0
 	density = 1
 	req_access = list(access_engine_equip)
-	var/obj/item/tank/phoron/P = null
+	var/obj/item/tank/P = null
 
 	var/health = 100
 	var/max_safe_temp = 1000 + T0C
@@ -63,11 +63,11 @@ var/global/list/rad_collectors = list()
 			receive_pulse(12.5*(last_rads/max_rads)/(0.3+(last_rads/max_rads)))
 
 	if(P)
-		if(P.air_contents.gas[MAT_PHORON] == 0)
+		if(P.air_contents.gas[MAT_HYDROGEN] == 0)
 			investigate_log("<font color='red'>out of fuel</font>.","singulo")
 			eject()
 		else
-			P.air_adjust_gas(MAT_PHORON, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
+			P.air_adjust_gas(MAT_HYDROGEN, -0.01*drainratio*min(last_rads,max_rads)/max_rads) //fuel cost increases linearly with incoming radiation
 
 /obj/machinery/power/rad_collector/CanUseTopic(mob/user)
 	if(!anchored)
@@ -84,17 +84,17 @@ var/global/list/rad_collectors = list()
 		toggle_power()
 		user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
 		"You turn the [src.name] [active? "on":"off"].")
-		investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.gas[MAT_PHORON]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
+		investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.gas[MAT_HYDROGEN]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
 	else
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
 
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/tank/phoron))
+	if(istype(W, /obj/item/tank))
 		if(!src.anchored)
 			to_chat(user, "<span class='warning'>The [src] needs to be secured to the floor first.</span>")
 			return 1
 		if(src.P)
-			to_chat(user, "<span class='warning'>There's already a phoron tank loaded.</span>")
+			to_chat(user, "<span class='warning'>There's already a tank loaded.</span>")
 			return 1
 		if(!user.unEquip(W, src))
 			return
@@ -107,7 +107,7 @@ var/global/list/rad_collectors = list()
 			return 1
 	else if(isWrench(W))
 		if(P)
-			to_chat(user, "<span class='notice'>Remove the phoron tank first.</span>")
+			to_chat(user, "<span class='notice'>Remove the tank first.</span>")
 			return 1
 		for(var/obj/machinery/power/rad_collector/R in get_turf(src))
 			if(R != src)
@@ -171,7 +171,7 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector/proc/eject()
 	locked = 0
-	var/obj/item/tank/phoron/Z = src.P
+	var/obj/item/tank/Z = src.P
 	if (!Z)
 		return
 	Z.dropInto(loc)
@@ -185,7 +185,7 @@ var/global/list/rad_collectors = list()
 /obj/machinery/power/rad_collector/proc/receive_pulse(var/pulse_strength)
 	if(P && active)
 		var/power_produced = 0
-		power_produced = min(100*P.air_contents.gas[MAT_PHORON]*pulse_strength*pulse_coeff,max_power)
+		power_produced = min(100*P.air_contents.gas[MAT_HYDROGEN]*pulse_strength*pulse_coeff,max_power)
 		add_avail(power_produced)
 		last_power_new = power_produced
 		return

@@ -88,8 +88,7 @@
 		/obj/item/ore/uranium,
 		/obj/item/ore/gold,
 		/obj/item/ore/silver,
-		/obj/item/ore/slag,
-		/obj/item/ore/phoron)
+		/obj/item/ore/slag)
 
 /obj/random/ammo_magazine_smug
 	name = "Random Ammo Magazine"

@@ -260,7 +260,14 @@
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
-									if(t.air_contents.gas[breathes] && !t.air_contents.gas[MAT_PHORON])
+
+									var/contaminated = FALSE
+									for(var/g in C.species.poison_types)
+										if(t.air_contents.gas[g])
+											contaminated = TRUE
+											break
+
+									if(t.air_contents.gas[breathes] && !contaminated)
 										contents.Add(t.air_contents.gas[breathes])
 									else
 										contents.Add(0)

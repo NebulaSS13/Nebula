@@ -159,5 +159,5 @@
 	name = "Binary Gas Bomb"
 	item_cost = 30
 	path = /obj/effect/spawner/newbomb/traitor
-	desc = "A remote-activated phoron-oxygen bomb assembly with an included signaler. \
+	desc = "A remote-activated hydrogen-oxygen bomb assembly with an included signaler. \
 			A flashing disclaimer begins with the warning 'SOME DISASSEMBLY/REASSEMBLY REQUIRED.'"

@@ -40,7 +40,7 @@
 /datum/design/item/tool/experimental_welder
 	name = "experimental welding tool"
 	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
-	req_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4)
+	req_tech = list(TECH_ENGINEERING = 5, TECH_EXOTIC = 4)
 	build_path = /obj/item/weldingtool/experimental
 
 /datum/design/item/tool/shield_diffuser

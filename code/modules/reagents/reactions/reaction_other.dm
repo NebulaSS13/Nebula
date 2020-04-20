@@ -24,18 +24,11 @@
 	result_amount = 6
 	mix_message = "The solution begins to gleam with a fey inner light."
 
-/datum/chemical_reaction/oxyphoron
-	name = "Oxyphoron"
-	result = /datum/reagent/toxin/phoron/oxygen
-	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/toxin/phoron = 1)
-	result_amount = 2
-	mix_message = "The solution boils violently, shedding wisps of vapor."
-
 /datum/chemical_reaction/deuterium
 	name = "Deuterium"
 	result = null
-	required_reagents = list(/datum/reagent/water = 10)
-	catalysts = list(/datum/reagent/toxin/phoron/oxygen = 5)
+	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/fuel/hydrazine = 5)
+	catalysts = list(/datum/reagent/crystal = 5)
 	result_amount = 1
 	mix_message = "The solution makes a loud cracking sound as it crystalizes."
 

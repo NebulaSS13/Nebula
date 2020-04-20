@@ -92,18 +92,19 @@
 			return
 		lit = 1
 		damtype = "fire"
-		if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
+
+		var/fuel_val = 0
+		for(var/datum/reagent/R in reagents.reagent_list)
+			if(R.fuel_value > 0)
+				fuel_val += R.volume
+		if(fuel_val)
 			var/datum/effect/effect/system/reagents_explosion/e = new()
-			e.set_up(round(reagents.get_reagent_amount(/datum/reagent/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
+			e.set_up()
+			e.set_up(round(fuel_val / 2.5), get_turf(src), 0, 0)
 			e.start()
 			qdel(src)
 			return
-		if(reagents.get_reagent_amount(/datum/reagent/fuel)) // the fuel explodes, too, but much less violently
-			var/datum/effect/effect/system/reagents_explosion/e = new()
-			e.set_up(round(reagents.get_reagent_amount(/datum/reagent/fuel) / 5, 1), get_turf(src), 0, 0)
-			e.start()
-			qdel(src)
-			return
+
 		atom_flags &= ~ATOM_FLAG_NO_REACT // allowing reagents to react after being lit
 		HANDLE_REACTIONS(reagents)
 		update_icon()

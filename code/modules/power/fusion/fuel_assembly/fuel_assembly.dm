@@ -49,11 +49,11 @@
 /obj/item/fuel_assembly/tritium/Initialize(mapload)
 	. = ..(mapload,  MAT_TRITIUM)
 
-/obj/item/fuel_assembly/phoron/Initialize(mapload)
-	. = ..(mapload,  MAT_PHORON)
-
 /obj/item/fuel_assembly/supermatter/Initialize(mapload)
 	. = ..(mapload,  MAT_SUPERMATTER)
 
 /obj/item/fuel_assembly/hydrogen/Initialize(mapload)
 	. = ..(mapload,  MAT_HYDROGEN)
+
+/obj/item/fuel_assembly/mhydrogen/Initialize(mapload)
+	. = ..(mapload,  MAT_METALLIC_HYDROGEN)

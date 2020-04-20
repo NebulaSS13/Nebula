@@ -6,8 +6,7 @@ var/global/list/responsive_carriers = list(
 	/datum/reagent/mercury 			= "Metallic derivative",
 	/datum/reagent/iron 			= "Metallic composite",
 	/datum/reagent/toxin/chlorine 	= "Metamorphic/igneous rock composite",
-	/datum/reagent/phosphorus 		= "Metamorphic/sedimentary rock composite",
-	/datum/reagent/toxin/phoron 	= "Anomalous material")
+	/datum/reagent/phosphorus 		= "Metamorphic/sedimentary rock composite")
 
 /decl/archaeological_find
 	var/item_type = "object"
@@ -94,7 +93,7 @@ var/global/list/responsive_carriers = list(
 	if(prob(30))
 		descriptors.Add("is encircled with bands of [pick("quadrinium","cordite","ferritic-alloy","plasteel","duranium")]")
 	if(prob(30))
-		descriptors.Add("menaces with spikes of [pick("solid phoron","uranium","white pearl","black steel")]")
+		descriptors.Add("menaces with spikes of [pick("supermatter","uranium","white pearl","black steel")]")
 
 	if(length(descriptors))
 		result += ". It [english_list(descriptors)]."

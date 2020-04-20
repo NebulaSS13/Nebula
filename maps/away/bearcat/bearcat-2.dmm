@@ -4973,7 +4973,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/portables_connector,
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/borosilicate_reinf{
 	amount = 5
 	},
 /turf/simulated/floor/airless,
@@ -5010,7 +5010,7 @@
 /area/ship/scrap/maintenance/engine/aft)
 "iy" = (
 /obj/machinery/atmospherics/portables_connector,
-/obj/machinery/portable_atmospherics/canister/phoron,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iz" = (
@@ -5223,20 +5223,17 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iV" = (
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/reinforced_borosilicate{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/reinforced_borosilicate{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iW" = (
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/reinforced_borosilicate{
 	dir = 1
 	},
 /obj/machinery/meter/turf,
@@ -5246,12 +5243,10 @@
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iX" = (
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/reinforced_borosilicate{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/reinforced_borosilicate{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -5265,11 +5260,11 @@
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iY" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/reinforced_borosilicate,
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/borosilicate_reinf{
 	amount = 20
 	},
 /turf/simulated/floor/airless,
@@ -5344,8 +5339,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jg" = (
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/reinforced_borosilicate{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
@@ -5411,7 +5405,7 @@
 /area/ship/scrap/maintenance/atmos)
 "js" = (
 /obj/machinery/atmospherics/valve/open,
-/obj/item/material/shard/phoron,
+/obj/item/material/shard/borosilicate,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jt" = (
@@ -5428,9 +5422,8 @@
 /turf/simulated/floor/reinforced,
 /area/ship/scrap/maintenance/engine/aft)
 "jv" = (
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/reinforced_borosilicate,
+/obj/structure/window/reinforced_borosilicate{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
@@ -5447,8 +5440,7 @@
 /turf/simulated/floor/reinforced,
 /area/ship/scrap/maintenance/engine/aft)
 "jw" = (
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/reinforced_borosilicate{
 	dir = 1
 	},
 /obj/machinery/atmospherics/binary/pump{
@@ -5527,7 +5519,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jG" = (
-/obj/item/material/shard/phoron,
+/obj/item/material/shard/borosilicate,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jH" = (

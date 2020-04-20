@@ -62,7 +62,7 @@
 /datum/chemical_reaction/grenade_reaction/phlogiston
 	name = "Flash Fire"
 	lore_text = "This mixture causes an immediate flash fire."
-	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
+	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/fuel = 1, /datum/reagent/acid = 1 )
 	result_amount = 1
 	mix_message = "The solution thickens and begins to bubble."
 
@@ -70,7 +70,7 @@
 	..()
 	var/turf/location = get_turf(holder.my_atom.loc)
 	for(var/turf/simulated/floor/target_tile in range(0,location))
-		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
+		target_tile.assume_gas(MAT_HYDROGEN, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
 
 /datum/chemical_reaction/grenade_reaction/chemsmoke

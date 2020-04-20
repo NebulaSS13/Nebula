@@ -139,5 +139,5 @@
 /obj/item/coin/platinum
 	material = MAT_PLATINUM
 
-/obj/item/coin/phoron
-	material = MAT_PHORON
+/obj/item/coin/hydrogen
+	material = MAT_METALLIC_HYDROGEN

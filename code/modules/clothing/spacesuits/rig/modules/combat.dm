@@ -304,7 +304,7 @@
 
 	interface_name = "mounted plasma cutter"
 	interface_desc = "A forearm-mounted suit-powered plasma cutter."
-	origin_tech = "{'materials':5,'phorontech':4,'engineering':7,'combat':5}"
+	origin_tech = "{'materials':5,'exotictech':4,'engineering':7,'combat':5}"
 
 	gun = /obj/item/gun/energy/plasmacutter/mounted
 	material = MAT_STEEL
@@ -312,7 +312,7 @@
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
 		MAT_GOLD = MATTER_AMOUNT_TRACE,
-		MAT_PHORON = MATTER_AMOUNT_TRACE
+		MAT_METALLIC_HYDROGEN = MATTER_AMOUNT_TRACE
 	)
 	
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)

@@ -5,7 +5,6 @@
 #define O2STANDARD 0.21 // Percentage.
 #define N2STANDARD 0.79
 
-#define MOLES_PHORON_VISIBLE 0.7 // Moles in a standard cell after which phoron is visible.
 #define MOLES_O2STANDARD     (MOLES_CELLSTANDARD * O2STANDARD) // O2 standard value (21%)
 #define MOLES_N2STANDARD     (MOLES_CELLSTANDARD * N2STANDARD) // N2 standard value (79%)
 #define MOLES_O2ATMOS (MOLES_O2STANDARD*50)
@@ -49,9 +48,9 @@
 #define CARBON_LIFEFORM_FIRE_RESISTANCE (T0C + 200)
 #define CARBON_LIFEFORM_FIRE_DAMAGE     4
 
-// Phoron fire properties.
-#define PHORON_MINIMUM_BURN_TEMPERATURE    (T0C +  126) //400 K - autoignite temperature in tanks and canisters - enclosed environments I guess
-#define PHORON_FLASHPOINT                  (T0C +  246) //519 K - autoignite temperature in air if that ever gets implemented.
+// Gas fire properties.
+#define MINIMUM_BURN_TEMPERATURE (T0C +  126) //400 K - autoignite temperature in tanks and canisters - enclosed environments I guess
+#define FLASHPOINT_TEMPERATURE   (T0C +  246) //519 K - autoignite temperature in air if that ever gets implemented.
 
 //These control the mole ratio of oxidizer and fuel used in the combustion reaction
 #define FIRE_REACTION_OXIDIZER_AMOUNT	3 //should be greater than the fuel amount if fires are going to spread much
@@ -92,8 +91,6 @@
 #define ATMOSTANK_NITROGEN      90000 // A lot of N2 is needed to produce air mix, that's why we keep 90MPa of it
 #define ATMOSTANK_OXYGEN        50000 // O2 is also important for airmix, but not as much as N2 as it's only 21% of it.
 #define ATMOSTANK_CO2           60000 // CO2 is used for smaller vessels as the primary fuel propellant, and we need lots to stick around.
-#define ATMOSTANK_PHORON        25000
-#define ATMOSTANK_PHORON_FUEL	15000
 #define ATMOSTANK_HYDROGEN      50000
 #define ATMOSTANK_HYDROGEN_FUEL 25000
 #define ATMOSTANK_NITROUSOXIDE  10000 // N2O doesn't have a real useful use, i guess it's on station just to allow refilling of sec's riot control canisters?

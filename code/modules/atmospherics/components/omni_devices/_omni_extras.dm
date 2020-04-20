@@ -8,9 +8,8 @@
 #define ATM_O2		3
 #define ATM_N2		4
 #define ATM_CO2		5
-#define ATM_P		6	//Phoron
-#define ATM_N2O		7
-#define ATM_H2		8
+#define ATM_N2O		6
+#define ATM_H2		7
 
 //--------------------------------------------
 // Omni port datum
@@ -101,8 +100,6 @@
 			return MAT_NITROGEN
 		if(ATM_CO2)
 			return MAT_CO2
-		if(ATM_P)
-			return MAT_PHORON
 		if(ATM_N2O)
 			return MAT_N2O
 		if(ATM_H2)

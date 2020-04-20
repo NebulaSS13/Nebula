@@ -26,7 +26,6 @@
 /area/unishi/library)
 "ag" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/glass/bottle/tericadone,
 /obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
@@ -367,7 +366,7 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "aZ" = (
-/obj/structure/closet/crate/secure/phoron,
+/obj/structure/closet/crate/secure/bomb,
 /turf/simulated/floor,
 /area/unishi/common)
 "ba" = (
@@ -432,7 +431,6 @@
 /obj/structure/table/reinforced,
 /obj/item/chems/glass/beaker/large,
 /obj/item/chems/glass/beaker/bluespace,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "bl" = (
@@ -770,7 +768,6 @@
 /area/unishi/common)
 "ca" = (
 /obj/structure/table/standard,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cb" = (
@@ -878,7 +875,6 @@
 /obj/structure/table/glass,
 /obj/item/pen/green,
 /obj/item/paper_bin,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "co" = (
@@ -889,7 +885,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cp" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor,
 /area/unishi/common)
 "cq" = (
@@ -1170,8 +1166,7 @@
 	},
 /obj/item/folder/yellow,
 /obj/item/pen/green,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/stack/material/phoron/fifty,
+/obj/item/stack/material/graphite/fifty,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "da" = (
@@ -1197,7 +1192,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "dd" = (
-/obj/machinery/vending/phoronresearch,
+/obj/machinery/vending/bombresearch,
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "de" = (
@@ -1565,10 +1560,6 @@
 /area/unishi/rnd)
 "ea" = (
 /obj/structure/table/glass,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;
@@ -1700,7 +1691,7 @@
 /turf/simulated/floor/reinforced,
 /area/unishi/xenobio)
 "et" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	dir = 4
 	},
 /mob/living/carbon/slime,
@@ -1775,7 +1766,7 @@
 /turf/simulated/floor/reinforced,
 /area/unishi/xenobio)
 "eC" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	dir = 4
 	},
 /mob/living/carbon/human/monkey,
@@ -1844,10 +1835,10 @@
 /turf/simulated/floor/reinforced,
 /area/unishi/xenobio)
 "eM" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/reinforced_borosilicate,
 /turf/simulated/floor/reinforced,
 /area/unishi/xenobio)
 "eN" = (
@@ -2354,15 +2345,15 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "fW" = (
-/obj/machinery/atmospherics/unary/tank/phoron,
-/obj/structure/window/phoronreinforced{
+/obj/machinery/atmospherics/unary/tank/hydrogen,
+/obj/structure/window/reinforced_borosilicate{
 	dir = 8
 	},
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "fX" = (
 /obj/machinery/atmospherics/portables_connector,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	dir = 4
 	},
 /obj/item/remains,
@@ -2381,7 +2372,7 @@
 /area/unishi/smresearch)
 "fZ" = (
 /obj/machinery/atmospherics/unary/tank/air,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	dir = 8
 	},
 /turf/simulated/floor,
@@ -2404,7 +2395,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "ge" = (
-/obj/structure/closet/crate/secure/large/phoron/experimentalsm,
+/obj/structure/closet/crate/secure/large/supermatter/experimentalsm,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor,
 /area/unishi/smresearch)
@@ -2430,8 +2421,8 @@
 /area/unishi/smresearch)
 "gh" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate,
+/obj/structure/window/reinforced_borosilicate{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/loading,
@@ -2440,7 +2431,7 @@
 "gi" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
 /obj/machinery/door/window,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/loading,
@@ -2449,7 +2440,7 @@
 "gj" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
 /obj/machinery/door/window,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/loading,
@@ -2457,7 +2448,7 @@
 /area/unishi/smresearch)
 "gk" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/reinforced_borosilicate,
 /obj/effect/floor_decal/industrial/loading,
 /turf/simulated/floor,
 /area/unishi/smresearch)
@@ -2470,7 +2461,7 @@
 /area/unishi/smresearch)
 "gm" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/reinforced_borosilicate,
 /obj/item/remains,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
 	name = "\improper labcoat"
@@ -2760,14 +2751,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gQ" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
 	},
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gR" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
@@ -2775,7 +2766,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gS" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
 	icon_state = "map";
 	dir = 4
@@ -2783,7 +2774,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gT" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gU" = (
@@ -2919,7 +2910,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hm" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	icon_state = "intact";
 	dir = 4
@@ -3027,7 +3018,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "hC" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/reinforced_borosilicate{
 	dir = 4
 	},
 /turf/simulated/floor,

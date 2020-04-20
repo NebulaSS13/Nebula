@@ -38,7 +38,7 @@
 
 /obj/structure/table/glass/pglass
 	color = "#8f29a3"
-	material = MAT_PHORON_GLASS
+	material = MAT_GLASS_BOROSILICATE
 
 /obj/structure/table/holotable
 	icon_state = "holo_preview"

@@ -267,7 +267,7 @@
 	icon_state = "flaming"
 	hits = 5
 	heavy = 1
-	meteordrop = /obj/item/ore/phoron
+	meteordrop = /obj/item/ore/hydrogen
 
 /obj/effect/meteor/flaming/meteor_effect()
 	..()

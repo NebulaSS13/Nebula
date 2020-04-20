@@ -109,14 +109,10 @@
 //A power generator that runs on solid plasma sheets.
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
-	desc = "A power generator that runs on solid phoron sheets. Rated for 80 kW max safe output."
-
-	var/sheet_name = "Phoron Sheets"
-	var/sheet_path = /obj/item/stack/material/phoron
-
+	desc = "A power generator that runs on solid fuel. Rated for 80 kW max safe output."
 	/*
 		These values were chosen so that the generator can run safely up to 80 kW
-		A full 50 phoron sheet stack should last 20 minutes at power_output = 4
+		A full 50-unit fuel stack should last 20 minutes at power_output = 4
 		temperature_gain and max_temperature are set so that the max safe power level is 4.
 		Setting to 5 or higher can only be done temporarily before the generator overheats.
 	*/
@@ -125,6 +121,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	var/sheet_material = MAT_GRAPHITE
 	var/max_power_output = 5	//The maximum power setting without emagging.
 	var/max_safe_output = 4		// For UI use, maximal output that won't cause overheat.
 	var/time_per_sheet = 96		//fuel efficiency - how long 1 sheet lasts at power level 1
@@ -177,10 +174,9 @@
 //Removes one stack's worth of material from the generator.
 /obj/machinery/power/port_gen/pacman/DropFuel()
 	if(sheets)
-		var/obj/item/stack/material/S = new sheet_path(loc)
-		var/amount = min(sheets, S.max_amount)
-		S.amount = amount
-		sheets -= amount
+		var/material/mat = SSmaterials.get_material_datum(sheet_material)
+		mat.place_sheet(loc, sheets)
+		sheets = 0
 
 /obj/machinery/power/port_gen/pacman/UseFuel()
 
@@ -255,14 +251,11 @@
 		explode()
 
 /obj/machinery/power/port_gen/pacman/explode()
-	//Vapourize all the phoron
-	//When ground up in a grinder, 1 sheet produces 20 u of phoron -- Chemistry-Machinery.dm
-	//1 mol = 10 u? I dunno. 1 mol of carbon is definitely bigger than a pill
-	var/phoron = (sheets+sheet_left)*20
-	var/datum/gas_mixture/environment = loc.return_air()
-	if (environment)
-		environment.adjust_gas_temp(MAT_PHORON, phoron/10, operating_temperature + T0C)
-
+	var/material/mat = SSmaterials.get_material_datum(sheet_material)
+	if(SSmaterials.all_gasses[mat])
+		var/datum/gas_mixture/environment = loc.return_air()
+		if(environment)
+			environment.adjust_gas_temp(sheet_material, sheets, operating_temperature)
 	sheets = 0
 	sheet_left = 0
 	..()
@@ -284,7 +277,7 @@
 	return ..()
 
 /obj/machinery/power/port_gen/pacman/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, sheet_path))
+	if(istype(O, /obj/item/stack/material) && O.material.type == sheet_material)
 		var/obj/item/stack/addstack = O
 		var/amount = min((max_sheets - sheets), addstack.amount)
 		if(amount < 1)
@@ -342,7 +335,9 @@
 	data["fuel_stored"] = round((sheets * 1000) + (sheet_left * 1000))
 	data["fuel_capacity"] = round(max_sheets * 1000, 0.1)
 	data["fuel_usage"] = active ? round((power_output / time_per_sheet) * 1000) : 0
-	data["fuel_type"] = sheet_name
+
+	var/material/mat = SSmaterials.get_material_datum(sheet_material)
+	data["fuel_type"] = mat.display_name
 
 
 
@@ -352,35 +347,6 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-
-
-/*
-/obj/machinery/power/port_gen/pacman/interact(mob/user)
-	if (get_dist(src, user) > 1 )
-		if (!istype(user, /mob/living/silicon/ai))
-			user.unset_machine()
-			close_browser(user, "window=port_gen")
-			return
-
-	user.set_machine(src)
-
-	var/dat = text("<b>[name]</b><br>")
-	if (active)
-		dat += text("Generator: <A href='?src=\ref[src];action=disable'>On</A><br>")
-	else
-		dat += text("Generator: <A href='?src=\ref[src];action=enable'>Off</A><br>")
-	dat += text("[capitalize(sheet_name)]: [sheets] - <A href='?src=\ref[src];action=eject'>Eject</A><br>")
-	var/stack_percent = round(sheet_left * 100, 1)
-	dat += text("Current stack: [stack_percent]% <br>")
-	dat += text("Power output: <A href='?src=\ref[src];action=lower_power'>-</A> [power_gen * power_output] Watts<A href='?src=\ref[src];action=higher_power'>+</A><br>")
-	dat += text("Power current: [(powernet == null ? "Unconnected" : "[avail()]")]<br>")
-
-	var/tempstr = "Temperature: [temperature]&deg;C<br>"
-	dat += (overheating)? "<span class='danger'>[tempstr]</span>" : tempstr
-	dat += "<br><A href='?src=\ref[src];action=close'>Close</A>"
-	show_browser(user, "[dat]", "window=port_gen")
-	onclose(user, "port_gen")
-*/
 
 /obj/machinery/power/port_gen/pacman/Topic(href, href_list)
 	if(..())
@@ -410,8 +376,7 @@
 	name = "S.U.P.E.R.P.A.C.M.A.N.-type Portable Generator"
 	desc = "A power generator that utilizes uranium sheets as fuel. Can run for much longer than the standard PACMAN type generators. Rated for 80 kW max safe output."
 	icon_state = "portgen1"
-	sheet_path = /obj/item/stack/material/uranium
-	sheet_name = "Uranium Sheets"
+	sheet_material = MAT_URANIUM
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
 	var/rad_power = 4
 
@@ -505,8 +470,7 @@
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
 	desc = "An advanced power generator that runs on tritium. Rated for 200 kW maximum safe output!"
 	icon_state = "portgen2"
-	sheet_path = /obj/item/stack/material/tritium
-	sheet_name = "Tritium Fuel Sheets"
+	sheet_material = MAT_TRITIUM
 
 	//I don't think tritium has any other use, so we might as well make this rewarding for players
 	//max safe power output (power level = 8) is 200 kW and lasts for 1 hour - 3 or 4 of these could power the station

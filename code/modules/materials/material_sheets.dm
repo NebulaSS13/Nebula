@@ -188,20 +188,6 @@
 /obj/item/stack/material/uranium/ten
 	amount = 10
 
-/obj/item/stack/material/phoron
-	name = "solid phoron"
-	icon_state = "sheet-phoron"
-	plural_icon_state = "sheet-phoron-mult"
-	max_icon_state = "sheet-phoron-max"
-	material = MAT_PHORON
-	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
-
-/obj/item/stack/material/phoron/ten
-	amount = 10
-
-/obj/item/stack/material/phoron/fifty
-	amount = 50
-
 /obj/item/stack/material/plastic
 	name = "plastic"
 	icon_state = "sheet-plastic"
@@ -255,6 +241,20 @@
 
 /obj/item/stack/material/mhydrogen/ten
 	amount = 10
+
+//Fuel for PACMAN generator.
+/obj/item/stack/material/graphite
+	name = "graphite"
+	icon_state = "puck"
+	plural_icon_state = "puck-mult"
+	max_icon_state = "puck-max"
+	material = MAT_GRAPHITE
+
+/obj/item/stack/material/graphite/ten
+	amount = 10
+
+/obj/item/stack/material/graphite/fifty
+	amount = 50
 
 //Fuel for MRSPACMAN generator.
 /obj/item/stack/material/tritium
@@ -497,16 +497,16 @@
 /obj/item/stack/material/glass/reinforced/fifty
 	amount = 50
 
-/obj/item/stack/material/glass/phoronglass
+/obj/item/stack/material/glass/borosilicate
 	name = "borosilicate glass"
-	material = MAT_PHORON_GLASS
+	material = MAT_GLASS_BOROSILICATE
 
-/obj/item/stack/material/glass/phoronrglass
+/obj/item/stack/material/glass/borosilicate_reinf
 	name = "reinforced borosilicate glass"
-	material = MAT_PHORON_GLASS
+	material = MAT_GLASS_BOROSILICATE
 	reinf_material = MAT_STEEL
 
-/obj/item/stack/material/glass/phoronrglass/ten
+/obj/item/stack/material/glass/borosilicate_reinf/ten
 	amount = 10
 
 /obj/item/stack/material/aliumium

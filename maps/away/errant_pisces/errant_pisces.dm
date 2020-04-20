@@ -45,9 +45,9 @@
 	..()
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
-		var/datum/gas_mixture/sharkmaw_phoron = new
-		sharkmaw_phoron.adjust_gas(MAT_PHORON,  10)
-		environment.merge(sharkmaw_phoron)
+		var/datum/gas_mixture/sharkmaw_hydrogen = new
+		sharkmaw_hydrogen.adjust_gas(MAT_HYDROGEN,  10)
+		environment.merge(sharkmaw_hydrogen)
 		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
 
 /mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
@@ -78,7 +78,7 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
 	reagents.add_reagent(/datum/reagent/psychoactives, 1)
-	reagents.add_reagent(/datum/reagent/toxin/phoron, 1)
+	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 1)
 	src.bitesize = 8
 
 

@@ -270,7 +270,7 @@
 
 /datum/design/circuit/pacman
 	name = "PACMAN-type generator"
-	req_tech = list(TECH_DATA = 3, TECH_PHORON = 3, TECH_POWER = 3, TECH_ENGINEERING = 3)
+	req_tech = list(TECH_DATA = 3, TECH_EXOTIC = 3, TECH_POWER = 3, TECH_ENGINEERING = 3)
 	build_path = /obj/item/stock_parts/circuitboard/pacman
 
 /datum/design/circuit/superpacman
@@ -509,7 +509,7 @@
 
 /datum/design/circuit/bluespace_relay
 	name = "bluespace relay"
-	req_tech = list(TECH_DATA = 5, TECH_BLUESPACE = 5, TECH_PHORON = 5)
+	req_tech = list(TECH_DATA = 5, TECH_BLUESPACE = 5, TECH_EXOTIC = 5)
 	build_path = /obj/item/stock_parts/circuitboard/bluespacerelay
 
 /datum/design/circuit/shield_generator

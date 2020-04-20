@@ -1440,7 +1440,7 @@
 /area/constructionsite/teleporter)
 "eC" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 10
 	},
 /obj/random/powercell,
@@ -3199,7 +3199,7 @@
 /turf/simulated/wall,
 /area/constructionsite/engineering)
 "kI" = (
-/obj/machinery/portable_atmospherics/canister/empty/phoron,
+/obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kJ" = (
@@ -3340,7 +3340,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lm" = (
-/obj/machinery/portable_atmospherics/canister/phoron/engine_setup,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "ln" = (

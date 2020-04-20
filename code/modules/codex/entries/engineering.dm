@@ -59,7 +59,7 @@
 /datum/codex_entry/solars
 	associated_paths = list(/obj/item/solar_assembly, /obj/machinery/power/solar, /obj/machinery/power/tracker, /obj/machinery/power/solar_control)
 	associated_strings = list("solar array")
-	lore_text = "'At Greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuel or phoron! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array...''"
+	lore_text = "'At Greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuels! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array...''"
 	mechanics_text = "A solar array is a source of power for your ship or station, utalizing a series of panels on the outside of the ship/station. A computer console is used to control the array, with the help of a solar tracker.<BR> \
 	<BR><b>Using the console</b><BR> \
 	The solar panel control console must be connected via cables to the solar panels and tracker to excercise control. Additionally, the user must use the 'Search for devices button' to finish the connection.<BR>Using the console, you can manually rotate the array orientation to match the direction of the nearest star, after which you can set a timed tracking rate, causing the array to rotate clockwise at the set rate. Ideally though a solar tracker is connected and you set the tracking settings to auto, allowing the array to rotate on its own. \

@@ -1060,7 +1060,7 @@
 		"Silver"				= IC_PINTYPE_NUMBER,
 		"Gold"					= IC_PINTYPE_NUMBER,
 		"Diamond"				= IC_PINTYPE_NUMBER,
-		"Solid Phoron"			= IC_PINTYPE_NUMBER,
+		"Metallic Hydrogen"		= IC_PINTYPE_NUMBER,
 		"Uranium"				= IC_PINTYPE_NUMBER,
 		"Plasteel"				= IC_PINTYPE_NUMBER,
 		"Titanium"				= IC_PINTYPE_NUMBER,
@@ -1074,7 +1074,19 @@
 		)
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 40
-	var/list/mtypes = list("steel", "glass", "silver", "gold", "diamond", "phoron", "uranium", "plasteel", "titanium", "glass", "plastic")
+	var/list/mtypes = list(
+		MAT_STEEL,
+		MAT_GLASS,
+		MAT_SILVER,
+		MAT_GOLD,
+		MAT_DIAMOND,
+		MAT_METALLIC_HYDROGEN,
+		MAT_URANIUM,
+		MAT_PLASTEEL,
+		MAT_TITANIUM,
+		MAT_GLASS,
+		MAT_PLASTIC
+	)
 
 /obj/item/integrated_circuit/input/matscan/do_work()
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 1, /obj)

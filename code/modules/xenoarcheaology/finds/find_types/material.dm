@@ -13,7 +13,7 @@
 
 /decl/archaeological_find/material/exotic
 	item_type = "rare material lump"
-	possible_materials = list(MAT_ALIENALLOY, MAT_PHORON, MAT_METALLIC_HYDROGEN, MAT_PHORON_GLASS)
+	possible_materials = list(MAT_ALIENALLOY, MAT_METALLIC_HYDROGEN, MAT_GLASS_BOROSILICATE)
 
 //Machinery parts
 /decl/archaeological_find/parts

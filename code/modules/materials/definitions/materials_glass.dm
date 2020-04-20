@@ -31,17 +31,17 @@
 /material/glass/is_brittle()
 	return ..() && !is_reinforced()
 
-/material/glass/phoron
+/material/glass/borosilicate
 	display_name = "borosilicate glass"
 	lore_text = "An extremely heat-resistant form of glass."
-	stack_type = /obj/item/stack/material/glass/phoronglass
+	stack_type = /obj/item/stack/material/glass/borosilicate
 	flags = MAT_FLAG_BRITTLE
 	hardness = MAT_VALUE_HARD
 	integrity = 70
 	brute_armor = 2
 	burn_armor = 5
 	melting_point = T0C + 4000
-	icon_colour = GLASS_COLOR_PHORON
+	icon_colour = GLASS_COLOR_BOROSILICATE
 	stack_origin_tech = "{'materials':4}"
 	wire_product = null
 	construction_difficulty = MAT_VALUE_HARD_DIY

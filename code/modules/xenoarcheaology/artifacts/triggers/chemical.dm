@@ -35,7 +35,7 @@
 /datum/artifact_trigger/chemical/volatile
 	name = "presence of volatile chemicals"
 	required_chemicals = list(
-		/datum/reagent/toxin/phoron,
+		/datum/reagent/fuel/hydrazine,
 		/datum/reagent/fuel
 	)
 

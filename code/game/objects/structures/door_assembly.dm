@@ -192,7 +192,7 @@
 						if (S.use(1))
 							to_chat(user, "<span class='notice'>You installed reinforced glass windows into the airlock assembly.</span>")
 							glass = 1
-				else if(!(material_name in list(MAT_GOLD, MAT_SILVER, MAT_DIAMOND, MAT_URANIUM, MAT_PHORON, MAT_SANDSTONE)))
+				else if(!(material_name in list(MAT_GOLD, MAT_SILVER, MAT_DIAMOND, MAT_URANIUM, MAT_SANDSTONE)))
 					to_chat(user, "You cannot make an airlock out of that material.")
 					return
 				else

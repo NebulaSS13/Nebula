@@ -127,8 +127,8 @@
 			return
 
 // Preset types - left here for the code that uses them
-/obj/item/material/shard/phoron/Initialize(mapload, material_key)
-	. = ..(loc, MAT_PHORON_GLASS)
+/obj/item/material/shard/borosilicate/Initialize(mapload, material_key)
+	. = ..(loc, MAT_GLASS_BOROSILICATE)
 
 /obj/item/material/shard/shrapnel
 	name = "shrapnel"

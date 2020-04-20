@@ -172,10 +172,10 @@
 	required_reagents = list(/datum/reagent/ethanol/tequilla = 2, /datum/reagent/drink/juice/orange = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/recipe/phoron_special
+/datum/chemical_reaction/recipe/toxins_special
 	name = "Toxins Special"
 	result = /datum/reagent/ethanol/toxins_special
-	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/ethanol/vermouth = 2, /datum/reagent/toxin/phoron = 2)
+	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/ethanol/vermouth = 2, /datum/reagent/fuel/hydrazine = 2)
 	result_amount = 6
 
 /datum/chemical_reaction/recipe/beepsky_smash

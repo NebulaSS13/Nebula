@@ -875,14 +875,8 @@ About the new airlock wires panel:
 
 		electronics.dropInto(loc)
 		electronics = null
-
 	qdel(src)
-
 	return da
-/obj/machinery/door/airlock/phoron/attackby(C, mob/user)
-	if(C)
-		ignite(is_hot(C))
-	..()
 
 /obj/machinery/door/airlock/set_broken(new_state)
 	. = ..()

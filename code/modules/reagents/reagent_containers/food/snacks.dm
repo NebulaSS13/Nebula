@@ -3527,7 +3527,6 @@
 		/datum/reagent/capsaicin,
 		/datum/reagent/frostoil,
 		/datum/reagent/nutriment/sprinkles,
-		/datum/reagent/toxin/phoron,
 		/datum/reagent/nutriment/coco,
 		/datum/reagent/toxin/slimejelly,
 		/datum/reagent/nutriment/banana_cream,

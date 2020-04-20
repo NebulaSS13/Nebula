@@ -99,7 +99,7 @@
 				if(MAT_URANIUM)
 					ore_type = ORE_NUCLEAR
 					data_value = 3
-				if(MAT_PHORON, MAT_OSMIUM, MAT_METALLIC_HYDROGEN)
+				if(MAT_OSMIUM, MAT_METALLIC_HYDROGEN)
 					ore_type = ORE_EXOTIC
 					data_value = 4
 

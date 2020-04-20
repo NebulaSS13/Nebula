@@ -2825,10 +2825,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -2907,7 +2907,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -3286,54 +3286,54 @@
 /area/slavers_base/powatm)
 "im" = (
 /obj/structure/ore_box,
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "in" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "io" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
 /obj/machinery/light/small,
@@ -3341,16 +3341,16 @@
 /area/slavers_base/powatm)
 "ip" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
-/obj/item/stack/material/phoron{
+/obj/item/stack/material/graphite{
 	amount = 25
 	},
 /turf/simulated/floor/airless/ceiling,

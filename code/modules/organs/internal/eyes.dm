@@ -7,7 +7,7 @@
 	parent_organ = BP_HEAD
 	surface_accessible = TRUE
 	relative_size = 5
-	var/phoron_guard = 0
+	var/contaminant_guard = 0
 	var/list/eye_colour = list(0,0,0)
 	var/innate_flash_protection = FLASH_PROTECTION_NONE
 	max_damage = 45

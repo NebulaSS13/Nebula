@@ -46,7 +46,7 @@
 
 	breath_type =             MAT_METHYL_BROMIDE
 	exhale_type =             MAT_METHANE
-	poison_types =            list(MAT_PHORON)
+	poison_types =            list(MAT_CHLORINE)
 
 	reagent_tag =             IS_MANTID
 	genders =                 list(MALE)

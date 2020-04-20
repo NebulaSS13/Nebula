@@ -225,12 +225,6 @@
 	door_color = COLOR_BEIGE
 	mineral = MAT_SANDSTONE
 
-/obj/machinery/door/airlock/phoron
-	name = "\improper Phoron Airlock"
-	desc = "No way this can end badly."
-	door_color = COLOR_PURPLE
-	mineral = MAT_PHORON
-
 /obj/machinery/door/airlock/uranium
 	name = "Uranium Airlock"
 	desc = "And they said I was crazy."
@@ -246,28 +240,7 @@
 		last_event = world.time
 	..()
 
-/obj/machinery/door/airlock/phoron/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300)
-		PhoronBurn(exposed_temperature)
-
-/obj/machinery/door/airlock/phoron/proc/ignite(exposed_temperature)
-	if(exposed_temperature > 300)
-		PhoronBurn(exposed_temperature)
-
-/obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
-	for(var/turf/simulated/floor/target_tile in range(2,loc))
-		target_tile.assume_gas(MAT_PHORON, 35, 400+T0C)
-		spawn (0) target_tile.hotspot_expose(temperature, 400)
-	for(var/turf/simulated/wall/W in range(3,src))
-		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
-	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
-		D.ignite(temperature/4)
-	new/obj/structure/door_assembly(src.loc)
-	qdel(src)
-
-
 // Miscellaneous airlock presets
-
 /obj/machinery/door/airlock/centcom
 	airlock_type = "centcomm"
 	name = "\improper Airlock"

@@ -105,7 +105,7 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "ao" = (
-/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/effect/wingrille_spawn/reinforced_borosilicate,
 /turf/simulated/floor,
 /area/unishi/engineering)
 "ap" = (
@@ -113,7 +113,7 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/wingrille_spawn/reinforced_phoron,
+/obj/effect/wingrille_spawn/reinforced_borosilicate,
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aq" = (
@@ -520,7 +520,7 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bu" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bv" = (
@@ -702,7 +702,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bO" = (

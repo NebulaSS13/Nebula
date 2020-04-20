@@ -71,7 +71,7 @@
 	matter = list(
 		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_URANIUM = MATTER_AMOUNT_TRACE,
-		MAT_PHORON = MATTER_AMOUNT_TRACE
+		MAT_METALLIC_HYDROGEN = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/storage/bag/trash/bluespace/attackby(obj/item/W, mob/user)
