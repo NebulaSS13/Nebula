@@ -1,7 +1,30 @@
 /datum/map/bearcat
-	allowed_jobs = list(/datum/job/captain, /datum/job/chief_engineer, /datum/job/doctor, /datum/job/hop, /datum/job/cyborg, /datum/job/assistant, /datum/job/engineer)
+	allowed_jobs = list(
+		/datum/job/bearcat_captain, 
+		/datum/job/bearcat_first_mate,
+		/datum/job/bearcat_chief_engineer,
+		/datum/job/bearcat_engineer,
+		/datum/job/bearcat_doctor,
+		/datum/job/cyborg, 
+		/datum/job/assistant
+	)
 
-/datum/job/captain
+/datum/job/bearcat_captain
+	title = "Captain"
+	head_position = 1
+	department_refs = list(DEPT_COMMAND)
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#1d1d4f"
+	req_admin_notify = 1
+	access = list()
+	minimal_access = list()
+	minimal_player_age = 14
+	economic_power = 20
+	ideal_character_age = 70
+	guestbanned = 1	
+	must_fill = 1
+	not_random_selectable = 1	
 	supervisors = "the Merchant Code and your conscience"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/captain
 	min_skill = list(
@@ -16,7 +39,15 @@
 	)
 	skill_points = 30
 
-/datum/job/captain/equip(var/mob/living/carbon/human/H)
+/datum/job/bearcat_captain/equip(var/mob/living/carbon/human/H)
+	. = ..()
+	if(.)
+		H.implant_loyalty(src)
+
+/datum/job/bearcat_captain/get_access()
+	return get_all_station_access()
+
+/datum/job/bearcat_captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
 	if(H.client)
 		H.client.verbs += /client/proc/rename_ship
@@ -52,13 +83,33 @@
 		command_announcement.Announce("Congratulations to all employees of [capitalize(GLOB.using_map.company_name)] on the new name. Their rebranding has changed the [GLOB.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Company name change approved")
 	verbs -= /client/proc/rename_company
 
-/datum/job/captain/get_access()
+/datum/job/bearcat_captain/get_access()
 	return get_all_station_access()
 
-/datum/job/chief_engineer
+/datum/job/bearcat_chief_engineer
 	title = "Chief Engineer"
 	supervisors = "the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/chief_engineer
+	head_position = 1
+	department_refs = list(DEPT_ENGINEERING, DEPT_COMMAND)
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#7f6e2c"
+	req_admin_notify = 1
+	economic_power = 10
+	ideal_character_age = 50
+	guestbanned = 1	
+	must_fill = 1
+	not_random_selectable = 1
+	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_heads,
+			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
+			            access_bridge, access_construction, access_sec_doors,
+			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
+	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_heads,
+			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
+			            access_bridge, access_construction, access_sec_doors,
+			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
+	minimal_player_age = 14
 	min_skill = list(
 		SKILL_LITERACY =     SKILL_ADEPT,
 		SKILL_BUREAUCRACY =  SKILL_BASIC,
@@ -77,15 +128,20 @@
 	)
 	skill_points = 30
 
-/datum/job/doctor
+/datum/job/bearcat_doctor
 	title = "Doc"
 	supervisors = "the Captain and your idea of Hippocratic Oath"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/doc
-	alt_titles = list(
-		"Surgeon")
+	alt_titles = list("Surgeon")
 	total_positions = 1
 	spawn_positions = 1
 	hud_icon = "hudmedicaldoctor"
+	department_refs = list(DEPT_MEDICAL)
+	minimal_player_age = 3
+	selection_color = "#013d3b"
+	economic_power = 7
+	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology)
+	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology)
 	min_skill = list(
 		SKILL_LITERACY =    SKILL_ADEPT,
 		SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -100,11 +156,34 @@
 	)
 	skill_points = 28
 
-/datum/job/hop
+/datum/job/bearcat_first_mate
 	title = "First Mate"
 	supervisors = "the Captain and the Merchant Code"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/mate
 	hud_icon = "hudheadofpersonnel"
+	head_position = 1
+	department_refs = list(DEPT_COMMAND, DEPT_CIVILIAN)
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#2f2f7f"
+	req_admin_notify = 1
+	minimal_player_age = 14
+	economic_power = 10
+	ideal_character_age = 50
+	guestbanned = 1	
+	not_random_selectable = 1
+	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers, access_heads,
+			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_bridge,
+			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
+			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
+			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
+			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
+	minimal_access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers, access_heads,
+			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_bridge,
+			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
+			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
+			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
+			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
 	min_skill = list(
 		SKILL_LITERACY =    SKILL_ADEPT,
 		SKILL_WEAPONS =     SKILL_BASIC,
@@ -119,22 +198,18 @@
 	)
 	skill_points = 30
 
-/datum/job/assistant
-	title = "Deck Hand"
-	supervisors = "literally everyone, you bottom feeder"
-	outfit_type = /decl/hierarchy/outfit/job/bearcat/hand
-	alt_titles = list(
-		"Cook" = /decl/hierarchy/outfit/job/bearcat/hand/cook,
-		"Cargo Hand",
-		"Passenger")
-	hud_icon = "hudcargotechnician"
-
-/datum/job/engineer
+/datum/job/bearcat_engineer
 	title = "Junior Engineer"
-	supervisors = "Chief Engineer"
+	supervisors = "the Chief Engineer"
 	total_positions = 2
 	spawn_positions = 2
 	hud_icon = "hudengineer"
+	department_refs = list(DEPT_ENGINEERING)
+	selection_color = "#5b4d20"
+	economic_power = 5
+	minimal_player_age = 7
+	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
+	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
 	min_skill = list(
 		SKILL_LITERACY =     SKILL_ADEPT,
 		SKILL_COMPUTER =     SKILL_BASIC,
@@ -151,90 +226,19 @@
 		SKILL_ENGINES =      SKILL_MAX
 	)
 	skill_points = 20
+	outfit_type = /decl/hierarchy/outfit/job/bearcat/hand/engine
 
 /datum/job/cyborg
 	supervisors = "your laws and the Captain"
-	outfit_type = /decl/hierarchy/outfit/job/bearcat/hand/engine
 	total_positions = 1
 	spawn_positions = 1
 
-
-// OUTFITS
-#define BEARCAT_OUTFIT_JOB_NAME(job_name) ("Bearcat - Job - " + job_name)
-
-/decl/hierarchy/outfit/job/bearcat/
-	hierarchy_type = /decl/hierarchy/outfit/job/bearcat
-	pda_type = /obj/item/modular_computer/pda
-	pda_slot = slot_l_store
-	l_ear = null
-	r_ear = null
-
-/decl/hierarchy/outfit/job/bearcat/captain
-	name = BEARCAT_OUTFIT_JOB_NAME("Captain")
-	uniform = /obj/item/clothing/under/casual_pants/classicjeans
-	shoes = /obj/item/clothing/shoes/black
-	pda_type = /obj/item/modular_computer/pda/captain
-	r_pocket = /obj/item/radio
-	id_type = /obj/item/card/id/gold
-
-
-/decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
-	..()
-	var/obj/item/clothing/uniform = H.w_uniform
-	if(uniform)
-		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
-		if(uniform.can_attach_accessory(eyegore))
-			uniform.attach_accessory(null, eyegore)
-		else
-			qdel(eyegore)
-
-/decl/hierarchy/outfit/job/bearcat/chief_engineer
-	name = BEARCAT_OUTFIT_JOB_NAME("Chief Engineer")
-	uniform = /obj/item/clothing/under/rank/chief_engineer
-	glasses = /obj/item/clothing/glasses/welding/superior
-	suit = /obj/item/clothing/suit/storage/hazardvest
-	gloves = /obj/item/clothing/gloves/thick
-	shoes = /obj/item/clothing/shoes/workboots
-	pda_type = /obj/item/modular_computer/pda/heads/ce
-	l_hand = /obj/item/wrench
-	belt = /obj/item/storage/belt/utility/full
-	id_type = /obj/item/card/id/engineering/head
-	r_pocket = /obj/item/radio
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
-
-/decl/hierarchy/outfit/job/bearcat/doc
-	name = BEARCAT_OUTFIT_JOB_NAME("Ship's Doc")
-	uniform = /obj/item/clothing/under/det/black
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	shoes = /obj/item/clothing/shoes/laceup
-	pda_type = /obj/item/modular_computer/pda/medical
-
-/decl/hierarchy/outfit/job/bearcat/mate
-	name = BEARCAT_OUTFIT_JOB_NAME("First Mate")
-	uniform = /obj/item/clothing/under/suit_jacket/checkered
-	shoes = /obj/item/clothing/shoes/laceup
-	glasses = /obj/item/clothing/glasses/sunglasses/big
-	pda_type = /obj/item/modular_computer/pda/cargo
-	l_hand = /obj/item/material/clipboard
-
-/decl/hierarchy/outfit/job/bearcat/hand
-	name = BEARCAT_OUTFIT_JOB_NAME("Deck Hand")
-
-/decl/hierarchy/outfit/job/bearcat/hand/pre_equip(mob/living/carbon/human/H)
-	..()
-	uniform = pick(list(/obj/item/clothing/under/overalls,/obj/item/clothing/under/focal,/obj/item/clothing/under/hazard,/obj/item/clothing/under/rank/cargotech,/obj/item/clothing/under/color/black,/obj/item/clothing/under/color/grey,/obj/item/clothing/under/casual_pants/track, ))
-
-/decl/hierarchy/outfit/job/bearcat/hand/cook
-	name = BEARCAT_OUTFIT_JOB_NAME("Cook")
-	head = /obj/item/clothing/head/chefhat
-	suit = /obj/item/clothing/suit/chef/classic
-
-/decl/hierarchy/outfit/job/bearcat/hand/engine
-	name = BEARCAT_OUTFIT_JOB_NAME("Junior Engineer")
-	head = /obj/item/clothing/head/hardhat
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
-
-/decl/hierarchy/outfit/job/bearcat/hand/engine/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(prob(50))
-		suit = /obj/item/clothing/suit/storage/hazardvest
+/datum/job/assistant
+	title = "Deck Hand"
+	supervisors = "literally everyone, you bottom feeder"
+	outfit_type = /decl/hierarchy/outfit/job/bearcat/hand
+	alt_titles = list(
+		"Cook" = /decl/hierarchy/outfit/job/bearcat/hand/cook,
+		"Cargo Hand",
+		"Passenger")
+	hud_icon = "hudcargotechnician"

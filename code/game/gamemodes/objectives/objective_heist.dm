@@ -2,7 +2,7 @@
 	return
 
 /datum/objective/heist/kidnap
-	var/list/roles = list(/datum/job/chief_engineer, /datum/job/rd, /datum/job/roboticist, /datum/job/chemist, /datum/job/engineer)
+	var/list/roles
 
 /datum/objective/heist/kidnap/choose_target()
 	var/list/possible_targets = list()
@@ -11,10 +11,11 @@
 	for(var/datum/mind/possible_target in SSticker.minds)
 		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && (!possible_target.special_role))
 			possible_targets += possible_target
-			for(var/datum/job/role in SSjobs.get_by_path(roles))
-				if(possible_target.assigned_role == role.title)
-					priority_targets += possible_target
-					continue
+			if(length(roles))
+				for(var/datum/job/role in SSjobs.get_by_path(roles))
+					if(possible_target.assigned_role == role.title)
+						priority_targets += possible_target
+						continue
 
 	if(priority_targets.len > 0)
 		target = pick(priority_targets)

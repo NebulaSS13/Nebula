@@ -1,7 +1,6 @@
 #if !defined(using_map_DATUM)
 
 	#include "..\..\mods\misc\mundane.dm"
-	#include "..\..\mods\misc\spacemen.dm"
 	#include "..\..\mods\corporate\_corporate.dme"
 	#include "..\..\mods\government\_government.dme"
 	#include "..\..\mods\psionics\_psionics.dme"

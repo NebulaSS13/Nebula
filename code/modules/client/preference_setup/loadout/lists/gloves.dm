@@ -51,12 +51,6 @@
 	ringtype["ring, plastic"] = /obj/item/clothing/ring/material/plastic
 	gear_tweaks += new/datum/gear_tweak/path(ringtype)
 
-/datum/gear/gloves/botany
-	display_name = "gloves, botany"
-	path = /obj/item/clothing/gloves/thick/botany
-	cost = 3
-	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/chef, /datum/job/bartender, /datum/job/assistant)
-
 /datum/gear/gloves/work
 	display_name = "gloves, work"
 	path = /obj/item/clothing/gloves/thick

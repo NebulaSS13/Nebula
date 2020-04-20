@@ -326,19 +326,6 @@ var/const/NO_EMAG_ACT = -50
 	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")
 	return
 
-/obj/item/card/id/silver
-	name = "identification card"
-	desc = "A silver card which shows honour and dedication."
-	item_state = "silver_id"
-	job_access_type = /datum/job/hop
-
-/obj/item/card/id/gold
-	name = "identification card"
-	desc = "A golden card which shows power and might."
-	job_access_type = /datum/job/captain
-	color = "#d4c780"
-	extra_details = list("goldstripe")
-
 /obj/item/card/id/syndicate_command
 	name = "syndicate ID card"
 	desc = "An ID straight from the Syndicate."
@@ -404,122 +391,11 @@ var/const/NO_EMAG_ACT = -50
 	. = ..()
 	access = get_access_ids()
 
-// Department-flavor IDs
-/obj/item/card/id/medical
-	name = "identification card"
-	desc = "A card issued to medical staff."
-	job_access_type = /datum/job/doctor
-	detail_color = COLOR_PALE_BLUE_GRAY
-
-/obj/item/card/id/medical/chemist
-	job_access_type = /datum/job/chemist
-
-/obj/item/card/id/medical/geneticist
-	job_access_type = /datum/job/geneticist
-
-/obj/item/card/id/medical/psychiatrist
-	job_access_type = /datum/job/psychiatrist
-
-/obj/item/card/id/medical/paramedic
-	job_access_type = /datum/job/Paramedic
-
-/obj/item/card/id/medical/head
-	name = "identification card"
-	desc = "A card which represents care and compassion."
-	job_access_type = /datum/job/cmo
-	extra_details = list("goldstripe")
-
-/obj/item/card/id/security
-	name = "identification card"
-	desc = "A card issued to security staff."
-	job_access_type = /datum/job/officer
-	color = COLOR_OFF_WHITE
-	detail_color = COLOR_MAROON
-
-/obj/item/card/id/security/warden
-	job_access_type = /datum/job/warden
-
-/obj/item/card/id/security/detective
-	job_access_type = /datum/job/detective
-
-/obj/item/card/id/security/head
-	name = "identification card"
-	desc = "A card which represents honor and protection."
-	job_access_type = /datum/job/hos
-	extra_details = list("goldstripe")
-
-/obj/item/card/id/engineering
-	name = "identification card"
-	desc = "A card issued to engineering staff."
-	job_access_type = /datum/job/engineer
-	detail_color = COLOR_SUN
-
-/obj/item/card/id/engineering/head
-	name = "identification card"
-	desc = "A card which represents creativity and ingenuity."
-	job_access_type = /datum/job/chief_engineer
-	extra_details = list("goldstripe")
-
-/obj/item/card/id/science
-	name = "identification card"
-	desc = "A card issued to science staff."
-	job_access_type = /datum/job/scientist
-	detail_color = COLOR_PALE_PURPLE_GRAY
-
-/obj/item/card/id/science/xenobiologist
-	job_access_type = /datum/job/xenobiologist
-
-/obj/item/card/id/science/roboticist
-	job_access_type = /datum/job/roboticist
-
-/obj/item/card/id/science/head
-	name = "identification card"
-	desc = "A card which represents knowledge and reasoning."
-	job_access_type = /datum/job/rd
-	extra_details = list("goldstripe")
-
-/obj/item/card/id/cargo
-	name = "identification card"
-	desc = "A card issued to cargo staff."
-	job_access_type = /datum/job/cargo_tech
-	detail_color = COLOR_BROWN
-
-/obj/item/card/id/cargo/mining
-	job_access_type = /datum/job/mining
-
-/obj/item/card/id/cargo/head
-	name = "identification card"
-	desc = "A card which represents service and planning."
-	job_access_type = /datum/job/qm
-	extra_details = list("goldstripe")
-
 /obj/item/card/id/civilian
 	name = "identification card"
 	desc = "A card issued to civilian staff."
 	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
-
-/obj/item/card/id/civilian/bartender
-	job_access_type = /datum/job/bartender
-
-/obj/item/card/id/civilian/chef
-	job_access_type = /datum/job/chef
-
-/obj/item/card/id/civilian/botanist
-	job_access_type = /datum/job/hydro
-
-/obj/item/card/id/civilian/janitor
-	job_access_type = /datum/job/janitor
-
-/obj/item/card/id/civilian/librarian
-	job_access_type = /datum/job/librarian
-
-/obj/item/card/id/civilian/internal_affairs_agent
-	job_access_type = /datum/job/lawyer
-	detail_color = COLOR_NAVY_BLUE
-
-/obj/item/card/id/civilian/chaplain
-	job_access_type = /datum/job/chaplain
 
 /obj/item/card/id/civilian/head //This is not the HoP. There's no position that uses this right now.
 	name = "identification card"
@@ -532,3 +408,14 @@ var/const/NO_EMAG_ACT = -50
 	access = list(access_merchant)
 	color = COLOR_OFF_WHITE
 	detail_color = COLOR_BEIGE
+
+/obj/item/card/id/silver
+	name = "identification card"
+	desc = "A silver card which shows honour and dedication."
+	item_state = "silver_id"
+
+/obj/item/card/id/gold
+	name = "identification card"
+	desc = "A golden card which shows power and might."
+	color = "#d4c780"
+	extra_details = list("goldstripe")

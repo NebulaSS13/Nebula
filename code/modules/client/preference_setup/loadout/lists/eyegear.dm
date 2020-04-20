@@ -76,28 +76,9 @@
 	path = /obj/item/clothing/glasses/eyepatch/hud/medical
 	cost = 2
 
-/datum/gear/eyes/meson
-	display_name = "Meson Goggles"
-	path = /obj/item/clothing/glasses/meson
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/engineer, /datum/job/mining, /datum/job/scientist, /datum/job/rd)
-
-/datum/gear/eyes/meson/prescription
-	display_name = "Meson Goggles, prescription"
-	path = /obj/item/clothing/glasses/meson/prescription
-
 /datum/gear/eyes/welding
 	display_name = "Welding Goggles"
 	path = /obj/item/clothing/glasses/welding
-
-/datum/gear/eyes/meson/ipatch
-	display_name = "HUDpatch, Meson"
-	path = /obj/item/clothing/glasses/eyepatch/hud/meson
-	cost = 2
-
-/datum/gear/eyes/material
-	display_name = "Material Goggles"
-	path = /obj/item/clothing/glasses/material
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/engineer, /datum/job/mining)
 
 /datum/gear/eyes/shades/
 	display_name = "sunglasses"
@@ -122,13 +103,3 @@
 	display_name = "blindfold"
 	path = /obj/item/clothing/glasses/blindfold
 	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/eyes/janitor
-	display_name = "JaniHUD"
-	path = /obj/item/clothing/glasses/hud/janitor
-	cost = 2
-	allowed_roles = list(/datum/job/janitor)
-
-/datum/gear/eyes/janitor/prescription
-	display_name = "JaniHUD, prescription"
-	path = /obj/item/clothing/glasses/hud/janitor/prescription
