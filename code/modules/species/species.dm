@@ -782,7 +782,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				var/material/mat = SSmaterials.get_material_datum(exhale_type)
 				dat += "</br><b>They exhale [mat.display_name].</b>"
 			if(LAZYLEN(poison_types))
-				dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
+				var/list/poison_names = list()
+				for(var/g in poison_types)
+					var/material/mat = SSmaterials.get_material_datum(exhale_type)
+					poison_names |= mat.display_name
+				dat += "</br><b>[capitalize(english_list(poison_names))] [LAZYLEN(poison_names) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"
 		dat += "</td>"
 	dat += "</tr>"
