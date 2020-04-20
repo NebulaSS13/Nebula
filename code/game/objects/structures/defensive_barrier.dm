@@ -15,7 +15,7 @@
 
 /obj/structure/defensive_barrier/Initialize()
 	. = ..()
-	queue_icon_update()
+	update_icon()
 	GLOB.dir_set_event.register(src, src, .proc/update_layers)
 
 /obj/structure/defensive_barrier/show_examined_damage(mob/user, perc)
@@ -58,8 +58,8 @@
 		icon_state = "barrier_deployed"
 	update_layers()
 
-/obj/structure/defensive_barrier/CanPass(atom/movable/mover, turf/target, height, air_group)
-	if(!density || air_group)
+/obj/structure/defensive_barrier/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
+	if(!density || air_group || (height == 0))
 		return TRUE
 
 	if(istype(mover, /obj/item/projectile))
