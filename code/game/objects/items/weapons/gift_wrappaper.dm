@@ -58,7 +58,7 @@
 		/obj/item/storage/belt/champion,
 		/obj/item/pickaxe/silver,
 		/obj/item/pen/invisible,
-		/obj/item/lipstick/random,
+		/obj/random/lipstick,
 		/obj/item/grenade/smokebomb,
 		/obj/item/corncob,
 		/obj/item/contraband/poster,

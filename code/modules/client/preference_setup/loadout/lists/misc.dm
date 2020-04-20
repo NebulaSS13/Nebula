@@ -118,6 +118,7 @@
 
 /datum/gear/lipstick
 	display_name = "lipstick selection"
+	sort_category = "Cosmetics"
 	path = /obj/item/lipstick
 	flags = GEAR_HAS_TYPE_SELECTION
 

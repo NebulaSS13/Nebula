@@ -1,41 +1,41 @@
-/obj/item/lipstick
+/obj/item/lipstick //this is the base type and its red
 	gender = PLURAL
-	name = "red lipstick"
-	desc = "A generic brand of lipstick."
+	name = "ruby lipstick"
+	desc = "An unbranded tube of lipstick."
 	icon = 'icons/obj/items/lipstick.dmi'
-	icon_state = "lipstick"
+	icon_state = "lipstick_0"
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	var/colour = "red"
-	var/open = 0
+	color = "#e00606"
+	var/color_desc = "ruby"
+	var/open = FALSE
 
-/obj/item/lipstick/purple
-	name = "purple lipstick"
-	colour = "purple"
-
-/obj/item/lipstick/jade
-	name = "jade lipstick"
-	colour = "jade"
-
-/obj/item/lipstick/black
-	name = "black lipstick"
-	colour = "black"
-
-/obj/item/lipstick/random
-	name = "lipstick"
-
-/obj/item/lipstick/random/Initialize()
+/obj/item/lipstick/Initialize()
 	. = ..()
-	colour = pick("red","purple","jade","black")
-	name = "[colour] lipstick"
+	if(color_desc)
+		desc += " This one is in [color_desc]."
+	update_icon()
+
+//'lipstick' and 'key' are both coloured by var color
+/obj/item/lipstick/on_update_icon()
+	if(open)
+		icon_state = "the_stick"
+	else
+		icon_state = ""
+	var/new_overlays
+	LAZYADD(new_overlays, overlay_image(icon, "lipstick_[open]", flags=RESET_COLOR))
+	LAZYADD(new_overlays, overlay_image(icon, "key"))
+	if(blood_overlay)
+		LAZYADD(new_overlays, blood_overlay)
+	overlays = new_overlays
 
 /obj/item/lipstick/attack_self(mob/user)
-	to_chat(user, "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>")
 	open = !open
 	if(open)
-		icon_state = "[initial(icon_state)]_[colour]"
+		to_chat(user, SPAN_NOTICE("You remove the cap and twist \the [src] open."))
 	else
-		icon_state = initial(icon_state)
+		to_chat(user, SPAN_NOTICE("You twist \the [src] closed and replace the cap."))
+	update_icon()
 
 /obj/item/lipstick/attack(atom/A, mob/user, target_zone)
 	if(!open)	return
@@ -56,7 +56,7 @@
 			if(H == user)
 				user.visible_message("<span class='notice'>[user] does their lips with \the [src].</span>", \
 									 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
-				H.lip_style = colour
+				H.lip_style = color
 				H.update_body()
 			else
 				user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
@@ -64,45 +64,49 @@
 				if(do_after(user, 20, H) && do_after(H, 20, needhand = 0, progress = 0, incapacitation_flags = INCAPACITATION_NONE))	//user needs to keep their active hand, H does not.
 					user.visible_message("<span class='notice'>[user] does [H]'s lips with \the [src].</span>", \
 										 "<span class='notice'>You apply \the [src].</span>")
-					H.lip_style = colour
+					H.lip_style = color
 					H.update_body()
 	else if(istype(A, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, src)
 
-//you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
+//types
+/obj/item/lipstick/yellow
+	name = "topaz lipstick"
+	color = "#dfdb0a"
+	color_desc = "topaz"
 
+/obj/item/lipstick/orange
+	name = "agate lipstick"
+	color = "#db7d11"
+	color_desc = "agate"
 
-/obj/item/haircomb //sparklysheep's comb
-	name = "plastic comb"
-	desc = "A pristine comb made from flexible plastic."
-	w_class = ITEM_SIZE_TINY
-	slot_flags = SLOT_EARS
-	icon = 'icons/obj/items/comb.dmi'
-	icon_state = "comb"
-	item_state = "comb"
+/obj/item/lipstick/green
+	name = "emerald lipstick"
+	color = "#218c17"
+	color_desc = "emerald"
 
-/obj/item/haircomb/random/Initialize()
-	. = ..()
-	color = get_random_colour(lower = 150)
+/obj/item/lipstick/turquoise 
+	name = "turquoise lipstick"
+	color = "#0098f0"
+	color_desc = "turquoise"
 
-/obj/item/haircomb/attack_self(var/mob/living/carbon/human/user)
-	if(!user.incapacitated())
-		user.visible_message("<span class='notice'>\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")
+/obj/item/lipstick/blue
+	name = "sapphire lipstick"
+	color = "#0024f0"
+	color_desc = "sapphire"
 
-/obj/item/haircomb/brush
-	name = "hairbrush"
-	desc = "A surprisingly decent hairbrush with a false wood handle and semi-soft bristles."
-	icon = 'icons/obj/items/hairbrush.dmi'
-	w_class = ITEM_SIZE_SMALL
-	slot_flags = null
-	icon_state = "brush"
-	item_state = "brush"
+/obj/item/lipstick/violet
+	name = "amethyst lipstick"
+	color = "#d55cd0"
+	color_desc = "amethyst"
 
-/obj/item/haircomb/brush/attack_self(mob/living/carbon/human/user)
-	if(!user.incapacitated())
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[user.h_style]
-		if(hair_style.flags & VERY_SHORT)
-			user.visible_message("<span class='notice'>\The [user] just sort of runs \the [src] over their scalp.</span>")
-		else
-			user.visible_message("<span class='notice'>\The [user] meticulously brushes their hair with \the [src].</span>")
+/obj/item/lipstick/white
+	name = "moonstone lipstick"
+	color = "#d8d5d5"
+	color_desc = "moonstone"
+
+/obj/item/lipstick/black
+	name = "onyx lipstick"
+	color = "#2b2a2a"
+	color_desc = "onyx"
