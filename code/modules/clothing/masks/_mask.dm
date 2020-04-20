@@ -39,7 +39,7 @@
 	set name = "Adjust mask"
 	set src in usr
 
-	if(!user.incapacitated())
+	if(!user.incapacitated(INCAPACITATION_DISABLED))
 		if(!pull_mask)
 			to_chat(usr, "<span class ='notice'>You cannot pull down your [src.name].</span>")
 			return
