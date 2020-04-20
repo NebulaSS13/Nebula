@@ -3,6 +3,12 @@
 	desc = "This device is used to trigger functions which require more than one ID card to authenticate."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "auth_off"
+
+	anchored = 1.0
+	idle_power_usage = 2
+	active_power_usage = 6
+	power_channel = ENVIRON
+
 	var/active = 0 //This gets set to 1 on all devices except the one where the initial request was made.
 	var/event = ""
 	var/screen = 1
@@ -15,10 +21,6 @@
 	var/mob/event_confirmed_by
 	//1 = select event
 	//2 = authenticate
-	anchored = 1.0
-	idle_power_usage = 2
-	active_power_usage = 6
-	power_channel = ENVIRON
 
 /obj/machinery/keycard_auth/attack_ai(mob/user)
 	to_chat(user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
@@ -29,6 +31,7 @@
 		to_chat(user, "This device is not powered.")
 		return
 	if(istype(W,/obj/item/card/id))
+		visible_message(SPAN_NOTICE("[user] swipes \the [W] through \the [src]."))
 		var/obj/item/card/id/ID = W
 		if(access_keycard_auth in ID.access)
 			if(active)
@@ -125,10 +128,10 @@
 		if(KA == src)
 			continue
 		KA.reset()
-		KA.receive_request()
+		KA.receive_request(src, initial_card)
 
 	if(confirm_delay)
-		addtimer(CALLBACK(src, .broadcast_check), confirm_delay)
+		addtimer(CALLBACK(src, .proc/broadcast_check), confirm_delay)
 
 /obj/machinery/keycard_auth/proc/broadcast_check()
 	if(confirmed)
@@ -137,10 +140,11 @@
 		log_and_message_admins("triggered and [key_name(event_confirmed_by)] confirmed event [event]", event_triggered_by || usr)
 	reset()
 
-/obj/machinery/keycard_auth/proc/receive_request(var/obj/machinery/keycard_auth/source)
+/obj/machinery/keycard_auth/proc/receive_request(var/obj/machinery/keycard_auth/source, obj/item/card/id/ID)
 	if(stat & (BROKEN|NOPOWER))
 		return
 	event_source = source
+	initial_card = ID
 	busy = 1
 	active = 1
 	icon_state = "auth_on"
@@ -148,6 +152,7 @@
 	sleep(confirm_delay)
 
 	event_source = null
+	initial_card = null
 	icon_state = "auth_off"
 	active = 0
 	busy = 0
