@@ -10,6 +10,7 @@
 	var/confirm_delay = 3 SECONDS
 	var/busy = 0 //Busy when waiting for authentication or an event request has been sent from this device.
 	var/obj/machinery/keycard_auth/event_source
+	var/obj/item/card/id/initial_card
 	var/mob/event_triggered_by
 	var/mob/event_confirmed_by
 	//1 = select event
@@ -30,15 +31,15 @@
 	if(istype(W,/obj/item/card/id))
 		var/obj/item/card/id/ID = W
 		if(access_keycard_auth in ID.access)
-			if(active == 1)
-				//This is not the device that made the initial request. It is the device confirming the request.
-				if(event_source && event_source.event_triggered_by != usr)
+			if(active)
+				if(event_source && initial_card != ID)
 					event_source.confirmed = 1
-					event_source.event_confirmed_by = usr
+					event_source.event_confirmed_by = user
 				else
 					to_chat(user, "<span class='warning'>Unable to confirm, DNA matches that of origin.</span>")
 			else if(screen == 2)
-				event_triggered_by = usr
+				event_triggered_by = user
+				initial_card = ID
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
 
 //icon_state gets set everwhere besides here, that needs to be fixed sometime
@@ -116,16 +117,20 @@
 	icon_state = "auth_off"
 	event_triggered_by = null
 	event_confirmed_by = null
+	initial_card = null
 
 /obj/machinery/keycard_auth/proc/broadcast_request()
 	icon_state = "auth_on"
 	for(var/obj/machinery/keycard_auth/KA in world)
-		if(KA == src) continue
+		if(KA == src)
+			continue
 		KA.reset()
-		spawn()
-			KA.receive_request(src)
+		KA.receive_request()
 
-	sleep(confirm_delay)
+	if(confirm_delay)
+		addtimer(CALLBACK(src, .broadcast_check), confirm_delay)
+
+/obj/machinery/keycard_auth/proc/broadcast_check()
 	if(confirmed)
 		confirmed = 0
 		trigger_event(event)

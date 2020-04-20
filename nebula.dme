@@ -2775,7 +2775,7 @@
 #include "code\modules\research\design_database.dm"
 #include "code\modules\research\design_database_analyzer.dm"
 #include "code\modules\research\research_fields.dm"
-#include "code\modules\security levels\keycard authentication.dm"
+#include "code\modules\security levels\keycard_authentication.dm"
 #include "code\modules\shield_generators\floor_diffuser.dm"
 #include "code\modules\shield_generators\handheld_diffuser.dm"
 #include "code\modules\shield_generators\modes.dm"
