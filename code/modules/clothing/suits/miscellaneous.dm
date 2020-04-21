@@ -446,3 +446,48 @@
 
 /obj/item/clothing/suit/hospital/pink
 	color = "#ffb7db"
+
+/obj/item/clothing/suit/letterman
+	name = "letterman jacket"
+	desc = "A letter jacket often given to members of a varsity team."
+	color = "#ee1511"
+	var/sleeves_color = "#ffffff"
+	icon_state = "letterman"
+	item_state = "letterman"
+
+/obj/item/clothing/suit/letterman/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/clothing/suit/letterman/on_update_icon()
+	cut_overlays()
+	var/image/I = image(icon, "letterman_overlay")
+	I.appearance_flags |= RESET_COLOR
+	I.color = sleeves_color
+	add_overlay(I, TRUE)
+
+/obj/item/clothing/suit/letterman/get_mob_overlay(mob/user_mob, slot)
+	. = ..()
+	if(slot == slot_wear_suit_str)
+		var/image/I = .
+		I.overlays += overlay_image(I.icon, "letterman_overlay", sleeves_color, RESET_COLOR)
+
+/obj/item/clothing/suit/letterman/red
+	name = "red letterman jacket"
+	desc = "A red letter jacket often given to members of a varsity team."
+
+/obj/item/clothing/suit/letterman/blue
+	name = "blue letterman jacket"
+	desc = "A blue letter jacket often given to members of a varsity team."
+	color = "#3a64ba"
+
+/obj/item/clothing/suit/letterman/brown
+	name = "brown letterman jacket"
+	desc = "A brown letter jacket often given to members of a varsity team."
+	color = "#553c2f"
+	sleeves_color = "#dfd5cd"
+
+/obj/item/clothing/suit/letterman/green
+	name = "green letterman jacket"
+	desc = "A green letter jacket often given to members of a varsity team."
+	color = "#82e011"
