@@ -132,7 +132,7 @@
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(trenchcoats)
 
 /datum/gear/suit/letterman_custom
-    display_name = "letterman jacket, colour select"
-    path = /obj/item/clothing/suit/letterman
-    flags = GEAR_HAS_COLOR_SELECTION
-    cost = 1
+	display_name = "letterman jacket, colour select"
+	path = /obj/item/clothing/suit/letterman
+	flags = GEAR_HAS_COLOR_SELECTION
+	cost = 1
