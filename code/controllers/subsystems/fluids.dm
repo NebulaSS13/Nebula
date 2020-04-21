@@ -18,8 +18,6 @@ var/datum/controller/subsystem/fluids/SSfluids
 
 	var/tmp/active_fluids_copied_yet = FALSE
 	var/af_index = 1
-	var/downward_fluid_overlay_position = 1 // Bit of an odd hack, set in fluid spread code to determine which overlay
-	                                        // in the list is 'down'. More maintainer-friendly than hardcoding it.
 	var/list/fluid_images = list()
 
 	var/list/gurgles = list(
@@ -41,14 +39,34 @@ var/datum/controller/subsystem/fluids/SSfluids
 		active_fluids_copied_yet = FALSE
 		af_index = 1
 
-	var/flooded_a_neighbor // Not used, required by FLOOD_TURF_NEIGHBORS.
 	var/list/curr_sources = processing_sources
+	var/list/checked = list()
 	while (curr_sources.len)
-		var/turf/T = curr_sources[curr_sources.len]
 		curr_sources.len--
-
-		FLOOD_TURF_NEIGHBORS(T, FALSE)
-
+		var/flooded_a_neighbor
+		var/turf/T = curr_sources[curr_sources.len]
+		UPDATE_FLUID_BLOCKED_DIRS(T)
+		for(var/spread_dir in GLOB.cardinal)
+			if(T.fluid_blocked_dirs & spread_dir) 
+				continue
+			var/turf/next = get_step(T, spread_dir)
+			if(!istype(next) || next.flooded) 
+				continue
+			UPDATE_FLUID_BLOCKED_DIRS(next)
+			if((next.fluid_blocked_dirs & GLOB.reverse_dir[spread_dir]) || !next.CanFluidPass(spread_dir) || checked[next])
+				continue
+			checked[next] = TRUE
+			flooded_a_neighbor = TRUE
+			var/obj/effect/fluid/F = locate() in next
+			if(!F)
+				F = new /obj/effect/fluid(next)
+				var/datum/gas_mixture/GM = T.return_air()
+				if(GM) F.temperature = GM.temperature
+			if(F)
+				if(F.fluid_amount < FLUID_MAX_DEPTH)
+					SET_FLUID_DEPTH(F, FLUID_MAX_DEPTH)
+		if(!flooded_a_neighbor)
+			REMOVE_ACTIVE_FLUID_SOURCE(T)
 		if (MC_TICK_CHECK)
 			return
 
@@ -57,137 +75,131 @@ var/datum/controller/subsystem/fluids/SSfluids
 		processing_fluids = active_fluids.Copy()
 
 	// We need to iterate through this list a few times, so we're using indexes instead of a while-truncate loop.
+	checked.Cut()
 	while (af_index <= processing_fluids.len)
-		var/obj/effect/fluid/F = processing_fluids[af_index++]
-		if (QDELETED(F))
-			processing_fluids -= F
-		else
-			// Spread out and collect neighbors for equalizing later. Hardcoded here for performance reasons.
-			if(!F.loc || F.loc != F.start_loc || !F.loc.CanFluidPass())
-				qdel(F)
-				continue
 
+		var/obj/effect/fluid/F = processing_fluids[af_index++]
+		if(QDELETED(F))
+			processing_fluids -= F
+			continue
+
+		var/turf/T = F.loc
+		checked[T] = TRUE
+		if(!T.CanFluidPass() || F.fluid_amount <= FLUID_EVAPORATION_POINT)
+			qdel(F)
+			continue
+
+		if(istype(T, /turf/space))
+			LOSE_FLUID(F, max(FLUID_EVAPORATION_POINT-1, round(F.fluid_amount * 0.5)))
 			if(F.fluid_amount <= FLUID_EVAPORATION_POINT)
-				continue
+				qdel(F)
+			continue
 
-			F.equalizing_fluids = list(F)
-
-			// Flood downwards if there's open space below us.
-			if(HasBelow(F.z))
-				var/turf/current = get_turf(F)
-				if(istype(current, /turf/simulated/open))
-					var/turf/T = GetBelow(F)
-					var/obj/effect/fluid/other = locate() in T
-					if(!istype(other) || other.fluid_amount < FLUID_MAX_DEPTH)
-						if(!other)
-							other = new /obj/effect/fluid(T)
-						F.equalizing_fluids += other
-						downward_fluid_overlay_position = F.equalizing_fluids.len
-			UPDATE_FLUID_BLOCKED_DIRS(F.start_loc)
+		REMOVE_ACTIVE_FLUID(F) // This will be refreshed if our level changes at all in this iteration of the subsystem.
+		UPDATE_FLUID_BLOCKED_DIRS(T)
+		if(!(T.fluid_blocked_dirs & DOWN) && istype(T, /turf/simulated/open) && has_gravity(F))
+			var/turf/below = GetBelow(T)
+			if(below)
+				UPDATE_FLUID_BLOCKED_DIRS(below)
+				if(!(below.fluid_blocked_dirs & UP))
+					var/obj/effect/fluid/other = locate() in below
+					if(!other)
+						other = new(below)
+					if(other && other.fluid_amount < FLUID_MAX_DEPTH)
+						var/transfer = min(Floor(F.fluid_amount*0.5), FLUID_MAX_DEPTH - other.fluid_amount)
+						LOSE_FLUID(F, transfer)
+						SET_FLUID_DEPTH(other, other.fluid_amount + transfer)
+						continue
+		
+		if(F.fluid_amount > FLUID_EVAPORATION_POINT)
 			for(var/spread_dir in GLOB.cardinal)
-				if(F.start_loc.fluid_blocked_dirs & spread_dir)
+				if(T.fluid_blocked_dirs & spread_dir)
 					continue
-				var/turf/T = get_step(F.start_loc, spread_dir)
+				var/turf/neighbor_turf = get_step(T, spread_dir)
+				if(!istype(neighbor_turf) || neighbor_turf.flooded)
+					continue
 				var/coming_from = GLOB.reverse_dir[spread_dir]
-				if(!istype(T) || T.flooded)
+				UPDATE_FLUID_BLOCKED_DIRS(neighbor_turf)
+				if((neighbor_turf.fluid_blocked_dirs & coming_from) || checked[neighbor_turf] || !neighbor_turf.CanFluidPass(coming_from))
 					continue
-				UPDATE_FLUID_BLOCKED_DIRS(T)
-				if((T.fluid_blocked_dirs & coming_from) || !T.CanFluidPass(coming_from))
-					continue
-				var/obj/effect/fluid/other = locate() in T.contents
-				if(other && (QDELETED(other) || other.fluid_amount <= FLUID_DELETING))
-					continue
+				checked[neighbor_turf] = TRUE
+				var/obj/effect/fluid/other = locate() in neighbor_turf.contents
 				if(!other)
-					other = new /obj/effect/fluid(T)
-					other.temperature = F.temperature
-				F.equalizing_fluids += other
+					LOSE_FLUID(F, 1)
+					if(F.fluid_amount >= 1)
+						other = new /obj/effect/fluid(neighbor_turf)
+						SET_FLUID_DEPTH(other, 1)
+					else
+						qdel(F)
+						break
+		else
+			qdel(F)
 
 		if (MC_TICK_CHECK)
 			return
 
 	af_index = 1
-
 	while (af_index <= processing_fluids.len)
+
 		var/obj/effect/fluid/F = processing_fluids[af_index++]
 		if (QDELETED(F))
 			processing_fluids -= F
-		else
-			// Equalize across our neighbors. Hardcoded here for performance reasons.
-			if(!F.loc || F.loc != F.start_loc || !F.equalizing_fluids || !F.equalizing_fluids.len || F.fluid_amount <= FLUID_EVAPORATION_POINT)
-				continue
+			continue
 
-			F.equalize_avg_depth = 0
-			F.equalize_avg_temp = 0
-			F.flow_amount = 0
+		// Equalize across our neighbors. Hardcoded here for performance reasons.
+		if(!length(F.neighbors) || F.fluid_amount <= FLUID_EVAPORATION_POINT)
+			continue
 
-			// Flow downward first, since gravity. TODO: add check for gravity.
-			if(F.equalizing_fluids.len >= downward_fluid_overlay_position)
-				var/obj/effect/fluid/downward_fluid = F.equalizing_fluids[downward_fluid_overlay_position]
-				if(downward_fluid.z == F.z-1) // It's below us.
-					F.equalizing_fluids -= downward_fluid
-					var/transfer_amount = min(F.fluid_amount, (FLUID_MAX_DEPTH-downward_fluid.fluid_amount))
-					if(transfer_amount > 0)
-						SET_FLUID_DEPTH(downward_fluid, downward_fluid.fluid_amount + transfer_amount)
-						LOSE_FLUID(F, transfer_amount)
-						if(F.fluid_amount <= FLUID_EVAPORATION_POINT)
-							continue
+		var/sufficient_delta = FALSE
+		for(var/thing in F.neighbors)
+			var/obj/effect/fluid/other = thing
+			if(abs(F.fluid_amount - other.fluid_amount) >= FLUID_EVAPORATION_POINT)
+				sufficient_delta = TRUE
+				break
 
-			var/setting_dir = 0
-
-			for(var/obj/effect/fluid/other in F.equalizing_fluids)
-				if(!istype(other) || QDELETED(other) || other.fluid_amount <= FLUID_DELETING)
-					F.equalizing_fluids -= other
-					continue
-				F.equalize_avg_depth += other.fluid_amount
-				F.equalize_avg_temp += other.temperature
-
+		F.last_flow_strength = 0
+		var/setting_dir = 0
+		if(sufficient_delta)
+			var/equalize_avg_depth = F.fluid_amount
+			var/equalize_avg_temp = F.temperature
+			for(var/thing in F.neighbors)
+				var/obj/effect/fluid/other = thing
+				equalize_avg_depth += other.fluid_amount
+				equalize_avg_temp += other.temperature
 				var/flow_amount = F.fluid_amount - other.fluid_amount
-				if(F.flow_amount < flow_amount && flow_amount >= FLUID_PUSH_THRESHOLD)
-					F.flow_amount = flow_amount
+				if(F.last_flow_strength < flow_amount && flow_amount >= FLUID_PUSH_THRESHOLD)
+					F.last_flow_strength = flow_amount
 					setting_dir = get_dir(F, other)
-
-			F.set_dir(setting_dir)
-
-			if(islist(F.equalizing_fluids) && F.equalizing_fluids.len > 1)
-				F.equalize_avg_depth = Floor(F.equalize_avg_depth/F.equalizing_fluids.len)
-				F.equalize_avg_temp = Floor(F.equalize_avg_temp/F.equalizing_fluids.len)
-				for(var/thing in F.equalizing_fluids)
-					var/obj/effect/fluid/other = thing
-					if(!QDELETED(other))
-						SET_FLUID_DEPTH(other, F.equalize_avg_depth)
-						other.temperature = F.equalize_avg_temp
-			F.equalizing_fluids.Cut()
-			if(istype(F.loc, /turf/space))
-				LOSE_FLUID(F, max((FLUID_EVAPORATION_POINT-1),F.fluid_amount * 0.5))
+			equalize_avg_depth = Floor(equalize_avg_depth/(length(F.neighbors)+1))
+			equalize_avg_temp = Floor(equalize_avg_temp/(length(F.neighbors)+1))
+			SET_FLUID_DEPTH(F, equalize_avg_depth)
+			for(var/thing in F.neighbors)
+				var/obj/effect/fluid/other = thing
+				SET_FLUID_DEPTH(other, equalize_avg_depth)
+		F.set_dir(setting_dir)
 
 		if (MC_TICK_CHECK)
 			return
 
 	af_index = 1
-
 	while (af_index <= processing_fluids.len)
 		var/obj/effect/fluid/F = processing_fluids[af_index++]
-		if (QDELETED(F))
+		if(QDELETED(F))
 			processing_fluids -= F
+			continue
+
+		if(F.last_flow_strength >= 10)
+			if(prob(1))
+				playsound(F.loc, 'sound/effects/slosh.ogg', 25, 1)
+			for(var/atom/movable/AM in F.loc.contents)
+				if(!pushing_atoms[AM] && AM.is_fluid_pushable(F.last_flow_strength))
+					pushing_atoms[AM] = TRUE
+					step(AM, F.dir)
+
+		if (F.fluid_amount <= FLUID_EVAPORATION_POINT)
+			qdel(F)
 		else
-			if (!F.loc || F.loc != F.start_loc)
-				qdel(F)
-
-			if(F.flow_amount >= 10)
-				if(prob(1))
-					playsound(F.loc, 'sound/effects/slosh.ogg', 25, 1)
-				for(var/atom/movable/AM in F.loc.contents)
-					if(isnull(pushing_atoms[AM]) && AM.is_fluid_pushable(F.flow_amount))
-						pushing_atoms[AM] = TRUE
-						step(AM, F.dir)
-
-			if (F.fluid_amount <= FLUID_EVAPORATION_POINT & prob(10))
-				LOSE_FLUID(F, rand(1, 3))
-
-			if (F.fluid_amount <= FLUID_DELETING)
-				qdel(F)
-			else
-				F.update_icon()
+			F.update_icon()
 
 		if (MC_TICK_CHECK)
 			return

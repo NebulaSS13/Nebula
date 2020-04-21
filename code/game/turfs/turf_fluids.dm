@@ -78,10 +78,9 @@
 
 	// Wake up ourself!
 	if(flooded)
-		var/flooded_a_neighbor = 0
-		FLOOD_TURF_NEIGHBORS(src, TRUE)
-		if(flooded_a_neighbor)
-			ADD_ACTIVE_FLUID_SOURCE(src)
+		ADD_ACTIVE_FLUID_SOURCE(src)
+		for(var/obj/effect/fluid/F in src)
+			qdel(F)
 	else
 		REMOVE_ACTIVE_FLUID_SOURCE(src)
 		for(var/obj/effect/fluid/F in src)
