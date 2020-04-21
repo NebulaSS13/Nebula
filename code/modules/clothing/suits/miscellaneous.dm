@@ -447,11 +447,20 @@
 /obj/item/clothing/suit/hospital/pink
 	color = "#ffb7db"
 
+/obj/item/clothing/suit/letterman
+	name = "letterman jacket"
+	desc = "A letter jacket often given to members of a varsity team."
+	color = "#ee1511"
+	var/sleeves_color = "#ffffff"
+	icon_state = "letterman"
+	item_state = "letterman"
+
 /obj/item/clothing/suit/letterman/Initialize()
 	. = ..()
 	update_icon()
 
 /obj/item/clothing/suit/letterman/on_update_icon()
+	cut_overlays()
 	var/image/I = image(icon, "letterman_overlay")
 	I.appearance_flags |= RESET_COLOR
 	I.color = sleeves_color
@@ -462,14 +471,6 @@
 	if(slot == slot_wear_suit_str)
 		var/image/I = .
 		I.overlays += overlay_image(I.icon, "letterman_overlay", sleeves_color, RESET_COLOR)
-
-/obj/item/clothing/suit/letterman
-	name = "letterman jacket"
-	desc = "A letter jacket often given to members of a varsity team."
-	color = "#ee1511"
-	var/sleeves_color = "#ffffff"
-	icon_state = "letterman"
-	item_state = "letterman"
 
 /obj/item/clothing/suit/letterman/red
 	name = "red letterman jacket"
