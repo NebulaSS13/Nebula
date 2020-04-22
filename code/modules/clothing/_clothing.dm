@@ -160,25 +160,27 @@
 	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
 		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
 
-/obj/item/clothing/CanUseTopic(var/user)
-	if(user in view(get_turf(src)))
-		return STATUS_INTERACTIVE
-
-/obj/item/clothing/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)
-	if(href_list["list_ungabunga"])
-		if(length(accessories))
-			var/list/ties = list()
-			for(var/accessory in accessories)
-				ties += "\icon[accessory] \a [accessory]"
-			to_chat(user, "Attached to \the [src] are [english_list(ties)].")
-		return TOPIC_HANDLED
-	if(href_list["list_armor_damage"])
-		var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
-		var/list/damages = armor_datum.get_visible_damage()
-		to_chat(user, "\The [src] \icon[src] has some damage:")
-		for(var/key in damages)
-			to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
-		return TOPIC_HANDLED
+/obj/item/clothing/Topic(href, href_list, datum/topic_state/state)
+	var/mob/user = usr
+	if(istype(user))
+		var/turf/T = get_turf(src)
+		var/can_see = T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE
+		if(href_list["list_ungabunga"])
+			if(length(accessories) && can_see)
+				var/list/ties = list()
+				for(var/accessory in accessories)
+					ties += "\icon[accessory] \a [accessory]"
+				to_chat(user, "Attached to \the [src] are [english_list(ties)].")
+			return TOPIC_HANDLED
+		if(href_list["list_armor_damage"] && can_see)
+			var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor)
+			if(istype(armor_datum))
+				var/list/damages = armor_datum.get_visible_damage()
+				to_chat(user, "\The [src] \icon[src] has some damage:")
+				for(var/key in damages)
+					to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
+			return TOPIC_HANDLED
+	. = ..()
 
 /obj/item/clothing/get_pressure_weakness(pressure,zone)
 	. = ..()
