@@ -23,15 +23,14 @@
 
 /obj/item/clothing/accessory/badge/proc/set_desc(var/mob/living/carbon/human/H)
 
-/obj/item/clothing/accessory/badge/CanUseTopic(var/user)
-	if(user in view(get_turf(src)))
-		return STATUS_INTERACTIVE
-
-/obj/item/clothing/accessory/badge/OnTopic(var/mob/user, var/list/href_list)
-	if(href_list["look_at_me"])
-		if(istype(user))
+/obj/item/clothing/accessory/badge/Topic(href, href_list, datum/topic_state/state)
+	var/mob/user = usr
+	if(href_list["look_at_me"] && istype(user))
+		var/turf/T = get_turf(src)
+		if(T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE)
 			user.examinate(src)
 			return TOPIC_HANDLED
+	. = ..()
 
 /obj/item/clothing/accessory/badge/get_examine_line()
 	. = ..()

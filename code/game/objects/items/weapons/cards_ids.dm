@@ -206,15 +206,14 @@ var/const/NO_EMAG_ACT = -50
 	for(var/detail in extra_details)
 		overlays += overlay_image(icon, detail, flags=RESET_COLOR)
 
-/obj/item/card/id/CanUseTopic(var/user)
-	if(user in view(get_turf(src)))
-		return STATUS_INTERACTIVE
-
-/obj/item/card/id/OnTopic(var/mob/user, var/list/href_list)
-	if(href_list["look_at_id"])
-		if(istype(user))
+/obj/item/card/id/Topic(href, href_list, datum/topic_state/state)
+	var/mob/user = usr
+	if(href_list["look_at_id"] && istype(user))
+		var/turf/T = get_turf(src)
+		if(T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE)
 			user.examinate(src)
 			return TOPIC_HANDLED
+	. = ..()
 
 /obj/item/card/id/examine(mob/user, distance)
 	. = ..()
