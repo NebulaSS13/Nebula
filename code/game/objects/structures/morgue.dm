@@ -346,17 +346,17 @@
 								else
 									shake_animation()
 
+			if(round_is_spooky())
+				if(prob(50))
+					playsound(src, 'sound/effects/ghost.ogg', 10, 5)
+				else
+					playsound(src, 'sound/effects/ghost2.ogg', 10, 5)
 
-			if(M.stat >= DEAD)
-				if(round_is_spooky())
-					if(prob(50))
-						playsound(src, 'sound/effects/ghost.ogg', 10, 5)
-					else
-						playsound(src, 'sound/effects/ghost2.ogg', 10, 5)
-
-				admin_attack_log(M, A, "Cremated their victim.", "Was cremated.", "cremated alive")
+			if (!M.stat)
 				M.audible_message("[M]'s screams cease, as does any movement within the [src]. All that remains is a dull, empty silence.")
-				M.dust()
+
+			admin_attack_log(M, A, "Cremated their victim.", "Was cremated.", "cremated")
+			M.dust()
 
 		for(var/obj/O in contents) //obj instead of obj/item so that bodybags and ashes get destroyed. We dont want tons and tons of ash piling up
 			qdel(O)
