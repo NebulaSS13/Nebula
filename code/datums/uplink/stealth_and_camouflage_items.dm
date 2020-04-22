@@ -66,3 +66,9 @@
 	great for stashing your stolen goods. Comes with a crowbar and a floor tile."
 	item_cost = 20
 	path = /obj/item/storage/backpack/satchel/flat
+
+/datum/uplink_item/item/stealth_items/warez
+	name = "Warez Disk"
+	desc = "This drive contains various malicious programs for doing malicious things to computers and networks."
+	item_cost = 5
+	path = /obj/item/stock_parts/computer/hard_drive/portable/advanced/warez

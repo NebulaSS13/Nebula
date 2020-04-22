@@ -6,7 +6,6 @@ GLOBAL_LIST_INIT(security_statuses, list("None", "Released", "Parolled", "Incarc
 GLOBAL_VAR_INIT(default_security_status, "None")
 GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
-// Kept as a computer file for possible future expansion into servers.
 /datum/computer_file/report/crew_record
 	filetype = "CDB"
 	size = 2
@@ -155,6 +154,9 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/datum/computer_file/report/crew_record/CR = new record_type()
 	GLOB.all_crew_records.Add(CR)
 	CR.load_from_mob(H)
+	var/datum/computer_network/network = get_local_network_at(get_turf(H))
+	if(network)
+		network.store_file(CR, MF_ROLE_CREW_RECORDS)
 	return CR
 
 // Gets crew records filtered by set of positions
@@ -184,6 +186,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	dat += "</tt>"
 	return dat
 
+//Should only be used for OOC stuff, for player-facing stuff you must go through the network.
 /proc/get_crewmember_record(var/name)
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		if(CR.get_name() == name)

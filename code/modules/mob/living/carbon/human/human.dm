@@ -445,7 +445,10 @@
 			else
 				perpname = name
 
-			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
+			var/datum/computer_network/network = user.getHUDnetwork(HUD_SECURITY)
+			if(!network)
+				return TOPIC_HANDLED
+			var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
 			if(R)
 				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
@@ -475,7 +478,10 @@
 				perpname = id.registered_name
 			else
 				perpname = src.name
-			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_network/network = user.getHUDnetwork(HUD_SECURITY)
+			if(!network)
+				return TOPIC_HANDLED
+			var/datum/computer_file/report/crew_record/E = network.get_crew_record_by_name(perpname)
 			if(E)
 				if(hasHUD(user, HUD_SECURITY))
 					to_chat(user, "<b>Name:</b> [E.get_name()]")
@@ -498,7 +504,10 @@
 			else
 				perpname = src.name
 
-			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_network/network = user.getHUDnetwork(HUD_MEDICAL)
+			if(!network)
+				return TOPIC_HANDLED
+			var/datum/computer_file/report/crew_record/E = network.get_crew_record_by_name(perpname)
 			if(E)
 				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
 				if(hasHUD(user, HUD_MEDICAL) && setmedical)
@@ -528,7 +537,10 @@
 			else
 				perpname = src.name
 
-			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_network/network = user.getHUDnetwork(HUD_MEDICAL)
+			if(!network)
+				return TOPIC_HANDLED
+			var/datum/computer_file/report/crew_record/E = network.get_crew_record_by_name(perpname)
 			if(E)
 				if(hasHUD(user, HUD_MEDICAL))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")

@@ -505,15 +505,8 @@
 				to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
 				return
 		// If the robot is having something inserted which will remain inside it, self-inserting must be handled before exiting to avoid logic errors. Use the handle_selfinsert proc.
-		if(istype(W, /obj/item/stock_parts) && user.unEquip(W))
-			if(!user.unEquip(W, src))
-				return
-			to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
-			W.forceMove(src)
-			stock_parts += W
-			handle_selfinsert(W, user)
-			recalculate_synth_capacities()
-			return 1
+		if(try_stock_parts_install(W, user))
+			return
 
 	if(isWelder(W) && user.a_intent != I_HURT)
 		if (src == user)
@@ -1117,23 +1110,10 @@
 	C.dismantled_from(src)
 	qdel(src)
 
-/mob/living/silicon/robot/verb/access_computer()
-	set category = "Silicon Commands"
-	set name = "Boot NTOS Device"
-
-	if(incapacitated())
-		to_chat(src, SPAN_WARNING("You are in no state to do that right now."))
+/mob/living/silicon/robot/try_stock_parts_install(obj/item/stock_parts/W, mob/user)
+	if(!opened)
 		return
-
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(!istype(os))
-		to_chat(src, SPAN_WARNING("You seem to be lacking an NTOS capable device!"))
-		return
-	
-	if(!os.on)
-		os.system_boot()
-	if(!os.on)
-		to_chat(src, SPAN_WARNING("ERROR: NTOS failed to boot."))
-		return
-
-	os.ui_interact(src)
+	. = ..()
+	if(.)
+		handle_selfinsert(W, user)
+		recalculate_synth_capacities()

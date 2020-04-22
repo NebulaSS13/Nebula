@@ -1,20 +1,19 @@
 /datum/computer_file/program/rcon_console
 	filename = "rconconsole"
 	filedesc = "RCON Remote Control"
-	nanomodule_path = /datum/nano_module/rcon
+	nanomodule_path = /datum/nano_module/program/rcon
 	program_icon_state = "generic"
 	program_key_state = "rd_key"
 	program_menu_icon = "power"
 	extended_desc = "This program allows remote control of power distribution systems. This program can not be run on tablet computers."
 	required_access = access_engine
-	requires_ntnet = 1
 	network_destination = "RCON remote control system"
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 19
 	category = PROG_ENG
 
-/datum/nano_module/rcon
+/datum/nano_module/program/rcon
 	name = "Power RCON"
 	var/list/known_SMESs = null
 	var/list/known_breakers = null
@@ -23,7 +22,7 @@
 	var/hide_SMES_details = 0
 	var/hide_breakers = 0
 
-/datum/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = GLOB.default_state)
 	FindDevices() // Update our devices list
 	var/list/data = host.initial_data()
 
@@ -67,7 +66,7 @@
 // Proc: Topic()
 // Parameters: 2 (href, href_list - allows us to process UI clicks)
 // Description: Allows us to process UI clicks, which are relayed in form of hrefs.
-/datum/nano_module/rcon/Topic(href, href_list)
+/datum/nano_module/program/rcon/Topic(href, href_list)
 	if(..())
 		return
 
@@ -111,7 +110,7 @@
 // Proc: GetSMESByTag()
 // Parameters: 1 (tag - RCON tag of SMES we want to look up)
 // Description: Looks up and returns SMES which has matching RCON tag
-/datum/nano_module/rcon/proc/GetSMESByTag(var/tag)
+/datum/nano_module/program/rcon/proc/GetSMESByTag(var/tag)
 	if(!tag)
 		return
 
@@ -122,13 +121,29 @@
 // Proc: FindDevices()
 // Parameters: None
 // Description: Refreshes local list of known devices.
-/datum/nano_module/rcon/proc/FindDevices()
+/datum/nano_module/program/rcon/proc/FindDevices()
 	known_SMESs = new /list()
 	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
-		if(ARE_Z_CONNECTED(get_host_z(), get_z(SMES)) && SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
+		if(can_connect_to(SMES))
 			known_SMESs.Add(SMES)
 
 	known_breakers = new /list()
 	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
-		if(ARE_Z_CONNECTED(get_host_z(), get_z(breaker)) && breaker.RCon_tag != "NO_TAG")
+		if(can_connect_to(breaker))
 			known_breakers.Add(breaker)
+
+/datum/nano_module/program/rcon/proc/can_connect_to(obj/machinery/M)
+	var/datum/computer_network/network = get_network()
+	if(!network)
+		return FALSE
+
+	if(!ARE_Z_CONNECTED(network.get_router_z(), get_z(M)))
+		return FALSE
+	
+	if(istype(M, /obj/machinery/power/smes))
+		var/obj/machinery/power/smes/buildable/SMES = M
+		return SMES.RCon_tag && SMES.RCon_tag != "NO_TAG" && SMES.RCon
+
+	if(istype(M, /obj/machinery/power/breakerbox))
+		var/obj/machinery/power/breakerbox/breaker = M
+		return breaker.RCon_tag != "NO_TAG"

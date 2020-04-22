@@ -1,5 +1,3 @@
-var/global/ntnrc_uid = 0
-
 /datum/ntnet_conversation/
 	var/id = null
 	var/title = "Untitled Conversation"
@@ -7,21 +5,20 @@ var/global/ntnrc_uid = 0
 	var/list/messages = list()
 	var/list/clients = list()
 	var/password
-	var/source_z
+	var/datum/computer_network/network
 
-/datum/ntnet_conversation/New(var/_z)
-	source_z = _z
-	id = ntnrc_uid
-	ntnrc_uid++
-	if(ntnet_global)
-		ntnet_global.chat_channels.Add(src)
+/datum/ntnet_conversation/New(datum/computer_network/daddynet)
+	id = sequential_id(type)
+	network = daddynet
+	network.chat_channels.Add(src)
 	..()
 
 /datum/ntnet_conversation/Destroy()
-	ntnet_global.chat_channels -= src
+	network.chat_channels -= src
 	for(var/datum/computer_file/program/chatclient/client in clients)
 		if(client.channel == src)
 			client.channel = null
+	network = null
 	operator = null
 	clients.Cut()
 	. = ..()

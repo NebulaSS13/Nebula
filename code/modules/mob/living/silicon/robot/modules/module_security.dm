@@ -5,9 +5,9 @@
 	networks = list(
 		NETWORK_SECURITY
 	)
-	subsystems = list(
-		/datum/nano_module/crew_monitor, 
-		/datum/nano_module/digitalwarrant
+	software = list(
+		/datum/computer_file/program/suit_sensors,
+		/datum/computer_file/program/digitalwarrant
 	)
 	can_be_pushed = FALSE
 	supported_upgrades = list(

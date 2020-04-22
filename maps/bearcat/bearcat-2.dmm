@@ -68,10 +68,6 @@
 "aw" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/comms)
-"aD" = (
-/obj/machinery/ntnet_relay,
-/turf/simulated/floor/bluegrid,
-/area/ship/bearcat/comms)
 "aE" = (
 /turf/simulated/floor/bluegrid,
 /area/ship/bearcat/comms)
@@ -103,7 +99,9 @@
 /turf/simulated/wall/titanium,
 /area/ship/bearcat/shuttle/outgoing)
 "aP" = (
-/obj/machinery/message_server,
+/obj/machinery/network/router{
+	initial_network_id = "bearnet"
+	},
 /turf/simulated/floor/bluegrid,
 /area/ship/bearcat/comms)
 "aQ" = (
@@ -3887,6 +3885,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/portables_connector,
+/obj/machinery/camera/network/engineering,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/engine/aft)
 "jf" = (
@@ -6610,6 +6609,12 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/prepainted,
 /area/ship/bearcat/crew/toilets)
+"Uo" = (
+/obj/machinery/network/mainframe{
+	initial_network_id = "bearnet"
+	},
+/turf/simulated/floor/bluegrid,
+/area/ship/bearcat/comms)
 "Vb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -9763,7 +9768,7 @@ Ls
 oK
 aw
 aw
-aD
+Uo
 aP
 ba
 oK

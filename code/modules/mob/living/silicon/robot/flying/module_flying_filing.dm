@@ -22,6 +22,10 @@
 		/obj/item/megaphone,
 		/obj/item/stack/package_wrap/cyborg
 	)
+	software = list(
+		/datum/computer_file/program/wordprocessor,
+		/datum/computer_file/program/supply
+	)
 	emag = /obj/item/stamp/chameleon
 	synths = list(/datum/matter_synth/package_wrap)
 	skills = list(

@@ -38,10 +38,12 @@
 		if(!newname)
 			return
 		filedesc = newname
-		for(var/datum/computer_file/program/P in ntnet_global.available_station_software)
-			if(filedesc == P.filedesc)
-				program_menu_icon = P.program_menu_icon
-				break
+		var/datum/computer_network/net = computer.get_network()
+		if(net)
+			for(var/datum/computer_file/program/P in net.get_software_list())
+				if(filedesc == P.filedesc)
+					program_menu_icon = P.program_menu_icon
+					break
 	return 1
 
 /datum/computer_file/program/revelation/clone()

@@ -160,9 +160,9 @@
 	else
 		switch(src.sensor_mode)
 			if (SEC_HUD)
-				process_sec_hud(src,0)
+				process_sec_hud(src,0,network = get_computer_network())
 			if (MED_HUD)
-				process_med_hud(src,0)
+				process_med_hud(src,0,network = get_computer_network())
 
 	if (src.healths)
 		if (src.stat != 2)

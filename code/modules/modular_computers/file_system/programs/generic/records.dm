@@ -5,7 +5,6 @@
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
 	size = 14
-	requires_ntnet = 1
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/records
 	usage_flags = PROGRAM_ALL
@@ -15,9 +14,6 @@
 	name = "Crew Records"
 	var/datum/computer_file/report/crew_record/active_record
 	var/message = null
-
-/datum/nano_module/program/records/proc/get_records()
-	return GLOB.all_crew_records
 
 /datum/nano_module/program/records/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -93,11 +89,16 @@
 				break
 		return 1
 	if(href_list["new_record"])
+		var/datum/computer_network/network = get_network()
+		if(!network)
+			to_chat(usr, SPAN_WARNING("Network error."))
+			return
 		if(!check_access(usr, access_bridge))
 			to_chat(usr, "Access Denied.")
 			return
 		active_record = new/datum/computer_file/report/crew_record()
 		GLOB.all_crew_records.Add(active_record)
+		network.store_file(active_record, MF_ROLE_CREW_RECORDS)
 		return 1
 	if(href_list["print_active"])
 		if(!active_record)
@@ -105,6 +106,10 @@
 		print_text(record_to_html(active_record, get_record_access(usr)), usr)
 		return 1
 	if(href_list["search"])
+		var/datum/computer_network/network = get_network()
+		if(!network)
+			to_chat(usr, SPAN_WARNING("Network error."))
+			return
 		var/field_name = href_list["search"]
 		var/search = sanitize(input("Enter the value for search for.") as null|text)
 		if(!search)
@@ -120,6 +125,10 @@
 	var/datum/computer_file/report/crew_record/R = active_record
 	if(!istype(R))
 		return 1
+	var/datum/computer_network/network = get_network()
+	if(!network)
+		to_chat(usr, SPAN_WARNING("Network error."))
+		return
 	if(href_list["edit_photo_front"])
 		var/photo = get_photo(usr)
 		if(photo && active_record)

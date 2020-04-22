@@ -204,8 +204,9 @@
 
 	var/datum/computer_file/report/crew_record/random_record
 	var/obj/item/card/id/I = user.GetIdCard()
-	if(GLOB.all_crew_records.len)
-		random_record = pick(GLOB.all_crew_records)
+	var/datum/computer_network/net = get_local_network_at(get_turf(user))
+	if(net && length(net.get_crew_records()))
+		random_record = pick(net.get_crew_records())
 	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user)
 	if(I)
 		new_record.set_name(I.registered_name)

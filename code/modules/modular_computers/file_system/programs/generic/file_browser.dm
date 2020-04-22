@@ -9,141 +9,229 @@
 	requires_ntnet = 0
 	available_on_ntnet = 0
 	undeletable = 1
-	nanomodule_path = /datum/nano_module/program/computer_filemanager/
-	var/open_file
-	var/error
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
+	var/open_file
+	var/error
+	var/list/file_sources = list(
+		/datum/file_storage/disk,
+		/datum/file_storage/disk/removable,
+		/datum/file_storage/network
+	)
+	var/datum/file_storage/current_filesource = /datum/file_storage/disk
+	var/datum/file_transfer/current_transfer	//ongoing file transfer between filesources
 
-/datum/computer_file/program/filemanager/Topic(href, href_list)
+/datum/computer_file/program/filemanager/on_startup(var/mob/living/user, var/datum/extension/interactive/ntos/new_host)
+	..()
+	for(var/T in file_sources)
+		file_sources[T] = new T(new_host)
+	current_filesource = file_sources[initial(current_filesource)]
+
+/datum/computer_file/program/filemanager/on_shutdown()
+	for(var/T in file_sources)
+		var/datum/file_storage/FS = file_sources[T]
+		qdel(FS)
+		file_sources[T] = null
+	current_filesource = initial(current_filesource)
+	ui_header = null
+	if(current_transfer)
+		qdel(current_transfer)
+
+/datum/computer_file/program/filemanager/Topic(href, href_list, state)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
+
+	var/mob/user = usr
+
+	if(href_list["PRG_change_filesource"])
+		. = TOPIC_HANDLED
+		var/list/choices = list()
+		for(var/T in file_sources)
+			var/datum/file_storage/FS = file_sources[T]
+			if(FS == current_filesource)
+				continue
+			choices[FS.name] = FS
+		var/file_source = input(usr, "Choose a storage medium to use:", "Select Storage Medium") as null|anything in choices
+		if(file_source)
+			current_filesource = choices[file_source]
+			return TOPIC_REFRESH
+
+	if(href_list["PRG_changefileserver"])
+		. = TOPIC_HANDLED
+		var/datum/computer_network/network = computer.get_network()
+		if(!network)
+			return
+		var/list/file_servers = network.get_file_server_tags()
+		var/file_server = input(usr, "Choose a fileserver to view files on:", "Select File Server") as null|anything in file_servers
+		if(file_server)
+			var/datum/file_storage/network/N = file_sources[/datum/file_storage/network]
+			N.server = file_server
+			return TOPIC_REFRESH
+
+	var/errors = current_filesource.check_errors()
+	if(errors)
+		error = errors
+		return TOPIC_HANDLED
 
 	if(href_list["PRG_openfile"])
-		. = 1
+		. = TOPIC_HANDLED
 		open_file = href_list["PRG_openfile"]
+
 	if(href_list["PRG_newtextfile"])
-		. = 1
+		. = TOPIC_HANDLED
 		var/newname = sanitize(input(usr, "Enter file name or leave blank to cancel:", "File rename"))
 		if(!newname)
-			return 1
-		if(computer.create_file(newname, file_type = /datum/computer_file/data/text))
-			return 1
+			return TOPIC_HANDLED
+
+		if(current_filesource.create_file(newname))
+			return TOPIC_REFRESH
+	
 	if(href_list["PRG_deletefile"])
-		. = 1
-		computer.delete_file(href_list["PRG_deletefile"])
+		. = TOPIC_REFRESH
+		current_filesource.delete_file(href_list["PRG_deletefile"])
+
 	if(href_list["PRG_usbdeletefile"])
-		. = 1
-		var/obj/item/stock_parts/computer/hard_drive/RHDD = computer.get_component(PART_DRIVE)
-		computer.delete_file(href_list["PRG_usbdeletefile"], RHDD)
+		. = TOPIC_REFRESH
+		current_filesource.delete_file(href_list["PRG_usbdeletefile"])
 
 	if(href_list["PRG_closefile"])
-		. = 1
+		. = TOPIC_REFRESH
 		open_file = null
 		error = null
+
 	if(href_list["PRG_clone"])
-		. = 1
-		computer.clone_file(href_list["PRG_clone"])
+		. = TOPIC_REFRESH
+		current_filesource.clone_file(href_list["PRG_clone"])
+
 	if(href_list["PRG_rename"])
-		. = 1
-		var/datum/computer_file/F = computer.get_file(href_list["PRG_rename"])
+		. = TOPIC_REFRESH
+		var/datum/computer_file/F = current_filesource.get_file(href_list["PRG_rename"])
 		if(!F || !istype(F))
-			return 1
+			return
 		var/newname = sanitize(input(usr, "Enter new file name:", "File rename", F.filename))
 		if(F && newname)
 			F.filename = newname
+
 	if(href_list["PRG_edit"])
-		. = 1
+		. = TOPIC_HANDLED
 		if(!open_file)
-			return 1
-		var/datum/computer_file/data/F = computer.get_file(open_file)
+			return
+		var/datum/computer_file/data/F = current_filesource.get_file(open_file)
 		if(!F || !istype(F))
-			return 1
+			return
 		if(F.do_not_edit && (alert("WARNING: This file is not compatible with editor. Editing it may result in permanently corrupted formatting or damaged data consistency. Edit anyway?", "Incompatible File", "No", "Yes") == "No"))
-			return 1
+			return
 		if(F.read_only)
 			error = "This file is read only. You cannot edit it."
-			return 1
+			return
 
 		var/oldtext = html_decode(F.stored_data)
 		oldtext = replacetext(oldtext, "\[br\]", "\n")
 
 		var/newtext = sanitize(replacetext(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[br\]"), MAX_TEXTFILE_LENGTH)
-		if(!newtext)
+		if(!newtext || !CanInteract(user, state))
 			return
 
 		if(F)
-			computer.save_file(F.filename, newtext)
+			current_filesource.save_file(F.filename, newtext)
+			return TOPIC_REFRESH
+
 	if(href_list["PRG_printfile"])
 		. = 1
 		if(!open_file)
-			return 1
-		var/datum/computer_file/data/F = computer.get_file(open_file)
+			return
+		var/datum/computer_file/data/F = current_filesource.get_file(open_file)
 		if(!F || !istype(F))
-			return 1
+			return
 		if(!computer.print_paper(digitalPencode2html(F.stored_data),F.filename,F.papertype, F.metadata))
 			error = "Hardware error: Unable to print the file."
-			return 1
-	if(href_list["PRG_copytousb"])
-		. = 1
-		computer.copy_between_disks(href_list["PRG_copytousb"], computer.get_component(PART_HDD), computer.get_component(PART_DRIVE))
-	if(href_list["PRG_copyfromusb"])
-		. = 1
-		computer.copy_between_disks(href_list["PRG_copyfromusb"], computer.get_component(PART_DRIVE), computer.get_component(PART_HDD))
-	if(.)
-		SSnano.update_uis(NM)
+			return TOPIC_REFRESH
 
-/datum/nano_module/program/computer_filemanager
-	name = "NTOS File Manager"
+	if(href_list["PRG_stoptransfer"])
+		QDEL_NULL(current_transfer)
+		ui_header = null
+		return TOPIC_REFRESH
 
-/datum/nano_module/program/computer_filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
-	var/datum/computer_file/program/filemanager/PRG
-	PRG = program
+	if(href_list["PRG_copyto"])
+		. = TOPIC_REFRESH
+		var/datum/computer_file/F = current_filesource.get_file(href_list["PRG_copyto"])
+		if(!F || !istype(F))
+			error = "I/O ERROR: Unable to open file."
+			return
+		var/list/choices = list()
+		for(var/T in file_sources)
+			var/datum/file_storage/FS = file_sources[T]
+			if(FS == current_filesource)
+				continue
+			choices[FS.name] = FS
+		var/file_source = input(usr, "Choose a destination storage medium:", "Copy To Another Medium") as null|anything in choices
+		if(file_source)
+			var/datum/file_storage/dst = choices[file_source]
+			var/nope = dst.check_errors()
+			if(nope)
+				to_chat(user, SPAN_WARNING("Cannot copy file to [dst] for following reason: [nope]"))
+				return
+			current_transfer = new(current_filesource, dst, F)
+			ui_header = "downloader_running.gif"
 
-	if(PRG.error)
-		data["error"] = PRG.error
-	if(PRG.open_file)
-		var/datum/computer_file/data/F
+/datum/computer_file/program/filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+	var/list/data = computer.initial_data()
 
-		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
-			data["error"] = "I/O ERROR: Unable to access hard drive."
-		else
-			F = PRG.computer.get_file(PRG.open_file)
-			if(!istype(F))
-				data["error"] = "I/O ERROR: Unable to open file."
-			else
-				data["filedata"] = F.generate_file_data(user)
-				data["filename"] = "[F.filename].[F.filetype]"
+	if(error)
+		data["error"] = error
 	else
-		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
-			data["error"] = "I/O ERROR: Unable to access hard drive."
+		var/errors = current_filesource.check_errors()
+		if(errors)
+			data["error"] = errors
+	data["current_source"] = current_filesource.name
+	if(istype(current_filesource, /datum/file_storage/network))
+		var/datum/file_storage/network/N = current_filesource
+		data["fileserver"] = N.server
+	if(open_file)
+		var/datum/computer_file/data/F
+		F = current_filesource.get_file(open_file)
+		if(!istype(F))
+			data["error"] = "I/O ERROR: Unable to open file."
 		else
-			var/list/files[0]
-			for(var/datum/computer_file/F in PRG.computer.get_all_files())
-				files.Add(list(list(
-					"name" = F.filename,
-					"type" = F.filetype,
-					"size" = F.size,
-					"undeletable" = F.undeletable
-				)))
-			data["files"] = files
-			var/obj/item/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
-			if(RHDD)
-				data["usbconnected"] = 1
-				var/list/usbfiles[0]
-				for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD))
-					usbfiles.Add(list(list(
-						"name" = F.filename,
-						"type" = F.filetype,
-						"size" = F.size,
-						"undeletable" = F.undeletable
-					)))
-				data["usbfiles"] = usbfiles
+			data["filedata"] = F.generate_file_data(user)
+			data["filename"] = "[F.filename].[F.filetype]"
+	else
+		var/list/files[0]
+		for(var/datum/computer_file/F in current_filesource.get_all_files())
+			files.Add(list(list(
+				"name" = F.filename,
+				"type" = F.filetype,
+				"size" = F.size,
+				"undeletable" = F.undeletable
+			)))
+		data["files"] = files
+
+	// Don't show transfers that will be over in a tick, screw flickering
+	if(current_transfer && current_transfer.get_eta() > 2)
+		data |= current_transfer.get_ui_data()
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "file_manager.tmpl", "NTOS File Manager", 600, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
+		ui.set_auto_update(1)
 		ui.open()
+
+/datum/computer_file/program/filemanager/process_tick()
+	if(!current_transfer)
+		return
+	var/result = current_transfer.update_progress()
+	if(!result) //something went wrong
+		if(QDELETED(current_transfer)) //either completely
+			error = "I/O ERROR: Unknown error during the file transfer."
+		else  //or during the saving at the destination
+			error = "I/O ERROR: Unable to store '[current_transfer.copying.filename]' at [current_transfer.copying_to]"
+			qdel(current_transfer)
+		current_transfer = null
+		ui_header = null
+		return
+	else if(!current_transfer.left_to_copy)  //done
+		QDEL_NULL(current_transfer)
+		ui_header = null
+

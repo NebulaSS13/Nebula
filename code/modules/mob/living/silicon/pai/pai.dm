@@ -14,6 +14,13 @@
 	idcard = /obj/item/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
+	ntos_type =	/datum/extension/interactive/ntos/silicon/small
+	starting_stock_parts = list(
+		/obj/item/stock_parts/computer/processor_unit/small,
+		/obj/item/stock_parts/computer/hard_drive/silicon,
+		/obj/item/stock_parts/computer/network_card
+	)
+
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
 
@@ -290,6 +297,10 @@
 		visible_message("<span class='notice'>[user] slides [W] across [src].</span>")
 		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
 		return FALSE // don't continue processing click callstack.
+	if(try_stock_parts_install(W, user))
+		return
+	if(try_stock_parts_removal(W, user))
+		return
 	if(W.force)
 		visible_message("<span class='danger'>[user] attacks [src] with [W]!</span>")
 		src.adjustBruteLoss(W.force)

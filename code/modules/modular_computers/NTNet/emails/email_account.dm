@@ -25,19 +25,16 @@
 		fullname = _fullname
 	if(_assignment)
 		assignment = _assignment
-	ADD_SORTED(ntnet_global.email_accounts, src, /proc/cmp_emails_asc)
 	..()
-
-/datum/computer_file/data/email_account/Destroy()
-	ntnet_global.email_accounts.Remove(src)
-	. = ..()
 
 /datum/computer_file/data/email_account/proc/all_emails()
 	return (inbox | spam | deleted | outbox)
 
-/datum/computer_file/data/email_account/proc/send_mail(var/recipient_address, var/datum/computer_file/data/email_message/message, var/relayed = 0)
+/datum/computer_file/data/email_account/proc/send_mail(var/recipient_address, var/datum/computer_file/data/email_message/message, var/datum/computer_network/network)
+	if(!network)
+		return
 	var/datum/computer_file/data/email_account/recipient
-	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+	for(var/datum/computer_file/data/email_account/account in network.get_email_addresses())
 		if(account.login == recipient_address)
 			recipient = account
 			break
@@ -45,34 +42,22 @@
 	if(!istype(recipient))
 		return 0
 
-	if(!recipient.receive_mail(message, relayed))
+	if(!recipient.receive_mail(message, network))
 		return
 
 	outbox.Add(message)
-	ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
+	if(network.intrusion_detection_enabled)
+		network.add_log("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
 	return 1
 
-/datum/computer_file/data/email_account/proc/receive_mail(var/datum/computer_file/data/email_message/received_message, var/relayed)
+/datum/computer_file/data/email_account/proc/receive_mail(var/datum/computer_file/data/email_message/received_message, var/datum/computer_network/network)
+	if(!network)
+		return
 	received_message.set_timestamp()
-	if(!ntnet_global.intrusion_detection_enabled)
-		inbox.Add(received_message)
-		return 1
-	// Spam filters may occassionally let something through, or mark something as spam that isn't spam.
-	var/mark_spam = FALSE
-	if(received_message.spam)
-		if(prob(98))
-			mark_spam = TRUE
-	else
-		if(prob(1))
-			mark_spam = TRUE
-
-	if(mark_spam)
-		spam.Add(received_message)
-	else
-		inbox.Add(received_message)
-		for(var/datum/nano_module/program/email_client/ec in connected_clients)
+	inbox.Add(received_message)
+	for(var/datum/nano_module/program/email_client/ec in connected_clients)
+		if(ec.get_network() == network)
 			ec.mail_received(received_message)
-
 	return 1
 
 // Address namespace (@internal-services.net) for email addresses with special purpose only!.
@@ -82,18 +67,18 @@
 /datum/computer_file/data/email_account/service/broadcaster/
 	login = EMAIL_BROADCAST
 
-/datum/computer_file/data/email_account/service/broadcaster/receive_mail(var/datum/computer_file/data/email_message/received_message, var/relayed)
-	if(!istype(received_message) || relayed)
+/datum/computer_file/data/email_account/service/broadcaster/receive_mail(var/datum/computer_file/data/email_message/received_message, var/datum/computer_network/network)
+	if(!network || !istype(received_message))
 		return 0
 	// Possibly exploitable for user spamming so keep admins informed.
 	if(!received_message.spam)
 		log_and_message_admins("Broadcast email address used by [usr]. Message title: [received_message.title].")
 
-	spawn(0)
-		for(var/datum/computer_file/data/email_account/email_account in ntnet_global.email_accounts)
-			var/datum/computer_file/data/email_message/new_message = received_message.clone()
-			send_mail(email_account.login, new_message, 1)
-			sleep(2)
+	for(var/datum/computer_file/data/email_account/email_account in network.get_email_addresses())
+		if(istype(email_account, /datum/computer_file/data/email_account/service/broadcaster/))
+			continue
+		var/datum/computer_file/data/email_message/new_message = received_message.clone()
+		send_mail(email_account.login, new_message, network)
 
 	return 1
 

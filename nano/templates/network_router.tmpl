@@ -1,0 +1,38 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	<div class="item">
+		{{:helper.link('Refresh', null, { "refresh" : 1 })}}
+	</div>
+{{else}}
+	<div class="itemLabel">
+		Network TAG:
+	</div>
+	<div class="itemContent">
+		{{:data.network_tag}}
+	</div>
+	<div class="itemLabel">
+		Network ID:
+	</div>
+	<div class="itemContent">
+		{{:data.network_id}}
+	</div>
+	<div class="itemLabel">
+		Router Role:
+	</div>
+	{{if data.is_router}}
+		<div class="itemContent">
+			MAIN ROUTER
+		</div>
+	{{else}}
+		<div class="itemContent">
+			BACKUP ROUTER / BROADCASTER
+		</div>
+	{{/if}} 
+	<div class="item">
+		{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}
+	</div>
+	<hr>
+	<i>EXONET Firmware v110.04.4h Copyright EXONETWORKS INC</i>
+{{/if}} 

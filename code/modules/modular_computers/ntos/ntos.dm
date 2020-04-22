@@ -46,6 +46,11 @@
 /datum/extension/interactive/ntos/proc/host_status()
 	return TRUE
 
+/datum/extension/interactive/ntos/proc/get_network()
+	var/datum/extension/network_device/D = get_extension(get_component(PART_NETWORK), /datum/extension/network_device)
+	if(D)
+		return D.get_network()
+
 /datum/extension/interactive/ntos/proc/system_shutdown()
 	on = FALSE
 	for(var/datum/computer_file/program/P in running_programs)
@@ -53,7 +58,8 @@
 	
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
-		ntnet_global.unregister(network_card.identification_id)
+		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
+		D.disconnect()
 
 	if(updating)
 		updating = FALSE
@@ -76,7 +82,8 @@
 		run_program(autorun.stored_data)
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
-		ntnet_global.register(network_card.identification_id, src)
+		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
+		D.connect()
 	update_host_icon()
 
 /datum/extension/interactive/ntos/proc/kill_program(var/datum/computer_file/program/P, var/forced = 0)
@@ -132,9 +139,9 @@
 		create_file("autorun", "[program]")
 
 /datum/extension/interactive/ntos/proc/add_log(var/text)
-	if(!get_ntnet_status())
-		return 0
-	return ntnet_global.add_log(text, get_component(PART_NETWORK))
+	var/datum/extension/network_device/D = get_extension(get_component(PART_NETWORK), /datum/extension/network_device)
+	if(D)
+		D.add_log(text)
 
 /datum/extension/interactive/ntos/proc/get_physical_host()
 	var/atom/A = holder

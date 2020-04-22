@@ -6,7 +6,6 @@
 	program_menu_icon = "comment"
 	extended_desc = "This program allows communication over NTNRC network"
 	size = 8
-	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_COMMUNICATION
 	network_destination = "NTNRC server"
 	ui_header = "ntnrc_idle.gif"
@@ -25,7 +24,10 @@
 /datum/computer_file/program/chatclient/Topic(href, href_list)
 	if(..())
 		return 1
-
+	var/datum/computer_network/network = computer.get_network()
+	if(!network)
+		to_chat(usr, SPAN_WARNING("Network error."))
+		return 1
 	if(href_list["PRG_speak"])
 		. = 1
 		if(!channel)
@@ -39,7 +41,7 @@
 	if(href_list["PRG_joinchannel"])
 		. = 1
 		var/datum/ntnet_conversation/C
-		for(var/datum/ntnet_conversation/chan in ntnet_global.chat_channels)
+		for(var/datum/ntnet_conversation/chan in network.chat_channels)
 			if(chan.id == text2num(href_list["PRG_joinchannel"]))
 				C = chan
 				break
@@ -71,8 +73,7 @@
 		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
 		if(!channel_title)
 			return
-		var/atom/A = computer.get_physical_host()
-		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(A.z)
+		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(network)
 		C.add_client(src)
 		C.operator = src
 		channel = C
@@ -155,11 +156,10 @@
 			channel.password = newpassword
 
 /datum/computer_file/program/chatclient/process_tick()
-
 	..()
+	var/datum/computer_network/network = computer.get_network()
 
-	var/atom/A = computer.get_physical_host()
-	if(channel && !(channel.source_z in GetConnectedZlevels(A.z)))
+	if(channel && (!network || !(channel in network.chat_channels)))
 		channel.remove_client(src)
 		channel = null
 
@@ -187,7 +187,8 @@
 	name = "NTNet Relay Chat Client"
 
 /datum/nano_module/program/computer_chatclient/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
-	if(!ntnet_global || !ntnet_global.chat_channels)
+	var/datum/computer_network/network = program.computer.get_network()
+	if(!network || !network.chat_channels)
 		return
 
 	var/list/data = list()
@@ -218,10 +219,8 @@
 
 	else // Channel selection screen
 		var/list/all_channels[0]
-		var/atom/A = C.computer.get_physical_host()
-		var/list/connected_zs = GetConnectedZlevels(A.z)
-		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
-			if(conv && conv.title && (conv.source_z in connected_zs))
+		for(var/datum/ntnet_conversation/conv in network.chat_channels)
+			if(conv && conv.title)
 				all_channels.Add(list(list(
 					"chan" = conv.title,
 					"id" = conv.id

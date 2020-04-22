@@ -31,6 +31,43 @@
 <div class="itemContent">
 	{{:data.power_usage}}W
 </div>
+<h2>Network</h2>
+<div class="itemLabel">
+	Network Status:
+</div>
+{{if data.nic_exists}}
+	<div class="itemContent">
+		Active
+	</div>
+	<div class="itemLabel">
+		Signal Strength:
+	</div>
+	<div class="itemContent">
+		{{:data.signal_strength}}
+	</div>
+	<div class="itemLabel">
+		Network ID:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.net_id, null, { "PRG_newid" : 1 })}}
+	</div>
+	<div class="itemLabel">
+		Network KEY:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.key, null, { "PRG_newkey" : 1 })}}
+	</div>
+	<div class="itemLabel">
+		Network TAG:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.tag, null, { "PRG_newtag" : 1 })}}
+	</div>
+{{else}}
+	<div class="itemContent">
+		Not Available
+	</div>
+{{/if}}
 <h2>File System</h2>	
 <div class="itemLabel">
 	Used Capacity:

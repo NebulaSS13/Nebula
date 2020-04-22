@@ -33,7 +33,6 @@
 		if(P in running_programs)
 			program["running"] = 1
 		programs.Add(list(program))
-
 	data["programs"] = programs
 
 	data["updating"] = updating
@@ -157,7 +156,6 @@
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
 /datum/extension/interactive/ntos/proc/get_header_data()
 	var/list/data = list()
-
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
 		switch(battery_module.battery.percent())

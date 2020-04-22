@@ -1,0 +1,121 @@
+{{if data.skill_fail}}
+	{{for data.skill_fail}}
+	<div class="item">
+		<div class="itemLabelWide">
+    		{{:value.key}}
+		</div>
+		<div class="itemContentNarrow">
+			{{:value.value}}
+		</div>
+	</div>
+	{{/for}}
+{{else}}
+	<h1>NETWORK INFO</h1>
+	<div class="item">
+		<div class="itemLabel">
+    		Network ID:
+		</div>
+		<div class="itemContent">
+			{{:data.network}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+    		Main router:
+		</div>
+		<div class="itemContent">
+			{{:data.router}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+    		Connected devices:
+		</div>
+		<div class="itemContent">
+			{{:data.devices}}
+		</div>
+	</div>
+	{{:helper.link("ADDRESS LOOKUP", null, { 'get_nid' : 1 })}}
+	<h1>MAINFRAME CONFIGURATION</h1>
+	<table>
+		<tr class='candystripe'>
+			<th>SERVER
+			<th colspan=2> ROLES
+			
+		{{for data.mainframes}}
+			<tr class='candystripe'>
+				<td width="40%">{{:value.name}}
+				<td>{{:value.roles}}
+				<td>{{:helper.link("ADD ROLE", null, { 'add_role' : value.ref })}}
+					{{:helper.link("REMOVE ROLE", null, { 'remove_role' : value.ref })}}
+		{{/for}}
+	</table>
+
+	<h1>LOGGING</h1>
+	{{if data.logs}}
+		{{for data.logs}}
+			<div class="itemLabel">
+				SERVER: 
+			</div>
+			<div class="itemContent">
+				{{:value.server}}
+			</div>
+			<div class="itemLabel">
+				LOG LIMIT: 
+			</div>
+			<div class="itemContent">
+				{{:helper.link(value.maxlogs, null, {'updatemaxlogs' : value.ref})}}
+			</div>
+			<div class="item">
+				{{:helper.link('PURGE', null, {'purgelogs' : value.ref})}}
+			</div>
+			<div class="statusDisplay" style="overflow: auto;">
+				{{:value.log}}
+			</div>
+		{{/for}}
+	{{else}}
+		<b>NO LOG SERVERS FOUND</b>
+	{{/if}}
+
+	<h1>SECURITY</h1>
+	<h3>INTRUSION DETECTION</h3>
+	<div class="item">
+		<div class="itemLabel">
+    		Detection Status:
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.ids_status, null, { 'toggle_ids' : 1 })}}
+		</div>
+	</div>
+	{{if data.ids_alarm}}
+		<div class="item">
+			<h2>INTRUSION DETECTION ALARM TRIGGERED</h2>
+			<div><i>Consult network logs for details</i></div>
+			{{:helper.link("RESET", null, { 'reset_alarm' : 1 })}}
+		</div>
+	{{/if}} 
+	<h3>FIREWALL CONFIGURATION</h3>
+	<table cellpadding=3>
+		<tr class='candystripe'>
+			<th>PROTOCOL
+			<th colspan=2>STATUS
+		{{for data.features}}
+			<tr class='candystripe'>
+				<td>{{:value.name}}
+				<td>{{:value.status ? 'ENABLED' : 'DISABLED'}}
+				<td>{{:helper.link('TOGGLE', null, {'toggle_function' : value.flag})}}
+		{{/for}}
+	</table>
+	<h3>ADDRESS BLACKLISTING</h3>
+		<div class="item">
+			{{:helper.link('ADD BLACKLIST ENTRY', null, {'ban_nid' : 1})}}
+			{{:helper.link('REMOVE BLACKLIST ENTRY', null, {'unban_nid' : 1})}}
+		</div>
+		<div class="statusDisplay">
+			{{:data.banned_nids}}
+		</div>
+{{/if}}
+{{if data.terminal}}
+	<h1>MANUAL SYSTEM ACCESS</h1>
+	{{:helper.link('ACTIVATE TERMINAL', null, {'PC_terminal' : 1})}}
+{{/if}} 
