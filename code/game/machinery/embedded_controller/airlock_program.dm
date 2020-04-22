@@ -174,7 +174,6 @@
 		if("purge")
 			memory["purge"] = !memory["purge"]
 			if(memory["purge"])
-				close_doors()
 				state = STATE_PREPARE
 				target_state = TARGET_NONE
 
@@ -201,9 +200,6 @@
 					memory["target_pressure"] = memory["internal_sensor_pressure"]
 				if(TARGET_OUTOPEN)
 					memory["target_pressure"] = memory["external_sensor_pressure"]
-
-			//lock down the airlock before activating pumps
-			close_doors()
 
 			state = STATE_PREPARE
 		else
@@ -250,6 +246,8 @@
 						memory["purge"] = 1 // should always purge first if using external air, chamber pressure should never be higher than target pressure here
 
 				memory["target_pressure"] = target_pressure
+			else
+				close_doors()
 
 		if(STATE_PRESSURIZE)
 			if(memory["chamber_sensor_pressure"] >= memory["target_pressure"] - SENSOR_TOLERANCE)
