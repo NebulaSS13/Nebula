@@ -125,7 +125,7 @@
 	if(animals.len < 0.5*max_animal_count && !repopulating)
 		repopulating = 1
 		max_animal_count = round(max_animal_count * 0.5)
-	
+
 	handle_atmosphere()
 
 	if(repopulating)
