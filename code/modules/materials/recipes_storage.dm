@@ -6,7 +6,6 @@
 /datum/stack_recipe/box/large
 	title = "large box"
 	result_type = /obj/item/storage/box/large
-	req_amount = 2
 
 /datum/stack_recipe/box/donut
 	title = "donut box"
@@ -35,7 +34,6 @@
 /datum/stack_recipe/bag
 	title = "bag"
 	result_type = /obj/item/storage/bag/plasticbag
-	req_amount = 3
 	on_floor = 1
 
 /datum/stack_recipe/folder

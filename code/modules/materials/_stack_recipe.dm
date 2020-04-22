@@ -4,7 +4,7 @@
 /datum/stack_recipe
 	var/title = "ERROR"
 	var/result_type
-	var/req_amount = 1 // amount of material needed for this recipe
+	var/req_amount     // amount of material needed for this recipe
 	var/res_amount = 1 // amount of stuff that is produced in one batch (e.g. 4 for floor tiles)
 	var/max_res_amount = 1
 	var/time = 0
