@@ -29,8 +29,6 @@
 	var/tag_air_alarm
 
 /datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
-	..(M)
-
 	memory["chamber_sensor_pressure"] = ONE_ATMOSPHERE
 	memory["external_sensor_pressure"] = 0					//assume vacuum for simple airlock controller
 	memory["internal_sensor_pressure"] = ONE_ATMOSPHERE
@@ -40,10 +38,11 @@
 	memory["target_pressure"] = ONE_ATMOSPHERE
 	memory["purge"] = 0
 	memory["secure"] = 0
-	if (istype(master, /obj/machinery/embedded_controller/radio/airlock))
-		var/obj/machinery/embedded_controller/radio/airlock/controller = master
+	if (istype(M, /obj/machinery/embedded_controller/radio/airlock))
+		var/obj/machinery/embedded_controller/radio/airlock/controller = M
 		memory["secure"] = controller.tag_secure
 		cycle_to_external_air = controller.cycle_to_external_air
+	..(M)
 
 #define SET_AIRLOCK_TAG(FROM_CONTROLLER, FROM_SRC) (base_tag ? FROM_SRC : (FROM_CONTROLLER || FROM_SRC))
 
@@ -65,6 +64,8 @@
 		spawn(10)
 			signalDoor(tag_exterior_door)		//signals connected doors to update their status
 			signalDoor(tag_interior_door)
+
+#undef SET_AIRLOCK_TAG
 
 /datum/computer/file/embedded_program/airlock/get_receive_filters(for_ui = FALSE)
 	. = list(

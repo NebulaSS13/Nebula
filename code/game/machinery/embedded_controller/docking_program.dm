@@ -55,7 +55,6 @@
 	var/dock_state = STATE_UNDOCKED
 	var/control_mode = MODE_NONE
 	var/response_sent = 0		//so we don't spam confirmation messages
-	var/resend_counter = 0		//for periodically resending confirmation messages in case they are missed
 
 	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
 	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
@@ -189,13 +188,6 @@
 						finish_undocking()
 					reset()		//server is done undocking!
 
-	if (response_sent || resend_counter > 0)
-		resend_counter++
-
-	if (resend_counter >= MESSAGE_RESEND_TIME || (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING))
-		response_sent = 0
-		resend_counter = 0
-
 	//handle invalid states
 	if (control_mode == MODE_NONE && dock_state != STATE_UNDOCKED)
 		if (tag_target)
@@ -294,7 +286,7 @@
 	var/datum/signal/signal = new
 	signal.data["tag"] = id_tag
 	signal.data["dock_status"] = get_docking_status()
-	post_signal(signal, tag)
+	post_signal(signal, id_tag)
 
 //this is mostly for NanoUI
 /datum/computer/file/embedded_program/docking/proc/get_docking_status()
