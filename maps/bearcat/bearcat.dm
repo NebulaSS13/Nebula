@@ -1,8 +1,7 @@
 #if !defined(using_map_DATUM)
 
-	#include "..\..\mods\misc\mundane.dm"
-	#include "..\..\mods\misc\spacemen.dm"
-	#include "..\..\mods\corporate\_corporate.dme"
+	#include "../../mods/misc/mundane.dm"
+	#include "../../mods/corporate/_corporate.dme"
 
 	#include "bearcat_unit_testing.dm"
 
@@ -13,6 +12,7 @@
 	#include "bearcat_jobs.dm"
 	#include "bearcat_lobby.dm"
 	#include "bearcat_shuttles.dm"
+	#include "bearcat_outfits.dm"
 	#include "bearcat_overmap.dm"
 	#include "bearcat_overrides.dm"
 	#include "bearcat_loadouts.dm"

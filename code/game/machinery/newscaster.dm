@@ -157,12 +157,9 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	stat_immune = 0
 	frame_type = /obj/item/frame/stock_offset/newscaster
 
-/obj/machinery/newscaster/security_unit                   //Security unit
-	name = "Security Newscaster"
-	securityCaster = 1
-
 /obj/machinery/newscaster/Initialize()
 	. = ..()
+	securityCaster = istype(get_area(src), /area/security)
 	allCasters += src
 	paper_remaining = 15            // Will probably change this to something better
 	unit_no = sequential_id("obj/machinery/newscaster")

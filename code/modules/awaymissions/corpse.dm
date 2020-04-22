@@ -104,36 +104,6 @@
 	var/decl/hierarchy/outfit/corpse_outfit = outfit_by_type(pickweight(corpse_outfits))
 	corpse_outfit.equip(M, equip_adjustments = adjustments)
 
-/obj/effect/landmark/corpse/chef
-	name = "Chef"
-	corpse_outfits = list(/decl/hierarchy/outfit/job/service/chef)
-
-/obj/effect/landmark/corpse/doctor
-	name = "Doctor"
-	corpse_outfits = list(/decl/hierarchy/outfit/job/medical/doctor)
-
-/obj/effect/landmark/corpse/engineer
-	name = "Engineer"
-	corpse_outfits = list(/decl/hierarchy/outfit/job/engineering/engineer)
-
-/obj/effect/landmark/corpse/scientist
-	name = "Scientist"
-	corpse_outfits = list(/decl/hierarchy/outfit/job/science/scientist)
-
-/obj/effect/landmark/corpse/engineer/rig
-	corpse_outfits = list(/decl/hierarchy/outfit/job/engineering/engineer/void)
-
-/obj/effect/landmark/corpse/clown
-	name = "Clown"
-	corpse_outfits = list(/decl/hierarchy/outfit/clown)
-
-/obj/effect/landmark/corpse/miner
-	name = "Miner"
-	corpse_outfits = list(/decl/hierarchy/outfit/job/cargo/mining)
-
-/obj/effect/landmark/corpse/miner/rig
-	corpse_outfits = list(/decl/hierarchy/outfit/job/cargo/mining/void)
-
 /obj/effect/landmark/corpse/pirate
 	name = "Pirate"
 	corpse_outfits = list(/decl/hierarchy/outfit/pirate/norm)
@@ -159,3 +129,19 @@
 /obj/effect/landmark/corpse/syndicate/commando
 	name = "Syndicate Commando"
 	corpse_outfits = list(/decl/hierarchy/outfit/mercenary/syndicate/commando)
+
+/obj/effect/landmark/corpse/chef
+	name = "Chef"
+	corpse_outfits = list(/decl/hierarchy/outfit/job/generic/chef)
+
+/obj/effect/landmark/corpse/doctor
+	name = "Doctor"
+	corpse_outfits = list(/decl/hierarchy/outfit/job/generic/doctor)
+
+/obj/effect/landmark/corpse/engineer
+	name = "Engineer"
+	corpse_outfits = list(/decl/hierarchy/outfit/job/generic/engineer)
+
+/obj/effect/landmark/corpse/scientist
+	name = "Scientist"
+	corpse_outfits = list(/decl/hierarchy/outfit/job/generic/scientist)
