@@ -86,27 +86,24 @@
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = "<span class='scan_danger'>none, patient is braindead</span>"
 		else if(H.stat != DEAD)
-			if(H.has_brain_worms())
-				brain_result = "<span class='scan_danger'>ERROR - aberrant/unknown brainwave patterns, advanced scanner recommended</span>"
+			if(skill_level < SKILL_BASIC)
+				brain_result = "there's movement on the graph"
+			else if(istype(brain))
+				switch(brain.get_current_damage_threshold())
+					if(0)
+						brain_result = "normal"
+					if(1 to 2)
+						brain_result = "<span class='scan_notice'>minor brain damage</span>"
+					if(3 to 5)
+						brain_result = "<span class='scan_warning'>weak</span>"
+					if(6 to 8)
+						brain_result = "<span class='scan_danger'>extremely weak</span>"
+					if(9 to INFINITY)
+						brain_result = "<span class='scan_danger'>fading</span>"
+					else
+						brain_result = "<span class='scan_danger'>ERROR - Hardware fault</span>"
 			else
-				if(skill_level < SKILL_BASIC)
-					brain_result = "there's movement on the graph"
-				else if(istype(brain))
-					switch(brain.get_current_damage_threshold())
-						if(0)
-							brain_result = "normal"
-						if(1 to 2)
-							brain_result = "<span class='scan_notice'>minor brain damage</span>"
-						if(3 to 5)
-							brain_result = "<span class='scan_warning'>weak</span>"
-						if(6 to 8)
-							brain_result = "<span class='scan_danger'>extremely weak</span>"
-						if(9 to INFINITY)
-							brain_result = "<span class='scan_danger'>fading</span>"
-						else
-							brain_result = "<span class='scan_danger'>ERROR - Hardware fault</span>"
-				else
-					brain_result = "<span class='scan_danger'>ERROR - Organ not recognized</span>"
+				brain_result = "<span class='scan_danger'>ERROR - Organ not recognized</span>"
 	else
 		brain_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
 	dat += "Brain activity: [brain_result]."
@@ -196,6 +193,8 @@
 					dat += "<span class='scan_warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>"
 			if(e.has_infected_wound())
 				dat += "<span class='scan_warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>"
+			if(e.has_growths())
+				dat += "<span class='scan_warning'>Abnormal internal growths detected in subject [limb]. Surgical removal recommended.</span>"
 
 		for(var/name in H.organs_by_name)
 			var/obj/item/organ/external/e = H.organs_by_name[name]

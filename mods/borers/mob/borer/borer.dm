@@ -48,10 +48,15 @@
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 
+/obj/item/holder/borer
+	origin_tech = "{'biotech':6}"
+
 /mob/living/simple_animal/borer/roundstart
 	roundstart = TRUE
 
-/mob/living/simple_animal/borer/neutered
+/mob/living/simple_animal/borer/symbiote
+	name = "symbiote"
+	real_name = "symbiote"
 	neutered = TRUE
 
 /mob/living/simple_animal/borer/Login()
@@ -69,7 +74,6 @@
 		client.screen -= hud_intent_selector
 
 /mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
-
 	hud_intent_selector =  new
 	hud_inject_chemicals = new
 	hud_leave_host =       new

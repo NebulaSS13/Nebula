@@ -46,7 +46,6 @@
 	scan["genetic"] = H.getCloneLoss()
 	scan["paralysis"] = H.paralysis
 	scan["immune_system"] = H.get_immunity()
-	scan["worms"] = H.has_brain_worms()
 
 	scan["reagents"] = list()
 
@@ -70,6 +69,7 @@
 		O["brute_dam"] = E.brute_dam
 		O["burn_dam"] = E.burn_dam
 		O["scan_results"] = E.get_scan_results(tag)
+		O["tumors"] = E.has_growths()
 
 		scan["external_organs"] += list(O)
 
@@ -229,11 +229,7 @@
 		subdat = null
 		dat += "<tr><td colspan = '2'>Antibody levels and immune system perfomance are at [scan["immune_system"]*100]% of baseline.</td></tr>"
 
-		if(scan["worms"])
-			dat += "<tr><td colspan='2'><span class='bad'><center>Large growth detected in frontal lobe, possibly cancerous.</center></span></td></tr>"
-
 		var/other_reagent = FALSE
-
 		for(var/list/R in scan["reagents"])
 			if(R["scannable"])
 				subdat += "<tr><td colspan='2'>[R["quantity"]]u [R["name"]]</td></tr>"
@@ -244,11 +240,6 @@
 			dat += subdat
 		if(other_reagent)
 			dat += "<tr><td colspan='2'><span class='average'>Warning: Unknown substance detected in subject's blood.</span></td></tr>"
-
-	//summary for the medically disinclined.
-	/*
-			<tr><td colspan='2'>You see a lot of numbers and abbreviations here, but you have no clue what any of this means.</td></tr>
-	*/
 	else
 		dat += "<tr><td colspan='2'>You see a lot of numbers and abbreviations here, but you have no clue what any of this means.</td></tr>"
 
@@ -264,16 +255,6 @@
 	var/list/subdat = list()
 	var/dat = list()
 	//External Organs
-	/*
-			<tr><td colspan='2'><center>
-				<table class='block' border='1' width='95%'>
-					<tr><th colspan='3'>Body Status</th></tr>
-					<tr><th>Organ</th><th>Damage</th><th>Status</th></tr>
-					<tr><td>head</td><td><span class='brute'>Severe physical trauma</span><br><span class='burn'>Severe burns</span></td><td><span class='bad'>Bleeding</span></td></td>
-					<tr><td>upper body</td><td>None</td><td></td></tr>
-					<tr><td>right arm</td><td>N/A</td><td><span class='bad'>Missing</span></td></tr>
-	*/
-
 	dat += "<tr><td colspan='2'><center><table class='block' border='1' width='95%'><tr><th colspan='3'>Body Status</th></tr>"
 	dat += "<tr><th>Organ</th><th>Damage</th><th>Status</th></tr>"
 	subdat = list()
@@ -291,18 +272,23 @@
 				row += "<td>&nbsp;</td>"
 		else
 			row += "<td>"
+			var/rowdata = list()
 			if(E["brute_dam"] + E["burn_dam"] == 0)
-				row += "None</td>"
-			if(skill_level < SKILL_ADEPT)
+				rowdata += "None"
+			else if(skill_level < SKILL_ADEPT)
 				if(E["brute_dam"])
-					row += "<span class='bad'>Damaged</span><br>"
+					rowdata += "<span class='bad'>Damaged</span>"
 				if(E["burn_dam"])
-					row += "<span class='average'>Burned</span></td>"
+					rowdata += "<span class='average'>Burned</span>"
 			else
 				if(E["brute_dam"])
-					row += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span><br>"
+					rowdata += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span>"
 				if(E["burn_dam"])
-					row += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span></td>"
+					rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
+			if(E["tumors"])
+				rowdata += "<span class='bad'>Abnormal internal growth</span>"
+			row += "<td>[jointext(rowdata, "<br>")]</td>"
+
 			if(skill_level >= SKILL_ADEPT)
 				row += "<td>"
 				row += "<span class='bad'>[english_list(E["scan_results"], nothing_text="&nbsp;")]</span>"
@@ -316,17 +302,6 @@
 
 
 	//Internal Organs
-	/*
-					<tr><th colspan='3'><center>Internal Organs</center></th></tr>
-					<tr><td>heart</td<td>None</td><td></td>
-					<tr><td>lungs</td><td><span class='bad'>Severe</td><td>Decaying</span></td>
-					<tr><td colspan='3'><span class='bad'>No liver detected.</span></td></tr>
-					<tr><td colspan='3'>No appendix detected.</td></tr>
-					<tr><td colspan='3'><span class='bad'>Cateracts detected.</span></td></tr>
-					<tr><td colspan='3'><span class='average'>Retinal misalignment detected.</span></td></tr>
-				</table>
-			</center></td></tr>
-	*/
 	if(skill_level >= SKILL_BASIC)
 		dat += "<tr><th colspan='3'><center>Internal Organs</center></th></tr>"
 		for(var/list/I in scan["internal_organs"])

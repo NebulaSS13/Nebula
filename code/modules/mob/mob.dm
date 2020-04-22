@@ -834,10 +834,6 @@
 		human_user.bloody_hands(src)
 	return 1
 
-//Check for brain worms in head.
-/mob/proc/has_brain_worms()
-	return locate(/mob/living/simple_animal/borer) in contents
-
 // A mob should either use update_icon(), overriding this definition, or use update_icons(), not touching update_icon().
 // It should not use both.
 /mob/on_update_icon()
@@ -1051,3 +1047,6 @@
 	return FALSE
 /mob/proc/check_has_eyes()
 	return TRUE
+
+/mob/proc/handle_pre_transformation()
+	return

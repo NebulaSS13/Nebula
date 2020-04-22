@@ -123,9 +123,6 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/mouse
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/holder/borer
-	origin_tech = "{'biotech':6}"
-
 //need own subtype to work with recipes
 /obj/item/holder/corgi
 	origin_tech = "{'biotech':4}"

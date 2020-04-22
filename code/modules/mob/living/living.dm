@@ -567,7 +567,7 @@ default behaviour is:
 
 		// Update whether or not this mob needs to pass emotes to contents.
 		for(var/atom/A in M.contents)
-			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/holder))
+			if(istype(A,/mob) || istype(A,/obj/item/holder))
 				return
 		M.status_flags &= ~PASSEMOTES
 	else if(istype(H.loc,/obj/item/clothing/accessory/storage/holster) || istype(H.loc,/obj/item/storage/belt/holster))
@@ -859,3 +859,6 @@ default behaviour is:
 
 /mob/living/proc/is_telekinetic()
 	return FALSE
+
+/mob/living/proc/can_do_special_ranged_attack(var/check_flag = TRUE)
+	return TRUE

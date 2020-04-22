@@ -1414,3 +1414,6 @@ obj/item/organ/external/proc/remove_clamps()
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/datum/robolimb/R = all_robolimbs[model]
 		. = R && R.is_robotic
+
+/obj/item/organ/external/proc/has_growths()
+	return FALSE
