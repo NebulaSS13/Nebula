@@ -83,6 +83,8 @@
 
 /obj/effect/shuttle_landmark/proc/shuttle_arrived(datum/shuttle/shuttle)
 
+/obj/effect/shuttle_landmark/proc/shuttle_departed(datum/shuttle/shuttle)
+
 /proc/check_collision(area/target_area, list/target_turfs)
 	for(var/target_turf in target_turfs)
 		var/turf/target = target_turf
@@ -121,6 +123,43 @@
 	for(var/turf/T in range(radius, src))
 		if(T.density)
 			T.ChangeTurf(get_base_turf_by_area(T))
+
+//Used for custom landing locations. Self deletes after a shuttle leaves.
+/obj/effect/shuttle_landmark/temporary
+	name = "Landing Point"
+	landmark_tag = "landing"
+	flags = SLANDMARK_FLAG_AUTOSET
+	var/timer_id
+
+/obj/effect/shuttle_landmark/temporary/Initialize(var/mapload, var/shuttle_name)
+	shuttle_restricted = shuttle_name
+	. = ..(mapload)
+
+/obj/effect/shuttle_landmark/temporary/Initialize()
+	landmark_tag += "-[random_id("landmarks",1,9999)]"
+	timer_id = addtimer(CALLBACK(src, .proc/check_for_shuttle), 1 MINUTE, TIMER_STOPPABLE | TIMER_LOOP)
+	. = ..()
+
+/obj/effect/shuttle_landmark/temporary/Destroy()
+	SSshuttle.unregister_landmark(landmark_tag)
+	return ..()
+
+/obj/effect/shuttle_landmark/temporary/shuttle_departed(datum/shuttle/shuttle)
+	deltimer(timer_id)
+	qdel_self(src)
+
+/obj/effect/shuttle_landmark/temporary/proc/check_for_shuttle()
+	if(!shuttle_restricted)	// Temporary landmarks *must* be restricted to a single shuttle, so if this occurs, it should be deleted.
+		qdel_self()
+		return
+
+	var/datum/shuttle/autodock/shuttle = SSshuttle.shuttles[shuttle_restricted]
+	if(shuttle.current_location != src) // Something has gone wrong, or the shuttle has changed its destination, and thus this landmark should be deleted.
+		if(shuttle.next_location == src)
+			if(shuttle.current_location == shuttle.landmark_transition) // The shuttle is on the way, do not delete the landmark.
+				return
+		shuttle.next_location = null
+		qdel_self()
 
 /obj/item/spaceflare
 	name = "bluespace flare"

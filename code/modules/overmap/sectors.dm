@@ -23,6 +23,7 @@
 	var/hide_from_reports = FALSE
 
 	var/has_distress_beacon
+	var/free_landing = FALSE				//whether or not shuttles can land in arbitrary places within the sector's z-levels.
 
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
@@ -119,6 +120,7 @@
 	INCREMENT_WORLD_Z_SIZE
 	GLOB.using_map.overmap_z = world.maxz
 	
+
 	testing("Putting overmap on [GLOB.using_map.overmap_z]")
 	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))

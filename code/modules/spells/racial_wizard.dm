@@ -60,10 +60,10 @@
 	spawn(duration)
 		qdel(O)
 
-/mob/observer/eye/wizard_eye
+/mob/observer/eye/freelook/wizard_eye
 	name_sufix = "Wizard Eye"
 
-/mob/observer/eye/wizard_eye/Initialize()
+/mob/observer/eye/freelook/wizard_eye/Initialize()
 	. = ..() //we dont use the Ai one because it has AI specific procs imbedded in it.
 	visualnet = cameranet
 
@@ -78,7 +78,7 @@
 		return
 	eyeobj.release(src)
 
-/mob/observer/eye/wizard_eye/Destroy()
+/mob/observer/eye/freelook/wizard_eye/Destroy()
 	if(istype(eyeobj.owner, /mob/living))
 		var/mob/living/L = eyeobj.owner
 		L.release_eye()
