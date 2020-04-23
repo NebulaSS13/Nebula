@@ -61,6 +61,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 /obj/item/spellbook/proc/make_sacrifice(obj/item/I, mob/user, var/reagent)
 	if(has_sacrificed)
+		to_chat(user, SPAN_WARNING("\The [src] is already sated! Wait for a return on your investment before you sacrifice more to it."))
 		return
 	if(reagent)
 		var/datum/reagents/R = I.reagents
@@ -78,7 +79,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 
 /obj/item/spellbook/attackby(obj/item/I, mob/user)
-	if(investing_time && !has_sacrificed)
+	if(investing_time)
 		var/list/objects = spellbook.sacrifice_objects
 		if(objects && objects.len)
 			for(var/type in objects)
@@ -136,7 +137,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
 			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
 				dat += " <A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]];contract=1;'>Make Contract</a>"
-			dat += "<br><i>[desc]</i><br>"
+			dat += "<br><i>[desc]</i><br><br>"
+		dat += "<br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
 		if(spellbook.book_flags & INVESTABLE)
 			if(investing_time)
