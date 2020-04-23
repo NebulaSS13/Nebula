@@ -181,6 +181,13 @@ var/list/slot_equipment_priority = list( \
 			qdel(grab)
 			. = TRUE
 		return
+
+	var/obj/item/W = hand ? l_hand : r_hand
+	if(W && config.atom_content_limit)
+		var/turf/T = Target ? get_turf(Target) : get_turf(loc)
+		if(T.get_all_contents_count(list(/obj/structure, /obj/item)) >= config.atom_content_limit)
+			to_chat(src, SPAN_WARNING("There is no room to put that there."))
+			return 0
 	return hand ? drop_l_hand(Target) : drop_r_hand(Target)
 
 /*
@@ -236,6 +243,11 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/unEquip(obj/item/I, var/atom/target)
 	if(!canUnEquip(I))
 		return
+	if(I && config.atom_content_limit && target)
+		var/turf/T = get_turf(target)
+		if(T.get_all_contents_count(list(/obj/structure, /obj/item)) >= config.atom_content_limit)
+			to_chat(src, SPAN_WARNING("There is no room to put that there."))
+			return 0
 	drop_from_inventory(I, target)
 	return 1
 

@@ -89,6 +89,8 @@ var/list/gamemode_cache = list()
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 
+	var/atom_content_limit = 0
+
 	var/serverurl
 	var/server
 	var/banappeals
@@ -318,6 +320,9 @@ var/list/gamemode_cache = list()
 
 				if ("debug_paranoid")
 					config.debugparanoid = 1
+
+				if ("atom_content_limit")
+					config.atom_content_limit = text2num(value)
 
 				if ("log_admin")
 					config.log_admin = 1

@@ -160,6 +160,13 @@ VOTE_AUTOGAMEMODE_TIMELEFT 160
 ## players' votes default to "No vote" (otherwise,  default to "No change")
 DEFAULT_NO_VOTE
 
+## Set a limit to the number of /obj contents an atom can have.
+## Strict Values: <100
+## Moderate Values: <250
+## Generous Values: <500
+## Default: Disabled
+##ATOM_CONTENT_LIMIT 250
+
 ## Allow ghosts to see antagonist through AntagHUD
 ALLOW_ANTAG_HUD
 

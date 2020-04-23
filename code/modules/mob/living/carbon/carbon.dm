@@ -268,6 +268,10 @@
 
 	if(!item) return
 
+	if(config.atom_content_limit && get_turf(target).get_all_contents_count(list(/obj)) >= config.atom_content_limit)
+		to_chat(src, SPAN_WARNING("There is no room to throw that there."))
+		return // No room.
+
 	var/throw_range = item.throw_range
 	var/itemsize
 	if (istype(item, /obj/item/grab))

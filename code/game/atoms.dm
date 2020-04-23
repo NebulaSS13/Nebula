@@ -165,8 +165,27 @@
 			found += A.search_contents_for(path,filter_path)
 	return found
 
-
-
+/*
+ * Recursively searches all atom contents (including contents contents and so on.)
+ * 
+ * ARGS: paths (array) - only count atoms of one the provided paths.
+ * RETURNS: A number of all contents found.
+*/
+/atom/proc/get_all_contents_count(var/paths)
+	var/count = 0
+	for(var/atom/A in src.contents)
+		if(paths)
+			var/found = FALSE
+			for(var/path in paths)
+				if(istype(A, path))
+					found = TRUE
+					break
+			if(!found)
+				continue
+		count++
+		if(A.contents.len)
+			count += A.get_all_contents_count()
+	return count
 
 /*
 Beam code by Gunbuddy
