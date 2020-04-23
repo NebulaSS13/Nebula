@@ -6,12 +6,13 @@ SUBSYSTEM_DEF(supply)
 	flags = SS_NO_TICK_CHECK
 
 	//supply points
-	var/points = 50
-	var/points_per_process = 1
+	var/points = 500
+	var/points_per_process = 10
 	var/point_sources = list()
 	var/pointstotalsum = 0
 	var/pointstotal = 0
-	
+
+	var/price_markup =        1.15
 	var/crate_return_rebate = 0.9
 	var/slip_return_rebate =  0.15
 	var/goods_sale_modifier = 0.75
