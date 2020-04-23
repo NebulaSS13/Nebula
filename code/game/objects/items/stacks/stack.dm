@@ -143,9 +143,9 @@
 			to_chat(user, "<span class='warning'>You waste some [name] and fail to build \the [recipe.display_name()]!</span>")
 			return
 		var/atom/O = recipe.spawn_result(user, user.loc, produced)
-		O.add_fingerprint(user)
-
-		user.put_in_hands(O)
+		if(!QDELETED(O)) // In case of stack merger.
+			O.add_fingerprint(user)
+			user.put_in_hands(O)
 
 /obj/item/stack/Topic(href, href_list)
 	..()

@@ -4,7 +4,7 @@
 /datum/stack_recipe
 	var/title = "ERROR"
 	var/result_type
-	var/req_amount = 1 // amount of material needed for this recipe
+	var/req_amount     // amount of material needed for this recipe
 	var/res_amount = 1 // amount of stuff that is produced in one batch (e.g. 4 for floor tiles)
 	var/max_res_amount = 1
 	var/time = 0
@@ -29,8 +29,8 @@
 		req_amount = 0
 		var/list/materials = atom_info_repository.get_matter_for(result_type, use_material, res_amount)
 		for(var/mat in materials)
-			req_amount += materials[mat]
-		req_amount = Clamp(ceil((req_amount*CRAFTING_EXTRA_COST_FACTOR)/SHEET_MATERIAL_AMOUNT) * res_amount, 1, 50)
+			req_amount += round(materials[mat]/res_amount)
+		req_amount = Clamp(ceil(((req_amount*CRAFTING_EXTRA_COST_FACTOR)/SHEET_MATERIAL_AMOUNT) * res_amount), 1, 50)
 
 #undef CRAFTING_EXTRA_COST_FACTOR
 

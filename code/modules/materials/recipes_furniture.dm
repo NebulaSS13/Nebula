@@ -8,7 +8,6 @@
 /datum/stack_recipe/furniture/chair
 	title = "chair"
 	result_type = /obj/structure/bed/chair
-	req_amount = 5
 	time = 10
 	var/list/modifiers
 
@@ -34,7 +33,6 @@ PADDED_CHAIR(yellow)
 
 /datum/stack_recipe/furniture/chair/office
 	title = "office chair"
-	req_amount = 5
 
 /datum/stack_recipe/furniture/chair/office/display_name()
 	return modifiers ? jointext(modifiers + title, " ") : title // Bypass material
@@ -46,9 +44,6 @@ PADDED_CHAIR(yellow)
 /datum/stack_recipe/furniture/chair/office/dark
 	result_type = /obj/structure/bed/chair/office/dark
 	modifiers = list("dark")
-
-/datum/stack_recipe/furniture/chair/office/comfy
-	req_amount = 7
 
 #define COMFY_OFFICE_CHAIR(color) /datum/stack_recipe/furniture/chair/office/comfy/##color{\
 	result_type = /obj/structure/bed/chair/office/comfy/##color;\
@@ -67,7 +62,6 @@ COMFY_OFFICE_CHAIR(yellow)
 
 /datum/stack_recipe/furniture/chair/comfy
 	title = "comfy chair"
-	req_amount = 3
 
 #define COMFY_CHAIR(color) /datum/stack_recipe/furniture/chair/comfy/##color{\
 	result_type = /obj/structure/bed/chair/comfy/##color;\
@@ -86,7 +80,6 @@ COMFY_CHAIR(yellow)
 
 /datum/stack_recipe/furniture/chair/arm
 	title = "armchair"
-	req_amount = 4
 
 #define ARMCHAIR(color) /datum/stack_recipe/furniture/chair/arm/##color{\
 	result_type = /obj/structure/bed/chair/armchair/##color;\
@@ -104,7 +97,6 @@ ARMCHAIR(yellow)
 #undef ARMCHAIR
 
 /datum/stack_recipe/furniture/chair/wood
-	req_amount = 5
 
 /datum/stack_recipe/furniture/chair/wood/normal
 	result_type = /obj/structure/bed/chair/wood
@@ -116,55 +108,45 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/door
 	title = "door"
 	result_type = /obj/structure/door
-	req_amount = 10
 	time = 50
 
 /datum/stack_recipe/furniture/barricade
 	title = "barricade"
 	result_type = /obj/structure/barricade
-	req_amount = 5
 	time = 50
 
 /datum/stack_recipe/furniture/stool
 	title = "stool"
 	result_type = /obj/item/stool
-	req_amount = 2
 
 /datum/stack_recipe/furniture/bar_stool
 	title = "bar stool"
 	result_type = /obj/item/stool/bar
-	req_amount = 2
 
 /datum/stack_recipe/furniture/bed
 	title = "bed"
 	result_type = /obj/structure/bed
-	req_amount = 5
 
 /datum/stack_recipe/furniture/pew
 	title = "pew, right"
 	result_type = /obj/structure/bed/chair/pew
-	req_amount = 5
 
 /datum/stack_recipe/furniture/pew_left
 	title = "pew, left"
 	result_type = /obj/structure/bed/chair/pew/left
-	req_amount = 5
 
 /datum/stack_recipe/furniture/table_frame
 	title = "table frame"
 	result_type = /obj/structure/table
-	req_amount = 5
 	time = 10
 
 /datum/stack_recipe/furniture/rack
 	title = "rack"
-	req_amount = 5
 	result_type = /obj/structure/table/rack
 
 /datum/stack_recipe/furniture/closet
 	title = "closet"
 	result_type = /obj/structure/closet
-	req_amount = 5
 	time = 15
 
 /datum/stack_recipe/furniture/canister
@@ -176,7 +158,6 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/tank
 	title = "pressure tank"
 	result_type = /obj/item/pipe/tank
-	req_amount = 30
 	time = 20
 
 /datum/stack_recipe/furniture/computerframe
@@ -188,7 +169,6 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/ladder
 	title = "ladder"
 	result_type = /obj/structure/ladder
-	req_amount = 5
 	time = 50
 	one_per_turf = TRUE
 	on_floor = FALSE
@@ -196,15 +176,12 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/girder
 	title = "wall support"
 	result_type = /obj/structure/girder
-	req_amount = 5
 	time = 50
 
 /datum/stack_recipe/furniture/wall_frame
 	title = "low wall frame"
 	result_type = /obj/structure/wall_frame
-	req_amount = 3
 	time = 50
-	req_amount = 5
 
 /datum/stack_recipe/furniture/machine
 	title = "machine frame"
@@ -219,7 +196,6 @@ ARMCHAIR(yellow)
 	time = 25
 
 /datum/stack_recipe/furniture/door_assembly
-	req_amount = 4
 	time = 50
 
 /datum/stack_recipe/furniture/door_assembly/standard
@@ -249,7 +225,6 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/crate
 	title = "crate"
 	result_type = /obj/structure/closet/crate
-	req_amount = 10
 	time = 50
 
 /datum/stack_recipe/furniture/crate/plastic
@@ -258,25 +233,21 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/flaps
 	title = "flaps"
 	result_type = /obj/structure/plasticflaps
-	req_amount = 30
 	time = 50
 
 /datum/stack_recipe/furniture/coffin
 	title = "coffin"
 	result_type = /obj/structure/closet/coffin
-	req_amount = 5
 	time = 15
 
 /datum/stack_recipe/furniture/coffin/wooden
 	title = "coffin"
 	result_type = /obj/structure/closet/coffin/wooden
-	req_amount = 5
 	time = 15
 
 /datum/stack_recipe/furniture/bookcase
 	title = "book shelf"
 	result_type = /obj/structure/bookcase
-	req_amount = 5
 	time = 15
 
 /datum/stack_recipe/furniture/planting_bed
@@ -288,7 +259,6 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/fullwindow
 	title = "full-tile window"
 	result_type = /obj/structure/window
-	req_amount = 4
 	time = 15
 	one_per_turf = 0
 
@@ -306,7 +276,6 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/borderwindow
 	title = "border window"
 	result_type = /obj/structure/window
-	req_amount = 1
 	time = 5
 	one_per_turf = 0
 
@@ -324,7 +293,6 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/windoor
 	title = "windoor assembly"
 	result_type = /obj/structure/windoor_assembly
-	req_amount = 1
 	time = 20
 	one_per_turf = 1
 
