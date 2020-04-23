@@ -14,7 +14,7 @@
 	max_amount = 100
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
-	matter_multiplier = 0.5
+	matter_multiplier = 0.3
 	material_flags = USE_MATERIAL_COLOR
 	stacktype = /obj/item/stack/material/rods
 	material = MAT_STEEL

@@ -29,8 +29,8 @@
 		req_amount = 0
 		var/list/materials = atom_info_repository.get_matter_for(result_type, use_material, res_amount)
 		for(var/mat in materials)
-			req_amount += materials[mat]
-		req_amount = Clamp(ceil((req_amount*CRAFTING_EXTRA_COST_FACTOR)/SHEET_MATERIAL_AMOUNT) * res_amount, 1, 50)
+			req_amount += round(materials[mat]/res_amount)
+		req_amount = Clamp(ceil(((req_amount*CRAFTING_EXTRA_COST_FACTOR)/SHEET_MATERIAL_AMOUNT) * res_amount), 1, 50)
 
 #undef CRAFTING_EXTRA_COST_FACTOR
 
