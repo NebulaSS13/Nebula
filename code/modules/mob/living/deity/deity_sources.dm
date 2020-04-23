@@ -42,11 +42,11 @@
 	if(!ismovable(source))
 		return
 	if(amount > 0)
-		eye.visualnet.add_source(source)
+		eyenet.add_source(source)
 		if(istype(source, /obj/structure/deity))
 			structures |= source
 	else
-		eye.visualnet.remove_source(source)
+		eyenet.remove_source(source)
 		if(istype(source, /obj/structure/deity))
 			structures -= source
 
@@ -66,7 +66,7 @@
 		var/datum/mind/minion = m
 		to_chat(minion.current, "Your master is now known as [new_name]")
 		minion.special_role = "Servant of [new_name]"
-	eye.SetName("[src] ([eye.name_sufix])")
+	eyeobj.SetName("[src] ([eyeobj.name_sufix])")
 	nano_data["name"] = new_name
 	return 1
 

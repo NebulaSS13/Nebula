@@ -138,13 +138,13 @@
 		return
 	to_chat(L, "<span class='cult'>[whisper_from ? "The [whisper_from] speaks to you" : "You hear a whisper say"] \"[message]\"</span>")
 
-	linked.eye.visualnet.add_source(L)
+	linked.eyenet.add_source(L)
 	GLOB.destroyed_event.register(L, src, .proc/deactivate_look)
 	addtimer(CALLBACK(src, .proc/deactivate_look, L), 30 SECONDS)
 
 /datum/phenomena/flickering_whisper/proc/deactivate_look(var/mob/viewer)
 	if(!linked.is_follower(viewer)) //Don't remove if they are follower
-		linked.eye.visualnet.remove_source(viewer)
+		linked.eyenet.remove_source(viewer)
 	GLOB.destroyed_event.unregister(viewer, src)
 
 /datum/phenomena/burning_glare

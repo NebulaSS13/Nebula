@@ -61,7 +61,7 @@
 /spell/camera_connection/god_vision/set_connected_god(var/mob/living/deity/god)
 	..()
 
-	vision.visualnet = god.eye.visualnet
+	vision.visualnet = god.eyenet
 
 /spell/camera_connection/god_vision/Destroy()
 	vision.visualnet = null

@@ -17,7 +17,7 @@
 	bone_amount = 0
 
 	var/eye_type = /mob/observer/eye/freelook/cult
-	var/mob/observer/eye/freelook/cult/eye
+	var/datum/visualnet/cultnet/eyenet
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
 	var/list/feats = list()
@@ -27,11 +27,10 @@
 
 /mob/living/deity/Initialize()
 	. = ..()
-	var/visualnet = new /datum/visualnet/cultnet()
-	eye = new(get_turf(src), visualnet)
-	eye.possess(src)
-	eye.visualnet.add_source(src)
-	eyeobj = eye
+	eyenet = new()
+	eyeobj = new eye_type(get_turf(src), eyenet)
+	eyeobj.possess(src)
+	eyenet.add_source(src)
 
 /mob/living/deity/death()
 	. = ..()
@@ -55,18 +54,17 @@
 	death(0)
 	minions.Cut()
 	structures.Cut()
-	eye.release()
-	eyeobj = null
+	eyeobj.release()
 
-	QDEL_NULL(eye.visualnet) //We do it here as some mobs have eyes that have access to the visualnet and we only want to destroy it when the deity is destroyed
-	QDEL_NULL(eye)
+	QDEL_NULL(eyenet) //We do it here as some mobs have eyes that have access to the visualnet and we only want to destroy it when the deity is destroyed
+	QDEL_NULL(eyeobj)
 	QDEL_NULL(form)
 	return ..()
 
 /mob/living/deity/verb/return_to_plane()
 	set category = "Godhood"
 
-	eye.forceMove(get_turf(src))
+	eyeobj.forceMove(get_turf(src))
 
 /mob/living/deity/verb/choose_form()
 	set name = "Choose Form"

@@ -52,25 +52,25 @@
 		img.icon_state = "green"
 		. = TRUE
 
-		if(!T || !T.loc || (T.x < TRANSITIONEDGE || T.x > world.maxx - TRANSITIONEDGE) || (T.y < TRANSITIONEDGE || T.y > world.maxy - TRANSITIONEDGE))
-			img.icon_state = "red"
-			. = FALSE // Cannot collide with the edge of the map.
-			continue
-		if(T.density)
-			img.icon_state = "red"
-			. = FALSE // Cannot land on a dense turf.
-			continue
-		if(!A || A != get_area(src))
-			img.icon_state = "red"
-			. = FALSE // Cannot cross between two areas.
-			continue
-		if(!istype(A, /area/space) && !istype(A, /area/exoplanet)) // Can only land in space or outside.
+		if(!T || !T.loc || !origin || !origin.loc)
 			img.icon_state = "red"
 			. = FALSE
+			continue
+		if((T.x < TRANSITIONEDGE || T.x > world.maxx - TRANSITIONEDGE) || (T.y < TRANSITIONEDGE || T.y > world.maxy - TRANSITIONEDGE))
+			img.icon_state = "red"
+			. = FALSE // Cannot land past the normal world boundaries.
 			continue
 		if(!istype(T, origin))
 			img.icon_state = "red"
 			. = FALSE // Cannot land on two different types of turfs.
+			continue
+		if(check_collision(origin.loc, list(T))) // Checking for density or multi-area overlap.
+			img.icon_state = "red"
+			. = FALSE
+			continue
+		if(!istype(A, /area/space) && !istype(A, /area/exoplanet)) // Can only land in space or outside.
+			img.icon_state = "red"
+			. = FALSE
 			continue
 
 /mob/observer/eye/landing/possess(var/mob/user)

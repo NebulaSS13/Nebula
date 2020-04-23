@@ -45,10 +45,8 @@
 			"fuel_span" = fuel_span
 		)
 
-/obj/machinery/computer/shuttle_control/explore/handle_topic_href(var/datum/shuttle/autodock/overmap/shuttle, var/list/href_list, var/mob/usr)
-	if(ismob(usr))
-		var/mob/user = usr
-		shuttle.operator_skill = user.get_skill_value(SKILL_PILOT)
+/obj/machinery/computer/shuttle_control/explore/handle_topic_href(var/datum/shuttle/autodock/overmap/shuttle, var/list/href_list, var/mob/user)
+	shuttle.operator_skill = user.get_skill_value(SKILL_PILOT)
 
 	if((. = ..()) != null)
 		return
@@ -65,14 +63,14 @@
 			shuttle.set_destination(possible_d[D])
 		return TOPIC_REFRESH
 	if(href_list["manual_landing"])
-		if(usr.skill_check(SKILL_PILOT, SKILL_PROF))
-			if(current_user && current_user != usr)
-				to_chat(usr, SPAN_WARNING("Someone is already performing a landing maneuver!"))
+		if(user.skill_check(SKILL_PILOT, SKILL_PROF))
+			if(current_user && current_user != user)
+				to_chat(user, SPAN_WARNING("Someone is already performing a landing maneuver!"))
 				return TOPIC_REFRESH
 			if(eyeobj)
 				end_landing()
 			else
-				start_landing(usr, shuttle)
+				start_landing(user, shuttle)
 			return TOPIC_REFRESH
 		to_chat(usr, SPAN_WARNING("The manual controls look hopelessly complex to you!"))
 
@@ -95,7 +93,7 @@
 		if(LAZYLEN(available_sectors))
 			target_sector = input("Choose sector to land in.", "Sectors") as null|anything in available_sectors
 
-	if(target_sector && CanUseTopic(user))
+	if(target_sector && CanInteract(user, GLOB.default_state))
 		GLOB.moved_event.register(user, src, /obj/machinery/computer/shuttle_control/explore/proc/end_landing)
 		GLOB.stat_set_event.register(user, src, /obj/machinery/computer/shuttle_control/explore/proc/end_landing)
 		GLOB.logged_out_event.register(user, src, /obj/machinery/computer/shuttle_control/explore/proc/end_landing)	// Prevents bugs with landing images.
