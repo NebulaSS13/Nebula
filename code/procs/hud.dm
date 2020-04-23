@@ -9,10 +9,9 @@ the HUD updates properly! */
 	plane = DEFAULT_PLANE
 
 //Medical HUD outputs. Called by the Life() proc of the mob using it, usually.
-proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
+proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt, datum/computer_network/network)
 	if(!can_process_hud(M))
 		return
-
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.med_hud_users)
 	for(var/mob/living/carbon/human/patient in P.Mob.in_view(P.Turf))
 
@@ -21,7 +20,12 @@ proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
 
 		if(local_scanner)
 			P.Client.images += patient.hud_list[HEALTH_HUD]
-			P.Client.images += patient.hud_list[STATUS_HUD]
+
+			if(network)
+				var/record = network.get_crew_record_by_name(patient.get_visible_name())
+				if(!record)
+					return
+				P.Client.images += patient.hud_list[STATUS_HUD]
 		else
 			var/sensor_level = getsensorlevel(patient)
 			if(sensor_level >= SUIT_SENSOR_VITAL)
@@ -30,7 +34,7 @@ proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
 				P.Client.images += patient.hud_list[LIFE_HUD]
 
 //Security HUDs. Pass a value for the second argument to enable implant viewing or other special features.
-proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
+proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt, datum/computer_network/network)
 	if(!can_process_hud(M))
 		return
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.sec_hud_users)
@@ -39,12 +43,16 @@ proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
 		if(perp.is_invisible_to(P.Mob))
 			continue
 
-		P.Client.images += perp.hud_list[ID_HUD]
-		if(advanced_mode)
-			P.Client.images += perp.hud_list[WANTED_HUD]
-			P.Client.images += perp.hud_list[IMPTRACK_HUD]
-			P.Client.images += perp.hud_list[IMPLOYAL_HUD]
-			P.Client.images += perp.hud_list[IMPCHEM_HUD]
+		if(network)
+			var/record = network.get_crew_record_by_name(perp.get_visible_name())
+			if(!record)
+				return
+			P.Client.images += perp.hud_list[ID_HUD]
+			if(advanced_mode)
+				P.Client.images += perp.hud_list[WANTED_HUD]
+				P.Client.images += perp.hud_list[IMPTRACK_HUD]
+				P.Client.images += perp.hud_list[IMPLOYAL_HUD]
+				P.Client.images += perp.hud_list[IMPCHEM_HUD]
 
 proc/process_jani_hud(var/mob/M, var/mob/Alt)
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.jani_hud_users)

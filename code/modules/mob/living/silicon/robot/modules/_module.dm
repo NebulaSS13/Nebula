@@ -35,6 +35,7 @@
 	var/list/equipment = list()
 	var/list/synths = list()
 	var/list/skills = list() // Skills that this module grants. Other skills will remain at minimum levels.
+	var/list/software = list() // Apps to preinstall on robot's inbiult computer
 
 /obj/item/robot_module/Initialize()
 
@@ -47,6 +48,7 @@
 	R.module = src
 
 	grant_skills(R)
+	grant_software(R)
 	add_camera_networks(R)
 	add_languages(R)
 	add_subsystems(R)
@@ -217,3 +219,10 @@
 /obj/item/robot_module/proc/reset_skills(var/mob/living/silicon/robot/R)
 	for(var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))
 		buff.remove()
+
+/obj/item/robot_module/proc/grant_software(var/mob/living/silicon/robot/R)
+	var/datum/extension/interactive/ntos/os = get_extension(R, /datum/extension/interactive/ntos)
+	if(os && os.has_component(PART_HDD))
+		var/obj/item/stock_parts/computer/hard_drive/disk = os.get_component(PART_HDD)
+		for(var/T in software)
+			disk.store_file(new T(disk))

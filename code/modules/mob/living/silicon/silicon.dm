@@ -41,6 +41,7 @@
 		/obj/item/stock_parts/computer/hard_drive/silicon,
 		/obj/item/stock_parts/computer/network_card
 	)
+	var/ntos_type = /datum/extension/interactive/ntos/silicon
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -55,7 +56,9 @@
 		silicon_camera = new silicon_camera(src)
 	for(var/T in starting_stock_parts)
 		stock_parts += new T(src)
-	set_extension(src, /datum/extension/interactive/ntos/silicon)
+	if(ntos_type)
+		set_extension(src, ntos_type)
+		verbs |= /mob/living/silicon/proc/access_computer
 
 	add_language(/decl/language/human/common)
 	default_language = /decl/language/human/common
@@ -380,3 +383,52 @@
 
 /mob/living/silicon/get_bullet_impact_effect_type(var/def_zone)
 	return BULLET_IMPACT_METAL
+	
+/mob/living/silicon/proc/get_computer_network()
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		return os.get_network()
+
+
+/mob/living/silicon/proc/try_stock_parts_install(obj/item/stock_parts/W, mob/user)
+	if(istype(W) && user.unEquip(W))
+		W.forceMove(src)
+		stock_parts += W
+		to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
+		return TRUE
+
+/mob/living/silicon/proc/try_stock_parts_removal(obj/item/W, mob/user)
+	if(!isCrowbar(W) || user.a_intent == I_HURT)
+		return
+	if(!length(stock_parts))
+		to_chat(user, SPAN_WARNING("No parts left to remove"))
+		return
+	
+	var/obj/item/stock_parts/remove = input(user, "Which component do you want to pry out?", "Remove Component") as null|anything in stock_parts
+	if(!remove || !(remove in stock_parts) || !Adjacent(user))
+		return
+	stock_parts -= remove
+	to_chat(user, SPAN_NOTICE("You remove \the [remove]."))
+	user.put_in_hands(remove)
+	return TRUE
+
+/mob/living/silicon/proc/access_computer()
+	set category = "Silicon Commands"
+	set name = "Boot NTOS Device"
+
+	if(incapacitated())
+		to_chat(src, SPAN_WARNING("You are in no state to do that right now."))
+		return
+
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(!istype(os))
+		to_chat(src, SPAN_WARNING("You seem to be lacking an NTOS capable device!"))
+		return
+	
+	if(!os.on)
+		os.system_boot()
+	if(!os.on)
+		to_chat(src, SPAN_WARNING("ERROR: NTOS failed to boot."))
+		return
+
+	os.ui_interact(src)

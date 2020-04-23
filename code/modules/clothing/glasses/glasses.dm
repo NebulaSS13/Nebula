@@ -237,3 +237,11 @@
 	icon_state = "rwelding-g"
 	item_state = "rwelding-g"
 	tint = TINT_MODERATE
+
+/obj/item/clothing/glasses/proc/network_setup()
+	set name = "Setup HUD Network"
+	set category = "Object"
+	set src in usr
+
+	var/datum/extension/network_device/D = get_extension(hud || src, /datum/extension/network_device)
+	D.ui_interact(usr)

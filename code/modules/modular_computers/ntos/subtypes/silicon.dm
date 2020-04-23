@@ -39,3 +39,6 @@
 		return os.check_eye()
 	else 
 		return ..()
+
+/datum/extension/interactive/ntos/silicon/small/get_hardware_flag()
+	return PROGRAM_TABLET

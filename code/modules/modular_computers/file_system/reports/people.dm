@@ -20,17 +20,26 @@
 		to_chat(user, "<span class='notice'>The email has been sent.</span>")
 
 //Helper procs.
+/datum/report_field/people/proc/get_used_network()
+	var/obj/item/stock_parts/computer/hard_drive/holder = owner.holder
+	if(holder)
+		var/datum/extension/interactive/ntos/os = get_extension(holder.loc, /datum/extension/interactive/ntos)
+		return os?.get_network()
+
 /datum/report_field/people/proc/perform_send(subject, body, attach_report)
 	return
 
 /datum/report_field/people/proc/send_to_recipient(subject, body, attach_report, recipient)
-	var/datum/computer_file/data/email_account/server = ntnet_global.find_email_by_name(EMAIL_DOCUMENTS)
+	var/datum/computer_network/net = get_used_network()
+	if(!net)
+		return
+	var/datum/computer_file/data/email_account/server = net.find_email_by_name(EMAIL_DOCUMENTS)
 	var/datum/computer_file/data/email_message/message = new()
 	message.title = subject
 	message.stored_data = body
 	message.source = server.login
 	message.attachment = attach_report
-	server.send_mail(recipient, message)
+	server.send_mail(recipient, message, net)
 
 /datum/report_field/people/proc/format_output(name, rank, milrank)
 	. = list()

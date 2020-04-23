@@ -7,6 +7,8 @@
 
 /datum/extension/interactive/ntos/console/get_component(var/part_type)
 	var/obj/machinery/M = holder
+	if(ispath(part_type, PART_DRIVE))
+		return ..()	//special handling for removable disks
 	return M.get_component_of_type(part_type)
 
 /datum/extension/interactive/ntos/console/get_all_components()

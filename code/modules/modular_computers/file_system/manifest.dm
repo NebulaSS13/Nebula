@@ -1,5 +1,5 @@
 // Generates a simple HTML crew manifest for use in various places
-/proc/html_crew_manifest(var/monochrome, var/OOC)
+/proc/html_crew_manifest(var/monochrome, var/OOC, records = GLOB.all_crew_records)
 	var/list/dept_data = list()
 	var/list/dept_list = SSdepartments.departments
 	for(var/dept_key in dept_list)
@@ -27,7 +27,7 @@
 	<tr class='head'><th>Name</th><th>Position</th><th>Activity</th></tr>
 	"}
 	// sort mobs
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+	for(var/datum/computer_file/report/crew_record/CR in records)
 		var/name = CR.get_formal_name()
 		var/rank = CR.get_job()
 		mil_ranks[name] = ""

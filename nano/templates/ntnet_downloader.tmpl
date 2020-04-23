@@ -16,38 +16,38 @@
 	<hr>
 {{/if}}
 
-	<h2>{{:data.downloadname ? 'Download Running' : 'No Downloads In Progress'}}</h2>
+	<h2>{{:data.transfer_file ? 'Download Running' : 'No Downloads In Progress'}}</h2>
 	<i>{{:data.downloadname ? 'Please wait...' : 'Standing by...'}}</i>
 	<div class="item">
 		<div class="itemLabel">
 			File name: 
 		</div>
 		<div class="itemContent">
-			{{:data.downloadname ? data.downloadname : 'N/A'}}
+			{{:data.transfer_file ? data.transfer_file : 'N/A'}}
 		</div>
 		<div class="itemLabel">
 			File description: 
 		</div>
 		<div class="itemContent">
-			{{:data.downloadname ? data.downloaddesc : 'N/A'}}
+			{{:data.transfer_desc ? data.transfer_desc : 'N/A'}}
 		</div>
 		<div class="itemLabel">
 			File size: 
 		</div>
 		<div class="itemContent">
-			{{:data.downloadname ? (data.downloadcompletion + 'GQ / ' + data.downloadsize + 'GQ') : 'N/A'}}
+			{{:data.transfer_total ? (data.transfer_progress + 'GQ / ' + data.transfer_total + 'GQ') : 'N/A'}}
 		</div>
 		<div class="itemLabel">
 			Transfer Rate: 
 		</div>
 		<div class="itemContent">
-			{{:data.downloadname ? data.downloadspeed : '0'}} GQ/s
+			{{:data.downloadspeed ? data.downloadspeed : '0'}} GQ/s
 		</div>
 		<div class="itemLabel">
 			Download progress: 
 		</div>
 		<div class="itemContent">
-			{{:helper.displayBar(data.downloadcompletion, 0, data.downloadname ? data.downloadsize : 0, 'good')}}
+			{{:helper.displayBar(data.transfer_progress, 0, data.transfer_total ? data.transfer_total : 0, 'good')}}
 		</div>
 	</div>
 

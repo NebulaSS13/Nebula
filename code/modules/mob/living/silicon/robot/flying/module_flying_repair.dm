@@ -3,9 +3,9 @@
 	display_name = "Repair"
 	channels = list ("Engineering" = TRUE)
 	networks = list(NETWORK_ENGINEERING)
-	subsystems = list(
-		/datum/nano_module/power_monitor, 
-		/datum/nano_module/supermatter_monitor
+	software = list(
+		/datum/computer_file/program/power_monitor,
+		/datum/computer_file/program/supermatter_monitor
 	)
 	sprites = list(
 		"Drone" = "drone-engineer",

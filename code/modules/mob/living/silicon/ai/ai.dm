@@ -28,7 +28,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_take_image,
 	/mob/living/silicon/ai/proc/change_floor,
 	/mob/living/silicon/ai/proc/show_crew_monitor,
-	/mob/living/silicon/ai/proc/access_computer,
+	/mob/living/silicon/proc/access_computer,
 	/mob/living/silicon/ai/proc/ai_power_override,
 	/mob/living/silicon/ai/proc/ai_shutdown,
 	/mob/living/silicon/ai/proc/ai_reset_radio_keys,
@@ -619,20 +619,9 @@ var/list/ai_verbs_default = list(
 			user.visible_message("<span class='notice'>\The [user] finishes fastening down \the [src]!</span>")
 			anchored = 1
 			return
-	else if(isCrowbar(W) && user.a_intent != I_HURT)
-		if(!length(stock_parts))
-			to_chat(user, SPAN_WARNING("No parts left to remove"))
-			return
-		var/obj/item/stock_parts/remove = input(user, "Which component do you want to pry out?", "Remove Component") as null|anything in stock_parts
-		if(!remove || !(remove in stock_parts))
-			return
-		stock_parts -= remove
-		to_chat(user, SPAN_NOTICE("You remove \the [remove]."))
-		remove.forceMove(loc)
-	else if(istype(W, /obj/item/stock_parts) && user.unEquip(W))
-		W.forceMove(src)
-		stock_parts += W
-		to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
+	if(try_stock_parts_install(W, user))
+		return
+	if(try_stock_parts_removal(W, user))
 		return
 	else
 		return ..()
@@ -764,23 +753,6 @@ var/list/ai_verbs_default = list(
 	set name = "Show Crew Lifesigns Monitor"
 
 	run_program("sensormonitor")
-
-/mob/living/silicon/ai/proc/access_computer()
-	set category = "Silicon Commands"
-	set name = "Boot NTOS Device"
-
-	if(incapacitated())
-		to_chat(src, SPAN_WARNING("You are in no state to do that right now."))
-		return
-
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(!istype(os))
-		to_chat(src, SPAN_WARNING("You seem to be lacking an NTOS capable device!"))
-		return
-	
-	if(!os.on)
-		os.system_boot()
-	os.ui_interact(src)
 
 /mob/living/silicon/ai/proc/run_program(var/filename)
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)

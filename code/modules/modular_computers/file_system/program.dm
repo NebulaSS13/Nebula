@@ -69,7 +69,7 @@
 /datum/computer_file/program/proc/is_supported_by_hardware(var/hardware_flag, var/mob/user, var/loud = FALSE)
 	if(!(hardware_flag & usage_flags))
 		if(loud && computer && user)
-			computer.show_error(user, "Hardware Error - Incompatible software")
+			computer.show_error(user, "Hardware Error - Incompatible software '[filedesc]'")
 		return 0
 	return 1
 
@@ -165,6 +165,10 @@
 		return 0
 	return 1
 
+/datum/nano_module/program/proc/get_records()
+	var/datum/computer_network/network = program.computer.get_network()
+	if(network)
+		return network.get_crew_records()
 
 // CONVENTIONS, READ THIS WHEN CREATING NEW PROGRAM AND OVERRIDING THIS PROC:
 // Topic calls are automagically forwarded from NanoModule this program contains.
@@ -191,6 +195,9 @@
 /datum/nano_module/program/New(var/host, var/topic_manager, var/program)
 	..()
 	src.program = program
+
+/datum/nano_module/program/proc/get_network()
+	return program.computer.get_network()
 
 /datum/topic_manager/program
 	var/datum/program

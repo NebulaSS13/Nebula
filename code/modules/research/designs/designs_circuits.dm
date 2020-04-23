@@ -56,11 +56,6 @@
 	req_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 5, TECH_DATA = 3)
 	build_path = /obj/item/stock_parts/circuitboard/sleeper
 
-/datum/design/circuit/crewconsole
-	name = "crew monitoring console"
-	req_tech = list(TECH_DATA = 3, TECH_MAGNET = 2, TECH_BIO = 2)
-	build_path = /obj/item/stock_parts/circuitboard/crew
-
 /datum/design/circuit/body_scan_display
 	name = "body scanner display"
 	req_tech = list(TECH_BIO = 2, TECH_DATA = 2)
@@ -251,11 +246,6 @@
 /datum/design/circuit/air_management
 	name = "atmosphere monitoring console"
 	build_path = /obj/item/stock_parts/circuitboard/air_management
-
-/datum/design/circuit/rcon_console
-	name = "RCON remote control console"
-	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_POWER = 5)
-	build_path = /obj/item/stock_parts/circuitboard/rcon_console
 
 /datum/design/circuit/dronecontrol
 	name = "drone control console"
@@ -546,11 +536,6 @@
 	req_tech = list(TECH_COMBAT = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/stock_parts/circuitboard/pointdefense_control
 
-/datum/design/circuit/ntnet_relay
-	name = "NTNet Quantum Relay"
-	req_tech = list(TECH_DATA = 4)
-	build_path = /obj/item/stock_parts/circuitboard/ntnet_relay
-
 /datum/design/circuit/washer
 	name = "washing machine"
 	req_tech = list(TECH_ENGINEERING = 1)
@@ -714,3 +699,13 @@
 	name = "forensic DNA analyzer board"
 	build_path = /obj/item/stock_parts/circuitboard/forensic_dna_analyzer
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3, TECH_BIO = 3)
+
+/datum/design/circuit/net_mainframe
+	name = "network mainframe board"
+	build_path = /obj/item/stock_parts/circuitboard/mainframe
+	req_tech = list(TECH_DATA = 3)
+
+/datum/design/circuit/net_router
+	name = "network router board"
+	build_path = /obj/item/stock_parts/circuitboard/router
+	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 3)

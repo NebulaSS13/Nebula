@@ -53,8 +53,7 @@
 
 /obj/machinery/computer/modular/preset/aislot/research
 	default_software = list(
-		/datum/computer_file/program/ntnetmonitor,
-		/datum/computer_file/program/nttransfer,
+		/datum/computer_file/program/network_monitor,
 		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/aidiag,
 		/datum/computer_file/program/email_client,
@@ -63,8 +62,7 @@
 
 /obj/machinery/computer/modular/preset/aislot/sysadmin
 	default_software = list(
-		/datum/computer_file/program/ntnetmonitor,
-		/datum/computer_file/program/nttransfer,
+		/datum/computer_file/program/network_monitor,
 		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/aidiag,
 		/datum/computer_file/program/email_client,
@@ -119,7 +117,6 @@
 
 /obj/machinery/computer/modular/preset/full/ert
 	default_software = list(
-		/datum/computer_file/program/nttransfer,
 		/datum/computer_file/program/camera_monitor/ert,
 		/datum/computer_file/program/email_client,
 		/datum/computer_file/program/alarm_monitor,

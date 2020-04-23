@@ -1,30 +1,34 @@
 /datum/computer_file/program/shields_monitor
 	filename = "shieldsmonitor"
 	filedesc = "Shield Generators Monitoring"
-	nanomodule_path = /datum/nano_module/shields_monitor/
+	nanomodule_path = /datum/nano_module/program/shields_monitor/
 	program_icon_state = "shield"
 	program_key_state = "generic_key"
 	program_menu_icon = "radio-on"
 	extended_desc = "This program connects to shield generators and monitors their statuses."
 	ui_header = "shield.gif"
-	requires_ntnet = 1
 	network_destination = "shields monitoring system"
 	size = 10
 	category = PROG_ENG
 
-/datum/nano_module/shields_monitor
+/datum/nano_module/program/shields_monitor
 	name = "Shields monitor"
 	var/obj/machinery/power/shield_generator/active = null
 
-/datum/nano_module/shields_monitor/Destroy()
+/datum/nano_module/program/shields_monitor/Destroy()
 	. = ..()
 	deselect_shield()
 
-/datum/nano_module/shields_monitor/proc/get_shields()
+/datum/nano_module/program/shields_monitor/proc/can_connect_to_shield(obj/machinery/power/shield_generator/S)
+	var/datum/computer_network/network = get_network()
+	if(!network)
+		return FALSE
+	return ARE_Z_CONNECTED(network.get_router_z(), get_z(S))
+
+/datum/nano_module/program/shields_monitor/proc/get_shields()
 	var/list/shields = list()
-	var/connected_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
-		if(!(S.z in connected_z_levels))
+		if(!can_connect_to_shield(S))
 			continue
 		shields.Add(S)
 
@@ -32,9 +36,10 @@
 		deselect_shield()
 	return shields
 
-/datum/nano_module/shields_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/shields_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
-
+	if(!can_connect_to_shield(active))
+		deselect_shield()
 	if (active)
 		data["active"] = 1
 		data["running"] = active.running
@@ -84,7 +89,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/nano_module/shields_monitor/Topic(href, href_list)
+/datum/nano_module/program/shields_monitor/Topic(href, href_list)
 	if(..())
 		return 1
 	if( href_list["refresh"] )
@@ -98,11 +103,11 @@
 		var/obj/machinery/power/shield_generator/S = locate(href_list["ref"]) in shields
 		if(S)
 			deselect_shield()
-			GLOB.destroyed_event.register(S, src, /datum/nano_module/shields_monitor/proc/deselect_shield)
+			GLOB.destroyed_event.register(S, src, /datum/nano_module/program/shields_monitor/proc/deselect_shield)
 			active = S
 		return 1
 
-/datum/nano_module/shields_monitor/proc/deselect_shield(var/source)
+/datum/nano_module/program/shields_monitor/proc/deselect_shield(var/source)
 	if(!active)
 		return
 	GLOB.destroyed_event.unregister(active, src)

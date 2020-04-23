@@ -63,11 +63,6 @@
 	name = T_BOARD("R&D server control console")
 	build_path = /obj/machinery/computer/rdservercontrol
 
-/obj/item/stock_parts/circuitboard/crew
-	name = T_BOARD("crew monitoring console")
-	build_path = /obj/machinery/computer/crew
-	origin_tech = "{'programming':3,'biotech':2,'magnets':2}"
-
 /obj/item/stock_parts/circuitboard/operating
 	name = T_BOARD("patient monitoring console")
 	build_path = /obj/machinery/computer/operating
@@ -97,11 +92,6 @@
 	name = T_BOARD("area air control console")
 	build_path = /obj/machinery/computer/area_atmos
 	origin_tech = "{'programming':2}"
-
-/obj/item/stock_parts/circuitboard/rcon_console
-	name = T_BOARD("RCON remote control console")
-	build_path = /obj/machinery/computer/rcon
-	origin_tech = "{'programming':4,'engineering':3,'powerstorage':5}"
 
 /obj/item/stock_parts/circuitboard/account_database
 	name = T_BOARD("accounts uplink terminal")

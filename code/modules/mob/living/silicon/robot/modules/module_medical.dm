@@ -6,8 +6,8 @@
 	networks = list(
 		NETWORK_MEDICAL
 	)
-	subsystems = list(
-		/datum/nano_module/crew_monitor
+	software = list(
+		/datum/computer_file/program/crew_manifest
 	)
 	can_be_pushed = 0
 

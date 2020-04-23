@@ -6,7 +6,6 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "mail-closed"
 	size = 7
-	requires_ntnet = 1
 	available_on_ntnet = 1
 	var/stored_login = ""
 	var/stored_password = ""
@@ -84,6 +83,11 @@
 /datum/nano_module/program/email_client/proc/get_functional_drive()
 	return program.computer.get_component(/obj/item/stock_parts/computer/hard_drive)
 
+/datum/nano_module/program/email_client/proc/get_email_addresses()
+	var/datum/computer_network/net = get_network()
+	if(net)
+		return net.get_email_addresses()
+
 /datum/nano_module/program/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
 	var/mob/living/L = get_holder_of_type(host, /mob/living)
 	if(L)
@@ -111,8 +115,11 @@
 	if(id)
 		id_login = id.associated_email_login.Copy()
 
+	if(!get_network())
+		error = "Network error"
+		return 0
 	var/datum/computer_file/data/email_account/target
-	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+	for(var/datum/computer_file/data/email_account/account in get_email_addresses())
 		if(!account || !account.can_login)
 			continue
 		if(id_login && id_login["login"] == account.login)
@@ -149,7 +156,8 @@
 /datum/nano_module/program/email_client/proc/check_for_new_messages(var/messages_read = FALSE)
 	if(!current_account)
 		return 0
-
+	if(!get_network())
+		return 0
 	var/list/allmails = current_account.all_emails()
 
 	if(allmails.len > last_message_count)
@@ -200,7 +208,7 @@
 		data["current_account"] = current_account.login
 		if(addressbook)
 			var/list/all_accounts = list()
-			for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+			for(var/datum/computer_file/data/email_account/account in get_email_addresses())
 				if(!account.can_login)
 					continue
 				all_accounts.Add(list(list(
@@ -422,7 +430,7 @@
 		message.stored_data = msg_body
 		message.source = current_account.login
 		message.attachment = msg_attachment
-		if(!current_account.send_mail(msg_recipient, message))
+		if(!current_account.send_mail(msg_recipient, message, get_network()))
 			error = "Error sending email: this address doesn't exist."
 			return 1
 		else

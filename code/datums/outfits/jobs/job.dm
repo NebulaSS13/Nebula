@@ -20,6 +20,4 @@
 	if(H.mind)
 		if(H.mind.initial_account)
 			C.associated_account_number = H.mind.initial_account.account_number
-		if(H.mind.initial_email_login)
-			C.associated_email_login = H.mind.initial_email_login.Copy()
 	return C

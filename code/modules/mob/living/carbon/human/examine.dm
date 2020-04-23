@@ -283,12 +283,14 @@
 			perpname = src.name
 
 		if(perpname)
-			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
-			if(R)
-				criminal = R.get_criminalStatus()
+			var/datum/computer_network/network = user.getHUDnetwork(HUD_SECURITY)
+			if(network)
+				var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
+				if(R)
+					criminal = R.get_criminalStatus()
 
-			msg += "<span class = 'deptradio'>Criminal status:</span> <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
-			msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>\n"
+				msg += "<span class = 'deptradio'>Criminal status:</span> <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
+				msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>\n"
 
 	if(hasHUD(user, HUD_MEDICAL))
 		var/perpname = "wot"
@@ -300,12 +302,14 @@
 		else
 			perpname = src.name
 
-		var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
-		if(R)
-			medical = R.get_status()
+		var/datum/computer_network/network = user.getHUDnetwork(HUD_MEDICAL)
+		if(network)
+			var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
+			if(R)
+				medical = R.get_status()
 
-		msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
-		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
+			msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
+			msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
@@ -330,16 +334,36 @@
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M, hudtype)
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/clothing/glasses/G = H.glasses
-		return istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))
-	else if(istype(M, /mob/living/silicon/robot))
-		var/mob/living/silicon/robot/R = M
-		for(var/obj/item/borg/sight/sight in list(R.module_state_1, R.module_state_2, R.module_state_3))
-			if(istype(sight) && (sight.hud_type & hudtype))
-				return TRUE
-	return FALSE
+	return !!M.getHUDsource(hudtype)
+
+/mob/proc/getHUDsource(hudtype)
+	return
+
+/mob/living/carbon/human/getHUDsource(hudtype)
+	var/obj/item/clothing/glasses/G = glasses
+	if(!istype(G))
+		return 
+	if(G.hud_type & hudtype)
+		return G
+	if(G.hud && (G.hud.hud_type & hudtype))
+		return G.hud
+
+/mob/living/silicon/robot/getHUDsource(hudtype)
+	for(var/obj/item/borg/sight/sight in list(module_state_1, module_state_2, module_state_3))
+		if(istype(sight) && (sight.hud_type & hudtype))
+			return sight
+
+//Gets the computer network M's source of hudtype is using
+/mob/proc/getHUDnetwork(hudtype)
+	var/obj/O = getHUDsource(hudtype)
+	if(!O)
+		return
+	var/datum/extension/network_device/D = get_extension(O, /datum/extension/network_device)
+	return D.get_network()
+
+/mob/living/silicon/getHUDnetwork(hudtype)
+	if(getHUDsource(hudtype))
+		return get_computer_network()
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"

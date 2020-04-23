@@ -166,7 +166,7 @@
 			ui_ai_crew_rec,
 			"Inbuilt Computer",
 			"ai_crew_rec",
-			/mob/living/silicon/ai/proc/access_computer
+			/mob/living/silicon/proc/access_computer
 			)
 	A.client.screen = list()
 	A.client.screen.Add(adding)

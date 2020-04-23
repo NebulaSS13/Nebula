@@ -464,18 +464,6 @@ SUBSYSTEM_DEF(jobs)
 		//Equip job items.
 		job.setup_account(H)
 
-		// EMAIL GENERATION
-		if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
-			var/domain
-			if(H.char_branch)
-				if(H.char_branch.email_domain)
-					domain = H.char_branch.email_domain
-			else
-				domain = "freemail.net"
-			if(domain)
-				ntnet_global.create_email(H, H.real_name, domain, rank)
-		// END EMAIL GENERATION
-
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
 		job.apply_fingerprints(H)
 		spawn_in_storage = equip_custom_loadout(H, job)
@@ -498,6 +486,14 @@ SUBSYSTEM_DEF(jobs)
 		if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
 			H.buckled.forceMove(H.loc)
 			H.buckled.set_dir(H.dir)
+
+	if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
+		var/domain = "freemail.net"
+		if(H.char_branch?.email_domain)
+			domain = H.char_branch.email_domain
+		var/datum/computer_network/network = get_local_network_at(get_turf(H))
+		if(network)
+			network.create_email(H, H.real_name, domain, rank)
 
 	// If they're head, give them the account info for their department
 	if(H.mind && job.head_position)

@@ -11,14 +11,29 @@ GLOBAL_LIST(all_warrants)
 	requires_ntnet = 1
 	available_on_ntnet = 1
 	required_access = access_security
-	nanomodule_path = /datum/nano_module/digitalwarrant/
+	nanomodule_path = /datum/nano_module/program/digitalwarrant/
 	category = PROG_SEC
 
-/datum/nano_module/digitalwarrant/
+/datum/nano_module/program/digitalwarrant/
 	name = "Warrant Assistant"
 	var/datum/computer_file/report/warrant/active
 
-/datum/nano_module/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/proc/get_warrants()
+	var/datum/computer_network/network = program.computer.get_network()
+	if(network)
+		return network.get_all_files_of_type(/datum/computer_file/report/warrant)
+
+/datum/nano_module/program/proc/remove_warrant(datum/computer_file/report/warrant/W)
+	var/datum/computer_network/network = program.computer.get_network()
+	if(network)
+		return network.remove_file(W)
+
+/datum/nano_module/program/proc/save_warrant(datum/computer_file/report/warrant/W)
+	var/datum/computer_network/network = program.computer.get_network()
+	if(network)
+		return network.store_file(W)
+
+/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	if(active)
@@ -34,7 +49,7 @@ GLOBAL_LIST(all_warrants)
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/digitalwarrant/Topic(href, href_list)
+/datum/nano_module/program/digitalwarrant/Topic(href, href_list)
 	if(..())
 		return 1
 

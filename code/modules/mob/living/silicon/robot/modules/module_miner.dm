@@ -1,8 +1,8 @@
 /obj/item/robot_module/miner
 	name = "miner robot module"
 	display_name = "Miner"
-	subsystems = list(
-		/datum/nano_module/supply
+	software = list(
+		/datum/computer_file/program/supply
 	)
 	channels = list(
 		"Supply" = TRUE,

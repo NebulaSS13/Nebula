@@ -11,6 +11,9 @@
 
 		for(var/i = authorized_modes.len + 1 to firemodes.len)
 			authorized_modes.Add(default_mode_authorization)
+		
+		set_extension(src, /datum/extension/network_device/lazy)
+		verbs |= /obj/item/gun/proc/network_setup
 
 	. = ..()
 
@@ -113,3 +116,19 @@
 		if(. == sel_mode) // just in case all modes are unauthorized
 			return null
 	while (!authorized_modes[.] && !free_fire())
+
+/obj/item/gun/proc/get_network()
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	if(D)
+		return D.get_network()
+
+/obj/item/gun/proc/network_setup()
+	set name = "Setup Secure Gun Network"
+	set category = "Object"
+	set src in usr
+
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	if(D)
+		D.ui_interact(usr)
+	else
+		to_chat(usr, SPAN_WARNING("\The [src] is not network capable."))

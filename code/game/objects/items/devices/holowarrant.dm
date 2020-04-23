@@ -13,6 +13,10 @@
 	req_access = list(list(access_heads, access_security))
 	var/datum/computer_file/report/warrant/active
 
+/obj/item/holowarrant/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/network_device/lazy)
+
 //look at it
 /obj/item/holowarrant/examine(mob/user, distance)
 	. = ..()
@@ -22,18 +26,6 @@
 		show_content(user)
 	else
 		to_chat(user, "<span class='notice'>You have to be closer if you want to read it.</span>")
-
-// an active warrant with access authorized grants access
-/obj/item/holowarrant/GetAccess()
-	. = list()
-
-	if(!active)
-		return
-
-	if(active.archived)
-		return
-
-	. |= active.fields["access"]
 
 //hit yourself with it
 /obj/item/holowarrant/attack_self(mob/living/user)
@@ -77,6 +69,11 @@
 		active = selected
 		update_icon()
 		return TOPIC_REFRESH
+
+	if(href_list["settings"])
+		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+		D.ui_interact(user)
+		return TOPIC_HANDLED
 
 /obj/item/holowarrant/attackby(obj/item/W, mob/user)
 	if(active)

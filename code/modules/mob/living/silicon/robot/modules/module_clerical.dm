@@ -12,6 +12,10 @@
 		SKILL_SCIENCE             = SKILL_EXPERT,
 		SKILL_DEVICES             = SKILL_EXPERT
 	)
+	software = list(
+		/datum/computer_file/program/wordprocessor,
+		/datum/computer_file/program/supply
+	)
 
 /obj/item/robot_module/clerical/butler
 	name = "service robot module"

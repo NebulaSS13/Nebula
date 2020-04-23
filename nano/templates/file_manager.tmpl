@@ -1,3 +1,26 @@
+<div class='item'>
+	<div class='itemLabel'>Storage Medium</div>
+	{{:helper.link(data.current_source, null, { "PRG_change_filesource" : 1 }, null)}}
+</div>
+{{if data.transfer_file}}
+	<div class='item'>
+		<div class='itemLabel'>Current Transfer</div>
+		<div>
+		{{:helper.displayBar(data.transfer_progress, 0, data.transfer_total, 'average')}}
+		{{:helper.link('ABORT', null, { "PRG_stoptransfer" : 1 }, null)}}
+		</div>
+	</div>
+	<div>
+		<div class='itemLabel'>Transfer details</div>
+		<span class='white'>{{:data.transfer_file}}</span> from <span class='white'>{{:data.transfer_from}}</span> to <span class='white'>{{:data.transfer_to}}</span>
+	</div>
+{{/if}}
+{{if data.fileserver}}
+	<div class='item'>
+		<div class='itemLabel'>File Server</div>
+		{{:helper.link(data.fileserver, null, { "PRG_changefileserver" : 1 }, null)}}
+	</div>
+	{{/if}}
 {{if data.error}}
 	<h2>An error has occured:</h2>
 	Additional information: {{:data.error}}<br>
@@ -13,7 +36,7 @@
 		</div><hr>
 		{{:data.filedata}}
 	{{else}}
-		<h2>Available files (local):</h2>
+		<h2>Available files ({{:data.current_source}}):</h2>
 		<table>
 			<tr><th>File name
 			<th>File type
@@ -28,9 +51,7 @@
 					{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{:helper.link('RENAME', null, { "PRG_rename" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{:helper.link('CLONE', null, { "PRG_clone" : value.name }, value.undeletable ? 'disabled' : null)}}
-					{{if data.usbconnected}}
-						{{:helper.link('EXPORT', null, { "PRG_copytousb" : value.name }, value.undeletable ? 'disabled' : null)}}
-					{{/if}}
+					{{:helper.link('COPY TO', null, { "PRG_copyto" : value.name }, value.undeletable ? 'disabled' : null)}}
 			{{/for}}
 		</table>
 		{{if data.usbconnected}}

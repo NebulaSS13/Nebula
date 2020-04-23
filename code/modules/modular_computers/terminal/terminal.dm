@@ -47,7 +47,7 @@
 		return panel.user
 
 /datum/terminal/proc/show_terminal(mob/user)
-	panel = new(user, "terminal-\ref[computer]", name, 500, 460, src)
+	panel = new(user, "terminal-\ref[computer]", name, 500, 546, src)
 	update_content()
 	panel.open()
 
@@ -55,7 +55,7 @@
 	var/list/content = history.Copy()
 	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'>> <input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
 	content += "<i>type `man` for a list of available commands.</i>"
-	panel.set_content(jointext(content, "<br>"))
+	panel.set_content("<tt>[jointext(content, "<br>")]</tt>")
 
 /datum/terminal/Topic(href, href_list)
 	if(..())
@@ -94,4 +94,4 @@
 		if(scf.can_run(user, src))
 			candidates[scf] = scf.weight
 	var/datum/terminal_skill_fail/chosen = pickweight(candidates)
-	return chosen.execute()
+	return chosen.execute(src)

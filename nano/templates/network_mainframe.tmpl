@@ -1,0 +1,39 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	<div class="item">
+		{{:helper.link('Refresh', null, { "refresh" : 1 })}}
+	</div>
+{{else}}
+	<div class="itemLabel">
+		Network TAG:
+	</div>
+	<div class="itemContent">
+		{{:data.network_tag}}
+	</div>
+	<div class="item">
+		{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}
+	</div>
+	<h2>Mainframe roles:</h2>
+	{{for data.roles}}
+		<div class="itemLabelWide">
+			{{:value.name}}
+		</div>
+		<div class="itemContentNarrow">
+			{{:helper.link(value.enabled ? "Enabled" : "Disabled", null, { "toggle_role" : value.name })}}
+		</div>
+	{{/for}}
+	<h2>Storage Status:</h2>
+	{{if data.storage_exists}}
+		<div class="item">
+			{{:helper.displayBar(data.used, 0, data.capacity, 'good')}} {{:data.used}}/{{:data.capacity}} GQ
+		</div>
+	{{else}}
+		<div class="item">
+			MISSING
+		</div>
+	{{/if}} 
+	<hr>
+	<i>EXONET Firmware v110.04.4h Copyright EXONETWORKS INC</i>
+{{/if}} 

@@ -30,12 +30,14 @@
 			data["printer"] = program.computer.has_component(PART_PRINTER)
 		if(REPORTS_DOWNLOAD)
 			var/list/L = list()
-			for(var/datum/computer_file/report/report in ntnet_global.fetch_reports(get_access(user)))
-				var/M = list()
-				M["name"] = report.display_name()
-				M["uid"] = report.uid
-				L += list(M)
-			data["reports"] = L
+			var/datum/computer_network/net = program.computer.get_network()
+			if(net)
+				for(var/datum/computer_file/report/report in net.fetch_reports(get_access(user)))
+					var/M = list()
+					M["name"] = report.display_name()
+					M["uid"] = report.uid
+					L += list(M)
+				data["reports"] = L
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -170,7 +172,8 @@
 		return 1
 	if(href_list["get_report"])
 		var/uid = text2num(href_list["report"])
-		for(var/datum/computer_file/report/report in ntnet_global.fetch_reports(get_access(user)))
+		var/datum/computer_network/net = program.computer.get_network()
+		for(var/datum/computer_file/report/report in net.fetch_reports(get_access(user)))
 			if(report.uid == uid)
 				selected_report = report.clone()
 				can_view_only = 0

@@ -13,8 +13,22 @@
 	extended_desc = "A management tool that allows for ordering of various supplies through the facility's cargo system. Some features may require additional access."
 	size = 21
 	available_on_ntnet = 1
-	requires_ntnet = 1
 	category = PROG_SUPPLY
+
+/datum/computer_file/program/supply/is_supported_by_hardware(var/hardware_flag, var/mob/user, var/loud = FALSE)
+	. = ..()
+	if(. && computer)
+		var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
+		var/datum/computer_network/net = computer.get_network()
+		if(!shuttle || !net)
+			if(loud)
+				computer.show_error(user, "Unable to contact the supply shuttle.")
+			return FALSE
+		var/obj/physical_router = net.router.holder
+		if(!ARE_Z_CONNECTED(shuttle.waypoint_station.z, physical_router.z))
+			if(loud)
+				computer.show_error(user, "Unable to contact a supply shuttle serving your location.")
+			return FALSE
 
 /datum/computer_file/program/supply/process_tick()
 	..()

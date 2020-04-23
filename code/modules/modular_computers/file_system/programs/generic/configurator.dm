@@ -35,6 +35,18 @@
 		data["battery_rating"] = battery_module.battery.maxcharge
 		data["battery_percent"] = round(battery_module.battery.percent())
 
+	var/obj/item/stock_parts/computer/network_card/network_card = program.computer.get_component(PART_NETWORK)
+	data["nic_exists"] = !!network_card
+	if(network_card)
+		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
+		data["signal_strength"] = D.get_signal_wordlevel()
+		data["net_id"] = D.network_id ? D.network_id : "Not Set"
+		if(program.computer.emagged())
+			data["key"] = D.key
+		else
+			data["key"] = D.key ? "************" : "Not Set"
+		data["tag"] = D.network_tag
+
 	var/list/all_entries[0]
 	var/list/hardware = program.computer.get_all_components()
 	for(var/obj/item/stock_parts/computer/H in hardware)
@@ -57,3 +69,19 @@
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
+
+/datum/nano_module/program/computer_configurator/Topic(href, href_list)
+	. = ..()
+	if(.)
+		return
+	var/obj/item/stock_parts/computer/network_card/network_card = program.computer.get_component(PART_NETWORK)
+	var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
+	if(href_list["PRG_newid"])
+		D.do_change_id(usr)
+		return TOPIC_REFRESH
+	else if(href_list["PRG_newkey"])
+		D.do_change_key(usr)
+		return TOPIC_REFRESH
+	else if(href_list["PRG_newtag"])
+		D.do_change_net_tag(usr)
+		return TOPIC_REFRESH

@@ -5,8 +5,7 @@
 	program_key_state = "security_key"
 	program_menu_icon = "unlocked"
 	extended_desc = "This highly advanced script can very slowly decrypt operational codes used in almost any network. These codes can be downloaded to an ID card to expand the available access. The system administrator will probably notice this."
-	size = 34
-	requires_ntnet = 1
+	size = 12
 	available_on_ntnet = 0
 	available_on_syndinet = 1
 	nanomodule_path = /datum/nano_module/program/access_decrypter/
@@ -39,6 +38,10 @@
 	if(!istype(RFID.stored_card))
 		message = "RFID card has been removed from the device. Operation aborted."
 		return
+	var/datum/computer_network/net = computer.get_network()
+	if(!net)
+		message = "Network error. Unable to access to cypher database."
+		return
 
 	progress += get_speed()
 
@@ -51,9 +54,9 @@
 				valid_access_values -= skill_restricted_access_codes_master
 			target_access = get_access_by_id(pick(valid_access_values))
 		RFID.stored_card.access |= target_access.id
-		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
-			ntnet_global.add_log("IDS WARNING - Unauthorised access to primary keycode database from device: [computer.get_network_tag()]  - downloaded access codes for: [target_access.desc].")
-			ntnet_global.intrusion_detection_alarm = 1
+		if(net.intrusion_detection_enabled && !prob(get_sneak_chance()))
+			computer.add_log("IDS WARNING - Unauthorised access to primary keycode database - downloaded access codes for: [target_access.desc].")
+			net.intrusion_detection_alarm = 1
 		message = "Successfully decrypted and saved operational key codes. Downloaded access codes for: [target_access.desc]"
 		target_access = null
 		reset()
@@ -91,9 +94,10 @@
 
 		running = TRUE
 
-		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
-			ntnet_global.add_log("IDS WARNING - Unauthorised access attempt to primary keycode database from device: [computer.get_network_tag()]")
-			ntnet_global.intrusion_detection_alarm = 1
+		var/datum/computer_network/net = computer.get_network()
+		if(net.intrusion_detection_enabled && !prob(get_sneak_chance()))
+			computer.add_log("IDS WARNING - Unauthorised access attempt to primary keycode database")
+			net.intrusion_detection_alarm = 1
 		return 1
 
 /datum/computer_file/program/access_decrypter/proc/get_sneak_chance()
@@ -108,13 +112,13 @@
 	name = "NTNet Access Decrypter"
 
 /datum/nano_module/program/access_decrypter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
-	if(!ntnet_global)
-		return
 	var/datum/computer_file/program/access_decrypter/PRG = program
 	var/list/data = list()
 	if(!istype(PRG))
 		return
 	data = PRG.get_header_data()
+	if(!program.computer.get_network())
+		return
 
 	var/obj/item/stock_parts/computer/card_slot/RFID = PRG.computer.get_component(PART_CARD)
 	if(PRG.message)

@@ -189,10 +189,6 @@ var/syndicate_code_response//Code response for traitors.
 	var/drinks[] = list("vodka and tonic","gin fizz","bahama mama","manhattan","black Russian","whiskey soda","long island tea","margarita","Irish coffee"," manly dwarf","Irish cream","doctor's delight","Beepksy Smash","tequilla sunrise","brave bull","gargle blaster","bloody mary","whiskey cola","white Russian","vodka martini","martini","Cuba libre","kahlua","vodka","wine","moonshine")
 	var/locations[] = length(stationlocs) ? stationlocs : drinks//if null, defaults to drinks instead.
 
-	var/names[] = list()
-	for(var/datum/computer_file/report/crew_record/t in GLOB.all_crew_records)//Picks from crew manifest.
-		names += t.get_name()
-
 	var/maxwords = words//Extra var to check for duplicates.
 
 	for(words,words>0,words--)//Randomly picks from one of the choices below.
@@ -206,12 +202,9 @@ var/syndicate_code_response//Code response for traitors.
 			if(1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
 				switch(rand(1,2))//Mainly to add more options later.
 					if(1)
-						if(names.len&&prob(70))
-							code_phrase += pick(names)
-						else
-							code_phrase += pick(pick(GLOB.first_names_male,GLOB.first_names_female))
-							code_phrase += " "
-							code_phrase += pick(GLOB.last_names)
+						code_phrase += pick(pick(GLOB.first_names_male,GLOB.first_names_female))
+						code_phrase += " "
+						code_phrase += pick(GLOB.last_names)
 					if(2)
 						code_phrase += pick(SSjobs.titles_to_datums) //Returns a job.
 				safety -= 1

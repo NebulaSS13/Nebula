@@ -61,7 +61,8 @@ var/list/mob_hat_cache = list()
 	var/hat_y_offset = -13
 
 	holder_type = /obj/item/holder/drone
-	starting_stock_parts = list()
+	ntos_type = null
+	starting_stock_parts = null
 
 /mob/living/silicon/robot/drone/Initialize()
 	. = ..()

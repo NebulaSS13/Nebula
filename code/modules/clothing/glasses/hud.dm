@@ -16,6 +16,14 @@
 /obj/item/clothing/glasses/hud/process_hud(var/mob/M)
 	return
 
+/obj/item/clothing/glasses/hud/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/network_device/lazy)
+	var/obj/verb_holder = src
+	if(istype(loc, /obj/item/clothing/glasses)) //we're a HUD inside other glasses
+		verb_holder = loc
+	verb_holder.verbs |= /obj/item/clothing/glasses/proc/network_setup
+
 /obj/item/clothing/glasses/hud/health
 	name = "health scanner HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
@@ -24,7 +32,8 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
-	process_med_hud(M, 1)
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	process_med_hud(M, 1, network = D?.get_network())
 
 /obj/item/clothing/glasses/hud/health/prescription
 	name = "prescription health scanner HUD"
@@ -46,7 +55,7 @@
 	hud_type = HUD_SECURITY
 	body_parts_covered = 0
 	var/global/list/jobs[0]
-
+	
 /obj/item/clothing/glasses/hud/security/prescription
 	name = "prescription security HUD"
 	desc = "A security HUD integrated with a set of prescription glasses."
@@ -65,7 +74,8 @@
 
 
 /obj/item/clothing/glasses/hud/security/process_hud(var/mob/M)
-	process_sec_hud(M, 1)
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	process_sec_hud(M, 1, network = D?.get_network())
 
 /obj/item/clothing/glasses/hud/janitor
 	name = "janiHUD"
