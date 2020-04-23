@@ -14,7 +14,7 @@
 	if(!..())
 		return 0
 
-	usr.visible_message("<b>[src]</b> points to [A]")
+	usr.visible_message("<b>[src]</b> points to <a href='?src=\ref[A];look_at_me=1'>[A]</a>")
 	return 1
 
 /*one proc, four uses
