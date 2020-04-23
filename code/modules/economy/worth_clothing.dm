@@ -7,10 +7,5 @@
 /obj/item/clothing/get_single_monetary_worth()
 	. = ..()
 	if(!holographic)
-		switch(flash_protection)
-			if(FLASH_PROTECTION_MINOR)
-				. += 10
-			if(FLASH_PROTECTION_MODERATE)
-				. += 50
-			if(FLASH_PROTECTION_MAJOR)
-				. += 100
+		if(flash_protection > 0)
+			. += flash_protection * SSfabrication.flash_protection_value

@@ -15,6 +15,32 @@ SUBSYSTEM_DEF(fabrication)
 	var/list/crafting_recipes_to_init = list()
 	var/post_recipe_init = FALSE
 
+	// Value modifiers.
+	// TODO: move to SSeconomics.
+	// Exponential tech level value.
+	var/const/tech_level_value =                           5
+	// Linear weapon values.
+	var/const/fast_weapon_value =                          1.2
+	var/const/slow_weapon_value =                          0.8
+	var/const/accuracy_value_multiplier =                  2
+	var/const/parry_value_multiplier =                     5
+	var/const/edged_weapon_multiplier =                    1
+	var/const/force_weapon_value =                         10
+	// Linear clothing values.
+	var/const/heat_protection_multiplier =                 5
+	var/const/general_protection_value_multiplier =        20
+	var/const/mundane_armour_value =                       20
+	var/const/base_armour_worth =                          50
+	var/const/item_flag_value =                            15
+	var/const/flash_protection_value =                     25
+	// Projectile values.
+	var/const/distance_falloff_base_value =                5
+	var/const/projectile_status_multiplier =               0.2
+	var/const/projectile_penetration_modifier_multiplier = 0.1
+	var/const/projectile_penetration_multiplier =          0.2
+	// Misc other values.
+	var/const/data_value_modifier =                        5
+
 /datum/controller/subsystem/fabrication/Initialize()
 
 	// Fab recipes.
