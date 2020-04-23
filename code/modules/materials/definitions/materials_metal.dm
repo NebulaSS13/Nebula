@@ -17,7 +17,7 @@
 				)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_MATTE
-	value = 100
+	value = 1.5
 	removed_by_welder = TRUE
 
 /material/gold
@@ -43,7 +43,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "nugget"
-	value = 40	
+	value = 1.6
 	removed_by_welder = TRUE
 
 /material/gold/bronze //placeholder for ashtrays
@@ -54,6 +54,7 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = null
 	ore_compresses_to = null
+	value = 1.2
 
 /material/copper
 	display_name = "copper"
@@ -100,7 +101,7 @@
 	ore_name = "native silver"
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "shiny"
-	value = 35
+	value = 1.2
 	removed_by_welder = TRUE
 
 /material/steel
@@ -124,7 +125,7 @@
 	ore_smelts_to = MAT_STEEL
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_SHINY
-	value = 4
+	value = 1.1
 	removed_by_welder = TRUE
 
 /material/steel/holographic
@@ -165,6 +166,7 @@
 	alloy_materials = null
 	alloy_product = FALSE
 	hidden_from_codex = TRUE
+	value = 0
 
 /material/aluminium/holographic/get_recipes(reinf_mat)
 	return list()
@@ -190,7 +192,7 @@
 	alloy_materials = list(MAT_STEEL = 2500, MAT_PLATINUM = 1250)
 	alloy_product = TRUE
 	ore_smelts_to = MAT_PLASTEEL
-	value = 12
+	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE
 
@@ -210,7 +212,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_materials = null
 	alloy_product = FALSE
-	value = 30
+	value = 1.5
 	reflectiveness = MAT_VALUE_SHINY
 
 /material/plasteel/ocp
@@ -229,6 +231,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_product = TRUE
 	reflectiveness = MAT_VALUE_SHINY
+	value = 1.8
 
 /material/osmium
 	display_name = "osmium"
@@ -241,7 +244,7 @@
 	sheet_plural_name = "ingots"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	ore_smelts_to = MAT_OSMIUM
-	value = 30
+	value = 1.6
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
 
@@ -263,7 +266,7 @@
 	ore_name = "raw platinum"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "shiny"
-	value = 80
+	value = 1.5
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
 
@@ -281,7 +284,6 @@
 	chem_products = list(
 				/decl/reagent/iron = 20
 				)
-	value = 5
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE
 
@@ -298,7 +300,7 @@
 	weight = 500
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	hidden_from_codex = TRUE
-	value = 100
+	value = 3
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
 
@@ -324,6 +326,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	hidden_from_codex = TRUE
 	removed_by_welder = TRUE
+	value = 2.5
 
 /material/aliumium/New()
 	icon_base = "metal"
@@ -352,6 +355,7 @@
 	ore_name = "hematite"
 	ore_icon_overlay = "lump"
 	removed_by_welder = TRUE
+	value = 0.8
 
 /material/rutile
 	display_name = "rutile"
@@ -365,3 +369,4 @@
 	ore_name = "rutile"
 	ore_icon_overlay = "lump"
 	removed_by_welder = TRUE
+	value = 0.8

@@ -16,6 +16,7 @@
 		)
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
+	value = 0.8
 
 /material/graphite
 	display_name = "graphite"
@@ -31,6 +32,7 @@
 		/decl/reagent/toxin/plasticide = 5,
 		/decl/reagent/acetone = 5
 		)
+	value = 0.8
 
 /material/quartz
 	display_name = "quartz"
@@ -52,6 +54,7 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	reflectiveness = MAT_VALUE_SHINY
+	value = 0.8
 
 /material/pyrite
 	display_name = "pyrite"
@@ -73,6 +76,7 @@
 	icon_reinf = "reinf_stone"
 	ore_compresses_to = MAT_PYRITE
 	reflectiveness = MAT_VALUE_SHINY
+	value = 0.8
 
 /material/spodumene
 	display_name = "spodumene"
@@ -92,6 +96,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	value = 0.8
 
 /material/cinnabar
 	display_name = "cinnabar"
@@ -111,6 +116,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	value = 0.8
 
 /material/phosphorite
 	display_name = "phosphorite"
@@ -130,6 +136,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	value = 0.8
 
 /material/rocksalt
 	display_name = "rock salt"
@@ -149,6 +156,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	value = 0.8
 
 /material/potash
 	display_name = "potash"
@@ -168,6 +176,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
+	value = 0.8
 
 /material/bauxite
 	display_name = "bauxite"
@@ -188,6 +197,7 @@
 	icon_reinf = "reinf_stone"
 	ore_smelts_to = MAT_ALUMINIUM
 	ore_compresses_to = MAT_BAUXITE
+	value = 0.8
 
 /material/sand
 	display_name = "sand"
@@ -200,6 +210,7 @@
 	chem_products = list(
 		/decl/reagent/silicon = 20
 		)
+	value = 0.8
 
 /material/sand/clay
 	display_name = "clay"
@@ -234,7 +245,7 @@
 	ore_scan_icon = "mineral_uncommon"
 	xarch_source_mineral = /decl/reagent/toxin/phoron
 	ore_icon_overlay = "gems"
-	value = 200
+	value = 1.6
 	//Note that this has a significant impact on TTV yield.
 	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.
 	gas_specific_heat = 200	// J/(mol*K)
@@ -258,6 +269,7 @@
 	stack_type = null
 	luminescence = 3
 	ore_compresses_to = null
+	value = 3
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)

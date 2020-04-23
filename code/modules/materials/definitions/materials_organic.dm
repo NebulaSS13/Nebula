@@ -45,7 +45,7 @@
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
 	conductive = 0
-	value = 0
+	value = 0.5
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 0
 
@@ -132,7 +132,6 @@
 	conductive = 0
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	value = 1
 	integrity = 50
 	hardness = MAT_VALUE_SOFT
 	weight = 5
@@ -228,7 +227,6 @@
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
 	weight = 18
-	value = 1
 	reflectiveness = MAT_VALUE_MATTE
 	wall_support_value = 22
 
@@ -253,7 +251,7 @@
 	stack_type = /obj/item/stack/material/generic/skin
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	value = 3
+	value = 1.2
 	integrity = 50
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = 10

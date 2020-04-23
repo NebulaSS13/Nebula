@@ -21,7 +21,6 @@
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
-	value = 4
 	wall_support_value = 14
 
 /material/glass/proc/is_reinforced()
@@ -46,4 +45,4 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	alloy_product = TRUE
 	alloy_materials = list(MAT_GLASS = 2500, MAT_PLATINUM = 1250)
-	value = 40
+	value = 1.8

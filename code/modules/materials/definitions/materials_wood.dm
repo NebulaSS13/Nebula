@@ -28,7 +28,7 @@
 				/decl/reagent/carbon = 10,
 				/decl/reagent/water = 5
 				)
-	value = 3
+	value = 1.5
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 22
 
@@ -48,7 +48,7 @@
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	icon_colour = WOOD_COLOR_RICH
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	value = 45
+	value = 1.6
 
 /material/wood/maple
 	display_name = "maple"
@@ -67,7 +67,7 @@
 	weight = 22
 	integrity = 100
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
-	value = 85
+	value = 1.8
 
 /material/wood/walnut
 	display_name = "walnut"
@@ -78,7 +78,7 @@
 	icon_colour = WOOD_COLOR_CHOCOLATE
 	weight = 20
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	value = 21
+	value = 1.6
 
 /material/wood/bamboo
 	display_name = "bamboo"
