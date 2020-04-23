@@ -4,7 +4,6 @@
 	icon = 'icons/obj/items/weapon/throwing_star.dmi'
 	icon_state = "star"
 	randpixel = 12
-	max_force = 10
 	material_force_multiplier = 0.1 // 6 with hardness 60 (steel)
 	thrown_material_force_multiplier = 0.75 // 15 with weight 20 (steel)
 	throw_speed = 10

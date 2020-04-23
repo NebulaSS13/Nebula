@@ -9,7 +9,6 @@
 	thrown_material_force_multiplier = 1
 	origin_tech = "{'materials':1}"
 	attack_verb = list("attacked", "stabbed", "poked")
-	max_force = 5
 	sharp = 0
 	edge = 0
 	material_force_multiplier = 0.1 // 6 when wielded with hardness 60 (steel)
@@ -99,7 +98,6 @@
 	icon_state = "rolling_pin"
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	material = MAT_WOOD
-	max_force = 15
 	material_force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_material_force_multiplier = 1 // as above
 

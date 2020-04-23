@@ -38,6 +38,8 @@
 
 /obj/item/proc/update_force()
 	var/new_force
+	if(!max_force)
+		max_force = 5 * min(w_class, ITEM_SIZE_GARGANTUAN)
 	if(material)
 		if(edge || sharp)
 			new_force = material.get_edge_damage()

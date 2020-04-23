@@ -108,7 +108,6 @@
 	icon = 'icons/obj/items/weapon/spear.dmi'
 	icon_state = "spearglass0"
 	base_icon = "spearglass"
-	max_force = 20	//for wielded
 	applies_material_colour = 0
 	material_force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_material_force_multiplier = 0.20

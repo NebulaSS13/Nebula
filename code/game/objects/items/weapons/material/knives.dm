@@ -5,7 +5,6 @@
 	icon = 'icons/obj/knife.dmi'
 	icon_state = "knife"
 	item_state = "knife"
-	max_force = 15
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	material = MAT_STEEL
@@ -34,7 +33,6 @@
 	desc = "A simple table knife, used to cut up individual portions of food."
 	icon_state = "table"
 	material = MAT_ALUMINIUM
-	max_force = 7
 	material_force_multiplier = 0.1
 	sharp = FALSE
 	attack_verb = list("prodded")
@@ -84,6 +82,7 @@
 	icon_state = "tacknife"
 	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
+	max_force = 15
 
 /obj/item/material/knife/combat/get_autopsy_descriptors()
 	. = ..()
@@ -114,7 +113,7 @@
 	name = "utility knife"
 	desc = "An utility knife with a polymer handle, commonly used through human space."
 	icon_state = "utility"
-	max_force = 10
+	max_force = 5
 	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
 

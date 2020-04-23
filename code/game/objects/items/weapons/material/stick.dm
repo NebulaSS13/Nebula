@@ -4,7 +4,6 @@
 	icon = 'icons/obj/items/stick.dmi'
 	icon_state = "stick"
 	item_state = "stickmat"
-	max_force = 10
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
