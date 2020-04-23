@@ -6,8 +6,8 @@
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	program_icon_state = "security"
 	program_menu_icon = "locked"
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_network = 1
+	available_on_network = 1
 	required_access = access_armory
 	nanomodule_path = /datum/nano_module/program/forceauthorization/
 	category = PROG_SEC

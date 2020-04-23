@@ -1,13 +1,13 @@
 /datum/computer_file/program/email_administration
 	filename = "emailadmin"
 	filedesc = "Email Administration Utility"
-	extended_desc = "This program may be used to administrate NTNet's emailing service."
+	extended_desc = "This program may be used to administrate the local emailing service."
 	program_icon_state = "comm_monitor"
 	program_key_state = "generic_key"
 	program_menu_icon = "mail-open"
 	size = 12
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_network = 1
+	available_on_network = 1
 	nanomodule_path = /datum/nano_module/program/email_administration
 	required_access = access_network
 	category = PROG_ADMIN

@@ -12,7 +12,7 @@ GLOBAL_LIST_EMPTY(computer_networks)
 
 	var/datum/extension/network_device/router
 
-	var/network_features_enabled = NTNET_ALL_FEATURES
+	var/network_features_enabled = NETWORK_ALL_FEATURES
 	var/intrusion_detection_enabled
 	var/intrusion_detection_alarm
 	var/list/banned_nids = list()

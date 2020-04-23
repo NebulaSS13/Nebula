@@ -1,19 +1,19 @@
 /datum/computer_file/program/chatclient
 	filename = "ntnrc_client"
-	filedesc = "NTNet Relay Chat Client"
+	filedesc = "Intranet Relay Chat Client"
 	program_icon_state = "command"
 	program_key_state = "med_key"
 	program_menu_icon = "comment"
-	extended_desc = "This program allows communication over NTNRC network"
+	extended_desc = "This program allows communication over the local network"
 	size = 8
-	requires_ntnet_feature = NTNET_COMMUNICATION
-	network_destination = "NTNRC server"
+	requires_network_feature = NETWORK_COMMUNICATION
+	network_destination = "chat server"
 	ui_header = "ntnrc_idle.gif"
-	available_on_ntnet = 1
+	available_on_network = 1
 	nanomodule_path = /datum/nano_module/program/computer_chatclient
 	var/last_message = null				// Used to generate the toolbar icon
 	var/username
-	var/datum/ntnet_conversation/channel = null
+	var/datum/chat_conversation/channel = null
 	var/operator_mode = 0		// Channel operator mode
 	var/netadmin_mode = 0		// Administrator mode (invisible to other users + bypasses passwords)
 	usage_flags = PROGRAM_ALL
@@ -40,8 +40,8 @@
 
 	if(href_list["PRG_joinchannel"])
 		. = 1
-		var/datum/ntnet_conversation/C
-		for(var/datum/ntnet_conversation/chan in network.chat_channels)
+		var/datum/chat_conversation/C
+		for(var/datum/chat_conversation/chan in network.chat_channels)
 			if(chan.id == text2num(href_list["PRG_joinchannel"]))
 				C = chan
 				break
@@ -73,7 +73,7 @@
 		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
 		if(!channel_title)
 			return
-		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(network)
+		var/datum/chat_conversation/C = new/datum/chat_conversation(network)
 		C.add_client(src)
 		C.operator = src
 		channel = C
@@ -184,7 +184,7 @@
 	..(forced)
 
 /datum/nano_module/program/computer_chatclient
-	name = "NTNet Relay Chat Client"
+	name = "Intranet Relay Chat Client"
 
 /datum/nano_module/program/computer_chatclient/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/datum/computer_network/network = program.computer.get_network()
@@ -219,7 +219,7 @@
 
 	else // Channel selection screen
 		var/list/all_channels[0]
-		for(var/datum/ntnet_conversation/conv in network.chat_channels)
+		for(var/datum/chat_conversation/conv in network.chat_channels)
 			if(conv && conv.title)
 				all_channels.Add(list(list(
 					"chan" = conv.title,
@@ -229,7 +229,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "ntnet_chat.tmpl", "NTNet Relay Chat Client", 575, 700, state = state)
+		ui = new(user, src, ui_key, "chat_app.tmpl", name, 575, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()

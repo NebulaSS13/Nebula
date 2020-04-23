@@ -37,7 +37,7 @@
 		process_updates()
 		return
 	for(var/datum/computer_file/program/P in running_programs)
-		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
+		if(P.requires_network && !get_network_status(P.requires_network_feature))
 			P.event_networkfailure(P != active_program)
 		else
 			P.process_tick()

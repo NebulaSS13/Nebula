@@ -1,16 +1,16 @@
-/datum/computer_file/program/ntnetdownload
+/datum/computer_file/program/appdownloader
 	filename = "ntndownloader"
-	filedesc = "NTNet Software Download Tool"
+	filedesc = "Software Download Tool"
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
 	program_menu_icon = "arrowthickstop-1-s"
-	extended_desc = "This program allows downloads of software from official software repositories"
+	extended_desc = "This program allows downloads of software from the local software repositories"
 	unsendable = 1
 	undeletable = 1
 	size = 4
-	requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
-	available_on_ntnet = 0
-	nanomodule_path = /datum/nano_module/program/computer_ntnetdownload/
+	requires_network_feature = NETWORK_SOFTWAREDOWNLOAD
+	available_on_network = 0
+	nanomodule_path = /datum/nano_module/program/computer_appdownloader/
 	ui_header = "downloader_finished.gif"
 	var/hacked_download = 0
 	var/downloaderror
@@ -21,12 +21,12 @@
 
 	var/datum/file_transfer/current_transfer
 
-/datum/computer_file/program/ntnetdownload/on_shutdown()
+/datum/computer_file/program/appdownloader/on_shutdown()
 	..()
 	QDEL_NULL(current_transfer)
 	ui_header = "downloader_finished.gif"
 
-/datum/computer_file/program/ntnetdownload/proc/begin_file_download(var/filename)
+/datum/computer_file/program/appdownloader/proc/begin_file_download(var/filename)
 	if(current_transfer)
 		return 0
 
@@ -47,7 +47,7 @@
 	ui_header = "downloader_running.gif"
 	generate_network_log("Downloading file [filename] from [source.server].")
 
-/datum/computer_file/program/ntnetdownload/proc/check_file_download(var/filename)
+/datum/computer_file/program/appdownloader/proc/check_file_download(var/filename)
 	//returns 1 if file can be downloaded, returns 0 if download prohibited
 	var/datum/computer_network/net = computer.get_network()
 	if(!net)
@@ -62,13 +62,13 @@
 
 	return 1
 
-/datum/computer_file/program/ntnetdownload/proc/abort_file_download()
+/datum/computer_file/program/appdownloader/proc/abort_file_download()
 	if(!current_transfer)
 		return
 	QDEL_NULL(current_transfer)
 	ui_header = "downloader_finished.gif"
 
-/datum/computer_file/program/ntnetdownload/process_tick()
+/datum/computer_file/program/appdownloader/process_tick()
 	if(!current_transfer)
 		return
 	
@@ -88,7 +88,7 @@
 		var/next = popleft(downloads_queue)
 		begin_file_download(next)
 
-/datum/computer_file/program/ntnetdownload/Topic(href, href_list)
+/datum/computer_file/program/appdownloader/Topic(href, href_list)
 	if(..())
 		return 1
 	if(href_list["PRG_downloadfile"])
@@ -105,12 +105,12 @@
 		return 1
 	return 0
 
-/datum/nano_module/program/computer_ntnetdownload
-	name = "Network Downloader"
+/datum/nano_module/program/computer_appdownloader
+	name = "Software Downloader"
 
-/datum/nano_module/program/computer_ntnetdownload/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/computer_appdownloader/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
-	var/datum/computer_file/program/ntnetdownload/prog = program
+	var/datum/computer_file/program/appdownloader/prog = program
 	// For now limited to execution by the downloader program
 	if(!prog || !istype(prog))
 		return
@@ -160,7 +160,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "ntnet_downloader.tmpl", "NTNet Download Program", 575, 700, state = state)
+		ui = new(user, src, ui_key, "software_downloader.tmpl", name, 575, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()

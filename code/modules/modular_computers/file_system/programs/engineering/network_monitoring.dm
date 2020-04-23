@@ -12,9 +12,9 @@
 /datum/nano_module/program/network_monitor
 	name = "Network Diagnostics and Monitoring"
 	var/global/list/all_network_features = list(
-		"Software Download" = NTNET_SOFTWAREDOWNLOAD,
-		"Communication Systems" = NTNET_COMMUNICATION,
-		"Remote System Control" = NTNET_SYSTEMCONTROL
+		"Software Download" = NETWORK_SOFTWAREDOWNLOAD,
+		"Communication Systems" = NETWORK_COMMUNICATION,
+		"Remote System Control" = NETWORK_SYSTEMCONTROL
 		)
 
 /datum/nano_module/program/network_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
@@ -96,9 +96,9 @@
 		var/datum/extension/network_device/mainframe/M = locate(href_list["updatemaxlogs"])
 		if(!istype(M))
 			return TOPIC_HANDLED
-		var/logcount = input(user,"Enter amount of logs to keep on the disk ([MIN_NTNET_LOGS]-[MAX_NTNET_LOGS]):", M.max_log_count) as null|num
+		var/logcount = input(user,"Enter amount of logs to keep on the disk ([MIN_NETWORK_LOGS]-[MAX_NETWORK_LOGS]):", M.max_log_count) as null|num
 		if(logcount && CanUseTopic(user, state))
-			logcount = Clamp(logcount, MIN_NTNET_LOGS, MAX_NTNET_LOGS)
+			logcount = Clamp(logcount, MIN_NETWORK_LOGS, MAX_NETWORK_LOGS)
 			M.max_log_count = logcount
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED

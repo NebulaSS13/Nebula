@@ -114,10 +114,10 @@ GLOBAL_LIST_INIT(all_mainframe_roles, list(MF_ROLE_SOFTWARE, MF_ROLE_FILESERVER,
 	
 	for(var/F in subtypesof(/datum/computer_file/report))
 		var/datum/computer_file/report/type = F
-		if(initial(type.available_on_ntnet))
+		if(initial(type.available_on_network))
 			store_file(new type)
 
 	for(var/F in subtypesof(/datum/computer_file/program))
 		var/datum/computer_file/program/type = F
-		if(initial(type.available_on_ntnet))
+		if(initial(type.available_on_network))
 			store_file(new type)
