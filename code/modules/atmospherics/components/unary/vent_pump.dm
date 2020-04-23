@@ -520,21 +520,6 @@
 		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux = 1
 	)
 
-/decl/stock_part_preset/radio/receiver/vent_pump/airlock
-	frequency = AIRLOCK_AIR_FREQ
-	filter = null
-
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock
-	frequency = AIRLOCK_AIR_FREQ
-	filter = null
-
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock
-	controlled = FALSE
-	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/airlock = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock = 1
-	)
-
 /decl/stock_part_preset/radio/receiver/vent_pump/engine
 	frequency = ATMOS_ENGINE_FREQ
 	filter = null

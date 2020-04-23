@@ -55,15 +55,17 @@
 	var/dock_state = STATE_UNDOCKED
 	var/control_mode = MODE_NONE
 	var/response_sent = 0		//so we don't spam confirmation messages
-	var/resend_counter = 0		//for periodically resending confirmation messages in case they are missed
 
 	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
 	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
 	var/docking_codes			//would only allow docking when receiving signal with these, if set
 	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 
-/datum/computer/file/embedded_program/docking/New(var/obj/machinery/embedded_controller/M)
-	..()
+/datum/computer/file/embedded_program/docking/reset_id_tags(base_tag)
+	if(SSshuttle.docking_registry[base_tag])
+		return SPAN_WARNING("The tag [base_tag] is already registered and cannot be used.")
+	SSshuttle.docking_registry -= id_tag
+	. = ..()
 	if(id_tag)
 		if(SSshuttle.docking_registry[id_tag])
 			crash_with("Docking controller tag [id_tag] had multiple associated programs.")
@@ -88,7 +90,7 @@
 		return TRUE
 
 /datum/computer/file/embedded_program/docking/get_receive_filters()
-	return list(id_tag)
+	return list("[id_tag]" = "primary controller")
 
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
@@ -185,13 +187,6 @@
 					if (!override_enabled)
 						finish_undocking()
 					reset()		//server is done undocking!
-
-	if (response_sent || resend_counter > 0)
-		resend_counter++
-
-	if (resend_counter >= MESSAGE_RESEND_TIME || (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING))
-		response_sent = 0
-		resend_counter = 0
 
 	//handle invalid states
 	if (control_mode == MODE_NONE && dock_state != STATE_UNDOCKED)
@@ -291,7 +286,7 @@
 	var/datum/signal/signal = new
 	signal.data["tag"] = id_tag
 	signal.data["dock_status"] = get_docking_status()
-	post_signal(signal, tag)
+	post_signal(signal, id_tag)
 
 //this is mostly for NanoUI
 /datum/computer/file/embedded_program/docking/proc/get_docking_status()

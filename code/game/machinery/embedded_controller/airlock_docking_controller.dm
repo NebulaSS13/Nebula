@@ -4,6 +4,7 @@
 	program = /datum/computer/file/embedded_program/docking/airlock
 	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 	tag_secure = 1
+	base_type = /obj/machinery/embedded_controller/radio/airlock/docking_port
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/Initialize()
 	. = ..()
@@ -81,6 +82,11 @@
 	if(istype(airlock_program))
 		. |= airlock_program.get_receive_filters()
 
+/datum/computer/file/embedded_program/docking/airlock/reset_id_tags(base_tag)
+	. = ..()
+	if(!. && istype(airlock_program))
+		return airlock_program.reset_id_tags(base_tag)
+
 /datum/computer/file/embedded_program/docking/airlock/receive_signal(datum/signal/signal, receive_method, receive_param)
 	airlock_program.receive_signal(signal, receive_method, receive_param)	//pass along to subprograms
 	..(signal, receive_method, receive_param)
@@ -95,14 +101,12 @@
 
 //we are docked, open the doors or whatever.
 /datum/computer/file/embedded_program/docking/airlock/finish_docking()
-	airlock_program.enable_mech_regulators()
 	airlock_program.open_doors()
 
 //tell the docking port to start getting ready for undocking - e.g. close those doors.
 /datum/computer/file/embedded_program/docking/airlock/prepare_for_undocking()
 	airlock_program.stop_cycling()
 	airlock_program.close_doors()
-	airlock_program.disable_mech_regulators()
 
 //are we ready for undocking?
 /datum/computer/file/embedded_program/docking/airlock/ready_for_undocking()
@@ -124,12 +128,6 @@
 /datum/computer/file/embedded_program/airlock/docking/receive_user_command(command)
 	if (master_prog.undocked() || master_prog.override_enabled)	//only allow the port to be used as an airlock if nothing is docked here or the override is enabled
 		return ..(command)
-
-/datum/computer/file/embedded_program/airlock/docking/proc/enable_mech_regulators()
-	enable_mech_regulation()
-
-/datum/computer/file/embedded_program/airlock/docking/proc/disable_mech_regulators()
-	disable_mech_regulation()
 
 /datum/computer/file/embedded_program/airlock/docking/proc/open_doors()
 	toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "open")

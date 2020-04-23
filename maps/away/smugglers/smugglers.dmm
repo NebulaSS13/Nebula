@@ -21,7 +21,6 @@
 /area/smugglers/base)
 "ag" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1439;
 	icon_state = "door_closed";
 	locked = 0
 	},
@@ -53,11 +52,10 @@
 /area/smugglers/base)
 "am" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1439;
-	master_tag = "asteroid_base_dock_airlock";
+	id_tag = "asteroid_base_dock_airlock";
 	pixel_x = 25
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "asteroid_base_dock_pump"
 	},
@@ -84,7 +82,6 @@
 /area/space)
 "aq" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1439;
 	icon_state = "door_closed";
 	locked = 0;
 	name = "Internal Airlock"
@@ -111,7 +108,6 @@
 "av" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1439;
 	id_tag = "asteroid_base_dock_airlock";
 	name = "Dock Airlock Controller";
 	pixel_x = -25;
@@ -119,10 +115,8 @@
 	tag_exterior_door = "asteroid_base_dock_outer";
 	tag_interior_door = "asteroid_base_dock_inner"
 	},
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1439;
-	master_tag = "asteroid_base_dock_airlock";
+/obj/machinery/button/access/interior{
+	id_tag = "asteroid_base_dock_airlock";
 	name = "interior access button";
 	pixel_x = 28;
 	pixel_y = 24;
@@ -258,19 +252,14 @@
 /area/smugglers/base)
 "aH" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1439;
 	id_tag = "asteroid_base_east_airlock";
 	pixel_y = 25;
 	tag_airpump = "asteroid_base_east_pump";
 	tag_exterior_door = "asteroid_base_east_outer";
-	tag_exterior_sensor = null;
-	tag_interior_door = "asteroid_base_east_inner";
-	tag_interior_sensor = null
+	tag_interior_door = "asteroid_base_east_inner"
 	},
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1439;
-	master_tag = "asteroid_base_east_airlock";
+/obj/machinery/button/access/interior{
+	id_tag = "asteroid_base_east_airlock";
 	name = "interior access button";
 	pixel_x = -28;
 	pixel_y = 24;
@@ -283,7 +272,6 @@
 /area/smugglers/base)
 "aI" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1439;
 	icon_state = "door_locked";
 	id_tag = "asteroid_base_east_inner";
 	locked = 1;
@@ -301,11 +289,10 @@
 	icon_state = "beartrap1"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1439;
-	master_tag = "asteroid_base_east_airlock";
+	id_tag = "asteroid_base_east_airlock";
 	pixel_y = -25
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "asteroid_base_east_pump"
 	},
@@ -314,7 +301,6 @@
 /area/smugglers/base)
 "aK" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1439;
 	icon_state = "door_locked";
 	id_tag = "asteroid_base_east_outer";
 	locked = 1
@@ -322,9 +308,8 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "aL" = (
-/obj/machinery/access_button/airlock_exterior{
-	frequency = 1439;
-	master_tag = "asteroid_base_east_airlock";
+/obj/machinery/button/access/exterior{
+	id_tag = "asteroid_base_east_airlock";
 	name = "exterior access button";
 	pixel_x = -25;
 	pixel_y = 25

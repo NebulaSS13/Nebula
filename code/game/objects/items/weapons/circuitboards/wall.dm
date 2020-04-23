@@ -70,3 +70,24 @@
 /obj/item/stock_parts/circuitboard/requests_console/newscaster
 	name = T_BOARD("newscaster")
 	build_path = /obj/machinery/newscaster
+
+/obj/item/stock_parts/circuitboard/airlock_controller
+	name = T_BOARD("airlock controller")
+	build_path = /obj/machinery/embedded_controller/radio/simple_docking_controller
+	board_type = "wall"
+	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_ENGINEERING + "':3}"
+	req_components = list()
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1,
+	)
+	buildtype_select = TRUE
+
+/obj/item/stock_parts/circuitboard/airlock_controller/get_buildable_types()
+	. = list()
+	for(var/path in typesof(/obj/machinery/embedded_controller/radio))
+		var/obj/machinery/embedded_controller/radio/controller = path
+		var/base_type = initial(controller.base_type) || path
+		. |= base_type
+	

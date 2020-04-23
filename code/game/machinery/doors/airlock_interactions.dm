@@ -13,9 +13,6 @@
 /obj/structure/window/blocks_airlock()
 	return 0
 
-/obj/machinery/mech_sensor/blocks_airlock()
-	return 0
-
 /obj/effect/energy_field/blocks_airlock()
 	return 0
 

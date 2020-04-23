@@ -18,8 +18,6 @@
 	var/tag_chamber_sensor
 	var/tag_exterior_sensor
 	var/tag_interior_sensor
-	var/tag_airlock_mech_sensor
-	var/tag_shuttle_mech_sensor
 
 	var/state = STATE_IDLE
 	var/target_state = TARGET_NONE
@@ -31,8 +29,6 @@
 	var/tag_air_alarm
 
 /datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
-	..(M)
-
 	memory["chamber_sensor_pressure"] = ONE_ATMOSPHERE
 	memory["external_sensor_pressure"] = 0					//assume vacuum for simple airlock controller
 	memory["internal_sensor_pressure"] = ONE_ATMOSPHERE
@@ -42,40 +38,51 @@
 	memory["target_pressure"] = ONE_ATMOSPHERE
 	memory["purge"] = 0
 	memory["secure"] = 0
-
-	if (istype(M, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
+	if (istype(M, /obj/machinery/embedded_controller/radio/airlock))
 		var/obj/machinery/embedded_controller/radio/airlock/controller = M
-		cycle_to_external_air = controller.cycle_to_external_air
-		if(cycle_to_external_air)
-			tag_pump_out_external = "[id_tag]_pump_out_external"
-			tag_pump_out_internal = "[id_tag]_pump_out_internal"
-		tag_exterior_door = controller.tag_exterior_door? controller.tag_exterior_door : "[id_tag]_outer"
-		tag_interior_door = controller.tag_interior_door? controller.tag_interior_door : "[id_tag]_inner"
-		tag_airpump = controller.tag_airpump? controller.tag_airpump : "[id_tag]_pump"
-		tag_chamber_sensor = controller.tag_chamber_sensor? controller.tag_chamber_sensor : "[id_tag]_sensor"
-		tag_exterior_sensor = controller.tag_exterior_sensor || "[id_tag]_exterior_sensor"
-		tag_interior_sensor = controller.tag_interior_sensor || "[id_tag]_interior_sensor"
-		tag_airlock_mech_sensor = controller.tag_airlock_mech_sensor? controller.tag_airlock_mech_sensor : "[id_tag]_airlock_mech"
-		tag_shuttle_mech_sensor = controller.tag_shuttle_mech_sensor? controller.tag_shuttle_mech_sensor : "[id_tag]_shuttle_mech"
-		tag_air_alarm = controller.tag_air_alarm || "[id_tag]_alarm"
 		memory["secure"] = controller.tag_secure
+		cycle_to_external_air = controller.cycle_to_external_air
+	..(M)
+
+#define SET_AIRLOCK_TAG(FROM_CONTROLLER, FROM_SRC) (base_tag ? FROM_SRC : (FROM_CONTROLLER || FROM_SRC))
+
+/datum/computer/file/embedded_program/airlock/reset_id_tags(base_tag)
+	. = ..()
+	if(cycle_to_external_air)
+		tag_pump_out_external = "[id_tag]_pump_out_external"
+		tag_pump_out_internal = "[id_tag]_pump_out_internal"
+	if(istype(master, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
+		var/obj/machinery/embedded_controller/radio/airlock/controller = master
+		tag_exterior_door = SET_AIRLOCK_TAG(controller.tag_exterior_door, "[id_tag]_outer")
+		tag_interior_door = SET_AIRLOCK_TAG(controller.tag_interior_door, "[id_tag]_inner")
+		tag_airpump = SET_AIRLOCK_TAG(controller.tag_airpump, "[id_tag]_pump")
+		tag_chamber_sensor = SET_AIRLOCK_TAG(controller.tag_chamber_sensor, "[id_tag]_sensor")
+		tag_exterior_sensor = SET_AIRLOCK_TAG(controller.tag_exterior_sensor, "[id_tag]_exterior_sensor")
+		tag_interior_sensor = SET_AIRLOCK_TAG(controller.tag_interior_sensor, "[id_tag]_interior_sensor")
+		tag_air_alarm = SET_AIRLOCK_TAG(controller.tag_air_alarm, "[id_tag]_alarm")
 
 		spawn(10)
-			signalDoor(tag_exterior_door, "update")		//signals connected doors to update their status
-			signalDoor(tag_interior_door, "update")
+			signalDoor(tag_exterior_door)		//signals connected doors to update their status
+			signalDoor(tag_interior_door)
 
-/datum/computer/file/embedded_program/airlock/get_receive_filters()
+#undef SET_AIRLOCK_TAG
+
+/datum/computer/file/embedded_program/airlock/get_receive_filters(for_ui = FALSE)
 	. = list(
-		id_tag,
-		tag_exterior_door,
-		tag_interior_door,
-		tag_airpump,
-		tag_chamber_sensor,
-		tag_exterior_sensor,
-		tag_interior_sensor
+		"[id_tag]" = "primary controller",
+		"[tag_exterior_door]" = "exterior airlock",
+		"[tag_interior_door]" = "interior airlock",
+		"[tag_airpump]" = "main pumps",
+		"[tag_chamber_sensor]" = "chamber sensor",
+		"[tag_exterior_sensor]" = "exterior sensor",
+		"[tag_interior_sensor]" = "interior sensor"
 	)
+	if(for_ui)
+		.[tag_air_alarm] = "air alarm within airlock"
 	if(cycle_to_external_air)
-		. += tag_pump_out_internal
+		.[tag_pump_out_internal] = "airlock vent pumps to exterior"
+		if(for_ui)
+			.[tag_pump_out_external] = "external vent pumps"
 
 /datum/computer/file/embedded_program/airlock/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]
@@ -167,18 +174,13 @@
 		if("purge")
 			memory["purge"] = !memory["purge"]
 			if(memory["purge"])
-				close_doors()
 				state = STATE_PREPARE
 				target_state = TARGET_NONE
 
 		if("secure")
+			toggleDoor(memory["exterior_status"], tag_exterior_door, !memory["secure"])
+			toggleDoor(memory["interior_status"], tag_interior_door, !memory["secure"])
 			memory["secure"] = !memory["secure"]
-			if(memory["secure"])
-				signalDoor(tag_interior_door, "lock")
-				signalDoor(tag_exterior_door, "lock")
-			else
-				signalDoor(tag_interior_door, "unlock")
-				signalDoor(tag_exterior_door, "unlock")
 		else
 			. = FALSE
 
@@ -198,9 +200,6 @@
 					memory["target_pressure"] = memory["internal_sensor_pressure"]
 				if(TARGET_OUTOPEN)
 					memory["target_pressure"] = memory["external_sensor_pressure"]
-
-			//lock down the airlock before activating pumps
-			close_doors()
 
 			state = STATE_PREPARE
 		else
@@ -247,6 +246,8 @@
 						memory["purge"] = 1 // should always purge first if using external air, chamber pressure should never be higher than target pressure here
 
 				memory["target_pressure"] = target_pressure
+			else
+				close_doors()
 
 		if(STATE_PRESSURIZE)
 			if(memory["chamber_sensor_pressure"] >= memory["target_pressure"] - SENSOR_TOLERANCE)
@@ -330,10 +331,12 @@
 	var/int_closed = check_interior_door_secured()
 	return (ext_closed && int_closed)
 
-/datum/computer/file/embedded_program/airlock/proc/signalDoor(var/tag, var/command)
+/datum/computer/file/embedded_program/proc/signalDoor(var/tag, var/list/commands)
 	var/datum/signal/signal = new
 	signal.data["tag"] = tag
-	signal.data["command"] = command
+	if(length(commands))
+		signal.data += commands
+	signal.data["status"] = TRUE
 	post_signal(signal, tag)
 
 /datum/computer/file/embedded_program/airlock/proc/shutAlarm()
@@ -364,26 +367,6 @@
 		if(TARGET_INOPEN)
 			toggleDoor(memory["exterior_status"], tag_exterior_door, memory["secure"], "close")
 			toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "open")
-		if(TARGET_NONE)
-			var/command = "unlock"
-			if(memory["secure"])
-				command = "lock"
-			signalDoor(tag_exterior_door, command)
-			signalDoor(tag_interior_door, command)
-
-datum/computer/file/embedded_program/airlock/proc/signal_mech_sensor(var/command, var/sensor)
-	var/datum/signal/signal = new
-	signal.data["tag"] = sensor
-	signal.data["command"] = command
-	post_signal(signal, tag)
-
-/datum/computer/file/embedded_program/airlock/proc/enable_mech_regulation()
-	signal_mech_sensor("enable", tag_shuttle_mech_sensor)
-	signal_mech_sensor("enable", tag_airlock_mech_sensor)
-
-/datum/computer/file/embedded_program/airlock/proc/disable_mech_regulation()
-	signal_mech_sensor("disable", tag_shuttle_mech_sensor)
-	signal_mech_sensor("disable", tag_airlock_mech_sensor)
 
 /*----------------------------------------------------------
 toggleDoor()
@@ -397,46 +380,25 @@ Only sends a command if it is needed, i.e. if the door is
 already open, passing an open command to this proc will not
 send an additional command to open the door again.
 ----------------------------------------------------------*/
-/datum/computer/file/embedded_program/airlock/proc/toggleDoor(var/list/doorStatus, var/doorTag, var/secure, var/command)
-	var/doorCommand = null
+/datum/computer/file/embedded_program/proc/toggleDoor(var/list/doorStatus, var/doorTag, var/secure, var/command)
+	. = list()
 
 	if(command == "toggle")
-		if(doorStatus["state"] == "open")
-			command = "close"
-		else if(doorStatus["state"] == "closed")
-			command = "open"
+		command = doorStatus["state"] == "open" ? "close" : "open"
 
-	switch(command)
-		if("close")
-			if(secure)
-				if(doorStatus["state"] == "open")
-					doorCommand = "secure_close"
-				else if(doorStatus["lock"] == "unlocked")
-					doorCommand = "lock"
-			else
-				if(doorStatus["state"] == "open")
-					if(doorStatus["lock"] == "locked")
-						signalDoor(doorTag, "unlock")
-					doorCommand = "close"
-				else if(doorStatus["lock"] == "locked")
-					doorCommand = "unlock"
+	var/toggle = command && ((doorStatus["state"] == "open") ^ (command == "open"))
+	var/locked = (doorStatus["lock"] == "locked")
+	if(toggle)
+		if(locked) // need to unlock before opening
+			.["unlock"] = TRUE
+		.["[command]"] = TRUE
+		if(secure)
+			.["lock"] = TRUE
+	else if(locked ^ !!secure) // don't need to open, but do need to toggle lock state
+		.[secure ? "lock" : "unlock"] = TRUE
 
-		if("open")
-			if(secure)
-				if(doorStatus["state"] == "closed")
-					doorCommand = "secure_open"
-				else if(doorStatus["lock"] == "unlocked")
-					doorCommand = "lock"
-			else
-				if(doorStatus["state"] == "closed")
-					if(doorStatus["lock"] == "locked")
-						signalDoor(doorTag,"unlock")
-					doorCommand = "open"
-				else if(doorStatus["lock"] == "locked")
-					doorCommand = "unlock"
-
-	if(doorCommand)
-		signalDoor(doorTag, doorCommand)
+	if(length(.))
+		signalDoor(doorTag, .)
 
 
 #undef STATE_IDLE

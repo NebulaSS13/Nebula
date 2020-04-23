@@ -5,11 +5,9 @@
 	var/id_tag
 
 /datum/computer/file/embedded_program/New(var/obj/machinery/embedded_controller/M)
-	master = M
-	if (istype(M, /obj/machinery/embedded_controller/radio))
-		var/obj/machinery/embedded_controller/R = M
-		id_tag = R.id_tag
 	..()
+	master = M
+	reset_id_tags()
 
 /datum/computer/file/embedded_program/Destroy()
 	if(master)
@@ -21,7 +19,7 @@
 	return FALSE
 
 // Returns all filters on which you want to receive signals
-/datum/computer/file/embedded_program/proc/get_receive_filters()
+/datum/computer/file/embedded_program/proc/get_receive_filters(var/for_ui = FALSE)
 
 /datum/computer/file/embedded_program/proc/receive_signal(datum/signal/signal, receive_method, receive_param)
 	return
@@ -34,3 +32,6 @@
 		master.post_signal(signal, comm_line)
 	else
 		qdel(signal)
+
+/datum/computer/file/embedded_program/proc/reset_id_tags(base_tag)
+	id_tag = base_tag || master.id_tag

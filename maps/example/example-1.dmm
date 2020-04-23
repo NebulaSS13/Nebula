@@ -177,14 +177,12 @@
 /area/shuttle/escape)
 "D" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1379;
 	id_tag = "example_shuttle_port_hatch"
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/escape)
 "E" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1379;
 	id_tag = "example_shuttle_starboard_hatch"
 	},
 /turf/simulated/floor/plating,
@@ -199,7 +197,6 @@
 /area/constructionsite)
 "G" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1379;
 	id_tag = "lower_level_dock_hatch"
 	},
 /turf/simulated/floor,

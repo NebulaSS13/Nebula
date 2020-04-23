@@ -727,12 +727,12 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bu" = (
-/obj/machinery/access_button/airlock_exterior{
-	master_tag = "bearcat_dock_port";
+/obj/machinery/button/access/exterior{
+	id_tag = "bearcat_dock_port";
 	pixel_x = -18;
 	pixel_y = 20
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "dock_port_out"
 	},
 /obj/machinery/shield_diffuser,
@@ -745,7 +745,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bv" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
 	id_tag = "dock_port_pump"
 	},
@@ -793,8 +793,8 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/access_button/airlock_interior{
-	master_tag = "bearcat_dock_port";
+/obj/machinery/button/access/interior{
+	id_tag = "bearcat_dock_port";
 	pixel_x = 12;
 	pixel_y = 20
 	},
@@ -802,7 +802,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "dock_port_in"
 	},
 /obj/structure/cable{
@@ -914,8 +914,8 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/obj/machinery/access_button/airlock_interior{
-	master_tag = "bearcat_starboard_dock";
+/obj/machinery/button/access/interior{
+	id_tag = "bearcat_starboard_dock";
 	pixel_x = -12;
 	pixel_y = 20
 	},
@@ -923,7 +923,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "dock_star_in"
 	},
 /obj/structure/cable{
@@ -963,7 +963,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bH" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "dock_star_pump"
 	},
@@ -976,12 +976,12 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bI" = (
-/obj/machinery/access_button/airlock_exterior{
-	master_tag = "bearcat_starboard_dock";
+/obj/machinery/button/access/exterior{
+	id_tag = "bearcat_starboard_dock";
 	pixel_x = 18;
 	pixel_y = 20
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "dock_star_out"
 	},
 /obj/machinery/shield_diffuser,

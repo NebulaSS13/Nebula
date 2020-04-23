@@ -253,7 +253,7 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aL" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	dir = 4;
 	id_tag = "unishi_inner"
 	},
@@ -261,14 +261,14 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aM" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "unishi_vent"
 	},
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aN" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	dir = 4;
 	id_tag = "unishi_outer"
 	},
@@ -357,8 +357,8 @@
 /turf/simulated/wall/r_wall,
 /area/unishi/engineroom)
 "aX" = (
-/obj/machinery/access_button/airlock_interior{
-	master_tag = "unishi";
+/obj/machinery/button/access/interior{
+	id_tag = "unishi";
 	pixel_x = 28
 	},
 /turf/simulated/floor,
@@ -368,8 +368,8 @@
 /turf/simulated/wall/titanium,
 /area/unishi/engineering)
 "aZ" = (
-/obj/machinery/access_button/airlock_exterior{
-	master_tag = "unishi";
+/obj/machinery/button/access/exterior{
+	id_tag = "unishi";
 	pixel_x = -28
 	},
 /turf/space,

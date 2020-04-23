@@ -87,6 +87,10 @@
 /obj/machinery/door/airlock/glass/virology
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_GREEN
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/airlock/external_air = 1,
+		/decl/stock_part_preset/radio/event_transmitter/airlock/external_air = 1
+	)
 
 /obj/machinery/door/airlock/glass/mining
 	door_color = COLOR_PALE_ORANGE
@@ -136,6 +140,10 @@
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 	door_color = COLOR_NT_RED
 	paintable = AIRLOCK_PAINTABLE
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/airlock/external_air = 1,
+		/decl/stock_part_preset/radio/event_transmitter/airlock/external_air = 1
+	)
 
 /obj/machinery/door/airlock/external/inherit_access_from_area()
 	..()
@@ -144,7 +152,6 @@
 
 /obj/machinery/door/airlock/external/escapepod
 	name = "Escape Pod"
-	frequency =  1380
 	locked = TRUE
 
 /obj/machinery/door/airlock/external/escapepod/attackby(obj/item/C, mob/user)
@@ -162,11 +169,14 @@
 				return
 	..()
 
+/obj/machinery/door/airlock/external/shuttle
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/airlock/shuttle = 1,
+		/decl/stock_part_preset/radio/event_transmitter/airlock/shuttle = 1
+	)
+
 /obj/machinery/door/airlock/external/bolted
 	locked = TRUE
-
-/obj/machinery/door/airlock/external/bolted/cycling
-	frequency = 1379
 
 /obj/machinery/door/airlock/external/bolted_open
 	density = FALSE
@@ -181,9 +191,6 @@
 
 /obj/machinery/door/airlock/external/glass/bolted
 	locked = TRUE
-
-/obj/machinery/door/airlock/external/glass/bolted/cycling
-	frequency = 1379
 
 /obj/machinery/door/airlock/external/glass/bolted_open
 	density = FALSE

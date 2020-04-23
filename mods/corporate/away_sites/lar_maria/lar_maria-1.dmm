@@ -1197,7 +1197,6 @@
 "de" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
-	frequency = 1041;
 	id_tag = "ZHPcells_access_airlock_outer"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -1378,7 +1377,6 @@
 /area/lar_maria/cells)
 "dA" = (
 /obj/machinery/door/airlock/security{
-	frequency = 1041;
 	id_tag = "ZHPcells_access_airlock_outer"
 	},
 /obj/machinery/door/firedoor,
@@ -1662,7 +1660,7 @@
 "eu" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1041;
+	frequency = 1305;
 	id_tag = "ZHPcells_access_airlock";
 	pixel_x = 0;
 	pixel_y = 0;
@@ -2013,7 +2011,6 @@
 	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1043;
 	id_tag = "ZHPsec_access_airlock";
 	pixel_x = 0;
 	pixel_y = 0;
@@ -2510,7 +2507,6 @@
 /area/lar_maria/sec_wing)
 "fX" = (
 /obj/machinery/door/airlock/virology{
-	frequency = 1043;
 	id_tag = "ZHPsec__access_airlock_inner"
 	},
 /obj/machinery/door/firedoor,
@@ -2553,7 +2549,6 @@
 /area/lar_maria/sec_wing)
 "fZ" = (
 /obj/machinery/door/airlock/virology{
-	frequency = 1043;
 	id_tag = "ZHPsec__access_airlock_outer"
 	},
 /obj/machinery/door/firedoor,
@@ -2739,7 +2734,6 @@
 /area/lar_maria/vir_hallway)
 "gw" = (
 /obj/machinery/door/airlock/virology{
-	frequency = 1039;
 	id_tag = "ZHPvirology_access_airlock_inner"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -2759,7 +2753,6 @@
 	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1039;
 	id_tag = "ZHPvirology_access_airlock";
 	pixel_x = 0;
 	pixel_y = 25;
@@ -2875,9 +2868,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/access_button/airlock_interior{
-	frequency = 1039;
-	master_tag = "ZHPvirology_access_airlock";
+/obj/machinery/button/access/interior{
+	id_tag = "ZHPvirology_access_airlock";
 	pixel_x = 0;
 	pixel_y = -25
 	},
@@ -2885,7 +2877,6 @@
 /area/lar_maria/vir_hallway)
 "gP" = (
 /obj/machinery/door/airlock/virology{
-	frequency = 1039;
 	id_tag = "ZHPvirology_access_airlock_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2913,9 +2904,7 @@
 "gR" = (
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/airlock_sensor{
-	frequency = 1039;
 	id_tag = "ZHPvirology_access_airlock_sensor";
-	master_tag = "ZHPvirology_access_airlock";
 	pixel_x = 25;
 	pixel_y = 0
 	},
@@ -2958,7 +2947,6 @@
 /area/lar_maria/vir_access)
 "gY" = (
 /obj/machinery/door/airlock/virology{
-	frequency = 1039;
 	id_tag = "ZHPvirology_access_airlock_outer"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2967,7 +2955,6 @@
 /area/lar_maria/vir_access)
 "gZ" = (
 /obj/machinery/door/airlock/virology{
-	frequency = 1039;
 	id_tag = "ZHPvirology_access_airlock_outer"
 	},
 /turf/simulated/floor/tiled,
@@ -3068,9 +3055,8 @@
 /obj/structure/sign/warning/biohazard{
 	pixel_x = 32
 	},
-/obj/machinery/access_button/airlock_exterior{
-	frequency = 1039;
-	master_tag = "ZHPvirology_access_airlock";
+/obj/machinery/button/access/exterior{
+	id_tag = "ZHPvirology_access_airlock";
 	pixel_x = 25;
 	pixel_y = 15
 	},
@@ -3648,7 +3634,6 @@
 "iB" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1439;
 	id_tag = "ZHPCells_airlock";
 	pixel_x = 0;
 	pixel_y = 0;
@@ -3749,7 +3734,6 @@
 /area/lar_maria/sec_wing)
 "iN" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1439;
 	id_tag = "ZHPCells_airlock_inner"
 	},
 /obj/machinery/door/firedoor,
@@ -3762,7 +3746,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "iO" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
 	id_tag = "ZHPCells_airlock_pump"
 	},
@@ -3770,7 +3754,6 @@
 /area/lar_maria/cells)
 "iP" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1439;
 	id_tag = "ZHPCells_airlock_outer"
 	},
 /obj/machinery/door/firedoor,

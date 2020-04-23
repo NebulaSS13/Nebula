@@ -12,8 +12,10 @@
 #define STATE_SEALED   3
 
 /obj/machinery/embedded_controller/radio/airlock/tin_can
+	name = "non-cycling shuttle airlock controller"
 	program = /datum/computer/file/embedded_program/airlock/tin_can
 	cycle_to_external_air = TRUE // Some kind of legacy var needed for proper init
+	base_type = /obj/machinery/embedded_controller/radio/airlock/tin_can
 
 /obj/machinery/embedded_controller/radio/airlock/tin_can/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
@@ -46,8 +48,7 @@
 	switch(command)
 		if("toggle_door_safety")
 			door_safety = !door_safety
-			if(!door_safety)
-				signalDoor(tag_exterior_door, "unlock")
+			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety)
 		if("evacuate_atmos")
 			if(state == STATE_EVACUATE)
 				return
@@ -74,11 +75,8 @@
 
 /datum/computer/file/embedded_program/airlock/tin_can/process()
 	if(door_safety)
-		var/safe_to_open = safe_to_open()
-		if(safe_to_open && memory["exterior_status"]["lock"] == "locked")
-			signalDoor(tag_exterior_door, "unlock")
-		else if(!safe_to_open && memory["exterior_status"]["lock"] == "unlocked")
-			signalDoor(tag_exterior_door, "secure_close") // close and lock
+		var/safe_to_open = safe_to_open() // If safe, unlock; if not, close and lock
+		toggleDoor(memory["exterior_status"], tag_exterior_door, !safe_to_open, !safe_to_open ? "close" : null)
 
 /datum/computer/file/embedded_program/airlock/tin_can/proc/safe_to_open()
 	. = TRUE

@@ -974,7 +974,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "co" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
-	frequency = 1380;
 	id_tag = "skipjack_base";
 	pixel_x = -25;
 	pixel_y = -5
@@ -1019,7 +1018,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "cu" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "skipjack_base_hatch"
 	},
 /turf/unsimulated/floor{
@@ -1035,8 +1033,7 @@
 /turf/simulated/wall/voxshuttle,
 /area/map_template/skipjack_station/start)
 "cx" = (
-/obj/machinery/door/airlock/hatch{
-	frequency = 1331;
+/obj/machinery/door/airlock/external{
 	icon_state = "door_closed";
 	id_tag = "vox_northwest_lock";
 	locked = 0
@@ -1045,10 +1042,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cy" = (
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1331;
-	master_tag = "vox_west_control";
+/obj/machinery/button/access/shuttle/exterior{
+	id_tag = "vox_west_control";
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/effect/paint/black,
@@ -1069,7 +1064,6 @@
 "cA" = (
 /obj/machinery/door/airlock/external{
 	density = 1;
-	frequency = 1380;
 	id_tag = "skipjack_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -1085,8 +1079,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cC" = (
-/obj/machinery/airlock_sensor{
-	frequency = 1331;
+/obj/machinery/airlock_sensor/shuttle{
 	id_tag = "vox_west_sensor";
 	pixel_x = 25
 	},
@@ -1108,7 +1101,6 @@
 "cG" = (
 /obj/random/trash,
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "skipjack_shuttle_sensor";
 	pixel_x = 8;
 	pixel_y = 25
@@ -1199,7 +1191,6 @@
 "cP" = (
 /obj/machinery/light/small,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1380;
 	id_tag = "skipjack_shuttle";
 	pixel_x = -25;
 	pixel_y = 8;
@@ -1223,8 +1214,7 @@
 /turf/simulated/wall/voxshuttle,
 /area/map_template/skipjack_station/start)
 "cS" = (
-/obj/machinery/door/airlock/hatch{
-	frequency = 1331;
+/obj/machinery/door/airlock/external{
 	icon_state = "door_closed";
 	id_tag = "vox_southwest_lock";
 	locked = 0
@@ -1259,7 +1249,6 @@
 "cY" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "skipjack_shuttle_inner";
 	name = "Ship External Access"
 	},
@@ -1267,10 +1256,8 @@
 /area/map_template/skipjack_station/start)
 "cZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "vox_west_control";
+/obj/machinery/button/access/shuttle/interior{
+	id_tag = "vox_west_control";
 	pixel_x = -22;
 	req_access = list("ACCESS_SYNDICATE")
 	},
@@ -1383,10 +1370,8 @@
 /area/map_template/skipjack_station/start)
 "dk" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1380;
-	master_tag = "skipjack_shuttle";
+/obj/machinery/button/access/interior{
+	id_tag = "skipjack_shuttle";
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;

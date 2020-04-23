@@ -11,11 +11,13 @@
 	var/list/children_ready
 	var/list/children_override
 
-/datum/computer/file/embedded_program/docking/multi/New(var/obj/machinery/embedded_controller/M)
-	..(M)
+/datum/computer/file/embedded_program/docking/multi/reset_id_tags(base_tag)
+	. = ..()
 
-	if (istype(M,/obj/machinery/embedded_controller/radio/docking_port_multi))	//if our parent controller is the right type, then we can auto-init stuff at construction
-		var/obj/machinery/embedded_controller/radio/docking_port_multi/controller = M
+	children_tags = null
+
+	if (istype(master,/obj/machinery/embedded_controller/radio/docking_port_multi))	//if our parent controller is the right type, then we can auto-init stuff at construction
+		var/obj/machinery/embedded_controller/radio/docking_port_multi/controller = master
 		//parse child_tags_txt and create child tags
 		children_tags = splittext(controller.child_tags_txt, ";")
 
@@ -174,11 +176,9 @@
 			if (!override_enabled)
 				stop_cycling()
 				close_doors()
-				disable_mech_regulation()
 
 		if ("finish_docking")
 			if (!override_enabled)
-				enable_mech_regulation()
 				open_doors()
 
 		if ("finish_undocking")

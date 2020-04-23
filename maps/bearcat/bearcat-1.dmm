@@ -7,18 +7,18 @@
 /turf/space,
 /area/space)
 "ad" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_out"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/cargo/lower)
 "ae" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_out"
 	},
-/obj/machinery/access_button/airlock_exterior{
-	master_tag = "cargo";
+/obj/machinery/button/access/exterior{
+	id_tag = "cargo";
 	pixel_x = 18;
 	pixel_y = 17
 	},
@@ -33,13 +33,13 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/escape_port)
 "aj" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "cargo_pump"
 	},
 /turf/simulated/floor/plating,
 /area/ship/bearcat/cargo/lower)
 "ak" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "cargo_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
@@ -195,18 +195,18 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/cargo/lower)
 "aG" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_in"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/cargo/lower)
 "aH" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "cargo_in"
 	},
-/obj/machinery/access_button/airlock_interior{
-	master_tag = "cargo";
+/obj/machinery/button/access/interior{
+	id_tag = "cargo";
 	pixel_x = 20;
 	pixel_y = -12
 	},
@@ -1997,11 +1997,11 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "eva_in"
 	},
-/obj/machinery/access_button/airlock_interior{
-	master_tag = "eva";
+/obj/machinery/button/access/interior{
+	id_tag = "eva";
 	pixel_x = -12;
 	pixel_y = 20
 	},
@@ -2045,7 +2045,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/maintenance/eva)
 "eH" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "eva_pump"
 	},
@@ -2056,11 +2056,11 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/maintenance/eva)
 "eI" = (
-/obj/machinery/door/airlock/external/bolted/cycling{
+/obj/machinery/door/airlock/external/bolted{
 	id_tag = "eva_out"
 	},
-/obj/machinery/access_button/airlock_exterior{
-	master_tag = "eva";
+/obj/machinery/button/access/exterior{
+	id_tag = "eva";
 	pixel_x = 18;
 	pixel_y = -18
 	},

@@ -1471,8 +1471,8 @@
 /turf/simulated/wall,
 /area/constructionsite/hallway/fore)
 "eH" = (
-/obj/machinery/access_button/airlock_exterior{
-	master_tag = "constructionsite_airlock";
+/obj/machinery/button/access/exterior{
+	id_tag = "constructionsite_airlock";
 	pixel_x = 20;
 	pixel_y = 0;
 	req_access = newlist()
@@ -1483,8 +1483,8 @@
 /obj/structure/sign/warning/vacuum{
 	pixel_x = -32
 	},
-/obj/machinery/access_button/airlock_interior{
-	master_tag = "constructionsite_airlock";
+/obj/machinery/button/access/interior{
+	id_tag = "constructionsite_airlock";
 	pixel_x = -20;
 	pixel_y = 0;
 	req_access = newlist()
@@ -1538,7 +1538,6 @@
 /area/constructionsite/hallway/fore)
 "eR" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_outer";
 	locked = 1
@@ -1546,7 +1545,7 @@
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "eS" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "constructionsite_vent"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1557,7 +1556,6 @@
 /area/constructionsite/teleporter)
 "eU" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_inner";
 	locked = 1
@@ -1600,7 +1598,6 @@
 	},
 /obj/machinery/light/small,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1379;
 	id_tag = "constructionsite_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -1619,7 +1616,6 @@
 "fb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue,
 /obj/machinery/airlock_sensor{
-	frequency = 1379;
 	id_tag = "constructionsite_sensor";
 	pixel_x = 0;
 	pixel_y = -25
@@ -1636,7 +1632,6 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
-	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_inner";
 	locked = 1
@@ -3636,7 +3631,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ob" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "constructionsite_vent"
 	},
 /obj/effect/floor_decal/industrial/warning{

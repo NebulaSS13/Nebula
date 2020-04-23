@@ -31,16 +31,19 @@
 	..(M)
 	memory["door_status"] = list(state = "closed", lock = "locked")		//assume closed and locked in case the doors dont report in
 
-	if (istype(M, /obj/machinery/embedded_controller/radio/simple_docking_controller))
-		var/obj/machinery/embedded_controller/radio/simple_docking_controller/controller = M
+/datum/computer/file/embedded_program/docking/simple/reset_id_tags(base_tag)
+	. = ..()
+	if (istype(master, /obj/machinery/embedded_controller/radio/simple_docking_controller))
+		var/obj/machinery/embedded_controller/radio/simple_docking_controller/controller = master
 
-		tag_door = controller.tag_door? controller.tag_door : "[id_tag]_hatch"
+		tag_door = (!base_tag && controller.tag_door) || "[id_tag]_hatch"
 
 		spawn(10)
-			signal_door("update")		//signals connected doors to update their status
+			signalDoor()		//signals connected doors to update their status
 
 /datum/computer/file/embedded_program/docking/simple/get_receive_filters()
-	return ..() + tag_door
+	. = ..()
+	.[tag_door] = "doors"
 
 /datum/computer/file/embedded_program/docking/simple/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]
@@ -58,10 +61,7 @@
 	switch(command)
 		if("force_door")
 			if (override_enabled)
-				if(memory["door_status"]["state"] == "open")
-					close_door()
-				else
-					open_door()
+				toggleDoor(memory["door_status"], tag_door, TRUE, "toggle")
 		if("toggle_override")
 			if (override_enabled)
 				disable_override()
@@ -69,30 +69,6 @@
 				enable_override()
 		else
 			. = FALSE
-
-/datum/computer/file/embedded_program/docking/simple/proc/signal_door(var/command)
-	var/datum/signal/signal = new
-	signal.data["tag"] = tag_door
-	signal.data["command"] = command
-	post_signal(signal, tag_door)
-
-///datum/computer/file/embedded_program/docking/simple/proc/signal_mech_sensor(var/command)
-//	signal_door(command)
-//	return
-
-/datum/computer/file/embedded_program/docking/simple/proc/open_door()
-	if(memory["door_status"]["state"] == "closed")
-		//signal_mech_sensor("enable")
-		signal_door("secure_open")
-	else if(memory["door_status"]["lock"] == "unlocked")
-		signal_door("lock")
-
-/datum/computer/file/embedded_program/docking/simple/proc/close_door()
-	if(memory["door_status"]["state"] == "open")
-		signal_door("secure_close")
-		//signal_mech_sensor("disable")
-	else if(memory["door_status"]["lock"] == "unlocked")
-		signal_door("lock")
 
 //tell the docking port to start getting ready for docking - e.g. pressurize
 /datum/computer/file/embedded_program/docking/simple/prepare_for_docking()
@@ -104,11 +80,11 @@
 
 //we are docked, open the doors or whatever.
 /datum/computer/file/embedded_program/docking/simple/finish_docking()
-	open_door()
+	toggleDoor(memory["door_status"], tag_door, TRUE, "open")
 
 //tell the docking port to start getting ready for undocking - e.g. close those doors.
 /datum/computer/file/embedded_program/docking/simple/prepare_for_undocking()
-	close_door()
+	toggleDoor(memory["door_status"], tag_door, TRUE, "close")
 
 //are we ready for undocking?
 /datum/computer/file/embedded_program/docking/simple/ready_for_undocking()

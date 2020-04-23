@@ -687,7 +687,6 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1380;
 	id_tag = "merc_shuttle_sensor";
 	pixel_x = 0;
 	pixel_y = 25
@@ -811,7 +810,6 @@
 /area/map_template/merc_shuttle)
 "bp" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1380;
 	id_tag = "merc_shuttle_inner";
 	name = "Ship External Access"
 	},
@@ -837,7 +835,6 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	dir = 2;
-	frequency = 1380;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -970,7 +967,6 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	dir = 4;
-	frequency = 1380;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -1042,7 +1038,6 @@
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
 	dir = 1;
-	frequency = 1380;
 	id_tag = "merc_shuttle";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -1984,8 +1979,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "merc_shuttle_pump_out_external"
 	},
-/obj/machinery/airlock_sensor/airlock_exterior{
-	frequency = 1380;
+/obj/machinery/airlock_sensor{
 	id_tag = "merc_shuttle_exterior_sensor";
 	pixel_x = 0;
 	pixel_y = -28
@@ -2000,9 +1994,8 @@
 /obj/machinery/pointdefense{
 	initial_id_tag = "merc_pd"
 	},
-/obj/machinery/access_button/airlock_exterior{
-	frequency = 1380;
-	master_tag = "merc_shuttle";
+/obj/machinery/button/access/exterior{
+	id_tag = "merc_shuttle";
 	pixel_x = 37;
 	pixel_y = -32;
 	req_access = list("ACCESS_SYNDICATE")

@@ -201,3 +201,33 @@
 /obj/item/frame/stock_offset/newscaster/kit
 	name = "newscaster kit"
 	fully_construct = TRUE
+
+/obj/item/frame/button/airlock_sensor
+	icon = 'icons/obj/airlock_machines.dmi'
+	icon_state = "airlock_sensor_off"
+	name = "airlock sensor"
+	desc = "An airlock sensor frame."
+	build_machine_type = /obj/machinery/airlock_sensor/buildable
+
+/obj/item/frame/button/airlock_controller
+	icon = 'icons/obj/airlock_machines.dmi'
+	icon_state = "airlock_control_off"
+	name = "airlock controller frame"
+	desc = "Used to build airlock controllers. Use a multitool on the circuit to determine which type you want, and then hit this with the the circuit."
+	build_machine_type = null
+
+/obj/item/frame/button/airlock_controller/try_build(turf/on_wall, click_params)
+	if(!build_machine_type)
+		to_chat(usr, SPAN_WARNING("First hit this with a circuitboard to configure it!"))
+		return
+	return ..()
+
+/obj/item/frame/button/airlock_controller/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/stock_parts/circuitboard))
+		var/obj/item/stock_parts/circuitboard/board = W
+		if(ispath(board.build_path, /obj/machinery/embedded_controller/radio))
+			build_machine_type = board.build_path
+			to_chat(user, SPAN_NOTICE("You configure \the [src] using \the [W]."))
+			return TRUE
+	. = ..()
+	

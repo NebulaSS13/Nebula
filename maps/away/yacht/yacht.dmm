@@ -1257,9 +1257,8 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/living)
 "fb" = (
-/obj/machinery/access_button/airlock_exterior{
-	frequency = 1439;
-	master_tag = "yacht_airlock";
+/obj/machinery/button/access/exterior{
+	id_tag = "yacht_airlock";
 	pixel_x = 24
 	},
 /turf/space,
@@ -1272,9 +1271,8 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/constructable_frame/computerframe,
-/obj/machinery/access_button/airlock_interior{
-	frequency = 1439;
-	master_tag = "yacht_airlock";
+/obj/machinery/button/access/interior{
+	id_tag = "yacht_airlock";
 	pixel_x = -24
 	},
 /turf/simulated/floor/plating,
@@ -1319,7 +1317,6 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1439;
 	id_tag = "yacht_outer"
 	},
 /turf/simulated/floor/airless,
@@ -1332,7 +1329,6 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1439;
 	id_tag = "yacht_airlock";
 	pixel_y = 24;
 	tag_airpump = "yacht_pump";
@@ -1340,12 +1336,11 @@
 	tag_exterior_door = "yacht_outer";
 	tag_interior_door = "yacht_inner"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
 	id_tag = "yacht_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1439;
 	id_tag = "yacht_sensor";
 	pixel_y = -24
 	},
@@ -1363,7 +1358,6 @@
 	icon_state = "intact"
 	},
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1439;
 	id_tag = "yacht_inner"
 	},
 /turf/simulated/floor/plating,

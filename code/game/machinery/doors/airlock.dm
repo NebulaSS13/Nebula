@@ -29,6 +29,7 @@ var/list/airlock_overlays = list()
 	var/main_power_lost_until = 0	 	//World time when main power is restored.
 	var/backup_power_lost_until = -1	//World time when backup power is restored.
 	var/next_beep_at = 0				//World time when we may next beep due to doors being blocked by mobs
+	var/shockedby = list()              //Some sort of admin logging var
 	var/spawnPowerRestoreRunning = 0
 	var/welded = null
 	var/locked = FALSE
@@ -90,14 +91,9 @@ var/list/airlock_overlays = list()
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/radio/transmitter/on_event,
 		/obj/item/stock_parts/power/apc
 	)
-	// To be fleshed out and moved to parent door, but staying minimal for now.
-	public_methods = list(
-		/decl/public_access/public_method/toggle_door,
-		/decl/public_access/public_method/airlock_toggle_bolts
-	)
-	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/airlock = 1)
 
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
@@ -1126,17 +1122,3 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/stripe_airlock(var/paint_color)
 	stripe_color = paint_color
 	update_icon()
-
-// Public access
-
-/decl/public_access/public_method/airlock_toggle_bolts
-	name = "toggle bolts"
-	desc = "Toggles whether the airlock is bolted or not, if possible."
-	call_proc = /obj/machinery/door/airlock/proc/toggle_lock
-
-/decl/stock_part_preset/radio/receiver/airlock
-	frequency = AIRLOCK_FREQ
-	receive_and_call = list(
-		"toggle_door" = /decl/public_access/public_method/toggle_door,
-		"toggle_bolts" = /decl/public_access/public_method/airlock_toggle_bolts
-	)

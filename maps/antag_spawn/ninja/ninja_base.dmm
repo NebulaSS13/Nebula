@@ -1355,9 +1355,8 @@
 	},
 /area/map_template/ninja_dojo/start)
 "cR" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/shuttle{
 	density = 1;
-	frequency = 1331;
 	id_tag = "ninja_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -1395,10 +1394,8 @@
 	dir = 5;
 	icon_state = "intact"
 	},
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "ninja_shuttle";
+/obj/machinery/button/access/shuttle/interior{
+	id_tag = "ninja_shuttle";
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;
@@ -1413,8 +1410,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/machinery/door/airlock/external{
-	frequency = 1331;
+/obj/machinery/door/airlock/external/shuttle{
 	id_tag = "ninja_shuttle_inner";
 	name = "Ship External Access"
 	},
@@ -1424,8 +1420,7 @@
 	},
 /area/map_template/ninja_dojo/start)
 "cW" = (
-/obj/machinery/airlock_sensor{
-	frequency = 1331;
+/obj/machinery/airlock_sensor/shuttle{
 	id_tag = "ninja_shuttle_sensor";
 	pixel_x = 8;
 	pixel_y = -25
