@@ -6,8 +6,8 @@
 /obj/item/gun/energy/get_base_value()
 	. = 150
 
-/obj/item/gun/get_single_monetary_worth()
-	. = ..()
+/obj/item/gun/get_base_value()
+	. = 0
 	if(silenced)
 		. += 20
 	. += one_hand_penalty * -2
@@ -19,8 +19,9 @@
 			if(F.settings["can_autofire"])
 				. += 100
 	. *= 10
-	
-/obj/item/gun/energy/get_single_monetary_worth()	
+	. += ..()
+
+/obj/item/gun/energy/get_base_value()
 	. = ..()
 	if(self_recharge)
 		. += 100
@@ -30,7 +31,7 @@
 			projectile_value = max(projectile_value, atom_info_repository.get_worth_for(F.settings["projectile_type"]))
 	. += max_shots * projectile_value
 	
-/obj/item/gun/projectile/get_single_monetary_worth()
+/obj/item/gun/projectile/get_base_value()
 	. = ..()
 	if(load_method & (SINGLE_CASING|SPEEDLOADER))
 		var/projectile_value = atom_info_repository.get_worth_for(ammo_type)

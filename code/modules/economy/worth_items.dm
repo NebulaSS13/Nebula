@@ -2,7 +2,7 @@
 /obj/item/proc/get_max_weapon_value()
 	return force
 
-/obj/item/get_single_monetary_worth()
+/obj/item/get_base_value()
 
 	if(holographic)
 		return 0
@@ -10,9 +10,13 @@
 	. = ..()
 
 	if(origin_tech)
+		var/largest_tech_val = 0
 		var/list/tech = cached_json_decode(origin_tech)
 		for(var/t in tech)
-			. += (tech[t]**2) * SSfabrication.tech_level_value
+			var/next_tech_val = (tech[t]**2) * SSfabrication.tech_level_value
+			if(next_tech_val > largest_tech_val)
+				largest_tech_val = next_tech_val
+			. += largest_tech_val
 
 	if(force)
 		var/weapon_value = ((get_max_weapon_value() * SSfabrication.force_weapon_value) * (SSfabrication.edged_weapon_multiplier * (1 + max(sharp, edge))))

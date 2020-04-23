@@ -159,12 +159,6 @@
 	containername = "\improper Supermatter crate (CAUTION)"
 	access = access_ce
 
-/decl/hierarchy/supply_pack/engineering/fueltank
-	name = "Liquid - Fuel tank"
-	contains = list(/obj/structure/reagent_dispensers/fueltank)
-	containertype = /obj/structure/largecrate
-	containername = "fuel tank crate"
-
 /decl/hierarchy/supply_pack/engineering/robotics
 	name = "Parts - Robotics assembly"
 	contains = list(/obj/item/assembly/prox_sensor = 3,

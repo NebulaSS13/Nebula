@@ -85,7 +85,7 @@
 	access = access_atmospherics
 
 /decl/hierarchy/supply_pack/atmospherics/fuel
-	name = "Liquid - Fuel tanks"
+	name = "Gas - Fuel tanks"
 	contains = list(/obj/item/tank/hydrogen = 4)
 	containername = "fuel tank crate"
 

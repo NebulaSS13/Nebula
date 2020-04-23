@@ -1,4 +1,4 @@
-/obj/item/projectile/get_single_monetary_worth()
+/obj/item/projectile/get_base_value()
 	. = -5 * distance_falloff
 	. += damage
 	. += armor_penetration
@@ -21,7 +21,7 @@
 		. += 50
 	if(hitscan)
 		. += 100
-	. = max(round(. * 0.1), 1)
-	
-/obj/item/projectile/ion/get_single_monetary_worth()
-	. = ..() + heavy_effect_range * 10 + light_effect_range * 5
+	. = max(round(. * 0.1)+..(), 1)
+
+/obj/item/projectile/ion/get_base_value()
+	. = ..() + (heavy_effect_range * 10) + (light_effect_range * 5)

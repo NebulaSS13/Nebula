@@ -4,8 +4,7 @@
 /obj/item/clothing/head/collectable/get_value_multiplier()
 	. = 5
 
-/obj/item/clothing/get_single_monetary_worth()
+/obj/item/clothing/get_base_value()
 	. = ..()
-	if(!holographic)
-		if(flash_protection > 0)
-			. += flash_protection * SSfabrication.flash_protection_value
+	if(!holographic && flash_protection > 0)
+		. += flash_protection * SSfabrication.flash_protection_value
