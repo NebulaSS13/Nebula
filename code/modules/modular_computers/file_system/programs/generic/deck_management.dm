@@ -271,8 +271,9 @@
 				if(selected_mission.stage in list(SHUTTLE_MISSION_PLANNED, SHUTTLE_MISSION_QUEUED))
 					return 1 //Hold your horses until the mission is started on these reports.
 				var/index = text2num(href_list["index"])
-				var/datum/computer_file/report/prototype = listgetindex(report_prototypes, index)
-				if(!index) return 1
+				if(!is_valid_index(index, report_prototypes))
+					return 1
+				var/datum/computer_file/report/prototype = report_prototypes[index]
 				prog_state = DECK_REPORT_EDIT
 				var/datum/computer_file/report/old_report = locate(prototype.type) in selected_mission.other_reports
 				if(old_report)

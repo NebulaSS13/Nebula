@@ -4,8 +4,8 @@
 /datum/unit_test/fusion_network_test/start_test()
 
 	var/list/check_machines
-	for(var/thing in SSmachines.machinery)
-		if(hasvar(thing, "initial_id_tag") && !isnull(thing:initial_id_tag) && has_extension(thing, /datum/extension/local_network_member))
+	for(var/atom/thing in SSmachines.machinery)
+		if(has_extension(thing, /datum/extension/local_network_member) && !isnull(thing.vars["initial_id_tag"]))
 			LAZYADD(check_machines, get_extension(thing, /datum/extension/local_network_member))
 
 	if(LAZYLEN(check_machines))

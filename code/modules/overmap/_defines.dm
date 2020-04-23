@@ -51,7 +51,7 @@ var/list/moving_levels = list()
 //Proc to 'move' stars in spess
 //yes it looks ugly, but it should only fire when state actually change.
 //null direction stops movement
-proc/toggle_move_stars(zlevel, direction)
+/proc/toggle_move_stars(zlevel, direction)
 	if(!zlevel)
 		return
 
@@ -74,6 +74,6 @@ proc/toggle_move_stars(zlevel, direction)
 				T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
 				for(var/atom/movable/AM in T)
 					if (AM.simulated && !AM.anchored)
-						AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
+						AM.throw_at(get_step(T, GLOB.reverse_dir[direction]), 5, 1)
 						CHECK_TICK
 			CHECK_TICK

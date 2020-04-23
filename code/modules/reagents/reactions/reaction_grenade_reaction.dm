@@ -35,22 +35,14 @@
 	s.set_up(2, 1, location)
 	s.start()
 	for(var/mob/living/carbon/M in viewers(world.view, location))
-		switch(get_dist(M, location))
-			if(0 to 3)
-				if(hasvar(M, "glasses"))
-					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
-						continue
-
-				M.flash_eyes()
-				M.Weaken(15)
-
-			if(4 to 5)
-				if(hasvar(M, "glasses"))
-					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
-						continue
-
-				M.flash_eyes()
-				M.Stun(5)
+		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
+			switch(get_dist(M, location))
+				if(0 to 3)
+					M.flash_eyes()
+					M.Weaken(15)
+				if(4 to 5)
+					M.flash_eyes()
+					M.Stun(5)
 
 /datum/chemical_reaction/grenade_reaction/emp_pulse
 	name = "EMP Pulse"
