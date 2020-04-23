@@ -98,6 +98,12 @@ SUBSYSTEM_DEF(zcopy)
 
 	log_ss("zcopy", "Z-Stack maximums: [json_encode(zstack_maximums)]")
 
+/datum/controller/subsystem/zcopy/StartLoadingMap()
+	suspend()
+
+/datum/controller/subsystem/zcopy/StopLoadingMap()
+	wake()
+
 /datum/controller/subsystem/zcopy/fire(resumed = FALSE, no_mc_tick = FALSE)
 	if (!resumed)
 		qt_idex = 1
