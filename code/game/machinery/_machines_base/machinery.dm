@@ -417,9 +417,9 @@ Class Procs:
 		to_chat(user, "\The [src] is missing [english_list(parts)], rendering it inoperable.")
 
 // This is really pretty crap and should be overridden for specific machines.
-/obj/machinery/water_act(var/depth)
+/obj/machinery/fluid_act(var/datum/reagents/fluids)
 	..()
-	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (depth > FLUID_DEEP))
+	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids.total_volume > FLUID_DEEP))
 		ex_act(3)
 
 /obj/machinery/Move()

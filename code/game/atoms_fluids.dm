@@ -1,8 +1,10 @@
 /atom/proc/is_flooded(var/lying_mob, var/absolute)
 	return
 
-/atom/proc/water_act(var/depth)
-	clean_blood()
+/atom/proc/fluid_act(var/datum/reagents/fluids)
+	if(reagents && fluids.total_volume >= FLUID_SHALLOW && ATOM_IS_OPEN_CONTAINER(src))
+		reagents.trans_to_holder(fluids, reagents.total_volume)
+		fluids.trans_to_holder(reagents, min(fluids.total_volume, reagents.maximum_volume))
 
 /atom/proc/return_fluid()
 	return null

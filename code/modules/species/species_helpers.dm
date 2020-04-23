@@ -36,12 +36,12 @@ var/list/stored_shock_by_ref = list()
 		return I
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
-/datum/species/proc/water_act(var/mob/living/carbon/human/H, var/depth)
-	if(!isnull(water_soothe_amount) && depth >= 40)
-		if(H.getHalLoss())
-			H.adjustHalLoss(-(water_soothe_amount))
-			if(prob(5))
-				to_chat(H, "<span class='notice'>The water ripples gently over your skin in a soothing balm.</span>")
+/datum/species/proc/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
+	var/water = REAGENT_VOLUME(fluids, /decl/reagent/water)
+	if(water >= 40 && H.getHalLoss())
+		H.adjustHalLoss(-(water_soothe_amount))
+		if(prob(5))
+			to_chat(H, SPAN_NOTICE("The water ripples gently over your skin in a soothing balm."))
 
 /datum/species/proc/is_available_for_join()
 	if(!(spawn_flags & SPECIES_CAN_JOIN))

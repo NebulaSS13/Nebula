@@ -767,14 +767,17 @@ default behaviour is:
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 
-/mob/living/water_act(var/depth)
+/mob/fluid_act(var/datum/reagents/fluids)
 	..()
 	wash_mob(src)
+
+/mob/living/fluid_act(var/datum/reagents/fluids)
+	..()
 	for(var/thing in get_equipped_items(TRUE))
 		if(isnull(thing)) continue
 		var/atom/movable/A = thing
 		if(A.simulated && !A.waterproof)
-			A.water_act(depth)
+			A.fluid_act(fluids)
 
 /mob/living/proc/nervous_system_failure()
 	return FALSE
