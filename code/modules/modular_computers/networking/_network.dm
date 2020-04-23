@@ -10,7 +10,7 @@ GLOBAL_LIST_EMPTY(computer_networks)
 	var/list/mainframes = list()
 	var/list/mainframes_by_role = list()
 
-	var/datum/extension/network_device/router
+	var/datum/extension/network_device/router/router
 
 	var/network_features_enabled = NETWORK_ALL_FEATURES
 	var/intrusion_detection_enabled
@@ -98,8 +98,12 @@ GLOBAL_LIST_EMPTY(computer_networks)
 	return ARE_Z_CONNECTED(get_z(router.holder), get_z(D.holder))
 
 /datum/computer_network/proc/get_signal_strength(datum/extension/network_device/D)
-	if(check_connection(D))
-		return D.connection_type
+	if(!check_connection(D))
+		return 0
+	var/broadcast_strength = router.get_broadcast_strength()
+	var/distance = get_dist(router.holder, D.holder)
+	var/receiver_strength = D.connection_type
+	return (broadcast_strength * receiver_strength) - distance
 
 /datum/computer_network/proc/get_device_by_tag(nettag)
 	return devices_by_tag[nettag]

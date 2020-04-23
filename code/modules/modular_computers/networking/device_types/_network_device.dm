@@ -54,7 +54,7 @@
 	var/signal_strength = network.get_signal_strength(src)
 	if(signal_strength <= 0)
 		return "Not Connected"
-	if(signal_strength < NETWORK_CONNECTION_STRONG_WIRELESS)
+	if(signal_strength < (NETWORK_BASE_BROADCAST_STRENGTH * 0.5))
 		return "Low Signal"
 	else
 		return "High Signal"
