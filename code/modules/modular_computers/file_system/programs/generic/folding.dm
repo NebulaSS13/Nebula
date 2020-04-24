@@ -50,12 +50,15 @@ GLOBAL_LIST_INIT(science_strings, list(
 		next_event = (rand(MINIMUM_FOLDING_EVENT_INTERVAL, MAXIMUM_FOLDING_EVENT_INTERVAL) SECONDS) + world.timeofday
 
 	if(href_list["collect"] && started_on > 0 && !crashed)
+		if(started_on + current_interval > world.timeofday)
+			return TOPIC_HANDLED // not ready to collect.
 		var/obj/item/card/id/I = usr.GetIdCard()
 		if(!I)
 			to_chat(usr, SPAN_WARNING("Unable to locate ID card for transaction."))
 			return TOPIC_HANDLED
 		var/datum/money_account/account = get_account(I.associated_account_number)
-		var/earned = current_interval * SCIENCE_MONEY_PER_MINUTE
+		var/obj/item/stock_parts/computer/processor_unit/processor = computer.get_component(PART_CPU)
+		var/earned = current_interval * (SCIENCE_MONEY_PER_MINUTE * processor.processing_power)
 		account.deposit(earned, "Completed FOLDING@SPACE project.")
 		to_chat(usr, SPAN_NOTICE("Transferred [earned] to your account."))
 		started_on = 0
