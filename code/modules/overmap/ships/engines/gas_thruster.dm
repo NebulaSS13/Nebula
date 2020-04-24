@@ -136,7 +136,7 @@
 
 /obj/machinery/atmospherics/unary/engine/proc/check_blockage()
 	blockage = FALSE
-	var/exhaust_dir = reverse_direction(dir)
+	var/exhaust_dir = GLOB.reverse_dir[dir]
 	var/turf/A = get_step(src, exhaust_dir)
 	var/turf/B = A
 	while(isturf(A) && !(isspace(A) || isopenspace(A)))
@@ -163,7 +163,7 @@
 	if(network)
 		network.update = 1
 
-	var/exhaust_dir = reverse_direction(dir)
+	var/exhaust_dir = GLOB.reverse_dir[dir]
 	var/turf/T = get_step(src,exhaust_dir)
 	if(T)
 		T.assume_air(removed)

@@ -150,7 +150,7 @@
 
 //General spider procs
 /mob/living/simple_animal/hostile/giant_spider/Initialize(var/mapload, var/atom/parent)
-	get_light_and_color(parent)
+	color = parent?.color || color
 	spider_randomify()
 	update_icon()
 	. = ..()

@@ -17,16 +17,6 @@
 		if(2) return "[input[1]][and_text][input[2]]"
 		else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
 
-//Returns list element or null. Should prevent "index out of bounds" error.
-proc/listgetindex(var/list/list,index)
-	if(istype(list) && list.len)
-		if(isnum(index))
-			if(InRange(index,1,list.len))
-				return list[index]
-		else if(index in list)
-			return list[index]
-	return
-
 //Return either pick(list) or null if list is not of type /list or is empty
 proc/safepick(list/list)
 	if(!islist(list) || !list.len)

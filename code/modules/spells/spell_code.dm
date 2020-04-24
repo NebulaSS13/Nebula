@@ -393,4 +393,10 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/set_connected_god(var/mob/living/deity/god)
 	connected_god = god
-	return
+
+/proc/view_or_range(distance = world.view , center = usr , type)
+	switch(type)
+		if("view")
+			. = view(distance,center)
+		if("range")
+			. = range(distance,center)
