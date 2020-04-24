@@ -132,3 +132,29 @@
 		/obj/item/crowbar = 2
 	)
 	contraband = list(/obj/item/flash = 2)
+
+/obj/machinery/vending/materials
+	name = "MatterVend"
+	desc = "Provides access to baryonic matter in easy to handle sheet form."
+	icon_state = "engivend"
+	icon_deny = "engivend-deny"
+	icon_vend = "engivend-vend"
+	markup = 0
+	vend_delay = 21
+	base_type = /obj/machinery/vending/materials
+	products = list(
+		/obj/item/stack/material/steel/fifty = 3,
+		/obj/item/stack/material/plastic/fifty = 4,
+		/obj/item/stack/material/aluminium/fifty = 3,
+		/obj/item/stack/material/plasteel/ten = 4,
+		/obj/item/stack/material/glass/fifty = 4
+	)
+	contraband = list(/obj/item/stack/material/ocp/ten = 3)
+
+/obj/machinery/vending/materials/build_inventory()
+	..()
+	for(var/datum/stored_items/vending_products/P in product_records)
+		if(ispath(P.item_path, /obj/item/stack/material))
+			var/obj/item/stack/material/S = P.item_path
+			var/material/sheet_material = SSmaterials.get_material_datum(initial(S.material))
+			P.item_name = "[sheet_material.display_name] [sheet_material.sheet_plural_name] ([initial(S.amount)]x)"
