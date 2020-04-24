@@ -285,6 +285,8 @@
 	for(var/obj/item/grab/G in mob.get_active_grabs())
 		if(G.assailant == G.affecting)
 			return
+		if(G.affecting.anchored)
+			return
 		. = max(., G.grab_slowdown())
 		if(isturf(mob.loc) && mob.loc != old_turf)
 			for(var/atom/movable/M in (mob.ret_grab()-mob))
