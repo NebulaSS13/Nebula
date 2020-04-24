@@ -101,7 +101,7 @@ GLOBAL_LIST_EMPTY(computer_networks)
 	if(!check_connection(D))
 		return 0
 	var/broadcast_strength = router.get_broadcast_strength()
-	var/distance = get_dist(router.holder, D.holder)
+	var/distance = get_dist(get_turf(router.holder), get_turf(D.holder))
 	var/receiver_strength = D.connection_type
 	return (broadcast_strength * receiver_strength) - distance
 
