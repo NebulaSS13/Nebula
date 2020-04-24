@@ -10,7 +10,9 @@ GLOBAL_LIST_EMPTY(computer_networks)
 	var/list/mainframes = list()
 	var/list/mainframes_by_role = list()
 
-	var/datum/extension/network_device/router/router
+	var/list/relays = list()
+
+	var/datum/extension/network_device/broadcaster/router/router
 
 	var/network_features_enabled = NETWORK_ALL_FEATURES
 	var/intrusion_detection_enabled
@@ -49,6 +51,9 @@ GLOBAL_LIST_EMPTY(computer_networks)
 		for(var/role in M.roles)
 			LAZYDISTINCTADD(mainframes_by_role[role], M)
 		add_log("Mainframe ONLINE with roles: [english_list(M.roles)]", D.network_tag)
+	else if(istype(D, /datum/extension/network_device/broadcaster/relay))
+		relays |= D
+		add_log("Relay ONLINE", D.network_tag)
 	return TRUE
 
 /datum/computer_network/proc/remove_device(datum/extension/network_device/D)
@@ -60,9 +65,12 @@ GLOBAL_LIST_EMPTY(computer_networks)
 		for(var/role in mainframes_by_role)
 			LAZYREMOVE(mainframes_by_role[role], M)
 		add_log("Mainframe OFFLINE with roles: [english_list(M.roles)]", M.network_tag)
+	else if(D in relays)
+		relays -= D
+		add_log("Relay OFFLINE", D.network_tag)
 	if(D == router)
 		router = null
-		for(var/datum/extension/network_device/router/R in devices)
+		for(var/datum/extension/network_device/broadcaster/router/R in devices)
 			router = R
 			add_log("Router offline, falling back to router '[R.network_tag]'", R.network_tag)
 			break
@@ -95,15 +103,24 @@ GLOBAL_LIST_EMPTY(computer_networks)
 		return FALSE
 	if(specific_action && !(network_features_enabled & specific_action))
 		return FALSE
-	return ARE_Z_CONNECTED(get_z(router.holder), get_z(D.holder))
+	var/list/broadcasters = relays + router
+	for(var/datum/extension/network_device/R in broadcasters)
+		if(get_z(R.holder) == get_z(D.holder))
+			return TRUE
 
 /datum/computer_network/proc/get_signal_strength(datum/extension/network_device/D)
 	if(!check_connection(D))
 		return 0
-	var/broadcast_strength = router.get_broadcast_strength()
-	var/distance = get_dist(get_turf(router.holder), get_turf(D.holder))
 	var/receiver_strength = D.connection_type
-	return (broadcast_strength * receiver_strength) - distance
+	var/list/broadcasters = relays + router
+	var/best_signal = 0
+	for(var/datum/extension/network_device/broadcaster/B in broadcasters)
+		if(get_z(B.holder) != get_z(D.holder))
+			continue
+		var/broadcast_strength = B.get_broadcast_strength()
+		var/distance = get_dist(get_turf(B.holder), get_turf(D.holder))
+		best_signal = max(best_signal, (broadcast_strength * receiver_strength) - distance)
+	return best_signal
 
 /datum/computer_network/proc/get_device_by_tag(nettag)
 	return devices_by_tag[nettag]
@@ -128,12 +145,12 @@ GLOBAL_LIST_EMPTY(computer_networks)
 /datum/computer_network/proc/update_mainframe_roles(datum/extension/network_device/mainframe/M)
 	if(!(M in mainframes))
 		return FALSE
-	
+
 	for(var/role in mainframes_by_role)
 		LAZYREMOVE(mainframes_by_role[role], M)
 	for(var/role in M.roles)
 		LAZYDISTINCTADD(mainframes_by_role[role], M)
-		
+
 	add_log("Mainframe roles updated, now: [english_list(M.roles)]", M.network_tag)
 
 /datum/computer_network/proc/get_os_by_nid(nid)
