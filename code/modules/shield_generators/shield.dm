@@ -22,7 +22,7 @@
 		if(T) // Incase we somehow stepped off the map.
 			for(var/obj/effect/shield/F in T)
 				if(update_neightbors)
-					F.update_icon(0)
+					F.queue_icon_update(0)
 				adjacent_shields_dir |= direction
 				break
 
@@ -71,7 +71,7 @@
 		var/turf/T = get_step(current_loc, direction)
 		if(T)
 			for(var/obj/effect/shield/F in T)
-				F.update_icon()
+				F.queue_icon_update()
 	. = ..()
 
 
