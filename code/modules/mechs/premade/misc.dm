@@ -33,3 +33,7 @@
 	has_hardpoints = list(HARDPOINT_BACK)
 	desc = "The Katamari series cockpits won a massive government tender a few years back. No one is sure why, but these terrible things keep popping up on every government-run facility."
 	material = MAT_STEEL
+
+/obj/item/mech_component/chassis/pod/prebuild()
+	. = ..()
+	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
