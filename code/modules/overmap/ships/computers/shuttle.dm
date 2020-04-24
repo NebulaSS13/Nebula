@@ -122,7 +122,7 @@
 		end_landing()
 		return
 	var/datum/shuttle/autodock/overmap/shuttle = SSshuttle.shuttles[shuttle_tag]
-	var/obj/effect/shuttle_landmark/temporary/lz = new(lz_turf, shuttle_tag)
+	var/obj/effect/shuttle_landmark/temporary/lz = new(lz_turf)
 	if(lz.is_valid(shuttle))	// Preliminary check that the shuttle fits.
 		shuttle.set_destination(lz)
 	else

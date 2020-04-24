@@ -135,9 +135,6 @@
 	landmark_tag = "landing"
 	flags = SLANDMARK_FLAG_AUTOSET
 
-/obj/effect/shuttle_landmark/temporary/Initialize(var/mapload, var/shuttle_name)
-	. = ..(mapload)
-
 /obj/effect/shuttle_landmark/temporary/Initialize()
 	landmark_tag += "-[random_id("landmarks",1,9999)]"
 	. = ..()
