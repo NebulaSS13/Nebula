@@ -229,7 +229,7 @@
 /datum/file_storage/network/get_transfer_speed()
 	if(check_errors())
 		return 0
-	return NTNETSPEED_DISK
+	return NETWORK_SPEED_DISK
 
 // Datum tracking progress between of file transfer between two file streams
 /datum/file_transfer

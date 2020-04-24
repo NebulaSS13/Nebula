@@ -6,7 +6,7 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "mail-closed"
 	size = 7
-	available_on_ntnet = 1
+	available_on_network = 1
 	var/stored_login = ""
 	var/stored_password = ""
 	usage_flags = PROGRAM_ALL
@@ -46,7 +46,7 @@
 	var/datum/nano_module/program/email_client/NME = NM
 	if(!istype(NME))
 		return
-	NME.relayed_process(ntnet_speed)
+	NME.relayed_process(network_speed)
 
 	var/check_count = NME.check_for_new_messages()
 	if(check_count)

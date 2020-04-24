@@ -1,4 +1,4 @@
-/datum/ntnet_conversation/
+/datum/chat_conversation/
 	var/id = null
 	var/title = "Untitled Conversation"
 	var/datum/computer_file/program/chatclient/operator // "Administrator" of this channel. Creator starts as channel's operator,
@@ -7,13 +7,13 @@
 	var/password
 	var/datum/computer_network/network
 
-/datum/ntnet_conversation/New(datum/computer_network/daddynet)
+/datum/chat_conversation/New(datum/computer_network/daddynet)
 	id = sequential_id(type)
 	network = daddynet
 	network.chat_channels.Add(src)
 	..()
 
-/datum/ntnet_conversation/Destroy()
+/datum/chat_conversation/Destroy()
 	network.chat_channels -= src
 	for(var/datum/computer_file/program/chatclient/client in clients)
 		if(client.channel == src)
@@ -23,21 +23,21 @@
 	clients.Cut()
 	. = ..()
 
-/datum/ntnet_conversation/proc/add_message(var/message, var/username)
+/datum/chat_conversation/proc/add_message(var/message, var/username)
 	message = "[stationtime2text()] [username]: [message]"
 	messages.Add(message)
 	trim_message_list()
 
-/datum/ntnet_conversation/proc/add_status_message(var/message)
+/datum/chat_conversation/proc/add_status_message(var/message)
 	messages.Add("[stationtime2text()] -!- [message]")
 	trim_message_list()
 
-/datum/ntnet_conversation/proc/trim_message_list()
+/datum/chat_conversation/proc/trim_message_list()
 	if(messages.len <= 50)
 		return
 	messages.Cut(1, (messages.len-49))
 
-/datum/ntnet_conversation/proc/add_client(var/datum/computer_file/program/chatclient/C)
+/datum/chat_conversation/proc/add_client(var/datum/computer_file/program/chatclient/C)
 	if(!istype(C))
 		return
 	clients.Add(C)
@@ -46,7 +46,7 @@
 	if(!operator)
 		changeop(C)
 
-/datum/ntnet_conversation/proc/remove_client(var/datum/computer_file/program/chatclient/C)
+/datum/chat_conversation/proc/remove_client(var/datum/computer_file/program/chatclient/C)
 	if(!istype(C) || !(C in clients))
 		return
 	clients.Remove(C)
@@ -60,12 +60,12 @@
 			changeop(newop)
 
 
-/datum/ntnet_conversation/proc/changeop(var/datum/computer_file/program/chatclient/newop)
+/datum/chat_conversation/proc/changeop(var/datum/computer_file/program/chatclient/newop)
 	if(istype(newop))
 		operator = newop
 		add_status_message("Channel operator status transferred to [newop.username].")
 
-/datum/ntnet_conversation/proc/change_title(var/newtitle, var/datum/computer_file/program/chatclient/client)
+/datum/chat_conversation/proc/change_title(var/newtitle, var/datum/computer_file/program/chatclient/client)
 	if(operator != client)
 		return 0 // Not Authorised
 

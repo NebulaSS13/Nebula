@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
 		return skill_fail_message()
 	if(!check_access(user))
 		return "[name]: ACCESS DENIED"
-	if(needs_network && !terminal.computer.get_ntnet_status())
+	if(needs_network && !terminal.computer.get_network_status())
 		return "NETWORK ERROR: Check connection and try again."
 
 	return proper_input_entered(text, user, terminal)
@@ -143,7 +143,7 @@ Subtypes
 /datum/terminal_command/status/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	. = list()
 	var/datum/computer_network/network = terminal.computer.get_network()
-	. += "NTnet status: [network ? "ENABLED" : "DISABLED"]"
+	. += "Network status: [network ? "ENABLED" : "DISABLED"]"
 	. += "Alarm status: [network?.intrusion_detection_enabled ? "ENABLED" : "DISABLED"]"
 	if(network.intrusion_detection_alarm)
 		. += "NETWORK INCURSION DETECTED"
@@ -162,11 +162,11 @@ Subtypes
 	if(!nid)
 		return
 	var/datum/extension/interactive/ntos/origin = terminal.computer
-	if(!origin || !origin.get_ntnet_status())
+	if(!origin || !origin.get_network_status())
 		return
 	var/datum/computer_network/network = origin.get_network()
 	var/datum/extension/interactive/ntos/comp = network.get_os_by_nid(nid)
-	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
+	if(!comp || !comp.host_status() || !comp.get_network_status())
 		return
 	var/area/A = get_area(comp.get_physical_host())
 	return "... Estimating location: \the [A.name]"
@@ -185,12 +185,12 @@ Subtypes
 		. += "ping: Improper syntax. Use ping nid."
 		return
 	var/datum/extension/interactive/ntos/origin = terminal.computer
-	if(!origin || !origin.get_ntnet_status())
+	if(!origin || !origin.get_network_status())
 		. += "failed. Check network status."
 		return
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/interactive/ntos/comp = network.get_os_by_nid(nid)
-	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
+	if(!comp || !comp.host_status() || !comp.get_network_status())
 		. += "failed. Target device not responding."
 		return
 	. += "ping successful."
@@ -208,14 +208,14 @@ Subtypes
 	if(length(text) < 5)
 		return "ssh: Improper syntax. Use ssh nid."
 	var/datum/extension/interactive/ntos/origin = terminal.computer
-	if(!origin || !origin.get_ntnet_status())
+	if(!origin || !origin.get_network_status())
 		return "ssh: Check network connectivity."
 	var/nid = text2num(copytext(text, 5))
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/interactive/ntos/comp = network.get_os_by_nid(nid)
 	if(comp == origin)
 		return "ssh: Error; can not open remote terminal to self."
-	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
+	if(!comp || !comp.host_status() || !comp.get_network_status())
 		return "ssh: No active device with this nid found."
 	if(comp.has_terminal(user))
 		return "ssh: A remote terminal to this device is already active."

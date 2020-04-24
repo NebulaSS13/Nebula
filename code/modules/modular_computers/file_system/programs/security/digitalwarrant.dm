@@ -8,8 +8,8 @@ GLOBAL_LIST(all_warrants)
 	program_icon_state = "warrant"
 	program_key_state = "security_key"
 	program_menu_icon = "star"
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_network = 1
+	available_on_network = 1
 	required_access = access_security
 	nanomodule_path = /datum/nano_module/program/digitalwarrant/
 	category = PROG_SEC

@@ -1,8 +1,6 @@
-var/global/ntnet_card_uid = 1
-
 /obj/item/stock_parts/computer/network_card
-	name = "basic NTNet network card"
-	desc = "A basic network card for usage with standard NTNet frequencies."
+	name = "basic network card"
+	desc = "A basic network card for usage with standard network protocols."
 	power_usage = 50
 	origin_tech = "{'programming':2,'engineering':1}"
 	critical = 0
@@ -12,7 +10,7 @@ var/global/ntnet_card_uid = 1
 	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/long_range = 0
-	var/ethernet = 0 // Hard-wired, therefore always on, ignores NTNet wireless checks.
+	var/ethernet = 0 // Hard-wired, therefore always on, ignores wireless checks.
 	var/proxy_id     // If set, uses the value to funnel connections through another network card.
 
 /obj/item/stock_parts/computer/network_card/diagnostics()
@@ -38,8 +36,8 @@ var/global/ntnet_card_uid = 1
 	. = ..()
 
 /obj/item/stock_parts/computer/network_card/advanced
-	name = "advanced NTNet network card"
-	desc = "An advanced network card for usage with standard NTNet frequencies. It's transmitter is strong enough to connect even when far away."
+	name = "advanced network card"
+	desc = "An advanced network card for usage with standard network protocols. It's transmitter is strong enough to connect even when far away."
 	long_range = 1
 	origin_tech = "{'programming':4,'engineering':2}"
 	power_usage = 100 // Better range but higher power usage.
@@ -49,8 +47,8 @@ var/global/ntnet_card_uid = 1
 	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/network_card/wired
-	name = "wired NTNet network card"
-	desc = "An advanced network card for usage with standard NTNet frequencies. This one also supports wired connection."
+	name = "wired network card"
+	desc = "An advanced network card for usage with standard network protocols. This one also supports wired connection."
 	ethernet = 1
 	origin_tech = "{'programming':5,'engineering':3}"
 	power_usage = 100 // Better range but higher power usage.

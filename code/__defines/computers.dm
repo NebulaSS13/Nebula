@@ -1,16 +1,16 @@
 #define RANDBYTE  num2hex(rand(1,255))
 #define NETWORK_MAC   "[RANDBYTE]-[RANDBYTE]-[RANDBYTE]-[RANDBYTE]"
-									// NTNet module-configuration values.
-#define NTNET_SOFTWAREDOWNLOAD 	1 	// Downloads of software from NTNet
-#define NTNET_COMMUNICATION 	2	// Communication (messaging)
-#define NTNET_SYSTEMCONTROL 	4	// Control of various systems, RCon, air alarm control, etc.
-#define NTNET_ALL_FEATURES		(NTNET_SOFTWAREDOWNLOAD|NTNET_COMMUNICATION|NTNET_SYSTEMCONTROL)
+									// Network allowed actions
+#define NETWORK_SOFTWAREDOWNLOAD 	1 	// Downloads of software
+#define NETWORK_COMMUNICATION 		2	// Communication (messaging)
+#define NETWORK_SYSTEMCONTROL 		4	// Control of various systems, RCon, air alarm control, etc.
+#define NETWORK_ALL_FEATURES		(NETWORK_SOFTWAREDOWNLOAD|NETWORK_COMMUNICATION|NETWORK_SYSTEMCONTROL)
 
-// NTNet transfer speeds, used when downloading/uploading a file/program.
-#define NTNETSPEED_LOWSIGNAL 0.5	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
-#define NTNETSPEED_HIGHSIGNAL 1	// GQ/s transfer speed when the device is wirelessly connected and on High signal
-#define NTNETSPEED_ETHERNET 2		// GQ/s transfer speed when the device is using wired connection
-#define NTNETSPEED_DISK 	10		// GQ/s transfer speed when the device is transferring between hard drives
+// Transfer speeds, used when downloading/uploading a file/program.
+#define NETWORK_SPEED_LOWSIGNAL 0.5	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
+#define NETWORK_SPEED_HIGHSIGNAL 1	// GQ/s transfer speed when the device is wirelessly connected and on High signal
+#define NETWORK_SPEED_ETHERNET 2		// GQ/s transfer speed when the device is using wired connection
+#define NETWORK_SPEED_DISK 	10		// GQ/s transfer speed when the device is transferring between hard drives
 
 // Network mainframe roles
 #define MF_ROLE_FILESERVER  	"FILE SERVER"
@@ -36,7 +36,7 @@
 #define PROG_OFFICE  	"Office Work"
 #define PROG_COMMAND  	"Command"
 #define PROG_SUPPLY  	"Supply and Shuttles"
-#define PROG_ADMIN  	"NTNet Administration"
+#define PROG_ADMIN  	"Network Administration"
 #define PROG_UTIL 		"Utility"
 #define PROG_SEC 		"Security"
 #define PROG_MONITOR	"Monitoring"
@@ -44,6 +44,7 @@
 #define NETWORK_CONNECTION_WIRELESS			1
 #define NETWORK_CONNECTION_STRONG_WIRELESS	2
 #define NETWORK_CONNECTION_WIRED			3
-// Caps for NTNet logging. Less than 10 would make logging useless anyway, more than 500 may make the log browser too laggy. Defaults to 100 unless user changes it.
-#define MAX_NTNET_LOGS 100
-#define MIN_NTNET_LOGS 10
+
+// Caps for network logging. Less than 10 would make logging useless anyway, more than 500 may make the log browser too laggy. Defaults to 100 unless user changes it.
+#define MAX_NETWORK_LOGS 100
+#define MIN_NETWORK_LOGS 10
