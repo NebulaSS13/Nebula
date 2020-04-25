@@ -16,7 +16,7 @@
 	var/confirm_delay = 3 SECONDS
 	var/busy = 0 //Busy when waiting for authentication or an event request has been sent from this device.
 	var/obj/machinery/keycard_auth/event_source
-	var/obj/item/card/id/initial_card
+	var/weakref/initial_card
 	var/mob/event_triggered_by
 	var/mob/event_confirmed_by
 	//1 = select event
@@ -35,14 +35,14 @@
 		var/obj/item/card/id/ID = W
 		if(access_keycard_auth in ID.access)
 			if(active)
-				if(event_source && initial_card != ID)
+				if(event_source && initial_card?.resolve() != ID)
 					event_source.confirmed = 1
 					event_source.event_confirmed_by = user
 				else
 					visible_message(SPAN_WARNING("\The [src] blinks and displays a message: Unable to confirm the event with the same card."), range=2)
 			else if(screen == 2)
 				event_triggered_by = user
-				initial_card = ID
+				initial_card = weakref(ID)
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
 
 //icon_state gets set everwhere besides here, that needs to be fixed sometime
@@ -128,7 +128,7 @@
 		if(KA == src)
 			continue
 		KA.reset()
-		KA.receive_request(src, initial_card)
+		addtimer(CALLBACK(src, .proc/receive_request, src, initial_card.resolve()))
 
 	if(confirm_delay)
 		addtimer(CALLBACK(src, .proc/broadcast_check), confirm_delay)
@@ -144,7 +144,7 @@
 	if(stat & (BROKEN|NOPOWER))
 		return
 	event_source = source
-	initial_card = ID
+	initial_card = weakref(ID)
 	busy = 1
 	active = 1
 	icon_state = "auth_on"

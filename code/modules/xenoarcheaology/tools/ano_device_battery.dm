@@ -157,7 +157,6 @@
 		shutdown_emission()
 		. = TOPIC_REFRESH
 	else if(href_list["refresh"])
-		interact(user)
 		. = TOPIC_REFRESH
 	else if(href_list["ejectbattery"])
 		shutdown_emission()
