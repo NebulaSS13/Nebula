@@ -3,24 +3,25 @@
 // A mob that the AI controls to look around the station with.
 // It streams chunks as it moves around, which will show it what the AI can and cannot see.
 
-/mob/observer/eye/cameranet
+/mob/observer/eye/freelook/cameranet
 	name = "Inactive Camera Eye"
 	name_sufix = "Camera Eye"
+	living_eye = FALSE
 
-/mob/observer/eye/cameranet/Initialize()
+/mob/observer/eye/freelook/cameranet/Initialize()
 	. = ..()
 	visualnet = cameranet
 
-/mob/observer/eye/aiEye
+/mob/observer/eye/freelook/aiEye
 	name = "Inactive AI Eye"
 	name_sufix = "AI Eye"
 	icon_state = "AI-eye"
 
-/mob/observer/eye/aiEye/Initialize()
+/mob/observer/eye/freelook/aiEye/Initialize()
 	. = ..()
 	visualnet = cameranet
 
-/mob/observer/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
+/mob/observer/eye/freelook/aiEye/setLoc(var/T, var/cancel_tracking = 1)
 	. = ..()
 	if(. && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
@@ -32,7 +33,7 @@
 			ai.holo.move_hologram(ai)
 		return 1
 
-/mob/observer/eye/aiEye/set_dir(new_dir)
+/mob/observer/eye/freelook/aiEye/set_dir(new_dir)
 	. = ..()
 	if(. && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
@@ -61,7 +62,7 @@
 /mob/living/silicon/ai/proc/create_eyeobj(var/newloc)
 	if(eyeobj) destroy_eyeobj()
 	if(!newloc) newloc = get_turf(src)
-	eyeobj = new /mob/observer/eye/aiEye(newloc)
+	eyeobj = new /mob/observer/eye/freelook/aiEye(newloc)
 	eyeobj.possess(src)
 
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.

@@ -5,6 +5,7 @@
 	bound_width = 64
 	icon_state = "globe"
 	in_space = 0
+	free_landing = TRUE
 	var/area/planetary_area
 
 	var/lightlevel = 0 		//This default makes turfs not generate light. Adjust to have exoplanents be lit.
@@ -55,7 +56,7 @@
 	var/list/possible_themes = list(
 		/datum/exoplanet_theme = 30,
 		/datum/exoplanet_theme/mountains = 100,
-		/datum/exoplanet_theme/radiation_bombing = 10, 
+		/datum/exoplanet_theme/radiation_bombing = 10,
 		/datum/exoplanet_theme/ruined_city = 5,
 		/datum/exoplanet_theme/robotic_guardians = 10
 		)
@@ -124,7 +125,7 @@
 	if(animals.len < 0.5*max_animal_count && !repopulating)
 		repopulating = 1
 		max_animal_count = round(max_animal_count * 0.5)
-	
+
 	handle_atmosphere()
 
 	if(repopulating)

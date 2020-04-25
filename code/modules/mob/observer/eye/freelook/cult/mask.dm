@@ -1,16 +1,17 @@
-/mob/observer/eye/cult
+/mob/observer/eye/freelook/cult
 	name = "Mask of God"
 	desc = "A terrible fracture of reality coinciding into a mirror to another world."
+	living_eye = FALSE
 
-/mob/observer/eye/cult/Initialize(mapload, var/net)
+/mob/observer/eye/freelook/cult/Initialize(mapload, var/net)
 	. = ..()
 	visualnet = net
 
-/mob/observer/eye/cult/Destroy()
+/mob/observer/eye/freelook/cult/Destroy()
 	visualnet = null
 	return ..()
 
-mob/observer/eye/cult/EyeMove()
+mob/observer/eye/freelook/cult/EyeMove()
 	if(owner && istype(owner, /mob/living/deity))
 		var/mob/living/deity/D = owner
 		if(D.following)

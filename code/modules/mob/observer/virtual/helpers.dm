@@ -99,7 +99,7 @@
 /atom/movable/proc/virtual_can_see_turf(var/turf/T)
 	return TRUE // We assume objects have already been filtered using viewers() or similar proc
 
-/mob/observer/eye/virtual_can_see_turf(var/turf/T)
+/mob/observer/eye/freelook/virtual_can_see_turf(var/turf/T)
 	return visualnet.is_turf_visible(T)
 
 #undef ACQUIRE_VIRTUAL_OR_TURF

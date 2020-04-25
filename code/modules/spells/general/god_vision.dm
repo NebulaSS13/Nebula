@@ -13,8 +13,8 @@
 
 	spell_flags = Z2NOCAST
 	hud_state = "wiz_IPC"
-	var/mob/observer/eye/vision
-	var/eye_type = /mob/observer/eye/wizard_eye
+	var/mob/observer/eye/freelook/vision
+	var/eye_type = /mob/observer/eye/freelook/wizard_eye
 
 /spell/camera_connection/New()
 	..()
@@ -60,7 +60,8 @@
 
 /spell/camera_connection/god_vision/set_connected_god(var/mob/living/deity/god)
 	..()
-	vision.visualnet = god.eyeobj.visualnet
+
+	vision.visualnet = god.eyenet
 
 /spell/camera_connection/god_vision/Destroy()
 	vision.visualnet = null

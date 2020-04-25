@@ -99,7 +99,7 @@
 	action_button_name = "Toggle MUI"
 	origin_tech = "{'programming':5,'engineering':5}"
 	var/active = FALSE
-	var/mob/observer/eye/cameranet/eye
+	var/mob/observer/eye/freelook/cameranet/eye
 
 /obj/item/clothing/mask/ai/Initialize()
 	. = ..()
