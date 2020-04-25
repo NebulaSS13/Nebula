@@ -96,7 +96,7 @@
 		set_density(1)
 		set_invisibility(0)
 		update_nearby_tiles()
-		update_icon()
+		update_icon(TRUE)
 		update_explosion_resistance()
 		gen.damaged_segments -= src
 
@@ -112,7 +112,7 @@
 	set_density(0)
 	set_invisibility(INVISIBILITY_MAXIMUM)
 	update_nearby_tiles()
-	update_icon()
+	update_icon(TRUE)
 	update_explosion_resistance()
 
 /obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
@@ -262,7 +262,7 @@
 
 	// Update airflow
 	update_nearby_tiles()
-	update_icon()
+	update_icon(TRUE)
 	update_explosion_resistance()
 
 /obj/effect/shield/proc/update_explosion_resistance()
