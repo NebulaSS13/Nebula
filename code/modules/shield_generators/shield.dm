@@ -8,23 +8,12 @@
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	invisibility = 0
+	atmos_canpass = CANPASS_PROC
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
 	var/diffused_for = 0
-	atmos_canpass = CANPASS_PROC
 
-
-/obj/effect/shield/on_update_icon(update_neightbors = 0)
-	overlays.Cut()
-	var/list/adjacent_shields_dir = list()
-	for(var/direction in GLOB.cardinal)
-		var/turf/T = get_step(src, direction)
-		if(T) // Incase we somehow stepped off the map.
-			for(var/obj/effect/shield/F in T)
-				if(update_neightbors)
-					F.queue_icon_update(0)
-				adjacent_shields_dir |= direction
-				break
+/obj/effect/shield/on_update_icon(update_neighbors = FALSE)
 
 	if(gen && gen.check_flag(MODEFLAG_PHOTONIC) && !disabled_for && !diffused_for)
 		set_opacity(1)
@@ -38,22 +27,27 @@
 		icon_state = "shield_normal"
 		set_light(1, 0.1, 2, l_color = "#66ffff")
 
-	// Edge overlays
-	for(var/found_dir in adjacent_shields_dir)
-		overlays += image(src.icon, src, icon_state = "[icon_state]_edge", dir = found_dir)
+	cut_overlays()
+	for(var/direction in GLOB.cardinal)
+		var/turf/T = get_step(src, direction)
+		if(!T)
+			continue
+		var/found = locate(/obj/effect/shield) in T
+		if(found)
+			if(update_neighbors)
+				for(var/obj/effect/shield/shield in T)
+					shield.update_icon(FALSE)
+			add_overlay(image(icon = icon, icon_state = "[icon_state]_edge", dir = direction))
 
 // Prevents shuttles, singularities and pretty much everything else from moving the field segments away.
 // The only thing that is allowed to move us is the Destroy() proc.
 /obj/effect/shield/forceMove()
-	if(QDELING(src))
-		return ..()
-	return 0
-
+	. = QDELING(src) && ..()
 
 /obj/effect/shield/Initialize()
 	. = ..()
+	update_icon(TRUE)
 	update_nearby_tiles()
-
 
 /obj/effect/shield/Destroy()
 	if(gen)
