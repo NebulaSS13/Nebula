@@ -709,3 +709,8 @@
 	name = "network router board"
 	build_path = /obj/item/stock_parts/circuitboard/router
 	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 3)
+
+/datum/design/circuit/net_relay
+	name = "network relay board"
+	build_path = /obj/item/stock_parts/circuitboard/relay
+	req_tech = list(TECH_DATA = 3, TECH_BLUESPACE = 3)

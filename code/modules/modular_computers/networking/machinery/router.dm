@@ -1,6 +1,6 @@
 /obj/machinery/network/router
 	name = "network router"
-	network_device_type =  /datum/extension/network_device/router
+	network_device_type =  /datum/extension/network_device/broadcaster/router
 	main_template = "network_router.tmpl"
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -14,7 +14,7 @@
 
 /obj/machinery/network/router/ui_data(mob/user, ui_key)
 	var/data = ..()
-	var/datum/extension/network_device/router/R = get_extension(src, /datum/extension/network_device)
+	var/datum/extension/network_device/broadcaster/router/R = get_extension(src, /datum/extension/network_device)
 	if(!istype(R))
 		return data
 	var/datum/computer_network/net = R.get_network()
