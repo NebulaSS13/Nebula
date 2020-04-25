@@ -7,7 +7,6 @@
 	icon_state = "knife_preview"
 	item_state = null
 	force = 0.2 //force of folded obj
-	max_force = 10
 	material_force_multiplier = 0.2
 	applies_material_colour = FALSE
 	applies_material_name = FALSE
@@ -93,7 +92,6 @@
 /obj/item/material/knife/folding/combat //master obj
 	name = "switchblade"
 	desc = "This is a master item - berate the admin or mapper who spawned this"
-	max_force = 15
 	material_force_multiplier = 0.25
 	thrown_material_force_multiplier = 0.25
 	takes_colour = FALSE
