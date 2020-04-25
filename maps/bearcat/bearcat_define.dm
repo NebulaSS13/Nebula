@@ -20,7 +20,7 @@
 	allowed_spawns = list("Cryogenic Storage")
 	default_spawn = "Cryogenic Storage"
 	use_overmap = 1
-	num_exoplanets = 0
+	num_exoplanets = 1
 	
 	welcome_sound = 'sound/effects/cowboysting.ogg'
 
