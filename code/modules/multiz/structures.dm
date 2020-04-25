@@ -15,9 +15,11 @@
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_ANCHOR
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
+	var/base_icon = "ladder"
+	var/draw_shadow = TRUE
 	var/obj/structure/ladder/target_up
 	var/obj/structure/ladder/target_down
-	var/const/climb_time = 2 SECONDS
+	var/climb_time = 2 SECONDS
 	var/static/list/climbsounds = list('sound/effects/ladder.ogg','sound/effects/ladder2.ogg','sound/effects/ladder3.ogg','sound/effects/ladder4.ogg')
 
 /obj/structure/ladder/handle_default_wrench_attackby()
@@ -255,10 +257,10 @@
 /obj/structure/ladder/on_update_icon()
 	. = ..()
 	if(!anchored)
-		icon_state = "ladder00"
+		icon_state = "[base_icon]00"
 	else
-		icon_state = "ladder[!!target_up][!!target_down]"
-	if(target_down)
+		icon_state = "[base_icon][!!target_up][!!target_down]"
+	if(target_down && draw_shadow)
 		var/image/I = image(icon, "downward_shadow")
 		I.appearance_flags |= RESET_COLOR
 		underlays = list(I)
