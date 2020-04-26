@@ -122,7 +122,7 @@
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "av" = (
-/obj/structure/bookcase/manuals/research_and_development,
+/obj/structure/bookcase,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
 "aw" = (
@@ -262,7 +262,6 @@
 "aJ" = (
 /obj/structure/table/standard,
 /obj/item/stock_parts/circuitboard/roboprinter,
-/obj/item/stock_parts/circuitboard/rdserver,
 /obj/item/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)
@@ -1345,9 +1344,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dA" = (
-/obj/machinery/computer/rdconsole/core{
-	req_access = newlist()
-	},
+/obj/machinery/design_database,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dB" = (
@@ -1552,15 +1549,15 @@
 /turf/simulated/floor,
 /area/unishi/hydro)
 "dX" = (
-/obj/machinery/r_n_d/circuit_imprinter,
+/obj/machinery/fabricator/imprinter,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dY" = (
-/obj/machinery/r_n_d/destructive_analyzer,
+/obj/machinery/destructive_analyzer,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dZ" = (
-/obj/machinery/r_n_d/protolathe,
+/obj/machinery/fabricator/protolathe,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "ea" = (

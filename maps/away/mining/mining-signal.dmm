@@ -224,16 +224,14 @@
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "aX" = (
-/obj/machinery/r_n_d/circuit_imprinter{
-	icon_state = "circuit_imprinter_t";
+/obj/machinery/fabricator/imprinter{
 	stat = 1
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "aY" = (
-/obj/machinery/r_n_d/protolathe{
-	icon_state = "protolathe_t";
+/obj/machinery/fabricator/protolathe{
 	stat = 1
 	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,

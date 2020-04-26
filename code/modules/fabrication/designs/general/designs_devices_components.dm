@@ -88,3 +88,26 @@
 
 /datum/fabricator_recipe/device_component/heatsink
 	path = /obj/item/stock_parts/shielding/heat
+
+/datum/fabricator_recipe/device_component/comp_accessory
+	category = "Computer Components"
+	path = /obj/item/stock_parts/computer/ai_slot
+
+/datum/fabricator_recipe/device_component/comp_accessory/get_product_name()
+	. = "computer accessory ([..()])"
+
+/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu
+	category = "CPU Designs"
+	path = /obj/item/stock_parts/computer/processor_unit
+
+/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu/get_product_name()
+	. = "CPU design ([..()])"
+
+/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu/small
+	path = /obj/item/stock_parts/computer/processor_unit/small
+
+/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu/photonic
+	path = /obj/item/stock_parts/computer/processor_unit/photonic
+
+/datum/fabricator_recipe/device_component/comp_accessory/comp_cpu/photonic/small
+	path = /obj/item/stock_parts/computer/processor_unit/photonic/small

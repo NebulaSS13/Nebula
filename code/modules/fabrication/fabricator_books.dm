@@ -15,14 +15,16 @@
 	color_selectable = TRUE
 
 /obj/machinery/fabricator/book/do_build(datum/fabricator_recipe/recipe, amount)
-	recipe.build(get_turf(src), amount, selected_color)
+	. = recipe.build(get_turf(src), amount, selected_color)
 
 /datum/fabricator_recipe/book/skill/build(var/turf/location, var/amount = 1, var/color = COLOR_WHITE)
+	. = list()
 	for(var/i = 1, i <= amount, i++)
 		var/obj/item/book/skill/custom/new_item = new path(location)
 		if(colorable)
 			new_item.color = color
 			new_item.overlays += overlay_image('icons/obj/library.dmi', "tb_over_pages", null, RESET_COLOR)
+		. += new_item
 
 /obj/machinery/fabricator/book/get_color_list()
 	return null // uses hex color selector instead of a list

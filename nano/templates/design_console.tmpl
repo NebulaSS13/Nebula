@@ -1,0 +1,96 @@
+<div class = "item">
+	<div class="itemLabel">Network:</div>
+	<div class="itemContent">{{:data.network_id}}</div>
+</div>
+
+{{if data.go_back}}
+	{{:helper.link('Back to summary', null, {'view_summary' : 1})}}
+{{/if}}
+
+<div class = "item">
+	<div class="itemLabel">External storage</div>
+	<div class="itemContent">
+	{{if data.disk_tech}}
+		{{:helper.link(data.disk_name, null, {'eject_disk' : 1})}} ({{:data.disk_tech}})
+	{{else}}
+		{{:data.disk_name}}
+	{{/if}}
+	</div>
+</div>
+
+{{if data.showing_db}}
+
+	<div class = "item">
+		<div class="itemLabel">Remote data repository</div>
+		<div class="itemContent">
+			<table width = '90%'>
+			<tr><td width = '60%'>Data</td><td>Stored</td></tr>
+			{{for data.tech_levels}}
+				<tr><td width = '60%'>{{:value.field}}</td><td>{{:value.level}}</td></tr>
+			{{/for}}
+			</table>
+		</div>
+	</div>
+
+{{else data.showing_tech}}
+
+	<div class = "item">
+		<div class="itemLabel">Design repository</div>
+		<div class="itemContent">
+			<table width = '90%'>
+			<tr><td>Design</td></tr>
+			{{for data.designs}}
+				{{if data.disk_tech}}
+					<tr><td width = '60%'>{{:value.name}} {{:helper.link('Save', null, {'save_design' : value.ref})}}</td></tr>
+				{{else}}
+					<tr><td width = '60%'>{{:value.name}}</td></tr>
+				{{/if}}
+			{{/for}}
+			</table>
+		</div>
+	</div>
+
+{{else}}
+
+	<div class = "item">
+		<div class="itemLabel">Local data cache</div>
+		<div class="itemContent">
+			<table width = '90%'>
+			<tr><td width = '60%'>Data</td><td>Stored</td></tr>
+			{{for data.tech_levels}}
+				<tr><td width = '60%'>{{:value.field}}</td><td>{{:value.level}}</td></tr>
+			{{/for}}
+			</table>
+		</div>
+		<div class="itemLabel">Cache management</div>
+		<div class="itemContent">{{:helper.link('Flush memory', null, {'wipe_cache' : 1})}}</div>
+	</div>
+
+	<div class = "item">
+		<div class="itemLabel">Connected devices</div>
+		<table width = '90%'>
+	
+			<tr><td colspan = 3>Analyzers</td></tr>
+			{{for data.connected_analyzers}}
+				{{if value.can_process}}
+					<tr><td>{{:value.name}}</td><td>{{:value.status}}</td><td>{{:helper.link('Analyze', null, {'process_analyzer' : value.ref})}}</td></tr>
+				{{else}}
+					<tr><td>{{:value.name}}</td><td colspan = 2>{{:value.status}}</td></tr>
+				{{/if}}
+			{{/for}}
+			<tr><td colspan = 3></td></tr>
+			<tr><td colspan = 3>Databases</td></tr>
+			{{for data.connected_databases}}
+				{{if value.can_view}}
+					<tr><td>{{:value.name}}</td><td>{{:value.status}}</td><td>{{:helper.link('View', null, {'view_database' : value.ref})}}</td></tr>
+				{{else}}
+					<tr><td>{{:value.name}}</td><td colspan = 2>{{:value.status}}</td></tr>
+				{{/if}}
+			{{/for}}
+		</table>
+	</div>
+
+	{{:helper.link('View all available designs', null, {'view_designs' : 1})}}
+	{{:helper.link('Perform manual network sync', null, {'manual_sync' : 1})}}
+
+{{/if}}

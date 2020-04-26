@@ -27,6 +27,7 @@
 			resources[path] = building_cost[path] * FABRICATOR_EXTRA_COST_FACTOR
 
 /datum/fabricator_recipe/pipe/build(var/turf/location, var/amount = 1, var/color = PIPE_COLOR_WHITE)
+	. = list()
 	for(var/i = 1, i <= amount, i++)
 		var/obj/item/pipe/new_item = new path(location)
 		if(istype(new_item))
@@ -45,8 +46,10 @@
 		new_item.set_dir(dir)
 		new_item.icon = build_icon
 		new_item.icon_state = build_icon_state
+		. += new_item
 
 /datum/fabricator_recipe/pipe/disposal_dispenser/build(var/turf/location, var/amount = 1, var/color = PIPE_COLOR_GREY)
+	. = ..()
 	for(var/i = 1, i <= amount, i++)
 		var/obj/structure/disposalconstruct/new_item = new path(location)
 		new_item.SetName(name)
@@ -59,3 +62,4 @@
 		new_item.turn = turn
 		new_item.constructed_path = constructed_path
 		new_item.update_icon()
+		. += new_item

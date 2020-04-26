@@ -81,6 +81,30 @@
 		return ..()
 	if(stat & (NOPOWER | BROKEN))
 		return
+
+	// Gate some simple interactions beind intent so people can still feed lathes disks.
+	if(user.a_intent != I_HURT)
+
+		// Set or update our local network.
+		if(isMultitool(O))
+			var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
+			fabnet.get_new_tag(user)
+			return
+
+		// Install new designs.
+		if(istype(O, /obj/item/disk/design_disk))
+			var/obj/item/disk/design_disk/disk = O
+			if(!disk.blueprint)
+				to_chat(usr, SPAN_WARNING("\The [O] is blank."))
+				return
+			if(disk.blueprint in installed_designs)
+				to_chat(usr, SPAN_WARNING("\The [src] is already loaded with the blueprint stored on \the [O]."))
+				return
+			installed_designs += disk.blueprint
+			design_cache |= disk.blueprint
+			visible_message(SPAN_NOTICE("\The [user] inserts \the [O] into \the [src], and after a second or so of loud clicking, the fabricator beeps and spits it out again."))
+			return
+
 	// Take reagents, if any are applicable.
 	var/reagents_taken = take_reagents(O, user)
 	if(reagents_taken != SUBSTANCE_TAKEN_NONE && !has_recycler)

@@ -785,11 +785,11 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "bH" = (
-/obj/structure/bookcase/manuals/research_and_development,
+/obj/structure/bookcase,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "bI" = (
-/obj/structure/bookcase/manuals/research_and_development,
+/obj/structure/bookcase,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -1228,7 +1228,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "dd" = (
-/obj/structure/bookcase/manuals/research_and_development,
+/obj/structure/bookcase,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "de" = (

@@ -164,7 +164,7 @@
 /turf/simulated/floor/lino,
 /area/template_noop)
 "D" = (
-/obj/structure/bookcase/manuals/research_and_development,
+/obj/structure/bookcase,
 /obj/effect/decal/cleanable/cobweb2,
 /turf/simulated/floor/lino,
 /area/template_noop)

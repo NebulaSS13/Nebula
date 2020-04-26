@@ -28,7 +28,7 @@
 		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/fabricator/pipe/do_build(var/datum/fabricator_recipe/recipe, var/amount)
-	recipe.build(get_turf(src), amount, pipe_colors[selected_color])
+	. = recipe.build(get_turf(src), amount, pipe_colors[selected_color])
 	use_power_oneoff(500 * amount)
 
 /obj/machinery/fabricator/pipe/disposal

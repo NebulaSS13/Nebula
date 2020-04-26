@@ -3,23 +3,34 @@ SUBSYSTEM_DEF(fabrication)
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_MISC_LATE
 
-	var/list/recipes =    list()
-	var/list/categories = list()
+	var/list/all_recipes =                 list()
+	var/list/locked_recipes =              list()
+	var/list/initial_recipes =             list()
+	var/list/categories =                  list()
 	var/list/crafting_procedures_by_type = list()
+	var/list/recipes_by_product_type =     list()
+	var/list/fields_by_id =                list()
 
-	// These should be removed after rewriting research networks and crafting to respect init order.
+	// These should be removed after rewriting crafting to respect init order.
 	var/list/crafting_recipes_to_init = list()
-	var/list/rnd_to_init = list()
 	var/post_recipe_init = FALSE
 
 /datum/controller/subsystem/fabrication/Initialize()
 
 	// Fab recipes.
 	for(var/R in subtypesof(/datum/fabricator_recipe))
-		var/datum/fabricator_recipe/recipe = new R
+		var/datum/fabricator_recipe/recipe = R
+		if(!initial(recipe.path))
+			continue
+		recipe = new recipe
+		recipes_by_product_type[recipe.path] = recipe
 		for(var/fab_type in recipe.fabricator_types)
-			LAZYADD(recipes[fab_type], recipe)
+			LAZYADD(all_recipes[fab_type], recipe)
 			LAZYDISTINCTADD(categories[fab_type], recipe.category)
+			if(recipe.required_technology)
+				LAZYADD(locked_recipes[fab_type], recipe)
+			else
+				LAZYADD(initial_recipes[fab_type], recipe)
 
 	// Slapcrafting trees.
 	var/list/all_crafting_handlers = decls_repository.get_decls_of_subtype(/decl/crafting_stage)
@@ -32,10 +43,6 @@ SUBSYSTEM_DEF(fabrication)
 		recipe.InitializeMaterials()
 	crafting_recipes_to_init.Cut()
 
-	// R&D designs.
-	for(var/datum/design/design in rnd_to_init)
-		design.AssembleDesignMaterials()
-	rnd_to_init.Cut()
 	post_recipe_init = TRUE
 
 	init_rpd_lists()
@@ -47,17 +54,34 @@ SUBSYSTEM_DEF(fabrication)
 	else
 		crafting_recipes_to_init |= recipe
 
+/datum/controller/subsystem/fabrication/proc/get_research_field_by_id(var/rnd_id)
+	if(!length(fields_by_id))
+		var/all_fields = decls_repository.get_decls_of_subtype(/decl/research_field)
+		for(var/fid in all_fields)
+			var/decl/research_field/field = all_fields[fid]
+			fields_by_id[lowertext(field.id)] = field
+	return fields_by_id[lowertext(rnd_id)]
+
 /datum/controller/subsystem/fabrication/proc/get_categories(var/fab_type)
 	. = categories[fab_type]
 
-/datum/controller/subsystem/fabrication/proc/init_rnd_design(var/datum/design/design)
-	if(post_recipe_init)
-		design.AssembleDesignMaterials()
-	else
-		rnd_to_init |= design
+/datum/controller/subsystem/fabrication/proc/get_all_recipes(var/fab_type)
+	. = all_recipes[fab_type]
 
-/datum/controller/subsystem/fabrication/proc/get_recipes(var/fab_type)
-	. = recipes[fab_type]
+/datum/controller/subsystem/fabrication/proc/get_initial_recipes(var/fab_type)
+	. = initial_recipes[fab_type]
+
+/datum/controller/subsystem/fabrication/proc/get_unlocked_recipes(var/fab_type, var/list/known_tech)
+	. = list()
+	if(fab_type)
+		for(var/datum/fabricator_recipe/design in locked_recipes[fab_type])
+			if(design.check_research_requirements(known_tech))
+				. += design
+	else
+		for(var/ftype in locked_recipes)
+			for(var/datum/fabricator_recipe/design in locked_recipes[ftype])
+				if(design.check_research_requirements(known_tech))
+					. += design
 
 /datum/controller/subsystem/fabrication/proc/find_crafting_recipes(var/_type)
 	if(isnull(crafting_procedures_by_type[_type]))

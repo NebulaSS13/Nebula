@@ -75,7 +75,7 @@
 	var/failed = list()
 	for(var/thing in typesof(/obj/machinery/fabricator))
 		var/obj/machinery/fabricator/fab = new thing
-		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fab.fabricator_class))
+		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_all_recipes(fab.fabricator_class))
 			for(var/mat in recipe.resources)
 				if(isnull(fab.storage_capacity[mat]))
 					log_bad("[fab.name] ([fab.type]) could not print [recipe.name] due to lacking [mat].")

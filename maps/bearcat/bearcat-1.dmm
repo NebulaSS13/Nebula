@@ -2455,7 +2455,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/broken1)
 "pb" = (
-/obj/machinery/robotics_fabricator,
+/obj/machinery/fabricator/industrial,
 /turf/simulated/floor/plating,
 /area/ship/bearcat/broken1)
 "pr" = (

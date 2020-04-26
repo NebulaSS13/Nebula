@@ -37,11 +37,15 @@
 		MAT_PLASTIC =   SHEET_MATERIAL_AMOUNT * 10
 	)
 
+	var/initial_id_tag
 	var/show_category = "All"
 	var/fab_status_flags = 0
 	var/mat_efficiency = 1.1
 	var/build_time_multiplier = 1
 	var/global/list/stored_substances_to_names = list()
+
+	var/list/design_cache
+	var/list/installed_designs
 
 	var/sound_id
 	var/datum/sound_token/sound_token
@@ -64,9 +68,17 @@
 		to_chat(user, SPAN_NOTICE("It has a built-in shredder that can recycle most items, although any materials it cannot use will be wasted."))
 
 /obj/machinery/fabricator/Initialize()
+
 	panel_image = image(icon, "[base_icon_state]_panel")
 	. = ..()
 	sound_id = "[fabricator_sound]"
+
+	// Get any local network we need to be part of.
+	set_extension(src, /datum/extension/local_network_member)
+	if(initial_id_tag)
+		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
+		lanm.set_tag(null, initial_id_tag)
+
 	// Initialize material storage lists.
 	stored_material = list()
 	for(var/mat in base_storage_capacity)
@@ -81,6 +93,28 @@
 			else if(ispath(mat, /datum/reagent))
 				var/datum/reagent/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))
+
+	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
+	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
+	refresh_design_cache()
+
+/obj/machinery/fabricator/proc/refresh_design_cache(var/list/known_tech)
+	if(length(installed_designs))
+		design_cache |= installed_designs
+	if(!known_tech)
+		known_tech = list()
+		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
+		if(lanm)
+			var/datum/local_network/lan = lanm.get_local_network()
+			if(lan)
+				for(var/obj/machinery/design_database/db in lan.network_entities[/obj/machinery/design_database])
+					for(var/tech in db.tech_levels)
+						if(db.tech_levels[tech] > known_tech[tech])
+							known_tech[tech] = db.tech_levels[tech]
+	if(length(known_tech))
+		var/list/unlocked_tech = SSfabrication.get_unlocked_recipes(fabricator_class, known_tech)
+		if(length(unlocked_tech))
+			design_cache |= unlocked_tech
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()

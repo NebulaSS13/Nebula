@@ -1,8 +1,6 @@
 /*
 	"Brain expansion"
 	Rare, short event that makes every item worth one more research point for a small while
-
-	All relevant code is run in /datum/research/proc/UpdateTech
 */
 
 /datum/event/brain_expansion

@@ -10,6 +10,16 @@
 			</td>
 		</tr>
 		{{/if}}
+		{{if data.network}}
+		<tr>
+			<td>
+				Connected to local network.
+			</td>
+				({{:data.network}})
+			</td>
+			<td>
+		</tr>
+		{{/if}}
 		<tr>
 			<td colspan = 2>
 				<table width = '85%' style = 'border:1px solid #333333;'>

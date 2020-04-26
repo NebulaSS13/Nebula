@@ -126,10 +126,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "v" = (
-/obj/machinery/r_n_d/server/robotics{
-	desc = "A jury-rigged server setup.";
-	name = "low-tech server"
-	},
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "w" = (

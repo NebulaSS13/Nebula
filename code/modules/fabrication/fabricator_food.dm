@@ -19,7 +19,7 @@
 	else if(findtext(true_text, "menu"))
 		addtimer(CALLBACK(src, /obj/machinery/fabricator/replicator/proc/state_menu), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 	else 
-		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fabricator_class))
+		for(var/datum/fabricator_recipe/recipe in design_cache)
 			if(recipe.hidden && !(fab_status_flags & FAB_HACKED))
 				continue
 			if(findtext(true_text, lowertext(recipe.name)))
@@ -33,7 +33,7 @@
 
 /obj/machinery/fabricator/replicator/proc/state_menu()
 	var/list/menu = list()
-	for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fabricator_class))
+	for(var/datum/fabricator_recipe/recipe in design_cache)
 		if(recipe.hidden && !(fab_status_flags & FAB_HACKED))
 			continue
 		menu += recipe.name

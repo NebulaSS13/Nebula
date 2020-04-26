@@ -3,6 +3,11 @@
 /obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data = list()
 
+	var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
+	if(fabnet)
+		var/datum/local_network/lan = fabnet.get_local_network()
+		if(lan)
+			data["network"] = lan.id_tag
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
 
@@ -48,8 +53,10 @@
 			data["build_queue"] += list(order_data)
 
 		data["build_options"] = list()
-		for(var/datum/fabricator_recipe/R in SSfabrication.get_recipes(fabricator_class))
-			if(R.hidden && !(fab_status_flags & FAB_HACKED) || (show_category != "All" && show_category != R.category))
+		for(var/datum/fabricator_recipe/R in design_cache)
+			if(R.hidden && !(fab_status_flags & FAB_HACKED))
+				continue
+			if(show_category != "All" && show_category != R.category)
 				continue
 			var/list/build_option = list()
 			var/max_sheets = 0
