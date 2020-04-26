@@ -33,8 +33,9 @@ GLOBAL_LIST_INIT(science_strings, list(
 	var/crashed_at			= 0		// When the program crashed.
 
 /datum/computer_file/program/folding/Topic(href, href_list)
-	if(..())
-		return TOPIC_HANDLED
+	. = ..()
+	if(.)
+		return
 	. = TOPIC_REFRESH
 
 	if(href_list["fix_crash"] && crashed)
@@ -63,9 +64,6 @@ GLOBAL_LIST_INIT(science_strings, list(
 		to_chat(usr, SPAN_NOTICE("Transferred [earned] to your account."))
 		started_on = 0
 		current_interval = 0
-
-	if(.)
-		SSnano.update_uis(NM)
 
 /datum/computer_file/program/folding/process_tick()
 	. = ..()
