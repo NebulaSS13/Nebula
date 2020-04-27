@@ -35,10 +35,12 @@
 	ui_header = null
 	if(current_transfer)
 		qdel(current_transfer)
+	return ..()
 
 /datum/computer_file/program/filemanager/Topic(href, href_list, state)
-	if(..())
-		return TOPIC_HANDLED
+	. = ..()
+	if(.)
+		return
 
 	var/mob/user = usr
 
@@ -174,14 +176,16 @@
 			ui_header = "downloader_running.gif"
 
 /datum/computer_file/program/filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+	. = ..()
+	if(!.)
+		return
 	var/list/data = computer.initial_data()
 
 	if(error)
 		data["error"] = error
-	else
-		var/errors = current_filesource.check_errors()
-		if(errors)
-			data["error"] = errors
+	else if(current_filesource)
+		data["error"] = current_filesource.check_errors()
+
 	data["current_source"] = current_filesource.name
 	if(istype(current_filesource, /datum/file_storage/network))
 		var/datum/file_storage/network/N = current_filesource
