@@ -143,7 +143,7 @@
 	desc = "Because you really needed another excuse to punch your crewmates."
 
 /obj/structure/window/holowindow/full
-	dir = 5
+	dir = NORTHEAST
 	icon_state = "window_full"
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W, mob/user)
@@ -325,7 +325,7 @@
 	anchored = 1
 	layer = TABLE_LAYER
 	throwpass = 1
-	dir = 4
+	dir = EAST
 
 /obj/structure/holonet/end
 	icon_state = "volleynet_end"

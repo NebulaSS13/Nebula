@@ -168,7 +168,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 	if(!is_still())
 		icon_state = moving_state
-		dir = get_heading()
+		set_dir(get_heading())
 	else
 		icon_state = initial(icon_state)
 

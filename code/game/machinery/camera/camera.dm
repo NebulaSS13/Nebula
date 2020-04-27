@@ -190,7 +190,7 @@
 				assembly.camera_name = c_tag
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
 				assembly.update_icon()
-				assembly.dir = src.dir
+				assembly.set_dir(src.dir)
 				if(stat & BROKEN)
 					assembly.state = 2
 					to_chat(user, "<span class='notice'>You repaired \the [src] frame.</span>")

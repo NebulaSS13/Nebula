@@ -66,7 +66,7 @@ var/global/photo_count = 0
 	..()
 
 /obj/item/photo/examine(mob/user, distance)
-	. = TRUE
+	. = ..()
 	if(!img)
 		return
 	if(distance <= 1)
@@ -83,7 +83,6 @@ var/global/photo_count = 0
 		+ "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"\
 		+ "</body></html>", "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
 	onclose(user, "[name]")
-	return
 
 /obj/item/photo/verb/rename()
 	set name = "Rename photo"

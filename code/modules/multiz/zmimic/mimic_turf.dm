@@ -88,4 +88,5 @@
 	loc.attack_generic(user)
 
 /atom/movable/openspace/turf_overlay/examine(mob/examiner)
+	SHOULD_CALL_PARENT(FALSE)
 	. = loc.examine(examiner)

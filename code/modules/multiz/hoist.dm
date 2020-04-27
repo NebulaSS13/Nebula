@@ -117,7 +117,7 @@
 
 /obj/structure/hoist/Initialize(mapload, ndir)
 	. = ..()
-	dir = ndir
+	set_dir(ndir)
 	var/turf/newloc = get_step(src, dir)
 	source_hook = new(newloc)
 	source_hook.source_hoist = src

@@ -279,7 +279,7 @@ its easier to just keep the beam vertical.
 		icon_state = new_icon_state
 
 /atom/proc/update_icon()
-	SHOULD_NOT_OVERRIDE(TRUE)
+	SHOULD_CALL_PARENT(TRUE)
 	on_update_icon(arglist(args))
 
 /atom/proc/on_update_icon()

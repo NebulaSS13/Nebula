@@ -14,7 +14,8 @@
 	dir = SOUTH
 
 /obj/item/robot_parts/set_dir()
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /obj/item/robot_parts/Initialize(mapload, var/model)
 	. = ..(mapload)

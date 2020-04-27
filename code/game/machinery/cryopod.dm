@@ -599,6 +599,6 @@
 			busy = 0
 			icon_state = "broken_cryo_open"
 			var/obj/dead = new remains_type(loc)
-			dead.dir = src.dir//skeleton is oriented as cryo
+			dead.set_dir(dir) //skeleton is oriented as cryo
 	else
 		to_chat(user, "<span class='notice'>The glass cover is already open.</span>")

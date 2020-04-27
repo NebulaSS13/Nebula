@@ -42,13 +42,13 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 
 	spawn_carp()
 
-/datum/event/carp_migration/proc/spawn_carp(var/dir, var/speed)
+/datum/event/carp_migration/proc/spawn_carp(var/direction, var/speed)
 	if(!living_observers_present(affecting_z))
 		return
 	var/Z = pick(affecting_z)
 
-	if(!dir)
-		dir = pick(GLOB.cardinal)
+	if(!direction)
+		direction = pick(GLOB.cardinal)
 
 	if(!speed)
 		speed = rand(1,3)
@@ -56,7 +56,7 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 	var/n = rand(severity-1, severity*2)
 	var/I = 0
 	while(I < n)
-		var/turf/T = get_random_edge_turf(dir,TRANSITIONEDGE + 2, Z)
+		var/turf/T = get_random_edge_turf(direction,TRANSITIONEDGE + 2, Z)
 		if(istype(T,/turf/space))
 			var/mob/living/simple_animal/hostile/M
 			if(prob(96))
@@ -68,7 +68,7 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 			GLOB.destroyed_event.register(M,src,/datum/event/carp_migration/proc/reduce_carp_count)
 			LAZYADD(GLOB.carp_count["[Z]"], M)
 			spawned_carp ++
-			M.throw_at(get_random_edge_turf(GLOB.reverse_dir[dir],TRANSITIONEDGE + 2, Z), 250, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
+			M.throw_at(get_random_edge_turf(GLOB.reverse_dir[direction],TRANSITIONEDGE + 2, Z), 250, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
 		I++
 		if(no_show)
 			break
@@ -77,11 +77,11 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 	if(M.health <= 0 && prob(60))
 		M.gib()
 
-/proc/get_random_edge_turf(var/dir, var/clearance = TRANSITIONEDGE + 1, var/Z)
-	if(!dir)
+/proc/get_random_edge_turf(var/direction, var/clearance = TRANSITIONEDGE + 1, var/Z)
+	if(!direction)
 		return
 
-	switch(dir)
+	switch(direction)
 		if(NORTH)
 			return locate(rand(clearance, world.maxx - clearance), world.maxy - clearance, Z)
 		if(SOUTH)
