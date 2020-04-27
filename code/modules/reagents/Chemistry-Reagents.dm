@@ -1,11 +1,8 @@
-/datum/reagent
+/decl/reagent
 	var/name
 	var/description = "A non-descript chemical."
 	var/taste_description = "old rotten bandaids"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
-	var/datum/reagents/holder = null
-	var/list/data = null
-	var/volume = 0
 	var/metabolism = REM // This would be 0.2 normally
 	var/ingest_met = 0
 	var/touch_met = 0
@@ -51,38 +48,27 @@
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 1
 
-/datum/reagent/New(var/datum/reagents/holder)
-	if(!istype(holder))
-		CRASH("Invalid reagents holder: [log_info_line(holder)]")
-	src.holder = holder
-	..()
-
-/datum/reagent/proc/remove_self(var/amount) // Shortcut
-	if(QDELETED(src)) // In case we remove multiple times without being careful.
-		return
-	holder.remove_reagent(type, amount)
-
-/datum/reagent/proc/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
+/decl/reagent/proc/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
 	return
 
-/datum/reagent/proc/touch_obj(var/obj/O, var/amount) // Acid melting, cleaner cleaning, etc
+/decl/reagent/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
 	return
 
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
-/datum/reagent/proc/touch_mob(var/mob/living/M, var/amount)
+/decl/reagent/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	if(fuel_value && amount && istype(M))
 		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
 
-/datum/reagent/proc/touch_turf(var/turf/T, var/amount) // Cleaner cleaning, lube lubbing, etc, all go here
+/decl/reagent/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 	if(fuel_value && istype(T))
 		var/removing = Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
 		if(removing > 0)
 			new /obj/effect/decal/cleanable/liquid_fuel(T, removing)
-			remove_self(removing)
+			holder.remove_reagent(type, removing)
 #undef FLAMMABLE_LIQUID_DIVISOR
 
-/datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/decl/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
 		return // Something else removed us.
 	if(!istype(M))
@@ -91,8 +77,8 @@
 		return
 	if(overdose && (location != CHEM_TOUCH))
 		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_SIZE_MEDIUM/M.mob_size)
-		if(volume > overdose_threshold)
-			affect_overdose(M, alien)
+		if(REAGENT_VOLUME(holder, type) > overdose_threshold)
+			affect_overdose(M, alien, holder)
 
 	//determine the metabolism rate
 	var/removed = metabolism
@@ -111,54 +97,39 @@
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
 			if(CHEM_INJECT)
-				affect_blood(M, alien, effective)
+				affect_blood(M, alien, effective, holder)
 			if(CHEM_INGEST)
-				affect_ingest(M, alien, effective)
+				affect_ingest(M, alien, effective, holder)
 			if(CHEM_TOUCH)
-				affect_touch(M, alien, effective)
+				affect_touch(M, alien, effective, holder)
+	holder.remove_reagent(type, removed)
 
-	if(volume)
-		remove_self(removed)
-
-/datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return
 
-/datum/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_blood(M, alien, removed * 0.5)
+/decl/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	affect_blood(M, alien, removed * 0.5, holder)
 	return
 
-/datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return
 
-/datum/reagent/proc/affect_overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
+/decl/reagent/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
+
+/decl/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
+	if(newdata) 
+		. = newdata
+
+/decl/reagent/proc/mix_data(var/datum/reagents/reagents, var/data, var/amount)	
+	. = LAZYACCESS(reagents.reagent_data, type)
+
+/decl/reagent/proc/ex_act(obj/item/chems/holder, severity)
 	return
 
-/datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
-	if(!isnull(newdata))
-		data = newdata
+/decl/reagent/proc/custom_temperature_effects(var/temperature)
 	return
 
-/datum/reagent/proc/mix_data(var/newdata, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
-	return
-
-/datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently.
-	if(data && istype(data, /list))
-		return data.Copy()
-	else if(data)
-		return data
-	return null
-
-/datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
-	holder = null
-	. = ..()
-
-/datum/reagent/proc/ex_act(obj/item/chems/holder, severity)
-	return
-
-/datum/reagent/proc/custom_temperature_effects(var/temperature)
-	return
-
-/datum/reagent/proc/get_value()
-	. = value * volume
+/decl/reagent/proc/get_value()
+	. = value

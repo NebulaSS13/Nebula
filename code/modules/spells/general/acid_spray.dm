@@ -8,7 +8,7 @@
 
 	invocation = "Tagopar lethodar!"
 	invocation_type = SpI_SHOUT
-	var/reagent_type = /datum/reagent/acid/hydrochloric
+	var/reagent_type = /decl/reagent/acid/hydrochloric
 	hud_state = "wiz_acid"
 	cast_sound = 'sound/magic/disintegrate.ogg'
 

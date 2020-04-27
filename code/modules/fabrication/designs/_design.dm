@@ -60,9 +60,9 @@
 			var/material/M = SSmaterials.get_material_datum(material)
 			if(istype(M))
 				.[M.type] = matter[material]
-	if(reagents && length(reagents.reagent_list))
-		for(var/datum/reagent/R in reagents.reagent_list)
-			.[R.type] = R.volume
+	if(reagents && length(reagents.reagent_volumes))
+		for(var/R in reagents.reagent_volumes)
+			.[R] = REAGENT_VOLUME(reagents, R)
 
 /datum/fabricator_recipe/proc/build(var/turf/location, var/amount = 1)
 	. = list()

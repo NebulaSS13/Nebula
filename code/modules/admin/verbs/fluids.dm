@@ -8,7 +8,7 @@
 	if(istype(user) && user.client)
 		for(var/thing in trange(1, get_turf(user)))
 			var/turf/T = thing
-			T.add_fluid(2000, /datum/reagent/water)
+			T.add_fluid(2000, /decl/reagent/water)
 
 /datum/admins/proc/jump_to_fluid_source()
 

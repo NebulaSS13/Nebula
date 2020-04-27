@@ -153,7 +153,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 			if(affecting && istype(affecting))
 				var/dam = BP_IS_PROSTHETIC(affecting) ? -amt_dam_robo : amt_organ
 				affecting.heal_damage(dam, dam, robo_repair = BP_IS_PROSTHETIC(affecting))
-		H.vessel.add_reagent(/datum/reagent/blood,amt_blood)
+		H.vessel.add_reagent(/decl/reagent/blood,amt_blood)
 		H.adjustBrainLoss(amt_brain)
 		H.radiation += min(H.radiation, amt_radiation)
 		H.fixblood()

@@ -29,7 +29,7 @@ var/global/list/cached_icons = list()
 /obj/item/chems/glass/paint/Initialize()
 	. = ..()
 	if(paint_hex && length(paint_hex) > 0)
-		reagents.add_reagent(/datum/reagent/paint, volume, paint_hex)
+		reagents.add_reagent(/decl/reagent/paint, volume, paint_hex)
 		update_icon()
 
 /obj/item/chems/glass/paint/on_update_icon()

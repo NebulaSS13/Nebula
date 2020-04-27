@@ -117,20 +117,20 @@
 			injectReagents(target, user)
 
 /obj/item/chems/syringe/proc/drawReagents(var/atom/target, var/mob/user)
-	if(!reagents.get_free_space())
+	if(!REAGENTS_FREE_SPACE(reagents))
 		to_chat(user, "<span class='warning'>The syringe is full.</span>")
 		mode = SYRINGE_INJECT
 		return
 
 	if(ismob(target))//Blood!
-		if(reagents.has_reagent(/datum/reagent/blood))
+		if(reagents.has_reagent(/decl/reagent/blood))
 			to_chat(user, "<span class='notice'>There is already a blood sample in this syringe.</span>")
 			return
 		if(istype(target, /mob/living/carbon))
 			if(istype(target, /mob/living/carbon/slime))
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
 				return
-			var/amount = reagents.get_free_space()
+			var/amount = REAGENTS_FREE_SPACE(reagents)
 			var/mob/living/carbon/T = target
 			if(!T.dna)
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
@@ -186,7 +186,7 @@
 		to_chat(user, "<span class='notice'>You fill the syringe with [trans] units of the solution.</span>")
 		update_icon()
 
-	if(!reagents.get_free_space())
+	if(!REAGENTS_FREE_SPACE(reagents))
 		mode = SYRINGE_INJECT
 		update_icon()
 
@@ -204,7 +204,7 @@
 	if(!ATOM_IS_OPEN_CONTAINER(target) && !ismob(target) && !istype(target, /obj/item/chems/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/cigarettes))
 		to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 		return
-	if(!target.reagents.get_free_space())
+	if(!REAGENTS_FREE_SPACE(target.reagents))
 		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return
 
@@ -336,7 +336,7 @@
 
 /obj/item/chems/syringe/ld50_syringe/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin/heartstopper, 60)
+	reagents.add_reagent(/decl/reagent/toxin/heartstopper, 60)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -350,7 +350,7 @@
 
 /obj/item/chems/syringe/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/adrenaline, 15)
+	reagents.add_reagent(/decl/reagent/adrenaline, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -360,7 +360,7 @@
 
 /obj/item/chems/syringe/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/antitoxins, 15)
+	reagents.add_reagent(/decl/reagent/antitoxins, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -370,7 +370,7 @@
 
 /obj/item/chems/syringe/antibiotic/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/antibiotics, 15)
+	reagents.add_reagent(/decl/reagent/antibiotics, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -380,9 +380,9 @@
 
 /obj/item/chems/syringe/drugs/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/psychoactives, 5)
-	reagents.add_reagent(/datum/reagent/hallucinogenics, 5)
-	reagents.add_reagent(/datum/reagent/presyncopics, 5)
+	reagents.add_reagent(/decl/reagent/psychoactives, 5)
+	reagents.add_reagent(/decl/reagent/hallucinogenics, 5)
+	reagents.add_reagent(/decl/reagent/presyncopics, 5)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -392,8 +392,8 @@
 
 /obj/item/chems/syringe/steroid/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/adrenaline, 5)
-	reagents.add_reagent(/datum/reagent/amphetamines, 10)
+	reagents.add_reagent(/decl/reagent/adrenaline, 5)
+	reagents.add_reagent(/decl/reagent/amphetamines, 10)
 
 
 // TG ports

@@ -24,11 +24,11 @@
 /obj/item/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
 		return
-	if(A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
-		to_chat(user, "<span class='notice'>You unbless \the [A].</span>")
-		var/holy2water = A.reagents.get_reagent_amount(/datum/reagent/water/holywater)
-		A.reagents.del_reagent(/datum/reagent/water/holywater)
-		A.reagents.add_reagent(/datum/reagent/water, holy2water)
+	if(A.reagents && A.reagents.has_reagent(/decl/reagent/water/holywater))
+		to_chat(user, "<span class='notice'>You desecrate \the [A].</span>")
+		var/holy2water = REAGENT_VOLUME(A.reagents, /decl/reagent/water/holywater)
+		A.reagents.clear_reagent(/decl/reagent/water/holywater)
+		A.reagents.add_reagent(/decl/reagent/water, holy2water)
 
 /mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
 	var/has_tome = 0
@@ -100,7 +100,7 @@
 	return 0
 
 /mob/living/carbon/human/make_rune(var/rune, var/cost, var/tome_required)
-	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/datum/reagent/blood, species.blood_volume * 0.7))
+	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/decl/reagent/blood, species.blood_volume * 0.7))
 		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
 		return
 	..()
@@ -110,7 +110,7 @@
 
 /mob/living/carbon/human/remove_blood_simple(var/blood)
 	if(should_have_organ(BP_HEART))
-		vessel.remove_reagent(/datum/reagent/blood, blood)
+		vessel.remove_reagent(/decl/reagent/blood, blood)
 
 /mob/proc/get_blood_name()
 	return "blood"

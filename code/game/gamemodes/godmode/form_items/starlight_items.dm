@@ -104,7 +104,7 @@
 			var/datum/reagents/R = target.reagents
 			if(!R)
 				return
-			R.add_reagent(/datum/reagent/toxin/bromide, 5)
+			R.add_reagent(/decl/reagent/toxin/bromide, 5)
 			new /obj/effect/temporary(get_turf(target),3, 'icons/effects/effects.dmi', "fire_goon")
 			charge--
 	else

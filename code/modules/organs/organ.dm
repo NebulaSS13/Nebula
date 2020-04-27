@@ -74,7 +74,7 @@ var/list/organ_cache = list()
 	species.resize_organ(src)
 
 	create_reagents(5 * (w_class-1)**2)
-	reagents.add_reagent(/datum/reagent/nutriment/protein, reagents.maximum_volume)
+	reagents.add_reagent(/decl/reagent/nutriment/protein, reagents.maximum_volume)
 
 	update_icon()
 
@@ -114,10 +114,9 @@ var/list/organ_cache = list()
 		return
 
 	if(!owner && reagents)
-		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
-		if(B && prob(40))
-			reagents.remove_reagent(/datum/reagent/blood,0.1)
-			blood_splatter(src,B,1)
+		if(prob(40) && REAGENT_VOLUME(reagents, /decl/reagent/blood) >= 0.1)
+			reagents.remove_reagent(/decl/reagent/blood, 0.1)
+			blood_splatter(get_turf(src), src, 1)
 		if(config.organs_decay)
 			take_general_damage(rand(1,3))
 		germ_level += rand(2,6)
@@ -154,7 +153,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
 	var/germ_immunity = owner.get_immunity() //reduces the amount of times we need to call this proc
-	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/antibiotics)
+	var/antibiotics = REAGENT_VOLUME(owner.reagents, /decl/reagent/antibiotics)
 
 	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(germ_immunity*0.3))
 		germ_level--
@@ -203,7 +202,7 @@ var/list/organ_cache = list()
 						germ_level += rand(2,3)
 					if(501 to INFINITY)
 						germ_level += rand(3,5)
-						owner.reagents.add_reagent(/datum/reagent/toxin, rand(1,2))
+						owner.reagents.add_reagent(/decl/reagent/toxin, rand(1,2))
 
 /obj/item/organ/proc/receive_chem(chemical)
 	return 0
@@ -278,8 +277,8 @@ var/list/organ_cache = list()
 	START_PROCESSING(SSobj, src)
 	rejecting = null
 	if(!BP_IS_PROSTHETIC(src))
-		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurences of locate(/datum/reagent/blood) horror
-		if(!organ_blood || !organ_blood.data["blood_DNA"])
+		var/list/blood_data = REAGENT_DATA(reagents, /decl/reagent/blood)
+		if(!blood_data || !blood_data["blood_DNA"])
 			owner.vessel.trans_to(src, 5, 1, 1)
 
 	if(owner && vital)

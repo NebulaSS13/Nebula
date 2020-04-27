@@ -58,28 +58,28 @@ var/list/lunchables_drinks_ = list(
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_drink_reagents_ = list(
-											/datum/reagent/drink/nothing,
-											/datum/reagent/drink/doctor_delight,
-											/datum/reagent/drink/dry_ramen,
-											/datum/reagent/drink/hell_ramen,
-											/datum/reagent/drink/hot_ramen,
-											/datum/reagent/drink/mutagencola
+											/decl/reagent/drink/nothing,
+											/decl/reagent/drink/doctor_delight,
+											/decl/reagent/drink/dry_ramen,
+											/decl/reagent/drink/hell_ramen,
+											/decl/reagent/drink/hot_ramen,
+											/decl/reagent/drink/mutagencola
 										)
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_ethanol_reagents_ = list(
-												/datum/reagent/ethanol/acid_spit,
-												/datum/reagent/ethanol/atomicbomb,
-												/datum/reagent/ethanol/beepsky_smash,
-												/datum/reagent/ethanol/coffee,
-												/datum/reagent/ethanol/hippies_delight,
-												/datum/reagent/ethanol/hooch,
-												/datum/reagent/ethanol/thirteenloko,
-												/datum/reagent/ethanol/manhattan_proj,
-												/datum/reagent/ethanol/neurotoxin,
-												/datum/reagent/ethanol/pwine,
-												/datum/reagent/ethanol/threemileisland,
-												/datum/reagent/ethanol/toxins_special
+												/decl/reagent/ethanol/acid_spit,
+												/decl/reagent/ethanol/atomicbomb,
+												/decl/reagent/ethanol/beepsky_smash,
+												/decl/reagent/ethanol/coffee,
+												/decl/reagent/ethanol/hippies_delight,
+												/decl/reagent/ethanol/hooch,
+												/decl/reagent/ethanol/thirteenloko,
+												/decl/reagent/ethanol/manhattan_proj,
+												/decl/reagent/ethanol/neurotoxin,
+												/decl/reagent/ethanol/pwine,
+												/decl/reagent/ethanol/threemileisland,
+												/decl/reagent/ethanol/toxins_special
 											)
 
 /proc/lunchables_lunches()
@@ -99,12 +99,12 @@ var/list/lunchables_ethanol_reagents_ = list(
 
 /proc/lunchables_drink_reagents()
 	if(!(lunchables_drink_reagents_[lunchables_drink_reagents_[1]]))
-		lunchables_drink_reagents_ = init_lunchable_reagent_list(lunchables_drink_reagents_, /datum/reagent/drink)
+		lunchables_drink_reagents_ = init_lunchable_reagent_list(lunchables_drink_reagents_, /decl/reagent/drink)
 	return lunchables_drink_reagents_
 
 /proc/lunchables_ethanol_reagents()
 	if(!(lunchables_ethanol_reagents_[lunchables_ethanol_reagents_[1]]))
-		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /datum/reagent/ethanol)
+		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /decl/reagent/ethanol)
 	return lunchables_ethanol_reagents_
 
 /proc/init_lunchable_list(var/list/lunches)
@@ -119,6 +119,6 @@ var/list/lunchables_ethanol_reagents_ = list(
 	for(var/reagent_type in subtypesof(reagent_types))
 		if(reagent_type in banned_reagents)
 			continue
-		var/datum/reagent/reagent = reagent_type
+		var/decl/reagent/reagent = reagent_type
 		.[initial(reagent.name)] = reagent_type
 	return sortAssoc(.)

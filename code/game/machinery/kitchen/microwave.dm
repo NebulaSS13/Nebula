@@ -110,8 +110,8 @@
 		)
 		if (!O.reagents)
 			return 1
-		for (var/datum/reagent/R in O.reagents.reagent_list)
-			if (!(R.type in SScuisine.microwave_accepts_reagents))
+		for (var/R in O.reagents.reagent_volumes)
+			if (!(R in SScuisine.microwave_accepts_reagents))
 				to_chat(user, "<span class='warning'>Your [O] contains components unsuitable for cookery.</span>")
 				return 1
 		return
@@ -205,15 +205,18 @@
 				else
 					dat += "<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]"
 
-		for (var/datum/reagent/R in reagents.reagent_list)
-			var/display_name = R.name
-			if (R.type == /datum/reagent/capsaicin)
+		for (var/R in reagents.reagent_volumes)
+			var/display_name
+			if (R == /decl/reagent/capsaicin)
 				display_name = "Hotsauce"
-			if (R.type == /datum/reagent/frostoil)
+			if (R == /decl/reagent/frostoil)
 				display_name = "Coldsauce"
-			dat += "<B>[display_name]:</B> [R.volume] unit\s"
+			else
+				var/decl/reagent/reagent = decls_repository.get_decl(R)
+				display_name = reagent.name
+			dat += "<B>[display_name]:</B> [REAGENT_VOLUME(reagents, R)] unit\s"
 
-		if (items_counts.len==0 && reagents.reagent_list.len==0)
+		if (items_counts.len==0 && LAZYLEN(reagents?.reagent_volumes))
 			dat += "<B>The microwave is empty</B>"
 		else
 			dat += "<b>Ingredients:</b><br>[dat]"
@@ -374,16 +377,14 @@
 
 	for (var/obj/O in ingredients)
 		amount++
-		if (O.reagents)
-			var/reagent_type = O.reagents.get_master_reagent_type()
-			if (reagent_type)
-				amount+=O.reagents.get_reagent_amount(reagent_type)
+		if (O.reagents && O.reagents.primary_reagent)
+			amount += REAGENT_VOLUME(O.reagents, O.reagents.primary_reagent)
 		qdel(O)
 	LAZYCLEARLIST(ingredients)
 	src.reagents.clear_reagents()
 	var/obj/item/chems/food/snacks/badrecipe/ffuu = new(src)
-	ffuu.reagents.add_reagent(/datum/reagent/carbon, amount)
-	ffuu.reagents.add_reagent(/datum/reagent/toxin, amount/10)
+	ffuu.reagents.add_reagent(/decl/reagent/carbon, amount)
+	ffuu.reagents.add_reagent(/decl/reagent/toxin, amount/10)
 	return ffuu
 
 /obj/machinery/microwave/Topic(href, href_list)

@@ -2,9 +2,9 @@
 	var/metabolism_class //CHEM_TOUCH, CHEM_INGEST, or CHEM_INJECT
 	var/mob/living/carbon/parent
 
-/datum/reagents/metabolism/del_reagent(var/reagent_type)
-	var/datum/reagent/current = locate(reagent_type) in reagent_list
-	if(current)
+/datum/reagents/metabolism/clear_reagent(var/reagent_type)
+	if(REAGENT_VOLUME(src, reagent_type))
+		var/decl/reagent/current = decls_repository.get_decl(reagent_type)
 		current.on_leaving_metabolism(parent, metabolism_class)
 	. = ..()
 
@@ -21,7 +21,7 @@
 		if(ishuman(parent))
 			var/mob/living/carbon/human/H = parent
 			metabolism_type = H.species.reagent_tag
-
-		for(var/datum/reagent/current in reagent_list)
-			current.on_mob_life(parent, metabolism_type, metabolism_class)
+		for(var/rtype in reagent_volumes)
+			var/decl/reagent/current = decls_repository.get_decl(rtype)
+			current.on_mob_life(parent, metabolism_type, metabolism_class, src)
 		update_total()

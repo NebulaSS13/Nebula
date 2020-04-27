@@ -49,37 +49,39 @@
 		to_chat(M, "It is fizzing slightly.")
 
 /obj/item/chems/food/drinks/glass2/proc/has_ice()
-	if(reagents.reagent_list.len > 0)
-		var/datum/reagent/R = reagents.get_master_reagent()
-		if(!((R.type == /datum/reagent/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
-			if(reagents.has_reagent(/datum/reagent/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
+	if(LAZYLEN(reagents.reagent_volumes))
+		var/decl/reagent/R = reagents.get_primary_reagent_decl()
+		if(!((R.type == /decl/reagent/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
+			if(reagents.has_reagent(/decl/reagent/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
 				return 1
 
 	return 0
 
 /obj/item/chems/food/drinks/glass2/proc/has_fizz()
-	if(reagents.reagent_list.len > 0)
-		var/datum/reagent/R = reagents.get_master_reagent()
+	if(LAZYLEN(reagents.reagent_volumes))
+		var/decl/reagent/R = reagents.get_primary_reagent_decl()
 		if(("fizz" in R.glass_special))
 			return 1
 		var/totalfizzy = 0
-		for(var/datum/reagent/re in reagents.reagent_list)
+		for(var/rtype in reagents.reagent_volumes)
+			var/decl/reagent/re = decls_repository.get_decl(rtype)
 			if("fizz" in re.glass_special)
-				totalfizzy += re.volume
+				totalfizzy += REAGENT_VOLUME(reagents, rtype)
 		if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
 			return 1
 	return 0
 
 /obj/item/chems/food/drinks/glass2/proc/has_vapor()
-	if(reagents.reagent_list.len > 0)
+	if(LAZYLEN(reagents.reagent_volumes) > 0)
 		if(temperature > T0C + 40)
 			return 1
-		var/datum/reagent/R = reagents.get_master_reagent()
+		var/decl/reagent/R = reagents.get_primary_reagent_decl()
 		if(!("vapor" in R.glass_special))
 			var/totalvape = 0
-			for(var/datum/reagent/re in reagents.reagent_list)
+			for(var/rtype in reagents.reagent_volumes)
+				var/decl/reagent/re = decls_repository.get_decl(rtype)
 				if("vapor" in re.glass_special)
-					totalvape += re.volume
+					totalvape += REAGENT_VOLUME(reagents, type)
 			if(totalvape >= volume * 0.6) // 60% vapor by container volume
 				return 1
 	return 0
@@ -116,8 +118,8 @@
 	underlays.Cut()
 	overlays.Cut()
 
-	if (reagents.reagent_list.len > 0)
-		var/datum/reagent/R = reagents.get_master_reagent()
+	if (LAZYLEN(reagents?.reagent_volumes) > 0)
+		var/decl/reagent/R = reagents.get_primary_reagent_decl()
 		SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
 		desc = R.glass_desc || custom_desc || initial(desc)
 

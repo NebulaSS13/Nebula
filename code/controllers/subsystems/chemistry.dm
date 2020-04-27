@@ -9,7 +9,7 @@ SUBSYSTEM_DEF(chemistry)
 	var/list/chemical_reactions_by_id =     list()
 	var/list/chemical_reactions_by_result = list()
 	var/list/processing_holders =           list()
-
+	var/list/pending_reagent_change =       list()
 	var/list/random_chem_prototypes =       list()
 
 /datum/controller/subsystem/chemistry/stat_entry()
@@ -60,9 +60,9 @@ SUBSYSTEM_DEF(chemistry)
 			return
 
 /datum/controller/subsystem/chemistry/proc/get_prototype(given_type, temperature)
-	if(!ispath(given_type, /datum/reagent/random))
+	if(!ispath(given_type, /decl/reagent/random))
 		return
-	var/datum/reagent/random/prototype = random_chem_prototypes[given_type]
+	var/decl/reagent/random/prototype = random_chem_prototypes[given_type]
 	if(!prototype)
 		prototype = new given_type(null, TRUE)
 		prototype.randomize_data(temperature)
@@ -72,8 +72,19 @@ SUBSYSTEM_DEF(chemistry)
 	return prototype
 
 /datum/controller/subsystem/chemistry/proc/get_random_chem(var/only_if_unique = FALSE, temperature = T20C)
-	for(var/type in typesof(/datum/reagent/random))
+	for(var/type in typesof(/decl/reagent/random))
 		if(only_if_unique && random_chem_prototypes[type])
 			continue
 		if(get_prototype(type, temperature)) //returns truthy if it's valid for the given temperature
 			return type
+
+// This is a fairly hacky way of preventing multiple on_reagent_change() calls being fired within the same tick.
+/datum/controller/subsystem/chemistry/proc/queue_reagent_change(var/atom/changing)
+	if(!pending_reagent_change[changing])
+		pending_reagent_change[changing] = TRUE
+		addtimer(CALLBACK(src, .proc/do_reagent_change, changing), 0)
+
+/datum/controller/subsystem/chemistry/proc/do_reagent_change(var/atom/changing)
+	pending_reagent_change -= changing
+	if(!QDELETED(changing))
+		changing.on_reagent_change()

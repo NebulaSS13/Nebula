@@ -79,7 +79,7 @@
 
 /obj/item/chems/ivbag/nanoblood/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/nanoblood, volume)
+	reagents.add_reagent(/decl/reagent/nanoblood, volume)
 
 /obj/item/chems/ivbag/blood
 	name = "blood pack"
@@ -89,7 +89,7 @@
 	. = ..()
 	if(blood_type)
 		name = "blood pack [blood_type]"
-		reagents.add_reagent(/datum/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
+		reagents.add_reagent(/decl/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
 
 /obj/item/chems/ivbag/blood/APlus
 	blood_type = "A+"

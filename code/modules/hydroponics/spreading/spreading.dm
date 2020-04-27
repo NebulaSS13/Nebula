@@ -127,7 +127,7 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		if(growth_type in list(GROWTH_VINES,GROWTH_BIOMASS))
 			set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/woodpulp]))
+		if(islist(seed.chems) && !isnull(seed.chems[/decl/reagent/woodpulp]))
 			set_density(1)
 			set_opacity(1)
 

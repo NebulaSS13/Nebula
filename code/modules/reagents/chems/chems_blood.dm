@@ -1,14 +1,4 @@
-/datum/reagent/blood
-	data = new/list(
-		"donor" = null,
-		"species" = null,
-		"blood_DNA" = null,
-		"blood_type" = null,
-		"blood_colour" = COLOR_BLOOD_HUMAN,
-		"trace_chem" = null,
-		"dose_chem" = null,
-		"has_oxy" = 1
-	)
+/decl/reagent/blood
 	name = "Blood"
 	description = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
 	metabolism = REM * 5
@@ -20,35 +10,24 @@
 	glass_desc = "Are you sure this is tomato juice?"
 	value = 2.5
 
-	chilling_products = list(/datum/reagent/coagulated_blood)
+	chilling_products = list(/decl/reagent/coagulated_blood)
 	chilling_point = 249
 	chilling_message = "coagulates and clumps together."
 
-	heating_products = list(/datum/reagent/coagulated_blood)
+	heating_products = list(/decl/reagent/coagulated_blood)
 	heating_point = 318
 	heating_message = "coagulates and clumps together."
 
-/datum/reagent/blood/initialize_data(var/newdata)
-	..()
-	if(data)
-		if(isnull(data["species"]))
-			data["species"] = GLOB.using_map.default_species
-		if(data["blood_colour"])
-			color = data["blood_colour"]
-	return
+/decl/reagent/blood/initialize_data(var/newdata)
+	. = ..() || list()
+	if(.)
+		.["species"] = .["species"] || GLOB.using_map.default_species
 
-/datum/reagent/blood/proc/sync_to(var/mob/living/carbon/C)
-	data = C.get_blood_data()
-	color = data["blood_colour"]
-
-/datum/reagent/blood/get_data() // Just in case you have a reagent that handles data differently.
-	var/t = data.Copy()
-	return t
-
-/datum/reagent/blood/touch_turf(var/turf/simulated/T)
-	if(!istype(T) || volume < 3)
+/decl/reagent/blood/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+	var/data = REAGENT_DATA(holder, type)
+	if(!istype(T) || REAGENT_VOLUME(holder, type) < 3)
 		return
-	var/weakref/W = data["donor"]
+	var/weakref/W = LAZYACCESS(data, "donor")
 	if (!W)
 		blood_splatter(T, src, 1)
 		return
@@ -56,28 +35,29 @@
 	if(ishuman(W))
 		blood_splatter(T, src, 1)
 	else if(isalien(W))
-		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, src, 1)
+		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, holder.my_atom, 1)
 		if(B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
-/datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 
 	if(M.chem_doses[type] > 5)
 		M.adjustToxLoss(removed)
 	if(M.chem_doses[type] > 15)
 		M.adjustToxLoss(removed)
 
-/datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return
 
-/datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.inject_blood(src, volume)
-	remove_self(volume)
+/decl/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	var/volume = REAGENT_VOLUME(holder, type)
+	M.inject_blood(volume, holder)
+	holder.remove_reagent(type, volume)
 
-/datum/reagent/coagulated_blood
+/decl/reagent/coagulated_blood
 	name = "coagulated blood"
 	color = "#aa0000"
 	taste_description = "chewy iron"

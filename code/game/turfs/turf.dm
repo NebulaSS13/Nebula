@@ -269,7 +269,7 @@ var/const/enterloopsanity = 100
 
 //expects an atom containing the reagents used to clean the turf
 /turf/proc/clean(atom/source, mob/user = null, var/time = null, var/message = null)
-	if(source.reagents.has_reagent(/datum/reagent/water, 1) || source.reagents.has_reagent(/datum/reagent/cleaner, 1))
+	if(source.reagents.has_reagent(/decl/reagent/water, 1) || source.reagents.has_reagent(/decl/reagent/cleaner, 1))
 		if(user && time && !do_after(user, time, src))
 			return
 		clean_blood()

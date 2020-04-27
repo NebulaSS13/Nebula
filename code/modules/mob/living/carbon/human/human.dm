@@ -903,7 +903,7 @@
 /mob/living/carbon/human/revive()
 
 	if(should_have_organ(BP_HEART))
-		vessel.add_reagent(/datum/reagent/blood,species.blood_volume-vessel.total_volume)
+		vessel.add_reagent(/decl/reagent/blood,species.blood_volume-vessel.total_volume)
 		fixblood()
 
 	species.create_organs(src) // Reset our organs/limbs.
@@ -1164,9 +1164,9 @@
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)
 			vessel.maximum_volume = species.blood_volume
-			vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
+			vessel.add_reagent(/decl/reagent/blood, species.blood_volume - vessel.total_volume)
 		else if(vessel.total_volume > species.blood_volume)
-			vessel.remove_reagent(/datum/reagent/blood, vessel.total_volume - species.blood_volume)
+			vessel.remove_reagent(/decl/reagent/blood, vessel.total_volume - species.blood_volume)
 			vessel.maximum_volume = species.blood_volume
 		fixblood()
 
@@ -1659,7 +1659,7 @@
 
 /mob/living/carbon/human/proc/make_reagent(amount, reagent_type)
 	if(stat == CONSCIOUS)
-		var/limit = max(0, reagents.get_overdose(reagent_type) - reagents.get_reagent_amount(reagent_type))
+		var/limit = max(0, reagents.get_overdose(reagent_type) - REAGENT_VOLUME(reagents, reagent_type))
 		reagents.add_reagent(reagent_type, min(amount, limit))
 
 //Get fluffy numbers

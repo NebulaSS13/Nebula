@@ -1,11 +1,12 @@
-/datum/reagent/anfo
+/decl/reagent/anfo
 	name = "ANFO"
 	description = "Ammonia Nitrate Fuel Oil mix, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	taste_description = "fertilizer and fuel"
 	color = "#dbc3c3"
 	var/boompower = 1
 
-/datum/reagent/anfo/ex_act(obj/item/chems/holder, severity)
+/decl/reagent/anfo/ex_act(obj/item/chems/holder, severity)
+	var/volume = REAGENT_VOLUME(holder?.reagents, type)
 	var/activated_volume = volume
 	switch(severity)
 		if(2)
@@ -13,7 +14,7 @@
 				activated_volume = rand(volume/4, volume)
 		if(3)
 			if(prob(max(0, 2*(volume - 60))))
-				activated_volume = rand(0, max(volume, 120))
+				activated_volume = rand(volume, 120)
 	if(activated_volume < 30) //whiff
 		return
 	var/turf/T = get_turf(holder)
@@ -23,10 +24,10 @@
 		var/gas_moles = 3 * volume
 		products.adjust_multi(MAT_CO2, 0.5 * gas_moles, MAT_NITROGEN, 0.3 * gas_moles, MAT_STEAM, 0.2 * gas_moles)
 		T.assume_air(products)
-		remove_self(activated_volume)
+		holder?.reagents?.remove_reagent(type, activated_volume)
 		explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)
 
-/datum/reagent/anfo/plus
+/decl/reagent/anfo/plus
 	name = "ANFO+"
 	description = "Ammonia Nitrate Fuel Oil, with aluminium powder, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	color = "#ffe8e8"

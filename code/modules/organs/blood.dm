@@ -15,22 +15,20 @@
 	if(!should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
 
-	vessel.add_reagent(/datum/reagent/blood,species.blood_volume)
+	vessel.add_reagent(/decl/reagent/blood,species.blood_volume)
 	fixblood()
 
 //Resets blood data
 /mob/living/carbon/human/proc/fixblood()
-	for(var/datum/reagent/blood/B in vessel.reagent_list)
-		if(B.type == /datum/reagent/blood)
-			B.data = list(
-				"donor" = weakref(src),
-				"species" = species.name,
-				"blood_DNA" = dna.unique_enzymes,
-				"blood_colour" = species.get_blood_colour(src),
-				"blood_type" = dna.b_type,
-				"trace_chem" = null
-			)
-			B.color = B.data["blood_colour"]
+	var/list/blooddata = list(
+		"donor" = weakref(src),
+		"species" = species.name,
+		"blood_DNA" = dna.unique_enzymes,
+		"blood_colour" = species.get_blood_colour(src),
+		"blood_type" = dna.b_type,
+		"trace_chem" = null
+	)
+	LAZYSET(vessel?.reagent_data, /decl/reagent/blood, blooddata)
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
@@ -109,7 +107,7 @@
 
 	amt *= ((src.mob_size/MOB_SIZE_MEDIUM) ** 0.5)
 
-	return vessel.remove_reagent(/datum/reagent/blood, amt)
+	return vessel.remove_reagent(/decl/reagent/blood, amt)
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -117,12 +115,7 @@
 
 //Gets blood from mob to the container, preserving all data in it.
 /mob/living/carbon/proc/take_blood(obj/item/chems/container, var/amount)
-	var/datum/reagent/blood/B = get_blood(container.reagents)
-	if(!B)
-		container.reagents.add_reagent(/datum/reagent/blood, amount, get_blood_data())
-	else
-		B.sync_to(src)
-		B.volume += amount
+	container.reagents.add_reagent(/decl/reagent/blood, amount, get_blood_data())
 	return 1
 
 //For humans, blood does not appear from blue, it comes from vessels.
@@ -132,50 +125,29 @@
 		reagents.trans_to_obj(container, amount)
 		return 1
 
-	if(vessel.get_reagent_amount(/datum/reagent/blood) < amount)
+	if(REAGENT_VOLUME(vessel, /decl/reagent/blood) < amount)
 		return null
-
-	//make sure virus/etc data is up to date
-	var/datum/reagent/blood/our = get_blood(vessel)
-	our.sync_to(src)
-	vessel.trans_to_holder(container.reagents,amount)
+	vessel.trans_to_holder(container.reagents, amount)
 	return 1
 
 //Transfers blood from container ot vessels
-/mob/living/carbon/proc/inject_blood(var/datum/reagent/blood/injected, var/amount)
-	if (!injected || !istype(injected))
-		return
-	var/list/chems = list()
-	chems = injected.data["trace_chem"]
+/mob/living/carbon/proc/inject_blood(var/amount, var/datum/reagents/donor)
+	var/injected_data = REAGENT_DATA(donor, /decl/reagent/blood)
+	var/chems = LAZYACCESS(injected_data, "trace_chem")
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.
-/mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
+/mob/living/carbon/human/inject_blood(var/amount, var/datum/reagents/donor)
 	if(!should_have_organ(BP_HEART))
-		reagents.add_reagent(/datum/reagent/blood, amount, injected.data)
+		reagents.add_reagent(/decl/reagent/blood, amount, REAGENT_DATA(donor, /decl/reagent/blood))
 		return
-
-	if(blood_incompatible(injected.data["blood_type"], injected.data["species"]))
-		reagents.add_reagent(/datum/reagent/toxin, amount * 0.5)
+	var/injected_data = REAGENT_DATA(donor, /decl/reagent/blood)
+	if(blood_incompatible(LAZYACCESS(injected_data, "blood_type"), LAZYACCESS(injected_data, "species")))
+		reagents.add_reagent(/decl/reagent/toxin, amount * 0.5)
 	else
-		vessel.add_reagent(/datum/reagent/blood, amount, injected.data)
+		vessel.add_reagent(/decl/reagent/blood, amount, injected_data)
 	..()
-
-//Gets human's own blood.
-/mob/living/carbon/proc/get_blood(datum/reagents/container)
-	var/datum/reagent/blood/res
-	if(container)
-		res = locate() in container.reagent_list //Grab some blood
-		if(res) // Make sure there's some blood at all
-			if(weakref && res.data["donor"] != weakref) //If it's not theirs, then we look for theirs
-				for(var/datum/reagent/blood/D in container.reagent_list)
-					if(weakref && D.data["donor"] != weakref)
-						return D
-	return res
-
-/mob/living/carbon/human/get_blood(datum/reagents/container)
-	. = ..(container || vessel)
 
 /mob/living/carbon/human/proc/blood_incompatible(blood_type, blood_species)
 	if(blood_species && species.name)
@@ -200,10 +172,10 @@
 
 /mob/living/carbon/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
-	var/blood_volume_raw = vessel.get_reagent_amount(/datum/reagent/blood)
+	var/blood_volume_raw = REAGENT_VOLUME(vessel, /decl/reagent/blood)
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
-		vessel.add_reagent(/datum/reagent/blood, amount, get_blood_data())
+		vessel.add_reagent(/decl/reagent/blood, amount, get_blood_data())
 	return amount
 
 /mob/living/carbon/proc/get_blood_data()
@@ -214,24 +186,18 @@
 	data["species"] = species.name
 	data["has_oxy"] = species.blood_oxy
 	var/list/temp_chem = list()
-	for(var/datum/reagent/R in reagents.reagent_list)
-		temp_chem[R.type] = R.volume
+	for(var/R in reagents.reagent_volumes)
+		temp_chem[R] = REAGENT_VOLUME(reagents, R)
 	data["trace_chem"] = temp_chem
 	data["dose_chem"] = chem_doses.Copy()
 	data["blood_colour"] = species.get_blood_colour(src)
 	return data
 
-proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
+proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 
-	var/obj/effect/decal/cleanable/blood/B
+	var/obj/effect/decal/cleanable/blood/splatter
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter
 	var/turf/T = get_turf(target)
-
-	if(istype(source,/mob/living/carbon))
-		var/mob/living/carbon/M = source
-		source = M.get_blood()
-	if(!istype(source))
-		source = null
 
 	// Are we dripping or splattering?
 	var/list/drips = list()
@@ -246,44 +212,51 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	if(T)
 		var/list/existing = filter_list(T.contents, decal_type)
 		if(length(existing) > 3)
-			B = pick(existing)
-	if(!B)
-		B = new decal_type(T)
+			splatter = pick(existing)
+	if(!splatter)
+		splatter = new decal_type(T)
 
-	var/obj/effect/decal/cleanable/blood/drip/drop = B
+	var/obj/effect/decal/cleanable/blood/drip/drop = splatter
 	if(istype(drop) && drips && drips.len && !large)
 		drop.overlays |= drips
 		drop.drips |= drips
 
 	// If there's no data to copy, call it quits here.
-	if(!source)
-		return B
+	var/blood_data
+	if(ishuman(source))
+		var/mob/living/carbon/human/donor = source
+		blood_data = REAGENT_DATA(donor.vessel, /decl/reagent/blood)
+	else if(isatom(source))
+		var/atom/donor = source
+		blood_data = REAGENT_DATA(donor.reagents, /decl/reagent/blood)
+	if(!islist(blood_data))
+		return splatter
 
 	// Update appearance.
-	if(source.data["blood_colour"])
-		B.basecolor = source.data["blood_colour"]
-		B.update_icon()
+	if(blood_data["blood_colour"])
+		splatter.basecolor = blood_data["blood_colour"]
+		splatter.update_icon()
 	if(spray_dir)
-		B.icon_state = "squirt"
-		B.dir = spray_dir
+		splatter.icon_state = "squirt"
+		splatter.dir = spray_dir
 
 	// Update blood information.
-	if(source.data["blood_DNA"])
-		B.blood_DNA = list()
-		if(source.data["blood_type"])
-			B.blood_DNA[source.data["blood_DNA"]] = source.data["blood_type"]
+	if(blood_data["blood_DNA"])
+		splatter.blood_DNA = list()
+		if(blood_data["blood_type"])
+			splatter.blood_DNA[blood_data["blood_DNA"]] = blood_data["blood_type"]
 		else
-			B.blood_DNA[source.data["blood_DNA"]] = "O+"
-		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)
-		forensics.add_data(/datum/forensics/blood_dna, source.data["blood_DNA"])
+			splatter.blood_DNA[blood_data["blood_DNA"]] = "O+"
+		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(splatter, /datum/extension/forensic_evidence)
+		forensics.add_data(/datum/forensics/blood_dna, blood_data["blood_DNA"])
 
-	B.fluorescent  = 0
-	B.set_invisibility(0)
-	return B
+	splatter.fluorescent  = 0
+	splatter.set_invisibility(0)
+	return splatter
 
 //Percentage of maximum blood volume.
 /mob/living/carbon/human/proc/get_blood_volume()
-	return round((vessel.get_reagent_amount(/datum/reagent/blood)/species.blood_volume)*100)
+	return round((REAGENT_VOLUME(vessel, /decl/reagent/blood)/species.blood_volume)*100)
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
 /mob/living/carbon/human/proc/get_blood_circulation()
