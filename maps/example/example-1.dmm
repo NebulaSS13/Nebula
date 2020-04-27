@@ -9,22 +9,17 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "d" = (
-/obj/machinery/light{
-	dir = 1
-	},
+/obj/machinery/light/spot,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "e" = (
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
-	},
-/turf/simulated/floor/tiled,
-/area/constructionsite)
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/shuttle/escape)
 "f" = (
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
@@ -60,7 +55,10 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "k" = (
-/obj/machinery/light,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "l" = (
@@ -172,9 +170,12 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape)
 "C" = (
-/obj/machinery/light,
-/turf/simulated/floor/plating,
-/area/shuttle/escape)
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/constructionsite)
 "D" = (
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "example_shuttle_port_hatch"
@@ -710,7 +711,7 @@ a
 y
 A
 B
-C
+e
 y
 a
 a
@@ -875,13 +876,13 @@ b
 c
 c
 c
-e
+k
 c
 c
 u
 c
 c
-e
+k
 h
 i
 j
@@ -974,19 +975,19 @@ a
 Z
 Z
 b
+f
+l
+l
+l
+c
+c
+c
+c
+c
+t
+t
+t
 d
-l
-l
-l
-c
-c
-c
-c
-c
-t
-t
-t
-k
 b
 Z
 Z
@@ -1178,7 +1179,7 @@ a
 Z
 Z
 b
-d
+f
 c
 c
 c
@@ -1190,7 +1191,7 @@ c
 c
 c
 X
-k
+d
 b
 Z
 Z
@@ -1283,13 +1284,13 @@ b
 c
 c
 v
-f
+C
 c
 n
 c
 q
 c
-f
+C
 c
 c
 c
