@@ -1,4 +1,5 @@
 /datum/extension/network_device/broadcaster
+	expected_type = /obj/machinery
 	connection_type = NETWORK_CONNECTION_WIRED
 
 /datum/extension/network_device/broadcaster/proc/get_broadcast_strength()

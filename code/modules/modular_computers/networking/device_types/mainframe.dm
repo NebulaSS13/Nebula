@@ -2,6 +2,7 @@ GLOBAL_LIST_INIT(all_mainframe_roles, list(MF_ROLE_SOFTWARE, MF_ROLE_FILESERVER,
 
 /datum/extension/network_device/mainframe
 	connection_type = NETWORK_CONNECTION_WIRED
+	expected_type = /obj/machinery
 	var/max_log_count = 100
 	var/list/roles = list()
 

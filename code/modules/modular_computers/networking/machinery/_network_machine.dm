@@ -53,3 +53,20 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
+
+/obj/machinery/network/power_change()
+	. = ..()
+	if(.)
+		update_network_status()
+
+/obj/machinery/network/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
+	. = ..()
+	if(.)
+		update_network_status()
+
+/obj/machinery/network/proc/update_network_status()
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	if(operable())
+		D.connect()
+	else
+		D.disconnect()
