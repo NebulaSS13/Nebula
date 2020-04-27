@@ -52,9 +52,14 @@
 	desc = "A simple deck of playing cards."
 	icon_state = "deck"
 
-/obj/item/deck/cards/Initialize()
+/obj/item/deck/Initialize()
 	. = ..()
+	generate_cards()
 
+/obj/item/deck/proc/generate_cards()
+	return
+
+/obj/item/deck/cards/generate_cards()
 	var/datum/playingcard/P
 	for(var/suit in list("spades","clubs","diamonds","hearts"))
 
@@ -78,18 +83,59 @@
 			P.back_icon = "card_back"
 			cards += P
 
-
 	for(var/i = 0,i<2,i++)
 		P = new()
 		P.name = "joker"
 		P.card_icon = "joker"
 		cards += P
 
+/obj/item/deck/compact
+	name = "compact deck of cards"
+	desc = "A deck of playing cards. Looks like this one hasn't numbers from two to five, and jokers."
+	icon_state = "deck"
+
+/obj/item/deck/compact/generate_cards()
+	var/datum/playingcard/P
+	for(var/suit in list("spades", "clubs", "diamonds", "hearts"))
+
+		var/colour
+		if(suit == "spades" || suit == "clubs")
+			colour = "black_"
+		else
+			colour = "red_"
+
+		for(var/number in list("ace", "six", "seven", "eight", "nine", "ten"))
+			P = new()
+			P.name = "[number] of [suit]"
+			P.card_icon = "[colour]num"
+			P.back_icon = "card_back"
+			cards += P
+
+		for(var/number in list("jack", "queen", "king"))
+			P = new()
+			P.name = "[number] of [suit]"
+			P.card_icon = "[colour]col"
+			P.back_icon = "card_back"
+			cards += P
+
+/obj/item/deck/attack_hand()
+	if(!usr)
+		return
+
+	draw_card(usr)
+
+/obj/item/deck/examine(mob/user)
+	. = ..()
+	if(cards.len)
+		to_chat(user, "<br>There is still <b>[cards.len] card[cards.len > 1? "s" : ""]</b>.")
+	to_chat(user, SPAN_NOTICE("You can deal cards at a table with clicking at it with grab intent."))
+
 /obj/item/deck/attackby(obj/O, mob/user)
 	if(istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
 		for(var/datum/playingcard/P in H.cards)
 			cards += P
+
 		qdel(O)
 		to_chat(user, "You place your cards on the bottom of \the [src].")
 		return
@@ -128,8 +174,9 @@
 	H.cards += P
 	cards -= P
 	H.update_icon()
+	H.name = "hand of [(H.cards.len)] cards"
 	user.visible_message("\The [user] draws a card.")
-	to_chat(user, "It's the [P].")
+	to_chat(user, "It's the <b>[P]</b>.")
 
 /obj/item/deck/verb/deal_card()
 
@@ -155,9 +202,10 @@
 
 	deal_at(usr, M)
 
-/obj/item/deck/proc/deal_at(mob/user, mob/target)
+/obj/item/deck/proc/deal_at(mob/user, atom/target)
 	var/obj/item/hand/H = new(get_step(user, user.dir))
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN / 2)
 	H.cards += cards[1]
 	cards -= cards[1]
 	H.concealed = 1
@@ -166,7 +214,8 @@
 		user.visible_message("\The [user] deals a card to \himself.")
 	else
 		user.visible_message("\The [user] deals a card to \the [target].")
-	H.throw_at(get_step(target,target.dir),10,1,user)
+
+	H.throw_at(get_step(target, ismob(target) ? target.dir : target),10,1,user)
 
 /obj/item/hand/attackby(obj/O, mob/user)
 	if(istype(O,/obj/item/hand))
@@ -176,6 +225,7 @@
 		H.concealed = src.concealed
 		qdel(src)
 		H.update_icon()
+		H.name = "hand of [(H.cards.len)] cards"
 		return
 	..()
 
@@ -185,16 +235,22 @@
 	user.visible_message("\The [user] shuffles [src].")
 
 /obj/item/deck/MouseDrop(atom/over)
-	if(!usr || !over) return
-	if(!Adjacent(usr) || !over.Adjacent(usr)) return // should stop you from dragging through windows
+	if(over == usr && !usr.incapacitated() && (usr.contents.Find(src) || in_range(src, usr)))
+		if(!ishuman(over))
+			return
 
-	if(!ishuman(over) || !(over in viewers(3))) return
+		if(!usr.get_active_hand()) //if active hand is empty
+			var/mob/living/carbon/human/H = over
+			var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 
-	if(!cards.len)
-		to_chat(usr, "There are no cards in the deck.")
-		return
+			if(H.hand)
+				temp = H.organs_by_name[BP_L_HAND]
+			if(temp && !temp.is_usable())
+				to_chat(over, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
+				return
 
-	deal_at(usr, over)
+			to_chat(over, SPAN_NOTICE("You pick up the [src]."))
+			usr.put_in_hands(src)
 
 /obj/item/pack/
 	name = "card pack"
