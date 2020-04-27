@@ -124,13 +124,13 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "u" = (
-/obj/machinery/light_switch{
+/obj/machinery/light_switch/on{
 	pixel_x = -25
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "v" = (
-/obj/machinery/light_switch{
+/obj/machinery/light_switch/on{
 	pixel_x = 25
 	},
 /turf/simulated/floor/tiled,

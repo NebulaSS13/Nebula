@@ -24,6 +24,9 @@
 /obj/machinery/light_switch/buildable
 	uncreated_component_parts = null
 
+/obj/machinery/light_switch/on
+	on = TRUE
+
 /obj/machinery/light_switch/Initialize()
 	. = ..()
 	if(other_area)

@@ -30,7 +30,7 @@
 /turf/simulated/open,
 /area/maintenance/fsmaint2)
 "h" = (
-/obj/machinery/light_switch{
+/obj/machinery/light_switch/on{
 	pixel_x = 25
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -125,7 +125,7 @@
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
 "v" = (
-/obj/machinery/light_switch{
+/obj/machinery/light_switch/on{
 	pixel_x = -25
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
