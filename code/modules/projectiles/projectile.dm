@@ -58,6 +58,7 @@
 	var/impact_type
 
 	var/fire_sound
+	var/fire_sound_vol = 50
 	var/miss_sounds
 	var/ricochet_sounds
 	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
