@@ -57,30 +57,3 @@
 /decl/reagent/paint/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	if(istype(M) && !isobserver(M)) //painting observers: not allowed
 		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
-
-/decl/reagent/paint/mix_data(var/datum/reagents/reagents, var/newdata, var/newamount)
-	var/list/colors = list(0, 0, 0, 0)
-	var/tot_w = 0
-
-	var/hex1 = uppertext(color)
-	var/hex2 = uppertext(newdata)
-	if(length(hex1) == 7)
-		hex1 += "FF"
-	if(length(hex2) == 7)
-		hex2 += "FF"
-	if(length(hex1) != 9 || length(hex2) != 9)
-		return
-	var/volume = REAGENT_VOLUME(reagents, type)
-	colors[1] += hex2num(copytext(hex1, 2, 4)) * volume
-	colors[2] += hex2num(copytext(hex1, 4, 6)) * volume
-	colors[3] += hex2num(copytext(hex1, 6, 8)) * volume
-	colors[4] += hex2num(copytext(hex1, 8, 10)) * volume
-	tot_w += volume
-	colors[1] += hex2num(copytext(hex2, 2, 4)) * newamount
-	colors[2] += hex2num(copytext(hex2, 4, 6)) * newamount
-	colors[3] += hex2num(copytext(hex2, 6, 8)) * newamount
-	colors[4] += hex2num(copytext(hex2, 8, 10)) * newamount
-	tot_w += newamount
-
-	color = rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)
-	return

@@ -17,7 +17,7 @@
 		return
 
 	//add the new taste data
-	var/data = REAGENT_DATA(reagents, type)
+	var/data = ..()
 	for(var/taste in newdata)
 		if(taste in data)
 			data[taste] += newdata[taste]
@@ -28,11 +28,10 @@
 	var/totalFlavor = 0
 	for(var/taste in data)
 		totalFlavor += data[taste]
-	if(!totalFlavor)
-		return
-	for(var/taste in data)
-		if(data[taste]/totalFlavor < 0.1)
-			data -= taste
+	if(totalFlavor)
+		for(var/taste in data)
+			if(data[taste]/totalFlavor < 0.1)
+				data -= taste
 	. = data
 
 /decl/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)

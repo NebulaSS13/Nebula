@@ -74,7 +74,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 /decl/reagent/random/mix_data(var/datum/reagents/reagents, var/list/other_data, var/amount)
 	var/volume = REAGENT_VOLUME(reagents, type)
 	if(volume <= 0)
-		return // ?? but we're about to divide by 0 if this happens, so let's avoid.
+		return ..() // ?? but we're about to divide by 0 if this happens, so let's avoid.
 	var/old_amount = max(volume - amount, 0) // how much we had prior to the addition
 	var/ratio = old_amount/volume
 	FOR_ALL_EFFECTS

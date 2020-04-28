@@ -23,6 +23,20 @@
 	if(.)
 		.["species"] = .["species"] || GLOB.using_map.default_species
 
+/decl/reagent/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
+	var/list/data = REAGENT_DATA(reagents, type)
+	if(LAZYACCESS(newdata, "trace_chem"))
+		var/list/other_chems = LAZYACCESS(newdata, "trace_chem")
+		if(!data)
+			data = newdata.Copy()
+		else if(!data["trace_chem"])
+			data["trace_chem"] = other_chems.Copy()
+		else
+			var/list/my_chems = data["trace_chem"]
+			for(var/chem in other_chems)
+				my_chems[chem] = my_chems[chem] + other_chems[chem]
+	. = data
+
 /decl/reagent/blood/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	var/data = REAGENT_DATA(holder, type)
 	if(!istype(T) || REAGENT_VOLUME(holder, type) < 3)

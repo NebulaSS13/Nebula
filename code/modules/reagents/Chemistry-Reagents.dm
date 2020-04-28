@@ -122,8 +122,8 @@
 	if(newdata) 
 		. = newdata
 
-/decl/reagent/proc/mix_data(var/datum/reagents/reagents, var/data, var/amount)	
-	. = LAZYACCESS(reagents.reagent_data, type)
+/decl/reagent/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
+	. = REAGENT_DATA(reagents, type)
 
 /decl/reagent/proc/ex_act(obj/item/chems/holder, severity)
 	return

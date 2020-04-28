@@ -127,7 +127,7 @@
 
 	if(vessel.total_volume < amount)
 		return null
-	vessel.trans_to_holder(container.reagents, amount)
+	vessel.trans_to_holder(container.reagents, amount, get_blood_data())
 	return 1
 
 //Transfers blood from container ot vessels
