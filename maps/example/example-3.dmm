@@ -16,10 +16,11 @@
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
 "e" = (
-/obj/machinery/light{
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
 "f" = (
@@ -41,11 +42,11 @@
 /turf/space,
 /area/space)
 "j" = (
-/obj/machinery/light{
-	icon_state = "tube1";
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
 "k" = (
@@ -65,8 +66,7 @@
 /turf/simulated/floor,
 /area/maintenance/fsmaint2)
 "n" = (
-/obj/machinery/door/airlock/external/bolted{
-	},
+/obj/machinery/door/airlock/external/bolted,
 /turf/simulated/floor,
 /area/maintenance/fsmaint2)
 "o" = (
@@ -76,15 +76,15 @@
 /area/maintenance/fsmaint2)
 "p" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/light{
-	icon_state = "tube1";
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
 "q" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
+	icon_state = "intact";
 	dir = 5
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -92,7 +92,7 @@
 /area/maintenance/fsmaint2)
 "r" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
+	icon_state = "intact";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -100,7 +100,7 @@
 /area/maintenance/fsmaint2)
 "s" = (
 /obj/machinery/atmospherics/portables_connector{
-	 icon_state = "map_connector";
+	icon_state = "map_connector";
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air,
@@ -109,7 +109,7 @@
 /area/maintenance/fsmaint2)
 "t" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	 icon_state = "intact";
+	icon_state = "intact";
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -117,7 +117,7 @@
 /area/maintenance/fsmaint2)
 "u" = (
 /obj/machinery/atmospherics/portables_connector{
-	 icon_state = "map_connector";
+	icon_state = "map_connector";
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
@@ -133,17 +133,14 @@
 /area/maintenance/fsmaint2)
 "w" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	 icon_state = "map_scrubber_on";
+	icon_state = "map_scrubber_on";
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
 "x" = (
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
-	},
+/obj/machinery/light/spot,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
@@ -174,11 +171,6 @@
 "A" = (
 /obj/structure/cable,
 /obj/machinery/power/debug_items/infinite_generator,
-/obj/effect/floor_decal/corner/blue/diagonal,
-/turf/simulated/floor/tiled,
-/area/maintenance/fsmaint2)
-"B" = (
-/obj/machinery/light,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,
 /area/maintenance/fsmaint2)
@@ -920,7 +912,7 @@ d
 d
 d
 d
-B
+x
 c
 a
 a
@@ -1124,7 +1116,7 @@ d
 d
 d
 d
-B
+x
 c
 a
 a
@@ -1223,8 +1215,8 @@ s
 d
 u
 d
-x
 d
+p
 d
 d
 c

@@ -30,13 +30,14 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "ag" = (
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
 /obj/item/storage/box/syringes,
 /obj/item/storage/box/freezer,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "ah" = (
@@ -56,10 +57,11 @@
 /turf/simulated/open,
 /area/medical/surgery)
 "ak" = (
-/obj/machinery/light{
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "al" = (
@@ -84,8 +86,8 @@
 /obj/structure/table/glass,
 /obj/item/chems/dropper,
 /obj/item/stack/nanopaste,
-/obj/machinery/light{
-	icon_state = "tube1";
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -157,8 +159,8 @@
 /area/medical/surgery)
 "ay" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/light{
-	icon_state = "tube1";
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -280,19 +282,19 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aP" = (
-/obj/machinery/light{
-	icon_state = "tube1";
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aQ" = (
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
-	},
+/obj/machinery/light/spot,
 /obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/fabricator/protolathe{
+	initial_id_tag = "research"
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aR" = (
@@ -326,7 +328,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aU" = (
-/obj/machinery/light,
+/obj/machinery/light/spot,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -347,14 +349,6 @@
 "aX" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/destructive_analyzer{
-	initial_id_tag = "research"
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/surgery)
-"aY" = (
-/obj/machinery/light,
-/obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/fabricator/protolathe{
 	initial_id_tag = "research"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1119,7 +1113,7 @@ aN
 aN
 aN
 aN
-aY
+aQ
 ac
 aa
 aa
@@ -1422,8 +1416,8 @@ aI
 aN
 aM
 aN
-aQ
 aN
+ay
 aN
 aN
 ac
