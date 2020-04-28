@@ -473,7 +473,6 @@
 		banned_chems += typesof(/decl/reagent/drink)
 		banned_chems += typesof(/decl/reagent/nutriment)
 		banned_chems += typesof(/decl/reagent/toxin/fertilizer)
-		banned_chems += typesof(/decl/reagent/pigment/crayon_dust)
 
 		if(prob(30))	banned_chems |= typesof(/decl/reagent/toxin)
 

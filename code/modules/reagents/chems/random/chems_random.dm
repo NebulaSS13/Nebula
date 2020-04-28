@@ -6,7 +6,6 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	/decl/reagent/water/holywater,
 	/decl/reagent/tobacco,
 	/decl/reagent/drink,
-	/decl/reagent/pigment/crayon_dust,
 	/decl/reagent/random,
 	/decl/reagent/toxin/phoron,
 	/decl/reagent/ethanol // Includes alcoholic beverages

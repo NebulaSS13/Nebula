@@ -127,7 +127,9 @@
 
 	if(vessel.total_volume < amount)
 		return null
-	vessel.trans_to_holder(container.reagents, amount, get_blood_data())
+	if(vessel.has_reagent(species.blood_reagent))
+		LAZYSET(vessel.reagent_data, species.blood_reagent, get_blood_data())
+	vessel.trans_to_holder(container.reagents, amount)
 	return 1
 
 //Transfers blood from container ot vessels

@@ -9,6 +9,8 @@
 	var/tot_w = 0
 	for(var/rtype in reagent_volumes)
 		var/decl/reagent/R = decls_repository.get_decl(rtype)
+		if(R.color_weight <= 0)
+			continue
 		var/hex = uppertext(R.color) + num2hex(R.alpha)
 		var/mod = REAGENT_VOLUME(src, rtype) * R.color_weight
 		colors[1] += hex2num(copytext(hex, 2, 4))  * mod

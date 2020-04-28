@@ -1,42 +1,54 @@
-/decl/reagent/pigment/crayon_dust
-	name = "crayon dust"
-	description = "Intensely coloured powder obtained by grinding crayons."
+/decl/reagent/pigment
+	name = "pigment"
+	description = "Intensely coloured powder."
 	taste_description = "the back of class"
 	color = "#888888"
 	overdose = 5
 	hidden_from_codex = TRUE
 
-/decl/reagent/pigment/crayon_dust/red
-	name = "red crayon dust"
+/decl/reagent/pigment/red
+	name = "red pigment"
 	color = "#fe191a"
 
-/decl/reagent/pigment/crayon_dust/orange
-	name = "orange crayon dust"
+/decl/reagent/pigment/orange
+	name = "orange pigment"
 	color = "#ffbe4f"
 
-/decl/reagent/pigment/crayon_dust/yellow
-	name = "yellow crayon dust"
+/decl/reagent/pigment/yellow
+	name = "yellow pigment"
 	color = "#fdfe7d"
 
-/decl/reagent/pigment/crayon_dust/green
-	name = "green crayon dust"
+/decl/reagent/pigment/green
+	name = "green pigment"
 	color = "#18a31a"
 
-/decl/reagent/pigment/crayon_dust/blue
-	name = "blue crayon dust"
+/decl/reagent/pigment/blue
+	name = "blue pigment"
 	color = "#247cff"
 
-/decl/reagent/pigment/crayon_dust/purple
-	name = "purple crayon dust"
+/decl/reagent/pigment/purple
+	name = "purple pigment"
 	color = "#cc0099"
 
-/decl/reagent/pigment/crayon_dust/grey //Mime
-	name = "grey crayon dust"
+/decl/reagent/pigment/grey //Mime
+	name = "grey pigment"
 	color = "#808080"
 
-/decl/reagent/pigment/crayon_dust/brown //Rainbow
-	name = "brown crayon dust"
+/decl/reagent/pigment/brown //Rainbow
+	name = "brown pigment"
 	color = "#846f35"
+
+/decl/reagent/pigment/grey //Mime
+	name = "grey pigment"
+	color = "#808080"
+
+/decl/reagent/pigment/black
+	name = "black pigment"
+	color = "#222222"
+
+/decl/reagent/pigment/white
+	name = "white pigment"
+	color = "#aaaaaa"
 
 /decl/reagent/paint
 	name = "paint"
@@ -44,16 +56,16 @@
 	taste_description = "chalk"
 	color = "#808080"
 	overdose = REAGENTS_OVERDOSE * 0.5
-	color_weight = 20
+	color_weight = 0
 
 /decl/reagent/paint/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(istype(T) && !istype(T, /turf/space))
-		T.color = color
+		T.color = holder.get_color()
 
 /decl/reagent/paint/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O))
-		O.color = color
+		O.color = holder.get_color()
 
 /decl/reagent/paint/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
-	if(istype(M) && !isobserver(M)) //painting observers: not allowed
-		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
+	if(istype(M) && !isobserver(M))
+		M.color = holder.get_color()

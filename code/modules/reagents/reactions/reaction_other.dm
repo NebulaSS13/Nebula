@@ -100,10 +100,3 @@
 	required_reagents = list(/decl/reagent/toxin/plasticide = 1, /decl/reagent/water = 3)
 	result_amount = 5
 	mix_message = "The solution thickens and takes on a glossy sheen."
-
-/datum/chemical_reaction/paint/send_data(datum/reagents/holder)
-	var/list/pigment_data = REAGENT_DATA(holder, /decl/reagent/pigment)
-	return pigment_data && pigment_data["color"]
-
-/datum/chemical_reaction/paint/can_happen(datum/reagents/holder)
-	. = ..() && REAGENT_DATA(holder, /decl/reagent/pigment)

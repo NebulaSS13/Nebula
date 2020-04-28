@@ -16,7 +16,7 @@ var/global/list/cached_icons = list()
 	volume = 60
 	unacidable = 0
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	var/paint_hex = "#fe191a"
+	var/pigment
 
 /obj/item/chems/glass/paint/afterattack(turf/simulated/target, mob/user, proximity)
 	if(!proximity) return
@@ -28,9 +28,9 @@ var/global/list/cached_icons = list()
 
 /obj/item/chems/glass/paint/Initialize()
 	. = ..()
-	if(paint_hex && length(paint_hex) > 0)
-		reagents.add_reagent(/decl/reagent/paint, volume, paint_hex)
-		update_icon()
+	reagents.add_reagent(/decl/reagent/paint, reagents.maximum_volume-10)
+	if(pigment)
+		reagents.add_reagent(pigment, reagents.maximum_volume-10)
 
 /obj/item/chems/glass/paint/on_update_icon()
 	overlays.Cut()
@@ -41,35 +41,35 @@ var/global/list/cached_icons = list()
 
 /obj/item/chems/glass/paint/red
 	name = "red paint bucket"
-	paint_hex = "#fe191a"
+	pigment = /decl/reagent/pigment/red
 
 /obj/item/chems/glass/paint/yellow
 	name = "yellow paint bucket"
-	paint_hex = "#fdfe7d"
+	pigment = /decl/reagent/pigment/yellow
 
 /obj/item/chems/glass/paint/green
 	name = "green paint bucket"
-	paint_hex = "#18a31a"
+	pigment = /decl/reagent/pigment/green
 
 /obj/item/chems/glass/paint/blue
 	name = "blue paint bucket"
-	paint_hex = "#247cff"
+	pigment = /decl/reagent/pigment/blue
 
 /obj/item/chems/glass/paint/purple
 	name = "purple paint bucket"
-	paint_hex = "#cc0099"
+	pigment = /decl/reagent/pigment/purple
 
 /obj/item/chems/glass/paint/black
 	name = "black paint bucket"
-	paint_hex = "#333333"
+	pigment = /decl/reagent/pigment/black
 
 /obj/item/chems/glass/paint/white
 	name = "white paint bucket"
-	paint_hex = "#f0f8ff"
+	pigment = /decl/reagent/pigment/white
 
 /obj/item/chems/glass/paint/random
 	name = "odd paint bucket"
 
 /obj/item/chems/glass/paint/random/Initialize()
-	paint_hex = rgb(rand(1,255),rand(1,255),rand(1,255))
+	pigment = pick(subtypesof(/decl/reagent/pigment))
 	. = ..()
