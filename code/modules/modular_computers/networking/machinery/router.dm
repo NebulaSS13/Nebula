@@ -27,3 +27,9 @@
 		icon_state = "bus"
 	else
 		icon_state = "bus_off"
+
+/obj/machinery/network/router/update_network_status()
+	..()
+	var/datum/extension/network_device/broadcaster/router/R = get_extension(src, /datum/extension/network_device)
+	if(operable())
+		R.broadcast()

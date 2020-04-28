@@ -1,5 +1,6 @@
 /datum/extension/network_device/broadcaster/relay
 	connection_type = NETWORK_CONNECTION_WIRED
+	expected_type = /obj/machinery
 	var/long_range  = 0 		// TRUE if relay can cross z-chunk boundaries.
 
 /datum/extension/network_device/broadcaster/relay/get_nearby_networks()
