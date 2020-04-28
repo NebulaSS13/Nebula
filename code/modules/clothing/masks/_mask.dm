@@ -3,6 +3,7 @@
 	icon = 'icons/obj/clothing/obj_mask.dmi'
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
+	blood_overlay_type = "maskblood"
 
 	var/voicechange = 0
 	var/list/say_messages
@@ -15,7 +16,6 @@
 	var/pull_mask = 0
 	var/hanging = 0
 	var/list/filtered_gases
-	blood_overlay_type = "maskblood"
 
 /obj/item/clothing/mask/proc/filters_water()
 	return FALSE
@@ -24,7 +24,7 @@
 	. = ..()
 	if(pull_mask)
 		action_button_name = "Adjust Mask"
-		verbs += /obj/item/clothing/mask/proc/adjust_mask
+		verbs += .verb/adjust_mask
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
@@ -34,14 +34,18 @@
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
 
-/obj/item/clothing/mask/proc/adjust_mask(var/mob/user)
+/obj/item/clothing/mask/verb/adjust_mask()
 	set category = "Object"
-	set name = "Adjust mask"
+	set name = "Adjust Mask"
 	set src in usr
 
-	if(!user.incapacitated())
+	if(!ismob(usr))
+		return
+
+	var/mob/user = usr
+	if(!user.incapacitated(INCAPACITATION_DISABLED))
 		if(!pull_mask)
-			to_chat(usr, "<span class ='notice'>You cannot pull down your [src.name].</span>")
+			to_chat(usr, SPAN_NOTICE("You cannot pull down your [src.name]."))
 			return
 		else
 			src.hanging = !src.hanging
@@ -66,4 +70,4 @@
 
 /obj/item/clothing/mask/attack_self(mob/user)
 	if(pull_mask)
-		adjust_mask(user)
+		adjust_mask()

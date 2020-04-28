@@ -1,8 +1,10 @@
-/mob/living/proc/convert_to_rev(mob/M as mob in able_mobs_in_oview(src))
+/mob/living/proc/convert_to_rev(mob/M in able_mobs_in_oview(src))
 	set name = "Recruit to Faction"
 	set category = "Abilities"
+
 	if(!M.mind || !M.client)
 		return
+
 	convert_to_faction(M.mind, GLOB.revs)
 
 /mob/living/proc/convert_to_faction(var/datum/mind/player, var/datum/antagonist/faction)
@@ -11,6 +13,10 @@
 		return
 
 	if(!faction.faction_verb || !faction.faction_descriptor || !faction.faction_verb)
+		return
+
+	if(!(src in able_mobs_in_oview(player.current)))
+		to_chat(src, "<span class='warning'>\The [player.current] can't see you.</span>")
 		return
 
 	if(player_is_antag(player))
@@ -32,6 +38,8 @@
 	player.rev_cooldown = world.time + 5 SECONDS
 	if (!faction.is_antagonist(player))
 		var/choice = alert(player.current,"Asked by [src]: Do you want to join the [faction.faction_descriptor]?","Join the [faction.faction_descriptor]?","No!","Yes!")
+		if(!(player.current in able_mobs_in_oview(src)))
+			return
 		if(choice == "Yes!" && faction.add_antagonist_mind(player, 0, faction.faction_role_text, faction.faction_welcome))
 			to_chat(src, "<span class='notice'>\The [player.current] joins the [faction.faction_descriptor]!</span>")
 			return
@@ -39,9 +47,11 @@
 			to_chat(player, "<span class='danger'>You reject this traitorous cause!</span>")
 	to_chat(src, "<span class='danger'>\The [player.current] does not support the [faction.faction_descriptor]!</span>")
 
-/mob/living/proc/convert_to_loyalist(mob/M as mob in able_mobs_in_oview(src))
+/mob/living/proc/convert_to_loyalist(mob/M in able_mobs_in_oview(src))
 	set name = "Convince Recidivist"
 	set category = "Abilities"
+
 	if(!M.mind || !M.client)
 		return
+
 	convert_to_faction(M.mind, GLOB.loyalists)

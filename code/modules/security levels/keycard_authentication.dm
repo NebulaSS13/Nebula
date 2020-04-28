@@ -3,6 +3,12 @@
 	desc = "This device is used to trigger functions which require more than one ID card to authenticate."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "auth_off"
+
+	anchored = TRUE
+	idle_power_usage = 2
+	active_power_usage = 6
+	power_channel = ENVIRON
+
 	var/active = 0 //This gets set to 1 on all devices except the one where the initial request was made.
 	var/event = ""
 	var/screen = 1
@@ -10,14 +16,11 @@
 	var/confirm_delay = 3 SECONDS
 	var/busy = 0 //Busy when waiting for authentication or an event request has been sent from this device.
 	var/obj/machinery/keycard_auth/event_source
+	var/weakref/initial_card
 	var/mob/event_triggered_by
 	var/mob/event_confirmed_by
 	//1 = select event
 	//2 = authenticate
-	anchored = 1.0
-	idle_power_usage = 2
-	active_power_usage = 6
-	power_channel = ENVIRON
 
 /obj/machinery/keycard_auth/attack_ai(mob/user)
 	to_chat(user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
@@ -28,17 +31,18 @@
 		to_chat(user, "This device is not powered.")
 		return
 	if(istype(W,/obj/item/card/id))
+		visible_message(SPAN_NOTICE("[user] swipes \the [W] through \the [src]."))
 		var/obj/item/card/id/ID = W
 		if(access_keycard_auth in ID.access)
-			if(active == 1)
-				//This is not the device that made the initial request. It is the device confirming the request.
-				if(event_source && event_source.event_triggered_by != usr)
+			if(active)
+				if(event_source && initial_card?.resolve() != ID)
 					event_source.confirmed = 1
-					event_source.event_confirmed_by = usr
+					event_source.event_confirmed_by = user
 				else
-					to_chat(user, "<span class='warning'>Unable to confirm, DNA matches that of origin.</span>")
+					visible_message(SPAN_WARNING("\The [src] blinks and displays a message: Unable to confirm the event with the same card."), range=2)
 			else if(screen == 2)
-				event_triggered_by = usr
+				event_triggered_by = user
+				initial_card = weakref(ID)
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
 
 //icon_state gets set everwhere besides here, that needs to be fixed sometime
@@ -116,26 +120,31 @@
 	icon_state = "auth_off"
 	event_triggered_by = null
 	event_confirmed_by = null
+	initial_card = null
 
 /obj/machinery/keycard_auth/proc/broadcast_request()
 	icon_state = "auth_on"
 	for(var/obj/machinery/keycard_auth/KA in world)
-		if(KA == src) continue
+		if(KA == src)
+			continue
 		KA.reset()
-		spawn()
-			KA.receive_request(src)
+		addtimer(CALLBACK(src, .proc/receive_request, src, initial_card.resolve()))
 
-	sleep(confirm_delay)
+	if(confirm_delay)
+		addtimer(CALLBACK(src, .proc/broadcast_check), confirm_delay)
+
+/obj/machinery/keycard_auth/proc/broadcast_check()
 	if(confirmed)
 		confirmed = 0
 		trigger_event(event)
 		log_and_message_admins("triggered and [key_name(event_confirmed_by)] confirmed event [event]", event_triggered_by || usr)
 	reset()
 
-/obj/machinery/keycard_auth/proc/receive_request(var/obj/machinery/keycard_auth/source)
+/obj/machinery/keycard_auth/proc/receive_request(var/obj/machinery/keycard_auth/source, obj/item/card/id/ID)
 	if(stat & (BROKEN|NOPOWER))
 		return
 	event_source = source
+	initial_card = weakref(ID)
 	busy = 1
 	active = 1
 	icon_state = "auth_on"
@@ -143,6 +152,7 @@
 	sleep(confirm_delay)
 
 	event_source = null
+	initial_card = null
 	icon_state = "auth_off"
 	active = 0
 	busy = 0
@@ -166,7 +176,7 @@
 			SSstatistics.add_field("alert_keycard_auth_maintRevoke",1)
 		if("Emergency Response Team")
 			if(is_ert_blocked())
-				to_chat(usr, "<span class='warning'>All emergency response teams are dispatched and can not be called at this time.</span>")
+				visible_message(SPAN_WARNING("\The [src] blinks and displays a message: All emergency response teams are dispatched and can not be called at this time."), range=2)
 				return
 
 			trigger_armed_response_team(1)
@@ -174,9 +184,9 @@
 		if("Grant Nuclear Authorization Code")
 			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in world
 			if(nuke)
-				to_chat(usr, "The nuclear authorization code is [nuke.r_code]")
+				visible_message(SPAN_WARNING("\The [src] blinks and displays a message: The nuclear authorization code is [nuke.r_code]"), range=2)
 			else
-				to_chat(usr, "No self destruct terminal found.")
+				visible_message(SPAN_WARNING("\The [src] blinks and displays a message: No self destruct terminal found."), range=2)
 			SSstatistics.add_field("alert_keycard_auth_nukecode",1)
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()

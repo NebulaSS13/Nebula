@@ -26,7 +26,7 @@
 /obj/item/anobattery/Destroy()
 	QDEL_NULL(battery_effect)
 	. = ..()
-	
+
 /obj/item/anodevice
 	name = "anomaly power utilizer"
 	desc = "APU allows users to safely (relatively) harness powers beyond their understanding, as long as they've been stored in anomaly power cells."
@@ -43,7 +43,7 @@
 /obj/item/anodevice/Destroy()
 	inserted_battery = null
 	. = ..()
-	
+
 /obj/item/anodevice/attackby(var/obj/I, var/mob/user)
 	if(istype(I, /obj/item/anobattery))
 		if(!inserted_battery)
@@ -155,6 +155,8 @@
 			. = TOPIC_REFRESH
 	else if(href_list["shutdown"])
 		shutdown_emission()
+		. = TOPIC_REFRESH
+	else if(href_list["refresh"])
 		. = TOPIC_REFRESH
 	else if(href_list["ejectbattery"])
 		shutdown_emission()
