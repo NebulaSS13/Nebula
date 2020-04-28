@@ -103,9 +103,3 @@
 		"It seems to draw you inward as you look it at.",
 		"Something twinkles faintly as you look at it.",
 		"It's mesmerizing to behold.")
-
-/client/verb/spawn_find()
-	var/list/finds = decls_repository.get_decls_of_type(/decl/archaeological_find)
-	var/find = input("What find") as anything in finds
-	var/decl/archaeological_find/F = finds[find]
-	F.create_find(get_turf(mob))
