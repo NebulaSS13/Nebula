@@ -390,6 +390,7 @@
 	icon_state = "trackjacket"
 	icon_open = "trackjacket_open"
 	icon_closed = "trackjacket"
+	body_parts_covered = UPPER_TORSO|ARMS
 
 /obj/item/clothing/suit/storage/toggle/track/blue
 	name = "blue track jacket"
@@ -398,13 +399,6 @@
 	icon_open = "trackjacketblue_open"
 	icon_closed = "trackjacketblue"
 
-/obj/item/clothing/suit/storage/toggle/track/green
-	name = "green track jacket"
-	desc = "A green track jacket, for the athletic."
-	icon_state = "trackjacketgreen"
-	icon_open = "trackjacketgreen_open"
-	icon_closed = "trackjacketgreen"
-
 /obj/item/clothing/suit/storage/toggle/track/red
 	name = "red track jacket"
 	desc = "A red track jacket, for the athletic."
@@ -412,19 +406,12 @@
 	icon_open = "trackjacketred_open"
 	icon_closed = "trackjacketred"
 
-/obj/item/clothing/suit/storage/toggle/track/white
-	name = "white track jacket"
-	desc = "A white track jacket, for the athletic."
-	icon_state = "trackjacketwhite"
-	icon_open = "trackjacketwhite_open"
-	icon_closed = "trackjacketwhite"
-
-/obj/item/clothing/suit/storage/toggle/track/gcc
-	name = "GCC track jacket"
-	desc = "An Independent track jacket, for the truly cheeki breeki."
-	icon_state = "trackjackettcc"
-	icon_open = "trackjackettcc_open"
-	icon_closed = "trackjackettcc"
+/obj/item/clothing/suit/storage/toggle/track/navy
+	name = "navy track jacket"
+	desc = "A navy track jacket, for the athletic."
+	icon_state = "trackjacketnavy"
+	icon_open = "trackjacketnavy_open"
+	icon_closed = "trackjacketnavy"
 
 /obj/item/clothing/suit/rubber
 	name = "human suit"
