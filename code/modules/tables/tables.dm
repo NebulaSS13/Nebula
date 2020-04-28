@@ -25,7 +25,7 @@
 
 	var/list/connections = list("nw0", "ne0", "sw0", "se0")
 	var/list/other_connections
-	
+
 /obj/structure/table/clear_connections()
 	connections = null
 	other_connections = null
@@ -56,7 +56,7 @@
 /obj/structure/table/destroyed()
 	visible_message(SPAN_DANGER("\The [src] breaks down!"))
 	. = break_to_parts()
-	
+
 /obj/structure/table/Destroy()
 	material = null
 	reinf_material = null
@@ -106,7 +106,7 @@
 		return 1
 
 	if(!carpeted && !reinf_material && !material && isWrench(W) && user.a_intent == I_HURT)
-		if(manipulating) 
+		if(manipulating)
 			return
 		manipulating = TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] begins dismantling \the [src]."))
@@ -130,6 +130,16 @@
 		var/obj/item/hand/H = W
 		if(H.cards && H.cards.len == 1)
 			usr.visible_message("\The [user] plays \the [H.cards[1].name].")
+
+	if(istype(W, /obj/item/deck)) //playing cards
+		if(user.a_intent == I_GRAB)
+			var/obj/item/deck/D = W
+			if(!D.cards.len)
+				to_chat(user, "There are no cards in the deck.")
+				return
+			D.deal_at(user, src)
+			return
+
 	return ..()
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
