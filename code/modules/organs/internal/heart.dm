@@ -156,7 +156,7 @@
 						blood_max += bleed_amount
 						do_spray += "[temp.name]"
 					else
-						owner.vessel.remove_reagent(/decl/reagent/blood, bleed_amount)
+						owner.vessel.remove_any(bleed_amount)
 
 		switch(pulse)
 			if(PULSE_SLOW)

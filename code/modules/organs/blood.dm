@@ -15,7 +15,7 @@
 	if(!should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
 
-	vessel.add_reagent(/decl/reagent/blood,species.blood_volume)
+	vessel.add_reagent(species.blood_reagent, species.blood_volume)
 	fixblood()
 
 //Resets blood data
@@ -28,7 +28,7 @@
 		"blood_type" = dna.b_type,
 		"trace_chem" = null
 	)
-	LAZYSET(vessel?.reagent_data, /decl/reagent/blood, blooddata)
+	LAZYSET(vessel.reagent_data, species.blood_reagent, blooddata)
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
@@ -107,7 +107,7 @@
 
 	amt *= ((src.mob_size/MOB_SIZE_MEDIUM) ** 0.5)
 
-	return vessel.remove_reagent(/decl/reagent/blood, amt)
+	return vessel.remove_any(amt)
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -115,7 +115,7 @@
 
 //Gets blood from mob to the container, preserving all data in it.
 /mob/living/carbon/proc/take_blood(obj/item/chems/container, var/amount)
-	container.reagents.add_reagent(/decl/reagent/blood, amount, get_blood_data())
+	container.reagents.add_reagent(species.blood_reagent, amount, get_blood_data())
 	return 1
 
 //For humans, blood does not appear from blue, it comes from vessels.
@@ -125,14 +125,14 @@
 		reagents.trans_to_obj(container, amount)
 		return 1
 
-	if(REAGENT_VOLUME(vessel, /decl/reagent/blood) < amount)
+	if(vessel.total_volume < amount)
 		return null
 	vessel.trans_to_holder(container.reagents, amount)
 	return 1
 
 //Transfers blood from container ot vessels
 /mob/living/carbon/proc/inject_blood(var/amount, var/datum/reagents/donor)
-	var/injected_data = REAGENT_DATA(donor, /decl/reagent/blood)
+	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
 	var/chems = LAZYACCESS(injected_data, "trace_chem")
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
@@ -140,13 +140,13 @@
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(var/amount, var/datum/reagents/donor)
 	if(!should_have_organ(BP_HEART))
-		reagents.add_reagent(/decl/reagent/blood, amount, REAGENT_DATA(donor, /decl/reagent/blood))
+		reagents.add_reagent(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
 		return
-	var/injected_data = REAGENT_DATA(donor, /decl/reagent/blood)
+	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
 	if(blood_incompatible(LAZYACCESS(injected_data, "blood_type"), LAZYACCESS(injected_data, "species")))
 		reagents.add_reagent(/decl/reagent/toxin, amount * 0.5)
 	else
-		vessel.add_reagent(/decl/reagent/blood, amount, injected_data)
+		vessel.add_reagent(species.blood_reagent, amount, injected_data)
 	..()
 
 /mob/living/carbon/human/proc/blood_incompatible(blood_type, blood_species)
@@ -172,10 +172,10 @@
 
 /mob/living/carbon/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
-	var/blood_volume_raw = REAGENT_VOLUME(vessel, /decl/reagent/blood)
+	var/blood_volume_raw = vessel.total_volume
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
-		vessel.add_reagent(/decl/reagent/blood, amount, get_blood_data())
+		vessel.add_reagent(species.blood_reagent, amount, get_blood_data())
 	return amount
 
 /mob/living/carbon/proc/get_blood_data()
@@ -225,7 +225,7 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 	var/blood_data
 	if(ishuman(source))
 		var/mob/living/carbon/human/donor = source
-		blood_data = REAGENT_DATA(donor.vessel, /decl/reagent/blood)
+		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
 	else if(isatom(source))
 		var/atom/donor = source
 		blood_data = REAGENT_DATA(donor.reagents, /decl/reagent/blood)
@@ -256,7 +256,7 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 
 //Percentage of maximum blood volume.
 /mob/living/carbon/human/proc/get_blood_volume()
-	return round((REAGENT_VOLUME(vessel, /decl/reagent/blood)/species.blood_volume)*100)
+	return round((vessel.total_volume/species.blood_volume)*100)
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
 /mob/living/carbon/human/proc/get_blood_circulation()

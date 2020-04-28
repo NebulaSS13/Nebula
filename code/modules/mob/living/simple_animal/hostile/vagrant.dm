@@ -60,9 +60,9 @@
 			gripping = null
 
 		else if(gripping.should_have_organ(BP_HEART))
-			var/blood_volume = round(REAGENT_VOLUME(gripping.vessel, /decl/reagent/blood))
+			var/blood_volume = round(gripping.vessel.total_volume)
 			if(blood_volume > 5)
-				gripping.vessel.remove_reagent(/decl/reagent/blood, blood_per_tick)
+				gripping.vessel.remove_any(blood_per_tick)
 				health = min(health + health_per_tick, maxHealth)
 				if(prob(15))
 					to_chat(gripping, "<span class='danger'>You feel your fluids being drained!</span>")

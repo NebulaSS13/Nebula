@@ -186,8 +186,10 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		if(my_atom)
 			SSchemistry.queue_reagent_change(my_atom)
 
-/datum/reagents/proc/has_reagent(var/reagent_type, var/amount = null)
-	. = REAGENT_VOLUME(src, reagent_type) >= amount
+/datum/reagents/proc/has_reagent(var/reagent_type, var/amount)
+	. = REAGENT_VOLUME(src, reagent_type)
+	if(. && amount)
+		. = (. >= amount)
 
 /datum/reagents/proc/has_any_reagent(var/list/check_reagents)
 	for(var/check in check_reagents)

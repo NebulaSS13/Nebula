@@ -114,9 +114,10 @@ var/list/organ_cache = list()
 		return
 
 	if(!owner && reagents)
-		if(prob(40) && REAGENT_VOLUME(reagents, /decl/reagent/blood) >= 0.1)
-			reagents.remove_reagent(/decl/reagent/blood, 0.1)
-			blood_splatter(get_turf(src), src, 1)
+		if(prob(40) && reagents.total_volume >= 0.1)
+			if(reagents.has_reagent(/decl/reagent/blood))
+				blood_splatter(get_turf(src), src, 1)
+			reagents.remove_any(0.1)
 		if(config.organs_decay)
 			take_general_damage(rand(1,3))
 		germ_level += rand(2,6)
@@ -276,10 +277,8 @@ var/list/organ_cache = list()
 
 	START_PROCESSING(SSobj, src)
 	rejecting = null
-	if(!BP_IS_PROSTHETIC(src))
-		var/list/blood_data = REAGENT_DATA(reagents, /decl/reagent/blood)
-		if(!blood_data || !blood_data["blood_DNA"])
-			owner.vessel.trans_to(src, 5, 1, 1)
+	if(!BP_IS_PROSTHETIC(src) && species && reagents?.total_volume < 5)
+		owner.vessel.trans_to(src, 5 - reagents.total_volume, 1, 1)
 
 	if(owner && vital)
 		if(user)

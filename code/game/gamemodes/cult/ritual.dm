@@ -100,7 +100,7 @@
 	return 0
 
 /mob/living/carbon/human/make_rune(var/rune, var/cost, var/tome_required)
-	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/decl/reagent/blood, species.blood_volume * 0.7))
+	if(should_have_organ(BP_HEART) && vessel && vessel.total_volume < species.blood_volume * 0.7)
 		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
 		return
 	..()
@@ -110,7 +110,7 @@
 
 /mob/living/carbon/human/remove_blood_simple(var/blood)
 	if(should_have_organ(BP_HEART))
-		vessel.remove_reagent(/decl/reagent/blood, blood)
+		vessel.remove_any(blood)
 
 /mob/proc/get_blood_name()
 	return "blood"

@@ -33,20 +33,19 @@
 		pulse_result = -3
 	scan["pulse"] = text2num(pulse_result)
 
-	scan["blood_pressure"] = H.get_blood_pressure()
-	scan["blood_o2"] = H.get_blood_oxygenation()
-	scan["blood_volume"] = REAGENT_VOLUME(H.vessel, /decl/reagent/blood)
-	scan["blood_volume_max"] = H.species.blood_volume
-	scan["temperature"] = H.bodytemperature
-	scan["trauma"] = H.getBruteLoss()
-	scan["burn"] = H.getFireLoss()
-	scan["toxin"] = H.getToxLoss()
-	scan["oxygen"] = H.getOxyLoss()
-	scan["radiation"] = H.radiation
-	scan["genetic"] = H.getCloneLoss()
-	scan["paralysis"] = H.paralysis
-	scan["immune_system"] = H.get_immunity()
-
+	scan["blood_pressure"] =   H.get_blood_pressure()
+	scan["blood_o2"] =         H.get_blood_oxygenation()
+	scan["blood_volume"] =     H.vessel.total_volume
+	scan["blood_volume_max"] = H.vessel.maximum_volume
+	scan["temperature"] =      H.bodytemperature
+	scan["trauma"] =           H.getBruteLoss()
+	scan["burn"] =             H.getFireLoss()
+	scan["toxin"] =            H.getToxLoss()
+	scan["oxygen"] =           H.getOxyLoss()
+	scan["radiation"] =        H.radiation
+	scan["genetic"] =          H.getCloneLoss()
+	scan["paralysis"] =        H.paralysis
+	scan["immune_system"] =    H.get_immunity()
 	scan["reagents"] = list()
 
 	if(H.reagents?.total_volume)

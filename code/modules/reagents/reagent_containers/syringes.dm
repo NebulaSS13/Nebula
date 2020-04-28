@@ -123,7 +123,7 @@
 		return
 
 	if(ismob(target))//Blood!
-		if(reagents.has_reagent(/decl/reagent/blood))
+		if(reagents.total_volume)
 			to_chat(user, "<span class='notice'>There is already a blood sample in this syringe.</span>")
 			return
 		if(istype(target, /mob/living/carbon))
@@ -137,7 +137,6 @@
 				if(istype(target, /mob/living/carbon/human))
 					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
-
 
 			var/allow = T.can_inject(user, check_zone(user.zone_sel.selecting))
 			if(!allow)
@@ -169,9 +168,7 @@
 				return
 
 			T.take_blood(src, amount)
-			to_chat(user, "<span class='notice'>You take a blood sample from [target].</span>")
-			for(var/mob/O in viewers(4, user))
-				O.show_message("<span class='notice'>[user] takes a blood sample from [target].</span>", 1)
+			user.visible_message(SPAN_NOTICE("\The [user] takes a blood sample from \the [target]."))
 
 	else //if not mob
 		if(!target.reagents.total_volume)
