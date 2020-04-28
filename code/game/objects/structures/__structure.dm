@@ -145,7 +145,11 @@
 
 /obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
-	take_damage(100*material.combustion_effect(get_turf(src),temperature, 0.3))
+	var/dmg = 100
+	if(material)
+		dmg = round(dmg * material.combustion_effect(get_turf(src),temperature, 0.3))
+	if(dmg)
+		take_damage(dmg)
 
 /obj/structure/Destroy()
 	reset_mobs_offset()
