@@ -411,11 +411,15 @@
 	return launched
 
 /obj/item/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
-	var/shot_sound = (istype(P) && P.fire_sound)? P.fire_sound : fire_sound
+	var/shot_sound = fire_sound
+	var/shot_sound_vol = 50
+	if((istype(P) && P.fire_sound))
+		shot_sound = P.fire_sound
+		shot_sound_vol = P.fire_sound_vol
 	if(silenced)
-		playsound(user, shot_sound, 10, 1)
-	else
-		playsound(user, shot_sound, 50, 1)
+		shot_sound_vol = 10
+	
+	playsound(user, shot_sound, shot_sound_vol, 1)
 
 //Suicide handling.
 /obj/item/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
