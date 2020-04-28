@@ -44,14 +44,22 @@
 /datum/unit_test/chemistry/proc/perform_transfer(var/atom/from, var/atom/target)
 	return validate_holders(from, target)
 
+/datum/unit_test/chemistry/proc/get_first_reagent_holder(var/atom/from)
+	. = from.reagents
+
+/datum/unit_test/chemistry/proc/get_second_reagent_holder(var/atom/from)
+	. = from.reagents
+
 /datum/unit_test/chemistry/proc/validate_transfer(var/atom/from, var/atom/target)
 	. = validate_holders(from, target)
 	if(!.)
 		var/to_holding_target = container_volume * 0.5
 		var/from_remaining_target = container_volume - to_holding_target
-		if(from.reagents.total_volume != from_remaining_target)
+		var/datum/reagents/checking = get_first_reagent_holder(from)
+		if(checking?.total_volume != from_remaining_target)
 			return "first holder should have [from_remaining_target]u remaining but has [from.reagents.total_volume]u."
-		if(target.reagents.total_volume != to_holding_target)
+		checking = get_second_reagent_holder(target)
+		if(checking?.total_volume != to_holding_target)
 			return "second holder should hold [to_holding_target]u but has [target.reagents.total_volume]u."
 
 /datum/unit_test/chemistry/proc/validate_holders(var/atom/from, var/atom/target)
@@ -80,9 +88,9 @@
 	name = "CHEMISTRY: trans_to() Test (mob)"
 	recipient_type = /mob/living/carbon
 
-/datum/unit_test/chemistry/test_trans_to/to_turf
-	name = "CHEMISTRY: trans_to() Test (turf)"
-	recipient_type = /turf/simulated/floor
+/datum/unit_test/chemistry/test_trans_to/to_mob/get_second_reagent_holder(var/atom/from)
+	var/mob/living/carbon/C = from
+	. = C.touching
 
 /datum/unit_test/chemistry/test_trans_to_holder
 	name = "CHEMISTRY: trans_to_holder() Test"
@@ -108,15 +116,6 @@
 	. = ..()
 	if(!.)
 		from.reagents.trans_to_mob(target, container_volume * 0.5)
-
-/datum/unit_test/chemistry/test_trans_to_turf
-	name = "CHEMISTRY: trans_to_turf() Test"
-	recipient_type = /turf/simulated/floor
-
-/datum/unit_test/chemistry/test_trans_to_turf/perform_transfer(var/atom/from, var/atom/target)
-	. = ..()
-	if(!.)
-		from.reagents.trans_to_turf(target, container_volume * 0.5)
 
 /datum/unit_test/reagent_colors_test
 	name = "CHEMISTRY: Reagents must have valid colors without alpha in color value"
