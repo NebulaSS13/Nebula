@@ -159,6 +159,7 @@
 /obj/item/storage/medical_lolli_jar
 	name = "lollipops jar"
 	desc = "A mixed pack of flavored medicinal lollipops. Perfect for small boo-boos."
+	icon = 'icons/obj/items/storage/lollijar.dmi'
 	icon_state = "lollijar"
 	max_storage_space = 20
 	startswith = list(/obj/item/clothing/mask/chewable/candy/lolli/weak_meds = 15)

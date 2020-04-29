@@ -22,6 +22,7 @@
 /obj/item/storage/box
 	name = "box"
 	desc = "It's just an ordinary box."
+	icon = 'icons/obj/items/storage/box.dmi'
 	icon_state = "box"
 	item_state = "syringe_kit"
 	max_storage_space = DEFAULT_BOX_STORAGE
@@ -152,6 +153,7 @@
 
 /obj/item/storage/box/ammo
 	name = "ammo box"
+	icon = 'icons/obj/items/storage/ammobox.dmi'
 	icon_state = "ammo"
 	desc = "A sturdy metal box with several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	use_sound = 'sound/effects/closet_open.ogg'
@@ -330,7 +332,6 @@
 /obj/item/storage/box/mousetraps
 	name = "box of Pest-B-Gon rat traps"
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
-	icon_state = "rat traps"
 	startswith = list(/obj/item/assembly/mousetrap = 6)
 
 /obj/item/storage/box/mousetraps/empty
@@ -380,7 +381,6 @@
 
 /obj/item/storage/box/lights
 	name = "box of replacement bulbs"
-	icon = 'icons/obj/storage.dmi'
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
@@ -436,7 +436,7 @@
 /obj/item/storage/box/freezer
 	name = "portable freezer"
 	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/items/storage/portafreezer.dmi'
 	icon_state = "portafreezer"
 	item_state = "medicalpack"
 	foldable = null
@@ -512,6 +512,7 @@
 /obj/item/storage/box/detergent
 	name = "detergent pods bag"
 	desc = "A bag full of juicy, yummy detergent pods. This bag has been labeled: Tod Pods, a Waffle Co. product."
+	icon = 'icons/obj/items/storage/detergent.dmi'
 	icon_state = "detergent"
 	startswith = list(/obj/item/chems/pill/detergent = 10)
 

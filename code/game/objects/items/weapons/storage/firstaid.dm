@@ -10,6 +10,7 @@
 /obj/item/storage/firstaid
 	name = "first-aid kit"
 	desc = "It's an emergency medical kit for those serious boo-boos."
+	icon = 'icons/obj/items/storage/firstaid.dmi'
 	icon_state = "firstaid"
 	throw_speed = 2
 	throw_range = 8
@@ -130,6 +131,7 @@
 /obj/item/storage/firstaid/surgery
 	name = "surgery kit"
 	desc = "Contains tools for surgery. Has precise foam fitting for safe transport and automatically sterilizes the content between uses."
+	icon = 'icons/obj/items/storage/surgerykit.dmi'
 	icon_state = "surgerykit"
 	item_state = "firstaid-surgery"
 

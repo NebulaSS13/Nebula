@@ -1,7 +1,7 @@
 /obj/item/clothingbag
 	name = "clothing bag"
 	desc = "A cheap plastic bag that contains a fresh set of clothes."
-	icon = 'icons/obj/trash.dmi'
+	icon = 'icons/obj/items/storage/trashbag.dmi'
 	icon_state = "trashbag3"
 
 	var/icon_used = "trashbag0"

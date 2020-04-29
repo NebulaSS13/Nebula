@@ -101,7 +101,7 @@
 /obj/random/toolbox
 	name = "random toolbox"
 	desc = "This is a random toolbox."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/items/storage/toolbox.dmi'
 	icon_state = "red"
 
 /obj/random/toolbox/spawn_choices()
@@ -182,7 +182,7 @@
 /obj/random/firstaid
 	name = "Random First Aid Kit"
 	desc = "This is a random first aid kit."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/items/storage/firstaid.dmi'
 	icon_state = "firstaid"
 
 /obj/random/firstaid/spawn_choices()
@@ -388,7 +388,7 @@
 /obj/random/junk //Broken items, or stuff that could be picked up
 	name = "random junk"
 	desc = "This is some random junk."
-	icon = 'icons/obj/trash.dmi'
+	icon = 'icons/obj/items/storage/trashbag.dmi'
 	icon_state = "trashbag3"
 
 /obj/random/junk/spawn_choices()
@@ -685,7 +685,7 @@ obj/random/obstruction/spawn_choices()
 /obj/random/storage
 	name = "random storage item"
 	desc = "This is a storage item."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/items/storage/box.dmi'
 	icon_state = "idOld"
 
 /obj/random/storage/spawn_choices()

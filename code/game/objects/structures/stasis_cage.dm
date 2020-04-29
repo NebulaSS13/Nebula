@@ -1,7 +1,7 @@
 /obj/structure/stasis_cage
 	name = "stasis cage"
 	desc = "A high-tech animal cage, designed to keep contained fauna docile and safe."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/stasis_cage.dmi'
 	icon_state = "stasis_cage"
 	density = 1
 	layer = ABOVE_OBJ_LAYER
