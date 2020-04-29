@@ -51,6 +51,8 @@
 	var/datum/sound_token/sound_token
 	var/fabricator_sound = 'sound/machines/fabricator_loop.ogg'
 
+	var/output_dir
+
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)
 	QDEL_NULL_LIST(queued_orders)

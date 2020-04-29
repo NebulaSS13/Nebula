@@ -20,8 +20,4 @@
 		MAT_URANIUM =   SHEET_MATERIAL_AMOUNT * 100,
 		MAT_DIAMOND =   SHEET_MATERIAL_AMOUNT * 100
 	)
-
-/obj/machinery/fabricator/industrial/do_build(var/datum/fabricator_recipe/recipe, var/amount)
-	. = ..()
-	for(var/atom/movable/product in .)
-		step(product, EAST)
+	output_dir = EAST

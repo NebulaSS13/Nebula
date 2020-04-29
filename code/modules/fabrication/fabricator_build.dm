@@ -16,6 +16,9 @@
 
 /obj/machinery/fabricator/proc/do_build(var/datum/fabricator_recipe/recipe, var/amount)
 	. = recipe.build(get_turf(src), amount)
+	if(output_dir)
+		for(var/atom/movable/product in .)
+			step(product, output_dir)
 
 /obj/machinery/fabricator/proc/start_building()
 	if(!(fab_status_flags & FAB_BUSY) && is_functioning())
