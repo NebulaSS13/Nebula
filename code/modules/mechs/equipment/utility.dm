@@ -4,7 +4,6 @@
 	icon_state = "mech_clamp"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	var/obj/carrying
 	origin_tech = "{'materials':2,'engineering':2}"
 	var/carrying_capacity = 5
 	var/list/obj/carrying = list()
