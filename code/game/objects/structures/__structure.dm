@@ -1,5 +1,5 @@
 /obj/structure
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/structures/barricade.dmi'
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER
 
