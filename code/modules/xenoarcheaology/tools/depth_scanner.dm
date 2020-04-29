@@ -1,7 +1,7 @@
 /obj/item/depth_scanner
 	name = "depth analysis scanner"
 	desc = "A device used to check spatial depth and density of rock outcroppings."
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/items/device/depth_scanner.dmi'
 	icon_state = "crap"
 	item_state = "analyzer"
 	origin_tech = "{'magnets':2,'engineering':2,'bluespace':2}"

@@ -1,6 +1,6 @@
 /obj/item/paicard
 	name = "personal AI device"
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/items/device/pai.dmi'
 	icon_state = "pai"
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL

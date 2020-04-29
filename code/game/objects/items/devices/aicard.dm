@@ -1,6 +1,6 @@
 /obj/item/aicard
 	name = "inteliCard"
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/items/device/ai_card.dmi'
 	icon_state = "aicard" // aicard-full
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
@@ -75,7 +75,7 @@
 	overlays.Cut()
 	if(carded_ai)
 		if (!carded_ai.control_disabled)
-			overlays += image('icons/obj/pda.dmi', "aicard-on")
+			overlays += image(icon, "aicard-on")
 		if(carded_ai.stat)
 			icon_state = "aicard-404"
 		else
