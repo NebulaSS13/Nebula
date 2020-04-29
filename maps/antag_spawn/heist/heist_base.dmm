@@ -28,7 +28,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "ah" = (
 /obj/structure/table/reinforced,
-/obj/item/tray{
+/obj/item/storage/tray{
 	pixel_y = 5
 	},
 /turf/unsimulated/floor{
@@ -748,7 +748,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bL" = (
 /obj/structure/table/woodentable,
-/obj/item/tray{
+/obj/item/storage/tray{
 	pixel_y = 5
 	},
 /obj/item/storage/backpack,
@@ -885,8 +885,7 @@
 "cd" = (
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
-	markup = 0
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	markup = 0products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"

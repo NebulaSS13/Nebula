@@ -1004,7 +1004,6 @@
 #include "code\game\objects\items\weapons\tools_crystal.dm"
 #include "code\game\objects\items\weapons\towels.dm"
 #include "code\game\objects\items\weapons\traps.dm"
-#include "code\game\objects\items\weapons\trays.dm"
 #include "code\game\objects\items\weapons\weaponry.dm"
 #include "code\game\objects\items\weapons\weldbackpack.dm"
 #include "code\game\objects\items\weapons\candle\candle.dm"

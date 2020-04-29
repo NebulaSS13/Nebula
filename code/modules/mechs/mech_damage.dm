@@ -29,8 +29,8 @@
 
 /mob/living/exosuit/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = ..()
-	if(body && body.armor)
-		var/body_armor = get_extension(body.armor, /datum/extension/armor)
+	if(body && body.m_armour)
+		var/body_armor = get_extension(body.m_armour, /datum/extension/armor)
 		if(body_armor)
 			. += body_armor
 
@@ -70,7 +70,7 @@
 	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, TRUE)
 	damage = after_armor[1]
 	damagetype = after_armor[2]
-
+	
 	if(!damage)
 		return 0
 
@@ -91,7 +91,14 @@
 
 	return 1
 
+/mob/living/exosuit/rad_act(var/severity)
+	if(severity)
+		apply_damage(severity, IRRADIATE, damage_flags = DAM_DISPERSED)
 
+/mob/living/exosuit/get_rads()
+	if(!hatch_closed || (body.pilot_coverage < 100)) //Open, environment is the source
+		return ..()
+	return radiation //Closed, what made it through our armour?
 
 /mob/living/exosuit/getFireLoss()
 	var/total = 0

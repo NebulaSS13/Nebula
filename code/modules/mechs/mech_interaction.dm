@@ -63,15 +63,20 @@
 	if(modifiers["shift"])
 		user.examinate(A)
 		return
+		
+	if(modifiers["ctrl"] && selected_system == A)
+		selected_system.CtrlClick(user)
+		setClickCooldown(3)
+		return	
 
 	if(!(user in pilots) && user != src)
 		return
 
+	if(!canClick())
+		return
+	
 	// Are we facing the target?
 	if(A.loc != src && !(get_dir(src, A) & dir))
-		return
-
-	if(!canClick())
 		return
 
 	if(!arms)

@@ -29,10 +29,21 @@
 		return
 	. = ..()
 
-/obj/item/storage/tray/proc/scatter_contents(var/neatly = FALSE)
+/obj/item/storage/tray/gather_all(var/turf/T, var/mob/user)
+	..()
+	update_icon()
+
+/obj/item/storage/tray/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(!proximity_flag)
+		return
+	if(istype(target, /obj/structure/table))
+		dump_contents(user, get_turf(target))
+
+/obj/item/storage/tray/proc/scatter_contents(var/neatly = FALSE, target_loc = get_turf(src))
 	set waitfor = 0
 	for(var/obj/item/I in contents)
-		if(remove_from_storage(I, get_turf(I)) && !neatly)
+		if(remove_from_storage(I, target_loc) && !neatly)
 			I.throw_at(get_edge_target_turf(I.loc, pick(GLOB.alldirs)), rand(1,3), round(10/I.w_class))
 	update_icon()
 
@@ -62,19 +73,16 @@
 	else
 		..()
 
-/obj/item/storage/tray/proc/dump_contents(var/mob/user)
-	set waitfor = 0
-	sleep(1)
-
-	if(!isturf(loc)) //to handle hand switching
+/obj/item/storage/tray/proc/dump_contents(var/mob/user, turf/new_loc = loc)
+	if(!isturf(new_loc)) //to handle hand switching
 		return
 
 	close(user)
-	if(!(locate(/obj/structure/table) in loc) && user && contents.len)
+	if(!(locate(/obj/structure/table) in new_loc) && user && contents.len)
 		visible_message(SPAN_DANGER("Everything falls off the [name]! Good job, [user]."))
-		scatter_contents()
+		scatter_contents(FALSE, new_loc)
 	else
-		scatter_contents(TRUE)
+		scatter_contents(TRUE, new_loc)
 
 /obj/item/storage/tray/dropped(mob/user)
 	. = ..()
@@ -84,7 +92,10 @@
 	..()
 	overlays.Cut()
 	for(var/obj/item/I in contents)
-		overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer, "pixel_x" = I.pixel_x, "pixel_y" = I.pixel_y)
+		var/mutable_appearance/MA = new(I)
+		MA.layer = FLOAT_LAYER
+		MA.appearance_flags = RESET_COLOR
+		overlays += MA
 
 /obj/item/storage/tray/examine(mob/user) // So when you look at the tray you can see whats on it.
 	. = ..()

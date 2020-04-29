@@ -113,3 +113,8 @@ GLOBAL_LIST_INIT(light_strike_sound,\
 	list(\
 		'sound/effects/hit_kick.ogg',
 		'sound/effects/hit_punch.ogg'))
+		
+GLOBAL_LIST_INIT(tray_hit_sound,\
+	list(\
+		'sound/items/trayhit1.ogg',
+		'sound/items/trayhit2.ogg'))
