@@ -17,11 +17,6 @@
 	desc = "They suspend the illusion of the mime's play."
 	icon_state = "suspenders_color"
 
-/obj/item/clothing/accessory/tunic
-	name = "researcher's tunic"
-	desc = "A fashionable tunic that EXO provides to their lab workers."
-	icon_state = "tunic"
-
 /obj/item/clothing/accessory/dashiki
 	name = "black dashiki"
 	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is green and black."

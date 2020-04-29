@@ -1,46 +1,42 @@
-/obj/item/clothing/suit/storage/toggle/labcoat/rd/heph
-	name = "\improper HI research director's labcoat"
-	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Hephaestus Industries management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
-	icon_state = "labcoat_rd_heph_open"
-	icon_open = "labcoat_rd_heph_open"
-	icon_closed = "labcoat_rd_heph"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/rd/zeng
-	name = "\improper Z-H research director's labcoat"
-	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Zeng-Hu Pharmaceuticals management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
-	icon_state = "labcoat_rd_zeng_open"
-	icon_open = "labcoat_rd_zeng_open"
-	icon_closed = "labcoat_rd_zeng"
+/obj/item/clothing/suit/storage/toggle/labcoat/science/corp
+	name = "\improper EXO labcoat"
+	desc = "A coat that protects against minor chemical spills. It has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Expeditionary Corps Organisation labcoat."
+	icon_state = "labcoat_TL_open"
+	icon_open = "labcoat_TL_open"
+	icon_closed = "labcoat_TL"
+	item_icons = list(slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_suit.dmi')
+	icon = 'mods/corporate/icons/obj/clothing/obj_suit.dmi'
 
-/obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
+/obj/item/clothing/suit/storage/toggle/labcoat/science/corp/nanotrasen
 	name = "\improper NanoTrasen labcoat"
 	desc = "A suit that protects against minor chemical spills. it has a red stripe on the shoulder and red trim on the sleeves, denoting it as a NanoTrasen labcoat."
 	icon_state = "labcoat_nt_open"
 	icon_open = "labcoat_nt_open"
 	icon_closed = "labcoat_nt"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/science/heph
+/obj/item/clothing/suit/storage/toggle/labcoat/science/corp/heph
 	name = "\improper Hephaestus Industries labcoat"
 	desc = "A suit that protects against minor chemical spills. It has a cyan stripe on the shoulder and cyan trim on the sleeves, denoting it as a Hephaestus Industries labcoat."
 	icon_state = "labcoat_heph_open"
 	icon_open = "labcoat_heph_open"
 	icon_closed = "labcoat_heph"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/science/zeng
+/obj/item/clothing/suit/storage/toggle/labcoat/science/corp/zeng
 	name = "\improper Zeng-Hu labcoat"
 	desc = "A suit that protects against minor chemical spills. It has a cyan stripe on the shoulder and cyan trim on the sleeves, denoting it as a Zeng-Hu Pharmaceuticals labcoat."
 	icon_state = "labcoat_zeng_open"
 	icon_open = "labcoat_zeng_open"
 	icon_closed = "labcoat_zeng"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/science/morpheus
+/obj/item/clothing/suit/storage/toggle/labcoat/science/corp/morpheus
 	name = "\improper Morpheus Cyberkinetics labcoat"
 	desc = "A suit that protects against minor chemical spills. It has a gray stripe on the shoulder and gray trim on the sleeves, denoting it as a Morpheus Cyberkinetics labcoat."
 	icon_state = "labcoat_morpheus_open"
 	icon_open = "labcoat_morpheus_open"
 	icon_closed = "labcoat_morpheus"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/science/dais
+/obj/item/clothing/suit/storage/toggle/labcoat/science/corp/dais
 	name = "\improper DAIS labcoat"
 	desc = "A labcoat with a the logo of Deimos Advanced Information Systems emblazoned on the back. It has a stylish blue \
 	trim and the pockets are reinforced to hold tools. It seems to have an insulated material woven in to prevent static shocks."
@@ -52,9 +48,32 @@
 	)//They don't need to protect against the environment very much.
 	siemens_coefficient = 0.5 //These guys work with electronics. DAIS's labcoats shouldn't conduct very well.
 
-/obj/item/clothing/suit/storage/toggle/labcoat/rd/nanotrasen
+/obj/item/clothing/suit/storage/toggle/labcoat/rd/corp
+	name = "\improper EXO research director's labcoat"
+	desc = "A full-body labcoat covered in green and black designs, denoting it as an Expeditionary Corps Organisation management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	icon_state = "labcoat_rd_open"
+	icon_open = "labcoat_rd_open"
+	icon_closed = "labcoat_rd"
+	item_icons = list(slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_suit.dmi')
+	icon = 'mods/corporate/icons/obj/clothing/obj_suit.dmi'
+
+/obj/item/clothing/suit/storage/toggle/labcoat/rd/corp/nanotrasen
 	name = "\improper NT research director's labcoat"
 	desc = "A full-body labcoat covered in red and black designs, denoting it as a NanoTrasen management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_nt_open"
 	icon_open = "labcoat_rd_nt_open"
 	icon_closed = "labcoat_rd_nt"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/rd/corp/heph
+	name = "\improper HI research director's labcoat"
+	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Hephaestus Industries management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	icon_state = "labcoat_rd_heph_open"
+	icon_open = "labcoat_rd_heph_open"
+	icon_closed = "labcoat_rd_heph"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/rd/corp/zeng
+	name = "\improper Z-H research director's labcoat"
+	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Zeng-Hu Pharmaceuticals management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	icon_state = "labcoat_rd_zeng_open"
+	icon_open = "labcoat_rd_zeng_open"
+	icon_closed = "labcoat_rd_zeng"
