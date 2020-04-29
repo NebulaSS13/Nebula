@@ -6,7 +6,6 @@
 	name = " "
 	var/base_name = " "
 	desc = ""
-	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
 	item_state = "null"
 	amount_per_transfer_from_this = 10
@@ -107,7 +106,7 @@
 /obj/item/chems/glass/beaker
 	name = "beaker"
 	desc = "A beaker."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/items/chem/beaker.dmi'
 	icon_state = "beaker"
 	item_state = "beaker"
 	center_of_mass = @"{'x':15,'y':10}"
@@ -212,6 +211,7 @@
 /obj/item/chems/glass/beaker/vial
 	name = "vial"
 	desc = "A small glass vial."
+	icon = 'icons/obj/items/chem/vial.dmi'
 	icon_state = "vial"
 	center_of_mass = @"{'x':15,'y':8}"
 	volume = 30

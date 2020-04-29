@@ -1,6 +1,7 @@
 /obj/item/chems/chem_disp_cartridge
 	name = "cartridge"
 	desc = "This goes in a chemical dispenser."
+	icon = 'icons/obj/items/chem/chem_cartridge.dmi'
 	icon_state = "cartridge"
 
 	w_class = ITEM_SIZE_NORMAL

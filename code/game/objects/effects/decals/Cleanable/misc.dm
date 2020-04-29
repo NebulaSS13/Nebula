@@ -60,7 +60,7 @@
 /obj/effect/decal/cleanable/molten_item
 	name = "gooey grey mass"
 	desc = "It looks like a melted... something."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/effects/molten_item.dmi'
 	icon_state = "molten"
 	persistent = TRUE
 	generic_filth = TRUE

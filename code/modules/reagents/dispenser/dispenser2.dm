@@ -1,6 +1,6 @@
 /obj/machinery/chemical_dispenser
 	name = "chemical dispenser"
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/machines/chemistry/dispenser.dmi'
 	icon_state = "dispenser"
 	layer = BELOW_OBJ_LAYER
 	clicksound = "button"
@@ -182,6 +182,6 @@
 	overlays.Cut()
 	if(container)
 		var/mutable_appearance/beaker_overlay
-		beaker_overlay = image('icons/obj/chemical.dmi', src, "lil_beaker")
+		beaker_overlay = image(src, src, "lil_beaker")
 		beaker_overlay.pixel_x = rand(-10, 5)
 		overlays += beaker_overlay
