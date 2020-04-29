@@ -1,7 +1,7 @@
 /obj/item/auto_cpr
 	name = "auto-compressor"
 	desc = "A device that gives regular compression to the victim's ribcage, used in case of urgent heart issues."
-	icon = 'icons/obj/auto_cpr.dmi'
+	icon = 'icons/obj/items/device/auto_cpr.dmi'
 	icon_state = "pumper"
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'magnets':2,'biotech':2}"

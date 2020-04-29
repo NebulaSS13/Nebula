@@ -1,7 +1,7 @@
 /obj/item/curtain
 	name = "rolled curtain"
 	desc = "A rolled curtains."
-	icon = 'icons/obj/curtain.dmi'
+	icon = 'icons/obj/structures/curtain.dmi'
 	icon_state = "curtain_rolled"
 	force = 3 //just plastic
 	w_class = ITEM_SIZE_HUGE //curtains, yeap
@@ -41,7 +41,7 @@
 
 /obj/structure/curtain
 	name = "curtain"
-	icon = 'icons/obj/curtain.dmi'
+	icon = 'icons/obj/structures/curtain.dmi'
 	icon_state = "closed"
 	layer = ABOVE_WINDOW_LAYER
 	opacity = TRUE

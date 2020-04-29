@@ -1,7 +1,7 @@
 /obj/item/pen/crayon
 	name = "crayon"
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
-	icon = 'icons/obj/crayons.dmi'
+	icon = 'icons/obj/items/crayons.dmi'
 	icon_state = "crayonred"
 	w_class = ITEM_SIZE_TINY
 	attack_verb = list("attacked", "coloured")

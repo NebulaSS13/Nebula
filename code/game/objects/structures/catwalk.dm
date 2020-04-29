@@ -1,7 +1,7 @@
 /obj/structure/catwalk
 	name = "catwalk"
 	desc = "Cats really don't like these things."
-	icon = 'icons/obj/catwalks.dmi'
+	icon = 'icons/obj/structures/catwalks.dmi'
 	icon_state = "catwalk"
 	density = 0
 	anchored = 1.0
@@ -55,10 +55,10 @@
 	var/image/I
 	if(!hatch_open)
 		for(var/i = 1 to 4)
-			I = image('icons/obj/catwalks.dmi', "catwalk[connections ? connections[i] : "0"]", dir = 1<<(i-1))
+			I = image(icon, "catwalk[connections ? connections[i] : "0"]", dir = 1<<(i-1))
 			overlays += I
 	if(plated_tile)
-		I = image('icons/obj/catwalks.dmi', "plated")
+		I = image(icon, "plated")
 		I.color = plated_tile.color
 		overlays += I
 
@@ -140,7 +140,7 @@
 
 /obj/effect/catwalk_plated
 	name = "plated catwalk spawner"
-	icon = 'icons/obj/catwalks.dmi'
+	icon = 'icons/obj/structures/catwalks.dmi'
 	icon_state = "catwalk_plated"
 	density = 1
 	anchored = 1.0

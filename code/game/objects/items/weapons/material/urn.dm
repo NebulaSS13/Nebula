@@ -1,7 +1,7 @@
 /obj/item/material/urn
 	name = "urn"
 	desc = "A vase used to store the ashes of the deceased."
-	icon = 'icons/obj/urn.dmi'
+	icon = 'icons/obj/items/urn.dmi'
 	icon_state = "urn"
 	applies_material_colour = TRUE
 	w_class = ITEM_SIZE_SMALL

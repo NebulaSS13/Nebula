@@ -2,7 +2,7 @@
 
 /obj/item/material/shard
 	name = "shard"
-	icon = 'icons/obj/shards.dmi'
+	icon = 'icons/obj/items/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
 	randpixel = 8
@@ -86,7 +86,7 @@
 	overlays.Cut()
 	. = ..()
 	if(has_handle)
-		var/image/I = image('icons/obj/shards.dmi', "handle")
+		var/image/I = image(icon, "handle")
 		I.appearance_flags |= RESET_COLOR
 		I.color = has_handle
 		overlays += I

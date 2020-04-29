@@ -38,7 +38,7 @@
 /obj/effect/vine
 	name = "vine"
 	anchored = 1
-	icon = 'icons/obj/hydroponics_growing.dmi'
+	icon = 'icons/obj/hydroponics/hydroponics_growing.dmi'
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 1

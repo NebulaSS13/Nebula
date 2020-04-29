@@ -78,7 +78,7 @@
 /obj/item/storage/fancy/crayons
 	name = "box of crayons"
 	desc = "A box of crayons for all your rune drawing needs."
-	icon = 'icons/obj/crayons.dmi'
+	icon = 'icons/obj/items/crayons.dmi'
 	icon_state = "crayonbox"
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
@@ -96,9 +96,9 @@
 
 /obj/item/storage/fancy/crayons/on_update_icon()
 	overlays = list() //resets list
-	overlays += image('icons/obj/crayons.dmi',"crayonbox")
+	overlays += image(icon,"crayonbox")
 	for(var/obj/item/pen/crayon/crayon in contents)
-		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
+		overlays += image(icon,crayon.colourName)
 
 ////////////
 //CIG PACK//

@@ -1,7 +1,7 @@
 /obj/item/ironingiron
 	name = "iron"
 	desc = "An ironing iron for ironing your iro- err... clothes."
-	icon = 'icons/obj/ironing.dmi'
+	icon = 'icons/obj/items/clothes_iron.dmi'
 	icon_state = "iron"
 	item_state = "ironingiron"
 	w_class = ITEM_SIZE_NORMAL

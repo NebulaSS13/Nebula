@@ -17,7 +17,7 @@
 	. = ..()
 	if(isspace(loc))
 		return INITIALIZE_HINT_QDEL
-	hud_overlay = new /image/hud_overlay('icons/obj/hud_tile.dmi', src, "caution")
+	hud_overlay = new /image/hud_overlay('icons/effects/hud_tile.dmi', src, "caution")
 	hud_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	set_cleanable_scent()
 
