@@ -64,12 +64,10 @@
 		user.examinate(A)
 		return
 		
-	if(modifiers["ctrl"])
-		if(selected_system)
-			if(selected_system == A)
-				selected_system.CtrlClick(user)
-				setClickCooldown(3)
-			return	
+	if(modifiers["ctrl"] && selected_system == A)
+		selected_system.CtrlClick(user)
+		setClickCooldown(3)
+		return	
 
 	if(!(user in pilots) && user != src)
 		return
