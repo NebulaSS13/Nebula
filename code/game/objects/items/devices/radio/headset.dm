@@ -2,6 +2,7 @@
 	name = "radio headset"
 	desc = "An updated, modular intercom that fits over the head. Takes encryption keys."
 	var/radio_desc = ""
+	icon = 'icons/obj/items/device/radio/headset.dmi'
 	icon_state = "headset"
 	item_state = "headset"
 	material = MAT_ALUMINIUM

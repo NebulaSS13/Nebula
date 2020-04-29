@@ -1,6 +1,7 @@
 /obj/item/radio/beacon
 	name = "tracking beacon"
 	desc = "A beacon used by a teleporter."
+	icon = 'icons/obj/items/device/radio/beacon.dmi'
 	icon_state = "beacon"
 	item_state = "signaler"
 	origin_tech = "{'bluespace':1}"

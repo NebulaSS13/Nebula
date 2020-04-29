@@ -32,8 +32,8 @@
 /obj/item/radio_beacon
 	name = "radio beacon"
 	desc = "Device capable of continuously broadcasting a signal that can be picked up by ship sensors."
-	icon = 'icons/obj/radio.dmi'
-	icon_state = "walkietalkie"
+	icon = 'icons/obj/items/device/radio/beacon.dmi'
+	icon_state = "beacon"
 	var/obj/effect/overmap/radio/signal
 
 /obj/item/radio_beacon/attack_self(mob/user)
