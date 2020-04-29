@@ -59,9 +59,6 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	var/temperature = my_atom ? my_atom.temperature : T20C
 	for(var/thing in reagent_volumes)
 		var/decl/reagent/R = decls_repository.get_decl(thing)
-		if(R.custom_temperature_effects(temperature, src))
-			reaction_occured = TRUE
-			continue
 
 		// Check if the reagent is decaying or not.
 		var/list/replace_self_with

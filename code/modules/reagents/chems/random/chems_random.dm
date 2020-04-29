@@ -22,22 +22,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	hidden_from_codex = TRUE
 	var/max_effect_number = 8
 	var/list/data = list()
-
-/decl/reagent/random/New(var/datum/reagents/holder, var/override = FALSE)
-	if(override)
-		return // This is used for random prototypes, so we bypass further init
-	return ..(holder)
-
-/decl/reagent/random/initialize_data(var/list/newdata)
-	var/decl/reagent/random/other = SSchemistry.get_prototype(type)
-	if(istype(newdata))
-		data = newdata.Copy()
-	else
-		data = other.data.Copy()
-	chilling_products = other.chilling_products
-	heating_products = other.heating_products
-	recompute_properties()
-	. = data
+	var/initialized = FALSE
 
 /decl/reagent/random/proc/randomize_data(temperature)
 	data = list()
@@ -62,43 +47,12 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	heating_products = list()
 	for(var/i in 1 to rand(1,3))
 		heating_products += pick_n_take(whitelist)
-	
-	for(var/decl/random_chem_effect/random_properties/effect in decls)
-		effect.set_caches(src, whitelist)
+
+	initialized = TRUE
 
 /decl/reagent/random/proc/stable_at_temperature(temperature)
 	if(temperature > chilling_point && temperature < heating_point)
 		return TRUE
-
-/decl/reagent/random/mix_data(var/datum/reagents/reagents, var/list/other_data, var/amount)
-	var/volume = REAGENT_VOLUME(reagents, type)
-	if(volume <= 0)
-		return ..() // ?? but we're about to divide by 0 if this happens, so let's avoid.
-	var/old_amount = max(volume - amount, 0) // how much we had prior to the addition
-	var/ratio = old_amount/volume
-	FOR_ALL_EFFECTS
-		data[effect.type] = effect.mix_data(data[effect.type], ratio, other_data[effect.type])
-	. = data
-
-/decl/reagent/random/proc/recompute_properties()
-	FOR_ALL_EFFECTS
-		effect.on_property_recompute(src, data[effect.type])
-
-/decl/reagent/random/custom_temperature_effects(var/temperature, var/datum/reagents/reagents)
-	if(temperature in (heating_point - 20) to heating_point)
-		FOR_ALL_EFFECTS
-			var/result = effect.distillation_act(src, reagents, data[effect.type])
-			if(!isnull(result))
-				data[effect.type] = result
-				. = TRUE
-	else if(temperature in chilling_point to (chilling_point + 20))
-		FOR_ALL_EFFECTS
-			var/result = effect.cooling_act(src, reagents, data[effect.type])
-			if(!isnull(result))
-				data[effect.type] = result
-				. = TRUE
-	if(.)
-		reagents.my_atom.visible_message("The chemicals in \the [reagents.my_atom] bubble slightly!")
 
 /decl/reagent/random/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	FOR_ALL_EFFECTS
@@ -121,7 +75,6 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		var/beneficial
 		var/harmful
 		var/list/effect_descs = list()
-		var/list/interactions = list()
 		FOR_ALL_EFFECTS
 			if(effect.beneficial > 0)
 				beneficial = 1
@@ -129,9 +82,6 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 				harmful = 1
 			if(effect.desc)
 				effect_descs += effect.desc
-			var/interaction = effect.get_interactions(src, sci_skill, chem_skill)
-			if(interaction)
-				interactions += interaction
 		if(sci_skill <= SKILL_ADEPT)
 			if(beneficial)
 				dat += "The scan suggests that the chemical has some potentially beneficial effects!"
@@ -139,11 +89,6 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 				dat += "The readings confirm that the chemical is not safe for human use."
 		else
 			dat += "A close analysis of the scan suggests that the chemical has some of the following effects: [english_list(effect_descs)]."
-		if(chem_skill == SKILL_ADEPT)
-			dat += "You aren't sure how this chemical will react with other reagents, but it does seem to be sensitive to changes in temperature."
-		else
-			dat += "Here are the chemicals you suspect this one will interact with, probably when heated or cooled:"
-			dat += JOINTEXT(interactions)
 	return jointext(dat, "<br>")
 
 /decl/reagent/random/get_value()

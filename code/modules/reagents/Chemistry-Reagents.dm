@@ -128,8 +128,5 @@
 /decl/reagent/proc/ex_act(obj/item/chems/holder, severity)
 	return
 
-/decl/reagent/proc/custom_temperature_effects(var/temperature)
-	return
-
 /decl/reagent/proc/get_value()
 	. = value

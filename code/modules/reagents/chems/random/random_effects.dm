@@ -19,27 +19,13 @@
 		if(RANDOM_CHEM_EFFECT_FLOAT)
 			return rand() * (maximum - minimum) + minimum
 
-/decl/random_chem_effect/proc/mix_data(first_value, first_ratio, second_value)
-	switch(mode)
-		if(RANDOM_CHEM_EFFECT_TRUE)
-			return !!(first_value * first_ratio + second_value * (1 - first_ratio)) // Basically |, unless ratio is 0 or 1
-		if(RANDOM_CHEM_EFFECT_INT)
-			return round(first_value * first_ratio + second_value * (1 - first_ratio))
-		if(RANDOM_CHEM_EFFECT_FLOAT)
-			return first_value * first_ratio + second_value * (1 - first_ratio)
-
-/decl/random_chem_effect/proc/prototype_process(var/decl/reagent/random/prototype, temperature)
-	prototype.data[type] = get_random_value()
+/decl/random_chem_effect/proc/prototype_process(var/decl/reagent/random/reagent, temperature)
+	var/value = get_random_value(temperature)
+	on_property_recompute(reagent, value)
 
 /decl/random_chem_effect/proc/on_property_recompute(var/decl/reagent/random/reagent, var/value)
 
 /decl/random_chem_effect/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
-
-/decl/random_chem_effect/proc/distillation_act(var/decl/reagent/random/reagent, var/datum/reagents/reagents)
-
-/decl/random_chem_effect/proc/cooling_act(var/decl/reagent/random/reagent, var/datum/reagents/reagents)
-
-/decl/random_chem_effect/proc/get_interactions()
 
 // This is referring to monetary value.
 /decl/random_chem_effect/proc/get_value(var/value)
@@ -61,26 +47,11 @@
 /decl/random_chem_effect/general_properties/name/on_property_recompute(var/decl/reagent/random/reagent, var/value)
 	reagent.name = "[initial(reagent.name)]-[value]"
 
-/decl/random_chem_effect/general_properties/color_r
-	maximum = 255
-	mode = RANDOM_CHEM_EFFECT_INT
+/decl/random_chem_effect/general_properties/color/get_random_value()
+	return color_rotation(round(rand(0,360),20))
 
-/decl/random_chem_effect/general_properties/color_g
-	maximum = 255
-	mode = RANDOM_CHEM_EFFECT_INT
-
-/decl/random_chem_effect/general_properties/color_b
-	maximum = 255
-	mode = RANDOM_CHEM_EFFECT_INT
-
-/decl/random_chem_effect/general_properties/color_r/on_property_recompute(var/decl/reagent/random/reagent, var/value)
-	/*
-	reagent.color = rgb(\
-		reagent.data[/decl/random_chem_effect/general_properties/color_r],\
-		reagent.data[/decl/random_chem_effect/general_properties/color_r],\
-		reagent.data[/decl/random_chem_effect/general_properties/color_b]
-	)
-	*/
+/decl/random_chem_effect/general_properties/color/on_property_recompute(var/decl/reagent/random/reagent, var/value)
+	reagent.color = value
 
 /decl/random_chem_effect/general_properties/overdose
 	minimum = REAGENTS_OVERDOSE * 0.2
@@ -109,12 +80,6 @@
 	var/min = max(min(generic_minimum, max - 20), minimum) // Use the generic min as min unless that's above the max - margin
 	return rand() * (max - min) + min
 
-/decl/random_chem_effect/general_properties/chilling_point/prototype_process(var/decl/reagent/random/prototype, temperature = T20C)
-	prototype.data[type] = get_random_value(temperature)
-
-/decl/random_chem_effect/general_properties/chilling_point/on_property_recompute(var/decl/reagent/random/reagent, var/value)
-	reagent.chilling_point = value
-
 /decl/random_chem_effect/general_properties/heating_point
 	minimum = T0C + 60
 	var/generic_maximum = T0C + 180
@@ -126,96 +91,17 @@
 	var/max = min(max(generic_maximum, min + 20), maximum)
 	return rand() * (max - min) + min
 
-/decl/random_chem_effect/general_properties/heating_point/prototype_process(var/decl/reagent/random/prototype, temperature = T20C)
-	prototype.data[type] = get_random_value(temperature)
-
-/decl/random_chem_effect/general_properties/heating_point/on_property_recompute(var/decl/reagent/random/reagent, var/value)
-	reagent.heating_point = value
-
 // Only some random properties are picked.
 
 /decl/random_chem_effect/random_properties
 	var/chem_effect_define                //If it corresponds to a CE_WHATEVER define, place here and it will do generic affect blood based on it
-	var/list/distillation_inhibitor_cache // Format: list(type = list(reagent types))
-	var/list/cooling_enhancer_cache
-	var/list/reaction_rate_cache
-	var/number_of_reaction_modifiers = 3
-
-/decl/random_chem_effect/random_properties/proc/set_caches(var/decl/reagent/random/prototype, var/list/whitelist)
-	LAZYSET(reaction_rate_cache, prototype.type, 1.5 * rand() + 0.5)
-	for(var/i = 1, i <= number_of_reaction_modifiers, i++)
-		if(length(whitelist))
-			LAZYINITLIST(distillation_inhibitor_cache)
-			LAZYADD(distillation_inhibitor_cache[prototype.type], pick_n_take(whitelist))
-		if(length(whitelist))
-			LAZYINITLIST(cooling_enhancer_cache)
-			LAZYADD(cooling_enhancer_cache[prototype.type], pick_n_take(whitelist))
-
-/decl/random_chem_effect/random_properties/distillation_act(var/decl/reagent/random/reagent, var/datum/reagents/reagents, var/value)
-	var/list/inhibitors = distillation_inhibitor_cache[reagent.type]
-	if(reagents.has_any_reagent(inhibitors))
-		return
-	return purify(reagent, reagents, value)
-
-/decl/random_chem_effect/random_properties/cooling_act(var/decl/reagent/random/reagent, var/datum/reagents/reagents, var/value)
-	var/list/enhancers = cooling_enhancer_cache[reagent.type]
-	if(!reagents.has_any_reagent(enhancers))
-		return
-	return purify(reagent, reagents, value)
-
-/decl/random_chem_effect/random_properties/proc/purify(var/decl/reagent/random/reagent, var/datum/reagents/reagents, var/value)
-	var/target = reagents.has_reagent(/decl/reagent/toxin/phoron) ? minimum : maximum
-	if(target == value)
-		return
-	var/rate = reaction_rate_cache[reagent.type]
-	switch(mode)
-		if(RANDOM_CHEM_EFFECT_TRUE)
-			if(prob(10 * rate))
-				return target
-			return value // this will keep us reacting
-		if(RANDOM_CHEM_EFFECT_INT)
-			var/amount = (target - value) * rate * 0.1
-			if(abs(amount) >= 1)
-				return round(amount + value)
-			else if(prob(100 * abs(amount)))
-				return value + sign(amount)
-			return value
-		if(RANDOM_CHEM_EFFECT_FLOAT)
-			var/resolution = (maximum - minimum)/100
-			var/new_val = value + (target - value) * rate * 0.1
-			var/round_dir = new_val > value ? -1 : 1                                   // Rounds up if going up, to nearest percent of max - min
-			new_val = round(round_dir * new_val / resolution) * round_dir * resolution // makes this finish in finite time to save processing power.
-			return new_val
-
-/decl/random_chem_effect/random_properties/cooling_act(var/decl/reagent/random/reagent, var/datum/reagents/reagents)
 
 /decl/random_chem_effect/random_properties/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
 	if(chem_effect_define)
 		M.add_chemical_effect(chem_effect_define, value)
 
-/decl/random_chem_effect/random_properties/get_interactions(var/decl/reagent/random/reagent, var/sci_skill, var/chem_skill)
-	if(chem_skill < SKILL_EXPERT)
-		return
-	. = list("<br>")
-	if(sci_skill > SKILL_ADEPT)
-		. += "For [desc]:<br>"
-	var/list/interactions = list()
-	if(chem_skill == SKILL_PROF)
-		. += "Heating: "
-	for(var/interaction in distillation_inhibitor_cache[reagent.type])
-		var/decl/reagent/R = interaction
-		interactions += initial(R.name)
-	if(chem_skill == SKILL_PROF)
-		. += english_list(interactions)
-		interactions.Cut()
-		. += ". Cooling: "
-	for(var/interaction in cooling_enhancer_cache[reagent.type])
-		var/decl/reagent/R = interaction
-		interactions += initial(R.name)
-	if(chem_skill <= SKILL_PROF)
-		shuffle(interactions)
-	. += english_list(interactions)
-	. += "."
+/decl/random_chem_effect/random_properties/on_property_recompute(var/decl/reagent/random/reagent, var/value)
+	reagent.data[type] = value
 
 /decl/random_chem_effect/random_properties/ce_stable
 	chem_effect_define = CE_STABLE
