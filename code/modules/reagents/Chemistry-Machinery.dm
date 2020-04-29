@@ -7,7 +7,7 @@
 	name = "\improper ChemMaster 3000"
 	density = 1
 	anchored = 1
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/machines/chemistry/chemmaster.dmi'
 	icon_state = "mixer0"
 	layer = BELOW_OBJ_LAYER
 	idle_power_usage = 20
@@ -250,9 +250,9 @@
 		spawn()
 			has_sprites += user.client
 			for(var/i = 1 to MAX_PILL_SPRITE)
-				send_rsc(usr, icon('icons/obj/chemical.dmi', "pill" + num2text(i)), "pill[i].png")
+				send_rsc(usr, icon('icons/obj/items/chem/pill.dmi', "pill" + num2text(i)), "pill[i].png")
 			for(var/sprite in BOTTLE_SPRITES)
-				send_rsc(usr, icon('icons/obj/chemical.dmi', sprite), "[sprite].png")
+				send_rsc(usr, icon('icons/obj/items/chem/bottle.dmi', sprite), "[sprite].png")
 	var/dat = list()
 	dat += "<TITLE>[name]</TITLE>"
 	dat += "[name] Menu:"

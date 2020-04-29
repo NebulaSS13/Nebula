@@ -133,7 +133,6 @@ obj/item/paper/prof2
 /obj/item/chems/glass/bottle/tericadone
 	name = "tericadone bottle"
 	desc = "A small bottle."
-	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
 /obj/item/chems/glass/bottle/tericadone/Initialize()

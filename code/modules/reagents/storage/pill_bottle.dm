@@ -5,7 +5,7 @@
 	name = "pill bottle"
 	desc = "It's an airtight container for storing medication."
 	icon_state = "pill_canister"
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/items/storage/pillbottle.dmi'
 	item_state = "contsolid"
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
