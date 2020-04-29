@@ -6,19 +6,19 @@ var/list/floating_chat_colors = list()
 
 /atom/movable/proc/animate_chat(message, decl/language/language, small, list/show_to, duration)
 	set waitfor = FALSE
-	
+
 	var/style	//additional style params for the message
 	var/fontsize = 6
 	if(small)
 		fontsize = 5
 	var/limit = 50
-	if(copytext(message, length(message) - 1) == "!!")
+	if(copytext_char(message, length_char(message) - 1) == "!!")
 		fontsize = 8
 		limit = 30
 		style += "font-weight: bold;"
 
-	if(length(message) > limit)
-		message = "[copytext(message, 1, limit)]..."
+	if(length_char(message) > limit)
+		message = "[copytext_char(message, 1, limit)]..."
 
 	if(!floating_chat_colors[name])
 		floating_chat_colors[name] = get_random_colour(0,160,230)
@@ -35,7 +35,7 @@ var/list/floating_chat_colors = list()
 			else
 				C.images += gibberish
 
-/proc/generate_floating_text(atom/movable/holder, message, style, size, duration, show_to)	
+/proc/generate_floating_text(atom/movable/holder, message, style, size, duration, show_to)
 	var/image/I = image(null, holder)
 	I.layer=FLY_LAYER
 	I.alpha = 0
@@ -48,11 +48,11 @@ var/list/floating_chat_colors = list()
 	style = "font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: [size]px; [style]"
 	I.maptext = "<center><span style=\"[style]\">[message]</span></center>"
 	animate(I, 1, alpha = 255, pixel_y = 16)
-	
+
 	for(var/image/old in holder.stored_chat_text)
 		animate(old, 2, pixel_y = old.pixel_y + 8)
 	LAZYADD(holder.stored_chat_text, I)
-	
+
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_floating_text, holder, I), duration)
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_images_from_clients, I, show_to), duration + 2)
 
