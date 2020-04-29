@@ -45,9 +45,6 @@ GLOBAL_LIST_INIT(science_strings, list(
 	if(href_list["start"] && started_on == 0)
 		started_on = world.timeofday
 		current_interval = rand(MINIMUM_SCIENCE_INTERVAL, MAXIMUM_SCIENCE_INTERVAL) SECONDS
-		// Better processors can do this faster. Normal processors are slower.
-		var/obj/item/stock_parts/computer/processor_unit/processor = computer.get_component(PART_CPU)
-		current_interval = (processor.processing_power / 2) * current_interval
 		next_event = (rand(MINIMUM_FOLDING_EVENT_INTERVAL, MAXIMUM_FOLDING_EVENT_INTERVAL) SECONDS) + world.timeofday
 
 	if(href_list["collect"] && started_on > 0 && !crashed)
