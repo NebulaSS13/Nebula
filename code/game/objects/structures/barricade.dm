@@ -1,6 +1,7 @@
 //Barricades!
 /obj/structure/barricade
 	name = "barricade"
+	icon = 'icons/obj/structures/barricade.dmi'
 	icon_state = "barricade"
 	anchored = 1.0
 	density = 1
