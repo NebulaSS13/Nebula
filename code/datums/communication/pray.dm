@@ -6,7 +6,7 @@
 	mute_setting = MUTE_PRAY
 
 /decl/communication_channel/pray/do_communicate(var/mob/communicator, var/message, var/speech_method_type)
-	var/image/cross = image('icons/obj/storage.dmi',"bible")
+	var/image/cross = image('icons/obj/items/storage/bible.dmi',"bible")
 	for(var/m in GLOB.player_list)
 		var/mob/M = m
 		if(!M.client)

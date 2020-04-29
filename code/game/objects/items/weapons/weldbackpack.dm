@@ -2,7 +2,7 @@
 	name = "welding kit"
 	desc = "An unwieldy, heavy backpack with two massive fuel tanks. Includes a connector for most models of portable welding tools."
 	slot_flags = SLOT_BACK
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/items/welderpack.dmi'
 	icon_state = "welderpack"
 	w_class = ITEM_SIZE_HUGE
 	var/max_fuel = 350

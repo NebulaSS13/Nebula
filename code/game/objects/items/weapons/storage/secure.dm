@@ -101,7 +101,7 @@
 				else if ((src.code == src.l_code) && (src.emagged == 0) && (src.l_set == 1))
 					src.locked = 0
 					overlays.Cut()
-					overlays += image('icons/obj/storage.dmi', icon_opened)
+					overlays += image(icon, icon_opened)
 					src.code = null
 				else
 					src.code = "ERROR"
@@ -130,10 +130,10 @@
 /obj/item/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	if(!emagged)
 		emagged = 1
-		src.overlays += image('icons/obj/storage.dmi', icon_sparking)
+		src.overlays += image(icon, icon_sparking)
 		sleep(6)
 		overlays.Cut()
-		overlays += image('icons/obj/storage.dmi', icon_locking)
+		overlays += image(icon, icon_locking)
 		locked = 0
 		to_chat(user, (feedback ? feedback : "You short out the lock of \the [src]."))
 		return 1
@@ -143,7 +143,7 @@
 // -----------------------------
 /obj/item/storage/secure/briefcase
 	name = "secure briefcase"
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/items/storage/briefcase.dmi'
 	icon_state = "secure"
 	item_state = "sec-case"
 	desc = "A large briefcase with a digital locking system."
@@ -174,7 +174,7 @@
 
 /obj/item/storage/secure/safe
 	name = "secure safe"
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/items/storage/safe.dmi'
 	icon_state = "safe"
 	icon_opened = "safe0"
 	icon_locking = "safeb"

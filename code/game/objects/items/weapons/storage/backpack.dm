@@ -10,6 +10,7 @@
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_backpacks.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_backpacks.dmi',
 		)
+	icon = 'icons/obj/items/storage/backpack/backpack.dmi'
 	icon_state = "backpack"
 	item_state = null
 	//most backpacks use the default backpack state for inhand overlays
@@ -83,6 +84,7 @@
 /obj/item/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
+	icon = 'icons/obj/items/storage/giftbag.dmi'
 	icon_state = "giftbag0"
 	item_state = "giftbag"
 	w_class = ITEM_SIZE_HUGE
@@ -153,6 +155,7 @@
 /obj/item/storage/backpack/rucksack
 	name = "black rucksack"
 	desc = "A sturdy military-grade backpack with low-profile straps. Designed to work well with armor."
+	icon = 'icons/obj/items/storage/backpack/rucksack.dmi'
 	icon_state = "rucksack"
 	item_state_slots = list(slot_l_hand_str = "rucksack", slot_r_hand_str = "rucksack")
 
@@ -183,6 +186,7 @@
 /obj/item/storage/backpack/dufflebag
 	name = "dufflebag"
 	desc = "A large dufflebag for holding extra things."
+	icon = 'icons/obj/items/storage/backpack/dufflebag.dmi'
 	icon_state = "duffle"
 	item_state_slots = null
 	w_class = ITEM_SIZE_HUGE
@@ -258,6 +262,7 @@
 /obj/item/storage/backpack/satchel
 	name = "satchel"
 	desc = "A trendy looking satchel."
+	icon = 'icons/obj/items/storage/backpack/satchel.dmi'
 	icon_state = "satchel-norm"
 
 /obj/item/storage/backpack/satchel/grey
@@ -295,6 +300,7 @@
 /obj/item/storage/backpack/satchel/pocketbook //black, master type
 	name = "black pocketbook"
 	desc = "A neat little folding clasp pocketbook with a shoulder sling."
+	icon = 'icons/obj/items/storage/backpack/pocketbook.dmi'
 	icon_state = "pocketbook"
 	w_class = ITEM_SIZE_HUGE // to avoid recursive backpacks
 	slot_flags = SLOT_BACK
@@ -441,6 +447,7 @@
 /obj/item/storage/backpack/messenger
 	name = "messenger bag"
 	desc = "A sturdy backpack worn over one shoulder."
+	icon = 'icons/obj/items/storage/backpack/messenger.dmi'
 	icon_state = "courierbag"
 
 /obj/item/storage/backpack/messenger/chem
