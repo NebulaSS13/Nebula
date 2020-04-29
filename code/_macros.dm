@@ -103,7 +103,7 @@
 #define sound_to(target, sound)                             target << (sound)
 #define to_file(file_entry, source_var)                     file_entry << (source_var)
 #define from_file(file_entry, target_var)                   file_entry >> (target_var)
-#define show_browser(target, browser_content, browser_name) target << browse(browser_content, browser_name)
+#define show_browser(target, browser_content, browser_name) target << browse(META_UTF(browser_content), browser_name)
 #define close_browser(target, browser_name)                 target << browse(null, browser_name)
 #define show_image(target, image)                           target << (image)
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
@@ -174,5 +174,7 @@
 #define FONT_HUGE(X) "<font size='4'>[X]</font>"
 
 #define FONT_GIANT(X) "<font size='5'>[X]</font>"
+
+#define META_UTF(X) "<meta charset=\"UTF-8\">[X]"
 
 #define crash_with(X) crash_at(X, __FILE__, __LINE__)

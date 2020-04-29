@@ -59,21 +59,17 @@
 		to_chat(src, SPAN_WARNING("The Discord server URL is not set in the server configuration."))
 	return
 
-#define RULES_FILE "config/rules.html"
 /client/verb/rules()
 	set name = "Rules"
 	set desc = "Show Server Rules."
 	set hidden = 1
-	show_browser(src, file(RULES_FILE), "window=rules;size=480x320")
-#undef RULES_FILE
+	show_browser(src, file("config/rules.html"), "window=rules;size=480x320")
 
-#define LORE_FILE "config/lore.html"
 /client/verb/lore_splash()
 	set name = "Lore"
 	set desc = "Links to the beginner Lore wiki."
 	set hidden = 1
-	show_browser(src, file(LORE_FILE), "window=lore;size=480x320")
-#undef LORE_FILE
+	show_browser(src, file("config/lore.html"), "window=lore;size=480x320")
 
 /client/verb/hotkeys_help()
 	set name = "Hotkeys Help"
