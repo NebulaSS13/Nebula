@@ -2,7 +2,7 @@
 /obj/item/material/knife //master obj
 	name = "knife"
 	desc = "You call that a knife? This is a master item - berate the admin or mapper who spawned this"
-	icon = 'icons/obj/knife.dmi'
+	icon = 'icons/obj/items/weapon/knife.dmi'
 	icon_state = "knife"
 	item_state = "knife"
 	material_force_multiplier = 0.3

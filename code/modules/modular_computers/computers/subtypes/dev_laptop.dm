@@ -4,7 +4,7 @@
 	desc = "A portable clamshell computer."
 	hardware_flag = PROGRAM_LAPTOP
 	icon_state_unpowered = "laptop-open"
-	icon = 'icons/obj/modular_laptop.dmi'
+	icon = 'icons/obj/modular_computers/modular_laptop.dmi'
 	icon_state = "laptop-open"
 	w_class = ITEM_SIZE_NORMAL
 	base_idle_power_usage = 25

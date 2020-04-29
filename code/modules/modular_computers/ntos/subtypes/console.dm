@@ -1,7 +1,7 @@
 /datum/extension/interactive/ntos/console
 	expected_type = /obj/machinery
-	screen_icon_file = 'icons/obj/modular_console.dmi'
-	
+	screen_icon_file = 'icons/obj/modular_computers/modular_console.dmi'
+
 /datum/extension/interactive/ntos/console/get_hardware_flag()
 	return PROGRAM_CONSOLE
 
@@ -60,5 +60,5 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		return os.check_eye()
-	else 
+	else
 		return ..()

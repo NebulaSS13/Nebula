@@ -1,7 +1,7 @@
 /obj/structure/closet/statue //what
 	name = "statue"
 	desc = "An incredibly lifelike marble carving."
-	icon = 'icons/obj/statue.dmi'
+	icon = 'icons/obj/structures/statue.dmi'
 	icon_state = "human_male"
 	density = 1
 	anchored = 1

@@ -1,7 +1,7 @@
 /obj/item/modular_computer/pda
 	name = "\improper PDA"
 	desc = "A very compact computer, designed to keep its user always connected."
-	icon = 'icons/obj/modular_pda.dmi'
+	icon = 'icons/obj/modular_computers/modular_pda.dmi'
 	icon_state = "pda"
 	icon_state_unpowered = "pda"
 	hardware_flag = PROGRAM_PDA

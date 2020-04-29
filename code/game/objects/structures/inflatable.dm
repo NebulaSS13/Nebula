@@ -1,7 +1,7 @@
 /obj/item/inflatable
 	name = "inflatable"
 	w_class = ITEM_SIZE_NORMAL
-	icon = 'icons/obj/inflatable.dmi'
+	icon = 'icons/obj/structures/inflatable.dmi'
 	atmos_canpass = CANPASS_DENSITY
 	var/deploy_path = null
 	var/inflatable_health
@@ -43,7 +43,7 @@
 	density = 1
 	anchored = 1
 	opacity = 0
-	icon = 'icons/obj/inflatable.dmi'
+	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "wall"
 	maxhealth = 20
 	hitsound = 'sound/effects/Glasshit.ogg'
@@ -278,7 +278,7 @@
 /obj/item/inflatable/torn
 	name = "torn inflatable wall"
 	desc = "A folded membrane which rapidly expands into a large cubical shape on activation. It is too torn to be usable."
-	icon = 'icons/obj/inflatable.dmi'
+	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "folded_wall_torn"
 
 	attack_self(mob/user)
@@ -288,7 +288,7 @@
 /obj/item/inflatable/door/torn
 	name = "torn inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation. It is too torn to be usable."
-	icon = 'icons/obj/inflatable.dmi'
+	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "folded_door_torn"
 
 	attack_self(mob/user)

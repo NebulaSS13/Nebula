@@ -2,7 +2,7 @@
 	name = "portable cooling unit"
 	desc = "A large portable heat sink with liquid cooled radiator packaged into a modified backpack."
 	w_class = ITEM_SIZE_LARGE
-	icon = 'icons/obj/suitcooler.dmi'
+	icon = 'icons/obj/items/suitcooler.dmi'
 	icon_state = "suitcooler0"
 	item_state = "coolingpack"			// beautiful codersprites until someone makes a prettier one.
 	slot_flags = SLOT_BACK

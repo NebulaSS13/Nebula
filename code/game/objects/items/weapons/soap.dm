@@ -2,7 +2,7 @@
 	name = "soap"
 	desc = "A cheap bar of soap. Doesn't smell."
 	gender = PLURAL
-	icon = 'icons/obj/soap.dmi'
+	icon = 'icons/obj/items/soap.dmi'
 	icon_state = "soap"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	w_class = ITEM_SIZE_SMALL
@@ -100,6 +100,6 @@
 /obj/item/soap/on_update_icon()
 	overlays.Cut()
 	if(key_data)
-		overlays += image('icons/obj/soap.dmi', icon_state = "soap_key_overlay")
+		overlays += image(icon, icon_state = "soap_key_overlay")
 	else if(decal_name)
 		overlays +=	overlay_image(icon, "decal-[decal_name]")

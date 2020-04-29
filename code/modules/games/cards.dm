@@ -19,7 +19,7 @@
 
 /obj/item/deck
 	w_class = ITEM_SIZE_SMALL
-	icon = 'icons/obj/playing_cards.dmi'
+	icon = 'icons/obj/items/playing_cards.dmi'
 	var/list/cards = list()
 
 /obj/item/deck/inherit_custom_item_data(var/datum/custom_item/citem)
@@ -257,7 +257,7 @@
 	desc = "For those with disposible income."
 
 	icon_state = "card_pack"
-	icon = 'icons/obj/playing_cards.dmi'
+	icon = 'icons/obj/items/playing_cards.dmi'
 	w_class = ITEM_SIZE_TINY
 	var/list/cards = list()
 
@@ -276,7 +276,7 @@
 /obj/item/hand
 	name = "hand of cards"
 	desc = "Some playing cards."
-	icon = 'icons/obj/playing_cards.dmi'
+	icon = 'icons/obj/items/playing_cards.dmi'
 	icon_state = "empty"
 	w_class = ITEM_SIZE_TINY
 

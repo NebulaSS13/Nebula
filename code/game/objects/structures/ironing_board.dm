@@ -1,7 +1,7 @@
 /obj/structure/bed/roller/ironingboard
 	name = "ironing board"
 	desc = "An ironing board to unwrinkle your wrinkled clothing."
-	icon = 'icons/obj/ironing.dmi'
+	icon = 'icons/obj/structures/ironing.dmi'
 	item_form_type = /obj/item/roller/ironingboard
 	iv_stand = FALSE
 
@@ -147,5 +147,5 @@
 /obj/item/roller/ironingboard
 	name = "ironing board"
 	desc = "A collapsed ironing board that can be carried around."
-	icon = 'icons/obj/ironing.dmi'
+	icon = 'icons/obj/structures/ironing.dmi'
 	structure_form_type = /obj/structure/bed/roller/ironingboard

@@ -15,7 +15,7 @@ GLOBAL_DATUM_INIT(global_hud, /datum/global_hud, new())
 /datum/global_hud/proc/setup_overlay(icon_state, color)
 	var/obj/screen/screen = new /obj/screen()
 	screen.screen_loc = ui_entire_screen
-	screen.icon = 'icons/obj/hud_full.dmi'
+	screen.icon = 'icons/effects/hud_full.dmi'
 	screen.icon_state = icon_state
 	screen.plane = FULLSCREEN_PLANE
 	screen.layer = FULLSCREEN_LAYER

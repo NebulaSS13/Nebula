@@ -1,6 +1,6 @@
 /obj/structure/iv_drip
 	name = "\improper IV drip"
-	icon = 'icons/obj/iv_drip.dmi'
+	icon = 'icons/obj/structures/iv_drip.dmi'
 	anchored = 0
 	density = 0
 	var/mob/living/carbon/human/attached
@@ -35,7 +35,7 @@
 		var/datum/reagents/reagents = beaker.reagents
 		var/percent = round((reagents.total_volume / beaker.volume) * 100)
 		if(reagents.total_volume)
-			var/image/filling = image('icons/obj/iv_drip.dmi', src, "reagent")
+			var/image/filling = image(icon, src, "reagent")
 
 			switch(percent)
 				if(0 to 9)		filling.icon_state = "reagent0"
@@ -49,7 +49,7 @@
 			overlays += filling
 
 		if(attached)
-			var/image/light = image('icons/obj/iv_drip.dmi', "light_full")
+			var/image/light = image(icon, "light_full")
 			if(percent < 15)
 				light.icon_state = "light_low"
 			else if(percent < 60)

@@ -9,7 +9,7 @@
 /obj/item/stock_parts/smes_coil
 	name = "superconductive magnetic coil"
 	desc = "Standard superconductive magnetic coil with average capacity and I/O rating."
-	icon = 'icons/obj/stock_parts.dmi'
+	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
 	w_class = ITEM_SIZE_LARGE							// It's LARGE (backpack size)
 	origin_tech = "{'materials':7,'powerstorage':7,'engineering':5}"

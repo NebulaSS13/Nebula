@@ -1,7 +1,7 @@
 /obj/item/boombox
 	name = "boombox"
 	desc = "A device used to emit rhythmic sounds, colloquialy refered to as a 'boombox'. It's in a retro style (massive), and absolutely unwieldy."
-	icon = 'icons/obj/boombox.dmi'
+	icon = 'icons/obj/items/device/boombox.dmi'
 	icon_state = "off"
 	item_state = "boombox"
 	force = 7

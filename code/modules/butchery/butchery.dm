@@ -63,7 +63,7 @@
 	desc = "It looks pretty sharp."
 	anchored = TRUE
 	density =  TRUE
-	icon = 'icons/obj/butchery.dmi'
+	icon = 'icons/obj/structures/butchery.dmi'
 	icon_state = "spike"
 	material = MAT_STEEL
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME

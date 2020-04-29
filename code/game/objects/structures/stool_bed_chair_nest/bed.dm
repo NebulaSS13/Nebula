@@ -159,7 +159,7 @@
  */
 /obj/structure/bed/roller
 	name = "roller bed"
-	icon = 'icons/obj/rollerbed.dmi'
+	icon = 'icons/obj/structures/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
 	buckle_pixel_shift = @"{'x':0,'y':0,'z':6}"
@@ -276,7 +276,7 @@
 /obj/item/roller
 	name = "roller bed"
 	desc = "A collapsed roller bed that can be carried around."
-	icon = 'icons/obj/rollerbed.dmi'
+	icon = 'icons/obj/structures/rollerbed.dmi'
 	icon_state = "folded"
 	item_state = "rbed"
 	slot_flags = SLOT_BACK
@@ -291,7 +291,7 @@
 /obj/item/robot_rack/roller
 	name = "roller bed rack"
 	desc = "A rack for carrying collapsed roller beds. Can also be used for carrying ironing boards."
-	icon = 'icons/obj/rollerbed.dmi'
+	icon = 'icons/obj/structures/rollerbed.dmi'
 	icon_state = "folded"
 	object_type = /obj/item/roller
 	interact_type = /obj/structure/bed/roller
