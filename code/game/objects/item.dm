@@ -8,6 +8,8 @@
 	var/randpixel = 6
 	var/r_speed = 1.0
 	var/health = null
+	var/max_health
+	var/material_health_multiplier = 0.2
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = "swing_hit"

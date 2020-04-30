@@ -387,8 +387,8 @@ Class Procs:
 		var/line = "<span class='notice'>	[C.name]</span>"
 		if(!C.health)
 			line = "<span class='warning'>	[C.name] (destroyed)</span>"
-		else if(C.health < initial(C.health))
-			line = "<span class='warning'>	[C.name] (damaged)</span>"
+		else if(C.health < 0.75 * C.max_health)
+			line = "<span class='notice'>	[C.name] (damaged)</span>"
 		to_chat(user, line)
 	for(var/path in uncreated_component_parts)
 		var/obj/item/thing = path

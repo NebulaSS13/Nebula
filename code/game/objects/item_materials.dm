@@ -61,7 +61,8 @@
 	if(new_material)
 		material = SSmaterials.get_material_datum(new_material)
 	if(istype(material))
-		health = round(material.integrity/5)
+		health = round(material_health_multiplier * material.integrity)
+		max_health = health
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)
