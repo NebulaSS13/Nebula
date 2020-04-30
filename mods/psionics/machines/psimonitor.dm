@@ -1,6 +1,6 @@
 /obj/machinery/psi_monitor
 	name = "psionic implant monitor"
-	icon = 'icons/obj/machines/psimeter.dmi'
+	icon = 'mods/psionics/icons/psimeter.dmi'
 	icon_state = "meter_on"
 	use_power = POWER_USE_ACTIVE
 	anchored = TRUE

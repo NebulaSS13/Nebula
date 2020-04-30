@@ -12,7 +12,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 /obj/machinery/portable_atmospherics/hydroponics/ascent
 	name = "mantid algae vat"
 	desc = "Some kind of strange alien hydroponics technology."
-	icon = 'icons/obj/machines/mantid_hydroponics.dmi'
+	icon = 'mods/ascent/icons/mantid_hydroponics.dmi'
 	closed_system = TRUE
 	construct_state = /decl/machine_construction/default/no_deconstruct
 	base_type = /obj/machinery/portable_atmospherics/hydroponics
@@ -46,8 +46,8 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 /obj/machinery/recharge_station/ascent
 	name = "mantid recharging dock"
 	desc = "An oddly organic aperture stuffed with power connectors."
-	icon = 'icons/obj/machines/mantid_charger.dmi'
-	overlay_icon = 'icons/obj/machines/mantid_charger.dmi'
+	icon = 'mods/ascent/icons/mantid_charger.dmi'
+	overlay_icon = 'mods/ascent/icons/mantid_charger.dmi'
 	construct_state = /decl/machine_construction/default/no_deconstruct
 	base_type = /obj/machinery/recharge_station
 
@@ -55,14 +55,14 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	name = "mantid scanner console"
 	desc = "Some kind of strange alien console technology."
 	req_access = list(access_ascent)
-	icon = 'icons/obj/ascent_sleepers.dmi'
+	icon = 'mods/ascent/icons/ascent_sleepers.dmi'
 	construct_state = /decl/machine_construction/default/no_deconstruct
 	base_type = /obj/machinery/body_scanconsole
 
 /obj/machinery/bodyscanner/ascent
 	name = "mantid body scanner"
 	desc = "Some kind of strange alien body scanning technology."
-	icon = 'icons/obj/ascent_sleepers.dmi'
+	icon = 'mods/ascent/icons/ascent_sleepers.dmi'
 	construct_state = /decl/machine_construction/default/no_deconstruct
 	base_type = /obj/machinery/bodyscanner
 
@@ -75,7 +75,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 /obj/machinery/sleeper/ascent
 	name = "mantid sleeper"
 	desc = "Some kind of strange alien sleeper technology."
-	icon = 'icons/obj/ascent_sleepers.dmi'
+	icon = 'mods/ascent/icons/ascent_sleepers.dmi'
 	base_type = /obj/machinery/sleeper
 	construct_state = /decl/machine_construction/default/no_deconstruct
 
@@ -87,7 +87,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 /obj/machinery/fabricator/ascent
 	name = "\improper Ascent nanofabricator"
 	desc = "A squat, complicated fabrication system clad in purple polymer."
-	icon = 'icons/obj/machines/fabricators/nanofabricator.dmi'
+	icon = 'mods/ascent/icons/nanofabricator.dmi'
 	icon_state = "nanofab"
 	base_icon_state = "nanofab"
 	req_access = list(access_ascent)
@@ -106,15 +106,15 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 
 /obj/machinery/door/airlock/ascent
 	desc = "Some kind of strange alien door technology."
-	icon =                'icons/obj/doors/ascent/base.dmi'
-	bolts_file =          'icons/obj/doors/ascent/lights_bolts.dmi'
-	deny_file =           'icons/obj/doors/ascent/lights_deny.dmi'
-	lights_file =         'icons/obj/doors/ascent/lights_green.dmi'
-	panel_file =          'icons/obj/doors/ascent/panel.dmi'
-	sparks_damaged_file = 'icons/obj/doors/ascent/sparks_damaged.dmi'
-	sparks_broken_file =  'icons/obj/doors/ascent/sparks_broken.dmi'
-	welded_file =         'icons/obj/doors/ascent/welded.dmi'
-	emag_file =           'icons/obj/doors/ascent/emag.dmi'
+	icon =                'mods/ascent/icons/doors/base.dmi'
+	bolts_file =          'mods/ascent/icons/doors/lights_bolts.dmi'
+	deny_file =           'mods/ascent/icons/doors/lights_deny.dmi'
+	lights_file =         'mods/ascent/icons/doors/lights_green.dmi'
+	panel_file =          'mods/ascent/icons/doors/panel.dmi'
+	sparks_damaged_file = 'mods/ascent/icons/doors/sparks_damaged.dmi'
+	sparks_broken_file =  'mods/ascent/icons/doors/sparks_broken.dmi'
+	welded_file =         'mods/ascent/icons/doors/welded.dmi'
+	emag_file =           'mods/ascent/icons/doors/emag.dmi'
 
 /obj/machinery/door/airlock/ascent/set_airlock_overlays(state)
 	return

@@ -1,6 +1,6 @@
 /obj/item/tableflag
 	name = "table flag"
-	icon = 'icons/obj/items/table_flag.dmi'
+	icon = 'mods/government/icons/table_flag.dmi'
 	icon_state = "tableflag"
 	force = 0.5
 	w_class = ITEM_SIZE_SMALL

@@ -11,7 +11,7 @@
 			thing.color = null
 
 /obj/screen/borer
-	icon = 'icons/mob/borer_ui.dmi'
+	icon = 'mods/borers/icons/borer_ui.dmi'
 	alpha = 0
 	invisibility = INVISIBILITY_MAXIMUM
 

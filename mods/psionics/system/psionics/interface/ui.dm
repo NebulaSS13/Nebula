@@ -1,5 +1,5 @@
 /obj/screen/psi
-	icon = 'icons/screen/psi.dmi'
+	icon = 'mods/psionics/icons/psi.dmi'
 	var/mob/living/owner
 	var/hidden = TRUE
 
