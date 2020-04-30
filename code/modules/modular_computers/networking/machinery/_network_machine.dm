@@ -5,16 +5,44 @@
 	var/main_template = "network_mainframe.tmpl"
 	var/network_device_type =  /datum/extension/network_device
 	var/error
-	
+
 	var/initial_network_id
 	var/initial_network_key
 	var/lateload
+
+	var/produces_heat = TRUE	// If true, produces and is affected by heat.
+	var/inefficiency = 0.12		// How much power is waste heat.
+	var/heat_threshold = 358.15	// At what temperature the machine will lock up.
 
 /obj/machinery/network/Initialize()
 	. = ..()
 	set_extension(src, network_device_type, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED, !lateload)
 	if(lateload)
 		return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/network/operable()
+	var/turf/simulated/L = loc
+	if(istype(L))
+		var/datum/gas_mixture/env = L.return_air()
+		if(env.temperature >= heat_threshold)
+			return FALSE
+	return ..()
+
+/obj/machinery/network/proc/produce_heat()
+	if (!produces_heat || !use_power || !operable())
+		return
+	var/turf/simulated/L = loc
+	if(istype(L))
+		var/datum/gas_mixture/env = L.return_air()
+		var/transfer_moles = 0.25 * env.total_moles
+		var/datum/gas_mixture/removed = env.remove(transfer_moles) // Air is moved through computer vents.
+		if(removed)
+			removed.add_thermal_energy(idle_power_usage * inefficiency)
+		env.merge(removed)
+
+/obj/machinery/network/Process()
+	. = ..()
+	produce_heat()
 
 /obj/machinery/network/interface_interact(user)
 	ui_interact(user)
