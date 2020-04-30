@@ -1,7 +1,7 @@
 /obj/structure/diona_gestalt
 	name = "nascent diona gestalt"
 	desc = "A heaving mass of nymphs. Chirp?"
-	icon = 'icons/mob/gestalt.dmi'
+	icon = 'mods/dionaea/icons/gestalt.dmi'
 	icon_state = "gestalt"
 	density = TRUE
 	opacity = FALSE

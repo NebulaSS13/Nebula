@@ -1,7 +1,7 @@
 /obj/item/razorweb
 	name = "razorweb wad"
 	desc = "A wad of crystalline monofilament."
-	icon = 'icons/effects/razorweb.dmi'
+	icon = 'mods/ascent/icons/razorweb.dmi'
 	icon_state = "wad"
 	var/web_type = /obj/effect/razorweb
 
@@ -19,7 +19,7 @@
 /obj/effect/razorweb
 	name = "razorweb"
 	desc = "A glimmering web of razor-sharp crystalline strands. Probably not something you want to sprint through."
-	icon = 'icons/effects/razorweb.dmi'
+	icon = 'mods/ascent/icons/razorweb.dmi'
 	icon_state = "razorweb"
 	anchored = TRUE
 

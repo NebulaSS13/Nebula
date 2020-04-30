@@ -45,7 +45,7 @@
 	return _aura_image
 
 /proc/create_aura_image(var/newloc)
-	var/image/aura_image = image(loc = newloc, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
+	var/image/aura_image = image(loc = newloc, icon = 'mods/psionics/icons/psi_aura_small.dmi', icon_state = "aura")
 	aura_image.blend_mode = BLEND_MULTIPLY
 	aura_image.appearance_flags = NO_CLIENT_COLOR | RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	aura_image.layer = TURF_LAYER + 0.5

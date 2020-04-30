@@ -6,7 +6,7 @@
 /mob/living/carbon/alien/diona
 	name = "diona nymph"
 	desc = "It's a little skittery critter. Chirp."
-	icon = 'icons/mob/gestalt.dmi'
+	icon = 'mods/dionaea/icons/gestalt.dmi'
 	icon_state = "nymph"
 	item_state = "nymph"
 	death_msg = "expires with a pitiful chirrup..."
