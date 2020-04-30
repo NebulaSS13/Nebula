@@ -1274,8 +1274,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/bearcat/cargo/lower)
 "cZ" = (
-/obj/structure/lattice,
-/obj/item/stack/nanopaste,
+/obj/structure/inflatable/wall,
 /turf/space,
 /area/ship/bearcat/broken1)
 "da" = (
@@ -2354,6 +2353,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/escape_port)
+"jw" = (
+/obj/machinery/network/relay{
+	initial_network_id = "bearnet"
+	},
+/turf/simulated/floor/tiled,
+/area/ship/bearcat/broken1)
 "jD" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -2976,6 +2981,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/item/stack/nanopaste,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/broken1)
 "Ub" = (
@@ -5616,7 +5622,7 @@ cs
 cs
 cQ
 da
-da
+jw
 ob
 pb
 WZ
