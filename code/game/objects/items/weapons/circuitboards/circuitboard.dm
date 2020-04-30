@@ -49,6 +49,7 @@
 			. = INITIALIZE_HINT_QDEL
 			CRASH("A circuitboard of type [type] has conflicting multitool extensions")
 		set_extension(src, /datum/extension/interactive/multitool/circuitboards/buildtype_select)
+	update_desc()
 
 /obj/item/stock_parts/circuitboard/on_uninstall(obj/machinery/machine)
 	. = ..()
@@ -56,3 +57,26 @@
 		build_path = machine.base_type || machine.type
 		var/obj/machinery/thing = build_path
 		SetName(T_BOARD(initial(thing.name)))
+
+/obj/item/stock_parts/circuitboard/proc/update_desc()
+	if(!build_path)
+		return
+	var/obj/machinery/M = build_path
+	if(!desc)
+		desc = "A circuitboard for \the [initial(M.name)]"
+	var/list/need = req_components.Copy()
+	if(!(initial(M.stat_immune) & NOSCREEN))
+		LAZYSET(need, /obj/item/stock_parts/console_screen, 1)
+	if(!(initial(M.stat_immune) & NOINPUT))
+		LAZYSET(need, /obj/item/stock_parts/keyboard, 1)
+	if(!(initial(M.stat_immune) & NOPOWER))
+		LAZYADD(need, "a power source")
+	var/list/parts = list()
+	for(var/thing in need)
+		if(ispath(thing))
+			var/obj/item/fake_thing = thing
+			parts += "[need[thing]] [initial(fake_thing.name)]\s"
+		else
+			parts += thing
+
+	desc += "\nTo build an operational [initial(M.name)] you would need [english_list(parts)]."

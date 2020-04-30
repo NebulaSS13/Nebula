@@ -1,6 +1,5 @@
 /obj/item/stock_parts
 	name = "stock part"
-	desc = "What?"
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	randpixel = 5
 	w_class = ITEM_SIZE_SMALL
