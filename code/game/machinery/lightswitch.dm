@@ -28,18 +28,19 @@
 	on = TRUE
 
 /obj/machinery/light_switch/Initialize()
-	. = ..()
+	..()
 	if(other_area)
-		src.connected_area = locate(other_area)
+		connected_area = locate(other_area)
 	else
-		src.connected_area = get_area(src)
+		connected_area = get_area(src)
 
-	if(!connected_area)
-		return // Test instance spawned in nullspace
-	if(name == initial(name))
+	if(connected_area && name == initial(name))
 		SetName("light switch ([connected_area.name])")
+	return INITIALIZE_HINT_LATELOAD
 
-	connected_area.set_lightswitch(on)
+/obj/machinery/light_switch/LateInitialize()
+	. = ..()
+	connected_area?.set_lightswitch(on)
 	update_icon()
 
 /obj/machinery/light_switch/on_update_icon()
