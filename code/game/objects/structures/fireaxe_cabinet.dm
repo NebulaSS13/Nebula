@@ -1,6 +1,7 @@
 /obj/structure/fireaxecabinet
 	name = "fire axe cabinet"
 	desc = "There is small label that reads \"For Emergency use only\" along with details for safe use of the axe. As if."
+	icon = 'icons/obj/structures/fireaxe.dmi'
 	icon_state = "fireaxe"
 	anchored = 1
 	density = 0
