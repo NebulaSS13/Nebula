@@ -1,0 +1,28 @@
+{{if data.crashed}}
+	<div class="block">
+		FOLDING@SPACE has stopped responding. The application may respond again if you wait.<br>
+		<i>Do you want to try and resume this process?</i>
+		<div class="item">
+			{{:helper.link('Restart Program', null, { "fix_crash": 1 })}}
+		</div>
+	</div>
+{{else data.computing}}
+	<div class="block">
+		<h2>{{:data.science_string}}</h2>
+	</div>
+	{{if data.completed}}
+		Computation complete!<br>
+		<div class="item">
+			{{:helper.link('Collect', null, { "collect": 1 })}}
+		</div>
+	{{else}}
+		Time Remaining: {{:data.time_remaining}} seconds<br>
+	{{/if}}
+{{else}}
+	<div class="block">
+		Low on dosh? Not using that dusty old portable computer? Donate your processor cycles to SCIENCE! and get money TODAY!
+	</div>
+	<div class="item">
+		{{:helper.link('Fold Some Space Science', null, { "start": 1 })}}
+	</div>
+{{/if}}
