@@ -5,6 +5,9 @@
 /datum/fabricator_recipe/robotics/augment/armblade/wolverine
 	path = /obj/item/organ/internal/augment/active/simple/wolverine
 
+/datum/fabricator_recipe/robotics/augment/cyberbrain
+	path = /obj/item/organ/internal/augment/active/cyberbrain
+
 /datum/fabricator_recipe/robotics/augment/engineering
 	path = /obj/item/organ/internal/augment/active/polytool/engineer
 
