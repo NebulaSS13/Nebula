@@ -1,14 +1,3 @@
-/obj/structure/diona_gestalt/attack_generic(var/mob/user, var/damage, var/attack_message)
-	if(user.loc == src)
-		return
-
-	if(istype(user, /mob/living/carbon/alien/diona) && user.a_intent != I_HURT)
-		can_roll_up_atom(user)
-		return
-
-	visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
-	shed_atom(forcefully = TRUE)
-
 /obj/structure/diona_gestalt/attackby(var/obj/item/thing, var/mob/user)
 	. = ..()
 	if(thing.force) 

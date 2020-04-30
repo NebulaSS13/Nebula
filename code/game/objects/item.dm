@@ -973,3 +973,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(material)
 		descriptors += "made of [material.display_name]"
 	return descriptors
+
+/obj/item/proc/attack_message_name()
+	return "\a [src]"

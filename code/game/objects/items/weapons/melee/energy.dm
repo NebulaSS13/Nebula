@@ -158,6 +158,10 @@
 /obj/item/melee/energy/sword/red
 	blade_color = "red"
 
+/obj/item/melee/energy/sword/red/activated/Initialize()
+	. = ..()
+	activate()
+
 /obj/item/melee/energy/sword/blue
 	blade_color = "blue"
 
@@ -187,6 +191,9 @@
 	active_icon = "cutlass1"
 	lighting_color = COLOR_SABER_CUTLASS
 
+/obj/item/melee/energy/sword/pirate/activated/Initialize()
+	. = ..()
+	activate()
 /*
  *Energy Blade
  */

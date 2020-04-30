@@ -65,21 +65,22 @@
 	if(!mob_wear_hat(user))
 		return ..()
 
-/obj/item/clothing/head/attack_generic(var/mob/user)
-	if(!istype(user) || !mob_wear_hat(user))
+/obj/item/clothing/head/attack_animal(var/mob/user)
+	if(!mob_wear_hat(user))
 		return ..()
 
 /obj/item/clothing/head/proc/mob_wear_hat(var/mob/user)
 	if(!Adjacent(user))
 		return 0
+	if(!is_drone(user))
+		return 0
 	var/success
-	if(is_drone(user))
-		var/mob/living/silicon/robot/drone/D = user
-		if(D.hat)
-			success = 2
-		else
-			D.wear_hat(src)
-			success = 1
+	var/mob/living/silicon/robot/drone/D = user
+	if(D.hat)
+		success = 2
+	else
+		D.wear_hat(src)
+		success = 1
 
 	if(!success)
 		return 0

@@ -18,12 +18,9 @@
 	return 0
 
 /obj/effect/wingrille_spawn/attack_hand()
-	attack_generic()
+	activate()
 
 /obj/effect/wingrille_spawn/attack_ghost()
-	attack_generic()
-
-/obj/effect/wingrille_spawn/attack_generic()
 	activate()
 
 /obj/effect/wingrille_spawn/Initialize(mapload)

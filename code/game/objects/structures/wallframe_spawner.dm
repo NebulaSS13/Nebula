@@ -14,12 +14,9 @@
 	return 0
 
 /obj/effect/wallframe_spawn/attack_hand()
-	attack_generic()
+	activate()
 
 /obj/effect/wallframe_spawn/attack_ghost()
-	attack_generic()
-
-/obj/effect/wallframe_spawn/attack_generic()
 	activate()
 
 /obj/effect/wallframe_spawn/Initialize(mapload)
