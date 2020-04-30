@@ -1,6 +1,7 @@
 /obj/item/radio/intercom
 	name = "intercom (General)"
 	desc = "Talk through this."
+	icon = 'icons/obj/items/device/radio/intercom.dmi'
 	icon_state = "intercom"
 	randpixel = 0
 	anchored = 1

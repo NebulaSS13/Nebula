@@ -1,6 +1,7 @@
 /obj/item/radio/electropack
 	name = "electropack"
 	desc = "Dance, my monkeys! DANCE!"
+	icon = 'icons/obj/items/device/radio/electropack.dmi'
 	icon_state = "electropack0"
 	item_state = "electropack"
 	frequency = 1449
