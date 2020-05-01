@@ -1,9 +1,11 @@
 // This file is an experiment in changing the way item icons are handled.
 // Not really expecting it to work out of the box, so we'll see how it goes
 // with a handful of specific items.
+var/list/if_has_inventory_icon_cache = list()  // for checking if we have special in-inventory HUD state. Cached cause asking icons is expensive
 
 /obj/item
 	var/on_mob_icon
+	var/tmp/has_inventory_icon	// do not set manually
 
 /obj/item/Initialize(ml, material_key)
 	. = ..()
@@ -14,13 +16,14 @@
 
 /obj/item/hud_layerise()
 	..()
-	if(on_mob_icon)
-		icon_state = "inventory"
-		update_icon()
+	update_world_inventory_state()
 
 /obj/item/reset_plane_and_layer()
 	..()
-	if(on_mob_icon)
+	update_world_inventory_state()
+
+/obj/item/proc/update_world_inventory_state()
+	if(on_mob_icon && has_inventory_state())
 		var/last_state = icon_state
 		if(plane == HUD_PLANE)
 			icon_state = "inventory"
@@ -28,6 +31,11 @@
 			icon_state = "world"
 		if(last_state != icon_state)
 			update_icon()
+
+/obj/item/proc/has_inventory_state()
+	if(isnull(if_has_inventory_icon_cache[type]))
+		if_has_inventory_icon_cache[type] = !!("inventory" in icon_states(icon))
+	return if_has_inventory_icon_cache[type]
 
 /mob/proc/get_bodytype()
 	return
