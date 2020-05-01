@@ -27,7 +27,7 @@
 
 /obj/item/chems/food/drinks/glass2/fitnessflask/proteinshake/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/nutriment, 30)
-	reagents.add_reagent(/datum/reagent/iron, 10)
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 15)
-	reagents.add_reagent(/datum/reagent/water, 45)
+	reagents.add_reagent(/decl/reagent/nutriment, 30)
+	reagents.add_reagent(/decl/reagent/iron, 10)
+	reagents.add_reagent(/decl/reagent/nutriment/protein, 15)
+	reagents.add_reagent(/decl/reagent/water, 45)

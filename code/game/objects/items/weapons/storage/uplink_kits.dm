@@ -119,27 +119,27 @@
 	. = ..()
 	var/obj/item/storage/fancy/cigarettes/pack
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
+	fill_cigarre_package(pack, list(/decl/reagent/aluminium = 1, /decl/reagent/potassium = 1, /decl/reagent/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
+	fill_cigarre_package(pack, list(/decl/reagent/aluminium = 1, /decl/reagent/potassium = 1, /decl/reagent/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/potassium = 1, /datum/reagent/nutriment/sugar = 1, /datum/reagent/phosphorus = 1))
+	fill_cigarre_package(pack, list(/decl/reagent/potassium = 1, /decl/reagent/nutriment/sugar = 1, /decl/reagent/phosphorus = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/potassium = 1, /datum/reagent/nutriment/sugar = 1, /datum/reagent/phosphorus = 1))
+	fill_cigarre_package(pack, list(/decl/reagent/potassium = 1, /decl/reagent/nutriment/sugar = 1, /decl/reagent/phosphorus = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/antitoxins = 1, /datum/reagent/silicon = 1, /datum/reagent/fuel/hydrazine = 1))
+	fill_cigarre_package(pack, list(/decl/reagent/antitoxins = 1, /decl/reagent/silicon = 1, /decl/reagent/fuel/hydrazine = 1))
 	pack.desc += " 'MB' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/datum/reagent/regenerator = 4))
+	fill_cigarre_package(pack, list(/decl/reagent/regenerator = 4))
 	pack.desc += " 'T' has been scribbled on it."
 
 	new /obj/item/flame/lighter/zippo(src)

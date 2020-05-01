@@ -100,16 +100,16 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 *****/
 
 /proc/set_scent_by_reagents(var/atom/smelly_atom)
-	var/datum/reagent/smelliest
-	var/datum/reagent/scent_intensity
+	var/decl/reagent/smelliest
+	var/decl/reagent/scent_intensity
 	if(!smelly_atom.reagents || !smelly_atom.reagents.total_volume)
 		return
-	for(var/datum/reagent/reagent_to_compare in smelly_atom.reagents.reagent_list)
-		var/datum/reagent/R = reagent_to_compare
+	for(var/reagent_type in smelly_atom.reagents.reagent_volumes)
+		var/decl/reagent/R = decls_repository.get_decl(reagent_type)
 		if(!R.scent)
 			continue
 		var/decl/scent_intensity/SI = decls_repository.get_decl(R.scent_intensity)
-		var/r_scent_intensity = R.volume * SI.intensity
+		var/r_scent_intensity = REAGENT_VOLUME(smelly_atom.reagents, reagent_type) * SI.intensity
 		if(r_scent_intensity > scent_intensity)
 			smelliest = R
 			scent_intensity = r_scent_intensity 

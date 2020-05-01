@@ -6,7 +6,7 @@
 /datum/fabricator_recipe/robotics/prosthetic/get_resources()
 	. = ..()
 	for(var/key in resources)
-		if(ispath(key, /datum/reagent))
+		if(ispath(key, /decl/reagent))
 			resources -= key
 
 /datum/fabricator_recipe/robotics/prosthetic/build()

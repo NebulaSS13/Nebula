@@ -84,7 +84,7 @@
 				M.client.screen -= W
 
 /datum/storage_ui/default/on_post_remove(var/mob/user)
-	if(user.s_active)
+	if(user?.s_active)
 		user.s_active.show_to(user)
 
 /datum/storage_ui/default/on_hand_attack(var/mob/user)

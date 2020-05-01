@@ -32,7 +32,7 @@
 
 /datum/recipe
 	var/display_name
-	var/list/reagents // example: = list(/datum/reagent/drink/juice/berry = 5) // do not list same reagent twice
+	var/list/reagents // example: = list(/decl/reagent/drink/juice/berry = 5) // do not list same reagent twice
 	var/list/items    // example: = list(/obj/item/crowbar, /obj/item/welder) // place /foo/bar before /foo
 	var/list/fruit    // example: = list("fruit" = 3)
 	var/result        // example: = /obj/item/chems/food/snacks/donut/normal
@@ -45,13 +45,13 @@
 /datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents)
 	. = 1
 	for (var/r_r in reagents)
-		var/aval_r_amnt = avail_reagents.get_reagent_amount(r_r)
+		var/aval_r_amnt = REAGENT_VOLUME(avail_reagents, r_r)
 		if (!(abs(aval_r_amnt - reagents[r_r])<0.5)) //if NOT equals
 			if (aval_r_amnt>reagents[r_r])
 				. = 0
 			else
 				return -1
-	if ((reagents?(reagents.len):(0)) < avail_reagents.reagent_list.len)
+	if (length(reagents) < LAZYLEN(avail_reagents.reagent_volumes))
 		return 0
 	return .
 
@@ -117,7 +117,7 @@
 		return result_obj
 	for (var/obj/O in (container_contents-result_obj))
 		if (O.reagents)
-			O.reagents.del_reagent(/datum/reagent/nutriment)
+			O.reagents.clear_reagent(/decl/reagent/nutriment)
 			O.reagents.update_total()
 			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
 		if(istype(O,/obj/item/holder/))

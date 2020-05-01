@@ -141,7 +141,7 @@
 				var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)
 				forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
 			return 1 //we bloodied the floor
-		blood_splatter(src,M.get_blood(M.vessel),1)
+		blood_splatter(src, M, 1)
 		return 1 //we bloodied the floor
 	return 0
 

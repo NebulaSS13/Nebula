@@ -67,7 +67,7 @@
 	return toxloss
 
 /mob/living/carbon/slime/get_digestion_product()
-	return /datum/reagent/toxin/slimejelly
+	return /decl/reagent/toxin/slimejelly
 
 /mob/living/carbon/slime/adjustToxLoss(var/amount)
 	toxloss = Clamp(toxloss + amount, 0, maxHealth)
@@ -100,10 +100,10 @@
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
 	if(reagents)
-		if(reagents.has_reagent(/datum/reagent/amphetamines)) // Stimulants slows slimes down
+		if(reagents.has_reagent(/decl/reagent/amphetamines)) // Stimulants slows slimes down
 			tally *= 2
 
-		if(reagents.has_reagent(/datum/reagent/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
+		if(reagents.has_reagent(/decl/reagent/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
 			tally *= 5
 
 	if(health <= 0) // if damaged, the slime moves twice as slow

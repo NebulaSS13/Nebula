@@ -343,7 +343,7 @@
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if(H.seed)
 			for(var/chem_path in H.seed.chems)
-				var/datum/reagent/R = chem_path
+				var/decl/reagent/R = chem_path
 				greagents.Add(initial(R.name))
 
 	set_pin_data(IC_OUTPUT, 1, greagents)

@@ -25,11 +25,12 @@ calculate text size per text.
 	var/list/out = list()
 	var/list/tastes = list() //descriptor = strength
 	if(minimum_percent <= 100)
-		for(var/datum/reagent/R in reagent_list)
+		for(var/reagent_type in reagent_volumes)
+			var/decl/reagent/R = decls_repository.get_decl(reagent_type)
 			if(!R.taste_mult)
 				continue
-			if(istype(R, /datum/reagent/nutriment))
-				var/list/taste_data = R.get_data()
+			if(istype(R, /decl/reagent/nutriment))
+				var/list/taste_data = LAZYACCESS(reagent_data, reagent_type)
 				for(var/taste in taste_data)
 					if(taste in tastes)
 						tastes[taste] += taste_data[taste]
@@ -37,7 +38,7 @@ calculate text size per text.
 						tastes[taste] = taste_data[taste]
 			else
 				var/taste_desc = R.taste_description
-				var/taste_amount = get_reagent_amount(R.type) * R.taste_mult
+				var/taste_amount = REAGENT_VOLUME(src, R.type) * R.taste_mult
 				if(R.taste_description in tastes)
 					tastes[taste_desc] += taste_amount
 				else
@@ -64,4 +65,4 @@ calculate text size per text.
 	return english_list(out, "something indescribable")
 
 /mob/living/carbon/proc/get_fullness()
-	return nutrition + (reagents.get_reagent_amount(/datum/reagent/nutriment) * 25)
+	return nutrition + (REAGENT_VOLUME(reagents, /decl/reagent/nutriment) * 25)

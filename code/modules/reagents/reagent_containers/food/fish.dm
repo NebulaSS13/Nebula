@@ -6,7 +6,7 @@
 	center_of_mass = @"{'x':17,'y':13}"
 	bitesize = 6
 	nutriment_amt = 6
-	nutriment_type = /datum/reagent/nutriment/protein
+	nutriment_type = /decl/reagent/nutriment/protein
 	var/fish_type = "fish"
 
 /obj/item/chems/food/snacks/fish/Initialize()
@@ -20,9 +20,9 @@
 		if(istype(M) && !M.unEquip(src))
 			return
 
-		var/toxin_amt = reagents.get_reagent_amount(/datum/reagent/toxin/carpotoxin)
+		var/toxin_amt = REAGENT_VOLUME(reagents, /decl/reagent/toxin/carpotoxin)
 		if(toxin_amt && !prob(user.skill_fail_chance(SKILL_COOKING, 100, SKILL_PROF)))
-			reagents.remove_reagent(/datum/reagent/toxin/carpotoxin, toxin_amt)
+			reagents.remove_reagent(/decl/reagent/toxin/carpotoxin, toxin_amt)
 		user.visible_message("<span class='notice'>\The [user] slices \the [src] into thin strips.</span>")
 
 		var/transfer_amt = Floor(reagents.total_volume * 0.3)
@@ -39,7 +39,7 @@
 
 /obj/item/chems/food/snacks/fish/poison/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 6)
+	reagents.add_reagent(/decl/reagent/toxin/carpotoxin, 6)
 
 /obj/item/chems/food/snacks/fish/shark
 	fish_type = "shark"
@@ -54,7 +54,7 @@
 	name = "meat"
 	desc = "Some slimy meat from clams or molluscs."
 	fish_type = "mollusc"
-	nutriment_type = /datum/reagent/nutriment/slime_meat
+	nutriment_type = /decl/reagent/nutriment/slime_meat
 
 /obj/item/chems/food/snacks/fish/mollusc/clam
 	fish_type = "clam"

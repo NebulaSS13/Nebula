@@ -22,7 +22,7 @@
 		if(mat.gas_flags & XGM_GAS_FUSION_FUEL)
 			gas_info+= "It can be used as fuel in a fusion reaction."
 		if(mat.gas_condensation_point && mat.gas_condensation_product)
-			var/datum/reagent/product = mat.gas_condensation_product
+			var/decl/reagent/product = mat.gas_condensation_product
 			gas_info+= "At [mat.gas_condensation_point] K it condenses into [initial(product.name)]."
 		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[mat.display_name] (gas)")), _mechanics_text = jointext(gas_info, "<br>"))
 		SScodex.add_entry_by_string(entry.display_name, entry)

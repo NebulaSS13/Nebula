@@ -134,8 +134,9 @@
 
 	data["beakercontents"] = list()
 	if(beaker?.reagents)
-		for(var/datum/reagent/R in beaker.reagents.reagent_list)
-			data["beakercontents"] += "<b>[capitalize(R.name)]</b> ([R.volume]u)"
+		for(var/rtype in beaker.reagents.reagent_volumes)
+			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			data["beakercontents"] += "<b>[capitalize(R.name)]</b> ([REAGENT_VOLUME(beaker.reagents, rtype)]u)"
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
@@ -247,7 +248,7 @@
 	user.visible_message(SPAN_DANGER("\The [user]'s hand gets caught in \the [src]!"), SPAN_DANGER("Your hand gets caught in \the [src]!"))
 	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
 	if(BP_IS_PROSTHETIC(hand_organ))
-		beaker.reagents.add_reagent(/datum/reagent/iron, dam)
+		beaker.reagents.add_reagent(/decl/reagent/iron, dam)
 	else
 		user.take_blood(beaker, dam)
 	user.Stun(2)

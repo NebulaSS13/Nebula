@@ -70,8 +70,8 @@
 
 /obj/item/clothing/ring/reagent/sleepy/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/paralytics, 10) // Less than a sleepy-pen, but still enough to knock someone out
-	reagents.add_reagent(/datum/reagent/sedatives, 5)  
+	reagents.add_reagent(/decl/reagent/paralytics, 10) // Less than a sleepy-pen, but still enough to knock someone out
+	reagents.add_reagent(/decl/reagent/sedatives, 5)  
 
 /////////////////////////////////////////
 //Seals and Signet Rings

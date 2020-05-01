@@ -153,7 +153,7 @@
 	origin_tech = "{'materials':2,'biotech':2}"
 	slot_flags = SLOT_BELT | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	var/list/starts_with = list(/datum/reagent/adrenaline = 5)
+	var/list/starts_with = list(/decl/reagent/adrenaline = 5)
 	var/band_color = COLOR_CYAN
 
 /obj/item/chems/hypospray/autoinjector/Initialize()
@@ -176,7 +176,7 @@
 
 /obj/item/chems/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
-	if(reagents && reagents.reagent_list.len)
+	if(reagents?.total_volume)
 		to_chat(user, "<span class='notice'>It is currently loaded.</span>")
 	else
 		to_chat(user, "<span class='notice'>It is spent.</span>")
@@ -184,22 +184,22 @@
 /obj/item/chems/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
 	band_color = COLOR_GREEN
-	starts_with = list(/datum/reagent/antitoxins = 5)
+	starts_with = list(/decl/reagent/antitoxins = 5)
 
 /obj/item/chems/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
 	band_color = COLOR_PURPLE
-	starts_with = list(/datum/reagent/painkillers = 5)
+	starts_with = list(/decl/reagent/painkillers = 5)
 
 /obj/item/chems/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
 	band_color = COLOR_AMBER
-	starts_with = list(/datum/reagent/antirads = 5)
+	starts_with = list(/decl/reagent/antirads = 5)
 
 /obj/item/chems/hypospray/autoinjector/hallucinogenics
 	name = "autoinjector"
 	band_color = COLOR_DARK_GRAY
-	starts_with = list(/datum/reagent/hallucinogenics = 5)
+	starts_with = list(/decl/reagent/hallucinogenics = 5)
 
 /obj/item/chems/hypospray/autoinjector/empty
 	name = "autoinjector"

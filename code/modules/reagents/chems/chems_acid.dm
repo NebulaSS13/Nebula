@@ -1,4 +1,4 @@
-/datum/reagent/acid
+/decl/reagent/acid
 	name = "sulphuric acid"
 	description = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
@@ -10,16 +10,16 @@
 	var/meltdose = 10 // How much is needed to melt
 	var/max_damage = 40
 
-/datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.take_organ_damage(0, removed * power)
 
-/datum/reagent/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed) // This is the most interesting
+/decl/reagent/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder) // This is the most interesting
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.head)
 			if(H.head.unacidable)
 				to_chat(H, "<span class='danger'>Your [H.head] protects you from the acid.</span>")
-				remove_self(volume)
+				holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 				return
 			else if(removed > meltdose)
 				to_chat(H, "<span class='danger'>Your [H.head] melts away!</span>")
@@ -33,7 +33,7 @@
 		if(H.wear_mask)
 			if(H.wear_mask.unacidable)
 				to_chat(H, "<span class='danger'>Your [H.wear_mask] protects you from the acid.</span>")
-				remove_self(volume)
+				holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 				return
 			else if(removed > meltdose)
 				to_chat(H, "<span class='danger'>Your [H.wear_mask] melts away!</span>")
@@ -72,18 +72,17 @@
 					H.emote("scream")
 				affecting.status |= ORGAN_DISFIGURED
 
-/datum/reagent/acid/touch_obj(var/obj/O)
+/decl/reagent/acid/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(O.unacidable)
 		return
-	if((istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (volume > meltdose))
+	if((istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > meltdose))
 		var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 		I.desc = "Looks like this was \an [O] some time ago."
-		for(var/mob/M in viewers(5, O))
-			to_chat(M, "<span class='warning'>\The [O] melts.</span>")
+		I.visible_message(SPAN_DANGER("\The [O] melts."))
 		qdel(O)
-		remove_self(meltdose) // 10 units of acid will not melt EVERYTHING on the tile
+		holder?.remove_reagent(type, meltdose) // 10 units of acid will not melt EVERYTHING on the tile
 
-/datum/reagent/acid/hydrochloric //Like sulfuric, but less toxic and more acidic.
+/decl/reagent/acid/hydrochloric //Like sulfuric, but less toxic and more acidic.
 	name = "hydrochloric acid"
 	description = "A very corrosive mineral acid with the molecular formula HCl."
 	taste_description = "stomach acid"
@@ -93,7 +92,7 @@
 	max_damage = 30
 	value = 1.5
 
-/datum/reagent/acid/polyacid
+/decl/reagent/acid/polyacid
 	name = "polytrinic acid"
 	description = "Polytrinic acid is a an extremely corrosive chemical substance."
 	taste_description = "acid"
@@ -103,7 +102,7 @@
 	max_damage = 60
 	value = 1.8
 
-/datum/reagent/acid/stomach
+/decl/reagent/acid/stomach
 	name = "stomach acid"
 	taste_description = "coppery foulness"
 	power = 2

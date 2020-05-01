@@ -28,7 +28,7 @@
 	item_type = "coin"
 	modification_flags = XENOFIND_REPLACE_ICON
 	engraving_chance = 100
-	responsive_reagent = /datum/reagent/iron
+	responsive_reagent = /decl/reagent/iron
 	possible_types = list(/obj/item/coin)
 
 /decl/archaeological_find/coin/new_icon_state()
@@ -68,7 +68,7 @@
 //Random tool
 /decl/archaeological_find/tool
 	item_type = "tool"
-	responsive_reagent = /datum/reagent/iron
+	responsive_reagent = /decl/reagent/iron
 	possible_types = list(
 		/obj/item/wrench,
 		/obj/item/crowbar,
@@ -86,7 +86,7 @@
 	item_type = "crystal"
 	modification_flags = XENOFIND_REPLACE_ICON
 	engraving_chance = 100
-	responsive_reagent = /datum/reagent/ammonia
+	responsive_reagent = /decl/reagent/ammonia
 
 /decl/archaeological_find/crystal/new_icon_state()
 	if(prob(25))

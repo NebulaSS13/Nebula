@@ -324,7 +324,7 @@ its easier to just keep the beam vertical.
 	return 1
 
 /mob/living/proc/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
-	vomit.reagents.add_reagent(/datum/reagent/acid/stomach, 5)
+	vomit.reagents.add_reagent(/decl/reagent/acid/stomach, 5)
 
 /atom/proc/clean_blood()
 	if(!simulated)
