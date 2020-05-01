@@ -5,7 +5,6 @@ var/list/same_wires = list()
 var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
 
 /datum/wires
-
 	var/random = 0 // Will the wires be different for every single instance.
 	var/atom/holder = null // The holder
 	var/holder_type = null // The holder type; used to make sure that the holder is the correct type.
@@ -27,7 +26,9 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	..()
 	src.holder = holder
 	if(!istype(holder, holder_type))
-		CRASH("Our holder is null/the wrong type!")
+		// This doesn't need to be a crash.
+		to_world_log("Our holder is null/the wrong type!") 
+		return ..()
 
 	// Generate new wires
 	if(random)
