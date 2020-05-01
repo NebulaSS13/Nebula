@@ -1,8 +1,8 @@
 /obj/machinery/sleeper
 	name = "sleeper"
 	desc = "A suspension chamber with built-in injectors, a dialysis machine, and a limited health scanner."
-	icon = 'icons/obj/cryogenics.dmi'
-	icon_state = "pod_preview"
+	icon = 'icons/obj/cryogenics_coffin.dmi'
+	icon_state = "med_pod_preview"
 	density = TRUE
 	anchored = TRUE
 	stat_immune = 0
@@ -80,7 +80,6 @@
 	. = ..()
 	if(populate_parts)
 		beaker = new /obj/item/chems/glass/beaker/large(src)
-	icon = 'icons/obj/cryogenics_coffin.dmi'
 	update_icon()
 
 /obj/machinery/sleeper/examine(mob/user, distance)
@@ -129,14 +128,14 @@
 
 /obj/machinery/sleeper/on_update_icon()
 	overlays.Cut()
-	icon_state = "pod"
+	icon_state = "med_pod"
 	if(occupant)
 		var/image/pickle = new
 		pickle.appearance = occupant
 		pickle.layer = FLOAT_LAYER
 		pickle.pixel_z = 12
 		overlays += pickle
-	var/image/I = image(icon, "lid[!!(occupant && !(stat & (BROKEN|NOPOWER)))]")
+	var/image/I = image(icon, "med_lid[!!(occupant && !(stat & (BROKEN|NOPOWER)))]")
 	overlays += I
 
 /obj/machinery/sleeper/DefaultTopicState()
