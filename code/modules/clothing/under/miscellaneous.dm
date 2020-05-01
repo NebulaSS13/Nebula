@@ -91,17 +91,6 @@
 	worn_state = "centcom"
 	displays_id = 0
 
-/obj/item/clothing/under/ert
-	name = "ERT tactical uniform"
-	desc = "A short-sleeved black uniform, paired with grey digital-camo cargo pants. It looks very tactical."
-	icon_state = "ert_uniform"
-	item_state = "bl_suit"
-	worn_state = "ert_uniform"
-	armor = list(
-		melee = ARMOR_MELEE_SMALL
-		)
-	siemens_coefficient = 0.9
-
 /obj/item/clothing/under/space
 	name = "\improper NASA jumpsuit"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
