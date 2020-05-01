@@ -7,7 +7,7 @@
 	var/list/stock_parts = list()
 	var/list/starting_stock_parts = list(
 		/obj/item/stock_parts/computer/processor_unit/small,
-		/obj/item/stock_parts/computer/hard_drive/silicon,
+		/obj/item/stock_parts/computer/hard_drive/small,
 		/obj/item/stock_parts/computer/network_card
 	)
 	var/max_hardware_size = 1
