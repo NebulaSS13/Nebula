@@ -13,12 +13,38 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
+	var/markings_color
+	var/markings_icon = "labcoat_marking"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/clothing/suit/storage/toggle/labcoat/on_update_icon()
+	. = ..()
+	if(markings_color)
+		overlays.Cut()
+		var/mutable_appearance/MA = new()
+		MA.icon = icon
+		MA.icon_state = markings_icon
+		MA.color = markings_color
+		MA.appearance_flags = RESET_COLOR
+		overlays += MA
+
+/obj/item/clothing/suit/storage/toggle/labcoat/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(markings_color)
+		var/mutable_appearance/MA = new()
+		MA.icon = ret.icon
+		MA.icon_state = markings_icon
+		MA.color = markings_color
+		MA.appearance_flags = RESET_COLOR
+		ret.overlays += MA
+	return ret
+
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
-	desc = "Bluer than the standard model."
-	icon_state = "labcoat_cmo_open"
-	icon_open = "labcoat_cmo_open"
-	icon_closed = "labcoat_cmo"
+	color = COLOR_BABY_BLUE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmoalt
 	name = "chief medical officer labcoat"
@@ -30,34 +56,22 @@
 /obj/item/clothing/suit/storage/toggle/labcoat/mad
 	name = "The Mad's labcoat"
 	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
-	icon_state = "labgreen_open"
-	icon_open = "labgreen_open"
-	icon_closed = "labgreen"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/genetics
-	name = "Geneticist labcoat"
-	desc = "A suit that protects against minor chemical spills. Has a blue stripe on the shoulder."
-	icon_state = "labcoat_gen_open"
-	icon_open = "labcoat_gen_open"
-	icon_closed = "labcoat_gen"
+	color = COLOR_GREEN
 
 /obj/item/clothing/suit/storage/toggle/labcoat/chemist
-	name = "Pharmacist labcoat"
-	desc = "A suit that protects against minor chemical spills. Has an orange stripe on the shoulder."
-	icon_state = "labcoat_chem_open"
-	icon_open = "labcoat_chem_open"
-	icon_closed = "labcoat_chem"
+	name = "pharmacist labcoat"
+	markings_color  = COLOR_SEDONA
+
+/obj/item/clothing/suit/storage/toggle/labcoat/genetics
+	name = "geneticist labcoat"
+	markings_color  = COLOR_BLUE_LIGHT
 
 /obj/item/clothing/suit/storage/toggle/labcoat/virologist
-	name = "Virologist labcoat"
-	desc = "A suit that protects against minor chemical spills. Offers slightly more protection against biohazards than the standard model. Has a green stripe on the shoulder."
-	icon_state = "labcoat_vir_open"
-	icon_open = "labcoat_vir_open"
-	icon_closed = "labcoat_vir"
+	name = "virologist labcoat"
+	markings_color  = COLOR_GREEN
 
 /obj/item/clothing/suit/storage/toggle/labcoat/blue
 	name = "blue-edged labcoat"
-	desc = "A suit that protects against minor chemical spills. This one has blue trim."
 	icon_state = "blue_edge_labcoat_open"
 	icon_open = "blue_edge_labcoat_open"
 	icon_closed = "blue_edge_labcoat"
@@ -76,15 +90,16 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
 	name = "researcher labcoat"
-	desc = "A coat that protects against minor chemical spills."
-	icon_state = "labcoat_TL_open"
-	icon_open = "labcoat_TL_open"
-	icon_closed = "labcoat_TL"
+	markings_color = COLOR_BOTTLE_GREEN
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	name = "research director's labcoat"
-	desc = "A full-body labcoat covered in green and black designs. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
+	desc = "A full-body labcoat covered in designs, denoting it as management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_open"
 	icon_open = "labcoat_rd_open"
 	icon_closed = "labcoat_rd"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	markings_color = COLOR_BOTTLE_GREEN
+	markings_icon = "rd_coat_marking"
+
+	
