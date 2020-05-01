@@ -418,3 +418,56 @@ var/const/NO_EMAG_ACT = -50
 	desc = "A golden card which shows power and might."
 	color = "#d4c780"
 	extra_details = list("goldstripe")
+
+/*
+ * NETWORK-ENABLED ID CARDS
+ */
+
+/obj/item/card/id/network
+	var/network_id												// The network_id that this card is paired to.
+	var/user_id													// The user's ID this card belongs to. This is typically their access_record UID, which is their cortical stack ID.
+	var/broken = FALSE											// Whether or not this card has been broken.
+	var/datum/computer_file/report/crew_record/access_record 	// A cached link to the access_record belonging to this card. Do not save this.
+
+/obj/item/card/id/network/Initialize()
+	set_extension(src, /datum/extension/network_device/lazy)
+	if(!access_record)
+		refresh_access_record()
+	return ..()
+
+/obj/item/card/id/network/GetAccess()
+	if(broken)
+		return
+	if(!access_record)
+		refresh_access_record()
+	return access
+
+/obj/item/card/id/network/verb/resync()
+	set name = "Resync ID Card"
+	set category = "Object"
+	set src in usr
+
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	if(broken)
+		to_chat(usr, "Pressing the synchronization button on the card does nothing.")
+		return
+
+	var/datum/computer_network/network = D.get_network()
+	if(!network)
+		to_chat(usr, "Pressing the synchronization button on the card causes a red LED to flash once.")
+		return
+	refresh_access_record(network)
+	to_chat(usr, "A green light flashes as the card is synchronized with its network.")
+
+/obj/item/card/id/network/proc/refresh_access_record(var/datum/computer_network/network)
+	for(var/datum/extension/network_device/mainframe/mainframe in network.mainframes_by_role[MF_ROLE_CREW_RECORDS])
+		for(var/datum/computer_file/report/crew_record/ar in mainframe.get_all_files())
+			if(ar.user_id != user_id)
+				continue // Mismatch user file.
+			// We have a match!
+			access_record = ar
+			access = ar.get_access(network_id)
+			return
+	// No record was found. This card is no longer good.
+	access = null
+	broken = TRUE

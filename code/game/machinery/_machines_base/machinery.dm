@@ -448,3 +448,9 @@ Class Procs:
 
 /obj/machinery/proc/on_user_login(var/mob/M)
 	return
+
+/obj/machinery/get_req_access()
+	. = ..() || list()
+	var/obj/item/stock_parts/network_lock/lock = get_component_of_type(/obj/item/stock_parts/network_lock)
+	if(lock)
+		. = . | lock.get_req_access()

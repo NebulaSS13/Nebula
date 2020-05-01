@@ -6,7 +6,7 @@
 	var/key				// passkey for the network
 	var/address			// unique network address, cannot be set by user
 	var/network_tag		// human-readable network address, can be set by user. Networks enforce uniqueness, will change it if there's clash.
-	var/connection_type = NETWORK_CONNECTION_WIRELESS  // affects signal strength
+	var/connection_type = NETWORK_CONNECTION_STRONG_WIRELESS  // affects signal strength
 
 /datum/extension/network_device/New(datum/holder, n_id, n_key, c_type, autojoin = TRUE)
 	..()

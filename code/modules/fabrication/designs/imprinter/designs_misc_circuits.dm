@@ -434,6 +434,9 @@
 /datum/fabricator_recipe/imprinter/circuit/mainframe
 	path = /obj/item/stock_parts/circuitboard/mainframe
 
+/datum/fabricator_recipe/imprinter/circuit/acl
+	path = /obj/item/stock_parts/circuitboard/acl
+
 /datum/fabricator_recipe/imprinter/circuit/router
 	path = /obj/item/stock_parts/circuitboard/router
 

@@ -80,7 +80,14 @@
 			return CR
 
 // Misc helpers
-/datum/computer_network/proc/get_file_server_tags()
+/datum/computer_network/proc/get_file_server_tags(var/mob/user)
 	. = list()
-	for(var/datum/extension/network_device/mainframe/M in mainframes_by_role[MF_ROLE_FILESERVER])
+	var/list/mainframes = mainframes_by_role[MF_ROLE_FILESERVER]
+	if(user)
+		mainframes = filter_devices_by_access(mainframes, user)
+	for(var/datum/extension/network_device/mainframe/M in mainframes)
 		. |= M.network_tag
+
+/datum/computer_network/proc/get_file_server_by_role(var/role)
+	if(length(mainframes_by_role[role]) > 0)
+		return mainframes_by_role[role][1]
