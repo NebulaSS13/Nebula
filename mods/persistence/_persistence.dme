@@ -1,0 +1,35 @@
+#ifndef MODPACK_PERSISTENCE
+#define MODPACK_PERSISTENCE
+// BEGIN_INCLUDE
+#include "_maps.dm"
+#include "_persistence.dm"
+#include "_global_vars\serialization.dm"
+#include "_onclick\click.dm"
+#include "controllers\ticker.dm"
+#include "controllers\subsystems\autosave.dm"
+#include "controllers\subsystems\mapping.dm"
+#include "controllers\subsystems\mining.dm"
+#include "game\gamemodes\persistence.dm"
+#include "game\machinery\resleever.dm"
+#include "game\species\species.dm"
+#include "modules\organs\stack.dm"
+#include "modules\world_save\_persistence.dm"
+#include "modules\world_save\load_cache.dm"
+#include "modules\world_save\world_handle.dm"
+#include "modules\world_save\wrappers.dm"
+#include "modules\world_save\mob\mob.dm"
+#include "modules\world_save\mob\new_player.dm"
+#include "modules\world_save\mob\living\living.dm"
+#include "modules\world_save\mob\skills\persistence_adjust_skills.dm"
+#include "modules\world_save\serializers\_serializer.dm"
+#include "modules\world_save\serializers\json_serializer.dm"
+#include "modules\world_save\serializers\sql_serializer.dm"
+// END_INCLUDE
+#endif
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES

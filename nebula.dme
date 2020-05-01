@@ -3112,9 +3112,10 @@
 #include "maps\antag_spawn\wizard\wizard.dm"
 #include "maps\away\away_sites.dm"
 #include "maps\away_sites_testing\away_sites_testing_define.dm"
-#include "maps\bearcat\bearcat.dm"
 #include "maps\bearcat\bearcat_define.dm"
 #include "maps\example\example_define.dm"
+#include "maps\persistence\outreach.dm"
+#include "maps\persistence\persistence_defines.dm"
 #include "maps\random_ruins\exoplanet_ruins\exoplanet_ruins.dm"
 #include "maps\random_ruins\exoplanet_ruins\crashed_pod\crashed_pod.dm"
 #include "maps\random_ruins\exoplanet_ruins\datacapsule\datacapsule.dm"
@@ -3143,5 +3144,6 @@
 #include "maps\~mapsystem\maps_unit_testing.dm"
 #include "maps\~unit_tests\unit_testing.dm"
 #include "mods\_modpack.dm"
+#include "mods\persistence\game\gamemodes\persistence.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE
