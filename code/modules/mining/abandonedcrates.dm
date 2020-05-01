@@ -96,12 +96,8 @@
 			new/obj/item/gun/energy/plasmacutter(src)
 		if(83 to 84)
 			new/obj/item/toy/katana(src)
-		if(85 to 86)
+		if(85 to 88)
 			new/obj/item/seeds/random(src)
-		if(87) // Rarest things, some are unobtainble otherwise, some are just robust,  1% each
-			new/obj/item/weed_extract(src)
-		if(88)
-			new/obj/item/xenos_claw(src)
 		if(89, 90)
 			new/obj/item/organ/internal/heart(src)
 		if(91)

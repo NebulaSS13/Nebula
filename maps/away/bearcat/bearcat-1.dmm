@@ -906,7 +906,7 @@
 /obj/item/fossil/animal,
 /obj/item/fossil/animal,
 /obj/item/fossil,
-/obj/item/xenos_claw,
+/obj/item/cat_hide,
 /obj/item/ore/strangerock,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)

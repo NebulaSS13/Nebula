@@ -625,7 +625,7 @@
 /area/map_template/wizard_station)
 "bD" = (
 /obj/structure/table/woodentable,
-/obj/item/xenos_claw,
+/obj/item/cat_hide,
 /turf/unsimulated/floor{
 	name = "plating";
 	icon_state = "cult"
