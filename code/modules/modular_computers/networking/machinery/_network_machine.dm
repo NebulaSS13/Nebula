@@ -66,6 +66,8 @@
 
 /obj/machinery/network/proc/update_network_status()
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	if(!D)
+		return
 	if(operable())
 		D.connect()
 	else
