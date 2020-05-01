@@ -8,7 +8,6 @@
 	var/rating = 1
 	var/status = 0             // Flags using PART_STAT defines.
 	var/base_type              // Type representing parent of category for replacer usage.
-	health = 50
 
 /obj/item/stock_parts/attack_hand(mob/user)
 	if(istype(loc, /obj/machinery))
@@ -85,10 +84,14 @@
 
 /obj/item/stock_parts/proc/is_functional()
 	return health > 0
-	
+
 /obj/item/stock_parts/examine(mob/user)
 	. = ..()
 	if(!is_functional())
 		to_chat(user, SPAN_WARNING("It is completely broken."))
-	else if(health < initial(health))
+	else if(health < 0.5 * max_health)
+		to_chat(user, SPAN_WARNING("It is heavily damaged."))
+	else if(health < 0.75 * max_health)
 		to_chat(user, SPAN_NOTICE("It is showing signs of damage."))
+	else if(health < max_health)
+		to_chat(user, SPAN_NOTICE("It is showing some wear and tear."))

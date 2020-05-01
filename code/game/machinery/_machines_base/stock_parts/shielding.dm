@@ -2,7 +2,7 @@
 //Components that soak damage before it reaches other components.
 /obj/item/stock_parts/shielding
 	base_type = /obj/item/stock_parts/shielding
-	health = 80
+	material_health_multiplier = 0.4
 	var/list/protection_types	//types of damage it will soak
 
 /obj/item/stock_parts/shielding/electric
