@@ -10,9 +10,10 @@
 	var/initial_network_key
 	var/lateload
 
-	var/produces_heat = TRUE	// If true, produces and is affected by heat.
-	var/inefficiency = 0.12		// How much power is waste heat.
-	var/heat_threshold = 358.15	// At what temperature the machine will lock up.
+	var/produces_heat = TRUE		// If true, produces and is affected by heat.
+	var/inefficiency = 0.12			// How much power is waste heat.
+	var/heat_threshold = 90 CELSIUS	// At what temperature the machine will lock up.
+	var/overheated = FALSE
 
 /obj/machinery/network/Initialize()
 	. = ..()
@@ -20,13 +21,12 @@
 	if(lateload)
 		return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/network/operable()
+/obj/machinery/network/proc/is_overheated()
 	var/turf/simulated/L = loc
 	if(istype(L))
 		var/datum/gas_mixture/env = L.return_air()
 		if(env.temperature >= heat_threshold)
-			return FALSE
-	return ..()
+			return TRUE
 
 /obj/machinery/network/proc/produce_heat()
 	if (!produces_heat || !use_power || !operable())
@@ -41,7 +41,9 @@
 		env.merge(removed)
 
 /obj/machinery/network/Process()
-	. = ..()
+	set_overheated(is_overheated())
+	if(stat & (BROKEN|NOPOWER))
+		return
 	produce_heat()
 
 /obj/machinery/network/interface_interact(user)
@@ -91,6 +93,11 @@
 	. = ..()
 	if(.)
 		update_network_status()
+
+/obj/machinery/network/proc/set_overheated(new_state)
+	if(new_state != overheated)
+		set_broken(new_state)
+	overheated = new_state
 
 /obj/machinery/network/proc/update_network_status()
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
