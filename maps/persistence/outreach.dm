@@ -2,6 +2,8 @@
 
 	#include "../../mods/persistence/_persistence.dme"
 
+	#include "persistence_defines.dm"
+
 	#include "outreach_areas.dm"
 	#include "outreach_jobs.dm"
 	#include "outreach_lobby.dm"
