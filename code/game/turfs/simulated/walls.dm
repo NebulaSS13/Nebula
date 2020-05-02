@@ -199,20 +199,17 @@
 
 	ChangeTurf(floor_type || get_base_turf_by_area(src))
 
-/turf/simulated/wall/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			src.ChangeTurf(get_base_turf(src.z))
-			return
-		if(2.0)
-			if(prob(75))
-				take_damage(rand(150, 250))
-			else
-				dismantle_wall(1,1)
-		if(3.0)
-			take_damage(rand(0, 250))
+/turf/simulated/wall/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(severity == 1)
+		ChangeTurf(get_base_turf(src.z))
+	else if(severity == 2)
+		if(prob(75))
+			take_damage(rand(150, 250))
 		else
-	return
+			dismantle_wall(1,1)
+	else if(severity == 3)
+		take_damage(rand(0, 250))
 
 // Wall-rot effect, a nasty fungus that destroys walls.
 /turf/simulated/wall/proc/rot()

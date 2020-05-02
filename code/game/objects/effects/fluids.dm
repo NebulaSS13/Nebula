@@ -13,9 +13,6 @@
 	var/last_flow_strength = 0
 	var/next_fluid_act = 0
 
-/obj/effect/fluid/ex_act()
-	return
-
 /obj/effect/fluid/airlock_crush()
 	qdel(src)
 
@@ -136,7 +133,8 @@
 	opacity = 0
 	anchored = 1
 
-/obj/effect/flood/ex_act()
+/obj/effect/flood/explosion_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/effect/flood/Initialize()

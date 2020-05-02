@@ -215,20 +215,14 @@ By design, d1 is the smallest direction and d2 is the highest
 			return 1
 	return 0
 
-//explosion handling
-/obj/structure/cable/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-		if(2.0)
-			if (prob(50))
-				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
-				qdel(src)
+/obj/structure/cable/create_dismantled_products(turf/T)
+	new /obj/item/stack/cable_coil(loc, (d1 ? 2 : 1), color)
 
-		if(3.0)
-			if (prob(25))
-				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
-				qdel(src)
+//explosion handling
+/obj/structure/cable/explosion_act(severity)
+	. = ..()
+	if(. && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(25))))
+		physically_destroyed()
 
 obj/structure/cable/proc/cableColor(var/colorC)
 	var/color_n = "#dd0000"

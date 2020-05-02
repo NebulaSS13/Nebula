@@ -45,13 +45,10 @@
 	else
 		return ..()
 
-/turf/simulated/floor/exoplanet/ex_act(severity)
-	switch(severity)
-		if(1)
-			ChangeTurf(get_base_turf_by_area(src))
-		if(2)
-			if(prob(40))
-				ChangeTurf(get_base_turf_by_area(src))
+/turf/simulated/floor/exoplanet/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
+		ChangeTurf(get_base_turf_by_area(src))
 
 /turf/simulated/floor/exoplanet/Initialize()
 	. = ..()

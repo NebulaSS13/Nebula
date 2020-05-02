@@ -48,30 +48,24 @@
 	if (N)
 		amount_per_transfer_from_this = N
 
-/obj/structure/reagent_dispensers/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				new /obj/effect/effect/water(loc)
-				qdel(src)
-				return
-		if(3.0)
-			if (prob(5))
-				new /obj/effect/effect/water(loc)
-				qdel(src)
-				return
-		else
-	return
+/obj/structure/reagent_dispensers/physically_destroyed()
+	if(reagents?.total_volume)
+		var/turf/T = get_turf(src)
+		if(T)
+			for(var/r in reagents.reagent_volumes)
+				T.add_fluid(REAGENT_VOLUME(reagents, r), r)
+	. = ..()
+
+/obj/structure/reagent_dispensers/explosion_act(severity)
+	. = ..()
+	if(. && (severity == 1) || (severity == 2 && prob(50)) || (severity == 3 && prob(5)))
+		physically_destroyed()
 
 /obj/structure/reagent_dispensers/AltClick(var/mob/user)
 	if(possible_transfer_amounts)
 		set_amount_per_transfer_from_this()
 	else
 		return ..()
-
 
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
@@ -194,7 +188,7 @@
 	if(isflamesource(W))
 		log_and_message_admins("triggered a fuel tank explosion with \the [W].")
 		visible_message(SPAN_DANGER("\The [user] puts \the [W] to \the [src]!"))
-		explode()
+		try_detonate_reagents()
 		return TRUE
 	return FALSE
 
@@ -209,19 +203,13 @@
 				log_and_message_admins("shot a fuel tank outside the world.")
 
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
-			explode()
-
-/obj/structure/reagent_dispensers/fueltank/proc/explode()
-	for(var/rtype in reagents.reagent_volumes)
-		var/decl/reagent/R = decls_repository.get_decl(reagents, rtype)
-		R.ex_act(src, 1)
-	qdel(src)
+			try_detonate_reagents()
 
 /obj/structure/reagent_dispensers/fueltank/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if (modded)
-		explode()
+		try_detonate_reagents()
 	else if (exposed_temperature > T0C+500)
-		explode()
+		try_detonate_reagents()
 	return ..()
 
 /obj/structure/reagent_dispensers/fueltank/Move()

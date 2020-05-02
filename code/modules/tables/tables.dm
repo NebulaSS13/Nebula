@@ -53,7 +53,8 @@
 /obj/structure/table/get_material_health_modifier()
 	. = 0.5
 
-/obj/structure/table/destroyed()
+/obj/structure/table/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	visible_message(SPAN_DANGER("\The [src] breaks down!"))
 	. = break_to_parts()
 

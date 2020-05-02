@@ -128,9 +128,11 @@
 		new /obj/item/stack/net(src.loc)
 		qdel(src)
 
-/obj/structure/net/destroyed()
+/obj/structure/net/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	visible_message("<span class='warning'>\The [src] is torn apart!</span>")
 	qdel(src)
+	. = TRUE
 
 /obj/structure/net/bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray

@@ -85,16 +85,6 @@
 			return 0
 	return 1
 
-/obj/structure/closet/proc/dump_contents()
-	for(var/mob/M in src)
-		M.dropInto(loc)
-		if(M.client)
-			M.client.eye = M.client.mob
-			M.client.perspective = MOB_PERSPECTIVE
-
-	for(var/atom/movable/AM in src)
-		AM.dropInto(loc)
-
 /obj/structure/closet/proc/store_contents()
 	var/stored_units = 0
 
@@ -104,7 +94,7 @@
 		stored_units += store_mobs(stored_units)
 	if(storage_types & CLOSET_STORAGE_STRUCTURES)
 		stored_units += store_structures(stored_units)
-
+		
 /obj/structure/closet/proc/open()
 	if(src.opened)
 		return 0
@@ -112,7 +102,7 @@
 	if(!src.can_open())
 		return 0
 
-	src.dump_contents()
+	dump_contents()
 
 	src.opened = 1
 	playsound(src.loc, open_sound, 50, 1, -3)
@@ -218,28 +208,10 @@
 		update_icon()
 
 // this should probably use dump_contents()
-/obj/structure/closet/ex_act(severity)
-	switch(severity)
-		if(1)
-			for(var/atom/movable/A in src)//pulls everything out of the locker and hits it with an explosion
-				A.forceMove(src.loc)
-				A.ex_act(severity + 1)
-			qdel(src)
-		if(2)
-			if(prob(50))
-				for (var/atom/movable/A in src)
-					A.forceMove(src.loc)
-					A.ex_act(severity + 1)
-				qdel(src)
-		if(3)
-			if(prob(5))
-				for(var/atom/movable/A in src)
-					A.forceMove(src.loc)
-				qdel(src)
-
-/obj/structure/closet/destroyed()
-	dump_contents()
-	. = ..()
+/obj/structure/closet/explosion_act(severity)
+	..()
+	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(5))))
+		physically_destroyed()
 
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
 	if(Proj.penetrating)

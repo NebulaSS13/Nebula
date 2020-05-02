@@ -59,15 +59,17 @@
 				"You hear heavy droning.")
 		return TOPIC_REFRESH
 
-/obj/machinery/shieldwallgen/ex_act(var/severity)
-	switch(severity)
-		if(1)
-			active = 0
-			storedpower = 0
-		if(2)
-			storedpower -= rand(min(storedpower,max_stored_power/2), max_stored_power)
-		if(3)
-			storedpower -= rand(0, max_stored_power)
+/obj/machinery/shieldwallgen/explosion_act(var/severity)
+	. = ..()
+	if(.)
+		switch(severity)
+			if(1)
+				active = 0
+				storedpower = 0
+			if(2)
+				storedpower -= rand(min(storedpower,max_stored_power/2), max_stored_power)
+			if(3)
+				storedpower -= rand(0, max_stored_power)
 
 /obj/machinery/shieldwallgen/emp_act(var/severity)
 	switch(severity)
@@ -321,21 +323,18 @@
 	..()
 	return
 
-
-/obj/machinery/shieldwall/ex_act(severity)
-	if(needs_power)
-		var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
-		switch(severity)
-			if(1.0) //big boom
-				G.storedpower -= rand(30000, min(G.storedpower, 60000))
-
-			if(2.0) //medium boom
-				G.storedpower -= rand(15000, min(G.storedpower, 30000))
-
-			if(3.0) //lil boom
-				G.storedpower -= rand(5000, min(G.storedpower, 15000))
-	return
-
+/obj/machinery/shieldwall/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(!needs_power)
+		return
+	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
+	switch(severity)
+		if(1)
+			G.storedpower -= rand(30000, min(G.storedpower, 60000))
+		if(2)
+			G.storedpower -= rand(15000, min(G.storedpower, 30000))
+		if(3)
+			G.storedpower -= rand(5000, min(G.storedpower, 15000))
 
 /obj/machinery/shieldwall/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1

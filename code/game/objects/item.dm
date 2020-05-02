@@ -171,16 +171,10 @@
 			return TRUE
 	return FALSE
 
-/obj/item/ex_act(severity)
-	switch(severity)
-		if(1)
-			qdel(src)
-		if(2)
-			if (prob(50))
-				qdel(src)
-		if(3)
-			if (prob(5))
-				qdel(src)
+/obj/item/explosion_act(severity)
+	..()
+	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50) || (severity == 3 && prob(5)))))
+		qdel(src)
 
 /obj/item/examine(mob/user, distance)
 	var/desc_comp = "" //For "description composite"

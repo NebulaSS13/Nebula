@@ -112,8 +112,10 @@
 /obj/effect/dummy/spell_jaunt/proc/allow_move()
 	canmove = TRUE
 
-/obj/effect/dummy/spell_jaunt/ex_act(blah)
+/obj/effect/dummy/spell_jaunt/explosion_act(blah)
+	SHOULD_CALL_PARENT(FALSE)
 	return
+
 /obj/effect/dummy/spell_jaunt/bullet_act(blah)
 	return
 

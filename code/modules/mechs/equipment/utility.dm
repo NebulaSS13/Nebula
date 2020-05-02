@@ -372,7 +372,7 @@
 					var/turf/simulated/wall/W = target
 					if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > drill_head.material.hardness)
 						to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
-					target.ex_act(2)
+					target.explosion_act(2)
 					drill_head.durability -= 1
 					log_and_message_admins("used [src] on the wall [W].", user, owner.loc)
 				else if(istype(target, /turf/simulated/mineral))
@@ -386,7 +386,7 @@
 							M.gets_dug()
 							drill_head.durability -= 1
 				else if(target.loc == T)
-					target.ex_act(2)
+					target.explosion_act(2)
 					drill_head.durability -= 1
 					log_and_message_admins("[src] used to drill [target].", user, owner.loc)
 

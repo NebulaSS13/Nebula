@@ -114,7 +114,7 @@
 	show_damage_message(health/maxhealth)
 
 	if(health == 0)
-		destroyed()
+		physically_destroyed()
 
 /obj/structure/proc/show_damage_message(var/perc)
 	if(perc > 0.75)
@@ -129,8 +129,8 @@
 		visible_message(SPAN_WARNING("\The [src] is showing some damage!"))
 		last_damage_message = 0.75
 
-/obj/structure/proc/destroyed()
-	. = dismantle()
+/obj/structure/physically_destroyed()
+	. = ..() && dismantle()
 
 /obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
@@ -212,13 +212,15 @@
 		qdel(G)
 		return TRUE
 
-/obj/structure/ex_act(severity)
-	if(severity == 1)
-		destroyed()
-	else if(severity == 2)
-		take_damage(rand(20, 30))
-	else
-		take_damage(rand(5, 15))
+/obj/structure/explosion_act(severity)
+	..()
+	if(QDELETED(src))
+		if(severity == 1)
+			physically_destroyed()
+		else if(severity == 2)
+			take_damage(rand(20, 30))
+		else
+			take_damage(rand(5, 15))
 
 /obj/structure/proc/can_repair(var/mob/user)
 	if(health >= maxhealth)

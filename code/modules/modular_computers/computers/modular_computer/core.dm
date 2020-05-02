@@ -139,9 +139,11 @@
 	if(battery_module)
 		return battery_module.get_cell()
 
-/obj/item/modular_computer/ex_act(var/severity)
+/obj/item/modular_computer/explosion_act(var/severity)
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	assembly.ex_act(severity)
+	if(!QDELETED(src))
+		. = ..()
 
 /obj/item/modular_computer/emp_act(var/severity)
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)

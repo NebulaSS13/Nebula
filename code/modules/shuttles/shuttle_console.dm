@@ -117,7 +117,8 @@
 /obj/machinery/computer/shuttle_control/bullet_act(var/obj/item/projectile/Proj)
 	visible_message("\The [Proj] ricochets off \the [src]!")
 
-/obj/machinery/computer/shuttle_control/ex_act()
+/obj/machinery/computer/shuttle_control/explosion_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/machinery/computer/shuttle_control/emp_act()

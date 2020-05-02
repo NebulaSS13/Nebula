@@ -285,8 +285,37 @@ its easier to just keep the beam vertical.
 /atom/proc/on_update_icon()
 	return
 
-/atom/proc/ex_act(var/severity)
-	return
+/atom/proc/get_contained_external_atoms()
+	. = contents
+
+/atom/proc/dump_contents()
+	for(var/thing in get_contained_external_atoms())
+		var/atom/movable/AM = thing
+		AM.dropInto(loc)
+		if(ismob(AM))
+			var/mob/M = AM
+			if(M.client)
+				M.client.eye = M.client.mob
+				M.client.perspective = MOB_PERSPECTIVE
+
+/atom/proc/physically_destroyed()
+	SHOULD_CALL_PARENT(TRUE)
+	dump_contents()
+	. = TRUE
+
+/atom/proc/try_detonate_reagents(var/severity = 3)
+	if(reagents)
+		for(var/rtype in reagents.reagent_volumes)
+			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			R.explosion_act(src, severity)
+
+/atom/proc/explosion_act(var/severity)
+	SHOULD_CALL_PARENT(TRUE)
+	. = (severity <= 3)
+	if(.)
+		for(var/atom/movable/AM in contents)
+			AM.explosion_act(severity++)
+		try_detonate_reagents(severity)
 
 /atom/proc/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	return NO_EMAG_ACT
@@ -369,7 +398,6 @@ its easier to just keep the beam vertical.
 		return 1
 	else
 		return 0
-
 
 // Show a message to all mobs and objects in sight of this atom
 // Use for objects performing visible actions

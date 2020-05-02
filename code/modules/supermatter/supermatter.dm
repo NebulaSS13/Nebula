@@ -531,16 +531,11 @@
 /obj/machinery/power/supermatter/RepelAirflowDest(n)
 	return
 
-/obj/machinery/power/supermatter/ex_act(var/severity)
-	..()
-	switch(severity)
-		if(1.0)
-			power *= 4
-		if(2.0)
-			power *= 3
-		if(3.0)
-			power *= 2
-	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
+/obj/machinery/power/supermatter/explosion_act(var/severity)
+	. = ..()
+	if(.)
+		power *= max(1, 5 - severity)
+		log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
 
 /obj/machinery/power/supermatter/get_artifact_scan_data()
 	return "Superdense phoron clump - appears to have been shaped or hewn, structure is composed of matter aproximately 20 times denser than ordinary refined phoron."

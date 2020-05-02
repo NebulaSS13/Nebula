@@ -71,7 +71,8 @@
 /obj/structure/window/CanFluidPass(var/coming_from)
 	return (!is_fulltile() && coming_from != dir)
 
-/obj/structure/window/destroyed()
+/obj/structure/window/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	. = shatter()
 
 /obj/structure/window/take_damage(damage = 0)
@@ -96,15 +97,10 @@
 	..()
 	take_damage(proj_damage)
 
-/obj/structure/window/ex_act(severity)
-	switch(severity)
-		if(1)
-			qdel(src)
-		if(2)
-			shatter(0)
-		if(3)
-			if(prob(50))
-				shatter(0)
+/obj/structure/window/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src) && (severity != 3 || prob(50)))
+		physically_destroyed()
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
@@ -518,7 +514,8 @@
 /obj/structure/window/reinforced/crescent/attackby()
 	return
 
-/obj/structure/window/reinforced/crescent/ex_act()
+/obj/structure/window/reinforced/crescent/explosion_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/structure/window/reinforced/crescent/hitby()

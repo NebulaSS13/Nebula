@@ -66,12 +66,14 @@
 	visible_message(SPAN_DANGER("The barricade is smashed apart!"))
 	. = ..()
 
-/obj/structure/barricade/ex_act(severity)
-	if(severity == 1)
-		parts_type = null
-		dismantle(src)
-	else if(severity == 2)
-		take_damage(25)
+/obj/structure/barricade/explosion_act(severity)
+	..()
+	if(QDELETED(src))
+		if(severity == 1)
+			parts_type = null
+			physically_destroyed(src)
+		else if(severity == 2)
+			take_damage(25)
 
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 	if(air_group || (height==0))

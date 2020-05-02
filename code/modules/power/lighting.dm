@@ -379,17 +379,13 @@
 // explosion effect
 // destroy the whole light fixture or just shatter it
 
-/obj/machinery/light/ex_act(severity)
-	switch(severity)
-		if(1)
-			qdel(src)
-			return
-		if(2)
-			if (prob(75))
-				broken()
-		if(3)
-			if (prob(50))
-				broken()
+/obj/machinery/light/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src))
+		if(severity == 1)
+			physically_destroyed()
+		else if((severity == 2 && prob(75)) || (severity == 3 && prob(50)))
+			broken()
 
 // timed process
 // use power

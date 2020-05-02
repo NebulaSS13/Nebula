@@ -85,19 +85,14 @@
 		src.add_fingerprint(usr)
 	..()
 
-/obj/machinery/self_destruct/ex_act(severity)
-	switch(severity)
-		if(1)
-			set_damaged()
-		if(2)
-			if(prob(50))
-				set_damaged()
-		if(3)
-			if(prob(25))
-				set_damaged()
+/obj/machinery/self_destruct/explosion_act(severity)
+	..()
+	if(!QDELETED(src) && (severity == 1 || (prob(100 - (25 * severity)))))
+		set_damaged()
 
 /obj/machinery/self_destruct/proc/set_damaged()
-		src.visible_message("<span class='warning'>[src] dents and chars.</span>")
+	if(!damaged)
+		visible_message(SPAN_DANGER("\The [src] dents and chars."))
 		damaged = 1
 
 /obj/machinery/self_destruct/examine(mob/user)
