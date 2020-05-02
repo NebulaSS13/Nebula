@@ -170,6 +170,10 @@
 				take_damage(-damage)
 		return TRUE
 
+	if(isProtected(user))
+		to_chat(user, SPAN_WARNING("This cannot be deconstructed while in a safe-zone."))
+		return
+
 	// Basic dismantling.
 	if(isnull(construction_stage) || !reinf_material)
 

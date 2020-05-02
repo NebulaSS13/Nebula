@@ -117,6 +117,7 @@
 #include "code\_helpers\medical_scans.dm"
 #include "code\_helpers\mobs.dm"
 #include "code\_helpers\names.dm"
+#include "code\_helpers\protection.dm"
 #include "code\_helpers\sanitize_values.dm"
 #include "code\_helpers\spawn_sync.dm"
 #include "code\_helpers\storage.dm"

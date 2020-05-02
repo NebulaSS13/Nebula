@@ -64,6 +64,9 @@
 	if((. = ..()))
 		return
 	if(isCrowbar(I))
+		if(machine.isProtected(user))
+			to_chat(user, SPAN_NOTICE("This machine is protected by a safe-zone."))
+			return
 		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
 		machine.visible_message(SPAN_NOTICE("\The [user] deconstructs \the [machine]."))

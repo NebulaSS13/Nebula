@@ -65,13 +65,17 @@
 	return O
 
 /datum/stack_recipe/proc/can_make(mob/user)
+	if(user.loc.isProtected(user))
+		to_chat(user, SPAN_WARNING("This area is protected and cannot be built in."))
+		return FALSE
+
 	if (one_per_turf && (locate(result_type) in user.loc))
-		to_chat(user, "<span class='warning'>There is another [display_name()] here!</span>")
+		to_chat(user, SPAN_WARNING("There is another [display_name()] here!"))
 		return FALSE
 
 	var/turf/T = get_turf(user.loc)
 	if (on_floor && !T.is_floor())
-		to_chat(user, "<span class='warning'>\The [display_name()] must be constructed on the floor!</span>")
+		to_chat(user, SPAN_WARNING("\The [display_name()] must be constructed on the floor!"))
 		return FALSE
 
 	return TRUE

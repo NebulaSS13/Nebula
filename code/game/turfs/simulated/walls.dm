@@ -146,11 +146,15 @@
 			visible_message(SPAN_DANGER("\The [src] spontaneously combusts!"))
 
 /turf/simulated/wall/proc/take_damage(dam)
+	if(isProtected())
+		return
 	if(dam)
 		damage = max(0, damage + dam)
 		update_damage()
 
 /turf/simulated/wall/proc/update_damage()
+	if(isProtected())
+		return
 	var/cap = material.integrity
 	if(reinf_material)
 		cap += reinf_material.integrity
@@ -223,6 +227,8 @@
 		new/obj/effect/overlay/wallrot(src)
 
 /turf/simulated/wall/proc/can_melt()
+	if(isProtected())
+		return 0
 	if(material.flags & MAT_FLAG_UNMELTABLE)
 		return 0
 	return 1
@@ -236,6 +242,8 @@
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
+	if(isProtected())
+		return
 	if(material.combustion_effect(src, temperature, 0.7))
 		spawn(2)
 			for(var/turf/simulated/wall/W in range(3,src))

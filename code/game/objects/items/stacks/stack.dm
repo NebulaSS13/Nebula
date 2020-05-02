@@ -158,6 +158,10 @@
 	if (href_list["make"])
 		if (src.get_amount() < 1) qdel(src) //Never should happen
 
+		if(usr.loc.isProtected(usr))
+			to_chat(usr, SPAN_WARNING("This area is protected and cannot be built in."))
+			return
+
 		var/list/recipes_list = recipes
 		if (href_list["sublist"])
 			var/datum/stack_recipe_list/srl = recipes_list[text2num(href_list["sublist"])]

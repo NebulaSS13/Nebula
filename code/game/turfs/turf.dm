@@ -91,6 +91,9 @@
 /turf/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
+	if(isProtected(user))
+		return 0
+
 	if(user.restrained())
 		return 0
 
