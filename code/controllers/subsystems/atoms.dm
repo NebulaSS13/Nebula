@@ -8,6 +8,8 @@ SUBSYSTEM_DEF(atoms)
 	init_order = SS_INIT_ATOMS
 	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 
+	// override and GetArguments() exists for mod-override/downstream hook functionality.
+	// Useful for total-overhaul type modifications.
 	var/override_populate_parts = FALSE
 	var/populate_parts = TRUE
 
