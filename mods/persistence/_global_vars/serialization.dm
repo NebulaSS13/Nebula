@@ -1,7 +1,7 @@
 GLOBAL_LIST_EMPTY(flatten_types)
 GLOBAL_LIST_EMPTY(wrapped_types)
 GLOBAL_LIST_INIT(saved_vars, initialize_saved_vars())
-GLOBAL_LIST_INIT(blacklisted_vars, list("is_processing", "vars", "active_timers", "weakref", "extensions", "type", "parent_type"))
+GLOBAL_LIST_INIT(blacklisted_vars, list("is_processing", "vars", "active_timers", "weakref", "type", "parent_type"))
 
 /proc/initialize_saved_vars()
 	. = list()
@@ -11,12 +11,17 @@ GLOBAL_LIST_INIT(blacklisted_vars, list("is_processing", "vars", "active_timers"
 	var/loaded_vars = 0
 
 	// Actual serialization
-	for(var/saved_var in json_decode(file2text('./saved_vars.json')))
+	for(var/saved_var in json_decode(file2text('./mods/persistence/saved_vars.json')))
 		if(!saved_var["path"])
 			continue
 		if(!saved_var["vars"] || !length(saved_var["vars"]))
 			continue
-		var/path = text2path(saved_var["path"])
+		var/path
+		try
+			path = text2path(saved_var["path"])
+		catch
+			to_world_log("[saved_var["path"]] does not exist.")
+			continue
 		var/subtypes = subtypesof(path)
 		loaded_types += length(subtypes) + 1
 		if(saved_var["flatten"])
