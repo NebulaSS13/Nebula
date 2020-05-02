@@ -92,7 +92,6 @@ SUBSYSTEM_DEF(mining)
 /datum/controller/subsystem/mining/proc/SpitOutMobs(var/list/mobs, var/Z)
 	if(!Z)
 		CRASH("No Z level was provided for mining spitout!")
-		return
 
 	if(!LAZYLEN(mobs))
 		return
