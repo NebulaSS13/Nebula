@@ -10,6 +10,7 @@
 	var/list/surface_z = list(3, 4)
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/outreach/Initialize()
+	. = ..()
 	map_z = GLOB.using_map.station_levels
 	register_z_levels() // This makes external calls to update global z level information.
 

@@ -1,7 +1,4 @@
 /mob/new_player
-	var/spawning = FALSE         //Referenced when you want to delete the new_player later on in the code.
-	var/datum/browser/panel
-	var/ready = 0
 	universal_speak = TRUE
 
 	invisibility = 101
@@ -14,7 +11,7 @@
 
 	virtual_mob = null // Hear no evil, speak no evil
 
-/mob/new_player/proc/new_player_panel(force = FALSE)
+/mob/new_player/new_player_panel(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
 		return // Not ready yet.
 	var/output = list()
@@ -103,7 +100,7 @@
 
 	qdel(src)
 
-/mob/new_player/proc/create_character()
+/mob/new_player/create_character()
 	spawning = TRUE
 	transition_to_game()
 	var/turf/spawn_turf
@@ -165,17 +162,6 @@
 /mob/new_player/Move()
 	return 0
 
-/mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
-	if(!S.is_available_for_join() && !has_admin_rights())
-		if(show_alert)
-			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
-		return 0
-	if(!is_alien_whitelisted(src, S))
-		if(show_alert)
-			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
-		return 0
-	return 1
-
 /mob/new_player/get_species()
 	var/datum/species/chosen_species
 	if(client.prefs.species)
@@ -193,29 +179,11 @@
 /mob/new_player/is_ready()
 	return ready && ..()
 
-/mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
-	return
-
-/mob/new_player/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
-	return
-
-/mob/new_player/show_message(msg, type, alt, alt_type)
-	return
-
-mob/new_player/MayRespawn()
-	return 1
-
-/mob/new_player/touch_map_edge()
-	return
-
-/mob/new_player/say(var/message)
-	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)
-
 /mob/new_player/proc/transition_to_game()
 	close_spawn_windows()
 	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel)) // stops lobby music
 
-/mob/new_player/proc/close_spawn_windows()
+/mob/new_player/close_spawn_windows()
 	close_browser(src, "window=latechoices") //closes late choices window
 	panel.close()
 
