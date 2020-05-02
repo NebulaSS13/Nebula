@@ -114,9 +114,11 @@
 
 /atom/movable/Destroy()
 	. = ..()
-#ifdef !DISABLE_DEBUG_CRASH
+#ifdef DISABLE_DEBUG_CRASH
+	// meh do nothing. we know what we're doing. pro engineers.
+#else
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
-		crash_with("Was deleted before initalization")
+		crash_with("Was deleted before initialization")
 #endif
 
 	for(var/A in src)
