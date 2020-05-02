@@ -26,9 +26,12 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	..()
 	src.holder = holder
 	if(!istype(holder, holder_type))
-		// This doesn't need to be a crash.
+#ifdef DISABLE_DEBUG_CRASH
 		to_world_log("Our holder is null/the wrong type!") 
 		return ..()
+#else
+		CRASH("Our holder is null/the wrong type!")
+#endif
 
 	// Generate new wires
 	if(random)
