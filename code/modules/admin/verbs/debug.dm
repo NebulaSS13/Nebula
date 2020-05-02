@@ -481,3 +481,14 @@
 
 	images -= powernet_markers
 	QDEL_NULL_LIST(powernet_markers)
+
+/client/proc/spawn_material()
+	set category = "Debug"
+	set name = "Spawn Material Stack"
+	if(!check_rights(R_DEBUG)) return
+
+	var/material = input("Select material to spawn") as null|anything in SSmaterials.materials_by_name
+	if(!material)
+		return
+	var/material/M = SSmaterials.get_material_datum(material)
+	new M.stack_type(get_turf(mob), 50, M)
