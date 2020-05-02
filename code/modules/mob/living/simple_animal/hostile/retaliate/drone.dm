@@ -62,7 +62,7 @@
 	ion_trail.set_up(src)
 	ion_trail.start()
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Allow_Spacemove(var/check_drift = 0)
+/mob/living/simple_animal/hostile/retaliate/malf_drone/Process_Spacemove()
 	return 1
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/proc/Haywire()

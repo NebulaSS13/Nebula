@@ -1,6 +1,6 @@
 // Water!
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
-/datum/reagent/water
+/decl/reagent/water
 	name = "water"
 	description = "A ubiquitous chemical substance composed of hydrogen and oxygen."
 	color = "#0064c8"
@@ -9,26 +9,26 @@
 	taste_description = "water"
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
-	chilling_products = list(/datum/reagent/drink/ice)
+	chilling_products = list(/decl/reagent/drink/ice)
 	chilling_point = T0C
-	heating_products = list(/datum/reagent/water/boiling)
+	heating_products = list(/decl/reagent/water/boiling)
 	heating_point = T100C
 	value = 0.01
 
-/datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(2 * removed)
 
-/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(2 * removed)
 
-/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjust_hydration(removed * 10)
 
-/datum/reagent/water/touch_turf(var/turf/simulated/T)
+/decl/reagent/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(!istype(T))
 		return
 
@@ -43,6 +43,7 @@
 		T.assume_air(lowertemp)
 		qdel(hotspot)
 
+	var/volume = REAGENT_VOLUME(holder, type)
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
 		var/removed_heat = between(0, volume * WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
@@ -53,24 +54,25 @@
 		var/turf/simulated/S = T
 		S.wet_floor(8, TRUE)
 
-/datum/reagent/water/touch_obj(var/obj/O)
+/decl/reagent/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O, /obj/item/chems/food/snacks/monkeycube))
 		var/obj/item/chems/food/snacks/monkeycube/cube = O
 		if(!cube.wrapped)
 			cube.Expand()
 
-/datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
-	if(istype(L))
-		var/needed = L.fire_stacks * 10
+/decl/reagent/water/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
+	if(istype(M))
+		var/needed = M.fire_stacks * 10
 		if(amount > needed)
-			L.fire_stacks = 0
-			L.ExtinguishMob()
-			remove_self(needed)
-		else
-			L.adjust_fire_stacks(-(amount / 10))
-			remove_self(amount)
+			M.fire_stacks = 0
+			M.ExtinguishMob()
+			holder.remove_reagent(type, needed)
 
-/datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+		else
+			M.adjust_fire_stacks(-(amount / 10))
+			holder.remove_reagent(type, amount)
+
+/decl/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(10 * removed)	// Babies have 150 health, adults have 200; So, 15 units and 20
@@ -84,9 +86,9 @@
 		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 		M.confused = max(M.confused, 2)
 
-/datum/reagent/water/boiling
+/decl/reagent/water/boiling
 	name = "boiling water"
-	chilling_products = list(/datum/reagent/water)
+	chilling_products = list(/decl/reagent/water)
 	chilling_point =   99 CELSIUS
 	chilling_message = "stops boiling."
 	heating_products =  list(null)
@@ -94,7 +96,7 @@
 	hidden_from_codex = TRUE
 
 // Ice is a drink for some reason.
-/datum/reagent/drink/ice
+/decl/reagent/drink/ice
 	name = "ice"
 	description = "Frozen water, your dentist wouldn't like you chewing this."
 	taste_description = "ice"
@@ -108,5 +110,5 @@
 	glass_icon = DRINK_ICON_NOISY
 
 	heating_message = "cracks and melts."
-	heating_products = list(/datum/reagent/water)
+	heating_products = list(/decl/reagent/water)
 	heating_point = 299 // This is about 26C, higher than the actual melting point of ice but allows drinks to be made properly without weird workarounds.

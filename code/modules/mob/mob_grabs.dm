@@ -24,7 +24,6 @@
 		if((grabber.mob_size == mob_size) && grabber.can_pull_mobs == MOB_PULL_SMALLER)
 			to_chat(grabber, SPAN_WARNING("\The [src] is too large for you to move!"))
 			return FALSE
-		inertia_dir = 0
 
 /mob/proc/handle_grab_damage()
 	set waitfor = 0

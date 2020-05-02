@@ -3,3 +3,5 @@
 	desc = "CEO of NanoTrasen corporation. Perfect for scaring the unionizing children."
 	icon_state = "trasen"
 	visible_name = "Jack Trasen"
+	icon = 'mods/corporate/icons/obj/clothing/obj_mask.dmi'
+	item_icons = list(slot_wear_mask_str = 'mods/corporate/icons/mob/onmob_mask.dmi')

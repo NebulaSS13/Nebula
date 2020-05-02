@@ -1,3 +1,11 @@
+
+/obj/item/clothing/accessory/tunic
+	name = "researcher's tunic"
+	desc = "A fashionable tunic that EXO provides to their lab workers."
+	icon_state = "tunic"
+	icon = 'mods/corporate/icons/obj/clothing/obj_accessories.dmi'
+	accessory_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_accessories.dmi', slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_accessories.dmi')
+
 /obj/item/clothing/accessory/tunic/nanotrasen
 	name = "\improper NanoTrasen tunic"
 	desc = "A fashionable tunic that NanoTrasen provides to their lab workers."

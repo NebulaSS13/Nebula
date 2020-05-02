@@ -159,32 +159,39 @@
 			if(assailant)
 				admin_attack_log(TT.thrower, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
 
-		// Begin BS12 momentum-transfer code.
-		var/mass = 1.5
-		if(istype(O, /obj/item))
-			var/obj/item/I = O
-			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
-		var/momentum = TT.speed*mass
+		if(O.can_embed() && (throw_damage > 5*O.w_class)) //Handles embedding for non-humans and simple_animals.
+			embed(O)
 
-		if(momentum >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/dir = TT.init_dir
+	process_momentum(AM, TT)
 
-			visible_message("<span class='warning'>\The [src] staggers under the impact!</span>","<span class='warning'>You stagger under the impact!</span>")
-			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+/mob/living/momentum_power(var/atom/movable/AM, var/datum/thrownthing/TT)
+	if(anchored || buckled)
+		return 0
 
-			if(!O || !src) return
+	. = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
+	if(has_gravity() || check_space_footing())
+		. *= 0.5
 
-			if(O.can_embed()) //Projectile is suitable for pinning.
-				//Handles embedding for non-humans and simple_animals.
-				embed(O)
+/mob/living/momentum_do(var/power, var/datum/thrownthing/TT, var/atom/movable/AM)
+	if(power >= 0.75)		//snowflake to enable being pinned to walls
+		var/direction = TT.init_dir
+		throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5), callback = CALLBACK(src,/mob/living/proc/pin_to_wall,AM,direction))
+		visible_message(SPAN_DANGER("\The [src] staggers under the impact!"),SPAN_DANGER("You stagger under the impact!"))
+		return
 
-				var/turf/T = near_wall(dir,2)
+	. = ..()
 
-				if(T)
-					forceMove(T)
-					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-					src.anchored = 1
-					src.pinned += O
+/mob/living/proc/pin_to_wall(var/obj/O, var/direction)
+	if(!istype(O) || O.loc != src || !O.can_embed())//Projectile is suitable for pinning.
+		return
+
+	var/turf/T = near_wall(direction,2)
+
+	if(T)
+		forceMove(T)
+		visible_message(SPAN_DANGER("[src] is pinned to the wall by [O]!"),SPAN_DANGER("You are pinned to the wall by [O]!"))
+		src.anchored = 1
+		src.pinned += O
 
 /mob/living/proc/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	O.forceMove(src)

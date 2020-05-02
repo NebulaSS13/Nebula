@@ -67,7 +67,7 @@
 
 /obj/item/chems/glass/bottle/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/adrenaline, 60)
+	reagents.add_reagent(/decl/reagent/adrenaline, 60)
 	update_icon()
 
 /obj/item/chems/glass/bottle/toxin
@@ -77,7 +77,7 @@
 
 /obj/item/chems/glass/bottle/toxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin, 60)
+	reagents.add_reagent(/decl/reagent/toxin, 60)
 	update_icon()
 
 
@@ -88,7 +88,7 @@
 
 /obj/item/chems/glass/bottle/cyanide/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin/cyanide, 30) //volume changed to match chloral
+	reagents.add_reagent(/decl/reagent/toxin/cyanide, 30) //volume changed to match chloral
 	update_icon()
 
 
@@ -99,7 +99,7 @@
 
 /obj/item/chems/glass/bottle/sedatives/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/sedatives, 60)
+	reagents.add_reagent(/decl/reagent/sedatives, 60)
 	update_icon()
 
 
@@ -110,7 +110,7 @@
 
 /obj/item/chems/glass/bottle/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/antitoxins, 60)
+	reagents.add_reagent(/decl/reagent/antitoxins, 60)
 	update_icon()
 
 
@@ -121,7 +121,7 @@
 
 /obj/item/chems/glass/bottle/mutagenics/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/mutagenics, 60)
+	reagents.add_reagent(/decl/reagent/mutagenics, 60)
 	update_icon()
 
 
@@ -132,7 +132,7 @@
 
 /obj/item/chems/glass/bottle/ammonia/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/ammonia, 60)
+	reagents.add_reagent(/decl/reagent/ammonia, 60)
 	update_icon()
 
 
@@ -143,7 +143,7 @@
 
 /obj/item/chems/glass/bottle/eznutrient/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin/fertilizer/eznutrient, 60)
+	reagents.add_reagent(/decl/reagent/toxin/fertilizer/eznutrient, 60)
 	update_icon()
 
 
@@ -154,7 +154,7 @@
 
 /obj/item/chems/glass/bottle/left4zed/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin/fertilizer/left4zed, 60)
+	reagents.add_reagent(/decl/reagent/toxin/fertilizer/left4zed, 60)
 	update_icon()
 
 
@@ -165,7 +165,7 @@
 
 /obj/item/chems/glass/bottle/robustharvest/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin/fertilizer/robustharvest, 60)
+	reagents.add_reagent(/decl/reagent/toxin/fertilizer/robustharvest, 60)
 	update_icon()
 
 /obj/item/chems/glass/bottle/pacid
@@ -175,7 +175,7 @@
 
 /obj/item/chems/glass/bottle/pacid/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/acid/polyacid, 60)
+	reagents.add_reagent(/decl/reagent/acid/polyacid, 60)
 	update_icon()
 
 
@@ -188,7 +188,7 @@
 
 /obj/item/chems/glass/bottle/adminordrazine/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/adminordrazine, 60)
+	reagents.add_reagent(/decl/reagent/adminordrazine, 60)
 	update_icon()
 
 
@@ -199,7 +199,7 @@
 
 /obj/item/chems/glass/bottle/capsaicin/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/capsaicin, 60)
+	reagents.add_reagent(/decl/reagent/capsaicin, 60)
 	update_icon()
 
 
@@ -210,5 +210,5 @@
 
 /obj/item/chems/glass/bottle/frostoil/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/frostoil, 60)
+	reagents.add_reagent(/decl/reagent/frostoil, 60)
 	update_icon()

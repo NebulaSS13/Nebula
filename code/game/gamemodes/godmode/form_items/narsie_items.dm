@@ -77,4 +77,4 @@
 
 /obj/item/chems/food/drinks/zombiedrink/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin/zombie, 10)
+	reagents.add_reagent(/decl/reagent/toxin/zombie, 10)

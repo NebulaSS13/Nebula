@@ -1,11 +1,11 @@
-/datum/reagent/carbon_monoxide
+/decl/reagent/carbon_monoxide
 	name = "carbon monoxide"
 	description = "A dangerous carbon comubstion byproduct."
 	taste_description = "stale air"
 	color = COLOR_GRAY80
 	metabolism = 0.05 // As with helium.
 
-/datum/reagent/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+/decl/reagent/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!istype(M))
 		return
 	var/warning_message
@@ -31,7 +31,7 @@
 	if(warning_message && prob(warning_prob))
 		to_chat(M, "<span class='warning'>You feel [warning_message].</span>")
 
-/datum/reagent/paralytics
+/decl/reagent/paralytics
 	name = "paralytics"
 	description = "A powerful paralytic agent."
 	taste_description = "metallic"
@@ -40,7 +40,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 1.5
 
-/datum/reagent/paralytics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/paralytics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/threshold = 2
 	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
 		M.confused = max(M.confused, 2)
@@ -57,7 +57,7 @@
 	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
 
-/datum/reagent/presyncopics
+/decl/reagent/presyncopics
 	name = "presyncopics"
 	description = "A compound that causess presyncopic effects in the taker, including confusion and dizzyness."
 	taste_description = "sourness"
@@ -65,10 +65,10 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	heating_point = 61 CELSIUS
-	heating_products = list(/datum/reagent/potassium, /datum/reagent/acetone, /datum/reagent/nutriment/sugar)
+	heating_products = list(/decl/reagent/potassium, /decl/reagent/acetone, /decl/reagent/nutriment/sugar)
 	value = 1.5
 
-/datum/reagent/presyncopics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/presyncopics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/drug_strength = 4
 	M.make_dizzy(drug_strength)
 	M.confused = max(M.confused, drug_strength * 5)

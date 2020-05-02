@@ -21,7 +21,7 @@
 
 /atom/movable/is_flooded(var/lying_mob, var/absolute)
 	var/turf/T = get_turf(src)
-	return T.is_flooded(lying_mob)
+	return T?.is_flooded(lying_mob)
 
 /atom/proc/submerged(depth)
 	if(isnull(depth))

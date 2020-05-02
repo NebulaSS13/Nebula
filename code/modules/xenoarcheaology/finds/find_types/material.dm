@@ -19,7 +19,7 @@
 /decl/archaeological_find/parts
 	item_type = "machinery part"
 	modification_flags = XENOFIND_APPLY_PREFIX 
-	responsive_reagent = /datum/reagent/potassium
+	responsive_reagent = /decl/reagent/potassium
 	possible_types = list()
 
 /decl/archaeological_find/parts/Initialize()

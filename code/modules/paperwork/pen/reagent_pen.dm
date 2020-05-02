@@ -37,4 +37,4 @@
 
 /obj/item/pen/reagent/sleepy/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/paralytics, 15)
+	reagents.add_reagent(/decl/reagent/paralytics, 15)

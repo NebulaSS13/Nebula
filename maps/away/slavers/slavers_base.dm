@@ -83,7 +83,7 @@
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver2
 	name = "Dead Slaver 2"
-	uniform = /obj/item/clothing/under/grayson
+	uniform = /obj/item/clothing/under/rank/corp/grayson
 	shoes = /obj/item/clothing/shoes/blue
 
 /obj/effect/landmark/corpse/slavers_base/slaver3

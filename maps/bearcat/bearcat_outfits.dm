@@ -70,7 +70,7 @@
 
 /decl/hierarchy/outfit/job/bearcat/hand/pre_equip(mob/living/carbon/human/H)
 	..()
-	uniform = pick(list(/obj/item/clothing/under/overalls,/obj/item/clothing/under/focal,/obj/item/clothing/under/hazard,/obj/item/clothing/under/rank/cargotech,/obj/item/clothing/under/color/black,/obj/item/clothing/under/color/grey,/obj/item/clothing/under/casual_pants/track, ))
+	uniform = pick(list(/obj/item/clothing/under/overalls,/obj/item/clothing/under/rank/corp/focal,/obj/item/clothing/under/hazard,/obj/item/clothing/under/rank/cargotech,/obj/item/clothing/under/color/black,/obj/item/clothing/under/color/grey,/obj/item/clothing/under/casual_pants/track))
 
 /decl/hierarchy/outfit/job/bearcat/hand/cook
 	name = BEARCAT_OUTFIT_JOB_NAME("Cook")

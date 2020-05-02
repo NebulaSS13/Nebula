@@ -115,6 +115,11 @@ proc/age2agedescription(age)
 	if(!user || !target)
 		return 0
 	var/user_loc = user.loc
+
+	var/drifting = 0
+	if(!user.Process_Spacemove(0) && user.inertia_dir)
+		drifting = 1
+
 	var/target_loc = target.loc
 
 	var/holding = user.get_active_hand()
@@ -135,7 +140,11 @@ proc/age2agedescription(age)
 		if(uninterruptible)
 			continue
 
-		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || user.loc != user_loc)
+		if(drifting && !user.inertia_dir)
+			drifting = 0
+			user_loc = user.loc
+
+		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (!drifting && user.loc != user_loc))
 			. = 0
 			break
 
@@ -168,6 +177,10 @@ proc/age2agedescription(age)
 
 	var/atom/original_loc = user.loc
 
+	var/drifting = 0
+	if(!user.Process_Spacemove(0) && user.inertia_dir)
+		drifting = 1
+
 	var/holding = user.get_active_hand()
 
 	var/datum/progressbar/progbar
@@ -182,7 +195,11 @@ proc/age2agedescription(age)
 		if (progress)
 			progbar.update(world.time - starttime)
 
-		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
+		if(drifting && !user.inertia_dir)
+			drifting = 0
+			original_loc = user.loc
+
+		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (!drifting && user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
 			. = 0
 			break
 

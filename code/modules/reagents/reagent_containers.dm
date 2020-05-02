@@ -67,7 +67,7 @@
 		to_chat(user, "<span class='notice'>[target] is empty.</span>")
 		return 1
 
-	if(reagents && !reagents.get_free_space())
+	if(reagents && !REAGENTS_FREE_SPACE(reagents))
 		to_chat(user, "<span class='notice'>[src] is full.</span>")
 		return 1
 
@@ -87,7 +87,7 @@
 		to_chat(user, "<span class='notice'>[src] is empty.</span>")
 		return 1
 
-	if(target.reagents && !target.reagents.get_free_space())
+	if(target.reagents && !REAGENTS_FREE_SPACE(target.reagents))
 		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return 1
 
@@ -183,7 +183,7 @@
 		to_chat(user, "<span class='notice'>[src] is empty.</span>")
 		return 1
 
-	if(!target.reagents.get_free_space())
+	if(!REAGENTS_FREE_SPACE(target.reagents))
 		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return 1
 
@@ -214,6 +214,7 @@
 
 /obj/item/chems/ex_act(severity)
 	if(reagents)
-		for(var/datum/reagent/R in reagents.reagent_list)
+		for(var/rtype in reagents.reagent_volumes)
+			var/decl/reagent/R = decls_repository.get_decl(rtype)
 			R.ex_act(src, severity)
 	..()

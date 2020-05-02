@@ -13,7 +13,7 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chem_products = list(
-				/datum/reagent/toxin/plasticide = 20
+				/decl/reagent/toxin/plasticide = 20
 				)
 	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
