@@ -116,7 +116,7 @@
 			new/obj/item/chems/spray/waterflower(src)
 		if(95)
 			new/obj/item/clothing/under/mime(src)
-			new/obj/item/clothing/shoes/black(src)
+			new/obj/item/clothing/shoes/color/black(src)
 			new/obj/item/clothing/gloves/color/white(src)
 			new/obj/item/clothing/mask/gas/mime(src)
 			new/obj/item/clothing/head/beret(src)

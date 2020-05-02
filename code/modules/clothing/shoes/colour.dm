@@ -1,104 +1,83 @@
-/obj/item/clothing/shoes/black
-	name = "black shoes"
-	icon_state = "black"
-	desc = "A pair of black shoes."
+/obj/item/clothing/shoes/color
+	name = "white shoes"
+	icon_state = "white"
+	desc = "A pair of shoes."
 
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/brown
-	name = "brown shoes"
-	desc = "A pair of brown shoes."
-	icon_state = "brown"
+	markings_icon = "shoes_coloring"
 
-/obj/item/clothing/shoes/blue
+/obj/item/clothing/shoes/color/black
+	name = "black shoes"
+	markings_color = COLOR_GRAY20
+
+/obj/item/clothing/shoes/color/brown
+	name = "brown shoes"
+	markings_color = WOOD_COLOR_CHOCOLATE
+
+/obj/item/clothing/shoes/color/blue
 	name = "blue shoes"
-	icon_state = "blue"
+	markings_color = COLOR_CYAN_BLUE
 
-/obj/item/clothing/shoes/green
+/obj/item/clothing/shoes/color/green
 	name = "green shoes"
-	icon_state = "green"
+	markings_color = COLOR_GREEN
 
-/obj/item/clothing/shoes/yellow
+/obj/item/clothing/shoes/color/yellow
 	name = "yellow shoes"
-	icon_state = "yellow"
+	markings_color = COLOR_GOLD
 
-/obj/item/clothing/shoes/purple
+/obj/item/clothing/shoes/color/purple
 	name = "purple shoes"
-	icon_state = "purple"
+	markings_color = COLOR_VIOLET
 
-/obj/item/clothing/shoes/brown
-	name = "brown shoes"
-	icon_state = "brown"
-
-/obj/item/clothing/shoes/red
+/obj/item/clothing/shoes/color/red
 	name = "red shoes"
-	desc = "Stylish red shoes."
-	icon_state = "red"
+	markings_color = COLOR_DARK_RED
 
-/obj/item/clothing/shoes/white
-	name = "white shoes"
-	icon_state = "white"
-	permeability_coefficient = 0.01
+/obj/item/clothing/shoes/color/white
 
-/obj/item/clothing/shoes/leather
-	name = "leather shoes"
-	desc = "A sturdy pair of leather shoes."
-	icon_state = "leather"
-
-/obj/item/clothing/shoes/rainbow
-	name = "rainbow shoes"
-	desc = "Very gay shoes."
-	icon_state = "rain_bow"
-
-/obj/item/clothing/shoes/orange
+/obj/item/clothing/shoes/color/orange
 	name = "orange shoes"
-	icon_state = "orange"
+	markings_color = COLOR_SUN
 
-/obj/item/clothing/shoes/flats
-	name = "flats"
-	desc = "Sleek flats."
-	icon_state = "flatswhite"
-
-/obj/item/clothing/shoes/flats/black
-	name = "black flats"
-	color = COLOR_GRAY15
-
-/obj/item/clothing/shoes/hightops
+/obj/item/clothing/shoes/color/hightops
 	name = "white high tops"
 	desc = "A pair of shoes that extends past the ankle. Based on a centuries-old, timeless design."
 	icon_state = "whitehi"
+	markings_icon = "hitops_coloring"
 
-/obj/item/clothing/shoes/hightops/red
+/obj/item/clothing/shoes/color/hightops/red
 	name = "red high tops"
-	icon_state = "redhi"
+	markings_color = COLOR_DARK_RED
 
-/obj/item/clothing/shoes/hightops/brown
+/obj/item/clothing/shoes/color/hightops/brown
 	name = "brown high tops"
-	icon_state = "brownhi"
+	markings_color = WOOD_COLOR_CHOCOLATE
 
-/obj/item/clothing/shoes/hightops/black
+/obj/item/clothing/shoes/color/hightops/black
 	name = "black high tops"
-	icon_state = "blackhi"
+	markings_color = COLOR_GRAY20
 
-/obj/item/clothing/shoes/hightops/orange
+/obj/item/clothing/shoes/color/hightops/orange
 	name = "orange high tops"
-	icon_state = "orangehi"
+	markings_color = COLOR_SUN
 
-/obj/item/clothing/shoes/hightops/blue
+/obj/item/clothing/shoes/color/hightops/blue
 	name = "blue high tops"
-	icon_state = "bluehi"
+	markings_color = COLOR_CYAN_BLUE
 
-/obj/item/clothing/shoes/hightops/green
+/obj/item/clothing/shoes/color/hightops/green
 	name = "green high tops"
-	icon_state = "greenhi"
+	markings_color = COLOR_GREEN
 
-/obj/item/clothing/shoes/hightops/purple
+/obj/item/clothing/shoes/color/hightops/purple
 	name = "purple high tops"
-	icon_state = "purplehi"
+	markings_color = COLOR_VIOLET
 
-/obj/item/clothing/shoes/hightops/yellow
+/obj/item/clothing/shoes/color/hightops/yellow
 	name = "yellow high tops"
-	icon_state = "yellowhi"
+	markings_color = COLOR_GOLD

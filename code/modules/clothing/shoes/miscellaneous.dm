@@ -12,7 +12,7 @@
 
 /obj/item/clothing/shoes/mime
 	name = "mime shoes"
-	icon_state = "mime"
+	icon_state = "white"
 	can_add_cuffs = FALSE
 
 /obj/item/clothing/shoes/swat
@@ -246,3 +246,22 @@ obj/item/clothing/shoes/heels/red
 	name = "red high heels"
 	desc = "A pair of red high heels."
 	color = COLOR_RED
+
+/obj/item/clothing/shoes/leather
+	name = "leather shoes"
+	desc = "A sturdy pair of leather shoes."
+	icon_state = "leather"
+
+/obj/item/clothing/shoes/rainbow
+	name = "rainbow shoes"
+	desc = "Very gay shoes."
+	icon_state = "rain_bow"
+
+/obj/item/clothing/shoes/flats
+	name = "flats"
+	desc = "Sleek flats."
+	icon_state = "flatswhite"
+
+/obj/item/clothing/shoes/flats/black
+	name = "black flats"
+	color = COLOR_GRAY15

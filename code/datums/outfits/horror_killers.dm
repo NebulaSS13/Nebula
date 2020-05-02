@@ -18,7 +18,7 @@
 /decl/hierarchy/outfit/masked_killer
 	name = "Masked killer"
 	uniform = /obj/item/clothing/under/overalls
-	shoes = /obj/item/clothing/shoes/white
+	shoes = /obj/item/clothing/shoes/color/white
 	gloves = /obj/item/clothing/gloves/latex
 	mask = /obj/item/clothing/mask/surgical
 	head = /obj/item/clothing/head/welding
@@ -38,7 +38,7 @@
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"
 	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat/black) }
-	shoes = /obj/item/clothing/shoes/black
+	shoes = /obj/item/clothing/shoes/color/black
 	gloves = /obj/item/clothing/gloves/thick
 	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
