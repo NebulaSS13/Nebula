@@ -10,15 +10,15 @@
 
 /obj/structure/closet/wardrobe/red/Initialize()
 	. = ..()
-	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
-	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
-	new /obj/item/clothing/head/beret/sec/corporate/officer(src)
+	new /obj/item/clothing/head/beret/corp/sec/corporate/officer(src)
+	new /obj/item/clothing/head/beret/corp/sec/corporate/officer(src)
+	new /obj/item/clothing/head/beret/corp/sec/corporate/officer(src)
 
 /obj/structure/closet/secure_closet/hos/WillContain()
-	. = ..() + /obj/item/clothing/head/beret/sec/corporate/hos
+	. = ..() + /obj/item/clothing/head/beret/corp/sec/corporate/hos
 
 /obj/structure/closet/secure_closet/warden/WillContain()
-	. = ..() + /obj/item/clothing/head/beret/sec/corporate/warden
+	. = ..() + /obj/item/clothing/head/beret/corp/sec/corporate/warden
 
 /obj/structure/closet/secure_closet/xenoarchaeologist/Initialize()
 	. = ..()
@@ -33,21 +33,21 @@
 
 /obj/structure/closet/wardrobe/red/Initialize()
 	. = ..()
-	new /obj/item/clothing/head/beret/sec(src)
-	new /obj/item/clothing/head/beret/sec(src)
-	new /obj/item/clothing/head/beret/sec(src)
+	new /obj/item/clothing/head/beret/corp/sec(src)
+	new /obj/item/clothing/head/beret/corp/sec(src)
+	new /obj/item/clothing/head/beret/corp/sec(src)
 
 /obj/structure/closet/wardrobe/atmospherics_yellow/Initialize()
 	. = ..()
-	new /obj/item/clothing/head/beret/engineering(src)
-	new /obj/item/clothing/head/beret/engineering(src)
-	new /obj/item/clothing/head/beret/engineering(src)
+	new /obj/item/clothing/head/beret/corp/engineering(src)
+	new /obj/item/clothing/head/beret/corp/engineering(src)
+	new /obj/item/clothing/head/beret/corp/engineering(src)
 
 /obj/structure/closet/wardrobe/engineering_yellow/Initialize()
 	. = ..()
-	new /obj/item/clothing/head/beret/engineering(src)
-	new /obj/item/clothing/head/beret/engineering(src)
-	new /obj/item/clothing/head/beret/engineering(src)
+	new /obj/item/clothing/head/beret/corp/engineering(src)
+	new /obj/item/clothing/head/beret/corp/engineering(src)
+	new /obj/item/clothing/head/beret/corp/engineering(src)
 
 /obj/structure/closet/secure_closet/scientist/WillContain()
 	. = ..() + new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger/tox, /obj/item/storage/backpack/satchel/tox))
@@ -62,13 +62,13 @@
 
 /obj/structure/closet/secure_closet/warden/WillContain()
 	. = ..()
-	. += /obj/item/clothing/head/helmet/nt
+	. += /obj/item/clothing/head/helmet/corp
 	. += /obj/item/clothing/suit/armor/vest/nt
 	. += /obj/item/clothing/under/rank/warden/corp
 
 /obj/structure/closet/secure_closet/hos/WillContain()
 	. = ..()
-	. += /obj/item/clothing/head/helmet/nt
+	. += /obj/item/clothing/head/helmet/corp
 	. += /obj/item/clothing/suit/armor/vest/nt
 	. += /obj/item/clothing/under/rank/head_of_security/corp
 

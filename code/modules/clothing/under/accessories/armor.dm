@@ -368,12 +368,3 @@
 	desc = "A fabric cover for armored helmets. This one has a desert camouflage pattern."
 	icon_state = "helmcover_tan"
 
-/obj/item/clothing/accessory/armor/helmcover/pcrc
-	name = "\improper PCRC helmet cover"
-	desc = "A fabric cover for armored helmets. This one is colored navy blue and has a tag in the back with the words PROXIMA CENTAURI RISK CONTROL printed in cyan lettering on it."
-	icon_state = "helmcover_pcrc"
-
-/obj/item/clothing/accessory/armor/helmcover/saare
-	name = "\improper SAARE helmet cover"
-	desc = "A fabric cover for armored helmets. This one has SAARE's colors."
-	icon_state = "helmcover_saare"

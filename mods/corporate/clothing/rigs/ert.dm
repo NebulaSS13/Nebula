@@ -35,13 +35,21 @@
 /obj/item/clothing/head/helmet/space/rig/ert
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/ert
+	icon = 'mods/corporate/icons/obj/clothing/obj_head.dmi'
+	item_icons = list(slot_head_str = 'mods/corporate/icons/mob/onmob_head.dmi')
 
 /obj/item/clothing/suit/space/rig/ert
+	icon = 'mods/corporate/icons/obj/clothing/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_suit.dmi')
 
 /obj/item/clothing/shoes/magboots/rig/ert
+	icon = 'mods/corporate/icons/obj/clothing/obj_feet.dmi'
+	item_icons = list(slot_shoes_str = 'mods/corporate/icons/mob/onmob_feet.dmi')
 
 /obj/item/clothing/gloves/rig/ert
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
+	icon = 'mods/corporate/icons/obj/clothing/obj_hands.dmi'
+	item_icons = list(slot_gloves_str = 'mods/corporate/icons/mob/onmob_hands.dmi')
 
 /obj/item/rig/ert/engineer
 	name = "emergency response engineering hardsuit control module"

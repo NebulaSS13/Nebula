@@ -1045,8 +1045,12 @@
 // mobs do not have mouths by default
 /mob/proc/check_has_mouth()
 	return FALSE
+
 /mob/proc/check_has_eyes()
 	return TRUE
 
 /mob/proc/handle_pre_transformation()
 	return
+
+/mob/get_mass()
+	return mob_size

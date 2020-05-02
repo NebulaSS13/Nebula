@@ -81,6 +81,8 @@ Class Procs:
 	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER // Layer under items
+	throw_speed = 1
+	throw_range = 5
 
 	var/stat = 0
 	var/reason_broken = 0

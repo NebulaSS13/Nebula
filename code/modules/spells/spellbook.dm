@@ -87,12 +87,10 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 					return
 		if(I.reagents)
 			var/datum/reagents/R = I.reagents
-			var/list/reagent_list = spellbook.sacrifice_reagents
-			if(reagent_list && reagent_list.len)
-				for(var/id in reagent_list)
-					if(R.has_reagent(id,5))
-						make_sacrifice(I,user, id)
-						return 1
+			for(var/id in spellbook.sacrifice_reagents)
+				if(R.has_reagent(id,5))
+					make_sacrifice(I,user, id)
+					return 1
 	..()
 
 /obj/item/spellbook/interact(mob/user)

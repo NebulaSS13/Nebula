@@ -30,7 +30,7 @@
 	. = ..()
 	SSstatistics.extracted_slime_cores_amount++
 	create_reagents(100)
-	reagents.add_reagent(/datum/reagent/toxin/slimejelly, 30)
+	reagents.add_reagent(/decl/reagent/toxin/slimejelly, 30)
 
 /obj/item/slime_extract/grey
 	name = "grey slime extract"
@@ -102,7 +102,7 @@
 
 /obj/item/slime_extract/adamantine/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/crystal, 10)
+	reagents.add_reagent(/decl/reagent/crystal, 10)
 
 /obj/item/slime_extract/bluespace
 	name = "bluespace slime extract"

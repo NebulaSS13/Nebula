@@ -193,9 +193,11 @@
 	for(var/obj/item/chems/food/snacks/grown/I in contents)
 		S += 5
 		ingredients--
-		if(I.reagents.get_reagent_amount(/datum/reagent/nutriment) < 0.1)
+		var/amt = REAGENT_VOLUME(I.reagents, /decl/reagent/nutriment)
+		if(amt < 0.1)
 			points += 1
-		else points += I.reagents.get_reagent_amount(/datum/reagent/nutriment) * 10 * eat_eff
+		else 
+			points += amt * 10 * eat_eff
 		qdel(I)
 	if(S)
 		state = BG_PROCESSING

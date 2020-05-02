@@ -1,13 +1,13 @@
 var/global/list/responsive_carriers = list(
-	/datum/reagent/carbon 			= "Trace organic cells",
-	/datum/reagent/potassium 		= "Long exposure particles",
-	/datum/reagent/fuel/hydrazine 	= "Trace water particles",
-	/datum/reagent/ammonia 			= "Crystalline structures",
-	/datum/reagent/mercury 			= "Metallic derivative",
-	/datum/reagent/iron 			= "Metallic composite",
-	/datum/reagent/toxin/chlorine 	= "Metamorphic/igneous rock composite",
-	/datum/reagent/phosphorus 		= "Metamorphic/sedimentary rock composite",
-	/datum/reagent/toxin/phoron 	= "Anomalous material")
+	/decl/reagent/carbon 			= "Trace organic cells",
+	/decl/reagent/potassium 		= "Long exposure particles",
+	/decl/reagent/fuel/hydrazine 	= "Trace water particles",
+	/decl/reagent/ammonia 			= "Crystalline structures",
+	/decl/reagent/mercury 			= "Metallic derivative",
+	/decl/reagent/iron 			= "Metallic composite",
+	/decl/reagent/toxin/chlorine 	= "Metamorphic/igneous rock composite",
+	/decl/reagent/phosphorus 		= "Metamorphic/sedimentary rock composite",
+	/decl/reagent/toxin/phoron 	= "Anomalous material")
 
 /decl/archaeological_find
 	var/item_type = "object"
@@ -16,7 +16,7 @@ var/global/list/responsive_carriers = list(
 	var/new_icon = 'icons/obj/xenoarchaeology.dmi'
 	var/new_icon_state
 	var/list/name_prefixes = list("strange","ancient","alien")
-	var/responsive_reagent = /datum/reagent/mercury
+	var/responsive_reagent = /decl/reagent/mercury
 	var/list/possible_types = list(/obj/item)
 
 /decl/archaeological_find/proc/create_find(atom/location)

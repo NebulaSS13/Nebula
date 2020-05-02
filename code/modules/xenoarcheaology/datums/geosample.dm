@@ -18,7 +18,7 @@
 	var/age = 0
 	var/artifact_id
 	var/artifact_distance
-	var/source_mineral = /datum/reagent/toxin/chlorine
+	var/source_mineral = /decl/reagent/toxin/chlorine
 	var/list/find_presence = list()
 
 /datum/geosample/New(var/turf/simulated/mineral/container)

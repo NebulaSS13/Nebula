@@ -176,17 +176,6 @@ var/const/enterloopsanity = 100
 
 	var/atom/movable/A = atom
 
-	if(ismob(A))
-		var/mob/M = A
-		if(!M.check_solid_ground())
-			inertial_drift(M)
-			//we'll end up checking solid ground again but we still need to check the other things.
-			//Ususally most people aren't in space anyways so hopefully this is acceptable.
-			M.update_floating()
-		else
-			M.inertia_dir = 0
-			M.make_floating(0) //we know we're not on solid ground so skip the checks to save a bit of processing
-
 	var/objects = 0
 	if(A && (A.movable_flags & MOVABLE_FLAG_PROXMOVE))
 		for(var/atom/movable/thing in range(1))
@@ -207,20 +196,6 @@ var/const/enterloopsanity = 100
 
 /turf/proc/protects_atom(var/atom/A)
 	return FALSE
-
-/turf/proc/inertial_drift(atom/movable/A)
-	if(!(A.last_move))	return
-	if((istype(A, /mob/) && src.x > 2 && src.x < (world.maxx - 1) && src.y > 2 && src.y < (world.maxy-1)))
-		var/mob/M = A
-		if(M.Allow_Spacemove(1)) //if this mob can control their own movement in space then they shouldn't be drifting
-			M.inertia_dir  = 0
-			return
-		spawn(5)
-			if(M && !M.anchored && !LAZYLEN(M.grabbed_by) && M.loc == src)
-				if(!M.inertia_dir)
-					M.inertia_dir = M.last_move
-				step(M, M.inertia_dir)
-	return
 
 /turf/proc/levelupdate()
 	for(var/obj/O in src)
@@ -269,7 +244,7 @@ var/const/enterloopsanity = 100
 
 //expects an atom containing the reagents used to clean the turf
 /turf/proc/clean(atom/source, mob/user = null, var/time = null, var/message = null)
-	if(source.reagents.has_reagent(/datum/reagent/water, 1) || source.reagents.has_reagent(/datum/reagent/cleaner, 1))
+	if(source.reagents.has_reagent(/decl/reagent/water, 1) || source.reagents.has_reagent(/decl/reagent/cleaner, 1))
 		if(user && time && !do_after(user, time, src))
 			return
 		clean_blood()
@@ -299,9 +274,12 @@ var/const/enterloopsanity = 100
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, TT.speed)
-		var/intial_dir = TT.init_dir
-		spawn(2)
-			step(AM, turn(intial_dir, 180))
+			if(M.pinned)
+				return
+		addtimer(CALLBACK(src, /turf/proc/bounce_off, AM, TT.init_dir), 2)
+
+/turf/proc/bounce_off(var/atom/movable/AM, var/direction)
+	step(AM, turn(direction, 180))
 
 /turf/proc/can_engrave()
 	return FALSE

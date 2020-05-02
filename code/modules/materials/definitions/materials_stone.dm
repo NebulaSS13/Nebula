@@ -20,7 +20,7 @@
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_rare"
-	xarch_source_mineral = /datum/reagent/ammonia
+	xarch_source_mineral = /decl/reagent/ammonia
 	ore_icon_overlay = "gems"
 	sale_price = 5
 	sheet_singular_name = "gem"
@@ -55,7 +55,7 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chem_products = list(
-		/datum/reagent/silicon = 20
+		/decl/reagent/silicon = 20
 		)
 	sale_price = 1
 	value = 4

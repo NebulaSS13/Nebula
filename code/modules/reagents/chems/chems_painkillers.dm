@@ -1,5 +1,5 @@
 
-/datum/reagent/painkillers
+/decl/reagent/painkillers
 	name = "painkillers"
 	description = "A highly effective opioid painkiller. Do not mix with alcohol."
 	taste_description = "sourness"
@@ -13,7 +13,8 @@
 	var/pain_power = 80 //magnitide of painkilling effect
 	var/effective_dose = 0.5 //how many units it need to process to reach max power
 
-/datum/reagent/painkillers/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/painkillers/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	var/volume = REAGENT_VOLUME(holder, type)
 	var/effectiveness = 1
 	if(M.chem_doses[type] < effective_dose) //some ease-in ease-out for the effect
 		effectiveness = M.chem_doses[type]/effective_dose
@@ -39,7 +40,7 @@
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
 		M.add_chemical_effect(CE_BREATHLOSS, 0.1 * boozed) //drinking and opiating makes breathing kinda hard
 
-/datum/reagent/painkillers/affect_overdose(var/mob/living/carbon/M, var/alien)
+/decl/reagent/painkillers/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
 	..()
 	M.hallucination(120, 30)
 	M.druggy = max(M.druggy, 10)
@@ -48,13 +49,14 @@
 	if(isboozed(M))
 		M.add_chemical_effect(CE_BREATHLOSS, 0.2) //Don't drink and OD on opiates folks
 
-/datum/reagent/painkillers/proc/isboozed(var/mob/living/carbon/M)
+/decl/reagent/painkillers/proc/isboozed(var/mob/living/carbon/M)
 	. = 0
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if(ingested)
-		var/list/pool = M.reagents.reagent_list | ingested.reagent_list
-		for(var/datum/reagent/ethanol/booze in pool)
-			if(M.chem_doses[booze.type] < 2) //let them experience false security at first
+		var/list/pool = M.reagents.reagent_volumes | ingested.reagent_volumes
+		for(var/rtype in pool)
+			var/decl/reagent/ethanol/booze = decls_repository.get_decl(rtype)
+			if(!istype(booze) || M.chem_doses[rtype] < 2) //let them experience false security at first
 				continue
 			. = 1
 			if(booze.strength < 40) //liquor stuff hits harder

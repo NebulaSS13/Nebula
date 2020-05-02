@@ -16,7 +16,7 @@
 /obj/item/flame/lighter/Initialize()
 	. = ..()
 	create_reagents(max_fuel)
-	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
+	reagents.add_reagent(/decl/reagent/fuel, max_fuel)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(random_colour)
 		color = pick(available_colors)
@@ -58,7 +58,7 @@
 
 /obj/item/flame/lighter/attack_self(mob/living/user)
 	if(!lit)
-		if(reagents.has_reagent(/datum/reagent/fuel))
+		if(reagents.has_reagent(/decl/reagent/fuel))
 			light(user)
 		else
 			to_chat(user, "<span class='warning'>\The [src] won't ignite - it must be out of fuel.</span>")
@@ -91,12 +91,12 @@
 	..()
 
 /obj/item/flame/lighter/Process()
-	if(!submerged() && reagents.has_reagent(/datum/reagent/fuel))
-		if(ismob(loc) && prob(10) && reagents.get_reagent_amount(/datum/reagent/fuel) < 1)
+	if(!submerged() && reagents.has_reagent(/decl/reagent/fuel))
+		if(ismob(loc) && prob(10) && REAGENT_VOLUME(reagents, /decl/reagent/fuel) < 1)
 			to_chat(loc, "<span class='warning'>\The [src]'s flame flickers.</span>")
 			set_light(0)
 			addtimer(CALLBACK(src, .atom/proc/set_light, 0.6, 0.5, 2), 4)
-		reagents.remove_reagent(/datum/reagent/fuel, 0.05)
+		reagents.remove_reagent(/decl/reagent/fuel, 0.05)
 	else
 		extinguish()
 		return

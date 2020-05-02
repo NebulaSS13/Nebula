@@ -168,7 +168,7 @@
 	. = ..()
 	var/mob/living/L = target
 	if(L.reagents)
-		L.reagents.add_reagent(/datum/reagent/toxin/venom, 5)
+		L.reagents.add_reagent(/decl/reagent/toxin/venom, 5)
 
 /obj/item/missile
 	icon = 'icons/obj/grenade.dmi'

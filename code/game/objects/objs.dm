@@ -193,3 +193,6 @@
 
 /obj/can_be_injected_by(var/atom/injector)
 	. = ATOM_IS_OPEN_CONTAINER(src) && ..()
+
+/obj/get_mass()
+	return min(2^(w_class-1), 100)

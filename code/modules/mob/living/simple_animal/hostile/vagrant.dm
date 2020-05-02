@@ -35,7 +35,7 @@
 
 	bleed_colour = "#aad9de"
 
-/mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
+/mob/living/simple_animal/hostile/vagrant/Process_Spacemove()
 	return 1
 
 /mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
@@ -60,9 +60,9 @@
 			gripping = null
 
 		else if(gripping.should_have_organ(BP_HEART))
-			var/blood_volume = round(gripping.vessel.get_reagent_amount(/datum/reagent/blood))
+			var/blood_volume = round(gripping.vessel.total_volume)
 			if(blood_volume > 5)
-				gripping.vessel.remove_reagent(/datum/reagent/blood, blood_per_tick)
+				gripping.vessel.remove_any(blood_per_tick)
 				health = min(health + health_per_tick, maxHealth)
 				if(prob(15))
 					to_chat(gripping, "<span class='danger'>You feel your fluids being drained!</span>")

@@ -11,7 +11,7 @@
 	unacidable = 1
 
 /obj/item/chems/food/drinks/jar/on_reagent_change()
-	if (reagents.reagent_list.len > 0)
+	if(LAZYLEN(reagents.reagent_volumes))
 		icon_state ="jar_what"
 		SetName("jar of something")
 		desc = "You can't really tell what this is."

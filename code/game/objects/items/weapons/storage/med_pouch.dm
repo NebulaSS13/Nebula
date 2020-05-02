@@ -170,25 +170,26 @@ Single Use Emergency Pouches
 	name = "emergency pill"
 	desc = "An emergency pill from an emergency medical pouch"
 	icon_state = "pill2"
-	var/datum/reagent/chem_type
+	var/decl/reagent/chem_type
 	var/chem_amount = 15
 
 /obj/item/chems/pill/pouch_pill/adrenaline
-	chem_type = /datum/reagent/adrenaline
+	chem_type = /decl/reagent/adrenaline
 
 /obj/item/chems/pill/pouch_pill/antitoxins
-	chem_type = /datum/reagent/antitoxins
+	chem_type = /decl/reagent/antitoxins
 
 /obj/item/chems/pill/pouch_pill/oxy_meds
-	chem_type = /datum/reagent/oxy_meds
+	chem_type = /decl/reagent/oxy_meds
 
 /obj/item/chems/pill/pouch_pill/painkillers
-	chem_type = /datum/reagent/painkillers
+	chem_type = /decl/reagent/painkillers
 
 /obj/item/chems/pill/pouch_pill/Initialize()
 	. = ..()
 	reagents.add_reagent(chem_type, chem_amount)
-	name = "emergency [reagents.get_master_reagent_name()] pill ([reagents.total_volume]u)"
+	var/decl/reagent/reagent = decls_repository.get_decl(chem_type)
+	name = "emergency [reagent.name] pill ([reagents.total_volume]u)"
 	color = reagents.get_color()
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto
@@ -197,21 +198,21 @@ Single Use Emergency Pouches
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
-	starts_with = list(/datum/reagent/adrenaline = 5)
+	starts_with = list(/decl/reagent/adrenaline = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers
 	name = "emergency painkiller autoinjector"
-	starts_with = list(/datum/reagent/painkillers = 5)
+	starts_with = list(/decl/reagent/painkillers = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins
 	name = "emergency antitoxins autoinjector"
-	starts_with = list(/datum/reagent/antitoxins = 5)
+	starts_with = list(/decl/reagent/antitoxins = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds
 	name = "emergency oxygel autoinjector"
-	starts_with = list(/datum/reagent/oxy_meds = 5)
+	starts_with = list(/decl/reagent/oxy_meds = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
-	starts_with = list(/datum/reagent/adrenaline = 8)
+	starts_with = list(/decl/reagent/adrenaline = 8)

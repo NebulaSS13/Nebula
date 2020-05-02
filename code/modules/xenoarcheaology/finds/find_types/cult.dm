@@ -2,7 +2,7 @@
 
 /decl/archaeological_find/cult
 	item_type = "garments"
-	responsive_reagent = /datum/reagent/potassium
+	responsive_reagent = /decl/reagent/potassium
 	possible_types = list(
 		/obj/item/clothing/head/culthood,
 		/obj/item/clothing/head/culthood/magus,

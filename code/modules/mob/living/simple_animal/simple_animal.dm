@@ -504,7 +504,7 @@
 	drip.update_icon()
 
 /mob/living/simple_animal/get_digestion_product()
-	return /datum/reagent/nutriment
+	return /decl/reagent/nutriment
 
 /mob/living/simple_animal/eyecheck()
 	switch(flash_vulnerability)
