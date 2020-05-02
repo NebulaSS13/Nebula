@@ -114,8 +114,10 @@
 
 /atom/movable/Destroy()
 	. = ..()
+#ifdef !DISABLE_DEBUG_CRASH
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
 		crash_with("Was deleted before initalization")
+#endif
 
 	for(var/A in src)
 		qdel(A)
