@@ -8,6 +8,9 @@ SUBSYSTEM_DEF(atoms)
 	init_order = SS_INIT_ATOMS
 	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 
+	var/override_populate_parts = FALSE
+	var/populate_parts = TRUE
+
 	var/atom_init_stage = INITIALIZATION_INSSATOMS
 	var/old_init_stage
 
@@ -34,10 +37,9 @@ SUBSYSTEM_DEF(atoms)
 	var/count = created_atoms.len
 	while(created_atoms.len)
 		var/atom/A = created_atoms[created_atoms.len]
-		var/list/arguments = created_atoms[A] ? mapload_arg + created_atoms[A] : mapload_arg
 		created_atoms.len--
 		if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
-			InitAtom(A, arguments)
+			InitAtom(A, GetArguments(A, mapload_arg))
 			CHECK_TICK
 
 	// If wondering why not just store all atoms in created_atoms and use the block above: that turns out unbearably expensive.
@@ -46,7 +48,7 @@ SUBSYSTEM_DEF(atoms)
 	if(!initialized)
 		for(var/atom/A in world)
 			if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
-				InitAtom(A, mapload_arg)
+				InitAtom(A, GetArguments(A, mapload_arg, FALSE))
 				++count
 				CHECK_TICK
 
@@ -95,6 +97,17 @@ SUBSYSTEM_DEF(atoms)
 		BadInitializeCalls[the_type] |= BAD_INIT_DIDNT_INIT
 
 	return qdeleted || QDELING(A)
+
+/datum/controller/subsystem/atoms/proc/GetArguments(atom/A, list/mapload_arg, created=TRUE)
+	var/list/arguments = mapload_arg.Copy()
+	if(created && created_atoms[A])
+		arguments += created_atoms[A]
+	if(override_populate_parts && istype(A, /obj/machinery))
+		if(arguments.len > 2)
+			arguments[3] = populate_parts
+		else
+			arguments |= list(null, populate_parts)
+	return arguments
 
 /datum/controller/subsystem/atoms/stat_entry(msg)
 	..("Bad Initialize Calls:[BadInitializeCalls.len]")
