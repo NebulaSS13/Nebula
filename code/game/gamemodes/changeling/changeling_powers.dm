@@ -791,7 +791,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.make_jittery(400)
-	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/carbon_monoxide, 40)
+	if(T.reagents)	T.reagents.add_reagent(/decl/reagent/carbon_monoxide, 40)
 	SSstatistics.add_field_details("changeling_powers","DTHS")
 	return 1
 

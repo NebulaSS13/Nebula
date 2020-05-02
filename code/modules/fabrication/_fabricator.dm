@@ -92,8 +92,8 @@
 				var/material/mat_instance = SSmaterials.get_material_datum(mat)
 				if(istype(mat_instance))
 					stored_substances_to_names[mat] =  lowertext(mat_instance.display_name)
-			else if(ispath(mat, /datum/reagent))
-				var/datum/reagent/reg = mat
+			else if(ispath(mat, /decl/reagent))
+				var/decl/reagent/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))
 
 	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)

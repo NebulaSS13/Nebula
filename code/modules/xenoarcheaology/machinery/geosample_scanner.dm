@@ -42,15 +42,15 @@
 	var/t_left_radspike = 0
 	var/rad_shield = 0
 	var/global/list/coolant_reagents_purity = list(
-		/datum/reagent/water = 1,
-		/datum/reagent/drink/coffee/icecoffee = 0.6,
-		/datum/reagent/drink/tea/icetea = 0.6,
-		/datum/reagent/drink/milkshake = 0.6,
-		/datum/reagent/burn_meds = 0.7,
-		/datum/reagent/antiseptic = 0.7,
-		/datum/reagent/burn_meds = 0.7,
-		/datum/reagent/amphetamines = 0.8,
-		/datum/reagent/adminordrazine = 2
+		/decl/reagent/water = 1,
+		/decl/reagent/drink/coffee/icecoffee = 0.6,
+		/decl/reagent/drink/tea/icetea = 0.6,
+		/decl/reagent/drink/milkshake = 0.6,
+		/decl/reagent/burn_meds = 0.7,
+		/decl/reagent/antiseptic = 0.7,
+		/decl/reagent/burn_meds = 0.7,
+		/decl/reagent/amphetamines = 0.8,
+		/decl/reagent/adminordrazine = 2
 	)
 
 /obj/machinery/radiocarbon_spectrometer/Initialize()
@@ -102,16 +102,14 @@
 	fresh_coolant = 0
 	coolant_purity = 0
 	var/num_reagent_types = 0
-	for (var/datum/reagent/current_reagent in src.reagents.reagent_list)
-		if (!current_reagent)
-			continue
-		var/cur_purity = coolant_reagents_purity[current_reagent.type]
+	for(var/rtype in reagents.reagent_volumes)
+		var/cur_purity = coolant_reagents_purity[rtype]
 		if(!cur_purity)
 			cur_purity = 0.1
 		else if(cur_purity > 1)
 			cur_purity = 1
-		total_purity += cur_purity * current_reagent.volume
-		fresh_coolant += current_reagent.volume
+		total_purity += cur_purity * REAGENT_VOLUME(reagents, rtype)
+		fresh_coolant += REAGENT_VOLUME(reagents, rtype)
 		num_reagent_types += 1
 	if(total_purity && fresh_coolant)
 		coolant_purity = total_purity / fresh_coolant

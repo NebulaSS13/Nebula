@@ -72,7 +72,7 @@
 			if(LAZYLEN(mat.chem_products))
 				var/chems = list()
 				for(var/chemial in mat.chem_products)
-					var/datum/reagent/R = chemial
+					var/decl/reagent/R = chemial
 					chems += "[initial(R.name)] ([mat.chem_products[chemial]]u)"
 				material_info += "The following chemicals can be extracted from it (per [mat.sheet_singular_name]):<br>[english_list(chems)]"
 			

@@ -8,7 +8,7 @@
 /datum/fabricator_recipe/protolathe/organ/get_resources()
 	. = ..()
 	for(var/key in resources)
-		if(ispath(key, /datum/reagent))
+		if(ispath(key, /decl/reagent))
 			resources -= key
 
 /datum/fabricator_recipe/protolathe/organ/build()

@@ -7,6 +7,7 @@
 	damage_flags = DAM_BULLET | DAM_SHARP
 	nodamage = 0
 	embed = 1
+	space_knockback = 1
 	penetration_modifier = 1.0
 	var/mob_passthrough_check = 0
 	var/caliber

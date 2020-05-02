@@ -20,12 +20,13 @@
 /proc/reagent_scan_results(obj/O, details = 0)
 	if(isnull(O.reagents))
 		return list("No significant chemical agents found in [O].")
-	if(O.reagents.reagent_list.len == 0)
+	if(!LAZYLEN(O.reagents.reagent_volumes))
 		return list("No active chemical agents found in [O].")
 	. = list("Chemicals found in [O]:")
 	var/one_percent = O.reagents.total_volume / 100
-	for (var/datum/reagent/R in O.reagents.reagent_list)
-		. += "[R][details ? ": [R.volume / one_percent]%" : ""]"
+	for (var/rtype in O.reagents.reagent_volumes)
+		var/decl/reagent/R = decls_repository.get_decl(rtype)
+		. += "[R.name][details ? ": [REAGENT_VOLUME(O.reagents, rtype) / one_percent]%" : ""]"
 
 /obj/item/scanner/reagent/adv
 	name = "advanced reagent scanner"

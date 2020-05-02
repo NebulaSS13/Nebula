@@ -80,11 +80,12 @@
 			return TRUE
 
 		var/obj/item/stack/material/rods/R = C
-		if(R.use(2))
-			src.alpha = 0
+		if(locate(/obj/structure/catwalk) in get_turf(src))
+			to_chat(user, SPAN_WARNING("There is already a catwalk here."))
+			return
+		else if(R.use(2))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/catwalk(src.loc)
-			qdel(src)
+			new /obj/structure/catwalk(src.loc, R.material.type)
 			return
 		else
 			to_chat(user, SPAN_WARNING("You require at least two rods to complete the catwalk."))

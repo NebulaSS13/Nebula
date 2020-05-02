@@ -116,3 +116,9 @@
 	desc = "A simple blue and white cloak."
 	icon_state = "cloak_med"
 	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_medical.dmi'
+
+/obj/item/clothing/accessory/cloak/hide
+	name = "hide cloak"
+	desc = "A ragged cloak made of some sort of thick hide."
+	icon_state = "cloak_hide"
+	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'

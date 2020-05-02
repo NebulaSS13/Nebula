@@ -1,5 +1,5 @@
 
-/datum/reagent/amphetamines
+/decl/reagent/amphetamines
 	name = "amphetamines"
 	description = "A powerful, long-lasting stimulant." 
 	taste_description = "acid"
@@ -8,13 +8,13 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2
 
-/datum/reagent/amphetamines/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/amphetamines/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(5))
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.add_chemical_effect(CE_PULSE, 3)
 
-/datum/reagent/narcotics
+/decl/reagent/narcotics
 	name = "narcotics"
 	description = "A narcotic that impedes mental ability by slowing down the higher brain cell functions."
 	taste_description = "numbness"
@@ -22,7 +22,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 
-/datum/reagent/narcotics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/narcotics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.jitteriness = max(M.jitteriness - 5, 0)
 	if(prob(80))
 		M.adjustBrainLoss(5.25 * removed)
@@ -31,7 +31,7 @@
 	if(prob(10))
 		M.emote("drool")
 
-/datum/reagent/nicotine
+/decl/reagent/nicotine
 	name = "nicotine"
 	description = "A sickly yellow liquid sourced from tobacco leaves. Stimulates and relaxes the mind and body."
 	taste_description = "peppery bitterness"
@@ -39,25 +39,24 @@
 	metabolism = REM * 0.002
 	overdose = 6
 	scannable = 1
-	data = 0
 	value = 2
 
-/datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	var/volume = REAGENT_VOLUME(holder, type)
 	if(prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + 3 MINUTES)
-		data = world.time
+	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
+		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, "<span class='warning'>You feel antsy, your concentration wavers...</span>")
-	else
-		if(world.time > data + 3 MINUTES)
-			data = world.time
-			to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
+	else if(world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
+		LAZYSET(holder.reagent_data, type, world.time)
+		to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
 
-/datum/reagent/nicotine/affect_overdose(var/mob/living/carbon/M, var/alien)
+/decl/reagent/nicotine/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/datum/reagent/sedatives
+/decl/reagent/sedatives
 	name = "sedatives"
 	description = "A mild sedative used to calm patients and induce sleep."
 	taste_description = "bitterness"
@@ -66,7 +65,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 
-/datum/reagent/sedatives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/sedatives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.make_jittery(-50)
 	var/threshold = 1
 	if(M.chem_doses[type] < 0.5 * threshold)
@@ -85,7 +84,7 @@
 		M.add_chemical_effect(CE_SEDATE, 1)
 	M.add_chemical_effect(CE_PULSE, -1)
 
-/datum/reagent/psychoactives
+/decl/reagent/psychoactives
 	name = "psychoactives"
 	description = "An illegal chemical compound used as a psychoactive drug."
 	taste_description = "bitterness"
@@ -95,7 +94,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 
-/datum/reagent/psychoactives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/psychoactives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/drug_strength = 15
 	M.druggy = max(M.druggy, drug_strength)
 	if(prob(10))
@@ -104,7 +103,7 @@
 		M.emote(pick("twitch", "drool", "moan", "giggle"))
 	M.add_chemical_effect(CE_PULSE, -1)
 
-/datum/reagent/hallucinogenics
+/decl/reagent/hallucinogenics
 	name = "hallucinogenics"
 	description = "A mix of powerful hallucinogens, they can cause fatal effects in users."
 	taste_description = "sourness"
@@ -113,11 +112,11 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 
-/datum/reagent/hallucinogenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/hallucinogenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_MIND, -2)
 	M.hallucination(50, 50)
 
-/datum/reagent/psychotropics
+/decl/reagent/psychotropics
 	name = "psychotropics"
 	description = "A strong psychotropic derived from certain species of mushroom."
 	taste_description = "mushroom"
@@ -126,7 +125,7 @@
 	metabolism = REM * 0.5
 	value = 2
 
-/datum/reagent/psychotropics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/psychotropics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/threshold = 1
 	M.druggy = max(M.druggy, 30)
 
@@ -152,7 +151,7 @@
 			M.emote(pick("twitch", "giggle"))
 
 // Welcome back, Three Eye
-/datum/reagent/glowsap/gleam
+/decl/reagent/glowsap/gleam
 	name = "Gleam"
 	description = "A powerful hallucinogenic and psychotropic derived from various species of glowing mushroom. Some say it can have permanent effects on the brains of those who over-indulge."
 	color = "#ccccff"
@@ -191,7 +190,7 @@
 		"THE LIGHT THE DARK A STAR IN CHAINS"
 	)
 
-/datum/reagent/glowsap/gleam/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/glowsap/gleam/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	. = ..()
 	M.add_client_color(/datum/client_color/thirdeye)
 	M.add_chemical_effect(CE_THIRDEYE, 1)
@@ -206,11 +205,11 @@
 	if(prob(5))
 		to_chat(M, SPAN_WARNING("<font size = [rand(1,3)]>[pick(dose_messages)]</font>"))
 
-/datum/reagent/glowsap/gleam/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
+/decl/reagent/glowsap/gleam/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
 	. = ..()
 	parent.remove_client_color(/datum/client_color/thirdeye)
 
-/datum/reagent/glowsap/gleam/affect_overdose(var/mob/living/carbon/M, var/alien)
+/decl/reagent/glowsap/gleam/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
 	M.adjustBrainLoss(rand(1, 5))
 	if(ishuman(M) && prob(10))
 		var/mob/living/carbon/human/H = M

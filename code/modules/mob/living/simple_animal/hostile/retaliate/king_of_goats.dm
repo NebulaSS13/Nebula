@@ -212,5 +212,5 @@
 	if(damtype != BRUTE)
 		special_attacks++
 	
-/mob/living/simple_animal/hostile/retaliate/goat/king/Allow_Spacemove(check_drift = 0)
+/mob/living/simple_animal/hostile/retaliate/goat/king/Process_Spacemove()
 	return 1

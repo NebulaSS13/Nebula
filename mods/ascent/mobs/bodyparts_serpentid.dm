@@ -76,10 +76,10 @@
 		else if(is_bruised())
 			amount *= 0.8
 
-		var/phoron_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/toxin/phoron)
+		var/phoron_volume_raw = REAGENT_VOLUME(owner.reagents, /decl/reagent/toxin/phoron)
 
 		if(phoron_volume_raw < phoron_level || !phoron_volume_raw)
-			owner.reagents.add_reagent(/datum/reagent/toxin/phoron, amount)
+			owner.reagents.add_reagent(/decl/reagent/toxin/phoron, amount)
 	..()
 
 /obj/item/organ/internal/phoron/can_recover()

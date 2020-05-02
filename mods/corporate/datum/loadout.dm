@@ -7,9 +7,9 @@
 /datum/gear/accessory/ntaward/New()
 	..()
 	var/ntawards = list()
-	ntawards["sciences medal"] = /obj/item/clothing/accessory/medal/bronze/nanotrasen
-	ntawards["distinguished service"] = /obj/item/clothing/accessory/medal/silver/nanotrasen
-	ntawards["command medal"] = /obj/item/clothing/accessory/medal/gold/nanotrasen
+	ntawards["sciences medal"] = /obj/item/clothing/accessory/medal/nanotrasen/bronze
+	ntawards["distinguished service"] = /obj/item/clothing/accessory/medal/nanotrasen/silver
+	ntawards["command medal"] = /obj/item/clothing/accessory/medal/nanotrasen/gold
 	gear_tweaks += new/datum/gear_tweak/path(ntawards)
 
 /datum/gear/accessory/armband_nt
@@ -28,37 +28,36 @@
 /datum/gear/uniform/corporate/New()
 	..()
 	var/corps = list()
-	corps += /obj/item/clothing/under/rank/scientist/nanotrasen
-	corps += /obj/item/clothing/under/rank/scientist/heph
-	corps += /obj/item/clothing/under/rank/scientist/zeng
-	corps += /obj/item/clothing/under/mbill
-	corps += /obj/item/clothing/under/saare
-	corps += /obj/item/clothing/under/aether
-	corps += /obj/item/clothing/under/hephaestus
-	corps += /obj/item/clothing/under/pcrc
-	corps += /obj/item/clothing/under/pcrcsuit
-	corps += /obj/item/clothing/under/wardt
-	corps += /obj/item/clothing/under/grayson
-	corps += /obj/item/clothing/under/focal
-	corps += /obj/item/clothing/under/rank/ntwork
-	corps += /obj/item/clothing/under/morpheus
-	corps += /obj/item/clothing/under/skinner
-	corps += /obj/item/clothing/under/dais
+	corps += /obj/item/clothing/under/rank/corp/polo/nanotrasen
+	corps += /obj/item/clothing/under/rank/corp/polo/heph
+	corps += /obj/item/clothing/under/rank/corp/polo/zeng
+	corps += /obj/item/clothing/under/rank/corp/mbill
+	corps += /obj/item/clothing/under/rank/corp/saare
+	corps += /obj/item/clothing/under/rank/corp/aether
+	corps += /obj/item/clothing/under/rank/corp/hephaestus
+	corps += /obj/item/clothing/under/rank/guard/pcrc
+	corps += /obj/item/clothing/under/rank/guard/pcrcsuit
+	corps += /obj/item/clothing/under/rank/corp/wardt
+	corps += /obj/item/clothing/under/rank/corp/grayson
+	corps += /obj/item/clothing/under/rank/corp/focal
+	corps += /obj/item/clothing/under/rank/corp/morpheus
+	corps += /obj/item/clothing/under/rank/corp/skinner
+	corps += /obj/item/clothing/under/rank/corp/dais
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(corps)
 
 /datum/gear/uniform/corp_exec
 	display_name = "corporate colours, senior researcher"
-	path = /obj/item/clothing/under/rank/scientist/executive
+	path = /obj/item/clothing/under/rank/corp/executive
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/corp_overalls
 	display_name = "corporate colours, coveralls"
-	path = /obj/item/clothing/under/rank/ntwork
+	path = /obj/item/clothing/under/rank/corp/work
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/corp_flight
 	display_name = "corporate colours, flight suit"
-	path = /obj/item/clothing/under/rank/ntpilot
+	path = /obj/item/clothing/under/rank/corp/pilot
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/corp_exec_jacket

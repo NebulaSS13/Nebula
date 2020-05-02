@@ -50,7 +50,7 @@
 
 	var/reaction_volume = holder.maximum_volume
 	for(var/reactant in required_reagents)
-		var/A = holder.get_reagent_amount(reactant) / required_reagents[reactant] / limit // How much of this reagent we are allowed to use
+		var/A = REAGENT_VOLUME(holder, reactant) / required_reagents[reactant] / limit // How much of this reagent we are allowed to use
 		if(reaction_volume > A)
 			reaction_volume = A
 

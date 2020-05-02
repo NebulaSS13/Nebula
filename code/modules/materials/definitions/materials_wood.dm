@@ -25,8 +25,8 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chem_products = list(
-				/datum/reagent/carbon = 10,
-				/datum/reagent/water = 5
+				/decl/reagent/carbon = 10,
+				/decl/reagent/water = 5
 				)
 	sale_price = 1
 	value = 3
@@ -101,7 +101,7 @@
 				tree can live for nearly a thousand years thanks to its natural disease resistance."
 	icon_colour = WOOD_COLOR_YELLOW
 	chem_products = list(
-				/datum/reagent/carbon = 10,
-				/datum/reagent/water = 5,
-				/datum/reagent/toxin/heartstopper = 0.05
+				/decl/reagent/carbon = 10,
+				/decl/reagent/water = 5,
+				/decl/reagent/toxin/heartstopper = 0.05
 				)

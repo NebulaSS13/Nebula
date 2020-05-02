@@ -178,7 +178,7 @@
 	else
 		reagent = valid_reagents[metadata]
 	if(reagent)
-		return I.reagents.add_reagent(reagent, I.reagents.get_free_space())
+		return I.reagents.add_reagent(reagent, REAGENTS_FREE_SPACE(I.reagents))
 
 /datum/gear_tweak/tablet
 	var/list/ValidProcessors = list(/obj/item/stock_parts/computer/processor_unit/small)

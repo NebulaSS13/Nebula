@@ -845,8 +845,7 @@ default behaviour is:
 
 /mob/living/handle_grab_damage()
 	..()
-	var/area/A = get_area(src)
-	if(!A.has_gravity)
+	if(!has_gravity())
 		return
 	if(isturf(loc) && pull_damage() && prob(getBruteLoss() / 6))
 		blood_splatter(loc, src, large = TRUE)

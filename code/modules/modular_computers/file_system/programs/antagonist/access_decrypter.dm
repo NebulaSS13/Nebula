@@ -105,8 +105,7 @@
 
 /datum/computer_file/program/access_decrypter/proc/get_speed()
 	var/skill_speed_modifier = 1 + (operator_skill - SKILL_ADEPT)/(SKILL_MAX - SKILL_MIN)
-	var/obj/item/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
-	return CPU?.processing_power * skill_speed_modifier
+	return computer.get_processing_power() * skill_speed_modifier
 
 /datum/nano_module/program/access_decrypter
 	name = "Access Database Decrypter"

@@ -1,5 +1,5 @@
 
-/datum/reagent/cleaner
+/decl/reagent/cleaner
 	name = "spray cleaner"
 	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
 	taste_description = "sourness"
@@ -7,10 +7,11 @@
 	touch_met = 50
 	value = 0.15 // shelf price of bug spray per ml, cleaner in general is too cheap
 
-/datum/reagent/cleaner/touch_obj(var/obj/O)
+/decl/reagent/cleaner/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	O.clean_blood()
 
-/datum/reagent/cleaner/touch_turf(var/turf/T)
+/decl/reagent/cleaner/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume >= 1)
 		if(istype(T, /turf/simulated))
 			var/turf/simulated/S = T
@@ -21,7 +22,7 @@
 		for(var/mob/living/carbon/slime/M in T)
 			M.adjustToxLoss(rand(5, 10))
 
-/datum/reagent/cleaner/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/reagent/cleaner/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(M.r_hand)
 		M.r_hand.clean_blood()
 	if(M.l_hand)

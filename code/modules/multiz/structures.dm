@@ -116,8 +116,7 @@
 /obj/structure/ladder/hitby(obj/item/I)
 	if(!target_down)
 		return
-	var/area/room = get_area(src)
-	if(!room.has_gravity())
+	if(!has_gravity())
 		return
 	var/atom/blocker
 	var/turf/landing = get_turf(target_down)

@@ -35,7 +35,7 @@
 				/obj/item/contract/apprentice = 				1
 				)
 
-	sacrifice_reagents = list(/datum/reagent/adminordrazine)
+	sacrifice_reagents = list(/decl/reagent/adminordrazine)
 	sacrifice_objects = list(/obj/item/stack/nanopaste,
 							/obj/item/scanner/health,
 							/obj/item/stack/medical/advanced/bruise_pack,

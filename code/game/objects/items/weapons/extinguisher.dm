@@ -40,7 +40,7 @@
 	. = ..()
 	create_reagents(max_water)
 	if(starting_water > 0)
-		reagents.add_reagent(/datum/reagent/water, starting_water)
+		reagents.add_reagent(/decl/reagent/water, starting_water)
 
 /obj/item/extinguisher/empty
 	starting_water = 0
@@ -93,7 +93,7 @@
 		sleep(3)
 
 /obj/item/extinguisher/resolve_attackby(var/atom/target, var/mob/user, var/flag)
-	if (istype(target, /obj/structure/hygiene/sink) && reagents.get_free_space() > 0) // fill first, wash if full
+	if (istype(target, /obj/structure/hygiene/sink) && REAGENTS_FREE_SPACE(target.reagents) > 0) // fill first, wash if full
 		return FALSE
 	return ..()
 
@@ -103,7 +103,7 @@
 
 	if (flag && (issink || istype(target, /obj/structure/reagent_dispensers)))
 		var/obj/dispenser = target
-		var/amount = reagents.get_free_space()
+		var/amount = REAGENTS_FREE_SPACE(target.reagents)
 		if (amount <= 0)
 			to_chat(user, SPAN_NOTICE("\The [src] is full."))
 			return
@@ -113,7 +113,7 @@
 				return
 			amount = dispenser.reagents.trans_to_obj(src, max_water)
 		else
-			reagents.add_reagent(/datum/reagent/water, amount)
+			reagents.add_reagent(/decl/reagent/water, amount)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] with [amount] units from \the [dispenser]."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		if (istype(target, /obj/structure/reagent_dispensers/acid))
@@ -135,16 +135,15 @@
 
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
 
-		var/direction = get_dir(src,target)
+		var/direction = get_dir(target,src)
 
 		if(user.buckled && isobj(user.buckled))
-			addtimer(CALLBACK(src, .proc/propel_object, user.buckled, user, turn(direction,180)), 0)
+			addtimer(CALLBACK(src, .proc/propel_object, user.buckled, user, direction), 0)
 
 		addtimer(CALLBACK(src, .proc/do_spray, target), 0)
 
-		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
-			user.inertia_dir = get_dir(target, user)
-			step(user, user.inertia_dir)
+		if(!user.check_space_footing())
+			step(user, direction)
 	else
 		return ..()
 	return

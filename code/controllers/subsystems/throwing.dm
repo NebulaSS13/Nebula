@@ -1,10 +1,10 @@
 //ported from TG 28/10/2019
 
-#define MAX_THROWING_DIST 1280 // 5 z-levels on default width
 #define MAX_TICKS_TO_MAKE_UP 3 //how many missed ticks will we attempt to make up for this run.
 
 SUBSYSTEM_DEF(throwing)
 	name = "Throwing"
+	priority = SS_PRIORITY_THROWING
 	wait = 1
 	flags = SS_NO_INIT|SS_KEEP_TIMING
 
@@ -117,7 +117,6 @@ SUBSYSTEM_DEF(throwing)
 		finalize()
 		return
 
-	var/area/A = get_area(AM.loc)
 	var/atom/step
 
 	last_move = world.time
@@ -125,7 +124,7 @@ SUBSYSTEM_DEF(throwing)
 	//calculate how many tiles to move, making up for any missed ticks.
 	var/tilestomove = CEILING(min(((((world.time+world.tick_lag) - start_time + delayed_time) * speed) - (dist_travelled ? dist_travelled : -1)), speed*MAX_TICKS_TO_MAKE_UP) * (world.tick_lag * SSthrowing.wait), 1)
 	while (tilestomove-- > 0)
-		if ((dist_travelled >= maxrange || AM.loc == target_turf) && (A && A.has_gravity()))
+		if (dist_travelled >= maxrange || AM.loc == target_turf)
 			finalize()
 			return
 
@@ -150,18 +149,11 @@ SUBSYSTEM_DEF(throwing)
 		AM.Move(step, get_dir(AM, step))
 
 		if (!AM.throwing) // we hit something during our move
-			finalize(hit = TRUE)
 			return
 
 		dist_travelled++
 
-		if (dist_travelled > MAX_THROWING_DIST)
-			finalize()
-			return
-
-		A = get_area(AM.loc)
-
-/datum/thrownthing/proc/finalize(hit = FALSE, t_target=null)
+/datum/thrownthing/proc/finalize(hit = FALSE, t_target = null)
 	set waitfor = FALSE
 	//done throwing, either because it hit something or it finished moving
 	if(QDELETED(thrownthing))
@@ -176,10 +168,7 @@ SUBSYSTEM_DEF(throwing)
 				break
 		if (!hit)
 			thrownthing.throw_impact(get_turf(thrownthing), src)  // we haven't hit something yet and we still must, let's hit the ground.
-
-	if(ismob(thrownthing))
-		var/mob/M = thrownthing
-		M.inertia_dir = init_dir
+			thrownthing.space_drift(init_dir)
 
 	if(t_target)
 		thrownthing.throw_impact(t_target, src)
