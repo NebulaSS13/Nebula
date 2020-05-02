@@ -12,6 +12,7 @@
 #include "game\gamemodes\persistence.dm"
 #include "game\machinery\resleever.dm"
 #include "game\species\species.dm"
+#include "modules\admin\admin.dm"
 #include "modules\organs\stack.dm"
 #include "modules\world_save\_persistence.dm"
 #include "modules\world_save\load_cache.dm"
