@@ -52,22 +52,24 @@
 		return "<span class='warning'>No sample to scan.</span>"
 	var/list/blood_traces = list()
 	var/list/blood_doses = list()
-	for(var/datum/reagent/R in reagents.reagent_list)
-		if(length(reagents.reagent_list) == 1)
-			var/datum/reagent/random/random = R
-			if(istype(random))
-				return random.get_scan_data(user)
-				
-		if(R.type != /datum/reagent/blood)
+
+	if(length(reagents.reagent_volumes) == 1)
+		var/decl/reagent/random/random = decls_repository.get_decl(reagents.reagent_volumes[1])
+		if(istype(random))
+			return random.get_scan_data(user)
+
+	for(var/R in reagents.reagent_volumes)
+		if(!ispath(R, /decl/reagent/blood))
 			return "<span class='warning'>The sample was contaminated! Please insert another sample</span>"
-		else
-			blood_traces = R.data["trace_chem"]
-			blood_doses = R.data["dose_chem"]
-			break
+		var/data = REAGENT_DATA(reagents, R)
+		if(islist(data))
+			blood_traces = data["trace_chem"]
+			blood_doses = data["dose_chem"]
+		break
 
 	var/list/dat = list("Trace Chemicals Found: ")
 	for(var/T in blood_traces)
-		var/datum/reagent/R = T
+		var/decl/reagent/R = T
 		if(details)
 			dat += "[initial(R.name)] ([blood_traces[T]] units) "
 		else
@@ -75,7 +77,7 @@
 	if(details)
 		dat += "Metabolism Products of Chemicals Found:"
 		for(var/T in blood_doses)
-			var/datum/reagent/R = T
+			var/decl/reagent/R = T
 			dat += "[initial(R.name)] ([blood_doses[T]] units) "
 
 	return jointext(dat, "<br>")

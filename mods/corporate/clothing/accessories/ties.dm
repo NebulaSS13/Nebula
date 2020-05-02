@@ -2,6 +2,8 @@
 	name = "corporate tie"
 	desc = "A green neosilk clip-on tie. This one has a clip on it that proudly bears a corporate logo."
 	icon_state = "cliptie"
+	icon = 'mods/corporate/icons/obj/clothing/obj_accessories.dmi'
+	accessory_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_accessories.dmi', slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_accessories.dmi')
 
 /obj/item/clothing/accessory/corptie/nanotrasen
 	name = "\improper NanoTrasen tie"

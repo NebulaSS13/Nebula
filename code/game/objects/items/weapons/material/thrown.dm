@@ -18,5 +18,10 @@
 		var/urgh = material.radioactivity
 		M.adjustToxLoss(rand(urgh/2,urgh))
 
+/obj/item/material/star/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(user.a_intent == I_HURT)
+		user.throw_item(target)
+
 /obj/item/material/star/ninja
 	material = MAT_URANIUM

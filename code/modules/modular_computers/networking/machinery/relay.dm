@@ -6,6 +6,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	base_type = /obj/machinery/network/relay
+	produces_heat = FALSE // for convenience
 
 /obj/machinery/network/relay/Initialize()
 	if(!initial_network_id)

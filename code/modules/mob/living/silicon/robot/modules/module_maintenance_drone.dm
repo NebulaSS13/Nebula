@@ -107,7 +107,7 @@
 /obj/item/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/chems/spray/cleaner/drone/SC = locate() in equipment
-	SC.reagents.add_reagent(/datum/reagent/cleaner, 8 * amount)
+	SC.reagents.add_reagent(/decl/reagent/cleaner, 8 * amount)
 
 /obj/item/robot_module/drone/construction
 	name = "construction drone module"

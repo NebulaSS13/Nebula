@@ -600,7 +600,7 @@
 
 		to_chat(user, "You inject the solution into the [src].")
 
-		if(S.reagents.has_reagent(/datum/reagent/toxin/phoron, 5))
+		if(S.reagents.has_reagent(/decl/reagent/toxin/phoron, 5))
 
 			log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
 

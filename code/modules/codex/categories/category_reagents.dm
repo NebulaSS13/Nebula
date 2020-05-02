@@ -14,12 +14,12 @@
 			mechanics_text = "[boom.mechanics_text]<br>[mechanics_text]"
 		var/list/reactant_values = list()
 		for(var/reactant_id in boom.required_reagents)
-			var/datum/reagent/reactant = reactant_id
+			var/decl/reagent/reactant = reactant_id
 			reactant_values += "[boom.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
 		mechanics_text += " [jointext(reactant_values, " + ")]"
 		var/list/catalysts = list()
 		for(var/catalyst_id in boom.catalysts)
-			var/datum/reagent/catalyst = catalyst_id
+			var/decl/reagent/catalyst = catalyst_id
 			catalysts += "[boom.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
 		if(catalysts.len)
 			mechanics_text += " [jointext(reactant_values, " + ")] (catalysts: [jointext(catalysts, ", ")])]"
@@ -35,8 +35,8 @@
 		 _mechanics_text =     mechanics_text                       \
 		)
 
-	for(var/thing in subtypesof(/datum/reagent))
-		var/datum/reagent/reagent = thing
+	for(var/thing in subtypesof(/decl/reagent))
+		var/decl/reagent/reagent = thing
 		if(!initial(reagent.name) || initial(reagent.hidden_from_codex))
 			continue
 		var/chem_name = lowertext(initial(reagent.name))
@@ -58,7 +58,7 @@
 
 			var/list/reactant_values = list()
 			for(var/reactant_id in reaction.required_reagents)
-				var/datum/reagent/reactant = reactant_id
+				var/decl/reagent/reactant = reactant_id
 				reactant_values += "[reaction.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
 
 			if(!reactant_values.len)
@@ -66,10 +66,10 @@
 
 			var/list/catalysts = list()
 			for(var/catalyst_id in reaction.catalysts)
-				var/datum/reagent/catalyst = catalyst_id
+				var/decl/reagent/catalyst = catalyst_id
 				catalysts += "[reaction.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
 
-			var/datum/reagent/result = reaction.result
+			var/decl/reagent/result = reaction.result
 			if(catalysts.len)
 				production_strings += "- [jointext(reactant_values, " + ")] (catalysts: [jointext(catalysts, ", ")]): [reaction.result_amount]u [lowertext(initial(result.name))]"
 			else

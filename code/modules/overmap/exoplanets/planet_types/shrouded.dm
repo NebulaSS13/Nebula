@@ -51,7 +51,7 @@
 	icon_state = "shrouded_tar"
 	desc = "A pool of viscous and sticky tar."
 	movement_delay = 12
-	reagent_type = /datum/reagent/toxin/tar
+	reagent_type = /decl/reagent/toxin/tar
 	dirt_color = "#3e3960"
 
 /turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(var/mob/caller)

@@ -55,7 +55,7 @@
 	icon_state = "chlorine_liquid"
 	desc = "A pool of noxious liquid chlorine. It's full of silt and plant matter."
 	dirt_color = "#d2e0b7"
-	reagent_type = /datum/reagent/toxin/chlorine
+	reagent_type = /decl/reagent/toxin/chlorine
 
 /turf/simulated/floor/exoplanet/chlorine_sand
 	name = "chlorinated sand"

@@ -43,7 +43,7 @@
 	var/mob/living/carbon/human/H = M
 	if(!istype(H))
 		return FALSE
-	if(H.reagents.has_reagent(/datum/reagent/hallucinogenics))
+	if(H.reagents.has_reagent(/decl/reagent/hallucinogenics))
 		brainwashing = 1
 	var/msg = get_instructions()
 	to_chat(M, msg)

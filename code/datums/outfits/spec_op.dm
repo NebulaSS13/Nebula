@@ -26,7 +26,7 @@
 
 /decl/hierarchy/outfit/ert
 	name = "Spec Ops - Emergency response team"
-	uniform = /obj/item/clothing/under/ert
+	uniform = /obj/item/clothing/under/syndicate/combat
 	shoes = /obj/item/clothing/shoes/swat
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_ear = /obj/item/radio/headset/ert

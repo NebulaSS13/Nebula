@@ -13,7 +13,7 @@
 		MAT_GOLD =                         SHEET_MATERIAL_AMOUNT * 50,
 		MAT_SILVER =                       SHEET_MATERIAL_AMOUNT * 50,
 		MAT_DIAMOND =                      SHEET_MATERIAL_AMOUNT * 50,
-		/datum/reagent/acid =              120,
-		/datum/reagent/acid/hydrochloric = 120,
-		/datum/reagent/acid/polyacid =     120
+		/decl/reagent/acid =              120,
+		/decl/reagent/acid/hydrochloric = 120,
+		/decl/reagent/acid/polyacid =     120
 	)

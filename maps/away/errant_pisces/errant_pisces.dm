@@ -76,9 +76,9 @@
 
 /obj/item/chems/food/snacks/sharkmeat/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
-	reagents.add_reagent(/datum/reagent/psychoactives, 1)
-	reagents.add_reagent(/datum/reagent/toxin/phoron, 1)
+	reagents.add_reagent(/decl/reagent/nutriment/protein, 5)
+	reagents.add_reagent(/decl/reagent/psychoactives, 1)
+	reagents.add_reagent(/decl/reagent/toxin/phoron, 1)
 	src.bitesize = 8
 
 
@@ -202,8 +202,7 @@
 		icon_state = "net_roll"
 
 /obj/item/stack/net/proc/attach_wall_check()//checks if wall can be attached to something vertical such as walls or another net-wall
-	var/area/A = get_area(src)
-	if (!A.has_gravity)
+	if (!has_gravity())
 		return 1
 	var/turf/T = get_turf(src)
 	for (var/turf/AT in T.CardinalTurfs(FALSE))

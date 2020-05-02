@@ -45,7 +45,7 @@
 	skin_amount =   5
 
 	var/poison_per_bite = 6
-	var/poison_type = /datum/reagent/toxin/venom
+	var/poison_type = /decl/reagent/toxin/venom
 	var/busy = 0
 	var/eye_colour
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
@@ -88,7 +88,7 @@
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
-	poison_type = /datum/reagent/sedatives
+	poison_type = /decl/reagent/sedatives
 	break_stuff_probability = 10
 	pry_time = 9 SECONDS
 

@@ -21,15 +21,15 @@
 
 /obj/item/chems/glass/beaker/vial/random
 	atom_flags = 0
-	var/list/random_reagent_list = list(list(/datum/reagent/water = 15) = 1, list(/datum/reagent/cleaner = 15) = 1)
+	var/list/random_reagent_list = list(list(/decl/reagent/water = 15) = 1, list(/decl/reagent/cleaner = 15) = 1)
 
 /obj/item/chems/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list(/datum/reagent/hallucinogenics = 10)    = 2,
-		list(/datum/reagent/psychoactives = 20)      = 2,
-		list(/datum/reagent/toxin/carpotoxin = 15)   = 2,
-		list(/datum/reagent/narcotics = 15)          = 2,
-		list(/datum/reagent/toxin/zombiepowder = 10) = 1
+		list(/decl/reagent/hallucinogenics = 10)    = 2,
+		list(/decl/reagent/psychoactives = 20)      = 2,
+		list(/decl/reagent/toxin/carpotoxin = 15)   = 2,
+		list(/decl/reagent/narcotics = 15)          = 2,
+		list(/decl/reagent/toxin/zombiepowder = 10) = 1
 	)
 
 /obj/item/chems/glass/beaker/vial/random/Initialize()
@@ -40,7 +40,8 @@
 		reagents.add_reagent(reagent, picked_reagents[reagent])
 
 	var/list/names = new
-	for(var/datum/reagent/R in reagents.reagent_list)
+	for(var/reagent_type in reagents.reagent_volumes)
+		var/decl/reagent/R = decls_repository.get_decl(reagent_type)
 		names += R.name
 
 	desc = "Contains [english_list(names)]."

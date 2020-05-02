@@ -6,20 +6,20 @@
 /obj/machinery/fabricator/proc/take_reagents(var/obj/item/thing, var/mob/user, var/destructive = FALSE)
 	if(!thing.reagents || (!destructive && !ATOM_IS_OPEN_CONTAINER(thing)))
 		return SUBSTANCE_TAKEN_NONE
-	for(var/datum/reagent/R in thing.reagents.reagent_list)
-		if(!base_storage_capacity[R.type])
+	for(var/R in thing.reagents.reagent_volumes)
+		if(!base_storage_capacity[R])
 			continue
-		var/taking_reagent = min(R.volume, storage_capacity[R.type] - stored_material[R.type])
+		var/taking_reagent = min(REAGENT_VOLUME(thing.reagents, R), storage_capacity[R] - stored_material[R])
 		if(taking_reagent <= 0)
 			continue
-		thing.reagents.remove_reagent(R.type, taking_reagent)
-		stored_material[R.type] += taking_reagent
+		thing.reagents.remove_reagent(R, taking_reagent)
+		stored_material[R] += taking_reagent
 		// If we're destroying this, take everything.
 		if(destructive)
 			. = SUBSTANCE_TAKEN_ALL
 			continue
 		// Otherwise take the first applicable and useful reagent.
-		if(stored_material[R.type] == storage_capacity[R.type])
+		if(stored_material[R] == storage_capacity[R])
 			return SUBSTANCE_TAKEN_FULL
 		else if(thing.reagents.total_volume > 0)
 			return SUBSTANCE_TAKEN_SOME

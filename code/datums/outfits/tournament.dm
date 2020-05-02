@@ -47,4 +47,4 @@
 	..()
 	var/obj/item/chems/glass/bucket/bucket = locate(/obj/item/chems/glass/bucket) in H
 	if(bucket)
-		bucket.reagents.add_reagent(/datum/reagent/water, 70)
+		bucket.reagents.add_reagent(/decl/reagent/water, 70)

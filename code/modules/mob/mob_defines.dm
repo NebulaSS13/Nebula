@@ -128,8 +128,6 @@
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
 	var/in_throw_mode = 0
 
-	var/inertia_dir = 0
-
 //	var/job = null//Living
 
 	var/can_pull_size = ITEM_SIZE_STRUCTURE // Maximum w_class the mob can pull.

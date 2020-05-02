@@ -20,7 +20,7 @@
 
 	if(reagents.total_volume)
 
-		if(!target.reagents.get_free_space())
+		if(!REAGENTS_FREE_SPACE(target.reagents))
 			to_chat(user, SPAN_WARNING("\The [target] is full."))
 			return
 

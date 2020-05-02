@@ -26,9 +26,9 @@
 	var/list/loaded_canisters
 	var/max_canister_capacity = 5
 	var/global/list/banned_chem_types = list(
-		/datum/reagent/toxin,
-		/datum/reagent/mutagenics,
-		/datum/reagent/acid
+		/decl/reagent/toxin,
+		/decl/reagent/mutagenics,
+		/decl/reagent/acid
 	)
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)
@@ -53,8 +53,8 @@
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept any more chemical canisters."))
 		return FALSE
 	if(!emagged)
-		for(var/rid in canister.reagents?.reagent_list)
-			var/datum/reagent/reagent = canister.reagents.reagent_list[rid]
+		for(var/rid in canister.reagents?.reagent_volumes)
+			var/decl/reagent/reagent = decls_repository.get_decl(rid)
 			for(var/banned_type in banned_chem_types)
 				if(istype(reagent, banned_type))
 					to_chat(user, SPAN_WARNING("Automatic safety checking indicates the present of a prohibited substance in this canister."))
@@ -105,11 +105,9 @@
 	if(filtering > 0)
 		if(beaker)
 			if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-				var/pumped = 0
-				for(var/datum/reagent/x in occupant.reagents.reagent_list)
-					occupant.reagents.trans_to_obj(beaker, pump_speed)
-					pumped++
-				if(ishuman(occupant))
+				var/pumped = LAZYLEN(occupant.reagents?.reagent_volumes)
+				if(pumped)
+					occupant.reagents.trans_to_obj(beaker, pump_speed * pumped)
 					occupant.vessel.trans_to_obj(beaker, pumped + 1)
 		else
 			toggle_filter()
@@ -118,8 +116,9 @@
 			if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
 				var/datum/reagents/ingested = occupant.get_ingested_reagents()
 				if(ingested)
-					for(var/datum/reagent/x in ingested.reagent_list)
-						ingested.trans_to_obj(beaker, pump_speed)
+					var/trans_amt = LAZYLEN(ingested.reagent_volumes)
+					if(trans_amt)
+						ingested.trans_to_obj(beaker, pump_speed * trans_amt)
 		else
 			toggle_pump()
 
@@ -174,7 +173,7 @@
 		data["occupant"] = 0
 
 	if(beaker)
-		data["beaker"] = beaker.reagents.get_free_space()
+		data["beaker"] = REAGENTS_FREE_SPACE(beaker.reagents)
 	else
 		data["beaker"] = -1
 	data["filtering"] = filtering

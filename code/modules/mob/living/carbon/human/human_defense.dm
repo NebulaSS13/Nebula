@@ -296,6 +296,7 @@ meteor_act
 					put_in_active_hand(O)
 					visible_message("<span class='warning'>[src] catches [O]!</span>")
 					throw_mode_off()
+					process_momentum(AM, TT)
 					return
 
 		var/dtype = O.damtype
@@ -352,29 +353,8 @@ meteor_act
 					affecting.embed(I, supplied_wound = created_wound)
 					I.has_embedded()
 
-		// Begin BS12 momentum-transfer code.
-		var/mass = 1.5
-		if(istype(O, /obj/item))
-			var/obj/item/I = O
-			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
-		var/momentum = TT.speed*mass
+		process_momentum(AM, TT)
 
-		if(momentum >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/dir = TT.init_dir
-
-			visible_message("<span class='warning'>\The [src] staggers under the impact!</span>","<span class='warning'>You stagger under the impact!</span>")
-			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
-
-			if(!O || !src) return
-
-			if(O.loc == src && O.sharp) //Projectile is embedded and suitable for pinning.
-				var/turf/T = near_wall(dir,2)
-
-				if(T)
-					src.forceMove(T)
-					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-					src.anchored = 1
-					src.pinned += O
 	else
 		..()
 
