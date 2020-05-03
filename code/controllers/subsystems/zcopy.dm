@@ -17,6 +17,10 @@ SUBSYSTEM_DEF(zcopy)
 	var/openspace_overlays = 0
 	var/openspace_turfs = 0
 
+	// Highest Z level in a given Z-group for absolute layering used by FIX_BIGTURF.
+	// zstm[zlev] = group_max
+	var/list/zstack_maximums = list()
+
 // for admin proc-call
 /datum/controller/subsystem/zcopy/proc/update_all()
 	disable()
@@ -77,9 +81,28 @@ SUBSYSTEM_DEF(zcopy)
 	..("Q:{T:[queued_turfs.len - (qt_idex - 1)]|O:[queued_overlays.len - (qo_idex - 1)]} T:{T:[openspace_turfs]|O:[openspace_overlays]}")
 
 /datum/controller/subsystem/zcopy/Initialize(timeofday)
+	calculate_zstack_limits()
 	// Flush the queue.
 	fire(FALSE, TRUE)
 	return ..()
+
+// If you add a new Zlevel or change Z-connections, call this.
+/datum/controller/subsystem/zcopy/proc/calculate_zstack_limits()
+	zstack_maximums = new(world.maxz)
+	var/start_zlev = 1
+	for (var/z in 1 to world.maxz)
+		if (!HasAbove(z))
+			for (var/member_zlev in start_zlev to z)
+				zstack_maximums[member_zlev] = z
+			start_zlev = z + 1
+
+	log_ss("zcopy", "Z-Stack maximums: [json_encode(zstack_maximums)]")
+
+/datum/controller/subsystem/zcopy/StartLoadingMap()
+	suspend()
+
+/datum/controller/subsystem/zcopy/StopLoadingMap()
+	wake()
 
 /datum/controller/subsystem/zcopy/fire(resumed = FALSE, no_mc_tick = FALSE)
 	if (!resumed)
@@ -115,10 +138,8 @@ SUBSYSTEM_DEF(zcopy)
 
 		while (Td.below)
 			Td = Td.below
-			depth += 1
 
-		if (depth > OPENTURF_MAX_DEPTH)
-			depth = OPENTURF_MAX_DEPTH
+		T.z_depth = depth = min(T.z - Td.z, OPENTURF_MAX_DEPTH)
 
 		var/t_target = OPENTURF_MAX_PLANE - depth	// this is where the openturf gets put
 
@@ -127,28 +148,35 @@ SUBSYSTEM_DEF(zcopy)
 			T.z_eventually_space = TRUE
 			t_target = SPACE_PLANE
 
-		if (!(T.z_flags & ZM_MIMIC_OVERWRITE))
-			// Some openturfs have icons, so we can't overwrite their appearance.
-			if (!T.below.bound_overlay)
-				T.below.bound_overlay = new(T)
-			var/atom/movable/openspace/turf_overlay/TO = T.below.bound_overlay
-			TO.appearance = T.below
-			TO.name = T.name
-			TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
-			TO.opacity = FALSE
-			TO.plane = t_target
-		else
-			// This openturf doesn't care about its icon, so we can just overwrite it.
-			if (T.below.bound_overlay)
-				QDEL_NULL(T.below.bound_overlay)
-			T.appearance = T.below
-			T.name = initial(T.name)
-			T.desc = initial(T.desc)
-			T.gender = NEUTER
-			T.opacity = FALSE
-			T.plane = t_target
+		if (T.below.z_flags & ZM_FIX_BIGTURF)
+			T.z_flags |= ZM_FIX_BIGTURF	// this flag is infectious
 
-		T.queue_ao()
+		// There's no point creating TOs for space, it'll draw under the Z-turf anyways.
+		if (!T.below.z_eventually_space || (T.z_flags & ZM_MIMIC_OVERWRITE))
+			if (T.z_flags & ZM_MIMIC_OVERWRITE)
+				// This openturf doesn't care about its icon, so we can just overwrite it.
+				if (T.below.bound_overlay)
+					QDEL_NULL(T.below.bound_overlay)
+				T.appearance = T.below
+				T.name = initial(T.name)
+				T.desc = initial(T.desc)
+				T.gender = initial(T.gender)
+				T.opacity = FALSE
+				T.plane = t_target
+			else
+				// Some openturfs have icons, so we can't overwrite their appearance.
+				if (!T.below.bound_overlay)
+					T.below.bound_overlay = new(T)
+				var/atom/movable/openspace/turf_overlay/TO = T.below.bound_overlay
+				TO.appearance = T.below
+				TO.name = T.name
+				TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
+				TO.opacity = FALSE
+				TO.plane = t_target
+		else if (T.below.bound_overlay)
+			QDEL_NULL(T.below.bound_overlay)
+
+		T.queue_ao()	// TODO: non-rebuild updates seem to break pixel offsets, but should work in theory if that's fixed?
 
 		// Add everything below us to the update queue.
 		for (var/thing in T.below)
@@ -165,12 +193,19 @@ SUBSYSTEM_DEF(zcopy)
 					object.bound_overlay = new(T)
 					object.bound_overlay.associated_atom = object
 
-				var/target_depth = depth
+				var/override_depth
 				var/original_type = object.type
-				if (object.type == /atom/movable/openspace/overlay)
-					var/atom/movable/openspace/overlay/OOO = object
-					target_depth = OOO.depth
-					original_type = OOO.mimiced_type
+				switch (object.type)
+					if (/atom/movable/openspace/overlay)
+						var/atom/movable/openspace/overlay/OOO = object
+						original_type = OOO.mimiced_type
+						override_depth = OOO.override_depth
+
+					if (/atom/movable/openspace/multiplier)
+						// Large turfs require special (read: broken) layering to not look awful.
+						// This isn't enabled on other turfs that can layer normally as it breaks atom/shadower layer order (causing them to be lighter than intended.)
+						if (T.z_flags & ZM_FIX_BIGTURF)
+							override_depth = min((zstack_maximums[T.z] - object.z) + 1, OPENTURF_MAX_DEPTH)
 
 				var/atom/movable/openspace/overlay/OO = object.bound_overlay
 
@@ -179,8 +214,9 @@ SUBSYSTEM_DEF(zcopy)
 					deltimer(OO.destruction_timer)
 					OO.destruction_timer = null
 
-				OO.depth = target_depth
+				OO.depth = override_depth || min(T.z - object.z, OPENTURF_MAX_DEPTH)
 				OO.mimiced_type = original_type
+				OO.override_depth = override_depth
 
 				if (!OO.queued)
 					OO.queued = TRUE
@@ -254,10 +290,11 @@ SUBSYSTEM_DEF(zcopy)
 	var/list/out = list(
 		"<h1>Analysis of [T] at [T.x],[T.y],[T.z]</h1>",
 		"<b>Queue occurrences:</b> [T.z_queued]",
-		"<b>Above space:</b> [T.is_above_space() ? "Yes" : "No"]",
+		"<b>Above space:</b> Apparent [T.z_eventually_space ? "Yes" : "No"], Actual [T.is_above_space() ? "Yes" : "No"]",
 		"<b>Z Flags</b>: [english_list(bitfield2list(T.z_flags, global.mimic_defines), "(none)")]",
 		"<b>Has Shadower:</b> [T.shadower ? "Yes" : "No"]",
 		"<b>Below:</b> [!T.below ? "(nothing)" : "[T.below] at [T.below.x],[T.below.y],[T.below.z]"]",
+		"<b>Depth:</b> [T.z_depth == null ? "(null)" : T.z_depth] [T.z_depth == OPENTURF_MAX_DEPTH ? "(max)" : ""]",
 		"<ul>"
 	)
 
@@ -280,9 +317,9 @@ SUBSYSTEM_DEF(zcopy)
 			out += "<li>\icon[A] plane [A.plane], layer [A.layer], depth [OO.depth], associated Z-level [AA.z] - [OO.type] copying [AA] ([AA.type], eventually [OO.mimiced_type])</li>"
 		else if (isturf(A))
 			if (A == T)
-				out += "<li>\icon[A] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type]) - <font color='green'>SELF</font></li>"
+				out += "<li>\icon[A] plane [A.plane], layer [A.layer], depth [A:z_depth], Z-level [A.z] - [A] ([A.type]) - <font color='green'>SELF</font></li>"
 			else	// foreign turfs - not visible here, but good for figuring out layering
-				out += "<li>\icon[A] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type]) - <font color='red'>FOREIGN</font></li>"
+				out += "<li>\icon[A] plane [A.plane], layer [A.layer], depth [A:z_depth], Z-level [A.z] - [A] ([A.type]) - <font color='red'>FOREIGN</font></li>"
 		else
 			out += "<li>\icon[A] plane [A.plane], layer [A.layer], Z-level [A.z] - [A] ([A.type])</li>"
 
