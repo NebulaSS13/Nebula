@@ -71,7 +71,7 @@
 	verbs += /mob/living/proc/hide
 
 	if(name == initial(name))
-		name = "[name] ([sequential_id(/mob/living/simple_animal/mouse)])"
+		name = "[name] ([guid_to_id(sequential_id(/mob/living/simple_animal/mouse))])"
 	real_name = name
 
 	if(!body_color)

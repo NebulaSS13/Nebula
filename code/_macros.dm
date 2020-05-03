@@ -93,7 +93,7 @@
 	var/mob/living/carbon/C = A
 	return C.species?.name == B
 
-#define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)
+#define sequential_id(key) new_guid(uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key), key)
 
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 

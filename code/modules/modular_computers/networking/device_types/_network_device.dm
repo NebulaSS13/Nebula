@@ -16,7 +16,7 @@
 		connection_type = c_type
 	address = uppertext(NETWORK_MAC)
 	var/obj/O = holder
-	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[num2hex(sequential_id(type))]"
+	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
 	if(autojoin)
 		if(network_id)
 			connect()

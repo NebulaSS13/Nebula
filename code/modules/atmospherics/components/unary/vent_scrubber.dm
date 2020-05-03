@@ -103,7 +103,7 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
 	if (!id_tag)
-		id_tag = num2text(sequential_id("obj/machinery"))
+		id_tag = "[sequential_id("obj/machinery")]"
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
 		for(var/g in SSmaterials.all_gasses)
