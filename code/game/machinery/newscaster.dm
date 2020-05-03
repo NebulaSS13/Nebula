@@ -162,7 +162,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	securityCaster = istype(get_area(src), /area/security)
 	allCasters += src
 	paper_remaining = 15            // Will probably change this to something better
-	unit_no = sequential_id("obj/machinery/newscaster")
+	unit_no = "[sequential_id("obj/machinery/newscaster")]"
 	queue_icon_update()
 
 /obj/machinery/newscaster/Destroy()

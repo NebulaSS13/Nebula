@@ -33,7 +33,7 @@
 
 /datum/species/proc/get_icon_cache_uid(var/mob/H)
 	if(!icon_cache_uid)
-		icon_cache_uid = sequential_id(/datum/species)
+		icon_cache_uid = "[sequential_id(/datum/species)]"
 	return icon_cache_uid
 
 /datum/species/proc/get_bodytype(var/mob/living/carbon/human/H)

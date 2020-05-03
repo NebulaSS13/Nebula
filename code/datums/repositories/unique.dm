@@ -1,3 +1,5 @@
+#define RANDBYTE  num2hex(rand(1,255))
+
 var/repository/unique/uniqueness_repository = new()
 
 /repository/unique
@@ -19,6 +21,9 @@ var/repository/unique/uniqueness_repository = new()
 
 /datum/uniqueness_generator/proc/Generate()
 	return
+
+/datum/uniqueness_generator/hex/Generate()
+	return "[RANDBYTE]-[RANDBYTE]-[RANDBYTE]-[RANDBYTE]"
 
 /datum/uniqueness_generator/id_sequential
 	var/list/ids_by_key
