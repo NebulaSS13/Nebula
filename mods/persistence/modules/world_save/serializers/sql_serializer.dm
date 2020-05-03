@@ -131,6 +131,9 @@
 				// Missing wrapper!
 				continue
 			GD.on_serialize(VV)
+			if(!GD.key)
+				// Wrapper is null.
+				continue
 			VV = flattener.SerializeDatum(GD)
 		else if (istype(VV, /datum))
 			var/datum/VD = VV
@@ -405,9 +408,6 @@
 	A.name = area_wrapper.name
 	A.has_gravity = area_wrapper.has_gravity
 	A.apc = area_wrapper.apc
-	A.power_light = area_wrapper.power_light
-	A.power_equip = area_wrapper.power_equip
-	A.power_environ = area_wrapper.power_environ
 	var/list/turfs = list()
 	for(var/index in 1 to length(area_wrapper.turfs))
 		var/list/coords = splittext(area_wrapper.turfs[index], ",")

@@ -50,7 +50,7 @@
 	{
 		"path":"/datum/gas_mixture",
 		"vars":[
-			"gas",
+			"serialized_gas",
 			"temperature",
 			"total_moles",
 			"volume",
@@ -61,12 +61,31 @@
 	{
 		"path":"/datum/mind",
 		"vars":[
-			"memory"
+			"key",
+			"name",
+			"current",
+			"active",
+			"known_connections",
+			"gen_relations_info",
+			"assigned_role",
+			"special_role",
+			"role_alt_title",
+			"assigned_job",
+			"objectives",
+			"special_verbs",
+			"has_been_rev",
+			"faction",
+			"changeling",
+			"rev_cooldown",
+			"brigged_since",
+			"initial_account",
+			"initial_email_account"
 		]
 	},
 	{
 		"path":"/datum/money_account",
 		"vars":[
+			"account_name",
 			"owner_name",
 			"account_number",
 			"remote_access_pin",
@@ -74,21 +93,8 @@
 			"transaction_log",
 			"suspended",
 			"security_level",
-			"account_type"
-		]
-	},
-	{
-		"path":"/datum/omni_port",
-		"vars":[
-			"master",
-			"dir",
-			"update",
-			"mode",
-			"concentration",
-			"con_lock",
-			"transfer_moles",
-			"air",
-			"node"
+			"account_type",
+			"currency"
 		]
 	},
 	{
@@ -1231,12 +1237,7 @@
 	{
 		"path":"/obj/machinery/atmospherics/omni/filter",
 		"vars":[
-			"filters",
-			"gas_filters",
-			"input",
-			"output",
-			"set_flow_rate",
-			"filtering_outputs"
+			"set_flow_rate"
 		]
 	},
 	{
@@ -1245,7 +1246,10 @@
 			"configuring",
 			"overlays_on",
 			"overlays_off",
-			"ports"
+			"tag_north",
+			"tag_east",
+			"tag_south",
+			"tag_west"
 		]
 	},
 	{
@@ -1827,12 +1831,6 @@
 		]
 	},
 	{
-		"path":"/obj/machinery/power/terminal",
-		"vars":[
-			"master"
-		]
-	},
-	{
 		"path":"/obj/machinery/power/tracker",
 		"vars":[
 			"control"
@@ -2225,7 +2223,6 @@
 			"germ_level",
 			"blood_DNA",
 			"was_bloodied",
-			"last_bumped",
 			"climbers",
 			"contents"
 		]
@@ -2518,7 +2515,8 @@
 	{
 		"path":"/obj/machinery/atmospherics/pipe",
 		"vars":[
-			"reagents"
+			"in_stasis",
+			"leaking"
 		]
 	},
 	{
@@ -2688,10 +2686,7 @@
 			"name",
 			"turfs",
 			"has_gravity",
-			"apc",
-			"power_light",
-			"power_equip",
-			"power_environ"
+			"apc"
 		]
 	},
 	{
@@ -2891,20 +2886,6 @@
 			"filter",
 			"encryption",
 			"multitool_extension"
-		]
-	},
-	{
-		"path":"/obj/item/stock_parts/power/terminal",
-		"vars":[
-			"terminal_dir",
-			"terminal"
-		]
-	},
-	{
-		"path":"/obj/item/stock_parts/power/terminal",
-		"vars":[
-			"priority",
-			"cached_channel"
 		]
 	},
 	{
@@ -3183,7 +3164,11 @@
 		"vars":[
 			"max_flow_rate",
 			"set_flow_rate",
-			"max_output_pressure"
+			"max_output_pressure",
+			"tag_north_con",
+			"tag_south_con",
+			"tag_east_con",
+			"tag_west_con"
 		]
 	},
 	{
@@ -4112,65 +4097,6 @@
 		]
 	},
 	{
-		"path":"/obj/machinery/exonet",
-		"vars":[
-			"enabled",
-			"initial_ennid",
-			"initial_keydata",
-			"ennid",
-			"keydata",
-			"net_tag"
-		]
-	},
-	{
-		"path":"/obj/machinery/exonet/broadcaster/router",
-		"vars":[
-			"lockdata",
-			"dos_failure",
-			"dos_overload",
-			"dos_capacity",
-			"dos_dissipate"
-		]
-	},
-	{
-		"path":"/obj/machinery/exonet/mainframe",
-		"vars":[
-			"setting_max_log_count",
-			"max_capacity",
-			"used_capacity",
-			"stored_files"
-		]
-	},
-	{
-		"path":"/datum/exonet",
-		"vars":[
-			"ennid",
-			"lockdata",
-			"email_server",
-			"log_server",
-			"report_server",
-			"router",
-			"default_domain",
-			"banned_nids"
-		]
-	},
-	{
-		"path":"/obj/item/card/id/exonet",
-		"vars":[
-			"user_id",
-			"ennid",
-			"broken"
-		]
-	},
-	{
-		"path":"/obj/machinery/exonet/access_directory",
-		"vars":[
-			"file_server",
-			"editing_user",
-			"stored_card"
-		]
-	},
-	{
 		"path":"/datum/wrapper/decal",
 		"vars":[
 			"icon",
@@ -4240,5 +4166,45 @@
 			"key"
 		],
 		"flatten": true
+	},
+	{
+		"path":"/obj/machinery/power/terminal",
+		"vars":[
+			"master"
+		]
+	},
+	{
+		"path":"/obj/item/stock_parts/power/terminal",
+		"vars":[
+			"terminal",
+			"terminal_dir"
+		]
+	},
+	{
+		"path":"/obj/machinery/network",
+		"var":[
+			"overheated",
+			"initial_network_id",
+			"initial_network_key",
+			"saved_network_tag",
+			"saved_address"
+		]
+	},
+	{
+		"path":"/obj/machinery/network/router",
+		"var":[
+			"saved_network"
+		]
+	},
+	{
+		"path":"/datum/computer_network",
+		"var":[
+			"network_key",
+			"network_features_enabled",
+			"intrusion_detection_enabled",
+			"intrusion_detection_alarm",
+			"banned_nids",
+			"chat_channels"
+		]
 	}
 ]

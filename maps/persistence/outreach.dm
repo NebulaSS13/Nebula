@@ -1,5 +1,7 @@
 #if !defined(using_map_DATUM)
 
+	#define DISABLE_DEBUG_CRASH
+
 	#include "../../mods/persistence/_persistence.dme"
 
 	#include "persistence_defines.dm"
