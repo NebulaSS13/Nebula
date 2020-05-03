@@ -9,13 +9,17 @@
 	force = 5
 
 	var/smash_duration = 5 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
-	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
+	var/isGlass = TRUE //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
 	var/obj/item/chems/glass/rag/rag = null
 	var/rag_underlay = "rag"
+	var/stop_spin_bottle = FALSE //Gotta stop the rotation.
 
 /obj/item/chems/food/drinks/bottle/Initialize()
 	. = ..()
-	if(isGlass) unacidable = 1
+	if(isGlass)
+		unacidable = TRUE
+	else
+		verbs -= .verb/spin_bottle
 
 /obj/item/chems/food/drinks/bottle/Destroy()
 	if(!QDELETED(rag))
@@ -110,7 +114,7 @@
 
 		// Equalize reagents between the rag and bottle so that
 		// the rag will probably have something to burn, and the
-		// bottle contents will be tainted by having the rag dipped 
+		// bottle contents will be tainted by having the rag dipped
 		// in it.
 		if(rag && rag.reagents)
 			rag.reagents.trans_to(src, rag.reagents.total_volume)
@@ -172,6 +176,39 @@
 	var/obj/item/broken_bottle/B = smash(target.loc, target)
 	user.put_in_active_hand(B)
 
+/obj/item/chems/food/drinks/bottle/verb/spin_bottle()
+	set name = "Spin Bottle"
+	set category = "Object"
+	set src in view(1)
+
+	if(!ishuman(usr) || usr.incapacitated())
+		return
+
+	if(!stop_spin_bottle)
+		if(usr.get_active_hand() == src || usr.get_inactive_hand() == src)
+			usr.drop_from_inventory(src)
+
+		if(isturf(loc))
+			var/speed = rand(1, 3)
+			var/loops
+			var/sleep_not_stacking
+			switch(speed) //At a low speed, the bottle should not make 10 loops
+				if(3)
+					loops = rand(7, 10)
+					sleep_not_stacking = 40
+				if(1 to 2)
+					loops = rand(10, 15)
+					sleep_not_stacking = 25
+
+			stop_spin_bottle = TRUE
+			SpinAnimation(speed, loops, pick(0, 1)) //SpinAnimation(speed, loops, clockwise, segments)
+			transform = turn(matrix(), dir2angle(pick(GLOB.alldirs)))
+			sleep(sleep_not_stacking) //Not stacking
+			stop_spin_bottle = FALSE
+
+/obj/item/chems/food/drinks/bottle/pickup(mob/living/user)
+	animate(src, transform = null, time = 0) //Restore bottle to its original position
+
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/broken_bottle
 	name = "broken bottle"
@@ -216,7 +253,7 @@
 	name = "aged whiskey"
 	desc = "This rich, smooth, hideously expensive beverage was aged for decades."
 	icon_state = "whiskeybottle2"
-	center_of_mass = @"{'x':16,'y':3}"		
+	center_of_mass = @"{'x':16,'y':3}"
 
 /obj/item/chems/food/drinks/bottle/agedwhiskey/Initialize()
 	. = ..()
@@ -227,7 +264,7 @@
 	desc = "Aah, vodka. Prime choice of drink AND fuel by Indies around the galaxy."
 	icon_state = "vodkabottle"
 	center_of_mass = @"{'x':17,'y':3}"
-	
+
 /obj/item/chems/food/drinks/bottle/vodka/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/reagent/ethanol/vodka, 100)

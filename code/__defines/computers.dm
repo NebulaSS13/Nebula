@@ -1,5 +1,4 @@
-#define RANDBYTE  num2hex(rand(1,255))
-#define NETWORK_MAC   "[RANDBYTE]-[RANDBYTE]-[RANDBYTE]-[RANDBYTE]"
+#define NETWORK_MAC  uniqueness_repository.Generate(/datum/uniqueness_generator/hex)
 									// Network allowed actions
 #define NETWORK_SOFTWAREDOWNLOAD 	1 	// Downloads of software
 #define NETWORK_COMMUNICATION 		2	// Communication (messaging)

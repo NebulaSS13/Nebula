@@ -14,6 +14,9 @@ var/list/z_levels = list()// Each bit re... haha just kidding this is a list of 
 			z_levels.len = i
 		z_levels[i] = TRUE
 
+	if (length(SSzcopy.zstack_maximums))
+		SSzcopy.calculate_zstack_limits()
+
 /obj/effect/landmark/map_data/Initialize()
 	..()
 	return INITIALIZE_HINT_QDEL

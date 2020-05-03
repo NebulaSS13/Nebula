@@ -36,6 +36,7 @@
 	var/bodytype = lowertext(user_mob?.get_bodytype() || BODYTYPE_HUMANOID)
 	var/image/I = image(get_icon_for_bodytype(bodytype), "[bodytype]-[slot]")
 	I.color = color
+	I.appearance_flags = RESET_COLOR
 	. = apply_offsets(user_mob, I, slot)
 	. = apply_overlays(user_mob, bodytype, I, slot)
 
