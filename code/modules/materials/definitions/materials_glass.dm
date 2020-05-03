@@ -12,7 +12,7 @@
 	hardness = MAT_VALUE_RIGID + 10	
 	reflectiveness = MAT_VALUE_SHINY
 	melting_point = T0C + 100
-	weight = 14
+	weight = MAT_VALUE_VERY_LIGHT
 	brute_armor = 1
 	burn_armor = 2
 	door_icon_base = "stone"
@@ -37,6 +37,7 @@
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MAT_FLAG_BRITTLE
 	hardness = MAT_VALUE_HARD
+	weight = MAT_VALUE_LIGHT
 	integrity = 70
 	brute_armor = 2
 	burn_armor = 5
