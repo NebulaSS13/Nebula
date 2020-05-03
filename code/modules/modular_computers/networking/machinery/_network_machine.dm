@@ -9,6 +9,10 @@
 	var/initial_network_id
 	var/initial_network_key
 	var/lateload
+	var/produces_heat = TRUE		// If true, produces and is affected by heat.
+	var/inefficiency = 0.12			// How much power is waste heat.
+	var/heat_threshold = 90 CELSIUS	// At what temperature the machine will lock up.
+	var/overheated = FALSE
 	var/runtimeload // Use this for calling an even later lateload.
 
 /obj/machinery/network/Initialize()

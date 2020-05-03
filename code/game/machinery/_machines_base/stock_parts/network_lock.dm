@@ -3,8 +3,8 @@
 	desc = "An id-based access lock preventing tampering with a machine's hardware and software. Connects wirelessly to network."
 	icon_state = "scan_module"
 	part_flags = PART_FLAG_QDEL
-	req_access = null
 	base_type = /obj/item/stock_parts/network_lock
+
 	var/auto_deny_all								// Set this to TRUE to deny all access attempts if network connection is lost.
 	var/initial_network_id							// The address to the network
 	var/initial_network_key							// network KEY
@@ -12,6 +12,8 @@
 	var/emagged										// Whether or not this has been emagged.
 	var/error
 	var/signal_strength = NETWORK_SPEED_LOWSIGNAL	// How good the wireless capabilities are of this card.
+	var/interact_sounds = list("keyboard", "keystroke")
+	var/interact_sound_volume = 40
 
 /obj/item/stock_parts/network_lock/Initialize()
 	. = ..()
@@ -129,6 +131,14 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
+
+/obj/item/stock_parts/network_lock/CouldUseTopic(var/mob/user)
+	..()
+	if(LAZYLEN(interact_sounds) && CanPhysicallyInteract(user))
+		playsound(src, pick(interact_sounds), interact_sound_volume)
+
+/obj/item/stock_parts/network_lock/CanUseTopic()
+	return STATUS_INTERACTIVE
 
 /obj/item/stock_parts/network_lock/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
