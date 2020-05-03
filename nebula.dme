@@ -109,6 +109,7 @@
 #include "code\_helpers\functional.dm"
 #include "code\_helpers\game.dm"
 #include "code\_helpers\global_lists.dm"
+#include "code\_helpers\guid.dm"
 #include "code\_helpers\icons.dm"
 #include "code\_helpers\lists.dm"
 #include "code\_helpers\logging.dm"

@@ -12,7 +12,10 @@
 
 // Serialize an object datum. Returns the appropriate serialized form of the object. What's outputted depends on the serializer.
 /serializer/json/SerializeDatum(var/datum/object, var/object_parent)
+	if(!object.should_save())
+		return
 	var/list/results = list()
+	object.before_save()
 	for(var/V in object.get_saved_vars())
 		if(!issaved(object.vars[V]))
 			continue
@@ -28,6 +31,7 @@
 				results[V] = "FLAT_OBJ#[SerializeDatum(VV)]"
 			else
 				results[V] = "OBJ#[sql.SerializeDatum(VV)]"
+	object.after_save()
 	return "[object.type]|[json_encode(results)]"
 
 // Serialize a list. Returns the appropriate serialized form of the list. What's outputted depends on the serializer.
@@ -84,6 +88,7 @@
 			thing.vars[V] = DeserializeList(encoded_value)
 			continue
 		thing.vars[V] = encoded_value
+	thing.after_deserialize()
 	return thing
 
 /serializer/json/DeserializeList(var/raw_list)

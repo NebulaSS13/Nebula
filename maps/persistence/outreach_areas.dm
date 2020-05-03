@@ -1,3 +1,6 @@
+/area/outreach/outpost
+	//safe_zone = TRUE
+
 /area/outreach/outpost/maint
 	name = "\improper Maintenance"
 	icon_state = "maintcentral"
@@ -16,6 +19,16 @@
 /area/outreach/outpost/engineering
 	icon_state = "engine_smes"
 	name = "\improper Engineering"
+
+/area/outreach/outpost/barracks
+	icon_state = "barracks"
+	name = "\improper Barracks"
+
+/area/outreach/outpost/barracks/upper
+	name = "\improper Upper Barracks"
+
+/area/outreach/outpost/barracks/lower
+	name = "\improper Lower Barracks"
 
 /area/outreach/outpost/it
 	icon_state = "telecomms"

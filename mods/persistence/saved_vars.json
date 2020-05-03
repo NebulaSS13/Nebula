@@ -50,7 +50,7 @@
 	{
 		"path":"/datum/gas_mixture",
 		"vars":[
-			"gas",
+			"serialized_gas",
 			"temperature",
 			"total_moles",
 			"volume",
@@ -61,12 +61,31 @@
 	{
 		"path":"/datum/mind",
 		"vars":[
-			"memory"
+			"key",
+			"name",
+			"current",
+			"active",
+			"known_connections",
+			"gen_relations_info",
+			"assigned_role",
+			"special_role",
+			"role_alt_title",
+			"assigned_job",
+			"objectives",
+			"special_verbs",
+			"has_been_rev",
+			"faction",
+			"changeling",
+			"rev_cooldown",
+			"brigged_since",
+			"initial_account",
+			"initial_email_account"
 		]
 	},
 	{
 		"path":"/datum/money_account",
 		"vars":[
+			"account_name",
 			"owner_name",
 			"account_number",
 			"remote_access_pin",
@@ -74,21 +93,8 @@
 			"transaction_log",
 			"suspended",
 			"security_level",
-			"account_type"
-		]
-	},
-	{
-		"path":"/datum/omni_port",
-		"vars":[
-			"master",
-			"dir",
-			"update",
-			"mode",
-			"concentration",
-			"con_lock",
-			"transfer_moles",
-			"air",
-			"node"
+			"account_type",
+			"currency"
 		]
 	},
 	{
@@ -898,7 +904,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/airlock_brace",
+		"path":"/obj/item/airlock_brace",
 		"vars":[
 			"cur_health",
 			"airlock",
@@ -906,7 +912,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/airlock_electronics",
+		"path":"/obj/item/airlock_electronics",
 		"vars":[
 			"secured",
 			"conf_access",
@@ -918,13 +924,13 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/beartrap",
+		"path":"/obj/item/beartrap",
 		"vars":[
 			"deployed"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/book",
+		"path":"/obj/item/book",
 		"vars":[
 			"dat",
 			"author",
@@ -935,7 +941,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/card/id",
+		"path":"/obj/item/card/id",
 		"vars":[
 			"age",
 			"access",
@@ -951,27 +957,27 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/cell",
+		"path":"/obj/item/cell",
 		"vars":[
 			"charge"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/disk/botany",
+		"path":"/obj/item/disk/botany",
 		"vars":[
 			"genes",
 			"genesource"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/flamethrower",
+		"path":"/obj/item/flamethrower",
 		"vars":[
 			"weldtool",
 			"igniter"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/grenade/chem_grenade",
+		"path":"/obj/item/grenade/chem_grenade",
 		"vars":[
 			"stage",
 			"path",
@@ -980,13 +986,13 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/grenade",
+		"path":"/obj/item/grenade",
 		"vars":[
 			"det_time"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/gun/energy",
+		"path":"/obj/item/gun/energy",
 		"vars":[
 			"power_supply",
 			"cell_type",
@@ -994,7 +1000,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/gun/launcher/pneumatic",
+		"path":"/obj/item/gun/launcher/pneumatic",
 		"vars":[
 			"tank",
 			"item_storage",
@@ -1002,7 +1008,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/gun/magnetic",
+		"path":"/obj/item/gun/magnetic",
 		"vars":[
 			"cell",
 			"capacitor",
@@ -1011,43 +1017,43 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/implant/freedom",
+		"path":"/obj/item/implant/freedom",
 		"vars":[
 			"activation_emote"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/key",
+		"path":"/obj/item/key",
 		"vars":[
 			"key_data"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/material",
+		"path":"/obj/item/material",
 		"wrapped_vars":[
 			"material"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/melee/baton",
+		"path":"/obj/item/melee/baton",
 		"vars":[
 			"bcell"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/melee/energy/axe",
+		"path":"/obj/item/melee/energy/axe",
 		"vars":[
 			"color"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/ore",
+		"path":"/obj/item/ore",
 		"vars":[
 			"geologic_data"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/paper",
+		"path":"/obj/item/paper",
 		"vars":[
 			"info",
 			"info_links",
@@ -1057,14 +1063,14 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/paper_bundle",
+		"path":"/obj/item/paper_bundle",
 		"vars":[
 			"page",
 			"pages"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/photo",
+		"path":"/obj/item/photo",
 		"vars":[
 			"icon",
 			"scribble",
@@ -1073,13 +1079,13 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/rcd",
+		"path":"/obj/item/rcd",
 		"vars":[
 			"stored_matter"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/reagent_containers/food/snacks/grown",
+		"path":"/obj/item/reagent_containers/food/snacks/grown",
 		"vars":[
 			"plantname",
 			"name",
@@ -1089,7 +1095,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/rig",
+		"path":"/obj/item/rig",
 		"vars":[
 			"hides_uniform",
 			"wearer",
@@ -1118,50 +1124,50 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/spacecash",
+		"path":"/obj/item/spacecash",
 		"vars":[
 			"access",
 			"worth"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/capacitor/super",
+		"path":"/obj/item/stock_parts/capacitor/super",
 		"vars":[
 			"charge"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stool",
+		"path":"/obj/item/stool",
 		"wrapped_vars":[
 			"material"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/storage/internal",
+		"path":"/obj/item/storage/internal",
 		"vars":[
 			"master_item"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/storage/secure/safe",
+		"path":"/obj/item/storage/secure/safe",
 		"vars":[
 			"l_code"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/storage/wallet/leather",
+		"path":"/obj/item/storage/wallet/leather",
 		"vars":[
 			"front_id"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/storage",
+		"path":"/obj/item/storage",
 		"vars":[
 			"max_storage_space"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/tank",
+		"path":"/obj/item/tank",
 		"vars":[
 			"air_contents",
 			"distribute_pressure",
@@ -1176,13 +1182,13 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/weldingtool",
+		"path":"/obj/item/weldingtool",
 		"vars":[
 			"tank"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/weldpack",
+		"path":"/obj/item/weldpack",
 		"vars":[
 			"welder"
 		]
@@ -1231,12 +1237,7 @@
 	{
 		"path":"/obj/machinery/atmospherics/omni/filter",
 		"vars":[
-			"filters",
-			"gas_filters",
-			"input",
-			"output",
-			"set_flow_rate",
-			"filtering_outputs"
+			"set_flow_rate"
 		]
 	},
 	{
@@ -1245,7 +1246,10 @@
 			"configuring",
 			"overlays_on",
 			"overlays_off",
-			"ports"
+			"tag_north",
+			"tag_east",
+			"tag_south",
+			"tag_west"
 		]
 	},
 	{
@@ -1827,12 +1831,6 @@
 		]
 	},
 	{
-		"path":"/obj/machinery/power/terminal",
-		"vars":[
-			"master"
-		]
-	},
-	{
 		"path":"/obj/machinery/power/tracker",
 		"vars":[
 			"control"
@@ -2225,7 +2223,6 @@
 			"germ_level",
 			"blood_DNA",
 			"was_bloodied",
-			"last_bumped",
 			"climbers",
 			"contents"
 		]
@@ -2385,107 +2382,107 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/cell/apc",
+		"path":"/obj/item/cell/apc",
 		"vars":[
 			"maxcharge"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/cell/device/variable",
+		"path":"/obj/item/cell/device/variable",
 		"vars":[
 			"maxcharge"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts",
+		"path":"/obj/item/stock_parts",
 		"vars":[
 			"rating",
 			"status"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/computer/ai_slot",
+		"path":"/obj/item/stock_parts/computer/ai_slot",
 		"vars":[
 			"stored_card"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/computer/battery_module",
+		"path":"/obj/item/stock_parts/computer/battery_module",
 		"vars":[
 			"battery"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/computer/hard_drive",
+		"path":"/obj/item/stock_parts/computer/hard_drive",
 		"vars":[
 			"stored_files",
 			"used_capacity"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/computer/card_slot",
+		"path":"/obj/item/stock_parts/computer/card_slot",
 		"vars":[
 			"stored_card"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/computer/nano_printer",
+		"path":"/obj/item/stock_parts/computer/nano_printer",
 		"vars":[
 			"stored_paper"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/computer/",
+		"path":"/obj/item/stock_parts/computer/",
 		"vars":[
 			"damage",
 			"enabled"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/disk/tech_disk",
+		"path":"/obj/item/disk/tech_disk",
 		"vars":[
 			"stored"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/disk/tech_disk",
+		"path":"/obj/item/disk/tech_disk",
 		"vars":[
 			"stored"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/disk/tech_disk",
+		"path":"/obj/item/disk/tech_disk",
 		"vars":[
 			"stored"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/ducttape",
+		"path":"/obj/item/ducttape",
 		"vars":[
 			"stuck"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/flamethrower/full",
+		"path":"/obj/item/flamethrower/full",
 		"vars":[
 			"tank"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/gun/projectile/pistol/sec/detective",
+		"path":"/obj/item/gun/projectile/pistol/sec/detective",
 		"vars":[
 			"unique_name",
 			"unique_reskin"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/material",
+		"path":"/obj/item/material",
 		"wrapped_vars":[
 			"material"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/tank",
+		"path":"/obj/item/tank",
 		"vars":[
 			"air_contents",
 			"distribute_pressure",
@@ -2518,7 +2515,8 @@
 	{
 		"path":"/obj/machinery/atmospherics/pipe",
 		"vars":[
-			"reagents"
+			"in_stasis",
+			"leaking"
 		]
 	},
 	{
@@ -2688,10 +2686,7 @@
 			"name",
 			"turfs",
 			"has_gravity",
-			"apc",
-			"power_light",
-			"power_equip",
-			"power_environ"
+			"apc"
 		]
 	},
 	{
@@ -2811,7 +2806,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/fuel_assembly",
+		"path":"/obj/item/fuel_assembly",
 		"vars":[
 			"material_name",
 			"percent_depleted",
@@ -2876,7 +2871,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/radio/transmitter",
+		"path":"/obj/item/stock_parts/radio/transmitter",
 		"vars":[
 			"range",
 			"latency",
@@ -2884,27 +2879,13 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/radio",
+		"path":"/obj/item/stock_parts/radio",
 		"vars":[
 			"frequency",
 			"id_tag",
 			"filter",
 			"encryption",
 			"multitool_extension"
-		]
-	},
-	{
-		"path":"/obj/item/weapon/stock_parts/power/terminal",
-		"vars":[
-			"terminal_dir",
-			"terminal"
-		]
-	},
-	{
-		"path":"/obj/item/weapon/stock_parts/power/terminal",
-		"vars":[
-			"priority",
-			"cached_channel"
 		]
 	},
 	{
@@ -3183,7 +3164,11 @@
 		"vars":[
 			"max_flow_rate",
 			"set_flow_rate",
-			"max_output_pressure"
+			"max_output_pressure",
+			"tag_north_con",
+			"tag_south_con",
+			"tag_east_con",
+			"tag_west_con"
 		]
 	},
 	{
@@ -3684,7 +3669,7 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/circuitboard/exosystem",
+		"path":"/obj/item/circuitboard/exosystem",
 		"vars":[
 			"contains_software"
 		]
@@ -3721,19 +3706,19 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/key",
+		"path":"/obj/item/key",
 		"vars":[
 			"key_data"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/key/soap",
+		"path":"/obj/item/key/soap",
 		"vars":[
 			"uses"
 		]
 	},
 	{
-		"path":"/obj/item/weapon/material/lock_construct",
+		"path":"/obj/item/material/lock_construct",
 		"vars":[
 			"lock_data"
 		]
@@ -4102,72 +4087,13 @@
 		]
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/computer/network_card",
+		"path":"/obj/item/stock_parts/computer/network_card",
 		"vars":[
 			"long_range",
 			"ethernet",
 			"proxy_id",
 			"ennid",
 			"keydata"
-		]
-	},
-	{
-		"path":"/obj/machinery/exonet",
-		"vars":[
-			"enabled",
-			"initial_ennid",
-			"initial_keydata",
-			"ennid",
-			"keydata",
-			"net_tag"
-		]
-	},
-	{
-		"path":"/obj/machinery/exonet/broadcaster/router",
-		"vars":[
-			"lockdata",
-			"dos_failure",
-			"dos_overload",
-			"dos_capacity",
-			"dos_dissipate"
-		]
-	},
-	{
-		"path":"/obj/machinery/exonet/mainframe",
-		"vars":[
-			"setting_max_log_count",
-			"max_capacity",
-			"used_capacity",
-			"stored_files"
-		]
-	},
-	{
-		"path":"/datum/exonet",
-		"vars":[
-			"ennid",
-			"lockdata",
-			"email_server",
-			"log_server",
-			"report_server",
-			"router",
-			"default_domain",
-			"banned_nids"
-		]
-	},
-	{
-		"path":"/obj/item/weapon/card/id/exonet",
-		"vars":[
-			"user_id",
-			"ennid",
-			"broken"
-		]
-	},
-	{
-		"path":"/obj/machinery/exonet/access_directory",
-		"vars":[
-			"file_server",
-			"editing_user",
-			"stored_card"
 		]
 	},
 	{
@@ -4229,7 +4155,7 @@
 		"flatten": true
 	},
 	{
-		"path":"/obj/item/weapon/stock_parts/building_material",
+		"path":"/obj/item/stock_parts/building_material",
 		"vars":[
 			"materials"
 		]
@@ -4240,5 +4166,45 @@
 			"key"
 		],
 		"flatten": true
+	},
+	{
+		"path":"/obj/machinery/power/terminal",
+		"vars":[
+			"master"
+		]
+	},
+	{
+		"path":"/obj/item/stock_parts/power/terminal",
+		"vars":[
+			"terminal",
+			"terminal_dir"
+		]
+	},
+	{
+		"path":"/obj/machinery/network",
+		"var":[
+			"overheated",
+			"initial_network_id",
+			"initial_network_key",
+			"saved_network_tag",
+			"saved_address"
+		]
+	},
+	{
+		"path":"/obj/machinery/network/router",
+		"var":[
+			"saved_network"
+		]
+	},
+	{
+		"path":"/datum/computer_network",
+		"var":[
+			"network_key",
+			"network_features_enabled",
+			"intrusion_detection_enabled",
+			"intrusion_detection_alarm",
+			"banned_nids",
+			"chat_channels"
+		]
 	}
 ]

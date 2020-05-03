@@ -74,6 +74,12 @@
 					CHECK_TICK
 			serializer.Commit() // cleanup leftovers.
 
+		// Save all players.
+		for(var/mob/living/T in world)
+			serializer.Serialize(T)
+			CHECK_TICK
+		serializer.Commit()
+
 		// Save multiz levels
 		// var/datum/wrapper/multiz/multiz = new()
 		// multiz.get_connected_zlevels()
@@ -160,8 +166,18 @@
 
 		serializer.resolver.clear_cache()
 		serializer.Clear()
+
+		// Tell the atoms subsystem to not populate parts.
+		if(turfs_loaded)
+			SSatoms.override_populate_parts = TRUE
+			SSatoms.populate_parts = FALSE
 	catch(var/exception/e)
 		to_world_log("Load failed on line [e.line], file [e.file] with message: '[e]'.")
 
-
-// /datum/persistence/world_handle/proc/LoadChunk(var/x, var/y, var/z)
+/hook/roundstart/proc/retally_all_power()
+	for(var/area/A)
+		try
+			A.retally_power()
+			CHECK_TICK
+		catch
+			continue

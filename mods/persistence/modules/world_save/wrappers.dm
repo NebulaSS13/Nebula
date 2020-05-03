@@ -4,10 +4,6 @@
 	var/turfs
 	var/has_gravity
 	var/apc
-	var/power_light
-	var/power_equip
-	var/power_environ
-	// var/shuttle
 
 /datum/wrapper/area/New(var/area/A)
 	if(A)
@@ -15,11 +11,7 @@
 		name = A.name
 		turfs = A.get_turf_coords()
 		has_gravity = A.has_gravity
-		power_light = A.power_light
-		power_equip = A.power_equip
-		power_environ = A.power_environ
 		apc = A.apc
-		//shuttle = A.shuttle
 
 /datum/wrapper/multiz
 	var/list/saved_z_levels = list() // a list of booleans on which z-levels are connected....
@@ -101,11 +93,11 @@
 /datum/wrapper/game_data/material/New()
 	wrapper_for = /material
 
-/datum/wrapper/game_data/material/on_serialize(var/material/object)
-	key = object.type
+/datum/wrapper/game_data/material/on_serialize(var/mat_type)
+	key = "[mat_type]"
 
 /datum/wrapper/game_data/material/on_deserialize()
-	return SSmaterials.get_material_datum(key)
+	return SSmaterials.get_material_datum(text2path(key))
 
 /datum/wrapper/game_data/species/New()
 	wrapper_for = /datum/species
