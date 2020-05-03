@@ -1,7 +1,7 @@
 /datum/map/persistence
-	name = "Example"
-	full_name = "The Example"
-	path = "outreach"
+	name = "Outreach"
+	full_name = "Outreach Outpost"
+	path = "persistence"
 
 	station_levels = list(1, 2, 3, 4)
 	contact_levels = list(1, 2, 3, 4)
@@ -29,6 +29,13 @@
 	emergency_shuttle_leaving_dock = "The emergency escape shuttle has departed from %dock_name%."
 	emergency_shuttle_called_message = "An emergency escape shuttle has been sent."
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled"
+
+	lobby_screens = list(
+		'maps/persistence/lobby/exoplanet.png'
+	)
+	lobby_tracks = list(
+		/music_track/dirtyoldfrogg
+	)
 
 	starting_money = 5000
 	department_money = 0
