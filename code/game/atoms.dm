@@ -463,14 +463,12 @@ its easier to just keep the beam vertical.
 /mob/proc/can_touch(var/atom/touching)
 	if(!touching.Adjacent(src) || incapacitated())
 		return FALSE
-	if(restrained() || buckled)
-		to_chat(src, SPAN_WARNING("You need your hands and legs free for this."))
+	if(restrained())
+		to_chat(src, SPAN_WARNING("You are restrained."))
 		return FALSE
+	if (buckled)
+		to_chat(src, SPAN_WARNING("You are buckled down."))
 	return TRUE
-
-/mob/living/silicon/can_touch(var/atom_touching)
-	to_chat(src, SPAN_WARNING("You need hands for this."))
-	return FALSE
 
 /atom/proc/turf_is_crowded(var/atom/ignore)
 	var/turf/T = get_turf(src)
