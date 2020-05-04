@@ -111,7 +111,7 @@
 	applies_material_colour = 0
 	material_force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_material_force_multiplier = 0.20
-	thrown_material_force_multiplier = 1.5 // 20 when thrown with weight 15 (glass)
+	thrown_material_force_multiplier = 0.6 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
 	edge = 0
 	sharp = 1
@@ -139,8 +139,8 @@
 	hitsound = 'sound/weapons/genhit3.ogg'
 	material = MAT_MAPLE
 	max_force = 40	//for wielded
-	material_force_multiplier = 1.1           // 22 when wielded with weight 20 (steel)
-	unwielded_material_force_multiplier = 0.7 // 15 when unwielded based on above.
+	material_force_multiplier = 0.4           // 24 when wielded with weight 60 (steel)
+	unwielded_material_force_multiplier = 0.25 // 15 when unwielded based on above.
 	melee_accuracy_bonus = -10
 
 //Predefined materials go here.
