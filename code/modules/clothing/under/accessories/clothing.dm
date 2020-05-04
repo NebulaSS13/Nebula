@@ -9,6 +9,7 @@
 
 /obj/item/clothing/accessory/wcoat/armored
 	desc = "A classy waistcoat. This one seems suspiciously more durable."
+	color = COLOR_GRAY15
 	armor = list(
 		bullet = ARMOR_BALLISTIC_SMALL,
 		laser = ARMOR_LASER_SMALL,
