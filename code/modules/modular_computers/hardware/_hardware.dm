@@ -29,8 +29,9 @@
 
 /obj/item/stock_parts/computer/Destroy()
 	if(istype(loc, /obj/item/modular_computer))
-		var/obj/item/modular_computer/C = loc
-		C.uninstall_component(null, src)
+		var/datum/extension/assembly/modular_computer/assembly = get_extension(loc, /datum/extension/assembly)
+		if(assembly)
+			assembly.uninstall_component(null, src)
 	return ..()
 
 // Handles damage checks

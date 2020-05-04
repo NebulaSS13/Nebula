@@ -4,22 +4,24 @@
 	icon = 'icons/obj/modular_computers/modular_telescreen.dmi'
 	icon_state = "telescreen"
 	icon_state_unpowered = "telescreen"
-	hardware_flag = PROGRAM_TELESCREEN
 	anchored = TRUE
 	density = 0
-	base_idle_power_usage = 75
-	base_active_power_usage = 300
-	max_hardware_size = 2
-	steel_sheet_cost = 10
 	light_strength = 4
-	max_damage = 300
-	broken_damage = 150
 	w_class = ITEM_SIZE_HUGE
 
 /obj/item/modular_computer/telescreen/Initialize()
 	. = ..()
 	// Allows us to create "north bump" "south bump" etc. named objects, for more comfortable mapping.
 	name = "telescreen"
+
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
+	assembly.hardware_flag = PROGRAM_TELESCREEN
+	assembly.max_hardware_size = 2
+	assembly.base_idle_power_usage = 75
+	assembly.base_active_power_usage = 300
+	assembly.steel_sheet_cost = 10
+	assembly.max_damage = 300
+	assembly.broken_damage = assembly.max_damage / 2
 
 /obj/item/modular_computer/telescreen/attackby(var/obj/item/W, var/mob/user)
 	if(isCrowbar(W))

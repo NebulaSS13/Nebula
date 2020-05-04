@@ -1,18 +1,16 @@
 /obj/item/modular_computer/Process()
-	if(!enabled) // The computer is turned off
-		last_power_usage = 0
-		return 0
-
-	if(damage > broken_damage)
-		shutdown_computer()
-		return 0
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly)
+		assembly.Process()
+		if(!assembly.enabled)
+			return
 
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		os.Process()
 
 	var/static/list/beepsounds = list('sound/effects/compbeep1.ogg','sound/effects/compbeep2.ogg','sound/effects/compbeep3.ogg','sound/effects/compbeep4.ogg','sound/effects/compbeep5.ogg')
-	if(enabled && world.time > ambience_last_played + 60 SECONDS && prob(1))
+	if(assembly.enabled && world.time > ambience_last_played + 60 SECONDS && prob(1))
 		ambience_last_played = world.time
 		playsound(src.loc, pick(beepsounds),15,1,10, is_ambiance = 1)
 
@@ -23,48 +21,53 @@
 
 // Used to perform preset-specific hardware changes.
 /obj/item/modular_computer/proc/install_default_hardware()
-	return 1
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	for(var/T in default_hardware)
+		assembly.try_install_component(null, new T(src))
 
 // Used to install preset-specific programs
 /obj/item/modular_computer/proc/install_default_programs()
-	return 1
-
-/obj/item/modular_computer/proc/install_default_programs_by_job(var/mob/living/carbon/human/H)
+	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
+	if(!H)
+		return
 	var/datum/job/jb = SSjobs.get_by_title(H.job)
 	if(!jb) return
-	for(var/prog_type in jb.software_on_spawn)
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/hard_drive/HDD = assembly.get_component(PART_HDD)
+	if(!HDD)
+		return
+	for(var/prog_type in (jb.software_on_spawn + default_programs))
 		var/datum/computer_file/program/prog_file = prog_type
-		if(initial(prog_file.usage_flags) & hardware_flag)
+		if(initial(prog_file.usage_flags) & assembly.hardware_flag)
 			prog_file = new prog_file
-			hard_drive.store_file(prog_file)
+			HDD.store_file(prog_file)
 
 /obj/item/modular_computer/Initialize()
 	START_PROCESSING(SSobj, src)
 	set_extension(src, /datum/extension/interactive/ntos/device)
+	set_extension(src, /datum/extension/assembly/modular_computer)
 
 	if(stores_pen && ispath(stored_pen))
 		stored_pen = new stored_pen(src)
 
-	install_default_hardware()
-	if(hard_drive)
-		install_default_programs()
-	if(scanner)
-		scanner.do_after_install(null, src)
 	update_icon()
 	update_verbs()
 	update_name()
 	if(enabled_by_default)
 		enable_computer()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/modular_computer/LateInitialize()
 	. = ..()
+	install_default_hardware()
+	install_default_programs()
 
 /obj/item/modular_computer/Destroy()
 	QDEL_NULL_LIST(terminals)
 	STOP_PROCESSING(SSobj, src)
 	if(istype(stored_pen))
 		QDEL_NULL(stored_pen)
-	for(var/obj/item/stock_parts/computer/CH in src.get_all_components())
-		uninstall_component(null, CH)
-		qdel(CH)
 	return ..()
 
 /obj/item/modular_computer/emag_act(var/remaining_charges, var/mob/user)
@@ -96,68 +99,51 @@
 
 /obj/item/modular_computer/proc/update_lighting()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(enabled)
-		set_light(0.2, 0.1, light_strength, l_color = (bsod || os?.updating) ? "#0000ff" : light_color)
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly && assembly.enabled)
+		set_light(0.2, 0.1, light_strength, l_color = (assembly.bsod || os?.updating) ? "#0000ff" : light_color)
 	else
 		set_light(0)
 
-/obj/item/modular_computer/proc/turn_on(var/mob/user)
-	if(bsod)
-		return
-	if(tesla_link)
-		tesla_link.enabled = 1
-	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
-	if(damage > broken_damage)
-		if(issynth)
-			to_chat(user, "You send an activation signal to \the [src], but it responds with an error code. It must be damaged.")
-		else
-			to_chat(user, "You press the power button, but the computer fails to boot up, displaying variety of errors before shutting down again.")
-		return
-	if(processor_unit && (apc_power(0) || battery_power(0))) // Battery-run and charged or non-battery but powered by APC.
-		if(issynth)
-			to_chat(user, "You send an activation signal to \the [src], turning it on")
-		else
-			to_chat(user, "You press the power button and start up \the [src]")
-		enable_computer(user)
-
-	else // Unpowered
-		if(issynth)
-			to_chat(user, "You send an activation signal to \the [src] but it does not respond")
-		else
-			to_chat(user, "You press the power button but \the [src] does not respond")
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		os.system_boot()
-
 /obj/item/modular_computer/proc/shutdown_computer(var/loud = 1)
 	QDEL_NULL_LIST(terminals)
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	assembly.shutdown_device()
 
 	if(loud)
 		visible_message("\The [src] shuts down.", range = 1)
 
-	enabled = 0
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		os.system_shutdown()
-
 /obj/item/modular_computer/proc/enable_computer(var/mob/user = null)
-	enabled = 1
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		os.system_boot()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	assembly.turn_on(user)
 
-	update_icon()
-
-	if(user)
-		ui_interact(user)
+	if(assembly.enabled)
+		update_icon()
+		if(user)
+			ui_interact(user)
 
 /obj/item/modular_computer/GetIdCard()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
 	if(card_slot && card_slot.can_broadcast && istype(card_slot.stored_card) && card_slot.check_functionality())
 		return card_slot.stored_card
 
 /obj/item/modular_computer/proc/update_name()
 
 /obj/item/modular_computer/get_cell()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/battery_module/battery_module = assembly.get_component(PART_CARD)
 	if(battery_module)
 		return battery_module.get_cell()
 
+/obj/item/modular_computer/ex_act(var/severity)
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	assembly.ex_act(severity)
+
+/obj/item/modular_computer/emp_act(var/severity)
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	assembly.emp_act(severity)
+
+/obj/item/modular_computer/bullet_act(var/proj)
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	assembly.bullet_act(proj)
