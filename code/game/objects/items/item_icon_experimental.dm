@@ -38,10 +38,7 @@ var/list/icon_state_cache = list()
 /obj/item/proc/update_world_inventory_state()
 	if(on_mob_icon && has_inventory_icon)
 		var/last_state = icon_state
-		if(plane == HUD_PLANE)
-			icon_state = "inventory"
-		else
-			icon_state = "world"
+		icon_state = get_world_inventory_state()
 		if(last_state != icon_state)
 			update_icon()
 
