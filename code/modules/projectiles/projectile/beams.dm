@@ -318,3 +318,12 @@
 		L.adjust_fire_stacks(rand(2,4))
 		if(L.fire_stacks >= 3)
 			L.IgniteMob()
+
+/obj/item/projectile/beam/pop
+	icon_state = "bluelaser"
+	fire_sound = 'sound/weapons/gunshot/laserbulb.ogg'
+	fire_sound_vol = 100
+
+	muzzle_type = /obj/effect/projectile/laser/blue/muzzle
+	tracer_type = /obj/effect/projectile/laser/blue/tracer
+	impact_type = /obj/effect/projectile/laser/blue/impact
