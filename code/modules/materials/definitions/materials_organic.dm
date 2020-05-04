@@ -66,6 +66,8 @@
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
+	hardness = MAT_VALUE_SOFT
+	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = 0
 
 /material/cloth/yellow
@@ -121,6 +123,8 @@
 	stack_type = null
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
+	hardness = MAT_VALUE_SOFT
+	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = 0
 	hidden_from_codex = TRUE
 

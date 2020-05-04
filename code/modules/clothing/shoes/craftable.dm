@@ -10,6 +10,7 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+	material_armor_multiplier = 1
 
 /obj/item/clothing/shoes/craftable/boots
 	name = "boots"
