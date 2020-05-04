@@ -29,13 +29,14 @@
 	display_name = "standard suit jackets"
 	path = /obj/item/clothing/suit/storage/toggle/suit
 
-/datum/gear/suit/suit_jacket/New()
-	..()
-	var/suitjackets = list()
-	suitjackets += /obj/item/clothing/suit/storage/toggle/suit/black
-	suitjackets += /obj/item/clothing/suit/storage/toggle/suit/blue
-	suitjackets += /obj/item/clothing/suit/storage/toggle/suit/purple
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(suitjackets)
+/datum/gear/suit/suit_jacket/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/suit/storage/toggle/suit/black,
+		/obj/item/clothing/suit/storage/toggle/suit/blue,
+		/obj/item/clothing/suit/storage/toggle/suit/purple
+	)
 
 /datum/gear/suit/custom_suit_jacket
 	display_name = "suit jacket, colour select"
@@ -56,13 +57,14 @@
 	display_name = "standard hoodies"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
 
-/datum/gear/suit/hoodie_sel/New()
-	..()
-	var/hoodies = list()
-	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/cti
-	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/mu
-	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/smw
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(hoodies)
+/datum/gear/suit/hoodie_sel/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/suit/storage/toggle/hoodie/cti,
+		/obj/item/clothing/suit/storage/toggle/hoodie/mu,
+		/obj/item/clothing/suit/storage/toggle/hoodie/smw
+	)
 
 /datum/gear/suit/labcoat
 	display_name = "labcoat, colour select"
@@ -82,14 +84,15 @@
 	display_name = "jacket selection"
 	path = /obj/item/clothing/suit
 
-/datum/gear/suit/leather/New()
-	..()
-	var/jackets = list()
-	jackets += /obj/item/clothing/suit/storage/toggle/bomber
-	jackets += /obj/item/clothing/suit/storage/leather_jacket
-	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket
-	jackets += /obj/item/clothing/suit/storage/mbill
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(jackets)
+/datum/gear/suit/leather/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/suit/storage/toggle/bomber,
+		/obj/item/clothing/suit/storage/leather_jacket,
+		/obj/item/clothing/suit/storage/toggle/brown_jacket,
+		/obj/item/clothing/suit/storage/mbill
+	)
 
 /datum/gear/suit/wintercoat
 	display_name = "winter coat"
@@ -114,22 +117,28 @@
 	display_name = "medical suit selection"
 	path = /obj/item/clothing/suit
 
-/datum/gear/suit/medcoat/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/fr_jacket/ems, /obj/item/clothing/suit/surgicalapron)
+/datum/gear/suit/medcoat/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/suit/storage/toggle/fr_jacket, 
+		/obj/item/clothing/suit/storage/toggle/fr_jacket/ems, 
+		/obj/item/clothing/suit/surgicalapron
+	)
 
 /datum/gear/suit/trenchcoat
 	display_name = "trenchcoat selection"
 	path = /obj/item/clothing/suit
 	cost = 3
 
-/datum/gear/suit/trenchcoat/New()
-	..()
-	var/trenchcoats = list()
-	trenchcoats += /obj/item/clothing/suit/storage/det_trench
-	trenchcoats += /obj/item/clothing/suit/storage/det_trench/grey
-	trenchcoats += /obj/item/clothing/suit/leathercoat
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(trenchcoats)
+/datum/gear/suit/trenchcoat/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/suit/storage/det_trench,
+		/obj/item/clothing/suit/storage/det_trench/grey,
+		/obj/item/clothing/suit/leathercoat
+	)
 
 /datum/gear/suit/letterman_custom
 	display_name = "letterman jacket, colour select"

@@ -14,37 +14,39 @@
 	path = /obj/item/clothing/shoes
 	cost = 2
 
-/datum/gear/shoes/boots/New()
-	..()
-	var/boots = list()
-	boots += /obj/item/clothing/shoes/jackboots
-	boots += /obj/item/clothing/shoes/workboots
-	boots += /obj/item/clothing/shoes/dutyboots
-	boots += /obj/item/clothing/shoes/jungleboots
-	boots += /obj/item/clothing/shoes/desertboots
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(boots)
+/datum/gear/shoes/boots/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/shoes/jackboots,
+		/obj/item/clothing/shoes/workboots,
+		/obj/item/clothing/shoes/dutyboots,
+		/obj/item/clothing/shoes/jungleboots,
+		/obj/item/clothing/shoes/desertboots
+	)
 
 /datum/gear/shoes/color
 	display_name = "shoe selection"
 	path = /obj/item/clothing/shoes
 
-/datum/gear/shoes/color/New()
-	..()
-	var/shoes = list()
-	shoes += /obj/item/clothing/shoes/black
-	shoes += /obj/item/clothing/shoes/blue
-	shoes += /obj/item/clothing/shoes/brown
-	shoes += /obj/item/clothing/shoes/laceup
-	shoes += /obj/item/clothing/shoes/dress/white
-	shoes += /obj/item/clothing/shoes/green
-	shoes += /obj/item/clothing/shoes/leather
-	shoes += /obj/item/clothing/shoes/orange
-	shoes += /obj/item/clothing/shoes/purple
-	shoes += /obj/item/clothing/shoes/rainbow
-	shoes += /obj/item/clothing/shoes/red
-	shoes += /obj/item/clothing/shoes/white
-	shoes += /obj/item/clothing/shoes/yellow
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(shoes)
+/datum/gear/shoes/color/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/shoes/black,
+		/obj/item/clothing/shoes/blue,
+		/obj/item/clothing/shoes/brown,
+		/obj/item/clothing/shoes/laceup,
+		/obj/item/clothing/shoes/dress/white,
+		/obj/item/clothing/shoes/green,
+		/obj/item/clothing/shoes/leather,
+		/obj/item/clothing/shoes/orange,
+		/obj/item/clothing/shoes/purple,
+		/obj/item/clothing/shoes/rainbow,
+		/obj/item/clothing/shoes/red,
+		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/shoes/yellow
+	)
 
 /datum/gear/shoes/flats
 	display_name = "flats, colour select"

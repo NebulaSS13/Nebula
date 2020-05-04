@@ -25,36 +25,37 @@
 	display_name = "clothes selection"
 	path = /obj/item/clothing/under
 
-/datum/gear/uniform/suit/New()
-	..()
-	var/suits = list()
-	suits += /obj/item/clothing/under/sl_suit
-	suits += /obj/item/clothing/under/suit_jacket
-	suits += /obj/item/clothing/under/lawyer/blue
-	suits += /obj/item/clothing/under/suit_jacket/burgundy
-	suits += /obj/item/clothing/under/suit_jacket/charcoal
-	suits += /obj/item/clothing/under/suit_jacket/checkered
-	suits += /obj/item/clothing/under/suit_jacket/really_black
-	suits += /obj/item/clothing/under/suit_jacket/female
-	suits += /obj/item/clothing/under/gentlesuit
-	suits += /obj/item/clothing/under/suit_jacket/navy
-	suits += /obj/item/clothing/under/lawyer/oldman
-	suits += /obj/item/clothing/under/lawyer/purpsuit
-	suits += /obj/item/clothing/under/suit_jacket/red
-	suits += /obj/item/clothing/under/lawyer/red
-	suits += /obj/item/clothing/under/lawyer/black
-	suits += /obj/item/clothing/under/suit_jacket/tan
-	suits += /obj/item/clothing/under/scratch
-	suits += /obj/item/clothing/under/lawyer/bluesuit
-	suits += /obj/item/clothing/under/rank/internalaffairs/plain
-	suits += /obj/item/clothing/under/blazer
-	suits += /obj/item/clothing/under/blackjumpskirt
-	suits += /obj/item/clothing/under/kilt
-	suits += /obj/item/clothing/under/dress/dress_hr
-	suits += /obj/item/clothing/under/det
-	suits += /obj/item/clothing/under/det/black
-	suits += /obj/item/clothing/under/det/grey
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(suits)
+/datum/gear/uniform/suit/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/under/sl_suit,
+		/obj/item/clothing/under/suit_jacket,
+		/obj/item/clothing/under/lawyer/blue,
+		/obj/item/clothing/under/suit_jacket/burgundy,
+		/obj/item/clothing/under/suit_jacket/charcoal,
+		/obj/item/clothing/under/suit_jacket/checkered,
+		/obj/item/clothing/under/suit_jacket/really_black,
+		/obj/item/clothing/under/suit_jacket/female,
+		/obj/item/clothing/under/gentlesuit,
+		/obj/item/clothing/under/suit_jacket/navy,
+		/obj/item/clothing/under/lawyer/oldman,
+		/obj/item/clothing/under/lawyer/purpsuit,
+		/obj/item/clothing/under/suit_jacket/red,
+		/obj/item/clothing/under/lawyer/red,
+		/obj/item/clothing/under/lawyer/black,
+		/obj/item/clothing/under/suit_jacket/tan,
+		/obj/item/clothing/under/scratch,
+		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/under/rank/internalaffairs/plain,
+		/obj/item/clothing/under/blazer,
+		/obj/item/clothing/under/blackjumpskirt,
+		/obj/item/clothing/under/kilt,
+		/obj/item/clothing/under/dress/dress_hr,
+		/obj/item/clothing/under/det,
+		/obj/item/clothing/under/det/black,
+		/obj/item/clothing/under/det/grey
+	)
 
 /datum/gear/uniform/scrubs
 	display_name = "standard medical scrubs"
@@ -69,17 +70,18 @@
 	display_name = "dress selection"
 	path = /obj/item/clothing/under
 
-/datum/gear/uniform/dress/New()
-	..()
-	var/dresses = list()
-	dresses += /obj/item/clothing/under/sundress_white
-	dresses += /obj/item/clothing/under/dress/dress_fire
-	dresses += /obj/item/clothing/under/dress/dress_green
-	dresses += /obj/item/clothing/under/dress/dress_orange
-	dresses += /obj/item/clothing/under/dress/dress_pink
-	dresses += /obj/item/clothing/under/dress/dress_purple
-	dresses += /obj/item/clothing/under/sundress
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(dresses)
+/datum/gear/uniform/dress/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/under/sundress_white,
+		/obj/item/clothing/under/dress/dress_fire,
+		/obj/item/clothing/under/dress/dress_green,
+		/obj/item/clothing/under/dress/dress_orange,
+		/obj/item/clothing/under/dress/dress_pink,
+		/obj/item/clothing/under/dress/dress_purple,
+		/obj/item/clothing/under/sundress
+	)
 
 /datum/gear/uniform/cheongsam
 	display_name = "cheongsam, colour select"
