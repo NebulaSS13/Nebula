@@ -108,9 +108,11 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/inertia_dir = magnitude >= 0 ? turn(fore_dir, 180) : fore_dir
 	var/inertia_strength = magnitude * 1e3
 	if(needs_dampers && damping_strength < inertia_strength)
-		for(var/area/A in world)
-			if(A.z in map_z)
-				A.throw_unbuckled_occupants(inertia_strength+2, inertia_strength, inertia_dir)	
+		var/list/areas_by_name = area_repository.get_areas_by_z_level()
+		for(var/area_name in areas_by_name)
+			var/area/A = areas_by_name[area_name]
+			if(area_belongs_to_zlevels(A, map_z))
+				A.throw_unbuckled_occupants(inertia_strength+2, inertia_strength, inertia_dir)
 	for(var/zz in map_z)
 		if(is_still())
 			toggle_move_stars(zz)
@@ -265,7 +267,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/datum/ship_engine/E in ship_engines)
 		if(check_ownership(E.holder))
 			engines |= E
-	for(var/datum/ship_inertial_damper/I in ship_inertial_dampers)
+	for(var/datum/ship_inertial_damper/I in global.ship_inertial_dampers)
 		if(check_ownership(I.holder))
 			inertial_dampers |= I
 

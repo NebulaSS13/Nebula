@@ -11,10 +11,10 @@ var/list/ship_inertial_dampers = list()
 /datum/ship_inertial_damper/New(var/obj/machinery/_holder)
 	..()
 	holder = _holder
-	ship_inertial_dampers += src
+	global.ship_inertial_dampers += src
 
 /datum/ship_inertial_damper/Destroy()
-	ship_inertial_dampers -= src
+	global.ship_inertial_dampers -= src
 	for(var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
 		S.inertial_dampers -= src
 	holder = null
@@ -65,7 +65,7 @@ var/list/ship_inertial_dampers = list()
 
 	var/current_overlay = null
 	var/width = 3
-	var/height = 3
+	var/height = 2
 
 /obj/machinery/inertial_damper/Initialize()
 	. = ..()
@@ -99,26 +99,7 @@ var/list/ship_inertial_dampers = list()
 			was_reset = TRUE
 		change_power_consumption(0, POWER_USE_OFF)
 
-	var/overlay_state = null
-	if(!active && damping_strength == 0)
-		overlay_state = null //inactive and powered off
-	else if(damping_strength < initial(damping_strength))
-		if(target_strength != damping_strength)
-			overlay_state = "startup" //lower than default strength and changing
-		else
-			overlay_state = "weak" //met our target but lower than default strength
-	else if(target_strength > damping_strength && damping_strength >= initial(damping_strength))
-		overlay_state = "activating" //rising higher than default strength
-	else
-		overlay_state = "activated" //met our target higher than default strength
-
-	if(overlay_state != current_overlay)
-		overlays.Cut()
-		if(overlay_state)
-			var/image/new_overlay_state = image(icon, overlay_state)
-			new_overlay_state.appearance_flags |= RESET_COLOR
-			overlays += new_overlay_state
-		current_overlay = overlay_state
+	queue_icon_update()
 
 	if(damping_strength != target_strength)
 		damping_strength = damping_strength > target_strength ? max(damping_strength - delta, target_strength) : min(damping_strength + delta, target_strength)
@@ -147,6 +128,27 @@ var/list/ship_inertial_dampers = list()
 /obj/machinery/inertial_damper/on_update_icon()
 	..()
 	icon_state = "damper_[get_status()]"
+
+	var/overlay_state = null
+	if(!active && damping_strength == 0)
+		overlay_state = null //inactive and powered off
+	else if(damping_strength < initial(damping_strength))
+		if(target_strength != damping_strength)
+			overlay_state = "startup" //lower than default strength and changing
+		else
+			overlay_state = "weak" //met our target but lower than default strength
+	else if(target_strength > damping_strength && damping_strength >= initial(damping_strength))
+		overlay_state = "activating" //rising higher than default strength
+	else
+		overlay_state = "activated" //met our target higher than default strength
+
+	if(overlay_state != current_overlay)
+		overlays.Cut()
+		if(overlay_state)
+			var/image/new_overlay_state = image(icon, overlay_state)
+			new_overlay_state.appearance_flags |= RESET_COLOR
+			overlays += new_overlay_state
+		current_overlay = overlay_state
 
 /obj/machinery/inertial_damper/proc/SetBounds()
 	bound_width = width * world.icon_size
@@ -177,6 +179,7 @@ var/list/ship_inertial_dampers = list()
 			warned = FALSE
 			return TOPIC_NOACTION
 
+		warned = FALSE
 		target_strength = Clamp(new_strength, 0, max_strength)
 		return TOPIC_REFRESH
 

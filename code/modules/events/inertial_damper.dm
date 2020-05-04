@@ -24,6 +24,7 @@
 		I.damping_modifier = initial(I.damping_modifier)
 		if(!I.was_reset)
 			display_announcement = TRUE
+			break
 
-	if(display_announcement)		
+	if(display_announcement)
 		command_announcement.Announce("Inertial dampers are again functioning within normal parameters. Sorry for any inconvenience.", "[location_name()] Inertial Damper Subsystem", zlevels = affecting_z)
