@@ -186,3 +186,18 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/grenade(src)
+
+/material/leather/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/shoes(src)
+	. += new/datum/stack_recipe/boots(src)
+
+/material/skin/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/cloak(src)
+	. += new/datum/stack_recipe/shoes(src)

@@ -2,9 +2,9 @@
 	name = "revolver"
 	desc = "The al-Maliki & Mosley Magnum Double Action is a choice revolver for when you absolutely, positively need to put a hole in the other guy."
 	icon = 'icons/obj/guns/revolvers.dmi'
-	icon_state = "revolver"
-	item_state = "revolver"
-	safety_icon = "revolver_safety"
+	on_mob_icon = 'icons/obj/guns/revolvers.dmi'
+	icon_state = "world"
+	safety_icon = "safety"
 	caliber = CALIBER_PISTOL_MAGNUM
 	origin_tech = "{'combat':2,'materials':2}"
 	handle_casings = CYCLE_CASINGS
@@ -49,16 +49,22 @@
 /obj/item/gun/projectile/revolver/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
-	icon_state = "revolver-toy"
 	caliber = CALIBER_CAPS
 	origin_tech = "{'combat':1,'materials':1}"
 	ammo_type = /obj/item/ammo_casing/cap
+	var/cap = TRUE
+
+/obj/item/gun/projectile/revolver/capgun/on_update_icon()
+	. = ..()
+	if(cap)
+		overlays += image(icon, "[icon_state]-toy")
 
 /obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
-	if(!istype(W) || icon_state == "revolver")
+	if(!istype(W) || !cap)
 		return ..()
 	to_chat(user, "<span class='notice'>You snip off the toy markings off the [src].</span>")
 	name = "revolver"
-	icon_state = "revolver"
 	desc += " Someone snipped off the barrel's toy mark. How dastardly."
+	cap = FALSE
+	update_icon()
 	return 1

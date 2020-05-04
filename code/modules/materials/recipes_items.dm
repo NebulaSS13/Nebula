@@ -255,3 +255,15 @@
 /datum/stack_recipe/wooden_prosthetic/right_foot
 	title = "right foot"
 	result_type = /obj/item/organ/external/foot/right/wooden
+
+/datum/stack_recipe/cloak
+	title = "cloak"
+	result_type = /obj/item/clothing/accessory/cloak/hide
+
+/datum/stack_recipe/shoes
+	title = "shoes"
+	result_type = /obj/item/clothing/shoes/craftable
+
+/datum/stack_recipe/boots
+	title = "boots"
+	result_type = /obj/item/clothing/shoes/craftable/boots

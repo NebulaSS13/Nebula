@@ -15,6 +15,7 @@
 	gas_molar_mass =    0.032 // kg/mol
 	reflectiveness = 0
 	hardness = 0
+	weight = 1
 
 /material/gas/boron
 	display_name = "boron"

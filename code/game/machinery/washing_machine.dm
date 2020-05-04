@@ -86,12 +86,6 @@
 					addtimer(CALLBACK(C, /obj/item/clothing/proc/change_smell), detergent.smell_clean_time, TIMER_UNIQUE | TIMER_OVERRIDE)
 	QDEL_NULL(detergent)
 
-	//Tanning!
-	for(var/obj/item/stack/hairlesshide/HH in contents)
-		var/obj/item/stack/wetleather/WL = new(src)
-		WL.amount = HH.amount
-		qdel(HH)
-
 	update_use_power(POWER_USE_IDLE)
 	if(locate(/mob/living) in src)
 		gibs_ready = 1
@@ -144,8 +138,7 @@
 		update_icon()
 		return TRUE
 
-	else if(istype(W,/obj/item/stack/hairlesshide) || \
-		istype(W,/obj/item/clothing/under)  || \
+	else if(istype(W,/obj/item/clothing/under)  || \
 		istype(W,/obj/item/clothing/mask)   || \
 		istype(W,/obj/item/clothing/head)   || \
 		istype(W,/obj/item/clothing/gloves) || \

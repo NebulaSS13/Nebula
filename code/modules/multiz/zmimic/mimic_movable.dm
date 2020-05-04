@@ -141,6 +141,8 @@
 	var/queued = FALSE
 	var/destruction_timer
 	var/mimiced_type
+	var/original_z
+	var/override_depth
 
 /atom/movable/openspace/overlay/New()
 	atom_flags |= ATOM_FLAG_INITIALIZED

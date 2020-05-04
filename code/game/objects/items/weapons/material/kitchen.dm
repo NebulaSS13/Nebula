@@ -12,7 +12,7 @@
 	sharp = 0
 	edge = 0
 	material_force_multiplier = 0.1 // 6 when wielded with hardness 60 (steel)
-	thrown_material_force_multiplier = 0.25 // 5 when thrown with weight 20 (steel)
+	thrown_material_force_multiplier = 0.1
 	material = MAT_ALUMINIUM
 
 	var/loaded      //Descriptive string for currently loaded food object.
