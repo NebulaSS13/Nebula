@@ -2,6 +2,7 @@
 	name = "Embedded Controller"
 	anchored = 1
 	idle_power_usage = 10
+	layer = ABOVE_WINDOW_LAYER
 	var/datum/computer/file/embedded_program/program	//the currently executing program
 	var/on = 1
 
