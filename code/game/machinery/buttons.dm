@@ -4,6 +4,7 @@
 	icon_state = "launcherbtt"
 	desc = "A remote control switch for something."
 	anchored = 1
+	layer = ABOVE_WINDOW_LAYER
 	power_channel = ENVIRON
 	idle_power_usage = 10
 	public_variables = list(
