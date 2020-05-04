@@ -33,23 +33,24 @@
 	path = /obj/item/clothing/ring
 	cost = 2
 
-/datum/gear/ring/New()
-	..()
-	var/ringtype = list()
-	ringtype["CTI ring"] = /obj/item/clothing/ring/cti
-	ringtype["Mariner University ring"] = /obj/item/clothing/ring/mariner
-	ringtype["engagement ring"] = /obj/item/clothing/ring/engagement
-	ringtype["signet ring"] = /obj/item/clothing/ring/seal/signet
-	ringtype["masonic ring"] = /obj/item/clothing/ring/seal/mason
-	ringtype["ring, steel"] = /obj/item/clothing/ring/material/steel
-	ringtype["ring, bronze"] = /obj/item/clothing/ring/material/bronze
-	ringtype["ring, silver"] = /obj/item/clothing/ring/material/silver
-	ringtype["ring, gold"] = /obj/item/clothing/ring/material/gold
-	ringtype["ring, platinum"] = /obj/item/clothing/ring/material/platinum
-	ringtype["ring, glass"] = /obj/item/clothing/ring/material/glass
-	ringtype["ring, wood"] = /obj/item/clothing/ring/material/wood
-	ringtype["ring, plastic"] = /obj/item/clothing/ring/material/plastic
-	gear_tweaks += new/datum/gear_tweak/path(ringtype)
+/datum/gear/ring/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"CTI ring" =                /obj/item/clothing/ring/cti,
+		"Mariner University ring" = /obj/item/clothing/ring/mariner,
+		"engagement ring" =         /obj/item/clothing/ring/engagement,
+		"signet ring" =             /obj/item/clothing/ring/seal/signet,
+		"masonic ring" =            /obj/item/clothing/ring/seal/mason,
+		"ring, steel" =             /obj/item/clothing/ring/material/steel,
+		"ring, bronze" =            /obj/item/clothing/ring/material/bronze,
+		"ring, silver" =            /obj/item/clothing/ring/material/silver,
+		"ring, gold" =              /obj/item/clothing/ring/material/gold,
+		"ring, platinum" =          /obj/item/clothing/ring/material/platinum,
+		"ring, glass" =             /obj/item/clothing/ring/material/glass,
+		"ring, wood" =              /obj/item/clothing/ring/material/wood,
+		"ring, plastic" =           /obj/item/clothing/ring/material/plastic
+	)
 
 /datum/gear/gloves/work
 	display_name = "gloves, work"

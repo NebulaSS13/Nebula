@@ -15,14 +15,15 @@
 	display_name = "glasses"
 	path = /obj/item/clothing/glasses
 
-/datum/gear/eyes/fashionglasses/New()
-	..()
-	var/glasses = list()
-	glasses["green glasses"] = /obj/item/clothing/glasses/prescription/gglasses
-	glasses["hipster glasses"] = /obj/item/clothing/glasses/prescription/hipster
-	glasses["monocle"] = /obj/item/clothing/glasses/monocle
-	glasses["scanning goggles"] = /obj/item/clothing/glasses/prescription/scanners
-	gear_tweaks += new/datum/gear_tweak/path(glasses)
+/datum/gear/eyes/fashionglasses/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"green glasses" =    /obj/item/clothing/glasses/prescription/gglasses,
+		"hipster glasses" =  /obj/item/clothing/glasses/prescription/hipster,
+		"monocle" =          /obj/item/clothing/glasses/monocle,
+		"scanning goggles" = /obj/item/clothing/glasses/prescription/scanners
+	)
 
 /datum/gear/eyes/sciencegoggles
 	display_name = "Science Goggles"
