@@ -10,8 +10,7 @@ SUBSYSTEM_DEF(atoms)
 
 	// override and GetArguments() exists for mod-override/downstream hook functionality.
 	// Useful for total-overhaul type modifications.
-	var/override_populate_parts = FALSE
-	var/populate_parts = TRUE
+	var/adjust_init_arguments = FALSE
 
 	var/atom_init_stage = INITIALIZATION_INSSATOMS
 	var/old_init_stage
@@ -100,15 +99,19 @@ SUBSYSTEM_DEF(atoms)
 
 	return qdeleted || QDELING(A)
 
+// override and GetArguments() exists for mod-override/downstream hook functionality.
+// Useful for total-overhaul type modifications.
+/atom/proc/AdjustInitializeArguments(list/arguments)
+	// Lists are passed by reference so can simply modify the arguments list without returning it
+
 /datum/controller/subsystem/atoms/proc/GetArguments(atom/A, list/mapload_arg, created=TRUE)
+	if(!created && !adjust_init_arguments)
+		return mapload_arg // Performance optimization. Nothing to do.
 	var/list/arguments = mapload_arg.Copy()
 	if(created && created_atoms[A])
 		arguments += created_atoms[A]
-	if(override_populate_parts && istype(A, /obj/machinery))
-		if(arguments.len > 2)
-			arguments[3] = populate_parts
-		else
-			arguments |= list(null, populate_parts)
+	if(adjust_init_arguments)
+		A.AdjustInitializeArguments(arguments)
 	return arguments
 
 /datum/controller/subsystem/atoms/stat_entry(msg)
