@@ -418,3 +418,55 @@ var/const/NO_EMAG_ACT = -50
 	desc = "A golden card which shows power and might."
 	color = "#d4c780"
 	extra_details = list("goldstripe")
+
+/*
+ * NETWORK-ENABLED ID CARDS
+ */
+
+/obj/item/card/id/network
+	var/network_id												// The network_id that this card is paired to.
+	var/user_id													// The user's ID this card belongs to. This is typically their access_record UID, which is their cortical stack ID.
+	var/datum/computer_file/report/crew_record/access_record 	// A cached link to the access_record belonging to this card. Do not save this.
+
+/obj/item/card/id/network/Initialize()
+	set_extension(src, /datum/extension/network_device/lazy)
+	if(!access_record)
+		refresh_access_record()
+	return ..()
+
+/obj/item/card/id/network/GetAccess()
+	if(!access_record)
+		refresh_access_record()
+	return access
+
+/obj/item/card/id/network/verb/resync()
+	set name = "Resync ID Card"
+	set category = "Object"
+	set src in usr
+
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+
+	var/datum/computer_network/network = D.get_network()
+	if(!network)
+		if(usr.skill_check(SKILL_DEVICES, SKILL_EXPERT))
+			to_chat(usr, SPAN_NOTICE("The red LED on the card flashes once, signaling it has no network."))
+		else
+			to_chat(usr, "Pressing the synchronization button on the card causes a red LED to flash once.")
+		return
+	if(refresh_access_record(network))
+		to_chat(usr, "A green light flashes as the card is synchronized with its network.")
+		return
+	if(usr.skill_check(SKILL_DEVICES, SKILL_EXPERT))
+		to_chat(usr, SPAN_NOTICE("The red LED on the card flashes three times, signaling it failed to synchronize the card with the network."))
+	else
+		to_chat(usr, SPAN_WARNING("Pressing the synchronization button on the card causes a red LED to flash three times."))
+
+/obj/item/card/id/network/proc/refresh_access_record(var/datum/computer_network/network)
+	for(var/datum/extension/network_device/mainframe/mainframe in network.get_mainframes_by_role(MF_ROLE_CREW_RECORDS))
+		for(var/datum/computer_file/report/crew_record/ar in mainframe.get_all_files())
+			if(ar.user_id != user_id)
+				continue // Mismatch user file.
+			// We have a match!
+			access_record = ar
+			access = ar.get_access(network_id)
+			return TRUE

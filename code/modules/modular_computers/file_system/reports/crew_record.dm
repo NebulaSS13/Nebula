@@ -12,15 +12,50 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/icon/photo_front = null
 	var/icon/photo_side = null
 	//More variables below.
-
+	var/list/grants = list()	// List of weakrefs to grant files.
+	var/user_id					// A unique identifier linking a mob/player/user to this access record and their grants.
+	
 /datum/computer_file/report/crew_record/New()
 	..()
 	filename = "record[random_id(type, 100,999)]"
+	user_id = sequential_id("datum/computer_file/report/crew_record")
 	load_from_mob(null)
 
 /datum/computer_file/report/crew_record/Destroy()
 	. = ..()
 	GLOB.all_crew_records.Remove(src)
+
+/datum/computer_file/report/crew_record/proc/add_grant(var/datum/computer_file/data/grant_record/new_grant)
+	grants |= weakref(new_grant)
+
+/datum/computer_file/report/crew_record/proc/remove_grant(var/grant_name)
+	for(var/weakref/grant in grants)
+		var/datum/computer_file/data/grant_record/GR = grant.resolve()
+		if(!GR)
+			grants -= GR
+			continue
+		if(GR.stored_data == grant_name)
+			grants -= GR
+			return
+
+/datum/computer_file/report/crew_record/proc/calculate_size()
+	size = max(1, round(length(user_id) + length(grants) / 20))
+
+/datum/computer_file/report/crew_record/proc/get_access(var/network_id)
+	var/list/access_grants = list()
+	for(var/datum/computer_file/data/grant_record/grant in get_valid_grants())
+		LAZYDISTINCTADD(access_grants, uppertext("[network_id].[grant.stored_data]"))
+	return access_grants
+
+/datum/computer_file/report/crew_record/proc/get_valid_grants()
+	var/list/valid_grants = list()
+	for(var/weakref/grant in grants)
+		var/datum/computer_file/data/grant_record/GR = grant.resolve()
+		if(!GR || GR.holder != holder)
+			grants.Remove(grant)
+			continue // This is a bad grant. File is gone or moved.
+		LAZYDISTINCTADD(valid_grants, GR)
+	return valid_grants
 
 /datum/computer_file/report/crew_record/proc/load_from_mob(var/mob/living/carbon/human/H)
 	if(istype(H))

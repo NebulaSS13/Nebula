@@ -51,9 +51,9 @@
 			mainframes.Add(list(rdata))
 		data["mainframes"] = mainframes
 
-		if(length(network.mainframes_by_role[MF_ROLE_LOG_SERVER]))
+		if(length(network.get_mainframes_by_role(MF_ROLE_LOG_SERVER, user)))
 			var/list/logs[0]
-			for(var/datum/extension/network_device/mainframe/M in network.mainframes_by_role[MF_ROLE_LOG_SERVER])
+			for(var/datum/extension/network_device/mainframe/M in network.get_mainframes_by_role(MF_ROLE_LOG_SERVER, user))
 				var/list/logdata[0]
 				var/datum/computer_file/data/logfile/F = M.get_file("network_log")
 				if(F)
