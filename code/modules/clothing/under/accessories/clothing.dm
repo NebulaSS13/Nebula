@@ -7,6 +7,18 @@
 /obj/item/clothing/accessory/wcoat/black
 	color = COLOR_GRAY15
 
+/obj/item/clothing/accessory/wcoat/armored
+	desc = "A classy waistcoat. This one seems suspiciously more durable."
+	color = COLOR_GRAY15
+	armor = list(
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_SMALL,
+		melee = ARMOR_MELEE_SMALL,
+		energy = ARMOR_ENERGY_MINOR
+		)
+	body_parts_covered = UPPER_TORSO
+	origin_tech = "{'combat':2,'materials':3,'esoteric':2}"
+
 /obj/item/clothing/accessory/suspenders
 	name = "suspenders"
 	desc = "They suspend the illusion of the mime's play."
