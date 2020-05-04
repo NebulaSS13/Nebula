@@ -36,9 +36,9 @@
 	icon_state = "gripper-mining"
 
 	can_hold = list(
-	/obj/item/cell,
-	/obj/item/stock_parts,
-	/obj/item/stock_parts/circuitboard/miningdrill
+		/obj/item/cell,
+		/obj/item/stock_parts,
+		/obj/item/stock_parts/circuitboard/miningdrill
 	)
 
 /obj/item/gripper/clerical
@@ -49,10 +49,12 @@
 		/obj/item/material/clipboard,
 		/obj/item/paper,
 		/obj/item/paper_bundle,
+		/obj/item/photo,
 		/obj/item/card/id,
 		/obj/item/book,
 		/obj/item/newspaper,
-		/obj/item/smallDelivery
+		/obj/item/smallDelivery,
+		/obj/item/forensics/sample
 		)
 
 /obj/item/gripper/chemistry
@@ -125,9 +127,9 @@
 	desc = "A simple grasping tool for holding and manipulating organic and mechanical organs, both internal and external."
 
 	can_hold = list(
-	/obj/item/organ,
-	/obj/item/robot_parts,
-	/obj/item/chems/ivbag
+		/obj/item/organ,
+		/obj/item/robot_parts,
+		/obj/item/chems/ivbag
 	)
 
 /obj/item/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
