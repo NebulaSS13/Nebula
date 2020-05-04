@@ -86,12 +86,12 @@
 
 /obj/machinery/network/power_change()
 	. = ..()
-	if(.)
+	if(. && get_extension(src, /datum/extension/network_device))
 		update_network_status()
 
 /obj/machinery/network/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
 	. = ..()
-	if(.)
+	if(. && get_extension(src, /datum/extension/network_device))
 		update_network_status()
 
 /obj/machinery/network/proc/set_overheated(new_state)
