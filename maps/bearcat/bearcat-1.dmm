@@ -783,7 +783,6 @@
 /obj/item/fossil/animal,
 /obj/item/fossil/animal,
 /obj/item/fossil,
-/obj/item/xenos_claw,
 /obj/item/ore/strangerock,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/bearcat/cargo/lower)

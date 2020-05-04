@@ -361,9 +361,19 @@ var/list/gear_datums = list()
 	if(flags & GEAR_HAS_COLOR_SELECTION)
 		gear_tweaks += gear_tweak_free_color_choice()
 	if(flags & GEAR_HAS_TYPE_SELECTION)
-		gear_tweaks += new/datum/gear_tweak/path/type(path)
+		gear_tweaks += new /datum/gear_tweak/path/type(path)
 	if(flags & GEAR_HAS_SUBTYPE_SELECTION)
-		gear_tweaks += new/datum/gear_tweak/path/subtype(path)
+		gear_tweaks += new /datum/gear_tweak/path/subtype(path)
+	var/options = get_gear_tweak_options()
+	for(var/tweak in options)
+		var/optargs = options[tweak]
+		if(optargs)
+			gear_tweaks += new tweak(optargs)
+		else
+			gear_tweaks += new tweak
+
+/datum/gear/proc/get_gear_tweak_options()
+	. = list()
 
 /datum/gear/proc/get_description(var/metadata)
 	. = description

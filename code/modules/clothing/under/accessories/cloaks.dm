@@ -118,7 +118,15 @@
 	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_medical.dmi'
 
 /obj/item/clothing/accessory/cloak/hide
-	name = "hide cloak"
+	name = "cloak"
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon_state = "cloak_hide"
 	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
+	material = MAT_LEATHER_GENERIC
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
+
+/obj/item/clothing/accessory/cloak/hide/set_material(var/new_material)
+	..()
+	if(istype(material))
+		desc = "A ragged cloak made of [material.display_name]."

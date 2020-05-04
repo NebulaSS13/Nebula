@@ -1,11 +1,8 @@
 /obj/item/clothing/head/soft
 	name = "cargo cap"
 	desc = "It's a peaked cap in a tasteless yellow color."
-	icon_state = "cargosoft"
-	item_state_slots = list(
-		slot_l_hand_str = "helmet", //probably a placeholder
-		slot_r_hand_str = "helmet",
-		)
+	icon_state = "softcap"
+	color = COLOR_YELLOW_GRAY
 	var/flipped = 0
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
@@ -39,59 +36,56 @@
 /obj/item/clothing/head/soft/red
 	name = "red cap"
 	desc = "It's a peaked hat in a tasteless red color."
-	icon_state = "redsoft"
+	color = COLOR_NT_RED
 
 /obj/item/clothing/head/soft/blue
 	name = "blue cap"
 	desc = "It's a peaked cap in a tasteless blue color."
-	icon_state = "bluesoft"
+	color = COLOR_BLUE_GRAY
 
 /obj/item/clothing/head/soft/green
 	name = "green cap"
 	desc = "It's a peaked cap in a tasteless green color."
-	icon_state = "greensoft"
+	color = COLOR_BOTTLE_GREEN
 
 /obj/item/clothing/head/soft/yellow
 	name = "yellow cap"
 	desc = "It's a peaked cap in a tasteless yellow color."
-	icon_state = "yellowsoft"
+	color = COLOR_YELLOW_GRAY
 
 /obj/item/clothing/head/soft/grey
 	name = "grey cap"
 	desc = "It's a peaked cap in a tasteful grey color."
-	icon_state = "greysoft"
+	color = COLOR_GRAY
 
 /obj/item/clothing/head/soft/orange
 	name = "orange cap"
 	desc = "It's a peaked cap in a tasteless orange color."
-	icon_state = "orangesoft"
+	color = COLOR_SEDONA
 
 /obj/item/clothing/head/soft/mime
 	name = "white cap"
 	desc = "It's a peaked cap in a tasteless white color."
-	icon_state = "mimesoft"
+	color = COLOR_WHITE
 
 /obj/item/clothing/head/soft/purple
 	name = "purple cap"
 	desc = "It's a peaked cap in a tasteless purple color."
-	icon_state = "purplesoft"
+	color = COLOR_PURPLE
 
 /obj/item/clothing/head/soft/rainbow
 	name = "rainbow cap"
 	desc = "It's a peaked cap in a bright rainbow of colors."
 	icon_state = "rainbowsoft"
+	color = null
 
 /obj/item/clothing/head/soft/sec
 	name = "security cap"
 	desc = "It's a field cap in tasteful red color."
 	icon_state = "secsoft"
-
-/obj/item/clothing/head/soft/mbill
-	name = "shipping cap"
-	desc = "It's a ballcap bearing the colors of Major Bill's Shipping."
-	icon_state = "mbillsoft"
+	color = COLOR_NT_RED
 
 /obj/item/clothing/head/soft/black
 	name = "black cap"
 	desc = "It's a peaked cap in a tasteful black color."
-	icon_state = "blacksoft"
+	color = COLOR_GRAY20

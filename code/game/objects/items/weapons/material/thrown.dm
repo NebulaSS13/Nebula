@@ -5,7 +5,7 @@
 	icon_state = "star"
 	randpixel = 12
 	material_force_multiplier = 0.1 // 6 with hardness 60 (steel)
-	thrown_material_force_multiplier = 0.75 // 15 with weight 20 (steel)
+	thrown_material_force_multiplier = 0.25 // 15 with weight 60 (steel)
 	throw_speed = 10
 	throw_range = 15
 	sharp = 1

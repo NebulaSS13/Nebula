@@ -4,13 +4,14 @@
 	path = /obj/item/clothing/accessory/medal
 	cost = 8
 
-/datum/gear/accessory/ntaward/New()
-	..()
-	var/ntawards = list()
-	ntawards["sciences medal"] = /obj/item/clothing/accessory/medal/nanotrasen/bronze
-	ntawards["distinguished service"] = /obj/item/clothing/accessory/medal/nanotrasen/silver
-	ntawards["command medal"] = /obj/item/clothing/accessory/medal/nanotrasen/gold
-	gear_tweaks += new/datum/gear_tweak/path(ntawards)
+/datum/gear/accessory/ntaward/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"sciences medal" =        /obj/item/clothing/accessory/medal/nanotrasen/bronze,
+		"distinguished service" = /obj/item/clothing/accessory/medal/nanotrasen/silver,
+		"command medal" =         /obj/item/clothing/accessory/medal/nanotrasen/gold
+	)
 
 /datum/gear/accessory/armband_nt
 	display_name = "corporate armband"
@@ -25,25 +26,26 @@
 	display_name = "corporate uniform selection"
 	path = /obj/item/clothing/under
 
-/datum/gear/uniform/corporate/New()
-	..()
-	var/corps = list()
-	corps += /obj/item/clothing/under/rank/corp/polo/nanotrasen
-	corps += /obj/item/clothing/under/rank/corp/polo/heph
-	corps += /obj/item/clothing/under/rank/corp/polo/zeng
-	corps += /obj/item/clothing/under/rank/corp/mbill
-	corps += /obj/item/clothing/under/rank/corp/saare
-	corps += /obj/item/clothing/under/rank/corp/aether
-	corps += /obj/item/clothing/under/rank/corp/hephaestus
-	corps += /obj/item/clothing/under/rank/guard/pcrc
-	corps += /obj/item/clothing/under/rank/guard/pcrcsuit
-	corps += /obj/item/clothing/under/rank/corp/wardt
-	corps += /obj/item/clothing/under/rank/corp/grayson
-	corps += /obj/item/clothing/under/rank/corp/focal
-	corps += /obj/item/clothing/under/rank/corp/morpheus
-	corps += /obj/item/clothing/under/rank/corp/skinner
-	corps += /obj/item/clothing/under/rank/corp/dais
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(corps)
+/datum/gear/uniform/corporate/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
+		/obj/item/clothing/under/rank/corp/polo/nanotrasen,
+		/obj/item/clothing/under/rank/corp/polo/heph,
+		/obj/item/clothing/under/rank/corp/polo/zeng,
+		/obj/item/clothing/under/rank/corp/mbill,
+		/obj/item/clothing/under/rank/corp/saare,
+		/obj/item/clothing/under/rank/corp/aether,
+		/obj/item/clothing/under/rank/corp/hephaestus,
+		/obj/item/clothing/under/rank/guard/pcrc,
+		/obj/item/clothing/under/rank/guard/pcrcsuit,
+		/obj/item/clothing/under/rank/corp/wardt,
+		/obj/item/clothing/under/rank/corp/grayson,
+		/obj/item/clothing/under/rank/corp/focal,
+		/obj/item/clothing/under/rank/corp/morpheus,
+		/obj/item/clothing/under/rank/corp/skinner,
+		/obj/item/clothing/under/rank/corp/dais
+	)
 
 /datum/gear/uniform/corp_exec
 	display_name = "corporate colours, senior researcher"
@@ -73,13 +75,13 @@
 	display_name = "corporate jacket selection"
 	path = /obj/item/clothing/suit
 
-/datum/gear/suit/corp_jacket/New()
-	..()
-	var/jackets = list(
+/datum/gear/suit/corp_jacket/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/suit/storage/leather_jacket/nanotrasen,
 		/obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	)
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(jackets)
 
 /datum/gear/suit/science_poncho
 	display_name = "poncho, science"
@@ -92,3 +94,8 @@
 /datum/gear/suit/wintercoat_dais
 	display_name = "winter coat, DAIS"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/dais
+
+/datum/gear/head/cap/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list("major bill's shipping cap" = /obj/item/clothing/head/soft/mbill)

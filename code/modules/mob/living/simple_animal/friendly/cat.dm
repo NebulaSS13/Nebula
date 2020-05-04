@@ -262,3 +262,13 @@
 	item_state = "cat2"
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"
+
+/mob/living/simple_animal/cat/harvest_skin()
+	. = ..()
+	. += new/obj/item/cat_hide(get_turf(src))
+
+/obj/item/cat_hide
+	name = "cat hide"
+	desc = "The by-product of cat farming."
+	icon = 'icons/obj/items/sheet_hide.dmi'
+	icon_state = "sheet-cat"
