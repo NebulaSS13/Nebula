@@ -43,21 +43,18 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 /datum/computer_file/report/crew_record/proc/get_access(var/network_id)
 	var/list/access_grants = list()
-	for(var/weakref/grant in get_valid_grants())
-		var/datum/computer_file/data/grant_record/GR = grant.resolve()
-		if(!GR)
-			grants -= GR
-			continue
-		LAZYDISTINCTADD(access_grants, uppertext("[network_id].[GR.stored_data]"))
+	for(var/datum/computer_file/data/grant_record/grant in get_valid_grants())
+		LAZYDISTINCTADD(access_grants, uppertext("[network_id].[grant.stored_data]"))
 	return access_grants
 
 /datum/computer_file/report/crew_record/proc/get_valid_grants()
 	var/list/valid_grants = list()
-	for(var/datum/computer_file/data/grant_record/grant in grants)
-		if(grant.holder != holder)
+	for(var/weakref/grant in grants)
+		var/datum/computer_file/data/grant_record/GR = grant.resolve()
+		if(!GR || GR.holder != holder)
 			grants.Remove(grant)
 			continue // This is a bad grant. File is gone or moved.
-		LAZYDISTINCTADD(valid_grants, grant)
+		LAZYDISTINCTADD(valid_grants, GR)
 	return valid_grants
 
 /datum/computer_file/report/crew_record/proc/load_from_mob(var/mob/living/carbon/human/H)

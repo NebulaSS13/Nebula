@@ -191,6 +191,8 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return TRUE // If not on network, always TRUE for access, as there isn't anything to access.
+	if(!user)
+		return FALSE
 	var/obj/item/card/id/network/id = user.GetIdCard()
 	if(id && istype(id, /obj/item/card/id/network) && network.access_controller && (id.user_id in network.access_controller.administrators))
 		return TRUE

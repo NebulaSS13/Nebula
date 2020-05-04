@@ -188,6 +188,8 @@ GLOBAL_LIST_EMPTY(computer_networks)
 
 /datum/computer_network/proc/get_mainframes_by_role(mainframe_role = MF_ROLE_FILESERVER, mob/user)
 	// if administrator, give full access.
+	if(!user)
+		return mainframes_by_role[mainframe_role]
 	var/obj/item/card/id/network/id = user.GetIdCard()
 	if(id && istype(id, /obj/item/card/id/network) && access_controller && (id.user_id in access_controller.administrators))
 		return mainframes_by_role[mainframe_role]
