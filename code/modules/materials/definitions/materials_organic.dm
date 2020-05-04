@@ -152,7 +152,7 @@
 
 /material/skin/insect
 	display_name = "chitin"
-	icon_colour = "#7a726d"
+	icon_colour = "#7a776d"
 	tans_to = MAT_LEATHER_CHITIN
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
@@ -263,7 +263,8 @@
 	wall_support_value = 0
 
 /material/leather/lizard
-	display_name = "hide"
+	display_name = "scaled hide"
+	icon_colour = "#434b31"
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
 	weight = MAT_VALUE_LIGHT
@@ -275,6 +276,7 @@
 /material/leather/chitin
 	display_name = "treated chitin"
 	integrity = 100
+	icon_colour = "#5c5a54"
 	hardness = MAT_VALUE_HARD
 	weight = MAT_VALUE_NORMAL
 	brute_armor = 2
