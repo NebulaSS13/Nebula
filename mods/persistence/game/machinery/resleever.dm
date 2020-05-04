@@ -182,7 +182,7 @@ obj/machinery/resleever/Process()
 		eject_occupant()
 
 /obj/machinery/resleever/proc/sleeve()
-	if(lace && !lace.prompting && occupant) // Not only check for the lace and occupant, but also if the lace isn't already prompting the dead user.
+	if(lace && occupant)
 		var/obj/item/organ/O = occupant.get_organ(lace.parent_organ)
 		if(istype(O))
 			lace.status &= ~ORGAN_CUT_AWAY //ensure the lace is properly attached
