@@ -31,5 +31,5 @@
 /obj/machinery/network/router/update_network_status()
 	..()
 	var/datum/extension/network_device/broadcaster/router/R = get_extension(src, /datum/extension/network_device)
-	if(operable())
+	if(R && operable())
 		R.broadcast()
