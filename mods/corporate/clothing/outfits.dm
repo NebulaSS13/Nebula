@@ -35,7 +35,7 @@
 	name = "Corporate Commander"
 	head = /obj/item/clothing/head/centhat
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
-	shoes = /obj/item/clothing/shoes/swat
+	shoes = /obj/item/clothing/shoes/jackboots/swat
 	uniform = /obj/item/clothing/under/rank/centcom_captain
 	suit = /obj/item/clothing/suit/armor/bulletproof
 	gloves = /obj/item/clothing/gloves/thick/swat
