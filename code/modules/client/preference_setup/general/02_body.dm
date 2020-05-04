@@ -550,7 +550,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					var/datum/robolimb/M = chargen_robolimbs[company]
 					if(tmp_bodytype in M.bodytypes_cannot_use)
 						continue
-					if(M.restricted_to.len && !(tmp_bodytype in M.restricted_to))
+					if(length(M.species_restricted) && !(temp_species.name in M.species_restricted))
 						continue
 					if(M.applies_to_part.len && !(limb in M.applies_to_part))
 						continue

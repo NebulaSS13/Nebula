@@ -24,6 +24,7 @@ var/list/limb_icon_cache = list()
 		var/datum/robolimb/franchise = all_robolimbs[model]
 		if(!(franchise && franchise.skintone))
 			return
+		skin_blend = franchise.limb_blend
 	if(species && human.species && species.name != human.species.name)
 		return
 	if(!isnull(human.skin_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
@@ -81,8 +82,9 @@ var/list/limb_icon_cache = list()
 	icon_state = "[icon_name][gender]"
 	if(species.base_skin_colours && !isnull(species.base_skin_colours[skin_base]))
 		icon_state += species.base_skin_colours[skin_base]
-
 	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"]"
+	if(model)
+		icon_cache_key += "_model_[model]"
 
 	if(force_icon)
 		icon = force_icon
@@ -117,8 +119,6 @@ var/list/limb_icon_cache = list()
 			limb_icon_cache[cache_key] = I
 		mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
 
-	if(model)
-		icon_cache_key += "_model_[model]"
 	set_dir(EAST, TRUE)
 	icon = mob_icon
 
