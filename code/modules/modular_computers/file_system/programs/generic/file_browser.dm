@@ -55,6 +55,16 @@
 		var/file_source = input(usr, "Choose a storage medium to use:", "Select Storage Medium") as null|anything in choices
 		if(file_source)
 			current_filesource = choices[file_source]
+			if(istype(current_filesource, /datum/file_storage/network))
+				var/datum/computer_network/network = computer.get_network()
+				if(!network)
+					return TOPIC_REFRESH
+				// Helper for some user-friendliness. Try to select the first available mainframe.
+				var/list/file_servers = network.get_file_server_tags()
+				if(!file_servers.len)
+					return TOPIC_REFRESH
+				var/datum/file_storage/network/N = current_filesource
+				N.server = file_servers[1]
 			return TOPIC_REFRESH
 
 	if(href_list["PRG_changefileserver"])

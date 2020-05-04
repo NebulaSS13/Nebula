@@ -18,7 +18,7 @@
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 80
-	weight = 25
+	weight = MAT_VALUE_HEAVY
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
 	hitsound = 'sound/effects/Glasshit.ogg'

@@ -10,7 +10,7 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#007a00"
-	weight = 23
+	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':5}"
 	chem_products = list(
 				/decl/reagent/uranium = 20
@@ -27,7 +27,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/gold
 	icon_colour = COLOR_GOLD
-	weight = 25
+	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_FLEXIBLE + 5
 	integrity = 100
 	stack_origin_tech = "{'materials':4}"
@@ -62,7 +62,7 @@
 	display_name = "copper"
 	wall_name = "bulkhead"
 	icon_colour = "#b87333"
-	weight = 15
+	weight = MAT_VALUE_NORMAL
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	reflectiveness = MAT_VALUE_SHINY
 	stack_origin_tech = "{'materials':2}"
@@ -88,7 +88,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/silver
 	icon_colour = "#d1e6e3"
-	weight = 23
+	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	reflectiveness = MAT_VALUE_SHINY
 	stack_origin_tech = "{'materials':3}"
@@ -113,7 +113,7 @@
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/steel
-	weight = 25
+	weight = MAT_VALUE_NORMAL
 	integrity = 150
 	brute_armor = 5
 	icon_base = "solid"
@@ -156,7 +156,7 @@
 				/decl/reagent/aluminium = 20
 				)
 	integrity = 125
-	weight = 18
+	weight = MAT_VALUE_LIGHT
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#cccdcc"
@@ -192,7 +192,7 @@
 	brute_armor = 6
 	burn_armor = 10
 	hardness = MAT_VALUE_VERY_HARD
-	weight = 23
+	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':2}"
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_HARD_DIY
@@ -211,7 +211,7 @@
 	burn_armor = 8
 	integrity = 200
 	melting_point = 3000
-	weight = 18
+	weight = MAT_VALUE_LIGHT
 	stack_type = /obj/item/stack/material/titanium
 	icon_base = "metal"
 	door_icon_base = "metal"
@@ -233,7 +233,7 @@
 	icon_colour = "#9bc6f2"
 	brute_armor = 4
 	burn_armor = 20
-	weight = 27
+	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':3}"
 	alloy_materials = list(MAT_PLASTEEL = 7500, MAT_OSMIUM = 3750)
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
@@ -263,7 +263,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/platinum
 	icon_colour = "#deddff"
-	weight = 27
+	weight = MAT_VALUE_VERY_HEAVY
 	stack_origin_tech = "{'materials':2}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -286,7 +286,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5c5454"
-	weight = 22
+	weight = MAT_VALUE_HEAVY
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'

@@ -114,7 +114,7 @@
 	var/hardness = MAT_VALUE_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
 	var/reflectiveness = MAT_VALUE_DULL
 
-	var/weight = 20              // Determines blunt damage/throwforce for weapons.
+	var/weight = MAT_VALUE_NORMAL             // Determines blunt damage/throwforce for weapons.
 
 	// Noise when someone is faceplanted onto a table made of this material.
 	var/tableslam_noise = 'sound/weapons/tablehit1.ogg'
@@ -229,9 +229,9 @@
 	return hardness //todo
 
 /material/proc/get_attack_cooldown()
-	if(weight <= MAT_FLAG_LIGHT)
+	if(weight <= MAT_VALUE_LIGHT)
 		return FAST_WEAPON_COOLDOWN
-	if(weight >= MAT_FLAG_HEAVY)
+	if(weight >= MAT_VALUE_HEAVY)
 		return SLOW_WEAPON_COOLDOWN
 	return DEFAULT_WEAPON_COOLDOWN
 

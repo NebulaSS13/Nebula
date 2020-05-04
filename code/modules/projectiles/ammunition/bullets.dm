@@ -171,3 +171,13 @@
 	projectile_type  = /obj/item/projectile/ion
 	material = MAT_STEEL
 	matter = list(MAT_URANIUM = MATTER_AMOUNT_REINFORCEMENT)
+
+/obj/item/ammo_casing/lasbulb
+	name = "lasbulb"
+	desc = "A laser-bulb casing."
+	caliber = CALIBER_PISTOL_LASBULB
+	projectile_type = /obj/item/projectile/beam/pop
+	icon_state = "pistolcasing"
+	spent_icon = "pistolcasing-spent"
+	material = MAT_GLASS
+	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)

@@ -76,9 +76,6 @@
 /datum/gear_tweak/path/specified_types_list/New(var/type_paths)
 	..(atomtypes2nameassoclist(type_paths))
 
-/datum/gear_tweak/path/specified_types_args/New()
-	..(atomtypes2nameassoclist(args))
-
 /datum/gear_tweak/path/get_contents(var/metadata)
 	return "Type: [metadata]"
 

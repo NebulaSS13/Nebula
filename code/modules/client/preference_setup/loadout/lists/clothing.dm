@@ -19,13 +19,14 @@
 	display_name = "hawaii shirt"
 	path = /obj/item/clothing/accessory/toggleable/hawaii
 
-/datum/gear/clothing/hawaii/New()
-	..()
-	var/list/shirts = list()
-	shirts["blue hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii
-	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/red
-	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/random
-	gear_tweaks += new/datum/gear_tweak/path(shirts)
+/datum/gear/clothing/hawaii/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"blue hawaii shirt" =           /obj/item/clothing/accessory/toggleable/hawaii,
+		"red hawaii shirt" =            /obj/item/clothing/accessory/toggleable/hawaii/red,
+		"random colored hawaii shirt" = /obj/item/clothing/accessory/toggleable/hawaii/random
+	)
 
 /datum/gear/clothing/vest
 	display_name = "suit vest, colour select"
