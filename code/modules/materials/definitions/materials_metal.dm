@@ -61,7 +61,7 @@
 /material/copper
 	display_name = "copper"
 	wall_name = "bulkhead"
-	icon_colour = "#b87333"
+	icon_colour = COLOR_COPPER
 	weight = MAT_VALUE_NORMAL
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	reflectiveness = MAT_VALUE_SHINY
