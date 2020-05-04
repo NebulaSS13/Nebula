@@ -12,20 +12,14 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return
-	for(var/datum/extension/network_device/mainframe/MF in network.mainframes_by_role[MF_ROLE_CREW_RECORDS])
-		var/obj/item/stock_parts/computer/hard_drive/HDD = MF.get_storage()
-		if(!HDD)
-			continue
-		var/file = HDD.find_file_by_name(grant_data)
-		if(file)
-			return file
+	return network.find_file_by_name(grant_data, MF_ROLE_CREW_RECORDS)
 
 /datum/extension/network_device/acl/proc/get_all_grants()
 	var/list/grants = list()
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return grants
-	for(var/datum/extension/network_device/mainframe/MF in network.mainframes_by_role[MF_ROLE_CREW_RECORDS])
-		for(var/datum/computer_file/data/grant_record/GR in MF.get_all_files())
-			grants |= GR
+	var/list/grant_files = network.get_all_files_of_type(/datum/computer_file/data/grant_record, MF_ROLE_CREW_RECORDS, TRUE)
+	for(var/datum/computer_file/data/grant_record/GR in grant_files)
+		grants |= GR
 	return grants

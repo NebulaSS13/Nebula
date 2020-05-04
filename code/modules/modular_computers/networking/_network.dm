@@ -186,17 +186,14 @@ GLOBAL_LIST_EMPTY(computer_networks)
 		if(net.router && ARE_Z_CONNECTED(get_z(net.router.holder), get_z(T)))
 			return net
 
-// Takes a list of network_device datums and an executor and only returns devices
-// which pass an access check.
-/datum/computer_network/proc/filter_devices_by_access(var/list/network_devices, var/mob/user)
+/datum/computer_network/proc/get_mainframes_by_role(mainframe_role = MF_ROLE_FILESERVER, mob/user)
 	// if administrator, give full access.
 	var/obj/item/card/id/network/id = user.GetIdCard()
 	if(id && istype(id, /obj/item/card/id/network) && access_controller && (id.user_id in access_controller.administrators))
-		return network_devices
+		return mainframes_by_role[mainframe_role]
+	var/list/allowed_mainframes = list()
+	for(var/datum/extension/network_device/D in mainframes_by_role[mainframe_role])
+		if(D.has_access(user))
+			allowed_mainframes |= D
+	return allowed_mainframes
 
-	var/list/allowed_devices = list()
-	for(var/datum/extension/network_device/D in network_devices)
-		var/obj/machine = D.holder
-		if(machine.allowed(user))
-			allowed_devices += D
-	return allowed_devices

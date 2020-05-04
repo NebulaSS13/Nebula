@@ -124,7 +124,7 @@
 	var/datum/computer_file/F = new file_type
 	F.filename = newname
 	var/datum/computer_file/data/FD = F
-	if(FD)
+	if(istype(F, /datum/computer_file/data))
 		FD.calculate_size()
 	return store_file(F)
 

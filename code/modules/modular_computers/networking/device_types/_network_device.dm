@@ -187,6 +187,16 @@
 		do_change_net_tag(user)
 		return TOPIC_REFRESH
 
+/datum/extension/network_device/proc/has_access(mob/user)
+	var/datum/computer_network/network = get_network()
+	if(!network)
+		return TRUE // If not on network, always TRUE for access, as there isn't anything to access.
+	var/obj/item/card/id/network/id = user.GetIdCard()
+	if(id && istype(id, /obj/item/card/id/network) && network.access_controller && (id.user_id in network.access_controller.administrators))
+		return TRUE
+	var/obj/M = holder
+	return M.allowed(user)
+
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy
 	base_type = /datum/extension/network_device

@@ -1,12 +1,12 @@
 /datum/computer_network/proc/get_email_addresses()
 	var/list/result = list()
-	for(var/datum/extension/network_device/mainframe/M in mainframes_by_role[MF_ROLE_EMAIL_SERVER])
+	for(var/datum/extension/network_device/mainframe/M in get_mainframes_by_role(MF_ROLE_EMAIL_SERVER))
 		for(var/datum/computer_file/data/email_account/E in M.get_all_files())
 			ADD_SORTED(result, E, /proc/cmp_emails_asc)
 	return result
 
 /datum/computer_network/proc/add_email_account(datum/computer_file/data/email_account/acc)
-	for(var/datum/extension/network_device/mainframe/M in mainframes_by_role[MF_ROLE_EMAIL_SERVER])
+	for(var/datum/extension/network_device/mainframe/M in get_mainframes_by_role(MF_ROLE_EMAIL_SERVER))
 		if(M.store_file(acc))
 			return TRUE
 

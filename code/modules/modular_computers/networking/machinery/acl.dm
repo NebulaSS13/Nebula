@@ -46,8 +46,11 @@
 	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
 		var/obj/item/card/id/I = W
 		var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
+		if(!card_slot)
+			return
 		card_slot.insert_id(I, user)
 		return
+	. = ..()
 
 /obj/machinery/network/acl/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()
@@ -105,6 +108,9 @@
 
 	if(href_list["write_id"])
 		var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
+		if(!card_slot)
+			error = "HARDWARE ERROR: No NTOS-v2 compatible device found."
+			return TOPIC_REFRESH
 		var/obj/item/card/id/network/card = card_slot.stored_card
 		if(!card)
 			error = "HARDWARE ERROR: No valid card inserted."
@@ -114,11 +120,13 @@
 		card.network_id = computer.network_id
 		card.user_id = AR.user_id
 		card.access_record = AR
-		card.broken = FALSE
 		visible_message(SPAN_NOTICE("\The [src] clicks and hums, writing new data to \a [card]."))
 
 	if(href_list["eject_id"])
 		var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
+		if(!card_slot)
+			error = "HARDWARE ERROR: No NTOS-v2 compatible device found."
+			return TOPIC_REFRESH
 		if(!card_slot.stored_card)
 			error = "HARDWARE ERROR: No valid card inserted."
 			return TOPIC_REFRESH
@@ -137,7 +145,8 @@
 		return
 
 	var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
-	.["card_inserted"] = !!card_slot.stored_card
+	if(card_slot)
+		.["card_inserted"] = !!card_slot.stored_card
 
 	var/datum/extension/network_device/acl/computer = get_extension(src, /datum/extension/network_device)
 	if(!computer.get_network())
