@@ -12,7 +12,7 @@
 		/obj/item/clothing/head/caphat/cap,
 		/obj/item/clothing/under/rank/captain,
 		/obj/item/clothing/head/helmet,
-		/obj/item/clothing/shoes/brown,
+		/obj/item/clothing/shoes/color/brown,
 		/obj/item/radio/headset/heads/captain,
 		/obj/item/clothing/gloves/captain,
 		/obj/item/gun/energy/gun,
@@ -50,10 +50,10 @@
 		/obj/item/clothing/under/lawyer/black,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/oldman,
-		/obj/item/clothing/shoes/brown,
-		/obj/item/clothing/shoes/black,
+		/obj/item/clothing/shoes/color/brown,
+		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/shoes/leather,
-		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/under/rank/head_of_personnel_whimsy,
 		/obj/item/clothing/head/caphat/hop
 	)
@@ -202,7 +202,7 @@
 /obj/structure/closet/secure_closet/brig/WillContain()
 	return list(
 		/obj/item/clothing/under/color/orange,
-		/obj/item/clothing/shoes/orange
+		/obj/item/clothing/shoes/color/orange
 	)
 
 /obj/structure/closet/secure_closet/courtroom
@@ -211,7 +211,7 @@
 
 /obj/structure/closet/secure_closet/courtroom/WillContain()
 	return list(
-		/obj/item/clothing/shoes/brown,
+		/obj/item/clothing/shoes/color/brown,
 		/obj/item/paper/court = 3,
 		/obj/item/pen ,
 		/obj/item/clothing/suit/judgerobe,

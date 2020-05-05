@@ -14,7 +14,7 @@
 		/obj/item/radio/headset/headset_cargo,
 		/obj/item/clothing/under/rank/miner,
 		/obj/item/clothing/gloves/thick,
-		/obj/item/clothing/shoes/black,
+		/obj/item/clothing/shoes/color/black,
 		/obj/item/scanner/gas,
 		/obj/item/storage/ore,
 		/obj/item/flashlight/lantern,

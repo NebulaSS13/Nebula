@@ -118,7 +118,7 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 					/obj/item/clothing/mask/surgical,
-					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
 					/obj/item/flashlight/pen,
@@ -138,7 +138,7 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat,
 					/obj/item/clothing/mask/surgical,
 					/obj/item/storage/firstaid/adv,
-					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/scanner/health,
 					/obj/item/flashlight/pen,
@@ -157,7 +157,7 @@
 					/obj/item/clothing/glasses/science,
 					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
 					/obj/item/clothing/mask/surgical,
-					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/shoes/color/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/chems/dropper,
 					/obj/item/scanner/health,
@@ -200,7 +200,7 @@
 					/obj/item/clothing/under/rank/psych/turtleneck,
 					/obj/item/clothing/shoes/laceup,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
-					/obj/item/clothing/shoes/white,
+					/obj/item/clothing/shoes/color/white,
 					/obj/item/material/clipboard,
 					/obj/item/folder/white,
 					/obj/item/pen)
@@ -211,7 +211,7 @@
 
 /decl/hierarchy/supply_pack/medical/medicalscrubs
 	name = "Gear - Medical scrubs"
-	contains = list(/obj/item/clothing/shoes/white = 4,
+	contains = list(/obj/item/clothing/shoes/color/white = 4,
 					/obj/item/clothing/under/rank/medical/scrubs/blue,
 					/obj/item/clothing/under/rank/medical/scrubs/green,
 					/obj/item/clothing/under/rank/medical/scrubs/purple,
@@ -244,7 +244,7 @@
 
 /decl/hierarchy/supply_pack/medical/medicaluniforms
 	name = "Gear - Medical uniforms"
-	contains = list(/obj/item/clothing/shoes/white = 3,
+	contains = list(/obj/item/clothing/shoes/color/white = 3,
 					/obj/item/clothing/under/rank/chief_medical_officer,
 					/obj/item/clothing/under/rank/geneticist,
 					/obj/item/clothing/under/rank/virologist,

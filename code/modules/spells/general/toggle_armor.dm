@@ -46,7 +46,7 @@
 	armor_pieces = list(/obj/item/clothing/under/color/grey = slot_w_uniform,
 						/obj/item/clothing/gloves/insulated/cheap = slot_gloves,
 						/obj/item/clothing/mask/gas = slot_wear_mask,
-						/obj/item/clothing/shoes/black = slot_shoes,
+						/obj/item/clothing/shoes/color/black = slot_shoes,
 						/obj/item/storage/toolbox/mechanical = slot_r_hand,
 						/obj/item/extinguisher = slot_l_hand)
 
