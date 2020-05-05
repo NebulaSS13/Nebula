@@ -44,6 +44,12 @@ var/list/icon_state_cache = list()
 		if(last_state != icon_state)
 			update_icon()
 
+/obj/item/proc/get_world_inventory_state()
+	if(plane == HUD_PLANE && has_inventory_icon)
+		return "inventory"
+	else
+		return "world"
+
 /mob/proc/get_bodytype()
 	return
 

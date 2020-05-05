@@ -12,11 +12,8 @@
 /obj/item/material/knife/folding/swiss
 	name = "combi-knife"
 	desc = "A small, colourable, multi-purpose folding knife."
-	icon = 'icons/obj/items/swiss_knife.dmi'
-	icon_state = "swissknf_closed"
-	handle_icon = "swissknf_handle"
-	takes_colour = FALSE
-	valid_colors = null
+	on_mob_icon = 'icons/obj/items/weapon/knives/folding/swiss.dmi'
+	valid_handle_colors = null
 	max_force = 5
 
 	var/active_tool = SWISSKNF_CLOSED
@@ -62,6 +59,10 @@
 	to_chat(user, active_tool == SWISSKNF_CLOSED ? "It is closed." : "Its [lowertext(active_tool)] is folded out.")
 
 /obj/item/material/knife/folding/swiss/update_force()
+	if(active_tool == SWISSKNF_CLOSED)
+		w_class = initial(w_class)
+	else
+		w_class = ITEM_SIZE_NORMAL
 	if(active_tool in sharp_tools)
 		..()
 		if(active_tool == SWISSKNF_GBLADE)
@@ -69,26 +70,21 @@
 		else
 			siemens_coefficient = initial(siemens_coefficient)
 	else
-		force = initial(force)
 		edge = initial(edge)
 		sharp = initial(sharp)
 		hitsound = initial(hitsound)
 		attack_verb = closed_attack_verbs
 		siemens_coefficient = initial(siemens_coefficient)
-	if(active_tool == SWISSKNF_CLOSED)
-		w_class = initial(w_class)
-	else
-		w_class = ITEM_SIZE_NORMAL
+		..()
 
 /obj/item/material/knife/folding/swiss/on_update_icon()
+	..()
 	if(active_tool != null)
-		overlays.Cut()
-		overlays += overlay_image(icon, active_tool, flags=RESET_COLOR)
-		item_state = initial(item_state)
-		if(active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE)
-			item_state = "knife"
-		if(blood_overlay)
-			overlays += blood_overlay
+		overlays += overlay_image(icon, active_tool)
+
+/obj/item/material/knife/folding/swiss/experimental_mob_overlay(mob/user_mob, slot)
+	if(active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE)
+		return ..()
 
 /obj/item/material/knife/folding/swiss/iscrowbar()
 	return active_tool == SWISSKNF_CROWBAR && can_use_tools
@@ -119,42 +115,42 @@
 /obj/item/material/knife/folding/swiss/officer
 	name = "officer's combi-knife"
 	desc = "A small, blue, multi-purpose folding knife. This one adds a corkscrew."
-	color = COLOR_COMMAND_BLUE
+	handle_color = COLOR_COMMAND_BLUE
 
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_CSCREW)
 
 /obj/item/material/knife/folding/swiss/sec
 	name = "Master-At-Arms' combi-knife"
 	desc = "A small, red, multi-purpose folding knife. This one adds no special tools."
-	color = COLOR_NT_RED
+	handle_color = COLOR_NT_RED
 
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER)
 
 /obj/item/material/knife/folding/swiss/medic
 	name = "medic's combi-knife"
 	desc = "A small, green, multi-purpose folding knife. This one adds a smaller blade in place of the large blade and a glass cutter."
-	color = COLOR_OFF_WHITE
+	handle_color = COLOR_OFF_WHITE
 
 	tools = list(SWISSKNF_SBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_GBLADE)
 
 /obj/item/material/knife/folding/swiss/engineer
 	name = "engineer's combi-knife"
 	desc = "A small, yellow, multi-purpose folding knife. This one adds a wood saw and wire cutters."
-	color = COLOR_AMBER
+	handle_color = COLOR_AMBER
 
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_WBLADE, SWISSKNF_WCUTTER)
 
 /obj/item/material/knife/folding/swiss/explorer
 	name = "explorer's combi-knife"
 	desc = "A small, purple, multi-purpose folding knife. This one adds a wood saw and pry bar."
-	color = COLOR_PURPLE
+	handle_color = COLOR_PURPLE
 
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_WBLADE, SWISSKNF_CROWBAR)
 
 /obj/item/material/knife/folding/swiss/loot
 	name = "black combi-knife"
 	desc = "A small, silver, multi-purpose folding knife. This one adds a small blade and corkscrew."
-	color = COLOR_TITANIUM
+	handle_color = COLOR_GRAY40
 
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_CSCREW)
 
