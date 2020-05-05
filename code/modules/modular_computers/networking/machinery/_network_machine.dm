@@ -28,6 +28,12 @@
 		if(env.temperature >= heat_threshold)
 			return TRUE
 
+/obj/machinery/network/on_update_icon()
+	if(operable())
+		icon_state = panel_open ? "bus_o" : "bus"
+	else
+		icon_state = panel_open ? "bus_o_off" : "bus_off"
+
 /obj/machinery/network/proc/produce_heat()
 	if (!produces_heat || !use_power || !operable())
 		return

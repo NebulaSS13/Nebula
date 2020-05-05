@@ -188,9 +188,9 @@
 
 /obj/machinery/network/acl/on_update_icon()
 	if(operable())
-		icon_state = "bus"
+		icon_state = panel_open ? "AAS_On_Open" : "AAS_On"
 	else
-		icon_state = "bus_off"
+		icon_state = panel_open ? "AAS_Off_Open" : "AAS_Off"
 
 /obj/machinery/network/acl/proc/get_all_users()
 	var/list/users = list()

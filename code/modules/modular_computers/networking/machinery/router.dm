@@ -24,9 +24,9 @@
 
 /obj/machinery/network/router/on_update_icon()
 	if(operable())
-		icon_state = "bus"
+		icon_state = panel_open ? "comm_server_o" : "comm_server"
 	else
-		icon_state = "bus_off"
+		icon_state = panel_open ? "comm_server_o_off" : "comm_server_off"
 
 /obj/machinery/network/router/update_network_status()
 	..()
