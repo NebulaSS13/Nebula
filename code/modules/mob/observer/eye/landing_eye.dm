@@ -74,17 +74,17 @@
 			continue
 
 /mob/observer/eye/landing/possess(var/mob/user)
-	..()
+	. = ..()
 	if(owner && owner.client)
 		owner.client.view = LANDING_VIEW
 		owner.client.images += landing_images
 
 /mob/observer/eye/landing/release(var/mob/user)
-	if(owner && owner.client)
+	if(owner && owner.client && owner == user)
 		owner.client.view = world.view
 		// Removing images is inconsistent if the image is not rendered on the screen at the time of removal, so it's safer to reset the client's images altogether.
 		owner.client.images.Cut()
-	..()
+	. = ..()
 
 // The eye can see turfs for landing, but is unable to see anything else.
 /mob/observer/eye/landing/additional_sight_flags()
