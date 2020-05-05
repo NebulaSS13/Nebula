@@ -221,6 +221,7 @@
 #include "code\controllers\subsystems\zcopy.dm"
 #include "code\controllers\subsystems\initialization\character_setup.dm"
 #include "code\controllers\subsystems\initialization\codex.dm"
+#include "code\controllers\subsystems\initialization\computer_networks.dm"
 #include "code\controllers\subsystems\initialization\cuisine.dm"
 #include "code\controllers\subsystems\initialization\customitems.dm"
 #include "code\controllers\subsystems\initialization\fabrication.dm"
