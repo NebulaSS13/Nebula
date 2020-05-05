@@ -51,8 +51,8 @@
 		if(istype(F))
 
 			// Drink more water!
-			var/consuming = min(F.fluid_amount, fluid_consumption_per_tick)
-			LOSE_FLUID(F, consuming)
+			var/consuming = min(F.reagents.total_volume, fluid_consumption_per_tick)
+			F.reagents.remove_any(consuming)
 			T.show_bubbles()
 
 			// Gas production.

@@ -3,7 +3,7 @@
 /decl/reagent/water
 	name = "water"
 	description = "A ubiquitous chemical substance composed of hydrogen and oxygen."
-	color = "#0064c8"
+	color = COLOR_OCEAN
 	scannable = 1
 	metabolism = REM * 10
 	taste_description = "water"
