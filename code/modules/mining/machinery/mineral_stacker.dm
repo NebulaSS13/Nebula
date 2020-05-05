@@ -1,6 +1,5 @@
 /obj/machinery/mineral/stacking_machine
 	name = "stacking machine"
-	icon_state = "stacker"
 	console = /obj/machinery/computer/mining
 	input_turf =  EAST
 	output_turf = WEST
@@ -53,3 +52,9 @@
 		. = TRUE
 	if(. && console)
 		console.updateUsrDialog()
+
+/obj/machinery/mineral/stacking_machine/on_update_icon()
+	if(panel_open)
+		icon_state = "stacker-open"
+	else
+		icon_state = "stacker"

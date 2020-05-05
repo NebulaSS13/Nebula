@@ -1,12 +1,17 @@
 /obj/machinery/computer/mining
 	name = "ore processing console"
 	icon = 'icons/obj/machines/mining_machines.dmi'
-	icon_state = "console"
 	var/obj/machinery/mineral/connected
 
 // Apparently mapped on walls, so must do this to avoid being hidden behind them.
 /obj/machinery/computer/mining/hide()
 	return
+
+/obj/machinery/computer/mining/on_update_icon()
+	if(panel_open)
+		icon_state = "console-open"
+	else
+		icon_state = "console"
 
 /obj/machinery/computer/mining/interface_interact(var/mob/user)
 	interact(user)
