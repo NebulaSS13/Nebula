@@ -4,12 +4,18 @@
 	item_icon_state = "wiredrod"
 	progress_message = "You wind the cable cuffs around the top of the rod."
 	completion_trigger_type = /obj/item/stack/material/rods
+	stack_material = null
 	stack_consume_amount = 1
 	next_stages = list(
 		/decl/crafting_stage/spear_blade_shard, 
 		/decl/crafting_stage/spear_blade_blade, 
 		/decl/crafting_stage/stunprod_wirecutters
 	)
+	
+/decl/crafting_stage/material/stunprod_rod/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
+	. = ..()
+	if(.)
+		target.set_material(thing?.material.type)
 
 /decl/crafting_stage/spear_blade_shard
 	completion_trigger_type = /obj/item/material/shard
@@ -19,6 +25,14 @@
 /decl/crafting_stage/spear_blade_shard/get_product(var/obj/item/work)
 	var/obj/item/material/shard/blade = locate() in work
 	. = ispath(product, /obj/item/material) && new product(get_turf(work), blade && blade.material && blade.material.type)
+	if(ispath(product,  /obj/item/material/twohanded/spear))
+		var/obj/item/material/twohanded/spear/S = .
+		var/obj/item/handcuffs/cable/C = locate() in work
+		if(C)
+			S.cable_color = C.color
+		if(work.material)
+			S.shaft_material = work.material.type
+		S.update_icon()
 
 /decl/crafting_stage/spear_blade_blade
 	completion_trigger_type = /obj/item/material/butterflyblade

@@ -105,10 +105,9 @@
 /obj/item/material/twohanded/spear
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
+	on_mob_icon = 'icons/obj/items/weapon/spear.dmi'
+	icon_state = "preview"
 	icon = 'icons/obj/items/weapon/spear.dmi'
-	icon_state = "spearglass0"
-	base_icon = "spearglass"
-	applies_material_colour = 0
 	material_force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_material_force_multiplier = 0.20
 	thrown_material_force_multiplier = 0.6 // 20 when thrown with weight 15 (glass)
@@ -119,12 +118,65 @@
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	material = MAT_GLASS
 	does_spin = FALSE
+	var/shaft_material = MAT_STEEL
+	var/cable_color = COLOR_RED
 
 /obj/item/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
-		new /obj/item/stack/material/rods(get_turf(src), 1)
-		new /obj/item/stack/cable_coil(get_turf(src), 3)
+		new /obj/item/stack/material/rods(get_turf(src), 1, shaft_material)
+		new /obj/item/stack/cable_coil(get_turf(src), 3, cable_color)
 	..()
+
+/obj/item/material/twohanded/spear/on_update_icon()
+	overlays.Cut()
+	if(applies_material_colour && material)
+		color = material.icon_colour
+		alpha = 100 + material.opacity * 255
+	overlays += get_shaft_overlay("shaft")
+	overlays += get_cable_overlay("cable")
+
+/obj/item/material/twohanded/spear/experimental_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(wielded)
+		ret.icon_state += "_wielded"
+	ret.overlays += get_shaft_overlay("[ret.icon_state]_shaft")
+	ret.overlays += get_cable_overlay("[ret.icon_state]_cable")
+	return ret
+
+/obj/item/material/twohanded/spear/proc/get_shaft_overlay(var/base_state)
+	var/mutable_appearance/shaft = new()
+	shaft.icon = icon
+	shaft.icon_state = base_state
+	var/material/M = SSmaterials.get_material_datum(shaft_material)
+	shaft.color = M.icon_colour
+	shaft.alpha = 155 + 100 * M.opacity
+	shaft.appearance_flags = RESET_COLOR | RESET_ALPHA
+	shaft.plane = FLOAT_PLANE
+	return shaft
+
+/obj/item/material/twohanded/spear/proc/get_cable_overlay(var/base_state)
+	var/mutable_appearance/cable = new()
+	cable.icon = icon
+	cable.icon_state = base_state
+	cable.color = cable_color
+	cable.appearance_flags = RESET_COLOR | RESET_ALPHA
+	cable.plane = FLOAT_PLANE
+	return cable
+
+/obj/item/material/twohanded/spear/diamond
+	material = MAT_DIAMOND
+	shaft_material = MAT_GOLD
+	cable_color = COLOR_PURPLE
+
+/obj/item/material/twohanded/spear/steel
+	material = MAT_STEEL
+	shaft_material = MAT_WOOD
+	cable_color = COLOR_GREEN
+
+/obj/item/material/twohanded/spear/supermatter
+	material = MAT_SUPERMATTER
+	shaft_material = MAT_EBONY
+	cable_color = COLOR_INDIGO
 
 /obj/item/material/twohanded/baseballbat
 	name = "bat"
