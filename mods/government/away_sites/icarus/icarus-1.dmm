@@ -363,7 +363,7 @@
 	dir = 1
 	},
 /obj/structure/table/steel,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bz" = (
@@ -471,7 +471,7 @@
 /area/icarus/vessel)
 "bO" = (
 /obj/structure/table/steel,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bP" = (

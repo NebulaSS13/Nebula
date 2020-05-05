@@ -156,7 +156,7 @@
 		/obj/item/storage/pill_bottle/antidepressants,
 		/obj/item/chems/pill/stimulants,
 		/obj/item/material/clipboard,
-		/obj/item/folder/white,
+		/obj/item/folder/cyan,
 		/obj/item/taperecorder,
 		/obj/item/tape/random = 3,
 		/obj/item/camera,
