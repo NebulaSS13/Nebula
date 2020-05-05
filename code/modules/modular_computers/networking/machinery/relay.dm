@@ -25,6 +25,6 @@
 
 /obj/machinery/network/relay/on_update_icon()
 	if(operable())
-		icon_state = "bus"
+		icon_state = panel_open ? "relay_o" : "relay"
 	else
-		icon_state = "bus_off"
+		icon_state = panel_open ? "relay_o_off" : "relay_off"
