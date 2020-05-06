@@ -61,33 +61,13 @@
 	mix_message = "The solution thickens slowly into a glossy liquid."
 
 /datum/chemical_reaction/anfo
-	name = "EZ-ANFO"
+	name = "Fertilizer ANFO"
 	result = /decl/material/anfo
 	required_reagents = list(
-		/decl/material/toxin/fertilizer/eznutrient = 20, 
+		/decl/material/toxin/fertilizer = 20, 
 		MAT_FUEL = 10
 	)
 	result_amount = 15
-	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
-
-/datum/chemical_reaction/anfo2
-	name = "Left 4 ANFO"
-	result = /decl/material/anfo
-	required_reagents = list(
-		/decl/material/toxin/fertilizer/left4zed = 10,
-		MAT_FUEL = 5
-	)
-	result_amount = 10
-	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
-
-/datum/chemical_reaction/anfo3
-	name = "Robust ANFO"
-	result = /decl/material/anfo
-	required_reagents = list(
-		/decl/material/toxin/fertilizer/robustharvest = 15,
-		MAT_FUEL = 5
-	)
-	result_amount = 10
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo4

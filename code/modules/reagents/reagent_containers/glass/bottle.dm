@@ -135,7 +135,6 @@
 	reagents.add_reagent(MAT_AMMONIA, 60)
 	update_icon()
 
-
 /obj/item/chems/glass/bottle/eznutrient
 	name = "\improper EZ NUtrient bottle"
 	desc = "A small bottle."
@@ -143,9 +142,8 @@
 
 /obj/item/chems/glass/bottle/eznutrient/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/toxin/fertilizer/eznutrient, 60)
+	reagents.add_reagent(/decl/material/toxin/fertilizer, 60)
 	update_icon()
-
 
 /obj/item/chems/glass/bottle/left4zed
 	name = "\improper Left-4-Zed bottle"
@@ -154,7 +152,8 @@
 
 /obj/item/chems/glass/bottle/left4zed/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/toxin/fertilizer/left4zed, 60)
+	reagents.add_reagent(/decl/material/toxin/fertilizer, 45)
+	reagents.add_reagent(/decl/material/mutagenics, 15)
 	update_icon()
 
 
@@ -165,7 +164,8 @@
 
 /obj/item/chems/glass/bottle/robustharvest/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/toxin/fertilizer/robustharvest, 60)
+	reagents.add_reagent(/decl/material/toxin/fertilizer, 45)
+	reagents.add_reagent(/decl/material/toxin/bromide, 15)
 	update_icon()
 
 /obj/item/chems/glass/bottle/pacid

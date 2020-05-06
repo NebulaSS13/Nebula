@@ -172,15 +172,6 @@
 	heating_products = null
 	hidden_from_codex = TRUE
 
-/decl/material/toxin/fertilizer/eznutrient
-	name = "EZ Nutrient"
-
-/decl/material/toxin/fertilizer/left4zed
-	name = "Left-4-Zed"
-
-/decl/material/toxin/fertilizer/robustharvest
-	name = "Robust Harvest"
-
 /decl/material/toxin/plantbgone
 	name = "Plant-B-Gone"
 	lore_text = "A harmful toxic mixture to kill plantlife. Do not ingest!"

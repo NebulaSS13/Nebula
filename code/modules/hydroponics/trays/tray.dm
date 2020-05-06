@@ -67,9 +67,7 @@
 		MAT_AMMONIA =                        1,
 		/decl/material/nutriment =                      1,
 		/decl/material/adminordrazine =                 1,
-		/decl/material/toxin/fertilizer/eznutrient =    1,
-		/decl/material/toxin/fertilizer/robustharvest = 1,
-		/decl/material/toxin/fertilizer/left4zed =      1
+		/decl/material/toxin/fertilizer =    1,
 		)
 	var/global/list/weedkiller_reagents = list(
 		MAT_HYDRAZINE =          -4,
@@ -110,17 +108,15 @@
 		MAT_AMMONIA =                         list(  0.5,  0,   0  ),
 		/decl/material/nutriment =                       list(  0.5,  0.1, 0  ),
 		MAT_RADIUM =                          list( -1.5,  0,   0.2),
-		/decl/material/adminordrazine =                  list(  1,    1,   1  ),
-		/decl/material/toxin/fertilizer/robustharvest =  list(  0,    0.2, 0  ),
-		/decl/material/toxin/fertilizer/left4zed =       list(  0,    0,   0.2)
+		/decl/material/adminordrazine =                  list(  1,    1,   1  )
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
 	var/global/list/mutagenic_reagents = list(
 		MAT_RADIUM =  8,
-		/decl/material/mutagenics = 15,
-		/decl/material/toxin/fertilizer/left4zed = 30)
+		/decl/material/mutagenics = 30
+	)
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
 	if(mechanical && !usr.incapacitated() && Adjacent(usr))
