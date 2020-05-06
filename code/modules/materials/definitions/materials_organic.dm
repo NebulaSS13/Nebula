@@ -12,9 +12,6 @@
 	stack_origin_tech = "{'materials':3}"
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chem_products = list(
-				/decl/material/toxin/plasticide = 20
-				)
 	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
 	wall_support_value = 10

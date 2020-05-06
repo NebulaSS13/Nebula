@@ -8,7 +8,6 @@
 	metabolism = REM * 10
 	taste_description = "water"
 	value = 0.01
-	chem_products = list(MAT_WATER = 20)
 	gas_tile_overlay = "generic"
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 30

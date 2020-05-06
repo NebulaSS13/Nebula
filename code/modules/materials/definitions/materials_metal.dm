@@ -12,9 +12,6 @@
 	icon_colour = "#007a00"
 	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':5}"
-	chem_products = list(
-		MAT_URANIUM = 20
-	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_MATTE
 	sale_price = 2
@@ -47,9 +44,6 @@
 	stack_origin_tech = "{'materials':4}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-				/decl/material/gold = 20
-				)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_SHINY
 	ore_smelts_to = MAT_GOLD
@@ -95,10 +89,6 @@
 	stack_origin_tech = "{'materials':2}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-		MAT_COPPER = 12,
-		MAT_SILVER = 8
-	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_COPPER
 	ore_result_amount = 5
@@ -121,9 +111,6 @@
 	stack_origin_tech = "{'materials':3}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-		MAT_SILVER = 20
-	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_SILVER
 	ore_result_amount = 5
@@ -148,10 +135,6 @@
 	icon_reinf = "reinf_over"
 	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
-	chem_products = list(
-		MAT_IRON = 19.6,
-		MAT_GRAPHITE = 0.4
-	)
 	alloy_materials = list(
 		MAT_IRON = 1875, 
 		MAT_GRAPHITE = 1875
@@ -183,9 +166,6 @@
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/aluminium
-	chem_products = list(
-				/decl/material/aluminium = 20
-				)
 	integrity = 125
 	weight = MAT_VALUE_LIGHT
 	icon_base = "solid"
@@ -325,9 +305,6 @@
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chem_products = list(
-		MAT_IRON = 20
-	)
 	sale_price = 1
 	value = 5
 	reflectiveness = MAT_VALUE_MATTE

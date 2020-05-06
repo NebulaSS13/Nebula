@@ -71,7 +71,6 @@
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
 	var/is_fusion_fuel
-	var/list/chem_products				  //Used with the grinder to produce chemicals.
 	var/hidden_from_codex
 	var/lore_text = "A nondescript material."
 	var/mechanics_text

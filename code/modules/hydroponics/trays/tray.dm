@@ -103,7 +103,7 @@
 		MAT_HYDRAZINE =                       list( -2,    0,   0  ),
 		/decl/material/phosphorus =                      list( -0.75, 0,   0  ),
 		/decl/material/drink/sodawater =                 list(  0.1,  0,   0  ),
-		MAT_ACID =                            list( -1,    0,   0  ),
+		MAT_ACID_SULPHURIC =                            list( -1,    0,   0  ),
 		MAT_ACID_HYDROCHLORIC =               list( -1,    0,   0  ),
 		MAT_ACID_POLYTRINIC =                   list( -2,    0,   0  ),
 		/decl/material/toxin/plantbgone =                list( -2,    0,   0.2),

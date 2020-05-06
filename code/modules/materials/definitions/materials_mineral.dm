@@ -9,10 +9,6 @@
 	ore_scan_icon = "mineral_uncommon"
 	stack_origin_tech = "{'materials':5}"
 	ore_icon_overlay = "nugget"
-	chem_products = list(
-		/decl/material/radium = 10,
-		MAT_URANIUM = 10
-		)
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	sale_price = 2
@@ -30,11 +26,6 @@
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	chem_products = list(
-		MAT_GRAPHITE = 15,
-		/decl/material/toxin/plasticide = 5,
-		/decl/material/acetone = 5
-		)
 	sale_price = 1
 
 /decl/material/graphite/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -65,9 +56,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#effffe"
-	chem_products = list(
-		/decl/material/silicon = 20
-		)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -85,10 +73,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#ccc9a3"
-	chem_products = list(
-		/decl/material/sulfur = 15,
-		MAT_IRON = 5
-		)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -108,9 +92,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#e5becb"
-	chem_products = list(
-		/decl/material/lithium = 20
-		)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -128,9 +109,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#e54e4e"
-	chem_products = list(
-		/decl/material/mercury  = 20
-	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -148,9 +126,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#acad95"
-	chem_products = list(
-		/decl/material/phosphorus = 20
-	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -168,9 +143,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#d1c0bc"
-	chem_products = list(
-		/decl/material/sodium = 20
-	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -188,9 +160,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#b77464"
-	chem_products = list(
-		/decl/material/potassium = 20
-		)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -207,9 +176,6 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	icon_colour = "#d8ad97"
-	chem_products = list(
-		MAT_ALUMINIUM = 15
-	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -228,9 +194,6 @@
 	ore_compresses_to = MAT_SANDSTONE
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
-	chem_products = list(
-		/decl/material/silicon = 20
-		)
 
 /decl/material/sand/clay
 	name = "clay"
@@ -254,9 +217,6 @@
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
-	chem_products = list(
-		MAT_PHORON = 20
-		)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_name = "phoron"
 	ore_compresses_to = MAT_PHORON

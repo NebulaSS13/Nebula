@@ -53,9 +53,6 @@
 	sheet_plural_name = "bricks"
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chem_products = list(
-		/decl/material/silicon = 20
-		)
 	sale_price = 1
 	value = 4
 
@@ -76,7 +73,6 @@
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	chem_products = null
 	sale_price = 4
 	value = 20
 

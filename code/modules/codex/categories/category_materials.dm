@@ -67,13 +67,6 @@
 				material_info += "It is ~[comparison] times structurally weaker than steel."
 			else
 				material_info += "It is ~[comparison] times more durable than steel."
-
-			if(LAZYLEN(mat.chem_products))
-				var/chems = list()
-				for(var/chemial in mat.chem_products)
-					var/decl/material/R = chemial
-					chems += "[initial(R.name)] ([mat.chem_products[chemial]]u)"
-				material_info += "The following chemicals can be extracted from it (per [mat.sheet_singular_name]):<br>[english_list(chems)]"
 			
 			if(LAZYLEN(mat.alloy_materials))
 				var/parts = list()

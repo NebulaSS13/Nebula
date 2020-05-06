@@ -99,14 +99,7 @@
 		to_chat(user, SPAN_NOTICE("\The [src] cannot fit \the [O]."))
 		return
 
-	if(istype(O,/obj/item/stack/material))
-		var/obj/item/stack/material/stack = O
-		var/decl/material/material = stack.get_material()
-		if(!LAZYLEN(material.chem_products))
-			to_chat(user, SPAN_NOTICE("\The [material.name] is unable to produce any usable reagents."))
-			return TRUE
-
-	else if(!O.reagents?.total_volume)
+	if(!istype(O,/obj/item/stack/material) && !O.reagents?.total_volume)
 		to_chat(user, SPAN_NOTICE("\The [O] is not suitable for grinding."))
 		return TRUE
 
@@ -203,25 +196,18 @@
 		if(remaining_volume <= 0)
 			break
 
+		#define UNITS_PER_SHEET 20
 		var/obj/item/stack/material/stack = O
 		if(istype(stack))
 			var/decl/material/material = stack.get_material()
-			if(!LAZYLEN(material.chem_products))
-				break
-
-			var/list/chem_products = material.chem_products
-			var/sheet_volume = 0
-			for(var/chem in chem_products)
-				sheet_volume += chem_products[chem]
-
-			var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/sheet_volume)))
+			var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/UNITS_PER_SHEET)))
 			if(amount_to_take)
 				stack.use(amount_to_take)
 				if(QDELETED(stack))
 					holdingitems -= stack
-				for(var/chem in chem_products)
-					beaker.reagents.add_reagent(chem, (amount_to_take*chem_products[chem]*skill_factor))
+				beaker.reagents.add_reagent(material.type, (amount_to_take * UNITS_PER_SHEET * skill_factor))
 				continue
+		#undef UNITS_PER_SHEET
 
 		if(O.reagents)
 			O.reagents.trans_to(beaker, O.reagents.total_volume, skill_factor)

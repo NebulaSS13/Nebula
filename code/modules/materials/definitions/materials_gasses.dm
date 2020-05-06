@@ -7,7 +7,6 @@
 /decl/material/lithium
 	name = "lithium"
 	lore_text = "A chemical element, used as antidepressant."
-	chem_products = list(/decl/material/lithium = 20)
 	is_fusion_fuel = TRUE
 	gas_flags = XGM_GAS_DEFAULT_GAS
 
@@ -24,7 +23,6 @@
 /decl/material/helium
 	name = "helium"
 	lore_text = "A noble gas. It makes your voice squeaky."
-	chem_products = list(/decl/material/helium = 20)
 	is_fusion_fuel = TRUE
 	gas_specific_heat = 80
 	gas_molar_mass = 0.004
@@ -51,7 +49,6 @@
 /decl/material/carbon_monoxide
 	name = "carbon monoxide"
 	lore_text = "A dangerous carbon comubstion byproduct."
-	chem_products = list(/decl/material/carbon_monoxide = 20)
 	gas_specific_heat = 30
 	gas_molar_mass = 0.028
 	gas_symbol_html = "CO"
@@ -90,7 +87,6 @@
 /decl/material/toxin/methyl_bromide
 	name = "methyl bromide"
 	lore_text = "A once-popular fumigant and weedkiller."
-	chem_products = list(/decl/material/toxin/methyl_bromide = 20)
 	gas_specific_heat = 42.59 
 	gas_molar_mass = 0.095	  
 	gas_symbol_html = "CH<sub>3</sub>Br"
@@ -121,7 +117,6 @@
 /decl/material/nitrous_oxide
 	name = "nitrous oxide"
 	lore_text = "An ubiquitous sedative also known as laughing gas."
-	chem_products = list(/decl/material/nitrous_oxide = 20)
 	gas_specific_heat = 40	
 	gas_molar_mass = 0.044	
 	gas_tile_overlay = "sleeping_agent"
@@ -158,7 +153,6 @@
 
 /decl/material/toxin/nitrodioxide
 	name = "nitrogen dioxide"
-	chem_products = list(/decl/material/toxin/nitrodioxide = 20)
 	icon_colour = "#ca6409"
 	gas_specific_heat = 37
 	gas_molar_mass = 0.054
@@ -238,7 +232,6 @@
 /decl/material/xenon
 	name = "xenon"
 	lore_text = "A nontoxic gas used as a general anaesthetic."
-	chem_products = list(/decl/material/xenon = 20)
 	gas_specific_heat = 3
 	gas_molar_mass = 0.054
 	gas_symbol_html = "Xe"
@@ -262,7 +255,6 @@
 /decl/material/ammonia
 	name = "ammonia"
 	lore_text = "A caustic substance commonly used in fertilizer or household cleaners."
-	chem_products = list(/decl/material/ammonia = 20)
 	gas_specific_heat = 20
 	gas_molar_mass = 0.017
 	gas_symbol_html = "NH<sub>3</sub>"
@@ -278,7 +270,6 @@
 /decl/material/toxin/chlorine
 	name = "chlorine"
 	lore_text = "A highly poisonous chemical. Smells strongly of bleach."
-	chem_products = list(/decl/material/toxin/chlorine = 20)
 	taste_description = "bleach"
 	icon_colour = "#707c13"
 	gas_overlay_limit = 0.5
@@ -291,7 +282,6 @@
 
 /decl/material/sulfurdioxide
 	name = "sulfur dioxide"
-	chem_products = list(/decl/material/sulfur = 20)
 	gas_specific_heat = 30
 	gas_molar_mass = 0.044
 	gas_symbol_html = "SO<sub>2</sub>"
@@ -313,7 +303,6 @@
 	gas_burn_product = MAT_WATER
 	gas_symbol_html = "H<sub>2</sub>"
 	gas_symbol = "H2"
-	chem_products = list(MAT_HYDRAZINE = 20)
 
 /decl/material/hydrogen/tritium
 	name = "tritium"
