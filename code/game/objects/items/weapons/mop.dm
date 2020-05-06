@@ -31,13 +31,13 @@
 	if(istype(A, /turf))
 		var/turf/T = A
 		var/obj/effect/fluid/F = locate() in T
-		if(F && F.fluid_amount > 0)
-			if(F.fluid_amount > FLUID_SHALLOW)
+		if(F && F.reagents.total_volume > 0)
+			if(F.reagents.total_volume > FLUID_SHALLOW)
 				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 			else
 				user.visible_message("<span class='notice'>\The [user] begins to mop up \the [T].</span>")
 				if(do_after(user, 40, T) && F && !QDELETED(F))
-					if(F.fluid_amount > FLUID_SHALLOW)
+					if(F.reagents.total_volume > FLUID_SHALLOW)
 						to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 					else
 						qdel(F)

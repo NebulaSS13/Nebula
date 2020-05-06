@@ -5,7 +5,7 @@
 	l_hand = /obj/item/material/knife/combat
 	r_hand = /obj/item/gun/energy/pulse_rifle/destroyer
 	r_pocket = /obj/item/grenade/smokebomb
-	shoes = /obj/item/clothing/shoes/black
+	shoes = /obj/item/clothing/shoes/color/black
 
 /decl/hierarchy/outfit/tournament_gear/red
 	name = "Tournament - Red"

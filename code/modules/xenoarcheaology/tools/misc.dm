@@ -24,7 +24,7 @@
 		new /obj/item/storage/backpack/dufflebag(src)
 	new /obj/item/clothing/under/color/white(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
-	new /obj/item/clothing/shoes/white(src)
+	new /obj/item/clothing/shoes/color/white(src)
 	new /obj/item/clothing/glasses/science(src)
 	new /obj/item/radio/headset/headset_sci(src)
 	new /obj/item/clothing/mask/gas(src)

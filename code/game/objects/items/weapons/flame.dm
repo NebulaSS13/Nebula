@@ -13,11 +13,10 @@
 	damtype = "brute"
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/flame/water_act(var/depth)
+/obj/item/flame/fluid_act(var/datum/reagents/fluids)
 	..()
 	if(!waterproof && lit)
-		if(submerged(depth))
-			extinguish(no_message = TRUE)
+		extinguish(no_message = TRUE)
 
 /proc/isflamesource(var/atom/A)
 	if(!istype(A))

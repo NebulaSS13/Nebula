@@ -4,7 +4,7 @@
 
 	uniform = /obj/item/clothing/under/color/grey
 	l_ear = /obj/item/radio/headset
-	shoes = /obj/item/clothing/shoes/black
+	shoes = /obj/item/clothing/shoes/color/black
 
 	id_slot = slot_wear_id
 	id_type = /obj/item/card/id/civilian

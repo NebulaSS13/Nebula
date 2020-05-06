@@ -74,7 +74,7 @@
 /decl/hierarchy/outfit/corpse/slavers_base/slaver1
 	name = "Dead Slaver 1"
 	uniform = /obj/item/clothing/under/johnny
-	shoes = /obj/item/clothing/shoes/black
+	shoes = /obj/item/clothing/shoes/color/black
 	glasses = /obj/item/clothing/glasses/sunglasses
 
 /obj/effect/landmark/corpse/slavers_base/slaver2
@@ -84,7 +84,7 @@
 /decl/hierarchy/outfit/corpse/slavers_base/slaver2
 	name = "Dead Slaver 2"
 	uniform = /obj/item/clothing/under/rank/corp/grayson
-	shoes = /obj/item/clothing/shoes/blue
+	shoes = /obj/item/clothing/shoes/color/blue
 
 /obj/effect/landmark/corpse/slavers_base/slaver3
 	name = "Slaver"
@@ -93,7 +93,7 @@
 /decl/hierarchy/outfit/corpse/slavers_base/slaver3
 	name = "Dead Slaver 3"
 	uniform = /obj/item/clothing/under/pirate
-	shoes = /obj/item/clothing/shoes/brown
+	shoes = /obj/item/clothing/shoes/color/brown
 
 /obj/effect/landmark/corpse/slavers_base/slaver4
 	name = "Slaver"
@@ -102,7 +102,7 @@
 /decl/hierarchy/outfit/corpse/slavers_base/slaver4
 	name = "Dead Slaver 4"
 	uniform = /obj/item/clothing/under/redcoat
-	shoes = /obj/item/clothing/shoes/brown
+	shoes = /obj/item/clothing/shoes/color/brown
 
 /obj/effect/landmark/corpse/slavers_base/slaver5
 	name = "Slaver"
@@ -111,7 +111,7 @@
 /decl/hierarchy/outfit/corpse/slavers_base/slaver5
 	name = "Dead Slaver 5"
 	uniform = /obj/item/clothing/under/sterile
-	shoes = /obj/item/clothing/shoes/orange
+	shoes = /obj/item/clothing/shoes/color/orange
 	mask = /obj/item/clothing/mask/surgical
 
 /obj/effect/landmark/corpse/slavers_base/slaver6
@@ -121,7 +121,7 @@
 /decl/hierarchy/outfit/corpse/slavers_base/slaver6
 	name = "Dead Slaver 6"
 	uniform = /obj/item/clothing/under/frontier
-	shoes = /obj/item/clothing/shoes/orange
+	shoes = /obj/item/clothing/shoes/color/orange
 
 /obj/effect/landmark/corpse/slavers_base/slave
 	name = "Slave"

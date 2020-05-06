@@ -6,7 +6,7 @@
 	var/key				// passkey for the network
 	var/address			// unique network address, cannot be set by user
 	var/network_tag		// human-readable network address, can be set by user. Networks enforce uniqueness, will change it if there's clash.
-	var/connection_type = NETWORK_CONNECTION_WIRELESS  // affects signal strength
+	var/connection_type = NETWORK_CONNECTION_STRONG_WIRELESS  // affects signal strength
 
 /datum/extension/network_device/New(datum/holder, n_id, n_key, c_type, autojoin = TRUE)
 	..()
@@ -186,6 +186,18 @@
 	else if(href_list["change_net_tag"])
 		do_change_net_tag(user)
 		return TOPIC_REFRESH
+
+/datum/extension/network_device/proc/has_access(mob/user)
+	var/datum/computer_network/network = get_network()
+	if(!network)
+		return TRUE // If not on network, always TRUE for access, as there isn't anything to access.
+	if(!user)
+		return FALSE
+	var/obj/item/card/id/network/id = user.GetIdCard()
+	if(id && istype(id, /obj/item/card/id/network) && network.access_controller && (id.user_id in network.access_controller.administrators))
+		return TRUE
+	var/obj/M = holder
+	return M.allowed(user)
 
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy

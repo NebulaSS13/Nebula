@@ -13,6 +13,7 @@ GLOBAL_LIST_EMPTY(computer_networks)
 	var/list/relays = list()
 
 	var/datum/extension/network_device/broadcaster/router/router
+	var/datum/extension/network_device/acl/access_controller
 
 	var/network_features_enabled = NETWORK_ALL_FEATURES
 	var/intrusion_detection_enabled
@@ -55,6 +56,8 @@ GLOBAL_LIST_EMPTY(computer_networks)
 	else if(istype(D, /datum/extension/network_device/broadcaster/relay))
 		relays |= D
 		add_log("Relay ONLINE", D.network_tag)
+	else if(istype(D, /datum/extension/network_device/acl) && !access_controller)
+		set_access_controller(D)
 	return TRUE
 
 /datum/computer_network/proc/remove_device(datum/extension/network_device/D)
@@ -78,6 +81,9 @@ GLOBAL_LIST_EMPTY(computer_networks)
 		if(!router)
 			add_log("Router offline, network shutting down", D.network_tag)
 			qdel(src)
+	if(D == access_controller)
+		access_controller = null
+		add_log("Access controller offline. Network security offline.", D.network_tag)
 	return TRUE
 
 /datum/computer_network/proc/get_unique_tag(nettag)
@@ -94,7 +100,12 @@ GLOBAL_LIST_EMPTY(computer_networks)
 	network_key = router.key
 	change_id(router.network_id)
 	devices |= D
-	add_log("New main router set", router.network_tag)
+	add_log("New main router set.", router.network_tag)
+
+/datum/computer_network/proc/set_access_controller(datum/extension/network_device/D)
+	access_controller = D
+	devices |= D
+	add_log("New main access controller set.", D.network_tag)
 
 /datum/computer_network/proc/check_connection(datum/extension/network_device/D, specific_action)
 	if(!router)
@@ -129,6 +140,7 @@ GLOBAL_LIST_EMPTY(computer_networks)
 /datum/computer_network/proc/change_id(new_id)
 	if(new_id == network_id)
 		return
+	// Update connected devices.
 	for(var/datum/extension/network_device/D in devices)
 		if(D.network_id != new_id)
 			D.network_id = new_id
@@ -173,3 +185,17 @@ GLOBAL_LIST_EMPTY(computer_networks)
 		var/datum/computer_network/net = GLOB.computer_networks[id]
 		if(net.router && ARE_Z_CONNECTED(get_z(net.router.holder), get_z(T)))
 			return net
+
+/datum/computer_network/proc/get_mainframes_by_role(mainframe_role = MF_ROLE_FILESERVER, mob/user)
+	// if administrator, give full access.
+	if(!user)
+		return mainframes_by_role[mainframe_role]
+	var/obj/item/card/id/network/id = user.GetIdCard()
+	if(id && istype(id, /obj/item/card/id/network) && access_controller && (id.user_id in access_controller.administrators))
+		return mainframes_by_role[mainframe_role]
+	var/list/allowed_mainframes = list()
+	for(var/datum/extension/network_device/D in mainframes_by_role[mainframe_role])
+		if(D.has_access(user))
+			allowed_mainframes |= D
+	return allowed_mainframes
+

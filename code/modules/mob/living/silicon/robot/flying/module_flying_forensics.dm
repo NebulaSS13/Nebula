@@ -16,6 +16,7 @@
 		/obj/item/storage/evidence,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
+		/obj/item/gripper/clerical,
 		/obj/item/flash,
 		/obj/item/borg/sight/hud/sec,
 		/obj/item/taperoll/police,

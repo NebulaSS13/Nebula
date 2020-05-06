@@ -34,10 +34,6 @@
 	SSpersistence.forget_value(src, /datum/persistent/filth)
 	. = ..()
 
-/obj/effect/decal/cleanable/water_act(var/depth)
-	..()
-	qdel(src)
-
 /obj/effect/decal/cleanable/clean_blood(var/ignore = 0)
 	if(!ignore)
 		qdel(src)
@@ -47,3 +43,7 @@
 /obj/effect/decal/cleanable/proc/set_cleanable_scent()
 	if(cleanable_scent)
 		set_extension(src, /datum/extension/scent/custom, cleanable_scent, scent_intensity, scent_descriptor, scent_range)
+
+/obj/effect/decal/cleanable/fluid_act(var/datum/reagents/fluid)
+	reagents?.trans_to(fluid, reagents.total_volume)
+	qdel(src)

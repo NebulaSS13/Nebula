@@ -53,7 +53,6 @@
 #include "system\psionics\interface\ui.dm"
 #include "system\psionics\interface\ui_hub.dm"
 #include "system\psionics\interface\ui_toggles.dm"
-#include "system\psionics\mob\borer_power.dm"
 #include "system\psionics\mob\mob.dm"
 #include "system\psionics\mob\mob_assay.dm"
 #include "system\psionics\mob\mob_interactions.dm"

@@ -7,7 +7,7 @@
 	name = OUTFIT_JOB_NAME("Default Scientist")
 	l_ear = /obj/item/radio/headset/headset_sci
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
-	shoes = /obj/item/clothing/shoes/white
+	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/science
 	uniform = /obj/item/clothing/under/color/white
 
@@ -34,7 +34,7 @@
 	l_hand = /obj/item/storage/firstaid/adv
 	r_pocket = /obj/item/flashlight/pen
 	l_ear = /obj/item/radio/headset/headset_med
-	shoes = /obj/item/clothing/shoes/white
+	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store
 
