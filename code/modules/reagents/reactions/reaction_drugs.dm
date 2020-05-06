@@ -1,13 +1,21 @@
 /datum/chemical_reaction/antitoxins
 	name = "Antitoxins"
 	result = /decl/material/antitoxins
-	required_reagents = list(/decl/material/silicon = 1, /decl/material/potassium = 1, MAT_AMMONIA = 1)
+	required_reagents = list(
+		MAT_SILICON = 1, 
+		MAT_POTASSIUM = 1, 
+		MAT_AMMONIA = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/painkillers
 	name = "Painkillers"
 	result = /decl/material/painkillers
-	required_reagents = list(/decl/material/adrenaline = 1, /decl/material/ethanol = 1, /decl/material/acetone = 1)
+	required_reagents = list(
+		/decl/material/adrenaline = 1, 
+		/decl/material/ethanol = 1, 
+		/decl/material/acetone = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/antiseptic
@@ -24,7 +32,7 @@
 	name = "Unstable mutagen"
 	result = /decl/material/mutagenics
 	required_reagents = list(
-		/decl/material/radium = 1, 
+		MAT_RADIUM = 1, 
 		MAT_PHOSPHORUS = 1, 
 		MAT_ACID_HYDROCHLORIC = 1
 	)
@@ -33,7 +41,11 @@
 /datum/chemical_reaction/psychoactives
 	name = "Psychoactives"
 	result = /decl/material/psychoactives
-	required_reagents = list(/decl/material/mercury = 1, /decl/material/nutriment/sugar = 1, /decl/material/lithium = 1)
+	required_reagents = list(
+		MAT_MERCURY = 1, 
+		/decl/material/nutriment/sugar = 1, 
+		MAT_LITHIUM = 1
+	)
 	result_amount = 3
 	minimum_temperature = 50 CELSIUS
 	maximum_temperature = (50 CELSIUS) + 100
@@ -43,7 +55,7 @@
 	result = /decl/material/lube
 	required_reagents = list(
 		MAT_WATER = 1, 
-		/decl/material/silicon = 1, 
+		MAT_SILICON = 1, 
 		/decl/material/acetone = 1
 	)
 	result_amount = 4
@@ -55,27 +67,34 @@
 	required_reagents = list(
 		MAT_ACID_SULPHURIC = 1, 
 		MAT_ACID_HYDROCHLORIC = 1, 
-		/decl/material/potassium = 1
+			 = 1
 	)
 	result_amount = 3
 
 /datum/chemical_reaction/antirads
 	name = "Anti-Radiation Medication"
 	result = /decl/material/antirads
-	required_reagents = list(/decl/material/radium = 1, /decl/material/antitoxins = 1)
+	required_reagents = list(
+		MAT_RADIUM = 1, 
+		/decl/material/antitoxins = 1
+	)
 	result_amount = 2
 
 /datum/chemical_reaction/narcotics
 	name = "Narcotics"
 	result = /decl/material/narcotics
-	required_reagents = list(/decl/material/mercury = 1, /decl/material/acetone = 1, /decl/material/nutriment/sugar = 1)
+	required_reagents = list(
+		MAT_MERCURY = 1, 
+		/decl/material/acetone = 1, 
+		/decl/material/nutriment/sugar = 1
+	)
 	result_amount = 2
 
 /datum/chemical_reaction/burn_meds
 	name = "Anti-Burn Medication"
 	result = /decl/material/burn_meds
 	required_reagents = list(
-		/decl/material/silicon = 1, 
+		MAT_SILICON = 1, 
 		MAT_GRAPHITE = 1
 	)
 	result_amount = 2
@@ -84,7 +103,11 @@
 /datum/chemical_reaction/presyncopics
 	name = "Presyncopics"
 	result = /decl/material/presyncopics
-	required_reagents = list(/decl/material/potassium = 1, /decl/material/acetone = 1, /decl/material/nutriment/sugar = 1)
+	required_reagents = list(
+		MAT_POTASSIUM = 1, 
+		/decl/material/acetone = 1, 
+		/decl/material/nutriment/sugar = 1
+	)
 	minimum_temperature = 30 CELSIUS
 	maximum_temperature = 60 CELSIUS
 	result_amount = 3
@@ -186,7 +209,7 @@
 	result = /decl/material/paralytics
 	required_reagents = list(
 		/decl/material/ethanol = 1, 
-		/decl/material/mercury = 2, 
+		MAT_MERCURY = 2, 
 		MAT_HYDRAZINE = 2
 	)
 	result_amount = 1
@@ -208,7 +231,7 @@
 	name = "Hallucinogenics"
 	result = /decl/material/hallucinogenics
 	required_reagents = list(
-		/decl/material/silicon = 1, 
+		MAT_SILICON = 1, 
 		MAT_HYDRAZINE = 1, 
 		/decl/material/antitoxins = 1
 	)
@@ -250,7 +273,7 @@
 	name = "Foaming Agent"
 	result = /decl/material/foaming_agent
 	required_reagents = list(
-		/decl/material/lithium = 1, 
+		MAT_LITHIUM = 1, 
 		MAT_HYDRAZINE = 1
 	)
 	result_amount = 1
@@ -275,7 +298,10 @@
 /datum/chemical_reaction/stimulants
 	name = "Stimulants"
 	result = /decl/material/stimulants
-	required_reagents = list(/decl/material/hallucinogenics = 1, /decl/material/lithium = 1)
+	required_reagents = list(
+		/decl/material/hallucinogenics = 1, 
+		MAT_LITHIUM = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/antidepressants
@@ -291,8 +317,8 @@
 	name = "Hair Remover"
 	result = /decl/material/toxin/hair_remover
 	required_reagents = list(
-		/decl/material/radium = 1, 
-		/decl/material/potassium = 1, 
+		MAT_RADIUM = 1, 
+		MAT_POTASSIUM = 1, 
 		MAT_ACID_HYDROCHLORIC = 1
 	)
 	result_amount = 3

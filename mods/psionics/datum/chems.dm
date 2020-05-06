@@ -9,7 +9,10 @@
 /datum/chemical_reaction/synthesis/nullglass
 	name = "Soulstone"
 	result = null
-	required_reagents = list(/decl/material/blood = 15, /decl/material/crystal = 1)
+	required_reagents = list(
+		/decl/material/blood = 15, 
+		MAT_CRYSTAL_AGENT = 1
+	)
 	result_amount = 1
 
 /datum/chemical_reaction/synthesis/nullglass/get_reaction_flags(var/datum/reagents/holder)

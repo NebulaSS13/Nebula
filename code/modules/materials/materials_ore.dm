@@ -38,7 +38,7 @@
 /obj/item/ore/coal
 	material = MAT_GRAPHITE
 /obj/item/ore/glass
-	material = MAT_SAND
+	material = MAT_SILICON
 /obj/item/ore/silver
 	material = MAT_SILVER
 /obj/item/ore/gold

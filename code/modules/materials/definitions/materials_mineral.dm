@@ -100,15 +100,18 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/decl/material/cinnabar
-	name = "cinnabar"
-	ore_compresses_to = MAT_CINNABAR
+/decl/material/mercury
+	name = "mercury"
+	lore_text = "A toxic heavy metal."
+	taste_mult = 0 //mercury apparently is tasteless. IDK
+	icon_colour = "#484848"
+	ore_compresses_to = MAT_MERCURY
 	ore_name = "cinnabar"
 	ore_result_amount = 10
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#e54e4e"
+	ore_icon_colour = "#e54e4e"
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -116,6 +119,14 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	sale_price = 2
+	value = 0.5
+
+/decl/material/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	if(istype(M.loc, /turf/space))
+		M.SelfMove(pick(GLOB.cardinal))
+	if(prob(5))
+		M.emote(pick("twitch", "drool", "moan"))
+	M.adjustBrainLoss(0.1)
 
 /decl/material/phosphorus
 	name = "phosphorus"
@@ -189,22 +200,37 @@
 	ore_compresses_to = MAT_BAUXITE
 	sale_price = 1
 
-/decl/material/sand
-	name = "sand"
+/decl/material/tungsten
+	name = "tungsten"
+	lore_text = "A chemical element, and a strong oxidising agent."
+	icon_colour = COLOR_SILVER
+	ore_name = "wolframite"
+	ore_scan_icon = "mineral_common"
+	ore_icon_overlay = "lump"
+	ore_smelts_to = MAT_TUNGSTEN
+	taste_mult = 0 //no taste
+	icon_colour = "#dcdcdc"
+	value = 0.5
+
+/decl/material/silicon
+	name = "silicon"
+	lore_text = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
 	stack_type = null
 	icon_colour = "#e2dbb5"
 	ore_smelts_to = MAT_GLASS
 	ore_compresses_to = MAT_SANDSTONE
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
+	value = 0.5
 
-/decl/material/sand/clay
+/decl/material/clay
 	name = "clay"
 	icon_colour = COLOR_OFF_WHITE
 	ore_name = "clay"
 	ore_icon_overlay = "lump"
 	ore_smelts_to = MAT_CERAMIC
 	ore_compresses_to = MAT_CLAY
+	stack_type = null
 
 /decl/material/toxin/phoron
 	name = "phoron"
@@ -279,7 +305,7 @@
 	name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
-	radioactivity = 20
+	radioactivity = 1
 	stack_origin_tech = "{'bluespace':2,'materials':6,'phorontech':4}"
 	stack_type = null
 	luminescence = 3
@@ -300,3 +326,27 @@
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
+
+/decl/material/potassium
+	name = "potassium"
+	lore_text = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
+	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
+	icon_colour = "#a0a0a0"
+	value = 0.5
+	ore_name = "sylvite"
+	ore_compresses_to = MAT_POTASSIUM
+
+/decl/material/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	var/volume = REAGENT_VOLUME(holder, type)
+	if(volume > 3)
+		M.add_chemical_effect(CE_PULSE, 1)
+	if(volume > 10)
+		M.add_chemical_effect(CE_PULSE, 1)
+
+/decl/material/radium
+	name = "radium"
+	lore_text = "Radium is an alkaline earth metal. It is radioactive."
+	taste_description = "the color blue, and regret"
+	icon_colour = "#c7c7c7"
+	value = 0.5
+	radioactivity = 0.5

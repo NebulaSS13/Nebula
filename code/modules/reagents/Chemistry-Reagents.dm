@@ -18,11 +18,14 @@
 		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
-	if(fuel_value && istype(T))
-		var/removing = Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
-		if(removing > 0)
-			new /obj/effect/decal/cleanable/liquid_fuel(T, removing)
-			holder.remove_reagent(type, removing)
+	if(istype(T))
+		if(fuel_value)
+			var/removing = Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+			if(removing > 0)
+				new /obj/effect/decal/cleanable/liquid_fuel(T, removing)
+				holder.remove_reagent(type, removing)
+		if(radioactivity >= 0.5 && REAGENT_VOLUME(holder, type) >= 3 && !istype(T, /turf/space) && !(locate(/obj/effect/decal/cleanable/greenglow) in T))
+			new /obj/effect/decal/cleanable/greenglow(T)
 #undef FLAMMABLE_LIQUID_DIVISOR
 
 /decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
@@ -71,6 +74,8 @@
 			H.take_organ_damage(0, removed * (pH-10))
 		else if(pH <= 3)
 			H.take_organ_damage(0, removed * ((4-pH)*2))
+	if(radioactive)
+		M.apply_damage(radioactive * 10 * removed, IRRADIATE, armor_pen = 100)
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)

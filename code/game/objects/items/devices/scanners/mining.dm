@@ -91,7 +91,7 @@
 			var/data_value = 1
 
 			switch(metal)
-				if(MAT_SAND, MAT_GRAPHITE, MAT_IRON)
+				if(MAT_SILICON, MAT_GRAPHITE, MAT_IRON)
 					ore_type = ORE_SURFACE
 				if(MAT_GOLD, MAT_SILVER, MAT_DIAMOND, MAT_RUTILE)
 					ore_type = ORE_PRECIOUS

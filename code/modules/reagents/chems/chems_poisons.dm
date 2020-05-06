@@ -32,7 +32,11 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	heating_point = 61 CELSIUS
-	heating_products = list(/decl/material/potassium, /decl/material/acetone, /decl/material/nutriment/sugar)
+	heating_products = list(
+		MAT_POTASSIUM, 
+		/decl/material/acetone, 
+		/decl/material/nutriment/sugar
+	)
 	value = 1.5
 
 /decl/material/presyncopics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)

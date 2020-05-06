@@ -102,7 +102,7 @@
 
 /obj/item/slime_extract/adamantine/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/crystal, 10)
+	reagents.add_reagent(MAT_CRYSTAL_AGENT, 10)
 
 /obj/item/slime_extract/bluespace
 	name = "bluespace slime extract"

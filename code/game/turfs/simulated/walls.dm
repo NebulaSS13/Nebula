@@ -228,7 +228,7 @@
 	return 1
 
 /turf/simulated/wall/proc/radiate()
-	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity / 2 : 0)
+	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity * 5 : 0)
 	if(!total_radiation)
 		return
 

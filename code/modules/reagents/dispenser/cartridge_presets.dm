@@ -11,24 +11,24 @@
 
 	// Chemistry
 	hydrazine	spawn_reagent = MAT_HYDRAZINE
-	lithium		spawn_reagent = /decl/material/lithium
+	lithium		spawn_reagent = MAT_LITHIUM
 	graphite	spawn_reagent = MAT_GRAPHITE
 	ammonia		spawn_reagent = MAT_AMMONIA
 	acetone		spawn_reagent = /decl/material/acetone
 	sodium		spawn_reagent = /decl/material/sodium
 	aluminium	spawn_reagent = MAT_ALUMINIUM
-	silicon		spawn_reagent = /decl/material/silicon
+	silicon		spawn_reagent = MAT_SILICON
 	phosphorus	spawn_reagent = MAT_PHOSPHORUS
 	sulfur		spawn_reagent = /decl/material/sulfur
 	hclacid		spawn_reagent = MAT_ACID_HYDROCHLORIC
-	potassium	spawn_reagent = /decl/material/potassium
+	potassium	spawn_reagent = MAT_POTASSIUM
 	iron		spawn_reagent = MAT_IRON
 	copper		spawn_reagent = MAT_COPPER
-	mercury		spawn_reagent = /decl/material/mercury
-	radium		spawn_reagent = /decl/material/radium
+	mercury		spawn_reagent = MAT_MERCURY
+	radium		spawn_reagent = MAT_RADIUM
 	ethanol		spawn_reagent = /decl/material/ethanol
 	sacid		spawn_reagent = MAT_ACID_SULPHURIC
-	tungsten	spawn_reagent = /decl/material/tungsten
+	tungsten	spawn_reagent = MAT_TUNGSTEN
 
 	// Bar, alcoholic
 	beer		spawn_reagent = /decl/material/ethanol/beer

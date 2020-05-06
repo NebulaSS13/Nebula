@@ -29,11 +29,11 @@
 			owner.adjustToxLoss(0.3)
 
 	if(is_bruised())
-		if(prob(5) && REAGENT_VOLUME(reagents, /decl/material/potassium) < 5)
-			reagents.add_reagent(/decl/material/potassium, REM*5)
+		if(prob(5) && REAGENT_VOLUME(reagents, MAT_POTASSIUM) < 5)
+			reagents.add_reagent(MAT_POTASSIUM, REM*5)
 	if(is_broken())
-		if(REAGENT_VOLUME(owner.reagents, /decl/material/potassium) < 15)
-			owner.reagents.add_reagent(/decl/material/potassium, REM*2)
+		if(REAGENT_VOLUME(owner.reagents, MAT_POTASSIUM) < 15)
+			owner.reagents.add_reagent(MAT_POTASSIUM, REM*2)
 
 	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
 	if(!owner.chem_effects[CE_ANTITOX])

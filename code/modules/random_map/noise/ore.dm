@@ -55,7 +55,7 @@
 			if(!priority_process)
 				CHECK_TICK
 			T.resources = list()
-			T.resources[MAT_SAND] =     rand(3,5)
+			T.resources[MAT_SILICON] =     rand(3,5)
 			T.resources[MAT_CLAY] =     rand(3,5)
 			T.resources[MAT_GRAPHITE] = rand(3,5)
 

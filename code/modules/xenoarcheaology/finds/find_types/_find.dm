@@ -14,7 +14,7 @@ var/global/list/responsive_carriers = list(
 	var/new_icon = 'icons/obj/xenoarchaeology.dmi'
 	var/new_icon_state
 	var/list/name_prefixes = list("strange","ancient","alien")
-	var/responsive_reagent = /decl/material/mercury
+	var/responsive_reagent = MAT_MERCURY
 	var/list/possible_types = list(/obj/item)
 
 /decl/archaeological_find/proc/create_find(atom/location)

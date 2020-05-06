@@ -13,10 +13,10 @@
 
 /obj/item/material/star/throw_impact(atom/hit_atom)
 	..()
-	if(material.radioactivity>0 && istype(hit_atom,/mob/living))
+	if(material.radioactivity && istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		var/urgh = material.radioactivity
-		M.adjustToxLoss(rand(urgh/2,urgh))
+		M.adjustToxLoss(rand(urgh * 5, urgh * 10))
 
 /obj/item/material/star/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()

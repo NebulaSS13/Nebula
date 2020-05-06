@@ -144,6 +144,7 @@
 	var/ore_spread_chance
 	var/ore_scan_icon
 	var/ore_icon_overlay
+	var/ore_icon_colour
 	var/sale_price
 	var/value = 1
 
@@ -252,6 +253,9 @@
 			gas_name = name
 		else
 			gas_name = "[name] vapour"
+
+	if(ore_name && !ore_icon_colour)
+		ore_icon_colour = icon_colour
 
 	if(!adjective_name)
 		adjective_name = name

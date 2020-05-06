@@ -8,7 +8,7 @@
 	lore_text = "Water and potassium are infamously and violently reactive, causing a large explosion on contact."
 	required_reagents = list(
 		MAT_WATER = 1, 
-		/decl/material/potassium = 1
+		MAT_POTASSIUM = 1
 	)
 	mix_message = "The solution bubbles vigorously!"
 
@@ -29,7 +29,7 @@
 	lore_text = "This reaction causes a brief, blinding flash of light."
 	required_reagents = list(
 		MAT_ALUMINIUM = 1, 
-		/decl/material/potassium = 1, 
+		MAT_POTASSIUM = 1, 
 		/decl/material/sulfur = 1 
 	)
 	result_amount = null
@@ -91,7 +91,7 @@
 	name = "Chemical Smoke"
 	lore_text = "This mixture causes a large cloud of smoke, which will be laden with the other chemicals present in the mixture when it reacted."
 	required_reagents = list(
-		/decl/material/potassium = 1, 
+		MAT_POTASSIUM = 1, 
 		/decl/material/nutriment/sugar = 1, 
 		MAT_PHOSPHORUS = 1
 	)

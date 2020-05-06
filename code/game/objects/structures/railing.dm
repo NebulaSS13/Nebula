@@ -33,7 +33,7 @@
 	if(!material || !material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
-		L.apply_damage(round(material.radioactivity/20),IRRADIATE, damage_flags = DAM_DISPERSED)
+		L.apply_damage(round(material.radioactivity*2),IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/structure/railing/Initialize()
 	. = ..()

@@ -56,8 +56,8 @@
 		MAT_ACID_HYDROCHLORIC = 1.5,
 		MAT_ACID_POLYTRINIC =     3,
 		/decl/material/toxin/plantbgone =  3,
-		/decl/material/radium =            2
-		)
+		MAT_RADIUM =            2
+	)
 	var/global/list/nutrient_reagents = list(
 		/decl/material/drink/milk =                     0.1,
 		/decl/material/ethanol/beer =                   0.25,
@@ -109,7 +109,7 @@
 		/decl/material/toxin/plantbgone =                list( -2,    0,   0.2),
 		MAT_AMMONIA =                         list(  0.5,  0,   0  ),
 		/decl/material/nutriment =                       list(  0.5,  0.1, 0  ),
-		/decl/material/radium =                          list( -1.5,  0,   0.2),
+		MAT_RADIUM =                          list( -1.5,  0,   0.2),
 		/decl/material/adminordrazine =                  list(  1,    1,   1  ),
 		/decl/material/toxin/fertilizer/robustharvest =  list(  0,    0.2, 0  ),
 		/decl/material/toxin/fertilizer/left4zed =       list(  0,    0,   0.2)
@@ -118,7 +118,7 @@
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
 	var/global/list/mutagenic_reagents = list(
-		/decl/material/radium =  8,
+		MAT_RADIUM =  8,
 		/decl/material/mutagenics = 15,
 		/decl/material/toxin/fertilizer/left4zed = 30)
 

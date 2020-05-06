@@ -208,7 +208,7 @@
 	icon_state = "injector"
 	charges = list(
 		list("bromide",             "bromide",             /decl/material/toxin/bromide, 80),
-		list("crystallizing agent", "crystallizing agent", /decl/material/crystal,       80),
+		list("crystallizing agent", "crystallizing agent", MAT_CRYSTAL_AGENT,       80),
 		list("antibiotics",         "antibiotics",         /decl/material/antibiotics,   80),
 		list("painkillers",         "painkillers",         /decl/material/painkillers,   80)
 	)

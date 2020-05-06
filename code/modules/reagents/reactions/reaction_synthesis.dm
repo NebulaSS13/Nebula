@@ -29,8 +29,8 @@
 /datum/chemical_reaction/synthesis/resin_pack
 	name = "Resin Globule"
 	required_reagents = list(
-		/decl/material/crystal = 1,
-		/decl/material/silicon = 2
+		MAT_CRYSTAL_AGENT = 1,
+		MAT_SILICON = 2
 	)
 	catalysts = list(
 		MAT_PHORON = 1

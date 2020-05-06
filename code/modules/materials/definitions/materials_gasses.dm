@@ -9,6 +9,15 @@
 	lore_text = "A chemical element, used as antidepressant."
 	is_fusion_fuel = TRUE
 	gas_flags = XGM_GAS_DEFAULT_GAS
+	taste_description = "metal"
+	icon_colour = "#808080"
+	value = 0.5
+
+/decl/material/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	if(istype(M.loc, /turf/space))
+		M.SelfMove(pick(GLOB.cardinal))
+	if(prob(5))
+		M.emote(pick("twitch", "drool", "moan"))
 
 /decl/material/oxygen
 	name = "oxygen"

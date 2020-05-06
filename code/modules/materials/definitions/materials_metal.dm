@@ -4,7 +4,7 @@
 	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/uranium
-	radioactivity = 12
+	radioactivity = 0.8
 	icon_base = "stone"
 	door_icon_base = "stone"
 	table_icon_base = "stone"

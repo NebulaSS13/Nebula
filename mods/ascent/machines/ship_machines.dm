@@ -68,7 +68,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
 MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 /obj/item/chems/chem_disp_cartridge/ascent/crystal
-	spawn_reagent = /decl/material/crystal
+	spawn_reagent = MAT_CRYSTAL_AGENT
 /obj/item/chems/chem_disp_cartridge/ascent/bromide
 	spawn_reagent = /decl/material/toxin/bromide
 

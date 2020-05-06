@@ -323,7 +323,11 @@
 /datum/chemical_reaction/recipe/singulo
 	name = "Singulo"
 	result = /decl/material/ethanol/singulo
-	required_reagents = list(/decl/material/ethanol/vodka = 5, /decl/material/radium = 1, /decl/material/ethanol/wine = 5)
+	required_reagents = list(
+		/decl/material/ethanol/vodka = 5, 
+		MAT_RADIUM = 1, 
+		/decl/material/ethanol/wine = 5
+	)
 	result_amount = 10
 
 /datum/chemical_reaction/recipe/alliescocktail

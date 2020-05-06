@@ -29,7 +29,7 @@
 #define MAT_WASTE                   /decl/material/waste
 #define MAT_ELEVATORIUM             /decl/material/voxalloy/elevatorium
 #define MAT_ALIENALLOY              /decl/material/aliumium
-#define MAT_SAND                    /decl/material/sand
+#define MAT_SILICON                 /decl/material/silicon
 #define MAT_GRAPHITE                /decl/material/graphite
 #define MAT_HYDROGEN                /decl/material/hydrogen
 #define MAT_METALLIC_HYDROGEN       /decl/material/hydrogen/metallic
@@ -41,7 +41,7 @@
 #define MAT_QUARTZ                  /decl/material/quartz
 #define MAT_PYRITE                  /decl/material/pyrite
 #define MAT_SPODUMENE               /decl/material/spodumene
-#define MAT_CINNABAR                /decl/material/cinnabar
+#define MAT_MERCURY                 /decl/material/mercury
 #define MAT_PHOSPHORUS              /decl/material/phosphorus
 #define MAT_ROCK_SALT               /decl/material/rocksalt
 #define MAT_POTASH                  /decl/material/potash
@@ -61,7 +61,7 @@
 #define MAT_ALUMINIUM               /decl/material/aluminium
 #define MAT_ALUMINIUM_HOLOGRAPHIC   /decl/material/aluminium/holographic
 #define MAT_CERAMIC                 /decl/material/stone/ceramic
-#define MAT_CLAY                    /decl/material/sand/clay
+#define MAT_CLAY                    /decl/material/clay
 
 // gasses
 #define MAT_CO2                     /decl/material/carbon_dioxide
@@ -131,6 +131,10 @@
 // chems
 #define MAT_HYDRAZINE               /decl/material/hydrazine
 #define MAT_FUEL                    /decl/material/fuel
+#define MAT_CRYSTAL_AGENT           /decl/material/crystal
+#define MAT_TUNGSTEN                /decl/material/tungsten
+#define MAT_POTASSIUM               /decl/material/potassium
+#define MAT_RADIUM                  /decl/material/radium
 
 // defaults
 #define DEFAULT_WALL_MATERIAL       MAT_STEEL

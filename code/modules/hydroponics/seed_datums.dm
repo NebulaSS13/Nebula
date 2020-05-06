@@ -762,7 +762,10 @@
 	name = "banana"
 	seed_name = "banana"
 	display_name = "banana tree"
-	chems = list(/decl/material/drink/juice/banana = list(10,10), /decl/material/potassium = list(2,3))
+	chems = list(
+		/decl/material/drink/juice/banana = list(10,10), 
+		MAT_POTASSIUM = list(2,3)
+	)
 	trash_type = /obj/item/bananapeel
 	kitchen_tag = "banana"
 

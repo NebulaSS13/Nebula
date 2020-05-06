@@ -36,7 +36,7 @@
 		return PROCESS_KILL
 
 	if(istype(loc, /turf))
-		SSradiation.radiate(src, max(1,ceil(radioactivity/15)))
+		SSradiation.radiate(src, max(1,ceil(radioactivity * 3)))
 
 /obj/item/fuel_assembly/Destroy()
 	STOP_PROCESSING(SSobj, src)

@@ -111,8 +111,12 @@
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/crystal_agent
-	result = /decl/material/crystal
-	required_reagents = list(/decl/material/silicon = 1, /decl/material/tungsten = 1, MAT_ACID_POLYTRINIC = 1)
+	result = MAT_CRYSTAL_AGENT
+	required_reagents = list(
+		MAT_SILICON = 1, 
+		MAT_TUNGSTEN = 1, 
+		MAT_ACID_POLYTRINIC = 1
+	)
 	minimum_temperature = 150 CELSIUS
 	maximum_temperature = 200 CELSIUS
 	result_amount = 3
