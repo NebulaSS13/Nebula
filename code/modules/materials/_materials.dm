@@ -148,18 +148,19 @@
 	// Xenoarch behavior.
 	var/xarch_source_mineral = /decl/material/iron
 
+	// State transition variables.
+	var/melting_point = 0
+	var/boiling_point = INFINITY
+
 	// Gas behavior.
 	var/gas_overlay_limit
 	var/gas_burn_product
-	var/gas_breathed_product
-	var/gas_condensation_product
 	var/gas_specific_heat
 	var/gas_molar_mass
 	var/gas_flags =              0
 	var/gas_symbol_html
 	var/gas_symbol
 	var/gas_tile_overlay =       "generic"
-	var/gas_condensation_point = INFINITY
 
 	var/taste_description = "old rotten bandaids"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable

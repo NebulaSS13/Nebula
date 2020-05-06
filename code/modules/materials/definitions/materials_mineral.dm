@@ -255,7 +255,6 @@
 	gas_molar_mass = 0.405	// kg/mol
 	gas_overlay_limit = 0.7
 	gas_flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL
-	gas_breathed_product = /decl/material/toxin/phoron
 	gas_symbol_html = "Ph"
 	gas_symbol = "Ph"
 	reflectiveness = MAT_VALUE_SHINY

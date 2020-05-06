@@ -194,13 +194,10 @@
 	var/ratio = BP_IS_PROSTHETIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
 		var/decl/material/mat = decls_repository.get_decl(gasname)
-		var/breathed_product = mat.gas_breathed_product
-		if(breathed_product)
-			var/reagent_amount = breath.gas[gasname] * REAGENT_GAS_EXCHANGE_FACTOR * ratio
-			 // Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.
-			if(reagent_amount >= 0.05)
-				owner.reagents.add_reagent(breathed_product, reagent_amount)
-				breath.adjust_gas(gasname, -breath.gas[gasname], update = 0) //update after
+		var/reagent_amount = breath.gas[gasname] * REAGENT_GAS_EXCHANGE_FACTOR * ratio
+		if(reagent_amount >= 0.05)
+			owner.reagents.add_reagent(gasname, reagent_amount)
+			breath.adjust_gas(gasname, -breath.gas[gasname], update = 0)
 
 	// Moved after reagent injection so we don't instantly poison ourselves with CO2 or whatever.
 	if(exhale_type && (!istype(owner.wear_mask) || !(exhale_type in owner.wear_mask.filtered_gases)))

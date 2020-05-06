@@ -46,7 +46,6 @@
 	gas_specific_heat = 80
 	gas_molar_mass = 0.004
 	gas_flags = XGM_GAS_FUSION_FUEL
-	gas_breathed_product = /decl/material/helium
 	gas_symbol_html = "He"
 	gas_symbol = "He"
 
@@ -64,7 +63,6 @@
 	chem_products = list(/decl/material/carbon_monoxide = 20)
 	gas_specific_heat = 30
 	gas_molar_mass = 0.028
-	gas_breathed_product = /decl/material/carbon_monoxide
 	gas_symbol_html = "CO"
 	gas_symbol = "CO"
 
@@ -74,7 +72,6 @@
 	chem_products = list(/decl/material/toxin/methyl_bromide = 20)
 	gas_specific_heat = 42.59 
 	gas_molar_mass = 0.095	  
-	gas_breathed_product = /decl/material/toxin/methyl_bromide
 	gas_symbol_html = "CH<sub>3</sub>Br"
 	gas_symbol = "CH3Br"
 
@@ -87,7 +84,6 @@
 	gas_tile_overlay = "sleeping_agent"
 	gas_overlay_limit = 1
 	gas_flags = XGM_GAS_OXIDIZER //N2O is a powerful oxidizer
-	gas_breathed_product = /decl/material/nitrous_oxide
 	gas_symbol_html = "N<sub>2</sub>O"
 	gas_symbol = "N2O"
 
@@ -106,7 +102,6 @@
 	gas_specific_heat = 37
 	gas_molar_mass = 0.054
 	gas_flags = XGM_GAS_OXIDIZER
-	gas_breathed_product = /decl/material/toxin
 	gas_symbol_html = "NO<sub>2</sub>"
 	gas_symbol = "NO2"
 
@@ -179,7 +174,6 @@
 	chem_products = list(/decl/material/nitrous_oxide/xenon = 20)
 	gas_specific_heat = 3
 	gas_molar_mass = 0.054
-	gas_breathed_product = /decl/material/nitrous_oxide/xenon
 	gas_symbol_html = "Xe"
 	gas_symbol = "Xe"
 
@@ -188,7 +182,6 @@
 	chem_products = list(/decl/material/ammonia = 20)
 	gas_specific_heat = 20
 	gas_molar_mass = 0.017
-	gas_breathed_product = /decl/material/ammonia
 	gas_symbol_html = "NH<sub>3</sub>"
 	gas_symbol = "NH3"
 
@@ -200,7 +193,6 @@
 	gas_specific_heat = 5
 	gas_molar_mass = 0.017
 	gas_flags = XGM_GAS_CONTAMINANT
-	gas_breathed_product = /decl/material/toxin/chlorine
 	gas_symbol_html = "Cl"
 	gas_symbol = "Cl"
 
@@ -219,9 +211,8 @@
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 30
 	gas_molar_mass = 0.020
-	gas_breathed_product =     /decl/material/water
-	gas_condensation_product = /decl/material/water
-	gas_condensation_point =   308.15 // 35C. Dew point is ~20C but this is better for gameplay considerations.
+	melting_point = T0C
+	boiling_point = T100C
 	gas_symbol_html = "H<sub>2</sub>O"
 	gas_symbol = "H2O"
 
