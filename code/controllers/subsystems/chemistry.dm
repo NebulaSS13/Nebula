@@ -1,8 +1,18 @@
 SUBSYSTEM_DEF(chemistry)
 	name = "Chemistry"
-	priority = SS_PRIORITY_CHEMISTRY
-	init_order = SS_INIT_CHEMISTRY
+	priority =   SS_PRIORITY_CHEMISTRY
+	init_order = SS_INIT_MATERIALS
 
+	// Materials lists/holders.
+	var/list/materials =                    list()
+	var/list/alloy_components =             list()
+	var/list/alloy_products =               list()
+	var/list/processable_ores =             list()
+	var/list/fusion_reactions =             list()
+	var/list/all_gasses =                   list()
+	var/list/gas_flag_cache =               list()
+
+	// Chemistry lists/holders.
 	var/list/active_holders =               list()
 	var/list/chemical_reactions =           list()
 	var/list/chemical_reactions_by_type =   list()
@@ -17,7 +27,7 @@ SUBSYSTEM_DEF(chemistry)
 /datum/controller/subsystem/chemistry/Initialize()
 
 	// Init reaction list.
-	//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
+	// Chemical Reactions - Initialises all /datum/chemical_reaction into a list
 	// It is filtered into multiple lists within a list.
 	// For example:
 	// chemical_reaction_list["phoron"] is a list of all reactions relating to phoron
@@ -35,6 +45,39 @@ SUBSYSTEM_DEF(chemistry)
 			if(!chemical_reactions_by_id[reagent_id])
 				chemical_reactions_by_id[reagent_id] = list()
 			chemical_reactions_by_id[reagent_id] += D
+
+	// Init other material and reaction lists as needed.
+	// Build core material lists.
+	var/list/all_mat_decls = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mtype in all_mat_decls)
+		var/decl/material/new_mineral = all_mat_decls[mtype]
+		if(!new_mineral.display_name)
+			continue
+		materials[new_mineral] = TRUE
+		if(new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)
+			processable_ores[mtype] = TRUE
+		if(new_mineral.alloy_product && LAZYLEN(new_mineral.alloy_materials))
+			alloy_products[new_mineral] = TRUE
+			for(var/component in new_mineral.alloy_materials)
+				processable_ores[component] = TRUE
+				alloy_components[component] = TRUE
+
+	// Build fusion reaction tree.
+	for(var/rtype in subtypesof(/decl/fusion_reaction))
+		var/decl/fusion_reaction/cur_reaction = new rtype()
+		if(!fusion_reactions[cur_reaction.p_react])
+			fusion_reactions[cur_reaction.p_react] = list()
+		fusion_reactions[cur_reaction.p_react][cur_reaction.s_react] = cur_reaction
+		if(!fusion_reactions[cur_reaction.s_react])
+			fusion_reactions[cur_reaction.s_react] = list()
+		fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
+
+	// Cache our gas data.
+	for(var/decl/material/mat in materials)
+		if(mat.is_a_gas())
+			all_gasses[mat.type] = mat
+			gas_flag_cache[mat.type] = mat.gas_flags
+
 	. = ..()
 
 /datum/controller/subsystem/chemistry/fire(resumed = FALSE)

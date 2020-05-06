@@ -4,7 +4,7 @@
 /datum/unit_test/crafting_recipes_shall_not_have_inconsistent_materials/start_test()
 	var/list/failed_designs = list()
 	var/list/passed_designs = list()
-	for(var/decl/material/mat_datum in SSmaterials.materials)
+	for(var/decl/material/mat_datum in SSchemistry.materials)
 		for(var/datum/stack_recipe/recipe in mat_datum.get_recipes())
 			var/obj/product = recipe.spawn_result()
 			var/failed

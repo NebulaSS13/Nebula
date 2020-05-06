@@ -225,7 +225,6 @@
 #include "code\controllers\subsystems\initialization\customitems.dm"
 #include "code\controllers\subsystems\initialization\fabrication.dm"
 #include "code\controllers\subsystems\initialization\lore.dm"
-#include "code\controllers\subsystems\initialization\materials.dm"
 #include "code\controllers\subsystems\initialization\misc.dm"
 #include "code\controllers\subsystems\initialization\modpacks.dm"
 #include "code\controllers\subsystems\initialization\persistence.dm"

@@ -19,7 +19,7 @@
 /obj/machinery/mineral/processing_unit/Initialize()
 	ores_processing = list()
 	ores_stored = list()
-	for(var/orename in SSmaterials.processable_ores)
+	for(var/orename in SSchemistry.processable_ores)
 		ores_processing[orename] = 0
 		ores_stored[orename] = 0
 	. = ..()
@@ -56,7 +56,7 @@
 			               // and a negative result indicates slag was produced.
 			var/ore_mode = ores_processing[metal]
 			if(ore_mode == ORE_ALLOY)
-				if(SSmaterials.alloy_components[metal])
+				if(SSchemistry.alloy_components[metal])
 					attempt_to_alloy[metal] = TRUE
 				else
 					result = min(sheets_per_tick - sheets, Floor(ores_processing[metal] / SHEET_MATERIAL_AMOUNT))
@@ -76,7 +76,7 @@
 		if(LAZYLEN(attempt_to_alloy))
 
 			var/list/making_alloys = list()
-			for(var/thing in SSmaterials.alloy_products)
+			for(var/thing in SSchemistry.alloy_products)
 				var/decl/material/M = thing
 				var/failed = FALSE
 				for(var/otherthing in M.alloy_materials)

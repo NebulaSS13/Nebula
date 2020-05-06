@@ -327,7 +327,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
-		if((SSmaterials.get_gas_flags(g) & XGM_GAS_OXIDIZER) && gas[g] >= 0.1)
+		if((SSchemistry.gas_flag_cache[g] & XGM_GAS_OXIDIZER) && gas[g] >= 0.1)
 			. = 1
 			break
 
@@ -339,14 +339,14 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 	. = 0
 	for(var/g in gas)
-		if((SSmaterials.get_gas_flags(g) & XGM_GAS_FUEL) && gas[g] >= 0.1)
+		if((SSchemistry.gas_flag_cache[g] & XGM_GAS_FUEL) && gas[g] >= 0.1)
 			. = 1
 			break
 
 /datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fuel/liquid=null)
 	. = 0
 	for(var/g in gas)
-		if((SSmaterials.get_gas_flags(g) & XGM_GAS_OXIDIZER) && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
+		if((SSchemistry.gas_flag_cache[g] & XGM_GAS_OXIDIZER) && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
 			. = 1
 			break
 
@@ -358,7 +358,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 	. = 0
 	for(var/g in gas)
-		if((SSmaterials.get_gas_flags(g) & XGM_GAS_FUEL) && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
+		if((SSchemistry.gas_flag_cache[g] & XGM_GAS_FUEL) && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
 			. = 1
 			break
 
