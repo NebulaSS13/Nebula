@@ -20,7 +20,9 @@ I said no!
 */
 
 /datum/recipe/friedegg
-	reagents = list(/decl/material/sodiumchloride = 1, /decl/material/blackpepper = 1)
+	reagents = list(
+		/decl/material/sodiumchloride = 1, 
+		/decl/material/blackpepper = 1)
 	items = list(
 		/obj/item/chems/food/snacks/egg
 	)

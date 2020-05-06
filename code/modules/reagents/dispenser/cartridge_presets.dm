@@ -15,11 +15,11 @@
 	graphite	spawn_reagent = MAT_GRAPHITE
 	ammonia		spawn_reagent = MAT_AMMONIA
 	acetone		spawn_reagent = /decl/material/acetone
-	sodium		spawn_reagent = /decl/material/sodium
+	sodium		spawn_reagent = MAT_SODIUM
 	aluminium	spawn_reagent = MAT_ALUMINIUM
 	silicon		spawn_reagent = MAT_SILICON
 	phosphorus	spawn_reagent = MAT_PHOSPHORUS
-	sulfur		spawn_reagent = /decl/material/sulfur
+	sulfur		spawn_reagent = MAT_SULFUR
 	hclacid		spawn_reagent = MAT_ACID_HYDROCHLORIC
 	potassium	spawn_reagent = MAT_POTASSIUM
 	iron		spawn_reagent = MAT_IRON

@@ -65,7 +65,6 @@ SEC_PACK(mead,     /obj/item/chems/chem_disp_cartridge/mead,     "Reagent refill
 //  Datum path   Contents type                                                       Supply pack name                        Container name                                          Cost
 PACK(water,      /obj/item/chems/chem_disp_cartridge/water,      "Reagent refill - Water",               "water reagent cartridge crate",                         15)
 PACK(sugar,      /obj/item/chems/chem_disp_cartridge/sugar,      "Reagent refill - Sugar",               "sugar reagent cartridge crate",                         15)
-PACK(ice,        /obj/item/chems/chem_disp_cartridge/ice,        "Reagent refill - Ice",                 "ice reagent cartridge crate",                           15)
 PACK(tea,        /obj/item/chems/chem_disp_cartridge/tea,        "Reagent refill - Tea",                 "tea reagent cartridge crate",                           15)
 PACK(green_tea,  /obj/item/chems/chem_disp_cartridge/green_tea,  "Reagent refill - Green Tea",           "green tea reagent cartridge crate",                     15)
 PACK(chai_tea,   /obj/item/chems/chem_disp_cartridge/chai_tea,   "Reagent refill - Chai Tea",            "chai tea reagent cartridge crate",                      15)

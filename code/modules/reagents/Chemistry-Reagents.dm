@@ -74,8 +74,8 @@
 			H.take_organ_damage(0, removed * (pH-10))
 		else if(pH <= 3)
 			H.take_organ_damage(0, removed * ((4-pH)*2))
-	if(radioactive)
-		M.apply_damage(radioactive * 10 * removed, IRRADIATE, armor_pen = 100)
+	if(radioactivity)
+		M.apply_damage(radioactivity * 10 * removed, IRRADIATE, armor_pen = 100)
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
@@ -98,7 +98,7 @@
 				removed -= meltdose
 
 		if(!M.unacidable && removed >= meltdose)
-			M.take_organ_damage(0, min(removed * power * 0.2, max_damage))
+			M.take_organ_damage(0, min(removed * (4-pH), 40))
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				var/screamed

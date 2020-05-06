@@ -38,12 +38,12 @@
 #define MAT_SUPERMATTER             /decl/material/toxin/phoron/supermatter
 #define MAT_PITCHBLENDE             /decl/material/pitchblende
 #define MAT_HEMATITE                /decl/material/hematite
-#define MAT_QUARTZ                  /decl/material/quartz
+#define MAT_SULFUR                  /decl/material/sulfur
 #define MAT_PYRITE                  /decl/material/pyrite
 #define MAT_SPODUMENE               /decl/material/spodumene
 #define MAT_MERCURY                 /decl/material/mercury
 #define MAT_PHOSPHORUS              /decl/material/phosphorus
-#define MAT_ROCK_SALT               /decl/material/rocksalt
+#define MAT_SODIUM                  /decl/material/sodium
 #define MAT_POTASH                  /decl/material/potash
 #define MAT_BAUXITE                 /decl/material/bauxite
 #define MAT_COPPER                  /decl/material/copper
@@ -135,6 +135,10 @@
 #define MAT_TUNGSTEN                /decl/material/tungsten
 #define MAT_POTASSIUM               /decl/material/potassium
 #define MAT_RADIUM                  /decl/material/radium
+#define MAT_ACID_SULPHURIC          /decl/material/acid
+#define MAT_ACID_POLYTRINIC         /decl/material/polyacid
+#define MAT_ACID_HYDROCHLORIC       /decl/material/hydroacid
+#define MAT_ACID_STOMACH            /decl/material/stomachacid
 
 // defaults
 #define DEFAULT_WALL_MATERIAL       MAT_STEEL

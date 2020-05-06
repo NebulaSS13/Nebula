@@ -119,11 +119,11 @@
 	. = ..()
 	var/obj/item/storage/fancy/cigarettes/pack
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(MAT_ALUMINIUM = 1, MAT_POTASSIUM = 1, /decl/material/sulfur = 1))
+	fill_cigarre_package(pack, list(MAT_ALUMINIUM = 1, MAT_POTASSIUM = 1, MAT_SULFUR = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(MAT_ALUMINIUM = 1, MAT_POTASSIUM = 1, /decl/material/sulfur = 1))
+	fill_cigarre_package(pack, list(MAT_ALUMINIUM = 1, MAT_POTASSIUM = 1, MAT_SULFUR = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)

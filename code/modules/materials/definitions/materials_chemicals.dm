@@ -19,11 +19,6 @@
 	value = 1.2
 	fuel_value = 1.2
 
-#define MAT_ACID_SULPHURIC    /decl/material/acid
-#define MAT_ACID_POLYTRINIC   /decl/material/polyacid
-#define MAT_ACID_HYDROCHLORIC /decl/material/hydroacid
-#define MAT_ACID_STOMACH      /decl/material/stomachacid
-
 /decl/material/acid
 	name = "sulphuric acid"
 	lore_text = "A very corrosive mineral acid with the molecular formula H2SO4."

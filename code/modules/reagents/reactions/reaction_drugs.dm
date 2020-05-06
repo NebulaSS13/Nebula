@@ -66,8 +66,8 @@
 	result = MAT_ACID_POLYTRINIC
 	required_reagents = list(
 		MAT_ACID_SULPHURIC = 1, 
-		MAT_ACID_HYDROCHLORIC = 1, 
-			 = 1
+		MAT_ACID_HYDROCHLORIC = 1,
+		MAT_POTASSIUM = 1
 	)
 	result_amount = 3
 
@@ -134,7 +134,7 @@
 	required_reagents = list(
 		/decl/material/acetone = 1, 
 		MAT_WATER = 1, 
-		/decl/material/sulfur = 1
+		MAT_SULFUR = 1
 	)
 	result_amount = 1
 
@@ -154,7 +154,7 @@
 	required_reagents = list(
 		/decl/material/nutriment/sugar = 1, 
 		MAT_PHOSPHORUS = 1, 
-		/decl/material/sulfur = 1
+		MAT_SULFUR = 1
 	)
 	result_amount = 3
 
@@ -283,7 +283,7 @@
 	name = "Sodium Chloride"
 	result = /decl/material/sodiumchloride
 	required_reagents = list(
-		/decl/material/sodium = 1, 
+		MAT_SODIUM = 1, 
 		MAT_ACID_HYDROCHLORIC = 1
 	)
 	result_amount = 2

@@ -8,12 +8,12 @@ GLOBAL_LIST_INIT(weighted_minerals_sparse, \
 		MAT_GOLD =         8, \
 		MAT_SILVER =       8, \
 		MAT_PHORON =      10, \
-		MAT_QUARTZ =       3, \
+		MAT_SULPHUR =      3, \
 		MAT_PYRITE =       3, \
 		MAT_SPODUMENE =    3, \
 		MAT_CINNABAR =     3, \
 		MAT_PHOSPHORUS  =  3, \
-		MAT_ROCK_SALT =    3, \
+		MAT_SODIUM =    3, \
 		MAT_POTASH =       3, \
 		MAT_BAUXITE =      3, \
 		MAT_RUTILE = 		3
@@ -29,15 +29,15 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 		MAT_GOLD =        10, \
 		MAT_SILVER =      10, \
 		MAT_PHORON =      20, \
-		MAT_QUARTZ =       1, \
+		MAT_SULPHUR =      1, \
 		MAT_PYRITE =       1, \
 		MAT_SPODUMENE =    1, \
 		MAT_CINNABAR =     1, \
 		MAT_PHOSPHORUS  =  1, \
-		MAT_ROCK_SALT =    1, \
+		MAT_SODIUM =       1, \
 		MAT_POTASH =       1, \
 		MAT_BAUXITE =      1, \
-		MAT_RUTILE = 		1
+		MAT_RUTILE =       1
 	))
 
 /datum/random_map/automata/cave_system

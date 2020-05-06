@@ -30,7 +30,7 @@
 	required_reagents = list(
 		MAT_ALUMINIUM = 1, 
 		MAT_POTASSIUM = 1, 
-		/decl/material/sulfur = 1 
+		MAT_SULFUR = 1 
 	)
 	result_amount = null
 	mix_message = "The solution bubbles vigorously!"

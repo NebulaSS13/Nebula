@@ -46,16 +46,17 @@
 		else
 			dirtoverlay.alpha = min(dirtoverlay.alpha + volume * 30, 255)
 
-/decl/material/quartz
-	name = "quartz"
-	ore_compresses_to = MAT_QUARTZ
+/decl/material/sulfur
+	name = "sulfur"
+	ore_compresses_to = MAT_SULFUR
 	ore_name = "quartz"
+	icon_colour = COLOR_YELLOW_GRAY
 	opacity = 0.5
 	ore_result_amount = 10
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#effffe"
+	ore_icon_colour = "#effffe"
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -64,6 +65,10 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 	reflectiveness = MAT_VALUE_SHINY
+	lore_text = "A chemical element with a pungent smell."
+	taste_description = "old eggs"
+	icon_colour = "#bf8c00"
+	value = 0.5
 
 /decl/material/pyrite
 	name = "pyrite"
@@ -148,10 +153,14 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/decl/material/rocksalt
-	name = "rock salt"
-	ore_compresses_to = MAT_ROCK_SALT
+/decl/material/sodium
+	name = "sodium"
+	lore_text = "A chemical element, readily reacts with water."
+	taste_description = "salty metal"
+	icon_colour = "#808080"
+	value = 0.5
 	ore_name = "rock salt"
+	ore_compresses_to = MAT_SODIUM
 	ore_result_amount = 10
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"

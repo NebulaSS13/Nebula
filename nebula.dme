@@ -2707,7 +2707,6 @@
 #include "code\modules\reagents\chems\chems_compounds.dm"
 #include "code\modules\reagents\chems\chems_drinks.dm"
 #include "code\modules\reagents\chems\chems_drugs.dm"
-#include "code\modules\reagents\chems\chems_elements.dm"
 #include "code\modules\reagents\chems\chems_ethanol.dm"
 #include "code\modules\reagents\chems\chems_explosives.dm"
 #include "code\modules\reagents\chems\chems_medicines.dm"
