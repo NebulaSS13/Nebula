@@ -37,3 +37,22 @@
 	else
 		pass("[length(passed_designs)] crafting recipes had consistent output materials.")
 	return 1 
+
+/datum/unit_test/reagent_colors_test
+	name = "MATERIALS: Materials must have valid colors without alpha in color value"
+
+/datum/unit_test/reagent_colors_test/start_test()
+	var/list/bad_reagents = list()
+
+	for(var/T in typesof(/decl/material))
+		var/decl/material/R = T
+		var/col = initial(R.icon_colour)
+		if(length(col) != 7)
+			bad_reagents += "[T] ([col])"
+
+	if(length(bad_reagents))
+		fail("Materials with invalid colors found: [english_list(bad_reagents)]")
+	else
+		pass("All materials have valid colors.")
+
+	return 1

@@ -29,7 +29,7 @@
 	name = "Isolated Corruption"
 	lore_text = "An incredibly dark, oily substance. Moves very slightly."
 	taste_description = "decayed blood"
-	color = "#800000"
+	icon_colour = "#800000"
 	amount_to_zombify = 3
 
 /obj/item/chems/glass/beaker/vial/random_podchem

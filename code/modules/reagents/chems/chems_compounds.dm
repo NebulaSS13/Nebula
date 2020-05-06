@@ -2,7 +2,7 @@
 	name = "acetone"
 	lore_text = "A colorless liquid solvent used in chemical synthesis."
 	taste_description = "acid"
-	color = "#808080"
+	icon_colour = "#808080"
 	metabolism = REM * 0.2
 	value = 0.1
 
@@ -31,21 +31,21 @@
 	name = "surfacant"
 	lore_text = "A isocyanate liquid that forms a foam when mixed with water."
 	taste_description = "metal"
-	color = "#9e6b38"
+	icon_colour = "#9e6b38"
 	value = 0.1
 
 /decl/material/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
 	name = "foaming agent"
 	lore_text = "A agent that yields metallic foam when mixed with light metal and a strong acid."
 	taste_description = "metal"
-	color = "#664b63"
+	icon_colour = "#664b63"
 	value = 0.1
 
 /decl/material/lube
 	name = "lubricant"
 	lore_text = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
 	taste_description = "slime"
-	color = "#009ca8"
+	icon_colour = "#009ca8"
 	value = 0.1
 
 /decl/material/lube/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
@@ -57,21 +57,21 @@
 	name = "wood pulp"
 	lore_text = "A mass of wood fibers."
 	taste_description = "wood"
-	color = WOOD_COLOR_GENERIC
+	icon_colour = WOOD_COLOR_GENERIC
 	hidden_from_codex = TRUE
 
 /decl/material/bamboo
 	name = "bamboo pulp"
 	lore_text = "A mass of bamboo fibers."
 	taste_description = "grass"
-	color = WOOD_COLOR_PALE2
+	icon_colour = WOOD_COLOR_PALE2
 	hidden_from_codex = TRUE
 
 /decl/material/luminol
 	name = "luminol"
 	lore_text = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
-	color = "#f2f3f4"
+	icon_colour = "#f2f3f4"
 
 /decl/material/luminol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	O.reveal_blood()
@@ -83,7 +83,7 @@
 	name = "glowsap"
 	lore_text = "A popular party drug for adventurous types who want to BE the glowstick. Rumoured to be hallucinogenic in high doses."
 	overdose = 15
-	color = "#9eefff"
+	icon_colour = "#9eefff"
 
 /decl/material/glowsap/affect_ingest(mob/living/carbon/M, alien, removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed, holder)
@@ -110,7 +110,7 @@
 	name = "table salt"
 	lore_text = "A salt made of sodium chloride. Commonly used to season food."
 	taste_description = "salt"
-	color = "#ffffff"
+	icon_colour = "#ffffff"
 	overdose = REAGENTS_OVERDOSE
 	value = 0.1
 
@@ -118,7 +118,7 @@
 	name = "black pepper"
 	lore_text = "A powder ground from peppercorns. *AAAACHOOO*"
 	taste_description = "pepper"
-	color = "#000000"
+	icon_colour = "#000000"
 	value = 0.1
 
 /decl/material/enzyme
@@ -126,7 +126,7 @@
 	lore_text = "A universal enzyme used in the preperation of certain chemicals and foods."
 	taste_description = "sweetness"
 	taste_mult = 0.7
-	color = "#365e30"
+	icon_colour = "#365e30"
 	overdose = REAGENTS_OVERDOSE
 
 /decl/material/frostoil
@@ -134,7 +134,7 @@
 	lore_text = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."
 	taste_description = "arctic mint"
 	taste_mult = 1.5
-	color = "#07aab2"
+	icon_colour = "#07aab2"
 	value = 2
 
 /decl/material/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -150,7 +150,7 @@
 	lore_text = "This is what makes chilis hot."
 	taste_description = "hot peppers"
 	taste_mult = 1.5
-	color = "#b31008"
+	icon_colour = "#b31008"
 	var/agony_dose = 5
 	var/agony_amount = 2
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
@@ -182,7 +182,7 @@
 	taste_description = "scorching agony"
 	taste_mult = 10
 	touch_met = 5 // Get rid of it quickly
-	color = "#b31008"
+	icon_colour = "#b31008"
 	agony_dose = 0.5
 	agony_amount = 4
 	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
@@ -270,7 +270,7 @@
 	lore_text = "Might cause unpredictable mutations. Keep away from children."
 	taste_description = "slime"
 	taste_mult = 0.9
-	color = "#13bc5e"
+	icon_colour = "#13bc5e"
 
 /decl/material/mutagenics/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(33))
@@ -304,7 +304,7 @@
 	name = "nitrous oxide"
 	lore_text = "An ubiquitous sleeping agent also known as laughing gas."
 	taste_description = "dental surgery"
-	color = COLOR_GRAY80
+	icon_colour = COLOR_GRAY80
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 	var/do_giggle = TRUE
 
@@ -313,7 +313,7 @@
 	lore_text = "A nontoxic gas used as a general anaesthetic."
 	do_giggle = FALSE
 	taste_description = "nothing"
-	color = COLOR_GRAY80
+	icon_colour = COLOR_GRAY80
 
 /decl/material/nitrous_oxide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/dosage = M.chem_doses[type]
@@ -333,7 +333,7 @@
 	name = "lactate"
 	lore_text = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
 	taste_description = "sourness"
-	color = "#eeddcc"
+	icon_colour = "#eeddcc"
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM
@@ -352,7 +352,7 @@
 	name = "nanoblood"
 	lore_text = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
 	taste_description = "blood with bubbles"
-	color = "#c10158"
+	icon_colour = "#c10158"
 	scannable = 1
 	overdose = 5
 	metabolism = 1
@@ -369,7 +369,7 @@
 	name = "tobacco"
 	lore_text = "Cut and processed tobacco leaves."
 	taste_description = "tobacco"
-	color = "#684b3c"
+	icon_colour = "#684b3c"
 	scannable = 1
 	scent = "cigarette smoke"
 	scent_descriptor = SCENT_DESC_ODOR
@@ -401,7 +401,7 @@
 	name = "nicotine solution"
 	lore_text = "A diluted nicotine solution."
 	taste_mult = 0
-	color = "#fcfcfc"
+	icon_colour = "#fcfcfc"
 	nicotine = REM * 0.1
 	scent = null
 	scent_intensity = null
@@ -412,7 +412,7 @@
 	name = "menthol"
 	lore_text = "Tastes naturally minty, and imparts a very mild numbing sensation."
 	taste_description = "mint"
-	color = "#80af9c"
+	icon_colour = "#80af9c"
 	metabolism = REM * 0.002
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
@@ -427,7 +427,7 @@
 	name = "Nanite Fluid"
 	lore_text = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
 	taste_description = "metallic sludge"
-	color = "#c2c2d6"
+	icon_colour = "#c2c2d6"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
@@ -445,7 +445,7 @@
 	name = "antiseptic"
 	lore_text = "Sterilizes surfaces (or wounds) in preparation for surgery, and thoroughly removes blood."
 	taste_description = "bitterness"
-	color = "#c8a5dc"
+	icon_colour = "#c8a5dc"
 	touch_met = 5
 
 /decl/material/antiseptic/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -469,7 +469,7 @@
 /decl/material/crystal
 	name = "crystallizing agent"
 	taste_description = "sharpness"
-	color = "#13bc5e"
+	icon_colour = "#13bc5e"
 
 /decl/material/crystal/proc/do_material_check(var/mob/living/carbon/M)
 	. = MAT_CRYSTAL

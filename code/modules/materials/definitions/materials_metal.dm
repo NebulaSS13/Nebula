@@ -13,8 +13,8 @@
 	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':5}"
 	chem_products = list(
-				/decl/material/uranium = 20
-				)
+		/decl/material/uranium = 20
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_MATTE
 	sale_price = 2
@@ -351,7 +351,7 @@
 	melting_point = rand(400,10000)
 	..()
 
-/decl/material/aliumium/place_dismantled_girder(var/turf/target, var/material/reinf_material)
+/decl/material/aliumium/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
 	return
 
 /decl/material/hematite

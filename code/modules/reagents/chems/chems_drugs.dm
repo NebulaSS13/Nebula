@@ -3,7 +3,7 @@
 	name = "amphetamines"
 	lore_text = "A powerful, long-lasting stimulant." 
 	taste_description = "acid"
-	color = "#ff3300"
+	icon_colour = "#ff3300"
 	metabolism = REM * 0.15
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2
@@ -18,7 +18,7 @@
 	name = "narcotics"
 	lore_text = "A narcotic that impedes mental ability by slowing down the higher brain cell functions."
 	taste_description = "numbness"
-	color = "#c8a5dc"
+	icon_colour = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 
@@ -35,7 +35,7 @@
 	name = "nicotine"
 	lore_text = "A sickly yellow liquid sourced from tobacco leaves. Stimulates and relaxes the mind and body."
 	taste_description = "peppery bitterness"
-	color = "#efebaa"
+	icon_colour = "#efebaa"
 	metabolism = REM * 0.002
 	overdose = 6
 	scannable = 1
@@ -60,7 +60,7 @@
 	name = "sedatives"
 	lore_text = "A mild sedative used to calm patients and induce sleep."
 	taste_description = "bitterness"
-	color = "#009ca8"
+	icon_colour = "#009ca8"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	value = 2
@@ -89,7 +89,7 @@
 	lore_text = "An illegal chemical compound used as a psychoactive drug."
 	taste_description = "bitterness"
 	taste_mult = 0.4
-	color = "#60a584"
+	icon_colour = "#60a584"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	value = 2
@@ -107,7 +107,7 @@
 	name = "hallucinogenics"
 	lore_text = "A mix of powerful hallucinogens, they can cause fatal effects in users."
 	taste_description = "sourness"
-	color = "#b31008"
+	icon_colour = "#b31008"
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
 	value = 2
@@ -120,7 +120,7 @@
 	name = "psychotropics"
 	lore_text = "A strong psychotropic derived from certain species of mushroom."
 	taste_description = "mushroom"
-	color = "#e700e7"
+	icon_colour = "#e700e7"
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
 	value = 2
@@ -154,7 +154,7 @@
 /decl/material/glowsap/gleam
 	name = "Gleam"
 	lore_text = "A powerful hallucinogenic and psychotropic derived from various species of glowing mushroom. Some say it can have permanent effects on the brains of those who over-indulge."
-	color = "#ccccff"
+	icon_colour = "#ccccff"
 	metabolism = REM
 	overdose = 25
 

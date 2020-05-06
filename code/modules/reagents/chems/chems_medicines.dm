@@ -2,7 +2,7 @@
 	name = "eye drops"
 	lore_text = "A soothing balm that helps with minor eye damage."
 	taste_description = "a mild burn"
-	color = "#c8a5dc"
+	icon_colour = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -21,7 +21,7 @@
 	name = "antirads"
 	lore_text = "A synthetic recombinant protein, derived from entolimod, used in the treatment of radiation poisoning."
 	taste_description = "bitterness"
-	color = "#408000"
+	icon_colour = "#408000"
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
@@ -36,7 +36,7 @@
 	lore_text = "An analgesic and bleeding suppressant that helps with recovery from physical trauma. Can assist with mending arteries if injected in large amounts, but will cause complications."
 	taste_description = "bitterness"
 	taste_mult = 3
-	color = "#bf0000"
+	icon_colour = "#bf0000"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -59,7 +59,7 @@
 	name = "synthskin"
 	lore_text = "A synthetic sealant, disinfectant and analgesic that encourages burned tissue to recover."
 	taste_description = "bitterness"
-	color = "#ffa800"
+	icon_colour = "#ffa800"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -73,7 +73,7 @@
 	name = "Adminordrazine"
 	lore_text = "It's magic. We don't have to explain it."
 	taste_description = "100% abuse"
-	color = "#c8a5dc"
+	icon_colour = "#c8a5dc"
 	flags = AFFECTS_DEAD //This can even heal dead people.
 
 	glass_name = "liquid gold"
@@ -89,7 +89,7 @@
 	name = "antitoxins"
 	lore_text = "A mix of broad-spectrum antitoxins used to neutralize poisons before they can do significant harm."
 	taste_description = "a roll of gauze"
-	color = "#00a000"
+	icon_colour = "#00a000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
@@ -119,7 +119,7 @@
 	name = "immunobooster"
 	lore_text = "A drug that helps restore the immune system. Will not replace a normal immunity."
 	taste_description = "chalky"
-	color = "#ffc0cb"
+	icon_colour = "#ffc0cb"
 	metabolism = REM
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
@@ -138,7 +138,7 @@
 	name = "stimulants"
 	lore_text = "Improves the ability to concentrate."
 	taste_description = "sourness"
-	color = "#bf80bf"
+	icon_colour = "#bf80bf"
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
@@ -161,7 +161,7 @@
 	name = "antidepressants"
 	lore_text = "Stabilizes the mind a little."
 	taste_description = "bitterness"
-	color = "#ff80ff"
+	icon_colour = "#ff80ff"
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
@@ -182,7 +182,7 @@
 	name = "antibiotics"
 	lore_text = "An all-purpose antibiotic agent."
 	taste_description = "bitterness"
-	color = "#c1c1c1"
+	icon_colour = "#c1c1c1"
 	metabolism = REM * 0.1
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
@@ -207,7 +207,7 @@
 	name = "retrovirals"
 	lore_text = "A combination of retroviral therapy compounds and a meta-polymerase that rapidly mends genetic damage and unwanted mutations with the power of dark science."
 	taste_description = "acid"
-	color = "#004000"
+	icon_colour = "#004000"
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
@@ -237,7 +237,7 @@
 	name = "adrenaline"
 	lore_text = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
 	taste_description = "rush"
-	color = "#c8a5dc"
+	icon_colour = "#c8a5dc"
 	scannable = 1
 	overdose = 20
 	metabolism = 0.1
@@ -264,7 +264,7 @@
 	name = "regenerative serum"
 	lore_text = "A broad-spectrum cellular regenerator that heals both burns and physical trauma, albeit quite slowly."
 	taste_description = "metastasis"
-	color = "#8040ff"
+	icon_colour = "#8040ff"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
@@ -276,7 +276,7 @@
 	name = "neuroannealer"
 	lore_text = "A neuroplasticity-assisting compound that helps to lessen damage to neurological tissue after a injury. Can aid in healing brain tissue."
 	taste_description = "bitterness"
-	color = "#ffff66"
+	icon_colour = "#ffff66"
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
@@ -295,7 +295,7 @@
 	name = "oxygel"
 	lore_text = "A biodegradable gel full of oxygen-laden synthetic molecules. Injected into suffocation victims to stave off the effects of oxygen deprivation."
 	taste_description = "tasteless slickness"
-	color = COLOR_GRAY80
+	icon_colour = COLOR_GRAY80
 
 /decl/material/oxy_meds/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_OXYGENATED, 1)

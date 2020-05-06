@@ -22,7 +22,7 @@
 	hidden_from_codex = TRUE
 	reflectiveness = MAT_VALUE_DULL
 
-/decl/material/cult/place_dismantled_girder(var/turf/target)
+/decl/material/cult/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
 	new /obj/structure/girder/cult(target)
 
 /decl/material/cult/reinf

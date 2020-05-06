@@ -83,7 +83,8 @@
 	var/foam_state = "foam"
 
 	// Icons
-	var/icon_colour                                      // Colour applied to products of this material.
+	var/icon_colour = COLOR_WHITE                        // Colour applied to products of this material.
+	var/icon_colour_weight = 1                           // Weighting of colour in substance mixes.
 	var/icon_base = "metal"                              // Wall and table base icon tag. See header.
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
 	var/icon_reinf = "reinf_metal"                       // Overlay used
@@ -167,9 +168,6 @@
 	var/touch_met = 0
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
-	var/color = "#000000"
-	var/color_weight = 1
-	var/alpha = 255
 
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"

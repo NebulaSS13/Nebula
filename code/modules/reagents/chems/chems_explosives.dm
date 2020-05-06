@@ -2,7 +2,7 @@
 	name = "ANFO"
 	lore_text = "Ammonia Nitrate Fuel Oil mix, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	taste_description = "fertilizer and fuel"
-	color = "#dbc3c3"
+	icon_colour = "#dbc3c3"
 	var/boompower = 1
 
 /decl/material/anfo/ex_act(obj/item/chems/holder, severity)
@@ -30,5 +30,5 @@
 /decl/material/anfo/plus
 	name = "ANFO+"
 	lore_text = "Ammonia Nitrate Fuel Oil, with aluminium powder, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
-	color = "#ffe8e8"
+	icon_colour = "#ffe8e8"
 	boompower = 2

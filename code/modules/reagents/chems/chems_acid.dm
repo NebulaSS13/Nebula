@@ -2,7 +2,7 @@
 	name = "sulphuric acid"
 	lore_text = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
-	color = "#db5008"
+	icon_colour = "#db5008"
 	metabolism = REM * 2
 	touch_met = 50 // It's acid!
 	value = 1.2
@@ -86,7 +86,7 @@
 	name = "hydrochloric acid"
 	lore_text = "A very corrosive mineral acid with the molecular formula HCl."
 	taste_description = "stomach acid"
-	color = "#808080"
+	icon_colour = "#808080"
 	power = 3
 	meltdose = 8
 	max_damage = 30
@@ -96,7 +96,7 @@
 	name = "polytrinic acid"
 	lore_text = "Polytrinic acid is a an extremely corrosive chemical substance."
 	taste_description = "acid"
-	color = "#8e18a9"
+	icon_colour = "#8e18a9"
 	power = 10
 	meltdose = 4
 	max_damage = 60
@@ -106,6 +106,6 @@
 	name = "stomach acid"
 	taste_description = "coppery foulness"
 	power = 2
-	color = "#d8ff00"
+	icon_colour = "#d8ff00"
 	hidden_from_codex = TRUE
 	value = 0

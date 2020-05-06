@@ -3,7 +3,7 @@
 	name = "painkillers"
 	lore_text = "A highly effective opioid painkiller. Do not mix with alcohol."
 	taste_description = "sourness"
-	color = "#cb68fc"
+	icon_colour = "#cb68fc"
 	overdose = 30
 	scannable = 1
 	metabolism = 0.05

@@ -3,7 +3,7 @@
 /decl/material/water
 	name = "water"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
-	color = COLOR_OCEAN
+	icon_colour = COLOR_OCEAN
 	scannable = 1
 	metabolism = REM * 10
 	taste_description = "water"
@@ -101,7 +101,7 @@
 	lore_text = "Frozen water, your dentist wouldn't like you chewing this."
 	taste_description = "ice"
 	taste_mult = 1.5
-	color = "#619494"
+	icon_colour = "#619494"
 	adj_temp = -5
 	hydration = 10
 

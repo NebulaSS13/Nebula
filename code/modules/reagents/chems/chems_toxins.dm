@@ -3,7 +3,7 @@
 	lore_text = "A toxic chemical."
 	taste_description = "bitterness"
 	taste_mult = 1.2
-	color = "#cf3600"
+	icon_colour = "#cf3600"
 	metabolism = REM * 0.25 // 0.05 by default. They last a while and slowly kill you.
 	heating_products = list(/decl/material/toxin/denatured)
 	heating_point = 100 CELSIUS
@@ -37,7 +37,7 @@
 	lore_text = "Once toxic, now harmless."
 	taste_description = null
 	taste_mult = null
-	color = "#808080"
+	icon_colour = "#808080"
 	metabolism = REM
 	heating_products = null
 	heating_point = null
@@ -50,14 +50,14 @@
 	lore_text = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
 	taste_description = "slime"
 	taste_mult = 1.3
-	color = "#801e28"
+	icon_colour = "#801e28"
 	strength = 10
 
 /decl/material/toxin/plasticide
 	name = "plasticide"
 	lore_text = "Liquid plastic, do not eat."
 	taste_description = "plastic"
-	color = "#cf3600"
+	icon_colour = "#cf3600"
 	strength = 5
 	heating_point = null
 	heating_products = null
@@ -66,14 +66,14 @@
 	name = "amatoxin"
 	lore_text = "A powerful poison derived from certain species of mushroom."
 	taste_description = "mushroom"
-	color = "#792300"
+	icon_colour = "#792300"
 	strength = 10
 
 /decl/material/toxin/carpotoxin
 	name = "carpotoxin"
 	lore_text = "A deadly neurotoxin produced by the dreaded space carp."
 	taste_description = "fish"
-	color = "#003333"
+	icon_colour = "#003333"
 	target_organ = BP_BRAIN
 	strength = 10
 
@@ -81,7 +81,7 @@
 	name = "spider venom"
 	lore_text = "A deadly necrotic toxin produced by giant spiders to disable their prey."
 	taste_description = "absolutely vile"
-	color = "#91d895"
+	icon_colour = "#91d895"
 	target_organ = BP_LIVER
 	strength = 5
 
@@ -94,7 +94,7 @@
 	name = "chlorine"
 	lore_text = "A highly poisonous liquid. Smells strongly of bleach."
 	taste_description = "bleach"
-	color = "#707c13"
+	icon_colour = "#707c13"
 	strength = 15
 	metabolism = REM
 	heating_point = null
@@ -104,7 +104,7 @@
 	name = "phoron"
 	lore_text = "Phoron in its liquid form."
 	taste_mult = 1.5
-	color = "#ff3300"
+	icon_colour = "#ff3300"
 	strength = 30
 	touch_met = 5
 	heating_point = null
@@ -143,7 +143,7 @@
 	name = "cyanide"
 	lore_text = "A highly toxic chemical."
 	taste_mult = 0.6
-	color = "#cf3600"
+	icon_colour = "#cf3600"
 	strength = 20
 	metabolism = REM * 2
 	target_organ = BP_HEART
@@ -158,7 +158,7 @@
 	name = "heartstopper"
 	lore_text = "A potent cardiotoxin that paralyzes the heart."
 	taste_description = "intense bitterness"
-	color = "#6b833b"
+	icon_colour = "#6b833b"
 	strength = 16
 	overdose = REAGENTS_OVERDOSE / 3
 	metabolism = REM * 2
@@ -185,7 +185,7 @@
 	name = "zombie powder"
 	lore_text = "A strong neurotoxin that puts the subject into a death-like state."
 	taste_description = "death"
-	color = "#669900"
+	icon_colour = "#669900"
 	metabolism = REM
 	strength = 3
 	target_organ = BP_BRAIN
@@ -212,7 +212,7 @@
 	taste_description = "plant food"
 	taste_mult = 0.5
 	strength = 0.5 // It's not THAT poisonous.
-	color = "#664330"
+	icon_colour = "#664330"
 	heating_point = null
 	heating_products = null
 	hidden_from_codex = TRUE
@@ -230,7 +230,7 @@
 	name = "Plant-B-Gone"
 	lore_text = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 	taste_mult = 1
-	color = "#49002e"
+	icon_colour = "#49002e"
 	strength = 4
 	heating_products = list(/decl/material/toxin, /decl/material/water)
 
@@ -250,7 +250,7 @@
 	name = "tar"
 	lore_text = "A dark, viscous liquid."
 	taste_description = "petroleum"
-	color = "#140b30"
+	icon_colour = "#140b30"
 	strength = 4
 	heating_products = list(/decl/material/acetone, /decl/material/carbon, /decl/material/ethanol)
 	heating_point = 145 CELSIUS
@@ -260,7 +260,7 @@
 	name = "hair remover"
 	lore_text = "An extremely effective chemical depilator. Do not ingest."
 	taste_description = "acid"
-	color = "#d9ffb3"
+	icon_colour = "#d9ffb3"
 	strength = 1
 	overdose = REAGENTS_OVERDOSE
 	heating_products = null
@@ -274,7 +274,7 @@
 	name = "liquid corruption"
 	lore_text = "A filthy, oily substance which slowly churns of its own accord."
 	taste_description = "decaying blood"
-	color = "#800000"
+	icon_colour = "#800000"
 	taste_mult = 5
 	strength = 10
 	metabolism = REM * 5
@@ -303,7 +303,7 @@
 	name = "methyl bromide"
 	lore_text = "A fumigant derived from bromide."
 	taste_description = "pestkiller"
-	color = "#4c3b34"
+	icon_colour = "#4c3b34"
 	strength = 5
 	heating_products = null
 	heating_point = null
@@ -330,7 +330,7 @@
 	name = "bromide"
 	lore_text = "A dark, nearly opaque, red-orange, toxic element."
 	taste_description = "pestkiller"
-	color = "#4c3b34"
+	icon_colour = "#4c3b34"
 	strength = 3
 	heating_products = null
 	heating_point = null

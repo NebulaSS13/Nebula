@@ -2,7 +2,7 @@
 	name = "carbon monoxide"
 	lore_text = "A dangerous carbon comubstion byproduct."
 	taste_description = "stale air"
-	color = COLOR_GRAY80
+	icon_colour = COLOR_GRAY80
 	metabolism = 0.05 // As with helium.
 
 /decl/material/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -35,7 +35,7 @@
 	name = "paralytics"
 	lore_text = "A powerful paralytic agent."
 	taste_description = "metallic"
-	color = "#ff337d"
+	icon_colour = "#ff337d"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 1.5
@@ -61,7 +61,7 @@
 	name = "presyncopics"
 	lore_text = "A compound that causess presyncopic effects in the taker, including confusion and dizzyness."
 	taste_description = "sourness"
-	color = "#000055"
+	icon_colour = "#000055"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	heating_point = 61 CELSIUS

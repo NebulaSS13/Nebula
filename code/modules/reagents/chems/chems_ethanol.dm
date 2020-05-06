@@ -2,7 +2,7 @@
 	name = "ethanol" //Parent class for all alcoholic reagents.
 	lore_text = "A well-known alcohol with a variety of applications."
 	taste_description = "pure alcohol"
-	color = "#404030"
+	icon_colour = "#404030"
 	touch_met = 5
 	fuel_value = 0.75
 	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
@@ -82,7 +82,7 @@
 	lore_text = "Watch out that the Green Fairy doesn't come for you!"
 	taste_description = "death and licorice"
 	taste_mult = 1.5
-	color = "#33ee00"
+	icon_colour = "#33ee00"
 	strength = 12
 
 	glass_name = "absinthe"
@@ -92,7 +92,7 @@
 	name = "ale"
 	lore_text = "A dark alchoholic beverage made by malted barley and yeast."
 	taste_description = "hearty barley ale"
-	color = "#4c3100"
+	icon_colour = "#4c3100"
 	strength = 50
 
 	glass_name = "ale"
@@ -102,7 +102,7 @@
 	name = "beer"
 	lore_text = "An alcoholic beverage made from malted grains, hops, yeast, and water."
 	taste_description = "piss water"
-	color = "#ffd300"
+	icon_colour = "#ffd300"
 	strength = 50
 	nutriment_factor = 1
 
@@ -121,7 +121,7 @@
 	lore_text = "Exotically blue, fruity drink, distilled from oranges."
 	taste_description = "oranges"
 	taste_mult = 1.1
-	color = "#0000cd"
+	icon_colour = "#0000cd"
 	strength = 15
 
 	glass_name = "blue curacao"
@@ -132,7 +132,7 @@
 	lore_text = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
 	taste_description = "rich and smooth alcohol"
 	taste_mult = 1.1
-	color = "#ab3c05"
+	icon_colour = "#ab3c05"
 	strength = 15
 
 	glass_name = "cognac"
@@ -142,7 +142,7 @@
 	name = "gin"
 	lore_text = "It's gin. In space. I say, good sir."
 	taste_description = "an alcoholic christmas tree"
-	color = "#0064c6"
+	icon_colour = "#0064c6"
 	strength = 15
 
 	glass_name = "gin"
@@ -168,7 +168,7 @@
 	lore_text = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
 	taste_description = "spiked latte"
 	taste_mult = 1.1
-	color = "#4c3100"
+	icon_colour = "#4c3100"
 	strength = 15
 
 	glass_name = "RR coffee liquor"
@@ -178,7 +178,7 @@
 	name = "melon liqueur"
 	lore_text = "A relatively sweet and fruity 46 proof liqueur."
 	taste_description = "fruity alcohol"
-	color = "#138808" // rgb: 19, 136, 8
+	icon_colour = "#138808" // rgb: 19, 136, 8
 	strength = 50
 
 	glass_name = "melon liqueur"
@@ -189,7 +189,7 @@
 	lore_text = "Yohoho and all that."
 	taste_description = "spiked butterscotch"
 	taste_mult = 1.1
-	color = "#ecb633"
+	icon_colour = "#ecb633"
 	strength = 15
 
 	glass_name = "rum"
@@ -199,7 +199,7 @@
 	name = "sake"
 	lore_text = "Anime's favorite drink."
 	taste_description = "dry alcohol"
-	color = "#dddddd"
+	icon_colour = "#dddddd"
 	strength = 25
 
 	glass_name = "sake"
@@ -209,7 +209,7 @@
 	name = "tequila"
 	lore_text = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty hombre?"
 	taste_description = "paint stripper"
-	color = "#ffff91"
+	icon_colour = "#ffff91"
 	strength = 25
 
 	glass_name = "tequilla"
@@ -219,7 +219,7 @@
 	name = "Thirteen Loko"
 	lore_text = "A potent mixture of caffeine and alcohol."
 	taste_description = "jitters and death"
-	color = "#102000"
+	icon_colour = "#102000"
 	strength = 25
 	nutriment_factor = 1
 
@@ -239,7 +239,7 @@
 	lore_text = "You suddenly feel a craving for a martini..."
 	taste_description = "dry alcohol"
 	taste_mult = 1.3
-	color = "#91ff91" // rgb: 145, 255, 145
+	icon_colour = "#91ff91" // rgb: 145, 255, 145
 	strength = 15
 
 	glass_name = "vermouth"
@@ -249,7 +249,7 @@
 	name = "vodka"
 	lore_text = "Number one drink AND fueling choice for Independents around the galaxy."
 	taste_description = "grain alcohol"
-	color = "#0064c8" // rgb: 0, 100, 200
+	icon_colour = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
 
 	glass_name = "vodka"
@@ -259,14 +259,14 @@
 	name = "premium vodka"
 	lore_text = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	taste_description = "clear kvass"
-	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
+	icon_colour = "#aaddff" // rgb: 170, 221, 255 - very light blue.
 	strength = 10
 
 /decl/material/ethanol/whiskey
 	name = "whiskey"
 	lore_text = "A superb and well-aged single-malt whiskey. Damn."
 	taste_description = "molasses"
-	color = "#4c3100"
+	icon_colour = "#4c3100"
 	strength = 25
 
 	glass_name = "whiskey"
@@ -276,7 +276,7 @@
 	name = "wine"
 	lore_text = "An premium alchoholic beverage made from distilled grape juice."
 	taste_description = "bitter sweetness"
-	color = "#7e4043" // rgb: 126, 64, 67
+	icon_colour = "#7e4043" // rgb: 126, 64, 67
 	strength = 15
 
 	glass_name = "wine"
@@ -286,14 +286,14 @@
 	name = "white wine"
 	lore_text = "An exceptionally expensive alchoholic beverage made from distilled white grapes."
 	taste_description = "white velvet"
-	color = "#ffddaa" // rgb: 255, 221, 170 - a light cream
+	icon_colour = "#ffddaa" // rgb: 255, 221, 170 - a light cream
 	strength = 20
 
 /decl/material/ethanol/herbal
 	name = "herbal liquor"
 	lore_text = "A complex blend of herbs, spices and roots mingle in this old Earth classic."
 	taste_description = "a sweet summer garden"
-	color = "#dfff00"
+	icon_colour = "#dfff00"
 	strength = 13
 
 	glass_name = "herbal liquor"
@@ -304,7 +304,7 @@
 	name = "Acid Spit"
 	lore_text = "A drink for the daring, can be deadly if incorrectly prepared!"
 	taste_description = "stomach acid"
-	color = "#365000"
+	icon_colour = "#365000"
 	strength = 30
 
 	glass_name = "Acid Spit"
@@ -314,7 +314,7 @@
 	name = "Allies cocktail"
 	lore_text = "A drink made from your allies, not as sweet as when made from your enemies."
 	taste_description = "bitter yet free"
-	color = "#d8ac45"
+	icon_colour = "#d8ac45"
 	strength = 25
 
 	glass_name = "Allies cocktail"
@@ -324,7 +324,7 @@
 	name = "Aloe"
 	lore_text = "So very, very, very good."
 	taste_description = "sweet 'n creamy"
-	color = "#b7ea75"
+	icon_colour = "#b7ea75"
 	strength = 15
 
 	glass_name = "Aloe"
@@ -334,7 +334,7 @@
 	name = "Amasec"
 	lore_text = "Official drink of the Gun Club!"
 	taste_description = "dark and metallic"
-	color = "#ff975d"
+	icon_colour = "#ff975d"
 	strength = 25
 
 	glass_name = "Amasec"
@@ -344,7 +344,7 @@
 	name = "Andalusia"
 	lore_text = "A nice, strangely named drink."
 	taste_description = "lemons"
-	color = "#f4ea4a"
+	icon_colour = "#f4ea4a"
 	strength = 15
 
 	glass_name = "Andalusia"
@@ -354,7 +354,7 @@
 	name = "Anti-freeze"
 	lore_text = "Ultimate refreshment."
 	taste_description = "Jack Frost's piss"
-	color = "#56deea"
+	icon_colour = "#56deea"
 	strength = 12
 	adj_temp = 20
 	targ_temp = 330
@@ -366,7 +366,7 @@
 	name = "Atomic Bomb"
 	lore_text = "Nuclear proliferation never tasted so good."
 	taste_description = "da bomb"
-	color = "#666300"
+	icon_colour = "#666300"
 	strength = 10
 	druggy = 50
 
@@ -378,7 +378,7 @@
 	lore_text = "Coffee, Irish Cream, and cognac. You will get bombed."
 	taste_description = "angry and irish"
 	taste_mult = 1.3
-	color = "#997650"
+	icon_colour = "#997650"
 	strength = 12
 
 	glass_name = "B-52"
@@ -388,7 +388,7 @@
 	name = "Bahama Mama"
 	lore_text = "Tropical cocktail."
 	taste_description = "lime and orange"
-	color = "#ff7f3b"
+	icon_colour = "#ff7f3b"
 	strength = 25
 
 	glass_name = "Bahama Mama"
@@ -399,7 +399,7 @@
 	lore_text = "A drink from Clown Heaven."
 	taste_description = "a bad joke"
 	nutriment_factor = 1
-	color = "#ffff91"
+	icon_colour = "#ffff91"
 	strength = 12
 
 	glass_name = "Banana Honk"
@@ -409,7 +409,7 @@
 	name = "Barefoot"
 	lore_text = "Barefoot and pregnant"
 	taste_description = "creamy berries"
-	color = "#ffcdea"
+	icon_colour = "#ffcdea"
 	strength = 30
 
 	glass_name = "Barefoot"
@@ -420,7 +420,7 @@
 	lore_text = "Deny drinking this and prepare for THE LAW."
 	taste_description = "JUSTICE"
 	taste_mult = 2
-	color = "#404040"
+	icon_colour = "#404040"
 	strength = 12
 
 	glass_name = "Beepsky Smash"
@@ -434,7 +434,7 @@
 	name = "bilk"
 	lore_text = "This appears to be beer mixed with milk. Disgusting."
 	taste_description = "desperation and lactate"
-	color = "#895c4c"
+	icon_colour = "#895c4c"
 	strength = 50
 	nutriment_factor = 2
 
@@ -445,7 +445,7 @@
 	name = "Black Russian"
 	lore_text = "For the lactose-intolerant. Still as classy as a White Russian."
 	taste_description = "bitterness"
-	color = "#360000"
+	icon_colour = "#360000"
 	strength = 15
 
 	glass_name = "Black Russian"
@@ -455,7 +455,7 @@
 	name = "Bloody Mary"
 	lore_text = "A strange yet pleasurable mixture made of vodka, tomato and lime juice. Or at least you THINK the red stuff is tomato juice."
 	taste_description = "tomatoes with a hint of lime"
-	color = "#b40000"
+	icon_colour = "#b40000"
 	strength = 15
 
 	glass_name = "Bloody Mary"
@@ -465,7 +465,7 @@
 	name = "Booger"
 	lore_text = "Ewww..."
 	taste_description = "sweet 'n creamy"
-	color = "#8cff8c"
+	icon_colour = "#8cff8c"
 	strength = 30
 
 	glass_name = "Booger"
@@ -476,7 +476,7 @@
 	lore_text = "It's just as effective as Dutch-Courage!"
 	taste_description = "alcoholic bravery"
 	taste_mult = 1.1
-	color = "#4c3100"
+	icon_colour = "#4c3100"
 	strength = 15
 
 	glass_name = "Brave Bull"
@@ -486,7 +486,7 @@
 	name = "Changeling Sting"
 	lore_text = "You take a tiny sip and feel a burning sensation..."
 	taste_description = "your brain coming out your nose"
-	color = "#2e6671"
+	icon_colour = "#2e6671"
 	strength = 10
 
 	glass_name = "Changeling Sting"
@@ -496,7 +496,7 @@
 	name = "classic martini"
 	lore_text = "Vermouth with Gin. Not quite how 007 enjoyed it, but still delicious."
 	taste_description = "dry class"
-	color = "#0064c8"
+	icon_colour = "#0064c8"
 	strength = 25
 
 	glass_name = "classic martini"
@@ -506,7 +506,7 @@
 	name = "Cuba Libre"
 	lore_text = "Rum, mixed with cola. Viva la revolucion."
 	taste_description = "cola"
-	color = "#3e1b00"
+	icon_colour = "#3e1b00"
 	strength = 30
 
 	glass_name = "Cuba Libre"
@@ -517,7 +517,7 @@
 	lore_text = "AHHHH!!!!"
 	taste_description = "sweet tasting iron"
 	taste_mult = 1.5
-	color = "#820000"
+	icon_colour = "#820000"
 	strength = 15
 
 	glass_name = "Demons' Blood"
@@ -527,7 +527,7 @@
 	name = "Devils Kiss"
 	lore_text = "Creepy time!"
 	taste_description = "bitter iron"
-	color = "#a68310"
+	icon_colour = "#a68310"
 	strength = 15
 
 	glass_name = "Devil's Kiss"
@@ -538,7 +538,7 @@
 	lore_text = "Only for the experienced. You think you see sand floating in the glass."
 	taste_description = "a beach"
 	nutriment_factor = 1
-	color = "#2e6671"
+	icon_colour = "#2e6671"
 	strength = 12
 
 	glass_name = "driest martini"
@@ -548,7 +548,7 @@
 	name = "gin fizz"
 	lore_text = "Refreshingly lemony, deliciously dry."
 	taste_description = "dry, tart lemons"
-	color = "#ffffae"
+	icon_colour = "#ffffae"
 	strength = 30
 
 	glass_name = "gin fizz"
@@ -558,7 +558,7 @@
 	name = "grog"
 	lore_text = "Watered-down rum, pirate approved!"
 	taste_description = "a poor excuse for alcohol"
-	color = "#ffbb00"
+	icon_colour = "#ffbb00"
 	strength = 100
 
 	glass_name = "grog"
@@ -568,7 +568,7 @@
 	name = "Erika Surprise"
 	lore_text = "The surprise is, it's green!"
 	taste_description = "tartness and bananas"
-	color = "#2e6671"
+	icon_colour = "#2e6671"
 	strength = 15
 
 	glass_name = "Erika Surprise"
@@ -579,7 +579,7 @@
 	lore_text = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
 	taste_description = "your liver being ripped out of your body, but in the best, most delicious meaning of those words."
 	taste_mult = 5
-	color = "#7f00ff"
+	icon_colour = "#7f00ff"
 	strength = 10
 	glass_name = "The Livergeist"
 	glass_desc = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
@@ -588,7 +588,7 @@
 	name = "gin and tonic"
 	lore_text = "An all time classic, mild cocktail."
 	taste_description = "mild tartness" //???
-	color = "#0064c8"
+	icon_colour = "#0064c8"
 	strength = 50
 
 	glass_name = "gin and tonic"
@@ -599,7 +599,7 @@
 	lore_text = "100 proof cinnamon schnapps, made for alcoholic teen girls on spring break."
 	taste_description = "burning cinnamon"
 	taste_mult = 1.3
-	color = "#f4e46d"
+	icon_colour = "#f4e46d"
 	strength = 15
 
 	glass_name = "Goldschlager"
@@ -609,7 +609,7 @@
 	name = "Hippies' Delight"
 	lore_text = "You just don't get it maaaan."
 	taste_description = "giving peace a chance"
-	color = "#ff88ff"
+	icon_colour = "#ff88ff"
 	strength = 15
 	druggy = 50
 
@@ -620,7 +620,7 @@
 	name = "hooch"
 	lore_text = "Either someone's failure at cocktail making or attempt in alchohol production. In any case, do you really want to drink that?"
 	taste_description = "pure resignation"
-	color = "#4c3100"
+	icon_colour = "#4c3100"
 	strength = 25
 	toxicity = 2
 
@@ -631,7 +631,7 @@
 	name = "iced beer"
 	lore_text = "A beer which is so cold the air around it freezes."
 	taste_description = "refreshingly cold"
-	color = "#ffd300"
+	icon_colour = "#ffd300"
 	strength = 50
 	adj_temp = -20
 	targ_temp = 270
@@ -644,7 +644,7 @@
 	name = "Irish Slammer"
 	lore_text = "Mmm, tastes like chocolate cake..."
 	taste_description = "delicious anger"
-	color = "#2e6671"
+	icon_colour = "#2e6671"
 	strength = 15
 
 	glass_name = "Irish slammer"
@@ -654,7 +654,7 @@
 	name = "Irish coffee"
 	lore_text = "Coffee, and alcohol. More fun than a Mimosa to drink in the morning."
 	taste_description = "giving up on the day"
-	color = "#4c3100"
+	icon_colour = "#4c3100"
 	strength = 15
 
 	glass_name = "Irish coffee"
@@ -664,7 +664,7 @@
 	name = "Irish cream"
 	lore_text = "Whiskey-imbued cream, what else would you expect from the Irish."
 	taste_description = "creamy alcohol"
-	color = "#dddd9a"
+	icon_colour = "#dddd9a"
 	strength = 25
 
 	glass_name = "Irish cream"
@@ -674,7 +674,7 @@
 	name = "Long Island Iced Tea"
 	lore_text = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
 	taste_description = "a mixture of cola and alcohol"
-	color = "#895b1f"
+	icon_colour = "#895b1f"
 	strength = 12
 
 	glass_name = "Long Island iced tea"
@@ -684,7 +684,7 @@
 	name = "Manhattan"
 	lore_text = "The Detective's undercover drink of choice. He never could stomach gin..."
 	taste_description = "mild dryness"
-	color = "#c13600"
+	icon_colour = "#c13600"
 	strength = 15
 
 	glass_name = "Manhattan"
@@ -694,7 +694,7 @@
 	name = "Manhattan Project"
 	lore_text = "A scientist's drink of choice, for pondering ways to blow stuff up."
 	taste_description = "death, the destroyer of worlds"
-	color = "#c15d00"
+	icon_colour = "#c15d00"
 	strength = 10
 	druggy = 30
 
@@ -705,7 +705,7 @@
 	name = "Manly Dorf"
 	lore_text = "Beer and Ale, brought together in a delicious mix. Intended for true men only."
 	taste_description = "hair on your chest and your chin"
-	color = "#4c3100"
+	icon_colour = "#4c3100"
 	strength = 25
 
 	glass_name = "Manly Dorf"
@@ -715,7 +715,7 @@
 	name = "margarita"
 	lore_text = "On the rocks with salt on the rim. Arriba~!"
 	taste_description = "dry and salty"
-	color = "#8cff8c"
+	icon_colour = "#8cff8c"
 	strength = 15
 
 	glass_name = "margarita"
@@ -725,7 +725,7 @@
 	name = "mead"
 	lore_text = "A Viking's drink, though a cheap one."
 	taste_description = "sweet, sweet alcohol"
-	color = "#ffbb00"
+	icon_colour = "#ffbb00"
 	strength = 30
 	nutriment_factor = 1
 
@@ -737,7 +737,7 @@
 	lore_text = "You've really hit rock bottom now... your liver packed its bags and left last night."
 	taste_description = "bitterness"
 	taste_mult = 2.5
-	color = "#0064c8"
+	icon_colour = "#0064c8"
 	strength = 12
 
 	glass_name = "moonshine"
@@ -747,7 +747,7 @@
 	name = "Neurotoxin"
 	lore_text = "A strong neurotoxin that puts the subject into a death-like state."
 	taste_description = "a numbing sensation"
-	color = "#2e2e61"
+	icon_colour = "#2e2e61"
 	strength = 10
 
 	glass_name = "Neurotoxin"
@@ -764,7 +764,7 @@
 	name = "Patron"
 	lore_text = "Tequila with silver in it, a favorite of alcoholic women in the club scene."
 	taste_description = "metallic and expensive"
-	color = "#585840"
+	icon_colour = "#585840"
 	strength = 30
 
 	glass_name = "Patron"
@@ -774,7 +774,7 @@
 	name = "poison wine"
 	lore_text = "Is this even wine? Toxic! Hallucinogenic! Probably consumed in boatloads by your superiors!"
 	taste_description = "purified alcoholic death"
-	color = "#000000"
+	icon_colour = "#000000"
 	strength = 10
 	druggy = 50
 	halluci = 10
@@ -799,7 +799,7 @@
 	name = "red mead"
 	lore_text = "The true Viking's drink! Even though it has a strange red color."
 	taste_description = "sweet and salty alcohol"
-	color = "#c73c00"
+	icon_colour = "#c73c00"
 	strength = 30
 
 	glass_name = "red mead"
@@ -809,7 +809,7 @@
 	name = "sbiten"
 	lore_text = "A spicy mead! Might be a little hot for the little guys!"
 	taste_description = "hot and spice"
-	color = "#ffa371"
+	icon_colour = "#ffa371"
 	strength = 15
 	adj_temp = 50
 	targ_temp = 360
@@ -821,7 +821,7 @@
 	name = "Screwdriver"
 	lore_text = "Vodka, mixed with plain ol' orange juice. The result is surprisingly delicious."
 	taste_description = "oranges"
-	color = "#a68310"
+	icon_colour = "#a68310"
 	strength = 15
 
 	glass_name = "Screwdriver"
@@ -831,7 +831,7 @@
 	name = "Ship's Surgeon"
 	lore_text = "Rum and Dr. Gibb. Served ice cold, like the scalpel."
 	taste_description = "black comedy"
-	color = "#524d0f"
+	icon_colour = "#524d0f"
 	strength = 15
 
 	glass_name = "ship's surgeon"
@@ -843,7 +843,7 @@
 	taste_description = "a pencil eraser"
 	taste_mult = 1.2
 	nutriment_factor = 1
-	color = "#ffffff"
+	icon_colour = "#ffffff"
 	strength = 12
 
 	glass_name = "Silencer"
@@ -853,7 +853,7 @@
 	name = "Singulo"
 	lore_text = "A blue-space beverage!"
 	taste_description = "concentrated matter"
-	color = "#2e6671"
+	icon_colour = "#2e6671"
 	strength = 10
 
 	glass_name = "Singulo"
@@ -863,7 +863,7 @@
 	name = "Snow White"
 	lore_text = "A cold refreshment"
 	taste_description = "refreshing cold"
-	color = "#ffffff"
+	icon_colour = "#ffffff"
 	strength = 30
 
 	glass_name = "Snow White"
@@ -873,7 +873,7 @@
 	name = "Sui Dream"
 	lore_text = "Comprised of: White soda, blue curacao, melon liquor."
 	taste_description = "fruit"
-	color = "#00a86b"
+	icon_colour = "#00a86b"
 	strength = 100
 
 	glass_name = "Sui Dream"
@@ -883,7 +883,7 @@
 	name = "Syndicate Bomb"
 	lore_text = "Tastes like terrorism!"
 	taste_description = "purified antagonism"
-	color = "#2e6671"
+	icon_colour = "#2e6671"
 	strength = 10
 
 	glass_name = "Syndicate Bomb"
@@ -893,7 +893,7 @@
 	name = "Tequila Sunrise"
 	lore_text = "Tequila and orange juice. Much like a Screwdriver, only Mexican~"
 	taste_description = "oranges"
-	color = "#ffe48c"
+	icon_colour = "#ffe48c"
 	strength = 25
 
 	glass_name = "Tequilla Sunrise"
@@ -903,7 +903,7 @@
 	name = "Three Mile Island Iced Tea"
 	lore_text = "Made for a woman, strong enough for a man."
 	taste_description = "dry"
-	color = "#666340"
+	icon_colour = "#666340"
 	strength = 10
 	druggy = 50
 
@@ -914,7 +914,7 @@
 	name = "Toxins Special"
 	lore_text = "This thing is ON FIRE! CALL THE DAMN SHUTTLE!"
 	taste_description = "spicy toxins"
-	color = "#7f00ff"
+	icon_colour = "#7f00ff"
 	strength = 10
 	adj_temp = 15
 	targ_temp = 330
@@ -926,7 +926,7 @@
 	name = "vodka martini"
 	lore_text = "Vodka with Gin. Not quite how 007 enjoyed it, but still delicious."
 	taste_description = "shaken, not stirred"
-	color = "#0064c8"
+	icon_colour = "#0064c8"
 	strength = 12
 
 	glass_name = "vodka martini"
@@ -937,7 +937,7 @@
 	name = "vodka and tonic"
 	lore_text = "For when a gin and tonic isn't russian enough."
 	taste_description = "tart bitterness"
-	color = "#0064c8" // rgb: 0, 100, 200
+	icon_colour = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
 
 	glass_name = "vodka and tonic"
@@ -948,7 +948,7 @@
 	name = "White Russian"
 	lore_text = "That's just, like, your opinion, man..."
 	taste_description = "bitter cream"
-	color = "#a68340"
+	icon_colour = "#a68340"
 	strength = 15
 
 	glass_name = "White Russian"
@@ -959,7 +959,7 @@
 	name = "whiskey cola"
 	lore_text = "Whiskey, mixed with cola. Surprisingly refreshing."
 	taste_description = "cola"
-	color = "#3e1b00"
+	icon_colour = "#3e1b00"
 	strength = 25
 
 	glass_name = "whiskey cola"
@@ -969,7 +969,7 @@
 /decl/material/ethanol/whiskeysoda
 	name = "whiskey soda"
 	lore_text = "For the more refined griffon."
-	color = "#eab300"
+	icon_colour = "#eab300"
 	strength = 15
 
 	glass_name = "whiskey soda"
@@ -978,7 +978,7 @@
 /decl/material/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
 	name = "aged whiskey"
 	lore_text = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
-	color = "#523600"
+	icon_colour = "#523600"
 	strength = 25
 
 	glass_name = "aged whiskey"
@@ -988,7 +988,7 @@
 	name = "apple cider"
 	lore_text = "A refreshing glass of apple cider."
 	taste_description = "cool apple cider"
-	color = "#cac089"
+	icon_colour = "#cac089"
 	strength = 50
 
 	glass_name = "apple cider"
@@ -998,7 +998,7 @@
 	name = "Arak"
 	lore_text = "An unsweetened aniseed and grape mixture."
 	taste_description = "oil and licorice"
-	color = "#f7f6e0"
+	icon_colour = "#f7f6e0"
 	strength = 20
 
 	glass_name = "arak"
@@ -1008,7 +1008,7 @@
 	name = "champagne"
 	lore_text = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
 	taste_description = "a superior taste of sparkling wine"
-	color = "#e8dfc1"
+	icon_colour = "#e8dfc1"
 	strength = 25
 
 	glass_name = "champagne"
@@ -1018,7 +1018,7 @@
 	name = "Sawbones' Dismay"
 	lore_text = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
 	taste_description = "a pick-me-up and put-me-down"
-	color = "#996862"
+	icon_colour = "#996862"
 	strength = 10
 
 	glass_name = "Sawbones' Dismay"
@@ -1028,7 +1028,7 @@
 	name = "Jagermeister"
 	lore_text = "A special blend of alcohol, herbs, and spices. It has remained a popular Earther drink."
 	taste_description = "herbs, spices, and alcohol"
-	color = "#596e3e"
+	icon_colour = "#596e3e"
 	strength = 20
 
 	glass_name = "jagermeister"
@@ -1038,7 +1038,7 @@
 	name = "kvass"
 	lore_text = "An alcoholic drink commonly made from bread."
 	taste_description = "vkusnyy kvas, ypa!"
-	color = "#362f22"
+	icon_colour = "#362f22"
 	strength = 30
 
 	glass_name = "kvass"
@@ -1048,7 +1048,7 @@
 	name = "vodka cola"
 	lore_text = "A refreshing mix of vodka and cola."
 	taste_description = "vodka and cola"
-	color = "#474238"
+	icon_colour = "#474238"
 	strength = 15
 	glass_name = "vodka cola"
 	glass_desc = "A refreshing mix of vodka and cola."

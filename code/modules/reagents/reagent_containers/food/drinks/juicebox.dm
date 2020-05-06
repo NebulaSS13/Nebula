@@ -115,4 +115,4 @@
 	var/splash = pick("teasing", "splash", "hint", "measure", "nip", "slug", "depth", "dash", "sensation", "surge", "squirt", "spritz", "efflux", "gush", "swell")
 	desc = "[J.name]; [J.lore_text] This one comes with \an [splash] of [K.name] in a neat box."
 	name = "\improper [J.name] and [K.name] juicebox"
-	set_colors(J.color, K.color, get_random_colour(simple=TRUE), style=pick(list("stripe", "corner")))
+	set_colors(J.icon_colour, K.icon_colour, get_random_colour(simple=TRUE), style=pick(list("stripe", "corner")))
