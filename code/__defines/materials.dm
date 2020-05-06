@@ -126,6 +126,7 @@
 #define MAT_LEATHER_LIZARD          /material/leather/lizard
 #define MAT_LEATHER_FUR             /material/leather/fur
 #define MAT_LEATHER_CHITIN          /material/leather/chitin
+#define MAT_LEATHER_SYNTH           /material/leather/synth
 
 // defaults
 #define DEFAULT_WALL_MATERIAL       MAT_STEEL

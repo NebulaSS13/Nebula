@@ -20,9 +20,9 @@
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/shoes/jackboots,
 		/obj/item/clothing/shoes/workboots,
-		/obj/item/clothing/shoes/dutyboots,
-		/obj/item/clothing/shoes/jungleboots,
-		/obj/item/clothing/shoes/desertboots
+		/obj/item/clothing/shoes/jackboots/duty,
+		/obj/item/clothing/shoes/jackboots/jungleboots,
+		/obj/item/clothing/shoes/jackboots/desertboots
 	)
 
 /datum/gear/shoes/color

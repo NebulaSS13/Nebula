@@ -262,6 +262,12 @@
 	reflectiveness = MAT_VALUE_MATTE
 	wall_support_value = 0
 
+/material/leather/synth
+	display_name = "synthleather"
+	icon_colour = "#1f1f20"
+	ignition_point = T0C+150
+	melting_point = T0C+100
+
 /material/leather/lizard
 	display_name = "scaled hide"
 	icon_colour = "#434b31"
