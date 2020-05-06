@@ -92,7 +92,7 @@
 	name_language = TRADER_DEFAULT_NAME
 
 	possible_wanted_items = list(/mob/living/simple_animal/construct            = TRADER_SUBTYPES_ONLY,
-								/obj/item/melee/cultblade                = TRADER_THIS_TYPE,
+								/obj/item/material/sword/cultblade                = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/culthood                = TRADER_ALL,
 								/obj/item/clothing/suit/space/cult              = TRADER_ALL,
 								/obj/item/clothing/suit/cultrobes               = TRADER_ALL,
