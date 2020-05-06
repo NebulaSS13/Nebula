@@ -45,7 +45,7 @@
 	icon_reinf = "reinf_stone"
 	icon_colour = "#d9c179"
 	shard_type = SHARD_STONE_PIECE
-	weight = 23
+	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_HARD - 5
 	reflectiveness = MAT_VALUE_MATTE
 	brute_armor = 3
@@ -70,7 +70,7 @@
 	display_name = "marble"
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
 	icon_colour = "#aaaaaa"
-	weight = 26
+	weight = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_SHINY
 	brute_armor = 3

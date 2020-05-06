@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_LARGE
 	material_force_multiplier = 0.5 // 30 when wielded with hardnes 60 (steel)
 	armor_penetration = 10
-	thrown_material_force_multiplier = 0.5 // 10 when thrown with weight 20 (steel)
+	thrown_material_force_multiplier = 0.16 // 10 when thrown with weight 60 (steel)
 	sharp = 1
 	edge = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -21,7 +21,7 @@
 	edge = 0
 	sharp = 0
 	material_force_multiplier = 0.2
-	thrown_material_force_multiplier = 0.2
+	thrown_material_force_multiplier = 0.1
 
 /obj/item/material/sword/katana
 	name = "katana"
@@ -36,7 +36,7 @@
 	edge = 0
 	sharp = 0
 	material_force_multiplier = 0.2
-	thrown_material_force_multiplier = 0.2
+	thrown_material_force_multiplier = 0.1
 
 /obj/item/material/sword/katana/vibro
 	name = "vibrokatana"

@@ -43,9 +43,9 @@
 			if(mat.opacity < 0.5)
 				material_info += "It is transparent."
 
-			if(mat.weight <= MAT_FLAG_LIGHT)
+			if(mat.weight <= MAT_VALUE_LIGHT)
 				material_info += "It is very light."
-			else if(mat.weight >= MAT_FLAG_HEAVY)
+			else if(mat.weight >= MAT_VALUE_HEAVY)
 				material_info += "It is very heavy."
 			else
 				material_info += "It is of average weight."

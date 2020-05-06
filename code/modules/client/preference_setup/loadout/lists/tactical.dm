@@ -22,9 +22,10 @@
 	path = /obj/item/clothing/accessory/storage/holster
 	cost = 3
 
-/datum/gear/tactical/holster/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(typesof(/obj/item/clothing/accessory/storage/holster) - typesof(/obj/item/clothing/accessory/storage/holster/machete))
+/datum/gear/tactical/holster/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
+	.[/datum/gear_tweak/path/specified_types_list] |= typesof(/obj/item/clothing/accessory/storage/holster) - typesof(/obj/item/clothing/accessory/storage/holster/machete)
 
 /datum/gear/tactical/sheath
 	display_name = "machete sheath"

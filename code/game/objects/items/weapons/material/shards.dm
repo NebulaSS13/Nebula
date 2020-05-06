@@ -10,7 +10,7 @@
 	edge = 1
 	w_class = ITEM_SIZE_SMALL
 	material_force_multiplier = 0.12 // 6 with hardness 30 (glass)
-	thrown_material_force_multiplier = 0.4 // 4 with weight 15 (glass)
+	thrown_material_force_multiplier = 0.1 // 3 with weight 30 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	material = MAT_GLASS

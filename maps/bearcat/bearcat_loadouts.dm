@@ -5,9 +5,11 @@
 	sort_category = "Utility"
 	path = /obj/item/gun/projectile/
 
-/datum/gear/utility/guns/New()
-	..()
-	var/guns = list()
-	guns["holdout pistol"] = /obj/item/gun/projectile/pistol/holdout
-	guns["pistol"] = /obj/item/gun/projectile/pistol/random
-	gear_tweaks += new/datum/gear_tweak/path(guns)
+/datum/gear/utility/guns/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"holdout pistol" = /obj/item/gun/projectile/pistol/holdout,
+		"lasvolver" =      /obj/item/gun/projectile/revolver/lasvolver,
+		"pistol" =         /obj/item/gun/projectile/pistol/random
+	)

@@ -178,3 +178,7 @@
 	material = MAT_STEEL
 	max_ammo = 7
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/speedloader/laser_revolver
+	caliber = CALIBER_PISTOL_LASBULB
+	ammo_type = /obj/item/ammo_casing/lasbulb
