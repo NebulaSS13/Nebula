@@ -198,7 +198,7 @@
 	for(var/A in range(1, get_turf(src)))
 		if(istype(A,/atom/movable))
 			var/atom/movable/AM = A
-			if(AM == inertia_ignore || !AM.simulated || !AM.mouse_opacity || AM == buckled)	//mouse_opacity is hacky as hell, need better solution
+			if(AM == src || AM == inertia_ignore || !AM.simulated || !AM.mouse_opacity || AM == buckled)	//mouse_opacity is hacky as hell, need better solution
 				continue
 			if(ismob(AM))
 				var/mob/M = AM
