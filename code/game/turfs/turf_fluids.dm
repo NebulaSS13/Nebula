@@ -9,7 +9,7 @@
 				break
 	return fluid_can_pass
 
-/turf/proc/add_fluid(var/amount, var/fluid = /decl/reagent/water)
+/turf/proc/add_fluid(var/amount, var/fluid = /decl/material/water)
 	if(!flooded)
 		var/obj/effect/fluid/F = locate() in src
 		if(!F) F = new(src)

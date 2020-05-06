@@ -6,7 +6,7 @@
 	layer = FIRE_LAYER
 	appearance_flags = RESET_COLOR
 	mouse_opacity = 0
-	var/material/material
+	var/decl/material/material
 
 /obj/effect/gas_overlay/proc/update_alpha_animation(var/new_alpha)
 	animate(src, alpha = new_alpha)
@@ -16,7 +16,7 @@
 
 /obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
-	material = SSmaterials.get_material_datum(gas)
+	material = decls_repository.get_decl(gas)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(material.gas_tile_overlay)
@@ -55,11 +55,11 @@
 
 //mostly for convenience
 /obj/proc/get_material_type()
-	var/material/mat = get_material()
+	var/decl/material/mat = get_material()
 	. = mat && mat.type
 
 // Material definition and procs follow.
-/material
+/decl/material
 	var/display_name                      // Prettier name for display.
 	var/adjective_name
 	var/use_name
@@ -145,7 +145,7 @@
 	var/value = 1
 
 	// Xenoarch behavior.
-	var/xarch_source_mineral = /decl/reagent/iron
+	var/xarch_source_mineral = /decl/material/iron
 
 	// Gas behavior.
 	var/gas_overlay_limit
@@ -160,8 +160,42 @@
 	var/gas_tile_overlay =       "generic"
 	var/gas_condensation_point = INFINITY
 
+	var/name
+	var/description = "A non-descript chemical."
+	var/taste_description = "old rotten bandaids"
+	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
+	var/metabolism = REM // This would be 0.2 normally
+	var/ingest_met = 0
+	var/touch_met = 0
+	var/overdose = 0
+	var/scannable = 0 // Shows up on health analyzers.
+	var/color = "#000000"
+	var/color_weight = 1
+	var/alpha = 255
+
+	var/glass_icon = DRINK_ICON_DEFAULT
+	var/glass_name = "something"
+	var/glass_desc = "It's a glass of... what, exactly?"
+	var/list/glass_special = null // null equivalent to list()
+
+	// Matter state data.
+	var/chilling_point
+	var/chilling_message = "crackles and freezes!"
+	var/chilling_sound = 'sound/effects/bubbles.ogg'
+	var/list/chilling_products
+	var/list/heating_products
+	var/heating_point
+	var/heating_message = "begins to boil!"
+	var/heating_sound = 'sound/effects/bubbles.ogg'
+	var/fuel_value = 0
+	var/temperature_multiplier = 1
+	var/scent //refer to _scent.dm
+	var/scent_intensity = /decl/scent_intensity/normal
+	var/scent_descriptor = SCENT_DESC_SMELL
+	var/scent_range = 1
+
 // Placeholders for light tiles and rglass.
-/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
+/decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
 	if(!used_stack.can_use(1))
 		to_chat(user, "<span class='warning'>You need need at least one [used_stack.singular_name] to reinforce [target_stack].</span>")
 		return
@@ -171,7 +205,7 @@
 		to_chat(user, "<span class='warning'>You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack].</span>")
 		return
 
-	var/material/reinf_mat = used_stack.material
+	var/decl/material/reinf_mat = used_stack.material
 	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
 		to_chat(user, "<span class='warning'>The [reinf_mat.display_name] is too structurally weak to reinforce the [display_name].</span>")
 		return
@@ -184,7 +218,7 @@
 	S.update_icon()
 	S.dropInto(target_stack.loc)
 
-/material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
+/decl/material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
 		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]."))	
 		return
@@ -200,7 +234,7 @@
 		user.put_in_hands(product)
 
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
-/material/New()
+/decl/material/New()
 	..()
 	if(!use_name)
 		use_name = display_name
@@ -212,23 +246,23 @@
 		burn_armor = brute_armor
 
 // Return the matter comprising this material.
-/material/proc/get_matter()
+/decl/material/proc/get_matter()
 	var/list/temp_matter = list()
 	temp_matter[type] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
-/material/proc/is_a_gas()
+/decl/material/proc/is_a_gas()
 	. = !isnull(gas_specific_heat) && !isnull(gas_molar_mass) // Arbitrary but good enough.
 
 // Weapons handle applying a divisor for this value locally.
-/material/proc/get_blunt_damage()
+/decl/material/proc/get_blunt_damage()
 	return weight //todo
 
 // As above.
-/material/proc/get_edge_damage()
+/decl/material/proc/get_edge_damage()
 	return hardness //todo
 
-/material/proc/get_attack_cooldown()
+/decl/material/proc/get_attack_cooldown()
 	if(weight <= MAT_VALUE_LIGHT)
 		return FAST_WEAPON_COOLDOWN
 	if(weight >= MAT_VALUE_HEAVY)
@@ -236,43 +270,43 @@
 	return DEFAULT_WEAPON_COOLDOWN
 
 // Snowflakey, only checked for alien doors at the moment.
-/material/proc/can_open_material_door(var/mob/living/user)
+/decl/material/proc/can_open_material_door(var/mob/living/user)
 	return 1
 
 // Currently used for weapons and objects made of uranium to irradiate things.
-/material/proc/products_need_process()
+/decl/material/proc/products_need_process()
 	return (radioactivity>0) //todo
 
 // Used by walls when qdel()ing to avoid neighbor merging.
-/material/placeholder
+/decl/material/placeholder
 	display_name = "placeholder"
 	hidden_from_codex = TRUE
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
-/material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)
+/decl/material/proc/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
 	new /obj/structure/girder(target, type, reinf_material && reinf_material.type)
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
-/material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
+/decl/material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
 	place_sheet(target, is_devastated ? 1 : 2)
 
 // Debris product. Used ALL THE TIME.
-/material/proc/place_sheet(var/turf/target, var/amount = 1)
+/decl/material/proc/place_sheet(var/turf/target, var/amount = 1)
 	return stack_type ? new stack_type(target, amount, type) : null
 
 // As above.
-/material/proc/place_shard(var/turf/target)
+/decl/material/proc/place_shard(var/turf/target)
 	if(shard_type)
 		return new /obj/item/material/shard(target, type)
 
 // Used by walls and weapons to determine if they break or not.
-/material/proc/is_brittle()
+/decl/material/proc/is_brittle()
 	return !!(flags & MAT_FLAG_BRITTLE)
 
-/material/proc/combustion_effect(var/turf/T, var/temperature)
+/decl/material/proc/combustion_effect(var/turf/T, var/temperature)
 	return
 
 // Dumb overlay to apply over wall sprite for cheap texture effect
-/material/proc/get_wall_texture()
+/decl/material/proc/get_wall_texture()
 	return

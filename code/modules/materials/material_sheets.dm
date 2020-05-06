@@ -10,8 +10,8 @@
 	icon = 'icons/obj/materials.dmi'
 	matter = null
 
-	var/material/reinf_material
-	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	var/decl/material/reinf_material
+	var/decl/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
 	. = ..(mapload, amount, _material)
@@ -20,7 +20,7 @@
 	if(!_reinf_material)
 		_reinf_material = reinf_material
 	if(_reinf_material)
-		reinf_material = SSmaterials.get_material_datum(_reinf_material)
+		reinf_material = decls_repository.get_decl(_reinf_material)
 		if(!istype(reinf_material))
 			reinf_material = null
 	base_state = icon_state

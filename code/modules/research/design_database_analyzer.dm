@@ -12,7 +12,7 @@
 	var/initial_id_tag
 	var/busy = FALSE
 	var/obj/item/loaded_item = null
-	var/material_return_modifier = 0
+	var/decl/material_return_modifier = 0
 	var/list/cached_materials = list()
 
 /obj/machinery/destructive_analyzer/Initialize()
@@ -64,7 +64,7 @@
 	if(length(dump_matter))
 		visible_message("\The [user] unloads \the [src]'s material hopper.")
 		for(var/mat in dump_matter)
-			var/material/M = SSmaterials.get_material_datum(mat)
+			var/decl/material/M = decls_repository.get_decl(mat)
 			M.place_sheet(loc, dump_matter[mat])
 			cached_materials[mat] -= dump_matter[mat] * SHEET_MATERIAL_AMOUNT
 			if(cached_materials[mat] <= 0)

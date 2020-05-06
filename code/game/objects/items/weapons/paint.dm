@@ -28,7 +28,7 @@ var/global/list/cached_icons = list()
 
 /obj/item/chems/glass/paint/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/paint, reagents.maximum_volume-10)
+	reagents.add_reagent(/decl/material/paint, reagents.maximum_volume-10)
 	if(pigment)
 		reagents.add_reagent(pigment, reagents.maximum_volume-10)
 
@@ -41,35 +41,35 @@ var/global/list/cached_icons = list()
 
 /obj/item/chems/glass/paint/red
 	name = "red paint bucket"
-	pigment = /decl/reagent/pigment/red
+	pigment = /decl/material/pigment/red
 
 /obj/item/chems/glass/paint/yellow
 	name = "yellow paint bucket"
-	pigment = /decl/reagent/pigment/yellow
+	pigment = /decl/material/pigment/yellow
 
 /obj/item/chems/glass/paint/green
 	name = "green paint bucket"
-	pigment = /decl/reagent/pigment/green
+	pigment = /decl/material/pigment/green
 
 /obj/item/chems/glass/paint/blue
 	name = "blue paint bucket"
-	pigment = /decl/reagent/pigment/blue
+	pigment = /decl/material/pigment/blue
 
 /obj/item/chems/glass/paint/purple
 	name = "purple paint bucket"
-	pigment = /decl/reagent/pigment/purple
+	pigment = /decl/material/pigment/purple
 
 /obj/item/chems/glass/paint/black
 	name = "black paint bucket"
-	pigment = /decl/reagent/pigment/black
+	pigment = /decl/material/pigment/black
 
 /obj/item/chems/glass/paint/white
 	name = "white paint bucket"
-	pigment = /decl/reagent/pigment/white
+	pigment = /decl/material/pigment/white
 
 /obj/item/chems/glass/paint/random
 	name = "odd paint bucket"
 
 /obj/item/chems/glass/paint/random/Initialize()
-	pigment = pick(subtypesof(/decl/reagent/pigment))
+	pigment = pick(subtypesof(/decl/material/pigment))
 	. = ..()

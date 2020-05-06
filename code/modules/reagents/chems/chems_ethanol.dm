@@ -1,4 +1,4 @@
-/decl/reagent/ethanol
+/decl/material/ethanol
 	name = "ethanol" //Parent class for all alcoholic reagents.
 	description = "A well-known alcohol with a variety of applications."
 	taste_description = "pure alcohol"
@@ -21,10 +21,10 @@
 	glass_desc = "A well-known alcohol with a variety of applications."
 	value = 1.2
 
-/decl/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(removed * 2 * toxicity)
 
-/decl/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
 	var/strength_mod = 1
@@ -61,7 +61,7 @@
 	if(halluci)
 		M.adjust_hallucination(halluci, halluci)
 
-/decl/reagent/ethanol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
+/decl/material/ethanol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O, /obj/item/paper))
 		var/obj/item/paper/paperaffected = O
 		paperaffected.clearpaper()
@@ -77,7 +77,7 @@
 		affectedbook.dat = null
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
 
-/decl/reagent/ethanol/absinthe
+/decl/material/ethanol/absinthe
 	name = "absinthe"
 	description = "Watch out that the Green Fairy doesn't come for you!"
 	taste_description = "death and licorice"
@@ -88,7 +88,7 @@
 	glass_name = "absinthe"
 	glass_desc = "Wormwood, anise, oh my."
 
-/decl/reagent/ethanol/ale
+/decl/material/ethanol/ale
 	name = "ale"
 	description = "A dark alchoholic beverage made by malted barley and yeast."
 	taste_description = "hearty barley ale"
@@ -98,7 +98,7 @@
 	glass_name = "ale"
 	glass_desc = "A freezing container of delicious ale"
 
-/decl/reagent/ethanol/beer
+/decl/material/ethanol/beer
 	name = "beer"
 	description = "An alcoholic beverage made from malted grains, hops, yeast, and water."
 	taste_description = "piss water"
@@ -109,14 +109,14 @@
 	glass_name = "beer"
 	glass_desc = "A freezing container of beer"
 
-/decl/reagent/ethanol/beer/good
+/decl/material/ethanol/beer/good
 	taste_description = "beer"
 
-/decl/reagent/ethanol/beer/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/ethanol/beer/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.jitteriness = max(M.jitteriness - 3, 0)
 
-/decl/reagent/ethanol/bluecuracao
+/decl/material/ethanol/bluecuracao
 	name = "blue Curacao"
 	description = "Exotically blue, fruity drink, distilled from oranges."
 	taste_description = "oranges"
@@ -127,7 +127,7 @@
 	glass_name = "blue curacao"
 	glass_desc = "Exotically blue, fruity drink, distilled from oranges."
 
-/decl/reagent/ethanol/cognac
+/decl/material/ethanol/cognac
 	name = "cognac"
 	description = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
 	taste_description = "rich and smooth alcohol"
@@ -138,7 +138,7 @@
 	glass_name = "cognac"
 	glass_desc = "Damn, you feel like some kind of French aristocrat just by holding this."
 
-/decl/reagent/ethanol/gin
+/decl/material/ethanol/gin
 	name = "gin"
 	description = "It's gin. In space. I say, good sir."
 	taste_description = "an alcoholic christmas tree"
@@ -149,10 +149,10 @@
 	glass_desc = "A crystal clear glass of Griffeater gin."
 
 //Base type for alchoholic drinks containing coffee
-/decl/reagent/ethanol/coffee
+/decl/material/ethanol/coffee
 	overdose = 45
 
-/decl/reagent/ethanol/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/ethanol/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.dizziness = max(0, M.dizziness - 5)
 	M.drowsyness = max(0, M.drowsyness - 3)
@@ -160,10 +160,10 @@
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
-/decl/reagent/ethanol/coffee/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/ethanol/coffee/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
 	M.make_jittery(5)
 
-/decl/reagent/ethanol/coffee/kahlua
+/decl/material/ethanol/coffee/kahlua
 	name = "coffee liqueur"
 	description = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
 	taste_description = "spiked latte"
@@ -174,7 +174,7 @@
 	glass_name = "RR coffee liquor"
 	glass_desc = "DAMN, THIS THING LOOKS ROBUST"
 
-/decl/reagent/ethanol/melonliquor
+/decl/material/ethanol/melonliquor
 	name = "melon liqueur"
 	description = "A relatively sweet and fruity 46 proof liqueur."
 	taste_description = "fruity alcohol"
@@ -184,7 +184,7 @@
 	glass_name = "melon liqueur"
 	glass_desc = "A relatively sweet and fruity 46 proof liquor."
 
-/decl/reagent/ethanol/rum
+/decl/material/ethanol/rum
 	name = "rum"
 	description = "Yohoho and all that."
 	taste_description = "spiked butterscotch"
@@ -195,7 +195,7 @@
 	glass_name = "rum"
 	glass_desc = "Now you want to Pray for a pirate suit, don't you?"
 
-/decl/reagent/ethanol/sake
+/decl/material/ethanol/sake
 	name = "sake"
 	description = "Anime's favorite drink."
 	taste_description = "dry alcohol"
@@ -205,7 +205,7 @@
 	glass_name = "sake"
 	glass_desc = "A glass of sake."
 
-/decl/reagent/ethanol/tequilla
+/decl/material/ethanol/tequilla
 	name = "tequila"
 	description = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty hombre?"
 	taste_description = "paint stripper"
@@ -215,7 +215,7 @@
 	glass_name = "tequilla"
 	glass_desc = "Now all that's missing is the weird colored shades!"
 
-/decl/reagent/ethanol/thirteenloko
+/decl/material/ethanol/thirteenloko
 	name = "Thirteen Loko"
 	description = "A potent mixture of caffeine and alcohol."
 	taste_description = "jitters and death"
@@ -226,7 +226,7 @@
 	glass_name = "Thirteen Loko"
 	glass_desc = "This is a glass of Thirteen Loko, it appears to be of the highest quality. The drink, not the glass."
 
-/decl/reagent/ethanol/thirteenloko/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/ethanol/thirteenloko/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.drowsyness = max(0, M.drowsyness - 7)
 	if (M.bodytemperature > 310)
@@ -234,7 +234,7 @@
 	M.make_jittery(5)
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/decl/reagent/ethanol/vermouth
+/decl/material/ethanol/vermouth
 	name = "vermouth"
 	description = "You suddenly feel a craving for a martini..."
 	taste_description = "dry alcohol"
@@ -245,7 +245,7 @@
 	glass_name = "vermouth"
 	glass_desc = "You wonder why you're even drinking this straight."
 
-/decl/reagent/ethanol/vodka
+/decl/material/ethanol/vodka
 	name = "vodka"
 	description = "Number one drink AND fueling choice for Independents around the galaxy."
 	taste_description = "grain alcohol"
@@ -255,14 +255,14 @@
 	glass_name = "vodka"
 	glass_desc = "The glass contain wodka. Xynta."
 
-/decl/reagent/ethanol/vodka/premium
+/decl/material/ethanol/vodka/premium
 	name = "premium vodka"
 	description = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	taste_description = "clear kvass"
 	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
 	strength = 10
 
-/decl/reagent/ethanol/whiskey
+/decl/material/ethanol/whiskey
 	name = "whiskey"
 	description = "A superb and well-aged single-malt whiskey. Damn."
 	taste_description = "molasses"
@@ -272,7 +272,7 @@
 	glass_name = "whiskey"
 	glass_desc = "The silky, smokey whiskey goodness inside the glass makes the drink look very classy."
 
-/decl/reagent/ethanol/wine
+/decl/material/ethanol/wine
 	name = "wine"
 	description = "An premium alchoholic beverage made from distilled grape juice."
 	taste_description = "bitter sweetness"
@@ -282,14 +282,14 @@
 	glass_name = "wine"
 	glass_desc = "A very classy looking drink."
 
-/decl/reagent/ethanol/wine/premium
+/decl/material/ethanol/wine/premium
 	name = "white wine"
 	description = "An exceptionally expensive alchoholic beverage made from distilled white grapes."
 	taste_description = "white velvet"
 	color = "#ffddaa" // rgb: 255, 221, 170 - a light cream
 	strength = 20
 
-/decl/reagent/ethanol/herbal
+/decl/material/ethanol/herbal
 	name = "herbal liquor"
 	description = "A complex blend of herbs, spices and roots mingle in this old Earth classic."
 	taste_description = "a sweet summer garden"
@@ -300,7 +300,7 @@
 	glass_desc = "It's definitely green. Or is it yellow?"
 
 // Cocktails
-/decl/reagent/ethanol/acid_spit
+/decl/material/ethanol/acid_spit
 	name = "Acid Spit"
 	description = "A drink for the daring, can be deadly if incorrectly prepared!"
 	taste_description = "stomach acid"
@@ -310,7 +310,7 @@
 	glass_name = "Acid Spit"
 	glass_desc = "A drink from the company archives. Made from live aliens."
 
-/decl/reagent/ethanol/alliescocktail
+/decl/material/ethanol/alliescocktail
 	name = "Allies cocktail"
 	description = "A drink made from your allies, not as sweet as when made from your enemies."
 	taste_description = "bitter yet free"
@@ -320,7 +320,7 @@
 	glass_name = "Allies cocktail"
 	glass_desc = "A drink made from your allies."
 
-/decl/reagent/ethanol/aloe
+/decl/material/ethanol/aloe
 	name = "Aloe"
 	description = "So very, very, very good."
 	taste_description = "sweet 'n creamy"
@@ -330,7 +330,7 @@
 	glass_name = "Aloe"
 	glass_desc = "Very, very, very good."
 
-/decl/reagent/ethanol/amasec
+/decl/material/ethanol/amasec
 	name = "Amasec"
 	description = "Official drink of the Gun Club!"
 	taste_description = "dark and metallic"
@@ -340,7 +340,7 @@
 	glass_name = "Amasec"
 	glass_desc = "Always handy before COMBAT!!!"
 
-/decl/reagent/ethanol/andalusia
+/decl/material/ethanol/andalusia
 	name = "Andalusia"
 	description = "A nice, strangely named drink."
 	taste_description = "lemons"
@@ -350,7 +350,7 @@
 	glass_name = "Andalusia"
 	glass_desc = "A nice, strange named drink."
 
-/decl/reagent/ethanol/antifreeze
+/decl/material/ethanol/antifreeze
 	name = "Anti-freeze"
 	description = "Ultimate refreshment."
 	taste_description = "Jack Frost's piss"
@@ -362,7 +362,7 @@
 	glass_name = "Anti-freeze"
 	glass_desc = "The ultimate refreshment."
 
-/decl/reagent/ethanol/atomicbomb
+/decl/material/ethanol/atomicbomb
 	name = "Atomic Bomb"
 	description = "Nuclear proliferation never tasted so good."
 	taste_description = "da bomb"
@@ -373,7 +373,7 @@
 	glass_name = "Atomic Bomb"
 	glass_desc = "We cannot take legal responsibility for your actions after imbibing."
 
-/decl/reagent/ethanol/coffee/b52
+/decl/material/ethanol/coffee/b52
 	name = "B-52"
 	description = "Coffee, Irish Cream, and cognac. You will get bombed."
 	taste_description = "angry and irish"
@@ -384,7 +384,7 @@
 	glass_name = "B-52"
 	glass_desc = "Kahlua, Irish cream, and congac. You will get bombed."
 
-/decl/reagent/ethanol/bahama_mama
+/decl/material/ethanol/bahama_mama
 	name = "Bahama Mama"
 	description = "Tropical cocktail."
 	taste_description = "lime and orange"
@@ -394,7 +394,7 @@
 	glass_name = "Bahama Mama"
 	glass_desc = "Tropical cocktail"
 
-/decl/reagent/ethanol/bananahonk
+/decl/material/ethanol/bananahonk
 	name = "Banana Mama"
 	description = "A drink from Clown Heaven."
 	taste_description = "a bad joke"
@@ -405,7 +405,7 @@
 	glass_name = "Banana Honk"
 	glass_desc = "A drink from Banana Heaven."
 
-/decl/reagent/ethanol/barefoot
+/decl/material/ethanol/barefoot
 	name = "Barefoot"
 	description = "Barefoot and pregnant"
 	taste_description = "creamy berries"
@@ -415,7 +415,7 @@
 	glass_name = "Barefoot"
 	glass_desc = "Barefoot and pregnant"
 
-/decl/reagent/ethanol/beepsky_smash
+/decl/material/ethanol/beepsky_smash
 	name = "Beepsky Smash"
 	description = "Deny drinking this and prepare for THE LAW."
 	taste_description = "JUSTICE"
@@ -426,11 +426,11 @@
 	glass_name = "Beepsky Smash"
 	glass_desc = "Heavy, hot and strong. Just like the Iron fist of the LAW."
 
-/decl/reagent/ethanol/beepsky_smash/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/ethanol/beepsky_smash/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.Stun(2)
 
-/decl/reagent/ethanol/bilk
+/decl/material/ethanol/bilk
 	name = "bilk"
 	description = "This appears to be beer mixed with milk. Disgusting."
 	taste_description = "desperation and lactate"
@@ -441,7 +441,7 @@
 	glass_name = "bilk"
 	glass_desc = "A brew of milk and beer. For those alcoholics who fear osteoporosis."
 
-/decl/reagent/ethanol/black_russian
+/decl/material/ethanol/black_russian
 	name = "Black Russian"
 	description = "For the lactose-intolerant. Still as classy as a White Russian."
 	taste_description = "bitterness"
@@ -451,7 +451,7 @@
 	glass_name = "Black Russian"
 	glass_desc = "For the lactose-intolerant. Still as classy as a White Russian."
 
-/decl/reagent/ethanol/bloody_mary
+/decl/material/ethanol/bloody_mary
 	name = "Bloody Mary"
 	description = "A strange yet pleasurable mixture made of vodka, tomato and lime juice. Or at least you THINK the red stuff is tomato juice."
 	taste_description = "tomatoes with a hint of lime"
@@ -461,7 +461,7 @@
 	glass_name = "Bloody Mary"
 	glass_desc = "Tomato juice, mixed with Vodka and a lil' bit of lime. Tastes like liquid murder."
 
-/decl/reagent/ethanol/booger
+/decl/material/ethanol/booger
 	name = "Booger"
 	description = "Ewww..."
 	taste_description = "sweet 'n creamy"
@@ -471,7 +471,7 @@
 	glass_name = "Booger"
 	glass_desc = "Ewww..."
 
-/decl/reagent/ethanol/coffee/brave_bull
+/decl/material/ethanol/coffee/brave_bull
 	name = "Brave Bull"
 	description = "It's just as effective as Dutch-Courage!"
 	taste_description = "alcoholic bravery"
@@ -482,7 +482,7 @@
 	glass_name = "Brave Bull"
 	glass_desc = "Tequilla and coffee liquor, brought together in a mouthwatering mixture. Drink up."
 
-/decl/reagent/ethanol/changelingsting
+/decl/material/ethanol/changelingsting
 	name = "Changeling Sting"
 	description = "You take a tiny sip and feel a burning sensation..."
 	taste_description = "your brain coming out your nose"
@@ -492,7 +492,7 @@
 	glass_name = "Changeling Sting"
 	glass_desc = "A stingy drink."
 
-/decl/reagent/ethanol/martini
+/decl/material/ethanol/martini
 	name = "classic martini"
 	description = "Vermouth with Gin. Not quite how 007 enjoyed it, but still delicious."
 	taste_description = "dry class"
@@ -502,7 +502,7 @@
 	glass_name = "classic martini"
 	glass_desc = "Damn, the bartender even stirred it, not shook it."
 
-/decl/reagent/ethanol/cuba_libre
+/decl/material/ethanol/cuba_libre
 	name = "Cuba Libre"
 	description = "Rum, mixed with cola. Viva la revolucion."
 	taste_description = "cola"
@@ -512,7 +512,7 @@
 	glass_name = "Cuba Libre"
 	glass_desc = "A classic mix of rum and cola."
 
-/decl/reagent/ethanol/demonsblood
+/decl/material/ethanol/demonsblood
 	name = "Demons Blood"
 	description = "AHHHH!!!!"
 	taste_description = "sweet tasting iron"
@@ -523,7 +523,7 @@
 	glass_name = "Demons' Blood"
 	glass_desc = "Just looking at this thing makes the hair at the back of your neck stand up."
 
-/decl/reagent/ethanol/devilskiss
+/decl/material/ethanol/devilskiss
 	name = "Devils Kiss"
 	description = "Creepy time!"
 	taste_description = "bitter iron"
@@ -533,7 +533,7 @@
 	glass_name = "Devil's Kiss"
 	glass_desc = "Creepy time!"
 
-/decl/reagent/ethanol/driestmartini
+/decl/material/ethanol/driestmartini
 	name = "driest martini"
 	description = "Only for the experienced. You think you see sand floating in the glass."
 	taste_description = "a beach"
@@ -544,7 +544,7 @@
 	glass_name = "driest martini"
 	glass_desc = "Only for the experienced. You think you see sand floating in the glass."
 
-/decl/reagent/ethanol/ginfizz
+/decl/material/ethanol/ginfizz
 	name = "gin fizz"
 	description = "Refreshingly lemony, deliciously dry."
 	taste_description = "dry, tart lemons"
@@ -554,7 +554,7 @@
 	glass_name = "gin fizz"
 	glass_desc = "Refreshingly lemony, deliciously dry."
 
-/decl/reagent/ethanol/grog
+/decl/material/ethanol/grog
 	name = "grog"
 	description = "Watered-down rum, pirate approved!"
 	taste_description = "a poor excuse for alcohol"
@@ -564,7 +564,7 @@
 	glass_name = "grog"
 	glass_desc = "A fine and cepa drink for Space."
 
-/decl/reagent/ethanol/erikasurprise
+/decl/material/ethanol/erikasurprise
 	name = "Erika Surprise"
 	description = "The surprise is, it's green!"
 	taste_description = "tartness and bananas"
@@ -574,7 +574,7 @@
 	glass_name = "Erika Surprise"
 	glass_desc = "The surprise is, it's green!"
 
-/decl/reagent/ethanol/livergeist
+/decl/material/ethanol/livergeist
 	name = "The Livergeist"
 	description = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
 	taste_description = "your liver being ripped out of your body, but in the best, most delicious meaning of those words."
@@ -584,7 +584,7 @@
 	glass_name = "The Livergeist"
 	glass_desc = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
 
-/decl/reagent/ethanol/gintonic
+/decl/material/ethanol/gintonic
 	name = "gin and tonic"
 	description = "An all time classic, mild cocktail."
 	taste_description = "mild tartness" //???
@@ -594,7 +594,7 @@
 	glass_name = "gin and tonic"
 	glass_desc = "A mild but still great cocktail. Drink up, like a true Englishman."
 
-/decl/reagent/ethanol/goldschlager
+/decl/material/ethanol/goldschlager
 	name = "cinnamon schnapps"
 	description = "100 proof cinnamon schnapps, made for alcoholic teen girls on spring break."
 	taste_description = "burning cinnamon"
@@ -605,7 +605,7 @@
 	glass_name = "Goldschlager"
 	glass_desc = "100 proof that teen girls will drink anything with gold in it."
 
-/decl/reagent/ethanol/hippies_delight
+/decl/material/ethanol/hippies_delight
 	name = "Hippies' Delight"
 	description = "You just don't get it maaaan."
 	taste_description = "giving peace a chance"
@@ -616,7 +616,7 @@
 	glass_name = "Hippie's Delight"
 	glass_desc = "A drink enjoyed by people during the 1960's."
 
-/decl/reagent/ethanol/hooch
+/decl/material/ethanol/hooch
 	name = "hooch"
 	description = "Either someone's failure at cocktail making or attempt in alchohol production. In any case, do you really want to drink that?"
 	taste_description = "pure resignation"
@@ -627,7 +627,7 @@
 	glass_name = "Hooch"
 	glass_desc = "You've really hit rock bottom now... your liver packed its bags and left last night."
 
-/decl/reagent/ethanol/iced_beer
+/decl/material/ethanol/iced_beer
 	name = "iced beer"
 	description = "A beer which is so cold the air around it freezes."
 	taste_description = "refreshingly cold"
@@ -640,7 +640,7 @@
 	glass_desc = "A beer so frosty, the air around it freezes."
 	glass_special = list(DRINK_ICE)
 
-/decl/reagent/ethanol/irishslammer
+/decl/material/ethanol/irishslammer
 	name = "Irish Slammer"
 	description = "Mmm, tastes like chocolate cake..."
 	taste_description = "delicious anger"
@@ -650,7 +650,7 @@
 	glass_name = "Irish slammer"
 	glass_desc = "An Irish slammer, mixed with cream, whiskey, and ale."
 
-/decl/reagent/ethanol/coffee/irishcoffee
+/decl/material/ethanol/coffee/irishcoffee
 	name = "Irish coffee"
 	description = "Coffee, and alcohol. More fun than a Mimosa to drink in the morning."
 	taste_description = "giving up on the day"
@@ -660,7 +660,7 @@
 	glass_name = "Irish coffee"
 	glass_desc = "Coffee and alcohol. More fun than a Mimosa to drink in the morning."
 
-/decl/reagent/ethanol/irish_cream
+/decl/material/ethanol/irish_cream
 	name = "Irish cream"
 	description = "Whiskey-imbued cream, what else would you expect from the Irish."
 	taste_description = "creamy alcohol"
@@ -670,7 +670,7 @@
 	glass_name = "Irish cream"
 	glass_desc = "It's cream, mixed with whiskey. What else would you expect from the Irish?"
 
-/decl/reagent/ethanol/longislandicedtea
+/decl/material/ethanol/longislandicedtea
 	name = "Long Island Iced Tea"
 	description = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
 	taste_description = "a mixture of cola and alcohol"
@@ -680,7 +680,7 @@
 	glass_name = "Long Island iced tea"
 	glass_desc = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
 
-/decl/reagent/ethanol/manhattan
+/decl/material/ethanol/manhattan
 	name = "Manhattan"
 	description = "The Detective's undercover drink of choice. He never could stomach gin..."
 	taste_description = "mild dryness"
@@ -690,7 +690,7 @@
 	glass_name = "Manhattan"
 	glass_desc = "The Detective's undercover drink of choice. He never could stomach gin..."
 
-/decl/reagent/ethanol/manhattan_proj
+/decl/material/ethanol/manhattan_proj
 	name = "Manhattan Project"
 	description = "A scientist's drink of choice, for pondering ways to blow stuff up."
 	taste_description = "death, the destroyer of worlds"
@@ -701,7 +701,7 @@
 	glass_name = "Manhattan Project"
 	glass_desc = "A scientist's drink of choice, for pondering ways to blow stuff up."
 
-/decl/reagent/ethanol/manly_dorf
+/decl/material/ethanol/manly_dorf
 	name = "Manly Dorf"
 	description = "Beer and Ale, brought together in a delicious mix. Intended for true men only."
 	taste_description = "hair on your chest and your chin"
@@ -711,7 +711,7 @@
 	glass_name = "Manly Dorf"
 	glass_desc = "A manly concotion made from Ale and Beer. Intended for true men only."
 
-/decl/reagent/ethanol/margarita
+/decl/material/ethanol/margarita
 	name = "margarita"
 	description = "On the rocks with salt on the rim. Arriba~!"
 	taste_description = "dry and salty"
@@ -721,7 +721,7 @@
 	glass_name = "margarita"
 	glass_desc = "On the rocks with salt on the rim. Arriba~!"
 
-/decl/reagent/ethanol/mead
+/decl/material/ethanol/mead
 	name = "mead"
 	description = "A Viking's drink, though a cheap one."
 	taste_description = "sweet, sweet alcohol"
@@ -732,7 +732,7 @@
 	glass_name = "mead"
 	glass_desc = "A Viking's beverage, though a cheap one."
 
-/decl/reagent/ethanol/moonshine
+/decl/material/ethanol/moonshine
 	name = "moonshine"
 	description = "You've really hit rock bottom now... your liver packed its bags and left last night."
 	taste_description = "bitterness"
@@ -743,7 +743,7 @@
 	glass_name = "moonshine"
 	glass_desc = "You've really hit rock bottom now... your liver packed its bags and left last night."
 
-/decl/reagent/ethanol/neurotoxin
+/decl/material/ethanol/neurotoxin
 	name = "Neurotoxin"
 	description = "A strong neurotoxin that puts the subject into a death-like state."
 	taste_description = "a numbing sensation"
@@ -755,12 +755,12 @@
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list("neuroright")
 
-/decl/reagent/ethanol/neurotoxin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/ethanol/neurotoxin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.Weaken(3)
 	M.add_chemical_effect(CE_PULSE, -1)
 
-/decl/reagent/ethanol/patron
+/decl/material/ethanol/patron
 	name = "Patron"
 	description = "Tequila with silver in it, a favorite of alcoholic women in the club scene."
 	taste_description = "metallic and expensive"
@@ -770,7 +770,7 @@
 	glass_name = "Patron"
 	glass_desc = "Drinking patron in the bar, with all the subpar ladies."
 
-/decl/reagent/ethanol/pwine
+/decl/material/ethanol/pwine
 	name = "poison wine"
 	description = "Is this even wine? Toxic! Hallucinogenic! Probably consumed in boatloads by your superiors!"
 	taste_description = "purified alcoholic death"
@@ -782,7 +782,7 @@
 	glass_name = "???"
 	glass_desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
 
-/decl/reagent/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	if(M.chem_doses[type] > 30)
 		M.adjustToxLoss(2 * removed)
@@ -795,7 +795,7 @@
 			else
 				L.take_internal_damage(100, 0)
 
-/decl/reagent/ethanol/red_mead
+/decl/material/ethanol/red_mead
 	name = "red mead"
 	description = "The true Viking's drink! Even though it has a strange red color."
 	taste_description = "sweet and salty alcohol"
@@ -805,7 +805,7 @@
 	glass_name = "red mead"
 	glass_desc = "A true Viking's beverage, though its color is strange."
 
-/decl/reagent/ethanol/sbiten
+/decl/material/ethanol/sbiten
 	name = "sbiten"
 	description = "A spicy mead! Might be a little hot for the little guys!"
 	taste_description = "hot and spice"
@@ -817,7 +817,7 @@
 	glass_name = "Sbiten"
 	glass_desc = "A spicy mix of Mead and Spice. Very hot."
 
-/decl/reagent/ethanol/screwdrivercocktail
+/decl/material/ethanol/screwdrivercocktail
 	name = "Screwdriver"
 	description = "Vodka, mixed with plain ol' orange juice. The result is surprisingly delicious."
 	taste_description = "oranges"
@@ -827,7 +827,7 @@
 	glass_name = "Screwdriver"
 	glass_desc = "A simple, yet superb mixture of Vodka and orange juice. Just the thing for the tired engineer."
 
-/decl/reagent/ethanol/ships_surgeon
+/decl/material/ethanol/ships_surgeon
 	name = "Ship's Surgeon"
 	description = "Rum and Dr. Gibb. Served ice cold, like the scalpel."
 	taste_description = "black comedy"
@@ -837,7 +837,7 @@
 	glass_name = "ship's surgeon"
 	glass_desc = "Rum qualified for surgical practice by Dr. Gibb. Smooth and steady."
 
-/decl/reagent/ethanol/silencer
+/decl/material/ethanol/silencer
 	name = "Silencer"
 	description = "A drink from Mime Heaven."
 	taste_description = "a pencil eraser"
@@ -849,7 +849,7 @@
 	glass_name = "Silencer"
 	glass_desc = "A drink from mime Heaven."
 
-/decl/reagent/ethanol/singulo
+/decl/material/ethanol/singulo
 	name = "Singulo"
 	description = "A blue-space beverage!"
 	taste_description = "concentrated matter"
@@ -859,7 +859,7 @@
 	glass_name = "Singulo"
 	glass_desc = "A blue-space beverage."
 
-/decl/reagent/ethanol/snowwhite
+/decl/material/ethanol/snowwhite
 	name = "Snow White"
 	description = "A cold refreshment"
 	taste_description = "refreshing cold"
@@ -869,7 +869,7 @@
 	glass_name = "Snow White"
 	glass_desc = "A cold refreshment."
 
-/decl/reagent/ethanol/suidream
+/decl/material/ethanol/suidream
 	name = "Sui Dream"
 	description = "Comprised of: White soda, blue curacao, melon liquor."
 	taste_description = "fruit"
@@ -879,7 +879,7 @@
 	glass_name = "Sui Dream"
 	glass_desc = "A froofy, fruity, and sweet mixed drink. Understanding the name only brings shame."
 
-/decl/reagent/ethanol/syndicatebomb
+/decl/material/ethanol/syndicatebomb
 	name = "Syndicate Bomb"
 	description = "Tastes like terrorism!"
 	taste_description = "purified antagonism"
@@ -889,7 +889,7 @@
 	glass_name = "Syndicate Bomb"
 	glass_desc = "Tastes like terrorism!"
 
-/decl/reagent/ethanol/tequilla_sunrise
+/decl/material/ethanol/tequilla_sunrise
 	name = "Tequila Sunrise"
 	description = "Tequila and orange juice. Much like a Screwdriver, only Mexican~"
 	taste_description = "oranges"
@@ -899,7 +899,7 @@
 	glass_name = "Tequilla Sunrise"
 	glass_desc = "Oh great, now you feel nostalgic about sunrises back on Terra..."
 
-/decl/reagent/ethanol/threemileisland
+/decl/material/ethanol/threemileisland
 	name = "Three Mile Island Iced Tea"
 	description = "Made for a woman, strong enough for a man."
 	taste_description = "dry"
@@ -910,7 +910,7 @@
 	glass_name = "Three Mile Island iced tea"
 	glass_desc = "A glass of this is sure to prevent a meltdown."
 
-/decl/reagent/ethanol/toxins_special
+/decl/material/ethanol/toxins_special
 	name = "Toxins Special"
 	description = "This thing is ON FIRE! CALL THE DAMN SHUTTLE!"
 	taste_description = "spicy toxins"
@@ -922,7 +922,7 @@
 	glass_name = "Toxins Special"
 	glass_desc = "Whoah, this thing is on FIRE"
 
-/decl/reagent/ethanol/vodkamartini
+/decl/material/ethanol/vodkamartini
 	name = "vodka martini"
 	description = "Vodka with Gin. Not quite how 007 enjoyed it, but still delicious."
 	taste_description = "shaken, not stirred"
@@ -933,7 +933,7 @@
 	glass_desc ="A bastardisation of the classic martini. Still great."
 
 
-/decl/reagent/ethanol/vodkatonic
+/decl/material/ethanol/vodkatonic
 	name = "vodka and tonic"
 	description = "For when a gin and tonic isn't russian enough."
 	taste_description = "tart bitterness"
@@ -944,7 +944,7 @@
 	glass_desc = "For when a gin and tonic isn't Russian enough."
 
 
-/decl/reagent/ethanol/white_russian
+/decl/material/ethanol/white_russian
 	name = "White Russian"
 	description = "That's just, like, your opinion, man..."
 	taste_description = "bitter cream"
@@ -955,7 +955,7 @@
 	glass_desc = "A very nice looking drink. But that's just, like, your opinion, man."
 
 
-/decl/reagent/ethanol/whiskey_cola
+/decl/material/ethanol/whiskey_cola
 	name = "whiskey cola"
 	description = "Whiskey, mixed with cola. Surprisingly refreshing."
 	taste_description = "cola"
@@ -966,7 +966,7 @@
 	glass_desc = "An innocent-looking mixture of cola and Whiskey. Delicious."
 
 
-/decl/reagent/ethanol/whiskeysoda
+/decl/material/ethanol/whiskeysoda
 	name = "whiskey soda"
 	description = "For the more refined griffon."
 	color = "#eab300"
@@ -975,7 +975,7 @@
 	glass_name = "whiskey soda"
 	glass_desc = "Ultimate refreshment."
 
-/decl/reagent/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
+/decl/material/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
 	name = "aged whiskey"
 	description = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
 	color = "#523600"
@@ -984,7 +984,7 @@
 	glass_name = "aged whiskey"
 	glass_desc = "A well-aged whiskey of high quality. Probably imported."
 
-/decl/reagent/ethanol/applecider
+/decl/material/ethanol/applecider
 	name = "apple cider"
 	description = "A refreshing glass of apple cider."
 	taste_description = "cool apple cider"
@@ -994,7 +994,7 @@
 	glass_name = "apple cider"
 	glass_desc = "A refreshing glass of apple cider."
 
-/decl/reagent/ethanol/arak
+/decl/material/ethanol/arak
 	name = "Arak"
 	description = "An unsweetened aniseed and grape mixture."
 	taste_description = "oil and licorice"
@@ -1004,7 +1004,7 @@
 	glass_name = "arak"
 	glass_desc = "An unsweetened mixture of aniseed and grape."
 
-/decl/reagent/ethanol/champagne
+/decl/material/ethanol/champagne
 	name = "champagne"
 	description = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
 	taste_description = "a superior taste of sparkling wine"
@@ -1014,7 +1014,7 @@
 	glass_name = "champagne"
 	glass_desc = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
 
-/decl/reagent/ethanol/sawbonesdismay
+/decl/material/ethanol/sawbonesdismay
 	name = "Sawbones' Dismay"
 	description = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
 	taste_description = "a pick-me-up and put-me-down"
@@ -1024,7 +1024,7 @@
 	glass_name = "Sawbones' Dismay"
 	glass_desc = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
 
-/decl/reagent/ethanol/jagermeister
+/decl/material/ethanol/jagermeister
 	name = "Jagermeister"
 	description = "A special blend of alcohol, herbs, and spices. It has remained a popular Earther drink."
 	taste_description = "herbs, spices, and alcohol"
@@ -1034,7 +1034,7 @@
 	glass_name = "jagermeister"
 	glass_desc = "A special blend of alcohol, herbs, and spaces. It has remained a popular Earther drink."
 
-/decl/reagent/ethanol/kvass
+/decl/material/ethanol/kvass
 	name = "kvass"
 	description = "An alcoholic drink commonly made from bread."
 	taste_description = "vkusnyy kvas, ypa!"
@@ -1044,7 +1044,7 @@
 	glass_name = "kvass"
 	glass_desc = "An alcoholic drink commonly made from bread."
 
-/decl/reagent/ethanol/vodkacola
+/decl/material/ethanol/vodkacola
 	name = "vodka cola"
 	description = "A refreshing mix of vodka and cola."
 	taste_description = "vodka and cola"

@@ -11,7 +11,7 @@
 	. = get_single_monetary_worth()
 	if(reagents)
 		for(var/a in reagents.reagent_volumes)
-			var/decl/reagent/reg = decls_repository.get_decl(a)
+			var/decl/material/reg = decls_repository.get_decl(a)
 			. += reg.get_value() * REAGENT_VOLUME(reagents, a)
 	for(var/atom/movable/a in contents)
 		. += a.get_single_monetary_worth()

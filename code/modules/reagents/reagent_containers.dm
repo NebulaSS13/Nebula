@@ -215,6 +215,6 @@
 /obj/item/chems/ex_act(var/severity)
 	if(reagents)
 		for(var/rtype in reagents.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = decls_repository.get_decl(rtype)
 			R.ex_act(src, severity)
 	..()

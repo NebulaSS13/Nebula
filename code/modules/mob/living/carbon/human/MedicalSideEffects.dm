@@ -81,8 +81,8 @@
 // ========
 /datum/medical_effect/headache
 	name = "Headache"
-	triggers = list(/decl/reagent/brute_meds = 15, /decl/reagent/regenerator = 15)
-	cures = list(/decl/reagent/neuroannealer, /decl/reagent/painkillers)
+	triggers = list(/decl/material/brute_meds = 15, /decl/material/regenerator = 15)
+	cures = list(/decl/material/neuroannealer, /decl/material/painkillers)
 	cure_message = "Your head stops throbbing..."
 
 /datum/medical_effect/headache/on_life(mob/living/carbon/human/H, strength)
@@ -106,8 +106,8 @@
 // ===========
 /datum/medical_effect/bad_stomach
 	name = "Bad Stomach"
-	triggers = list(/decl/reagent/burn_meds = 30)
-	cures = list(/decl/reagent/antitoxins)
+	triggers = list(/decl/material/burn_meds = 30)
+	cures = list(/decl/material/antitoxins)
 	cure_message = "Your stomach feels a little better now..."
 
 /datum/medical_effect/bad_stomach/on_life(mob/living/carbon/human/H, strength)
@@ -125,8 +125,8 @@
 // ======
 /datum/medical_effect/cramps
 	name = "Cramps"
-	triggers = list(/decl/reagent/antitoxins = 30, /decl/reagent/painkillers = 15)
-	cures = list(/decl/reagent/adrenaline)
+	triggers = list(/decl/material/antitoxins = 30, /decl/material/painkillers = 15)
+	cures = list(/decl/material/adrenaline)
 	cure_message = "The cramps let up..."
 
 /datum/medical_effect/cramps/on_life(mob/living/carbon/human/H, strength)
@@ -144,8 +144,8 @@
 // ====
 /datum/medical_effect/itch
 	name = "Itch"
-	triggers = list(/decl/reagent/psychoactives = 10)
-	cures = list(/decl/reagent/adrenaline)
+	triggers = list(/decl/material/psychoactives = 10)
+	cures = list(/decl/material/adrenaline)
 	cure_message = "The itching stops..."
 
 /datum/medical_effect/itch/on_life(mob/living/carbon/human/H, strength)

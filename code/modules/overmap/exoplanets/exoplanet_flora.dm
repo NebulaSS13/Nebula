@@ -32,7 +32,7 @@
 			if(color == "RANDOM")
 				color = get_random_colour(0,75,190)
 			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems[/decl/reagent/woodpulp] = 1
+			S.chems[/decl/material/woodpulp] = 1
 			adapt_seed(S)
 			big_flora_types += S
 
@@ -48,15 +48,15 @@
 		if(S.consume_gasses)
 			S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
 		for(var/g in atmosphere.gas)
-			var/material/mat = SSmaterials.get_material_datum(g)
+			var/decl/material/mat = decls_repository.get_decl(g)
 			if(mat.gas_flags & XGM_GAS_CONTAMINANT)
 				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 	if(prob(50))
 		var/chem_type = SSchemistry.get_random_chem(TRUE, atmosphere ? atmosphere.temperature : T0C)
 		if(chem_type)
-			var/nutriment = S.chems[/decl/reagent/nutriment]
+			var/nutriment = S.chems[/decl/material/nutriment]
 			S.chems.Cut()
-			S.chems[/decl/reagent/nutriment] = nutriment
+			S.chems[/decl/material/nutriment] = nutriment
 			S.chems[chem_type] = list(rand(1,10),rand(10,20))
 
 // Landmarks placed by random map generator

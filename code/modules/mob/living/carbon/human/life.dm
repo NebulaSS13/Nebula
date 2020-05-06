@@ -328,7 +328,7 @@
 
 	//Check for contaminants before anything else because we don't want to skip it.
 	for(var/g in environment.gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = decls_repository.get_decl(g)
 		if((mat.gas_flags & XGM_GAS_CONTAMINANT) && environment.gas[g] > mat.gas_overlay_limit + 1)
 			pl_effects()
 			break
@@ -544,7 +544,7 @@
 	for(var/T in chem_doses)
 		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
 			continue
-		var/decl/reagent/R = T
+		var/decl/material/R = T
 		chem_doses[T] -= initial(R.metabolism)*2
 		if(chem_doses[T] <= 0)
 			chem_doses -= T

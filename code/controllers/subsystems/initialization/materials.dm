@@ -4,7 +4,6 @@ SUBSYSTEM_DEF(materials)
 	flags = SS_NO_FIRE
 
 	var/list/materials
-	var/list/materials_by_name
 	var/list/alloy_components
 	var/list/alloy_products
 	var/list/processable_ores
@@ -22,8 +21,7 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/proc/build_gas_lists()
 	all_gasses = list()
 	gas_flag_cache = list()
-	for(var/thing in materials_by_name)
-		var/material/mat = materials_by_name[thing]
+	for(var/decl/material/mat in materials)
 		if(mat.is_a_gas())
 			all_gasses[thing] = mat
 			gas_flag_cache[thing] = mat.gas_flags
@@ -37,18 +35,16 @@ SUBSYSTEM_DEF(materials)
 		return
 
 	materials =         list()
-	materials_by_name = list()
 	alloy_components =  list()
 	alloy_products =    list()
 	processable_ores =  list()
 
-	for(var/mtype in subtypesof(/material))
-		var/material/new_mineral = mtype
-		if(!initial(new_mineral.display_name))
+	var/list/all_mat_decls = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mtype in all_mat_decls
+		var/decl/material/new_mineral = all_mat_decls[mtype]
+		if(!new_mineral.display_name)
 			continue
-		new_mineral = new mtype
-		materials += new_mineral
-		materials_by_name[mtype] = new_mineral
+		material[new_mineral] = TRUE
 		if(new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)
 			processable_ores[mtype] = TRUE
 		if(new_mineral.alloy_product && LAZYLEN(new_mineral.alloy_materials))
@@ -57,16 +53,8 @@ SUBSYSTEM_DEF(materials)
 				processable_ores[component] = TRUE
 				alloy_components[component] = TRUE
 
-/datum/controller/subsystem/materials/proc/get_material_datum(var/mat)
-	. = materials_by_name[mat]
-	if(!.)
-		if(ispath(mat))
-			crash_with("Unable to acquire material by path '[mat]'.")
-		else
-			crash_with("Unable to acquire material by non-path key '[mat]'.")
-
 /proc/material_display_name(var/mat)
-	var/material/material = SSmaterials.get_material_datum(mat)
+	var/decl/material/material = decls_repository.get_decl(mat)
 	if(material)
 		return material.display_name
 	return null

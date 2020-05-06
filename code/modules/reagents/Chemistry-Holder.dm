@@ -24,7 +24,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	my_atom = null
 
 /datum/reagents/proc/get_primary_reagent_name() // Returns the name of the reagent with the biggest volume.
-	var/decl/reagent/reagent = get_primary_reagent_decl()
+	var/decl/material/reagent = get_primary_reagent_decl()
 	if(reagent)
 		. = reagent.name
 
@@ -60,7 +60,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 	var/temperature = my_atom ? my_atom.temperature : T20C
 	for(var/thing in reagent_volumes)
-		var/decl/reagent/R = decls_repository.get_decl(thing)
+		var/decl/material/R = decls_repository.get_decl(thing)
 
 		// Check if the reagent is decaying or not.
 		var/list/replace_self_with
@@ -142,7 +142,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return FALSE
 
 	amount = min(amount, REAGENTS_FREE_SPACE(src))
-	var/decl/reagent/newreagent = decls_repository.get_decl(reagent_type)
+	var/decl/material/newreagent = decls_repository.get_decl(reagent_type)
 	LAZYINITLIST(reagent_volumes)
 	if(!reagent_volumes[reagent_type])
 		reagent_volumes[reagent_type] = amount
@@ -207,7 +207,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	reagent_data = null
 	total_volume = 0
 
-/datum/reagents/proc/get_overdose(var/decl/reagent/current)
+/datum/reagents/proc/get_overdose(var/decl/material/current)
 	if(current)
 		return initial(current.overdose)
 	return 0
@@ -215,7 +215,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 /datum/reagents/proc/get_reagents(scannable_only = 0, precision)
 	. = list()
 	for(var/rtype in reagent_volumes)
-		var/decl/reagent/current= decls_repository.get_decl(rtype)
+		var/decl/material/current= decls_repository.get_decl(rtype)
 		if(scannable_only && !current.scannable)
 			continue
 		var/volume = REAGENT_VOLUME(src, rtype)
@@ -322,7 +322,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	if(!target || !istype(target) || !target.simulated)
 		return
 	for(var/rtype in reagent_volumes)
-		var/decl/reagent/current = decls_repository.get_decl(rtype)
+		var/decl/material/current = decls_repository.get_decl(rtype)
 		current.touch_mob(target, REAGENT_VOLUME(src, rtype), src)
 	update_total()
 
@@ -330,7 +330,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	if(!target || !istype(target) || !target.simulated)
 		return
 	for(var/rtype in reagent_volumes)
-		var/decl/reagent/current = decls_repository.get_decl(rtype)
+		var/decl/material/current = decls_repository.get_decl(rtype)
 		current.touch_turf(target, REAGENT_VOLUME(src, rtype), src)
 	update_total()
 
@@ -338,7 +338,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	if(!target || !istype(target) || !target.simulated)
 		return
 	for(var/rtype in reagent_volumes)
-		var/decl/reagent/current = decls_repository.get_decl(rtype)
+		var/decl/material/current = decls_repository.get_decl(rtype)
 		current.touch_obj(target, REAGENT_VOLUME(src, rtype), src)
 	update_total()
 

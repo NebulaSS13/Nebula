@@ -12,7 +12,7 @@
 
 	var/atom/from = new donor_type(test_loc)
 	from.create_reagents(container_volume)
-	from.reagents.add_reagent(/decl/reagent/water, container_volume)
+	from.reagents.add_reagent(/decl/material/water, container_volume)
 
 	var/atom/target
 	if(ispath(recipient_type, /turf) && istype(test_loc, recipient_type))
@@ -123,8 +123,8 @@
 /datum/unit_test/reagent_colors_test/start_test()
 	var/list/bad_reagents = list()
 
-	for(var/T in typesof(/decl/reagent))
-		var/decl/reagent/R = T
+	for(var/T in typesof(/decl/material))
+		var/decl/material/R = T
 		if(length(initial(R.color)) != 7)
 			bad_reagents += "[T] ([initial(R.color)])"
 

@@ -36,7 +36,7 @@
 
 		add_data(S)
 		for(var/T in M.chem_doses)
-			var/decl/reagent/R = T
+			var/decl/material/R = T
 			chemtraces |= initial(R.name)
 
 	else if(istype(A, /obj/item/organ/external))

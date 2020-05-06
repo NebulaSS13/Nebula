@@ -1,4 +1,4 @@
-/decl/reagent/drink
+/decl/material/drink
 	name = "drink"
 	description = "Uh, some kind of drink."
 	color = "#e78108"
@@ -12,10 +12,10 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 
-/decl/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
 
-/decl/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(nutrition)
 		M.adjust_nutrition(nutrition * removed)
 	if(hydration)
@@ -29,11 +29,11 @@
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 // Juices
-/decl/reagent/drink/juice/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/juice/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
 
-/decl/reagent/drink/juice/banana
+/decl/material/drink/juice/banana
 	name = "banana juice"
 	description = "The raw essence of a banana."
 	taste_description = "banana"
@@ -42,7 +42,7 @@
 	glass_name = "banana juice"
 	glass_desc = "The raw essence of a banana. HONK!"
 
-/decl/reagent/drink/juice/berry
+/decl/material/drink/juice/berry
 	name = "berry juice"
 	description = "A delicious blend of several different kinds of berries."
 	taste_description = "berries"
@@ -51,7 +51,7 @@
 	glass_name = "berry juice"
 	glass_desc = "Berry juice. Or maybe it's jam. Who cares?"
 
-/decl/reagent/drink/juice/carrot
+/decl/material/drink/juice/carrot
 	name = "carrot juice"
 	description = "It is just like a carrot but without crunching."
 	taste_description = "carrots"
@@ -60,11 +60,11 @@
 	glass_name = "carrot juice"
 	glass_desc = "It is just like a carrot but without crunching."
 
-/decl/reagent/drink/juice/carrot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/juice/carrot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	M.reagents.add_reagent(/decl/reagent/eyedrops, removed * 0.2)
+	M.reagents.add_reagent(/decl/material/eyedrops, removed * 0.2)
 
-/decl/reagent/drink/juice/grape
+/decl/material/drink/juice/grape
 	name = "grape juice"
 	description = "It's grrrrrape!"
 	taste_description = "grapes"
@@ -73,7 +73,7 @@
 	glass_name = "grape juice"
 	glass_desc = "It's grrrrrape!"
 
-/decl/reagent/drink/juice/lemon
+/decl/material/drink/juice/lemon
 	name = "lemon juice"
 	description = "This juice is VERY sour."
 	taste_description = "sourness"
@@ -83,7 +83,7 @@
 	glass_name = "lemon juice"
 	glass_desc = "Sour..."
 
-/decl/reagent/drink/juice/lime
+/decl/material/drink/juice/lime
 	name = "lime juice"
 	description = "The sweet-sour juice of limes."
 	taste_description = "unbearable sourness"
@@ -93,11 +93,11 @@
 	glass_name = "lime juice"
 	glass_desc = "A glass of sweet-sour lime juice"
 
-/decl/reagent/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjustToxLoss(-0.5 * removed)
 
-/decl/reagent/drink/juice/orange
+/decl/material/drink/juice/orange
 	name = "orange juice"
 	description = "Both delicious AND rich in Vitamin C, what more do you need?"
 	taste_description = "oranges"
@@ -106,11 +106,11 @@
 	glass_name = "orange juice"
 	glass_desc = "Vitamins! Yay!"
 
-/decl/reagent/drink/juice/orange/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/juice/orange/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjustOxyLoss(-2 * removed)
 
-/decl/reagent/toxin/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
+/decl/material/toxin/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
 	name = "poison berry juice"
 	description = "A tasty juice blended from various kinds of very deadly and toxic berries."
 	taste_description = "berries"
@@ -120,7 +120,7 @@
 	glass_name = "poison berry juice"
 	glass_desc = "A glass of deadly juice."
 
-/decl/reagent/drink/juice/potato
+/decl/material/drink/juice/potato
 	name = "potato juice"
 	description = "Juice of the potato. Bleh."
 	taste_description = "sadness and potatoes"
@@ -130,7 +130,7 @@
 	glass_name = "potato juice"
 	glass_desc = "Juice from a potato. Bleh."
 
-/decl/reagent/drink/juice/garlic
+/decl/material/drink/juice/garlic
 	name = "garlic juice"
 	description = "Who would even drink this?"
 	taste_description = "bad breath"
@@ -140,7 +140,7 @@
 	glass_name = "garlic juice"
 	glass_desc = "Who would even drink juice from garlic?"
 
-/decl/reagent/drink/juice/onion
+/decl/material/drink/juice/onion
 	name = "onion juice"
 	description = "Juice from an onion, for when you need to cry."
 	taste_description = "stinging tears"
@@ -150,7 +150,7 @@
 	glass_name = "onion juice"
 	glass_desc = "Juice from an onion, for when you need to cry."
 
-/decl/reagent/drink/juice/tomato
+/decl/material/drink/juice/tomato
 	name = "tomato juice"
 	description = "Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?"
 	taste_description = "tomatoes"
@@ -159,11 +159,11 @@
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
-/decl/reagent/drink/juice/tomato/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/juice/tomato/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.heal_organ_damage(0, 0.5 * removed)
 
-/decl/reagent/drink/juice/watermelon
+/decl/material/drink/juice/watermelon
 	name = "watermelon juice"
 	description = "Delicious juice made from watermelon."
 	taste_description = "sweet watermelon"
@@ -172,7 +172,7 @@
 	glass_name = "watermelon juice"
 	glass_desc = "Delicious juice made from watermelon."
 
-/decl/reagent/drink/juice/turnip
+/decl/material/drink/juice/turnip
 	name = "turnip juice"
 	description = "Delicious (?) juice made from turnips."
 	taste_description = "turnip and uncertainty"
@@ -181,7 +181,7 @@
 	glass_name = "turnip juice"
 	glass_desc = "Delicious (?) juice made from turnips."
 
-/decl/reagent/drink/juice/apple
+/decl/material/drink/juice/apple
 	name = "apple juice"
 	description = "Delicious sweet juice made from apples."
 	taste_description = "sweet apples"
@@ -190,7 +190,7 @@
 	glass_name = "apple juice"
 	glass_desc = "Delicious juice made from apples."
 
-/decl/reagent/drink/juice/pear
+/decl/material/drink/juice/pear
 	name = "pear juice"
 	description = "Delicious sweet juice made from pears."
 	taste_description = "sweet pears"
@@ -201,7 +201,7 @@
 
 // Everything else
 
-/decl/reagent/drink/milk
+/decl/material/drink/milk
 	name = "milk"
 	description = "An opaque white liquid produced by tiplods."
 	taste_description = "milk"
@@ -210,7 +210,7 @@
 	glass_name = "milk"
 	glass_desc = "White and nutritious goodness!"
 
-/decl/reagent/drink/milk/chocolate
+/decl/material/drink/milk/chocolate
 	name =  "chocolate milk"
 	description = "A mixture of perfectly healthy milk and delicious chocolate."
 	taste_description = "chocolate milk"
@@ -219,12 +219,12 @@
 	glass_name = "chocolate milk"
 	glass_desc = "Deliciously fattening!"
 
-/decl/reagent/drink/milk/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/milk/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
-	holder.remove_reagent(/decl/reagent/capsaicin, 10 * removed)
+	holder.remove_reagent(/decl/material/capsaicin, 10 * removed)
 
-/decl/reagent/drink/milk/cream
+/decl/material/drink/milk/cream
 	name = "cream"
 	description = "The fatty, still liquid part of milk."
 	taste_description = "creamy milk"
@@ -233,7 +233,7 @@
 	glass_name = "cream"
 	glass_desc = "Ewwww..."
 
-/decl/reagent/drink/milk/soymilk
+/decl/material/drink/milk/soymilk
 	name = "soy milk"
 	description = "An opaque white liquid made from soybeans."
 	taste_description = "soy milk"
@@ -242,7 +242,7 @@
 	glass_name = "soy milk"
 	glass_desc = "White and nutritious soy goodness!"
 
-/decl/reagent/drink/coffee
+/decl/material/drink/coffee
 	name = "coffee"
 	description = "Coffee is a brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant."
 	taste_description = "bitterness"
@@ -257,25 +257,25 @@
 	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
-/decl/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	if(adj_temp > 0)
-		holder.remove_reagent(/decl/reagent/frostoil, 10 * removed)
+		holder.remove_reagent(/decl/material/frostoil, 10 * removed)
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume > 15)
 		M.add_chemical_effect(CE_PULSE, 1)
 	if(volume > 45)
 		M.add_chemical_effect(CE_PULSE, 1)
 
-/decl/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/decl/reagent/drink/coffee/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/drink/coffee/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
 	M.make_jittery(5)
 	M.add_chemical_effect(CE_PULSE, 1)
 
-/decl/reagent/drink/coffee/icecoffee
+/decl/material/drink/coffee/icecoffee
 	name = "iced coffee"
 	description = "Coffee and ice, refreshing and cool."
 	taste_description = "bitter coldness"
@@ -286,7 +286,7 @@
 	glass_desc = "A drink to perk you up and refresh you!"
 	glass_special = list(DRINK_ICE)
 
-/decl/reagent/drink/coffee/soy_latte
+/decl/material/drink/coffee/soy_latte
 	name = "soy latte"
 	description = "A nice and tasty beverage while you are reading your nature books."
 	taste_description = "bitter creamy coffee"
@@ -296,11 +296,11 @@
 	glass_name = "soy latte"
 	glass_desc = "A nice and refreshing beverage while you are reading your nature books."
 
-/decl/reagent/drink/coffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/coffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
 
-/decl/reagent/drink/coffee/icecoffee/soy_latte
+/decl/material/drink/coffee/icecoffee/soy_latte
 	name = "iced soy latte"
 	description = "A nice and tasty beverage while you are reading your nature books. This one's cold."
 	taste_description = "cold bitter creamy coffee"
@@ -309,11 +309,11 @@
 	glass_name = "iced soy latte"
 	glass_desc = "A nice and refreshing beverage while you are reading your nature books. This one's cold."
 
-/decl/reagent/drink/coffee/icecoffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/coffee/icecoffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
 
-/decl/reagent/drink/coffee/cafe_latte
+/decl/material/drink/coffee/cafe_latte
 	name = "cafe latte"
 	description = "A nice, strong and tasty beverage while you are reading."
 	taste_description = "bitter creamy coffee"
@@ -323,11 +323,11 @@
 	glass_name = "cafe latte"
 	glass_desc = "A nice, strong and refreshing beverage while you are reading."
 
-/decl/reagent/drink/coffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/coffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
 
-/decl/reagent/drink/coffee/icecoffee/cafe_latte
+/decl/material/drink/coffee/icecoffee/cafe_latte
 	name = "iced cafe latte"
 	description = "A nice, strong and refreshing beverage while you are reading. This one's cold."
 	taste_description = "cold bitter creamy coffee"
@@ -336,11 +336,11 @@
 	glass_name = "iced cafe latte"
 	glass_desc = "A nice, strong and refreshing beverage while you are reading. This one's cold."
 
-/decl/reagent/drink/coffee/icecoffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/coffee/icecoffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
 
-/decl/reagent/drink/coffee/cafe_latte/mocha
+/decl/material/drink/coffee/cafe_latte/mocha
 	name = "mocha latte"
 	description = "Coffee and chocolate, smooth and creamy."
 	taste_description = "bitter creamy chocolate"
@@ -348,7 +348,7 @@
 	glass_name = "mocha latte"
 	glass_desc = "Coffee and chocolate, smooth and creamy."
 
-/decl/reagent/drink/coffee/soy_latte/mocha
+/decl/material/drink/coffee/soy_latte/mocha
 	name = "mocha soy latte"
 	description = "Coffee, soy, and chocolate, smooth and creamy."
 	taste_description = "bitter creamy chocolate"
@@ -356,7 +356,7 @@
 	glass_name = "mocha soy latte"
 	glass_desc = "Coffee, soy, and chocolate, smooth and creamy."
 
-/decl/reagent/drink/coffee/icecoffee/cafe_latte/mocha
+/decl/material/drink/coffee/icecoffee/cafe_latte/mocha
 	name = "iced mocha latte"
 	description = "Coffee and chocolate, smooth and creamy. This one's cold."
 	taste_description = "cold bitter creamy chocolate"
@@ -364,7 +364,7 @@
 	glass_name = "iced mocha latte"
 	glass_desc = "Coffee and chocolate, smooth and creamy. This one's cold."
 
-/decl/reagent/drink/coffee/icecoffee/soy_latte/mocha
+/decl/material/drink/coffee/icecoffee/soy_latte/mocha
 	name = "iced soy mocha latte"
 	description = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
 	taste_description = "cold bitter creamy chocolate"
@@ -372,7 +372,7 @@
 	glass_name = "iced soy mocha latte"
 	glass_desc = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
 
-/decl/reagent/drink/coffee/cafe_latte/pumpkin
+/decl/material/drink/coffee/cafe_latte/pumpkin
 	name = "pumpkin spice latte"
 	description = "Smells and tastes like Autumn."
 	taste_description = "bitter creamy pumpkin spice"
@@ -380,7 +380,7 @@
 	glass_name = "pumpkin spice latte"
 	glass_desc = "Smells and tastes like Autumn."
 
-/decl/reagent/drink/coffee/soy_latte/pumpkin
+/decl/material/drink/coffee/soy_latte/pumpkin
 	name = "pumpkin spice soy latte"
 	description = "Smells and tastes like Autumn."
 	taste_description = "bitter creamy pumpkin spice"
@@ -388,7 +388,7 @@
 	glass_name = "pumpkin spice soy latte"
 	glass_desc = "Smells and tastes like Autumn."
 
-/decl/reagent/drink/coffee/icecoffee/cafe_latte/pumpkin
+/decl/material/drink/coffee/icecoffee/cafe_latte/pumpkin
 	name = "iced pumpkin spice latte"
 	description = "Smells and tastes like Autumn. This one's cold"
 	taste_description = "cold bitter creamy pumpkin spice"
@@ -396,7 +396,7 @@
 	glass_name = "iced pumpkin spice latte"
 	glass_desc = "Smells and tastes like Autumn. This one's cold."
 
-/decl/reagent/drink/coffee/icecoffee/soy_latte/pumpkin
+/decl/material/drink/coffee/icecoffee/soy_latte/pumpkin
 	name = "iced pumpkin spice soy latte"
 	description = "Smells and tastes like Autumn. This one's cold"
 	taste_description = "cold bitter creamy pumpkin spice"
@@ -404,7 +404,7 @@
 	glass_name = "iced pumpkin spice soy latte"
 	glass_desc = "Smells and tastes like Autumn. This one's cold."
 
-/decl/reagent/drink/hot_coco
+/decl/material/drink/hot_coco
 	name = "hot chocolate"
 	description = "Made with love! And cocoa beans."
 	taste_description = "creamy chocolate"
@@ -415,7 +415,7 @@
 	glass_name = "hot chocolate"
 	glass_desc = "Made with love! And cocoa beans."
 
-/decl/reagent/drink/sodawater
+/decl/material/drink/sodawater
 	name = "soda water"
 	description = "Carbonated water, the most boring carbonated drink known to science."
 	taste_description = "bubbles"
@@ -428,7 +428,7 @@
 	glass_desc = "A glass of fizzy soda water."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/grapesoda
+/decl/material/drink/grapesoda
 	name = "grape soda"
 	description = "Grapes made into a fine drank."
 	taste_description = "grape soda"
@@ -439,7 +439,7 @@
 	glass_desc = "Looks like a delicious drink!"
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/tonic
+/decl/material/drink/tonic
 	name = "tonic water"
 	description = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
 	taste_description = "tart and fresh"
@@ -452,7 +452,7 @@
 	glass_name = "tonic water"
 	glass_desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
 
-/decl/reagent/drink/lemonade
+/decl/material/drink/lemonade
 	name = "lemonade"
 	description = "Oh the nostalgia..."
 	taste_description = "tartness"
@@ -463,7 +463,7 @@
 	glass_desc = "Oh the nostalgia..."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/citrusseltzer
+/decl/material/drink/citrusseltzer
 	name = "citrus seltzer"
 	description = "A tasty blend of fizz and citrus."
 	taste_description = "tart and tasty"
@@ -474,7 +474,7 @@
 	glass_desc = "A tasty blend of fizz and citrus."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/orangecola
+/decl/material/drink/orangecola
 	name = "orange cola"
 	description = "A traditional cola experience with a refreshing spritz of orange citrus flavour."
 	taste_description = "orange and cola"
@@ -484,7 +484,7 @@
 	glass_name = "orange cola"
 	glass_desc = "It's an unpleasant shade of muddy brown, and smells like over-ripe citrus."
 
-/decl/reagent/drink/milkshake
+/decl/material/drink/milkshake
 	name = "milkshake"
 	description = "Glorious brainfreezing mixture."
 	taste_description = "creamy vanilla"
@@ -494,7 +494,7 @@
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
 
-/decl/reagent/drink/rewriter
+/decl/material/drink/rewriter
 	name = "Rewriter"
 	description = "The secret of the sanctuary of the Libarian..."
 	taste_description = "a bad night out"
@@ -504,11 +504,11 @@
 	glass_name = "Rewriter"
 	glass_desc = "The secret of the sanctuary of the Libarian..."
 
-/decl/reagent/drink/rewriter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/rewriter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.make_jittery(5)
 
-/decl/reagent/drink/mutagencola
+/decl/material/drink/mutagencola
 	name = "mutagen cola"
 	description = "The energy of a radioactive isotope in beverage form."
 	taste_description = "cancer"
@@ -520,7 +520,7 @@
 	glass_desc = "The unstable energy of a radioactive isotope in beverage form."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/mutagencola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/mutagencola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.make_jittery(20)
@@ -528,7 +528,7 @@
 	M.dizziness += 5
 	M.drowsyness = 0
 
-/decl/reagent/drink/grenadine
+/decl/material/drink/grenadine
 	name = "grenadine syrup"
 	description = "Made in the modern day with proper pomegranate substitute. Who uses real fruit, anyways?"
 	taste_description = "100% pure pomegranate"
@@ -537,7 +537,7 @@
 	glass_name = "grenadine syrup"
 	glass_desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
 
-/decl/reagent/drink/cola
+/decl/material/drink/cola
 	name = "cola"
 	description = "A refreshing beverage."
 	taste_description = "cola"
@@ -549,7 +549,7 @@
 	glass_desc = "A glass of refreshing cola."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/citrussoda
+/decl/material/drink/citrussoda
 	name = "citrus soda"
 	description = "Fizzy and tangy."
 	taste_description = "sweet citrus soda"
@@ -562,7 +562,7 @@
 	glass_desc = "A glass of fizzy citrus soda."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/cherrycola
+/decl/material/drink/cherrycola
 	name = "cherry soda"
 	description = "A delicious blend of 42 different flavours"
 	taste_description = "cherry soda"
@@ -573,7 +573,7 @@
 	glass_name = "cherry soda"
 	glass_desc = "A glass of cherry soda, a delicious blend of 42 flavours."
 
-/decl/reagent/drink/lemonade
+/decl/material/drink/lemonade
 	name = "lemonade"
 	description = "Tastes like a hull breach in your mouth."
 	taste_description = "a hull breach"
@@ -584,7 +584,7 @@
 	glass_desc = "A glass of lemonade. It helps keep you cool."
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/lemon_lime
+/decl/material/drink/lemon_lime
 	name = "lemon-lime soda"
 	description = "A tangy substance made of 0.5% natural citrus!"
 	taste_description = "tangy lime and lemon soda"
@@ -595,7 +595,7 @@
 	glass_desc = "A tangy substance made of 0.5% natural citrus!"
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/doctor_delight
+/decl/material/drink/doctor_delight
 	name = "The Doctor's Delight"
 	description = "Tasty drink that keeps you healthy and doctors bored.  Just the way they like it."
 	taste_description = "homely fruit"
@@ -605,7 +605,7 @@
 	glass_name = "The Doctor's Delight"
 	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next exile decides to put a few new holes in you."
 
-/decl/reagent/drink/doctor_delight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/doctor_delight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjustOxyLoss(-4 * removed)
 	M.heal_organ_damage(2 * removed, 2 * removed)
@@ -615,14 +615,14 @@
 	if(M.confused)
 		M.confused = max(0, M.confused - 5)
 
-/decl/reagent/drink/dry_ramen
+/decl/material/drink/dry_ramen
 	name = "dry ramen"
 	description = "Space age food, since August 25, 1958. Contains dried noodles, vegetables, and chemicals that boil in contact with water."
 	taste_description = "dry and cheap noodles"
 	nutrition = 1
 	color = "#302000"
 
-/decl/reagent/drink/hot_ramen
+/decl/material/drink/hot_ramen
 	name = "hot ramen"
 	description = "The noodles are boiled, the flavors are artificial, just like being back in school."
 	taste_description = "wet and cheap noodles"
@@ -630,18 +630,18 @@
 	nutrition = 5
 	adj_temp = 5
 
-/decl/reagent/drink/hell_ramen
+/decl/material/drink/hell_ramen
 	name = "hell ramen"
 	description = "The noodles are boiled, the flavors are artificial, just like being back in school."
 	taste_description = "wet and cheap noodles on fire"
 	color = "#302000"
 	nutrition = 5
 
-/decl/reagent/drink/hell_ramen/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/hell_ramen/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 
-/decl/reagent/drink/nothing
+/decl/material/drink/nothing
 	name = "nothing"
 	description = "Absolutely nothing."
 	taste_description = "nothing"
@@ -649,7 +649,7 @@
 	glass_name = "nothing"
 	glass_desc = "Absolutely nothing."
 
-/decl/reagent/drink/tea
+/decl/material/drink/tea
 	name = "black tea"
 	description = "Tasty black tea, it has antioxidants, it's good for you!"
 	taste_description = "tart black tea"
@@ -662,11 +662,11 @@
 	glass_name = "black tea"
 	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
 
-/decl/reagent/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjustToxLoss(-0.5 * removed)
 
-/decl/reagent/drink/tea/icetea
+/decl/material/drink/tea/icetea
 	name = "iced black tea"
 	description = "It's the black tea you know and love, but now it's cold."
 	taste_description = "cold black tea"
@@ -676,7 +676,7 @@
 	glass_desc = "It's the black tea you know and love, but now it's cold."
 	glass_special = list(DRINK_ICE)
 
-/decl/reagent/drink/tea/icetea/sweet
+/decl/material/drink/tea/icetea/sweet
 	name = "sweet black tea"
 	description = "It's the black tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet tea"
@@ -684,7 +684,7 @@
 	glass_name = "sweet black tea"
 	glass_desc = "It's the black tea you know and love, but now it's cold. And sweet."
 
-/decl/reagent/drink/tea/barongrey
+/decl/material/drink/tea/barongrey
 	name = "Baron Grey tea"
 	description = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
 	taste_description = "tangy black tea"
@@ -692,7 +692,7 @@
 	glass_name = "Baron Grey tea"
 	glass_desc = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
 
-/decl/reagent/drink/tea/barongrey/latte
+/decl/material/drink/tea/barongrey/latte
 	name = "London Fog"
 	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
 	taste_description = "creamy, tangy black tea"
@@ -700,7 +700,7 @@
 	glass_name = "London Fog"
 	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
 
-/decl/reagent/drink/tea/barongrey/soy_latte
+/decl/material/drink/tea/barongrey/soy_latte
 	name = "soy London Fog"
 	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte."
 	taste_description = "creamy, tangy black tea"
@@ -708,7 +708,7 @@
 	glass_name = "Soy London Fog"
 	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte."
 
-/decl/reagent/drink/tea/icetea/barongrey/latte
+/decl/material/drink/tea/icetea/barongrey/latte
 	name = "iced London Fog"
 	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
 	taste_description = "cold, creamy, tangy black tea"
@@ -716,7 +716,7 @@
 	glass_name = "iced london fog"
 	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
 
-/decl/reagent/drink/tea/icetea/barongrey/soy_latte
+/decl/material/drink/tea/icetea/barongrey/soy_latte
 	name = "iced soy London Fog"
 	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte. This one's cold."
 	taste_description = "cold, creamy, tangy black tea"
@@ -725,7 +725,7 @@
 	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte. This one's cold."
 
 //green tea
-/decl/reagent/drink/tea/green
+/decl/material/drink/tea/green
 	name = "green tea"
 	description = "Subtle green tea, it has antioxidants, it's good for you!"
 	taste_description = "subtle green tea"
@@ -734,7 +734,7 @@
 	glass_name = "green tea"
 	glass_desc = "Subtle green tea, it has antioxidants, it's good for you!"
 
-/decl/reagent/drink/tea/icetea/green
+/decl/material/drink/tea/icetea/green
 	name = "iced green tea"
 	description = "It's the green tea you know and love, but now it's cold."
 	taste_description = "cold green tea"
@@ -743,7 +743,7 @@
 	glass_name = "iced green tea"
 	glass_desc = "It's the green tea you know and love, but now it's cold."
 
-/decl/reagent/drink/tea/icetea/green/sweet
+/decl/material/drink/tea/icetea/green/sweet
 	name = "sweet green tea"
 	description = "It's the green tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet green tea"
@@ -752,7 +752,7 @@
 	glass_name = "sweet green tea"
 	glass_desc = "It's the green tea you know and love, but now it's cold. And sweet."
 
-/decl/reagent/drink/tea/icetea/green/sweet/mint
+/decl/material/drink/tea/icetea/green/sweet/mint
 	name = "mint tea"
 	description = "Iced green tea prepared with mint and sugar. Refreshing!"
 	taste_description = "refreshing mint tea"
@@ -760,7 +760,7 @@
 	glass_name = "mint tea"
 	glass_desc = "Iced green tea prepared with mint and sugar. Refreshing!"
 
-/decl/reagent/drink/tea/chai
+/decl/material/drink/tea/chai
 	name = "chai"
 	description = "A spiced, dark tea. Goes great with milk."
 	taste_description = "spiced black tea"
@@ -769,7 +769,7 @@
 	glass_name = "chai"
 	glass_desc = "A spiced, dark tea. Goes great with milk."
 
-/decl/reagent/drink/tea/icetea/chai
+/decl/material/drink/tea/icetea/chai
 	name = "iced chai"
 	description = "It's the chai tea you know and love, but now it's cold."
 	taste_description = "cold spiced black tea"
@@ -778,7 +778,7 @@
 	glass_name = "iced chai"
 	glass_desc = "It's the spiced tea you know and love, but now it's cold."
 
-/decl/reagent/drink/tea/icetea/chai/sweet
+/decl/material/drink/tea/icetea/chai/sweet
 	name = "sweet chai"
 	description = "It's the chai tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet spiced black tea"
@@ -786,7 +786,7 @@
 	glass_name = "sweet chai"
 	glass_desc = "It's the chai tea you know and love, but now it's cold. And sweet."
 
-/decl/reagent/drink/tea/chai/latte
+/decl/material/drink/tea/chai/latte
 	name = "chai latte"
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
 	taste_description = "creamy spiced tea"
@@ -795,7 +795,7 @@
 	glass_name = "chai latte"
 	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
 
-/decl/reagent/drink/tea/chai/soy_latte
+/decl/material/drink/tea/chai/soy_latte
 	name = "soy chai latte"
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
 	taste_description = "creamy spiced tea"
@@ -804,7 +804,7 @@
 	glass_name = "soy chai latte"
 	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
 
-/decl/reagent/drink/tea/icetea/chai/latte
+/decl/material/drink/tea/icetea/chai/latte
 	name = "iced chai latte"
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
 	taste_description = "cold creamy spiced tea"
@@ -813,7 +813,7 @@
 	glass_name = "iced chai latte"
 	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
 
-/decl/reagent/drink/tea/icetea/chai/soy_latte
+/decl/material/drink/tea/icetea/chai/soy_latte
 	name = "iced soy chai latte"
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk. This one's cold."
 	taste_description = "cold creamy spiced tea"
@@ -822,7 +822,7 @@
 	glass_name = "iced soy chai latte"
 	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk. This one's cold."
 
-/decl/reagent/drink/tea/red
+/decl/material/drink/tea/red
 	name = "redbush tea"
 	description = "A caffeine-free dark red tea, flavorful and full of antioxidants."
 	taste_description = "nutty red tea"
@@ -831,7 +831,7 @@
 	glass_name = "redbush tea"
 	glass_desc = "A caffeine-free dark red tea, flavorful and full of antioxidants."
 
-/decl/reagent/drink/tea/icetea/red
+/decl/material/drink/tea/icetea/red
 	name = "iced redbush tea"
 	description = "It's the red tea you know and love, but now it's cold."
 	taste_description = "cold nutty red tea"
@@ -840,7 +840,7 @@
 	glass_name = "iced redbush tea"
 	glass_desc = "It's the red tea you know and love, but now it's cold."
 
-/decl/reagent/drink/tea/icetea/red/sweet
+/decl/material/drink/tea/icetea/red/sweet
 	name = "sweet redbush tea"
 	description = "It's the red tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet nutty red tea"
@@ -848,7 +848,7 @@
 	glass_name = "sweet redbush tea"
 	glass_desc = "It's the red tea you know and love, but now it's cold. And sweet."
 
-/decl/reagent/drink/syrup_chocolate
+/decl/material/drink/syrup_chocolate
 	name = "chocolate syrup"
 	description = "Thick chocolate syrup used to flavor drinks."
 	taste_description = "chocolate"
@@ -857,7 +857,7 @@
 	glass_name = "chocolate syrup"
 	glass_desc = "Thick chocolate syrup used to flavor drinks."
 
-/decl/reagent/drink/syrup_caramel
+/decl/material/drink/syrup_caramel
 	name = "caramel syrup"
 	description = "Thick caramel syrup used to flavor drinks."
 	taste_description = "caramel"
@@ -866,7 +866,7 @@
 	glass_name = "caramel syrup"
 	glass_desc = "Thick caramel syrup used to flavor drinks."
 
-/decl/reagent/drink/syrup_vanilla
+/decl/material/drink/syrup_vanilla
 	name = "vanilla syrup"
 	description = "Thick vanilla syrup used to flavor drinks."
 	taste_description = "vanilla"
@@ -875,7 +875,7 @@
 	glass_name = "vanilla syrup"
 	glass_desc = "Thick vanilla syrup used to flavor drinks."
 
-/decl/reagent/drink/syrup_pumpkin
+/decl/material/drink/syrup_pumpkin
 	name = "pumpkin spice syrup"
 	description = "Thick spiced pumpkin syrup used to flavor drinks."
 	taste_description = "spiced pumpkin"
@@ -885,7 +885,7 @@
 	glass_desc = "Thick spiced pumpkin syrup used to flavor drinks."
 
 // Non-Alcoholic Drinks
-/decl/reagent/drink/fools_gold
+/decl/material/drink/fools_gold
 	name = "Fool's Gold"
 	description = "A non-alcoholic beverage typically served as an alternative to whiskey."
 	taste_description = "watered down whiskey"
@@ -893,7 +893,7 @@
 	glass_name = "fools gold"
 	glass_desc = "A non-alcoholic beverage typically served as an alternative to whiskey."
 
-/decl/reagent/drink/snowball
+/decl/material/drink/snowball
 	name = "Snowball"
 	description = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
 	taste_description = "intellectual thought and brain-freeze"
@@ -902,7 +902,7 @@
 	glass_name = "snowball"
 	glass_desc = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
 
-/decl/reagent/drink/browndwarf
+/decl/material/drink/browndwarf
 	name = "Brown Dwarf"
 	description = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
 	taste_description = "dark chocolatey matter"
@@ -910,7 +910,7 @@
 	glass_name = "brown dwarf"
 	glass_desc = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
 
-/decl/reagent/drink/gingerbeer
+/decl/material/drink/gingerbeer
 	name = "ginger beer"
 	description = "A hearty, non-alcoholic beverage brewed from ginger."
 	taste_description = "carbonated ginger"
@@ -918,7 +918,7 @@
 	glass_name = "ginger beer"
 	glass_desc = "A hearty, non-alcoholic beverage brewed from ginger."
 
-/decl/reagent/drink/beastenergy
+/decl/material/drink/beastenergy
 	name = "Beast Energy"
 	description = "A bottle of 100% pure energy."
 	taste_description = "your heart crying"
@@ -926,13 +926,13 @@
 	glass_name = "beast energy"
 	glass_desc = "Why would you drink this without mixer?"
 
-/decl/reagent/drink/beastenergy/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/drink/beastenergy/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.drowsyness = max(0, M.drowsyness - 7)
 	M.make_jittery(2)
 	M.add_chemical_effect(CE_PULSE, 1)
 
-/decl/reagent/drink/kefir
+/decl/material/drink/kefir
 	name = "kefir"
 	description = "Fermented milk. Actually very tasty."
 	taste_description = "sharp, frothy yougurt"

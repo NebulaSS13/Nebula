@@ -182,7 +182,7 @@
 
 	else if(istype(W, /obj/item/stack/material) && !glass)
 		var/obj/item/stack/material/S = W
-		var/material_name = S.get_material_type()		
+		var/decl/material_name = S.get_material_type()		
 		if (S)
 			if (S.get_amount() >= 1)
 				if(material_name == MAT_GLASS && S.reinf_material)

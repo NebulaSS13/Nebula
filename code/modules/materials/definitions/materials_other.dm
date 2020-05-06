@@ -1,4 +1,4 @@
-/material/waste
+/decl/material/waste
 	display_name = "slag"
 	stack_type = null
 	icon_colour = "#2e3a07"
@@ -9,7 +9,7 @@
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 0
 
-/material/cult
+/decl/material/cult
 	display_name = "disturbing stone"
 	icon_base = "cult"
 	icon_colour = "#402821"
@@ -22,9 +22,9 @@
 	hidden_from_codex = TRUE
 	reflectiveness = MAT_VALUE_DULL
 
-/material/cult/place_dismantled_girder(var/turf/target)
+/decl/material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)
 
-/material/cult/reinf
+/decl/material/cult/reinf
 	display_name = "runic inscriptions"
 	

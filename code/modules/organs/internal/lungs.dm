@@ -193,7 +193,7 @@
 	// humans processing thousands of units of oxygen over the course of a round for the sole purpose of poisoning vox.
 	var/ratio = BP_IS_PROSTHETIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
-		var/material/mat = SSmaterials.get_material_datum(gasname)
+		var/decl/material/mat = decls_repository.get_decl(gasname)
 		var/breathed_product = mat.gas_breathed_product
 		if(breathed_product)
 			var/reagent_amount = breath.gas[gasname] * REAGENT_GAS_EXCHANGE_FACTOR * ratio

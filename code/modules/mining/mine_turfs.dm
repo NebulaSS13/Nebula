@@ -23,7 +23,7 @@ var/list/mining_floors = list()
 	explosion_resistance = 2
 
 	var/mined_turf = /turf/simulated/floor/asteroid
-	var/material/mineral
+	var/decl/material/mineral
 	var/mined_ore = 0
 	var/last_act = 0
 	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
@@ -395,7 +395,7 @@ var/list/mining_floors = list()
 		mineral_name = pickweight(default_mineral_list)
 
 	if(!mineral && mineral_name)
-		mineral = SSmaterials.get_material_datum(mineral_name)
+		mineral = decls_repository.get_decl(mineral_name)
 	if(istype(mineral))
 		UpdateMineral()
 	. = ..(ml)

@@ -51,7 +51,7 @@
 		return
 	for(var/material in O.matter)
 		if(materials[material] + O.matter[material] > metal_max)
-			var/material/material_datum = SSmaterials.get_material_datum(material)
+			var/decl/material/material_datum = decls_repository.get_decl(material)
 			if(material_datum)
 				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.display_name]!</span>")
 			return
@@ -151,7 +151,7 @@
 		HTML += "Materials: "
 		var/list/dat = list()
 		for(var/material in materials)
-			var/material/material_datum = SSmaterials.get_material_datum(material)
+			var/decl/material/material_datum = decls_repository.get_decl(material)
 			dat += "[materials[material]]/[metal_max] [material_datum.display_name]"
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
@@ -325,7 +325,7 @@
 /obj/item/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
 	for(var/material in cost)
 		if(materials[material] < cost[material])
-			var/material/material_datum = SSmaterials.get_material_datum(material)
+			var/decl/material/material_datum = decls_repository.get_decl(material)
 			to_chat(user, "<span class='warning'>You need [cost[material]] [material_datum.display_name] to build that!</span>")
 			return FALSE
 	for(var/material in cost) //Iterate twice to make sure it's going to work before deducting

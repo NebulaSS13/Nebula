@@ -15,7 +15,7 @@
 	var/difficulty = 1 // higher difficulty requires higher skill level to make.
 	var/apply_material_name = 1 //Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
 
-/datum/stack_recipe/New(material/material, var/reinforce_material)
+/datum/stack_recipe/New(var/decl/material/material, var/reinforce_material)
 	if(material)
 		use_material = material.type
 		difficulty +=  material.construction_difficulty

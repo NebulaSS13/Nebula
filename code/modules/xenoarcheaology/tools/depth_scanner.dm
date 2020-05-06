@@ -22,7 +22,7 @@
 	var/clearance = 0
 	var/record_index = 1
 	var/dissonance_spread = 1
-	var/material = "unknown"
+	var/decl/material = "unknown"
 
 /obj/item/depth_scanner/proc/scan_atom(var/mob/user, var/atom/A)
 	user.visible_message("<span class='notice'>\The [user] scans \the [A], the air around them humming gently.</span>")

@@ -487,8 +487,6 @@
 	set name = "Spawn Material Stack"
 	if(!check_rights(R_DEBUG)) return
 
-	var/material = input("Select material to spawn") as null|anything in SSmaterials.materials_by_name
-	if(!material)
-		return
-	var/material/M = SSmaterials.get_material_datum(material)
-	new M.stack_type(get_turf(mob), 50, M)
+	var/decl/material/M = input("Select material to spawn") as null|anything in SSmaterials.materials
+	if(istype(M))
+		new M.stack_type(get_turf(mob), 50, M.type)

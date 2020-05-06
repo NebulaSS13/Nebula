@@ -40,12 +40,12 @@
 	completion_message = "Ahh, that hit the spot!"
 
 /datum/goal/achievement/specific_object/drink/New()
-	possible_objects = subtypesof(/decl/reagent/drink)
+	possible_objects = subtypesof(/decl/material/drink)
 	..()
 
 /datum/goal/achievement/specific_object/drink/update_strings()
 	..()
-	var/decl/reagent/drink = object_path
+	var/decl/material/drink = object_path
 	description = "You could really do with a nice [initial(drink.name)]."
 
 /datum/goal/achievement/specific_object/pet

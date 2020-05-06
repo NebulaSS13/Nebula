@@ -4,7 +4,7 @@
 /decl/hierarchy/supply_pack/materials/New()
 	for(var/thing in contains)
 		var/obj/item/stack/material/S = thing
-		var/material/mat = SSmaterials.get_material_datum(initial(S.material))
+		var/decl/material/mat = decls_repository.get_decl(initial(S.material))
 		if(istype(mat) && mat.sale_price)
 			cost += mat.sale_price * initial(S.amount)
 	..()

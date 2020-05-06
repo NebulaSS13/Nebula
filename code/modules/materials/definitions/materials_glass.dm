@@ -1,5 +1,5 @@
 
-/material/glass
+/decl/material/glass
 	display_name = "glass"
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	stack_type = /obj/item/stack/material/glass
@@ -25,13 +25,13 @@
 	value = 4
 	wall_support_value = 14
 
-/material/glass/proc/is_reinforced()
+/decl/material/glass/proc/is_reinforced()
 	return (integrity > 75) //todo
 
-/material/glass/is_brittle()
+/decl/material/glass/is_brittle()
 	return ..() && !is_reinforced()
 
-/material/glass/phoron
+/decl/material/glass/phoron
 	display_name = "borosilicate glass"
 	lore_text = "An extremely heat-resistant form of glass."
 	stack_type = /obj/item/stack/material/glass/phoronglass

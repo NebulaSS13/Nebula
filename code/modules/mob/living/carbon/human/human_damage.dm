@@ -408,7 +408,7 @@ This function restores all organs.
 		return 0
 
 	if(damage > 15 && prob(damage*4) && organ.can_feel_pain())
-		make_reagent(round(damage/10), /decl/reagent/adrenaline)
+		make_reagent(round(damage/10), /decl/material/adrenaline)
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)

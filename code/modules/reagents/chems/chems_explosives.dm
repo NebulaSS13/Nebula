@@ -1,11 +1,11 @@
-/decl/reagent/anfo
+/decl/material/anfo
 	name = "ANFO"
 	description = "Ammonia Nitrate Fuel Oil mix, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	taste_description = "fertilizer and fuel"
 	color = "#dbc3c3"
 	var/boompower = 1
 
-/decl/reagent/anfo/ex_act(obj/item/chems/holder, severity)
+/decl/material/anfo/ex_act(obj/item/chems/holder, severity)
 	var/volume = REAGENT_VOLUME(holder?.reagents, type)
 	var/activated_volume = volume
 	switch(severity)
@@ -27,7 +27,7 @@
 		holder?.reagents?.remove_reagent(type, activated_volume)
 		explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)
 
-/decl/reagent/anfo/plus
+/decl/material/anfo/plus
 	name = "ANFO+"
 	description = "Ammonia Nitrate Fuel Oil, with aluminium powder, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	color = "#ffe8e8"

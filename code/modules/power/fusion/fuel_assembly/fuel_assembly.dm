@@ -4,7 +4,7 @@
 	icon_state = "fuel_assembly"
 	layer = 4
 
-	var/material_name
+	var/decl/material_name
 	var/percent_depleted = 1
 	var/list/rod_quantities = list()
 	var/radioactivity = 0

@@ -15,7 +15,7 @@
 	max_targets = 1
 	equipped_summons = list("active hand" = /obj/item/material/sword)
 	delete_old = 0
-	var/material = MAT_GOLD
+	var/decl/material = MAT_GOLD
 
 	hud_state = "gen_immolate"
 

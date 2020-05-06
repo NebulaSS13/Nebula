@@ -186,7 +186,7 @@
 	if(S.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You will need at least 2 sheets to reinforce \the [src]."))
 		return TRUE
-	var/material/M = S.material
+	var/decl/material/M = S.material
 	if(!istype(M) || M.integrity < 50)
 		to_chat(user, SPAN_WARNING("You cannot reinforce \the [src] with [M.display_name]; it is too soft."))
 		return TRUE

@@ -8,7 +8,7 @@
 	anchored = 0
 
 	var/initial_capacity = 1000
-	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/decl/reagent/water = 0.5) would fill the dispenser halfway to capacity.
+	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/decl/material/water = 0.5) would fill the dispenser halfway to capacity.
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = @"[10,25,50,100,500]"
 
@@ -29,7 +29,7 @@
 		to_chat(user, SPAN_NOTICE("It contains:"))
 		if(LAZYLEN(reagents?.reagent_volumes))
 			for(var/rtype in reagents.reagent_volumes)
-				var/decl/reagent/R = decls_repository.get_decl(rtype)
+				var/decl/material/R = decls_repository.get_decl(rtype)
 				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, rtype)] units of [R.name]"))
 		else
 			to_chat(user, SPAN_NOTICE("Nothing."))
@@ -84,7 +84,7 @@
 	var/fill_level = FLUID_SHALLOW // Can be adminbussed for silly room-filling tanks.
 	possible_transfer_amounts = @"[10,25,50,100]"
 	initial_capacity = 50000
-	initial_reagent_types = list(/decl/reagent/water = 1)
+	initial_reagent_types = list(/decl/material/water = 1)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/watertank/proc/drain_water()
@@ -103,10 +103,10 @@
 		return
 
 	// For now, this cheats and only checks/leaks water, pending additions to the fluid system.
-	var/W = reagents.remove_reagent(/decl/reagent/water, amount_per_transfer_from_this * 5)
+	var/W = reagents.remove_reagent(/decl/material/water, amount_per_transfer_from_this * 5)
 	if(W > 0)
 		// Artificially increased flow - a 1:1 rate doesn't result in very much water at all.
-		T.add_fluid(W * 100, /decl/reagent/water)
+		T.add_fluid(W * 100, /decl/material/water)
 
 /obj/structure/reagent_dispensers/watertank/examine(mob/user)
 	. = ..()
@@ -147,7 +147,7 @@
 	amount_per_transfer_from_this = 10
 	var/modded = 0
 	var/obj/item/assembly_holder/rig = null
-	initial_reagent_types = list(/decl/reagent/fuel = 1)
+	initial_reagent_types = list(/decl/material/fuel = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
@@ -213,7 +213,7 @@
 
 /obj/structure/reagent_dispensers/fueltank/proc/explode()
 	for(var/rtype in reagents.reagent_volumes)
-		var/decl/reagent/R = decls_repository.get_decl(reagents, rtype)
+		var/decl/material/R = decls_repository.get_decl(reagents, rtype)
 		R.ex_act(src, 1)
 	qdel(src)
 
@@ -231,7 +231,7 @@
 /obj/structure/reagent_dispensers/fueltank/proc/leak_fuel(amount)
 	if (reagents.total_volume > 0)
 		amount = min(amount, reagents.total_volume)
-		reagents.remove_reagent(/decl/reagent/fuel,amount)
+		reagents.remove_reagent(/decl/material/fuel,amount)
 		new /obj/effect/decal/cleanable/liquid_fuel(loc, amount,1)
 
 /obj/structure/reagent_dispensers/peppertank
@@ -242,7 +242,7 @@
 	anchored = 1
 	density = 0
 	amount_per_transfer_from_this = 45
-	initial_reagent_types = list(/decl/reagent/capsaicin/condensed = 1)
+	initial_reagent_types = list(/decl/material/capsaicin/condensed = 1)
 
 /obj/structure/reagent_dispensers/water_cooler
 	name = "water cooler"
@@ -253,7 +253,7 @@
 	possible_transfer_amounts = null
 	anchored = 1
 	initial_capacity = 500
-	initial_reagent_types = list(/decl/reagent/water = 1)
+	initial_reagent_types = list(/decl/material/water = 1)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	var/cups = 12
 	var/cup_type = /obj/item/chems/food/drinks/sillycup
@@ -285,7 +285,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "beertankTEMP"
 	amount_per_transfer_from_this = 10
-	initial_reagent_types = list(/decl/reagent/ethanol/beer = 1)
+	initial_reagent_types = list(/decl/material/ethanol/beer = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/acid
@@ -295,4 +295,4 @@
 	icon_state = "acidtank"
 	amount_per_transfer_from_this = 10
 	anchored = 1
-	initial_reagent_types = list(/decl/reagent/acid = 1)
+	initial_reagent_types = list(/decl/material/acid = 1)

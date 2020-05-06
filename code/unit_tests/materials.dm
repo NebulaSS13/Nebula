@@ -4,8 +4,7 @@
 /datum/unit_test/crafting_recipes_shall_not_have_inconsistent_materials/start_test()
 	var/list/failed_designs = list()
 	var/list/passed_designs = list()
-	for(var/owner_mat in SSmaterials.materials_by_name)
-		var/material/mat_datum = SSmaterials.get_material_datum(owner_mat)
+	for(var/decl/material/mat_datum in SSmaterials.materials)
 		for(var/datum/stack_recipe/recipe in mat_datum.get_recipes())
 			var/obj/product = recipe.spawn_result()
 			var/failed
@@ -27,7 +26,7 @@
 						if(mat != recipe.use_material && mat != recipe.use_reinf_material)
 							failed = "extra material type ([mat])"
 			if(failed)
-				failed_designs += "[owner_mat] - [recipe.type] - [failed]"
+				failed_designs += "[mat_datum.type] - [recipe.type] - [failed]"
 			else
 				passed_designs += recipe
 			if(!QDELETED(product))

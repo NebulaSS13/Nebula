@@ -1,47 +1,47 @@
-/decl/reagent/gold
+/decl/material/gold
 	name = "gold"
 	description = "Gold is a dense, soft, shiny metal and the most malleable and ductile metal known."
 	taste_description = "expensive metal"
 	color = "#f7c430"
 	value = 1.5
 
-/decl/reagent/silver
+/decl/material/silver
 	name = "silver"
 	description = "A soft, white, lustrous transition metal, it has the highest electrical conductivity of any element and the highest thermal conductivity of any metal."
 	taste_description = "expensive yet reasonable metal"
 	color = "#d0d0d0"
 
-/decl/reagent/uranium
+/decl/material/uranium
 	name = "uranium"
 	description = "A silvery-white metallic chemical element in the actinide series, weakly radioactive."
 	taste_description = "the inside of a reactor"
 	color = "#b8b8c0"
 
-/decl/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_ingest(M, alien, removed, holder)
 
-/decl/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
 
-/decl/reagent/uranium/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/uranium/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(REAGENT_VOLUME(holder, type) >= 3)
 		if(!istype(T, /turf/space))
 			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
 			if(!glow)
 				new /obj/effect/decal/cleanable/greenglow(T)
 
-/decl/reagent/helium
+/decl/material/helium
 	name = "helium"
 	description = "A noble gas. It makes your voice squeaky."
 	taste_description = "nothing"
 	color = COLOR_GRAY80
 	metabolism = 0.05
 
-/decl/reagent/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_SQUEAKY, 1)
 
-/decl/reagent/aluminium
+/decl/material/aluminium
 	name = "aluminium"
 	taste_description = "metal"
 	taste_mult = 1.1
@@ -49,7 +49,7 @@
 	color = "#a8a8a8"
 	value = 0.5
 
-/decl/reagent/ammonia
+/decl/material/ammonia
 	name = "ammonia"
 	taste_description = "mordant"
 	taste_mult = 2
@@ -59,7 +59,7 @@
 	overdose = 5
 	value = 0.5
 
-/decl/reagent/carbon
+/decl/material/carbon
 	name = "carbon"
 	description = "A chemical element, the building block of life."
 	taste_description = "sour chalk"
@@ -67,7 +67,7 @@
 	color = "#1c1300"
 	value = 0.5
 
-/decl/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if(ingested && LAZYLEN(ingested.reagent_volumes) > 1)
 		var/effect = 1 / (LAZYLEN(ingested.reagent_volumes) - 1)
@@ -75,7 +75,7 @@
 			if(R != type)
 				ingested.remove_reagent(R, removed * effect)
 
-/decl/reagent/carbon/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/carbon/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(!istype(T, /turf/space))
 		var/volume = REAGENT_VOLUME(holder, src)
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, T)
@@ -85,109 +85,109 @@
 		else
 			dirtoverlay.alpha = min(dirtoverlay.alpha + volume * 30, 255)
 
-/decl/reagent/copper
+/decl/material/copper
 	name = "copper"
 	description = "A highly ductile metal."
 	taste_description = "copper"
 	color = "#6e3b08"
 	value = 0.5
 
-/decl/reagent/iron
+/decl/material/iron
 	name = "iron"
 	description = "Pure iron is a metal."
 	taste_description = "metal"
 	color = "#353535"
 	value = 0.5
 
-/decl/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
-/decl/reagent/lithium
+/decl/material/lithium
 	name = "lithium"
 	description = "A chemical element, used as antidepressant."
 	taste_description = "metal"
 	color = "#808080"
 	value = 0.5
 
-/decl/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(istype(M.loc, /turf/space))
 		M.SelfMove(pick(GLOB.cardinal))
 	if(prob(5))
 		M.emote(pick("twitch", "drool", "moan"))
 
-/decl/reagent/mercury
+/decl/material/mercury
 	name = "mercury"
 	description = "A chemical element."
 	taste_mult = 0 //mercury apparently is tasteless. IDK
 	color = "#484848"
 	value = 0.5
 
-/decl/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(istype(M.loc, /turf/space))
 		M.SelfMove(pick(GLOB.cardinal))
 	if(prob(5))
 		M.emote(pick("twitch", "drool", "moan"))
 	M.adjustBrainLoss(0.1)
 
-/decl/reagent/phosphorus
+/decl/material/phosphorus
 	name = "phosphorus"
 	description = "A chemical element, the backbone of biological energy carriers."
 	taste_description = "vinegar"
 	color = "#832828"
 	value = 0.5
 
-/decl/reagent/potassium
+/decl/material/potassium
 	name = "potassium"
 	description = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
 	color = "#a0a0a0"
 	value = 0.5
 
-/decl/reagent/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)
 	if(volume > 10)
 		M.add_chemical_effect(CE_PULSE, 1)
 
-/decl/reagent/radium
+/decl/material/radium
 	name = "radium"
 	description = "Radium is an alkaline earth metal. It is extremely radioactive."
 	taste_description = "the color blue, and regret"
 	color = "#c7c7c7"
 	value = 0.5
 
-/decl/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
 
-/decl/reagent/radium/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/radium/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(REAGENT_VOLUME(holder, type) >= 3)
 		if(!istype(T, /turf/space))
 			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
 			if(!glow)
 				new /obj/effect/decal/cleanable/greenglow(T)
 
-/decl/reagent/silicon
+/decl/material/silicon
 	name = "silicon"
 	description = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
 	color = "#a8a8a8"
 	value = 0.5
 
-/decl/reagent/sodium
+/decl/material/sodium
 	name = "sodium"
 	description = "A chemical element, readily reacts with water."
 	taste_description = "salty metal"
 	color = "#808080"
 	value = 0.5
 
-/decl/reagent/sulfur
+/decl/material/sulfur
 	name = "sulfur"
 	description = "A chemical element with a pungent smell."
 	taste_description = "old eggs"
 	color = "#bf8c00"
 	value = 0.5
 
-/decl/reagent/tungsten
+/decl/material/tungsten
 	name = "tungsten"
 	description = "A chemical element, and a strong oxidising agent."
 	taste_mult = 0 //no taste
