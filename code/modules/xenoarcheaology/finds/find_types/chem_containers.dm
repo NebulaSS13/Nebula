@@ -32,7 +32,7 @@
 		/decl/material/lube,            \
 		/decl/material/sedatives,       \
 		/decl/material/ethanol,         \
-		/decl/material/drink/ice,       \
+		MAT_WATER,                      \
 		MAT_FUEL,                       \
 		/decl/material/cleaner          \
 	)

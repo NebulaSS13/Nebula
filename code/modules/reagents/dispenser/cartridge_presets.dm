@@ -45,7 +45,7 @@
 	mead		spawn_reagent = /decl/material/ethanol/mead
 
 	// Bar, soft
-	ice			spawn_reagent = /decl/material/drink/ice
+	water		spawn_reagent = MAT_WATER
 	tea			spawn_reagent = /decl/material/drink/tea
 	green_tea	spawn_reagent = /decl/material/drink/tea/green
 	chai_tea	spawn_reagent = /decl/material/drink/tea/chai

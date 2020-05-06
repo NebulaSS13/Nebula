@@ -134,7 +134,6 @@
 		/decl/material/ethanol/mead,
 		MAT_WATER,
 		/decl/material/nutriment/sugar,
-		/decl/material/drink/ice,
 		/decl/material/drink/tea,
 		/decl/material/drink/tea/icetea,
 		/decl/material/drink/cola,

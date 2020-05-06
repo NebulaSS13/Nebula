@@ -4,21 +4,30 @@
 /datum/chemical_reaction/cafe/icecoffee
 	name = "Iced Coffee"
 	result = /decl/material/drink/coffee/icecoffee
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/coffee = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/coffee = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled coffee."
 
 /datum/chemical_reaction/cafe/icesoylatte
 	name = "Iced Soy Latte"
 	result = /decl/material/drink/coffee/icecoffee/soy_latte
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/coffee/soy_latte = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/coffee/soy_latte = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled soy latte."
 
 /datum/chemical_reaction/cafe/icecafelatte
 	name = "Iced Cafe Latte"
 	result = /decl/material/drink/coffee/icecoffee/cafe_latte
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/coffee/cafe_latte = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/coffee/cafe_latte = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled cafe latte."
 
@@ -53,14 +62,20 @@
 /datum/chemical_reaction/recipe/cafe/ice_mocha_latte
 	name = "Iced Mocha Latte"
 	result = /decl/material/drink/coffee/icecoffee/cafe_latte/mocha
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/coffee/cafe_latte/mocha = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/coffee/cafe_latte/mocha = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled mocha latte."
 
 /datum/chemical_reaction/recipe/cafe/ice_soy_mocha_latte
 	name = "Iced Soy Mocha Latte"
 	result = /decl/material/drink/coffee/icecoffee/soy_latte/mocha
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/coffee/soy_latte/mocha = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/coffee/soy_latte/mocha = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled soy mocha latte."
 
@@ -81,14 +96,20 @@
 /datum/chemical_reaction/recipe/cafe/ice_pumpkin_latte
 	name = "Iced Pumpkin Spice Latte"
 	result = /decl/material/drink/coffee/icecoffee/cafe_latte/pumpkin
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/coffee/cafe_latte/pumpkin = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/coffee/cafe_latte/pumpkin = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled pumpkin spice latte."
 
 /datum/chemical_reaction/recipe/cafe/ice_soy_pumpkin_latte
 	name = "Iced Pumpkin Spice Soy Latte"
 	result = /decl/material/drink/coffee/icecoffee/soy_latte/pumpkin
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/coffee/soy_latte/pumpkin = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/coffee/soy_latte/pumpkin = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled pumpkin spice soy latte."
 
@@ -151,7 +172,10 @@
 /datum/chemical_reaction/recipe/cafe/icetea
 	name = "Iced Tea"
 	result = /decl/material/drink/tea/icetea
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/tea = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/tea = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the tea."
 
@@ -186,21 +210,30 @@
 /datum/chemical_reaction/recipe/cafe/ice_latte_barongrey
 	name = "Iced London Fog"
 	result = /decl/material/drink/tea/icetea/barongrey/latte
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/tea/barongrey/latte = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/tea/barongrey/latte = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled london fog."
 
 /datum/chemical_reaction/recipe/cafe/ice_soy_latte_barongrey
 	name = "Iced Soy London Fog"
 	result = /decl/material/drink/tea/icetea/barongrey/soy_latte
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/tea/barongrey/soy_latte = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/tea/barongrey/soy_latte = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled soy london fog."
 
 /datum/chemical_reaction/recipe/cafe/icetea_green
 	name = "Iced Green Tea"
 	result = /decl/material/drink/tea/icetea/green
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/tea/green = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/tea/green = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the tea."
 
@@ -222,7 +255,10 @@
 /datum/chemical_reaction/recipe/cafe/icetea_chai
 	name = "Iced Chai Tea"
 	result = /decl/material/drink/tea/icetea/chai
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/tea/chai = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/tea/chai = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the tea."
 
@@ -250,21 +286,30 @@
 /datum/chemical_reaction/recipe/cafe/ice_latte_chai
 	name = "Iced Chai Latte"
 	result = /decl/material/drink/tea/icetea/chai/latte
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/tea/chai/latte = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/tea/chai/latte = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled chai latte."
 
 /datum/chemical_reaction/recipe/cafe/ice_soy_latte_chai
 	name = "Iced Chai Soy Latte"
 	result = /decl/material/drink/tea/icetea/chai/soy_latte
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/tea/chai/soy_latte = 2)
+	required_reagents = list(
+		MAT_WATER = 1,
+		/decl/material/drink/tea/chai/soy_latte = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled chai soy latte."
 
 /datum/chemical_reaction/recipe/cafe/icetea_red
 	name = "Iced Rooibos tea"
 	result = /decl/material/drink/tea/icetea/red
-	required_reagents = list(/decl/material/drink/ice = 1, /decl/material/drink/tea/red = 2)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/tea/red = 2
+	)
 	result_amount = 3
 	mix_message = "The ice clinks together in the tea."
 

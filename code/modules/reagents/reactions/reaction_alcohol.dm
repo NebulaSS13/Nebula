@@ -312,7 +312,12 @@
 /datum/chemical_reaction/recipe/bahama_mama
 	name = "Bahama Mama"
 	result = /decl/material/ethanol/bahama_mama
-	required_reagents = list(/decl/material/ethanol/rum = 2, /decl/material/drink/juice/orange = 2, /decl/material/drink/juice/lime = 1, /decl/material/drink/ice = 1)
+	required_reagents = list(
+		/decl/material/ethanol/rum = 2, 
+		/decl/material/drink/juice/orange = 2, 
+		/decl/material/drink/juice/lime = 1, 
+		MAT_WATER = 1
+	)
 	result_amount = 6
 
 /datum/chemical_reaction/recipe/singulo
@@ -343,7 +348,11 @@
 /datum/chemical_reaction/recipe/antifreeze
 	name = "Anti-freeze"
 	result = /decl/material/ethanol/antifreeze
-	required_reagents = list(/decl/material/ethanol/vodka = 1, /decl/material/drink/milk/cream = 1, /decl/material/drink/ice = 1)
+	required_reagents = list(
+		/decl/material/ethanol/vodka = 1, 
+		/decl/material/drink/milk/cream = 1, 
+		MAT_WATER = 1
+	)
 	minimum_temperature = (0 CELSIUS) - 100
 	maximum_temperature = 0 CELSIUS
 	result_amount = 3
@@ -387,7 +396,10 @@
 /datum/chemical_reaction/recipe/iced_beer2
 	name = "Iced Beer"
 	result = /decl/material/ethanol/iced_beer
-	required_reagents = list(/decl/material/ethanol/beer = 5, /decl/material/drink/ice = 1)
+	required_reagents = list(
+		/decl/material/ethanol/beer = 5,
+		MAT_WATER = 1
+	)
 	result_amount = 6
 	mix_message = "The ice clinks together in the beer."
 
@@ -463,7 +475,13 @@
 /datum/chemical_reaction/recipe/erikasurprise
 	name = "Erika Surprise"
 	result = /decl/material/ethanol/erikasurprise
-	required_reagents = list(/decl/material/ethanol/ale = 2, /decl/material/drink/juice/lime = 1, /decl/material/ethanol/whiskey = 1, /decl/material/drink/juice/banana = 1, /decl/material/drink/ice = 1)
+	required_reagents = list(
+		/decl/material/ethanol/ale = 2, 
+		/decl/material/drink/juice/lime = 1, 
+		/decl/material/ethanol/whiskey = 1, 
+		/decl/material/drink/juice/banana = 1, 
+		MAT_WATER = 1
+	)
 	result_amount = 6
 
 /datum/chemical_reaction/recipe/devilskiss
@@ -510,7 +528,11 @@
 /datum/chemical_reaction/recipe/ships_surgeon
 	name = "Ship's Surgeon"
 	result = /decl/material/ethanol/ships_surgeon
-	required_reagents = list(/decl/material/ethanol/rum = 1, /decl/material/drink/cherrycola = 2, /decl/material/drink/ice = 1)
+	required_reagents = list(
+		/decl/material/ethanol/rum = 1, 
+		/decl/material/drink/cherrycola = 2, 
+		MAT_WATER = 1
+	)
 	result_amount = 4
 
 /datum/chemical_reaction/recipe/applecider

@@ -19,10 +19,7 @@
 
 /datum/artifact_trigger/chemical/water
 	name = "presence of water"
-	required_chemicals = list(
-		MAT_WATER,
-		/decl/material/drink/ice
-	)
+	required_chemicals = list(MAT_WATER)
 
 /datum/artifact_trigger/chemical/acid
 	name = "presence of acid"

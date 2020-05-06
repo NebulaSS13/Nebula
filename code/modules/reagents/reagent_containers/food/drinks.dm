@@ -192,7 +192,7 @@
 
 /obj/item/chems/food/drinks/ice/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/drink/ice, 30)
+	reagents.add_reagent(MAT_WATER, 30)
 
 /obj/item/chems/food/drinks/h_chocolate
 	name = "cup of hot cocoa"

@@ -39,7 +39,11 @@
 /datum/chemical_reaction/recipe/milkshake
 	name = "Milkshake"
 	result = /decl/material/drink/milkshake
-	required_reagents = list(/decl/material/drink/milk/cream = 1, /decl/material/drink/ice = 2, /decl/material/drink/milk = 2)
+	required_reagents = list(
+		/decl/material/drink/milk/cream = 1, 
+		MAT_WATER = 2, 
+		/decl/material/drink/milk = 2
+	)
 	result_amount = 5
 
 /datum/chemical_reaction/recipe/rewriter
@@ -78,7 +82,11 @@
 /datum/chemical_reaction/recipe/snowball
 	name = "Snowball"
 	result = /decl/material/drink/snowball
-	required_reagents = list(/decl/material/drink/ice = 2, /decl/material/drink/coffee/icecoffee = 1, /decl/material/drink/juice/watermelon = 1)
+	required_reagents = list(
+		MAT_WATER = 2, 
+		/decl/material/drink/coffee/icecoffee = 1, 
+		/decl/material/drink/juice/watermelon = 1
+	)
 	result_amount = 4
 	minimum_temperature = (0 CELSIUS) - 100
 	maximum_temperature = 0 CELSIUS
