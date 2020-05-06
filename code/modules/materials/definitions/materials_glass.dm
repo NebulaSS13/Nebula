@@ -1,6 +1,6 @@
 
 /decl/material/glass
-	display_name = "glass"
+	name = "glass"
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	stack_type = /obj/item/stack/material/glass
 	flags = MAT_FLAG_BRITTLE
@@ -32,7 +32,7 @@
 	return ..() && !is_reinforced()
 
 /decl/material/glass/phoron
-	display_name = "borosilicate glass"
+	name = "borosilicate glass"
 	lore_text = "An extremely heat-resistant form of glass."
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MAT_FLAG_BRITTLE

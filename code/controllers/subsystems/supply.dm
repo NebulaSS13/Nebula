@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(supply)
 
 	for(var/decl/material/mat in SSchemistry.materials)
 		if(mat.sale_price > 0)
-			point_source_descriptions[mat.display_name] = "From exported [mat.display_name]"
+			point_source_descriptions[mat.name] = "From exported [mat.name]"
 
 // Just add points over time.
 /datum/controller/subsystem/supply/fire()
@@ -102,9 +102,9 @@ SUBSYSTEM_DEF(supply)
 					if(istype(A, /obj/item/stack/material))
 						var/obj/item/stack/material/P = A
 						if(P.material && P.material.sale_price > 0)
-							material_count[P.material.display_name] += P.get_amount() * P.material.sale_price * P.matter_multiplier
+							material_count[P.material.name] += P.get_amount() * P.material.sale_price * P.matter_multiplier
 						if(P.reinf_material && P.reinf_material.sale_price > 0)
-							material_count[P.reinf_material.display_name] += P.get_amount() * P.reinf_material.sale_price * P.matter_multiplier * 0.5
+							material_count[P.reinf_material.name] += P.get_amount() * P.reinf_material.sale_price * P.matter_multiplier * 0.5
 						continue
 
 					// Must sell ore detector disks in crates

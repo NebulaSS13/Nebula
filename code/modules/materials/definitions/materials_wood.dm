@@ -1,5 +1,5 @@
 /decl/material/wood
-	display_name = "wood"
+	name = "wood"
 	lore_text = "A fibrous structural material harvested from an indeterminable plant. Don't get a splinter."
 	adjective_name = "wooden"
 	stack_type = /obj/item/stack/material/wood
@@ -45,7 +45,7 @@
 	return list()
 
 /decl/material/wood/mahogany
-	display_name = "mahogany"
+	name = "mahogany"
 	adjective_name = "mahogany"
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	icon_colour = WOOD_COLOR_RICH
@@ -54,13 +54,13 @@
 	value = 45
 
 /decl/material/wood/maple
-	display_name = "maple"
+	name = "maple"
 	adjective_name = "maple"
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	icon_colour = WOOD_COLOR_PALE
 
 /decl/material/wood/ebony
-	display_name = "ebony"
+	name = "ebony"
 	adjective_name = "ebony"
 	lore_text = "Ebony is the name for a group of dark coloured, extremely dense, and fine grained hardwoods. \
 				Despite gene modification to produce larger source trees and ample land to plant them on, \
@@ -74,7 +74,7 @@
 	value = 85
 
 /decl/material/wood/walnut
-	display_name = "walnut"
+	name = "walnut"
 	adjective_name = "walnut"
 	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
 				Walnut is especially favoured for construction of figurines (where it contrasts with lighter coloured woods) and tables. \
@@ -86,7 +86,7 @@
 	value = 21
 
 /decl/material/wood/bamboo
-	display_name = "bamboo"
+	name = "bamboo"
 	adjective_name = "bamboo"
 	lore_text = "Bamboo is a fast-growing grass which can be used similar to wood after processing. Due to its swift growth \
 				and high strength, various species of bamboo area common building materials in developing societies."
@@ -95,7 +95,7 @@
 	hardness = MAT_VALUE_RIGID
 
 /decl/material/wood/yew
-	display_name = "yew"
+	name = "yew"
 	adjective_name = "yew"
 	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
 				tree can live for nearly a thousand years thanks to its natural disease resistance."

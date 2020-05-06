@@ -1,5 +1,5 @@
 /decl/material/diamond
-	display_name = "diamond"
+	name = "diamond"
 	lore_text = "An extremely hard allotrope of carbon. Valued for its use in industrial tools."
 	stack_type = /obj/item/stack/material/diamond
 	flags = MAT_FLAG_UNMELTABLE
@@ -28,7 +28,7 @@
 	value = 70
 
 /decl/material/diamond/crystal
-	display_name = "crystal"
+	name = "crystal"
 	hardness = MAT_VALUE_VERY_HARD
 	reflectiveness = MAT_VALUE_VERY_SHINY
 	stack_type = null
@@ -37,7 +37,7 @@
 	hidden_from_codex = TRUE
 
 /decl/material/stone
-	display_name = "sandstone"
+	name = "sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	stack_type = /obj/item/stack/material/sandstone
 	icon_base = "stone"
@@ -61,13 +61,13 @@
 	value = 4
 
 /decl/material/stone/ceramic
-	display_name = "ceramic"
+	name = "ceramic"
 	lore_text = "A hard substance produced by firing clay in a kiln."
 	stack_type = /obj/item/stack/material/generic
 	icon_colour = COLOR_OFF_WHITE
 
 /decl/material/stone/marble
-	display_name = "marble"
+	name = "marble"
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
 	icon_colour = "#aaaaaa"
 	weight = MAT_VALUE_VERY_HEAVY
@@ -82,7 +82,7 @@
 	value = 20
 
 /decl/material/stone/concrete
-	display_name = "concrete"
+	name = "concrete"
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	stack_type = /obj/item/stack/material/generic/brick
 	icon_colour = COLOR_GRAY

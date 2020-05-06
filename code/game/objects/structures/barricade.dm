@@ -37,9 +37,9 @@
 
 /obj/structure/barricade/update_material_desc()
 	if(reinf_material)
-		desc = "A rather simple [material.display_name] barrier. It menaces with spikes of [reinf_material.display_name]."
+		desc = "A rather simple [material.name] barrier. It menaces with spikes of [reinf_material.name]."
 	else
-		desc = "A heavy, solid barrier made of [material.display_name]."
+		desc = "A heavy, solid barrier made of [material.name]."
 
 /obj/structure/barricade/on_update_icon()
 	..()

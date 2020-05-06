@@ -1,5 +1,5 @@
 /decl/material/pitchblende
-	display_name = "pitchblende"
+	name = "pitchblende"
 	ore_compresses_to = MAT_PITCHBLENDE
 	icon_colour = "#917d1a"
 	ore_smelts_to = MAT_URANIUM
@@ -19,7 +19,7 @@
 	sale_price = 2
 
 /decl/material/graphite
-	display_name = "graphite"
+	name = "graphite"
 	ore_compresses_to = MAT_GRAPHITE
 	icon_colour = "#444444"
 	ore_name = "graphite"
@@ -35,7 +35,7 @@
 	sale_price = 1
 
 /decl/material/quartz
-	display_name = "quartz"
+	name = "quartz"
 	ore_compresses_to = MAT_QUARTZ
 	ore_name = "quartz"
 	opacity = 0.5
@@ -57,7 +57,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 
 /decl/material/pyrite
-	display_name = "pyrite"
+	name = "pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -79,7 +79,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 
 /decl/material/spodumene
-	display_name = "spodumene"
+	name = "spodumene"
 	ore_compresses_to = MAT_SPODUMENE
 	ore_name = "spodumene"
 	ore_result_amount = 10
@@ -99,7 +99,7 @@
 	sale_price = 2
 
 /decl/material/cinnabar
-	display_name = "cinnabar"
+	name = "cinnabar"
 	ore_compresses_to = MAT_CINNABAR
 	ore_name = "cinnabar"
 	ore_result_amount = 10
@@ -119,7 +119,7 @@
 	sale_price = 2
 
 /decl/material/phosphorite
-	display_name = "phosphorite"
+	name = "phosphorite"
 	ore_compresses_to = MAT_PHOSPHORITE
 	ore_name = "phosphorite"
 	ore_result_amount = 10
@@ -139,7 +139,7 @@
 	sale_price = 2
 
 /decl/material/rocksalt
-	display_name = "rock salt"
+	name = "rock salt"
 	ore_compresses_to = MAT_ROCK_SALT
 	ore_name = "rock salt"
 	ore_result_amount = 10
@@ -159,7 +159,7 @@
 	sale_price = 2
 
 /decl/material/potash
-	display_name = "potash"
+	name = "potash"
 	ore_compresses_to = MAT_POTASH
 	ore_name = "potash"
 	ore_result_amount = 10
@@ -179,7 +179,7 @@
 	sale_price = 2
 
 /decl/material/bauxite
-	display_name = "bauxite"
+	name = "bauxite"
 	ore_name = "bauxite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -200,7 +200,7 @@
 	sale_price = 1
 
 /decl/material/sand
-	display_name = "sand"
+	name = "sand"
 	stack_type = null
 	icon_colour = "#e2dbb5"
 	ore_smelts_to = MAT_GLASS
@@ -212,7 +212,7 @@
 		)
 
 /decl/material/sand/clay
-	display_name = "clay"
+	name = "clay"
 	icon_colour = COLOR_OFF_WHITE
 	ore_name = "clay"
 	ore_icon_overlay = "lump"
@@ -220,7 +220,7 @@
 	ore_compresses_to = MAT_CLAY
 
 /decl/material/phoron
-	display_name = "phoron"
+	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
@@ -261,7 +261,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 
 /decl/material/phoron/supermatter
-	display_name = "exotic matter"
+	name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
 	radioactivity = 20

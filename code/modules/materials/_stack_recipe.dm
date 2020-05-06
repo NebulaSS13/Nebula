@@ -38,10 +38,10 @@
 	if(!use_material || !apply_material_name)
 		return title
 	var/decl/material/mat = decls_repository.get_decl(use_material)
-	. = "[mat.display_name] [title]"
+	. = "[mat.name] [title]"
 	if(use_reinf_material)
 		mat = decls_repository.get_decl(use_reinf_material)
-		. = "[mat.display_name]-reinforced [.]"
+		. = "[mat.name]-reinforced [.]"
 
 /datum/stack_recipe/proc/spawn_result(mob/user, location, amount)
 	var/atom/O

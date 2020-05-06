@@ -70,9 +70,9 @@
 	. = TRUE
 	if(rotting)
 		if(reinf_material)
-			to_chat(user, "<span class='danger'>\The [reinf_material.display_name] feels porous and crumbly.</span>")
+			to_chat(user, "<span class='danger'>\The [reinf_material.name] feels porous and crumbly.</span>")
 		else
-			to_chat(user, "<span class='danger'>\The [material.display_name] crumbles under your touch!</span>")
+			to_chat(user, "<span class='danger'>\The [material.name] crumbles under your touch!</span>")
 			dismantle_wall()
 			return
 

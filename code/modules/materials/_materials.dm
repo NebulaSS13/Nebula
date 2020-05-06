@@ -60,7 +60,7 @@
 
 // Material definition and procs follow.
 /decl/material
-	var/display_name                      // Prettier name for display.
+	var/name                              // Prettier name for display.
 	var/adjective_name
 	var/use_name
 	var/wall_name = "wall"                // Name given to walls of this material
@@ -160,7 +160,6 @@
 	var/gas_tile_overlay =       "generic"
 	var/gas_condensation_point = INFINITY
 
-	var/name
 	var/description = "A non-descript chemical."
 	var/taste_description = "old rotten bandaids"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
@@ -207,10 +206,10 @@
 
 	var/decl/material/reinf_mat = used_stack.material
 	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
-		to_chat(user, "<span class='warning'>The [reinf_mat.display_name] is too structurally weak to reinforce the [display_name].</span>")
+		to_chat(user, "<span class='warning'>The [reinf_mat.name] is too structurally weak to reinforce the [name].</span>")
 		return
 
-	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.display_name].</span>")
+	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.name].</span>")
 	used_stack.use(1)
 	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
 	S.reinf_material = reinf_mat
@@ -223,12 +222,12 @@
 		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]."))	
 		return
 	if(!used_stack.can_use(5) || !target_stack.can_use(1))
-		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [display_name] to make anything useful."))
+		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [name] to make anything useful."))
 		return
 
 	used_stack.use(5)
 	target_stack.use(1)
-	to_chat(user, SPAN_NOTICE("You attach wire to the [display_name]."))
+	to_chat(user, SPAN_NOTICE("You attach wire to the [name]."))
 	var/obj/item/product = new wire_product(get_turf(user))
 	if(!(user.l_hand && user.r_hand))
 		user.put_in_hands(product)
@@ -237,9 +236,9 @@
 /decl/material/New()
 	..()
 	if(!use_name)
-		use_name = display_name
+		use_name = name
 	if(!adjective_name)
-		adjective_name = display_name
+		adjective_name = name
 	if(!shard_icon)
 		shard_icon = shard_type
 	if(!burn_armor)
@@ -279,7 +278,7 @@
 
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
-	display_name = "placeholder"
+	name = "placeholder"
 	hidden_from_codex = TRUE
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.

@@ -32,7 +32,7 @@
 
 /obj/structure/grille/update_material_desc(override_desc)
 	if(material)
-		desc = "A lattice of [material.display_name] rods, with screws to secure it to the floor."
+		desc = "A lattice of [material.name] rods, with screws to secure it to the floor."
 	else
 		..()
 
@@ -272,7 +272,7 @@
 	if(ST.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 		return
-	user.visible_message(SPAN_NOTICE("\The [user] begins assembling a [ST.material.display_name] grille."))
+	user.visible_message(SPAN_NOTICE("\The [user] begins assembling a [ST.material.name] grille."))
 	if(do_after(user, 1 SECOND, ST) && ST.use(2))
 		var/obj/structure/grille/F = new(loc, ST.material.type)
 		user.visible_message(SPAN_NOTICE("\The [user] finishes building \a [F]."))

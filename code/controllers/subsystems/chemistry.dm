@@ -51,7 +51,7 @@ SUBSYSTEM_DEF(chemistry)
 	var/list/all_mat_decls = decls_repository.get_decls_of_subtype(/decl/material)
 	for(var/mtype in all_mat_decls)
 		var/decl/material/new_mineral = all_mat_decls[mtype]
-		if(!new_mineral.display_name)
+		if(!new_mineral.name)
 			continue
 		materials[new_mineral] = TRUE
 		if(new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)

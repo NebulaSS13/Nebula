@@ -14,7 +14,7 @@
 			gas_info+= "It is flammable."
 			if(mat.gas_burn_product)
 				var/decl/material/firemat = decls_repository.get_decl(mat.gas_burn_product)
-				gas_info+= "It produces [firemat.display_name] when burned."
+				gas_info+= "It produces [firemat.name] when burned."
 		if(mat.gas_flags & XGM_GAS_OXIDIZER)
 			gas_info+= "It is an oxidizer, required to sustain fire."
 		if(mat.gas_flags & XGM_GAS_CONTAMINANT)
@@ -24,7 +24,7 @@
 		if(mat.gas_condensation_point && mat.gas_condensation_product)
 			var/decl/material/product = mat.gas_condensation_product
 			gas_info+= "At [mat.gas_condensation_point] K it condenses into [initial(product.name)]."
-		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[mat.display_name] (gas)")), _mechanics_text = jointext(gas_info, "<br>"))
+		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[mat.name] (gas)")), _mechanics_text = jointext(gas_info, "<br>"))
 		SScodex.add_entry_by_string(entry.display_name, entry)
 		items += entry.display_name
 	..()

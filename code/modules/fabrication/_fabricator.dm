@@ -91,7 +91,7 @@
 			if(ispath(mat, /decl/material))
 				var/decl/material/mat_instance = decls_repository.get_decl(mat)
 				if(istype(mat_instance))
-					stored_substances_to_names[mat] =  lowertext(mat_instance.display_name)
+					stored_substances_to_names[mat] =  lowertext(mat_instance.name)
 			else if(ispath(mat, /decl/material))
 				var/decl/material/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))

@@ -103,7 +103,7 @@
 		var/obj/item/stack/material/stack = O
 		var/decl/material/material = stack.get_material()
 		if(!LAZYLEN(material.chem_products))
-			to_chat(user, SPAN_NOTICE("\The [material.display_name] is unable to produce any usable reagents."))
+			to_chat(user, SPAN_NOTICE("\The [material.name] is unable to produce any usable reagents."))
 			return TRUE
 
 	else if(!O.reagents?.total_volume)
