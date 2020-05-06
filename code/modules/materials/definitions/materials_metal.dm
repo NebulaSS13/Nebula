@@ -1,6 +1,6 @@
 /decl/material/uranium
 	name = "uranium"
-	lore_text = "A highly radioactive metal. Commonly used as fuel in fission reactors."
+	lore_text = "A silvery-white metallic chemical element in the actinide series, somewhat radioactive."
 	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/uranium
@@ -13,13 +13,27 @@
 	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':5}"
 	chem_products = list(
-		/decl/material/uranium = 20
+		MAT_URANIUM = 20
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_MATTE
 	sale_price = 2
 	value = 100
 	removed_by_welder = TRUE
+	taste_description = "the inside of a reactor"
+
+/decl/material/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	affect_ingest(M, alien, removed, holder)
+
+/decl/material/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
+
+/decl/material/uranium/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+	if(REAGENT_VOLUME(holder, type) >= 3)
+		if(!istype(T, /turf/space))
+			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
+			if(!glow)
+				new /obj/effect/decal/cleanable/greenglow(T)
 
 /decl/material/gold
 	name = "gold"
@@ -45,22 +59,35 @@
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "nugget"
 	sale_price = 3
-	value = 40	
 	removed_by_welder = TRUE
+	taste_description = "expensive metal"
+	value = 1.5
 
-/decl/material/gold/bronze //placeholder for ashtrays
+/decl/material/bronze //placeholder for ashtrays
 	name = "bronze"
 	lore_text = "An alloy of copper and tin."
-	reflectiveness = MAT_VALUE_SHINY
 	icon_colour = "#edd12f"
-	construction_difficulty = MAT_VALUE_HARD_DIY
-	ore_smelts_to = null
-	ore_compresses_to = null
 	sale_price = null
+	wall_name = "bulkhead"
+	stack_type = /obj/item/stack/material/generic
+	weight = MAT_VALUE_HEAVY
+	hardness = MAT_VALUE_FLEXIBLE + 5
+	integrity = 100
+	stack_origin_tech = "{'materials':4}"
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+	construction_difficulty = MAT_VALUE_HARD_DIY
+	reflectiveness = MAT_VALUE_SHINY
+	removed_by_welder = TRUE
+	taste_description = "metal"
+	value = 1.5
 
 /decl/material/copper
 	name = "copper"
 	wall_name = "bulkhead"
+	lore_text = "A highly ductile metal."
+	taste_description = "copper"
+	value = 0.5
 	icon_colour = "#b87333"
 	weight = MAT_VALUE_NORMAL
 	hardness = MAT_VALUE_FLEXIBLE + 10
@@ -69,9 +96,9 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
-		/decl/material/copper = 12,
-		/decl/material/silver = 8
-		)
+		MAT_COPPER = 12,
+		MAT_SILVER = 8
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_COPPER
 	ore_result_amount = 5
@@ -95,8 +122,8 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
-				/decl/material/silver = 20
-				)
+		MAT_SILVER = 20
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_SILVER
 	ore_result_amount = 5
@@ -107,6 +134,7 @@
 	sale_price = 2
 	value = 35
 	removed_by_welder = TRUE
+	taste_description = "expensive yet reasonable metal"
 
 /decl/material/steel
 	name = "steel"
@@ -121,10 +149,13 @@
 	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
 	chem_products = list(
-				/decl/material/iron = 19.6,
-				/decl/material/carbon = 0.4
-				)
-	alloy_materials = list(MAT_IRON = 1875, MAT_GRAPHITE = 1875)
+		MAT_IRON = 19.6,
+		MAT_GRAPHITE = 0.4
+	)
+	alloy_materials = list(
+		MAT_IRON = 1875, 
+		MAT_GRAPHITE = 1875
+	)
 	alloy_product = TRUE
 	sale_price = 1
 	ore_smelts_to = MAT_STEEL
@@ -164,6 +195,9 @@
 	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
+	taste_description = "metal"
+	taste_mult = 1.1
+	value = 0.5
 
 /decl/material/aluminium/holographic
 	name = "holoaluminium"
@@ -285,19 +319,24 @@
 	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/iron
-	icon_colour = "#5c5454"
+	icon_colour = "#353535"
 	weight = MAT_VALUE_HEAVY
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chem_products = list(
-				/decl/material/iron = 20
-				)
+		MAT_IRON = 20
+	)
 	sale_price = 1
 	value = 5
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE
+	taste_description = "tangy metal"
+	value = 0.5
+
+/decl/material/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 // Adminspawn only, do not let anyone get this.
 /decl/material/voxalloy

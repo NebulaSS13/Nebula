@@ -37,7 +37,7 @@ var/list/stored_shock_by_ref = list()
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /datum/species/proc/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
-	var/water = REAGENT_VOLUME(fluids, /decl/material/water)
+	var/water = REAGENT_VOLUME(fluids, MAT_WATER)
 	if(water >= 40 && H.getHalLoss())
 		H.adjustHalLoss(-(water_soothe_amount))
 		if(prob(5))

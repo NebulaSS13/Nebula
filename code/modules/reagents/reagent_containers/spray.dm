@@ -162,7 +162,7 @@
 
 /obj/item/chems/spray/waterflower/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"

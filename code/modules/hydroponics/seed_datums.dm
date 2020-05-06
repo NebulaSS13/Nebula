@@ -80,7 +80,10 @@
 	seed_name = "glowberry"
 	display_name = "glowberry bush"
 	mutants = null
-	chems = list(/decl/material/nutriment = list(1,10), /decl/material/uranium = list(3,5))
+	chems = list(
+		/decl/material/nutriment = list(1,10), 
+		MAT_URANIUM = list(3,5)
+	)
 
 /datum/seed/berry/glow/New()
 	..()
@@ -113,7 +116,11 @@
 	seed_name = "death berry"
 	display_name = "death berry bush"
 	mutants = null
-	chems = list(/decl/material/nutriment = list(1), /decl/material/toxin = list(3,3), /decl/material/carbon_monoxide = list(1,5))
+	chems = list(
+		/decl/material/nutriment = list(1), 
+		/decl/material/toxin = list(3,3), 
+		MAT_CO = list(1,5)
+	)
 
 /datum/seed/berry/poison/death/New()
 	..()
@@ -290,7 +297,9 @@
 	seed_name = "golden apple"
 	display_name = "gold apple tree"
 	mutants = null
-	chems = list(/decl/material/nutriment = list(1,10), /decl/material/gold = list(1,5))
+	chems = list(
+		/decl/material/nutriment = list(1,10), 
+		MAT_GOLD = list(1,5))
 	kitchen_tag = "goldapple"
 
 /datum/seed/apple/gold/New()

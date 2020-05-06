@@ -8,11 +8,10 @@
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
 	stack_origin_tech = "{'materials':5}"
-	xarch_source_mineral = /decl/material/phosphorus
 	ore_icon_overlay = "nugget"
 	chem_products = list(
 		/decl/material/radium = 10,
-		/decl/material/uranium = 10
+		MAT_URANIUM = 10
 		)
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -20,19 +19,41 @@
 
 /decl/material/graphite
 	name = "graphite"
+	lore_text = "A substance composed of lattices of carbon, the building block of life."
+	taste_description = "sour chalk"
+	taste_mult = 1.5
+	value = 0.5
 	ore_compresses_to = MAT_GRAPHITE
-	icon_colour = "#444444"
+	icon_colour = "#222222"
 	ore_name = "graphite"
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	chem_products = list(
-		/decl/material/carbon = 15,
+		MAT_GRAPHITE = 15,
 		/decl/material/toxin/plasticide = 5,
 		/decl/material/acetone = 5
 		)
 	sale_price = 1
+
+/decl/material/graphite/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	var/datum/reagents/ingested = M.get_ingested_reagents()
+	if(ingested && LAZYLEN(ingested.reagent_volumes) > 1)
+		var/effect = 1 / (LAZYLEN(ingested.reagent_volumes) - 1)
+		for(var/R in ingested.reagent_volumes)
+			if(R != type)
+				ingested.remove_reagent(R, removed * effect)
+
+/decl/material/graphite/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+	if(!istype(T, /turf/space))
+		var/volume = REAGENT_VOLUME(holder, src)
+		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, T)
+		if (!dirtoverlay)
+			dirtoverlay = new/obj/effect/decal/cleanable/dirt(T)
+			dirtoverlay.alpha = volume * 30
+		else
+			dirtoverlay.alpha = min(dirtoverlay.alpha + volume * 30, 255)
 
 /decl/material/quartz
 	name = "quartz"
@@ -66,7 +87,7 @@
 	icon_colour = "#ccc9a3"
 	chem_products = list(
 		/decl/material/sulfur = 15,
-		/decl/material/iron = 5
+		MAT_IRON = 5
 		)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -187,8 +208,8 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d8ad97"
 	chem_products = list(
-		/decl/material/aluminium = 15
-		)
+		MAT_ALUMINIUM = 15
+	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -219,7 +240,7 @@
 	ore_smelts_to = MAT_CERAMIC
 	ore_compresses_to = MAT_CLAY
 
-/decl/material/phoron
+/decl/material/toxin/phoron
 	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
@@ -234,7 +255,7 @@
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
 	chem_products = list(
-		/decl/material/toxin/phoron = 20
+		MAT_PHORON = 20
 		)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_name = "phoron"
@@ -242,10 +263,8 @@
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_uncommon"
-	xarch_source_mineral = /decl/material/toxin/phoron
 	ore_icon_overlay = "gems"
 	sale_price = 5
-	value = 200
 	//Note that this has a significant impact on TTV yield.
 	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.
 	gas_specific_heat = 200	// J/(mol*K)
@@ -258,8 +277,42 @@
 	gas_symbol_html = "Ph"
 	gas_symbol = "Ph"
 	reflectiveness = MAT_VALUE_SHINY
+	taste_mult = 1.5
+	strength = 30
+	touch_met = 5
+	heating_point = null
+	heating_products = null
+	value = 4
+	fuel_value = 5
 
-/decl/material/phoron/supermatter
+/decl/material/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
+	if(prob(10 * fuel_value))
+		M.pl_effects()
+
+/decl/material/toxin/phoron/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+	if(!istype(T))
+		return
+	var/volume = REAGENT_VOLUME(holder, type)
+	T.assume_gas(MAT_PHORON, volume, T20C)
+	holder.remove_reagent(type, volume)
+
+// Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
+/decl/material/toxin/phoron/oxygen
+	name = "oxyphoron"
+	lore_text = "An exceptionally flammable molecule formed from deuterium synthesis."
+	strength = 15
+	fuel_value = 15
+
+/decl/material/toxin/phoron/oxygen/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+	if(!istype(T))
+		return
+	var/volume = REAGENT_VOLUME(holder, type)
+	T.assume_gas(MAT_OXYGEN, ceil(volume/2), T20C)
+	T.assume_gas(MAT_PHORON, ceil(volume/2), T20C)
+	holder.remove_reagent(type, volume)
+
+/decl/material/toxin/phoron/supermatter
 	name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
@@ -271,7 +324,7 @@
 	sale_price = null
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
-/decl/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
+/decl/material/toxin/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
 	if(isnull(ignition_point))
 		return 0
 	if(temperature < ignition_point)

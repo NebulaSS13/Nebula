@@ -317,7 +317,8 @@
 
 /obj/item/chems/food/drinks/bottle/holywater/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/water/holywater, 100)
+	reagents.add_reagent(MAT_WATER, 100)
+	LAZYSET(reagents.reagent_data, MAT_WATER, list("blessed" = TRUE))
 
 /obj/item/chems/food/drinks/bottle/vermouth
 	name = "Goldeneye Vermouth"

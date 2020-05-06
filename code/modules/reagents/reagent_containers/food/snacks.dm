@@ -1056,7 +1056,7 @@
 /obj/item/chems/food/snacks/badrecipe/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/toxin, 1)
-	reagents.add_reagent(/decl/material/carbon, 3)
+	reagents.add_reagent(MAT_GRAPHITE, 3)
 
 /obj/item/chems/food/snacks/plainsteak
 	name = "plain steak"
@@ -1158,7 +1158,7 @@
 /obj/item/chems/food/snacks/meatballsoup/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/nutriment/protein, 8)
-	reagents.add_reagent(/decl/material/water, 5)
+	reagents.add_reagent(MAT_WATER, 5)
 
 /obj/item/chems/food/snacks/slimesoup
 	name = "slime soup"
@@ -1171,7 +1171,7 @@
 /obj/item/chems/food/snacks/slimesoup/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/toxin/slimejelly, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 
 /obj/item/chems/food/snacks/bloodsoup
 	name = "tomato soup"
@@ -1186,7 +1186,7 @@
 	.=..()
 	reagents.add_reagent(/decl/material/nutriment/protein, 2)
 	reagents.add_reagent(/decl/material/blood, 10)
-	reagents.add_reagent(/decl/material/water, 5)
+	reagents.add_reagent(MAT_WATER, 5)
 
 /obj/item/chems/food/snacks/clownstears
 	name = "clown's tears"
@@ -1202,7 +1202,7 @@
 /obj/item/chems/food/snacks/clownstears/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/drink/juice/banana, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 
 /obj/item/chems/food/snacks/vegetablesoup
 	name = "vegetable soup"
@@ -1218,7 +1218,7 @@
 
 /obj/item/chems/food/snacks/vegetablesoup/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/water, 5)
+	reagents.add_reagent(MAT_WATER, 5)
 
 /obj/item/chems/food/snacks/nettlesoup
 	name = "nettle soup"
@@ -1234,7 +1234,7 @@
 
 /obj/item/chems/food/snacks/nettlesoup/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/water, 5)
+	reagents.add_reagent(MAT_WATER, 5)
 	reagents.add_reagent(/decl/material/regenerator, 5)
 
 /obj/item/chems/food/snacks/mysterysoup
@@ -1262,11 +1262,11 @@
 			reagents.add_reagent(/decl/material/drink/juice/tomato, 2)
 		if(3)
 			reagents.add_reagent(/decl/material/nutriment, 5)
-			reagents.add_reagent(/decl/material/water, 5)
+			reagents.add_reagent(MAT_WATER, 5)
 			reagents.add_reagent(/decl/material/regenerator, 5)
 		if(4)
 			reagents.add_reagent(/decl/material/nutriment, 5)
-			reagents.add_reagent(/decl/material/water, 10)
+			reagents.add_reagent(MAT_WATER, 10)
 		if(5)
 			reagents.add_reagent(/decl/material/nutriment, 2)
 			reagents.add_reagent(/decl/material/drink/juice/banana, 10)
@@ -1275,9 +1275,9 @@
 			reagents.add_reagent(/decl/material/blood, 10)
 		if(7)
 			reagents.add_reagent(/decl/material/toxin/slimejelly, 10)
-			reagents.add_reagent(/decl/material/water, 10)
+			reagents.add_reagent(MAT_WATER, 10)
 		if(8)
-			reagents.add_reagent(/decl/material/carbon, 10)
+			reagents.add_reagent(MAT_GRAPHITE, 10)
 			reagents.add_reagent(/decl/material/toxin, 10)
 		if(9)
 			reagents.add_reagent(/decl/material/nutriment, 5)
@@ -1299,7 +1299,7 @@
 
 /obj/item/chems/food/snacks/wishsoup/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 	if(prob(25))
 		src.desc = "A wish come true!"
 		reagents.add_reagent(/decl/material/nutriment, 8, list("something good" = 8))
@@ -1385,7 +1385,7 @@
 	Expand()
 
 /obj/item/chems/food/snacks/monkeycube/on_reagent_change()
-	if(reagents.has_reagent(/decl/material/water))
+	if(reagents.has_reagent(MAT_WATER))
 		Expand()
 
 /obj/item/chems/food/snacks/monkeycube/wrapped
@@ -1516,7 +1516,7 @@
 /obj/item/chems/food/snacks/toastedsandwich/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/carbon, 2)
+	reagents.add_reagent(MAT_GRAPHITE, 2)
 
 /obj/item/chems/food/snacks/grilledcheese
 	name = "grilled cheese sandwich"
@@ -1577,7 +1577,7 @@
 	reagents.add_reagent(/decl/material/nutriment/protein, 4)
 	reagents.add_reagent(/decl/material/drink/juice/tomato, 5)
 	reagents.add_reagent(/decl/material/eyedrops, 5)
-	reagents.add_reagent(/decl/material/water, 5)
+	reagents.add_reagent(MAT_WATER, 5)
 
 /obj/item/chems/food/snacks/jelliedtoast
 	name = "jellied toast"
@@ -1634,7 +1634,7 @@
 
 /obj/item/chems/food/snacks/milosoup/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/water, 5)
+	reagents.add_reagent(MAT_WATER, 5)
 
 
 /obj/item/chems/food/snacks/stewedsoymeat
@@ -1963,7 +1963,7 @@
 	bitesize = 3
 /obj/item/chems/food/snacks/appletart/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/gold, 5)
+	reagents.add_reagent(MAT_GOLD, 5)
 
 /////////////////////////////////////////////////Sliceable////////////////////////////////////////
 // All the food items that can be sliced into smaller bits like meatbread and cheesewheels
@@ -3169,10 +3169,10 @@
 	bitesize = 20
 /obj/item/chems/food/snacks/canned/spinach/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/nutriment, 5,
-						/decl/material/adrenaline, 5,
-						/decl/material/amphetamines, 5,
-						/decl/material/iron, 5)
+	reagents.add_reagent(/decl/material/nutriment, 5)
+	reagents.add_reagent(/decl/material/adrenaline, 5)
+	reagents.add_reagent(/decl/material/amphetamines, 5)
+	reagents.add_reagent(MAT_IRON, 5)
 
 //Vending Machine Foods should go here.
 
@@ -3352,7 +3352,7 @@
 	bitesize = 4
 /obj/item/chems/food/snacks/liquidfood/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/iron, 3)
+	reagents.add_reagent(MAT_IRON, 3)
 
 /obj/item/chems/food/snacks/meatcube
 	name = "cubed meat"
@@ -3527,7 +3527,7 @@
 		/decl/material/capsaicin,
 		/decl/material/frostoil,
 		/decl/material/nutriment/sprinkles,
-		/decl/material/toxin/phoron,
+		MAT_PHORON,
 		/decl/material/nutriment/coco,
 		/decl/material/toxin/slimejelly,
 		/decl/material/nutriment/banana_cream,

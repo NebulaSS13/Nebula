@@ -29,7 +29,6 @@
 	. = ..()
 	spawning_id = pick(
 		/decl/material/blood,           \
-		/decl/material/water/holywater, \
 		/decl/material/lube,            \
 		/decl/material/sedatives,       \
 		/decl/material/ethanol,         \

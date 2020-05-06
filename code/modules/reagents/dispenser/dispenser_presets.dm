@@ -2,7 +2,7 @@
 	spawn_cartridges = list(
 			/obj/item/chems/chem_disp_cartridge/hydrazine,
 			/obj/item/chems/chem_disp_cartridge/lithium,
-			/obj/item/chems/chem_disp_cartridge/carbon,
+			/obj/item/chems/chem_disp_cartridge/graphite,
 			/obj/item/chems/chem_disp_cartridge/ammonia,
 			/obj/item/chems/chem_disp_cartridge/acetone,
 			/obj/item/chems/chem_disp_cartridge/sodium,

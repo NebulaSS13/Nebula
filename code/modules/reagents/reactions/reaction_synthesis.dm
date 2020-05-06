@@ -5,7 +5,10 @@
 
 /datum/chemical_reaction/synthesis/phoronsolidification
 	name = "Solid Phoron"
-	required_reagents = list(/decl/material/iron = 5, /decl/material/toxin/phoron = 20)
+	required_reagents = list(
+		MAT_IRON = 5, 
+		MAT_PHORON = 20
+	)
 	minimum_temperature = (-80 CELSIUS) - 100
 	maximum_temperature = -80 CELSIUS
 	mix_message = "The solution hardens and begins to crystallize."
@@ -30,7 +33,7 @@
 		/decl/material/silicon = 2
 	)
 	catalysts = list(
-		/decl/material/toxin/phoron = 1
+		MAT_PHORON = 1
 	)
 	result_amount = 3
 	mix_message = "The solution hardens and begins to crystallize."

@@ -248,7 +248,7 @@
 	user.visible_message(SPAN_DANGER("\The [user]'s hand gets caught in \the [src]!"), SPAN_DANGER("Your hand gets caught in \the [src]!"))
 	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
 	if(BP_IS_PROSTHETIC(hand_organ))
-		beaker.reagents.add_reagent(/decl/material/iron, dam)
+		beaker.reagents.add_reagent(MAT_IRON, dam)
 	else
 		user.take_blood(beaker, dam)
 	user.Stun(2)

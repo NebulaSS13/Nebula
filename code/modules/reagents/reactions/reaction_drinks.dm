@@ -8,13 +8,20 @@
 /datum/chemical_reaction/recipe/grapesoda
 	name = "Grape Soda"
 	result = /decl/material/drink/grapesoda
-	required_reagents = list(/decl/material/drink/juice/grape = 2, /decl/material/drink/cola = 1)
+	required_reagents = list(
+		/decl/material/drink/juice/grape = 2, 
+		/decl/material/drink/cola = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/recipe/lemonade
 	name = "Lemonade"
 	result = /decl/material/drink/lemonade
-	required_reagents = list(/decl/material/drink/juice/lemon = 1, /decl/material/nutriment/sugar = 1, /decl/material/water = 1)
+	required_reagents = list(
+		/decl/material/drink/juice/lemon = 1, 
+		/decl/material/nutriment/sugar = 1, 
+		MAT_WATER = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/recipe/citrusseltzer
@@ -52,13 +59,20 @@
 /datum/chemical_reaction/recipe/nothing
 	name = "Nothing"
 	result = /decl/material/drink/nothing
-	required_reagents = list(/decl/material/drink/milk/cream = 1, /decl/material/nutriment/sugar = 1, /decl/material/water= 1)
+	required_reagents = list(
+		/decl/material/drink/milk/cream = 1, 
+		/decl/material/nutriment/sugar = 1, 
+		MAT_WATER = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/recipe/fools_gold
 	name = "Fools Gold"
 	result = /decl/material/drink/fools_gold
-	required_reagents = list(/decl/material/water = 2, /decl/material/ethanol/whiskey = 1)
+	required_reagents = list(
+		MAT_WATER = 2, 
+		/decl/material/ethanol/whiskey = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/recipe/snowball

@@ -12,7 +12,7 @@
 			newgases -= MAT_PHORON
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= MAT_ALIEN_GAS
-		newgases -= MAT_STEAM
+		newgases -= MAT_WATER
 
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
 		var/badflag = 0

@@ -62,6 +62,9 @@
 /decl/material
 	var/name                              // Prettier name for display.
 	var/adjective_name
+	var/solid_name
+	var/liquid_name
+	var/gas_name
 	var/use_name
 	var/wall_name = "wall"                // Name given to walls of this material
 	var/flags = 0                         // Various status modifiers.
@@ -96,7 +99,6 @@
 	var/cut_delay = 0            // Delay in ticks when cutting through this wall.
 	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
 	var/ignition_point           // K, point at which the material catches on fire.
-	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
 	var/brute_armor = 2	 		 // Brute damage to a wall is divided by this value if the wall is reinforced by this material.
 	var/burn_armor				 // Same as above, but for Burn damage type. If blank brute_armor's value is used.
 	var/integrity = 150          // General-use HP value for products.
@@ -145,22 +147,19 @@
 	var/sale_price
 	var/value = 1
 
-	// Xenoarch behavior.
-	var/xarch_source_mineral = /decl/material/iron
-
 	// State transition variables.
-	var/melting_point = 0
-	var/boiling_point = INFINITY
+	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
+	var/boiling_point = INFINITY // K, gasses will condense below this point.
 
 	// Gas behavior.
 	var/gas_overlay_limit
-	var/gas_burn_product
-	var/gas_specific_heat
-	var/gas_molar_mass
-	var/gas_flags =              0
+	var/gas_burn_product =  MAT_CO2 // todo make realistic
+	var/gas_specific_heat = 20    // J/(mol*K)
+	var/gas_molar_mass =    0.032 // kg/mol
+	var/gas_tile_overlay =  "generic"
+	var/gas_flags = 0
 	var/gas_symbol_html
 	var/gas_symbol
-	var/gas_tile_overlay =       "generic"
 
 	var/taste_description = "old rotten bandaids"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
@@ -235,6 +234,25 @@
 	..()
 	if(!use_name)
 		use_name = name
+
+	if(!solid_name)
+		if(melting_point >= T20C && boiling_point >= T100C)
+			solid_name = name
+		else
+			solid_name = "solid [name]"
+
+	if(!liquid_name)
+		if(melting_point < T20C)
+			liquid_name = name
+		else
+			liquid_name = "molten [name]"
+
+	if(!gas_name)
+		if(boiling_point > T100C)
+			gas_name = name
+		else
+			gas_name = "[name] vapour"
+
 	if(!adjective_name)
 		adjective_name = name
 	if(!shard_icon)

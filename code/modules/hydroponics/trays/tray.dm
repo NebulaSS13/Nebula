@@ -64,7 +64,7 @@
 		/decl/material/phosphorus =                     0.1,
 		/decl/material/nutriment/sugar =                          0.1,
 		/decl/material/drink/sodawater =                0.1,
-		/decl/material/ammonia =                        1,
+		MAT_AMMONIA =                        1,
 		/decl/material/nutriment =                      1,
 		/decl/material/adminordrazine =                 1,
 		/decl/material/toxin/fertilizer/eznutrient =    1,
@@ -84,17 +84,16 @@
 	var/global/list/pestkiller_reagents = list(
 		/decl/material/nutriment/sugar =                 2,
 		/decl/material/toxin/bromide =        -2,
-		/decl/material/toxin/methyl_bromide = -4,
+		MAT_METHYL_BROMIDE = -4,
 		/decl/material/adminordrazine =       -5
 		)
 	var/global/list/water_reagents = list(
-		/decl/material/water =           1,
+		MAT_WATER =                      1,
 		/decl/material/adminordrazine =  1,
 		/decl/material/drink/milk =      0.9,
 		/decl/material/ethanol/beer =    0.7,
-		/decl/material/fuel/hydrazine =      -2,
+		/decl/material/fuel/hydrazine = -2,
 		/decl/material/phosphorus =     -0.5,
-		/decl/material/water =           1,
 		/decl/material/drink/sodawater = 1,
 		)
 
@@ -108,7 +107,7 @@
 		/decl/material/acid/hydrochloric =               list( -1,    0,   0  ),
 		/decl/material/acid/polyacid =                   list( -2,    0,   0  ),
 		/decl/material/toxin/plantbgone =                list( -2,    0,   0.2),
-		/decl/material/ammonia =                         list(  0.5,  0,   0  ),
+		MAT_AMMONIA =                         list(  0.5,  0,   0  ),
 		/decl/material/nutriment =                       list(  0.5,  0.1, 0  ),
 		/decl/material/radium =                          list( -1.5,  0,   0.2),
 		/decl/material/adminordrazine =                  list(  1,    1,   1  ),

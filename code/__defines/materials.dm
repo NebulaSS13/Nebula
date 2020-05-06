@@ -8,14 +8,15 @@
 #define MAT_GOLD                    /decl/material/gold
 #define MAT_SILVER                  /decl/material/silver
 #define MAT_DIAMOND                 /decl/material/diamond
-#define MAT_PHORON                  /decl/material/phoron
+#define MAT_PHORON                  /decl/material/toxin/phoron
+#define MAT_OXYPHORON               /decl/material/toxin/phoron/oxygen
 #define MAT_URANIUM                 /decl/material/uranium
 #define MAT_CRYSTAL                 /decl/material/diamond/crystal
 #define MAT_SANDSTONE               /decl/material/stone
 #define MAT_CONCRETE                /decl/material/stone/concrete
 #define MAT_IRON                    /decl/material/iron
 #define MAT_PLATINUM                /decl/material/platinum
-#define MAT_BRONZE                  /decl/material/gold/bronze
+#define MAT_BRONZE                  /decl/material/bronze
 #define MAT_PHORON_GLASS            /decl/material/glass/phoron
 #define MAT_MARBLE                  /decl/material/stone/marble
 #define MAT_CULT                    /decl/material/cult
@@ -34,7 +35,7 @@
 #define MAT_METALLIC_HYDROGEN       /decl/material/hydrogen/metallic
 #define MAT_DEUTERIUM               /decl/material/hydrogen/deuterium
 #define MAT_TRITIUM                 /decl/material/hydrogen/tritium
-#define MAT_SUPERMATTER             /decl/material/phoron/supermatter
+#define MAT_SUPERMATTER             /decl/material/toxin/phoron/supermatter
 #define MAT_PITCHBLENDE             /decl/material/pitchblende
 #define MAT_HEMATITE                /decl/material/hematite
 #define MAT_QUARTZ                  /decl/material/quartz
@@ -63,27 +64,27 @@
 #define MAT_CLAY                    /decl/material/sand/clay
 
 // gasses
-#define MAT_CO2                     /decl/material/gas/carbon_dioxide
-#define MAT_CO                      /decl/material/gas/carbon_monoxide
-#define MAT_METHYL_BROMIDE          /decl/material/gas/methyl_bromide
-#define MAT_N2O                     /decl/material/gas/sleeping_agent
-#define MAT_NITROGEN                /decl/material/gas/nitrogen
-#define MAT_NO2                     /decl/material/gas/nitrodioxide
-#define MAT_NO                      /decl/material/gas/nitricoxide
-#define MAT_METHANE                 /decl/material/gas/methane
-#define MAT_ALIEN_GAS               /decl/material/gas/alien
-#define MAT_ARGON                   /decl/material/gas/argon
-#define MAT_KRYPTON                 /decl/material/gas/krypton
-#define MAT_NEON                    /decl/material/gas/neon
-#define MAT_XENON                   /decl/material/gas/xenon
-#define MAT_AMMONIA                 /decl/material/gas/ammonia
-#define MAT_CHLORINE                /decl/material/gas/chlorine
-#define MAT_SULFUR_DIOXIDE          /decl/material/gas/sulfurdioxide
-#define MAT_STEAM                   /decl/material/gas/water
-#define MAT_BORON                   /decl/material/gas/boron
-#define MAT_LITHIUM                 /decl/material/gas/lithium
-#define MAT_OXYGEN                  /decl/material/gas/oxygen
-#define MAT_HELIUM                  /decl/material/gas/helium
+#define MAT_CO2                     /decl/material/carbon_dioxide
+#define MAT_CO                      /decl/material/carbon_monoxide
+#define MAT_METHYL_BROMIDE          /decl/material/toxin/methyl_bromide
+#define MAT_N2O                     /decl/material/nitrous_oxide
+#define MAT_NITROGEN                /decl/material/nitrogen
+#define MAT_NO2                     /decl/material/toxin/nitrodioxide
+#define MAT_NO                      /decl/material/nitricoxide
+#define MAT_METHANE                 /decl/material/methane
+#define MAT_ALIEN_GAS               /decl/material/alien
+#define MAT_ARGON                   /decl/material/argon
+#define MAT_KRYPTON                 /decl/material/krypton
+#define MAT_NEON                    /decl/material/neon
+#define MAT_XENON                   /decl/material/xenon
+#define MAT_AMMONIA                 /decl/material/ammonia
+#define MAT_CHLORINE                /decl/material/toxin/chlorine
+#define MAT_SULFUR_DIOXIDE          /decl/material/sulfurdioxide
+#define MAT_WATER                   /decl/material/water
+#define MAT_BORON                   /decl/material/boron
+#define MAT_LITHIUM                 /decl/material/lithium
+#define MAT_OXYGEN                  /decl/material/oxygen
+#define MAT_HELIUM                  /decl/material/helium
 
 //woods
 #define MAT_WOOD                    /decl/material/wood

@@ -83,7 +83,7 @@
 			descriptors |= "bitter"
 		if(reagents.has_reagent(/decl/material/drink/juice/orange) || reagents.has_reagent(/decl/material/drink/juice/lemon) || reagents.has_reagent(/decl/material/drink/juice/lime))
 			descriptors |= "sweet-sour"
-		if(reagents.has_reagent(/decl/material/radium) || reagents.has_reagent(/decl/material/uranium))
+		if(reagents.has_reagent(/decl/material/radium) || reagents.has_reagent(MAT_URANIUM))
 			descriptors |= "radioactive"
 		if(reagents.has_reagent(/decl/material/toxin/amatoxin) || reagents.has_reagent(/decl/material/toxin))
 			descriptors |= "poisonous"
@@ -91,7 +91,7 @@
 			descriptors |= "hallucinogenic"
 		if(reagents.has_reagent(/decl/material/brute_meds))
 			descriptors |= "medicinal"
-		if(reagents.has_reagent(/decl/material/gold))
+		if(reagents.has_reagent(MAT_GOLD))
 			descriptors |= "shiny"
 		if(reagents.has_reagent(/decl/material/lube))
 			descriptors |= "slippery"

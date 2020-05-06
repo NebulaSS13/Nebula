@@ -8,7 +8,7 @@
 	anchored = 0
 
 	var/initial_capacity = 1000
-	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/decl/material/water = 0.5) would fill the dispenser halfway to capacity.
+	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(MAT_WATER = 0.5) would fill the dispenser halfway to capacity.
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = @"[10,25,50,100,500]"
 
@@ -84,7 +84,7 @@
 	var/fill_level = FLUID_SHALLOW // Can be adminbussed for silly room-filling tanks.
 	possible_transfer_amounts = @"[10,25,50,100]"
 	initial_capacity = 50000
-	initial_reagent_types = list(/decl/material/water = 1)
+	initial_reagent_types = list(MAT_WATER = 1)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/watertank/proc/drain_water()
@@ -103,10 +103,10 @@
 		return
 
 	// For now, this cheats and only checks/leaks water, pending additions to the fluid system.
-	var/W = reagents.remove_reagent(/decl/material/water, amount_per_transfer_from_this * 5)
+	var/W = reagents.remove_reagent(MAT_WATER, amount_per_transfer_from_this * 5)
 	if(W > 0)
 		// Artificially increased flow - a 1:1 rate doesn't result in very much water at all.
-		T.add_fluid(W * 100, /decl/material/water)
+		T.add_fluid(W * 100, MAT_WATER)
 
 /obj/structure/reagent_dispensers/watertank/examine(mob/user)
 	. = ..()
@@ -253,7 +253,7 @@
 	possible_transfer_amounts = null
 	anchored = 1
 	initial_capacity = 500
-	initial_reagent_types = list(/decl/material/water = 1)
+	initial_reagent_types = list(MAT_WATER = 1)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	var/cups = 12
 	var/cup_type = /obj/item/chems/food/drinks/sillycup

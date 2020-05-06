@@ -28,13 +28,21 @@
 
 /datum/chemical_reaction/recipe/food/dough
 	name = "Dough"
-	required_reagents = list(/decl/material/nutriment/protein/egg = 3, /decl/material/nutriment/flour = 10, /decl/material/water = 10)
+	required_reagents = list(
+		/decl/material/nutriment/protein/egg = 3, 
+		/decl/material/nutriment/flour = 10, 
+		MAT_WATER = 10
+	)
 	mix_message = "The solution folds and thickens into a large ball of dough."
 	obj_result = /obj/item/chems/food/snacks/dough
 
 /datum/chemical_reaction/recipe/food/soydough
 	name = "Soy dough"
-	required_reagents = list(/decl/material/nutriment/plant_protein = 3, /decl/material/nutriment/flour = 10, /decl/material/water = 10)
+	required_reagents = list(
+		/decl/material/nutriment/plant_protein = 3, 
+		/decl/material/nutriment/flour = 10, 
+		MAT_WATER = 10
+	)
 	mix_message = "The solution folds and thickens into a large ball of dough."
 	obj_result = /obj/item/chems/food/snacks/dough
 

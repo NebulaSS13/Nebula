@@ -97,7 +97,13 @@
 	activators = list("push ref" = IC_PINTYPE_PULSE_IN)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	var/volume = 60
-	var/list/fuel = list(/decl/material/toxin/phoron = 50000, /decl/material/fuel = 15000, /decl/material/carbon = 10000, /decl/material/ethanol = 10000, /decl/material/nutriment = 8000)
+	var/list/fuel = list(
+		MAT_PHORON = 50000, 
+		/decl/material/fuel = 15000, 
+		MAT_GRAPHITE = 10000, 
+		/decl/material/ethanol = 10000, 
+		/decl/material/nutriment = 8000
+	)
 	var/multi = 1
 	var/lfwb =TRUE
 

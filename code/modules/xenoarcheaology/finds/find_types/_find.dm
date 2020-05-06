@@ -1,13 +1,11 @@
 var/global/list/responsive_carriers = list(
-	/decl/material/carbon 			= "Trace organic cells",
-	/decl/material/potassium 		= "Long exposure particles",
-	/decl/material/fuel/hydrazine 	= "Trace water particles",
-	/decl/material/ammonia 			= "Crystalline structures",
-	/decl/material/mercury 			= "Metallic derivative",
-	/decl/material/iron 			= "Metallic composite",
-	/decl/material/toxin/chlorine 	= "Metamorphic/igneous rock composite",
-	/decl/material/phosphorus 		= "Metamorphic/sedimentary rock composite",
-	/decl/material/toxin/phoron 	= "Anomalous material")
+	MAT_GRAPHITE    = "Organic traces",
+	MAT_CHLORINE    = "Caustic compounds",
+	MAT_DIAMOND     = "Crystalline structures",
+	MAT_IRON        = "Metallic composite",
+	MAT_PITCHBLENDE = "Metamorphic/sedimentary rock composite",
+	MAT_PHORON      = "Anomalous material"
+)
 
 /decl/archaeological_find
 	var/item_type = "object"

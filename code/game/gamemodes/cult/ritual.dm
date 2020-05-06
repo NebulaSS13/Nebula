@@ -24,11 +24,11 @@
 /obj/item/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
 		return
-	if(A.reagents && A.reagents.has_reagent(/decl/material/water/holywater))
-		to_chat(user, "<span class='notice'>You desecrate \the [A].</span>")
-		var/holy2water = REAGENT_VOLUME(A.reagents, /decl/material/water/holywater)
-		A.reagents.clear_reagent(/decl/material/water/holywater)
-		A.reagents.add_reagent(/decl/material/water, holy2water)
+	if(A.reagents && A.reagents.has_reagent(MAT_WATER))
+		var/list/rdata = REAGENT_DATA(A.reagents, MAT_WATER)
+		if(rdata && rdata["blessed"])
+			to_chat(user, "<span class='notice'>You desecrate \the [A].</span>")
+			LAZYREMOVE(A.reagents.reagent_data[MAT_WATER], "blessed")
 
 /mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
 	var/has_tome = 0

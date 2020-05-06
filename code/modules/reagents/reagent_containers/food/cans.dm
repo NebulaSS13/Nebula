@@ -25,7 +25,7 @@
 
 /obj/item/chems/food/drinks/cans/waterbottle/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/water, 30)
+	reagents.add_reagent(MAT_WATER, 30)
 
 /obj/item/chems/food/drinks/cans/waterbottle/open(mob/user)
 	playsound(loc,'sound/effects/bonebreak1.ogg', rand(10,50), 1)
@@ -172,8 +172,8 @@
 
 /obj/item/chems/food/drinks/cans/syndicola/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/water, 25)
-	reagents.add_reagent(/decl/material/iron, 5)
+	reagents.add_reagent(MAT_WATER, 25)
+	reagents.add_reagent(MAT_IRON, 5)
 
 /obj/item/chems/food/drinks/glass2/square/boda
 	name = "boda"

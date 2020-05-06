@@ -61,6 +61,10 @@ SUBSYSTEM_DEF(chemistry)
 			for(var/component in new_mineral.alloy_materials)
 				processable_ores[component] = TRUE
 				alloy_components[component] = TRUE
+		// Cache our gas data.
+		if(new_mineral.gas_flags & XGM_GAS_DEFAULT_GAS)
+			all_gasses[new_mineral.type] = new_mineral
+			gas_flag_cache[new_mineral.type] = new_mineral.gas_flags
 
 	// Build fusion reaction tree.
 	for(var/rtype in subtypesof(/decl/fusion_reaction))
@@ -71,12 +75,6 @@ SUBSYSTEM_DEF(chemistry)
 		if(!fusion_reactions[cur_reaction.s_react])
 			fusion_reactions[cur_reaction.s_react] = list()
 		fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
-
-	// Cache our gas data.
-	for(var/decl/material/mat in materials)
-		if(mat.is_a_gas())
-			all_gasses[mat.type] = mat
-			gas_flag_cache[mat.type] = mat.gas_flags
 
 	. = ..()
 

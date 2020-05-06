@@ -42,7 +42,7 @@
 	var/t_left_radspike = 0
 	var/rad_shield = 0
 	var/global/list/coolant_reagents_purity = list(
-		/decl/material/water = 1,
+		MAT_WATER = 1,
 		/decl/material/drink/coffee/icecoffee = 0.6,
 		/decl/material/drink/tea/icetea = 0.6,
 		/decl/material/drink/milkshake = 0.6,

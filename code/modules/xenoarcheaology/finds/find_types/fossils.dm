@@ -2,7 +2,7 @@
 /decl/archaeological_find/fossil
 	item_type = "bones"
 	modification_flags = 0
-	responsive_reagent = /decl/material/carbon
+	responsive_reagent = MAT_GRAPHITE
 	var/list/candidates = list(
 		/obj/item/fossil/animal = 9,
 		/obj/item/fossil/skull = 3,

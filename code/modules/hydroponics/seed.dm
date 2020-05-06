@@ -465,7 +465,6 @@
 		var/list/banned_chems = list(
 			/decl/material/adminordrazine,
 			/decl/material/nutriment,
-			/decl/material/water/holywater,
 			/decl/material/toxin/plantbgone
 			)
 		banned_chems += subtypesof(/decl/material/ethanol)

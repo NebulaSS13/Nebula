@@ -110,7 +110,7 @@
 	icon_state = "shallow_still"
 	color = COLOR_OCEAN
 
-	var/fluid_type = /decl/material/water
+	var/fluid_type =    MAT_WATER
 	var/fluid_initial = FLUID_MAX_DEPTH
 
 /obj/effect/fluid_mapped/Initialize()

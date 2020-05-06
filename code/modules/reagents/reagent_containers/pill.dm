@@ -268,7 +268,7 @@
 	icon_state = "pill1"
 /obj/item/chems/pill/sugariron/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/iron, 5)
+	reagents.add_reagent(MAT_IRON, 5)
 	reagents.add_reagent(/decl/material/nutriment/sugar, 5)
 	color = reagents.get_color()
 
@@ -280,7 +280,7 @@
 
 /obj/item/chems/pill/detergent/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/ammonia, 30)
+	reagents.add_reagent(MAT_AMMONIA, 30)
 
 /obj/item/chems/pill/pod
 	name = "master flavorpod item"

@@ -300,35 +300,6 @@
 			M.UpdateAppearance()
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
 
-/decl/material/nitrous_oxide
-	name = "nitrous oxide"
-	lore_text = "An ubiquitous sleeping agent also known as laughing gas."
-	taste_description = "dental surgery"
-	icon_colour = COLOR_GRAY80
-	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
-	var/do_giggle = TRUE
-
-/decl/material/nitrous_oxide/xenon
-	name = "xenon"
-	lore_text = "A nontoxic gas used as a general anaesthetic."
-	do_giggle = FALSE
-	taste_description = "nothing"
-	icon_colour = COLOR_GRAY80
-
-/decl/material/nitrous_oxide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	var/dosage = M.chem_doses[type]
-	if(dosage >= 1)
-		if(prob(5)) M.Sleeping(3)
-		M.dizziness =  max(M.dizziness, 3)
-		M.confused =   max(M.confused, 3)
-	if(dosage >= 0.3)
-		if(prob(5)) M.Paralyse(1)
-		M.drowsyness = max(M.drowsyness, 3)
-		M.slurring =   max(M.slurring, 3)
-	if(do_giggle && prob(20))
-		M.emote(pick("giggle", "laugh"))
-	M.add_chemical_effect(CE_PULSE, -1)
-
 /decl/material/lactate
 	name = "lactate"
 	lore_text = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."

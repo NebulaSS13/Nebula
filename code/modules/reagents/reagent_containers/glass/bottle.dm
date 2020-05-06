@@ -132,7 +132,7 @@
 
 /obj/item/chems/glass/bottle/ammonia/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/ammonia, 60)
+	reagents.add_reagent(MAT_AMMONIA, 60)
 	update_icon()
 
 

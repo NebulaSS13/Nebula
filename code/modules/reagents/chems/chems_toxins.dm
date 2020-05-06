@@ -90,55 +90,6 @@
 		M.confused = max(M.confused, 3)
 	..()
 
-/decl/material/toxin/chlorine
-	name = "chlorine"
-	lore_text = "A highly poisonous liquid. Smells strongly of bleach."
-	taste_description = "bleach"
-	icon_colour = "#707c13"
-	strength = 15
-	metabolism = REM
-	heating_point = null
-	heating_products = null
-
-/decl/material/toxin/phoron
-	name = "phoron"
-	lore_text = "Phoron in its liquid form."
-	taste_mult = 1.5
-	icon_colour = "#ff3300"
-	strength = 30
-	touch_met = 5
-	heating_point = null
-	heating_products = null
-	value = 4
-	fuel_value = 5
-
-/decl/material/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
-	if(prob(10 * fuel_value))
-		M.pl_effects()
-
-/decl/material/toxin/phoron/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(!istype(T))
-		return
-	var/volume = REAGENT_VOLUME(holder, type)
-	T.assume_gas(MAT_PHORON, volume, T20C)
-	holder.remove_reagent(type, volume)
-
-// Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
-/decl/material/toxin/phoron/oxygen
-	name = "oxyphoron"
-	lore_text = "An exceptionally flammable molecule formed from deuterium synthesis."
-	strength = 15
-	fuel_value = 15
-
-/decl/material/toxin/phoron/oxygen/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(!istype(T))
-		return
-	var/volume = REAGENT_VOLUME(holder, type)
-	T.assume_gas(MAT_OXYGEN, ceil(volume/2), T20C)
-	T.assume_gas(MAT_PHORON, ceil(volume/2), T20C)
-	holder.remove_reagent(type, volume)
-
 /decl/material/toxin/cyanide //Fast and Lethal
 	name = "cyanide"
 	lore_text = "A highly toxic chemical."
@@ -190,7 +141,11 @@
 	strength = 3
 	target_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
-	heating_products = list(/decl/material/toxin/carpotoxin, /decl/material/sedatives, /decl/material/copper)
+	heating_products = list(
+		/decl/material/toxin/carpotoxin, 
+		/decl/material/sedatives, 
+		MAT_COPPER
+	)
 
 /decl/material/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -232,7 +187,10 @@
 	taste_mult = 1
 	icon_colour = "#49002e"
 	strength = 4
-	heating_products = list(/decl/material/toxin, /decl/material/water)
+	heating_products = list(
+		/decl/material/toxin, 
+		MAT_WATER
+	)
 
 /decl/material/toxin/plantbgone/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(istype(T, /turf/simulated/wall))
@@ -252,7 +210,11 @@
 	taste_description = "petroleum"
 	icon_colour = "#140b30"
 	strength = 4
-	heating_products = list(/decl/material/acetone, /decl/material/carbon, /decl/material/ethanol)
+	heating_products = list(
+		/decl/material/acetone, 
+		MAT_GRAPHITE, 
+		/decl/material/ethanol
+	)
 	heating_point = 145 CELSIUS
 	heating_message = "separates"
 
@@ -298,33 +260,6 @@
 			H.zombify()
 		else if (prob(10))
 			to_chat(H, "<span class='warning'>You feel terribly ill!</span>")
-
-/decl/material/toxin/methyl_bromide
-	name = "methyl bromide"
-	lore_text = "A fumigant derived from bromide."
-	taste_description = "pestkiller"
-	icon_colour = "#4c3b34"
-	strength = 5
-	heating_products = null
-	heating_point = null
-
-/decl/material/toxin/methyl_bromide/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T))
-		var/volume = REAGENT_VOLUME(holder, type)
-		T.assume_gas(MAT_METHYL_BROMIDE, volume, T20C)
-		holder.remove_reagent(type, volume)
-
-/decl/material/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	. = ..()
-	if(istype(M))
-		for(var/obj/item/organ/external/E in M.organs)
-			if(LAZYLEN(E.implants))
-				for(var/obj/effect/spider/spider in E.implants)
-					if(prob(25))
-						E.implants -= spider
-						M.visible_message("<span class='notice'>The dying form of \a [spider] emerges from inside \the [M]'s [E.name].</span>")
-						qdel(spider)
-						break
 
 /decl/material/toxin/bromide
 	name = "bromide"

@@ -1,14 +1,20 @@
 /datum/chemical_reaction/recipe/goldschlager
 	name = "Goldschlager"
 	result = /decl/material/ethanol/goldschlager
-	required_reagents = list(/decl/material/ethanol/vodka = 10, /decl/material/gold = 1)
+	required_reagents = list(
+		/decl/material/ethanol/vodka = 10, 
+		MAT_GOLD = 1
+	)
 	result_amount = 10
 	mix_message = "The gold flakes and settles in the vodka."
 
 /datum/chemical_reaction/recipe/patron
 	name = "Patron"
 	result = /decl/material/ethanol/patron
-	required_reagents = list(/decl/material/ethanol/tequilla = 10, /decl/material/silver = 1)
+	required_reagents = list(
+		/decl/material/ethanol/tequilla = 10, 
+		MAT_SILVER = 1
+	)
 	result_amount = 10
 	mix_message = "The silver flakes and settles in the tequila."
 
@@ -175,13 +181,21 @@
 /datum/chemical_reaction/recipe/phoron_special
 	name = "Toxins Special"
 	result = /decl/material/ethanol/toxins_special
-	required_reagents = list(/decl/material/ethanol/rum = 2, /decl/material/ethanol/vermouth = 2, /decl/material/toxin/phoron = 2)
+	required_reagents = list(
+		/decl/material/ethanol/rum = 2, 
+		/decl/material/ethanol/vermouth = 2, 
+		MAT_PHORON = 2
+	)
 	result_amount = 6
 
 /datum/chemical_reaction/recipe/beepsky_smash
 	name = "Beepksy Smash"
 	result = /decl/material/ethanol/beepsky_smash
-	required_reagents = list(/decl/material/drink/juice/lime = 1, /decl/material/ethanol/whiskey = 1, /decl/material/iron = 1)
+	required_reagents = list(
+		/decl/material/drink/juice/lime = 1, 
+		/decl/material/ethanol/whiskey = 1, 
+		MAT_IRON = 1
+	)
 	result_amount = 2
 
 /datum/chemical_reaction/recipe/doctor_delight
@@ -225,7 +239,10 @@
 /datum/chemical_reaction/recipe/atomicbomb
 	name = "Atomic Bomb"
 	result = /decl/material/ethanol/atomicbomb
-	required_reagents = list(/decl/material/ethanol/coffee/b52 = 10, /decl/material/uranium = 1)
+	required_reagents = list(
+		/decl/material/ethanol/coffee/b52 = 10,
+		MAT_URANIUM = 1
+	)
 	result_amount = 10
 
 /datum/chemical_reaction/recipe/margarita
@@ -243,7 +260,10 @@
 /datum/chemical_reaction/recipe/threemileisland
 	name = "Three Mile Island Iced Tea"
 	result = /decl/material/ethanol/threemileisland
-	required_reagents = list(/decl/material/ethanol/longislandicedtea = 10, /decl/material/uranium = 1)
+	required_reagents = list(
+		/decl/material/ethanol/longislandicedtea = 10, 
+		MAT_URANIUM = 1
+	)
 	result_amount = 10
 
 /datum/chemical_reaction/recipe/whiskeysoda
@@ -267,7 +287,10 @@
 /datum/chemical_reaction/recipe/manhattan_proj
 	name = "Manhattan Project"
 	result = /decl/material/ethanol/manhattan_proj
-	required_reagents = list(/decl/material/ethanol/manhattan = 10, /decl/material/uranium = 1)
+	required_reagents = list(
+		/decl/material/ethanol/manhattan = 10, 
+		MAT_URANIUM = 1
+	)
 	result_amount = 10
 
 /datum/chemical_reaction/recipe/vodka_tonic
@@ -343,7 +366,10 @@
 /datum/chemical_reaction/recipe/mead
 	name = "Mead"
 	result = /decl/material/ethanol/mead
-	required_reagents = list(/decl/material/nutriment/honey = 1, /decl/material/water = 1)
+	required_reagents = list(
+		/decl/material/nutriment/honey = 1, 
+		MAT_WATER = 1
+	)
 	catalysts = list(/decl/material/enzyme = 5)
 	result_amount = 2
 
@@ -364,7 +390,10 @@
 /datum/chemical_reaction/recipe/grog
 	name = "Grog"
 	result = /decl/material/ethanol/grog
-	required_reagents = list(/decl/material/ethanol/rum = 1, /decl/material/water = 1)
+	required_reagents = list(
+		/decl/material/ethanol/rum = 1, 
+		MAT_WATER = 1
+	)
 	result_amount = 2
 
 /datum/chemical_reaction/recipe/acidspit
@@ -377,7 +406,11 @@
 /datum/chemical_reaction/recipe/amasec
 	name = "Amasec"
 	result = /decl/material/ethanol/amasec
-	required_reagents = list(/decl/material/iron = 1, /decl/material/ethanol/wine = 5, /decl/material/ethanol/vodka = 5)
+	required_reagents = list(
+		MAT_IRON = 1, 
+		/decl/material/ethanol/wine = 5, 
+		/decl/material/ethanol/vodka = 5
+	)
 	result_amount = 10
 
 /datum/chemical_reaction/recipe/changelingsting
@@ -462,7 +495,10 @@
 /datum/chemical_reaction/recipe/rum
 	name = "Rum"
 	result = /decl/material/ethanol/rum
-	required_reagents = list(/decl/material/nutriment/sugar = 1, /decl/material/water = 1)
+	required_reagents = list(
+		/decl/material/nutriment/sugar = 1,
+		MAT_WATER = 1
+	)
 	catalysts = list(/decl/material/enzyme = 5)
 	result_amount = 2
 	mix_message = "The solution roils as it rapidly ferments into a red-brown liquid."
@@ -505,7 +541,10 @@
 /datum/chemical_reaction/recipe/jagermeister
 	name = "Jagermeister"
 	result = /decl/material/ethanol/jagermeister
-	required_reagents = list(/decl/material/ethanol/herbal = 2, /decl/material/water = 1)
+	required_reagents = list(
+		/decl/material/ethanol/herbal = 2, 
+		MAT_WATER = 1
+	)
 	catalysts = list(/decl/material/nutriment/mint)
 	result_amount = 3
 

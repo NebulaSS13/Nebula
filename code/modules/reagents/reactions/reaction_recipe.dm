@@ -15,7 +15,11 @@
 /datum/chemical_reaction/recipe/ketchup
 	name = "Ketchup"
 	result = /decl/material/nutriment/ketchup
-	required_reagents = list(/decl/material/drink/juice/tomato = 2, /decl/material/water = 1, /decl/material/nutriment/sugar = 1)
+	required_reagents = list(
+		/decl/material/drink/juice/tomato = 2, 
+		MAT_WATER = 1, 
+		/decl/material/nutriment/sugar = 1
+	)
 	result_amount = 4
 	mix_message = "The solution thickens into a sweet-smelling red sauce."
 
@@ -96,7 +100,10 @@
 /datum/chemical_reaction/recipe/hot_ramen
 	name = "Hot Ramen"
 	result = /decl/material/drink/hot_ramen
-	required_reagents = list(/decl/material/water = 1, /decl/material/drink/dry_ramen = 3)
+	required_reagents = list(
+		MAT_WATER = 1, 
+		/decl/material/drink/dry_ramen = 3
+	)
 	result_amount = 3
 	mix_message = "The noodles soften in the hot water, releasing savoury steam."
 	hidden_from_codex = TRUE

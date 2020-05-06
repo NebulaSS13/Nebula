@@ -18,7 +18,7 @@
 	var/age = 0
 	var/artifact_id
 	var/artifact_distance
-	var/source_mineral = /decl/material/toxin/chlorine
+	var/source_mineral = MAT_CHLORINE
 	var/list/find_presence = list()
 
 /datum/geosample/New(var/turf/simulated/mineral/container)
@@ -27,8 +27,8 @@
 
 	age = rand(1, 999)
 
-	if(container?.mineral?.xarch_source_mineral)
-		source_mineral = container.mineral.xarch_source_mineral
+	if(container?.mineral)
+		source_mineral = container.mineral.type
 
 	var/total_presence = 0
 	for(var/datum/find/F in container.finds)

@@ -28,11 +28,11 @@
 //      Datum path  Contents type                                                       Supply pack name                  Container name                         Cost  Container access
 SEC_PACK(hydrazine, /obj/item/chems/chem_disp_cartridge/hydrazine,  "Reagent refill - Hydrazine",     "hydrazine reagent cartridge crate",     15, access_chemistry)
 SEC_PACK(lithium,   /obj/item/chems/chem_disp_cartridge/lithium,    "Reagent refill - Lithium",       "lithium reagent cartridge crate",       15, access_chemistry)
-SEC_PACK(carbon,    /obj/item/chems/chem_disp_cartridge/carbon,     "Reagent refill - Carbon",        "carbon reagent cartridge crate",        15, access_chemistry)
+SEC_PACK(graphite,  /obj/item/chems/chem_disp_cartridge/graphite,   "Reagent refill - Graphite",      "graphite reagent cartridge crate",      15, access_chemistry)
 SEC_PACK(ammonia,   /obj/item/chems/chem_disp_cartridge/ammonia,    "Reagent refill - Ammonia",       "ammonia reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(oxygen,    /obj/item/chems/chem_disp_cartridge/acetone,    "Reagent refill - Acetone",       "acetone reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(sodium,    /obj/item/chems/chem_disp_cartridge/sodium,     "Reagent refill - Sodium",        "sodium reagent cartridge crate",        15, access_chemistry)
-SEC_PACK(aluminium, /obj/item/chems/chem_disp_cartridge/aluminium,   "Reagent refill - Aluminium",      "aluminium reagent cartridge crate",      15, access_chemistry)
+SEC_PACK(aluminium, /obj/item/chems/chem_disp_cartridge/aluminium,  "Reagent refill - Aluminium",      "aluminium reagent cartridge crate",      15, access_chemistry)
 SEC_PACK(silicon,   /obj/item/chems/chem_disp_cartridge/silicon,    "Reagent refill - Silicon",       "silicon reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(phosphorus,/obj/item/chems/chem_disp_cartridge/phosphorus, "Reagent refill - Phosphorus",    "phosphorus reagent cartridge crate",    15, access_chemistry)
 SEC_PACK(sulfur,    /obj/item/chems/chem_disp_cartridge/sulfur,     "Reagent refill - Sulfur",        "sulfur reagent cartridge crate",        15, access_chemistry)

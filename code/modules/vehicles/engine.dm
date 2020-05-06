@@ -119,12 +119,12 @@
 			actually_flameable = 1
 		else if(istype(R,/decl/material/fuel))
 			actually_flameable = 1
-		else if(istype(R,/decl/material/toxin/phoron))
+		else if(istype(R, MAT_PHORON))
 			new_multiplier = 2
 			actually_flameable = 1
 		else if(istype(R,/decl/material/frostoil))
 			new_multiplier = 0.1
-		else if(istype(R,/decl/material/water))
+		else if(istype(R, MAT_WATER))
 			new_multiplier = 0.4
 		else if(istype(R,/decl/material/nutriment/sugar) && REAGENT_VOLUME(reagents, rtype) > 1)
 			stat = DEAD

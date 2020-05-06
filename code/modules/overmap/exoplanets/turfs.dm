@@ -92,7 +92,7 @@
 	icon_state = "seashallow"
 	movement_delay = 2
 	footstep_type = /decl/footsteps/water
-	var/reagent_type = /decl/material/water
+	var/reagent_type = MAT_WATER
 
 /turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)
 	var/obj/item/chems/RG = O

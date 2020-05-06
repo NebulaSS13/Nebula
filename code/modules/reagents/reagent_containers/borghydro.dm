@@ -132,7 +132,7 @@
 		/decl/material/ethanol/cognac,
 		/decl/material/ethanol/ale,
 		/decl/material/ethanol/mead,
-		/decl/material/water,
+		MAT_WATER,
 		/decl/material/nutriment/sugar,
 		/decl/material/drink/ice,
 		/decl/material/drink/tea,

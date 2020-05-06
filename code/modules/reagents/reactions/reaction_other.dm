@@ -20,22 +20,26 @@
 /datum/chemical_reaction/luminol
 	name = "Luminol"
 	result = /decl/material/luminol
-	required_reagents = list(/decl/material/fuel/hydrazine = 2, /decl/material/carbon = 2, /decl/material/ammonia = 2)
+	required_reagents = list(
+		/decl/material/fuel/hydrazine = 2, 
+		MAT_GRAPHITE = 2, 
+		MAT_AMMONIA = 2
+	)
 	result_amount = 6
 	mix_message = "The solution begins to gleam with a fey inner light."
 
 /datum/chemical_reaction/oxyphoron
 	name = "Oxyphoron"
-	result = /decl/material/toxin/phoron/oxygen
-	required_reagents = list(/decl/material/water = 1, /decl/material/toxin/phoron = 1)
+	result = MAT_OXYPHORON
+	required_reagents = list(MAT_WATER = 1, MAT_PHORON = 1)
 	result_amount = 2
 	mix_message = "The solution boils violently, shedding wisps of vapor."
 
 /datum/chemical_reaction/deuterium
 	name = "Deuterium"
 	result = null
-	required_reagents = list(/decl/material/water = 10)
-	catalysts = list(/decl/material/toxin/phoron/oxygen = 5)
+	required_reagents = list(MAT_WATER = 10)
+	catalysts = list(MAT_OXYPHORON = 5)
 	result_amount = 1
 	mix_message = "The solution makes a loud cracking sound as it crystalizes."
 
@@ -48,7 +52,11 @@
 /datum/chemical_reaction/nanoblood
 	name = "Nanoblood"
 	result = /decl/material/nanoblood
-	required_reagents = list(/decl/material/nanitefluid = 1, /decl/material/iron = 1, /decl/material/blood = 1)
+	required_reagents = list(
+		/decl/material/nanitefluid = 1, 
+		MAT_IRON = 1, 
+		/decl/material/blood = 1
+	)
 	result_amount = 3
 	mix_message = "The solution thickens slowly into a glossy liquid."
 
@@ -76,14 +84,17 @@
 /datum/chemical_reaction/anfo4
 	name = "Chemlab ANFO"
 	result = /decl/material/anfo
-	required_reagents = list(/decl/material/ammonia=10, /decl/material/fuel=5)
+	required_reagents = list(MAT_AMMONIA=10, /decl/material/fuel=5)
 	result_amount = 15
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo_plus
 	name = "ANFO+"
 	result = /decl/material/anfo/plus
-	required_reagents = list(/decl/material/anfo=15, /decl/material/aluminium=5)
+	required_reagents = list(
+		/decl/material/anfo = 15,
+		MAT_ALUMINIUM = 5
+	)
 	result_amount = 20
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
@@ -97,6 +108,9 @@
 /datum/chemical_reaction/paint
 	name = "Paint"
 	result = /decl/material/paint
-	required_reagents = list(/decl/material/toxin/plasticide = 1, /decl/material/water = 3)
+	required_reagents = list(
+		/decl/material/toxin/plasticide = 1, 
+		MAT_WATER = 3
+	)
 	result_amount = 5
 	mix_message = "The solution thickens and takes on a glossy sheen."

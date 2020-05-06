@@ -40,7 +40,7 @@
 	. = ..()
 	create_reagents(max_water)
 	if(starting_water > 0)
-		reagents.add_reagent(/decl/material/water, starting_water)
+		reagents.add_reagent(MAT_WATER, starting_water)
 
 /obj/item/extinguisher/empty
 	starting_water = 0
@@ -113,7 +113,7 @@
 				return
 			amount = dispenser.reagents.trans_to_obj(src, max_water)
 		else
-			reagents.add_reagent(/decl/material/water, amount)
+			reagents.add_reagent(MAT_WATER, amount)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] with [amount] units from \the [dispenser]."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		if (istype(target, /obj/structure/reagent_dispensers/acid))

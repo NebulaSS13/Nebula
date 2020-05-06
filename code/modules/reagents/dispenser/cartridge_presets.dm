@@ -6,24 +6,24 @@
 		volume = CARTRIDGE_VOLUME_MEDIUM
 
 	// Multiple
-	water		spawn_reagent = /decl/material/water
+	water		spawn_reagent = MAT_WATER
 	sugar		spawn_reagent = /decl/material/nutriment/sugar
 
 	// Chemistry
 	hydrazine	spawn_reagent = /decl/material/fuel/hydrazine
 	lithium		spawn_reagent = /decl/material/lithium
-	carbon		spawn_reagent = /decl/material/carbon
-	ammonia		spawn_reagent = /decl/material/ammonia
+	graphite	spawn_reagent = MAT_GRAPHITE
+	ammonia		spawn_reagent = MAT_AMMONIA
 	acetone		spawn_reagent = /decl/material/acetone
 	sodium		spawn_reagent = /decl/material/sodium
-	aluminium	spawn_reagent = /decl/material/aluminium
+	aluminium	spawn_reagent = MAT_ALUMINIUM
 	silicon		spawn_reagent = /decl/material/silicon
 	phosphorus	spawn_reagent = /decl/material/phosphorus
 	sulfur		spawn_reagent = /decl/material/sulfur
 	hclacid		spawn_reagent = /decl/material/acid/hydrochloric
 	potassium	spawn_reagent = /decl/material/potassium
-	iron		spawn_reagent = /decl/material/iron
-	copper		spawn_reagent = /decl/material/copper
+	iron		spawn_reagent = MAT_IRON
+	copper		spawn_reagent = MAT_COPPER
 	mercury		spawn_reagent = /decl/material/mercury
 	radium		spawn_reagent = /decl/material/radium
 	ethanol		spawn_reagent = /decl/material/ethanol

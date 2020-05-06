@@ -383,7 +383,7 @@
 	LAZYCLEARLIST(ingredients)
 	src.reagents.clear_reagents()
 	var/obj/item/chems/food/snacks/badrecipe/ffuu = new(src)
-	ffuu.reagents.add_reagent(/decl/material/carbon, amount)
+	ffuu.reagents.add_reagent(MAT_GRAPHITE, amount)
 	ffuu.reagents.add_reagent(/decl/material/toxin, amount/10)
 	return ffuu
 

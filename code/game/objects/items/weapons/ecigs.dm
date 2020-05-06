@@ -237,7 +237,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/blanknico/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco/liquid, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 
 /obj/item/chems/ecig_cartridge/med_nicotine
 	name = "tobacco flavour cartridge"
@@ -246,7 +246,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/med_nicotine/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco, 5)
-	reagents.add_reagent(/decl/material/water, 15)
+	reagents.add_reagent(MAT_WATER, 15)
 
 /obj/item/chems/ecig_cartridge/high_nicotine
 	name = "high nicotine tobacco flavour cartridge"
@@ -255,7 +255,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/high_nicotine/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco, 10)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 
 /obj/item/chems/ecig_cartridge/orange
 	name = "orange flavour cartridge"
@@ -264,7 +264,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/orange/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco/liquid, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 	reagents.add_reagent(/decl/material/drink/juice/orange, 5)
 
 /obj/item/chems/ecig_cartridge/mint
@@ -274,7 +274,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/mint/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco/liquid, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 	reagents.add_reagent(/decl/material/menthol, 5)
 
 /obj/item/chems/ecig_cartridge/watermelon
@@ -284,7 +284,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/watermelon/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco/liquid, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 	reagents.add_reagent(/decl/material/drink/juice/watermelon, 5)
 
 /obj/item/chems/ecig_cartridge/grape
@@ -294,7 +294,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/grape/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco/liquid, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 	reagents.add_reagent(/decl/material/drink/juice/grape, 5)
 
 /obj/item/chems/ecig_cartridge/lemonlime
@@ -304,7 +304,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/lemonlime/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco/liquid, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 	reagents.add_reagent(/decl/material/drink/lemon_lime, 5)
 
 /obj/item/chems/ecig_cartridge/coffee
@@ -314,5 +314,5 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 /obj/item/chems/ecig_cartridge/coffee/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/tobacco/liquid, 5)
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(MAT_WATER, 10)
 	reagents.add_reagent(/decl/material/drink/coffee, 5)

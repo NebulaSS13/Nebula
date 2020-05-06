@@ -299,4 +299,4 @@
 
 /decl/material/oxy_meds/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_OXYGENATED, 1)
-	holder.remove_reagent(/decl/material/carbon_monoxide, 2 * removed)
+	holder.remove_reagent(MAT_CO, 2 * removed)
