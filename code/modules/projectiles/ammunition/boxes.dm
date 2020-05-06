@@ -1,10 +1,46 @@
 /obj/item/ammo_magazine/speedloader
-	icon_state = "spdloader_magnum"
+	icon_state = "world"
 	caliber = CALIBER_PISTOL_MAGNUM
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	material = MAT_STEEL
 	max_ammo = 6
-	multiple_sprites = 1
+	on_mob_icon = 'icons/obj/ammo/speedloader.dmi'
+	var/list/global/bullet_offsets = list(
+		list("x" = 0, "y" = 0),
+		list("x" = -2, "y" = -3),
+		list("x" = -2, "y" = -7),
+		list("x" = 0, "y" = -10),
+		list("x" = 2, "y" = -7),
+		list("x" = 2, "y" = -3)
+	)
+
+/obj/item/ammo_magazine/speedloader/on_update_icon()
+	cut_overlays()
+	if(!length(stored_ammo))
+		return
+	switch(icon_state)
+		if("world")
+			var/ammo_state = "world-some"
+			if(length(stored_ammo) == 1)
+				ammo_state = "world-one"
+			else if(length(stored_ammo) == max_ammo)
+				ammo_state = "world-full"
+			var/obj/item/ammo_casing/A = stored_ammo[1]
+			add_overlay(overlay_image(icon, ammo_state, A.color, RESET_COLOR))
+			add_overlay(overlay_image(icon, "[ammo_state]-bullets", A.bullet_color, flags = RESET_COLOR))
+			if(A.marking_color)
+				add_overlay(overlay_image(icon, "[ammo_state]-markings", A.marking_color, RESET_COLOR))
+		if("inventory")
+			for(var/i = 1 to length(stored_ammo))
+				var/obj/item/ammo_casing/A = stored_ammo[i]
+				var/image/I = overlay_image(icon, "casing", A.color, RESET_COLOR)
+				if(A.marking_color)
+					I.overlays += overlay_image(icon, "marking", A.marking_color, RESET_COLOR)
+				if(A.BB)
+					I.overlays += overlay_image(icon, "bullet", A.bullet_color, RESET_COLOR)
+				I.pixel_x = bullet_offsets[i]["x"]
+				I.pixel_y = bullet_offsets[i]["y"]
+				add_overlay(I)
 
 /obj/item/ammo_magazine/shotholder
 	name = "shotgun slug holder"
