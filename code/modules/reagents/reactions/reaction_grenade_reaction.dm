@@ -75,7 +75,7 @@
 	required_reagents = list(
 		MAT_ALUMINIUM = 1, 
 		MAT_PHORON = 1, 
-		/decl/material/acid = 1
+		MAT_ACID_SULPHURIC = 1
 	)
 	result_amount = 1
 	mix_message = "The solution thickens and begins to bubble."
@@ -131,7 +131,7 @@
 	required_reagents = list(
 		MAT_ALUMINIUM = 3, 
 		/decl/material/foaming_agent = 1, 
-		/decl/material/acid/polyacid = 1
+		MAT_ACID_POLYTRINIC = 1
 	)
 	result_amount = 5
 	mix_message = "The solution bubbles vigorously!"
@@ -151,7 +151,7 @@
 	required_reagents = list(
 		MAT_IRON = 3, 
 		/decl/material/foaming_agent = 1, 
-		/decl/material/acid/polyacid = 1
+		MAT_ACID_POLYTRINIC = 1
 	)
 	result_amount = 5
 	mix_message = "The solution bubbles vigorously!"

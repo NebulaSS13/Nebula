@@ -20,14 +20,14 @@
 	silicon		spawn_reagent = /decl/material/silicon
 	phosphorus	spawn_reagent = /decl/material/phosphorus
 	sulfur		spawn_reagent = /decl/material/sulfur
-	hclacid		spawn_reagent = /decl/material/acid/hydrochloric
+	hclacid		spawn_reagent = MAT_ACID_HYDROCHLORIC
 	potassium	spawn_reagent = /decl/material/potassium
 	iron		spawn_reagent = MAT_IRON
 	copper		spawn_reagent = MAT_COPPER
 	mercury		spawn_reagent = /decl/material/mercury
 	radium		spawn_reagent = /decl/material/radium
 	ethanol		spawn_reagent = /decl/material/ethanol
-	sacid		spawn_reagent = /decl/material/acid
+	sacid		spawn_reagent = MAT_ACID_SULPHURIC
 	tungsten	spawn_reagent = /decl/material/tungsten
 
 	// Bar, alcoholic

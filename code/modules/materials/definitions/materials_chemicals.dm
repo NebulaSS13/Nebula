@@ -18,3 +18,48 @@
 	touch_met = 5
 	value = 1.2
 	fuel_value = 1.2
+
+#define MAT_ACID_SULPHURIC    /decl/material/acid
+#define MAT_ACID_POLYTRINIC   /decl/material/polyacid
+#define MAT_ACID_HYDROCHLORIC /decl/material/hydroacid
+#define MAT_ACID_STOMACH      /decl/material/stomachacid
+
+/decl/material/acid
+	name = "sulphuric acid"
+	lore_text = "A very corrosive mineral acid with the molecular formula H2SO4."
+	taste_description = "acid"
+	icon_colour = "#db5008"
+	metabolism = REM * 2
+	touch_met = 50
+	value = 1.2
+	pH = 2
+
+/decl/material/hydroacid
+	name = "hydrochloric acid"
+	lore_text = "A very corrosive mineral acid with the molecular formula HCl."
+	taste_description = "stomach acid"
+	icon_colour = "#808080"
+	metabolism = REM * 2
+	touch_met = 50
+	pH = 3
+	value = 1.5
+
+/decl/material/polyacid
+	name = "polytrinic acid"
+	lore_text = "Polytrinic acid is a an extremely corrosive chemical substance."
+	taste_description = "acid"
+	icon_colour = "#8e18a9"
+	metabolism = REM * 2
+	touch_met = 50
+	pH = 1
+	value = 1.8
+
+/decl/material/stomachacid
+	name = "stomach acid"
+	taste_description = "coppery foulness"
+	metabolism = REM * 2
+	touch_met = 50
+	icon_colour = "#d8ff00"
+	hidden_from_codex = TRUE
+	pH = 3
+	value = 0

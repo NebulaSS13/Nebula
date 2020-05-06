@@ -19,7 +19,7 @@
 
 /datum/chemical_reaction/synthesis/plastication
 	name = "Plastic"
-	required_reagents = list(/decl/material/acid/polyacid = 1, /decl/material/toxin/plasticide = 2)
+	required_reagents = list(MAT_ACID_POLYTRINIC = 1, /decl/material/toxin/plasticide = 2)
 	mix_message = "The solution solidifies into a grey-white mass."
 
 /datum/chemical_reaction/synthesis/plastication/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)

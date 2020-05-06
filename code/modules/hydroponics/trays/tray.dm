@@ -52,9 +52,9 @@
 		/decl/material/toxin =             2,
 		MAT_HYDRAZINE =         2.5,
 		/decl/material/acetone =	       1,
-		/decl/material/acid =              1.5,
-		/decl/material/acid/hydrochloric = 1.5,
-		/decl/material/acid/polyacid =     3,
+		MAT_ACID_SULPHURIC =              1.5,
+		MAT_ACID_HYDROCHLORIC = 1.5,
+		MAT_ACID_POLYTRINIC =     3,
 		/decl/material/toxin/plantbgone =  3,
 		/decl/material/radium =            2
 		)
@@ -75,9 +75,9 @@
 		MAT_HYDRAZINE =          -4,
 		/decl/material/phosphorus =         -2,
 		/decl/material/nutriment/sugar =               2,
-		/decl/material/acid =               -2,
-		/decl/material/acid/hydrochloric =  -2,
-		/decl/material/acid/polyacid =      -4,
+		MAT_ACID_SULPHURIC =               -2,
+		MAT_ACID_HYDROCHLORIC =  -2,
+		MAT_ACID_POLYTRINIC =      -4,
 		/decl/material/toxin/plantbgone =   -8,
 		/decl/material/adminordrazine =     -5
 		)
@@ -103,9 +103,9 @@
 		MAT_HYDRAZINE =                       list( -2,    0,   0  ),
 		/decl/material/phosphorus =                      list( -0.75, 0,   0  ),
 		/decl/material/drink/sodawater =                 list(  0.1,  0,   0  ),
-		/decl/material/acid =                            list( -1,    0,   0  ),
-		/decl/material/acid/hydrochloric =               list( -1,    0,   0  ),
-		/decl/material/acid/polyacid =                   list( -2,    0,   0  ),
+		MAT_ACID =                            list( -1,    0,   0  ),
+		MAT_ACID_HYDROCHLORIC =               list( -1,    0,   0  ),
+		MAT_ACID_POLYTRINIC =                   list( -2,    0,   0  ),
 		/decl/material/toxin/plantbgone =                list( -2,    0,   0.2),
 		MAT_AMMONIA =                         list(  0.5,  0,   0  ),
 		/decl/material/nutriment =                       list(  0.5,  0.1, 0  ),

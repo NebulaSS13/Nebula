@@ -95,7 +95,7 @@
 			descriptors |= "shiny"
 		if(reagents.has_reagent(/decl/material/lube))
 			descriptors |= "slippery"
-		if(reagents.has_reagent(/decl/material/acid/polyacid) || reagents.has_reagent(/decl/material/acid) || reagents.has_reagent(/decl/material/acid/hydrochloric))
+		if(reagents.has_reagent(MAT_ACID_POLYTRINIC || reagents.has_reagent(MAT_ACID_SULPHURIC) || reagents.has_reagent(MAT_ACID_HYDROCHLORIC))
 			descriptors |= "acidic"
 		if(seed.get_trait(TRAIT_JUICY))
 			descriptors |= "juicy"

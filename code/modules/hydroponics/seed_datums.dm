@@ -135,7 +135,10 @@
 	seed_name = "nettle"
 	display_name = "nettles"
 	mutants = list("deathnettle")
-	chems = list(/decl/material/nutriment = list(1,50), /decl/material/acid = list(0,1))
+	chems = list(
+		/decl/material/nutriment = list(1,50), 
+		MAT_ACID_SULPHURIC = list(0,1)
+	)
 	kitchen_tag = "nettle"
 	kitchen_tag = "nettle"
 
@@ -156,7 +159,9 @@
 	seed_name = "death nettle"
 	display_name = "death nettles"
 	mutants = null
-	chems = list(/decl/material/nutriment = list(1,50), /decl/material/acid/polyacid = list(0,1))
+	chems = list(
+		/decl/material/nutriment = list(1,50), 
+		MAT_ACID_POLYTRINIC = list(0,1))
 	kitchen_tag = "deathnettle"
 
 /datum/seed/nettle/death/New()

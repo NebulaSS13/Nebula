@@ -175,7 +175,7 @@
 
 /obj/item/chems/glass/bottle/pacid/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/acid/polyacid, 60)
+	reagents.add_reagent(MAT_ACID_POLYTRINIC, 60)
 	update_icon()
 
 

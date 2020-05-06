@@ -2,7 +2,14 @@
 	return
 
 /decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
-	return
+	if(pH <= 3 && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && !O.unacidable)
+		var/meltdose = (pH * 8)
+		if(REAGENT_VOLUME(holder, type) >= meltdose)
+			var/obj/effect/decal/cleanable/molten_item/I = new(get_turf(O))
+			I.desc = "Looks like this was \an [O] some time ago."
+			I.visible_message(SPAN_DANGER("\The [O] melts."))
+			qdel(O)
+			holder?.remove_reagent(type, meltdose) 
 
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
@@ -58,13 +65,43 @@
 	var/fueltox = fuel_value * 2
 	if(fueltox > 0)
 		M.adjustToxLoss(fueltox * removed)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(pH >= 10)
+			H.take_organ_damage(0, removed * (pH-10))
+		else if(pH <= 3)
+			H.take_organ_damage(0, removed * ((4-pH)*2))
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
 	return
 
 /decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	return
+
+	if(pH <= 3)
+		var/meltdose = (pH * 8)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/thing in list(H.head, H.wear_mask, H.glasses))
+				if(thing.unacidable || removed < meltdose)
+					to_chat(H, SPAN_DANGER("Your [thing] protects you from the acid."))
+					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
+					return
+				to_chat(H, SPAN_DANGER("Your [thing] melts away!"))
+				H.drop_from_inventory(thing)
+				qdel(thing)
+				removed -= meltdose
+
+		if(!M.unacidable && removed >= meltdose)
+			M.take_organ_damage(0, min(removed * power * 0.2, max_damage))
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				var/screamed
+				for(var/obj/item/organ/external/affecting in H.organs)
+					if(!screamed && affecting.can_feel_pain())
+						screamed = 1
+						H.emote("scream")
+					affecting.status |= ORGAN_DISFIGURED
 
 /decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)

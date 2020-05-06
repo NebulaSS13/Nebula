@@ -4,7 +4,7 @@
 
 /datum/artifact_trigger/chemical/New()
 	if(isnull(required_chemicals))
-		required_chemicals = list(pick(/decl/material/acid, /decl/material/toxin, MAT_WATER))
+		required_chemicals = list(pick(MAT_ACID_SULPHURIC, /decl/material/toxin, MAT_WATER))
 
 /datum/artifact_trigger/chemical/copy()
 	var/datum/artifact_trigger/chemical/C = ..()
@@ -24,8 +24,9 @@
 /datum/artifact_trigger/chemical/acid
 	name = "presence of acid"
 	required_chemicals = list(
-		/decl/material/acid,
-		/decl/material/acid/polyacid
+		MAT_ACID_SULPHURIC,
+		MAT_ACID_HYDROCHLORIC,
+		MAT_ACID_POLYTRINIC
 	)
 
 /datum/artifact_trigger/chemical/volatile

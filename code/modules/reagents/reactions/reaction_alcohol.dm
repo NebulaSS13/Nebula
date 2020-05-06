@@ -415,7 +415,10 @@
 /datum/chemical_reaction/recipe/acidspit
 	name = "Acid Spit"
 	result = /decl/material/ethanol/acid_spit
-	required_reagents = list(/decl/material/acid = 1, /decl/material/ethanol/wine = 5)
+	required_reagents = list(
+		MAT_ACID_SULPHURIC = 1, 
+		/decl/material/ethanol/wine = 5
+	)
 	result_amount = 6
 	mix_message = "The solution curdles into an unpleasant, slimy liquid."
 

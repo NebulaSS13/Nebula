@@ -4,4 +4,4 @@
 
 /datum/fabricator_recipe/imprinter/get_resources()
 	. = ..()
-	LAZYSET(resources, /decl/material/acid, 20)
+	LAZYSET(resources, MAT_ACID_SULPHURIC, 20)

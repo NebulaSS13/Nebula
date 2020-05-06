@@ -204,7 +204,7 @@
 
 	B1.reagents.add_reagent(MAT_ALUMINIUM, 30)
 	B2.reagents.add_reagent(/decl/material/foaming_agent, 10)
-	B2.reagents.add_reagent(/decl/material/acid/polyacid, 10)
+	B2.reagents.add_reagent(MAT_ACID_SULPHURIC, 10)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
@@ -226,7 +226,7 @@
 	B1.reagents.add_reagent(MAT_ALUMINIUM, 15)
 	B1.reagents.add_reagent(MAT_FUEL,20)
 	B2.reagents.add_reagent(MAT_PHORON, 15)
-	B2.reagents.add_reagent(/decl/material/acid, 15)
+	B2.reagents.add_reagent(MAT_ACID_SULPHURIC, 15)
 	B1.reagents.add_reagent(MAT_FUEL,20)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)

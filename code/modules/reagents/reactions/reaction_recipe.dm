@@ -8,7 +8,10 @@
 /datum/chemical_reaction/recipe/soysauce_acid
 	name = "Acid Soy Sauce"
 	result = /decl/material/nutriment/soysauce
-	required_reagents = list(/decl/material/drink/milk/soymilk = 4, /decl/material/acid = 1)
+	required_reagents = list(
+		/decl/material/drink/milk/soymilk = 4, 
+		MAT_ACID_SULPHURIC = 1
+	)
 	result_amount = 5
 	mix_message = "The solution settles into a glossy black sauce."
 

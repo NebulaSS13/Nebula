@@ -13,13 +13,21 @@
 /datum/chemical_reaction/antiseptic
 	name = "Antiseptic"
 	result = /decl/material/antiseptic
-	required_reagents = list(/decl/material/ethanol = 1, /decl/material/antitoxins = 1, /decl/material/acid/hydrochloric = 1)
+	required_reagents = list(
+		/decl/material/ethanol = 1, 
+		/decl/material/antitoxins = 1, 
+		MAT_ACID_HYDROCHLORIC = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/mutagenics
 	name = "Unstable mutagen"
 	result = /decl/material/mutagenics
-	required_reagents = list(/decl/material/radium = 1, /decl/material/phosphorus = 1, /decl/material/acid/hydrochloric = 1)
+	required_reagents = list(
+		/decl/material/radium = 1, 
+		/decl/material/phosphorus = 1, 
+		MAT_ACID_HYDROCHLORIC = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/psychoactives
@@ -43,8 +51,12 @@
 
 /datum/chemical_reaction/pacid
 	name = "Polytrinic acid"
-	result = /decl/material/acid/polyacid
-	required_reagents = list(/decl/material/acid = 1, /decl/material/acid/hydrochloric = 1, /decl/material/potassium = 1)
+	result = MAT_ACID_POLYTRINIC
+	required_reagents = list(
+		MAT_ACID_SULPHURIC = 1, 
+		MAT_ACID_HYDROCHLORIC = 1, 
+		/decl/material/potassium = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/antirads
@@ -86,7 +98,11 @@
 /datum/chemical_reaction/neuroannealer
 	name = "Neuroannealer"
 	result = /decl/material/neuroannealer
-	required_reagents = list(/decl/material/acid/hydrochloric = 1, MAT_AMMONIA = 1, /decl/material/antitoxins = 1)
+	required_reagents = list(
+		MAT_ACID_HYDROCHLORIC = 1, 
+		MAT_AMMONIA = 1, 
+		/decl/material/antitoxins = 1
+	)
 	result_amount = 2
 
 /datum/chemical_reaction/oxy_meds
@@ -203,7 +219,7 @@
 	required_reagents = list(
 		MAT_HYDRAZINE = 2, 
 		MAT_GRAPHITE = 2, 
-		/decl/material/acid = 1
+		MAT_ACID_SULPHURIC = 1
 	)
 	result_amount = 5
 	mix_message = "The solution begins to foam gently."
@@ -239,7 +255,10 @@
 /datum/chemical_reaction/sodiumchloride
 	name = "Sodium Chloride"
 	result = /decl/material/sodiumchloride
-	required_reagents = list(/decl/material/sodium = 1, /decl/material/acid/hydrochloric = 1)
+	required_reagents = list(
+		/decl/material/sodium = 1, 
+		MAT_ACID_HYDROCHLORIC = 1
+	)
 	result_amount = 2
 
 /datum/chemical_reaction/condensedcapsaicin
@@ -267,7 +286,11 @@
 /datum/chemical_reaction/hair_remover
 	name = "Hair Remover"
 	result = /decl/material/toxin/hair_remover
-	required_reagents = list(/decl/material/radium = 1, /decl/material/potassium = 1, /decl/material/acid/hydrochloric = 1)
+	required_reagents = list(
+		/decl/material/radium = 1, 
+		/decl/material/potassium = 1, 
+		MAT_ACID_HYDROCHLORIC = 1
+	)
 	result_amount = 3
 	mix_message = "The solution thins out and emits an acrid smell."
 

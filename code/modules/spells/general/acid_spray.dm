@@ -5,12 +5,11 @@
 	feedback = "as"
 	spell_flags = 0
 	charge_max  = 600
-
 	invocation = "Tagopar lethodar!"
 	invocation_type = SpI_SHOUT
-	var/reagent_type = /decl/material/acid/hydrochloric
 	hud_state = "wiz_acid"
 	cast_sound = 'sound/magic/disintegrate.ogg'
+	var/reagent_type = MAT_ACID_HYDROCHLORIC
 
 /spell/acid_spray/choose_targets()
 	return list(holder)

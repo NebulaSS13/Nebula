@@ -28,7 +28,7 @@
 	var/global/list/banned_chem_types = list(
 		/decl/material/toxin,
 		/decl/material/mutagenics,
-		/decl/material/acid
+		MAT_ACID_POLYTRINIC
 	)
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)

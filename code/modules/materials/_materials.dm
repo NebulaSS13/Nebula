@@ -108,6 +108,7 @@
 	var/luminescence
 	var/list/alloy_materials     // If set, material can be produced via alloying these materials in these amounts.
 	var/wall_support_value = 30
+	var/pH = 7                   // Neutral pH by default. Determines acid burns.
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/wire_product

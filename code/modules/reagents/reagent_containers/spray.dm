@@ -42,9 +42,9 @@
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
-	if(reagents.has_reagent(/decl/material/acid))
+	if(reagents.has_reagent(MAT_ACID_SULPHURIC))
 		log_and_message_admins("fired sulphuric acid from \a [src].", user)
-	if(reagents.has_reagent(/decl/material/acid/polyacid))
+	if(reagents.has_reagent(MAT_ACID_POLYTRINIC))
 		log_and_message_admins("fired polyacid from \a [src].", user)
 	if(reagents.has_reagent(/decl/material/lube))
 		log_and_message_admins("fired lubricant from \a [src].", user)

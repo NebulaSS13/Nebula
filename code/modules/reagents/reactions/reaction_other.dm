@@ -112,7 +112,7 @@
 
 /datum/chemical_reaction/crystal_agent
 	result = /decl/material/crystal
-	required_reagents = list(/decl/material/silicon = 1, /decl/material/tungsten = 1, /decl/material/acid/polyacid = 1)
+	required_reagents = list(/decl/material/silicon = 1, /decl/material/tungsten = 1, MAT_ACID_POLYTRINIC = 1)
 	minimum_temperature = 150 CELSIUS
 	maximum_temperature = 200 CELSIUS
 	result_amount = 3
