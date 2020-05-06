@@ -16,8 +16,8 @@
 	var/runtimeload // Use this for calling an even later lateload.
 
 /obj/machinery/network/Initialize()
-	. = ..()
 	set_extension(src, network_device_type, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED, !lateload)
+	. = ..()
 	if(lateload)
 		return INITIALIZE_HINT_LATELOAD
 
