@@ -25,7 +25,7 @@
 	result = /decl/material/mutagenics
 	required_reagents = list(
 		/decl/material/radium = 1, 
-		/decl/material/phosphorus = 1, 
+		MAT_PHOSPHORUS = 1, 
 		MAT_ACID_HYDROCHLORIC = 1
 	)
 	result_amount = 3
@@ -128,7 +128,11 @@
 /datum/chemical_reaction/amphetamines
 	name = "Amphetamines"
 	result = /decl/material/amphetamines
-	required_reagents = list(/decl/material/nutriment/sugar = 1, /decl/material/phosphorus = 1, /decl/material/sulfur = 1)
+	required_reagents = list(
+		/decl/material/nutriment/sugar = 1, 
+		MAT_PHOSPHORUS = 1, 
+		/decl/material/sulfur = 1
+	)
 	result_amount = 3
 
 /datum/chemical_reaction/retrovirals
@@ -174,7 +178,7 @@
 	name = "Sedatives"
 	result = /decl/material/sedatives
 	required_reagents = list(/decl/material/ethanol = 1, /decl/material/nutriment/sugar = 4)
-	inhibitors = list(/decl/material/phosphorus) // Messes with the smoke
+	inhibitors = list(MAT_PHOSPHORUS) // Messes with the smoke
 	result_amount = 5
 
 /datum/chemical_reaction/paralytics

@@ -25,13 +25,6 @@
 		M.emote(pick("twitch", "drool", "moan"))
 	M.adjustBrainLoss(0.1)
 
-/decl/material/phosphorus
-	name = "phosphorus"
-	lore_text = "A chemical element, the backbone of biological energy carriers."
-	taste_description = "vinegar"
-	icon_colour = "#832828"
-	value = 0.5
-
 /decl/material/potassium
 	name = "potassium"
 	lore_text = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."

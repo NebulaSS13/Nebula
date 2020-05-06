@@ -249,7 +249,7 @@
 
 	B1.reagents.add_reagent(/decl/material/toxin/plantbgone, 25)
 	B1.reagents.add_reagent(/decl/material/potassium, 25)
-	B2.reagents.add_reagent(/decl/material/phosphorus, 25)
+	B2.reagents.add_reagent(MAT_PHOSPHORUS, 25)
 	B2.reagents.add_reagent(/decl/material/nutriment/sugar, 25)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
@@ -290,7 +290,7 @@
 	var/obj/item/chems/glass/beaker/large/B1 = new(src)
 	var/obj/item/chems/glass/beaker/large/B2 = new(src)
 
-	B1.reagents.add_reagent(/decl/material/phosphorus, 40)
+	B1.reagents.add_reagent(MAT_PHOSPHORUS, 40)
 	B1.reagents.add_reagent(/decl/material/potassium, 40)
 	B1.reagents.add_reagent(/decl/material/capsaicin/condensed, 40)
 	B2.reagents.add_reagent(/decl/material/nutriment/sugar, 40)

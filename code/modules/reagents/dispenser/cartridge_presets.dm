@@ -18,7 +18,7 @@
 	sodium		spawn_reagent = /decl/material/sodium
 	aluminium	spawn_reagent = MAT_ALUMINIUM
 	silicon		spawn_reagent = /decl/material/silicon
-	phosphorus	spawn_reagent = /decl/material/phosphorus
+	phosphorus	spawn_reagent = MAT_PHOSPHORUS
 	sulfur		spawn_reagent = /decl/material/sulfur
 	hclacid		spawn_reagent = MAT_ACID_HYDROCHLORIC
 	potassium	spawn_reagent = /decl/material/potassium

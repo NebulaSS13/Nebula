@@ -42,7 +42,7 @@
 #define MAT_PYRITE                  /decl/material/pyrite
 #define MAT_SPODUMENE               /decl/material/spodumene
 #define MAT_CINNABAR                /decl/material/cinnabar
-#define MAT_PHOSPHORITE             /decl/material/phosphorite
+#define MAT_PHOSPHORUS              /decl/material/phosphorus
 #define MAT_ROCK_SALT               /decl/material/rocksalt
 #define MAT_POTASH                  /decl/material/potash
 #define MAT_BAUXITE                 /decl/material/bauxite

@@ -90,7 +90,11 @@
 /datum/chemical_reaction/grenade_reaction/chemsmoke
 	name = "Chemical Smoke"
 	lore_text = "This mixture causes a large cloud of smoke, which will be laden with the other chemicals present in the mixture when it reacted."
-	required_reagents = list(/decl/material/potassium = 1, /decl/material/nutriment/sugar = 1, /decl/material/phosphorus = 1)
+	required_reagents = list(
+		/decl/material/potassium = 1, 
+		/decl/material/nutriment/sugar = 1, 
+		MAT_PHOSPHORUS = 1
+	)
 	result_amount = 0.4
 	mix_message = "The solution bubbles vigorously!"
 

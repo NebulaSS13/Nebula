@@ -117,15 +117,18 @@
 	icon_reinf = "reinf_stone"
 	sale_price = 2
 
-/decl/material/phosphorite
-	name = "phosphorite"
-	ore_compresses_to = MAT_PHOSPHORITE
+/decl/material/phosphorus
+	name = "phosphorus"
+	lore_text = "A chemical element, the backbone of biological energy carriers."
+	taste_description = "vinegar"
+	icon_colour = "#832828"
+	value = 0.5
+	ore_compresses_to = MAT_PHOSPHORUS
 	ore_name = "phosphorite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#acad95"
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"

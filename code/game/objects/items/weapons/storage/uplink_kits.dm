@@ -127,11 +127,11 @@
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(MAT_ALUMINIUM = 1, /decl/material/nutriment/sugar = 1, /decl/material/phosphorus = 1))
+	fill_cigarre_package(pack, list(MAT_ALUMINIUM = 1, /decl/material/nutriment/sugar = 1, MAT_PHOSPHORUS = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/decl/material/potassium = 1, /decl/material/nutriment/sugar = 1, /decl/material/phosphorus = 1))
+	fill_cigarre_package(pack, list(/decl/material/potassium = 1, /decl/material/nutriment/sugar = 1, MAT_PHOSPHORUS = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
