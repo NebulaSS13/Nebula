@@ -231,6 +231,6 @@
 		qdel(src)
 		return
 
-	reagents.remove_reagent(/decl/material/fuel, reagents.maximum_volume/25)
+	reagents.remove_reagent(MAT_FUEL, reagents.maximum_volume/25)
 	update_name()
 	burn_time--

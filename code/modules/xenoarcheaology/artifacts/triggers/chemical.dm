@@ -35,7 +35,7 @@
 	name = "presence of volatile chemicals"
 	required_chemicals = list(
 		MAT_PHORON,
-		/decl/material/fuel
+		MAT_FUEL
 	)
 
 /datum/artifact_trigger/chemical/toxic

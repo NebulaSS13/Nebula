@@ -50,7 +50,7 @@
 	var/global/list/toxic_reagents = list(
 		/decl/material/antitoxins =         -2,
 		/decl/material/toxin =             2,
-		/decl/material/fuel/hydrazine =         2.5,
+		MAT_HYDRAZINE =         2.5,
 		/decl/material/acetone =	       1,
 		/decl/material/acid =              1.5,
 		/decl/material/acid/hydrochloric = 1.5,
@@ -72,7 +72,7 @@
 		/decl/material/toxin/fertilizer/left4zed =      1
 		)
 	var/global/list/weedkiller_reagents = list(
-		/decl/material/fuel/hydrazine =          -4,
+		MAT_HYDRAZINE =          -4,
 		/decl/material/phosphorus =         -2,
 		/decl/material/nutriment/sugar =               2,
 		/decl/material/acid =               -2,
@@ -92,7 +92,7 @@
 		/decl/material/adminordrazine =  1,
 		/decl/material/drink/milk =      0.9,
 		/decl/material/ethanol/beer =    0.7,
-		/decl/material/fuel/hydrazine = -2,
+		MAT_HYDRAZINE = -2,
 		/decl/material/phosphorus =     -0.5,
 		/decl/material/drink/sodawater = 1,
 		)
@@ -100,7 +100,7 @@
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
 	var/global/list/beneficial_reagents = list(
 		/decl/material/ethanol/beer =                    list( -0.05, 0,   0  ),
-		/decl/material/fuel/hydrazine =                       list( -2,    0,   0  ),
+		MAT_HYDRAZINE =                       list( -2,    0,   0  ),
 		/decl/material/phosphorus =                      list( -0.75, 0,   0  ),
 		/decl/material/drink/sodawater =                 list(  0.1,  0,   0  ),
 		/decl/material/acid =                            list( -1,    0,   0  ),

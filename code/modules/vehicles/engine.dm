@@ -114,10 +114,10 @@
 			var/decl/material/ethanol/E = R
 			new_multiplier = (10/E.strength)
 			actually_flameable = 1
-		else if(istype(R,/decl/material/fuel/hydrazine))
+		else if(istype(R, MAT_HYDRAZINE))
 			new_multiplier = 1.25
 			actually_flameable = 1
-		else if(istype(R,/decl/material/fuel))
+		else if(istype(R, MAT_FUEL))
 			actually_flameable = 1
 		else if(istype(R, MAT_PHORON))
 			new_multiplier = 2

@@ -33,7 +33,7 @@
 		/decl/material/sedatives,       \
 		/decl/material/ethanol,         \
 		/decl/material/drink/ice,       \
-		/decl/material/fuel,            \
+		MAT_FUEL,                       \
 		/decl/material/cleaner          \
 	)
 	START_PROCESSING(SSobj, src)

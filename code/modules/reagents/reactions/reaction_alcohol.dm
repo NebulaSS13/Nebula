@@ -219,7 +219,11 @@
 /datum/chemical_reaction/recipe/hooch
 	name = "Hooch"
 	result = /decl/material/ethanol/hooch
-	required_reagents = list (/decl/material/nutriment/sugar = 1, /decl/material/ethanol = 2, /decl/material/fuel = 1)
+	required_reagents = list (
+		/decl/material/nutriment/sugar = 1, 
+		/decl/material/ethanol = 2, 
+		MAT_FUEL = 1
+	)
 	minimum_temperature = 30 CELSIUS
 	maximum_temperature = (30 CELSIUS) + 100
 	result_amount = 3

@@ -10,7 +10,7 @@
 	sugar		spawn_reagent = /decl/material/nutriment/sugar
 
 	// Chemistry
-	hydrazine	spawn_reagent = /decl/material/fuel/hydrazine
+	hydrazine	spawn_reagent = MAT_HYDRAZINE
 	lithium		spawn_reagent = /decl/material/lithium
 	graphite	spawn_reagent = MAT_GRAPHITE
 	ammonia		spawn_reagent = MAT_AMMONIA

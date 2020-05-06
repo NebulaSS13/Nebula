@@ -128,6 +128,10 @@
 #define MAT_LEATHER_FUR             /decl/material/leather/fur
 #define MAT_LEATHER_CHITIN          /decl/material/leather/chitin
 
+// chems
+#define MAT_HYDRAZINE               /decl/material/hydrazine
+#define MAT_FUEL                    /decl/material/fuel
+
 // defaults
 #define DEFAULT_WALL_MATERIAL       MAT_STEEL
 #define DEFAULT_FURNITURE_MATERIAL  MAT_ALUMINIUM

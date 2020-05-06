@@ -3532,7 +3532,7 @@
 		/decl/material/toxin/slimejelly,
 		/decl/material/nutriment/banana_cream,
 		/decl/material/nutriment/cherryjelly,
-		/decl/material/fuel,
+		MAT_FUEL,
 		/decl/material/regenerator)), 3)
 	if(prob(30))
 		src.icon_state = "donut2"
@@ -3775,7 +3775,7 @@ obj/item/chems/food/snacks/dango
 /obj/item/chems/food/snacks/old/Initialize()
 	.=..()
 	reagents.add_reagent(pick(list(
-				/decl/material/fuel,
+				MAT_FUEL,
 				/decl/material/toxin/amatoxin,
 				/decl/material/toxin/carpotoxin,
 				/decl/material/toxin/zombiepowder,

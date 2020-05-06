@@ -147,7 +147,7 @@
 	amount_per_transfer_from_this = 10
 	var/modded = 0
 	var/obj/item/assembly_holder/rig = null
-	initial_reagent_types = list(/decl/material/fuel = 1)
+	initial_reagent_types = list(MAT_FUEL = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
@@ -231,7 +231,7 @@
 /obj/structure/reagent_dispensers/fueltank/proc/leak_fuel(amount)
 	if (reagents.total_volume > 0)
 		amount = min(amount, reagents.total_volume)
-		reagents.remove_reagent(/decl/material/fuel,amount)
+		reagents.remove_reagent(MAT_FUEL, amount)
 		new /obj/effect/decal/cleanable/liquid_fuel(loc, amount,1)
 
 /obj/structure/reagent_dispensers/peppertank

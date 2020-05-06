@@ -153,7 +153,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/lolli/Initialize()
 	. = ..()
 	reagents.add_reagent(pick(list(
-				/decl/material/fuel,
+				MAT_FUEL,
 				/decl/material/drink/juice/grape,
 				/decl/material/drink/juice/orange,
 				/decl/material/drink/juice/lemon,

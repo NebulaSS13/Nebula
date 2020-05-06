@@ -99,7 +99,7 @@
 	var/volume = 60
 	var/list/fuel = list(
 		MAT_PHORON = 50000, 
-		/decl/material/fuel = 15000, 
+		MAT_FUEL = 15000, 
 		MAT_GRAPHITE = 10000, 
 		/decl/material/ethanol = 10000, 
 		/decl/material/nutriment = 8000

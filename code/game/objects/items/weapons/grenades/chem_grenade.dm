@@ -224,10 +224,10 @@
 	var/obj/item/chems/glass/beaker/B2 = new(src)
 
 	B1.reagents.add_reagent(MAT_ALUMINIUM, 15)
-	B1.reagents.add_reagent(/decl/material/fuel,20)
+	B1.reagents.add_reagent(MAT_FUEL,20)
 	B2.reagents.add_reagent(MAT_PHORON, 15)
 	B2.reagents.add_reagent(/decl/material/acid, 15)
-	B1.reagents.add_reagent(/decl/material/fuel,20)
+	B1.reagents.add_reagent(MAT_FUEL,20)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 

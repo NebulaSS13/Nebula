@@ -135,7 +135,7 @@
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/decl/material/antitoxins = 1, /decl/material/silicon = 1, /decl/material/fuel/hydrazine = 1))
+	fill_cigarre_package(pack, list(/decl/material/antitoxins = 1, /decl/material/silicon = 1, MAT_HYDRAZINE = 1))
 	pack.desc += " 'MB' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)

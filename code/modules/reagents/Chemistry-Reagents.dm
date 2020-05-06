@@ -55,7 +55,9 @@
 	holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	return
+	var/fueltox = fuel_value * 2
+	if(fueltox > 0)
+		M.adjustToxLoss(fueltox * removed)
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
@@ -76,7 +78,23 @@
 	. = REAGENT_DATA(reagents, type)
 
 /decl/material/proc/ex_act(obj/item/chems/holder, severity)
-	return
+	if(fuel_value <= 0)
+		return
+	var/volume = REAGENT_VOLUME(holder?.reagents, type) * fuel_value
+	if(volume <= 50)
+		return
+	var/turf/T = get_turf(holder)
+	var/datum/gas_mixture/products = new(_temperature = 5 * PHORON_FLASHPOINT)
+	var/gas_moles = 3 * volume
+	products.adjust_multi(MAT_NO, 0.1 * gas_moles, MAT_NO2, 0.1 * gas_moles, MAT_NITROGEN, 0.6 * gas_moles, MAT_HYDROGEN, 0.02 * gas_moles)
+	T.assume_air(products)
+	if(volume > 500)
+		explosion(T,1,2,4)
+	else if(volume > 100)
+		explosion(T,0,1,3)
+	else if(volume > 50)
+		explosion(T,-1,1,2)
+	holder?.reagents?.remove_reagent(type, volume)
 
 /decl/material/proc/get_value()
 	. = value

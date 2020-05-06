@@ -21,7 +21,7 @@
 	name = "Luminol"
 	result = /decl/material/luminol
 	required_reagents = list(
-		/decl/material/fuel/hydrazine = 2, 
+		MAT_HYDRAZINE = 2, 
 		MAT_GRAPHITE = 2, 
 		MAT_AMMONIA = 2
 	)
@@ -63,28 +63,40 @@
 /datum/chemical_reaction/anfo
 	name = "EZ-ANFO"
 	result = /decl/material/anfo
-	required_reagents = list(/decl/material/toxin/fertilizer/eznutrient=20, /decl/material/fuel=10)
+	required_reagents = list(
+		/decl/material/toxin/fertilizer/eznutrient = 20, 
+		MAT_FUEL = 10
+	)
 	result_amount = 15
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo2
 	name = "Left 4 ANFO"
 	result = /decl/material/anfo
-	required_reagents = list(/decl/material/toxin/fertilizer/left4zed=10, /decl/material/fuel=5)
+	required_reagents = list(
+		/decl/material/toxin/fertilizer/left4zed = 10,
+		MAT_FUEL = 5
+	)
 	result_amount = 10
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo3
 	name = "Robust ANFO"
 	result = /decl/material/anfo
-	required_reagents = list(/decl/material/toxin/fertilizer/robustharvest=15, /decl/material/fuel=5)
+	required_reagents = list(
+		/decl/material/toxin/fertilizer/robustharvest = 15,
+		MAT_FUEL = 5
+	)
 	result_amount = 10
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/anfo4
 	name = "Chemlab ANFO"
 	result = /decl/material/anfo
-	required_reagents = list(MAT_AMMONIA=10, /decl/material/fuel=5)
+	required_reagents = list(
+		MAT_AMMONIA = 10, 
+		MAT_FUEL = 5
+	)
 	result_amount = 15
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 

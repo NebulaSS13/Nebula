@@ -97,9 +97,9 @@
 			e.start()
 			qdel(src)
 			return
-		if(REAGENT_VOLUME(reagents, /decl/material/fuel)) // the fuel explodes, too, but much less violently
+		if(REAGENT_VOLUME(reagents, MAT_FUEL)) // the fuel explodes, too, but much less violently
 			var/datum/effect/effect/system/reagents_explosion/e = new()
-			e.set_up(round(REAGENT_VOLUME(reagents, /decl/material/fuel) / 5, 1), get_turf(src), 0, 0)
+			e.set_up(round(REAGENT_VOLUME(reagents, MAT_FUEL) / 5, 1), get_turf(src), 0, 0)
 			e.start()
 			qdel(src)
 			return

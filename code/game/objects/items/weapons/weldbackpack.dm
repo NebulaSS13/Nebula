@@ -10,13 +10,11 @@
 
 /obj/item/weldpack/Initialize()
 	create_reagents(max_fuel)
-	reagents.add_reagent(/decl/material/fuel, max_fuel)
-
+	reagents.add_reagent(MAT_FUEL, max_fuel)
 	. = ..()
 
 /obj/item/weldpack/Destroy()
 	QDEL_NULL(welder)
-
 	. = ..()
 
 /obj/item/weldpack/attackby(obj/item/W, mob/user)

@@ -149,7 +149,7 @@
 	result = /decl/material/eyedrops
 	required_reagents = list(
 		MAT_GRAPHITE = 1, 
-		/decl/material/fuel/hydrazine = 1, 
+		MAT_HYDRAZINE = 1, 
 		/decl/material/antitoxins = 1
 	)
 	result_amount = 2
@@ -164,7 +164,11 @@
 /datum/chemical_reaction/paralytics
 	name = "Paralytics"
 	result = /decl/material/paralytics
-	required_reagents = list(/decl/material/ethanol = 1, /decl/material/mercury = 2, /decl/material/fuel/hydrazine = 2)
+	required_reagents = list(
+		/decl/material/ethanol = 1, 
+		/decl/material/mercury = 2, 
+		MAT_HYDRAZINE = 2
+	)
 	result_amount = 1
 
 /datum/chemical_reaction/zombiepowder
@@ -183,7 +187,11 @@
 /datum/chemical_reaction/hallucinogenics
 	name = "Hallucinogenics"
 	result = /decl/material/hallucinogenics
-	required_reagents = list(/decl/material/silicon = 1, /decl/material/fuel/hydrazine = 1, /decl/material/antitoxins = 1)
+	required_reagents = list(
+		/decl/material/silicon = 1, 
+		MAT_HYDRAZINE = 1, 
+		/decl/material/antitoxins = 1
+	)
 	result_amount = 3
 	mix_message = "The solution takes on an iridescent sheen."
 	minimum_temperature = 75 CELSIUS
@@ -193,7 +201,7 @@
 	name = "Azosurfactant"
 	result = /decl/material/surfactant
 	required_reagents = list(
-		/decl/material/fuel/hydrazine = 2, 
+		MAT_HYDRAZINE = 2, 
 		MAT_GRAPHITE = 2, 
 		/decl/material/acid = 1
 	)
@@ -221,7 +229,10 @@
 /datum/chemical_reaction/foaming_agent
 	name = "Foaming Agent"
 	result = /decl/material/foaming_agent
-	required_reagents = list(/decl/material/lithium = 1, /decl/material/fuel/hydrazine = 1)
+	required_reagents = list(
+		/decl/material/lithium = 1, 
+		MAT_HYDRAZINE = 1
+	)
 	result_amount = 1
 	mix_message = "The solution begins to foam vigorously."
 
@@ -262,7 +273,11 @@
 
 /datum/chemical_reaction/methyl_bromide
 	name = "Methyl Bromide"
-	required_reagents = list(/decl/material/toxin/bromide = 1, /decl/material/ethanol = 1, /decl/material/fuel/hydrazine = 1)
+	required_reagents = list(
+		/decl/material/toxin/bromide = 1, 
+		/decl/material/ethanol = 1, 
+		MAT_HYDRAZINE = 1
+	)
 	result_amount = 3
 	result = MAT_METHYL_BROMIDE
 	mix_message = "The solution begins to bubble, emitting a dark vapor."

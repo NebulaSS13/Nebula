@@ -313,7 +313,7 @@
 	gas_burn_product = MAT_WATER
 	gas_symbol_html = "H<sub>2</sub>"
 	gas_symbol = "H2"
-	chem_products = list(/decl/material/fuel/hydrazine = 20)
+	chem_products = list(MAT_HYDRAZINE = 20)
 
 /decl/material/hydrogen/tritium
 	name = "tritium"
