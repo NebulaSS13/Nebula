@@ -1,7 +1,7 @@
 
 /decl/material/painkillers
 	name = "painkillers"
-	description = "A highly effective opioid painkiller. Do not mix with alcohol."
+	lore_text = "A highly effective opioid painkiller. Do not mix with alcohol."
 	taste_description = "sourness"
 	color = "#cb68fc"
 	overdose = 30

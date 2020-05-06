@@ -1,6 +1,6 @@
 /decl/material/acid
 	name = "sulphuric acid"
-	description = "A very corrosive mineral acid with the molecular formula H2SO4."
+	lore_text = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
 	color = "#db5008"
 	metabolism = REM * 2
@@ -84,7 +84,7 @@
 
 /decl/material/acid/hydrochloric //Like sulfuric, but less toxic and more acidic.
 	name = "hydrochloric acid"
-	description = "A very corrosive mineral acid with the molecular formula HCl."
+	lore_text = "A very corrosive mineral acid with the molecular formula HCl."
 	taste_description = "stomach acid"
 	color = "#808080"
 	power = 3
@@ -94,7 +94,7 @@
 
 /decl/material/acid/polyacid
 	name = "polytrinic acid"
-	description = "Polytrinic acid is a an extremely corrosive chemical substance."
+	lore_text = "Polytrinic acid is a an extremely corrosive chemical substance."
 	taste_description = "acid"
 	color = "#8e18a9"
 	power = 10

@@ -222,7 +222,7 @@
 		var/blood_data = REAGENT_DATA(beaker?.reagents, /decl/material/blood)
 		. += "Blood Type: [LAZYACCESS(blood_data, "blood_type")]<br>DNA: [LAZYACCESS(blood_data, "blood.DNA")]"
 	else
-		. += "[reagent.description]"
+		. += "[reagent.lore_text]"
 	. += "<BR><BR><BR><A href='?src=\ref[src];main=1'>(Back)</A>"
 	. = JOINTEXT(.)
 

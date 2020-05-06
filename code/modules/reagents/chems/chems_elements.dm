@@ -1,19 +1,19 @@
 /decl/material/gold
 	name = "gold"
-	description = "Gold is a dense, soft, shiny metal and the most malleable and ductile metal known."
+	lore_text = "Gold is a dense, soft, shiny metal and the most malleable and ductile metal known."
 	taste_description = "expensive metal"
 	color = "#f7c430"
 	value = 1.5
 
 /decl/material/silver
 	name = "silver"
-	description = "A soft, white, lustrous transition metal, it has the highest electrical conductivity of any element and the highest thermal conductivity of any metal."
+	lore_text = "A soft, white, lustrous transition metal, it has the highest electrical conductivity of any element and the highest thermal conductivity of any metal."
 	taste_description = "expensive yet reasonable metal"
 	color = "#d0d0d0"
 
 /decl/material/uranium
 	name = "uranium"
-	description = "A silvery-white metallic chemical element in the actinide series, weakly radioactive."
+	lore_text = "A silvery-white metallic chemical element in the actinide series, weakly radioactive."
 	taste_description = "the inside of a reactor"
 	color = "#b8b8c0"
 
@@ -32,7 +32,7 @@
 
 /decl/material/helium
 	name = "helium"
-	description = "A noble gas. It makes your voice squeaky."
+	lore_text = "A noble gas. It makes your voice squeaky."
 	taste_description = "nothing"
 	color = COLOR_GRAY80
 	metabolism = 0.05
@@ -45,7 +45,7 @@
 	name = "aluminium"
 	taste_description = "metal"
 	taste_mult = 1.1
-	description = "A silvery white and ductile member of the boron group of chemical elements."
+	lore_text = "A silvery white and ductile member of the boron group of chemical elements."
 	color = "#a8a8a8"
 	value = 0.5
 
@@ -53,7 +53,7 @@
 	name = "ammonia"
 	taste_description = "mordant"
 	taste_mult = 2
-	description = "A caustic substance commonly used in fertilizer or household cleaners."
+	lore_text = "A caustic substance commonly used in fertilizer or household cleaners."
 	color = "#404030"
 	metabolism = REM * 0.5
 	overdose = 5
@@ -61,7 +61,7 @@
 
 /decl/material/carbon
 	name = "carbon"
-	description = "A chemical element, the building block of life."
+	lore_text = "A chemical element, the building block of life."
 	taste_description = "sour chalk"
 	taste_mult = 1.5
 	color = "#1c1300"
@@ -87,14 +87,14 @@
 
 /decl/material/copper
 	name = "copper"
-	description = "A highly ductile metal."
+	lore_text = "A highly ductile metal."
 	taste_description = "copper"
 	color = "#6e3b08"
 	value = 0.5
 
 /decl/material/iron
 	name = "iron"
-	description = "Pure iron is a metal."
+	lore_text = "Pure iron is a metal."
 	taste_description = "metal"
 	color = "#353535"
 	value = 0.5
@@ -104,7 +104,7 @@
 
 /decl/material/lithium
 	name = "lithium"
-	description = "A chemical element, used as antidepressant."
+	lore_text = "A chemical element, used as antidepressant."
 	taste_description = "metal"
 	color = "#808080"
 	value = 0.5
@@ -117,7 +117,7 @@
 
 /decl/material/mercury
 	name = "mercury"
-	description = "A chemical element."
+	lore_text = "A chemical element."
 	taste_mult = 0 //mercury apparently is tasteless. IDK
 	color = "#484848"
 	value = 0.5
@@ -131,14 +131,14 @@
 
 /decl/material/phosphorus
 	name = "phosphorus"
-	description = "A chemical element, the backbone of biological energy carriers."
+	lore_text = "A chemical element, the backbone of biological energy carriers."
 	taste_description = "vinegar"
 	color = "#832828"
 	value = 0.5
 
 /decl/material/potassium
 	name = "potassium"
-	description = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
+	lore_text = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
 	color = "#a0a0a0"
 	value = 0.5
@@ -152,7 +152,7 @@
 
 /decl/material/radium
 	name = "radium"
-	description = "Radium is an alkaline earth metal. It is extremely radioactive."
+	lore_text = "Radium is an alkaline earth metal. It is extremely radioactive."
 	taste_description = "the color blue, and regret"
 	color = "#c7c7c7"
 	value = 0.5
@@ -169,27 +169,27 @@
 
 /decl/material/silicon
 	name = "silicon"
-	description = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
+	lore_text = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
 	color = "#a8a8a8"
 	value = 0.5
 
 /decl/material/sodium
 	name = "sodium"
-	description = "A chemical element, readily reacts with water."
+	lore_text = "A chemical element, readily reacts with water."
 	taste_description = "salty metal"
 	color = "#808080"
 	value = 0.5
 
 /decl/material/sulfur
 	name = "sulfur"
-	description = "A chemical element with a pungent smell."
+	lore_text = "A chemical element with a pungent smell."
 	taste_description = "old eggs"
 	color = "#bf8c00"
 	value = 0.5
 
 /decl/material/tungsten
 	name = "tungsten"
-	description = "A chemical element, and a strong oxidising agent."
+	lore_text = "A chemical element, and a strong oxidising agent."
 	taste_mult = 0 //no taste
 	color = "#dcdcdc"
 	value = 0.5

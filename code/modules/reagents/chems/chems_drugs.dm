@@ -1,7 +1,7 @@
 
 /decl/material/amphetamines
 	name = "amphetamines"
-	description = "A powerful, long-lasting stimulant." 
+	lore_text = "A powerful, long-lasting stimulant." 
 	taste_description = "acid"
 	color = "#ff3300"
 	metabolism = REM * 0.15
@@ -16,7 +16,7 @@
 
 /decl/material/narcotics
 	name = "narcotics"
-	description = "A narcotic that impedes mental ability by slowing down the higher brain cell functions."
+	lore_text = "A narcotic that impedes mental ability by slowing down the higher brain cell functions."
 	taste_description = "numbness"
 	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
@@ -33,7 +33,7 @@
 
 /decl/material/nicotine
 	name = "nicotine"
-	description = "A sickly yellow liquid sourced from tobacco leaves. Stimulates and relaxes the mind and body."
+	lore_text = "A sickly yellow liquid sourced from tobacco leaves. Stimulates and relaxes the mind and body."
 	taste_description = "peppery bitterness"
 	color = "#efebaa"
 	metabolism = REM * 0.002
@@ -58,7 +58,7 @@
 
 /decl/material/sedatives
 	name = "sedatives"
-	description = "A mild sedative used to calm patients and induce sleep."
+	lore_text = "A mild sedative used to calm patients and induce sleep."
 	taste_description = "bitterness"
 	color = "#009ca8"
 	metabolism = REM * 0.5
@@ -86,7 +86,7 @@
 
 /decl/material/psychoactives
 	name = "psychoactives"
-	description = "An illegal chemical compound used as a psychoactive drug."
+	lore_text = "An illegal chemical compound used as a psychoactive drug."
 	taste_description = "bitterness"
 	taste_mult = 0.4
 	color = "#60a584"
@@ -105,7 +105,7 @@
 
 /decl/material/hallucinogenics
 	name = "hallucinogenics"
-	description = "A mix of powerful hallucinogens, they can cause fatal effects in users."
+	lore_text = "A mix of powerful hallucinogens, they can cause fatal effects in users."
 	taste_description = "sourness"
 	color = "#b31008"
 	metabolism = REM * 0.25
@@ -118,7 +118,7 @@
 
 /decl/material/psychotropics
 	name = "psychotropics"
-	description = "A strong psychotropic derived from certain species of mushroom."
+	lore_text = "A strong psychotropic derived from certain species of mushroom."
 	taste_description = "mushroom"
 	color = "#e700e7"
 	overdose = REAGENTS_OVERDOSE
@@ -153,7 +153,7 @@
 // Welcome back, Three Eye
 /decl/material/glowsap/gleam
 	name = "Gleam"
-	description = "A powerful hallucinogenic and psychotropic derived from various species of glowing mushroom. Some say it can have permanent effects on the brains of those who over-indulge."
+	lore_text = "A powerful hallucinogenic and psychotropic derived from various species of glowing mushroom. Some say it can have permanent effects on the brains of those who over-indulge."
 	color = "#ccccff"
 	metabolism = REM
 	overdose = 25

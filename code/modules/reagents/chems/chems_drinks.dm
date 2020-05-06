@@ -1,6 +1,6 @@
 /decl/material/drink
 	name = "drink"
-	description = "Uh, some kind of drink."
+	lore_text = "Uh, some kind of drink."
 	color = "#e78108"
 	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 	value = 1.2
@@ -35,7 +35,7 @@
 
 /decl/material/drink/juice/banana
 	name = "banana juice"
-	description = "The raw essence of a banana."
+	lore_text = "The raw essence of a banana."
 	taste_description = "banana"
 	color = "#c3af00"
 
@@ -44,7 +44,7 @@
 
 /decl/material/drink/juice/berry
 	name = "berry juice"
-	description = "A delicious blend of several different kinds of berries."
+	lore_text = "A delicious blend of several different kinds of berries."
 	taste_description = "berries"
 	color = "#990066"
 
@@ -53,7 +53,7 @@
 
 /decl/material/drink/juice/carrot
 	name = "carrot juice"
-	description = "It is just like a carrot but without crunching."
+	lore_text = "It is just like a carrot but without crunching."
 	taste_description = "carrots"
 	color = "#ff8c00" // rgb: 255, 140, 0
 
@@ -66,7 +66,7 @@
 
 /decl/material/drink/juice/grape
 	name = "grape juice"
-	description = "It's grrrrrape!"
+	lore_text = "It's grrrrrape!"
 	taste_description = "grapes"
 	color = "#863333"
 
@@ -75,7 +75,7 @@
 
 /decl/material/drink/juice/lemon
 	name = "lemon juice"
-	description = "This juice is VERY sour."
+	lore_text = "This juice is VERY sour."
 	taste_description = "sourness"
 	taste_mult = 1.1
 	color = "#afaf00"
@@ -85,7 +85,7 @@
 
 /decl/material/drink/juice/lime
 	name = "lime juice"
-	description = "The sweet-sour juice of limes."
+	lore_text = "The sweet-sour juice of limes."
 	taste_description = "unbearable sourness"
 	taste_mult = 1.1
 	color = "#365e30"
@@ -99,7 +99,7 @@
 
 /decl/material/drink/juice/orange
 	name = "orange juice"
-	description = "Both delicious AND rich in Vitamin C, what more do you need?"
+	lore_text = "Both delicious AND rich in Vitamin C, what more do you need?"
 	taste_description = "oranges"
 	color = "#e78108"
 
@@ -112,7 +112,7 @@
 
 /decl/material/toxin/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
 	name = "poison berry juice"
-	description = "A tasty juice blended from various kinds of very deadly and toxic berries."
+	lore_text = "A tasty juice blended from various kinds of very deadly and toxic berries."
 	taste_description = "berries"
 	color = "#863353"
 	strength = 5
@@ -122,7 +122,7 @@
 
 /decl/material/drink/juice/potato
 	name = "potato juice"
-	description = "Juice of the potato. Bleh."
+	lore_text = "Juice of the potato. Bleh."
 	taste_description = "sadness and potatoes"
 	nutrition = 2
 	color = "#302000"
@@ -132,7 +132,7 @@
 
 /decl/material/drink/juice/garlic
 	name = "garlic juice"
-	description = "Who would even drink this?"
+	lore_text = "Who would even drink this?"
 	taste_description = "bad breath"
 	nutrition = 1
 	color = "#eeddcc"
@@ -142,7 +142,7 @@
 
 /decl/material/drink/juice/onion
 	name = "onion juice"
-	description = "Juice from an onion, for when you need to cry."
+	lore_text = "Juice from an onion, for when you need to cry."
 	taste_description = "stinging tears"
 	nutrition = 1
 	color = "#ffeedd"
@@ -152,7 +152,7 @@
 
 /decl/material/drink/juice/tomato
 	name = "tomato juice"
-	description = "Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?"
+	lore_text = "Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?"
 	taste_description = "tomatoes"
 	color = "#731008"
 
@@ -165,7 +165,7 @@
 
 /decl/material/drink/juice/watermelon
 	name = "watermelon juice"
-	description = "Delicious juice made from watermelon."
+	lore_text = "Delicious juice made from watermelon."
 	taste_description = "sweet watermelon"
 	color = "#b83333"
 
@@ -174,7 +174,7 @@
 
 /decl/material/drink/juice/turnip
 	name = "turnip juice"
-	description = "Delicious (?) juice made from turnips."
+	lore_text = "Delicious (?) juice made from turnips."
 	taste_description = "turnip and uncertainty"
 	color = "#b1166e"
 
@@ -183,7 +183,7 @@
 
 /decl/material/drink/juice/apple
 	name = "apple juice"
-	description = "Delicious sweet juice made from apples."
+	lore_text = "Delicious sweet juice made from apples."
 	taste_description = "sweet apples"
 	color = "#c07c40"
 
@@ -192,7 +192,7 @@
 
 /decl/material/drink/juice/pear
 	name = "pear juice"
-	description = "Delicious sweet juice made from pears."
+	lore_text = "Delicious sweet juice made from pears."
 	taste_description = "sweet pears"
 	color = "#ffff66"
 
@@ -203,7 +203,7 @@
 
 /decl/material/drink/milk
 	name = "milk"
-	description = "An opaque white liquid produced by tiplods."
+	lore_text = "An opaque white liquid produced by tiplods."
 	taste_description = "milk"
 	color = "#dfdfdf"
 
@@ -212,7 +212,7 @@
 
 /decl/material/drink/milk/chocolate
 	name =  "chocolate milk"
-	description = "A mixture of perfectly healthy milk and delicious chocolate."
+	lore_text = "A mixture of perfectly healthy milk and delicious chocolate."
 	taste_description = "chocolate milk"
 	color = "#74533b"
 
@@ -226,7 +226,7 @@
 
 /decl/material/drink/milk/cream
 	name = "cream"
-	description = "The fatty, still liquid part of milk."
+	lore_text = "The fatty, still liquid part of milk."
 	taste_description = "creamy milk"
 	color = "#dfd7af"
 
@@ -235,7 +235,7 @@
 
 /decl/material/drink/milk/soymilk
 	name = "soy milk"
-	description = "An opaque white liquid made from soybeans."
+	lore_text = "An opaque white liquid made from soybeans."
 	taste_description = "soy milk"
 	color = "#dfdfc7"
 
@@ -244,7 +244,7 @@
 
 /decl/material/drink/coffee
 	name = "coffee"
-	description = "Coffee is a brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant."
+	lore_text = "Coffee is a brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant."
 	taste_description = "bitterness"
 	taste_mult = 1.3
 	color = "#482000"
@@ -277,7 +277,7 @@
 
 /decl/material/drink/coffee/icecoffee
 	name = "iced coffee"
-	description = "Coffee and ice, refreshing and cool."
+	lore_text = "Coffee and ice, refreshing and cool."
 	taste_description = "bitter coldness"
 	color = "#102838"
 	adj_temp = -5
@@ -288,7 +288,7 @@
 
 /decl/material/drink/coffee/soy_latte
 	name = "soy latte"
-	description = "A nice and tasty beverage while you are reading your nature books."
+	lore_text = "A nice and tasty beverage while you are reading your nature books."
 	taste_description = "bitter creamy coffee"
 	color = "#c65905"
 	adj_temp = 5
@@ -302,7 +302,7 @@
 
 /decl/material/drink/coffee/icecoffee/soy_latte
 	name = "iced soy latte"
-	description = "A nice and tasty beverage while you are reading your nature books. This one's cold."
+	lore_text = "A nice and tasty beverage while you are reading your nature books. This one's cold."
 	taste_description = "cold bitter creamy coffee"
 	color = "#c65905"
 
@@ -315,7 +315,7 @@
 
 /decl/material/drink/coffee/cafe_latte
 	name = "cafe latte"
-	description = "A nice, strong and tasty beverage while you are reading."
+	lore_text = "A nice, strong and tasty beverage while you are reading."
 	taste_description = "bitter creamy coffee"
 	color = "#c65905"
 	adj_temp = 5
@@ -329,7 +329,7 @@
 
 /decl/material/drink/coffee/icecoffee/cafe_latte
 	name = "iced cafe latte"
-	description = "A nice, strong and refreshing beverage while you are reading. This one's cold."
+	lore_text = "A nice, strong and refreshing beverage while you are reading. This one's cold."
 	taste_description = "cold bitter creamy coffee"
 	color = "#c65905"
 
@@ -342,7 +342,7 @@
 
 /decl/material/drink/coffee/cafe_latte/mocha
 	name = "mocha latte"
-	description = "Coffee and chocolate, smooth and creamy."
+	lore_text = "Coffee and chocolate, smooth and creamy."
 	taste_description = "bitter creamy chocolate"
 
 	glass_name = "mocha latte"
@@ -350,7 +350,7 @@
 
 /decl/material/drink/coffee/soy_latte/mocha
 	name = "mocha soy latte"
-	description = "Coffee, soy, and chocolate, smooth and creamy."
+	lore_text = "Coffee, soy, and chocolate, smooth and creamy."
 	taste_description = "bitter creamy chocolate"
 
 	glass_name = "mocha soy latte"
@@ -358,7 +358,7 @@
 
 /decl/material/drink/coffee/icecoffee/cafe_latte/mocha
 	name = "iced mocha latte"
-	description = "Coffee and chocolate, smooth and creamy. This one's cold."
+	lore_text = "Coffee and chocolate, smooth and creamy. This one's cold."
 	taste_description = "cold bitter creamy chocolate"
 
 	glass_name = "iced mocha latte"
@@ -366,7 +366,7 @@
 
 /decl/material/drink/coffee/icecoffee/soy_latte/mocha
 	name = "iced soy mocha latte"
-	description = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
+	lore_text = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
 	taste_description = "cold bitter creamy chocolate"
 
 	glass_name = "iced soy mocha latte"
@@ -374,7 +374,7 @@
 
 /decl/material/drink/coffee/cafe_latte/pumpkin
 	name = "pumpkin spice latte"
-	description = "Smells and tastes like Autumn."
+	lore_text = "Smells and tastes like Autumn."
 	taste_description = "bitter creamy pumpkin spice"
 
 	glass_name = "pumpkin spice latte"
@@ -382,7 +382,7 @@
 
 /decl/material/drink/coffee/soy_latte/pumpkin
 	name = "pumpkin spice soy latte"
-	description = "Smells and tastes like Autumn."
+	lore_text = "Smells and tastes like Autumn."
 	taste_description = "bitter creamy pumpkin spice"
 
 	glass_name = "pumpkin spice soy latte"
@@ -390,7 +390,7 @@
 
 /decl/material/drink/coffee/icecoffee/cafe_latte/pumpkin
 	name = "iced pumpkin spice latte"
-	description = "Smells and tastes like Autumn. This one's cold"
+	lore_text = "Smells and tastes like Autumn. This one's cold"
 	taste_description = "cold bitter creamy pumpkin spice"
 
 	glass_name = "iced pumpkin spice latte"
@@ -398,7 +398,7 @@
 
 /decl/material/drink/coffee/icecoffee/soy_latte/pumpkin
 	name = "iced pumpkin spice soy latte"
-	description = "Smells and tastes like Autumn. This one's cold"
+	lore_text = "Smells and tastes like Autumn. This one's cold"
 	taste_description = "cold bitter creamy pumpkin spice"
 
 	glass_name = "iced pumpkin spice soy latte"
@@ -406,7 +406,7 @@
 
 /decl/material/drink/hot_coco
 	name = "hot chocolate"
-	description = "Made with love! And cocoa beans."
+	lore_text = "Made with love! And cocoa beans."
 	taste_description = "creamy chocolate"
 	color = "#403010"
 	nutrition = 2
@@ -417,7 +417,7 @@
 
 /decl/material/drink/sodawater
 	name = "soda water"
-	description = "Carbonated water, the most boring carbonated drink known to science."
+	lore_text = "Carbonated water, the most boring carbonated drink known to science."
 	taste_description = "bubbles"
 	color = "#619494"
 	adj_dizzy = -5
@@ -430,7 +430,7 @@
 
 /decl/material/drink/grapesoda
 	name = "grape soda"
-	description = "Grapes made into a fine drank."
+	lore_text = "Grapes made into a fine drank."
 	taste_description = "grape soda"
 	color = "#421c52"
 	adj_drowsy = -3
@@ -441,7 +441,7 @@
 
 /decl/material/drink/tonic
 	name = "tonic water"
-	description = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
+	lore_text = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
 	taste_description = "tart and fresh"
 	color = "#619494"
 	adj_dizzy = -5
@@ -454,7 +454,7 @@
 
 /decl/material/drink/lemonade
 	name = "lemonade"
-	description = "Oh the nostalgia..."
+	lore_text = "Oh the nostalgia..."
 	taste_description = "tartness"
 	color = "#ffff00"
 	adj_temp = -5
@@ -465,7 +465,7 @@
 
 /decl/material/drink/citrusseltzer
 	name = "citrus seltzer"
-	description = "A tasty blend of fizz and citrus."
+	lore_text = "A tasty blend of fizz and citrus."
 	taste_description = "tart and tasty"
 	color = "#cccc99"
 	adj_temp = -5
@@ -476,7 +476,7 @@
 
 /decl/material/drink/orangecola
 	name = "orange cola"
-	description = "A traditional cola experience with a refreshing spritz of orange citrus flavour."
+	lore_text = "A traditional cola experience with a refreshing spritz of orange citrus flavour."
 	taste_description = "orange and cola"
 	color = "#9f3400"
 	adj_temp = -2
@@ -486,7 +486,7 @@
 
 /decl/material/drink/milkshake
 	name = "milkshake"
-	description = "Glorious brainfreezing mixture."
+	lore_text = "Glorious brainfreezing mixture."
 	taste_description = "creamy vanilla"
 	color = "#aee5e4"
 	adj_temp = -9
@@ -496,7 +496,7 @@
 
 /decl/material/drink/rewriter
 	name = "Rewriter"
-	description = "The secret of the sanctuary of the Libarian..."
+	lore_text = "The secret of the sanctuary of the Libarian..."
 	taste_description = "a bad night out"
 	color = "#485000"
 	adj_temp = -5
@@ -510,7 +510,7 @@
 
 /decl/material/drink/mutagencola
 	name = "mutagen cola"
-	description = "The energy of a radioactive isotope in beverage form."
+	lore_text = "The energy of a radioactive isotope in beverage form."
 	taste_description = "cancer"
 	color = "#100800"
 	adj_temp = -5
@@ -530,7 +530,7 @@
 
 /decl/material/drink/grenadine
 	name = "grenadine syrup"
-	description = "Made in the modern day with proper pomegranate substitute. Who uses real fruit, anyways?"
+	lore_text = "Made in the modern day with proper pomegranate substitute. Who uses real fruit, anyways?"
 	taste_description = "100% pure pomegranate"
 	color = "#ff004f"
 
@@ -539,7 +539,7 @@
 
 /decl/material/drink/cola
 	name = "cola"
-	description = "A refreshing beverage."
+	lore_text = "A refreshing beverage."
 	taste_description = "cola"
 	color = "#100800"
 	adj_drowsy = -3
@@ -551,7 +551,7 @@
 
 /decl/material/drink/citrussoda
 	name = "citrus soda"
-	description = "Fizzy and tangy."
+	lore_text = "Fizzy and tangy."
 	taste_description = "sweet citrus soda"
 	color = "#102000"
 	adj_drowsy = -7
@@ -564,7 +564,7 @@
 
 /decl/material/drink/cherrycola
 	name = "cherry soda"
-	description = "A delicious blend of 42 different flavours"
+	lore_text = "A delicious blend of 42 different flavours"
 	taste_description = "cherry soda"
 	color = "#102000"
 	adj_drowsy = -6
@@ -575,7 +575,7 @@
 
 /decl/material/drink/lemonade
 	name = "lemonade"
-	description = "Tastes like a hull breach in your mouth."
+	lore_text = "Tastes like a hull breach in your mouth."
 	taste_description = "a hull breach"
 	color = "#202800"
 	adj_temp = -8
@@ -586,7 +586,7 @@
 
 /decl/material/drink/lemon_lime
 	name = "lemon-lime soda"
-	description = "A tangy substance made of 0.5% natural citrus!"
+	lore_text = "A tangy substance made of 0.5% natural citrus!"
 	taste_description = "tangy lime and lemon soda"
 	color = "#878f00"
 	adj_temp = -8
@@ -597,7 +597,7 @@
 
 /decl/material/drink/doctor_delight
 	name = "The Doctor's Delight"
-	description = "Tasty drink that keeps you healthy and doctors bored.  Just the way they like it."
+	lore_text = "Tasty drink that keeps you healthy and doctors bored.  Just the way they like it."
 	taste_description = "homely fruit"
 	color = "#ff8cff"
 	nutrition = 1
@@ -617,14 +617,14 @@
 
 /decl/material/drink/dry_ramen
 	name = "dry ramen"
-	description = "Space age food, since August 25, 1958. Contains dried noodles, vegetables, and chemicals that boil in contact with water."
+	lore_text = "Space age food, since August 25, 1958. Contains dried noodles, vegetables, and chemicals that boil in contact with water."
 	taste_description = "dry and cheap noodles"
 	nutrition = 1
 	color = "#302000"
 
 /decl/material/drink/hot_ramen
 	name = "hot ramen"
-	description = "The noodles are boiled, the flavors are artificial, just like being back in school."
+	lore_text = "The noodles are boiled, the flavors are artificial, just like being back in school."
 	taste_description = "wet and cheap noodles"
 	color = "#302000"
 	nutrition = 5
@@ -632,7 +632,7 @@
 
 /decl/material/drink/hell_ramen
 	name = "hell ramen"
-	description = "The noodles are boiled, the flavors are artificial, just like being back in school."
+	lore_text = "The noodles are boiled, the flavors are artificial, just like being back in school."
 	taste_description = "wet and cheap noodles on fire"
 	color = "#302000"
 	nutrition = 5
@@ -643,7 +643,7 @@
 
 /decl/material/drink/nothing
 	name = "nothing"
-	description = "Absolutely nothing."
+	lore_text = "Absolutely nothing."
 	taste_description = "nothing"
 
 	glass_name = "nothing"
@@ -651,7 +651,7 @@
 
 /decl/material/drink/tea
 	name = "black tea"
-	description = "Tasty black tea, it has antioxidants, it's good for you!"
+	lore_text = "Tasty black tea, it has antioxidants, it's good for you!"
 	taste_description = "tart black tea"
 	color = "#101000"
 	adj_dizzy = -2
@@ -668,7 +668,7 @@
 
 /decl/material/drink/tea/icetea
 	name = "iced black tea"
-	description = "It's the black tea you know and love, but now it's cold."
+	lore_text = "It's the black tea you know and love, but now it's cold."
 	taste_description = "cold black tea"
 	adj_temp = -5
 
@@ -678,7 +678,7 @@
 
 /decl/material/drink/tea/icetea/sweet
 	name = "sweet black tea"
-	description = "It's the black tea you know and love, but now it's cold. And sweet."
+	lore_text = "It's the black tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet tea"
 
 	glass_name = "sweet black tea"
@@ -686,7 +686,7 @@
 
 /decl/material/drink/tea/barongrey
 	name = "Baron Grey tea"
-	description = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
+	lore_text = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
 	taste_description = "tangy black tea"
 
 	glass_name = "Baron Grey tea"
@@ -694,7 +694,7 @@
 
 /decl/material/drink/tea/barongrey/latte
 	name = "London Fog"
-	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
+	lore_text = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
 	taste_description = "creamy, tangy black tea"
 
 	glass_name = "London Fog"
@@ -702,7 +702,7 @@
 
 /decl/material/drink/tea/barongrey/soy_latte
 	name = "soy London Fog"
-	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte."
+	lore_text = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte."
 	taste_description = "creamy, tangy black tea"
 
 	glass_name = "Soy London Fog"
@@ -710,7 +710,7 @@
 
 /decl/material/drink/tea/icetea/barongrey/latte
 	name = "iced London Fog"
-	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
+	lore_text = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
 	taste_description = "cold, creamy, tangy black tea"
 
 	glass_name = "iced london fog"
@@ -718,7 +718,7 @@
 
 /decl/material/drink/tea/icetea/barongrey/soy_latte
 	name = "iced soy London Fog"
-	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte. This one's cold."
+	lore_text = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte. This one's cold."
 	taste_description = "cold, creamy, tangy black tea"
 
 	glass_name = "iced soy london fog"
@@ -727,7 +727,7 @@
 //green tea
 /decl/material/drink/tea/green
 	name = "green tea"
-	description = "Subtle green tea, it has antioxidants, it's good for you!"
+	lore_text = "Subtle green tea, it has antioxidants, it's good for you!"
 	taste_description = "subtle green tea"
 	color = "#b4cd94"
 
@@ -736,7 +736,7 @@
 
 /decl/material/drink/tea/icetea/green
 	name = "iced green tea"
-	description = "It's the green tea you know and love, but now it's cold."
+	lore_text = "It's the green tea you know and love, but now it's cold."
 	taste_description = "cold green tea"
 	color = "#b4cd94"
 
@@ -745,7 +745,7 @@
 
 /decl/material/drink/tea/icetea/green/sweet
 	name = "sweet green tea"
-	description = "It's the green tea you know and love, but now it's cold. And sweet."
+	lore_text = "It's the green tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet green tea"
 	color = "#b4cd94"
 
@@ -754,7 +754,7 @@
 
 /decl/material/drink/tea/icetea/green/sweet/mint
 	name = "mint tea"
-	description = "Iced green tea prepared with mint and sugar. Refreshing!"
+	lore_text = "Iced green tea prepared with mint and sugar. Refreshing!"
 	taste_description = "refreshing mint tea"
 
 	glass_name = "mint tea"
@@ -762,7 +762,7 @@
 
 /decl/material/drink/tea/chai
 	name = "chai"
-	description = "A spiced, dark tea. Goes great with milk."
+	lore_text = "A spiced, dark tea. Goes great with milk."
 	taste_description = "spiced black tea"
 	color = "#151000"
 
@@ -771,7 +771,7 @@
 
 /decl/material/drink/tea/icetea/chai
 	name = "iced chai"
-	description = "It's the chai tea you know and love, but now it's cold."
+	lore_text = "It's the chai tea you know and love, but now it's cold."
 	taste_description = "cold spiced black tea"
 	color = "#151000"
 
@@ -780,7 +780,7 @@
 
 /decl/material/drink/tea/icetea/chai/sweet
 	name = "sweet chai"
-	description = "It's the chai tea you know and love, but now it's cold. And sweet."
+	lore_text = "It's the chai tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet spiced black tea"
 
 	glass_name = "sweet chai"
@@ -788,7 +788,7 @@
 
 /decl/material/drink/tea/chai/latte
 	name = "chai latte"
-	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
+	lore_text = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
 	taste_description = "creamy spiced tea"
 	color = "#c8a988"
 
@@ -797,7 +797,7 @@
 
 /decl/material/drink/tea/chai/soy_latte
 	name = "soy chai latte"
-	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
+	lore_text = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
 	taste_description = "creamy spiced tea"
 	color = "#c8a988"
 
@@ -806,7 +806,7 @@
 
 /decl/material/drink/tea/icetea/chai/latte
 	name = "iced chai latte"
-	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
+	lore_text = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
 	taste_description = "cold creamy spiced tea"
 	color = "#c8a988"
 
@@ -815,7 +815,7 @@
 
 /decl/material/drink/tea/icetea/chai/soy_latte
 	name = "iced soy chai latte"
-	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk. This one's cold."
+	lore_text = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk. This one's cold."
 	taste_description = "cold creamy spiced tea"
 	color = "#c8a988"
 
@@ -824,7 +824,7 @@
 
 /decl/material/drink/tea/red
 	name = "redbush tea"
-	description = "A caffeine-free dark red tea, flavorful and full of antioxidants."
+	lore_text = "A caffeine-free dark red tea, flavorful and full of antioxidants."
 	taste_description = "nutty red tea"
 	color = "#ab4c3a"
 
@@ -833,7 +833,7 @@
 
 /decl/material/drink/tea/icetea/red
 	name = "iced redbush tea"
-	description = "It's the red tea you know and love, but now it's cold."
+	lore_text = "It's the red tea you know and love, but now it's cold."
 	taste_description = "cold nutty red tea"
 	color = "#ab4c3a"
 
@@ -842,7 +842,7 @@
 
 /decl/material/drink/tea/icetea/red/sweet
 	name = "sweet redbush tea"
-	description = "It's the red tea you know and love, but now it's cold. And sweet."
+	lore_text = "It's the red tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet nutty red tea"
 
 	glass_name = "sweet redbush tea"
@@ -850,7 +850,7 @@
 
 /decl/material/drink/syrup_chocolate
 	name = "chocolate syrup"
-	description = "Thick chocolate syrup used to flavor drinks."
+	lore_text = "Thick chocolate syrup used to flavor drinks."
 	taste_description = "chocolate"
 	color = "#542a0c"
 
@@ -859,7 +859,7 @@
 
 /decl/material/drink/syrup_caramel
 	name = "caramel syrup"
-	description = "Thick caramel syrup used to flavor drinks."
+	lore_text = "Thick caramel syrup used to flavor drinks."
 	taste_description = "caramel"
 	color = "#85461e"
 
@@ -868,7 +868,7 @@
 
 /decl/material/drink/syrup_vanilla
 	name = "vanilla syrup"
-	description = "Thick vanilla syrup used to flavor drinks."
+	lore_text = "Thick vanilla syrup used to flavor drinks."
 	taste_description = "vanilla"
 	color = "#f3e5ab"
 
@@ -877,7 +877,7 @@
 
 /decl/material/drink/syrup_pumpkin
 	name = "pumpkin spice syrup"
-	description = "Thick spiced pumpkin syrup used to flavor drinks."
+	lore_text = "Thick spiced pumpkin syrup used to flavor drinks."
 	taste_description = "spiced pumpkin"
 	color = "#d88b4c"
 
@@ -887,7 +887,7 @@
 // Non-Alcoholic Drinks
 /decl/material/drink/fools_gold
 	name = "Fool's Gold"
-	description = "A non-alcoholic beverage typically served as an alternative to whiskey."
+	lore_text = "A non-alcoholic beverage typically served as an alternative to whiskey."
 	taste_description = "watered down whiskey"
 	color = "#e78108"
 	glass_name = "fools gold"
@@ -895,7 +895,7 @@
 
 /decl/material/drink/snowball
 	name = "Snowball"
-	description = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
+	lore_text = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
 	taste_description = "intellectual thought and brain-freeze"
 	color = "#eeecea"
 	adj_temp = -5
@@ -904,7 +904,7 @@
 
 /decl/material/drink/browndwarf
 	name = "Brown Dwarf"
-	description = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
+	lore_text = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
 	taste_description = "dark chocolatey matter"
 	color = "#44371f"
 	glass_name = "brown dwarf"
@@ -912,7 +912,7 @@
 
 /decl/material/drink/gingerbeer
 	name = "ginger beer"
-	description = "A hearty, non-alcoholic beverage brewed from ginger."
+	lore_text = "A hearty, non-alcoholic beverage brewed from ginger."
 	taste_description = "carbonated ginger"
 	color = "#44371f"
 	glass_name = "ginger beer"
@@ -920,7 +920,7 @@
 
 /decl/material/drink/beastenergy
 	name = "Beast Energy"
-	description = "A bottle of 100% pure energy."
+	lore_text = "A bottle of 100% pure energy."
 	taste_description = "your heart crying"
 	color = "#d69115"
 	glass_name = "beast energy"
@@ -934,7 +934,7 @@
 
 /decl/material/drink/kefir
 	name = "kefir"
-	description = "Fermented milk. Actually very tasty."
+	lore_text = "Fermented milk. Actually very tasty."
 	taste_description = "sharp, frothy yougurt"
 	color = "#ece4e3"
 	glass_name = "Kefir"

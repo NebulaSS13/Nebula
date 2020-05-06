@@ -1,7 +1,7 @@
 
 /decl/material/cleaner
 	name = "spray cleaner"
-	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
+	lore_text = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
 	taste_description = "sourness"
 	color = "#a5f0ee"
 	touch_met = 50

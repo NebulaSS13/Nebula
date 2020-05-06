@@ -1,6 +1,6 @@
 /decl/material/pigment
 	name = "pigment"
-	description = "Intensely coloured powder."
+	lore_text = "Intensely coloured powder."
 	taste_description = "the back of class"
 	color = "#888888"
 	overdose = 5
@@ -52,7 +52,7 @@
 
 /decl/material/paint
 	name = "paint"
-	description = "This paint will stick to almost any object."
+	lore_text = "This paint will stick to almost any object."
 	taste_description = "chalk"
 	color = "#808080"
 	overdose = REAGENTS_OVERDOSE * 0.5

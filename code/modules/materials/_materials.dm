@@ -70,7 +70,7 @@
 	var/is_fusion_fuel
 	var/list/chem_products				  //Used with the grinder to produce chemicals.
 	var/hidden_from_codex
-	var/lore_text
+	var/lore_text = "A nondescript material."
 	var/mechanics_text
 	var/antag_text
 
@@ -160,7 +160,6 @@
 	var/gas_tile_overlay =       "generic"
 	var/gas_condensation_point = INFINITY
 
-	var/description = "A non-descript chemical."
 	var/taste_description = "old rotten bandaids"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
 	var/metabolism = REM // This would be 0.2 normally

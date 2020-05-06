@@ -1,6 +1,6 @@
 /decl/material/carbon_monoxide
 	name = "carbon monoxide"
-	description = "A dangerous carbon comubstion byproduct."
+	lore_text = "A dangerous carbon comubstion byproduct."
 	taste_description = "stale air"
 	color = COLOR_GRAY80
 	metabolism = 0.05 // As with helium.
@@ -33,7 +33,7 @@
 
 /decl/material/paralytics
 	name = "paralytics"
-	description = "A powerful paralytic agent."
+	lore_text = "A powerful paralytic agent."
 	taste_description = "metallic"
 	color = "#ff337d"
 	metabolism = REM * 0.5
@@ -59,7 +59,7 @@
 
 /decl/material/presyncopics
 	name = "presyncopics"
-	description = "A compound that causess presyncopic effects in the taker, including confusion and dizzyness."
+	lore_text = "A compound that causess presyncopic effects in the taker, including confusion and dizzyness."
 	taste_description = "sourness"
 	color = "#000055"
 	metabolism = REM * 0.5

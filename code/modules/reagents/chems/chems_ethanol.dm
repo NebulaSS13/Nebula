@@ -1,6 +1,6 @@
 /decl/material/ethanol
 	name = "ethanol" //Parent class for all alcoholic reagents.
-	description = "A well-known alcohol with a variety of applications."
+	lore_text = "A well-known alcohol with a variety of applications."
 	taste_description = "pure alcohol"
 	color = "#404030"
 	touch_met = 5
@@ -79,7 +79,7 @@
 
 /decl/material/ethanol/absinthe
 	name = "absinthe"
-	description = "Watch out that the Green Fairy doesn't come for you!"
+	lore_text = "Watch out that the Green Fairy doesn't come for you!"
 	taste_description = "death and licorice"
 	taste_mult = 1.5
 	color = "#33ee00"
@@ -90,7 +90,7 @@
 
 /decl/material/ethanol/ale
 	name = "ale"
-	description = "A dark alchoholic beverage made by malted barley and yeast."
+	lore_text = "A dark alchoholic beverage made by malted barley and yeast."
 	taste_description = "hearty barley ale"
 	color = "#4c3100"
 	strength = 50
@@ -100,7 +100,7 @@
 
 /decl/material/ethanol/beer
 	name = "beer"
-	description = "An alcoholic beverage made from malted grains, hops, yeast, and water."
+	lore_text = "An alcoholic beverage made from malted grains, hops, yeast, and water."
 	taste_description = "piss water"
 	color = "#ffd300"
 	strength = 50
@@ -118,7 +118,7 @@
 
 /decl/material/ethanol/bluecuracao
 	name = "blue Curacao"
-	description = "Exotically blue, fruity drink, distilled from oranges."
+	lore_text = "Exotically blue, fruity drink, distilled from oranges."
 	taste_description = "oranges"
 	taste_mult = 1.1
 	color = "#0000cd"
@@ -129,7 +129,7 @@
 
 /decl/material/ethanol/cognac
 	name = "cognac"
-	description = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
+	lore_text = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
 	taste_description = "rich and smooth alcohol"
 	taste_mult = 1.1
 	color = "#ab3c05"
@@ -140,7 +140,7 @@
 
 /decl/material/ethanol/gin
 	name = "gin"
-	description = "It's gin. In space. I say, good sir."
+	lore_text = "It's gin. In space. I say, good sir."
 	taste_description = "an alcoholic christmas tree"
 	color = "#0064c6"
 	strength = 15
@@ -165,7 +165,7 @@
 
 /decl/material/ethanol/coffee/kahlua
 	name = "coffee liqueur"
-	description = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
+	lore_text = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
 	taste_description = "spiked latte"
 	taste_mult = 1.1
 	color = "#4c3100"
@@ -176,7 +176,7 @@
 
 /decl/material/ethanol/melonliquor
 	name = "melon liqueur"
-	description = "A relatively sweet and fruity 46 proof liqueur."
+	lore_text = "A relatively sweet and fruity 46 proof liqueur."
 	taste_description = "fruity alcohol"
 	color = "#138808" // rgb: 19, 136, 8
 	strength = 50
@@ -186,7 +186,7 @@
 
 /decl/material/ethanol/rum
 	name = "rum"
-	description = "Yohoho and all that."
+	lore_text = "Yohoho and all that."
 	taste_description = "spiked butterscotch"
 	taste_mult = 1.1
 	color = "#ecb633"
@@ -197,7 +197,7 @@
 
 /decl/material/ethanol/sake
 	name = "sake"
-	description = "Anime's favorite drink."
+	lore_text = "Anime's favorite drink."
 	taste_description = "dry alcohol"
 	color = "#dddddd"
 	strength = 25
@@ -207,7 +207,7 @@
 
 /decl/material/ethanol/tequilla
 	name = "tequila"
-	description = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty hombre?"
+	lore_text = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty hombre?"
 	taste_description = "paint stripper"
 	color = "#ffff91"
 	strength = 25
@@ -217,7 +217,7 @@
 
 /decl/material/ethanol/thirteenloko
 	name = "Thirteen Loko"
-	description = "A potent mixture of caffeine and alcohol."
+	lore_text = "A potent mixture of caffeine and alcohol."
 	taste_description = "jitters and death"
 	color = "#102000"
 	strength = 25
@@ -236,7 +236,7 @@
 
 /decl/material/ethanol/vermouth
 	name = "vermouth"
-	description = "You suddenly feel a craving for a martini..."
+	lore_text = "You suddenly feel a craving for a martini..."
 	taste_description = "dry alcohol"
 	taste_mult = 1.3
 	color = "#91ff91" // rgb: 145, 255, 145
@@ -247,7 +247,7 @@
 
 /decl/material/ethanol/vodka
 	name = "vodka"
-	description = "Number one drink AND fueling choice for Independents around the galaxy."
+	lore_text = "Number one drink AND fueling choice for Independents around the galaxy."
 	taste_description = "grain alcohol"
 	color = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
@@ -257,14 +257,14 @@
 
 /decl/material/ethanol/vodka/premium
 	name = "premium vodka"
-	description = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
+	lore_text = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	taste_description = "clear kvass"
 	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
 	strength = 10
 
 /decl/material/ethanol/whiskey
 	name = "whiskey"
-	description = "A superb and well-aged single-malt whiskey. Damn."
+	lore_text = "A superb and well-aged single-malt whiskey. Damn."
 	taste_description = "molasses"
 	color = "#4c3100"
 	strength = 25
@@ -274,7 +274,7 @@
 
 /decl/material/ethanol/wine
 	name = "wine"
-	description = "An premium alchoholic beverage made from distilled grape juice."
+	lore_text = "An premium alchoholic beverage made from distilled grape juice."
 	taste_description = "bitter sweetness"
 	color = "#7e4043" // rgb: 126, 64, 67
 	strength = 15
@@ -284,14 +284,14 @@
 
 /decl/material/ethanol/wine/premium
 	name = "white wine"
-	description = "An exceptionally expensive alchoholic beverage made from distilled white grapes."
+	lore_text = "An exceptionally expensive alchoholic beverage made from distilled white grapes."
 	taste_description = "white velvet"
 	color = "#ffddaa" // rgb: 255, 221, 170 - a light cream
 	strength = 20
 
 /decl/material/ethanol/herbal
 	name = "herbal liquor"
-	description = "A complex blend of herbs, spices and roots mingle in this old Earth classic."
+	lore_text = "A complex blend of herbs, spices and roots mingle in this old Earth classic."
 	taste_description = "a sweet summer garden"
 	color = "#dfff00"
 	strength = 13
@@ -302,7 +302,7 @@
 // Cocktails
 /decl/material/ethanol/acid_spit
 	name = "Acid Spit"
-	description = "A drink for the daring, can be deadly if incorrectly prepared!"
+	lore_text = "A drink for the daring, can be deadly if incorrectly prepared!"
 	taste_description = "stomach acid"
 	color = "#365000"
 	strength = 30
@@ -312,7 +312,7 @@
 
 /decl/material/ethanol/alliescocktail
 	name = "Allies cocktail"
-	description = "A drink made from your allies, not as sweet as when made from your enemies."
+	lore_text = "A drink made from your allies, not as sweet as when made from your enemies."
 	taste_description = "bitter yet free"
 	color = "#d8ac45"
 	strength = 25
@@ -322,7 +322,7 @@
 
 /decl/material/ethanol/aloe
 	name = "Aloe"
-	description = "So very, very, very good."
+	lore_text = "So very, very, very good."
 	taste_description = "sweet 'n creamy"
 	color = "#b7ea75"
 	strength = 15
@@ -332,7 +332,7 @@
 
 /decl/material/ethanol/amasec
 	name = "Amasec"
-	description = "Official drink of the Gun Club!"
+	lore_text = "Official drink of the Gun Club!"
 	taste_description = "dark and metallic"
 	color = "#ff975d"
 	strength = 25
@@ -342,7 +342,7 @@
 
 /decl/material/ethanol/andalusia
 	name = "Andalusia"
-	description = "A nice, strangely named drink."
+	lore_text = "A nice, strangely named drink."
 	taste_description = "lemons"
 	color = "#f4ea4a"
 	strength = 15
@@ -352,7 +352,7 @@
 
 /decl/material/ethanol/antifreeze
 	name = "Anti-freeze"
-	description = "Ultimate refreshment."
+	lore_text = "Ultimate refreshment."
 	taste_description = "Jack Frost's piss"
 	color = "#56deea"
 	strength = 12
@@ -364,7 +364,7 @@
 
 /decl/material/ethanol/atomicbomb
 	name = "Atomic Bomb"
-	description = "Nuclear proliferation never tasted so good."
+	lore_text = "Nuclear proliferation never tasted so good."
 	taste_description = "da bomb"
 	color = "#666300"
 	strength = 10
@@ -375,7 +375,7 @@
 
 /decl/material/ethanol/coffee/b52
 	name = "B-52"
-	description = "Coffee, Irish Cream, and cognac. You will get bombed."
+	lore_text = "Coffee, Irish Cream, and cognac. You will get bombed."
 	taste_description = "angry and irish"
 	taste_mult = 1.3
 	color = "#997650"
@@ -386,7 +386,7 @@
 
 /decl/material/ethanol/bahama_mama
 	name = "Bahama Mama"
-	description = "Tropical cocktail."
+	lore_text = "Tropical cocktail."
 	taste_description = "lime and orange"
 	color = "#ff7f3b"
 	strength = 25
@@ -396,7 +396,7 @@
 
 /decl/material/ethanol/bananahonk
 	name = "Banana Mama"
-	description = "A drink from Clown Heaven."
+	lore_text = "A drink from Clown Heaven."
 	taste_description = "a bad joke"
 	nutriment_factor = 1
 	color = "#ffff91"
@@ -407,7 +407,7 @@
 
 /decl/material/ethanol/barefoot
 	name = "Barefoot"
-	description = "Barefoot and pregnant"
+	lore_text = "Barefoot and pregnant"
 	taste_description = "creamy berries"
 	color = "#ffcdea"
 	strength = 30
@@ -417,7 +417,7 @@
 
 /decl/material/ethanol/beepsky_smash
 	name = "Beepsky Smash"
-	description = "Deny drinking this and prepare for THE LAW."
+	lore_text = "Deny drinking this and prepare for THE LAW."
 	taste_description = "JUSTICE"
 	taste_mult = 2
 	color = "#404040"
@@ -432,7 +432,7 @@
 
 /decl/material/ethanol/bilk
 	name = "bilk"
-	description = "This appears to be beer mixed with milk. Disgusting."
+	lore_text = "This appears to be beer mixed with milk. Disgusting."
 	taste_description = "desperation and lactate"
 	color = "#895c4c"
 	strength = 50
@@ -443,7 +443,7 @@
 
 /decl/material/ethanol/black_russian
 	name = "Black Russian"
-	description = "For the lactose-intolerant. Still as classy as a White Russian."
+	lore_text = "For the lactose-intolerant. Still as classy as a White Russian."
 	taste_description = "bitterness"
 	color = "#360000"
 	strength = 15
@@ -453,7 +453,7 @@
 
 /decl/material/ethanol/bloody_mary
 	name = "Bloody Mary"
-	description = "A strange yet pleasurable mixture made of vodka, tomato and lime juice. Or at least you THINK the red stuff is tomato juice."
+	lore_text = "A strange yet pleasurable mixture made of vodka, tomato and lime juice. Or at least you THINK the red stuff is tomato juice."
 	taste_description = "tomatoes with a hint of lime"
 	color = "#b40000"
 	strength = 15
@@ -463,7 +463,7 @@
 
 /decl/material/ethanol/booger
 	name = "Booger"
-	description = "Ewww..."
+	lore_text = "Ewww..."
 	taste_description = "sweet 'n creamy"
 	color = "#8cff8c"
 	strength = 30
@@ -473,7 +473,7 @@
 
 /decl/material/ethanol/coffee/brave_bull
 	name = "Brave Bull"
-	description = "It's just as effective as Dutch-Courage!"
+	lore_text = "It's just as effective as Dutch-Courage!"
 	taste_description = "alcoholic bravery"
 	taste_mult = 1.1
 	color = "#4c3100"
@@ -484,7 +484,7 @@
 
 /decl/material/ethanol/changelingsting
 	name = "Changeling Sting"
-	description = "You take a tiny sip and feel a burning sensation..."
+	lore_text = "You take a tiny sip and feel a burning sensation..."
 	taste_description = "your brain coming out your nose"
 	color = "#2e6671"
 	strength = 10
@@ -494,7 +494,7 @@
 
 /decl/material/ethanol/martini
 	name = "classic martini"
-	description = "Vermouth with Gin. Not quite how 007 enjoyed it, but still delicious."
+	lore_text = "Vermouth with Gin. Not quite how 007 enjoyed it, but still delicious."
 	taste_description = "dry class"
 	color = "#0064c8"
 	strength = 25
@@ -504,7 +504,7 @@
 
 /decl/material/ethanol/cuba_libre
 	name = "Cuba Libre"
-	description = "Rum, mixed with cola. Viva la revolucion."
+	lore_text = "Rum, mixed with cola. Viva la revolucion."
 	taste_description = "cola"
 	color = "#3e1b00"
 	strength = 30
@@ -514,7 +514,7 @@
 
 /decl/material/ethanol/demonsblood
 	name = "Demons Blood"
-	description = "AHHHH!!!!"
+	lore_text = "AHHHH!!!!"
 	taste_description = "sweet tasting iron"
 	taste_mult = 1.5
 	color = "#820000"
@@ -525,7 +525,7 @@
 
 /decl/material/ethanol/devilskiss
 	name = "Devils Kiss"
-	description = "Creepy time!"
+	lore_text = "Creepy time!"
 	taste_description = "bitter iron"
 	color = "#a68310"
 	strength = 15
@@ -535,7 +535,7 @@
 
 /decl/material/ethanol/driestmartini
 	name = "driest martini"
-	description = "Only for the experienced. You think you see sand floating in the glass."
+	lore_text = "Only for the experienced. You think you see sand floating in the glass."
 	taste_description = "a beach"
 	nutriment_factor = 1
 	color = "#2e6671"
@@ -546,7 +546,7 @@
 
 /decl/material/ethanol/ginfizz
 	name = "gin fizz"
-	description = "Refreshingly lemony, deliciously dry."
+	lore_text = "Refreshingly lemony, deliciously dry."
 	taste_description = "dry, tart lemons"
 	color = "#ffffae"
 	strength = 30
@@ -556,7 +556,7 @@
 
 /decl/material/ethanol/grog
 	name = "grog"
-	description = "Watered-down rum, pirate approved!"
+	lore_text = "Watered-down rum, pirate approved!"
 	taste_description = "a poor excuse for alcohol"
 	color = "#ffbb00"
 	strength = 100
@@ -566,7 +566,7 @@
 
 /decl/material/ethanol/erikasurprise
 	name = "Erika Surprise"
-	description = "The surprise is, it's green!"
+	lore_text = "The surprise is, it's green!"
 	taste_description = "tartness and bananas"
 	color = "#2e6671"
 	strength = 15
@@ -576,7 +576,7 @@
 
 /decl/material/ethanol/livergeist
 	name = "The Livergeist"
-	description = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
+	lore_text = "Looking at this beverage, you can faintly hear your liver swear it'll come back to haunt you."
 	taste_description = "your liver being ripped out of your body, but in the best, most delicious meaning of those words."
 	taste_mult = 5
 	color = "#7f00ff"
@@ -586,7 +586,7 @@
 
 /decl/material/ethanol/gintonic
 	name = "gin and tonic"
-	description = "An all time classic, mild cocktail."
+	lore_text = "An all time classic, mild cocktail."
 	taste_description = "mild tartness" //???
 	color = "#0064c8"
 	strength = 50
@@ -596,7 +596,7 @@
 
 /decl/material/ethanol/goldschlager
 	name = "cinnamon schnapps"
-	description = "100 proof cinnamon schnapps, made for alcoholic teen girls on spring break."
+	lore_text = "100 proof cinnamon schnapps, made for alcoholic teen girls on spring break."
 	taste_description = "burning cinnamon"
 	taste_mult = 1.3
 	color = "#f4e46d"
@@ -607,7 +607,7 @@
 
 /decl/material/ethanol/hippies_delight
 	name = "Hippies' Delight"
-	description = "You just don't get it maaaan."
+	lore_text = "You just don't get it maaaan."
 	taste_description = "giving peace a chance"
 	color = "#ff88ff"
 	strength = 15
@@ -618,7 +618,7 @@
 
 /decl/material/ethanol/hooch
 	name = "hooch"
-	description = "Either someone's failure at cocktail making or attempt in alchohol production. In any case, do you really want to drink that?"
+	lore_text = "Either someone's failure at cocktail making or attempt in alchohol production. In any case, do you really want to drink that?"
 	taste_description = "pure resignation"
 	color = "#4c3100"
 	strength = 25
@@ -629,7 +629,7 @@
 
 /decl/material/ethanol/iced_beer
 	name = "iced beer"
-	description = "A beer which is so cold the air around it freezes."
+	lore_text = "A beer which is so cold the air around it freezes."
 	taste_description = "refreshingly cold"
 	color = "#ffd300"
 	strength = 50
@@ -642,7 +642,7 @@
 
 /decl/material/ethanol/irishslammer
 	name = "Irish Slammer"
-	description = "Mmm, tastes like chocolate cake..."
+	lore_text = "Mmm, tastes like chocolate cake..."
 	taste_description = "delicious anger"
 	color = "#2e6671"
 	strength = 15
@@ -652,7 +652,7 @@
 
 /decl/material/ethanol/coffee/irishcoffee
 	name = "Irish coffee"
-	description = "Coffee, and alcohol. More fun than a Mimosa to drink in the morning."
+	lore_text = "Coffee, and alcohol. More fun than a Mimosa to drink in the morning."
 	taste_description = "giving up on the day"
 	color = "#4c3100"
 	strength = 15
@@ -662,7 +662,7 @@
 
 /decl/material/ethanol/irish_cream
 	name = "Irish cream"
-	description = "Whiskey-imbued cream, what else would you expect from the Irish."
+	lore_text = "Whiskey-imbued cream, what else would you expect from the Irish."
 	taste_description = "creamy alcohol"
 	color = "#dddd9a"
 	strength = 25
@@ -672,7 +672,7 @@
 
 /decl/material/ethanol/longislandicedtea
 	name = "Long Island Iced Tea"
-	description = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
+	lore_text = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
 	taste_description = "a mixture of cola and alcohol"
 	color = "#895b1f"
 	strength = 12
@@ -682,7 +682,7 @@
 
 /decl/material/ethanol/manhattan
 	name = "Manhattan"
-	description = "The Detective's undercover drink of choice. He never could stomach gin..."
+	lore_text = "The Detective's undercover drink of choice. He never could stomach gin..."
 	taste_description = "mild dryness"
 	color = "#c13600"
 	strength = 15
@@ -692,7 +692,7 @@
 
 /decl/material/ethanol/manhattan_proj
 	name = "Manhattan Project"
-	description = "A scientist's drink of choice, for pondering ways to blow stuff up."
+	lore_text = "A scientist's drink of choice, for pondering ways to blow stuff up."
 	taste_description = "death, the destroyer of worlds"
 	color = "#c15d00"
 	strength = 10
@@ -703,7 +703,7 @@
 
 /decl/material/ethanol/manly_dorf
 	name = "Manly Dorf"
-	description = "Beer and Ale, brought together in a delicious mix. Intended for true men only."
+	lore_text = "Beer and Ale, brought together in a delicious mix. Intended for true men only."
 	taste_description = "hair on your chest and your chin"
 	color = "#4c3100"
 	strength = 25
@@ -713,7 +713,7 @@
 
 /decl/material/ethanol/margarita
 	name = "margarita"
-	description = "On the rocks with salt on the rim. Arriba~!"
+	lore_text = "On the rocks with salt on the rim. Arriba~!"
 	taste_description = "dry and salty"
 	color = "#8cff8c"
 	strength = 15
@@ -723,7 +723,7 @@
 
 /decl/material/ethanol/mead
 	name = "mead"
-	description = "A Viking's drink, though a cheap one."
+	lore_text = "A Viking's drink, though a cheap one."
 	taste_description = "sweet, sweet alcohol"
 	color = "#ffbb00"
 	strength = 30
@@ -734,7 +734,7 @@
 
 /decl/material/ethanol/moonshine
 	name = "moonshine"
-	description = "You've really hit rock bottom now... your liver packed its bags and left last night."
+	lore_text = "You've really hit rock bottom now... your liver packed its bags and left last night."
 	taste_description = "bitterness"
 	taste_mult = 2.5
 	color = "#0064c8"
@@ -745,7 +745,7 @@
 
 /decl/material/ethanol/neurotoxin
 	name = "Neurotoxin"
-	description = "A strong neurotoxin that puts the subject into a death-like state."
+	lore_text = "A strong neurotoxin that puts the subject into a death-like state."
 	taste_description = "a numbing sensation"
 	color = "#2e2e61"
 	strength = 10
@@ -762,7 +762,7 @@
 
 /decl/material/ethanol/patron
 	name = "Patron"
-	description = "Tequila with silver in it, a favorite of alcoholic women in the club scene."
+	lore_text = "Tequila with silver in it, a favorite of alcoholic women in the club scene."
 	taste_description = "metallic and expensive"
 	color = "#585840"
 	strength = 30
@@ -772,7 +772,7 @@
 
 /decl/material/ethanol/pwine
 	name = "poison wine"
-	description = "Is this even wine? Toxic! Hallucinogenic! Probably consumed in boatloads by your superiors!"
+	lore_text = "Is this even wine? Toxic! Hallucinogenic! Probably consumed in boatloads by your superiors!"
 	taste_description = "purified alcoholic death"
 	color = "#000000"
 	strength = 10
@@ -797,7 +797,7 @@
 
 /decl/material/ethanol/red_mead
 	name = "red mead"
-	description = "The true Viking's drink! Even though it has a strange red color."
+	lore_text = "The true Viking's drink! Even though it has a strange red color."
 	taste_description = "sweet and salty alcohol"
 	color = "#c73c00"
 	strength = 30
@@ -807,7 +807,7 @@
 
 /decl/material/ethanol/sbiten
 	name = "sbiten"
-	description = "A spicy mead! Might be a little hot for the little guys!"
+	lore_text = "A spicy mead! Might be a little hot for the little guys!"
 	taste_description = "hot and spice"
 	color = "#ffa371"
 	strength = 15
@@ -819,7 +819,7 @@
 
 /decl/material/ethanol/screwdrivercocktail
 	name = "Screwdriver"
-	description = "Vodka, mixed with plain ol' orange juice. The result is surprisingly delicious."
+	lore_text = "Vodka, mixed with plain ol' orange juice. The result is surprisingly delicious."
 	taste_description = "oranges"
 	color = "#a68310"
 	strength = 15
@@ -829,7 +829,7 @@
 
 /decl/material/ethanol/ships_surgeon
 	name = "Ship's Surgeon"
-	description = "Rum and Dr. Gibb. Served ice cold, like the scalpel."
+	lore_text = "Rum and Dr. Gibb. Served ice cold, like the scalpel."
 	taste_description = "black comedy"
 	color = "#524d0f"
 	strength = 15
@@ -839,7 +839,7 @@
 
 /decl/material/ethanol/silencer
 	name = "Silencer"
-	description = "A drink from Mime Heaven."
+	lore_text = "A drink from Mime Heaven."
 	taste_description = "a pencil eraser"
 	taste_mult = 1.2
 	nutriment_factor = 1
@@ -851,7 +851,7 @@
 
 /decl/material/ethanol/singulo
 	name = "Singulo"
-	description = "A blue-space beverage!"
+	lore_text = "A blue-space beverage!"
 	taste_description = "concentrated matter"
 	color = "#2e6671"
 	strength = 10
@@ -861,7 +861,7 @@
 
 /decl/material/ethanol/snowwhite
 	name = "Snow White"
-	description = "A cold refreshment"
+	lore_text = "A cold refreshment"
 	taste_description = "refreshing cold"
 	color = "#ffffff"
 	strength = 30
@@ -871,7 +871,7 @@
 
 /decl/material/ethanol/suidream
 	name = "Sui Dream"
-	description = "Comprised of: White soda, blue curacao, melon liquor."
+	lore_text = "Comprised of: White soda, blue curacao, melon liquor."
 	taste_description = "fruit"
 	color = "#00a86b"
 	strength = 100
@@ -881,7 +881,7 @@
 
 /decl/material/ethanol/syndicatebomb
 	name = "Syndicate Bomb"
-	description = "Tastes like terrorism!"
+	lore_text = "Tastes like terrorism!"
 	taste_description = "purified antagonism"
 	color = "#2e6671"
 	strength = 10
@@ -891,7 +891,7 @@
 
 /decl/material/ethanol/tequilla_sunrise
 	name = "Tequila Sunrise"
-	description = "Tequila and orange juice. Much like a Screwdriver, only Mexican~"
+	lore_text = "Tequila and orange juice. Much like a Screwdriver, only Mexican~"
 	taste_description = "oranges"
 	color = "#ffe48c"
 	strength = 25
@@ -901,7 +901,7 @@
 
 /decl/material/ethanol/threemileisland
 	name = "Three Mile Island Iced Tea"
-	description = "Made for a woman, strong enough for a man."
+	lore_text = "Made for a woman, strong enough for a man."
 	taste_description = "dry"
 	color = "#666340"
 	strength = 10
@@ -912,7 +912,7 @@
 
 /decl/material/ethanol/toxins_special
 	name = "Toxins Special"
-	description = "This thing is ON FIRE! CALL THE DAMN SHUTTLE!"
+	lore_text = "This thing is ON FIRE! CALL THE DAMN SHUTTLE!"
 	taste_description = "spicy toxins"
 	color = "#7f00ff"
 	strength = 10
@@ -924,7 +924,7 @@
 
 /decl/material/ethanol/vodkamartini
 	name = "vodka martini"
-	description = "Vodka with Gin. Not quite how 007 enjoyed it, but still delicious."
+	lore_text = "Vodka with Gin. Not quite how 007 enjoyed it, but still delicious."
 	taste_description = "shaken, not stirred"
 	color = "#0064c8"
 	strength = 12
@@ -935,7 +935,7 @@
 
 /decl/material/ethanol/vodkatonic
 	name = "vodka and tonic"
-	description = "For when a gin and tonic isn't russian enough."
+	lore_text = "For when a gin and tonic isn't russian enough."
 	taste_description = "tart bitterness"
 	color = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
@@ -946,7 +946,7 @@
 
 /decl/material/ethanol/white_russian
 	name = "White Russian"
-	description = "That's just, like, your opinion, man..."
+	lore_text = "That's just, like, your opinion, man..."
 	taste_description = "bitter cream"
 	color = "#a68340"
 	strength = 15
@@ -957,7 +957,7 @@
 
 /decl/material/ethanol/whiskey_cola
 	name = "whiskey cola"
-	description = "Whiskey, mixed with cola. Surprisingly refreshing."
+	lore_text = "Whiskey, mixed with cola. Surprisingly refreshing."
 	taste_description = "cola"
 	color = "#3e1b00"
 	strength = 25
@@ -968,7 +968,7 @@
 
 /decl/material/ethanol/whiskeysoda
 	name = "whiskey soda"
-	description = "For the more refined griffon."
+	lore_text = "For the more refined griffon."
 	color = "#eab300"
 	strength = 15
 
@@ -977,7 +977,7 @@
 
 /decl/material/ethanol/aged_whiskey // I have no idea what this is and where it comes from.  //It comes from Dinnlan now 
 	name = "aged whiskey"
-	description = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
+	lore_text = "A well-aged whiskey of high quality. Probably imported. Just a sip'll do it, but that burn will leave you wanting more."
 	color = "#523600"
 	strength = 25
 
@@ -986,7 +986,7 @@
 
 /decl/material/ethanol/applecider
 	name = "apple cider"
-	description = "A refreshing glass of apple cider."
+	lore_text = "A refreshing glass of apple cider."
 	taste_description = "cool apple cider"
 	color = "#cac089"
 	strength = 50
@@ -996,7 +996,7 @@
 
 /decl/material/ethanol/arak
 	name = "Arak"
-	description = "An unsweetened aniseed and grape mixture."
+	lore_text = "An unsweetened aniseed and grape mixture."
 	taste_description = "oil and licorice"
 	color = "#f7f6e0"
 	strength = 20
@@ -1006,7 +1006,7 @@
 
 /decl/material/ethanol/champagne
 	name = "champagne"
-	description = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
+	lore_text = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
 	taste_description = "a superior taste of sparkling wine"
 	color = "#e8dfc1"
 	strength = 25
@@ -1016,7 +1016,7 @@
 
 /decl/material/ethanol/sawbonesdismay
 	name = "Sawbones' Dismay"
-	description = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
+	lore_text = "The Tradehouse Surgeon general doesn't recommend mixing stimulants and depressants, but who listens to those warnings, anyhow?"
 	taste_description = "a pick-me-up and put-me-down"
 	color = "#996862"
 	strength = 10
@@ -1026,7 +1026,7 @@
 
 /decl/material/ethanol/jagermeister
 	name = "Jagermeister"
-	description = "A special blend of alcohol, herbs, and spices. It has remained a popular Earther drink."
+	lore_text = "A special blend of alcohol, herbs, and spices. It has remained a popular Earther drink."
 	taste_description = "herbs, spices, and alcohol"
 	color = "#596e3e"
 	strength = 20
@@ -1036,7 +1036,7 @@
 
 /decl/material/ethanol/kvass
 	name = "kvass"
-	description = "An alcoholic drink commonly made from bread."
+	lore_text = "An alcoholic drink commonly made from bread."
 	taste_description = "vkusnyy kvas, ypa!"
 	color = "#362f22"
 	strength = 30
@@ -1046,7 +1046,7 @@
 
 /decl/material/ethanol/vodkacola
 	name = "vodka cola"
-	description = "A refreshing mix of vodka and cola."
+	lore_text = "A refreshing mix of vodka and cola."
 	taste_description = "vodka and cola"
 	color = "#474238"
 	strength = 15

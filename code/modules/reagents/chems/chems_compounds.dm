@@ -1,6 +1,6 @@
 /decl/material/acetone
 	name = "acetone"
-	description = "A colorless liquid solvent used in chemical synthesis."
+	lore_text = "A colorless liquid solvent used in chemical synthesis."
 	taste_description = "acid"
 	color = "#808080"
 	metabolism = REM * 0.2
@@ -29,21 +29,21 @@
 
 /decl/material/surfactant // Foam precursor
 	name = "surfacant"
-	description = "A isocyanate liquid that forms a foam when mixed with water."
+	lore_text = "A isocyanate liquid that forms a foam when mixed with water."
 	taste_description = "metal"
 	color = "#9e6b38"
 	value = 0.1
 
 /decl/material/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
 	name = "foaming agent"
-	description = "A agent that yields metallic foam when mixed with light metal and a strong acid."
+	lore_text = "A agent that yields metallic foam when mixed with light metal and a strong acid."
 	taste_description = "metal"
 	color = "#664b63"
 	value = 0.1
 
 /decl/material/lube
 	name = "lubricant"
-	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
+	lore_text = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
 	taste_description = "slime"
 	color = "#009ca8"
 	value = 0.1
@@ -55,21 +55,21 @@
 
 /decl/material/woodpulp
 	name = "wood pulp"
-	description = "A mass of wood fibers."
+	lore_text = "A mass of wood fibers."
 	taste_description = "wood"
 	color = WOOD_COLOR_GENERIC
 	hidden_from_codex = TRUE
 
 /decl/material/bamboo
 	name = "bamboo pulp"
-	description = "A mass of bamboo fibers."
+	lore_text = "A mass of bamboo fibers."
 	taste_description = "grass"
 	color = WOOD_COLOR_PALE2
 	hidden_from_codex = TRUE
 
 /decl/material/luminol
 	name = "luminol"
-	description = "A compound that interacts with blood on the molecular level."
+	lore_text = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
 	color = "#f2f3f4"
 
@@ -81,7 +81,7 @@
 
 /decl/material/glowsap
 	name = "glowsap"
-	description = "A popular party drug for adventurous types who want to BE the glowstick. Rumoured to be hallucinogenic in high doses."
+	lore_text = "A popular party drug for adventurous types who want to BE the glowstick. Rumoured to be hallucinogenic in high doses."
 	overdose = 15
 	color = "#9eefff"
 
@@ -108,7 +108,7 @@
 
 /decl/material/sodiumchloride
 	name = "table salt"
-	description = "A salt made of sodium chloride. Commonly used to season food."
+	lore_text = "A salt made of sodium chloride. Commonly used to season food."
 	taste_description = "salt"
 	color = "#ffffff"
 	overdose = REAGENTS_OVERDOSE
@@ -116,14 +116,14 @@
 
 /decl/material/blackpepper
 	name = "black pepper"
-	description = "A powder ground from peppercorns. *AAAACHOOO*"
+	lore_text = "A powder ground from peppercorns. *AAAACHOOO*"
 	taste_description = "pepper"
 	color = "#000000"
 	value = 0.1
 
 /decl/material/enzyme
 	name = "universal enzyme"
-	description = "A universal enzyme used in the preperation of certain chemicals and foods."
+	lore_text = "A universal enzyme used in the preperation of certain chemicals and foods."
 	taste_description = "sweetness"
 	taste_mult = 0.7
 	color = "#365e30"
@@ -131,7 +131,7 @@
 
 /decl/material/frostoil
 	name = "chilly oil"
-	description = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."
+	lore_text = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."
 	taste_description = "arctic mint"
 	taste_mult = 1.5
 	color = "#07aab2"
@@ -147,7 +147,7 @@
 
 /decl/material/capsaicin
 	name = "capsaicin oil"
-	description = "This is what makes chilis hot."
+	lore_text = "This is what makes chilis hot."
 	taste_description = "hot peppers"
 	taste_mult = 1.5
 	color = "#b31008"
@@ -178,7 +178,7 @@
 
 /decl/material/capsaicin/condensed
 	name = "condensed capsaicin"
-	description = "A chemical agent used for self-defense and in police work."
+	lore_text = "A chemical agent used for self-defense and in police work."
 	taste_description = "scorching agony"
 	taste_mult = 10
 	touch_met = 5 // Get rid of it quickly
@@ -267,7 +267,7 @@
 
 /decl/material/mutagenics
 	name = "mutagenics"
-	description = "Might cause unpredictable mutations. Keep away from children."
+	lore_text = "Might cause unpredictable mutations. Keep away from children."
 	taste_description = "slime"
 	taste_mult = 0.9
 	color = "#13bc5e"
@@ -302,7 +302,7 @@
 
 /decl/material/nitrous_oxide
 	name = "nitrous oxide"
-	description = "An ubiquitous sleeping agent also known as laughing gas."
+	lore_text = "An ubiquitous sleeping agent also known as laughing gas."
 	taste_description = "dental surgery"
 	color = COLOR_GRAY80
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
@@ -310,7 +310,7 @@
 
 /decl/material/nitrous_oxide/xenon
 	name = "xenon"
-	description = "A nontoxic gas used as a general anaesthetic."
+	lore_text = "A nontoxic gas used as a general anaesthetic."
 	do_giggle = FALSE
 	taste_description = "nothing"
 	color = COLOR_GRAY80
@@ -331,7 +331,7 @@
 
 /decl/material/lactate
 	name = "lactate"
-	description = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
+	lore_text = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
 	taste_description = "sourness"
 	color = "#eeddcc"
 	scannable = 1
@@ -350,7 +350,7 @@
 
 /decl/material/nanoblood
 	name = "nanoblood"
-	description = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
+	lore_text = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
 	taste_description = "blood with bubbles"
 	color = "#c10158"
 	scannable = 1
@@ -367,7 +367,7 @@
 
 /decl/material/tobacco
 	name = "tobacco"
-	description = "Cut and processed tobacco leaves."
+	lore_text = "Cut and processed tobacco leaves."
 	taste_description = "tobacco"
 	color = "#684b3c"
 	scannable = 1
@@ -399,7 +399,7 @@
 
 /decl/material/tobacco/liquid
 	name = "nicotine solution"
-	description = "A diluted nicotine solution."
+	lore_text = "A diluted nicotine solution."
 	taste_mult = 0
 	color = "#fcfcfc"
 	nicotine = REM * 0.1
@@ -410,7 +410,7 @@
 
 /decl/material/menthol
 	name = "menthol"
-	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
+	lore_text = "Tastes naturally minty, and imparts a very mild numbing sensation."
 	taste_description = "mint"
 	color = "#80af9c"
 	metabolism = REM * 0.002
@@ -425,7 +425,7 @@
 
 /decl/material/nanitefluid
 	name = "Nanite Fluid"
-	description = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
+	lore_text = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
 	taste_description = "metallic sludge"
 	color = "#c2c2d6"
 	scannable = 1
@@ -443,7 +443,7 @@
 
 /decl/material/antiseptic
 	name = "antiseptic"
-	description = "Sterilizes surfaces (or wounds) in preparation for surgery, and thoroughly removes blood."
+	lore_text = "Sterilizes surfaces (or wounds) in preparation for surgery, and thoroughly removes blood."
 	taste_description = "bitterness"
 	color = "#c8a5dc"
 	touch_met = 5

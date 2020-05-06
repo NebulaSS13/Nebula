@@ -1,6 +1,6 @@
 /decl/material/eyedrops
 	name = "eye drops"
-	description = "A soothing balm that helps with minor eye damage."
+	lore_text = "A soothing balm that helps with minor eye damage."
 	taste_description = "a mild burn"
 	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
@@ -19,7 +19,7 @@
 
 /decl/material/antirads
 	name = "antirads"
-	description = "A synthetic recombinant protein, derived from entolimod, used in the treatment of radiation poisoning."
+	lore_text = "A synthetic recombinant protein, derived from entolimod, used in the treatment of radiation poisoning."
 	taste_description = "bitterness"
 	color = "#408000"
 	metabolism = REM * 0.25
@@ -33,7 +33,7 @@
 
 /decl/material/brute_meds
 	name = "styptic powder"
-	description = "An analgesic and bleeding suppressant that helps with recovery from physical trauma. Can assist with mending arteries if injected in large amounts, but will cause complications."
+	lore_text = "An analgesic and bleeding suppressant that helps with recovery from physical trauma. Can assist with mending arteries if injected in large amounts, but will cause complications."
 	taste_description = "bitterness"
 	taste_mult = 3
 	color = "#bf0000"
@@ -57,7 +57,7 @@
 
 /decl/material/burn_meds
 	name = "synthskin"
-	description = "A synthetic sealant, disinfectant and analgesic that encourages burned tissue to recover."
+	lore_text = "A synthetic sealant, disinfectant and analgesic that encourages burned tissue to recover."
 	taste_description = "bitterness"
 	color = "#ffa800"
 	overdose = REAGENTS_OVERDOSE
@@ -71,7 +71,7 @@
 
 /decl/material/adminordrazine //An OP chemical for admins
 	name = "Adminordrazine"
-	description = "It's magic. We don't have to explain it."
+	lore_text = "It's magic. We don't have to explain it."
 	taste_description = "100% abuse"
 	color = "#c8a5dc"
 	flags = AFFECTS_DEAD //This can even heal dead people.
@@ -87,7 +87,7 @@
 
 /decl/material/antitoxins
 	name = "antitoxins"
-	description = "A mix of broad-spectrum antitoxins used to neutralize poisons before they can do significant harm."
+	lore_text = "A mix of broad-spectrum antitoxins used to neutralize poisons before they can do significant harm."
 	taste_description = "a roll of gauze"
 	color = "#00a000"
 	scannable = 1
@@ -117,7 +117,7 @@
 
 /decl/material/immunobooster
 	name = "immunobooster"
-	description = "A drug that helps restore the immune system. Will not replace a normal immunity."
+	lore_text = "A drug that helps restore the immune system. Will not replace a normal immunity."
 	taste_description = "chalky"
 	color = "#ffc0cb"
 	metabolism = REM
@@ -136,7 +136,7 @@
 
 /decl/material/stimulants
 	name = "stimulants"
-	description = "Improves the ability to concentrate."
+	lore_text = "Improves the ability to concentrate."
 	taste_description = "sourness"
 	color = "#bf80bf"
 	scannable = 1
@@ -159,7 +159,7 @@
 
 /decl/material/antidepressants
 	name = "antidepressants"
-	description = "Stabilizes the mind a little."
+	lore_text = "Stabilizes the mind a little."
 	taste_description = "bitterness"
 	color = "#ff80ff"
 	scannable = 1
@@ -180,7 +180,7 @@
 
 /decl/material/antibiotics
 	name = "antibiotics"
-	description = "An all-purpose antibiotic agent."
+	lore_text = "An all-purpose antibiotic agent."
 	taste_description = "bitterness"
 	color = "#c1c1c1"
 	metabolism = REM * 0.1
@@ -205,7 +205,7 @@
 
 /decl/material/retrovirals
 	name = "retrovirals"
-	description = "A combination of retroviral therapy compounds and a meta-polymerase that rapidly mends genetic damage and unwanted mutations with the power of dark science."
+	lore_text = "A combination of retroviral therapy compounds and a meta-polymerase that rapidly mends genetic damage and unwanted mutations with the power of dark science."
 	taste_description = "acid"
 	color = "#004000"
 	scannable = 1
@@ -235,7 +235,7 @@
 
 /decl/material/adrenaline
 	name = "adrenaline"
-	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
+	lore_text = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
 	taste_description = "rush"
 	color = "#c8a5dc"
 	scannable = 1
@@ -262,7 +262,7 @@
 
 /decl/material/regenerator
 	name = "regenerative serum"
-	description = "A broad-spectrum cellular regenerator that heals both burns and physical trauma, albeit quite slowly."
+	lore_text = "A broad-spectrum cellular regenerator that heals both burns and physical trauma, albeit quite slowly."
 	taste_description = "metastasis"
 	color = "#8040ff"
 	scannable = 1
@@ -274,7 +274,7 @@
 
 /decl/material/neuroannealer
 	name = "neuroannealer"
-	description = "A neuroplasticity-assisting compound that helps to lessen damage to neurological tissue after a injury. Can aid in healing brain tissue."
+	lore_text = "A neuroplasticity-assisting compound that helps to lessen damage to neurological tissue after a injury. Can aid in healing brain tissue."
 	taste_description = "bitterness"
 	color = "#ffff66"
 	metabolism = REM * 0.25
@@ -293,7 +293,7 @@
 
 /decl/material/oxy_meds
 	name = "oxygel"
-	description = "A biodegradable gel full of oxygen-laden synthetic molecules. Injected into suffocation victims to stave off the effects of oxygen deprivation."
+	lore_text = "A biodegradable gel full of oxygen-laden synthetic molecules. Injected into suffocation victims to stave off the effects of oxygen deprivation."
 	taste_description = "tasteless slickness"
 	color = COLOR_GRAY80
 

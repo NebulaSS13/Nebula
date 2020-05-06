@@ -2,7 +2,7 @@
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /decl/material/water
 	name = "water"
-	description = "A ubiquitous chemical substance composed of hydrogen and oxygen."
+	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
 	color = COLOR_OCEAN
 	scannable = 1
 	metabolism = REM * 10
@@ -98,7 +98,7 @@
 // Ice is a drink for some reason.
 /decl/material/drink/ice
 	name = "ice"
-	description = "Frozen water, your dentist wouldn't like you chewing this."
+	lore_text = "Frozen water, your dentist wouldn't like you chewing this."
 	taste_description = "ice"
 	taste_mult = 1.5
 	color = "#619494"

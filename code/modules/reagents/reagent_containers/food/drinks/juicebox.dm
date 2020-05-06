@@ -113,6 +113,6 @@
 	var/decl/material/J = decls_repository.get_decl(chosen_reagents[1])
 	var/decl/material/K = decls_repository.get_decl(chosen_reagents[2])
 	var/splash = pick("teasing", "splash", "hint", "measure", "nip", "slug", "depth", "dash", "sensation", "surge", "squirt", "spritz", "efflux", "gush", "swell")
-	desc = "[J.name]; [J.description] This one comes with \an [splash] of [K.name] in a neat box."
+	desc = "[J.name]; [J.lore_text] This one comes with \an [splash] of [K.name] in a neat box."
 	name = "\improper [J.name] and [K.name] juicebox"
 	set_colors(J.color, K.color, get_random_colour(simple=TRUE), style=pick(list("stripe", "corner")))

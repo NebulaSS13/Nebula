@@ -1,6 +1,6 @@
 /decl/material/toxin
 	name = "toxin"
-	description = "A toxic chemical."
+	lore_text = "A toxic chemical."
 	taste_description = "bitterness"
 	taste_mult = 1.2
 	color = "#cf3600"
@@ -34,7 +34,7 @@
 
 /decl/material/toxin/denatured
 	name = "denatured toxin"
-	description = "Once toxic, now harmless."
+	lore_text = "Once toxic, now harmless."
 	taste_description = null
 	taste_mult = null
 	color = "#808080"
@@ -47,7 +47,7 @@
 
 /decl/material/toxin/slimejelly
 	name = "slime jelly"
-	description = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
+	lore_text = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
 	taste_description = "slime"
 	taste_mult = 1.3
 	color = "#801e28"
@@ -55,7 +55,7 @@
 
 /decl/material/toxin/plasticide
 	name = "plasticide"
-	description = "Liquid plastic, do not eat."
+	lore_text = "Liquid plastic, do not eat."
 	taste_description = "plastic"
 	color = "#cf3600"
 	strength = 5
@@ -64,14 +64,14 @@
 
 /decl/material/toxin/amatoxin
 	name = "amatoxin"
-	description = "A powerful poison derived from certain species of mushroom."
+	lore_text = "A powerful poison derived from certain species of mushroom."
 	taste_description = "mushroom"
 	color = "#792300"
 	strength = 10
 
 /decl/material/toxin/carpotoxin
 	name = "carpotoxin"
-	description = "A deadly neurotoxin produced by the dreaded space carp."
+	lore_text = "A deadly neurotoxin produced by the dreaded space carp."
 	taste_description = "fish"
 	color = "#003333"
 	target_organ = BP_BRAIN
@@ -79,7 +79,7 @@
 
 /decl/material/toxin/venom
 	name = "spider venom"
-	description = "A deadly necrotic toxin produced by giant spiders to disable their prey."
+	lore_text = "A deadly necrotic toxin produced by giant spiders to disable their prey."
 	taste_description = "absolutely vile"
 	color = "#91d895"
 	target_organ = BP_LIVER
@@ -92,7 +92,7 @@
 
 /decl/material/toxin/chlorine
 	name = "chlorine"
-	description = "A highly poisonous liquid. Smells strongly of bleach."
+	lore_text = "A highly poisonous liquid. Smells strongly of bleach."
 	taste_description = "bleach"
 	color = "#707c13"
 	strength = 15
@@ -102,7 +102,7 @@
 
 /decl/material/toxin/phoron
 	name = "phoron"
-	description = "Phoron in its liquid form."
+	lore_text = "Phoron in its liquid form."
 	taste_mult = 1.5
 	color = "#ff3300"
 	strength = 30
@@ -127,7 +127,7 @@
 // Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
 /decl/material/toxin/phoron/oxygen
 	name = "oxyphoron"
-	description = "An exceptionally flammable molecule formed from deuterium synthesis."
+	lore_text = "An exceptionally flammable molecule formed from deuterium synthesis."
 	strength = 15
 	fuel_value = 15
 
@@ -141,7 +141,7 @@
 
 /decl/material/toxin/cyanide //Fast and Lethal
 	name = "cyanide"
-	description = "A highly toxic chemical."
+	lore_text = "A highly toxic chemical."
 	taste_mult = 0.6
 	color = "#cf3600"
 	strength = 20
@@ -156,7 +156,7 @@
 
 /decl/material/toxin/heartstopper
 	name = "heartstopper"
-	description = "A potent cardiotoxin that paralyzes the heart."
+	lore_text = "A potent cardiotoxin that paralyzes the heart."
 	taste_description = "intense bitterness"
 	color = "#6b833b"
 	strength = 16
@@ -183,7 +183,7 @@
 
 /decl/material/toxin/zombiepowder
 	name = "zombie powder"
-	description = "A strong neurotoxin that puts the subject into a death-like state."
+	lore_text = "A strong neurotoxin that puts the subject into a death-like state."
 	taste_description = "death"
 	color = "#669900"
 	metabolism = REM
@@ -208,7 +208,7 @@
 
 /decl/material/toxin/fertilizer //Reagents used for plant fertilizers.
 	name = "fertilizer"
-	description = "A chemical mix good for growing plants with."
+	lore_text = "A chemical mix good for growing plants with."
 	taste_description = "plant food"
 	taste_mult = 0.5
 	strength = 0.5 // It's not THAT poisonous.
@@ -228,7 +228,7 @@
 
 /decl/material/toxin/plantbgone
 	name = "Plant-B-Gone"
-	description = "A harmful toxic mixture to kill plantlife. Do not ingest!"
+	lore_text = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 	taste_mult = 1
 	color = "#49002e"
 	strength = 4
@@ -248,7 +248,7 @@
 		
 /decl/material/toxin/tar
 	name = "tar"
-	description = "A dark, viscous liquid."
+	lore_text = "A dark, viscous liquid."
 	taste_description = "petroleum"
 	color = "#140b30"
 	strength = 4
@@ -258,7 +258,7 @@
 
 /decl/material/toxin/hair_remover
 	name = "hair remover"
-	description = "An extremely effective chemical depilator. Do not ingest."
+	lore_text = "An extremely effective chemical depilator. Do not ingest."
 	taste_description = "acid"
 	color = "#d9ffb3"
 	strength = 1
@@ -272,7 +272,7 @@
 
 /decl/material/toxin/zombie
 	name = "liquid corruption"
-	description = "A filthy, oily substance which slowly churns of its own accord."
+	lore_text = "A filthy, oily substance which slowly churns of its own accord."
 	taste_description = "decaying blood"
 	color = "#800000"
 	taste_mult = 5
@@ -301,7 +301,7 @@
 
 /decl/material/toxin/methyl_bromide
 	name = "methyl bromide"
-	description = "A fumigant derived from bromide."
+	lore_text = "A fumigant derived from bromide."
 	taste_description = "pestkiller"
 	color = "#4c3b34"
 	strength = 5
@@ -328,7 +328,7 @@
 
 /decl/material/toxin/bromide
 	name = "bromide"
-	description = "A dark, nearly opaque, red-orange, toxic element."
+	lore_text = "A dark, nearly opaque, red-orange, toxic element."
 	taste_description = "pestkiller"
 	color = "#4c3b34"
 	strength = 3

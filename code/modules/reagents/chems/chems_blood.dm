@@ -1,6 +1,6 @@
 /decl/material/blood
 	name = "Blood"
-	description = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
+	lore_text = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
 	metabolism = REM * 5
 	color = "#c80000"
 	scannable = 1
@@ -76,7 +76,7 @@
 	color = "#aa0000"
 	taste_description = "chewy iron"
 	taste_mult = 1.5
-	description = "When exposed to unsuitable conditions, such as the floor or an oven, blood becomes coagulated and useless for transfusions. It's great for making blood pudding, though."
+	lore_text = "When exposed to unsuitable conditions, such as the floor or an oven, blood becomes coagulated and useless for transfusions. It's great for making blood pudding, though."
 	glass_name = "tomato salsa"
 	glass_desc = "Are you sure this is tomato salsa?"
 	hidden_from_codex = TRUE

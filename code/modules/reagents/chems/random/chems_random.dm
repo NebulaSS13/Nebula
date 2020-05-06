@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 
 /decl/material/random
 	name = "exotic chemical"
-	description = "A strange and exotic chemical substance."
+	lore_text = "A strange and exotic chemical substance."
 	taste_mult = 0 // Random taste not yet implemented
 	hidden_from_codex = TRUE
 	var/max_effect_number = 8

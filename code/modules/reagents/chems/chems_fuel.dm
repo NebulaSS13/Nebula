@@ -1,6 +1,6 @@
 /decl/material/fuel
 	name = "welding fuel"
-	description = "A stable hydrazine-based compound whose exact manufacturing specifications are a closely-guarded secret. One of the most common fuels in human space. Extremely flammable."
+	lore_text = "A stable hydrazine-based compound whose exact manufacturing specifications are a closely-guarded secret. One of the most common fuels in human space. Extremely flammable."
 	taste_description = "gross metal"
 	color = "#660000"
 	touch_met = 5
@@ -32,7 +32,7 @@
 
 /decl/material/fuel/hydrazine
 	name = "hydrazine"
-	description = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
+	lore_text = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
 	taste_description = "sweet tasting metal"
 	color = "#808080"
 	metabolism = REM * 0.2
