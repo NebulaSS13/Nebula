@@ -350,7 +350,7 @@
 	desc = "A small bottle of the essential oil of some kind of mint plant."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "coldsauce"
-	starting_reagents = list(/decl/reagent/nutriment/mint = 15)
+	starting_reagents = list(/decl/reagent/drink/syrup/mint = 15)
 
 /obj/item/chems/food/condiment/mint/on_reagent_change()
 	return

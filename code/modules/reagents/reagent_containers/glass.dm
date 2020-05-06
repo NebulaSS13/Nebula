@@ -3,8 +3,7 @@
 /// (Mixing)Glass.
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/glass
-	name = " "
-	var/base_name = " "
+	name = ""
 	desc = ""
 	icon_state = "null"
 	item_state = "null"
@@ -36,10 +35,6 @@
 		/obj/machinery/constructable_frame,
 		/obj/machinery/radiocarbon_spectrometer
 	)
-
-/obj/item/chems/glass/Initialize()
-	. = ..()
-	base_name = name
 
 /obj/item/chems/glass/examine(mob/user, distance)
 	. = ..()
@@ -113,13 +108,11 @@
 	material = MAT_GLASS
 	applies_material_name = TRUE
 	material_force_multiplier = 0.25
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 
 /obj/item/chems/glass/beaker/Initialize()
 	. = ..()
 	desc += " It can hold up to [volume] units."
-
-/obj/item/chems/glass/beaker/on_reagent_change()
-	update_icon()
 
 /obj/item/chems/glass/beaker/pickup(mob/user)
 	..()
@@ -164,7 +157,6 @@
 	volume = 120
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120]"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_force_multiplier = 0.5
 
 /obj/item/chems/glass/beaker/bowl
@@ -188,7 +180,7 @@
 	center_of_mass = @"{'x':16,'y':8}"
 	volume = 60
 	amount_per_transfer_from_this = 10
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT | ATOM_FLAG_SHOW_REAGENT_NAME
 	material = null
 	material = MAT_STEEL
 
@@ -200,7 +192,6 @@
 	volume = 300
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_force_multiplier = 2.5
 	material = MAT_STEEL
 	matter = list(
@@ -218,7 +209,6 @@
 	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,30]"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	material_force_multiplier = 0.1
 
 /obj/item/chems/glass/beaker/insulated
@@ -229,7 +219,7 @@
 	material = MAT_GLASS
 	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
-	atom_flags = null
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 	temperature_coefficient = 1
 	material = null
 
@@ -257,7 +247,7 @@
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = @"[10,20,30,60,120,150,180]"
 	volume = 180
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 	unacidable = 0
 	material = MAT_PLASTIC
 	material_force_multiplier = 0.2

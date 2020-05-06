@@ -142,6 +142,10 @@
 	nutriment_factor = 1
 	color = "#482000"
 
+/decl/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	..()
+	M.add_chemical_effect(CE_PULSE, 2)
+
 /decl/reagent/nutriment/coffee/instant
 	name = "instant coffee powder"
 	description = "A bitter powder made by processing coffee beans."
@@ -273,12 +277,6 @@
 	taste_description = "childhood whimsy"
 	nutriment_factor = 1
 	color = "#ff00ff"
-
-/decl/reagent/nutriment/mint
-	name = "mint"
-	description = "Also known as Mentha."
-	taste_description = "sweet mint"
-	color = "#07aab2"
 
 /decl/reagent/nutriment/sugar
 	name = "sugar"

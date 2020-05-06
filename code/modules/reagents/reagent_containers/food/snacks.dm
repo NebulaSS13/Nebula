@@ -1863,7 +1863,7 @@
 	bitesize = 1
 /obj/item/chems/food/snacks/mint/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/reagent/nutriment/mint, 1)
+	reagents.add_reagent(/decl/reagent/drink/syrup/mint, 1)
 
 
 /obj/item/chems/food/snacks/mushroomsoup

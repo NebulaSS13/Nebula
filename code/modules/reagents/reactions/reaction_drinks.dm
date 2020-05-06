@@ -64,7 +64,7 @@
 /datum/chemical_reaction/recipe/snowball
 	name = "Snowball"
 	result = /decl/reagent/drink/snowball
-	required_reagents = list(/decl/reagent/drink/ice = 2, /decl/reagent/drink/coffee/icecoffee = 1, /decl/reagent/drink/juice/watermelon = 1)
+	required_reagents = list(/decl/reagent/drink/ice = 2, /decl/reagent/drink/coffee = 1, /decl/reagent/drink/juice/watermelon = 1)
 	result_amount = 4
 	minimum_temperature = (0 CELSIUS) - 100
 	maximum_temperature = 0 CELSIUS
