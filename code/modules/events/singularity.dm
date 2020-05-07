@@ -1,5 +1,3 @@
-#define OVERMAP_EDGE 2
-
 /datum/event/rogue_singularity
 	startWhen				= 0
 	announceWhen			= 1
@@ -49,7 +47,7 @@
 		if(position <= singularity_path.len)
 			position++
 			rogue_singularity.forceMove(singularity_path[position])
-		
+
 		absorb_overmap_effect()
 		move_overmap_effect()
 	move_ship()
