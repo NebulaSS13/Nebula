@@ -105,3 +105,6 @@
 /decl/machine_construction/default/panel_open/door
 	needs_board = "door"
 	up_state = /decl/machine_construction/default/panel_closed/door
+
+/decl/machine_construction/default/panel_open/cannot_print
+	cannot_print = TRUE

@@ -178,6 +178,14 @@ Class Procs:
 		stat ^= NOINPUT
 		return TRUE
 
+/obj/machinery/proc/set_stat(state, new_state)
+	if (stat_immune & state)
+		return FALSE
+
+	if (!new_state != !(stat & state))
+		stat ^= state
+		return TRUE
+
 /proc/is_operable(var/obj/machinery/M, var/mob/user)
 	return istype(M) && M.operable()
 

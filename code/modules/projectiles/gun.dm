@@ -87,6 +87,8 @@
 	var/has_safety = TRUE
 	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
 
+	var/can_use_wcs = FALSE // Designates this gun as compatible with a weapon control system
+
 /obj/item/gun/Initialize()
 	. = ..()
 	for(var/i in 1 to firemodes.len)
@@ -332,7 +334,7 @@
 			var/obj/item/rig/R = H.back
 			for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
 				S.deactivate()
-	
+
 	if(space_recoil)
 		if(!user.check_space_footing())
 			var/old_dir = user.dir
@@ -437,7 +439,7 @@
 		shot_sound_vol = P.fire_sound_vol
 	if(silenced)
 		shot_sound_vol = 10
-	
+
 	playsound(user, shot_sound, shot_sound_vol, 1)
 
 //Suicide handling.
