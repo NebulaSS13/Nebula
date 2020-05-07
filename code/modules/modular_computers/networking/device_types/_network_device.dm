@@ -18,29 +18,26 @@
 	var/obj/O = holder
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
 	if(autojoin)
-		if(network_id)
-			connect()
-		else
-			connect_to_any()
+		SSnetworking.queue_connection(src)
 	
 /datum/extension/network_device/Destroy()
 	disconnect()
 	. = ..()
 
 /datum/extension/network_device/proc/connect()
-	var/datum/computer_network/net = GLOB.computer_networks[network_id]
+	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
 		return FALSE
 	return net.add_device(src)
 
 /datum/extension/network_device/proc/disconnect()
-	var/datum/computer_network/net = GLOB.computer_networks[network_id]
+	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
 		return FALSE
 	return net.remove_device(src)
 
 /datum/extension/network_device/proc/check_connection(specific_action)
-	var/datum/computer_network/net = GLOB.computer_networks[network_id]
+	var/datum/computer_network/net = SSnetworking.networks[network_id]
 	if(!net)
 		return FALSE
 	if(!net.check_connection(src, specific_action) || !net.add_device(src))
@@ -61,8 +58,8 @@
 
 /datum/extension/network_device/proc/get_nearby_networks()
 	var/list/networks = list()
-	for(var/id in GLOB.computer_networks)
-		var/datum/computer_network/net = GLOB.computer_networks[id]
+	for(var/id in SSnetworking.networks)
+		var/datum/computer_network/net = SSnetworking.networks[id]
 		if(net.check_connection(src))
 			networks |= id
 	return networks
@@ -75,7 +72,7 @@
 
 /datum/extension/network_device/proc/get_network()
 	if(check_connection())
-		return GLOB.computer_networks[network_id]
+		return SSnetworking.networks[network_id]
 
 /datum/extension/network_device/proc/add_log(text)
 	var/datum/computer_network/net = get_network()
@@ -88,7 +85,7 @@
 	for(var/net in nets)
 		network_id = net
 		if(connect())
-			return
+			return TRUE
 
 /datum/extension/network_device/proc/can_interact(user)
 	return holder.CanUseTopic(user) == STATUS_INTERACTIVE
