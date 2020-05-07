@@ -7,9 +7,10 @@
  */
 
 /obj/item/rig
-
 	name = "hardsuit control module"
-	icon = 'icons/obj/rig_modules.dmi'
+	icon_state = "world"
+	icon = 'icons/clothing/rigs/eva.dmi'
+	on_mob_icon = 'icons/clothing/rigs/eva.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
@@ -18,12 +19,12 @@
 	// These values are passed on to all component pieces.
 	armor_type = /datum/extension/armor/rig
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
@@ -34,6 +35,7 @@
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
 	unacidable = 1
+	on_mob_use_spritesheets = TRUE
 
 	var/equipment_overlay_icon = 'icons/mob/onmob/onmob_rig_modules.dmi'
 	var/hides_uniform = 1 	//used to determinate if uniform should be visible whenever the suit is sealed or not
@@ -124,8 +126,6 @@
 
 /obj/item/rig/Initialize()
 	. = ..()
-
-	item_state = icon_state
 	wires = new(src)
 
 	if(!length(req_access))
@@ -169,7 +169,9 @@
 		piece.canremove = 0
 		piece.SetName("[suit_type] [initial(piece.name)]")
 		piece.desc = "It seems to be part of a [src.name]."
-		piece.icon_state = "[initial(icon_state)]"
+		piece.icon = icon
+		piece.on_mob_icon = on_mob_icon
+		piece.sprite_sheets = sprite_sheets
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
@@ -193,14 +195,6 @@
 	qdel(spark_system)
 	spark_system = null
 	return ..()
-
-/obj/item/rig/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
-	if(icon_override)
-		ret.icon = icon_override
-	else if(slot == slot_back_str)
-		ret.icon = mob_icon
-	return ret
 
 /obj/item/rig/proc/set_slowdown_and_vision(var/active)
 	if(chest)
@@ -290,7 +284,7 @@
 					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,needhand=0))
 						failed_to_seal = 1
 
-					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
+					piece.icon_state = "[msg_type][!seal_target ? "_sealed" : ""]"
 					switch(msg_type)
 						if("boots")
 							to_chat(wearer, "<font color='blue'>\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"].</font>")
@@ -552,18 +546,10 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/rig/on_update_icon(var/update_mob_icon)
+/obj/item/rig/on_update_icon()
 
 	//TODO: Maybe consider a cache for this (use mob_icon as blank canvas, use suit icon overlay).
 	overlays.Cut()
-	if(!mob_icon || update_mob_icon)
-		var/species_icon = 'icons/mob/onmob/onmob_rig_back.dmi'
-		// Since setting mob_icon will override the species checks in
-		// update_inv_wear_suit(), handle species checks here.
-		if(wearer && sprite_sheets && sprite_sheets[wearer.species.get_bodytype(wearer)])
-			species_icon =  sprite_sheets[wearer.species.get_bodytype(wearer)]
-		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
-
 	if(equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
@@ -745,6 +731,7 @@
 					return
 			else
 				to_chat(wearer, "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>")
+			use_obj.icon_state = initial(use_obj.icon_state)
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(wearer)

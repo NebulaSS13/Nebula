@@ -2,8 +2,8 @@
 /obj/item/rig/light
 	name = "light suit control module"
 	desc = "A lighter, less armoured rig suit."
-	icon_state = "ninja_rig"
 	suit_type = "light suit"
+	on_mob_icon = 'icons/clothing/rigs/stealth.dmi'
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/tank,/obj/item/suit_cooling_unit,/obj/item/cell)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
@@ -43,7 +43,7 @@
 	name = "cybersuit control module"
 	suit_type = "cyber"
 	desc = "An advanced powered armour suit with many cyberwarfare enhancements. Comes with built-in insulated gloves for safely tampering with electronics."
-	icon_state = "hacker_rig"
+	on_mob_icon = 'icons/clothing/rigs/hacker.dmi'
 
 	req_access = list(access_syndicate)
 
@@ -86,7 +86,7 @@
 	name = "ominous suit control module"
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for assassins."
 	suit_type = "ominous"
-	icon_state = "ninja_rig"
+	on_mob_icon = 'icons/clothing/rigs/ninja.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -164,7 +164,7 @@
 	name = "stealth suit control module"
 	suit_type = "stealth"
 	desc = "A highly advanced and expensive suit designed for covert operations."
-	icon_state = "stealth_rig"
+	on_mob_icon = 'icons/clothing/rigs/stealth.dmi'
 
 	req_access = list(access_syndicate)
 
