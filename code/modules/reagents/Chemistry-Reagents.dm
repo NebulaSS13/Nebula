@@ -138,5 +138,5 @@
 
 /decl/reagent/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	. = supplied
-	if(type != /decl/reagent/drink/ice && prop.reagents.has_reagent(/decl/reagent/drink/ice))
+	if(prop.reagents.has_reagent(/decl/reagent/drink/ice))
 		. = "iced [.]"

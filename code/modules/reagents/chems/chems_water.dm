@@ -112,3 +112,6 @@
 	heating_message = "cracks and melts."
 	heating_products = list(/decl/reagent/water)
 	heating_point = 299 // This is about 26C, higher than the actual melting point of ice but allows drinks to be made properly without weird workarounds.
+
+/decl/reagent/drink/ice/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	. = glass_name
