@@ -1723,9 +1723,9 @@
 			T.show_bubbles()
 	return breath
 
-/mob/living/carbon/human/water_act(var/depth)
-	species.water_act(src, depth)
-	..(depth)
+/mob/living/carbon/human/fluid_act(var/datum/reagents/fluids)
+	species.fluid_act(src, fluids)
+	..()
 
 /mob/living/carbon/human/proc/set_cultural_value(var/token, var/decl/cultural_info/_culture, var/defer_language_update)
 	if(!istype(_culture))

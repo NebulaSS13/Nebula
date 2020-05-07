@@ -25,7 +25,7 @@
 		/obj/item/clothing/under/rank/bartender = 2,
 		/obj/item/clothing/under/dress/dress_saloon,
 		/obj/item/clothing/accessory/wcoat/black = 2,
-		/obj/item/clothing/shoes/black = 2
+		/obj/item/clothing/shoes/color/black = 2
 	)
 
 /*
@@ -88,6 +88,6 @@
 		/obj/item/clothing/suit/storage/toggle/suit/blue,
 		/obj/item/clothing/under/lawyer/purpsuit,
 		/obj/item/clothing/suit/storage/toggle/suit/purple,
-		/obj/item/clothing/shoes/brown,
-		/obj/item/clothing/shoes/black
+		/obj/item/clothing/shoes/color/brown,
+		/obj/item/clothing/shoes/color/black
 	)

@@ -14,7 +14,7 @@
 		return
 	if(get_file(newname))
 		return
-	
+
 	var/datum/computer_file/data/F = new file_type(md = metadata)
 	F.filename = newname
 	F.stored_data = data
@@ -66,7 +66,7 @@
 		return FALSE
 
 	return disk.remove_file(F)
-	
+
 /datum/extension/interactive/ntos/proc/clone_file(var/filename, var/obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
 	if(!disk)
 		return FALSE
@@ -118,12 +118,14 @@
 
 /datum/file_storage/proc/delete_file(filename)
 
-/datum/file_storage/proc/create_file(newname)
+/datum/file_storage/proc/create_file(newname, var/file_type = /datum/computer_file/data/text)
 	if(check_errors())
 		return FALSE
-	var/datum/computer_file/data/text/F = new()
+	var/datum/computer_file/F = new file_type
 	F.filename = newname
-	F.calculate_size()
+	var/datum/computer_file/data/FD = F
+	if(istype(F, /datum/computer_file/data))
+		FD.calculate_size()
 	return store_file(F)
 
 /datum/file_storage/proc/clone_file(filename)
@@ -154,22 +156,22 @@
 /datum/file_storage/network/proc/get_mainframe()
 	if(check_errors())
 		return FALSE
-	var/datum/computer_network/network = os.get_network()	
+	var/datum/computer_network/network = os.get_network()
 	return network.get_device_by_tag(server)
 
-/datum/file_storage/network/get_all_files()	
+/datum/file_storage/network/get_all_files()
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
 	return M && M.get_all_files()
 
-/datum/file_storage/network/get_file(filename)	
+/datum/file_storage/network/get_file(filename)
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
 	return M && M.get_file(filename)
 
-/datum/file_storage/network/store_file(datum/computer_file/F)	
+/datum/file_storage/network/store_file(datum/computer_file/F)
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
 	return M && M.store_file(F)
 
-/datum/file_storage/network/delete_file(filename)	
+/datum/file_storage/network/delete_file(filename)
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
 	return M && M.delete_file(filename)
 
@@ -181,6 +183,40 @@
 	if(check_errors())
 		return 0
 	return os.get_network_speed()
+
+/*
+ * Special subclass for network machines specifically.
+ *
+ */
+/datum/file_storage/network/machine
+	var/obj/localhost
+
+/datum/file_storage/network/machine/New(ntos, machine)
+	localhost = machine
+
+/datum/file_storage/network/machine/check_errors()
+	// Do not call predecessors. This is a straight up override.
+	var/datum/extension/network_device/computer = get_extension(localhost, /datum/extension/network_device)
+	var/datum/computer_network/network = computer.get_network()
+	if(!network)
+		return "NETWORK ERROR: No connectivity to the network"
+	if(!network.get_device_by_tag(server))
+		return "NETWORK ERROR: No connectivity to the file server '[server]'"
+	var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(server)
+	if(!istype(M))
+		return "NETWORK ERROR: Invalid server '[server]', no file sharing capabilities detected"
+
+/datum/file_storage/network/machine/get_mainframe()
+	if(check_errors())
+		return FALSE
+	var/datum/extension/network_device/computer = get_extension(localhost, /datum/extension/network_device)
+	var/datum/computer_network/network = computer.get_network()
+	return network.get_device_by_tag(server)
+
+/datum/file_storage/network/machine/get_transfer_speed()
+	if(check_errors())
+		return 0
+	return 1
 
 // Storing stuff locally on some kinda disk
 /datum/file_storage/disk
@@ -200,7 +236,7 @@
 		return "HARDWARE ERROR: No compatible device found"
 	if(!HDD.check_functionality())
 		return "NETWORK ERROR: [HDD] is non-operational"
-	
+
 /datum/file_storage/disk/get_all_files()
 	if(check_errors())
 		return FALSE
@@ -264,7 +300,7 @@
 	left_to_copy = max(0, left_to_copy - get_transfer_speed())
 	if(!left_to_copy)
 		return copying_to.store_file(copying)
-	
+
 /datum/file_transfer/proc/get_transfer_speed()
 	if(!check_self())
 		return 0

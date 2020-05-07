@@ -12,35 +12,7 @@
 		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
-
-	var/markings_color
-	var/markings_icon = "labcoat_marking"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/Initialize()
-	. = ..()
-	update_icon()
-
-/obj/item/clothing/suit/storage/toggle/labcoat/on_update_icon()
-	. = ..()
-	if(markings_color)
-		overlays.Cut()
-		var/mutable_appearance/MA = new()
-		MA.icon = icon
-		MA.icon_state = markings_icon
-		MA.color = markings_color
-		MA.appearance_flags = RESET_COLOR
-		overlays += MA
-
-/obj/item/clothing/suit/storage/toggle/labcoat/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
-	if(markings_color)
-		var/mutable_appearance/MA = new()
-		MA.icon = ret.icon
-		MA.icon_state = markings_icon
-		MA.color = markings_color
-		MA.appearance_flags = RESET_COLOR
-		ret.overlays += MA
-	return ret
+	markings_icon = "labcoat_marking"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"

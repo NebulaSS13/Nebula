@@ -6,8 +6,6 @@
 
 ### CONTRIBUTING GUIDELINES
 
-**Please refrain from making non code related comments in pull requests on GitHub.** See the Code of Conduct on where you may provide feedback to users.
-
 All users are expected to review [/docs/CODE_OF_CONDUCT.md](/docs/CODE_OF_CONDUCT.md) before interacting with the repository or other users.
 
 ---

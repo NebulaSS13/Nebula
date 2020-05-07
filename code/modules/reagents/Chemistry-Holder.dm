@@ -7,6 +7,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	var/total_volume = 0
 	var/maximum_volume = 120
 	var/atom/my_atom
+	var/cached_color
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	if(!istype(my_atom))
@@ -31,6 +32,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	. = primary_reagent && decls_repository.get_decl(primary_reagent)
 
 /datum/reagents/proc/update_total() // Updates volume.
+	cached_color = null
 	total_volume = 0
 	primary_reagent = null
 	for(var/R in reagent_volumes)

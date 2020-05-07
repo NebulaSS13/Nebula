@@ -68,14 +68,15 @@
 	if(flood_amt)
 		var/turf/T = loc
 		if(istype(T))
-			var/obj/effect/fluid/F = locate() in T
-			if(!F) F = new(loc)
 			T.show_bubbles()
 			if(world.time > next_gurgle)
 				visible_message("\The [src] gurgles and overflows!")
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
-			SET_FLUID_DEPTH(F, min(F.fluid_amount + (rand(30,50)*clogged), flood_amt))
+			var/obj/effect/fluid/F = locate() in T
+			var/adding = min(flood_amt-F?.reagents.total_volume, rand(30,50)*clogged)
+			if(adding)
+				T.add_fluid(adding, /decl/reagent/water)
 
 /obj/structure/hygiene/proc/drain()
 	if(!can_drain) return

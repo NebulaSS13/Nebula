@@ -132,7 +132,7 @@
 
 /obj/effect/landmark/costume/scratch/make_costumes()
 	new /obj/item/clothing/gloves/color/white(src.loc)
-	new /obj/item/clothing/shoes/white(src.loc)
+	new /obj/item/clothing/shoes/color/white(src.loc)
 	new /obj/item/clothing/under/scratch(src.loc)
 	if (prob(30))
 		new /obj/item/clothing/head/cueball(src.loc)
@@ -142,7 +142,7 @@
 	new /obj/item/clothing/glasses/monocle(src.loc)
 	var/CHOICE= pick( /obj/item/clothing/head/bowler, /obj/item/clothing/head/that)
 	new CHOICE(src.loc)
-	new /obj/item/clothing/shoes/black(src.loc)
+	new /obj/item/clothing/shoes/color/black(src.loc)
 	new /obj/item/cane(src.loc)
 	new /obj/item/clothing/under/sl_suit(src.loc)
 	new /obj/item/clothing/mask/fakemoustache(src.loc)

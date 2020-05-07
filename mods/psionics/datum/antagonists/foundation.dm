@@ -47,7 +47,7 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 	name = "Cuchulain Foundation Agent"
 	glasses =  /obj/item/clothing/glasses/sunglasses
 	uniform =  /obj/item/clothing/under/suit_jacket/charcoal
-	shoes =    /obj/item/clothing/shoes/black
+	shoes =    /obj/item/clothing/shoes/color/black
 	l_hand =   /obj/item/storage/briefcase/foundation
 	l_ear =    /obj/item/radio/headset/foundation
 	holster =  /obj/item/clothing/accessory/storage/holster/armpit

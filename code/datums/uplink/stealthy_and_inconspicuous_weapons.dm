@@ -21,6 +21,12 @@
 	item_cost = 8
 	path = /obj/item/cane/concealed
 
+/datum/uplink_item/item/stealthy_weapons/wcoat_armored
+	name = "Armoured Waistcoat"
+	desc = "A classy waistcoat that discreetly provides a layer of low-profile armor to the discerning agent."
+	item_cost = 6
+	path = /obj/item/clothing/accessory/wcoat/armored
+
 /datum/uplink_item/item/stealthy_weapons/random_toxin
 	name = "Random Toxin Vial"
 	desc = "Contains one of an assortment of nasty toxins, with a single syringe included. Don't worry, its labeled. "

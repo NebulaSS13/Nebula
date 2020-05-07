@@ -7,7 +7,7 @@
 	return list(
 		/obj/item/clothing/under/color/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/material/clipboard
@@ -22,7 +22,7 @@
 	return list(
 		/obj/item/clothing/under/color/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/shoes/color/white,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/gloves/latex,
@@ -40,7 +40,7 @@
 		/obj/item/clothing/suit/bio_suit/scientist = 2,
 		/obj/item/clothing/head/bio_hood/scientist = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/radio/headset/heads/rd,
 		/obj/item/clothing/mask/gas,

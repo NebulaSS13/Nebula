@@ -3698,7 +3698,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "ja" = (
-/obj/item/clothing/shoes/brown,
+/obj/item/clothing/shoes/color/brown,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)

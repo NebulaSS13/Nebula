@@ -1,0 +1,82 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	<div class="item">
+		{{:helper.link('REFRESH', null, { "refresh" : 1 })}}
+		{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}
+	</div>
+{{else}}
+	<i>Welcome to the Network Firewall Controller system. Please consult your system administrator if you have any questions about your device.</i><hr>
+	<div class="itemContent">
+		{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}
+	</div>
+	{{if !data.connected}}
+		<h2>Disconnected from network.</h2>
+	{{else}}
+		<h2>Viewing File System:</h2>
+		<div class='item'>
+			{{:helper.link(data.file_server, null, { "change_file_server" : 1 })}}
+		</div><hr>
+		{{if data.editing_user}}
+			<h2>Viewing User Record: {{:data.desired_name}}</h2>
+			<div class='item'>
+				<div class='itemLabel'>NAME:</div>
+				<div class='itemBody'>{{:data.desired_name}}</div>
+			</div>
+			<div class='item'>
+				<div class='itemLabel'>USER ID:</div>
+				<div class='itemBody'>{{:data.user_id}}</div>
+			</div>
+			<div class='item'>
+				<div class='itemLabel'>GRANT COUNT:</div>
+				<div class='itemBody'>{{:data.grant_count}}</div>
+			</div>
+			<div class='item'>
+				<div class='itemLabel'>RECORD SIZE:</div>
+				<div class='itemBody'>{{:data.size}}GQ</div>
+			</div>
+			<div class='item'>
+				{{:helper.link('CREATE GRANT', null, { "create_grant" : data.user_id })}}
+				{{if data.is_admin}}
+					{{:helper.link('REMOVE ADMIN', null, { "remove_admin": 1})}}
+				{{else}}
+					{{:helper.link('GRANT ADMIN', null, { "add_admin": 1})}}
+				{{/if}}
+				{{:helper.link('WRITE ID', null, { "write_id": 1}, !data.card_inserted ? 'disabled' : null)}}
+				{{:helper.link('EJECT ID', null, { "eject_id": 1}, !data.card_inserted ? 'disabled' : null)}}
+			</div>
+			<hr>
+			<table>
+				<tr><th>Grant
+				<th>Operations
+				{{for data.grants}}
+					<tr><td>{{:value.grant_name}}
+					<td>
+						{{if value.assigned}}
+							{{:helper.link('REMOVE', null, { "remove_grant" : value.grant_name })}}
+						{{else}}
+							{{:helper.link('ASSIGN', null, { "assign_grant" : value.grant_name })}}
+						{{/if}}
+						{{:helper.link('DELETE', null, { "delete_grant" : value.grant_name })}}
+				{{/for}}
+			</table>
+			{{:helper.link('Back to menu', null, { "back" : 1 })}}
+		{{else}}
+			<h2>Available Users ({{:data.file_server}}):</h2>
+			<table>
+				<tr><th>User ID
+				<th>Grants
+				<th>File size (GQ)
+				<th>Operations
+				{{for data.users}}
+					<tr><td>{{:value.desired_name}}
+					<td>{{:value.grant_count}}
+					<td>{{:value.size}}GQ
+					<td>
+						{{:helper.link('VIEW', null, { "view_user" : value.user_id })}}
+				{{/for}}
+			</table>
+		{{/if}}
+	{{/if}}
+{{/if}}

@@ -42,6 +42,19 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/bearcat/maintenance/atmos)
+"ae" = (
+/obj/structure/cable{
+	icon_state = "4-9"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/machinery/network/acl{
+	initial_network_id = "bearnet"
+	},
+/turf/simulated/floor/carpet/blue,
+/area/ship/bearcat/command/captain)
 "aj" = (
 /obj/effect/landmark/map_data{
 	height = 2
@@ -209,16 +222,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/bearcat/maintenance/atmos)
-"be" = (
-/obj/structure/cable{
-	icon_state = "4-9"
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	level = 2
-	},
-/turf/simulated/floor/carpet/blue,
-/area/ship/bearcat/command/captain)
 "bg" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/walllocker/emerglocker/north,
@@ -10332,7 +10335,7 @@ ar
 Wp
 aI
 aV
-be
+ae
 eq
 aa
 bA

@@ -122,7 +122,8 @@
 	else
 		..()
 
-/obj/item/weldingtool/water_act()
+/obj/item/weldingtool/fluid_act(var/datum/reagents/fluids)
+	..()
 	if(welding && !waterproof)
 		setWelding(0)
 

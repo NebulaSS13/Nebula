@@ -77,11 +77,10 @@
 		M.update_inv_l_hand(0)
 		M.update_inv_r_hand(1)
 
-/obj/item/clothing/mask/smokable/water_act(var/depth)
+/obj/item/clothing/mask/smokable/fluid_act(var/datum/reagents/fluids)
 	..()
 	if(!waterproof && lit)
-		if(submerged(depth))
-			extinguish(no_message = TRUE)
+		extinguish(no_message = TRUE)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(QDELETED(src))

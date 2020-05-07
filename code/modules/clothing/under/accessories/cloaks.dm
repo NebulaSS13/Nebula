@@ -29,15 +29,28 @@
 // Cloaks should layer over and under everything, so set the layer directly rather 
 // than relying on overlay order. This also overlays over inhands but it looks ok.
 /obj/item/clothing/accessory/cloak/apply_overlays(mob/user_mob, bodytype, image/overlay, slot)
+
 	if(slot == slot_wear_suit_str || slot == slot_tie_str || slot == slot_w_uniform_str)
-		var/bodyicon = get_icon_for_bodytype(bodytype)
-		var/image/underlay = image(bodyicon, "[bodytype]-underlay")
+
+		var/image/underlay
+		var/image/cloverlay
+
+		if(ishuman(user_mob) && bodytype != user_mob.get_bodytype())
+			var/mob/living/carbon/human/H = user_mob
+			var/bodyicon = get_icon_for_bodytype(BODYTYPE_HUMANOID)
+			underlay =  H.species.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-underlay", color, slot)
+			cloverlay = H.species.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-overlay", color, slot)
+		else
+			var/bodyicon = get_icon_for_bodytype(bodytype)
+			underlay = image(bodyicon, "[bodytype]-underlay")
+			cloverlay = image(bodyicon, "[bodytype]-overlay")
+
 		underlay.layer = MOB_LAYER-0.01
 		overlay.underlays = list(underlay)
-		var/image/cloverlay = image(bodyicon, "[bodytype]-overlay")
 		cloverlay.layer = MOB_LAYER+0.01
 		overlay.overlays = list(cloverlay)
-	. = ..()
+
+	. = overlay
 
 /obj/item/clothing/accessory/cloak/captain
 	name = "captain's cloak"

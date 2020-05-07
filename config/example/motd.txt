@@ -1,5 +1,5 @@
 <h1>Welcome to Space Station 13!</h1>
 
--<i>This server is running <a href="https://github.com/NebulaSS13/Nebula">Nebula</a>, a modification of the <a href="https://github.com/Baystation12/Baystation12">Baystation12/a> SS13 code.</i>
+-<i>This server is running <a href="https://github.com/NebulaSS13/Nebula">Nebula</a>, a modification of the <a href="https://github.com/Baystation12/Baystation12">Baystation12</a> SS13 code.</i>
 <br><br>
 <strong>Bugtracker:</strong> <a href="https://github.com/NebulaSS13/Nebula/issues">Go here for posting of bugs and issues.</a>

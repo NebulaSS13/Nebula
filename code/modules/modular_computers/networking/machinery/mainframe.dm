@@ -52,6 +52,6 @@
 	
 /obj/machinery/network/mainframe/on_update_icon()
 	if(operable())
-		icon_state = "server-on"
+		icon_state = "blackbox"
 	else
-		icon_state = "server-nopower"
+		icon_state = "blackbox_off"

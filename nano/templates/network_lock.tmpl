@@ -1,0 +1,38 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Refresh', null, { "refresh" : 1 })}}
+{{else}}
+	<h2>Editing Access Requirements:</h2>
+	<div class='item'>
+		<div class='itemBody'>{{:helper.link("NETWORK SETTINGS", null, { "settings" : 1 })}}</div>
+	</div>
+	{{if !data.connected}}
+		<hr>
+		<h2>Disconnected from network.</h2>
+	{{else}}
+		<div class='item'>
+			<div class='itemLabel'>Device Default State:</div>
+			<div class='itemBody'>
+				{{:helper.link('ALLOW ALL', null, { "allow_all" : 1 }, !data.default_state ? 'disabled' : null)}}
+				{{:helper.link('DENY ALL', null, { "deny_all" : 1 }, data.default_state ? 'disabled' : null)}}
+			</div>
+		</div>
+		<hr>
+		<h2>Grants:</h2>
+		<table>
+			<tr><th>Grant
+			<th>Operations
+			{{for data.grants}}
+				<tr><td>{{:value.grant_name}}
+				<td>
+					{{if value.assigned}}
+						{{:helper.link('REMOVE', null, { "remove_grant" : value.grant_name })}}
+					{{else}}
+						{{:helper.link('ASSIGN', null, { "assign_grant" : value.grant_name })}}
+					{{/if}}
+			{{/for}}
+		</table>
+	{{/if}}
+{{/if}}

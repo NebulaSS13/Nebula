@@ -133,8 +133,8 @@
 					/obj/item/clothing/under/suit_jacket/red,
 					/obj/item/clothing/under/lawyer/bluesuit,
 					/obj/item/clothing/under/lawyer/purpsuit,
-					/obj/item/clothing/shoes/black,
-					/obj/item/clothing/shoes/black,
+					/obj/item/clothing/shoes/color/black,
+					/obj/item/clothing/shoes/color/black,
 					/obj/item/clothing/shoes/leather,
 					/obj/item/clothing/accessory/wcoat/black)
 	name = "Costume - Formalwear"
@@ -236,7 +236,7 @@
 /decl/hierarchy/supply_pack/nonessent/chaplaingear
 	name = "Costume - Chaplain"
 	contains = list(/obj/item/clothing/under/rank/chaplain,
-					/obj/item/clothing/shoes/black,
+					/obj/item/clothing/shoes/color/black,
 					/obj/item/clothing/suit/nun,
 					/obj/item/clothing/head/nun_hood,
 					/obj/item/clothing/suit/chaplain_hoodie,

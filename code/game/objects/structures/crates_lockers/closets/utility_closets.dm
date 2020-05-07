@@ -130,7 +130,7 @@
 	return list(
 		/obj/item/clothing/suit/bomb_suit,
 		/obj/item/clothing/under/color/black,
-		/obj/item/clothing/shoes/black,
+		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/head/bomb_hood)
 
 
@@ -143,7 +143,7 @@
 	return list(
 		/obj/item/clothing/suit/bomb_suit/security,
 		/obj/item/clothing/under/rank/security,
-		/obj/item/clothing/shoes/brown,
+		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/head/bomb_hood/security)
 
 /*
