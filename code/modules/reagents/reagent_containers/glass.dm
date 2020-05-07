@@ -107,6 +107,7 @@
 	center_of_mass = @"{'x':15,'y':10}"
 	material = MAT_GLASS
 	applies_material_name = TRUE
+	applies_material_colour = TRUE
 	material_force_multiplier = 0.25
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 
@@ -193,6 +194,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
 	material_force_multiplier = 2.5
+	applies_material_colour = FALSE
 	material = MAT_STEEL
 	matter = list(
 		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
@@ -220,6 +222,7 @@
 	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
+	applies_material_colour = FALSE
 	temperature_coefficient = 1
 	material = null
 
