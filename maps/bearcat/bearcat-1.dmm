@@ -374,6 +374,12 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/bearcat/cargo/lower)
+"be" = (
+/obj/machinery/network/relay{
+	initial_network_id = "bearnet"
+	},
+/turf/simulated/floor/tiled,
+/area/ship/bearcat/broken1)
 "bf" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -2345,12 +2351,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/escape_port)
-"jw" = (
-/obj/machinery/network/relay{
-	initial_network_id = "bearnet"
-	},
-/turf/simulated/floor/tiled,
-/area/ship/bearcat/broken1)
 "jD" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -5614,7 +5614,7 @@ cs
 cs
 cQ
 da
-jw
+be
 ob
 pb
 WZ

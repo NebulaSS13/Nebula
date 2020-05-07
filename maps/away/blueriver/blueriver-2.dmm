@@ -584,7 +584,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
 "bP" = (
-/obj/structure/fuel_port,
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
 "bQ" = (

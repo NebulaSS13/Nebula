@@ -1686,9 +1686,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cH" = (
-/obj/structure/fuel_port{
-	pixel_x = -32
-	},
 /obj/machinery/atmospherics/valve/shutoff{
 	level = 2
 	},
@@ -1707,9 +1704,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cJ" = (
-/obj/structure/fuel_port{
-	pixel_x = 32
-	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 2;
 	icon_state = "warning"

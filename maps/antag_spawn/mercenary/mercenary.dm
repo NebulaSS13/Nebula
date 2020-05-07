@@ -38,7 +38,6 @@
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/merc
 	warmup_time = 5
 	range = 1
-	fuel_consumption = 7
 	skill_needed = SKILL_BASIC
 
 /turf/simulated/floor/shuttle_ceiling/merc

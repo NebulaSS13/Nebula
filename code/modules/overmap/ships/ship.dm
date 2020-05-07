@@ -231,7 +231,8 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	if (world.time < last_burn + burn_delay)
 		return 0
 	for(var/datum/extension/ship_engine/E in engines)
-		. |= E.can_burn()
+		if(E.can_burn())
+			return TRUE // If even one engine can burn, we can burn.
 
 //deciseconds to next step
 /obj/effect/overmap/visitable/ship/proc/ETA()

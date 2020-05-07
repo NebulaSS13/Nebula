@@ -58,25 +58,37 @@
 	</div>
 	<span class="average">{{:data.destination_name}}</span>
 	<div class="item">
-		{{:helper.link('Choose Destination', 'arrowreturn-1-s', {'pick' : '1'}, data.can_pick ? null : 'disabled' , null)}}
+		{{:helper.link('Choose Destination', 'arrowreturn-1-s', {'pick' : '1'}, data.can_pick && !data.can_resume ? null : 'disabled' , null)}}
 	</div>
 	<div class="item">
-		{{:helper.link('Manual Landing', 'arrowthickstop-1-s', {'manual_landing' : '1'})}}
+		{{:helper.link('Manual Landing', 'arrowthickstop-1-s', {'manual_landing' : '1'}, data.can_resume ? 'disabled' : null)}}
 	</div>
 </div>
-{{if data.fuel_usage}}
+{{if data.is_ship}}
 	<div class="item" style="padding-top: 10px">
-		<div class="itemLabel">
-			Est. Delta-V Budget:
+		<div class="item">
+			<div class="itemLabel">
+				Est. Delta-V Budget:
+			</div>
+			<div class="itemContent">
+				<span class='{{:data.fuel_span}}'>{{:data.delta_v_budget}} Km/s</span>
+			</div>
 		</div>
-		<div class="itemContent">
-			<span class='{{:data.fuel_span}}'>{{:data.remaining_fuel}} m/s</span>
+		<div class="item">
+			<div class="itemLabel">
+				Avg. Delta-V Per Maneuver:
+			</div>
+			<div class="itemContent">
+				{{:data.delta_v}} Km/s
+			</div>
 		</div>
-		<div class="itemLabel">
-			Avg. Delta-V Per Maneuver:
-		</div>
-		<div class="itemContent">
-			 {{:data.fuel_usage}} m/s
+		<div class="item">
+			<div class="itemLabel">
+				Total Delta-V:
+			</div>
+			<div class="itemContent">
+				{{:data.total_delta_v}}
+			</div>
 		</div>
 	</div>
 {{/if}}
@@ -87,6 +99,7 @@
 			{{:helper.link('Launch Shuttle', 'arrowthickstop-1-e', {'move' : '1'}, data.can_launch ? null : 'disabled' , null)}}
 			{{:helper.link('Cancel Launch', 'cancel', {'cancel' : '1'}, data.can_cancel ? null : 'disabled' , null)}}
 			{{:helper.link('Force Launch', 'alert', {'force' : '1'}, data.can_force ? null : 'disabled' , data.can_force ? 'redButton' : null)}}
+			{{:helper.link('Resume Launch', 'arrowthickstop-1-e', {'resume': '1'}, data.can_resume ? null : 'disabled')}}
 		</div>
 	</div>
 </div>

@@ -80,51 +80,54 @@
 	moving_status = SHUTTLE_WARMUP
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
-	spawn(warmup_time*10)
-		if (moving_status == SHUTTLE_IDLE)
-			return FALSE	//someone cancelled the launch
+	addtimer(CALLBACK(src, .proc/do_short_jump, destination), warmup_time * 10)
+		
 
-		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
-			var/datum/shuttle/autodock/S = src
-			if(istype(S))
-				S.cancel_launch(null)
-			return
+/datum/shuttle/proc/do_short_jump(var/obj/effect/shuttle_landmark/destination)
+	if (moving_status == SHUTTLE_IDLE)
+		return FALSE	//someone cancelled the launch
 
-		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
-		attempt_move(destination)
-		moving_status = SHUTTLE_IDLE
+	if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+		var/datum/shuttle/autodock/S = src
+		if(istype(S))
+			S.cancel_launch(null)
+		return
+
+	moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
+	attempt_move(destination)
+	moving_status = SHUTTLE_IDLE
 
 /datum/shuttle/proc/long_jump(var/obj/effect/shuttle_landmark/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
 	if(moving_status != SHUTTLE_IDLE) return
-
-	var/obj/effect/shuttle_landmark/start_location = current_location
-
+	
 	moving_status = SHUTTLE_WARMUP
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
-	spawn(warmup_time*10)
-		if(moving_status == SHUTTLE_IDLE)
-			return	//someone cancelled the launch
+	addtimer(CALLBACK(src, .proc/do_long_jump, destination, interim, travel_time), warmup_time * 10)
 
-		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
-			var/datum/shuttle/autodock/S = src
-			if(istype(S))
-				S.cancel_launch(null)
-			return
+/datum/shuttle/proc/do_long_jump(var/obj/effect/shuttle_landmark/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
+	if(moving_status == SHUTTLE_IDLE)
+		return	//someone cancelled the launch
 
-		arrive_time = world.time + travel_time*10
-		moving_status = SHUTTLE_INTRANSIT
-		if(attempt_move(interim))
-			var/fwooshed = 0
-			while (world.time < arrive_time)
-				if(!fwooshed && (arrive_time - world.time) < 100)
-					fwooshed = 1
-					playsound(destination, sound_landing, 100, 0, 7)
-				sleep(5)
-			if(!attempt_move(destination))
-				attempt_move(start_location) //try to go back to where we started. If that fails, I guess we're stuck in the interim location
+	if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+		var/datum/shuttle/autodock/S = src
+		if(istype(S))
+			S.cancel_launch(null)
+		return
 
-		moving_status = SHUTTLE_IDLE
+	arrive_time = world.time + travel_time*10
+	moving_status = SHUTTLE_INTRANSIT
+	if(attempt_move(interim))
+		var/fwooshed = 0
+		while (world.time < arrive_time)
+			if(!fwooshed && (arrive_time - world.time) < 100)
+				fwooshed = 1
+				playsound(destination, sound_landing, 100, 0, 7)
+			sleep(5)
+		if(!attempt_move(destination))
+			attempt_move(current_location) //try to go back to where we started. If that fails, I guess we're stuck in the interim location
+
+	moving_status = SHUTTLE_IDLE
 
 /datum/shuttle/proc/fuel_check()
 	return 1 //fuel check should always pass in non-overmap shuttles (they have magic engines)

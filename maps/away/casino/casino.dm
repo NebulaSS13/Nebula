@@ -67,7 +67,6 @@
 	shuttle_area = /area/casino/casino_cutter
 	current_location = "nav_casino_hangar"
 	landmark_transition = "nav_casino_transit"
-	fuel_consumption = 0.5//it's small
 	range = 1
 	defer_initialisation = TRUE
 

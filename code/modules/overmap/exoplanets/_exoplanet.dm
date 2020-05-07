@@ -71,6 +71,10 @@
 	var/list/possible_features = list()
 	var/list/spawned_features
 
+	//Details regarding flight characteristics of the planet.
+	var/planet_radius
+	var/gravity
+
 	var/habitability_class	// if it's above bad, atmosphere will be adjusted to be better for humans (no extreme temps / oxygen to breathe)
 
 /obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
@@ -92,6 +96,11 @@
 		themes += new T
 		possible_themes -= T
 	name = "[generate_planet_name()], \a [name]"
+
+	if(!planet_radius)
+		planet_radius = rand(0.5, 2.5)
+	if(!gravity)
+		gravity = planet_radius * rand(3, 5) + 2
 
 	generate_habitability()
 	generate_atmosphere()

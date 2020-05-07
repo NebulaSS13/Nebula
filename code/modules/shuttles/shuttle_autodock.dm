@@ -145,6 +145,9 @@
 /datum/shuttle/autodock/proc/can_cancel()
 	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)
 
+/datum/shuttle/autodock/proc/can_resume()
+	return (moving_status == SHUTTLE_FREEFALL && next_location.is_valid(src))
+
 /*
 	"Public" procs
 */

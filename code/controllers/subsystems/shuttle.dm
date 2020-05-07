@@ -148,3 +148,8 @@ SUBSYSTEM_DEF(shuttle)
 
 /datum/controller/subsystem/shuttle/stat_entry()
 	..("Shuttles:[shuttles.len], Ships:[ships.len], L:[registered_shuttle_landmarks.len][overmap_halted ? ", HALT" : ""]")
+
+/datum/controller/subsystem/shuttle/proc/get_ship_by_shuttle(var/datum/shuttle/S)
+	for(var/obj/effect/overmap/visitable/ship/landable/ship in ships)
+		if(ship.shuttle == S.name)
+			return ship

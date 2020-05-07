@@ -66,3 +66,44 @@
 
 	// Convert kilograms to metric tonnes.
 	. = . / 1000
+
+// Returns the delta-v budget required to get to the destination.
+/obj/effect/overmap/visitable/ship/proc/get_delta_v_budget(var/obj/effect/overmap/visitable/destination)
+	var/obj/effect/overmap/visitable/location = loc
+	var/to_planet = istype(destination, /obj/effect/overmap/visitable/sector/exoplanet)
+	var/from_planet = istype(location, /obj/effect/overmap/visitable/sector/exoplanet)
+
+	var/delta_v = 0
+	if(from_planet && !to_planet)
+		var/obj/effect/overmap/visitable/sector/exoplanet/planet = destination
+		var/orbit_radius = planet.planet_radius + 90000
+		// We are taking off into space.
+		var/E = -1 * (planet.gravity / (2 * orbit_radius))
+		var/v_leo = sqrt(2 * (E + (planet.gravity / orbit_radius)))
+		var/gravity_loss = (planet.gravity * 2) * 0.8
+		// delta_v in km/s
+		delta_v = v_leo + gravity_loss
+	else if(to_planet && !from_planet)
+		// We are landing on a planet.
+		var/obj/effect/overmap/visitable/sector/exoplanet/planet = location
+		var/orbit_radius = planet.planet_radius + 90000 // Our current orbit.
+		// We are taking off into space.
+		var/E = -1 * (planet.gravity / (2 * orbit_radius))
+		var/v_leo = sqrt(2 * (E + (planet.gravity / orbit_radius)))
+		var/gravity_gain = (planet.gravity * 2) * 0.8
+		delta_v = Clamp((v_leo / 1.4) - gravity_gain, 0, 50)
+	else if(to_planet && from_planet)
+		var/obj/effect/overmap/visitable/sector/exoplanet/planet = destination
+		delta_v = planet.gravity * 0.8
+	else
+		// We are moving around in space.
+		// This is a goofy equation.
+		if(istype(destination, /obj/effect/overmap/visitable/ship))
+			// we's going to a ship. this is a *really* goofy equation.
+			var/obj/effect/overmap/visitable/ship/destination_ship = destination
+			// How big our ships are in relation results in how much delta-v it'll take to uh.. 'encounter' them. This isn't real math.
+			// this is fake game math.
+			delta_v = Clamp(log(max(destination_ship.vessel_mass, vessel_mass) / min(destination_ship.vessel_mass, vessel_mass)), 0.1, 0.9)
+		delta_v = 0.1 // Traveling around in space is e.z..
+	return delta_v
+

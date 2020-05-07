@@ -48,6 +48,7 @@
 #define SHUTTLE_IDLE      0
 #define SHUTTLE_WARMUP    1
 #define SHUTTLE_INTRANSIT 2
+#define SHUTTLE_FREEFALL  3
 
 // Autodock shuttle processing status.
 #define IDLE_STATE   0

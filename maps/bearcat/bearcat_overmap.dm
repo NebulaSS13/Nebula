@@ -11,3 +11,7 @@
 	initial_restricted_waypoints = list(
 		"Exploration Pod" = list("nav_bearcat_starboard_dock_pod"), //pod can only dock starboard-side, b/c there's only one door.
 	)
+
+/obj/effect/overmap/visitable/ship/landable/outgoing
+	shuttle = "Exploration Shuttle"
+	

@@ -30,6 +30,9 @@
 
 	if(requires_contact)
 		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
+
+	if(!color) // color is required. choose a random one if none chosen.
+		color = get_random_colour()
 	update_icon()
 
 /obj/effect/overmap/Crossed(var/obj/effect/overmap/visitable/other)

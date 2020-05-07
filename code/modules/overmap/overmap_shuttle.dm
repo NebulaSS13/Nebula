@@ -4,32 +4,20 @@
 	warmup_time = 10
 
 	var/range = 0	//how many overmap tiles can shuttle go, for picking destinations and returning.
-	var/fuel_consumption = 0 //Amount of moles of gas consumed per trip; If zero, then shuttle is magic and does not need fuel
-	var/list/obj/structure/fuel_port/fuel_ports //the fuel ports of the shuttle (but usually just one)
 
 	category = /datum/shuttle/autodock/overmap
 	var/skill_needed = SKILL_BASIC
 	var/operator_skill = SKILL_MIN
 
-/datum/shuttle/autodock/overmap/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
-	..(_name, start_waypoint)
-	refresh_fuel_ports_list()
-
-/datum/shuttle/autodock/overmap/proc/refresh_fuel_ports_list() //loop through all
-	fuel_ports = list()
-	for(var/area/A in shuttle_area)
-		for(var/obj/structure/fuel_port/fuel_port_in_area in A)
-			fuel_port_in_area.parent_shuttle = src
-			fuel_ports += fuel_port_in_area
-
 /datum/shuttle/autodock/overmap/fuel_check()
-	if(!src.try_consume_fuel()) //insufficient fuel
+	var/delta_v = try_consume_fuel()
+	if(!delta_v) //insufficient fuel or burn failed.
 		for(var/area/A in shuttle_area)
 			for(var/mob/living/M in A)
-				M.show_message(SPAN_WARNING("You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?"), AUDIBLE_MESSAGE,
-				SPAN_WARNING("The shuttle shakes but fails to take off."), VISIBLE_MESSAGE)
-				return 0 //failure!
-	return 1 //sucess, continue with launch
+				M.show_message(SPAN_WARNING("You hear the shuttle engines sputter... and quietly die off. Perhaps they ran out of fuel?"), AUDIBLE_MESSAGE,
+				SPAN_WARNING("The shuttle rumbles and then becomes still."), VISIBLE_MESSAGE)
+				return FALSE //failure!
+	return delta_v //success, continue with launch
 
 /datum/shuttle/autodock/overmap/proc/can_go()
 	if(!next_location)
@@ -37,14 +25,18 @@
 	if(moving_status == SHUTTLE_INTRANSIT)
 		return FALSE //already going somewhere, current_location may be an intransit location instead of in a sector
 
+	var/obj/effect/overmap/visitable/ship/ship = SSshuttle.get_ship_by_shuttle(src)
+	if(istype(ship))
+		// Bypass range check for ships.
+		return TRUE
+
 	//ensures that distances are calculated correctly when dealing with multi-tile sectors
 	var/atom/movable/current_sector = waypoint_sector(current_location)
 	var/atom/movable/next_sector = waypoint_sector(next_location)
-	for(var/turf/current_loc_turf in (current_sector.locs))
-		for(var/turf/next_loc_turf in (next_sector.locs))
+	for(var/turf/current_loc_turf in current_sector.locs)
+		for(var/turf/next_loc_turf in next_sector.locs)
 			if(get_dist(current_loc_turf, next_loc_turf) <= range)
 				return TRUE
-
 	return FALSE
 
 /datum/shuttle/autodock/overmap/can_launch()
@@ -54,16 +46,43 @@
 	return ..() && can_go()
 
 /datum/shuttle/autodock/overmap/get_travel_time()
-	var/distance_mod = get_dist(waypoint_sector(current_location),waypoint_sector(next_location))
+	var/distance_mod = get_dist(waypoint_sector(current_location), waypoint_sector(next_location))
 	var/skill_mod = 0.2*(skill_needed - operator_skill)
 	return move_time * (1 + distance_mod + skill_mod)
 
 /datum/shuttle/autodock/overmap/process_launch()
-	if(prob(10*max(0, skill_needed - operator_skill)))
+	if(prob(10 * max(0, skill_needed - operator_skill)))
 		var/places = get_possible_destinations()
 		var/place = pick(places)
 		set_destination(places[place])
-	..()
+
+	check_transition()
+	return ..()
+
+// This proc will look at our destination and make sure we have a transition layer created & ready for our arrival.
+/datum/shuttle/autodock/overmap/proc/check_transition()
+	if(!next_location)
+		return FALSE
+
+	// Normal transition.
+	if(!landmark_transition)
+		INCREMENT_WORLD_Z_SIZE
+		landmark_transition = new("[name] transit")
+		landmark_transition.loc = locate(100, 100, world.maxz)
+	
+	var/transit_z = landmark_transition.loc.z
+
+	var/obj/effect/overmap/visitable/current_sector = waypoint_sector(current_location)
+	var/obj/effect/overmap/visitable/next_sector = waypoint_sector(next_location) 
+	if(current_sector.is_planet() || next_sector.is_planet())
+		// We landin on a planet (or taking off from).		
+		for(var/turf/T in block(locate(0, 0, transit_z), locate(world.maxx, world.maxy, transit_z)))
+			T.ChangeTurf(/turf/simulated/open)
+	else
+		// Space transit.
+		for(var/turf/T in block(locate(0, 0, transit_z), locate(world.maxx, world.maxy, transit_z)))
+			T.ChangeTurf(/turf/space)
+	return TRUE
 
 /datum/shuttle/autodock/overmap/proc/set_destination(var/obj/effect/shuttle_landmark/A)
 	if(A != current_location)
@@ -91,88 +110,123 @@
 		return "None"
 	return "[waypoint_sector(next_location)] - [next_location]"
 
-/datum/shuttle/autodock/overmap/proc/try_consume_fuel() //returns 1 if sucessful, returns 0 if error (like insufficient fuel)
-	if(!fuel_consumption)
-		return 1 //shuttles with zero fuel consumption are magic and can always launch
-	if(!fuel_ports.len)
-		return 0 //Nowhere to get fuel from
-	var/list/obj/item/tank/fuel_tanks = list()
-	for(var/obj/structure/FP in fuel_ports) //loop through fuel ports and assemble list of all fuel tanks
-		var/obj/item/tank/FT = locate() in FP
-		if(FT)
-			fuel_tanks += FT
-	if(!fuel_tanks.len)
-		return 0 //can't launch if you have no fuel TANKS in the ports
-	var/total_flammable_gas_moles = 0
-	for(var/obj/item/tank/FT in fuel_tanks)
-		total_flammable_gas_moles += FT.air_contents.get_by_flag(XGM_GAS_FUEL)
-	if(total_flammable_gas_moles < fuel_consumption) //not enough fuel
-		return 0
-	// We are going to succeed if we got to here, so start consuming that fuel
-	var/fuel_to_consume = fuel_consumption
-	for(var/obj/item/tank/FT in fuel_tanks) //loop through tanks, consume their fuel one by one
-		var/fuel_available = FT.air_contents.get_by_flag(XGM_GAS_FUEL)
-		if(!fuel_available) // Didn't even have fuel.
-			continue
-		if(fuel_available >= fuel_to_consume)
-			FT.remove_air_by_flag(XGM_GAS_FUEL, fuel_to_consume)
-			return 1 //ALL REQUIRED FUEL HAS BEEN CONSUMED, GO FOR LAUNCH!
-		else //this tank doesn't have enough to launch shuttle by itself, so remove all its fuel, then continue loop
-			fuel_to_consume -= fuel_available
-			FT.remove_air_by_flag(XGM_GAS_FUEL, fuel_available)
+/datum/shuttle/autodock/overmap/proc/try_consume_fuel() //returns delta v produced if sucessful, returns 0 if error (like insufficient fuel)
+	var/obj/effect/overmap/visitable/ship/ship = SSshuttle.get_ship_by_shuttle(src)
+	return ship.get_delta_v(TRUE)
 
-/obj/structure/fuel_port
-	name = "fuel port"
-	desc = "The fuel input port of the shuttle. Holds one fuel tank. Use a crowbar to open and close it."
-	icon = 'icons/turf/shuttle.dmi'
-	icon_state = "fuel_port"
-	density = 0
-	anchored = 1
-	var/icon_closed = "fuel_port"
-	var/icon_empty = "fuel_port_empty"
-	var/icon_full = "fuel_port_full"
-	var/opened = 0
-	var/parent_shuttle
+/datum/shuttle/autodock/overmap/proc/get_heaviest_landmark() // If our destination or origin position are a planet, it returns that.
+	var/obj/effect/overmap/visitable/sector = waypoint_sector(next_location)
+	if(sector.is_planet())
+		return next_location
+	sector = waypoint_sector(current_location)
+	if(sector.is_planet())
+		return current_location
 
-/obj/structure/fuel_port/Initialize()
-	. = ..()
-	new /obj/item/tank/hydrogen(src)
+/datum/shuttle/autodock/overmap/do_long_jump(var/obj/effect/shuttle_landmark/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
+	if(moving_status == SHUTTLE_IDLE)
+		return	//someone cancelled the launch
 
-/obj/structure/fuel_port/attack_hand(mob/user)
-	if(!opened)
-		to_chat(user, SPAN_WARNING("The door is secured tightly. You'll need a crowbar to open it."))
+	var/obj/effect/overmap/visitable/ship/ship = SSshuttle.get_ship_by_shuttle(src)
+	if(!istype(ship))
+		// Somehow this got called by a shuttle w/o a ship reference?
+		return ..() // Safety return.
+
+	var/delta_v = fuel_check()
+	if(!delta_v) // engines failed to produce thrust.
+		var/datum/shuttle/autodock/S = src
+		if(istype(S))
+			S.cancel_launch(null)
 		return
-	else if(contents.len > 0)
-		user.put_in_hands(contents[1])
-	update_icon()
 
-/obj/structure/fuel_port/on_update_icon()
-	if(opened)
-		if(contents.len > 0)
-			icon_state = icon_full
-		else
-			icon_state = icon_empty
-	else
-		icon_state = icon_closed
+	var/delta_v_budget = ship.get_delta_v_budget(waypoint_sector(destination))
 
-/obj/structure/fuel_port/attackby(obj/item/W, mob/user)
-	if(isCrowbar(W))
-		if(opened)
-			to_chat(user, SPAN_NOTICE("You tightly shut \the [src] door."))
-			playsound(src.loc, 'sound/effects/locker_close.ogg', 25, 0, -3)
-			opened = 0
+	arrive_time = world.time + ((delta_v_budget / delta_v) * 10 SECONDS) // Estimated!
+	moving_status = SHUTTLE_INTRANSIT
+	if(attempt_move(interim))
+		playsound(destination, sound_landing, 100, 0, 7)
+
+	addtimer(CALLBACK(src, .proc/continue_long_jump, destination, 1, delta_v_budget, delta_v_budget - delta_v), 10 SECONDS)
+
+/datum/shuttle/autodock/overmap/proc/continue_long_jump(var/obj/effect/shuttle_landmark/destination, var/burns, var/delta_v_budget, var/remaining_delta_v)
+	var/delta_v = fuel_check()
+
+	if(burns >= 5 || !delta_v)
+		var/obj/effect/shuttle_landmark/landmark = get_heaviest_landmark()
+		var/obj/effect/overmap/visitable/sector = waypoint_sector(landmark)
+		if(landmark && sector && sector.is_planet())
+			// Enter freefall. We're super fucked!
+			return freefall(landmark, remaining_delta_v)
 		else
-			to_chat(user, SPAN_NOTICE("You open up \the [src] door."))
-			playsound(src.loc, 'sound/effects/locker_open.ogg', 15, 1, -3)
-			opened = 1
-	else if(istype(W,/obj/item/tank))
-		if(!opened)
-			to_chat(user, SPAN_WARNING("\The [src] door is still closed!"))
+			// This is just space transit. We're stuck here now.
+			moving_status = SHUTTLE_FREEFALL // We're in freefall but not destructively. Nothing to hit.
 			return
-		if(contents.len == 0)
-			user.unEquip(W, src)
-	update_icon()
 
-// Walls hide stuff inside them, but we want to be visible.
-/obj/structure/fuel_port/hide()
-	return
+	var/new_remaining_delta_v = remaining_delta_v - delta_v
+	arrive_time = world.time + ((delta_v_budget / new_remaining_delta_v) * 10 SECONDS) // Estimated!	
+
+	if(remaining_delta_v > 0)
+		addtimer(CALLBACK(src, .proc/continue_long_jump, destination, burns + 1, delta_v_budget, new_remaining_delta_v), 10 SECONDS)
+	else if(attempt_move(destination))
+		playsound(destination, sound_landing, 100, 0, 7)
+		moving_status = SHUTTLE_IDLE // We landed!
+
+/datum/shuttle/autodock/overmap/proc/freefall(var/obj/effect/shuttle_landmark/destination, var/remaining_delta_v)
+	var/obj/effect/overmap/visitable/sector = waypoint_sector(destination)
+	
+	var/is_descending = istype(sector, /obj/effect/overmap/visitable/sector/exoplanet)
+	for(var/area/A in shuttle_area)
+		for(var/mob/living/M in A)
+			M.show_message(SPAN_WARNING("The ship rattles and becomes still as it ceases controlled [is_descending ? "descent" : "ascent"]. The ground sure seems to be approaching fast."), VISIBLE_MESSAGE)
+	moving_status = SHUTTLE_FREEFALL
+
+	var/freefall_time = min(30, remaining_delta_v) SECONDS
+	addtimer(CALLBACK(src, .proc/do_freefall, destination, remaining_delta_v), freefall_time)
+
+/datum/shuttle/autodock/overmap/proc/do_freefall(var/obj/effect/shuttle_landmark/destination, var/remaining_delta_v)
+	if(moving_status != SHUTTLE_FREEFALL)
+		return // We pulled out!
+	// Crash!
+	crash_land(3, destination)
+
+// Force moves a shuttle to the given landmark and damages the shuttle via explosions. The explosions will be placed semi-randomly,
+// targeting the outer areas of the shuttle more severely. Severity determines how 'bad' the crash is, increasing the strength of explosions.
+// Number of explosions is determined by the size of the shuttle via amount of turfs.
+/datum/shuttle/autodock/overmap/proc/crash_land(var/severity, var/obj/effect/shuttle_landmark/crash_zone)
+    if(!crash_zone)
+        return
+   
+    attempt_move(crash_zone)
+ 
+    var/max_x
+    var/max_y
+    var/min_x
+    var/min_y
+    var/shuttle_z
+ 
+    // List of potential 'targets' for the explosions.
+    var/list/shuttle_turfs = list()
+   
+    // Locating the approximate center of the shuttle in order to weight the probability of a turf being targeted.
+    for(var/area/A in shuttle_area)
+        for(var/turf/T in A.contents)
+            if(!max_x && !max_y && !min_x && !min_y)
+                max_x = T.x
+                max_y = T.y
+                min_x = T.x
+                min_y = T.y
+ 
+                shuttle_z = T.z
+ 
+            shuttle_turfs += T
+            max_x = max(T.x, max_x)
+            max_y = max(T.y, max_y)
+            min_x = min(T.x, max_x)
+            min_y = min(T.y, min_y)
+ 
+    var/turf/center_turf = locate(round(min_x + ((max_x - min_x)/2)), round(min_y + ((max_y - min_y/2))), shuttle_z)
+ 
+    for(var/turf/T in shuttle_turfs)
+        shuttle_turfs[T] = get_dist(T, center_turf)
+ 
+    for(var/explosion_count = 0 to length(shuttle_turfs) step 20) // 1 explosion for every 20 turfs in the shuttle, still weighting the edges.
+        explosion(pickweight(shuttle_turfs), severity-2, severity, severity+2, 5)

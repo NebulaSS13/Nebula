@@ -101,6 +101,9 @@
 /obj/effect/overmap/visitable/proc/generate_skybox()
 	return
 
+/obj/effect/overmap/visitable/proc/is_planet()
+	return istype(src, /obj/effect/overmap/visitable/sector/exoplanet)
+
 /obj/effect/overmap/visitable/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
