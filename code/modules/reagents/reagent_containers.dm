@@ -19,6 +19,19 @@
 		return TRUE
 	return FALSE
 
+/obj/item/chems/proc/get_base_name()
+	. = initial(name)
+
+/obj/item/chems/on_reagent_change()
+	if(atom_flags & ATOM_FLAG_SHOW_REAGENT_NAME)
+		var/decl/reagent/R = reagents?.get_primary_reagent_decl()
+		var/newname = get_base_name()
+		if(R)
+			newname = "[newname] of [R.get_presentation_name(src)]"
+		if(newname != name)
+			SetName(newname)
+	update_icon()
+
 /obj/item/chems/verb/set_amount_per_transfer_from_this()
 	set name = "Set Transfer Amount"
 	set category = "Object"

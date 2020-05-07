@@ -59,7 +59,7 @@
 			/obj/item/chems/chem_disp_cartridge/coffee,
 			/obj/item/chems/chem_disp_cartridge/hot_coco,
 			/obj/item/chems/chem_disp_cartridge/cream,
-			/obj/item/chems/chem_disp_cartridge/tea,
+			/obj/item/chems/chem_disp_cartridge/black_tea,
 			/obj/item/chems/chem_disp_cartridge/green_tea,
 			/obj/item/chems/chem_disp_cartridge/chai_tea,
 			/obj/item/chems/chem_disp_cartridge/red_tea,
@@ -119,12 +119,11 @@
 /obj/machinery/chemical_dispenser/bar_coffee/full
 	spawn_cartridges = list(
 			/obj/item/chems/chem_disp_cartridge/coffee,
-			/obj/item/chems/chem_disp_cartridge/cafe_latte,
-			/obj/item/chems/chem_disp_cartridge/soy_latte,
 			/obj/item/chems/chem_disp_cartridge/hot_coco,
 			/obj/item/chems/chem_disp_cartridge/milk,
+			/obj/item/chems/chem_disp_cartridge/soymilk,
 			/obj/item/chems/chem_disp_cartridge/cream,
-			/obj/item/chems/chem_disp_cartridge/tea,
+			/obj/item/chems/chem_disp_cartridge/black_tea,
 			/obj/item/chems/chem_disp_cartridge/green_tea,
 			/obj/item/chems/chem_disp_cartridge/chai_tea,
 			/obj/item/chems/chem_disp_cartridge/red_tea,
