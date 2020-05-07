@@ -22,10 +22,9 @@
 	ore_scan_icon = "mineral_rare"
 	xarch_source_mineral = /decl/reagent/ammonia
 	ore_icon_overlay = "gems"
-	sale_price = 5
 	sheet_singular_name = "gem"
 	sheet_plural_name = "gems"
-	value = 70
+	value = 1.8
 
 /material/diamond/crystal
 	display_name = "crystal"
@@ -33,8 +32,8 @@
 	reflectiveness = MAT_VALUE_VERY_SHINY
 	stack_type = null
 	ore_compresses_to = null
-	sale_price = null
 	hidden_from_codex = TRUE
+	value = 2
 
 /material/stone
 	display_name = "sandstone"
@@ -57,8 +56,7 @@
 	chem_products = list(
 		/decl/reagent/silicon = 20
 		)
-	sale_price = 1
-	value = 4
+	value = 1.5
 
 /material/stone/ceramic
 	display_name = "ceramic"
@@ -78,15 +76,13 @@
 	stack_type = /obj/item/stack/material/marble
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	chem_products = null
-	sale_price = 4
-	value = 20
 
 /material/stone/concrete
 	display_name = "concrete"
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	stack_type = /obj/item/stack/material/generic/brick
 	icon_colour = COLOR_GRAY
-	value = 1
+	value = 0.9
 	var/image/texture
 
 /material/stone/concrete/New()
