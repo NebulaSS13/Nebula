@@ -297,7 +297,8 @@
 
 /obj/item/chems/food/drinks/bottle/patron/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/ethanol/patron, 100)
+	reagents.add_reagent(/decl/reagent/ethanol/tequilla, 95)
+	reagents.add_reagent(/decl/reagent/silver, 5)
 
 /obj/item/chems/food/drinks/bottle/rum
 	name = "Captain Pete's Cuban Spiced Rum"
@@ -347,7 +348,8 @@
 
 /obj/item/chems/food/drinks/bottle/goldschlager/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/ethanol/goldschlager, 100)
+	reagents.add_reagent(/decl/reagent/ethanol/vodka, 95)
+	reagents.add_reagent(/decl/reagent/gold, 5)
 
 /obj/item/chems/food/drinks/bottle/cognac
 	name = "Chateau De Baton Premium Cognac"

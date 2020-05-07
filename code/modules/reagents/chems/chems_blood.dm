@@ -1,5 +1,5 @@
 /decl/reagent/blood
-	name = "Blood"
+	name = "blood"
 	description = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
 	metabolism = REM * 5
 	color = "#c80000"

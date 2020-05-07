@@ -403,20 +403,6 @@
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
 
-/decl/reagent/drink/rewriter
-	name = "Rewriter"
-	description = "The secret of the sanctuary of the Libarian..."
-	taste_description = "a bad night out"
-	color = "#485000"
-	adj_temp = -5
-
-	glass_name = "Rewriter"
-	glass_desc = "The secret of the sanctuary of the Libarian..."
-
-/decl/reagent/drink/rewriter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	..()
-	M.make_jittery(5)
-
 /decl/reagent/drink/mutagencola
 	name = "mutagen cola"
 	description = "The energy of a radioactive isotope in beverage form."
@@ -503,26 +489,6 @@
 	glass_name = "lemon lime soda"
 	glass_desc = "A tangy substance made of 0.5% natural citrus!"
 	glass_special = list(DRINK_FIZZ)
-
-/decl/reagent/drink/doctor_delight
-	name = "The Doctor's Delight"
-	description = "Tasty drink that keeps you healthy and doctors bored.  Just the way they like it."
-	taste_description = "homely fruit"
-	color = "#ff8cff"
-	nutrition = 1
-
-	glass_name = "The Doctor's Delight"
-	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next exile decides to put a few new holes in you."
-
-/decl/reagent/drink/doctor_delight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	..()
-	M.adjustOxyLoss(-4 * removed)
-	M.heal_organ_damage(2 * removed, 2 * removed)
-	M.adjustToxLoss(-2 * removed)
-	if(M.dizziness)
-		M.dizziness = max(0, M.dizziness - 15)
-	if(M.confused)
-		M.confused = max(0, M.confused - 5)
 
 /decl/reagent/drink/dry_ramen
 	name = "dry ramen"

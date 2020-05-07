@@ -59,7 +59,6 @@ var/list/lunchables_drinks_ = list(
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_drink_reagents_ = list(
 											/decl/reagent/drink/nothing,
-											/decl/reagent/drink/doctor_delight,
 											/decl/reagent/drink/dry_ramen,
 											/decl/reagent/drink/hell_ramen,
 											/decl/reagent/drink/hot_ramen,
@@ -68,18 +67,10 @@ var/list/lunchables_drink_reagents_ = list(
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_ethanol_reagents_ = list(
-												/decl/reagent/ethanol/acid_spit,
-												/decl/reagent/ethanol/atomicbomb,
-												/decl/reagent/ethanol/beepsky_smash,
 												/decl/reagent/ethanol/coffee,
-												/decl/reagent/ethanol/hippies_delight,
 												/decl/reagent/ethanol/hooch,
 												/decl/reagent/ethanol/thirteenloko,
-												/decl/reagent/ethanol/manhattan_proj,
-												/decl/reagent/ethanol/neurotoxin,
-												/decl/reagent/ethanol/pwine,
-												/decl/reagent/ethanol/threemileisland,
-												/decl/reagent/ethanol/toxins_special
+												/decl/reagent/ethanol/pwine
 											)
 
 /proc/lunchables_lunches()

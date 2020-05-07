@@ -35,12 +35,6 @@
 	required_reagents = list(/decl/reagent/drink/milk/cream = 1, /decl/reagent/drink/ice = 2, /decl/reagent/drink/milk = 2)
 	result_amount = 5
 
-/datum/chemical_reaction/recipe/rewriter
-	name = "Rewriter"
-	result = /decl/reagent/drink/rewriter
-	required_reagents = list(/decl/reagent/drink/citrussoda = 1, /decl/reagent/drink/coffee = 1)
-	result_amount = 2
-
 /datum/chemical_reaction/recipe/chocolate_milk
 	name = "Chocolate Milk"
 	result = /decl/reagent/drink/milk/chocolate

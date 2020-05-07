@@ -62,7 +62,7 @@
 		/decl/reagent/drink/milk =                     0.1,
 		/decl/reagent/ethanol/beer =                   0.25,
 		/decl/reagent/phosphorus =                     0.1,
-		/decl/reagent/nutriment/sugar =                          0.1,
+		/decl/reagent/nutriment/sugar =                0.1,
 		/decl/reagent/drink/sodawater =                0.1,
 		/decl/reagent/ammonia =                        1,
 		/decl/reagent/nutriment =                      1,
