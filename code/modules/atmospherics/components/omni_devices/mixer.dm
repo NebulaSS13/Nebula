@@ -33,7 +33,7 @@
 	if(mapper_set())
 		var/con = 0
 		for(var/datum/omni_port/P in ports)
-			switch(P.dir)
+			switch(P.direction)
 				if(NORTH)
 					if(tag_north_con && tag_north == 1)
 						P.concentration = tag_north_con
@@ -170,7 +170,7 @@
 			if(ATM_OUTPUT)
 				output = 1
 
-		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
+		portData[++portData.len] = list("dir" = dir_name(P.direction, capitalize = 1), \
 										"concentration" = P.concentration, \
 										"input" = input, \
 										"output" = output, \
@@ -227,7 +227,7 @@
 
 	for(var/datum/omni_port/P in ports)
 		var/old_mode = P.mode
-		if(P.dir == port)
+		if(P.direction == port)
 			switch(mode)
 				if(ATM_INPUT)
 					if(P.mode == ATM_OUTPUT)
@@ -245,10 +245,10 @@
 		if(P.mode != old_mode)
 			switch(P.mode)
 				if(ATM_NONE)
-					initialize_directions &= ~P.dir
+					initialize_directions &= ~P.direction
 					P.disconnect()
 				else
-					initialize_directions |= P.dir
+					initialize_directions |= P.direction
 					P.connect()
 			P.update = 1
 
@@ -266,7 +266,7 @@
 	var/remain_con = 1
 
 	for(var/datum/omni_port/P in inputs)
-		if(P.dir == port)
+		if(P.direction == port)
 			old_con = P.concentration
 		else if(!P.con_lock)
 			non_locked++
@@ -291,7 +291,7 @@
 	remain_con /= max(1, non_locked)
 
 	for(var/datum/omni_port/P in inputs)
-		if(P.dir == port)
+		if(P.direction == port)
 			P.concentration = new_con
 		else if(!P.con_lock)
 			P.concentration = remain_con
@@ -305,5 +305,5 @@
 
 /obj/machinery/atmospherics/omni/mixer/proc/con_lock(var/port = NORTH)
 	for(var/datum/omni_port/P in inputs)
-		if(P.dir == port)
+		if(P.direction == port)
 			P.con_lock = !P.con_lock

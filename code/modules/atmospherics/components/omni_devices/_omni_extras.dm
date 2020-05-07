@@ -20,7 +20,7 @@
 //--------------------------------------------
 /datum/omni_port
 	var/obj/machinery/atmospherics/omni/master
-	var/dir
+	var/direction
 	var/update = 1
 	var/mode = 0
 	var/concentration = 0
@@ -32,7 +32,7 @@
 
 /datum/omni_port/New(var/obj/machinery/atmospherics/omni/M, var/direction = NORTH)
 	..()
-	dir = direction
+	src.direction = direction
 	if(istype(M))
 		master = M
 	air = new
@@ -79,9 +79,9 @@
 
 //returns a direction flag based on the string passed to it
 // case insensitive
-/proc/dir_flag(var/dir)
-	dir = lowertext(dir)
-	switch(dir)
+/proc/dir_flag(var/direction)
+	direction = lowertext(direction)
+	switch(direction)
 		if("north")
 			return NORTH
 		if("south")

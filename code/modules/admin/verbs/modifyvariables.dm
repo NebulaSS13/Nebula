@@ -148,7 +148,7 @@
 
 	var/default
 
-	var/dir
+	var/direction
 
 	if(!O.may_edit_var(usr, objectvar))
 		return
@@ -158,7 +158,7 @@
 	else if(isnum(variable))
 		to_chat(usr, "Variable appears to be <b>NUM</b>.")
 		default = "num"
-		dir = 1
+		direction = TRUE
 
 	else if(istext(variable))
 		to_chat(usr, "Variable appears to be <b>TEXT</b>.")
@@ -190,29 +190,10 @@
 		default = "file"
 
 	to_chat(usr, "Variable contains: [variable]")
-	if(dir)
-		switch(variable)
-			if(1)
-				dir = "NORTH"
-			if(2)
-				dir = "SOUTH"
-			if(4)
-				dir = "EAST"
-			if(8)
-				dir = "WEST"
-			if(5)
-				dir = "NORTHEAST"
-			if(6)
-				dir = "SOUTHEAST"
-			if(9)
-				dir = "NORTHWEST"
-			if(10)
-				dir = "SOUTHWEST"
-			else
-				dir = null
-
-		if(dir)
-			to_chat(usr, "If a direction, direction is: [dir]")
+	if(direction)
+		direction = dir2text(variable)
+		if(direction != "unknown")
+			to_chat(usr, "If a direction, direction is: [direction]")
 	var/class = "text"
 	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
 
@@ -402,14 +383,14 @@
 
 	if(!autodetect_class)
 
-		var/dir
+		var/direction
 		var/default
 		if(isnull(var_value))
 			to_chat(usr, "Unable to determine variable type.")
 		else if(isnum(var_value))
 			to_chat(usr, "Variable appears to be <b>NUM</b>.")
 			default = "num"
-			dir = 1
+			direction = TRUE
 
 		else if(istext(var_value))
 			to_chat(usr, "Variable appears to be <b>TEXT</b>.")
@@ -441,28 +422,10 @@
 			default = "file"
 
 		to_chat(usr, "Variable contains: [var_value]")
-		if(dir)
-			switch(var_value)
-				if(1)
-					dir = "NORTH"
-				if(2)
-					dir = "SOUTH"
-				if(4)
-					dir = "EAST"
-				if(8)
-					dir = "WEST"
-				if(5)
-					dir = "NORTHEAST"
-				if(6)
-					dir = "SOUTHEAST"
-				if(9)
-					dir = "NORTHWEST"
-				if(10)
-					dir = "SOUTHWEST"
-				else
-					dir = null
-			if(dir)
-				to_chat(usr, "If a direction, direction is: [dir]")
+		if(direction)
+			direction = dir2text(var_value)
+			if(direction != "unknown")
+				to_chat(usr, "If a direction, direction is: [direction]")
 		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","color","edit referenced object","restore to default")
 		if(src.holder)
 			var/datum/marked_datum = holder.marked_datum()

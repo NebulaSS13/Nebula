@@ -241,6 +241,7 @@ its easier to just keep the beam vertical.
 // Calls to ..() should generally not supply any arguments and instead rely on BYOND's automatic argument passing
 // There is no need to check the return value of ..(), this is only done by the calling /examinate() proc to validate the call chain
 /atom/proc/examine(mob/user, distance, infix = "", suffix = "")
+	SHOULD_CALL_PARENT(TRUE)
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
 	if(blood_color && !istype(src, /obj/effect/decal))
@@ -261,6 +262,7 @@ its easier to just keep the beam vertical.
 
 //called to set the atom's dir and used to add behaviour to dir-changes
 /atom/proc/set_dir(new_dir)
+	SHOULD_CALL_PARENT(TRUE)
 	var/old_dir = dir
 	if(new_dir == old_dir)
 		return FALSE
@@ -268,6 +270,7 @@ its easier to just keep the beam vertical.
 	return TRUE
 
 /atom/proc/set_icon_state(var/new_icon_state)
+	SHOULD_CALL_PARENT(TRUE)
 	if(has_extension(src, /datum/extension/base_icon_state))
 		var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 		bis.base_icon_state = new_icon_state
@@ -276,6 +279,7 @@ its easier to just keep the beam vertical.
 		icon_state = new_icon_state
 
 /atom/proc/update_icon()
+	SHOULD_CALL_PARENT(TRUE)
 	on_update_icon(arglist(args))
 
 /atom/proc/on_update_icon()

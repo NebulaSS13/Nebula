@@ -93,7 +93,7 @@
 		//Try to settle down
 		if(can_spawn_plant())
 			plant = new(T,seed)
-			plant.dir = src.dir
+			plant.set_dir(dir)
 			plant.transform = src.transform
 			plant.age = seed.get_trait(TRAIT_MATURATION)-1
 			plant.update_icon()

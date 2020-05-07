@@ -53,7 +53,7 @@ var/list/tape_roll_applications = list()
 			new_state = "[icon_base]_h"
 		else   // END POINT (1|2|4|8)
 			new_state = "[icon_base]_dir"
-			dir = tape_dir
+			set_dir(tape_dir)
 	icon_state = "[new_state]_[crumpled]"
 	if(detail_overlay)
 		var/image/I = overlay_image(icon, "[new_state]_[detail_overlay]", flags=RESET_COLOR)
@@ -225,8 +225,8 @@ var/list/tape_roll_applications = list()
 		var/orientation = get_dir(start, end)
 		var/dir = 0
 		switch(orientation)
-			if(NORTH, SOUTH)	dir = NORTH|SOUTH	// North-South taping
-			if(EAST,   WEST)	dir =  EAST|WEST	// East-West taping
+			if(NORTH, SOUTH) set_dir(NORTH|SOUTH) // North-South taping
+			if(EAST,   WEST) set_dir(EAST|WEST)   // East-West taping
 
 		var/can_place = 1
 		while (can_place)

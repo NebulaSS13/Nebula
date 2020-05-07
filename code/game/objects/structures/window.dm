@@ -389,7 +389,7 @@
 	color = GLASS_COLOR
 
 /obj/structure/window/basic/full
-	dir = 5
+	dir = NORTHEAST
 	icon_state = "window_full"
 
 /obj/structure/window/basic/full/polarized
@@ -401,7 +401,7 @@
 	material = MAT_PHORON_GLASS
 
 /obj/structure/window/phoronbasic/full
-	dir = 5
+	dir = NORTHEAST
 	icon_state = "window_full"
 
 /obj/structure/window/phoronreinforced
@@ -412,7 +412,7 @@
 	reinf_material = MAT_STEEL
 
 /obj/structure/window/phoronreinforced/full
-	dir = 5
+	dir = NORTHEAST
 	icon_state = "window_full"
 
 /obj/structure/window/reinforced
@@ -422,7 +422,7 @@
 	reinf_material = MAT_STEEL
 
 /obj/structure/window/reinforced/full
-	dir = 5
+	dir = NORTHEAST
 	icon_state = "rwindow_full"
 
 /obj/structure/window/reinforced/tinted
@@ -440,7 +440,7 @@
 	icon = 'icons/obj/structures/podwindows.dmi'
 	basestate = "w"
 	reinf_basestate = "w"
-	dir = 5
+	dir = NORTHEAST
 
 /obj/structure/window/reinforced/polarized
 	name = "electrochromic window"
@@ -449,7 +449,7 @@
 	polarized = 1
 
 /obj/structure/window/reinforced/polarized/full
-	dir = 5
+	dir = NORTHEAST
 	icon_state = "rwindow_full"
 
 /obj/structure/window/proc/toggle()
