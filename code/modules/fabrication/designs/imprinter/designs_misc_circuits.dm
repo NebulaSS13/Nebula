@@ -442,3 +442,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/relay
 	path = /obj/item/stock_parts/circuitboard/relay
+
+/datum/fabricator_recipe/imprinter/circuit/inertial_damper
+	path = /obj/item/stock_parts/circuitboard/inertial_damper
