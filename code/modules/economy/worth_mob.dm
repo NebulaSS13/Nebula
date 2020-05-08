@@ -10,7 +10,7 @@
 /mob/living/get_base_value()
 	. = ..()
 	if(meat_type)
-		. += atom_info_repository.get_worth_for(meat_type) * meat_amount
+		. += atom_info_repository.get_combined_worth_for(meat_type) * meat_amount
 	if(skin_material)
 		var/material/M = SSmaterials.get_material_datum(skin_material)
 		. += skin_amount * M.value * 10
@@ -18,5 +18,5 @@
 		var/material/M = SSmaterials.get_material_datum(bone_material)
 		. += bone_amount * M.value * 10
 	if(skull_type)
-		.+= atom_info_repository.get_worth_for(skull_type)
+		.+= atom_info_repository.get_combined_worth_for(skull_type)
 	. = round(.)

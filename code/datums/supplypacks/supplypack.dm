@@ -21,10 +21,11 @@
 	if(isnull(cost))
 		cost = 0
 		for(var/entry in contains)
-			cost += atom_info_repository.get_worth_for(entry) * max(1, contains[entry])
+			cost += atom_info_repository.get_combined_worth_for(entry) * max(1, contains[entry])
 		if(containertype)
-			cost += atom_info_repository.get_worth_for(containertype)
-		cost = max(1, round(cost * SSsupply.price_markup * 0.1))
+			cost += atom_info_repository.get_single_worth_for(containertype)
+		cost = cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup
+		cost = max(1, CEILING(cost, WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
 
 	var/decl/supply_method/sm = get_supply_method(supply_method)
 	manifest = sm.setup_manifest(src)

@@ -25,20 +25,20 @@
 	. = ..()
 	if(self_recharge)
 		. += 100
-	var/projectile_value = atom_info_repository.get_worth_for(projectile_type)
+	var/projectile_value = atom_info_repository.get_combined_worth_for(projectile_type)
 	for(var/datum/firemode/F in firemodes)
 		if(F.settings["projectile_type"])
-			projectile_value = max(projectile_value, atom_info_repository.get_worth_for(F.settings["projectile_type"]))
+			projectile_value = max(projectile_value, atom_info_repository.get_combined_worth_for(F.settings["projectile_type"]))
 	. += max_shots * projectile_value
 
 /obj/item/gun/projectile/get_base_value()
 	. = ..()
 	if(load_method & (SINGLE_CASING|SPEEDLOADER))
-		var/projectile_value = atom_info_repository.get_worth_for(ammo_type)
+		var/projectile_value = atom_info_repository.get_combined_worth_for(ammo_type)
 		. += 0.5 * projectile_value * max_shells
 	else if(load_method & MAGAZINE)
 		if(auto_eject)
 			. += 20
 		var/obj/item/ammo_magazine/mag = magazine_type
-		var/projectile_value = atom_info_repository.get_worth_for(initial(mag.ammo_type))
+		var/projectile_value = atom_info_repository.get_combined_worth_for(initial(mag.ammo_type))
 		. += 0.5 * projectile_value * initial(mag.max_ammo)

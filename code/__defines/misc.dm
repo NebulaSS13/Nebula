@@ -262,3 +262,6 @@
 #define RC_ASSIST 1		//Request Assistance
 #define RC_SUPPLY 2		//Request Supplies
 #define RC_INFO   4		//Relay Info
+
+#define WORTH_TO_SUPPLY_POINTS_CONSTANT       0.0075
+#define WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT 5
