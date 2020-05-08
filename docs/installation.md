@@ -2,11 +2,11 @@
 
 The simplest way to obtain the code is using Github's .zip feature.
 
-Click [here](https://github.com/NebulaSS13/Nebula/archive/dev.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
+Click [here](https://github.com/PersistentSS13/Nebula/archive/dev.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
 
 The more complicated and easier to update method is using git.  You'll need to download git or some client from [here](http://git-scm.com/).  When that's installed, right click in any folder and click on "Git Bash".  When that opens, type in:
 
-    git clone https://github.com/NebulaSS13/Nebula.git
+    git clone https://github.com/PersistentSS13/PersistentOutreach13
 
 (hint: hold down ctrl and press insert to paste into git bash)
 
@@ -17,6 +17,10 @@ This will take a while to download, but it provides an easier method for updatin
 ### INSTALLATION
 
 First-time installation should be fairly straightforward.  First, you'll need BYOND installed.  You can get it from [here](http://www.byond.com/).
+
+A database will also be required to enable persistence. You can get MySQL from [here](https://dev.mysql.com/downloads/mysql/) or MariaDB from [here](https://mariadb.org/download/). After installing MySQL, it will be necessary to connect to your local database using a client.
+
+HeidiSQL is available [here](https://www.heidisql.com/download.php) or alternatively it's possible to use MySQL workbench available [here](https://dev.mysql.com/downloads/workbench/). Once that's downloaded, installed, and connected to the database. Create a database called **persistence** and execute to **schema.sql** which is available at the base level of this repository.
 
 This is a sourcecode-only release, so the next step is to compile the server files.  Open `nebula.dme` by double-clicking it, open the Build menu, and click compile.  This'll take a little while, and if everything's done right you'll get a message like this:
 
@@ -34,6 +38,10 @@ Copy the contents of the `/config/examples` folder into `/config`. You will now 
 
 Edit `config.txt` to set the probabilities for different gamemodes in Secret and to set your server location so that all your players don't get disconnected at the end of each round.  It's recommended you don't turn on the gamemodes with probability 0, as they have various issues and aren't currently being tested, they may have unknown and bizarre bugs.
 
+**Persistence must be uncommented to enable the gamemode from config.txt**
+
+**dbconfig.txt must also be configured and pointing to a valid mySQL or MariaDB instance.**
+
 Edit `admins.txt` to remove the default admins and add your own.  "Game Master" is the highest level of access, and the other recommended admin levels for now are "Game Admin" and "Moderator".  The format is:
 
     byondkey - Rank
@@ -50,6 +58,8 @@ If you wish to use Discord webhooks, which are a way of passing information from
 - webhook_roundend: The round has ended. Will include the mode name and summarize survivors and ghosts.
 - webhook_roundstart: The master controller has finished initializing and the round will begin soon.
 - webhook_submap_loaded: A submap has been loaded and placed, and is available for people to join. Includes the name of the submap.
+- webhook_submap_vox: The vox submap specifically has been loaded and placed. This is distinct for the purposes of tagging vox players with a @mention.
+- webhook_submap_skrell: The Skrell submap specifically has been loaded and placed. This is distinct for the purposes of tagging Skrell players with a @mention.
 - webhook_custom_event: The custom event text for the round has been set or changed.
 
 Each definition can optionally include an array of roles to mention when the webhook is called. Roles must be provided using the role ID (ex. `<@&555231866735689749>`), which can be obtained by writing `\@somerole` into the chat, in order for pinging to work correctly.
@@ -78,5 +88,6 @@ When you have done this, you'll need to recompile the code, but then it should w
 ### SQL Setup
 
 The SQL backend for the `/library/stats` and bans requires a MySQL server.  Your server details go in `/config/dbconfig.txt`.
+**Persistence also requires this to be setup or maps will not save.**
 
 For initial setup and migrations refer to `/sql/README.md`
