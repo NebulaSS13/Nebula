@@ -130,3 +130,38 @@
 /obj/item/clothing/suit/radiation/Initialize()
 	. = ..()
 	slowdown_per_slot[slot_shoes] = 1.5
+
+/*
+ * chemical protection
+ */
+
+/obj/item/clothing/head/chem_hood
+	name = "chemical hood"
+	icon_state = "chem_hood"
+	desc = "A hood that protects the head from chemical comtaminants."
+	permeability_coefficient = 0
+	armor = list(
+		bio = ARMOR_BIO_RESISTANT, 
+		rad = ARMOR_RAD_MINOR
+		)
+	flags_inv = HIDEEARS|HIDEEYES|BLOCKHAIR
+	item_flags = ITEM_FLAG_THICKMATERIAL
+	body_parts_covered = HEAD
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/suit/chem_suit
+	name = "chemical suit"
+	desc = "A suit that protects against chemical contamination."
+	icon_state = "chem_suit"
+	w_class = ITEM_SIZE_HUGE//bulky item
+	gas_transfer_coefficient = 0
+	permeability_coefficient = 0
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	allowed = list(/obj/item/tank/emergency,/obj/item/pen,/obj/item/flashlight/pen,/obj/item/scanner/health,/obj/item/ano_scanner,/obj/item/clothing/head/chem_hood,/obj/item/clothing/mask/gas,/obj/item/geiger)
+	armor = list(
+		bio = ARMOR_BIO_RESISTANT, 
+		rad = ARMOR_RAD_MINOR
+		)
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
+	item_flags = ITEM_FLAG_THICKMATERIAL
+	siemens_coefficient = 0.9
