@@ -1,9 +1,9 @@
 /obj/item/material/sword
 	name = "claymore"
 	desc = "What are you standing around staring at this for? Get to killing!"
-	icon = 'icons/obj/items/weapon/broadswords.dmi'
-	icon_state = "claymore"
-	item_state = "claymore"
+	icon_state = "world"
+	icon = 'icons/obj/items/weapon/swords/claymore.dmi'
+	on_mob_icon = 'icons/obj/items/weapon/swords/claymore.dmi'
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_LARGE
 	material_force_multiplier = 0.5 // 30 when wielded with hardnes 60 (steel)
@@ -15,28 +15,60 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	base_parry_chance = 50
 	melee_accuracy_bonus = 10
+	var/draw_handle
+
+/obj/item/material/sword/update_force()
+	if(material?.hardness < MAT_VALUE_HARD)
+		edge = 0
+		attack_verb = list("attacked", "stabbed", "jabbed", "smacked", "prodded")
+		hitsound = 'sound/weapons/pierce.ogg'
+	if(material?.hardness < MAT_VALUE_RIGID)
+		sharp = 0
+		attack_verb = list("attacked", "smashed", "jabbed", "smacked", "prodded", "bonked")
+		hitsound = "chop"
+	. = ..()
+	
+/obj/item/material/sword/on_update_icon()
+	. = ..()
+	if(applies_material_colour)
+		if(draw_handle)
+			add_overlay(get_mutable_overlay(icon, "[icon_state]_handle"))
+		if(material.reflectiveness >= MAT_VALUE_SHINY)
+			add_overlay(get_mutable_overlay(icon, "[icon_state]_shine"), adjust_brightness(color, 20 + material.reflectiveness))
+
+/obj/item/material/sword/experimental_mob_overlay(mob/user_mob, slot)
+	var/image/res = ..()
+	//Do not color scabbarded blades
+	if(applies_material_colour && (slot == slot_back_str || slot == slot_belt_str))
+		res.color = null
+	return res
+
+/obj/item/material/sword/wood
+	material = MAT_WOOD
+	draw_handle = FALSE
 
 /obj/item/material/sword/replica
-	max_force = 10
-	edge = 0
-	sharp = 0
-	material_force_multiplier = 0.2
-	thrown_material_force_multiplier = 0.1
+	material = MAT_PLASTIC
 
 /obj/item/material/sword/katana
 	name = "katana"
 	desc = "Woefully underpowered in D20. This one looks pretty sharp."
-	icon = 'icons/obj/items/weapon/katana.dmi'
-	icon_state = "katana"
-	item_state = "katana"
+	on_mob_icon = 'icons/obj/items/weapon/swords/katana.dmi'
 	slot_flags = SLOT_BELT | SLOT_BACK
 
-/obj/item/material/sword/katana/replica
-	max_force = 10
-	edge = 0
-	sharp = 0
-	material_force_multiplier = 0.2
-	thrown_material_force_multiplier = 0.1
+/obj/item/material/sword/katana/set_material(new_material)
+	. = ..()
+	if(applies_material_name && istype(material, /material/wood))
+		SetName("[material.display_name] bokutou")
+		desc = "Finest wooden fibers folded exactly one thousand times by master robots."
+	
+/obj/item/material/sword/katana/bamboo
+	material = MAT_BAMBOO
+	draw_handle = FALSE
+
+/obj/item/material/sword/katana/wood
+	material = MAT_WOOD
+	draw_handle = FALSE
 
 /obj/item/material/sword/katana/vibro
 	name = "vibrokatana"

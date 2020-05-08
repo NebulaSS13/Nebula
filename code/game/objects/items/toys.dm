@@ -282,18 +282,10 @@
 		src.add_fingerprint(user)
 		return
 
-/obj/item/toy/katana
-	name = "replica katana"
+/obj/item/material/sword/katana/toy
+	name = "toy katana"
 	desc = "Woefully underpowered in D20."
-	icon = 'icons/obj/items/weapon/katana.dmi'
-	icon_state = "katana"
-	item_state = "katana"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT | SLOT_BACK
-	force = 5
-	throwforce = 5
-	w_class = ITEM_SIZE_LARGE
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
+	material = MAT_PLASTIC
 
 /*
  * Snap pops
@@ -758,14 +750,13 @@
 	icon_state = "spiderplushie"
 
 //Toy cult sword
-/obj/item/toy/cultsword
+/obj/item/material/sword/cult_toy
 	name = "foam sword"
 	desc = "An arcane weapon (made of foam) wielded by the followers of the hit Saturday morning cartoon \"King Nursee and the Acolytes of Heroism\"."
-	icon = 'icons/obj/items/weapon/broadswords.dmi'
-	icon_state = "cultblade"
-	item_state = "cultblade"
-	w_class = ITEM_SIZE_HUGE
-	attack_verb = list("attacked", "slashed", "stabbed", "poked")
+	on_mob_icon = 'icons/obj/items/weapon/swords/cult.dmi'
+	material = MAT_PLASTIC
+	edge = 0
+	sharp = 0
 
 /obj/item/inflatable_duck
 	name = "inflatable duck"

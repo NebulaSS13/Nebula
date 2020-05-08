@@ -72,7 +72,7 @@
 	name = "Toggle Sword"
 	invocation_type = SpI_EMOTE
 	invocation = "thrusts /his hand forward, and it is enveloped in golden embers!"
-	armor_pieces = list(/obj/item/excalibur = slot_r_hand)
+	armor_pieces = list(/obj/item/material/sword/excalibur = slot_r_hand)
 	hud_state = "excalibur"
 
 /spell/toggle_armor/fiend
