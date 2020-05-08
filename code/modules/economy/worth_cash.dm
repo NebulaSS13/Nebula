@@ -23,6 +23,9 @@
 	if(absolute_worth > 0)
 		update_from_worth()
 
+/obj/item/cash/get_base_value()
+	. = holographic ? 0 : absolute_worth 
+
 /obj/item/cash/proc/set_currency(var/new_currency)
 	currency = new_currency
 	update_from_worth()
@@ -189,5 +192,8 @@
 		var/decl/currency/cur = decls_repository.get_decl(currency)
 		to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
 
-/obj/item/charge_card/get_single_monetary_worth()
-	. = loaded_worth
+/obj/item/charge_card/get_base_value()
+	. = holographic ? 0 : loaded_worth
+
+/obj/item/coin/get_base_value()
+	. = max((holographic ? 0 : absolute_worth), ..())
