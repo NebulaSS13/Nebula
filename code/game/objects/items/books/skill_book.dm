@@ -602,28 +602,6 @@ MEDICAL
 	skill_req = SKILL_EXPERT
 	name = "theoretical medicine textbook"
 
-//anatomy
-/obj/item/book/skill/medical/anatomy
-	author = "Dr. Basil Cartwright"
-	skill = SKILL_ANATOMY
-
-/obj/item/book/skill/medical/anatomy/basic
-	skill_req = SKILL_NONE
-	name = "beginner anatomy textbook"
-
-/obj/item/book/skill/medical/anatomy/adept
-	skill_req = SKILL_BASIC
-	name = "intermediate anatomy textbook"
-
-/obj/item/book/skill/medical/anatomy/expert
-	skill_req = SKILL_ADEPT
-	name = "advanced anatomy textbook"
-
-/obj/item/book/skill/medical/anatomy/prof
-	skill_req = SKILL_EXPERT
-	name = "theoretical anatomy textbook"
-
-
 //////////////////////
 //Custom Skill Books//
 //////////////////////

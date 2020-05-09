@@ -40,7 +40,7 @@
 	START_PROCESSING(SSobj,src)
 
 /obj/item/auto_cpr/attack_hand(mob/user)
-	skilled_setup = user.skill_check(SKILL_ANATOMY, SKILL_BASIC) && user.skill_check(SKILL_MEDICAL, SKILL_BASIC) 
+	skilled_setup = user.skill_check(SKILL_MEDICAL, SKILL_BASIC) 
 	..()
 
 /obj/item/auto_cpr/dropped(mob/user)

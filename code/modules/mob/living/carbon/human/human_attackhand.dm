@@ -53,8 +53,8 @@
 				if (!cpr_time)
 					return TRUE
 
-				var/pumping_skill = max(M.get_skill_value(SKILL_MEDICAL),M.get_skill_value(SKILL_ANATOMY))
-				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2)
+				var/pumping_skill = M.get_skill_value(SKILL_MEDICAL)
+				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_MEDICAL, 0.2)
 				cpr_time = 0
 
 				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
