@@ -120,16 +120,6 @@
 			iconholder = 1
 			eprojectile = /obj/item/projectile/beam
 
-//			if(/obj/item/gun/energy/laser/practice/sc_laser)
-//				iconholder = 1
-//				eprojectile = /obj/item/projectile/beam
-
-		if(/obj/item/gun/energy/retro)
-			iconholder = 1
-
-//			if(/obj/item/gun/energy/retro/sc_retro)
-//				iconholder = 1
-
 		if(/obj/item/gun/energy/captain)
 			iconholder = 1
 
@@ -137,10 +127,6 @@
 			iconholder = 1
 
 		if(/obj/item/gun/energy/taser)
-			eprojectile = /obj/item/projectile/beam
-			eshot_sound = 'sound/weapons/Laser.ogg'
-
-		if(/obj/item/gun/energy/stunrevolver)
 			eprojectile = /obj/item/projectile/beam
 			eshot_sound = 'sound/weapons/Laser.ogg'
 

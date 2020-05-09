@@ -2548,8 +2548,7 @@
 /obj/machinery/vending/cigarette{
 	dir = 8;
 	name = "hacked cigarette machine";
-	markup = 0
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	markup = 0,products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-1";
@@ -2706,7 +2705,7 @@
 /area/map_template/merc_spawn)
 "IB" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/ionrifle/small,
+/obj/item/gun/energy/ionrifle,
 /obj/effect/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
@@ -3105,19 +3104,6 @@
 	dir = 8
 	},
 /obj/structure/railing/mapped/no_density,
-/turf/simulated/floor/plating,
-/area/map_template/merc_spawn)
-"Zl" = (
-/obj/structure/table/rack,
-/obj/item/gun/projectile/pistol,
-/obj/item/gun/projectile/pistol,
-/obj/item/ammo_magazine/pistol,
-/obj/item/ammo_magazine/pistol,
-/obj/item/ammo_magazine/pistol,
-/obj/item/ammo_magazine/pistol,
-/obj/effect/landmark/delete_on_shuttle{
-	shuttle_name = "Desperado"
-	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Zx" = (
@@ -8712,7 +8698,7 @@ dh
 dh
 XS
 Kk
-Zl
+iB
 XS
 aa
 aa
