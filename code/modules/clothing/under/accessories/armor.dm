@@ -6,25 +6,10 @@
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "pouches"
+	color = COLOR_GRAY40
 	gender = PLURAL
 	slot = ACCESSORY_SLOT_ARMOR_S
 	slots = 2
-
-/obj/item/clothing/accessory/storage/pouches/blue
-	desc = "A collection of blue pouches that can be attached to a plate carrier. Carries up to two items."
-	icon_state = "pouches_blue"
-
-/obj/item/clothing/accessory/storage/pouches/navy
-	desc = "A collection of navy blue pouches that can be attached to a plate carrier. Carries up to two items."
-	icon_state = "pouches_navy"
-
-/obj/item/clothing/accessory/storage/pouches/green
-	desc = "A collection of green pouches that can be attached to a plate carrier. Carries up to two items."
-	icon_state = "pouches_green"
-
-/obj/item/clothing/accessory/storage/pouches/tan
-	desc = "A collection of tan pouches that can be attached to a plate carrier. Carries up to two items."
-	icon_state = "pouches_tan"
 
 /obj/item/clothing/accessory/storage/pouches/large
 	name = "large storage pouches"
@@ -33,21 +18,8 @@
 	slots = 4
 	slowdown = 1
 
-/obj/item/clothing/accessory/storage/pouches/large/blue
-	desc = "A collection of blue pouches that can be attached to a plate carrier. Carries up to four items."
-	icon_state = "lpouches_blue"
-
-/obj/item/clothing/accessory/storage/pouches/large/navy
-	desc = "A collection of navy blue pouches that can be attached to a plate carrier. Carries up to four items."
-	icon_state = "lpouches_navy"
-
-/obj/item/clothing/accessory/storage/pouches/large/green
-	desc = "A collection of green pouches that can be attached to a plate carrier. Carries up to four items."
-	icon_state = "lpouches_green"
-
 /obj/item/clothing/accessory/storage/pouches/large/tan
-	desc = "A collection of tan pouches that can be attached to a plate carrier. Carries up to four items."
-	icon_state = "lpouches_tan"
+	color = COLOR_TAN
 
 //Armor plates
 /obj/item/clothing/accessory/armorplate
@@ -93,18 +65,6 @@
 		)
 	slowdown = 0.5
 
-/obj/item/clothing/accessory/armorplate/merc
-	name = "heavy armor plate"
-	desc = "A ceramics-reinforced synthetic armor plate, providing state of of the art protection. Attaches to a plate carrier."
-	icon_state = "armor_merc"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	slowdown = 0.5
 
 //Arm guards
 /obj/item/clothing/accessory/armguards
@@ -114,6 +74,7 @@
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "armguards"
+	color = COLOR_GRAY40
 	gender = PLURAL
 	body_parts_covered = ARMS
 	armor = list(
@@ -125,73 +86,6 @@
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
 
-/obj/item/clothing/accessory/armguards/blue
-	desc = "A pair of blue arm pads reinforced with armor plating. Attaches to a plate carrier."
-	icon_state = "armguards_blue"
-
-/obj/item/clothing/accessory/armguards/navy
-	desc = "A pair of navy blue arm pads reinforced with armor plating. Attaches to a plate carrier."
-	icon_state = "armguards_navy"
-
-/obj/item/clothing/accessory/armguards/green
-	desc = "A pair of green arm pads reinforced with armor plating. Attaches to a plate carrier."
-	icon_state = "armguards_green"
-
-/obj/item/clothing/accessory/armguards/tan
-	desc = "A pair of tan arm pads reinforced with armor plating. Attaches to a plate carrier."
-	icon_state = "armguards_tan"
-
-/obj/item/clothing/accessory/armguards/merc
-	name = "heavy arm guards"
-	desc = "A pair of red-trimmed black arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
-	icon_state = "armguards_merc"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
-
-/obj/item/clothing/accessory/armguards/riot
-	name = "riot arm guards"
-	desc = "A pair of armored arm pads with heavy padding to protect against melee attacks."
-	icon_state = "armguards_riot"
-	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	siemens_coefficient = 0.5
-
-/obj/item/clothing/accessory/armguards/ballistic
-	name = "ballistic arm guards"
-	desc = "A pair of armored arm pads with heavy plates to protect against ballistic projectiles."
-	icon_state = "armguards_ballistic"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	siemens_coefficient = 0.7
-
-/obj/item/clothing/accessory/armguards/ablative
-	name = "ablative arm guards"
-	desc = "A pair of armored arm pads with advanced shielding to protect against energy weapons."
-	icon_state = "armguards_ablative"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_RIFLES,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	siemens_coefficient = 0
-
 //Leg guards
 /obj/item/clothing/accessory/legguards
 	name = "leg guards"
@@ -200,6 +94,7 @@
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "legguards"
+	color = COLOR_GRAY40
 	gender = PLURAL
 	body_parts_covered = LEGS
 	armor = list(
@@ -210,77 +105,6 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
-
-/obj/item/clothing/accessory/legguards/blue
-	desc = "A pair of armored leg pads in blue. Attaches to a plate carrier."
-	icon_state = "legguards_blue"
-
-/obj/item/clothing/accessory/legguards/navy
-	desc = "A pair of armored leg pads in navy blue. Attaches to a plate carrier."
-	icon_state = "legguards_navy"
-
-/obj/item/clothing/accessory/legguards/green
-	desc = "A pair of armored leg pads in green. Attaches to a plate carrier."
-	icon_state = "legguards_green"
-
-/obj/item/clothing/accessory/legguards/tan
-	desc = "A pair of armored leg pads in tan. Attaches to a plate carrier."
-	icon_state = "legguards_tan"
-
-/obj/item/clothing/accessory/legguards/merc
-	name = "heavy leg guards"
-	desc = "A pair of heavily armored leg pads in red-trimmed black. Attaches to a plate carrier."
-	icon_state = "legguards_merc"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
-
-/obj/item/clothing/accessory/legguards/riot
-	name = "riot leg guards"
-	desc = "A pair of armored leg pads with heavy padding to protect against melee attacks. Looks like they might impair movement."
-	icon_state = "legguards_riot"
-	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	siemens_coefficient = 0.5
-	slowdown = 1
-
-/obj/item/clothing/accessory/legguards/ballistic
-	name = "ballistic leg guards"
-	desc = "A pair of armored leg pads with heavy plates to protect against ballistic projectiles. Looks like they might impair movement."
-	icon_state = "legguards_ballistic"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	siemens_coefficient = 0.7
-	slowdown = 1
-
-/obj/item/clothing/accessory/legguards/ablative
-	name = "ablative leg guards"
-	desc = "A pair of armored leg pads with advanced shielding to protect against energy weapons. Looks like they might impair movement."
-	icon_state = "legguards_ablative"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_RIFLES,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	siemens_coefficient = 0
-	slowdown = 1
-
 
 //Decorative attachments
 /obj/item/clothing/accessory/armor/tag
@@ -296,13 +120,19 @@
 /obj/item/clothing/accessory/armor/tag/press
 	name = "\improper PRESS tag"
 	desc = "A tag with the word PRESS printed in white lettering on it."
-	icon_state = "presstag"
+	icon_state = "smalltag"
 	slot_flags = SLOT_BELT
 
-/obj/item/clothing/accessory/armor/tag/opos
-	name = "\improper O+ blood patch"
-	desc = "An embroidered patch indicating the wearer's blood type as O POSITIVE."
-	icon_state = "opostag"
+/obj/item/clothing/accessory/armor/tag/warden
+	name = "\improper WARDEN tag"
+	desc = "A tag with the word WARDEN printed in silver lettering on it."
+	icon_state = "largetag"
+
+/obj/item/clothing/accessory/armor/tag/hos
+	name = "\improper COMMANDER tag"
+	desc = "A tag with the word COMMANDER printed in golden lettering on it."
+	icon_state = "largetag"
+	color = COLOR_GOLD
 
 /obj/item/clothing/accessory/armor/tag/oneg
 	name = "\improper O- blood patch"
@@ -345,26 +175,15 @@
 	icon_override = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_head_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
-	icon_state = "null"
+	icon_state = "helmcover"
 	slot = ACCESSORY_SLOT_HELM_C
 
 /obj/item/clothing/accessory/armor/helmcover/blue
-	name = "blue helmet cover"
-	desc = "A fabric cover for armored helmets in a bright blue color."
-	icon_state = "helmcover_blue"
-
-/obj/item/clothing/accessory/armor/helmcover/navy
-	name = "navy blue helmet cover"
-	desc = "A fabric cover for armored helmets. This one is colored navy blue."
-	icon_state = "helmcover_navy"
+	color = COLOR_SKY_BLUE
 
 /obj/item/clothing/accessory/armor/helmcover/green
-	name = "green helmet cover"
-	desc = "A fabric cover for armored helmets. This one has a woodland camouflage pattern."
-	icon_state = "helmcover_green"
+	color = COLOR_DARK_GREEN_GRAY
 
 /obj/item/clothing/accessory/armor/helmcover/tan
-	name = "tan helmet cover"
-	desc = "A fabric cover for armored helmets. This one has a desert camouflage pattern."
-	icon_state = "helmcover_tan"
+	color = COLOR_TAN
 

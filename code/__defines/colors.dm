@@ -77,6 +77,7 @@
 #define COLOR_TITANIUM         "#d1e6e3"
 #define COLOR_DARK_GUNMETAL    "#4c535b"
 #define COLOR_BRONZE           "#8c7853"
+#define COLOR_TAN			   "#a39682"
 #define COLOR_BRASS            "#b99d71"
 #define COLOR_POLISHED_BRASS   "#fdef6e"
 #define COLOR_INDIGO           "#4b0082"
