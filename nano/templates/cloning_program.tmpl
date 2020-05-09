@@ -1,0 +1,114 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Back to menu', null, { 'refresh' : 1 })}}
+{{else}}
+	<div class='item'>
+		<div class='itemLabel'>File Server</div>
+		{{:helper.link(data.fileserver, null, { "change_file_server" : 1 }, null)}}
+		{{if data.total_space}}
+			<div class='item'>
+				<div class='itemLabel'>Used storage</div>
+				<div class='itemContent'>
+					{{:helper.displayBar(data.used_space, 0, data.total_space, 'average')}} {{:data.used_space}} / {{:data.total_space}} (GQ)
+				</div>
+			</div>
+		{{/if}}
+	</div>
+	{{for data.cloning_pods}}
+		<h3>{{:value.id}}</h3>
+		{{if value.online}}
+			<div class="item">
+				<div class="itemLabel">
+					Status
+				</div>
+				<div class="itemContent">
+					{{:value.status}}
+					{{if value.can_backup}}
+						<br/>
+						{{:helper.link('Begin backup.', null, {'machine': value.id, 'backup': 1})}}
+						{{:helper.link('Eject.', null, {'machine': value.id, 'eject': 1})}}
+					{{/if}}
+					{{if value.can_clone}}
+						<br/>
+						{{:helper.link('Begin clone.', null, {'machine': value.id, 'clone': 1})}}
+						{{:helper.link('Eject.', null, {'machine': value.id, 'eject': 1})}}
+					{{/if}}
+				</div>
+			</div>
+			<div class="item">
+				<div class="itemLabel">
+					Contents
+				</div>
+				<div class="itemContent">
+					{{:value.contents}}
+				</div>
+			</div>
+			<div class="item">
+				<div class="itemLabel">
+					Current operation
+				</div>
+				<div class="itemContent">
+					{{:value.operation}}
+				</div>
+			</div>
+			{{if value.progress}}
+				<div class="item">
+					<div class="itemLabel">
+						Progress
+					</div>
+					<div class="itemContent">
+						{{:helper.displayBar(value.progress, 0, value.total_progress, 'average')}} {{:value.remaining}} seconds remaining
+					</div>
+				</div>
+			{{/if}}
+			{{if value.detailed}}
+				<div class='statusDisplay'>
+					<div class="item">
+						<div class="itemLabel">
+							Last backup
+						</div>
+						<div class="itemContent">
+							{{:value.last_backup}}
+						</div>
+					</div>
+					<div class="item">
+						<div class="itemLabel">
+							Filename
+						</div>
+						<div class="itemContent">
+							{{:value.filename}}
+						</div>
+					</div>
+					<div class="item">
+						<div class="itemLabel">
+							Backup size
+						</div>
+						<div class="itemContent">
+							{{:value.backup_size}} GQ
+						</div>
+					</div>
+				</div>
+			{{/if}}
+		{{else}}
+			<div class="item">
+				<div class="itemLabel">
+					Error:
+				</div>
+				<div class="itemContent">
+					Cloning pod offline.
+				</div>
+			</div>
+		{{/if}}
+	{{empty}}
+		<div class="item">
+			<div class="itemLabel">
+				Error:
+			</div>
+			<div class="itemContent">
+				No cloning pods connected.
+			</div>
+		</div>
+	{{/for}}
+{{/if}}

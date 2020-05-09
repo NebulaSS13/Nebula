@@ -79,7 +79,10 @@
 			"rev_cooldown",
 			"brigged_since",
 			"initial_account",
-			"initial_email_account"
+			"initial_email_account",
+			"philotic_damage",
+			"age",
+			"unique_id"
 		]
 	},
 	{
@@ -4182,7 +4185,7 @@
 	},
 	{
 		"path":"/obj/machinery/network",
-		"var":[
+		"vars":[
 			"overheated",
 			"initial_network_id",
 			"initial_network_key",
@@ -4192,19 +4195,50 @@
 	},
 	{
 		"path":"/obj/machinery/network/router",
-		"var":[
+		"vars":[
 			"saved_network"
 		]
 	},
 	{
 		"path":"/datum/computer_network",
-		"var":[
+		"vars":[
 			"network_key",
 			"network_features_enabled",
 			"intrusion_detection_enabled",
 			"intrusion_detection_alarm",
 			"banned_nids",
 			"chat_channels"
+		]
+	},
+	{
+		"path":"/obj/item/organ/internal/stack",
+		"vars":[
+			"stackmob",
+			"backup"
+		]
+	},
+	{
+		"path":"/obj/machinery/cloning_pod",
+		"vars":[
+			"occupant",
+			"error"
+		]
+	},
+	{
+		"path":"/datum/computer_file/data/cloning",
+		"vars":[
+			"mob_age",
+			"skill_list",
+			"languages",
+			"mind_id",
+			"dna",
+			"backup_date"
+		]
+	},
+	{
+		"path":"/obj/item/organ/internal/augment/active/cyberbrain",
+		"vars":[
+			"stock_parts"
 		]
 	}
 ]
