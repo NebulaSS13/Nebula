@@ -138,6 +138,9 @@
 	material = MAT_LEATHER_GENERIC
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
+	armor_type = /datum/extension/armor/ablative
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	material_armor_multiplier = 0.5
 
 /obj/item/clothing/accessory/cloak/hide/set_material(var/new_material)
 	..()

@@ -160,6 +160,10 @@
 	var/gas_tile_overlay =       "generic"
 	var/gas_condensation_point = INFINITY
 
+	// Armor values generated from properties
+	var/list/basic_armor
+	var/armor_degradation_speed
+
 // Placeholders for light tiles and rglass.
 /material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
 	if(!used_stack.can_use(1))
@@ -210,6 +214,7 @@
 		shard_icon = shard_type
 	if(!burn_armor)
 		burn_armor = brute_armor
+	generate_armor_values()
 
 // Return the matter comprising this material.
 /material/proc/get_matter()
