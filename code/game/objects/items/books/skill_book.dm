@@ -470,28 +470,6 @@ ENGINEERING
 	skill_req = SKILL_EXPERT
 	name = "theoretical electrical engineering textbook"
 
-//atmos
-/obj/item/book/skill/engineering/atmos
-	skill = SKILL_ATMOS
-	author = "Maria Crash"
-	icon_state = "pipingbook"
-
-/obj/item/book/skill/engineering/atmos/basic
-	skill_req = SKILL_NONE
-	name = "beginner atmospherics textbook"
-
-/obj/item/book/skill/engineering/atmos/adept
-	skill_req = SKILL_BASIC
-	name = "intermediate atmospherics textbook"
-
-/obj/item/book/skill/engineering/atmos/expert
-	skill_req = SKILL_ADEPT
-	name = "advanced atmospherics textbook"
-
-/obj/item/book/skill/engineering/atmos/prof
-	skill_req = SKILL_EXPERT
-	name = "theoretical atmospherics textbook"
-
 //engines
 /obj/item/book/skill/engineering/engines
 	skill = SKILL_ENGINES
@@ -865,7 +843,6 @@ MEDICAL
 							/obj/item/book/skill/security/forensics,
 							/obj/item/book/skill/engineering/construction,
 							/obj/item/book/skill/engineering/electrical,
-							/obj/item/book/skill/engineering/atmos,
 							/obj/item/book/skill/engineering/engines,
 							/obj/item/book/skill/research/devices,
 							/obj/item/book/skill/research/science,
