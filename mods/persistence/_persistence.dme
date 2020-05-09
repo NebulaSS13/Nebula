@@ -3,6 +3,7 @@
 // BEGIN_INCLUDE
 #include "_maps.dm"
 #include "_persistence.dm"
+#include "sequential_guid.dm"
 #include "_global_vars\serialization.dm"
 #include "_onclick\click.dm"
 #include "controllers\ticker.dm"
