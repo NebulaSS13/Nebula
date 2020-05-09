@@ -213,28 +213,6 @@ GENERAL
 	skill_req = SKILL_EXPERT
 	name = "theoretical extra-vehicular activity textbook"
 
-//mech
-/obj/item/book/skill/general/mech
-	icon_state = "tb_mech"
-	skill = SKILL_MECH
-	author = "J.T. Marsh"
-
-/obj/item/book/skill/general/mech/basic
-	skill_req = SKILL_NONE
-	name = "beginner exosuit operation textbook"
-
-/obj/item/book/skill/general/mech/adept
-	skill_req = SKILL_BASIC
-	name = "intermediate exosuit operation textbook"
-
-/obj/item/book/skill/general/mech/expert
-	skill_req = SKILL_ADEPT
-	name = "advanced exosuit operation textbook"
-
-/obj/item/book/skill/general/mech/prof
-	skill_req = SKILL_EXPERT
-	name = "theoretical exosuit operation textbook"
-
 //piloting
 /obj/item/book/skill/general/pilot
 	skill = SKILL_PILOT
@@ -810,7 +788,6 @@ MEDICAL
 	var/list/catalogue = list(/obj/item/book/skill/organizational/finance,
 							/obj/item/book/skill/organizational/literacy,
 							/obj/item/book/skill/general/eva,
-							/obj/item/book/skill/general/mech,
 							/obj/item/book/skill/general/pilot,
 							/obj/item/book/skill/general/hauling,
 							/obj/item/book/skill/general/computer,
@@ -825,8 +802,8 @@ MEDICAL
 							/obj/item/book/skill/research/devices,
 							/obj/item/book/skill/research/science,
 							/obj/item/book/skill/medical/chemistry,
-							/obj/item/book/skill/medical/medicine,
-							/obj/item/book/skill/medical/anatomy)
+							/obj/item/book/skill/medical/medicine
+	)
 
 //give me ALL the textbooks
 /obj/structure/bookcase/skill_books/all

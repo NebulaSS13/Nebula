@@ -25,7 +25,7 @@
 	skills = list(
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_EVA      = SKILL_MAX,
-		SKILL_MECH     = HAS_PERK,
+		SKILL_PILOT    = SKILL_MAX,
 		SKILL_BOTANY   = SKILL_MAX
 	) // lol, idk
 

@@ -70,7 +70,7 @@
 	var/moving_dir = direction
 
 	var/failed = FALSE
-	var/fail_prob = mover != host ? (mover.skill_check(SKILL_MECH, HAS_PERK) ? 0 : 25) : 0
+	var/fail_prob = mover != host ? (mover.skill_check(SKILL_PILOT, HAS_PERK) ? 0 : 25) : 0
 	if(prob(fail_prob))
 		to_chat(mover, SPAN_DANGER("You clumsily fumble with the exosuit joystick."))
 		failed = TRUE

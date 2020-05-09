@@ -124,7 +124,7 @@
 		SKILL_MEDICAL     = SKILL_PROF,
 		SKILL_CHEMISTRY   = SKILL_ADEPT,
 		SKILL_EVA         = SKILL_EXPERT,
-		SKILL_MECH        = HAS_PERK
+		SKILL_PILOT       = SKILL_EXPERT
 	)
 
 /obj/item/robot_module/medical/crisis/finalize_equipment()
