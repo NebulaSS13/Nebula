@@ -424,3 +424,22 @@
 	name = "green letterman jacket"
 	desc = "A green letter jacket often given to members of a varsity team."
 	color = "#82e011"
+
+//Space santa outfit suit
+/obj/item/clothing/head/santahat
+	name = "Santa's hat"
+	desc = "Ho ho ho. Merrry X-mas!"
+	icon_state = "santahat"
+	item_state = "santahat"
+	flags_inv = BLOCKHAIR
+	body_parts_covered = HEAD
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
+
+/obj/item/clothing/suit/santa
+	name = "Santa's suit"
+	desc = "Festive!"
+	icon_state = "santa"
+	allowed = list(/obj/item) //for stuffing exta special presents
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0

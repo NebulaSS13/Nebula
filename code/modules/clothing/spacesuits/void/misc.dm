@@ -2,7 +2,8 @@
 /obj/item/clothing/suit/space/void/swat
 	name = "\improper SWAT suit"
 	desc = "A heavily armored suit that protects against moderate damage. Used in special operations."
-	icon_state = "deathsquad"
+	icon = 'icons/clothing/spacesuit/void/deathsquad/suit.dmi'
+	on_mob_icon = 'icons/clothing/spacesuit/void/deathsquad/suit.dmi'
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/tank)
 	armor = list(

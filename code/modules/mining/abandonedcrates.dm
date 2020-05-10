@@ -30,7 +30,7 @@
 			new/obj/item/pickaxe/drill(src)
 			new/obj/item/taperecorder(src)
 			new/obj/item/clothing/suit/space(src)
-			new/obj/item/clothing/head/helmet/space/fishbowl(src)
+			new/obj/item/clothing/head/helmet/space(src)
 		if(11 to 15)
 			new/obj/item/chems/glass/beaker/bluespace(src)
 		if(16 to 20)
