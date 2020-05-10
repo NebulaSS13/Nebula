@@ -59,7 +59,7 @@
 	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
-	req_access = list(list(access_security, access_bridge))
+	initial_access = list(list(access_security, access_bridge))
 
 /obj/machinery/porta_turret/crescent
 	enabled = 0
@@ -70,7 +70,7 @@
 	check_records = 1
 	check_weapons = 1
 	check_anomalies = 1
-	req_access = list(access_cent_specops)
+	initial_access = list(access_cent_specops)
 
 /obj/machinery/porta_turret/stationary
 	ailock = 1

@@ -29,6 +29,10 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 				LAZYINITLIST(uncreated_component_parts)
 				for(var/type in req_components)
 					uncreated_component_parts[type] += (req_components[type] || 1)
+		if(initial_access && length(initial_access) > 0)
+			// Auto-create a network lock.
+			var/obj/item/stock_parts/network_lock/lock = install_component(/obj/item/stock_parts/network_lock, refresh_parts = FALSE)
+			lock.grants = initial_access
 
 	// Create the parts we are supposed to have. If not full_populate, this is only hard-baked parts, and more will be added later.
 	for(var/component_path in uncreated_component_parts)

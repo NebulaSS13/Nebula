@@ -4,7 +4,7 @@
 	icon_state = "injector0"
 	density = 1
 	anchored = 0
-	req_access = list(access_engine)
+	initial_access = list(access_engine)
 	idle_power_usage = 10
 	active_power_usage = 500
 	construct_state = /decl/machine_construction/default/panel_closed

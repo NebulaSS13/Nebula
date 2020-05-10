@@ -116,6 +116,8 @@ Class Procs:
 	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/stock_parts
 	var/processing_flags         // What is being processed
 
+	var/list/initial_access		// Used to setup network locks on machinery at populate_parts.
+
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(d)
