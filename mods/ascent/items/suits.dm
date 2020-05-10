@@ -14,7 +14,6 @@
 	)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	bodytype_restricted = list(BODYTYPE_MANTID_SMALL)
-	sprite_sheets = list(BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_head_alate.dmi')
 
 /obj/item/clothing/suit/space/void/ascent
 	name = "\improper Ascent voidsuit"
@@ -32,7 +31,6 @@
 		rad = ARMOR_RAD_SHIELDED
 	)
 	bodytype_restricted = list(BODYTYPE_MANTID_SMALL)
-	sprite_sheets = list(BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_suit_alate.dmi')
 	allowed = list(
 		/obj/item/clustertool,
 		/obj/item/tank/mantid,
