@@ -346,16 +346,3 @@
 //-------------------------------------------------------
 /obj/vehicle/proc/update_stats()
 	return
-
-/obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
-	if(!damage)
-		return
-	visible_message("<span class='danger'>\The [user] [attack_message] the \the [src]!</span>")
-	if(istype(user))
-		admin_attacker_log(user, "attacked \the [src]")
-		user.do_attack_animation(src)
-	src.health -= damage
-	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	spawn(1) healthcheck()
-	return 1

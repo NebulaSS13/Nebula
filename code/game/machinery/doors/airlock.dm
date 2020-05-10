@@ -95,20 +95,6 @@ var/list/airlock_overlays = list()
 		/obj/item/stock_parts/power/apc
 	)
 
-/obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
-	if(stat & (BROKEN|NOPOWER))
-		if(damage >= 10)
-			if(src.density)
-				visible_message(SPAN_DANGER("\The [user] forces \the [src] open!"))
-				open(1)
-			else
-				visible_message(SPAN_DANGER("\The [user] forces \the [src] closed!"))
-				close(1)
-		else
-			visible_message(SPAN_NOTICE("\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"]."))
-		return
-	..()
-
 /obj/machinery/door/airlock/get_material()
 	return SSmaterials.get_material_datum(mineral ? mineral : MAT_STEEL)
 
@@ -837,9 +823,21 @@ About the new airlock wires panel:
 	else if(istype(C, /obj/item/floor_painter))
 		return
 
+	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/simple_animal))
+		var/mob/living/simple_animal/A = user
+		var/obj/item/I = A.get_natural_weapon()
+		if(I.force >= 10)
+			if(density)
+				visible_message(SPAN_DANGER("\The [A] forces \the [src] open!"))
+				open(1)
+			else
+				visible_message(SPAN_DANGER("\The [A] forces \the [src] closed!"))
+				close(1)
+		else
+			visible_message(SPAN_NOTICE("\The [A] strains fruitlessly to force \the [src] [density ? "open" : "closed"]."))
+		return
 	else
 		..()
-	return
 
 /obj/machinery/door/airlock/deconstruct(mob/user, var/moved = FALSE)
 	var/obj/structure/door_assembly/da = new assembly_type(src.loc)

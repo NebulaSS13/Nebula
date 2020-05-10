@@ -166,7 +166,7 @@
 /decl/reagent/ethanol/coffee/kahlua
 	name = "coffee liqueur"
 	description = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
-	taste_description = "spiked latte"
+	taste_description = "spiked coffee"
 	taste_mult = 1.1
 	color = "#4c3100"
 	strength = 15
@@ -626,19 +626,6 @@
 
 	glass_name = "Hooch"
 	glass_desc = "You've really hit rock bottom now... your liver packed its bags and left last night."
-
-/decl/reagent/ethanol/iced_beer
-	name = "iced beer"
-	description = "A beer which is so cold the air around it freezes."
-	taste_description = "refreshingly cold"
-	color = "#ffd300"
-	strength = 50
-	adj_temp = -20
-	targ_temp = 270
-
-	glass_name = "iced beer"
-	glass_desc = "A beer so frosty, the air around it freezes."
-	glass_special = list(DRINK_ICE)
 
 /decl/reagent/ethanol/irishslammer
 	name = "Irish Slammer"

@@ -4,7 +4,6 @@
 	icon_state = "server"
 	network_device_type =  /datum/extension/network_device/mainframe
 	main_template = "network_mainframe.tmpl"
-	lateload = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
@@ -17,11 +16,10 @@
 		MF_ROLE_SOFTWARE
 		)
 
-/obj/machinery/network/mainframe/LateInitialize()
+/obj/machinery/network/mainframe/Initialize()
 	. = ..()
 	var/datum/extension/network_device/mainframe/M = get_extension(src, /datum/extension/network_device)
 	M.roles |= initial_roles
-	M.connect() || M.connect_to_any()
 
 /obj/machinery/network/mainframe/ui_data(mob/user, ui_key)
 	var/data = ..()

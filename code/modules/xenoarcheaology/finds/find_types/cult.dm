@@ -14,7 +14,7 @@
 /decl/archaeological_find/cult/sword
 	item_type = "blade"
 	modification_flags = 0
-	possible_types = list(/obj/item/melee/cultblade)
+	possible_types = list(/obj/item/material/sword/cultblade)
 	engraving_chance = 10
 
 //Override adding soulstone

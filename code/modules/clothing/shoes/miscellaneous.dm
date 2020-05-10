@@ -15,11 +15,9 @@
 	icon_state = "white"
 	can_add_cuffs = FALSE
 
-/obj/item/clothing/shoes/swat
+/obj/item/clothing/shoes/jackboots/swat
 	name = "\improper SWAT boots"
 	desc = "When you want to turn up the heat."
-	icon_state = "swat"
-	force = 3
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH, 
 		bullet = ARMOR_BALLISTIC_RIFLE, 
@@ -31,87 +29,38 @@
 	item_flags = ITEM_FLAG_NOSLIP
 	siemens_coefficient = 0.6
 
-/obj/item/clothing/shoes/combat //Basically SWAT shoes combined with galoshes.
+/obj/item/clothing/shoes/jackboots/swat/combat //Basically SWAT shoes combined with galoshes.
 	name = "combat boots"
 	desc = "When you REALLY want to turn up the heat."
-	icon_state = "jungle"
+	applies_material_colour = FALSE
+	color = "#694e30"
 	force = 5
-	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_RIFLE, 
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_MINOR
-		)
-	item_flags = ITEM_FLAG_NOSLIP
-	siemens_coefficient = 0.6
 
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
-
-/obj/item/clothing/shoes/jungleboots
+/obj/item/clothing/shoes/jackboots/jungleboots
 	name = "jungle boots"
 	desc = "A pair of durable brown boots. Waterproofed for use planetside."
-	icon_state = "jungle"
-	force = 3
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_MINOR
-		)
-	siemens_coefficient = 0.7
+	applies_material_colour = FALSE
+	color = "#694e30"
+	artificail_shine = 0
 
-/obj/item/clothing/shoes/desertboots
+/obj/item/clothing/shoes/jackboots/desertboots
 	name = "desert boots"
 	desc = "A pair of durable tan boots. Designed for use in hot climates."
-	icon_state = "desert"
-	force = 3
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_MINOR
-		)
-	siemens_coefficient = 0.7
+	applies_material_colour = FALSE
+	color = "#9c8c6a"
+	artificail_shine = 0
 
-/obj/item/clothing/shoes/dutyboots
+/obj/item/clothing/shoes/jackboots/duty
 	name = "duty boots"
 	desc = "A pair of steel-toed synthleather boots with a mirror shine."
-	icon_state = "duty"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		rad = ARMOR_RAD_MINOR
-		)
-	siemens_coefficient = 0.7
-	gas_transfer_coefficient = 0.90
-	permeability_coefficient = 0.50
-	body_parts_covered = FEET
-	heat_protection = FEET
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	artificail_shine = 40
 
-/obj/item/clothing/shoes/tactical
+/obj/item/clothing/shoes/jackboots/tactical
 	name = "tactical boots"
 	desc = "Tan boots with extra padding and armor."
-	icon_state = "desert"
-	force = 3
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_HANDGUNS, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_RESISTANT)
-	siemens_coefficient = 0.7
+	applies_material_colour = FALSE
+	color = "#9c8c6a"
+	artificail_shine = 0
 
 /obj/item/clothing/shoes/dress
 	name = "dress shoes"

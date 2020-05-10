@@ -37,7 +37,7 @@ exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 29 "text2path uses" 'text2path'
 exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto uses" 'goto '
-exactly 421 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
+exactly 419 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 6 "atom/New uses" '^/(obj|atom|area|mob|turf).*/New\('
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong

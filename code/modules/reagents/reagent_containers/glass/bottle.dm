@@ -16,9 +16,6 @@
 	obj_flags = 0
 	volume = 60
 
-/obj/item/chems/glass/bottle/on_reagent_change()
-	update_icon()
-
 /obj/item/chems/glass/bottle/pickup(mob/user)
 	..()
 	update_icon()

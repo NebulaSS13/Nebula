@@ -130,3 +130,13 @@
 
 /decl/reagent/proc/get_value()
 	. = value
+
+/decl/reagent/proc/get_presentation_name(var/obj/item/prop)
+	. = glass_name || name
+	if(prop?.reagents?.total_volume)
+		. = build_presentation_name_from_reagents(prop, .)
+
+/decl/reagent/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	. = supplied
+	if(prop.reagents.has_reagent(/decl/reagent/drink/ice))
+		. = "iced [.]"

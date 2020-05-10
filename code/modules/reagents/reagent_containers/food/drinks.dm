@@ -14,8 +14,12 @@
 	var/base_name = null // Name to put in front of drinks, i.e. "[base_name] of [contents]"
 	var/base_icon = null // Base icon name for fill states
 
-/obj/item/chems/food/drinks/on_reagent_change()
-	update_icon()
+/obj/item/chems/food/drinks/Initialize()
+	. = ..()
+	base_name = name
+
+/obj/item/chems/food/drinks/get_base_name()
+	. = base_name
 
 /obj/item/chems/food/drinks/dragged_onto(var/mob/user)
 	attack_self(user)
@@ -95,13 +99,17 @@
 		if(percent <= k)
 			return k
 
+/obj/item/chems/food/drinks/get_base_name()
+	. = base_name
+
+/obj/item/chems/food/drinks/on_reagent_change()
+	. = ..()
+	var/decl/reagent/R = reagents.get_primary_reagent_decl()
+	desc = R?.glass_desc || initial(desc)
+
 /obj/item/chems/food/drinks/on_update_icon()
 	overlays.Cut()
 	if(LAZYLEN(reagents.reagent_volumes))
-		if(base_name)
-			var/decl/reagent/R = reagents.get_primary_reagent_decl()
-			SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
-			desc = R.glass_desc ? R.glass_desc : initial(desc)
 		if(filling_states)
 			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
 			filling.color = reagents.get_color()
@@ -225,7 +233,8 @@
 	volume = 10
 	center_of_mass = @"{'x':16,'y':12}"
 
-/obj/item/chems/food/drinks/sillycup/on_reagent_change()
+/obj/item/chems/food/drinks/sillycup/on_update_icon()
+	. = ..()
 	if(reagents.total_volume)
 		icon_state = "water_cup"
 	else
@@ -311,7 +320,7 @@
 
 /obj/item/chems/food/drinks/tea/black/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/drink/tea, 30)
+	reagents.add_reagent(/decl/reagent/drink/tea/black, 30)
 
 /obj/item/chems/food/drinks/tea/green
 	name = "cup of green tea"

@@ -26,11 +26,12 @@
 	boot_type =  /obj/item/clothing/shoes/magboots/rig/mantid
 	glove_type = /obj/item/clothing/gloves/rig/mantid
 	update_visible_name = TRUE
-	icon_override = 'mods/ascent/icons/species/mantid/onmob_back_alate.dmi'
+	icon = 'mods/ascent/icons/rig/inventory.dmi'
+	on_mob_icon = 'mods/ascent/icons/rig/inventory.dmi'
 	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/species/mantid/onmob_back_gyne.dmi',
-		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_back_alate.dmi',
-		BODYTYPE_SNAKE =        'mods/ascent/icons/species/serpentid/onmob_back_serpentid.dmi'
+		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/rig/gyne.dmi',
+		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/rig/alate.dmi',
+		BODYTYPE_SNAKE =        'mods/ascent/icons/rig/serpentid.dmi'
 		)
 	initial_modules = list(
 		/obj/item/rig_module/vision/thermal,
@@ -167,7 +168,7 @@
 	var/gas_regen_cap = 30
 
 /obj/item/tank/jetpack/ascent/Initialize()
-	starting_pressure = list("[refill_gas_type]" = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(refill_gas_type = 6 * ONE_ATMOSPHERE)
 	. = ..()
 
 /obj/item/tank/jetpack/ascent/Process()
@@ -225,7 +226,6 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	icon_override = 'mods/ascent/icons/species/mantid/onmob_back_gyne.dmi'
 	mantid_caste = SPECIES_MANTID_GYNE
 	initial_modules = list(
 		/obj/item/rig_module/vision/thermal,
@@ -245,7 +245,6 @@
 
 /obj/item/rig/mantid/serpentid
 	name = "serpentid support exosuit"
-	icon_override = 'mods/ascent/icons/species/serpentid/onmob_back_serpentid.dmi'
 	mantid_caste = SPECIES_SERPENTID
 	air_type =   /obj/item/tank/mantid/reactor/oxygen
 	chest_type = /obj/item/clothing/suit/space/rig/mantid/serpentid
@@ -266,20 +265,10 @@
 	light_color = "#00ffff"
 	desc = "More like a torpedo casing than a helmet."
 	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL)
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/species/mantid/onmob_head_gyne.dmi',
-		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_head_alate.dmi',
-		BODYTYPE_SNAKE =        'mods/ascent/icons/species/serpentid/onmob_head_serpentid.dmi'
-		)
 
 /obj/item/clothing/suit/space/rig/mantid
 	desc = "It's closer to a mech than a suit."
 	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL)
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/species/mantid/onmob_suit_gyne.dmi',
-		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_suit_alate.dmi',
-		BODYTYPE_MANTID_SNAKE = 'mods/ascent/icons/species/serpentid/onmob_suit_serpentid.dmi'
-		)
 	allowed = list(
 		/obj/item/clustertool,
 		/obj/item/gun/energy/particle/small,
@@ -292,16 +281,7 @@
 /obj/item/clothing/shoes/magboots/rig/mantid
 	desc = "It's like a highly advanced forklift."
 	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL)
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/species/mantid/onmob_shoes_gyne.dmi',
-		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_shoes_alate.dmi'
-	)
 
 /obj/item/clothing/gloves/rig/mantid
 	desc = "They look like a cross between a can opener and a Swiss army knife the size of a shoebox."
 	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL)
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/species/mantid/onmob_gloves_gyne.dmi',
-		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_gloves_alate.dmi',
-		BODYTYPE_SNAKE =        'mods/ascent/icons/species/serpentid/onmob_hands_serpentid.dmi'
-	)

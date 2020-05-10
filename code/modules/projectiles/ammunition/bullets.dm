@@ -3,42 +3,61 @@
 	desc = "A pistol bullet casing."
 	caliber = CALIBER_PISTOL
 	projectile_type = /obj/item/projectile/bullet/pistol
-	icon_state = "pistolcasing"
-	spent_icon = "pistolcasing-spent"
+	icon = 'icons/obj/ammo/casings/pistol.dmi'
+	on_mob_icon = 'icons/obj/ammo/casings/pistol.dmi'
 
 /obj/item/ammo_casing/pistol/rubber
 	desc = "A rubber pistol bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
-	icon_state = "pistolcasing_r"
+	bullet_color = COLOR_GRAY40
 
 /obj/item/ammo_casing/pistol/practice
 	desc = "A practice pistol bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
-	icon_state = "pistolcasing_p"
+	bullet_color = COLOR_OFF_WHITE
+	marking_color = COLOR_SUN
+
+/obj/item/ammo_casing/pistol/emp
+	name = "haywire round"
+	desc = "A pistol bullet casing fitted with a single-use ion pulse generator."
+	projectile_type = /obj/item/projectile/ion/small
+	material = MAT_STEEL
+	matter = list(MAT_URANIUM = MATTER_AMOUNT_REINFORCEMENT)
+	bullet_color = COLOR_ACID_CYAN
+	marking_color = COLOR_LUMINOL
 
 /obj/item/ammo_casing/pistol/small
 	desc = "A small pistol bullet casing."
+	color = COLOR_POLISHED_BRASS
+	on_mob_icon = 'icons/obj/ammo/casings/small_pistol.dmi'
 	caliber = CALIBER_PISTOL_SMALL
 	projectile_type = /obj/item/projectile/bullet/pistol/holdout
-	icon_state = "smallcasing"
-	spent_icon = "smallcasing-spent"
-
+	
 /obj/item/ammo_casing/pistol/small/rubber
 	desc = "A small pistol rubber bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber/holdout
-	icon_state = "pistolcasing_r"
+	bullet_color = COLOR_GRAY40
 
 /obj/item/ammo_casing/pistol/small/practice
 	desc = "A small pistol practice bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
-	icon_state = "pistolcasing_p"
+	bullet_color = COLOR_OFF_WHITE
+	marking_color = COLOR_SUN
+
+/obj/item/ammo_casing/pistol/small/emp
+	name = "small haywire round"
+	desc = "A small bullet casing fitted with a single-use ion pulse generator."
+	projectile_type = /obj/item/projectile/ion/tiny
+	bullet_color = COLOR_ACID_CYAN
+	marking_color = COLOR_LUMINOL
 
 /obj/item/ammo_casing/pistol/magnum
 	desc = "A high-power pistol bullet casing."
 	caliber = CALIBER_PISTOL_MAGNUM
+	color = COLOR_POLISHED_BRASS
+	marking_color = COLOR_MAROON
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
-	icon_state = "magnumcasing"
-	spent_icon = "magnumcasing-spent"
+	on_mob_icon = 'icons/obj/ammo/casings/magnum.dmi'
 
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"
@@ -108,31 +127,43 @@
 	material = MAT_STEEL
 	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 
+/obj/item/ammo_casing/shotgun/emp
+	name = "haywire slug"
+	desc = "A 12-gauge shotgun slug fitted with a single-use ion pulse generator."
+	icon_state = "empshell"
+	spent_icon = "empshell-spent"
+	projectile_type  = /obj/item/projectile/ion
+	material = MAT_STEEL
+	matter = list(MAT_URANIUM = MATTER_AMOUNT_REINFORCEMENT)
+
 /obj/item/ammo_casing/shell
 	name = "shell casing"
 	desc = "An antimaterial shell casing."
-	icon_state = "lcasing"
-	spent_icon = "lcasing-spent"
 	caliber = CALIBER_ANTIMATERIAL
 	projectile_type = /obj/item/projectile/bullet/rifle/shell
 	material = MAT_STEEL
+	color = COLOR_POLISHED_BRASS
+	on_mob_icon = 'icons/obj/ammo/casings/antimaterial.dmi'
 
 /obj/item/ammo_casing/shell/apds
 	name = "\improper APDS shell casing"
 	desc = "An Armour Piercing Discarding Sabot shell."
 	projectile_type = /obj/item/projectile/bullet/rifle/shell/apds
+	bullet_color = COLOR_RED_GRAY
+	marking_color = COLOR_NT_RED
 
 /obj/item/ammo_casing/rifle
 	desc = "A military rifle bullet casing."
 	caliber = CALIBER_RIFLE
 	projectile_type = /obj/item/projectile/bullet/rifle
-	icon_state = "rifle_mil"
-	spent_icon = "rifle_mil-spent"
+	icon = 'icons/obj/ammo/casings/rifle.dmi'
+	on_mob_icon = 'icons/obj/ammo/casings/rifle.dmi'
 
 /obj/item/ammo_casing/rifle/practice
 	desc = "A military rifle practice bullet casing."
 	projectile_type = /obj/item/projectile/bullet/rifle/practice
-	icon_state = "rifle_mil_p"
+	bullet_color = COLOR_OFF_WHITE
+	marking_color = COLOR_SUN
 
 /obj/item/ammo_casing/rocket
 	name = "rocket shell"
@@ -145,39 +176,18 @@
 	name = "cap"
 	desc = "A cap for children toys."
 	caliber = CALIBER_CAPS
-	color = "#ff0000"
+	on_mob_icon = 'icons/obj/ammo/casings/small_pistol.dmi'
+	bullet_color = COLOR_RED
+	color = COLOR_RED
 	projectile_type = /obj/item/projectile/bullet/pistol/cap
-
-// EMP ammo.
-/obj/item/ammo_casing/pistol/emp
-	name = "haywire round"
-	desc = "A pistol bullet casing fitted with a single-use ion pulse generator."
-	projectile_type = /obj/item/projectile/ion/small
-	icon_state = "pistolcasing_h"
-	material = MAT_STEEL
-	matter = list(MAT_URANIUM = MATTER_AMOUNT_REINFORCEMENT)
-
-/obj/item/ammo_casing/pistol/small/emp
-	name = "small haywire round"
-	desc = "A small bullet casing fitted with a single-use ion pulse generator."
-	projectile_type = /obj/item/projectile/ion/tiny
-	icon_state = "smallcasing_h"
-
-/obj/item/ammo_casing/shotgun/emp
-	name = "haywire slug"
-	desc = "A 12-gauge shotgun slug fitted with a single-use ion pulse generator."
-	icon_state = "empshell"
-	spent_icon = "empshell-spent"
-	projectile_type  = /obj/item/projectile/ion
-	material = MAT_STEEL
-	matter = list(MAT_URANIUM = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/ammo_casing/lasbulb
 	name = "lasbulb"
 	desc = "A laser-bulb casing."
 	caliber = CALIBER_PISTOL_LASBULB
 	projectile_type = /obj/item/projectile/beam/pop
-	icon_state = "pistolcasing"
-	spent_icon = "pistolcasing-spent"
+	on_mob_icon = 'icons/obj/ammo/casings/lasbulb.dmi'
+	color = COLOR_BLUE_GRAY
+	bullet_color = COLOR_BLUE_LIGHT
 	material = MAT_GLASS
 	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)

@@ -46,7 +46,7 @@
 
 	// Bar, soft
 	ice			spawn_reagent = /decl/reagent/drink/ice
-	tea			spawn_reagent = /decl/reagent/drink/tea
+	black_tea	spawn_reagent = /decl/reagent/drink/tea/black
 	green_tea	spawn_reagent = /decl/reagent/drink/tea/green
 	chai_tea	spawn_reagent = /decl/reagent/drink/tea/chai
 	red_tea		spawn_reagent = /decl/reagent/drink/tea/red
@@ -62,17 +62,16 @@
 	watermelon	spawn_reagent = /decl/reagent/drink/juice/watermelon
 
 	// Bar, syrups
-	syrup_chocolate	spawn_reagent = /decl/reagent/drink/syrup_chocolate
-	syrup_caramel	spawn_reagent = /decl/reagent/drink/syrup_caramel
-	syrup_vanilla	spawn_reagent = /decl/reagent/drink/syrup_vanilla
-	syrup_pumpkin	spawn_reagent = /decl/reagent/drink/syrup_pumpkin
+	syrup_chocolate	spawn_reagent = /decl/reagent/drink/syrup/chocolate
+	syrup_caramel	spawn_reagent = /decl/reagent/drink/syrup/caramel
+	syrup_vanilla	spawn_reagent = /decl/reagent/drink/syrup/vanilla
+	syrup_pumpkin	spawn_reagent = /decl/reagent/drink/syrup/pumpkin
 
 	// Bar, coffee
 	coffee		spawn_reagent = /decl/reagent/drink/coffee
-	cafe_latte	spawn_reagent = /decl/reagent/drink/coffee/cafe_latte
-	soy_latte	spawn_reagent = /decl/reagent/drink/coffee/soy_latte
 	hot_coco	spawn_reagent = /decl/reagent/drink/hot_coco
 	milk		spawn_reagent = /decl/reagent/drink/milk
+	soymilk		spawn_reagent = /decl/reagent/drink/milk/soymilk
 	cream		spawn_reagent = /decl/reagent/drink/milk/cream
 
 	// ERT

@@ -260,7 +260,7 @@ SUBSYSTEM_DEF(zcopy)
 			continue
 
 		// Actually update the overlay.
-		OO.dir = OO.associated_atom.dir
+		OO.set_dir(OO.associated_atom.dir)
 		OO.appearance = OO.associated_atom
 		OO.plane = OPENTURF_MAX_PLANE - OO.depth
 

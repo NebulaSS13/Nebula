@@ -195,7 +195,7 @@
 	. = ATOM_IS_OPEN_CONTAINER(src) && ..()
 
 /obj/get_mass()
-	return min(2^(w_class-1), 100)
+	return min(2**(w_class-1), 100)
 
 /obj/fluid_act(var/datum/reagents/fluids)
 	fluids.touch_obj(src)

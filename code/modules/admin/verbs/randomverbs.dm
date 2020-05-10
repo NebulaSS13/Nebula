@@ -264,10 +264,10 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 		return
 	if(!M.client)
 		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: This mob doesn't have a client tied to it.</font>")
+		return
 	if(M.client.holder)
 		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>")
-	if(!M.client)		return
-	if(M.client.holder)	return
+		return
 
 	var/muteunmute
 	var/mute_string
@@ -275,6 +275,7 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 	switch(mute_type)
 		if(MUTE_IC)			mute_string = "IC (say and emote)"
 		if(MUTE_OOC)		mute_string = "OOC"
+		if(MUTE_AOOC)		mute_string = "AOOC"
 		if(MUTE_PRAY)		mute_string = "pray"
 		if(MUTE_ADMINHELP)	mute_string = "adminhelp, admin PM and ASAY"
 		if(MUTE_DEADCHAT)	mute_string = "deadchat and DSAY"

@@ -1,5 +1,5 @@
 GLOBAL_LIST_INIT(default_blend_objects,   list(/obj/machinery/door, /turf/simulated/wall))
-GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window))
+GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/machinery/door/firedoor, /obj/machinery/door/blast))
 
 /obj/structure
 	var/handle_generic_blending

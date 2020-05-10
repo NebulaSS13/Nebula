@@ -2,14 +2,24 @@
 #define MUNDANE_ARMOUR_VALUE 20
 #define BASE_ARMOUR_WORTH    50
 
-/obj/item/get_single_monetary_worth()
-	. = apply_additional_item_value(..())
-
 /obj/item/proc/get_max_weapon_value()
 	return force
 
-/obj/item/proc/apply_additional_item_value(var/initial_value)
-	. = initial_value
+/obj/item/get_base_value()
+
+	if(holographic)
+		return 0
+
+	. = ..()
+
+	if(origin_tech)
+		var/largest_tech_val = 0
+		var/list/tech = cached_json_decode(origin_tech)
+		for(var/t in tech)
+			var/next_tech_val = (tech[t]**2) * 5
+			if(next_tech_val > largest_tech_val)
+				largest_tech_val = next_tech_val
+			. += largest_tech_val
 
 	if(force)
 		var/weapon_value = ((get_max_weapon_value() * 25) * (1 + max(sharp, edge)))

@@ -49,6 +49,7 @@
 	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. This is an associative list: item slot - slowdown
 	var/slowdown_accessory // How much an accessory will slow you down when attached to a worn article of clothing.
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
+	var/material_armor_multiplier  // if set, item will use material's armor values multiplied by this.
 	var/armor_type = /datum/extension/armor
 	var/list/armor
 	var/armor_degradation_speed //How fast armor will degrade, multiplier to blocked damage to get armor damage value.
@@ -727,7 +728,7 @@ GLOBAL_LIST_EMPTY(blood_overlay_cache)
 	I.Blend(new /icon('icons/effects/blood.dmi', rgb(255,255,255)),ICON_ADD) //fills the icon_state with white (except where it's transparent)
 	I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 	blood_overlay = image(I)
-	blood_overlay.appearance_flags |= NO_CLIENT_COLOR
+	blood_overlay.appearance_flags |= NO_CLIENT_COLOR|RESET_COLOR
 	GLOB.blood_overlay_cache["[icon]" + icon_state] = blood_overlay
 
 /obj/item/proc/showoff(mob/user)
@@ -973,3 +974,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(material)
 		descriptors += "made of [material.display_name]"
 	return descriptors
+
+/obj/item/proc/attack_message_name()
+	return "\a [src]"

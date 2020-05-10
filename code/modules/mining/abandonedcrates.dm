@@ -95,7 +95,7 @@
 		if(81 to 82)
 			new/obj/item/gun/energy/plasmacutter(src)
 		if(83 to 84)
-			new/obj/item/toy/katana(src)
+			new/obj/item/material/sword/katana/toy(src)
 		if(85 to 88)
 			new/obj/item/seeds/random(src)
 		if(89, 90)

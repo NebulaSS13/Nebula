@@ -43,9 +43,7 @@
 	var/rad_shield = 0
 	var/global/list/coolant_reagents_purity = list(
 		/decl/reagent/water = 1,
-		/decl/reagent/drink/coffee/icecoffee = 0.6,
-		/decl/reagent/drink/tea/icetea = 0.6,
-		/decl/reagent/drink/milkshake = 0.6,
+		/decl/reagent/drink/ice = 0.6,
 		/decl/reagent/burn_meds = 0.7,
 		/decl/reagent/antiseptic = 0.7,
 		/decl/reagent/burn_meds = 0.7,

@@ -28,8 +28,7 @@
 				/decl/reagent/carbon = 10,
 				/decl/reagent/water = 5
 				)
-	sale_price = 1
-	value = 3
+	value = 1.5
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 22
 
@@ -37,7 +36,6 @@
 	icon_colour = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	stack_type = null
 	shard_type = SHARD_NONE
-	sale_price = 0
 	value = 0
 	hidden_from_codex = TRUE
 
@@ -50,14 +48,14 @@
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	icon_colour = WOOD_COLOR_RICH
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	sale_price = 3
-	value = 45
+	value = 1.6
 
 /material/wood/maple
 	display_name = "maple"
 	adjective_name = "maple"
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	icon_colour = WOOD_COLOR_PALE
+	value = 1.8
 
 /material/wood/ebony
 	display_name = "ebony"
@@ -70,8 +68,7 @@
 	weight = MAT_VALUE_HEAVY
 	integrity = 100
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
-	sale_price = 6
-	value = 85
+	value = 1.8
 
 /material/wood/walnut
 	display_name = "walnut"
@@ -82,8 +79,6 @@
 	icon_colour = WOOD_COLOR_CHOCOLATE
 	weight = MAT_VALUE_NORMAL
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	sale_price = 2
-	value = 21
 
 /material/wood/bamboo
 	display_name = "bamboo"
@@ -105,3 +100,4 @@
 				/decl/reagent/water = 5,
 				/decl/reagent/toxin/heartstopper = 0.05
 				)
+	value = 1.8

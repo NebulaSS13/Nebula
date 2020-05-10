@@ -49,7 +49,7 @@
 	if(!variable)	return
 	var/default
 	var/var_value = O.vars[variable]
-	var/dir
+	var/direction
 
 	if(variable == "holder" || (variable in locked))
 		if(!check_rights(R_DEBUG))	return
@@ -60,7 +60,7 @@
 	else if(isnum(var_value))
 		to_chat(usr, "Variable appears to be <b>NUM</b>.")
 		default = "num"
-		dir = 1
+		direction = TRUE
 
 	else if(istext(var_value))
 		to_chat(usr, "Variable appears to be <b>TEXT</b>.")
@@ -92,28 +92,10 @@
 		default = "file"
 
 	to_chat(usr, "Variable contains: [var_value]")
-	if(dir)
-		switch(var_value)
-			if(1)
-				dir = "NORTH"
-			if(2)
-				dir = "SOUTH"
-			if(4)
-				dir = "EAST"
-			if(8)
-				dir = "WEST"
-			if(5)
-				dir = "NORTHEAST"
-			if(6)
-				dir = "SOUTHEAST"
-			if(9)
-				dir = "NORTHWEST"
-			if(10)
-				dir = "SOUTHWEST"
-			else
-				dir = null
-		if(dir)
-			to_chat(usr, "If a direction, direction is: [dir]")
+	if(direction)
+		direction = dir2text(var_value)
+		if(direction != "unknown")
+			to_chat(usr, "If a direction, direction is: [direction]")
 
 	var/class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
 		"num","type","icon","file","edit referenced object","restore to default")

@@ -8,25 +8,33 @@ SUBSYSTEM_DEF(supply)
 	//supply points
 	var/points = 50
 	var/points_per_process = 1
-	var/points_per_slip = 2
 	var/point_sources = list()
 	var/pointstotalsum = 0
 	var/pointstotal = 0
+
+	var/price_markup =        1.15
+	var/crate_return_rebate = 0.9
+	var/slip_return_rebate =  0.15
+	var/goods_sale_modifier = 0.75
+	var/list/saleable_materials = list(/obj/item/stack/material)
+
 	//control
 	var/ordernum
 	var/list/shoppinglist = list()
 	var/list/requestlist = list()
 	var/list/donelist = list()
 	var/list/master_supply_list = list()
+	
 	//shuttle movement
 	var/movetime = 1200
 	var/datum/shuttle/autodock/ferry/supply/shuttle
 	var/list/point_source_descriptions = list(
+		"goods" = "From the sale of goods",
 		"time" = "Base station supply",
 		"manifest" = "From exported manifests",
 		"crate" = "From exported crates",
-		"gep" = "From uploaded good explorer points",
-		"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
+		"data" =  "From uploaded survey data",
+		"total" = "Total" 
 	)
 
 /datum/controller/subsystem/supply/Initialize()
@@ -40,10 +48,6 @@ SUBSYSTEM_DEF(supply)
 			for(var/decl/hierarchy/supply_pack/spc in sp.get_descendents())
 				spc.setup()
 				master_supply_list += spc
-
-	for(var/material/mat in SSmaterials.materials)
-		if(mat.sale_price > 0)
-			point_source_descriptions[mat.display_name] = "From exported [mat.display_name]"
 
 // Just add points over time.
 /datum/controller/subsystem/supply/fire()
@@ -76,7 +80,6 @@ SUBSYSTEM_DEF(supply)
 			return 1
 
 /datum/controller/subsystem/supply/proc/sell()
-	var/list/material_count = list()
 
 	for(var/area/subarea in shuttle.shuttle_area)
 		for(var/atom/movable/AM in subarea)
@@ -85,7 +88,7 @@ SUBSYSTEM_DEF(supply)
 			if(istype(AM, /obj/structure/closet/crate/))
 				var/obj/structure/closet/crate/CR = AM
 				callHook("sell_crate", list(CR, subarea))
-				add_points_from_source(CR.points_per_crate, "crate")
+				add_points_from_source(CR.get_single_monetary_worth() * crate_return_rebate * 0.1, "crate")
 				var/find_slip = 1
 
 				for(var/atom in CR)
@@ -93,30 +96,21 @@ SUBSYSTEM_DEF(supply)
 					var/atom/A = atom
 					if(find_slip && istype(A,/obj/item/paper/manifest))
 						var/obj/item/paper/manifest/slip = A
-						if(!slip.is_copy && slip.stamped && slip.stamped.len) //Any stamp works.
-							add_points_from_source(points_per_slip, "manifest")
+						if(!slip.is_copy && length(slip.stamped))
+							add_points_from_source(slip.order_total * slip_return_rebate, "manifest")
 							find_slip = 0
 						continue
 
 					// Sell materials
-					if(istype(A, /obj/item/stack/material))
-						var/obj/item/stack/material/P = A
-						if(P.material && P.material.sale_price > 0)
-							material_count[P.material.display_name] += P.get_amount() * P.material.sale_price * P.matter_multiplier
-						if(P.reinf_material && P.reinf_material.sale_price > 0)
-							material_count[P.reinf_material.display_name] += P.get_amount() * P.reinf_material.sale_price * P.matter_multiplier * 0.5
-						continue
+					if(is_type_in_list(A.type, saleable_materials))
+						add_points_from_source(A.get_combined_monetary_worth() * goods_sale_modifier * 0.1, "goods")
 
 					// Must sell ore detector disks in crates
 					if(istype(A, /obj/item/disk/survey))
 						var/obj/item/disk/survey/D = A
-						add_points_from_source(round(D.get_combined_monetary_worth() * 0.005), "gep")
+						add_points_from_source(D.get_combined_monetary_worth() * 0.005, "data")
 
 			qdel(AM)
-
-	if(material_count.len)
-		for(var/material_type in material_count)
-			add_points_from_source(material_count[material_type], material_type)
 
 /datum/controller/subsystem/supply/proc/get_clear_turfs()
 	var/list/clear_turfs = list()
@@ -167,6 +161,7 @@ SUBSYSTEM_DEF(supply)
 			info +="CONTENTS:<br><ul>"
 
 			slip = new /obj/item/paper/manifest(A, JOINTEXT(info))
+			slip.order_total = SP.cost
 			slip.is_copy = 0
 
 		//spawn the stuff, finish generating the manifest while you're at it

@@ -1,7 +1,10 @@
 var/list/limb_icon_cache = list()
 
-/obj/item/organ/external/set_dir()
-	return
+/obj/item/organ/external/set_dir(var/direction, var/forced)
+	SHOULD_CALL_PARENT(FALSE)
+	if(forced)
+		return ..(direction)
+	return FALSE
 
 /obj/item/organ/external/proc/compile_icon()
 	overlays.Cut()
@@ -116,7 +119,7 @@ var/list/limb_icon_cache = list()
 
 	if(model)
 		icon_cache_key += "_model_[model]"
-	dir = EAST
+	set_dir(EAST, TRUE)
 	icon = mob_icon
 
 /obj/item/organ/external/proc/get_icon()

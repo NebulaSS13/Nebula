@@ -11,8 +11,8 @@
 
 /proc/get_valid_clone_pods(var/mind_id)
 	var/list/valid_clone_pods = list()
-	for(var/network_id in GLOB.computer_networks)
-		var/datum/computer_network/network = GLOB.computer_networks[network_id]
+	for(var/network_id in SSnetworking.networks)
+		var/datum/computer_network/network = SSnetworking.networks[network_id]
 		for(var/datum/extension/network_device/cloning_pod/CP in network.devices)
 			var/datum/computer_file/data/cloning/backup = CP.is_valid_respawn(mind_id)
 			if(istype(backup))
