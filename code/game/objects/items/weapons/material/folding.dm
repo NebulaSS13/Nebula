@@ -3,12 +3,9 @@
 /obj/item/material/knife/folding
 	name = "pocketknife"
 	desc = "A small folding knife."
-	icon = 'icons/obj/items/weapon/folding_knife.dmi'
-	icon_state = "knife_preview"
-	item_state = null
-	force = 0.2 //force of folded obj
+	icon = 'icons/obj/items/weapon/knives/folding/basic.dmi'
+	on_mob_icon = 'icons/obj/items/weapon/knives/folding/basic.dmi'
 	material_force_multiplier = 0.2
-	applies_material_colour = FALSE
 	applies_material_name = FALSE
 	unbreakable = TRUE
 	w_class = ITEM_SIZE_SMALL
@@ -16,22 +13,11 @@
 	hitsound = "swing_hit"
 	edge = FALSE
 	sharp = FALSE
+	draw_handle = TRUE
+	valid_handle_colors = list(COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_DARK_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_DARK_GREEN_GRAY)
 
 	var/open = FALSE
-	var/takes_colour = TRUE
-	var/hardware_closed = "basic_hardware_closed"
-	var/hardware_open = "basic_hardware"
-	var/handle_icon = "basic_handle"
-
 	var/closed_attack_verbs = list("prodded", "tapped") //initial doesnt work with lists, rip
-	var/valid_colors = list(COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_DARK_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_DARK_GREEN_GRAY)
-
-/obj/item/material/knife/folding/Initialize()
-	if(takes_colour)
-		color = pick(valid_colors)
-	icon_state = handle_icon
-	update_icon()
-	. = ..()
 
 /obj/item/material/knife/folding/attack_self(mob/user)
 	open = !open
@@ -53,59 +39,55 @@
 		attack_verb = list("slashed", "stabbed")
 		..()
 	else
-		force = initial(force)
 		edge = initial(edge)
 		sharp = initial(sharp)
 		hitsound = initial(hitsound)
 		w_class = initial(w_class)
 		attack_verb = closed_attack_verbs
+		..()
 
 /obj/item/material/knife/folding/on_update_icon()
+	icon_state = get_world_inventory_state()
 	if(open)
-		overlays.Cut()
-		overlays += overlay_image(icon, hardware_open, flags=RESET_COLOR)
-		item_state = "knife"
-	else
-		overlays.Cut()
-		overlays += overlay_image(icon, hardware_closed, flags=RESET_COLOR)
-		item_state = initial(item_state)
-	if(blood_overlay)
-		overlays += blood_overlay
+		icon_state = "[get_world_inventory_state()]_open"
+	if(ismob(loc))
+		var/mob/M = loc
+		if(M.hand)
+			M.update_inv_l_hand()
+		else
+			M.update_inv_r_hand()
+	..()
 
+/obj/item/material/knife/folding/experimental_mob_overlay(mob/user_mob, slot)
+	if(open)
+		return ..()
+	
 //Subtypes
 /obj/item/material/knife/folding/wood
 	name = "peasant knife"
 	desc = "A small folding knife with a wooden handle and carbon steel blade. Knives like this have been used on Earth for centuries."
-	hardware_closed = "peasant_hardware_closed"
-	hardware_open = "peasant_hardware"
-	handle_icon = "peasant_handle"
-	valid_colors = list(WOOD_COLOR_GENERIC, WOOD_COLOR_RICH, WOOD_COLOR_BLACK, WOOD_COLOR_CHOCOLATE, WOOD_COLOR_PALE)
+	on_mob_icon = 'icons/obj/items/weapon/knives/folding/peasant.dmi'
+	valid_handle_colors = list(WOOD_COLOR_GENERIC, WOOD_COLOR_RICH, WOOD_COLOR_BLACK, WOOD_COLOR_CHOCOLATE, WOOD_COLOR_PALE)
 
 /obj/item/material/knife/folding/tacticool
 	name = "folding knife"
 	desc = "A small folding knife with a polymer handle and a blackened steel blade. These are typically marketed for self defense purposes."
-	hardware_closed = "tacticool_hardware_closed"
-	hardware_open = "tacticool_hardware"
-	handle_icon = "tacticool_handle"
-	valid_colors = list("#0f0f2a", "#2a0f0f", "#0f2a0f", COLOR_GRAY20, COLOR_DARK_GUNMETAL)
+	on_mob_icon = 'icons/obj/items/weapon/knives/folding/tacticool.dmi'
+	valid_handle_colors = list("#0f0f2a", "#2a0f0f", "#0f2a0f", COLOR_GRAY20, COLOR_DARK_GUNMETAL)
 
 /obj/item/material/knife/folding/combat //master obj
 	name = "switchblade"
 	desc = "This is a master item - berate the admin or mapper who spawned this"
 	material_force_multiplier = 0.25
 	thrown_material_force_multiplier = 0.25
-	takes_colour = FALSE
+	valid_handle_colors = null
 
 /obj/item/material/knife/folding/combat/balisong
 	name = "butterfly knife"
 	desc = "A basic metal blade concealed in a lightweight plasteel grip. Small enough when folded to fit in a pocket."
-	hardware_closed = "bfly_hardware_closed"
-	hardware_open = "bfly_hardware"
-	handle_icon = "bfly_handle"
+	on_mob_icon = 'icons/obj/items/weapon/knives/folding/butterfly.dmi'
 
 /obj/item/material/knife/folding/combat/switchblade
 	name = "switchblade"
 	desc = "A classic switchblade with gold engraving. Just holding it makes you feel like a gangster."
-	hardware_closed = "switch_hardware_closed"
-	hardware_open = "switch_hardware"
-	handle_icon = "switch_handle"
+	on_mob_icon = 'icons/obj/items/weapon/knives/folding/switchblade.dmi'
