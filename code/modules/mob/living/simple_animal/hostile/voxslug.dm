@@ -22,9 +22,7 @@ Small, little HP, poisonous.
 	mob_size = MOB_SIZE_MINISCULE
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
-	melee_damage_lower = 5
-	melee_damage_upper = 10
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/bite
 	holder_type = /obj/item/holder/voxslug
 	faction = "Hostile Fauna"
 

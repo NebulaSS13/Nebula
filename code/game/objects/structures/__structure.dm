@@ -93,17 +93,6 @@
 				else
 					to_chat(user, SPAN_SUBTLE("Can have wiring installed with a cable coil."))
 
-/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
-	if(wallbreaker && damage && breakable)
-		visible_message(SPAN_DANGER("\The [user] smashes \the [src] to pieces!"))
-		attack_animation(user)
-		qdel(src)
-		return 1
-	visible_message(SPAN_DANGER("\The [user] [attack_verb] \the [src]!"))
-	attack_animation(user)
-	take_damage(damage)
-	return 1
-
 /obj/structure/proc/mob_breakout(var/mob/living/escapee)
 	set waitfor = FALSE
 	return FALSE

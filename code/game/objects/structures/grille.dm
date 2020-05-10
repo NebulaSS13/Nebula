@@ -104,7 +104,7 @@
 		damage_dealt += 5
 	else
 		damage_dealt += 1
-
+	
 	attack_generic(user,damage_dealt,attack_message)
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

@@ -431,16 +431,12 @@
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)
 		faction = MOB_FACTION_NEUTRAL
-		melee_damage_lower = 0
-		melee_damage_upper = 0
+		natural_weapon.force = 0
 		environment_smash = 0
 		destroy_surroundings = 0
 	else
 		faction = "carp"
-		melee_damage_lower = initial(melee_damage_lower)
-		melee_damage_upper = initial(melee_damage_upper)
-		environment_smash = initial(environment_smash)
-		destroy_surroundings = initial(destroy_surroundings)
+		natural_weapon.force = initial(natural_weapon.force)
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib()
 	death()

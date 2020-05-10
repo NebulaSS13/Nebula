@@ -22,9 +22,7 @@
 	response_harm   = "pokes"
 	maxHealth = 125
 	health = 125
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/bite
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
 	faction = "spiders"
@@ -63,8 +61,7 @@
 	meat_amount = 4
 	maxHealth = 200
 	health = 200
-	melee_damage_lower = 13
-	melee_damage_upper = 18
+	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 5
 	speed = 2
 	move_to_delay = 4
@@ -83,8 +80,6 @@
 	icon_dead = "beige_dead"
 	maxHealth = 80
 	health = 80
-	melee_damage_lower = 10
-	melee_damage_upper = 14
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
@@ -110,8 +105,7 @@
 	icon_dead = "black_dead"
 	maxHealth = 150
 	health = 150
-	melee_damage_lower = 17
-	melee_damage_upper = 20
+	natural_weapon = /obj/item/natural_weapon/bite/strong
 	poison_per_bite = 10
 	speed = -1
 	move_to_delay = 2
@@ -134,8 +128,6 @@
 	icon_dead = "purple_dead"
 	maxHealth = 90
 	health = 90
-	melee_damage_lower = 10
-	melee_damage_upper = 14
 	poison_per_bite = 15
 	ranged = TRUE
 	move_to_delay = 2
@@ -156,8 +148,6 @@
 	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
-	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
-	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
 	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
 	health = maxHealth
 	eye_colour = pick(allowed_eye_colours)
@@ -189,7 +179,9 @@
 	. = ..()
 	if(isliving(.))
 		if(health < maxHealth)
-			health += (0.2 * rand(melee_damage_lower, melee_damage_upper)) //heal a bit on hit
+			var/obj/item/W = get_natural_weapon()
+			if(W)
+				health += (0.2 * W.force) //heal a bit on hit
 		if(ishuman(.))
 			var/mob/living/carbon/human/H = .
 			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
@@ -263,8 +255,9 @@ Guard caste procs
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
 	audible_message("<span class='danger'>\The [src] chitters wildly!</span>")
-	melee_damage_lower +=5
-	melee_damage_upper +=5
+	var/obj/item/W = get_natural_weapon()
+	if(W)
+		W.force = initial(W.force) + 5
 	move_to_delay--
 	break_stuff_probability = 45
 	addtimer(CALLBACK(src, .proc/calm_down), 3 MINUTES)
@@ -272,8 +265,9 @@ Guard caste procs
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/calm_down()
 	berserking = FALSE
 	visible_message("<span class='notice'>\The [src] calms down and surveys the area.</span>")
-	melee_damage_lower -= 5
-	melee_damage_upper -= 5
+	var/obj/item/W = get_natural_weapon()
+	if(W)
+		W.force = initial(W.force)
 	move_to_delay++
 	break_stuff_probability = 10
 

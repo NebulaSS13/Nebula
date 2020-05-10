@@ -56,14 +56,6 @@
 	. = ..()
 	anchored = prob(50)
 
-/obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
-	if(!damage || !wallbreaker)
-		return FALSE
-	attack_animation(user)
-	visible_message(SPAN_DANGER("\The [user] [attack_message] \the [src]!"))
-	dismantle()
-	return TRUE
-
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 	
 	var/effective_cover = cover

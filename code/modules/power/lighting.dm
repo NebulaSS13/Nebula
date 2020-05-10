@@ -168,20 +168,6 @@
 	if(get_status() != LIGHT_OK)
 		set_light(0)
 
-/obj/machinery/light/attack_generic(var/mob/user, var/damage)
-	if(!damage)
-		return
-	var/status = get_status()
-	if(status == LIGHT_EMPTY || status == LIGHT_BROKEN)
-		to_chat(user, "That object is useless to you.")
-		return
-	if(!(status == LIGHT_OK||status == LIGHT_BURNED))
-		return
-	visible_message("<span class='danger'>[user] smashes the light!</span>")
-	attack_animation(user)
-	broken()
-	return 1
-
 /obj/machinery/light/proc/set_mode(var/new_mode)
 	if(current_mode != new_mode)
 		current_mode = new_mode

@@ -28,7 +28,7 @@
 	var/pry_time = 7 SECONDS //time it takes for mob to pry open a door
 	var/pry_desc = "prying" //"X begins pry_desc the door!"
 
-	//hostile mobs will bash through these in order - any new entry must have a functioning attack_generic()
+	//hostile mobs will bash through these in order with their natural weapon
 	var/list/valid_obstacles_by_priority = list(/obj/structure/window,
 												/obj/structure/closet,
 												/obj/machinery/door/window,
@@ -137,7 +137,7 @@
 			visible_message("<span class='notice'>\The [src] misses its attack on \the [target_mob]!</span>")
 			return
 		var/mob/living/L = target_mob
-		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense,melee_damage_flags)
+		L.attackby(get_natural_weapon(), src)
 		return L
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
@@ -263,14 +263,14 @@
 
 		var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
 		if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
-			S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+			S.attackby(natural_weapon, src)
 			return
 
 		for(var/type in valid_obstacles_by_priority)
 			var/obj/obstacle = locate(type) in targ
 			if(obstacle)
 				face_atom(obstacle)
-				obstacle.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)
+				obstacle.attackby(natural_weapon, src)
 				return
 
 		if(can_pry)

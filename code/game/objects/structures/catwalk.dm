@@ -171,12 +171,9 @@
 	return 0
 
 /obj/effect/catwalk_plated/attack_hand()
-	attack_generic()
+	activate()
 
 /obj/effect/catwalk_plated/attack_ghost()
-	attack_generic()
-
-/obj/effect/catwalk_plated/attack_generic()
 	activate()
 
 /obj/effect/catwalk_plated/proc/activate()
