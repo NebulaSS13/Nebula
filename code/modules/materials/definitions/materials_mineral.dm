@@ -16,7 +16,7 @@
 		)
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	sale_price = 2
+	value = 0.8
 
 /material/graphite
 	display_name = "graphite"
@@ -32,7 +32,7 @@
 		/decl/reagent/toxin/plasticide = 5,
 		/decl/reagent/acetone = 5
 		)
-	sale_price = 1
+	value = 0.8
 
 /material/quartz
 	display_name = "quartz"
@@ -53,7 +53,6 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
 	reflectiveness = MAT_VALUE_SHINY
 
 /material/pyrite
@@ -75,8 +74,8 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	ore_compresses_to = MAT_PYRITE
-	sale_price = 2
 	reflectiveness = MAT_VALUE_SHINY
+	value = 0.8
 
 /material/spodumene
 	display_name = "spodumene"
@@ -96,7 +95,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
+	value = 0.8
 
 /material/cinnabar
 	display_name = "cinnabar"
@@ -116,7 +115,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
+	value = 0.8
 
 /material/phosphorite
 	display_name = "phosphorite"
@@ -136,7 +135,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
+	value = 0.8
 
 /material/rocksalt
 	display_name = "rock salt"
@@ -156,7 +155,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
+	value = 0.8
 
 /material/potash
 	display_name = "potash"
@@ -176,7 +175,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	sale_price = 2
+	value = 0.8
 
 /material/bauxite
 	display_name = "bauxite"
@@ -197,7 +196,7 @@
 	icon_reinf = "reinf_stone"
 	ore_smelts_to = MAT_ALUMINIUM
 	ore_compresses_to = MAT_BAUXITE
-	sale_price = 1
+	value = 0.8
 
 /material/sand
 	display_name = "sand"
@@ -210,6 +209,7 @@
 	chem_products = list(
 		/decl/reagent/silicon = 20
 		)
+	value = 0.8
 
 /material/sand/clay
 	display_name = "clay"
@@ -218,6 +218,7 @@
 	ore_icon_overlay = "lump"
 	ore_smelts_to = MAT_CERAMIC
 	ore_compresses_to = MAT_CLAY
+	value = 0.8
 
 /material/phoron
 	display_name = "phoron"
@@ -244,8 +245,6 @@
 	ore_scan_icon = "mineral_uncommon"
 	xarch_source_mineral = /decl/reagent/toxin/phoron
 	ore_icon_overlay = "gems"
-	sale_price = 5
-	value = 200
 	//Note that this has a significant impact on TTV yield.
 	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.
 	gas_specific_heat = 200	// J/(mol*K)
@@ -259,17 +258,7 @@
 	gas_symbol_html = "Ph"
 	gas_symbol = "Ph"
 	reflectiveness = MAT_VALUE_SHINY
-
-/material/phoron/supermatter
-	display_name = "exotic matter"
-	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
-	icon_colour = "#ffff00"
-	radioactivity = 20
-	stack_origin_tech = "{'bluespace':2,'materials':6,'phorontech':4}"
-	stack_type = null
-	luminescence = 3
-	ore_compresses_to = null
-	sale_price = null
+	value = 1.6
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
@@ -285,3 +274,14 @@
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
+
+/material/phoron/supermatter
+	display_name = "exotic matter"
+	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
+	icon_colour = "#ffff00"
+	radioactivity = 20
+	stack_origin_tech = "{'bluespace':2,'materials':6,'phorontech':4}"
+	stack_type = null
+	luminescence = 3
+	ore_compresses_to = null
+	value = 3

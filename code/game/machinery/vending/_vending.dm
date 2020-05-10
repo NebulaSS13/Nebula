@@ -107,7 +107,7 @@
 		var/category = current_list[2]
 		for(var/entry in current_list[1])
 			var/datum/stored_items/vending_products/product = new(src, entry, get_product_name(entry))
-			product.price = atom_info_repository.get_worth_for(entry) * markup
+			product.price = atom_info_repository.get_combined_worth_for(entry) * markup
 			product.category = category
 			if(product && populate_parts)
 				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1

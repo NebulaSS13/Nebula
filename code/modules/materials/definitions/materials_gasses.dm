@@ -7,7 +7,6 @@
 	conductive = 0
 	alloy_materials = null
 	alloy_product = FALSE
-	sale_price = null
 	hidden_from_codex = FALSE
 	value = 0
 	gas_burn_product = MAT_CO2
@@ -249,7 +248,7 @@
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
 	stack_origin_tech = "{'materials':5}"
-	value = 300
+	value = 1.5
 	gas_symbol_html = "T"
 	gas_symbol = "T"
 
@@ -275,7 +274,6 @@
 	ore_name = "raw hydrogen"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "gems"
-	sale_price = 5
-	value = 100
+	value = 2
 	gas_symbol_html = "H*"
 	gas_symbol = "H*"

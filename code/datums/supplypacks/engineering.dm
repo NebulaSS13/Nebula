@@ -189,13 +189,6 @@
 	containername = "\improper Supermatter crate (CAUTION)"
 	access = access_ce
 
-/decl/hierarchy/supply_pack/engineering/fueltank
-	name = "Liquid - Fuel tank"
-	contains = list(/obj/structure/reagent_dispensers/fueltank)
-	cost = 8
-	containertype = /obj/structure/largecrate
-	containername = "fuel tank crate"
-
 /decl/hierarchy/supply_pack/engineering/robotics
 	name = "Parts - Robotics assembly"
 	contains = list(/obj/item/assembly/prox_sensor = 3,
@@ -211,7 +204,7 @@
 	name = "Gear - Radiation protection gear"
 	contains = list(/obj/item/clothing/suit/radiation = 6,
 			/obj/item/clothing/head/radiation = 6)
-	cost = 20
+	cost = 160
 	containertype = /obj/structure/closet/radiation
 	containername = "radiation suit locker"
 
@@ -233,7 +226,7 @@
 			/obj/item/tank/emergency/oxygen/double/red,
 			/obj/item/extinguisher,
 			/obj/item/clothing/head/hardhat/red)
-	cost = 20
+	cost = 40
 	containertype = /obj/structure/closet/firecloset
 	containername = "fire-safety closet"
 
