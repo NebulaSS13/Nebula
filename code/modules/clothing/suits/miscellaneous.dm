@@ -252,36 +252,6 @@
 	icon_state = "swim_red"
 	siemens_coefficient = 1
 
-/obj/item/clothing/suit/poncho/colored
-	name = "poncho"
-	desc = "A simple, comfortable poncho."
-	bodytype_restricted = null
-	icon_state = "classicponcho"
-
-/obj/item/clothing/suit/poncho/colored/green
-	name = "green poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is green."
-	bodytype_restricted = null
-	icon_state = "greenponcho"
-
-/obj/item/clothing/suit/poncho/colored/red
-	name = "red poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is red."
-	bodytype_restricted = null
-	icon_state = "redponcho"
-
-/obj/item/clothing/suit/poncho/colored/purple
-	name = "purple poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is purple."
-	bodytype_restricted = null
-	icon_state = "purpleponcho"
-
-/obj/item/clothing/suit/poncho/colored/blue
-	name = "blue poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is blue."
-	bodytype_restricted = null
-	icon_state = "blueponcho"
-
 /obj/item/clothing/suit/storage/toggle/bomber
 	name = "bomber jacket"
 	desc = "A thick, well-worn WW2 leather bomber jacket."
@@ -356,30 +326,6 @@
 	name = "shipping jacket"
 	desc = "A green jacket bearing the logo of Major Bill's Shipping."
 	icon_state = "mbill"
-
-/obj/item/clothing/suit/poncho/roles/security
-	name = "security poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is black and red, which are standard Security colors."
-	bodytype_restricted = null
-	icon_state = "secponcho"
-
-/obj/item/clothing/suit/poncho/roles/medical
-	name = "medical poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is white with a blue tint, which are standard Medical colors."
-	bodytype_restricted = null
-	icon_state = "medponcho"
-
-/obj/item/clothing/suit/poncho/roles/engineering
-	name = "engineering poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, which are standard Engineering colors."
-	bodytype_restricted = null
-	icon_state = "engiponcho"
-
-/obj/item/clothing/suit/poncho/roles/cargo
-	name = "cargo poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, which are standard Cargo colors."
-	bodytype_restricted = null
-	icon_state = "cargoponcho"
 
 /*
  * Track Jackets
