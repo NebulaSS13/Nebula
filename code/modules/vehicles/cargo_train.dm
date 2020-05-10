@@ -43,7 +43,7 @@
 	. = ..()
 	cell = new /obj/item/cell/high(src)
 	key = new(src)
-	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay")
+	var/image/I = new(icon = icon, icon_state = "cargo_engine_overlay")
 	I.plane = plane
 	I.layer = layer
 	overlays += I
