@@ -71,7 +71,7 @@
 		/obj/item/toy/blink,
 		/obj/item/toy/crossbow,
 		/obj/item/gun/projectile/revolver/capgun,
-		/obj/item/toy/katana,
+		/obj/item/material/sword/katana/toy,
 		/obj/item/toy/prize/deathripley,
 		/obj/item/toy/prize/durand,
 		/obj/item/toy/prize/fireripley,

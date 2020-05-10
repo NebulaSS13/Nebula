@@ -48,6 +48,7 @@
 	return 0
 
 /mob/observer/eye/examine(mob/user)
+	SHOULD_CALL_PARENT(FALSE)
 	return TRUE
 
 /mob/observer/eye/proc/possess(var/mob/user)

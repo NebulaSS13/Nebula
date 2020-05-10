@@ -169,8 +169,7 @@
 
 		// Tell the atoms subsystem to not populate parts.
 		if(turfs_loaded)
-			SSatoms.override_populate_parts = TRUE
-			SSatoms.populate_parts = FALSE
+			SSatoms.adjust_init_arguments = TRUE
 	catch(var/exception/e)
 		to_world_log("Load failed on line [e.line], file [e.file] with message: '[e]'.")
 

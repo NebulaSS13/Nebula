@@ -15,6 +15,7 @@
 	var/can_add_hidden_item = TRUE
 	var/hidden_item_max_w_class = ITEM_SIZE_SMALL
 	var/obj/item/hidden_item = null
+	var/shine = -1 // if material should apply shine overlay. Set to -1 for it to not do that
 
 /obj/item/clothing/shoes/Destroy()
 	. = ..()
@@ -147,3 +148,19 @@
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_shoes()
+
+/obj/item/clothing/shoes/set_material(var/new_material)
+	..()
+	if(shine != -1 && material.reflectiveness >= MAT_VALUE_DULL)
+		shine = material.reflectiveness
+
+/obj/item/clothing/shoes/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
+	var/image/I = ..()
+	if(shine > 0 && slot == slot_shoes_str)
+		var/mutable_appearance/S = new()
+		S.icon = I.icon
+		S.icon_state = "shine"
+		S.appearance_flags = RESET_COLOR
+		S.color = adjust_brightness(I.color, shine)
+		I.overlays += S
+	return I

@@ -25,7 +25,7 @@
 
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[5,10,15,30]"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 	temperature_coefficient = 4
 
 	var/custom_name
@@ -91,9 +91,14 @@
 	if(!icon_state)
 		icon_state = base_icon
 
+/obj/item/chems/food/drinks/glass2/get_base_name()
+	. = base_name
+
 /obj/item/chems/food/drinks/glass2/on_reagent_change()
 	temperature_coefficient = 4 / max(1, reagents.total_volume)
-	update_icon()
+	..()
+	var/decl/reagent/R = reagents.get_primary_reagent_decl()
+	desc = R?.glass_desc || custom_desc || initial(desc)
 
 /obj/item/chems/food/drinks/glass2/proc/can_add_extra(obj/item/glass_extra/GE)
 	if(!("[base_icon]_[GE.glass_addition]left" in icon_states(icon)))
@@ -120,9 +125,6 @@
 
 	if (LAZYLEN(reagents?.reagent_volumes) > 0)
 		var/decl/reagent/R = reagents.get_primary_reagent_decl()
-		SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
-		desc = R.glass_desc || custom_desc || initial(desc)
-
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
 
@@ -153,10 +155,6 @@
 			underlays += filling
 
 		overlays += over_liquid
-		
-	else
-		SetName(custom_name || initial(name))
-		desc = custom_desc || initial(desc)
 
 	var/side = "left"
 	for(var/item in extras)

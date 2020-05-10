@@ -8,6 +8,7 @@
 	hidden_from_codex = TRUE
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 0
+	value = 0.1
 
 /material/cult
 	display_name = "disturbing stone"

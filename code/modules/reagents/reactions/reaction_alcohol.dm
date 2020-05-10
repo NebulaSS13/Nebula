@@ -347,20 +347,6 @@
 	catalysts = list(/decl/reagent/enzyme = 5)
 	result_amount = 2
 
-/datum/chemical_reaction/recipe/iced_beer
-	name = "Iced Beer"
-	result = /decl/reagent/ethanol/iced_beer
-	required_reagents = list(/decl/reagent/ethanol/beer = 10, /decl/reagent/frostoil = 1)
-	result_amount = 10
-	mix_message = "The solution chills rapidly, frost forming on its surface."
-
-/datum/chemical_reaction/recipe/iced_beer2
-	name = "Iced Beer"
-	result = /decl/reagent/ethanol/iced_beer
-	required_reagents = list(/decl/reagent/ethanol/beer = 5, /decl/reagent/drink/ice = 1)
-	result_amount = 6
-	mix_message = "The ice clinks together in the beer."
-
 /datum/chemical_reaction/recipe/grog
 	name = "Grog"
 	result = /decl/reagent/ethanol/grog
@@ -506,7 +492,7 @@
 	name = "Jagermeister"
 	result = /decl/reagent/ethanol/jagermeister
 	required_reagents = list(/decl/reagent/ethanol/herbal = 2, /decl/reagent/water = 1)
-	catalysts = list(/decl/reagent/nutriment/mint)
+	catalysts = list(/decl/reagent/drink/syrup/mint)
 	result_amount = 3
 
 /datum/chemical_reaction/recipe/kvass

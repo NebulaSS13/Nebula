@@ -32,7 +32,7 @@
 								/obj/item/toy/figure                  = TRADER_SUBTYPES_ONLY,
 								/obj/item/toy/figure/ert              = TRADER_BLACKLIST,
 								/obj/item/toy/plushie                 = TRADER_SUBTYPES_ONLY,
-								/obj/item/toy/katana                  = TRADER_THIS_TYPE,
+								/obj/item/material/sword/katana/toy                  = TRADER_THIS_TYPE,
 								/obj/item/toy/sword                   = TRADER_THIS_TYPE,
 								/obj/item/toy/bosunwhistle            = TRADER_THIS_TYPE,
 								/obj/item/board                = TRADER_THIS_TYPE,
@@ -134,13 +134,13 @@
 	possible_origins = list("Foot Safe", "Paysmall", "Popular Footwear", "Grimbly's Shoes", "Right Steps")
 	possible_trading_items = list(/obj/item/clothing/shoes                = TRADER_SUBTYPES_ONLY,
 								/obj/item/clothing/shoes/chameleon        = TRADER_BLACKLIST,
-								/obj/item/clothing/shoes/combat           = TRADER_BLACKLIST,
+								/obj/item/clothing/shoes/jackboots/swat/combat           = TRADER_BLACKLIST,
 								/obj/item/clothing/shoes/clown_shoes      = TRADER_BLACKLIST,
 								/obj/item/clothing/shoes/cult             = TRADER_BLACKLIST,
 								/obj/item/clothing/shoes/cyborg           = TRADER_BLACKLIST,
 								/obj/item/clothing/shoes/lightrig         = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/shoes/magboots         = TRADER_BLACKLIST_ALL,
-								/obj/item/clothing/shoes/swat             = TRADER_BLACKLIST,
+								/obj/item/clothing/shoes/jackboots/swat             = TRADER_BLACKLIST,
 								/obj/item/clothing/shoes/syndigaloshes    = TRADER_BLACKLIST)
 
 /datum/trader/ship/clothingshop/hatglovesaccessories

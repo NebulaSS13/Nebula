@@ -27,7 +27,7 @@
 							/obj/item/chems/spray/waterflower						= 100,
 							/obj/random/action_figure													= 100,
 							/obj/random/plushie															= 100,
-							/obj/item/toy/cultsword														= 100,
+							/obj/item/material/sword/cult_toy														= 100,
 							/obj/item/storage/box/large/foam_gun									= 100,
 							/obj/item/storage/box/large/foam_gun/burst							= 50,
 							/obj/item/storage/box/large/foam_gun/revolver						= 25,

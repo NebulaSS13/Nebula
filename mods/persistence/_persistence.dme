@@ -13,6 +13,7 @@
 #include "datums\extensions\extensions.dm"
 #include "datums\mind\mind.dm"
 #include "game\gamemodes\persistence.dm"
+#include "game\machinery\machinery.dm"
 #include "game\machinery\resleever.dm"
 #include "game\machinery\doors\multi_tile.dm"
 #include "game\species\species.dm"

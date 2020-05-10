@@ -12,7 +12,7 @@
 "d" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/under/color/black,
-/obj/item/clothing/shoes/jungleboots,
+/obj/item/clothing/shoes/jackboots/jungleboots,
 /obj/item/clothing/mask/breath,
 /turf/simulated/floor/carpet/green,
 /area/template_noop)
@@ -123,9 +123,6 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/monotile,
-/area/template_noop)
-"v" = (
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "w" = (
@@ -259,7 +256,7 @@ a
 a
 a
 b
-v
+t
 C
 b
 a

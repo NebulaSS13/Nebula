@@ -173,6 +173,14 @@
 	containername = "shield generator construction kit crate"
 	access = access_engine
 
+/decl/hierarchy/supply_pack/engineering/inertial_damper
+	name = "Equipment - inertial damper construction kit"
+	contains = list(/obj/item/stock_parts/circuitboard/inertial_damper, /obj/item/stock_parts/capacitor, /obj/item/stock_parts/micro_laser, /obj/item/stock_parts/console_screen)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "inertial damper construction kit crate"
+	access = access_engine
+
 /decl/hierarchy/supply_pack/engineering/smbig
 	name = "Power - Supermatter core"
 	contains = list(/obj/machinery/power/supermatter)
@@ -180,13 +188,6 @@
 	containertype = /obj/structure/closet/crate/secure/large/phoron
 	containername = "\improper Supermatter crate (CAUTION)"
 	access = access_ce
-
-/decl/hierarchy/supply_pack/engineering/fueltank
-	name = "Liquid - Fuel tank"
-	contains = list(/obj/structure/reagent_dispensers/fueltank)
-	cost = 8
-	containertype = /obj/structure/largecrate
-	containername = "fuel tank crate"
 
 /decl/hierarchy/supply_pack/engineering/robotics
 	name = "Parts - Robotics assembly"
@@ -203,7 +204,7 @@
 	name = "Gear - Radiation protection gear"
 	contains = list(/obj/item/clothing/suit/radiation = 6,
 			/obj/item/clothing/head/radiation = 6)
-	cost = 20
+	cost = 160
 	containertype = /obj/structure/closet/radiation
 	containername = "radiation suit locker"
 
@@ -225,7 +226,7 @@
 			/obj/item/tank/emergency/oxygen/double/red,
 			/obj/item/extinguisher,
 			/obj/item/clothing/head/hardhat/red)
-	cost = 20
+	cost = 40
 	containertype = /obj/structure/closet/firecloset
 	containername = "fire-safety closet"
 

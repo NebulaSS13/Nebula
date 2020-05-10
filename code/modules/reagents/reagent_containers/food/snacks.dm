@@ -209,7 +209,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/chems/food/snacks/attack_generic(var/mob/living/user)
+/obj/item/chems/food/snacks/attack_animal(var/mob/living/user)
 	if(!isanimal(user) && !isalien(user))
 		return
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
@@ -1863,7 +1863,7 @@
 	bitesize = 1
 /obj/item/chems/food/snacks/mint/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/reagent/nutriment/mint, 1)
+	reagents.add_reagent(/decl/reagent/drink/syrup/mint, 1)
 
 
 /obj/item/chems/food/snacks/mushroomsoup

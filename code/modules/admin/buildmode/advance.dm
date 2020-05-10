@@ -25,7 +25,7 @@
 			T.ChangeTurf(build_type)
 		else if(ispath(build_type))
 			var/atom/new_atom = new build_type (get_turf(A))
-			new_atom.set_dir(host.dir)
+			new_atom.set_dir(host.direction)
 			Log("Created - [log_info_line(new_atom)]")
 		else
 			to_chat(user, "<span>Select a type to construct.</span>")

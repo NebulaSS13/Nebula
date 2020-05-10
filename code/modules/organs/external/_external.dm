@@ -891,7 +891,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		victim.updatehealth()
 		victim.UpdateDamageIcon()
 		victim.regenerate_icons()
-		dir = 2
+		set_dir(SOUTH, TRUE)
 
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
@@ -905,7 +905,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				// Throw limb around.
 				if(src && istype(loc,/turf))
 					throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
-				dir = 2
+				set_dir(SOUTH, TRUE)
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
 			for(var/obj/item/I in src)

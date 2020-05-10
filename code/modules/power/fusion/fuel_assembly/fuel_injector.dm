@@ -134,17 +134,17 @@
 	set name = "Rotate Generator (Clockwise)"
 	set src in view(1)
 
-	if (usr.incapacitated() || usr.restrained()  || anchored)
+	if (usr.incapacitated() || anchored)
 		return
 
-	src.dir = turn(src.dir, -90)
+	set_dir(turn(src.dir, -90))
 
 /obj/machinery/fusion_fuel_injector/verb/rotate_anticlock()
 	set category = "Object"
 	set name = "Rotate Generator (Counter-clockwise)"
 	set src in view(1)
 
-	if (usr.incapacitated() || usr.restrained()  || anchored)
+	if (usr.incapacitated() || anchored)
 		return
 
-	src.dir = turn(src.dir, 90)
+	set_dir(turn(src.dir, 90))

@@ -5,7 +5,6 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	setup = 0
 	storage_types = CLOSET_STORAGE_ITEMS
-	var/points_per_crate = 5
 	var/rigged = 0
 
 /obj/structure/closet/crate/open()
@@ -73,7 +72,6 @@
 /obj/structure/closet/crate/plastic
 	name = "plastic crate"
 	desc = "A rectangular plastic crate."
-	points_per_crate = 1
 	closet_appearance = /decl/closet_appearance/crate/plastic
 
 /obj/structure/closet/crate/internals

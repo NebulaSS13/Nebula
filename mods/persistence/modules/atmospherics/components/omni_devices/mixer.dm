@@ -1,7 +1,7 @@
 /obj/machinery/atmospherics/omni/mixer/before_save()
 	. = ..()
 	for(var/datum/omni_port/port in ports)
-		switch(port.dir)
+		switch(port.direction)
 			if(NORTH)
 				tag_north_con = port.concentration
 			if(EAST)

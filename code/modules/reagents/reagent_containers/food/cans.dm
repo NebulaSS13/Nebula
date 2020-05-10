@@ -100,7 +100,8 @@
 
 /obj/item/chems/food/drinks/cans/iced_tea/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/drink/tea/icetea, 30)
+	reagents.add_reagent(/decl/reagent/drink/tea/black, 25)
+	reagents.add_reagent(/decl/reagent/drink/ice, 5)
 
 /obj/item/chems/food/drinks/cans/grape_juice
 	name = "\improper Grapel Juice"

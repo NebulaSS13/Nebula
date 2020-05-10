@@ -1,14 +1,15 @@
 /obj/item/clothing/suit/bio_suit/anomaly
 	name = "Anomaly suit"
 	desc = "A suit that protects against exotic alien energies and biological contamination."
-	icon_state = "bio_anom"
 	anomaly_shielding = 0.7
+	icon = 'icons/clothing/suit/biosuit/anomaly.dmi'
+	on_mob_icon = 'icons/clothing/suit/biosuit/anomaly.dmi'
 
 /obj/item/clothing/head/bio_hood/anomaly
 	name = "Anomaly hood"
 	desc = "A hood that protects the head and face from exotic alien energies and biological contamination."
-	icon_state = "bio_anom"
-	item_state = "bio_anom"
+	icon = 'icons/clothing/head/biosuit/anomaly.dmi'
+	on_mob_icon = 'icons/clothing/head/biosuit/anomaly.dmi'
 	anomaly_shielding = 0.3
 
 /obj/item/clothing/suit/space/void/excavation

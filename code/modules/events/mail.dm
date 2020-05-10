@@ -20,7 +20,7 @@
 
 	var/list/rare_gifts = list(
 		/obj/item/toy/bosunwhistle,
-		/obj/item/toy/cultsword,
+		/obj/item/material/sword/cult_toy,
 		/obj/item/bikehorn/airhorn,
 		/obj/item/gun/projectile/revolver/capgun,
 		/obj/item/grenade/fake,

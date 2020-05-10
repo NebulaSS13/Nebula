@@ -455,6 +455,7 @@
 //For supply.
 /obj/item/paper/manifest
 	name = "supply manifest"
+	var/order_total = 0
 	var/is_copy = 1
 /*
  * Premade paper

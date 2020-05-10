@@ -19,4 +19,3 @@
 		icon_state = initial(icon_state)
 		SetName(initial(name))
 		desc = "A jar. You're not sure what it's supposed to hold."
-		return

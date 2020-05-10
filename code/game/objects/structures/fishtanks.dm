@@ -136,7 +136,7 @@ GLOBAL_LIST_INIT(aquarium_states_and_layers, list(
 				A.update_icon()
 
 /obj/structure/glass_tank/can_climb(var/mob/living/user, post_climb_check=0)
-	if (!can_touch(user) || !(atom_flags & ATOM_FLAG_CLIMBABLE) || (!post_climb_check && (user in climbers)))
+	if (!user.can_touch(src) || !(atom_flags & ATOM_FLAG_CLIMBABLE) || (!post_climb_check && (user in climbers)))
 		return 0
 
 	if (!Adjacent(user))

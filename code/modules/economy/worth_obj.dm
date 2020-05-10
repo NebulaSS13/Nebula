@@ -1,5 +1,4 @@
-/obj/get_single_monetary_worth()
-	var/mult = 1
+/obj/get_value_multiplier()
 	if(length(matter))
 		var/total_matter = 0
 		for(var/mat in matter)
@@ -8,7 +7,24 @@
 		for(var/mat in matter)
 			var/material/mat_datum = SSmaterials.get_material_datum(mat)
 			mat_value_mult += mat_datum.value * (matter[mat] / total_matter)
-		mult = mat_value_mult * (total_matter / SHEET_MATERIAL_AMOUNT)
+		. = mat_value_mult * (total_matter / SHEET_MATERIAL_AMOUNT)
 	else
-		mult = Clamp(w_class, ITEM_SIZE_MIN, ITEM_SIZE_MAX)
-	. = round(..() * mult)
+		. = ..()
+
+/obj/item/get_value_multiplier()
+	. = length(matter) ? ..() : (material?.value || 1)
+
+/obj/structure/get_value_multiplier()
+	. = length(matter) ? ..() : (material?.value || 1)
+
+/obj/get_base_value()
+	if(holographic)
+		return 0
+	if(length(matter))
+		. = 0
+		for(var/mat in matter)
+			. += matter[mat]
+		. = Floor(. / SHEET_MATERIAL_AMOUNT)
+	else
+		. = Clamp(w_class, ITEM_SIZE_MIN, ITEM_SIZE_MAX)
+	. = max(1, round(.))

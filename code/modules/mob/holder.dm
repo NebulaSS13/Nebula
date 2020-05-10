@@ -42,7 +42,7 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	. = ..()
 	update_state(1)
-	
+
 /obj/item/holder/proc/update_state(var/delay)
 	set waitfor = 0
 
@@ -101,13 +101,13 @@ var/list/holder_mob_icon_cache = list()
 	..()
 
 /obj/item/holder/proc/sync(var/mob/living/M)
-	dir = 2
+	set_dir(SOUTH)
 	overlays.Cut()
 	icon = M.icon
 	icon_state = M.icon_state
 	item_state = M.item_state
 	color = M.color
-	name = M.name
+	SetName(M.name)
 	desc = M.desc
 	overlays |= M.overlays
 	var/mob/living/carbon/human/H = loc

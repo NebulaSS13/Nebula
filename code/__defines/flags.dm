@@ -19,6 +19,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ATOM_FLAG_OPEN_CONTAINER          0x0020 // Is an open container for chemistry purposes.
 #define ATOM_FLAG_INITIALIZED             0x0040 // Has this atom been initialized
 #define ATOM_FLAG_NO_TEMP_CHANGE          0x0080 // Reagents do not cool or heat to ambient temperature in this container.
+#define ATOM_FLAG_SHOW_REAGENT_NAME       0x0100 // Reagent presentation name is attached to the atom name
 
 #define ATOM_IS_CONTAINER(A)              (A.atom_flags & ATOM_FLAG_CONTAINER)
 #define ATOM_IS_OPEN_CONTAINER(A)         (A.atom_flags & ATOM_FLAG_OPEN_CONTAINER)

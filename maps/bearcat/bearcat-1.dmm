@@ -1854,10 +1854,14 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/eva)
 "es" = (
+/obj/machinery/vending/engineering{
+	icon_state = "engi";
+	dir = 4
+	},
 /obj/machinery/light/small{
+	icon_state = "bulb1";
 	dir = 8
 	},
-/obj/machinery/vending/engineering,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/bearcat/maintenance/techstorage)
 "et" = (
@@ -2014,10 +2018,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/bearcat/maintenance/eva)
 "eG" = (
-/obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 1
-	},
 /obj/machinery/airlock_sensor{
 	id_tag = "eva_sensor";
 	pixel_y = 40
@@ -2039,6 +2039,10 @@
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 2;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/bearcat/maintenance/eva)
@@ -2066,14 +2070,10 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/bearcat/maintenance/eva)
 "eJ" = (
-/obj/item/stock_parts/capacitor,
-/obj/item/stock_parts/capacitor,
-/obj/item/stock_parts/capacitor/adv,
-/obj/item/stock_parts/scanning_module,
-/obj/item/stock_parts/scanning_module,
-/obj/item/stock_parts/scanning_module,
-/obj/item/stock_parts/scanning_module/adv,
-/obj/structure/table/rack,
+/obj/machinery/vending/materials{
+	icon_state = "engivend";
+	dir = 4
+	},
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 10
@@ -2218,15 +2218,8 @@
 /area/ship/bearcat/maintenance/storage)
 "eX" = (
 /obj/item/tape_roll,
-/obj/item/stack/material/plasteel/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/steel/fifty,
 /obj/structure/closet/crate,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/bearcat/maintenance/storage)
 "eY" = (

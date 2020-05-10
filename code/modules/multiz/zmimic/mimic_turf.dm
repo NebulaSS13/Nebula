@@ -85,8 +85,6 @@
 /atom/movable/openspace/turf_overlay/attack_hand(mob/user)
 	return loc.attack_hand(user)
 
-/atom/movable/openspace/turf_overlay/attack_generic(mob/user)
-	loc.attack_generic(user)
-
 /atom/movable/openspace/turf_overlay/examine(mob/examiner)
+	SHOULD_CALL_PARENT(FALSE)
 	. = loc.examine(examiner)

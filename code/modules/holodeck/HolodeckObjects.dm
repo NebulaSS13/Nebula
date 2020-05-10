@@ -143,7 +143,7 @@
 	desc = "Because you really needed another excuse to punch your crewmates."
 
 /obj/structure/window/holowindow/full
-	dir = 5
+	dir = NORTHEAST
 	icon_state = "window_full"
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W, mob/user)
@@ -325,7 +325,7 @@
 	anchored = 1
 	layer = TABLE_LAYER
 	throwpass = 1
-	dir = 4
+	dir = EAST
 
 /obj/structure/holonet/end
 	icon_state = "volleynet_end"
@@ -431,16 +431,12 @@
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)
 		faction = MOB_FACTION_NEUTRAL
-		melee_damage_lower = 0
-		melee_damage_upper = 0
+		natural_weapon.force = 0
 		environment_smash = 0
 		destroy_surroundings = 0
 	else
 		faction = "carp"
-		melee_damage_lower = initial(melee_damage_lower)
-		melee_damage_upper = initial(melee_damage_upper)
-		environment_smash = initial(environment_smash)
-		destroy_surroundings = initial(destroy_surroundings)
+		natural_weapon.force = initial(natural_weapon.force)
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib()
 	death()

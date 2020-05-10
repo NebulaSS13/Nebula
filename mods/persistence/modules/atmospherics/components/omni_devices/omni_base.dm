@@ -1,7 +1,7 @@
 /obj/machinery/atmospherics/omni/before_save()
 	. = ..()
 	for(var/datum/omni_port/port in ports)
-		switch(port.dir)
+		switch(port.direction)
 			if(NORTH)
 				tag_north = port.mode
 			if(EAST)

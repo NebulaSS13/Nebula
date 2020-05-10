@@ -3110,7 +3110,7 @@
 /obj/structure/bed/chair/comfy/red{
 	dir = 4
 	},
-/obj/item/material/knife,
+/obj/item/material/knife/combat,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iq" = (

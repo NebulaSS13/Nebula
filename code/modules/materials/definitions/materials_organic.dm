@@ -15,7 +15,6 @@
 	chem_products = list(
 				/decl/reagent/toxin/plasticide = 20
 				)
-	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
 	wall_support_value = 10
 
@@ -23,7 +22,6 @@
 	display_name = "holographic plastic"
 	stack_type = null
 	shard_type = SHARD_NONE
-	sale_price = null
 	hidden_from_codex = TRUE
 
 /material/plastic/holographic/get_recipes(reinf_mat)
@@ -47,7 +45,7 @@
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
 	conductive = 0
-	value = 0
+	value = 0.5
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 0
 
@@ -66,6 +64,8 @@
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
+	hardness = MAT_VALUE_SOFT
+	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = 0
 
 /material/cloth/yellow
@@ -121,6 +121,8 @@
 	stack_type = null
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_DULL
+	hardness = MAT_VALUE_SOFT
+	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = 0
 	hidden_from_codex = TRUE
 
@@ -134,13 +136,13 @@
 	conductive = 0
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	value = 1
 	integrity = 50
 	hardness = MAT_VALUE_SOFT
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	explosion_resistance = 1
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 0
+	value = 1.2
 	var/tans_to = MAT_LEATHER_GENERIC
 
 /material/skin/lizard
@@ -230,7 +232,6 @@
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
 	weight = MAT_VALUE_LIGHT
-	value = 1
 	reflectiveness = MAT_VALUE_MATTE
 	wall_support_value = 22
 
@@ -255,12 +256,17 @@
 	stack_type = /obj/item/stack/material/generic/skin
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	value = 3
 	integrity = 50
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	reflectiveness = MAT_VALUE_MATTE
 	wall_support_value = 0
+
+/material/leather/synth
+	display_name = "synthleather"
+	icon_colour = "#1f1f20"
+	ignition_point = T0C+150
+	melting_point = T0C+100
 
 /material/leather/lizard
 	display_name = "scaled hide"

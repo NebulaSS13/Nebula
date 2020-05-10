@@ -72,4 +72,11 @@
 		update_force()
 		if(applies_material_name)
 			SetName("[material.display_name] [initial(name)]")
+		if(material_armor_multiplier)
+			armor = material.get_armor(material_armor_multiplier)
+			armor_degradation_speed = material.armor_degradation_speed
+			if(length(armor))
+				set_extension(src, armor_type, armor, armor_degradation_speed)
+			else
+				remove_extension(src, armor_type)
 	queue_icon_update()

@@ -41,6 +41,7 @@
 /obj/item/clothing/shoes/jackboots/medievalboots
 	name = "leather boots"
 	desc = "Old-fashioned leather boots. Probably not something you want to get kicked with."
+	material = MAT_LEATHER_GENERIC
 	icon_state = "medievalboots"
 	force = 5
 	armor = list(
@@ -50,35 +51,23 @@
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 	)
+	artificail_shine = 0
 
-/obj/item/excalibur
+/obj/item/material/sword/excalibur
 	name = "champion's blade"
 	desc = "<i>For at his belt hung Excalibur, the finest sword that there was, which sliced through iron as through wood.</i>"
-	icon = 'icons/obj/items/weapon/broadswords.dmi'
-	icon_state = "excalibur"
-	item_icons = list(
-					slot_l_hand_str = 'icons/mob/onmob/items/lefthand.dmi',
-					slot_r_hand_str = 'icons/mob/onmob/items/righthand.dmi',
-					slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi'
-					)
-	item_state = "excalibur"
-	edge = 1
-	sharp = 1
-	w_class = ITEM_SIZE_HUGE
-	force = 35
-	throw_range = 2
-	throwforce = 10
-	slot_flags = SLOT_BELT
-	hitsound = 'sound/weapons/bladeslice.ogg'
+	on_mob_icon = 'icons/obj/items/weapon/swords/excalibur.dmi'
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cleaved", "sundered")
+	applies_material_colour = FALSE
+	applies_material_name = FALSE
 
-/obj/item/excalibur/pickup(var/mob/living/user)
+/obj/item/material/sword/excalibur/pickup(var/mob/living/user)
 	if(user.mind)
 		if(!GLOB.wizards.is_antagonist(user.mind) || user.mind.special_role != ANTAG_SERVANT)
 			START_PROCESSING(SSobj, src)
 			to_chat(user,"<span class='danger'>\The [src] heats up in your hands, burning you!</span>")
 
-/obj/item/excalibur/Process()
+/obj/item/material/sword/excalibur/Process()
 	if(istype(loc, /mob/living))
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
@@ -94,5 +83,5 @@
 			to_chat(loc,"<span class='danger'>\The [src] is burning you!</span>")
 	return 1
 
-/obj/item/excalibur/dropped()
+/obj/item/material/sword/excalibur/dropped()
 	STOP_PROCESSING(SSobj, src)

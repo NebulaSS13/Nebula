@@ -240,7 +240,7 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 		splatter.update_icon()
 	if(spray_dir)
 		splatter.icon_state = "squirt"
-		splatter.dir = spray_dir
+		splatter.set_dir(spray_dir)
 
 	// Update blood information.
 	if(blood_data["blood_DNA"])
