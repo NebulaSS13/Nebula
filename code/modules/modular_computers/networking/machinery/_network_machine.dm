@@ -1,6 +1,7 @@
 /obj/machinery/network
 	name = "base network machine"
 	icon_state = "bus"
+	density = 1
 
 	var/main_template = "network_mainframe.tmpl"
 	var/network_device_type =  /datum/extension/network_device
