@@ -1,10 +1,9 @@
 /obj/item/gun/energy/staff
 	name = "staff of change"
 	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself."
+	on_mob_icon = 'icons/obj/guns/staff.dmi'
 	icon = 'icons/obj/guns/staff.dmi'
-	item_icons = null
-	icon_state = "staffofchange"
-	item_state = "staffofchange"
+	icon_state = "world"
 	fire_sound = 'sound/weapons/emitter.ogg'
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_BACK
@@ -42,7 +41,5 @@
 /obj/item/gun/energy/staff/focus
 	name = "mental focus"
 	desc = "An artefact that channels the will of the user into destructive bolts of force. If you aren't careful with it, you might poke someone's brain out."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "focus"
-	item_state = "focus"
+	on_mob_icon = 'icons/obj/guns/focus_staff.dmi'
 	projectile_type = /obj/item/projectile/forcebolt

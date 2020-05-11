@@ -271,7 +271,7 @@
 /area/map_template/oldpod)
 "aJ" = (
 /obj/effect/landmark/corpse/pirate,
-/obj/item/gun/energy/retro,
+/obj/item/gun/energy/captain,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,

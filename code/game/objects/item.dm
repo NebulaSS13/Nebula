@@ -147,7 +147,10 @@
 			M.update_inv_r_hand()
 
 /obj/item/proc/is_held_twohanded(mob/living/M)
-
+	if(!M)
+		M = loc
+	if(!istype(M))
+		return
 	if(istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/rig))
 		return TRUE
 
