@@ -162,6 +162,10 @@
 		.["user_id"] = editing_user
 		.["is_admin"] = (editing_user in network.access_controller.administrators)
 		var/datum/computer_file/report/crew_record/AR = get_access_record()
+		if(!istype(AR))
+			// Something has gone wrong. Our AR file is missing.
+			error = "NETWORK ERROR: Unable to find access record for user [editing_user]."
+			return
 		var/list/grants[0]
 		var/list/assigned_grants = AR.get_valid_grants()
 		// We're editing a user, so we only need to build a subset of data.
