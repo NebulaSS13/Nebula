@@ -40,14 +40,16 @@
 /obj/item/flame/match
 	name = "match"
 	desc = "A simple match stick, used for lighting fine smokables."
-	icon = 'icons/obj/cigarettes.dmi'
-	icon_state = "match_unlit"
+	icon = 'icons/obj/items/storage/matches/match.dmi'
+	on_mob_icon = 'icons/obj/items/storage/matches/match.dmi'
+	icon_state = "world"
 	var/burnt = 0
 	var/smoketime = 5
 	w_class = ITEM_SIZE_TINY
 	origin_tech = "{'materials':1}"
 	slot_flags = SLOT_EARS
 	attack_verb = list("burnt", "singed")
+	randpixel = 10
 
 /obj/item/flame/match/Process()
 	if(isliving(loc))
@@ -81,5 +83,6 @@
 /obj/item/flame/match/on_update_icon()
 	..()
 	if(burnt)
-		icon_state = "match_burnt"
-		item_state = "cigoff"
+		icon_state = "[get_world_inventory_state()]_burnt"
+	else if(lit)
+		icon_state = "[get_world_inventory_state()]_lit"

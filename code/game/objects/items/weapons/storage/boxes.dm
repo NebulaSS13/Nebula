@@ -353,7 +353,7 @@
 /obj/item/storage/box/matches
 	name = "matchbox"
 	desc = "A small box of 'Space-Proof' premium matches."
-	icon = 'icons/obj/cigarettes.dmi'
+	icon = 'icons/obj/items/storage/matches/matchbox.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
 	w_class = ITEM_SIZE_TINY
@@ -365,7 +365,7 @@
 	if(istype(W) && !W.lit && !W.burnt)
 		W.lit = 1
 		W.damtype = "burn"
-		W.icon_state = "match_lit"
+		W.update_icon()
 		START_PROCESSING(SSobj, W)
 		playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
 		user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
