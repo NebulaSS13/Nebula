@@ -3,15 +3,13 @@
 //      Meaning the the suit is defined directly after the corrisponding helmet. Just like below!
 
 /obj/item/clothing/head/helmet/space
-	name = "Space helmet"
-	icon_state = "space"
+	name = "space helmet"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
+	icon = 'icons/clothing/spacesuit/generic/helmet.dmi'
+	on_mob_icon = 'icons/clothing/spacesuit/generic/helmet.dmi'
+	icon_state = "world"
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	flags_inv = BLOCKHAIR
-	item_state_slots = list(
-		slot_l_hand_str = "s_helmet",
-		slot_r_hand_str = "s_helmet",
-		)
 	permeability_coefficient = 0
 	armor = list(
 		bio = ARMOR_BIO_SHIELDED,
@@ -72,11 +70,9 @@
 
 /obj/item/clothing/head/helmet/space/proc/update_tint()
 	if(tinted)
-		icon_state = "[initial(icon_state)]_dark"
 		flash_protection = FLASH_PROTECTION_MAJOR
 		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	else
-		icon_state = initial(icon_state)
 		flash_protection = FLASH_PROTECTION_NONE
 		flags_inv = HIDEEARS|BLOCKHAIR
 	update_icon()
@@ -95,18 +91,47 @@
 	to_chat(usr, "You toggle [src]'s visor tint.")
 	update_tint()
 
+/obj/item/clothing/head/helmet/space/experimental_mob_overlay(var/mob/user_mob, var/slot)
+	var/image/ret = ..()
+	if(tint && check_state_in_icon("[ret.icon_state]_dark", ret.icon))
+		ret.icon_state = "[ret.icon_state]_dark"
+	return ret
+
+/obj/item/clothing/head/helmet/space/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
+	var/image/ret = ..()
+	if(on && check_state_in_icon("[ret.icon_state]_light", ret.icon))
+		var/image/light_overlay = image(ret.icon, "[ret.icon_state]_light")
+		if(ishuman(user_mob))
+			var/mob/living/carbon/human/H = user_mob
+			if(H.species.get_bodytype(H) != bodytype)
+				light_overlay = H.species.get_offset_overlay_image(FALSE, light_overlay.icon, light_overlay.icon_state, null, slot)
+		ret.overlays += light_overlay
+	return ret
+
+/obj/item/clothing/head/helmet/space/on_update_icon(mob/user)
+	. = ..()
+	var/base_icon = get_world_inventory_state()
+	if(!base_icon)
+		base_icon = initial(icon_state)
+	if(tint && check_state_in_icon("[base_icon]_dark", icon))
+		icon_state = "[base_icon]_dark"
+	else
+		icon_state = base_icon
+
+/obj/item/clothing/head/helmet/space/add_light_overlay()
+	if(!on_mob_icon)
+		..()
+	var/cache_key = "[icon]-[get_world_inventory_state()]_icon"
+	if(!light_overlay_cache[cache_key])
+		light_overlay_cache[cache_key] = image(icon, "[get_world_inventory_state()]_light")
+	overlays |= light_overlay_cache[cache_key]
+
 /obj/item/clothing/suit/space
-	name = "Space suit"
+	name = "space suit"
 	desc = "A suit that protects against low pressure environments."
-	icon_state = "space"
-	item_icons = list(
-		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_spacesuits.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_spacesuits.dmi',
-		)
-	item_state_slots = list(
-		slot_l_hand_str = "s_suit",
-		slot_r_hand_str = "s_suit",
-	)
+	icon = 'icons/clothing/spacesuit/generic/suit.dmi'
+	on_mob_icon = 'icons/clothing/spacesuit/generic/suit.dmi'
+	icon_state = "world"
 	w_class = ITEM_SIZE_LARGE//large item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0

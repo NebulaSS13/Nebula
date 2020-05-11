@@ -2,7 +2,9 @@
 /obj/item/clothing/head/helmet/space/void
 	name = "void helmet"
 	desc = "A high-tech dark red space suit helmet. Used for AI satellite maintenance."
-	icon_state = "void"
+	icon = 'icons/clothing/spacesuit/void/nasa/helmet.dmi'
+	on_mob_icon = 'icons/clothing/spacesuit/void/nasa/helmet.dmi'
+	icon_state = "world"
 
 	heat_protection = HEAD
 	armor = list(
@@ -18,11 +20,13 @@
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	min_pressure_protection = 0
 	siemens_coefficient = 0.4
-	light_overlay = "helmet_light"
 
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
-	icon_state = "void"
+	icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
+	on_mob_icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
+	icon_state = "world"
+	item_state_slots = null
 	w_class = ITEM_SIZE_HUGE//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
 	armor = list(
@@ -284,6 +288,12 @@ else if(##equipment_var) {\
 	toggle_helmet()
 
 /obj/item/clothing/suit/space/void/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(tank && slot == slot_back)
+		ret.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
+	return ret
+
+/obj/item/clothing/suit/space/void/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	var/image/ret = ..()
 	if(tank && slot == slot_back)
 		ret.overlays += tank.get_mob_overlay(user_mob, slot_back_str)

@@ -31,7 +31,7 @@
 /decl/hierarchy/supply_pack/security/tacticalarmor
 	name = "Armor - Tactical"
 	contains = list(/obj/item/clothing/under/tactical,
-					/obj/item/clothing/suit/armor/pcarrier/tan/tactical,
+					/obj/item/clothing/suit/armor/pcarrier/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
 					/obj/item/clothing/glasses/tacgoggles,
@@ -47,42 +47,6 @@
 	name = "Armor - Arm and leg guards, black"
 	contains = list(/obj/item/clothing/accessory/armguards = 2,
 					/obj/item/clothing/accessory/legguards = 2)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
-	containername = "arm and leg guards crate"
-	access = access_armory
-
-/decl/hierarchy/supply_pack/security/blueguards
-	name = "Armor - Arm and leg guards, blue"
-	contains = list(/obj/item/clothing/accessory/armguards/blue = 2,
-					/obj/item/clothing/accessory/legguards/blue = 2)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
-	containername = "arm and leg guards crate"
-	access = access_armory
-
-/decl/hierarchy/supply_pack/security/greenguards
-	name = "Armor - Arm and leg guards, green"
-	contains = list(/obj/item/clothing/accessory/armguards/green = 2,
-					/obj/item/clothing/accessory/legguards/green = 2)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
-	containername = "arm and leg guards crate"
-	access = access_armory
-
-/decl/hierarchy/supply_pack/security/navyguards
-	name = "Armor - Arm and leg guards, navy blue"
-	contains = list(/obj/item/clothing/accessory/armguards/navy = 2,
-					/obj/item/clothing/accessory/legguards/navy = 2)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
-	containername = "arm and leg guards crate"
-	access = access_armory
-
-/decl/hierarchy/supply_pack/security/tanguards
-	name = "Armor - Arm and leg guards, tan"
-	contains = list(/obj/item/clothing/accessory/armguards/tan = 2,
-					/obj/item/clothing/accessory/legguards/tan = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"

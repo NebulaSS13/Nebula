@@ -62,6 +62,10 @@
 		error = "NETWORK ERROR: Connection lost."
 		return TOPIC_REFRESH
 
+	if(href_list["back"])
+		editing_user = null
+		return TOPIC_REFRESH
+
 	if(href_list["change_file_server"])
 		var/list/file_servers = network.get_file_server_tags()
 		var/file_server = input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers
@@ -162,6 +166,10 @@
 		.["user_id"] = editing_user
 		.["is_admin"] = (editing_user in network.access_controller.administrators)
 		var/datum/computer_file/report/crew_record/AR = get_access_record()
+		if(!istype(AR))
+			// Something has gone wrong. Our AR file is missing.
+			error = "NETWORK ERROR: Unable to find access record for user [editing_user]."
+			return
 		var/list/grants[0]
 		var/list/assigned_grants = AR.get_valid_grants()
 		// We're editing a user, so we only need to build a subset of data.

@@ -229,16 +229,27 @@ note dizziness decrements automatically in the mob's Life() proc.
 	anim(src,'icons/mob/mob.dmi',,"phaseout",,dir)
 
 /mob/living/proc/on_structure_offset(var/offset = 0)
+
+	var/next_x = default_pixel_x
+	var/next_y = default_pixel_y
+	var/next_z = default_pixel_z
+
 	if(offset)
-		var/check = default_pixel_z + offset
-		if(pixel_z != check)
-			animate(src, pixel_z = check, time = 2, easing = SINE_EASING)
+		next_z += offset
 	else if(pixel_z != default_pixel_z)
 		var/turf/T = get_turf(src)
 		for(var/obj/structure/S in T.contents)
 			if(S && S.mob_offset)
 				return
-		animate(src, pixel_z = default_pixel_z, time = 2, easing = SINE_EASING)
+
+	if(buckled && buckled.buckle_pixel_shift)
+		var/list/pixel_shift = cached_json_decode(buckled.buckle_pixel_shift)
+		next_x = default_pixel_x + pixel_shift["x"]
+		next_y = default_pixel_y + pixel_shift["y"]
+		next_z = default_pixel_z + pixel_shift["z"]
+	
+	if(pixel_x != next_x || pixel_y != next_y || pixel_z != next_z)
+		animate(src, pixel_x = next_x, pixel_y = next_y, pixel_z = next_z, 2, 1, SINE_EASING)
 
 /mob/living/Move()
 	. = ..()
