@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/standard_space_gear
 	name = "Standard space gear"
 	shoes = /obj/item/clothing/shoes/color/black
-	head = /obj/item/clothing/head/helmet/space/fishbowl
+	head = /obj/item/clothing/head/helmet/space
 	suit = /obj/item/clothing/suit/space
 	uniform = /obj/item/clothing/under/color/grey
 	back = /obj/item/tank/jetpack/oxygen

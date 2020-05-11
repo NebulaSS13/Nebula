@@ -7,8 +7,7 @@
 /obj/machinery/suit_cycler/engineering/alt
 	available_modifications = list(
 		/decl/item_modifier/space_suit/engineering/alt,
-		/decl/item_modifier/space_suit/atmos/alt,
-		/decl/item_modifier/space_suit/hazard
+		/decl/item_modifier/space_suit/atmos/alt
 	)
 	buildable = FALSE
 

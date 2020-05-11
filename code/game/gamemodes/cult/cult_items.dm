@@ -109,7 +109,7 @@
 /obj/item/clothing/head/helmet/space/cult
 	name = "cult helmet"
 	desc = "A space worthy helmet used by the followers of Nar-Sie."
-	icon_state = "cult_helmet"
+	on_mob_icon = 'icons/clothing/spacesuit/cult/helmet.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -123,8 +123,8 @@
 
 /obj/item/clothing/suit/space/cult
 	name = "cult armour"
-	icon_state = "cult_armour"
 	desc = "A bulky suit of armour, bristling with spikes. It looks space proof."
+	on_mob_icon = 'icons/clothing/spacesuit/cult/suit.dmi'
 	allowed = list(/obj/item/book/tome,/obj/item/material/sword/cultblade,/obj/item/tank,/obj/item/suit_cooling_unit)
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
