@@ -5,7 +5,8 @@
 	density = TRUE
 	anchored = TRUE
 
-	var/initial_id_tag
+	var/initial_network_id
+	var/initial_network_key
 	var/list/tech_levels = list(
 		TECH_MATERIAL =    0,
 		TECH_ENGINEERING = 0,
@@ -32,9 +33,8 @@
 /obj/machinery/design_database/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
 	var/list/data = list()
-	var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
-	var/datum/local_network/lan = fabnet?.get_local_network()
-	data["network_id"] = lan?.id_tag || "none"
+	var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
+	data["network_id"] = device.network_tag
 	if(disk)
 		data["disk_name"] = disk.name
 		var/list/tech_data = list()
@@ -80,14 +80,15 @@
 			for(var/tech in tech_levels)
 				tech_levels[tech] = 0
 			return TOPIC_REFRESH
+		if(href_list["settings"])
+			var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+			D.ui_interact(user)
+			return TOPIC_REFRESH
 
 /obj/machinery/design_database/Initialize()
 	. = ..()
 	design_databases += src
-	set_extension(src, /datum/extension/local_network_member)
-	if(initial_id_tag)
-		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-		lanm.set_tag(null, initial_id_tag)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
 	update_icon()
 
 /obj/machinery/design_database/Process()
@@ -107,9 +108,9 @@
 				visible_message(SPAN_NOTICE("\The [src] clicks and chirps as it reads from \the [disk]."))
 				if(sync_policy & SYNC_PUSH_NETWORK)
 					var/synced
-					var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
-					var/datum/local_network/lan = fabnet?.get_local_network()
-					for(var/obj/machinery/computer/design_console/dc in lan?.network_entities[/obj/machinery/computer/design_console])
+					var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
+					var/datum/computer_network/network = device.get_network()
+					for(var/obj/machinery/computer/design_console/dc in network?.get_devices_by_type(/obj/machinery/computer/design_console))
 						if(!(dc.stat & (BROKEN|NOPOWER)))
 							dc.sync_network(tech_levels)
 							synced = TRUE
@@ -140,12 +141,6 @@
 	. = ..()
 
 /obj/machinery/design_database/attackby(obj/item/I, mob/user)
-
-	if(isMultitool(I))
-		var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
-		fabnet.get_new_tag(user)
-		return TRUE
-
 	if(istype(I, /obj/item/disk/tech_disk))
 		if(disk)
 			to_chat(user, SPAN_WARNING("\The [src] already has a disk inserted."))

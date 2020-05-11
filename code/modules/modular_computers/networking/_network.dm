@@ -197,3 +197,18 @@
 			allowed_mainframes |= D
 	return allowed_mainframes
 
+/datum/computer_network/proc/get_devices_by_type(var/type, var/mob/user)
+	var/bypass_auth = !user
+	if(!bypass_auth)
+		// Check for admin.
+		var/obj/item/card/id/network/id = user.GetIdCard()
+		if(id && istype(id, /obj/item/card/id/network) && access_controller && (id.user_id in access_controller.administrators))
+			bypass_auth = TRUE
+
+	var/list/results = list()
+	for(var/datum/extension/network_device/device in devices)
+		if(istype(device.holder, type))
+			if(bypass_auth || device.has_access(user))
+				results += device.holder
+	return results
+

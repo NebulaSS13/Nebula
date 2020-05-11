@@ -9,7 +9,8 @@
 	density = TRUE
 	anchored = TRUE
 
-	var/initial_id_tag
+	var/initial_network_id
+	var/initial_network_key
 	var/busy = FALSE
 	var/obj/item/loaded_item = null
 	var/material_return_modifier = 0
@@ -17,10 +18,7 @@
 
 /obj/machinery/destructive_analyzer/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/local_network_member)
-	if(initial_id_tag)
-		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-		lanm.set_tag(null, initial_id_tag)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
 
 /obj/machinery/destructive_analyzer/RefreshParts()
 	var/T = 0
@@ -72,6 +70,11 @@
 		return TRUE
 
 	. = ..()
+
+/obj/machinery/destructive_analyzer/interface_interact(user)
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	D.ui_interact(user)
+	return TRUE
 
 /obj/machinery/destructive_analyzer/attackby(var/obj/item/O, var/mob/user)
 
