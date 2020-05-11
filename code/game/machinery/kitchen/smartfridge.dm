@@ -11,6 +11,7 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
+	atmos_canpass = CANPASS_NEVER
 	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/icon_base = "fridge_sci"
 	var/icon_contents = "chem"
