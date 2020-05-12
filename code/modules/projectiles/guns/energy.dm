@@ -17,6 +17,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
+	var/indicator_color		// color used for overlay based charge meters
 
 	//self-recharging
 	var/self_recharge = 0	//if set, the weapon will recharge itself
@@ -90,19 +91,39 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 		var/shots_remaining = round(power_supply.charge / charge_cost)
 		to_chat(user, "Has [shots_remaining] shot\s remaining.")
 
-/obj/item/gun/energy/on_update_icon()
-	..()
-	if(charge_meter && power_supply)
+/obj/item/gun/energy/proc/get_charge_ratio()
+	. = 0
+	if(power_supply)
 		var/ratio = power_supply.percent()
-
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
 		// Also make sure cells adminbussed with higher-than-max charge don't break sprites
 		if(power_supply.charge < charge_cost)
 			ratio = 0
 		else
 			ratio = Clamp(round(ratio, 25), 25, 100)
+		return ratio
 
+/obj/item/gun/energy/on_update_icon()
+	..()
+	if(charge_meter)
+		update_charge_meter()
+
+/obj/item/gun/energy/experimental_mob_overlay(mob/user_mob, slot)
+	var/image/I = ..()
+	if(charge_meter)
+		I = add_onmob_charge_meter(I)
+	return I
+
+/obj/item/gun/energy/proc/add_onmob_charge_meter(image/I)
+	I.overlays += get_mutable_overlay(icon, "[I.icon_state][get_charge_ratio()]", indicator_color)
+	return I
+
+/obj/item/gun/energy/proc/update_charge_meter()
+	if(on_mob_icon)
+		overlays += get_mutable_overlay(icon, "[get_world_inventory_state()][get_charge_ratio()]", indicator_color)
+		return
+	if(power_supply)
 		if(modifystate)
-			icon_state = "[modifystate][ratio]"
+			icon_state = "[modifystate][get_charge_ratio()]"
 		else
-			icon_state = "[initial(icon_state)][ratio]"
+			icon_state = "[initial(icon_state)][get_charge_ratio()]"

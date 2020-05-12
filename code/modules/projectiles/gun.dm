@@ -111,17 +111,26 @@
 	var/mob/living/M = loc
 	overlays.Cut()
 	if(istype(M))
-		if(wielded_item_state)
-			if(M.can_wield_item(src) && src.is_held_twohanded(M))
-				item_state_slots[slot_l_hand_str] = wielded_item_state
-				item_state_slots[slot_r_hand_str] = wielded_item_state
-			else
-				item_state_slots[slot_l_hand_str] = initial(item_state)
-				item_state_slots[slot_r_hand_str] = initial(item_state)
 		if(M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
 			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
+		if (src == M.r_hand)
+			M.update_inv_r_hand()
+		else if (src == M.l_hand)
+			M.update_inv_l_hand()
 	if(safety_icon)
-		overlays += image(icon,"[safety_icon][safety()]")
+		overlays += image(icon,"[get_world_inventory_state()][safety_icon][safety()]")
+
+/obj/item/gun/get_mob_overlay(mob/user_mob, slot)
+	var/image/I = ..()
+	if(wielded_item_state && user_mob.can_wield_item(src) && is_held_twohanded(user_mob))
+		I.icon_state = wielded_item_state
+	return I
+
+/obj/item/gun/experimental_mob_overlay(mob/user_mob, slot)
+	var/image/I = ..()
+	if(user_mob.can_wield_item(src) && is_held_twohanded(user_mob) && check_state_in_icon("[I.icon_state]-wielded", icon))
+		I.icon_state = "[I.icon_state]-wielded"
+	return I
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.

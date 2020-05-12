@@ -289,7 +289,6 @@
 	icon_state = "tube1";
 	dir = 8
 	},
-/obj/item/gun/energy/stunrevolver,
 /obj/structure/closet/cabinet,
 /obj/item/storage/secure/briefcase,
 /obj/item/taperecorder,

@@ -194,11 +194,36 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 //coats
-
 /obj/item/clothing/suit/leathercoat
-	name = "leather coat"
-	desc = "A long, thick black leather coat."
-	icon_state = "leathercoat"
+	name = "longcoat"
+	icon_state = "world"
+	icon = 'icons/clothing/suit/leathercoat.dmi'
+	on_mob_icon = 'icons/clothing/suit/leathercoat.dmi'
+	material = MAT_LEATHER_GENERIC
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
+	material_armor_multiplier = 0.8
+	var/shine 
+	var/artificial_shine
+
+/obj/item/clothing/suit/leathercoat/set_material(var/new_material)
+	..()
+	if(material)
+		if(material.reflectiveness >= MAT_VALUE_DULL)
+			shine = material.reflectiveness
+		desc = "A long, thick [material.use_name] coat."
+
+/obj/item/clothing/suit/leathercoat/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
+	var/image/I = ..()
+	if(shine > 0 && slot == slot_wear_suit_str)
+		var/mutable_appearance/S = get_mutable_overlay(I.icon, "shine")
+		S.alpha = max(shine, artificial_shine)/100 * 255
+		I.overlays += S
+	return I
+
+/obj/item/clothing/suit/leathercoat/synth
+	material = MAT_LEATHER_SYNTH
+	artificial_shine = 80
 
 //stripper
 /obj/item/clothing/under/stripper
