@@ -1,4 +1,4 @@
-#if !defined(using_map_DATUM)
+#if !defined(USING_MAP_DATUM)
 
 	#include "../../mods/misc/mundane.dm"
 	#include "../../mods/corporate/_corporate.dme"
@@ -19,7 +19,7 @@
 	#include "bearcat-1.dmm"
 	#include "bearcat-2.dmm"
 
-	#define using_map_DATUM /datum/map/bearcat
+	#define USING_MAP_DATUM /datum/map/bearcat
 
 #elif !defined(MAP_OVERRIDE)
 
