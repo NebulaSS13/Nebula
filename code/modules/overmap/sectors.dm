@@ -17,7 +17,7 @@
 	var/start_x			//Coordinates for self placing
 	var/start_y			//will use random values if unset
 
-	var/sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_IN_SPACE
+	var/sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 	var/hide_from_reports = FALSE
 
