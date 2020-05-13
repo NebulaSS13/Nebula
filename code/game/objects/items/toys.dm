@@ -135,13 +135,8 @@
 /obj/item/toy/crossbow
 	name = "foam dart crossbow"
 	desc = "A weapon favored by many overactive children. Ages 8 and up."
-	icon = 'icons/obj/guns/energy_crossbow.dmi'
-	icon_state = "crossbow"
-	item_state = "crossbow"
-	item_icons = list(
-		icon_l_hand = 'icons/mob/onmob/items/lefthand_guns.dmi',
-		icon_r_hand = 'icons/mob/onmob/items/righthand_guns.dmi',
-		)
+	on_mob_icon = 'icons/obj/guns/energy_crossbow.dmi'
+	icon_state = "world"
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5

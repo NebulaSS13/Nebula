@@ -4523,7 +4523,6 @@
 /area/errant_pisces/science_wing)
 "lf" = (
 /obj/structure/table/rack,
-/obj/item/gun/launcher/net,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lg" = (
@@ -5169,7 +5168,6 @@
 	level = 2
 	},
 /obj/structure/table/rack,
-/obj/item/gun/launcher/net,
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "mV" = (
@@ -6026,7 +6024,6 @@
 /area/errant_pisces/fishing_wing)
 "oz" = (
 /obj/structure/table/marble,
-/obj/item/gun/launcher/net,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/fishing_wing)
 "oA" = (
@@ -6676,7 +6673,6 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/obj/item/gun/launcher/net,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qt" = (
@@ -6715,7 +6711,6 @@
 /area/errant_pisces/fishing_wing)
 "qA" = (
 /obj/structure/table/rack,
-/obj/item/gun/launcher/net,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qB" = (

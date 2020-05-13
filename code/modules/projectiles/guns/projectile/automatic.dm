@@ -1,9 +1,9 @@
 /obj/item/gun/projectile/automatic/smg
 	name = "submachine gun"
 	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced for paramilitary and private use."
+	on_mob_icon = 'icons/obj/guns/sec_smg.dmi'
 	icon = 'icons/obj/guns/sec_smg.dmi'
-	icon_state = "smg"
-	item_state = "wt550"
+	icon_state = "world"
 	safety_icon = "safety"
 	w_class = ITEM_SIZE_NORMAL
 	caliber = CALIBER_PISTOL_SMALL
@@ -24,8 +24,8 @@
 		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
 		MAT_DIAMOND = MATTER_AMOUNT_TRACE
 	)
+	ammo_indicator = TRUE
 
-	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
 		list(mode_name="semi auto",      burst=1, fire_delay=null, one_hand_penalty=3, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, one_hand_penalty=4, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
@@ -36,18 +36,13 @@
 /obj/item/gun/projectile/automatic/smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		overlays += image(icon, "mag-[round(ammo_magazine.stored_ammo.len,5)]")
-	if(ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
-		overlays += image(icon, "ammo-ok")
-	else
-		overlays += image(icon, "ammo-bad")
+		overlays += image(icon, "[get_world_inventory_state()]mag-[round(ammo_magazine.stored_ammo.len,5)]")
 
 /obj/item/gun/projectile/automatic/assault_rifle
 	name = "assault rifle"
 	desc = "The Z8 Bulldog is an older model bullpup carbine. Makes you feel like a space marine when you hold it."
+	on_mob_icon = 'icons/obj/guns/bullpup_rifle.dmi'
 	icon = 'icons/obj/guns/bullpup_rifle.dmi'
-	icon_state = "carbine"
-	item_state = "z8carbine"
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	caliber = CALIBER_RIFLE
@@ -64,7 +59,6 @@
 	one_hand_penalty = 8
 	bulk = GUN_BULK_RIFLE
 	burst_delay = 1
-	wielded_item_state = "z8carbine-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
 	material = MAT_STEEL
@@ -105,15 +99,14 @@
 	else
 		..()
 
-/obj/item/gun/projectile/automatic/assault_rifle/on_update_icon()
-	..()
+/obj/item/gun/projectile/automatic/assault_rifle/update_base_icon()
 	if(ammo_magazine)
 		if(ammo_magazine.stored_ammo.len)
-			icon_state = "carbine-loaded"
+			icon_state = "[get_world_inventory_state()]-loaded"
 		else
-			icon_state = "carbine-empty"
+			icon_state = "[get_world_inventory_state()]-empty"
 	else
-		icon_state = "carbine"
+		icon_state = get_world_inventory_state()
 
 /obj/item/gun/projectile/automatic/assault_rifle/examine(mob/user)
 	. = ..()
