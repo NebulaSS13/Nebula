@@ -67,7 +67,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["change_file_server"])
-		var/list/file_servers = network.get_file_server_tags()
+		var/list/file_servers = network.get_file_server_tags(MF_ROLE_CREW_RECORDS)
 		var/file_server = input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers
 		if(file_server)
 			file_source.server = file_server
