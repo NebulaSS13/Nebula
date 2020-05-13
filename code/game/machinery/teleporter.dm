@@ -187,7 +187,7 @@
 
 /obj/machinery/teleport
 	name = "teleport"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/teleporter.dmi'
 	density = 1
 	anchored = 1.0
 	var/lockeddown = 0
@@ -300,6 +300,6 @@
 
 /obj/machinery/teleport/station/on_update_icon()
 	if(stat & NOPOWER)
-		icon_state = "controller-p"
+		icon_state = panel_open ? "controller-o" : "controller-p"
 	else
 		icon_state = "controller"

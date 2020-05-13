@@ -1146,7 +1146,7 @@
 	dir = 4
 	},
 /obj/random/clipboard,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /obj/item/pen/reagent/sleepy,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)

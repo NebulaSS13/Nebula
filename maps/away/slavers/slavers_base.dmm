@@ -1974,7 +1974,7 @@
 "eZ" = (
 /obj/structure/table/standard,
 /obj/item/storage/firstaid/o2,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /obj/item/paper{
 	info = "Seems they don't really look over my shoulder anymore. We have now maybe a dozen of them with inactive implants. Hope they will pick right moment to flip the lid. I'll kill few bastards myself soon as I have a chance.";
 	name = "Note"

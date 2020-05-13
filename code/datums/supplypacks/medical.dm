@@ -202,7 +202,7 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat,
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/material/clipboard,
-					/obj/item/folder/white,
+					/obj/item/folder/cyan,
 					/obj/item/pen)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
@@ -229,7 +229,7 @@
 
 /decl/hierarchy/supply_pack/medical/autopsy
 	name = "Gear - Autopsy equipment"
-	contains = list(/obj/item/folder/white,
+	contains = list(/obj/item/folder/cyan,
 					/obj/item/camera,
 					/obj/item/camera_film = 2,
 					/obj/item/scanner/autopsy,
