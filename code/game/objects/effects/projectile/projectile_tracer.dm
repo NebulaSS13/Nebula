@@ -50,7 +50,6 @@
 /obj/effect/projectile/tracer/heavy_laser
 	name = "heavy laser"
 	icon_state = "beam_heavy"
-	light_power = 3
 	light_color = LIGHT_COLOR_RED
 
 /obj/effect/projectile/tracer/cult
@@ -62,7 +61,6 @@
 /obj/effect/projectile/tracer/cult/heavy
 	name = "heavy arcane beam"
 	icon_state = "hcult"
-	light_power = 3
 	appearance_flags = NO_CLIENT_COLOR
 
 /obj/effect/projectile/tracer/solar

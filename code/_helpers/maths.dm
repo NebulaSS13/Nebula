@@ -135,5 +135,4 @@
 /matrix/proc/get_angle()
 	return Atan2(b,a)
 
-/proc/Modulus(x, y)
-	return ( (x) - (y) * round((x) / (y)) )
+#define MODULUS_FLOAT(X, Y) ( (X) - (Y) * round((X) / (Y)) )

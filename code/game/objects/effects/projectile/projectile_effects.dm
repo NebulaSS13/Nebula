@@ -5,8 +5,6 @@
 	layer = 4.5
 	anchored = TRUE
 	unacidable = TRUE
-	light_power = 1
-	light_range = 2
 	light_color = "#00ffff"
 	mouse_opacity = 0
 	appearance_flags = 0

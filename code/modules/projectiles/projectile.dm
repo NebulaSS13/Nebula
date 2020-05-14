@@ -1,6 +1,6 @@
 //Amount of time in deciseconds to wait before deleting all drawn segments of a projectile.
 #define SEGMENT_DELETION_DELAY 5
-
+#define MUZZLE_EFFECT_PIXEL_INCREMENT 16
 /obj/item/projectile
 	name = "projectile"
 	icon = 'icons/obj/projectiles.dmi'
@@ -71,12 +71,6 @@
 	var/Angle = 0
 	var/original_angle = 0		//Angle at firing
 	var/nondirectional_sprite = FALSE //Set TRUE to prevent projectiles from having their sprites rotated based on firing angle
-	var/yo = null
-	var/xo = null
-	var/atom/original			// the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
-	var/turf/starting			// the projectile's starting turf
-	var/list/permutated			// we've passed through these atoms, don't try to hit them again
-	var/penetrating = 0			//If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
 	var/forcedodge = FALSE		//to pass through everything
 	var/ignore_source_check = FALSE
 
@@ -126,7 +120,6 @@
 
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)
-	impact_effect(effect_transform)		// generate impact effect
 	if(damage && damage_type == BURN)
 		var/turf/T = get_turf(A)
 		if(T)
@@ -308,182 +301,12 @@
 /obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 1
 
-/obj/item/projectile/Process()
-	var/first_step = 1
-
-	spawn while(src && src.loc)
-		if(life_span-- < 1)
-			on_impact(src.loc) //for any final impact behaviours
-			qdel(src)
-			return
-		if((!( current ) || loc == current))
-			current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
-		if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
-			qdel(src)
-			return
-
-		trajectory.increment()	// increment the current location
-		location = trajectory.return_location(location)		// update the locally stored location data
-
-		if(!location)
-			qdel(src)	// if it's left the world... kill it
-			return
-
-		if (is_below_sound_pressure(get_turf(src)) && !vacuum_traversal) //Deletes projectiles that aren't supposed to bein vacuum if they leave pressurised areas
-			qdel(src)
-			return
-
-		before_move()
-		Move(location.return_turf())
-
-		if(!bumped && !isturf(original))
-			if(loc == get_turf(original))
-				if(!(original in permutated))
-					if(Bump(original))
-						return
-
-		if(first_step)
-			muzzle_effect(effect_transform)
-			first_step = 0
-		else if(!bumped && life_span > 0)
-			tracer_effect(effect_transform)
-		if(!hitscan)
-			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
-
 /obj/item/projectile/proc/before_move()
-	return 0
-
-/obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0)
-	// setup projectile state
-	starting = startloc
-	current = startloc
-	yo = round(targloc.y - startloc.y + y_offset, 1)
-	xo = round(targloc.x - startloc.x + x_offset, 1)
-
-	// trajectory dispersion
-	var/offset = 0
-	if(dispersion)
-		var/radius = round(dispersion*9, 1)
-		offset = rand(-radius, radius)
-
-	// plot the initial trajectory
-	trajectory = new()
-	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset=offset)
-
-	// generate this now since all visual effects the projectile makes can use it
-	effect_transform = new()
-	effect_transform.Scale(round(trajectory.return_hypotenuse() + 0.005, 0.001) , 1) //Seems like a weird spot to truncate, but it minimizes gaps.
-	effect_transform.Turn(round(-trajectory.return_angle(), 0.1))		//no idea why this has to be inverted, but it works
-
-	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
-
-/obj/item/projectile/proc/muzzle_effect(var/matrix/T)
-	if(silenced)
-		return
-
-	if(ispath(muzzle_type))
-		var/obj/effect/projectile/M = new muzzle_type(get_turf(src), src)
-
-		if(istype(M))
-			M.set_transform(T)
-			M.pixel_x = round(location.pixel_x, 1)
-			M.pixel_y = round(location.pixel_y, 1)
-			if(!hitscan) //Bullets don't hit their target instantly, so we can't link the deletion of the muzzle flash to the bullet's Destroy()
-				QDEL_IN(M,1)
-			else
-				segments += M
-
-/obj/item/projectile/proc/tracer_effect(var/matrix/M)
-	if(ispath(tracer_type))
-		var/obj/effect/projectile/P = new tracer_type(location.loc, src)
-
-		if(istype(P))
-			P.set_transform(M)
-			P.pixel_x = round(location.pixel_x, 1)
-			P.pixel_y = round(location.pixel_y, 1)
-			if(!hitscan)
-				QDEL_IN(M,1)
-			else
-				segments += P
-
-/obj/item/projectile/proc/impact_effect(var/matrix/M)
-	if(ispath(impact_type))
-		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src), src)
-
-		if(istype(P) && location)
-			P.set_transform(M)
-			P.pixel_x = round(location.pixel_x, 1)
-			P.pixel_y = round(location.pixel_y, 1)
-			segments += P
-
-//"Tracing" projectile
-/obj/item/projectile/test //Used to see if you can hit them.
-	invisibility = 101 //Nope!  Can't see me!
-	yo = null
-	xo = null
-	var/result = 0 //To pass the message back to the gun.
-
-/obj/item/projectile/test/Bump(atom/A, forced=0)
-	if(A == firer)
-		forceMove(A.loc)
-		return //cannot shoot yourself
-	if(istype(A, /obj/item/projectile))
-		return
-	if(istype(A, /mob/living) || istype(A, /obj/vehicle))
-		result = 2 //We hit someone, return 1!
-		return
-	result = 1
 	return
 
-/obj/item/projectile/test/launch(atom/target)
-	var/turf/curloc = get_turf(src)
-	var/turf/targloc = get_turf(target)
-	if(!curloc || !targloc)
-		return 0
+/obj/item/projectile/proc/after_move()
+	return
 
-	original = target
-
-	//plot the initial trajectory
-	setup_trajectory(curloc, targloc)
-	return Process(targloc)
-
-/obj/item/projectile/test/Process(var/turf/targloc)
-	while(src) //Loop on through!
-		if(result)
-			return (result - 1)
-		if((!( targloc ) || loc == targloc))
-			targloc = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
-
-		trajectory.increment()	// increment the current location
-		location = trajectory.return_location(location)		// update the locally stored location data
-
-		Move(location.return_turf())
-
-		var/mob/living/M = locate() in get_turf(src)
-		if(istype(M)) //If there is someting living...
-			return 1 //Return 1
-		else
-			M = locate() in get_step(src,targloc)
-			if(istype(M))
-				return 1
-
-//Helper proc to check if you can hit them or not.
-/proc/check_trajectory(atom/target, atom/firer, var/pass_flags=PASS_FLAG_TABLE|PASS_FLAG_GLASS|PASS_FLAG_GRILLE, item_flags, obj_flags)
-	if(!istype(target) || !istype(firer))
-		return 0
-
-	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_turf(firer)) //Making the test....
-
-	//Set the flags and pass flags to that of the real projectile...
-	if(!isnull(item_flags))
-		trace.item_flags = item_flags
-	if(!isnull(obj_flags))
-		trace.obj_flags = obj_flags
-	trace.pass_flags = pass_flags
-
-	var/output = trace.launch(target) //Test it!
-	qdel(trace) //No need for it anymore
-	return output //Send it back to the gun!
 
 /obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)
 	//Check if we even broke skin in first place
@@ -556,7 +379,7 @@
 	if(hitscan)
 		return process_hitscan()
 	else
-		if(!isprocessing)
+		if(!is_processing)
 			START_PROCESSING(SSprojectiles, src)
 		pixel_move(1)	//move it now!
 
@@ -584,15 +407,9 @@
 	if(angle_offset)
 		setAngle(Angle + angle_offset)
 
-/obj/item/projectile/proc/before_move()
-	return
-
-/obj/item/projectile/proc/after_move()
-	return
-
 /obj/item/projectile/Crossed(atom/movable/AM) //A mob moving on a tile with a projectile is hit by it.
 	..()
-	if(isliving(AM) && (AM.density || AM == original) && !(pass_flags & PASSMOB))
+	if(isliving(AM) && (AM.density || AM == original) && !(pass_flags & PASS_FLAG_MOB))
 		Bump(AM)
 
 /obj/item/projectile/Initialize()
@@ -732,7 +549,7 @@
 	if(hitscan)
 		store_hitscan_collision(pcache)
 
-/obj/item/projectile/process()
+/obj/item/projectile/Process()
 	last_process = world.time
 	if(!loc || !fired || !trajectory)
 		fired = FALSE
@@ -749,7 +566,7 @@
 			var/overrun = required_moves - SSprojectiles.global_max_tick_moves
 			required_moves = SSprojectiles.global_max_tick_moves
 			time_offset += overrun * speed
-		time_offset += Modulus(elapsed_time_deciseconds, speed)
+		time_offset += MODULUS_FLOAT(elapsed_time_deciseconds, speed)
 	else
 		required_moves = SSprojectiles.global_max_tick_moves
 	if(!required_moves)
