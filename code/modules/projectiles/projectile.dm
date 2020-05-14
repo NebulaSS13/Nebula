@@ -167,8 +167,23 @@
 /obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
 	return launch(target, target_zone, user, params, angle_override, forced_spread)
 
+/obj/item/projectile/proc/set_clickpoint(var/params)
+	var/list/mouse_control = params2list(params)
+	if(mouse_control["icon-x"])
+		p_x = text2num(mouse_control["icon-x"])
+	if(mouse_control["icon-y"])
+		p_y = text2num(mouse_control["icon-y"])
+
+	//randomize clickpoint a bit based on dispersion
+	if(dispersion)
+		var/radius = round((dispersion*0.443)*world.icon_size*0.8) //0.443 = sqrt(pi)/4 = 2a, where a is the side length of a square that shares the same area as a circle with diameter = dispersion
+		p_x = between(0, p_x + rand(-radius, radius), world.icon_size)
+		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
+
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
+	return
+/*
 	var/turf/new_target = locate(new_x, new_y, src.z)
 
 	original = new_target
@@ -176,7 +191,7 @@
 		firer = src
 
 	setup_trajectory(starting_loc, new_target)
-
+*/
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/special_miss_modifier=0)
 	if(!istype(target_mob))
