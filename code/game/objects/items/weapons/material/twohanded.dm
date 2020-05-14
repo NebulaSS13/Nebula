@@ -133,35 +133,21 @@
 		color = material.icon_colour
 		alpha = 100 + material.opacity * 255
 	overlays += get_shaft_overlay("shaft")
-	overlays += get_cable_overlay("cable")
+	overlays += get_mutable_overlay(icon, "cable", cable_color)
 
 /obj/item/material/twohanded/spear/experimental_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	if(wielded)
-		ret.icon_state += "_wielded"
+	if(wielded && check_state_in_icon("[ret.icon_state]_wielded", icon))
+		ret.icon_state = "[ret.icon_state]_wielded"
 	ret.overlays += get_shaft_overlay("[ret.icon_state]_shaft")
-	ret.overlays += get_cable_overlay("[ret.icon_state]_cable")
+	ret.overlays += get_mutable_overlay(icon, "[ret.icon_state]_cable", cable_color)
 	return ret
 
 /obj/item/material/twohanded/spear/proc/get_shaft_overlay(var/base_state)
-	var/mutable_appearance/shaft = new()
-	shaft.icon = icon
-	shaft.icon_state = base_state
 	var/material/M = SSmaterials.get_material_datum(shaft_material)
-	shaft.color = M.icon_colour
+	var/mutable_appearance/shaft = get_mutable_overlay(icon, base_state, M.icon_colour)
 	shaft.alpha = 155 + 100 * M.opacity
-	shaft.appearance_flags = RESET_COLOR | RESET_ALPHA
-	shaft.plane = FLOAT_PLANE
 	return shaft
-
-/obj/item/material/twohanded/spear/proc/get_cable_overlay(var/base_state)
-	var/mutable_appearance/cable = new()
-	cable.icon = icon
-	cable.icon_state = base_state
-	cable.color = cable_color
-	cable.appearance_flags = RESET_COLOR | RESET_ALPHA
-	cable.plane = FLOAT_PLANE
-	return cable
 
 /obj/item/material/twohanded/spear/diamond
 	material = MAT_DIAMOND
