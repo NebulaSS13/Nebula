@@ -71,7 +71,7 @@
 /obj/effect/overmap/visitable/before_save()
 	should_save = FALSE
 	for(var/z in map_z)
-		if(z in SSmapping.saved_levels)
+		if(z in SSpersistence.saved_levels)
 			should_save = TRUE
 	start_x = x
 	start_y = x

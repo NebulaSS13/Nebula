@@ -311,8 +311,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_direct_narrate,
 	/client/proc/aooc,
 	/datum/admins/proc/sendFax,
-	/datum/admins/proc/paralyze_mob,
-	/datum/admins/proc/view_persistent_data
+	/datum/admins/proc/paralyze_mob
 )
 
 /client/proc/add_admin_verbs()

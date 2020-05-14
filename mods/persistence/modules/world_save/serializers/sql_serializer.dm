@@ -60,7 +60,12 @@
 		var/turf/T = object
 		x = T.x
 		y = T.y
-		z = T.z
+		if(nongreedy_serialize && !("[T.z]" in z_map))
+			return null
+		try
+			z = z_map["[T.z]"]
+		catch
+			z = T.z
 
 #ifdef SAVE_DEBUG
 	to_world_log("(SerializeThing) ([t_i],'[object.type]',[x],[y],[z])")
@@ -77,9 +82,6 @@
 #ifdef SAVE_DEBUG
 		to_world_log("(SerializeThingVar) [V]")
 #endif
-		// EXPERIMENTAL SAVING OPTIMIZATION OH FUCK
-		// if(default_instance && default_instance.vars[V] == VV)
-			// continue // Don't save things that are 'default value'. doh.
 		if(VV == initial(object.vars[V]))
 			continue
 
@@ -451,14 +453,11 @@
 	inserts_since_commit = 0
 
 
-/serializer/sql/proc/Clear()
+/serializer/sql/Clear()
+	. = ..()
 	thing_inserts.Cut(1)
 	var_inserts.Cut(1)
 	element_inserts.Cut(1)
-	thing_map.Cut(1)
-	reverse_map.Cut(1)
-	list_map.Cut(1)
-	reverse_list_map.Cut(1)
 
 
 // Deletes all saves from the database.
@@ -472,6 +471,10 @@
 	if(query.ErrorMsg())
 		to_world_log("UNABLE TO WIPE PREVIOUS SAVE: [query.ErrorMsg()].")
 	query = dbcon.NewQuery("TRUNCATE TABLE `list_element`;")
+	query.Execute()
+	if(query.ErrorMsg())
+		to_world_log("UNABLE TO WIPE PREVIOUS SAVE: [query.ErrorMsg()].")
+	query = dbcon.NewQuery("TRUNCATE TABLE `z_level`;")
 	query.Execute()
 	if(query.ErrorMsg())
 		to_world_log("UNABLE TO WIPE PREVIOUS SAVE: [query.ErrorMsg()].")

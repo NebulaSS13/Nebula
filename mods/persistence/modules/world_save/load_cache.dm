@@ -39,9 +39,24 @@
 	value = sql_row["value"]
 	value_type = sql_row["value_type"]
 
+/datum/persistence/load_cache/z_level
+	var/index			// The index in the database for the z_level
+	var/new_index		// The new z_index on load.
+	var/dynamic = FALSE // Dynamic z_levels are transformed on load.
+	var/metadata
+	var/default_turf	// The fill turf for the z_level.
+
+/datum/persistence/load_cache/z_level/New(var/sql_row)
+	if(sql_row)
+		index = text2num(sql_row["z"])
+		dynamic = text2num(sql_row["dynamic"])
+		default_turf = text2path(sql_row["default_turf"])
+		metadata = sql_row["metadata"]
+
 /datum/persistence/load_cache/resolver
 	var/list/things = list()
 	var/list/lists = list()
+	var/list/z_levels = list()
 
 	var/vars_cached = 0
 	var/lists_cached = 0
@@ -49,7 +64,7 @@
 
 	var/failed_vars = 0
 
-/datum/persistence/load_cache/resolver/proc/load_cache() 
+/datum/persistence/load_cache/resolver/proc/load_cache()
 	clear_cache()
 
 	// Deserialize the objects
@@ -91,6 +106,17 @@
 		lists_cached++
 		CHECK_TICK
 	to_world_log("Took [(world.timeofday - start) / 10]s to cache all lists")
+
+	// Deserialized levels
+	start = world.timeofday
+	query = dbcon.NewQuery("SELECT `z`,`dynamic`,`default_turf`,`metadata` FROM `z_level`;")
+	query.Execute()
+	while(query.NextRow())
+		var/items = query.GetRowData()
+		var/datum/persistence/load_cache/z_level/z_level = new(items)
+		z_levels += z_level
+		CHECK_TICK
+	to_world_log("Took [(world.timeofday - start) / 10]s to cache all z_levels")
 
 	// Done!
 	to_world_log("Cached [things_cached] things, [vars_cached + failed_vars] vars, [lists_cached] lists. [failed_vars] failed to cache due to missing thing references.")
