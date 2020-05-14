@@ -32,11 +32,6 @@
 	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
 	icon = 'icons/obj/guns/gui.dmi'
-	item_icons = list(
-		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns.dmi',
-		)
-	item_state = "gun"
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	material = MAT_STEEL
@@ -110,6 +105,7 @@
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
 	overlays.Cut()
+	update_base_icon()
 	if(istype(M))
 		if(M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
 			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
@@ -118,7 +114,12 @@
 		else if (src == M.l_hand)
 			M.update_inv_l_hand()
 	if(safety_icon)
-		overlays += image(icon,"[get_world_inventory_state()][safety_icon][safety()]")
+		overlays +=	get_safety_indicator()
+
+/obj/item/gun/proc/update_base_icon()
+
+/obj/item/gun/proc/get_safety_indicator()
+	return get_mutable_overlay(icon, "[get_world_inventory_state()][safety_icon][safety()]")
 
 /obj/item/gun/get_mob_overlay(mob/user_mob, slot)
 	var/image/I = ..()

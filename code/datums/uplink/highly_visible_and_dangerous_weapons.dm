@@ -124,14 +124,6 @@
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/gun/magnetic/railgun
 
-/datum/uplink_item/item/visible_weapons/railguntcc // Only slightly better than the normal railgun; but cooler looking
-	name = "Advanced Railgun"
-	desc = "A modified prototype of the original railgun implement, this time boring slugs out of steel rods loaded into the chamber, \
-			now with even MORE stopping power."
-	antag_roles = list(MODE_MERCENARY)
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
-	path = /obj/item/gun/magnetic/railgun/tcc
-
 /datum/uplink_item/item/visible_weapons/harpoonbomb
 	name = "Explosive Harpoon"
 	item_cost = 12

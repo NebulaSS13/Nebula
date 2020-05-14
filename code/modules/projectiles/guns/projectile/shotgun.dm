@@ -1,9 +1,9 @@
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
-	icon = 'icons/obj/guns/shotguns.dmi'
-	icon_state = "shotgun"
-	item_state = "shotgun"
+	on_mob_icon = 'icons/obj/guns/shotgun/pump.dmi'
+	icon = 'icons/obj/guns/shotgun/pump.dmi'
+	icon_state = "world"
 	max_shells = 4
 	w_class = ITEM_SIZE_HUGE
 	force = 10
@@ -17,15 +17,13 @@
 	one_hand_penalty = 8
 	bulk = 6
 	var/recentpump = 0 // to prevent spammage
-	wielded_item_state = "shotgun-wielded"
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 
-/obj/item/gun/projectile/shotgun/on_update_icon()
-	..()
+/obj/item/gun/projectile/shotgun/update_base_icon()
 	if(length(loaded))
-		icon_state = initial(icon_state)
+		icon_state = get_world_inventory_state()
 	else
-		icon_state = "[initial(icon_state)]-empty"
+		icon_state = "[get_world_inventory_state()]-empty"
 
 /obj/item/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
@@ -56,10 +54,7 @@
 /obj/item/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
 	desc = "A true classic."
-	icon = 'icons/obj/guns/shotguns.dmi'
-	icon_state = "dshotgun"
-	item_state = "dshotgun"
-	wielded_item_state = "dshotgun-wielded"
+	on_mob_icon = 'icons/obj/guns/shotgun/doublebarrel.dmi'
 	//SPEEDLOADER because rapid unloading.
 	//In principle someone could make a speedloader for it, so it makes sense.
 	load_method = SINGLE_CASING|SPEEDLOADER
@@ -73,7 +68,6 @@
 	origin_tech = "{'combat':3,'materials':1}"
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	one_hand_penalty = 2
-	wielded_item_state = "gun_wielded"
 
 	burst_delay = 0
 	firemodes = list(
@@ -109,9 +103,7 @@
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"
 	desc = "Omar's coming!"
-	icon_state = "sawnshotgun"
-	item_state = "sawnshotgun"
-	wielded_item_state = "sawnshotgun-wielded"
+	on_mob_icon = 'icons/obj/guns/shotgun/sawnoff.dmi'
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	w_class = ITEM_SIZE_NORMAL

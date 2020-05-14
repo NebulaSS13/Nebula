@@ -2653,7 +2653,6 @@
 #include "code\modules\projectiles\guns\launcher\foam_gun.dm"
 #include "code\modules\projectiles\guns\launcher\grenade_launcher.dm"
 #include "code\modules\projectiles\guns\launcher\money_cannon.dm"
-#include "code\modules\projectiles\guns\launcher\net.dm"
 #include "code\modules\projectiles\guns\launcher\pneumatic.dm"
 #include "code\modules\projectiles\guns\launcher\rocket.dm"
 #include "code\modules\projectiles\guns\launcher\slugsling.dm"

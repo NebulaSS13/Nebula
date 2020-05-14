@@ -592,10 +592,6 @@
 	icon_state = "setup_medium_gun"
 	item_state = "circuitgun"
 	desc = "It's a case, for building medium-sized electronics with. This one resembles a gun, or some type of tool, if you're feeling optimistic. It can fire guns and throw items while the user is holding it."
-	item_icons = list(
-		icon_l_hand = 'icons/mob/onmob/items/lefthand_guns.dmi',
-		icon_r_hand = 'icons/mob/onmob/items/righthand_guns.dmi'
-		)
 	circuit_flags = IC_FLAG_CAN_FIRE | IC_FLAG_ANCHORABLE
 
 /obj/item/electronic_assembly/medium/radio

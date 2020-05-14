@@ -45,11 +45,11 @@
 	ammo_name = "spike"
 	ammo_type = /obj/item/spike
 	release_force = 30
-	icon = 'icons/obj/guns/spikethrower.dmi'
-	icon_state = "spikethrower3"
-	item_state = "spikethrower"
+	on_mob_icon = 'icons/obj/guns/launcher/voxspike.dmi'
+	icon = 'icons/obj/guns/launcher/voxspike.dmi'
+	icon_state = "world0"
 	fire_sound_text = "a strange noise"
 	fire_sound = 'sound/weapons/spike.ogg'
 
 /obj/item/gun/launcher/alien/spikethrower/on_update_icon()
-	icon_state = "spikethrower[ammo]"
+	icon_state = "[get_world_inventory_state()][Clamp(ammo,0,3)]"

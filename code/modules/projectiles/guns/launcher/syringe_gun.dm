@@ -63,9 +63,9 @@
 /obj/item/gun/launcher/syringe
 	name = "syringe gun"
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
-	icon = 'icons/obj/guns/syringegun.dmi'
-	icon_state = "syringegun"
-	item_state = "syringegun"
+	on_mob_icon = 'icons/obj/guns/launcher/syringe.dmi'
+	icon = 'icons/obj/guns/launcher/syringe.dmi'
+	icon_state = "world"
 	w_class = ITEM_SIZE_LARGE
 	force = 7
 	material = MAT_STEEL
@@ -133,8 +133,7 @@
 /obj/item/gun/launcher/syringe/rapid
 	name = "syringe gun revolver"
 	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots."
-	icon_state = "rapidsyringegun"
-	item_state = "rapidsyringegun"
+	on_mob_icon = 'icons/obj/guns/launcher/syringe_rapid.dmi'
 	max_darts = 5
 	material = MAT_STEEL
 	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
