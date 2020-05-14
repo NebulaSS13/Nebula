@@ -8,8 +8,14 @@
 	var/list/list_map = list()
 	var/list/reverse_list_map = list()
 
+	var/list/z_map = list() // This map lists key (game's z_index) to the zindex used by the database (value).
+	var/z_index = -1
+
 // Serializes an object. Returns the appropriate serialized form of the object. What's outputted depends on the serializer.
-/serializer/proc/Serialize(var/object, var/object_parent)
+// object: A thing to serialize.
+// object_parent: That object's parent. Could be a container or other. Optional.
+// z: The z_level of this object. Also optional. Used for reordering z_levels in world saves
+/serializer/proc/Serialize(var/object, var/object_parent, var/z)
 	if(islist(object))
 		return SerializeList(object, object_parent)
 	return SerializeDatum(object, object_parent)
@@ -19,6 +25,9 @@
 
 // Serialize a list. Returns the appropriate serialized form of the list. What's outputted depends on the serializer.
 /serializer/proc/SerializeList(var/list/list, var/list_parent)
+
+// Takes the current cache of z_levels and serializes them.
+/serializer/proc/SerializeMultiZ()
 
 /serializer/proc/DeserializeDatum(var/datum/persistence/load_cache/thing/object)
 
@@ -42,3 +51,11 @@
 	if(isnull(object))
 		return FALSE
 	return object.type in GLOB.flatten_types
+
+/serializer/proc/Clear()
+	z_index = -1
+	z_levels.Cut(1)
+	thing_map.Cut(1)
+	reverse_map.Cut(1)
+	list_map.Cut(1)
+	reverse_list_map.Cut(1)

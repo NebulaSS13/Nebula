@@ -10,7 +10,7 @@
 	matter = list(MAT_WOOD = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/dat			 // Actual page content
-	var/pencode_dat  // Cache pencode if input, so it can be edited later. 
+	var/pencode_dat  // Cache pencode if input, so it can be edited later.
 	var/author		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	var/unique = 0   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
 	var/title		 // The real name of the book.
@@ -23,29 +23,6 @@
 	var/const/signfont = "Times New Roman"
 	var/const/crayonfont = "Comic Sans MS"
 	var/const/fancyfont = "Segoe Script"
-
-/obj/item/book/Initialize(var/ml)
-	if(!ml && !unique)
-		SSpersistence.track_value(src, /datum/persistent/book)
-	. = ..()
-
-/obj/item/book/Destroy()
-	if(dat && last_modified_ckey && SSpersistence.is_tracking(src, /datum/persistent/book))
-		// Create a new book in nullspace that is tracked by persistence.
-		// This is so destroying a book does not get rid of someone's 
-		// content, as books with null coords will get spawned in a random
-		// library bookcase.
-		var/obj/item/book/backup_book = new(src)
-		backup_book.dat =                dat
-		backup_book.author =             author
-		backup_book.title =              title
-		backup_book.last_modified_ckey = last_modified_ckey
-		backup_book.unique =             TRUE
-		backup_book.forceMove(null)
-		backup_book.SetName(backup_book.title)
-
-	SSpersistence.forget_value(src, /datum/persistent/book)
-	. = ..()
 
 /obj/item/book/attack_self(var/mob/user)
 	if(carved)
