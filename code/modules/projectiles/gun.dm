@@ -267,7 +267,7 @@
 		return 2
 	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone
 	//on the other side of a window if it makes a difference. Or if they run behind a window, too bad.
-	return check_trajectory(target, user)
+	return (target in check_trajectory(target, user))
 
 //called if there was no projectile to shoot
 /obj/item/gun/proc/handle_click_empty(mob/user)
@@ -413,18 +413,17 @@
 		P.set_clickpoint(params)
 
 	//shooting while in shock
-	var/x_offset = 0
-	var/y_offset = 0
+	var/shock_dispersion = 0
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/mob = user
 		if(mob.shock_stage > 120)
-			y_offset = rand(-2,2)
-			x_offset = rand(-2,2)
+			shock_dispersion = rand(-4,4)
 		else if(mob.shock_stage > 70)
-			y_offset = rand(-1,1)
-			x_offset = rand(-1,1)
+			shock_dispersion = rand(-2,2)
 
-	var/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
+	P.dispersion += shock_dispersion
+
+	var/launched = !P.launch_from_gun(target, target_zone, user, params)
 
 	if(launched)
 		play_fire_sound(user,P)

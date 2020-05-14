@@ -57,6 +57,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define PASS_FLAG_TABLE                   BITFLAG(0)
 #define PASS_FLAG_GLASS                   BITFLAG(1)
 #define PASS_FLAG_GRILLE                  BITFLAG(2)
+#define PASS_FLAG_MOB                     BITFLAG(3)
 
 // Sector Flags.
 #define OVERMAP_SECTOR_BASE               BITFLAG(0) // Whether or not this sector is a starting sector. Z levels contained in this sector are added to station_levels
