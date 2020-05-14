@@ -12,13 +12,7 @@
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	enabled_by_default = TRUE
-
-/obj/item/modular_computer/pda/Initialize()
-	. = ..()
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
-	assembly.hardware_flag = PROGRAM_PDA
-	assembly.max_hardware_size = 1
+	computer_type = /datum/extension/assembly/modular_computer/pda
 
 /obj/item/modular_computer/pda/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))

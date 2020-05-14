@@ -10,12 +10,7 @@
 
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
-
-/obj/item/modular_computer/tablet/Initialize()
-	. = ..()
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
-	assembly.hardware_flag = PROGRAM_TABLET
-	assembly.max_hardware_size = 1
+	computer_type = /datum/extension/assembly/modular_computer/tablet
 
 /obj/item/modular_computer/tablet/lease
 	desc = "A small, portable microcomputer. This one has a gold and blue stripe, and a serial number stamped into the case."

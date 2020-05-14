@@ -56,25 +56,6 @@
 	var/obj/item/stock_parts/computer/P = path
 	return initial(P.external_slot)
 
-/obj/machinery/computer/modular/proc/eject_usb()
-	set name = "Eject Portable Storage"
-	set category = "Object"
-	set src in view(1)
-
-	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
-		return
-
-	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	var/obj/item/stock_parts/computer/hard_drive/portable/drive = assembly.get_component(PART_DRIVE)
-	if(ismob(usr))
-		var/mob/user = usr
-		visible_message(SPAN_NOTICE("[user] ejects \the [drive] from \the [src]."))
-		user.put_in_hands(drive)
-	else
-		drive.dropInto(loc)
-	verbs -= /obj/machinery/computer/modular/proc/eject_usb
-
 /obj/machinery/computer/modular/CouldUseTopic(var/mob/user)
 	..()
 	if(LAZYLEN(interact_sounds) && CanPhysicallyInteract(user))

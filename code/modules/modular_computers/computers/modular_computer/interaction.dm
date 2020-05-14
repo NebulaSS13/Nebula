@@ -1,10 +1,5 @@
 /obj/item/modular_computer/proc/update_verbs()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	if(assembly.get_component(PART_DRIVE))
-		verbs |= /obj/item/modular_computer/proc/eject_usb
-	else
-		verbs -= /obj/item/modular_computer/proc/eject_usb
-
 	if(stores_pen && istype(stored_pen))
 		verbs |= /obj/item/modular_computer/proc/remove_pen
 	else
@@ -38,23 +33,6 @@
 			assembly.bsod = 0
 			update_icon()
 
-
-// Eject ID card from computer, if it has ID slot with card inside.
-/obj/item/modular_computer/proc/eject_usb()
-	set name = "Eject Portable Storage"
-	set category = "Object"
-	set src in view(1)
-
-	if(!CanPhysicallyInteract(usr))
-		return
-
-	if(!Adjacent(usr))
-		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
-		return
-
-	proc_eject_usb(usr)
-	update_verbs()
-
 /obj/item/modular_computer/proc/remove_pen()
 	set name = "Remove Pen"
 	set category = "Object"
@@ -73,17 +51,6 @@
 		usr.put_in_hands(stored_pen) // Silicons will drop it anyway.
 		stored_pen = null
 		update_verbs()
-
-/obj/item/modular_computer/proc/proc_eject_usb(mob/user)
-	if(!user)
-		user = usr
-
-	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
-	if(!assembly.get_component(PART_DRIVE))
-		to_chat(user, "There is no portable device connected to \the [src].")
-		return
-
-	assembly.uninstall_component(user, assembly.get_component(PART_DRIVE))
 
 /obj/item/modular_computer/attack_ghost(var/mob/observer/ghost/user)
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)

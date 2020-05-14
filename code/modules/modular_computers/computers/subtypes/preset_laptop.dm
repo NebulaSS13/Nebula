@@ -7,7 +7,8 @@
 		/obj/item/stock_parts/computer/network_card,
 		/obj/item/stock_parts/computer/nano_printer,
 		/obj/item/stock_parts/computer/card_slot,
-		/obj/item/stock_parts/computer/battery_module/advanced
+		/obj/item/stock_parts/computer/battery_module/advanced,
+		/obj/item/stock_parts/computer/drive_slot
 	)
 
 /obj/item/modular_computer/laptop/preset/custom_loadout/advanced
@@ -18,7 +19,8 @@
 		/obj/item/stock_parts/computer/network_card/advanced,
 		/obj/item/stock_parts/computer/nano_printer,
 		/obj/item/stock_parts/computer/card_slot,
-		/obj/item/stock_parts/computer/battery_module/advanced
+		/obj/item/stock_parts/computer/battery_module/advanced,
+		/obj/item/stock_parts/computer/drive_slot
 	)
 
 /obj/item/modular_computer/laptop/preset/custom_loadout/standard
@@ -29,7 +31,8 @@
 		/obj/item/stock_parts/computer/network_card,
 		/obj/item/stock_parts/computer/nano_printer,
 		/obj/item/stock_parts/computer/card_slot,
-		/obj/item/stock_parts/computer/battery_module/advanced
+		/obj/item/stock_parts/computer/battery_module/advanced,
+		/obj/item/stock_parts/computer/drive_slot
 	)
 
 /obj/item/modular_computer/laptop/preset/custom_loadout
@@ -47,7 +50,8 @@
 		/obj/item/stock_parts/computer/network_card,
 		/obj/item/stock_parts/computer/nano_printer,
 		/obj/item/stock_parts/computer/battery_module/nano,
-		/obj/item/stock_parts/computer/scanner/paper
+		/obj/item/stock_parts/computer/scanner/paper,
+		/obj/item/stock_parts/computer/drive_slot
 	)
 
 	default_programs = list(

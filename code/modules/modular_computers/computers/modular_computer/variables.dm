@@ -4,10 +4,7 @@
 	name = "Modular Computer"
 	desc = "A modular computer. You shouldn't see this."
 
-	var/enabled_by_default = FALSE							// Start enabled durint Initialization
-	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
 	var/computer_emagged = FALSE							// Whether the computer is emagged.
-	var/apc_powered = FALSE									// Set automatically. Whether the computer used APC power last tick.
 	var/ambience_last_played								// Last time sound was played
 
 	// Modular computers can run on various devices. Each DEVICE (Laptop, Console, Tablet,..)
@@ -19,11 +16,9 @@
 	center_of_mass = null									// No pixelshifting by placing on tables, etc.
 	randpixel = 0											// And no random pixelshifting on-creation either.
 	var/icon_state_unpowered = null							// Icon state when the computer is turned off
-	var/max_hardware_size = 0								// Maximal hardware size. Currently, tablets have 1, laptops 2 and consoles 3. Limits what hardware types can be installed.
 	var/light_strength = 0									// Intensity of light this computer emits. Comparable to numbers light fixtures use.
 
 	var/list/terminals          // List of open terminal datums.
-	var/modifiable = TRUE	// can't be modified or damaged if false
 
 	var/stores_pen = FALSE
 	var/obj/item/pen/stored_pen
@@ -36,3 +31,4 @@
 
 	// setup stuff
 	var/initial_hardware_flag = 0
+	var/computer_type = /datum/extension/assembly/modular_computer // Determines assembly extension.

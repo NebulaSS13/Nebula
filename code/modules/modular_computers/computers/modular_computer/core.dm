@@ -28,15 +28,16 @@
 // Used to install preset-specific programs
 /obj/item/modular_computer/proc/install_default_programs()
 	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
-	if(!H)
-		return
-	var/datum/job/jb = SSjobs.get_by_title(H.job)
-	if(!jb) return
+	var/list/job_programs = list()
+	if(H)
+		var/datum/job/jb = SSjobs.get_by_title(H.job)
+		if(istype(jb))
+			job_programs = jb.software_on_spawn
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = assembly.get_component(PART_HDD)
 	if(!HDD)
 		return
-	for(var/prog_type in (jb.software_on_spawn + default_programs))
+	for(var/prog_type in (job_programs + default_programs))
 		var/datum/computer_file/program/prog_file = prog_type
 		if(initial(prog_file.usage_flags) & assembly.hardware_flag)
 			prog_file = new prog_file
@@ -45,7 +46,7 @@
 /obj/item/modular_computer/Initialize()
 	START_PROCESSING(SSobj, src)
 	set_extension(src, /datum/extension/interactive/ntos/device)
-	set_extension(src, /datum/extension/assembly/modular_computer)
+	set_extension(src, computer_type)
 
 	if(stores_pen && ispath(stored_pen))
 		stored_pen = new stored_pen(src)
@@ -53,7 +54,9 @@
 	update_icon()
 	update_verbs()
 	update_name()
-	if(enabled_by_default)
+	
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly/modular_computer)
+	if(istype(assembly) && assembly.enabled_by_default)
 		enable_computer()
 	..()
 	return INITIALIZE_HINT_LATELOAD

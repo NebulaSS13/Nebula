@@ -57,6 +57,15 @@
 		card_slot.insert_id(I, user)
 		return TRUE
 
+	if(istype(W, PART_DRIVE)) // Portable HDD, try to insert it.
+		var/obj/item/stock_parts/computer/hard_drive/portable/I = W
+		var/obj/item/stock_parts/computer/drive_slot/drive_slot = get_component(PART_D_SLOT)
+		if(!drive_slot)
+			to_chat(user, "You try to insert [I] into [holder], but it does not have a drive slot installed.")
+			return TRUE
+		drive_slot.insert_drive(I, user)
+		return TRUE
+
 	if(istype(W, /obj/item/paper))
 		var/obj/item/paper/paper = W
 		if(paper.info)

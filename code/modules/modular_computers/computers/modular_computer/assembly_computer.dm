@@ -7,15 +7,16 @@
 	var/max_hardware_size
 	var/hardware_flag
 	var/bsod
+	var/enabled_by_default = FALSE
 	assembly_name = "computer"
 	max_parts = list(
+		PART_D_SLOT		= 1,
 		PART_BATTERY 	= 1,
 		PART_CPU		= 1,
 		PART_NETWORK	= 1,
 		PART_HDD		= 1,
 		PART_CARD		= 1,
 		PART_PRINTER	= 1,
-		PART_DRIVE		= 1,
 		PART_AI			= 1,
 		PART_TESLA		= 1,
 		PART_SCANNER	= 1

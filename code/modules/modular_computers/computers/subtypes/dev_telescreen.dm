@@ -8,27 +8,20 @@
 	density = 0
 	light_strength = 4
 	w_class = ITEM_SIZE_HUGE
+	computer_type = /datum/extension/assembly/modular_computer/telescreen
 
 /obj/item/modular_computer/telescreen/Initialize()
 	. = ..()
 	// Allows us to create "north bump" "south bump" etc. named objects, for more comfortable mapping.
 	name = "telescreen"
 
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
-	assembly.hardware_flag = PROGRAM_TELESCREEN
-	assembly.max_hardware_size = 2
-	assembly.base_idle_power_usage = 75
-	assembly.base_active_power_usage = 300
-	assembly.steel_sheet_cost = 10
-	assembly.max_damage = 300
-	assembly.broken_damage = assembly.max_damage / 2
-
 /obj/item/modular_computer/telescreen/attackby(var/obj/item/W, var/mob/user)
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly/modular_computer)
 	if(isCrowbar(W))
 		if(anchored)
 			shutdown_computer()
 			anchored = FALSE
-			screen_on = FALSE
+			assembly.screen_on = FALSE
 			pixel_x = 0
 			pixel_y = 0
 			to_chat(user, "You unsecure \the [src].")
@@ -53,7 +46,7 @@
 
 			if(valid)
 				anchored = 1
-				screen_on = TRUE
+				assembly.screen_on = TRUE
 				to_chat(user, "You secure \the [src].")
 			return
 	..()

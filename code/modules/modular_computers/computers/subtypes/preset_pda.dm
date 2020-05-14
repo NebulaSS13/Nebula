@@ -5,7 +5,8 @@
 		/obj/item/stock_parts/computer/processor_unit/small,
 		/obj/item/stock_parts/computer/card_slot/broadcaster,
 		/obj/item/stock_parts/computer/battery_module,
-		/obj/item/stock_parts/computer/tesla_link
+		/obj/item/stock_parts/computer/tesla_link,
+		/obj/item/stock_parts/computer/drive_slot
 	)
 
 	default_programs = list(

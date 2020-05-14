@@ -10,19 +10,8 @@
 	var/icon_state_closed = "laptop-closed"
 	interact_sounds = list("keyboard", "keystroke")
 	interact_sound_volume = 20
+	computer_type = /datum/extension/assembly/modular_computer/laptop
 	
-
-/obj/item/modular_computer/laptop/Initialize()
-	. = ..()
-	screen_on = anchored
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
-	assembly.hardware_flag = PROGRAM_LAPTOP
-	assembly.max_hardware_size = 2
-	assembly.base_idle_power_usage = 25
-	assembly.base_active_power_usage = 200
-	assembly.max_damage = 200
-	assembly.broken_damage = assembly.max_damage / 2
-
 /obj/item/modular_computer/laptop/AltClick(var/mob/user)
 // Prevents carrying of open laptops inhand.
 // While they work inhand, i feel it'd make tablets lose some of their high-mobility advantage they have over laptops now.
@@ -31,8 +20,9 @@
 	if(!istype(loc, /turf/))
 		to_chat(usr, "\The [src] has to be on a stable surface first!")
 		return
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, computer_type)
 	anchored = !anchored
-	screen_on = anchored
+	assembly.screen_on = anchored
 	update_icon()
 
 /obj/item/modular_computer/laptop/on_update_icon()
