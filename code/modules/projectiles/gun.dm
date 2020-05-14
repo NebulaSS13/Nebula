@@ -267,7 +267,7 @@
 		return 2
 	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone
 	//on the other side of a window if it makes a difference. Or if they run behind a window, too bad.
-	return check_trajectory(target, user)
+	return (target in check_trajectory(target, user))
 
 //called if there was no projectile to shoot
 /obj/item/gun/proc/handle_click_empty(mob/user)
@@ -330,7 +330,7 @@
 			var/obj/item/rig/R = H.back
 			for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
 				S.deactivate()
-	
+
 	if(space_recoil)
 		if(!user.check_space_footing())
 			var/old_dir = user.dir
@@ -435,7 +435,7 @@
 		shot_sound_vol = P.fire_sound_vol
 	if(silenced)
 		shot_sound_vol = 10
-	
+
 	playsound(user, shot_sound, shot_sound_vol, 1)
 
 //Suicide handling.
