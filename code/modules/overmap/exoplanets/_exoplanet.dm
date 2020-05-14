@@ -4,7 +4,7 @@
 	bound_height = 64
 	bound_width = 64
 	icon_state = "globe"
-	in_space = 0
+	sector_flags = OVERMAP_SECTOR_KNOWN
 	free_landing = TRUE
 	var/area/planetary_area
 
