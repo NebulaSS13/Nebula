@@ -4,8 +4,7 @@
 
 	base_type = /obj/machinery/atmospherics/unary/engine
 	construct_state = /decl/machine_construction/default/panel_closed
-	maximum_component_parts = list(/obj/item/stock_parts = 6)//don't want too many, let upgraded component shine
-	uncreated_component_parts = list(/obj/item/stock_parts/power/apc/buildable = 1)
+	maximum_component_parts = list(/obj/item/stock_parts = 8)//don't want too many, let upgraded component shine
 	engine_extension = /datum/extension/ship_engine/gas/fusion
 
 	use_power = POWER_USE_OFF
