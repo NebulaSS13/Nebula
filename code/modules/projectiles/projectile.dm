@@ -165,7 +165,7 @@
 
 //called to launch a projectile from a gun
 /obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
-	return launch(target, target_zone, user, params, angle_override, forced_spread)
+	return launch(target, target_zone, user, params)
 
 /obj/item/projectile/proc/set_clickpoint(var/params)
 	var/list/mouse_control = params2list(params)

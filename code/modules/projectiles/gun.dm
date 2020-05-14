@@ -420,7 +420,7 @@
 			y_offset = rand(-1,1)
 			x_offset = rand(-1,1)
 
-	var/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
+	var/launched = !P.launch_from_gun(target, target_zone, user, params)
 
 	if(launched)
 		play_fire_sound(user,P)
