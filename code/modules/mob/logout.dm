@@ -4,9 +4,13 @@
 	log_access("Logout: [key_name(src)]")
 	if(my_client)
 		my_client.screen -= l_general
-		my_client.screen -= l_plane
+		my_client.screen -= lighting_plane_master
+		my_client.screen -= mundane_plane_masters
+
 	QDEL_NULL(l_general)
-	QDEL_NULL(l_plane)
+	QDEL_NULL(lighting_plane_master)
+	QDEL_NULL_LIST(mundane_plane_masters)
+
 	hide_client_images()
 	..()
 

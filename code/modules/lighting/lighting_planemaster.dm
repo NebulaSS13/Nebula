@@ -1,7 +1,6 @@
-/obj/lighting_plane
-	screen_loc = "LEFT+1,BOTTOM+1"
+/obj/screen/plane_master/light
 	plane = LIGHTING_PLANE
-
+	default_plane = LIGHTING_PLANE
 	blend_mode = BLEND_MULTIPLY
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 	// use 20% ambient lighting; be sure to add full alpha
@@ -40,9 +39,9 @@
 	color = new_colour
 
 /mob
-	var/obj/lighting_plane/l_plane
+	// Plane master and backdrop for lighting.
+	var/obj/screen/plane_master/light/lighting_plane_master
 	var/obj/lighting_general/l_general
-
 
 /mob/proc/change_light_colour(var/new_colour)
 	if(l_general)

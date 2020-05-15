@@ -44,6 +44,7 @@
 	gun_setting_icon = null
 	ability_master = null
 	zone_sel = null
+	mundane_plane_masters = null
 
 /mob/Initialize()
 	. = ..()
@@ -53,6 +54,9 @@
 	if(ispath(move_intent))
 		move_intent = decls_repository.get_decl(move_intent)
 	START_PROCESSING(SSmobs, src)
+
+/mob/verb/fix_planes()
+	client?.screen |= mundane_plane_masters
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	if(!client)	return
@@ -1058,3 +1062,6 @@
 
 /mob/get_mass()
 	return mob_size
+
+/mob/proc/update_sight()
+	return

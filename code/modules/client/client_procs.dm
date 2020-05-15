@@ -591,3 +591,17 @@ client/verb/character_setup()
 			break
 	winset(src, "menu.icon[set_initial_window_size]", "is-checked=true")
 	SetWindowIconSize(set_initial_window_size)
+
+/client
+	var/mundane_planes_hidden = FALSE
+
+/client/proc/toggle_default_planes()
+	set name = "Toggle Default Planes"
+	set category = "Debug"
+
+	mundane_planes_hidden = !mundane_planes_hidden
+	mob.lighting_plane_master?.hide(mundane_planes_hidden)
+	mob.l_general.alpha = mundane_planes_hidden ? 0 : initial(mob.l_general.alpha)
+	for(var/obj/screen/plane_master/pmaster in mob.mundane_plane_masters)
+		pmaster.hide(mundane_planes_hidden)
+	to_chat(mob, SPAN_NOTICE("You are [mundane_planes_hidden ? "no longer" : "now"] viewing mundane plane masters (space, objs, lighting, z-mimic, etc)."))

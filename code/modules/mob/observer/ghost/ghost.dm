@@ -27,7 +27,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/admin_ghosted = 0
 	var/anonsay = 0
 	var/ghostvision = 1 //is the ghost able to see things humans can't?
-	var/seedarkness = 1
 
 	var/obj/item/multitool/ghost_multitool
 	var/list/hud_images // A list of hud images
@@ -482,18 +481,21 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Toggles your ability to see things only ghosts can see, like other ghosts"
 	set category = "Ghost"
 	ghostvision = !(ghostvision)
-	updateghostsight()
+	update_sight()
 	to_chat(src, "You [(ghostvision?"now":"no longer")] have ghost vision.")
+
+/mob/observer/ghost
+	var/darkness_hidden = FALSE
 
 /mob/observer/ghost/verb/toggle_darkness()
 	set name = "Toggle Darkness"
 	set category = "Ghost"
-	seedarkness = !(seedarkness)
-	updateghostsight()
-	to_chat(src, "You [(seedarkness?"now":"no longer")] see darkness.")
+	darkness_hidden = !darkness_hidden
+	update_sight()
+	to_chat(src, "You [!darkness_hidden ? "now" : "no longer"] see darkness.")
 
-/mob/observer/ghost/proc/updateghostsight()
-	if (!seedarkness)
+/mob/observer/ghost/update_sight()
+	if(darkness_hidden)
 		set_see_invisible(SEE_INVISIBLE_NOLIGHTING)
 	else
 		set_see_invisible(ghostvision ? SEE_INVISIBLE_OBSERVER : SEE_INVISIBLE_LIVING)
@@ -504,11 +506,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	client.images -= ghost_sightless_images
 	client.images -= ghost_darkness_images
-	if(!seedarkness)
+	if(darkness_hidden)
 		client.images |= ghost_sightless_images
 		if(ghostvision)
 			client.images |= ghost_darkness_images
-	else if(seedarkness && !ghostvision)
+	else if(!darkness_hidden && !ghostvision)
 		client.images |= ghost_sightless_images
 	client.images -= ghost_image //remove ourself
 

@@ -59,7 +59,6 @@ What is the naming convention for planes or layers?
 
 	FLOAT_PLANE = -32767
 */
-
 #define CLICKCATCHER_PLANE -100
 
 #define SPACE_PLANE               -99
@@ -72,10 +71,8 @@ What is the naming convention for planes or layers?
 	#define DUST_LAYER                   2
 
 // Openspace uses planes -80 through -70.
-
-#define OVER_OPENSPACE_PLANE        -3
-
-#define DEFAULT_PLANE                   0
+#define DEFAULT_PLANE                0
+	#define DEFAULT_LAYER               0
 	#define PLATING_LAYER               1
 	//ABOVE PLATING
 	#define HOLOMAP_LAYER               1.01
@@ -215,22 +212,24 @@ What is the naming convention for planes or layers?
 /*
   PLANE MASTERS
 */
-
 /obj/screen/plane_master
-	appearance_flags = PLANE_MASTER
-	screen_loc = "CENTER,CENTER"
-	globalscreen = 1
+	screen_loc = "LEFT+1,BOTTOM+1"
+	appearance_flags =  PLANE_MASTER
+	var/default_layer = DEFAULT_LAYER
+	var/default_plane = DEFAULT_PLANE
 
-/obj/screen/plane_master/ghost_master
-	plane = OBSERVER_PLANE
+/obj/screen/plane_master/Initialize()
+	. = ..()
+	name = ""
+	verbs.Cut()
+	reset_plane_and_layer()
 
-/obj/screen/plane_master/ghost_dummy
-	// this avoids a bug which means plane masters which have nothing to control get angry and mess with the other plane masters out of spite
-	alpha = 0
-	appearance_flags = 0
-	plane = OBSERVER_PLANE
+/obj/screen/plane_master/hud_layerise()
+	reset_plane_and_layer()
 
-GLOBAL_LIST_INIT(ghost_master, list(
-	new /obj/screen/plane_master/ghost_master(),
-	new /obj/screen/plane_master/ghost_dummy()
-))
+/obj/screen/plane_master/reset_plane_and_layer()
+	layer = default_layer
+	plane = default_plane
+
+/obj/screen/plane_master/hide(var/hide)
+	alpha = hide ? 0 : initial(alpha)

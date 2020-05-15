@@ -56,6 +56,39 @@
 /mob
 	var/client/my_client // Need to keep track of this ourselves, since by the time Logout() is called the client has already been nulled
 
+// A list of planes that make up the "real world".
+// Space and co are not included because they break.
+// Plane masters are really finnicky!
+var/list/mundane_environment_planes = list(
+	DEFAULT_PLANE,
+	EFFECTS_ABOVE_LIGHTING_PLANE,
+	FULLSCREEN_PLANE
+)
+
+/mob/proc/rebuild_plane_masters()
+
+	lighting_plane_master = lighting_plane_master || new
+	l_general = l_general || new
+
+	if(!length(mundane_plane_masters) < length(global.mundane_environment_planes) + OPENTURF_MAX_DEPTH + 1)
+		mundane_plane_masters = list()
+
+		for(var/i = 0 to OPENTURF_MAX_DEPTH)
+			var/obj/screen/plane_master/zmimic_master = new
+			zmimic_master.default_plane = OPENTURF_MAX_PLANE - i
+			zmimic_master.plane = zmimic_master.default_plane
+			mundane_plane_masters += zmimic_master
+
+		for(var/otherplane in global.mundane_environment_planes)
+			var/obj/screen/plane_master/pmaster = new
+			pmaster.default_plane = otherplane
+			pmaster.plane = pmaster.default_plane
+			mundane_plane_masters += pmaster
+
+	client.screen += lighting_plane_master
+	client.screen += l_general
+	client.screen += mundane_plane_masters
+
 /mob/Login()
 
 	GLOB.player_list |= src
@@ -84,11 +117,7 @@
 	if(eyeobj)
 		eyeobj.possess(src)
 
-	l_plane = new()
-	l_general = new()
-	client.screen += l_plane
-	client.screen += l_general
-
+	rebuild_plane_masters()
 	refresh_client_images()
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()

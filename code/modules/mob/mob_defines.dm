@@ -186,3 +186,6 @@
 	var/list/additional_vision_handlers = list() //Basically a list of atoms from which additional vision data is retrieved
 
 	var/list/progressbars = null //for stacking do_after bars
+
+	// Plane masters for handling the default plane and multiz.
+	var/list/mundane_plane_masters
