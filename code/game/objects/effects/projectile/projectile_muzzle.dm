@@ -44,3 +44,18 @@
 
 /obj/effect/projectile/muzzle/bullet
 	icon_state = "muzzle_bullet"
+
+/obj/effect/projectile/muzzle/particle
+	icon_state = "muzzle_particle"
+
+/obj/effect/projectile/muzzle/darkmatter
+	icon_state = "muzzle_darkmatter"
+
+/obj/effect/projectile/muzzle/darkmattertaser
+	icon_state = "muzzle_darkt"
+
+/obj/effect/projectile/muzzle/incen
+	icon_state = "muzzle_incen"
+
+/obj/effect/projectile/muzzle/pd
+	icon_state = "muzzle_pd"

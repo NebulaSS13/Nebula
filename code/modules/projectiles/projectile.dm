@@ -66,11 +66,11 @@
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 //Movement parameters
-	var/speed = 0.8			//Amount of deciseconds it takes for projectile to travel
+	var/speed = 0.4			//Amount of deciseconds it takes for projectile to travel
 	var/pixel_speed = 33	//pixels per move - DO NOT FUCK WITH THIS UNLESS YOU ABSOLUTELY KNOW WHAT YOU ARE DOING OR UNEXPECTED THINGS /WILL/ HAPPEN!
 	var/Angle = 0
 	var/original_angle = 0		//Angle at firing
-	var/nondirectional_sprite = FALSE //Set TRUE to prevent projectiles from having their sprites rotated based on firing angle
+	var/nondirectional_sprite = TRUE //Set TRUE to prevent projectiles from having their sprites rotated based on firing angle
 	var/forcedodge = FALSE		//to pass through everything
 	var/ignore_source_check = FALSE
 

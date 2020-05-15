@@ -84,3 +84,25 @@
 /obj/effect/projectile/tracer/bfg
 	icon_state = "bfg"
 	light_color = LIGHT_COLOR_GREEN
+
+/obj/effect/projectile/tracer/particle
+	name = "particle beam"
+	icon_state = "particle"
+	light_color = LIGHT_COLOR_VIOLET
+
+/obj/effect/projectile/tracer/darkmatter
+	name = "darkmatter beam"
+	icon_state = "darkmatter"
+	light_color = LIGHT_COLOR_VIOLET
+
+/obj/effect/projectile/tracer/darkmattertaser
+	name = "darktaser beam"
+	icon_state = "darkt"
+	light_color = LIGHT_COLOR_VIOLET
+
+/obj/effect/projectile/tracer/incen
+	icon_state = "incen"
+	light_color = LIGHT_COLOR_RED
+
+/obj/effect/projectile/tracer/pd
+	icon_state = "pd"

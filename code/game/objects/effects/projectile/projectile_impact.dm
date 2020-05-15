@@ -50,3 +50,18 @@
 
 /obj/effect/projectile/impact/emitter
 	icon_state = "impact_emitter"
+
+/obj/effect/projectile/impact/particle
+	icon_state = "impact_particle"
+
+/obj/effect/projectile/impact/darkmatter
+	icon_state = "impact_darkmatter"
+
+/obj/effect/projectile/impact/darkmattertaser
+	icon_state = "impact_darkt"
+
+/obj/effect/projectile/impact/incen
+	icon_state = "impact_incen"
+
+/obj/effect/projectile/impact/pd
+	icon_state = "impact_pd"
