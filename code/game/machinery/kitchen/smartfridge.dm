@@ -78,7 +78,7 @@
 	name = "\improper Refrigerated Medicine Storage"
 	desc = "A refrigerated storage unit for storing medicine and chemicals."
 	icon_contents = "chem"
-	initial_access = list(access_medical,access_chemistry)
+	initial_access = list(list(access_medical, access_chemistry))
 
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O)
 	if(istype(O,/obj/item/chems/glass/))

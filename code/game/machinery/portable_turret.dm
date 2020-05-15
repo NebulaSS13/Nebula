@@ -59,7 +59,7 @@
 	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
-	initial_access = list(access_security, access_bridge)
+	initial_access = list(list(access_security, access_bridge))
 
 /obj/machinery/porta_turret/crescent
 	enabled = 0
