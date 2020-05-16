@@ -146,9 +146,7 @@
 /area/medical/surgery)
 "aw" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/fabricator/industrial{
-	initial_id_tag = "research"
-	},
+/obj/machinery/fabricator/industrial,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "ax" = (
@@ -292,9 +290,7 @@
 "aQ" = (
 /obj/machinery/light/spot,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/fabricator/protolathe{
-	initial_id_tag = "research"
-	},
+/obj/machinery/fabricator/protolathe,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aR" = (
@@ -334,23 +330,17 @@
 /area/medical/surgery)
 "aV" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/fabricator/robotics{
-	initial_id_tag = "research"
-	},
+/obj/machinery/fabricator/robotics,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aW" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/fabricator/imprinter{
-	initial_id_tag = "research"
-	},
+/obj/machinery/fabricator/imprinter,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aX" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/destructive_analyzer{
-	initial_id_tag = "research"
-	},
+/obj/machinery/destructive_analyzer,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aZ" = (
@@ -363,16 +353,13 @@
 "ba" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/design_database{
-	dir = 1;
-	initial_id_tag = "research"
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "qL" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/computer/design_console{
-	initial_id_tag = "research"
-	},
+/obj/machinery/computer/design_console,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 

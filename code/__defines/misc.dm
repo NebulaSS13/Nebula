@@ -265,3 +265,6 @@
 
 #define WORTH_TO_SUPPLY_POINTS_CONSTANT       0.0075
 #define WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT 5
+
+#define  ICON_STATE_WORLD  "world"
+#define  ICON_STATE_INV  "inventory"

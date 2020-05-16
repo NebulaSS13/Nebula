@@ -1,4 +1,4 @@
-#if !defined(using_map_DATUM)
+#if !defined(USING_MAP_DATUM)
 
 	#define DISABLE_DEBUG_CRASH
 
@@ -18,7 +18,7 @@
 	#include "outreach_3_ground.dmm"
 	#include "outreach_4_sky.dmm"
 
-	#define using_map_DATUM /datum/map/persistence
+	#define USING_MAP_DATUM /datum/map/persistence
 #elif !defined(MAP_OVERRIDE)
 
 	#warn A map has already been included, ignoring Outreach

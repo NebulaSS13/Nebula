@@ -41,7 +41,7 @@
 	var/list/resulting_grants = list()
 	for(var/grant_data in grants)
 		var/datum/computer_file/data/grant_record/grant = access_controller.get_grant(grant_data)
-		if(!grant)
+		if(!istype(grant))
 			continue // couldn't find.
 		resulting_grants |= uppertext("[D.network_id].[grant_data]")
 

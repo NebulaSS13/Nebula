@@ -142,7 +142,6 @@
 		/obj/item/multitool,
 		/obj/item/magnetic_ammo,
 		/obj/item/ammo_magazine,
-		/obj/item/net_shell,
 		/obj/item/chems/glass/beaker/vial,
 		/obj/item/paper,
 		/obj/item/pen,
@@ -152,8 +151,3 @@
 		/obj/item/storage/pill_bottle
 	)
 
-/obj/item/clothing/accessory/storage/bandolier/safari/Initialize()
-	. = ..()
-
-	for(var/i = 0, i < slots, i++)
-		new /obj/item/net_shell(hold)

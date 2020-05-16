@@ -53,6 +53,9 @@
 
 	var/output_dir
 
+	var/initial_network_id
+	var/initial_network_key
+
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)
 	QDEL_NULL_LIST(queued_orders)
@@ -76,10 +79,7 @@
 	sound_id = "[fabricator_sound]"
 
 	// Get any local network we need to be part of.
-	set_extension(src, /datum/extension/local_network_member)
-	if(initial_id_tag)
-		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-		lanm.set_tag(null, initial_id_tag)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
 
 	// Initialize material storage lists.
 	stored_material = list()
@@ -105,14 +105,13 @@
 		design_cache |= installed_designs
 	if(!known_tech)
 		known_tech = list()
-		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-		if(lanm)
-			var/datum/local_network/lan = lanm.get_local_network()
-			if(lan)
-				for(var/obj/machinery/design_database/db in lan.network_entities[/obj/machinery/design_database])
-					for(var/tech in db.tech_levels)
-						if(db.tech_levels[tech] > known_tech[tech])
-							known_tech[tech] = db.tech_levels[tech]
+		var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
+		var/datum/computer_network/network = device.get_network()
+		if(network)
+			for(var/obj/machinery/design_database/db in network.get_devices_by_type(/obj/machinery/design_database))
+				for(var/tech in db.tech_levels)
+					if(db.tech_levels[tech] > known_tech[tech])
+						known_tech[tech] = db.tech_levels[tech]
 	if(length(known_tech))
 		var/list/unlocked_tech = SSfabrication.get_unlocked_recipes(fabricator_class, known_tech)
 		if(length(unlocked_tech))

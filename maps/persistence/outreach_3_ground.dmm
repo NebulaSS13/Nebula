@@ -115,9 +115,8 @@
 /turf/simulated/floor/wood/bamboo,
 /area/outreach/outpost)
 "az" = (
-/obj/machinery/door/airlock/glass,
-/turf/simulated/floor/plating,
-/area/outreach/outpost/hallway)
+/turf/simulated/floor/exoplanet/barren,
+/area/outreach/outpost)
 "aA" = (
 /obj/machinery/door/airlock/glass,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1851,7 +1850,11 @@
 /turf/simulated/floor/tiled,
 /area/outreach/outpost/hallway)
 "eY" = (
-/turf/simulated/floor/plating,
+/obj/structure/stairs{
+	icon_state = "";
+	dir = 1
+	},
+/turf/simulated/floor/wood/mahogany,
 /area/outreach/outpost/barracks/lower)
 "eZ" = (
 /obj/machinery/power/tracker,
@@ -1939,13 +1942,16 @@
 /turf/simulated/floor/grass,
 /area/outreach/outpost/hallway)
 "fj" = (
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 1
+/obj/structure/cable/green{
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/outreach/outpost)
+/area/outreach/outpost/hallway)
 "fk" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	icon_state = "map_scrubber_on";
@@ -2164,12 +2170,18 @@
 /turf/simulated/floor/tiled,
 /area/outreach/outpost)
 "fN" = (
-/obj/machinery/door/airlock/glass/civilian,
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 1
+/obj/structure/cable/green{
+	icon_state = "4-8"
 	},
+/obj/effect/catwalk_plated,
+/obj/structure/cable/green{
+	icon_state = "1-4"
+	},
+/obj/structure/cable/green{
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
 "fO" = (
@@ -2196,13 +2208,17 @@
 /turf/simulated/floor/tiled,
 /area/outreach/outpost/hallway)
 "fR" = (
-/obj/effect/floor_decal/corner/green/half{
-	icon_state = "bordercolorhalf";
-	dir = 1
+/obj/structure/cable/green{
+	icon_state = "2-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
+/obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
 "fS" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2260,9 +2276,13 @@
 /turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
 "fY" = (
+/obj/structure/cable/green{
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
 "fZ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -2273,18 +2293,9 @@
 /turf/simulated/floor/tiled,
 /area/outreach/outpost)
 "ga" = (
-/obj/machinery/door/airlock/glass,
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
-/turf/simulated/floor/plating,
-/area/outreach/outpost/hallway)
-"gb" = (
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
+/obj/structure/stairs,
+/turf/simulated/floor/wood/mahogany,
+/area/outreach/outpost/barracks/lower)
 "gc" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "stripe";
@@ -2347,18 +2358,6 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
-"gi" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	icon_state = "map-supply";
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/structure/cable/green{
-	icon_state = "4-8"
-	},
-/obj/effect/catwalk_plated,
-/turf/simulated/floor/plating,
-/area/outreach/outpost/hallway)
 "gj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2388,28 +2387,6 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
-"gl" = (
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 5
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
-"gm" = (
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 9
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 9
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
 "gn" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	icon_state = "map-scrubbers";
@@ -2550,62 +2527,10 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
-"gA" = (
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 6
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
-"gB" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	icon_state = "map_scrubber_on";
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
 "gC" = (
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/outreach,
 /turf/simulated/floor/exoplanet/barren,
 /area/exoplanet/chlorine)
-"gD" = (
-/obj/machinery/door/airlock/glass,
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost/hallway)
-"gE" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{
-	icon_state = "map-scrubbers";
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/visible/supply{
-	icon_state = "map-supply";
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
-"gF" = (
-/obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 9
-	},
-/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 5
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
 "gG" = (
 /obj/structure/table/rack,
 /obj/item/tank/emergency/oxygen,
@@ -2825,21 +2750,6 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
-"gZ" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	icon_state = "map-scrubbers";
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	icon_state = "map-supply";
-	dir = 4
-	},
-/obj/structure/cable/green{
-	icon_state = "2-8"
-	},
-/obj/effect/catwalk_plated,
-/turf/simulated/floor/plating,
-/area/outreach/outpost/hallway)
 "ha" = (
 /obj/effect/floor_decal/corner/orange/half,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3017,15 +2927,6 @@
 /obj/effect/floor_decal/corner/orange/half,
 /turf/simulated/floor/tiled,
 /area/outreach/outpost/hallway)
-"hA" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
 "hB" = (
 /obj/effect/floor_decal/corner/mauve,
 /turf/simulated/floor/tiled,
@@ -3132,15 +3033,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/outreach/outpost/solar_array)
-"hN" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost)
 "hO" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	icon_state = "map-scrubbers";
@@ -3566,34 +3458,6 @@
 	},
 /turf/simulated/floor/bluegrid,
 /area/outreach/outpost/it)
-"iF" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	icon_state = "map-supply";
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	icon_state = "map-scrubbers";
-	dir = 8
-	},
-/obj/structure/cable/green{
-	icon_state = "1-2"
-	},
-/obj/effect/catwalk_plated,
-/turf/simulated/floor/plating,
-/area/outreach/outpost/hallway)
-"iG" = (
-/obj/effect/floor_decal/corner/green/half{
-	icon_state = "bordercolorhalf";
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/outreach/outpost/hallway)
 "iH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -3910,13 +3774,6 @@
 /obj/machinery/cooker/grill,
 /turf/simulated/floor/wood/bamboo,
 /area/outreach/outpost)
-"jq" = (
-/obj/structure/stairs{
-	icon_state = "";
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost/barracks/lower)
 "jr" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/blue,
@@ -4288,10 +4145,6 @@
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/outreach/outpost/barracks/lower)
-"kl" = (
-/obj/structure/stairs,
-/turf/simulated/floor/plating,
-/area/outreach/outpost/barracks/lower)
 "km" = (
 /obj/machinery/light{
 	icon_state = "tube_map";
@@ -4328,21 +4181,6 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
-/area/outreach/outpost/hallway)
-"kq" = (
-/obj/structure/cable/green{
-	icon_state = "4-8"
-	},
-/obj/effect/catwalk_plated,
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/structure/cable/green{
-	icon_state = "1-4"
-	},
-/obj/structure/cable/green{
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/plating,
 /area/outreach/outpost/hallway)
 "kr" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -17535,14 +17373,14 @@ ge
 gg
 hy
 ap
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ak
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -17737,14 +17575,14 @@ ge
 gg
 hy
 ap
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ak
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -17936,17 +17774,17 @@ ai
 cB
 ap
 hv
-gi
-ha
-fK
-eN
-eN
-hA
-ao
-ao
-ao
-ao
-ak
+fj
+hy
+ap
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -18141,14 +17979,14 @@ ge
 gg
 hy
 ap
-ao
-ao
-eB
-ao
-ao
-ao
-ao
-ak
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -18343,14 +18181,14 @@ ge
 gg
 hy
 ap
-ao
-cT
-eC
-go
-ao
-ao
-ao
-ak
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -18545,14 +18383,14 @@ aX
 gj
 cR
 ap
-ao
-ao
-eB
-ao
-ao
-ao
-ao
-ak
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -18747,14 +18585,14 @@ ge
 gg
 hy
 ap
-ao
-ao
-eB
-ao
-ao
-ao
-ao
-ak
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -18949,14 +18787,14 @@ ge
 gg
 hy
 ap
-ao
-ao
-eB
-ao
-ao
-ao
-ao
-ak
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -19151,14 +18989,14 @@ ge
 gg
 hy
 ap
-ao
-cT
-hN
-go
-ao
-ao
-ao
-ak
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -19353,10 +19191,10 @@ hw
 gg
 hy
 ap
-ao
-ao
-ao
-ao
+az
+az
+az
+az
 ak
 ak
 ak
@@ -19555,10 +19393,10 @@ ge
 gg
 hy
 ap
-ao
-ao
-ao
-ao
+az
+az
+az
+az
 ak
 hj
 il
@@ -19757,10 +19595,10 @@ fP
 gk
 hy
 ap
-ao
-ao
-ao
-ao
+az
+az
+az
+az
 ak
 ig
 io
@@ -19958,11 +19796,11 @@ ap
 ge
 gg
 hy
+ap
 az
-ao
-ao
-ao
-ao
+az
+az
+az
 ak
 ih
 ij
@@ -20161,10 +19999,10 @@ ge
 gg
 hy
 ap
-ao
-ao
-ao
-ao
+az
+az
+az
+az
 ak
 ii
 ik
@@ -25607,9 +25445,9 @@ aJ
 bl
 aJ
 ak
-ao
-ao
-ao
+az
+az
+az
 ap
 cF
 gg
@@ -25809,9 +25647,9 @@ aJ
 aN
 aJ
 ak
-ao
-ao
-ao
+az
+az
+az
 ap
 cG
 gg
@@ -26011,9 +25849,9 @@ cn
 da
 bX
 ak
-ao
-ao
-ao
+az
+az
+az
 ap
 aX
 gp
@@ -26213,9 +26051,9 @@ aJ
 bk
 ax
 ak
-ao
-ao
-ao
+az
+az
+az
 ap
 cF
 gg
@@ -26415,9 +26253,9 @@ aJ
 aJ
 ax
 ak
-ao
-fS
-ao
+az
+az
+az
 ap
 cF
 gg
@@ -26617,12 +26455,12 @@ au
 ak
 ak
 ak
-ao
-gA
-fj
-fN
+az
+az
+az
+ap
+cF
 fR
-gZ
 cY
 cY
 fc
@@ -26639,7 +26477,7 @@ cY
 cY
 cY
 cY
-iF
+fY
 cY
 cY
 iQ
@@ -26818,10 +26656,10 @@ aC
 aC
 aC
 aC
-ak
-ao
-gB
-ao
+az
+az
+az
+az
 ap
 fo
 fp
@@ -26841,7 +26679,7 @@ fp
 fp
 fp
 fp
-iG
+fp
 fy
 fp
 fp
@@ -27020,10 +26858,10 @@ aC
 aC
 aC
 aC
-ak
-ao
-ao
-ao
+az
+az
+az
+az
 ak
 ak
 ak
@@ -27034,19 +26872,19 @@ cF
 hY
 fq
 ap
-at
-at
-at
-at
 ap
 ap
-at
-at
-at
-gD
-at
-at
-at
+ap
+ap
+ap
+ap
+ap
+ap
+ap
+ap
+ap
+ap
+ap
 ap
 ap
 do
@@ -27222,34 +27060,34 @@ aC
 aC
 aC
 aC
-ak
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ao
+az
+az
+az
+az
+az
+az
+az
+az
+az
 ap
 cF
 hY
 fq
 ap
-ao
-ao
-ao
-ao
-ak
-ao
-ao
-ao
-ao
-fU
-ao
-ao
-ao
-ao
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
 cV
 dp
 dy
@@ -27424,34 +27262,34 @@ aC
 aC
 aC
 aC
-ak
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ao
+az
+az
+az
+az
+az
+az
+az
+az
+az
 ap
 as
 gx
 as
 ap
-ao
-ao
-ao
-ao
-ak
-ao
-ao
-ao
-ao
-fU
-ao
-ao
-ao
-ao
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
 cV
 do
 dy
@@ -27627,33 +27465,33 @@ ey
 ey
 ey
 ak
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ao
+az
+az
+az
+az
+az
+az
+az
+az
 ap
 aq
 gg
 cE
 ap
-ao
-ao
-ao
-ao
-ak
-ao
-ao
-ao
-ao
-fU
-ao
-ao
-ao
-ao
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
 cV
 dq
 dz
@@ -27829,33 +27667,33 @@ ey
 hZ
 ja
 ak
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ao
+az
+az
+az
+az
+az
+az
+az
+az
 ap
 aq
 gg
 aq
-at
-ao
-ao
-ao
-ao
-ak
-ao
-ao
-fS
-ao
-fU
-ao
-ao
-fS
-ao
+ap
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
 cV
 cV
 dA
@@ -28031,34 +27869,34 @@ ey
 jE
 jG
 ak
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ao
+az
+az
+az
+az
+az
+az
+az
+az
 ap
 aq
 gg
 aq
-at
-cT
-gl
-go
-ao
-ak
-ao
-ao
-gA
-gb
-gE
-gb
-gb
-gF
-ao
-ak
+ap
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
 ao
 cO
 ao
@@ -28245,22 +28083,22 @@ ap
 aq
 gg
 aq
-at
-ao
-fU
-ao
-ao
-ak
-ao
-ao
-gB
-ao
-ao
-ao
-ao
-gB
-ao
-ak
+ap
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -28445,24 +28283,24 @@ jL
 jL
 kn
 kp
-kq
-fY
-ga
-gb
-gm
-ao
-ao
-ak
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ao
-ak
+fN
+aq
+ap
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
+az
 ab
 ab
 ab
@@ -28662,9 +28500,9 @@ aM
 aM
 aM
 aM
-ao
-ao
-ak
+az
+az
+az
 ab
 ab
 ab
@@ -28837,9 +28675,9 @@ aC
 aC
 aM
 aM
-aM
+jN
 eY
-jq
+jN
 jN
 jO
 jZ
@@ -28859,14 +28697,14 @@ kg
 kw
 jO
 jN
-eY
-kl
+jN
+jN
+ga
 aM
 aM
-aM
-ao
-ao
-ak
+az
+az
+az
 ab
 ab
 ab
@@ -29039,9 +28877,9 @@ ab
 ac
 aM
 aM
-aM
+jN
 eY
-jq
+jN
 jN
 jP
 ka
@@ -29060,15 +28898,15 @@ ku
 kv
 ka
 jN
-kA
-eY
-kl
+jN
+jN
+jN
+ga
 aM
 aM
-aM
-ak
-ak
-ak
+az
+az
+az
 ab
 ab
 ab

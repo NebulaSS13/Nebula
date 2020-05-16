@@ -26,7 +26,7 @@
 		"blue folder" =   /obj/item/folder/blue,
 		"grey folder" =   /obj/item/folder,
 		"red folder" =    /obj/item/folder/red,
-		"white folder" =  /obj/item/folder/white,
+		"cyan folder" =  /obj/item/folder/cyan,
 		"yellow folder" = /obj/item/folder/yellow
 	)
 
