@@ -1,5 +1,6 @@
 var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
+#define KM_OVERMAP_RATE		100
 #define SHIP_MOVE_RESOLUTION 0.00001
 #define MOVING(speed) abs(speed) >= min_speed
 #define SANITIZE_SPEED(speed) SIGN(speed) * Clamp(abs(speed), 0, max_speed)
@@ -8,7 +9,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	if(!MOVING(speed_var + v_diff)) \
 		{speed_var = 0};\
 	else \
-		{speed_var = SANITIZE_SPEED((speed_var + v_diff)/(1 + speed_var*v_diff/(max_speed ** 2)))}
+		{speed_var = round(SANITIZE_SPEED((speed_var + v_diff) / (1 + speed_var * v_diff / (max_speed ** 2))), SHIP_MOVE_RESOLUTION)}
 // Uses Lorentzian dynamics to avoid going too fast.
 
 /obj/effect/overmap/visitable/ship
@@ -19,7 +20,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/moving_state = "ship_moving"
 	var/list/consoles
 
-	var/vessel_mass = 10000             // tonnes, arbitrary number, affects acceleration provided by engines
+	var/vessel_mass = 10000             // metric tonnes, very rough number, affects acceleration provided by engines
 	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
 	var/max_speed = 1/(1 SECOND)        // "speed of light" for the ship, in turfs/tick.
 	var/min_speed = 1/(2 MINUTES)       // Below this, we round speed to 0 to avoid math errors.
@@ -30,9 +31,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/burn_delay = 1 SECOND           // how often ship can do burns
 	var/fore_dir = NORTH                // what dir ship flies towards for purpose of moving stars effect procs
 
-	var/list/engines = list()
-	var/engines_state = 0 //global on/off toggle for all engines
-	var/thrust_limit = 1  //global thrust limit for all engines, 0..1
+	var/list/engines = list()			// /datum/extension/ship_engine list of all engines.
 	var/halted = 0        //admin halt or other stop.
 	var/skill_needed = SKILL_ADEPT  //piloting skill needed to steer it without going in random dir
 	var/operator_skill
@@ -40,7 +39,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/needs_dampers = FALSE
 	var/list/inertial_dampers = list()
 	var/damping_strength = null
-
+	
 /obj/effect/overmap/visitable/ship/Initialize()
 	. = ..()
 	glide_size = world.icon_size
@@ -59,9 +58,29 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		consoles = null
 	. = ..()
 
+/obj/effect/overmap/visitable/ship/proc/set_thrust_limit(var/thrust_limit)
+	for(var/datum/extension/ship_engine/E in engines)
+		E.thrust_limit = Clamp(thrust_limit, 0, 1)
+
+/obj/effect/overmap/visitable/ship/proc/set_engine_power(var/engine_power)
+	for(var/datum/extension/ship_engine/E in engines)
+		if(engine_power != E.is_on())
+			E.toggle()
+
+/obj/effect/overmap/visitable/ship/proc/get_engine_power()
+	for(var/datum/extension/ship_engine/E in engines)
+		if(E.is_on())
+			return TRUE
+
+/obj/effect/overmap/visitable/ship/proc/get_thrust_limit()
+	for(var/datum/extension/ship_engine/E in engines)
+		if(E.thrust_limit > 0 && E.thrust_limit < .)
+			. = E.thrust_limit
+
+
 /obj/effect/overmap/visitable/ship/relaymove(mob/user, direction, accel_limit)
-	accelerate(direction, accel_limit)
 	operator_skill = user.get_skill_value(SKILL_PILOT)
+	accelerate(direction, accel_limit)
 
 /obj/effect/overmap/visitable/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
@@ -69,20 +88,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/get_scan_data(mob/user)
 	. = ..()
 	if(!is_still())
-		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * 1000]"
-
-//Projected acceleration based on information from engines
-/obj/effect/overmap/visitable/ship/proc/get_acceleration()
-	return round(get_total_thrust()/get_vessel_mass(), SHIP_MOVE_RESOLUTION)
-
-//Does actual burn and returns the resulting acceleration
-/obj/effect/overmap/visitable/ship/proc/get_burn_acceleration()
-	return round(burn() / get_vessel_mass(), SHIP_MOVE_RESOLUTION)
-
-/obj/effect/overmap/visitable/ship/proc/get_vessel_mass()
-	. = vessel_mass
-	for(var/obj/effect/overmap/visitable/ship/ship in src)
-		. += ship.get_vessel_mass()
+		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * KM_OVERMAP_RATE]"
 
 /obj/effect/overmap/visitable/ship/proc/get_speed()
 	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION)
@@ -121,7 +127,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	update_icon()
 
 /obj/effect/overmap/visitable/ship/proc/get_brake_path()
-	if(!get_acceleration())
+	if(!get_delta_v())
 		return INFINITY
 	if(is_still())
 		return 0
@@ -129,22 +135,29 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		return 0
 	if(!get_speed())
 		return 0
-	var/num_burns = get_speed()/get_acceleration() + 2 //some padding in case acceleration drops form fuel usage
+	var/num_burns = get_speed() / get_delta_v() + 2 //some padding in case acceleration drops fromm fuel usage
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
-	return round(num_burns/burns_per_grid)
+	return round(num_burns / burns_per_grid)
 
 /obj/effect/overmap/visitable/ship/proc/decelerate()
 	if(((speed[1]) || (speed[2])) && can_burn())
 		if (speed[1])
-			adjust_speed(-SIGN(speed[1]) * min(get_burn_acceleration(),abs(speed[1])), 0)
+			var/partial_power = Clamp(speed[1] / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
+			var/delta_v = get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
+			adjust_speed(-SIGN(speed[1]) * min(delta_v, abs(speed[1])), 0)
 		if (speed[2])
-			adjust_speed(0, -SIGN(speed[2]) * min(get_burn_acceleration(),abs(speed[2])))
+			var/partial_power = Clamp(speed[2] / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
+			var/delta_v = get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
+			adjust_speed(0, -SIGN(speed[2]) * min(delta_v, abs(speed[2])))
 		last_burn = world.time
 
 /obj/effect/overmap/visitable/ship/proc/accelerate(direction, accel_limit)
+	var/actual_accel_limit = accel_limit / KM_OVERMAP_RATE
 	if(can_burn())
 		last_burn = world.time
-		var/acceleration = min(get_burn_acceleration(), accel_limit)
+		var/delta_v = get_delta_v() / KM_OVERMAP_RATE
+		var/partial_power = Clamp(actual_accel_limit / delta_v, 0, 1)
+		var/acceleration = min(get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, actual_accel_limit)
 		if(direction & EAST)
 			adjust_speed(acceleration, 0)
 		if(direction & WEST)
@@ -200,19 +213,15 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	..()
 
 /obj/effect/overmap/visitable/ship/proc/burn()
-	for(var/datum/ship_engine/E in engines)
+	for(var/datum/extension/ship_engine/E in engines)
 		. += E.burn()
-
-/obj/effect/overmap/visitable/ship/proc/get_total_thrust()
-	for(var/datum/ship_engine/E in engines)
-		. += E.get_thrust()
 
 /obj/effect/overmap/visitable/ship/proc/can_burn()
 	if(halted)
 		return 0
 	if (world.time < last_burn + burn_delay)
 		return 0
-	for(var/datum/ship_engine/E in engines)
+	for(var/datum/extension/ship_engine/E in engines)
 		. |= E.can_burn()
 
 //deciseconds to next step
@@ -264,12 +273,15 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	..()
 	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
 		S.attempt_hook_up(src)
-	for(var/datum/ship_engine/E in ship_engines)
+	for(var/datum/extension/ship_engine/E in ship_engines)
 		if(check_ownership(E.holder))
 			engines |= E
 	for(var/datum/ship_inertial_damper/I in global.ship_inertial_dampers)
 		if(check_ownership(I.holder))
 			inertial_dampers |= I
+	var/v_mass = recalculate_vessel_mass()
+	if(v_mass)
+		vessel_mass = v_mass
 
 /obj/effect/overmap/visitable/ship/proc/get_landed_info()
 	return "This ship cannot land."
