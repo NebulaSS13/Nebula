@@ -13,7 +13,7 @@
 
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
-	idle_power_usage = 21600 //6 Wh per tick for default 2 capacitor. Gives them a reason to turn it off, really to nerf backup battery
+	idle_power_usage = 11600
 
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()

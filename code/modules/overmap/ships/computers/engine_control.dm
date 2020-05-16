@@ -22,6 +22,7 @@
 		var/list/rdata[0]
 		rdata["eng_type"] = E.engine_type
 		rdata["eng_on"] = E.is_on()
+		rdata["booting"] = E.next_on && E.next_on > world.time
 		rdata["eng_thrust_limiter"] = round(E.thrust_limit * 100)
 		rdata["eng_status"] = E.get_status()
 		rdata["eng_reference"] = "\ref[E]"

@@ -9,7 +9,7 @@
 
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
-	idle_power_usage = 21600 //6 Wh per tick for default 2 capacitor. Gives them a reason to turn it off, really to nerf backup battery
+	idle_power_usage = 13600
 	var/initial_id_tag
 	var/obj/machinery/power/fusion_core/harvest_from
 
