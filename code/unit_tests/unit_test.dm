@@ -89,6 +89,9 @@ var/ascii_reset = "[ascii_esc]\[0m"
 	fail("No check results proc - [type]")
 	return 1
 
+/datum/unit_test/proc/conclude_test()
+	// Runs after the test has been fully run - Primarily intended for cleanup
+
 /datum/unit_test/proc/get_safe_turf()
 	if(!safe_landmark)
 		for(var/landmark in landmarks_list)
@@ -175,6 +178,7 @@ var/ascii_reset = "[ascii_esc]\[0m"
 	if(test.async)
 		while(!check_unit_test(test, end_unit_tests))
 			sleep(20)
+	test.conclude_test()
 	unit_test_final_message()
 
 /obj/effect/landmark/test/safe_turf
