@@ -14,6 +14,10 @@
 	else if(href_list["eject_mat"])
 		try_dump_material(href_list["eject_mat"])
 		. = TOPIC_REFRESH
+	else if(href_list["settings"])
+		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+		D.ui_interact(user)
+		. = TOPIC_REFRESH
 
 	if(href_list["color_select"])
 		var/choice

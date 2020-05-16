@@ -4240,5 +4240,44 @@
 		"vars":[
 			"stock_parts"
 		]
+	},
+	{
+		"path":"/obj/item/experiment",
+		"vars":[
+			"wired",
+			"welded",
+			"code_fragment",
+			"assembly_icon",
+			"components"
+		]
+	},
+	{
+		"path":"/datum/computer_file/data/blueprint",
+		"vars":[
+			"instability",
+			"efficiency",
+			"speed",
+			"compression",
+			"power_efficiency",
+			"recipe",
+			"complexity"
+		]
+	},
+	{
+		"path":"/datum/computer_file/program/research_manager",
+		"vars":[
+			"mode"
+		]
+	},
+	{
+		"path":"/datum/computer_file/data/experiment",
+		"vars":[
+			"id",
+			"multiplier",
+			"attribute",
+			"tech_levels",
+			"target_blueprint",
+			"in_progress"
+		]
 	}
 ]

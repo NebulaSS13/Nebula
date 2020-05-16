@@ -1,0 +1,61 @@
+<div class='item'>
+	<div class='itemLabel'>Storage Medium</div>
+	{{:helper.link(data.current_source, null, { "PRG_change_filesource" : 1 }, null)}}
+</div>
+{{if data.fileserver}}
+	<div class='item'>
+		<div class='itemLabel'>File Server</div>
+		{{:helper.link(data.fileserver, null, { "PRG_changefileserver" : 1 }, null)}}
+	</div>
+{{/if}}
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Back to menu', null, { "PRG_closefile" : 1 })}}
+{{else}}
+	<center><h3>Destructive Analyzers</h3></center>
+	<div style="float:left;width:75%;">
+	{{for data.analyzers}}
+		<fieldset style="min-height:180px;background-color: #202020;">
+			<legend style="text-align:center">Destructive Analyzer ({{:value.network_tag}})</legend> 
+			{{if value.loaded_with}}
+				<div class='item'>
+					<div class="itemLabelWider">
+						Loaded with:
+					</div>
+					<div style="float:right">
+						{{:value.loaded_with}}
+					</div>
+				</div>
+				<div class='item'>
+					<div class="itemLabelWider">
+						Tech levels:
+					</div>
+					<div style="float:right">
+						{{:value.tech_levels}}
+					</div>
+				</div>
+				<div class='item'>
+					<div class="itemLabelWider">
+						Experiment
+					</div>
+					<div style="float:right">
+						{{:value.experiment}}
+					</div>
+				</div>
+				<div class='item'>
+					<div class="itemLabelWider">
+						Actions:
+					</div>
+					<div style="float:right">
+						{{:helper.link('Analyze', null, { "PRG_analyze" : value.network_tag })}}
+						{{:helper.link('Eject', null, { "PRG_eject" : value.network_tag })}}
+					</div>
+				</div>
+			{{else}}
+				Empty
+			{{/if}}
+		</fieldset>
+	{{/for}}
+{{/if}}

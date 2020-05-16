@@ -1,0 +1,91 @@
+<div class='item'>
+	<div class='itemLabel'>Storage Medium</div>
+	{{:helper.link(data.current_source, null, { "PRG_change_filesource" : 1 }, null)}}
+</div>
+{{if data.fileserver}}
+	<div class='item'>
+		<div class='itemLabel'>File Server</div>
+		{{:helper.link(data.fileserver, null, { "PRG_changefileserver" : 1 }, null)}}
+	</div>
+{{/if}}
+<div class='item'>
+	<div class='itemLabel'>Protolathe</div>
+	{{:helper.link(data.current_protolathe, null, { "PRG_change_protolathe" : 1 }, null)}}
+</div>
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Back to menu', null, { "PRG_closefile" : 1 })}}
+{{else}}
+	<center><h3>Experimentation Menu</h3></center>
+	<div class='item'>
+		<div class='itemLabel'>Blueprint:</div>
+		{{:helper.link(data.blueprint, null, { "PRG_changeblueprint" : 1 }, null)}}
+		{{if data.blueprint != 'NOT SET'}}
+			{{:helper.link('GENERATE EXPERIMENTS', null, { "PRG_generate_experiments" : 1 }, null)}}
+		{{/if}}
+	</div>		
+	{{if data.blueprint != 'NOT SET'}}
+		<div class='statusDisplay'>
+			{{:data.blueprint_stats}}	
+		</div>
+	{{/if}}
+	<div style="float:left;width:75%">
+		{{for data.experiments}}
+			<fieldset style="min-height:180px;background-color: #202020;">
+				<legend style="text-align:center">Experiment {{:value.id}}</legend> 
+				<div class='item'>
+					<div class="itemLabelWider">
+						Status:
+					</div>
+					<div style="float:right">
+						{{:value.status}}
+					</div>
+				</div>
+				<div class='item'>
+					<div class="itemLabelWider">
+						Improves:
+					</div>
+					<div style="float:right">
+						{{:value.improves}}
+					</div>
+				</div>
+				<div class='item'>
+					<div class="itemLabelWider">
+						Requirements:
+					</div>
+					<div style="float:right">
+						{{:value.requirements}}
+					</div>
+				</div>
+				<div class='item'>
+					<div class="itemLabelWider">
+						Actions:
+					</div>
+					<div style="float:right">
+						{{if value.can_begin}}
+							{{:helper.link('BEGIN', null, { "PRG_beginexperiment" : value.id }, value.undeletable ? 'disabled' : null)}}
+						{{/if}}
+					</div>
+				</div>
+			</fieldset>
+		{{/for}}
+	</div>
+	{{if data.usbconnected}}
+		<h2>Available files (portable device):</h2>
+		<table>
+			<tr><th>File name
+			<th>File type
+			<th>File size (GQ)
+			<th>Operations
+			{{for data.usbfiles}}
+				<tr><td>{{:value.name}}
+				<td>.{{:value.type}}
+				<td>{{:value.size}}GQ
+				<td>
+					{{:helper.link('DELETE', null, { "PRG_usbdeletefile" : value.name }, value.undeletable ? 'disabled' : null)}}
+			{{/for}}
+		</table>
+	{{/if}}
+{{/if}}

@@ -3,12 +3,13 @@
 /obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data = list()
 
-	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-	data["network"] = D.network_tag
+	var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
+	var/datum/computer_network/network = device.get_network()
+	data["network"] = device.network_tag
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
 
-	if(is_functioning())	
+	if(is_functioning())
 		data["color_selectable"] = color_selectable
 		data["color"] = selected_color
 
@@ -50,36 +51,37 @@
 			data["build_queue"] += list(order_data)
 
 		data["build_options"] = list()
-		for(var/datum/fabricator_recipe/R in design_cache)
-			if(R.hidden && !(fab_status_flags & FAB_HACKED))
-				continue
-			if(show_category != "All" && show_category != R.category)
-				continue
-			var/list/build_option = list()
-			var/max_sheets = 0
-			build_option["name"] =      R.name
-			build_option["reference"] = "\ref[R]"
-			build_option["illegal"] =   R.hidden
-			if(!length(R.resources))
-				build_option["cost"] = "No resources required."
-				max_sheets = 100
-			else
-				//Make sure it's buildable and list required resources.
-				var/list/material_components = list()
-				for(var/material in R.resources)
-					var/sheets = round(stored_material[material]/round(R.resources[material]*mat_efficiency))
-					if(isnull(max_sheets) || max_sheets > sheets)
-						max_sheets = sheets
-					if(stored_material[material] < round(R.resources[material]*mat_efficiency))
-						build_option["unavailable"] = 1
-					material_components += "[round(R.resources[material] * mat_efficiency)][SHEET_UNIT] [stored_substances_to_names[material]]"
-				build_option["cost"] = "[capitalize(jointext(material_components, ", "))]."
-			if(R.max_amount >= PRINT_MULTIPLIER_DIVISOR && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
-				build_option["multiplier"] = list()
-				for(var/i = 1 to Floor(min(R.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
-					var/mult = i * PRINT_MULTIPLIER_DIVISOR
-					build_option["multiplier"] += list(list("label" = "x[mult]", "multiplier" = mult))
-			data["build_options"] += list(build_option)
+
+		if(istype(network))
+			for(var/datum/computer_file/data/blueprint/BP in network.get_all_files_of_type(/datum/computer_file/data/blueprint, MF_ROLE_DESIGN, user))
+				if(show_category != "All" && show_category != BP.recipe.category)
+					continue
+				var/list/build_option = list()
+				var/max_sheets = 0
+				build_option["name"] =      BP.recipe.name
+				build_option["reference"] = "\ref[BP]"
+				build_option["illegal"] =   BP.recipe.hidden
+				var/list/resources = BP.get_resources()
+				if(!length(resources))
+					build_option["cost"] = "No resources required."
+					max_sheets = 100
+				else
+					//Make sure it's buildable and list required resources.
+					var/list/material_components = list()
+					for(var/material in resources)
+						var/sheets = round(stored_material[material]/round(resources[material]*mat_efficiency))
+						if(isnull(max_sheets) || max_sheets > sheets)
+							max_sheets = sheets
+						if(stored_material[material] < round(resources[material]*mat_efficiency))
+							build_option["unavailable"] = 1
+						material_components += "[round(resources[material] * mat_efficiency)][SHEET_UNIT] [stored_substances_to_names[material]]"
+					build_option["cost"] = "[capitalize(jointext(material_components, ", "))]."
+				if(BP.recipe.max_amount >= PRINT_MULTIPLIER_DIVISOR && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
+					build_option["multiplier"] = list()
+					for(var/i = 1 to Floor(min(BP.recipe.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
+						var/mult = i * PRINT_MULTIPLIER_DIVISOR
+						build_option["multiplier"] += list(list("label" = "x[mult]", "multiplier" = mult))
+				data["build_options"] += list(build_option)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -87,9 +89,3 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-
-/obj/machinery/fabricator/interface_interact(mob/user)
-	ui_interact(user)
-	return TRUE
-
-#undef PRINT_MULTIPLIER_DIVISOR
