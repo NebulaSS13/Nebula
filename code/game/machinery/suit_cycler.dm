@@ -8,7 +8,7 @@
 	icon = 'icons/obj/suitstorage.dmi'
 	icon_state = "close"
 
-	req_access = list(access_captain, access_bridge)
+	initial_access = list(list(access_captain, access_bridge))
 
 	var/active = 0          // PLEASE HOLD.
 	var/safeties = 1        // The cycler won't start with a living thing inside it unless safeties are off.

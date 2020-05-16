@@ -61,7 +61,7 @@
 	markup = 0
 	vend_delay = 21
 	base_type = /obj/machinery/vending/engivend
-	req_access = list(list(access_atmospherics,access_engine_equip))
+	initial_access = list(list(access_atmospherics, access_engine_equip))
 	products = list(
 		/obj/item/clothing/glasses/meson = 2,
 		/obj/item/multitool = 4,
@@ -84,7 +84,7 @@
 	icon_vend = "engi-vend"
 	base_type = /obj/machinery/vending/engineering
 	markup = 0
-	req_access = list(list(access_atmospherics,access_engine_equip))
+	initial_access = list(list(access_atmospherics, access_engine_equip))
 	products = list(
 		/obj/item/storage/belt/utility = 4,
 		/obj/item/clothing/glasses/meson = 4,
@@ -117,7 +117,7 @@
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	icon_vend = "robotics-vend"
-	req_access = list(access_robotics)
+	initial_access = list(access_robotics)
 	base_type = /obj/machinery/vending/robotics
 	products = list(
 		/obj/item/stack/cable_coil = 4,
