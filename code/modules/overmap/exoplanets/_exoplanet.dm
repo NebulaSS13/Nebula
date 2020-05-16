@@ -4,7 +4,7 @@
 	bound_height = 64
 	bound_width = 64
 	icon_state = "globe"
-	in_space = 0
+	sector_flags = OVERMAP_SECTOR_KNOWN
 	free_landing = TRUE
 	var/area/planetary_area
 
@@ -222,7 +222,7 @@
 	. = ..()
 	var/list/extra_data = list("<br>")
 	if(atmosphere)
-		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERT))
+		if(user.skill_check(SKILL_SCIENCE, SKILL_EXPERT) || user.skill_check(SKILL_ATMOS, SKILL_EXPERT))
 			var/list/gases = list()
 			for(var/g in atmosphere.gas)
 				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
@@ -231,7 +231,7 @@
 			extra_data += "Atmosphere composition: [english_list(gases)]"
 			var/inaccuracy = rand(8,12)/10
 			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
-		else if(user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+		else if(user.skill_check(SKILL_SCIENCE, SKILL_BASIC) || user.skill_check(SKILL_ATMOS, SKILL_BASIC))
 			extra_data += "Atmosphere present"
 		extra_data += "<br>"
 

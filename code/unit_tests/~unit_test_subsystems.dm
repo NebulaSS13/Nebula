@@ -80,8 +80,11 @@ SUBSYSTEM_DEF(unit_tests)
 	while (curr.len)
 		var/datum/unit_test/test = curr[curr.len]
 		curr.len--
-		if(do_unit_test(test, end_unit_tests) && test.async)
-			async_tests += test
+		if(do_unit_test(test, end_unit_tests))
+			if(test.async)
+				async_tests += test
+			else
+				test.conclude_test()
 		total_unit_tests++
 		if (MC_TICK_CHECK)
 			return
@@ -102,6 +105,7 @@ SUBSYSTEM_DEF(unit_tests)
 		async.len--
 		if(check_unit_test(test, end_unit_tests))
 			async_tests -= test
+			test.conclude_test()
 		if (MC_TICK_CHECK)
 			return
 	if (!async_tests.len)

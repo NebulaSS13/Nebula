@@ -1,10 +1,7 @@
 /obj/item/gun/projectile/revolver/lasvolver
 	name = "lasvolver"
 	desc = "An inane combination of a lasgun and revolver, 'firing' special one-use flash capsules to produce laser bursts."
-	icon = 'icons/obj/guns/lasvolver.dmi'
-	icon_state = "lasvolver"
-	item_state = "lasvolver"
-	safety_icon = "lasvolver_safety"
+	on_mob_icon = 'icons/obj/guns/lasvolver.dmi'
 	fire_sound_text = "pop"
 	caliber = CALIBER_PISTOL_LASBULB
 	ammo_type = /obj/item/ammo_casing/lasbulb

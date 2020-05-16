@@ -226,7 +226,7 @@
 "aA" = (
 /obj/structure/table/glass,
 /obj/item/paper,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aB" = (
@@ -611,7 +611,7 @@
 /area/lar_maria/vir_main)
 "bK" = (
 /obj/structure/table/glass,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bL" = (
@@ -2589,7 +2589,7 @@
 /area/lar_maria/vir_aux)
 "gf" = (
 /obj/structure/closet/crate,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /obj/item/material/knife/folding,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)

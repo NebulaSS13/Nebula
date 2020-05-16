@@ -17,8 +17,7 @@
 	var/start_x			//Coordinates for self placing
 	var/start_y			//will use random values if unset
 
-	var/base = 0		//starting sector, counts as station_levels
-	var/in_space = 1	//can be accessed via lucky EVA
+	var/sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 	var/hide_from_reports = FALSE
 
@@ -35,7 +34,7 @@
 
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
-		
+
 	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 
@@ -62,9 +61,9 @@
 		map_sectors["[zlevel]"] = src
 
 	GLOB.using_map.player_levels |= map_z
-	if(!in_space)
+	if(!(sector_flags & OVERMAP_SECTOR_IN_SPACE))
 		GLOB.using_map.sealed_levels |= map_z
-	if(base)
+	if(sector_flags & OVERMAP_SECTOR_BASE)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
 		GLOB.using_map.map_levels |= map_z
@@ -119,7 +118,7 @@
 	testing("Building overmap...")
 	INCREMENT_WORLD_Z_SIZE
 	GLOB.using_map.overmap_z = world.maxz
-	
+
 
 	testing("Putting overmap on [GLOB.using_map.overmap_z]")
 	var/area/overmap/A = new

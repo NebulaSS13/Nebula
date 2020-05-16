@@ -2688,7 +2688,7 @@
 	id_tag = "rescue_shuttle";
 	pixel_x = -8;
 	pixel_y = 25;
-	req_access = list()
+	initial_access = list()
 	},
 /obj/machinery/light{
 	dir = 4
@@ -2903,7 +2903,7 @@
 	name = "interior access button";
 	pixel_x = 25;
 	pixel_y = 25;
-	req_access = list("ACCESS_CENT_SPECOPS")
+	initial_access = list("ACCESS_CENT_SPECOPS")
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
@@ -3067,7 +3067,7 @@
 	name = "Emergency NanoMed";
 	pixel_x = 28;
 	pixel_y = 0;
-	req_access = newlist()
+	initial_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)

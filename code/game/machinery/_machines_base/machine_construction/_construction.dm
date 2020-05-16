@@ -18,6 +18,10 @@
 
 // Return a change state define or a fail message to block transition.
 /obj/machinery/proc/cannot_transition_to(var/state_path, var/mob/user)
+	if(ispath(state_path, /decl/machine_construction/default/deconstructed))
+		var/obj/item/stock_parts/network_lock/lock = get_component_of_type(/obj/item/stock_parts/network_lock)
+		if(istype(lock) && !allowed(user)) // Only check if we have a network_lock.
+			return MCS_BLOCK
 	return MCS_CHANGE
 
 /decl/machine_construction

@@ -112,24 +112,6 @@
 "au" = (
 /turf/simulated/open,
 /area/outreach/outpost)
-"av" = (
-/obj/structure/stairs{
-	icon_state = "";
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost/barracks/upper)
-"aw" = (
-/obj/structure/stairs{
-	icon_state = "";
-	dir = 1
-	},
-/obj/structure/railing/mapped{
-	icon_state = "railing0-1";
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/outreach/outpost/barracks/upper)
 "ax" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -462,18 +444,6 @@
 /turf/simulated/floor/wood/mahogany{
 	icon_state = "wood_broken2"
 	},
-/area/outreach/outpost/barracks/upper)
-"bk" = (
-/obj/structure/stairs,
-/turf/simulated/floor/wood/mahogany,
-/area/outreach/outpost/barracks/upper)
-"bl" = (
-/obj/structure/stairs,
-/obj/structure/railing/mapped{
-	icon_state = "railing0-1";
-	dir = 4
-	},
-/turf/simulated/floor/wood/mahogany,
 /area/outreach/outpost/barracks/upper)
 "bm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -24955,7 +24925,7 @@ ae
 ah
 ai
 ai
-av
+aq
 ae
 aE
 ac
@@ -24976,7 +24946,7 @@ ak
 ak
 ae
 aq
-bk
+ai
 ai
 ai
 ae
@@ -25157,7 +25127,7 @@ ae
 ai
 ai
 ay
-aw
+ar
 ae
 aF
 ae
@@ -25178,7 +25148,7 @@ ae
 ae
 ae
 ar
-bl
+ay
 aM
 ai
 ae

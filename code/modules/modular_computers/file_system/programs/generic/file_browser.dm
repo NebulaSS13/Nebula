@@ -72,7 +72,7 @@
 		var/datum/computer_network/network = computer.get_network()
 		if(!network)
 			return
-		var/list/file_servers = network.get_file_server_tags(user)
+		var/list/file_servers = network.get_file_server_tags(MF_ROLE_FILESERVER, user)
 		var/file_server = input(usr, "Choose a fileserver to view files on:", "Select File Server") as null|anything in file_servers
 		if(file_server)
 			var/datum/file_storage/network/N = file_sources[/datum/file_storage/network]

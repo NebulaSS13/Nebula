@@ -3,7 +3,7 @@
 	name = "deployable"
 	desc = "Deployable."
 	icon = 'icons/obj/objects.dmi'
-	req_access = list(access_security)//I'm changing this until these are properly tested./N
+	initial_access = list(access_security)
 
 /obj/machinery/deployable/barrier
 	name = "deployable barrier"
@@ -15,7 +15,6 @@
 	var/health = 100.0
 	var/maxhealth = 100.0
 	var/locked = 0.0
-//	req_access = list(access_maint_tunnels)
 
 /obj/machinery/deployable/barrier/Initialize()
 	. = ..()

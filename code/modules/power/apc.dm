@@ -87,7 +87,7 @@
 	power_channel = LOCAL      // Do not manipulate this; you don't want to power the APC off itself.
 	interact_offline = TRUE    // Can use UI even if unpowered
 
-	req_access = list(access_engine_equip)
+	initial_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
 	var/needs_powerdown_sound

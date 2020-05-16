@@ -12,18 +12,80 @@
 	var/datum/file_storage/network/file_source = /datum/file_storage/network/machine
 	var/editing_user	// Numerical user ID of the user being editing on this device.
 	var/list/initial_grants = list(
-		DEPT_COMMAND,
-		DEPT_CIVILIAN,
-		DEPT_ENGINEERING,
-		DEPT_EXPLORATION,
-		DEPT_MEDICAL,
-		DEPT_MISC,
-		DEPT_SCIENCE,
-		DEPT_SECURITY,
-		DEPT_SERVICE,
-		DEPT_SUPPORT,
-		DEPT_SUPPLY
+		access_security,
+		access_brig,
+		access_armory,
+		access_forensics_lockers,
+		access_medical,
+		access_morgue,
+		access_tox,
+		access_tox_storage,
+		access_engine,
+		access_engine_equip,
+		access_maint_tunnels,
+		access_external_airlocks,
+		access_emergency_storage,
+		access_change_ids,
+		access_ai_upload,
+		access_teleporter,
+		access_eva,
+		access_bridge,
+		access_captain,
+		access_all_personal_lockers,
+		access_chapel_office,
+		access_tech_storage,
+		access_atmospherics,
+		access_bar,
+		access_janitor,
+		access_crematorium,
+		access_kitchen,
+		access_robotics,
+		access_rd,
+		access_cargo,
+		access_construction,
+		access_chemistry,
+		access_cargo_bot,
+		access_hydroponics,
+		access_manufacturing,
+		access_library,
+		access_lawyer,
+		access_virology,
+		access_cmo,
+		access_qm,
+		access_network,
+		access_surgery,
+		access_research,
+		access_mining,
+		access_mining_office,
+		access_mailsorting,
+		access_heads_vault,
+		access_mining_station,
+		access_xenobiology,
+		access_ce,
+		access_hop,
+		access_hos,
+		access_RC_announce,
+		access_keycard_auth,
+		access_tcomsat,
+		access_gateway,
+		access_sec_doors,
+		access_psychiatrist,
+		access_xenoarch,
+		access_medical_equip,
+		access_heads
 	)
+
+/obj/machinery/network/acl/merchant
+	initial_grants = list(
+		access_crate_cash,
+		access_merchant
+	)
+
+/obj/machinery/network/acl/antag
+	initial_grants = list(
+		access_syndicate
+	)
+
 
 /obj/machinery/network/acl/Initialize()
 	. = ..()
@@ -67,7 +129,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["change_file_server"])
-		var/list/file_servers = network.get_file_server_tags()
+		var/list/file_servers = network.get_file_server_tags(MF_ROLE_CREW_RECORDS)
 		var/file_server = input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers
 		if(file_server)
 			file_source.server = file_server

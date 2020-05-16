@@ -80,9 +80,9 @@
 			return CR
 
 // Misc helpers
-/datum/computer_network/proc/get_file_server_tags(var/mob/user)
+/datum/computer_network/proc/get_file_server_tags(var/role = MF_ROLE_FILESERVER, var/mob/user)
 	. = list()
-	var/list/mainframes = get_mainframes_by_role(MF_ROLE_FILESERVER) // Do not add permissions check here.
+	var/list/mainframes = get_mainframes_by_role(role)
 	for(var/datum/extension/network_device/mainframe/M in mainframes)
 		if(user && !M.has_access(user))
 			continue // We only check if user is provided. If no user is provided, it's assumed to be an admin check.

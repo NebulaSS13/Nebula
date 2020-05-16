@@ -34,8 +34,9 @@
 	name = "slug sling"
 	desc = "A bulbous looking rifle. It feels like holding a plastic bag full of meat."
 	w_class = ITEM_SIZE_LARGE
-	icon_state = "slugsling"
-	item_state = "spikethrower"
+	on_mob_icon = 'icons/obj/guns/launcher/voxslug.dmi'
+	icon = 'icons/obj/guns/launcher/voxslug.dmi'
+	icon_state = "world"
 	fire_sound_text = "a strange noise"
 	fire_sound = 'sound/weapons/towelwhip.ogg'
 	release_force = 6
