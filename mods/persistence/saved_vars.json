@@ -3252,7 +3252,8 @@
 			"became_younger",
 			"descriptors",
 			"last_smelt",
-			"saved_ckey"
+			"saved_ckey",
+			"home_spawn"
 		]
 	},
 	{
