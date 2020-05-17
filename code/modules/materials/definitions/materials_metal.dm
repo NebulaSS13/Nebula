@@ -12,9 +12,9 @@
 	icon_colour = "#007a00"
 	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':5}"
-	chem_products = list(
-				/decl/reagent/uranium = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/uranium = 1
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_MATTE
 	value = 1.5
@@ -32,9 +32,9 @@
 	stack_origin_tech = "{'materials':4}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-				/decl/reagent/gold = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/gold = 1
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_SHINY
 	ore_smelts_to = MAT_GOLD
@@ -66,10 +66,10 @@
 	stack_origin_tech = "{'materials':2}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-		/decl/reagent/copper = 12,
-		/decl/reagent/silver = 8
-		)
+	chemical_makeup = list(
+		/decl/reagent/copper = 0.6,
+		/decl/reagent/silver = 0.4
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_COPPER
 	ore_result_amount = 5
@@ -91,9 +91,9 @@
 	stack_origin_tech = "{'materials':3}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-				/decl/reagent/silver = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/silver = 1
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_SILVER
 	ore_result_amount = 5
@@ -116,10 +116,10 @@
 	icon_reinf = "reinf_over"
 	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
-	chem_products = list(
-				/decl/reagent/iron = 19.6,
-				/decl/reagent/carbon = 0.4
-				)
+	chemical_makeup = list(
+		/decl/reagent/iron = 0.98,
+		/decl/reagent/carbon = 0.02
+	)
 	alloy_materials = list(MAT_IRON = 1875, MAT_GRAPHITE = 1875)
 	alloy_product = TRUE
 	ore_smelts_to = MAT_STEEL
@@ -146,9 +146,9 @@
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/aluminium
-	chem_products = list(
-				/decl/reagent/aluminium = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/aluminium = 1
+	)
 	integrity = 125
 	weight = MAT_VALUE_LIGHT
 	icon_base = "solid"
@@ -280,9 +280,9 @@
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chem_products = list(
-				/decl/reagent/iron = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/iron = 1
+	)
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE
 

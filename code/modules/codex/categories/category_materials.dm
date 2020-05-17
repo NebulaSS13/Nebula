@@ -69,13 +69,13 @@
 			else
 				material_info += "It is ~[comparison] times more durable than steel."
 
-			if(LAZYLEN(mat.chem_products))
+			if(LAZYLEN(mat.chemical_makeup))
 				var/chems = list()
-				for(var/chemial in mat.chem_products)
+				for(var/chemial in mat.chemical_makeup)
 					var/decl/reagent/R = chemial
-					chems += "[initial(R.name)] ([mat.chem_products[chemial]]u)"
-				material_info += "The following chemicals can be extracted from it (per [mat.sheet_singular_name]):<br>[english_list(chems)]"
-			
+					chems += "[initial(R.name)] ([mat.chemical_makeup[chemial]*100]%)"
+				material_info += "The following chemicals can be extracted from it:<br> [english_list(chems)]"
+
 			if(LAZYLEN(mat.alloy_materials))
 				var/parts = list()
 				for(var/alloy_part in mat.alloy_materials)

@@ -53,9 +53,9 @@
 	sheet_plural_name = "bricks"
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chem_products = list(
-		/decl/reagent/silicon = 20
-		)
+	chemical_makeup = list(
+		/decl/reagent/silicon = 1
+	)
 	value = 1.5
 
 /material/stone/ceramic
@@ -75,7 +75,6 @@
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	chem_products = null
 
 /material/stone/concrete
 	display_name = "concrete"
