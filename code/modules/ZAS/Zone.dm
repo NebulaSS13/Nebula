@@ -185,17 +185,17 @@ Class Procs:
 	condensing = TRUE
 	for(var/g in air.gas)
 		var/material/mat = SSmaterials.get_material_datum(g)
-		var/product = mat.gas_condensation_product
-		if(product && air.temperature <= mat.gas_condensation_point)
+		if(length(mat.chemical_makeup) && air.temperature <= mat.gas_condensation_point)
 			var/condensation_area = air.group_multiplier / length(air.gas)
 			while(condensation_area > 0 && length(contents))
 				condensation_area--
 				var/turf/flooding = pick(contents)
-				var/condense_amt = min(air.gas[g], rand(3,5))
+				var/condense_amt = min(air.gas[g], rand(1,3))
 				if(condense_amt < 1)
 					break
 				air.adjust_gas(g, -condense_amt)
-				flooding.add_fluid(condense_amt, product)
+				for(var/chem in mat.chemical_makeup)
+					flooding.add_fluid(mat.chemical_makeup[chem] * condense_amt * REAGENT_UNITS_PER_GAS_MOLE, chem)
 				CHECK_TICK
 	condensing = FALSE
 
