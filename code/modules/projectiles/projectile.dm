@@ -66,11 +66,11 @@
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 //Movement parameters
-	var/speed = 0.4			//Amount of deciseconds it takes for projectile to travel
+	var/speed = 0.4		//Amount of deciseconds it takes for projectile to travel
 	var/pixel_speed = 33	//pixels per move - DO NOT FUCK WITH THIS UNLESS YOU ABSOLUTELY KNOW WHAT YOU ARE DOING OR UNEXPECTED THINGS /WILL/ HAPPEN!
 	var/Angle = 0
 	var/original_angle = 0		//Angle at firing
-	var/nondirectional_sprite = TRUE //Set TRUE to prevent projectiles from having their sprites rotated based on firing angle
+	var/nondirectional_sprite = FALSE //Set TRUE to prevent projectiles from having their sprites rotated based on firing angle
 	var/forcedodge = FALSE		//to pass through everything
 	var/ignore_source_check = FALSE
 
@@ -181,17 +181,21 @@
 		p_y = between(0, p_y + rand(-radius, radius), world.icon_size)
 
 //Used to change the direction of the projectile in flight.
-/obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
+/obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null, var/is_ricochet = FALSE)
 	return
-/*
+
+	var/turf/starting_turf = get_turf(src)
 	var/turf/new_target = locate(new_x, new_y, src.z)
 
 	original = new_target
 	if(new_firer)
 		firer = src
+	var/new_angle = Atan2(starting_turf, new_target)
+	if(is_ricochet) // Add some dispersion.
+		new_angle += (rand(-5,5) * 5)
+	setAngle(new_angle)
 
-	setup_trajectory(starting_loc, new_target)
-*/
+
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
 /obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/special_miss_modifier=0)
 	if(!istype(target_mob))
@@ -381,7 +385,8 @@
 		var/turf/target = locate(Clamp(starting + xo, 1, world.maxx), Clamp(starting + yo, 1, world.maxy), starting.z)
 		setAngle(Get_Angle(src, target))
 	if(dispersion)
-		setAngle(Angle + rand(-dispersion, dispersion))
+		var/DeviationAngle = (dispersion * 15)
+		setAngle(Angle + rand(-DeviationAngle, DeviationAngle))
 	original_angle = Angle
 	if(!nondirectional_sprite)
 		var/matrix/M = new

@@ -417,7 +417,7 @@
 		else if(mob.shock_stage > 70)
 			shock_dispersion = rand(-2,2)
 
-	P.dispersion = shock_dispersion
+	P.dispersion += shock_dispersion
 
 	var/launched = !P.launch_from_gun(target, target_zone, user, params)
 
