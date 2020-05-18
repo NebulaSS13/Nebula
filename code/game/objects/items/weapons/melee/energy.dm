@@ -21,7 +21,7 @@
 
 /obj/item/energy_blade/can_embed()
 	return FALSE
-	
+
 /obj/item/energy_blade/Initialize()
 	. = ..()
 	if(active)
@@ -30,7 +30,7 @@
 	else
 		active = TRUE
 		deactivate()
-		
+
 /obj/item/energy_blade/on_update_icon()
 	. = ..()
 	if(active)
@@ -53,7 +53,7 @@
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 	set_light(0.8, 1, 2, 4, lighting_color)
-	
+
 /obj/item/energy_blade/proc/deactivate(mob/living/user)
 	if(!active)
 		return
@@ -209,13 +209,13 @@
 	icon_state = "blade"
 	active_icon = "blade"	//It's all energy, so it should always be visible.
 	lighting_color = COLOR_SABER_GREEN
-	force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
+	active_force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
 	active = 1
 	armor_penetration = 100
 	sharp = 1
 	edge = 1
 	anchored = 1    // Never spawned outside of inventory, should be fine.
-	throwforce = 1  //Throwing or dropping the item deletes it.
+	active_throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
 	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
