@@ -45,6 +45,8 @@
 		user.visible_message("<span class='notice'>[user] runs \the [src] over \the [A].</span>", range = 2)
 		if(scan_sound)
 			playsound(src, scan_sound, 30)
+		if(check_state_in_icon("[icon_state]_active", icon))
+			flick("[icon_state]_active", src)
 		if(use_delay && !do_after(user, use_delay, A))
 			to_chat(user, "You stop scanning \the [A] with \the [src].")
 			return
