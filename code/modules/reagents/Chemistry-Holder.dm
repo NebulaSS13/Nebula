@@ -379,12 +379,10 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 /datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Turfs don't have any reagents (at least, for now). Just touch it.
 	if(!target || !target.simulated)
 		return
-
 	var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
 	. = trans_to_holder(R, amount, multiplier, copy, 1)
 	R.touch_turf(target)
-	qdel(R)
-	return
+	target.add_reagents_as_fluid(R)
 
 /datum/reagents/proc/trans_to_obj(var/obj/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
 	if(!target || !target.simulated)

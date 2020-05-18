@@ -773,7 +773,7 @@ default behaviour is:
 	for(var/thing in get_equipped_items(TRUE))
 		if(isnull(thing)) continue
 		var/atom/movable/A = thing
-		if(A.simulated && !A.waterproof)
+		if(A.simulated)
 			A.fluid_act(fluids)
 
 /mob/living/proc/nervous_system_failure()

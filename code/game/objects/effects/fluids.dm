@@ -60,19 +60,19 @@
 	if(reagents.total_volume <= FLUID_EVAPORATION_POINT)
 		qdel(src)
 		return
-	if(world.time < next_fluid_act)
-		return
-	next_fluid_act = world.time + SSfluids.fluid_act_delay
-	if(prob(1))
-		playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-	if(length(loc.contents) > 1 && reagents.total_volume > FLUID_SHALLOW)
+	if(isturf(loc) && reagents.total_volume)
+		reagents.touch_turf(loc)
+	if(world.time >= next_fluid_act && last_flow_strength >= 10 && length(loc.contents) > 1 && reagents.total_volume > FLUID_SHALLOW)
+		next_fluid_act = world.time + SSfluids.fluid_act_delay
+		if(prob(1))
+			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		for(var/thing in loc.contents)
 			if(thing == src)
 				continue
 			var/atom/movable/AM = thing
-			if(AM.simulated && !AM.waterproof)
+			if(AM.simulated)
 				AM.fluid_act(reagents)
-			if(last_flow_strength >= 10 && AM.is_fluid_pushable(last_flow_strength))
+			if(AM.is_fluid_pushable(last_flow_strength))
 				step(AM, dir)
 
 /obj/effect/fluid/on_update_icon()
