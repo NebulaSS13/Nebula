@@ -10,9 +10,11 @@
 	mining_areas = list(1, 2)
 
 	// A list of turfs and their default turfs for serialization optimization.
-	default_z_turfs = list(
-		/turf/simulated/floor/exoplanet = 3,
-		/turf/simulated/open = 4
+	base_turf_by_z = list(
+		"1" = /turf/simulated/floor/exoplanet/barren,
+		"2" = /turf/simulated/floor/exoplanet/barren,
+		"3" = /turf/simulated/floor/exoplanet/barren,
+		"4" = /turf/simulated/open
 	)
 
 	overmap_size = 35

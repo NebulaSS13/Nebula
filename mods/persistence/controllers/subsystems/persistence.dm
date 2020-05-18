@@ -6,19 +6,13 @@ SUBSYSTEM_DEF(persistence)
 	var/in_loaded_world 	= 	FALSE	// Whether or not we're in a world that was loaded.
 
 	var/list/saved_areas	= 	list()
-	var/list/saved_levels 	= 	list()	// Saved levels are saved entirely and optimized with get_default_turf()
+	var/list/saved_levels 	= 	list()	// Saved levels are saved entirely and optimized with get_base_turf()
 
 	var/serializer/sql/serializer = new() // The serializer impl for actually saving.
 
 /datum/controller/subsystem/persistence/Initialize()
 	. = ..()
 	saved_levels = GLOB.using_map.saved_levels
-
-/datum/controller/subsystem/persistence/proc/get_default_turf(var/z)
-	for(var/default_turf in GLOB.using_map.default_z_turfs)
-		if(GLOB.using_map.default_z_turfs[default_turf] == z)
-			return default_turf
-	return /turf/space
 
 /datum/controller/subsystem/persistence/proc/SaveWorld()
 	// Collect the z-levels we're saving and get the turfs!
@@ -64,7 +58,7 @@ SUBSYSTEM_DEF(persistence)
 		// Now we go through our saved levels and remap all of those.
 		for(var/z in saved_levels)
 			var/datum/persistence/load_cache/z_level/z_level = new()
-			z_level.default_turf = get_default_turf(z)
+			z_level.default_turf = get_base_turf(z)
 			z_level.index = z
 			if(z in GLOB.using_map.station_levels)
 				z_level.dynamic = FALSE
@@ -83,7 +77,7 @@ SUBSYSTEM_DEF(persistence)
 				// Turf exists in an area outside of saved_levels.
 				// In this case, we'll remap.
 				var/datum/persistence/load_cache/z_level/z_level = new()
-				z_level.default_turf = get_default_turf(T.z)
+				z_level.default_turf = get_base_turf(T.z)
 				z_level.index = T.z
 				z_level.dynamic = TRUE
 				if("[T.z]" in map_sectors)
@@ -120,7 +114,7 @@ SUBSYSTEM_DEF(persistence)
 		// This will save all the turfs/world.
 		var/index = 1
 		for(var/z in saved_levels)
-			var/default_turf = get_default_turf(z)
+			var/default_turf = get_base_turf(z)
 			for(var/x in 1 to world.maxx)
 				for(var/y in 1 to world.maxy)
 					// Get the thing to serialize and serialize it.
@@ -233,6 +227,8 @@ SUBSYSTEM_DEF(persistence)
 			turfs_loaded++
 			CHECK_TICK
 		to_world_log("Load complete! Took [(world.timeofday-start)/10]s to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
+
+		in_loaded_world = turfs_loaded > 0
 
 		// Cleanup the cache. It uses a *lot* of memory.
 		for(var/id in serializer.reverse_map)

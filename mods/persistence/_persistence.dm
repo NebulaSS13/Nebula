@@ -5,5 +5,6 @@
 	. = ..()
 	admin_verbs_admin.Add(/client/proc/save_server)
 	admin_verbs_admin.Add(/client/proc/regenerate_mine)
-	admin_verbs_admin.Remove(/client/proc/admin_ghost)
-	admin_verbs_admin.Add(/client/proc/special_admin_ghost)
+	for(var/client/C in GLOB.admins)
+		C.remove_admin_verbs()
+		C.add_admin_verbs()

@@ -3,10 +3,9 @@
 
 /mob/before_save()
 	. = ..()
-	if(stat != DEAD) // Temporary, until revival mechanics are in place.
+	if(!(stat & DEAD)) // Temporary, until revival mechanics are in place.
 		saved_ckey = LAST_CKEY(src)
 
 /mob/after_save()
 	. = ..()
 	saved_ckey = null
-	

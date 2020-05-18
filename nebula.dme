@@ -1,6 +1,7 @@
 // DM Environment file for nebula.dme.
 // All manual changes should be made outside the BEGIN_ and END_ blocks.
  // New source code should be placed in .dm files: choose File/New --> Code File.
+ #define DISABLE_DEBUG_CRASH
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR

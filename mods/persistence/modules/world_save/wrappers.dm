@@ -98,3 +98,12 @@
 
 /datum/wrapper/game_data/species/on_deserialize()
 	return all_species[key]
+
+/datum/wrapper/game_data/decl
+	wrapper_for = /decl
+
+/datum/wrapper/game_data/decl/on_serialize(var/decl/D)
+	key = "[D.type]"
+
+/datum/wrapper/game_data/decl/on_deserialize()
+	return decls_repository.get_decl(text2path(key))

@@ -1,7 +1,3 @@
-/datum/map
-	// A list of turfs and their default turfs for serialization optimization.
-	var/list/default_z_turfs = list()
-
 /datum/proc/after_save()
 
 /datum/proc/before_save()

@@ -1,5 +1,4 @@
 GLOBAL_LIST_EMPTY(flatten_types)
-GLOBAL_LIST_EMPTY(wrapped_types)
 GLOBAL_LIST_INIT(saved_vars, initialize_saved_vars())
 GLOBAL_LIST_INIT(blacklisted_vars, list("is_processing", "vars", "active_timers", "weakref", "type", "parent_type"))
 
@@ -33,20 +32,6 @@ GLOBAL_LIST_INIT(blacklisted_vars, list("is_processing", "vars", "active_timers"
 			loaded_vars++
 			for(var/subtype in subtypes)
 				LAZYDISTINCTADD(.[subtype], v)
-
-		if(saved_var["wrapped_vars"] && length(saved_var["wrapped_vars"]))
-			for(var/v in saved_var["wrapped_vars"])
-				LAZYDISTINCTADD(.[path], v)
-				loaded_vars++
-				saved_var["wrapped_vars"][v] = text2path(saved_var["wrapped_vars"][v])
-				for(var/subtype in subtypes)
-					LAZYDISTINCTADD(.[subtype], v)
-
-			for(var/v in saved_var["wrapped_vars"])
-				LAZYDISTINCTADD(GLOB.wrapped_types[path], v)
-				loaded_vars++
-				for(var/subtype in subtypes)
-					LAZYDISTINCTADD(GLOB.wrapped_types[subtype], v)
 
 	to_world_log("Successfully loaded [loaded_types] serialized types, and [loaded_vars] variables.")
 

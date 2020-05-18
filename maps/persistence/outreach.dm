@@ -1,9 +1,9 @@
 #if !defined(USING_MAP_DATUM)
-
-	#define DISABLE_DEBUG_CRASH
-
+	// Mods
 	#include "../../mods/persistence/_persistence.dme"
+	#include "../../mods/ascent/_ascent.dme"
 
+	// Lobby stuff
 	#include "../../code/datums/music_tracks/dirtyoldfrogg.dm"
 
 	#include "persistence_defines.dm"
