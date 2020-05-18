@@ -37,7 +37,7 @@
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
 	material = SSmaterials.get_material_datum(materialtype)
-	if(!isnull(rmaterialtype))
+	if(ispath(rmaterialtype, /material))
 		reinf_material = SSmaterials.get_material_datum(rmaterialtype)
 	if(ispath(girder_material, /material))
 		girder_material = SSmaterials.get_material_datum(girder_material)
