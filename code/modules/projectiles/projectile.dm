@@ -164,7 +164,7 @@
 	return fire(angle_override, direct_target)
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
+/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, var/obj/item/weapon/gun/launcher)
 	return launch(target, target_zone, user, params)
 
 /obj/item/projectile/proc/set_clickpoint(var/params)
@@ -182,8 +182,6 @@
 
 //Used to change the direction of the projectile in flight.
 /obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null, var/is_ricochet = FALSE)
-	return
-
 	var/turf/starting_turf = get_turf(src)
 	var/turf/new_target = locate(new_x, new_y, src.z)
 
