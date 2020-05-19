@@ -4215,7 +4215,8 @@
 		"path":"/obj/item/organ/internal/stack",
 		"vars":[
 			"stackmob",
-			"backup"
+			"backup",
+			"cortical_alias"
 		]
 	},
 	{

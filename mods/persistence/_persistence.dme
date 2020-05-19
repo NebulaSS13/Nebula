@@ -38,6 +38,7 @@
 #include "modules\mob\death.dm"
 #include "modules\mob\mob.dm"
 #include "modules\mob\new_player.dm"
+#include "modules\mob\language\cortical.dm"
 #include "modules\mob\living\living.dm"
 #include "modules\mob\living\carbon\human\_defines.dm"
 #include "modules\mob\living\carbon\human\human.dm"

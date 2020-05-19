@@ -6,3 +6,10 @@
 	for(var/obj/item/I in contents)
 		I.hud_layerise()
 	. = ..()
+
+// For granting cortical chat on character creation.
+/mob/living/carbon/human/update_languages()	
+	. = ..()
+	var/obj/item/organ/internal/stack/stack = (locate() in internal_organs)
+	if(stack)
+		add_language(/decl/language/cortical)
