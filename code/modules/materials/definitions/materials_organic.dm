@@ -5,7 +5,7 @@
 	flags = MAT_FLAG_BRITTLE
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = COLOR_WHITE
+	icon_colour = COLOR_EGGSHELL
 	hardness = MAT_VALUE_SOFT
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	melting_point = T0C+371 //assuming heat resistant plastic
