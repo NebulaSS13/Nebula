@@ -19,9 +19,15 @@
 	var/datum/computer_file/data/cloning/backup
 	var/mob/living/carbon/limbo/stackmob = null
 
+	var/cortical_alias
+	var/last_alias_change
+
 /obj/item/organ/internal/stack/Initialize()
 	. = ..()
 	robotize()
+	if(owner && istype(owner))
+		cortical_alias = Gibberish(owner.name, 100)
+		verbs |= /obj/item/organ/internal/stack/proc/change_cortical_alias
 
 /obj/item/organ/internal/stack/examine(var/mob/user)
 	. = ..(user)
@@ -45,10 +51,16 @@
 /obj/item/organ/internal/stack/replaced()
 	. = ..()
 	qdel(backup)
+	if(owner)
+		owner.add_language(/decl/language/cortical)
 
 /obj/item/organ/internal/stack/removed(var/mob/living/user, var/drop_organ=1)
 	if(!istype(owner))
 		return
+
+	// Language will be readded upon placement into a mob with a stack.
+	owner.remove_language(/decl/language/cortical)
+
 	qdel(backup)
 	backup = new()
 	backup.initialize_backup(owner)
@@ -61,3 +73,19 @@
 	QDEL_NULL(stackmob)
 	QDEL_NULL(backup)
 	. = ..()
+
+/obj/item/organ/internal/stack/proc/change_cortical_alias()
+	set name = "Change Cortical Chat alias"
+	set desc = "Changes your alias displayed on Cortical Chat."
+	set category = "IC"
+	set src in usr
+	if(!owner || owner.incapacitated())
+		return
+	if(world.time < last_alias_change + 1 MINUTE)
+		to_chat(owner, SPAN_WARNING("You can't adjust your Cortical Chat alias again so soon!"))
+		return
+	var/new_alias = sanitizeName(input("Please enter your new Cortical Chat alias.", "Alias Select", cortical_alias) as text|null)
+	if(new_alias)
+		cortical_alias = new_alias
+		to_chat(owner, SPAN_NOTICE("You change your Cortical Chat alias to [cortical_alias]"))
+		last_alias_change = world.time
