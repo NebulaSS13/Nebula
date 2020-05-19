@@ -9,6 +9,14 @@
 	saved_levels = list(3, 4)
 	mining_areas = list(1, 2)
 
+	// Hotloading module
+	default_levels = list(
+		"1" = 'maps/persistence/outreach_1_mine_2.dmm',
+		"2" = 'maps/persistence/outreach_2_mine_1.dmm',
+		"3" = 'maps/persistence/outreach_3_ground.dmm',
+		"4" = 'maps/persistence/outreach_4_sky.dmm'
+	)
+
 	// A list of turfs and their default turfs for serialization optimization.
 	base_turf_by_z = list(
 		"1" = /turf/simulated/floor/exoplanet/barren,

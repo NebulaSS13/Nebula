@@ -3,6 +3,7 @@ SUBSYSTEM_DEF(persistence)
 	init_order = SS_INIT_EARLY
 	flags = SS_NO_FIRE
 
+	var/save_exists			=	FALSE	// Whether or not a save exists in the DB
 	var/in_loaded_world 	= 	FALSE	// Whether or not we're in a world that was loaded.
 
 	var/list/saved_areas	= 	list()
@@ -13,6 +14,14 @@ SUBSYSTEM_DEF(persistence)
 /datum/controller/subsystem/persistence/Initialize()
 	. = ..()
 	saved_levels = GLOB.using_map.saved_levels
+
+/datum/controller/subsystem/persistence/proc/SaveExists()
+	if(save_exists)
+		return save_exists
+	var/DBQuery/query = dbcon.NewQuery("SELECT COUNT(*) FROM `thing`;")
+	query.Execute()
+	if(query.NextRow())
+		save_exists = text2num(query.item[1]) > 0
 
 /datum/controller/subsystem/persistence/proc/SaveWorld()
 	// Collect the z-levels we're saving and get the turfs!

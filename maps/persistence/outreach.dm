@@ -13,11 +13,6 @@
 	#include "outreach_exoplanet.dm"
 	// #include "example_unit_testing.dm"
 
-	#include "outreach_1_mine_2.dmm"
-	#include "outreach_2_mine_1.dmm"
-	#include "outreach_3_ground.dmm"
-	#include "outreach_4_sky.dmm"
-
 	#define USING_MAP_DATUM /datum/map/persistence
 #elif !defined(MAP_OVERRIDE)
 
