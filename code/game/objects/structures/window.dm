@@ -345,8 +345,9 @@
 /obj/structure/window/on_update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
-	color =  material.icon_colour
-	if(reinf_material)
+	if(istype(material))
+		color =  material.icon_colour
+	if(istype(reinf_material))
 		basestate = reinf_basestate
 	else
 		basestate = initial(basestate)
