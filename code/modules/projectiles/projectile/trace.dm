@@ -27,7 +27,7 @@
 		qdel(src)
 	return hit
 
-/obj/item/projectile/test/Bump(atom/A)
+/obj/item/projectile/test/Bump(atom/A, forced = FALSE)
 	if(A != src)
 		hit |= A
 	return ..()
