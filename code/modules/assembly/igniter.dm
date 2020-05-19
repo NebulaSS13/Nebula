@@ -1,6 +1,6 @@
 /obj/item/assembly/igniter
 	name = "igniter"
-	desc = "A small electronic device able to ignite combustable substances."
+	desc = "A small electronic device able to ignite combustible substances."
 	icon_state = "igniter"
 	origin_tech = "{'magnets':1}"
 	material = MAT_STEEL

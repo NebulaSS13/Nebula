@@ -53,7 +53,8 @@
 /obj/effect/fluid/Destroy()
 	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
-		T.zone?.fuel_objs -= src
+		if(length(T.zone?.fuel_objs))
+			T.zone.fuel_objs -= src
 		T.wet_floor()
 	STOP_PROCESSING(SSobj, src)
 	for(var/thing in neighbors)

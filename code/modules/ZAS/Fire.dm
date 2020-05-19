@@ -219,7 +219,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 //Returns the firelevel
 /datum/gas_mixture/proc/react(zone/zone, force_burn, no_check = 0)
 	. = 0
-	if((temperature > FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
+	if((temperature > FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustibility(zone? zone.fuel_objs : null)))
 
 		#ifdef FIREDBG
 		log_debug("***************** FIREDBG *****************")
@@ -324,7 +324,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 
 		return firelevel
 
-datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
+datum/gas_mixture/proc/check_recombustibility(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
 		if((SSmaterials.get_gas_flags(g) & XGM_GAS_OXIDIZER) && gas[g] >= 0.1)
@@ -367,19 +367,19 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	//Calculates the firelevel based on one equation instead of having to do this multiple times in different areas.
 	var/firelevel = 0
 
-	var/total_combustables = (total_fuel + total_oxidizers)
-	var/active_combustables = (FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT + 1)*reaction_limit
+	var/total_combustibles = (total_fuel + total_oxidizers)
+	var/active_combustibles = (FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT + 1)*reaction_limit
 
-	if(total_combustables > 0)
+	if(total_combustibles > 0)
 		//slows down the burning when the concentration of the reactants is low
-		var/damping_multiplier = min(1, active_combustables / (total_moles/group_multiplier))
+		var/damping_multiplier = min(1, active_combustibles / (total_moles/group_multiplier))
 
 		//weight the damping mult so that it only really brings down the firelevel when the ratio is closer to 0
 		damping_multiplier = 2*damping_multiplier - (damping_multiplier*damping_multiplier)
 
 		//calculates how close the mixture of the reactants is to the optimum
 		//fires burn better when there is more oxidizer -- too much fuel will choke the fire out a bit, reducing firelevel.
-		var/mix_multiplier = 1 / (1 + (5 * ((total_fuel / total_combustables) ** 2)))
+		var/mix_multiplier = 1 / (1 + (5 * ((total_fuel / total_combustibles) ** 2)))
 
 		#ifdef FIREDBG
 		ASSERT(damping_multiplier <= 1)
