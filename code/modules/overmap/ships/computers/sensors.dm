@@ -6,6 +6,9 @@
 	extra_view = 4
 	var/obj/machinery/shipsensors/sensors
 	var/list/last_scan
+	var/working_sound = 'sound/machines/sensors/dradis.ogg'
+	var/datum/sound_token/sound_token
+	var/sound_id
 
 /obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
 	if(!(. = ..()))
@@ -19,6 +22,19 @@
 		if(linked.check_ownership(S))
 			sensors = S
 			break
+
+/obj/machinery/computer/ship/sensors/proc/update_sound()
+	if(!working_sound)
+		return
+	if(!sound_id)
+		sound_id = "[type]_[sequential_id(/obj/machinery/computer/ship/sensors)]"
+	if(linked && sensors.use_power ** sensors.powered())
+		var/volume = 10
+		if(!sound_token)
+			sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, working_sound, volume = volume, range = 10)
+		sound_token.SetVolume(volume)
+	else if(sound_token)
+		QDEL_NULL(sound_token)
 
 /obj/machinery/computer/ship/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
@@ -42,7 +58,20 @@
 		else
 			data["status"] = "OK"
 		var/list/contacts = list()
-		for(var/obj/effect/overmap/O in view(7,linked))
+
+		var/list/potential_contacts = list()
+
+		for(var/obj/effect/overmap/nearby in view(7,linked))
+			if(nearby.requires_contact) // Some ships require.
+				continue 
+			potential_contacts |= nearby
+		
+		// Effects that require contact are only added to the contacts if they have been identified.
+		// Allows for coord tracking out of range of the player's view.
+		for(var/obj/effect/overmap/visitable/identified_contact in contact_datums)
+			potential_contacts |= identified_contact
+
+		for(var/obj/effect/overmap/O in potential_contacts)
 			if(linked == O)
 				continue
 			if(!O.scannable)
@@ -96,30 +125,22 @@
 
 	if (href_list["scan"])
 		var/obj/effect/overmap/O = locate(href_list["scan"])
-		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
-			playsound(loc, "sound/effects/ping.ogg", 50, 1)
-			LAZYSET(last_scan, "data", O.get_scan_data(user))
-			LAZYSET(last_scan, "location", "[O.x],[O.y]")
-			LAZYSET(last_scan, "name", "[O]")
-			to_chat(user, SPAN_NOTICE("Successfully scanned [O]."))
-		else
-			to_chat(user, SPAN_WARNING("Could not get a scan!"))
+		if(istype(O) && !QDELETED(O))
+			if((O in view(7,linked))|| (O in contact_datums))
+				playsound(loc, "sound/effects/ping.ogg", 50, 1)
+				LAZYSET(last_scan, "data", O.get_scan_data(user))
+				LAZYSET(last_scan, "location", "[O.x],[O.y]")
+				LAZYSET(last_scan, "name", "[O]")
+				to_chat(user, SPAN_NOTICE("Successfully scanned [O]."))
+				return TOPIC_HANDLED
+		
+		to_chat(user, SPAN_WARNING("Could not get a scan!"))
 		return TOPIC_HANDLED
 
 	if (href_list["print"])
 		playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
 		new/obj/item/paper/(get_turf(src), last_scan["data"], "paper (Sensor Scan - [last_scan["name"]])")
 		return TOPIC_HANDLED
-
-/obj/machinery/computer/ship/sensors/Process()
-	..()
-	if(!linked)
-		return
-	if(sensors && sensors.use_power && sensors.powered())
-		var/sensor_range = round(sensors.range*1.5) + 1
-		linked.set_light(1, sensor_range, sensor_range+1)
-	else
-		linked.set_light(0)
 
 /obj/machinery/shipsensors
 	name = "sensors suite"
@@ -131,6 +152,7 @@
 	var/heat_reduction = 1.5 // mitigates this much heat per tick
 	var/heat = 0
 	var/range = 1
+	var/sensor_strength //used for detecting ships via contacts
 	idle_power_usage = 5000
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -191,6 +213,10 @@
 	toggle()
 	..()
 
+/obj/machinery/shipsensors/RefreshParts()
+	..()
+	sensor_strength = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5)
+	
 /obj/machinery/shipsensors/weak
 	heat_reduction = 0.2
 	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
