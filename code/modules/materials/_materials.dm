@@ -153,11 +153,11 @@
 	var/gas_burn_product
 	var/gas_specific_heat
 	var/gas_molar_mass
-	var/gas_flags =              0
 	var/gas_symbol_html
 	var/gas_symbol
-	var/gas_tile_overlay =       "generic"
-	var/gas_condensation_point = INFINITY
+	var/gas_flags = 0
+	var/gas_tile_overlay = "generic"
+	var/gas_condensation_point = 0
 
 	// Armor values generated from properties
 	var/list/basic_armor

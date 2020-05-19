@@ -53,7 +53,7 @@
 /obj/effect/fluid/Destroy()
 	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
-		T.zone.fuel_objs -= src
+		T.zone?.fuel_objs -= src
 		T.wet_floor()
 	STOP_PROCESSING(SSobj, src)
 	for(var/thing in neighbors)
@@ -82,9 +82,15 @@
 			. += REAGENT_VOLUME(reagents, rtype) * fuel.fuel_value
 
 /obj/effect/fluid/Process()
-	if(reagents.total_volume <= FLUID_PUDDLE)
+
+	// Evaporation! TODO: add fumes to the air from this, if appropriate.
+	if(reagents.total_volume > FLUID_EVAPORATION_POINT && reagents.total_volume <= FLUID_PUDDLE)
+		reagents.remove_any(min(reagents.total_volume, rand(1,3)))
+	if(reagents.total_volume <= FLUID_EVAPORATION_POINT)
 		qdel(src)
 		return
+
+	// Apply reagent interactions to everything on the turf, and the turf itself.
 	if(isturf(loc) && reagents.total_volume)
 		reagents.touch_turf(loc)
 	if(world.time >= next_fluid_act && last_flow_strength >= 10 && length(loc.contents) > 1 && reagents.total_volume > FLUID_SHALLOW)
@@ -102,7 +108,7 @@
 
 /obj/effect/fluid/on_update_icon()
 
-	overlays.Cut()
+	cut_overlays()
 
 	if(reagents.total_volume > FLUID_OVER_MOB_HEAD)
 		layer = DEEP_FLUID_LAYER
