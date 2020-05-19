@@ -25,8 +25,8 @@
 /obj/structure/reagent_dispensers/proc/leak()
 	var/turf/T = get_turf(src)
 	if(reagents && T)
-		var/datum/reagents/leaked = new(200, GLOB.temp_reagents_holder)
-		reagents.trans_to_holder(leaked, 200)
+		var/datum/reagents/leaked = new(FLUID_PUDDLE, GLOB.temp_reagents_holder)
+		reagents.trans_to_holder(leaked, FLUID_PUDDLE)
 		T.add_reagents_as_fluid(leaked)
 		qdel(leaked)
 

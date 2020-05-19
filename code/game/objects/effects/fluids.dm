@@ -1,6 +1,7 @@
 /obj/effect/fluid
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
+	icon_state = "puddle"
 	anchored = 1
 	simulated = 0
 	opacity = 0
@@ -33,6 +34,7 @@
 /obj/effect/fluid/Initialize()
 	START_PROCESSING(SSobj, src)
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	icon_state = ""
 	create_reagents(FLUID_MAX_DEPTH)
 	. = ..()
 	var/turf/simulated/T = get_turf(src)
@@ -51,7 +53,7 @@
 /obj/effect/fluid/Destroy()
 	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
-		LAZYREMOVE(T.zone.fuel_objs, src)
+		T.zone.fuel_objs -= src
 		T.wet_floor()
 	STOP_PROCESSING(SSobj, src)
 	for(var/thing in neighbors)
@@ -80,7 +82,7 @@
 			. += REAGENT_VOLUME(reagents, rtype) * fuel.fuel_value
 
 /obj/effect/fluid/Process()
-	if(reagents.total_volume <= FLUID_EVAPORATION_POINT)
+	if(reagents.total_volume <= FLUID_PUDDLE)
 		qdel(src)
 		return
 	if(isturf(loc) && reagents.total_volume)
@@ -114,13 +116,15 @@
 	else
 		alpha = min(FLUID_MAX_ALPHA,max(FLUID_MIN_ALPHA,ceil(255*(reagents.total_volume/FLUID_DEEP))))
 
-	if(reagents.total_volume <= FLUID_EVAPORATION_POINT)
+	if(reagents.total_volume <= FLUID_PUDDLE)
+		APPLY_FLUID_OVERLAY("puddle")
+	else if(reagents.total_volume <= FLUID_SHALLOW)
 		APPLY_FLUID_OVERLAY("shallow_still")
-	else if(reagents.total_volume > FLUID_EVAPORATION_POINT && reagents.total_volume < FLUID_SHALLOW)
+	else if(reagents.total_volume < FLUID_DEEP)
 		APPLY_FLUID_OVERLAY("mid_still")
-	else if(reagents.total_volume >= FLUID_SHALLOW && reagents.total_volume < (FLUID_DEEP*2))
+	else if(reagents.total_volume < (FLUID_DEEP*2))
 		APPLY_FLUID_OVERLAY("deep_still")
-	else if(reagents.total_volume >= (FLUID_DEEP*2))
+	else
 		APPLY_FLUID_OVERLAY("ocean")
 
 	if(update_lighting)
