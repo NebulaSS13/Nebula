@@ -53,6 +53,9 @@ SUBSYSTEM_DEF(persistence)
 		// Wipe the previous save.
 		serializer.WipeSave()
 
+		// Launch events
+		GLOB.world_saving_event.raise_event(src)
+
 		//
 		// 	ACTUAL SAVING SECTION
 		//
@@ -264,8 +267,11 @@ SUBSYSTEM_DEF(persistence)
 	catch(var/exception/e)
 		to_world_log("Load failed on line [e.line], file [e.file] with message: '[e]'.")
 
-/datum/controller/subsystem/persistence/proc/RegisterLevel(var/z)
+/datum/controller/subsystem/persistence/proc/AddSavedArea(var/area/A)
+	saved_areas |= A
 
+/datum/controller/subsystem/persistence/proc/RemoveSavedArea(var/area/A)
+	saved_areas -= A
 
 /hook/roundstart/proc/retally_all_power()
 	for(var/area/A)

@@ -15,6 +15,7 @@
 #include "controllers\subsystems\persistence.dm"
 #include "datums\extensions\extensions.dm"
 #include "datums\mind\mind.dm"
+#include "datums\observation\saving.dm"
 #include "game\gamemodes\persistence.dm"
 #include "game\machinery\cryopod.dm"
 #include "game\machinery\machinery.dm"
