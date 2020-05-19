@@ -78,7 +78,7 @@
 	if((istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > meltdose))
 		var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 		I.desc = "Looks like this was \an [O] some time ago."
-		I.visible_message(SPAN_DANGER("\The [O] melts."))
+		I.visible_message(SPAN_DANGER("\The [O] dissolves!"))
 		qdel(O)
 		holder?.remove_reagent(type, meltdose) // 10 units of acid will not melt EVERYTHING on the tile
 

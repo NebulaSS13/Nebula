@@ -91,24 +91,32 @@
 		return
 
 	// Apply reagent interactions to everything on the turf, and the turf itself.
-	if(isturf(loc) && reagents.total_volume)
-		reagents.touch_turf(loc)
-	if(world.time >= next_fluid_act && last_flow_strength >= 10 && length(loc.contents) > 1 && reagents.total_volume > FLUID_SHALLOW)
+	var/list/pushable
+	if(!isturf(loc))
+		return
+
+	reagents.touch_turf(loc)
+	var/pushing = (world.time >= next_fluid_act && reagents.total_volume > FLUID_SHALLOW && last_flow_strength >= 10)
+	for(var/thing in loc.contents)
+		if(thing == src)
+			continue
+		var/atom/movable/AM = thing
+		if(!AM.simulated)
+			continue
+		AM.fluid_act(reagents)
+		if(!QDELETED(AM) && pushing && AM.is_fluid_pushable(last_flow_strength))
+			LAZYADD(pushable, AM)
+
+	if(length(pushable))
 		next_fluid_act = world.time + SSfluids.fluid_act_delay
 		if(prob(1))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-		for(var/thing in loc.contents)
-			if(thing == src)
-				continue
-			var/atom/movable/AM = thing
-			if(AM.simulated)
-				AM.fluid_act(reagents)
-			if(AM.is_fluid_pushable(last_flow_strength))
-				step(AM, dir)
+		for(var/thing in pushable)
+			step(thing, dir)
 
 /obj/effect/fluid/on_update_icon()
 
-	cut_overlays()
+	overlays.Cut()
 
 	if(reagents.total_volume > FLUID_OVER_MOB_HEAD)
 		layer = DEEP_FLUID_LAYER

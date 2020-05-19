@@ -1050,6 +1050,7 @@
 	return TRUE
 
 /mob/fluid_act(var/datum/reagents/fluids)
+	wash_mob(src)
 	fluids.touch_mob(src)
 	..()
 
