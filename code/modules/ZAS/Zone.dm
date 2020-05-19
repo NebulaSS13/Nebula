@@ -72,10 +72,11 @@ Class Procs:
 	T.zone = src
 	contents.Add(T)
 	if(T.fire)
-		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 		fire_tiles.Add(T)
 		SSair.active_fire_zones |= src
-		if(fuel) fuel_objs += fuel
+		var/obj/effect/fluid/fuel = T.return_fluid()
+		if(fuel?.get_fuel_amount()) 
+			fuel_objs += fuel
 	T.update_graphic(air.graphic)
 
 /zone/proc/remove(turf/simulated/T)
@@ -88,8 +89,7 @@ Class Procs:
 	contents.Remove(T)
 	fire_tiles.Remove(T)
 	if(T.fire)
-		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
-		fuel_objs -= fuel
+		fuel_objs -= T.return_fluid()
 	T.zone = null
 	T.update_graphic(graphic_remove = air.graphic)
 	if(contents.len)
@@ -150,6 +150,7 @@ Class Procs:
 
 	// Update fires.
 	if(air.temperature >= FLAMMABLE_GAS_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && contents.len)
+
 		var/turf/T = pick(contents)
 		if(istype(T))
 			T.create_fire(vsc.fire_firelevel_multiplier)

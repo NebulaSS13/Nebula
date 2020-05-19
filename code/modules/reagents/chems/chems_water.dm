@@ -28,32 +28,6 @@
 /decl/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjust_hydration(removed * 10)
 
-/decl/reagent/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(!istype(T))
-		return
-
-	var/datum/gas_mixture/environment = T.return_air()
-	var/min_temperature = T20C + rand(0, 20) // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
-
-	var/hotspot = (locate(/obj/fire) in T)
-	if(hotspot && !istype(T, /turf/space))
-		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
-		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
-		lowertemp.react()
-		T.assume_air(lowertemp)
-		qdel(hotspot)
-
-	var/volume = REAGENT_VOLUME(holder, type)
-	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
-		var/removed_heat = between(0, volume * WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
-		environment.add_thermal_energy(-removed_heat)
-		if (prob(5) && environment && environment.temperature > T100C)
-			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
-
-	else if(volume >= 10)
-		var/turf/simulated/S = T
-		S.wet_floor(8, TRUE)
-
 /decl/reagent/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O, /obj/item/chems/food/snacks/monkeycube))
 		var/obj/item/chems/food/snacks/monkeycube/cube = O

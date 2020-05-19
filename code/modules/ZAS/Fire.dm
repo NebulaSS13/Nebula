@@ -33,11 +33,8 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 		return 0
 
 	var/igniting = 0
-	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in src
-
-	if(air_contents.check_combustability(liquid))
+	if(air_contents.check_combustibility(return_fluid()))
 		igniting = 1
-
 		create_fire(exposed_temperature)
 	return igniting
 
@@ -53,9 +50,8 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 			if(T.fire)
 				T.fire.firelevel = firelevel
 			else
-				var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 				fire_tiles -= T
-				fuel_objs -= fuel
+				fuel_objs -= T.return_fluid()
 	else
 		for(var/turf/simulated/T in fire_tiles)
 			if(istype(T.fire))
@@ -67,27 +63,27 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 		SSair.active_fire_zones.Remove(src)
 
 /zone/proc/remove_liquidfuel(var/used_liquid_fuel, var/remove_fire=0)
-	if(!fuel_objs.len)
+	if(!length(fuel_objs))
 		return
 
 	//As a simplification, we remove fuel equally from all fuel sources. It might be that some fuel sources have more fuel,
 	//some have less, but whatever. It will mean that sometimes we will remove a tiny bit less fuel then we intended to.
 
-	var/fuel_to_remove = used_liquid_fuel/(fuel_objs.len*LIQUIDFUEL_AMOUNT_TO_MOL) //convert back to liquid volume units
+	var/fuel_to_remove = used_liquid_fuel/(length(fuel_objs) * LIQUIDFUEL_AMOUNT_TO_MOL) //convert back to liquid volume units
 
 	for(var/O in fuel_objs)
-		var/obj/effect/decal/cleanable/liquid_fuel/fuel = O
-		if(!istype(fuel))
+		var/obj/effect/fluid/fuel = O
+		if(!istype(fuel) || !fuel.get_fuel_amount())
 			fuel_objs -= fuel
 			continue
 
-		fuel.amount -= fuel_to_remove
-		if(fuel.amount <= 0)
+		fuel.remove_fuel(fuel_to_remove)
+		if(QDELETED(fuel) || fuel.get_fuel_amount() <= 0)
 			fuel_objs -= fuel
 			if(remove_fire)
 				var/turf/T = fuel.loc
-				if(istype(T) && T.fire) qdel(T.fire)
-			qdel(fuel)
+				if(istype(T) && T.fire) 
+					qdel(T.fire)
 
 /turf/proc/create_fire(fl)
 	return 0
@@ -107,9 +103,10 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 	fire = new(src, fl)
 	SSair.active_fire_zones |= zone
 
-	var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in src
 	zone.fire_tiles |= src
-	if(fuel) zone.fuel_objs += fuel
+	var/obj/effect/fluid/fuel = return_fluid()
+	if(fuel?.get_fuel_amount()) 
+		zone.fuel_objs += fuel
 
 	return 0
 
@@ -168,8 +165,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 
 				//if(!enemy_tile.zone.fire_tiles.len) TODO - optimize
 				var/datum/gas_mixture/acs = enemy_tile.return_air()
-				var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in enemy_tile
-				if(!acs || !acs.check_combustability(liquid))
+				if(!acs || !acs.check_combustibility(enemy_tile.return_fluid()))
 					continue
 
 				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
@@ -248,8 +244,12 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 		//Liquid Fuel
 		var/fuel_area = 0
 		if(zone)
-			for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in zone.fuel_objs)
-				liquid_fuel += fuel.amount*LIQUIDFUEL_AMOUNT_TO_MOL
+			for(var/obj/effect/fluid/fuel in zone.fuel_objs)
+				var/fuel_amount = fuel.get_fuel_amount()
+				if(!fuel_amount)
+					zone.fuel_objs -= fuel
+					continue
+				liquid_fuel += fuel_amount * LIQUIDFUEL_AMOUNT_TO_MOL
 				fuel_area++
 
 		total_fuel = gas_fuel + liquid_fuel
@@ -311,7 +311,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 				adjust_gas(mat.gas_burn_product, burned_fuel.gas[g])
 
 		if(zone)
-			zone.remove_liquidfuel(used_liquid_fuel, !check_combustability())
+			zone.remove_liquidfuel(used_liquid_fuel, !check_combustibility())
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * (used_gas_fuel + used_liquid_fuel)) / heat_capacity()
@@ -334,7 +334,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	if(!.)
 		return 0
 
-	if(fuel_objs && fuel_objs.len)
+	if(length(fuel_objs))
 		return 1
 
 	. = 0
@@ -343,7 +343,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 			. = 1
 			break
 
-/datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fuel/liquid=null)
+/datum/gas_mixture/proc/check_combustibility(var/obj/effect/fluid/fuel)
 	. = 0
 	for(var/g in gas)
 		if((SSmaterials.get_gas_flags(g) & XGM_GAS_OXIDIZER) && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
@@ -353,7 +353,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	if(!.)
 		return 0
 
-	if(liquid)
+	if(fuel?.get_fuel_amount())
 		return 1
 
 	. = 0

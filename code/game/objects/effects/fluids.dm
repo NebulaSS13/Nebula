@@ -12,6 +12,7 @@
 	var/list/neighbors = list()
 	var/last_flow_strength = 0
 	var/next_fluid_act = 0
+	var/update_lighting = FALSE
 
 /obj/effect/fluid/airlock_crush()
 	qdel(src)
@@ -21,8 +22,12 @@
 	return FALSE
 
 /obj/effect/fluid/on_reagent_change()
+	if(reagents?.total_volume <= FLUID_EVAPORATION_POINT)
+		qdel(src)
+		return
 	. = ..()
 	ADD_ACTIVE_FLUID(src)
+	update_lighting = TRUE
 	queue_icon_update()
 
 /obj/effect/fluid/Initialize()
@@ -44,10 +49,11 @@
 	ADD_ACTIVE_FLUID(src)
 
 /obj/effect/fluid/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	var/turf/simulated/T = loc
+	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
+		LAZYREMOVE(T.zone.fuel_objs, src)
 		T.wet_floor()
+	STOP_PROCESSING(SSobj, src)
 	for(var/thing in neighbors)
 		var/obj/effect/fluid/F = thing
 		LAZYREMOVE(F.neighbors, src)
@@ -55,6 +61,23 @@
 	neighbors = null
 	REMOVE_ACTIVE_FLUID(src)
 	. = ..()
+
+/obj/effect/fluid/proc/remove_fuel(var/amt)
+	for(var/rtype in reagents.reagent_volumes)
+		var/decl/reagent/fuel = decls_repository.get_decl(rtype)
+		if(fuel.fuel_value)
+			var/removing = min(amt, reagents.reagent_volumes[rtype])
+			reagents.remove_reagent(rtype, removing)
+			amt -= removing
+		if(amt <= 0)
+			break
+
+/obj/effect/fluid/proc/get_fuel_amount()
+	. = 0
+	for(var/rtype in reagents?.reagent_volumes)
+		var/decl/reagent/fuel = decls_repository.get_decl(rtype)
+		if(fuel.fuel_value)
+			. += REAGENT_VOLUME(reagents, rtype) * fuel.fuel_value
 
 /obj/effect/fluid/Process()
 	if(reagents.total_volume <= FLUID_EVAPORATION_POINT)
@@ -100,6 +123,19 @@
 	else if(reagents.total_volume >= (FLUID_DEEP*2))
 		APPLY_FLUID_OVERLAY("ocean")
 
+	if(update_lighting)
+		update_lighting = FALSE
+		var/glowing
+		for(var/rtype in reagents.reagent_volumes)
+			var/decl/reagent/reagent = decls_repository.get_decl(rtype)
+			if(REAGENT_VOLUME(reagents, rtype) >= 3 && reagent.radioactive)
+				glowing = TRUE
+				break
+		if(glowing)
+			set_light(0.2, 0.1, 1, l_color = COLOR_GREEN)
+		else
+			set_light(0)	
+
 // Map helper.
 /obj/effect/fluid_mapped
 	name = "mapped flooded area"
@@ -118,6 +154,11 @@
 		if(!F) F = new(T)
 		F.reagents.add_reagent(fluid_type, fluid_initial)
 	return INITIALIZE_HINT_QDEL
+
+/obj/effect/fluid_mapped/fuel
+	name = "spilled fuel"
+	fluid_type = /decl/reagent/fuel
+	fluid_initial = 10
 
 // Permaflood overlay.
 /obj/effect/flood
