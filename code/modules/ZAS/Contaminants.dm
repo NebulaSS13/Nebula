@@ -73,6 +73,7 @@ obj/var/contaminated = 0
 //		back.contaminate()
 
 /mob/proc/handle_contaminants()
+	return
 
 /mob/living/carbon/human/handle_contaminants()
 	//Handles all the bad things contaminants can do.

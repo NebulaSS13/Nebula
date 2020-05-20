@@ -32,7 +32,7 @@
 
 /mob/living/carbon/human
 	var/oxygen_alert = 0
-	var/phoron_alert = 0
+	var/toxins_alert = 0
 	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
@@ -787,7 +787,7 @@
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
 		if(toxin)
-			toxin.icon_state = "tox[phoron_alert ? "1" : "0"]"
+			toxin.icon_state = "tox[toxins_alert ? "1" : "0"]"
 		if(oxygen)
 			oxygen.icon_state = "oxy[oxygen_alert ? "1" : "0"]"
 		if(fire)
