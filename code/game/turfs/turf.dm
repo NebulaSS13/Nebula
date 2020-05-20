@@ -41,7 +41,7 @@
 		luminosity = 0
 	else
 		luminosity = 1
-	opaque_counter = opacity
+	RecalculateOpacity()
 	if (mapload && permit_ao)
 		queue_ao()
 	if (z_flags & ZM_MIMIC_BELOW)
