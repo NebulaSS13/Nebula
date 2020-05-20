@@ -581,21 +581,18 @@
 // if a syringe, can inject phoron to make it explode
 /obj/item/light/attackby(var/obj/item/I, var/mob/user)
 	..()
-	if(istype(I, /obj/item/chems/syringe))
+	if(istype(I, /obj/item/chems/syringe) && I.reagents?.total_volume)
 		var/obj/item/chems/syringe/S = I
-
 		to_chat(user, "You inject the solution into the [src].")
-
-		if(S.reagents.has_reagent(/decl/reagent/toxin/phoron, 5))
-
-			log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
-
-			rigged = 1
-
+		for(var/rtype in S.reagents)
+			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			if(R.fuel_value)
+				rigged = TRUE
+				log_and_message_admins("injected a light with flammable reagents, rigging it to explode.", user)
+				break
 		S.reagents.clear_reagents()
-	else
-		..()
-	return
+		return TRUE
+	. = ..()
 
 // called after an attack with a light item
 // shatter light, unless it was an attempt to put it in a light socket
