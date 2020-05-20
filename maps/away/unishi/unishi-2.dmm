@@ -1196,7 +1196,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "dd" = (
-/obj/machinery/vending/phoronresearch,
+/obj/machinery/vending/bombresearch,
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "de" = (
