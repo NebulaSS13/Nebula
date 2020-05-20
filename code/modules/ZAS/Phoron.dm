@@ -43,7 +43,7 @@ obj/var/contaminated = 0
 
 /obj/item/proc/can_contaminate()
 	//Clothing and backpacks can be contaminated.
-	if(obj_flags & ITEM_FLAG_PHORONGUARD) return 0
+	if(obj_flags & ITEM_FLAG_NO_CONTAMINATION) return 0
 	else if(istype(src,/obj/item/storage/backpack)) return 0 //Cannot be washed :(
 	else if(istype(src,/obj/item/clothing)) return 1
 
@@ -129,7 +129,7 @@ obj/var/contaminated = 0
 	//Checks if the head is adequately sealed.
 	if(head)
 		if(vsc.plc.PHORONGUARD_ONLY)
-			if(head.item_flags & ITEM_FLAG_PHORONGUARD)
+			if(head.item_flags & ITEM_FLAG_NO_CONTAMINATION)
 				return 1
 		else if(head.body_parts_covered & EYES)
 			return 1
@@ -141,7 +141,7 @@ obj/var/contaminated = 0
 	for(var/obj/item/protection in list(wear_suit, gloves, shoes))
 		if(!protection)
 			continue
-		if(vsc.plc.PHORONGUARD_ONLY && !(protection.item_flags & ITEM_FLAG_PHORONGUARD))
+		if(vsc.plc.PHORONGUARD_ONLY && !(protection.item_flags & ITEM_FLAG_NO_CONTAMINATION))
 			return 0
 		coverage |= protection.body_parts_covered
 
