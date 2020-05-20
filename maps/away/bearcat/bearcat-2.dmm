@@ -4972,7 +4972,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/portables_connector,
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/reinforced_borosilicate{
 	amount = 5
 	},
 /turf/simulated/floor/airless,
@@ -5268,7 +5268,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/reinforced_borosilicate{
 	amount = 20
 	},
 /turf/simulated/floor/airless,
