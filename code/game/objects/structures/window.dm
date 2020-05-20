@@ -398,7 +398,7 @@
 /obj/structure/window/phoronbasic
 	name = "phoron window"
 	color = GLASS_COLOR_PHORON
-	material = MAT_PHORON_GLASS
+	material = MAT_BOROSILICATE_GLASS
 
 /obj/structure/window/phoronbasic/full
 	dir = NORTHEAST
@@ -408,7 +408,7 @@
 	name = "reinforced borosilicate window"
 	icon_state = "rwindow"
 	color = GLASS_COLOR_PHORON
-	material = MAT_PHORON_GLASS
+	material = MAT_BOROSILICATE_GLASS
 	reinf_material = MAT_STEEL
 
 /obj/structure/window/phoronreinforced/full
