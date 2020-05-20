@@ -304,7 +304,7 @@
 
 	interface_name = "mounted plasma cutter"
 	interface_desc = "A forearm-mounted suit-powered plasma cutter."
-	origin_tech = "{'materials':5,'phorontech':4,'engineering':7,'combat':5}"
+	origin_tech = "{'materials':5,'exoticmatter':4,'engineering':7,'combat':5}"
 
 	gun = /obj/item/gun/energy/plasmacutter/mounted
 	material = MAT_STEEL
