@@ -330,7 +330,7 @@
 	for(var/g in environment.gas)
 		var/material/mat = SSmaterials.get_material_datum(g)
 		if((mat.gas_flags & XGM_GAS_CONTAMINANT) && environment.gas[g] > mat.gas_overlay_limit + 1)
-			pl_effects()
+			contaminant_control()
 			break
 
 	if(istype(src.loc, /turf/space)) //being in a closet will interfere with radiation, may not make sense but we don't model radiation for atoms in general so it will have to do for now.

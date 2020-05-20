@@ -1,7 +1,7 @@
 /obj/item/organ/internal/eyes/insectoid/serpentid
 	name = "compound eyes"
 	innate_flash_protection = FLASH_PROTECTION_VULNERABLE
-	phoron_guard = 1
+	contaminant_guard = 1
 	action_button_name = "Toggle Eye Shields"
 	eye_icon = 'mods/ascent/icons/species/body/serpentid/eyes.dmi'
 	var/eyes_shielded
