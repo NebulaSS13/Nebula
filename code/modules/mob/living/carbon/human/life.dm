@@ -330,7 +330,7 @@
 	for(var/g in environment.gas)
 		var/material/mat = SSmaterials.get_material_datum(g)
 		if((mat.gas_flags & XGM_GAS_CONTAMINANT) && environment.gas[g] > mat.gas_overlay_limit + 1)
-			contaminant_control()
+			handle_contaminants()
 			break
 
 	if(istype(src.loc, /turf/space)) //being in a closet will interfere with radiation, may not make sense but we don't model radiation for atoms in general so it will have to do for now.
@@ -643,11 +643,11 @@
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
 
-		if(vsc.plc.CONTAMINATION_LOSS)
+		if(vsc.contaminant_control.CONTAMINATION_LOSS)
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
 				if(I.contaminated)
-					total_phoronloss += vsc.plc.CONTAMINATION_LOSS
+					total_phoronloss += vsc.contaminant_control.CONTAMINATION_LOSS
 			adjustToxLoss(total_phoronloss)
 
 		// nutrition decrease
