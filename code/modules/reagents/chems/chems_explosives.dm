@@ -20,7 +20,7 @@
 	var/turf/T = get_turf(holder)
 	if(T)
 		var/adj_power = round(boompower * activated_volume/60)
-		var/datum/gas_mixture/products = new(_temperature = 5 * PHORON_FLASHPOINT)
+		var/datum/gas_mixture/products = new(_temperature = 5 * FLAMMABLE_GAS_FLASHPOINT)
 		var/gas_moles = 3 * volume
 		products.adjust_multi(MAT_CO2, 0.5 * gas_moles, MAT_NITROGEN, 0.3 * gas_moles, MAT_STEAM, 0.2 * gas_moles)
 		T.assume_air(products)
