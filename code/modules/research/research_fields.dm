@@ -13,7 +13,7 @@
 	desc = "The study of physics and fabrication techniques as applied to engineering."
 	id = TECH_ENGINEERING
 
-/decl/research_field/phoron
+/decl/research_field/exotic_matter
 	name = "Exotic Matter"
 	desc = "The study of wormholes, non-baryonic matter, and the manipulation of spacetime."
 	id = TECH_PHORON

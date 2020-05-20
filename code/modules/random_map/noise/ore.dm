@@ -7,6 +7,35 @@
 	var/min_rare_ratio = MIN_RARE_COUNT_PER_CHUNK
 	var/min_deep_ratio = MIN_DEEP_COUNT_PER_CHUNK
 
+	var/list/surface_metals = list(
+		MAT_IRON =              list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
+		MAT_ALUMINIUM =         list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_GOLD =              list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		MAT_SILVER =            list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		MAT_URANIUM =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+	)
+	var/list/rare_metals = list(
+		MAT_GOLD =              list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_SILVER =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_URANIUM =           list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_PHORON =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_OSMIUM =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_RUTILE =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+	)
+	var/list/deep_metals = list(
+		MAT_URANIUM =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		MAT_DIAMOND =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		MAT_PHORON =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
+		MAT_OSMIUM =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
+		MAT_METALLIC_HYDROGEN = list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_RUTILE =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+	)
+	var/list/common_resources = list(
+		MAT_SAND =     list(3,5),
+		MAT_CLAY =     list(3,5),
+		MAT_GRAPHITE = list(3,5)
+	)
+
 /datum/random_map/noise/ore/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
 	rare_val = cell_range * rare_val
 	deep_val = cell_range * deep_val
@@ -55,44 +84,25 @@
 			if(!priority_process)
 				CHECK_TICK
 			T.resources = list()
-			T.resources[MAT_SAND] =     rand(3,5)
-			T.resources[MAT_CLAY] =     rand(3,5)
-			T.resources[MAT_GRAPHITE] = rand(3,5)
+
+			for(var/val in common_resources)
+				var/list/ranges = common_resources[val]
+				T.resources[val] = rand(ranges[1], ranges[2])
 
 			var/tmp_cell
 			TRANSLATE_AND_VERIFY_COORD(x, y)
 
-			if(tmp_cell < rare_val)      // Surface metals.
-				T.resources[MAT_IRON] =     rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
-				T.resources[MAT_ALUMINIUM] =     rand(RESOURCE_MID_MIN, RESOURCE_MID_MAX)
-				T.resources[MAT_GOLD] =     rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources[MAT_SILVER] =   rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources[MAT_URANIUM] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources[MAT_RUTILE] = 0
-				T.resources[MAT_DIAMOND] =  0
-				T.resources[MAT_PHORON] =   0
-				T.resources[MAT_OSMIUM] =   0
-				T.resources[MAT_METALLIC_HYDROGEN] = 0
-			else if(tmp_cell < deep_val) // Rare metals.
-				T.resources[MAT_GOLD] =     rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources[MAT_SILVER] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources[MAT_URANIUM] =  rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources[MAT_PHORON] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources[MAT_OSMIUM] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources[MAT_RUTILE] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources[MAT_METALLIC_HYDROGEN] = 0
-				T.resources[MAT_DIAMOND] =  0
-				T.resources[MAT_IRON] =     0
-			else                             // Deep metals.
-				T.resources[MAT_URANIUM] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources[MAT_DIAMOND] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources[MAT_PHORON] =   rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
-				T.resources[MAT_OSMIUM] =   rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
-				T.resources[MAT_METALLIC_HYDROGEN] = rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources[MAT_RUTILE] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources[MAT_IRON] =     0
-				T.resources[MAT_GOLD] =     0
-				T.resources[MAT_SILVER] =   0
+			var/spawning
+			if(tmp_cell < rare_val)
+				spawning = surface_metals
+			else if(tmp_cell < deep_val)
+				spawning = rare_metals
+			else
+				spawning = deep_metals
+
+			for(var/val in spawning)
+				var/list/ranges = spawning[val]
+				T.resources[val] = rand(ranges[1], ranges[2])
 
 /datum/random_map/noise/ore/get_map_char(var/value)
 	if(value < rare_val)
