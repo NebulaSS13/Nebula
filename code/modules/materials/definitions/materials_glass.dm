@@ -40,7 +40,7 @@
 	brute_armor = 2
 	burn_armor = 5
 	melting_point = T0C + 4000
-	icon_colour = GLASS_COLOR_PHORON
+	icon_colour = GLASS_COLOR_SILICATE
 	stack_origin_tech = "{'materials':4}"
 	wire_product = null
 	construction_difficulty = MAT_VALUE_HARD_DIY

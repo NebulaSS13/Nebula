@@ -397,7 +397,7 @@
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"
-	color = GLASS_COLOR_PHORON
+	color = GLASS_COLOR_SILICATE
 	material = MAT_BOROSILICATE_GLASS
 
 /obj/structure/window/phoronbasic/full
@@ -407,7 +407,7 @@
 /obj/structure/window/phoronreinforced
 	name = "reinforced borosilicate window"
 	icon_state = "rwindow"
-	color = GLASS_COLOR_PHORON
+	color = GLASS_COLOR_SILICATE
 	material = MAT_BOROSILICATE_GLASS
 	reinf_material = MAT_STEEL
 
