@@ -57,34 +57,6 @@
 	. = ..()
 	color = rgb(new_dna.GetUIValue(DNA_UI_EYES_R), new_dna.GetUIValue(DNA_UI_EYES_G), new_dna.GetUIValue(DNA_UI_EYES_B))
 
-/obj/item/organ/internal/phoron
-	name = "phoron storage"
-	icon_state = "stomach"
-	color = "#ed81f1"
-	organ_tag = BP_PHORON
-	parent_organ = BP_CHEST
-	can_be_printed = FALSE
-	var/dexalin_level = 10
-	var/phoron_level = 5
-	var/raw_amount = 0.1
-
-/obj/item/organ/internal/phoron/Process()
-	if(owner)
-		var/amount = raw_amount
-		if(is_broken())
-			amount *= 0.5
-		else if(is_bruised())
-			amount *= 0.8
-
-		var/phoron_volume_raw = REAGENT_VOLUME(owner.reagents, /decl/reagent/toxin/phoron)
-
-		if(phoron_volume_raw < phoron_level || !phoron_volume_raw)
-			owner.reagents.add_reagent(/decl/reagent/toxin/phoron, amount)
-	..()
-
-/obj/item/organ/internal/phoron/can_recover()
-	return TRUE
-
 /obj/item/organ/internal/liver/insectoid/serpentid
 	name = "toxin filter"
 	color = "#66ff99"
