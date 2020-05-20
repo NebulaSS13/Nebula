@@ -255,7 +255,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "aH" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -537,7 +537,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bu" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
@@ -547,7 +547,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bv" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";

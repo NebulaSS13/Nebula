@@ -4461,7 +4461,7 @@
 /turf/simulated/floor/reinforced,
 /area/casino/casino_bow)
 "ly" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
