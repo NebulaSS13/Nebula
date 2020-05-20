@@ -406,7 +406,7 @@
 
 /obj/structure/window/borosilicate_reinforced
 	name = "reinforced borosilicate window"
-	icon_state = "rwindow"
+	icon_state = "phoronrwindow"
 	color = GLASS_COLOR_SILICATE
 	material = MAT_BOROSILICATE_GLASS
 	reinf_material = MAT_STEEL

@@ -1,9 +1,9 @@
 
 //This one's from bay12
-/obj/machinery/vending/phoronresearch
+/obj/machinery/vending/bombresearch
 	name = "Toximate 3000"
 	desc = "All the fine parts you need in one vending machine!"
-	base_type = /obj/machinery/vending/phoronresearch
+	base_type = /obj/machinery/vending/bombresearch
 	products = list(
 		/obj/item/clothing/suit/bio_suit = 6,
 		/obj/item/clothing/head/bio_hood = 6,

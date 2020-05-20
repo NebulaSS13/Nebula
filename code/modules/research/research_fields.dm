@@ -16,7 +16,7 @@
 /decl/research_field/phoron
 	name = "Exotic Matter"
 	desc = "The study of wormholes, non-baryonic matter, and the manipulation of spacetime."
-	id = TECH_PHORON
+	id = TECH_EXOTIC_MATTER
 
 /decl/research_field/power
 	name = "Power Storage"

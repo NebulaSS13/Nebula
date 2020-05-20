@@ -2,7 +2,7 @@
 	name = T_BOARD("PACMAN-type generator")
 	build_path = /obj/machinery/power/port_gen/pacman
 	board_type = "machine"
-	origin_tech = "{'programming':3,'powerstorage':3,'phorontech':3,'engineering':3}"
+	origin_tech = "{'programming':3,'powerstorage':3,'exoticmatter':3,'engineering':3}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/micro_laser = 1,

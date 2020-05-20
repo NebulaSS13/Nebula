@@ -1196,7 +1196,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "dd" = (
-/obj/machinery/vending/phoronresearch,
+/obj/machinery/vending/bombresearch,
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
 "de" = (
@@ -2757,14 +2757,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gQ" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
 	},
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gR" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
@@ -2772,7 +2772,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gS" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
 	icon_state = "map";
 	dir = 4
@@ -2780,7 +2780,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gT" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gU" = (
@@ -2916,7 +2916,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hm" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	icon_state = "intact";
 	dir = 4

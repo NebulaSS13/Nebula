@@ -48,7 +48,7 @@
 #define CARBON_LIFEFORM_FIRE_RESISTANCE (T0C + 200)
 #define CARBON_LIFEFORM_FIRE_DAMAGE     4
 
-// Phoron fire properties.
+// Flammable gas fire properties.
 #define FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE    (T0C +  126) //400 K - autoignite temperature in tanks and canisters - enclosed environments I guess
 #define FLAMMABLE_GAS_FLASHPOINT                  (T0C +  246) //519 K - autoignite temperature in air if that ever gets implemented.
 

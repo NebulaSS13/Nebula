@@ -2257,11 +2257,9 @@
 	id_tag = "d1starboardnacelle"
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /obj/structure/grille,
@@ -2360,7 +2358,6 @@
 	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/grille,
@@ -2407,7 +2404,6 @@
 	},
 /obj/structure/window/borosilicate_reinforced,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/grille,
