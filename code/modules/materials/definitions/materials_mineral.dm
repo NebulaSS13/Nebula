@@ -223,7 +223,7 @@
 /material/phoron
 	display_name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
-	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
+	ignition_point = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_colour = "#e37108"

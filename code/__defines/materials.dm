@@ -16,7 +16,7 @@
 #define MAT_IRON                    /material/iron
 #define MAT_PLATINUM                /material/platinum
 #define MAT_BRONZE                  /material/gold/bronze
-#define MAT_PHORON_GLASS            /material/glass/phoron
+#define MAT_BOROSILICATE_GLASS      /material/glass/borosilicate
 #define MAT_MARBLE                  /material/stone/marble
 #define MAT_CULT                    /material/cult
 #define MAT_REINFORCED_CULT         /material/cult/reinf

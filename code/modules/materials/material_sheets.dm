@@ -497,16 +497,16 @@
 /obj/item/stack/material/glass/reinforced/fifty
 	amount = 50
 
-/obj/item/stack/material/glass/phoronglass
+/obj/item/stack/material/glass/borosilicate
 	name = "borosilicate glass"
-	material = MAT_PHORON_GLASS
+	material = MAT_BOROSILICATE_GLASS
 
-/obj/item/stack/material/glass/phoronrglass
+/obj/item/stack/material/glass/reinforced_borosilicate
 	name = "reinforced borosilicate glass"
-	material = MAT_PHORON_GLASS
+	material = MAT_BOROSILICATE_GLASS
 	reinf_material = MAT_STEEL
 
-/obj/item/stack/material/glass/phoronrglass/ten
+/obj/item/stack/material/glass/reinforced_borosilicate/ten
 	amount = 10
 
 /obj/item/stack/material/aliumium
