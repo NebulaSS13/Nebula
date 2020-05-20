@@ -45,6 +45,8 @@
 	ore_icon_overlay = "nugget"
 	value = 1.6
 	removed_by_welder = TRUE
+	sparse_material_weight = 8
+	rich_material_weight = 10
 
 /material/gold/bronze //placeholder for ashtrays
 	display_name = "bronze"
@@ -55,6 +57,8 @@
 	ore_smelts_to = null
 	ore_compresses_to = null
 	value = 1.2
+	sparse_material_weight = null
+	rich_material_weight = null
 
 /material/copper
 	display_name = "copper"
@@ -103,6 +107,8 @@
 	ore_icon_overlay = "shiny"
 	removed_by_welder = TRUE
 	value = 1.2
+	sparse_material_weight = 8
+	rich_material_weight = 10
 
 /material/steel
 	display_name = "steel"
@@ -268,6 +274,8 @@
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
 	value = 1.5
+	sparse_material_weight = 8
+	rich_material_weight = 10
 
 /material/iron
 	display_name = "iron"
@@ -355,6 +363,8 @@
 	ore_icon_overlay = "lump"
 	removed_by_welder = TRUE
 	value = 0.8
+	sparse_material_weight = 35
+	rich_material_weight = 20
 
 /material/rutile
 	display_name = "rutile"
@@ -369,3 +379,5 @@
 	ore_icon_overlay = "lump"
 	removed_by_welder = TRUE
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
