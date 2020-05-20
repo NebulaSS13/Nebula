@@ -1017,7 +1017,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "bI" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
@@ -1127,7 +1127,7 @@
 /turf/simulated/wall/ocp_wall,
 /area/map_template/merc_shuttle/rear)
 "bR" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -1139,7 +1139,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "bS" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},

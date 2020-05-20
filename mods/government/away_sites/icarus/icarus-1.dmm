@@ -2249,18 +2249,18 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ho" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /obj/machinery/door/blast/regular{
 	dir = 4;
 	id_tag = "d1starboardnacelle"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 1
 	},
@@ -2356,10 +2356,10 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hB" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
@@ -2402,11 +2402,11 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hG" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced,
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},

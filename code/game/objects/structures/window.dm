@@ -395,23 +395,23 @@
 /obj/structure/window/basic/full/polarized
 	polarized = 1
 
-/obj/structure/window/phoronbasic
-	name = "phoron window"
+/obj/structure/window/borosilicate
+	name = "borosilicate window"
 	color = GLASS_COLOR_SILICATE
 	material = MAT_BOROSILICATE_GLASS
 
-/obj/structure/window/phoronbasic/full
+/obj/structure/window/borosilicate/full
 	dir = NORTHEAST
 	icon_state = "window_full"
 
-/obj/structure/window/phoronreinforced
+/obj/structure/window/borosilicate_reinforced
 	name = "reinforced borosilicate window"
 	icon_state = "rwindow"
 	color = GLASS_COLOR_SILICATE
 	material = MAT_BOROSILICATE_GLASS
 	reinf_material = MAT_STEEL
 
-/obj/structure/window/phoronreinforced/full
+/obj/structure/window/borosilicate_reinforced/full
 	dir = NORTHEAST
 	icon_state = "window_full"
 

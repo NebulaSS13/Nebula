@@ -15,7 +15,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growX)
 "ae" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growX)
@@ -51,7 +51,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growX)
 "al" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
@@ -129,7 +129,7 @@
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/growD)
 "au" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growD)
@@ -235,7 +235,7 @@
 	icon_state = "warningcorner";
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
@@ -356,7 +356,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
@@ -418,7 +418,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
@@ -801,7 +801,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/hydrobase/station/growF)
 "ca" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
@@ -948,7 +948,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cv" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growC)
@@ -1022,7 +1022,7 @@
 	dir = 4;
 	start_pressure = 740.5
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 1
 	},
@@ -1033,7 +1033,7 @@
 	icon_state = "map";
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 1
 	},
@@ -1044,7 +1044,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 1
 	},
@@ -1059,11 +1059,11 @@
 	icon_state = "map_universal";
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /obj/structure/catwalk,
@@ -1585,7 +1585,7 @@
 	id = "hydrosolar";
 	track = 2
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
@@ -1751,11 +1751,11 @@
 /area/map_template/hydrobase/station/processing)
 "eo" = (
 /obj/structure/closet/toolcloset,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -1775,7 +1775,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -2130,7 +2130,7 @@
 /area/map_template/hydrobase/station/processing)
 "eX" = (
 /obj/structure/closet/l3closet/general/multi,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
@@ -2169,7 +2169,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
@@ -2193,14 +2193,14 @@
 	icon_state = "1-8"
 	},
 /obj/structure/catwalk,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fd" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/solarlock)
 "fe" = (
@@ -2328,7 +2328,7 @@
 /area/map_template/hydrobase/station/processing)
 "ft" = (
 /obj/machinery/light,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
@@ -2336,7 +2336,7 @@
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/gun/projectile/shotgun/doublebarrel,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /obj/item/grenade/chem_grenade/antiweed,
@@ -2360,7 +2360,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fw" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
@@ -2399,7 +2399,7 @@
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/shipaccess)
 "fC" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/map_template/hydrobase/station/shipaccess)
@@ -2776,7 +2776,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/dockport)
 "gp" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/map_template/hydrobase/station/dockport)
