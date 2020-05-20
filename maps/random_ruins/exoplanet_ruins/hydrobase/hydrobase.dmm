@@ -236,7 +236,6 @@
 	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -357,7 +356,6 @@
 	icon_state = "1-2"
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -419,7 +417,6 @@
 	icon_state = "1-2"
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -1023,7 +1020,6 @@
 	start_pressure = 740.5
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /turf/simulated/floor/fixed/alium,
@@ -1034,7 +1030,6 @@
 	dir = 1
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /obj/structure/catwalk,
@@ -1045,7 +1040,6 @@
 	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /obj/structure/catwalk,
@@ -1060,7 +1054,6 @@
 	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /obj/structure/window/borosilicate_reinforced{
@@ -1586,7 +1579,6 @@
 	track = 2
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/cable,
@@ -1752,7 +1744,6 @@
 "eo" = (
 /obj/structure/closet/toolcloset,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/window/borosilicate_reinforced,
@@ -2131,7 +2122,6 @@
 "eX" = (
 /obj/structure/closet/l3closet/general/multi,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -2170,7 +2160,6 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/item/material/shard/phoron,
@@ -2194,7 +2183,6 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /turf/simulated/floor/fixed/alium,
@@ -2329,7 +2317,6 @@
 "ft" = (
 /obj/machinery/light,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/table/rack,

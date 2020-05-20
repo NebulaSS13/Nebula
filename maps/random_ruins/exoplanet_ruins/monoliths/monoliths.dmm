@@ -13,15 +13,12 @@
 "d" = (
 /obj/structure/artifact,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/window/borosilicate_reinforced,

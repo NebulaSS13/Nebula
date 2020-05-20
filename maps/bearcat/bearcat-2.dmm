@@ -4174,11 +4174,9 @@
 "jJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 1
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4189,7 +4187,6 @@
 	dir = 6
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4204,11 +4201,9 @@
 	dir = 10
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 1
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4316,7 +4311,6 @@
 "jW" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4403,7 +4397,6 @@
 	dir = 5
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
@@ -4429,7 +4422,6 @@
 	dir = 1
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
@@ -4439,7 +4431,6 @@
 	dir = 4
 	},
 /obj/structure/window/borosilicate_reinforced{
-	icon_state = "rwindow";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
