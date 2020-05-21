@@ -1,6 +1,8 @@
 /datum/codex_category/cocktails
 	name = "Cocktails"
 	desc = "Various mixes of drinks, alcoholic and otherwise, that can be made by a skilled bartender."
+	guide_name = "Bartending"
+	guide_strings = list("bartender", "cocktails", "bartending")
 
 /datum/codex_category/cocktails/Initialize()
 
@@ -34,7 +36,6 @@
 		)
 
 	for(var/datum/codex_entry/entry in entries_to_register)
-		entry.update_links()
 		SScodex.add_entry_by_string(entry.display_name, entry)
 		items += entry.display_name
 
