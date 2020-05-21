@@ -43,12 +43,6 @@
 	mix_message = "The solution thickens into a creamy brown beverage."
 	maximum_temperature = 70 CELSIUS
 
-/datum/chemical_reaction/recipe/nothing
-	name = "Nothing"
-	result = /decl/reagent/drink/nothing
-	required_reagents = list(/decl/reagent/drink/milk/cream = 1, /decl/reagent/nutriment/sugar = 1, /decl/reagent/water= 1)
-	result_amount = 3
-
 /datum/chemical_reaction/recipe/fools_gold
 	name = "Fools Gold"
 	result = /decl/reagent/drink/fools_gold

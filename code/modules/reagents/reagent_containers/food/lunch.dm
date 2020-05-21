@@ -58,7 +58,6 @@ var/list/lunchables_drinks_ = list(
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_drink_reagents_ = list(
-											/decl/reagent/drink/nothing,
 											/decl/reagent/drink/dry_ramen,
 											/decl/reagent/drink/hell_ramen,
 											/decl/reagent/drink/hot_ramen,

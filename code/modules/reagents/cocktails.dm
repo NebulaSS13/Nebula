@@ -464,23 +464,6 @@
 		/decl/reagent/nutriment/sugar =    0.1
 	)
 
-/decl/cocktail/silencer
-	name = "Silencer"
-	description = "A very non-alcoholic cocktail - sort of a mocktail, really."
-	ratios = list(
-		/decl/reagent/drink/nothing =    0.3,
-		/decl/reagent/drink/milk/cream = 0.3,
-		/decl/reagent/nutriment/sugar =  0.1
-	)
-
-/decl/cocktail/driestmartini
-	name = "driest martini"
-	description = "If the dryness of a martini is proportionate to classiness, drinking this will turn you into Old Money."
-	ratios = list(
-		/decl/reagent/ethanol/gin =   0.4,
-		/decl/reagent/drink/nothing = 0.3
-	)
-
 /decl/cocktail/ships_surgeon
 	name = "Ship's Surgeon"
 	description = "A smooth, steady cocktail supposedly ordered by sawbones and surgeons of legend."

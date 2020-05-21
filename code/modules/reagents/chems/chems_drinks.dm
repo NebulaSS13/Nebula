@@ -516,14 +516,6 @@
 	..()
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 
-/decl/reagent/drink/nothing
-	name = "nothing"
-	description = "Absolutely nothing."
-	taste_description = "nothing"
-
-	glass_name = "nothing"
-	glass_desc = "Absolutely nothing."
-
 /decl/reagent/drink/tea/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	. = supplied || glass_name
 	if(prop.reagents.has_reagent(/decl/reagent/nutriment/sugar) || prop.reagents.has_reagent(/decl/reagent/nutriment/honey))
