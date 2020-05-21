@@ -6,6 +6,18 @@
 
 	var/list/entries_to_register = list()
 
+	guide_html = {"
+		<h1>Chef recipes</h1>
+		Here is a guide on food recipes and also how to not poison your customers accidentally.
+
+		<h3>Basics:</h3>
+		<ul>
+		<li>Mix an egg and some flour along with some water to make dough.</li>
+		<li>Bake that to make a bun or flatten and cut it.</li>
+		<li>Cup up a meat slab with a sharp knife to make cutlets.</li>
+		<li>Mix flour and protein (ground meat) to make meatballs.</li>
+		</ul>"}
+
 	for(var/reactiontype in subtypesof(/datum/chemical_reaction/recipe))
 		var/datum/chemical_reaction/recipe/food = SSchemistry.chemical_reactions[reactiontype]
 		if(!food || !food.name || food.hidden_from_codex)
@@ -69,24 +81,25 @@
 		var/mechanics_text = ""
 		if(recipe.mechanics_text)
 			mechanics_text = "[recipe.mechanics_text]<br><br>"
-		mechanics_text += "This recipe requires the following ingredients:<br><ul>"
+		mechanics_text += "This recipe requires the following ingredients:<br>"
+		var/list/ingredients = list()
 		for(var/thing in recipe.reagents)
 			var/decl/reagent/thing_reagent = thing
-			mechanics_text += "<li>[recipe.reagents[thing]]u [initial(thing_reagent.name)]</li>"
+			ingredients += "[recipe.reagents[thing]]u [initial(thing_reagent.name)]"
 		for(var/thing in recipe.items)
 			var/atom/thing_atom = thing
-			mechanics_text += "<li>\a [initial(thing_atom.name)]</li>"
+			ingredients += "\a [initial(thing_atom.name)]"
 		for(var/thing in recipe.fruit)
-			mechanics_text += "<li>[recipe.fruit[thing]] [thing]\s</li>"
-		mechanics_text += "</ul>"
+			ingredients += "[recipe.fruit[thing]] [thing]\s"
+		mechanics_text += "<ul><li>[jointext(ingredients, "</li><li>")]</li></ul>"
 		var/atom/recipe_product = recipe.result
 		mechanics_text += "<br>This recipe takes [ceil(recipe.time/10)] second\s to cook in a microwave and creates \a [initial(recipe_product.name)]."
 		var/lore_text = recipe.lore_text
 		if(!lore_text)
 			lore_text = initial(recipe_product.desc)
-		var/recipe_name = recipe.display_name
-		if(!recipe_name)
-			recipe_name = sanitize(initial(recipe_product.name))
+
+		var/recipe_name = recipe.display_name || sanitize(initial(recipe_product.name))
+		guide_html += "<h3>[capitalize(recipe_name)]</h3>Place [english_list(ingredients)] into a microwave for [ceil(recipe.time/10)] second\s."
 
 		entries_to_register += new /datum/codex_entry(             \
 		 _display_name =       "[recipe_name] (microwave recipe)", \

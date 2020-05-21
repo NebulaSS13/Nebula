@@ -2,6 +2,7 @@
 	var/name = "Generic Category"
 	var/desc = "Some description for category's codex entry"
 	var/list/items = list()
+	var/guide_html
 
 //Children should call ..() at the end after filling the items list
 /datum/codex_category/proc/Initialize()
@@ -13,4 +14,4 @@
 			links+= "<l>[item]</l>"
 		entry.lore_text += jointext(links, "<br>")
 		SScodex.add_entry_by_string(lowertext(entry.display_name), entry)
-
+	build_guide()

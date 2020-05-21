@@ -34,7 +34,9 @@
 			return FALSE
 		if(isnum(ratios[rtype]))
 			LAZYSET(check_ratios, rtype, ratios[rtype])
-	var/effective_volume = prop.reagents.total_volume - REAGENT_VOLUME(prop.reagents, /decl/reagent/drink/ice)
+	var/effective_volume = prop.reagents.total_volume
+	if(!(/decl/reagent/drink/ice in ratios))
+		effective_volume -= REAGENT_VOLUME(prop.reagents, /decl/reagent/drink/ice)
 	for(var/rtype in check_ratios)
 		if((REAGENT_VOLUME(prop.reagents, rtype) / effective_volume) < check_ratios[rtype])
 			return FALSE
