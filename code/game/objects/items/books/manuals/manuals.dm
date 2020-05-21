@@ -50,7 +50,6 @@
 			</html>
 			"}
 
-SScuis
 /obj/item/book/manual/detective
 	name = "The Film Noir: Proper Procedures for Investigations"
 	icon_state ="bookDetective"

@@ -18,7 +18,7 @@
 			links+= "<l>[item]</l>"
 		entry.lore_text += jointext(links, "<br>")
 		if(guide_name && guide_html)
-			entry.mechanics_text("This category has <span codexlink='[guide_name]]'>an associated guide</span>.")
+			entry.mechanics_text = "This category has <span codexlink='[guide_name]]'>an associated guide</span>."
 		SScodex.add_entry_by_string(lowertext(entry.display_name), entry)
 
 	if(guide_html)
