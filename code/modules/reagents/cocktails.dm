@@ -512,3 +512,28 @@
 		/decl/reagent/ethanol/vodka = 0.7,
 		/decl/reagent/gold
 	)
+
+/decl/cocktail/browndwarf
+	name = "Brown Dwarf"
+	description = "A foamy chocolate beverage that has failed to sustain nuclear fusion."
+	ratios = list(
+		/decl/reagent/drink/hot_coco =   0.4, 
+		/decl/reagent/drink/citrussoda = 0.3
+	)
+
+/decl/cocktail/snowball
+	name = "Snowball"
+	description = "A cold pick-me-up frequently drunk in scientific outposts and academic offices."
+	ratios = list(
+		/decl/reagent/drink/ice =              0.3,
+		/decl/reagent/drink/coffee =           0.2,
+		/decl/reagent/drink/juice/watermelon = 0.2
+	)
+
+/decl/cocktail/fools_gold
+	name = "Fool's Gold"
+	description = "Watered-down whiskey. Essentially grog, but without the pirates."
+	ratios = list(
+		/decl/reagent/water =           0.5,
+		/decl/reagent/ethanol/whiskey = 0.2
+	)

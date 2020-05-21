@@ -645,32 +645,6 @@
 	glass_name = "pumpkin spice syrup"
 	glass_desc = "Thick spiced pumpkin syrup used to flavor drinks."
 
-// Non-Alcoholic Drinks
-/decl/reagent/drink/fools_gold
-	name = "Fool's Gold"
-	description = "A non-alcoholic beverage typically served as an alternative to whiskey."
-	taste_description = "watered down whiskey"
-	color = "#e78108"
-	glass_name = "fools gold"
-	glass_desc = "A non-alcoholic beverage typically served as an alternative to whiskey."
-
-/decl/reagent/drink/snowball
-	name = "Snowball"
-	description = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
-	taste_description = "intellectual thought and brain-freeze"
-	color = "#eeecea"
-	adj_temp = -5
-	glass_name = "snowball"
-	glass_desc = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
-
-/decl/reagent/drink/browndwarf
-	name = "Brown Dwarf"
-	description = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
-	taste_description = "dark chocolatey matter"
-	color = "#44371f"
-	glass_name = "brown dwarf"
-	glass_desc = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
-
 /decl/reagent/drink/gingerbeer
 	name = "ginger beer"
 	description = "A hearty, non-alcoholic beverage brewed from ginger."
