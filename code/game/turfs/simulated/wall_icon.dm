@@ -3,17 +3,26 @@
 	if(!material)
 		return
 
-	if(reinf_material)
-		construction_stage = 6
-	else
-		construction_stage = null
+	if(construction_stage != -1)
+		if(reinf_material)
+			construction_stage = 6
+		else
+			construction_stage = null
 	if(!material)
-		material = decls_repository.get_decl(DEFAULT_WALL_MATERIAL)
+		material = decls_repository.get_decl(get_default_material())
 	if(material)
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
 		explosion_resistance = reinf_material.explosion_resistance
 
+	update_strings()
+	set_opacity(material.opacity >= 0.5)
+
+	SSradiation.resistance_cache.Remove(src)
+	update_connections(1)
+	queue_icon_update()
+
+/turf/simulated/wall/proc/update_strings()
 	if(reinf_material)
 		SetName("reinforced [material.name] [material.wall_name]")
 		desc = "It seems to be a section of hull reinforced with [reinf_material.name] and plated with [material.name]."
@@ -21,18 +30,20 @@
 		SetName("[material.name] [material.wall_name]")
 		desc = "It seems to be a section of hull plated with [material.name]."
 
-	set_opacity(material.opacity >= 0.5)
-
-	SSradiation.resistance_cache.Remove(src)
-	update_connections(1)
-	update_icon()
-
+/turf/simulated/wall/proc/get_default_material()
+	. = DEFAULT_WALL_MATERIAL
 
 /turf/simulated/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial, var/decl/material/newgmaterial)
 	material = newmaterial
 	reinf_material = newrmaterial
 	girder_material = newgmaterial
 	update_material()
+
+/turf/simulated/wall/proc/get_wall_state()
+	. = material?.icon_base || "metal"
+
+/turf/simulated/wall/proc/apply_reinf_overlay()
+	. = !!reinf_material
 
 /turf/simulated/wall/on_update_icon()
 
@@ -46,24 +57,25 @@
 
 	overlays.Cut()
 
+	var/material_icon_base = get_wall_state()
 	var/image/I
 	var/base_color = paint_color ? paint_color : material.icon_colour
 	if(!density)
-		I = image(icon, "[material.icon_base]fwall_open")
+		I = image(icon, "[material_icon_base]fwall_open")
 		I.color = base_color
 		overlays += I
 		return
 
 	for(var/i = 1 to 4)
-		I = image(icon, "[material.icon_base][wall_connections[i]]", dir = 1<<(i-1))
+		I = image(icon, "[material_icon_base][wall_connections[i]]", dir = 1<<(i-1))
 		I.color = base_color
 		overlays += I
 		if(other_connections[i] != "0")
-			I = image(icon, "[material.icon_base]_other[wall_connections[i]]", dir = 1<<(i-1))
+			I = image(icon, "[material_icon_base]_other[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = base_color
 			overlays += I
 
-	if(reinf_material)
+	if(apply_reinf_overlay())
 		var/reinf_color = paint_color ? paint_color : reinf_material.icon_colour
 		if(construction_stage != null && construction_stage < 6)
 			I = image(icon, "reinf_construct-[construction_stage]")
@@ -156,7 +168,7 @@
 	other_connections = dirs_to_corner_states(other_dirs)
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(material && W.material && material.icon_base == W.material.icon_base)
+	if(material && W.material && get_wall_state() == W.get_wall_state())
 		if((reinf_material && W.reinf_material) || (!reinf_material && !W.reinf_material))
 			return 1
 		return 2

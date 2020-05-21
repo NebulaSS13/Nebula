@@ -368,18 +368,19 @@
 					drill_head.shatter()
 					drill_head = null
 					return
-				if(istype(target, /turf/simulated/wall))
+
+				if(istype(target, /turf/simulated/wall/natural))
+					for(var/turf/simulated/wall/natural/M in range(target,1))
+						if(get_dir(owner,M)&owner.dir)
+							M.dismantle_wall()
+							drill_head.durability -= 1
+				else if(istype(target, /turf/simulated/wall))
 					var/turf/simulated/wall/W = target
 					if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > drill_head.material.hardness)
 						to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
 					target.explosion_act(2)
 					drill_head.durability -= 1
 					log_and_message_admins("used [src] on the wall [W].", user, owner.loc)
-				else if(istype(target, /turf/simulated/mineral))
-					for(var/turf/simulated/mineral/M in range(target,1))
-						if(get_dir(owner,M)&owner.dir)
-							M.GetDrilled()
-							drill_head.durability -= 1
 				else if(istype(target, /turf/simulated/floor/asteroid))
 					for(var/turf/simulated/floor/asteroid/M in range(target,1))
 						if(get_dir(owner,M)&owner.dir)

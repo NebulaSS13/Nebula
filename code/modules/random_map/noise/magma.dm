@@ -39,6 +39,6 @@
 	if(value>=178)
 		if(istype(T,/turf/simulated/floor/asteroid))
 			T.ChangeTurf(/turf/simulated/floor/airless/lava)
-		else if(istype(T,/turf/simulated/mineral))
-			var/turf/simulated/mineral/M = T
-			M.mined_turf = /turf/simulated/floor/airless/lava
+		else if(istype(T,/turf/simulated/wall/natural))
+			var/turf/simulated/wall/natural/M = T
+			M.floor_type = /turf/simulated/floor/airless/lava

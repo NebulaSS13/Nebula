@@ -82,14 +82,14 @@
 /datum/random_map/automata/cave_system/mountains/volcanic
 	iterations = 2
 	descriptor = "space volcanic mountains"
-	wall_type =  /turf/simulated/mineral/volcanic
-	mineral_turf =  /turf/simulated/mineral/random/volcanic
+	wall_type =  /turf/simulated/wall/natural/volcanic
+	mineral_turf =  /turf/simulated/wall/natural/random/volcanic
 	rock_color = COLOR_DARK_GRAY
 
-/datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/mineral/T)
+/datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/wall/natural/T)
 	..()
 	if(use_area && istype(T))
-		T.mined_turf = prob(90) ? use_area.base_turf : /turf/simulated/floor/exoplanet/lava
+		T.floor_type = prob(90) ? use_area.base_turf : /turf/simulated/floor/exoplanet/lava
 
 /turf/simulated/floor/exoplanet/lava
 	name = "lava"
@@ -145,14 +145,11 @@
 /turf/simulated/floor/exoplanet/lava/get_footstep_sound(var/mob/caller)
 	return get_footstep(/decl/footsteps/lava, caller)
 
-/turf/simulated/mineral/volcanic
-	name = "volcanic rock"
-	color = COLOR_DARK_GRAY
+/turf/simulated/wall/natural/volcanic
+	material = MAT_BASALT
 
-/turf/simulated/mineral/random/volcanic
-	name = "volcanic rock"
-	color = COLOR_DARK_GRAY
+/turf/simulated/wall/natural/random/volcanic
+	material = MAT_BASALT
 
-/turf/simulated/mineral/random/high_chance/volcanic
-	name = "volcanic rock"
-	color = COLOR_DARK_GRAY
+/turf/simulated/wall/natural/random/high_chance/volcanic
+	material = MAT_BASALT

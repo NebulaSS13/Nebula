@@ -1,11 +1,11 @@
 /datum/random_map/automata/cave_system
 	iterations = 5
 	descriptor = "moon caves"
-	wall_type =  /turf/simulated/mineral
+	wall_type =  /turf/simulated/wall/natural
 	floor_type = /turf/simulated/floor/asteroid
 	target_turf_type = /turf/unsimulated/mask
 
-	var/mineral_turf = /turf/simulated/mineral/random
+	var/mineral_turf = /turf/simulated/wall/natural/random
 	var/list/ore_turfs = list()
 	var/list/minerals_sparse
 	var/list/minerals_rich

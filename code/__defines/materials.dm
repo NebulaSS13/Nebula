@@ -13,11 +13,12 @@
 #define MAT_CRYSTAL                 /decl/material/diamond/crystal
 #define MAT_SANDSTONE               /decl/material/stone
 #define MAT_CONCRETE                /decl/material/stone/concrete
+#define MAT_MARBLE                  /decl/material/stone/marble
+#define MAT_BASALT                  /decl/material/stone/basalt
 #define MAT_IRON                    /decl/material/iron
 #define MAT_PLATINUM                /decl/material/platinum
 #define MAT_BRONZE                  /decl/material/gold/bronze
 #define MAT_BOROSILICATE_GLASS      /decl/material/glass/borosilicate
-#define MAT_MARBLE                  /decl/material/stone/marble
 #define MAT_CULT                    /decl/material/cult
 #define MAT_REINFORCED_CULT         /decl/material/cult/reinf
 #define MAT_VOX                     /decl/material/voxalloy

@@ -1513,7 +1513,7 @@
 	},
 /area/ship/bearcat/crew/medbay)
 "eh" = (
-/turf/simulated/mineral,
+/turf/simulated/wall/natural,
 /area/space)
 "el" = (
 /obj/structure/disposalpipe/segment,
@@ -1589,7 +1589,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/ship/bearcat/crew/medbay)
 "ew" = (
-/turf/simulated/mineral/random/high_chance,
+/turf/simulated/wall/natural/random/high_chance,
 /area/space)
 "ex" = (
 /obj/effect/paint/brown,

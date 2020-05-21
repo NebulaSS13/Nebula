@@ -205,9 +205,9 @@
 	impact_type = /obj/effect/projectile/trilaser/impact
 
 /obj/item/projectile/beam/plasmacutter/on_impact(var/atom/A)
-	if(istype(A, /turf/simulated/mineral))
-		var/turf/simulated/mineral/M = A
-		M.GetDrilled(1)
+	if(istype(A, /turf/simulated/wall/natural))
+		var/turf/simulated/wall/natural/M = A
+		M.dismantle_wall()
 	. = ..()
 
 /obj/item/projectile/beam/confuseray

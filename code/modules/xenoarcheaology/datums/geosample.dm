@@ -10,7 +10,7 @@
 	if(new_data)
 		set_data(new_data)
 		return
-	var/turf/simulated/mineral/container = holder
+	var/turf/simulated/wall/natural/container = holder
 	if(istype(container))
 		geodata = new(container)
 
@@ -21,14 +21,14 @@
 	var/source_mineral = /decl/material/chem/toxin/chlorine
 	var/list/find_presence = list()
 
-/datum/geosample/New(var/turf/simulated/mineral/container)
+/datum/geosample/New(var/turf/simulated/wall/natural/container)
 	if(!istype(container))
 		return
 
 	age = rand(1, 999)
 
-	if(container?.mineral?.xarch_source_mineral)
-		source_mineral = container.mineral.xarch_source_mineral
+	if(container?.reinf_material?.xarch_source_mineral)
+		source_mineral = container.reinf_material.xarch_source_mineral
 
 	var/total_presence = 0
 	for(var/datum/find/F in container.finds)
@@ -38,7 +38,7 @@
 	for(var/carrier in find_presence)
 		find_presence[carrier] = find_presence[carrier] / total_presence
 
-/datum/geosample/proc/UpdateNearbyArtifactInfo(var/turf/simulated/mineral/container)
+/datum/geosample/proc/UpdateNearbyArtifactInfo(var/turf/simulated/wall/natural/container)
 	if(!istype(container))
 		return
 
