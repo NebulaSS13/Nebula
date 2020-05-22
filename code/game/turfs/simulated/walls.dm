@@ -139,12 +139,14 @@
 		else
 			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
 	if(paint_color)
-		to_chat(user, "<span class='notice'>It has a coat of paint applied.</span>")
+		to_chat(user, get_paint_examine_message())
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
 
-//Damage
+/turf/simulated/wall/proc/get_paint_examine_message()
+	. = SPAN_NOTICE("It has had <font color = '[paint_color]'>a coat of paint</font> applied.")
 
+//Damage
 /turf/simulated/wall/melt()
 	if(can_melt())
 		var/turf/simulated/floor/F = ChangeTurf(/turf/simulated/floor/plating)

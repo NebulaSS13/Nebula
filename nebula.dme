@@ -1247,6 +1247,7 @@
 #include "code\game\turfs\simulated\wall_attacks.dm"
 #include "code\game\turfs\simulated\wall_icon.dm"
 #include "code\game\turfs\simulated\wall_natural.dm"
+#include "code\game\turfs\simulated\wall_natural_subtypes.dm"
 #include "code\game\turfs\simulated\wall_natural_xenoarch.dm"
 #include "code\game\turfs\simulated\wall_shuttle.dm"
 #include "code\game\turfs\simulated\wall_types.dm"

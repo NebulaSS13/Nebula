@@ -1,18 +1,31 @@
+var/list/strata_material_by_z = list()
 var/list/natural_walls = list()
 /turf/simulated/wall/natural
 	name = "wall"
-	material = MAT_SANDSTONE
+	material = null
 	reinf_material = null
 	girder_material = null
 	construction_stage = -1
 	floor_type = /turf/simulated/floor/asteroid
+	var/strata
 	var/image/ore_overlay
 
-/turf/simulated/wall/natural/Initialize(ml, materialtype, rmaterialtype)
+/turf/simulated/wall/natural/get_paint_examine_message()
+	. = SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements.")
+
+/turf/simulated/wall/natural/Initialize()
+	if(!material)
+		if(!strata)
+			strata = pick(/decl/strata/sedimentary, /decl/strata/metamorphic, /decl/strata/igneous)
+		var/skey = "[strata]-[z]"
+		if(!strata_material_by_z[skey])
+			var/decl/strata/strata_info = decls_repository.get_decl(strata)
+			if(length(strata_info.base_materials))
+				strata_material_by_z[skey] = pick(strata_info.base_materials)
+		material = strata_material_by_z[skey]
+	. = ..()
 	global.natural_walls += src
-	..(ml, materialtype || material, rmaterialtype || reinf_material)
 	set_extension(src, /datum/extension/geological_data)
-	. = INITIALIZE_HINT_LATELOAD
 
 /turf/simulated/wall/natural/LateInitialize()
 	..()

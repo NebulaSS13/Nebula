@@ -30,20 +30,20 @@
 /turf/simulated/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial, var/decl/material/newgmaterial)
 
 	material = newmaterial
-	if(ispath(material, /path))
+	if(ispath(material, /material))
 		material = SSmaterials.get_material_datum(material)
 	else if(!istype(material))
 		crash_with("Wall has been supplied non-material '[newmaterial]'.")
 		material = SSmaterials.get_material_datum(get_default_material())
 
 	reinf_material = newrmaterial
-	if(ispath(reinf_material, /path))
+	if(ispath(reinf_material, /material))
 		reinf_material = SSmaterials.get_material_datum(reinf_material)
 	else if(!istype(reinf_material))
 		reinf_material = null
 
 	girder_material = newgmaterial
-	if(ispath(girder_material, /path))
+	if(ispath(girder_material, /material))
 		girder_material = SSmaterials.get_material_datum(girder_material)
 	else if(!istype(girder_material))
 		girder_material = null

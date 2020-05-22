@@ -10,7 +10,11 @@
 		/datum/exoplanet_theme = 100,
 		/datum/exoplanet_theme/robotic_guardians = 10
 	)
-	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
+	map_generators = list(
+		/datum/random_map/automata/cave_system/mountains/volcanic, 
+		/datum/random_map/noise/exoplanet/volcanic, 
+		/datum/random_map/noise/ore/filthy_rich
+	)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#261e19"
 	water_color = "#c74d00"
@@ -144,12 +148,3 @@
 
 /turf/simulated/floor/exoplanet/lava/get_footstep_sound(var/mob/caller)
 	return get_footstep(/decl/footsteps/lava, caller)
-
-/turf/simulated/wall/natural/volcanic
-	material = MAT_BASALT
-
-/turf/simulated/wall/natural/random/volcanic
-	material = MAT_BASALT
-
-/turf/simulated/wall/natural/random/high_chance/volcanic
-	material = MAT_BASALT
