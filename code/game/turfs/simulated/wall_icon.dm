@@ -1,8 +1,4 @@
 /turf/simulated/wall/proc/update_material()
-
-	if(!material)
-		return
-
 	if(construction_stage != -1)
 		if(reinf_material)
 			construction_stage = 6
@@ -14,10 +10,8 @@
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
 		explosion_resistance = reinf_material.explosion_resistance
-
 	update_strings()
 	set_opacity(material.opacity >= 0.5)
-
 	SSradiation.resistance_cache.Remove(src)
 	update_connections(1)
 	queue_icon_update()
@@ -34,9 +28,26 @@
 	. = DEFAULT_WALL_MATERIAL
 
 /turf/simulated/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial, var/decl/material/newgmaterial)
+
 	material = newmaterial
+	if(ispath(material, /path))
+		material = SSmaterials.get_material_datum(material)
+	else if(!istype(material))
+		crash_with("Wall has been supplied non-material '[newmaterial]'.")
+		material = SSmaterials.get_material_datum(get_default_material())
+
 	reinf_material = newrmaterial
+	if(ispath(reinf_material, /path))
+		reinf_material = SSmaterials.get_material_datum(reinf_material)
+	else if(!istype(reinf_material))
+		reinf_material = null
+
 	girder_material = newgmaterial
+	if(ispath(girder_material, /path))
+		girder_material = SSmaterials.get_material_datum(girder_material)
+	else if(!istype(girder_material))
+		girder_material = null
+
 	update_material()
 
 /turf/simulated/wall/proc/get_wall_state()
@@ -124,7 +135,6 @@
 		img.blend_mode = BLEND_MULTIPLY
 		img.alpha = (i * alpha_inc) - 1
 		damage_overlays[i] = img
-
 
 /turf/simulated/wall/proc/update_connections(propagate = 0)
 	if(!material)

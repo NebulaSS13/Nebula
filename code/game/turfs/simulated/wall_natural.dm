@@ -34,10 +34,6 @@ var/list/natural_walls = list()
 			target_turf.set_material(target_turf.material, reinf_material)
 			target_turf.spread_deposit()
 
-/turf/simulated/wall/natural/deposit/Initialize(ml, materialtype, rmaterialtype)
-	reinf_material = pick(MAT_GOLD, MAT_SILVER, MAT_DIAMOND, MAT_PITCHBLENDE, MAT_HEMATITE, MAT_SPODUMENE, MAT_QUARTZ)
-	. = ..()	
-
 /turf/simulated/wall/natural/attackby(obj/item/W, mob/user, click_params)
 
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))

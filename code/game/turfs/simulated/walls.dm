@@ -32,20 +32,28 @@
 	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
 /turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
-	. = ..(ml)
-	icon_state = "blank"
-	if(!materialtype)
-		materialtype = material || get_default_material()
-	material = decls_repository.get_decl(materialtype)
-	if(!isnull(rmaterialtype))
-		reinf_material = decls_repository.get_decl(rmaterialtype)
-	if(ispath(girder_material, /decl/material))
-		girder_material = decls_repository.get_decl(girder_material)
-	update_material()
-	hitsound = material.hitsound
+	..(ml)
 
+	if(!ispath(material, /decl/material))
+		material = materialtype || get_default_material()
+	if(ispath(material, /decl/material))
+		material = SSmaterials.get_material_datum(material)
+
+	if(!ispath(reinf_material, /decl/material))
+		reinf_material = rmaterialtype
+	if(ispath(reinf_material, /decl/material))
+		reinf_material = SSmaterials.get_material_datum(reinf_material)
+
+	if(ispath(girder_material, /decl/material))
+		girder_material = SSmaterials.get_material_datum(girder_material)
+
+	. = INITIALIZE_HINT_LATELOAD
 	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	START_PROCESSING(SSturf, src) //Used for radiation.
+
+/turf/simulated/wall/LateInitialize()
+	..()
+	update_material()
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
