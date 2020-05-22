@@ -145,4 +145,4 @@
 /obj/item/clothing/accessory/cloak/hide/set_material(var/new_material)
 	..()
 	if(istype(material))
-		desc = "A ragged cloak made of [material.name]."
+		desc = "A ragged cloak made of [material.solid_name]."

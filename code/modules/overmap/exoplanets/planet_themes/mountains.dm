@@ -27,8 +27,8 @@
 	..()
 
 /datum/random_map/automata/cave_system/mountains/get_additional_spawns(value, var/turf/simulated/wall/natural/T)
-	T.paint_color = rock_color
-	T.queue_icon_update()
-	if(use_area)
-		if(istype(T))
+	if(istype(T))
+		T.paint_color = rock_color
+		T.queue_icon_update()
+		if(use_area)
 			T.floor_type = use_area.base_turf

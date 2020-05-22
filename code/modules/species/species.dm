@@ -779,15 +779,15 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 					dat += "</br><b>Resistant to [kind].</b>"
 			if(breath_type)
 				var/decl/material/mat = decls_repository.get_decl(breath_type)
-				dat += "</br><b>They breathe [mat.name].</b>"
+				dat += "</br><b>They breathe [mat.gas_name].</b>"
 			if(exhale_type)
 				var/decl/material/mat = decls_repository.get_decl(exhale_type)
-				dat += "</br><b>They exhale [mat.name].</b>"
+				dat += "</br><b>They exhale [mat.gas_name].</b>"
 			if(LAZYLEN(poison_types))
 				var/list/poison_names = list()
 				for(var/g in poison_types)
 					var/decl/material/mat = decls_repository.get_decl(exhale_type)
-					poison_names |= mat.name
+					poison_names |= mat.gas_name
 				dat += "</br><b>[capitalize(english_list(poison_names))] [LAZYLEN(poison_names) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"
 		dat += "</td>"

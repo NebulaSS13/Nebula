@@ -7,8 +7,8 @@
 /obj/item/clothing/ring/material/set_material(var/new_material)
 	. = ..()
 	if(istype(material))
-		name = "[material.name] ring"
-		desc = "A ring made from [material.name]."
+		name = "[material.solid_name] ring"
+		desc = "A ring made from [material.solid_name]."
 		color = material.icon_colour
 
 /obj/item/clothing/ring/material/attackby(var/obj/item/S, var/mob/user)
@@ -17,7 +17,7 @@
 		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
 			if(!inscription)
 				return
-			desc = "A ring made from [material.name]."
+			desc = "A ring made from [material.solid_name]."
 			to_chat(user, "<span class='warning'>You carve \"[inscription]\" into \the [src].</span>")
 			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
 

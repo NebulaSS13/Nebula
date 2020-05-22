@@ -53,7 +53,7 @@
 
 /obj/structure/railing/update_material_desc(override_desc)
 	if(material)
-		desc = "A simple [material.name] railing designed to protect against careless trespass."
+		desc = "A simple [material.solid_name] railing designed to protect against careless trespass."
 	else
 		..()
 

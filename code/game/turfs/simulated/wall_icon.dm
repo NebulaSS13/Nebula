@@ -18,11 +18,11 @@
 
 /turf/simulated/wall/proc/update_strings()
 	if(reinf_material)
-		SetName("reinforced [material.name] [material.wall_name]")
-		desc = "It seems to be a section of hull reinforced with [reinf_material.name] and plated with [material.name]."
+		SetName("reinforced [material.solid_name] [material.wall_name]")
+		desc = "It seems to be a section of hull reinforced with [reinf_material.solid_name] and plated with [material.solid_name]."
 	else
-		SetName("[material.name] [material.wall_name]")
-		desc = "It seems to be a section of hull plated with [material.name]."
+		SetName("[material.solid_name] [material.wall_name]")
+		desc = "It seems to be a section of hull plated with [material.solid_name]."
 
 /turf/simulated/wall/proc/get_default_material()
 	. = DEFAULT_WALL_MATERIAL
@@ -30,21 +30,21 @@
 /turf/simulated/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial, var/decl/material/newgmaterial)
 
 	material = newmaterial
-	if(ispath(material, /material))
-		material = SSmaterials.get_material_datum(material)
+	if(ispath(material, /decl/material))
+		material = decls_repository.get_decl(material)
 	else if(!istype(material))
 		crash_with("Wall has been supplied non-material '[newmaterial]'.")
-		material = SSmaterials.get_material_datum(get_default_material())
+		material = decls_repository.get_decl(get_default_material())
 
 	reinf_material = newrmaterial
-	if(ispath(reinf_material, /material))
-		reinf_material = SSmaterials.get_material_datum(reinf_material)
+	if(ispath(reinf_material, /decl/material))
+		reinf_material = decls_repository.get_decl(reinf_material)
 	else if(!istype(reinf_material))
 		reinf_material = null
 
 	girder_material = newgmaterial
-	if(ispath(girder_material, /material))
-		girder_material = SSmaterials.get_material_datum(girder_material)
+	if(ispath(girder_material, /decl/material))
+		girder_material = decls_repository.get_decl(girder_material)
 	else if(!istype(girder_material))
 		girder_material = null
 

@@ -157,4 +157,4 @@
 		if(ispath(P.item_path, /obj/item/stack/material))
 			var/obj/item/stack/material/S = P.item_path
 			var/decl/material/sheet_material = decls_repository.get_decl(initial(S.material))
-			P.item_name = "[sheet_material.name] [sheet_material.sheet_plural_name] ([initial(S.amount)]x)"
+			P.item_name = "[sheet_material.solid_name] [sheet_material.sheet_plural_name] ([initial(S.amount)]x)"

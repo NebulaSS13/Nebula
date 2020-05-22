@@ -6,14 +6,14 @@
 		var/decl/strata/strata_info = decls_repository.get_decl(strata)
 		. = strata_info.ores_sparse
 	if(!.)
-		. = GLOB.weighted_minerals_sparse
+		. = SSmaterials.weighted_minerals_sparse
 
 /turf/simulated/wall/natural/random/high_chance/get_weighted_mineral_list()
 	if(strata)
 		var/decl/strata/strata_info = decls_repository.get_decl(strata)
 		. = strata_info.ores_rich
 	if(!.)
-		. = GLOB.weighted_minerals_rich
+		. = SSmaterials.weighted_minerals_rich
 
 /turf/simulated/wall/natural/random/Initialize()
 	if(isnull(reinf_material))

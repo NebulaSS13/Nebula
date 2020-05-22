@@ -204,7 +204,7 @@ Class Procs:
 	to_chat(M, name)
 	for(var/g in air.gas)
 		var/decl/material/mat = decls_repository.get_decl(g)
-		to_chat(M, "[capitalize(mat.name)]: [air.gas[g]]")
+		to_chat(M, "[capitalize(mat.gas_name)]: [air.gas[g]]")
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
 	to_chat(M, "O2 per N2: [(air.gas[MAT_NITROGEN] ? air.gas[MAT_OXYGEN]/air.gas[MAT_NITROGEN] : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")

@@ -185,7 +185,7 @@
 /obj/item/defensive_barrier/Initialize(ml, material_key)
 	. = ..()
 	if(material)
-		name = "[material.name] [initial(name)]"
+		name = "[material.solid_name] [initial(name)]"
 
 /obj/item/defensive_barrier/proc/turf_check(mob/user)
 	var/turf/T = get_turf(user)

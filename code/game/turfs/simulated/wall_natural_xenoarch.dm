@@ -51,20 +51,7 @@
 	playsound(user, P.drill_sound, 20, 1)
 	var/newDepth = excavation_level + P.excavation_amount // Used commonly below
 	//handle any archaeological finds we might uncover
-	var/fail_message = ""
-	if(length(finds))
-		var/datum/find/F = finds[1]
-		if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
-			fail_message = ". <b>[pick("There is a crunching noise","[P] collides with some different rock","Part of the rock face crumbles away","Something breaks under [P]")]</b>"
-	to_chat(user, SPAN_NOTICE("You start [P.drill_verb][fail_message]."))
-	if(fail_message && prob(90))
-		if(prob(25))
-			excavate_find(prob(5), finds[1])
-		else if(prob(50))
-			finds.Remove(finds[1])
-			if(prob(50))
-				place_artifact_debris()
-
+	to_chat(user, SPAN_NOTICE("You start [P.drill_verb][destroy_artifacts(P, newDepth)]."))
 	if(!do_after(user,P.digspeed, src))
 		return
 	
@@ -126,5 +113,18 @@
 		next_rock -= 50
 		pass_geodata_to(new /obj/item/ore(src, material?.type))
 
-/turf/simulated/wall/natural/proc/destroy_artifacts(var/obj/item/W, var/mob/user)
-	return
+/turf/simulated/wall/natural/proc/destroy_artifacts(var/obj/item/W, var/newDepth)
+	if(!length(finds))
+		return
+	var/datum/find/F = finds[1]
+	if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
+		if(W)
+			. = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
+		if(prob(10))
+			return
+		if(prob(25))
+			excavate_find(prob(5), finds[1])
+		else if(prob(50))
+			finds.Remove(finds[1])
+			if(prob(50))
+				place_artifact_debris()

@@ -105,12 +105,6 @@ SUBSYSTEM_DEF(materials)
 				processable_ores[component] = TRUE
 				alloy_components[component] = TRUE
 
-/proc/material_display_name(var/mat)
-	var/decl/material/material = decls_repository.get_decl(mat)
-	if(material)
-		return material.name
-	return null
-
 /datum/controller/subsystem/materials/proc/build_fusion_reaction_list()
 	fusion_reactions = list()
 	for(var/rtype in subtypesof(/decl/fusion_reaction))

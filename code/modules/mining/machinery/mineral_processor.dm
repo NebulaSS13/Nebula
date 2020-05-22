@@ -128,7 +128,7 @@
 	for(var/ore in ores_processing)
 		if(!ores_stored[ore] && !report_all_ores) continue
 		var/decl/material/M = decls_repository.get_decl(ore)
-		var/line = "[capitalize(M.name)]</td><td>[Floor(ores_stored[ore] / SHEET_MATERIAL_AMOUNT)] ([ores_stored[ore]]u)"
+		var/line = "[capitalize(M.solid_name)]</td><td>[Floor(ores_stored[ore] / SHEET_MATERIAL_AMOUNT)] ([ores_stored[ore]]u)"
 		var/status_string
 		if(ores_processing[ore])
 			switch(ores_processing[ore])

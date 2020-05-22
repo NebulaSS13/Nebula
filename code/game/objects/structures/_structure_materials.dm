@@ -34,14 +34,14 @@
 /obj/structure/proc/update_material_name(var/override_name)
 	var/base_name = override_name || initial(name)
 	if(istype(material))
-		SetName("[material.name] [base_name]")
+		SetName("[material.solid_name] [base_name]")
 	else
 		SetName(base_name)
 
 /obj/structure/proc/update_material_desc(var/override_desc)
 	var/base_desc = override_desc || initial(desc)
 	if(istype(material))
-		desc = "[base_desc] This one is made of [material.name]."
+		desc = "[base_desc] This one is made of [material.solid_name]."
 	else
 		desc = base_desc
 

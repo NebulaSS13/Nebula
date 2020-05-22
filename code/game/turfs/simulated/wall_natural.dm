@@ -1,3 +1,4 @@
+var/list/strata_by_z = list()
 var/list/strata_material_by_z = list()
 var/list/natural_walls = list()
 /turf/simulated/wall/natural
@@ -16,9 +17,11 @@ var/list/natural_walls = list()
 /turf/simulated/wall/natural/Initialize()
 	if(!material)
 		if(!strata)
-			strata = pick(/decl/strata/sedimentary, /decl/strata/metamorphic, /decl/strata/igneous)
+			if(!global.strata_by_z["z"])
+				global.strata_by_z["z"] = pick(/decl/strata/sedimentary, /decl/strata/metamorphic, /decl/strata/igneous)
+			strata = global.strata_by_z["z"]
 		var/skey = "[strata]-[z]"
-		if(!strata_material_by_z[skey])
+		if(!global.strata_material_by_z[skey])
 			var/decl/strata/strata_info = decls_repository.get_decl(strata)
 			if(length(strata_info.base_materials))
 				strata_material_by_z[skey] = pick(strata_info.base_materials)
@@ -41,11 +44,11 @@ var/list/natural_walls = list()
 	for(var/trydir in GLOB.cardinal)
 		if(!prob(reinf_material.ore_spread_chance))
 			continue
-			var/turf/simulated/wall/natural/target_turf = get_step(src, trydir)
-			if(!istype(target_turf) || !isnull(target_turf.reinf_material))
-				continue
-			target_turf.set_material(target_turf.material, reinf_material)
-			target_turf.spread_deposit()
+		var/turf/simulated/wall/natural/target_turf = get_step(src, trydir)
+		if(!istype(target_turf) || !isnull(target_turf.reinf_material))
+			continue
+		target_turf.set_material(target_turf.material, reinf_material)
+		target_turf.spread_deposit()
 
 /turf/simulated/wall/natural/attackby(obj/item/W, mob/user, click_params)
 
@@ -71,10 +74,9 @@ var/list/natural_walls = list()
 	if(istype(W, /obj/item/pickaxe))
 		var/obj/item/pickaxe/P = W
 		playsound(user, P.drill_sound, 20, 1)
-		to_chat(user, SPAN_NOTICE("You start [P.drill_verb]."))
+		to_chat(user, SPAN_NOTICE("You start [P.drill_verb][destroy_artifacts(P, INFINITY)]."))
 		if(do_after(user, P.digspeed, src))		
 			to_chat(user, SPAN_NOTICE("You finish [P.drill_verb] \the [src]."))
-			destroy_artifacts(W, user)
 			dismantle_wall()
 		return TRUE
 
@@ -84,11 +86,11 @@ var/list/natural_walls = list()
 	
 /turf/simulated/wall/natural/update_strings()
 	if(reinf_material)
-		SetName("[reinf_material.display_name] deposit")
-		desc = "A natural cliff face composed of bare [material.display_name] and a deposit of [reinf_material.display_name]."
+		SetName("[reinf_material.solid_name] deposit")
+		desc = "A natural cliff face composed of bare [material.solid_name] and a deposit of [reinf_material.solid_name]."
 	else
-		SetName("natural [material.display_name] wall")
-		desc = "A natural cliff face composed of bare [material.display_name]."
+		SetName("natural [material.solid_name] wall")
+		desc = "A natural cliff face composed of bare [material.solid_name]."
 
 /turf/simulated/wall/natural/update_material()
 	. = ..()
@@ -118,9 +120,11 @@ var/list/natural_walls = list()
 		for(var/i = 1 to reinf_material.ore_result_amount)
 			pass_geodata_to(new /obj/item/ore(src, reinf_material.type))
 
+	destroy_artifacts(null, INFINITY)
+
 	// drop rubble
 	clear_plants()
-	material = SSmaterials.get_material_datum(MAT_PLACEHOLDER)
+	material = decls_repository.get_decl(MAT_PLACEHOLDER)
 	reinf_material = null
 	update_connections(1)
 
@@ -139,7 +143,7 @@ var/list/natural_walls = list()
 	. = FALSE
 
 /turf/simulated/wall/natural/can_join_with(var/turf/simulated/wall/W)
-	. = istype(W, /turf/simulated/wall/natural)
+	. = (istype(W, /turf/simulated/wall/natural) && W.material?.type != MAT_PLACEHOLDER && material?.type != MAT_PLACEHOLDER)
 
 /turf/simulated/wall/natural/Bumped(AM)
 	. = ..()

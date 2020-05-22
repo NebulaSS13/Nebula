@@ -71,7 +71,7 @@
 			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 		update_force()
 		if(applies_material_name)
-			SetName("[material.name] [initial(name)]")
+			SetName("[material.solid_name] [initial(name)]")
 		if(material_armor_multiplier)
 			armor = material.get_armor(material_armor_multiplier)
 			armor_degradation_speed = material.armor_degradation_speed

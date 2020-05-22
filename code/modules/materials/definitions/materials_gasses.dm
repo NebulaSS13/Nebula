@@ -305,8 +305,9 @@
 	gas_symbol = "SO2"
 
 /decl/material/gas/water
-	name = "water vapour"
-	liquid_name = "water"
+	name = "water"
+	gas_name = "water vapour"
+	solid_name = "ice"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
 	color = COLOR_OCEAN
 	chemical_makeup = list(

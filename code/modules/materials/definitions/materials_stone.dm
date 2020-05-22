@@ -81,7 +81,7 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
 /decl/material/stone/basalt
-	display_name = "basalt"
+	name = "basalt"
 	lore_text = "A ubiquitous volcanic stone."
 	icon_colour = COLOR_DARK_GRAY
 	stack_type = /obj/item/stack/material/generic

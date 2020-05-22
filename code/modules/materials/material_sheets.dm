@@ -42,7 +42,7 @@
 	..() 
 
 /obj/item/stack/material/get_codex_value()
-	return (material && !material.hidden_from_codex) ? "[lowertext(material.name)] (material)" : ..()
+	return (material && !material.hidden_from_codex) ? "[lowertext(material.solid_name)] (material)" : ..()
 
 /obj/item/stack/material/get_material()
 	return material

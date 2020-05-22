@@ -9,8 +9,8 @@
 /obj/item/stack/material/cyborg/Initialize()
 	. = ..()
 	if(material)
-		name = "[material.name] synthesiser"
-		desc = "A device that synthesises [material.name]."
+		name = "[material.solid_name] synthesiser"
+		desc = "A device that synthesises [material.solid_name]."
 		matter = null
 
 /obj/item/stack/material/cyborg/plastic

@@ -37,15 +37,15 @@
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()
 	if(ispath(material, /decl/material))
-		material = SSmaterials.get_material_datum(material)
+		material = decls_repository.get_decl(material)
 
 	if(!ispath(reinf_material, /decl/material))
 		reinf_material = rmaterialtype
 	if(ispath(reinf_material, /decl/material))
-		reinf_material = SSmaterials.get_material_datum(reinf_material)
+		reinf_material = decls_repository.get_decl(reinf_material)
 
 	if(ispath(girder_material, /decl/material))
-		girder_material = SSmaterials.get_material_datum(girder_material)
+		girder_material = decls_repository.get_decl(girder_material)
 
 	. = INITIALIZE_HINT_LATELOAD
 	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
@@ -212,7 +212,7 @@
 /turf/simulated/wall/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	if(severity == 1)
-		ChangeTurf(get_base_turf(src.z))
+		dismantle_wall(1,1,1)
 	else if(severity == 2)
 		if(prob(75))
 			take_damage(rand(150, 250))

@@ -54,7 +54,7 @@
 			if(C.owned_field && LAZYLEN(C.owned_field.reactants))
 				for(var/reactant in C.owned_field.reactants)
 					var/decl/material/mat = decls_repository.get_decl(reactant)
-					fuel_string += "<tr><td>[capitalize(mat.name)]</td><td>[C.owned_field.reactants[reactant]]</td></tr>"
+					fuel_string += "<tr><td>[capitalize(mat.gas_name)]</td><td>[C.owned_field.reactants[reactant]]</td></tr>"
 			else
 				fuel_string += "<tr><td colspan = 2>Nothing.</td></tr>"
 			fuel_string += "</table>"

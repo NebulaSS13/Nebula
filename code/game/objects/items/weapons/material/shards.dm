@@ -37,8 +37,8 @@
 	update_icon()
 
 	if(material.shard_type)
-		SetName("[material.name] [material.shard_type]")
-		desc = "A small piece of [material.name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
+		SetName("[material.solid_name] [material.shard_type]")
+		desc = "A small piece of [material.solid_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
 		switch(material.shard_type)
 			if(SHARD_SPLINTER, SHARD_SHRAPNEL)
 				gender = PLURAL
@@ -75,7 +75,7 @@
 		if(cable.use(3))
 			to_chat(user, SPAN_NOTICE("You wind some cable around the thick end of \the [src]."))
 			has_handle = cable.color
-			SetName("[material.name] shank")
+			SetName("[material.solid_name] shank")
 			update_icon()
 			return
 		to_chat(user, SPAN_WARNING("You need 3 or more units of cable to give \the [src] a handle."))
