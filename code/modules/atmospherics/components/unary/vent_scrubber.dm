@@ -241,7 +241,7 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on/sauna/Initialize()
 	. = ..()
-	scrubbing_gas -= MAT_STEAM
+	scrubbing_gas -= MAT_WATER
 
 /decl/public_access/public_variable/scrubbing
 	expected_type = /obj/machinery/atmospherics/unary/vent_scrubber

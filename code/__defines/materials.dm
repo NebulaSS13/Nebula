@@ -80,7 +80,7 @@
 #define MAT_AMMONIA                 /decl/material/gas/ammonia
 #define MAT_CHLORINE                /decl/material/gas/chlorine
 #define MAT_SULFUR_DIOXIDE          /decl/material/gas/sulfurdioxide
-#define MAT_STEAM                   /decl/material/gas/water
+#define MAT_WATER                   /decl/material/gas/water
 #define MAT_BORON                   /decl/material/gas/boron
 #define MAT_LITHIUM                 /decl/material/gas/lithium
 #define MAT_OXYGEN                  /decl/material/gas/oxygen

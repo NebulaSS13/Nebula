@@ -468,7 +468,7 @@
 	gas_specific_heat = 100
 	gas_molar_mass = 0.002
 	gas_flags = XGM_GAS_FUEL|XGM_GAS_FUSION_FUEL
-	gas_burn_product = MAT_STEAM
+	gas_burn_product = MAT_WATER
 	gas_symbol_html = "H<sub>2</sub>"
 	gas_symbol = "H2"
 	chemical_makeup = list(

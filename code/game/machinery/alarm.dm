@@ -109,8 +109,8 @@
 
 /decl/environment_data/finnish/Initialize()
 	. = ..()
-	important_gasses[MAT_STEAM] = TRUE
-	dangerous_gasses -= MAT_STEAM
+	important_gasses[MAT_WATER] = TRUE
+	dangerous_gasses -= MAT_WATER
 
 /obj/machinery/alarm/warm
 	target_temperature = T0C+75

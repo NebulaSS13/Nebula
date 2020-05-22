@@ -35,7 +35,7 @@
 	. = ..(ml)
 	icon_state = "blank"
 	if(!materialtype)
-		materialtype = get_default_material()
+		materialtype = material || get_default_material()
 	material = decls_repository.get_decl(materialtype)
 	if(!isnull(rmaterialtype))
 		reinf_material = decls_repository.get_decl(rmaterialtype)

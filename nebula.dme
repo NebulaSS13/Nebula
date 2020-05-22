@@ -1958,6 +1958,7 @@
 #include "code\modules\materials\definitions\materials_other.dm"
 #include "code\modules\materials\definitions\materials_stone.dm"
 #include "code\modules\materials\definitions\materials_wood.dm"
+#include "code\modules\materials\geology\_strata.dm"
 #include "code\modules\mechs\_mech_setup.dm"
 #include "code\modules\mechs\mech.dm"
 #include "code\modules\mechs\mech_construction.dm"

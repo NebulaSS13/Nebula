@@ -25,7 +25,7 @@
 				for(var/i = 1 to rand(1,3))
 					new /obj/item/material/shard/phoron(src)
 			if(7)
-				new /obj/item/stack/material/uranium(src, amount = rand(5,25))
+				new /obj/item/stack/material/uranium(src, rand(5,25))
 
 /turf/simulated/wall/natural/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
 	//many finds are ancient and thus very delicate - luckily there is a specialised energy suspension field which protects them when they're being extracted
