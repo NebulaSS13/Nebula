@@ -390,7 +390,9 @@ var/list/mining_floors = list()
 /turf/simulated/mineral/random
 	name = "mineral deposit"
 
-/turf/simulated/mineral/random/Initialize(var/ml, var/mineral_name, var/default_mineral_list = GLOB.weighted_minerals_sparse)
+/turf/simulated/mineral/random/Initialize(var/ml, var/mineral_name, var/default_mineral_list)
+	if(!default_mineral_list)
+		default_mineral_list = SSmaterials.weighted_minerals_sparse
 	if(!mineral_name && LAZYLEN(default_mineral_list))
 		mineral_name = pickweight(default_mineral_list)
 
@@ -401,7 +403,7 @@ var/list/mining_floors = list()
 	. = ..(ml)
 
 /turf/simulated/mineral/random/high_chance/Initialize(var/ml, var/mineral_name, var/default_mineral_list)
-	. = ..(ml, mineral_name, GLOB.weighted_minerals_rich)
+	. = ..(ml, mineral_name, SSmaterials.weighted_minerals_rich)
 
 /**********************Asteroid**************************/
 

@@ -9,9 +9,10 @@ SUBSYSTEM_DEF(materials)
 	var/list/alloy_products
 	var/list/processable_ores
 	var/list/fusion_reactions
-
 	var/list/all_gasses
 	var/list/gas_flag_cache
+	var/list/weighted_minerals_sparse = list()
+	var/list/weighted_minerals_rich = list()
 
 /datum/controller/subsystem/materials/Initialize()
 	build_material_lists()       // Build core material lists.
@@ -49,6 +50,10 @@ SUBSYSTEM_DEF(materials)
 		new_mineral = new mtype
 		materials += new_mineral
 		materials_by_name[mtype] = new_mineral
+		if(new_mineral.sparse_material_weight)
+			weighted_minerals_sparse[new_mineral.type] = new_mineral.sparse_material_weight
+		if(new_mineral.rich_material_weight)
+			weighted_minerals_rich[new_mineral.type] = new_mineral.rich_material_weight
 		if(new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)
 			processable_ores[mtype] = TRUE
 		if(new_mineral.alloy_product && LAZYLEN(new_mineral.alloy_materials))

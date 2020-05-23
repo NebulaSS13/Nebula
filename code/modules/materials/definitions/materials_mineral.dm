@@ -17,6 +17,8 @@
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	value = 0.8
+	sparse_material_weight = 8
+	rich_material_weight = 10
 
 /material/graphite
 	display_name = "graphite"
@@ -33,6 +35,8 @@
 		/decl/reagent/acetone = 0.2
 	)
 	value = 0.8
+	sparse_material_weight = 35
+	rich_material_weight = 20
 
 /material/quartz
 	display_name = "quartz"
@@ -54,6 +58,8 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	reflectiveness = MAT_VALUE_SHINY
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
 /material/pyrite
 	display_name = "pyrite"
@@ -76,6 +82,8 @@
 	ore_compresses_to = MAT_PYRITE
 	reflectiveness = MAT_VALUE_SHINY
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
 /material/spodumene
 	display_name = "spodumene"
@@ -96,6 +104,8 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
 /material/cinnabar
 	display_name = "cinnabar"
@@ -116,6 +126,8 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
 /material/phosphorite
 	display_name = "phosphorite"
@@ -136,6 +148,8 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
 /material/rocksalt
 	display_name = "rock salt"
@@ -156,6 +170,8 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
 /material/potash
 	display_name = "potash"
@@ -176,6 +192,8 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
 /material/bauxite
 	display_name = "bauxite"
@@ -197,6 +215,8 @@
 	ore_smelts_to = MAT_ALUMINIUM
 	ore_compresses_to = MAT_BAUXITE
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
 /material/sand
 	display_name = "sand"
@@ -258,6 +278,8 @@
 	gas_symbol = "Ph"
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.6
+	sparse_material_weight = 10
+	rich_material_weight = 20
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
 /material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
@@ -284,3 +306,5 @@
 	luminescence = 3
 	ore_compresses_to = null
 	value = 3
+	sparse_material_weight = null
+	rich_material_weight = null

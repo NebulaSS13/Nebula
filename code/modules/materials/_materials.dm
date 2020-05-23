@@ -105,6 +105,8 @@
 	var/luminescence
 	var/list/alloy_materials     // If set, material can be produced via alloying these materials in these amounts.
 	var/wall_support_value = 30
+	var/sparse_material_weight
+	var/rich_material_weight
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/wire_product

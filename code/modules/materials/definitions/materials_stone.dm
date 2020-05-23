@@ -25,6 +25,8 @@
 	sheet_singular_name = "gem"
 	sheet_plural_name = "gems"
 	value = 1.8
+	sparse_material_weight = 5
+	rich_material_weight = 5
 
 /material/diamond/crystal
 	display_name = "crystal"
@@ -34,6 +36,8 @@
 	ore_compresses_to = null
 	hidden_from_codex = TRUE
 	value = 2
+	sparse_material_weight = null
+	rich_material_weight = null
 
 /material/stone
 	display_name = "sandstone"
