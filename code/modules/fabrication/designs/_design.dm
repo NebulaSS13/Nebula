@@ -10,7 +10,7 @@
 	var/build_time = 5 SECONDS
 	var/max_amount = 1 // How many instances can be queued at once
 	var/ignore_materials = list(
-		/material/waste = TRUE
+		MAT_WASTE = TRUE
 	)
 	var/list/required_technology
 
@@ -57,7 +57,7 @@
 	. = ..()
 	if(length(matter))
 		for(var/material in matter)
-			var/material/M = SSmaterials.get_material_datum(material)
+			var/decl/material/M = SSmaterials.get_material_datum(material)
 			if(istype(M))
 				.[M.type] = matter[material]
 	if(reagents && length(reagents.reagent_volumes))

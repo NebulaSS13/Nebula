@@ -10,7 +10,7 @@
 	icon = 'icons/obj/materials.dmi'
 	matter = null
 
-	var/material/reinf_material
+	var/decl/material/reinf_material
 	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)

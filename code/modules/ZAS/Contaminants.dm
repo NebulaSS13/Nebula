@@ -166,7 +166,7 @@ turf/Entered(obj/item/I)
 		if(!env)
 			return
 		for(var/g in env.gas)
-			var/material/mat = SSmaterials.get_material_datum(g)
+			var/decl/material/mat = SSmaterials.get_material_datum(g)
 			if((mat.gas_flags & XGM_GAS_CONTAMINANT) && env.gas[g] > mat.gas_overlay_limit + 1)
 				I.contaminate()
 				break

@@ -4,7 +4,7 @@
 
 /datum/codex_category/materials/Initialize()
 	for(var/thing in SSmaterials.materials)
-		var/material/mat = thing
+		var/decl/material/mat = thing
 		if(!mat.hidden_from_codex)
 			var/datum/codex_entry/entry = new(_display_name = "[mat.display_name] (material)")
 			entry.lore_text = mat.lore_text
@@ -14,11 +14,11 @@
 			material_info += "Its melting point is [mat.melting_point] K."
 
 			if(mat.ore_compresses_to && mat.ore_compresses_to != mat.type)
-				var/material/M = SSmaterials.get_material_datum(mat.ore_compresses_to)
+				var/decl/material/M = SSmaterials.get_material_datum(mat.ore_compresses_to)
 				material_info += "It can be compressed into [M.display_name]."
 
 			if(mat.ore_smelts_to && mat.ore_smelts_to != mat.type)
-				var/material/M = SSmaterials.get_material_datum(mat.ore_smelts_to)
+				var/decl/material/M = SSmaterials.get_material_datum(mat.ore_smelts_to)
 				material_info += "It can be smelted into [M.display_name]."
 
 			if(mat.brute_armor < 2)
@@ -50,7 +50,7 @@
 			else
 				material_info += "It is of average weight."
 
-			var/material/steel = SSmaterials.materials_by_name[MAT_STEEL]
+			var/decl/material/steel = SSmaterials.materials_by_name[MAT_STEEL]
 			var/comparison = round(mat.hardness / steel.hardness, 0.1)
 			if(comparison >= 0.9 && comparison <= 1.1)
 				material_info += "It is as hard as steel."
@@ -79,7 +79,7 @@
 			if(LAZYLEN(mat.alloy_materials))
 				var/parts = list()
 				for(var/alloy_part in mat.alloy_materials)
-					var/material/part = SSmaterials.materials_by_name[alloy_part]
+					var/decl/material/part = SSmaterials.materials_by_name[alloy_part]
 					parts += "[mat.alloy_materials[alloy_part]]u [part.display_name]"
 				material_info += "It is an alloy of the following materials: [english_list(parts)]"
 

@@ -1,4 +1,4 @@
-/material/pitchblende
+/decl/material/pitchblende
 	display_name = "pitchblende"
 	ore_compresses_to = MAT_PITCHBLENDE
 	icon_colour = "#917d1a"
@@ -18,7 +18,7 @@
 	sheet_plural_name = "bricks"
 	value = 0.8
 
-/material/graphite
+/decl/material/graphite
 	display_name = "graphite"
 	ore_compresses_to = MAT_GRAPHITE
 	icon_colour = "#444444"
@@ -34,7 +34,7 @@
 	)
 	value = 0.8
 
-/material/quartz
+/decl/material/quartz
 	display_name = "quartz"
 	ore_compresses_to = MAT_QUARTZ
 	ore_name = "quartz"
@@ -55,7 +55,7 @@
 	icon_reinf = "reinf_stone"
 	reflectiveness = MAT_VALUE_SHINY
 
-/material/pyrite
+/decl/material/pyrite
 	display_name = "pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10
@@ -77,7 +77,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 	value = 0.8
 
-/material/spodumene
+/decl/material/spodumene
 	display_name = "spodumene"
 	ore_compresses_to = MAT_SPODUMENE
 	ore_name = "spodumene"
@@ -97,7 +97,7 @@
 	icon_reinf = "reinf_stone"
 	value = 0.8
 
-/material/cinnabar
+/decl/material/cinnabar
 	display_name = "cinnabar"
 	ore_compresses_to = MAT_CINNABAR
 	ore_name = "cinnabar"
@@ -117,7 +117,7 @@
 	icon_reinf = "reinf_stone"
 	value = 0.8
 
-/material/phosphorite
+/decl/material/phosphorite
 	display_name = "phosphorite"
 	ore_compresses_to = MAT_PHOSPHORITE
 	ore_name = "phosphorite"
@@ -137,7 +137,7 @@
 	icon_reinf = "reinf_stone"
 	value = 0.8
 
-/material/rocksalt
+/decl/material/rocksalt
 	display_name = "rock salt"
 	ore_compresses_to = MAT_ROCK_SALT
 	ore_name = "rock salt"
@@ -157,7 +157,7 @@
 	icon_reinf = "reinf_stone"
 	value = 0.8
 
-/material/potash
+/decl/material/potash
 	display_name = "potash"
 	ore_compresses_to = MAT_POTASH
 	ore_name = "potash"
@@ -177,7 +177,7 @@
 	icon_reinf = "reinf_stone"
 	value = 0.8
 
-/material/bauxite
+/decl/material/bauxite
 	display_name = "bauxite"
 	ore_name = "bauxite"
 	ore_result_amount = 10
@@ -198,7 +198,7 @@
 	ore_compresses_to = MAT_BAUXITE
 	value = 0.8
 
-/material/sand
+/decl/material/sand
 	display_name = "sand"
 	stack_type = null
 	icon_colour = "#e2dbb5"
@@ -211,7 +211,7 @@
 	)
 	value = 0.8
 
-/material/sand/clay
+/decl/material/sand/clay
 	display_name = "clay"
 	icon_colour = COLOR_OFF_WHITE
 	ore_name = "clay"
@@ -220,7 +220,7 @@
 	ore_compresses_to = MAT_CLAY
 	value = 0.8
 
-/material/phoron
+/decl/material/phoron
 	display_name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
@@ -260,7 +260,7 @@
 	value = 1.6
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
-/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
+/decl/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
 	if(isnull(ignition_point))
 		return 0
 	if(temperature < ignition_point)
@@ -274,7 +274,7 @@
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
 
-/material/phoron/supermatter
+/decl/material/phoron/supermatter
 	display_name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"

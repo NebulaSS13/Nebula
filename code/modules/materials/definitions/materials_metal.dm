@@ -1,4 +1,4 @@
-/material/uranium
+/decl/material/uranium
 	display_name = "uranium"
 	lore_text = "A highly radioactive metal. Commonly used as fuel in fission reactors."
 	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
@@ -20,7 +20,7 @@
 	value = 1.5
 	removed_by_welder = TRUE
 
-/material/gold
+/decl/material/gold
 	display_name = "gold"
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	wall_name = "bulkhead"
@@ -46,7 +46,7 @@
 	value = 1.6
 	removed_by_welder = TRUE
 
-/material/gold/bronze //placeholder for ashtrays
+/decl/material/gold/bronze //placeholder for ashtrays
 	display_name = "bronze"
 	lore_text = "An alloy of copper and tin."
 	reflectiveness = MAT_VALUE_SHINY
@@ -56,7 +56,7 @@
 	ore_compresses_to = null
 	value = 1.2
 
-/material/copper
+/decl/material/copper
 	display_name = "copper"
 	wall_name = "bulkhead"
 	icon_colour = COLOR_COPPER
@@ -79,7 +79,7 @@
 	ore_icon_overlay = "shiny"
 	removed_by_welder = TRUE
 
-/material/silver
+/decl/material/silver
 	display_name = "silver"
 	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
 	wall_name = "bulkhead"
@@ -104,7 +104,7 @@
 	removed_by_welder = TRUE
 	value = 1.2
 
-/material/steel
+/decl/material/steel
 	display_name = "steel"
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	wall_name = "bulkhead"
@@ -128,7 +128,7 @@
 	removed_by_welder = TRUE
 	value = 1.1
 
-/material/steel/holographic
+/decl/material/steel/holographic
 	display_name = "holographic steel"
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -138,10 +138,10 @@
 	hidden_from_codex = TRUE
 	value = 0
 
-/material/steel/holographic/get_recipes(reinf_mat)
+/decl/material/steel/holographic/get_recipes(reinf_mat)
 	return list()
 
-/material/aluminium
+/decl/material/aluminium
 	display_name = "aluminium"
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	wall_name = "bulkhead"
@@ -158,7 +158,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
 
-/material/aluminium/holographic
+/decl/material/aluminium/holographic
 	display_name = "holoaluminium"
 	stack_type = null
 	shard_type = SHARD_NONE
@@ -167,10 +167,10 @@
 	alloy_product = FALSE
 	hidden_from_codex = TRUE
 
-/material/aluminium/holographic/get_recipes(reinf_mat)
+/decl/material/aluminium/holographic/get_recipes(reinf_mat)
 	return list()
 
-/material/plasteel
+/decl/material/plasteel
 	display_name = "plasteel"
 	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	wall_name = "bulkhead"
@@ -195,7 +195,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE
 
-/material/plasteel/titanium
+/decl/material/plasteel/titanium
 	display_name = "titanium"
 	lore_text = "A light, strong, corrosion-resistant metal. Perfect for cladding high-velocity ballistic supply pods."
 	brute_armor = 10
@@ -214,7 +214,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.5
 
-/material/plasteel/ocp
+/decl/material/plasteel/ocp
 	display_name = "osmium-carbide plasteel"
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
@@ -232,7 +232,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.8
 
-/material/osmium
+/decl/material/osmium
 	display_name = "osmium"
 	lore_text = "An extremely hard form of platinum."
 	wall_name = "bulkhead"
@@ -247,7 +247,7 @@
 	removed_by_welder = TRUE
 	value = 1.3
 
-/material/platinum
+/decl/material/platinum
 	display_name = "platinum"
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	wall_name = "bulkhead"
@@ -269,7 +269,7 @@
 	removed_by_welder = TRUE
 	value = 1.5
 
-/material/iron
+/decl/material/iron
 	display_name = "iron"
 	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
 	wall_name = "bulkhead"
@@ -287,7 +287,7 @@
 	removed_by_welder = TRUE
 
 // Adminspawn only, do not let anyone get this.
-/material/voxalloy
+/decl/material/voxalloy
 	display_name = "dense alloy"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -304,14 +304,14 @@
 	value = 3
 
 // Likewise.
-/material/voxalloy/elevatorium
+/decl/material/voxalloy/elevatorium
 	display_name = "elevator panelling"
 	wall_name = "bulkhead"
 	icon_colour = "#666666"
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	hidden_from_codex = TRUE
 
-/material/aliumium
+/decl/material/aliumium
 	display_name = "alien alloy"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -327,7 +327,7 @@
 	removed_by_welder = TRUE
 	value = 2.5
 
-/material/aliumium/New()
+/decl/material/aliumium/New()
 	icon_base = "metal"
 	icon_colour = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
@@ -339,10 +339,10 @@
 	melting_point = rand(400,10000)
 	..()
 
-/material/aliumium/place_dismantled_girder(var/turf/target, var/material/reinf_material)
+/decl/material/aliumium/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
 	return
 
-/material/hematite
+/decl/material/hematite
 	display_name = "hematite"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -356,7 +356,7 @@
 	removed_by_welder = TRUE
 	value = 0.8
 
-/material/rutile
+/decl/material/rutile
 	display_name = "rutile"
 	wall_name = "bulkhead"
 	stack_type = null

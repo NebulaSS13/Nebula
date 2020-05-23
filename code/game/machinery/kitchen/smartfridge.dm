@@ -132,7 +132,7 @@
 		return S.dried_type
 	else if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/mat = O
-		var/material/skin/skin_mat = mat.material
+		var/decl/material/skin/skin_mat = mat.material
 		return istype(skin_mat)
 	return 0
 
@@ -180,12 +180,12 @@
 
 			else if(istype(thing, /obj/item/stack/material))
 				var/obj/item/stack/material/skin = thing
-				if(!istype(skin.material, /material/skin))
+				if(!istype(skin.material, /decl/material/skin))
 					continue
-				var/material/skin/skin_mat = skin.material
+				var/decl/material/skin/skin_mat = skin.material
 				if(!skin_mat.tans_to)
 					continue
-				var/material/leather_mat = SSmaterials.get_material_datum(skin_mat.tans_to)
+				var/decl/material/leather_mat = SSmaterials.get_material_datum(skin_mat.tans_to)
 				stock_item(new leather_mat.stack_type(get_turf(src), skin.amount, skin_mat.tans_to))
 				remove_thing = TRUE
 

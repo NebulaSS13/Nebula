@@ -64,7 +64,7 @@
 				var/percentage = round(mixture.gas[mix]/total_moles * 100, 0.01)
 				if(!percentage)
 					continue
-				var/material/mat = SSmaterials.get_material_datum(mix)
+				var/decl/material/mat = SSmaterials.get_material_datum(mix)
 				switch(mode)
 					if(MV_MODE)
 						perGas_add_string = ", Moles: [round(mixture.gas[mix], 0.01)]"

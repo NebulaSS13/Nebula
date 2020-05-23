@@ -53,7 +53,7 @@
 			var/fuel_string = "<table width = '100%'>"
 			if(C.owned_field && LAZYLEN(C.owned_field.reactants))
 				for(var/reactant in C.owned_field.reactants)
-					var/material/mat = SSmaterials.get_material_datum(reactant)
+					var/decl/material/mat = SSmaterials.get_material_datum(reactant)
 					fuel_string += "<tr><td>[capitalize(mat.display_name)]</td><td>[C.owned_field.reactants[reactant]]</td></tr>"
 			else
 				fuel_string += "<tr><td colspan = 2>Nothing.</td></tr>"

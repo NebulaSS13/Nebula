@@ -4,7 +4,7 @@
 
 /datum/codex_category/gases/Initialize()
 	for(var/gas in SSmaterials.all_gasses)
-		var/material/mat = SSmaterials.get_material_datum(gas)
+		var/decl/material/mat = SSmaterials.get_material_datum(gas)
 		if(mat.hidden_from_codex)
 			continue
 		var/list/gas_info = list()
@@ -13,7 +13,7 @@
 		if(mat.gas_flags & XGM_GAS_FUEL)
 			gas_info+= "It is flammable."
 			if(mat.gas_burn_product)
-				var/material/firemat = SSmaterials.get_material_datum(mat.gas_burn_product)
+				var/decl/material/firemat = SSmaterials.get_material_datum(mat.gas_burn_product)
 				gas_info+= "It produces [firemat.display_name] when burned."
 		if(mat.gas_flags & XGM_GAS_OXIDIZER)
 			gas_info+= "It is an oxidizer, required to sustain fire."

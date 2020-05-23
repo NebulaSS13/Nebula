@@ -6,7 +6,7 @@
 
 /decl/archaeological_find/material/spawn_item(atom/loc)
 	var/mat_to_spawn = pickweight(possible_materials)
-	var/material/M = SSmaterials.materials_by_name[mat_to_spawn]
+	var/decl/material/M = SSmaterials.materials_by_name[mat_to_spawn]
 	var/obj/item/stack/material/new_item = new M.stack_type(loc)
 	new_item.amount = rand(5,45)
 	return new_item

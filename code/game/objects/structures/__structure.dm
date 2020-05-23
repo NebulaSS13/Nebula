@@ -24,13 +24,13 @@
 		UNSETEMPTY(matter)
 
 /obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat)
-	if(ispath(_mat, /material))
+	if(ispath(_mat, /decl/material))
 		material = _mat
-	if(ispath(material, /material))
+	if(ispath(material, /decl/material))
 		material = SSmaterials.get_material_datum(material)
-	if(ispath(_reinf_mat, /material))
+	if(ispath(_reinf_mat, /decl/material))
 		reinf_material = _reinf_mat
-	if(ispath(reinf_material, /material))
+	if(ispath(reinf_material, /decl/material))
 		reinf_material = SSmaterials.get_material_datum(reinf_material)
 	. = ..()
 	update_materials()

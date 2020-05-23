@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_HUGE
 	material = DEFAULT_FURNITURE_MATERIAL
 	var/base_icon = "stool"
-	var/material/padding_material
+	var/decl/material/padding_material
 
 /obj/item/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
@@ -21,7 +21,7 @@
 	. = ..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
-	if(ispath(padding_material, /material))
+	if(ispath(padding_material, /decl/material))
 		padding_material = SSmaterials.get_material_datum(padding_material)
 	force = round(material.get_blunt_damage()*0.4)
 	update_icon()

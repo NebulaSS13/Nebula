@@ -5,7 +5,7 @@
 	var/list/failed = list()
 	var/list/passed = list()
 	for(var/mat in SSmaterials.materials_by_name)
-		var/material/mat_datum = SSmaterials.get_material_datum(mat)
+		var/decl/material/mat_datum = SSmaterials.get_material_datum(mat)
 		if(length(mat_datum.chemical_makeup))
 			var/total = 0
 			for(var/chem in mat_datum.chemical_makeup)
@@ -27,7 +27,7 @@
 	var/list/failed_designs = list()
 	var/list/passed_designs = list()
 	for(var/owner_mat in SSmaterials.materials_by_name)
-		var/material/mat_datum = SSmaterials.get_material_datum(owner_mat)
+		var/decl/material/mat_datum = SSmaterials.get_material_datum(owner_mat)
 		for(var/datum/stack_recipe/recipe in mat_datum.get_recipes())
 			var/obj/product = recipe.spawn_result()
 			var/failed

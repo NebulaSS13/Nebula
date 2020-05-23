@@ -51,7 +51,7 @@
 
 	if(moles > 0 && abs(temperature - temp) > MINIMUM_TEMPERATURE_DELTA_TO_CONSIDER)
 		var/self_heat_capacity = heat_capacity()
-		var/material/mat = SSmaterials.get_material_datum(gasid)
+		var/decl/material/mat = SSmaterials.get_material_datum(gasid)
 		var/giver_heat_capacity = mat.gas_specific_heat * moles
 		var/combined_heat_capacity = giver_heat_capacity + self_heat_capacity
 		if(combined_heat_capacity != 0)
@@ -138,7 +138,7 @@
 /datum/gas_mixture/proc/heat_capacity()
 	. = 0
 	for(var/g in gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = SSmaterials.get_material_datum(g)
 		. += mat.gas_specific_heat * gas[g]
 	. *= group_multiplier
 
@@ -194,7 +194,7 @@
 		return SPECIFIC_ENTROPY_VACUUM	//that gas isn't here
 
 	//group_multiplier gets divided out in volume/gas[gasid] - also, V/(m*T) = R/(partial pressure)
-	var/material/mat = SSmaterials.get_material_datum(gasid)
+	var/decl/material/mat = SSmaterials.get_material_datum(gasid)
 	var/molar_mass = mat.gas_molar_mass
 	var/specific_heat = mat.gas_specific_heat
 	var/safe_temp = max(temperature, TCMB) // We're about to divide by this.
@@ -278,12 +278,12 @@
 
 	var/sum = 0
 	for(var/g in gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = SSmaterials.get_material_datum(g)
 		if(mat.gas_flags & flag)
 			sum += gas[g]
 
 	for(var/g in gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = SSmaterials.get_material_datum(g)
 		if(mat.gas_flags & flag)
 			removed.gas[g] = QUANTIZE((gas[g] / sum) * amount)
 			gas[g] -= removed.gas[g] / group_multiplier
@@ -298,7 +298,7 @@
 /datum/gas_mixture/proc/get_by_flag(flag)
 	. = 0
 	for(var/g in gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = SSmaterials.get_material_datum(g)
 		if(mat.gas_flags & flag)
 			. += gas[g]
 
@@ -357,7 +357,7 @@
 			LAZYADD(graphic_remove, O)
 	for(var/g in gas)
 		//Overlay isn't applied for this gas, check if it's valid and needs to be added.
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = SSmaterials.get_material_datum(g)
 		if(!isnull(mat.gas_overlay_limit) && gas[g] > mat.gas_overlay_limit)
 			if(!LAZYACCESS(tile_overlay_cache, g))
 				LAZYSET(tile_overlay_cache, g, new/obj/effect/gas_overlay(null, g))
@@ -509,7 +509,7 @@
 
 /datum/gas_mixture/proc/get_mass()
 	for(var/g in gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = SSmaterials.get_material_datum(g)
 		. += gas[g] * mat.gas_molar_mass * group_multiplier
 
 /datum/gas_mixture/proc/specific_mass()

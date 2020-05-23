@@ -490,5 +490,5 @@
 	var/material = input("Select material to spawn") as null|anything in SSmaterials.materials_by_name
 	if(!material)
 		return
-	var/material/M = SSmaterials.get_material_datum(material)
+	var/decl/material/M = SSmaterials.get_material_datum(material)
 	new M.stack_type(get_turf(mob), 50, M)

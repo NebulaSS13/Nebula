@@ -34,7 +34,7 @@
 	block_air_zones = 0
 
 	var/begins_closed = TRUE
-	var/material/implicit_material
+	var/decl/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
 

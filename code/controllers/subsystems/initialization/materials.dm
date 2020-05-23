@@ -23,7 +23,7 @@ SUBSYSTEM_DEF(materials)
 	all_gasses = list()
 	gas_flag_cache = list()
 	for(var/thing in materials_by_name)
-		var/material/mat = materials_by_name[thing]
+		var/decl/material/mat = materials_by_name[thing]
 		if(mat.is_a_gas())
 			all_gasses[thing] = mat
 			gas_flag_cache[thing] = mat.gas_flags
@@ -42,11 +42,11 @@ SUBSYSTEM_DEF(materials)
 	alloy_products =    list()
 	processable_ores =  list()
 
-	for(var/mtype in subtypesof(/material))
-		var/material/new_mineral = mtype
+	for(var/mtype in subtypesof(/decl/material))
+		var/decl/material/new_mineral = mtype
 		if(!initial(new_mineral.display_name))
 			continue
-		new_mineral = new mtype
+		new_mineral = decls_repository.get_decl(mtype)
 		materials += new_mineral
 		materials_by_name[mtype] = new_mineral
 		if(new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)
@@ -66,7 +66,7 @@ SUBSYSTEM_DEF(materials)
 			crash_with("Unable to acquire material by non-path key '[mat]'.")
 
 /proc/material_display_name(var/mat)
-	var/material/material = SSmaterials.get_material_datum(mat)
+	var/decl/material/material = SSmaterials.get_material_datum(mat)
 	if(material)
 		return material.display_name
 	return null

@@ -15,9 +15,9 @@
 	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
-	var/material/material
-	var/material/reinf_material
-	var/material/girder_material = MAT_STEEL
+	var/decl/material/material
+	var/decl/material/reinf_material
+	var/decl/material/girder_material = MAT_STEEL
 	var/last_state
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
@@ -39,7 +39,7 @@
 	material = SSmaterials.get_material_datum(materialtype)
 	if(!isnull(rmaterialtype))
 		reinf_material = SSmaterials.get_material_datum(rmaterialtype)
-	if(ispath(girder_material, /material))
+	if(ispath(girder_material, /decl/material))
 		girder_material = SSmaterials.get_material_datum(girder_material)
 	update_material()
 	hitsound = material.hitsound
