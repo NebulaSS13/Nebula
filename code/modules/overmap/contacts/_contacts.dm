@@ -32,7 +32,7 @@
 
 /datum/overmap_contact/proc/update_marker_icon(var/range = 0)
 	marker.icon_state = effect.icon_state
-
+	marker.dir = effect.dir
 	marker.overlays.Cut()
 
 	if(check_effect_shield())
