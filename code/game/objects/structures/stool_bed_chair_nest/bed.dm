@@ -138,7 +138,7 @@
 	update_icon()
 
 /obj/structure/bed/proc/add_padding(var/padding_type)
-	reinf_material = SSmaterials.get_material_datum(padding_type)
+	reinf_material = decls_repository.get_decl(padding_type)
 	update_icon()
 
 /obj/structure/bed/psych

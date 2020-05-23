@@ -36,11 +36,11 @@
 	icon_state = "blank"
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
-	material = SSmaterials.get_material_datum(materialtype)
+	material = decls_repository.get_decl(materialtype)
 	if(!isnull(rmaterialtype))
-		reinf_material = SSmaterials.get_material_datum(rmaterialtype)
+		reinf_material = decls_repository.get_decl(rmaterialtype)
 	if(ispath(girder_material, /decl/material))
-		girder_material = SSmaterials.get_material_datum(girder_material)
+		girder_material = decls_repository.get_decl(girder_material)
 	update_material()
 	hitsound = material.hitsound
 
@@ -193,7 +193,7 @@
 			O.forceMove(src)
 
 	clear_plants()
-	material = SSmaterials.get_material_datum(MAT_PLACEHOLDER)
+	material = decls_repository.get_decl(MAT_PLACEHOLDER)
 	reinf_material = null
 	update_connections(1)
 

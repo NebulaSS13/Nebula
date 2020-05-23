@@ -57,16 +57,8 @@ SUBSYSTEM_DEF(materials)
 				processable_ores[component] = TRUE
 				alloy_components[component] = TRUE
 
-/datum/controller/subsystem/materials/proc/get_material_datum(var/mat)
-	. = materials_by_name[mat]
-	if(!.)
-		if(ispath(mat))
-			crash_with("Unable to acquire material by path '[mat]'.")
-		else
-			crash_with("Unable to acquire material by non-path key '[mat]'.")
-
 /proc/material_display_name(var/mat)
-	var/decl/material/material = SSmaterials.get_material_datum(mat)
+	var/decl/material/material = decls_repository.get_decl(mat)
 	if(material)
 		return material.display_name
 	return null

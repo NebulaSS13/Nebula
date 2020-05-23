@@ -254,7 +254,7 @@
 	if(full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
-		var/decl/material/M = SSmaterials.get_material_datum(MAT_STEEL)
+		var/decl/material/M = decls_repository.get_decl(MAT_STEEL)
 		S = M.place_shard(loc)
 		if(S) shards += S
 	qdel(src)

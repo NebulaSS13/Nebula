@@ -16,7 +16,7 @@
 
 /obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
-	material = SSmaterials.get_material_datum(gas)
+	material = decls_repository.get_decl(gas)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(material.gas_tile_overlay)

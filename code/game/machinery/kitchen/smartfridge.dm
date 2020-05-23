@@ -185,7 +185,7 @@
 				var/decl/material/skin/skin_mat = skin.material
 				if(!skin_mat.tans_to)
 					continue
-				var/decl/material/leather_mat = SSmaterials.get_material_datum(skin_mat.tans_to)
+				var/decl/material/leather_mat = decls_repository.get_decl(skin_mat.tans_to)
 				stock_item(new leather_mat.stack_type(get_turf(src), skin.amount, skin_mat.tans_to))
 				remove_thing = TRUE
 

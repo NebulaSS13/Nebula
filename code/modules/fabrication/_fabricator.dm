@@ -89,7 +89,7 @@
 		// Update global type to string cache.
 		if(!stored_substances_to_names[mat])
 			if(ispath(mat, /decl/material))
-				var/decl/material/mat_instance = SSmaterials.get_material_datum(mat)
+				var/decl/material/mat_instance = decls_repository.get_decl(mat)
 				if(istype(mat_instance))
 					stored_substances_to_names[mat] =  lowertext(mat_instance.display_name)
 			else if(ispath(mat, /decl/reagent))
@@ -171,7 +171,7 @@
 	for(var/mat in stored_material)
 		if(ispath(mat, /decl/material))
 			var/mat_name = stored_substances_to_names[mat]
-			var/decl/material/M = SSmaterials.get_material_datum(mat_name)
+			var/decl/material/M = decls_repository.get_decl(mat_name)
 			if(stored_material[mat] > SHEET_MATERIAL_AMOUNT)
 				M.place_sheet(get_turf(src), round(stored_material[mat] / SHEET_MATERIAL_AMOUNT), M.type)
 	..()

@@ -237,7 +237,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 
 		//*** Get the fuel and oxidizer amounts
 		for(var/g in gas)
-			var/decl/material/mat = SSmaterials.get_material_datum(g)
+			var/decl/material/mat = decls_repository.get_decl(g)
 			if(mat.gas_flags & XGM_GAS_FUEL)
 				gas_fuel += gas[g]
 			if(mat.gas_flags & XGM_GAS_OXIDIZER)
@@ -306,7 +306,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
 		var/datum/gas_mixture/burned_fuel = remove_by_flag(XGM_GAS_FUEL, used_gas_fuel)
 		for(var/g in burned_fuel.gas)
-			var/decl/material/mat = SSmaterials.get_material_datum(g)
+			var/decl/material/mat = decls_repository.get_decl(g)
 			if(mat.gas_burn_product)
 				adjust_gas(mat.gas_burn_product, burned_fuel.gas[g])
 

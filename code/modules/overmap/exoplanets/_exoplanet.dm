@@ -226,7 +226,7 @@
 			var/list/gases = list()
 			for(var/g in atmosphere.gas)
 				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
-					var/decl/material/mat = SSmaterials.get_material_datum(g)
+					var/decl/material/mat = decls_repository.get_decl(g)
 					gases += mat.display_name
 			extra_data += "Atmosphere composition: [english_list(gases)]"
 			var/inaccuracy = rand(8,12)/10

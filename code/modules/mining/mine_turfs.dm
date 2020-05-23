@@ -395,7 +395,7 @@ var/list/mining_floors = list()
 		mineral_name = pickweight(default_mineral_list)
 
 	if(!mineral && mineral_name)
-		mineral = SSmaterials.get_material_datum(mineral_name)
+		mineral = decls_repository.get_decl(mineral_name)
 	if(istype(mineral))
 		UpdateMineral()
 	. = ..(ml)

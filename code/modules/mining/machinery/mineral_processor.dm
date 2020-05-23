@@ -51,7 +51,7 @@
 			if(ores_stored[metal] <= 0 || ores_processing[metal] == ORE_DISABLED)
 				continue
 
-			var/decl/material/M = SSmaterials.get_material_datum(metal)
+			var/decl/material/M = decls_repository.get_decl(metal)
 			var/result = 0 // For reference: a positive result indicates sheets were produced,
 			               // and a negative result indicates slag was produced.
 			var/ore_mode = ores_processing[metal]
@@ -103,7 +103,7 @@
 /obj/machinery/mineral/processing_unit/proc/attempt_smelt(var/decl/material/metal, var/max_result)
 	. = Clamp(Floor(ores_stored[metal.type]/SHEET_MATERIAL_AMOUNT),1,max_result)
 	ores_stored[metal.type] -= . * SHEET_MATERIAL_AMOUNT
-	var/decl/material/M = SSmaterials.get_material_datum(metal.ore_smelts_to)
+	var/decl/material/M = decls_repository.get_decl(metal.ore_smelts_to)
 	if(istype(M))
 		M.place_sheet(output_turf, .)
 	else
@@ -114,7 +114,7 @@
 	if(making >= 2)
 		ores_stored[metal.type] -= making * SHEET_MATERIAL_AMOUNT
 		. = Floor(making * 0.5)
-		var/decl/material/M = SSmaterials.get_material_datum(metal.ore_compresses_to)
+		var/decl/material/M = decls_repository.get_decl(metal.ore_compresses_to)
 		if(istype(M))
 			M.place_sheet(output_turf, .)
 		else
@@ -127,7 +127,7 @@
 	var/result = ""
 	for(var/ore in ores_processing)
 		if(!ores_stored[ore] && !report_all_ores) continue
-		var/decl/material/M = SSmaterials.get_material_datum(ore)
+		var/decl/material/M = decls_repository.get_decl(ore)
 		var/line = "[capitalize(M.display_name)]</td><td>[Floor(ores_stored[ore] / SHEET_MATERIAL_AMOUNT)] ([ores_stored[ore]]u)"
 		var/status_string
 		if(ores_processing[ore])

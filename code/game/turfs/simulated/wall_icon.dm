@@ -8,7 +8,7 @@
 	else
 		construction_stage = null
 	if(!material)
-		material = SSmaterials.get_material_datum(DEFAULT_WALL_MATERIAL)
+		material = decls_repository.get_decl(DEFAULT_WALL_MATERIAL)
 	if(material)
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)

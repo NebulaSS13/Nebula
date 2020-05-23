@@ -116,7 +116,7 @@
 	newgases = newgases.Copy()
 	newgases ^= atmosphere.gas
 	for(var/gas in newgases)
-		var/decl/material/mat = SSmaterials.get_material_datum(gas)
+		var/decl/material/mat = decls_repository.get_decl(gas)
 		if(mat.gas_flags & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
 			newgases -= gas
 	if(newgases.len)

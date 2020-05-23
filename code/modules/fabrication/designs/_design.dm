@@ -57,7 +57,7 @@
 	. = ..()
 	if(length(matter))
 		for(var/material in matter)
-			var/decl/material/M = SSmaterials.get_material_datum(material)
+			var/decl/material/M = decls_repository.get_decl(material)
 			if(istype(M))
 				.[M.type] = matter[material]
 	if(reagents && length(reagents.reagent_volumes))

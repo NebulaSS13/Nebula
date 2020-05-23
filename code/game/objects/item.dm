@@ -217,7 +217,7 @@
 		if(LAZYLEN(matter))
 			desc_comp += "<span class='notice'>Extractable materials:</span><BR>"
 			for(var/mat in matter)
-				var/decl/material/M = SSmaterials.get_material_datum(mat)
+				var/decl/material/M = decls_repository.get_decl(mat)
 				desc_comp += "[capitalize(M.display_name)]<BR>"
 		else
 			desc_comp += "<span class='danger'>No extractable materials detected.</span><BR>"
