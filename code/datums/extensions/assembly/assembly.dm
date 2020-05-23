@@ -12,8 +12,8 @@
 	base_type = /datum/extension/assembly
 	var/assembly_name = "assembly"
 	var/list/parts = list()					// List of all components.
-	var/list/max_parts = list()				// Max parts allowed. Dict, key is type, value is max number allowed.
-	var/list/critical_parts = list()		// Parts that are required for the device to function. Normal list.
+	var/list/max_parts						// Max parts allowed. Dict, key is type, value is max number allowed.
+	var/list/critical_parts					// Parts that are required for the device to function. Normal list.
 
 	// Some stateful variables.
 	var/apc_powered				= FALSE		// Power is coming from APC.
