@@ -46,7 +46,7 @@
 	var/datum/nano_module/program/email_client/NME = NM
 	if(!istype(NME))
 		return
-	NME.relayed_process(network_speed)
+	NME.relayed_process(computer.get_network_status())
 
 	var/check_count = NME.check_for_new_messages()
 	if(check_count)
