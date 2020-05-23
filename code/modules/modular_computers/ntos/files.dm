@@ -223,10 +223,6 @@
 	name = "Local Storage"
 	var/disk_type = PART_HDD
 
-/datum/file_storage/disk/removable
-	name = "Disk Drive"
-	disk_type = PART_DRIVE
-
 /datum/file_storage/disk/check_errors()
 	. = ..()
 	if(.)
@@ -266,6 +262,52 @@
 	if(check_errors())
 		return 0
 	return NETWORK_SPEED_DISK
+
+// Storing files on a removable disk.
+/datum/file_storage/disk_removable
+	name = "Disk Drive"
+
+/datum/file_storage/disk_removable/check_errors()
+	. = ..()
+	if(.)
+		return
+	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	if(!drive_slot)
+		return "HARDWARE ERROR: No compatible device found"
+	if(!drive_slot.check_functionality())
+		return "HARDWARE ERROR: [drive_slot] is non-operational"
+	if(!istype(drive_slot.stored_drive))
+		return "HARDWARE ERROR: No portable drive inserted."
+
+/datum/file_storage/disk_removable/get_all_files()
+	if(check_errors())
+		return FALSE
+	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	return os.get_all_files(drive_slot.stored_drive)
+
+/datum/file_storage/disk_removable/get_file(filename)
+	if(check_errors())
+		return FALSE
+	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	return os.get_file(filename, drive_slot.stored_drive)
+
+/datum/file_storage/disk_removable/store_file(datum/computer_file/F)
+	if(check_errors())
+		return FALSE
+	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	return os.store_file(F, drive_slot.stored_drive)
+
+/datum/file_storage/disk_removable/save_file(filename, new_data)
+	if(check_errors())
+		return FALSE
+	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	return os.save_file(filename, new_data, drive_slot.stored_drive)
+
+/datum/file_storage/disk_removable/delete_file(filename)
+	if(check_errors())
+		return FALSE
+	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	return os.delete_file(filename, drive_slot.stored_drive)
 
 // Datum tracking progress between of file transfer between two file streams
 /datum/file_transfer

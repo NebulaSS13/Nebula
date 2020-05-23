@@ -1,15 +1,11 @@
 /obj/item/modular_computer/proc/update_verbs()
-	if(portable_drive)
-		verbs |= /obj/item/modular_computer/proc/eject_usb
-	else
-		verbs -= /obj/item/modular_computer/proc/eject_usb
-
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
 	if(stores_pen && istype(stored_pen))
 		verbs |= /obj/item/modular_computer/proc/remove_pen
 	else
 		verbs -= /obj/item/modular_computer/proc/remove_pen
 
-	if(card_slot)
+	if(assembly.get_component(PART_CARD))
 		verbs |= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 	else
 		verbs -= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
@@ -27,32 +23,15 @@
 	if(!Adjacent(usr))
 		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
 		return
-
-	if(enabled)
-		bsod = 1
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly.enabled)
+		assembly.bsod = 1
 		update_icon()
 		to_chat(usr, "You press a hard-reset button on \the [src]. It displays a brief debug screen before shutting down.")
 		shutdown_computer(FALSE)
 		spawn(2 SECONDS)
-			bsod = 0
+			assembly.bsod = 0
 			update_icon()
-
-
-// Eject ID card from computer, if it has ID slot with card inside.
-/obj/item/modular_computer/proc/eject_usb()
-	set name = "Eject Portable Storage"
-	set category = "Object"
-	set src in view(1)
-
-	if(!CanPhysicallyInteract(usr))
-		return
-
-	if(!Adjacent(usr))
-		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
-		return
-
-	proc_eject_usb(usr)
-	update_verbs()
 
 /obj/item/modular_computer/proc/remove_pen()
 	set name = "Remove Pen"
@@ -73,23 +52,14 @@
 		stored_pen = null
 		update_verbs()
 
-/obj/item/modular_computer/proc/proc_eject_usb(mob/user)
-	if(!user)
-		user = usr
-
-	if(!portable_drive)
-		to_chat(user, "There is no portable device connected to \the [src].")
-		return
-
-	uninstall_component(user, portable_drive)
-
 /obj/item/modular_computer/attack_ghost(var/mob/observer/ghost/user)
-	if(enabled)
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly.enabled)
 		ui_interact(user)
 	else if(check_rights(R_ADMIN, 0, user))
 		var/response = alert(user, "This computer is turned off. Would you like to turn it on?", "Admin Override", "Yes", "No")
 		if(response == "Yes")
-			turn_on(user)
+			assembly.turn_on(user)
 
 /obj/item/modular_computer/attack_ai(var/mob/user)
 	return attack_self(user)
@@ -101,22 +71,18 @@
 
 // On-click handling. Turns on the computer if it's off and opens the GUI.
 /obj/item/modular_computer/attack_self(var/mob/user)
-	if(enabled && screen_on)
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly.enabled && assembly.screen_on)
 		ui_interact(user)
-	else if(!enabled && screen_on)
-		turn_on(user)
+	else if(!assembly.enabled && assembly.screen_on)
+		assembly.turn_on(user)
 
 /obj/item/modular_computer/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
-		var/obj/item/card/id/I = W
-		if(!card_slot)
-			to_chat(user, "You try to insert [I] into [src], but it does not have an ID card slot installed.")
-			return
-
-		if(card_slot.insert_id(I, user))
-			update_verbs()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly.attackby(W, user))
+		update_verbs()
 		return
-		
+
 	if(istype(W, /obj/item/pen) && stores_pen)
 		if(istype(stored_pen))
 			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
@@ -127,89 +93,18 @@
 		update_verbs()
 		to_chat(user, "<span class='notice'>You insert [W] into [src].</span>")
 		return
-	if(istype(W, /obj/item/paper))
-		var/obj/item/paper/paper = W
-		if(scanner && paper.info)
-			scanner.do_on_attackby(user, W)
-			return
-	if(istype(W, /obj/item/paper) || istype(W, /obj/item/paper_bundle))
-		if(nano_printer)
-			nano_printer.attackby(W, user)
-	if(istype(W, /obj/item/aicard))
-		if(!ai_slot)
-			return
-		ai_slot.attackby(W, user)
-
-	if(!modifiable)
-		return ..()
-
-	if(istype(W, /obj/item/stock_parts/computer))
-		var/obj/item/stock_parts/computer/C = W
-		if(C.hardware_size <= max_hardware_size)
-			try_install_component(user, C)
-		else
-			to_chat(user, "This component is too large for \the [src].")
-	if(isWrench(W))
-		var/list/components = get_all_components()
-		if(components.len)
-			to_chat(user, "Remove all components from \the [src] before disassembling it.")
-			return
-		new /obj/item/stack/material/steel( get_turf(src.loc), steel_sheet_cost )
-		src.visible_message("\The [src] has been disassembled by [user].")
-		qdel(src)
-		return
-	if(isWelder(W))
-		var/obj/item/weldingtool/WT = W
-		if(!WT.isOn())
-			to_chat(user, "\The [W] is off.")
-			return
-
-		if(!damage)
-			to_chat(user, "\The [src] does not require repairs.")
-			return
-
-		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
-			damage = 0
-			to_chat(user, "You repair \the [src].")
-		return
-
-	if(isScrewdriver(W))
-		var/list/all_components = get_all_components()
-		if(!all_components.len)
-			to_chat(user, "This device doesn't have any components installed.")
-			return
-		var/list/component_names = list()
-		for(var/obj/item/stock_parts/computer/H in all_components)
-			component_names.Add(H.name)
-
-		var/choice = input(usr, "Which component do you want to uninstall?", "Computer maintenance", null) as null|anything in component_names
-
-		if(!choice)
-			return
-
-		if(!Adjacent(usr))
-			return
-
-		var/obj/item/stock_parts/computer/H = find_hardware_by_name(choice)
-
-		if(!H)
-			return
-
-		uninstall_component(user, H)
-
-		return
-
-	..()
+	return ..()
 
 /obj/item/modular_computer/examine(mob/user)
 	. = ..()
-
-	if(enabled)
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly.enabled)
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
 
+	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
 	if(card_slot && card_slot.stored_card)
 		to_chat(user, "The [card_slot.stored_card] is inserted into it.")
+	assembly.examine(user)
 
 /obj/item/modular_computer/MouseDrop(var/atom/over_object)
 	var/mob/M = usr
@@ -218,6 +113,8 @@
 
 /obj/item/modular_computer/afterattack(atom/target, mob/user, proximity)
 	. = ..()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/scanner/scanner = assembly.get_component(PART_SCANNER)
 	if(scanner)
 		scanner.do_on_afterattack(user, target, proximity)
 

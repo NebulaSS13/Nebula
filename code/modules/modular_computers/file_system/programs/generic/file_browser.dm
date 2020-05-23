@@ -14,7 +14,7 @@
 	var/error
 	var/list/file_sources = list(
 		/datum/file_storage/disk,
-		/datum/file_storage/disk/removable,
+		/datum/file_storage/disk_removable,
 		/datum/file_storage/network
 	)
 	var/datum/file_storage/current_filesource = /datum/file_storage/disk
