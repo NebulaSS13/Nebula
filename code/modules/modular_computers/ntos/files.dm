@@ -275,7 +275,7 @@
 	if(!drive_slot)
 		return "HARDWARE ERROR: No compatible device found"
 	if(!drive_slot.check_functionality())
-		return "NETWORK ERROR: [drive_slot] is non-operational"
+		return "HARDWARE ERROR: [drive_slot] is non-operational"
 	if(!istype(drive_slot.stored_drive))
 		return "HARDWARE ERROR: No portable drive inserted."
 
