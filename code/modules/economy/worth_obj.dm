@@ -5,7 +5,7 @@
 			total_matter += matter[mat]
 		var/mat_value_mult = 0
 		for(var/mat in matter)
-			var/material/mat_datum = SSmaterials.get_material_datum(mat)
+			var/decl/material/mat_datum = decls_repository.get_decl(mat)
 			mat_value_mult += mat_datum.value * (matter[mat] / total_matter)
 		. = mat_value_mult * (total_matter / SHEET_MATERIAL_AMOUNT)
 	else

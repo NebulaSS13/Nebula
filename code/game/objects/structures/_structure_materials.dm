@@ -1,6 +1,6 @@
 /obj/structure
-	var/material/material
-	var/material/reinf_material
+	var/decl/material/material
+	var/decl/material/reinf_material
 	var/material_alteration
 	var/dismantled
 

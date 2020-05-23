@@ -1,5 +1,5 @@
 // Placeholders for compile purposes.
-/material/gas
+/decl/material/gas
 	display_name = null
 	icon_colour = COLOR_GRAY80
 	stack_type = null
@@ -16,12 +16,12 @@
 	hardness = 0
 	weight = 1
 
-/material/gas/boron
+/decl/material/gas/boron
 	display_name = "boron"
 	lore_text = "Boron is a chemical element with the symbol B and atomic number 5."
 	is_fusion_fuel = TRUE
 
-/material/gas/lithium
+/decl/material/gas/lithium
 	display_name = "lithium"
 	lore_text = "A chemical element, used as antidepressant."
 	chemical_makeup = list(
@@ -29,7 +29,7 @@
 	)
 	is_fusion_fuel = TRUE
 
-/material/gas/oxygen
+/decl/material/gas/oxygen
 	display_name = "oxygen"
 	lore_text = "An ubiquitous oxidizing agent."
 	is_fusion_fuel = TRUE
@@ -39,7 +39,7 @@
 	gas_symbol_html = "O<sub>2</sub>"
 	gas_symbol = "O2"
 
-/material/gas/helium
+/decl/material/gas/helium
 	display_name = "helium"
 	lore_text = "A noble gas. It makes your voice squeaky."
 	chemical_makeup = list(
@@ -52,7 +52,7 @@
 	gas_symbol_html = "He"
 	gas_symbol = "He"
 
-/material/gas/carbon_dioxide
+/decl/material/gas/carbon_dioxide
 	display_name = "carbon dioxide"
 	lore_text = "A byproduct of respiration."
 	gas_specific_heat = 30	
@@ -60,7 +60,7 @@
 	gas_symbol_html = "CO<sub>2</sub>"
 	gas_symbol = "CO2"
 
-/material/gas/carbon_monoxide
+/decl/material/gas/carbon_monoxide
 	display_name = "carbon monoxide"
 	lore_text = "A highly poisonous gas."
 	chemical_makeup = list(
@@ -71,7 +71,7 @@
 	gas_symbol_html = "CO"
 	gas_symbol = "CO"
 
-/material/gas/methyl_bromide
+/decl/material/gas/methyl_bromide
 	display_name = "methyl bromide"
 	lore_text = "A once-popular fumigant and weedkiller."
 	chemical_makeup = list(
@@ -82,7 +82,7 @@
 	gas_symbol_html = "CH<sub>3</sub>Br"
 	gas_symbol = "CH3Br"
 
-/material/gas/sleeping_agent
+/decl/material/gas/sleeping_agent
 	display_name = "sleeping agent"
 	lore_text = "A mild sedative. Also known as laughing gas."
 	chemical_makeup = list(
@@ -96,7 +96,7 @@
 	gas_symbol_html = "N<sub>2</sub>O"
 	gas_symbol = "N2O"
 
-/material/gas/nitrogen
+/decl/material/gas/nitrogen
 	display_name = "nitrogen"
 	lore_text = "An ubiquitous noble gas."
 	gas_specific_heat = 20	
@@ -104,7 +104,7 @@
 	gas_symbol_html = "N<sub>2</sub>"
 	gas_symbol = "N2"
 
-/material/gas/nitrodioxide
+/decl/material/gas/nitrodioxide
 	display_name = "nitrogen dioxide"
 	chemical_makeup = list(
 		/decl/reagent/toxin = 1
@@ -116,7 +116,7 @@
 	gas_symbol_html = "NO<sub>2</sub>"
 	gas_symbol = "NO2"
 
-/material/gas/nitricoxide
+/decl/material/gas/nitricoxide
 	display_name = "nitric oxide"
 	gas_specific_heat = 10
 	gas_molar_mass = 0.030
@@ -124,7 +124,7 @@
 	gas_symbol_html = "NO"
 	gas_symbol = "NO"
 
-/material/gas/methane
+/decl/material/gas/methane
 	display_name = "methane"
 	gas_specific_heat = 30	
 	gas_molar_mass = 0.016	
@@ -132,13 +132,13 @@
 	gas_symbol_html = "CH<sub>4</sub>"
 	gas_symbol = "CH4"
 
-/material/gas/alien
+/decl/material/gas/alien
 	display_name = "alien gas"
 	hidden_from_codex = TRUE
 	gas_symbol_html = "X"
 	gas_symbol = "X"
 
-/material/gas/alien/New()
+/decl/material/gas/alien/New()
 	var/num = rand(100,999)
 	display_name = "compound #[num]"
 	gas_specific_heat = rand(1, 400)	
@@ -157,7 +157,7 @@
 		icon_colour = RANDOM_RGB
 		gas_overlay_limit = 0.5
 
-/material/gas/argon
+/decl/material/gas/argon
 	display_name = "argon"
 	lore_text = "Just when you need it, all of your supplies argon."
 	gas_specific_heat = 10
@@ -166,21 +166,21 @@
 	gas_symbol = "Ar"
 
 // If narcosis is ever simulated, krypton has a narcotic potency seven times greater than regular airmix.
-/material/gas/krypton
+/decl/material/gas/krypton
 	display_name = "krypton"
 	gas_specific_heat = 5
 	gas_molar_mass = 0.036
 	gas_symbol_html = "Kr"
 	gas_symbol = "Kr"
 
-/material/gas/neon
+/decl/material/gas/neon
 	display_name = "neon"
 	gas_specific_heat = 20
 	gas_molar_mass = 0.01
 	gas_symbol_html = "Ne"
 	gas_symbol = "Ne"
 
-/material/gas/xenon
+/decl/material/gas/xenon
 	display_name = "xenon"
 	chemical_makeup = list(
 		/decl/reagent/nitrous_oxide/xenon = 1
@@ -190,7 +190,7 @@
 	gas_symbol_html = "Xe"
 	gas_symbol = "Xe"
 
-/material/gas/ammonia
+/decl/material/gas/ammonia
 	display_name = "ammonia"
 	chemical_makeup = list(
 		/decl/reagent/ammonia = 1
@@ -200,7 +200,7 @@
 	gas_symbol_html = "NH<sub>3</sub>"
 	gas_symbol = "NH3"
 
-/material/gas/chlorine
+/decl/material/gas/chlorine
 	display_name = "chlorine"
 	chemical_makeup = list(
 		/decl/reagent/toxin/chlorine = 1
@@ -213,7 +213,7 @@
 	gas_symbol_html = "Cl"
 	gas_symbol = "Cl"
 
-/material/gas/sulfurdioxide
+/decl/material/gas/sulfurdioxide
 	display_name = "sulfur dioxide"
 	chemical_makeup = list(
 		/decl/reagent/sulfur = 1
@@ -223,7 +223,7 @@
 	gas_symbol_html = "SO<sub>2</sub>"
 	gas_symbol = "SO2"
 
-/material/gas/water
+/decl/material/gas/water
 	display_name = "water vapour"
 	chemical_makeup = list(
 		/decl/reagent/water = 1
@@ -236,7 +236,7 @@
 	gas_symbol_html = "H<sub>2</sub>O"
 	gas_symbol = "H2O"
 
-/material/hydrogen
+/decl/material/hydrogen
 	display_name = "hydrogen"
 	lore_text = "A colorless, flammable gas."
 	is_fusion_fuel = TRUE
@@ -255,7 +255,7 @@
 		/decl/reagent/fuel/hydrazine = 1
 	)
 
-/material/hydrogen/tritium
+/decl/material/hydrogen/tritium
 	display_name = "tritium"
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
@@ -266,7 +266,7 @@
 	gas_symbol_html = "T"
 	gas_symbol = "T"
 
-/material/hydrogen/deuterium
+/decl/material/hydrogen/deuterium
 	display_name = "deuterium"
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
@@ -276,7 +276,7 @@
 	gas_symbol_html = "D"
 	gas_symbol = "D"
 
-/material/hydrogen/metallic
+/decl/material/hydrogen/metallic
 	display_name = "metallic hydrogen"
 	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
 	display_name = "metallic hydrogen"

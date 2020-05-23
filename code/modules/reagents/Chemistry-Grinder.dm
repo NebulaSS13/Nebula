@@ -101,7 +101,7 @@
 
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O
-		var/material/material = stack.get_material()
+		var/decl/material/material = stack.get_material()
 		if(!LAZYLEN(material.chemical_makeup))
 			to_chat(user, SPAN_NOTICE("\The [material.display_name] cannot be ground down to any usable reagents."))
 			return TRUE
@@ -205,7 +205,7 @@
 
 		var/obj/item/stack/material/stack = O
 		if(istype(stack))
-			var/material/material = stack.get_material()
+			var/decl/material/material = stack.get_material()
 			if(!LAZYLEN(material.chemical_makeup))
 				break
 

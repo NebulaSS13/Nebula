@@ -184,7 +184,7 @@ Class Procs:
 	set waitfor = FALSE
 	condensing = TRUE
 	for(var/g in air.gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = decls_repository.get_decl(g)
 		if(length(mat.chemical_makeup) && air.temperature <= mat.gas_condensation_point)
 			var/condensation_area = air.group_multiplier / length(air.gas)
 			while(condensation_area > 0 && length(contents))
@@ -202,7 +202,7 @@ Class Procs:
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)
 	for(var/g in air.gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = decls_repository.get_decl(g)
 		to_chat(M, "[capitalize(mat.display_name)]: [air.gas[g]]")
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
 	to_chat(M, "O2 per N2: [(air.gas[MAT_NITROGEN] ? air.gas[MAT_OXYGEN]/air.gas[MAT_NITROGEN] : "N/A")] Moles: [air.total_moles]")

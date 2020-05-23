@@ -1,4 +1,4 @@
-/material/wood
+/decl/material/wood
 	display_name = "wood"
 	lore_text = "A fibrous structural material harvested from an indeterminable plant. Don't get a splinter."
 	adjective_name = "wooden"
@@ -32,17 +32,17 @@
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 22
 
-/material/wood/holographic
+/decl/material/wood/holographic
 	icon_colour = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	stack_type = null
 	shard_type = SHARD_NONE
 	value = 0
 	hidden_from_codex = TRUE
 
-/material/wood/holographic/get_recipes(reinf_mat)
+/decl/material/wood/holographic/get_recipes(reinf_mat)
 	return list()
 
-/material/wood/mahogany
+/decl/material/wood/mahogany
 	display_name = "mahogany"
 	adjective_name = "mahogany"
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
@@ -50,14 +50,14 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	value = 1.6
 
-/material/wood/maple
+/decl/material/wood/maple
 	display_name = "maple"
 	adjective_name = "maple"
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	icon_colour = WOOD_COLOR_PALE
 	value = 1.8
 
-/material/wood/ebony
+/decl/material/wood/ebony
 	display_name = "ebony"
 	adjective_name = "ebony"
 	lore_text = "Ebony is the name for a group of dark coloured, extremely dense, and fine grained hardwoods. \
@@ -70,7 +70,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
 
-/material/wood/walnut
+/decl/material/wood/walnut
 	display_name = "walnut"
 	adjective_name = "walnut"
 	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
@@ -80,7 +80,7 @@
 	weight = MAT_VALUE_NORMAL
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
-/material/wood/bamboo
+/decl/material/wood/bamboo
 	display_name = "bamboo"
 	adjective_name = "bamboo"
 	lore_text = "Bamboo is a fast-growing grass which can be used similar to wood after processing. Due to its swift growth \
@@ -89,7 +89,7 @@
 	weight = MAT_VALUE_VERY_LIGHT
 	hardness = MAT_VALUE_RIGID
 
-/material/wood/yew
+/decl/material/wood/yew
 	display_name = "yew"
 	adjective_name = "yew"
 	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
