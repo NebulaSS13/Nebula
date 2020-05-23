@@ -3,13 +3,14 @@ SUBSYSTEM_DEF(chemistry)
 	priority = SS_PRIORITY_CHEMISTRY
 	init_order = SS_INIT_CHEMISTRY
 
-	var/list/active_holders =               list()
-	var/list/chemical_reactions =           list()
-	var/list/chemical_reactions_by_type =   list()
-	var/list/chemical_reactions_by_id =     list()
-	var/list/chemical_reactions_by_result = list()
-	var/list/processing_holders =           list()
-	var/list/pending_reagent_change =       list()
+	var/list/active_holders =                  list()
+	var/list/chemical_reactions =              list()
+	var/list/chemical_reactions_by_type =      list()
+	var/list/chemical_reactions_by_id =        list()
+	var/list/chemical_reactions_by_result =    list()
+	var/list/processing_holders =              list()
+	var/list/pending_reagent_change =          list()
+	var/list/cocktails_by_primary_ingredient = list()
 
 /datum/controller/subsystem/chemistry/stat_entry()
 	..("AH:[active_holders.len]")
@@ -35,6 +36,15 @@ SUBSYSTEM_DEF(chemistry)
 			if(!chemical_reactions_by_id[reagent_id])
 				chemical_reactions_by_id[reagent_id] = list()
 			chemical_reactions_by_id[reagent_id] += D
+
+	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
+	for(var/ctype in cocktails)
+		var/decl/cocktail/cocktail = cocktails[ctype]
+		for(var/reagent in cocktail.ratios)
+			LAZYADD(cocktails_by_primary_ingredient[reagent], cocktail)
+	// Sort to avoid supersets/subsets being unreachable.
+	for(var/reagent in cocktails_by_primary_ingredient)
+		sortTim(cocktails_by_primary_ingredient[reagent], /proc/cmp_cocktail_des)
 	. = ..()
 
 /datum/controller/subsystem/chemistry/fire(resumed = FALSE)
@@ -77,3 +87,6 @@ SUBSYSTEM_DEF(chemistry)
 	pending_reagent_change -= changing
 	if(!QDELETED(changing))
 		changing.on_reagent_change()
+
+/datum/controller/subsystem/chemistry/proc/get_cocktails_by_primary_ingredient(var/primary)
+	. = cocktails_by_primary_ingredient[primary]

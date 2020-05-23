@@ -1,4 +1,3 @@
-
 /decl/reagent/cleaner
 	name = "spray cleaner"
 	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"

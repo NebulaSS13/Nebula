@@ -270,7 +270,6 @@
 /area/map_template/wizard_station)
 "aL" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/bottle/bottleofnothing,
 /obj/item/chems/food/drinks/bottle/pwine,
 /obj/item/chems/food/drinks/bottle/agedwhiskey,
 /obj/item/chems/food/drinks/bottle/cognac,

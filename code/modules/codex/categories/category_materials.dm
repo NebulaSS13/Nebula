@@ -99,7 +99,6 @@
 				material_info += "It can be used to pad furniture."
 
 			entry.mechanics_text = jointext(material_info,"<br>")
-			entry.update_links()
 			SScodex.add_entry_by_string(entry.display_name, entry)
 			items += entry.display_name
 	..()

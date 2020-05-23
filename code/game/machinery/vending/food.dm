@@ -140,7 +140,6 @@
 		/obj/item/chems/food/drinks/bottle/melonliquor = 5,
 		/obj/item/chems/food/drinks/bottle/bluecuracao = 5,
 		/obj/item/chems/food/drinks/bottle/absinthe = 5,
-		/obj/item/chems/food/drinks/bottle/bottleofnothing =5,
 		/obj/item/chems/food/drinks/bottle/champagne = 5,
 		/obj/item/chems/food/drinks/bottle/herbal = 5,
 		/obj/item/chems/food/drinks/bottle/small/beer = 15,

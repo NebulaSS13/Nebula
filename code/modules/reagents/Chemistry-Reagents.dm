@@ -13,7 +13,7 @@
 	var/alpha = 255
 	var/flags = 0
 	var/hidden_from_codex
-
+	var/cocktail_ingredient
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
 	var/glass_desc = "It's a glass of... what, exactly?"
@@ -47,6 +47,15 @@
 	var/scent_intensity = /decl/scent_intensity/normal
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 1
+
+/decl/reagent/Initialize()
+	. = ..()
+	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
+	for(var/ctype in cocktails)
+		var/decl/cocktail/cocktail = cocktails[ctype]
+		if(type in cocktail.ratios)
+			cocktail_ingredient = TRUE
+			break
 
 /decl/reagent/proc/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
 	return
@@ -138,5 +147,11 @@
 
 /decl/reagent/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	. = supplied
+
+	if(cocktail_ingredient)
+		for(var/decl/cocktail/cocktail in SSchemistry.get_cocktails_by_primary_ingredient(type))
+			if(cocktail.matches(prop))
+				return cocktail.get_presentation_name(prop)
+
 	if(prop.reagents.has_reagent(/decl/reagent/drink/ice))
 		. = "iced [.]"

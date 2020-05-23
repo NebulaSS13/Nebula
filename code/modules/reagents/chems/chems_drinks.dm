@@ -403,20 +403,6 @@
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
 
-/decl/reagent/drink/rewriter
-	name = "Rewriter"
-	description = "The secret of the sanctuary of the Libarian..."
-	taste_description = "a bad night out"
-	color = "#485000"
-	adj_temp = -5
-
-	glass_name = "Rewriter"
-	glass_desc = "The secret of the sanctuary of the Libarian..."
-
-/decl/reagent/drink/rewriter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	..()
-	M.make_jittery(5)
-
 /decl/reagent/drink/mutagencola
 	name = "mutagen cola"
 	description = "The energy of a radioactive isotope in beverage form."
@@ -504,26 +490,6 @@
 	glass_desc = "A tangy substance made of 0.5% natural citrus!"
 	glass_special = list(DRINK_FIZZ)
 
-/decl/reagent/drink/doctor_delight
-	name = "The Doctor's Delight"
-	description = "Tasty drink that keeps you healthy and doctors bored.  Just the way they like it."
-	taste_description = "homely fruit"
-	color = "#ff8cff"
-	nutrition = 1
-
-	glass_name = "The Doctor's Delight"
-	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next exile decides to put a few new holes in you."
-
-/decl/reagent/drink/doctor_delight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	..()
-	M.adjustOxyLoss(-4 * removed)
-	M.heal_organ_damage(2 * removed, 2 * removed)
-	M.adjustToxLoss(-2 * removed)
-	if(M.dizziness)
-		M.dizziness = max(0, M.dizziness - 15)
-	if(M.confused)
-		M.confused = max(0, M.confused - 5)
-
 /decl/reagent/drink/dry_ramen
 	name = "dry ramen"
 	description = "Space age food, since August 25, 1958. Contains dried noodles, vegetables, and chemicals that boil in contact with water."
@@ -549,14 +515,6 @@
 /decl/reagent/drink/hell_ramen/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
-
-/decl/reagent/drink/nothing
-	name = "nothing"
-	description = "Absolutely nothing."
-	taste_description = "nothing"
-
-	glass_name = "nothing"
-	glass_desc = "Absolutely nothing."
 
 /decl/reagent/drink/tea/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	. = supplied || glass_name
@@ -686,32 +644,6 @@
 
 	glass_name = "pumpkin spice syrup"
 	glass_desc = "Thick spiced pumpkin syrup used to flavor drinks."
-
-// Non-Alcoholic Drinks
-/decl/reagent/drink/fools_gold
-	name = "Fool's Gold"
-	description = "A non-alcoholic beverage typically served as an alternative to whiskey."
-	taste_description = "watered down whiskey"
-	color = "#e78108"
-	glass_name = "fools gold"
-	glass_desc = "A non-alcoholic beverage typically served as an alternative to whiskey."
-
-/decl/reagent/drink/snowball
-	name = "Snowball"
-	description = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
-	taste_description = "intellectual thought and brain-freeze"
-	color = "#eeecea"
-	adj_temp = -5
-	glass_name = "snowball"
-	glass_desc = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
-
-/decl/reagent/drink/browndwarf
-	name = "Brown Dwarf"
-	description = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
-	taste_description = "dark chocolatey matter"
-	color = "#44371f"
-	glass_name = "brown dwarf"
-	glass_desc = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
 
 /decl/reagent/drink/gingerbeer
 	name = "ginger beer"

@@ -279,16 +279,6 @@
 	. = ..()
 	reagents.add_reagent(/decl/reagent/ethanol/tequilla, 100)
 
-/obj/item/chems/food/drinks/bottle/bottleofnothing
-	name = "Bottle of Nothing"
-	desc = "A bottle filled with nothing."
-	icon_state = "bottleofnothing"
-	center_of_mass = @"{'x':17,'y':5}"
-
-/obj/item/chems/food/drinks/bottle/bottleofnothing/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/reagent/drink/nothing, 100)
-
 /obj/item/chems/food/drinks/bottle/patron
 	name = "Wrapp Artiste Patron"
 	desc = "Silver laced tequilla, served in space night clubs across the galaxy."
@@ -297,7 +287,8 @@
 
 /obj/item/chems/food/drinks/bottle/patron/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/ethanol/patron, 100)
+	reagents.add_reagent(/decl/reagent/ethanol/tequilla, 95)
+	reagents.add_reagent(/decl/reagent/silver, 5)
 
 /obj/item/chems/food/drinks/bottle/rum
 	name = "Captain Pete's Cuban Spiced Rum"
@@ -347,7 +338,8 @@
 
 /obj/item/chems/food/drinks/bottle/goldschlager/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/ethanol/goldschlager, 100)
+	reagents.add_reagent(/decl/reagent/ethanol/vodka, 95)
+	reagents.add_reagent(/decl/reagent/gold, 5)
 
 /obj/item/chems/food/drinks/bottle/cognac
 	name = "Chateau De Baton Premium Cognac"
