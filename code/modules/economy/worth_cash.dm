@@ -166,9 +166,9 @@
 
 /obj/item/charge_card
 	name = "charge card"
-	icon = 'icons/obj/items/e_funds.dmi'
-	icon_state = "efundcard"
-	desc = "A card that holds an amount of money."
+	icon = 'icons/obj/items/credstick.dmi'
+	icon_state = "peasant"
+	desc = "A digital stick that holds an amount of money."
 
 	var/max_worth = 5000
 	var/loaded_worth = 0
@@ -185,6 +185,7 @@
 	if(!ispath(currency, /decl/currency))
 		currency = GLOB.using_map.default_currency
 	set_extension(src, lock_type)
+	update_icon()
 
 /obj/item/charge_card/proc/adjust_worth(amt)
 	loaded_worth += amt
@@ -222,6 +223,36 @@
 /obj/item/charge_card/proc/is_locked()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	return lock.locked
+
+/obj/item/charge_card/on_update_icon()
+	. = ..()
+	overlays.Cut()
+	switch(grade)
+		if("bronze")
+			icon_state = "copper"
+		if("silver")
+			icon_state = "silver"
+		if("gold")
+			icon_state = "gold"
+		if("platinum")
+			icon_state = "platinum"
+
+	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	if(lock.locked)
+		return
+		
+	if(loaded_worth > 999999)
+		overlays += image(icon, "9__")
+		overlays += image(icon, "_9_")
+		overlays += image(icon, "__9")
+		return
+
+	var/h_thou = loaded_worth / 100000
+	var/t_thou = (loaded_worth - (Floor(h_thou) * 100000)) / 10000
+	var/thou = (loaded_worth - (Floor(h_thou) * 100000) - (Floor(t_thou) * 10000)) / 1000
+	overlays += image(icon, "[Floor(h_thou)]__")
+	overlays += image(icon, "_[Floor(t_thou)]_")
+	overlays += image(icon, "__[Floor(thou)]")
 
 /obj/item/charge_card/silver
 	grade = "silver"

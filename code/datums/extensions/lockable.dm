@@ -55,6 +55,8 @@
 	if(isnum(key_num))
 		code += href_list["key"]
 		return TOPIC_REFRESH
+
+	var/atom/A = holder
 	if(href_list["key"] == "E")
 		if(!l_set && !l_setshort)
 			// We're in lock set mode.
@@ -72,11 +74,13 @@
 				return TOPIC_REFRESH
 			locked = FALSE
 			code = null
+		A.update_icon()
 		return TOPIC_REFRESH
 	if(href_list["key"] == "C")
 		code = null
 		error = null
 		locked = TRUE
+		A.update_icon()
 		return TOPIC_REFRESH
 
 /datum/extension/lockable/proc/bad_access_attempt(var/mob/user)
@@ -123,35 +127,38 @@
 			l_hacking = 1
 			if (do_after(user, 100 * user.skill_delay_mult(SKILL_ELECTRICAL), holder))
 				if (prob(user.skill_fail_chance(SKILL_DEVICES, 40, SKILL_EXPERT)))
-					l_setshort = 1
+					l_setshort = FALSE
 					user.show_message(SPAN_NOTICE("Internal memory reset. Please give it a few seconds to reinitialize."), 1)
 					addtimer(CALLBACK(src, /datum/extension/lockable/proc/reset_memory), 3 SECONDS)
 					return TRUE
 				else
 					user.show_message(SPAN_WARNING("Unable to reset internal memory."), 1)
-					l_hacking = 0
+					l_hacking = FALSE
 					bad_access_attempt(user)
 					return TRUE
 			else	
-				l_hacking = 0
+				l_hacking = FALSE
 	return FALSE
 
 /datum/extension/lockable/proc/reset_memory()
 	if(!l_hacking)
 		return
 	reset_memory()
-	l_setshort = 0
-	l_hacking = 0
+	l_setshort = FALSE
+	l_hacking = FALSE
 	l_code = null
 	l_set = FALSE
+	var/atom/movable/A = holder
+	A.update_icon()
 
 /datum/extension/lockable/proc/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	var/atom/movable/A = holder
 	if(!emagged)
-		emagged = 1
-		locked = 0
+		emagged = TRUE
+		locked = FALSE
 		to_chat(user, (feedback || "You short out the lock of \the [A]."))
-		return 1
+		A.update_icon()
+		return TRUE
 
 /datum/extension/lockable/storage
 	base_type = /datum/extension/lockable
