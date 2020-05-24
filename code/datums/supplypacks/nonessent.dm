@@ -135,7 +135,7 @@
 					/obj/item/clothing/under/lawyer/purpsuit,
 					/obj/item/clothing/shoes/color/black,
 					/obj/item/clothing/shoes/color/black,
-					/obj/item/clothing/shoes/leather,
+					/obj/item/clothing/shoes/craftable,
 					/obj/item/clothing/accessory/wcoat/black)
 	name = "Costume - Formalwear"
 	cost = 30

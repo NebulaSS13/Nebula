@@ -52,7 +52,7 @@
 		/obj/item/clothing/under/lawyer/oldman,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/color/black,
-		/obj/item/clothing/shoes/leather,
+		/obj/item/clothing/shoes/craftable,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/under/rank/head_of_personnel_whimsy,
 		/obj/item/clothing/head/caphat/hop
@@ -174,7 +174,7 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/head/det,
 		/obj/item/clothing/head/det/grey,
-		/obj/item/clothing/shoes/laceup,
+		/obj/item/clothing/shoes/dress,
 		/obj/item/storage/box/evidence,
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/pcarrier/detective,

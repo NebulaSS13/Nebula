@@ -9,7 +9,7 @@
 	mechanics_text = "If your ID has bar access, you may swipe it on this sign to alter its display."
 
 /datum/codex_entry/sneakies
-	associated_paths = list(/obj/item/clothing/shoes/laceup/sneakies)
+	associated_paths = list(/obj/item/clothing/shoes/dress/sneakies)
 	lore_text =  "Originally designed to confuse Terran troops on the swamp moon of Nabier XI, where they were proven somewhat effective. Not bad on a space vessel, either."
 
 /datum/codex_entry/moneygun

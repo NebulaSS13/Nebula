@@ -76,27 +76,24 @@
 			ret.overlays += A.get_mob_overlay(user_mob, slot)
 
 	if(markings_icon && markings_color)
-		var/mutable_appearance/MA = new()
-		MA.icon = ret.icon
-		MA.icon_state = markings_icon
-		MA.color = markings_color
-		MA.appearance_flags = RESET_COLOR
-		MA.layer = FLOAT_LAYER
-		MA.plane = FLOAT_PLANE
-		ret.overlays += MA
+		ret.overlays += get_mutable_overlay(ret.icon, markings_icon, markings_color)
 	return ret
 
-/obj/item/clothing/shoes/color/on_update_icon()
+/obj/item/clothing/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
+	var/image/ret = ..()
+	if(length(accessories))
+		for(var/obj/item/clothing/accessory/A in accessories)
+			ret.overlays += A.get_mob_overlay(user_mob, slot)
+
+	if(markings_icon && markings_color && check_state_in_icon("[ret.icon_state][markings_icon]", ret.icon))
+		ret.overlays += get_mutable_overlay(ret.icon, "[ret.icon_state][markings_icon]", markings_color)
+	
+	return ret
+
+/obj/item/clothing/on_update_icon()
+	..()
 	if(markings_icon && markings_color)
-		cut_overlays()
-		var/mutable_appearance/MA = new()
-		MA.icon = icon
-		MA.icon_state = markings_icon
-		MA.color = markings_color
-		MA.appearance_flags = RESET_COLOR
-		MA.layer = FLOAT_LAYER
-		MA.plane = FLOAT_PLANE
-		add_overlay(list(MA))
+		overlays += get_mutable_overlay(icon, "[get_world_inventory_state()][markings_icon]", markings_color)
 		
 /obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
 	smell_state = smell

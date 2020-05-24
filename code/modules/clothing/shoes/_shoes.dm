@@ -154,13 +154,19 @@
 	if(shine != -1 && material.reflectiveness >= MAT_VALUE_DULL)
 		shine = material.reflectiveness
 
+/obj/item/clothing/shoes/on_update_icon()
+	. = ..()
+	if(shine > 0 && check_state_in_icon("[icon_state]_shine", icon))
+		var/mutable_appearance/S = get_mutable_overlay(icon, "[icon_state]_shine")
+		S.alpha = 127 * shine / 100
+		S.blend_mode = BLEND_ADD
+		overlays += S
+
 /obj/item/clothing/shoes/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	var/image/I = ..()
 	if(shine > 0 && slot == slot_shoes_str)
-		var/mutable_appearance/S = new()
-		S.icon = I.icon
-		S.icon_state = "shine"
-		S.appearance_flags = RESET_COLOR
-		S.color = adjust_brightness(I.color, shine)
+		var/mutable_appearance/S = get_mutable_overlay(I.icon, "shine")
+		S.alpha = 127 * shine / 100
+		S.blend_mode = BLEND_ADD
 		I.overlays += S
 	return I

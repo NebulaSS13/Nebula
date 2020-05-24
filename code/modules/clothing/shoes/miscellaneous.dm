@@ -65,14 +65,25 @@
 /obj/item/clothing/shoes/dress
 	name = "dress shoes"
 	desc = "The height of fashion, and they're pre-polished!"
-	icon_state = "laceups"
+	icon_state = "world"
+	icon = 'icons/clothing/feet/laceups.dmi'
+	on_mob_icon = 'icons/clothing/feet/laceups.dmi'
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
+	color = "#1c1c1c"
+	shine = 60
+	var/inset_color = "#b3885e"
+
+/obj/item/clothing/shoes/dress/on_update_icon()
+	. = ..()
+	if(check_state_in_icon("[icon_state]_inset", icon))
+		overlays += overlay_image(icon, "[icon_state]_inset", inset_color, RESET_COLOR)
 
 /obj/item/clothing/shoes/dress/white
 	name = "white dress shoes"
 	desc = "Brilliantly white shoes, not a spot on them."
-	icon_state = "whitedress"
+	color = COLOR_WHITE
+	shine = 0  //already shiny
 
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain wooden sandals."
@@ -117,8 +128,9 @@
 /obj/item/clothing/shoes/cult
 	name = "boots"
 	desc = "A pair of boots worn by the followers of Nar-Sie."
-	icon_state = "cult"
-	item_state = "cult"
+	icon_state = "world"
+	icon = 'icons/clothing/feet/cult.dmi'
+	on_mob_icon = 'icons/clothing/feet/cult.dmi'
 	force = 2
 	siemens_coefficient = 0.7
 
@@ -150,13 +162,6 @@
 	icon_state = "slippers_worn"
 	item_state = "slippers_worn"
 
-/obj/item/clothing/shoes/laceup
-	name = "laceup shoes"
-	desc = "The height of fashion, and they're pre-polished!"
-	icon_state = "laceups"
-	can_add_hidden_item = FALSE
-	can_add_cuffs = FALSE
-
 /obj/item/clothing/shoes/swimmingfins
 	desc = "Help you swim good."
 	name = "swimming fins"
@@ -175,7 +180,7 @@
 	desc = "A pair of sleek atheletic shoes. Made by and for the sporty types."
 	icon_state = "sportshoe"
 
-/obj/item/clothing/shoes/laceup/sneakies
+/obj/item/clothing/shoes/dress/sneakies
 	desc = "The height of fashion, and they're pre-polished. Upon further inspection, the soles appear to be on backwards. They look uncomfortable."
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints/reversed
 	item_flags = ITEM_FLAG_SILENT
@@ -195,11 +200,6 @@ obj/item/clothing/shoes/heels/red
 	name = "red high heels"
 	desc = "A pair of red high heels."
 	color = COLOR_RED
-
-/obj/item/clothing/shoes/leather
-	name = "leather shoes"
-	desc = "A sturdy pair of leather shoes."
-	icon_state = "leather"
 
 /obj/item/clothing/shoes/rainbow
 	name = "rainbow shoes"

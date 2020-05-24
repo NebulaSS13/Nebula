@@ -30,7 +30,7 @@
 /obj/item/clothing/shoes/dress/infilshoes
 	name = "black leather shoes"
 	desc = "Dress shoes. Their footsteps are dead silent."
-	icon_state = "infshoes"
+	inset_color = COLOR_INDIGO
 	item_flags = ITEM_FLAG_SILENT
 
 /obj/item/clothing/head/infilhat/fem
