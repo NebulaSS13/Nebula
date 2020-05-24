@@ -76,10 +76,11 @@
 #define DEFAULT_JOB_TYPE /datum/job/assistant
 
 //Area flags, possibly more to come
-#define AREA_FLAG_RAD_SHIELDED      1 // shielded from radiation, clearly
-#define AREA_FLAG_EXTERNAL          2 // External as in exposed to space, not outside in a nice, green, forest
-#define AREA_FLAG_ION_SHIELDED      4 // shielded from ionospheric anomalies
+#define AREA_FLAG_RAD_SHIELDED      1 // Shielded from radiation, clearly.
+#define AREA_FLAG_EXTERNAL          2 // External as in exposed to space, not outside in a nice, green, forest.
+#define AREA_FLAG_ION_SHIELDED      4 // Shielded from ionospheric anomalies.
 #define AREA_FLAG_IS_NOT_PERSISTENT 8 // SSpersistence will not track values from this area.
+#define AREA_FLAG_IS_BACKGROUND     16// Blueprints can create areas on top of these areas. Cannot edit the name of or delete these areas.
 
 //Map template flags
 #define TEMPLATE_FLAG_ALLOW_DUPLICATES 1 // Lets multiple copies of the template to be spawned
