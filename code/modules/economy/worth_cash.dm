@@ -215,6 +215,33 @@
 
 /obj/item/charge_stick/attackby(var/obj/item/W, var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+
+	if(istype(W, /obj/item/charge_stick))
+		var/obj/item/charge_stick/sender = W
+		var/datum/extension/lockable/W_lock = get_extension(W, /datum/extension/lockable)
+		if(lock.locked)
+			to_chat(user, SPAN_NOTICE("Cannot transfer funds to a locked [src]."))
+			return TRUE
+		if(W_lock.locked)
+			to_chat(user, SPAN_NOTICE("Cannot transfer funds from a locked [W]."))
+			return TRUE
+		if(sender.currency != currency)
+			to_chat(user, SPAN_WARNING("Mismatched currency detected. Unable to transfer."))
+			return TRUE
+		var/amount = input(user, "How much of [sender.loaded_worth] do you want to transfer?", "[sender] transfer", "0") as null|num
+		if(!amount)
+			return TRUE
+		if(amount < 0 || amount > sender.loaded_worth)
+			to_chat(user, SPAN_WARNING("Enter a valid number between 1 and [sender.loaded_worth] to transfer."))
+			return TRUE
+		sender.loaded_worth -= amount
+		loaded_worth += amount
+		sender.update_icon()
+		update_icon()
+		var/decl/currency/cur = decls_repository.get_decl(currency)
+		to_chat(user, SPAN_NOTICE("Completed transfer of [amount] [cur.name]."))
+		return TRUE
+	
 	if(lock.attackby(W, user))
 		return TRUE
 	return ..()
