@@ -198,21 +198,10 @@
 	return ..()
 
 
-/obj/structure/girder/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(30))
-				dismantle()
-			return
-		if(3.0)
-			if (prob(5))
-				dismantle()
-			return
-		else
-	return
+/obj/structure/girder/explosion_act(severity)
+	..()
+	if(severity == 1 || (severity == 2 && prob(30)) || (severity == 3 && prob(5)))
+		physically_destroyed()
 
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'

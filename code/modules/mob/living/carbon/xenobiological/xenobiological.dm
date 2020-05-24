@@ -178,30 +178,18 @@
 	powerlevel = 0 // oh no, the power!
 	..()
 
-/mob/living/carbon/slime/ex_act(severity)
+/mob/living/carbon/slime/explosion_act(severity)
 	..()
-
-	var/b_loss = null
-	var/f_loss = null
-	switch (severity)
-		if (1.0)
+	switch(severity)
+		if(1)
 			qdel(src)
-			return
-
-		if (2.0)
-
-			b_loss += 60
-			f_loss += 60
-
-
-		if(3.0)
-			b_loss += 30
-
-	adjustBruteLoss(b_loss)
-	adjustFireLoss(f_loss)
-
-	updatehealth()
-
+		if(2)
+			adjustBruteLoss(60)
+			adjustFireLoss(60)
+			updatehealth()
+		if(3)
+			adjustBruteLoss(30)
+			updatehealth()
 
 /mob/living/carbon/slime/u_equip(obj/item/W)
 	return

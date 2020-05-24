@@ -316,8 +316,9 @@
 	qdel(src)
 	return 1
 
-/obj/item/projectile/ex_act()
-	return //explosions probably shouldn't delete projectiles
+/obj/item/projectile/explosion_act()
+	SHOULD_CALL_PARENT(FALSE)
+	return 
 
 /obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 1

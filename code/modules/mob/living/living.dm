@@ -640,13 +640,10 @@ default behaviour is:
 		return
 	return 1
 
-//Organs should not be removed via inventory procs.
-/mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
-	if(W in internal_organs)
-		return
-	if(W in organs)
-		return
-	. = ..()
+/mob/living/carbon/get_contained_external_atoms()
+	. = contents.Copy()
+	. -= internal_organs
+	. -= organs
 
 //damage/heal the mob ears and adjust the deaf amount
 /mob/living/adjustEarDamage(var/damage, var/deaf)

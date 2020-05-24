@@ -96,15 +96,14 @@ var/list/mining_floors = list()
 	if(archaeo_overlay)
 		overlays += archaeo_overlay
 
-/turf/simulated/mineral/ex_act(severity)
-	switch(severity)
-		if(2.0)
-			if (prob(70))
-				mined_ore = 1 //some of the stuff gets blown up
-				GetDrilled()
-		if(1.0)
-			mined_ore = 2 //some of the stuff gets blown up
-			GetDrilled()
+/turf/simulated/mineral/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(severity == 2 && prob(70))
+		mined_ore = 1 //some of the stuff gets blown up
+		GetDrilled()
+	else if(severity == 1)
+		mined_ore = 2 //some of the stuff gets blown up
+		GetDrilled()
 
 /turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj)
 
@@ -439,16 +438,10 @@ var/list/mining_floors = list()
 		mining_floors["[src.z]"] -= src
 	return ..()
 
-/turf/simulated/floor/asteroid/ex_act(severity)
-	switch(severity)
-		if(3.0)
-			return
-		if(2.0)
-			if (prob(70))
-				gets_dug()
-		if(1.0)
-			gets_dug()
-	return
+/turf/simulated/floor/asteroid/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(severity == 1 || (severity == 2 && prob(70)))
+		gets_dug()
 
 /turf/simulated/floor/asteroid/is_plating()
 	return !density

@@ -93,7 +93,7 @@
 	. = ..()
 	var/turf/T = get_turf(src)
 	if(T)
-		T.ex_act(2)
+		T.explosion_act(2)
 		var/firecount = rand(5,8)
 		while(firecount)
 			firecount--

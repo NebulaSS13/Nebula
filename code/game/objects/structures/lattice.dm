@@ -46,9 +46,10 @@
 		if(L)
 			L.update_icon()
 
-/obj/structure/lattice/ex_act(severity)
-	if(severity <= 2)
-		qdel(src)
+/obj/structure/lattice/explosion_act(severity)
+	..()
+	if(!QDELETED(src) && severity <= 2)
+		physically_destroyed()
 
 /obj/structure/lattice/proc/deconstruct(var/mob/user)
 	to_chat(user, SPAN_NOTICE("Slicing lattice joints..."))

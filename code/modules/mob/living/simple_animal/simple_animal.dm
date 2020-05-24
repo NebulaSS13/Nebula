@@ -382,21 +382,16 @@
 	walk_to(src,0)
 	return ..(gibbed,deathmessage,show_dead_message)
 
-/mob/living/simple_animal/ex_act(severity)
-	if(!blinded)
-		flash_eyes()
-
+/mob/living/simple_animal/explosion_act(severity)
+	..()
 	var/damage
-	switch (severity)
-		if (1)
+	switch(severity)
+		if(1)
 			damage = 500
-
-		if (2)
+		if(2)
 			damage = 120
-
 		if(3)
 			damage = 30
-
 	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
 
 /mob/living/simple_animal/adjustBruteLoss(damage)

@@ -47,7 +47,8 @@
 	initial_gas = null
 	temperature = TCMB
 
-/turf/simulated/floor/fixed/alium/ex_act(severity)
+/turf/simulated/floor/fixed/alium/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	var/decl/material/A = decls_repository.get_decl(MAT_ALIENALLOY)
 	if(prob(A.explosion_resistance))
 		return

@@ -134,8 +134,9 @@
 /decl/reagent/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
 	. = REAGENT_DATA(reagents, type)
 
-/decl/reagent/proc/ex_act(obj/item/chems/holder, severity)
-	return
+/decl/reagent/proc/explosion_act(obj/item/chems/holder, severity)
+	SHOULD_CALL_PARENT(TRUE)
+	. = TRUE
 
 /decl/reagent/proc/get_value()
 	. = value

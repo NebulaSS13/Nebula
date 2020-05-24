@@ -272,8 +272,10 @@
 		return
 	. = ..()
 
-/obj/structure/railing/ex_act(severity)
-	qdel(src)
+/obj/structure/railing/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		qdel(src)
 
 /obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=0)
 	. = ..()

@@ -64,14 +64,15 @@
 			src.explode()
 		..()
 
-/obj/machinery/deployable/barrier/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			src.explode()
-		if(2.0)
-			src.health -= 25
-			if (src.health <= 0)
-				src.explode()
+/obj/machinery/deployable/barrier/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src))
+		if(severity == 1)
+			health = 0
+		else if(severity == 2)
+			health -= 25
+		if(health <= 0)
+			explode()
 
 /obj/machinery/deployable/barrier/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

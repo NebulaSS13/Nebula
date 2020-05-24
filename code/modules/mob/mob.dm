@@ -1058,3 +1058,12 @@
 
 /mob/get_mass()
 	return mob_size
+
+/mob/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
+	gib()
+	
+/mob/explosion_act()
+	. = ..()
+	if(!blinded)
+		flash_eyes()

@@ -16,6 +16,10 @@
 	if (above)
 		above.update_mimic()
 
+/turf/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
+	. = TRUE
+
 //Creates a new turf
 /turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
 	if (!N)

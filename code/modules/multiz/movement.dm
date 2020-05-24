@@ -338,7 +338,8 @@
 /atom/movable/z_observer/can_fall()
 	return FALSE
 
-/atom/movable/z_observer/ex_act()
+/atom/movable/z_observer/explosion_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /atom/movable/z_observer/singularity_act()

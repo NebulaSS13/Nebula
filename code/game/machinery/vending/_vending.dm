@@ -122,11 +122,13 @@
 /obj/machinery/vending/get_codex_value()
 	return "vendomat"
 
-/obj/machinery/vending/ex_act(severity)
-	if(severity == 1 || (severity == 2 && prob(50)))
-		qdel(src)
-	else if(prob(25))
-		malfunction()
+/obj/machinery/vending/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		if(severity == 1 || (severity == 2 && prob(50)))
+			qdel(src)
+		else if(prob(25))
+			malfunction()
 
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)

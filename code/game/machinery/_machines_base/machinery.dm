@@ -422,7 +422,7 @@ Class Procs:
 /obj/machinery/fluid_act(var/datum/reagents/fluids)
 	..()
 	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids.total_volume > FLUID_DEEP))
-		ex_act(3)
+		explosion_act(3)
 
 /obj/machinery/Move()
 	. = ..()

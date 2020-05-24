@@ -93,8 +93,10 @@
 	if(Adjacent(user) && isrobot(user))
 		return attack_hand(user)
 
-/obj/structure/door/ex_act(severity)
-	take_damage(100 - (severity * 30))
+/obj/structure/door/explosion_act(severity)
+	. = ..()
+	if(!QDELETED(src))
+		take_damage(100 - (severity * 30))
 
 /obj/structure/door/can_repair(var/mob/user)
 	. = ..()
