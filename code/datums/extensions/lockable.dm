@@ -174,13 +174,13 @@
 	base_type = /datum/extension/lockable
 	expected_type = /obj/item/storage
 
-/datum/extension/lockable/charge_card	
+/datum/extension/lockable/charge_stick	
 	base_type = /datum/extension/lockable
-	expected_type = /obj/item/charge_card
+	expected_type = /obj/item/charge_stick
 	var/shock_strength = 0
 	var/alarm_loudness = 0
 
-/datum/extension/lockable/charge_card/bad_access_attempt(var/mob/user)
+/datum/extension/lockable/charge_stick/bad_access_attempt(var/mob/user)
 	if(shock_strength > 0)
 		shock(user, 80)
 	if(alarm_loudness > 0)
@@ -188,7 +188,7 @@
 		A.audible_message(SPAN_WARNING("\The [holder] shrills in an annoying tone, alerting those nearby of unauthorized tampering."), hearing_distance = alarm_loudness)
 		playsound(holder, 'sound/effects/alarm.ogg', 50, 1, alarm_loudness)
 
-/datum/extension/lockable/charge_card/proc/shock(var/mob/living/user, prb)
+/datum/extension/lockable/charge_stick/proc/shock(var/mob/living/user, prb)
 	if(!prob(prb) || !istype(user))
 		return FALSE
 	var/datum/effect/effect/system/spark_spread/s = new
@@ -197,22 +197,22 @@
 	user.electrocute_act(rand(40 * shock_strength, 80 * shock_strength), holder, shock_strength) //zzzzzzap!
 	return TRUE
 
-/datum/extension/lockable/charge_card/copper
+/datum/extension/lockable/charge_stick/copper
 	shock_strength = 0.2
 	alarm_loudness = 1
 	max_code_length = 5
 
-/datum/extension/lockable/charge_card/silver
+/datum/extension/lockable/charge_stick/silver
 	shock_strength = 0.4
 	max_code_length = 7
 	alarm_loudness = 3
 
-/datum/extension/lockable/charge_card/gold
+/datum/extension/lockable/charge_stick/gold
 	shock_strength = 0.6
 	max_code_length = 9
 	alarm_loudness = 5
 
-/datum/extension/lockable/charge_card/platinum
+/datum/extension/lockable/charge_stick/platinum
 	shock_strength = 0.9
 	max_code_length = 11
 	alarm_loudness = 7

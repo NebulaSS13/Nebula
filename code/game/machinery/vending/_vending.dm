@@ -146,8 +146,8 @@
 		if (I) //for IDs and PDAs and wallets with IDs
 			paid = pay_with_card(I,W)
 			handled = 1
-		else if (istype(W, /obj/item/charge_card))
-			var/obj/item/charge_card/C = W
+		else if (istype(W, /obj/item/charge_stick))
+			var/obj/item/charge_stick/C = W
 			paid = pay_with_charge_card(C)
 			handled = 1
 		else if (istype(W, /obj/item/cash))
@@ -214,14 +214,14 @@
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed.
  */
-/obj/machinery/vending/proc/pay_with_charge_card(var/obj/item/charge_card/wallet)
-	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
+/obj/machinery/vending/proc/pay_with_charge_card(var/obj/item/charge_stick/wallet)
+	visible_message("<span class='info'>\The [usr] plugs \the [wallet] into \the [src].</span>")
 	if(wallet.is_locked())
 		status_message = "Unlock \the [src] before using it."
 		status_error = 1
 		return 0
 	else if(currently_vending.price > wallet.loaded_worth)
-		status_message = "Insufficient funds on chargecard."
+		status_message = "Insufficient funds on \the [wallet]."
 		status_error = 1
 		return 0
 	else

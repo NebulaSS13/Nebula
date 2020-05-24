@@ -164,8 +164,8 @@
 	currency = /decl/currency/scav
 	absolute_worth = 10
 
-/obj/item/charge_card
-	name = "charge card"
+/obj/item/charge_stick
+	name = "charge-stick"
 	icon = 'icons/obj/items/credstick.dmi'
 	icon_state = "peasant"
 	desc = "A digital stick that holds an amount of money."
@@ -175,24 +175,31 @@
 	var/creator			// Who originally created this card. Mostly for book-keeping purposes. In game these cards are 'anonymous'.
 	var/id = "" 		//So the ATM can set it so the EFTPOS can put a valid name on transactions.
 	var/currency
-	var/lock_type = /datum/extension/lockable/charge_card
+	var/lock_type = /datum/extension/lockable/charge_stick
 	var/grade = "peasant"
 
-/obj/item/charge_card/Initialize(ml, material_key)
+/obj/item/charge_stick/Initialize(ml, material_key)
 	. = ..()
-	id = "[grade]-card-[sequential_id("charge_card")]"
+	id = "[grade]-card-[sequential_id("charge_stick")]"
 	appearance_flags |= PIXEL_SCALE
 	if(!ispath(currency, /decl/currency))
 		currency = GLOB.using_map.default_currency
+		update_name_desc()
 	set_extension(src, lock_type)
 	update_icon()
 
-/obj/item/charge_card/proc/adjust_worth(amt)
+/obj/item/charge_stick/proc/update_name_desc()
+	if(!isnull(currency))
+		var/decl/currency/cur = decls_repository.get_decl(currency)
+		name = "[cur.name]-stick"
+		desc = "A pre-charged digital stick that anonymously holds an amount of [cur.name]."
+
+/obj/item/charge_stick/proc/adjust_worth(amt)
 	loaded_worth += amt
 	if(loaded_worth < 0)
 		loaded_worth = 0
 
-/obj/item/charge_card/examine(mob/user, distance)
+/obj/item/charge_stick/examine(mob/user, distance)
 	. = ..(user)
 	if(distance <= 2 || user == loc)
 		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
@@ -203,28 +210,28 @@
 			var/decl/currency/cur = decls_repository.get_decl(currency)
 			to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
 
-/obj/item/charge_card/get_base_value()
+/obj/item/charge_stick/get_base_value()
 	. = holographic ? 0 : loaded_worth
 
-/obj/item/charge_card/attackby(var/obj/item/W, var/mob/user)
+/obj/item/charge_stick/attackby(var/obj/item/W, var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.attackby(W, user))
 		return TRUE
 	return ..()
 
-/obj/item/charge_card/emag_act(var/remaining_charges, var/mob/user, var/feedback)
+/obj/item/charge_stick/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	.= lock.emag_act(remaining_charges, user, feedback)
 
-/obj/item/charge_card/attack_self(var/mob/user)
+/obj/item/charge_stick/attack_self(var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	lock.ui_interact(user)		
 
-/obj/item/charge_card/proc/is_locked()
+/obj/item/charge_stick/proc/is_locked()
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	return lock.locked
 
-/obj/item/charge_card/on_update_icon()
+/obj/item/charge_stick/on_update_icon()
 	. = ..()
 	overlays.Cut()
 	icon_state = grade
@@ -245,25 +252,25 @@
 	overlays += image(icon, "_[Floor(t_thou)]_")
 	overlays += image(icon, "__[Floor(thou)]")
 
-/obj/item/charge_card/copper
+/obj/item/charge_stick/copper
 	grade = "copper"
 	max_worth = 20000
-	lock_type = /datum/extension/lockable/charge_card/copper
+	lock_type = /datum/extension/lockable/charge_stick/copper
 
-/obj/item/charge_card/silver
+/obj/item/charge_stick/silver
 	grade = "silver"
 	max_worth = 50000
-	lock_type = /datum/extension/lockable/charge_card/silver
+	lock_type = /datum/extension/lockable/charge_stick/silver
 
-/obj/item/charge_card/gold
+/obj/item/charge_stick/gold
 	grade = "gold"
 	max_worth = 200000
-	lock_type = /datum/extension/lockable/charge_card/gold
+	lock_type = /datum/extension/lockable/charge_stick/gold
 
-/obj/item/charge_card/platinum
+/obj/item/charge_stick/platinum
 	grade = "platinum"
 	max_worth = 500000
-	lock_type = /datum/extension/lockable/charge_card/platinum
+	lock_type = /datum/extension/lockable/charge_stick/platinum
 
 /obj/item/coin/get_base_value()
 	. = max((holographic ? 0 : absolute_worth), ..())

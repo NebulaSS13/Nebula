@@ -326,11 +326,11 @@
 			if("e_withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				amount = round(amount, 0.01)
-				var/obj/item/charge_card/E
+				var/obj/item/charge_stick/E
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(amount > initial(E.max_worth))
-					alert("That amount exceeds the max amount holdable by bronze charge cards.")
+					alert("That amount exceeds the max amount holdable by basic charge sticks.")
 				else if(authenticated_account && amount > 0)
 					//create an entry in the account transaction log
 					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
