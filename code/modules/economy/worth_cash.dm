@@ -170,15 +170,21 @@
 	icon_state = "efundcard"
 	desc = "A card that holds an amount of money."
 
+	var/max_worth = 5000
 	var/loaded_worth = 0
-	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
+	var/creator			// Who originally created this card. Mostly for book-keeping purposes. In game these cards are 'anonymous'.
+	var/id = "" 		//So the ATM can set it so the EFTPOS can put a valid name on transactions.
 	var/currency
+	var/lock_type = /datum/extension/lockable/charge_card
+	var/grade = "bronze"
 
 /obj/item/charge_card/Initialize(ml, material_key)
 	. = ..()
+	id = "[grade]-card-[sequential_id("charge_card")]"
 	appearance_flags |= PIXEL_SCALE
 	if(!ispath(currency, /decl/currency))
 		currency = GLOB.using_map.default_currency
+	set_extension(src, lock_type)
 
 /obj/item/charge_card/proc/adjust_worth(amt)
 	loaded_worth += amt
@@ -188,12 +194,46 @@
 /obj/item/charge_card/examine(mob/user, distance)
 	. = ..(user)
 	if(distance <= 2 || user == loc)
-		to_chat(user, SPAN_NOTICE("<b>Owner:</b> [owner_name]."))
-		var/decl/currency/cur = decls_repository.get_decl(currency)
-		to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
+		var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+		if(lock.locked)
+			to_chat(user, SPAN_WARNING("\The [src] is locked."))
+		else
+			to_chat(user, SPAN_NOTICE("<b>Id:</b> [id]."))
+			var/decl/currency/cur = decls_repository.get_decl(currency)
+			to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
 
 /obj/item/charge_card/get_base_value()
 	. = holographic ? 0 : loaded_worth
+
+/obj/item/charge_card/attackby(var/obj/item/W, var/mob/user)
+	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	if(lock.attackby(W, user))
+		return TRUE
+	return ..()
+
+/obj/item/charge_card/emag_act(var/remaining_charges, var/mob/user, var/feedback)
+	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	.= lock.emag_act(remaining_charges, user, feedback)
+
+/obj/item/charge_card/attack_self(var/mob/user)
+	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	lock.ui_interact(user)		
+
+/obj/item/charge_card/proc/is_locked()
+	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	return lock.locked
+
+/obj/item/charge_card/silver
+	grade = "silver"
+	max_worth = 50000
+
+/obj/item/charge_card/gold
+	grade = "gold"
+	max_worth = 200000
+
+/obj/item/charge_card/platinum
+	grade = "platinum"
+	max_worth = 500000
 
 /obj/item/coin/get_base_value()
 	. = max((holographic ? 0 : absolute_worth), ..())

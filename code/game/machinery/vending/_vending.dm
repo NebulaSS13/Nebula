@@ -216,13 +216,17 @@
  */
 /obj/machinery/vending/proc/pay_with_charge_card(var/obj/item/charge_card/wallet)
 	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
-	if(currently_vending.price > wallet.loaded_worth)
+	if(wallet.is_locked())
+		status_message = "Unlock \the [src] before using it."
+		status_error = 1
+		return 0
+	else if(currently_vending.price > wallet.loaded_worth)
 		status_message = "Insufficient funds on chargecard."
 		status_error = 1
 		return 0
 	else
 		wallet.adjust_worth(-(currently_vending.price))
-		credit_purchase("[wallet.owner_name] (chargecard)")
+		credit_purchase("[wallet.id]")
 		return 1
 
 /**

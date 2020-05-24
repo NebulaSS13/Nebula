@@ -102,7 +102,7 @@
 	var/obj/item/A = holder
 	if(locked)
 		if (!is_digital_lock && istype(W, /obj/item/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [holder]"))
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			var/datum/effect/effect/system/spark_spread/spark_system = new
 			spark_system.set_up(5, 0, A.loc)
 			spark_system.start()
 			playsound(A.loc, 'sound/weapons/blade1.ogg', 50, 1)
@@ -111,11 +111,11 @@
 
 		if(isScrewdriver(W))
 			if (do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES), holder))
+				user.show_message(SPAN_NOTICE("You [open ? "open" : "close"] the service panel."))
 				if(open)
 					close()
 				else
-					open()
-				user.show_message(SPAN_NOTICE("You [open ? "open" : "close"] the service panel."))
+					open()				
 			return TRUE
 
 		if(isMultitool(W) && open && !l_hacking)
@@ -150,7 +150,7 @@
 	if(!emagged)
 		emagged = 1
 		locked = 0
-		to_chat(user, (feedback ? feedback : "You short out the lock of \the [A]."))
+		to_chat(user, (feedback || "You short out the lock of \the [A]."))
 		return 1
 
 /datum/extension/lockable/storage
@@ -167,3 +167,43 @@
 /datum/extension/lockable/storage/safe
 	base_type = /datum/extension/lockable
 	expected_type = /obj/item/storage
+
+/datum/extension/lockable/charge_card	
+	base_type = /datum/extension/lockable
+	expected_type = /obj/item/charge_card
+	var/shock_strength = 0.2
+	var/alarm_loudness = 1
+
+/datum/extension/lockable/charge_card/New(holder, var/is_digital = FALSE)
+	..(holder, TRUE)
+	
+	var/obj/item/charge_card/E = holder
+	if(!istype(E))
+		return
+	switch(E.grade)
+		if("silver")
+			shock_strength = 0.4
+			max_code_length = 7
+			alarm_loudness = 3
+		if("gold")
+			shock_strength = 0.6
+			max_code_length = 9
+			alarm_loudness = 5
+		if("platinum")
+			shock_strength = 0.9
+			max_code_length = 11
+			alarm_loudness = 7
+
+/datum/extension/lockable/charge_card/bad_access_attempt(var/mob/user)
+	shock(user, 80)
+	var/atom/A = holder
+	A.audible_message(SPAN_WARNING("\The [holder] shrills in an annoying tone, alerting those nearby of unauthorized tampering."), hearing_distance = alarm_loudness)
+
+/datum/extension/lockable/charge_card/proc/shock(var/mob/living/user, prb)
+	if(!prob(prb) || !istype(user))
+		return FALSE
+	var/datum/effect/effect/system/spark_spread/s = new
+	s.set_up(5, 1, holder)
+	s.start()
+	user.electrocute_act(rand(40 * shock_strength, 80 * shock_strength), holder, shock_strength) //zzzzzzap!
+	return TRUE
