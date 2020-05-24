@@ -176,7 +176,7 @@
 	var/id = "" 		//So the ATM can set it so the EFTPOS can put a valid name on transactions.
 	var/currency
 	var/lock_type = /datum/extension/lockable/charge_card
-	var/grade = "bronze"
+	var/grade = "peasant"
 
 /obj/item/charge_card/Initialize(ml, material_key)
 	. = ..()
@@ -227,20 +227,11 @@
 /obj/item/charge_card/on_update_icon()
 	. = ..()
 	overlays.Cut()
-	switch(grade)
-		if("bronze")
-			icon_state = "copper"
-		if("silver")
-			icon_state = "silver"
-		if("gold")
-			icon_state = "gold"
-		if("platinum")
-			icon_state = "platinum"
-
+	icon_state = grade
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
 		return
-		
+
 	if(loaded_worth > 999999)
 		overlays += image(icon, "9__")
 		overlays += image(icon, "_9_")
@@ -254,17 +245,25 @@
 	overlays += image(icon, "_[Floor(t_thou)]_")
 	overlays += image(icon, "__[Floor(thou)]")
 
+/obj/item/charge_card/copper
+	grade = "copper"
+	max_worth = 20000
+	lock_type = /datum/extension/lockable/charge_card/copper
+
 /obj/item/charge_card/silver
 	grade = "silver"
 	max_worth = 50000
+	lock_type = /datum/extension/lockable/charge_card/silver
 
 /obj/item/charge_card/gold
 	grade = "gold"
 	max_worth = 200000
+	lock_type = /datum/extension/lockable/charge_card/gold
 
 /obj/item/charge_card/platinum
 	grade = "platinum"
 	max_worth = 500000
+	lock_type = /datum/extension/lockable/charge_card/platinum
 
 /obj/item/coin/get_base_value()
 	. = max((holographic ? 0 : absolute_worth), ..())

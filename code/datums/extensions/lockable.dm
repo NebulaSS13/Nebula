@@ -60,8 +60,8 @@
 	if(href_list["key"] == "E")
 		if(!l_set && !l_setshort)
 			// We're in lock set mode.
-			if(length(code) != max_code_length)
-				error = "Incorrect code length. Must be [max_code_length] numbers long."
+			if(length(code) < Floor(max_code_length * 0.5) || length(code) > max_code_length)
+				error = "Incorrect code length. Must be between [Floor(max_code_length * 0.5)] and [max_code_length] numbers long."
 				return TOPIC_REFRESH
 			l_code = code
 			code = null
@@ -164,7 +164,6 @@
 	base_type = /datum/extension/lockable
 	expected_type = /obj/item/storage
 	
-
 /datum/extension/lockable/storage/open()
 	open = TRUE
 
@@ -178,33 +177,16 @@
 /datum/extension/lockable/charge_card	
 	base_type = /datum/extension/lockable
 	expected_type = /obj/item/charge_card
-	var/shock_strength = 0.2
-	var/alarm_loudness = 1
-
-/datum/extension/lockable/charge_card/New(holder, var/is_digital = FALSE)
-	..(holder, TRUE)
-	
-	var/obj/item/charge_card/E = holder
-	if(!istype(E))
-		return
-	switch(E.grade)
-		if("silver")
-			shock_strength = 0.4
-			max_code_length = 7
-			alarm_loudness = 3
-		if("gold")
-			shock_strength = 0.6
-			max_code_length = 9
-			alarm_loudness = 5
-		if("platinum")
-			shock_strength = 0.9
-			max_code_length = 11
-			alarm_loudness = 7
+	var/shock_strength = 0
+	var/alarm_loudness = 0
 
 /datum/extension/lockable/charge_card/bad_access_attempt(var/mob/user)
-	shock(user, 80)
-	var/atom/A = holder
-	A.audible_message(SPAN_WARNING("\The [holder] shrills in an annoying tone, alerting those nearby of unauthorized tampering."), hearing_distance = alarm_loudness)
+	if(shock_strength > 0)
+		shock(user, 80)
+	if(alarm_loudness > 0)
+		var/atom/A = holder
+		A.audible_message(SPAN_WARNING("\The [holder] shrills in an annoying tone, alerting those nearby of unauthorized tampering."), hearing_distance = alarm_loudness)
+		playsound(holder, 'sound/effects/alarm.ogg', 50, 1, alarm_loudness)
 
 /datum/extension/lockable/charge_card/proc/shock(var/mob/living/user, prb)
 	if(!prob(prb) || !istype(user))
@@ -214,3 +196,23 @@
 	s.start()
 	user.electrocute_act(rand(40 * shock_strength, 80 * shock_strength), holder, shock_strength) //zzzzzzap!
 	return TRUE
+
+/datum/extension/lockable/charge_card/copper
+	shock_strength = 0.2
+	alarm_loudness = 1
+	max_code_length = 5
+
+/datum/extension/lockable/charge_card/silver
+	shock_strength = 0.4
+	max_code_length = 7
+	alarm_loudness = 3
+
+/datum/extension/lockable/charge_card/gold
+	shock_strength = 0.6
+	max_code_length = 9
+	alarm_loudness = 5
+
+/datum/extension/lockable/charge_card/platinum
+	shock_strength = 0.9
+	max_code_length = 11
+	alarm_loudness = 7
