@@ -6,15 +6,15 @@
 	var/max_code_length = 5		// Max length of the password.
 
 	// Stateful variables
-	var/locked 			= 1		// Is it locked?
+	var/locked 			= TRUE	// Is it locked?
 	var/code 					// The passcode currently inputed.
-	var/l_code 			= null	// The actual code of the lock
-	var/l_set 			= 0		// Whether or not the lock has been set.
-	var/l_setshort 		= 0		// Whether or not the ability to set the lock is broken.
-	var/l_hacking 		= 0		// Whether or not the lock is being hacked.
-	var/emagged 		= 0		// What or not the lock is emagged.
+	var/l_code 					// The actual code of the lock
+	var/l_set 			= FALSE	// Whether or not the lock has been set.
+	var/l_setshort 		= FALSE	// Whether or not the ability to set the lock is broken.
+	var/l_hacking 		= FALSE	// Whether or not the lock is being hacked.
+	var/emagged 		= FALSE	// What or not the lock is emagged.
 	var/is_digital_lock = FALSE	// Whether or not the lock is digital, and its ability to be brute forced.
-	var/open			= 0		// Whether or not the lock panel is open.
+	var/open			= FALSE	// Whether or not the lock panel is open.
 	var/error					// Any errors from user input. Temporary.
 
 /datum/extension/lockable/New(holder, var/is_digital = FALSE)
@@ -54,7 +54,7 @@
 	var/key_num = text2num(href_list["key"])
 	if(isnum(key_num))
 		code += href_list["key"]
-		return TOPIC_REFRESH
+		return
 
 	var/atom/A = holder
 	if(href_list["key"] == "E")
@@ -62,7 +62,7 @@
 			// We're in lock set mode.
 			if(length(code) < Floor(max_code_length * 0.5) || length(code) > max_code_length)
 				error = "Incorrect code length. Must be between [Floor(max_code_length * 0.5)] and [max_code_length] numbers long."
-				return TOPIC_REFRESH
+				return
 			l_code = code
 			code = null
 			l_set = TRUE
@@ -71,17 +71,17 @@
 			if(code != l_code)
 				error = "Invalid keycode entered."
 				bad_access_attempt(user)
-				return TOPIC_REFRESH
+				return
 			locked = FALSE
 			code = null
 		A.update_icon()
-		return TOPIC_REFRESH
+		return
 	if(href_list["key"] == "C")
 		code = null
 		error = null
 		locked = TRUE
 		A.update_icon()
-		return TOPIC_REFRESH
+		return
 
 /datum/extension/lockable/proc/bad_access_attempt(var/mob/user)
 
@@ -98,9 +98,10 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/extension/lockable/proc/open()
-
-/datum/extension/lockable/proc/close()
+/datum/extension/lockable/proc/toggle_panel(var/mob/user)
+	if(user)
+		user.show_message(SPAN_NOTICE("You [open ? "open" : "close"] the service panel."))
+	open = !open
 
 /datum/extension/lockable/proc/attackby(var/obj/item/W, var/mob/user)
 	var/obj/item/A = holder
@@ -115,11 +116,7 @@
 
 		if(isScrewdriver(W))
 			if (do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES), holder))
-				user.show_message(SPAN_NOTICE("You [open ? "open" : "close"] the service panel."))
-				if(open)
-					close()
-				else
-					open()				
+				toggle_panel()		
 			return TRUE
 
 		if(isMultitool(W) && open && !l_hacking)
@@ -164,12 +161,6 @@
 	base_type = /datum/extension/lockable
 	expected_type = /obj/item/storage
 	
-/datum/extension/lockable/storage/open()
-	open = TRUE
-
-/datum/extension/lockable/storage/close()
-	open = FALSE
-
 /datum/extension/lockable/storage/safe
 	base_type = /datum/extension/lockable
 	expected_type = /obj/item/storage

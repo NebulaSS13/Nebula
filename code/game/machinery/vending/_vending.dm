@@ -138,17 +138,17 @@
 /obj/machinery/vending/attackby(obj/item/W, mob/user)
 
 	var/obj/item/card/id/I = W.GetIdCard()
+	var/obj/item/charge_stick/CS = W.GetChargeStick()
 
 	if (currently_vending && vendor_account && !vendor_account.suspended)
 		var/paid = 0
 		var/handled = 0
 
 		if (I) //for IDs and PDAs and wallets with IDs
-			paid = pay_with_card(I,W)
+			paid = pay_with_card(I, W)
 			handled = 1
-		else if (istype(W, /obj/item/charge_stick))
-			var/obj/item/charge_stick/C = W
-			paid = pay_with_charge_card(C)
+		else if (CS)
+			paid = pay_with_charge_card(CS)
 			handled = 1
 		else if (istype(W, /obj/item/cash))
 			var/obj/item/cash/C = W
@@ -217,7 +217,7 @@
 /obj/machinery/vending/proc/pay_with_charge_card(var/obj/item/charge_stick/wallet)
 	visible_message("<span class='info'>\The [usr] plugs \the [wallet] into \the [src].</span>")
 	if(wallet.is_locked())
-		status_message = "Unlock \the [src] before using it."
+		status_message = "Unlock \the [wallet] before using it."
 		status_error = 1
 		return 0
 	else if(currently_vending.price > wallet.loaded_worth)

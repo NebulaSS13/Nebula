@@ -131,6 +131,12 @@
 	if(card_slot && card_slot.can_broadcast && istype(card_slot.stored_card) && card_slot.check_functionality())
 		return card_slot.stored_card
 
+/obj/item/modular_computer/GetChargeStick()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/charge_stick_slot/mstick_slot = assembly.get_component(PART_MSTICK)
+	if(mstick_slot && mstick_slot.can_broadcast && istype(mstick_slot.stored_stick) && mstick_slot.check_functionality())
+		return mstick_slot.stored_stick
+
 /obj/item/modular_computer/proc/update_name()
 
 /obj/item/modular_computer/get_cell()

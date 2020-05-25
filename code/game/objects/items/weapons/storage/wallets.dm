@@ -44,6 +44,7 @@
 	slot_flags = SLOT_ID
 
 	var/obj/item/card/id/front_id = null
+	var/obj/item/charge_stick/front_stick = null
 
 /obj/item/storage/wallet/leather
 	color = COLOR_SEDONA
@@ -52,6 +53,9 @@
 	if(front_id)
 		front_id.dropInto(loc)
 		front_id = null
+	if(front_stick)
+		front_stick.dropInto(loc)
+		front_stick = null
 	. = ..()
 
 /obj/item/storage/wallet/remove_from_storage(obj/item/W, atom/new_location)
@@ -61,6 +65,8 @@
 			front_id = null
 			SetName(initial(name))
 			update_icon()
+		if(W == front_stick)
+			front_stick = null
 
 /obj/item/storage/wallet/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	. = ..(W, prevent_warning)
@@ -68,6 +74,8 @@
 		if(!front_id && istype(W, /obj/item/card/id))
 			front_id = W
 			update_icon()
+		if(!front_stick && istype(W, /obj/item/charge_stick))
+			front_stick = W
 
 /obj/item/storage/wallet/on_update_icon()
 	overlays.Cut()
@@ -81,6 +89,9 @@
 
 /obj/item/storage/wallet/GetIdCard()
 	return front_id
+
+/obj/item/storage/wallet/GetChargeStick()
+	return front_stick
 
 /obj/item/storage/wallet/GetAccess()
 	var/obj/item/I = GetIdCard()

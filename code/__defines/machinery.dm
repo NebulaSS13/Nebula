@@ -174,3 +174,4 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define  PART_TESLA  	/obj/item/stock_parts/computer/tesla_link					// Tesla Link, Allows remote charging from nearest APC.
 #define  PART_SCANNER  	/obj/item/stock_parts/computer/scanner							// One of several optional scanner attachments.
 #define  PART_D_SLOT	/obj/item/stock_parts/computer/drive_slot				// Portable drive slot.
+#define  PART_MSTICK	/obj/item/stock_parts/computer/charge_stick_slot		// Charge-slot component for transactions /w charge sticks.

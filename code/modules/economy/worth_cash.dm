@@ -194,6 +194,9 @@
 		var/decl/currency/cur = decls_repository.get_decl(currency)
 		name = "[cur.name]-stick"
 		desc = "A pre-charged digital stick that anonymously holds an amount of [cur.name]."
+		return
+	name = initial(name)
+	desc = initial(desc)
 
 /obj/item/charge_stick/proc/adjust_worth(amt)
 	loaded_worth += amt
@@ -221,26 +224,26 @@
 		var/obj/item/charge_stick/sender = W
 		var/datum/extension/lockable/W_lock = get_extension(W, /datum/extension/lockable)
 		if(lock.locked)
-			to_chat(user, SPAN_NOTICE("Cannot transfer funds to a locked [src]."))
+			to_chat(user, SPAN_WARNING("Cannot transfer funds to a locked [src]."))
 			return TRUE
 		if(W_lock.locked)
-			to_chat(user, SPAN_NOTICE("Cannot transfer funds from a locked [W]."))
+			to_chat(user, SPAN_WARNING("Cannot transfer funds from a locked [W]."))
 			return TRUE
 		if(sender.currency != currency)
-			to_chat(user, SPAN_WARNING("Mismatched currency detected. Unable to transfer."))
+			to_chat(user, SPAN_WARNING("\icon[src] [src] chirps, \"Mismatched currency detected. Unable to transfer.\""))
 			return TRUE
 		var/amount = input(user, "How much of [sender.loaded_worth] do you want to transfer?", "[sender] transfer", "0") as null|num
 		if(!amount)
 			return TRUE
 		if(amount < 0 || amount > sender.loaded_worth)
-			to_chat(user, SPAN_WARNING("Enter a valid number between 1 and [sender.loaded_worth] to transfer."))
+			to_chat(user, SPAN_NOTICE("\icon[src] [src] chirps, \"Enter a valid number between 1 and [sender.loaded_worth] to transfer.\""))
 			return TRUE
 		sender.loaded_worth -= amount
 		loaded_worth += amount
 		sender.update_icon()
 		update_icon()
 		var/decl/currency/cur = decls_repository.get_decl(currency)
-		to_chat(user, SPAN_NOTICE("Completed transfer of [amount] [cur.name]."))
+		to_chat(user, SPAN_NOTICE("\icon[src] [src] chirps, \"Completed transfer of [amount] [cur.name].\""))
 		return TRUE
 	
 	if(lock.attackby(W, user))
@@ -249,6 +252,8 @@
 
 /obj/item/charge_stick/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	if(lock.emagged)
+		return FALSE
 	.= lock.emag_act(remaining_charges, user, feedback)
 
 /obj/item/charge_stick/attack_self(var/mob/user)
@@ -261,11 +266,10 @@
 
 /obj/item/charge_stick/on_update_icon()
 	. = ..()
-	overlays.Cut()
-	if(isturf(loc)) 
+	if(get_world_inventory_state() == ICON_STATE_WORLD)
 		icon_state = "world"
-		return
-		
+		return 
+
 	icon_state = grade
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
@@ -303,6 +307,12 @@
 	grade = "platinum"
 	max_worth = 500000
 	lock_type = /datum/extension/lockable/charge_stick/platinum
+
+/atom/movable/proc/GetChargeStick()
+	return null
+	
+/obj/item/charge_stick/GetChargeStick()
+	return src
 
 /obj/item/coin/get_base_value()
 	. = max((holographic ? 0 : absolute_worth), ..())

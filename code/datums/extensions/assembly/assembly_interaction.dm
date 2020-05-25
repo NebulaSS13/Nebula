@@ -49,19 +49,26 @@
 		return TRUE
 
 	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
-		var/obj/item/card/id/I = W
 		var/obj/item/stock_parts/computer/card_slot/card_slot = get_component(PART_CARD)
 		if(!card_slot)
-			to_chat(user, "You try to insert [I] into [holder], but it does not have an ID card slot installed.")
+			to_chat(user, SPAN_WARNING("You try to insert [W] into [holder], but it does not have an ID card slot installed."))
 			return TRUE
-		card_slot.insert_id(I, user)
+		card_slot.insert_id(W, user)
+		return TRUE
+
+	if(istype(W, /obj/item/charge_stick)) // Try to insert charge stick.
+		var/obj/item/stock_parts/computer/charge_stick_slot/mstick_slot = get_component(PART_MSTICK)
+		if(!mstick_slot)
+			to_chat(user, SPAN_WARNING("You try to insert [W] into [holder], but it does not have a charge-stick slot installed."))
+			return TRUE
+		mstick_slot.insert_stick(W, user)
 		return TRUE
 
 	if(istype(W, PART_DRIVE)) // Portable HDD, try to insert it.
 		var/obj/item/stock_parts/computer/hard_drive/portable/I = W
 		var/obj/item/stock_parts/computer/drive_slot/drive_slot = get_component(PART_D_SLOT)
 		if(!drive_slot)
-			to_chat(user, "You try to insert [I] into [holder], but it does not have a drive slot installed.")
+			to_chat(user, SPAN_WARNING("You try to insert [I] into [holder], but it does not have a drive slot installed."))
 			return TRUE
 		drive_slot.insert_drive(I, user)
 		return TRUE
