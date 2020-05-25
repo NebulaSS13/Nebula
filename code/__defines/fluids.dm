@@ -1,4 +1,5 @@
 #define FLUID_EVAPORATION_POINT 5          // Depth a fluid begins self-deleting
+#define FLUID_PUDDLE 25
 #define FLUID_SHALLOW 200                  // Depth shallow icon is used
 #define FLUID_OVER_MOB_HEAD 300
 #define FLUID_DEEP 800                     // Depth deep icon is used
@@ -28,9 +29,8 @@
 // We share overlays for all fluid turfs to sync icon animation.
 #define APPLY_FLUID_OVERLAY(img_state) \
 	if(!SSfluids.fluid_images[img_state]) SSfluids.fluid_images[img_state] = image('icons/effects/liquids.dmi',img_state); \
-	overlays += SSfluids.fluid_images[img_state];
+	overlays += (SSfluids.fluid_images[img_state]);
 
 #define FLUID_MAX_ALPHA 160
 #define FLUID_MIN_ALPHA 45
-
 #define TANK_WATER_MULTIPLIER 5

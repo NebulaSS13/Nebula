@@ -1,6 +1,6 @@
 //For anything that can light stuff on fire
 /obj/item/flame
-	waterproof = FALSE
+	var/waterproof = FALSE
 	var/lit = 0
 
 /obj/item/flame/afterattack(var/obj/O, var/mob/user, proximity)

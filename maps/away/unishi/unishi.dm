@@ -148,6 +148,3 @@ obj/item/paper/prof2
 
 /decl/reagent/toxin/phoron/safe/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return
-
-/decl/reagent/toxin/phoron/safe/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	return

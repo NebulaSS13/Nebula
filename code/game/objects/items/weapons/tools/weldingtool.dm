@@ -7,7 +7,6 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	center_of_mass = @"{'x':14,'y':15}"
-	waterproof = FALSE
 	force = 5
 	throwforce = 5
 	throw_speed = 1
@@ -17,6 +16,7 @@
 	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'engineering':1}"
 
+	var/waterproof = FALSE
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 	var/welding_resource = "welding fuel"

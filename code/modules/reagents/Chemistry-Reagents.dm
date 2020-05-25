@@ -13,7 +13,9 @@
 	var/alpha = 255
 	var/flags = 0
 	var/hidden_from_codex
+	var/radioactive = FALSE
 	var/cocktail_ingredient
+
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
 	var/glass_desc = "It's a glass of... what, exactly?"
@@ -70,11 +72,8 @@
 		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
 
 /decl/reagent/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
-	if(fuel_value && istype(T))
-		var/removing = Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
-		if(removing > 0)
-			new /obj/effect/decal/cleanable/liquid_fuel(T, removing)
-			holder.remove_reagent(type, removing)
+	return
+
 #undef FLAMMABLE_LIQUID_DIVISOR
 
 /decl/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.

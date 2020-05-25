@@ -112,16 +112,27 @@
 		attack_hand(user)
 
 /turf/attackby(obj/item/W, mob/user)
+
+	if(ATOM_IS_OPEN_CONTAINER(W) && W.reagents)
+		var/obj/effect/fluid/F = locate() in src
+		if(F && F.reagents?.total_volume)
+			var/taking = min(F.reagents?.total_volume, REAGENTS_FREE_SPACE(W.reagents))
+			if(taking > 0)
+				to_chat(user, SPAN_NOTICE("You fill \the [src] with [F.reagents.get_primary_reagent_name()] from \the [src]."))
+				F.reagents.trans_to(W, taking)
+				return TRUE
+
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
 		return TRUE
 
-	else if(istype(W, /obj/item/grab))
+	if(istype(W, /obj/item/grab))
 		var/obj/item/grab/G = W
 		step(G.affecting, get_dir(G.affecting.loc, src))
 		return TRUE
+
 	return ..()
 
 /turf/Enter(atom/movable/mover, atom/forget)

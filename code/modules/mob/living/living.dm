@@ -759,21 +759,20 @@ default behaviour is:
 	if(!can_drown() || !loc.is_flooded(lying))
 		return FALSE
 	if(prob(5))
-		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale water!"))
+		var/obj/effect/fluid/F = locate() in loc
+		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [(F?.reagents && F.reagents.get_primary_reagent_name()) || "liquid"]!"))
+		F?.reagents?.trans_to_holder(get_ingested_reagents(), min(F.reagents.total_volume, rand(2,5)))
+
 	var/turf/T = get_turf(src)
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
-
-/mob/fluid_act(var/datum/reagents/fluids)
-	..()
-	wash_mob(src)
 
 /mob/living/fluid_act(var/datum/reagents/fluids)
 	..()
 	for(var/thing in get_equipped_items(TRUE))
 		if(isnull(thing)) continue
 		var/atom/movable/A = thing
-		if(A.simulated && !A.waterproof)
+		if(A.simulated)
 			A.fluid_act(fluids)
 
 /mob/living/proc/nervous_system_failure()
@@ -861,3 +860,6 @@ default behaviour is:
 
 /mob/living/proc/can_do_special_ranged_attack(var/check_flag = TRUE)
 	return TRUE
+
+/mob/living/proc/get_ingested_reagents()
+	return reagents

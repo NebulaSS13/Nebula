@@ -284,7 +284,6 @@
 /obj/effect/meteor/irradiated/meteor_effect()
 	..()
 	explosion(src.loc, 0, 0, 4, 3, 0)
-	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
 	SSradiation.radiate(src, 50)
 
 /obj/effect/meteor/golden

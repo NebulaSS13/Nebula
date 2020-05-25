@@ -85,6 +85,7 @@ Class Procs:
 	throw_range = 5
 
 	var/stat = 0
+	var/waterproof = TRUE
 	var/reason_broken = 0
 	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
 	var/emagged = 0

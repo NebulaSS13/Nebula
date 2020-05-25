@@ -16,19 +16,13 @@
 	description = "A silvery-white metallic chemical element in the actinide series, weakly radioactive."
 	taste_description = "the inside of a reactor"
 	color = "#b8b8c0"
+	radioactive = TRUE
 
 /decl/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_ingest(M, alien, removed, holder)
 
 /decl/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
-
-/decl/reagent/uranium/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(REAGENT_VOLUME(holder, type) >= 3)
-		if(!istype(T, /turf/space))
-			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
-			if(!glow)
-				new /obj/effect/decal/cleanable/greenglow(T)
 
 /decl/reagent/helium
 	name = "helium"
@@ -156,16 +150,10 @@
 	taste_description = "the color blue, and regret"
 	color = "#c7c7c7"
 	value = 0.5
+	radioactive = TRUE
 
 /decl/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
-
-/decl/reagent/radium/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(REAGENT_VOLUME(holder, type) >= 3)
-		if(!istype(T, /turf/space))
-			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
-			if(!glow)
-				new /obj/effect/decal/cleanable/greenglow(T)
 
 /decl/reagent/silicon
 	name = "silicon"

@@ -1,6 +1,6 @@
 /obj/item/assembly/igniter
 	name = "igniter"
-	desc = "A small electronic device able to ignite combustable substances."
+	desc = "A small electronic device able to ignite combustible substances."
 	icon_state = "igniter"
 	origin_tech = "{'magnets':1}"
 	material = MAT_STEEL
@@ -25,7 +25,7 @@
 			if (istype(src.loc,/obj/item/assembly_holder))
 				if (istype(src.loc.loc, /obj/structure/reagent_dispensers/fueltank/))
 					var/obj/structure/reagent_dispensers/fueltank/tank = src.loc.loc
-					if (tank && tank.modded)
+					if(tank)
 						tank.try_detonate_reagents()
 
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

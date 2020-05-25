@@ -43,8 +43,8 @@
 	origin_tech = "{'combat':1}"
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
-	waterproof = FALSE
 
+	var/waterproof = FALSE
 	var/burst = 1
 	var/can_autofire = FALSE
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1]

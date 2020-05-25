@@ -4543,7 +4543,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/effect/fluid_mapped/fuel,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
 "hI" = (
@@ -4752,7 +4752,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/effect/fluid_mapped/fuel,
 /obj/machinery/vending/cigarette,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
@@ -4762,7 +4762,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/effect/fluid_mapped/fuel,
 /obj/structure/sign/warning/nosmoking_1{
 	pixel_y = -32
 	},

@@ -16,17 +16,12 @@
 	value = 0.01
 
 /decl/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
-		return
-	M.adjustToxLoss(2 * removed)
-
-/decl/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
-		return
-	M.adjustToxLoss(2 * removed)
+	if(istype(M, /mob/living/carbon/slime) || alien == IS_SLIME)
+		M.adjustToxLoss(2 * removed)
 
 /decl/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjust_hydration(removed * 10)
+	affect_blood(M, alien, removed, holder)
 
 /decl/reagent/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(!istype(T))
