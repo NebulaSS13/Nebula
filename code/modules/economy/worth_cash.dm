@@ -167,6 +167,7 @@
 /obj/item/charge_stick
 	name = "charge-stick"
 	icon = 'icons/obj/items/credstick.dmi'
+	on_mob_icon = 'icons/obj/items/credstick.dmi'
 	icon_state = "peasant"
 	desc = "A digital stick that holds an amount of money."
 
@@ -261,6 +262,10 @@
 /obj/item/charge_stick/on_update_icon()
 	. = ..()
 	overlays.Cut()
+	if(isturf(loc)) 
+		icon_state = "world"
+		return
+		
 	icon_state = grade
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
