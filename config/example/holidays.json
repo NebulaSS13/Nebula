@@ -1,0 +1,242 @@
+[
+  {
+    "name"     : "New Year's Day",
+    "month"    : 1,
+    "day"      : 1
+  },
+  {
+    "name"     : "Groundhog Day",
+    "month"    : 2,
+    "day"      : 2
+  },
+  {
+    "name"     : "Valentine's Day",
+    "month"    : 2,
+    "day"      : 14
+  },
+  {
+    "name"     : "Random Acts of Kindness Day",
+    "month"    : 2,
+    "day"      : 17
+  },
+  {
+    "name"     : "Pi Day",
+    "month"    : 3,
+    "day"      : 14
+  },
+  {
+    "name"     : "St. Patrick's Day",
+    "month"    : 3,
+    "day"      : 17
+  },
+  {
+    "name"     : "April Fool's Day",
+    "month"    : 4,
+    "day"      : 1
+  },
+  {
+    "name"     : "Four-Twenty",
+    "month"    : 4,
+    "day"      : 20
+  },
+  {
+    "name"     : "Earth Day",
+    "month"    : 4,
+    "day"      : 22
+  },
+  {
+    "name"     : "Labour Day",
+    "month"    : 5,
+    "day"      : 1
+  },
+  {
+    "name"     : "Firefighter's Day",
+    "month"    : 5,
+    "day"      : 4
+  },
+  {
+    "name"     : "Owl and Pussycat Day",
+    "month"    : 5,
+    "day"      : 12
+  },
+  {
+    "name"     : "Doctor's Day",
+    "month"    : 7,
+    "day"      : 1
+  },
+  {
+    "name"     : "UFO Day",
+    "month"    : 7,
+    "day"      : 2
+  },
+  {
+    "name"     : "Writer's Day",
+    "month"    : 7,
+    "day"      : 8
+  },
+  {
+    "name"     : "Friendship Day",
+    "month"    : 7,
+    "day"      : 30
+  },
+  {
+    "name"     : "Beer Day",
+    "month"    : 8,
+    "day"      : 5
+  },
+  {
+    "name"     : "Talk-Like-A-Pirate Day",
+    "month"    : 9,
+    "day"      : 19
+  },
+  {
+    "name"     : "Stupid-Questions Day",
+    "month"    : 9,
+    "day"      : 28
+  },
+
+  {
+    "name"     : "Animal's Day",
+    "month"    : 10,
+    "day"      : 4
+  },
+  {
+    "name"     : "Smiling Day",
+    "month"    : 10,
+    "day"      : 7
+  },
+  {
+    "name"     : "Boss' Day",
+    "month"    : 10,
+    "day"      : 16
+  },
+  {
+    "name"     : "Halloween",
+    "month"    : 10,
+    "day"      : 31
+  },
+  {
+    "name"     : "Vegan Day",
+    "month"    : 11,
+    "day"      : 1
+  },
+  {
+    "name"     : "Kindness Day",
+    "month"    : 11,
+    "day"      : 13
+  },
+  {
+    "name"     : "Flowers Day",
+    "month"    : 11,
+    "day"      : 19
+  },
+  {
+    "name"     : "Saying-'Hello' Day",
+    "month"    : 11,
+    "day"      : 21
+  },
+  {
+    "name"     : "Human Rights Day",
+    "month"    : 12,
+    "day"      : 10
+  },
+  {
+    "name"     : "Monkey Day",
+    "month"    : 12,
+    "day"      : 14
+  },
+  {
+    "name"     : "Orgasming Day",
+    "month"    : 12,
+    "day"      : 22
+  },
+  {
+    "name"     : "Christmas Eve",
+    "month"    : 12,
+    "day"      : 24,
+  "path"     : "/datum/holiday/christmas"
+  },
+  {
+    "name"     : "Christmas",
+    "month"    : 12,
+    "day"      : 25,
+  "path"     : "/datum/holiday/christmas"
+  },
+  {
+    "name"     : "Boxing Day",
+    "month"    : 12,
+    "day"      : 26
+  },
+  {
+    "name"     : "New Year's Eve",
+    "month"    : 12,
+    "day"      : 31
+  },
+  {
+    "name"     : "Friday the 13th",
+    "weekday"  : "fri",
+    "day"      : 13,
+    "prefixes" : ["Mike", "Friday", "Evil", "Myers", "Murder", "Deathly", "Stabby"],
+    "suffixes" : ["13", "XIII", "Thirteen"]
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 21,
+    "month"    : 4,
+    "day"      : 4
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 22,
+    "month"    : 4,
+    "day"      : 17
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 23,
+    "month"    : 4,
+    "day"      : 9
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 24,
+    "month"    : 3,
+    "day"      : 31
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 25,
+    "month"    : 4,
+    "day"      : 20
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 26,
+    "month"    : 4,
+    "day"      : 5
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 27,
+    "month"    : 3,
+    "day"      : 28
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 28,
+    "month"    : 4,
+    "day"      : 16
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 29,
+    "month"    : 4,
+    "day"      : 1
+  },
+  {
+    "name"     : "Easter",
+    "year"     : 30,
+    "month"    : 4,
+    "day"      : 21
+  }
+]
