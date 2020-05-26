@@ -92,6 +92,12 @@
 	<div class="itemContent">
 		{{:value.powerusage}}W
 	</div>
+	<div class="itemLabel">
+		Diagnostics:
+	</div>
+	<div class="itemContent">
+		{{:helper.link("EXECUTE", null, {'PC_diagnostics' : value.ref}, null)}}
+	</div>
 	{{if !value.critical}}
 	<div class="itemLabel">
 		Toggle Component: 
