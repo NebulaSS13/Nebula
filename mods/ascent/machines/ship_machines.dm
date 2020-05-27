@@ -51,21 +51,6 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	construct_state = /decl/machine_construction/default/no_deconstruct
 	base_type = /obj/machinery/recharge_station
 
-/obj/machinery/body_scanconsole/ascent
-	name = "mantid scanner console"
-	desc = "Some kind of strange alien console technology."
-	req_access = list(access_ascent)
-	icon = 'mods/ascent/icons/ascent_sleepers.dmi'
-	construct_state = /decl/machine_construction/default/no_deconstruct
-	base_type = /obj/machinery/body_scanconsole
-
-/obj/machinery/bodyscanner/ascent
-	name = "mantid body scanner"
-	desc = "Some kind of strange alien body scanning technology."
-	icon = 'mods/ascent/icons/ascent_sleepers.dmi'
-	construct_state = /decl/machine_construction/default/no_deconstruct
-	base_type = /obj/machinery/bodyscanner
-
 MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 /obj/item/chems/chem_disp_cartridge/ascent/crystal
 	spawn_reagent = /decl/material/liquid/crystal_agent
@@ -122,33 +107,6 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 		/decl/stock_part_preset/radio/receiver/airlock/shuttle = 1,
 		/decl/stock_part_preset/radio/event_transmitter/airlock/shuttle = 1
 	)
-
-/obj/machinery/power/apc/hyper/ascent
-	req_access = list(access_ascent)
-
-/obj/machinery/power/apc/hyper/ascent/north
-	name = "north bump"
-	pixel_x = 0
-	pixel_y = 24
-	dir = NORTH
-
-/obj/machinery/power/apc/hyper/ascent/south
-	name = "south bump"
-	pixel_x = 0
-	pixel_y = -24
-	dir = SOUTH
-
-/obj/machinery/power/apc/hyper/ascent/east
-	name = "east bump"
-	pixel_x = 24
-	pixel_y = 0
-	dir = EAST
-
-/obj/machinery/power/apc/hyper/ascent/west
-	name = "west bump"
-	pixel_x = -24
-	pixel_y = 0
-	dir = WEST
 
 /obj/machinery/light/ascent
 	name = "mantid light"

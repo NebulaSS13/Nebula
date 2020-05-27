@@ -156,7 +156,8 @@
 
 	override_limb_types = list(
 		BP_HEAD = /obj/item/organ/external/head/insectoid/mantid,
-		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne
+		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne,
+		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid
 	)
 
 	descriptors = list(
@@ -424,14 +425,14 @@
 	if(attacker.pulling_punches || target.lying || attacker == target)
 		return ..(attacker, target)
 	if(world.time < attacker.last_attack + 20)
-		to_chat(attacker, "<span class='notice'>You can't attack again so soon.</span>")
+		to_chat(attacker, SPAN_NOTICE("You can't attack again so soon."))
 		return 0
 	attacker.last_attack = world.time
 	var/turf/T = get_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
 	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
 	if(!T.density)
 		step(target, get_dir(get_turf(attacker), get_turf(target)))
-		target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
+		target.visible_message(SPAN_DANGER("[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]"))
 	else
 		target.turf_collision(T, target.throw_speed / 2)
 	if(prob(50))
@@ -442,7 +443,7 @@
 	if(H.pulling_punches)
 		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
 	else
-		return "\n<span class='warning'>[T.His] upper arms are raised and [T.he] looks ready to attack!</span>"
+		return SPAN_WARNING("\n[T.His] upper arms are raised and [T.he] looks ready to attack!")
 
 /datum/species/serpentid/handle_post_spawn(var/mob/living/carbon/human/H)
 	..()
@@ -455,15 +456,15 @@
 	if(H.incapacitated())
 		return FALSE
 	var/datum/gender/T = gender_datums[H.get_gender()]
-	to_chat(H, "<span class='notice'>You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using.</span>")
+	to_chat(H, SPAN_NOTICE("You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using."))
 	var/hidden = H.is_cloaked()
-	if(!hidden) H.visible_message("<span class='warning'>\The [H] shifts [T.his] arms.</span>")
+	if(!hidden) H.visible_message(SPAN_WARNING("\The [H] shifts [T.his] arms."))
 	H.unEquip(H.l_hand)
 	H.unEquip(H.r_hand)
 	if(do_after(H, 30))
 		arm_swap(H)
 	else
-		to_chat(H, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")
+		to_chat(H, SPAN_NOTICE("You stop adjusting your arms and don't switch between them."))
 	return TRUE
 
 /datum/species/serpentid/proc/arm_swap(var/mob/living/carbon/human/H, var/forced)
@@ -474,20 +475,20 @@
 	H.pulling_punches = !H.pulling_punches
 	if(H.pulling_punches)
 		if(forced)
-			to_chat(H, "<span class='notice'>You can't keep your hunting arms prepared and they drop, forcing you to use your manipulation arms.</span>")
+			to_chat(H, SPAN_NOTICE("You can't keep your hunting arms prepared and they drop, forcing you to use your manipulation arms."))
 			if(!hidden)
-				H.visible_message("<span class='notice'>[H] falters, [T.his] hunting arms failing.</span>")
+				H.visible_message(SPAN_NOTICE("[H] falters, [T.his] hunting arms failing."))
 		else
-			to_chat(H, "<span class='notice'>You relax your hunting arms, lowering the pressure and folding them tight to your thorax. \
-			You reach out with your manipulation arms, ready to use complex items.</span>")
+			to_chat(H, SPAN_NOTICE("You relax your hunting arms, lowering the pressure and folding them tight to your thorax. \
+			You reach out with your manipulation arms, ready to use complex items."))
 			if(!hidden)
-				H.visible_message("<span class='notice'>[H] seems to relax as [T.he] folds [T.his] massive curved arms to [T.his] thorax and reaches out \
-				with [T.his] small handlike limbs.</span>")
+				H.visible_message(SPAN_NOTICE("[H] seems to relax as [T.he] folds [T.his] massive curved arms to [T.his] thorax and reaches out \
+				with [T.his] small handlike limbs."))
 	else
-		to_chat(H, "<span class='notice'>You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey.</span>")
+		to_chat(H, SPAN_NOTICE("You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey."))
 		if(!hidden)
-			H.visible_message("<span class='warning'>[H] tenses as [T.he] brings [T.his] smaller arms in close to [T.his] body. [T.His] two massive spiked arms reach \
-			out. [T.He] looks ready to attack.</span>")
+			H.visible_message(SPAN_WARNING("[H] tenses as [T.he] brings [T.his] smaller arms in close to [T.his] body. [T.His] two massive spiked arms reach \
+			out. [T.He] looks ready to attack."))
 
 /datum/species/serpentid/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)

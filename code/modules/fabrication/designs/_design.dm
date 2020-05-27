@@ -13,6 +13,7 @@
 		/decl/material/solid/slag = TRUE
 	)
 	var/list/required_technology
+	var/list/species_locked
 
 // Populate name and resources from the product type.
 /datum/fabricator_recipe/proc/get_product_name()

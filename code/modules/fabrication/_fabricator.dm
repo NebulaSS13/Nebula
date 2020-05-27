@@ -56,6 +56,8 @@
 	var/initial_network_id
 	var/initial_network_key
 
+	var/species_variation = /datum/species/human // If this fabricator is a variant for a specific species, this will be checked to unlock species-specific designs.
+
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)
 	QDEL_NULL_LIST(queued_orders)
@@ -114,6 +116,19 @@
 		var/list/unlocked_tech = SSfabrication.get_unlocked_recipes(fabricator_class, known_tech)
 		if(length(unlocked_tech))
 			design_cache |= unlocked_tech
+
+	for(var/datum/fabricator_recipe/R in design_cache)
+		if(!length(R.species_locked))
+			continue
+
+		if(isnull(species_variation))
+			design_cache.Remove(R)
+			continue
+
+		for(var/species_type in R.species_locked)
+			if(ispath(species_variation, species_type))
+				design_cache.Remove(R)
+				return
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()

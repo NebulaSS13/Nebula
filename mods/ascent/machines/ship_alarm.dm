@@ -14,7 +14,6 @@ MANTIDIFY(/obj/machinery/alarm, "mantid thermostat", "atmospherics")
 
 /obj/machinery/alarm/ascent
 	req_access = list(access_ascent)
-	construct_state = null
 	environment_type = /decl/environment_data/mantid
 	base_type = /obj/machinery/alarm/ascent
 
@@ -22,3 +21,30 @@ MANTIDIFY(/obj/machinery/alarm, "mantid thermostat", "atmospherics")
 	. = ..()
 	TLV[/decl/material/gas/methyl_bromide] = list(16, 19, 135, 140)
 	TLV[/decl/material/gas/methane] = list(-1.0, -1.0, 5, 10)
+
+
+/obj/item/frame/air_alarm/ascent
+	name = "air alarm frame"
+	desc = "Used for building air alarms."
+	build_machine_type = /obj/machinery/alarm/ascent
+
+/obj/item/frame/air_alarm/ascent/kit
+	fully_construct = TRUE
+	name = "air alarm kit"
+	desc = "An all-in-one air alarm kit, comes preassembled."
+
+/datum/fabricator_recipe/engineering/airalarm_kit/ascent
+	path = /obj/item/frame/air_alarm/ascent/kit
+	species_locked = list(
+		/datum/species/mantid
+	)
+
+/obj/item/stock_parts/circuitboard/air_alarm/ascent
+	name = T_BOARD("ascent air alarm")
+	build_path = /obj/machinery/alarm/ascent
+
+/datum/fabricator_recipe/engineering/airalarm/ascent
+	path = /obj/item/stock_parts/circuitboard/air_alarm/ascent
+	species_locked = list(
+		/datum/species/mantid
+	)

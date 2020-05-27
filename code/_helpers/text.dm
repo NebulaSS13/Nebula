@@ -561,3 +561,7 @@ proc/TextPreview(var/string,var/len=40)
 // Switch to use copytext_char() when 513 is in
 var/list/fullstop_alternatives = list(".", "!", "?")
 #define APPEND_FULLSTOP_IF_NEEDED(TXT) ((copytext(TXT, -1, 0) in global.fullstop_alternatives) ? TXT : "[TXT].")
+
+/proc/make_rainbow(var/msg)
+	for(var/i = 1 to length(msg))
+		. += "<font color='[get_random_colour(1)]'>[copytext(msg, i, i+1)]</font>"

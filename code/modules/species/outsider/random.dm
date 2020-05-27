@@ -148,5 +148,5 @@
 	new/obj/item/implanter/translator(get_turf(src))
 	user.set_species(SPECIES_ALIEN)
 	var/decl/cultural_info/culture = user.get_cultural_value(TAG_CULTURE)
-	user.fully_replace_character_name(culture.get_random_name(user.gender))
+	user.fully_replace_character_name(culture.get_random_name(user, user.gender))
 	user.rename_self("Humanoid Alien", 1)

@@ -126,12 +126,12 @@ client
 			actor_culture = SSlore.get_culture(CULTURE_HUMAN)
 		if(!showckey)
 			if(prob(90))
-				chunk += "[actor_culture.get_random_name(H.gender)]\t \t \t \t[uppertext(used_name)][job]"
+				chunk += "[actor_culture.get_random_name(H, H.gender)]\t \t \t \t[uppertext(used_name)][job]"
 			else				
 				var/datum/gender/G = gender_datums[H.gender]
 				chunk += "[used_name]\t \t \t \t[uppertext(G.him)]SELF"
 		else
-			chunk += "[uppertext(actor_culture.get_random_name(H.gender))] a.k.a. '[uppertext(H.ckey)]'\t \t \t \t[uppertext(used_name)][job]"
+			chunk += "[uppertext(actor_culture.get_random_name(H, H.gender))] a.k.a. '[uppertext(H.ckey)]'\t \t \t \t[uppertext(used_name)][job]"
 		chunksize++
 		if(chunksize > 2)
 			cast += "<center>[jointext(chunk,"<br>")]</center>"
