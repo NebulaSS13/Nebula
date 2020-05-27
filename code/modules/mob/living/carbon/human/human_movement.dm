@@ -137,7 +137,7 @@
 		return
 	var/lac_chance =  10 * encumbrance()
 	if(lac_chance && prob(skill_fail_chance(SKILL_HAULING, lac_chance)))
-		make_reagent(1, /decl/material/lactate)
+		make_reagent(1, /decl/material/chem/lactate)
 		adjust_hydration(-DEFAULT_THIRST_FACTOR)
 		switch(rand(1,20))
 			if(1)

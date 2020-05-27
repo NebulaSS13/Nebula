@@ -42,11 +42,11 @@
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
-	if(reagents.has_reagent(/decl/material/acid))
+	if(reagents.has_reagent(/decl/material/chem/acid))
 		log_and_message_admins("fired sulphuric acid from \a [src].", user)
-	if(reagents.has_reagent(/decl/material/acid/polyacid))
+	if(reagents.has_reagent(/decl/material/chem/acid/polyacid))
 		log_and_message_admins("fired polyacid from \a [src].", user)
-	if(reagents.has_reagent(/decl/material/lube))
+	if(reagents.has_reagent(/decl/material/chem/lube))
 		log_and_message_admins("fired lubricant from \a [src].", user)
 	return
 
@@ -102,7 +102,7 @@
 
 /obj/item/chems/spray/cleaner/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/cleaner, volume)
+	reagents.add_reagent(/decl/material/chem/cleaner, volume)
 
 /obj/item/chems/spray/antiseptic
 	name = "antiseptic spray"
@@ -110,7 +110,7 @@
 
 /obj/item/chems/spray/antiseptic/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/antiseptic, volume)
+	reagents.add_reagent(/decl/material/chem/antiseptic, volume)
 
 /obj/item/chems/spray/hair_remover
 	name = "hair remover"
@@ -118,7 +118,7 @@
 
 /obj/item/chems/spray/hair_remover/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/toxin/hair_remover, volume)
+	reagents.add_reagent(/decl/material/chem/toxin/hair_remover, volume)
 
 /obj/item/chems/spray/pepper
 	name = "pepperspray"
@@ -133,7 +133,7 @@
 
 /obj/item/chems/spray/pepper/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/capsaicin/condensed, 60)
+	reagents.add_reagent(/decl/material/chem/capsaicin/condensed, 60)
 
 /obj/item/chems/spray/pepper/examine(mob/user, distance)
 	. = ..()
@@ -162,7 +162,7 @@
 
 /obj/item/chems/spray/waterflower/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/water, 10)
+	reagents.add_reagent(/decl/material/gas/water, 10)
 
 /obj/item/chems/spray/chemsprayer
 	name = "chem sprayer"
@@ -209,7 +209,7 @@
 
 /obj/item/chems/spray/plantbgone/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/toxin/plantbgone, 100)
+	reagents.add_reagent(/decl/material/chem/toxin/plantbgone, 100)
 
 /obj/item/chems/spray/plantbgone/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return

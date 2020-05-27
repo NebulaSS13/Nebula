@@ -6,7 +6,7 @@
 /datum/chemical_reaction/grenade_reaction/explosion_potassium
 	name = "Explosion"
 	lore_text = "Water and potassium are infamously and violently reactive, causing a large explosion on contact."
-	required_reagents = list(/decl/material/water = 1, /decl/material/potassium = 1)
+	required_reagents = list(/decl/material/gas/water = 1, /decl/material/chem/potassium = 1)
 	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/grenade_reaction/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
@@ -24,7 +24,7 @@
 /datum/chemical_reaction/grenade_reaction/flash_powder
 	name = "Flash powder"
 	lore_text = "This reaction causes a brief, blinding flash of light."
-	required_reagents = list(/decl/material/aluminium = 1, /decl/material/potassium = 1, /decl/material/sulfur = 1 )
+	required_reagents = list(/decl/material/aluminium = 1, /decl/material/chem/potassium = 1, /decl/material/chem/sulfur = 1 )
 	result_amount = null
 	mix_message = "The solution bubbles vigorously!"
 
@@ -62,7 +62,7 @@
 /datum/chemical_reaction/grenade_reaction/phlogiston
 	name = "Flash Fire"
 	lore_text = "This mixture causes an immediate flash fire."
-	required_reagents = list(/decl/material/aluminium = 1, /decl/material/toxin/phoron = 1, /decl/material/acid = 1 )
+	required_reagents = list(/decl/material/aluminium = 1, /decl/material/chem/toxin/phoron = 1, /decl/material/chem/acid = 1 )
 	result_amount = 1
 	mix_message = "The solution thickens and begins to bubble."
 
@@ -70,13 +70,13 @@
 	..()
 	var/turf/location = get_turf(holder.my_atom.loc)
 	for(var/turf/simulated/floor/target_tile in range(0,location))
-		target_tile.assume_gas(/decl/material/toxin/phoron, created_volume, 400+T0C)
+		target_tile.assume_gas(/decl/material/chem/toxin/phoron, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
 
 /datum/chemical_reaction/grenade_reaction/chemsmoke
 	name = "Chemical Smoke"
 	lore_text = "This mixture causes a large cloud of smoke, which will be laden with the other chemicals present in the mixture when it reacted."
-	required_reagents = list(/decl/material/potassium = 1, /decl/material/nutriment/sugar = 1, /decl/material/phosphorus = 1)
+	required_reagents = list(/decl/material/chem/potassium = 1, /decl/material/chem/nutriment/sugar = 1, /decl/material/chem/phosphorus = 1)
 	result_amount = 0.4
 	mix_message = "The solution bubbles vigorously!"
 
@@ -94,7 +94,7 @@
 /datum/chemical_reaction/grenade_reaction/foam
 	name = "Foam"
 	lore_text = "This mixture explodes in a burst of foam. Good for cleaning!"
-	required_reagents = list(/decl/material/surfactant = 1, /decl/material/water = 1)
+	required_reagents = list(/decl/material/chem/surfactant = 1, /decl/material/gas/water = 1)
 	result_amount = 2
 	mix_message = "The solution bubbles vigorously!"
 
@@ -111,7 +111,7 @@
 /datum/chemical_reaction/grenade_reaction/metalfoam
 	name = "Metal Foam"
 	lore_text = "This mixture explodes in a burst of metallic foam. Good for hull repair!"
-	required_reagents = list(/decl/material/aluminium = 3, /decl/material/foaming_agent = 1, /decl/material/acid/polyacid = 1)
+	required_reagents = list(/decl/material/aluminium = 3, /decl/material/chem/foaming_agent = 1, /decl/material/chem/acid/polyacid = 1)
 	result_amount = 5
 	mix_message = "The solution bubbles vigorously!"
 
@@ -127,7 +127,7 @@
 /datum/chemical_reaction/grenade_reaction/ironfoam
 	name = "Iron Foam"
 	lore_text = "This mixture explodes in a burst of iron foam. Good for hull repair!"
-	required_reagents = list(/decl/material/iron = 3, /decl/material/foaming_agent = 1, /decl/material/acid/polyacid = 1)
+	required_reagents = list(/decl/material/iron = 3, /decl/material/chem/foaming_agent = 1, /decl/material/chem/acid/polyacid = 1)
 	result_amount = 5
 	mix_message = "The solution bubbles vigorously!"
 

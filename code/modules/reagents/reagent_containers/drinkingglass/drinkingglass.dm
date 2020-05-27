@@ -51,8 +51,8 @@
 /obj/item/chems/food/drinks/glass2/proc/has_ice()
 	if(LAZYLEN(reagents.reagent_volumes))
 		var/decl/material/R = reagents.get_primary_reagent_decl()
-		if(!((R.type == /decl/material/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
-			if(reagents.has_reagent(/decl/material/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
+		if(!((R.type == /decl/material/gas/water/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
+			if(reagents.has_reagent(/decl/material/gas/water/ice, reagents.total_volume / 10)) // 10% ice by volume
 				return 1
 
 	return 0

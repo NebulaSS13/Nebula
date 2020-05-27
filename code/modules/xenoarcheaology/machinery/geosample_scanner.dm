@@ -42,13 +42,13 @@
 	var/t_left_radspike = 0
 	var/rad_shield = 0
 	var/global/list/coolant_reagents_purity = list(
-		/decl/material/water = 1,
-		/decl/material/drink/ice = 0.6,
-		/decl/material/burn_meds = 0.7,
-		/decl/material/antiseptic = 0.7,
-		/decl/material/burn_meds = 0.7,
-		/decl/material/amphetamines = 0.8,
-		/decl/material/adminordrazine = 2
+		/decl/material/gas/water = 1,
+		/decl/material/gas/water/ice = 0.6,
+		/decl/material/chem/burn_meds = 0.7,
+		/decl/material/chem/antiseptic = 0.7,
+		/decl/material/chem/burn_meds = 0.7,
+		/decl/material/chem/amphetamines = 0.8,
+		/decl/material/chem/adminordrazine = 2
 	)
 
 /obj/machinery/radiocarbon_spectrometer/Initialize()

@@ -336,7 +336,7 @@
 			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
 	for(var/obj/effect/effect/smoke/chem/smoke in range(1, current_turf))
-		if(smoke.reagents.has_reagent(/decl/material/toxin/plantbgone))
+		if(smoke.reagents.has_reagent(/decl/material/chem/toxin/plantbgone))
 			return 100
 
 	// Pressure and temperature are needed as much as water and light.
@@ -457,24 +457,24 @@
 
 	chems = list()
 	if(prob(80))
-		chems[/decl/material/nutriment] = list(rand(1,10),rand(10,20))
+		chems[/decl/material/chem/nutriment] = list(rand(1,10),rand(10,20))
 
 	var/additional_chems = rand(0,5)
 
 	if(additional_chems)
 		var/list/banned_chems = list(
-			/decl/material/adminordrazine,
-			/decl/material/nutriment,
-			/decl/material/water/holywater,
-			/decl/material/toxin/plantbgone
+			/decl/material/chem/adminordrazine,
+			/decl/material/chem/nutriment,
+			/decl/material/gas/water/holywater,
+			/decl/material/chem/toxin/plantbgone
 			)
-		banned_chems += subtypesof(/decl/material/ethanol)
-		banned_chems += subtypesof(/decl/material/tobacco)
-		banned_chems += typesof(/decl/material/drink)
-		banned_chems += typesof(/decl/material/nutriment)
-		banned_chems += typesof(/decl/material/toxin/fertilizer)
+		banned_chems += subtypesof(/decl/material/chem/ethanol)
+		banned_chems += subtypesof(/decl/material/chem/tobacco)
+		banned_chems += typesof(/decl/material/chem/drink)
+		banned_chems += typesof(/decl/material/chem/nutriment)
+		banned_chems += typesof(/decl/material/chem/toxin/fertilizer)
 
-		if(prob(30))	banned_chems |= typesof(/decl/material/toxin)
+		if(prob(30))	banned_chems |= typesof(/decl/material/chem/toxin)
 
 		for(var/x=1;x<=additional_chems;x++)
 			var/new_chem = pick(subtypesof(/decl/material))

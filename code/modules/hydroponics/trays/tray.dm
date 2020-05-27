@@ -48,80 +48,80 @@
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
 	var/global/list/toxic_reagents = list(
-		/decl/material/antitoxins =         -2,
-		/decl/material/toxin =             2,
-		/decl/material/fuel/hydrazine =         2.5,
-		/decl/material/acetone =	       1,
-		/decl/material/acid =              1.5,
-		/decl/material/acid/hydrochloric = 1.5,
-		/decl/material/acid/polyacid =     3,
-		/decl/material/toxin/plantbgone =  3,
-		/decl/material/radium =            2
+		/decl/material/chem/antitoxins =         -2,
+		/decl/material/chem/toxin =             2,
+		/decl/material/chem/fuel/hydrazine =         2.5,
+		/decl/material/chem/acetone =	       1,
+		/decl/material/chem/acid =              1.5,
+		/decl/material/chem/acid/hydrochloric = 1.5,
+		/decl/material/chem/acid/polyacid =     3,
+		/decl/material/chem/toxin/plantbgone =  3,
+		/decl/material/chem/radium =            2
 		)
 	var/global/list/nutrient_reagents = list(
-		/decl/material/drink/milk =                     0.1,
-		/decl/material/ethanol/beer =                   0.25,
-		/decl/material/phosphorus =                     0.1,
-		/decl/material/nutriment/sugar =                0.1,
-		/decl/material/drink/sodawater =                0.1,
-		/decl/material/ammonia =                        1,
-		/decl/material/nutriment =                      1,
-		/decl/material/adminordrazine =                 1,
-		/decl/material/toxin/fertilizer/eznutrient =    1,
-		/decl/material/toxin/fertilizer/robustharvest = 1,
-		/decl/material/toxin/fertilizer/left4zed =      1
+		/decl/material/chem/drink/milk =                     0.1,
+		/decl/material/chem/ethanol/beer =                   0.25,
+		/decl/material/chem/phosphorus =                     0.1,
+		/decl/material/chem/nutriment/sugar =                0.1,
+		/decl/material/chem/drink/sodawater =                0.1,
+		/decl/material/chem/ammonia =                        1,
+		/decl/material/chem/nutriment =                      1,
+		/decl/material/chem/adminordrazine =                 1,
+		/decl/material/chem/toxin/fertilizer/eznutrient =    1,
+		/decl/material/chem/toxin/fertilizer/robustharvest = 1,
+		/decl/material/chem/toxin/fertilizer/left4zed =      1
 		)
 	var/global/list/weedkiller_reagents = list(
-		/decl/material/fuel/hydrazine =          -4,
-		/decl/material/phosphorus =         -2,
-		/decl/material/nutriment/sugar =               2,
-		/decl/material/acid =               -2,
-		/decl/material/acid/hydrochloric =  -2,
-		/decl/material/acid/polyacid =      -4,
-		/decl/material/toxin/plantbgone =   -8,
-		/decl/material/adminordrazine =     -5
+		/decl/material/chem/fuel/hydrazine =          -4,
+		/decl/material/chem/phosphorus =         -2,
+		/decl/material/chem/nutriment/sugar =               2,
+		/decl/material/chem/acid =               -2,
+		/decl/material/chem/acid/hydrochloric =  -2,
+		/decl/material/chem/acid/polyacid =      -4,
+		/decl/material/chem/toxin/plantbgone =   -8,
+		/decl/material/chem/adminordrazine =     -5
 		)
 	var/global/list/pestkiller_reagents = list(
-		/decl/material/nutriment/sugar =                 2,
-		/decl/material/toxin/bromide =        -2,
-		/decl/material/toxin/methyl_bromide = -4,
-		/decl/material/adminordrazine =       -5
+		/decl/material/chem/nutriment/sugar =                 2,
+		/decl/material/chem/toxin/bromide =        -2,
+		/decl/material/gas/methyl_bromide = -4,
+		/decl/material/chem/adminordrazine =       -5
 		)
 	var/global/list/water_reagents = list(
-		/decl/material/water =           1,
-		/decl/material/adminordrazine =  1,
-		/decl/material/drink/milk =      0.9,
-		/decl/material/ethanol/beer =    0.7,
-		/decl/material/fuel/hydrazine =      -2,
-		/decl/material/phosphorus =     -0.5,
-		/decl/material/water =           1,
-		/decl/material/drink/sodawater = 1,
+		/decl/material/gas/water =           1,
+		/decl/material/chem/adminordrazine =  1,
+		/decl/material/chem/drink/milk =      0.9,
+		/decl/material/chem/ethanol/beer =    0.7,
+		/decl/material/chem/fuel/hydrazine =      -2,
+		/decl/material/chem/phosphorus =     -0.5,
+		/decl/material/gas/water =           1,
+		/decl/material/chem/drink/sodawater = 1,
 		)
 
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
 	var/global/list/beneficial_reagents = list(
-		/decl/material/ethanol/beer =                    list( -0.05, 0,   0  ),
-		/decl/material/fuel/hydrazine =                       list( -2,    0,   0  ),
-		/decl/material/phosphorus =                      list( -0.75, 0,   0  ),
-		/decl/material/drink/sodawater =                 list(  0.1,  0,   0  ),
-		/decl/material/acid =                            list( -1,    0,   0  ),
-		/decl/material/acid/hydrochloric =               list( -1,    0,   0  ),
-		/decl/material/acid/polyacid =                   list( -2,    0,   0  ),
-		/decl/material/toxin/plantbgone =                list( -2,    0,   0.2),
-		/decl/material/ammonia =                         list(  0.5,  0,   0  ),
-		/decl/material/nutriment =                       list(  0.5,  0.1, 0  ),
-		/decl/material/radium =                          list( -1.5,  0,   0.2),
-		/decl/material/adminordrazine =                  list(  1,    1,   1  ),
-		/decl/material/toxin/fertilizer/robustharvest =  list(  0,    0.2, 0  ),
-		/decl/material/toxin/fertilizer/left4zed =       list(  0,    0,   0.2)
+		/decl/material/chem/ethanol/beer =                    list( -0.05, 0,   0  ),
+		/decl/material/chem/fuel/hydrazine =                       list( -2,    0,   0  ),
+		/decl/material/chem/phosphorus =                      list( -0.75, 0,   0  ),
+		/decl/material/chem/drink/sodawater =                 list(  0.1,  0,   0  ),
+		/decl/material/chem/acid =                            list( -1,    0,   0  ),
+		/decl/material/chem/acid/hydrochloric =               list( -1,    0,   0  ),
+		/decl/material/chem/acid/polyacid =                   list( -2,    0,   0  ),
+		/decl/material/chem/toxin/plantbgone =                list( -2,    0,   0.2),
+		/decl/material/chem/ammonia =                         list(  0.5,  0,   0  ),
+		/decl/material/chem/nutriment =                       list(  0.5,  0.1, 0  ),
+		/decl/material/chem/radium =                          list( -1.5,  0,   0.2),
+		/decl/material/chem/adminordrazine =                  list(  1,    1,   1  ),
+		/decl/material/chem/toxin/fertilizer/robustharvest =  list(  0,    0.2, 0  ),
+		/decl/material/chem/toxin/fertilizer/left4zed =       list(  0,    0,   0.2)
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
 	var/global/list/mutagenic_reagents = list(
-		/decl/material/radium =  8,
-		/decl/material/mutagenics = 15,
-		/decl/material/toxin/fertilizer/left4zed = 30)
+		/decl/material/chem/radium =  8,
+		/decl/material/chem/mutagenics = 15,
+		/decl/material/chem/toxin/fertilizer/left4zed = 30)
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
 	if(mechanical && !usr.incapacitated() && Adjacent(usr))

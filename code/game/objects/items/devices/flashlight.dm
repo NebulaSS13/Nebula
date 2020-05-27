@@ -119,8 +119,8 @@
 		if(H.getBrainLoss() > 15)
 			to_chat(user, "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>")
 
-		var/list/pinpoint = list(/decl/material/painkillers=5,/decl/material/amphetamines=1)
-		var/list/dilating = list(/decl/material/psychoactives=5,/decl/material/hallucinogenics=1,/decl/material/adrenaline=1)
+		var/list/pinpoint = list(/decl/material/chem/painkillers=5,/decl/material/chem/amphetamines=1)
+		var/list/dilating = list(/decl/material/chem/psychoactives=5,/decl/material/chem/hallucinogenics=1,/decl/material/chem/adrenaline=1)
 		var/datum/reagents/ingested = H.get_ingested_reagents()
 		if(H.reagents.has_any_reagent(pinpoint) || ingested.has_any_reagent(pinpoint))
 			to_chat(user, "<span class='notice'>\The [H]'s pupils are already pinpoint and cannot narrow any more.</span>")

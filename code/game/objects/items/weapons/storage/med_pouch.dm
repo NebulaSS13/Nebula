@@ -174,22 +174,22 @@ Single Use Emergency Pouches
 	var/chem_amount = 15
 
 /obj/item/chems/pill/pouch_pill/adrenaline
-	chem_type = /decl/material/adrenaline
+	chem_type = /decl/material/chem/adrenaline
 
 /obj/item/chems/pill/pouch_pill/antitoxins
-	chem_type = /decl/material/antitoxins
+	chem_type = /decl/material/chem/antitoxins
 
 /obj/item/chems/pill/pouch_pill/oxy_meds
-	chem_type = /decl/material/oxy_meds
+	chem_type = /decl/material/chem/oxy_meds
 
 /obj/item/chems/pill/pouch_pill/painkillers
-	chem_type = /decl/material/painkillers
+	chem_type = /decl/material/chem/painkillers
 
 /obj/item/chems/pill/pouch_pill/Initialize()
 	. = ..()
 	reagents.add_reagent(chem_type, chem_amount)
 	var/decl/material/reagent = decls_repository.get_decl(chem_type)
-	name = "emergency [reagent.name] pill ([reagents.total_volume]u)"
+	name = "emergency [reagent.liquid_name] pill ([reagents.total_volume]u)"
 	color = reagents.get_color()
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto
@@ -198,21 +198,21 @@ Single Use Emergency Pouches
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
-	starts_with = list(/decl/material/adrenaline = 5)
+	starts_with = list(/decl/material/chem/adrenaline = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers
 	name = "emergency painkiller autoinjector"
-	starts_with = list(/decl/material/painkillers = 5)
+	starts_with = list(/decl/material/chem/painkillers = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins
 	name = "emergency antitoxins autoinjector"
-	starts_with = list(/decl/material/antitoxins = 5)
+	starts_with = list(/decl/material/chem/antitoxins = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds
 	name = "emergency oxygel autoinjector"
-	starts_with = list(/decl/material/oxy_meds = 5)
+	starts_with = list(/decl/material/chem/oxy_meds = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
-	starts_with = list(/decl/material/adrenaline = 8)
+	starts_with = list(/decl/material/chem/adrenaline = 8)

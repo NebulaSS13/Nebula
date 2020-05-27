@@ -28,7 +28,7 @@ var/global/list/cached_icons = list()
 
 /obj/item/chems/glass/paint/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/paint, reagents.maximum_volume-10)
+	reagents.add_reagent(/decl/material/chem/narcotics, reagents.maximum_volume-10)
 	if(pigment)
 		reagents.add_reagent(pigment, reagents.maximum_volume-10)
 

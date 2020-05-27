@@ -60,8 +60,9 @@
 
 // Material definition and procs follow.
 /decl/material
-	var/display_name                      // Prettier name for display.
+	var/name                      // Prettier name for display.
 	var/adjective_name
+	var/liquid_name
 	var/use_name
 	var/wall_name = "wall"                // Name given to walls of this material
 	var/flags = 0                         // Various status modifiers.
@@ -163,6 +164,41 @@
 	var/list/basic_armor
 	var/armor_degradation_speed
 
+	// Copied reagent values. Todo: integrate.
+	var/taste_description = "old rotten bandaids"
+	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
+	var/metabolism = REM // This would be 0.2 normally
+	var/ingest_met = 0
+	var/touch_met = 0
+	var/overdose = 0
+	var/scannable = 0 // Shows up on health analyzers.
+	var/color = "#000000"
+	var/color_weight = 1
+	var/alpha = 255
+	var/cocktail_ingredient
+
+	var/glass_icon = DRINK_ICON_DEFAULT
+	var/glass_name = "something"
+	var/glass_desc = "It's a glass of... what, exactly?"
+	var/list/glass_special = null // null equivalent to list()
+
+	// Matter state data.
+	var/chilling_point
+	var/chilling_message = "crackles and freezes!"
+	var/chilling_sound = 'sound/effects/bubbles.ogg'
+	var/list/chilling_products
+
+	var/list/heating_products
+	var/heating_point
+	var/heating_message = "begins to boil!"
+	var/heating_sound = 'sound/effects/bubbles.ogg'
+	var/fuel_value = 0
+
+	var/scent //refer to _scent.dm
+	var/scent_intensity = /decl/scent_intensity/normal
+	var/scent_descriptor = SCENT_DESC_SMELL
+	var/scent_range = 1
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
 	if(!used_stack.can_use(1))
@@ -176,10 +212,10 @@
 
 	var/decl/material/reinf_mat = used_stack.material
 	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
-		to_chat(user, "<span class='warning'>The [reinf_mat.display_name] is too structurally weak to reinforce the [display_name].</span>")
+		to_chat(user, "<span class='warning'>The [reinf_mat.name] is too structurally weak to reinforce the [name].</span>")
 		return
 
-	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.display_name].</span>")
+	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.name].</span>")
 	used_stack.use(1)
 	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
 	S.reinf_material = reinf_mat
@@ -192,28 +228,36 @@
 		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]."))	
 		return
 	if(!used_stack.can_use(5) || !target_stack.can_use(1))
-		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [display_name] to make anything useful."))
+		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [name] to make anything useful."))
 		return
 
 	used_stack.use(5)
 	target_stack.use(1)
-	to_chat(user, SPAN_NOTICE("You attach wire to the [display_name]."))
+	to_chat(user, SPAN_NOTICE("You attach wire to the [name]."))
 	var/obj/item/product = new wire_product(get_turf(user))
 	if(!(user.l_hand && user.r_hand))
 		user.put_in_hands(product)
 
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
-/decl/material/New()
-	..()
+/decl/material/Initialize()
+	. = ..()
 	if(!use_name)
-		use_name = display_name
+		use_name = name
+	if(!liquid_name)
+		liquid_name = name
 	if(!adjective_name)
-		adjective_name = display_name
+		adjective_name = name
 	if(!shard_icon)
 		shard_icon = shard_type
 	if(!burn_armor)
 		burn_armor = brute_armor
 	generate_armor_values()
+	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
+	for(var/ctype in cocktails)
+		var/decl/cocktail/cocktail = cocktails[ctype]
+		if(type in cocktail.ratios)
+			cocktail_ingredient = TRUE
+			break
 
 // Return the matter comprising this material.
 /decl/material/proc/get_matter()
@@ -249,7 +293,7 @@
 
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
-	display_name = "placeholder"
+	name = "placeholder"
 	hidden_from_codex = TRUE
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
@@ -280,3 +324,100 @@
 // Dumb overlay to apply over wall sprite for cheap texture effect
 /decl/material/proc/get_wall_texture()
 	return
+
+/decl/material/proc/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
+	return
+
+/decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
+	return
+
+#define FLAMMABLE_LIQUID_DIVISOR 7
+// This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
+/decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
+	if(fuel_value && amount && istype(M))
+		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+
+/decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
+	return
+
+#undef FLAMMABLE_LIQUID_DIVISOR
+
+/decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+	if(QDELETED(src))
+		return // Something else removed us.
+	if(!istype(M))
+		return
+	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
+		return
+	if(overdose && (location != CHEM_TOUCH))
+		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_SIZE_MEDIUM/M.mob_size)
+		if(REAGENT_VOLUME(holder, type) > overdose_threshold)
+			affect_overdose(M, alien, holder)
+
+	//determine the metabolism rate
+	var/removed = metabolism
+	if(ingest_met && (location == CHEM_INGEST))
+		removed = ingest_met
+	if(touch_met && (location == CHEM_TOUCH))
+		removed = touch_met
+	removed = M.get_adjusted_metabolism(removed)
+
+	//adjust effective amounts - removed, dose, and max_dose - for mob size
+	var/effective = removed
+	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
+		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
+
+	M.chem_doses[type] = M.chem_doses[type] + effective
+	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
+		switch(location)
+			if(CHEM_INJECT)
+				affect_blood(M, alien, effective, holder)
+			if(CHEM_INGEST)
+				affect_ingest(M, alien, effective, holder)
+			if(CHEM_TOUCH)
+				affect_touch(M, alien, effective, holder)
+	holder.remove_reagent(type, removed)
+
+/decl/material/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	return
+
+/decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	affect_blood(M, alien, removed * 0.5, holder)
+	return
+
+/decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	return
+
+/decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
+	M.add_chemical_effect(CE_TOXIN, 1)
+	M.adjustToxLoss(REM)
+
+/decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
+	if(newdata) 
+		. = newdata
+
+/decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
+	. = REAGENT_DATA(reagents, type)
+
+/decl/material/proc/explosion_act(obj/item/chems/holder, severity)
+	SHOULD_CALL_PARENT(TRUE)
+	. = TRUE
+
+/decl/material/proc/get_value()
+	. = value
+
+/decl/material/proc/get_presentation_name(var/obj/item/prop)
+	. = glass_name || liquid_name
+	if(prop?.reagents?.total_volume)
+		. = build_presentation_name_from_reagents(prop, .)
+
+/decl/material/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	. = supplied
+
+	if(cocktail_ingredient)
+		for(var/decl/cocktail/cocktail in SSchemistry.get_cocktails_by_primary_ingredient(type))
+			if(cocktail.matches(prop))
+				return cocktail.get_presentation_name(prop)
+
+	if(prop.reagents.has_reagent(/decl/material/gas/water/ice))
+		. = "iced [.]"

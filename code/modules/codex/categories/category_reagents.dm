@@ -40,7 +40,7 @@
 		if(!initial(reagent.name) || initial(reagent.hidden_from_codex))
 			continue
 		var/chem_name = lowertext(initial(reagent.name))
-		var/new_lore_text = initial(reagent.description) 
+		var/new_lore_text = initial(reagent.lore_text) 
 		if(initial(reagent.taste_description))
 			new_lore_text = "[new_lore_text] It apparently tastes of [initial(reagent.taste_description)]."
 		var/datum/codex_entry/entry = new(               \

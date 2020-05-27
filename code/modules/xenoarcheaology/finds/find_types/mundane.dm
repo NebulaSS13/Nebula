@@ -86,7 +86,7 @@
 	item_type = "crystal"
 	modification_flags = XENOFIND_REPLACE_ICON
 	engraving_chance = 100
-	responsive_reagent = /decl/material/ammonia
+	responsive_reagent = /decl/material/chem/ammonia
 
 /decl/archaeological_find/crystal/new_icon_state()
 	if(prob(25))

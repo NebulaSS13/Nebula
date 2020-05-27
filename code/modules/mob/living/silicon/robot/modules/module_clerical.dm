@@ -66,22 +66,22 @@
 	. = ..()
 	if(emag)
 		var/datum/reagents/R = emag.create_reagents(50)
-		R.add_reagent(/decl/material/paralytics, 10)
-		R.add_reagent(/decl/material/sedatives, 15)
-		R.add_reagent(/decl/material/ethanol/beer, 20)
-		R.add_reagent(/decl/material/drink/ice, 5)
+		R.add_reagent(/decl/material/chem/paralytics, 10)
+		R.add_reagent(/decl/material/chem/sedatives, 15)
+		R.add_reagent(/decl/material/chem/ethanol/beer, 20)
+		R.add_reagent(/decl/material/gas/water/ice, 5)
 		emag.SetName("Mickey Finn's Special Brew")
 
 /obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/chems/food/condiment/enzyme/E = locate() in equipment
-	E.reagents.add_reagent(/decl/material/enzyme, 2 * amount)
+	E.reagents.add_reagent(/decl/material/chem/enzyme, 2 * amount)
 	if(emag)
 		var/obj/item/chems/food/drinks/bottle/small/beer/B = emag
-		B.reagents.add_reagent(/decl/material/ethanol/beer, amount * 0.4)
-		B.reagents.add_reagent(/decl/material/drink/ice,    amount * 0.1)
-		B.reagents.add_reagent(/decl/material/paralytics,   amount * 0.2)
-		B.reagents.add_reagent(/decl/material/sedatives,    amount * 0.3)
+		B.reagents.add_reagent(/decl/material/chem/ethanol/beer, amount * 0.4)
+		B.reagents.add_reagent(/decl/material/gas/water/ice,    amount * 0.1)
+		B.reagents.add_reagent(/decl/material/chem/paralytics,   amount * 0.2)
+		B.reagents.add_reagent(/decl/material/chem/sedatives,    amount * 0.3)
 
 /obj/item/robot_module/clerical/general
 	name = "clerical robot module"

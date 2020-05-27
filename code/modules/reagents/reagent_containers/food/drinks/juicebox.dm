@@ -69,7 +69,7 @@
 /obj/item/chems/food/drinks/juicebox/apple/Initialize()
 	. = ..()
 	set_colors("#ff0000", "#ffff00", "#ff0000", style="stripe")
-	reagents.add_reagent(/decl/material/drink/juice/apple, 25)
+	reagents.add_reagent(/decl/material/chem/drink/juice/apple, 25)
 
 /obj/item/chems/food/drinks/juicebox/orange
 	name = "orange juicebox"
@@ -78,7 +78,7 @@
 /obj/item/chems/food/drinks/juicebox/orange/Initialize()
 	. = ..()
 	set_colors("#ffff00", "#ff0000", "#ffff00", style="stripe")
-	reagents.add_reagent(/decl/material/drink/juice/orange, 25)
+	reagents.add_reagent(/decl/material/chem/drink/juice/orange, 25)
 
 /obj/item/chems/food/drinks/juicebox/grape
 	name = "grape juicebox"
@@ -87,7 +87,7 @@
 /obj/item/chems/food/drinks/juicebox/grape/Initialize()
 	. = ..()
 	set_colors("#ff00ff", "#00ff00", style="stripe")
-	reagents.add_reagent(/decl/material/drink/juice/grape, 25)
+	reagents.add_reagent(/decl/material/chem/drink/juice/grape, 25)
 
 /obj/item/chems/food/drinks/juicebox/random/Initialize()
 	. = ..()
@@ -101,7 +101,7 @@
 	desc = "Juice in a box; who knows what flavor!"
 
 /obj/item/chems/food/drinks/juicebox/sensible_random/proc/juice_it()
-	var/drinktypes = subtypesof(/decl/material/drink/juice)
+	var/drinktypes = subtypesof(/decl/material/chem/drink/juice)
 	var/decl/material/J = pick(drinktypes)
 	reagents.add_reagent(J, 20)
 	reagents.add_reagent(pick(drinktypes - J), 5)
@@ -113,6 +113,6 @@
 	var/decl/material/J = decls_repository.get_decl(chosen_reagents[1])
 	var/decl/material/K = decls_repository.get_decl(chosen_reagents[2])
 	var/splash = pick("teasing", "splash", "hint", "measure", "nip", "slug", "depth", "dash", "sensation", "surge", "squirt", "spritz", "efflux", "gush", "swell")
-	desc = "[J.name]; [J.description] This one comes with \an [splash] of [K.name] in a neat box."
-	name = "\improper [J.name] and [K.name] juicebox"
+	desc = "[J.liquid_name]; [J.lore_text] This one comes with \an [splash] of [K.liquid_name] in a neat box."
+	name = "\improper [J.liquid_name] and [K.liquid_name] juicebox"
 	set_colors(J.color, K.color, get_random_colour(simple=TRUE), style=pick(list("stripe", "corner")))

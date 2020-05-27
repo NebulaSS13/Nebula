@@ -6,7 +6,7 @@
 	for(var/thing in SSmaterials.materials)
 		var/decl/material/mat = thing
 		if(!mat.hidden_from_codex)
-			var/datum/codex_entry/entry = new(_display_name = "[mat.display_name] (material)")
+			var/datum/codex_entry/entry = new(_display_name = "[mat.name] (material)")
 			entry.lore_text = mat.lore_text
 			entry.antag_text = mat.antag_text
 			var/list/material_info = list(mat.mechanics_text)
@@ -15,11 +15,11 @@
 
 			if(mat.ore_compresses_to && mat.ore_compresses_to != mat.type)
 				var/decl/material/M = decls_repository.get_decl(mat.ore_compresses_to)
-				material_info += "It can be compressed into [M.display_name]."
+				material_info += "It can be compressed into [M.name]."
 
 			if(mat.ore_smelts_to && mat.ore_smelts_to != mat.type)
 				var/decl/material/M = decls_repository.get_decl(mat.ore_smelts_to)
-				material_info += "It can be smelted into [M.display_name]."
+				material_info += "It can be smelted into [M.name]."
 
 			if(mat.brute_armor < 2)
 				material_info += "It is weak to physical impacts."
@@ -80,7 +80,7 @@
 				var/parts = list()
 				for(var/alloy_part in mat.alloy_materials)
 					var/decl/material/part = SSmaterials.materials_by_name[alloy_part]
-					parts += "[mat.alloy_materials[alloy_part]]u [part.display_name]"
+					parts += "[mat.alloy_materials[alloy_part]]u [part.name]"
 				material_info += "It is an alloy of the following materials: [english_list(parts)]"
 
 			if(mat.radioactivity)

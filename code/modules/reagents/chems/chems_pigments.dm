@@ -1,6 +1,6 @@
 /decl/material/pigment
 	name = "pigment"
-	description = "Intensely coloured powder."
+	lore_text = "Intensely coloured powder."
 	taste_description = "the back of class"
 	color = "#888888"
 	overdose = 5
@@ -50,22 +50,22 @@
 	name = "white pigment"
 	color = "#aaaaaa"
 
-/decl/material/paint
+/decl/material/chem/paint
 	name = "paint"
-	description = "This paint will stick to almost any object."
+	lore_text = "This paint will stick to almost any object."
 	taste_description = "chalk"
 	color = "#808080"
 	overdose = REAGENTS_OVERDOSE * 0.5
 	color_weight = 0
 
-/decl/material/paint/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/chem/paint/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(istype(T) && !istype(T, /turf/space))
 		T.color = holder.get_color()
 
-/decl/material/paint/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
+/decl/material/chem/paint/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O))
 		O.color = holder.get_color()
 
-/decl/material/paint/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
+/decl/material/chem/paint/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	if(istype(M) && !isobserver(M))
 		M.color = holder.get_color()

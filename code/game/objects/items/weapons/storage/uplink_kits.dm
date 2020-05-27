@@ -119,27 +119,27 @@
 	. = ..()
 	var/obj/item/storage/fancy/cigarettes/pack
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/decl/material/aluminium = 1, /decl/material/potassium = 1, /decl/material/sulfur = 1))
+	fill_cigarre_package(pack, list(/decl/material/aluminium = 1, /decl/material/chem/potassium = 1, /decl/material/chem/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/decl/material/aluminium = 1, /decl/material/potassium = 1, /decl/material/sulfur = 1))
+	fill_cigarre_package(pack, list(/decl/material/aluminium = 1, /decl/material/chem/potassium = 1, /decl/material/chem/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/decl/material/potassium = 1, /decl/material/nutriment/sugar = 1, /decl/material/phosphorus = 1))
+	fill_cigarre_package(pack, list(/decl/material/chem/potassium = 1, /decl/material/chem/nutriment/sugar = 1, /decl/material/chem/phosphorus = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/decl/material/potassium = 1, /decl/material/nutriment/sugar = 1, /decl/material/phosphorus = 1))
+	fill_cigarre_package(pack, list(/decl/material/chem/potassium = 1, /decl/material/chem/nutriment/sugar = 1, /decl/material/chem/phosphorus = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/decl/material/antitoxins = 1, /decl/material/silicon = 1, /decl/material/fuel/hydrazine = 1))
+	fill_cigarre_package(pack, list(/decl/material/chem/antitoxins = 1, /decl/material/chem/silicon = 1, /decl/material/chem/fuel/hydrazine = 1))
 	pack.desc += " 'MB' has been scribbled on it."
 
 	pack = new /obj/item/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list(/decl/material/regenerator = 4))
+	fill_cigarre_package(pack, list(/decl/material/chem/regenerator = 4))
 	pack.desc += " 'T' has been scribbled on it."
 
 	new /obj/item/flame/lighter/zippo(src)

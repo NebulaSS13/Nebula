@@ -184,10 +184,10 @@
 		return
 
 	//also copied from matches
-	if(REAGENT_VOLUME(reagents, /decl/material/toxin/phoron)) // the phoron explodes when exposed to fire
+	if(REAGENT_VOLUME(reagents, /decl/material/chem/toxin/phoron)) // the phoron explodes when exposed to fire
 		visible_message(SPAN_DANGER("\The [src] explodes!"))
 		var/datum/effect/effect/system/reagents_explosion/e = new()
-		e.set_up(round(REAGENT_VOLUME(reagents, /decl/material/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
+		e.set_up(round(REAGENT_VOLUME(reagents, /decl/material/chem/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
 		e.start()
 		qdel(src)
 		return
@@ -231,6 +231,6 @@
 		qdel(src)
 		return
 
-	reagents.remove_reagent(/decl/material/fuel, reagents.maximum_volume/25)
+	reagents.remove_reagent(/decl/material/chem/fuel, reagents.maximum_volume/25)
 	update_name()
 	burn_time--

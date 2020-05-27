@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(materials)
 
 	for(var/mtype in subtypesof(/decl/material))
 		var/decl/material/new_mineral = mtype
-		if(!initial(new_mineral.display_name))
+		if(!initial(new_mineral.name))
 			continue
 		new_mineral = decls_repository.get_decl(mtype)
 		materials += new_mineral
@@ -65,7 +65,7 @@ SUBSYSTEM_DEF(materials)
 /proc/material_display_name(var/mat)
 	var/decl/material/material = decls_repository.get_decl(mat)
 	if(material)
-		return material.display_name
+		return material.name
 	return null
 
 /datum/controller/subsystem/materials/proc/build_fusion_reaction_list()

@@ -22,18 +22,18 @@
 	// Coffee is really bad for you with busted kidneys.
 	// This should probably be expanded in some way, but fucked if I know
 	// what else kidneys can process in our reagent list.
-	if(REAGENT_VOLUME(owner.reagents, /decl/material/drink/coffee))
+	if(REAGENT_VOLUME(owner.reagents, /decl/material/chem/drink/coffee))
 		if(is_bruised())
 			owner.adjustToxLoss(0.1)
 		else if(is_broken())
 			owner.adjustToxLoss(0.3)
 
 	if(is_bruised())
-		if(prob(5) && REAGENT_VOLUME(reagents, /decl/material/potassium) < 5)
-			reagents.add_reagent(/decl/material/potassium, REM*5)
+		if(prob(5) && REAGENT_VOLUME(reagents, /decl/material/chem/potassium) < 5)
+			reagents.add_reagent(/decl/material/chem/potassium, REM*5)
 	if(is_broken())
-		if(REAGENT_VOLUME(owner.reagents, /decl/material/potassium) < 15)
-			owner.reagents.add_reagent(/decl/material/potassium, REM*2)
+		if(REAGENT_VOLUME(owner.reagents, /decl/material/chem/potassium) < 15)
+			owner.reagents.add_reagent(/decl/material/chem/potassium, REM*2)
 
 	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
 	if(!owner.chem_effects[CE_ANTITOX])

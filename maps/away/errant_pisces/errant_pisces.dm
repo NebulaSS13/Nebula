@@ -75,9 +75,9 @@
 
 /obj/item/chems/food/snacks/sharkmeat/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/nutriment/protein, 5)
-	reagents.add_reagent(/decl/material/psychoactives, 1)
-	reagents.add_reagent(/decl/material/toxin/phoron, 1)
+	reagents.add_reagent(/decl/material/chem/nutriment/protein, 5)
+	reagents.add_reagent(/decl/material/chem/psychoactives, 1)
+	reagents.add_reagent(/decl/material/chem/toxin/phoron, 1)
 	src.bitesize = 8
 
 

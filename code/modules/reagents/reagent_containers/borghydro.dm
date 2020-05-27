@@ -13,15 +13,15 @@
 	var/charge_tick = 0
 	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
 
-	var/list/reagent_ids = list(/decl/material/regenerator, /decl/material/adrenaline, /decl/material/antibiotics)
+	var/list/reagent_ids = list(/decl/material/chem/regenerator, /decl/material/chem/adrenaline, /decl/material/chem/antibiotics)
 	var/list/reagent_volumes = list()
 	var/list/reagent_names = list()
 
 /obj/item/chems/borghypo/surgeon
-	reagent_ids = list(/decl/material/brute_meds, /decl/material/oxy_meds, /decl/material/painkillers)
+	reagent_ids = list(/decl/material/chem/brute_meds, /decl/material/chem/oxy_meds, /decl/material/chem/painkillers)
 
 /obj/item/chems/borghypo/crisis
-	reagent_ids = list(/decl/material/regenerator, /decl/material/adrenaline, /decl/material/painkillers)
+	reagent_ids = list(/decl/material/chem/regenerator, /decl/material/chem/adrenaline, /decl/material/chem/painkillers)
 
 /obj/item/chems/borghypo/Initialize()
 	. = ..()
@@ -120,38 +120,38 @@
 	volume = 60
 	possible_transfer_amounts = @"[5,10,20,30]"
 	reagent_ids = list(
-		/decl/material/ethanol/beer,
-		/decl/material/ethanol/coffee/kahlua,
-		/decl/material/ethanol/whiskey,
-		/decl/material/ethanol/wine,
-		/decl/material/ethanol/vodka,
-		/decl/material/ethanol/gin,
-		/decl/material/ethanol/rum,
-		/decl/material/ethanol/tequilla,
-		/decl/material/ethanol/vermouth,
-		/decl/material/ethanol/cognac,
-		/decl/material/ethanol/ale,
-		/decl/material/ethanol/mead,
-		/decl/material/water,
-		/decl/material/nutriment/sugar,
-		/decl/material/drink/ice,
-		/decl/material/drink/tea/black,
-		/decl/material/drink/cola,
-		/decl/material/drink/citrussoda,
-		/decl/material/drink/cherrycola,
-		/decl/material/drink/lemonade,
-		/decl/material/drink/tonic,
-		/decl/material/drink/sodawater,
-		/decl/material/drink/lemon_lime,
-		/decl/material/drink/juice/orange,
-		/decl/material/drink/juice/lime,
-		/decl/material/drink/juice/watermelon,
-		/decl/material/drink/coffee,
-		/decl/material/drink/hot_coco,
-		/decl/material/drink/tea/green,
-		/decl/material/drink/citrussoda,
-		/decl/material/ethanol/beer,
-		/decl/material/ethanol/coffee/kahlua
+		/decl/material/chem/ethanol/beer,
+		/decl/material/chem/ethanol/coffee/kahlua,
+		/decl/material/chem/ethanol/whiskey,
+		/decl/material/chem/ethanol/wine,
+		/decl/material/chem/ethanol/vodka,
+		/decl/material/chem/ethanol/gin,
+		/decl/material/chem/ethanol/rum,
+		/decl/material/chem/ethanol/tequilla,
+		/decl/material/chem/ethanol/vermouth,
+		/decl/material/chem/ethanol/cognac,
+		/decl/material/chem/ethanol/ale,
+		/decl/material/chem/ethanol/mead,
+		/decl/material/gas/water,
+		/decl/material/chem/nutriment/sugar,
+		/decl/material/gas/water/ice,
+		/decl/material/chem/drink/tea/black,
+		/decl/material/chem/drink/cola,
+		/decl/material/chem/drink/citrussoda,
+		/decl/material/chem/drink/cherrycola,
+		/decl/material/chem/drink/lemonade,
+		/decl/material/chem/drink/tonic,
+		/decl/material/chem/drink/sodawater,
+		/decl/material/chem/drink/lemon_lime,
+		/decl/material/chem/drink/juice/orange,
+		/decl/material/chem/drink/juice/lime,
+		/decl/material/chem/drink/juice/watermelon,
+		/decl/material/chem/drink/coffee,
+		/decl/material/chem/drink/hot_coco,
+		/decl/material/chem/drink/tea/green,
+		/decl/material/chem/drink/citrussoda,
+		/decl/material/chem/ethanol/beer,
+		/decl/material/chem/ethanol/coffee/kahlua
 		)
 
 /obj/item/chems/borghypo/service/attack(var/mob/M, var/mob/user)

@@ -213,11 +213,11 @@
 	. += "<TITLE>[name]</TITLE>"
 	. += "[heading]:<BR><BR>Name:<BR>[reagent.name]"
 	. += "<BR><BR>Description:<BR>"
-	if(detailed_blood && istype(reagent, /decl/material/blood))
-		var/blood_data = REAGENT_DATA(beaker?.reagents, /decl/material/blood)
+	if(detailed_blood && istype(reagent, /decl/material/chem/blood))
+		var/blood_data = REAGENT_DATA(beaker?.reagents, /decl/material/chem/blood)
 		. += "Blood Type: [LAZYACCESS(blood_data, "blood_type")]<br>DNA: [LAZYACCESS(blood_data, "blood.DNA")]"
 	else
-		. += "[reagent.description]"
+		. += "[reagent.lore_text]"
 	. += "<BR><BR><BR><A href='?src=\ref[src];main=1'>(Back)</A>"
 	. = JOINTEXT(.)
 

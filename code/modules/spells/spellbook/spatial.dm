@@ -36,6 +36,6 @@
 				/obj/item/contract/apprentice = 			1
 				)
 
-	sacrifice_reagents = list(/decl/material/amphetamines)
+	sacrifice_reagents = list(/decl/material/chem/amphetamines)
 	sacrifice_objects = list(/obj/item/stack/telecrystal,
 							/obj/item/stack/material/diamond)

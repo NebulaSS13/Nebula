@@ -26,9 +26,9 @@
 	var/list/loaded_canisters
 	var/max_canister_capacity = 5
 	var/global/list/banned_chem_types = list(
-		/decl/material/toxin,
-		/decl/material/mutagenics,
-		/decl/material/acid
+		/decl/material/chem/toxin,
+		/decl/material/chem/mutagenics,
+		/decl/material/chem/acid
 	)
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)

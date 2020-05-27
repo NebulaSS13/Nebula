@@ -1,5 +1,5 @@
 /decl/material/pitchblende
-	display_name = "pitchblende"
+	name = "pitchblende"
 	ore_compresses_to = MAT_PITCHBLENDE
 	icon_colour = "#917d1a"
 	ore_smelts_to = MAT_URANIUM
@@ -8,10 +8,10 @@
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
 	stack_origin_tech = "{'materials':5}"
-	xarch_source_mineral = /decl/material/phosphorus
+	xarch_source_mineral = /decl/material/chem/phosphorus
 	ore_icon_overlay = "nugget"
 	chemical_makeup = list(
-		/decl/material/radium = 0.5,
+		/decl/material/chem/radium = 0.5,
 		/decl/material/uranium = 0.5
 	)
 	sheet_singular_name = "brick"
@@ -21,7 +21,7 @@
 	rich_material_weight = 10
 
 /decl/material/graphite
-	display_name = "graphite"
+	name = "graphite"
 	ore_compresses_to = MAT_GRAPHITE
 	icon_colour = "#444444"
 	ore_name = "graphite"
@@ -30,16 +30,16 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	chemical_makeup = list(
-		/decl/material/carbon = 0.6,
-		/decl/material/toxin/plasticide = 0.2,
-		/decl/material/acetone = 0.2
+		/decl/material/chem/carbon = 0.6,
+		/decl/material/chem/toxin/plasticide = 0.2,
+		/decl/material/chem/acetone = 0.2
 	)
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
 
 /decl/material/quartz
-	display_name = "quartz"
+	name = "quartz"
 	ore_compresses_to = MAT_QUARTZ
 	ore_name = "quartz"
 	opacity = 0.5
@@ -49,7 +49,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#effffe"
 	chemical_makeup = list(
-		/decl/material/silicon = 1
+		/decl/material/chem/silicon = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -62,7 +62,7 @@
 	rich_material_weight = 1
 
 /decl/material/pyrite
-	display_name = "pyrite"
+	name = "pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -70,7 +70,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#ccc9a3"
 	chemical_makeup = list(
-		/decl/material/sulfur = 0.75,
+		/decl/material/chem/sulfur = 0.75,
 		/decl/material/iron = 0.25
 	)
 	door_icon_base = "stone"
@@ -86,7 +86,7 @@
 	rich_material_weight = 1
 
 /decl/material/spodumene
-	display_name = "spodumene"
+	name = "spodumene"
 	ore_compresses_to = MAT_SPODUMENE
 	ore_name = "spodumene"
 	ore_result_amount = 10
@@ -95,7 +95,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#e5becb"
 	chemical_makeup = list(
-		/decl/material/lithium = 1
+		/decl/material/chem/lithium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -108,7 +108,7 @@
 	rich_material_weight = 1
 
 /decl/material/cinnabar
-	display_name = "cinnabar"
+	name = "cinnabar"
 	ore_compresses_to = MAT_CINNABAR
 	ore_name = "cinnabar"
 	ore_result_amount = 10
@@ -117,7 +117,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#e54e4e"
 	chemical_makeup = list(
-		/decl/material/mercury = 1
+		/decl/material/chem/mercury = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -130,7 +130,7 @@
 	rich_material_weight = 1
 
 /decl/material/phosphorite
-	display_name = "phosphorite"
+	name = "phosphorite"
 	ore_compresses_to = MAT_PHOSPHORITE
 	ore_name = "phosphorite"
 	ore_result_amount = 10
@@ -139,7 +139,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#acad95"
 	chemical_makeup = list(
-		/decl/material/phosphorus = 1
+		/decl/material/chem/phosphorus = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -152,7 +152,7 @@
 	rich_material_weight = 1
 
 /decl/material/rocksalt
-	display_name = "rock salt"
+	name = "rock salt"
 	ore_compresses_to = MAT_ROCK_SALT
 	ore_name = "rock salt"
 	ore_result_amount = 10
@@ -161,7 +161,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d1c0bc"
 	chemical_makeup = list(
-		/decl/material/sodium = 1
+		/decl/material/chem/sodium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -174,7 +174,7 @@
 	rich_material_weight = 1
 
 /decl/material/potash
-	display_name = "potash"
+	name = "potash"
 	ore_compresses_to = MAT_POTASH
 	ore_name = "potash"
 	ore_result_amount = 10
@@ -183,7 +183,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#b77464"
 	chemical_makeup = list(
-		/decl/material/potassium = 1
+		/decl/material/chem/potassium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -196,7 +196,7 @@
 	rich_material_weight = 1
 
 /decl/material/bauxite
-	display_name = "bauxite"
+	name = "bauxite"
 	ore_name = "bauxite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -219,7 +219,7 @@
 	rich_material_weight = 1
 
 /decl/material/sand
-	display_name = "sand"
+	name = "sand"
 	stack_type = null
 	icon_colour = "#e2dbb5"
 	ore_smelts_to = MAT_GLASS
@@ -227,12 +227,12 @@
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
 	chemical_makeup = list(
-		/decl/material/silicon = 1
+		/decl/material/chem/silicon = 1
 	)
 	value = 0.8
 
 /decl/material/sand/clay
-	display_name = "clay"
+	name = "clay"
 	icon_colour = COLOR_OFF_WHITE
 	ore_name = "clay"
 	ore_icon_overlay = "lump"
@@ -241,7 +241,7 @@
 	value = 0.8
 
 /decl/material/phoron
-	display_name = "phoron"
+	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
@@ -255,7 +255,7 @@
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
 	chemical_makeup = list(
-		/decl/material/toxin/phoron = 1
+		/decl/material/chem/toxin/phoron = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_name = "phoron"
@@ -263,7 +263,7 @@
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_uncommon"
-	xarch_source_mineral = /decl/material/toxin/phoron
+	xarch_source_mineral = /decl/material/chem/toxin/phoron
 	ore_icon_overlay = "gems"
 	//Note that this has a significant impact on TTV yield.
 	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.
@@ -297,7 +297,7 @@
 	return round(totalPhoron/100)
 
 /decl/material/phoron/supermatter
-	display_name = "exotic matter"
+	name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
 	radioactivity = 20

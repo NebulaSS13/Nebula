@@ -1,6 +1,6 @@
-/decl/material/fuel
+/decl/material/chem/fuel
 	name = "welding fuel"
-	description = "A stable hydrazine-based compound whose exact manufacturing specifications are a closely-guarded secret. One of the most common fuels in human space. Extremely flammable."
+	lore_text = "A stable hydrazine-based compound whose exact manufacturing specifications are a closely-guarded secret. One of the most common fuels in human space. Extremely flammable."
 	taste_description = "gross metal"
 	color = "#660000"
 	touch_met = 5
@@ -10,10 +10,10 @@
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 	value = 1.5
 
-/decl/material/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(2 * removed)
 
-/decl/material/fuel/explosion_act(obj/item/chems/holder, severity)
+/decl/material/chem/fuel/explosion_act(obj/item/chems/holder, severity)
 	. = ..()
 	if(.)
 		var/volume = REAGENT_VOLUME(holder?.reagents, type)
@@ -32,9 +32,9 @@
 			explosion(T,-1,1,2)
 		holder?.reagents?.remove_reagent(type, volume)
 
-/decl/material/fuel/hydrazine
+/decl/material/chem/fuel/hydrazine
 	name = "hydrazine"
-	description = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
+	lore_text = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
 	taste_description = "sweet tasting metal"
 	color = "#808080"
 	metabolism = REM * 0.2
