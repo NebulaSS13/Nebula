@@ -72,7 +72,7 @@
 			if(LAZYLEN(mat.chemical_makeup))
 				var/chems = list()
 				for(var/chemial in mat.chemical_makeup)
-					var/decl/reagent/R = chemial
+					var/decl/material/R = chemial
 					chems += "[initial(R.name)] ([mat.chemical_makeup[chemial]*100]%)"
 				material_info += "The following chemicals can be extracted from it:<br> [english_list(chems)]"
 

@@ -21,15 +21,15 @@
 
 /obj/item/chems/glass/beaker/vial/random
 	atom_flags = 0
-	var/list/random_reagent_list = list(list(/decl/reagent/water = 15) = 1, list(/decl/reagent/cleaner = 15) = 1)
+	var/list/random_reagent_list = list(list(/decl/material/water = 15) = 1, list(/decl/material/cleaner = 15) = 1)
 
 /obj/item/chems/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list(/decl/reagent/hallucinogenics = 10)    = 2,
-		list(/decl/reagent/psychoactives = 20)      = 2,
-		list(/decl/reagent/toxin/carpotoxin = 15)   = 2,
-		list(/decl/reagent/narcotics = 15)          = 2,
-		list(/decl/reagent/toxin/zombiepowder = 10) = 1
+		list(/decl/material/hallucinogenics = 10)    = 2,
+		list(/decl/material/psychoactives = 20)      = 2,
+		list(/decl/material/toxin/carpotoxin = 15)   = 2,
+		list(/decl/material/narcotics = 15)          = 2,
+		list(/decl/material/toxin/zombiepowder = 10) = 1
 	)
 
 /obj/item/chems/glass/beaker/vial/random/Initialize()
@@ -41,7 +41,7 @@
 
 	var/list/names = new
 	for(var/reagent_type in reagents.reagent_volumes)
-		var/decl/reagent/R = decls_repository.get_decl(reagent_type)
+		var/decl/material/R = decls_repository.get_decl(reagent_type)
 		names += R.name
 
 	desc = "Contains [english_list(names)]."

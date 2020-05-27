@@ -13,22 +13,22 @@
 	var/charge_tick = 0
 	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
 
-	var/list/reagent_ids = list(/decl/reagent/regenerator, /decl/reagent/adrenaline, /decl/reagent/antibiotics)
+	var/list/reagent_ids = list(/decl/material/regenerator, /decl/material/adrenaline, /decl/material/antibiotics)
 	var/list/reagent_volumes = list()
 	var/list/reagent_names = list()
 
 /obj/item/chems/borghypo/surgeon
-	reagent_ids = list(/decl/reagent/brute_meds, /decl/reagent/oxy_meds, /decl/reagent/painkillers)
+	reagent_ids = list(/decl/material/brute_meds, /decl/material/oxy_meds, /decl/material/painkillers)
 
 /obj/item/chems/borghypo/crisis
-	reagent_ids = list(/decl/reagent/regenerator, /decl/reagent/adrenaline, /decl/reagent/painkillers)
+	reagent_ids = list(/decl/material/regenerator, /decl/material/adrenaline, /decl/material/painkillers)
 
 /obj/item/chems/borghypo/Initialize()
 	. = ..()
 
 	for(var/T in reagent_ids)
 		reagent_volumes[T] = volume
-		var/decl/reagent/R = T
+		var/decl/material/R = T
 		reagent_names += initial(R.name)
 
 /obj/item/chems/borghypo/Initialize()
@@ -98,7 +98,7 @@
 		if(index > 0 && index <= reagent_ids.len)
 			playsound(loc, 'sound/effects/pop.ogg', 50, 0)
 			mode = index
-			var/decl/reagent/R = reagent_ids[mode]
+			var/decl/material/R = reagent_ids[mode]
 			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[initial(R.name)]'.</span>")
 		return TOPIC_REFRESH
 
@@ -107,7 +107,7 @@
 	if(distance > 2)
 		return
 
-	var/decl/reagent/R = reagent_ids[mode]
+	var/decl/material/R = reagent_ids[mode]
 	to_chat(user, "<span class='notice'>It is currently producing [initial(R.name)] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>")
 
 /obj/item/chems/borghypo/service
@@ -120,38 +120,38 @@
 	volume = 60
 	possible_transfer_amounts = @"[5,10,20,30]"
 	reagent_ids = list(
-		/decl/reagent/ethanol/beer,
-		/decl/reagent/ethanol/coffee/kahlua,
-		/decl/reagent/ethanol/whiskey,
-		/decl/reagent/ethanol/wine,
-		/decl/reagent/ethanol/vodka,
-		/decl/reagent/ethanol/gin,
-		/decl/reagent/ethanol/rum,
-		/decl/reagent/ethanol/tequilla,
-		/decl/reagent/ethanol/vermouth,
-		/decl/reagent/ethanol/cognac,
-		/decl/reagent/ethanol/ale,
-		/decl/reagent/ethanol/mead,
-		/decl/reagent/water,
-		/decl/reagent/nutriment/sugar,
-		/decl/reagent/drink/ice,
-		/decl/reagent/drink/tea/black,
-		/decl/reagent/drink/cola,
-		/decl/reagent/drink/citrussoda,
-		/decl/reagent/drink/cherrycola,
-		/decl/reagent/drink/lemonade,
-		/decl/reagent/drink/tonic,
-		/decl/reagent/drink/sodawater,
-		/decl/reagent/drink/lemon_lime,
-		/decl/reagent/drink/juice/orange,
-		/decl/reagent/drink/juice/lime,
-		/decl/reagent/drink/juice/watermelon,
-		/decl/reagent/drink/coffee,
-		/decl/reagent/drink/hot_coco,
-		/decl/reagent/drink/tea/green,
-		/decl/reagent/drink/citrussoda,
-		/decl/reagent/ethanol/beer,
-		/decl/reagent/ethanol/coffee/kahlua
+		/decl/material/ethanol/beer,
+		/decl/material/ethanol/coffee/kahlua,
+		/decl/material/ethanol/whiskey,
+		/decl/material/ethanol/wine,
+		/decl/material/ethanol/vodka,
+		/decl/material/ethanol/gin,
+		/decl/material/ethanol/rum,
+		/decl/material/ethanol/tequilla,
+		/decl/material/ethanol/vermouth,
+		/decl/material/ethanol/cognac,
+		/decl/material/ethanol/ale,
+		/decl/material/ethanol/mead,
+		/decl/material/water,
+		/decl/material/nutriment/sugar,
+		/decl/material/drink/ice,
+		/decl/material/drink/tea/black,
+		/decl/material/drink/cola,
+		/decl/material/drink/citrussoda,
+		/decl/material/drink/cherrycola,
+		/decl/material/drink/lemonade,
+		/decl/material/drink/tonic,
+		/decl/material/drink/sodawater,
+		/decl/material/drink/lemon_lime,
+		/decl/material/drink/juice/orange,
+		/decl/material/drink/juice/lime,
+		/decl/material/drink/juice/watermelon,
+		/decl/material/drink/coffee,
+		/decl/material/drink/hot_coco,
+		/decl/material/drink/tea/green,
+		/decl/material/drink/citrussoda,
+		/decl/material/ethanol/beer,
+		/decl/material/ethanol/coffee/kahlua
 		)
 
 /obj/item/chems/borghypo/service/attack(var/mob/M, var/mob/user)

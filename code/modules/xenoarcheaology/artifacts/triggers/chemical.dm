@@ -4,7 +4,7 @@
 
 /datum/artifact_trigger/chemical/New()
 	if(isnull(required_chemicals))
-		required_chemicals = list(pick(/decl/reagent/acid, /decl/reagent/toxin, /decl/reagent/water))
+		required_chemicals = list(pick(/decl/material/acid, /decl/material/toxin, /decl/material/water))
 
 /datum/artifact_trigger/chemical/copy()
 	var/datum/artifact_trigger/chemical/C = ..()
@@ -20,31 +20,31 @@
 /datum/artifact_trigger/chemical/water
 	name = "presence of water"
 	required_chemicals = list(
-		/decl/reagent/water,
-		/decl/reagent/water/boiling,
-		/decl/reagent/drink/ice
+		/decl/material/water,
+		/decl/material/water/boiling,
+		/decl/material/drink/ice
 	)
 
 /datum/artifact_trigger/chemical/acid
 	name = "presence of acid"
 	required_chemicals = list(
-		/decl/reagent/acid,
-		/decl/reagent/acid/polyacid
+		/decl/material/acid,
+		/decl/material/acid/polyacid
 	)
 
 /datum/artifact_trigger/chemical/volatile
 	name = "presence of volatile chemicals"
 	required_chemicals = list(
-		/decl/reagent/toxin/phoron,
-		/decl/reagent/fuel
+		/decl/material/toxin/phoron,
+		/decl/material/fuel
 	)
 
 /datum/artifact_trigger/chemical/toxic
 	name = "presence of toxins"
 	required_chemicals = list(
-		/decl/reagent/toxin,
-		/decl/reagent/toxin/cyanide,
-		/decl/reagent/toxin/amatoxin,
-		/decl/reagent/toxin/venom,
-		/decl/reagent/toxin/chlorine
+		/decl/material/toxin,
+		/decl/material/toxin/cyanide,
+		/decl/material/toxin/amatoxin,
+		/decl/material/toxin/venom,
+		/decl/material/toxin/chlorine
 	)

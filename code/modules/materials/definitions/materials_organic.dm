@@ -13,7 +13,7 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chemical_makeup = list(
-		/decl/reagent/toxin/plasticide = 1
+		/decl/material/toxin/plasticide = 1
 	)
 	reflectiveness = MAT_VALUE_SHINY
 	wall_support_value = 10

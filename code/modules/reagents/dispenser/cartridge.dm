@@ -19,7 +19,7 @@
 	. = ..()
 	if(spawn_reagent)
 		reagents.add_reagent(spawn_reagent, volume)
-		var/decl/reagent/R = spawn_reagent
+		var/decl/material/R = spawn_reagent
 		setLabel(initial(R.name))
 
 /obj/item/chems/chem_disp_cartridge/examine(mob/user)

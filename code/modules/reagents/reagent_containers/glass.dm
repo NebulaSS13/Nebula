@@ -236,7 +236,7 @@
 
 /obj/item/chems/glass/beaker/sulphuric/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/acid, 60)
+	reagents.add_reagent(/decl/material/acid, 60)
 	update_icon()
 
 /obj/item/chems/glass/bucket

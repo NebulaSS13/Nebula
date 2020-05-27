@@ -202,9 +202,9 @@
 	var/obj/item/chems/glass/beaker/B1 = new(src)
 	var/obj/item/chems/glass/beaker/B2 = new(src)
 
-	B1.reagents.add_reagent(/decl/reagent/aluminium, 30)
-	B2.reagents.add_reagent(/decl/reagent/foaming_agent, 10)
-	B2.reagents.add_reagent(/decl/reagent/acid/polyacid, 10)
+	B1.reagents.add_reagent(/decl/material/aluminium, 30)
+	B2.reagents.add_reagent(/decl/material/foaming_agent, 10)
+	B2.reagents.add_reagent(/decl/material/acid/polyacid, 10)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
@@ -223,11 +223,11 @@
 	var/obj/item/chems/glass/beaker/B1 = new(src)
 	var/obj/item/chems/glass/beaker/B2 = new(src)
 
-	B1.reagents.add_reagent(/decl/reagent/aluminium, 15)
-	B1.reagents.add_reagent(/decl/reagent/fuel,20)
-	B2.reagents.add_reagent(/decl/reagent/toxin/phoron, 15)
-	B2.reagents.add_reagent(/decl/reagent/acid, 15)
-	B1.reagents.add_reagent(/decl/reagent/fuel,20)
+	B1.reagents.add_reagent(/decl/material/aluminium, 15)
+	B1.reagents.add_reagent(/decl/material/fuel,20)
+	B2.reagents.add_reagent(/decl/material/toxin/phoron, 15)
+	B2.reagents.add_reagent(/decl/material/acid, 15)
+	B1.reagents.add_reagent(/decl/material/fuel,20)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
@@ -247,10 +247,10 @@
 	var/obj/item/chems/glass/beaker/B1 = new(src)
 	var/obj/item/chems/glass/beaker/B2 = new(src)
 
-	B1.reagents.add_reagent(/decl/reagent/toxin/plantbgone, 25)
-	B1.reagents.add_reagent(/decl/reagent/potassium, 25)
-	B2.reagents.add_reagent(/decl/reagent/phosphorus, 25)
-	B2.reagents.add_reagent(/decl/reagent/nutriment/sugar, 25)
+	B1.reagents.add_reagent(/decl/material/toxin/plantbgone, 25)
+	B1.reagents.add_reagent(/decl/material/potassium, 25)
+	B2.reagents.add_reagent(/decl/material/phosphorus, 25)
+	B2.reagents.add_reagent(/decl/material/nutriment/sugar, 25)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
@@ -269,9 +269,9 @@
 	var/obj/item/chems/glass/beaker/B1 = new(src)
 	var/obj/item/chems/glass/beaker/B2 = new(src)
 
-	B1.reagents.add_reagent(/decl/reagent/surfactant, 40)
-	B2.reagents.add_reagent(/decl/reagent/water, 40)
-	B2.reagents.add_reagent(/decl/reagent/cleaner, 10)
+	B1.reagents.add_reagent(/decl/material/surfactant, 40)
+	B2.reagents.add_reagent(/decl/material/water, 40)
+	B2.reagents.add_reagent(/decl/material/cleaner, 10)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
@@ -290,11 +290,11 @@
 	var/obj/item/chems/glass/beaker/large/B1 = new(src)
 	var/obj/item/chems/glass/beaker/large/B2 = new(src)
 
-	B1.reagents.add_reagent(/decl/reagent/phosphorus, 40)
-	B1.reagents.add_reagent(/decl/reagent/potassium, 40)
-	B1.reagents.add_reagent(/decl/reagent/capsaicin/condensed, 40)
-	B2.reagents.add_reagent(/decl/reagent/nutriment/sugar, 40)
-	B2.reagents.add_reagent(/decl/reagent/capsaicin/condensed, 80)
+	B1.reagents.add_reagent(/decl/material/phosphorus, 40)
+	B1.reagents.add_reagent(/decl/material/potassium, 40)
+	B1.reagents.add_reagent(/decl/material/capsaicin/condensed, 40)
+	B2.reagents.add_reagent(/decl/material/nutriment/sugar, 40)
+	B2.reagents.add_reagent(/decl/material/capsaicin/condensed, 80)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 
@@ -315,8 +315,8 @@
 	var/obj/item/chems/glass/beaker/B1 = new(src)
 	var/obj/item/chems/glass/beaker/B2 = new(src)
 
-	B1.reagents.add_reagent(/decl/reagent/water, 40)
-	B2.reagents.add_reagent(/decl/reagent/water, 40)
+	B1.reagents.add_reagent(/decl/material/water, 40)
+	B2.reagents.add_reagent(/decl/material/water, 40)
 
 	detonator = new/obj/item/assembly_holder/timer_igniter(src)
 

@@ -25,7 +25,7 @@
 	display_name = "lithium"
 	lore_text = "A chemical element, used as antidepressant."
 	chemical_makeup = list(
-		/decl/reagent/lithium = 1
+		/decl/material/lithium = 1
 	)
 	is_fusion_fuel = TRUE
 
@@ -43,7 +43,7 @@
 	display_name = "helium"
 	lore_text = "A noble gas. It makes your voice squeaky."
 	chemical_makeup = list(
-		/decl/reagent/helium = 1
+		/decl/material/helium = 1
 	)
 	is_fusion_fuel = TRUE
 	gas_specific_heat = 80
@@ -64,7 +64,7 @@
 	display_name = "carbon monoxide"
 	lore_text = "A highly poisonous gas."
 	chemical_makeup = list(
-		/decl/reagent/carbon_monoxide = 1
+		/decl/material/carbon_monoxide = 1
 	)
 	gas_specific_heat = 30
 	gas_molar_mass = 0.028
@@ -75,7 +75,7 @@
 	display_name = "methyl bromide"
 	lore_text = "A once-popular fumigant and weedkiller."
 	chemical_makeup = list(
-		/decl/reagent/toxin/methyl_bromide = 1
+		/decl/material/toxin/methyl_bromide = 1
 	)
 	gas_specific_heat = 42.59 
 	gas_molar_mass = 0.095	  
@@ -86,7 +86,7 @@
 	display_name = "sleeping agent"
 	lore_text = "A mild sedative. Also known as laughing gas."
 	chemical_makeup = list(
-		/decl/reagent/nitrous_oxide = 1
+		/decl/material/nitrous_oxide = 1
 	)
 	gas_specific_heat = 40	
 	gas_molar_mass = 0.044	
@@ -107,7 +107,7 @@
 /decl/material/gas/nitrodioxide
 	display_name = "nitrogen dioxide"
 	chemical_makeup = list(
-		/decl/reagent/toxin = 1
+		/decl/material/toxin = 1
 	)
 	icon_colour = "#ca6409"
 	gas_specific_heat = 37
@@ -183,7 +183,7 @@
 /decl/material/gas/xenon
 	display_name = "xenon"
 	chemical_makeup = list(
-		/decl/reagent/nitrous_oxide/xenon = 1
+		/decl/material/nitrous_oxide/xenon = 1
 	)
 	gas_specific_heat = 3
 	gas_molar_mass = 0.054
@@ -193,7 +193,7 @@
 /decl/material/gas/ammonia
 	display_name = "ammonia"
 	chemical_makeup = list(
-		/decl/reagent/ammonia = 1
+		/decl/material/ammonia = 1
 	)
 	gas_specific_heat = 20
 	gas_molar_mass = 0.017
@@ -203,7 +203,7 @@
 /decl/material/gas/chlorine
 	display_name = "chlorine"
 	chemical_makeup = list(
-		/decl/reagent/toxin/chlorine = 1
+		/decl/material/toxin/chlorine = 1
 	)
 	icon_colour = "#c5f72d"
 	gas_overlay_limit = 0.5
@@ -216,7 +216,7 @@
 /decl/material/gas/sulfurdioxide
 	display_name = "sulfur dioxide"
 	chemical_makeup = list(
-		/decl/reagent/sulfur = 1
+		/decl/material/sulfur = 1
 	)
 	gas_specific_heat = 30
 	gas_molar_mass = 0.044
@@ -226,7 +226,7 @@
 /decl/material/gas/water
 	display_name = "water vapour"
 	chemical_makeup = list(
-		/decl/reagent/water = 1
+		/decl/material/water = 1
 	)
 	gas_tile_overlay = "generic"
 	gas_overlay_limit = 0.5
@@ -252,7 +252,7 @@
 	gas_symbol_html = "H<sub>2</sub>"
 	gas_symbol = "H2"
 	chemical_makeup = list(
-		/decl/reagent/fuel/hydrazine = 1
+		/decl/material/fuel/hydrazine = 1
 	)
 
 /decl/material/hydrogen/tritium

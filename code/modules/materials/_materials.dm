@@ -146,7 +146,7 @@
 	var/value = 1
 
 	// Xenoarch behavior.
-	var/xarch_source_mineral = /decl/reagent/iron
+	var/xarch_source_mineral = /decl/material/iron
 
 	// Gas behavior.
 	var/gas_overlay_limit

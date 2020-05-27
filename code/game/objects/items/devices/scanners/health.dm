@@ -249,7 +249,7 @@
 		var/unknown = 0
 		var/reagentdata[0]
 		for(var/A in H.reagents.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(A)
+			var/decl/material/R = decls_repository.get_decl(A)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
 				reagentdata[A] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, A), 1)]u [R.name]</span>"
@@ -268,7 +268,7 @@
 		var/unknown = 0
 		var/reagentdata[0]
 		for(var/A in H.touching.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(A)
+			var/decl/material/R = decls_repository.get_decl(A)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
 				reagentdata[R.type] = "<span class='scan_notice'>[round(REAGENT_VOLUME(H.reagents, R.type), 1)]u [R.name]</span>"
@@ -287,7 +287,7 @@
 	if(ingested && ingested.total_volume)
 		var/unknown = 0
 		for(var/rtype in ingested.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = decls_repository.get_decl(rtype)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
 				. += "<span class='scan_notice'>[R.name] found in subject's stomach.</span>"
@@ -300,7 +300,7 @@
 	if(H.chem_doses.len)
 		var/list/chemtraces = list()
 		for(var/T in H.chem_doses)
-			var/decl/reagent/R = T
+			var/decl/material/R = T
 			if(initial(R.scannable))
 				chemtraces += "[initial(R.name)] ([H.chem_doses[T]])"
 		if(chemtraces.len)

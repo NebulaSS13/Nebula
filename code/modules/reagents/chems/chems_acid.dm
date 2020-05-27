@@ -1,4 +1,4 @@
-/decl/reagent/acid
+/decl/material/acid
 	name = "sulphuric acid"
 	description = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
@@ -10,10 +10,10 @@
 	var/meltdose = 10 // How much is needed to melt
 	var/max_damage = 40
 
-/decl/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.take_organ_damage(0, removed * power)
 
-/decl/reagent/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder) // This is the most interesting
+/decl/material/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder) // This is the most interesting
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.head)
@@ -72,7 +72,7 @@
 					H.emote("scream")
 				affecting.status |= ORGAN_DISFIGURED
 
-/decl/reagent/acid/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
+/decl/material/acid/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(O.unacidable)
 		return
 	if((istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > meltdose))
@@ -82,7 +82,7 @@
 		qdel(O)
 		holder?.remove_reagent(type, meltdose) // 10 units of acid will not melt EVERYTHING on the tile
 
-/decl/reagent/acid/hydrochloric //Like sulfuric, but less toxic and more acidic.
+/decl/material/acid/hydrochloric //Like sulfuric, but less toxic and more acidic.
 	name = "hydrochloric acid"
 	description = "A very corrosive mineral acid with the molecular formula HCl."
 	taste_description = "stomach acid"
@@ -92,7 +92,7 @@
 	max_damage = 30
 	value = 1.5
 
-/decl/reagent/acid/polyacid
+/decl/material/acid/polyacid
 	name = "polytrinic acid"
 	description = "Polytrinic acid is a an extremely corrosive chemical substance."
 	taste_description = "acid"
@@ -102,7 +102,7 @@
 	max_damage = 60
 	value = 1.8
 
-/decl/reagent/acid/stomach
+/decl/material/acid/stomach
 	name = "stomach acid"
 	taste_description = "coppery foulness"
 	power = 2

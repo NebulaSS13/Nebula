@@ -20,7 +20,7 @@
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_rare"
-	xarch_source_mineral = /decl/reagent/ammonia
+	xarch_source_mineral = /decl/material/ammonia
 	ore_icon_overlay = "gems"
 	sheet_singular_name = "gem"
 	sheet_plural_name = "gems"
@@ -58,7 +58,7 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chemical_makeup = list(
-		/decl/reagent/silicon = 1
+		/decl/material/silicon = 1
 	)
 	value = 1.5
 

@@ -25,8 +25,8 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chemical_makeup = list(
-		/decl/reagent/carbon = 0.66,
-		/decl/reagent/water = 0.34
+		/decl/material/carbon = 0.66,
+		/decl/material/water = 0.34
 	)
 	value = 1.5
 	reflectiveness = MAT_VALUE_DULL
@@ -96,8 +96,8 @@
 				tree can live for nearly a thousand years thanks to its natural disease resistance."
 	icon_colour = WOOD_COLOR_YELLOW
 	chemical_makeup = list(
-		/decl/reagent/carbon = 0.6,
-		/decl/reagent/water = 0.3,
-		/decl/reagent/toxin/heartstopper = 0.1
+		/decl/material/carbon = 0.6,
+		/decl/material/water = 0.3,
+		/decl/material/toxin/heartstopper = 0.1
 	)
 	value = 1.8

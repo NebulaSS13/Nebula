@@ -13,7 +13,7 @@
 	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':5}"
 	chemical_makeup = list(
-		/decl/reagent/uranium = 1
+		/decl/material/uranium = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_MATTE
@@ -33,7 +33,7 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chemical_makeup = list(
-		/decl/reagent/gold = 1
+		/decl/material/gold = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_SHINY
@@ -71,8 +71,8 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chemical_makeup = list(
-		/decl/reagent/copper = 0.6,
-		/decl/reagent/silver = 0.4
+		/decl/material/copper = 0.6,
+		/decl/material/silver = 0.4
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_COPPER
@@ -96,7 +96,7 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chemical_makeup = list(
-		/decl/reagent/silver = 1
+		/decl/material/silver = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_SILVER
@@ -123,8 +123,8 @@
 	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
 	chemical_makeup = list(
-		/decl/reagent/iron = 0.98,
-		/decl/reagent/carbon = 0.02
+		/decl/material/iron = 0.98,
+		/decl/material/carbon = 0.02
 	)
 	alloy_materials = list(MAT_IRON = 1875, MAT_GRAPHITE = 1875)
 	alloy_product = TRUE
@@ -153,7 +153,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/aluminium
 	chemical_makeup = list(
-		/decl/reagent/aluminium = 1
+		/decl/material/aluminium = 1
 	)
 	integrity = 125
 	weight = MAT_VALUE_LIGHT
@@ -289,7 +289,7 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chemical_makeup = list(
-		/decl/reagent/iron = 1
+		/decl/material/iron = 1
 	)
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE

@@ -66,7 +66,7 @@ SUBSYSTEM_DEF(fluids)
 				if(GM) F.temperature = GM.temperature
 			if(F)
 				if(F.reagents.total_volume < FLUID_MAX_DEPTH)
-					F.reagents.add_reagent(/decl/reagent/water, FLUID_MAX_DEPTH - F.reagents.total_volume)
+					F.reagents.add_reagent(/decl/material/water, FLUID_MAX_DEPTH - F.reagents.total_volume)
 		if(!flooded_a_neighbor)
 			REMOVE_ACTIVE_FLUID_SOURCE(T)
 		if (MC_TICK_CHECK)

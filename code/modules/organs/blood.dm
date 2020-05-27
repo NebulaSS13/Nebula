@@ -146,7 +146,7 @@
 		return
 	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
 	if(blood_incompatible(LAZYACCESS(injected_data, "blood_type"), LAZYACCESS(injected_data, "species")))
-		reagents.add_reagent(/decl/reagent/toxin, amount * 0.5)
+		reagents.add_reagent(/decl/material/toxin, amount * 0.5)
 	else
 		vessel.add_reagent(species.blood_reagent, amount, injected_data)
 	..()
@@ -230,7 +230,7 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
 	else if(isatom(source))
 		var/atom/donor = source
-		blood_data = REAGENT_DATA(donor.reagents, /decl/reagent/blood)
+		blood_data = REAGENT_DATA(donor.reagents, /decl/material/blood)
 	if(!islist(blood_data))
 		return splatter
 

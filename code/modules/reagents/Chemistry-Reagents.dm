@@ -1,4 +1,4 @@
-/decl/reagent
+/decl/material
 	var/name
 	var/description = "A non-descript chemical."
 	var/taste_description = "old rotten bandaids"
@@ -50,7 +50,7 @@
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 1
 
-/decl/reagent/Initialize()
+/decl/material/Initialize()
 	. = ..()
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
 	for(var/ctype in cocktails)
@@ -59,24 +59,24 @@
 			cocktail_ingredient = TRUE
 			break
 
-/decl/reagent/proc/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
+/decl/material/proc/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
 	return
 
-/decl/reagent/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
+/decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
 	return
 
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
-/decl/reagent/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
+/decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	if(fuel_value && amount && istype(M))
 		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
 
-/decl/reagent/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
+/decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 	return
 
 #undef FLAMMABLE_LIQUID_DIVISOR
 
-/decl/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
 		return // Something else removed us.
 	if(!istype(M))
@@ -112,40 +112,40 @@
 				affect_touch(M, alien, effective, holder)
 	holder.remove_reagent(type, removed)
 
-/decl/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return
 
-/decl/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
 	return
 
-/decl/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return
 
-/decl/reagent/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
+/decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
 
-/decl/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
+/decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
 	if(newdata) 
 		. = newdata
 
-/decl/reagent/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
+/decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
 	. = REAGENT_DATA(reagents, type)
 
-/decl/reagent/proc/explosion_act(obj/item/chems/holder, severity)
+/decl/material/proc/explosion_act(obj/item/chems/holder, severity)
 	SHOULD_CALL_PARENT(TRUE)
 	. = TRUE
 
-/decl/reagent/proc/get_value()
+/decl/material/proc/get_value()
 	. = value
 
-/decl/reagent/proc/get_presentation_name(var/obj/item/prop)
+/decl/material/proc/get_presentation_name(var/obj/item/prop)
 	. = glass_name || name
 	if(prop?.reagents?.total_volume)
 		. = build_presentation_name_from_reagents(prop, .)
 
-/decl/reagent/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+/decl/material/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
 	. = supplied
 
 	if(cocktail_ingredient)
@@ -153,5 +153,5 @@
 			if(cocktail.matches(prop))
 				return cocktail.get_presentation_name(prop)
 
-	if(prop.reagents.has_reagent(/decl/reagent/drink/ice))
+	if(prop.reagents.has_reagent(/decl/material/drink/ice))
 		. = "iced [.]"

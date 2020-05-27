@@ -26,9 +26,9 @@
 	var/list/loaded_canisters
 	var/max_canister_capacity = 5
 	var/global/list/banned_chem_types = list(
-		/decl/reagent/toxin,
-		/decl/reagent/mutagenics,
-		/decl/reagent/acid
+		/decl/material/toxin,
+		/decl/material/mutagenics,
+		/decl/material/acid
 	)
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)
@@ -54,7 +54,7 @@
 		return FALSE
 	if(!emagged)
 		for(var/rid in canister.reagents?.reagent_volumes)
-			var/decl/reagent/reagent = decls_repository.get_decl(rid)
+			var/decl/material/reagent = decls_repository.get_decl(rid)
 			for(var/banned_type in banned_chem_types)
 				if(istype(reagent, banned_type))
 					to_chat(user, SPAN_WARNING("Automatic safety checking indicates the present of a prohibited substance in this canister."))

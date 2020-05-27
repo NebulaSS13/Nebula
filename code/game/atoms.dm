@@ -306,7 +306,7 @@ its easier to just keep the beam vertical.
 /atom/proc/try_detonate_reagents(var/severity = 3)
 	if(reagents)
 		for(var/rtype in reagents.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = decls_repository.get_decl(rtype)
 			R.explosion_act(src, severity)
 
 /atom/proc/explosion_act(var/severity)
@@ -357,7 +357,7 @@ its easier to just keep the beam vertical.
 	return 1
 
 /mob/living/proc/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
-	vomit.reagents.add_reagent(/decl/reagent/acid/stomach, 5)
+	vomit.reagents.add_reagent(/decl/material/acid/stomach, 5)
 
 /atom/proc/clean_blood()
 	if(!simulated)

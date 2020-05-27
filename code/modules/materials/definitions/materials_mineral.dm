@@ -8,11 +8,11 @@
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
 	stack_origin_tech = "{'materials':5}"
-	xarch_source_mineral = /decl/reagent/phosphorus
+	xarch_source_mineral = /decl/material/phosphorus
 	ore_icon_overlay = "nugget"
 	chemical_makeup = list(
-		/decl/reagent/radium = 0.5,
-		/decl/reagent/uranium = 0.5
+		/decl/material/radium = 0.5,
+		/decl/material/uranium = 0.5
 	)
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -30,9 +30,9 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	chemical_makeup = list(
-		/decl/reagent/carbon = 0.6,
-		/decl/reagent/toxin/plasticide = 0.2,
-		/decl/reagent/acetone = 0.2
+		/decl/material/carbon = 0.6,
+		/decl/material/toxin/plasticide = 0.2,
+		/decl/material/acetone = 0.2
 	)
 	value = 0.8
 	sparse_material_weight = 35
@@ -49,7 +49,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#effffe"
 	chemical_makeup = list(
-		/decl/reagent/silicon = 1
+		/decl/material/silicon = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -70,8 +70,8 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#ccc9a3"
 	chemical_makeup = list(
-		/decl/reagent/sulfur = 0.75,
-		/decl/reagent/iron = 0.25
+		/decl/material/sulfur = 0.75,
+		/decl/material/iron = 0.25
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -95,7 +95,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#e5becb"
 	chemical_makeup = list(
-		/decl/reagent/lithium = 1
+		/decl/material/lithium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -117,7 +117,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#e54e4e"
 	chemical_makeup = list(
-		/decl/reagent/mercury = 1
+		/decl/material/mercury = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -139,7 +139,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#acad95"
 	chemical_makeup = list(
-		/decl/reagent/phosphorus = 1
+		/decl/material/phosphorus = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -161,7 +161,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d1c0bc"
 	chemical_makeup = list(
-		/decl/reagent/sodium = 1
+		/decl/material/sodium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -183,7 +183,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#b77464"
 	chemical_makeup = list(
-		/decl/reagent/potassium = 1
+		/decl/material/potassium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -204,7 +204,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d8ad97"
 	chemical_makeup = list(
-		/decl/reagent/aluminium = 1
+		/decl/material/aluminium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -227,7 +227,7 @@
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
 	chemical_makeup = list(
-		/decl/reagent/silicon = 1
+		/decl/material/silicon = 1
 	)
 	value = 0.8
 
@@ -255,7 +255,7 @@
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
 	chemical_makeup = list(
-		/decl/reagent/toxin/phoron = 1
+		/decl/material/toxin/phoron = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_name = "phoron"
@@ -263,7 +263,7 @@
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_uncommon"
-	xarch_source_mineral = /decl/reagent/toxin/phoron
+	xarch_source_mineral = /decl/material/toxin/phoron
 	ore_icon_overlay = "gems"
 	//Note that this has a significant impact on TTV yield.
 	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.

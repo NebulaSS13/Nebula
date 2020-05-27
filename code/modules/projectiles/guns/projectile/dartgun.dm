@@ -61,7 +61,7 @@
 		for(var/obj/item/chems/glass/beaker/B in beakers)
 			if(B.reagents && LAZYLEN(B.reagents?.reagent_volumes))
 				for(var/rtype in B.reagents.reagent_volumes)
-					var/decl/reagent/R = decls_repository.get_decl(rtype)
+					var/decl/material/R = decls_repository.get_decl(rtype)
 					to_chat(user, "<span class='notice'>[REAGENT_VOLUME(B.reagents, rtype)] units of [R.name]</span>")
 
 /obj/item/gun/projectile/dartgun/attackby(obj/item/I, mob/user)
@@ -112,7 +112,7 @@
 			dat += "Beaker [i] contains: "
 			if(B.reagents && LAZYLEN(B.reagents.reagent_volumes))
 				for(var/rtype in B.reagents.reagent_volumes)
-					var/decl/reagent/R = decls_repository.get_decl(rtype)
+					var/decl/material/R = decls_repository.get_decl(rtype)
 					dat += "<br>    [REAGENT_VOLUME(B.reagents, rtype)] units of [R.name], "
 				if(B in mixing)
 					dat += "<A href='?src=\ref[src];stop_mix=[i]'><font color='green'>Mixing</font></A> "
@@ -156,7 +156,7 @@
 	Interact(usr)
 
 /obj/item/gun/projectile/dartgun/medical
-	starting_chems = list(/decl/reagent/burn_meds,/decl/reagent/brute_meds,/decl/reagent/antitoxins)
+	starting_chems = list(/decl/material/burn_meds,/decl/material/brute_meds,/decl/material/antitoxins)
 
 /obj/item/gun/projectile/dartgun/raider
-	starting_chems = list(/decl/reagent/psychoactives,/decl/reagent/sedatives,/decl/reagent/narcotics)
+	starting_chems = list(/decl/material/psychoactives,/decl/material/sedatives,/decl/material/narcotics)

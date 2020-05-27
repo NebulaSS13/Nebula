@@ -641,7 +641,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(germ_level < INFECTION_LEVEL_TWO)
 		return ..()
 
-	var/antibiotics = REAGENT_VOLUME(owner.reagents, /decl/reagent/antibiotics)
+	var/antibiotics = REAGENT_VOLUME(owner.reagents, /decl/material/antibiotics)
 
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		//spread the infection to internal organs
