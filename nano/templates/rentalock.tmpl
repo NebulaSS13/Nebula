@@ -1,0 +1,36 @@
+<h2>Rent-A-Lock Airlock</h2>
+{{if data.awaiting_payment}}
+	<h3>Awaiting for payment of {{:data.price}}</h3>
+	<div class='item'>
+		{{:helper.link('CANCEL', null, { "cancel" : 1 })}}
+	</div>
+{{else}}
+	{{if data.rented}}
+		<div class='item'>
+			<div class='itemLabel'>Rented by:</div>
+			<div class='itemBody'>{{:data.rented_by}}</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>Rented for:</div>
+			<div class='itemBody'>{{:data.rented_for}}</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>Lock:</div>
+			<div class='itemBody'>
+				{{if data.locked}}
+					{{:helper.link('UNLOCK', null, { "unlock" : 1 })}}
+				{{else}}
+					{{:helper.link('LOCK', null, { "lock" : 1 })}}
+				{{/if}}			
+			</div>
+		</div>
+	{{else}}
+		<h3>AVAILABLE</h3>
+	{{/if}}
+	{{if data.can_deposit}}
+		<div class='item'>
+			<div class='itemLabel'>Price:</div>
+			<div class='itemBody'>{{:data.price}}</div>
+		</div>
+	{{/if}}
+{{/if}}
