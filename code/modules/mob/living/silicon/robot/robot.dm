@@ -955,7 +955,6 @@
 	if(!LAZYLEN(module_sprites))
 		to_chat(src, "Something is badly wrong with the sprite selection. Harass a coder.")
 		CRASH("Can't setup robot icon for [src] ([src.client]). Module: [module?.name]")
-		return
 
 	icon_selected = FALSE
 	if(module_sprites.len == 1 || !client)
