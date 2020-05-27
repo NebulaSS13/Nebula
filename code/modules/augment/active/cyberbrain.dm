@@ -4,13 +4,13 @@
 	icon_state = "cyberbrain"
 	allowed_organs = list(BP_AUGMENT_HEAD)
 	augment_flags = AUGMENTATION_MECHANIC
-	var/list/stock_parts = list()
-	var/list/starting_stock_parts = list(
+	var/list/default_hardware = list(
 		/obj/item/stock_parts/computer/processor_unit/small,
 		/obj/item/stock_parts/computer/hard_drive/small,
-		/obj/item/stock_parts/computer/network_card
+		/obj/item/stock_parts/computer/network_card,
+		/obj/item/stock_parts/computer/battery_module/nano,
+		/obj/item/stock_parts/computer/tesla_link
 	)
-	var/max_hardware_size = 1
 
 /*
  *
@@ -19,99 +19,78 @@
  */
 /obj/item/organ/internal/augment/active/cyberbrain/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/interactive/ntos/implant)
-	for(var/T in starting_stock_parts)
-		stock_parts += new T(src)
 
-/obj/item/organ/internal/augment/active/cyberbrain/Destroy()
-	. = ..()
-	QDEL_NULL_LIST(stock_parts)
+	START_PROCESSING(SSobj, src)
+	set_extension(src, /datum/extension/interactive/ntos/device/implant)
+	set_extension(src, /datum/extension/assembly/modular_computer/cyberbrain)
+
+	update_icon()
+	
+	install_default_hardware()
+
+// Used to perform preset-specific hardware changes.
+/obj/item/organ/internal/augment/active/cyberbrain/proc/install_default_hardware()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	for(var/T in default_hardware)
+		assembly.try_install_component(null, new T(src))
 
 /obj/item/organ/internal/augment/active/cyberbrain/activate()
 	if(!can_activate())
 		return
 
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(!istype(os))
-		to_chat(owner, SPAN_WARNING("You seem to be lacking an NTOS capable device!"))
-		return
-
-	if(!os.on)
-		os.system_boot()
-	if(!os.on)
-		to_chat(owner, SPAN_WARNING("ERROR: NTOS failed to boot."))
-		return
-
-	os.ui_interact(owner)
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly.enabled && assembly.screen_on)
+		var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+		if(os)
+			os.ui_interact(owner)
+	else if(!assembly.enabled && assembly.screen_on)
+		assembly.turn_on(owner)
 
 /obj/item/organ/internal/augment/active/cyberbrain/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/stock_parts/computer))
-		var/obj/item/stock_parts/computer/C = W
-		if(C.hardware_size <= max_hardware_size)
-			try_install_component(user, C)
-		else
-			to_chat(user, "This component is too large for \the [src].")
-	if(isScrewdriver(W))
-		if(!stock_parts.len)
-			to_chat(user, "\the [src] doesn't have any components installed.")
-			return
-		var/list/component_names = list()
-		for(var/obj/item/stock_parts/computer/H in stock_parts)
-			component_names.Add(H.name)
-		var/choice = input(usr, "Which component do you want to uninstall?", "[src] maintenance", null) as null|anything in component_names
-
-		if(!choice)
-			return
-
-		if(!Adjacent(usr))
-			return
-
-		var/obj/item/stock_parts/computer/H = find_hardware_by_name(choice)
-		if(!H)
-			return
-
-		stock_parts -= H
-		to_chat(user, "You uninstall \the [H] from \the [src].")
-		user.put_in_hands(H)
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly.attackby(W, user))
 		return
-	. = ..()
+	return ..()
 
-/obj/item/organ/internal/augment/active/cyberbrain/proc/try_install_component(var/user, var/obj/item/stock_parts/computer/C)
-	var/can_install = FALSE
-	if(istype(C, /obj/item/stock_parts/computer/hard_drive))
-		if(has_component_type(/obj/item/stock_parts/computer/hard_drive))
-			to_chat(user, SPAN_WARNING("\the [src] already has a hard drive."))
-			return
-		can_install = TRUE
-	if(istype(C, /obj/item/stock_parts/computer/processor_unit))
-		if(has_component_type(/obj/item/stock_parts/computer/processor_unit))
-			to_chat(user, SPAN_WARNING("\the [src] already has a processor."))
-			return
-		can_install = TRUE
-	if(istype(C, /obj/item/stock_parts/computer/network_card))
-		if(has_component_type(/obj/item/stock_parts/computer/network_card))
-			to_chat(user, SPAN_WARNING("\the [src] already has a network card."))
-			return
-		can_install = TRUE
-	if(istype(C, /obj/item/stock_parts/computer/ai_slot))
-		if(has_component_type(/obj/item/stock_parts/computer/ai_slot))
-			to_chat(user, SPAN_WARNING("\the [src] already has an ai slot."))
-			return
-		can_install = TRUE
+/obj/item/organ/internal/augment/active/cyberbrain/MouseDrop(var/atom/over_object)
+	var/mob/M = usr
+	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
+		return attack_self(M)
 
-	if(can_install)
-		to_chat(user, "You install \the [C] into \the [src].")
-		stock_parts |= C
-		C.dropInto(src)
-	else
-		to_chat(user, SPAN_WARNING("\the [C] is not installable in \the [src]."))
+/obj/item/organ/internal/augment/active/cyberbrain/Process()
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	if(assembly)
+		assembly.Process()
+		if(!assembly.enabled)
+			return
 
-/obj/item/organ/internal/augment/active/cyberbrain/proc/has_component_type(var/path)
-	for(var/C in stock_parts)
-		if(istype(C, path))
-			return TRUE
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		os.Process()
 
-/obj/item/organ/internal/augment/active/cyberbrain/proc/find_hardware_by_name(var/name)
-	for(var/obj/item/stock_parts/computer/H in stock_parts)
-		if(H.name == name)
-			return H
+/*
+ *
+ * Section for assembly override for the cyberbrain.
+ *
+ */
+/datum/extension/assembly/modular_computer/cyberbrain
+	hardware_flag = PROGRAM_PDA
+	max_hardware_size = 1
+	enabled_by_default = TRUE
+	max_parts = list(
+		PART_BATTERY 	= 1,
+		PART_CPU		= 1,
+		PART_NETWORK	= 1,
+		PART_HDD		= 1,
+		PART_AI			= 1,
+		PART_TESLA		= 1
+	)
+	expected_type = /obj/item/organ/internal/augment/active/cyberbrain
+	assembly_name = "cyberbrain"
+	force_synth = TRUE
+
+/datum/extension/interactive/ntos/device/implant
+	expected_type = /obj/item/organ/internal/augment/active/cyberbrain
+
+/datum/extension/interactive/ntos/device/implant/emagged()
+	return FALSE

@@ -8,6 +8,7 @@
 	var/hardware_flag
 	var/bsod
 	var/enabled_by_default = FALSE
+	var/force_synth				// Whether or not to force issynth checks to return TRUE.
 	assembly_name = "computer"
 	max_parts = list(
 		PART_D_SLOT		= 1,
@@ -65,14 +66,14 @@
 
 	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
 	if(damage > broken_damage)
-		if(issynth)
+		if(force_synth || issynth)
 			to_chat(user, "You send an activation signal to \the [assembly_name], but it responds with an error code. It must be damaged.")
 		else
 			to_chat(user, "You press the power button, but the computer fails to boot up, displaying variety of errors before shutting down again.")
 		shutdown_device()
 		return
 	if(has_critical_parts() && has_power()) // Battery-run and charged or non-battery but powered by APC.
-		if(issynth)
+		if(force_synth || issynth)
 			to_chat(user, "You send an activation signal to \the [assembly_name], turning it on")
 		else
 			to_chat(user, "You press the power button and start up \the [assembly_name]")
@@ -80,7 +81,7 @@
 		if(os)
 			os.system_boot()
 	else // Unpowered
-		if(issynth)
+		if(force_synth || issynth)
 			to_chat(user, "You send an activation signal to \the [assembly_name] but it does not respond")
 		else
 			to_chat(user, "You press the power button but \the [assembly_name] does not respond")
