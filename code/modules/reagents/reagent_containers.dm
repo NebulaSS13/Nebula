@@ -1,7 +1,7 @@
 /obj/item/chems
 	name = "Container"
 	desc = "..."
-	icon = 'icons/obj/items/chem/beaker.dmi'
+	icon = 'icons/obj/items/chem/container.dmi'
 	icon_state = null
 	w_class = ITEM_SIZE_SMALL
 
