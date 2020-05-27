@@ -29,20 +29,12 @@
 /datum/extension/interactive/ntos/proc/get_network_status(var/specific_action = 0)
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
-		return network_card.get_signal(specific_action)
+		var/signal_power_level = NETWORK_SPEED_BASE * network_card.get_signal(specific_action)
+		if(signal_power_level > 0)
+			signal_power_level = round(Clamp(signal_power_level, 1, 3))
+		return signal_power_level
 	else
 		return 0
-
-/datum/extension/interactive/ntos/proc/get_network_speed(var/specific_action = 0)
-	switch(get_network_status(NETWORK_SOFTWAREDOWNLOAD))
-		if(0)
-			return 0
-		if(1)
-			return NETWORK_SPEED_LOWSIGNAL
-		if(2)
-			return NETWORK_SPEED_HIGHSIGNAL
-		if(3)
-			return NETWORK_SPEED_ETHERNET
 
 /datum/extension/interactive/ntos/proc/get_inserted_id()
 	var/obj/item/stock_parts/computer/card_slot/card_slot = get_component(PART_CARD)
