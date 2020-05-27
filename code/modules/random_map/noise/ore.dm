@@ -125,3 +125,43 @@
 	rare_val = 0.7
 	min_rare_ratio = 0.02
 	min_rare_ratio = 0.01
+
+/datum/random_map/noise/ore/ice
+	surface_metals = list(
+		/decl/material/ice/aspium =		list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/lukrite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/rubenium =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/trigarite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/ediroite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		MAT_IRON =              list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_ALUMINIUM =         list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MIN),
+		MAT_GOLD =              list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		MAT_SILVER =            list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		MAT_URANIUM =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+	)
+	rare_metals = list(
+		/decl/material/ice/aspium =		list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/lukrite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/rubenium =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/trigarite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/ediroite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		MAT_GOLD =              list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_SILVER =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_URANIUM =           list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_PHORON =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_OSMIUM =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_RUTILE =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+	)
+	deep_metals = list(
+		/decl/material/ice/aspium =		list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/lukrite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/rubenium =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/trigarite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		/decl/material/ice/ediroite =	list(RESOURCE_MID_MIN, RESOURCE_MID_MAX),
+		MAT_URANIUM =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		MAT_DIAMOND =           list(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX),
+		MAT_PHORON =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
+		MAT_OSMIUM =            list(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX),
+		MAT_METALLIC_HYDROGEN = list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX),
+		MAT_RUTILE =            list(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+	)
