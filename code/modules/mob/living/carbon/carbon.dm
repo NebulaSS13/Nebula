@@ -6,6 +6,8 @@
 
 	if (!default_language && species_language)
 		default_language = species_language
+	if(!isnull(species) && ispath(species.ai))
+		ai = new species.ai(src)
 	. = ..()
 
 /mob/living/carbon/Destroy()

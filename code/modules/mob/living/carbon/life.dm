@@ -31,5 +31,8 @@
 
 		. = 1
 
-		if(!client && !mind && species)
-			species.handle_npc(src)
+		// If we have an AI, and we're in a fugue state or without client.
+		// Give control to AI.
+		if(istype(ai) && ((stat & FUGUE) || (!client && !mind && species)))
+			if(ai.can_process())
+				ai.do_process()

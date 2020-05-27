@@ -110,3 +110,5 @@
 	var/list/descriptors
 
 	var/last_smelt = 0
+
+	ai = /datum/ai/human

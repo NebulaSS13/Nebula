@@ -263,6 +263,8 @@
 
 	var/manual_dexterity = DEXTERITY_FULL
 
+	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs. This will override mob AIs.
+
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
@@ -514,10 +516,6 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		if(attack.shredding)
 			return 1
 	return 0
-
-// Called in life() when the mob has no client.
-/datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
-	return
 
 /datum/species/proc/handle_vision(var/mob/living/carbon/human/H)
 	var/list/vision = H.get_accumulated_vision_handlers()

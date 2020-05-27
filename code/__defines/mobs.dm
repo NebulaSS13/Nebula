@@ -2,6 +2,7 @@
 #define CONSCIOUS   0
 #define UNCONSCIOUS 1
 #define DEAD        2
+#define FUGUE       4
 
 // Bitflags defining which status effects could be or are inflicted on a mob.
 #define CANSTUN     0x1

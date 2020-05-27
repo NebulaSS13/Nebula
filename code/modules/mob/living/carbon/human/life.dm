@@ -81,9 +81,11 @@
 
 		handle_medical_side_effects()
 
-		if(!client && !mind)
-			species.handle_npc(src)
-
+		// If we have an AI, and we're in a fugue state or without client.
+		// Give control to AI.
+		if(istype(ai) && ((stat & FUGUE) || (!client && !mind && species)))
+			if(ai.can_process())
+				ai.do_process()
 
 	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
