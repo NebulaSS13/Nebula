@@ -12,6 +12,7 @@
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
+#define ENABLE_AI	0x8000	// Regardless of player control, the mob is using AI.
 
 #define BORGMESON 0x1
 #define BORGTHERM 0x2

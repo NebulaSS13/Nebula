@@ -31,8 +31,8 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	hud_type = /datum/hud/diona_nymph
 
-	var/emote_prob = 1
-	var/wander_prob = 33
+	ai = /datum/ai/nymph
+
 	var/obj/item/hat
 	var/obj/item/holding_item
 	var/mob/living/carbon/alien/diona/next_nymph
@@ -56,8 +56,6 @@
 
 /mob/living/carbon/alien/diona/sterile
 	name = "sterile nymph"
-	emote_prob =  0
-	wander_prob = 0
 
 /mob/living/carbon/alien/diona/sterile/Initialize(var/mapload)
 	. = ..(mapload, 0)
@@ -90,11 +88,3 @@
 
 /mob/living/carbon/alien/diona/has_dexterity()
 	return FALSE
-
-/mob/living/carbon/alien/diona/proc/handle_npc(var/mob/living/carbon/alien/diona/D)
-	if(D.stat != CONSCIOUS)
-		return
-	if(prob(wander_prob) && !LAZYLEN(grabbed_by) && isturf(D.loc)) //won't move if being pulled
-		SelfMove(pick(GLOB.cardinal))
-	if(prob(emote_prob))
-		D.emote(pick("scratch","jump","chirp","tail"))
