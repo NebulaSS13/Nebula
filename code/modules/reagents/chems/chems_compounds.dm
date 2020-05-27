@@ -428,10 +428,10 @@
 	taste_description = "sharpness"
 	color = "#13bc5e"
 
-/decl/material/chem/crystal/proc/do_material_check(var/mob/living/carbon/M)
+/decl/material/chem/crystal_agent/proc/do_material_check(var/mob/living/carbon/M)
 	. = MAT_CRYSTAL
 
-/decl/material/chem/crystal/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/crystal_agent/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/result_mat = do_material_check(M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M

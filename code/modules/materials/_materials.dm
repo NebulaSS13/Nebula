@@ -415,7 +415,7 @@
 	. = supplied
 
 	if(cocktail_ingredient)
-		for(var/decl/cocktail/cocktail in SSchemistry.get_cocktails_by_primary_ingredient(type))
+		for(var/decl/cocktail/cocktail in SSmaterials.get_cocktails_by_primary_ingredient(type))
 			if(cocktail.matches(prop))
 				return cocktail.get_presentation_name(prop)
 

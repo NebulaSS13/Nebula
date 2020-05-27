@@ -45,7 +45,7 @@
 			else
 				to_chat(user, "<span class='notice'>You remove the label.</span>")
 				label_text = null
-				SSchemistry.queue_reagent_change(src)
+				SSmaterials.queue_reagent_change(src)
 		return
 
 

@@ -52,7 +52,7 @@
 			if(mat.gas_flags & XGM_GAS_CONTAMINANT)
 				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 	if(prob(50))
-		var/chem_type = SSchemistry.get_random_chem(TRUE, atmosphere ? atmosphere.temperature : T0C)
+		var/chem_type = SSmaterials.get_random_chem(TRUE, atmosphere ? atmosphere.temperature : T0C)
 		if(chem_type)
 			var/nutriment = S.chems[/decl/material/chem/nutriment]
 			S.chems.Cut()

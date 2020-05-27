@@ -6,7 +6,7 @@
 
 	var/list/entries_to_register = list()
 	for(var/reactiontype in subtypesof(/datum/chemical_reaction/grenade_reaction))
-		var/datum/chemical_reaction/grenade_reaction/boom = SSchemistry.chemical_reactions[reactiontype]
+		var/datum/chemical_reaction/grenade_reaction/boom = SSmaterials.chemical_reactions[reactiontype]
 		if(!boom || !boom.name || boom.hidden_from_codex)
 			continue
 		var/mechanics_text = "It can be caused with the following reagents:"
@@ -49,7 +49,7 @@
 		 _lore_text = new_lore_text)
 
 		var/list/production_strings = list()
-		for(var/react in SSchemistry.chemical_reactions_by_result[thing])
+		for(var/react in SSmaterials.chemical_reactions_by_result[thing])
 
 			var/datum/chemical_reaction/reaction = react
 

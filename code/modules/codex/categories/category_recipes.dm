@@ -21,7 +21,7 @@
 		</ul>"}
 
 	for(var/reactiontype in subtypesof(/datum/chemical_reaction/recipe))
-		var/datum/chemical_reaction/recipe/food = SSchemistry.chemical_reactions[reactiontype]
+		var/datum/chemical_reaction/recipe/food = SSmaterials.chemical_reactions[reactiontype]
 		if(!food || !food.name || food.hidden_from_codex)
 			continue
 

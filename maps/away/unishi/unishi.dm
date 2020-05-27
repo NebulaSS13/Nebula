@@ -126,7 +126,7 @@ obj/item/paper/prof2
 
 /decl/material/chem/toxin/phoron/safe
 	name = "tericadone"
-	description = "Phoron substitute currently in labratory testing"
+	lore_text = "A phoron substitute currently in labratory testing"
 	taste_mult = 1.5
 	color = "#ffc4ff"
 

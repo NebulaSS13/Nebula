@@ -96,7 +96,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 					playsound(my_atom, replace_sound, 80, 1)
 
 		else // Otherwise, collect all possible reactions.
-			eligible_reactions |= SSchemistry.chemical_reactions_by_id[R.type]
+			eligible_reactions |= SSmaterials.chemical_reactions_by_id[R.type]
 
 	var/list/active_reactions = list()
 
@@ -163,7 +163,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	if(!safety)
 		HANDLE_REACTIONS(src)
 	if(my_atom)
-		SSchemistry.queue_reagent_change(my_atom)
+		SSmaterials.queue_reagent_change(my_atom)
 
 	return TRUE
 
@@ -175,7 +175,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	if(!safety)
 		HANDLE_REACTIONS(src)
 	if(my_atom)
-		SSchemistry.queue_reagent_change(my_atom)
+		SSmaterials.queue_reagent_change(my_atom)
 	return TRUE
 
 /datum/reagents/proc/clear_reagent(var/reagent_type)
@@ -187,7 +187,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			primary_reagent = null
 		update_total()
 		if(my_atom)
-			SSchemistry.queue_reagent_change(my_atom)
+			SSmaterials.queue_reagent_change(my_atom)
 
 /datum/reagents/proc/has_reagent(var/reagent_type, var/amount)
 	. = REAGENT_VOLUME(src, reagent_type)
