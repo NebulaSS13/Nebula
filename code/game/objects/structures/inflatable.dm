@@ -108,22 +108,16 @@
 	if(QDELETED(src))
 		return PROJECTILE_CONTINUE
 
-/obj/structure/inflatable/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			deflate(1)
-			return
-		if(3.0)
-			if(prob(50))
-				deflate(1)
-				return
+/obj/structure/inflatable/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		if(severity == 1)
+			physically_destroyed()
+		else if(severity == 2 || (severity == 3 && prob(50)))
+			deflate(TRUE)
 
 /obj/structure/inflatable/attack_hand(mob/user)
 	add_fingerprint(user)
-	return
 
 /obj/structure/inflatable/can_repair_with(obj/item/tool)
 	. = istype(tool, /obj/item/tape_roll) && (health < maxhealth)
@@ -149,7 +143,8 @@
 
 	return FALSE
 
-/obj/structure/inflatable/destroyed()
+/obj/structure/inflatable/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	. = deflate(1)
 
 /obj/structure/inflatable/CtrlClick()

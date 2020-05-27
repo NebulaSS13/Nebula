@@ -332,25 +332,19 @@
 	if(. && new_state)
 		visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
 
-/obj/machinery/door/ex_act(severity)
-	switch(severity)
-		if(1)
+/obj/machinery/door/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		if(severity == 1 || (severity == 2 && prob(25)))
 			qdel(src)
-		if(2)
-			if(prob(25))
-				qdel(src)
-			else
-				take_damage(100)
-			take_damage(200)
-		if(3)
+		else
+			if(severity == 2)
+				take_damage(200)
+			take_damage(100)
 			if(prob(80))
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(2, 1, src)
 				s.start()
-			else
-				take_damage(100)
-			take_damage(100)
-
 
 /obj/machinery/door/on_update_icon()
 	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))

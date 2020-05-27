@@ -10,7 +10,7 @@
 /obj/effect/overmap/visitable/merc_base
 	name = "TCV Tersten Tenacity"
 	desc = "Sensor array detects a medium cargo vessel with high structural damage."
-	in_space = 1
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 	icon_state = "ship"
 	hide_from_reports = TRUE
 	initial_generic_waypoints = list(

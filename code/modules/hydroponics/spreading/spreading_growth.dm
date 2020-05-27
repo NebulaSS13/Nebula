@@ -39,7 +39,7 @@
 
 		if(floor.density)
 			if(!isnull(seed.chems[/decl/reagent/acid/polyacid]))
-				spawn(rand(5,25)) floor.ex_act(3)
+				spawn(rand(5,25)) floor.explosion_act(3)
 			continue
 
 		if(!Adjacent(floor) || !floor.Enter(src))
@@ -93,7 +93,7 @@
 		//Try to settle down
 		if(can_spawn_plant())
 			plant = new(T,seed)
-			plant.dir = src.dir
+			plant.set_dir(dir)
 			plant.transform = src.transform
 			plant.age = seed.get_trait(TRAIT_MATURATION)-1
 			plant.update_icon()
@@ -133,7 +133,7 @@
 		child.update_icon()
 		// Some plants eat through plating.
 		if(islist(seed.chems) && !isnull(seed.chems[/decl/reagent/acid/polyacid]))
-			target_turf.ex_act(prob(80) ? 3 : 2)
+			target_turf.explosion_act(prob(80) ? 3 : 2)
 	else
 		qdel(child)
 

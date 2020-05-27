@@ -209,7 +209,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/chems/food/snacks/attack_generic(var/mob/living/user)
+/obj/item/chems/food/snacks/attack_animal(var/mob/living/user)
 	if(!isanimal(user) && !isalien(user))
 		return
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
@@ -251,9 +251,7 @@
 	bitesize = 3
 /obj/item/chems/food/snacks/aesirsalad/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/reagent/drink/doctor_delight, 8)
 	reagents.add_reagent(/decl/reagent/regenerator, 8)
-
 
 /obj/item/chems/food/snacks/egg
 	name = "egg"
@@ -514,7 +512,11 @@
 	name = "\improper Sin-pocket"
 	desc = "The food of choice for the veteran. Do <b>NOT</b> overconsume."
 	filling_color = "#6d6d00"
-	heated_reagents = list(/decl/reagent/drink/doctor_delight = 5, /decl/reagent/amphetamines = 0.75, /decl/reagent/stimulants = 0.25)
+	heated_reagents = list(
+		/decl/reagent/regenerator = 5, 
+		/decl/reagent/amphetamines = 0.75, 
+		/decl/reagent/stimulants = 0.25
+	)
 	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
 
 /obj/item/chems/food/snacks/donkpocket/sinpocket/attack_self(mob/user)
@@ -3235,7 +3237,6 @@
 	.=..()
 	reagents.add_reagent(/decl/reagent/nutriment/sugar, 4)
 
-
 /obj/item/chems/food/snacks/cheesiehonkers
 	name = "cheese puffs"
 	icon_state = "cheesie_honkers"
@@ -3260,7 +3261,7 @@
 
 /obj/item/chems/food/snacks/syndicake/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/reagent/drink/doctor_delight, 5)
+	reagents.add_reagent(/decl/reagent/regenerator, 5)
 
 //terran delights
 
@@ -3289,7 +3290,7 @@
 /obj/item/chems/food/snacks/squid
 	name = "\improper Calamari Crisps"
 	icon_state = "squid"
-	desc = "Space squid tentacles, Carefully removed (from the squid) then dried into strips of delicious rubbery goodness!"
+	desc = "Space cepholapod tentacles, carefully removed from the squid then dried into strips of delicious rubbery goodness!"
 	trash = /obj/item/trash/squid
 	filling_color = "#c0a9d7"
 	center_of_mass = @"{'x':15,'y':9}"

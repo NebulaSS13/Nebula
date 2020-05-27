@@ -3455,7 +3455,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/effect/fluid_mapped/fuel,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/bearcat/maintenance/engineering)
 "io" = (
@@ -3641,7 +3641,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/effect/fluid_mapped/fuel,
 /obj/machinery/vending/cigarette,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/bearcat/maintenance/engineering)
@@ -3651,7 +3651,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/effect/fluid_mapped/fuel,
 /obj/structure/sign/warning/nosmoking_1{
 	pixel_y = -32
 	},
@@ -4173,12 +4173,10 @@
 /area/ship/bearcat/maintenance/engine/aft)
 "jJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4188,8 +4186,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 6
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4203,18 +4200,16 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/ship/bearcat/maintenance/engine/aft)
 "jM" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
@@ -4315,8 +4310,7 @@
 /area/ship/bearcat/maintenance/engine/aft)
 "jW" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4398,25 +4392,24 @@
 /turf/simulated/floor/plating,
 /area/ship/bearcat/maintenance/engine/aft)
 "ki" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 5
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
 /area/ship/bearcat/maintenance/engine/aft)
 "kj" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
 /turf/simulated/floor/reinforced,
 /area/ship/bearcat/maintenance/engine/aft)
 "kk" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /obj/machinery/atmospherics/unary/vent_pump/engine{
 	dir = 4;
 	external_pressure_bound = 4000;
@@ -4428,8 +4421,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
@@ -4438,8 +4430,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "rwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -5213,7 +5204,6 @@
 	icon_state = "tube1";
 	dir = 8
 	},
-/obj/item/gun/energy/stunrevolver,
 /obj/structure/closet/cabinet,
 /obj/item/storage/secure/briefcase,
 /obj/item/taperecorder,

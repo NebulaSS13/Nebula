@@ -17,9 +17,9 @@
 	desc = "A yellow folder."
 	icon_state = "folder_yellow"
 
-/obj/item/folder/white
-	desc = "A white folder."
-	icon_state = "folder_white"
+/obj/item/folder/cyan
+	desc = "A cyan folder."
+	icon_state = "folder_cyan"
 
 /obj/item/folder/on_update_icon()
 	overlays.Cut()

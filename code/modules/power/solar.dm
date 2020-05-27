@@ -142,27 +142,21 @@ var/list/solars_list = list()
 		S.glass_type = null
 		unset_control()
 
-/obj/machinery/power/solar/ex_act(severity)
-	switch(severity)
-		if(1.0)
+/obj/machinery/power/solar/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src))
+		if(severity == 1)
 			if(prob(15))
 				new /obj/item/material/shard( src.loc )
-			qdel(src)
-			return
-
-		if(2.0)
+			physically_destroyed(src)
+		else if(severity == 2)
 			if (prob(25))
 				new /obj/item/material/shard( src.loc )
-				qdel(src)
-				return
-
-			if (prob(50))
+				physically_destroyed(src)
+			else if (prob(50))
 				set_broken(TRUE)
-
-		if(3.0)
-			if (prob(25))
-				set_broken(TRUE)
-	return
+		else if(severity == 3 && prob(25))
+			set_broken(TRUE)
 
 
 /obj/machinery/power/solar/fake/Initialize(mapload, var/obj/item/solar_assembly/S)
@@ -477,18 +471,13 @@ var/list/solars_list = list()
 		S.update_icon() //update it
 	update_icon()
 
-/obj/machinery/power/solar_control/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			//SN src = null
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				set_broken(TRUE)
-		if(3.0)
-			if (prob(25))
-				set_broken(TRUE)
+/obj/machinery/power/solar_control/explosion_act(severity)
+	. = ..()
+	if(.)
+		if(severity == 1)
+			physically_destroyed()
+		else if((severity == 2 && prob(50)) || (severity == 3 && prob(25)))
+			set_broken(TRUE)
 
 // Used for mapping in solar array which automatically starts itself (telecomms, for example)
 /obj/machinery/power/solar_control/autostart

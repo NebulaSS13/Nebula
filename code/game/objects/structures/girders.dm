@@ -56,14 +56,6 @@
 	. = ..()
 	anchored = prob(50)
 
-/obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
-	if(!damage || !wallbreaker)
-		return FALSE
-	attack_animation(user)
-	visible_message(SPAN_DANGER("\The [user] [attack_message] \the [src]!"))
-	dismantle()
-	return TRUE
-
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 	
 	var/effective_cover = cover
@@ -186,7 +178,7 @@
 	if(S.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You will need at least 2 sheets to reinforce \the [src]."))
 		return TRUE
-	var/material/M = S.material
+	var/decl/material/M = S.material
 	if(!istype(M) || M.integrity < 50)
 		to_chat(user, SPAN_WARNING("You cannot reinforce \the [src] with [M.display_name]; it is too soft."))
 		return TRUE
@@ -206,21 +198,10 @@
 	return ..()
 
 
-/obj/structure/girder/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(30))
-				dismantle()
-			return
-		if(3.0)
-			if (prob(5))
-				dismantle()
-			return
-		else
-	return
+/obj/structure/girder/explosion_act(severity)
+	..()
+	if(severity == 1 || (severity == 2 && prob(30)) || (severity == 3 && prob(5)))
+		physically_destroyed()
 
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'

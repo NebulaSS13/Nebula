@@ -110,12 +110,12 @@
 	heating_point = null
 	heating_products = null
 	value = 4
-	fuel_value = 5
+	fuel_value = 2
 
 /decl/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
 	if(prob(10 * fuel_value))
-		M.pl_effects()
+		M.handle_contaminants()
 
 /decl/reagent/toxin/phoron/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(!istype(T))
@@ -129,7 +129,7 @@
 	name = "oxyphoron"
 	description = "An exceptionally flammable molecule formed from deuterium synthesis."
 	strength = 15
-	fuel_value = 15
+	fuel_value = 2.5
 
 /decl/reagent/toxin/phoron/oxygen/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(!istype(T))

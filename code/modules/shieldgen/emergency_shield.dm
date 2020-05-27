@@ -67,18 +67,10 @@
 	set_opacity(1)
 	spawn(20) if(!QDELETED(src)) set_opacity(0)
 
-/obj/machinery/shield/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			if (prob(75))
-				qdel(src)
-		if(2.0)
-			if (prob(50))
-				qdel(src)
-		if(3.0)
-			if (prob(25))
-				qdel(src)
-	return
+/obj/machinery/shield/explosion_act(severity)
+	. = ..()
+	if(. && ((severity == 1 && prob(75)) || (severity == 2 && prob(50)) || (severity == 3 && prob(25))))
+		physically_destroyed()
 
 /obj/machinery/shield/emp_act(severity)
 	switch(severity)
@@ -87,7 +79,6 @@
 		if(2)
 			if(prob(50))
 				qdel(src)
-
 
 /obj/machinery/shield/hitby(AM, var/datum/thrownthing/TT)
 	//Let everyone know we've been hit!
@@ -123,7 +114,7 @@
 	density = 1
 	opacity = 0
 	anchored = 0
-	req_access = list(access_engine)
+	initial_access = list(access_engine)
 	var/const/max_health = 100
 	var/health = max_health
 	var/active = 0
@@ -223,20 +214,18 @@
 	update_icon()
 	return
 
-/obj/machinery/shieldgen/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			src.health -= 75
-			src.checkhp()
-		if(2.0)
-			src.health -= 30
-			if (prob(15))
-				src.malfunction = 1
-			src.checkhp()
-		if(3.0)
-			src.health -= 10
-			src.checkhp()
-	return
+/obj/machinery/shieldgen/explosion_act(severity)
+	. = ..()
+	if(.)
+		if(severity == 1)
+			health -= 75
+		else if(severity == 2)
+			health -= 30
+			if(prob(15))
+				malfunction = 1
+		else if(severity == 3)
+			health -= 10
+		checkhp()
 
 /obj/machinery/shieldgen/emp_act(severity)
 	switch(severity)

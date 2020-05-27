@@ -37,14 +37,9 @@
 		return 1
 	return 0
 
-/obj/effect/blob/ex_act(var/severity)
-	switch(severity)
-		if(1)
-			take_damage(rand(100, 120) / brute_resist)
-		if(2)
-			take_damage(rand(60, 100) / brute_resist)
-		if(3)
-			take_damage(rand(20, 60) / brute_resist)
+/obj/effect/blob/explosion_act(var/severity)
+	SHOULD_CALL_PARENT(FALSE)
+	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_resist)
 
 /obj/effect/blob/on_update_icon()
 	if(health > maxHealth / 2)
@@ -92,7 +87,7 @@
 		return
 	for(var/obj/machinery/door/D in T) // There can be several - and some of them can be open, locate() is not suitable
 		if(D.density)
-			D.ex_act(2)
+			D.explosion_act(2)
 			return
 	var/obj/structure/foamedmetal/F = locate() in T
 	if(F)
@@ -105,7 +100,7 @@
 
 	var/obj/vehicle/V = locate() in T
 	if(V)
-		V.ex_act(2)
+		V.explosion_act(2)
 		return
 	var/obj/machinery/camera/CA = locate() in T
 	if(CA)

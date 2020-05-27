@@ -363,7 +363,7 @@
 	dir = 1
 	},
 /obj/structure/table/steel,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bz" = (
@@ -471,7 +471,7 @@
 /area/icarus/vessel)
 "bO" = (
 /obj/structure/table/steel,
-/obj/item/folder/white,
+/obj/item/folder/cyan,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bP" = (
@@ -2249,19 +2249,17 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ho" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /obj/machinery/door/blast/regular{
 	dir = 4;
 	id_tag = "d1starboardnacelle"
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /obj/structure/grille,
@@ -2356,11 +2354,10 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hB" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /obj/structure/grille,
@@ -2402,12 +2399,11 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hG" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
+/obj/structure/window/borosilicate_reinforced,
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /obj/structure/grille,

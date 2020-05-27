@@ -1,4 +1,4 @@
-#if !defined(using_map_DATUM)
+#if !defined(USING_MAP_DATUM)
 
 	#include "..\..\mods\misc\mundane.dm"
 	#include "..\..\mods\corporate\_corporate.dme"
@@ -17,7 +17,7 @@
 	#include "example-2.dmm"
 	#include "example-3.dmm"
 
-	#define using_map_DATUM /datum/map/example
+	#define USING_MAP_DATUM /datum/map/example
 
 #elif !defined(MAP_OVERRIDE)
 

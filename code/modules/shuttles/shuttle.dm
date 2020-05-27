@@ -156,6 +156,32 @@
 	destination.shuttle_arrived(src)
 	return TRUE
 
+// Attempts to force move the shuttle with minimal checks.
+// In ideal use, none of the checks fail and this is a standard move to location while overriding any movement time or fuel checks.
+// Anything in the arrival area will be destroyed with no warning. Use sparingly.
+/datum/shuttle/proc/attempt_force_move(var/obj/effect/shuttle_landmark/destination)
+	if(current_location == destination)
+		log_error("Error when attempting to force move a shuttle: Attempted to move [src] to its current location [destination].")
+		return FALSE
+	if(destination.shuttle_restricted != name)
+		log_error("Error when attempting to force move a shuttle: Destination location not restricted for [src]'s use.")
+		return FALSE
+	
+	testing("Force moving [src] to [destination]. Areas are [english_list(shuttle_area)]")
+	var/list/translation = list()
+
+	for(var/area/A in shuttle_area)
+		testing("Moving [A]")
+		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
+	var/obj/effect/shuttle_landmark/old_location = current_location
+	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
+	shuttle_moved(destination, translation)
+	GLOB.shuttle_moved_event.raise_event(src, old_location, destination)
+	if(istype(old_location))
+		old_location.shuttle_departed(src)
+	destination.shuttle_arrived(src)
+	return TRUE
+
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. shuttle_moved() must absolutely not, under any circumstances, fail to move the shuttle.
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump(), long_jump() or attempt_move()

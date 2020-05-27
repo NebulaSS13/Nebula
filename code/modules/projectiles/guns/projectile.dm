@@ -33,6 +33,7 @@
 
 	var/is_jammed = 0           //Whether this gun is jammed
 	var/jam_chance = 0          //Chance it jams on fire
+	var/ammo_indicator	   //if true, draw ammo indicator overlays
 	//TODO generalize ammo icon states for guns
 	//var/magazine_states = 0
 	//var/list/icon_keys = list()		//keys
@@ -258,6 +259,20 @@
 	if(chambered)
 		bullets += 1
 	return bullets
+
+/obj/item/gun/projectile/on_update_icon()
+	..()
+	if(ammo_indicator)
+		overlays += get_ammo_indicator()
+	
+/obj/item/gun/projectile/proc/get_ammo_indicator()
+	var/base_state = get_world_inventory_state()
+	if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
+		return get_mutable_overlay(icon, "[base_state]_ammo_bad")
+	else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+		return get_mutable_overlay(icon, "[base_state]_ammo_warn") 
+	else
+		return get_mutable_overlay(icon, "[base_state]_ammo_ok") 
 
 /* Unneeded -- so far.
 //in case the weapon has firemodes and can't unload using attack_hand()

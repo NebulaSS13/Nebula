@@ -16,18 +16,24 @@
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 	sharp = TRUE
+	applies_material_colour = TRUE
 
 	var/build_from_parts = TRUE
 	var/valid_colours = list(COLOR_RED, COLOR_CYAN_BLUE, COLOR_PURPLE, COLOR_CHESTNUT, COLOR_GREEN, COLOR_TEAL, COLOR_ASSEMBLY_YELLOW, COLOR_BOTTLE_GREEN, COLOR_VIOLET, COLOR_GRAY80, COLOR_GRAY20)
+	var/handle_color
 
 /obj/item/screwdriver/Initialize()
-	if(build_from_parts)
-		icon_state = "screwdriver_handle"
-		color = pick(valid_colours)
-		overlays += overlay_image(icon, "screwdriver_hardware", flags=RESET_COLOR)
 	if (prob(75))
 		src.pixel_y = rand(0, 16)
 	. = ..()
+
+/obj/item/screwdriver/on_update_icon()
+	..()
+	if(build_from_parts)
+		icon_state = "hardware"
+		if(!handle_color)
+			handle_color = pick(valid_colours)
+		overlays += overlay_image(icon, "handle", handle_color, flags=RESET_COLOR)
 
 /obj/item/screwdriver/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M) || user.a_intent == "help")
@@ -37,3 +43,6 @@
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
 		M = user
 	return eyestab(M,user)
+
+/obj/item/screwdriver/gold
+	material = MAT_GOLD

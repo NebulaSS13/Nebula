@@ -124,7 +124,7 @@
 	for(var/datum/omni_port/P in ports)
 		if(P.update)
 			var/ref_layer = 0
-			switch(P.dir)
+			switch(P.direction)
 				if(NORTH)
 					ref_layer = 1
 				if(SOUTH)
@@ -157,7 +157,7 @@
 		return
 
 	if(P.mode > 0)
-		var/ic_dir = dir_name(P.dir)
+		var/ic_dir = dir_name(P.direction)
 		var/ic_on = ic_dir
 		var/ic_off = ic_dir
 		switch(P.mode)
@@ -179,11 +179,11 @@
 		if(!istype(T))
 			return
 		if(!T.is_plating() && istype(P.node, /obj/machinery/atmospherics/pipe) && P.node.level == 1 )
-			//pipe_state = icon_manager.get_atmos_icon("underlay_down", P.dir, color_cache_name(P.node))
-			pipe_state = icon_manager.get_atmos_icon("underlay", P.dir, color_cache_name(P.node), "down")
+			//pipe_state = icon_manager.get_atmos_icon("underlay_down", P.direction, color_cache_name(P.node))
+			pipe_state = icon_manager.get_atmos_icon("underlay", P.direction, color_cache_name(P.node), "down")
 		else
-			//pipe_state = icon_manager.get_atmos_icon("underlay_intact", P.dir, color_cache_name(P.node))
-			pipe_state = icon_manager.get_atmos_icon("underlay", P.dir, color_cache_name(P.node), "intact")
+			//pipe_state = icon_manager.get_atmos_icon("underlay_intact", P.direction, color_cache_name(P.node))
+			pipe_state = icon_manager.get_atmos_icon("underlay", P.direction, color_cache_name(P.node), "intact")
 
 		return list("on_icon" = ic_on, "off_icon" = ic_off, "pipe_icon" = pipe_state)
 
@@ -229,7 +229,7 @@
 	for(var/datum/omni_port/P in ports)
 		if(P.node || P.mode == 0)
 			continue
-		for(var/obj/machinery/atmospherics/target in get_step(src, P.dir))
+		for(var/obj/machinery/atmospherics/target in get_step(src, P.direction))
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
 					P.node = target

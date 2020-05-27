@@ -1,4 +1,4 @@
-/material/uranium
+/decl/material/uranium
 	display_name = "uranium"
 	lore_text = "A highly radioactive metal. Commonly used as fuel in fission reactors."
 	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
@@ -12,16 +12,15 @@
 	icon_colour = "#007a00"
 	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':5}"
-	chem_products = list(
-				/decl/reagent/uranium = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/uranium = 1
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_MATTE
-	sale_price = 2
-	value = 100
+	value = 1.5
 	removed_by_welder = TRUE
 
-/material/gold
+/decl/material/gold
 	display_name = "gold"
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	wall_name = "bulkhead"
@@ -33,9 +32,9 @@
 	stack_origin_tech = "{'materials':4}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-				/decl/reagent/gold = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/gold = 1
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_SHINY
 	ore_smelts_to = MAT_GOLD
@@ -44,11 +43,12 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "nugget"
-	sale_price = 3
-	value = 40	
+	value = 1.6
 	removed_by_welder = TRUE
+	sparse_material_weight = 8
+	rich_material_weight = 10
 
-/material/gold/bronze //placeholder for ashtrays
+/decl/material/gold/bronze //placeholder for ashtrays
 	display_name = "bronze"
 	lore_text = "An alloy of copper and tin."
 	reflectiveness = MAT_VALUE_SHINY
@@ -56,9 +56,11 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = null
 	ore_compresses_to = null
-	sale_price = null
+	value = 1.2
+	sparse_material_weight = null
+	rich_material_weight = null
 
-/material/copper
+/decl/material/copper
 	display_name = "copper"
 	wall_name = "bulkhead"
 	icon_colour = COLOR_COPPER
@@ -68,10 +70,10 @@
 	stack_origin_tech = "{'materials':2}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-		/decl/reagent/copper = 12,
-		/decl/reagent/silver = 8
-		)
+	chemical_makeup = list(
+		/decl/reagent/copper = 0.6,
+		/decl/reagent/silver = 0.4
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_COPPER
 	ore_result_amount = 5
@@ -79,10 +81,9 @@
 	ore_name = "tetrahedrite"
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "shiny"
-	sale_price = 1
 	removed_by_welder = TRUE
 
-/material/silver
+/decl/material/silver
 	display_name = "silver"
 	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
 	wall_name = "bulkhead"
@@ -94,9 +95,9 @@
 	stack_origin_tech = "{'materials':3}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chem_products = list(
-				/decl/reagent/silver = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/silver = 1
+	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_smelts_to = MAT_SILVER
 	ore_result_amount = 5
@@ -104,11 +105,12 @@
 	ore_name = "native silver"
 	ore_scan_icon = "mineral_uncommon"
 	ore_icon_overlay = "shiny"
-	sale_price = 2
-	value = 35
 	removed_by_welder = TRUE
+	value = 1.2
+	sparse_material_weight = 8
+	rich_material_weight = 10
 
-/material/steel
+/decl/material/steel
 	display_name = "steel"
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	wall_name = "bulkhead"
@@ -120,65 +122,61 @@
 	icon_reinf = "reinf_over"
 	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
-	chem_products = list(
-				/decl/reagent/iron = 19.6,
-				/decl/reagent/carbon = 0.4
-				)
+	chemical_makeup = list(
+		/decl/reagent/iron = 0.98,
+		/decl/reagent/carbon = 0.02
+	)
 	alloy_materials = list(MAT_IRON = 1875, MAT_GRAPHITE = 1875)
 	alloy_product = TRUE
-	sale_price = 1
 	ore_smelts_to = MAT_STEEL
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_SHINY
-	value = 4
 	removed_by_welder = TRUE
+	value = 1.1
 
-/material/steel/holographic
+/decl/material/steel/holographic
 	display_name = "holographic steel"
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
 	alloy_materials = null
 	alloy_product = FALSE
-	sale_price = null
 	hidden_from_codex = TRUE
 	value = 0
 
-/material/steel/holographic/get_recipes(reinf_mat)
+/decl/material/steel/holographic/get_recipes(reinf_mat)
 	return list()
 
-/material/aluminium
+/decl/material/aluminium
 	display_name = "aluminium"
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/aluminium
-	chem_products = list(
-				/decl/reagent/aluminium = 20
-				)
+	chemical_makeup = list(
+		/decl/reagent/aluminium = 1
+	)
 	integrity = 125
 	weight = MAT_VALUE_LIGHT
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
-	sale_price = 1
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
 
-/material/aluminium/holographic
+/decl/material/aluminium/holographic
 	display_name = "holoaluminium"
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
 	alloy_materials = null
 	alloy_product = FALSE
-	sale_price = null
 	hidden_from_codex = TRUE
 
-/material/aluminium/holographic/get_recipes(reinf_mat)
+/decl/material/aluminium/holographic/get_recipes(reinf_mat)
 	return list()
 
-/material/plasteel
+/decl/material/plasteel
 	display_name = "plasteel"
 	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	wall_name = "bulkhead"
@@ -198,13 +196,12 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	alloy_materials = list(MAT_STEEL = 2500, MAT_PLATINUM = 1250)
 	alloy_product = TRUE
-	sale_price = 2
 	ore_smelts_to = MAT_PLASTEEL
-	value = 12
+	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE
 
-/material/plasteel/titanium
+/decl/material/plasteel/titanium
 	display_name = "titanium"
 	lore_text = "A light, strong, corrosion-resistant metal. Perfect for cladding high-velocity ballistic supply pods."
 	brute_armor = 10
@@ -220,10 +217,10 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_materials = null
 	alloy_product = FALSE
-	value = 30
 	reflectiveness = MAT_VALUE_SHINY
+	value = 1.5
 
-/material/plasteel/ocp
+/decl/material/plasteel/ocp
 	display_name = "osmium-carbide plasteel"
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
@@ -238,10 +235,10 @@
 	alloy_materials = list(MAT_PLASTEEL = 7500, MAT_OSMIUM = 3750)
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_product = TRUE
-	sale_price = 3
 	reflectiveness = MAT_VALUE_SHINY
+	value = 1.8
 
-/material/osmium
+/decl/material/osmium
 	display_name = "osmium"
 	lore_text = "An extremely hard form of platinum."
 	wall_name = "bulkhead"
@@ -251,13 +248,12 @@
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
-	sale_price = 3
 	ore_smelts_to = MAT_OSMIUM
-	value = 30
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
+	value = 1.3
 
-/material/platinum
+/decl/material/platinum
 	display_name = "platinum"
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	wall_name = "bulkhead"
@@ -275,12 +271,13 @@
 	ore_name = "raw platinum"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "shiny"
-	sale_price = 5
-	value = 80
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
+	value = 1.5
+	sparse_material_weight = 8
+	rich_material_weight = 10
 
-/material/iron
+/decl/material/iron
 	display_name = "iron"
 	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
 	wall_name = "bulkhead"
@@ -291,16 +288,14 @@
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chem_products = list(
-				/decl/reagent/iron = 20
-				)
-	sale_price = 1
-	value = 5
+	chemical_makeup = list(
+		/decl/reagent/iron = 1
+	)
 	reflectiveness = MAT_VALUE_MATTE
 	removed_by_welder = TRUE
 
 // Adminspawn only, do not let anyone get this.
-/material/voxalloy
+/decl/material/voxalloy
 	display_name = "dense alloy"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -312,19 +307,19 @@
 	weight = 500
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	hidden_from_codex = TRUE
-	value = 100
 	reflectiveness = MAT_VALUE_SHINY
 	removed_by_welder = TRUE
+	value = 3
 
 // Likewise.
-/material/voxalloy/elevatorium
+/decl/material/voxalloy/elevatorium
 	display_name = "elevator panelling"
 	wall_name = "bulkhead"
 	icon_colour = "#666666"
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	hidden_from_codex = TRUE
 
-/material/aliumium
+/decl/material/aliumium
 	display_name = "alien alloy"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -338,8 +333,9 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	hidden_from_codex = TRUE
 	removed_by_welder = TRUE
+	value = 2.5
 
-/material/aliumium/New()
+/decl/material/aliumium/New()
 	icon_base = "metal"
 	icon_colour = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
@@ -351,10 +347,10 @@
 	melting_point = rand(400,10000)
 	..()
 
-/material/aliumium/place_dismantled_girder(var/turf/target, var/material/reinf_material)
+/decl/material/aliumium/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
 	return
 
-/material/hematite
+/decl/material/hematite
 	display_name = "hematite"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -365,10 +361,12 @@
 	ore_scan_icon = "mineral_common"
 	ore_name = "hematite"
 	ore_icon_overlay = "lump"
-	sale_price = 1
 	removed_by_welder = TRUE
+	value = 0.8
+	sparse_material_weight = 35
+	rich_material_weight = 20
 
-/material/rutile
+/decl/material/rutile
 	display_name = "rutile"
 	wall_name = "bulkhead"
 	stack_type = null
@@ -379,5 +377,7 @@
 	ore_scan_icon = "mineral_uncommon"
 	ore_name = "rutile"
 	ore_icon_overlay = "lump"
-	sale_price = 2
 	removed_by_welder = TRUE
+	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1

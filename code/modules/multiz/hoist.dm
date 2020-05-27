@@ -117,7 +117,7 @@
 
 /obj/structure/hoist/Initialize(mapload, ndir)
 	. = ..()
-	dir = ndir
+	set_dir(ndir)
 	var/turf/newloc = get_step(src, dir)
 	source_hook = new(newloc)
 	source_hook.source_hoist = src
@@ -157,37 +157,21 @@
 		release_hoistee()
 	QDEL_NULL(source_hook)
 
-/obj/structure/hoist/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if(prob(50))
-				qdel(src)
-			else
-				visible_message("\The [src] shakes violently, and neatly collapses as its damage sensors go off.")
-				collapse_kit()
-			return
-		if(3.0)
-			if(prob(50) && !broken)
-				break_hoist()
-			return
+/obj/structure/hoist/explosion_act(severity)
+	. = ..()
+	if(.)
+		if(severity == 1 || (severity == 2 && prob(50)))
+			physically_destroyed()
+		else if(severity == 2)
+			visible_message("\The [src] shakes violently, and neatly collapses as its damage sensors go off.")
+			collapse_kit()
+		else if(severity == 3 && prob(50) && !broken)
+			break_hoist()
 
-/obj/effect/hoist_hook/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			source_hoist.break_hoist()
-			return
-		if(2.0)
-			if(prob(50))
-				source_hoist.break_hoist()
-			return
-		if(3.0)
-			if(prob(25))
-				source_hoist.break_hoist()
-			return
-
+/obj/effect/hoist_hook/explosion_act(severity)
+	. = ..()
+	if(. && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(25))))
+		source_hoist.break_hoist()
 
 /obj/structure/hoist/attack_hand(mob/living/user)
 	if (!ishuman(user))

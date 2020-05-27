@@ -43,17 +43,17 @@
 	return ..()
 
 // Mapper shorthand.
-/obj/item/fuel_assembly/deuterium/Initialize(mapload)
-	. = ..(mapload,  MAT_DEUTERIUM)
+/obj/item/fuel_assembly/deuterium
+	material = MAT_DEUTERIUM
 
-/obj/item/fuel_assembly/tritium/Initialize(mapload)
-	. = ..(mapload,  MAT_TRITIUM)
+/obj/item/fuel_assembly/tritium
+	material = MAT_TRITIUM
 
-/obj/item/fuel_assembly/phoron/Initialize(mapload)
-	. = ..(mapload,  MAT_PHORON)
+/obj/item/fuel_assembly/phoron
+	material = MAT_PHORON
 
-/obj/item/fuel_assembly/supermatter/Initialize(mapload)
-	. = ..(mapload,  MAT_SUPERMATTER)
+/obj/item/fuel_assembly/supermatter
+	material = MAT_SUPERMATTER
 
-/obj/item/fuel_assembly/hydrogen/Initialize(mapload)
-	. = ..(mapload,  MAT_HYDROGEN)
+/obj/item/fuel_assembly/hydrogen
+	material = MAT_HYDROGEN

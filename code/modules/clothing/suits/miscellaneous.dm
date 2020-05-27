@@ -194,11 +194,36 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 //coats
-
 /obj/item/clothing/suit/leathercoat
-	name = "leather coat"
-	desc = "A long, thick black leather coat."
-	icon_state = "leathercoat"
+	name = "longcoat"
+	icon_state = "world"
+	icon = 'icons/clothing/suit/leathercoat.dmi'
+	on_mob_icon = 'icons/clothing/suit/leathercoat.dmi'
+	material = MAT_LEATHER_GENERIC
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
+	material_armor_multiplier = 0.8
+	var/shine 
+	var/artificial_shine
+
+/obj/item/clothing/suit/leathercoat/set_material(var/new_material)
+	..()
+	if(material)
+		if(material.reflectiveness >= MAT_VALUE_DULL)
+			shine = material.reflectiveness
+		desc = "A long, thick [material.use_name] coat."
+
+/obj/item/clothing/suit/leathercoat/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
+	var/image/I = ..()
+	if(shine > 0 && slot == slot_wear_suit_str)
+		var/mutable_appearance/S = get_mutable_overlay(I.icon, "shine")
+		S.alpha = max(shine, artificial_shine)/100 * 255
+		I.overlays += S
+	return I
+
+/obj/item/clothing/suit/leathercoat/synth
+	material = MAT_LEATHER_SYNTH
+	artificial_shine = 80
 
 //stripper
 /obj/item/clothing/under/stripper
@@ -251,36 +276,6 @@
 	desc = "An oldfashioned red swimsuit."
 	icon_state = "swim_red"
 	siemens_coefficient = 1
-
-/obj/item/clothing/suit/poncho/colored
-	name = "poncho"
-	desc = "A simple, comfortable poncho."
-	bodytype_restricted = null
-	icon_state = "classicponcho"
-
-/obj/item/clothing/suit/poncho/colored/green
-	name = "green poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is green."
-	bodytype_restricted = null
-	icon_state = "greenponcho"
-
-/obj/item/clothing/suit/poncho/colored/red
-	name = "red poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is red."
-	bodytype_restricted = null
-	icon_state = "redponcho"
-
-/obj/item/clothing/suit/poncho/colored/purple
-	name = "purple poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is purple."
-	bodytype_restricted = null
-	icon_state = "purpleponcho"
-
-/obj/item/clothing/suit/poncho/colored/blue
-	name = "blue poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is blue."
-	bodytype_restricted = null
-	icon_state = "blueponcho"
 
 /obj/item/clothing/suit/storage/toggle/bomber
 	name = "bomber jacket"
@@ -356,30 +351,6 @@
 	name = "shipping jacket"
 	desc = "A green jacket bearing the logo of Major Bill's Shipping."
 	icon_state = "mbill"
-
-/obj/item/clothing/suit/poncho/roles/security
-	name = "security poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is black and red, which are standard Security colors."
-	bodytype_restricted = null
-	icon_state = "secponcho"
-
-/obj/item/clothing/suit/poncho/roles/medical
-	name = "medical poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is white with a blue tint, which are standard Medical colors."
-	bodytype_restricted = null
-	icon_state = "medponcho"
-
-/obj/item/clothing/suit/poncho/roles/engineering
-	name = "engineering poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, which are standard Engineering colors."
-	bodytype_restricted = null
-	icon_state = "engiponcho"
-
-/obj/item/clothing/suit/poncho/roles/cargo
-	name = "cargo poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, which are standard Cargo colors."
-	bodytype_restricted = null
-	icon_state = "cargoponcho"
 
 /*
  * Track Jackets
@@ -478,3 +449,22 @@
 	name = "green letterman jacket"
 	desc = "A green letter jacket often given to members of a varsity team."
 	color = "#82e011"
+
+//Space santa outfit suit
+/obj/item/clothing/head/santahat
+	name = "Santa's hat"
+	desc = "Ho ho ho. Merrry X-mas!"
+	icon_state = "santahat"
+	item_state = "santahat"
+	flags_inv = BLOCKHAIR
+	body_parts_covered = HEAD
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
+
+/obj/item/clothing/suit/santa
+	name = "Santa's suit"
+	desc = "Festive!"
+	icon_state = "santa"
+	allowed = list(/obj/item) //for stuffing exta special presents
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0

@@ -18,7 +18,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 /datum/computer_file/report/crew_record/New()
 	..()
 	filename = "record[random_id(type, 100,999)]"
-	user_id = sequential_id("datum/computer_file/report/crew_record")
+	user_id = "[sequential_id("datum/computer_file/report/crew_record")]"
 	load_from_mob(null)
 
 /datum/computer_file/report/crew_record/Destroy()
@@ -51,7 +51,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/list/valid_grants = list()
 	for(var/weakref/grant in grants)
 		var/datum/computer_file/data/grant_record/GR = grant.resolve()
-		if(!GR || GR.holder != holder)
+		if(!istype(GR) || GR.holder != holder)
 			grants.Remove(grant)
 			continue // This is a bad grant. File is gone or moved.
 		LAZYDISTINCTADD(valid_grants, GR)

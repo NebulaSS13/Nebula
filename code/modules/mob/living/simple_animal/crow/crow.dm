@@ -22,8 +22,7 @@
 	emote_hear = list("caws")
 	emote_see = list("hops")
 
-	melee_damage_lower = 5
-	melee_damage_upper = 10
+	natural_weapon = /obj/item/natural_weapon/crow_claws
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
@@ -34,6 +33,13 @@
 
 	var/obj/item/storage/messenger/messenger_bag
 	var/obj/item/card/id/access_card
+
+/obj/item/natural_weapon/crow_claws
+	name = "claws"
+	gender = PLURAL
+	attack_verb = list("clawed")
+	sharp = TRUE
+	force = 7
 
 /mob/living/simple_animal/crow/Initialize()
 	. = ..()

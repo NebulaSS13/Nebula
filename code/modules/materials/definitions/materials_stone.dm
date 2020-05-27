@@ -1,4 +1,4 @@
-/material/diamond
+/decl/material/diamond
 	display_name = "diamond"
 	lore_text = "An extremely hard allotrope of carbon. Valued for its use in industrial tools."
 	stack_type = /obj/item/stack/material/diamond
@@ -22,21 +22,24 @@
 	ore_scan_icon = "mineral_rare"
 	xarch_source_mineral = /decl/reagent/ammonia
 	ore_icon_overlay = "gems"
-	sale_price = 5
 	sheet_singular_name = "gem"
 	sheet_plural_name = "gems"
-	value = 70
+	value = 1.8
+	sparse_material_weight = 5
+	rich_material_weight = 5
 
-/material/diamond/crystal
+/decl/material/diamond/crystal
 	display_name = "crystal"
 	hardness = MAT_VALUE_VERY_HARD
 	reflectiveness = MAT_VALUE_VERY_SHINY
 	stack_type = null
 	ore_compresses_to = null
-	sale_price = null
 	hidden_from_codex = TRUE
+	value = 2
+	sparse_material_weight = null
+	rich_material_weight = null
 
-/material/stone
+/decl/material/stone
 	display_name = "sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	stack_type = /obj/item/stack/material/sandstone
@@ -54,19 +57,18 @@
 	sheet_plural_name = "bricks"
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chem_products = list(
-		/decl/reagent/silicon = 20
-		)
-	sale_price = 1
-	value = 4
+	chemical_makeup = list(
+		/decl/reagent/silicon = 1
+	)
+	value = 1.5
 
-/material/stone/ceramic
+/decl/material/stone/ceramic
 	display_name = "ceramic"
 	lore_text = "A hard substance produced by firing clay in a kiln."
 	stack_type = /obj/item/stack/material/generic
 	icon_colour = COLOR_OFF_WHITE
 
-/material/stone/marble
+/decl/material/stone/marble
 	display_name = "marble"
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
 	icon_colour = "#aaaaaa"
@@ -77,22 +79,19 @@
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
 	construction_difficulty = MAT_VALUE_HARD_DIY
-	chem_products = null
-	sale_price = 4
-	value = 20
 
-/material/stone/concrete
+/decl/material/stone/concrete
 	display_name = "concrete"
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	stack_type = /obj/item/stack/material/generic/brick
 	icon_colour = COLOR_GRAY
-	value = 1
+	value = 0.9
 	var/image/texture
 
-/material/stone/concrete/New()
+/decl/material/stone/concrete/New()
 	..()
 	texture = image('icons/turf/wall_texture.dmi', "concrete")
 	texture.blend_mode = BLEND_MULTIPLY
 
-/material/stone/concrete/get_wall_texture()
+/decl/material/stone/concrete/get_wall_texture()
 	return texture

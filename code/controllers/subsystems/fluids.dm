@@ -111,7 +111,7 @@ SUBSYSTEM_DEF(fluids)
 						F.reagents.trans_to_holder(other.reagents, min(Floor(F.reagents.total_volume*0.5), FLUID_MAX_DEPTH - other.reagents.total_volume))
 						continue
 		
-		if(F.reagents.total_volume > FLUID_EVAPORATION_POINT)
+		if(F.reagents.total_volume > FLUID_PUDDLE)
 			for(var/spread_dir in GLOB.cardinal)
 				if(T.fluid_blocked_dirs & spread_dir)
 					continue
@@ -131,8 +131,6 @@ SUBSYSTEM_DEF(fluids)
 					else
 						qdel(F)
 						break
-		else
-			qdel(F)
 
 		if (MC_TICK_CHECK)
 			return
@@ -146,13 +144,13 @@ SUBSYSTEM_DEF(fluids)
 			continue
 
 		// Equalize across our neighbors. Hardcoded here for performance reasons.
-		if(!length(F.neighbors) || F.reagents.total_volume <= FLUID_EVAPORATION_POINT)
+		if(!length(F.neighbors) || F.reagents.total_volume <= FLUID_PUDDLE)
 			continue
 
 		var/sufficient_delta = FALSE
 		for(var/thing in F.neighbors)
 			var/obj/effect/fluid/other = thing
-			if(abs(F.reagents.total_volume - other.reagents.total_volume) >= FLUID_EVAPORATION_POINT)
+			if(abs(F.reagents.total_volume - other.reagents.total_volume) > FLUID_EVAPORATION_POINT)
 				sufficient_delta = TRUE
 				break
 
@@ -178,4 +176,4 @@ SUBSYSTEM_DEF(fluids)
 		F.set_dir(setting_dir)
 
 		if (MC_TICK_CHECK)
-			return
+			return 

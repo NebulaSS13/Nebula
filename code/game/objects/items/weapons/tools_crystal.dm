@@ -60,6 +60,7 @@
 	icon = 'icons/obj/crystal_tools.dmi'
 	material = MAT_CRYSTAL
 	build_from_parts = FALSE
+	applies_material_colour = FALSE
 
 /obj/item/screwdriver/crystal/Initialize()
 	. = ..()

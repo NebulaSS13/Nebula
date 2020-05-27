@@ -46,9 +46,17 @@
 	desc = "A set of armor worn by many corporate and private asset protection forces. Has red and white highlights."
 	icon_state = "ertarmor_med"
 
-/obj/item/clothing/suit/armor/vest/old/security
+/obj/item/clothing/suit/armor/vest/security
 	name = "security armor"
 	desc = "An armored vest that protects against some damage. This one has a corporate badge."
 	icon = 'mods/corporate/icons/obj/clothing/obj_suit.dmi'
 	icon_state = "armorsec"
 	item_icons = list(slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_suit.dmi')
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_MINOR
+		)
+

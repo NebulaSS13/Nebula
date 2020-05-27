@@ -4,8 +4,6 @@
 	icon = 'icons/obj/modular_computers/modular_pda.dmi'
 	icon_state = "pda"
 	icon_state_unpowered = "pda"
-	hardware_flag = PROGRAM_PDA
-	max_hardware_size = 1
 	w_class = ITEM_SIZE_SMALL
 	light_strength = 2
 	slot_flags = SLOT_ID | SLOT_BELT
@@ -14,11 +12,13 @@
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	enabled_by_default = TRUE
+	computer_type = /datum/extension/assembly/modular_computer/pda
 
 /obj/item/modular_computer/pda/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
 	if(card_slot && istype(card_slot.stored_card))
 		card_slot.eject_id(user)
 	else

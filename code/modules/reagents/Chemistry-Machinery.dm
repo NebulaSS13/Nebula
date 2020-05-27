@@ -30,15 +30,10 @@
 	. = ..()
 	create_reagents(120)
 
-/obj/machinery/chem_master/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				qdel(src)
-				return
+/obj/machinery/chem_master/explosion_act(severity)
+	. = ..()
+	if(. && (severity == 1) || (severity == 2 && prob(50)))
+		physically_destroyed()
 
 /obj/machinery/chem_master/attackby(var/obj/item/B, var/mob/user)
 

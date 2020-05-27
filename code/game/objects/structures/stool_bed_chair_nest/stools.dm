@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_HUGE
 	material = DEFAULT_FURNITURE_MATERIAL
 	var/base_icon = "stool"
-	var/material/padding_material
+	var/decl/material/padding_material
 
 /obj/item/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
@@ -21,8 +21,8 @@
 	. = ..()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
-	if(ispath(padding_material, /material))
-		padding_material = SSmaterials.get_material_datum(padding_material)
+	if(ispath(padding_material, /decl/material))
+		padding_material = decls_repository.get_decl(padding_material)
 	force = round(material.get_blunt_damage()*0.4)
 	update_icon()
 
@@ -62,7 +62,7 @@
 		desc = "A stool. Apply butt with care. It's made of [material.use_name]."
 
 /obj/item/stool/proc/add_padding(var/padding_type)
-	padding_material = SSmaterials.get_material_datum(padding_type)
+	padding_material = decls_repository.get_decl(padding_type)
 	update_icon()
 
 /obj/item/stool/proc/remove_padding()
@@ -85,19 +85,10 @@
 
 	return ..()
 
-/obj/item/stool/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				qdel(src)
-				return
-		if(3.0)
-			if (prob(5))
-				qdel(src)
-				return
+/obj/item/stool/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src) && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(5))))
+		physically_destroyed(src)
 
 /obj/item/stool/proc/dismantle()
 	if(material)

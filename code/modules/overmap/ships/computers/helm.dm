@@ -11,7 +11,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	var/dx		//desitnation
 	var/dy		//coordinates
 	var/speedlimit = 1/(20 SECONDS) //top speed for autopilot, 5
-	var/accellimit = 0.001 //manual limiter for acceleration
+	var/accellimit = 1 //manual limiter for acceleration
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
@@ -20,7 +20,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 /obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/visitable/sector/S in map)
-		if (S.known)
+		if ((S.sector_flags & OVERMAP_SECTOR_KNOWN))
 			var/datum/computer_file/data/waypoint/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
@@ -39,7 +39,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		else
 			var/brake_path = linked.get_brake_path()
 			var/direction = get_dir(linked.loc, T)
-			var/acceleration = min(linked.get_acceleration(), accellimit)
+			var/acceleration = min(linked.get_delta_v(), accellimit)
 			var/speed = linked.get_speed()
 			var/heading = linked.get_heading()
 
@@ -79,18 +79,18 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["dest"] = dy && dx
 		data["d_x"] = dx
 		data["d_y"] = dy
-		data["speedlimit"] = speedlimit ? speedlimit*1000 : "Halted"
-		data["accel"] = min(round(linked.get_acceleration()*1000, 0.01),accellimit*1000)
+		data["speedlimit"] = speedlimit ? speedlimit : "Halted"
+		data["accel"] = min(round(linked.get_delta_v(), 0.01),accellimit)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 		data["autopilot"] = autopilot
 		data["manual_control"] = viewing_overmap(user)
 		data["canburn"] = linked.can_burn()
-		data["accellimit"] = accellimit*1000
+		data["accellimit"] = accellimit
 
-		var/speed = round(linked.get_speed()*1000, 0.01)
-		if(linked.get_speed() < SHIP_SPEED_SLOW)
+		var/speed = round(linked.get_speed() * KM_OVERMAP_RATE, 0.01) // type abused
+		if(speed < SHIP_SPEED_SLOW)
 			speed = "<span class='good'>[speed]</span>"
-		if(linked.get_speed() > SHIP_SPEED_FAST)
+		else if(speed > SHIP_SPEED_FAST)
 			speed = "<span class='average'>[speed]</span>"
 		data["speed"] = speed
 
@@ -180,13 +180,13 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		dy = 0
 
 	if (href_list["speedlimit"])
-		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit*1000) as num|null
+		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit) as num|null
 		if(newlimit)
-			speedlimit = Clamp(newlimit/1000, 0, 100)
+			speedlimit = Clamp(newlimit, 0, 100)
 	if (href_list["accellimit"])
-		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit*1000) as num|null
+		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit) as num|null
 		if(newlimit)
-			accellimit = max(newlimit/1000, 0)
+			accellimit = max(newlimit, 0)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
@@ -227,8 +227,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
 	data["s_x"] = linked.x
 	data["s_y"] = linked.y
-	data["speed"] = round(linked.get_speed()*1000, 0.01)
-	data["accel"] = round(linked.get_acceleration()*1000, 0.01)
+	data["speed"] = round(linked.get_speed() * KM_OVERMAP_RATE, 0.01)
+	data["accel"] = round(linked.get_delta_v(), 0.01)
 	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 	data["viewing"] = viewing_overmap(user)
 

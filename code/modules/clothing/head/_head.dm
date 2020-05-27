@@ -65,21 +65,22 @@
 	if(!mob_wear_hat(user))
 		return ..()
 
-/obj/item/clothing/head/attack_generic(var/mob/user)
-	if(!istype(user) || !mob_wear_hat(user))
+/obj/item/clothing/head/attack_animal(var/mob/user)
+	if(!mob_wear_hat(user))
 		return ..()
 
 /obj/item/clothing/head/proc/mob_wear_hat(var/mob/user)
 	if(!Adjacent(user))
 		return 0
+	if(!is_drone(user))
+		return 0
 	var/success
-	if(is_drone(user))
-		var/mob/living/silicon/robot/drone/D = user
-		if(D.hat)
-			success = 2
-		else
-			D.wear_hat(src)
-			success = 1
+	var/mob/living/silicon/robot/drone/D = user
+	if(D.hat)
+		success = 2
+	else
+		D.wear_hat(src)
+		success = 1
 
 	if(!success)
 		return 0
@@ -93,14 +94,15 @@
 
 	overlays.Cut()
 	if(on)
-		// Generate object icon.
-		if(!light_overlay_cache["[light_overlay]_icon"])
-			light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
-		overlays |= light_overlay_cache["[light_overlay]_icon"]
-
+		add_light_overlay()
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		H.update_inv_head()
+
+/obj/item/clothing/head/proc/add_light_overlay()
+	if(!light_overlay_cache["[light_overlay]_icon"])
+		light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
+	overlays |= light_overlay_cache["[light_overlay]_icon"]
 
 /obj/item/clothing/head/update_clothing_icon()
 	if (ismob(src.loc))

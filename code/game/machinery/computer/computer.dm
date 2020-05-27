@@ -33,24 +33,14 @@
 	if(prob(20/severity)) set_broken(TRUE)
 	..()
 
-/obj/machinery/computer/ex_act(severity)
-	switch(severity)
-		if(1.0)
+/obj/machinery/computer/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		if(severity == 1 || (severity == 2 && prob(25)))
 			qdel(src)
-			return
-		if(2.0)
-			if (prob(25))
-				qdel(src)
-				return
-			if (prob(50))
-				for(var/x in verbs)
-					verbs -= x
-				set_broken(TRUE)
-		if(3.0)
-			if (prob(25))
-				for(var/x in verbs)
-					verbs -= x
-				set_broken(TRUE)
+		else if(prob(100 - (severity * 25)))
+			verbs.Cut()
+			set_broken(TRUE)
 
 /obj/machinery/computer/on_update_icon()
 	overlays.Cut()

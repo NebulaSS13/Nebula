@@ -50,5 +50,8 @@
 /datum/fabricator_recipe/protolathe/misc/chameleon
 	path = /obj/item/storage/backpack/chameleon/sydie_kit
 
-/datum/fabricator_recipe/protolathe/misc/ionengine
-	path = /obj/item/stock_parts/circuitboard/engine/ion
+/datum/fabricator_recipe/protolathe/misc/ship_tracker
+	path = /obj/item/ship_tracker
+
+/datum/fabricator_recipe/protolathe/misc/radio_beacon
+	path = /obj/item/radio_beacon

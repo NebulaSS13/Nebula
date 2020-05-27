@@ -8,7 +8,7 @@
 	else
 		construction_stage = null
 	if(!material)
-		material = SSmaterials.get_material_datum(DEFAULT_WALL_MATERIAL)
+		material = decls_repository.get_decl(DEFAULT_WALL_MATERIAL)
 	if(material)
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
@@ -28,7 +28,7 @@
 	update_icon()
 
 
-/turf/simulated/wall/proc/set_material(var/material/newmaterial, var/material/newrmaterial, var/material/newgmaterial)
+/turf/simulated/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial, var/decl/material/newgmaterial)
 	material = newmaterial
 	reinf_material = newrmaterial
 	girder_material = newgmaterial

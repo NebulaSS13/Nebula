@@ -16,17 +16,12 @@
 	value = 0.01
 
 /decl/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
-		return
-	M.adjustToxLoss(2 * removed)
-
-/decl/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
-		return
-	M.adjustToxLoss(2 * removed)
+	if(istype(M, /mob/living/carbon/slime) || alien == IS_SLIME)
+		M.adjustToxLoss(2 * removed)
 
 /decl/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjust_hydration(removed * 10)
+	affect_blood(M, alien, removed, holder)
 
 /decl/reagent/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(!istype(T))
@@ -112,3 +107,6 @@
 	heating_message = "cracks and melts."
 	heating_products = list(/decl/reagent/water)
 	heating_point = 299 // This is about 26C, higher than the actual melting point of ice but allows drinks to be made properly without weird workarounds.
+
+/decl/reagent/drink/ice/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	. = glass_name

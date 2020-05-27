@@ -8,7 +8,7 @@ var/global/list/rad_collectors = list()
 	icon_state = "ca"
 	anchored = 0
 	density = 1
-	req_access = list(access_engine_equip)
+	initial_access = list(access_engine_equip)
 	var/obj/item/tank/phoron/P = null
 
 	var/health = 100
@@ -142,11 +142,10 @@ var/global/list/rad_collectors = list()
 		to_chat(user, "The meter indicates that \the [src] is collecting [last_power] W.")
 		return 1
 
-/obj/machinery/power/rad_collector/ex_act(severity)
-	switch(severity)
-		if(2, 3)
-			eject()
-	return ..()
+/obj/machinery/power/rad_collector/explosion_act(severity)
+	if(severity != 1)
+		eject()
+	. = ..()
 
 /obj/machinery/power/rad_collector/proc/collector_break()
 	if(P && P.air_contents)

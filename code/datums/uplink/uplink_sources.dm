@@ -20,18 +20,20 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /decl/uplink_source/pda/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/modular_computer/pda/P = find_in_mob(M, /obj/item/modular_computer/pda)
-	if(!P || !P.hard_drive)
+	var/datum/extension/assembly/assembly = get_extension(P, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/hard_drive/HDD = assembly.get_component(PART_HDD)
+	if(!P || !HDD)
 		return SETUP_FAILED
 
 	var/pda_pass = "[rand(100,999)] [pick(GLOB.greek_letters)]"
 	var/obj/item/uplink/T = new(P, M.mind, amount)
 	P.hidden_uplink = T
 	var/datum/computer_file/program/uplink/program = new(pda_pass)
-	if(!P.hard_drive.try_store_file(program))
-		P.hard_drive.remove_file(P.hard_drive.find_file_by_name(program.filename))	//Maybe it already has a fake copy.
-	if(!P.hard_drive.try_store_file(program))
+	if(!HDD.try_store_file(program))
+		HDD.remove_file(HDD.find_file_by_name(program.filename))	//Maybe it already has a fake copy.
+	if(!HDD.try_store_file(program))
 		return SETUP_FAILED	//Not enough space or other issues.
-	P.hard_drive.store_file(program)
+	HDD.store_file(program)
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in TaxQuickly program to unlock its hidden features.</span>")
 	M.StoreMemory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).", /decl/memory_options/system)
 

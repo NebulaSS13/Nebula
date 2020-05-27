@@ -26,10 +26,10 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	skill_setter = /datum/antag_skill_setter/station
 
 	var/list/spawn_guns = list(
-		/obj/item/gun/energy/retro,
+		/obj/item/gun/projectile/revolver/lasvolver,
 		/obj/item/gun/energy/gun,
 		/obj/item/gun/energy/crossbow,
-		/obj/item/gun/energy/pulse_rifle/pistol,
+		/obj/item/gun/energy/pulse_pistol,
 		/obj/item/gun/projectile/automatic/smg,
 		/obj/item/gun/projectile/pistol/holdout,
 		/obj/item/gun/projectile/revolver,

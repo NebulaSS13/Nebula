@@ -1,55 +1,12 @@
-/obj/item/gun/energy/gun
-	name = "energy gun"
-	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low, medium and high power projectile settings. In other words: stun, shock or kill."
-	icon = 'icons/obj/guns/energy_gun.dmi'
-	icon_state = "energystun100"
-	item_state = null	//so the human update icon uses the icon_state instead.
-	max_shots = 10
-	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
-
-	projectile_type = /obj/item/projectile/beam/stun
-	origin_tech = "{'combat':3,'magnets':2}"
-	modifystate = "energystun"
-
-	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
-		)
-
-/obj/item/gun/energy/gun/small
-	name = "small energy gun"
-	desc = "A smaller model of the versatile LAEP90 Perun, the LAEP90-C packs considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
-	icon = 'icons/obj/guns/small_egun.dmi'
-	icon_state = "smallgunstun"
-	max_shots = 5
-	w_class = ITEM_SIZE_SMALL
-	force = 2 //it's the size of a car key, what did you expect?
-	modifystate = "smallgunstun"
-
-	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="smallgunstun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="smallgunshock"),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill"),
-		)
-
-/obj/item/gun/energy/gun/mounted
-	name = "mounted energy gun"
-	self_recharge = 1
-	use_external_power = 1
-	has_safety = FALSE
-
 /obj/item/gun/energy/gun/nuclear
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
-	icon = 'icons/obj/guns/adv_egun.dmi'
-	icon_state = "nucgun"
+	on_mob_icon = 'icons/obj/guns/adv_egun.dmi'
 	origin_tech = "{'combat':3,'materials':5,'powerstorage':3}"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_LARGE
 	force = 8 //looks heavier than a pistol
 	self_recharge = 1
-	modifystate = null
 	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
 	material = MAT_STEEL
 	matter = list(
@@ -59,7 +16,6 @@
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam),
 		)
 
@@ -84,29 +40,29 @@
 			if(ismob(loc))
 				to_chat(loc, "<span class='warning'>\The [src] feels pleasantly warm.</span>")
 
-/obj/item/gun/energy/gun/nuclear/proc/get_charge_overlay()
-	var/ratio = power_supply.percent()
-	ratio = round(ratio, 25)
-	return "nucgun-[ratio]"
-
-/obj/item/gun/energy/gun/nuclear/proc/get_reactor_overlay()
-	if(fail_counter)
-		return "nucgun-medium"
-	if (power_supply.percent() <= 50)
-		return "nucgun-light"
-	return "nucgun-clean"
-
-/obj/item/gun/energy/gun/nuclear/proc/get_mode_overlay()
-	var/datum/firemode/current_mode = firemodes[sel_mode]
-	switch(current_mode.name)
-		if("stun") return "nucgun-stun"
-		if("kill") return "nucgun-kill"
+/obj/item/gun/energy/gun/nuclear/proc/get_charge_color()
+	switch(get_charge_ratio())
+		if(25)
+			return COLOR_RED
+		if(50)
+			return COLOR_ORANGE
+		if(75)
+			return COLOR_CIVIE_GREEN
+		if(100)
+			return COLOR_LIME
 
 /obj/item/gun/energy/gun/nuclear/on_update_icon()
+	indicator_color = get_charge_color()
+	. = ..()
 	var/list/new_overlays = list()
 
-	new_overlays += get_charge_overlay()
-	new_overlays += get_reactor_overlay()
-	new_overlays += get_mode_overlay()
+	var/reactor_icon = fail_counter ? "danger" : "clean"
+	new_overlays += get_mutable_overlay(icon, "[get_world_inventory_state()]_[reactor_icon]")
+	var/datum/firemode/current_mode = firemodes[sel_mode]
+	new_overlays += get_mutable_overlay(icon, "[get_world_inventory_state()]_[current_mode.name]")
 
-	overlays = new_overlays
+	overlays += new_overlays
+
+/obj/item/gun/energy/gun/nuclear/add_onmob_charge_meter(image/I)
+	I.overlays += get_mutable_overlay(icon, "[I.icon_state]_charge", get_charge_color())
+	return I

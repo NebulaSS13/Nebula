@@ -107,6 +107,7 @@
 	center_of_mass = @"{'x':15,'y':10}"
 	material = MAT_GLASS
 	applies_material_name = TRUE
+	applies_material_colour = TRUE
 	material_force_multiplier = 0.25
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 
@@ -193,6 +194,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120,150,200,250,300]"
 	material_force_multiplier = 2.5
+	applies_material_colour = FALSE
 	material = MAT_STEEL
 	matter = list(
 		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
@@ -220,6 +222,7 @@
 	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
+	applies_material_colour = FALSE
 	temperature_coefficient = 1
 	material = null
 
@@ -239,9 +242,9 @@
 /obj/item/chems/glass/bucket
 	name = "bucket"
 	desc = "It's a bucket."
-	icon = 'icons/obj/janitor.dmi'
-	icon_state = "bucket"
-	item_state = "bucket"
+	icon = 'icons/obj/items/bucket.dmi'
+	on_mob_icon = 'icons/obj/items/bucket.dmi'
+	icon_state = "world"
 	center_of_mass = @"{'x':16,'y':9}"
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
@@ -251,12 +254,12 @@
 	unacidable = 0
 	material = MAT_PLASTIC
 	material_force_multiplier = 0.2
+	slot_flags = SLOT_HEAD
 
 /obj/item/chems/glass/bucket/wood
-	name = "bucket"
 	desc = "It's a wooden bucket. How rustic."
-	icon_state = "wbucket"
-	item_state = "wbucket"
+	icon = 'icons/obj/items/wooden_bucket.dmi'
+	on_mob_icon = 'icons/obj/items/wooden_bucket.dmi'
 	volume = 200
 	material = MAT_WOOD
 

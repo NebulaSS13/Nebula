@@ -23,12 +23,6 @@
 /datum/fabricator_recipe/protolathe/weapon/advancedflash
 	path = /obj/item/flash/advanced
 
-/datum/fabricator_recipe/protolathe/weapon/stunrevolver
-	path = /obj/item/gun/energy/stunrevolver
-
-/datum/fabricator_recipe/protolathe/weapon/stunrifle
-	path = /obj/item/gun/energy/stunrevolver/rifle
-
 /datum/fabricator_recipe/protolathe/weapon/confuseray
 	path = /obj/item/gun/energy/confuseray
 
@@ -37,9 +31,6 @@
 
 /datum/fabricator_recipe/protolathe/weapon/lasercannon
 	path = /obj/item/gun/energy/lasercannon
-
-/datum/fabricator_recipe/protolathe/weapon/xraypistol
-	path = /obj/item/gun/energy/xray/pistol
 
 /datum/fabricator_recipe/protolathe/weapon/xrayrifle
 	path = /obj/item/gun/energy/xray

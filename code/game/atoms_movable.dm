@@ -2,7 +2,6 @@
 	layer = OBJ_LAYER
 	appearance_flags = TILE_BOUND
 	glide_size = 4
-	var/waterproof = TRUE
 	var/movable_flags
 	var/last_move = null
 	var/anchored = 0
@@ -114,8 +113,12 @@
 
 /atom/movable/Destroy()
 	. = ..()
+#ifdef DISABLE_DEBUG_CRASH
+	// meh do nothing. we know what we're doing. pro engineers.
+#else
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
-		crash_with("Was deleted before initalization")
+		crash_with("Was deleted before initialization")
+#endif
 
 	for(var/A in src)
 		qdel(A)

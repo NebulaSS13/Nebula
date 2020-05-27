@@ -30,10 +30,10 @@
 	else
 		to_chat(user, SPAN_DANGER("It is on the verge of breaking apart!"))
 
-/obj/structure/defensive_barrier/destroyed()
+/obj/structure/defensive_barrier/physically_destroyed()
 	visible_message(SPAN_DANGER("\The [src] was destroyed!"))
 	playsound(src, 'sound/effects/clang.ogg', 100, 1)
-	..()
+	. = ..()
 
 /obj/structure/defensive_barrier/Destroy()
 	GLOB.dir_set_event.unregister(src, src, .proc/update_layers)

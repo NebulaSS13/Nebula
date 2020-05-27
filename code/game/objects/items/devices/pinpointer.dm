@@ -101,7 +101,7 @@
 		overlays += image(icon,"pin_up")
 		return
 
-	dir = get_dir(here,there)
+	set_dir(get_dir(here, there))
 	var/image/pointer = image(icon,"pin_point")
 	var/distance = get_dist(here,there)
 	if(distance < world.view)

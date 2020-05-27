@@ -136,7 +136,7 @@
 /datum/trader/proc/get_item_value(var/trading_num, skill = SKILL_MAX)
 	if(!trading_items[trading_items[trading_num]])
 		var/item_type = trading_items[trading_num]
-		var/value = atom_info_repository.get_worth_for(item_type)
+		var/value = atom_info_repository.get_combined_worth_for(item_type)
 		value = round(rand(100 - price_rng,100 + price_rng)/100 * value) //For some reason rand doesn't like decimals.
 		trading_items[item_type] = value
 	. = trading_items[trading_items[trading_num]]
@@ -144,7 +144,7 @@
 
 /datum/trader/proc/get_buy_price(var/atom/movable/item, is_wanted, skill = SKILL_MAX)
 	if(ispath(item, /atom/movable))
-		. = atom_info_repository.get_worth_for(item)
+		. = atom_info_repository.get_combined_worth_for(item)
 	else if(istype(item))
 		. = item.get_combined_monetary_worth()
 	if(is_wanted)

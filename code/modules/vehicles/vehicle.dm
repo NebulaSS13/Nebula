@@ -112,23 +112,18 @@
 	..()
 	healthcheck()
 
-/obj/vehicle/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			explode()
-			return
-		if(2.0)
+/obj/vehicle/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(severity == 1)
+		explode()
+	else 
+		if(severity == 2)
 			health -= rand(5,10)*fire_dam_coeff
 			health -= rand(10,20)*brute_dam_coeff
-			healthcheck()
-			return
-		if(3.0)
-			if (prob(50))
-				health -= rand(1,5)*fire_dam_coeff
-				health -= rand(1,5)*brute_dam_coeff
-				healthcheck()
-				return
-	return
+		else if(prob(50))
+			health -= rand(1,5)*fire_dam_coeff
+			health -= rand(1,5)*brute_dam_coeff
+		healthcheck()
 
 /obj/vehicle/emp_act(severity)
 	var/was_on = on
@@ -346,16 +341,3 @@
 //-------------------------------------------------------
 /obj/vehicle/proc/update_stats()
 	return
-
-/obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
-	if(!damage)
-		return
-	visible_message("<span class='danger'>\The [user] [attack_message] the \the [src]!</span>")
-	if(istype(user))
-		admin_attacker_log(user, "attacked \the [src]")
-		user.do_attack_animation(src)
-	src.health -= damage
-	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	spawn(1) healthcheck()
-	return 1

@@ -10,6 +10,7 @@
 #define INVISIBILITY_LIGHTING    20
 #define INVISIBILITY_LEVEL_ONE   35
 #define INVISIBILITY_LEVEL_TWO   45
+#define INVISIBILITY_OVERMAP     50
 #define INVISIBILITY_OBSERVER    60
 #define INVISIBILITY_EYE         61
 #define INVISIBILITY_SYSTEM      99
@@ -262,3 +263,9 @@
 #define RC_ASSIST 1		//Request Assistance
 #define RC_SUPPLY 2		//Request Supplies
 #define RC_INFO   4		//Relay Info
+
+#define WORTH_TO_SUPPLY_POINTS_CONSTANT       0.0075
+#define WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT 5
+
+#define  ICON_STATE_WORLD  "world"
+#define  ICON_STATE_INV  "inventory"

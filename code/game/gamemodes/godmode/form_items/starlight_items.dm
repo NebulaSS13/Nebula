@@ -125,10 +125,10 @@
 
 /obj/item/material/sword/blazing
 	name = "blazing blade"
+	on_mob_icon = 'icons/obj/items/weapon/swords/flaming.dmi'
 	damtype = BURN
-	icon_state = "fireblade"
-	item_state = "fireblade"
 	applies_material_colour = FALSE
+	applies_material_name = FALSE
 	var/last_near_structure = 0
 	var/mob/living/deity/linked
 

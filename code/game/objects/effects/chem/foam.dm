@@ -146,8 +146,10 @@
 	else
 		icon_state = "ironfoam"
 
-/obj/structure/foamedmetal/ex_act(severity)
-	qdel(src)
+/obj/structure/foamedmetal/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		physically_destroyed(src)
 
 /obj/structure/foamedmetal/bullet_act()
 	if(metal == 1 || prob(50))

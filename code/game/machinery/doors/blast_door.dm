@@ -26,7 +26,7 @@
 	var/close_sound = 'sound/machines/blastdoor_close.ogg'
 
 	closed_layer = ABOVE_WINDOW_LAYER
-	dir = 1
+	dir = NORTH
 	explosion_resistance = 25
 
 	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
@@ -34,7 +34,7 @@
 	block_air_zones = 0
 
 	var/begins_closed = TRUE
-	var/material/implicit_material
+	var/decl/material/implicit_material
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
 
@@ -61,7 +61,7 @@
 		set_opacity(0)
 		layer = open_layer
 
-	implicit_material = SSmaterials.get_material_datum(MAT_PLASTEEL)
+	implicit_material = decls_repository.get_decl(MAT_PLASTEEL)
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()

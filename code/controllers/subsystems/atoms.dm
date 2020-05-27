@@ -8,6 +8,10 @@ SUBSYSTEM_DEF(atoms)
 	init_order = SS_INIT_ATOMS
 	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 
+	// override and GetArguments() exists for mod-override/downstream hook functionality.
+	// Useful for total-overhaul type modifications.
+	var/adjust_init_arguments = FALSE
+
 	var/atom_init_stage = INITIALIZATION_INSSATOMS
 	var/old_init_stage
 
@@ -34,10 +38,9 @@ SUBSYSTEM_DEF(atoms)
 	var/count = created_atoms.len
 	while(created_atoms.len)
 		var/atom/A = created_atoms[created_atoms.len]
-		var/list/arguments = created_atoms[A] ? mapload_arg + created_atoms[A] : mapload_arg
 		created_atoms.len--
 		if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
-			InitAtom(A, arguments)
+			InitAtom(A, GetArguments(A, mapload_arg))
 			CHECK_TICK
 
 	// If wondering why not just store all atoms in created_atoms and use the block above: that turns out unbearably expensive.
@@ -46,7 +49,7 @@ SUBSYSTEM_DEF(atoms)
 	if(!initialized)
 		for(var/atom/A in world)
 			if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
-				InitAtom(A, mapload_arg)
+				InitAtom(A, GetArguments(A, mapload_arg, FALSE))
 				++count
 				CHECK_TICK
 
@@ -95,6 +98,21 @@ SUBSYSTEM_DEF(atoms)
 		BadInitializeCalls[the_type] |= BAD_INIT_DIDNT_INIT
 
 	return qdeleted || QDELING(A)
+
+// override and GetArguments() exists for mod-override/downstream hook functionality.
+// Useful for total-overhaul type modifications.
+/atom/proc/AdjustInitializeArguments(list/arguments)
+	// Lists are passed by reference so can simply modify the arguments list without returning it
+
+/datum/controller/subsystem/atoms/proc/GetArguments(atom/A, list/mapload_arg, created=TRUE)
+	if(!created && !adjust_init_arguments)
+		return mapload_arg // Performance optimization. Nothing to do.
+	var/list/arguments = mapload_arg.Copy()
+	if(created && created_atoms[A])
+		arguments += created_atoms[A]
+	if(adjust_init_arguments)
+		A.AdjustInitializeArguments(arguments)
+	return arguments
 
 /datum/controller/subsystem/atoms/stat_entry(msg)
 	..("Bad Initialize Calls:[BadInitializeCalls.len]")

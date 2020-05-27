@@ -1,9 +1,9 @@
 /obj/item/gun/launcher/pneumatic
 	name = "pneumatic cannon"
 	desc = "A large gas-powered cannon."
-	icon = 'icons/obj/guns/pneumatic.dmi'
-	icon_state = "pneumatic"
-	item_state = "pneumatic"
+	on_mob_icon = 'icons/obj/guns/launcher/pneumatic.dmi'
+	icon = 'icons/obj/guns/launcher/pneumatic.dmi'
+	icon_state = "world"
 	origin_tech = "{'combat':4,'materials':3}"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_HUGE
@@ -127,13 +127,17 @@
 
 /obj/item/gun/launcher/pneumatic/on_update_icon()
 	if(tank)
-		icon_state = "pneumatic-tank"
-		item_state = "pneumatic-tank"
+		icon_state = "[get_world_inventory_state()]-tank"
 	else
-		icon_state = "pneumatic"
-		item_state = "pneumatic"
+		icon_state = get_world_inventory_state()
 
 	update_held_icon()
+
+/obj/item/gun/launcher/pneumatic/experimental_mob_overlay(mob/user_mob, slot)
+	var/image/I = ..()
+	if(tank)
+		I.icon_state += "-tank" 
+	return I
 
 /obj/item/gun/launcher/pneumatic/small
 	name = "small pneumatic cannon"

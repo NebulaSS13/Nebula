@@ -9,9 +9,10 @@ SUBSYSTEM_DEF(materials)
 	var/list/alloy_products
 	var/list/processable_ores
 	var/list/fusion_reactions
-
 	var/list/all_gasses
 	var/list/gas_flag_cache
+	var/list/weighted_minerals_sparse = list()
+	var/list/weighted_minerals_rich = list()
 
 /datum/controller/subsystem/materials/Initialize()
 	build_material_lists()       // Build core material lists.
@@ -23,7 +24,7 @@ SUBSYSTEM_DEF(materials)
 	all_gasses = list()
 	gas_flag_cache = list()
 	for(var/thing in materials_by_name)
-		var/material/mat = materials_by_name[thing]
+		var/decl/material/mat = materials_by_name[thing]
 		if(mat.is_a_gas())
 			all_gasses[thing] = mat
 			gas_flag_cache[thing] = mat.gas_flags
@@ -42,13 +43,17 @@ SUBSYSTEM_DEF(materials)
 	alloy_products =    list()
 	processable_ores =  list()
 
-	for(var/mtype in subtypesof(/material))
-		var/material/new_mineral = mtype
+	for(var/mtype in subtypesof(/decl/material))
+		var/decl/material/new_mineral = mtype
 		if(!initial(new_mineral.display_name))
 			continue
-		new_mineral = new mtype
+		new_mineral = decls_repository.get_decl(mtype)
 		materials += new_mineral
 		materials_by_name[mtype] = new_mineral
+		if(new_mineral.sparse_material_weight)
+			weighted_minerals_sparse[new_mineral.type] = new_mineral.sparse_material_weight
+		if(new_mineral.rich_material_weight)
+			weighted_minerals_rich[new_mineral.type] = new_mineral.rich_material_weight
 		if(new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)
 			processable_ores[mtype] = TRUE
 		if(new_mineral.alloy_product && LAZYLEN(new_mineral.alloy_materials))
@@ -57,16 +62,8 @@ SUBSYSTEM_DEF(materials)
 				processable_ores[component] = TRUE
 				alloy_components[component] = TRUE
 
-/datum/controller/subsystem/materials/proc/get_material_datum(var/mat)
-	. = materials_by_name[mat]
-	if(!.)
-		if(ispath(mat))
-			crash_with("Unable to acquire material by path '[mat]'.")
-		else
-			crash_with("Unable to acquire material by non-path key '[mat]'.")
-
 /proc/material_display_name(var/mat)
-	var/material/material = SSmaterials.get_material_datum(mat)
+	var/decl/material/material = decls_repository.get_decl(mat)
 	if(material)
 		return material.display_name
 	return null

@@ -3,11 +3,8 @@
 /obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data = list()
 
-	var/datum/extension/local_network_member/fabnet = get_extension(src, /datum/extension/local_network_member)
-	if(fabnet)
-		var/datum/local_network/lan = fabnet.get_local_network()
-		if(lan)
-			data["network"] = lan.id_tag
+	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	data["network"] = D.network_tag
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
 
@@ -24,7 +21,7 @@
 			material_data["stored"] =      "[stored_material[material]][SHEET_UNIT]"
 			material_data["max"] =         storage_capacity[material]
 			material_data["eject_key"] =   stored_substances_to_names[material]
-			material_data["eject_label"] = ispath(material, /material) ? "Eject" : "Flush"
+			material_data["eject_label"] = ispath(material, /decl/material) ? "Eject" : "Flush"
 			data["material_storage"] +=    list(material_data)
 
 		var/list/current_build = list()

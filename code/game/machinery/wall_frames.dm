@@ -19,7 +19,7 @@
 /obj/item/frame/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
 		for(var/key in matter)
-			var/material/material = SSmaterials.get_material_datum(key)
+			var/decl/material/material = decls_repository.get_decl(key)
 			material.place_sheet(get_turf(src), matter[key]/SHEET_MATERIAL_AMOUNT)
 		qdel(src)
 		return TRUE

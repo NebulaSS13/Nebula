@@ -74,9 +74,16 @@
 		return TRUE
 	. = ..()
 
-/obj/structure/rubble/destroyed()
+/obj/structure/rubble/dismantle()
+	SHOULD_CALL_PARENT(FALSE)
+	qdel(src)
+	. = TRUE
+	
+/obj/structure/rubble/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	visible_message(SPAN_NOTICE("\The [src] is cleared away."))
 	qdel(src)
+	. = TRUE
 
 /obj/structure/rubble/house
 	loot = list(

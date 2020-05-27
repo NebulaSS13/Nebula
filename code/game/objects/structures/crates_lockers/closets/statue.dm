@@ -90,14 +90,11 @@
 
 	return
 
-/obj/structure/closet/statue/attack_generic(var/mob/user, damage, attacktext, environment_smash)
-	if(damage && environment_smash)
-		for(var/mob/M in src)
-			shatter(M)
-
-/obj/structure/closet/statue/ex_act(severity)
+/obj/structure/closet/statue/explosion_act(severity)
 	for(var/mob/M in src)
-		M.ex_act(severity)
+		M.explosion_act(severity)
+	..()
+	if(!QDELETED(src))
 		health -= 60 / severity
 		check_health()
 

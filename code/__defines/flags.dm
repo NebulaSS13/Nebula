@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 
 //Flags for items (equipment)
 #define ITEM_FLAG_NO_BLUDGEON             0x0001 // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
-#define ITEM_FLAG_PHORONGUARD             0x0002 // Does not get contaminated by phoron.
+#define ITEM_FLAG_NO_CONTAMINATION        0x0002 // Does not get contaminated.
 #define ITEM_FLAG_NO_PRINT                0x0004 // This object does not leave the user's prints/fibres when using it
 #define ITEM_FLAG_INVALID_FOR_CHAMELEON   0x0008 // Chameleon items cannot mimick this.
 #define ITEM_FLAG_THICKMATERIAL           0x0010 // Prevents syringes, reagent pens, and hyposprays if equiped to slot_suit or slot_head.
@@ -55,3 +55,9 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define PASS_FLAG_TABLE                   0x1
 #define PASS_FLAG_GLASS                   0x2
 #define PASS_FLAG_GRILLE                  0x4
+
+// Sector Flags.
+#define OVERMAP_SECTOR_BASE              0x0001 // Whether or not this sector is a starting sector. Z levels contained in this sector are added to station_levels
+#define OVERMAP_SECTOR_KNOWN             0x0002 // Makes the sector show up on nav computers
+#define OVERMAP_SECTOR_IN_SPACE          0x0004 // If the sector can be accessed by drifting off the map edge
+#define OVERMAP_SECTOR_UNTARGETABLE      0x0008 // If the sector is untargetable by missiles.

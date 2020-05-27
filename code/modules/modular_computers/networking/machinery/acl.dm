@@ -11,22 +11,23 @@
 	// Datum file source for where grants/records are.
 	var/datum/file_storage/network/file_source = /datum/file_storage/network/machine
 	var/editing_user	// Numerical user ID of the user being editing on this device.
-	var/list/initial_grants = list(
-		DEPT_COMMAND,
-		DEPT_CIVILIAN,
-		DEPT_ENGINEERING,
-		DEPT_EXPLORATION,
-		DEPT_MEDICAL,
-		DEPT_MISC,
-		DEPT_SCIENCE,
-		DEPT_SECURITY,
-		DEPT_SERVICE,
-		DEPT_SUPPORT,
-		DEPT_SUPPLY
+	var/list/initial_grants  //defaults to all possible station accesses if left null
+
+/obj/machinery/network/acl/merchant
+	initial_grants = list(
+		access_crate_cash,
+		access_merchant
+	)
+
+/obj/machinery/network/acl/antag
+	initial_grants = list(
+		access_syndicate
 	)
 
 /obj/machinery/network/acl/Initialize()
 	. = ..()
+	if(isnull(initial_grants))
+		initial_grants = get_all_station_access()
 	if(ispath(file_source))
 		file_source = new file_source(null, src)
 
@@ -62,8 +63,12 @@
 		error = "NETWORK ERROR: Connection lost."
 		return TOPIC_REFRESH
 
+	if(href_list["back"])
+		editing_user = null
+		return TOPIC_REFRESH
+
 	if(href_list["change_file_server"])
-		var/list/file_servers = network.get_file_server_tags()
+		var/list/file_servers = network.get_file_server_tags(MF_ROLE_CREW_RECORDS)
 		var/file_server = input(usr, "Choose a fileserver to view access records on:", "Select File Server") as null|anything in file_servers
 		if(file_server)
 			file_source.server = file_server
@@ -162,6 +167,10 @@
 		.["user_id"] = editing_user
 		.["is_admin"] = (editing_user in network.access_controller.administrators)
 		var/datum/computer_file/report/crew_record/AR = get_access_record()
+		if(!istype(AR))
+			// Something has gone wrong. Our AR file is missing.
+			error = "NETWORK ERROR: Unable to find access record for user [editing_user]."
+			return
 		var/list/grants[0]
 		var/list/assigned_grants = AR.get_valid_grants()
 		// We're editing a user, so we only need to build a subset of data.

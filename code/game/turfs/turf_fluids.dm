@@ -9,6 +9,11 @@
 				break
 	return fluid_can_pass
 
+/turf/proc/add_reagents_as_fluid(var/datum/reagents/mixture)
+	for(var/rtype in mixture?.reagent_volumes)
+		add_fluid(mixture.reagent_volumes[rtype], rtype)
+	qdel(mixture)
+
 /turf/proc/add_fluid(var/amount, var/fluid = /decl/reagent/water)
 	if(!flooded)
 		var/obj/effect/fluid/F = locate() in src

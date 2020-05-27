@@ -122,12 +122,6 @@
 	icon_state = "white"
 	},
 /area/map_template/ninja_dojo/dojo)
-"as" = (
-/turf/unsimulated/floor{
-	dir = 2;
-	icon_state = "white"
-	},
-/area/map_template/ninja_dojo/dojo)
 "at" = (
 /obj/structure/table/glass,
 /obj/item/storage/firstaid/o2{
@@ -614,7 +608,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bs" = (
 /obj/structure/table/rack,
-/obj/item/toy/katana{
+/obj/item/material/sword/katana/toy{
 	name = "practice katana"
 	},
 /turf/unsimulated/floor{
@@ -1884,7 +1878,7 @@ ar
 aB
 aI
 aR
-as
+ao
 aj
 aj
 aj
@@ -1923,11 +1917,11 @@ ad
 ad
 aj
 al
-as
-as
-as
+ao
+ao
+ao
 aS
-as
+ao
 bf
 bl
 bq
@@ -1966,11 +1960,11 @@ ad
 ad
 aj
 am
-as
-as
-as
-as
-as
+ao
+ao
+ao
+ao
+ao
 aL
 aG
 aG
@@ -2012,8 +2006,8 @@ an
 at
 aC
 aJ
-as
-as
+ao
+ao
 aL
 aG
 aG
@@ -2053,7 +2047,7 @@ ad
 aj
 ao
 au
-as
+ao
 aK
 aT
 aT
@@ -2096,7 +2090,7 @@ ad
 aj
 ap
 av
-as
+ao
 aL
 aG
 aG

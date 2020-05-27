@@ -325,25 +325,25 @@
 /datum/gear_tweak/tablet/tweak_item(var/obj/item/modular_computer/tablet/I, var/list/metadata)
 	if(length(metadata) < TWEAKABLE_COMPUTER_PART_SLOTS)
 		return
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(I, /datum/extension/assembly)
 	if(ValidProcessors[metadata[1]])
 		var/t = ValidProcessors[metadata[1]]
-		I.processor_unit = new t(I)
+		assembly.add_replace_component(null, PART_CPU, new t(I))
 	if(ValidBatteries[metadata[2]])
 		var/t = ValidBatteries[metadata[2]]
-		I.battery_module = new t(I)
-		I.battery_module.charge_to_full()
+		assembly.add_replace_component(null, PART_BATTERY, new t(I))
 	if(ValidHardDrives[metadata[3]])
 		var/t = ValidHardDrives[metadata[3]]
-		I.hard_drive = new t(I)
+		assembly.add_replace_component(null, PART_HDD, new t(I))
 	if(ValidNetworkCards[metadata[4]])
 		var/t = ValidNetworkCards[metadata[4]]
-		I.network_card = new t(I)
+		assembly.add_replace_component(null, PART_NETWORK, new t(I))
 	if(ValidNanoPrinters[metadata[5]])
 		var/t = ValidNanoPrinters[metadata[5]]
-		I.nano_printer = new t(I)
+		assembly.add_replace_component(null, PART_PRINTER, new t(I))
 	if(ValidCardSlots[metadata[6]])
 		var/t = ValidCardSlots[metadata[6]]
-		I.card_slot = new t(I)
+		assembly.add_replace_component(null, PART_CARD, new t(I))
 	if(ValidTeslaLinks[metadata[7]])
 		var/t = ValidTeslaLinks[metadata[7]]
-		I.tesla_link = new t(I)
+		assembly.add_replace_component(null, PART_TESLA, new t(I))

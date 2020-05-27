@@ -56,7 +56,7 @@
 	idle_power_usage = 80
 	active_power_usage = 1000 //For heating/cooling rooms. 1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
 	power_channel = ENVIRON
-	req_access = list(list(access_atmospherics, access_engine_equip))
+	initial_access = list(list(access_atmospherics, access_engine_equip))
 	clicksound = "button"
 	clickvol = 30
 
@@ -124,7 +124,7 @@
 	breach_detection = 0
 
 /obj/machinery/alarm/server/Initialize()
-	req_access = list(access_rd, access_atmospherics, access_engine_equip)
+	initial_access = list(list(access_rd, access_atmospherics, access_engine_equip))
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+30, T0C+40) // K
 	target_temperature = T0C+10
 	. = ..()
@@ -508,7 +508,7 @@
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
 		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 		for(var/gas_id in env_info.important_gasses)
-			var/material/mat = SSmaterials.get_material_datum(gas_id)	
+			var/decl/material/mat = decls_repository.get_decl(gas_id)	
 			environment_data[++environment_data.len] = list(
 				"name" =  capitalize(mat.display_name),
 				"value" = environment.gas[gas_id] / total * 100,
@@ -564,7 +564,7 @@
 					)
 				var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 				for(var/gas_id in env_info.filter_gasses)
-					var/material/mat = SSmaterials.get_material_datum(gas_id)
+					var/decl/material/mat = decls_repository.get_decl(gas_id)
 					scrubbers[scrubbers.len]["filters"] += list(
 						list(
 							"name" = capitalize(mat.display_name),

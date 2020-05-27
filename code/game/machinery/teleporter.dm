@@ -187,7 +187,7 @@
 
 /obj/machinery/teleport
 	name = "teleport"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/teleporter.dmi'
 	density = 1
 	anchored = 1.0
 	var/lockeddown = 0
@@ -197,7 +197,7 @@
 	name = "teleporter hub"
 	desc = "The teleporter hub handles all of the impossibly complex busywork required in instant matter transmission."
 	icon_state = "tele0"
-	dir = 4
+	dir = EAST
 	idle_power_usage = 10
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
@@ -228,7 +228,7 @@
 	name = "projector"
 	desc = "This machine is capable of projecting a miniature wormhole leading directly to its provided target."
 	icon_state = "controller"
-	dir = 4
+	dir = EAST
 	var/engaged = 0
 	idle_power_usage = 10
 	active_power_usage = 2000
@@ -300,6 +300,6 @@
 
 /obj/machinery/teleport/station/on_update_icon()
 	if(stat & NOPOWER)
-		icon_state = "controller-p"
+		icon_state = panel_open ? "controller-o" : "controller-p"
 	else
 		icon_state = "controller"

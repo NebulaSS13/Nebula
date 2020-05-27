@@ -178,7 +178,7 @@
 	var/inhaled_gas_used = inhaling / 4
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
-	owner.phoron_alert = 0 // Reset our toxins alert for now.
+	owner.toxins_alert = 0 // Reset our toxins alert for now.
 	if(!failed_inhale) // Enough gas to tell we're being poisoned via chemical burns or whatever.
 		var/poison_total = 0
 		if(poison_types)
@@ -186,20 +186,20 @@
 				if(poison_types[gname])
 					poison_total += breath.gas[gname]
 		if(((poison_total/breath.total_moles)*breath_pressure) > safe_toxins_max)
-			owner.phoron_alert = 1
+			owner.toxins_alert = 1
 
 	// Pass reagents from the gas into our body.
 	// Presumably if you breathe it you have a specialized metabolism for it, so we drop/ignore breath_type. Also avoids
 	// humans processing thousands of units of oxygen over the course of a round for the sole purpose of poisoning vox.
 	var/ratio = BP_IS_PROSTHETIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
-		var/material/mat = SSmaterials.get_material_datum(gasname)
-		var/breathed_product = mat.gas_breathed_product
-		if(breathed_product)
-			var/reagent_amount = breath.gas[gasname] * REAGENT_GAS_EXCHANGE_FACTOR * ratio
+		var/decl/material/mat = decls_repository.get_decl(gasname)
+		if(length(mat.chemical_makeup))
+			var/reagent_amount = breath.gas[gasname] * REAGENT_UNITS_PER_GAS_MOLE * ratio
 			 // Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.
 			if(reagent_amount >= 0.05)
-				owner.reagents.add_reagent(breathed_product, reagent_amount)
+				for(var/chem in mat.chemical_makeup)
+					owner.reagents.add_reagent(chem, mat.chemical_makeup[chem] * reagent_amount)
 				breath.adjust_gas(gasname, -breath.gas[gasname], update = 0) //update after
 
 	// Moved after reagent injection so we don't instantly poison ourselves with CO2 or whatever.

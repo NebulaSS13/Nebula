@@ -65,6 +65,10 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		user.reset_view(linked)
 	if(user.client)
 		user.client.view = world.view + extra_view
+	if(linked)
+		for(var/obj/machinery/computer/ship/sensors/sensor in linked.consoles)
+			sensor.reveal_contacts(user)
+
 	GLOB.moved_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
 	GLOB.stat_set_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYDISTINCTADD(viewers, weakref(user))
@@ -74,6 +78,10 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(user.client)
 		user.client.view = world.view
 		user.client.OnResize()
+	if(linked)
+		for(var/obj/machinery/computer/ship/sensors/sensor in linked.consoles)
+			sensor.hide_contacts(user)
+
 	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
 	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYREMOVE(viewers, weakref(user))
@@ -96,6 +104,10 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		return -1
 	else
 		return 0
+
+/obj/machinery/computer/ship/Destroy()
+	linked.consoles -= src
+	. = ..()
 
 /obj/machinery/computer/ship/sensors/Destroy()
 	sensors = null

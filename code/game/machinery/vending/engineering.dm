@@ -61,7 +61,7 @@
 	markup = 0
 	vend_delay = 21
 	base_type = /obj/machinery/vending/engivend
-	req_access = list(list(access_atmospherics,access_engine_equip))
+	initial_access = list(list(access_atmospherics, access_engine_equip))
 	products = list(
 		/obj/item/clothing/glasses/meson = 2,
 		/obj/item/multitool = 4,
@@ -84,7 +84,7 @@
 	icon_vend = "engi-vend"
 	base_type = /obj/machinery/vending/engineering
 	markup = 0
-	req_access = list(list(access_atmospherics,access_engine_equip))
+	initial_access = list(list(access_atmospherics, access_engine_equip))
 	products = list(
 		/obj/item/storage/belt/utility = 4,
 		/obj/item/clothing/glasses/meson = 4,
@@ -117,7 +117,7 @@
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	icon_vend = "robotics-vend"
-	req_access = list(access_robotics)
+	initial_access = list(access_robotics)
 	base_type = /obj/machinery/vending/robotics
 	products = list(
 		/obj/item/stack/cable_coil = 4,
@@ -132,3 +132,29 @@
 		/obj/item/crowbar = 2
 	)
 	contraband = list(/obj/item/flash = 2)
+
+/obj/machinery/vending/materials
+	name = "MatterVend"
+	desc = "Provides access to baryonic matter in easy to handle sheet form."
+	icon_state = "engivend"
+	icon_deny = "engivend-deny"
+	icon_vend = "engivend-vend"
+	markup = 0
+	vend_delay = 21
+	base_type = /obj/machinery/vending/materials
+	products = list(
+		/obj/item/stack/material/steel/fifty = 3,
+		/obj/item/stack/material/plastic/fifty = 4,
+		/obj/item/stack/material/aluminium/fifty = 3,
+		/obj/item/stack/material/plasteel/ten = 4,
+		/obj/item/stack/material/glass/fifty = 4
+	)
+	contraband = list(/obj/item/stack/material/ocp/ten = 3)
+
+/obj/machinery/vending/materials/build_inventory()
+	..()
+	for(var/datum/stored_items/vending_products/P in product_records)
+		if(ispath(P.item_path, /obj/item/stack/material))
+			var/obj/item/stack/material/S = P.item_path
+			var/decl/material/sheet_material = decls_repository.get_decl(initial(S.material))
+			P.item_name = "[sheet_material.display_name] [sheet_material.sheet_plural_name] ([initial(S.amount)]x)"

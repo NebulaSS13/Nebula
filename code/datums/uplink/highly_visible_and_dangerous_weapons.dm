@@ -55,12 +55,6 @@
 	item_cost = 32
 	path = /obj/item/gun/energy/gun
 
-/datum/uplink_item/item/visible_weapons/ionpistol
-	name = "Ion Pistol"
-	desc = "Ion rifle in compact form."
-	item_cost = 40
-	path = /obj/item/gun/energy/ionrifle/small
-
 /datum/uplink_item/item/visible_weapons/revolver
 	name = "Magnum Revolver"
 	desc = "A high-caliber revolver. Includes an extra speedloader of ammo."
@@ -115,13 +109,6 @@
 	item_cost = 45
 	path = /obj/item/gun/projectile/shotgun/doublebarrel/sawn
 
-/datum/uplink_item/item/visible_weapons/pulserifle
-	name = "Pulse Rifle"
-	desc = "A triple burst, heavy laser rifle, with a large battery compacity."
-	item_cost = 68
-	path = /obj/item/gun/energy/pulse_rifle
-	antag_roles = list(MODE_MERCENARY)
-
 /datum/uplink_item/item/visible_weapons/flechetterifle
 	name = "Flechette Rifle"
 	desc = "A railgun with two togglable fire modes, able to launch flechette ammunition at incredible speeds."
@@ -136,14 +123,6 @@
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/gun/magnetic/railgun
-
-/datum/uplink_item/item/visible_weapons/railguntcc // Only slightly better than the normal railgun; but cooler looking
-	name = "Advanced Railgun"
-	desc = "A modified prototype of the original railgun implement, this time boring slugs out of steel rods loaded into the chamber, \
-			now with even MORE stopping power."
-	antag_roles = list(MODE_MERCENARY)
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
-	path = /obj/item/gun/magnetic/railgun/tcc
 
 /datum/uplink_item/item/visible_weapons/harpoonbomb
 	name = "Explosive Harpoon"

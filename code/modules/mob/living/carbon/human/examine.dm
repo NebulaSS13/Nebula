@@ -1,4 +1,5 @@
 /mob/living/carbon/human/examine(mob/user, distance)
+	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 	var/skipgloves = 0
 	var/skipsuitstorage = 0

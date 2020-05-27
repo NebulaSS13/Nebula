@@ -65,48 +65,35 @@ var/religion_name = null
 	var/name = ""
 
 	//Rare: Pre-Prefix
-	if (prob(10))
+	if(prob(10))
 		name = pick(GLOB.station_prefixes)
 		GLOB.using_map.station_name = name + " "
 
-	// Prefix
-	switch(Holiday)
-		//get normal name
-		if(null,"",0)
-			name = pick(GLOB.station_names)
-			if(name)
-				GLOB.using_map.station_name += name + " "
-
-		//For special days like christmas, easter, new-years etc ~Carn
-		if("Friday the 13th")
-			name = pick("Mike","Friday","Evil","Myers","Murder","Deathly","Stabby")
-			GLOB.using_map.station_name += name + " "
-			random = 13
-		else
-			//get the first word of the Holiday and use that
-			var/i = findtext(Holiday," ",1,0)
-			name = copytext(Holiday,1,i)
-			GLOB.using_map.station_name += name + " "
+	var/holiday_prefix = length(global.current_holiday?.station_prefixes) && pick(global.current_holiday.station_prefixes)
+	if(holiday_prefix)
+		name = holiday_prefix
+		GLOB.using_map.station_name = "[GLOB.using_map.station_name][holiday_prefix] "
 
 	// Suffix
 	name = pick(GLOB.station_suffixes)
 	GLOB.using_map.station_name += name + " "
 
-	// ID Number
-	switch(random)
-		if(1)
-			GLOB.using_map.station_name += "[rand(1, 99)]"
-		if(2)
-			GLOB.using_map.station_name += pick(GLOB.greek_letters)
-		if(3)
-			GLOB.using_map.station_name += "\Roman[rand(1,99)]"
-		if(4)
-			GLOB.using_map.station_name += pick(GLOB.phonetic_alphabet)
-		if(5)
-			GLOB.using_map.station_name += pick(GLOB.numbers_as_words)
-		if(13)
-			GLOB.using_map.station_name += pick("13","XIII","Thirteen")
-
+	var/holiday_suffix = length(global.current_holiday?.station_suffixes) && pick(global.current_holiday.station_suffixes)
+	if(holiday_suffix)
+		GLOB.using_map.station_name += holiday_suffix
+	else
+		// ID Number
+		switch(random)
+			if(1)
+				GLOB.using_map.station_name += "[rand(1, 99)]"
+			if(2)
+				GLOB.using_map.station_name += pick(GLOB.greek_letters)
+			if(3)
+				GLOB.using_map.station_name += "\Roman[rand(1,99)]"
+			if(4)
+				GLOB.using_map.station_name += pick(GLOB.phonetic_alphabet)
+			if(5)
+				GLOB.using_map.station_name += pick(GLOB.numbers_as_words)
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"
@@ -186,7 +173,7 @@ var/syndicate_code_response//Code response for traitors.
 
 	var/safety[] = list(1,2,3)//Tells the proc which options to remove later on.
 	var/nouns[] = list("love","hate","anger","peace","pride","sympathy","bravery","loyalty","honesty","integrity","compassion","charity","success","courage","deceit","skill","beauty","brilliance","pain","misery","beliefs","dreams","justice","truth","faith","liberty","knowledge","thought","information","culture","trust","dedication","progress","education","hospitality","leisure","trouble","friendships", "relaxation")
-	var/drinks[] = list("vodka and tonic","gin fizz","bahama mama","manhattan","black Russian","whiskey soda","long island tea","margarita","Irish coffee"," manly dwarf","Irish cream","doctor's delight","Beepksy Smash","tequilla sunrise","brave bull","gargle blaster","bloody mary","whiskey cola","white Russian","vodka martini","martini","Cuba libre","kahlua","vodka","wine","moonshine")
+	var/drinks[] = list("vodka and tonic","gin fizz","bahama mama","manhattan","black Russian","whiskey soda","long island tea","margarita","Irish coffee"," manly dwarf","Irish cream","doctor's delight","Beepsky Smash","tequilla sunrise","brave bull","gargle blaster","bloody mary","whiskey cola","white Russian","vodka martini","martini","Cuba libre","kahlua","vodka","wine","moonshine")
 	var/locations[] = length(stationlocs) ? stationlocs : drinks//if null, defaults to drinks instead.
 
 	var/maxwords = words//Extra var to check for duplicates.

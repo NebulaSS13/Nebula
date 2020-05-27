@@ -85,6 +85,7 @@ Class Procs:
 	throw_range = 5
 
 	var/stat = 0
+	var/waterproof = TRUE
 	var/reason_broken = 0
 	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
 	var/emagged = 0
@@ -115,6 +116,8 @@ Class Procs:
 
 	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/stock_parts
 	var/processing_flags         // What is being processed
+
+	var/list/initial_access		// Used to setup network locks on machinery at populate_parts.
 
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
@@ -243,7 +246,7 @@ Class Procs:
 
 /obj/machinery/proc/get_tool_manipulation_info()
 	return construct_state?.mechanics_info()
-	
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_ai(mob/user)
@@ -260,7 +263,7 @@ Class Procs:
 /obj/machinery/attack_ghost(mob/user)
 	interface_interact(user)
 
-// If you don't call parent in this proc, you must make all appropriate checks yourself. 
+// If you don't call parent in this proc, you must make all appropriate checks yourself.
 // If you do, you must respect the return value.
 /obj/machinery/attack_hand(mob/user)
 	if((. = ..())) // Buckling, climbers; unlikely to return true.
@@ -420,7 +423,7 @@ Class Procs:
 /obj/machinery/fluid_act(var/datum/reagents/fluids)
 	..()
 	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids.total_volume > FLUID_DEEP))
-		ex_act(3)
+		explosion_act(3)
 
 /obj/machinery/Move()
 	. = ..()
@@ -451,6 +454,5 @@ Class Procs:
 
 /obj/machinery/get_req_access()
 	. = ..() || list()
-	var/obj/item/stock_parts/network_lock/lock = get_component_of_type(/obj/item/stock_parts/network_lock)
-	if(lock)
-		. = . | lock.get_req_access()
+	for(var/obj/item/stock_parts/network_lock/lock in get_all_components_of_type(/obj/item/stock_parts/network_lock))
+		.+= lock.get_req_access()

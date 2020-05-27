@@ -3,7 +3,7 @@
 	name = "deployable"
 	desc = "Deployable."
 	icon = 'icons/obj/objects.dmi'
-	req_access = list(access_security)//I'm changing this until these are properly tested./N
+	initial_access = list(access_security)
 
 /obj/machinery/deployable/barrier
 	name = "deployable barrier"
@@ -15,7 +15,6 @@
 	var/health = 100.0
 	var/maxhealth = 100.0
 	var/locked = 0.0
-//	req_access = list(access_maint_tunnels)
 
 /obj/machinery/deployable/barrier/Initialize()
 	. = ..()
@@ -65,14 +64,15 @@
 			src.explode()
 		..()
 
-/obj/machinery/deployable/barrier/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			src.explode()
-		if(2.0)
-			src.health -= 25
-			if (src.health <= 0)
-				src.explode()
+/obj/machinery/deployable/barrier/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src))
+		if(severity == 1)
+			health = 0
+		else if(severity == 2)
+			health -= 25
+		if(health <= 0)
+			explode()
 
 /obj/machinery/deployable/barrier/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

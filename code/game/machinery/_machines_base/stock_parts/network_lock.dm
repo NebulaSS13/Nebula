@@ -11,7 +11,7 @@
 	var/list/grants = list()						// List of grants required to operate the device.
 	var/emagged										// Whether or not this has been emagged.
 	var/error
-	var/signal_strength = NETWORK_SPEED_LOWSIGNAL	// How good the wireless capabilities are of this card.
+	var/signal_strength = NETWORK_CONNECTION_WIRELESS	// How good the wireless capabilities are of this card.
 	var/interact_sounds = list("keyboard", "keystroke")
 	var/interact_sound_volume = 40
 
@@ -41,7 +41,7 @@
 	var/list/resulting_grants = list()
 	for(var/grant_data in grants)
 		var/datum/computer_file/data/grant_record/grant = access_controller.get_grant(grant_data)
-		if(!grant)
+		if(!istype(grant))
 			continue // couldn't find.
 		resulting_grants |= uppertext("[D.network_id].[grant_data]")
 

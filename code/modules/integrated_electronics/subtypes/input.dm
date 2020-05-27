@@ -1140,7 +1140,7 @@
 	var/list/gas_names = list()
 	var/list/gas_amounts = list()
 	for(var/id in gases)
-		var/material/mat = SSmaterials.get_material_datum(id)
+		var/decl/material/mat = decls_repository.get_decl(id)
 		gas_names.Add(mat.display_name)
 		gas_amounts.Add(round(gases[id], 0.001))
 

@@ -1,33 +1,27 @@
-/obj/item/modular_computer/telescreen/preset/install_default_hardware()
-	..()
-	processor_unit = new/obj/item/stock_parts/computer/processor_unit(src)
-	tesla_link = new/obj/item/stock_parts/computer/tesla_link(src)
-	hard_drive = new/obj/item/stock_parts/computer/hard_drive(src)
-	network_card = new/obj/item/stock_parts/computer/network_card(src)
+/obj/item/modular_computer/telescreen/preset
+	default_hardware = list(
+		/obj/item/stock_parts/computer/processor_unit,
+		/obj/item/stock_parts/computer/tesla_link,
+		/obj/item/stock_parts/computer/hard_drive,
+		/obj/item/stock_parts/computer/network_card
+	)
 
-/obj/item/modular_computer/telescreen/preset/generic/install_default_programs()
-	..()
-	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		os.set_autorun("cammon")
+/obj/item/modular_computer/telescreen/preset/generic
+	default_programs = list(
+		/datum/computer_file/program/alarm_monitor,
+		/datum/computer_file/program/camera_monitor
+	)
 
-/obj/item/modular_computer/telescreen/preset/medical/install_default_programs()
-	..()
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/records())
-	hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		os.set_autorun("sensormonitor")
-
-/obj/item/modular_computer/telescreen/preset/engineering/install_default_programs()
-	..()
-	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/shields_monitor())
-	hard_drive.store_file(new/datum/computer_file/program/supermatter_monitor())
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		os.set_autorun("alarmmonitor")
+/obj/item/modular_computer/telescreen/preset/medical
+	default_programs = list(
+		/datum/computer_file/program/camera_monitor,
+		/datum/computer_file/program/records,
+		/datum/computer_file/program/suit_sensors
+	)
+/obj/item/modular_computer/telescreen/preset/engineering
+	default_programs = list(
+		/datum/computer_file/program/alarm_monitor,
+		/datum/computer_file/program/camera_monitor,
+		/datum/computer_file/program/shields_monitor,
+		/datum/computer_file/program/supermatter_monitor
+	)

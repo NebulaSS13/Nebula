@@ -1,9 +1,9 @@
 /obj/item/gun/projectile/heavysniper
 	name = "anti-materiel rifle"
 	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to be used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease."
+	on_mob_icon = 'icons/obj/guns/heavysniper.dmi'
 	icon = 'icons/obj/guns/heavysniper.dmi'
-	icon_state = "heavysniper"
-	item_state = "heavysniper" //sort of placeholder
+	icon_state = "world"
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	slot_flags = SLOT_BACK
@@ -20,16 +20,15 @@
 	scoped_accuracy = 8 //increased accuracy over the LWAP because only one shot
 	scope_zoom = 2
 	var/bolt_open = 0
-	wielded_item_state = "heavysniper-wielded" //sort of placeholder
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
 	fire_delay = 12
 
 /obj/item/gun/projectile/heavysniper/on_update_icon()
 	..()
 	if(bolt_open)
-		icon_state = "[initial(icon_state)]-open"
+		icon_state = "[get_world_inventory_state()]-open"
 	else
-		icon_state = "[initial(icon_state)]"
+		icon_state = get_world_inventory_state()
 
 /obj/item/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
 	..()

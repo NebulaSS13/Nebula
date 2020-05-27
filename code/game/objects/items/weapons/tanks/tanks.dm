@@ -348,7 +348,7 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/Process()
 	//Allow for reactions
-	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
+	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
 	check_status()
 
 /obj/item/tank/on_update_icon(var/override)
@@ -508,7 +508,7 @@ var/list/global/tank_gauge_cache = list()
 	air_contents.gas[MAT_OXYGEN] = oxygen_amt
 	air_contents.update_values()
 	valve_welded = 1
-	air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
+	air_contents.temperature = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE-1
 
 	wired = 1
 

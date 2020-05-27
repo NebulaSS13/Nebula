@@ -116,7 +116,7 @@
 		icon_state = "scrap"
 		return
 	user.examinate(src)
-	if(rigged && (Holiday == "April Fool's Day"))
+	if(rigged && (global.current_holiday?.name == "April Fool's Day"))
 		if(spam_flag == 0)
 			spam_flag = 1
 			playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
@@ -455,6 +455,7 @@
 //For supply.
 /obj/item/paper/manifest
 	name = "supply manifest"
+	var/order_total = 0
 	var/is_copy = 1
 /*
  * Premade paper

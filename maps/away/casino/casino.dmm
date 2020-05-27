@@ -209,6 +209,7 @@
 "aF" = (
 /obj/structure/bed/chair{
 	dir = 4;
+	
 	},
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled,
@@ -1080,6 +1081,7 @@
 "cS" = (
 /obj/structure/bed/chair{
 	dir = 4;
+	
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
@@ -1297,8 +1299,8 @@
 /area/casino/casino_security)
 "dC" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/armor/bulletproof/vest,
-/obj/item/clothing/suit/armor/bulletproof/vest,
+/obj/item/clothing/suit/armor/vest,
+/obj/item/clothing/suit/armor/vest,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dD" = (
@@ -1424,7 +1426,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_storage)
 "dU" = (
-/obj/item/clothing/suit/armor/bulletproof/vest,
+/obj/item/clothing/suit/armor/vest,
 /obj/random/ammo,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -4459,7 +4461,7 @@
 /turf/simulated/floor/reinforced,
 /area/casino/casino_bow)
 "ly" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -5478,6 +5480,7 @@
 "Fb" = (
 /obj/structure/bed/chair{
 	dir = 4;
+	
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/structure/cable{

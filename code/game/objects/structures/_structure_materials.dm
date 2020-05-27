@@ -1,6 +1,6 @@
 /obj/structure
-	var/material/material
-	var/material/reinf_material
+	var/decl/material/material
+	var/decl/material/reinf_material
 	var/material_alteration
 	var/dismantled
 
@@ -62,6 +62,7 @@
 			reinf_material.place_dismantled_product(T)
 
 /obj/structure/proc/dismantle()
+	SHOULD_CALL_PARENT(TRUE)
 	if(!dismantled)
 		dismantled = TRUE
 		create_dismantled_products(get_turf(src))

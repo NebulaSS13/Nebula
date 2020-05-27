@@ -168,20 +168,6 @@
 	if(get_status() != LIGHT_OK)
 		set_light(0)
 
-/obj/machinery/light/attack_generic(var/mob/user, var/damage)
-	if(!damage)
-		return
-	var/status = get_status()
-	if(status == LIGHT_EMPTY || status == LIGHT_BROKEN)
-		to_chat(user, "That object is useless to you.")
-		return
-	if(!(status == LIGHT_OK||status == LIGHT_BURNED))
-		return
-	visible_message("<span class='danger'>[user] smashes the light!</span>")
-	attack_animation(user)
-	broken()
-	return 1
-
 /obj/machinery/light/proc/set_mode(var/new_mode)
 	if(current_mode != new_mode)
 		current_mode = new_mode
@@ -393,17 +379,13 @@
 // explosion effect
 // destroy the whole light fixture or just shatter it
 
-/obj/machinery/light/ex_act(severity)
-	switch(severity)
-		if(1)
-			qdel(src)
-			return
-		if(2)
-			if (prob(75))
-				broken()
-		if(3)
-			if (prob(50))
-				broken()
+/obj/machinery/light/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src))
+		if(severity == 1)
+			physically_destroyed()
+		else if((severity == 2 && prob(75)) || (severity == 3 && prob(50)))
+			broken()
 
 // timed process
 // use power
@@ -595,21 +577,18 @@
 // if a syringe, can inject phoron to make it explode
 /obj/item/light/attackby(var/obj/item/I, var/mob/user)
 	..()
-	if(istype(I, /obj/item/chems/syringe))
+	if(istype(I, /obj/item/chems/syringe) && I.reagents?.total_volume)
 		var/obj/item/chems/syringe/S = I
-
 		to_chat(user, "You inject the solution into the [src].")
-
-		if(S.reagents.has_reagent(/decl/reagent/toxin/phoron, 5))
-
-			log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
-
-			rigged = 1
-
+		for(var/rtype in S.reagents)
+			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			if(R.fuel_value)
+				rigged = TRUE
+				log_and_message_admins("injected a light with flammable reagents, rigging it to explode.", user)
+				break
 		S.reagents.clear_reagents()
-	else
-		..()
-	return
+		return TRUE
+	. = ..()
 
 // called after an attack with a light item
 // shatter light, unless it was an attempt to put it in a light socket

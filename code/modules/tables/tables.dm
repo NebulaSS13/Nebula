@@ -53,7 +53,8 @@
 /obj/structure/table/get_material_health_modifier()
 	. = 0.5
 
-/obj/structure/table/destroyed()
+/obj/structure/table/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	visible_message(SPAN_DANGER("\The [src] breaks down!"))
 	. = break_to_parts()
 
@@ -183,7 +184,7 @@
 
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_add(obj/item/stack/material/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
-	var/material/M = S.get_material()
+	var/decl/material/M = S.get_material()
 	if(!istype(M))
 		to_chat(user, "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>")
 		return null
@@ -199,7 +200,7 @@
 	return M
 
 // Returns the material to set the table to.
-/obj/structure/table/proc/common_material_remove(mob/user, material/M, delay, what, type_holding, sound)
+/obj/structure/table/proc/common_material_remove(mob/user, decl/material/M, delay, what, type_holding, sound)
 	if(!M.stack_type)
 		to_chat(user, "<span class='warning'>You are unable to remove the [what] from this table!</span>")
 		return M
@@ -254,7 +255,7 @@
 	if(full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
-		var/material/M = SSmaterials.get_material_datum(MAT_STEEL)
+		var/decl/material/M = decls_repository.get_decl(MAT_STEEL)
 		S = M.place_shard(loc)
 		if(S) shards += S
 	qdel(src)

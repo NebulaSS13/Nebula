@@ -1,13 +1,13 @@
-/material
+/decl/material
 	var/is_psionic_nullifier
 
-/material/proc/is_psi_null()
+/decl/material/proc/is_psi_null()
 	return is_psionic_nullifier
 
-/material/nullglass
+/decl/material/nullglass
 	is_psionic_nullifier = TRUE
 
-/material/nullglass
+/decl/material/nullglass
 	
 	icon_colour = COLOR_NULLGLASS
 	conductive = 1
@@ -23,7 +23,7 @@
 	destruction_desc = "shatters"
 	hitsound = 'sound/effects/Glasshit.ogg'
 
-/material/nullglass/generate_recipes()
+/decl/material/nullglass/generate_recipes()
 	. = ..()
 	. += new /datum/stack_recipe/tile/nullglass(src)
 

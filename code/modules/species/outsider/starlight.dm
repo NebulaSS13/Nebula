@@ -83,8 +83,8 @@
 /datum/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
 	..()
 	var/turf/T = get_turf(H)
-	new/obj/effect/decal/cleanable/liquid_fuel(T, 20, TRUE)
-	T.hotspot_expose(PHORON_MINIMUM_BURN_TEMPERATURE)
+	T.add_fluid(20, /decl/reagent/fuel)
+	T.hotspot_expose(FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 
 /datum/species/starlight/blueforged
 	name = "Blueforged"

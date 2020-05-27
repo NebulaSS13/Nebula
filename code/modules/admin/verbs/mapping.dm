@@ -150,6 +150,7 @@ var/list/debug_verbs = list (
 		,/client/proc/spawn_tanktransferbomb
 		,/client/proc/find_leaky_pipes
 		,/client/proc/analyze_openturf
+		,/client/proc/show_cargo_prices
 	)
 
 
@@ -342,3 +343,18 @@ var/list/debug_verbs = list (
 			baddies += "[P] ([P.x],[P.y],[P.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[P.x];Y=[P.y];Z=[P.z]'>JMP</a>)"
 
 	to_chat(usr,jointext(baddies, "<br>"))
+
+/client/proc/show_cargo_prices()
+	set category = "Debug"
+	set name = "Debug Cargo Prices"
+
+	var/list/cargo_packs = decls_repository.get_decls_of_subtype(/decl/hierarchy/supply_pack)
+	var/list/prices = list()
+	for(var/ptype in cargo_packs)
+		var/decl/hierarchy/supply_pack/pack = cargo_packs[ptype]
+		if(pack.name && !isnull(pack.cost))
+			prices += "<tr><td>[pack.name]</td><td>[pack.cost]</td></tr>"
+
+	var/datum/browser/popup = new(mob, "cargo_price_debug", "Cargo Prices")
+	popup.set_content("<table>[jointext(prices, "")]</table>")
+	popup.open()

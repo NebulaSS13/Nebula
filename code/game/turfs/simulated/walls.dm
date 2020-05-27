@@ -15,9 +15,9 @@
 	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
-	var/material/material
-	var/material/reinf_material
-	var/material/girder_material = MAT_STEEL
+	var/decl/material/material
+	var/decl/material/reinf_material
+	var/decl/material/girder_material = MAT_STEEL
 	var/last_state
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
@@ -28,7 +28,7 @@
 	var/stripe_color
 	var/global/list/wall_stripe_cache = list()
 	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut, /turf/simulated/wall/maple, /turf/simulated/wall/mahogany, /turf/simulated/wall/ebony)
-	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/phoronbasic/full, /obj/structure/window/phoronreinforced/full) // Objects which to blend with
+	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/borosilicate/full, /obj/structure/window/borosilicate_reinforced/full) // Objects which to blend with
 	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
 /turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
@@ -36,11 +36,11 @@
 	icon_state = "blank"
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
-	material = SSmaterials.get_material_datum(materialtype)
+	material = decls_repository.get_decl(materialtype)
 	if(!isnull(rmaterialtype))
-		reinf_material = SSmaterials.get_material_datum(rmaterialtype)
-	if(ispath(girder_material, /material))
-		girder_material = SSmaterials.get_material_datum(girder_material)
+		reinf_material = decls_repository.get_decl(rmaterialtype)
+	if(ispath(girder_material, /decl/material))
+		girder_material = decls_repository.get_decl(girder_material)
 	update_material()
 	hitsound = material.hitsound
 
@@ -193,26 +193,23 @@
 			O.forceMove(src)
 
 	clear_plants()
-	material = SSmaterials.get_material_datum(MAT_PLACEHOLDER)
+	material = decls_repository.get_decl(MAT_PLACEHOLDER)
 	reinf_material = null
 	update_connections(1)
 
 	ChangeTurf(floor_type || get_base_turf_by_area(src))
 
-/turf/simulated/wall/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			src.ChangeTurf(get_base_turf(src.z))
-			return
-		if(2.0)
-			if(prob(75))
-				take_damage(rand(150, 250))
-			else
-				dismantle_wall(1,1)
-		if(3.0)
-			take_damage(rand(0, 250))
+/turf/simulated/wall/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(severity == 1)
+		ChangeTurf(get_base_turf(src.z))
+	else if(severity == 2)
+		if(prob(75))
+			take_damage(rand(150, 250))
 		else
-	return
+			dismantle_wall(1,1)
+	else if(severity == 3)
+		take_damage(rand(0, 250))
 
 // Wall-rot effect, a nasty fungus that destroys walls.
 /turf/simulated/wall/proc/rot()

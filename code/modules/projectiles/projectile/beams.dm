@@ -71,12 +71,6 @@
 	tracer_type = /obj/effect/projectile/laser/pulse/tracer
 	impact_type = /obj/effect/projectile/laser/pulse/impact
 
-/obj/item/projectile/beam/pulse/mid
-	damage = 20
-
-/obj/item/projectile/beam/pulse/heavy
-	damage = 25
-
 /obj/item/projectile/beam/pulse/destroy
 	name = "destroyer pulse"
 	damage = 100 //badmins be badmins I don't give a fuck
@@ -84,7 +78,7 @@
 
 /obj/item/projectile/beam/pulse/destroy/on_hit(var/atom/target, var/blocked = 0)
 	if(isturf(target))
-		target.ex_act(2)
+		target.explosion_act(2)
 	..()
 
 /obj/item/projectile/beam/emitter

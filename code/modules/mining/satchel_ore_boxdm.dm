@@ -86,9 +86,7 @@
 		O.dropInto(loc)
 	to_chat(usr, "<span class='notice'>You empty the ore box</span>")
 
-/obj/structure/ore_box/ex_act(severity)
-	if(severity == 1.0 || (severity < 3.0 && prob(50)))
-		for (var/obj/item/ore/O in contents)
-			O.dropInto(loc)
-			O.ex_act(severity++)
-		qdel(src)
+/obj/structure/ore_box/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src) && (severity == 1 || prob(50)))
+		physically_destroyed(src)

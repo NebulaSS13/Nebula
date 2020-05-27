@@ -34,7 +34,6 @@
 	flipped = 1
 	},
 /obj/effect/spider/cocoon,
-/obj/item/net_shell,
 /obj/random/energy,
 /obj/random/trash,
 /turf/simulated/floor/lino,

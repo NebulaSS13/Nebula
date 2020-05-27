@@ -14,7 +14,7 @@ var/list/ventcrawl_machinery = list(
 	/obj/item/clothing/suit/cultrobes,
 	/obj/item/book/tome,
 	/obj/item/paper/,
-	/obj/item/melee/cultblade
+	/obj/item/material/sword/cultblade
 	)
 
 /mob/living/var/list/icon/pipes_shown = list()
