@@ -11,7 +11,7 @@
 
 /obj/item/chems/food/snacks/meat/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/nutriment/protein, 9)
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 9)
 	bitesize = 3
 
 /obj/item/chems/food/snacks/meat/syntiflesh

@@ -32,7 +32,7 @@
 	update_icon()
 
 /obj/item/soap/proc/wet()
-	reagents.add_reagent(/decl/material/chem/cleaner, 15)
+	reagents.add_reagent(/decl/material/liquid/cleaner, 15)
 
 /obj/item/soap/Crossed(var/mob/living/AM)
 	if(istype(AM))

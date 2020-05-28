@@ -7,7 +7,7 @@
 	base_icon_state = "replicator"
 	has_recycler = FALSE
 	base_storage_capacity = list(
-		/decl/material/chem/nutriment = 100
+		/decl/material/liquid/nutriment = 100
 	)
 
 /obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/decl/language/speaking)

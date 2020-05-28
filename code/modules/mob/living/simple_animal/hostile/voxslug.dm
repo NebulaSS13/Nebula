@@ -67,7 +67,7 @@ Small, little HP, poisonous.
 			if(prob(1))
 				to_chat(L, "<span class='warning'>You feel strange as \the [src] pulses...</span>")
 			var/datum/reagents/R = L.reagents
-			R.add_reagent(/decl/material/chem/presyncopics, 0.5)
+			R.add_reagent(/decl/material/liquid/presyncopics, 0.5)
 
 /obj/item/holder/voxslug/attack(var/mob/target, var/mob/user)
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]

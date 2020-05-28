@@ -1,4 +1,4 @@
-/decl/material/chem/blood
+/decl/material/liquid/blood
 	name = "blood"
 	lore_text = "A red (or blue) liquid commonly found inside animals, most of whom are pretty insistent about it being left where you found it."
 	metabolism = REM * 5
@@ -11,23 +11,23 @@
 	value = 2.5
 
 	chilling_products = list(
-		/decl/material/chem/coagulated_blood = 1
+		/decl/material/liquid/coagulated_blood = 1
 	)
 	chilling_point = 249
 	chilling_message = "coagulates and clumps together."
 
 	heating_products = list(
-		/decl/material/chem/coagulated_blood = 1
+		/decl/material/liquid/coagulated_blood = 1
 	)
 	heating_point = 318
 	heating_message = "coagulates and clumps together."
 
-/decl/material/chem/blood/initialize_data(var/newdata)
+/decl/material/liquid/blood/initialize_data(var/newdata)
 	. = ..() || list()
 	if(.)
 		.["species"] = .["species"] || GLOB.using_map.default_species
 
-/decl/material/chem/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
+/decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
 	var/list/data = REAGENT_DATA(reagents, type)
 	if(LAZYACCESS(newdata, "trace_chem"))
 		var/list/other_chems = LAZYACCESS(newdata, "trace_chem")
@@ -41,7 +41,7 @@
 				my_chems[chem] = my_chems[chem] + other_chems[chem]
 	. = data
 
-/decl/material/chem/blood/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/liquid/blood/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	var/data = REAGENT_DATA(holder, type)
 	if(!istype(T) || REAGENT_VOLUME(holder, type) < 3)
 		return
@@ -57,25 +57,25 @@
 		if(B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
-/decl/material/chem/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 
 	if(M.chem_doses[type] > 5)
 		M.adjustToxLoss(removed)
 	if(M.chem_doses[type] > 15)
 		M.adjustToxLoss(removed)
 
-/decl/material/chem/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return
 
-/decl/material/chem/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	M.inject_blood(volume, holder)
 	holder.remove_reagent(type, volume)
 
-/decl/material/chem/coagulated_blood
+/decl/material/liquid/coagulated_blood
 	name = "coagulated blood"
 	color = "#aa0000"
 	taste_description = "chewy iron"
@@ -84,4 +84,5 @@
 	glass_name = "tomato salsa"
 	glass_desc = "Are you sure this is tomato salsa?"
 	hidden_from_codex = TRUE
+	toxicity = 4
 	value = 0

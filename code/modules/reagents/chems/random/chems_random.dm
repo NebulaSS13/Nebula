@@ -2,19 +2,19 @@
 
 // subtypes of stuff in here will be avoided when randomizing interactions.
 GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
-	/decl/material/chem/adminordrazine,
-	/decl/material/chem/tobacco,
-	/decl/material/chem/drink,
-	/decl/material/chem/random,
-	/decl/material/chem/toxin/phoron,
-	/decl/material/chem/ethanol // Includes alcoholic beverages
+	/decl/material/liquid/adminordrazine,
+	/decl/material/solid/tobacco,
+	/decl/material/liquid/drink,
+	/decl/material/liquid/random,
+	/decl/material/solid/phoron,
+	/decl/material/liquid/ethanol // Includes alcoholic beverages
 ))
 
 #define FOR_ALL_EFFECTS \
 	var/list/all_effects = decls_repository.get_decls_unassociated(data);\
 	for(var/decl/random_chem_effect/effect in all_effects)
 
-/decl/material/chem/random
+/decl/material/liquid/random
 	name = "exotic chemical"
 	lore_text = "A strange and exotic chemical substance."
 	taste_mult = 0 // Random taste not yet implemented
@@ -23,7 +23,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	var/list/data = list()
 	var/initialized = FALSE
 
-/decl/material/chem/random/proc/randomize_data(temperature)
+/decl/material/liquid/random/proc/randomize_data(temperature)
 	data = list()
 	var/list/effects_to_get = subtypesof(/decl/random_chem_effect/random_properties)
 	if(length(effects_to_get) > max_effect_number)
@@ -52,19 +52,19 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 
 	initialized = TRUE
 
-/decl/material/chem/random/proc/stable_at_temperature(temperature)
+/decl/material/liquid/random/proc/stable_at_temperature(temperature)
 	if(temperature > chilling_point && temperature < heating_point)
 		return TRUE
 
-/decl/material/chem/random/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/random/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	FOR_ALL_EFFECTS
 		var/data = REAGENT_DATA(holder, type)
 		effect.affect_blood(M, alien, removed, LAZYACCESS(data, effect.type))
 
-/decl/material/chem/random/proc/on_chemicals_analyze(mob/user)
+/decl/material/liquid/random/proc/on_chemicals_analyze(mob/user)
 	to_chat(user, get_scan_data(user))
 
-/decl/material/chem/random/proc/get_scan_data(mob/user)
+/decl/material/liquid/random/proc/get_scan_data(mob/user)
 	var/list/dat = list()
 	var/chem_skill = user.get_skill_value(SKILL_CHEMISTRY)
 	if(chem_skill < SKILL_BASIC)
@@ -93,7 +93,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 			dat += "A close analysis of the scan suggests that the chemical has some of the following effects: [english_list(effect_descs)]."
 	return jointext(dat, "<br>")
 
-/decl/material/chem/random/get_value()
+/decl/material/liquid/random/get_value()
 
 	. = 0
 	FOR_ALL_EFFECTS
@@ -102,7 +102,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 
 
 // Extra unique types for exoplanet spawns, etc.
-/decl/material/chem/random/one
-/decl/material/chem/random/two
+/decl/material/liquid/random/one
+/decl/material/liquid/random/two
 
 #undef FOR_ALL_EFFECTS

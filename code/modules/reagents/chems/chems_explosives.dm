@@ -1,11 +1,11 @@
-/decl/material/chem/anfo
+/decl/material/liquid/anfo
 	name = "ANFO"
 	lore_text = "Ammonia Nitrate Fuel Oil mix, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	taste_description = "fertilizer and fuel"
 	color = "#dbc3c3"
 	var/boompower = 1
 
-/decl/material/chem/anfo/explosion_act(obj/item/chems/holder, severity)
+/decl/material/liquid/anfo/explosion_act(obj/item/chems/holder, severity)
 	. = ..()
 	if(.)
 		var/volume = REAGENT_VOLUME(holder?.reagents, type)
@@ -29,7 +29,7 @@
 			holder?.reagents?.remove_reagent(type, activated_volume)
 			explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)
 
-/decl/material/chem/anfo/plus
+/decl/material/liquid/anfo/plus
 	name = "ANFO+"
 	lore_text = "Ammonia Nitrate Fuel Oil, with aluminium powder, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	color = "#ffe8e8"

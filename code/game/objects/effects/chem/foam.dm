@@ -117,7 +117,7 @@
 				for(var/id in carried_reagents)
 					F.reagents.add_reagent(id, 1, safety = 1) //makes a safety call because all reagents should have already reacted anyway
 			else
-				F.reagents.add_reagent(/decl/material/gas/water, 1, safety = 1)
+				F.reagents.add_reagent(/decl/material/liquid/water, 1, safety = 1)
 
 // wall formed by metal foams, dense and opaque, but easy to break
 

@@ -166,7 +166,7 @@
 
 //Returns the amount of fuel in the welder
 /obj/item/weldingtool/proc/get_fuel()
-	return tank ? REAGENT_VOLUME(tank.reagents, /decl/material/chem/fuel) : 0
+	return tank ? REAGENT_VOLUME(tank.reagents, /decl/material/liquid/fuel) : 0
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
 /obj/item/weldingtool/proc/remove_fuel(var/amount = 1, var/mob/M = null)
@@ -198,11 +198,11 @@
 
 	if(in_mob)
 		amount = max(amount, 2)
-		tank.reagents.trans_type_to(in_mob, /decl/material/chem/fuel, amount)
+		tank.reagents.trans_type_to(in_mob, /decl/material/liquid/fuel, amount)
 		in_mob.IgniteMob()
 
 	else
-		tank.reagents.remove_reagent(/decl/material/chem/fuel, amount)
+		tank.reagents.remove_reagent(/decl/material/liquid/fuel, amount)
 		var/turf/location = get_turf(src.loc)
 		if(location)
 			location.hotspot_expose(700, 5)
@@ -339,7 +339,7 @@
 
 /obj/item/welder_tank/Initialize()
 	create_reagents(max_fuel)
-	reagents.add_reagent(/decl/material/chem/fuel, max_fuel)
+	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 	. = ..()
 
 /obj/item/welder_tank/afterattack(obj/O, mob/user, proximity)
@@ -407,8 +407,8 @@
 	return ..()
 
 /obj/item/welder_tank/experimental/Process()
-	var/cur_fuel = REAGENT_VOLUME(reagents, /decl/material/chem/fuel)
+	var/cur_fuel = REAGENT_VOLUME(reagents, /decl/material/liquid/fuel)
 	if(cur_fuel < max_fuel)
 		var/gen_amount = ((world.time-last_gen)/25)
-		reagents.add_reagent(/decl/material/chem/fuel, gen_amount)
+		reagents.add_reagent(/decl/material/liquid/fuel, gen_amount)
 		last_gen = world.time

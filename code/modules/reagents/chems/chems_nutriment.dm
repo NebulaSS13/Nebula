@@ -1,5 +1,5 @@
 /* Food */
-/decl/material/chem/nutriment
+/decl/material/liquid/nutriment
 	name = "nutriment"
 	lore_text = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 	taste_mult = 4
@@ -13,7 +13,7 @@
 	var/hydration_factor = 0 // Per unit
 	var/injectable = 0
 
-/decl/material/chem/nutriment/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
+/decl/material/liquid/nutriment/mix_data(var/datum/reagents/reagents, var/list/newdata, var/newamount)
 
 	if(!islist(newdata) || !newdata.len)
 		return
@@ -36,19 +36,19 @@
 				data -= taste
 	. = data
 
-/decl/material/chem/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!injectable)
 		M.adjustToxLoss(0.2 * removed)
 		return
 	affect_ingest(M, alien, removed, holder)
 
-/decl/material/chem/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.heal_organ_damage(0.5 * removed, 0) //what
 
 	adjust_nutrition(M, alien, removed)
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
-/decl/material/chem/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/material/liquid/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	var/nut_removed = removed
 	var/hyd_removed = removed
 	if(nutriment_factor)
@@ -56,7 +56,7 @@
 	if(hydration_factor)
 		M.adjust_hydration(hydration_factor * hyd_removed) // For thirst
 
-/decl/material/chem/nutriment/slime_meat
+/decl/material/liquid/nutriment/slime_meat
 	name = "slime-meat"
 	lore_text = "Mollusc meat, or slug meat - something slimy, anyway."
 	scannable = 1
@@ -64,40 +64,40 @@
 	overdose = 10
 	hydration_factor = 6
 
-/decl/material/chem/nutriment/glucose
+/decl/material/liquid/nutriment/glucose
 	name = "glucose"
 	color = "#ffffff"
 	scannable = 1
 	injectable = 1
 
-/decl/material/chem/nutriment/bread
+/decl/material/liquid/nutriment/bread
 	name = "bread"
 
-/decl/material/chem/nutriment/bread/cake
+/decl/material/liquid/nutriment/bread/cake
 	name = "cake"
 
-/decl/material/chem/nutriment/protein
+/decl/material/liquid/nutriment/protein
 	name = "animal protein"
 	taste_description = "some sort of protein"
 	color = "#440000"
 
-/decl/material/chem/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
+/decl/material/liquid/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(nutriment_factor * removed)
 
-/decl/material/chem/nutriment/protein/egg
+/decl/material/liquid/nutriment/protein/egg
 	name = "egg yolk"
 	taste_description = "egg"
 	color = "#ffffaa"
 
 //vegetamarian alternative that is safe for vegans to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
 
-/decl/material/chem/nutriment/plant_protein
+/decl/material/liquid/nutriment/plant_protein
 	name = "plant protein"
 	lore_text = "A gooey pale paste."
 	taste_description = "healthy sadness"
 	color = "#ffffff"
 
-/decl/material/chem/nutriment/honey
+/decl/material/liquid/nutriment/honey
 	name = "honey"
 	lore_text = "A golden yellow syrup, loaded with sugary sweetness."
 	taste_description = "sweetness"
@@ -105,7 +105,7 @@
 	color = "#ffff00"
 	fruit_descriptor = "rich"
 
-/decl/material/chem/nutriment/flour
+/decl/material/liquid/nutriment/flour
 	name = "flour"
 	lore_text = "This is what you rub all over yourself to pretend to be a ghost."
 	taste_description = "chalky wheat"
@@ -113,11 +113,11 @@
 	color = "#ffffff"
 	slipperiness = -1
 
-/decl/material/chem/nutriment/flour/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/flour/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	..()
 	new /obj/effect/decal/cleanable/flour(T)
 
-/decl/material/chem/nutriment/batter
+/decl/material/liquid/nutriment/batter
 	name = "batter"
 	lore_text = "A gooey mixture of eggs and flour, a base for turning wheat into food."
 	taste_description = "blandness"
@@ -125,17 +125,17 @@
 	color = "#ffd592"
 	slipperiness = -1
 
-/decl/material/chem/nutriment/batter/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/batter/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	..()
 	new /obj/effect/decal/cleanable/pie_smudge(T)
 
-/decl/material/chem/nutriment/batter/cakebatter
+/decl/material/liquid/nutriment/batter/cakebatter
 	name = "cake batter"
 	lore_text = "A gooey mixture of eggs, flour and sugar, a important precursor to cake!"
 	taste_description = "sweetness"
 	color = "#ffe992"
 
-/decl/material/chem/nutriment/coffee
+/decl/material/liquid/nutriment/coffee
 	name = "coffee powder"
 	lore_text = "A bitter powder made by grinding coffee beans."
 	taste_description = "bitterness"
@@ -144,15 +144,15 @@
 	color = "#482000"
 	fruit_descriptor = "bitter"
 
-/decl/material/chem/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/decl/material/chem/nutriment/coffee/instant
+/decl/material/liquid/nutriment/coffee/instant
 	name = "instant coffee powder"
 	lore_text = "A bitter powder made by processing coffee beans."
 
-/decl/material/chem/nutriment/tea
+/decl/material/liquid/nutriment/tea
 	name = "tea powder"
 	lore_text = "A dark, tart powder made from black tea leaves."
 	taste_description = "tartness"
@@ -160,10 +160,10 @@
 	nutriment_factor = 1
 	color = "#101000"
 
-/decl/material/chem/nutriment/tea/instant
+/decl/material/liquid/nutriment/tea/instant
 	name = "instant tea powder"
 
-/decl/material/chem/nutriment/coco
+/decl/material/liquid/nutriment/coco
 	name = "coco powder"
 	lore_text = "A fatty, bitter paste made from coco beans."
 	taste_description = "bitterness"
@@ -172,37 +172,37 @@
 	color = "#302000"
 	fruit_descriptor = "bitter"
 
-/decl/material/chem/nutriment/instantjuice
+/decl/material/liquid/nutriment/instantjuice
 	name = "juice concentrate"
 	lore_text = "Dehydrated, powdered juice of some kind."
 	taste_mult = 1.3
 	nutriment_factor = 1
 
-/decl/material/chem/nutriment/instantjuice/grape
+/decl/material/liquid/nutriment/instantjuice/grape
 	name = "grape concentrate"
 	lore_text = "Dehydrated, powdered grape juice."
 	taste_description = "dry grapes"
 	color = "#863333"
 
-/decl/material/chem/nutriment/instantjuice/orange
+/decl/material/liquid/nutriment/instantjuice/orange
 	name = "orange concentrate"
 	lore_text = "Dehydrated, powdered orange juice."
 	taste_description = "dry oranges"
 	color = "#e78108"
 
-/decl/material/chem/nutriment/instantjuice/watermelon
+/decl/material/liquid/nutriment/instantjuice/watermelon
 	name = "watermelon concentrate"
 	lore_text = "Dehydrated, powdered watermelon juice."
 	taste_description = "dry sweet watermelon"
 	color = "#b83333"
 
-/decl/material/chem/nutriment/instantjuice/apple
+/decl/material/liquid/nutriment/instantjuice/apple
 	name = "apple concentrate"
 	lore_text = "Dehydrated, powdered apple juice."
 	taste_description = "dry sweet apples"
 	color = "#c07c40"
 
-/decl/material/chem/nutriment/soysauce
+/decl/material/liquid/nutriment/soysauce
 	name = "soy sauce"
 	lore_text = "A salty sauce made from the soy plant."
 	taste_description = "umami"
@@ -210,34 +210,34 @@
 	nutriment_factor = 2
 	color = "#792300"
 
-/decl/material/chem/nutriment/ketchup
+/decl/material/liquid/nutriment/ketchup
 	name = "ketchup"
 	lore_text = "Ketchup, catsup, whatever. It's tomato paste."
 	taste_description = "ketchup"
 	nutriment_factor = 5
 	color = "#731008"
 
-/decl/material/chem/nutriment/banana_cream
+/decl/material/liquid/nutriment/banana_cream
 	name = "banana cream"
 	lore_text = "A creamy confection that tastes of banana."
 	taste_description = "banana"
 	color = "#f6dfaa"
 
-/decl/material/chem/nutriment/barbecue
+/decl/material/liquid/nutriment/barbecue
 	name = "barbecue sauce"
 	lore_text = "Barbecue sauce for barbecues and long shifts."
 	taste_description = "barbecue"
 	nutriment_factor = 5
 	color = "#4f330f"
 
-/decl/material/chem/nutriment/garlicsauce
+/decl/material/liquid/nutriment/garlicsauce
 	name = "garlic sauce"
 	lore_text = "Garlic sauce, perfect for spicing up a plate of garlic."
 	taste_description = "garlic"
 	nutriment_factor = 4
 	color = "#d8c045"
 
-/decl/material/chem/nutriment/rice
+/decl/material/liquid/nutriment/rice
 	name = "rice"
 	lore_text = "Enjoy the great taste of nothing."
 	taste_description = "rice"
@@ -245,7 +245,7 @@
 	nutriment_factor = 1
 	color = "#ffffff"
 
-/decl/material/chem/nutriment/rice/chazuke
+/decl/material/liquid/nutriment/rice/chazuke
 	name = "chazuke"
 	lore_text = "Green tea over rice. How rustic!"
 	taste_description = "green tea and rice"
@@ -253,7 +253,7 @@
 	nutriment_factor = 1
 	color = "#f1ffdb"
 
-/decl/material/chem/nutriment/cherryjelly
+/decl/material/liquid/nutriment/cherryjelly
 	name = "cherry jelly"
 	lore_text = "Totally the best. Only to be spread on foods with excellent lateral symmetry."
 	taste_description = "cherry"
@@ -262,7 +262,7 @@
 	color = "#801e28"
 	fruit_descriptor = "sweet"
 
-/decl/material/chem/nutriment/cornoil
+/decl/material/liquid/nutriment/cornoil
 	name = "corn oil"
 	lore_text = "An oil derived from various types of corn."
 	taste_description = "slime"
@@ -271,14 +271,14 @@
 	color = "#302000"
 	slipperiness = 8
 
-/decl/material/chem/nutriment/sprinkles
+/decl/material/liquid/nutriment/sprinkles
 	name = "sprinkles"
 	lore_text = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."
 	taste_description = "childhood whimsy"
 	nutriment_factor = 1
 	color = "#ff00ff"
 
-/decl/material/chem/nutriment/sugar
+/decl/material/liquid/nutriment/sugar
 	name = "sugar"
 	lore_text = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	taste_description = "sugar"
@@ -291,14 +291,14 @@
 	glass_icon = DRINK_ICON_NOISY
 	fruit_descriptor = "sweet"
 
-/decl/material/chem/nutriment/vinegar
+/decl/material/liquid/nutriment/vinegar
 	name = "vinegar"
 	lore_text = "A weak solution of acetic acid. Usually used for seasoning food."
 	taste_description = "vinegar"
 	color = "#e8dfd0"
 	taste_mult = 3
 
-/decl/material/chem/nutriment/mayo
+/decl/material/liquid/nutriment/mayo
 	name = "mayonnaise"
 	lore_text = "A mixture of egg yolk with lemon juice or vinegar. Usually put on bland food to make it more edible."
 	taste_description = "mayo"

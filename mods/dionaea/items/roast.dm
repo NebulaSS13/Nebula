@@ -11,4 +11,4 @@
 
 /obj/item/chems/food/snacks/dionaroast/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/chem/radium, 2)
+	reagents.add_reagent(/decl/material/solid/metal/radium, 2)

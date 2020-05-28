@@ -151,7 +151,7 @@
 
 /obj/item/chems/food/drinks/milk/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/milk, 50)
+	reagents.add_reagent(/decl/material/liquid/drink/milk, 50)
 
 /obj/item/chems/food/drinks/soymilk
 	name = "soymilk carton"
@@ -162,7 +162,7 @@
 
 /obj/item/chems/food/drinks/soymilk/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/milk/soymilk, 50)
+	reagents.add_reagent(/decl/material/liquid/drink/milk/soymilk, 50)
 
 /obj/item/chems/food/drinks/milk/smallcarton
 	name = "small milk carton"
@@ -171,7 +171,7 @@
 
 /obj/item/chems/food/drinks/milk/smallcarton/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/milk, 30)
+	reagents.add_reagent(/decl/material/liquid/drink/milk, 30)
 
 /obj/item/chems/food/drinks/milk/smallcarton/chocolate
 	name = "small chocolate milk carton"
@@ -179,7 +179,7 @@
 
 /obj/item/chems/food/drinks/milk/smallcarton/chocolate/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/milk/chocolate, 30)
+	reagents.add_reagent(/decl/material/liquid/drink/milk/chocolate, 30)
 
 
 /obj/item/chems/food/drinks/coffee
@@ -190,7 +190,7 @@
 
 /obj/item/chems/food/drinks/coffee/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/coffee, 30)
+	reagents.add_reagent(/decl/material/liquid/drink/coffee, 30)
 
 /obj/item/chems/food/drinks/ice
 	name = "cup of ice"
@@ -200,7 +200,7 @@
 
 /obj/item/chems/food/drinks/ice/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/gas/water/ice, 30)
+	reagents.add_reagent(/decl/material/solid/ice, 30)
 
 /obj/item/chems/food/drinks/h_chocolate
 	name = "cup of hot cocoa"
@@ -211,7 +211,7 @@
 
 /obj/item/chems/food/drinks/h_chocolate/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/hot_coco, 30)
+	reagents.add_reagent(/decl/material/liquid/drink/hot_coco, 30)
 
 /obj/item/chems/food/drinks/dry_ramen
 	name = "cup ramen"
@@ -222,7 +222,7 @@
 
 /obj/item/chems/food/drinks/dry_ramen/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/dry_ramen, 30)
+	reagents.add_reagent(/decl/material/liquid/drink/dry_ramen, 30)
 
 
 /obj/item/chems/food/drinks/sillycup
@@ -320,7 +320,7 @@
 
 /obj/item/chems/food/drinks/tea/black/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/tea/black, 30)
+	reagents.add_reagent(/decl/material/liquid/drink/tea/black, 30)
 
 /obj/item/chems/food/drinks/tea/green
 	name = "cup of green tea"
@@ -328,7 +328,7 @@
 
 /obj/item/chems/food/drinks/tea/green/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/tea/green, 30)
+	reagents.add_reagent(/decl/material/liquid/drink/tea/green, 30)
 
 /obj/item/chems/food/drinks/tea/chai
 	name = "cup of chai tea"
@@ -336,4 +336,4 @@
 
 /obj/item/chems/food/drinks/tea/chai/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/tea/chai, 30)
+	reagents.add_reagent(/decl/material/liquid/drink/tea/chai, 30)

@@ -156,7 +156,7 @@
 	Interact(usr)
 
 /obj/item/gun/projectile/dartgun/medical
-	starting_chems = list(/decl/material/chem/burn_meds,/decl/material/chem/brute_meds,/decl/material/chem/antitoxins)
+	starting_chems = list(/decl/material/liquid/burn_meds,/decl/material/liquid/brute_meds,/decl/material/liquid/antitoxins)
 
 /obj/item/gun/projectile/dartgun/raider
-	starting_chems = list(/decl/material/chem/psychoactives,/decl/material/chem/sedatives,/decl/material/chem/narcotics)
+	starting_chems = list(/decl/material/liquid/psychoactives,/decl/material/liquid/sedatives,/decl/material/liquid/narcotics)

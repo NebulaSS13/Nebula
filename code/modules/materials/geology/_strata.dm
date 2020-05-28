@@ -22,4 +22,4 @@
 
 /decl/strata/permafrost
 	name = "permafrost"
-	base_materials = list(MAT_WATER)
+	base_materials = list(/decl/material/solid/ice)

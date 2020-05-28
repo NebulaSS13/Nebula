@@ -1,7 +1,7 @@
-/decl/material/chem/crystal_agent/do_material_check(var/mob/living/carbon/M)
+/decl/material/liquid/crystal_agent/do_material_check(var/mob/living/carbon/M)
 	. = (M.psi || (M.mind && GLOB.wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : ..()
 	
-/decl/material/chem/glowsap/gleam/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
 	..()
 	if(M.psi)
 		M.psi.check_latency_trigger(30, "a [name] overdose")
@@ -9,11 +9,11 @@
 /datum/chemical_reaction/synthesis/nullglass
 	name = "Soulstone"
 	result = null
-	required_reagents = list(/decl/material/chem/blood = 15, /decl/material/chem/crystal_agent = 1)
+	required_reagents = list(/decl/material/liquid/blood = 15, /decl/material/liquid/crystal_agent = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/synthesis/nullglass/get_reaction_flags(var/datum/reagents/holder)
-	var/list/blood_data = REAGENT_DATA(holder, /decl/material/chem/blood)
+	var/list/blood_data = REAGENT_DATA(holder, /decl/material/liquid/blood)
 	var/weakref/donor_ref = LAZYACCESS(blood_data, "donor")
 	var/mob/living/donor = donor_ref?.resolve()
 	. = (istype(donor) && (donor.psi || (donor.mind && GLOB.wizards.is_antagonist(donor.mind))))

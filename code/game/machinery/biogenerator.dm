@@ -193,7 +193,7 @@
 	for(var/obj/item/chems/food/snacks/grown/I in contents)
 		S += 5
 		ingredients--
-		var/amt = REAGENT_VOLUME(I.reagents, /decl/material/chem/nutriment)
+		var/amt = REAGENT_VOLUME(I.reagents, /decl/material/liquid/nutriment)
 		if(amt < 0.1)
 			points += 1
 		else 

@@ -174,16 +174,16 @@ Single Use Emergency Pouches
 	var/chem_amount = 15
 
 /obj/item/chems/pill/pouch_pill/adrenaline
-	chem_type = /decl/material/chem/adrenaline
+	chem_type = /decl/material/liquid/adrenaline
 
 /obj/item/chems/pill/pouch_pill/antitoxins
-	chem_type = /decl/material/chem/antitoxins
+	chem_type = /decl/material/liquid/antitoxins
 
 /obj/item/chems/pill/pouch_pill/oxy_meds
-	chem_type = /decl/material/chem/oxy_meds
+	chem_type = /decl/material/liquid/oxy_meds
 
 /obj/item/chems/pill/pouch_pill/painkillers
-	chem_type = /decl/material/chem/painkillers
+	chem_type = /decl/material/liquid/painkillers
 
 /obj/item/chems/pill/pouch_pill/Initialize()
 	. = ..()
@@ -198,21 +198,21 @@ Single Use Emergency Pouches
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
-	starts_with = list(/decl/material/chem/adrenaline = 5)
+	starts_with = list(/decl/material/liquid/adrenaline = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/painkillers
 	name = "emergency painkiller autoinjector"
-	starts_with = list(/decl/material/chem/painkillers = 5)
+	starts_with = list(/decl/material/liquid/painkillers = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/antitoxins
 	name = "emergency antitoxins autoinjector"
-	starts_with = list(/decl/material/chem/antitoxins = 5)
+	starts_with = list(/decl/material/liquid/antitoxins = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/oxy_meds
 	name = "emergency oxygel autoinjector"
-	starts_with = list(/decl/material/chem/oxy_meds = 5)
+	starts_with = list(/decl/material/liquid/oxy_meds = 5)
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
-	starts_with = list(/decl/material/chem/adrenaline = 8)
+	starts_with = list(/decl/material/liquid/adrenaline = 8)

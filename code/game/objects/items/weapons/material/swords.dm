@@ -58,7 +58,7 @@
 
 /obj/item/material/sword/katana/set_material(new_material)
 	. = ..()
-	if(applies_material_name && istype(material, /decl/material/wood))
+	if(applies_material_name && istype(material, /decl/material/solid/wood))
 		SetName("[material.solid_name] bokutou")
 		desc = "Finest wooden fibers folded exactly one thousand times by master robots."
 

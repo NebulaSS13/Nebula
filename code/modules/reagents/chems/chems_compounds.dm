@@ -1,82 +1,50 @@
-/decl/material/chem/acetone
-	name = "acetone"
-	lore_text = "A colorless liquid solvent used in chemical synthesis."
-	taste_description = "acid"
-	color = "#808080"
-	metabolism = REM * 0.2
-	value = 0.1
-	solvent_power = MAT_SOLVENT_MODERATE
-	toxicity = 3
-
-/decl/material/chem/surfactant // Foam precursor
-	name = "surfacant"
-	lore_text = "A isocyanate liquid that forms a foam when mixed with water."
-	taste_description = "metal"
-	color = "#9e6b38"
-	value = 0.1
-
-/decl/material/chem/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
-	name = "foaming agent"
-	lore_text = "A agent that yields metallic foam when mixed with light metal and a strong acid."
-	taste_description = "metal"
-	color = "#664b63"
-	value = 0.1
-
-/decl/material/chem/lube
-	name = "lubricant"
-	lore_text = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
-	taste_description = "slime"
-	color = "#009ca8"
-	value = 0.1
-	slipperiness = 80
-
-/decl/material/chem/luminol
+/decl/material/liquid/luminol
 	name = "luminol"
 	lore_text = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
 	color = "#f2f3f4"
 
-/decl/material/chem/luminol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
+/decl/material/liquid/luminol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	O.reveal_blood()
 
-/decl/material/chem/luminol/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
+/decl/material/liquid/luminol/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	M.reveal_blood()
 
-/decl/material/chem/glowsap
+/decl/material/liquid/glowsap
 	name = "glowsap"
 	lore_text = "A popular party drug for adventurous types who want to BE the glowstick. Rumoured to be hallucinogenic in high doses."
 	overdose = 15
 	color = "#9eefff"
 
-/decl/material/chem/glowsap/affect_ingest(mob/living/carbon/M, alien, removed, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/affect_ingest(mob/living/carbon/M, alien, removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed, holder)
 
-/decl/material/chem/glowsap/affect_blood(mob/living/carbon/M, alien, removed, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/affect_blood(mob/living/carbon/M, alien, removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_GLOWINGEYES, 1)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.update_eyes()
 
-/decl/material/chem/glowsap/on_leaving_metabolism(mob/parent, metabolism_class)
+/decl/material/liquid/glowsap/on_leaving_metabolism(mob/parent, metabolism_class)
 	if(ishuman(parent))
 		var/mob/living/carbon/human/H = parent
 		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/update_eyes), 5 SECONDS)
 	. = ..()
 
-/decl/material/chem/glowsap/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
 	. = ..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.hallucination(60, 20)
 	M.adjust_drugged(2)
 
-/decl/material/chem/blackpepper
+/decl/material/solid/blackpepper
 	name = "black pepper"
 	lore_text = "A powder ground from peppercorns. *AAAACHOOO*"
 	taste_description = "pepper"
 	color = "#000000"
 	value = 0.1
 
-/decl/material/chem/enzyme
+/decl/material/liquid/enzyme
 	name = "universal enzyme"
 	lore_text = "A universal enzyme used in the preperation of certain chemicals and foods."
 	taste_description = "sweetness"
@@ -84,7 +52,7 @@
 	color = "#365e30"
 	overdose = REAGENTS_OVERDOSE
 
-/decl/material/chem/frostoil
+/decl/material/liquid/frostoil
 	name = "chilly oil"
 	lore_text = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."
 	taste_description = "arctic mint"
@@ -93,15 +61,15 @@
 	value = 2
 	fruit_descriptor = "numbing"
 
-/decl/material/chem/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
 		M.emote("shiver")
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
-	holder.remove_reagent(/decl/material/chem/capsaicin, 5)
+	holder.remove_reagent(/decl/material/liquid/capsaicin, 5)
 
-/decl/material/chem/capsaicin
+/decl/material/liquid/capsaicin
 	name = "capsaicin oil"
 	lore_text = "This is what makes chilis hot."
 	taste_description = "hot peppers"
@@ -113,10 +81,10 @@
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
 	var/slime_temp_adj = 10
 
-/decl/material/chem/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(0.5 * removed)
 
-/decl/material/chem/capsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
@@ -131,9 +99,9 @@
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(0, 15) + slime_temp_adj
-	holder.remove_reagent(/decl/material/chem/frostoil, 5)
+	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
-/decl/material/chem/capsaicin/condensed
+/decl/material/liquid/capsaicin/condensed
 	name = "condensed capsaicin"
 	lore_text = "A chemical agent used for self-defense and in police work."
 	taste_description = "scorching agony"
@@ -146,7 +114,7 @@
 	slime_temp_adj = 15
 	value = 2
 
-/decl/material/chem/capsaicin/condensed/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/condensed/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/eyes_covered = 0
 	var/mouth_covered = 0
 	var/partial_mouth_covered = 0
@@ -205,7 +173,7 @@
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
 			M.Stun(3)
 
-/decl/material/chem/capsaicin/condensed/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
@@ -220,24 +188,24 @@
 			M.Stun(2)
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(15, 30)
-	holder.remove_reagent(/decl/material/chem/frostoil, 5)
+	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
-/decl/material/chem/mutagenics
+/decl/material/liquid/mutagenics
 	name = "mutagenics"
 	lore_text = "Might cause unpredictable mutations. Keep away from children."
 	taste_description = "slime"
 	taste_mult = 0.9
 	color = "#13bc5e"
 
-/decl/material/chem/mutagenics/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/mutagenics/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(33))
 		affect_blood(M, alien, removed, holder)
 
-/decl/material/chem/mutagenics/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/mutagenics/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(67))
 		affect_blood(M, alien, removed, holder)
 
-/decl/material/chem/mutagenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/mutagenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 
 	if(M.isSynthetic())
 		return
@@ -257,7 +225,7 @@
 			M.UpdateAppearance()
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100)
 
-/decl/material/chem/lactate
+/decl/material/liquid/lactate
 	name = "lactate"
 	lore_text = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
 	taste_description = "sourness"
@@ -266,7 +234,7 @@
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM
 
-/decl/material/chem/lactate/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/lactate/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	M.add_chemical_effect(CE_PULSE, 1)
 	M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
@@ -276,7 +244,7 @@
 	else if(M.chem_doses[type] > 20) //after prolonged exertion
 		M.make_jittery(10)
 
-/decl/material/chem/nanoblood
+/decl/material/liquid/nanoblood
 	name = "nanoblood"
 	lore_text = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
 	taste_description = "blood with bubbles"
@@ -285,7 +253,7 @@
 	overdose = 5
 	metabolism = 1
 
-/decl/material/chem/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
 	if(M.regenerate_blood(4 * removed))
@@ -293,7 +261,7 @@
 		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
 			M.immunity = max(M.immunity - 0.5, 0)
 
-/decl/material/chem/tobacco
+/decl/material/solid/tobacco
 	name = "tobacco"
 	lore_text = "Cut and processed tobacco leaves."
 	taste_description = "tobacco"
@@ -306,18 +274,18 @@
 
 	var/nicotine = REM * 0.2
 
-/decl/material/chem/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	M.reagents.add_reagent(/decl/material/chem/nicotine, nicotine)
+	M.reagents.add_reagent(/decl/material/liquid/nicotine, nicotine)
 
-/decl/material/chem/tobacco/fine
+/decl/material/solid/tobacco/fine
 	name = "fine tobacco"
 	taste_description = "fine tobacco"
 	value = 1.5
 	scent = "fine tobacco smoke"
 	scent_descriptor = SCENT_DESC_FRAGRANCE
 
-/decl/material/chem/tobacco/bad
+/decl/material/solid/tobacco/bad
 	name = "terrible tobacco"
 	taste_description = "acrid smoke"
 	value = 0.5
@@ -325,7 +293,7 @@
 	scent_intensity = /decl/scent_intensity/strong
 	scent_descriptor = SCENT_DESC_ODOR
 
-/decl/material/chem/tobacco/liquid
+/decl/material/solid/tobacco/liquid
 	name = "nicotine solution"
 	lore_text = "A diluted nicotine solution."
 	taste_mult = 0
@@ -336,7 +304,7 @@
 	scent_descriptor = null
 	scent_range = null
 
-/decl/material/chem/menthol
+/decl/material/liquid/menthol
 	name = "menthol"
 	lore_text = "Tastes naturally minty, and imparts a very mild numbing sensation."
 	taste_description = "mint"
@@ -346,12 +314,12 @@
 	scannable = 1
 	hidden_from_codex = TRUE
 
-/decl/material/chem/menthol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/menthol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
 
-/decl/material/chem/nanitefluid
+/decl/material/liquid/nanitefluid
 	name = "Nanite Fluid"
 	lore_text = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
 	taste_description = "metallic sludge"
@@ -359,7 +327,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
-/decl/material/chem/nanitefluid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nanitefluid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
@@ -369,7 +337,7 @@
 				if(BP_IS_PROSTHETIC(I))
 					I.heal_damage(20*removed)
 
-/decl/material/chem/antiseptic
+/decl/material/liquid/antiseptic
 	name = "antiseptic"
 	lore_text = "Sterilizes surfaces (or wounds) in preparation for surgery, and thoroughly removes blood."
 	taste_description = "bitterness"
@@ -377,15 +345,15 @@
 	touch_met = 5
 	dirtiness = DIRTINESS_STERILE
 
-/decl/material/chem/crystal_agent
+/decl/material/liquid/crystal_agent
 	name = "crystallizing agent"
 	taste_description = "sharpness"
 	color = "#13bc5e"
 
-/decl/material/chem/crystal_agent/proc/do_material_check(var/mob/living/carbon/M)
+/decl/material/liquid/crystal_agent/proc/do_material_check(var/mob/living/carbon/M)
 	. = MAT_CRYSTAL
 
-/decl/material/chem/crystal_agent/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/crystal_agent/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/result_mat = do_material_check(M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M

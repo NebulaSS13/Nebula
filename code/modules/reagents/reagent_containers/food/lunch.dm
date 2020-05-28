@@ -58,18 +58,18 @@ var/list/lunchables_drinks_ = list(
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_drink_reagents_ = list(
-											/decl/material/chem/drink/dry_ramen,
-											/decl/material/chem/drink/hell_ramen,
-											/decl/material/chem/drink/hot_ramen,
-											/decl/material/chem/drink/mutagencola
+											/decl/material/liquid/drink/dry_ramen,
+											/decl/material/liquid/drink/hell_ramen,
+											/decl/material/liquid/drink/hot_ramen,
+											/decl/material/liquid/drink/mutagencola
 										)
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_ethanol_reagents_ = list(
-												/decl/material/chem/ethanol/coffee,
-												/decl/material/chem/ethanol/hooch,
-												/decl/material/chem/ethanol/thirteenloko,
-												/decl/material/chem/ethanol/pwine
+												/decl/material/liquid/ethanol/coffee,
+												/decl/material/liquid/ethanol/hooch,
+												/decl/material/liquid/ethanol/thirteenloko,
+												/decl/material/liquid/ethanol/pwine
 											)
 
 /proc/lunchables_lunches()
@@ -89,12 +89,12 @@ var/list/lunchables_ethanol_reagents_ = list(
 
 /proc/lunchables_drink_reagents()
 	if(!(lunchables_drink_reagents_[lunchables_drink_reagents_[1]]))
-		lunchables_drink_reagents_ = init_lunchable_reagent_list(lunchables_drink_reagents_, /decl/material/chem/drink)
+		lunchables_drink_reagents_ = init_lunchable_reagent_list(lunchables_drink_reagents_, /decl/material/liquid/drink)
 	return lunchables_drink_reagents_
 
 /proc/lunchables_ethanol_reagents()
 	if(!(lunchables_ethanol_reagents_[lunchables_ethanol_reagents_[1]]))
-		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /decl/material/chem/ethanol)
+		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /decl/material/liquid/ethanol)
 	return lunchables_ethanol_reagents_
 
 /proc/init_lunchable_list(var/list/lunches)

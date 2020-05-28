@@ -69,7 +69,7 @@
 /obj/item/chems/food/drinks/juicebox/apple/Initialize()
 	. = ..()
 	set_colors("#ff0000", "#ffff00", "#ff0000", style="stripe")
-	reagents.add_reagent(/decl/material/chem/drink/juice/apple, 25)
+	reagents.add_reagent(/decl/material/liquid/drink/juice/apple, 25)
 
 /obj/item/chems/food/drinks/juicebox/orange
 	name = "orange juicebox"
@@ -78,7 +78,7 @@
 /obj/item/chems/food/drinks/juicebox/orange/Initialize()
 	. = ..()
 	set_colors("#ffff00", "#ff0000", "#ffff00", style="stripe")
-	reagents.add_reagent(/decl/material/chem/drink/juice/orange, 25)
+	reagents.add_reagent(/decl/material/liquid/drink/juice/orange, 25)
 
 /obj/item/chems/food/drinks/juicebox/grape
 	name = "grape juicebox"
@@ -87,7 +87,7 @@
 /obj/item/chems/food/drinks/juicebox/grape/Initialize()
 	. = ..()
 	set_colors("#ff00ff", "#00ff00", style="stripe")
-	reagents.add_reagent(/decl/material/chem/drink/juice/grape, 25)
+	reagents.add_reagent(/decl/material/liquid/drink/juice/grape, 25)
 
 /obj/item/chems/food/drinks/juicebox/random/Initialize()
 	. = ..()
@@ -101,7 +101,7 @@
 	desc = "Juice in a box; who knows what flavor!"
 
 /obj/item/chems/food/drinks/juicebox/sensible_random/proc/juice_it()
-	var/drinktypes = subtypesof(/decl/material/chem/drink/juice)
+	var/drinktypes = subtypesof(/decl/material/liquid/drink/juice)
 	var/decl/material/J = pick(drinktypes)
 	reagents.add_reagent(J, 20)
 	reagents.add_reagent(pick(drinktypes - J), 5)

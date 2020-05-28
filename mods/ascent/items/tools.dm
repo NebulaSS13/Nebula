@@ -51,7 +51,7 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 
 /obj/item/chems/food/snacks/hydration/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/gas/water, 10)
+	reagents.add_reagent(/decl/material/liquid/water, 10)
 
 /obj/item/storage/box/water/ascent
 	name = "box of hydration cylinders"

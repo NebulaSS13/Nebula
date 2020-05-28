@@ -1,4 +1,4 @@
-/decl/material/chem/cleaner
+/decl/material/liquid/cleaner
 	name = "spray cleaner"
 	lore_text = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
 	taste_description = "sourness"
