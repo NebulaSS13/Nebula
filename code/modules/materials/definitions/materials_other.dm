@@ -1,5 +1,5 @@
 /decl/material/waste
-	display_name = "slag"
+	name = "slag"
 	stack_type = null
 	icon_colour = "#2e3a07"
 	ore_name = "slag"
@@ -11,7 +11,7 @@
 	value = 0.1
 
 /decl/material/cult
-	display_name = "disturbing stone"
+	name = "disturbing stone"
 	icon_base = "cult"
 	icon_colour = "#402821"
 	icon_reinf = "reinf_cult"
@@ -27,5 +27,5 @@
 	new /obj/structure/girder/cult(target)
 
 /decl/material/cult/reinf
-	display_name = "runic inscriptions"
+	name = "runic inscriptions"
 	

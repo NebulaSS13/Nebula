@@ -5,7 +5,7 @@
 
 /datum/chemical_reaction/synthesis/phoronsolidification
 	name = "Solid Phoron"
-	required_reagents = list(/decl/reagent/iron = 5, /decl/reagent/toxin/phoron = 20)
+	required_reagents = list(/decl/material/iron = 5, /decl/material/chem/toxin/phoron = 20)
 	minimum_temperature = (-80 CELSIUS) - 100
 	maximum_temperature = -80 CELSIUS
 	mix_message = "The solution hardens and begins to crystallize."
@@ -16,7 +16,7 @@
 
 /datum/chemical_reaction/synthesis/plastication
 	name = "Plastic"
-	required_reagents = list(/decl/reagent/acid/polyacid = 1, /decl/reagent/toxin/plasticide = 2)
+	required_reagents = list(/decl/material/chem/acid/polyacid = 1, /decl/material/chem/toxin/plasticide = 2)
 	mix_message = "The solution solidifies into a grey-white mass."
 
 /datum/chemical_reaction/synthesis/plastication/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
@@ -26,11 +26,11 @@
 /datum/chemical_reaction/synthesis/resin_pack
 	name = "Resin Globule"
 	required_reagents = list(
-		/decl/reagent/crystal = 1,
-		/decl/reagent/silicon = 2
+		/decl/material/chem/crystal_agent = 1,
+		/decl/material/chem/silicon = 2
 	)
 	catalysts = list(
-		/decl/reagent/toxin/phoron = 1
+		/decl/material/chem/toxin/phoron = 1
 	)
 	result_amount = 3
 	mix_message = "The solution hardens and begins to crystallize."

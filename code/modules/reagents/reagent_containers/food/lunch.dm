@@ -58,18 +58,18 @@ var/list/lunchables_drinks_ = list(
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_drink_reagents_ = list(
-											/decl/reagent/drink/dry_ramen,
-											/decl/reagent/drink/hell_ramen,
-											/decl/reagent/drink/hot_ramen,
-											/decl/reagent/drink/mutagencola
+											/decl/material/chem/drink/dry_ramen,
+											/decl/material/chem/drink/hell_ramen,
+											/decl/material/chem/drink/hot_ramen,
+											/decl/material/chem/drink/mutagencola
 										)
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_ethanol_reagents_ = list(
-												/decl/reagent/ethanol/coffee,
-												/decl/reagent/ethanol/hooch,
-												/decl/reagent/ethanol/thirteenloko,
-												/decl/reagent/ethanol/pwine
+												/decl/material/chem/ethanol/coffee,
+												/decl/material/chem/ethanol/hooch,
+												/decl/material/chem/ethanol/thirteenloko,
+												/decl/material/chem/ethanol/pwine
 											)
 
 /proc/lunchables_lunches()
@@ -89,12 +89,12 @@ var/list/lunchables_ethanol_reagents_ = list(
 
 /proc/lunchables_drink_reagents()
 	if(!(lunchables_drink_reagents_[lunchables_drink_reagents_[1]]))
-		lunchables_drink_reagents_ = init_lunchable_reagent_list(lunchables_drink_reagents_, /decl/reagent/drink)
+		lunchables_drink_reagents_ = init_lunchable_reagent_list(lunchables_drink_reagents_, /decl/material/chem/drink)
 	return lunchables_drink_reagents_
 
 /proc/lunchables_ethanol_reagents()
 	if(!(lunchables_ethanol_reagents_[lunchables_ethanol_reagents_[1]]))
-		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /decl/reagent/ethanol)
+		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /decl/material/chem/ethanol)
 	return lunchables_ethanol_reagents_
 
 /proc/init_lunchable_list(var/list/lunches)
@@ -109,6 +109,6 @@ var/list/lunchables_ethanol_reagents_ = list(
 	for(var/reagent_type in subtypesof(reagent_types))
 		if(reagent_type in banned_reagents)
 			continue
-		var/decl/reagent/reagent = reagent_type
+		var/decl/material/reagent = reagent_type
 		.[initial(reagent.name)] = reagent_type
 	return sortAssoc(.)

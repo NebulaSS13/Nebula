@@ -45,8 +45,8 @@
 #define IGNORE_MOB_SIZE 0x1
 #define AFFECTS_DEAD    0x2
 
-#define HANDLE_REACTIONS(_reagents)  SSchemistry.active_holders[_reagents] = TRUE
-#define UNQUEUE_REACTIONS(_reagents) SSchemistry.active_holders -= _reagents
+#define HANDLE_REACTIONS(_reagents)  SSmaterials.active_holders[_reagents] = TRUE
+#define UNQUEUE_REACTIONS(_reagents) SSmaterials.active_holders -= _reagents
 
 #define REAGENT_LIST(R) (R.reagents?.get_reagents() || "No reagent holder")
 

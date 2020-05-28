@@ -124,9 +124,9 @@ obj/item/paper/prof2
 	icon = 'unishi.dmi'
 	icon_state = "CTILogo"
 
-/decl/reagent/toxin/phoron/safe
+/decl/material/chem/toxin/phoron/safe
 	name = "tericadone"
-	description = "Phoron substitute currently in labratory testing"
+	lore_text = "A phoron substitute currently in labratory testing"
 	taste_mult = 1.5
 	color = "#ffc4ff"
 
@@ -137,14 +137,14 @@ obj/item/paper/prof2
 
 /obj/item/chems/glass/bottle/tericadone/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/toxin/phoron/safe , 60)
+	reagents.add_reagent(/decl/material/chem/toxin/phoron/safe , 60)
 	update_icon()
 
-/decl/reagent/toxin/phoron/safe/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/safe/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	return
 
-/decl/reagent/toxin/phoron/safe/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/safe/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return
 
-/decl/reagent/toxin/phoron/safe/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/safe/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return

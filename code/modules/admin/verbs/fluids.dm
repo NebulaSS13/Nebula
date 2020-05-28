@@ -13,7 +13,7 @@
 	var/reagent_amount = input("How deep?", "Spawn Fluid", 1000) as num|null
 	if(!reagent_amount)
 		return
-	var/reagent_type = input("What kind of reagent?", "Spawn Fluid", /decl/reagent/water) as null|anything in subtypesof(/decl/reagent)
+	var/reagent_type = input("What kind of reagent?", "Spawn Fluid", /decl/material/gas/water) as null|anything in subtypesof(/decl/material)
 	if(!reagent_type || !user || !check_rights(R_SPAWN))
 		return
 	for(var/thing in trange(spawn_range, get_turf(user)))

@@ -6,7 +6,7 @@
 
 	var/list/entries_to_register = list()
 	for(var/reactiontype in subtypesof(/datum/chemical_reaction/grenade_reaction))
-		var/datum/chemical_reaction/grenade_reaction/boom = SSchemistry.chemical_reactions[reactiontype]
+		var/datum/chemical_reaction/grenade_reaction/boom = SSmaterials.chemical_reactions[reactiontype]
 		if(!boom || !boom.name || boom.hidden_from_codex)
 			continue
 		var/mechanics_text = "It can be caused with the following reagents:"
@@ -14,12 +14,12 @@
 			mechanics_text = "[boom.mechanics_text]<br>[mechanics_text]"
 		var/list/reactant_values = list()
 		for(var/reactant_id in boom.required_reagents)
-			var/decl/reagent/reactant = reactant_id
+			var/decl/material/reactant = reactant_id
 			reactant_values += "[boom.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
 		mechanics_text += " [jointext(reactant_values, " + ")]"
 		var/list/catalysts = list()
 		for(var/catalyst_id in boom.catalysts)
-			var/decl/reagent/catalyst = catalyst_id
+			var/decl/material/catalyst = catalyst_id
 			catalysts += "[boom.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
 		if(catalysts.len)
 			mechanics_text += " [jointext(reactant_values, " + ")] (catalysts: [jointext(catalysts, ", ")])]"
@@ -35,12 +35,12 @@
 		 _mechanics_text =     mechanics_text                       \
 		)
 
-	for(var/thing in subtypesof(/decl/reagent))
-		var/decl/reagent/reagent = thing
+	for(var/thing in subtypesof(/decl/material))
+		var/decl/material/reagent = thing
 		if(!initial(reagent.name) || initial(reagent.hidden_from_codex))
 			continue
 		var/chem_name = lowertext(initial(reagent.name))
-		var/new_lore_text = initial(reagent.description) 
+		var/new_lore_text = initial(reagent.lore_text) 
 		if(initial(reagent.taste_description))
 			new_lore_text = "[new_lore_text] It apparently tastes of [initial(reagent.taste_description)]."
 		var/datum/codex_entry/entry = new(               \
@@ -49,7 +49,7 @@
 		 _lore_text = new_lore_text)
 
 		var/list/production_strings = list()
-		for(var/react in SSchemistry.chemical_reactions_by_result[thing])
+		for(var/react in SSmaterials.chemical_reactions_by_result[thing])
 
 			var/datum/chemical_reaction/reaction = react
 
@@ -58,7 +58,7 @@
 
 			var/list/reactant_values = list()
 			for(var/reactant_id in reaction.required_reagents)
-				var/decl/reagent/reactant = reactant_id
+				var/decl/material/reactant = reactant_id
 				reactant_values += "[reaction.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
 
 			if(!reactant_values.len)
@@ -66,10 +66,10 @@
 
 			var/list/catalysts = list()
 			for(var/catalyst_id in reaction.catalysts)
-				var/decl/reagent/catalyst = catalyst_id
+				var/decl/material/catalyst = catalyst_id
 				catalysts += "[reaction.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
 
-			var/decl/reagent/result = reaction.result
+			var/decl/material/result = reaction.result
 			if(catalysts.len)
 				production_strings += "- [jointext(reactant_values, " + ")] (catalysts: [jointext(catalysts, ", ")]): [reaction.result_amount]u [lowertext(initial(result.name))]"
 			else

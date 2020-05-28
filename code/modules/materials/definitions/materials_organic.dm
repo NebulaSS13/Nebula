@@ -1,5 +1,5 @@
 /decl/material/plastic
-	display_name = "plastic"
+	name = "plastic"
 	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
 	stack_type = /obj/item/stack/material/plastic
 	flags = MAT_FLAG_BRITTLE
@@ -13,13 +13,13 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	chemical_makeup = list(
-		/decl/reagent/toxin/plasticide = 1
+		/decl/material/chem/toxin/plasticide = 1
 	)
 	reflectiveness = MAT_VALUE_SHINY
 	wall_support_value = 10
 
 /decl/material/plastic/holographic
-	display_name = "holographic plastic"
+	name = "holographic plastic"
 	stack_type = null
 	shard_type = SHARD_NONE
 	hidden_from_codex = TRUE
@@ -28,7 +28,7 @@
 	return list()
 
 /decl/material/cardboard
-	display_name = "cardboard"
+	name = "cardboard"
 	lore_text = "What with the difficulties presented by growing plants in orbit, a stock of cardboard in space is probably more valuable than gold."
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MAT_FLAG_BRITTLE
@@ -50,7 +50,7 @@
 	wall_support_value = 0
 
 /decl/material/cloth //todo
-	display_name = "cotton"
+	name = "cotton"
 	use_name = "cotton"
 	icon_colour = "#ffffff"
 	stack_origin_tech = "{'materials':2}"
@@ -69,47 +69,47 @@
 	wall_support_value = 0
 
 /decl/material/cloth/yellow
-	display_name ="yellow"
+	name = "yellow"
 	use_name = "yellow cloth"
 	icon_colour = "#ffbf00"
 
 /decl/material/cloth/teal
-	display_name = "teal"
+	name = "teal"
 	use_name = "teal cloth"
 	icon_colour = "#00e1ff"
 
 /decl/material/cloth/black
-	display_name = "black"
+	name = "black"
 	use_name = "black cloth"
 	icon_colour = "#505050"
 
 /decl/material/cloth/green
-	display_name = "green"
+	name = "green"
 	use_name = "green cloth"
 	icon_colour = "#b7f27d"
 
 /decl/material/cloth/purple
-	display_name = "purple"
+	name = "purple"
 	use_name = "purple cloth"
 	icon_colour = "#9933ff"
 
 /decl/material/cloth/blue
-	display_name = "blue"
+	name = "blue"
 	use_name = "blue cloth"
 	icon_colour = "#46698c"
 
 /decl/material/cloth/beige
-	display_name = "beige"
+	name = "beige"
 	use_name = "beige cloth"
 	icon_colour = "#ceb689"
 
 /decl/material/cloth/lime
-	display_name = "lime"
+	name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62e36c"
 
 /decl/material/carpet
-	display_name = "red"
+	name = "red"
 	use_name = "red upholstery"
 	icon_colour = "#9d2300"
 	flags = MAT_FLAG_PADDING
@@ -127,7 +127,7 @@
 	hidden_from_codex = TRUE
 
 /decl/material/skin
-	display_name = "skin"
+	name = "skin"
 	stack_type = /obj/item/stack/material/generic/skin
 	icon_colour = "#9e8c72"
 	flags = MAT_FLAG_PADDING
@@ -146,14 +146,14 @@
 	var/tans_to = MAT_LEATHER_GENERIC
 
 /decl/material/skin/lizard
-	display_name = "lizardskin"
+	name = "lizardskin"
 	icon_colour = "#626952"
 	tans_to = MAT_LEATHER_LIZARD
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
 
 /decl/material/skin/insect
-	display_name = "chitin"
+	name = "chitin"
 	icon_colour = "#7a776d"
 	tans_to = MAT_LEATHER_CHITIN
 	integrity = 75
@@ -162,7 +162,7 @@
 	brute_armor = 2
 
 /decl/material/skin/fur
-	display_name = "fur"
+	name = "fur"
 	icon_colour = "#7a726d"
 	tans_to = MAT_LEATHER_FUR
 /decl/material/skin/fur/gray
@@ -185,18 +185,18 @@
 	icon_colour = COLOR_GRAY40
 
 /decl/material/skin/shark
-	display_name = "sharkskin"
+	name = "sharkskin"
 	icon_colour = COLOR_PURPLE_GRAY
 
 /decl/material/skin/fish
 	icon_colour = COLOR_BOTTLE_GREEN
-	display_name = "fishskin"
+	name = "fishskin"
 
 /decl/material/skin/fish/purple
 	icon_colour = COLOR_PALE_PURPLE_GRAY
 
 /decl/material/skin/feathers
-	display_name = "feathers"
+	name = "feathers"
 	icon_colour = COLOR_SILVER
 
 /decl/material/skin/feathers/purple
@@ -218,7 +218,7 @@
 	icon_colour = COLOR_GRAY15
 
 /decl/material/bone
-	display_name = "bone"
+	name = "bone"
 	sheet_singular_name = "length"
 	sheet_plural_name = "lengths"
 	icon_colour = "#f0edc7"
@@ -236,17 +236,17 @@
 	wall_support_value = 22
 
 /decl/material/bone/fish
-	display_name = "fishbone"
+	name = "fishbone"
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
 
 /decl/material/bone/cartilage
-	display_name = "cartilage"
+	name = "cartilage"
 	hardness = 0
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 
 /decl/material/leather
-	display_name = "leather"
+	name = "leather"
 	icon_colour = "#5c4831"
 	stack_origin_tech = "{'materials':2}"
 	flags = MAT_FLAG_PADDING
@@ -263,13 +263,13 @@
 	wall_support_value = 0
 
 /decl/material/leather/synth
-	display_name = "synthleather"
+	name = "synthleather"
 	icon_colour = "#1f1f20"
 	ignition_point = T0C+150
 	melting_point = T0C+100
 
 /decl/material/leather/lizard
-	display_name = "scaled hide"
+	name = "scaled hide"
 	icon_colour = "#434b31"
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
@@ -277,10 +277,10 @@
 	reflectiveness = MAT_VALUE_SHINY
 
 /decl/material/leather/fur
-	display_name = "tanned pelt"
+	name = "tanned pelt"
 
 /decl/material/leather/chitin
-	display_name = "treated chitin"
+	name = "treated chitin"
 	integrity = 100
 	icon_colour = "#5c5a54"
 	hardness = MAT_VALUE_HARD

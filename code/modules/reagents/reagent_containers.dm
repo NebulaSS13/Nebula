@@ -24,7 +24,7 @@
 
 /obj/item/chems/on_reagent_change()
 	if(atom_flags & ATOM_FLAG_SHOW_REAGENT_NAME)
-		var/decl/reagent/R = reagents?.get_primary_reagent_decl()
+		var/decl/material/R = reagents?.get_primary_reagent_decl()
 		var/newname = get_base_name()
 		if(R)
 			newname = "[newname] of [R.get_presentation_name(src)]"

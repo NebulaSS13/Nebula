@@ -28,7 +28,7 @@
 		if(thing.reagents.total_volume < 100)
 			to_chat(user, "<span class='warning'>You need at least one hundred units of material to form a fuel rod.</span>")
 			return 1
-		var/decl/reagent/R = decls_repository.get_decl(thing.reagents.reagent_volumes[1])
+		var/decl/material/R = decls_repository.get_decl(thing.reagents.reagent_volumes[1])
 		visible_message("<span class='notice'>\The [src] compresses the contents of \the [thing] into a new fuel assembly.</span>")
 		var/obj/item/fuel_assembly/F = new(get_turf(src), R.type, R.color)
 		thing.reagents.remove_reagent(R.type, 100)

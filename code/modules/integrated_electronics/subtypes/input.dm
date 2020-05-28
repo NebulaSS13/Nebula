@@ -343,7 +343,7 @@
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if(H.seed)
 			for(var/chem_path in H.seed.chems)
-				var/decl/reagent/R = chem_path
+				var/decl/material/R = chem_path
 				greagents.Add(initial(R.name))
 
 	set_pin_data(IC_OUTPUT, 1, greagents)
@@ -1141,7 +1141,7 @@
 	var/list/gas_amounts = list()
 	for(var/id in gases)
 		var/decl/material/mat = decls_repository.get_decl(id)
-		gas_names.Add(mat.display_name)
+		gas_names.Add(mat.name)
 		gas_amounts.Add(round(gases[id], 0.001))
 
 	set_pin_data(IC_OUTPUT, 1, gas_names)

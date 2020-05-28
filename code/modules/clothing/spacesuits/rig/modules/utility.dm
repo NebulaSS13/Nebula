@@ -177,12 +177,12 @@
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
 
 	charges = list(
-		list("oxygel",       "oxygel",       /decl/reagent/oxy_meds,     80),
-		list("adrenaline",   "adrenaline",   /decl/reagent/adrenaline,   80),
-		list("antitoxins",   "antitoxins",   /decl/reagent/antitoxins,   80),
-		list("antirads",     "antirads",     /decl/reagent/antirads,     80),
-		list("antibiotics",  "antibiotics",  /decl/reagent/antibiotics,  80),
-		list("painkillers",  "painkillers",  /decl/reagent/painkillers,  80)
+		list("oxygel",       "oxygel",       /decl/material/chem/oxy_meds,     80),
+		list("adrenaline",   "adrenaline",   /decl/material/chem/adrenaline,   80),
+		list("antitoxins",   "antitoxins",   /decl/material/chem/antitoxins,   80),
+		list("antirads",     "antirads",     /decl/material/chem/antirads,     80),
+		list("antibiotics",  "antibiotics",  /decl/material/chem/antibiotics,  80),
+		list("painkillers",  "painkillers",  /decl/material/chem/painkillers,  80)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -192,14 +192,14 @@
 
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
-		list("oxygen",       "oxygel",       /decl/reagent/oxy_meds,          20),
-		list("adrenaline",   "adrenaline",   /decl/reagent/adrenaline,        20),
-		list("antitoxins",   "antitoxins",   /decl/reagent/antitoxins,        20),
-		list("glucose",      "glucose",      /decl/reagent/nutriment/glucose, 80),
-		list("antirads",    "antirads",      /decl/reagent/antirads,          20),
-		list("regenerative", "regenerative", /decl/reagent/burn_meds,         20),
-		list("antibiotics",  "antibiotics",  /decl/reagent/antibiotics,       20),
-		list("painkillers",  "painkillers",  /decl/reagent/painkillers,       20)
+		list("oxygen",       "oxygel",       /decl/material/chem/oxy_meds,          20),
+		list("adrenaline",   "adrenaline",   /decl/material/chem/adrenaline,        20),
+		list("antitoxins",   "antitoxins",   /decl/material/chem/antitoxins,        20),
+		list("glucose",      "glucose",      /decl/material/chem/nutriment/glucose, 80),
+		list("antirads",    "antirads",      /decl/material/chem/antirads,          20),
+		list("regenerative", "regenerative", /decl/material/chem/burn_meds,         20),
+		list("antibiotics",  "antibiotics",  /decl/material/chem/antibiotics,       20),
+		list("painkillers",  "painkillers",  /decl/material/chem/painkillers,       20)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
@@ -279,11 +279,11 @@
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 
 	charges = list(
-		list("antidepressants", "antidepressants",  /decl/reagent/antidepressants,   30),
-		list("stimulants",      "stimulants",       /decl/reagent/stimulants,        30),
-		list("amphetamines",    "amphetamines",     /decl/reagent/amphetamines,      30),
-		list("painkillers",     "painkillers",      /decl/reagent/painkillers,       30),
-		list("glucose",         "glucose",          /decl/reagent/nutriment/glucose, 80)
+		list("antidepressants", "antidepressants",  /decl/material/chem/antidepressants,   30),
+		list("stimulants",      "stimulants",       /decl/material/chem/stimulants,        30),
+		list("amphetamines",    "amphetamines",     /decl/material/chem/amphetamines,      30),
+		list("painkillers",     "painkillers",      /decl/material/chem/painkillers,       30),
+		list("glucose",         "glucose",          /decl/material/chem/nutriment/glucose, 80)
 		)
 
 	interface_name = "combat chem dispenser"

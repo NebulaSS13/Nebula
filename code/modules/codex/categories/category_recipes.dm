@@ -21,7 +21,7 @@
 		</ul>"}
 
 	for(var/reactiontype in subtypesof(/datum/chemical_reaction/recipe))
-		var/datum/chemical_reaction/recipe/food = SSchemistry.chemical_reactions[reactiontype]
+		var/datum/chemical_reaction/recipe/food = SSmaterials.chemical_reactions[reactiontype]
 		if(!food || !food.name || food.hidden_from_codex)
 			continue
 
@@ -39,12 +39,12 @@
 			lore_text = initial(product.desc)
 			mechanics_text = "This recipe produces \a [initial(product.name)].<br>It should be performed in a mixing bowl or beaker, and requires the following ingredients:"
 		else
-			var/decl/reagent/product = food.result
+			var/decl/material/product = food.result
 			if(!product)
 				continue
 			product_name = initial(product.name)
-			lore_text = initial(product.description)
-			if(ispath(food.result, /decl/reagent/drink) || ispath(food.result, /decl/reagent/ethanol))
+			lore_text = initial(product.lore_text)
+			if(ispath(food.result, /decl/material/chem/drink) || ispath(food.result, /decl/material/chem/ethanol))
 				category_name = "drink recipe"
 				mechanics_text = "This recipe produces [food.result_amount]u [initial(product.name)].<br>It should be performed in a glass or shaker, and requires the following ingredients:"
 			else
@@ -53,12 +53,12 @@
 
 		var/list/reactant_values = list()
 		for(var/reactant_id in food.required_reagents)
-			var/decl/reagent/reactant = reactant_id
+			var/decl/material/reactant = reactant_id
 			reactant_values += "[food.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
 		mechanics_text += " [jointext(reactant_values, " + ")]"
 		var/list/catalysts = list()
 		for(var/catalyst_id in food.catalysts)
-			var/decl/reagent/catalyst = catalyst_id
+			var/decl/material/catalyst = catalyst_id
 			catalysts += "[food.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
 		if(catalysts.len)
 			mechanics_text += " [jointext(reactant_values, " + ")] (catalysts: [jointext(catalysts, ", ")])]"
@@ -86,7 +86,7 @@
 		mechanics_text += "This recipe requires the following ingredients:<br>"
 		var/list/ingredients = list()
 		for(var/thing in recipe.reagents)
-			var/decl/reagent/thing_reagent = thing
+			var/decl/material/thing_reagent = thing
 			ingredients += "[recipe.reagents[thing]]u [initial(thing_reagent.name)]"
 		for(var/thing in recipe.items)
 			var/atom/thing_atom = thing

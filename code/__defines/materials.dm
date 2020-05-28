@@ -66,7 +66,7 @@
 #define MAT_CO2                     /decl/material/gas/carbon_dioxide
 #define MAT_CO                      /decl/material/gas/carbon_monoxide
 #define MAT_METHYL_BROMIDE          /decl/material/gas/methyl_bromide
-#define MAT_N2O                     /decl/material/gas/sleeping_agent
+#define MAT_N2O                     /decl/material/gas/nitrous_oxide
 #define MAT_NITROGEN                /decl/material/gas/nitrogen
 #define MAT_NO2                     /decl/material/gas/nitrodioxide
 #define MAT_NO                      /decl/material/gas/nitricoxide

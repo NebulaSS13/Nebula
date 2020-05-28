@@ -1,117 +1,117 @@
 /datum/chemical_reaction/antitoxins
 	name = "Antitoxins"
-	result = /decl/reagent/antitoxins
-	required_reagents = list(/decl/reagent/silicon = 1, /decl/reagent/potassium = 1, /decl/reagent/ammonia = 1)
+	result = /decl/material/chem/antitoxins
+	required_reagents = list(/decl/material/chem/silicon = 1, /decl/material/chem/potassium = 1, /decl/material/chem/ammonia = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/painkillers
 	name = "Painkillers"
-	result = /decl/reagent/painkillers
-	required_reagents = list(/decl/reagent/adrenaline = 1, /decl/reagent/ethanol = 1, /decl/reagent/acetone = 1)
+	result = /decl/material/chem/painkillers
+	required_reagents = list(/decl/material/chem/adrenaline = 1, /decl/material/chem/ethanol = 1, /decl/material/chem/acetone = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/antiseptic
 	name = "Antiseptic"
-	result = /decl/reagent/antiseptic
-	required_reagents = list(/decl/reagent/ethanol = 1, /decl/reagent/antitoxins = 1, /decl/reagent/acid/hydrochloric = 1)
+	result = /decl/material/chem/antiseptic
+	required_reagents = list(/decl/material/chem/ethanol = 1, /decl/material/chem/antitoxins = 1, /decl/material/chem/acid/hydrochloric = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/mutagenics
 	name = "Unstable mutagen"
-	result = /decl/reagent/mutagenics
-	required_reagents = list(/decl/reagent/radium = 1, /decl/reagent/phosphorus = 1, /decl/reagent/acid/hydrochloric = 1)
+	result = /decl/material/chem/mutagenics
+	required_reagents = list(/decl/material/chem/radium = 1, /decl/material/chem/phosphorus = 1, /decl/material/chem/acid/hydrochloric = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/psychoactives
 	name = "Psychoactives"
-	result = /decl/reagent/psychoactives
-	required_reagents = list(/decl/reagent/mercury = 1, /decl/reagent/nutriment/sugar = 1, /decl/reagent/lithium = 1)
+	result = /decl/material/chem/psychoactives
+	required_reagents = list(/decl/material/chem/mercury = 1, /decl/material/chem/nutriment/sugar = 1, /decl/material/chem/lithium = 1)
 	result_amount = 3
 	minimum_temperature = 50 CELSIUS
 	maximum_temperature = (50 CELSIUS) + 100
 
 /datum/chemical_reaction/lube
 	name = "Lubricant"
-	result = /decl/reagent/lube
-	required_reagents = list(/decl/reagent/water = 1, /decl/reagent/silicon = 1, /decl/reagent/acetone = 1)
+	result = /decl/material/chem/lube
+	required_reagents = list(/decl/material/gas/water = 1, /decl/material/chem/silicon = 1, /decl/material/chem/acetone = 1)
 	result_amount = 4
 	mix_message = "The solution becomes thick and slimy."
 
 /datum/chemical_reaction/pacid
 	name = "Polytrinic acid"
-	result = /decl/reagent/acid/polyacid
-	required_reagents = list(/decl/reagent/acid = 1, /decl/reagent/acid/hydrochloric = 1, /decl/reagent/potassium = 1)
+	result = /decl/material/chem/acid/polyacid
+	required_reagents = list(/decl/material/chem/acid = 1, /decl/material/chem/acid/hydrochloric = 1, /decl/material/chem/potassium = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/antirads
 	name = "Anti-Radiation Medication"
-	result = /decl/reagent/antirads
-	required_reagents = list(/decl/reagent/radium = 1, /decl/reagent/antitoxins = 1)
+	result = /decl/material/chem/antirads
+	required_reagents = list(/decl/material/chem/radium = 1, /decl/material/chem/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/narcotics
 	name = "Narcotics"
-	result = /decl/reagent/narcotics
-	required_reagents = list(/decl/reagent/mercury = 1, /decl/reagent/acetone = 1, /decl/reagent/nutriment/sugar = 1)
+	result = /decl/material/chem/narcotics
+	required_reagents = list(/decl/material/chem/mercury = 1, /decl/material/chem/acetone = 1, /decl/material/chem/nutriment/sugar = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/burn_meds
 	name = "Anti-Burn Medication"
-	result = /decl/reagent/burn_meds
-	required_reagents = list(/decl/reagent/silicon = 1, /decl/reagent/carbon = 1)
+	result = /decl/material/chem/burn_meds
+	required_reagents = list(/decl/material/chem/silicon = 1, /decl/material/chem/carbon = 1)
 	result_amount = 2
 	log_is_important = 1
 
 /datum/chemical_reaction/presyncopics
 	name = "Presyncopics"
-	result = /decl/reagent/presyncopics
-	required_reagents = list(/decl/reagent/potassium = 1, /decl/reagent/acetone = 1, /decl/reagent/nutriment/sugar = 1)
+	result = /decl/material/chem/presyncopics
+	required_reagents = list(/decl/material/chem/potassium = 1, /decl/material/chem/acetone = 1, /decl/material/chem/nutriment/sugar = 1)
 	minimum_temperature = 30 CELSIUS
 	maximum_temperature = 60 CELSIUS
 	result_amount = 3
 
 /datum/chemical_reaction/regenerator
 	name = "Regenerative Serum"
-	result = /decl/reagent/regenerator
-	required_reagents = list(/decl/reagent/adrenaline = 1, /decl/reagent/antitoxins = 1)
+	result = /decl/material/chem/regenerator
+	required_reagents = list(/decl/material/chem/adrenaline = 1, /decl/material/chem/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/neuroannealer
 	name = "Neuroannealer"
-	result = /decl/reagent/neuroannealer
-	required_reagents = list(/decl/reagent/acid/hydrochloric = 1, /decl/reagent/ammonia = 1, /decl/reagent/antitoxins = 1)
+	result = /decl/material/chem/neuroannealer
+	required_reagents = list(/decl/material/chem/acid/hydrochloric = 1, /decl/material/chem/ammonia = 1, /decl/material/chem/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/oxy_meds
 	name = "Oxygen Deprivation Medication"
-	result = /decl/reagent/oxy_meds
-	required_reagents = list(/decl/reagent/acetone = 1, /decl/reagent/water = 1, /decl/reagent/sulfur = 1)
+	result = /decl/material/chem/oxy_meds
+	required_reagents = list(/decl/material/chem/acetone = 1, /decl/material/gas/water = 1, /decl/material/chem/sulfur = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/brute_meds
 	name = "Anti-Trauma Medication"
-	result = /decl/reagent/brute_meds
-	required_reagents = list(/decl/reagent/adrenaline = 1, /decl/reagent/carbon = 1)
-	inhibitors = list(/decl/reagent/nutriment/sugar = 1) // Messes up with adrenaline
+	result = /decl/material/chem/brute_meds
+	required_reagents = list(/decl/material/chem/adrenaline = 1, /decl/material/chem/carbon = 1)
+	inhibitors = list(/decl/material/chem/nutriment/sugar = 1) // Messes up with adrenaline
 	result_amount = 2
 
 /datum/chemical_reaction/amphetamines
 	name = "Amphetamines"
-	result = /decl/reagent/amphetamines
-	required_reagents = list(/decl/reagent/nutriment/sugar = 1, /decl/reagent/phosphorus = 1, /decl/reagent/sulfur = 1)
+	result = /decl/material/chem/amphetamines
+	required_reagents = list(/decl/material/chem/nutriment/sugar = 1, /decl/material/chem/phosphorus = 1, /decl/material/chem/sulfur = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/retrovirals
 	name = "Retrovirals"
-	result = /decl/reagent/retrovirals
-	required_reagents = list(/decl/reagent/antirads = 1, /decl/reagent/carbon = 1)
+	result = /decl/material/chem/retrovirals
+	required_reagents = list(/decl/material/chem/antirads = 1, /decl/material/chem/carbon = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/nanitefluid
 	name = "Nanite Fluid"
-	result = /decl/reagent/nanitefluid
-	required_reagents = list(/decl/reagent/toxin/plasticide = 1, /decl/reagent/aluminium = 1, /decl/reagent/lube = 1)
-	catalysts = list(/decl/reagent/toxin/phoron = 5)
+	result = /decl/material/chem/nanitefluid
+	required_reagents = list(/decl/material/chem/toxin/plasticide = 1, /decl/material/aluminium = 1, /decl/material/chem/lube = 1)
+	catalysts = list(/decl/material/chem/toxin/phoron = 5)
 	result_amount = 3
 	minimum_temperature = (-25 CELSIUS) - 100
 	maximum_temperature = -25 CELSIUS
@@ -119,33 +119,33 @@
 
 /datum/chemical_reaction/antibiotics
 	name = "Antibiotics"
-	result = /decl/reagent/antibiotics
-	required_reagents = list(/decl/reagent/presyncopics = 1, /decl/reagent/adrenaline = 1)
+	result = /decl/material/chem/antibiotics
+	required_reagents = list(/decl/material/chem/presyncopics = 1, /decl/material/chem/adrenaline = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/eyedrops
 	name = "Eye Drops"
-	result = /decl/reagent/eyedrops
-	required_reagents = list(/decl/reagent/carbon = 1, /decl/reagent/fuel/hydrazine = 1, /decl/reagent/antitoxins = 1)
+	result = /decl/material/chem/eyedrops
+	required_reagents = list(/decl/material/chem/carbon = 1, /decl/material/chem/fuel/hydrazine = 1, /decl/material/chem/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/sedatives
 	name = "Sedatives"
-	result = /decl/reagent/sedatives
-	required_reagents = list(/decl/reagent/ethanol = 1, /decl/reagent/nutriment/sugar = 4)
-	inhibitors = list(/decl/reagent/phosphorus) // Messes with the smoke
+	result = /decl/material/chem/sedatives
+	required_reagents = list(/decl/material/chem/ethanol = 1, /decl/material/chem/nutriment/sugar = 4)
+	inhibitors = list(/decl/material/chem/phosphorus) // Messes with the smoke
 	result_amount = 5
 
 /datum/chemical_reaction/paralytics
 	name = "Paralytics"
-	result = /decl/reagent/paralytics
-	required_reagents = list(/decl/reagent/ethanol = 1, /decl/reagent/mercury = 2, /decl/reagent/fuel/hydrazine = 2)
+	result = /decl/material/chem/paralytics
+	required_reagents = list(/decl/material/chem/ethanol = 1, /decl/material/chem/mercury = 2, /decl/material/chem/fuel/hydrazine = 2)
 	result_amount = 1
 
 /datum/chemical_reaction/zombiepowder
 	name = "Zombie Powder"
-	result = /decl/reagent/toxin/zombiepowder
-	required_reagents = list(/decl/reagent/toxin/carpotoxin = 5, /decl/reagent/sedatives = 5, /decl/reagent/copper = 5)
+	result = /decl/material/chem/toxin/zombiepowder
+	required_reagents = list(/decl/material/chem/toxin/carpotoxin = 5, /decl/material/chem/sedatives = 5, /decl/material/copper = 5)
 	result_amount = 2
 	minimum_temperature = 90 CELSIUS
 	maximum_temperature = 99 CELSIUS
@@ -153,8 +153,8 @@
 
 /datum/chemical_reaction/hallucinogenics
 	name = "Hallucinogenics"
-	result = /decl/reagent/hallucinogenics
-	required_reagents = list(/decl/reagent/silicon = 1, /decl/reagent/fuel/hydrazine = 1, /decl/reagent/antitoxins = 1)
+	result = /decl/material/chem/hallucinogenics
+	required_reagents = list(/decl/material/chem/silicon = 1, /decl/material/chem/fuel/hydrazine = 1, /decl/material/chem/antitoxins = 1)
 	result_amount = 3
 	mix_message = "The solution takes on an iridescent sheen."
 	minimum_temperature = 75 CELSIUS
@@ -162,92 +162,92 @@
 
 /datum/chemical_reaction/surfactant
 	name = "Azosurfactant"
-	result = /decl/reagent/surfactant
-	required_reagents = list(/decl/reagent/fuel/hydrazine = 2, /decl/reagent/carbon = 2, /decl/reagent/acid = 1)
+	result = /decl/material/chem/surfactant
+	required_reagents = list(/decl/material/chem/fuel/hydrazine = 2, /decl/material/chem/carbon = 2, /decl/material/chem/acid = 1)
 	result_amount = 5
 	mix_message = "The solution begins to foam gently."
 
 /datum/chemical_reaction/space_cleaner
 	name = "Space cleaner"
-	result = /decl/reagent/cleaner
-	required_reagents = list(/decl/reagent/ammonia = 1, /decl/reagent/water = 1)
+	result = /decl/material/chem/cleaner
+	required_reagents = list(/decl/material/chem/ammonia = 1, /decl/material/gas/water = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/plantbgone
 	name = "Plant-B-Gone"
-	result = /decl/reagent/toxin/plantbgone
-	required_reagents = list(/decl/reagent/toxin = 1, /decl/reagent/water = 4)
+	result = /decl/material/chem/toxin/plantbgone
+	required_reagents = list(/decl/material/chem/toxin = 1, /decl/material/gas/water = 4)
 	result_amount = 5
 
 /datum/chemical_reaction/foaming_agent
 	name = "Foaming Agent"
-	result = /decl/reagent/foaming_agent
-	required_reagents = list(/decl/reagent/lithium = 1, /decl/reagent/fuel/hydrazine = 1)
+	result = /decl/material/chem/foaming_agent
+	required_reagents = list(/decl/material/chem/lithium = 1, /decl/material/chem/fuel/hydrazine = 1)
 	result_amount = 1
 	mix_message = "The solution begins to foam vigorously."
 
 /datum/chemical_reaction/sodiumchloride
 	name = "Sodium Chloride"
-	result = /decl/reagent/sodiumchloride
-	required_reagents = list(/decl/reagent/sodium = 1, /decl/reagent/acid/hydrochloric = 1)
+	result = /decl/material/chem/sodiumchloride
+	required_reagents = list(/decl/material/chem/sodium = 1, /decl/material/chem/acid/hydrochloric = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/condensedcapsaicin
 	name = "Condensed Capsaicin"
-	result = /decl/reagent/capsaicin/condensed
-	required_reagents = list(/decl/reagent/capsaicin = 2)
-	catalysts = list(/decl/reagent/toxin/phoron = 5)
+	result = /decl/material/chem/capsaicin/condensed
+	required_reagents = list(/decl/material/chem/capsaicin = 2)
+	catalysts = list(/decl/material/chem/toxin/phoron = 5)
 	result_amount = 1
 
 /datum/chemical_reaction/stimulants
 	name = "Stimulants"
-	result = /decl/reagent/stimulants
-	required_reagents = list(/decl/reagent/hallucinogenics = 1, /decl/reagent/lithium = 1)
+	result = /decl/material/chem/stimulants
+	required_reagents = list(/decl/material/chem/hallucinogenics = 1, /decl/material/chem/lithium = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/antidepressants
 	name = "Antidepressants"
-	result = /decl/reagent/antidepressants
-	required_reagents = list(/decl/reagent/hallucinogenics = 1, /decl/reagent/carbon = 1)
+	result = /decl/material/chem/antidepressants
+	required_reagents = list(/decl/material/chem/hallucinogenics = 1, /decl/material/chem/carbon = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/hair_remover
 	name = "Hair Remover"
-	result = /decl/reagent/toxin/hair_remover
-	required_reagents = list(/decl/reagent/radium = 1, /decl/reagent/potassium = 1, /decl/reagent/acid/hydrochloric = 1)
+	result = /decl/material/chem/toxin/hair_remover
+	required_reagents = list(/decl/material/chem/radium = 1, /decl/material/chem/potassium = 1, /decl/material/chem/acid/hydrochloric = 1)
 	result_amount = 3
 	mix_message = "The solution thins out and emits an acrid smell."
 
 /datum/chemical_reaction/methyl_bromide
 	name = "Methyl Bromide"
-	required_reagents = list(/decl/reagent/toxin/bromide = 1, /decl/reagent/ethanol = 1, /decl/reagent/fuel/hydrazine = 1)
+	required_reagents = list(/decl/material/chem/toxin/bromide = 1, /decl/material/chem/ethanol = 1, /decl/material/chem/fuel/hydrazine = 1)
 	result_amount = 3
-	result = /decl/reagent/toxin/methyl_bromide
+	result = /decl/material/gas/methyl_bromide
 	mix_message = "The solution begins to bubble, emitting a dark vapor."
 
 /datum/chemical_reaction/adrenaline
 	name = "Adrenaline"
-	result = /decl/reagent/adrenaline
-	required_reagents = list(/decl/reagent/nutriment/sugar = 1, /decl/reagent/amphetamines = 1, /decl/reagent/oxy_meds = 1)
+	result = /decl/material/chem/adrenaline
+	required_reagents = list(/decl/material/chem/nutriment/sugar = 1, /decl/material/chem/amphetamines = 1, /decl/material/chem/oxy_meds = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/gleam
 	name = "Gleam"
-	result = /decl/reagent/glowsap/gleam
+	result = /decl/material/chem/glowsap/gleam
 	result_amount = 2
 	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
 	minimum_temperature = 40 CELSIUS
 	reaction_sound = 'sound/effects/psi/power_used.ogg'
 	catalysts = list(
-		/decl/reagent/enzyme = 1
+		/decl/material/chem/enzyme = 1
 	)
 	required_reagents = list(
-		/decl/reagent/hallucinogenics = 2,
-		/decl/reagent/glowsap = 2
+		/decl/material/chem/hallucinogenics = 2,
+		/decl/material/chem/glowsap = 2
 	)
 
 /datum/chemical_reaction/immunobooster
-	result = /decl/reagent/immunobooster
-	required_reagents = list(/decl/reagent/presyncopics = 1, /decl/reagent/antitoxins = 1)
+	result = /decl/material/chem/immunobooster
+	required_reagents = list(/decl/material/chem/presyncopics = 1, /decl/material/chem/antitoxins = 1)
 	minimum_temperature = 40 CELSIUS
 	result_amount = 2
