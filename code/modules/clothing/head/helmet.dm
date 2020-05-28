@@ -24,6 +24,9 @@
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
+	matter = MAT_STEEL
+	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"

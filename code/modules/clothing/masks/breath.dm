@@ -13,6 +13,8 @@
 	down_item_flags = ITEM_FLAG_THICKMATERIAL
 	down_icon_state = "breathdown"
 	pull_mask = 1
+	origin_tech = "{'materials':1}"
+	material = MAT_PLASTIC
 
 /obj/item/clothing/mask/breath/medical
 	desc = "A close-fitting sterile mask that can be manually connected to an air supply for treatment."

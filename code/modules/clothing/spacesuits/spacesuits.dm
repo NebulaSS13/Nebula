@@ -32,6 +32,8 @@
 
 	var/obj/machinery/camera/camera
 	var/tinted = null	//Set to non-null for toggleable tint helmets
+	origin_tech = "{'materials':1}"
+	material = MAT_STEEL
 
 /obj/item/clothing/head/helmet/space/Destroy()
 	if(camera && !ispath(camera))
@@ -151,6 +153,13 @@
 	center_of_mass = null
 	randpixel = 0
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_OVER)
+	origin_tech = "{'materials':3, 'engineering':3}"
+	material = MAT_PLASTIC
+	matter = list(
+		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT,
+		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/clothing/suit/space/Initialize()
 	. = ..()

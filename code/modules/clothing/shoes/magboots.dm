@@ -14,6 +14,9 @@
 	center_of_mass = null
 	randpixel = 0
 	var/online_slowdown = 3
+	matter = MAT_STEEL
+	matter = list(MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':2,'engineering':2,'magnets':3}"
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
 	slowdown_per_slot[slot_shoes] = shoes? max(0, shoes.slowdown_per_slot[slot_shoes]): 0	//So you can't put on magboots to make you walk faster.
