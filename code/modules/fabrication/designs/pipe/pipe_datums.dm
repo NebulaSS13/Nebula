@@ -18,6 +18,7 @@
 	build_icon_state = "manifold"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold/hidden
 	pipe_class = PIPE_CLASS_TRINARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/manifold4w
 	name = "four-way pipe manifold fitting"
@@ -70,6 +71,7 @@
 	build_icon_state = "manifold"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold/hidden/supply
 	pipe_class = PIPE_CLASS_TRINARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/supply/manifold4w
 	name = "four-way supply pipe manifold fitting"
@@ -122,6 +124,7 @@
 	build_icon_state = "manifold"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers
 	pipe_class = PIPE_CLASS_TRINARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/scrubber/manifold4w
 	name = "four-way scrubber pipe manifold fitting"
@@ -173,6 +176,7 @@
 	build_icon_state = "manifold"
 	constructed_path = /obj/machinery/atmospherics/pipe/manifold/hidden/fuel
 	pipe_class = PIPE_CLASS_TRINARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/fuel/manifold4w
 	name = "four-way supply pipe manifold fitting"
@@ -204,6 +208,7 @@
 /datum/fabricator_recipe/pipe/he
 	category = "Heat Exchange Pipes"
 	colorable = FALSE
+	pipe_color = null
 	connect_types = CONNECT_TYPE_HE
 	constructed_path = /obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	pipe_class = PIPE_CLASS_BINARY
@@ -227,6 +232,7 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
 	build_icon_state = "junction"
 	constructed_path = /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/he/exchanger
 	name = "heat exchanger"
@@ -235,6 +241,7 @@
 	build_icon_state = "heunary"
 	constructed_path = /obj/machinery/atmospherics/unary/heat_exchanger
 	pipe_class = PIPE_CLASS_UNARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 //Cleanup
 #undef PIPE_STRAIGHT

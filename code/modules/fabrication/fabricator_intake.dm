@@ -139,8 +139,3 @@
 		return TRUE
 	interact(user)
 	return TRUE
-
-#undef SUBSTANCE_TAKEN_FULL
-#undef SUBSTANCE_TAKEN_NONE
-#undef SUBSTANCE_TAKEN_SOME
-#undef SUBSTANCE_TAKEN_ALL

@@ -48,9 +48,9 @@
 
 	frame_type = /obj/item/pipe
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
-	base_type = /obj/machinery/atmospherics/unary/vent_pump/buildable
+	base_type = /obj/machinery/atmospherics/unary/outlet_injector/buildable
 
-/obj/machinery/atmospherics/unary/vent_pump/buildable
+/obj/machinery/atmospherics/unary/outlet_injector/buildable
 	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/unary/outlet_injector/Initialize()
