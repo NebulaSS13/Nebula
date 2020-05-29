@@ -79,7 +79,7 @@
 			return P
 
 /datum/extension/assembly/proc/get_all_components()
-	return parts.Copy()
+	return parts?.Copy()
 
 
 /datum/extension/assembly/proc/shutdown_device()
