@@ -90,5 +90,5 @@
 	set name = "Change Colour"
 	set desc = "Choose the colour of your skin."
 
-	var/new_skin = input(usr, "Choose your new skin colour: ", "Change Colour", rgb(r_skin, g_skin, b_skin)) as color|null
-	change_skin_color(hex2num(copytext(new_skin, 2, 4)), hex2num(copytext(new_skin, 4, 6)), hex2num(copytext(new_skin, 6, 8)))
+	var/new_skin = input(usr, "Choose your new skin colour: ", "Change Colour", skin_colour) as color|null
+	change_skin_color(new_skin)

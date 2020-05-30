@@ -2,10 +2,10 @@
 	Global associative list for caching humanoid icons.
 	Index format m or f, followed by a string of 0 and 1 to represent bodyparts followed by husk fat hulk skeleton 1 or 0.
 	TODO: Proper documentation
-	icon_key is [species.get_icon_cache_uid(src)][g][husk][fat][hulk][skeleton][s_tone]
+	icon_key is [species.get_icon_cache_uid(src)][g][husk][fat][hulk][skeleton][skin_tone]
 */
 var/global/list/human_icon_cache = list()
-var/global/list/tail_icon_cache = list() //key is [species.get_icon_cache_uid(src)][r_skin][g_skin][b_skin]
+var/global/list/tail_icon_cache = list() //key is [species.get_icon_cache_uid(src)][skin_colour]
 var/global/list/light_overlay_cache = list()
 
 /proc/overlay_image(icon,icon_state,color,flags)
@@ -290,16 +290,13 @@ var/global/list/damage_icon_parts = list()
 	if(gender == FEMALE)
 		g = "female"
 
-	var/icon_key = "[species.get_icon_cache_uid(src)][g][s_tone][r_skin][g_skin][b_skin]"
+	var/icon_key = "[species.get_icon_cache_uid(src)][g][skin_tone][skin_colour]"
 	if(lip_style)
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
 	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
-	if(istype(eyes))
-		icon_key += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
-	else
-		icon_key += "#000000"
+	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
@@ -311,15 +308,15 @@ var/global/list/damage_icon_parts = list()
 		if(part)
 			icon_key += "[part.species.get_icon_cache_uid(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
-			icon_key += "[part.s_tone]"
-			icon_key += "[part.s_base]"
-			if(part.s_col && part.s_col.len >= 3)
-				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
-				icon_key += "[part.s_col_blend]"
-			if(part.body_hair && part.h_col && part.h_col.len >= 3)
-				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
+			icon_key += "[part.skin_tone]"
+			icon_key += "[part.skin_base]"
+			if(part.skin_colour)
+				icon_key += "[part.skin_colour]"
+				icon_key += "[part.skin_blend]"
+			if(part.body_hair && part.hair_colour)
+				icon_key += "[part.hair_colour]"
 			else
-				icon_key += "#000000"
+				icon_key += COLOR_BLACK
 			for(var/M in part.markings)
 				icon_key += "[M][part.markings[M]["color"]]"
 		if(BP_IS_PROSTHETIC(part))
@@ -699,19 +696,19 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/get_tail_icon()
-	var/icon_key = "[species.get_icon_cache_uid(src)][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
+	var/icon_key = "[species.get_icon_cache_uid(src)][skin_colour][hair_colour]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
 		//generate a new one
 		var/species_tail_anim = species.get_tail_animation(src)
 		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
 		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species.tail_blend)
+		tail_icon.Blend(skin_colour, species.tail_blend)
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)
 			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
-			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
+			hair_icon.Blend(hair_colour, ICON_ADD)
 			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
 

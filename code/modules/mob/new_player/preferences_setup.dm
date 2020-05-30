@@ -1,5 +1,3 @@
-#define ASSIGN_LIST_TO_COLORS(L, R, G, B) if(L) { R = L[1]; G = L[2]; B = L[3]; }
-
 /datum/preferences
 	//The mob should have a gender you want before running this proc. Will run fine without H
 	proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
@@ -10,22 +8,14 @@
 		f_style = random_facial_hair_style(gender, species)
 		if(current_species)
 			if(current_species.appearance_flags & HAS_A_SKIN_TONE)
-				s_tone = current_species.get_random_skin_tone() || s_tone
+				skin_tone = current_species.get_random_skin_tone() || skin_tone
 			if(current_species.appearance_flags & HAS_EYE_COLOR)
-				ASSIGN_LIST_TO_COLORS(current_species.get_random_eye_color(), r_eyes, g_eyes, b_eyes)
+				eye_colour = current_species.get_random_eye_color()
 			if(current_species.appearance_flags & HAS_SKIN_COLOR)
-				ASSIGN_LIST_TO_COLORS(current_species.get_random_skin_color(), r_skin, g_skin, b_skin)
+				skin_colour = current_species.get_random_skin_color()
 			if(current_species.appearance_flags & HAS_HAIR_COLOR)
-				var/hair_colors = current_species.get_random_hair_color()
-				if(hair_colors)
-					ASSIGN_LIST_TO_COLORS(hair_colors, r_hair, g_hair, b_hair)
-
-					if(prob(75))
-						r_facial = r_hair
-						g_facial = g_hair
-						b_facial = b_hair
-					else
-						ASSIGN_LIST_TO_COLORS(current_species.get_random_facial_hair_color(), r_facial, g_facial, b_facial)
+				hair_colour = current_species.get_random_hair_color()
+				facial_hair_colour = prob(75) ? hair_colour : current_species.get_random_facial_hair_color()
 
 		if(current_species.appearance_flags & HAS_UNDERWEAR)
 			if(all_underwear)
@@ -39,8 +29,6 @@
 		b_type = RANDOM_BLOOD_TYPE
 		if(H)
 			copy_to(H)
-
-#undef ASSIGN_LIST_TO_COLORS
 
 /datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
 	var/update_icon = FALSE
