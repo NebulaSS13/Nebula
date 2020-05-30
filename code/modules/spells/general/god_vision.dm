@@ -13,17 +13,12 @@
 
 	spell_flags = Z2NOCAST
 	hud_state = "wiz_IPC"
-	var/mob/observer/eye/freelook/vision
-	var/eye_type = /mob/observer/eye/freelook/wizard_eye
+
+	var/extension_type = /datum/extension/eye/cameranet
 
 /spell/camera_connection/New()
 	..()
-	vision = new eye_type(src)
-
-/spell/camera_connection/Destroy()
-	qdel(vision)
-	vision = null
-	. = ..()
+	set_extension(src, extension_type)
 
 /spell/camera_connection/choose_targets()
 	var/mob/living/L = holder
@@ -34,16 +29,11 @@
 /spell/camera_connection/cast(var/list/targets, mob/user)
 	var/mob/living/L = targets[1]
 
-	vision.possess(L)
-	GLOB.destroyed_event.register(L, src, /spell/camera_connection/proc/release)
-	GLOB.logged_out_event.register(L, src, /spell/camera_connection/proc/release)
-	L.verbs += /mob/living/proc/release_eye
-
-/spell/camera_connection/proc/release(var/mob/living/L)
-	vision.release(L)
-	L.verbs -= /mob/living/proc/release_eye
-	GLOB.destroyed_event.unregister(L, src)
-	GLOB.logged_out_event.unregister(L, src)
+	var/datum/extension/eye/cameranet/cn = get_extension(src, /datum/extension/eye/)
+	if(!cn)
+		to_chat(user, SPAN_WARNING("There's a flash of sparks as the spell fizzles out!"))
+		return
+	cn.look(L)
 
 /spell/camera_connection/god_vision
 	name = "All Seeing Eye"
@@ -54,15 +44,15 @@
 	invocation = "none"
 	invocation_type = SpI_NONE
 
-	eye_type = /mob/observer/eye
+	extension_type = /datum/extension/eye/freelook
 
 	hud_state = "gen_mind"
 
 /spell/camera_connection/god_vision/set_connected_god(var/mob/living/deity/god)
 	..()
 
-	vision.visualnet = god.eyenet
-
-/spell/camera_connection/god_vision/Destroy()
-	vision.visualnet = null
-	return ..()
+	var/datum/extension/eye/freelook/fl = get_extension(src, /datum/extension/eye)
+	if(!fl)
+		return
+	fl.set_visualnet(god.eyenet)
+	
