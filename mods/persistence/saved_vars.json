@@ -173,12 +173,6 @@
 		]
 	},
 	{
-		"path":"/datum/tech/materials",
-		"vars":[
-			"level"
-		]
-	},
-	{
 		"path":"/datum/transaction",
 		"vars":[
 			"purpose",
@@ -578,9 +572,6 @@
 		]
 	},
 	{
-		"path":"/obj/item/clothing/ring/material"
-	},
-	{
 		"path":"/obj/item/clothing/shoes/magboots",
 		"vars":[
 			"magpulse",
@@ -741,28 +732,9 @@
 		]
 	},
 	{
-		"path":"/obj/item/modular_computer",
-		"vars":[
-			"hardware_flag",
-			"computer_emagged",
-			"bsod",
-			"damage",
-			"processor_unit",
-			"network_card",
-			"hard_drive",
-			"battery_module",
-			"card_slot",
-			"nano_printer",
-			"portable_drive",
-			"ai_slot",
-			"tesla_link"
-		]
-	},
-	{
 		"path":"/obj/item/organ/external",
 		"vars":[
 			"slowdown_general",
-			"broken_description",
 			"brute_ratio",
 			"burn_dam",
 			"burn_ratio",
@@ -1001,9 +973,6 @@
 		"vars":[
 			"key_data"
 		]
-	},
-	{
-		"path":"/obj/item/material"
 	},
 	{
 		"path":"/obj/item/melee/baton",
@@ -2108,7 +2077,6 @@
 			"pixel_x",
 			"pixel_y",
 			"loc",
-			"matter",
 			"w_class",
 			"unacidable",
 			"throwforce",
@@ -2211,9 +2179,6 @@
 		]
 	},
 	{
-		"path":"/obj/item/stack/material/generic"
-	},
-	{
 		"path":"/obj/item/cell/apc",
 		"vars":[
 			"maxcharge"
@@ -2306,9 +2271,6 @@
 			"unique_name",
 			"unique_reskin"
 		]
-	},
-	{
-		"path":"/obj/item/material"
 	},
 	{
 		"path":"/obj/item/tank",
@@ -2737,7 +2699,6 @@
 			"icon_state_open_broken",
 			"icon_state_closed_broken",
 			"begins_closed",
-			"implicit_material",
 			"min_force",
 			"maxhealth",
 			"block_air_zones",
@@ -2989,7 +2950,7 @@
 		"path":"/mob/living/carbon/human",
 		"vars":[
 			"oxygen_alert",
-			"phoron_alert",
+			"toxins_alert",
 			"co2_alert",
 			"fire_alert",
 			"pressure_alert",
@@ -3246,8 +3207,6 @@
 	{
 		"path":"/obj/item/organ/internal/eyes",
 		"vars":[
-			"phoron_guard",
-			"innate_flash_protection",
 			"eye_icon",
 			"apply_eye_colour",
 			"last_cached_eye_colour",
@@ -3402,8 +3361,7 @@
 			"maintenance_protocols",
 			"hatch_closed",
 			"hatch_locked",
-			"use_air",
-			"material"
+			"use_air"
 		]
 	},
 	{
@@ -4077,6 +4035,26 @@
 			"tech_levels",
 			"target_blueprint",
 			"in_progress"
+		]
+	},
+	{
+		"path":"/datum/extension",
+		"vars":[
+			"holder"
+		]
+	},
+	{
+		"path":"/datum/extension/assembly",
+		"vars":[
+			"parts",
+			"enabled",
+			"damage"
+		]
+	},
+	{
+		"path":"/obj/item/screwdriver",
+		"vars":[
+			"handle_color"
 		]
 	}
 ]
