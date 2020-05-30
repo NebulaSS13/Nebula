@@ -273,14 +273,14 @@
 			I = image(icon, dir = 1<<(i-1), icon_state = connections ? connections[i] : "0")
 			overlays += I
 		// Standard table image
-		if(material)
+		if(istype(material))
 			for(var/i = 1 to 4)
 				I = image(icon, "[material.table_icon_base]_[connections ? connections[i] : "0"]", dir = 1<<(i-1))
 				if(material.icon_colour) I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
 				overlays += I
 		// Reinforcements
-		if(reinf_material)
+		if(istype(reinf_material))
 			for(var/i = 1 to 4)
 				I = image(icon, "[reinf_material.table_reinf]_[connections ? connections[i] : "0"]", dir = 1<<(i-1))
 				I.color = reinf_material.icon_colour
@@ -307,7 +307,7 @@
 			if (tabledirs & turn(dir,-90))
 				type += "+"
 		icon_state = "flip[type]"
-		if(material)
+		if(istype(material))
 			var/image/I = image(icon, "[material.table_icon_base]_flip[type]")
 			I.color = material.icon_colour
 			I.alpha = 255 * material.opacity
@@ -315,7 +315,7 @@
 			name = "[material.display_name] table"
 		else
 			name = "table frame"
-		if(reinf_material)
+		if(istype(reinf_material))
 			var/image/I = image(icon, "[reinf_material.table_reinf]_flip[type]")
 			I.color = reinf_material.icon_colour
 			I.alpha = 255 * reinf_material.opacity
@@ -373,7 +373,7 @@
 		if(!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
-		if(material && T.material && material.type == T.material.type && flipped == T.flipped)
+		if(istype(material) && istype(T.material) && material.type == T.material.type && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
 			spawn(0)

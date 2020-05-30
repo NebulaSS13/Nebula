@@ -85,7 +85,6 @@
 	GLOB.moved_event.register(src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
 
 /obj/item/paper/sticky/proc/reset_persistence_tracking()
-	SSpersistence.forget_value(src, /datum/persistent/paper/sticky)
 	pixel_x = 0
 	pixel_y = 0
 
@@ -123,7 +122,6 @@
 			return
 
 	if(user.unEquip(src, source_turf))
-		SSpersistence.track_value(src, /datum/persistent/paper/sticky)
 		if(params)
 			var/list/mouse_control = params2list(params)
 			if(mouse_control["icon-x"])

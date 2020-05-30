@@ -14,15 +14,6 @@
 	if(!isnull(_age))
 		age = _age
 
-/obj/item/trash/Initialize(var/ml)
-	if(!ml)
-		SSpersistence.track_value(src, /datum/persistent/filth/trash)
-	. = ..()
-
-/obj/item/trash/Destroy()
-	SSpersistence.forget_value(src, /datum/persistent/filth/trash)
-	. = ..()
-
 /obj/item/trash/raisins
 	name = "\improper 4no raisins"
 	icon_state = "4no_raisins"

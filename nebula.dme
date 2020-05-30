@@ -1,6 +1,7 @@
 // DM Environment file for nebula.dme.
 // All manual changes should be made outside the BEGIN_ and END_ blocks.
  // New source code should be placed in .dm files: choose File/New --> Code File.
+ #define DISABLE_DEBUG_CRASH
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR
@@ -230,7 +231,6 @@
 #include "code\controllers\subsystems\initialization\materials.dm"
 #include "code\controllers\subsystems\initialization\misc.dm"
 #include "code\controllers\subsystems\initialization\modpacks.dm"
-#include "code\controllers\subsystems\initialization\persistence.dm"
 #include "code\controllers\subsystems\initialization\robots.dm"
 #include "code\controllers\subsystems\initialization\webhooks.dm"
 #include "code\controllers\subsystems\processing\airflow.dm"
@@ -1273,7 +1273,6 @@
 #include "code\modules\admin\IsBanned.dm"
 #include "code\modules\admin\map_capture.dm"
 #include "code\modules\admin\NewBan.dm"
-#include "code\modules\admin\persistence.dm"
 #include "code\modules\admin\player_notes.dm"
 #include "code\modules\admin\player_panel.dm"
 #include "code\modules\admin\spam_prevention.dm"
@@ -2569,13 +2568,6 @@
 #include "code\modules\persistence\filth.dm"
 #include "code\modules\persistence\graffiti.dm"
 #include "code\modules\persistence\noticeboards.dm"
-#include "code\modules\persistence\persistence_datum.dm"
-#include "code\modules\persistence\persistence_datum_book.dm"
-#include "code\modules\persistence\persistence_datum_filth.dm"
-#include "code\modules\persistence\persistence_datum_filth_trash.dm"
-#include "code\modules\persistence\persistence_datum_graffiti.dm"
-#include "code\modules\persistence\persistence_datum_paper.dm"
-#include "code\modules\persistence\persistence_datum_paper_sticky.dm"
 #include "code\modules\pointdefense\pointdefense.dm"
 #include "code\modules\power\apc.dm"
 #include "code\modules\power\batteryrack.dm"

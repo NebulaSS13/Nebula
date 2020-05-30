@@ -58,8 +58,9 @@ SUBSYSTEM_DEF(materials)
 				alloy_components[component] = TRUE
 
 /datum/controller/subsystem/materials/proc/get_material_datum(var/mat)
-	. = materials_by_name[mat]
-	if(!.)
+	try
+		. = materials_by_name[mat]
+	catch
 		if(ispath(mat))
 			crash_with("Unable to acquire material by path '[mat]'.")
 		else

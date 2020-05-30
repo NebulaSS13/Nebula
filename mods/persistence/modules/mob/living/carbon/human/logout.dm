@@ -2,7 +2,7 @@
 	. = ..()
 
 	// Safety check. If a character spawned outside of a saved area, we want to move them to their last spawn.
-	if(!(z in SSmapping.saved_levels))
+	if(!(z in SSpersistence.saved_levels))
 		if(istype(home_spawn))
 			if(locate(/mob) in get_turf(home_spawn))
 				gib() // Someone or something was in your bed/cryopod.

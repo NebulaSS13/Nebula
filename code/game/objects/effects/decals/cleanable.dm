@@ -27,11 +27,6 @@
 	if(!ml)
 		if(!isnull(_age))
 			age = _age
-		SSpersistence.track_value(src, /datum/persistent/filth)
-	. = ..()
-
-/obj/effect/decal/cleanable/Destroy()
-	SSpersistence.forget_value(src, /datum/persistent/filth)
 	. = ..()
 
 /obj/effect/decal/cleanable/clean_blood(var/ignore = 0)

@@ -1,7 +1,3 @@
-/datum/map
-	// A list of turfs and their default turfs for serialization optimization.
-	var/list/default_z_turfs = list()
-
 /datum/proc/after_save()
 
 /datum/proc/before_save()
@@ -71,7 +67,7 @@
 /obj/effect/overmap/visitable/before_save()
 	should_save = FALSE
 	for(var/z in map_z)
-		if(z in SSmapping.saved_levels)
+		if(z in SSpersistence.saved_levels)
 			should_save = TRUE
 	start_x = x
 	start_y = x

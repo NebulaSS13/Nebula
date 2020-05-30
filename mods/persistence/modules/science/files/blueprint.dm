@@ -15,6 +15,8 @@
 	set_recipe(_recipe)
 
 /datum/computer_file/data/blueprint/proc/set_recipe(var/datum/fabricator_recipe/_recipe)
+	if(!istype(_recipe))
+		return
 	recipe = _recipe
 	filename = sanitize("[_recipe.name]")
 	for(var/badchar in list("/","\\",":","*","?","\"","<",">","|","#", ".", " ", ")"))

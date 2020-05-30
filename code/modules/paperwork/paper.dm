@@ -48,8 +48,6 @@
 	. = ..(mapload)
 	set_content(text ? text : info, title)
 	metadata = md
-	if(!mapload)
-		SSpersistence.track_value(src, /datum/persistent/paper)
 
 /obj/item/paper/proc/set_content(text,title)
 	if(title)
@@ -295,7 +293,7 @@
 					return
 			else
 				return
-		
+
 		var/obj/item/pen/P = I
 		if(!P.active)
 			P.toggle()

@@ -8,7 +8,6 @@
 	var/list/var_inserts = list()
 	var/list/element_inserts = list()
 
-	var/list/ignore_if_empty = list("pixel_x", "pixel_y", "density", "opacity", "blend_mode", "fingerprints", "climbers", "contents", "suit_fibers", "was_bloodied", "last_bumped", "blood_DNA", "id_tag", "x", "y", "z", "loc")
 	var/autocommit = TRUE // whether or not to autocommit after a certain number of inserts.
 	var/inserts_since_commit = 0
 	var/autocommit_threshold = 5000
@@ -17,8 +16,9 @@
 	var/serializer/json/flattener
 
 	var/list/wrappers = list(
-		new /datum/wrapper/game_data/species,
-		new /datum/wrapper/game_data/material
+		/datum/species 	= /datum/wrapper/game_data/species,
+		/material 		= /datum/wrapper/game_data/material,
+		/decl			= /datum/wrapper/game_data/decl
 	)
 
 #ifdef SAVE_DEBUG
@@ -28,6 +28,11 @@
 
 /serializer/sql/New()
 	flattener = new(src)
+
+/serializer/sql/proc/get_wrapper(var/D)
+	for(var/wrapper_type in wrappers)	
+		if(istype(D, wrapper_type))
+			return wrappers[wrapper_type]
 
 // Serialize an object datum. Returns the appropriate serialized form of the object. What's outputted depends on the serializer.
 /serializer/sql/SerializeDatum(var/datum/object, var/object_parent)
@@ -60,7 +65,12 @@
 		var/turf/T = object
 		x = T.x
 		y = T.y
-		z = T.z
+		if(nongreedy_serialize && !("[T.z]" in z_map))
+			return null
+		try
+			z = z_map["[T.z]"]
+		catch
+			z = T.z
 
 #ifdef SAVE_DEBUG
 	to_world_log("(SerializeThing) ([t_i],'[object.type]',[x],[y],[z])")
@@ -77,19 +87,8 @@
 #ifdef SAVE_DEBUG
 		to_world_log("(SerializeThingVar) [V]")
 #endif
-		// EXPERIMENTAL SAVING OPTIMIZATION OH FUCK
-		// if(default_instance && default_instance.vars[V] == VV)
-			// continue // Don't save things that are 'default value'. doh.
 		if(VV == initial(object.vars[V]))
 			continue
-
-		// hacking in some other optimizations
-		for(var/ignore in ignore_if_empty)
-			if(V == ignore)
-				if(!VV)
-					continue
-				if(islist(VV) && !length(VV))
-					continue
 
 		if(islist(VV) && !isnull(VV))
 			// Complex code for serializing lists...
@@ -117,16 +116,10 @@
 			VT = "FILE"
 		else if (isnull(VV))
 			VT = "NULL"
-		else if (isarea(VV))
-			VT = "AREA"
-			VV = SerializeArea(VV)
-		else if(V in GLOB.wrapped_types[object.type])
+		else if(get_wrapper(VV))
 			VT = "WRAP"
-			var/datum/wrapper/game_data/GD
-			for(var/datum/wrapper/game_data/BGD in wrappers)
-				if(istype(VV, BGD.wrapper_for))
-					GD = new BGD.type
-					break
+			var/wrapper_path = get_wrapper(VV)
+			var/datum/wrapper/game_data/GD = new wrapper_path
 			if(!GD)
 				// Missing wrapper!
 				continue
@@ -135,6 +128,9 @@
 				// Wrapper is null.
 				continue
 			VV = flattener.SerializeDatum(GD)
+		else if (isarea(VV))
+			VT = "AREA"
+			VV = SerializeArea(VV)
 		else if (istype(VV, /datum))
 			var/datum/VD = VV
 			if(!VD.should_save(object))
@@ -206,6 +202,18 @@
 		else if (islist(key))
 			KT = "LIST"
 			KV = SerializeList(key)
+		else if(get_wrapper(key))
+			KT = "WRAP"
+			var/wrapper_path = get_wrapper(key)
+			var/datum/wrapper/game_data/GD = new wrapper_path
+			if(!GD)
+				// Missing wrapper!
+				continue
+			GD.on_serialize(key)
+			if(!GD.key)
+				// Wrapper is null.
+				continue
+			KV = flattener.SerializeDatum(GD)
 		else if(isarea(key))
 			KT = "AREA"
 			KV = SerializeArea(KV)
@@ -239,6 +247,18 @@
 			else if (islist(EV))
 				ET = "LIST"
 				EV = SerializeList(EV)
+			else if(get_wrapper(EV))
+				ET = "WRAP"
+				var/wrapper_path = get_wrapper(EV)
+				var/datum/wrapper/game_data/GD = new wrapper_path
+				if(!GD)
+					// Missing wrapper!
+					continue
+				GD.on_serialize(EV)
+				if(!GD.key)
+					// Wrapper is null.
+					continue
+				EV = flattener.SerializeDatum(GD)
 			else if(isarea(key))
 				ET = "AREA"
 				EV = SerializeArea(EV)
@@ -451,14 +471,11 @@
 	inserts_since_commit = 0
 
 
-/serializer/sql/proc/Clear()
+/serializer/sql/Clear()
+	. = ..()
 	thing_inserts.Cut(1)
 	var_inserts.Cut(1)
 	element_inserts.Cut(1)
-	thing_map.Cut(1)
-	reverse_map.Cut(1)
-	list_map.Cut(1)
-	reverse_list_map.Cut(1)
 
 
 // Deletes all saves from the database.
@@ -472,6 +489,10 @@
 	if(query.ErrorMsg())
 		to_world_log("UNABLE TO WIPE PREVIOUS SAVE: [query.ErrorMsg()].")
 	query = dbcon.NewQuery("TRUNCATE TABLE `list_element`;")
+	query.Execute()
+	if(query.ErrorMsg())
+		to_world_log("UNABLE TO WIPE PREVIOUS SAVE: [query.ErrorMsg()].")
+	query = dbcon.NewQuery("TRUNCATE TABLE `z_level`;")
 	query.Execute()
 	if(query.ErrorMsg())
 		to_world_log("UNABLE TO WIPE PREVIOUS SAVE: [query.ErrorMsg()].")

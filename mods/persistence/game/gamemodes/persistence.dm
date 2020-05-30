@@ -8,3 +8,14 @@
 
 	ert_disabled = TRUE
 	auto_recall_shuttle = TRUE 
+
+/datum/game_mode/persistent/post_setup()
+	next_spawn = world.time + rand(min_autotraitor_delay, max_autotraitor_delay)
+
+	refresh_event_modifiers()
+
+	SSstatistics.set_field_details("round_start","[time2text(world.realtime)]")
+	if(SSticker.mode)
+		SSstatistics.set_field_details("game_mode","[SSticker.mode]")
+	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
+	return 1

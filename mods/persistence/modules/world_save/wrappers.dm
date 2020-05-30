@@ -13,15 +13,6 @@
 		has_gravity = A.has_gravity
 		apc = A.apc
 
-/datum/wrapper/multiz
-	var/list/saved_z_levels = list() // a list of booleans on which z-levels are connected....
-
-/datum/wrapper/multiz/proc/get_connected_zlevels()
-	// var/saved_zlevels = SSmapping.saved_levels
-	var/highest_zlevel = max(SSmapping.saved_levels)
-	saved_z_levels = z_levels.Copy(1, highest_zlevel)
-
-
 /datum/wrapper/decal
 	var/icon
 	var/icon_state
@@ -107,3 +98,12 @@
 
 /datum/wrapper/game_data/species/on_deserialize()
 	return all_species[key]
+
+/datum/wrapper/game_data/decl
+	wrapper_for = /decl
+
+/datum/wrapper/game_data/decl/on_serialize(var/decl/D)
+	key = "[D.type]"
+
+/datum/wrapper/game_data/decl/on_deserialize()
+	return decls_repository.get_decl(text2path(key))
