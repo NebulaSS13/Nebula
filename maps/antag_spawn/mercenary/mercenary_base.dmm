@@ -1017,7 +1017,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "bI" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
@@ -1127,7 +1127,7 @@
 /turf/simulated/wall/ocp_wall,
 /area/map_template/merc_shuttle/rear)
 "bR" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -1139,7 +1139,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "bS" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_borosilicate,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
@@ -1407,7 +1407,7 @@
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/reinforced_borosilicate/ten,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -2647,15 +2647,12 @@
 /obj/item/gun/energy/plasmacutter,
 /obj/item/gun/energy/plasmacutter,
 /obj/structure/window/reinforced{
-	icon_state = "rwindow";
 	dir = 4
 	},
 /obj/structure/window/reinforced{
-	icon_state = "rwindow";
 	dir = 8
 	},
 /obj/structure/window/reinforced{
-	icon_state = "rwindow";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2774,9 +2771,9 @@
 /obj/item/stack/material/ocp/ten,
 /obj/item/stack/material/ocp/ten,
 /obj/item/stack/material/ocp/ten,
-/obj/item/stack/material/glass/phoronrglass/ten,
-/obj/item/stack/material/glass/phoronrglass/ten,
-/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/reinforced_borosilicate/ten,
+/obj/item/stack/material/glass/reinforced_borosilicate/ten,
+/obj/item/stack/material/glass/reinforced_borosilicate/ten,
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-1";
 	dir = 8
@@ -3074,15 +3071,12 @@
 "Ya" = (
 /obj/structure/table/rack,
 /obj/structure/window/reinforced{
-	icon_state = "rwindow";
 	dir = 4
 	},
 /obj/structure/window/reinforced{
-	icon_state = "rwindow";
 	dir = 8
 	},
 /obj/structure/window/reinforced{
-	icon_state = "rwindow";
 	dir = 1
 	},
 /obj/item/rig/medical/equipped,

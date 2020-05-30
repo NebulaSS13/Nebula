@@ -1,11 +1,11 @@
-/decl/reagent/toxin
+/decl/material/chem/toxin
 	name = "toxin"
-	description = "A toxic chemical."
+	lore_text = "A toxic chemical."
 	taste_description = "bitterness"
 	taste_mult = 1.2
 	color = "#cf3600"
 	metabolism = REM * 0.25 // 0.05 by default. They last a while and slowly kill you.
-	heating_products = list(/decl/reagent/toxin/denatured)
+	heating_products = list(/decl/material/chem/toxin/denatured)
 	heating_point = 100 CELSIUS
 	heating_message = "goes clear."
 	value = 1.5
@@ -13,7 +13,7 @@
 	var/target_organ
 	var/strength = 4 // How much damage it deals per unit
 
-/decl/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(strength)
 		M.add_chemical_effect(CE_TOXIN, strength)
 		var/dam = (strength * removed)
@@ -32,9 +32,9 @@
 		if(dam)
 			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
 
-/decl/reagent/toxin/denatured
+/decl/material/chem/toxin/denatured
 	name = "denatured toxin"
-	description = "Once toxic, now harmless."
+	lore_text = "Once toxic, now harmless."
 	taste_description = null
 	taste_mult = null
 	color = "#808080"
@@ -45,54 +45,54 @@
 	strength = 0
 	hidden_from_codex = TRUE
 
-/decl/reagent/toxin/slimejelly
+/decl/material/chem/toxin/slimejelly
 	name = "slime jelly"
-	description = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
+	lore_text = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
 	taste_description = "slime"
 	taste_mult = 1.3
 	color = "#801e28"
 	strength = 10
 
-/decl/reagent/toxin/plasticide
+/decl/material/chem/toxin/plasticide
 	name = "plasticide"
-	description = "Liquid plastic, do not eat."
+	lore_text = "Liquid plastic, do not eat."
 	taste_description = "plastic"
 	color = "#cf3600"
 	strength = 5
 	heating_point = null
 	heating_products = null
 
-/decl/reagent/toxin/amatoxin
+/decl/material/chem/toxin/amatoxin
 	name = "amatoxin"
-	description = "A powerful poison derived from certain species of mushroom."
+	lore_text = "A powerful poison derived from certain species of mushroom."
 	taste_description = "mushroom"
 	color = "#792300"
 	strength = 10
 
-/decl/reagent/toxin/carpotoxin
+/decl/material/chem/toxin/carpotoxin
 	name = "carpotoxin"
-	description = "A deadly neurotoxin produced by the dreaded space carp."
+	lore_text = "A deadly neurotoxin produced by the dreaded space carp."
 	taste_description = "fish"
 	color = "#003333"
 	target_organ = BP_BRAIN
 	strength = 10
 
-/decl/reagent/toxin/venom
+/decl/material/chem/toxin/venom
 	name = "spider venom"
-	description = "A deadly necrotic toxin produced by giant spiders to disable their prey."
+	lore_text = "A deadly necrotic toxin produced by giant spiders to disable their prey."
 	taste_description = "absolutely vile"
 	color = "#91d895"
 	target_organ = BP_LIVER
 	strength = 5
 
-/decl/reagent/toxin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
 		M.confused = max(M.confused, 3)
 	..()
 
-/decl/reagent/toxin/chlorine
+/decl/material/chem/toxin/chlorine
 	name = "chlorine"
-	description = "A highly poisonous liquid. Smells strongly of bleach."
+	lore_text = "A highly poisonous liquid. Smells strongly of bleach."
 	taste_description = "bleach"
 	color = "#707c13"
 	strength = 15
@@ -100,9 +100,9 @@
 	heating_point = null
 	heating_products = null
 
-/decl/reagent/toxin/phoron
+/decl/material/chem/toxin/phoron
 	name = "phoron"
-	description = "Phoron in its liquid form."
+	lore_text = "Phoron in its liquid form."
 	taste_mult = 1.5
 	color = "#ff3300"
 	strength = 30
@@ -110,14 +110,14 @@
 	heating_point = null
 	heating_products = null
 	value = 4
-	fuel_value = 5
+	fuel_value = 2
 
-/decl/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
 	if(prob(10 * fuel_value))
-		M.pl_effects()
+		M.handle_contaminants()
 
-/decl/reagent/toxin/phoron/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(!istype(T))
 		return
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -125,13 +125,13 @@
 	holder.remove_reagent(type, volume)
 
 // Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
-/decl/reagent/toxin/phoron/oxygen
+/decl/material/chem/toxin/phoron/oxygen
 	name = "oxyphoron"
-	description = "An exceptionally flammable molecule formed from deuterium synthesis."
+	lore_text = "An exceptionally flammable molecule formed from deuterium synthesis."
 	strength = 15
-	fuel_value = 15
+	fuel_value = 2.5
 
-/decl/reagent/toxin/phoron/oxygen/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/oxygen/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(!istype(T))
 		return
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -139,9 +139,9 @@
 	T.assume_gas(MAT_PHORON, ceil(volume/2), T20C)
 	holder.remove_reagent(type, volume)
 
-/decl/reagent/toxin/cyanide //Fast and Lethal
+/decl/material/chem/toxin/cyanide //Fast and Lethal
 	name = "cyanide"
-	description = "A highly toxic chemical."
+	lore_text = "A highly toxic chemical."
 	taste_mult = 0.6
 	color = "#cf3600"
 	strength = 20
@@ -150,13 +150,13 @@
 	heating_point = null
 	heating_products = null
 
-/decl/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.sleeping += 1
 
-/decl/reagent/toxin/heartstopper
+/decl/material/chem/toxin/heartstopper
 	name = "heartstopper"
-	description = "A potent cardiotoxin that paralyzes the heart."
+	lore_text = "A potent cardiotoxin that paralyzes the heart."
 	taste_description = "intense bitterness"
 	color = "#6b833b"
 	strength = 16
@@ -166,11 +166,11 @@
 	heating_point = null
 	heating_products = null
 
-/decl/reagent/toxin/heartstopper/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/heartstopper/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.confused += 1.5
 
-/decl/reagent/toxin/heartstopper/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/chem/toxin/heartstopper/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -181,18 +181,18 @@
 			H.Weaken(10)
 		M.add_chemical_effect(CE_NOPULSE, 1)
 
-/decl/reagent/toxin/zombiepowder
+/decl/material/chem/toxin/zombiepowder
 	name = "zombie powder"
-	description = "A strong neurotoxin that puts the subject into a death-like state."
+	lore_text = "A strong neurotoxin that puts the subject into a death-like state."
 	taste_description = "death"
 	color = "#669900"
 	metabolism = REM
 	strength = 3
 	target_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
-	heating_products = list(/decl/reagent/toxin/carpotoxin, /decl/reagent/sedatives, /decl/reagent/copper)
+	heating_products = list(/decl/material/chem/toxin/carpotoxin, /decl/material/chem/sedatives, /decl/material/copper)
 
-/decl/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.status_flags |= FAKEDEATH
 	M.adjustOxyLoss(3 * removed)
@@ -202,13 +202,13 @@
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
-/decl/reagent/toxin/zombiepowder/on_leaving_metabolism(mob/parent, metabolism_class)
+/decl/material/chem/toxin/zombiepowder/on_leaving_metabolism(mob/parent, metabolism_class)
 	parent?.status_flags &= ~FAKEDEATH
 	. = ..()
 
-/decl/reagent/toxin/fertilizer //Reagents used for plant fertilizers.
+/decl/material/chem/toxin/fertilizer //Reagents used for plant fertilizers.
 	name = "fertilizer"
-	description = "A chemical mix good for growing plants with."
+	lore_text = "A chemical mix good for growing plants with."
 	taste_description = "plant food"
 	taste_mult = 0.5
 	strength = 0.5 // It's not THAT poisonous.
@@ -217,24 +217,24 @@
 	heating_products = null
 	hidden_from_codex = TRUE
 
-/decl/reagent/toxin/fertilizer/eznutrient
+/decl/material/chem/toxin/fertilizer/eznutrient
 	name = "EZ Nutrient"
 
-/decl/reagent/toxin/fertilizer/left4zed
+/decl/material/chem/toxin/fertilizer/left4zed
 	name = "Left-4-Zed"
 
-/decl/reagent/toxin/fertilizer/robustharvest
+/decl/material/chem/toxin/fertilizer/robustharvest
 	name = "Robust Harvest"
 
-/decl/reagent/toxin/plantbgone
+/decl/material/chem/toxin/plantbgone
 	name = "Plant-B-Gone"
-	description = "A harmful toxic mixture to kill plantlife. Do not ingest!"
+	lore_text = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 	taste_mult = 1
 	color = "#49002e"
 	strength = 4
-	heating_products = list(/decl/reagent/toxin, /decl/reagent/water)
+	heating_products = list(/decl/material/chem/toxin, /decl/material/gas/water)
 
-/decl/reagent/toxin/plantbgone/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/chem/toxin/plantbgone/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/W = T
 		if(locate(/obj/effect/overlay/wallrot) in W)
@@ -242,23 +242,23 @@
 				qdel(E)
 			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
 
-/decl/reagent/toxin/plantbgone/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
+/decl/material/chem/toxin/plantbgone/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O, /obj/effect/vine))
 		qdel(O)
 		
-/decl/reagent/toxin/tar
+/decl/material/chem/toxin/tar
 	name = "tar"
-	description = "A dark, viscous liquid."
+	lore_text = "A dark, viscous liquid."
 	taste_description = "petroleum"
 	color = "#140b30"
 	strength = 4
-	heating_products = list(/decl/reagent/acetone, /decl/reagent/carbon, /decl/reagent/ethanol)
+	heating_products = list(/decl/material/chem/acetone, /decl/material/chem/carbon, /decl/material/chem/ethanol)
 	heating_point = 145 CELSIUS
 	heating_message = "separates"
 
-/decl/reagent/toxin/hair_remover
+/decl/material/chem/toxin/hair_remover
 	name = "hair remover"
-	description = "An extremely effective chemical depilator. Do not ingest."
+	lore_text = "An extremely effective chemical depilator. Do not ingest."
 	taste_description = "acid"
 	color = "#d9ffb3"
 	strength = 1
@@ -266,13 +266,13 @@
 	heating_products = null
 	heating_point = null
 
-/decl/reagent/toxin/hair_remover/affect_touch(var/mob/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/hair_remover/affect_touch(var/mob/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.lose_hair()
 	holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
 
-/decl/reagent/toxin/zombie
+/decl/material/chem/toxin/zombie
 	name = "liquid corruption"
-	description = "A filthy, oily substance which slowly churns of its own accord."
+	lore_text = "A filthy, oily substance which slowly churns of its own accord."
 	taste_description = "decaying blood"
 	color = "#800000"
 	taste_mult = 5
@@ -284,10 +284,10 @@
 	heating_point = null
 	var/amount_to_zombify = 5
 
-/decl/reagent/toxin/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
 
-/decl/reagent/toxin/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
@@ -299,36 +299,9 @@
 		else if (prob(10))
 			to_chat(H, "<span class='warning'>You feel terribly ill!</span>")
 
-/decl/reagent/toxin/methyl_bromide
-	name = "methyl bromide"
-	description = "A fumigant derived from bromide."
-	taste_description = "pestkiller"
-	color = "#4c3b34"
-	strength = 5
-	heating_products = null
-	heating_point = null
-
-/decl/reagent/toxin/methyl_bromide/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T))
-		var/volume = REAGENT_VOLUME(holder, type)
-		T.assume_gas(MAT_METHYL_BROMIDE, volume, T20C)
-		holder.remove_reagent(type, volume)
-
-/decl/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	. = ..()
-	if(istype(M))
-		for(var/obj/item/organ/external/E in M.organs)
-			if(LAZYLEN(E.implants))
-				for(var/obj/effect/spider/spider in E.implants)
-					if(prob(25))
-						E.implants -= spider
-						M.visible_message("<span class='notice'>The dying form of \a [spider] emerges from inside \the [M]'s [E.name].</span>")
-						qdel(spider)
-						break
-
-/decl/reagent/toxin/bromide
+/decl/material/chem/toxin/bromide
 	name = "bromide"
-	description = "A dark, nearly opaque, red-orange, toxic element."
+	lore_text = "A dark, nearly opaque, red-orange, toxic element."
 	taste_description = "pestkiller"
 	color = "#4c3b34"
 	strength = 3

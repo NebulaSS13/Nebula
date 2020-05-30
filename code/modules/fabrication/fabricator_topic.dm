@@ -43,8 +43,8 @@
 	mat_name = lowertext(mat_name)
 	for(var/mat_path in stored_substances_to_names)
 		if(stored_substances_to_names[mat_path] == mat_name)
-			if(ispath(mat_path, /material))
-				var/material/mat = SSmaterials.get_material_datum(mat_path)
+			if(ispath(mat_path, /decl/material))
+				var/decl/material/mat = decls_repository.get_decl(mat_path)
 				if(mat && stored_material[mat_path] > SHEET_MATERIAL_AMOUNT && mat.stack_type)
 					var/sheet_count = Floor(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
 					stored_material[mat_path] -= sheet_count * SHEET_MATERIAL_AMOUNT

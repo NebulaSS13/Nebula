@@ -23,7 +23,7 @@ var/list/mining_floors = list()
 	explosion_resistance = 2
 
 	var/mined_turf = /turf/simulated/floor/asteroid
-	var/material/mineral
+	var/decl/material/mineral
 	var/mined_ore = 0
 	var/last_act = 0
 	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
@@ -96,15 +96,14 @@ var/list/mining_floors = list()
 	if(archaeo_overlay)
 		overlays += archaeo_overlay
 
-/turf/simulated/mineral/ex_act(severity)
-	switch(severity)
-		if(2.0)
-			if (prob(70))
-				mined_ore = 1 //some of the stuff gets blown up
-				GetDrilled()
-		if(1.0)
-			mined_ore = 2 //some of the stuff gets blown up
-			GetDrilled()
+/turf/simulated/mineral/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(severity == 2 && prob(70))
+		mined_ore = 1 //some of the stuff gets blown up
+		GetDrilled()
+	else if(severity == 1)
+		mined_ore = 2 //some of the stuff gets blown up
+		GetDrilled()
 
 /turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj)
 
@@ -390,18 +389,20 @@ var/list/mining_floors = list()
 /turf/simulated/mineral/random
 	name = "mineral deposit"
 
-/turf/simulated/mineral/random/Initialize(var/ml, var/mineral_name, var/default_mineral_list = GLOB.weighted_minerals_sparse)
+/turf/simulated/mineral/random/Initialize(var/ml, var/mineral_name, var/default_mineral_list)
+	if(!default_mineral_list)
+		default_mineral_list = SSmaterials.weighted_minerals_sparse
 	if(!mineral_name && LAZYLEN(default_mineral_list))
 		mineral_name = pickweight(default_mineral_list)
 
 	if(!mineral && mineral_name)
-		mineral = SSmaterials.get_material_datum(mineral_name)
+		mineral = decls_repository.get_decl(mineral_name)
 	if(istype(mineral))
 		UpdateMineral()
 	. = ..(ml)
 
 /turf/simulated/mineral/random/high_chance/Initialize(var/ml, var/mineral_name, var/default_mineral_list)
-	. = ..(ml, mineral_name, GLOB.weighted_minerals_rich)
+	. = ..(ml, mineral_name, SSmaterials.weighted_minerals_rich)
 
 /**********************Asteroid**************************/
 
@@ -437,16 +438,10 @@ var/list/mining_floors = list()
 		mining_floors["[src.z]"] -= src
 	return ..()
 
-/turf/simulated/floor/asteroid/ex_act(severity)
-	switch(severity)
-		if(3.0)
-			return
-		if(2.0)
-			if (prob(70))
-				gets_dug()
-		if(1.0)
-			gets_dug()
-	return
+/turf/simulated/floor/asteroid/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(severity == 1 || (severity == 2 && prob(70)))
+		gets_dug()
 
 /turf/simulated/floor/asteroid/is_plating()
 	return !density

@@ -328,7 +328,8 @@ var/bomb_set
 	timeleft = Clamp(timeleft, 120, 600)
 	update_icon()
 
-/obj/machinery/nuclearbomb/ex_act(severity)
+/obj/machinery/nuclearbomb/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 #define NUKERANGE 80

@@ -53,7 +53,7 @@
 
 /obj/structure/railing/update_material_desc(override_desc)
 	if(material)
-		desc = "A simple [material.display_name] railing designed to protect against careless trespass."
+		desc = "A simple [material.name] railing designed to protect against careless trespass."
 	else
 		..()
 
@@ -272,8 +272,10 @@
 		return
 	. = ..()
 
-/obj/structure/railing/ex_act(severity)
-	qdel(src)
+/obj/structure/railing/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		qdel(src)
 
 /obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=0)
 	. = ..()

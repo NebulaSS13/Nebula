@@ -397,16 +397,14 @@ var/list/turret_icons
 	if(disabled)
 		disabled = 0
 
-/obj/machinery/porta_turret/ex_act(severity)
-	switch (severity)
-		if (1)
-			qdel(src)
-		if (2)
-			if (prob(25))
-				qdel(src)
-			else
-				take_damage(initial(health) * 8) //should instakill most turrets
-		if (3)
+/obj/machinery/porta_turret/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src))
+		if(severity == 1 || (severity == 2 && prob(25)))
+			physically_destroyed(src)
+		else if(severity == 2)
+			take_damage(initial(health) * 8)
+		else
 			take_damage(initial(health) * 8 / 3)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0

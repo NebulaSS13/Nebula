@@ -199,9 +199,11 @@
 	healthcheck()
 	return 0
 
-/obj/effect/energy_net/ex_act()
-	health = 0
-	healthcheck()
+/obj/effect/energy_net/explosion_act()
+	..()
+	if(!QDELETED(src))
+		health = 0
+		healthcheck()
 
 /obj/effect/energy_net/attack_hand(var/mob/user)
 

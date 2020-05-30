@@ -22,7 +22,8 @@
 	update_nearby_tiles()
 	. = ..()
 
-/obj/effect/energy_field/ex_act(var/severity)
+/obj/effect/energy_field/explosion_act(var/severity)
+	SHOULD_CALL_PARENT(FALSE)
 	Stress(0.5 + severity)
 
 /obj/effect/energy_field/bullet_act(var/obj/item/projectile/Proj)

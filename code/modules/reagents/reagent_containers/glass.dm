@@ -236,15 +236,15 @@
 
 /obj/item/chems/glass/beaker/sulphuric/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/acid, 60)
+	reagents.add_reagent(/decl/material/chem/acid, 60)
 	update_icon()
 
 /obj/item/chems/glass/bucket
 	name = "bucket"
 	desc = "It's a bucket."
-	icon = 'icons/obj/janitor.dmi'
-	icon_state = "bucket"
-	item_state = "bucket"
+	icon = 'icons/obj/items/bucket.dmi'
+	on_mob_icon = 'icons/obj/items/bucket.dmi'
+	icon_state = "world"
 	center_of_mass = @"{'x':16,'y':9}"
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
@@ -254,12 +254,12 @@
 	unacidable = 0
 	material = MAT_PLASTIC
 	material_force_multiplier = 0.2
+	slot_flags = SLOT_HEAD
 
 /obj/item/chems/glass/bucket/wood
-	name = "bucket"
 	desc = "It's a wooden bucket. How rustic."
-	icon_state = "wbucket"
-	item_state = "wbucket"
+	icon = 'icons/obj/items/wooden_bucket.dmi'
+	on_mob_icon = 'icons/obj/items/wooden_bucket.dmi'
 	volume = 200
 	material = MAT_WOOD
 

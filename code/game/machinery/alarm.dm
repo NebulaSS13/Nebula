@@ -508,9 +508,9 @@
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
 		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 		for(var/gas_id in env_info.important_gasses)
-			var/material/mat = SSmaterials.get_material_datum(gas_id)	
+			var/decl/material/mat = decls_repository.get_decl(gas_id)	
 			environment_data[++environment_data.len] = list(
-				"name" =  capitalize(mat.display_name),
+				"name" =  capitalize(mat.name),
 				"value" = environment.gas[gas_id] / total * 100,
 				"unit" = "%",
 				"danger_level" = env_info.dangerous_gasses[gas_id] ? co2_dangerlevel : oxygen_dangerlevel
@@ -564,10 +564,10 @@
 					)
 				var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 				for(var/gas_id in env_info.filter_gasses)
-					var/material/mat = SSmaterials.get_material_datum(gas_id)
+					var/decl/material/mat = decls_repository.get_decl(gas_id)
 					scrubbers[scrubbers.len]["filters"] += list(
 						list(
-							"name" = capitalize(mat.display_name),
+							"name" = capitalize(mat.name),
 							"id"   = gas_id,
 							"val"  = (gas_id in info["scrubbing_gas"])
 						)

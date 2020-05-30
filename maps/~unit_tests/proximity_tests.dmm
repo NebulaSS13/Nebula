@@ -16,8 +16,8 @@
 /turf/simulated/floor,
 /area/test_area/proximity)
 "f" = (
-/obj/structure/door/iron,
-/turf/simulated/floor,
+/obj/effect/landmark/proximity_wall,
+/turf/simulated/wall,
 /area/test_area/proximity)
 
 (1,1,1) = {"

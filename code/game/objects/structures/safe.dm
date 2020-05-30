@@ -156,7 +156,8 @@ FLOOR SAFES
 			return
 
 
-obj/structure/safe/ex_act(severity)
+obj/structure/safe/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 //FLOOR SAFES

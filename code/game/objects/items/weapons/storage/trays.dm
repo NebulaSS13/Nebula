@@ -73,16 +73,17 @@
 	else
 		..()
 
-/obj/item/storage/tray/proc/dump_contents(var/mob/user, turf/new_loc = loc)
+/obj/item/storage/tray/dump_contents(var/mob/user, turf/new_loc = loc)
 	if(!isturf(new_loc)) //to handle hand switching
-		return
-
-	close(user)
+		return FALSE
+	if(user)
+		close(user)
 	if(!(locate(/obj/structure/table) in new_loc) && user && contents.len)
 		visible_message(SPAN_DANGER("Everything falls off the [name]! Good job, [user]."))
 		scatter_contents(FALSE, new_loc)
 	else
 		scatter_contents(TRUE, new_loc)
+	return TRUE
 
 /obj/item/storage/tray/dropped(mob/user)
 	. = ..()

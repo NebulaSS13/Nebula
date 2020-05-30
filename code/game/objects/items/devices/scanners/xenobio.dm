@@ -35,8 +35,8 @@
 /proc/list_gases(var/gases)
 	. = list()
 	for(var/g in gases)
-		var/material/mat = SSmaterials.get_material_datum(g)
-		. += "[capitalize(mat.display_name)] ([gases[g]]%)"
+		var/decl/material/mat = decls_repository.get_decl(g)
+		. += "[capitalize(mat.name)] ([gases[g]]%)"
 	return english_list(.)
 
 /proc/xenobio_scan_results(mob/target)
@@ -49,11 +49,11 @@
 		. += "Data for [H]:"
 		. += "Species:\t[H.species]"
 		if(H.species.breath_type)
-			var/material/mat = SSmaterials.get_material_datum(H.species.breath_type)
-			. += "Breathes:\t[mat.display_name]"
+			var/decl/material/mat = decls_repository.get_decl(H.species.breath_type)
+			. += "Breathes:\t[mat.name]"
 		if(H.species.exhale_type)
-			var/material/mat = SSmaterials.get_material_datum(H.species.exhale_type)
-			. += "Exhales:\t[mat.display_name]"
+			var/decl/material/mat = decls_repository.get_decl(H.species.exhale_type)
+			. += "Exhales:\t[mat.name]"
 		. += "Known toxins:\t[english_list(H.species.poison_types)]"
 		. += "Temperature comfort zone:\t[H.species.cold_discomfort_level] K to [H.species.heat_discomfort_level] K"
 		. += "Pressure comfort zone:\t[H.species.warning_low_pressure] kPa to [H.species.warning_high_pressure] kPa"

@@ -208,10 +208,10 @@
 	icon = 'mods/ascent/icons/ascent.dmi'
 	icon_state = "injector"
 	charges = list(
-		list("bromide",             "bromide",             /decl/reagent/toxin/bromide, 80),
-		list("crystallizing agent", "crystallizing agent", /decl/reagent/crystal,       80),
-		list("antibiotics",         "antibiotics",         /decl/reagent/antibiotics,   80),
-		list("painkillers",         "painkillers",         /decl/reagent/painkillers,   80)
+		list("bromide",             "bromide",             /decl/material/chem/toxin/bromide, 80),
+		list("crystallizing agent", "crystallizing agent", /decl/material/chem/crystal_agent,       80),
+		list("antibiotics",         "antibiotics",         /decl/material/chem/antibiotics,   80),
+		list("painkillers",         "painkillers",         /decl/material/chem/painkillers,   80)
 	)
 
 // Rig definitions.

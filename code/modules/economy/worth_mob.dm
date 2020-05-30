@@ -12,10 +12,10 @@
 	if(meat_type)
 		. += atom_info_repository.get_combined_worth_for(meat_type) * meat_amount
 	if(skin_material)
-		var/material/M = SSmaterials.get_material_datum(skin_material)
+		var/decl/material/M = decls_repository.get_decl(skin_material)
 		. += skin_amount * M.value * 10
 	if(bone_material)
-		var/material/M = SSmaterials.get_material_datum(bone_material)
+		var/decl/material/M = decls_repository.get_decl(bone_material)
 		. += bone_amount * M.value * 10
 	if(skull_type)
 		.+= atom_info_repository.get_combined_worth_for(skull_type)

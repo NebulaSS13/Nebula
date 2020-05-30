@@ -96,14 +96,14 @@
 		G.gene = gene
 
 /obj/item/gun/energy/toxgun
-	name = "phoron pistol"
-	desc = "A specialized firearm designed to fire lethal bolts of phoron."
+	name = "radpistol"
+	desc = "A specialized firearm designed to fire lethal bursts of radiation."
 	on_mob_icon = 'icons/obj/guns/toxgun.dmi'
 	icon = 'icons/obj/guns/toxgun.dmi'
 	icon_state = "world"
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'combat':5,'phorontech':4}"
-	projectile_type = /obj/item/projectile/energy/phoron
+	origin_tech = "{'combat':5,'exoticmatter':4}"
+	projectile_type = /obj/item/projectile/energy/radiation
 	material = MAT_STEEL
 	matter = list(
 		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
@@ -121,7 +121,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
-	origin_tech = "{'materials':4,'phorontech':4,'engineering':6,'combat':3}"
+	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
 	material = MAT_STEEL
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10

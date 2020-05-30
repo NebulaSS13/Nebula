@@ -36,8 +36,8 @@
 
 /obj/structure/window/update_materials(var/keep_health)
 	. = ..()
-	name = "[reinf_material ? "reinforced " : ""][material.display_name] window"
-	desc = "A window pane made from [material.display_name]."
+	name = "[reinf_material ? "reinforced " : ""][material.name] window"
+	desc = "A window pane made from [material.name]."
 
 /obj/structure/window/Initialize(var/ml, var/dir_to_set, var/anchored, var/_mat, var/_reinf_mat)
 	. = ..(ml, _mat, _reinf_mat)
@@ -71,7 +71,8 @@
 /obj/structure/window/CanFluidPass(var/coming_from)
 	return (!is_fulltile() && coming_from != dir)
 
-/obj/structure/window/destroyed()
+/obj/structure/window/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	. = shatter()
 
 /obj/structure/window/take_damage(damage = 0)
@@ -96,15 +97,10 @@
 	..()
 	take_damage(proj_damage)
 
-/obj/structure/window/ex_act(severity)
-	switch(severity)
-		if(1)
-			qdel(src)
-		if(2)
-			shatter(0)
-		if(3)
-			if(prob(50))
-				shatter(0)
+/obj/structure/window/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src) && (severity != 3 || prob(50)))
+		physically_destroyed()
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
@@ -319,7 +315,7 @@
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
 	if(reinf_material)
-		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.display_name] lattice."))
+		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.name] lattice."))
 		
 /obj/structure/window/proc/set_anchored(var/new_anchored)
 	if(anchored == new_anchored)
@@ -396,23 +392,23 @@
 /obj/structure/window/basic/full/polarized
 	polarized = 1
 
-/obj/structure/window/phoronbasic
-	name = "phoron window"
-	color = GLASS_COLOR_PHORON
-	material = MAT_PHORON_GLASS
+/obj/structure/window/borosilicate
+	name = "borosilicate window"
+	color = GLASS_COLOR_SILICATE
+	material = MAT_BOROSILICATE_GLASS
 
-/obj/structure/window/phoronbasic/full
+/obj/structure/window/borosilicate/full
 	dir = NORTHEAST
 	icon_state = "window_full"
 
-/obj/structure/window/phoronreinforced
+/obj/structure/window/borosilicate_reinforced
 	name = "reinforced borosilicate window"
-	icon_state = "rwindow"
-	color = GLASS_COLOR_PHORON
-	material = MAT_PHORON_GLASS
+	icon_state = "phoronrwindow"
+	color = GLASS_COLOR_SILICATE
+	material = MAT_BOROSILICATE_GLASS
 	reinf_material = MAT_STEEL
 
-/obj/structure/window/phoronreinforced/full
+/obj/structure/window/borosilicate_reinforced/full
 	dir = NORTHEAST
 	icon_state = "window_full"
 
@@ -519,7 +515,8 @@
 /obj/structure/window/reinforced/crescent/attackby()
 	return
 
-/obj/structure/window/reinforced/crescent/ex_act()
+/obj/structure/window/reinforced/crescent/explosion_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/structure/window/reinforced/crescent/hitby()

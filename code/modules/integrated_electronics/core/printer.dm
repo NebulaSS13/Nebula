@@ -51,9 +51,9 @@
 		return
 	for(var/material in O.matter)
 		if(materials[material] + O.matter[material] > metal_max)
-			var/material/material_datum = SSmaterials.get_material_datum(material)
+			var/decl/material/material_datum = decls_repository.get_decl(material)
 			if(material_datum)
-				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.display_name]!</span>")
+				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.name]!</span>")
 			return
 	for(var/material in O.matter)
 		materials[material] += O.matter[material]
@@ -72,7 +72,7 @@
 			amt = -round(-(metal_max - materials[M.material.type]) / SHEET_MATERIAL_AMOUNT) //round up
 		if(M.use(amt))
 			materials[M.material.type] = min(metal_max, materials[M.material.type] + amt * SHEET_MATERIAL_AMOUNT)
-			to_chat(user, "<span class='warning'>You insert [M.material.display_name] into \the [src].</span>")
+			to_chat(user, "<span class='warning'>You insert [M.material.name] into \the [src].</span>")
 			if(user)
 				attack_self(user) // We're really bad at refreshing the UI, so this is the best we've got.
 	if(istype(O, /obj/item/disk/integrated_circuit/upgrade/advanced))
@@ -151,8 +151,8 @@
 		HTML += "Materials: "
 		var/list/dat = list()
 		for(var/material in materials)
-			var/material/material_datum = SSmaterials.get_material_datum(material)
-			dat += "[materials[material]]/[metal_max] [material_datum.display_name]"
+			var/decl/material/material_datum = decls_repository.get_decl(material)
+			dat += "[materials[material]]/[metal_max] [material_datum.name]"
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
 
@@ -325,8 +325,8 @@
 /obj/item/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
 	for(var/material in cost)
 		if(materials[material] < cost[material])
-			var/material/material_datum = SSmaterials.get_material_datum(material)
-			to_chat(user, "<span class='warning'>You need [cost[material]] [material_datum.display_name] to build that!</span>")
+			var/decl/material/material_datum = decls_repository.get_decl(material)
+			to_chat(user, "<span class='warning'>You need [cost[material]] [material_datum.name] to build that!</span>")
 			return FALSE
 	for(var/material in cost) //Iterate twice to make sure it's going to work before deducting
 		materials[material] -= cost[material]

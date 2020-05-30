@@ -25,7 +25,7 @@
 	var/turf/T = get_step(holder, exhaust_dir)
 	if(T)
 		T.assume_air(removed)
-		new/obj/effect/engine_exhaust(T, exhaust_dir, removed.check_combustability() && removed.temperature >= PHORON_MINIMUM_BURN_TEMPERATURE)
+		new/obj/effect/engine_exhaust(T, exhaust_dir, removed.check_combustibility() && removed.temperature >= FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 
 /datum/extension/ship_engine/gas/proc/get_propellant(var/sample_only = TRUE, var/partial = 1)
 	var/obj/machinery/atmospherics/unary/engine/E = holder
@@ -74,7 +74,7 @@
 		return 0.01 // Divide by zero protection.
 
 	for(var/mat in propellant.gas)
-		var/material/gas/G = SSmaterials.get_material_datum(mat)
+		var/decl/material/gas/G = decls_repository.get_decl(mat)
 		// 0.08 chosen to get the RATIO of the specific heat, we don't have cV/cP here, so this is a rough approximate.
 		var/ratio = (G.gas_specific_heat / 25) + 0.8// These numbers are meaningless, just magic numbers to calibrate range.
 		ratio_specific_heat += ratio * (propellant.gas[mat] / propellant.total_moles)

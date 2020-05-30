@@ -31,6 +31,12 @@
 		client.playtitlemusic()
 		maybe_send_staffwarns("connected as new player")
 
+		if(get_preference_value(/datum/client_preference/chat_position) == GLOB.PREF_YES)
+			client.update_chat_position(TRUE)
+
+		if(get_preference_value(/datum/client_preference/fullscreen_mode) != GLOB.PREF_OFF)
+			client.toggle_fullscreen(get_preference_value(/datum/client_preference/fullscreen_mode))
+
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	var/decl/security_level/SL = security_state.current_security_level
 	var/alert_desc = ""

@@ -10,7 +10,7 @@
 	var/list/tech_levels = list(
 		TECH_MATERIAL =    0,
 		TECH_ENGINEERING = 0,
-		TECH_PHORON =      0,
+		TECH_EXOTIC_MATTER =      0,
 		TECH_POWER =       0,
 		TECH_BLUESPACE =   0,
 		TECH_BIO =         0,

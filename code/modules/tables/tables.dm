@@ -53,7 +53,8 @@
 /obj/structure/table/get_material_health_modifier()
 	. = 0.5
 
-/obj/structure/table/destroyed()
+/obj/structure/table/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	visible_message(SPAN_DANGER("\The [src] breaks down!"))
 	. = break_to_parts()
 
@@ -171,50 +172,50 @@
 
 /obj/structure/table/proc/update_desc()
 	if(material)
-		name = "[material.display_name] table"
+		name = "[material.name] table"
 	else
 		name = "table frame"
 
 	if(reinf_material)
 		name = "reinforced [name]"
-		desc = "[initial(desc)] This one seems to be reinforced with [reinf_material.display_name]."
+		desc = "[initial(desc)] This one seems to be reinforced with [reinf_material.name]."
 	else
 		desc = initial(desc)
 
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_add(obj/item/stack/material/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
-	var/material/M = S.get_material()
+	var/decl/material/M = S.get_material()
 	if(!istype(M))
 		to_chat(user, "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>")
 		return null
 
 	if(manipulating) return M
 	manipulating = 1
-	to_chat(user, "<span class='notice'>You begin [verb]ing \the [src] with [M.display_name].</span>")
+	to_chat(user, "<span class='notice'>You begin [verb]ing \the [src] with [M.name].</span>")
 	if(!do_after(user, 20, src) || !S.use(1))
 		manipulating = 0
 		return null
-	user.visible_message("<span class='notice'>\The [user] [verb]es \the [src] with [M.display_name].</span>", "<span class='notice'>You finish [verb]ing \the [src].</span>")
+	user.visible_message("<span class='notice'>\The [user] [verb]es \the [src] with [M.name].</span>", "<span class='notice'>You finish [verb]ing \the [src].</span>")
 	manipulating = 0
 	return M
 
 // Returns the material to set the table to.
-/obj/structure/table/proc/common_material_remove(mob/user, material/M, delay, what, type_holding, sound)
+/obj/structure/table/proc/common_material_remove(mob/user, decl/material/M, delay, what, type_holding, sound)
 	if(!M.stack_type)
 		to_chat(user, "<span class='warning'>You are unable to remove the [what] from this table!</span>")
 		return M
 
 	if(manipulating) return M
 	manipulating = 1
-	user.visible_message("<span class='notice'>\The [user] begins removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place.</span>",
-	                              "<span class='notice'>You begin removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place.</span>")
+	user.visible_message("<span class='notice'>\The [user] begins removing the [type_holding] holding \the [src]'s [M.name] [what] in place.</span>",
+	                              "<span class='notice'>You begin removing the [type_holding] holding \the [src]'s [M.name] [what] in place.</span>")
 	if(sound)
 		playsound(src.loc, sound, 50, 1)
 	if(!do_after(user, 40, src))
 		manipulating = 0
 		return M
-	user.visible_message("<span class='notice'>\The [user] removes the [M.display_name] [what] from \the [src].</span>",
-	                              "<span class='notice'>You remove the [M.display_name] [what] from \the [src].</span>")
+	user.visible_message("<span class='notice'>\The [user] removes the [M.name] [what] from \the [src].</span>",
+	                              "<span class='notice'>You remove the [M.name] [what] from \the [src].</span>")
 	M.place_sheet(src.loc)
 	manipulating = 0
 	return null
@@ -254,7 +255,7 @@
 	if(full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
-		var/material/M = SSmaterials.get_material_datum(MAT_STEEL)
+		var/decl/material/M = decls_repository.get_decl(MAT_STEEL)
 		S = M.place_shard(loc)
 		if(S) shards += S
 	qdel(src)
@@ -312,7 +313,7 @@
 			I.color = material.icon_colour
 			I.alpha = 255 * material.opacity
 			overlays += I
-			name = "[material.display_name] table"
+			name = "[material.name] table"
 		else
 			name = "table frame"
 		if(istype(reinf_material))

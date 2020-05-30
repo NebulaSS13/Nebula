@@ -27,23 +27,12 @@
 
 /obj/machinery/optable/examine(mob/user)
 	. = ..()
-	to_chat(user, "<span class='notice'>The neural suppressors are switched [suppressing ? "on" : "off"].</span>")
+	to_chat(user, SPAN_NOTICE("The neural suppressors are switched [suppressing ? "on" : "off"]."))
 
-/obj/machinery/optable/ex_act(severity)
-
-	switch(severity)
-		if(1.0)
-			//SN src = null
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(50))
-				//SN src = null
-				qdel(src)
-				return
-		if(3.0)
-			if (prob(25))
-				src.set_density(0)
+/obj/machinery/optable/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src) && (severity == 1 || prob(100 - (25 * severity))))
+		physically_destroyed(src)
 
 /obj/machinery/optable/attackby(var/obj/item/O, var/mob/user)
 	if (istype(O, /obj/item/grab))

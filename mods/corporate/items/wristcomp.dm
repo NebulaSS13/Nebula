@@ -17,11 +17,12 @@
 /obj/item/modular_computer/pda/wrist/get_mob_overlay(var/mob/user_mob, var/slot)
 	var/image/ret = ..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	if(slot == slot_wear_id_str)
-		if(enabled)
+		if(assembly.enabled)
 			var/image/I = image(icon = ret.icon, icon_state = "wc_screen")
 			I.appearance_flags |= RESET_COLOR
-			I.color = (bsod || os.updating) ? "#0000ff" : "#00ff00"
+			I.color = (assembly.bsod || os.updating) ? "#0000ff" : "#00ff00"
 			ret.overlays.Add(I)
 		else
 			ret.overlays.Add(image(icon = ret.icon, icon_state = "wc_screen_off"))
@@ -48,6 +49,8 @@
 /obj/item/modular_computer/pda/wrist/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
+	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
+	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
 	if(card_slot?.stored_card)
 		card_slot.eject_id(user)
 	else

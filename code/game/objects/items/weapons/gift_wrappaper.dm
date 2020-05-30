@@ -22,9 +22,10 @@
 	else
 		icon_state = "gift[pick(1, 2, 3)]"
 
-/obj/item/a_gift/ex_act()
-	qdel(src)
-	return
+/obj/item/a_gift/explosion_act()
+	..()
+	if(!QDELETED(src))
+		qdel(src)
 
 /obj/effect/spresent/relaymove(mob/user)
 	if (user.stat)

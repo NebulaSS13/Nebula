@@ -109,24 +109,24 @@
 	var/actually_flameable = 0
 	for(var/rtype in temp_reagents_holder.reagents.reagent_volumes)
 		var/new_multiplier = 1
-		var/decl/reagent/R = decls_repository.get_decl(rtype)
-		if(istype(R,/decl/reagent/ethanol))
-			var/decl/reagent/ethanol/E = R
+		var/decl/material/R = decls_repository.get_decl(rtype)
+		if(istype(R,/decl/material/chem/ethanol))
+			var/decl/material/chem/ethanol/E = R
 			new_multiplier = (10/E.strength)
 			actually_flameable = 1
-		else if(istype(R,/decl/reagent/fuel/hydrazine))
+		else if(istype(R,/decl/material/chem/fuel/hydrazine))
 			new_multiplier = 1.25
 			actually_flameable = 1
-		else if(istype(R,/decl/reagent/fuel))
+		else if(istype(R,/decl/material/chem/fuel))
 			actually_flameable = 1
-		else if(istype(R,/decl/reagent/toxin/phoron))
+		else if(istype(R,/decl/material/chem/toxin/phoron))
 			new_multiplier = 2
 			actually_flameable = 1
-		else if(istype(R,/decl/reagent/frostoil))
+		else if(istype(R,/decl/material/chem/frostoil))
 			new_multiplier = 0.1
-		else if(istype(R,/decl/reagent/water))
+		else if(istype(R,/decl/material/gas/water))
 			new_multiplier = 0.4
-		else if(istype(R,/decl/reagent/nutriment/sugar) && REAGENT_VOLUME(reagents, rtype) > 1)
+		else if(istype(R,/decl/material/chem/nutriment/sugar) && REAGENT_VOLUME(reagents, rtype) > 1)
 			stat = DEAD
 			explosion(get_turf(src),-1,0,2,3,0)
 			return 0

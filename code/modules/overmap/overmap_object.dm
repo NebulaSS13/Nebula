@@ -3,8 +3,12 @@
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
 
-	var/known = 1		//shows up on nav computers automatically
-	var/scannable       //if set to TRUE will show up on ship sensors for detailed scans
+	var/known = 1				 //shows up on nav computers automatically
+	var/scannable				 //if set to TRUE will show up on ship sensors for detailed scans, and will ping when detected by scanners.
+
+	var/requires_contact = FALSE //whether or not the effect must be identified by ship sensors before being seen.
+	var/instant_contact  = FALSE //do we instantly identify ourselves to any ship in sensors range?
+	var/sensor_visibility = 10	 //how likely it is to increase identification process each scan.
 
 //Overlay of how this object should look on other skyboxes
 /obj/effect/overmap/proc/get_skybox_representation()
@@ -23,6 +27,9 @@
 		plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
 			H.get_known_sectors()
+
+	if(requires_contact)
+		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
 	update_icon()
 
 /obj/effect/overmap/Crossed(var/obj/effect/overmap/visitable/other)

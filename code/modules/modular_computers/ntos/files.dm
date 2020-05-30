@@ -182,7 +182,7 @@
 /datum/file_storage/network/get_transfer_speed()
 	if(check_errors())
 		return 0
-	return os.get_network_speed()
+	return os.get_network_status()
 
 /*
  * Special subclass for network machines specifically.
@@ -223,16 +223,15 @@
 	name = "Local Storage"
 	var/disk_type = PART_HDD
 
-/datum/file_storage/disk/removable
-	name = "Disk Drive"
-	disk_type = PART_DRIVE
+/datum/file_storage/disk/proc/get_disk()
+	return os.get_component(PART_HDD)
 
 /datum/file_storage/disk/check_errors()
 	. = ..()
 	if(.)
 		return
-	var/obj/item/stock_parts/computer/hard_drive/HDD = os.get_component(disk_type)
-	if(!HDD)
+	var/obj/item/stock_parts/computer/hard_drive/HDD = get_disk()
+	if(!istype(HDD))
 		return "HARDWARE ERROR: No compatible device found"
 	if(!HDD.check_functionality())
 		return "NETWORK ERROR: [HDD] is non-operational"
@@ -240,32 +239,51 @@
 /datum/file_storage/disk/get_all_files()
 	if(check_errors())
 		return FALSE
-	return os.get_all_files(os.get_component(disk_type))
+	return os.get_all_files(get_disk())
 
 /datum/file_storage/disk/get_file(filename)
 	if(check_errors())
 		return FALSE
-	return os.get_file(filename, os.get_component(disk_type))
+	return os.get_file(filename, get_disk())
 
 /datum/file_storage/disk/store_file(datum/computer_file/F)
 	if(check_errors())
 		return FALSE
-	return os.store_file(F, os.get_component(disk_type))
+	return os.store_file(F, get_disk())
 
 /datum/file_storage/disk/save_file(filename, new_data)
 	if(check_errors())
 		return FALSE
-	return os.save_file(filename, new_data, os.get_component(disk_type))
+	return os.save_file(filename, new_data, get_disk())
 
 /datum/file_storage/disk/delete_file(filename)
 	if(check_errors())
 		return FALSE
-	return os.delete_file(filename, os.get_component(disk_type))
+	return os.delete_file(filename, get_disk())
 
-/datum/file_storage/network/get_transfer_speed()
+/datum/file_storage/disk/get_transfer_speed()
 	if(check_errors())
 		return 0
 	return NETWORK_SPEED_DISK
+
+// Storing files on a removable disk.
+/datum/file_storage/disk/removable
+	name = "Disk Drive"
+
+/datum/file_storage/disk/removable/get_disk()
+	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	return drive_slot.stored_drive
+
+/datum/file_storage/disk/removable/check_errors()
+	. = ..()
+	if(.)
+		return
+	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	if(!drive_slot.check_functionality())
+		return "HARDWARE ERROR: [drive_slot] is non-operational"
+	if(!istype(drive_slot.stored_drive))
+		return "HARDWARE ERROR: No portable drive inserted."
+
 
 // Datum tracking progress between of file transfer between two file streams
 /datum/file_transfer

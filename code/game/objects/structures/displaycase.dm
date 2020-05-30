@@ -24,19 +24,16 @@
 	if(contents.len)
 		to_chat(user, "Inside you see [english_list(contents)].")
 
-/obj/structure/displaycase/ex_act(severity)
-	switch(severity)
-		if (1)
+/obj/structure/displaycase/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		if(severity == 1)
 			new /obj/item/material/shard(loc)
 			for(var/atom/movable/AM in src)
 				AM.dropInto(loc)
 			qdel(src)
-		if (2)
-			if (prob(50))
-				take_damage(15)
-		if (3)
-			if (prob(50))
-				take_damage(5)
+		else if(prob(50))
+			take_damage(20 - (severity * 5))
 
 /obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
 	..()
@@ -55,17 +52,20 @@
 			matter -= mat
 	UNSETEMPTY(matter)
 
-/obj/structure/displaycase/destroyed()
+/obj/structure/displaycase/dismantle()
+	SHOULD_CALL_PARENT(FALSE)
+	. = TRUE
+
+/obj/structure/displaycase/physically_destroyed()
 	if(destroyed)
 		return
-	set_density(0)
-	destroyed = TRUE
-	
-	subtract_matter(new /obj/item/material/shard(get_turf(src), material?.type))
-	for(var/atom/movable/AM in src)
-		AM.dropInto(loc)
-	playsound(src, "shatter", 70, 1)
-	update_icon()
+	. = ..()
+	if(.)
+		set_density(0)
+		destroyed = TRUE
+		subtract_matter(new /obj/item/material/shard(get_turf(src), material?.type))
+		playsound(src, "shatter", 70, 1)
+		update_icon()
 
 /obj/structure/displaycase/on_update_icon()
 	if(destroyed)

@@ -1,5 +1,5 @@
-/material/waste
-	display_name = "slag"
+/decl/material/waste
+	name = "slag"
 	stack_type = null
 	icon_colour = "#2e3a07"
 	ore_name = "slag"
@@ -10,8 +10,8 @@
 	wall_support_value = 0
 	value = 0.1
 
-/material/cult
-	display_name = "disturbing stone"
+/decl/material/cult
+	name = "disturbing stone"
 	icon_base = "cult"
 	icon_colour = "#402821"
 	icon_reinf = "reinf_cult"
@@ -23,9 +23,9 @@
 	hidden_from_codex = TRUE
 	reflectiveness = MAT_VALUE_DULL
 
-/material/cult/place_dismantled_girder(var/turf/target)
+/decl/material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)
 
-/material/cult/reinf
-	display_name = "runic inscriptions"
+/decl/material/cult/reinf
+	name = "runic inscriptions"
 	

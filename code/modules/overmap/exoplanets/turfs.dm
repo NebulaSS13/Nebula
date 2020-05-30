@@ -45,13 +45,10 @@
 	else
 		return ..()
 
-/turf/simulated/floor/exoplanet/ex_act(severity)
-	switch(severity)
-		if(1)
-			ChangeTurf(get_base_turf_by_area(src))
-		if(2)
-			if(prob(40))
-				ChangeTurf(get_base_turf_by_area(src))
+/turf/simulated/floor/exoplanet/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
+		ChangeTurf(get_base_turf_by_area(src))
 
 /turf/simulated/floor/exoplanet/Initialize()
 	. = ..()
@@ -92,7 +89,7 @@
 	icon_state = "seashallow"
 	movement_delay = 2
 	footstep_type = /decl/footsteps/water
-	var/reagent_type = /decl/reagent/water
+	var/reagent_type = /decl/material/gas/water
 
 /turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)
 	var/obj/item/chems/RG = O

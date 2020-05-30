@@ -32,7 +32,7 @@
 
 /mob/living/carbon/human
 	var/oxygen_alert = 0
-	var/phoron_alert = 0
+	var/toxins_alert = 0
 	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
@@ -328,9 +328,9 @@
 
 	//Check for contaminants before anything else because we don't want to skip it.
 	for(var/g in environment.gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = decls_repository.get_decl(g)
 		if((mat.gas_flags & XGM_GAS_CONTAMINANT) && environment.gas[g] > mat.gas_overlay_limit + 1)
-			pl_effects()
+			handle_contaminants()
 			break
 
 	if(istype(src.loc, /turf/space)) //being in a closet will interfere with radiation, may not make sense but we don't model radiation for atoms in general so it will have to do for now.
@@ -544,7 +544,7 @@
 	for(var/T in chem_doses)
 		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
 			continue
-		var/decl/reagent/R = T
+		var/decl/material/R = T
 		chem_doses[T] -= initial(R.metabolism)*2
 		if(chem_doses[T] <= 0)
 			chem_doses -= T
@@ -643,11 +643,11 @@
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
 
-		if(vsc.plc.CONTAMINATION_LOSS)
+		if(vsc.contaminant_control.CONTAMINATION_LOSS)
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
 				if(I.contaminated)
-					total_phoronloss += vsc.plc.CONTAMINATION_LOSS
+					total_phoronloss += vsc.contaminant_control.CONTAMINATION_LOSS
 			adjustToxLoss(total_phoronloss)
 
 		// nutrition decrease
@@ -787,7 +787,7 @@
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
 		if(toxin)
-			toxin.icon_state = "tox[phoron_alert ? "1" : "0"]"
+			toxin.icon_state = "tox[toxins_alert ? "1" : "0"]"
 		if(oxygen)
 			oxygen.icon_state = "oxy[oxygen_alert ? "1" : "0"]"
 		if(fire)

@@ -62,8 +62,10 @@
 		take_damage(100/severity, ELECTROCUTE)
 	..()
 
-/obj/machinery/ex_act(severity)
-	take_damage(100/severity, BRUTE, TRUE)
+/obj/machinery/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		take_damage(100/severity, BRUTE, TRUE)
 
 /obj/machinery/bullet_act(obj/item/projectile/P, def_zone)
 	. = ..()

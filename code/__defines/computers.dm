@@ -6,9 +6,7 @@
 #define NETWORK_ALL_FEATURES		(NETWORK_SOFTWAREDOWNLOAD|NETWORK_COMMUNICATION|NETWORK_SYSTEMCONTROL)
 
 // Transfer speeds, used when downloading/uploading a file/program.
-#define NETWORK_SPEED_LOWSIGNAL 0.5	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
-#define NETWORK_SPEED_HIGHSIGNAL 1	// GQ/s transfer speed when the device is wirelessly connected and on High signal
-#define NETWORK_SPEED_ETHERNET 2		// GQ/s transfer speed when the device is using wired connection
+#define NETWORK_SPEED_BASE  1/NETWORK_BASE_BROADCAST_STRENGTH	// GQ/s transfer speed, multiplied by signal power
 #define NETWORK_SPEED_DISK 	10		// GQ/s transfer speed when the device is transferring between hard drives
 
 // Network mainframe roles

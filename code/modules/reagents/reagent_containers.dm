@@ -24,7 +24,7 @@
 
 /obj/item/chems/on_reagent_change()
 	if(atom_flags & ATOM_FLAG_SHOW_REAGENT_NAME)
-		var/decl/reagent/R = reagents?.get_primary_reagent_decl()
+		var/decl/material/R = reagents?.get_primary_reagent_decl()
 		var/newname = get_base_name()
 		if(R)
 			newname = "[newname] of [R.get_presentation_name(src)]"
@@ -224,10 +224,3 @@
 		to_chat(user, "<span class='notice'>The [src] contains: [reagents.get_reagents(precision = prec)].</span>")
 	else if((loc == user) && user.skill_check(SKILL_CHEMISTRY, SKILL_EXPERT))
 		to_chat(user, "<span class='notice'>Using your chemistry knowledge, you identify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)].</span>")
-
-/obj/item/chems/ex_act(var/severity)
-	if(reagents)
-		for(var/rtype in reagents.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(rtype)
-			R.ex_act(src, severity)
-	..()

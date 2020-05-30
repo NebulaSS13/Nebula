@@ -64,7 +64,7 @@
 				var/percentage = round(mixture.gas[mix]/total_moles * 100, 0.01)
 				if(!percentage)
 					continue
-				var/material/mat = SSmaterials.get_material_datum(mix)
+				var/decl/material/mat = decls_repository.get_decl(mix)
 				switch(mode)
 					if(MV_MODE)
 						perGas_add_string = ", Moles: [round(mixture.gas[mix], 0.01)]"
@@ -79,7 +79,7 @@
 						if(mat.gas_flags & XGM_GAS_FUSION_FUEL)
 							traits += "can be used to fuel fusion reaction"
 						perGas_add_string = "\n\tSpecific heat: [mat.gas_specific_heat] J/(mol*K), Molar mass: [mat.gas_molar_mass] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]"
-				. += "[capitalize(mat.display_name)]: [percentage]%[perGas_add_string]"
+				. += "[capitalize(mat.name)]: [percentage]%[perGas_add_string]"
 			var/totalGas_add_string = ""
 			if(mode == MV_MODE)
 				totalGas_add_string = ", Total moles: [round(mixture.total_moles, 0.01)], Volume: [mixture.volume]L"

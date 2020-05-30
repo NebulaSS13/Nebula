@@ -6,20 +6,20 @@
 
 /decl/archaeological_find/material/spawn_item(atom/loc)
 	var/mat_to_spawn = pickweight(possible_materials)
-	var/material/M = SSmaterials.materials_by_name[mat_to_spawn]
+	var/decl/material/M = SSmaterials.materials_by_name[mat_to_spawn]
 	var/obj/item/stack/material/new_item = new M.stack_type(loc)
 	new_item.amount = rand(5,45)
 	return new_item
 
 /decl/archaeological_find/material/exotic
 	item_type = "rare material lump"
-	possible_materials = list(MAT_ALIENALLOY, MAT_PHORON, MAT_METALLIC_HYDROGEN, MAT_PHORON_GLASS)
+	possible_materials = list(MAT_ALIENALLOY, MAT_PHORON, MAT_METALLIC_HYDROGEN, MAT_BOROSILICATE_GLASS)
 
 //Machinery parts
 /decl/archaeological_find/parts
 	item_type = "machinery part"
 	modification_flags = XENOFIND_APPLY_PREFIX 
-	responsive_reagent = /decl/reagent/potassium
+	responsive_reagent = /decl/material/chem/potassium
 	possible_types = list()
 
 /decl/archaeological_find/parts/Initialize()

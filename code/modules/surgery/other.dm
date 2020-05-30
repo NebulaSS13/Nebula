@@ -217,11 +217,11 @@
 
 /decl/surgery_step/sterilize/proc/check_chemicals(var/obj/item/chems/container)
 	if(istype(container) && ATOM_IS_OPEN_CONTAINER(container))
-		if(container.reagents.has_reagent(/decl/reagent/antiseptic))
+		if(container.reagents.has_reagent(/decl/material/chem/antiseptic))
 			return TRUE
 		else
 			for(var/rtype in container?.reagents?.reagent_volumes)
-				var/decl/reagent/ethanol/booze = decls_repository.get_decl(rtype)
+				var/decl/material/chem/ethanol/booze = decls_repository.get_decl(rtype)
 				if(istype(booze) && booze.strength <= 40)
 					return TRUE
 	return FALSE

@@ -35,7 +35,7 @@
 		show_browser(usr,"<HTML><HEAD><TITLE>[open_file]</TITLE></HEAD>[digitalPencode2html(loaded_data)]</BODY></HTML>", "window=[open_file]")
 		return 1
 
-	if(href_list["PRG_taghelp"])		
+	if(href_list["PRG_taghelp"])
 		var/datum/codex_entry/entry = SScodex.get_codex_entry("pen")
 		if(entry)
 			SScodex.present_codex_entry(usr, entry)
@@ -142,11 +142,11 @@
 					)))
 			data["files"] = files
 
-			var/obj/item/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
-			if(RHDD)
+			var/obj/item/stock_parts/computer/drive_slot/RHDD = PRG.computer.get_component(PART_D_SLOT)
+			if(istype(RHDD) && istype(RHDD.stored_drive))
 				data["usbconnected"] = 1
 				var/list/usbfiles[0]
-				for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD))
+				for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD.stored_drive))
 					if(F.filetype == "TXT")
 						usbfiles.Add(list(list(
 							"name" = F.filename,

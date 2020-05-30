@@ -26,7 +26,8 @@
 /obj/machinery/containment_field/physical_attack_hand(mob/user)
 	return shock(user)
 
-/obj/machinery/containment_field/ex_act(severity)
+/obj/machinery/containment_field/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	return 0
 
 /obj/machinery/containment_field/HasProximity(atom/movable/AM)

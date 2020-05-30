@@ -122,7 +122,6 @@
 			new/obj/item/clothing/head/beret(src)
 			new/obj/item/clothing/accessory/suspenders(src)
 			new/obj/item/pen/crayon/mime(src)
-			new/obj/item/chems/food/drinks/bottle/bottleofnothing(src)
 		if(96)
 			new/obj/item/vampiric(src)
 		if(97)

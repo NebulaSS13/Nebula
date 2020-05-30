@@ -12,7 +12,7 @@
 
 	var/atom/from = new donor_type(test_loc)
 	from.create_reagents(container_volume)
-	from.reagents.add_reagent(/decl/reagent/water, container_volume)
+	from.reagents.add_reagent(/decl/material/gas/water, container_volume)
 
 	var/atom/target
 	if(ispath(recipient_type, /turf) && istype(test_loc, recipient_type))
@@ -123,8 +123,8 @@
 /datum/unit_test/reagent_colors_test/start_test()
 	var/list/bad_reagents = list()
 
-	for(var/T in typesof(/decl/reagent))
-		var/decl/reagent/R = T
+	for(var/T in typesof(/decl/material))
+		var/decl/material/R = T
 		if(length(initial(R.color)) != 7)
 			bad_reagents += "[T] ([initial(R.color)])"
 
@@ -141,10 +141,10 @@
 /datum/unit_test/chem_recipes_shall_not_overlap/start_test()
 	var/list/bad_recipes = list()
 
-	for(var/path in SSchemistry.chemical_reactions)
-		var/datum/chemical_reaction/reaction = SSchemistry.chemical_reactions[path]
+	for(var/path in SSmaterials.chemical_reactions)
+		var/datum/chemical_reaction/reaction = SSmaterials.chemical_reactions[path]
 		for(var/reagent in reaction.required_reagents)
-			for(var/datum/chemical_reaction/other_reaction in SSchemistry.chemical_reactions_by_id[reagent])
+			for(var/datum/chemical_reaction/other_reaction in SSmaterials.chemical_reactions_by_id[reagent])
 				// We check if their requirements to react are a subset of our reaction's requirements, i.e. (we can react) implies (they can react)
 				if(other_reaction == reaction)
 					continue

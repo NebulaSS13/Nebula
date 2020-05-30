@@ -50,7 +50,7 @@
 
 	if(H.reagents?.total_volume)
 		for(var/reagent_type in H.reagents.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(reagent_type)
+			var/decl/material/R = decls_repository.get_decl(reagent_type)
 			var/list/reagent  = list()
 			reagent["name"]= R.name
 			reagent["quantity"] = round(REAGENT_VOLUME(H.reagents, R.type),1)

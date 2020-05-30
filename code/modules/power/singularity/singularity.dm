@@ -52,7 +52,8 @@
 	consume(user)
 	return 1
 
-/obj/singularity/ex_act(severity)
+/obj/singularity/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if(current_size == STAGE_SUPER)//IT'S UNSTOPPABLE
 		return
 	switch(severity)

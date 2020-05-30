@@ -187,11 +187,11 @@
 	//first bust whatever is in the turf
 	for(var/atom/A in T)
 		if(A != src && !A.CanPass(src, src.loc, 0.5, 0)) //only ram stuff that would actually block us
-			A.ex_act(hitpwr)
+			A.explosion_act(hitpwr)
 
 	//then, ram the turf if it still exists
 	if(T && !T.CanPass(src, src.loc, 0.5, 0))
-		T.ex_act(hitpwr)
+		T.explosion_act(hitpwr)
 
 //process getting 'hit' by colliding with a dense object
 //or randomly when ramming turfs
@@ -202,7 +202,8 @@
 		meteor_effect()
 		qdel(src)
 
-/obj/effect/meteor/ex_act()
+/obj/effect/meteor/explosion_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/effect/meteor/attackby(obj/item/W, mob/user, params)
@@ -283,7 +284,6 @@
 /obj/effect/meteor/irradiated/meteor_effect()
 	..()
 	explosion(src.loc, 0, 0, 4, 3, 0)
-	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
 	SSradiation.radiate(src, 50)
 
 /obj/effect/meteor/golden

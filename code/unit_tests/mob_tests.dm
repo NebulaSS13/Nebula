@@ -421,7 +421,7 @@ datum/unit_test/mob_damage/halloss
 			failed[mobtype] = "invalid meat_type ([mtype]) but meat_amount above zero"
 
 		var/smat =   initial(animal.skin_material)
-		var/stype =  (smat && istype(SSmaterials.get_material_datum(smat), /material))
+		var/stype =  (smat && istype(decls_repository.get_decl(smat), /decl/material))
 		var/scount = initial(animal.skin_amount) > 0
 		if(stype && scount)
 			check_skin += mobtype
@@ -431,7 +431,7 @@ datum/unit_test/mob_damage/halloss
 			failed[mobtype] = "invalid skin_material ([smat]) but skin_amount above zero"
 
 		var/bmat =   initial(animal.bone_material)
-		var/btype =  (bmat && istype(SSmaterials.get_material_datum(bmat), /material))
+		var/btype =  (bmat && istype(decls_repository.get_decl(bmat), /decl/material))
 		var/bcount = initial(animal.bone_amount) > 0
 		if(btype && bcount)
 			check_bones += mobtype

@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 /obj/structure/glass_tank/aquarium
 	name = "aquarium"
 	desc = "A clear glass box for keeping specimens in. This one is full of water."
-	fill_type = /decl/reagent/water
+	fill_type = /decl/material/gas/water
 	fill_amt = 300
 
 /obj/structure/glass_tank/Initialize()
@@ -68,7 +68,8 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 	else
 		. = ..()
 
-/obj/structure/glass_tank/destroyed(var/silent)
+/obj/structure/glass_tank/physically_destroyed(var/silent)
+	SHOULD_CALL_PARENT(FALSE)
 	deleting = 1
 	var/turf/T = get_turf(src)
 	playsound(T, "shatter", 70, 1)
@@ -81,13 +82,11 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 	dump_contents()
 	for(var/obj/structure/glass_tank/A in orange(1, src))
 		if(!A.deleting && A.type == type)
-			A.destroyed(TRUE)
+			A.physically_destroyed(TRUE)
 	qdel(src)
 
-/obj/structure/glass_tank/proc/dump_contents()
-	for(var/atom/movable/AM in contents)
-		if(AM.simulated)
-			AM.dropInto(get_turf(src))
+/obj/structure/glass_tank/dump_contents()
+	. = ..()
 	if(reagents && reagents.total_volume)
 		var/turf/T = get_turf(src)
 		if(T)
