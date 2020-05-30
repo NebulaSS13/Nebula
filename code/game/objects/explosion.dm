@@ -76,7 +76,7 @@
 			continue
 
 		var/throw_dist = 9/dist
-		T.ex_act(dist)
+		T.explosion_act(dist)
 		if(!T)
 			T = locate(x0,y0,z0)
 		if(T)
@@ -84,7 +84,7 @@
 			for(var/atom_movable in T.contents)
 				var/atom/movable/AM = atom_movable
 				if(AM && AM.simulated && !T.protects_atom(AM))
-					AM.ex_act(dist)
+					AM.explosion_act(dist)
 					if(!QDELETED(AM) && !AM.anchored)
 						addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, throw_dist, throw_dist), 0)
 
@@ -247,12 +247,12 @@
 		var/throw_target = get_edge_target_turf(T, get_dir(epicenter,T))
 		var/throw_dist = 9/severity
 		if (T.simulated)
-			T.ex_act(severity)
+			T.explosion_act(severity)
 		if (T.contents.len > !!T.lighting_overlay)
 			for (var/subthing in T)
 				var/atom/movable/AM = subthing
 				if (AM.simulated)
-					AM.ex_act(severity)
+					AM.explosion_act(severity)
 					if(!QDELETED(AM) && !AM.anchored)
 						addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, throw_dist, throw_dist), 0)
 				movable_tally++

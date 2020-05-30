@@ -187,7 +187,8 @@ obj/structure/disposalpipe/Destroy()
 
 
 // pipe affected by explosion
-/obj/structure/disposalpipe/ex_act(severity)
+/obj/structure/disposalpipe/explosion_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if(severity == 1)
 		broken(0)
 	else

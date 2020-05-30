@@ -264,7 +264,8 @@ var/global/list/narsie_list = list()
 			var/turf/T2 = A
 			T2.ChangeTurf(get_base_turf_by_area(A))
 
-/obj/singularity/narsie/ex_act(severity) //No throwing bombs at it either. --NEO
+/obj/singularity/narsie/explosion_act(severity) //No throwing bombs at it either. --NEO
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/singularity/narsie/proc/pickcultist() //Narsie rewards his cultists with being devoured first, then picks a ghost to follow. --NEO

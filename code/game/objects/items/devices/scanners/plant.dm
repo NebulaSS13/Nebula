@@ -76,7 +76,7 @@
 		dat += "<h2>Reagent Data</h2>"
 		dat += "<br>This sample contains: "
 		for(var/rtype in grown_reagents.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = decls_repository.get_decl(rtype)
 			dat += "<br>- [R.name], [REAGENT_VOLUME(grown_reagents, rtype)] unit(s)"
 
 	dat += "<h2>Other Data</h2>"

@@ -60,7 +60,7 @@
 	data["status"] = (use_power >= POWER_USE_ACTIVE)
 	data["materials"] = list()
 	for(var/mat in stored)
-		var/material/material = SSmaterials.get_material_datum(mat)
+		var/decl/material/material = decls_repository.get_decl(mat)
 		if(material)
 			var/sheets = Floor(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
 			data["materials"] += list(list("material" = mat, "rawamount" = stored[mat], "amount" = sheets, "harvest" = harvesting[mat]))
@@ -104,7 +104,7 @@
 /obj/machinery/kinetic_harvester/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	if(href_list["remove_mat"])
 		var/mat = href_list["remove_mat"]
-		var/material/material = SSmaterials.get_material_datum(mat)
+		var/decl/material/material = decls_repository.get_decl(mat)
 		if(material)
 			var/sheet_cost = (SHEET_MATERIAL_AMOUNT * 1.5)
 			var/sheets = Floor(stored[mat]/sheet_cost)

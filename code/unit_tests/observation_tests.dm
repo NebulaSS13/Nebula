@@ -201,6 +201,7 @@
 
 	return 1
 
+// Should have updated this to work with the new mechs
 /*
 /datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop
 	name = "OBSERVATION: Moved - Shall Only Trigger Once For Recursive Drop"
@@ -348,3 +349,111 @@
 
 	qdel(event_source)
 	return 1
+
+/datum/unit_test/observation/opaque_counter_checks
+	name = "Observation: Opacity - Validate opaque_counter"
+
+/datum/unit_test/observation/opaque_counter_checks/start_test()
+	var/list/landmark_types = list(
+		/obj/effect/landmark/proximity_spawner = 0,
+		/obj/effect/landmark/proximity_wall = 1)
+
+	var/list/object_types = list(
+		null,
+		/obj/unit_test/transparent = 0,
+		/obj/unit_test/opaque = 1)
+
+	var/list/errors = list()
+	for(var/landmark_type in landmark_types)
+		for(var/object_type in object_types)
+			for(var/delete_after = FALSE to TRUE)
+				var/landmark_modifier = landmark_types[landmark_type]
+				var/object_modifier = object_types[object_type] || 0
+
+				var/turf/T = get_turf(locate(landmark_type))
+				var/obj/O = object_type && new object_type(T)
+
+				if(!delete_after)
+					QDEL_NULL(O)
+
+				var/expected_opaque_counter = landmark_modifier + (delete_after && object_modifier)
+				if(expected_opaque_counter != T.opaque_counter)
+					errors[++errors.len] = list(
+						"Landmark Modifier" = landmark_modifier,
+						"Object Modifier" = object_modifier,
+						"Delete After" = delete_after,
+						"Expected Opaque Counter" = expected_opaque_counter,
+						"Actual Opaque Counter" = T.opaque_counter)
+				if(delete_after)
+					QDEL_NULL(O)
+
+	if(length(errors))
+		for(var/error in errors)
+			log_bad(log_info_line(error))
+		fail("[length(errors)] expectation\s not met")
+	else
+		pass("All expectations met")
+	return TRUE
+
+/datum/unit_test/observation/opacity_simple
+	template = /datum/unit_test/observation/opacity_simple
+	var/expected_opacity_sets = 0
+	var/expected_opacity_unsets = 0
+	var/expected_opaque_counter = 0
+	var/actual_opacity_sets = 0
+	var/actual_opacity_unsets = 0
+	var/actual_opaque_counter = 0
+	var/bad_sets = 0
+	var/turf_landmark_type
+
+/datum/unit_test/observation/opacity_simple/New()
+	name = "Observation: Opacity - " + name
+
+/datum/unit_test/observation/opacity_simple/conduct_test()
+	var/turf/T = get_turf(locate(turf_landmark_type))
+	var/initial_opacity = T.opacity
+	BeforeRegistration(T)
+	GLOB.opacity_set_event.register(T, src, .proc/RaiseTriggerCount)
+	ChangeOpacity(T)
+
+	if(expected_opacity_sets == actual_opacity_sets && expected_opacity_unsets == actual_opacity_unsets && expected_opaque_counter == T.opaque_counter && !bad_sets)
+		pass("All expectations met")
+	else
+		fail("\nExpected [expected_opacity_sets] sets, was [actual_opacity_sets].\nExpected [expected_opacity_unsets] unsets, was [actual_opacity_unsets].\nExpected an opaque counter of [expected_opaque_counter], was [T.opaque_counter].\nExpected 0 bad sets, was [bad_sets]")
+
+	GLOB.opacity_set_event.unregister(T, src, .proc/RaiseTriggerCount)
+	T.set_opacity(initial_opacity)
+	return TRUE
+
+/datum/unit_test/observation/opacity_simple/proc/BeforeRegistration(turf/T)
+	return
+
+/datum/unit_test/observation/opacity_simple/proc/ChangeOpacity(turf/T)
+	return
+
+/datum/unit_test/observation/opacity_simple/proc/RaiseTriggerCount(var/trigger, var/old_opacity, var/new_opacity)
+	if(new_opacity)
+		actual_opacity_sets++
+	else
+		actual_opacity_unsets++
+
+	if(old_opacity == new_opacity || old_opacity < 0 || old_opacity > 1 || new_opacity < 0 || new_opacity > 1)
+		bad_sets++
+
+/datum/unit_test/observation/opacity_simple/setting_opacity_of_non_opaque_turf_shall_only_trigger_once
+	name = "Setting opacity of non-opaque turf shall only trigger once"
+	expected_opacity_sets = 1
+	expected_opaque_counter = 1
+	turf_landmark_type = /obj/effect/landmark/proximity_spawner
+
+/datum/unit_test/observation/opacity_simple/setting_opacity_of_non_opaque_turf_shall_only_trigger_once/ChangeOpacity(turf/T)
+	T.set_opacity(TRUE)
+
+/datum/unit_test/observation/opacity_simple/unsetting_opacity_of_opaque_turf_shall_only_trigger_once
+	name = "Unsetting opacity of opaque turf shall only trigger once"
+	expected_opacity_unsets = 1
+	expected_opaque_counter = 0
+	turf_landmark_type = /obj/effect/landmark/proximity_wall
+
+/datum/unit_test/observation/opacity_simple/unsetting_opacity_of_opaque_turf_shall_only_trigger_once/ChangeOpacity(turf/T)
+	T.set_opacity(FALSE)

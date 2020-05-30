@@ -421,7 +421,7 @@
 		if(1)
 			var/cont[0]
 			for(var/rtype in reagents.reagent_volumes)
-				var/decl/reagent/RE = decls_repository.get_decl(rtype)
+				var/decl/material/RE = decls_repository.get_decl(rtype)
 				cont += RE.name
 			set_pin_data(IC_OUTPUT, 3, cont)
 			push_data()
@@ -488,7 +488,7 @@
 		return
 
 	for(var/rtype in source.reagents.reagent_volumes)
-		var/decl/reagent/G = decls_repository.get_decl(rtype)
+		var/decl/material/G = decls_repository.get_decl(rtype)
 		if(!direction_mode)
 			if(G.name in demand)
 				source.reagents.trans_type_to(target, G.type, transfer_amount)

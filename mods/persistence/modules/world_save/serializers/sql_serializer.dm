@@ -16,9 +16,9 @@
 	var/serializer/json/flattener
 
 	var/list/wrappers = list(
-		/datum/species 	= /datum/wrapper/game_data/species,
-		/material 		= /datum/wrapper/game_data/material,
-		/decl			= /datum/wrapper/game_data/decl
+		/datum/species	 	= /datum/wrapper/game_data/species,
+		/decl/material 		= /datum/wrapper/game_data/material,
+		/decl				= /datum/wrapper/game_data/decl
 	)
 
 #ifdef SAVE_DEBUG

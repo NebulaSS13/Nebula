@@ -54,12 +54,12 @@
 
 /obj/machinery/power/supermatter/randomsample/Initialize()
 	. = ..()
-	nitrogen_retardation_factor = rand(0.01, 1)	//Higher == N2 slows reaction more
-	thermal_release_modifier = rand(100, 1000000)		//Higher == more heat released during reaction
-	phoron_release_modifier = rand(0, 100000)		//Higher == less phoron released by reaction
-	oxygen_release_modifier = rand(0, 100000)		//Higher == less oxygen released at high temperature/power
-	radiation_release_modifier = rand(0, 100)    //Higher == more radiation released with more power.
-	reaction_power_modifier =  rand(0, 100)			//Higher == more overall power
+	nitrogen_retardation_factor = rand(0.01, 1)	  //Higher == N2 slows reaction more
+	thermal_release_modifier = rand(100, 1000000) //Higher == more heat released during reaction
+	phoron_release_modifier = rand(0, 100000)     //Higher == less phoron released by reaction
+	oxygen_release_modifier = rand(0, 100000)     //Higher == less oxygen released at high temperature/power
+	radiation_release_modifier = rand(0, 100)     //Higher == more radiation released with more power.
+	reaction_power_modifier =  rand(0, 100)       //Higher == more overall power
 
 	power_factor = rand(0, 20)
 	decay_factor = rand(50, 70000)			//Affects how fast the supermatter power decays
@@ -124,9 +124,9 @@ obj/item/paper/prof2
 	icon = 'unishi.dmi'
 	icon_state = "CTILogo"
 
-/decl/reagent/toxin/phoron/safe
+/decl/material/chem/toxin/phoron/safe
 	name = "tericadone"
-	description = "Phoron substitute currently in labratory testing"
+	lore_text = "A phoron substitute currently in labratory testing"
 	taste_mult = 1.5
 	color = "#ffc4ff"
 
@@ -137,17 +137,14 @@ obj/item/paper/prof2
 
 /obj/item/chems/glass/bottle/tericadone/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/toxin/phoron/safe , 60)
+	reagents.add_reagent(/decl/material/chem/toxin/phoron/safe , 60)
 	update_icon()
 
-/decl/reagent/toxin/phoron/safe/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/safe/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	return
 
-/decl/reagent/toxin/phoron/safe/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/safe/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return
 
-/decl/reagent/toxin/phoron/safe/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	return
-
-/decl/reagent/toxin/phoron/safe/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+/decl/material/chem/toxin/phoron/safe/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	return

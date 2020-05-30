@@ -156,10 +156,10 @@
 /turf/simulated/wall/alium/Initialize(var/ml)
 	. = ..(ml, MAT_ALIENALLOY)
 
-/turf/simulated/wall/alium/ex_act(severity)
+/turf/simulated/wall/alium/explosion_act(severity)
+	SHOULD_CALL_PARENT(TRUE)
 	if(prob(explosion_resistance))
-		return
-	..()
+		..()
 
 //Cult wall
 /turf/simulated/wall/cult

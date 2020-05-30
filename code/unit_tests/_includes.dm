@@ -1,5 +1,6 @@
 #ifdef UNIT_TEST
 	#include "extension_tests.dm"
+	#include "observation_tests.dm"
 	#include "override_tests.dm"
 	#include "proximity_tests.dm"
 	#include "virtual_mob_tests.dm"

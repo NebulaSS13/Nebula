@@ -9,7 +9,7 @@
 /turf/simulated/wall/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "ad" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
 "ae" = (
@@ -711,10 +711,10 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "bZ" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/ascent,
@@ -1040,7 +1040,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "cH" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
@@ -1080,7 +1080,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_starboard)
 "cL" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "cN" = (
@@ -1117,11 +1117,11 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
 "cU" = (
-/obj/effect/wallframe_spawn/phoron,
+/obj/effect/wallframe_spawn/borosilicate,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
 "cV" = (
-/obj/effect/wallframe_spawn/phoron,
+/obj/effect/wallframe_spawn/borosilicate,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "cW" = (
@@ -1217,7 +1217,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "dg" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/ascent,
@@ -1250,10 +1250,10 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_prow)
 "dm" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/ascent,
@@ -1500,7 +1500,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/habitation)
 "dQ" = (
-/obj/effect/wallframe_spawn/phoron,
+/obj/effect/wallframe_spawn/borosilicate,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_port)
 "dR" = (
@@ -1517,15 +1517,15 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "dT" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_port_prow)
 "dU" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_port)
 "dV" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
 "dW" = (
@@ -1592,7 +1592,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -1605,7 +1605,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "ee" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
@@ -1673,7 +1673,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
 "ek" = (
@@ -2044,7 +2044,7 @@
 /area/ship/ascent/fore_starboard_jut)
 "eT" = (
 /obj/machinery/atmospherics/unary/vent_pump/on/ascent,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
@@ -2109,7 +2109,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
 "ff" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/ascent,
@@ -2487,8 +2487,8 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_spike)
 "fS" = (
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced,
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -2616,7 +2616,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_hallway)
 "gh" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "gi" = (
@@ -2972,7 +2972,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "gQ" = (
-/obj/effect/wallframe_spawn/phoron,
+/obj/effect/wallframe_spawn/borosilicate,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_starboard)
 "gR" = (
@@ -3033,7 +3033,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "gY" = (
-/obj/effect/wallframe_spawn/phoron,
+/obj/effect/wallframe_spawn/borosilicate,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
@@ -3094,7 +3094,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_port)
 "hg" = (
-/obj/effect/wallframe_spawn/phoron,
+/obj/effect/wallframe_spawn/borosilicate,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
@@ -3134,7 +3134,7 @@
 	},
 /area/ship/ascent/engineering)
 "hm" = (
-/obj/effect/wallframe_spawn/phoron,
+/obj/effect/wallframe_spawn/borosilicate,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/habitation)
 "hn" = (
@@ -3202,8 +3202,8 @@
 "hz" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/phoronrglass/ten,
-/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/reinforced_borosilicate/ten,
+/obj/item/stack/material/glass/reinforced_borosilicate/ten,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "hA" = (
@@ -3368,10 +3368,10 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_port)
 "hU" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "hV" = (
@@ -3487,7 +3487,7 @@
 /area/ship/ascent/shuttle_port)
 "ik" = (
 /obj/machinery/ion_engine,
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
 "il" = (
@@ -3688,7 +3688,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
@@ -3699,7 +3699,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
 "iO" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
@@ -3711,7 +3711,7 @@
 	dir = 4;
 	pixel_x = -24
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
@@ -3788,7 +3788,7 @@
 	},
 /area/ship/ascent/shuttle_port)
 "ja" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /obj/structure/ore_box{
@@ -4192,7 +4192,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "lk" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/ascent,
@@ -4225,7 +4225,7 @@
 /turf/simulated/wall/ascent,
 /area/ship/ascent/aft_starboard_jut)
 "md" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/ascent,
@@ -4335,7 +4335,7 @@
 /area/ship/ascent/hydroponics_starboard)
 "oU" = (
 /obj/machinery/atmospherics/unary/vent_pump/on/ascent,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/canister/methyl_bromide,
@@ -4358,7 +4358,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/habitation)
 "pr" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "py" = (
@@ -4447,7 +4447,7 @@
 /area/ship/ascent/fore_starboard_prow)
 "uV" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/ascent,
@@ -4556,7 +4556,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "yP" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/ascent,
@@ -4592,10 +4592,10 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
 "zB" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "zV" = (
@@ -4624,7 +4624,7 @@
 /area/ship/ascent/fore_starboard_prow)
 "As" = (
 /obj/machinery/portable_atmospherics/canister/methyl_bromide,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/ascent,
@@ -4653,7 +4653,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "CV" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /obj/item/chems/food/drinks/cans/waterbottle/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
@@ -4729,8 +4729,8 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/aft_starboard_jut)
 "Gd" = (
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced,
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/ascent,
@@ -4754,16 +4754,16 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "GZ" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /obj/structure/table/rack/dark,
 /obj/item/clustertool,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/aft_starboard_jut)
 "HZ" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
 "If" = (
@@ -4774,7 +4774,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/aft_starboard_jut)
 "IQ" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	icon_state = "intact";
 	dir = 4
@@ -4822,7 +4822,7 @@
 /obj/item/rig/mantid,
 /obj/item/rig/mantid,
 /obj/machinery/light/ascent,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /obj/machinery/door/window/northright{
@@ -4846,7 +4846,7 @@
 /obj/machinery/ion_engine{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -4858,7 +4858,7 @@
 /obj/machinery/light/ascent{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /obj/machinery/door/window/southright{
@@ -4976,7 +4976,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "Qm" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -4995,7 +4995,7 @@
 /area/ship/ascent/aft_starboard_jut)
 "Qy" = (
 /obj/structure/table/rack/dark,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /obj/item/storage/bag/trash/purple/ascent,
@@ -5005,13 +5005,13 @@
 /obj/machinery/ion_engine{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
 "QJ" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "QT" = (
@@ -5063,10 +5063,10 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "TN" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -5114,10 +5114,10 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
 "Vf" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/ascent,
@@ -5147,7 +5147,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "VC" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -5159,7 +5159,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
 "WI" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
@@ -5192,7 +5192,7 @@
 /turf/space,
 /area/ship/ascent/shuttle_port)
 "XG" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/wallframe_spawn/reinforced_borosilicate/hull,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/aft_starboard_jut)
 "XM" = (
@@ -5202,10 +5202,10 @@
 /area/ship/ascent/shuttle_port)
 "Yh" = (
 /obj/machinery/shipsensors,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/ascent,
@@ -5221,10 +5221,10 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "Zx" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/borosilicate_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/ascent,

@@ -29,7 +29,6 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	name = "portable liquid cleaning agent carrier"
 	desc = "An alien container of some sort."
 	icon = 'mods/ascent/icons/ascent_doodads.dmi'
-	item_state = "bucket"
 
 /obj/item/material/knife/kitchen/cleaver/ascent
 	name = "xenobiological flenser"
@@ -52,7 +51,7 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 
 /obj/item/chems/food/snacks/hydration/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/reagent/water, 10)
+	reagents.add_reagent(/decl/material/gas/water, 10)
 
 /obj/item/storage/box/water/ascent
 	name = "box of hydration cylinders"

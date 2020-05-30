@@ -64,6 +64,13 @@
 	if( href_list["PC_exit"] )
 		kill_program(active_program)
 		return TOPIC_HANDLED
+	if(href_list["PC_diagnostics"])
+		var/obj/item/stock_parts/computer/H = locate(href_list["PC_diagnostics"]) in holder
+		var/list/diagnostics = list()
+		diagnostics += "[H] diagnostics:"
+		diagnostics |= H.diagnostics()
+		to_chat(user, SPAN_INFO(jointext(diagnostics, "\n")))
+		return TOPIC_REFRESH
 	if(href_list["PC_enable_component"] )
 		var/obj/item/stock_parts/computer/H = locate(href_list["PC_enable_component"]) in holder
 		if(H && istype(H) && !H.enabled)

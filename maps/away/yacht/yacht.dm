@@ -6,6 +6,7 @@
 	color = "#ffc966"
 	vessel_mass = 3000
 	max_speed = 1/(2 SECONDS)
+	instant_contact = TRUE
 	initial_generic_waypoints = list(
 		"nav_yacht_1",
 		"nav_yacht_2",

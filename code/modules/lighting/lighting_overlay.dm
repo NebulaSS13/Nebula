@@ -119,7 +119,8 @@
 	// 	T.above.shadower.copy_lighting(src)
 
 // Variety of overrides so the overlays don't get affected by weird things.
-/atom/movable/lighting_overlay/ex_act()
+/atom/movable/lighting_overlay/explosion_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /atom/movable/lighting_overlay/singularity_pull()

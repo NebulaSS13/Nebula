@@ -24,14 +24,10 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/machinery/body_scanconsole/ex_act(severity)
-
-	switch(severity)
-		if(1.0)
-			qdel(src)
-		if(2.0)
-			if (prob(50))
-				qdel(src)				
+/obj/machinery/body_scanconsole/explosion_act(severity)
+	. = ..()
+	if(. && !QDELETED(src) && (severity == 1 || (severity == 2 && prob(50))))
+		qdel(src)
 
 /obj/machinery/body_scanconsole/proc/FindScanner()
 	for(var/D in GLOB.cardinal)

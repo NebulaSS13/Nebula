@@ -207,19 +207,6 @@ obj/machinery/resleever/Process()
 	lace.forceMove(loc)
 	lace = null
 
-/obj/machinery/resleever/ex_act(severity)
-	var/killprob = 100
-	switch(severity)
-		if(2)
-			killprob = 50
-		if(3)
-			killprob = 25
-	if(prob(killprob))
-		for(var/atom/movable/A in src)
-			A.forceMove(loc)
-			A.ex_act(severity)
-		qdel(src)
-
 /obj/machinery/resleever/relaymove()
 	..()
 	eject_occupant()

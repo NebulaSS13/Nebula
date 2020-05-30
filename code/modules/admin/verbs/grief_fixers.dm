@@ -35,7 +35,7 @@
 
 	var/list/unsorted_overlays = list()
 	for(var/id in SSmaterials.all_gasses)
-		var/material/mat = SSmaterials.get_material_datum(id)
+		var/decl/material/mat = decls_repository.get_decl(id)
 		unsorted_overlays |= mat.gas_tile_overlay
 
 	for(var/turf/simulated/T in world)

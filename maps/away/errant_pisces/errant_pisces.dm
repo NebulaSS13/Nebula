@@ -5,6 +5,7 @@
 	desc = "Sensors detect civilian vessel with unusual signs of life aboard."
 	color = "#bd6100"
 	max_speed = 1/(3 SECONDS)
+	instant_contact = TRUE
 	burn_delay = 15 SECONDS
 	fore_dir = SOUTH
 
@@ -74,9 +75,9 @@
 
 /obj/item/chems/food/snacks/sharkmeat/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/reagent/nutriment/protein, 5)
-	reagents.add_reagent(/decl/reagent/psychoactives, 1)
-	reagents.add_reagent(/decl/reagent/toxin/phoron, 1)
+	reagents.add_reagent(/decl/material/chem/nutriment/protein, 5)
+	reagents.add_reagent(/decl/material/chem/psychoactives, 1)
+	reagents.add_reagent(/decl/material/chem/toxin/phoron, 1)
 	src.bitesize = 8
 
 
@@ -127,9 +128,11 @@
 		new /obj/item/stack/net(src.loc)
 		qdel(src)
 
-/obj/structure/net/destroyed()
+/obj/structure/net/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
 	visible_message("<span class='warning'>\The [src] is torn apart!</span>")
 	qdel(src)
+	. = TRUE
 
 /obj/structure/net/bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray

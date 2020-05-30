@@ -67,7 +67,7 @@
 	return toxloss
 
 /mob/living/carbon/slime/get_digestion_product()
-	return /decl/reagent/toxin/slimejelly
+	return /decl/material/chem/toxin/slimejelly
 
 /mob/living/carbon/slime/adjustToxLoss(var/amount)
 	toxloss = Clamp(toxloss + amount, 0, maxHealth)
@@ -100,10 +100,10 @@
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
 	if(reagents)
-		if(reagents.has_reagent(/decl/reagent/amphetamines)) // Stimulants slows slimes down
+		if(reagents.has_reagent(/decl/material/chem/amphetamines)) // Stimulants slows slimes down
 			tally *= 2
 
-		if(reagents.has_reagent(/decl/reagent/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
+		if(reagents.has_reagent(/decl/material/chem/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
 			tally *= 5
 
 	if(health <= 0) // if damaged, the slime moves twice as slow
@@ -178,30 +178,18 @@
 	powerlevel = 0 // oh no, the power!
 	..()
 
-/mob/living/carbon/slime/ex_act(severity)
+/mob/living/carbon/slime/explosion_act(severity)
 	..()
-
-	var/b_loss = null
-	var/f_loss = null
-	switch (severity)
-		if (1.0)
+	switch(severity)
+		if(1)
 			qdel(src)
-			return
-
-		if (2.0)
-
-			b_loss += 60
-			f_loss += 60
-
-
-		if(3.0)
-			b_loss += 30
-
-	adjustBruteLoss(b_loss)
-	adjustFireLoss(f_loss)
-
-	updatehealth()
-
+		if(2)
+			adjustBruteLoss(60)
+			adjustFireLoss(60)
+			updatehealth()
+		if(3)
+			adjustBruteLoss(30)
+			updatehealth()
 
 /mob/living/carbon/slime/u_equip(obj/item/W)
 	return

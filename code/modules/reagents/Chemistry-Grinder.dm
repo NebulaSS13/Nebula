@@ -101,9 +101,9 @@
 
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O
-		var/material/material = stack.get_material()
+		var/decl/material/material = stack.get_material()
 		if(!LAZYLEN(material.chemical_makeup))
-			to_chat(user, SPAN_NOTICE("\The [material.display_name] cannot be ground down to any usable reagents."))
+			to_chat(user, SPAN_NOTICE("\The [material.name] cannot be ground down to any usable reagents."))
 			return TRUE
 
 	else if(!O.reagents?.total_volume)
@@ -135,7 +135,7 @@
 	data["beakercontents"] = list()
 	if(beaker?.reagents)
 		for(var/rtype in beaker.reagents.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = decls_repository.get_decl(rtype)
 			data["beakercontents"] += "<b>[capitalize(R.name)]</b> ([REAGENT_VOLUME(beaker.reagents, rtype)]u)"
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -205,7 +205,7 @@
 
 		var/obj/item/stack/material/stack = O
 		if(istype(stack))
-			var/material/material = stack.get_material()
+			var/decl/material/material = stack.get_material()
 			if(!LAZYLEN(material.chemical_makeup))
 				break
 
@@ -247,7 +247,7 @@
 	user.visible_message(SPAN_DANGER("\The [user]'s hand gets caught in \the [src]!"), SPAN_DANGER("Your hand gets caught in \the [src]!"))
 	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
 	if(BP_IS_PROSTHETIC(hand_organ))
-		beaker.reagents.add_reagent(/decl/reagent/iron, dam)
+		beaker.reagents.add_reagent(/decl/material/iron, dam)
 	else
 		user.take_blood(beaker, dam)
 	user.Stun(2)

@@ -117,7 +117,7 @@
 				for(var/id in carried_reagents)
 					F.reagents.add_reagent(id, 1, safety = 1) //makes a safety call because all reagents should have already reacted anyway
 			else
-				F.reagents.add_reagent(/decl/reagent/water, 1, safety = 1)
+				F.reagents.add_reagent(/decl/material/gas/water, 1, safety = 1)
 
 // wall formed by metal foams, dense and opaque, but easy to break
 
@@ -146,8 +146,10 @@
 	else
 		icon_state = "ironfoam"
 
-/obj/structure/foamedmetal/ex_act(severity)
-	qdel(src)
+/obj/structure/foamedmetal/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		physically_destroyed(src)
 
 /obj/structure/foamedmetal/bullet_act()
 	if(metal == 1 || prob(50))

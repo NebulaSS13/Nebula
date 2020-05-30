@@ -72,6 +72,7 @@
 	battery = new battery(src)
 	battery.maxcharge = battery_rating
 	battery.charge = 0
+	charge_to_full()
 
 /obj/item/stock_parts/computer/battery_module/Destroy()
 	QDEL_NULL(battery)

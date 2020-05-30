@@ -954,7 +954,7 @@
 	set waitfor = 0
 	if(!LAZYLEN(module_sprites))
 		to_chat(src, "Something is badly wrong with the sprite selection. Harass a coder.")
-		return
+		CRASH("Can't setup robot icon for [src] ([src.client]). Module: [module?.name]")
 
 	icon_selected = FALSE
 	if(module_sprites.len == 1 || !client)
@@ -965,6 +965,7 @@
 		for(var/i in module_sprites)
 			var/image/radial_button = image(icon = src.icon, icon_state = module_sprites[i])
 			radial_button.overlays.Add(image(icon = src.icon, icon_state = "eyes-[module_sprites[i]]"))
+			radial_button.name = i
 			options[i] = radial_button
 		icontype = show_radial_menu(src, src, options, radius = 42, tooltips = TRUE)
 

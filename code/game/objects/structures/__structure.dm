@@ -24,14 +24,14 @@
 		UNSETEMPTY(matter)
 
 /obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat)
-	if(ispath(_mat, /material))
+	if(ispath(_mat, /decl/material))
 		material = _mat
-	if(ispath(material, /material))
-		material = SSmaterials.get_material_datum(material)
-	if(ispath(_reinf_mat, /material))
+	if(ispath(material, /decl/material))
+		material = decls_repository.get_decl(material)
+	if(ispath(_reinf_mat, /decl/material))
 		reinf_material = _reinf_mat
-	if(ispath(reinf_material, /material))
-		reinf_material = SSmaterials.get_material_datum(reinf_material)
+	if(ispath(reinf_material, /decl/material))
+		reinf_material = decls_repository.get_decl(reinf_material)
 	. = ..()
 	update_materials()
 	if(!CanFluidPass())
@@ -114,7 +114,7 @@
 	show_damage_message(health/maxhealth)
 
 	if(health == 0)
-		destroyed()
+		physically_destroyed()
 
 /obj/structure/proc/show_damage_message(var/perc)
 	if(perc > 0.75)
@@ -129,8 +129,8 @@
 		visible_message(SPAN_WARNING("\The [src] is showing some damage!"))
 		last_damage_message = 0.75
 
-/obj/structure/proc/destroyed()
-	. = dismantle()
+/obj/structure/physically_destroyed()
+	. = ..() && dismantle()
 
 /obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
@@ -212,13 +212,15 @@
 		qdel(G)
 		return TRUE
 
-/obj/structure/ex_act(severity)
-	if(severity == 1)
-		destroyed()
-	else if(severity == 2)
-		take_damage(rand(20, 30))
-	else
-		take_damage(rand(5, 15))
+/obj/structure/explosion_act(severity)
+	..()
+	if(QDELETED(src))
+		if(severity == 1)
+			physically_destroyed()
+		else if(severity == 2)
+			take_damage(rand(20, 30))
+		else
+			take_damage(rand(5, 15))
 
 /obj/structure/proc/can_repair(var/mob/user)
 	if(health >= maxhealth)

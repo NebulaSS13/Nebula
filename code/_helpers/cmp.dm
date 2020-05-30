@@ -87,3 +87,6 @@
 
 /proc/cmp_currency_denomination_des(var/datum/denomination/A, var/datum/denomination/B)
 	. = B.marked_value - A.marked_value
+
+/proc/cmp_cocktail_des(var/decl/cocktail/A, var/decl/cocktail/B)
+	. = B.mix_priority() - A.mix_priority()

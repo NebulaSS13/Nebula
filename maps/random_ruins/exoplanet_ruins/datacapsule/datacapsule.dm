@@ -25,9 +25,9 @@
 	suit = /obj/item/clothing/suit/bio_suit/anomaly
 	head = /obj/item/clothing/head/bio_hood/anomaly
 
-/decl/reagent/toxin/zombie/science
-	name = "Isolated Corruption"
-	description = "An incredibly dark, oily substance. Moves very slightly."
+/decl/material/chem/toxin/zombie/science
+	name = "isolated corruption"
+	lore_text = "An incredibly dark, oily substance. Moves very slightly."
 	taste_description = "decayed blood"
 	color = "#800000"
 	amount_to_zombify = 3
@@ -38,7 +38,7 @@
 /obj/item/chems/glass/beaker/vial/random_podchem/Initialize()
 	. = ..()
 	desc += "Label is smudged, and there's crusted blood fingerprints on it."
-	var/reagent_type = pick(/decl/reagent/random, /decl/reagent/toxin/zombie/science, /decl/reagent/retrovirals)
+	var/reagent_type = pick(/decl/material/chem/random, /decl/material/chem/toxin/zombie/science, /decl/material/chem/retrovirals)
 	reagents.add_reagent(pick(reagent_type), 5)
 
 /obj/structure/backup_server
@@ -53,7 +53,7 @@
 		to_chat(user, SPAN_NOTICE("You pry out the data drive from \the [src]."))
 		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new(get_turf(src))
-		drive.origin_tech = "{'[TECH_DATA]':[rand(4,5)],'[TECH_ENGINEERING]':[rand(4,5)],'[TECH_PHORON]':[rand(4,5)],'[TECH_COMBAT]':[rand(2,5)],'[TECH_ESOTERIC]':[rand(0,6)]}"
+		drive.origin_tech = "{'[TECH_DATA]':[rand(4,5)],'[TECH_ENGINEERING]':[rand(4,5)],'[TECH_EXOTIC_MATTER]':[rand(4,5)],'[TECH_COMBAT]':[rand(2,5)],'[TECH_ESOTERIC]':[rand(0,6)]}"
 		
 /obj/effect/landmark/map_load_mark/ejected_datapod
 	name = "random datapod contents"

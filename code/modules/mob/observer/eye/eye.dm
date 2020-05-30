@@ -14,7 +14,9 @@
 	var/acceleration = 1
 	var/owner_follows_eye = 0
 	var/living_eye = TRUE 	// Whether or not the eye uses normal living vision handling.
-
+	
+	var/click_handler_type = /datum/click_handler/eye/ // Set if the eye uses special click handling. Distinct from parent mob click handling for AI etc.
+	
 	see_in_dark = 7
 	invisibility = INVISIBILITY_EYE
 
@@ -62,6 +64,9 @@
 	if(owner.client)
 		owner.client.eye = src
 	LAZYDISTINCTADD(owner.additional_vision_handlers, src)
+	apply_visual(owner)
+	if(click_handler_type)
+		owner.PushClickHandler(click_handler_type)
 	setLoc(owner)
 
 /mob/observer/eye/proc/release(var/mob/user)
@@ -70,7 +75,10 @@
 	if(owner.eyeobj != src)
 		return
 	LAZYREMOVE(user.additional_vision_handlers, src)
+	remove_visual(owner)
 	owner.eyeobj = null
+	if(click_handler_type)
+		owner.RemoveClickHandler(click_handler_type)
 	owner = null
 	SetName(initial(name))
 
@@ -134,3 +142,32 @@
 	else
 		sprint = initial
 	return 1
+
+// Used to apply fullscreen effects etc. to owner
+/mob/observer/eye/apply_visual(var/mob/M)
+	if(M != owner || !M.client)
+		return FALSE
+	return TRUE
+
+/mob/observer/eye/remove_visual(var/mob/M)
+	if(M != owner || !M.client)
+		return FALSE
+	return TRUE
+
+/mob/observer/eye/ClickOn(var/atom/A, var/params)
+	if(owner)
+		return owner.ClickOn(A, params)
+	
+	return ..()
+
+/datum/click_handler/eye/OnClick(var/atom/A, params)
+	var/mob/observer/eye/eye = user.eyeobj
+
+	if(!eye) // Something has broken, ensure the click_handler doesn't stick around
+		user.RemoveClickHandler(src)
+		return
+
+	eye.ClickOn(A, params)
+
+/datum/click_handler/eye/OnDblClick(var/atom/A, var/params)
+	OnClick(A, params)

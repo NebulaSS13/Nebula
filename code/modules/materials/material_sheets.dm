@@ -10,7 +10,7 @@
 	icon = 'icons/obj/materials.dmi'
 	matter = null
 
-	var/material/reinf_material
+	var/decl/material/reinf_material
 	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
@@ -20,7 +20,7 @@
 	if(!_reinf_material)
 		_reinf_material = reinf_material
 	if(_reinf_material)
-		reinf_material = SSmaterials.get_material_datum(_reinf_material)
+		reinf_material = decls_repository.get_decl(_reinf_material)
 		if(!istype(reinf_material))
 			reinf_material = null
 	base_state = icon_state
@@ -42,7 +42,7 @@
 	..() 
 
 /obj/item/stack/material/get_codex_value()
-	return (material && !material.hidden_from_codex) ? "[lowertext(material.display_name)] (material)" : ..()
+	return (material && !material.hidden_from_codex) ? "[lowertext(material.name)] (material)" : ..()
 
 /obj/item/stack/material/get_material()
 	return material
@@ -497,16 +497,16 @@
 /obj/item/stack/material/glass/reinforced/fifty
 	amount = 50
 
-/obj/item/stack/material/glass/phoronglass
+/obj/item/stack/material/glass/borosilicate
 	name = "borosilicate glass"
-	material = MAT_PHORON_GLASS
+	material = MAT_BOROSILICATE_GLASS
 
-/obj/item/stack/material/glass/phoronrglass
+/obj/item/stack/material/glass/reinforced_borosilicate
 	name = "reinforced borosilicate glass"
-	material = MAT_PHORON_GLASS
+	material = MAT_BOROSILICATE_GLASS
 	reinf_material = MAT_STEEL
 
-/obj/item/stack/material/glass/phoronrglass/ten
+/obj/item/stack/material/glass/reinforced_borosilicate/ten
 	amount = 10
 
 /obj/item/stack/material/aliumium

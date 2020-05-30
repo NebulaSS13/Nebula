@@ -372,7 +372,7 @@
 					var/turf/simulated/wall/W = target
 					if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > drill_head.material.hardness)
 						to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
-					target.ex_act(2)
+					target.explosion_act(2)
 					drill_head.durability -= 1
 					log_and_message_admins("used [src] on the wall [W].", user, owner.loc)
 				else if(istype(target, /turf/simulated/mineral))
@@ -386,7 +386,7 @@
 							M.gets_dug()
 							drill_head.durability -= 1
 				else if(target.loc == T)
-					target.ex_act(2)
+					target.explosion_act(2)
 					drill_head.durability -= 1
 					log_and_message_admins("[src] used to drill [target].", user, owner.loc)
 
@@ -420,7 +420,7 @@
 	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	origin_tech = "{'materials':4,'phorontech':4,'engineering':6,'combat':3}"
+	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
 	material = MAT_STEEL
 
 /obj/item/gun/energy/plasmacutter/mounted/mech

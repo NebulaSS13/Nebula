@@ -59,7 +59,7 @@
 
 /obj/item/proc/set_material(var/new_material)
 	if(new_material)
-		material = SSmaterials.get_material_datum(new_material)
+		material = decls_repository.get_decl(new_material)
 	if(istype(material))
 		health = round(material_health_multiplier * material.integrity)
 		max_health = health
@@ -71,7 +71,7 @@
 			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 		update_force()
 		if(applies_material_name)
-			SetName("[material.display_name] [initial(name)]")
+			SetName("[material.name] [initial(name)]")
 		if(material_armor_multiplier)
 			armor = material.get_armor(material_armor_multiplier)
 			armor_degradation_speed = material.armor_degradation_speed

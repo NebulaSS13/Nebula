@@ -1,6 +1,6 @@
 
-/material/glass
-	display_name = "glass"
+/decl/material/glass
+	name = "glass"
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	stack_type = /obj/item/stack/material/glass
 	flags = MAT_FLAG_BRITTLE
@@ -23,16 +23,16 @@
 	conductive = 0
 	wall_support_value = 14
 
-/material/glass/proc/is_reinforced()
+/decl/material/glass/proc/is_reinforced()
 	return (integrity > 75) //todo
 
-/material/glass/is_brittle()
+/decl/material/glass/is_brittle()
 	return ..() && !is_reinforced()
 
-/material/glass/phoron
-	display_name = "borosilicate glass"
+/decl/material/glass/borosilicate
+	name = "borosilicate glass"
 	lore_text = "An extremely heat-resistant form of glass."
-	stack_type = /obj/item/stack/material/glass/phoronglass
+	stack_type = /obj/item/stack/material/glass/borosilicate
 	flags = MAT_FLAG_BRITTLE
 	hardness = MAT_VALUE_HARD
 	weight = MAT_VALUE_LIGHT
@@ -40,7 +40,7 @@
 	brute_armor = 2
 	burn_armor = 5
 	melting_point = T0C + 4000
-	icon_colour = GLASS_COLOR_PHORON
+	icon_colour = GLASS_COLOR_SILICATE
 	stack_origin_tech = "{'materials':4}"
 	wire_product = null
 	construction_difficulty = MAT_VALUE_HARD_DIY

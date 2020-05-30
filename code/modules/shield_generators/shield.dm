@@ -193,7 +193,8 @@
 
 
 // Explosions
-/obj/effect/shield/ex_act(var/severity)
+/obj/effect/shield/explosion_act(var/severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if(!disabled_for)
 		take_damage(rand(10,15) / severity, SHIELD_DAMTYPE_PHYSICAL)
 

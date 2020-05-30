@@ -27,9 +27,9 @@
 
 	if(reinf_material)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		visible_message(SPAN_NOTICE("\The [user] begins unscrewing \the [reinf_material.display_name] struts from \the [src]."))
+		visible_message(SPAN_NOTICE("\The [user] begins unscrewing \the [reinf_material.name] struts from \the [src]."))
 		if(do_after(user, 5 SECONDS, src) || QDELETED(src) || !reinf_material)
-			visible_message(SPAN_NOTICE("\The [user] unscrews and removes \the [reinf_material.display_name] struts from \the [src]."))
+			visible_message(SPAN_NOTICE("\The [user] unscrews and removes \the [reinf_material.name] struts from \the [src]."))
 			reinf_material.place_dismantled_product(get_turf(src))
 			reinf_material = null
 		return TRUE
@@ -88,7 +88,7 @@
 
 /obj/structure/girder/can_dismantle(var/mob/user)
 	if(reinf_material)
-		to_chat(user, SPAN_WARNING("You must use a screwdriver to remove the [reinf_material.display_name] reinforcement before you can dismantle \the [src]."))
+		to_chat(user, SPAN_WARNING("You must use a screwdriver to remove the [reinf_material.name] reinforcement before you can dismantle \the [src]."))
 		return FALSE
 	. = ..()
 
@@ -121,7 +121,7 @@
 				return construct_wall(W, user)
 			else
 				if(reinf_material)
-					to_chat(user, SPAN_WARNING("\The [src] is already reinforced with [reinf_material.display_name]."))
+					to_chat(user, SPAN_WARNING("\The [src] is already reinforced with [reinf_material.name]."))
 				else
 					return reinforce_with_material(W, user)
 			return TRUE
@@ -142,7 +142,7 @@
 		return FALSE
 
 	if(S.material.weight > max(material.wall_support_value, reinf_material && reinf_material.wall_support_value))
-		to_chat(user, SPAN_WARNING("You will need a support made of sturdier material to hold up [S.material.display_name] cladding."))
+		to_chat(user, SPAN_WARNING("You will need a support made of sturdier material to hold up [S.material.name] cladding."))
 		return FALSE
 
 	add_hiddenprint(usr)
@@ -150,13 +150,13 @@
 		to_chat(user, SPAN_WARNING("This material is too soft for use in wall construction."))
 		return 0
 
-	to_chat(user, SPAN_NOTICE("You begin adding the [S.material.display_name] cladding..."))
+	to_chat(user, SPAN_NOTICE("You begin adding the [S.material.name] cladding..."))
 
 	if(!do_after(user,40,src) || !S.use(2))
 		return 1 //once we've gotten this far don't call parent attackby()
 
 	if(!prepped_for_fakewall)
-		to_chat(user, SPAN_NOTICE("You added the [S.material.display_name] cladding!"))
+		to_chat(user, SPAN_NOTICE("You added the [S.material.name] cladding!"))
 	else
 		to_chat(user, SPAN_NOTICE("You create a false wall! Push on it to open or close the passage."))
 
@@ -178,14 +178,14 @@
 	if(S.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You will need at least 2 sheets to reinforce \the [src]."))
 		return TRUE
-	var/material/M = S.material
+	var/decl/material/M = S.material
 	if(!istype(M) || M.integrity < 50)
-		to_chat(user, SPAN_WARNING("You cannot reinforce \the [src] with [M.display_name]; it is too soft."))
+		to_chat(user, SPAN_WARNING("You cannot reinforce \the [src] with [M.name]; it is too soft."))
 		return TRUE
-	visible_message(SPAN_NOTICE("\The [user] begins installing [M.display_name] struts into \the [src]."))
+	visible_message(SPAN_NOTICE("\The [user] begins installing [M.name] struts into \the [src]."))
 	if (!do_after(user, 4 SECONDS, src) || !S.use(2))
 		return TRUE
-	visible_message(SPAN_NOTICE("\The [user] finishes reinforcing \the [src] with [M.display_name]."))
+	visible_message(SPAN_NOTICE("\The [user] finishes reinforcing \the [src] with [M.name]."))
 	reinf_material = M
 	update_icon()
 	return 1
@@ -198,21 +198,10 @@
 	return ..()
 
 
-/obj/structure/girder/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(30))
-				dismantle()
-			return
-		if(3.0)
-			if (prob(5))
-				dismantle()
-			return
-		else
-	return
+/obj/structure/girder/explosion_act(severity)
+	..()
+	if(severity == 1 || (severity == 2 && prob(30)) || (severity == 3 && prob(5)))
+		physically_destroyed()
 
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'

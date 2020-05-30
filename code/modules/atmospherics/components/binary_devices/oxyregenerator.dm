@@ -80,7 +80,7 @@
 			carbon_stored += co2_intake * carbon_efficiency
 			while (carbon_stored >= carbon_moles_per_piece)
 				carbon_stored -= carbon_moles_per_piece
-				var/material/M = SSmaterials.get_material_datum(MAT_GRAPHITE)
+				var/decl/material/M = decls_repository.get_decl(MAT_GRAPHITE)
 				M.place_sheet(get_turf(src), 1, M.type)
 			power_draw = power_rating * co2_intake
 			last_power_draw = power_draw

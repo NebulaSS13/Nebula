@@ -72,10 +72,11 @@ Class Procs:
 	T.zone = src
 	contents.Add(T)
 	if(T.fire)
-		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 		fire_tiles.Add(T)
 		SSair.active_fire_zones |= src
-		if(fuel) fuel_objs += fuel
+		var/obj/effect/fluid/fuel = T.return_fluid()
+		if(fuel?.get_fuel_amount()) 
+			fuel_objs += fuel
 	T.update_graphic(air.graphic)
 
 /zone/proc/remove(turf/simulated/T)
@@ -88,8 +89,7 @@ Class Procs:
 	contents.Remove(T)
 	fire_tiles.Remove(T)
 	if(T.fire)
-		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
-		fuel_objs -= fuel
+		fuel_objs -= T.return_fluid()
 	T.zone = null
 	T.update_graphic(graphic_remove = air.graphic)
 	if(contents.len)
@@ -149,7 +149,8 @@ Class Procs:
 /zone/proc/tick()
 
 	// Update fires.
-	if(air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && contents.len)
+	if(air.temperature >= FLAMMABLE_GAS_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustibility() && contents.len)
+
 		var/turf/T = pick(contents)
 		if(istype(T))
 			T.create_fire(vsc.fire_firelevel_multiplier)
@@ -184,7 +185,7 @@ Class Procs:
 	set waitfor = FALSE
 	condensing = TRUE
 	for(var/g in air.gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
+		var/decl/material/mat = decls_repository.get_decl(g)
 		if(length(mat.chemical_makeup) && air.temperature <= mat.gas_condensation_point)
 			var/condensation_area = air.group_multiplier / length(air.gas)
 			while(condensation_area > 0 && length(contents))
@@ -202,8 +203,8 @@ Class Procs:
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)
 	for(var/g in air.gas)
-		var/material/mat = SSmaterials.get_material_datum(g)
-		to_chat(M, "[capitalize(mat.display_name)]: [air.gas[g]]")
+		var/decl/material/mat = decls_repository.get_decl(g)
+		to_chat(M, "[capitalize(mat.name)]: [air.gas[g]]")
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
 	to_chat(M, "O2 per N2: [(air.gas[MAT_NITROGEN] ? air.gas[MAT_OXYGEN]/air.gas[MAT_NITROGEN] : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")

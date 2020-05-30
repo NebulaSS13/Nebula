@@ -29,11 +29,11 @@
 		while(i <= gasnum && total_moles && newgases.len)
 			if(badflag && sanity)
 				for(var/g in newgases)
-					var/material/mat = SSmaterials.get_material_datum(g)
+					var/decl/material/mat = decls_repository.get_decl(g)
 					if(mat.gas_flags & badflag)
 						newgases -= g
 			var/ng = pick_n_take(newgases)	//pick a gas
-			var/material/mat = SSmaterials.get_material_datum(ng)
+			var/decl/material/mat = decls_repository.get_decl(ng)
 			if(sanity) //make sure atmosphere is not flammable... always
 				if(mat.gas_flags & XGM_GAS_OXIDIZER)
 					badflag |= XGM_GAS_FUEL

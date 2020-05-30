@@ -1,5 +1,5 @@
-/material/pitchblende
-	display_name = "pitchblende"
+/decl/material/pitchblende
+	name = "pitchblende"
 	ore_compresses_to = MAT_PITCHBLENDE
 	icon_colour = "#917d1a"
 	ore_smelts_to = MAT_URANIUM
@@ -8,18 +8,20 @@
 	ore_name = "pitchblende"
 	ore_scan_icon = "mineral_uncommon"
 	stack_origin_tech = "{'materials':5}"
-	xarch_source_mineral = /decl/reagent/phosphorus
+	xarch_source_mineral = /decl/material/chem/phosphorus
 	ore_icon_overlay = "nugget"
 	chemical_makeup = list(
-		/decl/reagent/radium = 0.5,
-		/decl/reagent/uranium = 0.5
+		/decl/material/chem/radium = 0.5,
+		/decl/material/uranium = 0.5
 	)
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	value = 0.8
+	sparse_material_weight = 8
+	rich_material_weight = 10
 
-/material/graphite
-	display_name = "graphite"
+/decl/material/graphite
+	name = "graphite"
 	ore_compresses_to = MAT_GRAPHITE
 	icon_colour = "#444444"
 	ore_name = "graphite"
@@ -28,14 +30,16 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	chemical_makeup = list(
-		/decl/reagent/carbon = 0.6,
-		/decl/reagent/toxin/plasticide = 0.2,
-		/decl/reagent/acetone = 0.2
+		/decl/material/chem/carbon = 0.6,
+		/decl/material/chem/toxin/plasticide = 0.2,
+		/decl/material/chem/acetone = 0.2
 	)
 	value = 0.8
+	sparse_material_weight = 35
+	rich_material_weight = 20
 
-/material/quartz
-	display_name = "quartz"
+/decl/material/quartz
+	name = "quartz"
 	ore_compresses_to = MAT_QUARTZ
 	ore_name = "quartz"
 	opacity = 0.5
@@ -45,7 +49,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#effffe"
 	chemical_makeup = list(
-		/decl/reagent/silicon = 1
+		/decl/material/chem/silicon = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -54,9 +58,11 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	reflectiveness = MAT_VALUE_SHINY
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
-/material/pyrite
-	display_name = "pyrite"
+/decl/material/pyrite
+	name = "pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -64,8 +70,8 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#ccc9a3"
 	chemical_makeup = list(
-		/decl/reagent/sulfur = 0.75,
-		/decl/reagent/iron = 0.25
+		/decl/material/chem/sulfur = 0.75,
+		/decl/material/iron = 0.25
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -76,9 +82,11 @@
 	ore_compresses_to = MAT_PYRITE
 	reflectiveness = MAT_VALUE_SHINY
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
-/material/spodumene
-	display_name = "spodumene"
+/decl/material/spodumene
+	name = "spodumene"
 	ore_compresses_to = MAT_SPODUMENE
 	ore_name = "spodumene"
 	ore_result_amount = 10
@@ -87,7 +95,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#e5becb"
 	chemical_makeup = list(
-		/decl/reagent/lithium = 1
+		/decl/material/chem/lithium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -96,9 +104,11 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
-/material/cinnabar
-	display_name = "cinnabar"
+/decl/material/cinnabar
+	name = "cinnabar"
 	ore_compresses_to = MAT_CINNABAR
 	ore_name = "cinnabar"
 	ore_result_amount = 10
@@ -107,7 +117,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#e54e4e"
 	chemical_makeup = list(
-		/decl/reagent/mercury = 1
+		/decl/material/chem/mercury = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -116,9 +126,11 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
-/material/phosphorite
-	display_name = "phosphorite"
+/decl/material/phosphorite
+	name = "phosphorite"
 	ore_compresses_to = MAT_PHOSPHORITE
 	ore_name = "phosphorite"
 	ore_result_amount = 10
@@ -127,7 +139,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#acad95"
 	chemical_makeup = list(
-		/decl/reagent/phosphorus = 1
+		/decl/material/chem/phosphorus = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -136,9 +148,11 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
-/material/rocksalt
-	display_name = "rock salt"
+/decl/material/rocksalt
+	name = "rock salt"
 	ore_compresses_to = MAT_ROCK_SALT
 	ore_name = "rock salt"
 	ore_result_amount = 10
@@ -147,7 +161,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d1c0bc"
 	chemical_makeup = list(
-		/decl/reagent/sodium = 1
+		/decl/material/chem/sodium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -156,9 +170,11 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
-/material/potash
-	display_name = "potash"
+/decl/material/potash
+	name = "potash"
 	ore_compresses_to = MAT_POTASH
 	ore_name = "potash"
 	ore_result_amount = 10
@@ -167,7 +183,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#b77464"
 	chemical_makeup = list(
-		/decl/reagent/potassium = 1
+		/decl/material/chem/potassium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -176,9 +192,11 @@
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
-/material/bauxite
-	display_name = "bauxite"
+/decl/material/bauxite
+	name = "bauxite"
 	ore_name = "bauxite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -186,7 +204,7 @@
 	ore_icon_overlay = "lump"
 	icon_colour = "#d8ad97"
 	chemical_makeup = list(
-		/decl/reagent/aluminium = 1
+		/decl/material/aluminium = 1
 	)
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
@@ -197,9 +215,11 @@
 	ore_smelts_to = MAT_ALUMINIUM
 	ore_compresses_to = MAT_BAUXITE
 	value = 0.8
+	sparse_material_weight = 3
+	rich_material_weight = 1
 
-/material/sand
-	display_name = "sand"
+/decl/material/sand
+	name = "sand"
 	stack_type = null
 	icon_colour = "#e2dbb5"
 	ore_smelts_to = MAT_GLASS
@@ -207,12 +227,12 @@
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
 	chemical_makeup = list(
-		/decl/reagent/silicon = 1
+		/decl/material/chem/silicon = 1
 	)
 	value = 0.8
 
-/material/sand/clay
-	display_name = "clay"
+/decl/material/sand/clay
+	name = "clay"
 	icon_colour = COLOR_OFF_WHITE
 	ore_name = "clay"
 	ore_icon_overlay = "lump"
@@ -220,22 +240,22 @@
 	ore_compresses_to = MAT_CLAY
 	value = 0.8
 
-/material/phoron
-	display_name = "phoron"
+/decl/material/phoron
+	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
-	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
+	ignition_point = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_colour = "#e37108"
 	shard_type = SHARD_SHARD
 	hardness = MAT_VALUE_RIGID
-	stack_origin_tech = "{'materials':2,'phorontech':2}"
+	stack_origin_tech = "{'materials':2,'exoticmatter':2}"
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
 	chemical_makeup = list(
-		/decl/reagent/toxin/phoron = 1
+		/decl/material/chem/toxin/phoron = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	ore_name = "phoron"
@@ -243,7 +263,7 @@
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_uncommon"
-	xarch_source_mineral = /decl/reagent/toxin/phoron
+	xarch_source_mineral = /decl/material/chem/toxin/phoron
 	ore_icon_overlay = "gems"
 	//Note that this has a significant impact on TTV yield.
 	//Because it is so high, any leftover phoron soaks up a lot of heat and drops the yield pressure.
@@ -258,9 +278,11 @@
 	gas_symbol = "Ph"
 	reflectiveness = MAT_VALUE_SHINY
 	value = 1.6
+	sparse_material_weight = 10
+	rich_material_weight = 20
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
-/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
+/decl/material/phoron/combustion_effect(var/turf/T, var/temperature, var/effect_multiplier)
 	if(isnull(ignition_point))
 		return 0
 	if(temperature < ignition_point)
@@ -274,13 +296,15 @@
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
 
-/material/phoron/supermatter
-	display_name = "exotic matter"
+/decl/material/phoron/supermatter
+	name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
 	radioactivity = 20
-	stack_origin_tech = "{'bluespace':2,'materials':6,'phorontech':4}"
+	stack_origin_tech = "{'bluespace':2,'materials':6,'exoticmatter':4}"
 	stack_type = null
 	luminescence = 3
 	ore_compresses_to = null
 	value = 3
+	sparse_material_weight = null
+	rich_material_weight = null

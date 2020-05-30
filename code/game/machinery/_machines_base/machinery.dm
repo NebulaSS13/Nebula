@@ -85,6 +85,7 @@ Class Procs:
 	throw_range = 5
 
 	var/stat = 0
+	var/waterproof = TRUE
 	var/reason_broken = 0
 	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
 	var/emagged = 0
@@ -422,7 +423,7 @@ Class Procs:
 /obj/machinery/fluid_act(var/datum/reagents/fluids)
 	..()
 	if(!(stat & (NOPOWER|BROKEN)) && !waterproof && (fluids.total_volume > FLUID_DEEP))
-		ex_act(3)
+		explosion_act(3)
 
 /obj/machinery/Move()
 	. = ..()

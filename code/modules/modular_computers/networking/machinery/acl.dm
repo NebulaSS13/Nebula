@@ -11,69 +11,7 @@
 	// Datum file source for where grants/records are.
 	var/datum/file_storage/network/file_source = /datum/file_storage/network/machine
 	var/editing_user	// Numerical user ID of the user being editing on this device.
-	var/list/initial_grants = list(
-		access_security,
-		access_brig,
-		access_armory,
-		access_forensics_lockers,
-		access_medical,
-		access_morgue,
-		access_tox,
-		access_tox_storage,
-		access_engine,
-		access_engine_equip,
-		access_maint_tunnels,
-		access_external_airlocks,
-		access_emergency_storage,
-		access_change_ids,
-		access_ai_upload,
-		access_teleporter,
-		access_eva,
-		access_bridge,
-		access_captain,
-		access_all_personal_lockers,
-		access_chapel_office,
-		access_tech_storage,
-		access_atmospherics,
-		access_bar,
-		access_janitor,
-		access_crematorium,
-		access_kitchen,
-		access_robotics,
-		access_rd,
-		access_cargo,
-		access_construction,
-		access_chemistry,
-		access_cargo_bot,
-		access_hydroponics,
-		access_manufacturing,
-		access_library,
-		access_lawyer,
-		access_virology,
-		access_cmo,
-		access_qm,
-		access_network,
-		access_surgery,
-		access_research,
-		access_mining,
-		access_mining_office,
-		access_mailsorting,
-		access_heads_vault,
-		access_mining_station,
-		access_xenobiology,
-		access_ce,
-		access_hop,
-		access_hos,
-		access_RC_announce,
-		access_keycard_auth,
-		access_tcomsat,
-		access_gateway,
-		access_sec_doors,
-		access_psychiatrist,
-		access_xenoarch,
-		access_medical_equip,
-		access_heads
-	)
+	var/list/initial_grants  //defaults to all possible station accesses if left null
 
 /obj/machinery/network/acl/merchant
 	initial_grants = list(
@@ -86,9 +24,10 @@
 		access_syndicate
 	)
 
-
 /obj/machinery/network/acl/Initialize()
 	. = ..()
+	if(isnull(initial_grants))
+		initial_grants = get_all_station_access()
 	if(ispath(file_source))
 		file_source = new file_source(null, src)
 

@@ -8,6 +8,7 @@ SUBSYSTEM_DEF(codex)
 	var/list/entries_by_string = list()
 	var/list/index_file =        list()
 	var/list/search_cache =      list()
+	var/list/categories =        list()
 
 /datum/controller/subsystem/codex/Initialize()
 	// Codex link syntax is such: 
@@ -26,13 +27,12 @@ SUBSYSTEM_DEF(codex)
 				add_entry_by_string(associated_string, centry)
 			if(centry.display_name)
 				add_entry_by_string(centry.display_name, centry)
-			centry.update_links()
 
 	// Create categorized entries.
 	for(var/ctype in subtypesof(/datum/codex_category))
 		var/datum/codex_category/cat = new ctype
+		categories[ctype] = cat
 		cat.Initialize()
-		qdel(cat)
 
 	// Create the index file for later use.
 	for(var/thing in SScodex.entries_by_path)
@@ -79,6 +79,10 @@ SUBSYSTEM_DEF(codex)
 		var/datum/browser/popup = new(presenting_to, "codex\ref[entry]", "Codex", nheight=425)
 		popup.set_content(parse_links(entry.get_text(presenting_to), presenting_to))
 		popup.open()
+
+/datum/controller/subsystem/codex/proc/get_guide(var/category)
+	var/datum/codex_category/cat = categories[category]
+	. = cat?.guide_html
 
 /datum/controller/subsystem/codex/proc/retrieve_entries_for_string(var/searching)
 

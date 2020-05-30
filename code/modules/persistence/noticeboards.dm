@@ -81,8 +81,10 @@
 	QDEL_NULL_LIST(notices)
 	. = ..()
 
-/obj/structure/noticeboard/ex_act(var/severity)
-	dismantle()
+/obj/structure/noticeboard/explosion_act(var/severity)
+	. = ..()
+	if(.)
+		physically_destroyed()
 
 /obj/structure/noticeboard/on_update_icon()
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"

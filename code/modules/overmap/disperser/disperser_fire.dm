@@ -21,14 +21,14 @@
 				explosion(T,1,2,3)
 				continue
 			else
-				T.ex_act(1)
+				T.explosion_act(1)
 		for(var/atom/A in T)
 			if(A.density)
 				if(distance < 7)
 					explosion(A,1,2,3)
 					break
 				else
-					A.ex_act(1)
+					A.explosion_act(1)
 
 	var/list/relevant_z = GetConnectedZlevels(start.z)
 	for(var/mob/M in GLOB.player_list)

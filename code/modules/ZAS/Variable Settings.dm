@@ -9,7 +9,7 @@ var/global/vs_control/vsc = new
 	var/fire_firelevel_multiplier_NAME = "Fire - Firelevel Constant"
 	var/fire_firelevel_multiplier_DESC = "Multiplied by the equation for firelevel, affects mainly the extingiushing of fires."
 
-	//Note that this parameter and the phoron heat capacity have a significant impact on TTV yield.
+	//Note that this parameter and the gas heat capacity have a significant impact on TTV yield.
 	var/fire_fuel_energy_release = 866000 //J/mol. Adjusted to compensate for fire energy release being fixed, was 397000
 	var/fire_fuel_energy_release_NAME = "Fire - Fuel energy release"
 	var/fire_fuel_energy_release_DESC = "The energy in joule released when burning one mol of a burnable substance"
@@ -77,7 +77,7 @@ var/global/vs_control/vsc = new
 
 /vs_control/var/list/settings = list()
 /vs_control/var/list/bitflags = list("1","2","4","8","16","32","64","128","256","512","1024")
-/vs_control/var/pl_control/plc = new()
+/vs_control/var/contaminant_control/contaminant_control = new()
 
 /vs_control/New()
 	. = ..()
@@ -93,7 +93,7 @@ var/global/vs_control/vsc = new
 
 	settings -= "settings"
 	settings -= "bitflags"
-	settings -= "plc"
+	settings -= "contaminant_control"
 
 /vs_control/proc/ChangeSettingsDialog(mob/user,list/L)
 	//var/which = input(user,"Choose a setting:") in L
@@ -103,10 +103,10 @@ var/global/vs_control/vsc = new
 		var/vw
 		var/vw_desc = "No Description."
 		var/vw_name = ch
-		if(ch in plc.settings)
-			vw = plc.vars[ch]
-			if("[ch]_DESC" in plc.vars) vw_desc = plc.vars["[ch]_DESC"]
-			if("[ch]_NAME" in plc.vars) vw_name = plc.vars["[ch]_NAME"]
+		if(ch in contaminant_control.settings)
+			vw = contaminant_control.vars[ch]
+			if("[ch]_DESC" in contaminant_control.vars) vw_desc = contaminant_control.vars["[ch]_DESC"]
+			if("[ch]_NAME" in contaminant_control.vars) vw_name = contaminant_control.vars["[ch]_NAME"]
 		else
 			vw = vars[ch]
 			if("[ch]_DESC" in vars) vw_desc = vars["[ch]_DESC"]
@@ -123,12 +123,12 @@ var/global/vs_control/vsc = new
 	var/vw
 	var/how = "Text"
 	var/display_description = ch
-	if(ch in plc.settings)
-		vw = plc.vars[ch]
-		if("[ch]_NAME" in plc.vars)
-			display_description = plc.vars["[ch]_NAME"]
-		if("[ch]_METHOD" in plc.vars)
-			how = plc.vars["[ch]_METHOD"]
+	if(ch in contaminant_control.settings)
+		vw = contaminant_control.vars[ch]
+		if("[ch]_NAME" in contaminant_control.vars)
+			display_description = contaminant_control.vars["[ch]_NAME"]
+		if("[ch]_METHOD" in contaminant_control.vars)
+			how = contaminant_control.vars["[ch]_METHOD"]
 		else
 			if(isnum(vw))
 				how = "Numeric"
@@ -163,15 +163,15 @@ var/global/vs_control/vsc = new
 		if("Long Text")
 			newvar = input(user,"Enter text:","Settings",newvar) as message
 	vw = newvar
-	if(ch in plc.settings)
-		plc.vars[ch] = vw
+	if(ch in contaminant_control.settings)
+		contaminant_control.vars[ch] = vw
 	else
 		vars[ch] = vw
 	if(how == "Toggle")
 		newvar = (newvar?"ON":"OFF")
 	to_world("<span class='notice'><b>[key_name(user)] changed the setting [display_description] to [newvar].</b></span>")
-	if(ch in plc.settings)
-		ChangeSettingsDialog(user,plc.settings)
+	if(ch in contaminant_control.settings)
+		ChangeSettingsDialog(user,contaminant_control.settings)
 	else
 		ChangeSettingsDialog(user,settings)
 
@@ -187,52 +187,48 @@ var/global/vs_control/vsc = new
 				newvalue = vars[V]
 		V = newvalue
 
-/vs_control/proc/ChangePhoron()
-	for(var/V in plc.settings)
-		plc.Randomize(V)
-
 /vs_control/proc/SetDefault(var/mob/user)
-	var/list/setting_choices = list("Phoron - Standard", "Phoron - Low Hazard", "Phoron - High Hazard", "Phoron - Oh Shit!",\
-	"ZAS - Normal", "ZAS - Forgiving", "ZAS - Dangerous", "ZAS - Hellish", "ZAS/Phoron - Initial")
+	var/list/setting_choices = list("Contaminants - Standard", "Contaminants - Low Hazard", "Contaminants - High Hazard", "Contaminants - Oh Shit!",\
+	"ZAS - Normal", "ZAS - Forgiving", "ZAS - Dangerous", "ZAS - Hellish", "ZAS/Contaminants - Initial")
 	var/def = input(user, "Which of these presets should be used?") as null|anything in setting_choices
 	if(!def)
 		return
 	switch(def)
-		if("Phoron - Standard")
-			plc.CLOTH_CONTAMINATION = 1 //If this is on, phoron does damage by getting into cloth.
-			plc.PHORONGUARD_ONLY = 0
-			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
-			plc.SKIN_BURNS = 0       //Phoron has an effect similar to mustard gas on the un-suited.
-			plc.EYE_BURNS = 1 //Phoron burns the eyes of anyone not wearing eye protection.
-			plc.PHORON_HALLUCINATION = 0
-			plc.CONTAMINATION_LOSS = 0.02
+		if("Contaminants - Standard")
+			contaminant_control.CLOTH_CONTAMINATION = 1 //If this is on, contaminants do damage by getting into cloth.
+			contaminant_control.STRICT_PROTECTION_ONLY = 0
+			contaminant_control.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
+			contaminant_control.SKIN_BURNS = 0       //Contaminants have an effect similar to mustard gas on the un-suited.
+			contaminant_control.EYE_BURNS = 1 //Contaminants burn the eyes of anyone not wearing eye protection.
+			contaminant_control.CONTAMINANT_HALLUCINATION = 0
+			contaminant_control.CONTAMINATION_LOSS = 0.02
 
-		if("Phoron - Low Hazard")
-			plc.CLOTH_CONTAMINATION = 0 //If this is on, phoron does damage by getting into cloth.
-			plc.PHORONGUARD_ONLY = 0
-			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000
-			plc.SKIN_BURNS = 0       //Phoron has an effect similar to mustard gas on the un-suited.
-			plc.EYE_BURNS = 1 //Phoron burns the eyes of anyone not wearing eye protection.
-			plc.PHORON_HALLUCINATION = 0
-			plc.CONTAMINATION_LOSS = 0.01
+		if("Contaminants - Low Hazard")
+			contaminant_control.CLOTH_CONTAMINATION = 0 //If this is on, contaminants do damage by getting into cloth.
+			contaminant_control.STRICT_PROTECTION_ONLY = 0
+			contaminant_control.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000
+			contaminant_control.SKIN_BURNS = 0       //Contaminants have an effect similar to mustard gas on the un-suited.
+			contaminant_control.EYE_BURNS = 1 //Contaminants burn the eyes of anyone not wearing eye protection.
+			contaminant_control.CONTAMINANT_HALLUCINATION = 0
+			contaminant_control.CONTAMINATION_LOSS = 0.01
 
-		if("Phoron - High Hazard")
-			plc.CLOTH_CONTAMINATION = 1 //If this is on, phoron does damage by getting into cloth.
-			plc.PHORONGUARD_ONLY = 0
-			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
-			plc.SKIN_BURNS = 1       //Phoron has an effect similar to mustard gas on the un-suited.
-			plc.EYE_BURNS = 1 //Phoron burns the eyes of anyone not wearing eye protection.
-			plc.PHORON_HALLUCINATION = 1
-			plc.CONTAMINATION_LOSS = 0.05
+		if("Contaminants - High Hazard")
+			contaminant_control.CLOTH_CONTAMINATION = 1 //If this is on, contaminants do damage by getting into cloth.
+			contaminant_control.STRICT_PROTECTION_ONLY = 0
+			contaminant_control.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
+			contaminant_control.SKIN_BURNS = 1       //Contaminants have an effect similar to mustard gas on the un-suited.
+			contaminant_control.EYE_BURNS = 1 //Contaminants burn the eyes of anyone not wearing eye protection.
+			contaminant_control.CONTAMINANT_HALLUCINATION = 1
+			contaminant_control.CONTAMINATION_LOSS = 0.05
 
-		if("Phoron - Oh Shit!")
-			plc.CLOTH_CONTAMINATION = 1 //If this is on, phoron does damage by getting into cloth.
-			plc.PHORONGUARD_ONLY = 1
-			plc.GENETIC_CORRUPTION = 5 //Chance of genetic corruption as well as toxic damage, X in 1000.
-			plc.SKIN_BURNS = 1       //Phoron has an effect similar to mustard gas on the un-suited.
-			plc.EYE_BURNS = 1 //Phoron burns the eyes of anyone not wearing eye protection.
-			plc.PHORON_HALLUCINATION = 1
-			plc.CONTAMINATION_LOSS = 0.075
+		if("Contaminants - Oh Shit!")
+			contaminant_control.CLOTH_CONTAMINATION = 1 //If this is on, contaminants do damage by getting into cloth.
+			contaminant_control.STRICT_PROTECTION_ONLY = 1
+			contaminant_control.GENETIC_CORRUPTION = 5 //Chance of genetic corruption as well as toxic damage, X in 1000.
+			contaminant_control.SKIN_BURNS = 1       //Contaminants have an effect similar to mustard gas on the un-suited.
+			contaminant_control.EYE_BURNS = 1 //Contaminants burn the eyes of anyone not wearing eye protection.
+			contaminant_control.CONTAMINANT_HALLUCINATION = 1
+			contaminant_control.CONTAMINATION_LOSS = 0.075
 
 		if("ZAS - Normal")
 			airflow_lightest_pressure = 20
@@ -291,7 +287,7 @@ var/global/vs_control/vsc = new
 			airflow_mob_slowdown = 3
 			connection_insulation = 0
 
-		if("ZAS/Phoron - Initial")
+		if("ZAS/Contaminants - Initial")
 			fire_consuption_rate 			= initial(fire_consuption_rate)
 			fire_firelevel_multiplier 		= initial(fire_firelevel_multiplier)
 			fire_fuel_energy_release 		= initial(fire_fuel_energy_release)
@@ -311,22 +307,22 @@ var/global/vs_control/vsc = new
 			connection_insulation 			= initial(connection_insulation)
 			connection_temperature_delta 	= initial(connection_temperature_delta)
 
-			plc.PHORON_DMG 					= initial(plc.PHORON_DMG)
-			plc.CLOTH_CONTAMINATION 		= initial(plc.CLOTH_CONTAMINATION)
-			plc.PHORONGUARD_ONLY 			= initial(plc.PHORONGUARD_ONLY)
-			plc.GENETIC_CORRUPTION 			= initial(plc.GENETIC_CORRUPTION)
-			plc.SKIN_BURNS 					= initial(plc.SKIN_BURNS)
-			plc.EYE_BURNS 					= initial(plc.EYE_BURNS)
-			plc.CONTAMINATION_LOSS 			= initial(plc.CONTAMINATION_LOSS)
-			plc.PHORON_HALLUCINATION 		= initial(plc.PHORON_HALLUCINATION)
-			plc.N2O_HALLUCINATION 			= initial(plc.N2O_HALLUCINATION)
+			contaminant_control.CONTAMINANT_DMG 					= initial(contaminant_control.CONTAMINANT_DMG)
+			contaminant_control.CLOTH_CONTAMINATION 		= initial(contaminant_control.CLOTH_CONTAMINATION)
+			contaminant_control.STRICT_PROTECTION_ONLY 			= initial(contaminant_control.STRICT_PROTECTION_ONLY)
+			contaminant_control.GENETIC_CORRUPTION 			= initial(contaminant_control.GENETIC_CORRUPTION)
+			contaminant_control.SKIN_BURNS 					= initial(contaminant_control.SKIN_BURNS)
+			contaminant_control.EYE_BURNS 					= initial(contaminant_control.EYE_BURNS)
+			contaminant_control.CONTAMINATION_LOSS 			= initial(contaminant_control.CONTAMINATION_LOSS)
+			contaminant_control.CONTAMINANT_HALLUCINATION 		= initial(contaminant_control.CONTAMINANT_HALLUCINATION)
+			contaminant_control.N2O_HALLUCINATION 			= initial(contaminant_control.N2O_HALLUCINATION)
 
 
-	to_world("<span class='notice'><b>[key_name(user)] changed the global phoron/ZAS settings to \"[def]\"</b></span>")
+	to_world("<span class='notice'><b>[key_name(user)] changed the global contaminant/ZAS settings to \"[def]\"</b></span>")
 
-/pl_control/var/list/settings = list()
+/contaminant_control/var/list/settings = list()
 
-/pl_control/New()
+/contaminant_control/New()
 	. = ..()
 	settings = vars.Copy()
 
@@ -340,7 +336,7 @@ var/global/vs_control/vsc = new
 
 	settings -= "settings"
 
-/pl_control/proc/Randomize(V)
+/contaminant_control/proc/Randomize(V)
 	var/newvalue
 	if("[V]_RANDOM" in vars)
 		if(isnum(vars["[V]_RANDOM"]))

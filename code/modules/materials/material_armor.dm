@@ -1,6 +1,6 @@
 #define BASIC_ARMOUR_VALUES list(melee = ARMOR_MELEE_MAJOR, bullet = ARMOR_BALLISTIC_RIFLE, laser = ARMOR_LASER_HEAVY, energy = ARMOR_ENERGY_STRONG, bomb = ARMOR_BOMB_RESISTANT,rad  = ARMOR_RAD_SHIELDED)
 
-/material/proc/generate_armor_values()
+/decl/material/proc/generate_armor_values()
 	if(is_brittle())
 		armor_degradation_speed = 1
 	else
@@ -25,7 +25,7 @@
 
 	basic_armor = armor
 
-/material/proc/get_armor(coef=1)
+/decl/material/proc/get_armor(coef=1)
 	if(!length(basic_armor))
 		return list()
 	var/list/armor = basic_armor.Copy()

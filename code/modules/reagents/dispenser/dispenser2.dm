@@ -117,7 +117,7 @@
 	var beakerD[0]
 	if(LAZYLEN(container?.reagents?.reagent_volumes))
 		for(var/rtype in container.reagents.reagent_volumes)
-			var/decl/reagent/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = decls_repository.get_decl(rtype)
 			beakerD[++beakerD.len] = list("name" = R.name, "volume" = REAGENT_VOLUME(container.reagents, rtype))
 	data["beakerContents"] = beakerD
 

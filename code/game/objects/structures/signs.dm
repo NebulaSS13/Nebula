@@ -6,19 +6,10 @@
 	layer = ABOVE_WINDOW_LAYER
 	w_class = ITEM_SIZE_NORMAL
 
-/obj/structure/sign/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			qdel(src)
-			return
-		if(3.0)
-			qdel(src)
-			return
-		else
-	return
+/obj/structure/sign/explosion_act(severity)
+	..()
+	if(!QDELETED(src))
+		physically_destroyed()
 
 /obj/structure/sign/attackby(obj/item/tool, mob/user)	//deconstruction
 	if(isScrewdriver(tool) && !istype(src, /obj/structure/sign/double))

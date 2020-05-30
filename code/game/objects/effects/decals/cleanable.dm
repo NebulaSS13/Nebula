@@ -1,13 +1,12 @@
 /obj/effect/decal/cleanable
 	density = FALSE
 	anchored = TRUE
-	waterproof = FALSE
+
 	var/persistent = FALSE
 	var/generic_filth = FALSE
 	var/age = 0
 	var/list/random_icon_states
 	var/image/hud_overlay/hud_overlay
-
 	var/cleanable_scent
 	var/scent_intensity = /decl/scent_intensity/normal
 	var/scent_descriptor = SCENT_DESC_SMELL
