@@ -98,54 +98,27 @@
 	body_parts_covered = FACE|EYES
 	action_button_name = "Toggle MUI"
 	origin_tech = "{'programming':5,'engineering':5}"
-	var/active = FALSE
-	var/mob/observer/eye/freelook/cameranet/eye
 
 /obj/item/clothing/mask/ai/Initialize()
 	. = ..()
-	eye = new(src)
-	eye.name_sufix = "camera MIU"
-
-/obj/item/clothing/mask/ai/Destroy()
-	if(eye)
-		if(active)
-			disengage_mask(eye.owner)
-		qdel(eye)
-		eye = null
-	..()
+	set_extension(src, /datum/extension/eye/cameranet)
 
 /obj/item/clothing/mask/ai/attack_self(var/mob/user)
 	if(user.incapacitated())
 		return
-	active = !active
-	to_chat(user, "<span class='notice'>You [active ? "" : "dis"]engage \the [src].</span>")
-	if(active)
-		engage_mask(user)
-	else
-		disengage_mask(user)
-
-/obj/item/clothing/mask/ai/equipped(var/mob/user, var/slot)
-	..(user, slot)
-	engage_mask(user)
-
-/obj/item/clothing/mask/ai/dropped(var/mob/user)
-	..()
-	disengage_mask(user)
-
-/obj/item/clothing/mask/ai/proc/engage_mask(var/mob/user)
-	if(!active)
-		return
 	if(user.get_equipped_item(slot_wear_mask) != src)
+		to_chat(user, SPAN_WARNING("You must be wearing \the [src] to activate it!"))
 		return
-
-	eye.possess(user)
-	to_chat(eye.owner, "<span class='notice'>You feel disorented for a moment as your mind connects to the camera network.</span>")
-
-/obj/item/clothing/mask/ai/proc/disengage_mask(var/mob/user)
-	if(user == eye.owner)
-		to_chat(eye.owner, "<span class='notice'>You feel disorented for a moment as your mind disconnects from the camera network.</span>")
-		eye.release(eye.owner)
-		eye.forceMove(src)
+	var/datum/extension/eye/cameranet/CN = get_extension(src, /datum/extension/eye)
+	if(!CN)
+		to_chat(user, SPAN_WARNING("\The [src] doesn't respond!"))
+		return
+	if(CN.current_looker)
+		CN.unlook()
+		to_chat(user, SPAN_NOTICE("You deactivate \the [src]."))
+	else
+		CN.look(user)
+		to_chat(user, SPAN_NOTICE("You activate \the [src]."))
 
 /obj/item/clothing/mask/rubber
 	name = "rubber mask"
