@@ -38,7 +38,7 @@
 	..()
 	if(!species) species = GLOB.using_map.default_species
 	var/species_choice = islist(species) ? pickweight(species) : species 
-	new/mob/living/carbon/human/corpse (loc, species_choice, src)
+	new /mob/living/carbon/human/corpse(loc, species_choice, src)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)

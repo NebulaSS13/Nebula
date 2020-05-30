@@ -3,15 +3,12 @@ decl/color_generator
 	var/min_random_span = -25
 	var/max_random_span = 25
 
-/decl/color_generator/proc/GenerateHex()
-	. = GenerateRGB()
-	. = rgb(.[1], .[2], .[3])
-
-/decl/color_generator/proc/GenerateRGB()
+/decl/color_generator/proc/generate_random_colour()
 	. = create_color()
 	for(var/i in 1 to 3)
 		.[i] += rand(min_random_span, max_random_span)
 		.[i] = Clamp(.[i], 0, 255)
+	. = rgb(.[1], .[2], .[3])
 
 /decl/color_generator/proc/create_color()
 	return list(HEX_RED(color), HEX_GREEN(color), HEX_BLUE(color))
