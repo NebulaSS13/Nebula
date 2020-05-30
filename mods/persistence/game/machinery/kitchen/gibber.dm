@@ -43,4 +43,4 @@
 			if(istype(thing, /obj/item/chems/food/snacks/meat))
 				var/obj/item/chems/food/snacks/meat/slab = thing
 				slab.SetName("[slab_name] [slab.name]")
-				slab.reagents.add_reagent(/decl/reagent/nutriment,slab_nutrition)
+				slab.reagents.add_reagent(/decl/material/chem/nutriment,slab_nutrition)

@@ -82,13 +82,13 @@
 /datum/wrapper/game_data/proc/on_serialize(var/datum/object)
 
 /datum/wrapper/game_data/material/New()
-	wrapper_for = /material
+	wrapper_for = /decl/material
 
 /datum/wrapper/game_data/material/on_serialize(var/mat_type)
 	key = "[mat_type]"
 
 /datum/wrapper/game_data/material/on_deserialize()
-	return SSmaterials.get_material_datum(text2path(key))
+	return SSmaterials.materials_by_name[text2path(key)]
 
 /datum/wrapper/game_data/species/New()
 	wrapper_for = /datum/species

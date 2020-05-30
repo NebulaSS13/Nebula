@@ -55,7 +55,7 @@
 		experiment.multiplier = rand(1, 3)
 		experiment.attribute = pick("instability", "efficiency", "speed", "compression", "power_efficiency")
 		experiment.tech_levels = list()
-		var/tech_list = list(TECH_MATERIAL, TECH_ENGINEERING, TECH_PHORON, TECH_BLUESPACE, TECH_BIO, TECH_COMBAT, TECH_MAGNET, TECH_DATA, TECH_ESOTERIC)
+		var/tech_list = list(TECH_MATERIAL, TECH_ENGINEERING, TECH_EXOTIC_MATTER, TECH_BLUESPACE, TECH_BIO, TECH_COMBAT, TECH_MAGNET, TECH_DATA, TECH_ESOTERIC)
 		for(var/i in 1 to 3)
 			experiment.tech_levels[pick_n_take(tech_list)] = 1 + rand(0, experiment.multiplier * 3)
 		experiments += weakref(experiment)
@@ -75,8 +75,8 @@
 	var/list/materials = list()
 	var/list/resources = get_resources()
 	for(var/mat_type in resources)
-		var/material/mat = SSmaterials.get_material_datum(mat_type)
-		materials += "[resources[mat_type]]x [mat.display_name]"
+		var/decl/material/mat = SSmaterials.materials_by_name[mat_type]
+		materials += "[resources[mat_type]]x [mat.name]"
 	.+= "Materials: [english_list(materials)]"
 
 	. = jointext(.,"<br>")

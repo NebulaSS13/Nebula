@@ -2,7 +2,7 @@
 	name = "engineering kit"
 	icon_state = "survival"
 	startswith = list(
-		/obj/item/storage/toolbox/engistart = 1,
+		/obj/item/storage/toolbox/mechanical = 1,
 		/obj/item/clothing/head/welding = 1,
 		/obj/item/taperoll/engineering = 1
 	)

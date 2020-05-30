@@ -207,7 +207,7 @@ obj/machinery/resleever/Process()
 	lace.forceMove(loc)
 	lace = null
 
-/obj/machinery/resleever/ex_act(severity)
+/obj/machinery/resleever/explosion_act(severity)
 	var/killprob = 100
 	switch(severity)
 		if(2)
@@ -217,7 +217,7 @@ obj/machinery/resleever/Process()
 	if(prob(killprob))
 		for(var/atom/movable/A in src)
 			A.forceMove(loc)
-			A.ex_act(severity)
+			A.explosion_act(severity)
 		qdel(src)
 
 /obj/machinery/resleever/relaymove()
