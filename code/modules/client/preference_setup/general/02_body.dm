@@ -49,6 +49,32 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.preview_icon = null
 	from_file(S["bgstate"], pref.bgstate)
 
+	// Grandfathering in older saves post colour rewrite.
+	var/r = 0
+	var/g = 0
+	var/b = 0
+	if(!pref.hair_colour || pref.hair_colour == COLOR_BLACK)
+		from_file(S["hair_red"],     r)
+		from_file(S["hair_green"],   g)
+		from_file(S["hair_blue"],    b)
+		pref.hair_colour = rgb(r, g, b)
+	if(!pref.facial_hair_colour || pref.facial_hair_colour == COLOR_BLACK)
+		from_file(S["facial_red"],   r)
+		from_file(S["facial_green"], g)
+		from_file(S["facial_blue"],  g)
+		pref.facial_hair_colour = rgb(r, g, b)
+	if(!pref.skin_colour || pref.skin_colour == COLOR_BLACK)
+		from_file(S["skin_red"],     r)
+		from_file(S["skin_green"],   g)
+		from_file(S["skin_blue"],    b)
+		pref.skin_colour = rgb(r, g, b)
+	if(!pref.eye_colour || pref.eye_colour == COLOR_BLACK)
+		from_file(S["eyes_red"],     r)
+		from_file(S["eyes_green"],   g)
+		from_file(S["eyes_blue"],    b)
+		pref.eye_colour = rgb(r, g, b)
+	// End grandfathering.
+
 /datum/category_item/player_setup_item/physical/body/save_character(var/savefile/S)
 	to_file(S["species"], pref.species)
 	to_file(S["skin_tone"], pref.skin_tone)
