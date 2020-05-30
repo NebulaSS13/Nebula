@@ -129,21 +129,21 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		character.f_style = "Shaved"
 	var/beard	= GLOB.facial_hair_styles_list.Find(character.f_style)
 
-	SetUIValueRange(DNA_UI_HAIR_R,    hex2num(copytext(character.hair_colour, 2, 4)),    255,    1)
-	SetUIValueRange(DNA_UI_HAIR_G,    hex2num(copytext(character.hair_colour, 4, 6)),    255,    1)
-	SetUIValueRange(DNA_UI_HAIR_B,    hex2num(copytext(character.hair_colour, 6, 8)),    255,    1)
+	SetUIValueRange(DNA_UI_HAIR_R,  HEX_RED(character.hair_colour),   255, 1)
+	SetUIValueRange(DNA_UI_HAIR_G,  HEX_GREEN(character.hair_colour), 255, 1)
+	SetUIValueRange(DNA_UI_HAIR_B,  HEX_BLUE(character.hair_colour),  255, 1)
 
-	SetUIValueRange(DNA_UI_BEARD_R,   hex2num(copytext(character.hair_colour, 2, 4)),  255,    1)
-	SetUIValueRange(DNA_UI_BEARD_G,   hex2num(copytext(character.hair_colour, 4, 6)),  255,    1)
-	SetUIValueRange(DNA_UI_BEARD_B,   hex2num(copytext(character.hair_colour, 6, 8)),  255,    1)
+	SetUIValueRange(DNA_UI_BEARD_R, HEX_RED(character.hair_colour),   255, 1)
+	SetUIValueRange(DNA_UI_BEARD_G, HEX_GREEN(character.hair_colour), 255, 1)
+	SetUIValueRange(DNA_UI_BEARD_B, HEX_BLUE(character.hair_colour),  255, 1)
 
-	SetUIValueRange(DNA_UI_EYES_R,    hex2num(copytext(character.eye_colour, 2, 4)),    255,    1)
-	SetUIValueRange(DNA_UI_EYES_G,    hex2num(copytext(character.eye_colour, 4, 6)),    255,    1)
-	SetUIValueRange(DNA_UI_EYES_B,    hex2num(copytext(character.eye_colour, 6, 8)),    255,    1)
+	SetUIValueRange(DNA_UI_EYES_R,  HEX_RED(character.eye_colour),    255, 1)
+	SetUIValueRange(DNA_UI_EYES_G,  HEX_GREEN(character.eye_colour),  255, 1)
+	SetUIValueRange(DNA_UI_EYES_B,  HEX_BLUE(character.eye_colour),   255, 1)
 
-	SetUIValueRange(DNA_UI_SKIN_R,    hex2num(copytext(character.skin_colour, 2, 4)),    255,    1)
-	SetUIValueRange(DNA_UI_SKIN_G,    hex2num(copytext(character.skin_colour, 4, 6)),    255,    1)
-	SetUIValueRange(DNA_UI_SKIN_B,    hex2num(copytext(character.skin_colour, 6, 8)),    255,    1)
+	SetUIValueRange(DNA_UI_SKIN_R,  HEX_RED(character.skin_colour),   255, 1)
+	SetUIValueRange(DNA_UI_SKIN_G,  HEX_GREEN(character.skin_colour), 255, 1)
+	SetUIValueRange(DNA_UI_SKIN_B,  HEX_BLUE(character.skin_colour),  255, 1)
 
 	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.skin_tone, 220,    1) // Value can be negative.
 

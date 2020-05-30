@@ -14,7 +14,7 @@ decl/color_generator
 		.[i] = Clamp(.[i], 0, 255)
 
 /decl/color_generator/proc/create_color()
-	return GetHexColors(color)
+	return list(HEX_RED(color), HEX_GREEN(color), HEX_BLUE(color))
 
 /decl/color_generator/albino_eye/create_color()
 	return list(rand(200, 255), rand(0, 150), rand(0, 150))

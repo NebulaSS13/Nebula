@@ -170,9 +170,9 @@
 // Decompile the hexadecimal colour into lumcounts of each perspective.
 /datum/light_source/proc/parse_light_color()
 	if(light_color)
-		lum_r = GetRedPart  (light_color) / 255
-		lum_g = GetGreenPart(light_color) / 255
-		lum_b = GetBluePart (light_color) / 255
+		lum_r = HEX_RED(light_color) / 255
+		lum_g = HEX_GREEN(light_color) / 255
+		lum_b = HEX_BLUE(light_color) / 255
 	else
 		lum_r = 1
 		lum_g = 1
