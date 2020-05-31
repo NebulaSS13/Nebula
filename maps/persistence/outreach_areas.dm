@@ -16,6 +16,14 @@
 	icon_state = "hallA"
 	name = "\improper Hallways"
 
+/area/outreach/outpost/judges
+	name = "judges room"
+	icon_state = "security"
+
+/area/outreach/outpost/computer
+	name = "computer room"
+	icon_state = "comp room"
+
 /area/outreach/outpost/engineering
 	icon_state = "engine_smes"
 	name = "\improper Engineering"
