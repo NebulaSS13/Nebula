@@ -1,5 +1,6 @@
-var/list/strata_by_z = list()
-var/list/strata_material_by_z = list()
+var/list/default_strata_type_by_z = list()
+var/list/default_material_by_strata_and_z = list()
+
 var/list/natural_walls = list()
 /turf/simulated/wall/natural
 	name = "wall"
@@ -17,15 +18,15 @@ var/list/natural_walls = list()
 /turf/simulated/wall/natural/Initialize()
 	if(!material)
 		if(!strata)
-			if(!global.strata_by_z["z"])
-				global.strata_by_z["z"] = pick(/decl/strata/sedimentary, /decl/strata/metamorphic, /decl/strata/igneous)
-			strata = global.strata_by_z["z"]
+			if(!global.default_strata_type_by_z["z"])
+				global.default_strata_type_by_z["z"] = pick(/decl/strata/sedimentary, /decl/strata/metamorphic, /decl/strata/igneous)
+			strata = global.default_strata_type_by_z["z"]
 		var/skey = "[strata]-[z]"
-		if(!global.strata_material_by_z[skey])
+		if(!global.default_material_by_strata_and_z[skey])
 			var/decl/strata/strata_info = decls_repository.get_decl(strata)
 			if(length(strata_info.base_materials))
-				strata_material_by_z[skey] = pick(strata_info.base_materials)
-		material = strata_material_by_z[skey]
+				default_material_by_strata_and_z[skey] = pick(strata_info.base_materials)
+		material = default_material_by_strata_and_z[skey]
 	. = ..()
 	global.natural_walls += src
 	set_extension(src, /datum/extension/geological_data)
