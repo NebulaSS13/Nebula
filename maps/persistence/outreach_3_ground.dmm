@@ -3,8 +3,8 @@
 /turf/unsimulated/map{
 	icon = 'icons/turf/flooring/asteroid.dmi';
 	icon_state = "asteroid";
-	initial_gas = list(/material/gas/chlorine = 41.8366, /material/gas/carbon_dioxide = 22.1472);
-	name = /material/gas/chlorine
+	initial_gas = list(/decl/material/gas/chlorine = 41.8366, /decl/material/gas/carbon_dioxide = 22.1472);
+	name = /decl/material/gas/chlorine
 	},
 /area/exoplanet/chlorine)
 "ab" = (
@@ -19,6 +19,27 @@
 	icon_state = "asteroid"
 	},
 /area/exoplanet/chlorine)
+"ae" = (
+/obj/machinery/vending/infini/botany{
+	icon_state = "nutri";
+	dir = 1
+	},
+/turf/simulated/floor/exoplanet/barren,
+/area/outreach/outpost/barracks/lower)
+"af" = (
+/obj/machinery/vending/infini/industrial{
+	icon_state = "tool";
+	dir = 1
+	},
+/turf/simulated/floor/exoplanet/barren,
+/area/outreach/outpost/barracks/lower)
+"ag" = (
+/obj/machinery/vending/infini/science{
+	icon_state = "med";
+	dir = 1
+	},
+/turf/simulated/floor/exoplanet/barren,
+/area/outreach/outpost/barracks/lower)
 "ah" = (
 /turf/simulated/wall/r_titanium,
 /area/outreach/outpost/sleeproom)
@@ -37,12 +58,29 @@
 	},
 /turf/simulated/floor/plating,
 /area/outreach/outpost/maint)
+"al" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/filth,
+/obj/machinery/vending/infini/botany,
+/turf/simulated/floor/tiled,
+/area/outreach/outpost/hallway)
 "am" = (
 /obj/machinery/cryopod{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/outreach/outpost/sleeproom)
+"an" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/filth,
+/obj/machinery/vending/infini/industrial,
+/turf/simulated/floor/tiled,
+/area/outreach/outpost/hallway)
+"ao" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/vending/infini/science,
+/turf/simulated/floor/tiled,
+/area/outreach/outpost/hallway)
 "ap" = (
 /turf/simulated/wall/r_titanium,
 /area/outreach/outpost/hallway)
@@ -546,8 +584,8 @@
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/oxygen = 50000);
-	name = /material/gas/oxygen
+	initial_gas = list(/decl/material/gas/oxygen = 50000);
+	name = /decl/material/gas/oxygen
 	},
 /area/outreach/outpost/atmospherics)
 "dJ" = (
@@ -608,23 +646,23 @@
 /turf/simulated/floor/plating,
 /area/outreach/outpost/atmospherics)
 "dW" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/hidden/green,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/atmospherics)
 "dX" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/atmospherics)
 "dY" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/hidden/blue,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/atmospherics)
 "ea" = (
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/oxygen = 210.837, /material/gas/nitrogen = 820.147);
+	initial_gas = list(/decl/material/gas/oxygen = 210.837, /decl/material/gas/nitrogen = 820.147);
 	name = "air"
 	},
 /area/outreach/outpost/atmospherics)
@@ -643,20 +681,20 @@
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/oxygen = 210.837, /material/gas/nitrogen = 820.147);
+	initial_gas = list(/decl/material/gas/oxygen = 210.837, /decl/material/gas/nitrogen = 820.147);
 	name = "air"
 	},
 /area/outreach/outpost/atmospherics)
 "eg" = (
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/oxygen = 50000);
-	name = /material/gas/oxygen
+	initial_gas = list(/decl/material/gas/oxygen = 50000);
+	name = /decl/material/gas/oxygen
 	},
 /area/outreach/outpost/atmospherics)
 "eh" = (
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/nitrogen = 90000);
-	name = /material/gas/nitrogen
+	initial_gas = list(/decl/material/gas/nitrogen = 90000);
+	name = /decl/material/gas/nitrogen
 	},
 /area/outreach/outpost/atmospherics)
 "ej" = (
@@ -694,8 +732,8 @@
 	identifier = "o2_sensor"
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/oxygen = 50000);
-	name = /material/gas/oxygen
+	initial_gas = list(/decl/material/gas/oxygen = 50000);
+	name = /decl/material/gas/oxygen
 	},
 /area/outreach/outpost/atmospherics)
 "eY" = (
@@ -981,8 +1019,8 @@
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/oxygen = 50000);
-	name = /material/gas/oxygen
+	initial_gas = list(/decl/material/gas/oxygen = 50000);
+	name = /decl/material/gas/oxygen
 	},
 /area/outreach/outpost/atmospherics)
 "gR" = (
@@ -1000,7 +1038,7 @@
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/oxygen = 210.837, /material/gas/nitrogen = 820.147);
+	initial_gas = list(/decl/material/gas/oxygen = 210.837, /decl/material/gas/nitrogen = 820.147);
 	name = "air"
 	},
 /area/outreach/outpost/atmospherics)
@@ -1019,8 +1057,8 @@
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/nitrogen = 90000);
-	name = /material/gas/nitrogen
+	initial_gas = list(/decl/material/gas/nitrogen = 90000);
+	name = /decl/material/gas/nitrogen
 	},
 /area/outreach/outpost/atmospherics)
 "gT" = (
@@ -1030,8 +1068,8 @@
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/nitrogen = 90000);
-	name = /material/gas/nitrogen
+	initial_gas = list(/decl/material/gas/nitrogen = 90000);
+	name = /decl/material/gas/nitrogen
 	},
 /area/outreach/outpost/atmospherics)
 "gU" = (
@@ -1039,7 +1077,7 @@
 	id_tag = "air_sensor"
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/oxygen = 210.837, /material/gas/nitrogen = 820.147);
+	initial_gas = list(/decl/material/gas/oxygen = 210.837, /decl/material/gas/nitrogen = 820.147);
 	name = "air"
 	},
 /area/outreach/outpost/atmospherics)
@@ -1048,8 +1086,8 @@
 	id_tag = "n2_sensor"
 	},
 /turf/simulated/floor/reinforced{
-	initial_gas = list(/material/gas/nitrogen = 90000);
-	name = /material/gas/nitrogen
+	initial_gas = list(/decl/material/gas/nitrogen = 90000);
+	name = /decl/material/gas/nitrogen
 	},
 /area/outreach/outpost/atmospherics)
 "gW" = (
@@ -1439,14 +1477,14 @@
 /area/outreach/outpost/it)
 "iD" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/outreach/outpost/it)
 "iE" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
 	},
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/outreach/outpost/it)
@@ -2156,9 +2194,7 @@
 /turf/simulated/floor/exoplanet/barren,
 /area/outreach/outpost/barracks/lower)
 "qQ" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	
-	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/wood/mahogany,
 /area/outreach/outpost/barracks/lower)
@@ -3138,7 +3174,7 @@
 /turf/simulated/wall/r_titanium,
 /area/outreach/outpost/hallway)
 "Ok" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/plating,
 /area/outreach/outpost/atmospherics)
@@ -3177,7 +3213,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/outreach/outpost/barracks/lower)
 "PW" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/outreach/outpost/it)
 "Qc" = (
@@ -26806,7 +26842,7 @@ az
 az
 az
 ap
-Eh
+al
 Eh
 aq
 BF
@@ -27008,7 +27044,7 @@ az
 az
 az
 ap
-Eh
+an
 Eh
 aq
 BF
@@ -27210,7 +27246,7 @@ az
 az
 az
 ap
-aq
+ao
 aq
 aq
 BF
@@ -28209,7 +28245,7 @@ ab
 ab
 ab
 ac
-qF
+ae
 aM
 jN
 eY
@@ -28411,7 +28447,7 @@ ab
 ab
 ab
 ab
-qF
+af
 aM
 jN
 eY
@@ -28613,7 +28649,7 @@ ab
 ab
 ab
 ab
-qF
+ag
 aM
 aM
 aM
