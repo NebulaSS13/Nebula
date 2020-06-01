@@ -122,6 +122,7 @@
 	desc = "A refrigerated vending unit for alcoholic beverages and alcoholic beverage accessories."
 	icon_state = "fridge_dark"
 	icon_deny = "fridge_dark-deny"
+	markup = 0
 	products = list(
 		/obj/item/chems/food/drinks/glass2/square = 10,
 		/obj/item/chems/food/drinks/flask/barflask = 5,

@@ -6,6 +6,7 @@
 	icon_deny = "med-deny"
 	icon_vend = "med-vend"
 	vend_delay = 18
+	markup = 0
 	base_type = /obj/machinery/vending/medical
 	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
 	initial_access = list(access_medical_equip)

@@ -23,6 +23,7 @@
 	icon_state = "dinnerware"
 	icon_vend = "dinnerware-vend"
 	icon_deny = "dinnerware-deny"
+	markup = 0
 	base_type = /obj/machinery/vending/dinnerware
 	products = list(
 		/obj/item/chems/glass/beaker/bowl =2,
