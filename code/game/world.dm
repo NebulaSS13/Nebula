@@ -88,6 +88,8 @@
 	load_mods()
 	//end-emergency fix
 
+	TgsNew()
+
 	. = ..()
 
 #ifdef UNIT_TEST
@@ -95,6 +97,7 @@
 	load_unit_test_changes()
 #endif
 	Master.Initialize(10, FALSE)
+	TgsInitializationComplete()
 
 #undef RECOMMENDED_VERSION
 
@@ -102,6 +105,7 @@ var/world_topic_spam_protect_ip = "0.0.0.0"
 var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
+	TGS_TOPIC
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
 
 	if (T == "ping")
@@ -449,6 +453,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 /world/Reboot(var/reason)
+	TgsReboot()
 	/*spawn(0)
 		sound_to(world, sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')))// random end sounds!! - LastyBatsy
 

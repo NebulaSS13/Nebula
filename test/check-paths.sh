@@ -30,9 +30,9 @@ exactly 2 "/datum text paths" '"/datum'
 exactly 2 "/mob text paths" '"/mob'
 exactly 8 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
-exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
-exactly 1 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
-exactly 182 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 2 "world<< uses" 'world<<|world[[:space:]]<<'
+exactly 5 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
+exactly 187 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 21 "text2path uses" 'text2path'
 exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
