@@ -93,6 +93,7 @@
 /obj/structure/noticeboard/attackby(var/obj/item/thing, var/mob/user)
 	. = ..()
 	if(!.)
+
 		if(isScrewdriver(thing))
 			var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
 			if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
@@ -110,19 +111,19 @@
 					if("West")
 						pixel_x = -32
 						pixel_y = 0
-			return
-		else if(istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo))
+			return TRUE
+
+		if(!istype(thing, /obj/item/paper/sticky) && (istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo)))
 			if(jobban_isbanned(user, "Graffiti"))
 				to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
+			else if(LAZYLEN(notices) < max_notices && user.unEquip(thing, src))
+				add_fingerprint(user)
+				add_paper(thing)
+				to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
+				SSpersistence.track_value(thing, /datum/persistent/paper)
 			else
-				if(LAZYLEN(notices) < max_notices && user.unEquip(thing, src))
-					add_fingerprint(user)
-					add_paper(thing)
-					to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
-					SSpersistence.track_value(thing, /datum/persistent/paper)
-				else
-					to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
-			return
+				to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
+			return TRUE
 
 /obj/structure/noticeboard/attack_ai(var/mob/user)
 	examine(user)
