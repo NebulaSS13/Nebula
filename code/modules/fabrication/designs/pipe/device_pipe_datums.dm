@@ -9,6 +9,7 @@
 	build_icon_state = "connector"
 	constructed_path = /obj/machinery/atmospherics/portables_connector
 	pipe_class = PIPE_CLASS_UNARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/device/adapter
 	name = "universal pipe adapter"
