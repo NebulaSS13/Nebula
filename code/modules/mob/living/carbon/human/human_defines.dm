@@ -1,29 +1,15 @@
 /mob/living/carbon/human
 
-	//Hair colour and style
-	var/r_hair = 0
-	var/g_hair = 0
-	var/b_hair = 0
 	var/h_style = "Bald"
-
-	//Facial hair colour and style
-	var/r_facial = 0
-	var/g_facial = 0
-	var/b_facial = 0
 	var/f_style = "Shaved"
 
-	//Eye colour
-	var/r_eyes = 0
-	var/g_eyes = 0
-	var/b_eyes = 0
+	var/hair_colour
+	var/facial_hair_colour
+	var/skin_colour
+	var/eye_colour
 
-	var/s_tone = 0  //Skin tone
-	var/s_base = "" //Skin base
-
-	//Skin colour
-	var/r_skin = 0
-	var/g_skin = 0
-	var/b_skin = 0
+	var/skin_tone = 0  //Skin tone
+	var/skin_base = "" //Skin base
 
 	var/size_multiplier = 1 //multiplier for the mob's icon size
 	var/damage_multiplier = 1 //multiplies melee combat damage

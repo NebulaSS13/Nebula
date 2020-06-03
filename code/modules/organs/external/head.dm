@@ -128,8 +128,8 @@
 			if(!facial_hair_style.species_allowed || (species.get_root_species_name(owner) in facial_hair_style.species_allowed))
 				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
 					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-					if(facial_hair_style.do_colouration)
-						facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
+					if(owner.facial_hair_colour && facial_hair_style.do_colouration)
+						facial_s.Blend(owner.facial_hair_colour, facial_hair_style.blend)
 					res.overlays |= facial_s
 
 	if(owner.h_style)
@@ -142,8 +142,8 @@
 			if(!hair_style.species_allowed || (species.get_root_species_name(owner) in hair_style.species_allowed))
 				if(!hair_style.subspecies_allowed || (species.name in hair_style.subspecies_allowed))
 					var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-					if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
-						hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), hair_style.blend)
+					if(hair_style.do_colouration && hair_colour)
+						hair_s.Blend(hair_colour, hair_style.blend)
 					res.overlays |= hair_s
 
 	for (var/M in markings)
@@ -152,10 +152,10 @@
 			var/icon/mark_icon = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]")
 			if (!mark_style.do_colouration && owner.h_style)
 				var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[owner.h_style]
-				if ((~hair_style.flags & HAIR_BALD) && islist(h_col) && h_col.len >= 3)
-					mark_icon.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
+				if ((~hair_style.flags & HAIR_BALD) && hair_colour)
+					mark_icon.Blend(hair_colour, ICON_ADD)
 				else //only baseline human skin tones; others will need species vars for coloration
-					mark_icon.Blend(rgb(200 + s_tone, 150 + s_tone, 123 + s_tone), ICON_ADD)
+					mark_icon.Blend(rgb(200 + skin_tone, 150 + skin_tone, 123 + skin_tone), ICON_ADD)
 			else
 				mark_icon.Blend(markings[M]["color"], ICON_ADD)
 			res.overlays |= mark_icon

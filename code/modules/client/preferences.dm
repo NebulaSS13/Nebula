@@ -160,26 +160,18 @@ datum/preferences
 	character.age = age
 	character.b_type = b_type
 
-	character.r_eyes = r_eyes
-	character.g_eyes = g_eyes
-	character.b_eyes = b_eyes
+	character.eye_colour = eye_colour
 
 	character.h_style = h_style
-	character.r_hair = r_hair
-	character.g_hair = g_hair
-	character.b_hair = b_hair
+	character.hair_colour = hair_colour
 
 	character.f_style = f_style
-	character.r_facial = r_facial
-	character.g_facial = g_facial
-	character.b_facial = b_facial
+	character.facial_hair_colour = facial_hair_colour
 
-	character.r_skin = r_skin
-	character.g_skin = g_skin
-	character.b_skin = b_skin
+	character.skin_colour = skin_colour
 
-	character.s_tone = s_tone
-	character.s_base = s_base
+	character.skin_tone = skin_tone
+	character.skin_base = skin_base
 
 	character.h_style = h_style
 	character.f_style = f_style
