@@ -172,13 +172,13 @@
 
 /obj/structure/table/proc/update_desc()
 	if(material)
-		name = "[material.name] table"
+		name = "[material.solid_name] table"
 	else
 		name = "table frame"
 
 	if(reinf_material)
 		name = "reinforced [name]"
-		desc = "[initial(desc)] This one seems to be reinforced with [reinf_material.name]."
+		desc = "[initial(desc)] This one seems to be reinforced with [reinf_material.solid_name]."
 	else
 		desc = initial(desc)
 
@@ -191,11 +191,11 @@
 
 	if(manipulating) return M
 	manipulating = 1
-	to_chat(user, "<span class='notice'>You begin [verb]ing \the [src] with [M.name].</span>")
+	to_chat(user, "<span class='notice'>You begin [verb]ing \the [src] with [M.solid_name].</span>")
 	if(!do_after(user, 20, src) || !S.use(1))
 		manipulating = 0
 		return null
-	user.visible_message("<span class='notice'>\The [user] [verb]es \the [src] with [M.name].</span>", "<span class='notice'>You finish [verb]ing \the [src].</span>")
+	user.visible_message("<span class='notice'>\The [user] [verb]es \the [src] with [M.solid_name].</span>", "<span class='notice'>You finish [verb]ing \the [src].</span>")
 	manipulating = 0
 	return M
 
@@ -207,15 +207,15 @@
 
 	if(manipulating) return M
 	manipulating = 1
-	user.visible_message("<span class='notice'>\The [user] begins removing the [type_holding] holding \the [src]'s [M.name] [what] in place.</span>",
-	                              "<span class='notice'>You begin removing the [type_holding] holding \the [src]'s [M.name] [what] in place.</span>")
+	user.visible_message("<span class='notice'>\The [user] begins removing the [type_holding] holding \the [src]'s [M.solid_name] [what] in place.</span>",
+	                              "<span class='notice'>You begin removing the [type_holding] holding \the [src]'s [M.solid_name] [what] in place.</span>")
 	if(sound)
 		playsound(src.loc, sound, 50, 1)
 	if(!do_after(user, 40, src))
 		manipulating = 0
 		return M
-	user.visible_message("<span class='notice'>\The [user] removes the [M.name] [what] from \the [src].</span>",
-	                              "<span class='notice'>You remove the [M.name] [what] from \the [src].</span>")
+	user.visible_message("<span class='notice'>\The [user] removes the [M.solid_name] [what] from \the [src].</span>",
+	                              "<span class='notice'>You remove the [M.solid_name] [what] from \the [src].</span>")
 	M.place_sheet(src.loc)
 	manipulating = 0
 	return null
@@ -313,7 +313,7 @@
 			I.color = material.icon_colour
 			I.alpha = 255 * material.opacity
 			overlays += I
-			name = "[material.name] table"
+			name = "[material.solid_name] table"
 		else
 			name = "table frame"
 		if(reinf_material)

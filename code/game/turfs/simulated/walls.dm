@@ -32,20 +32,28 @@
 	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
 /turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
-	. = ..(ml)
-	icon_state = "blank"
-	if(!materialtype)
-		materialtype = DEFAULT_WALL_MATERIAL
-	material = decls_repository.get_decl(materialtype)
-	if(!isnull(rmaterialtype))
-		reinf_material = decls_repository.get_decl(rmaterialtype)
+	..(ml)
+
+	if(!ispath(material, /decl/material))
+		material = materialtype || get_default_material()
+	if(ispath(material, /decl/material))
+		material = decls_repository.get_decl(material)
+
+	if(!ispath(reinf_material, /decl/material))
+		reinf_material = rmaterialtype
+	if(ispath(reinf_material, /decl/material))
+		reinf_material = decls_repository.get_decl(reinf_material)
+
 	if(ispath(girder_material, /decl/material))
 		girder_material = decls_repository.get_decl(girder_material)
-	update_material()
-	hitsound = material.hitsound
 
+	. = INITIALIZE_HINT_LATELOAD
 	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	START_PROCESSING(SSturf, src) //Used for radiation.
+
+/turf/simulated/wall/LateInitialize()
+	..()
+	update_material()
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
@@ -131,12 +139,14 @@
 		else
 			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
 	if(paint_color)
-		to_chat(user, "<span class='notice'>It has a coat of paint applied.</span>")
+		to_chat(user, get_paint_examine_message())
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
 
-//Damage
+/turf/simulated/wall/proc/get_paint_examine_message()
+	. = SPAN_NOTICE("It has had <font color = '[paint_color]'>a coat of paint</font> applied.")
 
+//Damage
 /turf/simulated/wall/melt()
 	if(can_melt())
 		var/turf/simulated/floor/F = ChangeTurf(/turf/simulated/floor/plating)
@@ -202,7 +212,7 @@
 /turf/simulated/wall/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	if(severity == 1)
-		ChangeTurf(get_base_turf(src.z))
+		dismantle_wall(1,1,1)
 	else if(severity == 2)
 		if(prob(75))
 			take_damage(rand(150, 250))

@@ -232,9 +232,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	set background = 1
 	set waitfor = 0
 
-	for(var/thing in mining_walls["[zlevel]"])
-		var/turf/simulated/mineral/M = thing
-		M.update_icon()
 	for(var/thing in mining_floors["[zlevel]"])
 		var/turf/simulated/floor/asteroid/M = thing
 		if(istype(M))

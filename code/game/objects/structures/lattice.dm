@@ -28,9 +28,9 @@
 
 /obj/structure/lattice/update_material_desc()
 	if(material)
-		desc = "A lightweight support [material.name] lattice."
+		desc = "A lightweight support [material.solid_name] lattice."
 	else
-		desc = "A lightweight support [material.name] lattice."
+		desc = "A lightweight support [material.solid_name] lattice."
 
 /obj/structure/lattice/Destroy()
 	var/turf/old_loc = get_turf(src)

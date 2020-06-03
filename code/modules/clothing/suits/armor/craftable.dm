@@ -16,8 +16,8 @@
 
 /obj/item/clothing/suit/armor/crafted/proc/update_strings()
 	if(material)
-		name = "improvised [material.name] armour"
-		desc = "An improvised set of armour. This set is made out of [material.name]."
+		name = "improvised [material.solid_name] armour"
+		desc = "An improvised set of armour. This set is made out of [material.solid_name]."
 	else
 		name = initial(name)
 		desc = initial(desc)

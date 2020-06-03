@@ -7,10 +7,10 @@
 	parent_organ = BP_HEAD
 	surface_accessible = TRUE
 	relative_size = 5
+	max_damage = 45
 	var/contaminant_guard = 0
 	var/eye_colour = COLOR_BLACK
 	var/innate_flash_protection = FLASH_PROTECTION_NONE
-	max_damage = 45
 	var/eye_icon = 'icons/mob/human_races/species/default_eyes.dmi'
 	var/apply_eye_colour = TRUE
 	var/tmp/last_cached_eye_colour

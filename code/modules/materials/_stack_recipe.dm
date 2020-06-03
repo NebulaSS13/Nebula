@@ -37,9 +37,11 @@
 /datum/stack_recipe/proc/display_name()
 	if(!use_material || !apply_material_name)
 		return title
-	. = "[material_display_name(use_material)] [title]"
+	var/decl/material/material = decls_repository.get_decl(use_material)
+	. = "[material.solid_name] [title]"
 	if(use_reinf_material)
-		. = "[material_display_name(use_reinf_material)]-reinforced [.]"
+		material = decls_repository.get_decl(use_reinf_material)
+		. = "[material.solid_name]-reinforced [.]"
 
 /datum/stack_recipe/proc/spawn_result(mob/user, location, amount)
 	var/atom/O

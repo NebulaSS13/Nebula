@@ -11,7 +11,7 @@
 /obj/item/material/ashtray/examine(mob/user)
 	. = ..()
 	if(material)
-		to_chat(user, "It's made of [material.name].")
+		to_chat(user, "It's made of [material.solid_name].")
 	if(contents.len >= max_butts)
 		to_chat(user, "It's full.")
 	else if(contents.len)

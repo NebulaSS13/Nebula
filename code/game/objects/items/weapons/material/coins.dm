@@ -38,7 +38,7 @@
 
 	icon_state = "coin[rand(1,10)]"
 	if(material)
-		desc = "A rather thick coin stamped out of [material.name]."
+		desc = "A rather thick coin stamped out of [material.solid_name]."
 	else
 		desc = "A rather thick coin."
 

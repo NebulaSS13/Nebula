@@ -212,7 +212,7 @@
 			desc_comp += "<span class='notice'>Extractable materials:</span><BR>"
 			for(var/mat in matter)
 				var/decl/material/M = decls_repository.get_decl(mat)
-				desc_comp += "[capitalize(M.name)]<BR>"
+				desc_comp += "[capitalize(M.solid_name)]<BR>"
 		else
 			desc_comp += "<span class='danger'>No extractable materials detected.</span><BR>"
 		desc_comp += "*--------*"
@@ -969,7 +969,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(force >= 10 && !sharp && !edge)
 		descriptors += "heavy"
 	if(material)
-		descriptors += "made of [material.name]"
+		descriptors += "made of [material.solid_name]"
 	return descriptors
 
 /obj/item/proc/attack_message_name()

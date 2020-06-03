@@ -31,9 +31,6 @@
 	var/turf/simulated/wall/W = get_turf(src)
 	if(istype(W))
 		W.dismantle_wall(1,1,1)
-	var/turf/simulated/mineral/M = W
-	if(istype(M))
-		M.GetDrilled()
 	. = ..()
 
 //Applies fire act to the turf

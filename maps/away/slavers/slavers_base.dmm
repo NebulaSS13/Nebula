@@ -18,7 +18,7 @@
 /turf/space,
 /area/space)
 "af" = (
-/turf/simulated/mineral,
+/turf/simulated/wall/natural,
 /area/space)
 "ag" = (
 /turf/simulated/floor/asteroid,

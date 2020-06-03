@@ -27,8 +27,8 @@
 /obj/item/depth_scanner/proc/scan_atom(var/mob/user, var/atom/A)
 	user.visible_message("<span class='notice'>\The [user] scans \the [A], the air around them humming gently.</span>")
 
-	if(istype(A, /turf/simulated/mineral))
-		var/turf/simulated/mineral/M = A
+	if(istype(A, /turf/simulated/wall/natural))
+		var/turf/simulated/wall/natural/M = A
 		if((M.finds && M.finds.len) || M.artifact_find)
 
 			//create a new scanlog entry
@@ -36,7 +36,7 @@
 			D.coords = "[M.x]:[M.y]:[M.z]"
 			D.time = stationtime2text()
 			D.record_index = positive_locations.len + 1
-			D.material = M.mineral ? M.mineral.ore_name : "Rock"
+			D.material = M.reinf_material?.ore_name || "Rock"
 
 			//find the first artifact and store it
 			if(M.finds.len)

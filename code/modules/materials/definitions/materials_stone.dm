@@ -80,6 +80,16 @@
 	stack_type = /obj/item/stack/material/marble
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
+/decl/material/stone/basalt
+	name = "basalt"
+	lore_text = "A ubiquitous volcanic stone."
+	icon_colour = COLOR_DARK_GRAY
+	stack_type = /obj/item/stack/material/generic
+	weight = MAT_VALUE_VERY_HEAVY
+	hardness = MAT_VALUE_HARD
+	reflectiveness = MAT_VALUE_SHINY
+	construction_difficulty = MAT_VALUE_HARD_DIY
+
 /decl/material/stone/concrete
 	name = "concrete"
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."

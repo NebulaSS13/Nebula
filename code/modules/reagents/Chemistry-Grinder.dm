@@ -103,7 +103,7 @@
 		var/obj/item/stack/material/stack = O
 		var/decl/material/material = stack.get_material()
 		if(!LAZYLEN(material.chemical_makeup))
-			to_chat(user, SPAN_NOTICE("\The [material.name] cannot be ground down to any usable reagents."))
+			to_chat(user, SPAN_NOTICE("\The [material.solid_name] cannot be ground down to any usable reagents."))
 			return TRUE
 
 	else if(!O.reagents?.total_volume)

@@ -109,8 +109,8 @@
 
 /decl/environment_data/finnish/Initialize()
 	. = ..()
-	important_gasses[MAT_STEAM] = TRUE
-	dangerous_gasses -= MAT_STEAM
+	important_gasses[MAT_WATER] = TRUE
+	dangerous_gasses -= MAT_WATER
 
 /obj/machinery/alarm/warm
 	target_temperature = T0C+75
@@ -510,7 +510,7 @@
 		for(var/gas_id in env_info.important_gasses)
 			var/decl/material/mat = decls_repository.get_decl(gas_id)	
 			environment_data[++environment_data.len] = list(
-				"name" =  capitalize(mat.name),
+				"name" =  capitalize(mat.gas_name),
 				"value" = environment.gas[gas_id] / total * 100,
 				"unit" = "%",
 				"danger_level" = env_info.dangerous_gasses[gas_id] ? co2_dangerlevel : oxygen_dangerlevel
@@ -567,7 +567,7 @@
 					var/decl/material/mat = decls_repository.get_decl(gas_id)
 					scrubbers[scrubbers.len]["filters"] += list(
 						list(
-							"name" = capitalize(mat.name),
+							"name" = capitalize(mat.gas_name),
 							"id"   = gas_id,
 							"val"  = (gas_id in info["scrubbing_gas"])
 						)

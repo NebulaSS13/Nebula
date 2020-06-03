@@ -30,6 +30,11 @@
 			H.eye_blurry += 10
 			QDEL_IN(src, 1)
 
+/obj/item/ore/explosion_act(var/severity)
+	SHOULD_CALL_PARENT(FALSE)
+	if(severity == 1 && prob(25))
+		qdel(src)
+
 // Map definitions.
 /obj/item/ore/uranium
 	material = MAT_PITCHBLENDE

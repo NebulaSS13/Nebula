@@ -20,4 +20,4 @@
 /obj/item/clothing/shoes/craftable/set_material(var/new_material)
 	..()
 	if(istype(material))
-		desc = "[initial(desc)]. These are made of [material.name]."
+		desc = "[initial(desc)]. These are made of [material.solid_name]."

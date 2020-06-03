@@ -1141,7 +1141,7 @@
 	var/list/gas_amounts = list()
 	for(var/id in gases)
 		var/decl/material/mat = decls_repository.get_decl(id)
-		gas_names.Add(mat.name)
+		gas_names.Add(mat.gas_name)
 		gas_amounts.Add(round(gases[id], 0.001))
 
 	set_pin_data(IC_OUTPUT, 1, gas_names)

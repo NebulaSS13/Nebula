@@ -9,10 +9,10 @@
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "ae" = (
-/turf/simulated/mineral,
+/turf/simulated/wall/natural,
 /area/icarus/open)
 "af" = (
-/turf/simulated/mineral,
+/turf/simulated/wall/natural,
 /area/icarus/vessel)
 "ag" = (
 /obj/structure/grille,

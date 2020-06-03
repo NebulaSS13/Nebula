@@ -36,8 +36,8 @@
 
 /obj/structure/window/update_materials(var/keep_health)
 	. = ..()
-	name = "[reinf_material ? "reinforced " : ""][material.name] window"
-	desc = "A window pane made from [material.name]."
+	name = "[reinf_material ? "reinforced " : ""][material.solid_name] window"
+	desc = "A window pane made from [material.solid_name]."
 
 /obj/structure/window/Initialize(var/ml, var/dir_to_set, var/anchored, var/_mat, var/_reinf_mat)
 	. = ..(ml, _mat, _reinf_mat)
@@ -315,8 +315,8 @@
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
 	if(reinf_material)
-		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.name] lattice."))
-		
+		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.solid_name] lattice."))
+
 /obj/structure/window/proc/set_anchored(var/new_anchored)
 	if(anchored == new_anchored)
 		return
