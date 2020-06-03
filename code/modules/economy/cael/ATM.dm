@@ -326,15 +326,18 @@
 			if("e_withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				amount = round(amount, 0.01)
+				var/obj/item/charge_stick/E
 				if(amount <= 0)
 					alert("That is not a valid amount.")
+				else if(amount > initial(E.max_worth))
+					alert("That amount exceeds the max amount holdable by basic charge sticks.")
 				else if(authenticated_account && amount > 0)
 					//create an entry in the account transaction log
 					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						var/obj/item/charge_card/E = new(loc)
+						E = new(loc)
 						E.adjust_worth(amount)
-						E.owner_name = authenticated_account.owner_name
+						E.creator = authenticated_account.owner_name
 						usr.put_in_hands(E)
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")

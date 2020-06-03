@@ -20,7 +20,8 @@
 		PART_PRINTER	= 1,
 		PART_AI			= 1,
 		PART_TESLA		= 1,
-		PART_SCANNER	= 1
+		PART_SCANNER	= 1,
+		PART_MSTICK		= 1
 	)
 	critical_parts = list(PART_CPU, PART_HDD, PART_NETWORK)
 

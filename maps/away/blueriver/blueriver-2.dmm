@@ -481,9 +481,7 @@
 "bA" = (
 /obj/structure/table/glass,
 /obj/item/pen,
-/obj/item/storage/secure/briefcase/money{
-	code = "63214"
-	},
+/obj/item/storage/secure/briefcase/money,
 /obj/item/form_printer,
 /obj/item/gun/energy/gun/small,
 /obj/item/rig/hazmat/equipped,

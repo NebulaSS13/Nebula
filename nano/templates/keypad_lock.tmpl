@@ -1,0 +1,106 @@
+<div class='item'>
+	<div class="itemLabelWider">
+		Lock Status:
+	</div>
+	<div style="float:right">
+		{{if data.locked}}
+			LOCKED
+		{{else}}
+			UNLOCKED
+		{{/if}}
+	</div>
+</div>
+{{if data.error}}
+	<div class='item'>
+		<div class="itemLabelWider" style="padding: 10px">
+			<font color=red><b>{{:data.error}}</b></font>
+		</div>
+	</div>
+{{/if}}
+<div style="margin:0 auto;width:180px">
+	<fieldset style="background-color: #202020;padding: 10px">
+		<legend style="text-align:center">Keypad</legend> 
+		<div style="margin:0 auto;width: 145px;border:2px solid #6e6e6e;background-color:#404040;text-align:center">
+			{{:data.input_code}}
+		</div>
+		<center>
+			<table style="border-collapse: collapse;border-style: hidden">
+				<tr style="height: 40px">
+					<td style="border: 2px solid #6e6e6e;padding: 4px;width: 42px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('1' , null, {'key' : '1'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+					<td style="border: 2px solid #6e6e6e;padding: 4px;width: 42px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('2' , null, {'key' : '2'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+					<td style="border: 2px solid #6e6e6e;padding: 4px;width: 42px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('3' , null, {'key' : '3'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+				</tr>
+				<tr style="height: 40px">
+					<td style="border: 2px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('4' , null, {'key' : '4'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+					<td style="border: 2px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('5' , null, {'key' : '5'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+					<td style="border: 2px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('6' , null, {'key' : '6'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+				</tr>
+				<tr style="height: 40px">
+					<td style="border: 2px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('7' , null, {'key' : '7'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+					<td style="border: 2px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('8' , null, {'key' : '8'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+					<td style="border: 1px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('9' , null, {'key' : '9'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+				</tr>
+				<tr style="height: 50px">
+					<td style="border: 2px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('C' , null, {'key' : 'C'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+					<td style="border: 2px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('0' , null, {'key' : '0'}, data.disabled ? 'disabled' : null, null)}}
+						</div>
+					</td>
+					<td style="border: 2px solid #6e6e6e;padding: 4px">
+						<div style="margin:0 auto;width:23px">
+							{{:helper.link('E' , null, {'key' : 'E'}, data.disabled || !data.locked ? 'disabled' : null, null)}}
+						</div>
+					</td>
+				</tr>
+			</table>
+		<center>
+	</fieldset>
+</div>
+{{if data.status}}
+	<div class='item'>
+		<div style="float:right">
+			<b>{{:data.status}}</b>
+		</div>
+	</div>
+{{/if}}

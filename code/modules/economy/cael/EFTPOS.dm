@@ -109,14 +109,14 @@
 			scan_card(I, O)
 		else
 			to_chat(usr, "\icon[src]<span class='warning'>Unable to connect to linked account.</span>")
-	else if (istype(O, /obj/item/charge_card))
-		var/obj/item/charge_card/E = O
+	else if (istype(O, /obj/item/charge_stick))
+		var/obj/item/charge_stick/E = O
 		if (linked_account)
 			if(transaction_locked && !transaction_paid)
-				if(transaction_amount <= E.loaded_worth)
+				if(!E.is_locked() && transaction_amount <= E.loaded_worth)
 					//transfer the money
 					var/purpose = (transaction_purpose ? transaction_purpose : "None supplied.")
-					purpose += ", paid by [E.owner_name]"
+					purpose += ", paid by [E.id]"
 					if(linked_account.deposit(transaction_amount, purpose, machine_id))
 						E.adjust_worth(-(transaction_amount))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
