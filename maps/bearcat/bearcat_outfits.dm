@@ -54,13 +54,13 @@
 	name = BEARCAT_OUTFIT_JOB_NAME("Ship's Doc")
 	uniform = /obj/item/clothing/under/det/black
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	shoes = /obj/item/clothing/shoes/laceup
+	shoes = /obj/item/clothing/shoes/dress
 	pda_type = /obj/item/modular_computer/pda/medical
 
 /decl/hierarchy/outfit/job/bearcat/mate
 	name = BEARCAT_OUTFIT_JOB_NAME("First Mate")
 	uniform = /obj/item/clothing/under/suit_jacket/checkered
-	shoes = /obj/item/clothing/shoes/laceup
+	shoes = /obj/item/clothing/shoes/dress
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	pda_type = /obj/item/modular_computer/pda/cargo
 	l_hand = /obj/item/material/clipboard

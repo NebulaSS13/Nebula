@@ -32,10 +32,10 @@
 	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 /obj/item/clothing/shoes/dress/devilshoes
-	name = "dress shoes"
 	desc = "Off-colour leather dress shoes. Their footsteps are silent."
-	icon_state = "fiendshoes"
+	inset_color = COLOR_MAROON
 	item_flags = ITEM_FLAG_SILENT
+	color = "#2e1e1e"
 
 /obj/item/clothing/head/fiendhood/fem
 	name = "fiend's visage"

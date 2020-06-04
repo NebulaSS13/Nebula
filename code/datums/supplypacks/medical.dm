@@ -198,7 +198,7 @@
 	contains = list(/obj/item/clothing/under/rank/psych,
 					/obj/item/radio/headset/headset_med,
 					/obj/item/clothing/under/rank/psych/turtleneck,
-					/obj/item/clothing/shoes/laceup,
+					/obj/item/clothing/shoes/dress,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
 					/obj/item/clothing/shoes/color/white,
 					/obj/item/material/clipboard,

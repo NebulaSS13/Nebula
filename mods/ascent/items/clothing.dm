@@ -42,6 +42,7 @@
 /obj/item/clothing/shoes/magboots/ascent
 	name = "mantid mag-claws"
 	desc = "A set of powerful gripping claws."
+	icon = 'mods/ascent/icons/ascent_boots.dmi'
 	icon_state = "ascent_boots0"
 	icon_base = "ascent_boots"
 	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)

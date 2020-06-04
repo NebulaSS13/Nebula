@@ -2858,7 +2858,7 @@
 /obj/item/clothing/accessory/toggleable/hawaii/random,
 /obj/item/clothing/under/casual_pants/greyjeans,
 /obj/item/clothing/head/bowlerhat,
-/obj/item/clothing/shoes/leather,
+/obj/item/clothing/shoes/craftable,
 /obj/structure/closet,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)

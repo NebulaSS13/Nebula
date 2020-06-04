@@ -42,7 +42,7 @@
 			/obj/item/storage/backpack/satchel = 400,
 			/obj/item/storage/bag/cash = 400,
 			/obj/item/clothing/shoes/workboots = 400,
-			/obj/item/clothing/shoes/leather = 400,
+			/obj/item/clothing/shoes/craftable = 400,
 			/obj/item/clothing/shoes/dress = 400,
 			/obj/item/clothing/suit/leathercoat = 500,
 			/obj/item/clothing/suit/storage/toggle/brown_jacket = 500,
