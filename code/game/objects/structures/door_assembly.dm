@@ -68,6 +68,12 @@
 
 /obj/structure/door_assembly/blast/on_update_icon()	
 
+/obj/structure/door_assembly/blast/morgue
+	name = "morgue door assembly"
+	icon = 'icons/obj/doors/doormorgue.dmi'
+	icon_state = "door1"
+	airlock_type =  /obj/machinery/door/morgue
+
 /obj/structure/door_assembly/blast/shutter
 	name = "shutter assembly"
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'

@@ -12,7 +12,7 @@
 	additional_spawn_components = list(
 		/obj/item/stock_parts/radio/receiver/buildable,
 		/obj/item/stock_parts/radio/transmitter/on_event/buildable,
-		/obj/item/stock_parts/power/apc/buildable,
+		/obj/item/stock_parts/power/apc/buildable
 	) // The borg UI thing doesn't need screen/keyboard as borgs don't need those.
 
 	var/secure = 0 //if set, then wires will be randomized and bolts will drop if the door is broken
@@ -113,6 +113,11 @@
 	icon_state = "door_electronics_smoked"
 	name = "window door electronics"
 	build_path = /obj/machinery/door/window
+	additional_spawn_components = list()
+
+/obj/item/stock_parts/circuitboard/airlock_electronics/morgue
+	name = "morgue door electronics"
+	build_path = /obj/machinery/door/morgue
 	additional_spawn_components = list()
 
 /obj/item/stock_parts/circuitboard/airlock_electronics/blast

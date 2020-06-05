@@ -722,8 +722,7 @@
 /obj/machinery/door/blast/regular{
 	icon_state = "pdoor1";
 	id_tag = "heavyrescue";
-	name = "Restricted Equipment";
-	p_open = 0
+	name = "Restricted Equipment"
 	},
 /turf/unsimulated/floor{
 	icon_state = "vault";
@@ -855,8 +854,7 @@
 /obj/machinery/door/blast/regular{
 	icon_state = "pdoor1";
 	id_tag = "standardrescue";
-	name = "Heavy Equipment";
-	p_open = 0
+	name = "Heavy Equipment"
 	},
 /turf/unsimulated/floor{
 	icon_state = "vault";
@@ -1685,8 +1683,7 @@
 /obj/machinery/door/blast/regular{
 	icon_state = "pdoor1";
 	id_tag = "standardrescue";
-	name = "EVA";
-	p_open = 0
+	name = "EVA"
 	},
 /turf/unsimulated/floor{
 	icon_state = "vault";
@@ -1990,8 +1987,7 @@
 /obj/machinery/door/blast/regular{
 	icon_state = "pdoor1";
 	id_tag = "standardrescue";
-	name = "Garage";
-	p_open = 0
+	name = "Garage"
 	},
 /turf/unsimulated/floor{
 	icon_state = "vault";
@@ -2174,8 +2170,7 @@
 /obj/machinery/door/blast/regular{
 	icon_state = "pdoor1";
 	id_tag = "rescuegarage";
-	name = "Garage Exit";
-	p_open = 0
+	name = "Garage Exit"
 	},
 /turf/unsimulated/floor{
 	icon_state = "vault";
@@ -2517,8 +2512,7 @@
 /obj/machinery/door/blast/regular{
 	icon_state = "pdoor1";
 	id_tag = "heavyrescue";
-	name = "Combat Exosuit";
-	p_open = 0
+	name = "Combat Exosuit"
 	},
 /turf/unsimulated/floor{
 	icon_state = "vault";

@@ -468,6 +468,8 @@
 
 /obj/machinery/door/morgue
 	icon = 'icons/obj/doors/doormorgue.dmi'
+	frame_type = /obj/structure/door_assembly/blast/morgue
+	base_type = /obj/machinery/door/morgue
 
 /obj/machinery/door/proc/update_connections(var/propagate = 0)
 	var/dirs = 0
