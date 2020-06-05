@@ -2152,8 +2152,8 @@
 	dir = 9
 	},
 /obj/item/stock_parts/circuitboard/air_alarm,
-/obj/item/airlock_electronics,
-/obj/item/airlock_electronics,
+/obj/item/stock_parts/circuitboard/airlock_electronics,
+/obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)

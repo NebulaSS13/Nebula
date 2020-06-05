@@ -10,15 +10,19 @@
 
 /obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
 	. = ..()
-	if(!. && istype(C, /obj/item/stock_parts/circuitboard/air_alarm) && wired)
+	if(!. && istype(C, /obj/item/stock_parts/circuitboard/airlock_electronics/firedoor) && wired)
 		if(!anchored)
 			to_chat(user, SPAN_WARNING("You must secure \the [src] first!"))
 		else
+			if(!user.unEquip(C, src))
+				return
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			visible_message(SPAN_NOTICE("\The [user] inserts a circuit into \the [src]."))
-			var/obj/machinery/door/firedoor/D = new(src.loc)
-			D.hatch_open = 1
+			var/obj/machinery/door/firedoor/D = new(get_turf(src), dir, FALSE)
+			var/obj/item/stock_parts/circuitboard/airlock_electronics/firedoor/electronics = C
+			D.install_component(C)
+			electronics.construct(D)
+			D.construct_state.post_construct(D)
 			D.close()
-			qdel(C)
 			qdel(src)
 		. = TRUE

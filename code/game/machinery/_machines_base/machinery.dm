@@ -350,7 +350,7 @@ Class Procs:
 	var/obj/frame
 	if(ispath(frame_type, /obj/item/pipe) || ispath(frame_type, /obj/structure/disposalconstruct))
 		frame = new frame_type(get_turf(src), src)
-	else
+	else if(frame_type)
 		frame = new frame_type(get_turf(src), dir)
 
 	var/list/expelled_components = list()
@@ -367,7 +367,7 @@ Class Procs:
 		O.dropInto(loc)
 
 	qdel(src)
-	return 1
+	return frame
 
 /obj/machinery/InsertedContents()
 	return (contents - component_parts)

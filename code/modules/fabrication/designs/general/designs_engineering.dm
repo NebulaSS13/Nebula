@@ -1,5 +1,5 @@
 /datum/fabricator_recipe/engineering
-	path = /obj/item/airlock_electronics
+	path = /obj/item/stock_parts/circuitboard/airlock_electronics
 	category = "Engineering"
 
 /datum/fabricator_recipe/engineering/airalarm

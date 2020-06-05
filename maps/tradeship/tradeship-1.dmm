@@ -3486,8 +3486,8 @@
 /obj/item/cell/high,
 /obj/item/tape_roll,
 /obj/item/stock_parts/circuitboard/air_alarm,
-/obj/item/airlock_electronics,
-/obj/item/airlock_electronics,
+/obj/item/stock_parts/circuitboard/airlock_electronics,
+/obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";

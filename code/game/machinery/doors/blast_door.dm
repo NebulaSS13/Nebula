@@ -38,10 +38,6 @@
 	autoset_access = FALSE // Uses different system with buttons.
 	pry_mod = 1.35
 
-	uncreated_component_parts = list(
-		/obj/item/stock_parts/radio/receiver,
-		/obj/item/stock_parts/power/apc
-	)
 	// To be fleshed out and moved to parent door, but staying minimal for now.
 	public_methods = list(
 		/decl/public_access/public_method/open_door,
@@ -51,6 +47,9 @@
 		/decl/public_access/public_method/toggle_door_to
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/blast_door = 1)
+
+	frame_type = /obj/structure/door_assembly/blast
+	base_type = /obj/machinery/door/blast
 
 /obj/machinery/door/blast/Initialize()
 	. = ..()
@@ -170,9 +169,7 @@
 				to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 		else
 			to_chat(user, "<span class='warning'>You must remain still while working on \the [src].</span>")
-	check_force(C, user)
-
-
+	return ..()
 
 // Proc: open()
 // Parameters: None
@@ -325,6 +322,7 @@
 	maxhealth = 500
 	explosion_resistance = 10
 	pry_mod = 0.55
+	frame_type = /obj/structure/door_assembly/blast
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE

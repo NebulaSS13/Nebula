@@ -252,8 +252,6 @@
 		spawn(2)
 			for(var/turf/simulated/wall/W in range(3,src))
 				W.burn((temperature/4))
-			for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
-				D.ignite(temperature/4)
 			dismantle_wall(TRUE)
 
 /turf/simulated/wall/get_color()
