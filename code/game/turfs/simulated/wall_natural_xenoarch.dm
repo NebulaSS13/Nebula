@@ -67,7 +67,7 @@
 	if(newDepth >= 200) // This means the rock is mined out fully
 		if(artifact_find)
 			if( excavation_level > 0 || prob(15) )
-				var/obj/structure/boulder/B = new(src, material?.type)
+				var/obj/structure/boulder/B = new(src, material?.type, paint_color)
 				B.artifact_find = artifact_find
 			else
 				place_artifact_debris(1)
