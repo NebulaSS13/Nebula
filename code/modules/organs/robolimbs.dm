@@ -44,8 +44,9 @@ var/datum/robolimb/basic_robolimb
 	var/has_eyes = TRUE
 	var/can_feel_pain
 	var/skintone
+	var/limb_blend
 	var/list/bodytypes_cannot_use = list()
-	var/list/restricted_to = list()
+	var/list/species_restricted
 	var/list/applies_to_part = list() //TODO.
 	var/list/allowed_bodytypes = list(BODYTYPE_HUMANOID)
 	var/modifier_string = "robotic"
