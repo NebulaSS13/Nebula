@@ -89,7 +89,7 @@ proc/get_radio_key_from_channel(var/channel)
 	. = ispath(default_language, /decl/language) && decls_repository.get_decl(default_language)
 
 /mob/proc/is_muzzled()
-	return istype(wear_mask, /obj/item/clothing/mask/muzzle)
+	return istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(wear_mask, /obj/item/clothing/sealant)
 
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
 //Returns 1 if a speech problem was applied, 0 otherwise
