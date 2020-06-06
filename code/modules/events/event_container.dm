@@ -59,10 +59,11 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 
 	var/list/possible_events = list()
 	for(var/datum/event_meta/EM in available_events)
-		if(EM.event_type.check_conditions())
-			var/event_weight = get_weight(EM, active_with_role)
-			if(event_weight)
-				possible_events[EM] = event_weight
+		if(initial(EM.event_type.check_proc) && !call(initial(EM.event_type.check_proc))())
+			continue
+		var/event_weight = get_weight(EM, active_with_role)
+		if(event_weight)
+			possible_events[EM] = event_weight
 
 	if(possible_events.len == 0)
 		return null
