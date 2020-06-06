@@ -277,9 +277,6 @@
 		else if(dist <= consume_range)
 			consume(X)
 
-	//for (var/turf/T in trange(grav_pull, src)) //TODO: Create a similar trange for orange to prevent snowflake of self check.
-	//	consume(T)
-
 	return
 
 /obj/singularity/proc/consume(const/atom/A)

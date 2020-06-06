@@ -22,7 +22,7 @@
 	var/turf/simulated/open/O = GetAbove(src)
 	var/atom/climb_target
 	if(istype(O))
-		for(var/turf/T in trange(1,O))
+		for(var/turf/T in RANGE_TURFS(O, 1))
 			if(!isopenspace(T) && T.is_floor())
 				climb_target = T
 			else
@@ -72,7 +72,7 @@
 		return 1
 
 	if(Check_Shoegrip())	//scaling hull with magboots
-		for(var/turf/simulated/T in trange(1,src))
+		for(var/turf/simulated/T in RANGE_TURFS(src, 1))
 			if(T.density)
 				return 1
 
@@ -80,7 +80,7 @@
 	if(Process_Spacemove()) //Checks for active jetpack
 		return 1
 
-	for(var/turf/simulated/T in trange(1,src)) //Robots get "magboots"
+	for(var/turf/simulated/T in RANGE_TURFS(src, 1)) //Robots get "magboots"
 		if(T.density)
 			return 1
 

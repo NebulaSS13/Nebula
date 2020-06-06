@@ -16,7 +16,8 @@
 	var/reagent_type = input("What kind of reagent?", "Spawn Fluid", /decl/material/gas/water) as null|anything in subtypesof(/decl/material)
 	if(!reagent_type || !user || !check_rights(R_SPAWN))
 		return
-	for(var/thing in trange(spawn_range, get_turf(user)))
+	var/turf/flooding = get_turf(user)
+	for(var/thing in RANGE_TURFS(flooding, spawn_range))
 		var/turf/T = thing
 		T.add_fluid(reagent_amount, reagent_type)
 

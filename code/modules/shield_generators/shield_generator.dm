@@ -466,7 +466,7 @@
 
 	for(var/turf/gen_turf in base_turfs)
 		var/area/TA = null // Variable for area checking. Defining it here so memory does not have to be allocated repeatedly.
-		for(var/turf/T in trange(field_radius, gen_turf))
+		for(var/turf/T in RANGE_TURFS(gen_turf, field_radius))
 			// Don't expand to space or on shuttle areas.
 			if(istype(T, /turf/space) || istype(T, /turf/simulated/open))
 				continue
