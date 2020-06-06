@@ -1876,7 +1876,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techmaint,
-/area/ship/bearcat/maintenance/techstorage)
+/area/ship/trade/maintenance/techstorage)
 "et" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -2219,7 +2219,7 @@
 /obj/item/stack/material/rods/fifty,
 /obj/structure/closet/crate,
 /turf/simulated/floor/tiled/techfloor,
-/area/ship/bearcat/maintenance/storage)
+/area/ship/trade/maintenance/storage)
 "eY" = (
 /obj/item/radio/intercom{
 	dir = 1;
@@ -2268,10 +2268,6 @@
 /area/space)
 "fs" = (
 /obj/structure/closet/wardrobe/mixed,
-/obj/item/clothing/shoes/sandal/yinglet,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/shoes/sandal/yinglet,
 /obj/item/storage/backpack/dufflebag,
 /obj/machinery/light/small/red{
 	icon_state = "bulb1";
@@ -2786,10 +2782,6 @@
 /area/ship/trade/maintenance/lower)
 "uY" = (
 /obj/structure/closet/wardrobe/mixed,
-/obj/item/clothing/shoes/sandal/yinglet,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/shoes/sandal/yinglet,
 /obj/item/storage/backpack/dufflebag,
 /obj/machinery/light/small/red{
 	icon_state = "bulb1";

@@ -2,7 +2,6 @@
 	name = TRADESHIP_OUTFIT_JOB_NAME("Junior Engineer")
 	head = /obj/item/clothing/head/hardhat
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service
 	id_type = /obj/item/card/id/tradeship/engineering
 	shoes = /obj/item/clothing/shoes/workboots
 	l_hand = /obj/item/wrench
@@ -28,7 +27,6 @@
 	id_type = /obj/item/card/id/tradeship/engineering/head
 	r_pocket = /obj/item/radio
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/service/officiated
 
 /obj/item/card/id/tradeship/engineering/head
 	name = "identification card"

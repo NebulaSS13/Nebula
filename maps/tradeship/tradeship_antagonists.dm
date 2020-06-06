@@ -1,5 +1,4 @@
 /datum/antagonist
-	valid_species = list(SPECIES_HUMAN, SPECIES_YINGLET)
 	initial_spawn_req = 1
 	initial_spawn_target = 1
 	

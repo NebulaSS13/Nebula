@@ -2499,10 +2499,6 @@
 	dir = 9
 	},
 /obj/item/storage/backpack/dufflebag,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/shoes/sandal/yinglet,
-/obj/item/clothing/shoes/sandal/yinglet,
 /turf/simulated/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "gp" = (
@@ -5511,10 +5507,6 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/item/chems/glass/rag,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/under/yinglet,
-/obj/item/clothing/shoes/sandal/yinglet,
-/obj/item/clothing/shoes/sandal/yinglet,
 /obj/item/storage/firstaid/regular,
 /turf/simulated/floor/tiled/freezer,
 /area/ship/trade/crew/wash)

@@ -5,7 +5,6 @@
 	pda_type = /obj/item/modular_computer/pda/captain
 	r_pocket = /obj/item/radio
 	id_type = /obj/item/card/id/gold/tradeship_captain
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officer
 
 /decl/hierarchy/outfit/job/tradeship/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
@@ -24,7 +23,6 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	pda_type = /obj/item/modular_computer/pda/cargo
 	l_hand = /obj/item/material/clipboard
-	suit = /obj/item/clothing/suit/storage/toggle/redcoat/officiated
 	id_type = /obj/item/card/id/silver/tradeship_first_mate
 	pda_type = /obj/item/modular_computer/pda/heads/hop
 

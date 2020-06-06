@@ -76,8 +76,8 @@
 	name = "\improper Underside - Fore Starboard Maintenance"
 	icon_state = "locker"
 
-/area/ship/trade/enclave
-	name = "\improper Underside - Enclave"
+/area/ship/trade/disused
+	name = "\improper Underside - Disused"
 	icon_state = "yellow"
 
 /area/ship/trade/garden
@@ -246,7 +246,7 @@
 		SSpersistence.elevator_fall_shifts = -1
 
 /area/turbolift/tradeship_enclave
-	name = "Enclave Sublevel"
+	name = "Disused Sublevel"
 	base_turf = /turf/simulated/floor
 
 /area/turbolift/tradeship_cargo
