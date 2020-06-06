@@ -113,10 +113,16 @@
 	lore_text = "This mixture explodes in a burst of metallic foam. Good for hull repair!"
 	required_reagents = list(/decl/material/aluminium = 3, /decl/material/chem/foaming_agent = 1, /decl/material/chem/acid/polyacid = 1)
 	result_amount = 5
-	mix_message = "The solution bubbles vigorously!"
+	mix_message = "The solution foams up violently!"
 
 /datum/chemical_reaction/grenade_reaction/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
+
+	if(istype(holder.my_atom, /obj/item/sealant_tank))
+		var/obj/item/sealant_tank/foam = holder.my_atom
+		foam.foam_charges = Clamp(foam.foam_charges + created_volume, 0, foam.max_foam_charges)
+		return
+
 	var/location = get_turf(holder.my_atom)
 	for(var/mob/M in viewers(5, location))
 		to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
