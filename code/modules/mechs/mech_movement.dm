@@ -18,21 +18,10 @@
 			if(pilot.up_hint)
 				pilot.up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"
 
-//Override this and space move once a way to travel vertically is in 
-///mob/living/exosuit/can_ztravel()
-//	if(Allow_Spacemove()) //Handle here 
-	// 	return 1
-
-	// for(var/turf/simulated/T in trange(1,src))
-	// 	if(T.density)
-	// 		return 1
-
-
 /mob/living/exosuit/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
 	//mechs are always anchored, so falling should always ignore it
 	if(..(TRUE, location_override))
 		return !(can_overcome_gravity())
-
 
 /datum/movement_handler/mob/exosuit
 	expected_host_type = /mob/living/exosuit
@@ -118,7 +107,7 @@
 	return 0
 
 /mob/living/exosuit/check_space_footing()//mechs can't push off things to move around in space, they stick to hull or float away
-	for(var/thing in trange(1,src))
+	for(var/thing in RANGE_TURFS(src, 1))
 		var/turf/T = thing
 		if(T.density || T.is_wall() || T.is_floor())
 			return T

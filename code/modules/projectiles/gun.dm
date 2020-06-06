@@ -605,7 +605,8 @@
 		if(!safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
 			user.visible_message(SPAN_WARNING(message))
 			var/list/targets = list(user)
-			targets += trange(2, get_turf(src))
+			var/turf/checking = get_turf(src)
+			targets += RANGE_TURFS(checking, 2)
 			var/picked = pick(targets)
 			afterattack(picked, user)
 			return 1

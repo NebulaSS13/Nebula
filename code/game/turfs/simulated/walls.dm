@@ -63,9 +63,11 @@
 	var/old_y = y
 	var/old_z = z
 	. = ..()
-	for(var/turf/simulated/wall/W in trange(1, locate(old_x, old_y, old_z)))
-		W.update_connections()
-		W.queue_icon_update()
+	var/turf/debris = locate(old_x, old_y, old_z)
+	if(debris)
+		for(var/turf/simulated/wall/W in RANGE_TURFS(debris, 1))
+			W.update_connections()
+			W.queue_icon_update()
 
 // Walls always hide the stuff below them.
 /turf/simulated/wall/levelupdate()

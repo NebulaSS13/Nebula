@@ -189,7 +189,7 @@
 /mob/proc/get_spacemove_backup()//rename this
 	var/shoegrip = Check_Shoegrip()
 
-	for(var/thing in trange(1,src))//checks for walls or grav turf first
+	for(var/thing in RANGE_TURFS(src, 1))//checks for walls or grav turf first
 		var/turf/T = thing
 		if(T.density || T.is_wall() || (T.is_floor() && (shoegrip || T.has_gravity())))
 			return T
@@ -216,7 +216,7 @@
 		return 1
 
 	if(Check_Shoegrip())
-		for(var/thing in trange(1,src))	//checks for turfs that one can maglock to
+		for(var/thing in RANGE_TURFS(src, 1))	//checks for turfs that one can maglock to
 			var/turf/T = thing
 			if(T.density || T.is_wall() || T.is_floor())
 				return 1

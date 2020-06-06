@@ -34,7 +34,7 @@
 	return A
 
 /atom/movable/proc/throw_at_random(var/include_own_turf, var/maxrange, var/speed)
-	var/list/turfs = trange(maxrange, src)
+	var/list/turfs = RANGE_TURFS(src, maxrange)
 	if(!maxrange)
 		maxrange = 1
 
