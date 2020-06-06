@@ -243,6 +243,12 @@
 	icon_state = "radbox"
 	startswith = list(/obj/item/grenade/supermatter = 5)
 
+/obj/item/storage/box/decompilers
+	name = "box of decompiler grenades"
+	desc = "A box containing 5 experimental decompiler grenades."
+	icon_state = "flashbang"
+	startswith = list(/obj/item/grenade/decompiler = 5)
+
 /obj/item/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."

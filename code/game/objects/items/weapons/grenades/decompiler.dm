@@ -78,7 +78,8 @@
 
 	if(world.time > expiry_time)
 		fade_out()
-		return
+		return PROCESS_KILL
+
 	playsound(loc, 'sound/magic/lightningshock.ogg', 30, FALSE)
 
 	var/list/eaten

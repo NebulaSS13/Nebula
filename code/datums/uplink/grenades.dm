@@ -4,6 +4,18 @@
 /datum/uplink_item/item/grenades
 	category = /datum/uplink_category/grenades
 
+/datum/uplink_item/item/grenades/decompiler
+	name = "1x Decompiler Grenade"
+	desc = "This grenade contains an experimental mechanism that will draw in all nearby objects and collapse them down to their component materials."
+	item_cost = 6
+	path = /obj/item/grenade/decompiler
+
+/datum/uplink_item/item/grenades/decompilers
+	name = "5x Decompiler Grenades"
+	desc = "These grenades contain experimental mechanisms that will draw in all nearby objects and collapse them down to their component materials."
+	item_cost = 25
+	path = /obj/item/storage/box/decompilers
+
 /datum/uplink_item/item/grenades/anti_photon
 	name = "1x Photon Disruption Grenade"
 	desc = "An experimental device for temporarily removing light in a limited area for a small amount of time."
