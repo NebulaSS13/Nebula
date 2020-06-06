@@ -148,6 +148,9 @@ var/list/natural_walls = list()
 		debris.overlay_detail = "asteroid[rand(0,9)]"
 		debris.updateMineralOverlays(1)
 
+	for(var/turf/simulated/wall/W in trange(1, debris))
+		W.queue_icon_update()
+
 /turf/simulated/wall/natural/get_wall_state()
 	. = "rock"
 

@@ -207,7 +207,9 @@
 	reinf_material = null
 	update_connections(1)
 
-	ChangeTurf(floor_type || get_base_turf_by_area(src))
+	var/turf/result = ChangeTurf(floor_type || get_base_turf_by_area(src))
+	for(var/turf/simulated/wall/W in trange(1, result))
+		W.queue_icon_update()
 
 /turf/simulated/wall/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
