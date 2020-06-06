@@ -140,26 +140,15 @@ var/list/natural_walls = list()
 	overlays += extra_overlays
 
 /turf/simulated/wall/natural/dismantle_wall(var/devastated, var/explode, var/no_product)
-
 	if(reinf_material?.ore_result_amount)
 		for(var/i = 1 to reinf_material.ore_result_amount)
 			pass_geodata_to(new /obj/item/ore(src, reinf_material.type))
-
 	destroy_artifacts(null, INFINITY)
-
-	// drop rubble
-	clear_plants()
-	material = decls_repository.get_decl(MAT_PLACEHOLDER)
-	reinf_material = null
-	update_connections(1)
-
-	var/turf/simulated/floor/asteroid/debris = ChangeTurf(floor_type || get_base_turf_by_area(src))
-	if(istype(debris))
+	. = ..(no_product = TRUE)
+	if(istype(., /turf/simulated/floor/asteroid))
+		var/turf/simulated/floor/asteroid/debris = .
 		debris.overlay_detail = "asteroid[rand(0,9)]"
 		debris.updateMineralOverlays(1)
-
-	for(var/turf/simulated/wall/W in trange(1, debris))
-		W.queue_icon_update()
 
 /turf/simulated/wall/natural/get_wall_state()
 	. = "rock"

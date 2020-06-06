@@ -61,22 +61,22 @@
 	..()
 
 	if(!material)
+		overlays.Cut()
 		return
 
 	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
 		generate_overlays()
 
-
-	var/new_overlays
 	var/material_icon_base = get_wall_state()
 	var/image/I
 	var/base_color = paint_color ? paint_color : material.icon_colour
 	if(!density)
 		I = image(icon, "[material_icon_base]fwall_open")
 		I.color = base_color
-		LAZYADD(new_overlays, I)
+		overlays = list(I)
 		return
 
+	var/new_overlays
 	for(var/i = 1 to 4)
 		I = image(icon, "[material_icon_base][wall_connections[i]]", dir = 1<<(i-1))
 		I.color = base_color
@@ -129,7 +129,6 @@
 
 /turf/simulated/wall/proc/generate_overlays()
 	var/alpha_inc = 256 / damage_overlays.len
-
 	for(var/i = 1; i <= damage_overlays.len; i++)
 		var/image/img = image(icon = 'icons/turf/walls.dmi', icon_state = "overlay_damage")
 		img.blend_mode = BLEND_MULTIPLY
