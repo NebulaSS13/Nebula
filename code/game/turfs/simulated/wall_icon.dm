@@ -61,12 +61,11 @@
 	..()
 
 	if(!material)
+		overlays.Cut()
 		return
 
 	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
 		generate_overlays()
-
-	overlays.Cut()
 
 	var/material_icon_base = get_wall_state()
 	var/image/I
@@ -74,38 +73,39 @@
 	if(!density)
 		I = image(icon, "[material_icon_base]fwall_open")
 		I.color = base_color
-		overlays += I
+		overlays = list(I)
 		return
 
+	var/new_overlays
 	for(var/i = 1 to 4)
 		I = image(icon, "[material_icon_base][wall_connections[i]]", dir = 1<<(i-1))
 		I.color = base_color
-		overlays += I
+		LAZYADD(new_overlays, I)
 		if(other_connections[i] != "0")
 			I = image(icon, "[material_icon_base]_other[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = base_color
-			overlays += I
+			LAZYADD(new_overlays, I)
 
 	if(apply_reinf_overlay())
 		var/reinf_color = paint_color ? paint_color : reinf_material.icon_colour
 		if(construction_stage != null && construction_stage < 6)
 			I = image(icon, "reinf_construct-[construction_stage]")
 			I.color = reinf_color
-			overlays += I
+			LAZYADD(new_overlays, I)
 		else
 			if("[reinf_material.icon_reinf]0" in icon_states(icon))
 				// Directional icon
 				for(var/i = 1 to 4)
 					I = image(icon, "[reinf_material.icon_reinf][wall_connections[i]]", dir = 1<<(i-1))
 					I.color = reinf_color
-					overlays += I
+					LAZYADD(new_overlays, I)
 			else
 				I = image(icon, reinf_material.icon_reinf)
 				I.color = reinf_color
-				overlays += I
+				LAZYADD(new_overlays, I)
 	var/image/texture = material.get_wall_texture()
 	if(texture)
-		overlays += texture
+		LAZYADD(new_overlays, texture)
 	if(stripe_color)
 		for(var/i = 1 to 4)
 			if(other_connections[i] != "0")
@@ -113,7 +113,7 @@
 			else
 				I = image(icon, "stripe[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = stripe_color
-			overlays += I
+			LAZYADD(new_overlays, I)
 
 	if(damage != 0)
 		var/integrity = material.integrity
@@ -123,13 +123,12 @@
 		var/overlay = round(damage / integrity * damage_overlays.len) + 1
 		if(overlay > damage_overlays.len)
 			overlay = damage_overlays.len
+		LAZYADD(new_overlays, damage_overlays[overlay])
 
-		overlays += damage_overlays[overlay]
-	return
+	overlays = new_overlays
 
 /turf/simulated/wall/proc/generate_overlays()
 	var/alpha_inc = 256 / damage_overlays.len
-
 	for(var/i = 1; i <= damage_overlays.len; i++)
 		var/image/img = image(icon = 'icons/turf/walls.dmi', icon_state = "overlay_damage")
 		img.blend_mode = BLEND_MULTIPLY

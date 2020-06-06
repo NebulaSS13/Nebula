@@ -122,29 +122,31 @@ var/list/natural_walls = list()
 
 /turf/simulated/wall/natural/on_update_icon()
 	. = ..()
+
+	var/extra_overlays
+	if(material?.reflectiveness > 0)
+		var/shine = Clamp((material.reflectiveness * 0.01) * 255, 10, 230)
+		for(var/i = 1 to 4)
+			var/image/I = image(icon, "rockshine[wall_connections[i]]", dir = 1<<(i-1))
+			I.appearance_flags |= RESET_ALPHA
+			I.alpha = shine
+			LAZYADD(extra_overlays, I)
 	if(ore_overlay)
-		overlays += ore_overlay
+		LAZYADD(extra_overlays, ore_overlay)
 	if(excav_overlay)
-		overlays += excav_overlay
+		LAZYADD(extra_overlays, excav_overlay)
 	if(archaeo_overlay)
-		overlays += archaeo_overlay
+		LAZYADD(extra_overlays, archaeo_overlay)
+	overlays += extra_overlays
 
 /turf/simulated/wall/natural/dismantle_wall(var/devastated, var/explode, var/no_product)
-
 	if(reinf_material?.ore_result_amount)
 		for(var/i = 1 to reinf_material.ore_result_amount)
 			pass_geodata_to(new /obj/item/ore(src, reinf_material.type))
-
 	destroy_artifacts(null, INFINITY)
-
-	// drop rubble
-	clear_plants()
-	material = decls_repository.get_decl(MAT_PLACEHOLDER)
-	reinf_material = null
-	update_connections(1)
-
-	var/turf/simulated/floor/asteroid/debris = ChangeTurf(floor_type || get_base_turf_by_area(src))
-	if(istype(debris))
+	. = ..(no_product = TRUE)
+	if(istype(., /turf/simulated/floor/asteroid))
+		var/turf/simulated/floor/asteroid/debris = .
 		debris.overlay_detail = "asteroid[rand(0,9)]"
 		debris.updateMineralOverlays(1)
 

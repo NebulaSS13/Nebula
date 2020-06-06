@@ -57,7 +57,15 @@
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
+	material = decls_repository.get_decl(MAT_PLACEHOLDER)
+	reinf_material = null
+	var/old_x = x
+	var/old_y = y
+	var/old_z = z
 	. = ..()
+	for(var/turf/simulated/wall/W in trange(1, locate(old_x, old_y, old_z)))
+		W.update_connections()
+		W.queue_icon_update()
 
 // Walls always hide the stuff below them.
 /turf/simulated/wall/levelupdate()
@@ -201,13 +209,8 @@
 			P.roll_and_drop(src)
 		else
 			O.forceMove(src)
-
 	clear_plants()
-	material = decls_repository.get_decl(MAT_PLACEHOLDER)
-	reinf_material = null
-	update_connections(1)
-
-	ChangeTurf(floor_type || get_base_turf_by_area(src))
+	. = ChangeTurf(floor_type || get_base_turf_by_area(src))
 
 /turf/simulated/wall/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)

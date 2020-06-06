@@ -310,6 +310,7 @@
 	solid_name = "ice"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
 	color = COLOR_OCEAN
+	icon_colour = COLOR_OCEAN
 	chemical_makeup = list(
 		/decl/material/gas/water = 1
 	)
@@ -329,6 +330,7 @@
 	chilling_point = T0C
 	heating_products = list(/decl/material/gas/water/boiling)
 	heating_point = T100C
+	reflectiveness = MAT_VALUE_SHINY
 
 /decl/material/gas/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(istype(M, /mob/living/carbon/slime) || alien == IS_SLIME)
