@@ -55,9 +55,9 @@
 	update_icon(1)
 
 /turf/simulated/floor/exoplanet/on_update_icon(var/update_neighbors)
-	overlays.Cut()
+	cut_overlays()
 	if(LAZYLEN(decals))
-		overlays += decals
+		add_overlay(decals)
 	for(var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
 		if(!istype(turf_to_check, type))
@@ -72,7 +72,7 @@
 					rock_side.pixel_x += world.icon_size
 				if(WEST)
 					rock_side.pixel_x -= world.icon_size
-			overlays += rock_side
+			add_overlay(rock_side)
 		else if(update_neighbors)
 			turf_to_check.update_icon()
 
@@ -194,11 +194,11 @@
 	icon_state = "concrete"
 
 /turf/simulated/floor/exoplanet/concrete/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(burnt)
-		overlays |= get_damage_overlay("burned[(x + y) % 3]", BLEND_MULTIPLY)
+		add_overlay(get_damage_overlay("burned[(x + y) % 3]", BLEND_MULTIPLY))
 	if(broken)
-		overlays |= get_damage_overlay("broken[(x + y) % 5]", BLEND_MULTIPLY)
+		add_overlay(get_damage_overlay("broken[(x + y) % 5]", BLEND_MULTIPLY))
 
 /turf/simulated/floor/exoplanet/concrete/melt()
 	burnt = TRUE

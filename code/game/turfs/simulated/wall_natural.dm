@@ -122,22 +122,19 @@ var/list/natural_walls = list()
 
 /turf/simulated/wall/natural/on_update_icon()
 	. = ..()
-
-	var/extra_overlays
 	if(material?.reflectiveness > 0)
 		var/shine = Clamp((material.reflectiveness * 0.01) * 255, 10, 230)
 		for(var/i = 1 to 4)
 			var/image/I = image(icon, "rockshine[wall_connections[i]]", dir = 1<<(i-1))
 			I.appearance_flags |= RESET_ALPHA
 			I.alpha = shine
-			LAZYADD(extra_overlays, I)
+			add_overlay(I)
 	if(ore_overlay)
-		LAZYADD(extra_overlays, ore_overlay)
+		add_overlay(ore_overlay)
 	if(excav_overlay)
-		LAZYADD(extra_overlays, excav_overlay)
+		add_overlay(excav_overlay)
 	if(archaeo_overlay)
-		LAZYADD(extra_overlays, archaeo_overlay)
-	overlays += extra_overlays
+		add_overlay(archaeo_overlay)
 
 /turf/simulated/wall/natural/dismantle_wall(var/devastated, var/explode, var/no_product)
 	if(reinf_material?.ore_result_amount)

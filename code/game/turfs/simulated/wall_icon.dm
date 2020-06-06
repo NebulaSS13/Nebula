@@ -58,10 +58,10 @@
 
 /turf/simulated/wall/on_update_icon()
 
-	..()
+	. = ..()
+	cut_overlays()
 
 	if(!material)
-		overlays.Cut()
 		return
 
 	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
@@ -73,39 +73,38 @@
 	if(!density)
 		I = image(icon, "[material_icon_base]fwall_open")
 		I.color = base_color
-		overlays = list(I)
+		add_overlay(I)
 		return
 
-	var/new_overlays
 	for(var/i = 1 to 4)
 		I = image(icon, "[material_icon_base][wall_connections[i]]", dir = 1<<(i-1))
 		I.color = base_color
-		LAZYADD(new_overlays, I)
+		add_overlay(I)
 		if(other_connections[i] != "0")
 			I = image(icon, "[material_icon_base]_other[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = base_color
-			LAZYADD(new_overlays, I)
+			add_overlay(I)
 
 	if(apply_reinf_overlay())
 		var/reinf_color = paint_color ? paint_color : reinf_material.icon_colour
 		if(construction_stage != null && construction_stage < 6)
 			I = image(icon, "reinf_construct-[construction_stage]")
 			I.color = reinf_color
-			LAZYADD(new_overlays, I)
+			add_overlay(I)
 		else
 			if("[reinf_material.icon_reinf]0" in icon_states(icon))
 				// Directional icon
 				for(var/i = 1 to 4)
 					I = image(icon, "[reinf_material.icon_reinf][wall_connections[i]]", dir = 1<<(i-1))
 					I.color = reinf_color
-					LAZYADD(new_overlays, I)
+					add_overlay(I)
 			else
 				I = image(icon, reinf_material.icon_reinf)
 				I.color = reinf_color
-				LAZYADD(new_overlays, I)
+				add_overlay(I)
 	var/image/texture = material.get_wall_texture()
 	if(texture)
-		LAZYADD(new_overlays, texture)
+		add_overlay(texture)
 	if(stripe_color)
 		for(var/i = 1 to 4)
 			if(other_connections[i] != "0")
@@ -113,7 +112,7 @@
 			else
 				I = image(icon, "stripe[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = stripe_color
-			LAZYADD(new_overlays, I)
+			add_overlay(I)
 
 	if(damage != 0)
 		var/integrity = material.integrity
@@ -123,9 +122,7 @@
 		var/overlay = round(damage / integrity * damage_overlays.len) + 1
 		if(overlay > damage_overlays.len)
 			overlay = damage_overlays.len
-		LAZYADD(new_overlays, damage_overlays[overlay])
-
-	overlays = new_overlays
+		add_overlay(damage_overlays[overlay])
 
 /turf/simulated/wall/proc/generate_overlays()
 	var/alpha_inc = 256 / damage_overlays.len
