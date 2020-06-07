@@ -1,18 +1,22 @@
 /obj/structure/boulder
-	name = "rocky debris"
+	name = "boulder"
 	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "boulder1"
 	density = 1
 	opacity = 1
 	anchored = 1
+	material = MAT_SANDSTONE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	var/excavation_level = 0
 	var/datum/artifact_find/artifact_find
 	var/last_act = 0
 
-/obj/structure/boulder/Initialize()
+/obj/structure/boulder/Initialize(var/ml, var/_mat, var/coloration)
 	. = ..()
-	icon_state = "boulder[rand(1,4)]"
+	icon_state = "boulder[rand(1,6)]"
+	if(coloration)
+		color = coloration
 	excavation_level = rand(5, 50)
 
 /obj/structure/boulder/Destroy()
