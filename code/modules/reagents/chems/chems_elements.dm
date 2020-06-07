@@ -31,12 +31,7 @@
 	taste_description = "metal"
 	color = "#808080"
 	value = 0.5
-
-/decl/material/chem/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(istype(M.loc, /turf/space))
-		M.SelfMove(pick(GLOB.cardinal))
-	if(prob(5))
-		M.emote(pick("twitch", "drool", "moan"))
+	narcosis = 5
 
 /decl/material/chem/mercury
 	name = "mercury"
@@ -44,13 +39,7 @@
 	taste_mult = 0 //mercury apparently is tasteless. IDK
 	color = "#484848"
 	value = 0.5
-
-/decl/material/chem/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(istype(M.loc, /turf/space))
-		M.SelfMove(pick(GLOB.cardinal))
-	if(prob(5))
-		M.emote(pick("twitch", "drool", "moan"))
-	M.adjustBrainLoss(0.1)
+	narcosis = 5
 
 /decl/material/chem/phosphorus
 	name = "phosphorus"

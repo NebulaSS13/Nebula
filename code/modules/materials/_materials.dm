@@ -76,6 +76,7 @@
 	var/mechanics_text
 	var/antag_text
 
+	var/narcosis = 0 // Not a great word for it. Constant for causing mild confusion and brain damage when ingested.
 	var/toxicity = 0 // Organ damage from ingestion.
 	var/toxicity_targets_organ // Bypass liver/kidneys when ingested, harm this organ directly (using BP_FOO defines).
 
@@ -475,6 +476,12 @@
 
 	if(solvent_power >= MAT_SOLVENT_STRONG)
 		M.take_organ_damage(0, removed * solvent_power)
+
+	if(narcosis)
+		if(istype(M.loc, /turf/space))
+			M.SelfMove(pick(GLOB.cardinal))
+		if(prob(narcosis))
+			M.emote(pick("twitch", "drool", "moan"))
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
