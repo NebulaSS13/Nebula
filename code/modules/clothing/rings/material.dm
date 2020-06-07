@@ -9,7 +9,7 @@
 	if(istype(material))
 		name = "[material.solid_name] ring"
 		desc = "A ring made from [material.solid_name]."
-		color = material.icon_colour
+		color = material.color
 
 /obj/item/clothing/ring/material/attackby(var/obj/item/S, var/mob/user)
 	if(S.sharp)

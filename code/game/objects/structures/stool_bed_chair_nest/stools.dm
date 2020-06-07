@@ -45,12 +45,12 @@
 	// Base icon.
 	var/list/noverlays = list()
 	var/image/I = image(icon, "[base_icon]_base")
-	I.color = material.icon_colour
+	I.color = material.color
 	noverlays |= I
 	// Padding overlay.
 	if(padding_material)
 		I =  image(icon, "[base_icon]_padding")
-		I.color = padding_material.icon_colour
+		I.color = padding_material.color
 		noverlays += I
 	overlays = noverlays
 	// Strings.

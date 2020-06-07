@@ -48,7 +48,7 @@
 /obj/structure/proc/update_material_colour(var/override_colour)
 	var/base_colour = override_colour || initial(color)
 	if(istype(material))
-		color = material.icon_colour
+		color = material.color
 	else
 		color = base_colour
 

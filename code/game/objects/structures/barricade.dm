@@ -45,7 +45,7 @@
 	..()
 	if(reinf_material)
 		icon_state = "cheval"
-		overlays = overlay_image(icon, "cheval_spikes", color = reinf_material.icon_colour, flags = RESET_COLOR)
+		overlays = overlay_image(icon, "cheval_spikes", color = reinf_material.color, flags = RESET_COLOR)
 	else
 		icon_state = "barricade"
 	

@@ -1,7 +1,7 @@
 // Placeholders for compile purposes.
 /decl/material/gas
 	name = null
-	icon_colour = COLOR_GRAY80
+	color = COLOR_GRAY80
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
@@ -177,7 +177,7 @@
 	chemical_makeup = list(
 		/decl/material/chem/toxin = 1
 	)
-	icon_colour = "#ca6409"
+	color = "#ca6409"
 	gas_specific_heat = 37
 	gas_molar_mass = 0.054
 	gas_flags = XGM_GAS_OXIDIZER
@@ -222,7 +222,7 @@
 	gas_symbol_html = "X<sup>[num]</sup>"
 	gas_symbol = "X-[num]"
 	if(prob(50))
-		icon_colour = RANDOM_RGB
+		color = RANDOM_RGB
 		gas_overlay_limit = 0.5
 
 /decl/material/gas/argon
@@ -286,7 +286,7 @@
 	chemical_makeup = list(
 		/decl/material/chem/toxin/chlorine = 1
 	)
-	icon_colour = "#c5f72d"
+	color = "#c5f72d"
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 5
 	gas_molar_mass = 0.017
@@ -310,7 +310,6 @@
 	solid_name = "ice"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
 	color = COLOR_OCEAN
-	icon_colour = COLOR_OCEAN
 	chemical_makeup = list(
 		/decl/material/gas/water = 1
 	)
@@ -483,7 +482,7 @@
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
 	stack_type = /obj/item/stack/material/tritium
-	icon_colour = "#777777"
+	color = "#777777"
 	stack_origin_tech = "{'materials':5}"
 	value = 1.5
 	gas_symbol_html = "T"
@@ -494,7 +493,7 @@
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
 	stack_type = /obj/item/stack/material/deuterium
-	icon_colour = "#999999"
+	color = "#999999"
 	stack_origin_tech = "{'materials':3}"
 	gas_symbol_html = "D"
 	gas_symbol = "D"
@@ -504,7 +503,7 @@
 	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
 	name = "metallic hydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
-	icon_colour = "#e6c5de"
+	color = "#e6c5de"
 	stack_origin_tech = "{'materials':6,'powerstorage':6,'magnets':5}"
 	ore_smelts_to = MAT_TRITIUM
 	ore_compresses_to = MAT_METALLIC_HYDROGEN

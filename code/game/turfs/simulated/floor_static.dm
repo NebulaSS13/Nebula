@@ -39,7 +39,7 @@
 	var/decl/material/A = decls_repository.get_decl(MAT_ALIENALLOY)
 	if(!A)
 		return
-	color = A.icon_colour
+	color = A.color
 	var/style = A.hardness % 2 ? "curvy" : "jaggy"
 	icon_state = "[style][(x*y) % 7]"
 

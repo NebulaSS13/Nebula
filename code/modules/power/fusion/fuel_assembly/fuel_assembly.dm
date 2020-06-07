@@ -20,13 +20,13 @@
 		desc += " It is warm to the touch."
 		START_PROCESSING(SSobj, src)
 	if(material.luminescence)
-		set_light(material.luminescence, material.luminescence, material.icon_colour)
+		set_light(material.luminescence, material.luminescence, material.color)
 	rod_quantities[material.type] = initial_amount
 	update_icon()
 
 /obj/item/fuel_assembly/on_update_icon()
 	icon_state = "fuel_assembly"
-	color = material.icon_colour
+	color = material.color
 	var/image/I = image(icon, "fuel_assembly_bracket")
 	I.appearance_flags |= RESET_COLOR
 	overlays = list(I)

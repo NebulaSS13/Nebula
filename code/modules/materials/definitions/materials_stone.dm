@@ -4,7 +4,7 @@
 	stack_type = /obj/item/stack/material/diamond
 	flags = MAT_FLAG_UNMELTABLE
 	cut_delay = 60
-	icon_colour = COLOR_DIAMOND
+	color = COLOR_DIAMOND
 	opacity = 0.4
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
@@ -46,7 +46,7 @@
 	icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	icon_colour = "#d9c179"
+	color = "#d9c179"
 	shard_type = SHARD_STONE_PIECE
 	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_HARD - 5
@@ -66,12 +66,12 @@
 	name = "ceramic"
 	lore_text = "A hard substance produced by firing clay in a kiln."
 	stack_type = /obj/item/stack/material/generic
-	icon_colour = COLOR_OFF_WHITE
+	color = COLOR_OFF_WHITE
 
 /decl/material/stone/marble
 	name = "marble"
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
-	icon_colour = "#aaaaaa"
+	color = "#aaaaaa"
 	weight = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_SHINY
@@ -83,7 +83,7 @@
 /decl/material/stone/basalt
 	name = "basalt"
 	lore_text = "A ubiquitous volcanic stone."
-	icon_colour = COLOR_DARK_GRAY
+	color = COLOR_DARK_GRAY
 	stack_type = /obj/item/stack/material/generic
 	weight = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
@@ -94,7 +94,7 @@
 	name = "concrete"
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	stack_type = /obj/item/stack/material/generic/brick
-	icon_colour = COLOR_GRAY
+	color = COLOR_GRAY
 	value = 0.9
 	var/image/texture
 
