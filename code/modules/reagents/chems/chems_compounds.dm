@@ -28,11 +28,7 @@
 	taste_description = "slime"
 	color = "#009ca8"
 	value = 0.1
-
-/decl/material/chem/lube/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(REAGENT_VOLUME(holder, type) >= 1 && istype(T, /turf/simulated))
-		var/turf/simulated/slip = T
-		slip.wet_floor(80)
+	slipperiness = 80
 
 /decl/material/chem/luminol
 	name = "luminol"
