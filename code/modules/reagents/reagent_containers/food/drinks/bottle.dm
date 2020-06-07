@@ -308,7 +308,7 @@
 
 /obj/item/chems/food/drinks/bottle/holywater/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/gas/water/holywater, 100)
+	reagents.add_reagent(/decl/material/gas/water, 100, list("holy" = TRUE))
 
 /obj/item/chems/food/drinks/bottle/vermouth
 	name = "Goldeneye Vermouth"

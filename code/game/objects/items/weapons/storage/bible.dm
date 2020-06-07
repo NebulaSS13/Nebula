@@ -80,10 +80,8 @@
 	if(!proximity) return
 	if(user?.mind?.assigned_job?.is_holy)
 		if(A.reagents && A.reagents.has_reagent(/decl/material/gas/water)) //blesses all the water in the holder
-			to_chat(user, "<span class='notice'>You bless \the [A].</span>") // I wish it was this easy in nethack
-			var/water2holy = REAGENT_VOLUME(A.reagents, /decl/material/gas/water)
-			A.reagents.clear_reagent(/decl/material/gas/water)
-			A.reagents.add_reagent(/decl/material/gas/water/holywater,water2holy)
+			to_chat(user, SPAN_NOTICE("You bless \the [A].")) // I wish it was this easy in nethack
+			LAZYSET(A.reagents.reagent_data, /decl/material/gas/water, list("holy" = TRUE))
 
 /obj/item/storage/bible/attackby(obj/item/W, mob/user)
 	if (src.use_sound)
