@@ -37,6 +37,7 @@
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
+	dirtiness = 15
 
 /decl/material/quartz
 	name = "quartz"

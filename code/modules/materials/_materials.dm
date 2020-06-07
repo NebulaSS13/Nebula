@@ -177,6 +177,8 @@
 	var/alpha = 255
 	var/cocktail_ingredient
 
+	var/dirtiness = 0
+
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
 	var/glass_desc = "It's a glass of... what, exactly?"
@@ -346,13 +348,20 @@
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
+	if(dirtiness && !istype(T, /turf/space))
+		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in T
+		if (!dirtoverlay)
+			dirtoverlay = new /obj/effect/decal/cleanable/dirt(T)
+			dirtoverlay.alpha = REAGENT_VOLUME(holder, src) * dirtiness
+		else
+			dirtoverlay.alpha = min(dirtoverlay.alpha + REAGENT_VOLUME(holder, src) * dirtiness, 255)
+
 	if(length(vapor_products))
 		var/volume = REAGENT_VOLUME(holder, type)
 		var/temperature = holder?.my_atom?.temperature || T20C
 		for(var/vapor in vapor_products)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(type, volume)
-
 /decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
 		return // Something else removed us.
