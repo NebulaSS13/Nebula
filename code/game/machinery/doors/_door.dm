@@ -12,7 +12,6 @@
 	layer = CLOSED_DOOR_LAYER
 	interact_offline = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed/door
-	stat_immune = 0
 	uncreated_component_parts = null
 
 	var/open_layer = OPEN_DOOR_LAYER

@@ -814,8 +814,17 @@ About the new airlock wires panel:
 	if(ispath(state_path, /decl/machine_construction/default/deconstructed))
 		if(brace)
 			return SPAN_NOTICE("Remove \the [brace] first!")
-		if(!(operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && !src.locked)))
-			return MCS_CONTINUE
+		if(operating >= 0) // if emagged, apparently bypass all this crap; that's what < 0 would mean.
+			if(operating)
+				return SPAN_NOTICE("\The [src] is in use.")
+			if(!welded)
+				return SPAN_NOTICE("You need to weld \the [src] shut before removing the circuit.")
+			if(arePowerSystemsOn())
+				return SPAN_NOTICE("You need to depower \the [src] before removing the circuit.")
+			if(!density)
+				return SPAN_NOTICE("\The [src] must be closed to have access to the circuit.")
+			if(locked)
+				return SPAN_NOTICE("You must disengage the bolts first.")
 		if(repairing)
 			return MCS_CONTINUE
 	. = ..()
@@ -988,7 +997,7 @@ About the new airlock wires panel:
 		frame_type = assembly.type
 
 		var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
-		install_component(electronics)
+		install_component(electronics, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
 		electronics.construct(src)
 		var/decl/material/mat = decls_repository.get_decl(assembly.glass_material)
 
@@ -1001,7 +1010,7 @@ About the new airlock wires panel:
 				maxhealth = 300
 				explosion_resistance = 5
 			else
-				door_color = mat.icon_colour
+				door_color = mat.color
 		else
 			door_color = assembly.door_color
 
