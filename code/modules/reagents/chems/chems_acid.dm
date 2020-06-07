@@ -6,6 +6,8 @@
 	metabolism = REM * 2
 	touch_met = 50 // It's acid!
 	value = 1.2
+	solvent_power = MAT_SOLVENT_STRONG
+
 	var/power = 5
 	var/meltdose = 10 // How much is needed to melt
 	var/max_damage = 40

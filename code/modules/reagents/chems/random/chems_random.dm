@@ -40,12 +40,15 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	for(var/bad_type in GLOB.random_chem_interaction_blacklist)
 		whitelist -= typesof(bad_type)
 
+	var/chill_num = pick(1,2,4)
 	chilling_products = list()
-	for(var/i in 1 to rand(1,3))
-		chilling_products += pick_n_take(whitelist) // it's possible that these form a valid reaction, but we're OK with that.
+	for(var/i in 1 to chill_num)
+		chilling_products[pick_n_take(whitelist)] = 1 / chill_num // it's possible that these form a valid reaction, but we're OK with that.
+
+	var/heat_num = pick(1,2,4)
 	heating_products = list()
-	for(var/i in 1 to rand(1,3))
-		heating_products += pick_n_take(whitelist)
+	for(var/i in 1 to heat_num)
+		heating_products[pick_n_take(whitelist)] = 1 / heat_num
 
 	initialized = TRUE
 

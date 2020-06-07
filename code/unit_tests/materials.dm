@@ -1,23 +1,30 @@
-/datum/unit_test/material_chemical_makeup_shall_equal_one
-	name = "MATERIALS: Material Chemical Makeup Will Equal Exactly 1"
+/datum/unit_test/material_chemical_composition_shall_equal_one
+	name = "MATERIALS: Material Chemical Composition Will Equal Exactly 1"
 
-/datum/unit_test/material_chemical_makeup_shall_equal_one/start_test()
+/datum/unit_test/material_chemical_composition_shall_equal_one/start_test()
 	var/list/failed = list()
 	var/list/passed = list()
 	for(var/mat in SSmaterials.materials_by_name)
 		var/decl/material/mat_datum = decls_repository.get_decl(mat)
-		if(length(mat_datum.chemical_makeup))
-			var/total = 0
-			for(var/chem in mat_datum.chemical_makeup)
-				total += mat_datum.chemical_makeup[chem]
-			if(total != 1)
-				failed += "[mat_datum.type] - [total]"
-			else
-				passed += mat_datum
+		var/list/checking = list(
+			"dissolves" = mat_datum.dissolves_into,
+			"heats" = mat_datum.heating_products,
+			"chills" = mat_datum.chilling_products
+		)
+		for(var/field in checking)
+			var/list/checking_list = checking[field]
+			if(length(checking_list))
+				var/total = 0
+				for(var/chem in checking_list)
+					total += checking_list[chem]
+				if(total != 1)
+					failed += "[mat_datum.type] - [field] - [total]"
+				else
+					passed += "[mat_datum.type] - [field]"
 	if(length(failed))
-		fail("[length(failed)] materials have total makeup not equal to 1: [jointext(failed, "\n")].")
+		fail("[length(failed)] material lists have total makeup not equal to 1: [jointext(failed, "\n")].")
 	else
-		pass("[length(passed)] materials had chemical makeup exactly equal to 1.")
+		pass("[length(passed)] material lists had chemical makeup exactly equal to 1.")
 	return 1 
 
 /datum/unit_test/crafting_recipes_shall_not_have_inconsistent_materials

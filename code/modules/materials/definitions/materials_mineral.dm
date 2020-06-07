@@ -10,7 +10,7 @@
 	stack_origin_tech = "{'materials':5}"
 	xarch_source_mineral = /decl/material/chem/phosphorus
 	ore_icon_overlay = "nugget"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/radium = 0.5,
 		/decl/material/uranium = 0.5
 	)
@@ -29,7 +29,7 @@
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/carbon = 0.6,
 		/decl/material/chem/toxin/plasticide = 0.2,
 		/decl/material/chem/acetone = 0.2
@@ -49,7 +49,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#effffe"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/silicon = 1
 	)
 	door_icon_base = "stone"
@@ -70,7 +70,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#ccc9a3"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/sulfur = 0.75,
 		/decl/material/iron = 0.25
 	)
@@ -95,7 +95,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#e5becb"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/lithium = 1
 	)
 	door_icon_base = "stone"
@@ -117,7 +117,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#e54e4e"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/mercury = 1
 	)
 	door_icon_base = "stone"
@@ -139,7 +139,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#acad95"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/phosphorus = 1
 	)
 	door_icon_base = "stone"
@@ -162,7 +162,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#d1c0bc"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/sodium = 1
 	)
 	door_icon_base = "stone"
@@ -186,7 +186,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#b77464"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/potassium = 1
 	)
 	door_icon_base = "stone"
@@ -207,7 +207,7 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#d8ad97"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/aluminium = 1
 	)
 	door_icon_base = "stone"
@@ -230,7 +230,7 @@
 	ore_compresses_to = MAT_SANDSTONE
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/silicon = 1
 	)
 	value = 0.8
@@ -258,7 +258,7 @@
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/toxin/phoron = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY

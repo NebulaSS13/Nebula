@@ -21,7 +21,7 @@
 			gas_info+= "It contaminates exposed clothing with residue."
 		if(mat.gas_flags & XGM_GAS_FUSION_FUEL)
 			gas_info+= "It can be used as fuel in a fusion reaction."
-		if(length(mat.chemical_makeup) && !isnull(mat.gas_condensation_point))
+		if(mat.gas_condensation_point > 0 && mat.gas_condensation_point < INFINITY)
 			gas_info += "It condenses at [mat.gas_condensation_point] K."
 		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[mat.gas_name] (gas)")), _mechanics_text = jointext(gas_info, "<br>"))
 		SScodex.add_entry_by_string(entry.display_name, entry)

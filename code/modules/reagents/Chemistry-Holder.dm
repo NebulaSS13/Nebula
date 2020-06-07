@@ -81,12 +81,23 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			replace_message =   "\The [lowertext(R.name)] [R.heating_message]"
 			replace_sound =     R.heating_sound
 
+		else if(LAZYLEN(R.dissolves_into))
+			for(var/other in reagent_volumes)
+				if(other == thing)
+					continue
+				var/decl/material/solvent = decls_repository.get_decl(other)
+				if(solvent.solvent_power >= R.dissolves_in)
+					replace_self_with = R.dissolves_into
+					replace_message = "\The [lowertext(R.name)] [R.dissolve_message] \the [lowertext(solvent.name)]."
+					replace_sound = R.dissolve_sound
+					break
+
 		// If it is, handle replacing it with the decay product.
 		if(replace_self_with)
-			var/replace_amount = REAGENT_VOLUME(src, R.type) / LAZYLEN(replace_self_with)
+			var/replace_amount = REAGENT_VOLUME(src, R.type)
 			clear_reagent(R.type)
 			for(var/product in replace_self_with)
-				add_reagent(product, replace_amount)
+				add_reagent(product, replace_self_with[product] * replace_amount)
 			reaction_occured = TRUE
 
 			if(my_atom)

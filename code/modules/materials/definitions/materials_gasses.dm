@@ -24,7 +24,7 @@
 /decl/material/gas/lithium
 	name = "lithium"
 	lore_text = "A chemical element, used as antidepressant."
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/lithium = 1
 	)
 	is_fusion_fuel = TRUE
@@ -42,7 +42,7 @@
 /decl/material/gas/helium
 	name = "helium"
 	lore_text = "A noble gas. It makes your voice squeaky."
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/gas/helium = 1
 	)
 	is_fusion_fuel = TRUE
@@ -69,7 +69,7 @@
 /decl/material/gas/carbon_monoxide
 	name = "carbon monoxide"
 	lore_text = "A highly poisonous gas."
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/gas/carbon_monoxide = 1
 	)
 	gas_specific_heat = 30
@@ -108,7 +108,7 @@
 /decl/material/gas/methyl_bromide
 	name = "methyl bromide"
 	lore_text = "A once-popular fumigant and weedkiller."
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/gas/methyl_bromide = 1
 	)
 	gas_specific_heat = 42.59 
@@ -135,7 +135,7 @@
 /decl/material/gas/nitrous_oxide
 	name = "sleeping agent"
 	lore_text = "A mild sedative. Also known as laughing gas."
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/gas/nitrous_oxide = 1
 	)
 	gas_specific_heat = 40	
@@ -171,7 +171,7 @@
 
 /decl/material/gas/nitrodioxide
 	name = "nitrogen dioxide"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/toxin = 1
 	)
 	color = "#ca6409"
@@ -247,7 +247,7 @@
 
 /decl/material/gas/ammonia
 	name = "ammonia"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/ammonia = 1
 	)
 	gas_specific_heat = 20
@@ -258,7 +258,7 @@
 
 /decl/material/gas/xenon
 	name = "xenon"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/gas/xenon = 1
 	)
 	gas_specific_heat = 3
@@ -280,7 +280,7 @@
 
 /decl/material/gas/chlorine
 	name = "chlorine"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/toxin/chlorine = 1
 	)
 	color = "#c5f72d"
@@ -293,7 +293,7 @@
 
 /decl/material/gas/sulfurdioxide
 	name = "sulfur dioxide"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/sulfur = 1
 	)
 	gas_specific_heat = 30
@@ -307,7 +307,7 @@
 	solid_name = "ice"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
 	color = COLOR_OCEAN
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/gas/water = 1
 	)
 	gas_tile_overlay = "generic"
@@ -322,11 +322,16 @@
 	taste_description = "water"
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
-	chilling_products = list(/decl/material/gas/water/ice)
+	chilling_products = list(
+		/decl/material/gas/water/ice = 1
+	)
 	chilling_point = T0C
-	heating_products = list(/decl/material/gas/water/boiling)
+	heating_products = list(
+		/decl/material/gas/water/boiling = 1
+	)
 	heating_point = T100C
 	reflectiveness = MAT_VALUE_SHINY
+	solvent_power = MAT_SOLVENT_MILD
 
 /decl/material/gas/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(istype(M, /mob/living/carbon/slime) || alien == IS_SLIME)
@@ -416,11 +421,13 @@
 
 /decl/material/gas/water/boiling
 	name = "boiling water"
-	chilling_products = list(/decl/material/gas/water)
-	chilling_point =   99 CELSIUS
-	chilling_message = "stops boiling."
-	heating_products =  list(null)
-	heating_point =    null
+	chilling_products = list(
+		/decl/material/gas/water = 1
+	)
+	chilling_point =    99 CELSIUS
+	chilling_message =  "stops boiling."
+	heating_products =  null
+	heating_point =     null
 	hidden_from_codex = TRUE
 
 /decl/material/gas/water/ice
@@ -435,7 +442,9 @@
 	glass_icon = DRINK_ICON_NOISY
 
 	heating_message = "cracks and melts."
-	heating_products = list(/decl/material/gas/water)
+	heating_products = list(
+		/decl/material/gas/water = 1
+	)
 	heating_point = 299 // This is about 26C, higher than the actual melting point of ice but allows drinks to be made properly without weird workarounds.
 
 /decl/material/hydrogen
@@ -453,7 +462,7 @@
 	gas_burn_product = MAT_WATER
 	gas_symbol_html = "H<sub>2</sub>"
 	gas_symbol = "H2"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/fuel/hydrazine = 1
 	)
 

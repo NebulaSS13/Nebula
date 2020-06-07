@@ -71,7 +71,6 @@
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
 	var/is_fusion_fuel
-	var/list/chemical_makeup			  //Used with the grinder to produce chemicals.
 	var/hidden_from_codex
 	var/lore_text
 	var/mechanics_text
@@ -181,6 +180,7 @@
 	var/cocktail_ingredient
 
 	var/dirtiness = DIRTINESS_NEUTRAL // How dirty turfs are after being exposed to this material. Negative values cause a cleaning/sterilizing effect.
+	var/solvent_power = MAT_SOLVENT_NONE
 
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
@@ -188,6 +188,11 @@
 	var/list/glass_special = null // null equivalent to list()
 
 	// Matter state data.
+	var/dissolve_message = "dissolves in"
+	var/dissolve_sound = 'sound/effects/bubbles.ogg'
+	var/list/dissolves_in = MAT_SOLVENT_STRONG
+	var/list/dissolves_into	// Used with the grinder and a solvent to extract other materials.
+
 	var/chilling_point
 	var/chilling_message = "crackles and freezes!"
 	var/chilling_sound = 'sound/effects/bubbles.ogg'
@@ -340,6 +345,18 @@
 	return
 
 /decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
+	if(solvent_power > MAT_SOLVENT_MILD)
+		if(istype(O, /obj/item/paper))
+			var/obj/item/paper/paperaffected = O
+			paperaffected.clearpaper()
+			to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the paper."))
+		else if(istype(O, /obj/item/book) && REAGENT_VOLUME(holder, type) >= 5)
+			if(istype(O, /obj/item/book/tome))
+				to_chat(usr, SPAN_WARNING("The solution does nothing. Whatever this is, it isn't normal ink."))
+			else
+				var/obj/item/book/affectedbook = O
+				affectedbook.dat = null
+				to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
 
 	if(dirtiness <= DIRTINESS_STERILE)
 		O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
