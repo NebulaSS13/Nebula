@@ -337,7 +337,7 @@
 /obj/item/chems/food/snacks/friedegg/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/chem/nutriment/protein, 3)
-	reagents.add_reagent(/decl/material/chem/sodiumchloride, 1)
+	reagents.add_reagent(/decl/material/sodium_chloride, 1)
 	reagents.add_reagent(/decl/material/chem/blackpepper, 1)
 
 
@@ -1085,7 +1085,7 @@
 /obj/item/chems/food/snacks/meatsteak/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/chem/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/chem/sodiumchloride, 1)
+	reagents.add_reagent(/decl/material/sodium_chloride, 1)
 	reagents.add_reagent(/decl/material/chem/blackpepper, 1)
 
 /obj/item/chems/food/snacks/meatsteak/synthetic
@@ -1456,7 +1456,7 @@
 	reagents.add_reagent(/decl/material/chem/nutriment/protein, 10)
 	reagents.add_reagent(/decl/material/chem/drink/juice/banana, 5)
 	reagents.add_reagent(/decl/material/chem/blackpepper, 1)
-	reagents.add_reagent(/decl/material/chem/sodiumchloride, 1)
+	reagents.add_reagent(/decl/material/sodium_chloride, 1)
 
 /obj/item/chems/food/snacks/baguette
 	name = "baguette"
@@ -1472,7 +1472,7 @@
 /obj/item/chems/food/snacks/baguette/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/chem/blackpepper, 1)
-	reagents.add_reagent(/decl/material/chem/sodiumchloride, 1)
+	reagents.add_reagent(/decl/material/sodium_chloride, 1)
 
 /obj/item/chems/food/snacks/fishandchips
 	name = "fish and chips"
