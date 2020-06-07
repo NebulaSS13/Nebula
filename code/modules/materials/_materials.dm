@@ -83,7 +83,6 @@
 	var/shard_can_repair = 1              // Can shards be turned into sheets with a welder?
 	var/list/recipes                      // Holder for all recipes usable with a sheet of this material.
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
-	var/foam_state = "foam"
 
 	// Icons
 	var/icon_colour                                      // Colour applied to products of this material.
