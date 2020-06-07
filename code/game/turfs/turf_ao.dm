@@ -75,7 +75,7 @@
 
 #define CUT_AO(TARGET, AO_LIST) \
 	if (AO_LIST) { \
-		TARGET.overlays -= AO_LIST; \
+		TARGET.cut_overlay(AO_LIST, TRUE); \
 		AO_LIST.Cut(); \
 	}
 
@@ -89,7 +89,7 @@
 	} \
 	UNSETEMPTY(AO_LIST); \
 	if (AO_LIST) { \
-		TARGET.overlays |= AO_LIST; \
+		TARGET.add_overlay(AO_LIST, TRUE); \
 	}
 
 /turf/proc/update_ao()
