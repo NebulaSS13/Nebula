@@ -406,3 +406,12 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	else
 		reagents = new/datum/reagents(max_vol, src)
 	return reagents
+
+/datum/reagents/Topic(href, href_list)
+	. = ..()
+	if(!. && href_list["deconvert"])
+		var/list/data = REAGENT_DATA(src, /decl/material/gas/water)
+		if(LAZYACCESS(data, "holy"))
+			var/mob/living/carbon/C = locate(href_list["deconvert"])
+			if(istype(C) && !QDELETED(C) && C.mind)
+				GLOB.godcult.remove_antagonist(C.mind,1)

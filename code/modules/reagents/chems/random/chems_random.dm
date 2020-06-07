@@ -3,7 +3,6 @@
 // subtypes of stuff in here will be avoided when randomizing interactions.
 GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	/decl/material/chem/adminordrazine,
-	/decl/material/gas/water/holywater,
 	/decl/material/chem/tobacco,
 	/decl/material/chem/drink,
 	/decl/material/chem/random,

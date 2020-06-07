@@ -339,6 +339,21 @@
 /decl/material/gas/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjust_hydration(removed * 10)
 	affect_blood(M, alien, removed, holder)
+	if(ishuman(M)) // Any location
+		var/list/data = REAGENT_DATA(holder, type)
+		if(LAZYACCESS(data, "holy"))
+			if(iscultist(M))
+				if(prob(10))
+					GLOB.cult.offer_uncult(M)
+				if(prob(2))
+					var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
+					M.visible_message(SPAN_WARNING("\The [M] coughs up \the [S]!"))
+			else if(M.mind && GLOB.godcult.is_antagonist(M.mind))
+				if(REAGENT_VOLUME(holder, type) > 5)
+					M.adjustHalLoss(5)
+					M.adjustBruteLoss(1)
+					if(prob(10)) //Only annoy them a /bit/
+						to_chat(M, SPAN_DANGER("You feel your insides curdle and burn! \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]"))
 
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /decl/material/gas/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
@@ -366,6 +381,10 @@
 	else if(volume >= 10)
 		var/turf/simulated/S = T
 		S.wet_floor(8, TRUE)
+
+	var/list/data = REAGENT_DATA(holder, type)
+	if(LAZYACCESS(data, "holy") && REAGENT_VOLUME(holder, type) >= 5)
+		T.holy = TRUE
 
 /decl/material/gas/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O, /obj/item/chems/food/snacks/monkeycube))
@@ -398,42 +417,6 @@
 	if(M.chem_doses[type] == removed)
 		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 		M.confused = max(M.confused, 2)
-
-/decl/material/gas/water/holywater
-	name = "holy water"
-	lore_text = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
-	color = "#e0e8ef"
-	glass_name = "holy water"
-	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
-	hidden_from_codex = TRUE
-
-/decl/material/gas/water/holywater/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	..()
-	if(ishuman(M)) // Any location
-		if(iscultist(M))
-			if(prob(10))
-				GLOB.cult.offer_uncult(M)
-			if(prob(2))
-				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
-				M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
-		else if(M.mind && GLOB.godcult.is_antagonist(M.mind))
-			if(REAGENT_VOLUME(holder, type) > 5)
-				M.adjustHalLoss(5)
-				M.adjustBruteLoss(1)
-				if(prob(10)) //Only annoy them a /bit/
-					to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[src];deconvert=\ref[M]'>Give Into Purity</a>\]")
-
-/decl/material/gas/water/holywater/Topic(href, href_list)
-	. = ..()
-	if(!. && href_list["deconvert"])
-		var/mob/living/carbon/C = locate(href_list["deconvert"])
-		if(C.mind)
-			GLOB.godcult.remove_antagonist(C.mind,1)
-
-/decl/material/gas/water/holywater/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(REAGENT_VOLUME(holder, type) >= 5)
-		T.holy = 1
-	return
 
 /decl/material/gas/water/boiling
 	name = "boiling water"
