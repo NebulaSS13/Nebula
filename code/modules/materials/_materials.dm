@@ -192,7 +192,7 @@
 	// Matter state data.
 	var/dissolve_message = "dissolves in"
 	var/dissolve_sound = 'sound/effects/bubbles.ogg'
-	var/list/dissolves_in = MAT_SOLVENT_STRONG
+	var/dissolves_in = MAT_SOLVENT_STRONG
 	var/list/dissolves_into	// Used with the grinder and a solvent to extract other materials.
 
 	var/chilling_point
@@ -473,7 +473,7 @@
 		if(dam > 0)
 			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
 
-	if(solvent_power)
+	if(solvent_power >= MAT_SOLVENT_STRONG)
 		M.take_organ_damage(0, removed * solvent_power)
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)

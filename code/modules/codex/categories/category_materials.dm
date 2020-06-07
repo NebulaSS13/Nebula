@@ -69,6 +69,14 @@
 			else
 				material_info += "It is ~[comparison] times more durable than steel."
 
+			if(mat.solvent_power > MAT_SOLVENT_NONE)
+				if(mat.solvent_power <= MAT_SOLVENT_MILD)
+					material_info += "It is a mild solvent."
+				else if(mat.solvent_power <= MAT_SOLVENT_MODERATE)
+					material_info += "It is a moderately strong solvent, capable of removing ink."
+				else if(mat.solvent_power <= MAT_SOLVENT_STRONG)
+					material_info += "It is a strong solvent and will burn exposed skin on contact."
+
 			if(LAZYLEN(mat.dissolves_into))
 				var/chems = list()
 				for(var/chemical in mat.dissolves_into)
