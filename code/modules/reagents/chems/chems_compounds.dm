@@ -5,9 +5,7 @@
 	color = "#808080"
 	metabolism = REM * 0.2
 	value = 0.1
-
-/decl/material/chem/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.adjustToxLoss(removed * 3)
+	toxicity = 3
 
 /decl/material/chem/acetone/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)	//I copied this wholesale from ethanol and could likely be converted into a shared proc. ~Techhead
 	var/volume = REAGENT_VOLUME(holder, type)
