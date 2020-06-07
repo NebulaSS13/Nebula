@@ -116,12 +116,9 @@
 	gas_symbol_html = "CH<sub>3</sub>Br"
 	gas_symbol = "CH3Br"
 	taste_description = "pestkiller"
-
-/decl/material/gas/methyl_bromide/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T))
-		var/volume = REAGENT_VOLUME(holder, type)
-		T.assume_gas(MAT_METHYL_BROMIDE, volume, T20C)
-		holder.remove_reagent(type, volume)
+	vapor_products = list(
+		MAT_METHYL_BROMIDE = 1
+	)
 
 /decl/material/gas/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	. = ..()

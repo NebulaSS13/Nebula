@@ -196,6 +196,8 @@
 	var/heating_sound = 'sound/effects/bubbles.ogg'
 	var/fuel_value = 0
 
+	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged
+
 	var/scent //refer to _scent.dm
 	var/scent_intensity = /decl/scent_intensity/normal
 	var/scent_descriptor = SCENT_DESC_SMELL
@@ -342,11 +344,16 @@
 /decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	if(fuel_value && amount && istype(M))
 		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+#undef FLAMMABLE_LIQUID_DIVISOR
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
-	return
 
-#undef FLAMMABLE_LIQUID_DIVISOR
+	if(length(vapor_products))
+		var/volume = REAGENT_VOLUME(holder, type)
+		var/temperature = holder?.my_atom?.temperature || T20C
+		for(var/vapor in vapor_products)
+			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
+		holder.remove_reagent(type, volume)
 
 /decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))

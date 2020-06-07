@@ -111,18 +111,12 @@
 	heating_products = null
 	value = 4
 	fuel_value = 2
+	vapor_products = list(MAT_PHORON = 1)
 
 /decl/material/chem/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
 	if(prob(10 * fuel_value))
 		M.handle_contaminants()
-
-/decl/material/chem/toxin/phoron/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(!istype(T))
-		return
-	var/volume = REAGENT_VOLUME(holder, type)
-	T.assume_gas(MAT_PHORON, volume, T20C)
-	holder.remove_reagent(type, volume)
 
 // Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
 /decl/material/chem/toxin/phoron/oxygen
@@ -130,14 +124,10 @@
 	lore_text = "An exceptionally flammable molecule formed from deuterium synthesis."
 	strength = 15
 	fuel_value = 2.5
-
-/decl/material/chem/toxin/phoron/oxygen/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(!istype(T))
-		return
-	var/volume = REAGENT_VOLUME(holder, type)
-	T.assume_gas(MAT_OXYGEN, ceil(volume/2), T20C)
-	T.assume_gas(MAT_PHORON, ceil(volume/2), T20C)
-	holder.remove_reagent(type, volume)
+	vapor_products = list(
+		MAT_OXYGEN = 0.5,
+		MAT_PHORON = 0.5
+	)
 
 /decl/material/chem/toxin/cyanide //Fast and Lethal
 	name = "cyanide"
