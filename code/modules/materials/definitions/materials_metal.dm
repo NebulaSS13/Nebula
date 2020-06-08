@@ -21,12 +21,6 @@
 	removed_by_welder = TRUE
 	taste_description = "the inside of a reactor"
 
-/decl/material/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	affect_ingest(M, alien, removed, holder)
-
-/decl/material/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
-
 /decl/material/gold
 	name = "gold"
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."

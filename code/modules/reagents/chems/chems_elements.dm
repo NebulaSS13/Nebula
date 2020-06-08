@@ -90,9 +90,6 @@
 	value = 0.5
 	radioactivity = 12
 
-/decl/material/chem/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
-
 /decl/material/chem/silicon
 	name = "silicon"
 	lore_text = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."

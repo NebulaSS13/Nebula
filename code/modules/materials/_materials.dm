@@ -385,14 +385,15 @@
 	holder.remove_reagent(type, removed)
 
 /decl/material/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	return
+	if(radioactivity)
+		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
-	return
 
 /decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	return
+	if(radioactivity)
+		M.apply_damage((radioactivity / 2) * removed, IRRADIATE)
 
 /decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
