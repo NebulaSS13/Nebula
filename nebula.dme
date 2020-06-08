@@ -2788,6 +2788,7 @@
 #include "code\modules\reagents\reactions\reaction_recipe_food.dm"
 #include "code\modules\reagents\reactions\reaction_slimes.dm"
 #include "code\modules\reagents\reactions\reaction_synthesis.dm"
+#include "code\modules\reagents\reagent_containers\beaker.dm"
 #include "code\modules\reagents\reagent_containers\blood_pack.dm"
 #include "code\modules\reagents\reagent_containers\borghydro.dm"
 #include "code\modules\reagents\reagent_containers\dropper.dm"
