@@ -396,24 +396,7 @@
 	taste_description = "bitterness"
 	color = "#c8a5dc"
 	touch_met = 5
-
-/decl/material/chem/antiseptic/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
-		M.germ_level -= min(removed*20, M.germ_level)
-	for(var/obj/item/I in M.contents)
-		I.was_bloodied = null
-	M.was_bloodied = null
-
-/decl/material/chem/antiseptic/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
-	O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
-	O.was_bloodied = null
-
-/decl/material/chem/antiseptic/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	T.germ_level -= min(REAGENT_VOLUME(holder, type)*20, T.germ_level)
-	for(var/obj/item/I in T.contents)
-		I.was_bloodied = null
-	for(var/obj/effect/decal/cleanable/blood/B in T)
-		qdel(B)
+	dirtiness = DIRTINESS_STERILE
 
 /decl/material/chem/crystal_agent
 	name = "crystallizing agent"

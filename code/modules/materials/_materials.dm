@@ -177,6 +177,8 @@
 	var/alpha = 255
 	var/cocktail_ingredient
 
+	var/dirtiness = DIRTINESS_NEUTRAL // How dirty turfs are after being exposed to this material. Negative values cause a cleaning/sterilizing effect.
+
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
 	var/glass_desc = "It's a glass of... what, exactly?"
@@ -335,7 +337,13 @@
 	return
 
 /decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
-	return
+
+	if(dirtiness <= DIRTINESS_STERILE)
+		O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
+		O.was_bloodied = null
+
+	if(dirtiness <= DIRTINESS_CLEAN)
+		O.clean_blood()
 
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
@@ -346,13 +354,37 @@
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
+	if(dirtiness != DIRTINESS_NEUTRAL && istype(T, /turf/simulated) && REAGENT_VOLUME(holder, type) >= 1)
+
+		if(dirtiness > DIRTINESS_NEUTRAL)
+			var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in T
+			if (!dirtoverlay)
+				dirtoverlay = new /obj/effect/decal/cleanable/dirt(T)
+				dirtoverlay.alpha = REAGENT_VOLUME(holder, src) * dirtiness
+			else
+				dirtoverlay.alpha = min(dirtoverlay.alpha + REAGENT_VOLUME(holder, src) * dirtiness, 255)
+		else
+			if(dirtiness <= DIRTINESS_STERILE)
+				T.germ_level -= min(REAGENT_VOLUME(holder, type)*20, T.germ_level)
+				for(var/obj/item/I in T.contents)
+					I.was_bloodied = null
+				for(var/obj/effect/decal/cleanable/blood/B in T)
+					qdel(B)
+			if(dirtiness <= DIRTINESS_CLEAN)
+				var/turf/simulated/S = T
+				S.dirt = 0
+				if(S.wet > 1)
+					S.unwet_floor(FALSE)
+				T.clean_blood()
+				for(var/mob/living/carbon/slime/M in T)
+					M.adjustToxLoss(rand(5, 10))
+
 	if(length(vapor_products))
 		var/volume = REAGENT_VOLUME(holder, type)
 		var/temperature = holder?.my_atom?.temperature || T20C
 		for(var/vapor in vapor_products)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(type, volume)
-
 /decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
 		return // Something else removed us.
@@ -399,6 +431,43 @@
 /decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(radioactivity)
 		M.apply_damage((radioactivity / 2) * removed, IRRADIATE)
+
+	if(!istype(M))
+		return
+
+	if(dirtiness <= DIRTINESS_STERILE)
+		if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
+			M.germ_level -= min(removed*20, M.germ_level)
+		for(var/obj/item/I in M.contents)
+			I.was_bloodied = null
+		M.was_bloodied = null
+
+	if(dirtiness <= DIRTINESS_CLEAN)
+		if(M.r_hand)
+			M.r_hand.clean_blood()
+		if(M.l_hand)
+			M.l_hand.clean_blood()
+		if(M.wear_mask)
+			if(M.wear_mask.clean_blood())
+				M.update_inv_wear_mask(0)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.head)
+				if(H.head.clean_blood())
+					H.update_inv_head(0)
+			if(H.wear_suit)
+				if(H.wear_suit.clean_blood())
+					H.update_inv_wear_suit(0)
+			else if(H.w_uniform)
+				if(H.w_uniform.clean_blood())
+					H.update_inv_w_uniform(0)
+			if(H.shoes)
+				if(H.shoes.clean_blood())
+					H.update_inv_shoes(0)
+			else
+				H.clean_blood(1)
+				return
+		M.clean_blood()
 
 /decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)

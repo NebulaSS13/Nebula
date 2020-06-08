@@ -53,3 +53,7 @@
 #define REAGENTS_FREE_SPACE(R) (R.maximum_volume - R.total_volume)
 #define REAGENT_VOLUME(REAGENT_HOLDER, REAGENT_TYPE) (REAGENT_HOLDER?.reagent_volumes && REAGENT_HOLDER.reagent_volumes[REAGENT_TYPE])
 #define REAGENT_DATA(REAGENT_HOLDER, REAGENT_TYPE)   (REAGENT_HOLDER?.reagent_data    && REAGENT_HOLDER.reagent_data[REAGENT_TYPE])
+
+#define DIRTINESS_STERILE -2
+#define DIRTINESS_CLEAN   -1
+#define DIRTINESS_NEUTRAL  0
