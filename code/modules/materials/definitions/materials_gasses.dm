@@ -168,6 +168,7 @@
 	gas_molar_mass = 0.028	
 	gas_symbol_html = "N<sub>2</sub>"
 	gas_symbol = "N2"
+	gas_metabolically_inert = TRUE // Nitrogen is in all station airmixes, no point tracking it in bloodstream.
 
 /decl/material/gas/nitrodioxide
 	name = "nitrogen dioxide"
