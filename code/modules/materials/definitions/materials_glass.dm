@@ -4,7 +4,7 @@
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	stack_type = /obj/item/stack/material/glass
 	flags = MAT_FLAG_BRITTLE
-	icon_colour = GLASS_COLOR
+	color = GLASS_COLOR
 	opacity = 0.3
 	integrity = 50
 	shard_type = SHARD_SHARD
@@ -40,7 +40,7 @@
 	brute_armor = 2
 	burn_armor = 5
 	melting_point = T0C + 4000
-	icon_colour = GLASS_COLOR_SILICATE
+	color = GLASS_COLOR_SILICATE
 	stack_origin_tech = "{'materials':4}"
 	wire_product = null
 	construction_difficulty = MAT_VALUE_HARD_DIY

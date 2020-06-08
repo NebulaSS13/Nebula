@@ -42,26 +42,26 @@
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		I.appearance_flags |= RESET_COLOR
-		I.color = material.icon_colour
+		I.color = material.color
 	LAZYADD(new_overlays, I)
 	I = image(icon, "[icon_state]_armrest")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		I.appearance_flags |= RESET_COLOR
-		I.color = material.icon_colour
+		I.color = material.color
 	LAZYADD(new_overlays, I)
 	if(reinf_material)
 		I =  image(icon, "[icon_state]_padding_over")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_material.icon_colour
+			I.color = reinf_material.color
 		LAZYADD(new_overlays, I)
 		I = image(icon, "[icon_state]_padding_armrest")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_material.icon_colour
+			I.color = reinf_material.color
 		LAZYADD(new_overlays, I)
 	overlays += new_overlays
 
@@ -141,7 +141,7 @@
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = material.icon_colour
+			I.color = material.color
 		overlays |= I
 
 /obj/structure/bed/chair/armchair
@@ -265,7 +265,7 @@
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = material.icon_colour
+			I.color = material.color
 		overlays |= I
 
 /obj/structure/bed/chair/shuttle/blue

@@ -341,7 +341,7 @@
 /obj/structure/window/on_update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
-	color =  material.icon_colour
+	color =  material.color
 	if(reinf_material)
 		basestate = reinf_basestate
 	else
@@ -452,7 +452,7 @@
 	if(!polarized)
 		return
 	if(opacity)
-		animate(src, color=material.icon_colour, time=5)
+		animate(src, color=material.color, time=5)
 		set_opacity(0)
 	else
 		animate(src, color=GLASS_COLOR_TINTED, time=5)

@@ -1,7 +1,7 @@
 /obj/item/on_update_icon()
 	overlays.Cut()
 	if(applies_material_colour && material)
-		color = material.icon_colour
+		color = material.color
 		alpha = 100 + material.opacity * 255
 
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)

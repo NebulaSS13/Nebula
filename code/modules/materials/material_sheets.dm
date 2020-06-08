@@ -131,7 +131,7 @@
 
 /obj/item/stack/material/on_update_icon()
 	if(material_flags & USE_MATERIAL_COLOR)
-		color = material.icon_colour
+		color = material.color
 		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
 	if(max_icon_state && amount == max_amount)
 		icon_state = max_icon_state
@@ -526,7 +526,7 @@
 
 /obj/item/stack/material/generic/Initialize()
 	. = ..()
-	if(material) color = material.icon_colour
+	if(material) color = material.color
 
 /obj/item/stack/material/generic/skin
 	icon_state = "skin"

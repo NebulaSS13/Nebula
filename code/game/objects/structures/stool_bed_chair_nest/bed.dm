@@ -44,7 +44,7 @@
 		var/image/I = image(icon, "[icon_state]_padding")
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_material.icon_colour
+			I.color = reinf_material.color
 		LAZYADD(new_overlays, I)
 	overlays = new_overlays
 

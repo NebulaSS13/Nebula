@@ -130,7 +130,7 @@
 /obj/item/material/twohanded/spear/on_update_icon()
 	overlays.Cut()
 	if(applies_material_colour && material)
-		color = material.icon_colour
+		color = material.color
 		alpha = 100 + material.opacity * 255
 	overlays += get_shaft_overlay("shaft")
 	overlays += get_mutable_overlay(icon, "cable", cable_color)
@@ -145,7 +145,7 @@
 
 /obj/item/material/twohanded/spear/proc/get_shaft_overlay(var/base_state)
 	var/decl/material/M = decls_repository.get_decl(shaft_material)
-	var/mutable_appearance/shaft = get_mutable_overlay(icon, base_state, M.icon_colour)
+	var/mutable_appearance/shaft = get_mutable_overlay(icon, base_state, M.color)
 	shaft.alpha = 155 + 100 * M.opacity
 	return shaft
 

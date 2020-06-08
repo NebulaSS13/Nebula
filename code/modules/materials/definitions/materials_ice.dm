@@ -1,6 +1,6 @@
 /decl/material/ice
 	stack_type = null
-	icon_colour = "#a5f2f3"
+	color = "#a5f2f3"
 	heating_products = list(
 		/decl/material/gas/water 				= 1
 	)

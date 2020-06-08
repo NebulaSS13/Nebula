@@ -75,6 +75,6 @@
 	. = ..()
 	var/decl/material/A = decls_repository.get_decl(MAT_ALIENALLOY)
 	if(A)
-		door_color = A.icon_colour
+		door_color = A.color
 	stripe_color = get_random_colour(FALSE, 0, 255)
 	update_icon()

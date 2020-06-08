@@ -9,7 +9,7 @@
 
 /decl/material/nullglass
 	
-	icon_colour = COLOR_NULLGLASS
+	color = COLOR_NULLGLASS
 	conductive = 1
 	stack_type = /obj/item/stack/material/nullglass
 	flags = MAT_FLAG_BRITTLE

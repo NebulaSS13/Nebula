@@ -64,6 +64,6 @@
 	var/list/colors = list()
 	for(var/g in atmosphere.gas)
 		var/decl/material/mat = decls_repository.get_decl(g)
-		colors += mat.icon_colour
+		colors += mat.color
 	if(colors.len)
 		return MixColors(colors)

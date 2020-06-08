@@ -69,7 +69,7 @@
 
 	var/material_icon_base = get_wall_state()
 	var/image/I
-	var/base_color = paint_color ? paint_color : material.icon_colour
+	var/base_color = paint_color ? paint_color : material.color
 	if(!density)
 		I = image(icon, "[material_icon_base]fwall_open")
 		I.color = base_color
@@ -86,7 +86,7 @@
 			add_overlay(I)
 
 	if(apply_reinf_overlay())
-		var/reinf_color = paint_color ? paint_color : reinf_material.icon_colour
+		var/reinf_color = paint_color ? paint_color : reinf_material.color
 		if(construction_stage != null && construction_stage < 6)
 			I = image(icon, "reinf_construct-[construction_stage]")
 			I.color = reinf_color

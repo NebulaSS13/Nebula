@@ -21,7 +21,7 @@
 		return INITIALIZE_HINT_QDEL
 	if(material.gas_tile_overlay)
 		icon_state = material.gas_tile_overlay
-	color = material.icon_colour
+	color = material.color
 
 /*
 	MATERIAL DATUMS
@@ -85,7 +85,6 @@
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
 
 	// Icons
-	var/icon_colour                                      // Colour applied to products of this material.
 	var/icon_base = "metal"                              // Wall and table base icon tag. See header.
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
 	var/icon_reinf = "reinf_metal"                       // Overlay used

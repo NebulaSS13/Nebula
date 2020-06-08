@@ -1,7 +1,7 @@
 /decl/material/pitchblende
 	name = "pitchblende"
 	ore_compresses_to = MAT_PITCHBLENDE
-	icon_colour = "#917d1a"
+	color = "#917d1a"
 	ore_smelts_to = MAT_URANIUM
 	ore_result_amount = 5
 	ore_spread_chance = 10
@@ -23,7 +23,7 @@
 /decl/material/graphite
 	name = "graphite"
 	ore_compresses_to = MAT_GRAPHITE
-	icon_colour = "#444444"
+	color = "#444444"
 	ore_name = "graphite"
 	ore_result_amount = 5
 	ore_spread_chance = 25
@@ -47,7 +47,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#effffe"
+	color = "#effffe"
 	chemical_makeup = list(
 		/decl/material/chem/silicon = 1
 	)
@@ -68,7 +68,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#ccc9a3"
+	color = "#ccc9a3"
 	chemical_makeup = list(
 		/decl/material/chem/sulfur = 0.75,
 		/decl/material/iron = 0.25
@@ -93,7 +93,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#e5becb"
+	color = "#e5becb"
 	chemical_makeup = list(
 		/decl/material/chem/lithium = 1
 	)
@@ -115,7 +115,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#e54e4e"
+	color = "#e54e4e"
 	chemical_makeup = list(
 		/decl/material/chem/mercury = 1
 	)
@@ -137,7 +137,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#acad95"
+	color = "#acad95"
 	chemical_makeup = list(
 		/decl/material/chem/phosphorus = 1
 	)
@@ -160,7 +160,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#d1c0bc"
+	color = "#d1c0bc"
 	chemical_makeup = list(
 		/decl/material/chem/sodium = 1
 	)
@@ -184,7 +184,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#b77464"
+	color = "#b77464"
 	chemical_makeup = list(
 		/decl/material/chem/potassium = 1
 	)
@@ -205,7 +205,7 @@
 	ore_spread_chance = 10
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
-	icon_colour = "#d8ad97"
+	color = "#d8ad97"
 	chemical_makeup = list(
 		/decl/material/aluminium = 1
 	)
@@ -224,7 +224,7 @@
 /decl/material/sand
 	name = "sand"
 	stack_type = null
-	icon_colour = "#e2dbb5"
+	color = "#e2dbb5"
 	ore_smelts_to = MAT_GLASS
 	ore_compresses_to = MAT_SANDSTONE
 	ore_name = "sand"
@@ -236,7 +236,7 @@
 
 /decl/material/sand/clay
 	name = "clay"
-	icon_colour = COLOR_OFF_WHITE
+	color = COLOR_OFF_WHITE
 	ore_name = "clay"
 	ore_icon_overlay = "lump"
 	ore_smelts_to = MAT_CERAMIC
@@ -249,7 +249,7 @@
 	ignition_point = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
 	table_icon_base = "stone"
-	icon_colour = "#e37108"
+	color = "#e37108"
 	shard_type = SHARD_SHARD
 	hardness = MAT_VALUE_RIGID
 	stack_origin_tech = "{'materials':2,'exoticmatter':2}"
@@ -302,7 +302,7 @@
 /decl/material/phoron/supermatter
 	name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
-	icon_colour = "#ffff00"
+	color = "#ffff00"
 	radioactivity = 20
 	stack_origin_tech = "{'bluespace':2,'materials':6,'exoticmatter':4}"
 	stack_type = null
