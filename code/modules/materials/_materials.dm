@@ -77,6 +77,9 @@
 	var/mechanics_text
 	var/antag_text
 
+	var/toxicity = 0 // Organ damage from ingestion.
+	var/toxicity_targets_organ // Bypass liver/kidneys when ingested, harm this organ directly (using BP_FOO defines).
+
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
 	var/shard_icon                        // Related to above.
@@ -424,6 +427,25 @@
 /decl/material/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
+
+	if(toxicity)
+		M.add_chemical_effect(CE_TOXIN, toxicity)
+		var/dam = (toxicity * removed)
+		if(toxicity_targets_organ && ishuman(M))
+			var/mob/living/carbon/human/H = M
+			var/obj/item/organ/internal/I = H.internal_organs_by_name[toxicity_targets_organ]
+			if(I)
+				var/can_damage = I.max_damage - I.damage
+				if(can_damage > 0)
+					if(dam > can_damage)
+						I.take_internal_damage(can_damage, silent=TRUE)
+						dam -= can_damage
+					else
+						I.take_internal_damage(dam, silent=TRUE)
+						dam = 0
+		if(dam > 0)
+			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
+
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)

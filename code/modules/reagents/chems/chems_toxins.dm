@@ -10,28 +10,6 @@
 	heating_message = "goes clear."
 	value = 1.5
 
-	var/target_organ
-	var/strength = 4 // How much damage it deals per unit
-
-/decl/material/chem/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(strength)
-		M.add_chemical_effect(CE_TOXIN, strength)
-		var/dam = (strength * removed)
-		if(target_organ && ishuman(M))
-			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/internal/I = H.internal_organs_by_name[target_organ]
-			if(I)
-				var/can_damage = I.max_damage - I.damage
-				if(can_damage > 0)
-					if(dam > can_damage)
-						I.take_internal_damage(can_damage, silent=TRUE)
-						dam -= can_damage
-					else
-						I.take_internal_damage(dam, silent=TRUE)
-						dam = 0
-		if(dam)
-			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
-
 /decl/material/chem/toxin/denatured
 	name = "denatured toxin"
 	lore_text = "Once toxic, now harmless."
@@ -41,8 +19,8 @@
 	metabolism = REM
 	heating_products = null
 	heating_point = null
-	target_organ = null
-	strength = 0
+	toxicity_targets_organ = null
+	toxicity = 0
 	hidden_from_codex = TRUE
 
 /decl/material/chem/toxin/slimejelly
@@ -51,14 +29,14 @@
 	taste_description = "slime"
 	taste_mult = 1.3
 	color = "#801e28"
-	strength = 10
+	toxicity = 10
 
 /decl/material/chem/toxin/plasticide
 	name = "plasticide"
 	lore_text = "Liquid plastic, do not eat."
 	taste_description = "plastic"
 	color = "#cf3600"
-	strength = 5
+	toxicity = 5
 	heating_point = null
 	heating_products = null
 
@@ -67,23 +45,23 @@
 	lore_text = "A powerful poison derived from certain species of mushroom."
 	taste_description = "mushroom"
 	color = "#792300"
-	strength = 10
+	toxicity = 10
 
 /decl/material/chem/toxin/carpotoxin
 	name = "carpotoxin"
 	lore_text = "A deadly neurotoxin produced by the dreaded space carp."
 	taste_description = "fish"
 	color = "#003333"
-	target_organ = BP_BRAIN
-	strength = 10
+	toxicity_targets_organ = BP_BRAIN
+	toxicity = 10
 
 /decl/material/chem/toxin/venom
 	name = "spider venom"
 	lore_text = "A deadly necrotic toxin produced by giant spiders to disable their prey."
 	taste_description = "absolutely vile"
 	color = "#91d895"
-	target_organ = BP_LIVER
-	strength = 5
+	toxicity_targets_organ = BP_LIVER
+	toxicity = 5
 
 /decl/material/chem/toxin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
@@ -95,7 +73,7 @@
 	lore_text = "A highly poisonous liquid. Smells strongly of bleach."
 	taste_description = "bleach"
 	color = "#707c13"
-	strength = 15
+	toxicity = 15
 	metabolism = REM
 	heating_point = null
 	heating_products = null
@@ -105,7 +83,7 @@
 	lore_text = "Phoron in its liquid form."
 	taste_mult = 1.5
 	color = "#ff3300"
-	strength = 30
+	toxicity = 30
 	touch_met = 5
 	heating_point = null
 	heating_products = null
@@ -122,7 +100,7 @@
 /decl/material/chem/toxin/phoron/oxygen
 	name = "oxyphoron"
 	lore_text = "An exceptionally flammable molecule formed from deuterium synthesis."
-	strength = 15
+	toxicity = 15
 	fuel_value = 2.5
 	vapor_products = list(
 		MAT_OXYGEN = 0.5,
@@ -134,9 +112,9 @@
 	lore_text = "A highly toxic chemical."
 	taste_mult = 0.6
 	color = "#cf3600"
-	strength = 20
+	toxicity = 20
 	metabolism = REM * 2
-	target_organ = BP_HEART
+	toxicity_targets_organ = BP_HEART
 	heating_point = null
 	heating_products = null
 
@@ -149,10 +127,10 @@
 	lore_text = "A potent cardiotoxin that paralyzes the heart."
 	taste_description = "intense bitterness"
 	color = "#6b833b"
-	strength = 16
+	toxicity = 16
 	overdose = REAGENTS_OVERDOSE / 3
 	metabolism = REM * 2
-	target_organ = BP_HEART
+	toxicity_targets_organ = BP_HEART
 	heating_point = null
 	heating_products = null
 
@@ -177,8 +155,8 @@
 	taste_description = "death"
 	color = "#669900"
 	metabolism = REM
-	strength = 3
-	target_organ = BP_BRAIN
+	toxicity = 3
+	toxicity_targets_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
 	heating_products = list(/decl/material/chem/toxin/carpotoxin, /decl/material/chem/sedatives, /decl/material/copper)
 
@@ -201,7 +179,7 @@
 	lore_text = "A chemical mix good for growing plants with."
 	taste_description = "plant food"
 	taste_mult = 0.5
-	strength = 0.5 // It's not THAT poisonous.
+	toxicity = 0.5 // It's not THAT poisonous.
 	color = "#664330"
 	heating_point = null
 	heating_products = null
@@ -221,7 +199,7 @@
 	lore_text = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 	taste_mult = 1
 	color = "#49002e"
-	strength = 4
+	toxicity = 4
 	heating_products = list(/decl/material/chem/toxin, /decl/material/gas/water)
 
 /decl/material/chem/toxin/plantbgone/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
@@ -241,7 +219,7 @@
 	lore_text = "A dark, viscous liquid."
 	taste_description = "petroleum"
 	color = "#140b30"
-	strength = 4
+	toxicity = 4
 	heating_products = list(/decl/material/chem/acetone, /decl/material/chem/carbon, /decl/material/chem/ethanol)
 	heating_point = 145 CELSIUS
 	heating_message = "separates"
@@ -251,7 +229,7 @@
 	lore_text = "An extremely effective chemical depilator. Do not ingest."
 	taste_description = "acid"
 	color = "#d9ffb3"
-	strength = 1
+	toxicity = 1
 	overdose = REAGENTS_OVERDOSE
 	heating_products = null
 	heating_point = null
@@ -266,7 +244,7 @@
 	taste_description = "decaying blood"
 	color = "#800000"
 	taste_mult = 5
-	strength = 10
+	toxicity = 10
 	metabolism = REM * 5
 	overdose = 30
 	hidden_from_codex = TRUE
@@ -294,6 +272,6 @@
 	lore_text = "A dark, nearly opaque, red-orange, toxic element."
 	taste_description = "pestkiller"
 	color = "#4c3b34"
-	strength = 3
+	toxicity = 3
 	heating_products = null
 	heating_point = null

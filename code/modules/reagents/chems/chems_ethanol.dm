@@ -10,7 +10,7 @@
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
-	var/toxicity = 1
+	var/alcohol_toxicity = 1
 
 	var/druggy = 0
 	var/adj_temp = 0
@@ -22,7 +22,7 @@
 	value = 1.2
 
 /decl/material/chem/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.adjustToxLoss(removed * 2 * toxicity)
+	M.adjustToxLoss(removed * 2 * alcohol_toxicity)
 
 /decl/material/chem/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjust_nutrition(nutriment_factor * removed)
@@ -45,7 +45,7 @@
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
 		M.drowsyness = max(M.drowsyness, 20)
 	if(effective_dose >= strength * 6) // Toxic dose
-		M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity)
+		M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 	if(effective_dose >= strength * 7) // Pass out
 		M.Paralyse(20)
 		M.Sleeping(30)
@@ -305,7 +305,7 @@
 	taste_description = "pure resignation"
 	color = "#4c3100"
 	strength = 25
-	toxicity = 2
+	alcohol_toxicity = 2
 
 	glass_name = "Hooch"
 	glass_desc = "You've really hit rock bottom now... your liver packed its bags and left last night."
