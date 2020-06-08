@@ -1,10 +1,11 @@
 /datum/event/inertial_damper
 	announceWhen = 5
+	check_proc = /proc/inertial_dampener_event_can_fire
 
 /datum/event/inertial_damper/setup()
 	endWhen = rand(45, 120)
 
-/datum/event/inertial_damper/check_conditions() // Check if we have any ships that require dampers for this event to affect
+/proc/inertial_dampener_event_can_fire() // Check if we have any ships that require dampers for this event to affect
 	for(var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
 		if(S.needs_dampers)
 			return TRUE

@@ -61,6 +61,7 @@
 	var/datum/event_meta/event_meta = null
 	var/list/affecting_z
 	var/has_skybox_image
+	var/check_proc          //global proc to be tested for whether this event will be selected. Null is valid.
 
 /datum/event/nothing
 
@@ -143,10 +144,6 @@
 
 //Called during building of skybox to get overlays
 /datum/event/proc/get_skybox_image()
-
-//Called when picking a random event to check whether there are requirements for the event to be chosen
-/datum/event/proc/check_conditions()
-	return TRUE
 
 /datum/event/New(var/datum/event_meta/EM)
 	// event needs to be responsible for this, as stuff like APLUs currently make their own events for curious reasons
