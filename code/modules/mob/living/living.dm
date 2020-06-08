@@ -425,7 +425,7 @@ default behaviour is:
 	ear_deaf = 0
 	ear_damage = 0
 	drowsyness = 0
-	druggy = 0
+	drugged = 0
 	jitteriness = 0
 	confused = 0
 

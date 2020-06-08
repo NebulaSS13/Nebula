@@ -97,9 +97,7 @@
 
 /decl/material/chem/psychoactives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	var/drug_strength = 15
-	M.druggy = max(M.druggy, drug_strength)
-	M.add_chemical_effect(CE_PULSE, -1)
+	M.adjust_drugged(15, 15)	M.add_chemical_effect(CE_PULSE, -1)
 
 /decl/material/chem/hallucinogenics
 	name = "hallucinogenics"
@@ -125,7 +123,7 @@
 
 /decl/material/chem/psychotropics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/threshold = 1
-	M.druggy = max(M.druggy, 30)
+	M.adjust_drugged(30, 30)
 
 	if(M.chem_doses[type] < 1 * threshold)
 		M.apply_effect(3, STUTTER)
@@ -136,7 +134,8 @@
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
-		M.druggy = max(M.druggy, 35)
+		M.adjust_drugged(35, 35)
+
 		if(prob(10))
 			M.emote(pick("twitch", "giggle"))
 	else
@@ -144,7 +143,7 @@
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(10)
 		M.make_dizzy(10)
-		M.druggy = max(M.druggy, 40)
+		M.adjust_drugged(40, 40)
 		if(prob(15))
 			M.emote(pick("twitch", "giggle"))
 

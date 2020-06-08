@@ -1068,3 +1068,7 @@
 	. = ..()
 	if(!blinded)
 		flash_eyes()
+
+/mob/proc/adjust_drugged(var/amt, var/maxamt = 100)
+	drugged = Clamp(drugged + amt, 0, maxamt)
+	. = drugged
