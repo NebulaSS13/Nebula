@@ -16,8 +16,8 @@
 		set_extension(src, /datum/extension/eye/blueprints)
 
 /obj/item/blueprints/attack_self(var/mob/living/carbon/human/user)
-	if (!istype(user))
-		to_chat(user, "This stack of blue paper means nothing to you.")//monkeys cannot into projecting
+	if (!istype(user) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS)) // Monkeys et al. cannot blueprint.
+		to_chat(user, SPAN_WARNING("This stack of blue paper means nothing to you."))
 		return
 
 	if(CanInteract(user, GLOB.default_state))
