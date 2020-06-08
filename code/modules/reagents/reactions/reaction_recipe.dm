@@ -30,7 +30,7 @@
 /datum/chemical_reaction/recipe/barbecue
 	name = "Barbecue Sauce"
 	result = /decl/material/chem/nutriment/barbecue
-	required_reagents = list(/decl/material/chem/nutriment/ketchup = 2, /decl/material/chem/blackpepper = 1, /decl/material/chem/sodiumchloride = 1)
+	required_reagents = list(/decl/material/chem/nutriment/ketchup = 2, /decl/material/chem/blackpepper = 1, /decl/material/sodium_chloride = 1)
 	result_amount = 4
 	mix_message = "The solution thickens into a sweet-smelling brown sauce."
 

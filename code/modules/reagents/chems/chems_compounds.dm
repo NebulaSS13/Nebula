@@ -92,14 +92,6 @@
 	M.hallucination(60, 20)
 	M.druggy = max(M.druggy, 2)
 
-/decl/material/chem/sodiumchloride
-	name = "table salt"
-	lore_text = "A salt made of sodium chloride. Commonly used to season food."
-	taste_description = "salt"
-	color = "#ffffff"
-	overdose = REAGENTS_OVERDOSE
-	value = 0.1
-
 /decl/material/chem/blackpepper
 	name = "black pepper"
 	lore_text = "A powder ground from peppercorns. *AAAACHOOO*"

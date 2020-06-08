@@ -151,8 +151,9 @@
 	sparse_material_weight = 3
 	rich_material_weight = 1
 
-/decl/material/rocksalt
-	name = "rock salt"
+/decl/material/sodium_chloride
+	name = "sodium chloride"
+	lore_text = "A salt made of sodium chloride. Commonly used to season food."
 	ore_compresses_to = MAT_ROCK_SALT
 	ore_name = "rock salt"
 	ore_result_amount = 10
@@ -172,6 +173,8 @@
 	value = 0.8
 	sparse_material_weight = 3
 	rich_material_weight = 1
+	overdose = REAGENTS_OVERDOSE
+	taste_description = "salt"
 
 /decl/material/potash
 	name = "potash"
