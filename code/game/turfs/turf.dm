@@ -264,8 +264,8 @@ var/const/enterloopsanity = 100
 		if(message)
 			to_chat(user, message)
 	else
-		to_chat(user, "<span class='warning'>\The [source] is too dry to wash that.</span>")
-	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
+		to_chat(user, SPAN_WARNING("\The [source] is too dry to wash that."))
+	source.reagents.touch_turf(src)
 
 /turf/proc/remove_cleanables()
 	for(var/obj/effect/O in src)
