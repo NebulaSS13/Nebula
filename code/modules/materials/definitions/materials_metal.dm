@@ -12,7 +12,7 @@
 	color = "#007a00"
 	weight = MAT_VALUE_HEAVY
 	stack_origin_tech = "{'materials':5}"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/uranium = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
@@ -33,7 +33,7 @@
 	stack_origin_tech = "{'materials':4}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/gold = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
@@ -71,7 +71,7 @@
 	stack_origin_tech = "{'materials':2}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/copper = 0.6,
 		/decl/material/silver = 0.4
 	)
@@ -96,7 +96,7 @@
 	stack_origin_tech = "{'materials':3}"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/silver = 1
 	)
 	construction_difficulty = MAT_VALUE_HARD_DIY
@@ -123,7 +123,7 @@
 	icon_reinf = "reinf_over"
 	color = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/iron = 0.98,
 		/decl/material/chem/carbon = 0.02
 	)
@@ -153,7 +153,7 @@
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/aluminium
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/aluminium = 1
 	)
 	integrity = 125
@@ -290,7 +290,7 @@
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/iron = 1
 	)
 	reflectiveness = MAT_VALUE_MATTE

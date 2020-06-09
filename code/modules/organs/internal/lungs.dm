@@ -193,14 +193,15 @@
 	// humans processing thousands of units of oxygen over the course of a round for the sole purpose of poisoning vox.
 	var/ratio = BP_IS_PROSTHETIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
-		var/decl/material/mat = decls_repository.get_decl(gasname)
-		if(length(mat.chemical_makeup))
-			var/reagent_amount = breath.gas[gasname] * REAGENT_UNITS_PER_GAS_MOLE * ratio
-			 // Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.
-			if(reagent_amount >= 0.05)
-				for(var/chem in mat.chemical_makeup)
-					owner.reagents.add_reagent(chem, mat.chemical_makeup[chem] * reagent_amount)
-				breath.adjust_gas(gasname, -breath.gas[gasname], update = 0) //update after
+		var/decl/material/gas = decls_repository.get_decl(gasname)
+		if(gas.gas_metabolically_inert)
+			continue
+		// Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.
+		var/reagent_amount = breath.gas[gasname] * REAGENT_UNITS_PER_GAS_MOLE * ratio
+		if(reagent_amount < 0.05)
+			continue
+		owner.reagents.add_reagent(gasname, reagent_amount)
+		breath.adjust_gas(gasname, -breath.gas[gasname], update = 0) //update after
 
 	// Moved after reagent injection so we don't instantly poison ourselves with CO2 or whatever.
 	if(exhale_type && (!istype(owner.wear_mask) || !(exhale_type in owner.wear_mask.filtered_gases)))

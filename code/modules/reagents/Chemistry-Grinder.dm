@@ -100,9 +100,8 @@
 		return
 
 	if(istype(O,/obj/item/stack/material))
-		var/obj/item/stack/material/stack = O
-		var/decl/material/material = stack.get_material()
-		if(!LAZYLEN(material.chemical_makeup))
+		var/decl/material/material = O.get_material()
+		if(!material)
 			to_chat(user, SPAN_NOTICE("\The [material.solid_name] cannot be ground down to any usable reagents."))
 			return TRUE
 
@@ -206,20 +205,15 @@
 		var/obj/item/stack/material/stack = O
 		if(istype(stack))
 			var/decl/material/material = stack.get_material()
-			if(!LAZYLEN(material.chemical_makeup))
+			if(!material)
 				break
 
-			var/sheet_volume = 0
-			for(var/chem in material.chemical_makeup)
-				sheet_volume += material.chemical_makeup[chem] * REAGENT_UNITS_PER_MATERIAL_SHEET
-
-			var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/sheet_volume)))
+			var/amount_to_take = max(0,min(stack.amount, Floor(remaining_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)))
 			if(amount_to_take)
 				stack.use(amount_to_take)
 				if(QDELETED(stack))
 					holdingitems -= stack
-				for(var/chem in material.chemical_makeup)
-					beaker.reagents.add_reagent(chem, (amount_to_take * material.chemical_makeup[chem] * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
+				beaker.reagents.add_reagent(material.type, (amount_to_take * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
 				continue
 
 		if(O.reagents)

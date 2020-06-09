@@ -10,11 +10,15 @@
 	glass_desc = "Are you sure this is tomato juice?"
 	value = 2.5
 
-	chilling_products = list(/decl/material/chem/coagulated_blood)
+	chilling_products = list(
+		/decl/material/chem/coagulated_blood = 1
+	)
 	chilling_point = 249
 	chilling_message = "coagulates and clumps together."
 
-	heating_products = list(/decl/material/chem/coagulated_blood)
+	heating_products = list(
+		/decl/material/chem/coagulated_blood = 1
+	)
 	heating_point = 318
 	heating_message = "coagulates and clumps together."
 

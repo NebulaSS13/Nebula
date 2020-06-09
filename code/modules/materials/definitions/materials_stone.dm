@@ -57,7 +57,7 @@
 	sheet_plural_name = "bricks"
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/silicon = 1
 	)
 	value = 1.5

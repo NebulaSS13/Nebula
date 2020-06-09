@@ -5,7 +5,9 @@
 	taste_mult = 1.2
 	color = "#cf3600"
 	metabolism = REM * 0.25 // 0.05 by default. They last a while and slowly kill you.
-	heating_products = list(/decl/material/chem/toxin/denatured)
+	heating_products = list(
+		/decl/material/chem/toxin/denatured = 1
+	)
 	heating_point = 100 CELSIUS
 	heating_message = "goes clear."
 	value = 1.5
@@ -158,7 +160,11 @@
 	toxicity = 3
 	toxicity_targets_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
-	heating_products = list(/decl/material/chem/toxin/carpotoxin, /decl/material/chem/sedatives, /decl/material/copper)
+	heating_products = list(
+		/decl/material/chem/toxin/carpotoxin = 0.3, 
+		/decl/material/chem/sedatives        = 0.35, 
+		/decl/material/copper                = 0.35
+	)
 
 /decl/material/chem/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -200,7 +206,10 @@
 	taste_mult = 1
 	color = "#49002e"
 	toxicity = 4
-	heating_products = list(/decl/material/chem/toxin, /decl/material/gas/water)
+	heating_products = list(
+		/decl/material/chem/toxin = 0.3, 
+		/decl/material/gas/water = 0.7
+	)
 
 /decl/material/chem/toxin/plantbgone/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(istype(T, /turf/simulated/wall))
@@ -220,7 +229,11 @@
 	taste_description = "petroleum"
 	color = "#140b30"
 	toxicity = 4
-	heating_products = list(/decl/material/chem/acetone, /decl/material/chem/carbon, /decl/material/chem/ethanol)
+	heating_products = list(
+		/decl/material/chem/acetone = 0.2, 
+		/decl/material/chem/carbon  = 0.6, 
+		/decl/material/chem/ethanol = 0.2
+	)
 	heating_point = 145 CELSIUS
 	heating_message = "separates"
 

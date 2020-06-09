@@ -25,7 +25,7 @@
 	hitsound = 'sound/effects/woodhit.ogg'
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/carbon = 0.66,
 		/decl/material/gas/water = 0.34
 	)
@@ -97,7 +97,7 @@
 	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
 				tree can live for nearly a thousand years thanks to its natural disease resistance."
 	color = WOOD_COLOR_YELLOW
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/carbon = 0.6,
 		/decl/material/gas/water = 0.3,
 		/decl/material/chem/toxin/heartstopper = 0.1

@@ -6,6 +6,7 @@
 	touch_met = 5
 	fuel_value = 0.75
 	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
+	solvent_power = MAT_SOLVENT_MODERATE
 
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
@@ -60,22 +61,6 @@
 
 	if(halluci)
 		M.adjust_hallucination(halluci, halluci)
-
-/decl/material/chem/ethanol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
-	if(istype(O, /obj/item/paper))
-		var/obj/item/paper/paperaffected = O
-		paperaffected.clearpaper()
-		to_chat(usr, "The solution dissolves the ink on the paper.")
-		return
-	if(istype(O, /obj/item/book))
-		if(REAGENT_VOLUME(holder, type) < 5)
-			return
-		if(istype(O, /obj/item/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
-			return
-		var/obj/item/book/affectedbook = O
-		affectedbook.dat = null
-		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
 
 /decl/material/chem/ethanol/absinthe
 	name = "absinthe"

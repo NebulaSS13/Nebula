@@ -69,12 +69,31 @@
 			else
 				material_info += "It is ~[comparison] times more durable than steel."
 
-			if(LAZYLEN(mat.chemical_makeup))
+			if(mat.solvent_power > MAT_SOLVENT_NONE)
+				if(mat.solvent_power <= MAT_SOLVENT_MILD)
+					material_info += "It is a mild solvent."
+				else if(mat.solvent_power <= MAT_SOLVENT_MODERATE)
+					material_info += "It is a moderately strong solvent, capable of removing ink."
+				else if(mat.solvent_power <= MAT_SOLVENT_STRONG)
+					material_info += "It is a strong solvent and will burn exposed skin on contact."
+
+			if(LAZYLEN(mat.dissolves_into))
 				var/chems = list()
-				for(var/chemial in mat.chemical_makeup)
-					var/decl/material/R = chemial
-					chems += "[initial(R.name)] ([mat.chemical_makeup[chemial]*100]%)"
-				material_info += "The following chemicals can be extracted from it:<br> [english_list(chems)]"
+				for(var/chemical in mat.dissolves_into)
+					var/decl/material/R = chemical
+					chems += "[initial(R.name)] ([mat.dissolves_into[chemical]*100]%)"
+
+				var/solvent_needed
+				if(mat.dissolves_in <= MAT_SOLVENT_NONE)
+					solvent_needed = "any liquid"
+				else if(mat.dissolves_in <= MAT_SOLVENT_MILD)
+					solvent_needed = "a mild solvent, like water"
+				else if(mat.dissolves_in <= MAT_SOLVENT_MODERATE)
+					solvent_needed = "a moderately strong solvent, like acetone"
+				else if(mat.dissolves_in <= MAT_SOLVENT_STRONG)
+					solvent_needed = "a strong solvent, like sulphuric acid"
+
+				material_info += "The following chemicals can be extracted from it with [solvent_needed] solvent:<br> [english_list(chems)]"
 
 			if(LAZYLEN(mat.alloy_materials))
 				var/parts = list()

@@ -71,7 +71,6 @@
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
 	var/is_fusion_fuel
-	var/list/chemical_makeup			  //Used with the grinder to produce chemicals.
 	var/hidden_from_codex
 	var/lore_text
 	var/mechanics_text
@@ -162,7 +161,7 @@
 	var/gas_flags = 0
 	var/gas_tile_overlay = "generic"
 	var/gas_condensation_point = 0
-
+	var/gas_metabolically_inert = FALSE // If false, material will move into the bloodstream when breathed.
 	// Armor values generated from properties
 	var/list/basic_armor
 	var/armor_degradation_speed
@@ -181,6 +180,9 @@
 	var/cocktail_ingredient
 
 	var/dirtiness = DIRTINESS_NEUTRAL // How dirty turfs are after being exposed to this material. Negative values cause a cleaning/sterilizing effect.
+	var/solvent_power = MAT_SOLVENT_NONE
+	var/solvent_melt_dose = 0
+	var/solvent_max_damage  = 0
 
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
@@ -188,6 +190,11 @@
 	var/list/glass_special = null // null equivalent to list()
 
 	// Matter state data.
+	var/dissolve_message = "dissolves in"
+	var/dissolve_sound = 'sound/effects/bubbles.ogg'
+	var/dissolves_in = MAT_SOLVENT_STRONG
+	var/list/dissolves_into	// Used with the grinder and a solvent to extract other materials.
+
 	var/chilling_point
 	var/chilling_message = "crackles and freezes!"
 	var/chilling_sound = 'sound/effects/bubbles.ogg'
@@ -341,6 +348,26 @@
 
 /decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
 
+	if(solvent_power > MAT_SOLVENT_MILD)
+		if(istype(O, /obj/item/paper))
+			var/obj/item/paper/paperaffected = O
+			paperaffected.clearpaper()
+			to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the paper."))
+		else if(istype(O, /obj/item/book) && REAGENT_VOLUME(holder, type) >= 5)
+			if(istype(O, /obj/item/book/tome))
+				to_chat(usr, SPAN_WARNING("The solution does nothing. Whatever this is, it isn't normal ink."))
+			else
+				var/obj/item/book/affectedbook = O
+				affectedbook.dat = null
+				to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
+
+	if(solvent_power >= MAT_SOLVENT_STRONG && !O.unacidable && (istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (REAGENT_VOLUME(holder, type) > solvent_melt_dose))
+		var/obj/effect/decal/cleanable/molten_item/I = new(O.loc)
+		I.visible_message(SPAN_DANGER("\The [O] dissolves!"))
+		I.desc = "It looks like it was \a [O] some time ago."
+		qdel(O)
+		holder?.remove_reagent(type, solvent_melt_dose)
+
 	if(dirtiness <= DIRTINESS_STERILE)
 		O.germ_level -= min(REAGENT_VOLUME(holder, type)*20, O.germ_level)
 		O.was_bloodied = null
@@ -446,16 +473,19 @@
 		if(dam > 0)
 			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
 
+	if(solvent_power >= MAT_SOLVENT_STRONG)
+		M.take_organ_damage(0, removed * solvent_power)
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
 
 /decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	if(radioactivity)
-		M.apply_damage((radioactivity / 2) * removed, IRRADIATE)
 
 	if(!istype(M))
 		return
+
+	if(radioactivity)
+		M.apply_damage((radioactivity / 2) * removed, IRRADIATE)
 
 	if(dirtiness <= DIRTINESS_STERILE)
 		if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
@@ -490,6 +520,32 @@
 				H.clean_blood(1)
 				return
 		M.clean_blood()
+
+	if(solvent_power >= MAT_SOLVENT_STRONG && removed >= solvent_melt_dose)
+
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			for(var/obj/item/thing in list(H.head, H.wear_mask, H.glasses))
+				if(thing.unacidable || !H.unEquip(thing))
+					to_chat(H, SPAN_NOTICE("Your [thing] protects you from the acid."))
+					holder.remove_reagent(type, REAGENT_VOLUME(holder, type))
+					return
+				to_chat(H, SPAN_DANGER("Your [thing] dissolves!"))
+				qdel(thing)
+				removed -= solvent_melt_dose
+				if(removed <= 0)
+					return
+
+			if(!H.unacidable)
+				var/screamed
+				for(var/obj/item/organ/external/affecting in H.organs)
+					if(!screamed && affecting.can_feel_pain())
+						screamed = TRUE
+						H.emote("scream")
+					affecting.status |= ORGAN_DISFIGURED
+
+		if(!M.unacidable)
+			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage))
 
 /decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)

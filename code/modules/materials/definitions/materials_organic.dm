@@ -12,7 +12,7 @@
 	stack_origin_tech = "{'materials':3}"
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	chemical_makeup = list(
+	dissolves_into = list(
 		/decl/material/chem/toxin/plasticide = 1
 	)
 	reflectiveness = MAT_VALUE_SHINY

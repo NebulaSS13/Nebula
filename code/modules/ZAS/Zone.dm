@@ -186,7 +186,7 @@ Class Procs:
 	condensing = TRUE
 	for(var/g in air.gas)
 		var/decl/material/mat = decls_repository.get_decl(g)
-		if(length(mat.chemical_makeup) && air.temperature <= mat.gas_condensation_point)
+		if(air.temperature <= mat.gas_condensation_point)
 			var/condensation_area = air.group_multiplier / length(air.gas)
 			while(condensation_area > 0 && length(contents))
 				condensation_area--
@@ -195,8 +195,7 @@ Class Procs:
 				if(condense_amt < 1)
 					break
 				air.adjust_gas(g, -condense_amt)
-				for(var/chem in mat.chemical_makeup)
-					flooding.add_fluid(mat.chemical_makeup[chem] * condense_amt * REAGENT_UNITS_PER_GAS_MOLE, chem)
+				flooding.add_fluid(condense_amt * REAGENT_UNITS_PER_GAS_MOLE, g)
 				CHECK_TICK
 	condensing = FALSE
 
