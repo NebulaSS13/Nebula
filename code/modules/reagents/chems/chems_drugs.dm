@@ -94,6 +94,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 	narcosis = 7
+	fruit_descriptor = "rich"
 
 	euphoriant = 15
 	euphoriant_max = 15
@@ -126,6 +127,7 @@
 	value = 2
 	euphoriant = 30
 	euphoriant_max = 30
+	fruit_descriptor = "hallucinogenic"
 
 /decl/material/chem/psychotropics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/threshold = 1

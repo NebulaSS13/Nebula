@@ -91,6 +91,7 @@
 	taste_mult = 1.5
 	color = "#07aab2"
 	value = 2
+	fruit_descriptor = "numbing"
 
 /decl/material/chem/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
@@ -106,6 +107,7 @@
 	taste_description = "hot peppers"
 	taste_mult = 1.5
 	color = "#b31008"
+	fruit_descriptor = "spicy"
 	var/agony_dose = 5
 	var/agony_amount = 2
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
