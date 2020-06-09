@@ -111,10 +111,7 @@
 		update_icon()
 
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
-	if(isCoil(W))
-		material.build_wired_product(user, W, src)
-		return
-	else if(istype(W, /obj/item/stack/material))
+	if(istype(W, /obj/item/stack/material))
 		if(is_same(W))
 			..()
 		else if(!reinf_material)
