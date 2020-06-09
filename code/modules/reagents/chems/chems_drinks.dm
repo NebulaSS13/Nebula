@@ -419,7 +419,7 @@
 	..()
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.make_jittery(20)
-	M.druggy = max(M.druggy, 30)
+	M.adjust_drugged(30, 30)
 	M.dizziness += 5
 	M.drowsyness = 0
 

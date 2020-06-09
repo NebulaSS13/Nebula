@@ -12,8 +12,6 @@
 	var/hydration_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/alcohol_toxicity = 1
-
-	var/druggy = 0
 	var/adj_temp = 0
 	var/targ_temp = 310
 	var/halluci = 0
@@ -23,9 +21,11 @@
 	value = 1.2
 
 /decl/material/chem/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	..()
 	M.adjustToxLoss(removed * 2 * alcohol_toxicity)
 
 /decl/material/chem/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	..()
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
 	var/strength_mod = 1
@@ -51,8 +51,8 @@
 		M.Paralyse(20)
 		M.Sleeping(30)
 
-	if(druggy != 0)
-		M.druggy = max(M.druggy, druggy)
+	if(euphoriant)
+		M.adjust_drugged(euphoriant, euphoriant_max)
 
 	if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
@@ -333,10 +333,11 @@
 	taste_description = "purified alcoholic death"
 	color = "#000000"
 	strength = 10
-	druggy = 50
 	halluci = 10
 	glass_name = "???"
 	glass_desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
+	euphoriant = 50
+	euphoriant_max = 50
 
 /decl/material/chem/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()

@@ -67,7 +67,7 @@
 	. = ..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.hallucination(60, 20)
-	M.druggy = max(M.druggy, 2)
+	M.adjust_drugged(2)
 
 /decl/material/chem/blackpepper
 	name = "black pepper"

@@ -182,6 +182,8 @@
 	var/solvent_melt_dose = 0
 	var/solvent_max_damage  = 0
 	var/slipperiness
+	var/euphoriant // If set, ingesting/injecting this material will cause the rainbow high overlay/behavior.
+	var/euphoriant_max // Set a cap on how much drugged state the material can cause.
 
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
@@ -479,6 +481,9 @@
 			M.SelfMove(pick(GLOB.cardinal))
 		if(prob(narcosis))
 			M.emote(pick("twitch", "drool", "moan"))
+
+	if(euphoriant)
+		M.adjust_drugged(euphoriant, euphoriant_max)
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)

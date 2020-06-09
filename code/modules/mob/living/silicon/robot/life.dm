@@ -130,9 +130,7 @@
 		src.eye_blurry--
 		src.eye_blurry = max(0, src.eye_blurry)
 
-	if (src.druggy > 0)
-		src.druggy--
-		src.druggy = max(0, src.druggy)
+	handle_drugged()
 
 	//update the state of modules and components here
 	if (src.stat != CONSCIOUS)
@@ -259,7 +257,7 @@
 			clear_fullscreen("blind")
 			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
 			set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
-			set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
+			set_fullscreen(drugged, "high", /obj/screen/fullscreen/high)
 
 	return 1
 
