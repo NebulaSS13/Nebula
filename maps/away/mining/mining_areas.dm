@@ -4,6 +4,7 @@
 	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
 	sound_env = ASTEROID
 	base_turf = /turf/simulated/floor/asteroid
+	area_flags = AREA_FLAG_IS_BACKGROUND
 
 /area/mine/explored
 	name = "Mine"
