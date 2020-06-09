@@ -1866,17 +1866,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/eva)
-"es" = (
-/obj/machinery/vending/engineering{
-	icon_state = "engi";
-	dir = 4
-	},
-/obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/ship/trade/maintenance/techstorage)
 "et" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -2212,12 +2201,6 @@
 /obj/item/radio,
 /obj/machinery/light,
 /obj/item/radio,
-/turf/simulated/floor/tiled/techfloor,
-/area/ship/trade/maintenance/storage)
-"eX" = (
-/obj/item/tape_roll,
-/obj/item/stack/material/rods/fifty,
-/obj/structure/closet/crate,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/storage)
 "eY" = (
@@ -3437,7 +3420,7 @@
 /area/ship/trade/maintenance/robot)
 "Wm" = (
 /obj/machinery/network/relay{
-	initial_network_id = "scavnet"
+	initial_network_id = "tradenet"
 	},
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/maintenance/techstorage)

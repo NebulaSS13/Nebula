@@ -278,7 +278,7 @@
 /area/space)
 "ds" = (
 /obj/machinery/network/router{
-	initial_network_id = "scavnet"
+	initial_network_id = "tradenet"
 	},
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/comms)
@@ -1139,7 +1139,7 @@
 /area/space)
 "Tx" = (
 /obj/machinery/network/mainframe{
-	initial_network_id = "scavnet"
+	initial_network_id = "tradenet"
 	},
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/comms)

@@ -55,12 +55,6 @@
 	},
 /turf/simulated/floor/carpet/blue,
 /area/ship/trade/command/captain)
-"aj" = (
-/obj/effect/landmark/map_data{
-	height = 2
-	},
-/turf/space,
-/area/space)
 "ak" = (
 /obj/effect/overmap/visitable/ship/tradeship,
 /turf/space,
@@ -215,16 +209,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/atmos)
-"be" = (
-/obj/structure/cable{
-	icon_state = "4-9"
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	level = 2
-	},
-/turf/simulated/floor/carpet/blue,
-/area/ship/trade/command/captain)
 "bg" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/walllocker/emerglocker/north,
@@ -6547,7 +6531,7 @@
 	},
 /obj/effect/decal/cleanable/cobweb2,
 /obj/machinery/network/relay{
-	initial_network_id = "scavnet"
+	initial_network_id = "tradenet"
 	},
 /turf/simulated/floor/wood/yew,
 /area/ship/trade/unused)
@@ -6932,7 +6916,7 @@
 /area/ship/trade/crew/toilets)
 "Uo" = (
 /obj/machinery/network/relay{
-	initial_network_id = "scavnet"
+	initial_network_id = "tradenet"
 	},
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/comms)
