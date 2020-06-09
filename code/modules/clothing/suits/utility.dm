@@ -22,7 +22,7 @@
 
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO| ARMS
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
-	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/crowbar/emergency_forcing_tool,/obj/item/clothing/head/hardhat)
+	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/clothing/head/hardhat)
 	
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50

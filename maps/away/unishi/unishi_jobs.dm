@@ -38,7 +38,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/hoodie/cti
 	shoes = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio
-	l_pocket = /obj/item/crowbar/prybar
+	l_pocket = /obj/item/crowbar
 
 /obj/effect/submap_landmark/spawnpoint/unishi_crew
 	name = "Unishi Crew"

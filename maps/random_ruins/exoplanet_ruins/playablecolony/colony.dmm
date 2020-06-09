@@ -155,7 +155,7 @@
 "aC" = (
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
-/obj/item/crowbar/prybar,
+/obj/item/crowbar,
 /obj/item/clothing/under/captain_fly,
 /obj/item/clothing/under/color/blackjumpshorts,
 /obj/item/clothing/under/frontier,
@@ -1519,7 +1519,7 @@
 "dj" = (
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
-/obj/item/crowbar/prybar,
+/obj/item/crowbar,
 /obj/item/clothing/under/captain_fly,
 /obj/item/clothing/under/color/blackjumpshorts,
 /obj/item/clothing/under/frontier,
@@ -2551,7 +2551,7 @@
 /obj/structure/bed/padded,
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
-/obj/item/crowbar/prybar,
+/obj/item/crowbar,
 /obj/item/clothing/under/color/blackjumpshorts,
 /obj/item/clothing/under/captain_fly,
 /obj/item/clothing/under/frontier,
@@ -3038,7 +3038,7 @@
 "fM" = (
 /obj/item/gun/energy/gun/small,
 /obj/item/flashlight/upgraded,
-/obj/item/crowbar/prybar,
+/obj/item/crowbar,
 /obj/item/clothing/under/captain_fly,
 /obj/item/clothing/under/color/blackjumpshorts,
 /obj/item/clothing/under/frontier,

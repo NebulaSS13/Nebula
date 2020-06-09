@@ -89,7 +89,7 @@
 					/obj/item/flashlight/flare/glowstick = 1,
 					/obj/item/chems/food/snacks/candy/proteinbar = 1,
 					/obj/item/oxycandle = 1,
-					/obj/item/crowbar/prybar/cheap = 1)
+					/obj/item/crowbar/cheap = 1)
 
 /obj/item/storage/box/vox/
 	name = "vox survival kit"

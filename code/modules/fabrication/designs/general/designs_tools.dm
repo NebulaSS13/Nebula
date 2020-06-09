@@ -2,9 +2,6 @@
 	path = /obj/item/crowbar
 	category = "Tools"
 
-/datum/fabricator_recipe/tool/prybar
-	path = /obj/item/crowbar/prybar
-
 /datum/fabricator_recipe/tool/int_wirer
 	path = /obj/item/integrated_electronics/wirer
 
