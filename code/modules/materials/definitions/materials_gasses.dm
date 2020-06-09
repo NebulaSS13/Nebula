@@ -333,6 +333,7 @@
 	heating_point = T100C
 	reflectiveness = MAT_VALUE_SHINY
 	solvent_power = MAT_SOLVENT_MILD
+	slipperiness = 8
 
 /decl/material/gas/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(istype(M, /mob/living/carbon/slime) || alien == IS_SLIME)
@@ -359,6 +360,9 @@
 
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /decl/material/gas/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
+	
+	..()
+
 	if(!istype(T))
 		return
 
@@ -379,10 +383,6 @@
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
-
-	else if(volume >= 10)
-		var/turf/simulated/S = T
-		S.wet_floor(8, TRUE)
 
 	var/list/data = REAGENT_DATA(holder, type)
 	if(LAZYACCESS(data, "holy") && REAGENT_VOLUME(holder, type) >= 5)

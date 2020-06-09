@@ -108,12 +108,11 @@
 	taste_description = "chalky wheat"
 	nutriment_factor = 1
 	color = "#ffffff"
+	slipperiness = -1
 
 /decl/material/chem/nutriment/flour/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T, /turf/simulated))
-		var/turf/simulated/slip = T
-		new /obj/effect/decal/cleanable/flour(slip)
-		slip.unwet_floor(TRUE)
+	..()
+	new /obj/effect/decal/cleanable/flour(T)
 
 /decl/material/chem/nutriment/batter
 	name = "batter"
@@ -121,12 +120,11 @@
 	taste_description = "blandness"
 	nutriment_factor = 3
 	color = "#ffd592"
+	slipperiness = -1
 
 /decl/material/chem/nutriment/batter/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T, /turf/simulated))
-		var/turf/simulated/slip = T
-		new /obj/effect/decal/cleanable/pie_smudge(slip)
-		slip.unwet_floor(TRUE)
+	..()
+	new /obj/effect/decal/cleanable/pie_smudge(T)
 
 /decl/material/chem/nutriment/batter/cakebatter
 	name = "cake batter"
@@ -265,11 +263,7 @@
 	taste_mult = 0.1
 	nutriment_factor = 20
 	color = "#302000"
-
-/decl/material/chem/nutriment/cornoil/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T, /turf/simulated) && REAGENT_VOLUME(holder, src) >= 3)
-		var/turf/simulated/slip = T
-		slip.wet_floor()
+	slipperiness = 8
 
 /decl/material/chem/nutriment/sprinkles
 	name = "sprinkles"
