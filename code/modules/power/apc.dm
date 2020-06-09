@@ -175,8 +175,10 @@
 		SetName("\improper [area.name] APC")
 	area.apc = src
 
-	. = ..()
+	GLOB.name_set_event.register(area, src, .proc/change_area_name)
 
+	. = ..()
+	
 	if (populate_parts)
 		init_round_start()
 	else
@@ -195,6 +197,8 @@
 		area.power_equip = 0
 		area.power_environ = 0
 		area.power_change()
+
+		GLOB.name_set_event.unregister(area, src, .proc/change_area_name)
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
@@ -885,6 +889,11 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	if(power)
 		power.can_charge = chargemode
 		power.charge_wait_counter = initial(power.charge_wait_counter)
+
+/obj/machinery/power/apc/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
+	if(A != get_area(src) || !autoname)
+		return
+	SetName(replacetext(name,old_area_name,new_area_name))
 
 // overload the lights in this APC area
 /obj/machinery/power/apc/proc/overload_lighting(var/chance = 100)

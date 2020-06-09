@@ -130,6 +130,7 @@
 	. = ..()
 
 /obj/machinery/alarm/Destroy()
+	GLOB.name_set_event.unregister(src, get_area(src), .proc/change_area_name)
 	unregister_radio(src, frequency)
 	return ..()
 
@@ -156,6 +157,7 @@
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 
+	GLOB.name_set_event.register(alarm_area, src, .proc/change_area_name)
 	set_frequency(frequency)
 	update_icon()
 
@@ -775,6 +777,11 @@
 				to_chat(user, "<span class='warning'>Access denied.</span>")
 			return TRUE
 	return ..()
+
+/obj/machinery/alarm/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
+	if(A != get_area(src))
+		return
+	SetName(replacetext(name,old_area_name,new_area_name))
 
 /*
 FIRE ALARM

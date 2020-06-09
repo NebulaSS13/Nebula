@@ -2,25 +2,25 @@
 
 /mob/observer/eye/blueprints
 	
-	var/list/selected_turfs = list() // Associative list of turfs -> boolean validity that the player has selected for new area creation.
-	var/list/selection_images = list()
+	var/list/selected_turfs // Associative list of turfs -> boolean validity that the player has selected for new area creation.
+	var/list/selection_images
 	var/turf/last_selected_turf
 	var/image/last_selected_image
 	
 	// On what Z-levels this can be used to modify or create areas.
-	var/list/valid_z_levels = list()
+	var/list/valid_z_levels
 
 	// Displayed to the user to allow them to see what area they're hovering over.
 	var/obj/effect/overlay/area_name_effect
 	var/area_prefix
 	
 	// Displayed to the user on failed area creation.
-	var/list/errors = list()
+	var/list/errors
 
 /mob/observer/eye/blueprints/Initialize(var/mapload, var/list/valid_zls, var/area_p)
 	. = ..(mapload)
 
-	valid_z_levels = valid_zls
+	valid_z_levels = valid_zls.Copy()
 	area_prefix = area_p
 
 	area_name_effect = new()
@@ -34,14 +34,15 @@
 
 	last_selected_image = image('icons/effects/blueprints.dmi', "selected")
 	last_selected_image.plane = OBSERVER_PLANE
-	last_selected_image.appearance_flags = NO_CLIENT_COLOR
+	last_selected_image.appearance_flags = NO_CLIENT_COLOR | RESET_COLOR
 
 /mob/observer/eye/blueprints/Destroy()
 	. = ..()
 	QDEL_NULL(area_name_effect)
-	errors = null
-	selected_turfs = null
-	valid_z_levels = null
+	LAZYCLEARLIST(errors)
+	LAZYCLEARLIST(selected_turfs)
+	LAZYCLEARLIST(selection_images)
+	LAZYCLEARLIST(valid_z_levels)
 	last_selected_turf = null
 
 /mob/observer/eye/blueprints/release(var/mob/user)
@@ -93,18 +94,6 @@
 	if(length(new_area_name) > 50)
 		to_chat(owner, SPAN_WARNING("Text too long."))
 		return
-	
-	// Adjusting titles in the old area.
-	for(var/obj/machinery/alarm/M in A)
-		M.SetName(replacetext(M.name,prevname,new_area_name))
-	for(var/obj/machinery/power/apc/M in A)
-		M.SetName(replacetext(M.name,prevname,new_area_name))
-	for(var/obj/machinery/atmospherics/unary/vent_scrubber/M in A)
-		M.SetName(replacetext(M.name,prevname,new_area_name))
-	for(var/obj/machinery/atmospherics/unary/vent_pump/M in A)
-		M.SetName(replacetext(M.name,prevname,new_area_name))
-	for(var/obj/machinery/door/M in A)
-		M.SetName(replacetext(M.name,prevname,new_area_name))
 
 	A.SetName(new_area_name)
 	to_chat(owner, SPAN_NOTICE("You set the area '[prevname]' title to '[new_area_name]'."))
@@ -124,6 +113,7 @@
 	if(!last_selected_turf) // The player has only placed down one corner of the block.
 		last_selected_turf = next_selected_turf
 		last_selected_image.loc = last_selected_turf
+		owner.client.images |= last_selected_image // Add an indicator for the first selected turf.
 		return
 
 	if(last_selected_turf.z != next_selected_turf.z) // No multi-Z areas. Contiguity checks this as well, but this is cheaper.
@@ -132,9 +122,9 @@
 	var/list/new_selection = block(last_selected_turf, next_selected_turf)
 
 	if(params["shift"])		   // Shift click to remove areas from the selection.
-		selected_turfs -= new_selection
+		LAZYREMOVE(selected_turfs, new_selection)
 	else
-		selected_turfs |= new_selection
+		LAZYDISTINCTADD(selected_turfs, new_selection)
 
 	last_selected_image.loc = null // Remove the last selected turf indicator image.
 
@@ -145,20 +135,20 @@
 // Completes all the necessary checks for creating new areas, starting at the turf level before checking contiguity. 
 /mob/observer/eye/blueprints/proc/check_selection_validity()
 	. = TRUE
-	errors.Cut()
+	LAZYCLEARLIST(errors)
 
 	if(!LAZYLEN(selected_turfs)) // Sanity check
-		errors |= "no turfs are selected"
+		LAZYDISTINCTADD(errors, "no turfs are selected")
 		return FALSE
 
-	if(selected_turfs.len > MAX_AREA_SIZE)
-		errors |= "selection exceeds max size"
+	if(LAZYLEN(selected_turfs) > MAX_AREA_SIZE)
+		LAZYDISTINCTADD(errors, "selection exceeds max size")
 		return FALSE
 
 	for(var/turf/T in selected_turfs)
 		var/turf_valid = check_turf_validity(T)
 		. = min(., turf_valid)
-		selected_turfs[T] = turf_valid
+		LAZYSET(selected_turfs, T, turf_valid)
 	
 	if(!.) return // Skip checking contiguity if there's other errors with individual turfs.
 	. = check_contiguity()
@@ -168,27 +158,30 @@
 	if(!T)
 		return FALSE
 	if(!(T.z in valid_z_levels))
-		errors |= "selection isn't marked on the blueprints"
+		LAZYDISTINCTADD(errors, "selection isn't marked on the blueprints")
 		. = FALSE
 	var/area/A = T.loc
 	if(!A) // Safety check
-		errors |= "selection overlaps unknown location"
+		LAZYDISTINCTADD(errors, "selection overlaps unknown location")
 		return FALSE
 	if(!(A.area_flags & AREA_FLAG_IS_BACKGROUND)) // Cannot create new areas over old ones.
-		errors |= "selection overlaps other area"
+		LAZYDISTINCTADD(errors, "selection overlaps other area")
 		. = FALSE
 	if(istype(T, (A.base_turf ? A.base_turf : /turf/space)))
-		errors |= "selection is exposed to the outside"
+		LAZYDISTINCTADD(errors, "selection is exposed to the outside")
 		. = FALSE
 
 /mob/observer/eye/blueprints/proc/check_contiguity()
-	var/turf/start_turf = pick(selected_turfs)
+	var/turf/start_turf = DEFAULTPICK(selected_turfs, null)
+	if(!start_turf)
+		LAZYDISTINCTADD(errors, "no turfs were selected")
+		return FALSE
 	var/list/pending_turfs = list(start_turf)
 	var/list/checked_turfs = list()
 	
 	while(pending_turfs.len)
 		if(LAZYLEN(checked_turfs) > MAX_AREA_SIZE)
-			errors |= "selection exceeds max size"
+			LAZYDISTINCTADD(errors, "selection exceeds max size")
 			break
 		var/turf/T = pending_turfs[1]
 		pending_turfs -= T
@@ -200,10 +193,10 @@
 
 		checked_turfs += T
 	
-	var/list/incontiguous_turfs = (selected_turfs.Copy() - checked_turfs) 
+	var/list/noncontiguous_turfs = (selected_turfs.Copy() - checked_turfs) 
 
-	if(LAZYLEN(incontiguous_turfs)) // If turfs still remain in incontiguous_turfs, there are non-contiguous turfs in the selection.
-		errors |= "selection must be contiguous"
+	if(LAZYLEN(noncontiguous_turfs)) // If turfs still remain in noncontiguous_turfs, then the selection has unconnected parts.
+		LAZYDISTINCTADD(errors, "selection must be contiguous")
 		return FALSE
 	
 	return TRUE
@@ -223,26 +216,27 @@
 		return FALSE
 
 /mob/observer/eye/blueprints/proc/remove_selection()
-	selected_turfs.Cut()
+	LAZYCLEARLIST(selected_turfs)
 	update_images()
 
 /mob/observer/eye/blueprints/proc/update_images()
 	if(!owner || !owner.client)
 		return
 	
-	owner.client.images -= selection_images
-	selection_images.Cut()
-	
+	if(LAZYLEN(selection_images))
+		owner.client.images -= selection_images
+	LAZYCLEARLIST(selection_images)
+
 	if(LAZYLEN(selected_turfs))
 		for(var/turf/T in selected_turfs)
 			var/selection_icon_state = selected_turfs[T] ? "valid" : "invalid"
 			var/image/I = image('icons/effects/blueprints.dmi', T, selection_icon_state)
 			I.plane = OBSERVER_PLANE
-			I.appearance_flags = NO_CLIENT_COLOR
-			selection_images += I
-	
-	owner.client.images |= last_selected_image
-	owner.client.images += selection_images
+			I.appearance_flags = NO_CLIENT_COLOR | RESET_COLOR
+			LAZYADD(selection_images, I)
+
+	if(LAZYLEN(selection_images))
+		owner.client.images += selection_images
 
 /mob/observer/eye/blueprints/setLoc(var/turf/T)
 	. = ..()
