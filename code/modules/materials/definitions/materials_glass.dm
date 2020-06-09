@@ -18,7 +18,6 @@
 	door_icon_base = "stone"
 	table_icon_base = "solid"
 	destruction_desc = "shatters"
-	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
 	wall_support_value = 14
@@ -42,7 +41,6 @@
 	melting_point = T0C + 4000
 	color = GLASS_COLOR_SILICATE
 	stack_origin_tech = "{'materials':4}"
-	wire_product = null
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	alloy_product = TRUE
 	alloy_materials = list(MAT_GLASS = 2500, MAT_PLATINUM = 1250)

@@ -112,10 +112,6 @@
 	var/sparse_material_weight
 	var/rich_material_weight
 
-	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
-	var/wire_product
-	var/list/window_options = list()
-
 	// Damage values.
 	var/hardness = MAT_VALUE_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
 	var/reflectiveness = MAT_VALUE_DULL
@@ -240,20 +236,6 @@
 	S.update_icon()
 	S.dropInto(target_stack.loc)
 
-/decl/material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
-	if(!wire_product)
-		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]."))	
-		return
-	if(!used_stack.can_use(5) || !target_stack.can_use(1))
-		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [name] to make anything useful."))
-		return
-
-	used_stack.use(5)
-	target_stack.use(1)
-	to_chat(user, SPAN_NOTICE("You attach wire to the [name]."))
-	var/obj/item/product = new wire_product(get_turf(user))
-	if(!(user.l_hand && user.r_hand))
-		user.put_in_hands(product)
 
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
 /decl/material/Initialize()
