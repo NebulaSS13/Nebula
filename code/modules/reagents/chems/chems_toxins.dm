@@ -210,18 +210,7 @@
 		/decl/material/chem/toxin = 0.3, 
 		/decl/material/gas/water = 0.7
 	)
-
-/decl/material/chem/toxin/plantbgone/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T, /turf/simulated/wall))
-		var/turf/simulated/wall/W = T
-		if(locate(/obj/effect/overlay/wallrot) in W)
-			for(var/obj/effect/overlay/wallrot/E in W)
-				qdel(E)
-			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
-
-/decl/material/chem/toxin/plantbgone/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
-	if(istype(O, /obj/effect/vine))
-		qdel(O)
+	defoliant = TRUE
 		
 /decl/material/chem/toxin/tar
 	name = "tar"

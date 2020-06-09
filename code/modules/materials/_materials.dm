@@ -179,6 +179,7 @@
 	var/color_weight = 1
 	var/alpha = 255
 	var/cocktail_ingredient
+	var/defoliant
 
 	var/dirtiness = DIRTINESS_NEUTRAL // How dirty turfs are after being exposed to this material. Negative values cause a cleaning/sterilizing effect.
 	var/solvent_power = MAT_SOLVENT_NONE
@@ -377,6 +378,9 @@
 	if(dirtiness <= DIRTINESS_CLEAN)
 		O.clean_blood()
 
+	if(defoliant && istype(O, /obj/effect/vine))
+		qdel(O)
+
 #define FLAMMABLE_LIQUID_DIVISOR 7
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
@@ -387,35 +391,37 @@
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
 	if(istype(T, /turf/simulated))
-
-		if(slipperiness != 0 && REAGENT_VOLUME(holder, type) >= 5 && istype(T, /turf/simulated))
-			var/turf/simulated/slip = T
+		var/turf/simulated/wall/W = T
+		if(defoliant)
+			for(var/obj/effect/overlay/wallrot/E in W)
+				W.visible_message(SPAN_NOTICE("\The [E] is completely dissolved by the solution!"))
+				qdel(E)
+		if(slipperiness != 0 && REAGENT_VOLUME(holder, type) >= 5)
 			if(slipperiness < 0)
-				slip.unwet_floor(TRUE)
+				W.unwet_floor(TRUE)
 			else
-				slip.wet_floor(slipperiness)
+				W.wet_floor(slipperiness)
 		if(dirtiness != DIRTINESS_NEUTRAL && REAGENT_VOLUME(holder, type) >= 1)
 			if(dirtiness > DIRTINESS_NEUTRAL)
-				var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in T
+				var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in W
 				if (!dirtoverlay)
-					dirtoverlay = new /obj/effect/decal/cleanable/dirt(T)
+					dirtoverlay = new /obj/effect/decal/cleanable/dirt(W)
 					dirtoverlay.alpha = REAGENT_VOLUME(holder, src) * dirtiness
 				else
 					dirtoverlay.alpha = min(dirtoverlay.alpha + REAGENT_VOLUME(holder, src) * dirtiness, 255)
 			else
 				if(dirtiness <= DIRTINESS_STERILE)
-					T.germ_level -= min(REAGENT_VOLUME(holder, type)*20, T.germ_level)
-					for(var/obj/item/I in T.contents)
+					W.germ_level -= min(REAGENT_VOLUME(holder, type)*20, T.germ_level)
+					for(var/obj/item/I in W.contents)
 						I.was_bloodied = null
-					for(var/obj/effect/decal/cleanable/blood/B in T)
+					for(var/obj/effect/decal/cleanable/blood/B in W)
 						qdel(B)
 				if(dirtiness <= DIRTINESS_CLEAN)
-					var/turf/simulated/S = T
-					S.dirt = 0
-					if(S.wet > 1)
-						S.unwet_floor(FALSE)
-					T.clean_blood()
-					for(var/mob/living/carbon/slime/M in T)
+					W.dirt = 0
+					if(W.wet > 1)
+						W.unwet_floor(FALSE)
+					W.clean_blood()
+					for(var/mob/living/carbon/slime/M in W)
 						M.adjustToxLoss(rand(5, 10))
 
 	if(length(vapor_products))
