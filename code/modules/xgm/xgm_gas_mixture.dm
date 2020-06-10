@@ -270,7 +270,7 @@
 	return removed
 
 //Removes moles from the gas mixture, limited by a given flag.  Returns a gax_mixture containing the removed air.
-/datum/gas_mixture/proc/remove_by_flag(flag, amount)
+/datum/gas_mixture/proc/remove_by_flag(flag, amount, mat_flag = FALSE)
 	var/datum/gas_mixture/removed = new
 
 	if(!flag || amount <= 0)
@@ -279,12 +279,14 @@
 	var/sum = 0
 	for(var/g in gas)
 		var/decl/material/mat = decls_repository.get_decl(g)
-		if(mat.gas_flags & flag)
+		var/list/check = mat_flag ? mat.flags : mat.gas_flags
+		if(check & flag)
 			sum += gas[g]
 
 	for(var/g in gas)
 		var/decl/material/mat = decls_repository.get_decl(g)
-		if(mat.gas_flags & flag)
+		var/list/check = mat_flag ? mat.flags : mat.gas_flags
+		if(check & flag)
 			removed.gas[g] = QUANTIZE((gas[g] / sum) * amount)
 			gas[g] -= removed.gas[g] / group_multiplier
 

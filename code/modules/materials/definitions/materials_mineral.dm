@@ -257,7 +257,7 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
-	is_fusion_fuel = 1
+	flags = MAT_FLAG_FUSION_FUEL
 	dissolves_into = list(
 		/decl/material/chem/toxin/phoron = 1
 	)
@@ -277,7 +277,7 @@
 	//and following a N/Z ratio of 1.5, the molar mass of a monatomic gas is:
 	gas_molar_mass = 0.405	// kg/mol
 	gas_overlay_limit = 0.7
-	gas_flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL
+	gas_flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT
 	gas_symbol_html = "Ph"
 	gas_symbol = "Ph"
 	reflectiveness = MAT_VALUE_SHINY
