@@ -114,7 +114,7 @@
 		id_tag = "[sequential_id("obj/machinery")]"
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
-		for(var/g in SSmaterials.all_gasses)
+		for(var/g in subtypesof(/decl/material/gas))
 			if(g != MAT_OXYGEN && g != MAT_NITROGEN)
 				scrubbing_gas += g
 	var/area/A = get_area(src)

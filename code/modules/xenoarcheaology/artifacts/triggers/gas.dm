@@ -5,7 +5,7 @@
 
 /datum/artifact_trigger/gas/New()
 	if(!gas_needed)
-		gas_needed = list(pick(SSmaterials.all_gasses) = rand(1,10))
+		gas_needed = list(pick(subtypesof(/decl/material/gas)) = rand(1,10))
 
 /datum/artifact_trigger/gas/copy()
 	var/datum/artifact_trigger/gas/C = ..()
