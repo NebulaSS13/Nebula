@@ -87,3 +87,10 @@ var/list/icon_state_cache = list()
 		if(H.species.get_bodytype(H) != bodytype)
 			overlay = H.species.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, slot)
 	. = overlay
+
+//Special proc belts use to compose their icon
+/obj/item/proc/get_on_belt_overlay()
+	if(check_state_in_icon("on_belt", icon))
+		var/image/res = image(icon, "on_belt")
+		res.color = color
+		return res

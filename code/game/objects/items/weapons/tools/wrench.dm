@@ -2,18 +2,21 @@
 	name = "wrench"
 	desc = "A good, durable combination wrench, with self-adjusting, universal open- and ring-end mechanisms to match a wide variety of nuts and bolts."
 	icon = 'icons/obj//items/tool/wrench.dmi'
-	icon_state = "wrench"
-	item_state = "wrench"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	on_mob_icon = 'icons/obj//items/tool/wrench.dmi'
+	icon_state = "world"
 	slot_flags = SLOT_BELT
-	force = 7
-	throwforce = 7.0
+	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':1,'engineering':1}"
 	material = MAT_STEEL
 	center_of_mass = @"{'x':17,'y':16}"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
+	applies_material_colour = TRUE
+	var/handle_color
+	var/global/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
 
-/obj/item/wrench/Initialize()
-	icon_state = "wrench[pick("","_red","_black","_green","_blue")]"
+/obj/item/wrench/on_update_icon()
 	. = ..()
+	if(!handle_color)
+		handle_color = pick(valid_colours)
+	overlays += get_mutable_overlay(icon, "[get_world_inventory_state()]_handle", handle_color)

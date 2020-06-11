@@ -903,12 +903,12 @@
 	id_tag = "merc_shuttle";
 	pixel_x = 0
 	},
-/obj/item/crowbar/prybar,
-/obj/item/crowbar/prybar,
-/obj/item/crowbar/prybar,
-/obj/item/crowbar/prybar,
-/obj/item/crowbar/prybar,
-/obj/item/crowbar/prybar,
+/obj/item/crowbar,
+/obj/item/crowbar,
+/obj/item/crowbar,
+/obj/item/crowbar,
+/obj/item/crowbar,
+/obj/item/crowbar,
 /obj/machinery/button/blast_door{
 	id_tag = "merc_airlock";
 	req_access = list("ACCESS_SYNDICATE")
