@@ -24,4 +24,4 @@ This is a quick and dirty set of agreed-upon standards for contributions to the 
 - Check for adherence to the above, general code quality (efficiency, good practices, proper use of tools), and content quality (spelling of descs, etc). Not meeting the objective standards means no merge.
 - If there's a personal dislike of the PR, post about it for discussion. Maybe have an 'on hold for discussion' label. Try to reach a consensus/compromise. Failing a compromise, a majority maintainer vote will decide.
 - First person to review approves the PR, second person to review can merge it. If 24 hours pass with no objections, first person can merge the PR themselves.
-- Non-fix/non-critical PRs have a 24 hour grace period for people to object to their inclusion. Don't merge for the grace period (reviews are fine).
+  - PRs can have a 24 hour grace period applied by maintainers if it seems important for discussion and responses to be involved. Don't merge for the grace period if applied (reviews are fine).
