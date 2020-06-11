@@ -9,6 +9,13 @@
 		if(ispath(key, /decl/material))
 			resources -= key
 
+/datum/fabricator_recipe/robotics/prosthetic/get_product_name()
+	. = ..()
+	. = "prosthetic ([.])"
+	if(model)
+		var/datum/robolimb/brand = model
+		return "[.] ([initial(brand.company)])"
+
 /datum/fabricator_recipe/robotics/prosthetic/build()
 	. = ..()
 	for(var/obj/item/organ/external/E in .)

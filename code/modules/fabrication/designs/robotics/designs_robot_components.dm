@@ -2,6 +2,10 @@
 	category = "Robot Component"
 	path = /obj/item/robot_parts/robot_suit
 
+/datum/fabricator_recipe/robotics/robot_component/get_product_name()
+	. = ..()
+	return "robot part ([.])"
+
 /datum/fabricator_recipe/robotics/robot_component/exoskeleton_flying
 	path = /obj/item/robot_parts/robot_suit/flyer
 
