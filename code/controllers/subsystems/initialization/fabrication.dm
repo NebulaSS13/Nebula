@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(fabrication)
 	name = "Fabrication"
 	flags = SS_NO_FIRE
-	init_order = SS_INIT_MISC_LATE
+	init_order = SS_INIT_MISC
 
 	var/list/all_recipes =                 list()
 	var/list/locked_recipes =              list()
