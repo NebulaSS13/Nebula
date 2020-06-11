@@ -273,10 +273,9 @@
 
 
 obj/machinery/lapvend/attackby(obj/item/W as obj, mob/user as mob)
-	var/obj/item/card/id/I = W.GetIdCard()
 	// Awaiting payment state
 	if(state == 2)
-		if(process_payment(I,W))
+		if(process_payment(W))
 			fabricate_and_recalc_price(1)
 			flick("laptop-vend", src)
 			if((devtype == 1) && fabricated_laptop)
@@ -296,26 +295,13 @@ obj/machinery/lapvend/attackby(obj/item/W as obj, mob/user as mob)
 
 
 // Simplified payment processing, returns 1 on success.
-/obj/machinery/lapvend/proc/process_payment(var/obj/item/card/id/I, var/obj/item/ID_container)
-	if(I==ID_container || ID_container == null)
-		visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
-	else
-		visible_message("<span class='info'>\The [usr] swipes \the [ID_container] through \the [src].</span>")
-	var/datum/money_account/customer_account = I ? get_account(I.associated_account_number) : null
-	if (!customer_account || customer_account.suspended)
-		ping("Connection error. Unable to connect to account.")
-		return 0
-
-	if(customer_account.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
-		var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-		customer_account = attempt_account_access(I.associated_account_number, attempt_pin, 2)
-
-		if(!customer_account)
-			ping("Unable to access account: incorrect credentials.")
-			return 0
-
-	if(customer_account.withdraw(total_price, "Purchase of [(devtype == 1) ? "laptop computer" : "tablet microcomputer"].", "Computer Manufacturer (via [src.name])"))
-		return 1
-	else
-		ping("Transaction failed! Please try again.")
-		return 0
+/obj/machinery/lapvend/proc/process_payment(var/obj/item/charge_stick/I)
+	if(isnull(I))
+		ping("Invalid payment format.")
+		return FALSE
+	visible_message(SPAN_INFO("\The [usr] inserts \the [I] into \the [src]."))
+	if(total_price > I.loaded_worth)
+		ping("Unable to process transaction: insufficient funds.")
+		return FALSE
+	I.loaded_worth -= total_price
+	return TRUE
