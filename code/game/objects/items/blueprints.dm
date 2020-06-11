@@ -52,6 +52,7 @@
 	desc = "Blueprints of the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
 	area_prefix = station_name()
 	valid_z_levels += GLOB.using_map.station_levels
+	return TRUE
 
 //For use on exoplanets
 /obj/item/blueprints/outpost
