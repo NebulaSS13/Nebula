@@ -44,7 +44,7 @@
 	var/build_time_multiplier = 1
 	var/global/list/stored_substances_to_names = list()
 
-	var/list/design_cache
+	var/list/design_cache = list()
 	var/list/installed_designs
 
 	var/sound_id
@@ -96,9 +96,7 @@
 				var/decl/material/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))
 
-	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
-	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
-	refresh_design_cache()
+	SSfabrication.init_fabricator(src)
 
 /obj/machinery/fabricator/proc/refresh_design_cache(var/list/known_tech)
 	if(length(installed_designs))
