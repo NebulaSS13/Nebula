@@ -110,3 +110,6 @@
 	client_color = "#af111c"
 	priority = INFINITY //This effect sort of exists on its own you /have/ to be seeing RED
 	override = TRUE //Because multiplying this will inevitably fail
+
+/datum/client_color/oversaturated/New()
+	client_color = color_saturation(40)
