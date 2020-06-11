@@ -366,7 +366,7 @@ datum/gas_mixture/proc/check_recombustibility(list/fuel_objs)
 	for(var/g in gas)
 		if(QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
 			var/decl/material/gas = decls_repository.get_decl(g)
-			if(gas.gas_flags & XGM_GAS_OXIDIZER)
+			if(gas.gas_flags & XGM_GAS_FUEL)
 				. = 1
 				break
 
