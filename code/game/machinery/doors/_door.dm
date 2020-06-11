@@ -11,12 +11,13 @@
 	density = 1
 	layer = CLOSED_DOOR_LAYER
 	interact_offline = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed/door
+	uncreated_component_parts = null
 
 	var/open_layer = OPEN_DOOR_LAYER
 	var/closed_layer = CLOSED_DOOR_LAYER
 
 	var/visible = 1
-	var/p_open = 0
 	var/operating = 0
 	var/autoclose = 0
 	var/glass = 0
@@ -126,7 +127,7 @@
 		explosion_resistance = density ? initial(explosion_resistance) : 0
 
 /obj/machinery/door/Bumped(atom/AM)
-	if(p_open || operating) return
+	if(panel_open || operating) return
 	if(ismob(AM))
 		var/mob/M = AM
 		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
@@ -140,14 +141,12 @@
 		if(src.check_access(bot.botcard))
 			if(density)
 				open()
-		return
 
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return !block_air_zones
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return !opacity
 	return !density
-
 
 /obj/machinery/door/proc/bumpopen(mob/user)
 	if(operating)	return
@@ -159,7 +158,6 @@
 			open()
 		else
 			do_animate("deny")
-	return
 
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
@@ -183,8 +181,6 @@
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
 		take_damage(min(damage, 100))
 
-
-
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
 	var/tforce = 0
@@ -196,23 +192,29 @@
 	take_damage(tforce)
 
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
-/obj/machinery/door/interface_interact(user)
-	if(CanInteract(user, DefaultTopicState()))
-		return attackby(user, user)
+/obj/machinery/door/physical_attack_hand(user)
+	if(operating)
+		return FALSE
 
-/obj/machinery/door/attackby(obj/item/I, mob/user)
-	src.add_fingerprint(user, 0, I)
+	if(allowed(user))
+		toggle()
+	else if(density)
+		do_animate("deny")
 
+	update_icon()
+	return TRUE
+
+/obj/machinery/door/proc/handle_repair(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/material) && I.get_material_type() == src.get_material_type())
-		if(stat & BROKEN)
+		if(reason_broken & MACHINE_BROKEN_GENERIC)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
-			return
+			return TRUE
 		if(health >= maxhealth)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
-			return
+			return TRUE
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
-			return
+			return TRUE
 
 		//figure out how much metal we need
 		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
@@ -234,12 +236,12 @@
 		if (transfer)
 			to_chat(user, "<span class='notice'>You fit [transfer] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
 
-		return
+		return TRUE
 
 	if(repairing && isWelder(I))
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
-			return
+			return TRUE
 
 		var/obj/item/weldingtool/welder = I
 		if(welder.remove_fuel(0,user))
@@ -251,32 +253,20 @@
 				update_icon()
 				qdel(repairing)
 				repairing = null
-		return
+		return TRUE
 
 	if(repairing && isCrowbar(I))
 		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.dropInto(user.loc)
 		repairing = null
+		return TRUE
+
+/obj/machinery/door/attackby(obj/item/I, mob/user)
+	. = handle_repair(I, user)
+	if(.)
 		return
-
-	check_force(I, user)
-
-	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
-
-	if(src.operating) return
-
-	if(src.allowed(user) && operable())
-		if(src.density)
-			open()
-		else
-			close()
-		return
-
-	if(src.density)
-		do_animate("deny")
-	update_icon()
-	return
+	return ..()
 
 /obj/machinery/door/emag_act(var/remaining_charges)
 	if(density && operable())
@@ -286,21 +276,21 @@
 		operating = -1
 		return 1
 
-//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
-/obj/machinery/door/proc/check_force(obj/item/I, mob/user)
-	if(src.density && istype(I, /obj/item) && user.a_intent == I_HURT && !istype(I, /obj/item/card))
-		var/obj/item/W = I
+/obj/machinery/door/bash(obj/item/I, mob/user)
+	if(density && user.a_intent == I_HURT && !(I.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
-			user.do_attack_animation(src)
-			if(W.force < min_force)
-				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
-			else
-				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
-				playsound(src.loc, hitsound, 100, 1)
-				take_damage(W.force)
+		user.do_attack_animation(src)
+		if(I.force < min_force)
+			user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I] with no visible effect.</span>")
+		else
+			user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [I]!</span>")
+			playsound(src.loc, hitsound, 100, 1)
+			take_damage(I.force)
+		return TRUE
+	return FALSE
 
 /obj/machinery/door/take_damage(var/damage)
+	..()
 	var/initialhealth = src.health
 	src.health = max(0, src.health - damage)
 	if(src.health <= 0 && initialhealth > 0)
@@ -312,8 +302,6 @@
 	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
 		visible_message("\The [src] shows signs of damage!" )
 	update_icon()
-	return
-
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()
@@ -326,10 +314,9 @@
 	else if(src.health < src.maxhealth * 3/4)
 		to_chat(user, "\The [src] shows signs of damage!")
 
-
-/obj/machinery/door/set_broken(new_state)
+/obj/machinery/door/set_broken(new_state, cause)
 	. = ..()
-	if(. && new_state)
+	if(. && new_state && (cause & MACHINE_BROKEN_GENERIC))
 		visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
 
 /obj/machinery/door/explosion_act(severity)
@@ -360,18 +347,16 @@
 	else
 		icon_state = "door0"
 	SSradiation.resistance_cache.Remove(get_turf(src))
-	return
-
 
 /obj/machinery/door/proc/do_animate(animation)
 	switch(animation)
 		if("opening")
-			if(p_open)
+			if(panel_open)
 				flick("o_doorc0", src)
 			else
 				flick("doorc0", src)
 		if("closing")
-			if(p_open)
+			if(panel_open)
 				flick("o_doorc1", src)
 			else
 				flick("doorc1", src)
@@ -382,8 +367,6 @@
 			if(density && !(stat & (NOPOWER|BROKEN)))
 				flick("door_deny", src)
 				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
-	return
-
 
 /obj/machinery/door/proc/open(var/forced = 0)
 	if(!can_open(forced))
@@ -474,7 +457,7 @@
 			bound_height = width * world.icon_size
 
 	if(.)
-		deconstruct(null, TRUE)
+		dismantle(TRUE)
 
 /obj/machinery/door/proc/CheckPenetration(var/base_chance, var/damage)
 	. = damage/maxhealth*180
@@ -482,11 +465,10 @@
 		. *= 2
 	. = round(.)
 
-/obj/machinery/door/proc/deconstruct(mob/user, var/moved = FALSE)
-	return null
-
 /obj/machinery/door/morgue
 	icon = 'icons/obj/doors/doormorgue.dmi'
+	frame_type = /obj/structure/door_assembly/blast/morgue
+	base_type = /obj/machinery/door/morgue
 
 /obj/machinery/door/proc/update_connections(var/propagate = 0)
 	var/dirs = 0
@@ -521,15 +503,6 @@
 
 /obj/machinery/door/CanFluidPass(var/coming_from)
 	return !density
-
-// Most doors will never be deconstructed over the course of a round,
-// so as an optimization defer the creation of electronics until
-// the airlock is deconstructed
-/obj/machinery/door/proc/create_electronics(var/electronics_type = /obj/item/airlock_electronics)
-	var/obj/item/airlock_electronics/electronics = new electronics_type(loc)
-	electronics.set_access(src)
-	electronics.autoset = autoset_access
-	return electronics
 
 /obj/machinery/door/proc/access_area_by_dir(direction)
 	var/turf/T = get_turf(get_step(src, direction))

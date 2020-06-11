@@ -1,6 +1,18 @@
 /datum/fabricator_recipe/engineering
-	path = /obj/item/airlock_electronics
+	path = /obj/item/stock_parts/circuitboard/airlock_electronics
 	category = "Engineering"
+
+/datum/fabricator_recipe/engineering/windoor
+	path = /obj/item/stock_parts/circuitboard/airlock_electronics/windoor
+
+/datum/fabricator_recipe/engineering/firedoor
+	path = /obj/item/stock_parts/circuitboard/airlock_electronics/firedoor
+
+/datum/fabricator_recipe/engineering/morgue
+	path = /obj/item/stock_parts/circuitboard/airlock_electronics/morgue
+
+/datum/fabricator_recipe/engineering/blast_door
+	path = /obj/item/stock_parts/circuitboard/airlock_electronics/blast
 
 /datum/fabricator_recipe/engineering/airalarm
 	path = /obj/item/stock_parts/circuitboard/air_alarm

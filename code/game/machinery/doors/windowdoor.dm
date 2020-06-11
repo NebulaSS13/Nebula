@@ -15,23 +15,16 @@
 	explosion_resistance = 5
 	air_properties_vary_with_direction = 1
 	pry_mod = 0.5
-	var/obj/item/airlock_electronics/electronics = null
+	base_type = /obj/machinery/door/window
+	frame_type = /obj/structure/windoor_assembly
 	var/base_state = "left"
 
-/obj/machinery/door/window/Initialize(mapload, obj/structure/windoor_assembly/assembly)
+/obj/machinery/door/window/Initialize(mapload, d, populate_parts = TRUE, obj/structure/windoor_assembly/assembly)
 	if(assembly)
-		set_dir(assembly.dir)
 		set_density(0)
 		if(assembly.electronics)
-			if(assembly.electronics.autoset)
-				autoset_access = TRUE // Being careful in case of subtypes or something.
-			else
-				req_access = assembly.electronics.conf_access
-				if(assembly.electronics.one_access)
-					req_access = list(req_access)
-				autoset_access = FALSE
-			electronics = assembly.electronics
-			electronics.forceMove(src)
+			install_component(assembly.electronics)
+			assembly.electronics.construct(src)
 	. = ..()
 	update_nearby_tiles()
 
@@ -42,26 +35,16 @@
 		icon_state = "[base_state]open"
 
 /obj/machinery/door/window/proc/shatter(var/display_message = 1)
-	new /obj/item/material/shard(src.loc)
-	var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
-	CC.amount = 2
-	var/obj/item/airlock_electronics/ae
-	if(!electronics)
-		create_electronics()
-	ae = electronics
-	electronics = null
-	ae.dropInto(loc)
-	if(operating == -1)
-		ae.icon_state = "door_electronics_smoked"
-		operating = 0
-	set_density(0)
+	frame_type = null
+	new /obj/item/material/shard(loc)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")
-	qdel(src)
+	dismantle()
 
-/obj/machinery/door/window/deconstruct(mob/user, var/moved = FALSE)
-	shatter()
+/obj/machinery/door/window/dismantle()
+	new /obj/item/stack/cable_coil(loc, 2)
+	. = ..()
 
 /obj/machinery/door/window/Destroy()
 	set_density(0)
@@ -173,65 +156,13 @@
 	return !density || ((dir in GLOB.cardinal) && coming_from != dir)
 
 /obj/machinery/door/window/attackby(obj/item/I, mob/user)
-
 	//If it's in the process of opening/closing, ignore the click
 	if (src.operating == 1)
 		return
 
-	//Emags and ninja swords? You may pass.
-	if (istype(I, /obj/item/melee/energy/blade))
-		if(emag_act(10, user))
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-			spark_system.set_up(5, 0, src.loc)
-			spark_system.start()
-			playsound(src.loc, "sparks", 50, 1)
-			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			visible_message(SPAN_WARNING("The glass door was sliced open by [user]!"))
-		return 1
-
-	//If it's emagged, crowbar can pry electronics out.
-	if (src.operating == -1 && isCrowbar(I))
-		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
-		if (do_after(user,40,src))
-			to_chat(user, SPAN_NOTICE("You removed the windoor electronics!"))
-
-			var/obj/structure/windoor_assembly/wa = new/obj/structure/windoor_assembly(src.loc)
-			if (istype(src, /obj/machinery/door/window/brigdoor))
-				wa.secure = TRUE
-				wa.SetName("secure wired windooraAssembly")
-			else
-				wa.SetName("wired windoor assembly")
-			wa.facing_left = !(src.base_state == "right" || src.base_state == "rightsecure")
-			wa.set_dir(src.dir)
-			wa.wired = TRUE
-			wa.anchored = TRUE
-			wa.update_icon()
-
-			var/obj/item/airlock_electronics/ae
-			if(!electronics)
-				create_electronics()
-			ae = electronics
-			electronics = null
-			ae.dropInto(loc)
-			ae.icon_state = "door_electronics_smoked"
-
-			operating = 0
-			shatter(src)
-			return
-
-	//If it's a weapon, smash windoor. Unless it's an id card, agent card, ect.. then ignore it (Cards really shouldnt damage a door anyway)
-	if(src.density && istype(I, /obj/item) && !istype(I, /obj/item/card))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		var/aforce = I.force
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		visible_message("<span class='danger'>[src] was hit by [I].</span>")
-		if(I.damtype == BRUTE || I.damtype == BURN)
-			take_damage(aforce)
+	. = ..()
+	if(.)
 		return
-
-
-	src.add_fingerprint(user, 0, I)
 
 	if (src.allowed(user))
 		if (src.density)
@@ -242,9 +173,18 @@
 	else if (src.density)
 		flick(text("[]deny", src.base_state), src)
 
-/obj/machinery/door/window/create_electronics(var/electronics_type = /obj/item/airlock_electronics)
-	electronics = ..()
-	return electronics	
+/obj/machinery/door/window/bash(obj/item/I, mob/user)
+	//Emags and ninja swords? You may pass.
+	if (istype(I, /obj/item/melee/energy/blade))
+		if(emag_act(10, user))
+			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			spark_system.set_up(5, 0, src.loc)
+			spark_system.start()
+			playsound(src.loc, "sparks", 50, 1)
+			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
+			visible_message(SPAN_WARNING("The glass door was sliced open by [user]!"))
+		return 1
+	return ..()
 
 /obj/machinery/door/window/brigdoor
 	name = "secure door"

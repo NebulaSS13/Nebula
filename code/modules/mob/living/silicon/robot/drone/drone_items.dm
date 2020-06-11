@@ -11,7 +11,7 @@
 	//Has a list of items that it can hold.
 	var/list/can_hold = list(
 		/obj/item/cell,
-		/obj/item/airlock_electronics,
+		/obj/item/stock_parts/circuitboard/airlock_electronics,
 		/obj/item/tracker_electronics,
 		/obj/item/stock_parts,
 		/obj/item/frame,

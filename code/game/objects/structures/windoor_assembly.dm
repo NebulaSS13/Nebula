@@ -19,7 +19,7 @@
 	material = MAT_GLASS
 	tool_interaction_flags = TOOL_INTERACTION_ALL
 
-	var/obj/item/airlock_electronics/electronics = null
+	var/obj/item/stock_parts/circuitboard/airlock_electronics/windoor/electronics = null
 
 	//Vars to help with the icon's name
 	var/facing_left           //Does the windoor open to the left?
@@ -91,13 +91,14 @@ obj/structure/windoor_assembly/Destroy()
 		if(do_after(user, 4 SECONDS, src))
 			var/obj/machinery/door/window/windoor
 			if(secure)
-				windoor = new /obj/machinery/door/window/brigdoor(loc, src)
+				windoor = new /obj/machinery/door/window/brigdoor(loc, dir, FALSE, src)
 				windoor.base_state = "[facing_left ? "left" : "right"]secure"
 			else
-				windoor = new (loc, src)
+				windoor = new (loc, dir, FALSE, src)
 				windoor.base_state = facing_left ? "left" : "right"
 			windoor.icon_state = "[windoor.base_state]open"
 			visible_message(SPAN_NOTICE("\The [user] finishes \the [windoor]!"))
+			windoor.construct_state.post_construct(windoor)
 			qdel(src)
 		return TRUE	
 	. = ..()
@@ -126,7 +127,7 @@ obj/structure/windoor_assembly/Destroy()
 				visible_message(SPAN_NOTICE("\The [user] finishes reinforcing \the [src]."))
 				secure = TRUE
 			. = TRUE
-		else if(wired && !electronics && istype(W, /obj/item/airlock_electronics) && W.icon_state != "door_electronics_smoked")
+		else if(wired && !electronics && istype(W, /obj/item/stock_parts/circuitboard/airlock_electronics/windoor))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			visible_message(SPAN_NOTICE("\The [user] starts installing \the [W] into \the [src]."))
 			if(do_after(user, 4 SECONDS, src) && wired && !electronics && anchored && !QDELETED(src) && user.unEquip(W, src))

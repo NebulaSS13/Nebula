@@ -22,7 +22,7 @@
 
 	material_health_multiplier = 0.6
 	var/obj/machinery/door/airlock/airlock = null
-	var/obj/item/airlock_electronics/brace/electronics
+	var/obj/item/stock_parts/circuitboard/airlock_electronics/brace/electronics
 
 
 /obj/item/airlock_brace/examine(mob/user)
@@ -55,7 +55,7 @@
 /obj/item/airlock_brace/Initialize()
 	. = ..()
 	health = max_health
-	electronics = new/obj/item/airlock_electronics/brace(src)
+	electronics = new (src)
 	update_access()
 
 /obj/item/airlock_brace/Destroy()

@@ -42,10 +42,11 @@
 	var/sound_open = 'sound/machines/airlock_ext_open.ogg'
 	var/sound_close = 'sound/machines/airlock_ext_close.ogg'
 
-	var/hatch_open = 0
-
 	power_channel = ENVIRON
 	idle_power_usage = 5
+
+	frame_type = /obj/structure/firedoor_assembly
+	base_type = /obj/machinery/door/firedoor
 
 	var/list/tile_info[4]
 	var/list/dir_alerts[4] // 4 dirs, bitflags
@@ -127,7 +128,7 @@
 		to_chat(user, "These people have opened \the [src] during an alert: [users_to_open_string].")
 
 /obj/machinery/door/firedoor/Bumped(atom/AM)
-	if(p_open || operating)
+	if(panel_open || operating)
 		return
 	if(!density)
 		return ..()
@@ -209,39 +210,11 @@
 				to_chat(user, SPAN_WARNING("You must remain still to complete this task."))
 				return
 
-	if(density && isScrewdriver(C))
-		hatch_open = !hatch_open
-		user.visible_message("<span class='danger'>[user] has [hatch_open ? "opened" : "closed"] \the [src] maintenance hatch.</span>",
-									"You have [hatch_open ? "opened" : "closed"] the [src] maintenance hatch.")
-		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		update_icon()
-		return
-
-	if(blocked && isCrowbar(C) && !repairing)
-		if(!hatch_open)
-			to_chat(user, "<span class='danger'>You must open the maintenance hatch first!</span>")
-		else
-			user.visible_message("<span class='danger'>[user] is removing the electronics from \the [src].</span>",
-									"You start to remove the electronics from [src].")
-			if(do_after(user,30,src))
-				if(blocked && density && hatch_open)
-					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-					user.visible_message("<span class='danger'>[user] has removed the electronics from \the [src].</span>",
-										"You have removed the electronics from [src].")
-					deconstruct(user)
-			else
-				to_chat(user, "<span class='notice'>You must remain still to remove the electronics from \the [src].</span>")
-		return
-
-	if(blocked)
-		to_chat(user, "<span class='danger'>\The [src] is welded shut!</span>")
-		return
-
-	if(isCrowbar(C) || istype(C,/obj/item/material/twohanded/fireaxe))
+	if(!blocked && (isCrowbar(C) || istype(C,/obj/item/material/twohanded/fireaxe)))
 		if(operating)
 			return
 
-		if(blocked && isCrowbar(C))
+		if(isCrowbar(C))
 			user.visible_message("<span class='danger'>\The [user] pries at \the [src] with \a [C], but \the [src] is welded in place!</span>",\
 			"You try to pry \the [src] [density ? "open" : "closed"], but it is welded in place!",\
 			"You hear someone struggle and metal straining.")
@@ -266,30 +239,20 @@
 						"You force \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \the [C]!",\
 						"You hear metal strain and groan, and a door [density ? "opening" : "closing"].")
 			if(density)
-				spawn(0)
-					open(1)
+				open(1)
 			else
-				spawn(0)
-					close()
-			return
+				close()
 		else
 			to_chat(user, "<span class='notice'>You must remain still to interact with \the [src].</span>")
 	return ..()
 
-/obj/machinery/door/firedoor/deconstruct(mob/user, var/moved = FALSE)
-	if (stat & BROKEN)
-		new /obj/item/stock_parts/circuitboard/broken(src.loc)
-	else
-		new /obj/item/stock_parts/circuitboard/air_alarm(src.loc)
-
-	var/obj/structure/firedoor_assembly/FA = new/obj/structure/firedoor_assembly(src.loc)
+/obj/machinery/door/firedoor/dismantle(var/moved = FALSE)
+	var/obj/structure/firedoor_assembly/FA = ..()
+	. = FA
 	FA.anchored = !moved
 	FA.set_density(1)
 	FA.wired = 1
 	FA.update_icon()
-	qdel(src)
-
-	return FA
 
 // CHECK PRESSURE
 /obj/machinery/door/firedoor/Process()
@@ -352,8 +315,12 @@
 	return ..()
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
-	if(hatch_open)
-		hatch_open = 0
+	if(panel_open)
+		panel_open = FALSE
+		if(istype(construct_state, /decl/machine_construction/default/panel_open))
+			var/decl/machine_construction/default/panel_open/open = construct_state
+			construct_state = open.up_state
+			construct_state.validate_state(src)
 		visible_message("The maintenance hatch of \the [src] closes.")
 		update_icon()
 
@@ -418,7 +385,7 @@
 
 	if(density)
 		icon_state = "closed"
-		if(hatch_open)
+		if(panel_open)
 			overlays = panel_overlay
 		if(pdiff_alert)
 			lights_overlay += "palert"

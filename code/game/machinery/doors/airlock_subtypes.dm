@@ -137,7 +137,7 @@
 	deny_file = 'icons/obj/doors/external/lights_deny.dmi'
 	lights_file = 'icons/obj/doors/external/lights_green.dmi'
 	emag_file = 'icons/obj/doors/external/emag.dmi'
-	assembly_type = /obj/structure/door_assembly/door_assembly_ext
+	frame_type = /obj/structure/door_assembly/door_assembly_ext
 	door_color = COLOR_NT_RED
 	paintable = AIRLOCK_PAINTABLE
 	stock_part_presets = list(
@@ -155,19 +155,19 @@
 	locked = TRUE
 
 /obj/machinery/door/airlock/external/escapepod/attackby(obj/item/C, mob/user)
-	if(p_open && !arePowerSystemsOn())
+	if(panel_open && !arePowerSystemsOn())
 		if(isWrench(C))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"), SPAN_WARNING("You start frantically pumping the bolt override mechanism!"))
 			if(do_after(user, 160) && locked)
 				visible_message("\The [src] bolts disengage!")
 				locked = FALSE
-				return
+				return TRUE
 			else
 				visible_message("\The [src] bolts engage!")
 				locked = TRUE
-				return
-	..()
+				return TRUE
+	return ..()
 
 /obj/machinery/door/airlock/external/shuttle
 	stock_part_presets = list(
@@ -197,75 +197,6 @@
 	locked = TRUE
 	opacity = FALSE
 
-
-// Material airlock presets
-
-/obj/machinery/door/airlock/gold
-	name = "Gold Airlock"
-	door_color = COLOR_SUN
-	mineral = MAT_GOLD
-
-/obj/machinery/door/airlock/crystal
-	name = "Crystal Airlock"
-	door_color = COLOR_CRYSTAL
-	mineral = MAT_CRYSTAL
-
-/obj/machinery/door/airlock/silver
-	name = "Silver Airlock"
-	door_color = COLOR_SILVER
-	mineral = MAT_SILVER
-
-/obj/machinery/door/airlock/diamond
-	name = "Diamond Airlock"
-	door_color = COLOR_CYAN_BLUE
-	mineral = MAT_DIAMOND
-
-/obj/machinery/door/airlock/sandstone
-	name = "\improper Sandstone Airlock"
-	door_color = COLOR_BEIGE
-	mineral = MAT_SANDSTONE
-
-/obj/machinery/door/airlock/phoron
-	name = "\improper Phoron Airlock"
-	desc = "No way this can end badly."
-	door_color = COLOR_PURPLE
-	mineral = MAT_PHORON
-
-/obj/machinery/door/airlock/uranium
-	name = "Uranium Airlock"
-	desc = "And they said I was crazy."
-	door_color = COLOR_PAKISTAN_GREEN
-	mineral = MAT_URANIUM
-	var/last_event = 0
-	var/rad_power = 7.5
-
-/obj/machinery/door/airlock/uranium/Process()
-	if(world.time > last_event+20)
-		if(prob(50))
-			SSradiation.radiate(src, rad_power)
-		last_event = world.time
-	..()
-
-/obj/machinery/door/airlock/phoron/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300)
-		PhoronBurn(exposed_temperature)
-
-/obj/machinery/door/airlock/phoron/proc/ignite(exposed_temperature)
-	if(exposed_temperature > 300)
-		PhoronBurn(exposed_temperature)
-
-/obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
-	for(var/turf/simulated/floor/target_tile in range(2,loc))
-		target_tile.assume_gas(MAT_PHORON, 35, 400+T0C)
-		spawn (0) target_tile.hotspot_expose(temperature, 400)
-	for(var/turf/simulated/wall/W in range(3,src))
-		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
-	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
-		D.ignite(temperature/4)
-	new/obj/structure/door_assembly(src.loc)
-	qdel(src)
-
-
 // Miscellaneous airlock presets
 
 /obj/machinery/door/airlock/centcom
@@ -282,7 +213,7 @@
 	fill_file = 'icons/obj/doors/secure/fill_steel.dmi'
 	explosion_resistance = 20
 	secured_wires = TRUE
-	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity
+	frame_type = /obj/structure/door_assembly/door_assembly_highsecurity
 	paintable = 0
 
 /obj/machinery/door/airlock/highsecurity/bolted
@@ -303,7 +234,7 @@
 	emag_file = 'icons/obj/doors/hatch/emag.dmi'
 	explosion_resistance = 20
 	opacity = TRUE
-	assembly_type = /obj/structure/door_assembly/door_assembly_hatch
+	frame_type = /obj/structure/door_assembly/door_assembly_hatch
 	paintable = AIRLOCK_STRIPABLE
 
 /obj/machinery/door/airlock/hatch/maintenance
@@ -321,7 +252,7 @@
 	explosion_resistance = 20
 	opacity = TRUE
 	secured_wires = TRUE
-	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
+	frame_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
 	paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE
 
 /obj/machinery/door/airlock/vault/bolted

@@ -66,7 +66,7 @@
 		/obj/item/clothing/glasses/meson = 2,
 		/obj/item/multitool = 4,
 		/obj/item/geiger = 4,
-		/obj/item/airlock_electronics = 10,
+		/obj/item/stock_parts/circuitboard/airlock_electronics = 10,
 		/obj/item/stock_parts/circuitboard/apc = 10,
 		/obj/item/stock_parts/circuitboard/air_alarm = 10,
 		/obj/item/cell = 10,

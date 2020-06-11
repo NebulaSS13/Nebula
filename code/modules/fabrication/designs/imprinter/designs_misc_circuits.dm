@@ -222,7 +222,7 @@
 	path = /obj/item/stock_parts/circuitboard/pipedispensor/disposal
 
 /datum/fabricator_recipe/imprinter/circuit/secure_airlock
-	path = /obj/item/airlock_electronics/secure
+	path = /obj/item/stock_parts/circuitboard/airlock_electronics/secure
 
 /datum/fabricator_recipe/imprinter/circuit/portable_scrubber
 	path = /obj/item/stock_parts/circuitboard/portable_scrubber
