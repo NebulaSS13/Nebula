@@ -19,7 +19,7 @@
 			gas_info+= "It is an oxidizer, required to sustain fire."
 		if(mat.gas_flags & XGM_GAS_CONTAMINANT)
 			gas_info+= "It contaminates exposed clothing with residue."
-		if(mat.gas_flags & XGM_GAS_FUSION_FUEL)
+		if(mat.flags & MAT_FLAG_FUSION_FUEL)
 			gas_info+= "It can be used as fuel in a fusion reaction."
 		if(mat.gas_condensation_point > 0 && mat.gas_condensation_point < INFINITY)
 			gas_info += "It condenses at [mat.gas_condensation_point] K."

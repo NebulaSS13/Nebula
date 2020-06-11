@@ -43,7 +43,7 @@
 	else if(istype(thing, /obj/item/stack/material))
 		var/obj/item/stack/material/M = thing
 		var/decl/material/mat = M.get_material()
-		if(!mat.is_fusion_fuel)
+		if(!(mat.flags & MAT_FLAG_FUSION_FUEL))
 			to_chat(user, "<span class='warning'>It would be pointless to make a fuel rod out of [mat.use_name].</span>")
 			return
 		if(!M.use(5))

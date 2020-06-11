@@ -142,6 +142,7 @@
 #define MAT_FLAG_UNMELTABLE         0x1
 #define MAT_FLAG_BRITTLE            0x2
 #define MAT_FLAG_PADDING            0x4
+#define MAT_FLAG_FUSION_FUEL        0x8
 
 #define SHARD_SHARD                 "shard"
 #define SHARD_SHRAPNEL              "shrapnel"

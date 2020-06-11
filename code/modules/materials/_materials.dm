@@ -70,7 +70,6 @@
 	var/flags = 0                         // Various status modifiers.
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
-	var/is_fusion_fuel
 	var/hidden_from_codex
 	var/lore_text
 	var/mechanics_text

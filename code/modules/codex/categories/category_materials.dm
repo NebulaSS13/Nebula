@@ -105,7 +105,7 @@
 			if(mat.radioactivity)
 				material_info += "It is radioactive."
 
-			if(mat.is_fusion_fuel)
+			if(mat.flags & MAT_FLAG_FUSION_FUEL)
 				material_info += "It can be used as fusion fuel."
 
 			if(mat.flags & MAT_FLAG_UNMELTABLE)

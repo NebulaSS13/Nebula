@@ -19,7 +19,7 @@
 /decl/material/gas/boron
 	name = "boron"
 	lore_text = "Boron is a chemical element with the symbol B and atomic number 5."
-	is_fusion_fuel = TRUE
+	flags = MAT_FLAG_FUSION_FUEL
 
 /decl/material/gas/lithium
 	name = "lithium"
@@ -27,15 +27,15 @@
 	dissolves_into = list(
 		/decl/material/chem/lithium = 1
 	)
-	is_fusion_fuel = TRUE
+	flags = MAT_FLAG_FUSION_FUEL
 
 /decl/material/gas/oxygen
 	name = "oxygen"
 	lore_text = "An ubiquitous oxidizing agent."
-	is_fusion_fuel = TRUE
+	flags = MAT_FLAG_FUSION_FUEL
 	gas_specific_heat = 20	
 	gas_molar_mass = 0.032	
-	gas_flags = XGM_GAS_OXIDIZER | XGM_GAS_FUSION_FUEL
+	gas_flags = XGM_GAS_OXIDIZER
 	gas_symbol_html = "O<sub>2</sub>"
 	gas_symbol = "O2"
 
@@ -45,10 +45,9 @@
 	dissolves_into = list(
 		/decl/material/gas/helium = 1
 	)
-	is_fusion_fuel = TRUE
+	flags = MAT_FLAG_FUSION_FUEL
 	gas_specific_heat = 80
 	gas_molar_mass = 0.004
-	gas_flags = XGM_GAS_FUSION_FUEL
 	gas_symbol_html = "He"
 	gas_symbol = "He"
 	taste_description = "nothing"
@@ -216,7 +215,7 @@
 	if(prob(40))
 		gas_flags |= XGM_GAS_CONTAMINANT
 	if(prob(40))
-		gas_flags |= XGM_GAS_FUSION_FUEL
+		flags |= MAT_FLAG_FUSION_FUEL
 	gas_symbol_html = "X<sup>[num]</sup>"
 	gas_symbol = "X-[num]"
 	if(prob(50))
@@ -451,15 +450,14 @@
 /decl/material/hydrogen
 	name = "hydrogen"
 	lore_text = "A colorless, flammable gas."
-	is_fusion_fuel = TRUE
+	flags = MAT_FLAG_FUSION_FUEL
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	is_fusion_fuel = 1
 	wall_name = "bulkhead"
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	gas_specific_heat = 100
 	gas_molar_mass = 0.002
-	gas_flags = XGM_GAS_FUEL|XGM_GAS_FUSION_FUEL
+	gas_flags = XGM_GAS_FUEL
 	gas_burn_product = MAT_WATER
 	gas_symbol_html = "H<sub>2</sub>"
 	gas_symbol = "H2"
