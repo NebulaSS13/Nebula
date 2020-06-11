@@ -548,6 +548,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	H.set_fullscreen(how_nearsighted, "nearsighted", /obj/screen/fullscreen/oxy, how_nearsighted)
 	H.set_fullscreen(H.eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
 	H.set_fullscreen(H.drugged, "high", /obj/screen/fullscreen/high)
+	if(H.drugged)
+		H.add_client_color(/datum/client_color/oversaturated)
+	else
+		H.remove_client_color(/datum/client_color/oversaturated)
 
 	for(var/overlay in H.equipment_overlays)
 		H.client.screen |= overlay
