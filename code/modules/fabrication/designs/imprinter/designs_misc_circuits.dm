@@ -149,6 +149,9 @@
 /datum/fabricator_recipe/imprinter/circuit/roboticsfab
 	path = /obj/item/stock_parts/circuitboard/roboticsfab
 
+/datum/fabricator_recipe/imprinter/circuit/textilesfab
+	path = /obj/item/stock_parts/circuitboard/textilesfab
+
 /datum/fabricator_recipe/imprinter/circuit/mech_recharger
 	path = /obj/item/stock_parts/circuitboard/mech_recharger
 
