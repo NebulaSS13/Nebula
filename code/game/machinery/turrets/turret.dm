@@ -16,6 +16,7 @@
 // TODO Add glow lighting effect
 // TODO Add automatic mode switch based on alert status
 // TODO Re-organize procs (Overrides > Getters/Setters > Logic Procs)
+// TODO Replace current emag effect with unlocking access and adding haywire mode option
 
 
 /obj/machinery/turret
@@ -29,7 +30,7 @@
 	idle_power_usage = 50
 	active_power_usage = 300
 	power_channel = EQUIP
-	req_access = list(list(access_security, access_bridge)) // List of access flags permitted to unlock/lock the panel
+	req_access = list(list(access_security, access_bridge)) // List of access flags permitted to unlock/lock the panel TODO Replace with access_lock and network_lock
 	stat_immune = 0
 	waterproof = TRUE
 	base_type = /obj/machinery/turret
@@ -48,7 +49,7 @@
 	var/haywire_timer
 	var/power_cut = FALSE // Power wire is cut
 	var/power_cut_timer
-	var/panel_locked = TRUE // If the turret control panel is locked
+	var/panel_locked = TRUE // If the turret control panel is locked TODO Remove this; Replace with automatic ID checks
 	var/lock_cut = FALSE // Lock wire is cut. Cut means the lock state cannot be
 	var/ai_locked = FALSE // If the turret control panel is locked from AI access
 	var/list/turret_whitelist =  list(list(access_security, access_bridge)) // List of access flags that will NOT be fired on
@@ -143,7 +144,67 @@
 
 
 /obj/machinery/turret/OnTopic(mob/user, href_list, datum/topic_state/state)
-	// TODO
+	if (href_list["turret_mode"] == "1")
+		set_mode(TURR_MODE_ON)
+		. = TOPIC_REFRESH
+
+	if (href_list["turret_mode"] == "0")
+		set_mode(TURR_MODE_OFF)
+		. = TOPIC_REFRESH
+
+	if (href_list["target_toggle_people"])
+		set_target(TURR_TGT_PEOPLE)
+		. = TOPIC_REFRESH
+
+	if (href_list["target_toggle_unknown"])
+		set_target(TURR_TGT_UNKNOWNS)
+		. = TOPIC_REFRESH
+
+	if (href_list["target_toggle_creature"])
+		set_target(TURR_TGT_CREATURES)
+		. = TOPIC_REFRESH
+
+	if (href_list["target_toggle_synth"])
+		set_target(TURR_TGT_SYNTHS)
+		. = TOPIC_REFRESH
+
+	if (href_list["target_toggle_downed"])
+		set_target(TURR_TGT_DOWNED)
+		. = TOPIC_REFRESH
+
+	if (href_list["target_toggle_ign_access"])
+		set_target(TURR_TGT_IGNORE_ACCESS)
+		. = TOPIC_REFRESH
+
+
+/obj/machinery/turret/interface_interact(user)
+	ui_interact(user)
+	return TRUE
+
+
+/obj/machinery/turret/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
+	var/obj/item/stock_parts/weapon_control_system/WCS = get_wcs()
+	var/obj/item/gun/G = get_gun()
+
+	var/list/data = list()
+	data["haywire"] = haywire
+	data["turret_mode"] = turret_mode
+	data["wcs"] = istype(WCS) ? WCS.name : null
+	data["has_gun"] = istype(G)
+
+	data["target_people"] = turret_targets & TURR_TGT_PEOPLE
+	data["target_unknown"] = turret_targets & TURR_TGT_UNKNOWNS
+	data["target_creature"] = turret_targets & TURR_TGT_CREATURES
+	data["target_synth"] = turret_targets & TURR_TGT_SYNTHS
+	data["target_downed"] = turret_targets & TURR_TGT_DOWNED
+	data["target_ign_access"] = turret_targets & TURR_TGT_IGNORE_ACCESS
+
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "turret.tmpl", "Turret Controls", 500, 300)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(TRUE)
 
 
 /obj/machinery/turret/emp_act(severity)
@@ -563,3 +624,15 @@
 	var/obj/item/stock_parts/weapon_control_system/WCS = get_wcs()
 	if (istype(WCS) && istype(WCS.installed_gun, /obj/item/gun))
 		. = WCS.installed_gun
+
+
+/**
+ * Sets a target flag to on or off. Will flip the flag's state instead if new_mode is not provided.
+ */
+/obj/machinery/turret/proc/set_target(target_bit, new_mode = "flip")
+	if (new_mode == "flip")
+		turret_targets ^= target_bit
+	else if (new_mode)
+		turret_targets |= target_bit
+	else
+		turret_targets = turret_targets & ~target_bit

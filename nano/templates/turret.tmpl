@@ -1,0 +1,87 @@
+<div class="itemGroup">
+	{{if data.haywire}}
+		<div class="item bad">
+			Warning: Targeting subsystem error detected!
+		</div>
+	{{/if}}
+
+	<div class="item">
+		<div class="itemLabel">
+			Turret Mode:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Enabled', null, {'turret_mode' : 1}, data.turret_mode == 'ON' ? 'redButton' : null)}}
+			{{:helper.link('Disabled', null, {'turret_mode' : 0}, data.turret_mode == 'ON' ? null : 'selected')}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Targeting Parameters:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('People', null, {'target_toggle_people' : 1}, null, data.target_people ? 'selected' : null)}}
+			{{:helper.link('Unknowns', null, {'target_toggle_unknown' : 1}, null, data.target_unknown ? 'selected' : null)}}
+			{{:helper.link('Creatures', null, {'target_toggle_creature' : 1}, null, data.target_creature ? 'selected' : null)}}
+			{{:helper.link('Synths', null, {'target_toggle_synth' : 1}, null, data.target_synth ? 'selected' : null)}}
+			{{:helper.link('Downed', null, {'target_toggle_downed' : 1}, null, data.target_downed ? 'redButton' : 'yellowButton')}}
+			{{:helper.link('Ignore Access', null, {'target_toggle_ign_access' : 1}, null, data.target_ign_access ? 'redButton' : 'yellowButton')}}
+		</div>
+	</div>
+</div>
+
+<div class="itemGroup">
+	<div class="item">
+		<div class="itemLabel">
+			Weapon Control System:
+		</div>
+		{{if data.wcs}}
+			<div class="itemContent good">
+				{{:data.wcs}} installed
+			</div>
+		{{else}}
+			<div class="itemContent bad">
+				Missing
+			</div>
+		{{/if}}
+	</div>
+	{{if data.has_gun}}
+		<div class="item">
+			<div class="itemLabel">
+				Fire Mode:
+			</div>
+			<div class="itemContent">
+				TODO
+			</div>
+		</div>
+	{{/if}}
+</div>
+
+<div class="itemGroup">
+	<div class="item">
+		<div class="itemLabel">
+			Target Access List
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Sync with Area:
+		</div>
+		<div class="itemContent">
+			TODO ON OR OFF
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			List Mode:
+		</div>
+		<div class="itemContent">
+			TODO WHITELIST OR BLACKLIST
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemContent">
+			TODO ACCESS FLAGS
+		</div>
+	</div>
+</div>

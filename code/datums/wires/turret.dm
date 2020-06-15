@@ -12,6 +12,13 @@
 	)
 
 
+/datum/wires/turret/CanUse(mob/living/L)
+	. = ..()
+	var/obj/machinery/turret/T = holder
+	if (!T.panel_open)
+		. = FALSE
+
+
 /datum/wires/turret/UpdateCut(index, mended)
 	var/obj/machinery/turret/T = holder
 	switch (index)
