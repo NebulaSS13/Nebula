@@ -270,9 +270,6 @@
 	temp_matter[type] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
-/decl/material/proc/is_a_gas()
-	. = !isnull(gas_specific_heat) && !isnull(gas_molar_mass) // Arbitrary but good enough.
-
 // Weapons handle applying a divisor for this value locally.
 /decl/material/proc/get_blunt_damage()
 	return weight //todo

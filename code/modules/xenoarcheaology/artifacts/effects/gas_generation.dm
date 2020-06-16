@@ -5,7 +5,7 @@
 /datum/artifact_effect/gas/New()
 	..()
 	if(!spawned_gas)
-		spawned_gas = pick(SSmaterials.all_gasses)
+		spawned_gas = pick(subtypesof(/decl/material/gas))
 	operation_type = pick(EFFECT_TOUCH, EFFECT_AURA)
 	origin_type = pick(EFFECT_BLUESPACE, EFFECT_SYNTH)
 

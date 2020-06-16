@@ -6,7 +6,7 @@
 		atmosphere.adjust_gas(MAT_OXYGEN, MOLES_O2STANDARD, 0)
 		atmosphere.adjust_gas(MAT_NITROGEN, MOLES_N2STANDARD)
 	else //let the fuckery commence
-		var/list/newgases = SSmaterials.all_gasses
+		var/list/newgases = subtypesof(/decl/material/gas)
 		newgases = newgases.Copy() // So we don't mutate the global list.
 		if(prob(90)) //all phoron planet should be rare
 			newgases -= MAT_PHORON

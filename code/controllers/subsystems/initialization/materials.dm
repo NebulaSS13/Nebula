@@ -10,7 +10,6 @@ SUBSYSTEM_DEF(materials)
 	var/list/alloy_products
 	var/list/processable_ores
 	var/list/fusion_reactions
-	var/list/all_gasses
 	var/list/weighted_minerals_sparse = list()
 	var/list/weighted_minerals_rich = list()
 
@@ -63,11 +62,6 @@ SUBSYSTEM_DEF(materials)
 	. = ..()
 
 /datum/controller/subsystem/materials/proc/build_gas_lists()
-	all_gasses = list()
-	for(var/thing in materials_by_name)
-		var/decl/material/mat = materials_by_name[thing]
-		if(mat.is_a_gas())
-			all_gasses[thing] = mat
 
 /datum/controller/subsystem/materials/proc/build_material_lists()
 

@@ -112,7 +112,7 @@
 	breath_type = pick(atmosphere.gas)
 	breath_pressure = 0.8*(atmosphere.gas[breath_type]/atmosphere.total_moles)*normal_pressure
 
-	var/list/newgases = SSmaterials.all_gasses
+	var/list/newgases = subtypesof(/decl/material/gas)
 	newgases = newgases.Copy()
 	newgases ^= atmosphere.gas
 	for(var/gas in newgases)

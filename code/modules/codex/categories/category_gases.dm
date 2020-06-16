@@ -3,7 +3,7 @@
 	desc = "Notable gases."
 
 /datum/codex_category/gases/Initialize()
-	for(var/gas in SSmaterials.all_gasses)
+	for(var/gas in subtypesof(/decl/material/gas))
 		var/decl/material/mat = decls_repository.get_decl(gas)
 		if(mat.hidden_from_codex)
 			continue
