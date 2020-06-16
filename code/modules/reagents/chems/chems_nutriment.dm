@@ -7,6 +7,8 @@
 	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 	color = "#664330"
 	value = 1.2
+	fruit_descriptor = "nutritious"
+
 	var/nutriment_factor = 10 // Per unit
 	var/hydration_factor = 0 // Per unit
 	var/injectable = 0
@@ -101,6 +103,7 @@
 	taste_description = "sweetness"
 	nutriment_factor = 10
 	color = "#ffff00"
+	fruit_descriptor = "rich"
 
 /decl/material/chem/nutriment/flour
 	name = "flour"
@@ -139,6 +142,7 @@
 	taste_mult = 1.3
 	nutriment_factor = 1
 	color = "#482000"
+	fruit_descriptor = "bitter"
 
 /decl/material/chem/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -166,6 +170,7 @@
 	taste_mult = 1.3
 	nutriment_factor = 5
 	color = "#302000"
+	fruit_descriptor = "bitter"
 
 /decl/material/chem/nutriment/instantjuice
 	name = "juice concentrate"
@@ -255,6 +260,7 @@
 	taste_mult = 1.3
 	nutriment_factor = 1
 	color = "#801e28"
+	fruit_descriptor = "sweet"
 
 /decl/material/chem/nutriment/cornoil
 	name = "corn oil"
@@ -283,6 +289,7 @@
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	glass_icon = DRINK_ICON_NOISY
+	fruit_descriptor = "sweet"
 
 /decl/material/chem/nutriment/vinegar
 	name = "vinegar"

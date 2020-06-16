@@ -41,6 +41,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	fruit_descriptor = "medicinal"
 
 /decl/material/chem/brute_meds/affect_overdose(mob/living/carbon/M, alien, var/datum/reagents/holder)
 	..()
@@ -93,6 +94,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	fruit_descriptor = "astringent"
 	var/remove_generic = 1
 	var/list/remove_toxins = list(
 		/decl/material/chem/toxin/zombiepowder

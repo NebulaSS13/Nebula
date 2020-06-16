@@ -175,6 +175,7 @@
 	var/alpha = 255
 	var/cocktail_ingredient
 	var/defoliant
+	var/fruit_descriptor // String added to fruit desc if this chemical is present.
 
 	var/dirtiness = DIRTINESS_NEUTRAL // How dirty turfs are after being exposed to this material. Negative values cause a cleaning/sterilizing effect.
 	var/solvent_power = MAT_SOLVENT_NONE

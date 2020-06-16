@@ -29,6 +29,9 @@
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 // Juices
+/decl/material/chem/drink/juice
+	fruit_descriptor = "sweet"
+
 /decl/material/chem/drink/juice/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
@@ -79,6 +82,7 @@
 	taste_description = "sourness"
 	taste_mult = 1.1
 	color = "#afaf00"
+	fruit_descriptor = "sweet-sour"
 
 	glass_name = "lemon juice"
 	glass_desc = "Sour..."
@@ -89,6 +93,7 @@
 	taste_description = "unbearable sourness"
 	taste_mult = 1.1
 	color = "#365e30"
+	fruit_descriptor = "sweet-sour"
 
 	glass_name = "lime juice"
 	glass_desc = "A glass of sweet-sour lime juice"
@@ -102,6 +107,7 @@
 	lore_text = "Both delicious AND rich in Vitamin C, what more do you need?"
 	taste_description = "oranges"
 	color = "#e78108"
+	fruit_descriptor = "sweet-sour"
 
 	glass_name = "orange juice"
 	glass_desc = "Vitamins! Yay!"
