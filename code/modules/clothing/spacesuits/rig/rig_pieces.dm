@@ -26,7 +26,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)
 	var/image/I = ..()
-	if(user_mob.check_rig_status())
+	if(user_mob?.check_rig_status())
 		I.icon_state += "_sealed"
 	return I
 
@@ -43,7 +43,7 @@
 
 /obj/item/clothing/gloves/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)
 	var/image/I = ..()
-	if(user_mob.check_rig_status())
+	if(user_mob?.check_rig_status())
 		I.icon_state += "_sealed"
 	return I
 
@@ -61,7 +61,7 @@
 
 /obj/item/clothing/shoes/magboots/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)
 	var/image/I = ..()
-	if(user_mob.check_rig_status())
+	if(user_mob?.check_rig_status())
 		I.icon_state += "_sealed"
 	return I
 
@@ -84,7 +84,7 @@
 
 /obj/item/clothing/suit/space/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)
 	var/image/I = ..()
-	if(user_mob.check_rig_status())
+	if(user_mob?.check_rig_status())
 		I.icon_state += "_sealed"
 	return I
 
