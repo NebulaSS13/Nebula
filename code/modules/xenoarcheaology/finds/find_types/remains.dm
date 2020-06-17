@@ -2,7 +2,7 @@
 /decl/archaeological_find/remains
 	item_type = "humanoid remains"
 	modification_flags = XENOFIND_APPLY_PREFIX | XENOFIND_REPLACE_ICON
-	responsive_reagent = /decl/material/chem/carbon
+	responsive_reagent = /decl/material/solid/carbon
 	new_icon = 'icons/effects/blood.dmi'
 	new_icon_state = "remains"
 	possible_types = list(/obj/item)

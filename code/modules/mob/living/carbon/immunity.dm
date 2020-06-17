@@ -12,7 +12,7 @@
 	immunity = Clamp(immunity + amt, 0, immunity_norm)
 
 /mob/living/carbon/proc/get_immunity()
-	var/antibiotic_boost = REAGENT_VOLUME(reagents, /decl/material/chem/antibiotics) / (REAGENTS_OVERDOSE/2)
+	var/antibiotic_boost = REAGENT_VOLUME(reagents, /decl/material/liquid/antibiotics) / (REAGENTS_OVERDOSE/2)
 	return max(immunity/100 * (1+antibiotic_boost), antibiotic_boost)
 
 /mob/living/carbon/proc/immunity_weakness()

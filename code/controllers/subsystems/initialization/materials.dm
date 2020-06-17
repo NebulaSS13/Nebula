@@ -128,9 +128,9 @@ SUBSYSTEM_DEF(materials)
 			return
 
 /datum/controller/subsystem/materials/proc/get_random_chem(var/only_if_unique = FALSE, temperature = T20C)
-	var/list/all_random_reagents = decls_repository.get_decls_of_type(/decl/material/chem/random)
+	var/list/all_random_reagents = decls_repository.get_decls_of_type(/decl/material/liquid/random)
 	for(var/rtype in all_random_reagents)
-		var/decl/material/chem/random/random = all_random_reagents[rtype]
+		var/decl/material/liquid/random/random = all_random_reagents[rtype]
 		if(only_if_unique && random.initialized)
 			continue
 		if(random.randomize_data(temperature))

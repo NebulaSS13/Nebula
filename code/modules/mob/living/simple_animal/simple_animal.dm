@@ -499,7 +499,7 @@
 	drip.update_icon()
 
 /mob/living/simple_animal/get_digestion_product()
-	return /decl/material/chem/nutriment
+	return /decl/material/liquid/nutriment
 
 /mob/living/simple_animal/eyecheck()
 	switch(flash_vulnerability)

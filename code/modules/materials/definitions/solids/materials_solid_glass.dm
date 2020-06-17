@@ -1,5 +1,4 @@
-
-/decl/material/glass
+/decl/material/solid/glass
 	name = "glass"
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	stack_type = /obj/item/stack/material/glass
@@ -11,24 +10,23 @@
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = MAT_VALUE_RIGID + 10	
 	reflectiveness = MAT_VALUE_SHINY
-	melting_point = T0C + 100
+	melting_point = T100C
 	weight = MAT_VALUE_VERY_LIGHT
 	brute_armor = 1
 	burn_armor = 2
-	door_icon_base = "stone"
 	table_icon_base = "solid"
 	destruction_desc = "shatters"
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
 	wall_support_value = 14
 
-/decl/material/glass/proc/is_reinforced()
+/decl/material/solid/glass/proc/is_reinforced()
 	return (integrity > 75) //todo
 
-/decl/material/glass/is_brittle()
+/decl/material/solid/glass/is_brittle()
 	return ..() && !is_reinforced()
 
-/decl/material/glass/borosilicate
+/decl/material/solid/glass/borosilicate
 	name = "borosilicate glass"
 	lore_text = "An extremely heat-resistant form of glass."
 	stack_type = /obj/item/stack/material/glass/borosilicate

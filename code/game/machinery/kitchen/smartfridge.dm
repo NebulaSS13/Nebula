@@ -131,9 +131,7 @@
 		var/obj/item/chems/food/snacks/S = O
 		return S.dried_type
 	else if(istype(O, /obj/item/stack/material))
-		var/obj/item/stack/material/mat = O
-		var/decl/material/skin/skin_mat = mat.material
-		return istype(skin_mat)
+		return istype(O.material, /decl/material/solid/skin)
 	return 0
 
 /obj/machinery/smartfridge/drying_rack/Process()
@@ -180,9 +178,9 @@
 
 			else if(istype(thing, /obj/item/stack/material))
 				var/obj/item/stack/material/skin = thing
-				if(!istype(skin.material, /decl/material/skin))
+				if(!istype(skin.material, /decl/material/solid/skin))
 					continue
-				var/decl/material/skin/skin_mat = skin.material
+				var/decl/material/solid/skin/skin_mat = skin.material
 				if(!skin_mat.tans_to)
 					continue
 				var/decl/material/leather_mat = decls_repository.get_decl(skin_mat.tans_to)

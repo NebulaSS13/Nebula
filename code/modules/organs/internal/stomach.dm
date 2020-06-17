@@ -114,7 +114,7 @@ obj/item/organ/internal/stomach/proc/throw_up()
 			next_cramp = world.time + rand(200,800)
 			owner.custom_pain("Your stomach cramps agonizingly!",1)
 
-		var/alcohol_volume = REAGENT_VOLUME(ingested, /decl/material/chem/ethanol)
+		var/alcohol_volume = REAGENT_VOLUME(ingested, /decl/material/liquid/ethanol)
 		
 		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
 		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))

@@ -1,4 +1,4 @@
-/decl/material/wood
+/decl/material/solid/wood
 	name = "wood"
 	liquid_name = "wood pulp"
 	lore_text = "A fibrous structural material harvested from an indeterminable plant. Don't get a splinter."
@@ -26,24 +26,74 @@
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	dissolves_into = list(
-		/decl/material/chem/carbon = 0.66,
-		/decl/material/gas/water = 0.34
+		/decl/material/solid/carbon = 0.66,
+		/decl/material/liquid/water = 0.34
 	)
 	value = 1.5
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = 22
 
-/decl/material/wood/holographic
+/decl/material/solid/wood/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/sandals(src)
+	. += new/datum/stack_recipe/tile/wood(src)
+	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)
+	. += new/datum/stack_recipe/crossbowframe(src)
+	. += new/datum/stack_recipe/furniture/coffin/wooden(src)
+	. += new/datum/stack_recipe/beehive_assembly(src)
+	. += new/datum/stack_recipe/beehive_frame(src)
+	. += new/datum/stack_recipe/furniture/bookcase(src)
+	. += new/datum/stack_recipe/zipgunframe(src)
+	. += new/datum/stack_recipe/coilgun(src)
+	. += new/datum/stack_recipe/stick(src)
+	. += new/datum/stack_recipe/noticeboard(src)
+	. += new/datum/stack_recipe/furniture/table_frame(src)
+	. += new/datum/stack_recipe/wooden_prosthetic(src)
+	. += new/datum/stack_recipe/wooden_prosthetic/right_arm(src)
+	. += new/datum/stack_recipe/wooden_prosthetic/left_leg(src)
+	. += new/datum/stack_recipe/wooden_prosthetic/right_leg(src)
+	. += new/datum/stack_recipe/wooden_prosthetic/left_hand(src)
+	. += new/datum/stack_recipe/wooden_prosthetic/right_hand(src)
+	. += new/datum/stack_recipe/wooden_prosthetic/left_foot(src)
+	. += new/datum/stack_recipe/wooden_prosthetic/right_foot(src)
+
+/decl/material/solid/wood/mahogany/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/tile/mahogany(src)
+
+/decl/material/solid/wood/maple/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/tile/maple(src)
+
+/decl/material/solid/wood/ebony/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/tile/ebony(src)
+
+/decl/material/solid/wood/walnut/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)
+		return
+	. += new/datum/stack_recipe/tile/walnut(src)
+
+/decl/material/solid/wood/holographic
 	color = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	stack_type = null
 	shard_type = SHARD_NONE
 	value = 0
 	hidden_from_codex = TRUE
 
-/decl/material/wood/holographic/get_recipes(reinf_mat)
+/decl/material/solid/wood/holographic/get_recipes(reinf_mat)
 	return list()
 
-/decl/material/wood/mahogany
+/decl/material/solid/wood/mahogany
 	name = "mahogany"
 	adjective_name = "mahogany"
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
@@ -51,14 +101,14 @@
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	value = 1.6
 
-/decl/material/wood/maple
+/decl/material/solid/wood/maple
 	name = "maple"
 	adjective_name = "maple"
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	color = WOOD_COLOR_PALE
 	value = 1.8
 
-/decl/material/wood/ebony
+/decl/material/solid/wood/ebony
 	name = "ebony"
 	adjective_name = "ebony"
 	lore_text = "Ebony is the name for a group of dark coloured, extremely dense, and fine grained hardwoods. \
@@ -71,7 +121,7 @@
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
 
-/decl/material/wood/walnut
+/decl/material/solid/wood/walnut
 	name = "walnut"
 	adjective_name = "walnut"
 	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
@@ -81,7 +131,7 @@
 	weight = MAT_VALUE_NORMAL
 	construction_difficulty = MAT_VALUE_HARD_DIY
 
-/decl/material/wood/bamboo
+/decl/material/solid/wood/bamboo
 	name = "bamboo"
 	liquid_name = "bamboo pulp"
 	adjective_name = "bamboo"
@@ -91,15 +141,15 @@
 	weight = MAT_VALUE_VERY_LIGHT
 	hardness = MAT_VALUE_RIGID
 
-/decl/material/wood/yew
+/decl/material/solid/wood/yew
 	name = "yew"
 	adjective_name = "yew"
 	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
 				tree can live for nearly a thousand years thanks to its natural disease resistance."
 	color = WOOD_COLOR_YELLOW
 	dissolves_into = list(
-		/decl/material/chem/carbon = 0.6,
-		/decl/material/gas/water = 0.3,
-		/decl/material/chem/toxin/heartstopper = 0.1
+		/decl/material/solid/carbon = 0.6,
+		/decl/material/liquid/water = 0.3,
+		/decl/material/liquid/heartstopper = 0.1
 	)
 	value = 1.8

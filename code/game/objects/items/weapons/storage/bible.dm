@@ -79,9 +79,9 @@
 /obj/item/storage/bible/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
 	if(user?.mind?.assigned_job?.is_holy)
-		if(A.reagents && A.reagents.has_reagent(/decl/material/gas/water)) //blesses all the water in the holder
+		if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water)) //blesses all the water in the holder
 			to_chat(user, SPAN_NOTICE("You bless \the [A].")) // I wish it was this easy in nethack
-			LAZYSET(A.reagents.reagent_data, /decl/material/gas/water, list("holy" = TRUE))
+			LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = TRUE))
 
 /obj/item/storage/bible/attackby(obj/item/W, mob/user)
 	if (src.use_sound)

@@ -38,7 +38,7 @@
 			continue
 
 		if(floor.density)
-			if(!isnull(seed.chems[/decl/material/chem/acid/polyacid]))
+			if(!isnull(seed.chems[/decl/material/liquid/acid/polyacid]))
 				spawn(rand(5,25)) floor.explosion_act(3)
 			continue
 
@@ -132,7 +132,7 @@
 		child.set_dir(child.calc_dir())
 		child.update_icon()
 		// Some plants eat through plating.
-		if(islist(seed.chems) && !isnull(seed.chems[/decl/material/chem/acid/polyacid]))
+		if(islist(seed.chems) && !isnull(seed.chems[/decl/material/liquid/acid/polyacid]))
 			target_turf.explosion_act(prob(80) ? 3 : 2)
 	else
 		qdel(child)

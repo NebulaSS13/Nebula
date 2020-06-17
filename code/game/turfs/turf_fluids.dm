@@ -14,7 +14,7 @@
 		add_fluid(mixture.reagent_volumes[rtype], rtype)
 	qdel(mixture)
 
-/turf/proc/add_fluid(var/amount, var/fluid = /decl/material/gas/water)
+/turf/proc/add_fluid(var/amount, var/fluid = /decl/material/liquid/water)
 	if(!flooded)
 		var/obj/effect/fluid/F = locate() in src
 		if(!F) F = new(src)

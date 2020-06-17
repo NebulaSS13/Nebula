@@ -25,7 +25,7 @@
 	suit = /obj/item/clothing/suit/bio_suit/anomaly
 	head = /obj/item/clothing/head/bio_hood/anomaly
 
-/decl/material/chem/toxin/zombie/science
+/decl/material/liquid/zombie/science
 	name = "isolated corruption"
 	lore_text = "An incredibly dark, oily substance. Moves very slightly."
 	taste_description = "decayed blood"
@@ -38,7 +38,7 @@
 /obj/item/chems/glass/beaker/vial/random_podchem/Initialize()
 	. = ..()
 	desc += "Label is smudged, and there's crusted blood fingerprints on it."
-	var/reagent_type = pick(/decl/material/chem/random, /decl/material/chem/toxin/zombie/science, /decl/material/chem/retrovirals)
+	var/reagent_type = pick(/decl/material/liquid/random, /decl/material/liquid/zombie/science, /decl/material/liquid/retrovirals)
 	reagents.add_reagent(pick(reagent_type), 5)
 
 /obj/structure/backup_server

@@ -43,5 +43,5 @@
 	if(luminol.reagents.total_volume < luminol.volume)
 		var/adding = min(luminol.volume-luminol.reagents.total_volume, 2*amount)
 		if(adding > 0)
-			luminol.reagents.add_reagent(/decl/material/chem/luminol, adding)
+			luminol.reagents.add_reagent(/decl/material/liquid/luminol, adding)
 	..()

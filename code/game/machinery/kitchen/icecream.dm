@@ -29,21 +29,21 @@
 /obj/machinery/icecream_vat/proc/get_ingredient_list(var/type)
 	switch(type)
 		if(ICECREAM_CHOCOLATE)
-			return list(/decl/material/chem/drink/milk, /decl/material/gas/water/ice, /decl/material/chem/nutriment/coco)
+			return list(/decl/material/liquid/drink/milk, /decl/material/solid/ice, /decl/material/liquid/nutriment/coco)
 		if(ICECREAM_STRAWBERRY)
-			return list(/decl/material/chem/drink/milk, /decl/material/gas/water/ice, /decl/material/chem/drink/juice/berry)
+			return list(/decl/material/liquid/drink/milk, /decl/material/solid/ice, /decl/material/liquid/drink/juice/berry)
 		if(ICECREAM_BLUE)
-			return list(/decl/material/chem/drink/milk, /decl/material/gas/water/ice, /decl/material/chem/ethanol/bluecuracao)
+			return list(/decl/material/liquid/drink/milk, /decl/material/solid/ice, /decl/material/liquid/ethanol/bluecuracao)
 		if(ICECREAM_CHERRY)
-			return list(/decl/material/chem/drink/milk, /decl/material/gas/water/ice, /decl/material/chem/nutriment/cherryjelly)
+			return list(/decl/material/liquid/drink/milk, /decl/material/solid/ice, /decl/material/liquid/nutriment/cherryjelly)
 		if(ICECREAM_BANANA)
-			return list(/decl/material/chem/drink/milk, /decl/material/gas/water/ice, /decl/material/chem/drink/juice/banana)
+			return list(/decl/material/liquid/drink/milk, /decl/material/solid/ice, /decl/material/liquid/drink/juice/banana)
 		if(CONE_WAFFLE)
-			return list(/decl/material/chem/nutriment/flour, /decl/material/chem/nutriment/sugar)
+			return list(/decl/material/liquid/nutriment/flour, /decl/material/liquid/nutriment/sugar)
 		if(CONE_CHOC)
-			return list(/decl/material/chem/nutriment/flour, /decl/material/chem/nutriment/sugar, /decl/material/chem/nutriment/coco)
+			return list(/decl/material/liquid/nutriment/flour, /decl/material/liquid/nutriment/sugar, /decl/material/liquid/nutriment/coco)
 		else
-			return list(/decl/material/chem/drink/milk, /decl/material/gas/water/ice)
+			return list(/decl/material/liquid/drink/milk, /decl/material/solid/ice)
 
 /obj/machinery/icecream_vat/proc/get_flavour_name(var/flavour_type)
 	switch(flavour_type)
@@ -70,10 +70,10 @@
 	while(product_types.len < 8)
 		product_types.Add(5)
 	if(populate_parts)
-		reagents.add_reagent(/decl/material/chem/drink/milk, 5)
-		reagents.add_reagent(/decl/material/chem/nutriment/flour, 5)
-		reagents.add_reagent(/decl/material/chem/nutriment/sugar, 5)
-		reagents.add_reagent(/decl/material/gas/water/ice, 5)
+		reagents.add_reagent(/decl/material/liquid/drink/milk, 5)
+		reagents.add_reagent(/decl/material/liquid/nutriment/flour, 5)
+		reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)
+		reagents.add_reagent(/decl/material/solid/ice, 5)
 
 /obj/machinery/icecream_vat/interface_interact(mob/user)
 	interact(user)
@@ -116,7 +116,7 @@
 			//	if(beaker)
 			//		beaker.reagents.trans_to(I, 10)
 				if(I.reagents.total_volume < 10)
-					I.reagents.add_reagent(/decl/material/chem/nutriment/sugar, 10 - I.reagents.total_volume)
+					I.reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 10 - I.reagents.total_volume)
 			else
 				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
 		else
@@ -198,7 +198,7 @@
 
 /obj/item/chems/food/snacks/icecream/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/nutriment, 5)
+	reagents.add_reagent(/decl/material/liquid/nutriment, 5)
 
 /obj/item/chems/food/snacks/icecream/proc/add_ice_cream(var/flavour_name)
 	name = "[flavour_name] icecream"

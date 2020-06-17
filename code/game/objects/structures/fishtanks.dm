@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 /obj/structure/glass_tank/aquarium
 	name = "aquarium"
 	desc = "A clear glass box for keeping specimens in. This one is full of water."
-	fill_type = /decl/material/gas/water
+	fill_type = /decl/material/liquid/water
 	fill_amt = 300
 
 /obj/structure/glass_tank/Initialize()

@@ -24,9 +24,9 @@
 /obj/item/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
 		return
-	if(A.reagents && A.reagents.has_reagent(/decl/material/gas/water))
+	if(A.reagents && A.reagents.has_reagent(/decl/material/liquid/water))
 		to_chat(user, SPAN_NOTICE("You desecrate \the [A]."))
-		LAZYSET(A.reagents.reagent_data, /decl/material/gas/water, list("holy" = FALSE))
+		LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = FALSE))
 
 /mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
 	var/has_tome = 0

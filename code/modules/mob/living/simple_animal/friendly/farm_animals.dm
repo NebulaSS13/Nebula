@@ -49,7 +49,7 @@
 
 		if(stat == CONSCIOUS)
 			if(udder && prob(5))
-				udder.add_reagent(/decl/material/chem/drink/milk, rand(5, 10))
+				udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
 
 		if(locate(/obj/effect/vine) in loc)
 			var/obj/effect/vine/SV = locate() in loc
@@ -79,7 +79,7 @@
 	var/obj/item/chems/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && ATOM_IS_OPEN_CONTAINER(G))
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
-		var/transfered = udder.trans_type_to(G, /decl/material/chem/drink/milk, rand(5,10))
+		var/transfered = udder.trans_type_to(G, /decl/material/liquid/drink/milk, rand(5,10))
 		if(G.reagents.total_volume >= G.volume)
 			to_chat(user, "<span class='warning'>\The [O] is full.</span>")
 		if(!transfered)
@@ -123,7 +123,7 @@
 	var/obj/item/chems/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && ATOM_IS_OPEN_CONTAINER(G))
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
-		var/transfered = udder.trans_type_to(G, /decl/material/chem/drink/milk, rand(5,10))
+		var/transfered = udder.trans_type_to(G, /decl/material/liquid/drink/milk, rand(5,10))
 		if(G.reagents.total_volume >= G.volume)
 			to_chat(user, "<span class='warning'>\The [O] is full.</span>")
 		if(!transfered)
@@ -136,7 +136,7 @@
 	if(!.)
 		return FALSE
 	if(udder && prob(5))
-		udder.add_reagent(/decl/material/chem/drink/milk, rand(5, 10))
+		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
 
 /mob/living/simple_animal/cow/attack_hand(mob/living/carbon/M)
 	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)

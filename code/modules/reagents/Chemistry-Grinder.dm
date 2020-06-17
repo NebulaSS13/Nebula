@@ -216,13 +216,10 @@
 				beaker.reagents.add_reagent(material.type, (amount_to_take * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
 				continue
 
-		if(O.reagents)
+		else if(O.reagents)
 			O.reagents.trans_to(beaker, O.reagents.total_volume, skill_factor)
-			if(O.reagents.total_volume == 0)
-				holdingitems -= O
-				qdel(O)
-			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
-				break
+			holdingitems -= O
+			qdel(O)
 
 /obj/machinery/reagentgrinder/proc/end_grind(mob/user)
 	inuse = FALSE
@@ -241,7 +238,7 @@
 	user.visible_message(SPAN_DANGER("\The [user]'s hand gets caught in \the [src]!"), SPAN_DANGER("Your hand gets caught in \the [src]!"))
 	user.apply_damage(dam, BRUTE, hand, damage_flags = DAM_SHARP, used_weapon = "grinder")
 	if(BP_IS_PROSTHETIC(hand_organ))
-		beaker.reagents.add_reagent(/decl/material/iron, dam)
+		beaker.reagents.add_reagent(/decl/material/solid/metal/iron, dam)
 	else
 		user.take_blood(beaker, dam)
 	user.Stun(2)

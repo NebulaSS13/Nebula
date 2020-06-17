@@ -10,7 +10,7 @@
 
 /obj/item/weldpack/Initialize()
 	create_reagents(max_fuel)
-	reagents.add_reagent(/decl/material/chem/fuel, max_fuel)
+	reagents.add_reagent(/decl/material/liquid/fuel, max_fuel)
 
 	. = ..()
 

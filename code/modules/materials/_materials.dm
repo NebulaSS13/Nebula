@@ -99,6 +99,7 @@
 	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
 	var/ignition_point           // K, point at which the material catches on fire.
 	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
+	var/boiling_point = 3000     // K, point that material will become a gas.
 	var/brute_armor = 2	 		 // Brute damage to a wall is divided by this value if the wall is reinforced by this material.
 	var/burn_armor				 // Same as above, but for Burn damage type. If blank brute_armor's value is used.
 	var/integrity = 150          // General-use HP value for products.
@@ -145,7 +146,7 @@
 	var/value = 1
 
 	// Xenoarch behavior.
-	var/xarch_source_mineral = /decl/material/iron
+	var/xarch_source_mineral = /decl/material/solid/metal/iron
 
 	// Gas behavior.
 	var/gas_overlay_limit
@@ -170,7 +171,7 @@
 	var/touch_met = 0
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
-	var/color = "#000000"
+	var/color = COLOR_BEIGE
 	var/color_weight = 1
 	var/alpha = 255
 	var/cocktail_ingredient
@@ -256,6 +257,7 @@
 		shard_icon = shard_type
 	if(!burn_armor)
 		burn_armor = brute_armor
+
 	generate_armor_values()
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
 	for(var/ctype in cocktails)
@@ -330,9 +332,10 @@
 /decl/material/proc/on_leaving_metabolism(var/mob/parent, var/metabolism_class)
 	return
 
+#define ACID_MELT_DOSE 10
 /decl/material/proc/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder) // Acid melting, cleaner cleaning, etc
 
-	if(solvent_power > MAT_SOLVENT_MILD)
+	if(solvent_power >= MAT_SOLVENT_MILD)
 		if(istype(O, /obj/item/paper))
 			var/obj/item/paper/paperaffected = O
 			paperaffected.clearpaper()
@@ -584,5 +587,5 @@
 			if(cocktail.matches(prop))
 				return cocktail.get_presentation_name(prop)
 
-	if(prop.reagents.has_reagent(/decl/material/gas/water/ice))
+	if(prop.reagents.has_reagent(/decl/material/solid/ice))
 		. = "iced [.]"

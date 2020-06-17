@@ -29,7 +29,7 @@ calculate text size per text.
 			var/decl/material/R = decls_repository.get_decl(reagent_type)
 			if(!R.taste_mult)
 				continue
-			if(istype(R, /decl/material/chem/nutriment))
+			if(istype(R, /decl/material/liquid/nutriment))
 				var/list/taste_data = LAZYACCESS(reagent_data, reagent_type)
 				for(var/taste in taste_data)
 					if(taste in tastes)
@@ -65,4 +65,4 @@ calculate text size per text.
 	return english_list(out, "something indescribable")
 
 /mob/living/carbon/proc/get_fullness()
-	return nutrition + (REAGENT_VOLUME(reagents, /decl/material/chem/nutriment) * 25)
+	return nutrition + (REAGENT_VOLUME(reagents, /decl/material/liquid/nutriment) * 25)

@@ -9,7 +9,7 @@
 
 	var/unwrenched = FALSE
 	var/initial_capacity = 1000
-	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/decl/material/gas/water = 0.5) would fill the dispenser halfway to capacity.
+	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/decl/material/liquid/water = 0.5) would fill the dispenser halfway to capacity.
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = @"[10,25,50,100,500]"
 
@@ -113,7 +113,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[10,25,50,100]"
 	initial_capacity = 50000
-	initial_reagent_types = list(/decl/material/gas/water = 1)
+	initial_reagent_types = list(/decl/material/liquid/water = 1)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/watertank/attackby(obj/item/W, mob/user)
@@ -130,7 +130,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "weldtank"
 	amount_per_transfer_from_this = 10
-	initial_reagent_types = list(/decl/material/chem/fuel = 1)
+	initial_reagent_types = list(/decl/material/liquid/fuel = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 	var/obj/item/assembly_holder/rig = null
@@ -200,7 +200,7 @@
 	anchored = 1
 	density = 0
 	amount_per_transfer_from_this = 45
-	initial_reagent_types = list(/decl/material/chem/capsaicin/condensed = 1)
+	initial_reagent_types = list(/decl/material/liquid/capsaicin/condensed = 1)
 
 /obj/structure/reagent_dispensers/water_cooler
 	name = "water cooler"
@@ -211,7 +211,7 @@
 	possible_transfer_amounts = null
 	anchored = 1
 	initial_capacity = 500
-	initial_reagent_types = list(/decl/material/gas/water = 1)
+	initial_reagent_types = list(/decl/material/liquid/water = 1)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	var/cups = 12
 	var/cup_type = /obj/item/chems/food/drinks/sillycup
@@ -243,7 +243,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "beertankTEMP"
 	amount_per_transfer_from_this = 10
-	initial_reagent_types = list(/decl/material/chem/ethanol/beer = 1)
+	initial_reagent_types = list(/decl/material/liquid/ethanol/beer = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/acid
@@ -253,4 +253,4 @@
 	icon_state = "acidtank"
 	amount_per_transfer_from_this = 10
 	anchored = 1
-	initial_reagent_types = list(/decl/material/chem/acid = 1)
+	initial_reagent_types = list(/decl/material/liquid/acid = 1)

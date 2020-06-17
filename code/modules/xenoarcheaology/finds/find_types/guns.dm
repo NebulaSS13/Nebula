@@ -1,7 +1,7 @@
 // Ballistic gun
 /decl/archaeological_find/gun
 	item_type = "gun"
-	responsive_reagent = /decl/material/iron
+	responsive_reagent = /decl/material/solid/metal/iron
 	possible_types = list(/obj/item/gun/projectile/revolver)
 
 /decl/archaeological_find/gun/spawn_item(atom/loc)
@@ -34,7 +34,7 @@
 /decl/archaeological_find/laser
 	item_type = "gun"
 	modification_flags = XENOFIND_APPLY_DECOR | XENOFIND_REPLACE_ICON
-	responsive_reagent = /decl/material/iron
+	responsive_reagent = /decl/material/solid/metal/iron
 	possible_types = list(
 		/obj/item/gun/energy/laser/practice,
 		/obj/item/gun/energy/laser,

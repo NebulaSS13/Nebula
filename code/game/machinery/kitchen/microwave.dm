@@ -207,9 +207,9 @@
 
 		for (var/R in reagents.reagent_volumes)
 			var/display_name
-			if (R == /decl/material/chem/capsaicin)
+			if (R == /decl/material/liquid/capsaicin)
 				display_name = "Hotsauce"
-			if (R == /decl/material/chem/frostoil)
+			if (R == /decl/material/liquid/frostoil)
 				display_name = "Coldsauce"
 			else
 				var/decl/material/reagent = decls_repository.get_decl(R)
@@ -383,8 +383,8 @@
 	LAZYCLEARLIST(ingredients)
 	src.reagents.clear_reagents()
 	var/obj/item/chems/food/snacks/badrecipe/ffuu = new(src)
-	ffuu.reagents.add_reagent(/decl/material/chem/carbon, amount)
-	ffuu.reagents.add_reagent(/decl/material/chem/toxin, amount/10)
+	ffuu.reagents.add_reagent(/decl/material/solid/carbon, amount)
+	ffuu.reagents.add_reagent(/decl/material/liquid/bromide, amount/10)
 	return ffuu
 
 /obj/machinery/microwave/Topic(href, href_list)

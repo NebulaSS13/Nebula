@@ -21,15 +21,15 @@
 
 /obj/item/chems/glass/beaker/vial/random
 	atom_flags = 0
-	var/list/random_reagent_list = list(list(/decl/material/gas/water = 15) = 1, list(/decl/material/chem/cleaner = 15) = 1)
+	var/list/random_reagent_list = list(list(/decl/material/liquid/water = 15) = 1, list(/decl/material/liquid/cleaner = 15) = 1)
 
 /obj/item/chems/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list(/decl/material/chem/hallucinogenics = 10)    = 2,
-		list(/decl/material/chem/psychoactives = 20)      = 2,
-		list(/decl/material/chem/toxin/carpotoxin = 15)   = 2,
-		list(/decl/material/chem/narcotics = 15)          = 2,
-		list(/decl/material/chem/toxin/zombiepowder = 10) = 1
+		list(/decl/material/liquid/hallucinogenics = 10)    = 2,
+		list(/decl/material/liquid/psychoactives = 20)      = 2,
+		list(/decl/material/liquid/carpotoxin = 15)   = 2,
+		list(/decl/material/liquid/narcotics = 15)          = 2,
+		list(/decl/material/liquid/zombiepowder = 10) = 1
 	)
 
 /obj/item/chems/glass/beaker/vial/random/Initialize()

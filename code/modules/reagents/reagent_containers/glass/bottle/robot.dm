@@ -11,11 +11,11 @@
 	desc = "A small bottle. Contains adrenaline - used to stabilize patients."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle-4"
-	reagent = /decl/material/chem/adrenaline
+	reagent = /decl/material/liquid/adrenaline
 
 /obj/item/chems/glass/bottle/robot/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/adrenaline, 60)
+	reagents.add_reagent(/decl/material/liquid/adrenaline, 60)
 	update_icon()
 
 /obj/item/chems/glass/bottle/robot/antitoxin
@@ -23,9 +23,9 @@
 	desc = "A small bottle of Anti-toxins. Counters poisons, and repairs damage, a wonder drug."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle-4"
-	reagent = /decl/material/chem/antitoxins
+	reagent = /decl/material/liquid/antitoxins
 
 /obj/item/chems/glass/bottle/robot/antitoxin/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/antitoxins, 60)
+	reagents.add_reagent(/decl/material/liquid/antitoxins, 60)
 	update_icon()

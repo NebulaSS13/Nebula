@@ -37,7 +37,7 @@ var/list/stored_shock_by_ref = list()
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /datum/species/proc/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
-	var/water = REAGENT_VOLUME(fluids, /decl/material/gas/water)
+	var/water = REAGENT_VOLUME(fluids, /decl/material/liquid/water)
 	if(water >= 40 && H.getHalLoss())
 		H.adjustHalLoss(-(water_soothe_amount))
 		if(prob(5))
@@ -59,7 +59,7 @@ var/list/stored_shock_by_ref = list()
 	. = TRUE
 
 /datum/species/proc/get_digestion_product()
-	return /decl/material/chem/nutriment
+	return /decl/material/liquid/nutriment
 
 /datum/species/proc/handle_post_species_pref_set(var/datum/preferences/pref)
 	return

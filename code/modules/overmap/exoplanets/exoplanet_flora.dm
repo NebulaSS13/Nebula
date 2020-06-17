@@ -32,7 +32,7 @@
 			if(color == "RANDOM")
 				color = get_random_colour(0,75,190)
 			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems[/decl/material/wood] = 1
+			S.chems[/decl/material/solid/wood] = 1
 			adapt_seed(S)
 			big_flora_types += S
 
@@ -54,9 +54,9 @@
 	if(prob(50))
 		var/chem_type = SSmaterials.get_random_chem(TRUE, atmosphere ? atmosphere.temperature : T0C)
 		if(chem_type)
-			var/nutriment = S.chems[/decl/material/chem/nutriment]
+			var/nutriment = S.chems[/decl/material/liquid/nutriment]
 			S.chems.Cut()
-			S.chems[/decl/material/chem/nutriment] = nutriment
+			S.chems[/decl/material/liquid/nutriment] = nutriment
 			S.chems[chem_type] = list(rand(1,10),rand(10,20))
 
 // Landmarks placed by random map generator

@@ -253,8 +253,8 @@
 	// DNA sample from syringe.
 	if(istype(W,/obj/item/chems/syringe))
 		var/obj/item/chems/syringe/S = W
-		if(REAGENT_VOLUME(S.reagents, /decl/material/chem/blood))
-			var/loaded_dna = REAGENT_DATA(S.reagents, /decl/material/chem/blood)
+		if(REAGENT_VOLUME(S.reagents, /decl/material/liquid/blood))
+			var/loaded_dna = REAGENT_DATA(S.reagents, /decl/material/liquid/blood)
 			if(islist(loaded_dna))
 				var/weakref/R = loaded_dna["donor"]
 				var/mob/living/carbon/human/H = R.resolve()

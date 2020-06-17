@@ -80,18 +80,17 @@
 	icon_state = "pill1"
 /obj/item/chems/pill/antitox/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/antitoxins, 25)
+	reagents.add_reagent(/decl/material/liquid/antitoxins, 25)
 	color = reagents.get_color()
 
-
-/obj/item/chems/pill/tox
-	name = "toxins pill"
+/obj/item/chems/pill/bromide
+	name = "bromide pill"
 	desc = "Highly toxic."
 	icon_state = "pill4"
 	volume = 50
-/obj/item/chems/pill/tox/Initialize()
+/obj/item/chems/pill/bromide/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/toxin, 50)
+	reagents.add_reagent(/decl/material/liquid/bromide, 50)
 	color = reagents.get_color()
 
 
@@ -102,7 +101,7 @@
 	volume = 50
 /obj/item/chems/pill/cyanide/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/toxin/cyanide, 50)
+	reagents.add_reagent(/decl/material/liquid/cyanide, 50)
 
 
 /obj/item/chems/pill/adminordrazine
@@ -112,7 +111,7 @@
 
 /obj/item/chems/pill/adminordrazine/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/adminordrazine, 1)
+	reagents.add_reagent(/decl/material/liquid/adminordrazine, 1)
 
 /obj/item/chems/pill/stox
 	name = "sedatives (15u)"
@@ -120,7 +119,7 @@
 	icon_state = "pill3"
 /obj/item/chems/pill/stox/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/sedatives, 15)
+	reagents.add_reagent(/decl/material/liquid/sedatives, 15)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/burn_meds
@@ -129,7 +128,7 @@
 	icon_state = "pill2"
 /obj/item/chems/pill/burn_meds/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/burn_meds, 15)
+	reagents.add_reagent(/decl/material/liquid/burn_meds, 15)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/painkillers
@@ -138,7 +137,7 @@
 	icon_state = "pill3"
 /obj/item/chems/pill/painkillers/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/painkillers, 15)
+	reagents.add_reagent(/decl/material/liquid/painkillers, 15)
 	color = reagents.get_color()
 
 
@@ -148,7 +147,7 @@
 	icon_state = "pill1"
 /obj/item/chems/pill/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/adrenaline, 30)
+	reagents.add_reagent(/decl/material/liquid/adrenaline, 30)
 	color = reagents.get_color()
 
 
@@ -158,7 +157,7 @@
 	icon_state = "pill1"
 /obj/item/chems/pill/oxygen/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/oxy_meds, 15)
+	reagents.add_reagent(/decl/material/liquid/oxy_meds, 15)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antitoxins
@@ -167,7 +166,7 @@
 	icon_state = "pill1"
 /obj/item/chems/pill/antitoxins/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/antitoxins, 15)
+	reagents.add_reagent(/decl/material/liquid/antitoxins, 15)
 	color = reagents.get_color()
 
 
@@ -177,7 +176,7 @@
 	icon_state = "pill2"
 /obj/item/chems/pill/brute_meds/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/brute_meds, 20)
+	reagents.add_reagent(/decl/material/liquid/brute_meds, 20)
 	color = reagents.get_color()
 
 
@@ -187,8 +186,8 @@
 	icon_state = "pill4"
 /obj/item/chems/pill/happy/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/psychoactives, 15)
-	reagents.add_reagent(/decl/material/chem/nutriment/sugar, 15)
+	reagents.add_reagent(/decl/material/liquid/psychoactives, 15)
+	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 15)
 	color = reagents.get_color()
 
 
@@ -198,10 +197,10 @@
 	icon_state = "pill4"
 /obj/item/chems/pill/zoom/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/narcotics, 5)
-	reagents.add_reagent(/decl/material/chem/antidepressants, 5)
-	reagents.add_reagent(/decl/material/chem/stimulants, 5)
-	reagents.add_reagent(/decl/material/chem/amphetamines, 5)
+	reagents.add_reagent(/decl/material/liquid/narcotics, 5)
+	reagents.add_reagent(/decl/material/liquid/antidepressants, 5)
+	reagents.add_reagent(/decl/material/liquid/stimulants, 5)
+	reagents.add_reagent(/decl/material/liquid/amphetamines, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/gleam
@@ -211,7 +210,7 @@
 
 /obj/item/chems/pill/gleam/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/glowsap/gleam, 10)
+	reagents.add_reagent(/decl/material/liquid/glowsap/gleam, 10)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antibiotics
@@ -220,7 +219,7 @@
 	icon_state = "pill3"
 /obj/item/chems/pill/antibiotics/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/antibiotics, 10)
+	reagents.add_reagent(/decl/material/liquid/antibiotics, 10)
 	color = reagents.get_color()
 
 //Psychiatry pills.
@@ -230,7 +229,7 @@
 	icon_state = "pill2"
 /obj/item/chems/pill/stimulants/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/stimulants, 15)
+	reagents.add_reagent(/decl/material/liquid/stimulants, 15)
 	color = reagents.get_color()
 
 
@@ -240,7 +239,7 @@
 	icon_state = "pill4"
 /obj/item/chems/pill/antidepressants/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/antidepressants, 15)
+	reagents.add_reagent(/decl/material/liquid/antidepressants, 15)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antirads
@@ -249,7 +248,7 @@
 	icon_state = "pill1"
 /obj/item/chems/pill/antirads/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/antirads, 7)
+	reagents.add_reagent(/decl/material/liquid/antirads, 7)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/antirad
@@ -258,8 +257,8 @@
 	icon_state = "yellow"
 /obj/item/chems/pill/antirad/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/antirads, 5)
-	reagents.add_reagent(/decl/material/chem/antitoxins, 10)
+	reagents.add_reagent(/decl/material/liquid/antirads, 5)
+	reagents.add_reagent(/decl/material/liquid/antitoxins, 10)
 
 
 /obj/item/chems/pill/sugariron
@@ -268,8 +267,8 @@
 	icon_state = "pill1"
 /obj/item/chems/pill/sugariron/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/iron, 5)
-	reagents.add_reagent(/decl/material/chem/nutriment/sugar, 5)
+	reagents.add_reagent(/decl/material/solid/metal/iron, 5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/detergent
@@ -280,7 +279,7 @@
 
 /obj/item/chems/pill/detergent/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/ammonia, 30)
+	reagents.add_reagent(/decl/material/gas/ammonia, 30)
 
 /obj/item/chems/pill/pod
 	name = "master flavorpod item"
@@ -292,7 +291,7 @@
 
 /obj/item/chems/pill/pod/cream/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/milk, 5)
+	reagents.add_reagent(/decl/material/liquid/drink/milk, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/pod/cream_soy
@@ -300,7 +299,7 @@
 
 /obj/item/chems/pill/pod/cream_soy/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/milk/soymilk, 5)
+	reagents.add_reagent(/decl/material/liquid/drink/milk/soymilk, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/pod/orange
@@ -308,7 +307,7 @@
 
 /obj/item/chems/pill/pod/orange/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/juice/orange, 5)
+	reagents.add_reagent(/decl/material/liquid/drink/juice/orange, 5)
 	color = reagents.get_color()
 
 /obj/item/chems/pill/pod/mint
@@ -316,5 +315,5 @@
 
 /obj/item/chems/pill/pod/mint/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/chem/drink/syrup/mint, 1) //mint is used as a catalyst in all reactions as of writing
+	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, 1) //mint is used as a catalyst in all reactions as of writing
 	color = reagents.get_color()

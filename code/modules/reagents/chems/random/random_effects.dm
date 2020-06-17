@@ -19,11 +19,11 @@
 		if(RANDOM_CHEM_EFFECT_FLOAT)
 			return rand() * (maximum - minimum) + minimum
 
-/decl/random_chem_effect/proc/prototype_process(var/decl/material/chem/random/reagent, temperature)
+/decl/random_chem_effect/proc/prototype_process(var/decl/material/liquid/random/reagent, temperature)
 	var/value = get_random_value(temperature)
 	on_property_recompute(reagent, value)
 
-/decl/random_chem_effect/proc/on_property_recompute(var/decl/material/chem/random/reagent, var/value)
+/decl/random_chem_effect/proc/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
 
 /decl/random_chem_effect/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/value)
 
@@ -44,13 +44,13 @@
 	minimum = 100
 	mode = RANDOM_CHEM_EFFECT_INT
 
-/decl/random_chem_effect/general_properties/name/on_property_recompute(var/decl/material/chem/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/name/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
 	reagent.name = "[initial(reagent.name)]-[value]"
 
 /decl/random_chem_effect/general_properties/color/get_random_value()
 	return color_rotation(round(rand(0,360),20))
 
-/decl/random_chem_effect/general_properties/color/on_property_recompute(var/decl/material/chem/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/color/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
 	reagent.color = value
 
 /decl/random_chem_effect/general_properties/overdose
@@ -58,7 +58,7 @@
 	maximum = REAGENTS_OVERDOSE * 2
 	mode = RANDOM_CHEM_EFFECT_FLOAT
 
-/decl/random_chem_effect/general_properties/overdose/on_property_recompute(var/decl/material/chem/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/overdose/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
 	reagent.overdose = value
 
 /decl/random_chem_effect/general_properties/metabolism
@@ -66,7 +66,7 @@
 	maximum = REM * 3
 	mode = RANDOM_CHEM_EFFECT_FLOAT
 
-/decl/random_chem_effect/general_properties/metabolism/on_property_recompute(var/decl/material/chem/random/reagent, var/value)
+/decl/random_chem_effect/general_properties/metabolism/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
 	reagent.metabolism = value
 
 /decl/random_chem_effect/general_properties/chilling_point
@@ -100,7 +100,7 @@
 	if(chem_effect_define)
 		M.add_chemical_effect(chem_effect_define, value)
 
-/decl/random_chem_effect/random_properties/on_property_recompute(var/decl/material/chem/random/reagent, var/value)
+/decl/random_chem_effect/random_properties/on_property_recompute(var/decl/material/liquid/random/reagent, var/value)
 	reagent.data[type] = value
 
 /decl/random_chem_effect/random_properties/ce_stable
