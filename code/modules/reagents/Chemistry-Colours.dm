@@ -3,7 +3,7 @@
 		return "#ffffffff"
 	if(LAZYLEN(reagent_volumes) == 1) // It's pretty common and saves a lot of work
 		var/decl/material/R = decls_repository.get_decl(reagent_volumes[1])
-		return R.color + num2hex(R.alpha)
+		return R.color + num2hex(R.opacity * 255)
 
 	var/list/colors = list(0, 0, 0, 0)
 	var/tot_w = 0
@@ -11,7 +11,7 @@
 		var/decl/material/R = decls_repository.get_decl(rtype)
 		if(R.color_weight <= 0)
 			continue
-		var/hex = uppertext(R.color) + num2hex(R.alpha)
+		var/hex = uppertext(R.color) + num2hex(R.opacity * 255)
 		var/mod = REAGENT_VOLUME(src, rtype) * R.color_weight
 		colors[1] += HEX_RED(hex)   * mod
 		colors[2] += HEX_GREEN(hex) * mod
