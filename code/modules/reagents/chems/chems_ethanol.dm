@@ -8,6 +8,22 @@
 	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
 	solvent_power = MAT_SOLVENT_MODERATE
 
+	heating_message = "boils away its water content, leaving pure ethanol."
+	heating_point = T100C + 10
+	heating_products = list(
+		/decl/material/liquid/ethanol = 0.75,
+		/decl/material/liquid/water =   0.25
+	)
+	bypass_heating_products_for_root_type = /decl/material/liquid/ethanol
+
+	chilling_message = "separates as its water content freezes, leaving pure ethanol."
+	chilling_point = T0C - 10
+	chilling_products = list(
+		/decl/material/liquid/ethanol = 0.75,
+		/decl/material/liquid/water =   0.25
+	)
+	bypass_cooling_products_for_root_type = /decl/material/liquid/ethanol
+
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.

@@ -71,12 +71,12 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		var/replace_message
 		var/replace_sound
 
-		if(LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
+		if(R.type != R.bypass_cooling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
 			replace_self_with = R.chilling_products
 			replace_message =   "\The [lowertext(R.name)] [R.chilling_message]"
 			replace_sound =     R.chilling_sound
 
-		else if(LAZYLEN(R.heating_products) && temperature >= R.heating_point)
+		else if(R.type != R.bypass_heating_products_for_root_type && LAZYLEN(R.heating_products) && temperature >= R.heating_point)
 			replace_self_with = R.heating_products
 			replace_message =   "\The [lowertext(R.name)] [R.heating_message]"
 			replace_sound =     R.heating_sound

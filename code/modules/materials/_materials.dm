@@ -201,11 +201,15 @@
 	var/chilling_message = "crackles and freezes!"
 	var/chilling_sound = 'sound/effects/bubbles.ogg'
 	var/list/chilling_products
+	var/bypass_cooling_products_for_root_type
 
-	var/list/heating_products
 	var/heating_point
 	var/heating_message = "begins to boil!"
 	var/heating_sound = 'sound/effects/bubbles.ogg'
+	var/list/heating_products
+	var/bypass_heating_products_for_root_type
+
+
 	var/fuel_value = 0
 
 	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged

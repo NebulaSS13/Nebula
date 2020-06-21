@@ -16,7 +16,7 @@
 #define MAT_SPODUMENE               /decl/material/solid/mineral/spodumene
 #define MAT_CINNABAR                /decl/material/solid/mineral/cinnabar
 #define MAT_PHOSPHORITE             /decl/material/solid/mineral/phosphorite
-#define MAT_ROCK_SALT               /decl/material/solid/mineral/rocksalt
+#define MAT_ROCK_SALT               /decl/material/solid/mineral/sodiumchloride
 #define MAT_POTASH                  /decl/material/solid/mineral/potash
 #define MAT_BAUXITE                 /decl/material/solid/mineral/bauxite
 #define MAT_RUTILE                  /decl/material/solid/mineral/rutile
