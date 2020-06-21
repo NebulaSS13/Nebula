@@ -1,8 +1,8 @@
 var/list/default_strata_type_by_z = list()
 var/list/default_material_by_strata_and_z = list()
 var/list/default_strata_types = list()
-
 var/list/natural_walls = list()
+
 /turf/simulated/wall/natural
 	name = "wall"
 	material = null
@@ -10,6 +10,9 @@ var/list/natural_walls = list()
 	girder_material = null
 	construction_stage = -1
 	floor_type = /turf/simulated/floor/asteroid
+	blend_objects = null
+	noblend_objects = null
+
 	var/strata
 	var/image/ore_overlay
 
