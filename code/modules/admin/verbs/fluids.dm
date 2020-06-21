@@ -18,8 +18,9 @@
 		return
 	var/turf/flooding = get_turf(user)
 	for(var/thing in RANGE_TURFS(flooding, spawn_range))
-		var/turf/T = thing
-		T.add_fluid(reagent_amount, reagent_type)
+		var/obj/effect/fluid/F = locate() in thing
+		if(!F) F = new(thing)
+		F.reagents.add_reagent(reagent_type, reagent_amount)
 
 /datum/admins/proc/jump_to_fluid_source()
 

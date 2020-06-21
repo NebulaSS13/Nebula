@@ -1049,11 +1049,6 @@
 /mob/proc/check_has_eyes()
 	return TRUE
 
-/mob/fluid_act(var/datum/reagents/fluids)
-	wash_mob(src)
-	fluids.touch_mob(src)
-	..()
-
 /mob/proc/handle_pre_transformation()
 	return
 

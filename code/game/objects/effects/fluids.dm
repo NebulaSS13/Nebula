@@ -96,7 +96,7 @@
 	if(!isturf(loc))
 		return
 
-	reagents.touch_turf(loc)
+	loc.fluid_act(reagents)
 	var/pushing = (world.time >= next_fluid_act && reagents.total_volume > FLUID_SHALLOW && last_flow_strength >= 10)
 	for(var/thing in loc.contents)
 		if(thing == src)

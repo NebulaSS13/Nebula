@@ -25,10 +25,7 @@
 /obj/structure/reagent_dispensers/proc/leak()
 	var/turf/T = get_turf(src)
 	if(reagents && T)
-		var/datum/reagents/leaked = new(FLUID_PUDDLE, GLOB.temp_reagents_holder)
-		reagents.trans_to_holder(leaked, FLUID_PUDDLE)
-		T.add_reagents_as_fluid(leaked)
-		qdel(leaked)
+		reagents.trans_to_turf(T, FLUID_PUDDLE)
 
 /obj/structure/reagent_dispensers/Move()
 	. = ..()
@@ -89,8 +86,9 @@
 	if(reagents?.total_volume)
 		var/turf/T = get_turf(src)
 		if(T)
-			for(var/r in reagents.reagent_volumes)
-				T.add_fluid(REAGENT_VOLUME(reagents, r), r)
+			var/obj/effect/fluid/F = locate() in T
+			if(!F) F = new(T)
+			reagents.trans_to_holder(F.reagents, reagents.total_volume)
 	. = ..()
 
 /obj/structure/reagent_dispensers/explosion_act(severity)
