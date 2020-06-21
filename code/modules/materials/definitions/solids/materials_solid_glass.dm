@@ -18,7 +18,7 @@
 	destruction_desc = "shatters"
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
-	wall_support_value = 14
+	wall_support_value = MAT_VALUE_LIGHT
 
 /decl/material/solid/glass/proc/is_reinforced()
 	return (integrity > 75) //todo

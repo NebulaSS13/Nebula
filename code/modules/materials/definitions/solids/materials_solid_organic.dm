@@ -7,13 +7,13 @@
 	icon_reinf = "reinf_over"
 	color = COLOR_EGGSHELL
 	hardness = MAT_VALUE_SOFT
-	weight = MAT_VALUE_EXTREMELY_LIGHT
+	weight = MAT_VALUE_LIGHT
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = "{'materials':3}"
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_SHINY
-	wall_support_value = 10
+	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	taste_description = "plastic"
 
 /decl/material/solid/plastic/generate_recipes(var/reinforce_material)
@@ -57,7 +57,7 @@
 	conductive = 0
 	value = 0.5
 	reflectiveness = MAT_VALUE_DULL
-	wall_support_value = 0
+	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 
 /decl/material/solid/cardboard/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -85,7 +85,7 @@
 	reflectiveness = MAT_VALUE_DULL
 	hardness = MAT_VALUE_SOFT
 	weight = MAT_VALUE_EXTREMELY_LIGHT
-	wall_support_value = 0
+	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 
 /decl/material/solid/cloth/yellow
 	name = "yellow"
@@ -142,7 +142,7 @@
 	reflectiveness = MAT_VALUE_DULL
 	hardness = MAT_VALUE_SOFT
 	weight = MAT_VALUE_EXTREMELY_LIGHT
-	wall_support_value = 0
+	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	hidden_from_codex = TRUE
 
 /decl/material/solid/skin
@@ -160,7 +160,7 @@
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	explosion_resistance = 1
 	reflectiveness = MAT_VALUE_DULL
-	wall_support_value = 0
+	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	value = 1.2
 	var/tans_to = MAT_LEATHER_GENERIC
 
@@ -258,9 +258,9 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
-	weight = MAT_VALUE_LIGHT
 	reflectiveness = MAT_VALUE_MATTE
-	wall_support_value = 22
+	weight = MAT_VALUE_NORMAL
+	wall_support_value = MAT_VALUE_NORMAL
 
 /decl/material/solid/bone/fish
 	name = "fishbone"
@@ -287,7 +287,7 @@
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	reflectiveness = MAT_VALUE_MATTE
-	wall_support_value = 0
+	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 
 /decl/material/solid/leather/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -321,4 +321,4 @@
 	hardness = MAT_VALUE_HARD
 	weight = MAT_VALUE_NORMAL
 	brute_armor = 2
-	wall_support_value = 14
+	wall_support_value = MAT_VALUE_NORMAL

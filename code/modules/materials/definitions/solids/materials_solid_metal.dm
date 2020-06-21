@@ -8,6 +8,7 @@
 	wall_name = "bulkhead"
 	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_FLEXIBLE
+	wall_support_value = MAT_VALUE_HEAVY
 
 /decl/material/solid/metal/New()
 	if(!ore_smelts_to)
@@ -89,6 +90,7 @@
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	stack_type = /obj/item/stack/material/steel
 	weight = MAT_VALUE_NORMAL
+	wall_support_value = MAT_VALUE_VERY_HEAVY // Ideal construction material.
 	integrity = 150
 	brute_armor = 5
 	icon_base = "solid"
@@ -262,6 +264,7 @@
 	stack_type = /obj/item/stack/material/platinum
 	color = "#deddff"
 	weight = MAT_VALUE_VERY_HEAVY
+	wall_support_value = MAT_VALUE_VERY_HEAVY
 	stack_origin_tech = "{'materials':2}"
 	ore_smelts_to = MAT_PLATINUM
 	ore_compresses_to = MAT_OSMIUM
@@ -296,7 +299,8 @@
 	melting_point = 6000       // Hull plating.
 	explosion_resistance = 200 // Hull plating.
 	hardness = 500
-	weight = 500
+	weight = MAT_VALUE_VERY_HEAVY
+	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hidden_from_codex = TRUE
 	value = 3
 
