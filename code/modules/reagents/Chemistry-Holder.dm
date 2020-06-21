@@ -207,7 +207,8 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 /datum/reagents/proc/has_any_reagent(var/list/check_reagents)
 	for(var/check in check_reagents)
-		if(REAGENT_VOLUME(src, check) >= check_reagents[check])
+		var/vol = REAGENT_VOLUME(src, check)
+		if(vol > 0 && vol >= check_reagents[check])
 			return TRUE
 	return FALSE
 
