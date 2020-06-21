@@ -132,8 +132,11 @@
 /datum/chemical_reaction/sedatives
 	name = "Sedatives"
 	result = /decl/material/liquid/sedatives
-	required_reagents = list(/decl/material/liquid/ethanol = 1, /decl/material/liquid/nutriment/sugar = 4)
-	inhibitors = list(/decl/material/solid/phosphorus) // Messes with the smoke
+	required_reagents = list(/decl/material/liquid/ethanol = 1, /decl/material/liquid/nutriment/sugar = 4
+	)
+	inhibitors = list(
+		/decl/material/solid/phosphorus
+	) // Messes with the smoke
 	result_amount = 5
 
 /datum/chemical_reaction/paralytics

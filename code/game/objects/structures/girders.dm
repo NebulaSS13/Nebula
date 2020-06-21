@@ -141,7 +141,7 @@
 		to_chat(user, SPAN_WARNING("You must anchor \the [src] before finishing the wall."))
 		return FALSE
 
-	if(S.material.weight > max(material.wall_support_value, reinf_material && reinf_material.wall_support_value))
+	if(S.material.weight > max(material.wall_support_value, reinf_material?.wall_support_value))
 		to_chat(user, SPAN_WARNING("You will need a support made of sturdier material to hold up [S.material.solid_name] cladding."))
 		return FALSE
 

@@ -35,6 +35,7 @@
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
 	color = "#aaaaaa"
 	weight = MAT_VALUE_VERY_HEAVY
+	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_SHINY
 	brute_armor = 3
@@ -48,6 +49,7 @@
 	color = COLOR_DARK_GRAY
 	stack_type = /obj/item/stack/material/generic
 	weight = MAT_VALUE_VERY_HEAVY
+	wall_support_value = MAT_VALUE_VERY_HEAVY
 	hardness = MAT_VALUE_HARD
 	reflectiveness = MAT_VALUE_SHINY
 	construction_difficulty = MAT_VALUE_HARD_DIY

@@ -13,7 +13,7 @@
 	shard_can_repair = 0 // you can't weld splinters back into planks
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	brute_armor = 1
-	weight = MAT_VALUE_LIGHT
+	weight = MAT_VALUE_NORMAL
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
 	stack_origin_tech = "{'materials':1,'biotech':1}"
@@ -31,7 +31,7 @@
 	)
 	value = 1.5
 	reflectiveness = MAT_VALUE_DULL
-	wall_support_value = 22
+	wall_support_value = MAT_VALUE_NORMAL
 
 /decl/material/solid/wood/generate_recipes(var/reinforce_material)
 	. = ..()

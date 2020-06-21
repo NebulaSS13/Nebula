@@ -3,10 +3,10 @@
 	result_amount = 1
 	var/obj_result
 
-/datum/chemical_reaction/recipe/food/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/datum/chemical_reaction/recipe/food/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	if(obj_result)
-		var/location = get_turf(holder.my_atom)
+	var/location = get_turf(holder.my_atom)
+	if(obj_result && isturf(location))
 		for(var/i = 1, i <= created_volume, i++)
 			new obj_result(location)
 
