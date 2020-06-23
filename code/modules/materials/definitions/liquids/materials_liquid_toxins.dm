@@ -161,7 +161,6 @@
 	color = "#664330"
 	heating_point = null
 	heating_products = null
-	hidden_from_codex = TRUE
 	metabolism = REM * 0.25
 
 /decl/material/liquid/weedkiller

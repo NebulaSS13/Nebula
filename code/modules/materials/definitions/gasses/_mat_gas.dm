@@ -8,7 +8,6 @@
 	conductive = 0
 	alloy_materials = null
 	alloy_product = FALSE
-	hidden_from_codex = FALSE
 	value = 0
 	gas_burn_product = MAT_CO2
 	gas_specific_heat = 20    // J/(mol*K)

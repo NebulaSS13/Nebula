@@ -1,6 +1,4 @@
 /datum/chemical_reaction/grenade_reaction
-	var/lore_text
-	var/mechanics_text
 	result = null
 
 /datum/chemical_reaction/grenade_reaction/explosion_potassium

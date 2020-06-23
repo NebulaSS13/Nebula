@@ -290,6 +290,7 @@
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	glass_icon = DRINK_ICON_NOISY
 	fruit_descriptor = "sweet"
+	hidden_from_codex = FALSE
 
 /decl/material/liquid/nutriment/vinegar
 	name = "vinegar"
