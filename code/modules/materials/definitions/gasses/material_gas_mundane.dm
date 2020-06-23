@@ -7,6 +7,7 @@
 	gas_flags = XGM_GAS_OXIDIZER
 	gas_symbol_html = "O<sub>2</sub>"
 	gas_symbol = "O2"
+	gas_metabolically_inert = TRUE
 
 /decl/material/gas/helium
 	name = "helium"
@@ -124,6 +125,7 @@
 	gas_molar_mass = 0.028	
 	gas_symbol_html = "N<sub>2</sub>"
 	gas_symbol = "N2"
+	gas_metabolically_inert = TRUE
 
 /decl/material/gas/nitrodioxide
 	name = "nitrogen dioxide"
