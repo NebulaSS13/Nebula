@@ -148,6 +148,16 @@
 	arterial_bleed_severity = 0.5
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
+/obj/item/organ/external/hand/resolve_attackby(atom/A, mob/user, var/click_params)
+	if(owner == user && ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(src in H.organs)
+			var/obj/item/clothing/gloves/G = H.gloves
+			if(istype(G) && G.Touch(A, 1))
+				return TRUE
+			return A.attack_hand(user)
+	. = ..()
+
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND
 	name = "right hand"

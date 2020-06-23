@@ -9,18 +9,14 @@
 	Otherwise pretty standard.
 */
 /mob/living/carbon/human/UnarmedAttack(var/atom/A, var/proximity)
-
 	if(!..())
 		return
-
-	// Special glove functions:
-	// If the gloves do anything, have them return 1 to stop
-	// normal attack_hand() here.
-	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
-	if(istype(G) && G.Touch(A,1))
+	var/obj/item/organ/external/limb = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
+	if(!limb || (istype(limb) && limb.is_stump()))
+		to_chat(src, SPAN_WARNING("You are missing your [hand ? "left" : "right"] hand!"))
 		return
-
-	A.attack_hand(src)
+	if(!limb.resolve_attackby(A, src, proximity) && A && limb)
+		limb.afterattack(A, src, 1)
 
 /atom/proc/attack_hand(mob/user)
 	. = FALSE
