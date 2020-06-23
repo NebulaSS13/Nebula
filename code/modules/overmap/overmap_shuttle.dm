@@ -37,15 +37,7 @@
 	if(moving_status == SHUTTLE_INTRANSIT)
 		return FALSE //already going somewhere, current_location may be an intransit location instead of in a sector
 
-	//ensures that distances are calculated correctly when dealing with multi-tile sectors
-	var/atom/movable/current_sector = waypoint_sector(current_location)
-	var/atom/movable/next_sector = waypoint_sector(next_location)
-	for(var/turf/current_loc_turf in (current_sector.locs))
-		for(var/turf/next_loc_turf in (next_sector.locs))
-			if(get_dist(current_loc_turf, next_loc_turf) <= range)
-				return TRUE
-
-	return FALSE
+	return get_dist(waypoint_sector(current_location), waypoint_sector(next_location)) <= range
 
 /datum/shuttle/autodock/overmap/can_launch()
 	return ..() && can_go()
