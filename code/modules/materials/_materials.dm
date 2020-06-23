@@ -173,7 +173,6 @@
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = COLOR_BEIGE
 	var/color_weight = 1
-	var/alpha = 255
 	var/cocktail_ingredient
 	var/defoliant
 	var/fruit_descriptor // String added to fruit desc if this chemical is present.
