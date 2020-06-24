@@ -2,7 +2,7 @@
 	name = "pew"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "nothing"
-	layer = ABOVE_OBJ_LAYER
+	layer = PROJECTILE_LAYER
 	anchored = TRUE
 	unacidable = TRUE
 	light_color = "#00ffff"
