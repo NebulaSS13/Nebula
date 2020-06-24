@@ -68,9 +68,9 @@
 //Movement parameters
 	var/speed = 0.4		//Amount of deciseconds it takes for projectile to travel
 	var/pixel_speed = 33	//pixels per move - DO NOT FUCK WITH THIS UNLESS YOU ABSOLUTELY KNOW WHAT YOU ARE DOING OR UNEXPECTED THINGS /WILL/ HAPPEN!
-	var/angle = 0
-	var/original_angle = 0		//angle at firing
-	var/nondirectional_sprite = FALSE //Set TRUE to prevent projectiles from having their sprites rotated based on firing angle
+	var/Angle = 0
+	var/original_Angle = 0		//Angle at firing
+	var/nondirectional_sprite = FALSE //Set TRUE to prevent projectiles from having their sprites rotated based on firing Angle
 	var/forcedodge = FALSE		//to pass through everything
 	var/ignore_source_check = FALSE
 
@@ -152,7 +152,7 @@
 	return TRUE
 
 //called to launch a projectile
-/obj/item/projectile/proc/launch(atom/target, target_zone, mob/user, params, angle_override, forced_spread = 0)
+/obj/item/projectile/proc/launch(atom/target, target_zone, mob/user, params, Angle_override, forced_spread = 0)
 	original = target
 	def_zone = check_zone(target_zone)
 	firer = user
@@ -161,10 +161,10 @@
 		direct_target = target
 
 	preparePixelProjectile(target, user? user : get_turf(src), params, forced_spread)
-	return fire(angle_override, direct_target)
+	return fire(Angle_override, direct_target)
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, var/obj/item/gun/launcher)
+/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, Angle_override, forced_spread, var/obj/item/gun/launcher)
 	return launch(target, target_zone, user, params)
 
 /obj/item/projectile/proc/set_clickpoint(var/params)
@@ -188,10 +188,10 @@
 	original = new_target
 	if(new_firer)
 		firer = src
-	var/new_angle = Atan2(starting_turf, new_target)
+	var/new_Angle = Atan2(starting_turf, new_target)
 	if(is_ricochet) // Add some dispersion.
-		new_angle += (rand(-5,5) * 5)
-	setangle(new_angle)
+		new_Angle += (rand(-5,5) * 5)
+	setAngle(new_Angle)
 
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
@@ -360,38 +360,38 @@
 /obj/item/projectile/proc/old_style_target(atom/target, atom/source)
 	if(!source)
 		source = get_turf(src)
-	setangle(Get_Angle(source, target))
+	setAngle(Get_Angle(source, target))
 
 /obj/item/projectile/proc/fire(angle, atom/direct_target)
-	//If no angle needs to resolve it from xo/yo!
+	//If no Angle needs to resolve it from xo/yo!
 	if(direct_target)
 		direct_target.bullet_act(src, def_zone)
 		on_impact(direct_target)
 		qdel(src)
 		return
-	if(isnum(angle))
-		setangle(angle)
+	if(isnum(Angle))
+		setAngle(Angle)
 	// trajectory dispersion
 	var/turf/starting = get_turf(src)
 	if(!starting)
 		return
-	if(isnull(angle))	//Try to resolve through offsets if there's no angle set.
+	if(isnull(Angle))	//Try to resolve through offsets if there's no Angle set.
 		if(isnull(xo) || isnull(yo))
-			crash_with("WARNING: Projectile [type] deleted due to being unable to resolve a target after angle was null!")
+			crash_with("WARNING: Projectile [type] deleted due to being unable to resolve a target after Angle was null!")
 			qdel(src)
 			return
 		var/turf/target = locate(Clamp(starting + xo, 1, world.maxx), Clamp(starting + yo, 1, world.maxy), starting.z)
-		setangle(Get_Angle(src, target))
+		setAngle(Get_Angle(src, target))
 	if(dispersion)
-		var/Deviationangle = (dispersion * 15)
-		setangle(angle + rand(-Deviationangle, Deviationangle))
-	original_angle = angle
+		var/DeviationAngle = (dispersion * 15)
+		setAngle(Angle + rand(-DeviationAngle, DeviationAngle))
+	original_Angle = Angle
 	if(!nondirectional_sprite)
 		var/matrix/M = new
-		M.Turn(angle)
+		M.Turn(Angle)
 		transform = M
 	forceMove(starting)
-	trajectory = new(starting.x, starting.y, starting.z, 0, 0, angle, pixel_speed)
+	trajectory = new(starting.x, starting.y, starting.z, 0, 0, Angle, pixel_speed)
 	last_projectile_move = world.time
 	fired = TRUE
 	if(hitscan)
@@ -401,7 +401,7 @@
 			START_PROCESSING(SSprojectiles, src)
 		pixel_move(1)	//move it now!
 
-/obj/item/projectile/proc/preparePixelProjectile(atom/target, atom/source, params, angle_offset = 0)
+/obj/item/projectile/proc/preparePixelProjectile(atom/target, atom/source, params, Angle_offset = 0)
 	var/turf/curloc = get_turf(source)
 	var/turf/targloc = get_turf(target)
 	forceMove(get_turf(source))
@@ -410,20 +410,20 @@
 
 	var/list/calculated = list(null,null,null)
 	if(isliving(source) && params)
-		calculated = calculate_projectile_angle_and_pixel_offsets(source, params)
+		calculated = calculate_projectile_Angle_and_pixel_offsets(source, params)
 		p_x = calculated[2]
 		p_y = calculated[3]
-		setangle(calculated[1])
+		setAngle(calculated[1])
 
 	else if(targloc && curloc)
 		yo = targloc.y - curloc.y
 		xo = targloc.x - curloc.x
-		setangle(Get_Angle(src, targloc))
+		setAngle(Get_Angle(src, targloc))
 	else
 		crash_with("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
 		qdel(src)
-	if(angle_offset)
-		setangle(angle + angle_offset)
+	if(Angle_offset)
+		setAngle(Angle + Angle_offset)
 
 /obj/item/projectile/Crossed(atom/movable/AM) //A mob moving on a tile with a projectile is hit by it.
 	..()
@@ -440,7 +440,7 @@
 	last_projectile_move = world.time
 	if(!nondirectional_sprite && !hitscanning)
 		var/matrix/M = new
-		M.Turn(angle)
+		M.Turn(Angle)
 		transform = M
 	trajectory.increment(trajectory_multiplier)
 	var/turf/T = trajectory.return_turf()
@@ -473,11 +473,11 @@
 /obj/item/projectile/proc/can_hit_target(atom/target, var/list/passthrough)
 	return (target && ((target.layer >= TURF_LAYER + 0.3) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
 
-/proc/calculate_projectile_angle_and_pixel_offsets(mob/user, params)
+/proc/calculate_projectile_Angle_and_pixel_offsets(mob/user, params)
 	var/list/mouse_control = params2list(params)
 	var/p_x = 0
 	var/p_y = 0
-	var/angle = 0
+	var/Angle = 0
 	if(mouse_control["icon-x"])
 		p_x = text2num(mouse_control["icon-x"])
 	if(mouse_control["icon-y"])
@@ -501,8 +501,8 @@
 
 		var/ox = round(screenviewX/2) - user.client.pixel_x //"origin" x
 		var/oy = round(screenviewY/2) - user.client.pixel_y //"origin" y
-		angle = Atan2(y - oy, x - ox)
-	return list(angle, p_x, p_y)
+		Angle = Atan2(y - oy, x - ox)
+	return list(Angle, p_x, p_y)
 
 /obj/item/projectile/proc/check_distance_left()
 	range--
@@ -518,30 +518,30 @@
 	beam_index = pcache
 	beam_segments[beam_index] = null
 
-/obj/item/projectile/proc/return_predicted_turf_after_moves(moves, forced_angle)		//I say predicted because there's no telling that the projectile won't change direction/location in flight.
-	if(!trajectory && isnull(forced_angle) && isnull(angle))
+/obj/item/projectile/proc/return_predicted_turf_after_moves(moves, forced_Angle)		//I say predicted because there's no telling that the projectile won't change direction/location in flight.
+	if(!trajectory && isnull(forced_Angle) && isnull(Angle))
 		return FALSE
 	var/datum/point/vector/current = trajectory
 	if(!current)
 		var/turf/T = get_turf(src)
-		current = new(T.x, T.y, T.z, pixel_x, pixel_y, isnull(forced_angle)? angle : forced_angle, pixel_speed)
+		current = new(T.x, T.y, T.z, pixel_x, pixel_y, isnull(forced_Angle)? Angle : forced_Angle, pixel_speed)
 	var/datum/point/vector/v = current.return_vector_after_increments(moves)
 	return v.return_turf()
 
-/obj/item/projectile/proc/return_pathing_turfs_in_moves(moves, forced_angle)
+/obj/item/projectile/proc/return_pathing_turfs_in_moves(moves, forced_Angle)
 	var/turf/current = get_turf(src)
-	var/turf/ending = return_predicted_turf_after_moves(moves, forced_angle)
+	var/turf/ending = return_predicted_turf_after_moves(moves, forced_Angle)
 	return getline(current, ending)
 
 /obj/item/projectile/proc/process_hitscan()
 	var/safety = range * 3
-	var/return_vector = RETURN_POINT_VECTOR_INCREMENT(src, angle, MUZZLE_EFFECT_PIXEL_INCREMENT, 1)
+	var/return_vector = RETURN_POINT_VECTOR_INCREMENT(src, Angle, MUZZLE_EFFECT_PIXEL_INCREMENT, 1)
 	record_hitscan_start(return_vector)
 	while(loc && !QDELETED(src))
-		safety--
 		if(paused)
 			stoplag(1)
 			continue
+		safety--
 		if(safety <= 0)
 			qdel(src)
 			crash_with("WARNING: [type] projectile encountered infinite recursion during hitscanning!")
@@ -589,14 +589,14 @@
 	for(var/i in 1 to required_moves)
 		pixel_move(required_moves)
 
-/obj/item/projectile/proc/setangle(new_angle)	//wrapper for overrides.
-	angle = new_angle
+/obj/item/projectile/proc/setAngle(new_Angle)	//wrapper for overrides.
+	Angle = new_Angle
 	if(!nondirectional_sprite)
 		var/matrix/M = new
-		M.Turn(angle)
+		M.Turn(Angle)
 		transform = M
 	if(trajectory)
-		trajectory.set_angle(new_angle)
+		trajectory.set_angle(new_Angle)
 	return TRUE
 
 /obj/item/projectile/forceMove(atom/target)
@@ -626,7 +626,7 @@
 		var/atom/movable/thing = new muzzle_type
 		p.move_atom_to_src(thing)
 		var/matrix/M = new
-		M.Turn(original_angle)
+		M.Turn(original_Angle)
 		thing.transform = M
 		QDEL_IN(thing, duration)
 	if(impact_type)
@@ -634,7 +634,7 @@
 		var/atom/movable/thing = new impact_type
 		p.move_atom_to_src(thing)
 		var/matrix/M = new
-		M.Turn(angle)
+		M.Turn(Angle)
 		thing.transform = M
 		QDEL_IN(thing, duration)
 	if(cleanup)
