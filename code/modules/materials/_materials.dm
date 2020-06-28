@@ -208,7 +208,6 @@
 	var/list/heating_products
 	var/bypass_heating_products_for_root_type
 
-
 	var/fuel_value = 0
 
 	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged

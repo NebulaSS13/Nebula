@@ -16,7 +16,7 @@
 		<ul>
 		<li>Mix an egg and some flour along with some water to make dough.</li>
 		<li>Bake that to make a bun or flatten and cut it.</li>
-		<li>Cup up a meat slab with a sharp knife to make cutlets.</li>
+		<li>Cut up a meat slab with a sharp knife to make cutlets.</li>
 		<li>Mix flour and protein (ground meat) to make meatballs.</li>
 		</ul>"}
 

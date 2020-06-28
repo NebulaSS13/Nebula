@@ -1,4 +1,4 @@
-/datum/codex_category/languages/
+/datum/codex_category/languages
 	name = "Languages"
 	desc = "Languages spoken in known space."
 
@@ -19,7 +19,7 @@
 		if(L.flags & SIGNLANG)
 			lang_info += "It is completely non-verbal, using gestures or signs to communicate."
 		if(L.flags & HIVEMIND)
-			lang_info += "It's a 'hivemind' language, broadcasted to all creatures who understand it."
+			lang_info += "It's a 'hivemind' language, broadcast to all creatures who understand it."
 		if(L.flags & NO_STUTTER)
 			lang_info += "It will not be affected by speech impediments."
 

@@ -13,12 +13,12 @@
 	if(items.len)
 		var/datum/codex_entry/entry = new(_display_name = "[name] (category)")
 		entry.lore_text = desc + "<hr>"
+		if(guide_name && guide_html)
+			entry.lore_text += "This category has <span codexlink='Guide to [capitalize(guide_name || name)]'>an associated guide</span>.<hr>"
 		var/list/links = list()
 		for(var/item in items)
 			links+= "<l>[item]</l>"
 		entry.lore_text += jointext(links, "<br>")
-		if(guide_name && guide_html)
-			entry.mechanics_text = "This category has <span codexlink='Guide to [capitalize(guide_name || name)]'>an associated guide</span>."
 		SScodex.add_entry_by_string(lowertext(entry.display_name), entry)
 
 	if(guide_html)
