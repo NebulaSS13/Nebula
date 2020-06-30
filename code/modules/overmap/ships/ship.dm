@@ -74,6 +74,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		. += "<br>It is broadcasting a distress signal."
 
 /obj/effect/overmap/visitable/ship/adjust_speed(n_x, n_y)
+	. = ..()
 	var/magnitude = norm(n_x, n_y)
 	var/inertia_dir = magnitude >= 0 ? turn(fore_dir, 180) : fore_dir
 	var/inertia_strength = magnitude * 1e3
