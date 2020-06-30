@@ -86,3 +86,47 @@
 
 /obj/effect/overmap/proc/is_still()
 	return !MOVING(speed[1], min_speed) && !MOVING(speed[2], min_speed)
+
+/obj/effect/overmap/proc/get_speed()
+	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION)
+
+/obj/effect/overmap/proc/get_heading()
+	var/res = 0
+	if(MOVING(speed[1], min_speed))
+		if(speed[1] > 0)
+			res |= EAST
+		else
+			res |= WEST
+	if(MOVING(speed[2], min_speed))
+		if(speed[2] > 0)
+			res |= NORTH
+		else
+			res |= SOUTH
+	return res
+
+/obj/effect/overmap/proc/adjust_speed(n_x, n_y)
+	CHANGE_SPEED_BY(speed[1], n_x, min_speed)
+	CHANGE_SPEED_BY(speed[2], n_y, min_speed)
+	update_icon()
+
+/obj/effect/overmap/proc/get_delta_v() //This is here for inheritance reasons.
+	return
+
+/obj/effect/overmap/proc/get_vessel_mass() //Same as above.
+	return vessel_mass
+
+/obj/effect/overmap/proc/can_burn()
+	if(halted)
+		return FALSE
+	if (world.time < last_burn + burn_delay)
+		return FALSE
+	else
+		return TRUE
+
+/obj/effect/overmap/proc/accelerate(var/direction, var/accel_limit)
+	if(movement)
+		movement.accelerate(direction, accel_limit)
+
+/obj/effect/overmap/proc/decelerate()
+	if(movement)
+		movement.decelerate()

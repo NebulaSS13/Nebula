@@ -7,6 +7,12 @@
 /datum/extension/overmap_movement/proc/do_overmap_movement()
 	return //this just returns because this is the base extension.
 
+/datum/extension/overmap_movement/proc/accelerate()
+	return
+
+/datum/extension/overmap_movement/proc/decelerate()
+	return
+
 //Ship movement below.
 
 /datum/extension/overmap_movement/ship
@@ -33,3 +39,39 @@
 		if(newloc && OM.loc != newloc)
 			OM.Move(newloc)
 			OM.handle_wraparound()
+
+/datum/extension/overmap_movement/ship/accelerate(var/direction, var/accel_limit)
+	var/obj/effect/overmap/OM = holder
+
+	var/actual_accel_limit = accel_limit / KM_OVERMAP_RATE
+	if(OM.can_burn())
+		OM.last_burn = world.time
+		var/delta_v = OM.get_delta_v() / KM_OVERMAP_RATE
+		var/partial_power = Clamp(actual_accel_limit / delta_v, 0, 1)
+		var/acceleration = min(OM.get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, actual_accel_limit)
+		if(direction & EAST)
+			OM.adjust_speed(acceleration, 0)
+		if(direction & WEST)
+			OM.adjust_speed(-acceleration, 0)
+		if(direction & NORTH)
+			OM.adjust_speed(0, acceleration)
+		if(direction & SOUTH)
+			OM.adjust_speed(0, -acceleration)
+
+/datum/extension/overmap_movement/ship/decelerate()
+	var/obj/effect/overmap/OM = holder
+
+	if(((OM.speed[1]) || (OM.speed[2])) && OM.can_burn())
+		if (OM.speed[1])
+			var/partial_power = Clamp(OM.speed[1] / (OM.get_delta_v() / KM_OVERMAP_RATE), 0, 1)
+			var/delta_v = OM.get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
+			OM.adjust_speed(-SIGN(OM.speed[1]) * min(delta_v, abs(OM.speed[1])), 0)
+		if (OM.speed[2])
+			var/partial_power = Clamp(OM.speed[2] / (OM.get_delta_v() / KM_OVERMAP_RATE), 0, 1)
+			var/delta_v = OM.get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
+			OM.adjust_speed(0, -SIGN(OM.speed[2]) * min(delta_v, abs(OM.speed[2])))
+		OM.last_burn = world.time
+
+
+
+

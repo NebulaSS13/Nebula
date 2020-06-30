@@ -73,26 +73,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	if(instant_contact)
 		. += "<br>It is broadcasting a distress signal."
 
-/obj/effect/overmap/visitable/ship/proc/get_speed()
-	return round(sqrt(speed[1] ** 2 + speed[2] ** 2), SHIP_MOVE_RESOLUTION)
-
-/obj/effect/overmap/visitable/ship/proc/get_heading()
-	var/res = 0
-	if(MOVING(speed[1], min_speed))
-		if(speed[1] > 0)
-			res |= EAST
-		else
-			res |= WEST
-	if(MOVING(speed[2], min_speed))
-		if(speed[2] > 0)
-			res |= NORTH
-		else
-			res |= SOUTH
-	return res
-
-/obj/effect/overmap/visitable/ship/proc/adjust_speed(n_x, n_y)
-	CHANGE_SPEED_BY(speed[1], n_x, min_speed)
-	CHANGE_SPEED_BY(speed[2], n_y, min_speed)
+/obj/effect/overmap/visitable/ship/adjust_speed(n_x, n_y)
 	var/magnitude = norm(n_x, n_y)
 	var/inertia_dir = magnitude >= 0 ? turn(fore_dir, 180) : fore_dir
 	var/inertia_strength = magnitude * 1e3
@@ -107,7 +88,6 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 			toggle_move_stars(zz)
 		else
 			toggle_move_stars(zz, fore_dir)
-	update_icon()
 
 /obj/effect/overmap/visitable/ship/proc/get_brake_path()
 	if(!get_delta_v())
@@ -121,34 +101,6 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/num_burns = get_speed() / get_delta_v() + 2 //some padding in case acceleration drops fromm fuel usage
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns / burns_per_grid)
-
-/obj/effect/overmap/visitable/ship/proc/decelerate()
-	if(((speed[1]) || (speed[2])) && can_burn())
-		if (speed[1])
-			var/partial_power = Clamp(speed[1] / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
-			var/delta_v = get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
-			adjust_speed(-SIGN(speed[1]) * min(delta_v, abs(speed[1])), 0)
-		if (speed[2])
-			var/partial_power = Clamp(speed[2] / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
-			var/delta_v = get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
-			adjust_speed(0, -SIGN(speed[2]) * min(delta_v, abs(speed[2])))
-		last_burn = world.time
-
-/obj/effect/overmap/visitable/ship/proc/accelerate(direction, accel_limit)
-	var/actual_accel_limit = accel_limit / KM_OVERMAP_RATE
-	if(can_burn())
-		last_burn = world.time
-		var/delta_v = get_delta_v() / KM_OVERMAP_RATE
-		var/partial_power = Clamp(actual_accel_limit / delta_v, 0, 1)
-		var/acceleration = min(get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, actual_accel_limit)
-		if(direction & EAST)
-			adjust_speed(acceleration, 0)
-		if(direction & WEST)
-			adjust_speed(-acceleration, 0)
-		if(direction & NORTH)
-			adjust_speed(0, acceleration)
-		if(direction & SOUTH)
-			adjust_speed(0, -acceleration)
 
 /obj/effect/overmap/visitable/ship/Process()
 	damping_strength = 0
@@ -182,11 +134,11 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/datum/extension/ship_engine/E in engines)
 		. += E.burn()
 
-/obj/effect/overmap/visitable/ship/proc/can_burn()
+/obj/effect/overmap/visitable/ship/can_burn()
 	if(halted)
-		return 0
+		return FALSE
 	if (world.time < last_burn + burn_delay)
-		return 0
+		return FALSE
 	for(var/datum/extension/ship_engine/E in engines)
 		. |= E.can_burn()
 
