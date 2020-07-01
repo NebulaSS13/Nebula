@@ -130,3 +130,6 @@
 /obj/effect/overmap/proc/decelerate()
 	if(movement)
 		movement.decelerate()
+
+/obj/effect/overmap/proc/get_specific_wet_mass()
+	return

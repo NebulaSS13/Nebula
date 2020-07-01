@@ -5,6 +5,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	desc = "Space faring vessel."
 	icon_state = "ship"
 	requires_contact = TRUE
+	movement_handler_type = /datum/extension/overmap_movement/ship
 
 	var/moving_state = "ship_moving"
 	var/list/consoles
