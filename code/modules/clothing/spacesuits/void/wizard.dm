@@ -48,8 +48,7 @@
 /obj/item/clothing/gloves/wizard
 	name = "mystical gloves"
 	desc = "Reinforced, gem-studded gloves that radiate energy. They look like they go along with a matching voidsuit."
-	icon_state = "mystical"
-	item_state = "purplegloves"
+	color = COLOR_VIOLET
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = HANDS
 	cold_protection =    HANDS
