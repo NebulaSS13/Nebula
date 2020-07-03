@@ -13,7 +13,7 @@
 	var/charge_tick = 0
 	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
 
-	var/list/reagent_ids = list(/decl/material/liquid/regenerator, /decl/material/liquid/adrenaline, /decl/material/liquid/antibiotics)
+	var/list/reagent_ids = list(/decl/material/liquid/regenerator, /decl/material/liquid/stabilizer, /decl/material/liquid/antibiotics)
 	var/list/reagent_volumes = list()
 	var/list/reagent_names = list()
 
@@ -21,7 +21,7 @@
 	reagent_ids = list(/decl/material/liquid/brute_meds, /decl/material/liquid/oxy_meds, /decl/material/liquid/painkillers)
 
 /obj/item/chems/borghypo/crisis
-	reagent_ids = list(/decl/material/liquid/regenerator, /decl/material/liquid/adrenaline, /decl/material/liquid/painkillers)
+	reagent_ids = list(/decl/material/liquid/regenerator, /decl/material/liquid/stabilizer, /decl/material/liquid/painkillers)
 
 /obj/item/chems/borghypo/Initialize()
 	. = ..()

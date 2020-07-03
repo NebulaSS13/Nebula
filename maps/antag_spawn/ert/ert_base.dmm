@@ -1099,9 +1099,9 @@
 /obj/item/chems/hypospray,
 /obj/item/chems/hypospray,
 /obj/item/chems/glass/beaker/large,
-/obj/item/chems/glass/bottle/adrenaline,
-/obj/item/chems/glass/bottle/adrenaline,
-/obj/item/chems/glass/bottle/adrenaline,
+/obj/item/chems/glass/bottle/stabilizer,
+/obj/item/chems/glass/bottle/stabilizer,
+/obj/item/chems/glass/bottle/stabilizer,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -3207,7 +3207,7 @@
 	pixel_x = -4;
 	pixel_y = 8
 	},
-/obj/item/chems/glass/bottle/adrenaline{
+/obj/item/chems/glass/bottle/stabilizer{
 	pixel_x = 4;
 	pixel_y = 7
 	},

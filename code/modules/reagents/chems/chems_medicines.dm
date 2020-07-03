@@ -250,7 +250,6 @@
 
 /decl/material/liquid/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
-	M.add_chemical_effect(CE_STABLE)
 	if(M.chem_doses[type] < 0.2)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
 		M.add_chemical_effect(CE_PULSE, 1)
@@ -264,6 +263,18 @@
 		if(M.resuscitate())
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
 			heart.take_internal_damage(heart.max_damage * 0.15)
+
+/decl/material/liquid/stabilizer
+	name = "stabilizer"
+	lore_text = "A wonder drug that stabilizes autonomous nervous system, smoothing out irregularities in breathing and pulse, and helps against short-term brain damage."
+	taste_description = "gauze"
+	color = "#7efff9"
+	scannable = 1
+	metabolism = 0.5 * REM
+	value = 1.5
+
+/decl/material/liquid/stabilizer/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
+	M.add_chemical_effect(CE_STABLE)
 
 /decl/material/liquid/regenerator
 	name = "regenerative serum"

@@ -141,13 +141,13 @@
 	color = reagents.get_color()
 
 
-/obj/item/chems/pill/adrenaline
-	name = "adrenaline (30u)"
+/obj/item/chems/pill/stabilizer
+	name = "stabilizer (30u)"
 	desc = "Used to stabilize patients."
 	icon_state = "pill1"
 /obj/item/chems/pill/adrenaline/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/adrenaline, 30)
+	reagents.add_reagent(/decl/material/liquid/stabilizer, 30)
 	color = reagents.get_color()
 
 

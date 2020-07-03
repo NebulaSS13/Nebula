@@ -57,14 +57,14 @@
 		overlays += lid
 
 
-/obj/item/chems/glass/bottle/adrenaline
-	name = "adrenaline bottle"
-	desc = "A small bottle. Contains adrenaline - used to stabilize patients."
+/obj/item/chems/glass/bottle/stabilizer
+	name = "stabilizer bottle"
+	desc = "A small bottle. Contains stabilizer - used to stabilize patients."
 	icon_state = "bottle-4"
 
-/obj/item/chems/glass/bottle/adrenaline/Initialize()
+/obj/item/chems/glass/bottle/stabilizer/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/adrenaline, 60)
+	reagents.add_reagent(/decl/material/liquid/stabilizer, 60)
 	update_icon()
 
 /obj/item/chems/glass/bottle/bromide

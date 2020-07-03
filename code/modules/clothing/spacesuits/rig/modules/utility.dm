@@ -178,7 +178,7 @@
 
 	charges = list(
 		list("oxygel",       "oxygel",       /decl/material/liquid/oxy_meds,     80),
-		list("adrenaline",   "adrenaline",   /decl/material/liquid/adrenaline,   80),
+		list("stabilizer",   "stabilizer",   /decl/material/liquid/stabilizer,   80),
 		list("antitoxins",   "antitoxins",   /decl/material/liquid/antitoxins,   80),
 		list("antirads",     "antirads",     /decl/material/liquid/antirads,     80),
 		list("antibiotics",  "antibiotics",  /decl/material/liquid/antibiotics,  80),
@@ -193,7 +193,7 @@
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
 		list("oxygen",       "oxygel",       /decl/material/liquid/oxy_meds,          20),
-		list("adrenaline",   "adrenaline",   /decl/material/liquid/adrenaline,        20),
+		list("stabilizer",   "stabilizer",   /decl/material/liquid/stabilizer,        20),
 		list("antitoxins",   "antitoxins",   /decl/material/liquid/antitoxins,        20),
 		list("glucose",      "glucose",      /decl/material/liquid/nutriment/glucose, 80),
 		list("antirads",    "antirads",      /decl/material/liquid/antirads,          20),

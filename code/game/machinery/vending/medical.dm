@@ -12,7 +12,7 @@
 	initial_access = list(access_medical_equip)
 	products = list(
 		/obj/item/chems/glass/bottle/antitoxin = 4,
-		/obj/item/chems/glass/bottle/adrenaline = 4,
+		/obj/item/chems/glass/bottle/stabilizer = 4,
 		/obj/item/chems/glass/bottle/sedatives = 4,
 		/obj/item/chems/glass/bottle/bromide = 4,
 		/obj/item/chems/syringe/antibiotic = 4,

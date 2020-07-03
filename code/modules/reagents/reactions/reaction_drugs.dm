@@ -7,7 +7,7 @@
 /datum/chemical_reaction/painkillers
 	name = "Painkillers"
 	result = /decl/material/liquid/painkillers
-	required_reagents = list(/decl/material/liquid/adrenaline = 1, /decl/material/liquid/ethanol = 1, /decl/material/liquid/acetone = 1)
+	required_reagents = list(/decl/material/liquid/stabilizer = 1, /decl/material/liquid/ethanol = 1, /decl/material/liquid/acetone = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/antiseptic
@@ -73,7 +73,7 @@
 /datum/chemical_reaction/regenerator
 	name = "Regenerative Serum"
 	result = /decl/material/liquid/regenerator
-	required_reagents = list(/decl/material/liquid/adrenaline = 1, /decl/material/liquid/antitoxins = 1)
+	required_reagents = list(/decl/material/liquid/stabilizer = 1, /decl/material/liquid/antitoxins = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/neuroannealer
@@ -91,7 +91,7 @@
 /datum/chemical_reaction/brute_meds
 	name = "Anti-Trauma Medication"
 	result = /decl/material/liquid/brute_meds
-	required_reagents = list(/decl/material/liquid/adrenaline = 1, /decl/material/solid/carbon = 1)
+	required_reagents = list(/decl/material/liquid/stabilizer = 1, /decl/material/solid/carbon = 1)
 	inhibitors = list(/decl/material/liquid/nutriment/sugar = 1) // Messes up with adrenaline
 	result_amount = 2
 
@@ -120,7 +120,7 @@
 /datum/chemical_reaction/antibiotics
 	name = "Antibiotics"
 	result = /decl/material/liquid/antibiotics
-	required_reagents = list(/decl/material/liquid/presyncopics = 1, /decl/material/liquid/adrenaline = 1)
+	required_reagents = list(/decl/material/liquid/presyncopics = 1, /decl/material/liquid/stabilizer = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/eyedrops
@@ -239,6 +239,12 @@
 	name = "Adrenaline"
 	result = /decl/material/liquid/adrenaline
 	required_reagents = list(/decl/material/liquid/nutriment/sugar = 1, /decl/material/liquid/amphetamines = 1, /decl/material/liquid/oxy_meds = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/stabilizer
+	name = "Stabilizer"
+	result = /decl/material/liquid/stabilizer
+	required_reagents = list(/decl/material/liquid/nutriment/sugar = 1, /decl/material/solid/carbon = 1, /decl/material/liquid/acetone = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/gleam
