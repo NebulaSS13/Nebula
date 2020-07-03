@@ -27,6 +27,9 @@
 	. += new/datum/stack_recipe/clipboard(src)
 	. += new/datum/stack_recipe/cross(src)
 	. += new/datum/stack_recipe/improvised_armour(src)
+	. += new/datum/stack_recipe/armguards(src)
+	. += new/datum/stack_recipe/legguards(src)
+	. += new/datum/stack_recipe/gauntlets(src)
 
 	if(hardness >= MAT_VALUE_FLEXIBLE)
 		. += new/datum/stack_recipe/baseball_bat(src)
