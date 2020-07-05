@@ -341,13 +341,13 @@
 /// Syringes. END
 ////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/chems/syringe/adrenaline
-	name = "Syringe (adrenaline)"
-	desc = "Contains adrenaline - used to stabilize patients."
+/obj/item/chems/syringe/stabilizer
+	name = "Syringe (stabilizer)"
+	desc = "Contains stabilizer - for patients in danger of brain damage."
 
-/obj/item/chems/syringe/adrenaline/Initialize()
+/obj/item/chems/syringe/stabilizer/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/adrenaline, 15)
+	reagents.add_reagent(/decl/material/liquid/stabilizer, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 

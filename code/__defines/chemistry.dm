@@ -16,7 +16,7 @@
 // Some on_mob_life() procs check for alien races.
 #define IS_SLIME   1
 
-#define CE_STABLE        "stable"       // Adrenaline effect
+#define CE_STABLE        "stable"       // Stabilizing brain, pulse and breathing
 #define CE_ANTIBIOTIC    "antibiotic"   // Spaceacilin
 #define CE_BLOODRESTORE  "bloodrestore" // Iron/nutriment
 #define CE_PAINKILLER    "painkiller"

@@ -183,7 +183,7 @@ obj/item/clothing/mask/chewable/Destroy()
 				/decl/material/liquid/antitoxins,
 				/decl/material/liquid/brute_meds,
 				/decl/material/liquid/burn_meds,
-				/decl/material/liquid/adrenaline)), 10)
+				/decl/material/liquid/stabilizer)), 10)
 	color = reagents.get_color()
 
 /obj/item/clothing/mask/chewable/candy/lolli/weak_meds
@@ -198,7 +198,7 @@ obj/item/clothing/mask/chewable/Destroy()
 				/decl/material/liquid/painkillers,
 				/decl/material/liquid/regenerator,
 				/decl/material/liquid/antitoxins,
-				/decl/material/liquid/adrenaline))
+				/decl/material/liquid/stabilizer))
 	reagents.add_reagent(payload, 15)
 	color = reagents.get_color()
 	desc = "[desc]. This one is labeled '[initial(payload.name)]'"
