@@ -17,19 +17,19 @@
 
 /obj/effect/projectile/proc/scale_to(nx,ny,override=TRUE)
 	var/matrix/M
-	if(!override)
-		M = transform
-	else
+	if(override)
 		M = new
+	else
+		M = transform
 	M.Scale(nx,ny)
 	transform = M
 
 /obj/effect/projectile/proc/turn_to(angle,override=TRUE)
 	var/matrix/M
-	if(!override)
-		M = transform
-	else
+	if(override)
 		M = new
+	else
+		M = transform
 	M.Turn(angle)
 	transform = M
 
