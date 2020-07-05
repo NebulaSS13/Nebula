@@ -10,6 +10,8 @@
 	var/instant_contact  = FALSE //do we instantly identify ourselves to any ship in sensors range?
 	var/halted = FALSE
 	var/sensor_visibility = 10	 //how likely it is to increase identification process each scan.
+	var/list/consoles
+	var/list/map_z = list()
 
 	var/vessel_mass = 10000             // metric tonnes, very rough number, affects acceleration provided by engines
 	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
@@ -33,6 +35,7 @@
 
 /obj/effect/overmap/Initialize()
 	. = ..()
+	glide_size = world.icon_size
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 

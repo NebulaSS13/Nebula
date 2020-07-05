@@ -8,7 +8,6 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	movement_handler_type = /datum/extension/overmap_movement/ship
 
 	var/moving_state = "ship_moving"
-	var/list/consoles
 
 	var/list/known_ships = list()		//List of ships known at roundstart - put types here.
 	var/base_sensor_visibility
@@ -25,7 +24,6 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/Initialize()
 	. = ..()
-	glide_size = world.icon_size
 	min_speed = round(min_speed, SHIP_MOVE_RESOLUTION)
 	max_speed = round(max_speed, SHIP_MOVE_RESOLUTION)
 	SSshuttle.ships += src
@@ -113,23 +111,14 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	sensor_visibility = min(round(base_sensor_visibility + get_speed_sensor_increase(), 1), 100)
 
 /obj/effect/overmap/visitable/ship/on_update_icon()
-
-	pixel_x = position[1] * (world.icon_size/2)
-	pixel_y = position[2] * (world.icon_size/2)
-
+	if(movement)
+		movement.handle_pixel_movement()
 	if(!is_still())
 		icon_state = moving_state
 		set_dir(get_heading())
 	else
 		icon_state = initial(icon_state)
 
-	for(var/obj/machinery/computer/ship/machine in consoles)
-		if(machine.z in map_z)
-			for(var/weakref/W in machine.viewers)
-				var/mob/M = W.resolve()
-				if(istype(M) && M.client)
-					M.client.pixel_x = pixel_x
-					M.client.pixel_y = pixel_y
 	..()
 
 /obj/effect/overmap/visitable/ship/proc/burn()

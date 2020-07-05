@@ -13,6 +13,9 @@
 /datum/extension/overmap_movement/proc/decelerate()
 	return
 
+/datum/extension/overmap_movement/proc/handle_pixel_movement()
+	return
+
 //Ship movement below.
 
 /datum/extension/overmap_movement/ship
@@ -72,6 +75,19 @@
 			OM.adjust_speed(0, -SIGN(OM.speed[2]) * min(delta_v, abs(OM.speed[2])))
 		OM.last_burn = world.time
 
+/datum/extension/overmap_movement/ship/handle_pixel_movement()
+	var/obj/effect/overmap/OM = holder
+
+	OM.pixel_x = OM.position[1] * (world.icon_size/2)
+	OM.pixel_y = OM.position[2] * (world.icon_size/2)
+
+	for(var/obj/machinery/computer/ship/machine in OM.consoles)
+		if(machine.z in OM.map_z)
+			for(var/weakref/W in machine.viewers)
+				var/mob/M = W.resolve()
+				if(istype(M) && M.client)
+					M.client.pixel_x = OM.pixel_x
+					M.client.pixel_y = OM.pixel_y
 
 
 
