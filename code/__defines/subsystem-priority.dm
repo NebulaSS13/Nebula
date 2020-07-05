@@ -39,6 +39,7 @@
 #define SS_PRIORITY_PLANTS        90   // Plant processing, slow ticks.
 #define SS_PRIORITY_VINES         50   // Spreading vine effects.
 #define SS_PRIORITY_PSYCHICS      45   // Psychic complexus processing.
+#define SS_PRIORITY_AI            45   // Artificial Intelligence on mobs processing.
 #define SS_PRIORITY_NANO          40   // Updates to nanoui uis.
 #define SS_PRIORITY_TURF          30   // Radioactive walls/blob.
 #define SS_PRIORITY_EVAC          30   // Processes the evac controller.
