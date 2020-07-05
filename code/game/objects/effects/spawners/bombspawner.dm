@@ -23,9 +23,9 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 
-	var/filler_type =          MAT_CO2
+	var/filler_type =          /decl/material/gas/carbon_dioxide
 	var/accelerant_type =      DEFAULT_GAS_ACCELERANT
-	var/accelerant_tank_type = /obj/item/tank/phoron
+	var/accelerant_tank_type = /obj/item/tank/hydrogen
 	var/oxidizer_type =        DEFAULT_GAS_OXIDIZER
 	var/oxidizer_tank_type =   /obj/item/tank/oxygen
 
@@ -35,10 +35,6 @@
 	var/accelerant_amount = 12
 	var/oxidizer_amount = 18
 	var/filler_amount = 0
-
-/obj/effect/spawner/newbomb/hydrogen
-	accelerant_type = MAT_HYDROGEN
-	accelerant_tank_type = /obj/item/tank/hydrogen
 
 /obj/effect/spawner/newbomb/traitor
 	name = "TTV bomb - traitor"

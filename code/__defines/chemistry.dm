@@ -63,5 +63,5 @@
 #define DIRTINESS_CLEAN   -1
 #define DIRTINESS_NEUTRAL  0
 
-#define DEFAULT_GAS_ACCELERANT MAT_PHORON
-#define DEFAULT_GAS_OXIDIZER   MAT_OXYGEN
+#define DEFAULT_GAS_ACCELERANT /decl/material/gas/hydrogen
+#define DEFAULT_GAS_OXIDIZER   /decl/material/gas/oxygen
