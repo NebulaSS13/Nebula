@@ -18,6 +18,9 @@
 		/decl/material/solid/metal/uranium = 0.5,
 		/decl/material/solid/metal/radium = 0.5
 	)
+	ore_type_value = ORE_NUCLEAR
+	ore_data_value = 3
+
 /decl/material/solid/mineral/graphite
 	name = "graphite"
 	color = "#444444"
@@ -26,6 +29,8 @@
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
+	ore_type_value = ORE_SURFACE
+	ore_data_value = 1
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
@@ -182,6 +187,8 @@
 	ore_compresses_to = /decl/material/solid/stone/sandstone
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
+	ore_type_value = ORE_SURFACE
+	ore_data_value = 1
 	value = 0.8
 	dirtiness = 15
 	dissolves_into = list(
@@ -212,6 +219,8 @@
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
+	ore_type_value = ORE_SURFACE
+	ore_data_value = 1
 
 /decl/material/solid/mineral/rutile
 	name = "rutile"
@@ -223,7 +232,8 @@
 	ore_scan_icon = "mineral_uncommon"
 	ore_name = "rutile"
 	ore_icon_overlay = "lump"
-
+	ore_type_value = ORE_PRECIOUS
+	ore_data_value = 2
 	value = 0.8
 	sparse_material_weight = 3
 	rich_material_weight = 1

@@ -29,6 +29,8 @@
 	value = 1.8
 	sparse_material_weight = 5
 	rich_material_weight = 5
+	ore_type_value = ORE_PRECIOUS
+	ore_data_value = 2
 
 /decl/material/solid/gemstone/crystal
 	name = "crystal"

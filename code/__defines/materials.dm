@@ -53,3 +53,8 @@
 #define MAT_VALUE_MIRRORED          80
 
 #define STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+
+#define ORE_SURFACE  "surface minerals"
+#define ORE_PRECIOUS "precious metals"
+#define ORE_NUCLEAR  "nuclear fuel"
+#define ORE_EXOTIC   "exotic matter"
