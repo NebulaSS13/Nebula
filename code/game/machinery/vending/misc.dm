@@ -86,6 +86,8 @@
 		/obj/item/toy/eightball = 8, 
 		/obj/item/deck/cards = 5, 
 		/obj/item/deck/tarot = 5, 
+		/obj/item/deck/cag/white = 5,
+		/obj/item/deck/cag/black = 5, 
 		/obj/item/pack/cardemon = 6, 
 		/obj/item/pack/spaceball = 6, 
 		/obj/item/storage/pill_bottle/dice_nerd = 5, 
