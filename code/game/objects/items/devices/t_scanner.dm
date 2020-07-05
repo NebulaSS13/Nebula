@@ -8,7 +8,7 @@
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	material = MAT_ALUMINIUM
+	material = /decl/material/solid/metal/aluminium
 	origin_tech = "{'magnets':1,'engineering':1}"
 	action_button_name = "Toggle T-Ray scanner"
 

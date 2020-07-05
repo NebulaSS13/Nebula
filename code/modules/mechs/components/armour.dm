@@ -13,7 +13,7 @@
 		rad = ARMOR_RAD_MINOR
 		)
 	origin_tech = "{'materials':1}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/robot_parts/robot_component/armour/exosuit/radproof
 	name = "radiation-proof armour plating"
@@ -28,7 +28,7 @@
 		rad = ARMOR_RAD_SHIELDED
 		)
 	origin_tech = "{'materials':3}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/robot_parts/robot_component/armour/exosuit/em
 	name = "EM-shielded armour plating"
@@ -43,8 +43,8 @@
 		rad = ARMOR_RAD_SMALL
 		)
 	origin_tech = "{'materials':3}"
-	material = MAT_STEEL
-	matter = list(MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/robot_parts/robot_component/armour/exosuit/combat
 	name = "heavy combat plating"
@@ -58,8 +58,8 @@
 		bio = ARMOR_BIO_SHIELDED
 		)
 	origin_tech = "{'materials':5}"
-	material = MAT_STEEL
-	matter = list(MAT_DIAMOND = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/robot_parts/robot_component/armour/exosuit/Initialize()
 	. = ..()

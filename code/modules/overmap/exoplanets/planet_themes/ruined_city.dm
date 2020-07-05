@@ -128,7 +128,7 @@
 	floor_type = /turf/simulated/floor/fixed/alium/airless
 
 /turf/simulated/wall/containment/Initialize(var/ml)
-	. = ..(ml, MAT_CONCRETE, MAT_ALIENALLOY)
+	. = ..(ml, /decl/material/solid/stone/concrete, /decl/material/solid/metal/aliumium)
 
 /datum/random_map/maze/lab
 	wall_type =  /turf/simulated/wall/containment

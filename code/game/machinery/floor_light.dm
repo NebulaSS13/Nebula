@@ -12,8 +12,8 @@ var/list/floor_light_cache = list()
 	active_power_usage = 20
 	power_channel = LIGHT
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_PRIMARY,
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT
 	)
 
 	var/damaged

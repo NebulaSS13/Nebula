@@ -5,7 +5,7 @@
 	icon_state = "blank"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 	var/list/part = null // Order of args is important for installing robolimbs.
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
@@ -43,7 +43,7 @@
 	part = list(BP_L_ARM, BP_L_HAND)
 	model_info = 1
 	bp_tag = BP_L_ARM
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/robot_parts/r_arm
 	name = "right arm"
@@ -52,7 +52,7 @@
 	part = list(BP_R_ARM, BP_R_HAND)
 	model_info = 1
 	bp_tag = BP_R_ARM
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/robot_parts/l_leg
 	name = "left leg"
@@ -61,7 +61,7 @@
 	part = list(BP_L_LEG, BP_L_FOOT)
 	model_info = 1
 	bp_tag = BP_L_LEG
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/robot_parts/r_leg
 	name = "right leg"
@@ -70,7 +70,7 @@
 	part = list(BP_R_LEG, BP_R_FOOT)
 	model_info = 1
 	bp_tag = BP_R_LEG
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/robot_parts/head
 	name = "head"
@@ -79,7 +79,7 @@
 	part = list(BP_HEAD)
 	model_info = 1
 	bp_tag = BP_HEAD
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/obj/item/flash/flash1 = null
 	var/obj/item/flash/flash2 = null
 
@@ -97,7 +97,7 @@
 	part = list(BP_GROIN,BP_CHEST)
 	model_info = 1
 	bp_tag = BP_CHEST
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/wires = 0.0
 	var/obj/item/cell/cell = null
 

@@ -72,7 +72,7 @@
 				return
 			var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
 			if(istype(W,/obj/item/stack/tile/carpet))
-				padding_type = MAT_CARPET
+				padding_type = /decl/material/solid/carpet
 			else if(istype(W,/obj/item/stack/material))
 				var/obj/item/stack/material/M = W
 				if(M.material && (M.material.flags & MAT_FLAG_PADDING))
@@ -138,12 +138,12 @@
 	icon_state = "psychbed"
 
 /obj/structure/bed/psych
-	material = MAT_WALNUT
-	reinf_material = MAT_LEATHER_GENERIC
+	material = /decl/material/solid/wood/walnut
+	reinf_material = /decl/material/solid/leather
 
 /obj/structure/bed/padded
-	material = MAT_ALUMINIUM
-	reinf_material = MAT_CLOTH
+	material = /decl/material/solid/metal/aluminium
+	reinf_material = /decl/material/solid/cloth
 
 /*
  * Roller beds

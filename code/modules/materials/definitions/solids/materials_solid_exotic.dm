@@ -5,7 +5,7 @@
 	stack_type = /obj/item/stack/material/mhydrogen
 	color = "#e6c5de"
 	stack_origin_tech = "{'materials':6,'powerstorage':6,'magnets':5}"
-	ore_smelts_to = MAT_TRITIUM
+	ore_smelts_to = /decl/material/gas/hydrogen/tritium
 	ore_name = "raw hydrogen"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "gems"
@@ -20,7 +20,7 @@
 	gas_specific_heat = 100
 	gas_molar_mass = 0.002
 	gas_flags = XGM_GAS_FUEL
-	gas_burn_product = MAT_WATER
+	gas_burn_product = /decl/material/liquid/water
 	gas_symbol_html = "H<sub>2</sub>"
 	gas_symbol = "H2"
 	dissolves_into = list(
@@ -67,7 +67,7 @@
 	touch_met = 5
 	fuel_value = 2
 	vapor_products = list(
-		MAT_PHORON = 1
+		/decl/material/solid/phoron = 1
 	)
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
@@ -80,7 +80,7 @@
 	for(var/turf/simulated/floor/target_tile in range(2,T))
 		var/phoronToDeduce = (temperature/30) * effect_multiplier
 		totalPhoron += phoronToDeduce
-		target_tile.assume_gas(MAT_PHORON, phoronToDeduce, 200+T0C)
+		target_tile.assume_gas(/decl/material/solid/phoron, phoronToDeduce, 200+T0C)
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)

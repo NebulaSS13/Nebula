@@ -224,7 +224,7 @@
 /obj/item/robot_parts/robot_component
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 	var/brute = 0
 	var/burn = 0
@@ -265,7 +265,7 @@
 
 /obj/item/robot_parts/robot_component/armour/light
 	name = "light-weight armour plating"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/robot_parts/robot_component/camera
 	name = "camera"

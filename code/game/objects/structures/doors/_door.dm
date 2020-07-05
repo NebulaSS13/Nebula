@@ -155,45 +155,45 @@
 	open()
 
 /obj/structure/door/iron
-	material = MAT_IRON
+	material = /decl/material/solid/metal/iron
 
 /obj/structure/door/silver
-	material = MAT_SILVER
+	material = /decl/material/solid/metal/silver
 
 /obj/structure/door/gold
-	material = MAT_GOLD
+	material = /decl/material/solid/metal/gold
 
 /obj/structure/door/uranium
-	material = MAT_URANIUM
+	material = /decl/material/solid/metal/uranium
 
 /obj/structure/door/sandstone
-	material = MAT_SANDSTONE
+	material = /decl/material/solid/stone/sandstone
 
 /obj/structure/door/diamond
-	material = MAT_DIAMOND
+	material = /decl/material/solid/gemstone/diamond
 
 /obj/structure/door/wood
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/structure/door/mahogany
-	material = MAT_MAHOGANY
+	material = /decl/material/solid/wood/mahogany
 
 /obj/structure/door/maple
-	material = MAT_MAPLE
+	material = /decl/material/solid/wood/maple
 
 /obj/structure/door/ebony
-	material = MAT_EBONY
+	material = /decl/material/solid/wood/ebony
 
 /obj/structure/door/walnut
-	material = MAT_WALNUT
+	material = /decl/material/solid/wood/walnut
 
 /obj/structure/door/cult
-	material = MAT_CULT
+	material = /decl/material/solid/stone/cult
 
 /obj/structure/door/wood/saloon
 	icon_base = "saloon"
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 	opacity = FALSE
 
 /obj/structure/door/shuttle
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel

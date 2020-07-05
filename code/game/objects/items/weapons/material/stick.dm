@@ -7,7 +7,7 @@
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 	attack_verb = list("poked", "jabbed")
 
 /obj/item/material/stick/attack_self(mob/user)

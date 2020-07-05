@@ -556,10 +556,10 @@
 	action_flags = IC_ACTION_LONG_RANGE
 
 	origin_tech = "{'magnets':1,'bluespace':3}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_SILVER = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_GOLD = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()

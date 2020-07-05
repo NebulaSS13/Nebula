@@ -23,7 +23,7 @@
 
 	meat_type = /obj/item/chems/food/snacks/meat/corgi
 	meat_amount = 3
-	skin_material = MAT_SKIN_FUR_ORANGE
+	skin_material = /decl/material/solid/skin/fur/orange
 
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back

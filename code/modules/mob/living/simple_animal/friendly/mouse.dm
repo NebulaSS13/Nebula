@@ -34,7 +34,7 @@
 	meat_amount =   1
 	bone_amount =   1
 	skin_amount =   1
-	skin_material = MAT_SKIN_FUR
+	skin_material = /decl/material/solid/skin/fur
 
 	var/body_color //brown, gray and white, leave blank for random
 
@@ -87,9 +87,9 @@
 	. = ..()
 	switch(body_color)
 		if("gray")
-			skin_material = MAT_SKIN_FUR_GRAY
+			skin_material = /decl/material/solid/skin/fur/gray
 		if("white")
-			skin_material = MAT_SKIN_FUR_WHITE
+			skin_material = /decl/material/solid/skin/fur/white
 
 /mob/living/simple_animal/mouse/proc/splat()
 	icon_dead = "mouse_[body_color]_splat"

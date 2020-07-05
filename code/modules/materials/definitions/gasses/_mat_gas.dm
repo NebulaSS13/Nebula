@@ -9,7 +9,7 @@
 	alloy_materials = null
 	alloy_product = FALSE
 	value = 0
-	gas_burn_product = MAT_CO2
+	gas_burn_product = /decl/material/gas/carbon_dioxide
 	gas_specific_heat = 20    // J/(mol*K)
 	gas_molar_mass =    0.032 // kg/mol
 	reflectiveness = 0

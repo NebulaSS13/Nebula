@@ -15,7 +15,7 @@
 	max_targets = 1
 	equipped_summons = list("active hand" = /obj/item/material/sword)
 	delete_old = 0
-	var/material = MAT_GOLD
+	var/material = /decl/material/solid/metal/gold
 
 	hud_state = "gen_immolate"
 
@@ -33,7 +33,7 @@
 	if(!..())
 		return 0
 
-	material = MAT_SILVER
+	material = /decl/material/solid/metal/silver
 	return "Dyrnwyn has been made pure: it is now made of silver."
 
 /spell/targeted/equip_item/dyrnwyn/tower

@@ -6,8 +6,8 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = "{'programming':2}"
-	material = MAT_GLASS
-	matter = list(MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/glass
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/current_emotion = 1
 	var/obj/item/radio/radio

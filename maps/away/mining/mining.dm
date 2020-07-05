@@ -229,7 +229,7 @@
 
 
 /obj/item/stool/stone/Initialize(mapload)
-	. = ..(mapload, MAT_SANDSTONE)
+	. = ..(mapload, /decl/material/solid/stone/sandstone)
 
 /turf/simulated/floor/airless/stone
 	name = "temple floor"

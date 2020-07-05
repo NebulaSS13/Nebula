@@ -10,20 +10,20 @@
 	icon_state = "fusebox"
 	desc = "A bloc of multi-use fuses, protecting the machine against the electrical current spikes."
 	protection_types = list(ELECTROCUTE)
-	material = MAT_STEEL
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/shielding/kinetic
 	name = "internal armor"
 	icon_state = "armor"
 	desc = "Kinetic resistant armor plates to line the machine with."
 	protection_types = list(BRUTE)
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/stock_parts/shielding/heat
 	name = "heatsink"
 	icon_state = "heatsink"
 	desc = "Active cooling system protecting machinery against the high temperatures."
 	protection_types = list(BURN)
-	material = MAT_STEEL
-	matter = list(MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)

@@ -6,8 +6,8 @@
 	w_class = ITEM_SIZE_SMALL
 	
 	origin_tech = "{'magnets':3, 'programming':2}"
-	material = MAT_STEEL
-	matter = list(MAT_SILVER = MATTER_AMOUNT_TRACE, MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
 	var/enabled = FALSE
 
 /obj/item/ship_tracker/Initialize()

@@ -351,7 +351,7 @@
 	color = "#13bc5e"
 
 /decl/material/liquid/crystal_agent/proc/do_material_check(var/mob/living/carbon/M)
-	. = MAT_CRYSTAL
+	. = /decl/material/solid/gemstone/crystal
 
 /decl/material/liquid/crystal_agent/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/result_mat = do_material_check(M)

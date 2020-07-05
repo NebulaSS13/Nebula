@@ -36,7 +36,7 @@
 	desc = "These work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
-	material = MAT_LEATHER_GENERIC
+	material = /decl/material/solid/leather
 
 /obj/item/clothing/gloves/thick/botany/on_update_icon()
 	. = ..()

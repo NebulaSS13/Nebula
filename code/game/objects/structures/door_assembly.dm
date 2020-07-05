@@ -10,7 +10,7 @@
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/electronics = null
 	var/airlock_type = /obj/machinery/door/airlock //the type path of the airlock once completed
 	var/glass = 0 // 0 = glass can be installed. -1 = glass can't be installed. 1 = glass is already installed.
-	var/glass_material = MAT_GLASS // if this door was to built right now and be made of glass, what material should the glass be?
+	var/glass_material = /decl/material/solid/glass // if this door was to built right now and be made of glass, what material should the glass be?
 	var/created_name = null
 	var/panel_icon = 'icons/obj/doors/station/panel.dmi'
 	var/fill_icon = 'icons/obj/doors/station/fill_steel.dmi'

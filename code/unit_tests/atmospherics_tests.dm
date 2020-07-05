@@ -65,21 +65,21 @@
 		uphill = list(
 			source = list(
 				initial_gas = list(
-					MAT_OXYGEN         = 5,
-					MAT_NITROGEN       = 10,
-					MAT_CO2 = 5,
-					MAT_PHORON         = 10,
-					MAT_N2O = 5,
+					/decl/material/gas/oxygen         = 5,
+					/decl/material/gas/nitrogen       = 10,
+					/decl/material/gas/carbon_dioxide = 5,
+					/decl/material/solid/phoron         = 10,
+					/decl/material/gas/nitrous_oxide = 5,
 				),
 				temperature = T20C - 5,
 			),
 			sink = list(
 				initial_gas = list(
-					MAT_OXYGEN         = 10,
-					MAT_NITROGEN       = 20,
-					MAT_CO2 = 10,
-					MAT_PHORON         = 20,
-					MAT_N2O = 10,
+					/decl/material/gas/oxygen         = 10,
+					/decl/material/gas/nitrogen       = 20,
+					/decl/material/gas/carbon_dioxide = 10,
+					/decl/material/solid/phoron         = 20,
+					/decl/material/gas/nitrous_oxide = 10,
 				),
 				temperature = T20C + 5,
 			)
@@ -87,21 +87,21 @@
 		downhill = list(
 			source = list(
 				initial_gas = list(
-					MAT_OXYGEN         = 10,
-					MAT_NITROGEN       = 20,
-					MAT_CO2 = 10,
-					MAT_PHORON         = 20,
-					MAT_N2O = 10,
+					/decl/material/gas/oxygen         = 10,
+					/decl/material/gas/nitrogen       = 20,
+					/decl/material/gas/carbon_dioxide = 10,
+					/decl/material/solid/phoron         = 20,
+					/decl/material/gas/nitrous_oxide = 10,
 				),
 				temperature = T20C + 5,
 			),
 			sink = list(
 				initial_gas = list(
-					MAT_OXYGEN         = 5,
-					MAT_NITROGEN       = 10,
-					MAT_CO2 = 5,
-					MAT_PHORON         = 10,
-					MAT_N2O = 5,
+					/decl/material/gas/oxygen         = 5,
+					/decl/material/gas/nitrogen       = 10,
+					/decl/material/gas/carbon_dioxide = 5,
+					/decl/material/solid/phoron         = 10,
+					/decl/material/gas/nitrous_oxide = 5,
 				),
 				temperature = T20C - 5,
 			),
@@ -109,21 +109,21 @@
 		flat = list(
 			source = list(
 				initial_gas = list(
-					MAT_OXYGEN         = 10,
-					MAT_NITROGEN       = 20,
-					MAT_CO2 = 10,
-					MAT_PHORON         = 20,
-					MAT_N2O = 10,
+					/decl/material/gas/oxygen         = 10,
+					/decl/material/gas/nitrogen       = 20,
+					/decl/material/gas/carbon_dioxide = 10,
+					/decl/material/solid/phoron         = 20,
+					/decl/material/gas/nitrous_oxide = 10,
 				),
 				temperature = T20C,
 			),
 			sink = list(
 				initial_gas = list(
-					MAT_OXYGEN         = 10,
-					MAT_NITROGEN       = 20,
-					MAT_CO2 = 10,
-					MAT_PHORON         = 20,
-					MAT_N2O = 10,
+					/decl/material/gas/oxygen         = 10,
+					/decl/material/gas/nitrogen       = 20,
+					/decl/material/gas/carbon_dioxide = 10,
+					/decl/material/solid/phoron         = 20,
+					/decl/material/gas/nitrous_oxide = 10,
 				),
 				temperature = T20C,
 			),
@@ -131,11 +131,11 @@
 		vacuum_sink = list(
 			source = list(
 				initial_gas = list(
-					MAT_OXYGEN         = 10,
-					MAT_NITROGEN       = 20,
-					MAT_CO2 = 10,
-					MAT_PHORON         = 20,
-					MAT_N2O = 10,
+					/decl/material/gas/oxygen         = 10,
+					/decl/material/gas/nitrogen       = 20,
+					/decl/material/gas/carbon_dioxide = 10,
+					/decl/material/solid/phoron         = 20,
+					/decl/material/gas/nitrous_oxide = 10,
 				),
 				temperature = T20C,
 			),
@@ -151,11 +151,11 @@
 			),
 			sink = list(
 				initial_gas = list(
-					MAT_OXYGEN         = 10,
-					MAT_NITROGEN       = 20,
-					MAT_CO2 = 10,
-					MAT_PHORON         = 20,
-					MAT_N2O = 10,
+					/decl/material/gas/oxygen         = 10,
+					/decl/material/gas/nitrogen       = 20,
+					/decl/material/gas/carbon_dioxide = 10,
+					/decl/material/solid/phoron         = 20,
+					/decl/material/gas/nitrous_oxide = 10,
 				),
 				temperature = T20C,
 			),

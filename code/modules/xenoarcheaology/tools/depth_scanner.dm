@@ -5,10 +5,10 @@
 	icon_state = "crap"
 	item_state = "analyzer"
 	origin_tech = "{'magnets':2,'engineering':2,'bluespace':2}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_ALUMINIUM = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT

@@ -38,7 +38,7 @@
 	move_delay = 4
 	turn_delay = 4
 	power_use = 10
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/mech_component/sensors/powerloader
 	name = "exosuit sensors"
@@ -114,7 +114,7 @@
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
 
-	material = decls_repository.get_decl(MAT_OSMIUM_CARBIDE_PLASTEEL)
+	material = decls_repository.get_decl(/decl/material/solid/metal/plasteel/ocp)
 
 /mob/living/exosuit/premade/firefighter/spawn_mech_equipment()
 	..()

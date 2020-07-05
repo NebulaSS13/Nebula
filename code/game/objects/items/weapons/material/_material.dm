@@ -8,6 +8,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	sharp = 0
 	edge = 0
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	applies_material_colour = TRUE
 	applies_material_name = TRUE

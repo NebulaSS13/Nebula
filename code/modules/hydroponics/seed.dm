@@ -182,9 +182,9 @@
 		return
 	if(!(light_supplied) || !(get_trait(TRAIT_REQUIRES_WATER)))
 		return
-	if(environment.get_gas(MAT_CO2) >= req_CO2_moles)
-		environment.adjust_gas(MAT_CO2, -req_CO2_moles, 1)
-		environment.adjust_gas(MAT_OXYGEN, req_CO2_moles, 1)
+	if(environment.get_gas(/decl/material/gas/carbon_dioxide) >= req_CO2_moles)
+		environment.adjust_gas(/decl/material/gas/carbon_dioxide, -req_CO2_moles, 1)
+		environment.adjust_gas(/decl/material/gas/oxygen, req_CO2_moles, 1)
 
 //Splatter a turf.
 /datum/seed/proc/splatter(var/turf/T,var/obj/item/thrown)
@@ -447,12 +447,12 @@
 
 	if(prob(5))
 		consume_gasses = list()
-		var/gas = pick(MAT_OXYGEN,MAT_NITROGEN,MAT_PHORON,MAT_CO2)
+		var/gas = pick(/decl/material/gas/oxygen,/decl/material/gas/nitrogen,/decl/material/solid/phoron,/decl/material/gas/carbon_dioxide)
 		consume_gasses[gas] = rand(3,9)
 
 	if(prob(5))
 		exude_gasses = list()
-		var/gas = pick(MAT_OXYGEN,MAT_NITROGEN,MAT_PHORON,MAT_CO2)
+		var/gas = pick(/decl/material/gas/oxygen,/decl/material/gas/nitrogen,/decl/material/solid/phoron,/decl/material/gas/carbon_dioxide)
 		exude_gasses[gas] = rand(3,9)
 
 	chems = list()

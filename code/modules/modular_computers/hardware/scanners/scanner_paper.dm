@@ -2,8 +2,8 @@
 	name = "paper scanner module"
 	desc = "A paper scanning module. It can scan writing and save it to a file."
 	external_slot = TRUE
-	material = MAT_STEEL
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/scanner/paper/can_use_scanner(mob/user, obj/item/paper/target, proximity = TRUE)
 	if(!..())

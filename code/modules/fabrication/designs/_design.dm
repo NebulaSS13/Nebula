@@ -10,7 +10,7 @@
 	var/build_time = 5 SECONDS
 	var/max_amount = 1 // How many instances can be queued at once
 	var/ignore_materials = list(
-		MAT_WASTE = TRUE
+		/decl/material/solid/slag = TRUE
 	)
 	var/list/required_technology
 

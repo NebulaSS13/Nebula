@@ -29,7 +29,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
 	speed = 1
-	max_gas = list(MAT_PHORON = 1, MAT_CO2 = 5, MAT_METHYL_BROMIDE = 1)
+	max_gas = list(/decl/material/solid/phoron = 1, /decl/material/gas/carbon_dioxide = 5, /decl/material/gas/methyl_bromide = 1)
 	bleed_colour = "#0d5a71"
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
@@ -39,7 +39,7 @@
 	meat_amount = 3
 	bone_material = null
 	bone_amount =   0
-	skin_material = MAT_SKIN_CHITIN
+	skin_material = /decl/material/solid/skin/insect
 	skin_amount =   5
 
 	var/poison_per_bite = 6

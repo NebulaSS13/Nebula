@@ -116,9 +116,9 @@
 	sharp = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	does_spin = FALSE
-	var/shaft_material = MAT_STEEL
+	var/shaft_material = /decl/material/solid/metal/steel
 	var/cable_color = COLOR_RED
 
 /obj/item/material/twohanded/spear/shatter(var/consumed)
@@ -150,18 +150,18 @@
 	return shaft
 
 /obj/item/material/twohanded/spear/diamond
-	material = MAT_DIAMOND
-	shaft_material = MAT_GOLD
+	material = /decl/material/solid/gemstone/diamond
+	shaft_material = /decl/material/solid/metal/gold
 	cable_color = COLOR_PURPLE
 
 /obj/item/material/twohanded/spear/steel
-	material = MAT_STEEL
-	shaft_material = MAT_WOOD
+	material = /decl/material/solid/metal/steel
+	shaft_material = /decl/material/solid/wood
 	cable_color = COLOR_GREEN
 
 /obj/item/material/twohanded/spear/supermatter
-	material = MAT_SUPERMATTER
-	shaft_material = MAT_EBONY
+	material = /decl/material/solid/supermatter
+	shaft_material = /decl/material/solid/wood/ebony
 	cable_color = COLOR_INDIGO
 
 /obj/item/material/twohanded/baseballbat
@@ -175,7 +175,7 @@
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	material = MAT_MAPLE
+	material = /decl/material/solid/wood/maple
 	max_force = 40	//for wielded
 	material_force_multiplier = 0.4           // 24 when wielded with weight 60 (steel)
 	unwielded_material_force_multiplier = 0.25 // 15 when unwielded based on above.
@@ -183,16 +183,16 @@
 
 //Predefined materials go here.
 /obj/item/material/twohanded/baseballbat/aluminium/Initialize(mapload)
-	. = ..(mapload, MAT_ALUMINIUM)
+	. = ..(mapload, /decl/material/solid/metal/aluminium)
 
 /obj/item/material/twohanded/baseballbat/uranium/Initialize(mapload)
-	. = ..(mapload, MAT_URANIUM)
+	. = ..(mapload, /decl/material/solid/metal/uranium)
 
 /obj/item/material/twohanded/baseballbat/gold/Initialize(mapload)
-	. = ..(mapload, MAT_GOLD)
+	. = ..(mapload, /decl/material/solid/metal/gold)
 
 /obj/item/material/twohanded/baseballbat/platinum/Initialize(mapload)
-	. = ..(mapload, MAT_PLATINUM)
+	. = ..(mapload, /decl/material/solid/metal/platinum)
 
 /obj/item/material/twohanded/baseballbat/diamond/Initialize(mapload)
-	. = ..(mapload, MAT_DIAMOND)
+	. = ..(mapload, /decl/material/solid/gemstone/diamond)

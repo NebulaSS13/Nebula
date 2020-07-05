@@ -1,8 +1,8 @@
 /obj/item/frame_holder
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_OSMIUM = MATTER_AMOUNT_TRACE
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/frame_holder/Initialize(mapload, var/newloc)
@@ -17,7 +17,7 @@
 	icon_state = "backbone"
 	density = 1
 	pixel_x = -8
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 	// Holders for the final product.
 	var/obj/item/mech_component/manipulators/arms

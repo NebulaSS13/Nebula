@@ -43,7 +43,7 @@ var/global/list/responsive_carriers = list(
 		I.icon_state = new_icon_state()
 	I.desc = jointext(descriptors, "\n")
 	I.forceMove(location)
-	I.set_material(MAT_ALIENALLOY)
+	I.set_material(/decl/material/solid/metal/aliumium)
 	if(modification_flags & XENOFIND_APPLY_PREFIX)
 		new_name = "[pick(name_prefixes)] [new_name]"
 	I.SetName(new_name)

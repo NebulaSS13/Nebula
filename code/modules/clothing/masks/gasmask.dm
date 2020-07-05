@@ -15,13 +15,13 @@
 		bio = ARMOR_BIO_STRONG
 		)
 	filtered_gases = list(
-		MAT_PHORON,
-		MAT_N2O,
-		MAT_CHLORINE,
-		MAT_AMMONIA,
-		MAT_CO,
-		MAT_METHYL_BROMIDE,
-		MAT_METHANE
+		/decl/material/solid/phoron,
+		/decl/material/gas/nitrous_oxide,
+		/decl/material/gas/chlorine,
+		/decl/material/gas/ammonia,
+		/decl/material/gas/carbon_monoxide,
+		/decl/material/gas/methyl_bromide,
+		/decl/material/gas/methane
 	)
 	var/clogged
 	var/filter_water
@@ -196,7 +196,7 @@
 	item_state = "respirator"
 	flags_inv = 0
 	body_parts_covered = 0
-	filtered_gases = list(MAT_OXYGEN)
+	filtered_gases = list(/decl/material/gas/oxygen)
 
 
 /obj/item/clothing/mask/gas/swat/vox
@@ -206,14 +206,14 @@
 	item_state = "voxswat"
 	body_parts_covered = EYES
 	filtered_gases = list(
-		MAT_OXYGEN,
-		MAT_PHORON,
-		MAT_N2O,
-		MAT_CHLORINE,
-		MAT_AMMONIA,
-		MAT_CO,
-		MAT_METHYL_BROMIDE,
-		MAT_METHANE
+		/decl/material/gas/oxygen,
+		/decl/material/solid/phoron,
+		/decl/material/gas/nitrous_oxide,
+		/decl/material/gas/chlorine,
+		/decl/material/gas/ammonia,
+		/decl/material/gas/carbon_monoxide,
+		/decl/material/gas/methyl_bromide,
+		/decl/material/gas/methane
 		)
 
 /obj/item/clothing/mask/gas/aquabreather

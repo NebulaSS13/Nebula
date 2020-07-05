@@ -8,7 +8,7 @@
 	anchored =   TRUE
 	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CHECKS_BORDER
 	can_buckle = TRUE
-	material =   MAT_STEEL
+	material =   /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_NAME
 	maxhealth = 200
 	var/secured
@@ -178,7 +178,7 @@
 	icon = 'icons/obj/structures/barrier.dmi'
 	icon_state = "barrier_hand"
 	w_class = ITEM_SIZE_LARGE
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/stored_health = 200
 	var/stored_max_health = 200
 

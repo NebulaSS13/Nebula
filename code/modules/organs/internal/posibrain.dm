@@ -13,13 +13,13 @@
 	throw_range = 5
 	origin_tech = "{'engineering':4,'materials':4,'bluespace':2,'programming':4}"
 	attack_verb = list("attacked", "slapped", "whacked")
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_SILVER = MATTER_AMOUNT_TRACE,
-		MAT_GOLD = MATTER_AMOUNT_TRACE,
-		MAT_PHORON = MATTER_AMOUNT_TRACE,
-		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/phoron = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	relative_size = 60
 	req_access = list(access_robotics)

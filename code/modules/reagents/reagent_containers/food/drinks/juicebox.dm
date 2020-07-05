@@ -6,7 +6,7 @@
 	volume = 30
 	amount_per_transfer_from_this = 5
 	atom_flags = 0
-	material = MAT_CARDBOARD
+	material = /decl/material/solid/cardboard
 
 	color = "#ff0000"
 	var/primary_color = "#ff0000"

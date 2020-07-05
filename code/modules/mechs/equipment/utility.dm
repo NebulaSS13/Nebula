@@ -300,7 +300,7 @@
 
 /obj/item/mech_equipment/drill/Initialize()
 	. = ..()
-	drill_head = new /obj/item/material/drill_head(src, MAT_STEEL) //You start with a basic steel head
+	drill_head = new /obj/item/material/drill_head(src, /decl/material/solid/metal/steel) //You start with a basic steel head
 
 /obj/item/mech_equipment/drill/attack_self(var/mob/user)
 	. = ..()
@@ -422,7 +422,7 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE

@@ -135,7 +135,7 @@
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon_state = "cloak_hide"
 	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
-	material = MAT_LEATHER_GENERIC
+	material = /decl/material/solid/leather
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	armor_type = /datum/extension/armor/ablative

@@ -47,4 +47,4 @@
 
 /obj/item/stock_parts/radio/receiver/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel

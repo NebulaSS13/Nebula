@@ -22,7 +22,7 @@
 		var/turf/T = get_turf(holder)
 		var/datum/gas_mixture/products = new(_temperature = 5 * FLAMMABLE_GAS_FLASHPOINT)
 		var/gas_moles = 3 * volume
-		products.adjust_multi(MAT_NO, 0.1 * gas_moles, MAT_NO2, 0.1 * gas_moles, MAT_NITROGEN, 0.6 * gas_moles, MAT_HYDROGEN, 0.02 * gas_moles)
+		products.adjust_multi(/decl/material/gas/nitricoxide, 0.1 * gas_moles, /decl/material/gas/nitrodioxide, 0.1 * gas_moles, /decl/material/gas/nitrogen, 0.6 * gas_moles, /decl/material/gas/hydrogen, 0.02 * gas_moles)
 		T.assume_air(products)
 		if(volume > 500)
 			explosion(T,1,2,4)
