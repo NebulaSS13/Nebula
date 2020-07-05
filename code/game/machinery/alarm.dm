@@ -588,16 +588,14 @@
 			modes[++modes.len] = list("name" = "Off - Shuts off vents and scrubbers", 			"mode" = AALARM_MODE_OFF,			"selected" = mode == AALARM_MODE_OFF, 			"danger" = 0)
 			data["modes"] = modes
 			data["mode"] = mode
+
 		if(AALARM_SCREEN_SENSORS)
 			var/list/selected
 			var/thresholds[0]
-
-			var/list/gas_names = list(
-				/decl/material/gas/oxygen         = "O<sub>2</sub>",
-				/decl/material/gas/carbon_dioxide = "CO<sub>2</sub>",
-				"other"          = "Other")
-			for (var/g in gas_names)
-				thresholds[++thresholds.len] = list("name" = gas_names[g], "settings" = list())
+			var/decl/environment_data/env_info = GET_DECL(environment_type)
+			for(var/g in env_info?.important_gasses)
+				var/decl/material/mat = GET_DECL(g)
+				thresholds[++thresholds.len] = list("name" = (mat?.gas_symbol_html || "Other"), "settings" = list())
 				selected = TLV[g]
 				for(var/i = 1, i <= 4, i++)
 					thresholds[thresholds.len]["settings"] += list(list("env" = g, "val" = i, "selected" = selected[i]))
