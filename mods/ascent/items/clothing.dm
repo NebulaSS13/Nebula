@@ -42,13 +42,11 @@
 /obj/item/clothing/shoes/magboots/ascent
 	name = "mantid mag-claws"
 	desc = "A set of powerful gripping claws."
-	icon = 'mods/ascent/icons/ascent_boots.dmi'
-	icon_state = "ascent_boots0"
-	icon_base = "ascent_boots"
+	icon = 'mods/ascent/icons/magboots/boots.dmi'
+	on_mob_icon = 'mods/ascent/icons/magboots/boots.dmi'
 	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)
 	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/species/mantid/onmob_shoes_gyne.dmi',
-		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/species/mantid/onmob_shoes_alate.dmi'
+		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/magboots/boots_gyne.dmi'
 	)
 
 /obj/item/clothing/under/ascent

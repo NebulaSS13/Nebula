@@ -1,20 +1,20 @@
 //Note that despite the use of the NOSLIP flag, magboots are still hardcoded to prevent spaceslipping in Check_Shoegrip().
 /obj/item/clothing/shoes/magboots
-	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
 	name = "magboots"
-	icon_state = "magboots0"
+	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
+	icon_state = "world0"
+	icon = 'icons/clothing/feet/magboots.dmi'
+	on_mob_icon = 'icons/clothing/feet/magboots.dmi'
 	bodytype_restricted = null
 	force = 3
 	overshoes = 1
 	var/magpulse = 0
-	var/icon_base = "magboots"
 	action_button_name = "Toggle Magboots"
 	var/obj/item/clothing/shoes/shoes = null	//Undershoes
 	var/mob/living/carbon/human/wearer = null	//For shoe procs
 	center_of_mass = null
 	randpixel = 0
 	var/online_slowdown = 3
-	matter = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'materials':2,'engineering':2,'magnets':3}"
 
@@ -29,19 +29,31 @@
 		magpulse = 0
 		set_slowdown()
 		force = 3
-		if(icon_base) icon_state = "[icon_base]0"
 		to_chat(user, "You disable the mag-pulse traction system.")
 	else
 		item_flags |= ITEM_FLAG_NOSLIP
 		magpulse = 1
 		set_slowdown()
 		force = 5
-		if(icon_base) icon_state = "[icon_base]1"
 		playsound(get_turf(src), 'sound/effects/magnetclamp.ogg', 20)
 		to_chat(user, "You enable the mag-pulse traction system.")
-	user.update_inv_shoes()	//so our mob-overlays update
+	update_icon()
 	user.update_action_buttons()
 	user.update_floating()
+
+/obj/item/clothing/shoes/magboots/on_update_icon()
+	. = ..()
+	var/new_state = "[get_world_inventory_state()][!!magpulse]"
+	if(check_state_in_icon(new_state, icon))
+		icon_state = new_state
+	update_clothing_icon()
+	
+/obj/item/clothing/shoes/magboots/experimental_mob_overlay(var/mob/user_mob, var/slot)
+	var/image/ret = ..()
+	var/new_state = "[ret.icon_state][!!magpulse]"
+	if(check_state_in_icon(new_state, ret.icon))
+		ret.icon_state = new_state
+	return ret
 
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/user)
 	var/mob/living/carbon/human/H = user

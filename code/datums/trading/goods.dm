@@ -137,7 +137,6 @@
 								/obj/item/clothing/shoes/jackboots/swat/combat           = TRADER_BLACKLIST,
 								/obj/item/clothing/shoes/clown_shoes      = TRADER_BLACKLIST,
 								/obj/item/clothing/shoes/cult             = TRADER_BLACKLIST,
-								/obj/item/clothing/shoes/cyborg           = TRADER_BLACKLIST,
 								/obj/item/clothing/shoes/lightrig         = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/shoes/magboots         = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/shoes/jackboots/swat             = TRADER_BLACKLIST,

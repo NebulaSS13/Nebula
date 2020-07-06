@@ -1,7 +1,6 @@
 /obj/item/clothing/shoes/craftable
 	name = "shoes"
 	desc = "A pair of shoes."
-	icon_state = "world"
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
 	on_mob_icon = 'icons/clothing/feet/generic_shoes.dmi'
 	material = /decl/material/solid/leather

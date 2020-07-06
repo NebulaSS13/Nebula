@@ -1,10 +1,14 @@
 /obj/item/clothing/shoes
 	name = "shoes"
-	icon = 'icons/obj/clothing/obj_feet.dmi'
 	desc = "Comfortable-looking shoes."
+	icon_state = "world"
+	icon = 'icons/clothing/feet/generic_shoes.dmi'
+	on_mob_icon = 'icons/clothing/feet/generic_shoes.dmi'
 	gender = PLURAL
 	siemens_coefficient = 0.9
+	cold_protection = FEET
 	body_parts_covered = FEET
+	heat_protection = FEET
 	slot_flags = SLOT_FEET
 	permeability_coefficient = 0.50
 	force = 2

@@ -1,19 +1,16 @@
 /obj/item/clothing/shoes/syndigaloshes
-	desc = "A pair of brown shoes. They seem to have extra grip."
 	name = "brown shoes"
-	icon_state = "brown"
-	item_state = "brown"
+	desc = "A pair of brown shoes. They seem to have extra grip."
+	icon = 'icons/clothing/feet/colored_shoes.dmi'
+	on_mob_icon = 'icons/clothing/feet/colored_shoes.dmi'
+	markings_icon = "_coloring"
+	markings_color = WOOD_COLOR_CHOCOLATE
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP
 	origin_tech = "{'esoteric':3}"
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
 	bodytype_restricted = null
-
-/obj/item/clothing/shoes/mime
-	name = "mime shoes"
-	icon_state = "white"
-	can_add_cuffs = FALSE
 
 /obj/item/clothing/shoes/jackboots/swat
 	name = "\improper SWAT boots"
@@ -65,7 +62,6 @@
 /obj/item/clothing/shoes/dress
 	name = "dress shoes"
 	desc = "The height of fashion, and they're pre-polished!"
-	icon_state = "world"
 	icon = 'icons/clothing/feet/laceups.dmi'
 	on_mob_icon = 'icons/clothing/feet/laceups.dmi'
 	can_add_hidden_item = FALSE
@@ -86,9 +82,10 @@
 	shine = 0  //already shiny
 
 /obj/item/clothing/shoes/sandal
-	desc = "A pair of rather plain wooden sandals."
 	name = "sandals"
-	icon_state = "wizard"
+	desc = "A pair of rather plain wooden sandals."
+	icon = 'icons/clothing/feet/sandals.dmi'
+	on_mob_icon = 'icons/clothing/feet/sandals.dmi'
 	bodytype_restricted = null
 	body_parts_covered = 0
 	wizard_garb = 1
@@ -96,9 +93,11 @@
 	can_add_cuffs = FALSE
 
 /obj/item/clothing/shoes/sandal/marisa
-	desc = "A pair of magic, black shoes."
 	name = "magic shoes"
-	icon_state = "black"
+	desc = "A pair of magic, black shoes."
+	icon = 'icons/clothing/feet/generic_shoes.dmi'
+	on_mob_icon = 'icons/clothing/feet/generic_shoes.dmi'
+	color = COLOR_GRAY40
 	body_parts_covered = FEET
 
 /obj/item/clothing/shoes/clown_shoes
@@ -128,7 +127,6 @@
 /obj/item/clothing/shoes/cult
 	name = "boots"
 	desc = "A pair of boots worn by the followers of Nar-Sie."
-	icon_state = "world"
 	icon = 'icons/clothing/feet/cult.dmi'
 	on_mob_icon = 'icons/clothing/feet/cult.dmi'
 	force = 2
@@ -140,32 +138,22 @@
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 	bodytype_restricted = null
 
-/obj/item/clothing/shoes/cyborg
-	name = "cyborg boots"
-	desc = "Shoes for a cyborg costume."
-	icon_state = "boots"
-
 /obj/item/clothing/shoes/slippers
 	name = "bunny slippers"
 	desc = "Fluffy!"
-	icon_state = "slippers"
-	item_state = "slippers"
+	icon = 'icons/clothing/feet/bunny_slippers.dmi'
+	on_mob_icon = 'icons/clothing/feet/bunny_slippers.dmi'
 	force = 0
 	bodytype_restricted = null
 	w_class = ITEM_SIZE_SMALL
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
 
-/obj/item/clothing/shoes/slippers/worn
-	name = "worn bunny slippers"
-	desc = "Fluffy..."
-	icon_state = "slippers_worn"
-	item_state = "slippers_worn"
-
 /obj/item/clothing/shoes/swimmingfins
-	desc = "Help you swim good."
 	name = "swimming fins"
-	icon_state = "flippers"
+	desc = "Help you swim good."
+	icon = 'icons/clothing/feet/flippers.dmi'
+	on_mob_icon = 'icons/clothing/feet/flippers.dmi'
 	item_flags = ITEM_FLAG_NOSLIP
 	bodytype_restricted = null
 	can_add_hidden_item = FALSE
@@ -187,8 +175,9 @@
 
 /obj/item/clothing/shoes/heels
 	name = "high heels"
-	icon_state = "heels"
 	desc = "A pair of colourable high heels."
+	icon = 'icons/clothing/feet/high_heels.dmi'
+	on_mob_icon = 'icons/clothing/feet/high_heels.dmi'
 	can_add_cuffs = FALSE
 
 /obj/item/clothing/shoes/heels/black
@@ -203,13 +192,15 @@ obj/item/clothing/shoes/heels/red
 
 /obj/item/clothing/shoes/rainbow
 	name = "rainbow shoes"
-	desc = "Very gay shoes."
-	icon_state = "rain_bow"
+	desc = "Very fabulous shoes."
+	icon = 'icons/clothing/feet/rainbow.dmi'
+	on_mob_icon = 'icons/clothing/feet/rainbow.dmi'
 
 /obj/item/clothing/shoes/flats
 	name = "flats"
 	desc = "Sleek flats."
-	icon_state = "flatswhite"
+	icon = 'icons/clothing/feet/flats.dmi'
+	on_mob_icon = 'icons/clothing/feet/flats.dmi'
 
 /obj/item/clothing/shoes/flats/black
 	name = "black flats"
