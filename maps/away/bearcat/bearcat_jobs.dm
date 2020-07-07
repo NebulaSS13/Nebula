@@ -27,11 +27,11 @@
 	r_ear = null
 
 /decl/hierarchy/outfit/job/bearcat/crew
-	name = BEARCAT_OUTFIT_JOB_NAME("Crew")
+	name = BEARCAT_OUTFIT_JOB_NAME("FTU Crew")
 	id_type = /obj/item/card/id/bearcat
 
 /decl/hierarchy/outfit/job/bearcat/captain
-	name = BEARCAT_OUTFIT_JOB_NAME("Captain")
+	name = BEARCAT_OUTFIT_JOB_NAME("FTU Captain")
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	shoes = /obj/item/clothing/shoes/color/black
 	pda_type = /obj/item/modular_computer/pda/captain
