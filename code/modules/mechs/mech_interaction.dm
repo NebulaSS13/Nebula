@@ -233,7 +233,7 @@
 	LAZYDISTINCTADD(pilots, user)
 	sync_access()
 	playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
-	user.playsound_local(null, 'sound/mecha/nominal.ogg', 50)
+	user.playsound_local(get_turf(src), 'sound/mecha/nominal.ogg', 50)
 	if(user.client) user.client.screen |= hud_elements
 	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()

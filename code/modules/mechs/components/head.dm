@@ -80,8 +80,8 @@
 	icon_state = "control"
 	icon = 'icons/mecha/mech_equipment.dmi'
 	gender = NEUTER
+	color = COLOR_WHITE
 	material = /decl/material/solid/metal/steel
-
 	var/list/installed_software = list()
 	var/max_installed_software = 2
 
