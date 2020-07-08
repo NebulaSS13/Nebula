@@ -192,12 +192,6 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 			var/image/radial_button = image(icon = icon, icon_state = icon_state)
 			radial_button.name = S.name
-			radial_button.maptext_width = 80
-			radial_button.maptext_height = 64
-			radial_button.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-			radial_button.maptext_x = -round(radial_button.maptext_width/2) + 16
-			radial_button.maptext_y = -36
-			radial_button.maptext = "<center><span style=\"font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 8px\">[radial_button.name]</span></center>"
 			LAZYSET(possible_surgeries, S, radial_button)
 
 	// Which surgery, if any, do we actually want to do?
@@ -208,7 +202,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 		if(!user.client) // In case of future autodocs.
 			S = possible_surgeries[1]
 		else
-			S = show_radial_menu(user, M, possible_surgeries, radius = 42, tooltips = TRUE, require_near = TRUE, check_locs = list(src))
+			S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = TRUE, require_near = TRUE, check_locs = list(src))
 		if(S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src, zone)))
 			S = pick(possible_surgeries)
 

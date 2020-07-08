@@ -420,7 +420,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
 		return FALSE
-	return show_radial_menu(user, tool, attached_organs, radius = 42, tooltips = TRUE, require_near = TRUE, check_locs = list(tool))
+	return show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 
 /decl/surgery_step/robotics/detatch_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts to decouple [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
@@ -460,7 +460,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Reattach \the [I.name]"
 			LAZYSET(removable_organs, I.organ_tag, radial_button)
-	var/organ_to_replace = show_radial_menu(user, tool, removable_organs, radius = 42, tooltips = TRUE, require_near = TRUE, check_locs = list(tool))
+	var/organ_to_replace = show_radial_menu(user, tool, removable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	if(!organ_to_replace)
 		return FALSE
 	var/obj/item/organ/internal/augment/A = organ_to_replace
