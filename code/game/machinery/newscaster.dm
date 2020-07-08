@@ -679,10 +679,10 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		else if(href_list["setScreen"]) //Brings us to the main menu and resets all fields~
 			src.screen = text2num(href_list["setScreen"])
 			if (src.screen == 0)
-				src.scanned_user = "Unknown";
-				msg = "";
+				src.scanned_user = "Unknown"
+				msg = ""
 				src.c_locked=0;
-				channel_name="";
+				channel_name=""
 				src.viewing_channel = null
 				if (photo_data)
 					qdel(photo_data)

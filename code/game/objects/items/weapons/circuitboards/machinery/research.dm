@@ -104,7 +104,7 @@
 	name = T_BOARD("robotics fabricator")
 	build_path = /obj/machinery/fabricator/robotics
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'programming':3,'engineering':3}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/manipulator = 1,
@@ -119,7 +119,7 @@
 	name = T_BOARD("textiles fabricator")
 	build_path = /obj/machinery/fabricator/textile
 	board_type = "machine"
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'programming':3,'engineering':3}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/stock_parts/manipulator = 1,

@@ -75,7 +75,7 @@
 	name = T_BOARD("airlock controller")
 	build_path = /obj/machinery/embedded_controller/radio/simple_docking_controller
 	board_type = "wall"
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'programming':3,'engineering':3}"
 	req_components = list()
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,

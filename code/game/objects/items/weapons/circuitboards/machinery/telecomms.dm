@@ -64,7 +64,7 @@
 /obj/item/stock_parts/circuitboard/telecomms/allinone
 	name = T_BOARD("telecommunication mainframe")
 	build_path = /obj/machinery/telecomms/allinone
-	origin_tech = "{'programming':3,'engineering':3}";
+	origin_tech = "{'programming':3,'engineering':3}"
 	req_components = list(
 							/obj/item/stock_parts/subspace/ansible = 1,
 							/obj/item/stock_parts/subspace/filter = 1,
@@ -76,7 +76,7 @@
 /obj/item/stock_parts/circuitboard/telecomms/message_server
 	name = T_BOARD("message server")
 	build_path = /obj/machinery/message_server
-	origin_tech = "{'programming':4,'engineering':4}";
+	origin_tech = "{'programming':4,'engineering':4}"
 	req_components = list(
 							/obj/item/stock_parts/subspace/ansible = 1,
 							/obj/item/stock_parts/subspace/filter = 1,
