@@ -13,6 +13,3 @@
 
 /datum/fabricator_recipe/imprinter/exosuit/weapons
 	path = /obj/item/circuitboard/exosystem/weapons
-
-/datum/fabricator_recipe/imprinter/exosuit/advweapons
-	path = /obj/item/circuitboard/exosystem/advweapons
