@@ -8,8 +8,8 @@
 	allowed_organs = list(BP_AUGMENT_R_LEG, BP_AUGMENT_L_LEG)
 	icon_state = "muscule"
 	desc = "Nanofiber tendons powered by an array of actuators to help the wearer mantain speed even while encumbered. You may want to install these in pairs to see a result."
-	material = MAT_STEEL
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	var/obj/item/organ/internal/augment/boost/muscle/other //we need two for these
 
 /obj/item/organ/internal/augment/boost/muscle/onInstall()

@@ -5,7 +5,7 @@
 	icon_state = "urn"
 	applies_material_colour = TRUE
 	w_class = ITEM_SIZE_SMALL
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/material/urn/afterattack(var/obj/A, var/mob/user, var/proximity)
 	if(!istype(A, /obj/effect/decal/cleanable/ash))

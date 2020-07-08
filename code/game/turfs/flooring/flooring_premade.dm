@@ -131,35 +131,35 @@
 	initial_gas = null
 
 /turf/simulated/floor/reinforced/airmix
-	initial_gas = list(MAT_OXYGEN = MOLES_O2ATMOS, MAT_NITROGEN = MOLES_N2ATMOS)
+	initial_gas = list(/decl/material/gas/oxygen = MOLES_O2ATMOS, /decl/material/gas/nitrogen = MOLES_N2ATMOS)
 
 /turf/simulated/floor/reinforced/nitrogen
-	initial_gas = list(MAT_NITROGEN = ATMOSTANK_NITROGEN)
+	initial_gas = list(/decl/material/gas/nitrogen = ATMOSTANK_NITROGEN)
 
 /turf/simulated/floor/reinforced/hydrogen
-	initial_gas = list(MAT_HYDROGEN = ATMOSTANK_HYDROGEN)
+	initial_gas = list(/decl/material/gas/hydrogen = ATMOSTANK_HYDROGEN)
 
 /turf/simulated/floor/reinforced/oxygen
-	initial_gas = list(MAT_OXYGEN = ATMOSTANK_OXYGEN)
+	initial_gas = list(/decl/material/gas/oxygen = ATMOSTANK_OXYGEN)
 
 /turf/simulated/floor/reinforced/phoron
-	initial_gas = list(MAT_PHORON = ATMOSTANK_PHORON)
+	initial_gas = list(/decl/material/solid/phoron = ATMOSTANK_PHORON)
 
 /turf/simulated/floor/reinforced/nitrogen/engine
 	name = "engine floor"
-	initial_gas = list(MAT_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(/decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
 /turf/simulated/floor/reinforced/phoron/fuel
-	initial_gas = list(MAT_PHORON = ATMOSTANK_PHORON_FUEL)
+	initial_gas = list(/decl/material/solid/phoron = ATMOSTANK_PHORON_FUEL)
 
 /turf/simulated/floor/reinforced/hydrogen/fuel
-	initial_gas = list(MAT_HYDROGEN = ATMOSTANK_HYDROGEN_FUEL)
+	initial_gas = list(/decl/material/gas/hydrogen = ATMOSTANK_HYDROGEN_FUEL)
 
 /turf/simulated/floor/reinforced/carbon_dioxide
-	initial_gas = list(MAT_CO2 = ATMOSTANK_CO2)
+	initial_gas = list(/decl/material/gas/carbon_dioxide = ATMOSTANK_CO2)
 
 /turf/simulated/floor/reinforced/n20
-	initial_gas = list(MAT_N2O = ATMOSTANK_NITROUSOXIDE)
+	initial_gas = list(/decl/material/gas/nitrous_oxide = ATMOSTANK_NITROUSOXIDE)
 
 
 /turf/simulated/floor/cult
@@ -307,7 +307,7 @@
 	temperature = TCMB
 
 /turf/simulated/floor/greengrid/nitrogen
-	initial_gas = list(MAT_NITROGEN = MOLES_N2STANDARD)
+	initial_gas = list(/decl/material/gas/nitrogen = MOLES_N2STANDARD)
 
 // Placeholders
 /turf/simulated/floor/airless/lava

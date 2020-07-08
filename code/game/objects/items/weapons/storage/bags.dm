@@ -67,11 +67,11 @@
 	max_storage_space = 56
 	desc = "The latest and greatest in custodial convenience, a trashbag that is capable of holding vast quantities of garbage."
 	icon_state = "bluetrashbag"
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	matter = list(
-		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_URANIUM = MATTER_AMOUNT_TRACE,
-		MAT_PHORON = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/phoron = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/storage/bag/trash/bluespace/attackby(obj/item/W, mob/user)

@@ -99,9 +99,9 @@
 	// Death vars.
 	var/meat_type =     /obj/item/chems/food/snacks/meat/human
 	var/meat_amount =   3
-	var/skin_material = MAT_SKIN_GENERIC
+	var/skin_material = /decl/material/solid/skin
 	var/skin_amount =   3
-	var/bone_material = MAT_BONE_GENERIC
+	var/bone_material = /decl/material/solid/bone
 	var/bone_amount =   3
 	var/remains_type =  /obj/item/remains/xeno
 	var/gibbed_anim =   "gibbed-h"
@@ -118,9 +118,9 @@
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                             // Used for metabolizing reagents.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
-	var/breath_type = MAT_OXYGEN                                  // Non-oxygen gas breathed, if any.
-	var/poison_types = list(MAT_PHORON = TRUE, MAT_CHLORINE = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
-	var/exhale_type = MAT_CO2                          // Exhaled gas type.
+	var/breath_type = /decl/material/gas/oxygen                                  // Non-oxygen gas breathed, if any.
+	var/poison_types = list(/decl/material/solid/phoron = TRUE, /decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+	var/exhale_type = /decl/material/gas/carbon_dioxide                          // Exhaled gas type.
 	var/blood_reagent = /decl/material/liquid/blood
 
 	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs

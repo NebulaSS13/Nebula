@@ -36,7 +36,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/Initialize()
 	. = ..()
-	scrubbing_gas -= MAT_METHYL_BROMIDE
+	scrubbing_gas -= /decl/material/gas/methyl_bromide
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/shuttle
 	stock_part_presets = list(

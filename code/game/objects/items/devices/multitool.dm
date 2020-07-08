@@ -15,10 +15,10 @@
 	throw_range = 15
 	throw_speed = 3
 
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_STEEL = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
 
 	origin_tech = "{'magnets':1,'engineering':1}"

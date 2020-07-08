@@ -7,7 +7,7 @@
 	hardware_size = 1
 	max_capacity = 16
 	origin_tech = "{'programming':1}"
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 
 /obj/item/stock_parts/computer/hard_drive/portable/advanced
 	name = "advanced data crystal"
@@ -17,7 +17,7 @@
 	hardware_size = 1
 	max_capacity = 64
 	origin_tech = "{'programming':2}"
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 
 /obj/item/stock_parts/computer/hard_drive/portable/super
 	name = "super data crystal"
@@ -27,7 +27,7 @@
 	hardware_size = 1
 	max_capacity = 256
 	origin_tech = "{'programming':4}"
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 
 /obj/item/stock_parts/computer/hard_drive/portable/Initialize()
 	. = ..()

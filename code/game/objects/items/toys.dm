@@ -280,7 +280,7 @@
 /obj/item/material/sword/katana/toy
 	name = "toy katana"
 	desc = "Woefully underpowered in D20."
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 
 /*
  * Snap pops
@@ -749,7 +749,7 @@
 	name = "foam sword"
 	desc = "An arcane weapon (made of foam) wielded by the followers of the hit Saturday morning cartoon \"King Nursee and the Acolytes of Heroism\"."
 	on_mob_icon = 'icons/obj/items/weapon/swords/cult.dmi'
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	edge = 0
 	sharp = 0
 

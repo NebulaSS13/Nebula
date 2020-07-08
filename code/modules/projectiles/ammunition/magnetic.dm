@@ -7,7 +7,7 @@
 	var/projectile_name = "flechette"
 	var/basetype = /obj/item/magnetic_ammo
 	w_class = ITEM_SIZE_SMALL
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	origin_tech = "{'combat':1}"
 	var/remaining = 9
 

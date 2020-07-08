@@ -14,8 +14,8 @@
 	center_of_mass = null
 	randpixel = 0
 	var/online_slowdown = 3
-	matter = MAT_STEEL
-	matter = list(MAT_ALUMINIUM = MATTER_AMOUNT_REINFORCEMENT)
+	matter = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'materials':2,'engineering':2,'magnets':3}"
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()

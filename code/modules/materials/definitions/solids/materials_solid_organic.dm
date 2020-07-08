@@ -162,7 +162,7 @@
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	value = 1.2
-	var/tans_to = MAT_LEATHER_GENERIC
+	var/tans_to = /decl/material/solid/leather
 
 /decl/material/solid/skin/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -174,14 +174,14 @@
 /decl/material/solid/skin/lizard
 	name = "lizardskin"
 	color = "#626952"
-	tans_to = MAT_LEATHER_LIZARD
+	tans_to = /decl/material/solid/leather/lizard
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
 
 /decl/material/solid/skin/insect
 	name = "chitin"
 	color = "#7a776d"
-	tans_to = MAT_LEATHER_CHITIN
+	tans_to = /decl/material/solid/leather/chitin
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
 	weight = MAT_VALUE_VERY_LIGHT
@@ -190,7 +190,7 @@
 /decl/material/solid/skin/fur
 	name = "fur"
 	color = "#7a726d"
-	tans_to = MAT_LEATHER_FUR
+	tans_to = /decl/material/solid/leather/fur
 
 /decl/material/solid/skin/fur/gray
 

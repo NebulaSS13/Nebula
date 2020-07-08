@@ -34,7 +34,7 @@
 	icon = 'icons/obj/guns/gui.dmi'
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	w_class = ITEM_SIZE_NORMAL
 	throwforce = 5
 	throw_speed = 4

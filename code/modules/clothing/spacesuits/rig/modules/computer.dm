@@ -42,11 +42,11 @@
 	interface_name = "integrated intelligence system"
 	interface_desc = "A socket that supports a range of artificial intelligence systems."
 
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
-		MAT_GOLD = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'programming':6,'materials':5,'engineering':6}"
 
@@ -335,11 +335,11 @@
 	interface_desc = "Colloquially known as a power siphon, this module drains power through the suit hands into the suit battery."
 
 	origin_tech = "{'powerstorage':6,'engineering':6}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_GOLD = MATTER_AMOUNT_TRACE,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
 	var/atom/interfaced_with // Currently draining power from this device.

@@ -1,34 +1,34 @@
 /decl/parrot_subspecies
 	var/name = "giant parrot"
 	var/icon_set = "parrot"
-	var/feathers = 	MAT_SKIN_FEATHERS
+	var/feathers = 	/decl/material/solid/skin/feathers
 
 /decl/parrot_subspecies/purple
 	name = "simurgh"
 	icon_set = "purple"
-	feathers = 	MAT_SKIN_FEATHERS_PURPLE
+	feathers = 	/decl/material/solid/skin/feathers/purple
 
 /decl/parrot_subspecies/blue
 	name = "ziz"
 	icon_set = "blue"
-	feathers = 	MAT_SKIN_FEATHERS_BLUE
+	feathers = 	/decl/material/solid/skin/feathers/blue
 
 /decl/parrot_subspecies/green
 	name = "fenghuang"
 	icon_set = "green"
-	feathers = 	MAT_SKIN_FEATHERS_GREEN
+	feathers = 	/decl/material/solid/skin/feathers/green
 
 /decl/parrot_subspecies/brown
 	name = "roc"
 	icon_set = "brown"
-	feathers = 	MAT_SKIN_FEATHERS_BROWN
+	feathers = 	/decl/material/solid/skin/feathers/brown
 
 /decl/parrot_subspecies/red
 	name = "phoenix"
 	icon_set = "red"
-	feathers = 	MAT_SKIN_FEATHERS_RED
+	feathers = 	/decl/material/solid/skin/feathers/red
 
 /decl/parrot_subspecies/black
 	name = "lord of birds"
 	icon_set = "black"
-	feathers = 	MAT_SKIN_FEATHERS_BLACK
+	feathers = 	/decl/material/solid/skin/feathers/black

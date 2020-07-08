@@ -50,7 +50,7 @@
 	icon = 'icons/obj/drink_glasses/shot.dmi'
 	filling_states = @"[33,66,100]"
 	volume = 5
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	possible_transfer_amounts = @"[1,2,5]"
 	rim_pos = @"{'y':17,'x_left':13,'x_right':21}"
 
@@ -61,7 +61,7 @@
 	icon = 'icons/obj/drink_glasses/pint.dmi'
 	filling_states = @"[16,33,50,66,83,100]"
 	volume = 60
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	possible_transfer_amounts = @"[5,10,15,30,60]"
 	rim_pos = @"{'y':25,'x_left':12,'x_right':21}"
 
@@ -106,7 +106,7 @@
 	icon = 'icons/obj/drink_glasses/carafe.dmi'
 	filling_states = @"[10,20,30,40,50,60,70,80,90,100]"
 	volume = 120
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	possible_transfer_amounts = @"[5,10,15,30,60,120]"
 	rim_pos = @"{'y':26,'x_left':12,'x_right':21}"
 	center_of_mass = @"{'x':16,'y':7}"

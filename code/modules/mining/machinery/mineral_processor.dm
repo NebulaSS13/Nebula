@@ -69,7 +69,7 @@
 
 			sheets += abs(result)
 			while(result < 0)
-				new /obj/item/ore(output_turf, MAT_WASTE)
+				new /obj/item/ore(output_turf, /decl/material/solid/slag)
 				result++
 
 		// Try to make any available alloys.

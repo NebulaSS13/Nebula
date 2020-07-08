@@ -7,17 +7,17 @@
 
 /decl/strata/igneous
 	name = "igneous rock"
-	base_materials = list(MAT_BASALT)
+	base_materials = list(/decl/material/solid/stone/basalt)
 	default_strata_candidate = TRUE
 
 /decl/strata/sedimentary
 	name = "sedimentary rock"
-	base_materials = list(MAT_SANDSTONE)
+	base_materials = list(/decl/material/solid/stone/sandstone)
 	default_strata_candidate = TRUE
 
 /decl/strata/metamorphic
 	name = "metamorphic rock"
-	base_materials = list(MAT_MARBLE)
+	base_materials = list(/decl/material/solid/stone/marble)
 	default_strata_candidate = TRUE
 
 /decl/strata/permafrost

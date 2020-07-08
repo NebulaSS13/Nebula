@@ -15,8 +15,8 @@
 	throw_range = 4
 	action_button_name = "Toggle Heatsink"
 
-	material = MAT_ALUMINIUM
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/aluminium
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'magnets':2,'materials':2}"
 
 	var/on = 0								//is it turned on?

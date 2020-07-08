@@ -41,5 +41,5 @@
 	stack_origin_tech = "{'materials':4}"
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	alloy_product = TRUE
-	alloy_materials = list(MAT_GLASS = 2500, MAT_PLATINUM = 1250)
+	alloy_materials = list(/decl/material/solid/glass = 2500, /decl/material/solid/metal/platinum = 1250)
 	value = 1.8

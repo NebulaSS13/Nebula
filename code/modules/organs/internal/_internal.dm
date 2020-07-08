@@ -110,7 +110,7 @@
 	for(var/mat in matter)
 		mat_amt += matter[mat]
 	matter.Cut()
-	matter[MAT_STEEL] = max(3000, mat_amt)
+	matter[/decl/material/solid/metal/steel] = max(3000, mat_amt)
 
 /obj/item/organ/internal/proc/getToxLoss()
 	if(BP_IS_PROSTHETIC(src))

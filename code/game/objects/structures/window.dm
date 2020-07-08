@@ -10,7 +10,7 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	obj_flags = OBJ_FLAG_ROTATABLE
 	alpha = 180
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	rad_resistance_modifier = 0.5
 	atmos_canpass = CANPASS_PROC
 	handle_generic_blending = TRUE
@@ -394,7 +394,7 @@
 /obj/structure/window/borosilicate
 	name = "borosilicate window"
 	color = GLASS_COLOR_SILICATE
-	material = MAT_BOROSILICATE_GLASS
+	material = /decl/material/solid/glass/borosilicate
 
 /obj/structure/window/borosilicate/full
 	dir = NORTHEAST
@@ -404,8 +404,8 @@
 	name = "reinforced borosilicate window"
 	icon_state = "phoronrwindow"
 	color = GLASS_COLOR_SILICATE
-	material = MAT_BOROSILICATE_GLASS
-	reinf_material = MAT_STEEL
+	material = /decl/material/solid/glass/borosilicate
+	reinf_material = /decl/material/solid/metal/steel
 
 /obj/structure/window/borosilicate_reinforced/full
 	dir = NORTHEAST
@@ -414,8 +414,8 @@
 /obj/structure/window/reinforced
 	name = "reinforced window"
 	icon_state = "rwindow"
-	material = MAT_GLASS
-	reinf_material = MAT_STEEL
+	material = /decl/material/solid/glass
+	reinf_material = /decl/material/solid/metal/steel
 
 /obj/structure/window/reinforced/full
 	dir = NORTHEAST

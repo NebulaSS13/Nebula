@@ -5,7 +5,7 @@
 	icon_state = ""
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	throwforce = 2
 	throw_speed = 3
 	throw_range = 10

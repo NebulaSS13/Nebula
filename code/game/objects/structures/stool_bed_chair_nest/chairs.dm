@@ -79,25 +79,25 @@
 		buckled_mob.set_dir(dir)
 
 /obj/structure/bed/chair/padded/red
-	reinf_material = MAT_CARPET
+	reinf_material = /decl/material/solid/carpet
 /obj/structure/bed/chair/padded/brown
-	reinf_material = MAT_LEATHER_GENERIC
+	reinf_material = /decl/material/solid/leather
 /obj/structure/bed/chair/padded/teal
-	reinf_material = MAT_CLOTH_TEAL
+	reinf_material = /decl/material/solid/cloth/teal
 /obj/structure/bed/chair/padded/black
-	reinf_material = MAT_CLOTH_BLACK
+	reinf_material = /decl/material/solid/cloth/black
 /obj/structure/bed/chair/padded/green
-	reinf_material = MAT_CLOTH_GREEN
+	reinf_material = /decl/material/solid/cloth/green
 /obj/structure/bed/chair/padded/purple
-	reinf_material = MAT_CLOTH_PURPLE
+	reinf_material = /decl/material/solid/cloth/purple
 /obj/structure/bed/chair/padded/blue
-	reinf_material = MAT_CLOTH_BLUE
+	reinf_material = /decl/material/solid/cloth/blue
 /obj/structure/bed/chair/padded/beige
-	reinf_material = MAT_CLOTH_BEIGE
+	reinf_material = /decl/material/solid/cloth/beige
 /obj/structure/bed/chair/padded/lime
-	reinf_material = MAT_CLOTH_LIME
+	reinf_material = /decl/material/solid/cloth/lime
 /obj/structure/bed/chair/padded/yellow
-	reinf_material = MAT_CLOTH_YELLOW
+	reinf_material = /decl/material/solid/cloth/yellow
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
@@ -106,33 +106,33 @@
 	icon_state = "comfychair"
 
 /obj/structure/bed/chair/comfy/brown
-	reinf_material = MAT_LEATHER_GENERIC
+	reinf_material = /decl/material/solid/leather
 /obj/structure/bed/chair/comfy/red
-	reinf_material = MAT_CARPET
+	reinf_material = /decl/material/solid/carpet
 /obj/structure/bed/chair/comfy/teal
-	reinf_material = MAT_CLOTH_TEAL
+	reinf_material = /decl/material/solid/cloth/teal
 /obj/structure/bed/chair/comfy/black
-	reinf_material = MAT_CLOTH_BLACK
+	reinf_material = /decl/material/solid/cloth/black
 /obj/structure/bed/chair/comfy/green
-	reinf_material = MAT_CLOTH_GREEN
+	reinf_material = /decl/material/solid/cloth/green
 /obj/structure/bed/chair/comfy/purple
-	reinf_material = MAT_CLOTH_PURPLE
+	reinf_material = /decl/material/solid/cloth/purple
 /obj/structure/bed/chair/comfy/blue
-	reinf_material = MAT_CLOTH_BLUE
+	reinf_material = /decl/material/solid/cloth/blue
 /obj/structure/bed/chair/comfy/beige
-	reinf_material = MAT_CLOTH_BEIGE
+	reinf_material = /decl/material/solid/cloth/beige
 /obj/structure/bed/chair/comfy/lime
-	reinf_material = MAT_CLOTH_LIME
+	reinf_material = /decl/material/solid/cloth/lime
 /obj/structure/bed/chair/comfy/yellow
-	reinf_material = MAT_CLOTH_YELLOW
+	reinf_material = /decl/material/solid/cloth/yellow
 
 /obj/structure/bed/chair/comfy/captain
 	name = "captain chair"
 	desc = "It's a chair. Only for the highest ranked asses."
 	icon_state = "capchair"
 	buckle_movable = 1
-	material = MAT_STEEL
-	reinf_material = MAT_CLOTH_BLUE
+	material = /decl/material/solid/metal/steel
+	reinf_material = /decl/material/solid/cloth/blue
 
 /obj/structure/bed/chair/comfy/captain/on_update_icon()
 	..()
@@ -150,25 +150,25 @@
 	icon_state = "armchair"
 
 /obj/structure/bed/chair/armchair/brown
-	reinf_material = MAT_LEATHER_GENERIC
+	reinf_material = /decl/material/solid/leather
 /obj/structure/bed/chair/armchair/red
-	reinf_material = MAT_CARPET
+	reinf_material = /decl/material/solid/carpet
 /obj/structure/bed/chair/armchair/teal
-	reinf_material = MAT_CLOTH_TEAL
+	reinf_material = /decl/material/solid/cloth/teal
 /obj/structure/bed/chair/armchair/black
-	reinf_material = MAT_CLOTH_BLACK
+	reinf_material = /decl/material/solid/cloth/black
 /obj/structure/bed/chair/armchair/green
-	reinf_material = MAT_CLOTH_GREEN
+	reinf_material = /decl/material/solid/cloth/green
 /obj/structure/bed/chair/armchair/purple
-	reinf_material = MAT_CLOTH_PURPLE
+	reinf_material = /decl/material/solid/cloth/purple
 /obj/structure/bed/chair/armchair/blue
-	reinf_material = MAT_CLOTH_BLUE
+	reinf_material = /decl/material/solid/cloth/blue
 /obj/structure/bed/chair/armchair/beige
-	reinf_material = MAT_CLOTH_BEIGE
+	reinf_material = /decl/material/solid/cloth/beige
 /obj/structure/bed/chair/armchair/lime
-	reinf_material = MAT_CLOTH_LIME
+	reinf_material = /decl/material/solid/cloth/lime
 /obj/structure/bed/chair/armchair/yellow
-	reinf_material = MAT_CLOTH_YELLOW
+	reinf_material = /decl/material/solid/cloth/yellow
 
 /obj/structure/bed/chair/office
 	name = "office chair"
@@ -214,9 +214,9 @@
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light
-	reinf_material = MAT_CLOTH
+	reinf_material = /decl/material/solid/cloth
 /obj/structure/bed/chair/office/dark
-	reinf_material = MAT_CLOTH_BLACK
+	reinf_material = /decl/material/solid/cloth/black
 
 /obj/structure/bed/chair/office/comfy
 	name = "comfy office chair"
@@ -224,32 +224,32 @@
 	icon_state = "comfyofficechair"
 
 /obj/structure/bed/chair/office/comfy/brown
-	reinf_material = MAT_LEATHER_GENERIC
+	reinf_material = /decl/material/solid/leather
 /obj/structure/bed/chair/office/comfy/red
-	reinf_material = MAT_CARPET
+	reinf_material = /decl/material/solid/carpet
 /obj/structure/bed/chair/office/comfy/teal
-	reinf_material = MAT_CLOTH_TEAL
+	reinf_material = /decl/material/solid/cloth/teal
 /obj/structure/bed/chair/office/comfy/black
-	reinf_material = MAT_CLOTH_BLACK
+	reinf_material = /decl/material/solid/cloth/black
 /obj/structure/bed/chair/office/comfy/green
-	reinf_material = MAT_CLOTH_GREEN
+	reinf_material = /decl/material/solid/cloth/green
 /obj/structure/bed/chair/office/comfy/purple
-	reinf_material = MAT_CLOTH_PURPLE
+	reinf_material = /decl/material/solid/cloth/purple
 /obj/structure/bed/chair/office/comfy/blue
-	reinf_material = MAT_CLOTH_BLUE
+	reinf_material = /decl/material/solid/cloth/blue
 /obj/structure/bed/chair/office/comfy/beige
-	reinf_material = MAT_CLOTH_BEIGE
+	reinf_material = /decl/material/solid/cloth/beige
 /obj/structure/bed/chair/office/comfy/lime
-	reinf_material = MAT_CLOTH_LIME
+	reinf_material = /decl/material/solid/cloth/lime
 /obj/structure/bed/chair/office/comfy/yellow
-	reinf_material = MAT_CLOTH_YELLOW
+	reinf_material = /decl/material/solid/cloth/yellow
 
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
 	icon_state = "shuttle_chair"
 	buckling_sound = 'sound/effects/metal_close.ogg'
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
@@ -269,18 +269,18 @@
 		overlays |= I
 
 /obj/structure/bed/chair/shuttle/blue
-	reinf_material = MAT_CLOTH_BLUE
+	reinf_material = /decl/material/solid/cloth/blue
 /obj/structure/bed/chair/shuttle/black
-	reinf_material = MAT_CLOTH_BLACK
+	reinf_material = /decl/material/solid/cloth/black
 /obj/structure/bed/chair/shuttle/white
-	reinf_material = MAT_CLOTH
+	reinf_material = /decl/material/solid/cloth
 
 /obj/structure/bed/chair/wood
 	name = "classic chair"
 	desc = "Old is never too old to not be in fashion."
 	icon_state = "wooden_chair"
 	color = WOOD_COLOR_GENERIC
-	var/chair_material = MAT_WOOD
+	var/chair_material = /decl/material/solid/wood
 
 /obj/structure/bed/chair/wood/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/wirecutters))
@@ -289,45 +289,45 @@
 
 /obj/structure/bed/chair/wood/mahogany
 	color = WOOD_COLOR_RICH
-	material = MAT_MAHOGANY
+	material = /decl/material/solid/wood/mahogany
 /obj/structure/bed/chair/wood/maple
 	color = WOOD_COLOR_PALE
-	material = MAT_MAPLE
+	material = /decl/material/solid/wood/maple
 /obj/structure/bed/chair/wood/ebony
 	color = WOOD_COLOR_BLACK
-	material = MAT_EBONY
+	material = /decl/material/solid/wood/ebony
 /obj/structure/bed/chair/wood/walnut
 	color = WOOD_COLOR_CHOCOLATE
-	material = MAT_WALNUT
+	material = /decl/material/solid/wood/walnut
 
 /obj/structure/bed/chair/wood/wings
 	name = "winged chair"
 	icon_state = "wooden_chair_wings"
 /obj/structure/bed/chair/wood/wings/mahogany
 	color = WOOD_COLOR_RICH
-	material = MAT_MAHOGANY
+	material = /decl/material/solid/wood/mahogany
 /obj/structure/bed/chair/wood/wings/maple
 	color = WOOD_COLOR_PALE
-	material = MAT_MAPLE
+	material = /decl/material/solid/wood/maple
 /obj/structure/bed/chair/wood/wings/ebony
 	color = WOOD_COLOR_BLACK
-	material = MAT_EBONY
+	material = /decl/material/solid/wood/ebony
 /obj/structure/bed/chair/wood/wings/walnut
 	color = WOOD_COLOR_CHOCOLATE
-	material = MAT_WALNUT
+	material = /decl/material/solid/wood/walnut
 
 /obj/structure/bed/chair/pew
 	name = "pew"
 	desc = "A long, simple bench with a backboard, commonly found in places of worship, courtrooms and so on. Not known for being particularly comfortable."
 	icon_state = "pew"
 	color = WOOD_COLOR_GENERIC
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 	obj_flags = 0
 /obj/structure/bed/chair/pew/left
 	icon_state = "pew_left"
 /obj/structure/bed/chair/pew/mahogany
 	color = WOOD_COLOR_RICH
-	material = MAT_MAHOGANY
+	material = /decl/material/solid/wood/mahogany
 /obj/structure/bed/chair/pew/left/mahogany
 	color = WOOD_COLOR_RICH
-	material = MAT_MAHOGANY
+	material = /decl/material/solid/wood/mahogany

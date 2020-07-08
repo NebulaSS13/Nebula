@@ -179,9 +179,9 @@
 	if(istype(W,/obj/item/stack/material))
 		var/repair_power = 0
 		switch(W.get_material_type())
-			if(MAT_STEEL)
+			if(/decl/material/solid/metal/steel)
 				repair_power = 2
-			if(MAT_PLASTIC)
+			if(/decl/material/solid/plastic)
 				repair_power = 1
 
 		if(!repair_power)

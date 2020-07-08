@@ -17,7 +17,7 @@
 	matter_multiplier = 0.3
 	material_flags = USE_MATERIAL_COLOR
 	stacktype = /obj/item/stack/material/rods
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/stack/material/rods/get_autopsy_descriptors()
 	. = ..()

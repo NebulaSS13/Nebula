@@ -4,8 +4,8 @@
 	origin_tech = "{'magnets':3,'biotech':2}"
 	electric = 1
 	gender = NEUTER
-	material = MAT_ALUMINIUM
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/aluminium
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	bodytype_restricted = null
 	var/list/icon/current = list() //the current hud icons
 

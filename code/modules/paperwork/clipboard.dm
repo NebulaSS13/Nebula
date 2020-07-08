@@ -11,9 +11,9 @@
 	var/obj/item/pen/haspen		//The stored pen.
 	var/obj/item/toppaper	//The topmost piece of paper.
 	slot_flags = SLOT_BELT
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 	applies_material_name = FALSE
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/material/clipboard/Initialize()
 	. = ..()
@@ -176,20 +176,20 @@
 	return
 
 /obj/item/material/clipboard/ebony
-	material = MAT_EBONY
+	material = /decl/material/solid/wood/ebony
 
 /obj/item/material/clipboard/steel
-	material = MAT_STEEL
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
+	material = /decl/material/solid/metal/steel
 
 /obj/item/material/clipboard/aluminium
-	material = MAT_ALUMINIUM
-	material = MAT_ALUMINIUM
+	material = /decl/material/solid/metal/aluminium
+	material = /decl/material/solid/metal/aluminium
 
 /obj/item/material/clipboard/glass
-	material = MAT_GLASS
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
+	material = /decl/material/solid/glass
 
 /obj/item/material/clipboard/plastic
-	material = MAT_PLASTIC
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
+	material = /decl/material/solid/plastic

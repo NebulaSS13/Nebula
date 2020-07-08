@@ -125,7 +125,7 @@
 		)
 
 	var/matter_amount_per_sheet = 10
-	var/matter_type = MAT_STEEL
+	var/matter_type = /decl/material/solid/metal/steel
 
 /obj/machinery/organ_printer/robot/mapped/Initialize()
 	. = ..()

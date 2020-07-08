@@ -112,7 +112,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4

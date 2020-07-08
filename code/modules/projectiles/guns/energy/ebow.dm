@@ -7,7 +7,7 @@
 	icon_state = "world"
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':2,'magnets':2,'esoteric':5}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	slot_flags = SLOT_BELT
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
@@ -32,5 +32,5 @@
 	w_class = ITEM_SIZE_LARGE
 	force = 10
 	one_hand_penalty = 1
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/energy/bolt/large

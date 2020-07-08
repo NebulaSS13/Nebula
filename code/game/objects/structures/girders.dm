@@ -216,10 +216,10 @@
 	. = ..()
 
 /obj/structure/girder/wood
-	material = MAT_MAHOGANY
+	material = /decl/material/solid/wood/mahogany
 
 /obj/structure/grille/wood
-	material = MAT_MAHOGANY
+	material = /decl/material/solid/wood/mahogany
 
 /obj/structure/lattice/wood
-	material = MAT_MAHOGANY
+	material = /decl/material/solid/wood/mahogany

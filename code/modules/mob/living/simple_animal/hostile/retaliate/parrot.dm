@@ -52,7 +52,7 @@
 
 	meat_type = /obj/item/chems/food/snacks/meat/chicken/game
 	meat_amount = 3
-	skin_material = MAT_SKIN_FEATHERS
+	skin_material = /decl/material/solid/skin/feathers
 
 	var/parrot_state = PARROT_WANDER //Hunt for a perch when created
 	var/parrot_sleep_max = 25 //The time the parrot sits while perched before looking around. Mosly a way to avoid the parrot's AI in life() being run every single tick.

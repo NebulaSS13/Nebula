@@ -14,8 +14,8 @@
 	meat_amount = 5
 	bone_amount = 15
 	skin_amount = 15
-	bone_material = MAT_BONE_CARTILAGE
-	skin_material = MAT_SKIN_SHARK
+	bone_material = /decl/material/solid/bone/cartilage
+	skin_material = /decl/material/solid/skin/shark
 
 /obj/item/natural_weapon/bite/shark
 	force = 20

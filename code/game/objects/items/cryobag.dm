@@ -6,12 +6,12 @@
 	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	origin_tech = "{'biotech':4}"
-	material = MAT_PLASTIC
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
+	material = /decl/material/solid/plastic
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_SILVER = MATTER_AMOUNT_TRACE,
-		MAT_GOLD = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	var/stasis_power
 
@@ -29,7 +29,7 @@
 	a hostile enviroment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	storage_types = CLOSET_STORAGE_MOBS
 	var/datum/gas_mixture/airtank
 
@@ -40,8 +40,8 @@
 	. = ..()
 	airtank = new()
 	airtank.temperature = T0C
-	airtank.adjust_gas(MAT_OXYGEN, MOLES_O2STANDARD, 0)
-	airtank.adjust_gas(MAT_NITROGEN, MOLES_N2STANDARD)
+	airtank.adjust_gas(/decl/material/gas/oxygen, MOLES_O2STANDARD, 0)
+	airtank.adjust_gas(/decl/material/gas/nitrogen, MOLES_N2STANDARD)
 	update_icon()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()

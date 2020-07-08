@@ -14,7 +14,7 @@
 
 /obj/structure/adherent_bath/return_air()
 	var/datum/gas_mixture/venus = new(CELL_VOLUME, SYNTH_HEAT_LEVEL_1 - 10)
-	venus.adjust_multi(MAT_CHLORINE, MOLES_N2STANDARD, MAT_PHORON, MOLES_O2STANDARD)
+	venus.adjust_multi(/decl/material/gas/chlorine, MOLES_N2STANDARD, /decl/material/solid/phoron, MOLES_O2STANDARD)
 	return venus
 
 /obj/structure/adherent_bath/attackby(var/obj/item/thing, var/mob/user)

@@ -3,11 +3,11 @@
 	holding_type = /obj/item/rcd/mounted
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_ENGINEERING)
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_SILVER = MATTER_AMOUNT_TRACE,
-		MAT_GOLD = MATTER_AMOUNT_TRACE
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rcd/mounted/get_hardpoint_maptext()

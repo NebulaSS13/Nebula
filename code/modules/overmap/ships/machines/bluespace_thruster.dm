@@ -24,10 +24,10 @@
 							/obj/item/stack/cable_coil = 2,
 							/obj/item/stock_parts/matter_bin = 1,
 							/obj/item/stock_parts/capacitor = 2)
-	material = MAT_GOLD
+	material = /decl/material/solid/metal/gold
 	matter = list(
-		MAT_DIAMOND = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_URANIUM = MATTER_AMOUNT_TRACE,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
-		MAT_ALUMINIUM = MATTER_AMOUNT_TRACE
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)

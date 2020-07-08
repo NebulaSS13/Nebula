@@ -6,9 +6,9 @@
 /mob/living
 	var/meat_type =         /obj/item/chems/food/snacks/meat
 	var/meat_amount =       3
-	var/skin_material =     MAT_SKIN_GENERIC
+	var/skin_material =     /decl/material/solid/skin
 	var/skin_amount =       3
-	var/bone_material =     MAT_BONE_GENERIC
+	var/bone_material =     /decl/material/solid/bone
 	var/bone_amount =       3
 	var/skull_type
 	var/butchery_rotation = 90
@@ -65,7 +65,7 @@
 	density =  TRUE
 	icon = 'icons/obj/structures/butchery.dmi'
 	icon_state = "spike"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	matter = list(
 		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY

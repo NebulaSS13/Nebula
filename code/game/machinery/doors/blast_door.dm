@@ -60,7 +60,7 @@
 		set_opacity(0)
 		layer = open_layer
 
-	implicit_material = decls_repository.get_decl(MAT_PLASTEEL)
+	implicit_material = decls_repository.get_decl(/decl/material/solid/metal/plasteel)
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
@@ -151,7 +151,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 		return
-	if(istype(C, /obj/item/stack/material) && C.get_material_type() == MAT_PLASTEEL)
+	if(istype(C, /obj/item/stack/material) && C.get_material_type() == /decl/material/solid/metal/plasteel)
 		var/amt = Ceiling((maxhealth - health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")

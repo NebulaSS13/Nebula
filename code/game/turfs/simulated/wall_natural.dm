@@ -155,13 +155,13 @@ var/list/natural_walls = list()
 	. = "rock"
 
 /turf/simulated/wall/natural/get_default_material()
-	. = MAT_SANDSTONE
+	. = /decl/material/solid/stone/sandstone
 
 /turf/simulated/wall/natural/apply_reinf_overlay()
 	. = FALSE
 
 /turf/simulated/wall/natural/can_join_with(var/turf/simulated/wall/W)
-	. = (istype(W, /turf/simulated/wall/natural) && W.material?.type != MAT_PLACEHOLDER && material?.type != MAT_PLACEHOLDER)
+	. = (istype(W, /turf/simulated/wall/natural) && W.material?.type != /decl/material/placeholder && material?.type != /decl/material/placeholder)
 
 /turf/simulated/wall/natural/Bumped(AM)
 	. = ..()

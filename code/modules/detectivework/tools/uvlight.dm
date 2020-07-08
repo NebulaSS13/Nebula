@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	action_button_name = "Toggle UV light"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	origin_tech = "{'magnets':1,'engineering':1}"
 
 	var/list/scanned = list()

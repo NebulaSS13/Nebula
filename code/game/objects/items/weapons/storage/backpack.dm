@@ -50,11 +50,11 @@
 	icon_state = "holdingpack"
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
-	material = MAT_GOLD
+	material = /decl/material/solid/metal/gold
 	matter = list(
-		MAT_DIAMOND = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_URANIUM = MATTER_AMOUNT_TRACE,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/storage/backpack/holding/attackby(obj/item/W, mob/user)
@@ -74,11 +74,11 @@
 	name = "dufflebag of holding"
 	icon_state = "holdingduffle"
 	item_state_slots = list(slot_l_hand_str = "duffle", slot_r_hand_str = "duffle")
-	material = MAT_GOLD
+	material = /decl/material/solid/metal/gold
 	matter = list(
-		MAT_DIAMOND = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_URANIUM = MATTER_AMOUNT_TRACE,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/storage/backpack/santabag

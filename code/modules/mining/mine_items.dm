@@ -36,7 +36,7 @@
 	icon_state = "drill"
 	item_state = "jackhammer"
 	w_class = ITEM_SIZE_HUGE
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = "{'materials':1,'engineering':1}"
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
@@ -69,8 +69,8 @@
 	origin_tech = "{'materials':2,'powerstorage':3,'engineering':2}"
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
-	material = MAT_STEEL
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
@@ -89,10 +89,10 @@
 	origin_tech = "{'materials':6,'powerstorage':4,'engineering':5}"
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/pickaxe/borgdrill
@@ -142,7 +142,7 @@
 	sharp = 1
 	build_from_parts = TRUE
 	hardware_color = COLOR_DIAMOND
-	material = MAT_DIAMOND
+	material = /decl/material/solid/gemstone/diamond
 
 /*****************************Shovel********************************/
 
@@ -158,7 +158,7 @@
 	item_state = "shovel"
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':1,'engineering':1}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0
 	edge = 1

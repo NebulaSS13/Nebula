@@ -23,7 +23,7 @@
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
 		for(var/g in subtypesof(/decl/material/gas))
-			if(g != MAT_OXYGEN && g != MAT_NITROGEN)
+			if(g != /decl/material/gas/oxygen && g != /decl/material/gas/nitrogen)
 				scrubbing_gas += g
 
 /obj/machinery/portable_atmospherics/powered/scrubber/emp_act(severity)

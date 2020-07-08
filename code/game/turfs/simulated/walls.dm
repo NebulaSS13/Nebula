@@ -17,7 +17,7 @@
 	var/can_open = 0
 	var/decl/material/material
 	var/decl/material/reinf_material
-	var/decl/material/girder_material = MAT_STEEL
+	var/decl/material/girder_material = /decl/material/solid/metal/steel
 	var/last_state
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
@@ -57,7 +57,7 @@
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
-	material = decls_repository.get_decl(MAT_PLACEHOLDER)
+	material = decls_repository.get_decl(/decl/material/placeholder)
 	reinf_material = null
 	var/old_x = x
 	var/old_y = y

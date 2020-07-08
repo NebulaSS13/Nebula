@@ -44,11 +44,11 @@
 	return res
 
 /obj/item/material/sword/wood
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 	draw_handle = FALSE
 
 /obj/item/material/sword/replica
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 
 /obj/item/material/sword/katana
 	name = "katana"
@@ -63,17 +63,17 @@
 		desc = "Finest wooden fibers folded exactly one thousand times by master robots."
 
 /obj/item/material/sword/katana/bamboo
-	material = MAT_BAMBOO
+	material = /decl/material/solid/wood/bamboo
 	draw_handle = FALSE
 
 /obj/item/material/sword/katana/wood
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 	draw_handle = FALSE
 
 /obj/item/material/sword/katana/vibro
 	name = "vibrokatana"
 	desc = "A high-tech take on a woefully underpowered weapon. Can't mistake its sound for anything."
-	material = MAT_TITANIUM
+	material = /decl/material/solid/metal/plasteel/titanium
 	hitsound = 'sound/weapons/anime_sword.wav'
 
 /obj/item/material/sword/katana/vibro/equipped(mob/user, slot)

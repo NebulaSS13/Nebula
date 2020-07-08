@@ -3,7 +3,7 @@
 	icon = 'icons/obj/items/stock_parts/stock_parts.dmi'
 	randpixel = 5
 	w_class = ITEM_SIZE_SMALL
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/part_flags = PART_FLAG_LAZY_INIT | PART_FLAG_HAND_REMOVE
 	var/rating = 1
 	var/status = 0             // Flags using PART_STAT defines.

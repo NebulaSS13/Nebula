@@ -7,7 +7,7 @@
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = "{'combat':1,'magnets':2}"
 	self_recharge = 1
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 

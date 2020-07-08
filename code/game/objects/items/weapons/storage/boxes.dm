@@ -69,9 +69,9 @@
 	to_chat(user, "<span class='notice'>You fold [src] flat.</span>")
 	if(ispath(foldable, /obj/item/stack))
 		var/stack_amt = max(2**(w_class - 3), 1)
-		new foldable(get_turf(src), stack_amt, MAT_CARDBOARD)
+		new foldable(get_turf(src), stack_amt, /decl/material/solid/cardboard)
 	else
-		new foldable(get_turf(src), MAT_CARDBOARD)
+		new foldable(get_turf(src), /decl/material/solid/cardboard)
 	qdel(src)
 
 /obj/item/storage/box/make_exact_fit()

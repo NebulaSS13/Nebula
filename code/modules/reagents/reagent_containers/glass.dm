@@ -111,7 +111,7 @@
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 	unacidable = 0
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	material_force_multiplier = 0.2
 	slot_flags = SLOT_HEAD
 
@@ -120,7 +120,7 @@
 	icon = 'icons/obj/items/wooden_bucket.dmi'
 	on_mob_icon = 'icons/obj/items/wooden_bucket.dmi'
 	volume = 200
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user)
 	if(istype(D, /obj/item/mop))

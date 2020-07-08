@@ -178,7 +178,7 @@
 
 /obj/item/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /decl/stock_part_preset/terminal_setup
 	expected_part_type = /obj/item/stock_parts/power/terminal
