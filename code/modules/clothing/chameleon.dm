@@ -205,8 +205,10 @@
 
 /obj/item/clothing/gloves/chameleon
 	name = "black gloves"
-	icon_state = "black"
-	item_state = "bgloves"
+	icon_state = "world"
+	color = COLOR_GRAY40
+	icon = 'icons/clothing/hands/gloves_generic.dmi'
+	on_mob_icon = 'icons/clothing/hands/gloves_generic.dmi'
 	desc = "It looks like a pair of gloves, but it seems to have a small dial inside."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON

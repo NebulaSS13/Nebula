@@ -744,8 +744,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/gloves
 	name = "random gloves"
 	desc = "This is a random pair of gloves."
-	icon = 'icons/obj/clothing/obj_hands.dmi'
-	icon_state = "rainbow"
+	icon = 'icons/clothing/hands/gloves_generic.dmi'
+	icon_state = "inventory"
 
 /obj/random/gloves/spawn_choices()
 	return list(/obj/item/clothing/gloves/insulated = 3,
