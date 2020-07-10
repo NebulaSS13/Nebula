@@ -9,6 +9,8 @@
 	armor_degradation_speed = 1
 	armor_type = /datum/extension/armor/ablative
 	material_armor_multiplier = 1
+	valid_accessory_slots = list(ACCESSORY_SLOT_OVER, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_OVER, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 
 /obj/item/clothing/suit/armor/crafted/set_material(new_material)
 	. = ..()

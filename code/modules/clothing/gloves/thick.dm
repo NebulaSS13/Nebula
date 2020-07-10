@@ -54,3 +54,20 @@
 /obj/item/clothing/gloves/thick/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
 	color = COLOR_BEASTY_BROWN
+
+/obj/item/clothing/gloves/thick/craftable
+	name = "gauntlets"
+	desc = "Made to be thrown at scoundrels. Pretty heavy."
+	icon = 'icons/clothing/hands/gauntlets.dmi'
+	on_mob_icon = 'icons/clothing/hands/gauntlets.dmi'
+	material = MAT_STEEL
+	material_armor_multiplier = 1
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
+
+/obj/item/clothing/gloves/thick/craftable/set_material(var/new_material)
+	..()
+	if(material.conductive)
+		siemens_coefficient = 1
+	if(material.is_brittle())
+		item_flags &= ~ITEM_FLAG_THICKMATERIAL
