@@ -87,7 +87,7 @@
 	slot = ACCESSORY_SLOT_ARMOR_A
 
 /obj/item/clothing/accessory/armguards/craftable
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	material_armor_multiplier = 1
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
@@ -113,7 +113,7 @@
 	slot = ACCESSORY_SLOT_ARMOR_L
 
 /obj/item/clothing/accessory/legguards/craftable
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	material_armor_multiplier = 1
 	applies_material_colour = TRUE
 	applies_material_name =  TRUE

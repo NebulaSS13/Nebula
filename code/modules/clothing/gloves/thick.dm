@@ -60,7 +60,7 @@
 	desc = "Made to be thrown at scoundrels. Pretty heavy."
 	icon = 'icons/clothing/hands/gauntlets.dmi'
 	on_mob_icon = 'icons/clothing/hands/gauntlets.dmi'
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	material_armor_multiplier = 1
 	applies_material_colour = TRUE
 	applies_material_name = TRUE

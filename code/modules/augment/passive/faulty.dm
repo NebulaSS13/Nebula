@@ -1,7 +1,7 @@
 /obj/item/organ/internal/augment/faulty
 	name = "malfunctioning implant"
 	desc = "An augment that was badly installed. This one is malfunctioning."
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/timer_id
 	var/min_time = 1 MINUTES
 	var/max_time = 10 MINUTES
