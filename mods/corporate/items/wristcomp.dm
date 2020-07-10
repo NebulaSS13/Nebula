@@ -8,7 +8,7 @@
 	color = COLOR_GUNMETAL
 	light_color = LIGHT_COLOR_GREEN
 
-/obj/item/modular_computer/pda/wrist/get_mob_overlay(var/mob/user_mob, var/slot)
+/obj/item/modular_computer/pda/wrist/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)

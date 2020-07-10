@@ -79,8 +79,8 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 		"backpack" = slot_in_backpack_str,
 		"left pocket" = slot_l_store_str,
 		"right pocket" = slot_r_store_str,
-		"left hand" = slot_l_hand_str,
-		"right hand" = slot_r_hand_str
+		"left hand" =    BP_L_HAND,
+		"right hand" =   BP_R_HAND,
 	)
 	for(var/slot in slots)
 		player.equip_to_slot(T, slot)

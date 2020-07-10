@@ -42,21 +42,17 @@
 			src.open(usr)
 			return TRUE
 
-		if (!( istype(over_object, /obj/screen) ))
+		if (!( istype(over_object, /obj/screen/inventory) ))
 			return ..()
 
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
 		if (!usr.contains(src))
 			return
 
+		var/obj/screen/inventory/inv = over_object
 		src.add_fingerprint(usr)
 		if(usr.unEquip(src))
-			switch(over_object.name)
-				if(BP_R_HAND)
-					usr.put_in_r_hand(src)
-				if(BP_L_HAND)
-					usr.put_in_l_hand(src)
-
+			usr.equip_to_slot_if_possible(src, inv.slot_id)
 
 /obj/item/storage/proc/return_inv()
 

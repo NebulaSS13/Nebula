@@ -177,7 +177,7 @@
 	. = ..()
 
 /obj/item/gun/magnetic/attack_hand(var/mob/user)
-	if(user.get_inactive_hand() == src)
+	if(user.is_holding_offhand(src))
 		var/obj/item/removing
 
 		if(loaded)

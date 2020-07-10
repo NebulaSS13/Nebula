@@ -179,8 +179,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 	// Who can see the attack?
 	var/list/viewing = list()
-	for (var/mob/M in viewers(A))
-		if (M.client)
+	for(var/mob/M in viewers(A))
+		if(M.client)
 			viewing |= M.client
 	flick_overlay(I, viewing, 5) // 5 ticks/half a second
 

@@ -2,8 +2,10 @@
 	hierarchy_type = /decl/hierarchy/outfit/tournament_gear
 	head = /obj/item/clothing/head/helmet/thunderdome
 	suit = /obj/item/clothing/suit/armor/vest
-	l_hand = /obj/item/knife/combat
-	r_hand = /obj/item/gun/energy/laser
+	hands = list(
+		/obj/item/knife/combat,
+		/obj/item/gun/energy/laser
+	)
 	r_pocket = /obj/item/grenade/smokebomb
 	shoes = /obj/item/clothing/shoes/color/black
 
@@ -21,7 +23,10 @@
 	uniform = /obj/item/clothing/under/det
 	suit_store = /obj/item/clothing/suit/storage/det_trench
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
-	r_hand = /obj/item/gun/projectile/revolver
+	hands = list(
+		/obj/item/knife/combat,
+		/obj/item/gun/projectile/revolver
+	)
 	l_pocket = /obj/item/ammo_magazine/speedloader
 
 /decl/hierarchy/outfit/tournament_gear/chef
@@ -29,7 +34,10 @@
 	head = /obj/item/clothing/head/chefhat
 	uniform = /obj/item/clothing/under/rank/chef
 	suit = /obj/item/clothing/suit/chef
-	r_hand = /obj/item/kitchen/rollingpin
+	hands = list(
+		/obj/item/knife/combat,
+		/obj/item/kitchen/rollingpin
+	)
 	l_pocket = /obj/item/knife/combat
 	r_pocket = /obj/item/knife/combat
 
@@ -37,8 +45,10 @@
 	name = "Tournament gear - Janitor"
 	uniform = /obj/item/clothing/under/rank/janitor
 	back = /obj/item/storage/backpack
-	r_hand = /obj/item/mop
-	l_hand = /obj/item/chems/glass/bucket
+	hands = list(
+		/obj/item/mop,
+		/obj/item/chems/glass/bucket
+	)
 	l_pocket = /obj/item/grenade/chem_grenade/cleaner
 	r_pocket = /obj/item/grenade/chem_grenade/cleaner
 	backpack_contents = list(/obj/item/stack/tile/floor = 6)

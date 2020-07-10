@@ -46,16 +46,14 @@
 	var/obj/item/gun/G = get_holder_of_type(src, /obj/item/gun)
 	put_residue_on(G)
 	if(H)
-		var/zone
-		if(H.l_hand == G)
-			zone = BP_L_HAND
-		else if(H.r_hand == G)
-			zone = BP_R_HAND
-		if(zone)
-			var/target = H.get_covering_equipped_item_by_zone(zone)
-			if(!target)
-				target = H.get_organ(zone)
-			put_residue_on(target)
+		for(var/bp in H.held_item_slots)
+			var/datum/inventory_slot/inv_slot = H.held_item_slots[bp]
+			if(G == inv_slot?.holding)
+				var/target = H.get_covering_equipped_item_by_zone(bp)
+				if(!target)
+					target = H.get_organ(bp)
+				put_residue_on(target)
+				break
 	if(prob(30))
 		put_residue_on(get_turf(src))
 
@@ -180,7 +178,7 @@
 
 
 /obj/item/ammo_magazine/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
+	if(user.is_holding_offhand(src))
 		if(!stored_ammo.len)
 			to_chat(user, "<span class='notice'>[src] is already empty!</span>")
 		else

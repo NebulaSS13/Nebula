@@ -168,9 +168,7 @@
 		var/obj/item/P = locate(href_list["write"])
 		if(!P)
 			return
-		var/obj/item/pen/pen = user.r_hand
-		if(!istype(pen))
-			pen = user.l_hand
+		var/obj/item/pen/pen = locate() in user.get_held_items()
 		if(istype(pen))
 			add_fingerprint(user)
 			P.attackby(pen, user)

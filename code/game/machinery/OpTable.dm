@@ -83,7 +83,7 @@
 /obj/machinery/optable/MouseDrop_T(obj/O, mob/user)
 	if ((!( istype(O, /obj/item) ) || user.get_active_hand() != O))
 		return
-	if(!user.unequip_item())
+	if(!user.unEquip(O))
 		return
 	if (O.loc != src.loc)
 		step(O, get_dir(O, src))

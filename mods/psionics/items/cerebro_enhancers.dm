@@ -6,8 +6,8 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/cerebro.dmi'
 	item_state_slots = list(
-		slot_l_hand_str = "helmet",
-		slot_r_hand_str = "helmet"
+		BP_L_HAND = "helmet",
+		BP_R_HAND = "helmet"
 		)
 
 	var/operating = FALSE

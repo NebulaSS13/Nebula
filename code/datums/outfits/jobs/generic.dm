@@ -31,7 +31,7 @@
 	name = OUTFIT_JOB_NAME("Default Doctor")
 	uniform = /obj/item/clothing/under/rank/medical
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	l_hand = /obj/item/storage/firstaid/adv
+	hands = list(/obj/item/storage/firstaid/adv)
 	r_pocket = /obj/item/flashlight/pen
 	l_ear = /obj/item/radio/headset/headset_med
 	shoes = /obj/item/clothing/shoes/color/white

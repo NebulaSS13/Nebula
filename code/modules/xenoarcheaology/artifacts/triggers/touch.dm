@@ -5,7 +5,7 @@
 	return TRUE
 
 /datum/artifact_trigger/touch/on_touch(mob/living/M)
-	return can_touch(M, M.hand ? BP_R_HAND : BP_L_HAND)
+	return can_touch(M, M.get_active_held_item_slot())
 
 /datum/artifact_trigger/touch/on_bump(atom/movable/AM)
 	if(prob(25))

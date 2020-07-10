@@ -1,8 +1,8 @@
 /obj/item/clothing/under
 	icon = 'icons/obj/clothing/obj_under.dmi'
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_uniforms.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_uniforms.dmi',
+		BP_L_HAND = 'icons/mob/onmob/items/lefthand_uniforms.dmi',
+		BP_R_HAND = 'icons/mob/onmob/items/righthand_uniforms.dmi',
 		)
 	name = "under"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -82,7 +82,7 @@
 	else
 		. = icon_state
 	if(!findtext(.,"_s", -2)) // If we don't already have our suffix
-		if((icon_state + "_f_s") in icon_states(default_onmob_icons[slot_w_uniform_str]))
+		if((icon_state + "_f_s") in icon_states(global.default_onmob_icons[slot_w_uniform_str]))
 			. +=  get_gender_suffix()
 		else
 			. += "_s"
@@ -102,7 +102,7 @@
 		worn_state = icon_state
 	//autodetect rollability
 	if(rolled_down < 0)
-		if(("[worn_state]_d_s") in icon_states(default_onmob_icons[slot_w_uniform_str]))
+		if(("[worn_state]_d_s") in icon_states(global.default_onmob_icons[slot_w_uniform_str]))
 			rolled_down = 0
 
 /obj/item/clothing/under/proc/update_rolldown_status()
@@ -118,7 +118,7 @@
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
-		under_icon = default_onmob_icons[slot_w_uniform_str]
+		under_icon = global.default_onmob_icons[slot_w_uniform_str]
 
 	// The _s is because the icon update procs append it.
 	if(("[worn_state]_d_s") in icon_states(under_icon))
@@ -141,7 +141,7 @@
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
-		under_icon = default_onmob_icons[slot_w_uniform_str]
+		under_icon = global.default_onmob_icons[slot_w_uniform_str]
 
 	// The _s is because the icon update procs append it.
 	if(("[worn_state]_r_s") in icon_states(under_icon))

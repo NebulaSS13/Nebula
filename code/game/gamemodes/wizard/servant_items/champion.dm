@@ -68,14 +68,11 @@
 			to_chat(user,"<span class='danger'>\The [src] heats up in your hands, burning you!</span>")
 
 /obj/item/sword/excalibur/Process()
-	if(istype(loc, /mob/living))
-		if(istype(loc, /mob/living/carbon/human))
+	if(isliving(loc))
+		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
-			var/hand = BP_R_HAND
-			if(H.l_hand == src)
-				hand = BP_L_HAND
-			var/obj/item/organ/external/E = H.get_organ(hand)
-			E.take_external_damage(burn=2,used_weapon="stovetop")
+			var/obj/item/organ/external/E = H.get_organ(H.get_active_held_item_slot())
+			E?.take_external_damage(burn=2,used_weapon="stovetop")
 		else
 			var/mob/living/M = loc
 			M.adjustFireLoss(2)

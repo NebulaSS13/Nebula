@@ -336,9 +336,9 @@
 		else if(istype(user) && user.is_telekinetic())
 			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 		else if(user.a_intent != I_HELP)
-			var/obj/item/organ/external/hand = H.organs_by_name[user.hand ? BP_L_HAND : BP_R_HAND]
+			var/obj/item/organ/external/hand = H.organs_by_name[user.get_active_held_item_slot()]
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
-				user.apply_damage(3, BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
+				user.apply_damage(3, BURN, hand.organ_tag, used_weapon = src)
 				user.visible_message(SPAN_WARNING("\The [user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."), SPAN_WARNING("Your [hand] burns and sizzles as you remove the hot [get_fitting_name()]."))
 		else
 			to_chat(user, "You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand.")

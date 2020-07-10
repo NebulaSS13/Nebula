@@ -7,7 +7,7 @@
 
 // Yes, you can wear a nymph on your head instead of a radiation mask.
 /obj/item/holder/ascent_nymph/equipped(var/mob/living/user, var/slot)
-	if(slot == slot_l_hand_str || slot == slot_r_hand_str)
+	if(slot == BP_L_HAND || slot == BP_R_HAND)
 		body_parts_covered = ARMS
 	else if(slot == slot_head_str)
 		body_parts_covered = HEAD

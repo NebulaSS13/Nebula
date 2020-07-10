@@ -418,8 +418,9 @@ datum/gas_mixture/proc/check_recombustibility(list/fuel_objs)
 
 	//Get heat transfer coefficients for clothing.
 
+	var/holding = get_held_items()
 	for(var/obj/item/clothing/C in src)
-		if(l_hand == C || r_hand == C)
+		if(C in holding)
 			continue
 
 		if( C.max_heat_protection_temperature >= last_temperature )

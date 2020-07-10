@@ -108,10 +108,12 @@
 		return 0
 
 	//Check hands and mod slip
-	if(!l_hand)	prob_slip -= 2
-	else if(l_hand.w_class <= ITEM_SIZE_SMALL)	prob_slip -= 1
-	if (!r_hand)	prob_slip -= 2
-	else if(r_hand.w_class <= ITEM_SIZE_SMALL)	prob_slip -= 1
+	for(var/bp in held_item_slots)
+		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+		if(!inv_slot.holding)
+			prob_slip -= 2
+		else if(inv_slot.holding.w_class <= ITEM_SIZE_SMALL)
+			prob_slip -= 1
 
 	return prob_slip
 
@@ -149,9 +151,8 @@
 	if(!can_feel_pain())
 		return
 	var/crutches = 0
-	for(var/obj/item/cane/C in list(l_hand, r_hand))
-		if(istype(C))
-			crutches++
+	for(var/obj/item/cane/C in get_held_items())
+		crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = get_organ(organ_name)
 		if(E && (E.is_dislocated() || E.is_broken()))

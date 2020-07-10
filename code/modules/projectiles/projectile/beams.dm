@@ -269,9 +269,6 @@
 		L.eye_blurry += potency
 		if(L.confused >= 10)
 			L.Stun(1)
-			L.drop_l_hand()
-			L.drop_r_hand()
-
 	return 1
 
 /obj/item/projectile/beam/particle

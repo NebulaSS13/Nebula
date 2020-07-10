@@ -114,14 +114,8 @@
 			lowblood_tally = 6
 			if(prob(15))
 				to_chat(owner, "<span class='warning'>You're almost unable to move!</span>")
-				if(!owner.pulling_punches)
-					var/datum/species/serpentid/nab = species
-					nab.arm_swap(owner, TRUE)
 		if(-(INFINITY) to BLOOD_VOLUME_SURVIVE)
 			lowblood_tally = 10
-			if(prob(30) && !owner.pulling_punches)
-				var/datum/species/serpentid/nab = species
-				nab.arm_swap(owner, TRUE)
 			if(prob(10))
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
 				owner.Paralyse(1)
@@ -166,25 +160,12 @@
 /obj/item/organ/external/head/insectoid/serpentid
 	name = "head"
 	vital = 0
-	action_button_name = "Switch Stance" // Basically just a wrapper for switch stance verb, since GAS use it more than normals.
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
 	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
 	if(eyes)
 		return eyes.get_special_overlay()
-
-/obj/item/organ/external/head/insectoid/serpentid/refresh_action_button()
-	. = ..()
-	if(.)
-		action.button_icon_state = "serpentid-stance-[owner && owner.pulling_punches ? 1 : 0]"
-		if(action.button) action.button.UpdateIcon()
-
-/obj/item/organ/external/head/insectoid/serpentid/attack_self(var/mob/user)
-	. = ..()
-	if(.)
-		owner.pull_punches()
-		refresh_action_button()
 
 /obj/item/organ/external/groin/insectoid/serpentid
 	name = "abdomen"

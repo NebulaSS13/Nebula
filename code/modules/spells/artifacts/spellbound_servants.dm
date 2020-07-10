@@ -51,8 +51,8 @@
 	equipment = list(/obj/item/clothing/head/wizard = slot_head_str,
 					/obj/item/clothing/under/color/lightpurple = slot_w_uniform_str,
 					/obj/item/clothing/shoes/sandal = slot_shoes_str,
-					/obj/item/staff = slot_r_hand_str,
-					/obj/item/spellbook/apprentice = slot_l_hand_str,
+					/obj/item/staff = BP_R_HAND,
+					/obj/item/spellbook/apprentice = BP_L_HAND,
 					/obj/item/clothing/suit/wizrobe = slot_wear_suit_str)
 	spells = list(/spell/noclothes)
 
@@ -180,8 +180,8 @@
 	spiel = "Physicality is not something you are familiar with. Indeed, injuries cannot slow you down, but you can't fight back, either! In addition to this, you can reach into the void and return the soul of a single departed crewmember via the revoke death verb, if so desired; this can even revive your Master, should they fall in combat before you do. Serve them well."
 	equipment = list(/obj/item/clothing/under/grimhoodie = slot_w_uniform_str,
 					/obj/item/clothing/shoes/sandal/grimboots = slot_shoes_str,
-					/obj/item/contract/wizard/xray = slot_l_hand_str,
-					/obj/item/contract/wizard/telepathy = slot_r_hand_str)
+					/obj/item/contract/wizard/xray = BP_L_HAND,
+					/obj/item/contract/wizard/telepathy = BP_R_HAND)
 	spells = list(/spell/toggle_armor/overseer,
 				/spell/targeted/ethereal_jaunt,
 				/spell/invisibility,

@@ -102,10 +102,7 @@
 	if(W == A) // Handle attack_self
 		W.attack_self(src)
 		trigger_aiming(TARGET_CAN_CLICK)
-		if(hand)
-			update_inv_l_hand(0)
-		else
-			update_inv_r_hand(0)
+		update_inv_hands(0)
 		return 1
 
 	//Atoms on your person
@@ -220,7 +217,6 @@
 */
 /mob/proc/MiddleClickOn(var/atom/A)
 	swap_hand()
-	return
 
 // In case of use break glass
 /*

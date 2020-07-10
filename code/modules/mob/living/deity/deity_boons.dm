@@ -20,7 +20,7 @@
 		var/origin_text = "on the floor"
 		if(L.equip_to_appropriate_slot(I))
 			origin_text = "on your body"
-		else if(L.put_in_any_hand_if_possible(I))
+		else if(L.put_in_hands_or_del(I))
 			origin_text = "in your hands"
 		else
 			var/obj/O =  L.equip_to_storage(I)

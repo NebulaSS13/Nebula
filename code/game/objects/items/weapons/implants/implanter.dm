@@ -88,5 +88,3 @@
 
 				src.imp = null
 				update_icon()
-
-	return

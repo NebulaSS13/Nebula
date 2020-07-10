@@ -85,10 +85,6 @@ FLOOR SAFES
 	if(!ishuman(usr))	return
 	var/mob/living/carbon/human/user = usr
 
-	var/canhear = 0
-	if(istype(user.l_hand, /obj/item/clothing/accessory/stethoscope) || istype(user.r_hand, /obj/item/clothing/accessory/stethoscope))
-		canhear = 1
-
 	if(href_list["open"])
 		if(check_unlocked())
 			to_chat(user, "<span class='notice'>You [open ? "close" : "open"] [src].</span>")
@@ -100,6 +96,7 @@ FLOOR SAFES
 			to_chat(user, "<span class='notice'>You can't [open ? "close" : "open"] [src], the lock is engaged!</span>")
 			return
 
+	var/canhear = locate(/obj/item/clothing/accessory/stethoscope) in usr.get_held_items()
 	if(href_list["decrement"])
 		dial = decrement(dial)
 		if(dial == tumbler_1_pos + 1 || dial == tumbler_1_pos - 71)

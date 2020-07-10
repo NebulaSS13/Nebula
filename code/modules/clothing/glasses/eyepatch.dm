@@ -50,7 +50,7 @@
 		eye.color = eye_color
 		overlays += eye
 
-/obj/item/clothing/glasses/eyepatch/hud/get_mob_overlay(mob/user_mob, slot)
+/obj/item/clothing/glasses/eyepatch/hud/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/res = ..()
 	if(active)
 		var/image/eye = overlay_image(res.icon, "[icon_state]_eye", flags=RESET_COLOR)

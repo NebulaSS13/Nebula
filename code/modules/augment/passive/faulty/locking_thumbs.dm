@@ -5,14 +5,11 @@
 
 /obj/item/organ/internal/augment/faulty/locking_thumbs/on_malfunction()
 	var/slot = null
-
 	switch (limb.organ_tag)
 		if (BP_L_ARM, BP_L_HAND)
-			slot = slot_l_hand_str
+			slot = BP_L_HAND
 		if (BP_R_ARM, BP_R_HAND)
-			slot = slot_r_hand_str
-
+			slot = BP_R_HAND
 	var/obj/item/thing = owner.get_equipped_item(slot)
-
 	if(thing && owner.unEquip(thing))
 		owner.visible_message("<B>\The [owner]</B> drops what they were holding, \his [limb] malfunctioning!", "Your [limb] malfunctions, causing you to drop what you were holding.")

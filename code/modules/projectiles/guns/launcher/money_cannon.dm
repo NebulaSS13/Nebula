@@ -108,7 +108,7 @@
 	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [cur.name_singular] at a time.</span>")
 
 /obj/item/gun/launcher/money/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
+	if(user.is_holding_offhand(src))
 		unload_receptacle(user)
 	else
 		return ..()

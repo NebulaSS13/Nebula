@@ -81,13 +81,12 @@
 	if(back)
 		msg += "[T.He] [T.has] [back.get_examine_line()] on [T.his] back.\n"
 
-	//left hand
-	if(l_hand)
-		msg += "[T.He] [T.is] holding [l_hand.get_examine_line()] in [T.his] left hand.\n"
-
-	//right hand
-	if(r_hand)
-		msg += "[T.He] [T.is] holding [r_hand.get_examine_line()] in [T.his] right hand.\n"
+	//held items
+	for(var/bp in held_item_slots)
+		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, bp)
+		var/obj/item/organ/external/E = organs_by_name[bp]
+		if(inv_slot?.holding)
+			msg += "[T.He] [T.is] holding [inv_slot.holding.get_examine_line()] in [T.his] [E.name].\n"
 
 	//gloves
 	if(gloves && !skipgloves)

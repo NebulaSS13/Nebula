@@ -341,13 +341,12 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 
 /mob/proc/abiotic(var/full_body = FALSE)
-	if(full_body && ((src.l_hand && src.l_hand.simulated) || (src.r_hand && src.r_hand.simulated) || (src.back || src.wear_mask)))
+	. = FALSE
+	for(var/obj/item/thing in get_held_items())
+		if(thing.simulated)
+			return TRUE
+	if(full_body && (back || wear_mask))
 		return TRUE
-
-	if((src.l_hand && src.l_hand.simulated) || (src.r_hand && src.r_hand.simulated))
-		return TRUE
-
-	return FALSE
 
 //converts intent-strings into numbers and back
 var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
@@ -516,11 +515,9 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		threatcount += 4
 
 	if(auth_weapons && !access_obj.allowed(src))
-		if(istype(l_hand, /obj/item/gun) ||  istype(l_hand, /obj/item/energy_blade) || istype(l_hand, /obj/item/baton))
-			threatcount += 4
-
-		if(istype(r_hand, /obj/item/gun) || istype(r_hand, /obj/item/energy_blade) || istype(r_hand, /obj/item/baton))
-			threatcount += 4
+		for(var/thing in get_held_items())
+			if(istype(thing, /obj/item/gun) || istype(thing, /obj/item/energy_blade) || istype(thing, /obj/item/baton))
+				threatcount += 4
 
 		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/energy_blade) || istype(belt, /obj/item/baton))
 			threatcount += 2
@@ -568,12 +565,6 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 /mob/living/silicon/ai/get_multitool()
 	return ..(aiMulti)
-
-/proc/get_both_hands(mob/living/carbon/M)
-	if(!istype(M))
-		return
-	var/list/hands = list(M.l_hand, M.r_hand)
-	return hands
 
 /mob/proc/refresh_client_images()
 	if(client)

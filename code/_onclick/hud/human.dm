@@ -3,12 +3,7 @@
 
 /datum/hud/human/FinalizeInstantiation(var/ui_style='icons/mob/screen/white.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
 	var/mob/living/carbon/human/target = mymob
-	var/datum/hud_data/hud_data
-	if(!istype(target))
-		hud_data = new()
-	else
-		hud_data = target.species.hud
-
+	var/datum/hud_data/hud_data = istype(target) ? target.species.hud : new()
 	if(hud_data.icon)
 		ui_style = hud_data.icon
 
@@ -59,11 +54,9 @@
 
 	// Draw the attack intent dialogue.
 	if(hud_data.has_a_intent)
-
 		using = new /obj/screen/intent()
 		src.adding += using
 		action_intent = using
-
 		hud_elements |= using
 
 	if(hud_data.has_m_intent)
@@ -98,33 +91,6 @@
 		using.alpha = ui_alpha
 		src.adding += using
 
-		inv_box = new /obj/screen/inventory()
-		inv_box.SetName("r_hand")
-		inv_box.icon = ui_style
-		inv_box.icon_state = "r_hand_inactive"
-		if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
-			inv_box.icon_state = "r_hand_active"
-		inv_box.screen_loc = ui_rhand
-		inv_box.slot_id = slot_r_hand_str
-		inv_box.color = ui_color
-		inv_box.alpha = ui_alpha
-
-		src.r_hand_hud_object = inv_box
-		src.adding += inv_box
-
-		inv_box = new /obj/screen/inventory()
-		inv_box.SetName("l_hand")
-		inv_box.icon = ui_style
-		inv_box.icon_state = "l_hand_inactive"
-		if(mymob && mymob.hand)	//This being 1 means the left hand is in use
-			inv_box.icon_state = "l_hand_active"
-		inv_box.screen_loc = ui_lhand
-		inv_box.slot_id = slot_l_hand_str
-		inv_box.color = ui_color
-		inv_box.alpha = ui_alpha
-		src.l_hand_hud_object = inv_box
-		src.adding += inv_box
-
 		using = new /obj/screen/inventory()
 		using.SetName("hand")
 		using.icon = ui_style
@@ -142,6 +108,8 @@
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.adding += using
+
+		rebuild_hands(skip_client_update = TRUE)
 
 	if(hud_data.has_resist)
 		using = new /obj/screen()
@@ -283,8 +251,10 @@
 	mymob.radio_use_icon.alpha = ui_alpha
 
 	mymob.client.screen = list()
-
-	mymob.client.screen += hud_elements
+	if(length(hand_hud_objects))
+		mymob.client.screen += hand_hud_objects
+	if(length(hud_elements))
+		mymob.client.screen += hud_elements
 	mymob.client.screen += src.adding + src.hotkeybuttons
 	inventory_shown = 0
 

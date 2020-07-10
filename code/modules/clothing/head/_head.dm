@@ -17,7 +17,7 @@
 	light_overlay_image = null
 	..(user, slot)
 
-/obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot)
+/obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(light_overlay_image)
 		ret.overlays -= light_overlay_image

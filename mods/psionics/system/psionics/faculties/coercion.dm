@@ -129,10 +129,11 @@
 		to_chat(target, "<span class='danger'>The muscles in your arms cramp horrendously!</span>")
 		if(prob(75))
 			target.emote("scream")
-		if(prob(75) && target.l_hand && target.l_hand.simulated && target.unEquip(target.l_hand))
-			target.visible_message("<span class='danger'>\The [target] drops what they were holding as their left hand spasms!</span>")
-		if(prob(75) && target.r_hand && target.r_hand.simulated && target.unEquip(target.r_hand))
-			target.visible_message("<span class='danger'>\The [target] drops what they were holding as their right hand spasms!</span>")
+		for(var/bp in target.held_item_slots)
+			var/datum/inventory_slot/inv_slot = target.held_item_slots[bp]
+			if(inv_slot?.holding?.simulated && prob(75) && target.unEquip(inv_slot.holding))
+				var/obj/item/organ/external/E = target.get_organ(bp)
+				target.visible_message(SPAN_DANGER("\The [target] drops what they were holding as their [E ? E.name : "hand"] spasms!"))
 		return TRUE
 
 /decl/psionic_power/coercion/mindslave

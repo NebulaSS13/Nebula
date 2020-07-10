@@ -61,7 +61,7 @@
 		return
 
 /obj/item/weldpack/attack_hand(mob/user)
-	if(welder && user.get_inactive_hand() == src)
+	if(welder && user.is_holding_offhand(src))
 		user.put_in_hands(welder)
 		user.visible_message("[user] removes \the [welder] from \the [src].", "You remove \the [welder] from \the [src].")
 		welder = null

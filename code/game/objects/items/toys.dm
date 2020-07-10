@@ -789,12 +789,15 @@
 		user.visible_message("<span class='notice'>[user] holds \the [src] above their head, signalling a stop.</span>",
 							"<span class='notice'>You hold \the [src] above your head, signalling a stop.</span>")
 	else if (user.a_intent == I_GRAB)
-		var/WAND_TURN_DIRECTION
-		if (user.l_hand == src) WAND_TURN_DIRECTION = "left"
-		else if (user.r_hand == src) WAND_TURN_DIRECTION = "right"
-		else return //how can you not be holding it in either hand?? black magic
-		user.visible_message("<span class='notice'>[user] waves \the [src] to the [WAND_TURN_DIRECTION], signalling a turn.</span>",
-							"<span class='notice'>You wave \the [src] to the [WAND_TURN_DIRECTION], signalling a turn.</span>")
+		var/wand_dir
+		if(user.get_equipped_item(BP_L_HAND) == src) 
+			wand_dir = "left"
+		else if (user.get_equipped_item(BP_R_HAND) == src) 
+			wand_dir = "right"
+		else
+			wand_dir = pick("left", "right")
+		user.visible_message("<span class='notice'>[user] waves \the [src] to the [wand_dir], signalling a turn.</span>",
+							"<span class='notice'>You wave \the [src] to the [wand_dir], signalling a turn.</span>")
 	else if (user.a_intent == I_HURT)
 		user.visible_message("<span class='warning'>[user] frantically waves \the [src] above their head!</span>",
 							"<span class='warning'>You frantically wave \the [src] above your head!</span>")

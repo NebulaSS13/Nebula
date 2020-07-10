@@ -85,15 +85,11 @@
 			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
 				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
 				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
-
-				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
-
 				new /obj/effect/decal/cleanable/ash(src.loc)
 				qdel(src)
 
 			else
-				to_chat(user, "<span class='warning'>You must hold \the [P] steady to burn \the [src].</span>")
+				to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
 
 /obj/item/paper_bundle/examine(mob/user, distance)
 	. = ..()

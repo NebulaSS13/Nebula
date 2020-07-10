@@ -364,8 +364,8 @@
 /obj/item/rig_module/mounted/energy_blade/activate()
 	var/mob/living/M = holder.wearer
 
-	if(M.l_hand && M.r_hand)
-		to_chat(M, "<span class='danger'>Your hands are full.</span>")
+	if(!M.get_empty_hand_slot())
+		to_chat(M, SPAN_WARNING("Your hands are full."))
 		deactivate()
 		return
 
@@ -416,11 +416,11 @@
 	if(target)
 		var/obj/item/firing = new fabrication_type()
 		firing.dropInto(loc)
-		H.visible_message("<span class='danger'>[H] launches \a [firing]!</span>")
+		H.visible_message(SPAN_DANGER("\The [H] launches \a [firing]!"))
 		firing.throw_at(target,fire_force,fire_distance)
 	else
-		if(H.l_hand && H.r_hand)
-			to_chat(H, "<span class='danger'>Your hands are full.</span>")
+		if(!H.get_empty_hand_slot())
+			to_chat(H, SPAN_WARNING("Your hands are full."))
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.forceMove(H)

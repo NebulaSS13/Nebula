@@ -31,16 +31,9 @@
 /obj/item/flamethrower/Process()
 	if(!lit)
 		STOP_PROCESSING(SSobj, src)
-		return null
-	var/turf/location = loc
-	if(istype(location, /mob/))
-		var/mob/M = location
-		if(M.l_hand == src || M.r_hand == src)
-			location = M.loc
-	if(isturf(location)) //start a fire if possible
-		location.hotspot_expose(700, 2)
-	return
-
+	else
+		var/turf/location = get_turf(src)
+		location?.hotspot_expose(700, 2)
 
 /obj/item/flamethrower/on_update_icon()
 	overlays.Cut()

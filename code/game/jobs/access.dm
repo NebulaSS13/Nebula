@@ -222,21 +222,20 @@
 /mob/living/bot/GetIdCard()
 	return botcard
 
-#define HUMAN_ID_CARDS list(get_active_hand(), wear_id, get_inactive_hand())
 /mob/living/carbon/human/GetIdCard()
-	for(var/item_slot in HUMAN_ID_CARDS)
-		var/obj/item/I = item_slot
+	var/list/id_cards = get_held_items()
+	LAZYDISTINCTADD(id_cards, wear_id)
+	for(var/obj/item/I in id_cards)
 		var/obj/item/card/id = I ? I.GetIdCard() : null
-		if(id)
+		if(istype(id))
 			return id
 
 /mob/living/carbon/human/GetAccess()
 	. = list()
-	for(var/item_slot in HUMAN_ID_CARDS)
-		var/obj/item/I = item_slot
-		if(I)
-			. |= I.GetAccess()
-#undef HUMAN_ID_CARDS
+	var/list/id_cards = get_held_items()
+	LAZYDISTINCTADD(id_cards, wear_id)
+	for(var/obj/item/I in id_cards)
+		. |= I.GetAccess()
 
 /mob/living/silicon/GetIdCard()
 	if(stat || (ckey && !client))

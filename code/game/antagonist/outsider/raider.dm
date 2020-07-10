@@ -200,7 +200,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	else if(!player.back && (primary.slot_flags & SLOT_BACK))
 		player.equip_to_slot_or_del(primary, slot_back_str)
 	else
-		player.put_in_any_hand_if_possible(primary)
+		player.put_in_hands(primary)
 
 	//If they got a projectile gun, give them a little bit of spare ammo
 	equip_ammo(player, primary)
@@ -210,7 +210,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		if(istype(uniform) && uniform.can_attach_accessory(holster))
 			uniform.attackby(holster, player)
 		else
-			player.put_in_any_hand_if_possible(holster)
+			player.put_in_hands(holster)
 
 /datum/antagonist/raider/proc/equip_ammo(var/mob/living/carbon/human/player, var/obj/item/gun/gun)
 	if(istype(gun, /obj/item/gun/projectile))
@@ -223,5 +223,5 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			var/obj/item/storage/box/ammobox = new(get_turf(player.loc))
 			for(var/i in 1 to rand(3,5) + rand(0,2))
 				new bullet_thrower.ammo_type(ammobox)
-			player.put_in_any_hand_if_possible(ammobox)
+			player.put_in_hands(ammobox)
 		return

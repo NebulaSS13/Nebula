@@ -101,7 +101,7 @@
 		if (tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank attached - remove it first."))
 			return
-		if (user.get_active_hand() != src && user.get_inactive_hand() != src)
+		if(!(src in user.get_held_items()))
 			to_chat(user, SPAN_WARNING("You must hold the welder in your hands to attach a tank."))
 			return
 		if (!user.unEquip(W, src))
@@ -117,7 +117,7 @@
 
 
 /obj/item/weldingtool/attack_hand(mob/user)
-	if (tank && user.get_inactive_hand() == src)
+	if (tank && user.is_holding_offhand(src))
 		if (!welding)
 			user.visible_message("[user] removes \the [tank] from \the [src].", "You remove \the [tank] from \the [src].")
 			user.put_in_hands(tank)
@@ -202,7 +202,7 @@
 	//consider ourselves in a mob if we are in the mob's contents and not in their hands
 	if(isliving(src.loc))
 		var/mob/living/L = src.loc
-		if(!(L.l_hand == src || L.r_hand == src))
+		if(!(src in L.get_held_items()))
 			in_mob = L
 
 	if(in_mob)
@@ -238,8 +238,7 @@
 	item_state = welding ? "welder1" : "welder"
 	var/mob/M = loc
 	if(istype(M))
-		M.update_inv_l_hand()
-		M.update_inv_r_hand()
+		M.update_inv_hands()
 
 //Sets the welding state of the welding tool. If you see W.welding = 1 anywhere, please change it to W.setWelding(1)
 //so that the welding tool updates accordingly

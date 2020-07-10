@@ -109,18 +109,18 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 	var/cancel_aim = 1
 
-	if(!(aiming_with in owner) || (istype(owner, /mob/living/carbon/human) && (owner.l_hand != aiming_with && owner.r_hand != aiming_with)))
-		to_chat(owner, "<span class='warning'>You must keep hold of your weapon!</span>")
+	if(!(aiming_with in owner) || (istype(owner, /mob/living/carbon/human) && !(aiming_with in owner.get_held_items())))
+		to_chat(owner, SPAN_WARNING("You must keep hold of your weapon!"))
 	else if(owner.eye_blind)
-		to_chat(owner, "<span class='warning'>You are blind and cannot see your target!</span>")
+		to_chat(owner, SPAN_WARNING("You are blind and cannot see your target!"))
 	else if(!aiming_at || !istype(aiming_at.loc, /turf))
-		to_chat(owner, "<span class='warning'>You have lost sight of your target!</span>")
+		to_chat(owner, SPAN_WARNING("You have lost sight of your target!"))
 	else if(owner.incapacitated() || owner.lying || owner.restrained())
-		to_chat(owner, "<span class='warning'>You must be conscious and standing to keep track of your target!</span>")
+		to_chat(owner, SPAN_WARNING("You must be conscious and standing to keep track of your target!"))
 	else if(aiming_at.is_invisible_to(owner))
-		to_chat(owner, "<span class='warning'>Your target has become invisible!</span>")
+		to_chat(owner, SPAN_WARNING("Your target has become invisible!"))
 	else if(!(aiming_at in view(owner)))
-		to_chat(owner, "<span class='warning'>Your target is too far away to track!</span>")
+		to_chat(owner, SPAN_WARNING("Your target is too far away to track!"))
 	else
 		cancel_aim = 0
 

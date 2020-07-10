@@ -203,8 +203,9 @@
 			if(!M.reagents)
 				continue
 			var/body_coverage = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+			var/held_items = M.get_held_items()
 			for(var/obj/item/clothing/clothes in M)
-				if(M.l_hand == clothes || M.r_hand == clothes)
+				if(clothes in held_items)
 					continue
 				body_coverage &= ~(clothes.body_parts_covered)
 			if(!body_coverage)

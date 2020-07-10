@@ -41,9 +41,8 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	else
 		player.equip_to_slot_or_del(new /obj/item/plastique(player), slot_l_store_str)
 	player.equip_to_slot_or_del(new /obj/item/gun/projectile/revolver(player), slot_belt_str)
-	player.equip_to_slot_or_del(new /obj/item/gun/energy/laser(player), slot_r_hand_str)
-	player.equip_to_slot_or_del(new /obj/item/rig/ert/assetprotection(player), slot_back_str)
-	player.equip_to_slot_or_del(new /obj/item/energy_blade/sword(player), slot_l_hand_str)
+	player.put_in_hands_or_del(new /obj/item/gun/energy/laser(player))
+	player.put_in_hands_or_del(new /obj/item/energy_blade/sword(player))
 	player.implant_loyalty(player)
 
 	var/obj/item/card/id/id = create_id("Asset Protection", player)

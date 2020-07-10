@@ -275,11 +275,9 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	if(M == user)
 		var/hitzone = check_zone(user.zone_sel.selecting, M)
 		var/list/badzones = list(BP_HEAD)
-		if(user.hand)
-			badzones += BP_L_ARM
-			badzones += BP_L_HAND
-		else
-			badzones += BP_R_ARM
-			badzones += BP_R_HAND
+		var/obj/item/organ/external/E = M.get_organ(M.get_active_held_item_slot())
+		if(E)
+			badzones |= E.organ_tag
+			badzones |= E.parent_organ
 		if(hitzone in badzones)
 			return FALSE

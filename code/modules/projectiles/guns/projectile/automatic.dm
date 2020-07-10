@@ -84,7 +84,7 @@
 		..()
 
 /obj/item/gun/projectile/automatic/assault_rifle/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src && use_launcher)
+	if(user.is_holding_offhand(src) && use_launcher)
 		launcher.unload(user)
 	else
 		..()

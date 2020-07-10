@@ -95,9 +95,8 @@
 			animate(G.affecting, pixel_x = initial(G.affecting.pixel_x), pixel_y = initial(G.affecting.pixel_y), 4, 1)
 		qdel(G)
 		// check if we're grabbing with our inactive hand
-		G = thrower.get_inactive_hand()
-		if(istype(G))
-			qdel(G)
+		for(var/obj/item/grab/grab in thrower.get_inactive_held_items())
+			qdel(grab)
 
 /decl/grab/proc/hit_with_grab(var/obj/item/grab/G)
 	if(downgrade_on_action)

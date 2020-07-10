@@ -29,12 +29,11 @@
 		LAZYSET(A.reagents.reagent_data, /decl/material/liquid/water, list("holy" = FALSE))
 
 /mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
-	var/has_tome = 0
 	var/has_robes = 0
 	var/cult_ground = 0
-	if(istype(get_active_hand(), /obj/item/book/tome) || istype(get_inactive_hand(), /obj/item/book/tome))
-		has_tome = 1
-	else if(tome_required && mob_needs_tome())
+
+	var/has_tome = locate(/obj/item/book/tome) in get_held_items()
+	if(tome_required && mob_needs_tome() && !has_tome)
 		to_chat(src, "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>")
 		return
 	if(istype(get_equipped_item(slot_head_str), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes_str), /obj/item/clothing/shoes/cult))

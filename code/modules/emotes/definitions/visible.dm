@@ -240,8 +240,8 @@
 	emote_message_3p = "USER signals."
 	message_type = VISIBLE_MESSAGE
 
-/decl/emote/visible/signal/get_emote_message_3p(var/mob/user, var/atom/target, var/extra_params)
-	if(istype(user) && !(user.r_hand && user.l_hand))
+/decl/emote/visible/signal/get_emote_message_3p(var/mob/living/user, var/atom/target, var/extra_params)
+	if(istype(user) && user.get_empty_hand_slot())
 		var/t1 = round(text2num(extra_params))
 		if(isnum(t1) && t1 <= 5)
 			return "USER raises [t1] finger\s."

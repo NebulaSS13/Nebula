@@ -59,7 +59,7 @@
 		to_chat(user, "There is nothing to remove in \the [src].")
 
 /obj/item/gun/launcher/pneumatic/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
+	if(user.is_holding_offhand(src))
 		unload_hopper(user)
 	else
 		return ..()
@@ -132,7 +132,7 @@
 
 	update_held_icon()
 
-/obj/item/gun/launcher/pneumatic/experimental_mob_overlay(mob/user_mob, slot)
+/obj/item/gun/launcher/pneumatic/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/I = ..()
 	if(tank)
 		I.icon_state += "-tank" 

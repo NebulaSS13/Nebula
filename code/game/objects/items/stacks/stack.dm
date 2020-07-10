@@ -301,12 +301,10 @@
 /obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
 	var/list/stacks = list()
 	if(check_hands && user)
-		if(isstack(user.l_hand))
-			stacks += user.l_hand
-		if(isstack(user.r_hand))
-			stacks += user.r_hand
+		for(var/obj/item/stack/item in user.get_held_items())
+			stacks |= item
 	for (var/obj/item/stack/item in user?.loc)
-		stacks += item
+		stacks |= item
 	for (var/obj/item/stack/item in stacks)
 		if (item==src)
 			continue
@@ -322,7 +320,7 @@
 		. = ceil(. * amount / max_amount)
 
 /obj/item/stack/attack_hand(mob/user)
-	if (user.get_inactive_hand() == src)
+	if(user.is_holding_offhand(src))
 		var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
 		if(N)
 			var/obj/item/stack/F = src.split(N)

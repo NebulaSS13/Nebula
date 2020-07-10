@@ -49,7 +49,7 @@
 		return
 
 	var/atom/blade
-	for(var/obj/item/held in shuffle(list(user.l_hand, user.r_hand)))
+	for(var/obj/item/held in shuffle(user.get_held_items()))
 		if(has_edge(held))
 			blade = held
 			break

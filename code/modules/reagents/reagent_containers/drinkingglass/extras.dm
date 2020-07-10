@@ -27,7 +27,7 @@
 		return ..()
 
 /obj/item/chems/food/drinks/glass2/attack_hand(mob/user)
-	if(src != user.get_inactive_hand())
+	if(!user.is_holding_offhand(src))
 		return ..()
 
 	if(!extras.len)

@@ -22,7 +22,7 @@
 /obj/item/flash/proc/clown_check(var/mob/user)
 	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
-		user.unequip_item()
+		user.unEquip(src)
 		return 0
 	return 1
 
@@ -86,8 +86,7 @@
 					M.eye_blurry += flash_strength
 					M.confused += (flash_strength + 2)
 					if(flash_strength > 3)
-						M.drop_l_hand()
-						M.drop_r_hand()
+						M.drop_held_items()
 					if(flash_strength > 5)
 						M.Weaken(2)
 			else

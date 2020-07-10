@@ -214,7 +214,7 @@
 		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
-		)
+	)
 
 	var/list/override_limb_types // Used for species that only need to change one or two entries in has_limbs.
 
@@ -354,15 +354,15 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	
 /datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
-		if(extendedtank)
+		if (extendedtank)
 			H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack_str)
 		else
 			H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack_str)
 	else
-		if(extendedtank)
-			H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H), slot_r_hand_str)
+		if (extendedtank)
+			H.put_in_hands_or_del(new /obj/item/storage/box/engineer(H))
 		else
-			H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H), slot_r_hand_str)
+			H.put_in_hands_or_del(new /obj/item/storage/box/survival(H))
 
 /datum/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity
@@ -633,7 +633,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		target.w_uniform.add_fingerprint(attacker)
 	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(attacker.zone_sel.selecting, target = target))
 
-	var/list/holding = list(target.get_active_hand() = 60, target.get_inactive_hand() = 30)
+	var/list/holding = list(target.get_active_hand() = 60)
+	for(var/thing in target.get_inactive_held_items())
+		holding[thing] = 30
 
 	var/skill_mod = 10 * attacker.get_skill_difference(SKILL_COMBAT, target)
 	var/state_mod = attacker.melee_accuracy_mods() - target.melee_accuracy_mods()

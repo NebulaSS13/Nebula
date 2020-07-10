@@ -311,7 +311,7 @@
 	face_atom(A)
 
 	if(!isghost(src))
-		if(A.loc != src || A == l_hand || A == r_hand)
+		if(A.loc != src || (A in get_held_items()))
 			for(var/mob/M in viewers(4, src))
 				if(M == src)
 					continue
@@ -373,21 +373,13 @@
 	set name = "Activate Held Object"
 	set category = "Object"
 	set src = usr
+	var/obj/item/W = get_active_hand()
+	W?.attack_self(src)
+	return W
 
-	if(hand)
-		var/obj/item/W = l_hand
-		if (W)
-			W.attack_self(src)
-			update_inv_l_hand()
-		else
-			attack_empty_hand(BP_L_HAND)
-	else
-		var/obj/item/W = r_hand
-		if (W)
-			W.attack_self(src)
-			update_inv_r_hand()
-		else
-			attack_empty_hand(BP_R_HAND)
+/mob/living/mode()
+	if(!..())
+		attack_empty_hand()
 
 /mob/proc/update_flavor_text(var/key)
 	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
@@ -606,8 +598,7 @@
 
 	if(lying)
 		set_density(0)
-		if(l_hand) unEquip(l_hand)
-		if(r_hand) unEquip(r_hand)
+		drop_held_items()
 	else
 		set_density(initial(density))
 	reset_layer()
@@ -839,7 +830,7 @@
 		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your body.</b></span>")
 	remove_implant(selection)
 	selection.forceMove(get_turf(src))
-	if(!(U.l_hand && U.r_hand))
+	if(U.get_empty_hand_slot())
 		U.put_in_hands(selection)
 	if(ishuman(U))
 		var/mob/living/carbon/human/human_user = U

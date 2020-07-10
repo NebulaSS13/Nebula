@@ -53,7 +53,16 @@ var/list/icon_state_cache = list()
 /mob/proc/get_bodytype()
 	return
 
-/obj/item/proc/experimental_mob_overlay(var/mob/user_mob, var/slot)
+// This is a temporary workaround for the slot => bodypart 
+// changes. In the long term this should be removed after 
+// all the `slot_l/r_hand-foo` states are renamed to just 
+// `l/r_hand-foo`. TODO: check if this is still here in 2025.
+var/list/bodypart_to_slot_lookup_table = list(
+	BP_L_HAND = "slot_l_hand",
+	BP_R_HAND = "slot_r_hand"
+)
+
+/obj/item/proc/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 
 	var/bodytype = lowertext(user_mob?.get_bodytype())
 	var/useicon =  get_icon_for_bodytype(bodytype)
@@ -61,13 +70,18 @@ var/list/icon_state_cache = list()
 		bodytype = lowertext(BODYTYPE_HUMANOID)
 		useicon = get_icon_for_bodytype(bodytype)
 
-	var/useiconstate = "[bodytype]-[slot]"
-	if(!check_state_in_icon(useiconstate, useicon))
+	// See comment above.
+	var/use_state = "[bodytype]-[slot]"
+	if(!check_state_in_icon(use_state, useicon) && global.bodypart_to_slot_lookup_table[slot])
+		use_state = "[bodytype]-[global.bodypart_to_slot_lookup_table[slot]]"
+
+	if(!check_state_in_icon(use_state, useicon))
 		return new /image
-	var/image/I = image(useicon, useiconstate)
+
+	var/image/I = image(useicon, "[bodytype]-[slot]")
 	I.color = color
 	I.appearance_flags = RESET_COLOR
-	. = apply_offsets(user_mob,  bodytype, I, slot)
+	. = apply_offsets(user_mob,  bodytype, I, slot, bodypart)
 	. = apply_overlays(user_mob, bodytype, ., slot)
 
 /mob/living/carbon/get_bodytype()
@@ -83,11 +97,11 @@ var/list/icon_state_cache = list()
 /obj/item/proc/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	. = overlay
 
-/obj/item/proc/apply_offsets(var/mob/user_mob, var/bodytype,  var/image/overlay, var/slot)
+/obj/item/proc/apply_offsets(var/mob/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/H = user_mob
 		if(lowertext(H.species.get_bodytype(H)) != bodytype) 
-			overlay = H.species.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, slot)
+			overlay = H.species.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, bodypart || slot)
 	. = overlay
 
 //Special proc belts use to compose their icon

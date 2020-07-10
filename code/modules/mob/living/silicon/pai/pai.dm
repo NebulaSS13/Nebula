@@ -358,8 +358,7 @@
 		var/obj/item/holder/H = .
 		if(istype(H))
 			H.icon_state = "pai-[icon_state]"
-			grabber.update_inv_l_hand()
-			grabber.update_inv_r_hand()
+			grabber.update_inv_hands()
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"

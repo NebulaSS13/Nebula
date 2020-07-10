@@ -114,18 +114,14 @@ var/global/photo_count = 0
 
 	if((istype(usr, /mob/living/carbon/human)))
 		var/mob/M = usr
-		if(!( istype(over_object, /obj/screen) ))
+		if(!( istype(over_object, /obj/screen/inventory) ))
 			return ..()
 		playsound(loc, "rustle", 50, 1, -5)
 		if((!( M.restrained() ) && !( M.stat ) && M.back == src))
-			switch(over_object.name)
-				if("r_hand")
-					if(M.unEquip(src))
-						M.put_in_r_hand(src)
-				if("l_hand")
-					if(M.unEquip(src))
-						M.put_in_l_hand(src)
-			add_fingerprint(usr)
+			var/obj/screen/inventory/inv = over_object
+			src.add_fingerprint(M)
+			if(M.unEquip(src))
+				M.equip_to_slot_if_possible(src, inv.slot_id)
 			return
 		if(over_object == usr && in_range(src, usr) || usr.contents.Find(src))
 			if(usr.s_active)
@@ -197,16 +193,13 @@ var/global/photo_count = 0
 /obj/item/camera/proc/get_mobs(turf/the_turf)
 	var/mob_detail
 	for(var/mob/living/carbon/A in the_turf)
-		if(A.invisibility) continue
-		var/holding = null
-		if(A.l_hand || A.r_hand)
-			if(A.l_hand) holding = "They are holding \a [A.l_hand]"
-			if(A.r_hand)
-				if(holding)
-					holding += " and \a [A.r_hand]"
-				else
-					holding = "They are holding \a [A.r_hand]"
-
+		if(A.invisibility)
+			continue
+		var/holding
+		for(var/obj/item/thing in A.get_held_items())
+			LAZYADD(holding, "\a [thing]")
+		if(length(holding))
+			holding = "They are holding [english_list(holding)]"
 		if(!mob_detail)
 			mob_detail = "You can see [A] on the photo[(A.health / A.maxHealth) < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
 		else

@@ -75,7 +75,7 @@
 	. = ..()
 	if(istype(AM,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = AM
-		var/obj/item/pickaxe/P = H.get_inactive_hand()
+		var/obj/item/pickaxe/P = (locate() in H.get_inactive_held_items())
 		if(istype(P))
 			src.attackby(P, H)
 
