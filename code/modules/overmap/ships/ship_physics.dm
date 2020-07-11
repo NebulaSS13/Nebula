@@ -23,7 +23,7 @@
 	return vessel_mass * 0.2
 
 // This is the amount of fuel we can spend in one specific impulse.
-/obj/effect/overmap/visitable/ship/get_specific_wet_mass()
+/obj/effect/overmap/visitable/ship/proc/get_specific_wet_mass()
 	var/mass = 0
 	for(var/datum/extension/ship_engine/E in engines)
 		mass += E.get_specific_wet_mass()

@@ -21,6 +21,8 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/needs_dampers = FALSE
 	var/list/inertial_dampers = list()
 	var/damping_strength = null
+	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
+
 
 /obj/effect/overmap/visitable/ship/Initialize()
 	. = ..()
@@ -174,6 +176,9 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/get_speed_sensor_increase()
 	return min(get_speed() * 1000, 50) //Engines should never increase sensor visibility by more than 50.
+
+/obj/effect/overmap/proc/get_vessel_mass() //Same as above.
+	return vessel_mass
 
 #undef MOVING
 #undef SANITIZE_SPEED

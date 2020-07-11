@@ -12,11 +12,9 @@
 	var/halted = FALSE
 	var/can_move = FALSE
 	var/sensor_visibility = 10	 //how likely it is to increase identification process each scan.
-	var/list/consoles
-	var/list/map_z = list()
 
 	var/vessel_mass = 10000             // metric tonnes, very rough number, affects acceleration provided by engines
-	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
+
 	var/max_speed = 1/(1 SECOND)        // "speed of light" for the ship, in turfs/tick.
 	var/min_speed = 1/(2 MINUTES)       // Below this, we round speed to 0 to avoid math errors.
 
@@ -108,12 +106,6 @@
 	CHANGE_SPEED_BY(speed[2], n_y, min_speed)
 	update_icon()
 
-/obj/effect/overmap/proc/get_delta_v() //This is here for inheritance reasons.
-	return
-
-/obj/effect/overmap/proc/get_vessel_mass() //Same as above.
-	return vessel_mass
-
 /obj/effect/overmap/proc/can_burn()
 	if(halted)
 		return FALSE
@@ -172,18 +164,9 @@
 			adjust_speed(0, -SIGN(speed[2]) * min(delta_v, abs(speed[2])))
 		last_burn = world.time
 
-
-/obj/effect/overmap/proc/get_specific_wet_mass()
-	return
-
 /obj/effect/overmap/proc/handle_overmap_pixel_movement()
 	pixel_x = position[1] * (world.icon_size/2)
 	pixel_y = position[2] * (world.icon_size/2)
 
-	for(var/obj/machinery/computer/ship/machine in consoles)
-		if(machine.z in map_z)
-			for(var/weakref/W in machine.viewers)
-				var/mob/M = W.resolve()
-				if(istype(M) && M.client)
-					M.client.pixel_x = pixel_x
-					M.client.pixel_y = pixel_y
+/obj/effect/overmap/proc/get_delta_v()
+	return
