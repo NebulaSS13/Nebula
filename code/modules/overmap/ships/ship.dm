@@ -5,7 +5,7 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	desc = "Space faring vessel."
 	icon_state = "ship"
 	requires_contact = TRUE
-	movement_handler_type = /datum/extension/overmap_movement/ship
+	can_move = TRUE
 
 	var/moving_state = "ship_moving"
 
@@ -103,16 +103,15 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	return round(num_burns / burns_per_grid)
 
 /obj/effect/overmap/visitable/ship/Process()
+	. = ..()
 	damping_strength = 0
 	for(var/datum/ship_inertial_damper/I in inertial_dampers)
 		var/obj/machinery/inertial_damper/ID = I.holder
 		damping_strength += ID.get_damping_strength(TRUE)
-	movement.do_overmap_movement()
 	sensor_visibility = min(round(base_sensor_visibility + get_speed_sensor_increase(), 1), 100)
 
 /obj/effect/overmap/visitable/ship/on_update_icon()
-	if(movement)
-		movement.handle_pixel_movement()
+	handle_overmap_pixel_movement()
 	if(!is_still())
 		icon_state = moving_state
 		set_dir(get_heading())

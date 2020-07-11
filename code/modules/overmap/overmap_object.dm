@@ -2,6 +2,7 @@
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
+	color = "#c0c0c0"
 
 	var/known = 1				 //shows up on nav computers automatically
 	var/scannable				 //if set to TRUE will show up on ship sensors for detailed scans, and will ping when detected by scanners.
@@ -9,6 +10,7 @@
 	var/requires_contact = FALSE //whether or not the effect must be identified by ship sensors before being seen.
 	var/instant_contact  = FALSE //do we instantly identify ourselves to any ship in sensors range?
 	var/halted = FALSE
+	var/can_move = FALSE
 	var/sensor_visibility = 10	 //how likely it is to increase identification process each scan.
 	var/list/consoles
 	var/list/map_z = list()
@@ -22,9 +24,6 @@
 	var/list/position = list(0,0)       // position within a tile.
 	var/last_burn = 0                   // worldtime when ship last acceleated
 	var/burn_delay = 1 SECOND           // how often ship can do burns
-
-	var/datum/extension/overmap_movement/movement //Movement handler.
-	var/movement_handler_type //The type, for setting extensions.
 
 //Overlay of how this object should look on other skyboxes
 /obj/effect/overmap/proc/get_skybox_representation()
@@ -48,9 +47,6 @@
 	if(requires_contact)
 		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
 	update_icon()
-	if(movement_handler_type)
-		set_extension(src, movement_handler_type)
-		movement = get_extension(src, movement_handler_type)
 
 /obj/effect/overmap/Crossed(var/obj/effect/overmap/visitable/other)
 	if(istype(other))
@@ -126,13 +122,67 @@
 	else
 		return TRUE
 
+/obj/effect/overmap/Process()
+	if(!halted && !is_still() && can_move)
+		var/list/deltas = list(0,0)
+		for(var/i = 1 to 2)
+			if(MOVING(speed[i], min_speed))
+				position[i] += speed[i] * OVERMAP_SPEED_CONSTANT
+				if(position[i] < 0)
+					deltas[i] = ceil(position[i])
+				else if(position[i] > 0)
+					deltas[i] = Floor(position[i])
+				if(deltas[i] != 0)
+					position[i] -= deltas[i]
+					position[i] += (deltas[i] > 0) ? -1 : 1
+
+		update_icon()
+		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
+		if(newloc && loc != newloc)
+			Move(newloc)
+			handle_wraparound()
+
 /obj/effect/overmap/proc/accelerate(var/direction, var/accel_limit)
-	if(movement)
-		movement.accelerate(direction, accel_limit)
+	var/actual_accel_limit = accel_limit / KM_OVERMAP_RATE
+	if(can_burn())
+		last_burn = world.time
+		var/delta_v = get_delta_v() / KM_OVERMAP_RATE
+		var/partial_power = Clamp(actual_accel_limit / delta_v, 0, 1)
+		var/acceleration = min(get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE, actual_accel_limit)
+		if(direction & EAST)
+			adjust_speed(acceleration, 0)
+		if(direction & WEST)
+			adjust_speed(-acceleration, 0)
+		if(direction & NORTH)
+			adjust_speed(0, acceleration)
+		if(direction & SOUTH)
+			adjust_speed(0, -acceleration)
+
 
 /obj/effect/overmap/proc/decelerate()
-	if(movement)
-		movement.decelerate()
+	if(((speed[1]) || (speed[2])) && can_burn())
+		if (speed[1])
+			var/partial_power = Clamp(speed[1] / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
+			var/delta_v = get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
+			adjust_speed(-SIGN(speed[1]) * min(delta_v, abs(speed[1])), 0)
+		if (speed[2])
+			var/partial_power = Clamp(speed[2] / (get_delta_v() / KM_OVERMAP_RATE), 0, 1)
+			var/delta_v = get_delta_v(TRUE, partial_power) / KM_OVERMAP_RATE
+			adjust_speed(0, -SIGN(speed[2]) * min(delta_v, abs(speed[2])))
+		last_burn = world.time
+
 
 /obj/effect/overmap/proc/get_specific_wet_mass()
 	return
+
+/obj/effect/overmap/proc/handle_overmap_pixel_movement()
+	pixel_x = position[1] * (world.icon_size/2)
+	pixel_y = position[2] * (world.icon_size/2)
+
+	for(var/obj/machinery/computer/ship/machine in consoles)
+		if(machine.z in map_z)
+			for(var/weakref/W in machine.viewers)
+				var/mob/M = W.resolve()
+				if(istype(M) && M.client)
+					M.client.pixel_x = pixel_x
+					M.client.pixel_y = pixel_y
