@@ -104,7 +104,7 @@
 
 /obj/item/stock_parts/computer/card_slot/attackby(obj/item/card/id/I, mob/living/user)
 	if(!istype(I))
-		return
+		return ..()
 	insert_id(I, user)
 	return TRUE
 
