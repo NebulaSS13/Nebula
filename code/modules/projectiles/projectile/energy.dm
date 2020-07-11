@@ -51,13 +51,39 @@
 	brightness = 15
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
-	light_colour = pick("#e58775", "#ffffff", "#90ff90", "#a09030")
+	light_colour = pick("#e58775", "#ffffff", "#faa159", "#e34e0e")
 	set_light(1, 1, 4, 2, light_colour)
 	..() //initial flash
 
 	//residual illumination
 	new /obj/effect/effect/smoke/illumination(loc, rand(190,240), 8, 1, light_colour) //same lighting power as flare
 
+	var/turf/TO = get_turf(src)
+	var/area/AO = TO.loc
+	if(AO && (AO.area_flags & AREA_FLAG_EXTERNAL))
+		//Everyone saw that!
+		for(var/mob/living/mob in GLOB.living_mob_list_)
+			var/turf/T = get_turf(mob)
+			var/area/A1 = T.loc
+			if(T && (T != TO) && (TO.z == T.z) && !mob.blinded)
+				var/visible = FALSE
+				if(A1 && (A1.area_flags & AREA_FLAG_EXTERNAL))
+					visible = TRUE
+				else
+					var/dir = get_dir(T,TO)
+					var/turf/pos = T
+					for (var/j in 0 to 5)
+						pos = get_step(pos, dir)
+						if(pos.opacity)
+							break
+						A1 = pos.loc
+						if(A1 && (A1.area_flags & AREA_FLAG_EXTERNAL))
+							visible = TRUE
+							break
+				if(visible)
+					to_chat(mob, SPAN_NOTICE("You see a bright light to \the [dir2text(get_dir(T,TO))]"))
+			CHECK_TICK
+				
 /obj/item/projectile/energy/electrode	//has more pain than a beam because it's harder to hit 
 	name = "electrode"
 	icon_state = "spark"

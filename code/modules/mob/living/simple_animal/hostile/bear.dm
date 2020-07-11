@@ -32,7 +32,7 @@
 	meat_amount = 10
 	bone_amount = 20
 	skin_amount = 20
-	skin_material = MAT_SKIN_FUR_HEAVY
+	skin_material = /decl/material/solid/skin/fur/heavy
 
 	var/stance_step = 0
 

@@ -86,6 +86,12 @@
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
 
+/obj/item/clothing/accessory/armguards/craftable
+	material = /decl/material/solid/metal/steel
+	material_armor_multiplier = 1
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
+
 //Leg guards
 /obj/item/clothing/accessory/legguards
 	name = "leg guards"
@@ -105,6 +111,12 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
+
+/obj/item/clothing/accessory/legguards/craftable
+	material = /decl/material/solid/metal/steel
+	material_armor_multiplier = 1
+	applies_material_colour = TRUE
+	applies_material_name =  TRUE
 
 //Decorative attachments
 /obj/item/clothing/accessory/armor/tag

@@ -10,7 +10,7 @@
 	obj_flags = OBJ_FLAG_NOFALL
 	handle_generic_blending = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 	var/hatch_open = FALSE
 	var/decl/flooring/tiling/plated_tile

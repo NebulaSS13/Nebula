@@ -5,7 +5,7 @@
 	icon = 'icons/obj/items/device/radio/headset.dmi'
 	icon_state = "headset"
 	item_state = "headset"
-	material = MAT_ALUMINIUM
+	material = /decl/material/solid/metal/aluminium
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
 

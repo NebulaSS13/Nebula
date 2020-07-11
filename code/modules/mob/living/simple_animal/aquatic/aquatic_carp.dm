@@ -12,8 +12,8 @@
 	meat_amount = 3
 	bone_amount = 5
 	skin_amount = 5
-	bone_material = MAT_BONE_FISH
-	skin_material = MAT_SKIN_FISH
+	bone_material = /decl/material/solid/bone/fish
+	skin_material = /decl/material/solid/skin/fish
 
 /mob/living/simple_animal/hostile/retaliate/aquatic/carp/Initialize()
 	. = ..()

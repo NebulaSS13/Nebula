@@ -5,11 +5,11 @@
 	icon_state = "analyzer"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	material = MAT_ALUMINIUM
+	material = /decl/material/solid/metal/aluminium
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_GLASS = MATTER_AMOUNT_TRACE,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/integrated_electronics/analyzer/afterattack(var/atom/A, var/mob/living/user)

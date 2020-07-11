@@ -88,7 +88,7 @@
 	. = ..()
 
 /obj/machinery/door/firedoor/get_material()
-	return decls_repository.get_decl(MAT_STEEL)
+	return decls_repository.get_decl(/decl/material/solid/metal/steel)
 
 /obj/machinery/door/firedoor/examine(mob/user, distance)
 	. = ..()

@@ -39,10 +39,10 @@
 	use_power_cost = 200
 	origin_tech = "{'magnets':3,'biotech':3,'engineering':5}"
 	device = /obj/item/scanner/health
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_GLASS = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rig_module/device/defib
@@ -68,11 +68,11 @@
 	module_cooldown = 0
 	origin_tech = "{'materials':6,'powerstorage':4,'engineering':6}"
 	device = /obj/item/pickaxe/diamonddrill
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_DIAMOND = MATTER_AMOUNT_TRACE,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rig_module/device/anomaly_scanner
@@ -87,10 +87,10 @@
 	selectable = 0
 	device = /obj/item/ano_scanner
 	origin_tech = "{'bluespace':4,'magnets':4,'engineering':6}"
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_GLASS = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rig_module/device/orescanner
@@ -106,10 +106,10 @@
 	use_power_cost = 200
 	device = /obj/item/scanner/mining
 	origin_tech = "{'materials':4,'magnets':4,'engineering':6}"
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	matter = list(
-		MAT_STEEL = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_GLASS = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rig_module/device/orescanner/activate()
@@ -130,12 +130,12 @@
 	use_power_cost = 300
 	origin_tech = "{'materials':6,'magnets':5,'engineering':7}"
 	device = /obj/item/rcd/mounted
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE,
-		MAT_GOLD = MATTER_AMOUNT_TRACE,
-		MAT_SILVER = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	
 /obj/item/rig_module/device/Initialize()
@@ -178,7 +178,7 @@
 
 	charges = list(
 		list("oxygel",       "oxygel",       /decl/material/liquid/oxy_meds,     80),
-		list("adrenaline",   "adrenaline",   /decl/material/liquid/adrenaline,   80),
+		list("stabilizer",   "stabilizer",   /decl/material/liquid/stabilizer,   80),
 		list("antitoxins",   "antitoxins",   /decl/material/liquid/antitoxins,   80),
 		list("antirads",     "antirads",     /decl/material/liquid/antirads,     80),
 		list("antibiotics",  "antibiotics",  /decl/material/liquid/antibiotics,  80),
@@ -193,7 +193,7 @@
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
 		list("oxygen",       "oxygel",       /decl/material/liquid/oxy_meds,          20),
-		list("adrenaline",   "adrenaline",   /decl/material/liquid/adrenaline,        20),
+		list("stabilizer",   "stabilizer",   /decl/material/liquid/stabilizer,        20),
 		list("antitoxins",   "antitoxins",   /decl/material/liquid/antitoxins,        20),
 		list("glucose",      "glucose",      /decl/material/liquid/nutriment/glucose, 80),
 		list("antirads",    "antirads",      /decl/material/liquid/antirads,          20),
@@ -384,10 +384,10 @@
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
 	origin_tech = "{'materials':6,'engineering':7}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_GLASS = MATTER_AMOUNT_TRACE
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 	var/obj/item/tank/jetpack/rig/jets
 
@@ -505,10 +505,10 @@
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = "{'materials':5,'engineering':5}"
 	device = /obj/item/matter_decompiler
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_GLASS = MATTER_AMOUNT_TRACE
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/rig_module/cooling_unit
@@ -518,10 +518,10 @@
 	interface_name = "mounted cooling unit"
 	interface_desc = "A heat sink with a liquid cooled radiator."
 	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 	var/charge_consumption = 0.5 KILOWATTS
 	var/max_cooling = 12

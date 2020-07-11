@@ -1,8 +1,6 @@
 /obj/item/clothing/gloves/color
 	desc = "A pair of gloves, they don't look special in any way."
-	icon = 'icons/clothing/hands/gloves_generic.dmi'
 	icon_state = "world"
-	on_mob_icon = 'icons/clothing/hands/gloves_generic.dmi'
 	sprite_sheets = null
 
 /obj/item/clothing/gloves/color/white

@@ -4,7 +4,7 @@
 	icon_state = "world"
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
 	on_mob_icon = 'icons/clothing/feet/generic_shoes.dmi'
-	material = MAT_LEATHER_GENERIC
+	material = /decl/material/solid/leather
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	cold_protection = FEET

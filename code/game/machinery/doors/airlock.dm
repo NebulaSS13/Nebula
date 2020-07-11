@@ -90,7 +90,7 @@ var/list/airlock_overlays = list()
 	var/emag_file = 'icons/obj/doors/station/emag.dmi'
 
 /obj/machinery/door/airlock/get_material()
-	return decls_repository.get_decl(mineral ? mineral : MAT_STEEL)
+	return decls_repository.get_decl(mineral ? mineral : /decl/material/solid/metal/steel)
 
 /obj/machinery/door/airlock/get_codex_value()
 	return "airlock"

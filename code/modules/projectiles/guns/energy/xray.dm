@@ -13,9 +13,9 @@
 	charge_cost = 15
 	max_shots = 10
 	combustion = 0
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_URANIUM = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 

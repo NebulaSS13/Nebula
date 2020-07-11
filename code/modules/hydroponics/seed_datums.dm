@@ -1270,7 +1270,7 @@
 		/decl/material/liquid/bromide = list(3,8)
 	)
 	kitchen_tag = "algae"
-	exude_gasses = list(MAT_METHYL_BROMIDE = 3)
+	exude_gasses = list(/decl/material/gas/methyl_bromide = 3)
 
 /datum/seed/algae/New()
 	..()

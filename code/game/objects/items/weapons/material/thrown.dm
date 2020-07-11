@@ -24,4 +24,4 @@
 		user.throw_item(target)
 
 /obj/item/material/star/ninja
-	material = MAT_URANIUM
+	material = /decl/material/solid/metal/uranium

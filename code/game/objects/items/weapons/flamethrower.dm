@@ -11,7 +11,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = "{'combat':1}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/status = 0
 	var/throw_amount = 100
 	var/lit = 0	//on or off
@@ -189,7 +189,9 @@
 	//TODO: DEFERRED Consider checking to make sure tank pressure is high enough before doing this...
 	//Transfer 5% of current tank air contents to turf
 	var/datum/gas_mixture/air_transfer = tank.remove_air_ratio(0.02*(throw_amount/100))
-	target.add_fluid(air_transfer.get_by_flag(XGM_GAS_FUEL), /decl/material/liquid/fuel)
+	var/obj/effect/fluid/F = locate() in target
+	if(!F) F = new(target)
+	F.reagents.add_reagent(/decl/material/liquid/fuel, air_transfer.get_by_flag(XGM_GAS_FUEL))
 	air_transfer.remove_by_flag(XGM_GAS_FUEL, 0)
 	target.assume_air(air_transfer)
 	//Burn it based on transfered gas

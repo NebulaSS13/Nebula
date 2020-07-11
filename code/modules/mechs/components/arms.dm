@@ -3,7 +3,7 @@
 	pixel_y = -12
 	icon_state = "loader_arms"
 	has_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	power_use = 10
 
 	var/melee_damage = 15

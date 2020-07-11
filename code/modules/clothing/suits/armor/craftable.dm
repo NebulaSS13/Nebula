@@ -5,10 +5,12 @@
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	icon_state = "improvised_armour"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	armor_degradation_speed = 1
 	armor_type = /datum/extension/armor/ablative
 	material_armor_multiplier = 1
+	valid_accessory_slots = list(ACCESSORY_SLOT_OVER, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_OVER, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
 
 /obj/item/clothing/suit/armor/crafted/set_material(new_material)
 	. = ..()
@@ -23,14 +25,14 @@
 		desc = initial(desc)
 
 /obj/item/clothing/suit/armor/crafted/cardboard
-	material = MAT_CARDBOARD
+	material = /decl/material/solid/cardboard
 /obj/item/clothing/suit/armor/crafted/leather
-	material = MAT_LEATHER_GENERIC
+	material = /decl/material/solid/leather
 /obj/item/clothing/suit/armor/crafted/copper
-	material = MAT_COPPER
+	material = /decl/material/solid/metal/copper
 /obj/item/clothing/suit/armor/crafted/diamond
-	material = MAT_DIAMOND
+	material = /decl/material/solid/gemstone/diamond
 /obj/item/clothing/suit/armor/crafted/gold
-	material = MAT_GOLD
+	material = /decl/material/solid/metal/gold
 /obj/item/clothing/suit/armor/crafted/supermatter
-	material = MAT_SUPERMATTER
+	material = /decl/material/solid/supermatter

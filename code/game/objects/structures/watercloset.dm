@@ -75,8 +75,9 @@
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
 			var/obj/effect/fluid/F = locate() in T
 			var/adding = min(flood_amt-F?.reagents.total_volume, rand(30,50)*clogged)
-			if(adding)
-				T.add_fluid(adding, /decl/material/liquid/water)
+			if(adding > 0)
+				if(!F) F = new(T)
+				F.reagents.add_reagent(/decl/material/liquid/water, adding)
 
 /obj/structure/hygiene/proc/drain()
 	if(!can_drain) return
@@ -235,7 +236,7 @@
 
 /obj/structure/hygiene/shower/Initialize()
 	. = ..()
-	create_reagents(50)
+	create_reagents(5)
 
 /obj/structure/hygiene/shower/Destroy()
 	QDEL_NULL(sound_token)

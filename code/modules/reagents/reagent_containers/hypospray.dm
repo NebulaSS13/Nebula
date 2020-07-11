@@ -79,10 +79,10 @@
 	volume = 0
 	time = 0 // hyposprays are instant for conscious people
 	single_use = FALSE
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_SILVER = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	var/obj/item/chems/glass/beaker/vial/loaded_vial
 
@@ -205,5 +205,5 @@
 	name = "autoinjector"
 	band_color = COLOR_WHITE
 	starts_with = list()
-	material = MAT_PLASTIC
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)

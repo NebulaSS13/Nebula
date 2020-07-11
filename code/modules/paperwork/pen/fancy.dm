@@ -4,7 +4,7 @@
 	icon_state = "fancy"
 	throwforce = 1 //pointy
 	colour = "#1c1713" //dark ashy brownish
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	isfancy = TRUE
 
 /obj/item/pen/fancy/quill

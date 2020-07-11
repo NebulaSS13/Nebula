@@ -10,7 +10,7 @@
 	melee_accuracy_bonus = -10
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'engineering':1}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	center_of_mass = @"{'x':16,'y':20}"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	applies_material_colour = TRUE
@@ -62,11 +62,11 @@
 	handle_color = COLOR_MAROON
 
 /obj/item/crowbar/gold
-	material = MAT_GOLD
+	material = /decl/material/solid/metal/gold
 
 /obj/item/crowbar/cheap
 	name = "discount pry bar"
 	desc = "A plastic bar with a wedge. It looks so poorly manufactured that you're sure it will break if you try to use it."
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	w_class = ITEM_SIZE_TINY
 	shape_variations = 6

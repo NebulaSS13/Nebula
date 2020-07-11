@@ -141,7 +141,7 @@
 /obj/random/medical/spawn_choices()
 	return list(/obj/random/medical/lite = 21,
 				/obj/item/bodybag = 2,
-				/obj/item/chems/glass/bottle/adrenaline = 2,
+				/obj/item/chems/glass/bottle/stabilizer = 2,
 				/obj/item/chems/glass/bottle/antitoxin = 2,
 				/obj/item/storage/pill_bottle = 2,
 				/obj/item/storage/pill_bottle/painkillers = 1,
@@ -151,7 +151,7 @@
 				/obj/item/storage/pill_bottle/brute_meds = 1,
 				/obj/item/chems/syringe/antitoxin = 2,
 				/obj/item/chems/syringe/antibiotic = 1,
-				/obj/item/chems/syringe/adrenaline = 2,
+				/obj/item/chems/syringe/stabilizer = 2,
 				/obj/item/storage/box/freezer = 1,
 				/obj/item/stack/nanopaste = 1)
 
@@ -744,8 +744,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/gloves
 	name = "random gloves"
 	desc = "This is a random pair of gloves."
-	icon = 'icons/obj/clothing/obj_hands.dmi'
-	icon_state = "rainbow"
+	icon = 'icons/clothing/hands/gloves_generic.dmi'
+	icon_state = "inventory"
 
 /obj/random/gloves/spawn_choices()
 	return list(/obj/item/clothing/gloves/insulated = 3,

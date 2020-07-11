@@ -11,6 +11,7 @@
 		QDEL_NULL(skillset)
 	QDEL_NULL_LIST(grabbed_by)
 	clear_fullscreen()
+	QDEL_NULL(ai)
 	if(client)
 		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
@@ -52,7 +53,14 @@
 		move_intent = move_intents[1]
 	if(ispath(move_intent))
 		move_intent = decls_repository.get_decl(move_intent)
+	var/ai_type = get_ai_type()
+	if(ai_type)
+		ai = new ai_type(src)
 	START_PROCESSING(SSmobs, src)
+
+/mob/proc/get_ai_type()
+	if (ispath(ai))
+		return ai
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	if(!client)	return
@@ -236,6 +244,9 @@
 	return incapacitated(INCAPACITATION_KNOCKDOWN)
 
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
+	if(status_flags & ENABLE_AI)
+		return 1
+
 	if ((incapacitation_flags & INCAPACITATION_STUNNED) && stunned)
 		return 1
 
@@ -1048,11 +1059,6 @@
 
 /mob/proc/check_has_eyes()
 	return TRUE
-
-/mob/fluid_act(var/datum/reagents/fluids)
-	wash_mob(src)
-	fluids.touch_mob(src)
-	..()
 
 /mob/proc/handle_pre_transformation()
 	return

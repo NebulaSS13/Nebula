@@ -5,7 +5,7 @@
 	icon_state = "oxycandle"
 	item_state = "oxycandle"
 	w_class = ITEM_SIZE_SMALL // Should fit into internal's box or maybe pocket
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	light_color = "#e58775"
 	light_outer_range = 2
 	light_max_bright = 1
@@ -36,8 +36,8 @@
 		air_contents = new /datum/gas_mixture()
 		air_contents.volume = 200 //liters
 		air_contents.temperature = T20C
-		var/list/air_mix = list(MAT_OXYGEN = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
-		air_contents.adjust_multi(MAT_OXYGEN, air_mix[MAT_OXYGEN])
+		var/list/air_mix = list(/decl/material/gas/oxygen = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
+		air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
 		START_PROCESSING(SSprocessing, src)
 
 // Process of Oxygen candles releasing air. Makes 200 volume of oxygen
@@ -65,8 +65,8 @@
 		return
 	environment.merge(removed)
 	volume -= 200
-	var/list/air_mix = list(MAT_OXYGEN = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
-	air_contents.adjust_multi(MAT_OXYGEN, air_mix[MAT_OXYGEN])
+	var/list/air_mix = list(/decl/material/gas/oxygen = 1 * (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature))
+	air_contents.adjust_multi(/decl/material/gas/oxygen, air_mix[/decl/material/gas/oxygen])
 
 /obj/item/oxycandle/on_update_icon()
 	if(on == 1)

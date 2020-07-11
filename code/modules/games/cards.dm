@@ -176,7 +176,7 @@
 	H.update_icon()
 	H.name = "hand of [(H.cards.len)] cards"
 	user.visible_message("\The [user] draws a card.")
-	to_chat(user, "It's the <b>[P]</b>.")
+	to_chat(user, "It's \the <b>[APPEND_FULLSTOP_IF_NEEDED(P.name)]</b>")
 
 /obj/item/deck/verb/deal_card()
 
@@ -215,9 +215,10 @@
 	else
 		user.visible_message("\The [user] deals a card to \the [target].")
 
-	H.throw_at(get_step(target, ismob(target) ? target.dir : target),10,1,user)
+	H.throw_at(get_step(target, ismob(target) ? target.dir : target), 10, 1,user)
 
 /obj/item/hand/attackby(obj/O, mob/user)
+
 	if(istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
 		for(var/datum/playingcard/P in cards)
@@ -225,9 +226,22 @@
 		H.concealed = src.concealed
 		qdel(src)
 		H.update_icon()
-		H.name = "hand of [(H.cards.len)] cards"
-		return
-	..()
+		H.name = "hand of [(H.cards.len)] card\s"
+		return TRUE
+
+	if(length(cards) == 1 && istype(O, /obj/item/pen))
+		var/datum/playingcard/P = cards[1]
+		if(lowertext(P.name) != "blank card")
+			to_chat(user, SPAN_WARNING("You cannot write on that card."))
+			return TRUE
+		var/cardtext = sanitize(input(user, "What do you wish to write on the card?", "Card Editing") as text|null, MAX_PAPER_MESSAGE_LEN)
+		if(!cardtext || !P || (loc != user && !Adjacent(user)) || length(cards) <= 0 || cards[1] != P)
+			return TRUE
+		P.name = cardtext
+		P.card_icon = "cag_white_card"
+		return TRUE
+
+	. = ..()
 
 /obj/item/deck/attack_self(var/mob/user)
 
@@ -322,7 +336,7 @@
 	if((!concealed || src.loc == user) && cards.len)
 		to_chat(user, "It contains: ")
 		for(var/datum/playingcard/P in cards)
-			to_chat(user, "The [P.name].")
+			to_chat(user, "\The [APPEND_FULLSTOP_IF_NEEDED(P.name)]")
 
 /obj/item/hand/on_update_icon(var/direction = 0)
 	if(!cards.len)

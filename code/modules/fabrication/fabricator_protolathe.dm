@@ -9,13 +9,13 @@
 	base_type = /obj/machinery/fabricator/protolathe
 	fabricator_class = FABRICATOR_CLASS_PROTOLATHE
 	base_storage_capacity = list(
-		MAT_STEEL =     SHEET_MATERIAL_AMOUNT * 100,
-		MAT_ALUMINIUM = SHEET_MATERIAL_AMOUNT * 100,
-		MAT_PLASTIC =   SHEET_MATERIAL_AMOUNT * 100,
-		MAT_GLASS =     SHEET_MATERIAL_AMOUNT * 100,
-		MAT_GOLD =      SHEET_MATERIAL_AMOUNT * 100,
-		MAT_SILVER =    SHEET_MATERIAL_AMOUNT * 100,
-		MAT_PHORON =    SHEET_MATERIAL_AMOUNT * 100,
-		MAT_URANIUM =   SHEET_MATERIAL_AMOUNT * 100,
-		MAT_DIAMOND =   SHEET_MATERIAL_AMOUNT * 100
+		/decl/material/solid/metal/steel =     SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/metal/aluminium = SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/plastic =   SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/glass =     SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/metal/gold =      SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/metal/silver =    SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/phoron =    SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/metal/uranium =   SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/gemstone/diamond =   SHEET_MATERIAL_AMOUNT * 100
 	)

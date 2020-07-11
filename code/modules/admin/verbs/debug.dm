@@ -357,7 +357,7 @@
 		if(Rad.anchored)
 			if(!Rad.P)
 				var/obj/item/tank/phoron/Phoron = new/obj/item/tank/phoron(Rad)
-				Phoron.air_contents.gas[MAT_PHORON] = 70
+				Phoron.air_contents.gas[/decl/material/solid/phoron] = 70
 				Rad.drainratio = 0
 				Rad.P = Phoron
 				Phoron.forceMove(Rad)

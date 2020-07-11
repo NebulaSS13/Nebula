@@ -8,8 +8,8 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	material = MAT_ALUMINIUM
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/aluminium
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	var/scan_title
 	var/scan_data
 	var/window_width = 450

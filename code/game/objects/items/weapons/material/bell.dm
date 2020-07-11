@@ -7,7 +7,7 @@
 	icon_state = "bell"
 	thrown_material_force_multiplier = 0.3
 	hitsound = 'sound/items/oneding.ogg'
-	material = MAT_ALUMINIUM
+	material = /decl/material/solid/metal/aluminium
 
 /obj/item/material/bell/attack_hand(mob/user)
 	if (user.a_intent == I_GRAB)

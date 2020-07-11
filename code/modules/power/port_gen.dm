@@ -166,7 +166,7 @@
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
 	var/datum/gas_mixture/environment = loc.return_air()
 	if(environment)
-		environment.adjust_gas(MAT_CO, 0.05*power_output)
+		environment.adjust_gas(/decl/material/gas/carbon_monoxide, 0.05*power_output)
 
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet
@@ -261,7 +261,7 @@
 	var/phoron = (sheets+sheet_left)*20
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
-		environment.adjust_gas_temp(MAT_PHORON, phoron/10, operating_temperature + T0C)
+		environment.adjust_gas_temp(/decl/material/solid/phoron, phoron/10, operating_temperature + T0C)
 
 	sheets = 0
 	sheet_left = 0

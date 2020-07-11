@@ -16,7 +16,7 @@
 	density = 0
 	dir = NORTH
 	w_class = ITEM_SIZE_NORMAL
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	tool_interaction_flags = TOOL_INTERACTION_ALL
 
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/windoor/electronics = null

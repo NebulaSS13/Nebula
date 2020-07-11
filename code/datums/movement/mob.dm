@@ -284,7 +284,7 @@
 /datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction, var/old_turf)
 	. = 0
 	// TODO: Look into making grabs use movement events instead, this is a mess.
-	for(var/obj/item/grab/G in mob.get_active_grabs())
+	for(var/obj/item/grab/G in mob?.get_active_grabs())
 		if(G.assailant == G.affecting)
 			return
 		if(G.affecting.anchored)

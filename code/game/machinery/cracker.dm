@@ -58,7 +58,7 @@
 			// Gas production.
 			var/datum/gas_mixture/produced = new
 			var/gen_amt = min(1, (gas_generated_per_tick * (consuming/fluid_consumption_per_tick)))
-			produced.adjust_gas(MAT_OXYGEN,  gen_amt)
-			produced.adjust_gas(MAT_HYDROGEN, gen_amt * 2)
+			produced.adjust_gas(/decl/material/gas/oxygen,  gen_amt)
+			produced.adjust_gas(/decl/material/gas/hydrogen, gen_amt * 2)
 			produced.temperature = T20C //todo water temperature
 			air_contents.merge(produced)

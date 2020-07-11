@@ -11,7 +11,7 @@
 	throw_speed = 2
 	throw_range = 10
 	force = 10.0
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
 	var/spray_particles = 3

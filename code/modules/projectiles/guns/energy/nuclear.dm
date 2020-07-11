@@ -8,10 +8,10 @@
 	force = 8 //looks heavier than a pistol
 	self_recharge = 1
 	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_URANIUM = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 
 	firemodes = list(

@@ -14,7 +14,7 @@
 	one_hand_penalty = 0
 	fire_sound = 'sound/weapons/foamblaster.ogg'
 	fire_sound_text = "a pleasing 'pomp'"
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 
 	var/max_darts = 1
 	var/list/darts = new/list()

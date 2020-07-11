@@ -12,6 +12,7 @@
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
+#define ENABLE_AI	0x8000	// Regardless of player control, the mob is using AI.
 
 #define BORGMESON 0x1
 #define BORGTHERM 0x2
@@ -224,10 +225,10 @@
 #define BP_BY_DEPTH list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
 
 // Prosthetic helpers.
-#define BP_IS_PROSTHETIC(org) (org.status & ORGAN_PROSTHETIC)
-#define BP_IS_ASSISTED(org)   (org.status & ORGAN_ASSISTED)
-#define BP_IS_BRITTLE(org)    (org.status & ORGAN_BRITTLE)
-#define BP_IS_CRYSTAL(org)    (org.status & ORGAN_CRYSTAL)
+#define BP_IS_PROSTHETIC(org) (!QDELETED(org) && (org.status & ORGAN_PROSTHETIC))
+#define BP_IS_ASSISTED(org)   (!QDELETED(org) && (org.status & ORGAN_ASSISTED))
+#define BP_IS_BRITTLE(org)    (!QDELETED(org) && (org.status & ORGAN_BRITTLE))
+#define BP_IS_CRYSTAL(org)    (!QDELETED(org) && (org.status & ORGAN_CRYSTAL))
 
 // Limb flag helpers
 #define BP_IS_DEFORMED(org) (org.limb_flags & ORGAN_FLAG_DEFORMED)

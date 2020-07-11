@@ -12,7 +12,7 @@
 	throw_speed = 2
 	throw_range = 5
 	origin_tech = "{'materials':1}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes

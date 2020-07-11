@@ -19,8 +19,8 @@
 		slot_l_hand_str = "welding",
 		slot_r_hand_str = "welding",
 		)
-	material = MAT_STEEL
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)

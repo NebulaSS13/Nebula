@@ -23,20 +23,20 @@
 
 /datum/artifact_effect/gas/oxygen
 	name = "O2 creation"
-	spawned_gas = MAT_OXYGEN
+	spawned_gas = /decl/material/gas/oxygen
 
 /datum/artifact_effect/gas/phoron
 	name = "phoron creation"
-	spawned_gas = MAT_PHORON
+	spawned_gas = /decl/material/solid/phoron
 
 /datum/artifact_effect/gas/sleeping
 	name = "N2O creation"
-	spawned_gas = MAT_N2O
+	spawned_gas = /decl/material/gas/nitrous_oxide
 
 /datum/artifact_effect/gas/nitro
 	name = "N2 creation"
-	spawned_gas = MAT_NITROGEN
+	spawned_gas = /decl/material/gas/nitrogen
 
 /datum/artifact_effect/gas/co2
 	name = "CO2 creation"
-	spawned_gas = MAT_CO2
+	spawned_gas = /decl/material/gas/carbon_dioxide

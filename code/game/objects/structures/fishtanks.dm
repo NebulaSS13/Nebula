@@ -89,9 +89,9 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 	. = ..()
 	if(reagents && reagents.total_volume)
 		var/turf/T = get_turf(src)
-		if(T)
-			T.add_fluid(reagents.total_volume * TANK_WATER_MULTIPLIER)
-		reagents.clear_reagents()
+		var/obj/effect/fluid/F = locate() in T
+		if(!F) F = new(T)
+		reagents.trans_to_holder(F.reagents, reagents.total_volume)
 
 GLOBAL_LIST_INIT(aquarium_states_and_layers, list(
 	"b" = FLY_LAYER - 0.02,

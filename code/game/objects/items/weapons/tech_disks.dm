@@ -3,7 +3,7 @@
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL
-	matter = list(MAT_PLASTIC = 30, MAT_STEEL = 30, MAT_GLASS = 10)
+	matter = list(/decl/material/solid/plastic = 30, /decl/material/solid/metal/steel = 30, /decl/material/solid/glass = 10)
 
 /obj/item/disk/tech_disk
 	name = "fabricator data disk"

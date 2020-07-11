@@ -44,9 +44,9 @@
 	siemens_coefficient =     0
 	body_temperature =        null
 
-	breath_type =             MAT_METHYL_BROMIDE
-	exhale_type =             MAT_METHANE
-	poison_types =            list(MAT_PHORON)
+	breath_type =             /decl/material/gas/methyl_bromide
+	exhale_type =             /decl/material/gas/methane
+	poison_types =            list(/decl/material/solid/phoron)
 
 	reagent_tag =             IS_MANTID
 	genders =                 list(MALE)
@@ -238,7 +238,7 @@
 	antaghud_offset_y = 8
 	min_age = 8
 	max_age = 40
-	skin_material = MAT_SKIN_CHITIN
+	skin_material = /decl/material/solid/skin/insect
 	bone_material = null
 	speech_sounds = list('sound/voice/bug.ogg')
 	speech_chance = 2

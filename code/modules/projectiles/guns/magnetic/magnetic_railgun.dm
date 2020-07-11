@@ -79,11 +79,11 @@
 	load_type = /obj/item/magnetic_ammo
 	projectile_type = /obj/item/projectile/bullet/magnetic/flechette
 	loaded = /obj/item/magnetic_ammo
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_SILVER = MATTER_AMOUNT_TRACE,
-		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	firemodes = list(
 		list(mode_name="semiauto",    burst=1, fire_delay=0,     one_hand_penalty=1, burst_accuracy=null, dispersion=null),

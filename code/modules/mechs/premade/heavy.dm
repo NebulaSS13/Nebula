@@ -33,7 +33,7 @@
 	action_delay = 15
 	max_damage = 90
 	power_use = 60
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/mech_component/propulsion/heavy
 	name = "heavy legs"
@@ -44,7 +44,7 @@
 	turn_delay = 5
 	max_damage = 160
 	power_use = 100
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/mech_component/sensors/heavy
 	name = "heavy sensors"
@@ -53,12 +53,12 @@
 	icon_state = "heavy_head"
 	max_damage = 120
 	power_use = 0
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 /obj/item/mech_component/sensors/heavy/prebuild()
 	..()
 	software = new(src)
-	software.installed_software = list(MECH_SOFTWARE_WEAPONS, MECH_SOFTWARE_ADVWEAPONS)
+	software.installed_software = list(MECH_SOFTWARE_WEAPONS)
 
 /obj/item/mech_component/chassis/heavy
 	name = "reinforced exosuit chassis"
@@ -71,8 +71,8 @@
 	mech_health = 500
 	power_use = 50
 	has_hardpoints = list(HARDPOINT_BACK)
-	material = MAT_STEEL
-	matter = list(MAT_URANIUM = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/mech_component/chassis/heavy/prebuild()
 	. = ..()

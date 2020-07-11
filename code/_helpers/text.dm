@@ -557,3 +557,7 @@ proc/TextPreview(var/string,var/len=40)
 	text = replacetext(text, ";", "")
 	text = replacetext(text, "&", "")
 	return text
+
+// Switch to use copytext_char() when 513 is in
+var/list/fullstop_alternatives = list(".", "!", "?")
+#define APPEND_FULLSTOP_IF_NEEDED(TXT) ((copytext(TXT, -1, 0) in global.fullstop_alternatives) ? TXT : "[TXT].")

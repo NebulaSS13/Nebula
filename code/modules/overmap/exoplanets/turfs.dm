@@ -149,11 +149,11 @@
 	if(!resources)
 		resources = list()
 	if(prob(70))
-		resources[MAT_GRAPHITE] = rand(3,5)
+		resources[/decl/material/solid/mineral/graphite] = rand(3,5)
 	if(prob(5))
-		resources[MAT_URANIUM] = rand(1,3)
+		resources[/decl/material/solid/metal/uranium] = rand(1,3)
 	if(prob(2))
-		resources[MAT_DIAMOND] = 1
+		resources[/decl/material/solid/gemstone/diamond] = 1
 
 /turf/simulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)

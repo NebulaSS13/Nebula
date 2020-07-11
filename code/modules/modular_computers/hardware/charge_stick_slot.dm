@@ -8,7 +8,7 @@
 	origin_tech = "{'programming':2}"
 	usage_flags = PROGRAM_ALL & ~PROGRAM_PDA
 	external_slot = TRUE
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 
 	var/can_write = TRUE
 	var/can_broadcast = FALSE

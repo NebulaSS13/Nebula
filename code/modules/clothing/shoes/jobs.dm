@@ -16,7 +16,7 @@
 	icon_state = "world"
 	icon = 'icons/clothing/feet/boots.dmi'
 	on_mob_icon = 'icons/clothing/feet/boots.dmi'
-	material = MAT_LEATHER_SYNTH
+	material = /decl/material/solid/leather/synth
 	applies_material_colour = TRUE
 	force = 3
 	armor = list(
@@ -47,7 +47,7 @@
 	icon_state = "world"
 	icon = 'icons/clothing/feet/boots.dmi'
 	on_mob_icon = 'icons/clothing/feet/boots.dmi'
-	material = MAT_LEATHER_SYNTH
+	material = /decl/material/solid/leather/synth
 	color = "#d88d4b"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 

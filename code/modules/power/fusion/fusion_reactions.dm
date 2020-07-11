@@ -18,50 +18,50 @@
 // Basic power production reactions.
 // This is not necessarily realistic, but it makes a basic failure more spectacular.
 /decl/fusion_reaction/hydrogen_hydrogen
-	p_react = MAT_HYDROGEN
-	s_react = MAT_HYDROGEN
+	p_react = /decl/material/gas/hydrogen
+	s_react = /decl/material/gas/hydrogen
 	energy_consumption = 1
 	energy_production = 2
-	products = list(MAT_HELIUM = 1)
+	products = list(/decl/material/gas/helium = 1)
 	priority = 10
 
 /decl/fusion_reaction/deuterium_deuterium
-	p_react = MAT_DEUTERIUM
-	s_react = MAT_DEUTERIUM
+	p_react = /decl/material/gas/hydrogen/deuterium
+	s_react = /decl/material/gas/hydrogen/deuterium
 	energy_consumption = 1
 	energy_production = 2
 	priority = 0
 
 // Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
-	p_react = MAT_DEUTERIUM
-	s_react = MAT_HELIUM
+	p_react = /decl/material/gas/hydrogen/deuterium
+	s_react = /decl/material/gas/helium
 	energy_consumption = 1
 	energy_production = 5
 	radiation = 2
 
 /decl/fusion_reaction/deuterium_tritium
-	p_react = MAT_DEUTERIUM
-	s_react = MAT_TRITIUM
+	p_react = /decl/material/gas/hydrogen/deuterium
+	s_react = /decl/material/gas/hydrogen/tritium
 	energy_consumption = 1
 	energy_production = 1
-	products = list(MAT_HELIUM = 1)
+	products = list(/decl/material/gas/helium = 1)
 	instability = 0.5
 	radiation = 3
 
 /decl/fusion_reaction/deuterium_lithium
-	p_react = MAT_DEUTERIUM
-	s_react = MAT_LITHIUM
+	p_react = /decl/material/gas/hydrogen/deuterium
+	s_react = /decl/material/solid/lithium
 	energy_consumption = 2
 	energy_production = 0
 	radiation = 3
-	products = list(MAT_TRITIUM= 1)
+	products = list(/decl/material/gas/hydrogen/tritium= 1)
 	instability = 1
 
 // Unideal/material production reactions
 /decl/fusion_reaction/oxygen_oxygen
-	p_react = MAT_OXYGEN
-	s_react = MAT_OXYGEN
+	p_react = /decl/material/gas/oxygen
+	s_react = /decl/material/gas/oxygen
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
@@ -69,27 +69,27 @@
 	products = list(MAT_SILICON = 1)
 
 /decl/fusion_reaction/iron_iron
-	p_react = MAT_IRON
-	s_react = MAT_IRON
-	products = list(MAT_SILVER = 10, MAT_GOLD = 10, MAT_PLATINUM = 10) // Not realistic but w/e
+	p_react = /decl/material/solid/metal/iron
+	s_react = /decl/material/solid/metal/iron
+	products = list(/decl/material/solid/metal/silver = 10, /decl/material/solid/metal/gold = 10, /decl/material/solid/metal/platinum = 10) // Not realistic but w/e
 	energy_consumption = 10
 	energy_production = 0
 	instability = 2
 	minimum_reaction_temperature = 10000
 
 /decl/fusion_reaction/phoron_hydrogen
-	p_react = MAT_HYDROGEN
-	s_react = MAT_PHORON
+	p_react = /decl/material/gas/hydrogen
+	s_react = /decl/material/solid/phoron
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
-	products = list(MAT_METALLIC_HYDROGEN = 1)
+	products = list(/decl/material/solid/metallic_hydrogen = 1)
 	minimum_reaction_temperature = 8000
 
 // VERY UNIDEAL REACTIONS.
 /decl/fusion_reaction/phoron_supermatter
-	p_react = MAT_SUPERMATTER
-	s_react = MAT_PHORON
+	p_react = /decl/material/solid/supermatter
+	s_react = /decl/material/solid/phoron
 	energy_consumption = 0
 	energy_production = 5
 	radiation = 40
@@ -116,7 +116,7 @@
 				H.hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
-		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == MAT_SUPERMATTER)
+		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == /decl/material/solid/supermatter)
 			explosion(get_turf(I), 1, 2, 3)
 			spawn(5)
 				if(I && I.loc)
@@ -129,8 +129,8 @@
 
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen
-	p_react = MAT_BORON
-	s_react = MAT_HYDROGEN
+	p_react = /decl/material/solid/boron
+	s_react = /decl/material/gas/hydrogen
 	minimum_energy_level = FUSION_HEAT_CAP * 0.5
 	energy_consumption = 3
 	energy_production = 15

@@ -16,7 +16,7 @@
 	desc = "A tank of oxygen."
 	icon_state = "oxygen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list(MAT_OXYGEN = 6*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE)
 	volume = 180
 
 /obj/item/tank/oxygen/yellow
@@ -31,7 +31,7 @@
 	desc = "A tank with an N2O/O2 gas mix."
 	icon_state = "anesthetic"
 	item_state = "an_tank"
-	starting_pressure = list(MAT_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, MAT_N2O = 6*ONE_ATMOSPHERE*N2STANDARD)
+	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE*O2STANDARD, /decl/material/gas/nitrous_oxide = 6*ONE_ATMOSPHERE*N2STANDARD)
 	volume = 270
 
 /*
@@ -41,7 +41,7 @@
 	name = "air tank"
 	desc = "Mixed anyone?"
 	icon_state = "oxygen"
-	starting_pressure = list(MAT_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, MAT_NITROGEN = 6*ONE_ATMOSPHERE*N2STANDARD)
+	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE*O2STANDARD, /decl/material/gas/nitrogen = 6*ONE_ATMOSPHERE*N2STANDARD)
 	volume = 180
 
 /*
@@ -54,7 +54,7 @@
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null	//they have no straps!
-	starting_pressure = list(MAT_PHORON = 3*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/solid/phoron = 3*ONE_ATMOSPHERE)
 
 /*
  * Hydrogen
@@ -66,7 +66,7 @@
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null
-	starting_pressure = list(MAT_HYDROGEN = 3*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/hydrogen = 3*ONE_ATMOSPHERE)
 
 /*
  * Emergency Oxygen
@@ -90,7 +90,7 @@
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon_state = "emergency"
 	gauge_icon = "indicator_emergency"
-	starting_pressure = list(MAT_OXYGEN = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/oxygen = 10*ONE_ATMOSPHERE)
 
 /obj/item/tank/emergency/oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
@@ -115,7 +115,7 @@
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon_state = "emergency_nitro"
 	gauge_icon = "indicator_emergency"
-	starting_pressure = list(MAT_NITROGEN = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/nitrogen = 10*ONE_ATMOSPHERE)
 
 /obj/item/tank/emergency/nitrogen/double
 	name = "double emergency nitrogen tank"
@@ -131,5 +131,5 @@
 	desc = "A tank of nitrogen."
 	icon_state = "nitrogen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list(MAT_NITROGEN = 10*ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/nitrogen = 10*ONE_ATMOSPHERE)
 	volume = 180

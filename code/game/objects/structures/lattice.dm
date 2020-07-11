@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_NOFALL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 

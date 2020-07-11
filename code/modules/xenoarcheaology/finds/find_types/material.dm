@@ -2,7 +2,7 @@
 /decl/archaeological_find/material
 	item_type = "material lump"
 	modification_flags = XENOFIND_APPLY_PREFIX
-	var/list/possible_materials = list(MAT_STEEL, MAT_PLASTEEL, MAT_TITANIUM, MAT_GLASS)
+	var/list/possible_materials = list(/decl/material/solid/metal/steel, /decl/material/solid/metal/plasteel, /decl/material/solid/metal/plasteel/titanium, /decl/material/solid/glass)
 
 /decl/archaeological_find/material/spawn_item(atom/loc)
 	var/mat_to_spawn = pickweight(possible_materials)
@@ -13,7 +13,7 @@
 
 /decl/archaeological_find/material/exotic
 	item_type = "rare material lump"
-	possible_materials = list(MAT_ALIENALLOY, MAT_PHORON, MAT_METALLIC_HYDROGEN, MAT_BOROSILICATE_GLASS)
+	possible_materials = list(/decl/material/solid/metal/aliumium, /decl/material/solid/phoron, /decl/material/solid/metallic_hydrogen, /decl/material/solid/glass/borosilicate)
 
 //Machinery parts
 /decl/archaeological_find/parts

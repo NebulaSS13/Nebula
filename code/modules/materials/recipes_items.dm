@@ -267,3 +267,15 @@
 /datum/stack_recipe/boots
 	title = "boots"
 	result_type = /obj/item/clothing/shoes/craftable/boots
+
+/datum/stack_recipe/armguards
+	title = "arm guards"
+	result_type = /obj/item/clothing/accessory/armguards/craftable
+
+/datum/stack_recipe/legguards
+	title = "leg guards"
+	result_type = /obj/item/clothing/accessory/legguards/craftable
+
+/datum/stack_recipe/gauntlets
+	title = "gauntlets"
+	result_type = /obj/item/clothing/gloves/thick/craftable

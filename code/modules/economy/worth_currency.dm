@@ -43,7 +43,7 @@
 	var/name_prefix
 	var/name_suffix
 	var/icon = 'icons/obj/items/money.dmi'
-	var/material = MAT_PLASTIC
+	var/material = /decl/material/solid/plastic
 	var/absolute_value = 1 // Divisor for cash pile worth. Should never be <1 or non-integer (think of it like cents).
 	var/list/denominations = list()
 	var/list/denominations_by_value = list()
@@ -92,7 +92,7 @@
 /decl/currency/trader
 	name =     "scrip"
 	name_prefix = "$"
-	material = MAT_COPPER
+	material = /decl/material/solid/metal/copper
 
 /decl/currency/trader/build_denominations()
 	denominations = list(
@@ -106,7 +106,7 @@
 	name = "scavbucks"
 	name_singular = "scavbuck"
 	name_suffix = "sb"
-	material = MAT_WASTE
+	material = /decl/material/solid/slag
 
 /datum/denomination/trash
 	name = "wiggly string"

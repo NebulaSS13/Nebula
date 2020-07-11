@@ -3,10 +3,10 @@
 	desc = "The AIM-4 module improves gun accuracy by filtering unnecessary nerve signals."
 	buffs = list(SKILL_WEAPONS = 1)
 	injury_debuffs = list(SKILL_WEAPONS = -1)
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_SILVER = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/organ/internal/augment/boost/reflex/buff()

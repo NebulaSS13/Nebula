@@ -35,8 +35,8 @@
 	icon = 'icons/obj/module.dmi'
 	icon_state = "power_mod"
 	item_state = "electronic"
-	material = MAT_STEEL
-	matter = list(MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	build_path = /obj/machinery/power/apc/buildable
@@ -75,7 +75,7 @@
 	name = T_BOARD("airlock controller")
 	build_path = /obj/machinery/embedded_controller/radio/simple_docking_controller
 	board_type = "wall"
-	origin_tech = "{'" + TECH_DATA + "':3,'" + TECH_ENGINEERING + "':3}"
+	origin_tech = "{'programming':3,'engineering':3}"
 	req_components = list()
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,

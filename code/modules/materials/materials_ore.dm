@@ -37,28 +37,28 @@
 
 // Map definitions.
 /obj/item/ore/uranium
-	material = MAT_PITCHBLENDE
+	material = /decl/material/solid/mineral/pitchblende
 /obj/item/ore/iron
-	material = MAT_HEMATITE
+	material = /decl/material/solid/mineral/hematite
 /obj/item/ore/coal
-	material = MAT_GRAPHITE
+	material = /decl/material/solid/mineral/graphite
 /obj/item/ore/glass
-	material = MAT_SAND
+	material = /decl/material/solid/mineral/sand
 /obj/item/ore/silver
-	material = MAT_SILVER
+	material = /decl/material/solid/metal/silver
 /obj/item/ore/gold
-	material = MAT_GOLD
+	material = /decl/material/solid/metal/gold
 /obj/item/ore/diamond
-	material = MAT_DIAMOND
+	material = /decl/material/solid/gemstone/diamond
 /obj/item/ore/osmium
-	material = MAT_PLATINUM
+	material = /decl/material/solid/metal/platinum
 /obj/item/ore/hydrogen
-	material = MAT_METALLIC_HYDROGEN
+	material = /decl/material/solid/metallic_hydrogen
 /obj/item/ore/slag
-	material = MAT_WASTE
+	material = /decl/material/solid/slag
 /obj/item/ore/phoron
-	material = MAT_PHORON
+	material = /decl/material/solid/phoron
 /obj/item/ore/aluminium
-	material = MAT_BAUXITE
+	material = /decl/material/solid/mineral/bauxite
 /obj/item/ore/rutile
-	material = MAT_RUTILE
+	material = /decl/material/solid/mineral/rutile

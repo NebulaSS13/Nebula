@@ -6,8 +6,8 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = "{'programming':4,'materials':4}"
-	material = MAT_GLASS
-	matter = list(MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/glass
+	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/flush
 	var/mob/living/silicon/ai/carded_ai

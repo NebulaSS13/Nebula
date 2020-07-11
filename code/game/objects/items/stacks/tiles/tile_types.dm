@@ -43,7 +43,7 @@
 	desc = "An easy to fit wooden floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_GENERIC
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/stack/tile/wood/cyborg
 	name = "wood floor tile synthesizer"
@@ -59,7 +59,7 @@
 	desc = "An easy to fit mahogany wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_RICH
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/stack/tile/maple
 	name = "maple floor tile"
@@ -67,7 +67,7 @@
 	desc = "An easy to fit maple wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_PALE
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/stack/tile/ebony
 	name = "ebony floor tile"
@@ -75,7 +75,7 @@
 	desc = "An easy to fit ebony floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_BLACK
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/stack/tile/walnut
 	name = "walnut floor tile"
@@ -83,7 +83,7 @@
 	desc = "An easy to fit walnut wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_CHOCOLATE
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/stack/tile/bamboo
 	name = "bamboo floor tile"
@@ -91,7 +91,7 @@
 	desc = "An easy to fit bamboo wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_PALE2
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/stack/tile/yew
 	name = "yew floor tile"
@@ -99,7 +99,7 @@
 	desc = "An easy to fit yew wood floor tile."
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_YELLOW
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 
 /obj/item/stack/tile/floor
 	name = "steel floor tile"
@@ -107,7 +107,7 @@
 	desc = "Those could work as a pretty decent throwing weapon." //why?
 	icon_state = "tile"
 	force = 6
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	throwforce = 15
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
@@ -115,63 +115,63 @@
 	name = "steel mono tile"
 	singular_name = "steel mono tile"
 	icon_state = "tile"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/mono/dark
 	name = "dark mono tile"
 	singular_name = "dark mono tile"
 	icon_state = "tile"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/mono/white
 	name = "white mono tile"
 	singular_name = "white mono tile"
 	icon_state = "tile"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/grid
 	name = "grey grid tile"
 	singular_name = "grey grid tile"
 	icon_state = "tile_grid"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/ridge
 	name = "grey ridge tile"
 	singular_name = "grey ridge tile"
 	icon_state = "tile_ridged"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/techgrey
 	name = "grey techfloor tile"
 	singular_name = "grey techfloor tile"
 	icon_state = "techtile_grey"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/techgrid
 	name = "grid techfloor tile"
 	singular_name = "grid techfloor tile"
 	icon_state = "techtile_grid"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/techmaint
 	name = "dark techfloor tile"
 	singular_name = "dark techfloor tile"
 	icon_state = "techtile_maint"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/floor_white
 	name = "white floor tile"
 	singular_name = "white floor tile"
 	icon_state = "tile_white"
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 
 /obj/item/stack/tile/floor_white/fifty
 	amount = 50
@@ -180,7 +180,7 @@
 	name = "dark floor tile"
 	singular_name = "dark floor tile"
 	icon_state = "fr_tile"
-	material = MAT_PLASTEEL
+	material = /decl/material/solid/metal/plasteel
 
 /obj/item/stack/tile/floor_dark/fifty
 	amount = 50
@@ -189,7 +189,7 @@
 	name = "freezer floor tile"
 	singular_name = "freezer floor tile"
 	icon_state = "tile_freezer"
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 
 /obj/item/stack/tile/floor_freezer/fifty
 	amount = 50

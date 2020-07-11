@@ -4,7 +4,7 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm_bitem"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	var/build_machine_type
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 	var/fully_construct = FALSE // Results in a machine with all parts auto-installed and ready to go if TRUE; if FALSE, the machine will spawn without removable expected parts
@@ -92,26 +92,26 @@
 /obj/item/frame/light/small
 	name = "small light fixture frame"
 	icon_state = "bulb-construct-item"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/light/small/buildable
 
 /obj/item/frame/light/spot
 	name = "spotlight fixture frame"
 	icon_state = "tube-construct-item"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/light/spot/buildable
 
 /obj/item/frame/light/nav
 	name = "navigation light fixture frame"
 	icon_state = "tube-construct-item"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/light/navigation/buildable
 
 /obj/item/frame/button
 	name = "button frame"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "launcherbtt"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/button/buildable
 
 /obj/item/frame/button/modify_positioning(var/obj/machinery/button/product, _dir, click_params)
@@ -138,7 +138,7 @@
 	name = "wall charger frame"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "wrecharger0"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/recharger/wallcharger
 
 /obj/item/frame/button/wall_charger/kit
@@ -150,7 +150,7 @@
 	desc = "A wall-mounted ignition device."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "migniter"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/sparker/buildable
 
 // Shifts it dead center of the turf you are looking at. Useful for items with antiquated icons.

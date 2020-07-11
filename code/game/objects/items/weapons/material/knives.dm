@@ -7,7 +7,7 @@
 	icon_state = "world"
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	origin_tech = "{'materials':1}"
 	unbreakable = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -45,7 +45,7 @@
 	name = "table knife"
 	desc = "A simple table knife, used to cut up individual portions of food."
 	on_mob_icon = 'icons/obj/items/weapon/knives/table.dmi'
-	material = MAT_ALUMINIUM
+	material = /decl/material/solid/metal/aluminium
 	material_force_multiplier = 0.1
 	sharp = FALSE
 	attack_verb = list("prodded")
@@ -53,13 +53,13 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/material/knife/table/plastic
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 
 /obj/item/material/knife/table/primitive
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	on_mob_icon = 'icons/obj/items/weapon/knives/savage.dmi'
-	material = MAT_WOOD
+	material = /decl/material/solid/wood
 	applies_material_colour = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
@@ -86,7 +86,7 @@
 /obj/item/material/knife/kitchen/cleaver/bronze
 	name = "master chef's cleaver"
 	desc = "A heavy blade used to process food. This one is so fancy, it must be for a truly exceptional chef. There aren't any here, so what it's doing here is anyone's guess."
-	material = MAT_BRONZE
+	material = /decl/material/solid/metal/bronze
 	material_force_multiplier = 1 //25 with material bronze
 
 //fighting knives
@@ -104,10 +104,10 @@
 	. += "serrated"
 
 /obj/item/material/knife/combat/glass
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 
 /obj/item/material/knife/combat/titanium
-	material = MAT_TITANIUM
+	material = /decl/material/solid/metal/plasteel/titanium
 
 //random stuff
 /obj/item/material/knife/hook
@@ -140,5 +140,5 @@
 /obj/item/material/knife/utility/lightweight
 	name = "lightweight utility knife"
 	desc = "A lightweight utility knife made out of a titanium alloy."
-	material = MAT_TITANIUM
+	material = /decl/material/solid/metal/plasteel/titanium
 	draw_handle = FALSE

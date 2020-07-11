@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/jar.dmi'
 	icon_state = "jar"
 	w_class = ITEM_SIZE_SMALL
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	material_force_multiplier = 0.1
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	var/list/accept_mobs = list(

@@ -5,8 +5,8 @@
 	toxicity = 15
 	fuel_value = 2.5
 	vapor_products = list(
-		MAT_OXYGEN = 0.5, 
-		MAT_PHORON = 0.5
+		/decl/material/gas/oxygen = 0.5, 
+		/decl/material/solid/phoron = 0.5
 	)
 
 /decl/material/liquid/surfactant // Foam precursor

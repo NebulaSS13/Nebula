@@ -11,7 +11,7 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "rg0"
 	icon_state = "rg"
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[1,2,5]"
 	volume = 15
@@ -341,13 +341,13 @@
 /// Syringes. END
 ////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/chems/syringe/adrenaline
-	name = "Syringe (adrenaline)"
-	desc = "Contains adrenaline - used to stabilize patients."
+/obj/item/chems/syringe/stabilizer
+	name = "Syringe (stabilizer)"
+	desc = "Contains stabilizer - for patients in danger of brain damage."
 
-/obj/item/chems/syringe/adrenaline/Initialize()
+/obj/item/chems/syringe/stabilizer/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/adrenaline, 15)
+	reagents.add_reagent(/decl/material/liquid/stabilizer, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -401,10 +401,10 @@
 	amount_per_transfer_from_this = 20
 	volume = 60
 	icon_state = "bs"
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	matter = list(
-		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/chems/syringe/noreact
@@ -413,8 +413,8 @@
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	icon_state = "cs"
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	matter = list(
-		MAT_GOLD = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_PLASTIC = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)

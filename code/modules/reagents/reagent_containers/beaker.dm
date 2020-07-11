@@ -6,7 +6,7 @@
 	on_mob_icon = 'icons/obj/items/chem/beakers/beaker.dmi'
 	icon_state = "world"
 	center_of_mass = @"{'x':15,'y':10}"
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	applies_material_name = TRUE
 	applies_material_colour = TRUE
 	material_force_multiplier = 0.25
@@ -71,7 +71,7 @@
 	possible_transfer_amounts = @"[5,10,15,25,30,60,180]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	material_force_multiplier = 0.2
 
 /obj/item/chems/glass/beaker/noreact
@@ -83,7 +83,7 @@
 	volume = 60
 	amount_per_transfer_from_this = 10
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT | ATOM_FLAG_SHOW_REAGENT_NAME
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	applies_material_name = FALSE
 	applies_material_colour = FALSE
 
@@ -99,10 +99,10 @@
 	material_force_multiplier = 2.5
 	applies_material_colour = FALSE
 	applies_material_name = FALSE
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_PHORON = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_DIAMOND = MATTER_AMOUNT_TRACE
+		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/chems/glass/beaker/vial
@@ -123,12 +123,12 @@
 	icon = 'icons/obj/items/chem/beakers/insulated.dmi'
 	on_mob_icon = 'icons/obj/items/chem/beakers/insulated.dmi'
 	center_of_mass = @"{'x':15,'y':8}"
-	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 	applies_material_colour = FALSE
 	temperature_coefficient = 1
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	applies_material_name = FALSE
 	applies_material_colour = FALSE
 
@@ -137,7 +137,7 @@
 	icon = 'icons/obj/items/chem/beakers/insulated_large.dmi'
 	on_mob_icon = 'icons/obj/items/chem/beakers/insulated_large.dmi'
 	center_of_mass = @"{'x':16,'y':10}"
-	matter = list(MAT_PLASTIC = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	volume = 120
 
 /obj/item/chems/glass/beaker/sulphuric/Initialize()

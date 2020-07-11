@@ -147,7 +147,7 @@
 	volume = 180
 
 /obj/item/tank/mantid/methyl_bromide
-	starting_pressure = list(MAT_METHYL_BROMIDE = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list(/decl/material/gas/methyl_bromide = 6 * ONE_ATMOSPHERE)
 
 /obj/item/tank/mantid/oxygen
 	name = "mantid oxygen tank"
@@ -163,7 +163,7 @@
 		BODYTYPE_SNAKE =        'mods/ascent/icons/species/serpentid/onmob_back_serpentid.dmi'
 	)
 	icon_state = "maneuvering_pack"
-	var/refill_gas_type = MAT_METHYL_BROMIDE
+	var/refill_gas_type = /decl/material/gas/methyl_bromide
 	var/gas_regen_amount = 0.03
 	var/gas_regen_cap = 30
 
@@ -180,7 +180,7 @@
 	name = "mantid gas reactor"
 	desc = "A mantid gas processing plant that continuously synthesises 'breathable' atmosphere."
 	var/charge_cost = 12
-	var/refill_gas_type = MAT_METHYL_BROMIDE
+	var/refill_gas_type = /decl/material/gas/methyl_bromide
 	var/gas_regen_amount = 0.05
 	var/gas_regen_cap = 50
 
@@ -190,7 +190,7 @@
 
 /obj/item/tank/mantid/reactor/oxygen
 	name = "serpentid gas reactor"
-	refill_gas_type = MAT_OXYGEN
+	refill_gas_type = /decl/material/gas/oxygen
 	distribute_pressure = 31
 
 /obj/item/tank/mantid/reactor/Process()

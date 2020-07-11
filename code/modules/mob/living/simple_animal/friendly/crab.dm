@@ -24,7 +24,7 @@
 		)
 
 	meat_amount =   3
-	skin_material = MAT_SKIN_CHITIN
+	skin_material = /decl/material/solid/skin/insect
 	skin_amount =   10
 	bone_material = null
 	bone_amount =   0

@@ -393,7 +393,9 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return
 	var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
 	. = trans_to_holder(R, amount, multiplier, copy, 1)
-	target.add_reagents_as_fluid(R)
+	var/obj/effect/fluid/F = locate() in target
+	if(!F) F = new(target)
+	trans_to_holder(F.reagents, amount, multiplier, copy)
 
 /datum/reagents/proc/trans_to_obj(var/obj/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
 	if(!target || !target.simulated)

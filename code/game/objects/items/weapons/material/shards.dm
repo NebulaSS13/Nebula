@@ -13,7 +13,7 @@
 	thrown_material_force_multiplier = 0.1 // 3 with weight 30 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
-	material = MAT_GLASS
+	material = /decl/material/solid/glass
 	unbreakable = 1 //It's already broken.
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
@@ -128,13 +128,13 @@
 
 // Preset types - left here for the code that uses them
 /obj/item/material/shard/phoron/Initialize(mapload, material_key)
-	. = ..(loc, MAT_BOROSILICATE_GLASS)
+	. = ..(loc, /decl/material/solid/glass/borosilicate)
 
 /obj/item/material/shard/shrapnel
 	name = "shrapnel"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	w_class = ITEM_SIZE_TINY	//it's real small
 
 /obj/item/material/shard/plastic
-	material = MAT_PLASTIC
+	material = /decl/material/solid/plastic
 	w_class = ITEM_SIZE_TINY

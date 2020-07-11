@@ -73,10 +73,10 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 	throw_range = 3
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'engineering':5,'materials':4}"
-	material = MAT_STEEL
+	material = /decl/material/solid/metal/steel
 	matter = list(
-		MAT_GLASS = MATTER_AMOUNT_REINFORCEMENT,
-		MAT_SILVER = MATTER_AMOUNT_TRACE
+		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 
 	var/datum/effect/effect/system/spark_spread/spark_system
