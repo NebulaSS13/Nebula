@@ -111,7 +111,6 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	sensor_visibility = min(round(base_sensor_visibility + get_speed_sensor_increase(), 1), 100)
 
 /obj/effect/overmap/visitable/ship/on_update_icon()
-	handle_overmap_pixel_movement()
 	if(!is_still())
 		icon_state = moving_state
 		set_dir(get_heading())

@@ -141,6 +141,7 @@
 		if(newloc && loc != newloc)
 			Move(newloc)
 			handle_wraparound()
+	handle_overmap_pixel_movement()
 
 /obj/effect/overmap/proc/accelerate(var/direction, var/accel_limit)
 	var/actual_accel_limit = accel_limit / KM_OVERMAP_RATE
