@@ -3,7 +3,7 @@
 // Gets a ship's delta v in km/s. This only uses immediate impulse with whatever is in engines,
 // to get a ship's total *possible* approxiamte delta v, use get_total_delta_v().
 // partial power is used with burn() in order to only do partial burns.
-/obj/effect/overmap/visitable/ship/proc/get_delta_v(var/real_burn = FALSE, var/partial_power = 1)
+/obj/effect/overmap/visitable/ship/get_delta_v(var/real_burn = FALSE, var/partial_power = 1)
 	var/total_exhaust_velocity = 0
 	partial_power = Clamp(partial_power, 0, 1)
 	for(var/datum/extension/ship_engine/E in engines)
@@ -29,7 +29,7 @@
 		mass += E.get_specific_wet_mass()
 	return mass
 
-/obj/effect/overmap/visitable/ship/proc/get_vessel_mass()
+/obj/effect/overmap/visitable/ship/get_vessel_mass()
 	. = vessel_mass
 	for(var/obj/effect/overmap/visitable/ship/ship in src)
 		. += ship.get_vessel_mass()

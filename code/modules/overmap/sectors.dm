@@ -5,8 +5,6 @@
 	name = "map object"
 	scannable = TRUE
 
-	var/list/map_z = list()
-
 	var/list/initial_generic_waypoints //store landmark_tag of landmarks that should be added to the actual lists below on init.
 	var/list/initial_restricted_waypoints //For use with non-automatic landmarks (automatic ones add themselves).
 
@@ -23,6 +21,8 @@
 
 	var/has_distress_beacon
 	var/free_landing = FALSE				//whether or not shuttles can land in arbitrary places within the sector's z-levels.
+	var/list/map_z = list()
+	var/list/consoles
 
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
@@ -134,3 +134,13 @@
 
 	testing("Overmap build complete.")
 	return 1
+
+/obj/effect/overmap/visitable/handle_overmap_pixel_movement()
+	..()
+	for(var/obj/machinery/computer/ship/machine in consoles)
+		if(machine.z in map_z)
+			for(var/weakref/W in machine.viewers)
+				var/mob/M = W.resolve()
+				if(istype(M) && M.client)
+					M.client.pixel_x = pixel_x
+					M.client.pixel_y = pixel_y

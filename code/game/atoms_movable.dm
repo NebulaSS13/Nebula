@@ -76,7 +76,7 @@
 /atom/movable/proc/momentum_power(var/atom/movable/AM, var/datum/thrownthing/TT)
 	if(anchored)
 		return 0
-	
+
 	. = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
 	if(has_gravity())
 		. *= 0.5
@@ -91,7 +91,7 @@
 			step(src, direction)
 
 		if(0.25 to 0.5)	//glancing change in direction
-			var/drift_dir	
+			var/drift_dir
 			if(direction & (NORTH|SOUTH))
 				if(inertia_dir & (NORTH|SOUTH))
 					drift_dir |= (direction & (NORTH|SOUTH)) & (inertia_dir & (NORTH|SOUTH))
