@@ -3,7 +3,7 @@
 /obj/machinery/flasher
 	name = "mounted flash"
 	desc = "A wall-mounted flashbulb device."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/flash_mounted.dmi'
 	icon_state = "mflash1"
 	var/range = 2 //this is roughly the size of brig cell
 	var/disable = 0
@@ -105,6 +105,7 @@
 	name = "portable flasher"
 	desc = "A portable flashing device. Wrench to activate and deactivate. Cannot detect slow movements."
 	icon_state = "pflash1"
+	icon = 'icons/obj/machines/flash_portable.dmi'
 	strength = 8
 	anchored = 0
 	base_state = "pflash"
@@ -118,7 +119,7 @@
 		var/mob/living/carbon/M = AM
 		if(!MOVING_DELIBERATELY(M))
 			flash()
-	
+
 	if(isanimal(AM))
 		flash()
 

@@ -1,7 +1,6 @@
 /obj/machinery/cablelayer
 	name = "automatic cable layer"
-
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/pipe_dispenser.dmi'
 	icon_state = "pipe_d"
 	density = 1
 	var/obj/structure/cable/last_piece

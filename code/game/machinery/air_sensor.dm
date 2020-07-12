@@ -1,6 +1,6 @@
 /obj/machinery/air_sensor
 	name = "gas sensor"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/gas_sensor.dmi'
 	icon_state = "gsensor1"
 	anchored = TRUE
 
