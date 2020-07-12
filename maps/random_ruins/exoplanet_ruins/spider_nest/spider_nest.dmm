@@ -87,7 +87,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/template_noop)
 "q" = (
-/obj/item/melee/telebaton,
+/obj/item/telebaton,
 /obj/item/seeds/random,
 /obj/effect/decal/cleanable/spiderling_remains,
 /obj/structure/fireaxecabinet{

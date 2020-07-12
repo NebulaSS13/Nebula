@@ -7,7 +7,7 @@
 /*
  * Classic Baton
  */
-/obj/item/melee/classic_baton
+/obj/item/classic_baton
 	name = "police baton"
 	desc = "A wooden truncheon for beating criminal scum."
 	icon = 'icons/obj/items/weapon/old_baton.dmi'
@@ -16,7 +16,7 @@
 	slot_flags = SLOT_BELT
 	force = 10
 
-/obj/item/melee/classic_baton/attack(mob/M, mob/living/user)
+/obj/item/classic_baton/attack(mob/M, mob/living/user)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
 		user.Weaken(3 * force)
@@ -29,7 +29,7 @@
 	return ..()
 
 //Telescopic baton
-/obj/item/melee/telebaton
+/obj/item/telebaton
 	name = "telescopic baton"
 	desc = "A compact yet rebalanced personal defense weapon. Can be concealed when folded."
 	icon = 'icons/obj/items/weapon/telebaton.dmi'
@@ -41,7 +41,7 @@
 	var/on = 0
 
 
-/obj/item/melee/telebaton/attack_self(mob/user)
+/obj/item/telebaton/attack_self(mob/user)
 	on = !on
 	if(on)
 		user.visible_message("<span class='warning'>With a flick of their wrist, [user] extends their telescopic baton.</span>",\
@@ -63,7 +63,7 @@
 	update_icon()
 	update_held_icon()
 
-/obj/item/melee/telebaton/on_update_icon()
+/obj/item/telebaton/on_update_icon()
 	if(on)
 		icon_state = "telebaton_1"
 		item_state = "telebaton_1"
@@ -75,7 +75,7 @@
 		overlays.Cut()
 		overlays += blood_overlay
 
-/obj/item/melee/telebaton/attack(mob/target, mob/living/user)
+/obj/item/telebaton/attack(mob/target, mob/living/user)
 	if(on)
 		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 			to_chat(user, "<span class='warning'>You club yourself over the head.</span>")

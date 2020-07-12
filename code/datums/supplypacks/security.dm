@@ -86,7 +86,7 @@
 	name = "Weapons - Security basic"
 	contains = list(/obj/item/flash = 4,
 					/obj/item/chems/spray/pepper = 4,
-					/obj/item/melee/baton/loaded = 4,
+					/obj/item/baton/loaded = 4,
 					/obj/item/gun/energy/taser = 4)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon

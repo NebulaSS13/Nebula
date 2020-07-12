@@ -951,12 +951,12 @@
 /obj/item/storage/box/flashbangs,
 /obj/item/flash,
 /obj/item/flash,
-/obj/item/melee/baton/loaded,
-/obj/item/melee/baton/loaded,
+/obj/item/baton/loaded,
+/obj/item/baton/loaded,
 /obj/item/chems/spray/pepper,
 /obj/item/chems/spray/pepper,
-/obj/item/melee/telebaton,
-/obj/item/melee/telebaton,
+/obj/item/telebaton,
+/obj/item/telebaton,
 /obj/machinery/recharger/wallcharger{
 	pixel_x = 4;
 	pixel_y = 32
@@ -1067,8 +1067,8 @@
 /obj/structure/table/rack,
 /obj/item/flash,
 /obj/item/flash,
-/obj/item/melee/baton/loaded,
-/obj/item/melee/baton/loaded,
+/obj/item/baton/loaded,
+/obj/item/baton/loaded,
 /obj/item/storage/box/syringes,
 /obj/item/storage/box/syringes,
 /obj/item/storage/box/autoinjectors,
@@ -2111,7 +2111,7 @@
 /obj/item/storage/box/flashbangs,
 /obj/item/storage/box/teargas,
 /obj/item/storage/box/handcuffs,
-/obj/item/melee/baton/loaded,
+/obj/item/baton/loaded,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -2278,8 +2278,8 @@
 /obj/structure/table/rack,
 /obj/item/flash,
 /obj/item/flash,
-/obj/item/melee/baton/loaded,
-/obj/item/melee/baton/loaded,
+/obj/item/baton/loaded,
+/obj/item/baton/loaded,
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/grenade/chem_grenade/metalfoam,

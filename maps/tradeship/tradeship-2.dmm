@@ -5803,7 +5803,7 @@
 	pixel_y = 0
 	},
 /obj/item/handcuffs,
-/obj/item/melee/telebaton,
+/obj/item/telebaton,
 /obj/item/gun/energy/taser,
 /obj/structure/closet/secure_closet{
 	req_access = list("ACCESS_HEAD_OF_PERSONNEL")

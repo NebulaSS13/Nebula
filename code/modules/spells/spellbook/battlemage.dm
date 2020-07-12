@@ -33,7 +33,7 @@
 
 	sacrifice_objects = list(/obj/item/sword,
 							/obj/item/twohanded/fireaxe,
-							/obj/item/melee,
+							/obj/item/baton,
 							/obj/item/knife/ritual,
 							/obj/item/knife/kitchen/cleaver,
 							/obj/item/knife/folding/combat/balisong,

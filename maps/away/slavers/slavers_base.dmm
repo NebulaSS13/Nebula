@@ -1275,9 +1275,9 @@
 /area/slavers_base/secwing)
 "dk" = (
 /obj/structure/table/rack,
-/obj/item/melee/baton,
-/obj/item/melee/baton,
-/obj/item/melee/baton,
+/obj/item/baton,
+/obj/item/baton,
+/obj/item/baton,
 /obj/random/tool,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
@@ -1547,7 +1547,7 @@
 "dR" = (
 /obj/structure/table/steel,
 /obj/item/storage/box/ammo/stunshells,
-/obj/item/melee/baton,
+/obj/item/baton,
 /obj/machinery/power/terminal{
 	icon_state = "term";
 	dir = 1
@@ -1968,7 +1968,7 @@
 /obj/structure/table/standard,
 /obj/item/storage/firstaid/empty,
 /obj/item/handcuffs,
-/obj/item/melee/baton,
+/obj/item/baton,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eZ" = (
