@@ -127,7 +127,7 @@
 		if(97)
 			new/obj/item/archaeological_find(src)
 		if(98)
-			new/obj/item/energy/sword(src)
+			new/obj/item/energy_blade/sword(src)
 		if(99)
 			new/obj/item/storage/belt/champion(src)
 			new/obj/item/clothing/mask/luchador(src)
