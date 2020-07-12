@@ -151,30 +151,26 @@ SUBSYSTEM_DEF(zcopy)
 		if (T.below.z_flags & ZM_FIX_BIGTURF)
 			T.z_flags |= ZM_FIX_BIGTURF	// this flag is infectious
 
-		// There's no point creating TOs for space, it'll draw under the Z-turf anyways.
-		if (!T.below.z_eventually_space || (T.z_flags & ZM_MIMIC_OVERWRITE))
-			if (T.z_flags & ZM_MIMIC_OVERWRITE)
-				// This openturf doesn't care about its icon, so we can just overwrite it.
-				if (T.below.bound_overlay)
-					QDEL_NULL(T.below.bound_overlay)
-				T.appearance = T.below
-				T.name = initial(T.name)
-				T.desc = initial(T.desc)
-				T.gender = initial(T.gender)
-				T.opacity = FALSE
-				T.plane = t_target
-			else
-				// Some openturfs have icons, so we can't overwrite their appearance.
-				if (!T.below.bound_overlay)
-					T.below.bound_overlay = new(T)
-				var/atom/movable/openspace/turf_overlay/TO = T.below.bound_overlay
-				TO.appearance = T.below
-				TO.name = T.name
-				TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
-				TO.opacity = FALSE
-				TO.plane = t_target
-		else if (T.below.bound_overlay)
-			QDEL_NULL(T.below.bound_overlay)
+		if (T.z_flags & ZM_MIMIC_OVERWRITE)
+			// This openturf doesn't care about its icon, so we can just overwrite it.
+			if (T.below.bound_overlay)
+				QDEL_NULL(T.below.bound_overlay)
+			T.appearance = T.below
+			T.name = initial(T.name)
+			T.desc = initial(T.desc)
+			T.gender = initial(T.gender)
+			T.opacity = FALSE
+			T.plane = t_target
+		else
+			// Some openturfs have icons, so we can't overwrite their appearance.
+			if (!T.below.bound_overlay)
+				T.below.bound_overlay = new(T)
+			var/atom/movable/openspace/turf_overlay/TO = T.below.bound_overlay
+			TO.appearance = T.below
+			TO.name = T.name
+			TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
+			TO.opacity = FALSE
+			TO.plane = t_target
 
 		T.queue_ao()	// TODO: non-rebuild updates seem to break pixel offsets, but should work in theory if that's fixed?
 
