@@ -28,6 +28,12 @@
 	if(lit)
 		STOP_PROCESSING(SSobj, src)
 
+/obj/item/clothing/mask/smokable/isflamesource(atom/A)
+	. = lit
+
+/obj/item/clothing/mask/smokable/get_heat()
+	. = max(..(), lit ? 1500 : 0)
+
 /obj/item/clothing/mask/smokable/fire_act()
 	light(0)
 
@@ -120,7 +126,7 @@
 
 /obj/item/clothing/mask/smokable/attackby(var/obj/item/W, var/mob/user)
 	..()
-	if(isflamesource(W) || is_hot(W))
+	if(W.isflamesource() || W.get_heat() >= T100C)
 		var/text = matchmes
 		if(istype(W, /obj/item/flame/match))
 			text = matchmes
@@ -453,6 +459,9 @@
 /obj/item/clothing/mask/smokable/pipe/Initialize()
 	. = ..()
 	name = "empty [initial(name)]"
+
+/obj/item/clothing/mask/smokable/pipe/isflamesource(atom/A)
+	. = FALSE
 
 /obj/item/clothing/mask/smokable/pipe/light(var/flavor_text = "[usr] lights the [name].")
 	if(!lit && smoketime)

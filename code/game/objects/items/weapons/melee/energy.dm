@@ -11,6 +11,9 @@
 	armor_penetration = 50
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 
+/obj/item/melee/energy/get_heat()
+	. = max(..(), 3500)
+
 /obj/item/melee/energy/get_autopsy_descriptors()
 	. = ..()
 	if(active)

@@ -607,3 +607,9 @@ its easier to just keep the beam vertical.
 			user.examinate(src)
 			return TOPIC_HANDLED
 	. = ..()
+
+/atom/proc/get_heat()
+	. = temperature
+
+/atom/proc/isflamesource()
+	. = FALSE
