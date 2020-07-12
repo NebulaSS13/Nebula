@@ -21,7 +21,7 @@
 	req_components = list(
 		/obj/item/stock_parts/manipulator = 2,
 		/obj/item/stock_parts/matter_bin = 1,
-		/obj/item/material/knife/kitchen/cleaver = 1)
+		/obj/item/knife/kitchen/cleaver = 1)
 	additional_spawn_components = list(
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1

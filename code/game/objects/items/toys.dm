@@ -277,7 +277,7 @@
 		src.add_fingerprint(user)
 		return
 
-/obj/item/material/sword/katana/toy
+/obj/item/sword/katana/toy
 	name = "toy katana"
 	desc = "Woefully underpowered in D20."
 	material = /decl/material/solid/plastic
@@ -745,7 +745,7 @@
 	icon_state = "spiderplushie"
 
 //Toy cult sword
-/obj/item/material/sword/cult_toy
+/obj/item/sword/cult_toy
 	name = "foam sword"
 	desc = "An arcane weapon (made of foam) wielded by the followers of the hit Saturday morning cartoon \"King Nursee and the Acolytes of Heroism\"."
 	on_mob_icon = 'icons/obj/items/weapon/swords/cult.dmi'

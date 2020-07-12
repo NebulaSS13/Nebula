@@ -146,8 +146,8 @@
 								/obj/item/clothing/under/kilt          = TRADER_THIS_TYPE,
 								/obj/item/clothing/under/redcoat       = TRADER_THIS_TYPE,
 								/obj/item/clothing/under/soviet        = TRADER_THIS_TYPE,
-								/obj/item/material/harpoon      = TRADER_THIS_TYPE,
-								/obj/item/material/sword        = TRADER_ALL,
-								/obj/item/material/scythe       = TRADER_THIS_TYPE,
-								/obj/item/material/star         = TRADER_THIS_TYPE,
-								/obj/item/material/twohanded/baseballbat = TRADER_THIS_TYPE)
+								/obj/item/harpoon      = TRADER_THIS_TYPE,
+								/obj/item/sword        = TRADER_ALL,
+								/obj/item/scythe       = TRADER_THIS_TYPE,
+								/obj/item/star         = TRADER_THIS_TYPE,
+								/obj/item/twohanded/baseballbat = TRADER_THIS_TYPE)

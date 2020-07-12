@@ -149,7 +149,7 @@
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/wirecutters = 75,
-		/obj/item/material/kitchen/utensil/fork = 20
+		/obj/item/kitchen/utensil/fork = 20
 	)
 	min_duration = 80
 	max_duration = 100

@@ -123,7 +123,7 @@
 						author = newauthor
 			else
 				return
-	else if(istype(W, /obj/item/material/knife) || isWirecutter(W))
+	else if(istype(W, /obj/item/knife) || isWirecutter(W))
 		if(carved)	return
 		to_chat(user, "<span class='notice'>You begin to carve out [title].</span>")
 		if(do_after(user, 30, src))

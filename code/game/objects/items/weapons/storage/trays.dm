@@ -65,7 +65,7 @@
 		scatter_contents()
 
 /obj/item/storage/tray/attackby(obj/item/W, mob/user) // Keeping this from old trays because... i guess?
-	if(istype(W, /obj/item/material/kitchen/rollingpin))
+	if(istype(W, /obj/item/kitchen/rollingpin))
 		if(cooldown < world.time - 25)
 			user.visible_message(SPAN_WARNING("\The [user] bashes \the [src] with \the [W]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)

@@ -14,7 +14,7 @@
 	path = /obj/item/weapon/gun/projectile/flare
 
 /datum/fabricator_recipe/arms_ammo/hidden
-	path = /obj/item/material/hatchet/machete/steel
+	path = /obj/item/hatchet/machete/steel
 	hidden = TRUE
 
 /datum/fabricator_recipe/arms_ammo/hidden/shotgun
@@ -65,7 +65,7 @@
 	path = /obj/item/ammo_casing/shotgun/pellet
 
 /datum/fabricator_recipe/arms_ammo/hidden/tacknife
-	path = /obj/item/material/knife/combat
+	path = /obj/item/knife/combat
 
 /datum/fabricator_recipe/arms_ammo/hidden/stunshell
 	name = "ammunition (stun cartridge, shotgun)"

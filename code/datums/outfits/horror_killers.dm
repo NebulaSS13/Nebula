@@ -9,7 +9,7 @@
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/chaplain_hoodie
 	r_pocket = /obj/item/bikehorn
-	r_hand = /obj/item/material/twohanded/fireaxe
+	r_hand = /obj/item/twohanded/fireaxe
 
 	id_slot = slot_wear_id
 	id_type = /obj/item/card/id/centcom/station
@@ -25,9 +25,9 @@
 	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/apron
-	l_pocket = /obj/item/material/knife/combat
+	l_pocket = /obj/item/knife/combat
 	r_pocket = /obj/item/scalpel
-	r_hand = /obj/item/material/twohanded/fireaxe
+	r_hand = /obj/item/twohanded/fireaxe
 
 /decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/carbon/human/H)
 	..()

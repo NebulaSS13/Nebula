@@ -42,7 +42,7 @@
 	icon_state = "chain"
 	item_state = "whip"
 
-/obj/item/material/sword/replica/officersword
+/obj/item/sword/replica/officersword
 	name = "fleet officer's sword"
 	desc = "A polished sword issued to officers of the fleet."
 	icon = 'icons/obj/items/weapon/parade_sword.dmi'
@@ -51,18 +51,18 @@
 	slot_flags = SLOT_BELT
 	applies_material_colour = FALSE
 
-/obj/item/material/sword/replica/officersword/army
+/obj/item/sword/replica/officersword/army
 	name = "army NCO's sword"
 	desc = "A polished sword issued to NCOs."
 	icon_state = "armysword"
 
-/obj/item/material/sword/replica/officersword/armyofficer
+/obj/item/sword/replica/officersword/armyofficer
 	name = "army officer's sword"
 	desc = "A curved sword issued to officers."
 	icon_state = "armyofficersword"
 	item_state = "armyofficersword"
 
-/obj/item/material/sword/replica/officersword/pettyofficer
+/obj/item/sword/replica/officersword/pettyofficer
 	name = "chief petty officer's cutlass"
 	desc = "A polished cutlass issued to chief petty officers of the fleet."
 	icon_state = "pettyofficersword"

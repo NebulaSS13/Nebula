@@ -3,7 +3,7 @@
 	desc = "A divine blade of burning fury. If it stays too far away from an altar of some sort, it disappears."
 	base_cost = 250
 	category = DEITY_TREE_ARTIFACT
-	boon_path = /obj/item/material/sword/blazing
+	boon_path = /obj/item/sword/blazing
 
 /datum/deity_item/boon/holy_beacon
 	name = "Holy Beacon"
@@ -17,7 +17,7 @@
 	desc = "A small dagger capable of poisoning those it bites. Careful, if it loses all its charges, it will burn the user. It can be recharged at a radiant statue."
 	base_cost = 150
 	category = DEITY_TREE_ARTIFACT
-	boon_path = /obj/item/material/knife/ritual/shadow
+	boon_path = /obj/item/knife/ritual/shadow
 
 /datum/deity_item/blood_crafting/firecrafting
 	name = "Fire Crafting"

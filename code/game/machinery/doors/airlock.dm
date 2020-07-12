@@ -644,11 +644,11 @@ About the new airlock wires panel:
 		cut_sound = 'sound/weapons/circsawhit.ogg'
 		cut_delay *= 1.5
 
-	else if(istype(item,/obj/item/material/twohanded/fireaxe))
+	else if(istype(item,/obj/item/twohanded/fireaxe))
 		//special case - zero delay, different message
 		if (src.lock_cut_state == BOLTS_EXPOSED)
 			return 0 //can't actually cut the bolts, go back to regular smashing
-		var/obj/item/material/twohanded/fireaxe/F = item
+		var/obj/item/twohanded/fireaxe/F = item
 		if (!F.wielded)
 			return 0
 		user.visible_message(
@@ -759,8 +759,8 @@ About the new airlock wires panel:
 			else
 				close(1)
 
-	if(istype(C, /obj/item/material/twohanded/fireaxe) && !arePowerSystemsOn() && !(user.a_intent == I_HURT))
-		var/obj/item/material/twohanded/fireaxe/F = C
+	if(istype(C, /obj/item/twohanded/fireaxe) && !arePowerSystemsOn() && !(user.a_intent == I_HURT))
+		var/obj/item/twohanded/fireaxe/F = C
 		if(F.is_held_twohanded(user))
 			if(locked)
 				to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
@@ -795,8 +795,8 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/bash(obj/item/I, mob/user)
 			//if door is unbroken, hit with fire axe using harm intent
-	if (istype(I, /obj/item/material/twohanded/fireaxe) && !(stat & BROKEN) && user.a_intent == I_HURT)
-		var/obj/item/material/twohanded/fireaxe/F = I
+	if (istype(I, /obj/item/twohanded/fireaxe) && !(stat & BROKEN) && user.a_intent == I_HURT)
+		var/obj/item/twohanded/fireaxe/F = I
 		if (F.wielded)
 			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
 			health -= F.force_wielded * 2

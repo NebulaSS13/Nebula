@@ -18,8 +18,8 @@
 	can_escape = TRUE
 	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/corpse/russian
-	var/dropped_weapon = /obj/item/material/knife/combat
-	natural_weapon = /obj/item/material/knife/combat
+	var/dropped_weapon = /obj/item/knife/combat
+	natural_weapon = /obj/item/knife/combat
 	unsuitable_atmos_damage = 15
 	faction = "russian"
 	status_flags = CANPUSH

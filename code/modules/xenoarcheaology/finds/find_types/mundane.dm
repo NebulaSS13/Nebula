@@ -9,9 +9,9 @@
 /decl/archaeological_find/cutlery
 	item_type = "cutlery"
 	possible_types = list(
-		/obj/item/material/kitchen/utensil/fork,
-		/obj/item/material/knife/table,
-		/obj/item/material/kitchen/utensil/spoon
+		/obj/item/kitchen/utensil/fork,
+		/obj/item/knife/table,
+		/obj/item/kitchen/utensil/spoon
 	)
 
 /decl/archaeological_find/cutlery/new_icon_state()

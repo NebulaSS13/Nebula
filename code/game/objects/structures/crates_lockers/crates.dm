@@ -241,9 +241,9 @@
 /obj/structure/closet/crate/hydroponics/prespawned/WillContain()
 	return list(
 		/obj/item/chems/spray/plantbgone = 2,
-		/obj/item/material/minihoe = 2,
+		/obj/item/minihoe = 2,
 		/obj/item/storage/plants = 2,
-		/obj/item/material/hatchet = 2,
+		/obj/item/hatchet = 2,
 		/obj/item/wirecutters/clippers = 2,
 		/obj/item/scanner/plant = 2
 	)

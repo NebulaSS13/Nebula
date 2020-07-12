@@ -77,7 +77,7 @@
 /area/slavers_base/mort)
 "ar" = (
 /obj/structure/table/standard,
-/obj/item/material/knife/table,
+/obj/item/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "as" = (
@@ -110,12 +110,12 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "az" = (
-/obj/item/material/knife/table,
+/obj/item/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aA" = (
 /obj/structure/table/rack,
-/obj/item/material/hatchet,
+/obj/item/hatchet,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aB" = (
@@ -1985,7 +1985,7 @@
 "fa" = (
 /obj/structure/table/standard,
 /obj/item/storage/firstaid/regular,
-/obj/item/material/hatchet,
+/obj/item/hatchet,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "fb" = (
@@ -3584,7 +3584,7 @@
 "iR" = (
 /obj/structure/table/standard,
 /obj/item/trash/plate,
-/obj/item/material/kitchen/utensil/fork,
+/obj/item/kitchen/utensil/fork,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -3617,7 +3617,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iU" = (
-/obj/item/material/kitchen/utensil/fork,
+/obj/item/kitchen/utensil/fork,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -3752,7 +3752,7 @@
 /area/slavers_base/dorms)
 "jj" = (
 /obj/structure/table/standard,
-/obj/item/material/kitchen/utensil/fork,
+/obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jk" = (

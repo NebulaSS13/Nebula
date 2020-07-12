@@ -12,8 +12,8 @@
 		/obj/item/flashlight/lamp/green = 2, 
 		/obj/item/chems/food/drinks/jar = 1,
 		/obj/item/nullrod = 1, 
-		/obj/item/material/sword/cult_toy = 4, 
-		/obj/item/material/sword/katana/toy = 2
+		/obj/item/sword/cult_toy = 4, 
+		/obj/item/sword/katana/toy = 2
 	)
 
 /obj/machinery/vending/props/on_update_icon()

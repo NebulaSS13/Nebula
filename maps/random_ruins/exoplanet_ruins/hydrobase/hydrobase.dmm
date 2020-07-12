@@ -917,12 +917,12 @@
 /area/map_template/hydrobase/station/growA)
 "cq" = (
 /obj/structure/closet/secure_closet/hydroponics/hydro,
-/obj/item/material/hatchet/machete,
+/obj/item/hatchet/machete,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cr" = (
 /obj/structure/closet/secure_closet/hydroponics/hydro,
-/obj/item/material/scythe,
+/obj/item/scythe,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cs" = (
@@ -935,9 +935,9 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "ct" = (
-/obj/item/material/knife/kitchen,
+/obj/item/knife/kitchen,
 /obj/structure/table/glass/pglass,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cu" = (
@@ -1526,7 +1526,7 @@
 /area/map_template/hydrobase/station/processing)
 "dM" = (
 /obj/structure/catwalk,
-/obj/item/material/kitchen/utensil/spoon,
+/obj/item/kitchen/utensil/spoon,
 /obj/structure/table/glass/pglass,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -1698,10 +1698,10 @@
 /area/map_template/hydrobase/station/growA)
 "eh" = (
 /obj/structure/catwalk,
-/obj/item/material/kitchen/rollingpin,
-/obj/item/material/knife/kitchen,
+/obj/item/kitchen/rollingpin,
+/obj/item/knife/kitchen,
 /obj/structure/table/glass/pglass,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "ei" = (
@@ -2162,7 +2162,7 @@
 /obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/obj/item/material/shard/phoron,
+/obj/item/shard/borosilicate,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fb" = (
@@ -2286,7 +2286,7 @@
 /area/map_template/hydrobase/station/processing)
 "fr" = (
 /obj/structure/catwalk,
-/obj/item/material/knife/folding/combat/switchblade,
+/obj/item/knife/folding/combat/switchblade,
 /obj/random/coin,
 /obj/random/coin,
 /obj/structure/closet/crate/secure/weapon{
@@ -2295,7 +2295,7 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/random/projectile,
-/obj/item/material/knife/combat,
+/obj/item/knife/combat,
 /obj/item/cash/c100,
 /obj/random/cash,
 /obj/random/cash,
@@ -2329,7 +2329,7 @@
 /obj/item/grenade/chem_grenade/antiweed,
 /obj/item/grenade/chem_grenade/incendiary,
 /obj/item/weedkiller/D24,
-/obj/item/material/shard/phoron,
+/obj/item/shard/borosilicate,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/processing)
 "fu" = (

@@ -201,7 +201,7 @@
 					/obj/item/clothing/shoes/dress,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
 					/obj/item/clothing/shoes/color/white,
-					/obj/item/material/clipboard,
+					/obj/item/clipboard,
 					/obj/item/folder/cyan,
 					/obj/item/pen)
 	cost = 15

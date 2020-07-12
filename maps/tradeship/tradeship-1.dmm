@@ -1276,7 +1276,7 @@
 "db" = (
 /obj/structure/table/standard,
 /obj/item/wirecutters/clippers,
-/obj/item/material/minihoe,
+/obj/item/minihoe,
 /obj/item/chems/glass/bucket,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/disk/botany,

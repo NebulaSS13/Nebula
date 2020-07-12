@@ -66,17 +66,17 @@
 /datum/gear/knives
 	display_name = "knives selection"
 	description = "A selection of knives."
-	path = /obj/item/material/knife
+	path = /obj/item/knife
 
 /datum/gear/knives/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"folding knife" =             /obj/item/material/knife/folding,
-		"peasant folding knife" =     /obj/item/material/knife/folding/wood,
-		"tactical folding knife" =    /obj/item/material/knife/folding/tacticool,
-		"utility knife" =             /obj/item/material/knife/utility,
-		"lightweight utility knife" = /obj/item/material/knife/utility/lightweight
+		"folding knife" =             /obj/item/knife/folding,
+		"peasant folding knife" =     /obj/item/knife/folding/wood,
+		"tactical folding knife" =    /obj/item/knife/folding/tacticool,
+		"utility knife" =             /obj/item/knife/utility,
+		"lightweight utility knife" = /obj/item/knife/utility/lightweight
 	)
 
 /datum/gear/lunchbox
@@ -187,7 +187,7 @@
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
-	path = /obj/item/material/ashtray/plastic
+	path = /obj/item/ashtray/plastic
 
 /datum/gear/cigars
 	display_name = "fancy cigar case"
@@ -234,21 +234,21 @@
 
 /datum/gear/swiss
 	display_name = "multi-tool"
-	path = /obj/item/material/knife/folding/swiss
+	path = /obj/item/knife/folding/swiss
 	cost = 4
 	flags = GEAR_HAS_COLOR_SELECTION
 
 
 /datum/gear/cross
 	display_name = "cross"
-	path = /obj/item/material/cross
+	path = /obj/item/cross
 	cost = 2
 
 /datum/gear/cross/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"cross, wood"=    /obj/item/material/cross/wood,
-		"cross, silver" = /obj/item/material/cross/silver,
-		"cross, gold" =   /obj/item/material/cross/gold
+		"cross, wood"=    /obj/item/cross,
+		"cross, silver" = /obj/item/cross/silver,
+		"cross, gold" =   /obj/item/cross/gold
 	)

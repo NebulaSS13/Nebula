@@ -234,7 +234,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
 "aV" = (
-/obj/item/material/harpoon,
+/obj/item/harpoon,
 /obj/effect/landmark/corpse/scientist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,

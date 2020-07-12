@@ -868,7 +868,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "cb" = (
 /obj/structure/table/woodentable,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /obj/item/trash/cigbutt/cigarbutt,
 /turf/unsimulated/floor{
 	icon_state = "wood"
@@ -1269,7 +1269,7 @@
 /obj/item/tank/oxygen,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
-/obj/item/material/harpoon,
+/obj/item/harpoon,
 /obj/random/energy,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
@@ -1285,7 +1285,7 @@
 /obj/item/seeds/potatoseed,
 /obj/item/seeds/potatoseed,
 /obj/item/seeds/ambrosiavulgarisseed,
-/obj/item/material/minihoe,
+/obj/item/minihoe,
 /obj/item/beartrap,
 /obj/structure/table/steel,
 /turf/simulated/floor/plating,

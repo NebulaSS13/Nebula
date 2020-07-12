@@ -21,7 +21,7 @@
 
 /obj/item/cane/concealed/Initialize()
 	. = ..()
-	var/obj/item/material/knife/folding/combat/switchblade/temp_blade = new(src)
+	var/obj/item/knife/folding/combat/switchblade/temp_blade = new(src)
 	concealed_blade = temp_blade
 
 /obj/item/cane/concealed/attack_self(var/mob/user)
@@ -39,7 +39,7 @@
 	else
 		..()
 
-/obj/item/cane/concealed/attackby(var/obj/item/material/knife/folding/W, var/mob/user)
+/obj/item/cane/concealed/attackby(var/obj/item/knife/folding/W, var/mob/user)
 	if(!src.concealed_blade && istype(W) && user.unEquip(W, src))
 		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into [src]!</span>", "You sheathe \the [W] into [src].")
 		src.concealed_blade = W

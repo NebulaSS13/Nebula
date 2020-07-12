@@ -64,7 +64,7 @@
 		/obj/item/folder,
 		/obj/item/pen,
 		/obj/item/folder,
-		/obj/item/material/clipboard,
+		/obj/item/clipboard,
 		/obj/item/anodevice,
 		/obj/item/clothing/glasses,
 		/obj/item/wrench,

@@ -226,7 +226,7 @@
 /obj/structure/table/proc/remove_material(obj/item/wrench/W, mob/user)
 	material = common_material_remove(user, material, 20, "plating", "bolts", 'sound/items/Ratchet.ogg')
 
-// Returns a list of /obj/item/material/shard objects that were created as a result of this table's breakage.
+// Returns a list of /obj/item/shard objects that were created as a result of this table's breakage.
 // Used for !fun! things such as embedding shards in the faces of tableslammed people.
 
 // The repeated
@@ -237,7 +237,7 @@
 /obj/structure/table/proc/break_to_parts(full_return = 0)
 	reset_mobs_offset()
 	var/list/shards = list()
-	var/obj/item/material/shard/S = null
+	var/obj/item/shard/S = null
 	if(reinf_material)
 		if(reinf_material.stack_type && (full_return || prob(20)))
 			reinf_material.place_sheet(loc)

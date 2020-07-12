@@ -35,7 +35,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots/jungleboots 
 	gloves = /obj/item/clothing/gloves/thick 
 	head = /obj/item/clothing/head/beret 
-	l_pocket = /obj/item/material/knife/folding/combat/switchblade 
+	l_pocket = /obj/item/knife/folding/combat/switchblade 
  
 /area/map_template/marooned
 	name = "\improper Crashed Dropship"

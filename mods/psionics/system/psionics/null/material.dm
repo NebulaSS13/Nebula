@@ -27,7 +27,7 @@
 	. = ..()
 	. += new /datum/stack_recipe/tile/nullglass(src)
 
-/obj/item/material/shard/nullglass
+/obj/item/shard/nullglass
 	material = MAT_NULLGLASS
 /datum/stack_recipe/tile/nullglass
 	title = "nullglass floor tile"

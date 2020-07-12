@@ -1,4 +1,4 @@
-/obj/item/material/star
+/obj/item/star
 	name = "shuriken"
 	desc = "A sharp, perfectly weighted piece of metal."
 	icon = 'icons/obj/items/weapon/throwing_star.dmi'
@@ -10,18 +10,21 @@
 	throw_range = 15
 	sharp = 1
 	edge =  1
+	material = /decl/material/solid/metal/steel
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
 
-/obj/item/material/star/throw_impact(atom/hit_atom)
+/obj/item/star/throw_impact(atom/hit_atom)
 	..()
 	if(material.radioactivity>0 && istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		var/urgh = material.radioactivity
 		M.adjustToxLoss(rand(urgh/2,urgh))
 
-/obj/item/material/star/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/star/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
 	if(user.a_intent == I_HURT)
 		user.throw_item(target)
 
-/obj/item/material/star/ninja
+/obj/item/star/ninja
 	material = /decl/material/solid/metal/uranium

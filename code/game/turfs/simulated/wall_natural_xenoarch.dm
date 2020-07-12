@@ -20,10 +20,10 @@
 				new /obj/item/stack/material/plasteel(src, rand(5,25))
 			if(5)
 				for(var/i = 1 to rand(1,3))
-					new /obj/item/material/shard(src)
+					new /obj/item/shard(src)
 			if(6)
 				for(var/i = 1 to rand(1,3))
-					new /obj/item/material/shard/phoron(src)
+					new /obj/item/shard/borosilicate(src)
 			if(7)
 				new /obj/item/stack/material/uranium(src, rand(5,25))
 

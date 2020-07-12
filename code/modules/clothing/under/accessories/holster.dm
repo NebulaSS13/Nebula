@@ -80,9 +80,9 @@
 	desc = "A handsome synthetic leather sheath with matching belt."
 	icon_state = "holster_machete"
 	can_holster = list(
-		/obj/item/material/hatchet/machete,
-		/obj/item/material/knife/kitchen/cleaver,
-		/obj/item/material/sword/katana
+		/obj/item/hatchet/machete,
+		/obj/item/knife/kitchen/cleaver,
+		/obj/item/sword/katana
 	)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
@@ -91,7 +91,7 @@
 	name = "leather knife sheath"
 	desc = "A synthetic leather knife sheath which you can strap on your leg."
 	icon_state = "sheath_leather"
-	can_holster = list(/obj/item/material/knife)
+	can_holster = list(/obj/item/knife)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
 

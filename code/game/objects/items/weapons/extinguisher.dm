@@ -27,7 +27,7 @@
 	desc = "A light and compact fibreglass-framed model fire extinguisher."
 	icon_state = "miniFE0"
 	item_state = "miniFE"
-	hitsound = null	//it is much lighter, after all.
+	hitsound = null
 	throwforce = 2
 	w_class = ITEM_SIZE_SMALL
 	force = 3.0

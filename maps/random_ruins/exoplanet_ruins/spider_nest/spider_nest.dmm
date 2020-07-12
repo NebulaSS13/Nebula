@@ -81,7 +81,7 @@
 "p" = (
 /obj/effect/landmark/corpse/doctor,
 /obj/effect/decal/cleanable/blood,
-/obj/item/material/shard,
+/obj/item/shard,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/vomit,
 /turf/simulated/floor/tiled/techfloor,

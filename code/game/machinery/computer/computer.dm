@@ -91,7 +91,7 @@
 		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 		for(var/obj/item/stock_parts/console_screen/screen in component_parts)
 			qdel(screen)
-			new /obj/item/material/shard(loc)
+			new /obj/item/shard(loc)
 	else
 		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 	return ..()

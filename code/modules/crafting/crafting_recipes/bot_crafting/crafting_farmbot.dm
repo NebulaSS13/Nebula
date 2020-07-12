@@ -29,7 +29,7 @@
 
 /decl/crafting_stage/farmbot_minihoe
 	progress_message = "You attach the minihoe to the assembly."
-	completion_trigger_type = /obj/item/material/minihoe
+	completion_trigger_type = /obj/item/minihoe
 	next_stages = list(/decl/crafting_stage/proximity/farmbot)
 	item_icon_state = "farmbot_1"
 

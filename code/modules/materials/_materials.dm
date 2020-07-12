@@ -318,7 +318,7 @@
 // As above.
 /decl/material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/material/shard(target, type)
+		return new /obj/item/shard(target, type)
 
 // Used by walls and weapons to determine if they break or not.
 /decl/material/proc/is_brittle()

@@ -43,7 +43,7 @@
 
 /obj/item/corncob/attackby(obj/item/W, mob/user)
 	..()
-	if(istype(W, /obj/item/circular_saw) || isHatchet(W) || istype(W, /obj/item/material/knife))
+	if(istype(W, /obj/item/circular_saw) || isHatchet(W) || istype(W, /obj/item/knife))
 		to_chat(user, "<span class='notice'>You use [W] to fashion a pipe out of the corn cob!</span>")
 		new /obj/item/clothing/mask/smokable/pipe/cobpipe (user.loc)
 		qdel(src)

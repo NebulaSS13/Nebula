@@ -26,7 +26,7 @@
 	path = /obj/item/clothing/head/welding
 
 /datum/fabricator_recipe/knife
-	path = /obj/item/material/knife/kitchen
+	path = /obj/item/knife/kitchen
 
 /datum/fabricator_recipe/taperecorder
 	path = /obj/item/taperecorder/empty
@@ -44,7 +44,7 @@
 	path = /obj/item/light/bulb
 
 /datum/fabricator_recipe/ashtray_glass
-	path = /obj/item/material/ashtray/glass
+	path = /obj/item/ashtray/glass
 
 /datum/fabricator_recipe/weldinggoggles
 	path = /obj/item/clothing/glasses/welding
@@ -63,19 +63,19 @@
 
 /datum/fabricator_recipe/clipboard_steel
 	name = "clipboard, steel"
-	path = /obj/item/material/clipboard/steel
+	path = /obj/item/clipboard/steel
 
 /datum/fabricator_recipe/clipboard_alum
 	name = "clipboard, aluminium"
-	path = /obj/item/material/clipboard/aluminium
+	path = /obj/item/clipboard/aluminium
 
 /datum/fabricator_recipe/clipboard_glass
 	name = "clipboard, glass"
-	path = /obj/item/material/clipboard/glass
+	path = /obj/item/clipboard/glass
 
 /datum/fabricator_recipe/clipboard_alum
 	name = "clipboard, plastic"
-	path = /obj/item/material/clipboard/plastic
+	path = /obj/item/clipboard/plastic
 
 /datum/fabricator_recipe/destTagger
 	path = /obj/item/destTagger

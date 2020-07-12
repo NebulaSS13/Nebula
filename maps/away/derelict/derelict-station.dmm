@@ -972,7 +972,7 @@
 /area/constructionsite/hallway/fore)
 "dc" = (
 /obj/structure/table/marble,
-/obj/item/material/kitchen/rollingpin,
+/obj/item/kitchen/rollingpin,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dd" = (
@@ -3499,7 +3499,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lI" = (
-/obj/item/material/shard{
+/obj/item/shard{
 	icon_state = "medium"
 	},
 /turf/simulated/floor/airless,

@@ -578,7 +578,7 @@
 /area/map_template/wizard_station)
 "bx" = (
 /obj/structure/cult/talisman,
-/obj/item/material/knife/ritual,
+/obj/item/knife/ritual,
 /turf/unsimulated/floor{
 	name = "plating";
 	icon_state = "cult"

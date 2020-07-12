@@ -672,7 +672,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/material/kitchen/rollingpin,
+/obj/item/kitchen/rollingpin,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cu" = (
@@ -787,7 +787,7 @@
 	dir = 4
 	},
 /obj/item/trash/plate,
-/obj/item/material/kitchen/utensil/fork,
+/obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cM" = (
@@ -984,7 +984,7 @@
 /area/icarus/vessel)
 "dq" = (
 /obj/structure/table/standard,
-/obj/item/material/knife/table,
+/obj/item/knife/table,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dr" = (
@@ -1408,7 +1408,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/material/knife/table,
+/obj/item/knife/table,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eK" = (

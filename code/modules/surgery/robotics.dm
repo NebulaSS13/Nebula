@@ -38,7 +38,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
 		/obj/item/coin = 50,
-		/obj/item/material/knife = 50
+		/obj/item/knife = 50
 	)
 	min_duration = 90
 	max_duration = 110
@@ -74,7 +74,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
 		/obj/item/coin = 50,
-		/obj/item/material/knife = 50
+		/obj/item/knife = 50
 	)
 	min_duration = 90
 	max_duration = 110
@@ -110,7 +110,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	allowed_tools = list(
 		/obj/item/retractor = 100,
 		/obj/item/crowbar = 100,
-		/obj/item/material/kitchen/utensil = 50
+		/obj/item/kitchen/utensil = 50
 	)
 
 	min_duration = 30
@@ -147,7 +147,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	allowed_tools = list(
 		/obj/item/retractor = 100,
 		/obj/item/crowbar = 100,
-		/obj/item/material/kitchen/utensil = 50
+		/obj/item/kitchen/utensil = 50
 	)
 
 	min_duration = 70
@@ -574,7 +574,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/wirecutters = 75,
-		/obj/item/material/kitchen/utensil/fork = 20
+		/obj/item/kitchen/utensil/fork = 20
 	)
 	can_infect = 0
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT

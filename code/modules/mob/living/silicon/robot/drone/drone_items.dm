@@ -46,7 +46,7 @@
 	desc = "A simple grasping tool for clerical work."
 
 	can_hold = list(
-		/obj/item/material/clipboard,
+		/obj/item/clipboard,
 		/obj/item/paper,
 		/obj/item/paper_bundle,
 		/obj/item/photo,
@@ -380,10 +380,10 @@
 		else if(istype(W,/obj/item/ammo_casing))
 			if(metal)
 				metal.add_charge(1000)
-		else if(istype(W,/obj/item/material/shard/shrapnel))
+		else if(istype(W,/obj/item/shard/shrapnel))
 			if(metal)
 				metal.add_charge(1000)
-		else if(istype(W,/obj/item/material/shard))
+		else if(istype(W,/obj/item/shard))
 			if(glass)
 				glass.add_charge(1000)
 		else if(istype(W,/obj/item/chems/food/snacks/grown))

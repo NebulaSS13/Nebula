@@ -17,7 +17,7 @@
 /area/ship/ascent/shuttle_starboard)
 "af" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/material/knife/kitchen/cleaver/ascent,
+/obj/item/knife/kitchen/cleaver/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_prow)
 "ag" = (
@@ -4525,7 +4525,7 @@
 "wW" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/structure/table/rack/dark,
-/obj/item/material/knife/kitchen/cleaver/ascent,
+/obj/item/knife/kitchen/cleaver/ascent,
 /obj/item/stack/medical/bruise_pack,
 /obj/item/gun/energy/particle/small,
 /obj/item/tank/mantid/oxygen,
