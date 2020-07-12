@@ -27,39 +27,42 @@ They sell generic supplies and ask for generic supplies.
 
 				"bribe_refusal"     = "You have given me money to stay, however, I am a station. I do not leave.",
 				)
-	possible_wanted_items = list(/obj/item/                       = TRADER_SUBTYPES_ONLY,
-								/obj/item/assembly                = TRADER_BLACKLIST_ALL,
-								/obj/item/assembly_holder         = TRADER_BLACKLIST_ALL,
-								/obj/item/encryptionkey/syndicate = TRADER_BLACKLIST,
-								/obj/item/tank/phoron/onetankbomb = TRADER_BLACKLIST,
-								/obj/item/radio                   = TRADER_BLACKLIST_ALL,
-								/obj/item/modular_computer/pda                     = TRADER_BLACKLIST_SUB,
-								/obj/item/uplink                  = TRADER_BLACKLIST)
-	possible_trading_items = list(/obj/item/storage/bag                       = TRADER_SUBTYPES_ONLY,
-								/obj/item/storage/bag/cash/infinite           = TRADER_BLACKLIST,
-								/obj/item/storage/backpack                    = TRADER_ALL,
-								/obj/item/storage/backpack/cultpack           = TRADER_BLACKLIST,
-								/obj/item/storage/backpack/holding            = TRADER_BLACKLIST,
-								/obj/item/storage/backpack/satchel/grey/withwallet = TRADER_BLACKLIST,
-								/obj/item/storage/backpack/satchel/syndie_kit = TRADER_BLACKLIST_ALL,
-								/obj/item/storage/backpack/chameleon          = TRADER_BLACKLIST,
-								/obj/item/storage/backpack/ert                = TRADER_BLACKLIST_ALL,
-								/obj/item/storage/backpack/dufflebag/syndie   = TRADER_BLACKLIST_SUB,
-								/obj/item/storage/belt/champion               = TRADER_THIS_TYPE,
-								/obj/item/storage/briefcase                   = TRADER_THIS_TYPE,
-								/obj/item/storage/fancy                       = TRADER_SUBTYPES_ONLY,
-								/obj/item/storage/laundry_basket              = TRADER_THIS_TYPE,
-								/obj/item/storage/secure/briefcase            = TRADER_THIS_TYPE,
-								/obj/item/storage/plants                      = TRADER_THIS_TYPE,
-								/obj/item/storage/ore                         = TRADER_THIS_TYPE,
-								/obj/item/storage/toolbox                     = TRADER_ALL,
-								/obj/item/storage/wallet                      = TRADER_THIS_TYPE,
-								/obj/item/storage/photo_album                 = TRADER_THIS_TYPE,
-								/obj/item/clothing/glasses                           = TRADER_SUBTYPES_ONLY,
-								/obj/item/clothing/glasses/hud                       = TRADER_BLACKLIST_ALL,
-								/obj/item/clothing/glasses/blindfold/tape = TRADER_BLACKLIST,
-								/obj/item/clothing/glasses/chameleon                 = TRADER_BLACKLIST
-								)
+	possible_wanted_items = list(
+		/obj/item                                          = TRADER_SUBTYPES_ONLY,
+		/obj/item/assembly                                 = TRADER_BLACKLIST_ALL,
+		/obj/item/assembly_holder                          = TRADER_BLACKLIST_ALL,
+		/obj/item/encryptionkey/syndicate                  = TRADER_BLACKLIST,
+		/obj/item/tank/onetankbomb                         = TRADER_BLACKLIST,
+		/obj/item/radio                                    = TRADER_BLACKLIST_ALL,
+		/obj/item/modular_computer/pda                     = TRADER_BLACKLIST_SUB,
+		/obj/item/uplink                                   = TRADER_BLACKLIST
+	)
+	possible_trading_items = list(
+		/obj/item/storage/bag                              = TRADER_SUBTYPES_ONLY,
+		/obj/item/storage/bag/cash/infinite                = TRADER_BLACKLIST,
+		/obj/item/storage/backpack                         = TRADER_ALL,
+		/obj/item/storage/backpack/cultpack                = TRADER_BLACKLIST,
+		/obj/item/storage/backpack/holding                 = TRADER_BLACKLIST,
+		/obj/item/storage/backpack/satchel/grey/withwallet = TRADER_BLACKLIST,
+		/obj/item/storage/backpack/satchel/syndie_kit      = TRADER_BLACKLIST_ALL,
+		/obj/item/storage/backpack/chameleon               = TRADER_BLACKLIST,
+		/obj/item/storage/backpack/ert                     = TRADER_BLACKLIST_ALL,
+		/obj/item/storage/backpack/dufflebag/syndie        = TRADER_BLACKLIST_SUB,
+		/obj/item/storage/belt/champion                    = TRADER_THIS_TYPE,
+		/obj/item/storage/briefcase                        = TRADER_THIS_TYPE,
+		/obj/item/storage/fancy                            = TRADER_SUBTYPES_ONLY,
+		/obj/item/storage/laundry_basket                   = TRADER_THIS_TYPE,
+		/obj/item/storage/secure/briefcase                 = TRADER_THIS_TYPE,
+		/obj/item/storage/plants                           = TRADER_THIS_TYPE,
+		/obj/item/storage/ore                              = TRADER_THIS_TYPE,
+		/obj/item/storage/toolbox                          = TRADER_ALL,
+		/obj/item/storage/wallet                           = TRADER_THIS_TYPE,
+		/obj/item/storage/photo_album                      = TRADER_THIS_TYPE,
+		/obj/item/clothing/glasses                         = TRADER_SUBTYPES_ONLY,
+		/obj/item/clothing/glasses/hud                     = TRADER_BLACKLIST_ALL,
+		/obj/item/clothing/glasses/blindfold/tape          = TRADER_BLACKLIST,
+		/obj/item/clothing/glasses/chameleon               = TRADER_BLACKLIST
+	)
 
 	insult_drop = 0
 	compliment_increase = 0

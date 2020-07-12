@@ -359,9 +359,10 @@ Class Procs:
 	while(LAZYLEN(uncreated_component_parts))
 		var/path = uncreated_component_parts[1]
 		expelled_components += uninstall_component(path, refresh_parts = FALSE)
-	var/datum/extension/parts_stash/stash = get_extension(frame, /datum/extension/parts_stash)
-	if(stash)
-		stash.stash(expelled_components)
+	if(frame)
+		var/datum/extension/parts_stash/stash = get_extension(frame, /datum/extension/parts_stash)
+		if(stash)
+			stash.stash(expelled_components)
 
 	for(var/obj/O in src)
 		O.dropInto(loc)
