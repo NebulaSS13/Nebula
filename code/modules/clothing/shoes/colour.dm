@@ -1,6 +1,5 @@
 /obj/item/clothing/shoes/color
 	name = "white shoes"
-	icon_state = "world"
 	icon = 'icons/clothing/feet/colored_shoes.dmi'
 	on_mob_icon = 'icons/clothing/feet/colored_shoes.dmi'
 	desc = "A pair of shoes."

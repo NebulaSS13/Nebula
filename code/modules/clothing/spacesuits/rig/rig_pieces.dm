@@ -56,7 +56,6 @@
 	heat_protection = FEET
 	bodytype_restricted = null
 	gender = PLURAL
-	icon_base = null
 	on_mob_use_spritesheets = TRUE
 
 /obj/item/clothing/shoes/magboots/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)

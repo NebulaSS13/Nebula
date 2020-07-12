@@ -716,8 +716,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/shoes
 	name = "random footwear"
 	desc = "This is a random pair of shoes."
-	icon = 'icons/obj/clothing/obj_feet.dmi'
-	icon_state = "boots"
+	icon = 'icons/clothing/feet/generic_shoes.dmi'
+	icon_state = "world"
 
 /obj/random/shoes/spawn_choices()
 	return list(/obj/item/clothing/shoes/workboots = 3,
