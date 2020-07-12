@@ -3,7 +3,7 @@
 	name_plural = "Humans"
 	primitive_form = SPECIES_MONKEY
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch, /decl/natural_attack/bite)
-	description = "Humans are so big, and strong, and smart, and rich sometimes. Oooooh."
+	description = "A medium-sized creature prone to great ambition. If you are reading this, you are probably a human."
 	min_age = 17
 	max_age = 100
 	hidden_from_codex = FALSE
