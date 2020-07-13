@@ -1,7 +1,9 @@
 /obj/item/clothing/head/hardhat
 	name = "hard hat"
 	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight."
-	icon_state = "hardhat0_yellow"
+	icon_state = "world"
+	icon = 'icons/clothing/head/hardhat/yellow.dmi'
+	on_mob_icon = 'icons/clothing/head/hardhat/yellow.dmi'
 	action_button_name = "Toggle Headlamp"
 	brightness_on = 0.5 //luminosity when on
 	light_overlay = "hardhat_light"
@@ -22,21 +24,22 @@
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 
 /obj/item/clothing/head/hardhat/orange
-	icon_state = "hardhat0_orange"
+	on_mob_icon = 'icons/clothing/head/hardhat/orange.dmi'
 
 /obj/item/clothing/head/hardhat/red
-	icon_state = "hardhat0_red"
+	on_mob_icon = 'icons/clothing/head/hardhat/red.dmi'
 
 /obj/item/clothing/head/hardhat/white
-	icon_state = "hardhat0_white"
+	on_mob_icon = 'icons/clothing/head/hardhat/white.dmi'
 
 /obj/item/clothing/head/hardhat/dblue
-	icon_state = "hardhat0_dblue"
+	on_mob_icon = 'icons/clothing/head/hardhat/blue.dmi'
 
 /obj/item/clothing/head/hardhat/EMS
 	name = "\improper EMS helmet"
 	desc = "A polymer helmet worn by EMTs throughout human space to protect their head. This one comes with an attached flashlight and has 'Medic' written on its back in blue lettering."
-	icon_state = "EMS_helmet"
+	icon = 'icons/clothing/head/hardhat/medic.dmi'
+	on_mob_icon = 'icons/clothing/head/hardhat/medic.dmi'
 	light_overlay = "EMS_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
@@ -48,9 +51,10 @@
 	)
 
 /obj/item/clothing/head/hardhat/firefighter
-	icon_state = "Firefighter-Helmet"
 	name = "firefighter helmet"
 	desc = "A complete, face covering helmet specially designed for firefighting. It is airtight and has a port for internals."
+	icon = 'icons/clothing/head/hardhat/firefighter.dmi'
+	on_mob_icon = 'icons/clothing/head/hardhat/firefighter.dmi'
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	permeability_coefficient = 0
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
@@ -62,44 +66,15 @@
 	randpixel = 0
 	flash_protection = FLASH_PROTECTION_MAJOR
 
-/obj/item/clothing/head/hardhat/firefighter/Chief
-	icon_state = "Firefighter-Helmet-Chief"
-
 /obj/item/clothing/head/hardhat/damage_control
 	name = "damage control helmet"
 	desc = "A helmet commonly used by engineers and first responders throughout the human space. Comes with a built-in flashlight."
-	icon_state = "Damage-Control-Helmet"
-	light_overlay = "DC_light"
+	icon = 'icons/clothing/head/hardhat/damage_control.dmi'
+	on_mob_icon = 'icons/clothing/head/hardhat/damage_control.dmi'
 	flags_inv = HIDEEARS|BLOCKHAIR
-
-/obj/item/clothing/head/hardhat/damage_control/Yellow
-	name = "senior damage control helmet"
-	icon_state = "Damage-Control-Helmet-Yellow"
-
-/obj/item/clothing/head/hardhat/damage_control/White
-	name = "chief damage control helmet"
-	icon_state = "Damage-Control-Helmet-White"
-
-/obj/item/clothing/head/hardhat/damage_control/EMB
-	name = "\improper Emergency Management Bureau helmet"
-	desc = "The helmet currently issued by the emergency management bureau, commonly used by engineers and first responders throughout the human space. Comes with a built-in flashlight."
-	icon_state = "Damage-Control-Helmet-EMB"
-
-/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient
-	name = "ancient red EMB helmet"
-	desc = "This helmet used to be issued by the emergency management bureau once upon a time, and is still being used in frontier systems. Comes with a built-in flashlight."
-	icon_state = "EMB-ancient-red"
-	light_overlay = "EMB-ancient_light"
-
-/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/yellow
-	name = "ancient yellow EMB helmet"
-	icon_state = "EMB-ancient-yellow"
-
-/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/white
-	name = "ancient white EMB helmet"
-	icon_state = "EMB-ancient-white"
 
 /obj/item/clothing/head/hardhat/EMS/DC_light
 	name = "light damage control helmet"
 	desc = "A lighter polymer helmet commonly used by engineers and first responders throughout the human space. It comes with a built-in flashlight and has 'Damage Control' written on its back in yellow lettering."
-	icon_state = "Damage-Control-Helmet-light"
+	icon = 'icons/clothing/head/hardhat/damage_control_light.dmi'
+	on_mob_icon = 'icons/clothing/head/hardhat/damage_control_light.dmi'

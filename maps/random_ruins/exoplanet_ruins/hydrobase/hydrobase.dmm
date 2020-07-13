@@ -2857,7 +2857,7 @@
 "gy" = (
 /obj/item/clothing/accessory/toggleable/hawaii/random,
 /obj/item/clothing/under/casual_pants/greyjeans,
-/obj/item/clothing/head/bowlerhat,
+/obj/item/clothing/head/bowler,
 /obj/item/clothing/shoes/craftable,
 /obj/structure/closet,
 /turf/simulated/floor/tiled/freezer,

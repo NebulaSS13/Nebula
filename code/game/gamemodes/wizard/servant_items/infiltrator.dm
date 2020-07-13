@@ -1,7 +1,12 @@
 /obj/item/clothing/head/infilhat
 	name = "immaculate fedora"
 	desc = "Whoever owns this hat means business. Hopefully, it's just good business."
-	icon_state = "infhat"
+	color = COLOR_SILVER
+	icon_state = "world"
+	icon = 'icons/clothing/head/detective.dmi'
+	on_mob_icon = 'icons/clothing/head/detective.dmi'
+	markings_icon = "band"
+	markings_color = COLOR_DARK_GRAY
 	armor = list(
 		melee = ARMOR_MELEE_MINOR, 
 		bullet = ARMOR_BALLISTIC_MINOR, 

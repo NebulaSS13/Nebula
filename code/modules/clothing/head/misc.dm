@@ -26,9 +26,11 @@
 	icon_state = "hairflower_yellow"
 
 /obj/item/clothing/head/hairflower/bow
-	icon_state = "bow"
 	name = "hair bow"
 	desc = "A ribbon tied into a bow with a clip on the back to attach to hair."
+	icon_state = "world"
+	icon = 'icons/clothing/head/bow.dmi'
+	on_mob_icon = 'icons/clothing/head/bow.dmi'
 
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
@@ -39,8 +41,9 @@
 /obj/item/clothing/head/that
 	name = "top-hat"
 	desc = "It's an amish looking hat."
-	icon_state = "tophat"
-	item_state = "tophat"
+	icon_state = "world"
+	icon = 'icons/clothing/head/tophat.dmi'
+	on_mob_icon = 'icons/clothing/head/tophat.dmi'
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
@@ -74,21 +77,11 @@
 /obj/item/clothing/head/nursehat
 	name = "nurse's hat"
 	desc = "It allows quick identification of trained medical personnel."
-	icon_state = "nursehat"
+	icon_state = "world"
+	icon = 'icons/clothing/head/nurse.dmi'
+	on_mob_icon = 'icons/clothing/head/nurse.dmi'
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
-
-/obj/item/clothing/head/syndicatefake
-	name = "red space-helmet replica"
-	item_state_slots = list(
-		slot_l_hand_str = "syndicate-helm-black-red",
-		slot_r_hand_str = "syndicate-helm-black-red",
-		)
-	icon_state = "syndicate"
-	desc = "A plastic replica of a bloodthirsty mercenary's space helmet, you'll look just like a real murderous criminal operative in this! This is a toy, it is not made for use in space!"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	siemens_coefficient = 2.0
-	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/cueball
 	name = "cueball helmet"
@@ -101,8 +94,9 @@
 /obj/item/clothing/head/cardborg
 	name = "cardborg helmet"
 	desc = "A helmet made out of a box."
-	icon_state = "cardborg_h"
-	item_state = "cardborg_h"
+	icon_state = "world"
+	icon = 'icons/clothing/head/cardborg.dmi'
+	on_mob_icon = 'icons/clothing/head/cardborg.dmi'
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -110,39 +104,20 @@
 	. = ..()
 	set_extension(src, /datum/extension/appearance/cardborg)
 
-/obj/item/clothing/head/justice
-	name = "justice hat"
-	desc = "fight for what's righteous!"
-	icon_state = "justicered"
-	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD|EYES
-
-/obj/item/clothing/head/justice/blue
-	icon_state = "justiceblue"
-
-/obj/item/clothing/head/justice/yellow
-	icon_state = "justiceyellow"
-
-/obj/item/clothing/head/justice/green
-	icon_state = "justicegreen"
-
-/obj/item/clothing/head/justice/pink
-	icon_state = "justicepink"
-
 /obj/item/clothing/head/rabbitears
 	name = "rabbit ears"
 	desc = "Wearing these makes you looks useless, and only good for your sex appeal."
-	icon_state = "bunny"
+	icon_state = "world"
+	icon = 'icons/clothing/head/bunny.dmi'
+	on_mob_icon = 'icons/clothing/head/bunny.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/flatcap
 	name = "flat cap"
 	desc = "A working man's cap."
-	icon_state = "gentcap"
-	item_state_slots = list(
-		slot_l_hand_str = "det_hat",
-		slot_r_hand_str = "det_hat",
-		)
+	icon_state = "world"
+	icon = 'icons/clothing/head/flatcap.dmi'
+	on_mob_icon = 'icons/clothing/head/flatcap.dmi'
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/head/pirate
@@ -177,48 +152,57 @@
 /obj/item/clothing/head/bowler
 	name = "bowler-hat"
 	desc = "Gentleman, elite aboard!"
-	icon_state = "bowler"
 	body_parts_covered = 0
+	icon_state = "world"
+	icon = 'icons/clothing/head/bowler.dmi'
+	on_mob_icon = 'icons/clothing/head/bowler.dmi'
 
 //stylish bs12 hats
-
-/obj/item/clothing/head/bowlerhat
-	name = "bowler hat"
-	icon_state = "bowler_hat"
-	desc = "For the gentleman of distinction."
-	body_parts_covered = 0
 
 /obj/item/clothing/head/beaverhat
 	name = "beaver hat"
 	icon_state = "beaver_hat"
 	desc = "Soft felt makes this hat both comfortable and elegant."
+	icon_state = "world"
+	icon = 'icons/clothing/head/beaver.dmi'
+	on_mob_icon = 'icons/clothing/head/beaver.dmi'
 
 /obj/item/clothing/head/boaterhat
 	name = "boater hat"
-	icon_state = "boater_hat"
 	desc = "The ultimate in summer fashion."
+	icon_state = "world"
+	icon = 'icons/clothing/head/boater.dmi'
+	on_mob_icon = 'icons/clothing/head/boater.dmi'
 
 /obj/item/clothing/head/fedora
 	name = "fedora"
-	icon_state = "fedora"
 	desc = "A sharp, stylish hat."
+	icon_state = "world"
+	icon = 'icons/clothing/head/fedora.dmi'
+	on_mob_icon = 'icons/clothing/head/fedora.dmi'
 
 /obj/item/clothing/head/feathertrilby
 	name = "feather trilby"
-	icon_state = "feather_trilby"
 	desc = "A sharp, stylish hat with a feather."
+	icon_state = "world"
+	icon = 'icons/clothing/head/trilby.dmi'
+	on_mob_icon = 'icons/clothing/head/trilby.dmi'
 
 /obj/item/clothing/head/fez
 	name = "fez"
-	icon_state = "fez"
 	desc = "You should wear a fez. Fezzes are cool."
+	icon_state = "world"
+	icon = 'icons/clothing/head/fez.dmi'
+	on_mob_icon = 'icons/clothing/head/fez.dmi'
 
 //end bs12 hats
 
 /obj/item/clothing/head/witchwig
 	name = "witch costume wig"
 	desc = "Eeeee~heheheheheheh!"
-	icon_state = "witch"
+	icon_state = "world"
+	icon = 'icons/clothing/head/wizard/marisa.dmi'
+	on_mob_icon = 'icons/clothing/head/wizard/marisa.dmi'
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 2.0
 
@@ -268,49 +252,60 @@
 /obj/item/clothing/head/hijab
 	name = "hijab"
 	desc = "A veil which is wrapped to cover the head and chest."
-	icon_state = "hijab"
+	icon_state = "world"
+	icon = 'icons/clothing/head/hijab.dmi'
+	on_mob_icon = 'icons/clothing/head/hijab.dmi'
 	body_parts_covered = 0
 	flags_inv = BLOCKHAIR
 
 /obj/item/clothing/head/kippa
 	name = "kippa"
 	desc = "A small, brimless cap."
-	icon_state = "kippa"
+	icon_state = "world"
+	icon = 'icons/clothing/head/kippa.dmi'
+	on_mob_icon = 'icons/clothing/head/kippa.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/turban
 	name = "turban"
 	desc = "A sturdy cloth, worn around the head."
-	icon_state = "turban"
+	icon_state = "world"
+	icon = 'icons/clothing/head/turban.dmi'
+	on_mob_icon = 'icons/clothing/head/turban.dmi'
 	body_parts_covered = 0
 	flags_inv = BLOCKHEADHAIR //Shows beards!
 
 /obj/item/clothing/head/cowboy_hat
 	name = "cowboy hat"
 	desc = "A wide-brimmed hat, in the prevalent style of America's frontier period. By law, you are required to wear this hat while watching True Grit."
-	icon_state = "cowboyhat"
-	item_state = "cowboy_hat"
+	icon_state = "world"
+	icon = 'icons/clothing/head/cowboy.dmi'
+	on_mob_icon = 'icons/clothing/head/cowboy.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/taqiyah
 	name = "taqiyah"
 	desc = "A short, rounded skullcap usually worn for religious purposes."
-	icon_state = "taqiyah"
-	item_state = "taqiyah"
+	icon_state = "world"
+	icon = 'icons/clothing/head/taqiyah.dmi'
+	on_mob_icon = 'icons/clothing/head/taqiyah.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/rastacap
 	name = "rastacap"
 	desc = "A round, crocheted cap, often worn to tuck hair away or for religious purposes."
-	icon_state = "rastacap"
-	item_state = "rastacap"
+	icon_state = "world"
+	icon = 'icons/clothing/head/rasta.dmi'
+	on_mob_icon = 'icons/clothing/head/rasta.dmi'
 	body_parts_covered = 0
 	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/tank
 	name = "padded cap"
 	desc = "A padded skullcup for those prone to bumping their heads against hard surfaces."
-	icon_state = "tank"
+	icon_state = "world"
+	icon = 'icons/clothing/head/tank.dmi'
+	on_mob_icon = 'icons/clothing/head/tank.dmi'
 	flags_inv = BLOCKHEADHAIR
 	color = "#5f5f5f"
 	armor = list(
@@ -327,14 +322,17 @@
 /obj/item/clothing/head/beanie
 	name = "beanie"
 	desc = "A head-hugging brimless winter cap. This one is tight."
-	icon_state = "beanie"
-	item_state = "beanie"
+	icon_state = "world"
+	icon = 'icons/clothing/head/beanie.dmi'
+	on_mob_icon = 'icons/clothing/head/beanie.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/helmet/facecover
 	name = "face cover"
 	desc = "A helmet made of plastic. It's completely opaque. This will stop the stare."
-	icon_state = "facecover"
+	icon_state = "world"
+	icon = 'icons/clothing/head/facecover.dmi'
+	on_mob_icon = 'icons/clothing/head/facecover.dmi'
 	tint = TINT_BLIND
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES

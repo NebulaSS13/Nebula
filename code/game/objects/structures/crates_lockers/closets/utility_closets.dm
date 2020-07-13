@@ -57,7 +57,7 @@
 		/obj/item/flashlight,
 		/obj/item/tank/emergency/oxygen/double/red,
 		/obj/item/extinguisher,
-		/obj/item/clothing/head/hardhat/firefighter/Chief)
+		/obj/item/clothing/head/hardhat/firefighter)
 
 /*
  * Tool Closet
