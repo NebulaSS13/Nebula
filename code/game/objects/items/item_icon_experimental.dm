@@ -22,8 +22,8 @@ var/list/icon_state_cache = list()
 /obj/item/Initialize(ml, material_key)
 	. = ..()
 	if(on_mob_icon)
-		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
 		icon = on_mob_icon
+		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
 		icon_state = ICON_STATE_WORLD
 		update_icon()
 
