@@ -1,6 +1,6 @@
 /mob/living/simple_animal/mouse
-	name = "snaprat"
-	real_name = "snaprat"
+	name = "mouse"
+	real_name = "mouse"
 	desc = "It's a small rodent."
 	icon_state = "mouse_gray"
 	item_state = "mouse_gray"

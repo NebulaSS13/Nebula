@@ -255,8 +255,8 @@
 	gender = pick(MALE, FEMALE)
 
 /mob/living/simple_animal/cat/fluff/ran
-	name = "Rantime"
-	desc = "Her full name is Ran Ste-Su G'Mindel Time."
+	name = "Runtime"
+	desc = "Under no circumstances is this feline allowed inside the atmospherics system."
 	gender = FEMALE
 	icon_state = "cat2"
 	item_state = "cat2"

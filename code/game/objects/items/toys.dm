@@ -725,8 +725,8 @@
 		user.visible_message("<span class='notice'><b>\The [user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
 
 /obj/item/toy/plushie/mouse
-	name = "snaprat plush"
-	desc = "A plushie of a snaprat! What was once considered a vile rodent is now your very best friend."
+	name = "mouse plush"
+	desc = "A plushie of a mouse! What was once considered a vile rodent is now your very best friend."
 	icon_state = "mouseplushie"
 
 /obj/item/toy/plushie/kitten
