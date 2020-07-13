@@ -122,11 +122,11 @@
 			to_chat(user, SPAN_WARNING("\The [src] is locked!"))
 		return TRUE
 
-	if(istype(I,/obj/item/material/lock_construct))
+	if(istype(I,/obj/item/lock_construct))
 		if(lock)
 			to_chat(user, SPAN_WARNING("\The [src] already has a lock."))
 		else
-			var/obj/item/material/lock_construct/L = I
+			var/obj/item/lock_construct/L = I
 			lock = L.create_lock(src,user)
 		return
 

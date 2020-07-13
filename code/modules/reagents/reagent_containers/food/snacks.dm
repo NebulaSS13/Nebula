@@ -132,8 +132,8 @@
 		to_chat(user, "<span class='notice'>\The [src] isn't open!</span>")
 		return 0
 	// Eating with forks
-	if(istype(W,/obj/item/material/kitchen/utensil))
-		var/obj/item/material/kitchen/utensil/U = W
+	if(istype(W,/obj/item/kitchen/utensil))
+		var/obj/item/kitchen/utensil/U = W
 		if(U.scoop_food)
 			if(!U.reagents)
 				U.create_reagents(5)
@@ -2836,7 +2836,7 @@
 
 // Dough + rolling pin = flat dough
 /obj/item/chems/food/snacks/dough/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/material/kitchen/rollingpin))
+	if(istype(W,/obj/item/kitchen/rollingpin))
 		new /obj/item/chems/food/snacks/sliceable/flatdough(src)
 		to_chat(user, "You flatten the dough.")
 		qdel(src)
@@ -3066,7 +3066,7 @@
 
 // potato + knife = raw sticks
 /obj/item/chems/food/snacks/grown/potato/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/material/knife))
+	if(istype(W,/obj/item/knife))
 		new /obj/item/chems/food/snacks/rawsticks(src)
 		to_chat(user, "You cut the potato.")
 		qdel(src)

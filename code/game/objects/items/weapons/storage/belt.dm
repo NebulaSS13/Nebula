@@ -125,8 +125,8 @@
 		/obj/item/taperoll/engineering,
 		/obj/item/inducer/,
 		/obj/item/robotanalyzer,
-		/obj/item/material/minihoe,
-		/obj/item/material/hatchet,
+		/obj/item/minihoe,
+		/obj/item/hatchet,
 		/obj/item/scanner/plant,
 		/obj/item/taperoll,
 		/obj/item/extinguisher/mini,
@@ -273,7 +273,7 @@
 		/obj/item/taperecorder,
 		/obj/item/folder,
 		/obj/item/paper,
-		/obj/item/material/clipboard,
+		/obj/item/clipboard,
 		/obj/item/modular_computer/tablet,
 		/obj/item/flashlight,
 		/obj/item/modular_computer/pda,
@@ -329,7 +329,7 @@
 		/obj/item/taperecorder,
 		/obj/item/folder,
 		/obj/item/paper,
-		/obj/item/material/clipboard,
+		/obj/item/clipboard,
 		/obj/item/modular_computer/tablet,
 		/obj/item/flash,
 		/obj/item/flashlight,
@@ -408,7 +408,7 @@
 		/obj/item/tape,
 		/obj/item/scanner/gas
 		)
-	can_holster = list(/obj/item/material/hatchet/machete)
+	can_holster = list(/obj/item/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
 

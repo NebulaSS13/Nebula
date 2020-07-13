@@ -180,7 +180,7 @@
 		side = "right"
 
 /obj/item/chems/food/drinks/glass2/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/material/kitchen/utensil/spoon))
+	if(istype(W, /obj/item/kitchen/utensil/spoon))
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='warning'>[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube.</span>")
 			playsound(src, "shatter", 30, 1)

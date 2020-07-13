@@ -8,7 +8,7 @@
 		/obj/item/hemostat = 100,
 		/obj/item/stack/cable_coil = 75,
 		/obj/item/assembly/mousetrap = 10,
-		/obj/item/material/kitchen/utensil/fork = 75
+		/obj/item/kitchen/utensil/fork = 75
 	)
 	min_duration = 100
 	max_duration = 120

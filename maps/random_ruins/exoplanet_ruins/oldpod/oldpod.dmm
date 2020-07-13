@@ -293,7 +293,7 @@
 "aM" = (
 /obj/effect/landmark/corpse/scientist,
 /obj/item/melee/baton/cattleprod,
-/obj/item/material/shard,
+/obj/item/shard,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
@@ -306,10 +306,10 @@
 /obj/item/stack/material/rods,
 /obj/item/stack/material/rods,
 /obj/item/stack/material/rods,
-/obj/item/material/shard,
-/obj/item/material/shard,
-/obj/item/material/shard,
-/obj/item/material/shard,
+/obj/item/shard,
+/obj/item/shard,
+/obj/item/shard,
+/obj/item/shard,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "aO" = (

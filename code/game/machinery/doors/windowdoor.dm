@@ -36,7 +36,7 @@
 
 /obj/machinery/door/window/proc/shatter(var/display_message = 1)
 	frame_type = null
-	new /obj/item/material/shard(loc)
+	new /obj/item/shard(loc)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")

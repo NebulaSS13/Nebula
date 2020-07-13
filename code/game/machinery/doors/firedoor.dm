@@ -210,7 +210,7 @@
 				to_chat(user, SPAN_WARNING("You must remain still to complete this task."))
 				return
 
-	if(!blocked && (isCrowbar(C) || istype(C,/obj/item/material/twohanded/fireaxe)))
+	if(!blocked && (isCrowbar(C) || istype(C,/obj/item/twohanded/fireaxe)))
 		if(operating)
 			return
 
@@ -220,8 +220,8 @@
 			"You hear someone struggle and metal straining.")
 			return
 
-		if(istype(C,/obj/item/material/twohanded/fireaxe))
-			var/obj/item/material/twohanded/fireaxe/F = C
+		if(istype(C,/obj/item/twohanded/fireaxe))
+			var/obj/item/twohanded/fireaxe/F = C
 			if(!F.wielded)
 				return
 

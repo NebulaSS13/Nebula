@@ -479,7 +479,7 @@
 /area/space)
 "bu" = (
 /obj/structure/table/rack,
-/obj/item/material/knife/combat,
+/obj/item/knife/combat,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bv" = (
@@ -566,7 +566,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bD" = (
-/obj/item/material/shard,
+/obj/item/shard,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -1263,7 +1263,7 @@
 	icon_state = "tube1";
 	pixel_y = 0
 	},
-/obj/item/material/knife/folding,
+/obj/item/knife/folding,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_crew_bathroom)
@@ -2180,7 +2180,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "fJ" = (
-/obj/item/material/shard,
+/obj/item/shard,
 /obj/structure/coatrack,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -2237,7 +2237,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/material/kitchen/utensil/fork,
+/obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fT" = (
@@ -2448,7 +2448,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "gv" = (
@@ -2792,7 +2792,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "hy" = (
-/obj/item/material/shard,
+/obj/item/shard,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "hz" = (
@@ -2982,7 +2982,7 @@
 "ia" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/material/kitchen/utensil/fork,
+/obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "ib" = (
@@ -3112,7 +3112,7 @@
 /obj/structure/bed/chair/comfy/red{
 	dir = 4
 	},
-/obj/item/material/knife/combat,
+/obj/item/knife/combat,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iq" = (
@@ -3335,7 +3335,7 @@
 "iR" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/material/kitchen/utensil/spoon,
+/obj/item/kitchen/utensil/spoon,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iS" = (
@@ -3676,7 +3676,7 @@
 /area/casino/casino_mainfloor)
 "jH" = (
 /obj/structure/table/marble,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /obj/item/flame/lighter/zippo/random,
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
@@ -3686,12 +3686,12 @@
 /area/casino/casino_mainfloor)
 "jJ" = (
 /obj/structure/table/woodentable,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /obj/item/chems/food/snacks/cubancarp,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jK" = (
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jL" = (
@@ -3796,7 +3796,7 @@
 /obj/structure/table/gamblingtable,
 /obj/structure/casino/bj_table/bj_right,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jY" = (
@@ -4634,7 +4634,7 @@
 /area/casino/casino_private_vip)
 "ma" = (
 /obj/structure/table/woodentable,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
@@ -5390,7 +5390,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "Bb" = (
-/obj/item/material/shard,
+/obj/item/shard,
 /obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)

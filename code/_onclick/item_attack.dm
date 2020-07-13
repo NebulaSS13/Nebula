@@ -101,8 +101,13 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 //Called when a weapon is used to make a successful melee attack on a mob. Returns whether damage was dealt.
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
-	if(hitsound)
-		playsound(loc, hitsound, 50, 1, -1)
+	var/use_hitsound = hitsound
+	if(!use_hitsound)
+		if(edge || sharp)
+			use_hitsound = 'sound/weapons/bladeslice.ogg'
+		else
+			use_hitsound = "swing_hit"
+	playsound(loc, use_hitsound, 50, 1, -1)
 
 	var/power = force
 	if(MUTATION_HULK in user.mutations)

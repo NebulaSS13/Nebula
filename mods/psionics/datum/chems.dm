@@ -25,4 +25,4 @@
 			new /obj/item/soulstone(location)
 	else
 		for(var/i = 1, i <= created_volume*2, i++)
-			new /obj/item/material/shard(location, /decl/material/solid/gemstone/crystal)
+			new /obj/item/shard(location, /decl/material/solid/gemstone/crystal)

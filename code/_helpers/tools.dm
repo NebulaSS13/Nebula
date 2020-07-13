@@ -52,5 +52,5 @@
 /obj/item/crowbar/iscrowbar()
 	return TRUE
 
-/obj/item/material/hatchet/ishatchet()
+/obj/item/hatchet/ishatchet()
 	return TRUE

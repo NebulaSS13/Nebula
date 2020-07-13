@@ -312,7 +312,7 @@
 			return
 
 		// if paper is not in usr, then it must be near them, or in a clipboard or folder, which must be in or near usr
-		if(src.loc != usr && !src.Adjacent(usr) && !((istype(src.loc, /obj/item/material/clipboard) || istype(src.loc, /obj/item/folder)) && (src.loc.loc == usr || src.loc.Adjacent(usr)) ) )
+		if(src.loc != usr && !src.Adjacent(usr) && !((istype(src.loc, /obj/item/clipboard) || istype(src.loc, /obj/item/folder)) && (src.loc.loc == usr || src.loc.Adjacent(usr)) ) )
 			return
 
 		var/last_fields_value = fields
@@ -397,7 +397,7 @@
 		return
 
 	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
-		if((!in_range(src, usr) && loc != user && !( istype(loc, /obj/item/material/clipboard) ) && loc.loc != user && user.get_active_hand() != P))
+		if((!in_range(src, usr) && loc != user && !( istype(loc, /obj/item/clipboard) ) && loc.loc != user && user.get_active_hand() != P))
 			return
 
 		stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [P.name].</i>"

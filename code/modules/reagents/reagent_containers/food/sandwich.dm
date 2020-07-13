@@ -1,6 +1,6 @@
 /obj/item/chems/food/snacks/slice/bread/attackby(obj/item/W, mob/user)
 
-	if(istype(W,/obj/item/material/shard) || istype(W,/obj/item/chems/food/snacks))
+	if(istype(W,/obj/item/shard) || istype(W,/obj/item/chems/food/snacks))
 		var/obj/item/chems/food/snacks/csandwich/S = new(get_turf(src))
 		S.attackby(W,user)
 		qdel(src)
@@ -25,7 +25,7 @@
 	if(src.contents.len > sandwich_limit)
 		to_chat(user, "<span class='wwarning'>If you put anything else on \the [src] it's going to collapse.</span>")
 		return
-	else if(istype(W,/obj/item/material/shard))
+	else if(istype(W,/obj/item/shard))
 		if(!user.unEquip(W, src))
 			return
 		to_chat(user, "<span class='warning'>You hide [W] in \the [src].</span>")
@@ -87,7 +87,7 @@
 
 	var/obj/item/shard
 	for(var/obj/item/O in contents)
-		if(istype(O,/obj/item/material/shard))
+		if(istype(O,/obj/item/shard))
 			shard = O
 			break
 

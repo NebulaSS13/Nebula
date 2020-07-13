@@ -28,8 +28,8 @@
 	name = "Make incision in slime"
 	allowed_tools = list(
 		/obj/item/scalpel = 100,
-		/obj/item/material/knife = 75,
-		/obj/item/material/shard = 50
+		/obj/item/knife = 75,
+		/obj/item/shard = 50
 	)
 	min_duration = 5
 	max_duration = 2 SECONDS
@@ -57,8 +57,8 @@
 	name = "Dissect innards"
 	allowed_tools = list(
 		/obj/item/scalpel = 100,
-		/obj/item/material/knife = 75,
-		/obj/item/material/shard = 50
+		/obj/item/knife = 75,
+		/obj/item/shard = 50
 	)
 	min_duration = 5
 	max_duration = 2 SECONDS
@@ -87,8 +87,8 @@
 	allowed_tools = list(
 		/obj/item/scalpel/manager = 100,
 		/obj/item/circular_saw = 100,
-		/obj/item/material/knife = 75,
-		/obj/item/material/hatchet = 75
+		/obj/item/knife = 75,
+		/obj/item/hatchet = 75
 	)
 	min_duration = 1 SECOND
 	max_duration = 3 SECONDS

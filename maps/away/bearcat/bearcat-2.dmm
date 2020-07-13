@@ -1424,7 +1424,7 @@
 "cK" = (
 /obj/structure/table/standard,
 /obj/random/smokes,
-/obj/item/material/ashtray/glass,
+/obj/item/ashtray/glass,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -2305,7 +2305,7 @@
 	},
 /obj/item/storage/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/material/kitchen/rollingpin,
+/obj/item/kitchen/rollingpin,
 /obj/item/chems/food/condiment/small/saltshaker{
 	pixel_x = -3;
 	pixel_y = 0
@@ -4619,7 +4619,7 @@
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "hN" = (
-/obj/item/material/shard,
+/obj/item/shard,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/atmos)
 "hO" = (
@@ -4814,7 +4814,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "id" = (
-/obj/item/material/shard,
+/obj/item/shard,
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
@@ -5404,7 +5404,7 @@
 /area/ship/scrap/maintenance/atmos)
 "js" = (
 /obj/machinery/atmospherics/valve/open,
-/obj/item/material/shard/phoron,
+/obj/item/shard/borosilicate,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jt" = (
@@ -5518,7 +5518,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jG" = (
-/obj/item/material/shard/phoron,
+/obj/item/shard/borosilicate,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jH" = (
@@ -5814,7 +5814,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
 "IG" = (
-/obj/item/material/shard,
+/obj/item/shard,
 /obj/machinery/atmospherics/unary/outlet_injector{
 	icon_state = "map_injector";
 	dir = 8;
@@ -5848,7 +5848,7 @@
 	},
 /obj/structure/table/standard,
 /obj/item/toy/prize/powerloader,
-/obj/item/material/ashtray/plastic,
+/obj/item/ashtray/plastic,
 /obj/machinery/recharger,
 /obj/structure/sign/poster{
 	pixel_y = 32

@@ -1,4 +1,4 @@
-/obj/item/material/clipboard
+/obj/item/clipboard
 	name = "clipboard"
 	desc = "It's a board with a clip used to organise papers."
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -15,14 +15,14 @@
 	applies_material_name = FALSE
 	material = /decl/material/solid/wood
 
-/obj/item/material/clipboard/Initialize()
+/obj/item/clipboard/Initialize()
 	. = ..()
 	update_icon()
 	if(material)
 		desc = initial(desc)
 		desc += " It's made of [material.use_name]."
 
-/obj/item/material/clipboard/MouseDrop(obj/over_object) //Quick clipboard fix. -Agouri
+/obj/item/clipboard/MouseDrop(obj/over_object) //Quick clipboard fix. -Agouri
 	if(ishuman(usr))
 		var/mob/M = usr
 		if(!(istype(over_object, /obj/screen) ))
@@ -40,7 +40,7 @@
 			add_fingerprint(usr)
 			return
 
-/obj/item/material/clipboard/on_update_icon()
+/obj/item/clipboard/on_update_icon()
 	..()
 	if(toppaper)
 		overlays += overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR)
@@ -50,7 +50,7 @@
 	overlays += overlay_image(icon, "clipboard_over", flags=RESET_COLOR)
 	return
 
-/obj/item/material/clipboard/attackby(obj/item/W, mob/user)
+/obj/item/clipboard/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
 		if(!user.unEquip(W, src))
@@ -66,7 +66,7 @@
 
 	return
 
-/obj/item/material/clipboard/attack_self(mob/user)
+/obj/item/clipboard/attack_self(mob/user)
 	var/dat = "<title>Clipboard</title>"
 	if(haspen)
 		dat += "<A href='?src=\ref[src];pen=1'>Remove Pen</A><BR><HR>"
@@ -90,7 +90,7 @@
 	add_fingerprint(usr)
 	return
 
-/obj/item/material/clipboard/Topic(href, href_list)
+/obj/item/clipboard/Topic(href, href_list)
 	..()
 	if((usr.stat || usr.restrained()))
 		return
@@ -175,21 +175,21 @@
 		update_icon()
 	return
 
-/obj/item/material/clipboard/ebony
+/obj/item/clipboard/ebony
 	material = /decl/material/solid/wood/ebony
 
-/obj/item/material/clipboard/steel
+/obj/item/clipboard/steel
 	material = /decl/material/solid/metal/steel
 	material = /decl/material/solid/metal/steel
 
-/obj/item/material/clipboard/aluminium
+/obj/item/clipboard/aluminium
 	material = /decl/material/solid/metal/aluminium
 	material = /decl/material/solid/metal/aluminium
 
-/obj/item/material/clipboard/glass
+/obj/item/clipboard/glass
 	material = /decl/material/solid/glass
 	material = /decl/material/solid/glass
 
-/obj/item/material/clipboard/plastic
+/obj/item/clipboard/plastic
 	material = /decl/material/solid/plastic
 	material = /decl/material/solid/plastic

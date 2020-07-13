@@ -2413,7 +2413,7 @@
 /area/magshield/west)
 "gb" = (
 /obj/structure/table/steel,
-/obj/item/material/ashtray/plastic,
+/obj/item/ashtray/plastic,
 /obj/random/smokes,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2840,7 +2840,7 @@
 /area/magshield/west)
 "hn" = (
 /obj/structure/table/woodentable,
-/obj/item/material/sword/replica,
+/obj/item/sword/replica,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "ho" = (
@@ -2885,7 +2885,7 @@
 /area/magshield/west)
 "hx" = (
 /obj/structure/table/steel,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hy" = (
@@ -3077,7 +3077,7 @@
 /area/magshield/west)
 "hY" = (
 /obj/structure/table/steel,
-/obj/item/material/ashtray/plastic,
+/obj/item/ashtray/plastic,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -3104,7 +3104,7 @@
 /area/magshield/west)
 "ib" = (
 /obj/structure/table/woodentable,
-/obj/item/material/ashtray/bronze,
+/obj/item/ashtray,
 /obj/random/smokes,
 /obj/machinery/light,
 /turf/simulated/floor/carpet/blue,
@@ -3140,7 +3140,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/east)
 "ii" = (
-/obj/item/material/minihoe,
+/obj/item/minihoe,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -3594,7 +3594,7 @@
 /area/magshield/south)
 "jy" = (
 /obj/structure/table/marble,
-/obj/item/material/knife/kitchen/cleaver,
+/obj/item/knife/kitchen/cleaver,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jz" = (
@@ -3746,7 +3746,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/material/knife/table,
+/obj/item/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jU" = (
@@ -3761,7 +3761,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jW" = (
-/obj/item/material/knife/hook,
+/obj/item/knife/hook,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "jX" = (
@@ -3998,7 +3998,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kD" = (
-/obj/item/material/kitchen/utensil/fork/plastic,
+/obj/item/kitchen/utensil/fork/plastic,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -4047,7 +4047,7 @@
 /area/magshield/south)
 "kJ" = (
 /obj/structure/table/marble,
-/obj/item/material/knife/table,
+/obj/item/knife/table,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kK" = (
@@ -4114,7 +4114,7 @@
 /area/magshield/south)
 "kT" = (
 /obj/structure/curtain/open/bed,
-/obj/item/material/knife/table,
+/obj/item/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kU" = (
@@ -4174,7 +4174,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/material/kitchen/utensil/fork/plastic,
+/obj/item/kitchen/utensil/fork/plastic,
 /obj/item/trash/plate,
 /turf/simulated/floor/tiled,
 /area/magshield/south)

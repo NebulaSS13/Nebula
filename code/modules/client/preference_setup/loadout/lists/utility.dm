@@ -9,7 +9,7 @@
 
 /datum/gear/utility/clipboard
 	display_name = "clipboard"
-	path = /obj/item/material/clipboard
+	path = /obj/item/clipboard
 
 /datum/gear/utility/folder
 	display_name = "folders"

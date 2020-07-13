@@ -211,14 +211,14 @@
 				/obj/item/chems/glass/beaker/vial/random/toxin = 1,
 				/obj/item/chems/glass/beaker/sulphuric = 1,
 				/obj/item/contraband/poster = 5,
-				/obj/item/material/butterflyblade = 3,
-				/obj/item/material/butterflyhandle = 3,
+				/obj/item/butterflyblade = 3,
+				/obj/item/butterflyhandle = 3,
 				/obj/item/melee/baton/cattleprod = 1,
-				/obj/item/material/knife/combat = 1,
-				/obj/item/material/knife/folding = 1,
-				/obj/item/material/knife/folding/wood = 1,
-				/obj/item/material/knife/folding/combat/balisong = 2,
-				/obj/item/material/knife/folding/combat/switchblade = 1,
+				/obj/item/knife/combat = 1,
+				/obj/item/knife/folding = 1,
+				/obj/item/knife/folding/wood = 1,
+				/obj/item/knife/folding/combat/balisong = 2,
+				/obj/item/knife/folding/combat/switchblade = 1,
 				/obj/item/storage/secure/briefcase/money = 1,
 				/obj/item/storage/box/syndie_kit/cigarette = 1,
 				/obj/item/stack/telecrystal = 1,
@@ -481,8 +481,8 @@
 				/obj/item/toy/therapy_yellow,
 				/obj/item/toy/therapy_orange,
 				/obj/item/toy/therapy_green,
-				/obj/item/material/sword/cult_toy,
-				/obj/item/material/sword/katana/toy,
+				/obj/item/sword/cult_toy,
+				/obj/item/sword/katana/toy,
 				/obj/item/toy/snappop,
 				/obj/item/toy/sword,
 				/obj/item/toy/water_balloon,
@@ -1144,7 +1144,7 @@ var/list/random_useful_
 			random_junk_ += /obj/item/paper/crumpled
 			random_junk_ += /obj/item/inflatable/torn
 			random_junk_ += /obj/effect/decal/cleanable/molten_item
-			random_junk_ += /obj/item/material/shard
+			random_junk_ += /obj/item/shard
 			random_junk_ += /obj/item/hand/missing_card
 
 			random_junk_ -= /obj/item/trash/plate
@@ -1169,12 +1169,12 @@ var/list/random_useful_
 	icon_state = "clipboard_preview"
 
 /obj/random/clipboard/spawn_choices()
-	return list(/obj/item/material/clipboard = 300,
-				/obj/item/material/clipboard/steel = 200,
-				/obj/item/material/clipboard/aluminium = 200,
-				/obj/item/material/clipboard/plastic = 200,
-				/obj/item/material/clipboard/glass = 100,
-				/obj/item/material/clipboard/ebony = 10)
+	return list(/obj/item/clipboard = 300,
+				/obj/item/clipboard/steel = 200,
+				/obj/item/clipboard/aluminium = 200,
+				/obj/item/clipboard/plastic = 200,
+				/obj/item/clipboard/glass = 100,
+				/obj/item/clipboard/ebony = 10)
 
 //Random MRE stuff
 

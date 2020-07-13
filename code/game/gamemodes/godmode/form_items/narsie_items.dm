@@ -1,12 +1,12 @@
 
 //SACRIFICE DAGGER
 //If used on a person on an altar, causes the user to carve into them, dealing moderate damage and gaining points for the altar's god.
-/obj/item/material/knife/ritual/sacrifice
+/obj/item/knife/ritual/sacrifice
 	name = "sacrificial dagger"
 	desc = "This knife is dull but well used."
 	material = /decl/material/solid/stone/cult
 
-/obj/item/material/knife/ritual/sacrifice/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
+/obj/item/knife/ritual/sacrifice/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
 	var/turf/T = get_turf(a)
 	var/obj/structure/deity/altar/altar = locate() in T
 	if(!altar)
@@ -35,7 +35,7 @@
 
 //EXEC AXE
 //If a person hit by this axe within three seconds dies, sucks in their soul to be harvested at altars.
-/obj/item/material/twohanded/fireaxe/cult
+/obj/item/twohanded/fireaxe/cult
 	name = "terrible axe"
 	desc = "Its head is sharp and stained red with heavy use."
 	icon = 'icons/obj/items/weapon/bone_axe.dmi'
@@ -43,12 +43,12 @@
 	base_icon = "bone_axe"
 	var/stored_power = 0
 
-/obj/item/material/twohanded/fireaxe/cult/examine(mob/user)
+/obj/item/twohanded/fireaxe/cult/examine(mob/user)
 	. = ..()
 	if(stored_power)
 		to_chat(user, "<span class='notice'>It exudes a death-like smell.</span>")
 
-/obj/item/material/twohanded/fireaxe/cult/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
+/obj/item/twohanded/fireaxe/cult/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
 	if(istype(a, /obj/structure/deity/altar))
 		var/obj/structure/deity/altar/altar = a
 		if(stored_power && altar.linked_god)
@@ -58,12 +58,12 @@
 	if(ismob(a))
 		var/mob/M = a
 		if(M.stat != DEAD)
-			GLOB.death_event.register(M,src,/obj/item/material/twohanded/fireaxe/cult/proc/gain_power)
+			GLOB.death_event.register(M,src,/obj/item/twohanded/fireaxe/cult/proc/gain_power)
 		spawn(30)
 			GLOB.death_event.unregister(M,src)
 	return ..()
 
-/obj/item/material/twohanded/fireaxe/cult/proc/gain_power()
+/obj/item/twohanded/fireaxe/cult/proc/gain_power()
 	stored_power += 50
 	src.visible_message("<span class='cult'>\The [src] screeches as the smell of death fills the air!</span>")
 

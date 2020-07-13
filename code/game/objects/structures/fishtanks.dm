@@ -73,7 +73,7 @@ GLOBAL_LIST_INIT(fishtank_cache, new)
 	deleting = 1
 	var/turf/T = get_turf(src)
 	playsound(T, "shatter", 70, 1)
-	new /obj/item/material/shard(T)
+	new /obj/item/shard(T)
 	if(!silent)
 		if(contents.len || reagents.total_volume)
 			visible_message(SPAN_DANGER("\The [src] shatters, spilling its contents everywhere!"))

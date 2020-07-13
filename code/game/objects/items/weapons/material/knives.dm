@@ -1,5 +1,5 @@
 //knives for stabbing and slashing and so on and so forth
-/obj/item/material/knife //master obj
+/obj/item/knife //master obj
 	name = "knife"
 	desc = "You call that a knife? This is a master item - berate the admin or mapper who spawned this"
 	icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
@@ -14,11 +14,13 @@
 	sharp = TRUE
 	edge = TRUE
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
+	applies_material_name = TRUE
+	applies_material_colour = TRUE
 	var/draw_handle
 	var/handle_color
 	var/valid_handle_colors
 
-/obj/item/material/knife/on_update_icon()
+/obj/item/knife/on_update_icon()
 	..()
 	if(draw_handle)
 		cut_overlays()
@@ -28,7 +30,7 @@
 	if(blood_overlay)
 		add_overlay(blood_overlay)
 
-/obj/item/material/knife/attack(mob/living/carbon/M, mob/living/carbon/user, target_zone)
+/obj/item/knife/attack(mob/living/carbon/M, mob/living/carbon/user, target_zone)
 	if(!istype(M))
 		return ..()
 
@@ -41,7 +43,7 @@
 	return ..()
 
 //table knives
-/obj/item/material/knife/table
+/obj/item/knife/table
 	name = "table knife"
 	desc = "A simple table knife, used to cut up individual portions of food."
 	on_mob_icon = 'icons/obj/items/weapon/knives/table.dmi'
@@ -52,10 +54,10 @@
 	applies_material_name = FALSE
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/material/knife/table/plastic
+/obj/item/knife/table/plastic
 	material = /decl/material/solid/plastic
 
-/obj/item/material/knife/table/primitive
+/obj/item/knife/table/primitive
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	on_mob_icon = 'icons/obj/items/weapon/knives/savage.dmi'
@@ -63,19 +65,19 @@
 	applies_material_colour = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
-/obj/item/material/knife/table/primitive/get_autopsy_descriptors()
+/obj/item/knife/table/primitive/get_autopsy_descriptors()
 	. = ..()
 	. += "serrated"
 
 //kitchen knives
-/obj/item/material/knife/kitchen
+/obj/item/knife/kitchen
 	name = "kitchen knife"
 	on_mob_icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
 	desc = "A general purpose chef's knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
 	applies_material_name = FALSE
 	draw_handle = TRUE
 
-/obj/item/material/knife/kitchen/cleaver
+/obj/item/knife/kitchen/cleaver
 	name = "butcher's cleaver"
 	desc = "A heavy blade used to process food, especially animal carcasses."
 	on_mob_icon = 'icons/obj/items/weapon/knives/cleaver.dmi'
@@ -83,14 +85,14 @@
 	material_force_multiplier = 0.18
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
-/obj/item/material/knife/kitchen/cleaver/bronze
+/obj/item/knife/kitchen/cleaver/bronze
 	name = "master chef's cleaver"
 	desc = "A heavy blade used to process food. This one is so fancy, it must be for a truly exceptional chef. There aren't any here, so what it's doing here is anyone's guess."
 	material = /decl/material/solid/metal/bronze
 	material_force_multiplier = 1 //25 with material bronze
 
 //fighting knives
-/obj/item/material/knife/combat
+/obj/item/knife/combat
 	name = "combat knife"
 	desc = "A blade with a saw-like pattern on the reverse edge and a heavy handle."
 	on_mob_icon = 'icons/obj/items/weapon/knives/tactical.dmi'
@@ -99,36 +101,36 @@
 	max_force = 15
 	draw_handle = TRUE
 
-/obj/item/material/knife/combat/get_autopsy_descriptors()
+/obj/item/knife/combat/get_autopsy_descriptors()
 	. = ..()
 	. += "serrated"
 
-/obj/item/material/knife/combat/glass
+/obj/item/knife/combat/glass
 	material = /decl/material/solid/glass
 
-/obj/item/material/knife/combat/titanium
+/obj/item/knife/combat/titanium
 	material = /decl/material/solid/metal/plasteel/titanium
 
 //random stuff
-/obj/item/material/knife/hook
+/obj/item/knife/hook
 	name = "meat hook"
 	desc = "A sharp, metal hook what sticks into things."
 	on_mob_icon = 'icons/obj/items/weapon/knives/hook.dmi'
 	sharp = FALSE
 
-/obj/item/material/knife/ritual
+/obj/item/knife/ritual
 	name = "ritual knife"
 	desc = "The unearthly energies that once powered this blade are now dormant."
 	on_mob_icon = 'icons/obj/items/weapon/knives/ritual.dmi'
 	applies_material_colour = FALSE
 	applies_material_name = FALSE
 
-/obj/item/material/knife/ritual/get_autopsy_descriptors()
+/obj/item/knife/ritual/get_autopsy_descriptors()
 	. = ..()
 	. += "curved"
 
 //Utility knives
-/obj/item/material/knife/utility
+/obj/item/knife/utility
 	name = "utility knife"
 	desc = "An utility knife with a polymer handle, commonly used through human space."
 	on_mob_icon = 'icons/obj/items/weapon/knives/utility.dmi'
@@ -137,7 +139,7 @@
 	w_class = ITEM_SIZE_SMALL
 	draw_handle = TRUE
 
-/obj/item/material/knife/utility/lightweight
+/obj/item/knife/utility/lightweight
 	name = "lightweight utility knife"
 	desc = "A lightweight utility knife made out of a titanium alloy."
 	material = /decl/material/solid/metal/plasteel/titanium

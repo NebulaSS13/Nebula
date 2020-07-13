@@ -90,7 +90,7 @@
 	description = "This procedure detaches an internal organ for removal."
 	allowed_tools = list(
 		/obj/item/scalpel = 100,
-		/obj/item/material/shard = 50
+		/obj/item/shard = 50
 	)
 	min_duration = 90
 	max_duration = 110
@@ -141,8 +141,8 @@
 	allowed_tools = list(
 		/obj/item/hemostat = 100,
 		/obj/item/wirecutters = 75,
-		/obj/item/material/knife = 75,
-		/obj/item/material/kitchen/utensil/fork = 20
+		/obj/item/knife = 75,
+		/obj/item/kitchen/utensil/fork = 20
 	)
 	min_duration = 60
 	max_duration = 80

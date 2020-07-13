@@ -55,7 +55,7 @@
 		playsound(user, 'sound/effects/snap.ogg', 40, 1)
 		to_chat(user, SPAN_WARNING("\The [src] shatters like the cheap garbage it was!"))
 		qdel(src)
-		user.put_in_hands(new /obj/item/material/shard(get_turf(user), material.type))
+		user.put_in_hands(new /obj/item/shard(get_turf(user), material.type))
 	return
 
 /obj/item/crowbar/red

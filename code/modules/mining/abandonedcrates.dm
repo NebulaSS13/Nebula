@@ -95,7 +95,7 @@
 		if(81 to 82)
 			new/obj/item/gun/energy/plasmacutter(src)
 		if(83 to 84)
-			new/obj/item/material/sword/katana/toy(src)
+			new/obj/item/sword/katana/toy(src)
 		if(85 to 88)
 			new/obj/item/seeds/random(src)
 		if(89, 90)
@@ -103,7 +103,7 @@
 		if(91)
 			new/obj/item/soulstone(src)
 		if(92)
-			new/obj/item/material/sword/katana(src)
+			new/obj/item/sword/katana(src)
 		if(93)
 			new/obj/item/storage/firstaid/combat(src) // Probably the least OP
 		if(94) // Why the hell not

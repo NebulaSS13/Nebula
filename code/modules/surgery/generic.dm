@@ -95,9 +95,9 @@
 	description = "This procedure cuts a small wound that allows access to deeper tissue."
 	allowed_tools = list(
 		/obj/item/scalpel = 100,
-		/obj/item/material/knife = 75,
+		/obj/item/knife = 75,
 		/obj/item/broken_bottle = 50,
-		/obj/item/material/shard = 50
+		/obj/item/shard = 50
 	)
 	min_duration = 90
 	max_duration = 110
@@ -191,8 +191,8 @@
 	allowed_tools = list(
 		/obj/item/retractor = 100,
 		/obj/item/crowbar = 75,
-		/obj/item/material/knife = 50,
-		/obj/item/material/kitchen/utensil/fork = 50
+		/obj/item/knife = 50,
+		/obj/item/kitchen/utensil/fork = 50
 	)
 	min_duration = 30
 	max_duration = 40
@@ -302,7 +302,7 @@
 	name = "Amputate limb"
 	allowed_tools = list(
 		/obj/item/circular_saw = 100,
-		/obj/item/material/hatchet = 75
+		/obj/item/hatchet = 75
 	)
 	min_duration = 110
 	max_duration = 160

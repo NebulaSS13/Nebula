@@ -456,7 +456,7 @@
 
 		plant_seed(user, O)
 
-	else if (istype(O, /obj/item/material/minihoe))  // The minihoe
+	else if (istype(O, /obj/item/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
 			user.visible_message("<span class='notice'>[user] starts uprooting the weeds.</span>", "<span class='notice'>You remove the weeds from the [src].</span>")

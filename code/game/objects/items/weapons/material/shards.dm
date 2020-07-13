@@ -1,6 +1,6 @@
 // Glass shards
 
-/obj/item/material/shard
+/obj/item/shard
 	name = "shard"
 	icon = 'icons/obj/items/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
@@ -14,11 +14,13 @@
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	material = /decl/material/solid/glass
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
 	unbreakable = 1 //It's already broken.
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
 
-/obj/item/material/shard/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/shard/attack(mob/living/M, mob/living/user, var/target_zone)
 	. = ..()
 	if(. && !has_handle)
 		var/mob/living/carbon/human/H = user
@@ -28,7 +30,7 @@
 				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
 				hand.take_external_damage(rand(5,10), used_weapon = src)
 
-/obj/item/material/shard/set_material(var/new_material)
+/obj/item/shard/set_material(var/new_material)
 	..(new_material)
 	if(!istype(material))
 		return
@@ -47,7 +49,7 @@
 	else
 		qdel(src)
 
-/obj/item/material/shard/on_update_icon()
+/obj/item/shard/on_update_icon()
 	if(material)
 		color = material.color
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
@@ -56,7 +58,7 @@
 		color = "#ffffff"
 		alpha = 255
 
-/obj/item/material/shard/attackby(obj/item/W, mob/user)
+/obj/item/shard/attackby(obj/item/W, mob/user)
 	if(isWelder(W) && material.shard_can_repair)
 		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
@@ -82,7 +84,7 @@
 		return
 	return ..()
 
-/obj/item/material/shard/on_update_icon()
+/obj/item/shard/on_update_icon()
 	overlays.Cut()
 	. = ..()
 	if(has_handle)
@@ -91,7 +93,7 @@
 		I.color = has_handle
 		overlays += I
 
-/obj/item/material/shard/Crossed(atom/movable/AM)
+/obj/item/shard/Crossed(atom/movable/AM)
 	..()
 	if(isliving(AM))
 		var/mob/M = AM
@@ -127,14 +129,14 @@
 			return
 
 // Preset types - left here for the code that uses them
-/obj/item/material/shard/phoron/Initialize(mapload, material_key)
-	. = ..(loc, /decl/material/solid/glass/borosilicate)
+/obj/item/shard/borosilicate
+	material = /decl/material/solid/glass/borosilicate
 
-/obj/item/material/shard/shrapnel
+/obj/item/shard/shrapnel
 	name = "shrapnel"
 	material = /decl/material/solid/metal/steel
 	w_class = ITEM_SIZE_TINY	//it's real small
 
-/obj/item/material/shard/plastic
+/obj/item/shard/plastic
 	material = /decl/material/solid/plastic
 	w_class = ITEM_SIZE_TINY

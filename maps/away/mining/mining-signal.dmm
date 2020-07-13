@@ -177,7 +177,7 @@
 /area/outpost/abandoned)
 "aO" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/material/shard,
+/obj/item/shard,
 /turf/simulated/floor/tiled/freezer,
 /area/outpost/abandoned)
 "aP" = (
@@ -1079,7 +1079,7 @@
 "dE" = (
 /obj/effect/decal/remains,
 /obj/structure/table,
-/obj/item/material/shard{
+/obj/item/shard{
 	icon_state = "shardlarge"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -1087,7 +1087,7 @@
 /area/outpost/abandoned)
 "dF" = (
 /obj/structure/table,
-/obj/item/material/shard{
+/obj/item/shard{
 	icon_state = "shardsmall"
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -1170,7 +1170,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/outpost/abandoned)
 "dS" = (
-/obj/item/material/shard{
+/obj/item/shard{
 	icon_state = "splinterslarge"
 	},
 /turf/simulated/floor/carpet/blue,
@@ -1329,7 +1329,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/item/material/shard,
+/obj/item/shard,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -1421,7 +1421,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "eJ" = (
-/obj/item/material/shard{
+/obj/item/shard{
 	icon_state = "shardsmall"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -1429,7 +1429,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "eK" = (
-/obj/item/material/shard{
+/obj/item/shard{
 	icon_state = "piecesmall"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -2310,7 +2310,7 @@
 /area/outpost/abandoned)
 "hc" = (
 /obj/structure/table/steel,
-/obj/item/material/ashtray/glass,
+/obj/item/ashtray/glass,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";

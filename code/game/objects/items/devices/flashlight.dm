@@ -170,7 +170,6 @@
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	hitsound = "swing_hit"
 	flashlight_max_bright = 0.5
 	flashlight_outer_range = 5
 

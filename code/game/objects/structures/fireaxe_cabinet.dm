@@ -10,7 +10,7 @@
 	var/open
 	var/unlocked
 	var/shattered
-	var/obj/item/material/twohanded/fireaxe/fireaxe
+	var/obj/item/twohanded/fireaxe/fireaxe
 
 /obj/structure/fireaxecabinet/on_update_icon()
 	overlays.Cut()
@@ -70,7 +70,7 @@
 		toggle_lock(user)
 		return
 
-	if(istype(O, /obj/item/material/twohanded/fireaxe))
+	if(istype(O, /obj/item/twohanded/fireaxe))
 		if(open)
 			if(fireaxe)
 				to_chat(user, "<span class='warning'>There is already \a [fireaxe] inside \the [src].</span>")

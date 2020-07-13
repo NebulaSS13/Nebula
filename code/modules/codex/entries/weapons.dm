@@ -11,11 +11,11 @@
 	it can be concealed in your pocket or bag."
 
 /datum/codex_entry/cultblade
-	associated_paths = list(/obj/item/material/sword/cultblade)
+	associated_paths = list(/obj/item/sword/cultblade)
 	antag_text = "This sword is a powerful weapon, capable of severing limbs easily, if they are targeted. Nonbelivers are unable to use this weapon."
 
 /datum/codex_entry/spear
-	associated_paths = list(/obj/item/material/twohanded/spear)
+	associated_paths = list(/obj/item/twohanded/spear)
 	associated_strings = list("spear")
 	mechanics_text = "Spears are automatically held with two hands if the other hand is free to do so. Holding with both hands increases damage dealt. \
 	<BR><BR>You can start crafting a spear by making cable cuffs and applying them to a rod. After, examining the spear assembly will give details on how to proceed."

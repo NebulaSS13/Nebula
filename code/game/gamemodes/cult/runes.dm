@@ -621,7 +621,7 @@
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
-	user.put_in_hands(new /obj/item/material/sword/cultblade(user))
+	user.put_in_hands(new /obj/item/sword/cultblade(user))
 	qdel(src)
 
 /obj/effect/rune/shell

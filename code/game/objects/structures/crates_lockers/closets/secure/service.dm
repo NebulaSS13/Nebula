@@ -15,5 +15,5 @@
 		/obj/item/nullrod,
 		/obj/item/storage/bible,
 		/obj/item/storage/belt/general,
-		/obj/item/material/urn
+		/obj/item/urn
 	)

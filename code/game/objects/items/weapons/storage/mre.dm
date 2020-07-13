@@ -19,7 +19,7 @@ MRE Stuff
 	/obj/random/mre/spread,
 	/obj/random/mre/drink,
 	/obj/random/mre/sauce,
-	/obj/item/material/kitchen/utensil/spork/plastic
+	/obj/item/kitchen/utensil/spork/plastic
 	)
 
 /obj/item/storage/mre/Initialize()
@@ -83,7 +83,7 @@ MRE Stuff
 	/obj/random/mre/spread/vegan,
 	/obj/random/mre/drink,
 	/obj/random/mre/sauce/vegan,
-	/obj/item/material/kitchen/utensil/spoon/plastic
+	/obj/item/kitchen/utensil/spoon/plastic
 	)
 
 /obj/item/storage/mre/menu10
@@ -95,7 +95,7 @@ MRE Stuff
 	/obj/item/chems/food/snacks/candy/proteinbar,
 	/obj/item/chems/food/condiment/small/packet/protein,
 	/obj/random/mre/sauce/sugarfree,
-	/obj/item/material/kitchen/utensil/spoon/plastic
+	/obj/item/kitchen/utensil/spoon/plastic
 	)
 
 /obj/item/storage/mre/menu11

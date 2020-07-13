@@ -518,7 +518,7 @@
 /area/icarus/vessel)
 "bO" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/material/harpoon,
+/obj/item/harpoon,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bP" = (

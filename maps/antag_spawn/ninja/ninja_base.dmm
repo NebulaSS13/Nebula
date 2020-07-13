@@ -608,7 +608,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bs" = (
 /obj/structure/table/rack,
-/obj/item/material/sword/katana/toy{
+/obj/item/sword/katana/toy{
 	name = "practice katana"
 	},
 /turf/unsimulated/floor{
@@ -980,7 +980,7 @@
 	icon_state = "churchaltar";
 	name = "wooden altar"
 	},
-/obj/item/material/sword/katana,
+/obj/item/sword/katana,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -1169,12 +1169,12 @@
 /area/map_template/ninja_dojo/dojo)
 "cA" = (
 /obj/structure/table/rack,
-/obj/item/material/star/ninja,
-/obj/item/material/star/ninja,
-/obj/item/material/star/ninja,
-/obj/item/material/star/ninja,
-/obj/item/material/star/ninja,
-/obj/item/material/star/ninja,
+/obj/item/star/ninja,
+/obj/item/star/ninja,
+/obj/item/star/ninja,
+/obj/item/star/ninja,
+/obj/item/star/ninja,
+/obj/item/star/ninja,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	dir = 2;
@@ -1183,12 +1183,12 @@
 /area/map_template/ninja_dojo/dojo)
 "cB" = (
 /obj/structure/table/rack,
-/obj/item/material/star,
-/obj/item/material/star,
-/obj/item/material/star,
-/obj/item/material/star,
-/obj/item/material/star,
-/obj/item/material/star,
+/obj/item/star,
+/obj/item/star,
+/obj/item/star,
+/obj/item/star,
+/obj/item/star,
+/obj/item/star,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	dir = 2;

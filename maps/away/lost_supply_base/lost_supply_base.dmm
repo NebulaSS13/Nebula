@@ -1198,7 +1198,7 @@
 /area/lost_supply_base/common)
 "de" = (
 /obj/structure/table/standard,
-/obj/item/material/kitchen/utensil/fork,
+/obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "df" = (
@@ -1317,7 +1317,7 @@
 /turf/simulated/wall,
 /area/lost_supply_base)
 "dx" = (
-/obj/item/material/kitchen/utensil/spoon,
+/obj/item/kitchen/utensil/spoon,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dy" = (
@@ -1340,7 +1340,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dB" = (
-/obj/item/material/kitchen/utensil/fork,
+/obj/item/kitchen/utensil/fork,
 /obj/structure/bed/chair{
 	dir = 8
 	},
@@ -1980,7 +1980,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "fJ" = (
-/obj/item/material/twohanded/fireaxe,
+/obj/item/twohanded/fireaxe,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/airless,

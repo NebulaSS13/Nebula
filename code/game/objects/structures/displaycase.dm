@@ -28,7 +28,7 @@
 	..()
 	if(!QDELETED(src))
 		if(severity == 1)
-			new /obj/item/material/shard(loc)
+			new /obj/item/shard(loc)
 			for(var/atom/movable/AM in src)
 				AM.dropInto(loc)
 			qdel(src)
@@ -63,7 +63,7 @@
 	if(.)
 		set_density(0)
 		destroyed = TRUE
-		subtract_matter(new /obj/item/material/shard(get_turf(src), material?.type))
+		subtract_matter(new /obj/item/shard(get_turf(src), material?.type))
 		playsound(src, "shatter", 70, 1)
 		update_icon()
 

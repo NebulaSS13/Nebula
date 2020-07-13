@@ -1,4 +1,4 @@
-/obj/item/material/ashtray
+/obj/item/ashtray
 	name = "ashtray"
 	desc = "A thing to keep your butts in."
 	icon = 'icons/obj/objects.dmi'
@@ -6,9 +6,12 @@
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
 	randpixel = 5
+	material = /decl/material/solid/metal/bronze
+	applies_material_colour = TRUE
+	applies_material_name = TRUE
 	var/max_butts = 10
 
-/obj/item/material/ashtray/examine(mob/user)
+/obj/item/ashtray/examine(mob/user)
 	. = ..()
 	if(material)
 		to_chat(user, "It's made of [material.solid_name].")
@@ -17,7 +20,7 @@
 	else if(contents.len)
 		to_chat(user, "It has [contents.len] cig butts in it.")
 
-/obj/item/material/ashtray/on_update_icon()
+/obj/item/ashtray/on_update_icon()
 	..()
 	overlays.Cut()
 	if (contents.len == max_butts)
@@ -25,7 +28,7 @@
 	else if (contents.len >= max_butts/2)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
-/obj/item/material/ashtray/attackby(obj/item/W, mob/user)
+/obj/item/ashtray/attackby(obj/item/W, mob/user)
 	if (health <= 0)
 		return
 	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/flame/match))
@@ -52,7 +55,7 @@
 		if (health < 1)
 			shatter()
 
-/obj/item/material/ashtray/throw_impact(atom/hit_atom)
+/obj/item/ashtray/throw_impact(atom/hit_atom)
 	if (health > 0)
 		health = max(0,health - 3)
 		if (contents.len)
@@ -66,11 +69,8 @@
 		update_icon()
 	return ..()
 
-/obj/item/material/ashtray/plastic/Initialize(mapload)
-	. = ..(mapload, /decl/material/solid/plastic)
+/obj/item/ashtray/plastic
+	material = /decl/material/solid/plastic
 
-/obj/item/material/ashtray/bronze/Initialize(mapload)
-	. = ..(mapload, /decl/material/solid/metal/bronze)
-
-/obj/item/material/ashtray/glass/Initialize(mapload)
-	. = ..(mapload, /decl/material/solid/glass)
+/obj/item/ashtray/glass
+	material = /decl/material/solid/glass

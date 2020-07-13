@@ -6,12 +6,12 @@
 	name = "Gear - Hydroponics Supplies"
 	contains = list(/obj/item/chems/spray/plantbgone = 4,
 					/obj/item/chems/glass/bottle/ammonia = 2,
-					/obj/item/material/hatchet,
-					/obj/item/material/minihoe,
+					/obj/item/hatchet,
+					/obj/item/minihoe,
 					/obj/item/scanner/plant,
 					/obj/item/clothing/gloves/thick/botany,
 					/obj/item/clothing/suit/apron,
-					/obj/item/material/minihoe,
+					/obj/item/minihoe,
 					/obj/item/storage/box/botanydisk
 					)
 	cost = 15
@@ -43,7 +43,7 @@
 
 /decl/hierarchy/supply_pack/hydroponics/weedcontrol
 	name = "Gear - Weed control"
-	contains = list(/obj/item/material/hatchet = 2,
+	contains = list(/obj/item/hatchet = 2,
 					/obj/item/chems/spray/plantbgone = 4,
 					/obj/item/clothing/mask/gas = 2,
 					/obj/item/grenade/chem_grenade/antiweed = 2)
