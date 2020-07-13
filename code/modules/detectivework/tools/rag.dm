@@ -50,7 +50,7 @@
 		remove_contents(user)
 
 /obj/item/chems/glass/rag/attackby(obj/item/W, mob/user)
-	if(isflamesource(W))
+	if(W.isflamesource())
 		if(on_fire)
 			to_chat(user, SPAN_WARNING("\The [src] is already blazing merrily!"))
 			return

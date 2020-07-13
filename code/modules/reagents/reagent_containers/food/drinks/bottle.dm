@@ -93,7 +93,7 @@
 	if(!rag && istype(W, /obj/item/chems/glass/rag))
 		insert_rag(W, user)
 		return
-	if(rag && isflamesource(W))
+	if(rag && W.isflamesource())
 		rag.attackby(W, user)
 		return
 	..()

@@ -349,6 +349,9 @@ regen() will cover update_icon() for this proc
 	var/is_tendril = TRUE
 	var/types_of_tendril = list("solid", "fire")
 
+/obj/item/blob_tendril/get_heat()
+	. = max(..(), damtype == BURN ? 1000 : 0)
+
 /obj/item/blob_tendril/Initialize()
 	. = ..()
 	if(is_tendril)

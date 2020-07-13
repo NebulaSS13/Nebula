@@ -41,6 +41,12 @@
 
 	return ..()
 
+/obj/item/weldingtool/get_heat()
+	. = max(..(), isOn() ? 3800 : 0)
+
+/obj/item/weldingtool/isflamesource()
+	. = isOn()
+
 /obj/item/weldingtool/examine(mob/user, distance)
 	. = ..()
 	if (!tank)

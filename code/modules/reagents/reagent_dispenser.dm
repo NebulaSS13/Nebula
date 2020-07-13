@@ -165,7 +165,7 @@
 			test.Shift(EAST,6)
 			overlays += test
 		return TRUE
-	if(isflamesource(W))
+	if(W.isflamesource())
 		log_and_message_admins("triggered a fuel tank explosion with \the [W].")
 		visible_message(SPAN_DANGER("\The [user] puts \the [W] to \the [src]!"))
 		try_detonate_reagents()

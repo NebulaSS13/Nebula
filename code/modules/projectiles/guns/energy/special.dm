@@ -134,6 +134,9 @@
 	)
 	var/datum/effect/effect/system/spark_spread/spark_system
 
+/obj/item/gun/energy/plasmacutter/get_heat()
+	. = max(..(), 3800)
+
 /obj/item/gun/energy/plasmacutter/mounted
 	name = "mounted plasma cutter"
 	use_external_power = 1
