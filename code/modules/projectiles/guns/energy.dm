@@ -80,6 +80,9 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	if(isrobot(loc) || istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/mech_equipment))
 		return loc.get_cell()
 
+/obj/item/gun/energy/proc/get_shots_remaining()
+	. = round(power_supply.charge / charge_cost)
+
 /obj/item/gun/energy/examine(mob/user)
 	. = ..(user)
 	if(!power_supply)
@@ -88,8 +91,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	if (charge_cost == 0)
 		to_chat(user, "This gun seems to have an unlimited number of shots.")
 	else
-		var/shots_remaining = round(power_supply.charge / charge_cost)
-		to_chat(user, "Has [shots_remaining] shot\s remaining.")
+		to_chat(user, "Has [get_shots_remaining()] shot\s remaining.")
 
 /obj/item/gun/energy/proc/get_charge_ratio()
 	. = 0

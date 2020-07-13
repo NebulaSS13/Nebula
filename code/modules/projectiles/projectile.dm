@@ -397,7 +397,7 @@
 		return
 
 	if(ispath(muzzle_type))
-		var/obj/effect/projectile/M = new muzzle_type(get_turf(src))
+		var/obj/effect/projectile/M = new muzzle_type(get_turf(src), src)
 
 		if(istype(M))
 			M.set_transform(T)
@@ -410,7 +410,7 @@
 
 /obj/item/projectile/proc/tracer_effect(var/matrix/M)
 	if(ispath(tracer_type))
-		var/obj/effect/projectile/P = new tracer_type(location.loc)
+		var/obj/effect/projectile/P = new tracer_type(location.loc, src)
 
 		if(istype(P))
 			P.set_transform(M)
@@ -423,7 +423,7 @@
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
 	if(ispath(impact_type))
-		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src))
+		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src), src)
 
 		if(istype(P) && location)
 			P.set_transform(M)

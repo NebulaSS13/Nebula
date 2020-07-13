@@ -7,17 +7,39 @@
 	light_outer_range = 2
 	light_max_bright = 1
 	light_color = "#ff00dc"
-
 	mouse_opacity = 0
+	var/overlay_state
+	var/overlay_color
 
 /obj/effect/projectile/proc/set_transform(var/matrix/M)
 	if(istype(M))
 		transform = M
 
+/obj/effect/projectile/Initialize(var/ml, var/obj/item/owner)
+	if(owner)
+		if(owner.light_color)
+			light_color = owner.light_color
+		if(owner.color)
+			color = owner.color
+	. = ..()
+	if(overlay_state)
+		update_icon()
+
+/obj/effect/projectile/on_update_icon()
+	cut_overlays()
+	if(overlay_state)
+		var/image/I = image(icon, "[icon_state][overlay_state]")
+		I.color = overlay_color
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I)
+		// Projectile effects only exist for a tick or two, need to call
+		// this to ensure they show their overlays before expiring.
+		compile_overlays() 
+	
 //----------------------------
 // Laser beam
 //----------------------------
-/obj/effect/projectile/laser/
+/obj/effect/projectile/laser
 	light_color = COLOR_RED_LIGHT
 
 /obj/effect/projectile/laser/tracer
@@ -28,6 +50,32 @@
 
 /obj/effect/projectile/laser/impact
 	icon_state = "impact_laser"
+
+//----------------------------
+// Variable (white base) laser beam
+//----------------------------
+/obj/effect/projectile/laser/variable
+	light_color = COLOR_RED_LIGHT
+	color = COLOR_RED
+	overlay_state = "_overlay"
+
+/obj/effect/projectile/laser/variable/tracer
+	icon_state = "beam_white"
+
+/obj/effect/projectile/laser/variable/muzzle
+	icon_state = "muzzle_laser_white"
+
+/obj/effect/projectile/laser/variable/impact
+	icon_state = "impact_laser_white"
+
+/obj/effect/projectile/laser/variable/heavy_tracer
+	icon_state = "beam_heavy_white"
+
+/obj/effect/projectile/laser/variable/heavy_muzzle
+	icon_state = "muzzle_laser_heavy_white"
+
+/obj/effect/projectile/laser/variable/heavy_impact
+	icon_state = "impact_laser_heavy_white"
 
 //----------------------------
 // Blue laser beam

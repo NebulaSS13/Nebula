@@ -61,7 +61,6 @@
 			charge = 0
 
 //Rank 2
-
 /obj/item/stock_parts/scanning_module/adv
 	name = "advanced scanning module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."
