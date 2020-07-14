@@ -31,7 +31,7 @@
 
 /decl/material/solid/phoron
 	name = "phoron"
-	stack_type = /obj/item/stack/material/phoron
+	stack_type = /obj/item/stack/material/generic
 	ignition_point = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
 	table_icon_base = "stone"

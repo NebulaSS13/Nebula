@@ -963,7 +963,6 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/stack/material/diamond/ten = 7,
 				/obj/item/stack/material/glass/reinforced_borosilicate/ten = 7,
 				/obj/item/stack/material/marble/ten = 8,
-				/obj/item/stack/material/phoron/ten = 7,
 				/obj/item/stack/material/gold/ten = 7,
 				/obj/item/stack/material/silver/ten = 7,
 				/obj/item/stack/material/osmium/ten = 7,

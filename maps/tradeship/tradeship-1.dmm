@@ -752,7 +752,6 @@
 /obj/structure/closet/coffin,
 /obj/random/drinkbottle,
 /obj/item/contraband/poster,
-/obj/item/stack/material/phoron/ten,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "bP" = (

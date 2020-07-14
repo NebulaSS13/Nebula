@@ -1169,7 +1169,6 @@
 /obj/item/folder/yellow,
 /obj/item/pen/green,
 /obj/item/chems/glass/bottle/tericadone,
-/obj/item/stack/material/phoron/fifty,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "da" = (

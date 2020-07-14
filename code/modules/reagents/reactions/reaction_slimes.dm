@@ -215,7 +215,7 @@
 
 //Dark Purple
 /datum/chemical_reaction/slime/plasma
-	name = "Slime Plasma"
+	name = "Slime Hydrogen"
 	result = null
 	required_reagents = list(/decl/material/solid/phoron = 1)
 	result_amount = 1
@@ -223,8 +223,7 @@
 
 /datum/chemical_reaction/slime/plasma/on_reaction(var/datum/reagents/holder)
 	..()
-	var/obj/item/stack/material/phoron/P = new (get_turf(holder.my_atom))
-	P.amount = 10
+	new /obj/item/stack/material/generic(get_turf(holder.my_atom), 10, /decl/material/solid/metallic_hydrogen)
 
 //Red
 /datum/chemical_reaction/slime/bloodlust

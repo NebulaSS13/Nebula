@@ -1440,9 +1440,6 @@
 /area/constructionsite/teleporter)
 "eC" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/phoron{
-	amount = 10
-	},
 /obj/random/powercell,
 /obj/random/tech_supply,
 /obj/random/tech_supply,

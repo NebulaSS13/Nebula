@@ -2825,12 +2825,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "gY" = (
@@ -2906,9 +2900,6 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
@@ -3286,73 +3277,19 @@
 /area/slavers_base/powatm)
 "im" = (
 /obj/structure/ore_box,
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "in" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "io" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
 /obj/machinery/light/small,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "ip" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "iq" = (
