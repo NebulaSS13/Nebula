@@ -46,7 +46,7 @@
 
 	breath_type =             /decl/material/gas/methyl_bromide
 	exhale_type =             /decl/material/gas/methane
-	poison_types =            list(/decl/material/solid/phoron)
+	poison_types =            list(/decl/material/gas/chlorine)
 
 	reagent_tag =             IS_MANTID
 	genders =                 list(MALE)
