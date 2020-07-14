@@ -67,33 +67,18 @@
 	explanation_text = "It's a buyer's market out here. Steal [loot] for resale."
 
 /datum/objective/heist/salvage/choose_target()
-	switch(rand(1,8))
-		if(1)
-			target = /decl/material/solid/metal/steel
-			target_amount = 300
-		if(2)
-			target = /decl/material/solid/glass
-			target_amount = 200
-		if(3)
-			target = /decl/material/solid/metal/plasteel
-			target_amount = 100
-		if(4)
-			target = /decl/material/solid/phoron
-			target_amount = 100
-		if(5)
-			target = /decl/material/solid/metal/silver
-			target_amount = 50
-		if(6)
-			target = /decl/material/solid/metal/gold
-			target_amount = 20
-		if(7)
-			target = /decl/material/solid/metal/uranium
-			target_amount = 20
-		if(8)
-			target = /decl/material/solid/gemstone/diamond
-			target_amount = 20
+	var/list/loot = list(
+		/decl/material/solid/metal/steel = 300,
+		/decl/material/solid/glass = 200,
+		/decl/material/solid/metal/plasteel = 100,
+		/decl/material/solid/metal/silver = 50,
+		/decl/material/solid/metal/gold = 20,
+		/decl/material/solid/metal/uranium = 20,
+		/decl/material/solid/gemstone/diamond = 20
+	)
 
-	explanation_text = "Ransack the [station_name()] and escape with [target_amount] [target]."
+	var/decl/material/mat = decls_repository.get_decl(pick(loot))
+	explanation_text = "Ransack the [station_name()] and escape with [loot[mat.type]] unit\s of [mat.solid_name]."
 
 /datum/objective/heist/preserve_crew
 	explanation_text = "Do not leave anyone behind, alive or dead."
