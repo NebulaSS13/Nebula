@@ -77,7 +77,7 @@
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/psychoactives, 1)
-	reagents.add_reagent(/decl/material/solid/phoron, 1)
+	reagents.add_reagent(/decl/material/gas/chlorine, 1)
 	src.bitesize = 8
 
 

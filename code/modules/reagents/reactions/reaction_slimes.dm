@@ -30,7 +30,7 @@
 
 /datum/chemical_reaction/slime/spawn/on_reaction(var/datum/reagents/holder)
 	..()
-	holder.my_atom.visible_message("<span class='warning'>Infused with phoron, the core begins to quiver and grow, and soon a new baby slime emerges from it!</span>")
+	holder.my_atom.visible_message(SPAN_WARNING("The core begins to quiver and grow, and soon a new baby slime emerges from it!"))
 	new /mob/living/carbon/slime(get_turf(holder.my_atom))
 
 /datum/chemical_reaction/slime/monkey
@@ -156,7 +156,7 @@
 		return
 
 	var/turf/location = get_turf(holder.my_atom)
-	location.assume_gas(/decl/material/solid/phoron, 250, 1400)
+	location.assume_gas(/decl/material/gas/hydrogen, 250, 1400)
 	location.hotspot_expose(700, 400)
 
 //Yellow
