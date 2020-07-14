@@ -888,7 +888,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cp" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor,
 /area/unishi/common)
 "cq" = (

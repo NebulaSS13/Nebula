@@ -3338,7 +3338,6 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lm" = (
-/obj/machinery/portable_atmospherics/canister/phoron/engine_setup,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "ln" = (

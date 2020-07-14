@@ -1703,14 +1703,12 @@
 	},
 /area/space)
 "eQ" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "eS" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "eT" = (
