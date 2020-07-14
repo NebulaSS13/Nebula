@@ -3,7 +3,7 @@
 	desc = "MAGGOT."
 	on_mob_icon = 'icons/obj/guns/launcher/rocket.dmi'
 	icon = 'icons/obj/guns/launcher/rocket.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE
 	throw_speed = 2
 	throw_range = 10

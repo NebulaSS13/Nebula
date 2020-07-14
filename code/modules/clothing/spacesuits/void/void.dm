@@ -4,7 +4,7 @@
 	desc = "A high-tech dark red space suit helmet. Used for AI satellite maintenance."
 	icon = 'icons/clothing/spacesuit/void/nasa/helmet.dmi'
 	on_mob_icon = 'icons/clothing/spacesuit/void/nasa/helmet.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 
 	heat_protection = HEAD
 	armor = list(
@@ -25,7 +25,7 @@
 	name = "voidsuit"
 	icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
 	on_mob_icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	item_state_slots = null
 	w_class = ITEM_SIZE_HUGE//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."

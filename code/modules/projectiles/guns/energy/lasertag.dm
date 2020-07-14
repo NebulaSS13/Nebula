@@ -3,7 +3,7 @@
 	name = "laser tag gun"
 	icon = 'icons/obj/guns/laser_carbine.dmi'
 	on_mob_icon = 'icons/obj/guns/laser_carbine.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = "{'combat':1,'magnets':2}"
 	self_recharge = 1

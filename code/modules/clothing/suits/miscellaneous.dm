@@ -196,7 +196,7 @@
 //coats
 /obj/item/clothing/suit/leathercoat
 	name = "longcoat"
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/suit/leathercoat.dmi'
 	on_mob_icon = 'icons/clothing/suit/leathercoat.dmi'
 	material = /decl/material/solid/leather

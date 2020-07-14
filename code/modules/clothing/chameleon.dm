@@ -206,7 +206,7 @@
 
 /obj/item/clothing/gloves/chameleon
 	name = "black gloves"
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	color = COLOR_GRAY40
 	icon = 'icons/clothing/hands/gloves_generic.dmi'
 	on_mob_icon = 'icons/clothing/hands/gloves_generic.dmi'

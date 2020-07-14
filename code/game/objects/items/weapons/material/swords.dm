@@ -1,7 +1,7 @@
 /obj/item/sword
 	name = "claymore"
 	desc = "What are you standing around staring at this for? Get to killing!"
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/obj/items/weapon/swords/claymore.dmi'
 	on_mob_icon = 'icons/obj/items/weapon/swords/claymore.dmi'
 	slot_flags = SLOT_BELT

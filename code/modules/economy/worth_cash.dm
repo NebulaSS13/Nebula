@@ -267,7 +267,7 @@
 /obj/item/charge_stick/on_update_icon()
 	. = ..()
 	if(get_world_inventory_state() == ICON_STATE_WORLD)
-		icon_state = "world"
+		icon_state = ICON_STATE_WORLD
 		return 
 
 	icon_state = grade

@@ -1,7 +1,7 @@
 /obj/item/clothing/shoes
 	name = "shoes"
 	desc = "Comfortable-looking shoes."
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
 	on_mob_icon = 'icons/clothing/feet/generic_shoes.dmi'
 	gender = PLURAL

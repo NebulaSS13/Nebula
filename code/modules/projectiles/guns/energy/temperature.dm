@@ -2,7 +2,7 @@
 	name = "temperature gun"
 	icon = 'icons/obj/guns/freezegun.dmi'
 	on_mob_icon = 'icons/obj/guns/freezegun.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	desc = "A gun that changes temperatures. It has a small label on the side, 'More extreme temperatures will cost more charge!'"
 	material = /decl/material/solid/metal/steel

@@ -4,7 +4,7 @@
 	desc = "A beaker."
 	icon = 'icons/obj/items/chem/beakers/beaker.dmi'
 	on_mob_icon = 'icons/obj/items/chem/beakers/beaker.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	center_of_mass = @"{'x':15,'y':10}"
 	material = /decl/material/solid/glass
 	applies_material_name = TRUE

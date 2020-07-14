@@ -3,7 +3,7 @@
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
 	on_mob_icon = 'icons/obj/guns/shotgun/pump.dmi'
 	icon = 'icons/obj/guns/shotgun/pump.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	max_shells = 4
 	w_class = ITEM_SIZE_HUGE
 	force = 10

@@ -103,7 +103,7 @@
 /obj/item/clothing/head/det
 	name = "fedora"
 	desc = "A brown fedora - either the cornerstone of a detective's style or a poor attempt at looking cool, depending on the person wearing it."
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/detective.dmi'
 	on_mob_icon = 'icons/clothing/head/detective.dmi'
 	color = "#725443"

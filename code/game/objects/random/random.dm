@@ -717,7 +717,7 @@ obj/random/obstruction/spawn_choices()
 	name = "random footwear"
 	desc = "This is a random pair of shoes."
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/shoes/spawn_choices()
 	return list(/obj/item/clothing/shoes/workboots = 3,
@@ -745,7 +745,7 @@ obj/random/obstruction/spawn_choices()
 	name = "random gloves"
 	desc = "This is a random pair of gloves."
 	icon = 'icons/clothing/hands/gloves_generic.dmi'
-	icon_state = "inventory"
+	icon_state = ICON_STATE_INV
 
 /obj/random/gloves/spawn_choices()
 	return list(/obj/item/clothing/gloves/insulated = 3,

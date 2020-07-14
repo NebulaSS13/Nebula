@@ -3,7 +3,7 @@
 	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced for paramilitary and private use."
 	on_mob_icon = 'icons/obj/guns/sec_smg.dmi'
 	icon = 'icons/obj/guns/sec_smg.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
 	w_class = ITEM_SIZE_NORMAL
 	caliber = CALIBER_PISTOL_SMALL

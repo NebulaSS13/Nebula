@@ -50,7 +50,7 @@
 	desc = "A modern twist on an old classic. Pick up that can."
 	on_mob_icon = 'icons/obj/guns/launcher/crossbow.dmi'
 	icon = 'icons/obj/guns/launcher/crossbow.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	fire_sound = 'sound/weapons/punchmiss.ogg' // TODO: Decent THWOK noise.
 	fire_sound_text = "a solid thunk"
 	fire_delay = 25

@@ -8,7 +8,7 @@
 
 /obj/item/rig
 	name = "hardsuit control module"
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/spacesuit/rig/eva.dmi'
 	on_mob_icon = 'icons/clothing/spacesuit/rig/eva.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."

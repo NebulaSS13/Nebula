@@ -3,7 +3,7 @@
 	name = "pistol"
 	on_mob_icon = 'icons/obj/guns/pistol.dmi'
 	icon = 'icons/obj/guns/pistol.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	load_method = MAGAZINE
 	caliber = CALIBER_PISTOL
 	magazine_type = /obj/item/ammo_magazine/pistol
@@ -24,7 +24,7 @@
 	desc = "The Lumoco Arms P3 Whisper. A small, easily concealable gun."
 	on_mob_icon = 'icons/obj/guns/holdout_pistol.dmi'
 	icon = 'icons/obj/guns/holdout_pistol.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	item_state = null
 	ammo_indicator = FALSE
 	w_class = ITEM_SIZE_SMALL
@@ -78,5 +78,5 @@
 	desc = "A silencer."
 	on_mob_icon = 'icons/obj/guns/holdout_pistol_silencer.dmi'
 	icon = 'icons/obj/guns/holdout_pistol_silencer.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL

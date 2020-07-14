@@ -4,7 +4,7 @@
 	desc = "You call that a knife? This is a master item - berate the admin or mapper who spawned this"
 	icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
 	on_mob_icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	material = /decl/material/solid/metal/steel

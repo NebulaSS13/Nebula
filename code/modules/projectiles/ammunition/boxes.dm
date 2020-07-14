@@ -1,5 +1,5 @@
 /obj/item/ammo_magazine/speedloader
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	caliber = CALIBER_PISTOL_MAGNUM
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	material = /decl/material/solid/metal/steel

@@ -3,7 +3,7 @@
 	desc = "A long, thick-bodied energy rifle of some kind, clad in a curious indigo polymer and lit from within by Cherenkov radiation. The grip is clearly not designed for human hands."
 	icon = 'mods/ascent/icons/particle_rifle/rifle.dmi'
 	on_mob_icon = 'mods/ascent/icons/particle_rifle/rifle.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
 	force = 25 // Heavy as Hell.
 	projectile_type = /obj/item/projectile/beam/particle

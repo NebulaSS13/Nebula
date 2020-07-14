@@ -3,7 +3,7 @@
 	desc = "The classic Jorf blaster!"
 	on_mob_icon = 'icons/obj/guns/foam/blaster.dmi'
 	icon = 'icons/obj/guns/foam/blaster.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	force = 1
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = null

@@ -3,7 +3,7 @@
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
 	bodytype_restricted = null
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	on_mob_icon = 'icons/clothing/suit/poncho/classic.dmi'
 	icon = 'icons/clothing/suit/poncho/classic.dmi'
 
