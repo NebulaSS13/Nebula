@@ -89,7 +89,7 @@
 	if(pickednum >= 5)
 		new /obj/item/stack/material/glass(src, rand(common_min, common_max))
 
-	//Plasteel (common ore) Because it has a million more uses then phoron
+	//Plasteel (common metal)
 	if(pickednum >= 10)
 		new /obj/item/stack/material/plasteel(src, rand(common_min, common_max))
 

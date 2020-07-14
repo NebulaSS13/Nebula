@@ -360,8 +360,8 @@
 				var/obj/item/tank/hydrogen/hydrogen = new/obj/item/tank/hydrogen(Rad)
 				hydrogen.air_contents.gas[/decl/material/solid/hydrogen] = 70
 				Rad.drainratio = 0
-				Rad.P = Phoron
-				Phoron.forceMove(Rad)
+				Rad.P = hydrogen
+				hydrogen.forceMove(Rad)
 
 			if(!Rad.active)
 				Rad.toggle_power()

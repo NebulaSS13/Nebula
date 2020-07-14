@@ -460,7 +460,7 @@
 // - Is between 80 and 120kPa
 // - Has between 17% and 30% oxygen
 // - Has temperature between -10C and 50C
-// - Has no or only minimal phoron or N2O
+// - Has no or only minimal chlorine or N2O
 /proc/get_atmosphere_issues(datum/gas_mixture/atmosphere, var/returntext = 0)
 	var/list/status = list()
 	if(!atmosphere)
@@ -475,15 +475,16 @@
 	if((pressure > 120) || (pressure < 80))
 		status.Add("Pressure too [pressure > 120 ? "high" : "low"].")
 
+	// TODO: generalize to check for -all- unsafe gasses.
 	// Gas concentration checks
 	var/oxygen = 0
-	var/phoron = 0
+	var/chlorine = 0
 	var/carbondioxide = 0
 	var/nitrousoxide = 0
 	var/hydrogen = 0
 	if(atmosphere.total_moles) // Division by zero prevention
 		oxygen = (atmosphere.gas[/decl/material/gas/oxygen] / atmosphere.total_moles) * 100 // Percentage of the gas
-		phoron = (atmosphere.gas[/decl/material/solid/phoron] / atmosphere.total_moles) * 100
+		chlorine = (atmosphere.gas[/decl/material/gas/chlorine] / atmosphere.total_moles) * 100
 		carbondioxide = (atmosphere.gas[/decl/material/gas/carbon_dioxide] / atmosphere.total_moles) * 100
 		nitrousoxide = (atmosphere.gas[/decl/material/gas/nitrous_oxide] / atmosphere.total_moles) * 100
 		hydrogen = (atmosphere.gas[/decl/material/gas/hydrogen] / atmosphere.total_moles) * 100
@@ -495,8 +496,8 @@
 
 
 
-	if(phoron > 0.1)		// Toxic even in small amounts.
-		status.Add("Phoron contamination.")
+	if(chlorine > 0.1)		// Toxic even in small amounts.
+		status.Add("Chlorine contamination.")
 	if(nitrousoxide > 0.1)	// Probably slightly less dangerous but still.
 		status.Add("N2O contamination.")
 	if(hydrogen > 2.5)	// Not too dangerous, but flammable.
