@@ -1,23 +1,24 @@
 /obj/item/clothing/head/soft
 	name = "cargo cap"
 	desc = "It's a peaked cap in a tasteless yellow color."
-	icon_state = "softcap"
+	icon_state = "world"
+	icon = 'icons/clothing/head/softcap.dmi'
+	on_mob_icon = 'icons/clothing/head/softcap.dmi'
 	color = COLOR_YELLOW_GRAY
 	var/flipped = 0
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
-/obj/item/clothing/head/soft/Initialize()
-	. = ..()
-	set_extension(src, /datum/extension/base_icon_state, icon_state)
-	update_icon()
-
 /obj/item/clothing/head/soft/on_update_icon()
-	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+	..()
 	if(flipped)
-		icon_state = "[bis.base_icon_state]_flipped"
-	else
-		icon_state = bis.base_icon_state
+		icon_state = "[get_world_inventory_state()]_flipped"
+
+/obj/item/clothing/head/soft/experimental_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(flipped && check_state_in_icon("[ret.icon_state]_flipped", icon))
+		ret.icon_state = "[ret.icon_state]_flipped"
+	return ret	
 
 /obj/item/clothing/head/soft/dropped()
 	src.flipped=0
@@ -76,13 +77,13 @@
 /obj/item/clothing/head/soft/rainbow
 	name = "rainbow cap"
 	desc = "It's a peaked cap in a bright rainbow of colors."
-	icon_state = "rainbowsoft"
+	icon = 'icons/clothing/head/softcap_rainbow.dmi'
+	on_mob_icon = 'icons/clothing/head/softcap_rainbow.dmi'
 	color = null
 
 /obj/item/clothing/head/soft/sec
 	name = "security cap"
 	desc = "It's a field cap in tasteful red color."
-	icon_state = "secsoft"
 	color = COLOR_NT_RED
 
 /obj/item/clothing/head/soft/black

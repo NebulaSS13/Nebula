@@ -80,11 +80,7 @@
 		"blue hardhat" =                                      /obj/item/clothing/head/hardhat/dblue,
 		"orange hardhat" =                                    /obj/item/clothing/head/hardhat/orange,
 		"red hardhat" =                                       /obj/item/clothing/head/hardhat/red,
-		"light damage control helmet" =                       /obj/item/clothing/head/hardhat/EMS/DC_light,
-		"Emergency Management Bureau helmet" =                /obj/item/clothing/head/hardhat/damage_control/EMB,
-		"red ancient Emergency Management Bureau helmet" =    /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient,
-		"yellow ancient Emergency Management Bureau helmet" = /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/yellow,
-		"white ancient Emergency Management Bureau helmet" =  /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/white
+		"light damage control helmet" =                       /obj/item/clothing/head/hardhat/EMS/DC_light
 	)
 
 /datum/gear/head/formalhat

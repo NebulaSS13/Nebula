@@ -1,11 +1,9 @@
 /obj/item/clothing/head/helmet
 	name = "helmet"
 	desc = "Reinforced headgear. Protects the head from impacts."
-	icon_state = "helmet"
-	item_state_slots = list(
-		slot_l_hand_str = "helmet",
-		slot_r_hand_str = "helmet",
-		)
+	icon_state = "world"
+	icon = 'icons/clothing/head/armor/helmet.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/helmet.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
 	item_flags = ITEM_FLAG_THICKMATERIAL
@@ -31,7 +29,8 @@
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"
 	desc = "A tan helmet made from advanced ceramic. Comfortable and robust."
-	icon_state = "helmet_tac"
+	icon = 'icons/clothing/head/armor/tactical.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/tactical.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -44,7 +43,8 @@
 /obj/item/clothing/head/helmet/merc
 	name = "combat helmet"
 	desc = "A heavily reinforced helmet painted with red markings. Feels like it could take a lot of punishment."
-	icon_state = "helmet_merc"
+	icon = 'icons/clothing/head/armor/merc.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/merc.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -57,7 +57,8 @@
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
-	icon_state = "helmet_riot"
+	icon = 'icons/clothing/head/armor/riot.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/riot.dmi'
 	valid_accessory_slots = null
 	body_parts_covered = HEAD|FACE|EYES //face shield
 	armor = list(
@@ -66,20 +67,34 @@
 		)
 	siemens_coefficient = 0.7
 	action_button_name = "Toggle Visor"
+	var/up = 0
 
 /obj/item/clothing/head/helmet/riot/attack_self(mob/user)
-	if(src.icon_state == initial(icon_state))
-		src.icon_state = "[icon_state]_up"
+	up = !up
+	if(up)
 		to_chat(user, "You raise the visor on the [src].")
 	else
-		src.icon_state = initial(icon_state)
 		to_chat(user, "You lower the visor on the [src].")
+	update_icon()
+
+/obj/item/clothing/head/helmet/riot/on_update_icon(mob/user)
+	. = ..()
+	icon_state = get_world_inventory_state()
+	if(up && check_state_in_icon("[icon_state]_up", icon))
+		icon_state = "[icon_state]_up"
 	update_clothing_icon()
+
+/obj/item/clothing/head/helmet/riot/experimental_mob_overlay()
+	var/image/ret = ..()
+	if(up && check_state_in_icon("[ret.icon_state]_up", icon))
+		ret.icon_state = "[ret.icon_state]_up"
+	return ret
 
 /obj/item/clothing/head/helmet/ablative
 	name = "ablative helmet"
 	desc = "A helmet made from advanced materials which protects against concentrated energy weapons."
-	icon_state = "helmet_reflect"
+	icon = 'icons/clothing/head/armor/reflective.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/reflective.dmi'
 	valid_accessory_slots = null
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
@@ -92,7 +107,8 @@
 /obj/item/clothing/head/helmet/ballistic
 	name = "ballistic helmet"
 	desc = "A helmet with reinforced plating to protect against ballistic projectiles."
-	icon_state = "helmet_bulletproof"
+	icon = 'icons/clothing/head/armor/bulletproof.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/bulletproof.dmi'
 	valid_accessory_slots = null
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
@@ -105,7 +121,8 @@
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"
 	desc = "They're often used by highly trained Swat Members."
-	icon_state = "helmet_merc"
+	icon = 'icons/clothing/head/armor/merc.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/merc.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_RESISTANT,
@@ -120,7 +137,8 @@
 /obj/item/clothing/head/helmet/thunderdome
 	name = "\improper Thunderdome helmet"
 	desc = "<i>'Let the battle commence!'</i>"
-	icon_state = "thunderdome"
+	icon = 'icons/clothing/head/armor/thunderdome.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/thunderdome.dmi'
 	valid_accessory_slots = null
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
@@ -136,7 +154,8 @@
 /obj/item/clothing/head/helmet/gladiator
 	name = "gladiator helmet"
 	desc = "Ave, Imperator, morituri te salutant."
-	icon_state = "gladiator"
+	icon = 'icons/clothing/head/armor/gladiator.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/gladiator.dmi'
 	valid_accessory_slots = null
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE
@@ -145,7 +164,8 @@
 /obj/item/clothing/head/helmet/augment
 	name = "Augment Array"
 	desc = "A helmet with optical and cranial augments coupled to it."
-	icon_state = "v62"
+	icon = 'icons/clothing/head/armor/augment.dmi'
+	on_mob_icon = 'icons/clothing/head/armor/augment.dmi'
 	valid_accessory_slots = null
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
@@ -159,5 +179,3 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5
-
-

@@ -103,11 +103,10 @@
 /obj/item/clothing/head/det
 	name = "fedora"
 	desc = "A brown fedora - either the cornerstone of a detective's style or a poor attempt at looking cool, depending on the person wearing it."
-	icon_state = "detective"
-	item_state_slots = list(
-		slot_l_hand_str = "det_hat",
-		slot_r_hand_str = "det_hat",
-		)
+	icon_state = "world"
+	icon = 'icons/clothing/head/detective.dmi'
+	on_mob_icon = 'icons/clothing/head/detective.dmi'
+	color = "#725443"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
 		laser = ARMOR_LASER_SMALL,
@@ -115,6 +114,8 @@
 		)
 	siemens_coefficient = 0.9
 	flags_inv = BLOCKHEADHAIR
+	markings_icon = "band"
+	markings_color = "#b2977c"
 
 /obj/item/clothing/head/det/attack_self(mob/user)
 	flags_inv ^= BLOCKHEADHAIR
@@ -122,9 +123,14 @@
 	..()
 
 /obj/item/clothing/head/det/grey
-	icon_state = "detective2"
+	color = COLOR_GRAY40
+	markings_color = COLOR_SILVER
 	desc = "A grey fedora - either the cornerstone of a detective's style or a poor attempt at looking cool, depending on the person wearing it."
 
+/obj/item/clothing/head/det/wack
+	color = COLOR_VIOLET
+	markings_color = COLOR_YELLOW
+	desc = "A colorful fedora - either the cornerstone of a detective's style or a poor attempt at looking disco, depending on the person wearing it."
 
 /*
  * Head of Security
