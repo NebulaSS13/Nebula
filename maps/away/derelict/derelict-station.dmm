@@ -3194,7 +3194,6 @@
 /turf/simulated/wall,
 /area/constructionsite/engineering)
 "kI" = (
-/obj/machinery/portable_atmospherics/canister/empty/phoron,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kJ" = (
