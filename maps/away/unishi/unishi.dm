@@ -80,11 +80,11 @@
 	active = 1
 	powered = 1
 
-/obj/structure/closet/crate/secure/large/phoron/experimentalsm
+/obj/structure/closet/crate/secure/large/supermatter/experimentalsm
 	name = "experimental SM crate"
 	desc = "Are you sure you want to open this?"
 
-/obj/structure/closet/crate/secure/large/phoron/experimentalsm/WillContain()
+/obj/structure/closet/crate/secure/large/supermatter/experimentalsm/WillContain()
 	return list(/obj/machinery/power/supermatter/randomsample)
 
 obj/item/paper/prof1

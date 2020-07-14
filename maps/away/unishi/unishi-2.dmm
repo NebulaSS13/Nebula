@@ -366,7 +366,7 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "aZ" = (
-/obj/structure/closet/crate/secure/phoron,
+/obj/structure/closet/crate/secure/explosives,
 /turf/simulated/floor,
 /area/unishi/common)
 "ba" = (
@@ -2401,7 +2401,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "ge" = (
-/obj/structure/closet/crate/secure/large/phoron/experimentalsm,
+/obj/structure/closet/crate/secure/large/supermatter/experimentalsm,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor,
 /area/unishi/smresearch)

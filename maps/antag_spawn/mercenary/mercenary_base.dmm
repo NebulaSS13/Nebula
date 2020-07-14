@@ -2081,7 +2081,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "iv" = (
-/obj/structure/closet/crate/secure/phoron,
+/obj/structure/closet/crate/secure/explosives,
 /obj/item/stack/material/phoron/ten,
 /obj/item/stack/material/phoron/ten,
 /obj/item/stack/material/phoron/ten,
@@ -2582,7 +2582,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Fy" = (
-/obj/structure/closet/crate/secure/phoron,
+/obj/structure/closet/crate/secure/explosives,
 /obj/item/stack/material/phoron/ten,
 /obj/item/stack/material/phoron/ten,
 /obj/item/stack/material/phoron/ten,

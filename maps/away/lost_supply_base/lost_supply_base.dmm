@@ -1207,7 +1207,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dg" = (
-/obj/structure/closet/crate/secure/phoron{
+/obj/structure/closet/crate/secure/explosives{
 	name = "mineral crate";
 	req_access = newlist()
 	},
@@ -1217,7 +1217,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/structure/closet/crate/secure/phoron{
+/obj/structure/closet/crate/secure/explosives{
 	name = "mineral crate";
 	req_access = newlist()
 	},
