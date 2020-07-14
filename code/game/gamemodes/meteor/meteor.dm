@@ -5,7 +5,7 @@
 /datum/game_mode/meteor
 	name = "Meteor"
 	round_description = "You are about to enter an asteroid belt!"
-	extended_round_description = "We are on an unavoidable collision course with an asteroid field. You have only a moment to prepare before you are barraged by dust and meteors. As if it was not enough, all kinds of negative events seem to happen more frequently. Good Luck."
+	extended_round_description = "We are on an unavoidable collision course with an asteroid field. You have only a moment to prepare before you are barraged by dust and meteors. As if it was not enough, all kinds of negative events seem to happen more frequently. Good luck."
 	config_tag = "meteor"
 	required_players = 15				// Definitely not good for low-pop
 	votable = 1
