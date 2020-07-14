@@ -356,8 +356,9 @@
 	for(var/obj/machinery/power/rad_collector/Rad in world)
 		if(Rad.anchored)
 			if(!Rad.P)
-				var/obj/item/tank/phoron/Phoron = new/obj/item/tank/phoron(Rad)
-				Phoron.air_contents.gas[/decl/material/solid/phoron] = 70
+				// TODO: maybe make reactures use lithium instead.
+				var/obj/item/tank/hydrogen/hydrogen = new/obj/item/tank/hydrogen(Rad)
+				hydrogen.air_contents.gas[/decl/material/solid/hydrogen] = 70
 				Rad.drainratio = 0
 				Rad.P = Phoron
 				Phoron.forceMove(Rad)

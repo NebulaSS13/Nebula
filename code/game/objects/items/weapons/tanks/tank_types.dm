@@ -3,7 +3,6 @@
  *		Oxygen
  *		Anesthetic
  *		Air
- *		Phoron
  *		Hydrogen
  *		Emergency Oxygen
  */
@@ -43,18 +42,6 @@
 	icon_state = "oxygen"
 	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE*O2STANDARD, /decl/material/gas/nitrogen = 6*ONE_ATMOSPHERE*N2STANDARD)
 	volume = 180
-
-/*
- * Phoron
- */
-/obj/item/tank/phoron
-	name = "phoron tank"
-	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
-	icon_state = "phoron"
-	gauge_icon = null
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = null	//they have no straps!
-	starting_pressure = list(/decl/material/solid/phoron = 3*ONE_ATMOSPHERE)
 
 /*
  * Hydrogen
