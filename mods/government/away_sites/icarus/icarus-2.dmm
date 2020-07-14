@@ -932,11 +932,6 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
-/obj/item/stack/material/phoron,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cZ" = (
