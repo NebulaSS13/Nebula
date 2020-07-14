@@ -55,6 +55,8 @@
 	value = 1.6
 	sparse_material_weight = 8
 	rich_material_weight = 10
+	ore_type_value = ORE_PRECIOUS
+	ore_data_value = 2
 
 /decl/material/solid/metal/bronze
 	lore_text = "An alloy of copper and tin."
@@ -84,6 +86,8 @@
 	value = 1.2
 	sparse_material_weight = 8
 	rich_material_weight = 10
+	ore_type_value = ORE_PRECIOUS
+	ore_data_value = 2
 
 /decl/material/solid/metal/steel
 	name = "steel"
@@ -276,6 +280,8 @@
 	value = 1.5
 	sparse_material_weight = 8
 	rich_material_weight = 10
+	ore_type_value = ORE_EXOTIC
+	ore_data_value = 4
 
 /decl/material/solid/metal/iron
 	name = "iron"

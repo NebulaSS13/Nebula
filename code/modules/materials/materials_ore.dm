@@ -56,8 +56,8 @@
 	material = /decl/material/solid/metallic_hydrogen
 /obj/item/ore/slag
 	material = /decl/material/solid/slag
-/obj/item/ore/phoron
-	material = /decl/material/solid/phoron
+/obj/item/ore/phosphorite
+	material = /decl/material/solid/mineral/phosphorite
 /obj/item/ore/aluminium
 	material = /decl/material/solid/mineral/bauxite
 /obj/item/ore/rutile

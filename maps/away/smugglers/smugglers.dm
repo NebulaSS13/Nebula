@@ -84,12 +84,7 @@
 	icon_state = "horribletie"
 
 /obj/random/ore_smug/spawn_choices()
-	return list(
-		/obj/item/ore/uranium,
-		/obj/item/ore/gold,
-		/obj/item/ore/silver,
-		/obj/item/ore/slag,
-		/obj/item/ore/phoron)
+	return subtypesof(/obj/item/ore)
 
 /obj/random/ammo_magazine_smug
 	name = "Random Ammo Magazine"
