@@ -68,8 +68,8 @@
 					/decl/material/gas/oxygen         = 5,
 					/decl/material/gas/nitrogen       = 10,
 					/decl/material/gas/carbon_dioxide = 5,
-					/decl/material/solid/phoron         = 10,
-					/decl/material/gas/nitrous_oxide = 5,
+					/decl/material/gas/chlorine       = 10,
+					/decl/material/gas/nitrous_oxide  = 5
 				),
 				temperature = T20C - 5,
 			),
@@ -78,8 +78,8 @@
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
-					/decl/material/solid/phoron         = 20,
-					/decl/material/gas/nitrous_oxide = 10,
+					/decl/material/gas/chlorine       = 20,
+					/decl/material/gas/nitrous_oxide  = 10
 				),
 				temperature = T20C + 5,
 			)
@@ -90,8 +90,8 @@
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
-					/decl/material/solid/phoron         = 20,
-					/decl/material/gas/nitrous_oxide = 10,
+					/decl/material/gas/chlorine       = 20,
+					/decl/material/gas/nitrous_oxide  = 10
 				),
 				temperature = T20C + 5,
 			),
@@ -100,8 +100,8 @@
 					/decl/material/gas/oxygen         = 5,
 					/decl/material/gas/nitrogen       = 10,
 					/decl/material/gas/carbon_dioxide = 5,
-					/decl/material/solid/phoron         = 10,
-					/decl/material/gas/nitrous_oxide = 5,
+					/decl/material/gas/chlorine       = 10,
+					/decl/material/gas/nitrous_oxide  = 5
 				),
 				temperature = T20C - 5,
 			),
@@ -112,8 +112,8 @@
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
-					/decl/material/solid/phoron         = 20,
-					/decl/material/gas/nitrous_oxide = 10,
+					/decl/material/gas/chlorine       = 20,
+					/decl/material/gas/nitrous_oxide  = 10
 				),
 				temperature = T20C,
 			),
@@ -122,8 +122,8 @@
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
-					/decl/material/solid/phoron         = 20,
-					/decl/material/gas/nitrous_oxide = 10,
+					/decl/material/gas/chlorine       = 20,
+					/decl/material/gas/nitrous_oxide  = 10
 				),
 				temperature = T20C,
 			),
@@ -134,8 +134,8 @@
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
-					/decl/material/solid/phoron         = 20,
-					/decl/material/gas/nitrous_oxide = 10,
+					/decl/material/gas/chlorine       = 20,
+					/decl/material/gas/nitrous_oxide  = 10
 				),
 				temperature = T20C,
 			),
@@ -154,8 +154,8 @@
 					/decl/material/gas/oxygen         = 10,
 					/decl/material/gas/nitrogen       = 20,
 					/decl/material/gas/carbon_dioxide = 10,
-					/decl/material/solid/phoron         = 20,
-					/decl/material/gas/nitrous_oxide = 10,
+					/decl/material/gas/chlorine       = 20,
+					/decl/material/gas/nitrous_oxide  = 10
 				),
 				temperature = T20C,
 			),
