@@ -198,13 +198,6 @@
 	required_reagents = list(/decl/material/solid/sodium = 1, /decl/material/liquid/acid/hydrochloric = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/condensedcapsaicin
-	name = "Condensed Capsaicin"
-	result = /decl/material/liquid/capsaicin/condensed
-	required_reagents = list(/decl/material/liquid/capsaicin = 2)
-	catalysts = list(/decl/material/solid/phoron = 5)
-	result_amount = 1
-
 /datum/chemical_reaction/stimulants
 	name = "Stimulants"
 	result = /decl/material/liquid/stimulants
