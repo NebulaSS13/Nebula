@@ -77,26 +77,17 @@
 	instability = 2
 	minimum_reaction_temperature = 10000
 
-/decl/fusion_reaction/phoron_hydrogen
-	p_react = /decl/material/gas/hydrogen
-	s_react = /decl/material/solid/phoron
-	energy_consumption = 10
-	energy_production = 0
-	instability = 5
-	products = list(/decl/material/solid/metallic_hydrogen = 1)
-	minimum_reaction_temperature = 8000
-
 // VERY UNIDEAL REACTIONS.
-/decl/fusion_reaction/phoron_supermatter
+/decl/fusion_reaction/helium_supermatter
 	p_react = /decl/material/solid/supermatter
-	s_react = /decl/material/solid/phoron
+	s_react = /decl/material/gas/helium
 	energy_consumption = 0
 	energy_production = 5
 	radiation = 40
 	instability = 20
 	hidden_from_codex = TRUE
 
-/decl/fusion_reaction/phoron_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
+/decl/fusion_reaction/helium_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 
 	wormhole_event(GetConnectedZlevels(holder))
 
