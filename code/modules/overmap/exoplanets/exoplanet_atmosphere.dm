@@ -8,8 +8,6 @@
 	else //let the fuckery commence
 		var/list/newgases = subtypesof(/decl/material/gas)
 		newgases = newgases.Copy() // So we don't mutate the global list.
-		if(prob(90)) //all phoron planet should be rare
-			newgases -= /decl/material/solid/phoron
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= /decl/material/gas/alien
 		newgases -= /decl/material/liquid/water
