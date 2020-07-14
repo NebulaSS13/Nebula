@@ -1,5 +1,6 @@
 /obj/machinery/network
 	name = "base network machine"
+	icon = 'icons/obj/machines/tcomms/bus.dmi'
 	icon_state = "bus"
 	density = 1
 

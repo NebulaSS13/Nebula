@@ -2,7 +2,7 @@
 /obj/machinery/shieldwallgen
 	name = "Shield Generator"
 	desc = "A shield generator."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/shieldgen.dmi'
 	icon_state = "Shield_Gen"
 	anchored = 0
 	density = 1

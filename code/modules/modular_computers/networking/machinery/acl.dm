@@ -1,5 +1,6 @@
 /obj/machinery/network/acl
 	name = "network access controller"
+	icon = 'icons/obj/machines/tcomms/aas.dmi'
 	network_device_type =  /datum/extension/network_device/acl
 	main_template = "network_acl.tmpl"
 	construct_state = /decl/machine_construction/default/panel_closed

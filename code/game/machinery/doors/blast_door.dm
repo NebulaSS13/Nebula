@@ -230,9 +230,9 @@
 	)
 
 /obj/machinery/button/blast_door
-	icon = 'icons/obj/stationobjs.dmi'
 	name = "remote blast door-control"
 	desc = "It controls blast doors, remotely."
+	icon = 'icons/obj/machines/button_blastdoor.dmi'
 	icon_state = "blastctrl"
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/event_transmitter/blast_door_button = 1,

@@ -15,7 +15,7 @@ Buildable meters
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_NORMAL
 	level = 2
-	obj_flags = OBJ_FLAG_ROTATABLE 
+	obj_flags = OBJ_FLAG_ROTATABLE
 	dir = SOUTH
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden
 	var/pipe_class = PIPE_CLASS_BINARY
@@ -77,7 +77,7 @@ Buildable meters
 		to_chat(usr, pipefailtext)
 		return 1
 	P.build_network()
-	if(P.node)		
+	if(P.node)
 		P.node.atmos_init()
 		P.node.build_network()
 	return 0
@@ -100,8 +100,8 @@ Buildable meters
 	P.atmos_init()
 	if (QDELETED(P))
 		to_chat(usr, pipefailtext)
-		return 1	
-	P.build_network()	
+		return 1
+	P.build_network()
 	if(P.node1)
 		P.node1.atmos_init()
 		P.node1.build_network()
@@ -216,7 +216,7 @@ Buildable meters
 /obj/item/machine_chassis/air_sensor
 	name = "gas sensor"
 	desc = "A sensor. It detects gasses."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/gas_sensor.dmi'
 	icon_state = "gsensor1"
 	w_class = ITEM_SIZE_LARGE
 	build_type = /obj/machinery/air_sensor
@@ -239,7 +239,7 @@ Buildable meters
 /obj/item/machine_chassis/igniter
 	name = "igniter"
 	desc = "A device which will ignite surrounding gasses."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/igniter.dmi'
 	icon_state = "igniter1"
 	w_class = ITEM_SIZE_NORMAL
 	build_type = /obj/machinery/igniter

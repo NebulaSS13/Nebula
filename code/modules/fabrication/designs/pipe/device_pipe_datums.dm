@@ -151,7 +151,7 @@
 	desc = "a sensor. It detects gasses."
 	path = /obj/item/machine_chassis/air_sensor
 	build_icon_state = "gsensor1"
-	build_icon = 'icons/obj/stationobjs.dmi'
+	build_icon = 'icons/obj/machines/gas_sensor.dmi'
 	pipe_color = null
 	connect_types = null
 	colorable = FALSE
@@ -205,7 +205,7 @@
 /datum/fabricator_recipe/pipe/device/igniter
 	name = "igniter"
 	desc = "A device which will ignite surrounding gasses."
-	build_icon = 'icons/obj/stationobjs.dmi'
+	build_icon = 'icons/obj/machines/igniter.dmi'
 	build_icon_state = "igniter1"
 	path = /obj/item/machine_chassis/igniter
 	pipe_color = null

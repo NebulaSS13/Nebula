@@ -78,7 +78,6 @@ Class Procs:
 
 /obj/machinery
 	name = "machinery"
-	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER // Layer under items
 	throw_speed = 1

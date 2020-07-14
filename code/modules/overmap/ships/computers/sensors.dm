@@ -63,9 +63,9 @@
 
 		for(var/obj/effect/overmap/nearby in view(7,linked))
 			if(nearby.requires_contact) // Some ships require.
-				continue 
+				continue
 			potential_contacts |= nearby
-		
+
 		// Effects that require contact are only added to the contacts if they have been identified.
 		// Allows for coord tracking out of range of the player's view.
 		for(var/obj/effect/overmap/visitable/identified_contact in contact_datums)
@@ -133,7 +133,7 @@
 				LAZYSET(last_scan, "name", "[O]")
 				to_chat(user, SPAN_NOTICE("Successfully scanned [O]."))
 				return TOPIC_HANDLED
-		
+
 		to_chat(user, SPAN_WARNING("Could not get a scan!"))
 		return TOPIC_HANDLED
 
@@ -145,7 +145,7 @@
 /obj/machinery/shipsensors
 	name = "sensors suite"
 	desc = "Long range gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/ship_sensors.dmi'
 	icon_state = "sensors"
 	anchored = 1
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
@@ -216,7 +216,7 @@
 /obj/machinery/shipsensors/RefreshParts()
 	..()
 	sensor_strength = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5)
-	
+
 /obj/machinery/shipsensors/weak
 	heat_reduction = 0.2
 	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."

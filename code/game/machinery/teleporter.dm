@@ -14,8 +14,6 @@
 	. = ..()
 
 	id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
-	underlays.Cut()
-	underlays += image('icons/obj/stationobjs.dmi', icon_state = "telecomp-wires")
 
 	station = locate(/obj/machinery/teleport/station, get_step(src, turn(dir, 90)))
 	if(station)
@@ -202,11 +200,6 @@
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
 
-/obj/machinery/teleport/hub/Initialize()
-	. = ..()
-	underlays.Cut()
-	underlays += image('icons/obj/stationobjs.dmi', icon_state = "tele-wires")
-
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	spawn()
 		if (src.icon_state == "tele1")
@@ -234,11 +227,6 @@
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
 	var/obj/machinery/teleport/hub/hub
-
-/obj/machinery/teleport/station/Initialize()
-	. = ..()
-	overlays.Cut()
-	overlays += image('icons/obj/stationobjs.dmi', icon_state = "controller-wires")
 
 /obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
 	attack_hand(user)

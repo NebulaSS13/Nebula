@@ -1,5 +1,6 @@
 /obj/machinery/network/relay
 	name = "network relay"
+	icon = 'icons/obj/machines/tcomms/relay.dmi'
 	network_device_type =  /datum/extension/network_device/broadcaster/relay
 	main_template = "network_router.tmpl"
 	construct_state = /decl/machine_construction/default/panel_closed

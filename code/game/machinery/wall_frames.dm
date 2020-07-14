@@ -136,7 +136,7 @@
 
 /obj/item/frame/button/wall_charger
 	name = "wall charger frame"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/recharger_wall.dmi'
 	icon_state = "wrecharger0"
 	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/recharger/wallcharger
@@ -148,7 +148,7 @@
 /obj/item/frame/button/sparker
 	name = "mounted igniter"
 	desc = "A wall-mounted ignition device."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/igniter_mounted.dmi'
 	icon_state = "migniter"
 	material = /decl/material/solid/metal/steel
 	build_machine_type = /obj/machinery/sparker/buildable
@@ -230,4 +230,3 @@
 			to_chat(user, SPAN_NOTICE("You configure \the [src] using \the [W]."))
 			return TRUE
 	. = ..()
-	

@@ -1,5 +1,4 @@
 /obj/structure/fitness
-	icon = 'icons/obj/stationobjs.dmi'
 	anchored = 1
 	var/being_used = 0
 
@@ -7,6 +6,7 @@
 	name = "punching bag"
 	desc = "A punching bag."
 	icon_state = "punchingbag"
+	icon = 'icons/obj/structures/punching_bag.dmi'
 	density = 1
 	var/list/hit_message = list("hit", "punch", "kick", "robust")
 
@@ -32,6 +32,7 @@
 	name = "weightlifting machine"
 	desc = "A machine used to lift weights."
 	icon_state = "weightlifter"
+	icon = 'icons/obj/structures/weightlifter.dmi'
 	var/weight = 1
 	var/max_weight = 5
 	var/list/success_message = list("with great effort", "straining hard", "without any trouble", "with ease")
