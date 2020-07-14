@@ -91,8 +91,8 @@
 
 /decl/hierarchy/supply_pack/atmospherics/hydrogen
 	name = "Gas - Hydrogen tanks"
-	contains = list(/obj/item/tank/hydrogen = 3)
-	cost = 30
+	contains = list(/obj/item/tank/hydrogen = 4)
+	cost = 15
 	containername = "hydrogen tank crate"
 
 /decl/hierarchy/supply_pack/atmospherics/voidsuit

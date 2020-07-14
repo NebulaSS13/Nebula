@@ -1076,10 +1076,10 @@
 		/decl/material/solid/metal/steel,
 		/decl/material/solid/metal/silver, 
 		/decl/material/solid/metal/gold, 
-		/decl/material/solid/metal/diamond, 
+		/decl/material/solid/gemstone/diamond, 
 		/decl/material/solid/metal/uranium,
 		/decl/material/solid/metal/plasteel,
-		/decl/material/solid/metal/titanium,
+		/decl/material/solid/metal/plasteel/titanium,
 		/decl/material/solid/glass,
 		/decl/material/solid/plastic
 	)

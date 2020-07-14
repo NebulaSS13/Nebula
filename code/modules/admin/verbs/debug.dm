@@ -355,14 +355,10 @@
 
 	for(var/obj/machinery/power/rad_collector/Rad in world)
 		if(Rad.anchored)
-			if(!Rad.P)
-				// TODO: maybe make reactures use lithium instead.
-				var/obj/item/tank/hydrogen/hydrogen = new/obj/item/tank/hydrogen(Rad)
-				hydrogen.air_contents.gas[/decl/material/solid/hydrogen] = 70
+			if(!Rad.loaded_tank)
+				Rad.loaded_tank = new /obj/item/tank/hydrogen(Rad)
+				Rad.loaded_tank.air_contents.gas[/decl/material/gas/hydrogen] = 70
 				Rad.drainratio = 0
-				Rad.P = hydrogen
-				hydrogen.forceMove(Rad)
-
 			if(!Rad.active)
 				Rad.toggle_power()
 

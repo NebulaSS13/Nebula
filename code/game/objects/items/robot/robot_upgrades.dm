@@ -212,9 +212,8 @@
 	require_module = 1
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/metal/osmium = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/borg/upgrade/rcd/action(var/mob/living/silicon/robot/R)
