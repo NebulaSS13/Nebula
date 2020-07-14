@@ -83,10 +83,10 @@
 	applies_material_name = FALSE
 	applies_material_colour = FALSE
 
-/obj/item/chems/glass/beaker/bluespace
-	name = "bluespace beaker"
-	desc = "A bluespace beaker, powered by experimental bluespace technology."
-	icon = 'icons/obj/items/chem/beakers/bluespace.dmi'
+/obj/item/chems/glass/beaker/advanced
+	name = "advanced beaker"
+	desc = "An advanced beaker, powered by experimental technology."
+	icon = 'icons/obj/items/chem/beakers/advanced.dmi'
 	center_of_mass = @"{'x':16,'y':10}"
 	volume = 300
 	amount_per_transfer_from_this = 10

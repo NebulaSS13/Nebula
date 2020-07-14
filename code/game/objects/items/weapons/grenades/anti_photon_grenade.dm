@@ -5,7 +5,7 @@
 	icon_state = "emp"
 	item_state = "emp"
 	det_time = 20
-	origin_tech = "{'bluespace':4,'materials':4}"
+	origin_tech = "{'wormholes':4,'materials':4}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,

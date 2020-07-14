@@ -1270,7 +1270,7 @@
 "dk" = (
 /obj/structure/catwalk,
 /obj/machinery/portable_atmospherics/hydroponics,
-/obj/item/seeds/bluespacetomatoseed,
+/obj/item/seeds/quantumatoseed,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growC)
 "dl" = (

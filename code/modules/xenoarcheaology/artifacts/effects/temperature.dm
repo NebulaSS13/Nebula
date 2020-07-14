@@ -8,7 +8,7 @@
 /datum/artifact_effect/temperature/New()
 	..()
 	operation_type = pick(EFFECT_TOUCH, EFFECT_AURA)
-	origin_type = pick(EFFECT_ORGANIC, EFFECT_BLUESPACE, EFFECT_SYNTH)
+	origin_type = pick(EFFECT_ORGANIC, EFFECT_SYNTH)
 	if(!direction)
 		direction = pick(ANOM_EFFECT_COOLING, ANOM_EFFECT_HEATING)
 	switch(direction)

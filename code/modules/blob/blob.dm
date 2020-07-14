@@ -387,11 +387,11 @@ regen() will cover update_icon() for this proc
 	icon_state = "core_sample"
 	item_state = "blob_core"
 	w_class = ITEM_SIZE_NORMAL
-	origin_tech = "{'materials':4,'bluespace':5,'biotech':7}"
+	origin_tech = "{'materials':4,'wormholes':5,'biotech':7}"
 	is_tendril = FALSE
 
 /obj/item/blob_tendril/core/aux
 	name = "asteroclast auxiliary nucleus sample"
 	desc = "A sample taken from an asteroclast's auxiliary nucleus."
 	icon_state = "core_sample_2"
-	origin_tech = "{'materials':2,'bluespace':3,'biotech':4}"
+	origin_tech = "{'materials':2,'wormholes':3,'biotech':4}"

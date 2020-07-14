@@ -69,7 +69,7 @@
 			if(C.data == "Clown Land")
 				//whoops
 				for(var/mob/O in hearers(src, null))
-					O.show_message("<span class='warning'>Incoming bluespace portal detected, unable to lock in.</span>", 2)
+					O.show_message("<span class='warning'>Incoming wormhole detected, unable to lock in.</span>", 2)
 
 				for(var/obj/machinery/teleport/hub/H in range(1))
 					var/amount = rand(2,5)

@@ -221,7 +221,7 @@
 	name = "bluetomato"
 	seed_name = "blue tomato"
 	display_name = "blue tomato plant"
-	mutants = list("bluespacetomato")
+	mutants = list("quantumato")
 	chems = list(/decl/material/liquid/nutriment = list(1,20), /decl/material/liquid/lube = list(1,5))
 
 /datum/seed/tomato/blue/New()
@@ -230,9 +230,9 @@
 	set_trait(TRAIT_PLANT_COLOUR,"#070aad")
 
 /datum/seed/tomato/blue/teleport
-	name = "bluespacetomato"
-	seed_name = "bluespace tomato"
-	display_name = "bluespace tomato plant"
+	name = "quantumato"
+	seed_name = "quantumato"
+	display_name = "quantumato plant"
 	mutants = null
 	chems = list(
 		/decl/material/liquid/nutriment = list(1,20), 

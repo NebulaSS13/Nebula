@@ -41,7 +41,7 @@
 	name = T_BOARD("fusion core")
 	build_path = /obj/machinery/power/fusion_core
 	board_type = "machine"
-	origin_tech = "{'bluespace':2,'magnets':4,'powerstorage':4}"
+	origin_tech = "{'wormholes':2,'magnets':4,'powerstorage':4}"
 	req_components = list(
 							/obj/item/stock_parts/manipulator/pico = 2,
 							/obj/item/stock_parts/micro_laser/ultra = 1,

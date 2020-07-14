@@ -13,7 +13,7 @@
 #define TECH_ENGINEERING   "engineering"
 #define TECH_EXOTIC_MATTER "exoticmatter"
 #define TECH_POWER         "powerstorage"
-#define TECH_BLUESPACE     "bluespace"
+#define TECH_WORMHOLES     "wormholes"
 #define TECH_BIO           "biotech"
 #define TECH_COMBAT        "combat"
 #define TECH_MAGNET        "magnets"

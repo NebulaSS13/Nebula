@@ -47,8 +47,8 @@
 /datum/fabricator_recipe/protolathe/tool/noreactsyringe
 	path = /obj/item/chems/syringe/noreact
 
-/datum/fabricator_recipe/protolathe/tool/bluespacesyringe
-	path = /obj/item/chems/syringe/bluespace
+/datum/fabricator_recipe/protolathe/tool/advancedsyringe
+	path = /obj/item/chems/syringe/advanced
 
 /datum/fabricator_recipe/protolathe/tool/slime_scanner
 	path = /obj/item/scanner/xenobio
@@ -100,5 +100,5 @@
 /datum/fabricator_recipe/protolathe/tool/rped
 	path = /obj/item/storage/part_replacer
 
-/datum/fabricator_recipe/protolathe/tool/rped_bluespace
-	path = /obj/item/storage/part_replacer/bluespace
+/datum/fabricator_recipe/protolathe/tool/rped_advanced
+	path = /obj/item/storage/part_replacer/advanced

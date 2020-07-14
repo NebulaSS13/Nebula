@@ -16,7 +16,7 @@
 /obj/item/stock_parts/circuitboard/teleporter
 	name = T_BOARD("teleporter control console")
 	build_path = /obj/machinery/computer/teleporter
-	origin_tech = "{'programming':2,'bluespace':4}"
+	origin_tech = "{'programming':2,'wormholes':4}"
 
 /obj/item/stock_parts/circuitboard/atmos_alert
 	name = T_BOARD("atmospheric alert console")

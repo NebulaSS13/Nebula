@@ -4435,13 +4435,13 @@
 /area/casino/casino_mainfloor)
 "lw" = (
 /obj/structure/showcase{
-	desc = "A bewilderingly complex prototype designed to split the fabric of spacetime and allow access to Bluespace.";
+	desc = "A bewilderingly complex prototype designed to split the fabric of spacetime and generate traversable wormholes.";
 	icon = 'icons/obj/power.dmi';
 	icon_state = "tracker";
-	name = "Bluespace Drive"
+	name = "wormhole generator"
 	},
 /obj/machinery/shield{
-	desc = "An energy shield used to contain the exotic particles emitted by the Bluespace Drive.";
+	desc = "An energy shield used to contain the exotic particles emitted by the wormhole generator.";
 	name = "Containment Shield"
 	},
 /obj/structure/cable/green{
@@ -4470,7 +4470,7 @@
 "lz" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/engineering{
-	name = "Bluespace Drive";
+	name = "Wormhole Generator";
 	secured_wires = 0
 	},
 /obj/structure/cable/green{

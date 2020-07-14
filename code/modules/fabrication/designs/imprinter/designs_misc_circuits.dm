@@ -323,8 +323,8 @@
 /datum/fabricator_recipe/imprinter/circuit/tcom_receiver
 	path = /obj/item/stock_parts/circuitboard/telecomms/receiver
 
-/datum/fabricator_recipe/imprinter/circuit/bluespace_relay
-	path = /obj/item/stock_parts/circuitboard/bluespacerelay
+/datum/fabricator_recipe/imprinter/circuit/comms_relay
+	path = /obj/item/stock_parts/circuitboard/commsrelay
 
 /datum/fabricator_recipe/imprinter/circuit/shield_generator
 	path = /obj/item/stock_parts/circuitboard/shield_generator

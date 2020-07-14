@@ -36,7 +36,7 @@
 /obj/item/storage/backpack/holding
 	name = "bag of holding"
 	desc = "A backpack that opens into a localized pocket of Blue Space."
-	origin_tech = "{'bluespace':4}"
+	origin_tech = "{'wormholes':4}"
 	icon = 'icons/obj/items/storage/backpack/backpack_holding.dmi'
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
@@ -48,8 +48,8 @@
 	)
 
 /obj/item/storage/backpack/holding/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
-		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
+	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/advanced))
+		to_chat(user, "<span class='warning'>The spatial interfaces of the two devices conflict and malfunction.</span>")
 		qdel(W)
 		return 1
 	return ..()

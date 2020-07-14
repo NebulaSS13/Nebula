@@ -245,7 +245,7 @@
 		if(spawnees & 8)
 			C = new(src.loc)
 			C.SetName("Drone shielding controller")
-			C.origin_tech = "{'[TECH_BLUESPACE]':[rand(3, 6)]}"
+			C.origin_tech = "{'wormholes':[rand(3, 6)]}"
 
 		if(spawnees & 16)
 			C = new(src.loc)

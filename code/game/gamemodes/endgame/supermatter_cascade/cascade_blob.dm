@@ -1,6 +1,6 @@
 // QUALITY COPYPASTA
-/turf/unsimulated/wall/supermatter
-	name = "Bluespace"
+/turf/unsimulated/wall/cascade
+	name = "unravelling spacetime"
 	desc = "THE END IS right now actually."
 
 	icon = 'icons/turf/space.dmi'
@@ -13,7 +13,7 @@
 
 	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST,UP,DOWN)
 
-/turf/unsimulated/wall/supermatter/Initialize(mapload, ...)
+/turf/unsimulated/wall/cascade/Initialize(mapload, ...)
 	. = ..()
 	START_PROCESSING(SSturf, src)
 
@@ -21,11 +21,11 @@
 	for(var/atom/movable/A in src)
 		Consume(A)
 
-/turf/unsimulated/wall/supermatter/Destroy()
+/turf/unsimulated/wall/cascade/Destroy()
 	STOP_PROCESSING(SSturf, src)	
 	. = ..()
 
-/turf/unsimulated/wall/supermatter/Process(wait, times_fired)
+/turf/unsimulated/wall/cascade/Process(wait, times_fired)
 	// Only check infrequently.
 	var/how_often = max(round(5 SECONDS/wait), 1)
 	if(times_fired % how_often)
@@ -49,20 +49,20 @@
 				return
 			T.ChangeTurf(type)
 
-/turf/unsimulated/wall/supermatter/attack_robot(mob/user)
+/turf/unsimulated/wall/cascade/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
 	else
 		user.examinate(src)
 
 // /vg/: Don't let ghosts fuck with this.
-/turf/unsimulated/wall/supermatter/attack_ghost(mob/user)
+/turf/unsimulated/wall/cascade/attack_ghost(mob/user)
 	user.examinate(src)
 
-/turf/unsimulated/wall/supermatter/attack_ai(mob/user)
+/turf/unsimulated/wall/cascade/attack_ai(mob/user)
 	user.examinate(src)
 
-/turf/unsimulated/wall/supermatter/attack_hand(mob/user)
+/turf/unsimulated/wall/cascade/attack_hand(mob/user)
 	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src]... And then blinks out of existance.</span>",\
 		"<span class=\"danger\">You reach out and touch \the [src]. Everything immediately goes quiet. Your last thought is \"That was not a wise decision.\"</span>",\
 		"<span class=\"warning\">You hear an unearthly noise.</span>")
@@ -72,7 +72,7 @@
 	Consume(user)
 	return TRUE
 
-/turf/unsimulated/wall/supermatter/attackby(obj/item/W, mob/living/user)
+/turf/unsimulated/wall/cascade/attackby(obj/item/W, mob/living/user)
 	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
 		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
 		"<span class=\"warning\">Everything suddenly goes silent.</span>")
@@ -85,7 +85,7 @@
 
 #define MayConsume(A) (istype(A) && A.simulated && !isobserver(A))
 
-/turf/unsimulated/wall/supermatter/Bumped(var/atom/movable/AM)
+/turf/unsimulated/wall/cascade/Bumped(var/atom/movable/AM)
 	if(!MayConsume(AM))
 		return
 
@@ -100,10 +100,10 @@
 	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
 	Consume(AM)
 
-/turf/unsimulated/wall/supermatter/Entered(var/atom/movable/AM)
+/turf/unsimulated/wall/cascade/Entered(var/atom/movable/AM)
 	Bumped(AM)
 
-/turf/unsimulated/wall/supermatter/proc/Consume(var/atom/movable/AM)
+/turf/unsimulated/wall/cascade/proc/Consume(var/atom/movable/AM)
 	if(MayConsume(AM))
 		qdel(AM)
 

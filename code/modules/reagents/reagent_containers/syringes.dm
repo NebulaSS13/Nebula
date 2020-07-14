@@ -395,8 +395,8 @@
 
 // TG ports
 
-/obj/item/chems/syringe/bluespace
-	name = "bluespace syringe"
+/obj/item/chems/syringe/advanced
+	name = "advanced syringe"
 	desc = "An advanced syringe that can hold 60 units of chemicals."
 	amount_per_transfer_from_this = 20
 	volume = 60

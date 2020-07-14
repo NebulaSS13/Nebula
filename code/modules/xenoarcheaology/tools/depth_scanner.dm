@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/device/depth_scanner.dmi'
 	icon_state = "crap"
 	item_state = "analyzer"
-	origin_tech = "{'magnets':2,'engineering':2,'bluespace':2}"
+	origin_tech = "{'magnets':2,'engineering':2,'wormholes':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,

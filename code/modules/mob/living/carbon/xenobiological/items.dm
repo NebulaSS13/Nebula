@@ -104,9 +104,9 @@
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/crystal_agent, 10)
 
-/obj/item/slime_extract/bluespace
-	name = "bluespace slime extract"
-	icon_state = "bluespace slime extract"
+/obj/item/slime_extract/quantum
+	name = "quantum slime extract"
+	icon_state = "quantum slime extract"
 
 /obj/item/slime_extract/pyrite
 	name = "pyrite slime extract"

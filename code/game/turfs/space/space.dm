@@ -221,7 +221,7 @@
 /turf/space/is_open()
 	return TRUE
 
-//Bluespace turfs for shuttles and possible future transit use
-/turf/space/bluespace
-	name = "bluespace"
+// Spooky turfs for shuttles and possible future transit use
+/turf/space/infinity
+	name = "\proper infinity"
 	icon_state = "bluespace"

@@ -86,7 +86,7 @@
 	usable = 1
 	selectable = 0
 	device = /obj/item/ano_scanner
-	origin_tech = "{'bluespace':4,'magnets':4,'engineering':6}"
+	origin_tech = "{'wormholes':4,'magnets':4,'engineering':6}"
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
