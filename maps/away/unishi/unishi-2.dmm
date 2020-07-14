@@ -26,7 +26,6 @@
 /area/unishi/library)
 "ag" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/glass/bottle/tericadone,
 /obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
@@ -431,7 +430,6 @@
 /obj/structure/table/reinforced,
 /obj/item/chems/glass/beaker/large,
 /obj/item/chems/glass/beaker/bluespace,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "bl" = (
@@ -769,7 +767,6 @@
 /area/unishi/common)
 "ca" = (
 /obj/structure/table/standard,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cb" = (
@@ -877,7 +874,6 @@
 /obj/structure/table/glass,
 /obj/item/pen/green,
 /obj/item/paper_bin,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "co" = (
@@ -1168,7 +1164,6 @@
 	},
 /obj/item/folder/yellow,
 /obj/item/pen/green,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "da" = (
@@ -1560,10 +1555,6 @@
 /area/unishi/rnd)
 "ea" = (
 /obj/structure/table/glass,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;

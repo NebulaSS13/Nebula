@@ -123,28 +123,3 @@ obj/item/paper/prof2
 	desc = "Logo of the famed Ceti Technical Institute. Just looking at it makes you feel ashamed of your alma mater."
 	icon = 'unishi.dmi'
 	icon_state = "CTILogo"
-
-/decl/material/solid/phoron/safe
-	name = "tericadone"
-	lore_text = "A phoron substitute currently in labratory testing"
-	taste_mult = 1.5
-	color = "#ffc4ff"
-
-/obj/item/chems/glass/bottle/tericadone
-	name = "tericadone bottle"
-	desc = "A small bottle."
-	icon_state = "bottle-3"
-
-/obj/item/chems/glass/bottle/tericadone/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/solid/phoron/safe , 60)
-	update_icon()
-
-/decl/material/solid/phoron/safe/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
-	return
-
-/decl/material/solid/phoron/safe/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	return
-
-/decl/material/solid/phoron/safe/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	return
