@@ -3,12 +3,9 @@
 #define SETUP_ERROR 3		// Something bad happened, and it's important so we won't continue setup.
 #define SETUP_DELAYED 4		// Wait for other things first.
 
-
 #define ENERGY_NITROGEN 115			// Roughly 8 emitter shots.
 #define ENERGY_CARBONDIOXIDE 150	// Roughly 10 emitter shots.
 #define ENERGY_HYDROGEN 300			// Roughly 20 emitter shots.
-#define ENERGY_PHORON 500			// Roughly 40 emitter shots.
-
 
 /datum/admins/proc/setup_supermatter()
 	set category = "Debug"
@@ -250,4 +247,3 @@
 #undef ENERGY_NITROGEN
 #undef ENERGY_CARBONDIOXIDE
 #undef ENERGY_HYDROGEN
-#undef ENERGY_PHORON

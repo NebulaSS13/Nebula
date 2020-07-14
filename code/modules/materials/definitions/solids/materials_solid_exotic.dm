@@ -29,7 +29,7 @@
 		/decl/material/liquid/fuel/hydrazine = 1
 	)
 
-/decl/material/solid/supermatter
+/decl/material/solid/exotic_matter
 	name = "exotic matter"
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in all kinds of fringe physics-defying technology."
 	color = "#ffff00"
@@ -46,3 +46,17 @@
 	flags = MAT_FLAG_FUSION_FUEL
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_SHINY
+	ignition_point = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
+	gas_specific_heat = 200	// J/(mol*K)
+	gas_molar_mass = 0.405	// kg/mol
+	gas_overlay_limit = 0.7
+	gas_flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT
+	gas_symbol_html = "Ex<sub>*</sub>"
+	gas_symbol = "Ex*"
+	taste_mult = 1.5
+	toxicity = 30
+	touch_met = 5
+	fuel_value = 2
+	vapor_products = list(
+		/decl/material/solid/exotic_matter = 1
+	)

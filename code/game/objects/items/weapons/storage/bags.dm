@@ -70,8 +70,7 @@
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/phoron = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 
 /obj/item/storage/bag/trash/bluespace/attackby(obj/item/W, mob/user)

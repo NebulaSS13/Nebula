@@ -79,7 +79,7 @@
 
 // VERY UNIDEAL REACTIONS.
 /decl/fusion_reaction/helium_supermatter
-	p_react = /decl/material/solid/supermatter
+	p_react = /decl/material/solid/exotic_matter
 	s_react = /decl/material/gas/helium
 	energy_consumption = 0
 	energy_production = 5
@@ -107,7 +107,7 @@
 				H.hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
-		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == /decl/material/solid/supermatter)
+		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == /decl/material/solid/exotic_matter)
 			explosion(get_turf(I), 1, 2, 3)
 			spawn(5)
 				if(I && I.loc)

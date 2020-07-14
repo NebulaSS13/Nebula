@@ -56,7 +56,7 @@
 	. = ..()
 	nitrogen_retardation_factor = rand(0.01, 1)	  //Higher == N2 slows reaction more
 	thermal_release_modifier = rand(100, 1000000) //Higher == more heat released during reaction
-	phoron_release_modifier = rand(0, 100000)     //Higher == less phoron released by reaction
+	product_release_modifier = rand(0, 100000)    //Higher == less product gas released by reaction
 	oxygen_release_modifier = rand(0, 100000)     //Higher == less oxygen released at high temperature/power
 	radiation_release_modifier = rand(0, 100)     //Higher == more radiation released with more power.
 	reaction_power_modifier =  rand(0, 100)       //Higher == more overall power
@@ -72,7 +72,7 @@
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"
 	thermal_release_modifier = 0 //Basically inert
-	phoron_release_modifier = 100000000000
+	product_release_modifier = 100000000000
 	oxygen_release_modifier = 100000000000
 	radiation_release_modifier = 1
 
@@ -93,7 +93,7 @@ obj/item/paper/prof1
 
 obj/item/paper/prof2
 	name = "Error log"
-	info = "<large> COMPUTER ID: 15131 <br> Attempting recovery of document directory. <br> Three files recovered <br> Printing file (1/2) <br> </large> Email to iodc@net <br> To whom it may concern, <br> I recieved your email today in regards to the research I am conducting. You have no legal right to question our research or attempt to block it. Per article 323, scientific research is protected information, that you have absolutely zero claim to. The compound is secret in composition, but I can fully promise you that it contains zero traces of phoron, and thus you have no claim whatsoever to it or the technologies to it. Your threats are laughable at best, and have been forwarded to CTI legal. Do not contact me aga!#!41asjw. <br> <large> Printing file (2/2) <br> </large> Email from fuckyou@12cmal <br> We have ways of making you comply. "
+	info = "<large> COMPUTER ID: 15131 <br> Attempting recovery of document directory. <br> Three files recovered <br> Printing file (1/2) <br> </large> Email to iodc@net <br> To whom it may concern, <br> I recieved your email today in regards to the research I am conducting. You have no legal right to question our research or attempt to block it. Per article 323, scientific research is protected information, that you have absolutely zero claim to. The compound is secret in composition, but I can fully promise you that it contains absolutely no proprietary molecules, and thus you have no claim whatsoever to it or the technologies to it. Your threats are laughable at best, and have been forwarded to CTI legal. Do not contact me aga!#!41asjw. <br> <large> Printing file (2/2) <br> </large> Email from fuckyou@12cmal <br> We have ways of making you comply. "
 
 /obj/machinery/computer/log_printer
 	name = "Computer"
