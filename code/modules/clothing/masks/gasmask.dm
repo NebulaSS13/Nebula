@@ -15,7 +15,6 @@
 		bio = ARMOR_BIO_STRONG
 		)
 	filtered_gases = list(
-		/decl/material/solid/phoron,
 		/decl/material/gas/nitrous_oxide,
 		/decl/material/gas/chlorine,
 		/decl/material/gas/ammonia,
@@ -207,7 +206,6 @@
 	body_parts_covered = EYES
 	filtered_gases = list(
 		/decl/material/gas/oxygen,
-		/decl/material/solid/phoron,
 		/decl/material/gas/nitrous_oxide,
 		/decl/material/gas/chlorine,
 		/decl/material/gas/ammonia,

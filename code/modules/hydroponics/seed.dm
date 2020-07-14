@@ -447,12 +447,12 @@
 
 	if(prob(5))
 		consume_gasses = list()
-		var/gas = pick(/decl/material/gas/oxygen,/decl/material/gas/nitrogen,/decl/material/solid/phoron,/decl/material/gas/carbon_dioxide)
+		var/gas = pick(subtypesof(/decl/material/gas))
 		consume_gasses[gas] = rand(3,9)
 
 	if(prob(5))
 		exude_gasses = list()
-		var/gas = pick(/decl/material/gas/oxygen,/decl/material/gas/nitrogen,/decl/material/solid/phoron,/decl/material/gas/carbon_dioxide)
+		var/gas = pick(subtypesof(/decl/material/gas))
 		exude_gasses[gas] = rand(3,9)
 
 	chems = list()
