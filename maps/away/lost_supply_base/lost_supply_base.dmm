@@ -1627,7 +1627,7 @@
 	},
 /area/space)
 "eD" = (
-/obj/machinery/atmospherics/unary/tank/phoron{
+/obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 2;
 	volume = 3200
 	},

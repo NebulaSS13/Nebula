@@ -2350,7 +2350,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "fW" = (
-/obj/machinery/atmospherics/unary/tank/phoron,
+/obj/machinery/atmospherics/unary/tank/hydrogen,
 /obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
