@@ -63,9 +63,9 @@
 /obj/item/twohanded/on_update_icon()
 	..()
 	icon_state = "[base_icon][wielded]"
-	item_state_slots[slot_l_hand_str] = icon_state
-	item_state_slots[slot_r_hand_str] = icon_state
-	item_state_slots[slot_back_str] = base_icon
+	LAZYSET(item_state_slots, slot_l_hand_str, icon_state)
+	LAZYSET(item_state_slots, slot_r_hand_str, icon_state)
+	LAZYSET(item_state_slots, slot_back_str, base_icon)
 
 /*
  * Fireaxe

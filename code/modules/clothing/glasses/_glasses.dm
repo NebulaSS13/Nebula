@@ -10,7 +10,7 @@
 	var/light_protection = 0
 
 /obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
-	if(item_state_slots && item_state_slots[slot])
+	if(slot in item_state_slots)
 		return item_state_slots[slot]
 	else
 		return icon_state

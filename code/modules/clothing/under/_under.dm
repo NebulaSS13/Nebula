@@ -77,7 +77,7 @@
 			. = "_f" + suffix
 
 /obj/item/clothing/under/get_icon_state(mob/user_mob, slot)
-	if(item_state_slots && item_state_slots[slot])
+	if(slot in item_state_slots)
 		. = item_state_slots[slot]
 	else
 		. = icon_state
@@ -97,9 +97,7 @@
 /obj/item/clothing/under/Initialize()
 	. = ..()
 	if(worn_state)
-		if(!item_state_slots)
-			item_state_slots = list()
-		item_state_slots[slot_w_uniform_str] = worn_state
+		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state)
 	else
 		worn_state = icon_state
 	//autodetect rollability
@@ -245,10 +243,10 @@
 	rolled_down = !rolled_down
 	if(rolled_down)
 		body_parts_covered &= LOWER_TORSO|LEGS|FEET
-		item_state_slots[slot_w_uniform_str] = worn_state + get_gender_suffix("_d_s")
+		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix("_d_s"))
 	else
 		body_parts_covered = initial(body_parts_covered)
-		item_state_slots[slot_w_uniform_str] = worn_state + get_gender_suffix()
+		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix())
 	update_clothing_icon()
 
 /obj/item/clothing/under/verb/rollsleeves()
@@ -269,11 +267,11 @@
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
 		body_parts_covered &= ~(ARMS|HANDS)
-		item_state_slots[slot_w_uniform_str] = worn_state + get_gender_suffix("_r_s")
+		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix("_r_s"))
 		to_chat(usr, "<span class='notice'>You roll up your [src]'s sleeves.</span>")
 	else
 		body_parts_covered = initial(body_parts_covered)
-		item_state_slots[slot_w_uniform_str] = worn_state + get_gender_suffix()
+		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix())
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
 

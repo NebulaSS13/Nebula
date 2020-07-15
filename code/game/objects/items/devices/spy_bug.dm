@@ -55,7 +55,7 @@
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
 	icon = 'icons/obj/modular_computers/pda/pda.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	color = COLOR_GRAY80
 
 	w_class = ITEM_SIZE_SMALL
