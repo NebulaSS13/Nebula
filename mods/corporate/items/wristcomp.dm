@@ -4,7 +4,6 @@
 	icon = 'mods/corporate/icons/obj/wristcomp.dmi'
 	on_mob_icon = 'mods/corporate/icons/obj/wristcomp.dmi'
 	screen_icon = 'mods/corporate/icons/obj/wristcomp_screens.dmi'
-	item_state_slots = null
 
 	slot_flags = SLOT_ID | SLOT_BELT
 	color = COLOR_GUNMETAL
@@ -28,21 +27,6 @@
 			I.color = decals[decal]
 			ret.overlays.Add(I)
 	return ret
-
-/obj/item/modular_computer/pda/wrist/on_update_icon()
-	..()
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
-	if(assembly?.enabled)
-		var/image/I = image(screen_icon, icon_state = "[icon_state]-screen")
-		I.appearance_flags |= RESET_COLOR
-		I.color = (assembly.bsod || os.updating) ? "#0000ff" : "#00ff00"
-		add_overlay(I)
-	else
-		add_overlay(image(screen_icon, icon_state = "[icon_state]-screen_off"))
-	var/mob/living/carbon/human/H = loc
-	if(istype(H) && H.wear_id == src)
-		H.update_inv_wear_id()
 
 /obj/item/modular_computer/pda/wrist/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))

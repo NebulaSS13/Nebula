@@ -150,10 +150,9 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/card/id
 	name = "identification card"
 	desc = "A card used to provide ID and determine access."
-	icon_state = "base"
-	item_state = "card-id"
+	icon = 'icons/obj/id/id.dmi'
+	on_mob_icon = 'icons/obj/id/id.dmi'
 	slot_flags = SLOT_ID
-
 	var/list/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
 	var/associated_account_number = 0
@@ -197,14 +196,16 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	ret.overlays += overlay_image(ret.icon, "[ret.icon_state]_colors", detail_color, RESET_COLOR)
+	if(detail_color)
+		ret.overlays += overlay_image(ret.icon, "[ret.icon_state]-colors", detail_color, RESET_COLOR)
 	return ret
 
 /obj/item/card/id/on_update_icon()
-	overlays.Cut()
-	overlays += overlay_image(icon, "[icon_state]_colors", detail_color, RESET_COLOR)
+	cut_overlays()
+	if(detail_color)
+		add_overlay(overlay_image(icon, "[icon_state]-colors", detail_color, RESET_COLOR))
 	for(var/detail in extra_details)
-		overlays += overlay_image(icon, detail, flags=RESET_COLOR)
+		add_overlay(overlay_image(icon, detail, flags = RESET_COLOR))
 
 /obj/item/card/id/Topic(href, href_list, datum/topic_state/state)
 	var/mob/user = usr

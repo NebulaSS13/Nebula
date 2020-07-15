@@ -32,6 +32,12 @@
 	else
 		..()
 
+/obj/item/modular_computer/pda/on_update_icon()
+	. = ..()
+	var/mob/living/carbon/human/H = loc
+	if(istype(H) && H.wear_id == src)
+		H.update_inv_wear_id()
+
 // PDA box
 /obj/item/storage/box/PDAs
 	name = "box of spare PDAs"
