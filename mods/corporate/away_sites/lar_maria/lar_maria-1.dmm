@@ -1951,9 +1951,9 @@
 /area/lar_maria/sec_wing)
 "fg" = (
 /obj/structure/table/rack,
-/obj/item/melee/baton,
-/obj/item/melee/baton,
-/obj/item/melee/baton,
+/obj/item/baton,
+/obj/item/baton,
+/obj/item/baton,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fh" = (

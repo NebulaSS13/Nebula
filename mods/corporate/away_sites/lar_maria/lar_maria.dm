@@ -96,8 +96,8 @@
 	icon_state = "guard_light"
 	maxHealth = 60
 	health = 60
-	natural_weapon = /obj/item/melee/baton
-	weapon = /obj/item/melee/baton
+	natural_weapon = /obj/item/baton
+	weapon = /obj/item/baton
 	corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard
 
 /mob/living/simple_animal/hostile/lar_maria/guard/Initialize()

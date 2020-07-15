@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(stat & BROKEN || !I || !user)
 		return
 
-	if(istype(I, /obj/item/melee/energy/blade))
+	if(istype(I, /obj/item/energy_blade/blade))
 		to_chat(user, "You can't place that item inside the disposal unit.")
 		return
 

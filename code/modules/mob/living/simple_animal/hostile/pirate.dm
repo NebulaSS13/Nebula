@@ -15,10 +15,10 @@
 	health = 100
 	can_escape = TRUE
 	
-	natural_weapon = /obj/item/melee/energy/sword/pirate/activated
+	natural_weapon = /obj/item/energy_blade/sword/pirate/activated
 	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/pirate
-	var/weapon1 = /obj/item/melee/energy/sword/pirate
+	var/weapon1 = /obj/item/energy_blade/sword/pirate
 
 	faction = "pirate"
 

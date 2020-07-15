@@ -355,7 +355,7 @@
 /obj/item/rig_module/mounted/energy_blade/Process()
 
 	if(holder && holder.wearer)
-		if(!(locate(/obj/item/melee/energy/blade) in holder.wearer))
+		if(!(locate(/obj/item/energy_blade/blade) in holder.wearer))
 			deactivate()
 			return 0
 
@@ -373,7 +373,7 @@
 		deactivate()
 		return
 
-	var/obj/item/melee/energy/blade/blade = new(M)
+	var/obj/item/energy_blade/blade/blade = new(M)
 	blade.creator = M
 	M.put_in_hands(blade)
 
@@ -386,7 +386,7 @@
 	if(!M)
 		return
 
-	for(var/obj/item/melee/energy/blade/blade in M.contents)
+	for(var/obj/item/energy_blade/blade/blade in M.contents)
 		qdel(blade)
 
 /obj/item/rig_module/fabricator

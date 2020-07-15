@@ -324,7 +324,7 @@
 	pixel_x = -7;
 	pixel_y = 0
 	},
-/obj/item/melee/baton/cattleprod{
+/obj/item/baton/cattleprod{
 	desc = "Metal rod with wire attached to it.";
 	name = "jury-rigged antenna";
 	pixel_x = 5;
@@ -356,7 +356,7 @@
 /turf/template_noop,
 /area/template_noop)
 "aY" = (
-/obj/item/melee/baton/cattleprod{
+/obj/item/baton/cattleprod{
 	desc = "Metal rod with wire attached to it.";
 	name = "jury-rigged antenna";
 	pixel_x = 5;

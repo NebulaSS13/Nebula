@@ -41,7 +41,7 @@
 /mob/living/simple_animal/hostile/syndicate/melee
 	icon_state = "syndicatemelee"
 	icon_living = "syndicatemelee"
-	natural_weapon = /obj/item/melee/energy/sword/red/activated
+	natural_weapon = /obj/item/energy_blade/sword/red/activated
 	weapon2 = /obj/item/shield/energy
 	status_flags = 0
 

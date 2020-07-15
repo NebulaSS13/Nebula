@@ -16,7 +16,7 @@
 		/obj/item/radio/headset/heads/captain,
 		/obj/item/clothing/gloves/captain,
 		/obj/item/gun/energy/gun,
-		/obj/item/melee/telebaton,
+		/obj/item/telebaton,
 		/obj/item/clothing/under/dress/dress_cap,
 		/obj/item/clothing/head/caphat/formal,
 		/obj/item/clothing/under/captainformal,
@@ -79,10 +79,10 @@
 		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/flash,
-		/obj/item/melee/baton/loaded,
+		/obj/item/baton/loaded,
 		/obj/item/gun/energy/gun,
 		/obj/item/clothing/accessory/storage/holster/waist,
-		/obj/item/melee/telebaton,
+		/obj/item/telebaton,
 		/obj/item/holowarrant
 	)
 
@@ -106,7 +106,7 @@
 		/obj/item/storage/box/teargas,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/chems/spray/pepper,
-		/obj/item/melee/baton/loaded,
+		/obj/item/baton/loaded,
 		/obj/item/gun/energy/gun,
 		/obj/item/storage/box/holobadge,
 		/obj/item/holowarrant
@@ -127,7 +127,7 @@
 		/obj/item/flash,
 		/obj/item/chems/spray/pepper,
 		/obj/item/grenade/chem_grenade/teargas,
-		/obj/item/melee/baton/loaded,
+		/obj/item/baton/loaded,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/hailer,

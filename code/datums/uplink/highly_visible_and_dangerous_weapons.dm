@@ -34,7 +34,7 @@
 	desc = "A hilt, that when activated, creates a solid beam of pure energy in the form of a sword. \
 			Able to slice through people like butter!"
 	item_cost = 32
-	path = /obj/item/melee/energy/sword
+	path = /obj/item/energy_blade/sword
 
 /datum/uplink_item/item/visible_weapons/silenced
 	name = "Small Silenced Pistol"

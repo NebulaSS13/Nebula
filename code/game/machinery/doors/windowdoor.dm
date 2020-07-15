@@ -175,7 +175,7 @@
 
 /obj/machinery/door/window/bash(obj/item/I, mob/user)
 	//Emags and ninja swords? You may pass.
-	if (istype(I, /obj/item/melee/energy/blade))
+	if (istype(I, /obj/item/energy_blade/blade))
 		if(emag_act(10, user))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)

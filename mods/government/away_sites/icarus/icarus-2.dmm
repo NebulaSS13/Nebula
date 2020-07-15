@@ -380,8 +380,8 @@
 /area/icarus/vessel)
 "bq" = (
 /obj/structure/table/rack,
-/obj/item/melee/baton,
-/obj/item/melee/baton,
+/obj/item/baton,
+/obj/item/baton,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "br" = (

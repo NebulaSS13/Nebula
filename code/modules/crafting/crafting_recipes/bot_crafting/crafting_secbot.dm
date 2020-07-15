@@ -24,6 +24,6 @@
 	next_stages = list(/decl/crafting_stage/secbot_baton)
 
 /decl/crafting_stage/secbot_baton
-	completion_trigger_type = /obj/item/melee/baton
+	completion_trigger_type = /obj/item/baton
 	progress_message = "You complete the Securitron! Beep boop."
 	product = /mob/living/bot/secbot

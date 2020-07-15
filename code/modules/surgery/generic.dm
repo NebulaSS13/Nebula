@@ -27,7 +27,7 @@
 		/obj/item/scalpel/laser3 = 95,
 		/obj/item/scalpel/laser2 = 85,
 		/obj/item/scalpel/laser1 = 75,
-		/obj/item/melee/energy/sword = 5
+		/obj/item/energy_blade/sword = 5
 	)
 	min_duration = 90
 	max_duration = 110

@@ -106,7 +106,7 @@
 /datum/extension/lockable/proc/attackby(var/obj/item/W, var/mob/user)
 	var/obj/item/A = holder
 	if(locked)
-		if (!is_digital_lock && istype(W, /obj/item/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [holder]"))
+		if (!is_digital_lock && istype(W, /obj/item/energy_blade/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [holder]"))
 			var/datum/effect/effect/system/spark_spread/spark_system = new
 			spark_system.set_up(5, 0, A.loc)
 			spark_system.start()

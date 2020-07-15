@@ -62,8 +62,8 @@
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
 	var/sound_out = 'sound/effects/holster/holsterout.ogg'
 	can_hold = list(
-		/obj/item/melee/baton,
-		/obj/item/melee/telebaton
+		/obj/item/baton,
+		/obj/item/telebaton
 		)
 
 /obj/item/storage/belt/holster/Initialize()
@@ -213,15 +213,16 @@
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
 		/obj/item/chems/food/snacks/donut/,
-		/obj/item/melee/baton,
-		/obj/item/melee/telebaton,
+		/obj/item/baton,
+		/obj/item/telebaton,
 		/obj/item/flame/lighter,
 		/obj/item/flashlight,
 		/obj/item/modular_computer/pda,
 		/obj/item/radio/headset,
 		/obj/item/hailer,
 		/obj/item/megaphone,
-		/obj/item/melee,
+		/obj/item/energy_blade,
+		/obj/item/baton,
 		/obj/item/taperoll,
 		/obj/item/holowarrant,
 		/obj/item/magnetic_ammo,
@@ -245,15 +246,16 @@
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
 		/obj/item/chems/food/snacks/donut/,
-		/obj/item/melee/baton,
-		/obj/item/melee/telebaton,
+		/obj/item/baton,
+		/obj/item/telebaton,
 		/obj/item/flame/lighter,
 		/obj/item/flashlight,
 		/obj/item/modular_computer/pda,
 		/obj/item/radio/headset,
 		/obj/item/hailer,
 		/obj/item/megaphone,
-		/obj/item/melee,
+		/obj/item/energy_blade,
+		/obj/item/baton,
 		/obj/item/taperoll,
 		/obj/item/holowarrant,
 		/obj/item/magnetic_ammo,
@@ -269,7 +271,7 @@
 	overlay_flags = BELT_OVERLAY_ITEMS
 	can_hold = list(
 		/obj/item/flash,
-		/obj/item/melee/telebaton,
+		/obj/item/telebaton,
 		/obj/item/taperecorder,
 		/obj/item/folder,
 		/obj/item/paper,
@@ -325,7 +327,7 @@
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
 	can_hold = list(
 		/obj/item/flash,
-		/obj/item/melee/telebaton,
+		/obj/item/telebaton,
 		/obj/item/taperecorder,
 		/obj/item/folder,
 		/obj/item/paper,

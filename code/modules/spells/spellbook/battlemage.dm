@@ -31,11 +31,13 @@
 				/obj/item/contract/apprentice = 				1
 					)
 
-	sacrifice_objects = list(/obj/item/sword,
-							/obj/item/twohanded/fireaxe,
-							/obj/item/melee,
-							/obj/item/knife/ritual,
-							/obj/item/knife/kitchen/cleaver,
-							/obj/item/knife/folding/combat/balisong,
-							/obj/item/knife/folding/tacticool,
-							/obj/item/star)
+	sacrifice_objects = list(
+		/obj/item/sword,
+		/obj/item/twohanded/fireaxe,
+		/obj/item/baton,
+		/obj/item/knife/ritual,
+		/obj/item/knife/kitchen/cleaver,
+		/obj/item/knife/folding/combat/balisong,
+		/obj/item/knife/folding/tacticool,
+		/obj/item/star
+	)

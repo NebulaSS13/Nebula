@@ -1,4 +1,4 @@
-/obj/item/melee/whip
+/obj/item/whip
 	name = "whip"
 	desc = "A generic whip."
 	icon = 'icons/obj/items/weapon/whip.dmi'
@@ -12,7 +12,7 @@
 	origin_tech = "{'combat':4}"
 	attack_verb = list("flicked", "whipped", "lashed")
 
-/obj/item/melee/whip/abyssal
+/obj/item/whip/abyssal
 	name = "abyssal whip"
 	desc = "A weapon from the abyss. Requires 70 attack to wield."
 	icon_state = "whip"
@@ -25,7 +25,7 @@
 	origin_tech = "{'combat':4}"
 	attack_verb = list("flicked", "whipped", "lashed")
 
-/obj/item/melee/whip/tail
+/obj/item/whip/tail
 	name = "drake's tail"
 	desc = "The tail of a large scaled creature, obviously evolved as some kind of whipping weapon. It's razor sharp and incredibly tough, though relatively lightweight."
 	icon_state = "tailwhip"
@@ -35,7 +35,7 @@
 	edge = TRUE
 	origin_tech = "{'combat':6,'materials':5}"
 
-/obj/item/melee/whip/chainofcommand
+/obj/item/whip/chainofcommand
 	name = "chain of command"
 	desc = "A tool used by great men to placate the frothing masses."
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")

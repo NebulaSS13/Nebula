@@ -35,7 +35,7 @@
 					return
 			else
 				to_chat(user, "<span class='warning'>Access Denied</span>")
-		else if(istype(W, /obj/item/melee/energy/blade))
+		else if(istype(W, /obj/item/energy_blade/blade))
 			if(emag_act(INFINITY, user, W, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
 				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 				spark_system.set_up(5, 0, src.loc)

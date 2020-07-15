@@ -13,7 +13,7 @@
 		/obj/item/crowbar,
 		/obj/item/scanner/health
 	)
-	emag = /obj/item/melee/energy/sword
+	emag = /obj/item/energy_blade/sword
 	skills = list(
 		SKILL_LITERACY     = SKILL_ADEPT,
 		SKILL_COMBAT       = SKILL_ADEPT,

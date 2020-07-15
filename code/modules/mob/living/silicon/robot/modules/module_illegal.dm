@@ -8,7 +8,7 @@
 	)
 	equipment = list(
 		/obj/item/flash,
-		/obj/item/melee/energy/sword,
+		/obj/item/energy_blade/sword,
 		/obj/item/gun/energy/laser,
 		/obj/item/crowbar,
 		/obj/item/card/emag,

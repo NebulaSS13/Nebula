@@ -1296,7 +1296,7 @@
 /area/map_template/skipjack_station/start)
 "de" = (
 /obj/structure/table/rack,
-/obj/item/melee/energy/sword/pirate,
+/obj/item/energy_blade/sword/pirate,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/tank/oxygen,
@@ -1311,7 +1311,7 @@
 /area/map_template/skipjack_station/start)
 "df" = (
 /obj/structure/table/rack,
-/obj/item/melee/energy/sword/pirate,
+/obj/item/energy_blade/sword/pirate,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/tank/oxygen,
@@ -1850,7 +1850,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/item/melee/baton/cattleprod,
+/obj/item/baton/cattleprod,
 /turf/simulated/floor/shuttle/white,
 /area/map_template/skipjack_station/start)
 "eE" = (

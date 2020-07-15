@@ -11,11 +11,11 @@
 	if(istype(O, /obj/item/projectile))
 		var/obj/item/projectile/P = O
 		. = (P.damage_type == BURN) || (P.damage_type == ELECTROCUTE)
-	if(istype(O,/obj/item/melee/baton))
-		var/obj/item/melee/baton/B = O 
+	if(istype(O,/obj/item/baton))
+		var/obj/item/baton/B = O 
 		. = B.status
-	else if (istype(O,/obj/item/melee/energy))
-		var/obj/item/melee/energy/E = O
+	else if (istype(O,/obj/item/energy_blade))
+		var/obj/item/energy_blade/E = O
 		. = E.active
 	else if (is_type_in_list(O, energetic_things))
 		. = TRUE

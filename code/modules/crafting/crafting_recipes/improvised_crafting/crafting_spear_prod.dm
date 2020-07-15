@@ -46,4 +46,4 @@
 /decl/crafting_stage/stunprod_wirecutters
 	completion_trigger_type = /obj/item/wirecutters
 	progress_message = "You fasten the wirecutters to the top of the rod with the cable, prongs outward."
-	product = /obj/item/melee/baton/cattleprod
+	product = /obj/item/baton/cattleprod

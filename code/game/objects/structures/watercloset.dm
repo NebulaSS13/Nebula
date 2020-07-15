@@ -448,8 +448,8 @@
 		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
 		return 1
 
-	else if (istype(O, /obj/item/melee/baton))
-		var/obj/item/melee/baton/B = O
+	else if (istype(O, /obj/item/baton))
+		var/obj/item/baton/B = O
 		if(B.bcell)
 			if(B.bcell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
