@@ -61,11 +61,11 @@
 	name = "Flash Fire"
 	lore_text = "This mixture causes an immediate flash fire."
 	required_reagents = list(
-		/decl/material/solid/metal/aluminium = 1, 
-		/decl/material/solid/phoron = 1, 
+		/decl/material/solid/metal/aluminium = 2,
+		/decl/material/liquid/fuel = 1,
 		/decl/material/liquid/acid = 1
 	)
-	result_amount = 1
+	result_amount = 10 // Sufficient to start a fire.
 	reaction_sound = 'sound/items/Welder.ogg'
 	mix_message = "The solution suddenly ignites!"
 
@@ -73,7 +73,7 @@
 	..()
 	var/turf/location = get_turf(holder.my_atom.loc)
 	if(istype(location))
-		location.assume_gas(/decl/material/solid/phoron, created_volume, FLAMMABLE_GAS_FLASHPOINT + 10)
+		location.assume_gas(/decl/material/gas/hydrogen, created_volume, FLAMMABLE_GAS_FLASHPOINT + 10)
 		var/datum/effect/effect/system/spark_spread/sparks = new
 		sparks.set_up(1, 1, location)
 		sparks.start()
