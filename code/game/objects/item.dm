@@ -118,6 +118,8 @@
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
+	if(istype(loc, /obj/item/storage))
+		on_enter_storage()
 
 /obj/item/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -368,14 +370,14 @@
 
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
 /obj/item/proc/on_exit_storage(obj/item/storage/S)
-	return
+	mouse_opacity = initial(mouse_opacity)
 
 // called when this item is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
 /obj/item/proc/on_enter_storage(obj/item/storage/S)
-	return
+	mouse_opacity = 2
 
 // called when "found" in pockets and storage items. Returns 1 if the search should end.
-/obj/item/proc/on_found(mob/finder)
+/obj/item/proc/on_found(mob/finder) 
 	return
 
 // called after an item is placed in an equipment slot
