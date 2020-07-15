@@ -2,7 +2,7 @@
 	name = "immaculate fedora"
 	desc = "Whoever owns this hat means business. Hopefully, it's just good business."
 	color = COLOR_SILVER
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/detective.dmi'
 	on_mob_icon = 'icons/clothing/head/detective.dmi'
 	markings_icon = "band"

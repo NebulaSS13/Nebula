@@ -1,7 +1,7 @@
 /obj/item/clothing/head/fated
 	name = "strange key"
 	desc = "A glowing key, uncomfortably hot to the touch."
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/fated_key.dmi'
 	on_mob_icon = 'icons/clothing/head/fated_key.dmi'
 	body_parts_covered = 0

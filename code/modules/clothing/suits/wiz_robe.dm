@@ -1,7 +1,7 @@
 /obj/item/clothing/head/wizard
 	name = "wizard hat"
 	desc = "Strange-looking hat-wear that most certainly belongs to a real magic user."
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/wizard/wizard.dmi'
 	on_mob_icon = 'icons/clothing/head/wizard/wizard.dmi'
 	//Not given any special protective value since the magic robes are full-body protection --NEO

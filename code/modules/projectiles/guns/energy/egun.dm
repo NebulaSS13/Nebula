@@ -4,7 +4,7 @@
 	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low, medium and high power projectile settings. In other words: stun, shock or kill."
 	icon = 'icons/obj/guns/energy_gun.dmi'
 	on_mob_icon = 'icons/obj/guns/energy_gun.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
 	max_shots = 10
 	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
@@ -24,7 +24,7 @@
 	desc = "A smaller model of the versatile LAEP90 Perun, the LAEP90-C packs considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
 	on_mob_icon = 'icons/obj/guns/small_egun.dmi'
 	icon = 'icons/obj/guns/small_egun.dmi'
-	icon_state = "inventory"
+	icon_state = ICON_STATE_WORLD
 	max_shots = 5
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?

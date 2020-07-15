@@ -136,7 +136,7 @@
 	name = "foam dart crossbow"
 	desc = "A weapon favored by many overactive children. Ages 8 and up."
 	on_mob_icon = 'icons/obj/guns/energy_crossbow.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5

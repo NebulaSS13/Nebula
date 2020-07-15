@@ -3,7 +3,7 @@
 	desc = "A special pair of pliers with cutting edges. Various brackets and manipulators built into the handle allow it to repair severed wiring."
 	icon = 'icons/obj/items/tool/wirecutters.dmi'
 	on_mob_icon = 'icons/obj/items/tool/wirecutters.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':1,'engineering':1}"

@@ -65,7 +65,7 @@
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
 	on_mob_icon = 'icons/obj/guns/launcher/syringe.dmi'
 	icon = 'icons/obj/guns/launcher/syringe.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE
 	force = 7
 	material = /decl/material/solid/metal/steel

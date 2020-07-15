@@ -1,7 +1,7 @@
 /obj/item/clothing/accessory/cloak // A colorable cloak
 	name = "plain cloak"
 	desc = "A simple, bland cloak."
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/suit/cloaks/_cloak.dmi'
 	on_mob_icon = 'icons/clothing/suit/cloaks/_cloak.dmi'
 	w_class = ITEM_SIZE_NORMAL

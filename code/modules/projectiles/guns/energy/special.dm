@@ -3,7 +3,7 @@
 	desc = "The Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats. Not the best of its type."
 	on_mob_icon = 'icons/obj/guns/ion_rifle.dmi'
 	icon = 'icons/obj/guns/ion_rifle.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':2,'magnets':4}"
 	w_class = ITEM_SIZE_HUGE
 	force = 10
@@ -24,7 +24,7 @@
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
 	on_mob_icon = 'icons/obj/guns/decloner.dmi'
 	icon = 'icons/obj/guns/decloner.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':5,'materials':4,'powerstorage':3}"
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
@@ -37,7 +37,7 @@
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	on_mob_icon = 'icons/obj/guns/floral.dmi'
 	icon = 'icons/obj/guns/floral.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	charge_cost = 10
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
@@ -100,7 +100,7 @@
 	desc = "A specialized firearm designed to fire lethal bursts of radiation."
 	on_mob_icon = 'icons/obj/guns/toxgun.dmi'
 	icon = 'icons/obj/guns/toxgun.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':5,'exoticmatter':4}"
 	projectile_type = /obj/item/projectile/energy/radiation
@@ -116,7 +116,7 @@
 	charge_meter = 0
 	on_mob_icon = 'icons/obj/guns/plasmacutter.dmi'
 	icon = 'icons/obj/guns/plasmacutter.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
@@ -172,7 +172,7 @@
 	desc = "The A&M 'Shayatin' was the first of a now-banned class of dispersive laser weapons which, instead of firing a focused beam, scan over a target rapidly with the goal of setting it ablaze."
 	on_mob_icon = 'icons/obj/guns/incendiary_laser.dmi'
 	icon = 'icons/obj/guns/incendiary_laser.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
 	origin_tech = "{'combat':7,'magnets':4,'esoteric':4}"
 	material = /decl/material/solid/metal/aluminium

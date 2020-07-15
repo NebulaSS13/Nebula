@@ -171,11 +171,12 @@
 //**********************
 /obj/item/storage/backpack/chameleon
 	name = "backpack"
-	icon_state = "backpack"
-	item_state = "backpack"
 	desc = "A backpack outfitted with cloaking tech. It seems to have a small dial inside, kept away from the storage."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
+	icon = 'icons/obj/items/storage/backpack/backpack.dmi'
+	on_mob_icon = 'icons/obj/items/storage/backpack/backpack.dmi'
+
 	var/global/list/clothing_choices
 
 /obj/item/storage/backpack/chameleon/Initialize()
@@ -205,7 +206,7 @@
 
 /obj/item/clothing/gloves/chameleon
 	name = "black gloves"
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	color = COLOR_GRAY40
 	icon = 'icons/clothing/hands/gloves_generic.dmi'
 	on_mob_icon = 'icons/clothing/hands/gloves_generic.dmi'

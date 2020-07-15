@@ -10,7 +10,7 @@
 	color = COLOR_YELLOW
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 
 /obj/item/clothing/gloves/insulated/cheap                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
@@ -36,7 +36,7 @@
 /obj/item/clothing/gloves/tactical
 	desc = "These brown tactical gloves are made from a durable synthetic, and have hardened knuckles."
 	name = "tactical gloves"
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	color = COLOR_BROWN
 	force = 5
 	siemens_coefficient = 0.50
@@ -67,7 +67,7 @@
 /obj/item/clothing/gloves/fire
 	desc = "A pair of gloves specially design for firefight and damage control."
 	name = "fire gloves"
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/hands/firefighter.dmi'
 	on_mob_icon = 'icons/clothing/hands/firefighter.dmi'
 	siemens_coefficient = 0.50

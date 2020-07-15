@@ -3,7 +3,7 @@
 	desc = "Because you really needed another excuse to punch your crewmates."
 	icon = 'icons/clothing/hands/gloves_boxing.dmi'
 	on_mob_icon = 'icons/clothing/hands/gloves_boxing.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	color = COLOR_RED_GRAY
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_PADDED
 

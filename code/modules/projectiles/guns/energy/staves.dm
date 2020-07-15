@@ -3,7 +3,7 @@
 	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself."
 	on_mob_icon = 'icons/obj/guns/staff.dmi'
 	icon = 'icons/obj/guns/staff.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	fire_sound = 'sound/weapons/emitter.ogg'
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_BACK

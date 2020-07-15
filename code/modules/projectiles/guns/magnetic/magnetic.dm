@@ -3,7 +3,7 @@
 	desc = "A coilgun hastily thrown together out of a basic frame and advanced power storage components. Is it safe for it to be duct-taped together like that?"
 	on_mob_icon = 'icons/obj/guns/coilgun.dmi'
 	icon = 'icons/obj/guns/coilgun.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	one_hand_penalty = 5
 	fire_delay = 20
 	origin_tech = "{'combat':5,'materials':4,'esoteric':2,'magnets':4}"

@@ -103,7 +103,7 @@
 	desc = "It's a bucket."
 	icon = 'icons/obj/items/bucket.dmi'
 	on_mob_icon = 'icons/obj/items/bucket.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	center_of_mass = @"{'x':16,'y':9}"
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20

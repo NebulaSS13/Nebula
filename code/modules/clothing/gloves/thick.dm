@@ -11,7 +11,7 @@
 	color = COLOR_GRAY20
 	icon = 'icons/clothing/hands/gloves_thick.dmi'
 	on_mob_icon = 'icons/clothing/hands/gloves_thick.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	force = 5
 	sprite_sheets = null
 	armor = list(

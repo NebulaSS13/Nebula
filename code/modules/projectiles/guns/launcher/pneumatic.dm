@@ -3,7 +3,7 @@
 	desc = "A large gas-powered cannon."
 	on_mob_icon = 'icons/obj/guns/launcher/pneumatic.dmi'
 	icon = 'icons/obj/guns/launcher/pneumatic.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':4,'materials':3}"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_HUGE

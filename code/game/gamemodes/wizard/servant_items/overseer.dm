@@ -41,7 +41,7 @@
 /obj/item/clothing/shoes/sandal/grimboots
 	name = "stained boots"
 	desc = "These boots are stained with blood so dry that it's turned black..."
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	on_mob_icon = 'icons/clothing/feet/generic_shoes.dmi'
 	color = COLOR_BLACK
 	shine = 10

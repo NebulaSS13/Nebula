@@ -6,13 +6,15 @@
 //For uplink kits that provide bulkier items
 /obj/item/storage/backpack/satchel/syndie_kit
 	desc = "A sleek, sturdy satchel."
-	icon_state = "satchel-norm"
+	icon = 'icons/obj/items/storage/backpack/satchel_grey.dmi'
+	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_grey.dmi'
 
 //In case an uplink kit provides a lot of gear
 /obj/item/storage/backpack/dufflebag/syndie_kit
 	name = "black dufflebag"
 	desc = "A sleek, sturdy dufflebag."
-	icon_state = "duffle_syndie"
+	icon = 'icons/obj/items/storage/backpack/dufflebag_syndie.dmi'
+	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_syndie.dmi'
 
 /obj/item/storage/box/syndie_kit/imp_freedom
 	startswith = list(/obj/item/implanter/freedom)

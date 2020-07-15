@@ -14,7 +14,7 @@
 /obj/item/clothing/head/welding
 	name = "welding helmet"
 	desc = "A head-mounted face cover designed to protect the wearer completely from space-arc eye."
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/welding/default.dmi'
 	on_mob_icon = 'icons/clothing/head/welding/default.dmi'
 	material = /decl/material/solid/metal/steel

@@ -74,7 +74,7 @@
 	desc = "A heavy jacket made from 'synthetic' animal furs."
 	icon = 'icons/clothing/suit/wintercoat/coat.dmi'
 	on_mob_icon = 'icons/clothing/suit/wintercoat/coat.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
