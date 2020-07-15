@@ -68,24 +68,24 @@
 	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
 	if(damage > broken_damage)
 		if(force_synth || issynth)
-			to_chat(user, "You send an activation signal to \the [assembly_name], but it responds with an error code. It must be damaged.")
+			to_chat(user, SPAN_WARNING("You send an activation signal to \the [assembly_name], but it responds with an error code. It must be damaged."))
 		else
-			to_chat(user, "You press the power button, but the computer fails to boot up, displaying variety of errors before shutting down again.")
+			to_chat(user, SPAN_WARNING("You press the power button, but the computer fails to boot up, displaying variety of errors before shutting down again."))
 		shutdown_device()
 		return
 	if(has_critical_parts() && has_power()) // Battery-run and charged or non-battery but powered by APC.
 		if(force_synth || issynth)
-			to_chat(user, "You send an activation signal to \the [assembly_name], turning it on")
+			to_chat(user, SPAN_NOTICE("You send an activation signal to \the [assembly_name], turning it on."))
 		else
-			to_chat(user, "You press the power button and start up \the [assembly_name]")
+			to_chat(user, SPAN_NOTICE("You press the power button and start up \the [assembly_name]."))
 		var/datum/extension/interactive/ntos/os = get_extension(holder, /datum/extension/interactive/ntos)
 		if(os)
 			os.system_boot()
 	else // Unpowered
 		if(force_synth || issynth)
-			to_chat(user, "You send an activation signal to \the [assembly_name] but it does not respond")
+			to_chat(user, SPAN_WARNING("You send an activation signal to \the [assembly_name], but it does not respond."))
 		else
-			to_chat(user, "You press the power button but \the [assembly_name] does not respond")
+			to_chat(user, SPAN_WARNING("You press the power button but \the [assembly_name], does not respond."))
 		shutdown_device()
 
 /datum/extension/assembly/modular_computer/shutdown_device()

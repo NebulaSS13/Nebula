@@ -83,21 +83,19 @@
 		return 1
 
 /obj/item/modular_computer/on_update_icon()
-	icon_state = icon_state_unpowered
-
-	overlays.Cut()
+	cut_overlays()
+	for(var/decal_state in decals)
+		var/image/I = image(icon, "[icon_state]-[decal_state]")
+		I.color = decals[decal_state]
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I)
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		var/image/screen_overlay = os.get_screen_overlay()
-		if(screen_overlay)
-			screen_overlay.appearance_flags |= RESET_COLOR
-			overlays += screen_overlay
-
-		var/image/keyboard_overlay = os.get_keyboard_overlay()
-		if(keyboard_overlay)
-			keyboard_overlay.appearance_flags |= RESET_COLOR
-			overlays += keyboard_overlay
-
+	var/image/screen_overlay = os?.get_screen_overlay()
+	if(screen_overlay)
+		add_overlay(screen_overlay)
+	var/image/keyboard_overlay = os?.get_keyboard_overlay()
+	if(keyboard_overlay)
+		add_overlay(keyboard_overlay)
 	update_lighting()
 
 /obj/item/modular_computer/proc/update_lighting()

@@ -4,28 +4,40 @@
 	if(istype(A))
 		A.update_icon()
 
+/datum/extension/interactive/ntos/proc/get_screen_icon_file()
+	if(istype(holder, /obj/item/modular_computer))
+		var/obj/item/modular_computer/MC = holder
+		return MC.screen_icon || MC.icon
+	if(isatom(holder))
+		var/atom/A = holder
+		return A.icon
+
 /datum/extension/interactive/ntos/proc/get_screen_overlay()
 	if(!on)
 		return image(screen_icon_file, screensaver_icon)
 	if(!screen_icon_file)
-		var/atom/A = holder
-		if(istype(A))
-			screen_icon_file = A.icon
-	if(active_program)
-		return image(screen_icon_file, active_program.program_icon_state)
-	else
-		return image(screen_icon_file, menu_icon)
+		screen_icon_file = get_screen_icon_file()
+	if(screen_icon_file)
+		var/image/I
+		if(active_program)
+			I = image(screen_icon_file, active_program.program_icon_state)
+		else
+			I = image(screen_icon_file, menu_icon)
+		I.appearance_flags |= RESET_COLOR
+		return I
+	return image(null)
 
 /datum/extension/interactive/ntos/proc/get_keyboard_overlay()
 	if(!on)
 		return
 	if(!screen_icon_file)
-		var/atom/A = holder
-		if(istype(A))
-			screen_icon_file = A.icon
-	if(active_program && active_program.program_key_state)
-		return image(screen_icon_file, active_program.program_key_state)
-	
+		screen_icon_file = get_screen_icon_file()
+	if(screen_icon_file && active_program && active_program.program_key_state)
+		var/image/I = image(screen_icon_file, active_program.program_key_state)
+		I.appearance_flags |= RESET_COLOR
+		return I
+	return image(null)
+
 /datum/extension/interactive/ntos/proc/visible_error(message)
 	var/atom/A = holder
 	if(istype(A))

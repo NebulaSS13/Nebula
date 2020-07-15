@@ -43,7 +43,8 @@
 			set_broken(TRUE)
 
 /obj/machinery/computer/on_update_icon()
-	overlays.Cut()
+
+	cut_overlays()
 	icon = initial(icon)
 	icon_state = initial(icon_state)
 
@@ -54,32 +55,40 @@
 		var/screen = get_component_of_type(/obj/item/stock_parts/console_screen)
 		var/keyboard = get_component_of_type(/obj/item/stock_parts/keyboard)
 		if(screen)
-			overlays += "comp_screen"
+			add_overlay("comp_screen")
 		if(keyboard)
-			overlays += icon_keyboard ? "[icon_keyboard]_off" : "keyboard"
+			add_overlay(icon_keyboard ? "[icon_keyboard]_off" : "keyboard")
 		return
 
 	if(stat & NOPOWER)
 		set_light(0)
 		if(icon_keyboard)
-			overlays += image(icon,"[icon_keyboard]_off", overlay_layer)
+			add_overlay(image(icon,"[icon_keyboard]_off", overlay_layer))
 		return
 	else
 		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
 
 	if(stat & BROKEN)
-		overlays += image(icon,"[icon_state]_broken", overlay_layer)
+		add_overlay(image(icon,"[icon_state]_broken", overlay_layer))
 	else
-		overlays += get_screen_overlay()
-
-	overlays += get_keyboard_overlay()
+		var/screen_overlay = get_screen_overlay()
+		if(screen_overlay)
+			add_overlay(screen_overlay)
+	var/keyboard_overlay = get_keyboard_overlay()
+	if(keyboard_overlay)
+		add_overlay(keyboard_overlay)
 
 /obj/machinery/computer/proc/get_screen_overlay()
-	return image(icon,icon_screen, overlay_layer)
+	if(icon_screen)
+		var/image/I = image(icon, icon_screen, overlay_layer)
+		I.appearance_flags |= RESET_COLOR
+		return I
 
 /obj/machinery/computer/proc/get_keyboard_overlay()
 	if(icon_keyboard)
-		overlays += image(icon, icon_keyboard, overlay_layer)
+		var/image/I = image(icon, icon_keyboard, overlay_layer)
+		I.appearance_flags |= RESET_COLOR
+		return I
 
 /obj/machinery/computer/proc/decode(text)
 	// Adds line breaks
