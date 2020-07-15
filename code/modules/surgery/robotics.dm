@@ -414,13 +414,13 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	for(var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
 		if(I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
-			LAZYADD(attached_organs, organ)
+			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
+			radial_button.name = "Detach \the [I.name]"
+			LAZYSET(attached_organs, organ, radial_button)
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
 		return FALSE
-	var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
-	if(organ_to_remove)
-		return organ_to_remove
+	return show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 
 /decl/surgery_step/robotics/detatch_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts to decouple [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
@@ -453,12 +453,14 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/robotics/attach_organ_robotic/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/list/removable_organs = list()
+	var/list/removable_organs
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	for(var/obj/item/organ/I in affected.implants)
 		if ((I.status & ORGAN_CUT_AWAY) && BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && (I.parent_organ == target_zone))
-			removable_organs |= I.organ_tag
-	var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in removable_organs
+			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
+			radial_button.name = "Reattach \the [I.name]"
+			LAZYSET(removable_organs, I.organ_tag, radial_button)
+	var/organ_to_replace = show_radial_menu(user, tool, removable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	if(!organ_to_replace)
 		return FALSE
 	var/obj/item/organ/internal/augment/A = organ_to_replace

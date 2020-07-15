@@ -189,15 +189,20 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	for(var/decl in all_surgeries)
 		var/decl/surgery_step/S = all_surgeries[decl]
 		if(S.name && S.tool_quality(src) && S.can_use(user, M, zone, src))
-			LAZYSET(possible_surgeries, S, TRUE)
+
+			var/image/radial_button = image(icon = icon, icon_state = icon_state)
+			radial_button.name = S.name
+			LAZYSET(possible_surgeries, S, radial_button)
 
 	// Which surgery, if any, do we actually want to do?
 	var/decl/surgery_step/S
 	if(LAZYLEN(possible_surgeries) == 1)
 		S = possible_surgeries[1]
 	else if(LAZYLEN(possible_surgeries) >= 1)
-		if(user.client) // In case of future autodocs.
-			S = input(user, "Which surgery would you like to perform?", "Surgery") as null|anything in possible_surgeries
+		if(!user.client) // In case of future autodocs.
+			S = possible_surgeries[1]
+		else
+			S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = TRUE, require_near = TRUE, check_locs = list(src))
 		if(S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src, zone)))
 			S = pick(possible_surgeries)
 
