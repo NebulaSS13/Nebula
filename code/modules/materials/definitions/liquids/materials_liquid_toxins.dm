@@ -176,18 +176,6 @@
 	metabolism = REM * 0.25
 	defoliant = TRUE
 
-/decl/material/liquid/weedkiller/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T, /turf/simulated/wall))
-		var/turf/simulated/wall/W = T
-		if(locate(/obj/effect/overlay/wallrot) in W)
-			for(var/obj/effect/overlay/wallrot/E in W)
-				qdel(E)
-			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
-
-/decl/material/liquid/weedkiller/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
-	if(istype(O, /obj/effect/vine))
-		qdel(O)
-		
 /decl/material/liquid/tar
 	name = "tar"
 	lore_text = "A dark, viscous liquid."
