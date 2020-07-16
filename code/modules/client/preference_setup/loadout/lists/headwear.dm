@@ -45,7 +45,6 @@
 		"blue cap" =    /obj/item/clothing/head/soft/blue,
 		"green cap" =   /obj/item/clothing/head/soft/green,
 		"grey cap" =    /obj/item/clothing/head/soft/grey,
-		"mailman cap" = /obj/item/clothing/head/mailman,
 		"orange cap" =  /obj/item/clothing/head/soft/orange,
 		"purple cap" =  /obj/item/clothing/head/soft/purple,
 		"rainbow cap" = /obj/item/clothing/head/soft/rainbow,

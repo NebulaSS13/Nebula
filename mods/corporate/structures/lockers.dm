@@ -37,18 +37,6 @@
 	new /obj/item/clothing/head/beret/corp/sec(src)
 	new /obj/item/clothing/head/beret/corp/sec(src)
 
-/obj/structure/closet/wardrobe/atmospherics_yellow/Initialize()
-	. = ..()
-	new /obj/item/clothing/head/beret/corp/engineering(src)
-	new /obj/item/clothing/head/beret/corp/engineering(src)
-	new /obj/item/clothing/head/beret/corp/engineering(src)
-
-/obj/structure/closet/wardrobe/engineering_yellow/Initialize()
-	. = ..()
-	new /obj/item/clothing/head/beret/corp/engineering(src)
-	new /obj/item/clothing/head/beret/corp/engineering(src)
-	new /obj/item/clothing/head/beret/corp/engineering(src)
-
 /obj/structure/closet/secure_closet/scientist/WillContain()
 	. = ..() + new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger/tox, /obj/item/storage/backpack/satchel/tox))
 

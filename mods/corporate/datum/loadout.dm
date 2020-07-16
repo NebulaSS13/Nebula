@@ -95,7 +95,3 @@
 	display_name = "winter coat, DAIS"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/dais
 
-/datum/gear/head/cap/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path])
-	.[/datum/gear_tweak/path] |= list("major bill's shipping cap" = /obj/item/clothing/head/soft/mbill)

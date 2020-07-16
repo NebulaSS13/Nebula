@@ -1,7 +1,9 @@
 /obj/item/clothing/head/fiendhood
 	name = "fiend's hood"
 	desc = "A dark hood with blood-red trim. Something about the fabric blocks more light than it should."
-	icon_state = "fiendhood"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/fiend_hood.dmi'
+	on_mob_icon = 'icons/clothing/head/fiend_hood.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES, 
 		bullet = ARMOR_BALLISTIC_MINOR, 
@@ -40,7 +42,9 @@
 /obj/item/clothing/head/fiendhood/fem
 	name = "fiend's visage"
 	desc = "To gaze upon this is to gaze into an inferno. Look away, before it looks back of its own accord."
-	icon_state = "fiendvisage"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/fiend_visage.dmi'
+	on_mob_icon = 'icons/clothing/head/fiend_visage.dmi'
 	flags_inv = HIDEEARS | BLOCKHAIR
 
 /obj/item/clothing/suit/fiendcowl/fem

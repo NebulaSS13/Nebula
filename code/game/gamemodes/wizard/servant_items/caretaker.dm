@@ -1,7 +1,9 @@
 /obj/item/clothing/head/caretakerhood
 	name = "holy hood"
 	desc = "The hood of a shining white robe, with blue trim. Who would possess this robe and still want to hide themself away?"
-	icon_state = "caretakerhood"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/caretaker.dmi'
+	on_mob_icon = 'icons/clothing/head/caretaker.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES, 
 		bullet = ARMOR_BALLISTIC_MINOR, 

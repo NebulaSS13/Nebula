@@ -1,7 +1,9 @@
 /obj/item/clothing/head/champhelm
 	name = "champion's crown"
 	desc = "A spiky, golden crown. It's probably worth more than your bank account."
-	icon_state = "champhelm"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/champion.dmi'
+	on_mob_icon = 'icons/clothing/head/champion.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_AP,
