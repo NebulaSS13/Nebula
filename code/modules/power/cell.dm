@@ -262,12 +262,27 @@
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/cell/infinite/check_charge()
-	return 1
+/obj/item/cell/infinite/percent()
+	return 100
 
-/obj/item/cell/infinite/use()
-	return 1
+/obj/item/cell/infinite/fully_charged()
+	return TRUE
 
+/obj/item/cell/infinite/check_charge(var/amount)
+	return (maxcharge >= amount)
+
+/obj/item/cell/infinite/use(var/amount)
+	return min(maxcharge, amount)
+
+/obj/item/cell/infinite/checked_use(var/amount)
+	return check_charge(amount)
+
+/obj/item/cell/infinite/give()
+	return 0
+
+/obj/item/cell/infinite/get_electrocute_damage()
+	charge = maxcharge
+	return ..()
 
 /obj/item/cell/potato
 	name = "potato battery"
