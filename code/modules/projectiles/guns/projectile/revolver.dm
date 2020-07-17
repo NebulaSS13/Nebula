@@ -2,7 +2,6 @@
 	name = "revolver"
 	desc = "The al-Maliki & Mosley Magnum Double Action is a choice revolver for when you absolutely, positively need to put a hole in the other guy."
 	icon = 'icons/obj/guns/revolvers.dmi'
-	on_mob_icon = 'icons/obj/guns/revolvers.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
 	caliber = CALIBER_PISTOL_MAGNUM

@@ -3,7 +3,6 @@
 	name = "mini energy-crossbow"
 	desc = "A weapon favored by many mercenary stealth specialists."
 	icon = 'icons/obj/guns/energy_crossbow.dmi'
-	on_mob_icon = 'icons/obj/guns/energy_crossbow.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':2,'magnets':2,'esoteric':5}"

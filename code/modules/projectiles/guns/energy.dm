@@ -121,7 +121,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	return I
 
 /obj/item/gun/energy/proc/update_charge_meter()
-	if(on_mob_icon)
+	if(use_single_icon)
 		overlays += get_mutable_overlay(icon, "[get_world_inventory_state()][get_charge_ratio()]", indicator_color)
 		return
 	if(power_supply)

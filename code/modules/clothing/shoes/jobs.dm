@@ -2,7 +2,6 @@
 	desc = "Rubber boots."
 	name = "galoshes"
 	icon = 'icons/clothing/feet/galoshes.dmi'
-	on_mob_icon = 'icons/clothing/feet/galoshes.dmi'
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP
 	bodytype_restricted = null
@@ -15,7 +14,6 @@
 	name = "jackboots"
 	desc = "Tall synthleather boots with an artificial shine."
 	icon = 'icons/clothing/feet/boots.dmi'
-	on_mob_icon = 'icons/clothing/feet/boots.dmi'
 	material = /decl/material/solid/leather/synth
 	applies_material_colour = TRUE
 	force = 3
@@ -45,7 +43,6 @@
 	name = "workboots"
 	desc = "A pair of steel-toed work boots designed for use in industrial settings. Safety first."
 	icon = 'icons/clothing/feet/boots.dmi'
-	on_mob_icon = 'icons/clothing/feet/boots.dmi'
 	material = /decl/material/solid/leather/synth
 	color = "#d88d4b"
 	armor = list(

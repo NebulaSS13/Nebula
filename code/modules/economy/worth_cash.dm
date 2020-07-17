@@ -167,7 +167,6 @@
 /obj/item/charge_stick
 	name = "charge-stick"
 	icon = 'icons/obj/items/credstick.dmi'
-	on_mob_icon = 'icons/obj/items/credstick.dmi'
 	icon_state = "peasant"
 	desc = "A digital stick that holds an amount of money."
 

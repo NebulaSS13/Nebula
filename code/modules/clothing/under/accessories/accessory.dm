@@ -24,7 +24,7 @@
 
 /obj/item/clothing/accessory/proc/get_inv_overlay()
 	if(!inv_overlay)
-		if(on_mob_icon)
+		if(use_single_icon)
 			inv_overlay = image(icon, "inventory")
 			inv_overlay.color = color
 		else
@@ -40,7 +40,7 @@
 	return inv_overlay
 
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
-	if(!istype(loc,/obj/item/clothing) || on_mob_icon)	//don't need special handling if it's worn as normal item.
+	if(!istype(loc,/obj/item/clothing) || use_single_icon)	//don't need special handling if it's worn as normal item.
 		return ..()
 	var/bodytype = BODYTYPE_HUMANOID
 	if(ishuman(user_mob))

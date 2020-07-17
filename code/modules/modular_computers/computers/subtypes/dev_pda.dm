@@ -2,7 +2,6 @@
 	name = "\improper PDA"
 	desc = "A very compact computer, designed to keep its user always connected."
 	icon = 'icons/obj/modular_computers/pda/pda.dmi'
-	on_mob_icon = 'icons/obj/modular_computers/pda/pda.dmi'
 	screen_icon = 'icons/obj/modular_computers/pda/screens.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/aluminium

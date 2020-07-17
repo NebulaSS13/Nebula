@@ -2,7 +2,6 @@
 	name = "railgun"
 	desc = "The HelTek Arms LM-76 Thunderclap. A portable linear motor cannon produced during the Gaia Conflict for anti-armour and anti-fortification operations. Today, it sees wide use among private militaries, and is a staple on the black market."
 	icon = 'icons/obj/guns/railgun.dmi'
-	on_mob_icon = 'icons/obj/guns/railgun.dmi'
 	removable_components = TRUE // Can swap out the capacitor for more shots, or cell for longer usage before recharge
 	load_type = /obj/item/rcd_ammo
 	origin_tech = "{'combat':5,'materials':4,'magnets':4}"
@@ -67,7 +66,6 @@
 /obj/item/gun/magnetic/railgun/flechette
 	name = "flechette gun"
 	desc = "The MI-12 Skadi is a burst fire capable railgun that fires flechette rounds at high velocity. Deadly against armour, but much less effective against soft targets."
-	on_mob_icon = 'icons/obj/guns/flechette.dmi'
 	icon = 'icons/obj/guns/flechette.dmi'
 	one_hand_penalty = 2
 	fire_delay = 8

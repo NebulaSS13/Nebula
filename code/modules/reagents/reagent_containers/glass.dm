@@ -102,7 +102,6 @@
 	name = "bucket"
 	desc = "It's a bucket."
 	icon = 'icons/obj/items/bucket.dmi'
-	on_mob_icon = 'icons/obj/items/bucket.dmi'
 	icon_state = ICON_STATE_WORLD
 	center_of_mass = @"{'x':16,'y':9}"
 	w_class = ITEM_SIZE_NORMAL
@@ -118,7 +117,6 @@
 /obj/item/chems/glass/bucket/wood
 	desc = "It's a wooden bucket. How rustic."
 	icon = 'icons/obj/items/wooden_bucket.dmi'
-	on_mob_icon = 'icons/obj/items/wooden_bucket.dmi'
 	volume = 200
 	material = /decl/material/solid/wood
 

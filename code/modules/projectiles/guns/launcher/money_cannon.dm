@@ -1,7 +1,6 @@
 /obj/item/gun/launcher/money
 	name = "money cannon"
 	desc = "A blocky, plastic novelty launcher that claims to be able to shoot money at considerable velocities."
-	on_mob_icon = 'icons/obj/guns/launcher/money.dmi'
 	icon = 'icons/obj/guns/launcher/money.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':1,'materials':1}"

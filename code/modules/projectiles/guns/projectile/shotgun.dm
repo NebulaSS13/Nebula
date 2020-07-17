@@ -1,7 +1,6 @@
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
-	on_mob_icon = 'icons/obj/guns/shotgun/pump.dmi'
 	icon = 'icons/obj/guns/shotgun/pump.dmi'
 	icon_state = ICON_STATE_WORLD
 	max_shells = 4
@@ -55,7 +54,6 @@
 	name = "double-barreled shotgun"
 	desc = "A true classic."
 	icon = 'icons/obj/guns/shotgun/doublebarrel.dmi'
-	on_mob_icon = 'icons/obj/guns/shotgun/doublebarrel.dmi'
 	//SPEEDLOADER because rapid unloading.
 	//In principle someone could make a speedloader for it, so it makes sense.
 	load_method = SINGLE_CASING|SPEEDLOADER
@@ -105,7 +103,6 @@
 	name = "sawn-off shotgun"
 	desc = "Omar's coming!"
 	icon = 'icons/obj/guns/shotgun/sawnoff.dmi'
-	on_mob_icon = 'icons/obj/guns/shotgun/sawnoff.dmi'
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	w_class = ITEM_SIZE_NORMAL

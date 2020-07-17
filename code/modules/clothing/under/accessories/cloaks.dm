@@ -3,7 +3,6 @@
 	desc = "A simple, bland cloak."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/suit/cloaks/_cloak.dmi'
-	on_mob_icon = 'icons/clothing/suit/cloaks/_cloak.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	slot = ACCESSORY_SLOT_OVER
 	slot_flags = SLOT_OCLOTHING
@@ -55,86 +54,86 @@
 /obj/item/clothing/accessory/cloak/captain
 	name = "captain's cloak"
 	desc = "An elaborate cloak meant to be worn by the captain."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_captain.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_captain.dmi'
 
 /obj/item/clothing/accessory/cloak/ce
 	name = "chief engineer's cloak"
 	desc = "An elaborate cloak worn by the chief engineer."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_ce.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_ce.dmi'
 
 /obj/item/clothing/accessory/cloak/cmo
 	name = "chief medical officer's cloak"
 	desc = "An elaborate cloak meant to be worn by the chief medical officer."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_cmo.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_cmo.dmi'
 
 /obj/item/clothing/accessory/cloak/hop
 	name = "head of personnel's cloak"
 	desc = "An elaborate cloak meant to be worn by the head of personnel."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_hop.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_hop.dmi'
 
 /obj/item/clothing/accessory/cloak/rd
 	name = "research director's cloak"
 	desc = "An elaborate cloak meant to be worn by the research director."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_rd.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_rd.dmi'
 
 /obj/item/clothing/accessory/cloak/qm
 	name = "quartermaster's cloak"
 	desc = "An elaborate cloak meant to be worn by the quartermaster."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_qm.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_qm.dmi'
 
 /obj/item/clothing/accessory/cloak/hos
 	name = "head of security's cloak"
 	desc = "An elaborate cloak meant to be worn by the head of security."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_hos.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_hos.dmi'
 
 /obj/item/clothing/accessory/cloak/cargo
 	name = "brown cloak"
 	desc = "A simple brown and black cloak."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_cargo.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_cargo.dmi'
 
 /obj/item/clothing/accessory/cloak/mining
 	name = "trimmed purple cloak"
 	desc = "A trimmed purple and brown cloak."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_mining.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_mining.dmi'
 
 /obj/item/clothing/accessory/cloak/security
 	name = "red cloak"
 	desc = "A simple red and black cloak."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_security.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_security.dmi'
 
 /obj/item/clothing/accessory/cloak/service
 	name = "green cloak"
 	desc = "A simple green and blue cloak."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_service.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_service.dmi'
 
 /obj/item/clothing/accessory/cloak/engineer
 	name = "gold cloak"
 	desc = "A simple gold and brown cloak."
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_engineer.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_engineer.dmi'
 
 /obj/item/clothing/accessory/cloak/atmos
 	name = "yellow cloak"
 	desc = "A trimmed yellow and blue cloak."
 	icon_state = "cloak_atmos"
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_atmospherics.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_atmospherics.dmi'
 
 /obj/item/clothing/accessory/cloak/research
 	name = "purple cloak"
 	desc = "A simple purple and white cloak."
 	icon_state = "cloak_sci"
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_research.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_research.dmi'
 
 /obj/item/clothing/accessory/cloak/medical
 	name = "blue cloak"
 	desc = "A simple blue and white cloak."
 	icon_state = "cloak_med"
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_medical.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_medical.dmi'
 
 /obj/item/clothing/accessory/cloak/hide
 	name = "cloak"
 	desc = "A ragged cloak made of some sort of thick hide."
 	icon_state = "cloak_hide"
-	on_mob_icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
+	icon = 'icons/clothing/suit/cloaks/cloak_hide.dmi'
 	material = /decl/material/solid/leather
 	applies_material_colour = TRUE
 	applies_material_name = TRUE

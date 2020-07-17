@@ -83,7 +83,7 @@
 	else ..()
 
 /obj/item/ammo_casing/on_update_icon()
-	if(on_mob_icon)
+	if(use_single_icon)
 		cut_overlays()
 		if(BB)
 			var/image/I = overlay_image(icon, "[icon_state]-bullet", bullet_color, flags=RESET_COLOR)

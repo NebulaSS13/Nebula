@@ -1,7 +1,6 @@
 /obj/item/rig/combat
 	name = "combat hardsuit control module"
 	desc = "A sleek and dangerous hardsuit for active combat."
-	on_mob_icon = 'icons/clothing/spacesuit/rig/security.dmi'
 	suit_type = "combat hardsuit"
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
@@ -52,7 +51,7 @@
 /obj/item/rig/military
 	name = "military hardsuit control module"
 	desc = "An austere hardsuit used by paramilitary groups and real soldiers alike."
-	on_mob_icon = 'icons/clothing/spacesuit/rig/military.dmi'
+	icon = 'icons/clothing/spacesuit/rig/military.dmi'
 	suit_type = "military hardsuit"
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,

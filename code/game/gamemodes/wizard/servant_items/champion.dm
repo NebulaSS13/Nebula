@@ -55,7 +55,7 @@
 /obj/item/sword/excalibur
 	name = "champion's blade"
 	desc = "<i>For at his belt hung Excalibur, the finest sword that there was, which sliced through iron as through wood.</i>"
-	on_mob_icon = 'icons/obj/items/weapon/swords/excalibur.dmi'
+	icon = 'icons/obj/items/weapon/swords/excalibur.dmi'
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cleaved", "sundered")
 	applies_material_colour = FALSE
 	applies_material_name = FALSE

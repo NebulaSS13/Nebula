@@ -2,7 +2,6 @@
 /obj/item/gun/energy/xray
 	name = "x-ray laser carbine"
 	desc = "A high-power laser gun capable of emitting concentrated x-ray blasts, that are able to penetrate laser-resistant armor much more readily than standard photonic beams."
-	on_mob_icon = 'icons/obj/guns/xray.dmi'
 	icon = 'icons/obj/guns/xray.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BELT|SLOT_BACK

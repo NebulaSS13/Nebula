@@ -7,7 +7,6 @@
 	name = "backpack"
 	desc = "You wear this on your back and put items into it."
 	icon = 'icons/obj/items/storage/backpack/backpack.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
@@ -39,7 +38,6 @@
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = "{'bluespace':4}"
 	icon = 'icons/obj/items/storage/backpack/backpack_holding.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_holding.dmi'
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
 	material = /decl/material/solid/metal/gold
@@ -65,7 +63,6 @@
 /obj/item/storage/backpack/holding/duffle
 	name = "dufflebag of holding"
 	icon = 'icons/obj/items/storage/backpack/dufflebag_holding.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_holding.dmi'
 	material = /decl/material/solid/metal/gold
 	matter = list(
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
@@ -77,7 +74,6 @@
 	name = "\improper Santa's gift bag"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon = 'icons/obj/items/storage/backpack/giftbag.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/giftbag.dmi'
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 400 // can store a ton of shit!
@@ -86,67 +82,56 @@
 	name = "trophy rack"
 	desc = "It's useful for both carrying extra gear and proudly declaring your insanity."
 	icon = 'icons/obj/items/storage/backpack/backpack_cult.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_cult.dmi'
 
 /obj/item/storage/backpack/clown
 	name = "Giggles von Honkerton"
 	desc = "It's a backpack made by Honk! Co."
 	icon = 'icons/obj/items/storage/backpack/backpack_clown.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_clown.dmi'
 
 /obj/item/storage/backpack/medic
 	name = "medical backpack"
 	desc = "It's a backpack especially designed for use in a sterile environment."
 	icon = 'icons/obj/items/storage/backpack/backpack_med.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_med.dmi'
 
 /obj/item/storage/backpack/security
 	name = "security backpack"
 	desc = "It's a very robust backpack."
 	icon = 'icons/obj/items/storage/backpack/backpack_sec.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_sec.dmi'
 
 /obj/item/storage/backpack/captain
 	name = "captain's backpack"
 	desc = "It's a special backpack made exclusively for officers."
 	icon = 'icons/obj/items/storage/backpack/backpack_cap.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_cap.dmi'
 
 /obj/item/storage/backpack/industrial
 	name = "industrial backpack"
 	desc = "It's a tough backpack for the daily grind of industrial life."
 	icon = 'icons/obj/items/storage/backpack/backpack_eng.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_eng.dmi'
 
 /obj/item/storage/backpack/toxins
 	name = "science backpack"
 	desc = "It's a stain-resistant light backpack modeled for use in laboratories and other scientific institutions."
 	icon = 'icons/obj/items/storage/backpack/backpack_sci.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_sci.dmi'
 
 /obj/item/storage/backpack/hydroponics
 	name = "herbalist's backpack"
 	desc = "It's a green backpack with many pockets to store plants and tools in."
 	icon = 'icons/obj/items/storage/backpack/backpack_hydro.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_hydro.dmi'
 
 /obj/item/storage/backpack/genetics
 	name = "geneticist backpack"
 	desc = "It's a backpack fitted with slots for diskettes and other workplace tools."
 	icon = 'icons/obj/items/storage/backpack/backpack_genetics.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_genetics.dmi'
 
 /obj/item/storage/backpack/virology
 	name = "sterile backpack"
 	desc = "It's a sterile backpack able to withstand different pathogens from entering its fabric."
 	icon = 'icons/obj/items/storage/backpack/backpack_viro.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_viro.dmi'
 
 /obj/item/storage/backpack/chemistry
 	name = "pharmacist's backpack"
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon = 'icons/obj/items/storage/backpack/backpack_chem.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_chem.dmi'
 
 /obj/item/storage/backpack/rucksack
 	name = "black rucksack"
@@ -156,25 +141,21 @@
 /obj/item/storage/backpack/rucksack/blue
 	name = "blue rucksack"
 	icon = 'icons/obj/items/storage/backpack/rucksack_blue.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/rucksack_blue.dmi'
 
 /obj/item/storage/backpack/rucksack/green
 	name = "green rucksack"
 	icon_state = "rucksack_green"
 	icon = 'icons/obj/items/storage/backpack/rucksack_green.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/rucksack_green.dmi'
 
 /obj/item/storage/backpack/rucksack/navy
 	name = "navy rucksack"
 	icon_state = "rucksack_navy"
 	icon = 'icons/obj/items/storage/backpack/rucksack_navy.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/rucksack_navy.dmi'
 
 /obj/item/storage/backpack/rucksack/tan
 	name = "tan rucksack"
 	icon_state = "rucksack_tan"
 	icon = 'icons/obj/items/storage/backpack/rucksack_tan.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/rucksack_tan.dmi'
 
 /*
  * Duffle Types
@@ -184,7 +165,6 @@
 	name = "dufflebag"
 	desc = "A large dufflebag for holding extra things."
 	icon = 'icons/obj/items/storage/backpack/dufflebag.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag.dmi'
 	w_class = ITEM_SIZE_HUGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
@@ -198,7 +178,6 @@
 	name = "black dufflebag"
 	desc = "A large dufflebag for holding extra tactical supplies."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_syndie.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_syndie.dmi'
 
 /obj/item/storage/backpack/dufflebag/syndie/Initialize()
 	. = ..()
@@ -209,37 +188,31 @@
 	desc = "A large dufflebag for holding extra tactical medical supplies."
 	icon_state = "duffle_syndiemed"
 	icon = 'icons/obj/items/storage/backpack/dufflebag_synd_med.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_synd_med.dmi'
 
 /obj/item/storage/backpack/dufflebag/syndie/ammo
 	name = "ammunition dufflebag"
 	desc = "A large dufflebag for holding extra weapons ammunition and supplies."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_ammo.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_ammo.dmi'
 
 /obj/item/storage/backpack/dufflebag/captain
 	name = "captain's dufflebag"
 	desc = "A large dufflebag for holding extra captainly goods."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_cap.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_cap.dmi'
 
 /obj/item/storage/backpack/dufflebag/med
 	name = "medical dufflebag"
 	desc = "A large dufflebag for holding extra medical supplies."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_med.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_med.dmi'
 
 /obj/item/storage/backpack/dufflebag/sec
 	name = "security dufflebag"
 	desc = "A large dufflebag for holding extra security supplies and ammunition."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_sec.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_sec.dmi'
 
 /obj/item/storage/backpack/dufflebag/eng
 	name = "industrial dufflebag"
 	desc = "A large dufflebag for holding extra tools and supplies."
 	icon = 'icons/obj/items/storage/backpack/dufflebag_eng.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/dufflebag_eng.dmi'
 
 /obj/item/storage/backpack/dufflebag/firefighter
 	startswith = list(
@@ -260,7 +233,6 @@
 	name = "satchel"
 	desc = "A trendy looking satchel."
 	icon = 'icons/obj/items/storage/backpack/satchel.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel.dmi'
 
 /obj/item/storage/backpack/satchel/grey
 	name = "grey satchel"
@@ -297,7 +269,6 @@
 	name = "black pocketbook"
 	desc = "A neat little folding clasp pocketbook with a shoulder sling."
 	icon = 'icons/obj/items/storage/backpack/pocketbook.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/pocketbook.dmi'
 
 	w_class = ITEM_SIZE_HUGE // to avoid recursive backpacks
 	slot_flags = SLOT_BACK
@@ -317,49 +288,41 @@
 	name = "industrial satchel"
 	desc = "A tough satchel with extra pockets."
 	icon = 'icons/obj/items/storage/backpack/satchel_eng.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_eng.dmi'
 
 /obj/item/storage/backpack/satchel/med
 	name = "medical satchel"
 	desc = "A sterile satchel used in medical departments."
 	icon = 'icons/obj/items/storage/backpack/satchel_med.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_med.dmi'
 
 /obj/item/storage/backpack/satchel/vir
 	name = "virologist satchel"
 	desc = "A sterile satchel with virologist colours."
 	icon = 'icons/obj/items/storage/backpack/satchel_viro.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_viro.dmi'
 
 /obj/item/storage/backpack/satchel/chem
 	name = "pharmacist satchel"
 	desc = "A sterile satchel with pharmacist colours."
 	icon = 'icons/obj/items/storage/backpack/satchel_chem.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_chem.dmi'
 
 /obj/item/storage/backpack/satchel/gen
 	name = "geneticist satchel"
 	desc = "A sterile satchel with geneticist colours."
 	icon = 'icons/obj/items/storage/backpack/satchel_genetics.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_genetics.dmi'
 
 /obj/item/storage/backpack/satchel/sec
 	name = "security satchel"
 	desc = "A robust satchel for security related needs."
 	icon = 'icons/obj/items/storage/backpack/satchel_sec.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_sec.dmi'
 
 /obj/item/storage/backpack/satchel/hyd
 	name = "hydroponics satchel"
 	desc = "A green satchel for plant related work."
 	icon = 'icons/obj/items/storage/backpack/satchel_hydro.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_hydro.dmi'
 
 /obj/item/storage/backpack/satchel/cap
 	name = "captain's satchel"
 	desc = "An exclusive satchel for officers."
 	icon = 'icons/obj/items/storage/backpack/satchel_cap.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/satchel_cap.dmi'
 
 //Smuggler's satchel
 /obj/item/storage/backpack/satchel/flat
@@ -399,7 +362,6 @@
 	name = "emergency response team backpack"
 	desc = "A spacious backpack with lots of pockets, used by members of the Emergency Response Team."
 	icon = 'icons/obj/items/storage/backpack/backpack_ert.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack_ert.dmi'
 	var/marking_state
 	var/marking_colour
 
@@ -452,46 +414,38 @@
 	name = "messenger bag"
 	desc = "A sturdy backpack worn over one shoulder."
 	icon = 'icons/obj/items/storage/backpack/messenger.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/messenger.dmi'
 
 /obj/item/storage/backpack/messenger/chem
 	name = "pharmacy messenger bag"
 	desc = "A serile backpack worn over one shoulder. This one is in Chemistry colors."
 	icon = 'icons/obj/items/storage/backpack/messenger_chem.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/messenger_chem.dmi'
 
 /obj/item/storage/backpack/messenger/med
 	name = "medical messenger bag"
 	desc = "A sterile backpack worn over one shoulder used in medical departments."
 	icon = 'icons/obj/items/storage/backpack/messenger_med.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/messenger_med.dmi'
 
 /obj/item/storage/backpack/messenger/viro
 	name = "virology messenger bag"
 	desc = "A sterile backpack worn over one shoulder. This one is in Virology colors."
 	icon = 'icons/obj/items/storage/backpack/messenger_viro.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/messenger_viro.dmi'
 
 /obj/item/storage/backpack/messenger/com
 	name = "captain's messenger bag"
 	desc = "A special backpack worn over one shoulder. This one is made specifically for officers."
 	icon = 'icons/obj/items/storage/backpack/messenger_cap.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/messenger_cap.dmi'
 
 /obj/item/storage/backpack/messenger/engi
 	name = "engineering messenger bag"
 	desc = "A strong backpack worn over one shoulder. This one is designed for industrial work."
 	icon = 'icons/obj/items/storage/backpack/messenger_eng.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/messenger_eng.dmi'
 
 /obj/item/storage/backpack/messenger/hyd
 	name = "hydroponics messenger bag"
 	desc = "A backpack worn over one shoulder.  This one is designed for plant-related work."
 	icon = 'icons/obj/items/storage/backpack/messenger_hydro.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/messenger_hydro.dmi'
 
 /obj/item/storage/backpack/messenger/sec
 	name = "security messenger bag"
 	desc = "A tactical backpack worn over one shoulder. This one is in Security colors."
 	icon = 'icons/obj/items/storage/backpack/messenger_sec.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/messenger_sec.dmi'

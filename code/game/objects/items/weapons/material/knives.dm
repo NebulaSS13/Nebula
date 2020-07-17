@@ -3,7 +3,6 @@
 	name = "knife"
 	desc = "You call that a knife? This is a master item - berate the admin or mapper who spawned this"
 	icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
-	on_mob_icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
 	icon_state = ICON_STATE_WORLD
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -46,7 +45,7 @@
 /obj/item/knife/table
 	name = "table knife"
 	desc = "A simple table knife, used to cut up individual portions of food."
-	on_mob_icon = 'icons/obj/items/weapon/knives/table.dmi'
+	icon = 'icons/obj/items/weapon/knives/table.dmi'
 	material = /decl/material/solid/metal/aluminium
 	material_force_multiplier = 0.1
 	sharp = FALSE
@@ -60,7 +59,7 @@
 /obj/item/knife/table/primitive
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
-	on_mob_icon = 'icons/obj/items/weapon/knives/savage.dmi'
+	icon = 'icons/obj/items/weapon/knives/savage.dmi'
 	material = /decl/material/solid/wood
 	applies_material_colour = FALSE
 	w_class = ITEM_SIZE_NORMAL
@@ -72,7 +71,7 @@
 //kitchen knives
 /obj/item/knife/kitchen
 	name = "kitchen knife"
-	on_mob_icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
+	icon = 'icons/obj/items/weapon/knives/kitchen.dmi'
 	desc = "A general purpose chef's knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
 	applies_material_name = FALSE
 	draw_handle = TRUE
@@ -80,7 +79,7 @@
 /obj/item/knife/kitchen/cleaver
 	name = "butcher's cleaver"
 	desc = "A heavy blade used to process food, especially animal carcasses."
-	on_mob_icon = 'icons/obj/items/weapon/knives/cleaver.dmi'
+	icon = 'icons/obj/items/weapon/knives/cleaver.dmi'
 	armor_penetration = 5
 	material_force_multiplier = 0.18
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -95,7 +94,7 @@
 /obj/item/knife/combat
 	name = "combat knife"
 	desc = "A blade with a saw-like pattern on the reverse edge and a heavy handle."
-	on_mob_icon = 'icons/obj/items/weapon/knives/tactical.dmi'
+	icon = 'icons/obj/items/weapon/knives/tactical.dmi'
 	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
 	max_force = 15
@@ -115,13 +114,13 @@
 /obj/item/knife/hook
 	name = "meat hook"
 	desc = "A sharp, metal hook what sticks into things."
-	on_mob_icon = 'icons/obj/items/weapon/knives/hook.dmi'
+	icon = 'icons/obj/items/weapon/knives/hook.dmi'
 	sharp = FALSE
 
 /obj/item/knife/ritual
 	name = "ritual knife"
 	desc = "The unearthly energies that once powered this blade are now dormant."
-	on_mob_icon = 'icons/obj/items/weapon/knives/ritual.dmi'
+	icon = 'icons/obj/items/weapon/knives/ritual.dmi'
 	applies_material_colour = FALSE
 	applies_material_name = FALSE
 
@@ -133,7 +132,7 @@
 /obj/item/knife/utility
 	name = "utility knife"
 	desc = "An utility knife with a polymer handle, commonly used through human space."
-	on_mob_icon = 'icons/obj/items/weapon/knives/utility.dmi'
+	icon = 'icons/obj/items/weapon/knives/utility.dmi'
 	max_force = 5
 	material_force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL

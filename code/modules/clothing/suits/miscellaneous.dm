@@ -198,7 +198,6 @@
 	name = "longcoat"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/suit/leathercoat.dmi'
-	on_mob_icon = 'icons/clothing/suit/leathercoat.dmi'
 	material = /decl/material/solid/leather
 	applies_material_colour = TRUE
 	applies_material_name = TRUE

@@ -106,7 +106,6 @@
 /obj/item/twohanded/spear
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	on_mob_icon = 'icons/obj/items/weapon/spear.dmi'
 	icon_state = "preview"
 	icon = 'icons/obj/items/weapon/spear.dmi'
 	material_force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)

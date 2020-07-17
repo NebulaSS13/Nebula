@@ -175,8 +175,6 @@
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 	icon = 'icons/obj/items/storage/backpack/backpack.dmi'
-	on_mob_icon = 'icons/obj/items/storage/backpack/backpack.dmi'
-
 	var/global/list/clothing_choices
 
 /obj/item/storage/backpack/chameleon/Initialize()
@@ -209,7 +207,6 @@
 	icon_state = ICON_STATE_WORLD
 	color = COLOR_GRAY40
 	icon = 'icons/clothing/hands/gloves_generic.dmi'
-	on_mob_icon = 'icons/clothing/hands/gloves_generic.dmi'
 	desc = "It looks like a pair of gloves, but it seems to have a small dial inside."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON

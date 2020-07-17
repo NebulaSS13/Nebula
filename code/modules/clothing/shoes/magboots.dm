@@ -2,9 +2,8 @@
 /obj/item/clothing/shoes/magboots
 	name = "magboots"
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
-	icon_state = "world0"
+	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/feet/magboots.dmi'
-	on_mob_icon = 'icons/clothing/feet/magboots.dmi'
 	bodytype_restricted = null
 	force = 3
 	overshoes = 1

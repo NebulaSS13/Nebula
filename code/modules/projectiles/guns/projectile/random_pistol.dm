@@ -1,7 +1,6 @@
 
 /obj/item/gun/projectile/pistol/random
 	name = "pistol"
-	on_mob_icon = 'icons/obj/guns/randompistol.dmi'
 	icon  = 'icons/obj/guns/randompistol.dmi'
 	icon_state = "preview"
 	var/decl/gun_look/gun_look

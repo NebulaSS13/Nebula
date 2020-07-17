@@ -3,7 +3,6 @@
 	desc = "Reinforced headgear. Protects the head from impacts."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/armor/helmet.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/helmet.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
 	item_flags = ITEM_FLAG_THICKMATERIAL
@@ -30,7 +29,6 @@
 	name = "tactical helmet"
 	desc = "A tan helmet made from advanced ceramic. Comfortable and robust."
 	icon = 'icons/clothing/head/armor/tactical.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/tactical.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -44,7 +42,6 @@
 	name = "combat helmet"
 	desc = "A heavily reinforced helmet painted with red markings. Feels like it could take a lot of punishment."
 	icon = 'icons/clothing/head/armor/merc.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/merc.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -58,7 +55,6 @@
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
 	icon = 'icons/clothing/head/armor/riot.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/riot.dmi'
 	valid_accessory_slots = null
 	body_parts_covered = HEAD|FACE|EYES //face shield
 	armor = list(
@@ -94,7 +90,6 @@
 	name = "ablative helmet"
 	desc = "A helmet made from advanced materials which protects against concentrated energy weapons."
 	icon = 'icons/clothing/head/armor/reflective.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/reflective.dmi'
 	valid_accessory_slots = null
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
@@ -108,7 +103,6 @@
 	name = "ballistic helmet"
 	desc = "A helmet with reinforced plating to protect against ballistic projectiles."
 	icon = 'icons/clothing/head/armor/bulletproof.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/bulletproof.dmi'
 	valid_accessory_slots = null
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
@@ -122,7 +116,6 @@
 	name = "\improper SWAT helmet"
 	desc = "They're often used by highly trained Swat Members."
 	icon = 'icons/clothing/head/armor/merc.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/merc.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_RESISTANT,
@@ -138,7 +131,6 @@
 	name = "\improper Thunderdome helmet"
 	desc = "<i>'Let the battle commence!'</i>"
 	icon = 'icons/clothing/head/armor/thunderdome.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/thunderdome.dmi'
 	valid_accessory_slots = null
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
@@ -155,7 +147,6 @@
 	name = "gladiator helmet"
 	desc = "Ave, Imperator, morituri te salutant."
 	icon = 'icons/clothing/head/armor/gladiator.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/gladiator.dmi'
 	valid_accessory_slots = null
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE
@@ -165,7 +156,6 @@
 	name = "Augment Array"
 	desc = "A helmet with optical and cranial augments coupled to it."
 	icon = 'icons/clothing/head/armor/augment.dmi'
-	on_mob_icon = 'icons/clothing/head/armor/augment.dmi'
 	valid_accessory_slots = null
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,

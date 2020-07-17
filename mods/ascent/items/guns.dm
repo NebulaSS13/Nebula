@@ -2,7 +2,6 @@
 	name = "particle lance"
 	desc = "A long, thick-bodied energy rifle of some kind, clad in a curious indigo polymer and lit from within by Cherenkov radiation. The grip is clearly not designed for human hands."
 	icon = 'mods/ascent/icons/particle_rifle/rifle.dmi'
-	on_mob_icon = 'mods/ascent/icons/particle_rifle/rifle.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
 	force = 25 // Heavy as Hell.
@@ -30,7 +29,7 @@
 /obj/item/gun/energy/particle/small
 	name = "particle projector"
 	desc = "A smaller variant on the Ascent particle lance, usually carried by drones and alates."
-	on_mob_icon = 'mods/ascent/icons/particle_rifle/rifle_small.dmi'
+	icon = 'mods/ascent/icons/particle_rifle/rifle_small.dmi'
 	force = 12
 	max_shots = 9
 	burst = 1

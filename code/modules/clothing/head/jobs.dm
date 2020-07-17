@@ -5,7 +5,6 @@
 	desc = "It's a hat used by chefs to keep hair out of your food. Judging by the food in the mess, they don't work."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/chef.dmi'
-	on_mob_icon = 'icons/clothing/head/chef.dmi'
 
 //Captain
 /obj/item/clothing/head/caphat
@@ -56,7 +55,6 @@
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/surgery_cap.dmi'
-	on_mob_icon = 'icons/clothing/head/surgery_cap.dmi'
 	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/surgery/purple
@@ -97,7 +95,6 @@
 	desc = "A beret, an artists favorite headwear."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/beret.dmi'
-	on_mob_icon = 'icons/clothing/head/beret.dmi'
 	color = COLOR_NT_RED
 	body_parts_covered = 0
 

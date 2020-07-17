@@ -51,7 +51,6 @@
 	desc = "A pair of synthetic gloves and arm pads reinforced with armor plating."
 	name = "arm guards"
 	icon = 'icons/clothing/hands/armguards.dmi'
-	on_mob_icon = 'icons/clothing/hands/armguards.dmi'
 	body_parts_covered = HANDS|ARMS
 	w_class = ITEM_SIZE_NORMAL
 	siemens_coefficient = 0.7
@@ -69,7 +68,6 @@
 	name = "fire gloves"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/hands/firefighter.dmi'
-	on_mob_icon = 'icons/clothing/hands/firefighter.dmi'
 	siemens_coefficient = 0.50
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50

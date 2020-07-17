@@ -3,7 +3,6 @@
 	desc = "A glowing key, uncomfortably hot to the touch."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/fated_key.dmi'
-	on_mob_icon = 'icons/clothing/head/fated_key.dmi'
 	body_parts_covered = 0
 	armor = list(melee = 55, bullet = 55, laser = 55, energy = 55, bomb = 55, bio = 100, rad = 100)
 

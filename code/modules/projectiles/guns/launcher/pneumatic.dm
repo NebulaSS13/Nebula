@@ -1,7 +1,6 @@
 /obj/item/gun/launcher/pneumatic
 	name = "pneumatic cannon"
 	desc = "A large gas-powered cannon."
-	on_mob_icon = 'icons/obj/guns/launcher/pneumatic.dmi'
 	icon = 'icons/obj/guns/launcher/pneumatic.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':4,'materials':3}"

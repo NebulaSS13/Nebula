@@ -3,7 +3,6 @@
 	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has blue highlights. Armoured and space ready."
 	suit_type = "emergency response command"
 	icon = 'mods/corporate/icons/rigs/ert_commander.dmi'
-	on_mob_icon = 'mods/corporate/icons/rigs/ert_commander.dmi'
 
 	chest_type = /obj/item/clothing/suit/space/rig/ert
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
@@ -48,7 +47,7 @@
 	name = "emergency response engineering hardsuit control module"
 	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has orange highlights. Armoured and space ready."
 	suit_type = "emergency response engineer"
-	on_mob_icon = 'mods/corporate/icons/rigs/ert_engineer.dmi'
+	icon = 'mods/corporate/icons/rigs/ert_engineer.dmi'
 
 	glove_type = /obj/item/clothing/gloves/rig/ert/engineer
 
@@ -67,7 +66,7 @@
 	name = "emergency response sanitation hardsuit control module"
 	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has purple highlights. Armoured and space ready."
 	suit_type = "emergency response sanitation"
-	on_mob_icon = 'mods/corporate/icons/rigs/ert_janitor.dmi'
+	icon = 'mods/corporate/icons/rigs/ert_janitor.dmi'
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -82,7 +81,7 @@
 	name = "emergency response medical hardsuit control module"
 	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has white highlights. Armoured and space ready."
 	suit_type = "emergency response medic"
-	on_mob_icon = 'mods/corporate/icons/rigs/ert_medic.dmi'
+	icon = 'mods/corporate/icons/rigs/ert_medic.dmi'
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -96,7 +95,7 @@
 	name = "emergency response security hardsuit control module"
 	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has red highlights. Armoured and space ready."
 	suit_type = "emergency response security"
-	on_mob_icon = 'mods/corporate/icons/rigs/ert_security.dmi'
+	icon = 'mods/corporate/icons/rigs/ert_security.dmi'
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
@@ -109,7 +108,7 @@
 	name = "heavy emergency response suit control module"
 	desc = "A heavy, modified version of a common emergency response hardsuit. Has blood red highlights.  Armoured and space ready."
 	suit_type = "heavy emergency response"
-	on_mob_icon = 'mods/corporate/icons/rigs/asset_protection.dmi'
+	icon = 'mods/corporate/icons/rigs/asset_protection.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH, 
 		bullet = ARMOR_BALLISTIC_RESISTANT, 

@@ -4,7 +4,6 @@
 	caliber = CALIBER_PISTOL
 	projectile_type = /obj/item/projectile/bullet/pistol
 	icon = 'icons/obj/ammo/casings/pistol.dmi'
-	on_mob_icon = 'icons/obj/ammo/casings/pistol.dmi'
 
 /obj/item/ammo_casing/pistol/rubber
 	desc = "A rubber pistol bullet casing."
@@ -29,7 +28,7 @@
 /obj/item/ammo_casing/pistol/small
 	desc = "A small pistol bullet casing."
 	color = COLOR_POLISHED_BRASS
-	on_mob_icon = 'icons/obj/ammo/casings/small_pistol.dmi'
+	icon = 'icons/obj/ammo/casings/small_pistol.dmi'
 	caliber = CALIBER_PISTOL_SMALL
 	projectile_type = /obj/item/projectile/bullet/pistol/holdout
 	
@@ -57,7 +56,7 @@
 	color = COLOR_POLISHED_BRASS
 	marking_color = COLOR_MAROON
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
-	on_mob_icon = 'icons/obj/ammo/casings/magnum.dmi'
+	icon = 'icons/obj/ammo/casings/magnum.dmi'
 
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"
@@ -143,7 +142,7 @@
 	projectile_type = /obj/item/projectile/bullet/rifle/shell
 	material = /decl/material/solid/metal/steel
 	color = COLOR_POLISHED_BRASS
-	on_mob_icon = 'icons/obj/ammo/casings/antimaterial.dmi'
+	icon = 'icons/obj/ammo/casings/antimaterial.dmi'
 
 /obj/item/ammo_casing/shell/apds
 	name = "\improper APDS shell casing"
@@ -157,7 +156,6 @@
 	caliber = CALIBER_RIFLE
 	projectile_type = /obj/item/projectile/bullet/rifle
 	icon = 'icons/obj/ammo/casings/rifle.dmi'
-	on_mob_icon = 'icons/obj/ammo/casings/rifle.dmi'
 
 /obj/item/ammo_casing/rifle/practice
 	desc = "A military rifle practice bullet casing."
@@ -176,7 +174,7 @@
 	name = "cap"
 	desc = "A cap for children toys."
 	caliber = CALIBER_CAPS
-	on_mob_icon = 'icons/obj/ammo/casings/small_pistol.dmi'
+	icon = 'icons/obj/ammo/casings/small_pistol.dmi'
 	bullet_color = COLOR_RED
 	color = COLOR_RED
 	projectile_type = /obj/item/projectile/bullet/pistol/cap
@@ -186,7 +184,7 @@
 	desc = "A laser-bulb casing."
 	caliber = CALIBER_PISTOL_LASBULB
 	projectile_type = /obj/item/projectile/beam/pop
-	on_mob_icon = 'icons/obj/ammo/casings/lasbulb.dmi'
+	icon = 'icons/obj/ammo/casings/lasbulb.dmi'
 	color = COLOR_BLUE_GRAY
 	bullet_color = COLOR_BLUE_LIGHT
 	material = /decl/material/solid/glass

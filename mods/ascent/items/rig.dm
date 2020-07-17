@@ -27,7 +27,6 @@
 	glove_type = /obj/item/clothing/gloves/rig/mantid
 	update_visible_name = TRUE
 	icon = 'mods/ascent/icons/rig/inventory.dmi'
-	on_mob_icon = 'mods/ascent/icons/rig/inventory.dmi'
 	sprite_sheets = list(
 		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/rig/gyne.dmi',
 		BODYTYPE_MANTID_SMALL = 'mods/ascent/icons/rig/alate.dmi',

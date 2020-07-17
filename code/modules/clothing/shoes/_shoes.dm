@@ -3,7 +3,6 @@
 	desc = "Comfortable-looking shoes."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
-	on_mob_icon = 'icons/clothing/feet/generic_shoes.dmi'
 	gender = PLURAL
 	siemens_coefficient = 0.9
 	cold_protection = FEET

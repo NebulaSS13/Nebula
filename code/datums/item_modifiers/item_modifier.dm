@@ -22,7 +22,7 @@
 
 	var/onmob = type_setup[SETUP_ONMOB_ICON]
 	if(onmob)
-		I.on_mob_icon = onmob
+		I.use_single_icon = TRUE
 		I.icon = onmob
 
 	var/item_state = type_setup[SETUP_ITEM_STATE]

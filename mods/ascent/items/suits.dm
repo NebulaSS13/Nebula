@@ -2,7 +2,6 @@
 	name = "\improper Ascent voidsuit helmet"
 	desc = "An articulated spacesuit helmet of mantid manufacture."
 	icon = 'mods/ascent/icons/alate_spacesuit/helmet.dmi'
-	on_mob_icon = 'mods/ascent/icons/alate_spacesuit/helmet.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_RESISTANT,
@@ -19,7 +18,6 @@
 	name = "\improper Ascent voidsuit"
 	desc = "A form-fitting spacesuit of mantid manufacture."
 	icon = 'mods/ascent/icons/alate_spacesuit/suit.dmi'
-	on_mob_icon = 'mods/ascent/icons/alate_spacesuit/suit.dmi'
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,

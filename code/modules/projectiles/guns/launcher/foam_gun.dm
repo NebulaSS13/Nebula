@@ -1,7 +1,6 @@
 /obj/item/gun/launcher/foam
 	name = "foam blaster"
 	desc = "The classic Jorf blaster!"
-	on_mob_icon = 'icons/obj/guns/foam/blaster.dmi'
 	icon = 'icons/obj/guns/foam/blaster.dmi'
 	icon_state = ICON_STATE_WORLD
 	force = 1
@@ -47,7 +46,7 @@
 /obj/item/gun/launcher/foam/burst
 	name = "foam machine pistol"
 	desc = "The Jorf Outlander, a machine pistol blaster, fires two darts in rapid succession. Holds 4 darts."
-	on_mob_icon =  'icons/obj/guns/foam/pistol.dmi'
+	icon =  'icons/obj/guns/foam/pistol.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	burst = 2
 	fire_delay = 12
@@ -57,7 +56,7 @@
 /obj/item/gun/launcher/foam/revolver
 	name = "foam revolver"
 	desc = "The Jorf Desperado is a revolver blaster, with a hammer action so you can fan the hammer like a real desperado! It holds 6 darts."
-	on_mob_icon =  'icons/obj/guns/foam/revolver.dmi'
+	icon =  'icons/obj/guns/foam/revolver.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 4
 	one_hand_penalty = 1

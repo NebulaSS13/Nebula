@@ -45,10 +45,8 @@ var/list/laser_wavelengths
 /obj/item/gun/energy/capacitor
 	name = "capacitor pistol"
 	desc = "An excitingly chunky directed energy weapon that uses a modular capacitor array to charge each shot."
-	icon_state = "world"
-	on_mob_icon = 'icons/obj/guns/capacitor_pistol.dmi'
 	icon = 'icons/obj/guns/capacitor_pistol.dmi'
-	icon_state = "world"
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':4,'materials':4,'powerstorage':4}"
 	w_class = ITEM_SIZE_NORMAL
 	charge_cost = 100
@@ -271,7 +269,6 @@ var/list/laser_wavelengths
 	name = "capacitor rifle"
 	desc = "A heavy, unwieldly directed energy weapon that uses a linear capacitor array to charge a powerful beam."
 	max_capacitors = 4
-	on_mob_icon = 'icons/obj/guns/capacitor_rifle.dmi'
 	icon = 'icons/obj/guns/capacitor_rifle.dmi'
 	slot_flags = SLOT_BACK
 	one_hand_penalty = 6

@@ -2,7 +2,6 @@
 	name = "shoes"
 	desc = "A pair of shoes."
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
-	on_mob_icon = 'icons/clothing/feet/generic_shoes.dmi'
 	material = /decl/material/solid/leather
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
@@ -15,7 +14,6 @@
 /obj/item/clothing/shoes/craftable/boots
 	name = "boots"
 	desc = "A pair of tall boots."
-	on_mob_icon = 'icons/clothing/feet/tall_boots.dmi'
 
 /obj/item/clothing/shoes/craftable/set_material(var/new_material)
 	..()
