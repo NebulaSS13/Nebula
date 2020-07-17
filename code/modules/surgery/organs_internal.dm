@@ -168,7 +168,7 @@
 	var/target_zone = user.zone_sel.selecting
 	var/obj/item/organ/internal/O = LAZYACCESS(target.surgeries_in_progress, target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(BP_IS_PROSTHETIC(O))
+	if(O && BP_IS_PROSTHETIC(O))
 		if(BP_IS_PROSTHETIC(affected))
 			return SURGERY_SKILLS_ROBOTIC
 		else
@@ -311,7 +311,7 @@
 	var/target_zone = user.zone_sel.selecting
 	var/obj/item/organ/internal/O = LAZYACCESS(target.surgeries_in_progress, target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(BP_IS_PROSTHETIC(O))
+	if(O && BP_IS_PROSTHETIC(O))
 		if(BP_IS_PROSTHETIC(affected))
 			return SURGERY_SKILLS_ROBOTIC
 		else
