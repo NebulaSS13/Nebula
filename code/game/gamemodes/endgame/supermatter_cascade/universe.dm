@@ -57,26 +57,23 @@ var/global/universe_has_ended = 0
 	PlayerSet()
 	SSskybox.change_skybox("cascade", new_use_stars = FALSE, new_use_overmap_details = FALSE)
 
-	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
-	spawn(rand(30,60) SECONDS)
-		var/txt = {"
-A galaxy-wide electromagnetic pulse has been detected. All systems across space are heavily damaged and many personnel have died or are dying. We are currently detecting increasing indications that the universe itself is beginning to unravel.
+	var/spawned_exit = FALSE
+	if(length(endgame_exits))
+		spawned_exit = new /obj/singularity/narsie/large/exit(pick(endgame_exits))
 
-[station_name()], the largest source of disturbances has been pinpointed directly to you. We estimate you have five minutes until a bluespace rift opens within your facilities.
+	addtimer(CALLBACK(src, /datum/universal_state/supermatter_cascade/proc/announce_end_of_universe, spawned_exit), rand(30, 60) SECONDS)
+	addtimer(CALLBACK(src, /datum/universal_state/supermatter_cascade/proc/finalize_end_of_universe), 5 MINUTES)
 
-There is no known way to stop the formation of the rift, nor any way to escape it. You are entirely alone.
+/datum/universal_state/supermatter_cascade/proc/announce_end_of_universe(var/exit_exists)
+	var/end_message = "Attn. [GLOB.using_map.station_name]: Severe gravitational anomalies of unheard of scope have been detected in the local volume. Size and intensity of anomalies are increasing exponentially. Within the hour, a newborn black hole will have consumed everything in this sector."
+	if(exit_exists)
+		end_message += "\n\nCuriously, the distortion is predicted to form a traversable wormhole quite close to your current location in approximately five minutes. The terminus is unknown, but it must be better than behind a hungry singularity. Godspeed."
+	end_message += "\n\nAUTOMATED ALERT: Link to [command_name()] lost."
+	priority_announcement.Announce(end_message, "SUPERMATTER CASCADE DETECTED")
 
-God help your s\[\[###!!!-
-
-AUTOMATED ALERT: Link to [command_name()] lost.
-
-"}
-		priority_announcement.Announce(txt,"SUPERMATTER CASCADE DETECTED")
-
-		spawn(5 MINUTES)
-			GLOB.cinematic.station_explosion_cinematic(0,null) // TODO: Custom cinematic
-			universe_has_ended = 1
-		return
+/datum/universal_state/supermatter_cascade/proc/finalize_end_of_universe()
+	GLOB.cinematic.station_explosion_cinematic(0,null) // TODO: Custom cinematic
+	universe_has_ended = TRUE
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
 	for(var/area/A)
