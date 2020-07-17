@@ -1,5 +1,21 @@
 var/obj/screen/robot_inventory
 
+/obj/screen/robot_drop_grab
+	name = "drop grab"
+	icon = 'icons/mob/screen1_robot.dmi'
+	icon_state = "drop_grab"
+	screen_loc = ui_borg_drop_grab
+	invisibility = INVISIBILITY_MAXIMUM
+	alpha = 0
+
+/obj/screen/robot_drop_grab/Click(location, control, params)
+	. = ..()
+	if(isrobot(usr) && !usr.incapacitated())
+		var/mob/living/silicon/robot/R = usr
+		R.drop_item()
+		invisibility = INVISIBILITY_MAXIMUM
+		alpha = 0
+
 /mob/living/silicon/robot
 	hud_type = /datum/hud/robot
 
@@ -54,6 +70,10 @@ var/obj/screen/robot_inventory
 	R.inv3 = using
 
 	//End of module select
+
+	// Drop UI
+	R.ui_drop_grab = new
+	adding += R.ui_drop_grab
 
 	//Intent
 	using = new /obj/screen()
