@@ -38,6 +38,7 @@
 	var/obj/screen/inv1 = null
 	var/obj/screen/inv2 = null
 	var/obj/screen/inv3 = null
+	var/obj/screen/robot_drop_grab/ui_drop_grab
 
 	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
 	var/obj/screen/robot_modules_background

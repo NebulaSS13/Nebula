@@ -162,6 +162,13 @@
 			if (MED_HUD)
 				process_med_hud(src,0,network = get_computer_network())
 
+	if(length(get_active_grabs()))
+		ui_drop_grab.invisibility = 0
+		ui_drop_grab.alpha = 255
+	else
+		ui_drop_grab.invisibility = INVISIBILITY_MAXIMUM
+		ui_drop_grab.alpha = 0
+
 	if (src.healths)
 		if (src.stat != 2)
 			if(istype(src,/mob/living/silicon/robot/drone))
