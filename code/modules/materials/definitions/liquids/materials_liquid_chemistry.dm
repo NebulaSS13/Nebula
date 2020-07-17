@@ -1,14 +1,3 @@
-// Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
-/decl/material/liquid/oxyphoron
-	name = "oxyphoron"
-	lore_text = "An exceptionally flammable molecule formed from deuterium synthesis."
-	toxicity = 15
-	fuel_value = 2.5
-	vapor_products = list(
-		/decl/material/gas/oxygen = 0.5, 
-		/decl/material/solid/phoron = 0.5
-	)
-
 /decl/material/liquid/surfactant // Foam precursor
 	name = "surfacant"
 	lore_text = "A isocyanate liquid that forms a foam when mixed with water."

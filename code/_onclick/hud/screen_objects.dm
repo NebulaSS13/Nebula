@@ -234,7 +234,7 @@
 							var/list/nicename = null
 							var/list/tankcheck = null
 							var/breathes = /decl/material/gas/oxygen    //default, we'll check later
-							var/poisons = list(/decl/material/solid/phoron)
+							var/poisons = list(/decl/material/gas/chlorine)
 							var/list/contents = list()
 							var/from = "on"
 

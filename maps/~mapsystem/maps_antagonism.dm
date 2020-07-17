@@ -9,7 +9,7 @@
 		"a pair of magboots"                 = /obj/item/clothing/shoes/magboots,
 		"the master blueprints"              = /obj/item/blueprints,
 		"a nasa voidsuit"                    = /obj/item/clothing/suit/space/void,
-		"28 moles of phoron (full tank)"     = /obj/item/tank,
+		"full tank of hydrogen"              = /obj/item/tank/hydrogen,
 		"a sample of slime extract"          = /obj/item/slime_extract,
 		"a piece of corgi meat"              = /obj/item/chems/food/snacks/meat/corgi,
 		"a chief science officer's jumpsuit" = /obj/item/clothing/under/rank/research_director,

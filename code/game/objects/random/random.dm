@@ -459,13 +459,14 @@
 	icon_state = "coin1"
 
 /obj/random/coin/spawn_choices()
-	return list(/obj/item/coin/gold = 3,
-				/obj/item/coin/silver = 4,
-				/obj/item/coin/diamond = 2,
-				/obj/item/coin/iron = 4,
-				/obj/item/coin/uranium = 3,
-				/obj/item/coin/platinum = 1,
-				/obj/item/coin/phoron = 1)
+	return list(
+		/obj/item/coin/gold = 3,
+		/obj/item/coin/silver = 4,
+		/obj/item/coin/diamond = 2,
+		/obj/item/coin/iron = 4,
+		/obj/item/coin/uranium = 3,
+		/obj/item/coin/platinum = 1
+	)
 
 /obj/random/toy
 	name = "random toy"
@@ -963,7 +964,6 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/stack/material/diamond/ten = 7,
 				/obj/item/stack/material/glass/reinforced_borosilicate/ten = 7,
 				/obj/item/stack/material/marble/ten = 8,
-				/obj/item/stack/material/phoron/ten = 7,
 				/obj/item/stack/material/gold/ten = 7,
 				/obj/item/stack/material/silver/ten = 7,
 				/obj/item/stack/material/osmium/ten = 7,

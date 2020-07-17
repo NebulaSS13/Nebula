@@ -168,13 +168,13 @@
 		/decl/material/liquid/ethanol/coffee/kahlua = 0.25
 	)
 
-/decl/cocktail/phoron_special
-	name = "Toxins Special"
+/decl/cocktail/toxins_special
+	name = "H<sub>2</sub> Special"
 	description = "Raise a glass to the bomb technicians of yesteryear, wherever their ashes now reside."
 	ratios = list(
 		/decl/material/liquid/ethanol/rum = 0.35,
 		/decl/material/liquid/ethanol/vermouth = 0.35,
-		/decl/material/solid/phoron
+		/decl/material/solid/metallic_hydrogen
 	)
 
 /decl/cocktail/beepsky_smash

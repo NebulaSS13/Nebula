@@ -89,16 +89,12 @@
 	if(pickednum >= 5)
 		new /obj/item/stack/material/glass(src, rand(common_min, common_max))
 
-	//Plasteel (common ore) Because it has a million more uses then phoron
+	//Plasteel (common metal)
 	if(pickednum >= 10)
 		new /obj/item/stack/material/plasteel(src, rand(common_min, common_max))
 
-	//Phoron (rare ore)
-	if(pickednum >= 15)
-		new /obj/item/stack/material/phoron(src, rand(rare_min, rare_max))
-
 	//Silver (rare ore)
-	if(pickednum >= 20)
+	if(pickednum >= 15)
 		new /obj/item/stack/material/silver(src, rand(rare_min, rare_max))
 
 	//Gold (rare ore)
@@ -124,15 +120,14 @@
 	. = ..()
 
 	var/list/resources = list(
-	/obj/item/stack/material/steel,
-	/obj/item/stack/material/glass,
-	/obj/item/stack/material/gold,
-	/obj/item/stack/material/silver,
-	/obj/item/stack/material/phoron,
-	/obj/item/stack/material/uranium,
-	/obj/item/stack/material/diamond,
-	/obj/item/stack/material/plasteel,
-	/obj/item/stack/material/rods
+		/obj/item/stack/material/steel,
+		/obj/item/stack/material/glass,
+		/obj/item/stack/material/gold,
+		/obj/item/stack/material/silver,
+		/obj/item/stack/material/uranium,
+		/obj/item/stack/material/diamond,
+		/obj/item/stack/material/plasteel,
+		/obj/item/stack/material/rods
 	)
 
 

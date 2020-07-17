@@ -175,15 +175,6 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "aA" = (
-/obj/item/stack/material/phoron{
-	pixel_y = 7;
-	pixel_z = -8
-	},
-/obj/item/stack/material/phoron{
-	pixel_x = -5;
-	pixel_y = 5
-	},
-/obj/item/stack/material/phoron,
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},

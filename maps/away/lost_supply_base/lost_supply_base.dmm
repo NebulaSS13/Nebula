@@ -1207,7 +1207,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dg" = (
-/obj/structure/closet/crate/secure/phoron{
+/obj/structure/closet/crate/secure/explosives{
 	name = "mineral crate";
 	req_access = newlist()
 	},
@@ -1217,7 +1217,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/structure/closet/crate/secure/phoron{
+/obj/structure/closet/crate/secure/explosives{
 	name = "mineral crate";
 	req_access = newlist()
 	},
@@ -1627,7 +1627,7 @@
 	},
 /area/space)
 "eD" = (
-/obj/machinery/atmospherics/unary/tank/phoron{
+/obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 2;
 	volume = 3200
 	},
@@ -1703,14 +1703,12 @@
 	},
 /area/space)
 "eQ" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "eS" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "eT" = (

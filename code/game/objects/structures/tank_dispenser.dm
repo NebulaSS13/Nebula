@@ -1,21 +1,21 @@
 /obj/structure/dispenser
 	name = "tank storage unit"
-	desc = "A simple yet bulky storage device for gas tanks. Has room for up to ten oxygen tanks, and ten phoron tanks."
-	icon = 'icons/obj/objects.dmi'
+	desc = "A simple yet bulky storage device for gas tanks. Has room for up to ten oxygen tanks, and ten hydrogen tanks."
+	icon = 'icons/obj/structures/tank_dispenser.dmi'
 	icon_state = "dispenser"
 	density = 1
 	anchored = 1.0
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 
 	var/oxygentanks = 10
-	var/phorontanks = 10
+	var/hydrogentanks = 10
 	var/list/oxytanks = list()	//sorry for the similar var names
-	var/list/platanks = list()
+	var/list/hydtanks = list()
 
 /obj/structure/dispenser/oxygen
-	phorontanks = 0
+	hydrogentanks = 0
 
-/obj/structure/dispenser/phoron
+/obj/structure/dispenser/hydrogen
 	oxygentanks = 0
 
 /obj/structure/dispenser/Initialize()
@@ -27,9 +27,9 @@
 	switch(oxygentanks)
 		if(1 to 3)	overlays += "oxygen-[oxygentanks]"
 		if(4 to INFINITY) overlays += "oxygen-4"
-	switch(phorontanks)
-		if(1 to 4)	overlays += "phoron-[phorontanks]"
-		if(5 to INFINITY) overlays += "phoron-5"
+	switch(hydrogentanks)
+		if(1 to 4)	overlays += "hydrogen-[hydrogentanks]"
+		if(5 to INFINITY) overlays += "hydrogen-5"
 
 /obj/structure/dispenser/attack_ai(mob/user)
 	if(user.Adjacent(src))
@@ -40,7 +40,7 @@
 	user.set_machine(src)
 	var/dat = "[src]<br><br>"
 	dat += "Oxygen tanks: [oxygentanks] - [oxygentanks ? "<A href='?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
-	dat += "Phoron tanks: [phorontanks] - [phorontanks ? "<A href='?src=\ref[src];phoron=1'>Dispense</A>" : "empty"]"
+	dat += "Hydrogen tanks: [hydrogentanks] - [hydrogentanks ? "<A href='?src=\ref[src];hydrogen=1'>Dispense</A>" : "empty"]"
 	show_browser(user, dat, "window=dispenser")
 	onclose(user, "dispenser")
 	return
@@ -62,12 +62,12 @@
 				to_chat(user, "<span class='notice'>[src] is full.</span>")
 			updateUsrDialog()
 			return
-		if(istype(I, /obj/item/tank/phoron))
-			if(phorontanks < 10)
+		if(istype(I, /obj/item/tank/hydrogen))
+			if(hydrogentanks < 10)
 				if(!user.unEquip(I, src))
 					return
-				platanks.Add(I)
-				phorontanks++
+				hydtanks.Add(I)
+				hydrogentanks++
 				to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
 				if(oxygentanks < 6)
 					update_icon()
@@ -93,17 +93,17 @@
 				to_chat(usr, "<span class='notice'>You take [O] out of [src].</span>")
 				oxygentanks--
 				update_icon()
-		if(href_list["phoron"])
-			if(phorontanks > 0)
-				var/obj/item/tank/phoron/P
-				if(platanks.len == phorontanks)
-					P = platanks[1]
-					platanks.Remove(P)
+		if(href_list["hydrogen"])
+			if(hydrogentanks > 0)
+				var/obj/item/tank/hydrogen/P
+				if(hydtanks.len == hydrogentanks)
+					P = hydtanks[1]
+					hydtanks.Remove(P)
 				else
-					P = new /obj/item/tank/phoron(loc)
+					P = new /obj/item/tank/hydrogen(loc)
 				P.dropInto(loc)
 				to_chat(usr, "<span class='notice'>You take [P] out of [src].</span>")
-				phorontanks--
+				hydrogentanks--
 				update_icon()
 		add_fingerprint(usr)
 		updateUsrDialog()

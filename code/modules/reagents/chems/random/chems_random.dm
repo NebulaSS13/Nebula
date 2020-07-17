@@ -6,7 +6,6 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	/decl/material/solid/tobacco,
 	/decl/material/liquid/drink,
 	/decl/material/liquid/random,
-	/decl/material/solid/phoron,
 	/decl/material/liquid/ethanol // Includes alcoholic beverages
 ))
 

@@ -4112,7 +4112,6 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "kP" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "kQ" = (
@@ -4210,7 +4209,6 @@
 /area/casino/casino_bow)
 "ld" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "le" = (
@@ -4601,7 +4599,6 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "lW" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor/reinforced,
 /area/casino/casino_bow)
 "lX" = (

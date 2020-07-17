@@ -30,6 +30,6 @@
 	name = "concentration of nitrogen"
 	gas_needed = list(/decl/material/gas/nitrogen = 5)
 
-/datum/artifact_trigger/gas/phoron
-	name = "concentration of phoron"
-	gas_needed = list(/decl/material/solid/phoron = 5)
+/datum/artifact_trigger/gas/hydrogen
+	name = "concentration of hydrogen"
+	gas_needed = list(/decl/material/gas/hydrogen = 5)

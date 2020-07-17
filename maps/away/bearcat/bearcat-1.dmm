@@ -837,7 +837,6 @@
 /obj/structure/closet/coffin,
 /obj/random/drinkbottle,
 /obj/item/contraband/poster,
-/obj/item/stack/material/phoron/ten,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "bJ" = (

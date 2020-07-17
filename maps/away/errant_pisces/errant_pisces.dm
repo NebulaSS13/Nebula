@@ -44,10 +44,10 @@
 	..()
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
-		var/datum/gas_mixture/sharkmaw_phoron = new
-		sharkmaw_phoron.adjust_gas(/decl/material/solid/phoron,  10)
-		environment.merge(sharkmaw_phoron)
-		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
+		var/datum/gas_mixture/sharkmaw_chlorine = new
+		sharkmaw_chlorine.adjust_gas(/decl/material/gas/chlorine, 10)
+		environment.merge(sharkmaw_chlorine)
+		visible_message(SPAN_WARNING("\The [src]'s body releases some gas from the gills with a quiet fizz!"))
 
 /mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
 	set waitfor = 0//to deal with sleep() possibly stalling other procs
@@ -77,7 +77,7 @@
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/psychoactives, 1)
-	reagents.add_reagent(/decl/material/solid/phoron, 1)
+	reagents.add_reagent(/decl/material/gas/chlorine, 1)
 	src.bitesize = 8
 
 

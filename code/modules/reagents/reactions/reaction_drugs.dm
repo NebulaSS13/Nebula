@@ -111,7 +111,7 @@
 	name = "Nanite Fluid"
 	result = /decl/material/liquid/nanitefluid
 	required_reagents = list(/decl/material/liquid/plasticide = 1, /decl/material/solid/metal/aluminium = 1, /decl/material/liquid/lube = 1)
-	catalysts = list(/decl/material/solid/phoron = 5)
+	catalysts = list(/decl/material/liquid/crystal_agent = 1)
 	result_amount = 3
 	minimum_temperature = (-25 CELSIUS) - 100
 	maximum_temperature = -25 CELSIUS
@@ -197,13 +197,6 @@
 	result = /decl/material/solid/mineral/sodiumchloride
 	required_reagents = list(/decl/material/solid/sodium = 1, /decl/material/liquid/acid/hydrochloric = 1)
 	result_amount = 2
-
-/datum/chemical_reaction/condensedcapsaicin
-	name = "Condensed Capsaicin"
-	result = /decl/material/liquid/capsaicin/condensed
-	required_reagents = list(/decl/material/liquid/capsaicin = 2)
-	catalysts = list(/decl/material/solid/phoron = 5)
-	result_amount = 1
 
 /datum/chemical_reaction/stimulants
 	name = "Stimulants"

@@ -41,7 +41,7 @@
 /datum/fabricator_recipe/protolathe/weapon/flechette
 	path = /obj/item/gun/magnetic/railgun/flechette
 
-/datum/fabricator_recipe/protolathe/weapon/phoronpistol
+/datum/fabricator_recipe/protolathe/weapon/radpistol
 	path = /obj/item/gun/energy/toxgun
 
 /datum/fabricator_recipe/protolathe/weapon/decloner

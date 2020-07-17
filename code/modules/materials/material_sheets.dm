@@ -185,20 +185,6 @@
 /obj/item/stack/material/uranium/ten
 	amount = 10
 
-/obj/item/stack/material/phoron
-	name = "solid phoron"
-	icon_state = "sheet-phoron"
-	plural_icon_state = "sheet-phoron-mult"
-	max_icon_state = "sheet-phoron-max"
-	material = /decl/material/solid/phoron
-	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
-
-/obj/item/stack/material/phoron/ten
-	amount = 10
-
-/obj/item/stack/material/phoron/fifty
-	amount = 50
-
 /obj/item/stack/material/plastic
 	name = "plastic"
 	icon_state = "sheet-plastic"

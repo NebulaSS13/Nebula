@@ -640,11 +640,11 @@
 			gloves.germ_level += 1
 
 		if(vsc.contaminant_control.CONTAMINATION_LOSS)
-			var/total_phoronloss = 0
+			var/total_contamination= 0
 			for(var/obj/item/I in src)
 				if(I.contaminated)
-					total_phoronloss += vsc.contaminant_control.CONTAMINATION_LOSS
-			adjustToxLoss(total_phoronloss)
+					total_contamination += vsc.contaminant_control.CONTAMINATION_LOSS
+			adjustToxLoss(total_contamination)
 
 		// nutrition decrease
 		if(nutrition > 0)

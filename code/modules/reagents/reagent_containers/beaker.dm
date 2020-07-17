@@ -101,7 +101,7 @@
 	applies_material_name = FALSE
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/phoron = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 

@@ -26,7 +26,6 @@
 /area/unishi/library)
 "ag" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/glass/bottle/tericadone,
 /obj/item/flashlight/lamp,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
@@ -366,7 +365,7 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "aZ" = (
-/obj/structure/closet/crate/secure/phoron,
+/obj/structure/closet/crate/secure/explosives,
 /turf/simulated/floor,
 /area/unishi/common)
 "ba" = (
@@ -431,7 +430,6 @@
 /obj/structure/table/reinforced,
 /obj/item/chems/glass/beaker/large,
 /obj/item/chems/glass/beaker/bluespace,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "bl" = (
@@ -769,7 +767,6 @@
 /area/unishi/common)
 "ca" = (
 /obj/structure/table/standard,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cb" = (
@@ -877,7 +874,6 @@
 /obj/structure/table/glass,
 /obj/item/pen/green,
 /obj/item/paper_bin,
-/obj/item/chems/glass/bottle/tericadone,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "co" = (
@@ -888,7 +884,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cp" = (
-/obj/machinery/portable_atmospherics/canister/phoron,
 /turf/simulated/floor,
 /area/unishi/common)
 "cq" = (
@@ -1169,8 +1164,6 @@
 	},
 /obj/item/folder/yellow,
 /obj/item/pen/green,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/stack/material/phoron/fifty,
 /turf/simulated/floor/tiled,
 /area/unishi/meeting)
 "da" = (
@@ -1562,10 +1555,6 @@
 /area/unishi/rnd)
 "ea" = (
 /obj/structure/table/glass,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
-/obj/item/chems/glass/bottle/tericadone,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22;
@@ -2351,7 +2340,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "fW" = (
-/obj/machinery/atmospherics/unary/tank/phoron,
+/obj/machinery/atmospherics/unary/tank/hydrogen,
 /obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
@@ -2401,7 +2390,7 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "ge" = (
-/obj/structure/closet/crate/secure/large/phoron/experimentalsm,
+/obj/structure/closet/crate/secure/large/supermatter/experimentalsm,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor,
 /area/unishi/smresearch)

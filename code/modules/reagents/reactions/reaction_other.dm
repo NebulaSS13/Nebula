@@ -24,27 +24,6 @@
 	result_amount = 6
 	mix_message = "The solution begins to gleam with a fey inner light."
 
-/datum/chemical_reaction/oxyphoron
-	name = "Oxyphoron"
-	result = /decl/material/liquid/oxyphoron
-	required_reagents = list(/decl/material/liquid/water = 1, /decl/material/solid/phoron = 1)
-	result_amount = 2
-	mix_message = "The solution boils violently, shedding wisps of vapor."
-
-/datum/chemical_reaction/deuterium
-	name = "Deuterium"
-	result = null
-	required_reagents = list(/decl/material/liquid/water = 10)
-	catalysts = list(/decl/material/liquid/oxyphoron = 5)
-	result_amount = 1
-	mix_message = "The solution makes a loud cracking sound as it crystalizes."
-
-/datum/chemical_reaction/deuterium/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	..()
-	var/turf/T = get_turf(holder.my_atom)
-	if(istype(T)) new /obj/item/stack/material/deuterium(T, created_volume)
-	return
-
 /datum/chemical_reaction/nanoblood
 	name = "Nanoblood"
 	result = /decl/material/liquid/nanoblood

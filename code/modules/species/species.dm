@@ -119,7 +119,7 @@
 	var/reagent_tag                                             // Used for metabolizing reagents.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
 	var/breath_type = /decl/material/gas/oxygen                                  // Non-oxygen gas breathed, if any.
-	var/poison_types = list(/decl/material/solid/phoron = TRUE, /decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+	var/poison_types = list(/decl/material/gas/chlorine = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
 	var/exhale_type = /decl/material/gas/carbon_dioxide                          // Exhaled gas type.
 	var/blood_reagent = /decl/material/liquid/blood
 

@@ -65,9 +65,8 @@
 		/obj/item/chems/glass,
 		/obj/item/chems/pill,
 		/obj/item/chems/ivbag,
-		/obj/item/stack/material/phoron,
-		/obj/item/storage/pill_bottle,
-		)
+		/obj/item/storage/pill_bottle
+	)
 
 /obj/item/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc
 	name = "scientific gripper"

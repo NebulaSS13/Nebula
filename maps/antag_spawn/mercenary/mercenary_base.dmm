@@ -1804,7 +1804,6 @@
 	icon_state = "1-4"
 	},
 /obj/item/storage/toolbox/syndicate,
-/obj/item/stack/material/phoron/fifty,
 /obj/item/storage/backpack/dufflebag/syndie/ammo,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -2081,13 +2080,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "iv" = (
-/obj/structure/closet/crate/secure/phoron,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
+/obj/structure/closet/crate/secure/explosives,
 /obj/structure/railing/mapped/no_density,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
@@ -2582,13 +2575,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Fy" = (
-/obj/structure/closet/crate/secure/phoron,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
-/obj/item/stack/material/phoron/ten,
+/obj/structure/closet/crate/secure/explosives,
 /obj/machinery/light/spot{
 	icon_state = "tube_map";
 	dir = 1

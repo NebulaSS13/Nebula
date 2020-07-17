@@ -182,16 +182,6 @@
 		return
 	if(!can_ignite())
 		return
-
-	//also copied from matches
-	if(REAGENT_VOLUME(reagents, /decl/material/solid/phoron)) // the phoron explodes when exposed to fire
-		visible_message(SPAN_DANGER("\The [src] explodes!"))
-		var/datum/effect/effect/system/reagents_explosion/e = new()
-		e.set_up(round(REAGENT_VOLUME(reagents, /decl/material/solid/phoron) / 2.5, 1), get_turf(src), 0, 0)
-		e.start()
-		qdel(src)
-		return
-
 	START_PROCESSING(SSobj, src)
 	set_light(0.5, 0.1, 2, 2, "#e38f46")
 	on_fire = 1

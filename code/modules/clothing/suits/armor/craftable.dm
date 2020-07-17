@@ -35,4 +35,4 @@
 /obj/item/clothing/suit/armor/crafted/gold
 	material = /decl/material/solid/metal/gold
 /obj/item/clothing/suit/armor/crafted/supermatter
-	material = /decl/material/solid/supermatter
+	material = /decl/material/solid/exotic_matter

@@ -185,7 +185,7 @@
 	name = "Power - Supermatter core"
 	contains = list(/obj/machinery/power/supermatter)
 	cost = 150
-	containertype = /obj/structure/closet/crate/secure/large/phoron
+	containertype = /obj/structure/closet/crate/secure/large/supermatter
 	containername = "\improper Supermatter crate (CAUTION)"
 	access = access_ce
 

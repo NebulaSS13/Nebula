@@ -245,7 +245,6 @@
 /obj/item/stack/material/silver/ten,
 /obj/item/stack/material/uranium/ten,
 /obj/item/stack/material/diamond/ten,
-/obj/item/stack/material/phoron/fifty,
 /obj/item/storage/belt/utility/full,
 /obj/item/stack/material/steel/fifty,
 /turf/simulated/floor/tiled/white,
