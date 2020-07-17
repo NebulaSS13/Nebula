@@ -57,19 +57,26 @@
 	empulse(location, round(created_volume / 24), round(created_volume / 14), 1)
 	holder.clear_reagents()
 
-/datum/chemical_reaction/grenade_reaction/phlogiston
+/datum/chemical_reaction/grenade_reaction/flash_fire
 	name = "Flash Fire"
 	lore_text = "This mixture causes an immediate flash fire."
-	required_reagents = list(/decl/material/solid/metal/aluminium = 1, /decl/material/solid/phoron = 1, /decl/material/liquid/acid = 1 )
-	result_amount = 1
-	mix_message = "The solution thickens and begins to bubble."
+	required_reagents = list(
+		/decl/material/solid/metal/aluminium = 2,
+		/decl/material/liquid/fuel = 1,
+		/decl/material/liquid/acid = 1
+	)
+	result_amount = 10 // Sufficient to start a fire.
+	reaction_sound = 'sound/items/Welder.ogg'
+	mix_message = "The solution suddenly ignites!"
 
-/datum/chemical_reaction/grenade_reaction/phlogiston/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/datum/chemical_reaction/grenade_reaction/flash_fire/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
 	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0,location))
-		target_tile.assume_gas(/decl/material/solid/phoron, created_volume, 400+T0C)
-		spawn (0) target_tile.hotspot_expose(700, 400)
+	if(istype(location))
+		location.assume_gas(/decl/material/gas/hydrogen, created_volume, FLAMMABLE_GAS_FLASHPOINT + 10)
+		var/datum/effect/effect/system/spark_spread/sparks = new
+		sparks.set_up(1, 1, location)
+		sparks.start()
 
 /datum/chemical_reaction/grenade_reaction/chemsmoke
 	name = "Chemical Smoke"

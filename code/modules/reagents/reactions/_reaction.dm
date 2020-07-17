@@ -72,8 +72,12 @@
 /datum/chemical_reaction/proc/post_reaction(var/datum/reagents/holder)
 	var/atom/container = holder.my_atom
 	if(mix_message && container && !ismob(container))
-		container.visible_message("<span class='notice'>\icon[container] [mix_message]</span>")
-		playsound(container, reaction_sound, 80, 1)
+		var/turf/T = get_turf(container)
+		if(istype(T))
+			T.visible_message(SPAN_NOTICE("\icon[container] [mix_message]"))
+		else
+			container.visible_message(SPAN_NOTICE("\icon[container] [mix_message]"))
+		playsound(T || container, reaction_sound, 80, 1)
 
 //obtains any special data that will be provided to the reaction products
 //this is called just before reactants are removed.
