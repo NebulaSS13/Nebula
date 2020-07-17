@@ -116,11 +116,14 @@
 	addtimer(CALLBACK(src, /atom/movable/proc/fall_callback, below), 0)
 
 /atom/movable/proc/fall_callback(var/turf/below)
-	var/mob/M = src
-	var/is_client_moving = (ismob(M) && M.moving)
-	if(is_client_moving) M.moving = 1
-	handle_fall(below)
-	if(is_client_moving) M.moving = 0
+	if(!QDELETED(src))
+		handle_fall(below)
+
+/mob/fall_callback(var/turf/below)
+	var/was_moving = moving
+	..()
+	if(was_moving)
+		moving = FALSE
 
 //For children to override
 /atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = loc)
