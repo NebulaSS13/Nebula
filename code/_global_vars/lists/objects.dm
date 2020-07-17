@@ -24,3 +24,5 @@ GLOBAL_LIST_INIT(alphabet_no_vowels, list("b","c","d","f","g","h","j","k","l","m
 GLOBAL_LIST_INIT(full_alphabet, list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"))
 
 GLOBAL_LIST_EMPTY(meteor_list)
+
+var/list/is_currently_exploding = list()
