@@ -19,6 +19,38 @@
 	tracer_type = /obj/effect/projectile/laser/tracer
 	impact_type = /obj/effect/projectile/laser/impact
 
+/obj/item/projectile/beam/variable
+	muzzle_type = /obj/effect/projectile/laser/variable/muzzle
+	tracer_type = /obj/effect/projectile/laser/variable/tracer
+	impact_type = /obj/effect/projectile/laser/variable/impact
+
+/obj/item/projectile/beam/variable/split
+	muzzle_type = /obj/effect/projectile/laser/variable/heavy_muzzle
+	tracer_type = /obj/effect/projectile/laser/variable/heavy_tracer
+	impact_type = /obj/effect/projectile/laser/variable/heavy_impact
+	var/split_type = /obj/item/projectile/beam/variable
+	var/split_count = 3
+
+/obj/item/projectile/beam/variable/split/on_impact(var/atom/A)
+	if(split_type)
+		var/list/targets = list()
+		var/split_loc = get_turf(A)
+		if(split_loc)
+			for(var/turf/T in view(5, split_loc))
+				targets += T
+			for(var/i = 1 to split_count)
+				if(!length(targets))
+					break
+				var/obj/item/projectile/P = new split_type(split_loc)
+				P.color = color
+				P.light_color = color
+				P.firer = firer
+				P.shot_from = shot_from
+				P.damage = Floor(damage/split_count)
+				P.armor_penetration = Floor(armor_penetration/split_count)
+				P.launch(pick_n_take(targets), def_zone)
+	. = ..()
+
 /obj/item/projectile/beam/practice
 	fire_sound = 'sound/weapons/Taser.ogg'
 	damage = 2
