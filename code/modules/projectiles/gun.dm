@@ -31,7 +31,9 @@
 /obj/item/gun
 	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
-	icon = 'icons/obj/guns/gui.dmi'
+	icon_state = ICON_STATE_WORLD
+	on_mob_icon = 'icons/obj/guns/pistol.dmi'
+	icon = 'icons/obj/guns/pistol.dmi'
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	material = /decl/material/solid/metal/steel

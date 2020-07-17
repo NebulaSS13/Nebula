@@ -54,6 +54,7 @@
 /obj/item/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
 	desc = "A true classic."
+	icon = 'icons/obj/guns/shotgun/doublebarrel.dmi'
 	on_mob_icon = 'icons/obj/guns/shotgun/doublebarrel.dmi'
 	//SPEEDLOADER because rapid unloading.
 	//In principle someone could make a speedloader for it, so it makes sense.
@@ -103,6 +104,7 @@
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"
 	desc = "Omar's coming!"
+	icon = 'icons/obj/guns/shotgun/sawnoff.dmi'
 	on_mob_icon = 'icons/obj/guns/shotgun/sawnoff.dmi'
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet

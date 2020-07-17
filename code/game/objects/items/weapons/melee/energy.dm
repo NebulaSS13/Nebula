@@ -148,10 +148,11 @@
 /obj/item/energy_blade/sword/Initialize()
 	if(!blade_color)
 		blade_color = pick("red","blue","green","purple")
-	
-	active_icon = "sword[blade_color]"
-	var/color_hex = list("red" = COLOR_SABER_RED,  "blue" = COLOR_SABER_BLUE, "green" = COLOR_SABER_GREEN, "purple" = COLOR_SABER_PURPLE)
-	lighting_color = color_hex[blade_color]
+	if(!active_icon)
+		active_icon = "sword[blade_color]"
+	if(!lighting_color)
+		var/color_hex = list("red" = COLOR_SABER_RED,  "blue" = COLOR_SABER_BLUE, "green" = COLOR_SABER_GREEN, "purple" = COLOR_SABER_PURPLE)
+		lighting_color = color_hex[blade_color]
 	
 	. = ..()
 
