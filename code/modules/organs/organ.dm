@@ -280,11 +280,12 @@ var/list/organ_cache = list()
 	if(!BP_IS_PROSTHETIC(src) && species && reagents?.total_volume < 5)
 		owner.vessel.trans_to(src, 5 - reagents.total_volume, 1, 1)
 
-	if(owner && vital)
+	if(vital)
 		if(user)
 			admin_attack_log(user, owner, "Removed a vital organ ([src]).", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
 		owner.death()
-
+	screen_loc = null
+	owner.client?.screen -= src
 	owner = null
 
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
