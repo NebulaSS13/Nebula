@@ -3,7 +3,6 @@
 	desc = "A wall-mounted touchscreen computer."
 	icon = 'icons/obj/modular_computers/modular_telescreen.dmi'
 	icon_state = "telescreen"
-	icon_state_unpowered = "telescreen"
 	anchored = TRUE
 	density = 0
 	light_strength = 4

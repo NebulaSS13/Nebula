@@ -506,14 +506,12 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_wear_id(var/update_icons=1)
-	var/image/id_overlay
-	if(wear_id && istype(w_uniform, /obj/item/clothing/under))
+	overlays_standing[HO_ID_LAYER] = null
+	if(wear_id)
 		var/obj/item/clothing/under/U = w_uniform
-		if(U.displays_id && !U.rolled_down)
-			id_overlay = wear_id.get_mob_overlay(src,slot_wear_id_str)
-
-	overlays_standing[HO_ID_LAYER]	= id_overlay
-
+		if(istype(U) && !U.displays_id && !U.rolled_down)
+			return
+		overlays_standing[HO_ID_LAYER] = wear_id.get_mob_overlay(src, slot_wear_id_str)
 	BITSET(hud_updateflag, ID_HUD)
 	BITSET(hud_updateflag, WANTED_HUD)
 

@@ -1,7 +1,7 @@
 var/list/mob_hat_cache = list()
 /proc/get_hat_icon(var/obj/item/hat, var/offset_x = 0, var/offset_y = 0)
 	var/t_state = hat.icon_state
-	if(hat.item_state_slots && hat.item_state_slots[slot_head_str])
+	if(slot_head_str in hat.item_state_slots)
 		t_state = hat.item_state_slots[slot_head_str]
 	else if(hat.item_state)
 		t_state = hat.item_state

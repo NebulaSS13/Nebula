@@ -230,7 +230,6 @@ var/list/default_onmob_icons = list(
 		slot_l_ear_str = 'icons/mob/onmob/onmob_ears.dmi',
 		slot_r_ear_str = 'icons/mob/onmob/onmob_ears.dmi',
 		slot_glasses_str = 'icons/mob/onmob/onmob_eyes.dmi',
-		slot_wear_id_str = 'icons/mob/onmob/onmob_id.dmi',
 		slot_w_uniform_str = 'icons/mob/onmob/onmob_under.dmi',
 		slot_wear_suit_str = 'icons/mob/onmob/onmob_suit.dmi',
 		slot_head_str = 'icons/mob/onmob/onmob_head.dmi',

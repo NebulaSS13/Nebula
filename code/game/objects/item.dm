@@ -65,7 +65,7 @@
 
 	//** These specify item/icon overrides for _slots_
 
-	var/list/item_state_slots = list(slot_wear_id_str = "id") //overrides the default item_state for particular slots.
+	var/list/item_state_slots //overrides the default item_state for particular slots.
 
 	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
 	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
@@ -456,7 +456,7 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
-		if(slot_belt, slot_wear_id)
+		if(slot_belt)
 			if(slot == slot_belt && (item_flags & ITEM_FLAG_IS_BELT))
 				return 1
 			else if(!H.w_uniform && (slot_w_uniform in mob_equip))
@@ -842,7 +842,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_icon_state(mob/user_mob, slot)
 	var/mob_state
-	if(item_state_slots && item_state_slots[slot])
+	if(slot in item_state_slots)
 		mob_state = item_state_slots[slot]
 	else if (item_state)
 		mob_state = item_state

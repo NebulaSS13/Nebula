@@ -34,7 +34,7 @@
 	name = BEARCAT_OUTFIT_JOB_NAME("FTU Captain")
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	shoes = /obj/item/clothing/shoes/color/black
-	pda_type = /obj/item/modular_computer/pda/captain
+	pda_type = /obj/item/modular_computer/pda/heads/captain
 	id_type = /obj/item/card/id/bearcat_captain
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)

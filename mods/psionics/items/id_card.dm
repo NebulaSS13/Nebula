@@ -1,7 +1,9 @@
 /obj/item/card/id/foundation_civilian
 	name = "operant registration card"
 	desc = "A registration card in a faux-leather case. It marks the named individual as a registered, law-abiding psionic."
-	icon_state = "warrantcard_civ"
+	icon = 'icons/obj/id/id_warrantcard_civ.dmi'
+	on_mob_icon = 'icons/obj/id/id_warrantcard_civ.dmi'
+	detail_color = null
 
 /obj/item/card/id/foundation_civilian/on_update_icon()
 	return
@@ -10,7 +12,9 @@
 	name = "\improper Foundation warrant card"
 	desc = "A warrant card in a handsome leather case."
 	assignment = "Field Agent"
-	icon_state = "warrantcard"
+	icon = 'icons/obj/id/id_warrantcard.dmi'
+	on_mob_icon = 'icons/obj/id/id_warrantcard.dmi'
+	detail_color = null
 
 /obj/item/card/id/foundation/examine(mob/user, distance)
 	. = ..()

@@ -1,9 +1,16 @@
 /obj/item/modular_computer/pda
 	name = "\improper PDA"
 	desc = "A very compact computer, designed to keep its user always connected."
-	icon = 'icons/obj/modular_computers/modular_pda.dmi'
-	icon_state = "pda"
-	icon_state_unpowered = "pda"
+	icon = 'icons/obj/modular_computers/pda/pda.dmi'
+	on_mob_icon = 'icons/obj/modular_computers/pda/pda.dmi'
+	screen_icon = 'icons/obj/modular_computers/pda/screens.dmi'
+	icon_state = ICON_STATE_WORLD
+	material = /decl/material/solid/metal/aluminium
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/plastic =     MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass =       MATTER_AMOUNT_TRACE
+	)
 	w_class = ITEM_SIZE_SMALL
 	light_strength = 2
 	slot_flags = SLOT_ID | SLOT_BELT
@@ -13,6 +20,7 @@
 	interact_sound_volume = 20
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	computer_type = /datum/extension/assembly/modular_computer/pda
+	color = COLOR_GRAY80
 
 /obj/item/modular_computer/pda/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -24,6 +32,12 @@
 	else
 		..()
 
+/obj/item/modular_computer/pda/on_update_icon()
+	. = ..()
+	var/mob/living/carbon/human/H = loc
+	if(istype(H) && H.wear_id == src)
+		H.update_inv_wear_id()
+
 // PDA box
 /obj/item/storage/box/PDAs
 	name = "box of spare PDAs"
@@ -32,86 +46,8 @@
 
 /obj/item/storage/box/PDAs/Initialize()
 	. = ..()
-
 	new /obj/item/modular_computer/pda(src)
 	new /obj/item/modular_computer/pda(src)
 	new /obj/item/modular_computer/pda(src)
 	new /obj/item/modular_computer/pda(src)
 	new /obj/item/modular_computer/pda(src)
-
-// PDA types
-/obj/item/modular_computer/pda/medical
-	icon_state = "pda-m"
-	icon_state_unpowered = "pda-m"
-
-/obj/item/modular_computer/pda/chemistry
-	icon_state = "pda-m"
-	icon_state_unpowered = "pda-m"
-
-/obj/item/modular_computer/pda/engineering
-	icon_state = "pda-e"
-	icon_state_unpowered = "pda-e"
-
-/obj/item/modular_computer/pda/security
-	icon_state = "pda-s"
-	icon_state_unpowered = "pda-s"
-
-/obj/item/modular_computer/pda/forensics
-	icon_state = "pda-s"
-	icon_state_unpowered = "pda-s"
-
-/obj/item/modular_computer/pda/science
-	icon_state = "pda-nt"
-	icon_state_unpowered = "pda-nt"
-
-/obj/item/modular_computer/pda/heads
-	name = "command PDA"
-	icon_state = "pda-h"
-	icon_state_unpowered = "pda-h"
-
-/obj/item/modular_computer/pda/heads/paperpusher
-	stored_pen = /obj/item/pen/fancy
-
-/obj/item/modular_computer/pda/heads/hop
-	icon_state = "pda-hop"
-	icon_state_unpowered = "pda-hop"
-
-/obj/item/modular_computer/pda/heads/hos
-	icon_state = "pda-hos"
-	icon_state_unpowered = "pda-hos"
-
-/obj/item/modular_computer/pda/heads/ce
-	icon_state = "pda-ce"
-	icon_state_unpowered = "pda-ce"
-
-/obj/item/modular_computer/pda/heads/cmo
-	icon_state = "pda-cmo"
-	icon_state_unpowered = "pda-cmo"
-
-/obj/item/modular_computer/pda/heads/rd
-	icon_state = "pda-rd"
-	icon_state_unpowered = "pda-rd"
-
-/obj/item/modular_computer/pda/captain
-	icon_state = "pda-c"
-	icon_state_unpowered = "pda-c"
-
-/obj/item/modular_computer/pda/ert
-	icon_state = "pda-h"
-	icon_state_unpowered = "pda-h"
-
-/obj/item/modular_computer/pda/cargo
-	icon_state = "pda-sup"
-	icon_state_unpowered = "pda-sup"
-
-/obj/item/modular_computer/pda/mining
-	icon_state = "pda-nt"
-	icon_state_unpowered = "pda-nt"
-
-/obj/item/modular_computer/pda/syndicate
-	icon_state = "pda-syn"
-	icon_state_unpowered = "pda-syn"
-
-/obj/item/modular_computer/pda/roboticist
-	icon_state = "pda-robot"
-	icon_state_unpowered = "pda-robot"
