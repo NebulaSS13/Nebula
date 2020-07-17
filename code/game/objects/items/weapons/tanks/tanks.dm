@@ -1,5 +1,22 @@
 #define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
 
+var/tank_bomb_severity = 1
+#define TANK_BOMB_DVSTN_FACTOR (0.15 * global.tank_bomb_severity)
+#define TANK_BOMB_HEAVY_FACTOR (0.35 * global.tank_bomb_severity)
+#define TANK_BOMB_LIGHT_FACTOR (0.80 * global.tank_bomb_severity)
+#define TANK_BOMB_FLASH_FACTOR (1.25 * global.tank_bomb_severity)
+#define MAX_TANK_BOMB_SEVERITY 20
+
+/client/proc/verb_adjust_tank_bomb_severity()
+	set name = "Adjust Tank Bomb Severity"
+	set category = "Debug"
+
+	if(check_rights(R_DEBUG))
+		var/next_input = input("Enter a new bomb severity between 1 and [MAX_TANK_BOMB_SEVERITY].", "Tank Bomb Severity", global.tank_bomb_severity) as num|null
+		if(isnum(next_input))
+			global.tank_bomb_severity = Clamp(next_input, 0, MAX_TANK_BOMB_SEVERITY)
+			log_and_message_admins("[key_name_admin(mob)] has set the tank bomb severity value to [global.tank_bomb_severity].", mob)
+
 var/list/global/tank_gauge_cache = list()
 
 /obj/item/tank
@@ -410,10 +427,10 @@ var/list/global/tank_gauge_cache = list()
 			T.assume_air(air_contents)
 			explosion(
 				get_turf(loc),
-				round(min(BOMBCAP_DVSTN_RADIUS, ((mult)*strength)*0.15)),
-				round(min(BOMBCAP_HEAVY_RADIUS, ((mult)*strength)*0.35)),
-				round(min(BOMBCAP_LIGHT_RADIUS, ((mult)*strength)*0.80)),
-				round(min(BOMBCAP_FLASH_RADIUS, ((mult)*strength)*1.20)),
+				round(min(BOMBCAP_DVSTN_RADIUS, ((mult) * strength) * TANK_BOMB_DVSTN_FACTOR)),
+				round(min(BOMBCAP_HEAVY_RADIUS, ((mult) * strength) * TANK_BOMB_HEAVY_FACTOR)),
+				round(min(BOMBCAP_LIGHT_RADIUS, ((mult) * strength) * TANK_BOMB_LIGHT_FACTOR)),
+				round(min(BOMBCAP_FLASH_RADIUS, ((mult) * strength) * TANK_BOMB_FLASH_FACTOR)),
 				)
 
 			var/num_fragments = round(rand(8,10) * sqrt(strength * mult))
@@ -592,3 +609,8 @@ var/list/global/tank_gauge_cache = list()
 	name = "large metal fragment"
 	damage = 17
 
+#undef TANK_BOMB_DVSTN_FACTOR
+#undef TANK_BOMB_HEAVY_FACTOR
+#undef TANK_BOMB_LIGHT_FACTOR
+#undef TANK_BOMB_FLASH_FACTOR
+#undef MAX_TANK_BOMB_SEVERITY

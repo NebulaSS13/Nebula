@@ -11,8 +11,6 @@
 	var/toggle = 1
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
-/obj/item/transfer_valve/proc/process_activation(var/obj/item/D)
-
 /obj/item/transfer_valve/IsAssemblyHolder()
 	return 1
 
@@ -122,7 +120,7 @@
 			attached_device.attack_self(usr)
 	return 1 // Returning 1 sends an update to attached UIs
 
-/obj/item/transfer_valve/process_activation(var/obj/item/D)
+/obj/item/transfer_valve/proc/process_activation(var/obj/item/D)
 	if(toggle)
 		toggle = 0
 		toggle_valve()
