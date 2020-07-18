@@ -106,7 +106,6 @@
 	desc = "Perfect for winter in Siberia, da?"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/ushanka.dmi'
-	on_mob_icon = 'icons/clothing/head/ushanka.dmi'
 	flags_inv = HIDEEARS|BLOCKHEADHAIR
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -139,7 +138,6 @@
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/pumpkin.dmi'
-	on_mob_icon = 'icons/clothing/head/pumpkin.dmi'
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	brightness_on = 0.2
@@ -154,7 +152,6 @@
 	desc = "A pair of kitty ears. Meow!"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/cat.dmi'
-	on_mob_icon = 'icons/clothing/head/cat.dmi'
 	icon_state = "kitty"
 	body_parts_covered = 0
 	siemens_coefficient = 1.5
@@ -164,6 +161,5 @@
 	desc = "You can hear the distant sounds of rhythmic electronica."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/richard.dmi'
-	on_mob_icon = 'icons/clothing/head/richard.dmi'
 	body_parts_covered = HEAD|FACE
 	flags_inv = BLOCKHAIR

@@ -2,7 +2,6 @@
 	name = "head"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/softcap.dmi'
-	on_mob_icon = 'icons/clothing/head/softcap.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL

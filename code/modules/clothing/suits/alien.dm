@@ -25,7 +25,6 @@
 	desc = "A scarf of coarse fabric. Seems to have ear-holes."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/headscarf.dmi'
-	on_mob_icon = 'icons/clothing/head/headscarf.dmi'
 	body_parts_covered = HEAD|FACE
 
 /obj/item/clothing/accessory/shouldercape

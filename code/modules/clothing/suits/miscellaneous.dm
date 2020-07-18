@@ -455,7 +455,6 @@
 	desc = "Ho ho ho. Merrry X-mas!"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/santa.dmi'
-	on_mob_icon = 'icons/clothing/head/santa.dmi'
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE

@@ -7,8 +7,6 @@
 	desc = "A helmet with 'PRIVATE SECURITY' printed on the back in cyan lettering."
 	icon_state = ICON_STATE_WORLD
 	icon = 'mods/corporate/icons/clothing/head/pcrc.dmi'
-	on_mob_icon = 'mods/corporate/icons/clothing/head/pcrc.dmi'
-
 /obj/item/clothing/head/helmet/corp/nt/guard
 	starting_accessories = list(/obj/item/clothing/accessory/armor/helmcover/corp)
 
@@ -17,4 +15,3 @@
 	desc = "A corporate pilot's helmet for operating the cockpit in style for a hefty paycheck."
 	icon_state = ICON_STATE_WORLD
 	icon = 'mods/corporate/icons/clothing/head/corp_pilot.dmi'
-	on_mob_icon = 'mods/corporate/icons/clothing/head/corp_pilot.dmi'
