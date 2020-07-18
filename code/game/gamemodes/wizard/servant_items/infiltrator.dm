@@ -42,8 +42,6 @@
 	desc = "This dainty, frilled thing is apparently meant to go on your head."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/inf_hat.dmi'
-	on_mob_icon = 'icons/clothing/head/inf_hat.dmi'
-
 /obj/item/clothing/suit/infilsuit/fem
 	name = "maid's uniform"
 	desc = "The uniform of someone you'd expect to see dusting off the Antique Gun's display case."

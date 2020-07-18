@@ -2,30 +2,22 @@
 	name = "\improper CentComm. hat"
 	desc = "It's good to be emperor."
 	icon = 'icons/clothing/head/centcom.dmi'
-	on_mob_icon = 'icons/clothing/head/centcom.dmi'
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
 /obj/item/clothing/head/hairflower
 	name = "hair flower pin"
 	icon = 'icons/clothing/head/hairflower/red.dmi'
-	on_mob_icon = 'icons/clothing/head/hairflower/red.dmi'
 	desc = "Smells nice."
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
 
 /obj/item/clothing/head/hairflower/blue
 	icon = 'icons/clothing/head/hairflower/pink.dmi'
-	on_mob_icon = 'icons/clothing/head/hairflower/pink.dmi'
-
 /obj/item/clothing/head/hairflower/pink
 	icon = 'icons/clothing/head/hairflower/pink.dmi'
-	on_mob_icon = 'icons/clothing/head/hairflower/pink.dmi'
-
 /obj/item/clothing/head/hairflower/yellow
 	icon = 'icons/clothing/head/hairflower/yellow.dmi'
-	on_mob_icon = 'icons/clothing/head/hairflower/yellow.dmi'
-
 /obj/item/clothing/head/hairflower/bow
 	name = "hair bow"
 	desc = "A ribbon tied into a bow with a clip on the back to attach to hair."
@@ -35,8 +27,6 @@
 	name = "powdered wig"
 	desc = "A powdered wig."
 	icon = 'icons/clothing/head/powderd_wig.dmi'
-	on_mob_icon = 'icons/clothing/head/powderd_wig.dmi'
-
 /obj/item/clothing/head/that
 	name = "top-hat"
 	desc = "It's an amish looking hat."
@@ -47,7 +37,6 @@
 /obj/item/clothing/head/redcoat
 	name = "redcoat's hat"
 	icon = 'icons/clothing/head/redcoat.dmi'
-	on_mob_icon = 'icons/clothing/head/redcoat.dmi'
 	desc = "<i>'I guess it's a redhead.'</i>"
 	body_parts_covered = 0
 
@@ -55,7 +44,6 @@
 	name = "plague doctor's hat"
 	desc = "These were once used by Plague doctors. They're pretty much useless."
 	icon = 'icons/clothing/head/plague.dmi'
-	on_mob_icon = 'icons/clothing/head/plague.dmi'
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
@@ -64,7 +52,6 @@
 	name = "hastur's hood"
 	desc = "It's unspeakably stylish."
 	icon = 'icons/clothing/head/hastur.dmi'
-	on_mob_icon = 'icons/clothing/head/hastur.dmi'
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -102,35 +89,28 @@
 	name = "pirate hat"
 	desc = "Yarr."
 	icon = 'icons/clothing/head/pirate.dmi'
-	on_mob_icon = 'icons/clothing/head/pirate.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/hgpiratecap
 	name = "pirate hat"
 	desc = "Yarr."
 	icon = 'icons/clothing/head/pirate_cap.dmi'
-	on_mob_icon = 'icons/clothing/head/pirate_cap.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/bandana
 	name = "pirate bandana"
 	desc = "Yarr."
 	icon = 'icons/clothing/head/bandana/pirate.dmi'
-	on_mob_icon = 'icons/clothing/head/bandana/pirate.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/bandana/green
 	name = "green bandana"
 	desc = "It's a green bandana with some fine nanotech lining."
 	icon = 'icons/clothing/head/bandana/green.dmi'
-	on_mob_icon = 'icons/clothing/head/bandana/green.dmi'
-
 /obj/item/clothing/head/bandana/orange //themij: Taryn Kifer
 	name = "orange bandana"
 	desc = "An orange piece of cloth, worn on the head."
 	icon = 'icons/clothing/head/bandana/orange.dmi'
-	on_mob_icon = 'icons/clothing/head/bandana/orange.dmi'
-
 /obj/item/clothing/head/bowler
 	name = "bowler-hat"
 	desc = "Gentleman, elite aboard!"
@@ -178,7 +158,6 @@
 	name = "chicken suit head"
 	desc = "Bkaw!"
 	icon = 'icons/clothing/head/chicken.dmi'
-	on_mob_icon = 'icons/clothing/head/chicken.dmi'
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.7
 	body_parts_covered = HEAD|FACE|EYES
@@ -187,7 +166,6 @@
 	name = "bear pelt hat"
 	desc = "Fuzzy."
 	icon = 'icons/clothing/head/bearpelt.dmi'
-	on_mob_icon = 'icons/clothing/head/bearpelt.dmi'
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.7
 
@@ -196,7 +174,6 @@
 	icon_state = "xenos"
 	desc = "A helmet made out of chitinous alien hide."
 	icon = 'icons/clothing/head/xeno.dmi'
-	on_mob_icon = 'icons/clothing/head/xeno.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
@@ -206,7 +183,6 @@
 	name = "natural philosopher's wig"
 	desc = "A stylish monstrosity unearthed from Earth's Renaissance period. With this most distinguish'd wig, you'll be ready for your next soiree!"
 	icon = 'icons/clothing/head/huge_wig.dmi'
-	on_mob_icon = 'icons/clothing/head/huge_wig.dmi'
 	flags_inv = BLOCKHAIR
 	body_parts_covered = 0
 

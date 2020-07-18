@@ -52,7 +52,6 @@
 	desc = "Use in case of bomb."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/bombsuit.dmi'
-	on_mob_icon = 'icons/clothing/head/bombsuit.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH, 
 		bullet = ARMOR_BALLISTIC_MINOR, 
@@ -91,8 +90,6 @@
 	icon_state = "bombsuitsec"
 	body_parts_covered = HEAD
 	icon = 'icons/clothing/head/bombsuit_olive.dmi'
-	on_mob_icon = 'icons/clothing/head/bombsuit_olive.dmi'
-
 /obj/item/clothing/suit/bomb_suit/security
 	icon_state = "bombsuitsec"
 	allowed = list(/obj/item/gun/energy,/obj/item/baton,/obj/item/handcuffs)
@@ -106,7 +103,6 @@
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/radsuit.dmi'
-	on_mob_icon = 'icons/clothing/head/radsuit.dmi'
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	armor = list(
@@ -146,7 +142,6 @@
 	desc = "A hood that protects the head from chemical comtaminants."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/chem_hood.dmi'
-	on_mob_icon = 'icons/clothing/head/chem_hood.dmi'
 	permeability_coefficient = 0
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT, 

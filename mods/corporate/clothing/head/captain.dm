@@ -1,7 +1,6 @@
 /obj/item/clothing/head/helmet/space/capspace
 	name = "space helmet"
 	icon = 'mods/corporate/icons/clothing/head/capspace.dmi'
-	on_mob_icon = 'mods/corporate/icons/clothing/head/capspace.dmi'
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Only for the most fashionable of military figureheads."
 	item_flags = 0
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE

@@ -10,13 +10,10 @@
 	name = "ultra rare hat"
 	desc = "an ultra rare hat. It commands a certain respect."
 	icon = 'icons/clothing/head/pete.dmi'
-	on_mob_icon = 'icons/clothing/head/pete.dmi'
-
 /obj/item/clothing/head/collectable/xenom
 	name = "collectable alien monster helmet!"
 	desc = "Hiss hiss hiss!"
 	icon = 'icons/clothing/head/xeno.dmi'
-	on_mob_icon = 'icons/clothing/head/xeno.dmi'
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/collectable/chef
@@ -28,7 +25,6 @@
 	name = "collectable paper hat"
 	desc = "What looks like an ordinary paper hat, is actually a rare and valuable collector's edition paper hat. Keep away from water, fire and Librarians."
 	icon = 'icons/clothing/head/paper.dmi'
-	on_mob_icon = 'icons/clothing/head/paper.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/tophat
@@ -41,14 +37,12 @@
 	name = "collectable captain's hat"
 	desc = "A Collectable Hat that'll make you look just like a real comdom!"
 	icon = 'icons/clothing/head/captain.dmi'
-	on_mob_icon = 'icons/clothing/head/captain.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/police
 	name = "collectable police officer's hat"
 	desc = "A Collectable Police Officer's Hat. This hat emphasizes that you are THE LAW."
 	icon = 'icons/clothing/head/warden.dmi'
-	on_mob_icon = 'icons/clothing/head/warden.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/beret
@@ -69,20 +63,16 @@
 	name = "collectable slime hat"
 	desc = "Just like a real Brain Slug!"
 	icon = 'icons/clothing/head/brainslime.dmi'
-	on_mob_icon = 'icons/clothing/head/brainslime.dmi'
-
 /obj/item/clothing/head/collectable/pirate
 	name = "collectable pirate hat"
 	desc = "You'd make a great Dread Syndie Roberts!"
 	icon = 'icons/clothing/head/pirate.dmi'
-	on_mob_icon = 'icons/clothing/head/pirate.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/kitty
 	name = "collectable kitty ears"
 	desc = "The fur feels.....a bit too realistic."
 	icon = 'icons/clothing/head/cat.dmi'
-	on_mob_icon = 'icons/clothing/head/cat.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/rabbitears
@@ -107,7 +97,6 @@
 	name = "collectable HoS hat"
 	desc = "Now you can beat prisoners, set silly sentences and arrest for no reason too!"
 	icon = 'icons/clothing/head/hos.dmi'
-	on_mob_icon = 'icons/clothing/head/hos.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/thunderdome

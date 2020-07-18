@@ -24,7 +24,6 @@
 	desc = "It's a special helmet issued to the Warden of a securiy force."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/warden.dmi'
-	on_mob_icon = 'icons/clothing/head/warden.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/under/rank/security
@@ -152,7 +151,6 @@
 	desc = "The hat of the Head of Security. For showing the officers who's in charge."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/hos.dmi'
-	on_mob_icon = 'icons/clothing/head/hos.dmi'
 	body_parts_covered = 0
 	siemens_coefficient = 0.8
 
