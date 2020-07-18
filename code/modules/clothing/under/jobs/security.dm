@@ -107,7 +107,6 @@
 	desc = "A brown fedora - either the cornerstone of a detective's style or a poor attempt at looking cool, depending on the person wearing it."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/detective.dmi'
-	on_mob_icon = 'icons/clothing/head/detective.dmi'
 	color = "#725443"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 

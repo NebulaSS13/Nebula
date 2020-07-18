@@ -10,7 +10,6 @@
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 	color = COLOR_GRAY20
 	icon = 'icons/clothing/hands/gloves_thick.dmi'
-	on_mob_icon = 'icons/clothing/hands/gloves_thick.dmi'
 	icon_state = ICON_STATE_WORLD
 	force = 5
 	sprite_sheets = null
@@ -59,7 +58,6 @@
 	name = "gauntlets"
 	desc = "Made to be thrown at scoundrels. Pretty heavy."
 	icon = 'icons/clothing/hands/gauntlets.dmi'
-	on_mob_icon = 'icons/clothing/hands/gauntlets.dmi'
 	material = /decl/material/solid/metal/steel
 	material_armor_multiplier = 1
 	applies_material_colour = TRUE

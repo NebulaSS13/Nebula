@@ -1,7 +1,6 @@
 /obj/item/gun/magnetic
 	name = "improvised coilgun"
 	desc = "A coilgun hastily thrown together out of a basic frame and advanced power storage components. Is it safe for it to be duct-taped together like that?"
-	on_mob_icon = 'icons/obj/guns/coilgun.dmi'
 	icon = 'icons/obj/guns/coilgun.dmi'
 	icon_state = ICON_STATE_WORLD
 	one_hand_penalty = 5

@@ -3,7 +3,6 @@
 	name = "void helmet"
 	desc = "A high-tech dark red space suit helmet. Used for AI satellite maintenance."
 	icon = 'icons/clothing/spacesuit/void/nasa/helmet.dmi'
-	on_mob_icon = 'icons/clothing/spacesuit/void/nasa/helmet.dmi'
 	icon_state = ICON_STATE_WORLD
 
 	heat_protection = HEAD
@@ -24,7 +23,6 @@
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
 	icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
-	on_mob_icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
 	icon_state = ICON_STATE_WORLD
 	item_state_slots = null
 	w_class = ITEM_SIZE_HUGE//bulky item

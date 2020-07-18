@@ -129,7 +129,7 @@
 
 /obj/item/sword/blazing
 	name = "blazing blade"
-	on_mob_icon = 'icons/obj/items/weapon/swords/flaming.dmi'
+	icon = 'icons/obj/items/weapon/swords/flaming.dmi'
 	damtype = BURN
 	applies_material_colour = FALSE
 	applies_material_name = FALSE

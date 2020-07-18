@@ -1,7 +1,6 @@
 /obj/item/gun/launcher/grenade
 	name = "grenade launcher"
 	desc = "A bulky pump-action grenade launcher. Holds up to 6 grenades in a revolving magazine."
-	on_mob_icon = 'icons/obj/guns/launcher/grenade.dmi'
 	icon = 'icons/obj/guns/launcher/grenade.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':2,'materials':3}"

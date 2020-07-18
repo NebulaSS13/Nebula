@@ -1,7 +1,6 @@
 /obj/item/gun/projectile/automatic/smg
 	name = "submachine gun"
 	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced for paramilitary and private use."
-	on_mob_icon = 'icons/obj/guns/sec_smg.dmi'
 	icon = 'icons/obj/guns/sec_smg.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
@@ -41,7 +40,6 @@
 /obj/item/gun/projectile/automatic/assault_rifle
 	name = "assault rifle"
 	desc = "The Z8 Bulldog is an older model bullpup carbine. Makes you feel like a space marine when you hold it."
-	on_mob_icon = 'icons/obj/guns/bullpup_rifle.dmi'
 	icon = 'icons/obj/guns/bullpup_rifle.dmi'
 	w_class = ITEM_SIZE_HUGE
 	force = 10

@@ -2,7 +2,6 @@
 	name = "electrolaser"
 	desc = "The Mk30 NL is a small, low capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
 	icon = 'icons/obj/guns/taser.dmi'
-	on_mob_icon = 'icons/obj/guns/taser.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
 	item_state = null	//so the human update icon uses the icon_state instead.
@@ -29,7 +28,6 @@
 /obj/item/gun/energy/plasmastun
 	name = "plasma pulse projector"
 	desc = "The Mars Military Industries MA21 Selkie is a weapon that uses a laser pulse to ionise the local atmosphere, creating a disorienting pulse of plasma and deafening shockwave as the wave expands."
-	on_mob_icon = 'icons/obj/guns/plasma_stun.dmi'
 	icon = 'icons/obj/guns/plasma_stun.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':2,'materials':2,'powerstorage':3}"
@@ -42,7 +40,6 @@
 /obj/item/gun/energy/confuseray
 	name = "disorientator"
 	desc = "The W-T Mk. 4 Disorientator is a small, low capacity, and short-ranged energy projector intended for personal defense with minimal risk of permanent damage or cross-fire."
-	on_mob_icon = 'icons/obj/guns/confuseray.dmi'
 	icon = 'icons/obj/guns/confuseray.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"

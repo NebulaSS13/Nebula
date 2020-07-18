@@ -2,7 +2,6 @@
 	name = "wrist computer"
 	desc = "A wrist-mounted modular personal computer. Very stylish."
 	icon = 'mods/corporate/icons/obj/wristcomp.dmi'
-	on_mob_icon = 'mods/corporate/icons/obj/wristcomp.dmi'
 	screen_icon = 'mods/corporate/icons/obj/wristcomp_screens.dmi'
 
 	slot_flags = SLOT_ID | SLOT_BELT

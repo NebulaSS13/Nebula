@@ -156,7 +156,7 @@
 	if(!bodytype_restricted)
 		return
 	bodytype_restricted = list(target_bodytype)
-	if(!on_mob_icon)
+	if(!use_single_icon)
 		if (sprite_sheets_obj && (target_bodytype in sprite_sheets_obj))
 			icon = sprite_sheets_obj[target_bodytype]
 		else

@@ -1,7 +1,6 @@
 /obj/item/gun/projectile/heavysniper
 	name = "anti-materiel rifle"
 	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to be used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease."
-	on_mob_icon = 'icons/obj/guns/heavysniper.dmi'
 	icon = 'icons/obj/guns/heavysniper.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE

@@ -1,7 +1,6 @@
 /obj/item/gun/projectile/dartgun
 	name = "dart gun"
 	desc = "The Artemis is a gas-powered dart gun capable of delivering chemical cocktails swiftly across short distances."
-	on_mob_icon = 'icons/obj/guns/dartgun.dmi'
 	icon = 'icons/obj/guns/dartgun.dmi'
 	icon_state = ICON_STATE_WORLD
 

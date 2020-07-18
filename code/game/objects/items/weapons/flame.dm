@@ -32,7 +32,6 @@
 	name = "match"
 	desc = "A simple match stick, used for lighting fine smokables."
 	icon = 'icons/obj/items/storage/matches/match.dmi'
-	on_mob_icon = 'icons/obj/items/storage/matches/match.dmi'
 	icon_state = ICON_STATE_WORLD
 	var/burnt = 0
 	var/smoketime = 5

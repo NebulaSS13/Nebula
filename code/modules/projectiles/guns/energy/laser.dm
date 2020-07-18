@@ -2,7 +2,6 @@
 	name = "laser carbine"
 	desc = "A G40E carbine, designed to kill with concentrated energy blasts."
 	icon = 'icons/obj/guns/laser_carbine.dmi'
-	on_mob_icon = 'icons/obj/guns/laser_carbine.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
@@ -53,7 +52,6 @@
 
 /obj/item/gun/energy/captain
 	name = "antique laser gun"
-	on_mob_icon = 'icons/obj/guns/caplaser.dmi'
 	icon = 'icons/obj/guns/caplaser.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
@@ -70,7 +68,6 @@
 	name = "laser cannon"
 	desc = "With the laser cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
-	on_mob_icon = 'icons/obj/guns/laser_cannon.dmi'
 	icon = 'icons/obj/guns/laser_cannon.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':4,'materials':3,'powerstorage':3}"

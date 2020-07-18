@@ -3,7 +3,6 @@
 	desc = "Strange-looking hat-wear that most certainly belongs to a real magic user."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/wizard/wizard.dmi'
-	on_mob_icon = 'icons/clothing/head/wizard/wizard.dmi'
 	//Not given any special protective value since the magic robes are full-body protection --NEO
 	siemens_coefficient = 0.8
 	body_parts_covered = 0
@@ -13,28 +12,24 @@
 	name = "red wizard hat"
 	desc = "Strange-looking, red, hat-wear that most certainly belongs to a real magic user."
 	icon = 'icons/clothing/head/wizard/red.dmi'
-	on_mob_icon = 'icons/clothing/head/wizard/red.dmi'
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/head/wizard/fake
 	name = "wizard hat"
 	desc = "It has WIZZARD written across it in sequins. Comes with a cool beard."
 	icon = 'icons/clothing/head/wizard/fake.dmi'
-	on_mob_icon = 'icons/clothing/head/wizard/fake.dmi'
 	body_parts_covered = HEAD|FACE
 
 /obj/item/clothing/head/wizard/marisa
 	name = "Witch Hat"
 	desc = "Strange-looking hat-wear, makes you want to cast fireballs."
 	icon = 'icons/clothing/head/wizard/marisa.dmi'
-	on_mob_icon = 'icons/clothing/head/wizard/marisa.dmi'
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/head/wizard/magus
 	name = "Magus Helm"
 	desc = "A mysterious helmet that hums with an unearthly power."
 	icon = 'icons/clothing/head/wizard/magus.dmi'
-	on_mob_icon = 'icons/clothing/head/wizard/magus.dmi'
 	siemens_coefficient = 0.8
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -42,7 +37,6 @@
 	name = "Gentlemans Cap"
 	desc = "A checkered gray flat cap woven together with the rarest of threads."
 	icon = 'icons/clothing/head/flatcap.dmi'
-	on_mob_icon = 'icons/clothing/head/flatcap.dmi'
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/suit/wizrobe

@@ -4,7 +4,6 @@
 	name = "plant clippers"
 	desc = "A tool used to take samples from plants."
 	icon = 'icons/obj/items/tool/clippers.dmi'
-	on_mob_icon = 'icons/obj/items/tool/clippers.dmi'
 
 /obj/item/wirecutters/clippers/Initialize(ml, material_key)
 	. = ..()

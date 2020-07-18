@@ -2,7 +2,6 @@
 	name = "wrench"
 	desc = "A good, durable combination wrench, with self-adjusting, universal open- and ring-end mechanisms to match a wide variety of nuts and bolts."
 	icon = 'icons/obj//items/tool/wrench.dmi'
-	on_mob_icon = 'icons/obj//items/tool/wrench.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BELT
 	material_force_multiplier = 0.2

@@ -3,7 +3,6 @@
 	desc = "It's a peaked cap in a tasteless yellow color."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/softcap.dmi'
-	on_mob_icon = 'icons/clothing/head/softcap.dmi'
 	color = COLOR_YELLOW_GRAY
 	var/flipped = 0
 	siemens_coefficient = 0.9
@@ -78,7 +77,6 @@
 	name = "rainbow cap"
 	desc = "It's a peaked cap in a bright rainbow of colors."
 	icon = 'icons/clothing/head/softcap_rainbow.dmi'
-	on_mob_icon = 'icons/clothing/head/softcap_rainbow.dmi'
 	color = null
 
 /obj/item/clothing/head/soft/sec

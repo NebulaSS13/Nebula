@@ -97,7 +97,7 @@
 		H.update_inv_head()
 
 /obj/item/clothing/head/proc/add_light_overlay()
-	if(on_mob_icon)
+	if(use_single_icon)
 		var/cache_key = "[icon]-[get_world_inventory_state()]_icon"
 		if(!light_overlay_cache[cache_key])
 			light_overlay_cache[cache_key] = image(icon, "[get_world_inventory_state()]_light")

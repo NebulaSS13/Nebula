@@ -852,7 +852,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
 
-	if(on_mob_icon)
+	if(use_single_icon)
 		return experimental_mob_overlay(user_mob, slot)
 
 	var/bodytype = "Default"

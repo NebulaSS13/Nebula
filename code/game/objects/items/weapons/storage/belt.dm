@@ -29,7 +29,7 @@
 	overlays.Cut()
 	if(overlay_flags & BELT_OVERLAY_ITEMS)
 		for(var/obj/item/I in contents)
-			if(I.on_mob_icon)
+			if(I.use_single_icon)
 				overlays += I.get_on_belt_overlay()
 			else
 				overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
@@ -39,7 +39,7 @@
 	if(slot == slot_belt_str && contents.len)
 		var/list/ret_overlays = list()
 		for(var/obj/item/I in contents)
-			if(I.on_mob_icon)
+			if(I.use_single_icon)
 				ret_overlays += I.get_mob_overlay(user_mob, slot)
 			else
 				var/use_state = (I.item_state ? I.item_state : I.icon_state)

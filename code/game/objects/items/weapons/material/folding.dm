@@ -4,7 +4,6 @@
 	name = "pocketknife"
 	desc = "A small folding knife."
 	icon = 'icons/obj/items/weapon/knives/folding/basic.dmi'
-	on_mob_icon = 'icons/obj/items/weapon/knives/folding/basic.dmi'
 	material_force_multiplier = 0.2
 	applies_material_name = FALSE
 	unbreakable = TRUE
@@ -64,13 +63,13 @@
 /obj/item/knife/folding/wood
 	name = "peasant knife"
 	desc = "A small folding knife with a wooden handle and carbon steel blade. Knives like this have been used on Earth for centuries."
-	on_mob_icon = 'icons/obj/items/weapon/knives/folding/peasant.dmi'
+	icon = 'icons/obj/items/weapon/knives/folding/peasant.dmi'
 	valid_handle_colors = list(WOOD_COLOR_GENERIC, WOOD_COLOR_RICH, WOOD_COLOR_BLACK, WOOD_COLOR_CHOCOLATE, WOOD_COLOR_PALE)
 
 /obj/item/knife/folding/tacticool
 	name = "folding knife"
 	desc = "A small folding knife with a polymer handle and a blackened steel blade. These are typically marketed for self defense purposes."
-	on_mob_icon = 'icons/obj/items/weapon/knives/folding/tacticool.dmi'
+	icon = 'icons/obj/items/weapon/knives/folding/tacticool.dmi'
 	valid_handle_colors = list("#0f0f2a", "#2a0f0f", "#0f2a0f", COLOR_GRAY20, COLOR_DARK_GUNMETAL)
 
 /obj/item/knife/folding/combat //master obj
@@ -83,9 +82,9 @@
 /obj/item/knife/folding/combat/balisong
 	name = "butterfly knife"
 	desc = "A basic metal blade concealed in a lightweight plasteel grip. Small enough when folded to fit in a pocket."
-	on_mob_icon = 'icons/obj/items/weapon/knives/folding/butterfly.dmi'
+	icon = 'icons/obj/items/weapon/knives/folding/butterfly.dmi'
 
 /obj/item/knife/folding/combat/switchblade
 	name = "switchblade"
 	desc = "A classic switchblade with gold engraving. Just holding it makes you feel like a gangster."
-	on_mob_icon = 'icons/obj/items/weapon/knives/folding/switchblade.dmi'
+	icon = 'icons/obj/items/weapon/knives/folding/switchblade.dmi'

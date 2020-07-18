@@ -2,8 +2,7 @@
 	name = "crowbar"
 	desc = "A heavy crowbar, good and solid in your hand."
 	icon = 'icons/obj/items/tool/crowbar.dmi'
-	on_mob_icon = 'icons/obj/items/tool/crowbar.dmi'
-	icon_state = "world1"
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BELT
 	material_force_multiplier = 0.25
 	attack_cooldown = 2*DEFAULT_WEAPON_COOLDOWN

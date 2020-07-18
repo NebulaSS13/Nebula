@@ -2,7 +2,6 @@
 /obj/item/gun/energy/sniperrifle
 	name = "marksman energy rifle"
 	desc = "The HI DMR 9E is an older design. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
-	on_mob_icon = 'icons/obj/guns/laser_sniper.dmi'
 	icon = 'icons/obj/guns/laser_sniper.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':6,'materials':5,'powerstorage':4}"

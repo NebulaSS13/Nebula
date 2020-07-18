@@ -1,10 +1,10 @@
 /obj/item/ammo_magazine/speedloader
+	icon = 'icons/obj/ammo/speedloader.dmi'
 	icon_state = ICON_STATE_WORLD
 	caliber = CALIBER_PISTOL_MAGNUM
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	material = /decl/material/solid/metal/steel
 	max_ammo = 6
-	on_mob_icon = 'icons/obj/ammo/speedloader.dmi'
 	var/list/global/bullet_offsets = list(
 		list("x" = 0, "y" = 0),
 		list("x" = -2, "y" = -3),

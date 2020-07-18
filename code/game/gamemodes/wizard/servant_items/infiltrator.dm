@@ -4,7 +4,6 @@
 	color = COLOR_SILVER
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/detective.dmi'
-	on_mob_icon = 'icons/clothing/head/detective.dmi'
 	markings_icon = "band"
 	markings_color = COLOR_DARK_GRAY
 	armor = list(

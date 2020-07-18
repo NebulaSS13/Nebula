@@ -10,7 +10,6 @@
 	name = "hardsuit control module"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/spacesuit/rig/eva.dmi'
-	on_mob_icon = 'icons/clothing/spacesuit/rig/eva.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
@@ -170,7 +169,7 @@
 		piece.SetName("[suit_type] [initial(piece.name)]")
 		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon = icon
-		piece.on_mob_icon = on_mob_icon
+		piece.use_single_icon = use_single_icon
 		piece.sprite_sheets = sprite_sheets
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature

@@ -1,7 +1,7 @@
 /obj/item/gun/energy/gun/nuclear
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
-	on_mob_icon = 'icons/obj/guns/adv_egun.dmi'
+	icon = 'icons/obj/guns/adv_egun.dmi'
 	origin_tech = "{'combat':3,'materials':5,'powerstorage':3}"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_LARGE

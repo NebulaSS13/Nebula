@@ -12,7 +12,7 @@
 /obj/item/knife/folding/swiss
 	name = "combi-knife"
 	desc = "A small, colourable, multi-purpose folding knife."
-	on_mob_icon = 'icons/obj/items/weapon/knives/folding/swiss.dmi'
+	icon = 'icons/obj/items/weapon/knives/folding/swiss.dmi'
 	valid_handle_colors = null
 	max_force = 5
 	material = /decl/material/solid/metal/steel

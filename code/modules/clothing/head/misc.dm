@@ -30,7 +30,6 @@
 	name = "hair bow"
 	desc = "A ribbon tied into a bow with a clip on the back to attach to hair."
 	icon = 'icons/clothing/head/bow.dmi'
-	on_mob_icon = 'icons/clothing/head/bow.dmi'
 
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
@@ -42,7 +41,6 @@
 	name = "top-hat"
 	desc = "It's an amish looking hat."
 	icon = 'icons/clothing/head/tophat.dmi'
-	on_mob_icon = 'icons/clothing/head/tophat.dmi'
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
@@ -74,7 +72,6 @@
 	name = "nurse's hat"
 	desc = "It allows quick identification of trained medical personnel."
 	icon = 'icons/clothing/head/nurse.dmi'
-	on_mob_icon = 'icons/clothing/head/nurse.dmi'
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
@@ -82,7 +79,6 @@
 	name = "cardborg helmet"
 	desc = "A helmet made out of a box."
 	icon = 'icons/clothing/head/cardborg.dmi'
-	on_mob_icon = 'icons/clothing/head/cardborg.dmi'
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -94,14 +90,12 @@
 	name = "rabbit ears"
 	desc = "Wearing these makes you looks useless, and only good for your sex appeal."
 	icon = 'icons/clothing/head/bunny.dmi'
-	on_mob_icon = 'icons/clothing/head/bunny.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/flatcap
 	name = "flat cap"
 	desc = "A working man's cap."
 	icon = 'icons/clothing/head/flatcap.dmi'
-	on_mob_icon = 'icons/clothing/head/flatcap.dmi'
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/head/pirate
@@ -142,7 +136,6 @@
 	desc = "Gentleman, elite aboard!"
 	body_parts_covered = 0
 	icon = 'icons/clothing/head/bowler.dmi'
-	on_mob_icon = 'icons/clothing/head/bowler.dmi'
 
 //stylish bs12 hats
 
@@ -151,31 +144,26 @@
 	icon_state = "beaver_hat"
 	desc = "Soft felt makes this hat both comfortable and elegant."
 	icon = 'icons/clothing/head/beaver.dmi'
-	on_mob_icon = 'icons/clothing/head/beaver.dmi'
 
 /obj/item/clothing/head/boaterhat
 	name = "boater hat"
 	desc = "The ultimate in summer fashion."
 	icon = 'icons/clothing/head/boater.dmi'
-	on_mob_icon = 'icons/clothing/head/boater.dmi'
 
 /obj/item/clothing/head/fedora
 	name = "fedora"
 	desc = "A sharp, stylish hat."
 	icon = 'icons/clothing/head/fedora.dmi'
-	on_mob_icon = 'icons/clothing/head/fedora.dmi'
 
 /obj/item/clothing/head/feathertrilby
 	name = "feather trilby"
 	desc = "A sharp, stylish hat with a feather."
 	icon = 'icons/clothing/head/trilby.dmi'
-	on_mob_icon = 'icons/clothing/head/trilby.dmi'
 
 /obj/item/clothing/head/fez
 	name = "fez"
 	desc = "You should wear a fez. Fezzes are cool."
 	icon = 'icons/clothing/head/fez.dmi'
-	on_mob_icon = 'icons/clothing/head/fez.dmi'
 
 //end bs12 hats
 
@@ -183,7 +171,6 @@
 	name = "witch costume wig"
 	desc = "Eeeee~heheheheheheh!"
 	icon = 'icons/clothing/head/wizard/marisa.dmi'
-	on_mob_icon = 'icons/clothing/head/wizard/marisa.dmi'
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 2.0
 
@@ -227,7 +214,6 @@
 	name = "hijab"
 	desc = "A veil which is wrapped to cover the head and chest."
 	icon = 'icons/clothing/head/hijab.dmi'
-	on_mob_icon = 'icons/clothing/head/hijab.dmi'
 	body_parts_covered = 0
 	flags_inv = BLOCKHAIR
 
@@ -235,14 +221,12 @@
 	name = "kippa"
 	desc = "A small, brimless cap."
 	icon = 'icons/clothing/head/kippa.dmi'
-	on_mob_icon = 'icons/clothing/head/kippa.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/turban
 	name = "turban"
 	desc = "A sturdy cloth, worn around the head."
 	icon = 'icons/clothing/head/turban.dmi'
-	on_mob_icon = 'icons/clothing/head/turban.dmi'
 	body_parts_covered = 0
 	flags_inv = BLOCKHEADHAIR //Shows beards!
 
@@ -250,21 +234,18 @@
 	name = "cowboy hat"
 	desc = "A wide-brimmed hat, in the prevalent style of America's frontier period. By law, you are required to wear this hat while watching True Grit."
 	icon = 'icons/clothing/head/cowboy.dmi'
-	on_mob_icon = 'icons/clothing/head/cowboy.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/taqiyah
 	name = "taqiyah"
 	desc = "A short, rounded skullcap usually worn for religious purposes."
 	icon = 'icons/clothing/head/taqiyah.dmi'
-	on_mob_icon = 'icons/clothing/head/taqiyah.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/rastacap
 	name = "rastacap"
 	desc = "A round, crocheted cap, often worn to tuck hair away or for religious purposes."
 	icon = 'icons/clothing/head/rasta.dmi'
-	on_mob_icon = 'icons/clothing/head/rasta.dmi'
 	body_parts_covered = 0
 	flags_inv = BLOCKHEADHAIR
 
@@ -272,7 +253,6 @@
 	name = "padded cap"
 	desc = "A padded skullcup for those prone to bumping their heads against hard surfaces."
 	icon = 'icons/clothing/head/tank.dmi'
-	on_mob_icon = 'icons/clothing/head/tank.dmi'
 	flags_inv = BLOCKHEADHAIR
 	color = "#5f5f5f"
 	armor = list(
@@ -290,14 +270,12 @@
 	name = "beanie"
 	desc = "A head-hugging brimless winter cap. This one is tight."
 	icon = 'icons/clothing/head/beanie.dmi'
-	on_mob_icon = 'icons/clothing/head/beanie.dmi'
 	body_parts_covered = 0
 
 /obj/item/clothing/head/helmet/facecover
 	name = "face cover"
 	desc = "A helmet made of plastic. It's completely opaque. This will stop the stare."
 	icon = 'icons/clothing/head/facecover.dmi'
-	on_mob_icon = 'icons/clothing/head/facecover.dmi'
 	tint = TINT_BLIND
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES

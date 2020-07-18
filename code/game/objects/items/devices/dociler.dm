@@ -3,9 +3,8 @@
 	desc = "A complex single use recharging injector that spreads a complex neurological serum that makes animals docile and friendly. Somewhat."
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'biotech':5,'materials':2}"
-	on_mob_icon = 'icons/obj/items/device/animal_tagger.dmi'
 	icon = 'icons/obj/items/device/animal_tagger.dmi'
-	icon_state = "world0"
+	icon_state = ICON_STATE_WORLD
 	force = 1
 	var/loaded = 1
 	var/mode = "completely"
@@ -49,8 +48,8 @@
 		L.SetName(name)
 
 	loaded = 0
-	icon_state = "[get_world_inventory_state()]0"
+	icon_state = get_world_inventory_state()
 	spawn(1450)
 		loaded = 1
-		icon_state = "[get_world_inventory_state()]1"
+		icon_state = "[icon_state]-charged"
 		src.visible_message("\The [src] beeps, refilling itself.")

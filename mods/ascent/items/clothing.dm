@@ -56,7 +56,6 @@
 	name = "mantid mag-claws"
 	desc = "A set of powerful gripping claws."
 	icon = 'mods/ascent/icons/magboots/boots.dmi'
-	on_mob_icon = 'mods/ascent/icons/magboots/boots.dmi'
 	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)
 	sprite_sheets = list(
 		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/magboots/boots_gyne.dmi'
