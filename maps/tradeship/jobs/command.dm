@@ -24,9 +24,10 @@
 	minimal_player_age = 14
 	economic_power = 20
 	ideal_character_age = 70
-	guestbanned = 1	
+	guestbanned = 1
 	must_fill = 1
-	not_random_selectable = 1	
+	not_random_selectable = 1
+	forced_spawnpoint = "Captain Compartment"
 
 /datum/job/tradeship_captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -84,12 +85,12 @@
 	minimal_player_age = 14
 	economic_power = 10
 	ideal_character_age = 50
-	guestbanned = 1	
+	guestbanned = 1
 	not_random_selectable = 1
 	access = list(
-		access_security, 
-		access_sec_doors, 
-		access_brig, 
+		access_security,
+		access_sec_doors,
+		access_brig,
 		access_forensics_lockers,
 		access_heads,
 		access_medical,
