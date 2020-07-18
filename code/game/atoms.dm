@@ -66,6 +66,7 @@
 	return
 
 /atom/Destroy()
+	global.is_currently_exploding -= src
 	QDEL_NULL(reagents)
 	. = ..()
 
@@ -311,11 +312,14 @@ its easier to just keep the beam vertical.
 
 /atom/proc/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(TRUE)
-	. = (severity <= 3)
-	if(.)
-		for(var/atom/movable/AM in contents)
-			AM.explosion_act(severity++)
-		try_detonate_reagents(severity)
+	if(!global.is_currently_exploding[src])
+		global.is_currently_exploding[src] = TRUE
+		. = (severity <= 3)
+		if(.)
+			for(var/atom/movable/AM in contents)
+				AM.explosion_act(severity++)
+			try_detonate_reagents(severity)
+		global.is_currently_exploding -= src
 
 /atom/proc/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	return NO_EMAG_ACT

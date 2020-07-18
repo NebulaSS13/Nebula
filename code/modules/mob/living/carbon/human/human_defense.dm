@@ -322,15 +322,13 @@ meteor_act
 			else if(shield_check)
 				return
 
-		if(!zone)
-			visible_message("<span class='notice'>\The [O] misses [src] narrowly!</span>")
+		var/obj/item/organ/external/affecting = (zone && get_organ(zone))
+		if(!affecting)
+			visible_message(SPAN_NOTICE("\The [O] misses \the [src] narrowly!"))
 			return
 
-		var/obj/item/organ/external/affecting = get_organ(zone)
-		var/hit_area = affecting.name
 		var/datum/wound/created_wound
-
-		src.visible_message("<span class='warning'>\The [src] has been hit in the [hit_area] by \the [O].</span>")
+		visible_message(SPAN_DANGER("\The [src] has been hit in \the [affecting.name] by \the [O]."))
 		created_wound = apply_damage(throw_damage, dtype, zone, O.damage_flags(), O, O.armor_penetration)
 
 		if(TT.thrower)

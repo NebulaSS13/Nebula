@@ -206,7 +206,8 @@ var/list/admin_verbs_debug = list(
 	/client/proc/ping_webhook,
 	/client/proc/reload_webhooks,
 	/datum/admins/proc/check_unconverted_single_icon_items,
-	/client/proc/spawn_material
+	/client/proc/spawn_material,
+	/client/proc/verb_adjust_tank_bomb_severity
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
