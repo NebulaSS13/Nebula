@@ -2,9 +2,6 @@
 	channels = list(
 		"Service" = TRUE
 	)
-	languages = list(
-		/decl/language/human/common = TRUE
-	)
 	skills = list(
 		SKILL_LITERACY            = SKILL_ADEPT,
 		SKILL_FINANCE             = SKILL_PROF,

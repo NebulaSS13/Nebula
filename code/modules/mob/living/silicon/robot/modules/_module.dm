@@ -10,7 +10,9 @@
 	var/channels = list()
 	var/networks = list()
 	var/languages = list(
-		/decl/language/human/common = 1
+		/decl/language/human/common = TRUE,
+		/decl/language/legal = TRUE,
+		/decl/language/sign = FALSE
 		)
 	var/sprites = list()
 	var/can_be_pushed = 1
