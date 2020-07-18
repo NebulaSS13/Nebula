@@ -73,7 +73,13 @@
 	name = "mantid gear harness"
 	desc = "A complex tangle of articulated cables and straps."
 	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL, BODYTYPE_SNAKE)
-	icon_state = "ascent_harness"
+	icon_state = ICON_STATE_WORLD
+	icon = 'mods/ascent/icons/harness/alate.dmi'
+	on_mob_use_spritesheets = TRUE
+	sprite_sheets = list(
+		BODYTYPE_MANTID_LARGE = 'mods/ascent/icons/harness/gyne.dmi',
+		BODYTYPE_SNAKE =        'mods/ascent/icons/harness/serpentid.dmi'
+		)
 	body_parts_covered = 0
 	slot_flags = SLOT_OCLOTHING | SLOT_BELT
 	allowed = list(

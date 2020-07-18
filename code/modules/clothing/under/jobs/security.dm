@@ -22,7 +22,6 @@
 /obj/item/clothing/head/warden
 	name = "warden's hat"
 	desc = "It's a special helmet issued to the Warden of a securiy force."
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/warden.dmi'
 	body_parts_covered = 0
 
@@ -104,7 +103,6 @@
 /obj/item/clothing/head/det
 	name = "fedora"
 	desc = "A brown fedora - either the cornerstone of a detective's style or a poor attempt at looking cool, depending on the person wearing it."
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/detective.dmi'
 	color = "#725443"
 	armor = list(
@@ -149,7 +147,6 @@
 /obj/item/clothing/head/HoS
 	name = "Head of Security Hat"
 	desc = "The hat of the Head of Security. For showing the officers who's in charge."
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/hos.dmi'
 	body_parts_covered = 0
 	siemens_coefficient = 0.8
@@ -157,7 +154,7 @@
 /obj/item/clothing/suit/armor/hos
 	name = "armored coat"
 	desc = "A greatcoat enhanced with a special alloy for some protection and style."
-	icon_state = "hos"
+	icon = 'icons/clothing/suit/hos.dmi'
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR, 
@@ -181,31 +178,6 @@
 /obj/item/clothing/suit/armor/hos/jensen
 	name = "armored trenchcoat"
 	desc = "A trenchcoat augmented with a special alloy for some protection and style."
-	icon_state = "hostrench"
+	icon = 'icons/clothing/suit/jensen.dmi'
 	flags_inv = 0
 	siemens_coefficient = 0.6
-
-/*
- * Navy uniforms
- */
-
-/obj/item/clothing/under/rank/security/navyblue
-	name = "security officer's uniform"
-	desc = "The latest in fashionable security outfits."
-	icon_state = "officerblueclothes"
-	item_state = "ba_suit"
-	worn_state = "officerblueclothes"
-
-/obj/item/clothing/under/rank/head_of_security/navyblue
-	desc = "The insignia on this uniform tells you that this uniform belongs to the Head of Security."
-	name = "head of security's uniform"
-	icon_state = "hosblueclothes"
-	item_state = "ba_suit"
-	worn_state = "hosblueclothes"
-
-/obj/item/clothing/under/rank/warden/navyblue
-	desc = "The insignia on this uniform tells you that this uniform belongs to the Warden."
-	name = "warden's uniform"
-	icon_state = "wardenblueclothes"
-	item_state = "ba_suit"
-	worn_state = "wardenblueclothes"

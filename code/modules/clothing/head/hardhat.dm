@@ -1,7 +1,7 @@
 /obj/item/clothing/head/hardhat
 	name = "hard hat"
 	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight."
-	icon_state = ICON_STATE_WORLD
+
 	icon = 'icons/clothing/head/hardhat/yellow.dmi'
 	action_button_name = "Toggle Headlamp"
 	brightness_on = 0.5 //luminosity when on

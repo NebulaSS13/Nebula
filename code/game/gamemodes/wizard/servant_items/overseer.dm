@@ -8,7 +8,6 @@
 		energy = ARMOR_ENERGY_SHIELDED, 
 		bomb = ARMOR_BOMB_SHIELDED
 		)
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/necromancer.dmi'
 	item_flags = ITEM_FLAG_AIRTIGHT
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
@@ -19,7 +18,7 @@
 /obj/item/clothing/suit/straight_jacket/overseercloak
 	name = "grim cloak"
 	desc = "The void of space woven into fabric. It's hard to tell where its edges are."
-	icon_state = "overseercloak"
+	icon = 'icons/clothing/suit/wizard/servant/overseer.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SHIELDED, 
 		bullet = ARMOR_BALLISTIC_HEAVY, 
@@ -42,7 +41,6 @@
 /obj/item/clothing/shoes/sandal/grimboots
 	name = "stained boots"
 	desc = "These boots are stained with blood so dry that it's turned black..."
-	icon_state = ICON_STATE_WORLD
 	color = COLOR_BLACK
 	shine = 10
 	item_flags = ITEM_FLAG_SILENT

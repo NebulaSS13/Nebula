@@ -12,11 +12,7 @@
 /obj/item/clothing/suit/fire
 	name = "firesuit"
 	desc = "A suit that protects against fire and heat."
-	icon_state = "fire"
-	item_state_slots = list(
-		slot_l_hand_str = "fire_suit",
-		slot_r_hand_str = "fire_suit",
-	)
+	icon = 'icons/clothing/suit/firesuit.dmi'
 	w_class = ITEM_SIZE_LARGE//large item
 	flags_inv = HIDETAIL
 
@@ -37,20 +33,12 @@
 	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 0.5
 
-/obj/item/clothing/suit/fire/firefighter
-	icon_state = "firesuit"
-	item_state_slots = list(
-		slot_l_hand_str = "firefighter",
-		slot_r_hand_str = "firefighter",
-	)
-
 /*
  * Bomb protection
  */
 /obj/item/clothing/head/bomb_hood
 	name = "bomb hood"
 	desc = "Use in case of bomb."
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/bombsuit.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH, 
@@ -66,7 +54,7 @@
 /obj/item/clothing/suit/bomb_suit
 	name = "bomb suit"
 	desc = "A suit designed for safety when handling explosives."
-	icon_state = "bombsuit"
+	icon = 'icons/clothing/suit/bombsuit.dmi'
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
@@ -90,8 +78,9 @@
 	icon_state = "bombsuitsec"
 	body_parts_covered = HEAD
 	icon = 'icons/clothing/head/bombsuit_olive.dmi'
+
 /obj/item/clothing/suit/bomb_suit/security
-	icon_state = "bombsuitsec"
+	icon = 'icons/clothing/suit/bombsuit_olive.dmi'
 	allowed = list(/obj/item/gun/energy,/obj/item/baton,/obj/item/handcuffs)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 
@@ -101,7 +90,6 @@
 /obj/item/clothing/head/radiation
 	name = "Radiation Hood"
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/radsuit.dmi'
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
@@ -113,11 +101,7 @@
 /obj/item/clothing/suit/radiation
 	name = "Radiation suit"
 	desc = "A suit that protects against radiation. Label: Made with lead, do not eat insulation."
-	icon_state = "rad"
-	item_state_slots = list(
-		slot_l_hand_str = "rad_suit",
-		slot_r_hand_str = "rad_suit",
-	)
+	icon = 'icons/clothing/suit/rad_suit.dmi'
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
@@ -140,7 +124,6 @@
 /obj/item/clothing/head/chem_hood
 	name = "chemical hood"
 	desc = "A hood that protects the head from chemical comtaminants."
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/chem_hood.dmi'
 	permeability_coefficient = 0
 	armor = list(
@@ -155,7 +138,7 @@
 /obj/item/clothing/suit/chem_suit
 	name = "chemical suit"
 	desc = "A suit that protects against chemical contamination."
-	icon_state = "chem_suit"
+	icon = 'icons/clothing/suit/chem_suit.dmi'
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0
