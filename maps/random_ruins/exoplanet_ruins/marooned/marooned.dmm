@@ -2,10 +2,6 @@
 "aa" = (
 /turf/template_noop,
 /area/template_noop)
-"ab" = (
-/obj/effect/decal/cleanable/blood/drip,
-/turf/template_noop,
-/area/template_noop)
 "ac" = (
 /obj/item/stack/material/rods,
 /turf/template_noop,
@@ -370,12 +366,6 @@
 /obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
-"aZ" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
-/turf/template_noop,
-/area/template_noop)
 "hi" = (
 /obj/effect/landmark/scorcher,
 /obj/effect/landmark/clear,
@@ -733,7 +723,7 @@ hi
 hi
 hi
 aX
-aZ
+hi
 hi
 aa
 aa
@@ -793,7 +783,7 @@ ai
 ai
 ai
 ai
-ab
+aa
 aa
 aa
 aa
@@ -979,7 +969,7 @@ aa
 aa
 aa
 aa
-ab
+aa
 aa
 aa
 aa
@@ -1132,7 +1122,7 @@ aa
 "}
 (24,1,1) = {"
 aa
-ab
+aa
 aa
 aa
 aa
