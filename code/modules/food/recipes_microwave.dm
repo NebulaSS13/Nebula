@@ -982,10 +982,6 @@ I said no!
 	items = list(/obj/item/chems/food/snacks/chocolatebar)
 	result = /obj/item/chems/food/snacks/sliceable/chocolatecake
 
-//datum/recipe/cake/birthday
-//	items = list(/obj/item/clothing/head/cakehat)
-//	result = /obj/item/chems/food/snacks/sliceable/birthdaycake
-
 /datum/recipe/cake/birthday
 	reagents = list(/decl/material/liquid/nutriment/sprinkles = 10)
 	result = /obj/item/chems/food/snacks/sliceable/birthdaycake

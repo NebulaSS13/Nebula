@@ -182,7 +182,6 @@
 /decl/hierarchy/supply_pack/nonessent/costume_hats
 	name = "Costume - Regular hats"
 	contains = list(/obj/item/clothing/head/redcoat,
-					/obj/item/clothing/head/mailman,
 					/obj/item/clothing/head/plaguedoctorhat,
 					/obj/item/clothing/head/pirate,
 					/obj/item/clothing/head/hasturhood,

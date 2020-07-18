@@ -41,7 +41,9 @@
 /obj/item/clothing/head/infilhat/fem
 	name = "maid's headband"
 	desc = "This dainty, frilled thing is apparently meant to go on your head."
-	icon_state = "infhatfem"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/inf_hat.dmi'
+	on_mob_icon = 'icons/clothing/head/inf_hat.dmi'
 
 /obj/item/clothing/suit/infilsuit/fem
 	name = "maid's uniform"

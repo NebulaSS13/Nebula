@@ -1,10 +1,8 @@
 /obj/item/clothing/head
 	name = "head"
-	icon = 'icons/obj/clothing/obj_head.dmi'
-	item_icons = list(
-		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_hats.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_hats.dmi',
-		)
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/softcap.dmi'
+	on_mob_icon = 'icons/clothing/head/softcap.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL

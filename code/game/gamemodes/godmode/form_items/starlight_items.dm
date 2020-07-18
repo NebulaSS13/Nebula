@@ -58,7 +58,9 @@
 /obj/item/clothing/head/helmet/sunhelm
 	name = "knight's helm"
 	desc = "It's a shiny metal helmet. It looks ripped straight out of the Dark Ages, actually."
-	icon_state = "star_champion"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/star_champion.dmi'
+	on_mob_icon = 'icons/clothing/head/star_champion.dmi'
 	flags_inv = HIDEEARS | BLOCKHAIR
 
 /obj/item/clothing/suit/armor/sunrobe
@@ -88,7 +90,9 @@
 /obj/item/clothing/head/helmet/space/shadowhood
 	name = "traitor's hood"
 	desc = "No light can pierce this hood. It's unsettling."
-	icon_state = "star_traitor"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/star_traitor.dmi'
+	on_mob_icon = 'icons/clothing/head/star_traitor.dmi'
 	flags_inv = HIDEEARS | BLOCKHAIR
 
 /obj/item/knife/ritual/shadow

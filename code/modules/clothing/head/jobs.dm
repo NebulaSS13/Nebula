@@ -10,35 +10,42 @@
 //Captain
 /obj/item/clothing/head/caphat
 	name = "captain's hat"
-	icon_state = "captain"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/captain.dmi'
+	on_mob_icon = 'icons/clothing/head/captain.dmi'
 	desc = "It's good being the king."
-	item_state_slots = list(
-		slot_l_hand_str = "caphat",
-		slot_r_hand_str = "caphat",
-		)
 	body_parts_covered = 0
 
 /obj/item/clothing/head/caphat/cap
 	name = "captain's cap"
 	desc = "You fear to wear it for the negligence it brings."
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/captain_cap.dmi'
+	on_mob_icon = 'icons/clothing/head/captain_cap.dmi'
 	icon_state = "capcap"
 
 /obj/item/clothing/head/caphat/formal
 	name = "parade hat"
 	desc = "No one in a commanding position should be without a perfect, white hat of ultimate authority."
-	icon_state = "officercap"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/officer_cap.dmi'
+	on_mob_icon = 'icons/clothing/head/officer_cap.dmi'
 
 //HOP
 /obj/item/clothing/head/caphat/hop
 	name = "crew resource's hat"
 	desc = "A stylish hat that both protects you from enraged former-crewmembers and gives you a false sense of authority."
-	icon_state = "hopcap"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/hop.dmi'
+	on_mob_icon = 'icons/clothing/head/hop.dmi'
 
 //Chaplain
 /obj/item/clothing/head/chaplain_hood
 	name = "chaplain's hood"
 	desc = "It's hood that covers the head. It keeps you warm during the space winters."
-	icon_state = "chaplain_hood"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/chaplain.dmi'
+	on_mob_icon = 'icons/clothing/head/chaplain.dmi'
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 
@@ -46,7 +53,9 @@
 /obj/item/clothing/head/nun_hood
 	name = "nun hood"
 	desc = "Maximum piety in this star system."
-	icon_state = "nun_hood"
+	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/head/nun.dmi'
+	on_mob_icon = 'icons/clothing/head/nun.dmi'
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 

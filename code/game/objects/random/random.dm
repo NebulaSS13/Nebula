@@ -788,8 +788,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/hat
 	name = "random headgear"
 	desc = "This is a random hat of some kind."
-	icon = 'icons/obj/clothing/obj_head.dmi'
-	icon_state = "tophat"
+	icon = 'icons/clothing/head/softcap.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/hat/spawn_choices()
 	return list(/obj/item/clothing/head/helmet = 2,
@@ -992,8 +992,8 @@ something, make sure it's not in one of the other lists.*/
 /obj/random/voidhelmet
 	name = "Random Voidsuit Helmet"
 	desc = "This is a random voidsuit helmet."
-	icon = 'icons/obj/clothing/obj_head.dmi'
-	icon_state = "void"
+	icon = 'icons/clothing/spacesuit/generic/helmet.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/voidhelmet/spawn_choices()
 	return list(/obj/item/clothing/head/helmet/space/void,
