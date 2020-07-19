@@ -25,6 +25,51 @@
 			return 0
 	return 1
 
+/turf/simulated/floor/glass
+	name = "glass panel"
+	icon = 'icons/turf/flooring/glass.dmi'
+	icon_state = "glass_full"
+	initial_flooring = /decl/flooring/glass
+
+	z_flags = ZM_MIMIC_DEFAULTS
+	fluid_blocked_dirs = DOWN
+
+/turf/simulated/floor/glass/Initialize()
+	if(!HasBelow(z))
+		z_flags = 0
+	. = ..()
+
+/turf/simulated/floor/glass/on_update_icon()
+	underlays.Cut()
+	. = ..()
+
+	if(z_flags)
+		return
+
+	var/base_turf = get_base_turf_by_area(src)
+	if(base_turf == /turf/space)
+		var/image/I = image(icon = 'icons/turf/space.dmi', icon_state = "white")
+		I.plane = SPACE_PLANE
+		add_overlay(I)
+	else if(base_turf != /turf/simulated/open)
+		var/image/I = image(base_turf)
+		I.plane = OPENTURF_MAX_PLANE - 1
+		add_overlay(I)
+
+/turf/simulated/floor/glass/is_open()
+	return TRUE
+
+/turf/simulated/floor/glass/attackby(obj/item/C, mob/user)
+	if(isWrench(C))
+		to_chat(user, SPAN_NOTICE("You unwrench and remove the [flooring.descriptor]."))
+		ChangeTurf(/turf/simulated/open)
+		new /obj/structure/lattice(src)
+		new /obj/item/stack/material/glass(src, 1)
+		playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
+		return TRUE
+	. = ..()
+	
+
 /turf/simulated/open
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
@@ -97,6 +142,24 @@
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			ChangeTurf(/turf/simulated/floor/airless)
+		else
+			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
+		return TRUE
+
+	if(istype(C, /obj/item/stack/material/glass))
+		var/ladder = (locate(/obj/structure/ladder) in src)
+		if(ladder)
+			to_chat(user, SPAN_WARNING("\The [ladder] is in the way."))
+			return TRUE
+
+		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
+		if(L)
+			var/obj/item/stack/material/glass/G = C
+			if (!G.use(1))
+				return
+			qdel(L)
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+			ChangeTurf(/turf/simulated/floor/glass)
 		else
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
 		return TRUE

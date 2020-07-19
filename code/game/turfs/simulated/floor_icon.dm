@@ -114,8 +114,8 @@ var/list/flooring_cache = list()
 		if(wall_smooth == SMOOTH_ALL)
 			is_linked = TRUE
 
-	//If is_hole is true, then it's space or openspace
-	else if(T.is_open())
+	//If it's open and not a floor, then it's space or openspace
+	else if(T.is_open() && !T.is_floor())
 		if(space_smooth == SMOOTH_ALL)
 			is_linked = TRUE
 

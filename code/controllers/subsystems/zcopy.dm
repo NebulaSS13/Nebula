@@ -135,13 +135,19 @@ SUBSYSTEM_DEF(zcopy)
 		// Figure out how many z-levels down we are.
 		var/depth = 0
 		var/turf/Td = T
+		var/overwrite_override = FALSE
 
 		while (Td.below)
 			Td = Td.below
+			if(!(Td.z_flags & ZM_MIMIC_OVERWRITE))
+				overwrite_override = TRUE
 
 		T.z_depth = depth = min(T.z - Td.z, OPENTURF_MAX_DEPTH)
 
 		var/t_target = OPENTURF_MAX_PLANE - depth	// this is where the openturf gets put
+
+		if(overwrite_override)
+			t_target = OPENTURF_MAX_PLANE - 1
 
 		// Handle space parallax.
 		if (T.below.z_eventually_space)

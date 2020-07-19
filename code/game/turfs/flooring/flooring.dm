@@ -370,3 +370,14 @@
 	build_type = null
 	can_engrave = FALSE
 	footstep_type = /decl/footsteps/snow
+
+/decl/flooring/glass
+	name = "glass panel"
+	icon = 'icons/turf/flooring/glass.dmi'
+	icon_base = "glass"
+	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_ACID_IMMUNE
+	footstep_type = /decl/footsteps/tiles
+
+	floor_smooth = SMOOTH_NONE
+	wall_smooth = SMOOTH_NONE
+	space_smooth = SMOOTH_NONE
