@@ -118,12 +118,12 @@ var/list/mining_floors = list()
 
 		if(istype(get_step(src, step_overlays[direction]), /turf/space))
 			var/image/aster_edge = image('icons/turf/flooring/asteroid.dmi', "asteroid_edges", dir = step_overlays[direction])
-			aster_edge.turf_decal_layerise()
+			aster_edge.layer = DECAL_LAYER
 			overlays += aster_edge
 
 	if(overlay_detail)
 		var/image/floor_decal = image(icon = 'icons/turf/flooring/decals.dmi', icon_state = overlay_detail)
-		floor_decal.turf_decal_layerise()
+		floor_decal.layer = DECAL_LAYER
 		overlays |= floor_decal
 
 	if(update_neighbors)

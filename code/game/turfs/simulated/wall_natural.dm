@@ -121,7 +121,7 @@ var/list/natural_walls = list()
 			M.Scale(-1,1)
 			ore_overlay.transform = M
 		ore_overlay.color = reinf_material.color
-		ore_overlay.turf_decal_layerise()
+		ore_overlay.layer = DECAL_LAYER
 
 /turf/simulated/wall/natural/on_update_icon()
 	. = ..()
