@@ -12,6 +12,7 @@
 		/obj/item/crowbar,
 		/obj/item/wirecutters,
 		/obj/item/multitool,
+		/obj/item/t_scanner,
 		/obj/item/lightreplacer,
 		/obj/item/gripper,
 		/obj/item/soap,
@@ -97,7 +98,7 @@
 		))
 		var/obj/item/stack/stack = locate(thing) in equipment
 		LAZYDISTINCTADD(stack.synths, wood)
-	
+
 	var/obj/item/stack/cable_coil/cyborg/C = locate() in equipment
 	C.synths = list(wire)
 
