@@ -55,6 +55,16 @@
 	},
 /turf/simulated/floor/carpet/blue,
 /area/ship/trade/command/captain)
+"af" = (
+/obj/item/bedsheet/captain,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/item/gun/projectile/pistol/holdout,
+/obj/structure/bed/padded,
+/obj/effect/landmark{
+	name = "JoinLateCryoCaptain"
+	},
+/turf/simulated/floor/wood,
+/area/ship/trade/command/captain)
 "ak" = (
 /obj/effect/overmap/visitable/ship/tradeship,
 /turf/space,
@@ -74,13 +84,6 @@
 "aw" = (
 /turf/simulated/wall/r_wall,
 /area/ship/trade/command/fmate)
-"aI" = (
-/obj/item/bedsheet/captain,
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/item/gun/projectile/pistol/holdout,
-/obj/structure/bed/padded,
-/turf/simulated/floor/wood,
-/area/ship/trade/command/captain)
 "aJ" = (
 /obj/item/paper_bin,
 /obj/item/pen,
@@ -3526,8 +3529,8 @@
 /area/ship/trade/maintenance/power)
 "is" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/effect/floor_decal/corner/blue{
@@ -4109,8 +4112,8 @@
 /area/space)
 "jD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 6
@@ -10707,7 +10710,7 @@ HO
 nL
 ar
 Wp
-aI
+af
 aV
 ae
 eq
