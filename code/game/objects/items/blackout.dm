@@ -16,7 +16,7 @@
 	var/severity = 2
 	var/shots = 1
 	var/lastUse = 0
-	var/Cooldown = (20 MINUTES)
+	var/cooldown = (20 MINUTES)
 
 /obj/item/blackout/afterattack(obj/target, mob/user, proximity)
 	if(!proximity)
@@ -25,7 +25,7 @@
 	if(!istype(target))
 		return
 
-	target.add_fingerprint(user)
+	add_fingerprint(user)
 
 	if(istype(target, /obj/machinery/power/terminal))
 		var/obj/machinery/power/terminal/terminal = target
@@ -66,7 +66,7 @@
 	\"-- Done. Pulsing is complete. We wish you a successful and productive mission. --\"")
 
 	shots--
-	Cooldown = world.time
+	cooldown = world.time
 
 	var/datum/powernet/powernet = terminal_in.powernet
 	for(var/obj/machinery/power/terminal/terminal_out in powernet.nodes)
@@ -81,4 +81,4 @@
 	icon_state = "device_blackout-off"
 
 /obj/item/blackout/proc/check_to_use()
-	return lastUse <= (world.time - Cooldown)
+	return lastUse <= (world.time - cooldown)
