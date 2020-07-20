@@ -28,7 +28,7 @@
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/suit/fire,
 		/obj/item/tank/emergency/oxygen,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/glasses/meson,

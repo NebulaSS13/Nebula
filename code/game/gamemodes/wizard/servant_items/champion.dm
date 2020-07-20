@@ -1,7 +1,7 @@
 /obj/item/clothing/head/champhelm
 	name = "champion's crown"
 	desc = "A spiky, golden crown. It's probably worth more than your bank account."
-	icon_state = ICON_STATE_WORLD
+
 	icon = 'icons/clothing/head/champion.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
@@ -16,7 +16,7 @@
 /obj/item/clothing/suit/champarmor
 	name = "champion's armor"
 	desc = "A mighty suit of silver and gold armor, with a gleaming blue crystal inlaid into its left gaunlet."
-	icon_state = "champarmor"
+	icon = 'icons/clothing/suit/wizard/servant/champion.dmi'
 	siemens_coefficient = 0.5
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	armor = list(

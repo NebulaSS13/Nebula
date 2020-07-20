@@ -806,8 +806,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/suit
 	name = "random suit"
 	desc = "This is a random piece of outerwear."
-	icon = 'icons/obj/clothing/obj_suit.dmi'
-	icon_state = "fire"
+	icon = 'icons/clothing/suit/firesuit.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/suit/spawn_choices()
 	return list(/obj/item/clothing/suit/storage/hazardvest = 4,
@@ -1013,8 +1013,8 @@ something, make sure it's not in one of the other lists.*/
 /obj/random/voidsuit
 	name = "Random Voidsuit"
 	desc = "This is a random voidsuit."
-	icon = 'icons/obj/clothing/obj_suit.dmi'
-	icon_state = "void"
+	icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/voidsuit/spawn_choices()
 	return list(/obj/item/clothing/suit/space/void,

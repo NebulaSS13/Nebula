@@ -52,7 +52,7 @@
 /obj/structure/closet/firecloset/chief/WillContain()
 	return list(
 		/obj/item/storage/med_pouch/burn,
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/suit/fire,
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight,
 		/obj/item/tank/emergency/oxygen/double/red,

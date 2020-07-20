@@ -53,19 +53,6 @@
 	path = /obj/item/clothing/suit/storage/hooded/hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/suit/hoodie_sel
-	display_name = "standard hoodies"
-	path = /obj/item/clothing/suit/storage/toggle/hoodie
-
-/datum/gear/suit/hoodie_sel/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
-	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/storage/toggle/hoodie/cti,
-		/obj/item/clothing/suit/storage/toggle/hoodie/mu,
-		/obj/item/clothing/suit/storage/toggle/hoodie/smw
-	)
-
 /datum/gear/suit/labcoat
 	display_name = "labcoat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat

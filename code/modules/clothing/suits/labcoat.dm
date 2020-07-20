@@ -1,9 +1,7 @@
 /obj/item/clothing/suit/storage/toggle/labcoat
 	name = "labcoat"
 	desc = "A suit that protects against minor chemical spills."
-	icon_state = "labcoat_open"
-	icon_open = "labcoat_open"
-	icon_closed = "labcoat"
+	icon = 'icons/clothing/suit/labcoat/default.dmi'
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 	allowed = list(/obj/item/scanner/gas,/obj/item/stack/medical,/obj/item/chems/dropper,/obj/item/chems/syringe,/obj/item/chems/hypospray,/obj/item/scanner/health,/obj/item/flashlight/pen,/obj/item/chems/glass/bottle,/obj/item/chems/glass/beaker,/obj/item/chems/pill,/obj/item/storage/pill_bottle,/obj/item/paper)
@@ -12,7 +10,7 @@
 		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
-	markings_icon = "labcoat_marking"
+	markings_icon = "_marking"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
@@ -21,9 +19,7 @@
 /obj/item/clothing/suit/storage/toggle/labcoat/cmoalt
 	name = "chief medical officer labcoat"
 	desc = "A labcoat with command blue highlights."
-	icon_state = "labcoat_cmoalt_open"
-	icon_open = "labcoat_cmoalt_open"
-	icon_closed = "labcoat_cmoalt"
+	icon = 'icons/clothing/suit/labcoat/cmo.dmi'
 
 /obj/item/clothing/suit/storage/toggle/labcoat/mad
 	name = "The Mad's labcoat"
@@ -44,21 +40,12 @@
 
 /obj/item/clothing/suit/storage/toggle/labcoat/blue
 	name = "blue-edged labcoat"
-	icon_state = "blue_edge_labcoat_open"
-	icon_open = "blue_edge_labcoat_open"
-	icon_closed = "blue_edge_labcoat"
+	icon = 'icons/clothing/suit/labcoat/blue_edge.dmi'
 
 /obj/item/clothing/suit/storage/toggle/labcoat/coat
 	name = "coat"
 	desc = "A cozy overcoat."
 	color = "#292929"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/foundation
-	name = "\improper Foundation labcoat"
-	desc = "A medical labcoat with a Cuchulain Foundation crest stencilled on the back."
-	icon_state = "labcoat_foundation"
-	icon_open = "labcoat_foundation_open"
-	icon_closed = "labcoat_foundation"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
 	name = "researcher labcoat"
@@ -67,11 +54,9 @@
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	name = "research director's labcoat"
 	desc = "A full-body labcoat covered in designs, denoting it as management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
-	icon_state = "labcoat_rd_open"
-	icon_open = "labcoat_rd_open"
-	icon_closed = "labcoat_rd"
+	icon = 'icons/clothing/suit/labcoat/rd.dmi'
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	markings_color = COLOR_BOTTLE_GREEN
-	markings_icon = "rd_coat_marking"
+	markings_icon = "_marking"
 
 	

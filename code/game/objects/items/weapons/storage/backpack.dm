@@ -217,7 +217,7 @@
 /obj/item/storage/backpack/dufflebag/firefighter
 	startswith = list(
 		/obj/item/storage/belt/fire_belt/full,
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/suit/fire,
 		/obj/item/extinguisher,
 		/obj/item/clothing/gloves/fire,
 		/obj/item/clothing/accessory/fire_overpants,

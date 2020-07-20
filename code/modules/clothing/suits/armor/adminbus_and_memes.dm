@@ -2,8 +2,7 @@
 /obj/item/clothing/suit/armor/officer
 	name = "officer jacket"
 	desc = "An armored jacket used in special operations."
-	icon_state = "detective"
-	item_state = "detective"
+	icon = 'icons/clothing/suit/detective_brown.dmi'
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
@@ -17,19 +16,19 @@
 /obj/item/clothing/suit/armor/tdome/red
 	name = "thunderdome suit (red)"
 	desc = "Reddish armor."
-	icon_state = "tdred"
+	icon = 'icons/clothing/suit/tdred.dmi'
 	siemens_coefficient = 1
 
 /obj/item/clothing/suit/armor/tdome/green
 	name = "thunderdome suit (green)"
 	desc = "Pukish armor."
-	icon_state = "tdgreen"
+	icon = 'icons/clothing/suit/tdgreen.dmi'
 	siemens_coefficient = 1
 
 /obj/item/clothing/suit/armor/pirate
 	name = "pirate coat"
 	desc = "Yarr."
-	icon_state = "pirate"
+	icon = 'icons/clothing/suit/pirate.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/tank/emergency)
 	armor = list(

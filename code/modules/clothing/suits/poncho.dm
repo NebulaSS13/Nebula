@@ -3,7 +3,6 @@
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
 	bodytype_restricted = null
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/suit/poncho/classic.dmi'
 
 /obj/item/clothing/suit/poncho/colored/green

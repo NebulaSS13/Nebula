@@ -94,7 +94,6 @@
 
 /obj/structure/closet/wardrobe/xenos/Initialize()
 	. = ..()
-	new /obj/item/clothing/suit/mantle(src)
 	new /obj/item/clothing/suit/robe(src)
 	new /obj/item/clothing/shoes/sandal(src)
 	new /obj/item/clothing/shoes/sandal(src)

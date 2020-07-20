@@ -2,7 +2,6 @@
 /obj/item/clothing/head/helmet/space/syndicate
 	name = "red space helmet"
 	icon = 'icons/clothing/head/space/syndicate/red.dmi'
-	icon_state = ICON_STATE_WORLD
 	desc = "A crimson helmet sporting clean lines and durable plating. Engineered to look menacing."
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,

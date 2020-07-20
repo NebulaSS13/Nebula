@@ -1,12 +1,8 @@
 /obj/item/clothing/suit/armor/captain
 	name = "Captain's armor"
 	desc = "A bulky, heavy-duty piece of exclusive corporate armor. YOU are in charge!"
-	icon = 'mods/corporate/icons/obj/clothing/obj_suit.dmi'
-	icon_state = "caparmor"
-	item_state_slots = list(
-		slot_l_hand_str = "capspacesuit",
-		slot_r_hand_str = "capspacesuit",
-	)
+	icon_state = ICON_STATE_WORLD
+	icon = 'mods/corporate/icons/clothing/suit/capspace.dmi'
 	w_class = ITEM_SIZE_HUGE
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
@@ -27,7 +23,6 @@
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
-	item_icons = list(slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_suit.dmi')
 
 /obj/item/clothing/suit/armor/captain/Initialize()
 	. = ..()

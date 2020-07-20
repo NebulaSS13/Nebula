@@ -6,7 +6,6 @@
 	name = "space helmet"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	icon = 'icons/clothing/spacesuit/generic/helmet.dmi'
-	icon_state = ICON_STATE_WORLD
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	flags_inv = BLOCKHAIR
 	permeability_coefficient = 0
@@ -112,7 +111,6 @@
 	name = "space suit"
 	desc = "A suit that protects against low pressure environments."
 	icon = 'icons/clothing/spacesuit/generic/suit.dmi'
-	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE//large item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0

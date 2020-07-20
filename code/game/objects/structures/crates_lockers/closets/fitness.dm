@@ -10,11 +10,6 @@
 		/obj/item/clothing/under/shorts/red,
 		/obj/item/clothing/under/shorts/blue,
 		/obj/item/clothing/under/shorts/green,
-		/obj/item/clothing/under/swimsuit/red,
-		/obj/item/clothing/under/swimsuit/black,
-		/obj/item/clothing/under/swimsuit/blue,
-		/obj/item/clothing/under/swimsuit/green,
-		/obj/item/clothing/under/swimsuit/purple,
 		/obj/item/clothing/mask/snorkel = 2,
 		/obj/item/clothing/shoes/swimmingfins = 2,
 		/obj/item/towel = 2)

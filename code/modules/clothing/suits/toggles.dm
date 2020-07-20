@@ -73,7 +73,6 @@
 	name = "winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs."
 	icon = 'icons/clothing/suit/wintercoat/coat.dmi'
-	icon_state = ICON_STATE_WORLD
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
@@ -159,7 +158,7 @@
 /obj/item/clothing/suit/storage/hooded/hoodie
 	name = "hoodie"
 	desc = "A warm sweatshirt."
-	icon_state = "hoodie"
+	icon = 'icons/clothing/suit/hoodie.dmi'
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	action_button_name = "Toggle Hood"
@@ -168,7 +167,8 @@
 /obj/item/clothing/head/hoodiehood
 	name = "hoodie hood"
 	desc = "A hood attached to a warm sweatshirt."
-	icon_state = "generic_hood"
+	icon_state = "hood"
+	icon = 'icons/clothing/suit/hoodie.dmi'
 	body_parts_covered = HEAD
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = HEAD

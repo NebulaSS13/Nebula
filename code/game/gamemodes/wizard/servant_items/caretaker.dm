@@ -1,7 +1,6 @@
 /obj/item/clothing/head/caretakerhood
 	name = "holy hood"
 	desc = "The hood of a shining white robe, with blue trim. Who would possess this robe and still want to hide themself away?"
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/caretaker.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES, 
@@ -16,7 +15,7 @@
 /obj/item/clothing/suit/caretakercloak
 	name = "holy cloak"
 	desc = "A shining white and blue robe. For some reason, it reminds you of the holidays."
-	icon_state = "caretakercloak"
+	icon = 'icons/clothing/suit/wizard/servant/caretaker.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
 		bullet = ARMOR_BALLISTIC_PISTOL, 

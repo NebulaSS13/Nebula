@@ -118,6 +118,8 @@
 		for(var/T in starting_accessories)
 			var/obj/item/clothing/accessory/tie = new T(src)
 			src.attach_accessory(null, tie)
+	if(markings_color && markings_icon)
+		update_icon()
 
 /obj/item/clothing/mob_can_equip(M, slot, disable_warning = 0)
 

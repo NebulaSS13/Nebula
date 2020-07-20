@@ -4,7 +4,7 @@
 	desc = "An improvised set of armour."
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
-	icon_state = "improvised_armour"
+	icon = 'icons/clothing/suit/armor/improvised.dmi'
 	material = /decl/material/solid/metal/steel
 	armor_degradation_speed = 1
 	armor_type = /datum/extension/armor/ablative

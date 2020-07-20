@@ -1,7 +1,6 @@
 /obj/item/clothing/head/wizard
 	name = "wizard hat"
 	desc = "Strange-looking hat-wear that most certainly belongs to a real magic user."
-	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/wizard/wizard.dmi'
 	//Not given any special protective value since the magic robes are full-body protection --NEO
 	siemens_coefficient = 0.8
@@ -42,7 +41,7 @@
 /obj/item/clothing/suit/wizrobe
 	name = "wizard robe"
 	desc = "A magnificant, gem-lined robe that seems to radiate power."
-	icon_state = "wizard"
+	icon = 'icons/clothing/suit/wizard/wizard.dmi'
 	gas_transfer_coefficient = 0.01 // IT'S MAGICAL OKAY JEEZ +1 TO NOT DIE
 	permeability_coefficient = 0.01
 	armor = list(
@@ -61,42 +60,41 @@
 /obj/item/clothing/suit/wizrobe/red
 	name = "red wizard robe"
 	desc = "A magnificant, red, gem-lined robe that seems to radiate power."
-	icon_state = "redwizard"
-
+	icon = 'icons/clothing/suit/wizard/red.dmi'
 
 /obj/item/clothing/suit/wizrobe/marisa
 	name = "Witch Robe"
 	desc = "Magic is all about the spell power, ZE!"
-	icon_state = "marisa"
+	icon = 'icons/clothing/suit/wizard/marisa.dmi'
 
 /obj/item/clothing/suit/wizrobe/magusblue
 	name = "Magus Robe"
 	desc = "A set of armoured robes that seem to radiate a dark power."
-	icon_state = "magusblue"
+	icon = 'icons/clothing/suit/wizard/magusblue.dmi'
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
 /obj/item/clothing/suit/wizrobe/magusred
 	name = "Magus Robe"
 	desc = "A set of armoured robes that seem to radiate a dark power."
-	icon_state = "magusred"
+	icon = 'icons/clothing/suit/wizard/magusred.dmi'
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
 /obj/item/clothing/suit/wizrobe/psypurple
 	name = "purple robes"
 	desc = "Heavy, royal purple robes threaded with psychic amplifiers and weird, bulbous lenses. Do not machine wash."
-	icon_state = "psyamp"
+	icon = 'icons/clothing/suit/wizard/psy.dmi'
 	gender = PLURAL
 
 /obj/item/clothing/suit/wizrobe/gentlecoat
 	name = "Gentlemans Coat"
 	desc = "A heavy threaded tweed gray jacket. For a different sort of Gentleman."
-	icon_state = "gentlecoat"
+	icon = 'icons/clothing/suit/wizard/gentleman.dmi'
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/suit/wizrobe/fake
 	name = "wizard robe"
 	desc = "A rather dull, blue robe meant to mimick real wizard robes."
-	icon_state = "wizard-fake"
+	icon = 'icons/clothing/suit/wizard/fake.dmi'
 	armor = null
 	siemens_coefficient = 1.0
 
@@ -109,7 +107,6 @@
 /obj/item/clothing/suit/wizrobe/marisa/fake
 	name = "Witch Robe"
 	desc = "Magic is all about the spell power, ZE!"
-	icon_state = "marisa"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	armor = null
 	siemens_coefficient = 1.0

@@ -19,6 +19,7 @@
 #include "items\cerebro_enhancers.dm"
 #include "items\coffee_cup.dm"
 #include "items\foundation_implanter.dm"
+#include "items\foundation_labcoat.dm"
 #include "items\foundation_weapon.dm"
 #include "items\grabs.dm"
 #include "items\id_card.dm"
