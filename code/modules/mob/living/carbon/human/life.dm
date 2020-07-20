@@ -81,6 +81,8 @@
 
 		handle_medical_side_effects()
 
+		handle_eye_blink()
+
 	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
 
@@ -264,7 +266,7 @@
 		damage = Floor(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
-			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT) 
+			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
 			if(!isSynthetic() && organs.len)
 				var/obj/item/organ/external/O = pick(organs)

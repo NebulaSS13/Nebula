@@ -2122,6 +2122,7 @@
 #include "code\modules\mob\living\carbon\human\appearance.dm"
 #include "code\modules\mob\living\carbon\human\death.dm"
 #include "code\modules\mob\living\carbon\human\examine.dm"
+#include "code\modules\mob\living\carbon\human\eye_blink.dm"
 #include "code\modules\mob\living\carbon\human\human.dm"
 #include "code\modules\mob\living\carbon\human\human_attackhand.dm"
 #include "code\modules\mob\living\carbon\human\human_damage.dm"
