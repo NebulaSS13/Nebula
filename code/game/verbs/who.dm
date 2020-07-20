@@ -2,7 +2,7 @@
 	set name = "Who"
 	set category = "OOC"
 
-	var/msg = "<meta charset='UTF-8'><h2><b>Curret Players:</b></h2>\n"
+	var/msg = "<meta charset='UTF-8'><h2><b>Curret Players:</b></h2><br>"
 
 	var/list/Lines = list()
 
@@ -80,14 +80,13 @@
 		Dead: [dead] | <font color='gray'>Observers: [observers]</font> | \
 		<font color='#006400'>In Lobby: [lobby]</font> | \
 		<font color='#8100aa'>Living Antagonists: [living_antags]</font> | \
-		<font color='#9b0000'>Dead Antagonists: [dead_antags]</font></b>\n\n"
+		<font color='#9b0000'>Dead Antagonists: [dead_antags]</font></b><br><br>"
 
-	msg += "<b>Total Players: [length(Lines)]</b>\n\n"
+	msg += "<b>Total Players: [length(Lines)]</b><br><br>"
 
 	for(var/line in sortList(Lines))
-		msg += "[line]\n"
+		msg += "[line]<br>"
 
-	msg = replacetext(msg, "\n", "<br>")
 	show_browser(usr, msg, "window=who;size=780x420;can_close=1")
 
 /client/verb/staffwho()
@@ -135,7 +134,7 @@
 		else
 			msg += line
 
-	if(config.admin_irc)
-		to_chat(src, "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>")
 	to_chat(src, "<b>Current Staff ([active_staff]/[total_staff]):</b>")
 	to_chat(src, jointext(msg,"\n"))
+	if(config.admin_irc)
+		to_chat(src, "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>")
