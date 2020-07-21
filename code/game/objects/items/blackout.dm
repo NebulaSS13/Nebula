@@ -5,17 +5,17 @@
 	name = "High Pulse Electricity Outage Tool"
 	item_cost = 24
 	path = /obj/item/blackout
-	desc = "A device wich can create power virus in terminal, spread it in power network and temporally creating blackout."
+	desc = "A device which infects the power network with a virus via a local terminal, creating a temporary blackout."
 
 /obj/item/blackout
-	name = "high pulse electricity outage tool"
-	desc = "A unknown device, probably only experienced electrics know what this can do."
+	name = "blackout pulser"
+	desc = "A complicated eletronic device of unknown purpose"
 	icon = 'icons/obj/items/blackout.dmi'
 	icon_state = "device_blackout-off"
 
 	var/severity = 2
 	var/shots = 1
-	var/lastUse = 0
+	var/last_use = 0
 	var/cooldown = (20 MINUTES)
 
 /obj/item/blackout/afterattack(obj/target, mob/user, proximity)
@@ -31,15 +31,15 @@
 		var/obj/machinery/power/terminal/terminal = target
 
 		if(!terminal.powernet)
-			to_chat(user, SPAN_WARNING("This power station isn't connected to power net."))
+			to_chat(user, SPAN_WARNING("This terminal is not connected to a power net."))
 			return
 
 		if(check_to_use())
-			to_chat(user, SPAN_WARNING("Device does not respond. Perhaps you need to try later."))
+			to_chat(user, SPAN_WARNING("\The [src] is unresponsive. Perhaps you need to try later."))
 			return
 
 		if(!shots)
-			to_chat(user, SPAN_WARNING("Device does not respond."))
+			to_chat(user, SPAN_WARNING("\The [src] is unresponsive."))
 			return
 
 		hacktheenergy(terminal, user)
@@ -48,22 +48,22 @@
 	if(!istype(terminal_in) || !user) return
 
 	src.audible_message("<font color=Maroon><b>HackTheEnergy.exe Assistant</b></font> says, \
-	\"-- Starting. Connecting to the therminal. --\"")
+	\"Starting. Connecting to the terminal.\"")
 	if(!do_after(user, 30, terminal_in)) return
 
 	src.audible_message("<font color=Maroon><b>HackTheEnergy.exe Assistant</b></font> says, \
-	\"-- Successful Ñonnection to the terminal. Getting information about the powergrid ... --\"")
+	\"Successful connection to the terminal. Getting information about the powergrid...\"")
 	if(!do_after(user, 80, terminal_in)) return
 
 	src.audible_message("<font color=Maroon><b>HackTheEnergy.exe Assistant</b></font> says, \
-	\"-- Powernet scan succeeded. Starting the pulsation procedure. --\"")
+	\"Powernet scan succeeded. Beginning blackout pulse.\"")
 
 	icon_state = "device_blackout-on"
 	playsound(src, 'sound/items/goggles_charge.ogg', 50, 1)
 
 	if(!do_after(user, 40, terminal_in)) return
 	src.audible_message("<font color=Maroon><b>HackTheEnergy.exe Assistant</b></font> says, \
-	\"-- Done. Pulsing is complete. We wish you a successful and productive mission. --\"")
+	\"Done. Pulsing is complete. We wish you a successful and productive mission.\"")
 
 	shots--
 	cooldown = world.time
@@ -77,8 +77,8 @@
 			var/obj/machinery/power/smes/buildable/S = terminal_out.master
 			S.energy_fail(rand(15 * severity, 30 * severity))
 
-	log_and_message_admins("used \the [src] on \the [terminal_in] to shutdown powernet.", user)
+	log_and_message_admins("used \the [src] on \the [terminal_in] to cause a blackout.", user)
 	icon_state = "device_blackout-off"
 
 /obj/item/blackout/proc/check_to_use()
-	return lastUse <= (world.time - cooldown)
+	return last_use <= (world.time - cooldown)
