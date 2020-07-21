@@ -39,6 +39,7 @@
 	var/old_lighting_overlay = lighting_overlay
 	var/old_corners = corners
 	var/old_ao_neighbors = ao_neighbors
+	var/old_above = above
 
 //	log_debug("Replacing [src.type] with [N]")
 
@@ -54,6 +55,8 @@
 
 	var/old_opaque_counter = opaque_counter
 	var/turf/simulated/W = new N(src)
+
+	above = old_above
 
 	if (permit_ao)
 		regenerate_ao()
