@@ -51,13 +51,12 @@
 	. += "</table>"
 	. += "<b>Ghost Role Availability:</b>"
 	. += "<table>"
-	var/list/ghost_traps = get_ghost_traps()
-	for(var/ghost_trap_key in ghost_traps)
-		var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
+	for(var/ghost_trap_key in subtypesof(/decl/ghosttrap))
+		var/decl/ghosttrap/ghost_trap = decls_repository.get_decl(ghost_trap_key)
 		if(!ghost_trap.list_as_special_role)
 			continue
 
-		. += "<tr><td>[(ghost_trap.ghost_trap_role)]: </td><td>"
+		. += "<tr><td>[capitalize(ghost_trap.name)]: </td><td>"
 		if(banned_from_ghost_role(preference_mob(), ghost_trap))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
 		else if(ghost_trap.pref_check in pref.be_special_role)
@@ -72,7 +71,7 @@
 	. += "</table>"
 	. = jointext(.,null)
 
-/datum/category_item/player_setup_item/proc/banned_from_ghost_role(var/mob, var/datum/ghosttrap/ghost_trap)
+/datum/category_item/player_setup_item/proc/banned_from_ghost_role(var/mob, var/decl/ghosttrap/ghost_trap)
 	for(var/ban_type in ghost_trap.ban_checks)
 		if(jobban_isbanned(mob, ban_type))
 			return 1
@@ -126,17 +125,14 @@
 				continue
 		private_valid_special_roles += antag_type
 
-	var/list/ghost_traps = get_ghost_traps()
-	for(var/ghost_trap_key in ghost_traps)
-		var/datum/ghosttrap/ghost_trap = ghost_traps[ghost_trap_key]
+	for(var/ghost_trap_key in subtypesof(/decl/ghosttrap))
+		var/decl/ghosttrap/ghost_trap = decls_repository.get_decl(ghost_trap_key)
 		if(!ghost_trap.list_as_special_role)
 			continue
 		if(!include_bans)
 			if(banned_from_ghost_role(preference_mob(), ghost_trap))		
 				continue
 		private_valid_special_roles += ghost_trap.pref_check
-
-
 	return private_valid_special_roles
 
 /client/proc/wishes_to_be_role(var/role)

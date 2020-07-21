@@ -268,7 +268,7 @@
 
 //Procs for grabbing players.
 /mob/living/simple_animal/borer/proc/request_player()
-	var/datum/ghosttrap/G = get_ghost_trap("cortical borer")
+	var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/cortical_borer)
 	G.request_player(src, "A cortical borer needs a player.")
 
 /mob/living/simple_animal/borer/flash_eyes(intensity, override_blindness_check, affect_silicon, visual, type)

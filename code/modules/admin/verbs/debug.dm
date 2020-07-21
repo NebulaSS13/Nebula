@@ -489,3 +489,13 @@
 		return
 	var/decl/material/M = decls_repository.get_decl(material)
 	new M.stack_type(get_turf(mob), 50, M)
+
+/client/proc/force_ghost_trap_trigger()
+	set category = "Debug"
+	set name = "Force Ghost Trap Trigger"
+	if(!check_rights(R_DEBUG)) return
+	var/decl/ghosttrap/trap = input("Select a ghost trap.", "Force Ghost Trap Trigger") as null|anything in typesof(/decl/ghosttrap)
+	if(!trap)
+		return
+	trap = decls_repository.get_decl(trap)
+	trap.forced(mob)

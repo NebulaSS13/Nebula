@@ -1,4 +1,4 @@
-/datum/ghosttrap/plant/welcome_candidate(var/mob/target)
+/decl/ghosttrap/sentient_plant/welcome_candidate(var/mob/target)
 	..()
 	// This is a hack, replace with some kind of species blurb proc.
 	if(istype(target,/mob/living/carbon/alien/diona))
