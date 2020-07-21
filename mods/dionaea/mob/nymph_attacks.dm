@@ -1,24 +1,3 @@
-/mob/living/carbon/alien/diona/attack_hand(mob/user)
-	if(hat)
-		hat.forceMove(get_turf(src))
-		user.put_in_hands(hat)
-		user.visible_message(SPAN_DANGER("\The [user] removes \the [src]'s [hat]!"))
-		hat = null
-		update_icons()
-		return
-	. = ..()
-
-/mob/living/carbon/alien/diona/attackby(var/obj/item/W, var/mob/user)
-	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
-		if(hat)
-			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
-			return
-		user.unEquip(W)
-		wear_hat(W)
-		user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
-		return
-	return ..()
-
 /mob/living/carbon/alien/diona/UnarmedAttack(var/atom/A)
 
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -53,10 +32,13 @@
 			return
 		// End superhacky stuff.
 
-	if(a_intent == I_DISARM || a_intent == I_HELP)
-		if(!wear_hat(A) && can_collect(A))
-			collect(A)
-			return
+	if((a_intent == I_DISARM || a_intent == I_HELP) && can_collect(A))
+		collect(A)
+		return
+
+	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+	if(hattable?.wear_hat(src, A))
+		return
 
 	if(istype(A, /mob))
 		if(src != A && !gestalt_with(A))

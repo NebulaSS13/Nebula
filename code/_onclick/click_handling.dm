@@ -12,6 +12,10 @@ if(!click_handlers) { \
 
 /mob/Destroy()
 	QDEL_NULL_LIST(click_handlers)
+	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+	if(hattable?.hat)
+		hattable.hat.dropInto(get_turf(src))
+		hattable.hat = null
 	. = ..()
 
 var/const/CLICK_HANDLER_NONE                 = 0x000000

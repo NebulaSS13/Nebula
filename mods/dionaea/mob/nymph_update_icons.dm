@@ -1,5 +1,5 @@
 /mob/living/carbon/alien/diona/update_icons()
-	var/list/adding = list()
+	cut_overlays()
 	if(stat == DEAD)
 		icon_state = "[initial(icon_state)]_dead"
 	else if(lying || resting || stunned)
@@ -7,9 +7,10 @@
 	else
 		icon_state = "[initial(icon_state)]"
 		if(eyes)
-			adding += eyes
+			add_overlay(eyes)
 		if(flower)
-			adding += flower
-		if(hat)
-			adding += get_hat_icon(hat, 0, -8)
-	overlays = adding
+			add_overlay(flower)
+		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+		var/image/I = hattable?.get_hat_overlay(src)
+		if(I)
+			add_overlay(I)

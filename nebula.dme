@@ -288,6 +288,7 @@
 #include "code\datums\extensions\event_registration.dm"
 #include "code\datums\extensions\extensions.dm"
 #include "code\datums\extensions\fake_data.dm"
+#include "code\datums\extensions\hattable.dm"
 #include "code\datums\extensions\interactive.dm"
 #include "code\datums\extensions\label.dm"
 #include "code\datums\extensions\local_network.dm"

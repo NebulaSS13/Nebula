@@ -1,23 +1,3 @@
-var/list/mob_hat_cache = list()
-/proc/get_hat_icon(var/obj/item/hat, var/offset_x = 0, var/offset_y = 0)
-	var/t_state = hat.icon_state
-	if(slot_head_str in hat.item_state_slots)
-		t_state = hat.item_state_slots[slot_head_str]
-	else if(hat.item_state)
-		t_state = hat.item_state
-	var/key = "[t_state]_[offset_x]_[offset_y]"
-	if(!mob_hat_cache[key])            // Not ideal as there's no guarantee all hat icon_states
-		var/t_icon = default_onmob_icons[slot_head_str] // are unique across multiple dmis, but whatever.
-		if(hat.icon_override)
-			t_icon = hat.icon_override
-		else if(hat.item_icons && (slot_head_str in hat.item_icons))
-			t_icon = hat.item_icons[slot_head_str]
-		var/image/I = image(icon = t_icon, icon_state = t_state)
-		I.pixel_x = offset_x
-		I.pixel_y = offset_y
-		mob_hat_cache[key] = I
-	return mob_hat_cache[key]
-
 /mob/living/silicon/robot/drone
 	name = "maintenance drone"
 	real_name = "drone"
@@ -56,9 +36,8 @@ var/list/mob_hat_cache = list()
 	//Used for self-mailing.
 	var/mail_destination = ""
 	var/module_type = /obj/item/robot_module/drone
-	var/obj/item/hat
-	var/hat_x_offset = 0
-	var/hat_y_offset = -13
+	var/hat_x = 0
+	var/hat_y = -13
 
 	holder_type = /obj/item/holder/drone
 	ntos_type = null
@@ -71,6 +50,8 @@ var/list/mob_hat_cache = list()
 	remove_language(/decl/language/binary)
 	add_language(/decl/language/binary, 0)
 	add_language(/decl/language/binary/drone, 1)
+	set_extension(src, /datum/extension/hattable, hat_x, hat_y)
+
 	default_language = /decl/language/binary/drone
 	// NO BRAIN.
 	mmi = null
@@ -86,9 +67,6 @@ var/list/mob_hat_cache = list()
 	GLOB.moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 
 /mob/living/silicon/robot/drone/Destroy()
-	if(hat)
-		hat.dropInto(loc)
-		hat = null
 	GLOB.moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 	. = ..()
 
@@ -137,10 +115,10 @@ var/list/mob_hat_cache = list()
 	icon_state = "constructiondrone"
 	laws = /datum/ai_laws/construction_drone
 	module_type = /obj/item/robot_module/drone/construction
-	hat_x_offset = 1
-	hat_y_offset = -12
 	can_pull_size = ITEM_SIZE_STRUCTURE
 	can_pull_mobs = MOB_PULL_SAME
+	hat_x = 1
+	hat_y = -12
 
 /mob/living/silicon/robot/drone/init()
 	additional_law_channels["Drone"] = ":d"
@@ -164,19 +142,21 @@ var/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/on_update_icon()
 
-	overlays.Cut()
+	cut_overlays()
 	if(stat == 0)
 		if(controlling_ai)
-			overlays += "eyes-[icon_state]-ai"
+			add_overlay("eyes-[icon_state]-ai")
 		else if(emagged)
-			overlays += "eyes-[icon_state]-emag"
+			add_overlay("eyes-[icon_state]-emag")
 		else
-			overlays += "eyes-[icon_state]"
+			add_overlay("eyes-[icon_state]")
 	else
-		overlays -= "eyes"
+		add_overlay("eyes")
 
-	if(hat) // Let the drones wear hats.
-		overlays |= get_hat_icon(hat, hat_x_offset, hat_y_offset)
+	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+	var/image/I = hattable?.get_hat_overlay(src)
+	if(I)
+		add_overlay(I)
 
 /mob/living/silicon/robot/drone/choose_icon()
 	return
@@ -184,26 +164,12 @@ var/list/mob_hat_cache = list()
 /mob/living/silicon/robot/drone/pick_module()
 	return
 
-/mob/living/silicon/robot/drone/proc/wear_hat(var/obj/item/new_hat)
-	if(hat)
-		return
-	hat = new_hat
-	new_hat.forceMove(src)
-	update_icon()
-
 //Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
 /mob/living/silicon/robot/drone/attackby(var/obj/item/W, var/mob/user)
 
-	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
-		if(hat)
-			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
-		else if(user.unEquip(W))
-			wear_hat(W)
-			user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
-		return
-	else if(istype(W, /obj/item/borg/upgrade/))
+	if(istype(W, /obj/item/borg/upgrade))
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
-		return
+		return TRUE
 
 	else if(isCrowbar(W) && user.a_intent != I_HURT)
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
@@ -406,13 +372,3 @@ var/list/mob_hat_cache = list()
 	if(!controlling_ai)
 		return ..()
 	controlling_ai.open_subsystem(/datum/nano_module/law_manager)
-
-/mob/living/silicon/robot/drone/attack_hand(mob/user)
-	if(hat)
-		hat.forceMove(get_turf(src))
-		user.put_in_hands(hat)
-		user.visible_message(SPAN_DANGER("\The [user] removes \the [src]'s [hat]!"))
-		hat = null
-		update_icons()
-		return
-	. = ..()
