@@ -5,6 +5,9 @@
 	networks = list(
 		NETWORK_ENGINEERING
 	)
+	languages = list(
+		/decl/language/human/common = FALSE
+	)
 	equipment = list(
 		/obj/item/weldingtool,
 		/obj/item/screwdriver,
@@ -116,7 +119,6 @@
 	channels = list(
 		"Engineering" = 1
 	)
-	languages = list()
 
 /obj/item/robot_module/drone/construction/Initialize()
 	equipment += /obj/item/rcd/borg

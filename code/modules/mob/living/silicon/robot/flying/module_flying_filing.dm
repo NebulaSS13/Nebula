@@ -2,12 +2,9 @@
 	name = "filing drone module"
 	display_name = "Filing"
 	channels = list(
-		"Service" = TRUE, 
+		"Service" = TRUE,
 		"Supply" = TRUE
 		)
-	languages = list(
-		/decl/language/human/common = TRUE
-	)
 	sprites = list("Drone" = "drone-service")
 	equipment = list(
 		/obj/item/flash,
