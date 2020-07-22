@@ -165,7 +165,7 @@
 	absolute_worth = 10
 
 /obj/item/charge_stick
-	name = "charge-stick"
+	name = "charge stick"
 	icon = 'icons/obj/items/credstick.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A digital stick that holds an amount of money."

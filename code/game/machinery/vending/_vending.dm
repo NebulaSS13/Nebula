@@ -216,16 +216,17 @@
 	visible_message("<span class='info'>\The [usr] plugs \the [wallet] into \the [src].</span>")
 	if(wallet.is_locked())
 		status_message = "Unlock \the [wallet] before using it."
-		status_error = 1
-		return 0
+		status_error = TRUE
 	else if(currently_vending.price > wallet.loaded_worth)
 		status_message = "Insufficient funds on \the [wallet]."
-		status_error = 1
-		return 0
+		status_error = TRUE
 	else
 		wallet.adjust_worth(-(currently_vending.price))
 		credit_purchase("[wallet.id]")
-		return 1
+		return TRUE
+	if(status_message && status_error)
+		to_chat(usr, SPAN_WARNING(status_message))
+	return FALSE
 
 
 /**
