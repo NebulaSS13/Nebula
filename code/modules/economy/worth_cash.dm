@@ -167,7 +167,7 @@
 /obj/item/charge_stick
 	name = "charge-stick"
 	icon = 'icons/obj/items/credstick.dmi'
-	icon_state = "peasant"
+	icon_state = ICON_STATE_WORLD
 	desc = "A digital stick that holds an amount of money."
 
 	var/max_worth = 5000
@@ -265,11 +265,15 @@
 
 /obj/item/charge_stick/on_update_icon()
 	. = ..()
+
+	if(grade && grade != "peasant")
+		var/image/I = image(icon, "[icon_state]-[grade]")
+		I.appearance_flags |= RESET_COLOR
+		overlays += I
+
 	if(get_world_inventory_state() == ICON_STATE_WORLD)
-		icon_state = ICON_STATE_WORLD
 		return 
 
-	icon_state = grade
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(lock.locked)
 		return
