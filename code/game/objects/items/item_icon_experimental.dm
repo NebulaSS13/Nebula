@@ -62,6 +62,8 @@ var/list/icon_state_cache = list()
 		useicon = get_icon_for_bodytype(bodytype)
 
 	var/useiconstate = "[bodytype]-[slot]"
+	if(!check_state_in_icon(useiconstate, useicon))
+		return new /image
 	var/image/I = image(useicon, useiconstate)
 	I.color = color
 	I.appearance_flags = RESET_COLOR
