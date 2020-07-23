@@ -2,7 +2,7 @@
 	name = "supermatter grenade"
 	icon_state = "banana"
 	item_state = "emergency_engi"
-	origin_tech = "{'bluespace':5,'magnets':4,'engineering':5}"
+	origin_tech = "{'wormholes':5,'magnets':4,'engineering':5}"
 	arm_sound = 'sound/effects/3.wav'
 	var/implode_at
 

@@ -208,16 +208,16 @@
 	containertype = /obj/structure/closet/radiation
 	containername = "radiation suit locker"
 
-/decl/hierarchy/supply_pack/engineering/bluespacerelay
-	name = "Parts - Emergency Bluespace Relay parts"
-	contains = list(/obj/item/stock_parts/circuitboard/bluespacerelay,
+/decl/hierarchy/supply_pack/engineering/commrelay
+	name = "Parts - Emergency Communication Relay parts"
+	contains = list(/obj/item/stock_parts/circuitboard/commsrelay,
 					/obj/item/stock_parts/manipulator,
 					/obj/item/stock_parts/manipulator,
 					/obj/item/stock_parts/subspace/filter,
 					/obj/item/stock_parts/subspace/crystal,
 					/obj/item/storage/toolbox/electrical)
 	cost = 75
-	containername = "emergency bluespace relay assembly kit"
+	containername = "emergency communication relay assembly kit"
 
 /decl/hierarchy/supply_pack/engineering/firefighter
 	name = "Gear - Firefighting equipment"

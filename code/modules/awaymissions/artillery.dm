@@ -1,7 +1,7 @@
 
 /obj/machinery/artillerycontrol
 	var/reload = 180
-	name = "bluespace artillery control"
+	name = "superluminal artillery control"
 	icon_state = "control_boxp1"
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	density = 1
@@ -16,7 +16,7 @@
 	icon = 'icons/obj/machines/artillery.dmi'
 	anchored = 1
 	density = 1
-	desc = "The ship's old bluespace artillery cannon. Looks inoperative."
+	desc = "The ship's old superluminal artillery cannon. Looks inoperative."
 
 /obj/structure/artilleryplaceholder/decorative
 	density = 0
@@ -27,7 +27,7 @@
 
 /obj/machinery/artillerycontrol/interact(mob/user)
 	user.set_machine(src)
-	var/dat = "<B>Bluespace Artillery Control:</B><BR>"
+	var/dat = "<B>Superluminal Artillery Control:</B><BR>"
 	dat += "Locked on<BR>"
 	dat += "<B>Charge progress: [reload]/180:</B><BR>"
 	dat += "<A href='byond://?src=\ref[src];fire=1'>Open Fire</A><BR>"
@@ -47,7 +47,7 @@
 		if (src.reload < 180)
 			return
 		if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
-			command_announcement.Announce("Bluespace artillery fire detected. Brace for impact.")
+			command_announcement.Announce("Wormhole artillery fire detected. Brace for impact.")
 			log_and_message_admins("has launched an artillery strike.", 1)
 			var/list/L = list()
 			for(var/turf/T in get_area_turfs(thearea))

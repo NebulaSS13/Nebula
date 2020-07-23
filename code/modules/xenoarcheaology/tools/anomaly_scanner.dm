@@ -4,7 +4,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "flashgun"
 	item_state = "lampgreen"
-	origin_tech = "{'bluespace':3,'magnets':3}"
+	origin_tech = "{'wormholes':3,'magnets':3}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,

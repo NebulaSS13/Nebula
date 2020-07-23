@@ -421,7 +421,7 @@
 	if((setup & CLOSET_HAS_LOCK) && locked)
 		make_broken()
 
-	//Do this to prevent contents from being opened into nullspace (read: bluespace)
+	//Do this to prevent contents from being opened into nullspace
 	if(istype(loc, /obj/structure/bigDelivery))
 		var/obj/structure/bigDelivery/BD = loc
 		BD.unwrap()

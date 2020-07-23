@@ -177,9 +177,9 @@
 /obj/item/integrated_circuit/time/clock/station/get_time()
 	return stationtime2text()
 
-/obj/item/integrated_circuit/time/clock/bluespace
-	name = "integrated clock (Bluespace Absolute Time)"
-	desc = "Tells you what the time is, in Bluespace Absolute Time, unaffected by local time dilation or other phenomenon."
+/obj/item/integrated_circuit/time/clock/absolute
+	name = "integrated clock (Absolute Time)"
+	desc = "Tells you what the time is, in Absolute Time, unaffected by local time dilation or other phenomenon."
 
-/obj/item/integrated_circuit/time/clock/bluespace/get_time()
+/obj/item/integrated_circuit/time/clock/absolute/get_time()
 	return REALTIMEOFDAY

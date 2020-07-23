@@ -36,7 +36,6 @@
 	#include "../away/casino/casino.dm"
 	#include "../away/magshield/magshield.dm"
 	#include "../away/slavers/slavers_base.dm"
-	#include "../away/blueriver/blueriver.dm"
 	#include "../away/mobius_rift/mobius_rift.dm"
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/unishi/unishi.dm"

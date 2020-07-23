@@ -1,14 +1,14 @@
-/datum/universal_state/bluespace_jump
-	name = "Bluespace Jump"
-	var/list/bluespaced = list()
+/datum/universal_state/jump
+	name = "FTL Jump"
+	var/list/duplicated = list()
 	var/list/bluegoasts = list()
 	var/list/affected_levels
 	var/list/old_accessible_z_levels
 
-/datum/universal_state/bluespace_jump/New(var/list/zlevels)
+/datum/universal_state/jump/New(var/list/zlevels)
 	affected_levels = zlevels
 
-/datum/universal_state/bluespace_jump/OnEnter()
+/datum/universal_state/jump/OnEnter()
 	var/space_zlevel = GLOB.using_map.get_empty_zlevel() //get a place for stragglers
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
@@ -18,7 +18,7 @@
 				if(T)
 					M.forceMove(T)
 			else
-				apply_bluespaced(M)
+				create_duplicate(M)
 	for(var/mob/goast in GLOB.ghost_mob_list)
 		goast.mouse_opacity = 0	//can't let you click that Dave
 		goast.set_invisibility(SEE_INVISIBLE_LIVING)
@@ -27,39 +27,39 @@
 	for(var/z in affected_levels)
 		GLOB.using_map.accessible_z_levels -= "[z]" //not accessible during the jump
 
-/datum/universal_state/bluespace_jump/OnExit()
-	for(var/mob/M in bluespaced)
+/datum/universal_state/jump/OnExit()
+	for(var/mob/M in duplicated)
 		if(!QDELETED(M))
-			clear_bluespaced(M)
+			clear_duplicated(M)
 
-	bluespaced.Cut()
+	duplicated.Cut()
 	GLOB.using_map.accessible_z_levels = old_accessible_z_levels
 	old_accessible_z_levels = null
 
-/datum/universal_state/bluespace_jump/OnPlayerLatejoin(var/mob/living/M)
+/datum/universal_state/jump/OnPlayerLatejoin(var/mob/living/M)
 	if(M.z in affected_levels)
-		apply_bluespaced(M)
+		create_duplicate(M)
 
-/datum/universal_state/bluespace_jump/OnTouchMapEdge(var/atom/A)
-	if((A.z in affected_levels) && (A in bluespaced))
+/datum/universal_state/jump/OnTouchMapEdge(var/atom/A)
+	if((A.z in affected_levels) && (A in duplicated))
 		if(ismob(A))
-			to_chat(A,"<span class='warning'>You drift away into the shifting expanse, never to be seen again.</span>")
-		qdel(A) //lost in bluespace
+			to_chat(A, SPAN_WARNING("You drift away into the shifting expanse, never to be seen again."))
+		qdel(A) //lost beyond spacetime
 		return FALSE
 	return TRUE
 
-/datum/universal_state/bluespace_jump/proc/apply_bluespaced(var/mob/living/M)
-	bluespaced += M
+/datum/universal_state/jump/proc/create_duplicate(var/mob/living/M)
+	duplicated += M
 	if(M.client)
 		to_chat(M,"<span class='notice'>You feel oddly light, and somewhat disoriented as everything around you shimmers and warps ever so slightly.</span>")
-		M.overlay_fullscreen("bluespace", /obj/screen/fullscreen/bluespace_overlay)
+		M.overlay_fullscreen("wormhole", /obj/screen/fullscreen/wormhole_overlay)
 	M.confused = 20
 	bluegoasts += new/obj/effect/bluegoast/(get_turf(M),M)
 
-/datum/universal_state/bluespace_jump/proc/clear_bluespaced(var/mob/living/M)
+/datum/universal_state/jump/proc/clear_duplicated(var/mob/living/M)
 	if(M.client)
 		to_chat(M,"<span class='notice'>You feel rooted in material world again.</span>")
-		M.clear_fullscreen("bluespace")
+		M.clear_fullscreen("wormhole")
 	M.confused = 0
 	for(var/mob/goast in GLOB.ghost_mob_list)
 		goast.mouse_opacity = initial(goast.mouse_opacity)
@@ -70,7 +70,7 @@
 	bluegoasts.Cut()
 
 /obj/effect/bluegoast
-	name = "bluespace echo"
+	name = "echo"
 	desc = "It's not going to punch you, is it?"
 	var/mob/living/carbon/human/daddy
 	anchored = 1
@@ -104,12 +104,12 @@
 	if(nloc == new_loc)
 		reality++
 		if(reality > 5)
-			to_chat(daddy, "<span class='notice'>Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended...</span>")
+			to_chat(daddy, SPAN_NOTICE("Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended..."))
 			blueswitch()
 		else if(reality > 3)
-			to_chat(daddy, "<span class='danger'>Something is definitely wrong. Why do you think YOU are the original?</span>")
+			to_chat(daddy, SPAN_DANGER("Something is definitely wrong. Why do you think YOU are the original?"))
 		else
-			to_chat(daddy, "<span class='warning'>You feel a bit less real. Which one of you two was original again?..</span>")
+			to_chat(daddy, SPAN_WARNING("You feel a bit less real. Which one of you two was original again...?"))
 
 /obj/effect/bluegoast/proc/mirror_dir(var/atom/movable/am, var/old_dir, var/new_dir)
 	set_dir(GLOB.reverse_dir[new_dir])
@@ -131,7 +131,7 @@
 	daddy.dust()
 	qdel(src)
 
-/obj/screen/fullscreen/bluespace_overlay
+/obj/screen/fullscreen/wormhole_overlay
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "mfoam"
 	screen_loc = ui_entire_screen

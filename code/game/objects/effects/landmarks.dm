@@ -49,7 +49,7 @@
 		if("endgame_exit")
 			endgame_safespawns += loc
 			delete_me = 1
-		if("bluespacerift")
+		if("endgame_wormhole")
 			endgame_exits += loc
 			delete_me = 1
 

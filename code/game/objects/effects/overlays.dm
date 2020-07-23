@@ -35,7 +35,7 @@
 	icon_state = "coconuts"
 
 /obj/effect/overlay/bluespacify
-	name = "Bluespace"
+	name = "subspace"
 	icon = 'icons/turf/space.dmi'
 	icon_state = "bluespacify"
 	layer = SUPERMATTER_WALL_LAYER

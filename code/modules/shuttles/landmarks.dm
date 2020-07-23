@@ -151,9 +151,9 @@
 	qdel(src)
 
 /obj/item/spaceflare
-	name = "bluespace flare"
+	name = "long-range flare"
 	desc = "Burst transmitter used to broadcast all needed information for shuttle navigation systems. Has a flare attached for marking the spot where you probably shouldn't be standing."
-	icon = 'icons/obj/items/device/bluespace_flare.dmi'
+	icon = 'icons/obj/items/device/long_range_flare.dmi'
 	icon_state = "bluflare"
 	light_color = "#3728ff"
 	var/active

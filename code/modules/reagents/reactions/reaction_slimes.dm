@@ -315,12 +315,12 @@
 	new /obj/item/camera(get_turf(holder.my_atom))
 	..()
 
-//Bluespace
+//Quantum
 /datum/chemical_reaction/slime/teleport
 	name = "Slime Teleport"
 	result = null
 	required_reagents = list(/decl/material/solid/metal/uranium = 1)
-	required = /obj/item/slime_extract/bluespace
+	required = /obj/item/slime_extract/quantum
 	reaction_sound = 'sound/effects/teleport.ogg'
 
 /datum/chemical_reaction/slime/teleport/on_reaction(var/datum/reagents/holder)

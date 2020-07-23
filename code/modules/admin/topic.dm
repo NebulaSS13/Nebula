@@ -1400,10 +1400,10 @@
 		to_chat(H, SPAN_NOTICE("Your prayers have been answered!! You received the <b>best [C.name]</b>!"))
 		return
 
-	else if(href_list["BlueSpaceArtillery"])
+	else if(href_list["Artillery"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
-		var/mob/living/M = locate(href_list["BlueSpaceArtillery"])
+		var/mob/living/M = locate(href_list["Artillery"])
 		if(!isliving(M))
 			to_chat(usr, "This can only be used on instances of type /mob/living")
 			return
@@ -1419,9 +1419,9 @@
 		spawn(50)
 			BSACooldown = 0
 
-		to_chat(M, "You've been hit by bluespace artillery!")
-		log_admin("[key_name(M)] has been hit by Bluespace Artillery fired by [src.owner]")
-		message_admins("[key_name(M)] has been hit by Bluespace Artillery fired by [src.owner]")
+		to_chat(M, "You've been hit by wormhole artillery!")
+		log_admin("[key_name(M)] has been hit by wormhole artillery fired by [src.owner]")
+		message_admins("[key_name(M)] has been hit by wormhole artillery fired by [src.owner]")
 
 		var/obj/effect/stop/S
 		S = new /obj/effect/stop(M.loc)

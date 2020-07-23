@@ -21,9 +21,9 @@
 	name = "'[codename]' project data disk"
 	subject = pick("an experimental design for", "a blueprint to build",\
 	"a long set of theoretical formulas detailing the functioning of")
-	subject += " " + pick("a bluespace artillery cannon", "a supermatter engine", "a fusion engine", "an atmospheric scrubber",\
-	"a human cloning pod", "a microwave oven", "a bluespace drive", "a laser carbine", "an energy pistol",\
-	"a bluespace gateway", "a teleporter", "a huge mining drill", "a strange spacecraft", "a space station",\
+	subject += " " + pick("a superluminal artillery cannon", "a supermatter engine", "a fusion engine", "an atmospheric scrubber",\
+	"a human cloning pod", "a microwave oven", "a wormhole generator", "a laser carbine", "an energy pistol",\
+	"a wormhole", "a teleporter", "a huge mining drill", "a strange spacecraft", "a space station",\
 	"a sleek-looking fighter spacecraft", "a ballistic rifle", "an energy sword", "an inanimate carbon rod")
 	subject += " " + pick("that is extremely powerful", "which is highly efficient", "which is incredibly compact",\
 	"that runs off of an exotic form of matter", "that runs off of hydrogen gas", "created by aliens", "that just looks really cool")

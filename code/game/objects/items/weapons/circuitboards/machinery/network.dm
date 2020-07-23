@@ -28,7 +28,7 @@
 	name = T_BOARD("router")
 	build_path = /obj/machinery/network/router
 	board_type = "machine"
-	origin_tech = "{'bluespace':2,'programming':2}"
+	origin_tech = "{'wormholes':2,'programming':2}"
 	req_components = list(
 		/obj/item/stock_parts/subspace/filter = 1,
 		/obj/item/stock_parts/subspace/crystal = 1,
@@ -44,7 +44,7 @@
 	name = T_BOARD("relay")
 	build_path = /obj/machinery/network/relay
 	board_type = "machine"
-	origin_tech = "{'bluespace':2,'programming':2}"
+	origin_tech = "{'wormholes':2,'programming':2}"
 	req_components = list(
 		/obj/item/stock_parts/subspace/filter = 1,
 		/obj/item/stock_parts/subspace/crystal = 1,

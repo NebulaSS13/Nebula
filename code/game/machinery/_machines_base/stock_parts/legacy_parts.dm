@@ -159,7 +159,7 @@
 	name = "subspace ansible"
 	icon_state = "subspace_ansible"
 	desc = "A compact module capable of sensing extradimensional activity."
-	origin_tech = "{'programming':3,'magnets':5,'materials':4,'bluespace':2}"
+	origin_tech = "{'programming':3,'magnets':5,'materials':4,'wormholes':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -175,7 +175,7 @@
 	name = "subspace amplifier"
 	icon_state = "subspace_amplifier"
 	desc = "A compact micro-machine capable of amplifying weak subspace transmissions."
-	origin_tech = "{'programming':3,'magnets':4,'materials':4,'bluespace':2}"
+	origin_tech = "{'programming':3,'magnets':4,'materials':4,'wormholes':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
@@ -186,7 +186,7 @@
 	name = "subspace treatment disk"
 	icon_state = "treatment_disk"
 	desc = "A compact micro-machine capable of stretching out hyper-compressed radio waves."
-	origin_tech = "{'programming':3,'magnets':2,'materials':5,'bluespace':2}"
+	origin_tech = "{'programming':3,'magnets':2,'materials':5,'wormholes':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -194,7 +194,7 @@
 	name = "subspace wavelength analyzer"
 	icon_state = "wavelength_analyzer"
 	desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
-	origin_tech = "{'programming':3,'magnets':4,'materials':4,'bluespace':2}"
+	origin_tech = "{'programming':3,'magnets':4,'materials':4,'wormholes':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
 
@@ -202,7 +202,7 @@
 	name = "ansible crystal"
 	icon_state = "ansible_crystal"
 	desc = "A crystal made from pure glass used to transmit laser databursts to subspace."
-	origin_tech = "{'magnets':4,'materials':4,'bluespace':2}"
+	origin_tech = "{'magnets':4,'materials':4,'wormholes':2}"
 	material = /decl/material/solid/glass
 	matter = list(
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
@@ -213,7 +213,7 @@
 	name = "subspace transmitter"
 	icon_state = "subspace_transmitter"
 	desc = "A large piece of equipment used to open a window into the subspace dimension."
-	origin_tech = "{'magnets':5,'materials':5,'bluespace':3}"
+	origin_tech = "{'magnets':5,'materials':5,'wormholes':3}"
 	material = /decl/material/solid/glass
 	matter = list(
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,

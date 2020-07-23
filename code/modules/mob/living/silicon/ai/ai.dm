@@ -364,10 +364,10 @@ var/list/ai_verbs_default = list(
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
 	if(!is_relay_online())
-		to_chat(usr, "<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>")
+		to_chat(usr, "<span class='warning'>No emergency communication relay detected. Unable to transmit message.</span>")
 		return
 	if(emergency_message_cooldown)
-		to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
+		to_chat(usr, "<span class='warning'>Arrays cycling. Please stand by.</span>")
 		return
 	var/input = sanitize(input(usr, "Please choose a message to transmit to [GLOB.using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 	if(!input)

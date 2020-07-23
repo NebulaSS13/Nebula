@@ -429,7 +429,7 @@
 "bk" = (
 /obj/structure/table/reinforced,
 /obj/item/chems/glass/beaker/large,
-/obj/item/chems/glass/beaker/bluespace,
+/obj/item/chems/glass/beaker/advanced,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "bl" = (
@@ -1617,7 +1617,7 @@
 	icon_state = "map";
 	dir = 1
 	},
-/obj/item/seeds/bluespacetomatoseed,
+/obj/item/seeds/quantumatoseed,
 /turf/simulated/floor/tiled,
 /area/unishi/hydro)
 "ej" = (

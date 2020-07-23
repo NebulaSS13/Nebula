@@ -23,10 +23,10 @@
 	desc = "The study of miniaturized high-density power storage systems."
 	id = TECH_POWER
 
-/decl/research_field/bluespace
-	name = "Bluespace"
-	desc = "The study of the parallel realm that lies adjacent to realspace."
-	id = TECH_BLUESPACE
+/decl/research_field/wormholes
+	name = "Wormholes"
+	desc = "The study of the realm that lies beyond the singularity."
+	id = TECH_WORMHOLES
 
 /decl/research_field/biotech
 	name = "Biotechnology"

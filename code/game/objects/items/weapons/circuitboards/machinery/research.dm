@@ -192,7 +192,7 @@
 	name = T_BOARD("cryo pod")
 	build_path = /obj/machinery/cryopod
 	board_type = "machine"
-	origin_tech = "{'programming':6,'engineering':6,'bluespace':6}"
+	origin_tech = "{'programming':6,'engineering':6,'wormholes':6}"
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 4,
 		/obj/item/stock_parts/manipulator = 1,
@@ -212,7 +212,7 @@
 	name = T_BOARD("merchant pad")
 	build_path = /obj/machinery/merchant_pad
 	board_type = "machine"
-	origin_tech = "{'programming':6,'bluespace':6,'esoteric':1}"
+	origin_tech = "{'programming':6,'wormholes':6,'esoteric':1}"
 	req_components = list(/obj/item/stack/cable_coil = 15)
 	req_components = list(
 		/obj/item/stock_parts/subspace/amplifier = 1,

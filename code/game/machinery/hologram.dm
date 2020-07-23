@@ -422,7 +422,7 @@ Holographic project of everything else.
 
 /obj/machinery/hologram/holopad/longrange
 	name = "long range holopad"
-	desc = "It's a floor-mounted device for projecting holographic images. This one utilizes bluespace transmitter to communicate with far away locations."
+	desc = "It's a floor-mounted device for projecting holographic images. This one utilizes micro-width wormholes to communicate with far away locations."
 	icon_state = "holopad-Y0"
 	power_per_hologram = 1000 //per usage per hologram
 	holopadType = HOLOPAD_LONG_RANGE

@@ -537,9 +537,9 @@
 	if(istype(G))
 		G.update_outputs()
 
-/obj/item/integrated_circuit/manipulation/bluespace_rift
-	name = "bluespace rift generator"
-	desc = "This powerful circuit can open rifts to another realspace location through bluespace."
+/obj/item/integrated_circuit/manipulation/wormhole
+	name = "wormhole generator"
+	desc = "This powerful circuit can open micro-length wormholes between two points in space."
 	extended_desc = "If a valid teleporter console is supplied as input then its selected teleporter beacon will be used as destination point, \
 					and if not an undefined destination point is selected. \
 					Rift direction is a cardinal value determening in which direction the rift will be opened, relative the local north. \
@@ -555,14 +555,14 @@
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
 
-	origin_tech = "{'magnets':1,'bluespace':3}"
+	origin_tech = "{'magnets':1,'wormholes':3}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
+/obj/item/integrated_circuit/manipulation/wormhole/do_work()
 	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
 	var/step_dir = get_pin_data(IC_INPUT, 2)
 

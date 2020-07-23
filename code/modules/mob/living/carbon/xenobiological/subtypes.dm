@@ -16,7 +16,7 @@
 		if("dark purple")
 			return list("purple", "sepia", "orange", "orange")
 		if("yellow")
-			return list("bluespace", "metal", "orange", "orange")
+			return list("quantum", "metal", "orange", "orange")
 		if("silver")
 			return list("metal", "pyrite", "blue", "blue")
 		//Tier 4
@@ -66,8 +66,8 @@
 			return /obj/item/slime_extract/green
 		if("sepia")
 			return /obj/item/slime_extract/sepia
-		if("bluespace")
-			return /obj/item/slime_extract/bluespace
+		if("quantum")
+			return /obj/item/slime_extract/quantum
 		if("cerulean")
 			return /obj/item/slime_extract/cerulean
 		if("pyrite")

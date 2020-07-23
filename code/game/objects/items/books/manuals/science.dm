@@ -202,7 +202,7 @@
 				<br>
 				It's perhaps one of the most exciting times to be alive, with the recent breakthroughs in understanding and categorisation of things we may one day no longer call
 				'anomalies,' but rather 'infrequent or rare occurrences of certain celestial weather or phenomena.' Perhaps a little more long winded, but no less eloquent all the
-				same! Why, look at the strides we're making in piercing the walls of bluespace or our steadily improving ability to clarify and stabilise subspace emissions; it's
+				same! Why, look at the strides we're making in piercing the walls of spacetime or our steadily improving ability to clarify and stabilise subspace emissions; it's
 				certainly an exciting time to be alive. For the moment, the Hydrolian hasn't seen two spatial anomalies alike but the day will come and it is soon, I can feel it.
 				</body>
 			</html>"}
@@ -302,7 +302,7 @@
 				in the area of harvesting and application of the energy emitted by anomalous phenomena from around the galaxy (although I profess I have not yet seen him
 				venture further from his birthplace on Earth than the comfortable distance of the Sol Cis-Oort Satellite Sphere).<br>
 				<br>
-				By employing a patented semi-phased alloy with unique and fascinating bluespace interaction properties, Ward's contraption is able to 'harvest' energy, store
+				By employing a patented semi-phased alloy with unique and fascinating properties, Ward's contraption is able to 'harvest' energy, store
 				it and redirect it later at will (with appropriate electronic mechanisms, of course). Although he professes to see or desire no commercial or material gain
 				for the application and use of said energy once it is harvested, there are no doubt myriad ways we can come to benefit from such things beyond mere research,
 				such as the reconstruction of torn cartilaginous tissue that a peculiar radiation from an amphibious species on Brachis IV was found to emit.<br>
@@ -346,8 +346,8 @@
 				<a href="#Contents">Contents</a>
 
 				<h1><a name="Development">The breakthrough</a></h1>
-				It was in examining the effects of decelerated, bluespace, high energy particles when transphased through bluespace that the effects where primarily noticed.
-				Due to exigent properties of that dimension, transphasing those particles capable of existing in bluespace with high stability levels has the effect of bringing
+				It was in examining the effects of decelerated high energy particles when transphased through a gravitational lens that the effects where primarily noticed.
+				Due to exigent properties of that dimension, transphasing those particles capable of existing with high stability levels has the effect of bringing
 				some of those effects into realspace. Examining the Hoffman emissions in particular, it was discovered that they exhibited a-entropic behaviour, and in what is
 				now termed the 'Effete Hoffman Principle,' it was found that metastabilising the Hoffman radiation resulted in the effect being applied across other physical
 				interactions, in particular forces and reactions.<br>

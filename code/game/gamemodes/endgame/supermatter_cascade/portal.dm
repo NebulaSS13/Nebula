@@ -1,7 +1,7 @@
 /*** EXIT PORTAL ***/
 
 /obj/singularity/narsie/large/exit
-	name = "Bluespace Rift"
+	name = "unstable wormhole"
 	desc = "NO TIME TO EXPLAIN, JUMP IN!"
 	icon = 'icons/obj/rift.dmi'
 	icon_state = "rift"
