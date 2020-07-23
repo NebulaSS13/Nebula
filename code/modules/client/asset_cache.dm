@@ -90,7 +90,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	if(!unreceived || !unreceived.len)
 		return 0
 	if (unreceived.len >= ASSET_CACHE_TELL_CLIENT_AMOUNT)
-		to_chat(client, "Sending Resources...")
+		to_chat(client, "Sending resources...")
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
 	for(var/asset in unreceived)
 		if (asset in asset_cache.cache)
