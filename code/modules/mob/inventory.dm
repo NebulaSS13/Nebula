@@ -177,10 +177,14 @@ var/list/slot_equipment_priority = list( \
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
 	if(!Target && !l_hand && !r_hand)
-		for(var/obj/item/grab/grab in get_active_grabs())
-			qdel(grab)
-			. = TRUE
-		return
+		if(length(get_active_grabs()))
+			for(var/obj/item/grab/grab in get_active_grabs())
+				qdel(grab)
+				. = TRUE
+			return
+		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+		if(hattable?.drop_hat(src))
+			return TRUE
 	return hand ? drop_l_hand(Target) : drop_r_hand(Target)
 
 /*

@@ -20,9 +20,8 @@
 	icon_state = "hat"
 
 /obj/screen/diona/hat/Click()
-	var/mob/living/carbon/alien/diona/chirp = usr
-	if(istype(chirp) && chirp.hat)
-		chirp.unEquip(chirp.hat)
+	var/datum/extension/hattable/hattable = get_extension(usr, /datum/extension/hattable)
+	hattable?.drop_hat(usr)
 
 /obj/screen/diona/held
 	name = "held item"

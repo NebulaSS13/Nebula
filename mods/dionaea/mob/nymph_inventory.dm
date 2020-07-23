@@ -2,9 +2,6 @@
 	. = ..()
 	if(I == holding_item)
 		holding_item = null
-	else if(I == hat)
-		hat = null
-		update_icons()
 
 /mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands. Use mouth.
 	if(can_collect(W))
@@ -13,26 +10,11 @@
 		W.forceMove(get_turf(src))
 	return 1
 
-/mob/living/carbon/alien/diona/proc/wear_hat(var/obj/item/clothing/head/new_hat)
-	if(hat || !istype(new_hat) || holding_item == new_hat)
-		return FALSE
-	hat = new_hat
-	hat.forceMove(src)
-	hat.equipped(src)
-	hat.screen_loc = DIONA_SCREEN_LOC_HAT
-	update_icons()
-	return TRUE
-
-/mob/living/carbon/alien/diona/hotkey_drop()
-	if(holding_item || hat)
-		drop_item()
-	else
-		to_chat(usr, "<span class='warning'>You have nothing to drop.</span>")
-
 /mob/living/carbon/alien/diona/proc/can_collect(var/obj/item/collecting)
+	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	return (!holding_item && \
 		istype(collecting) && \
-		collecting != hat && \
+		collecting != hattable?.hat && \
 		collecting.loc != src && \
 		!collecting.anchored && \
 		collecting.simulated && \
@@ -70,10 +52,6 @@
 
 /mob/living/carbon/alien/diona/drop_item()
 	if(holding_item && unEquip(holding_item))
-		visible_message("<span class='notice'>\The [src] regurgitates \the [holding_item].</span>")
-	else if(hat && unEquip(hat))
-		visible_message("<span class='notice'>\The [src] wriggles out from under \the [hat].</span>")
-		update_icons()
-	else
-		. = ..()
-
+		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [holding_item]."))
+		return TRUE
+	. = ..()

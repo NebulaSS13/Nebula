@@ -80,7 +80,7 @@
 	var/lower_mod = 0
 	var/jetpack = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
-	var/datum/effect/effect/system/spark_spread/spark_system//So they can initialize sparks whenever/N
+	var/datum/effect/effect/system/spark_spread/spark_system
 	var/jeton = 0
 	var/killswitch = 0
 	var/killswitch_time = 60
@@ -478,14 +478,14 @@
 
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
-	if(prob(75) && Proj.damage > 0) spark_system.start()
+	if(prob(75) && Proj.damage > 0) 
+		spark_system.start()
 	return 2
 
 /mob/living/silicon/robot/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/inducer)) return // inducer.dm afterattack handles this
-	if (istype(W, /obj/item/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
-		return
+	if(istype(W, /obj/item/inducer) || istype(W, /obj/item/handcuffs))
+		return TRUE
 
 	if(opened) // Are they trying to insert something?
 		for(var/V in components)
@@ -653,7 +653,7 @@
 				update_icon()
 			else
 				to_chat(user, "<span class='warning'>Access denied.</span>")
-	else if(istype(W, /obj/item/borg/upgrade/))
+	else if(istype(W, /obj/item/borg/upgrade))
 		var/obj/item/borg/upgrade/U = W
 		if(!opened)
 			to_chat(usr, "You must access the borgs internals!")
@@ -671,7 +671,7 @@
 				to_chat(usr, "Upgrade error!")
 
 	else
-		if( !(istype(W, /obj/item/robotanalyzer) || istype(W, /obj/item/scanner/health)) )
+		if(!(istype(W, /obj/item/robotanalyzer) || istype(W, /obj/item/scanner/health)) && W.force && user.a_intent != I_HELP)
 			spark_system.start()
 		return ..()
 

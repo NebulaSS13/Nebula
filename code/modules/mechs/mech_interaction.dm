@@ -417,17 +417,17 @@
 			if(do_after(user, 30) && user.Adjacent(src) && (pilot in pilots) && !hatch_closed)
 				user.visible_message(SPAN_DANGER("\The [user] drags \the [pilot] out of \the [src]!"))
 				eject(pilot, silent=1)
-		return
+		return TRUE
 
 	// Otherwise toggle the hatch.
 	if(hatch_locked)
 		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
-		return
+		return TRUE
 	hatch_closed = !hatch_closed
 	to_chat(user, SPAN_NOTICE("You [hatch_closed ? "close" : "open"] the [body.hatch_descriptor]."))
 	hud_open.queue_icon_update()
 	queue_icon_update()
-	return
+	return TRUE
 
 /mob/living/exosuit/proc/attack_self(var/mob/user)
 	return visible_message("\The [src] pokes itself.")

@@ -67,25 +67,15 @@
 		return ..()
 
 /obj/item/clothing/head/proc/mob_wear_hat(var/mob/user)
-	if(!Adjacent(user))
-		return 0
-	if(!is_drone(user))
-		return 0
-	var/success
-	var/mob/living/silicon/robot/drone/D = user
-	if(D.hat)
-		success = 2
-	else
-		D.wear_hat(src)
-		success = 1
-
-	if(!success)
-		return 0
-	else if(success == 2)
-		to_chat(user, "<span class='warning'>You are already wearing a hat.</span>")
-	else if(success == 1)
-		to_chat(user, "<span class='notice'>You crawl under \the [src].</span>")
-	return 1
+	var/datum/extension/hattable/hattable = get_extension(user, /datum/extension/hattable)
+	if(Adjacent(user) && hattable)
+		if(hattable.hat)
+			to_chat(user, SPAN_WARNING("You are already wearing a hat."))
+			return TRUE
+		if(hattable.wear_hat(user, src))
+			to_chat(user, SPAN_NOTICE("You are now wearing \the [src]."))
+			return TRUE
+	return FALSE
 
 /obj/item/clothing/head/on_update_icon(var/mob/user)
 	..()
