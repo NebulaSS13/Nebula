@@ -113,6 +113,11 @@ var/list/slot_equipment_priority = list( \
 		newitem.forceMove(loc)
 	return stored
 
+/mob/proc/equip_to_storage_or_put_in_hands(obj/item/newitem)
+	var/stored = equip_to_storage(newitem)
+	if(!stored && newitem)
+		put_in_hands(newitem)
+	return stored
 //These procs handle putting s tuff in your hand. It's probably best to use these rather than setting l_hand = ...etc
 //as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
 

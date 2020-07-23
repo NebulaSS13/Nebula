@@ -5,6 +5,8 @@
 	var/decl/backpack_outfit/backpack
 	var/list/backpack_metadata
 
+	var/starting_cash_choice
+
 /datum/category_item/player_setup_item/physical/equipment
 	name = "Clothing"
 	sort_order = 3
@@ -27,14 +29,24 @@
 	from_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
 	from_file(S["backpack"], load_backbag)
 	from_file(S["backpack_metadata"], pref.backpack_metadata)
-
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
+
+	from_file(S["starting_cash_choice"], pref.starting_cash_choice)
+	var/list/all_cash_choices = decls_repository.get_decls_of_type(/decl/starting_cash_choice)
+	for(var/ctype in all_cash_choices)
+		var/decl/starting_cash_choice/cash_choice = all_cash_choices[ctype]
+		if(lowertext(cash_choice.name) == pref.starting_cash_choice)
+			pref.starting_cash_choice = ctype
+			break
 
 /datum/category_item/player_setup_item/physical/equipment/save_character(var/savefile/S)
 	to_file(S["all_underwear"], pref.all_underwear)
 	to_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
 	to_file(S["backpack"], pref.backpack.name)
 	to_file(S["backpack_metadata"], pref.backpack_metadata)
+	
+	var/decl/starting_cash_choice/cash_choice = decls_repository.get_decl(pref.starting_cash_choice)
+	to_file(S["starting_cash_choice"], lowertext(cash_choice.name))
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))
@@ -85,6 +97,8 @@
 				var/list/metadata = tweak_metadata["[tweak]"]
 				tweak_metadata["[tweak]"] = tweak.validate_metadata(metadata)
 
+	if(!ispath(pref.starting_cash_choice, /decl/starting_cash_choice))
+		pref.starting_cash_choice = GLOB.using_map.default_starting_cash_choice
 
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
@@ -103,6 +117,9 @@
 	for(var/datum/backpack_tweak/bt in pref.backpack.tweaks)
 		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
+
+	var/decl/starting_cash_choice/cash_choice = decls_repository.get_decl(pref.starting_cash_choice)
+	. += "<br><b>Personal finances:</b><br><a href='?src=\ref[src];change_cash_choice=1'>[capitalize(cash_choice.name)]</a><br>"
 	return jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/equipment/proc/get_underwear_metadata(var/underwear_category, var/datum/gear_tweak/gt)
@@ -174,7 +191,9 @@
 		if(new_metadata)
 			set_backpack_metadata(bo, bt, new_metadata)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
-
+	else if(href_list["change_cash_choice"])
+		pref.starting_cash_choice = next_in_list(pref.starting_cash_choice, typesof(/decl/starting_cash_choice))
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 	return ..()
 
 /datum/category_item/player_setup_item/physical/equipment/update_setup(var/savefile/preferences, var/savefile/character)
