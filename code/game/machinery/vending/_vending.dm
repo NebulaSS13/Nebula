@@ -68,6 +68,8 @@
 	var/vendor_currency
 	var/scan_id = 1
 
+	var/vend_cooldown = 0
+
 /obj/machinery/vending/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(isnull(markup))
@@ -141,7 +143,7 @@
 
 	var/obj/item/charge_stick/CS = W.GetChargeStick()
 
-	if (currently_vending && vendor_account && !vendor_account.suspended)
+	if (currently_vending && vendor_account && !vendor_account.suspended && vend_cooldown < world.time - 25)
 		var/paid = 0
 		var/handled = 0
 
@@ -342,6 +344,7 @@
 	status_message = "Vending..."
 	status_error = 0
 	SSnano.update_uis(src)
+	vend_cooldown = world.time
 
 	do_vending_reply()
 
