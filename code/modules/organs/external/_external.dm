@@ -138,8 +138,6 @@
 	splinted = null
 
 	if(owner)
-		if(limb_flags & ORGAN_FLAG_CAN_GRASP) owner.grasp_limbs -= src
-		if(limb_flags & ORGAN_FLAG_CAN_STAND) owner.stance_limbs -= src
 		owner.organs -= src
 		owner.organs_by_name[organ_tag] = null
 		owner.organs_by_name -= organ_tag
@@ -330,9 +328,6 @@
 	..()
 
 	if(istype(owner))
-
-		if(limb_flags & ORGAN_FLAG_CAN_GRASP) owner.grasp_limbs[src] = TRUE
-		if(limb_flags & ORGAN_FLAG_CAN_STAND) owner.stance_limbs[src] = TRUE
 		owner.organs_by_name[organ_tag] = src
 		owner.organs |= src
 
@@ -1211,9 +1206,6 @@ obj/item/organ/external/proc/remove_clamps()
 
 	if(!owner)
 		return
-
-	if(limb_flags & ORGAN_FLAG_CAN_GRASP) owner.grasp_limbs -= src
-	if(limb_flags & ORGAN_FLAG_CAN_STAND) owner.stance_limbs -= src
 
 	switch(body_part)
 		if(FOOT_LEFT, FOOT_RIGHT)
