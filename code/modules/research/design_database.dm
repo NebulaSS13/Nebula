@@ -1,7 +1,7 @@
 /obj/machinery/design_database
 	name = "fabricator design database"
-	icon = 'icons/obj/machines/server.dmi'
-	icon_state = "server-off"
+	icon = 'icons/obj/machines/tcomms/blackbox.dmi'
+	icon_state = "blackbox"
 	density = TRUE
 	anchored = TRUE
 
@@ -130,10 +130,11 @@
 		need_disk_operation = FALSE
 
 /obj/machinery/design_database/on_update_icon()
-	if(!(stat & NOPOWER) && !(stat & BROKEN) && use_power > 0)
-		icon_state = "server"
-	else
-		icon_state = "server-off"
+	icon_state = initial(icon_state)
+	if(panel_open)
+		icon_state = "[icon_state]_o"
+	if((stat & NOPOWER) || (stat & BROKEN) || !use_power)
+		icon_state = "[icon_state]_off"
 
 /obj/machinery/design_database/Destroy()
 	design_databases -= src
