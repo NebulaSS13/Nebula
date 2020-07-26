@@ -97,8 +97,6 @@
 	var/unbreakable = FALSE                    // Whether or not this weapon degrades.
 	var/anomaly_shielding					   // 0..1 value of how well it shields against xenoarch anomalies
 
-	///Used when thrown into a mob
-	var/mob_throw_hit_sound
 	///Sound used when equipping the item into a valid slot
 	var/equip_sound
 	///Sound uses when picking the item up (into your hands)
@@ -372,15 +370,13 @@
 	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
 		var/volume = get_volume_by_throwforce_and_or_w_class()
 		if (throwforce > 0)
-			if (mob_throw_hit_sound)
-				playsound(hit_atom, mob_throw_hit_sound, volume, TRUE, -1)
-			else if(hitsound)
+			if(hitsound)
 				playsound(hit_atom, hitsound, volume, TRUE, -1)
 			else
 				playsound(hit_atom, 'sound/weapons/genhit.ogg', volume, TRUE, -1)
 		else
 			playsound(hit_atom, 'sound/weapons/throwtap.ogg', 1, volume, -1)
-	else
+	else if(drop_sound)
 		playsound(src, drop_sound, 50)
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
@@ -432,10 +428,11 @@
 	if((slot_flags & slot))
 		if(equip_sound)
 			playsound(src, equip_sound, 50)
-		else
+		else if(drop_sound)
 			playsound(src, drop_sound, 50)
 	else if(slot == slot_l_hand || slot == slot_r_hand)
-		playsound(src, pickup_sound, 50)
+		if(pickup_sound)
+			playsound(src, pickup_sound, 50)
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(
