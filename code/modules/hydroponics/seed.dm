@@ -119,11 +119,8 @@
 			qdel(target)
 		return
 
-
-	if(!target_limb) target_limb = pick(BP_ALL_LIMBS)
-	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
-
-	if((target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))
+	var/obj/item/organ/external/affecting = target_limb ? target.get_organ(target_limb) : pick(target.organs)
+	if(affecting?.species?.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))
 		to_chat(target, "<span class='danger'>\The [fruit]'s thorns scratch against the armour on your [affecting.name]!</span>")
 		return
 

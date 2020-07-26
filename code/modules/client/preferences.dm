@@ -177,7 +177,7 @@ datum/preferences
 	character.f_style = f_style
 
 	// Replace any missing limbs.
-	for(var/name in BP_ALL_LIMBS)
+	for(var/name in global.all_limb_tags)
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(!O && organ_data[name] != "amputated")
 			var/list/organ_data = character.species.has_limbs[name]
@@ -186,7 +186,7 @@ datum/preferences
 			O = new limb_path(character)
 
 	// Destroy/cyborgize organs and limbs. The order is important for preserving low-level choices for robolimb sprites being overridden.
-	for(var/name in BP_BY_DEPTH)
+	for(var/name in global.all_limb_tags_by_depth)
 		var/status = organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(!O)
