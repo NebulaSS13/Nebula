@@ -134,11 +134,11 @@
 		return ..()
 	return 0
 
-/obj/machinery/door/firedoor/attack_hand(mob/user)
-	add_fingerprint(user)
+/obj/machinery/door/firedoor/physical_attack_hand(mob/user)
 	if(operating)
-		return//Already doing something.
+		return FALSE//Already doing something.
 
+	. = TRUE
 	if(blocked)
 		to_chat(user, "<span class='warning'>\The [src] is welded solid!</span>")
 		return
