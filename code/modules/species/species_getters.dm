@@ -107,3 +107,6 @@
 
 /datum/species/proc/get_root_species_name(var/mob/living/carbon/human/H)
 	return name
+
+/datum/species/proc/get_limb_from_zone(var/limb)
+	. = length(LAZYACCESS(limb_mapping, limb)) ? pick(limb_mapping[limb]) : limb

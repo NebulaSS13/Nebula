@@ -109,7 +109,7 @@
 		if(!B || H.isSynthetic())
 			to_chat(user, "<span class='warning'>\The [M] cannot be imprinted.</span>")
 			return FALSE
-		if(!(B.parent_organ == check_zone(target_zone)))
+		if(!(B.parent_organ == check_zone(target_zone, H)))
 			to_chat(user, "<span class='warning'>\The [src] must be implanted in [H.get_organ(B.parent_organ)].</span>")
 			return FALSE
 	return TRUE

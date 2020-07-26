@@ -266,7 +266,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 		. = TRUE
 
 	if(M == user)
-		var/hitzone = check_zone(user.zone_sel.selecting)
+		var/hitzone = check_zone(user.zone_sel.selecting, M)
 		var/list/badzones = list(BP_HEAD)
 		if(user.hand)
 			badzones += BP_L_ARM

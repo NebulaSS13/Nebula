@@ -110,22 +110,21 @@ var/list/global/organ_rel_size = list(
 	BP_R_FOOT = 10,
 )
 
-/proc/check_zone(zone)
-	if(!zone)	return BP_CHEST
-	switch(zone)
-		if(BP_EYES)
-			zone = BP_HEAD
-		if(BP_MOUTH)
-			zone = BP_HEAD
-	return zone
+/proc/check_zone(zone, mob/target, var/base_zone_only)
+	. = zone || BP_CHEST
+	if(. == BP_EYES || . == BP_MOUTH)
+		. = BP_HEAD
+	if(ishuman(target) && !base_zone_only)
+		var/mob/living/carbon/human/H = target
+		. = H.species.get_limb_from_zone(.)
 
 // Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
 // Do not use this if someone is intentionally trying to hit a specific body part.
 // Use get_zone_with_miss_chance() for that.
-/proc/ran_zone(zone, probability)
-	if (zone)
-		zone = check_zone(zone)
-		if (prob(probability))
+/proc/ran_zone(zone, probability, target)
+	if(zone)
+		zone = check_zone(zone, target)
+		if(prob(probability))
 			return zone
 
 	var/ran_zone = zone
@@ -150,7 +149,7 @@ var/list/global/organ_rel_size = list(
 // May return null if missed
 // miss_chance_mod may be negative.
 /proc/get_zone_with_miss_chance(zone, var/mob/target, var/miss_chance_mod = 0, var/ranged_attack=0)
-	zone = check_zone(zone)
+	zone = check_zone(zone, target)
 
 	if(!ranged_attack)
 		// target isn't trying to fight
