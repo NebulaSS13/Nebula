@@ -11,9 +11,9 @@
 		equip_to_slot_if_possible(W, slot)
 
 /mob/proc/put_in_any_hand_if_possible(obj/item/W, del_on_fail = 0, disable_warning = 1, redraw_mob = 1)
-	if(equip_to_slot_if_possible(W, slot_l_hand, del_on_fail, disable_warning, redraw_mob))
+	if(equip_to_slot_if_possible(W, slot_l_hand_str, del_on_fail, disable_warning, redraw_mob))
 		return 1
-	else if(equip_to_slot_if_possible(W, slot_r_hand, del_on_fail, disable_warning, redraw_mob))
+	else if(equip_to_slot_if_possible(W, slot_r_hand_str, del_on_fail, disable_warning, redraw_mob))
 		return 1
 	return 0
 
@@ -57,22 +57,22 @@
 
 //The list of slots by priority. equip_to_appropriate_slot() uses this list. Doesn't matter if a mob type doesn't have a slot.
 var/list/slot_equipment_priority = list( \
-		slot_back,\
-		slot_wear_id,\
-		slot_w_uniform,\
-		slot_wear_suit,\
-		slot_wear_mask,\
-		slot_head,\
-		slot_shoes,\
-		slot_gloves,\
-		slot_l_ear,\
-		slot_r_ear,\
-		slot_glasses,\
-		slot_belt,\
-		slot_s_store,\
-		slot_tie,\
-		slot_l_store,\
-		slot_r_store\
+		slot_back_str,\
+		slot_wear_id_str,\
+		slot_w_uniform_str,\
+		slot_wear_suit_str,\
+		slot_wear_mask_str,\
+		slot_head_str,\
+		slot_shoes_str,\
+		slot_gloves_str,\
+		slot_l_ear_str,\
+		slot_r_ear_str,\
+		slot_glasses_str,\
+		slot_belt_str,\
+		slot_s_store_str,\
+		slot_tie_str,\
+		slot_l_store_str,\
+		slot_r_store_str\
 	)
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
@@ -86,7 +86,7 @@ var/list/slot_equipment_priority = list( \
 
 	for(var/slot in slot_equipment_priority)
 		if(skip_store)
-			if(slot == slot_s_store || slot == slot_l_store || slot == slot_r_store)
+			if(slot == slot_s_store_str || slot == slot_l_store_str || slot == slot_r_store_str)
 				continue
 		if(equip_to_slot_if_possible(W, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return 1
@@ -229,12 +229,9 @@ var/list/slot_equipment_priority = list( \
 	return I.mob_can_unequip(src, slot)
 
 /mob/proc/get_inventory_slot(obj/item/I)
-	var/slot = 0
-	for(var/s in slot_first to slot_last) //kind of worries me
+	for(var/s in global.all_inventory_slots)
 		if(get_equipped_item(s) == I)
-			slot = s
-			break
-	return slot
+			return s
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
 /mob/proc/unEquip(obj/item/I, var/atom/target)
@@ -271,10 +268,10 @@ var/list/slot_equipment_priority = list( \
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(var/slot)
 	switch(slot)
-		if(slot_l_hand) return l_hand
-		if(slot_r_hand) return r_hand
-		if(slot_back) return back
-		if(slot_wear_mask) return wear_mask
+		if(slot_l_hand_str)    return l_hand
+		if(slot_r_hand_str)    return r_hand
+		if(slot_back_str)      return back
+		if(slot_wear_mask_str) return wear_mask
 	return null
 
 /mob/proc/get_equipped_items(var/include_carried = 0)

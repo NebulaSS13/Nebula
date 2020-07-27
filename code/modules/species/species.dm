@@ -348,12 +348,16 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		organ_data["descriptor"] = initial(limb_path.name)
 
 /datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
-	if(istype(H.get_equipped_item(slot_back), /obj/item/storage/backpack))
-		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack)
-		else	H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack)
+	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
+		if(extendedtank)
+			H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack_str)
+		else
+			H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack_str)
 	else
-		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H), slot_r_hand)
-		else	H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H), slot_r_hand)
+		if(extendedtank)
+			H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H), slot_r_hand_str)
+		else
+			H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H), slot_r_hand_str)
 
 /datum/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity

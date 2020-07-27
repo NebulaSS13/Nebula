@@ -125,7 +125,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
 /obj/item/clothing/suit/straight_jacket/equipped(var/mob/user, var/slot)
-	if(slot == slot_wear_suit)
+	if(slot == slot_wear_suit_str)
 		if(iscarbon(user))
 			var/mob/living/carbon/C = user
 			C.drop_from_inventory(C.handcuffed)

@@ -79,6 +79,6 @@
 	hitsound = 'sound/weapons/anime_sword.wav'
 
 /obj/item/sword/katana/vibro/equipped(mob/user, slot)
-	if(slot == slot_l_hand || slot == slot_r_hand)
+	if(slot == slot_l_hand_str || slot == slot_r_hand_str)
 		playsound(src, 'sound/weapons/katana_out.wav', 50, 1, -5)
 	

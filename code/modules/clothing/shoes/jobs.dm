@@ -8,7 +8,7 @@
 
 /obj/item/clothing/shoes/galoshes/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_shoes] = 1
+	LAZYSET(slowdown_per_slot, slot_shoes_str, 1)
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"

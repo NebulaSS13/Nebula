@@ -8,9 +8,9 @@
 
 	switch (limb.organ_tag)
 		if (BP_L_ARM, BP_L_HAND)
-			slot = slot_l_hand
+			slot = slot_l_hand_str
 		if (BP_R_ARM, BP_R_HAND)
-			slot = slot_r_hand
+			slot = slot_r_hand_str
 
 	var/obj/item/thing = owner.get_equipped_item(slot)
 

@@ -19,7 +19,7 @@
 
 /obj/item/clothing/mask/chewable/equipped(var/mob/living/user, var/slot)
 	..()
-	if(slot == slot_wear_mask)
+	if(slot == slot_wear_mask_str)
 		if(user.check_has_mouth())
 			START_PROCESSING(SSobj, src)
 		else

@@ -454,7 +454,7 @@
 
 /obj/item/storage/belt/holster/security/tactical/Initialize()
 	.=..()
-	slowdown_per_slot[slot_belt] = 1
+	LAZYSET(slowdown_per_slot, slot_belt_str, 1)
 
 /obj/item/storage/belt/waistpack
 	name = "waist pack"
@@ -477,7 +477,7 @@
 
 /obj/item/storage/belt/waistpack/big/Initialize()
 	.=..()
-	slowdown_per_slot[slot_belt] = 1
+	LAZYSET(slowdown_per_slot, slot_belt_str, 1)
 
 /obj/item/storage/belt/fire_belt
 	name = "firefighting equipment belt"

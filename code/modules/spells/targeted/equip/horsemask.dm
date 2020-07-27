@@ -21,7 +21,7 @@
 
 /spell/targeted/equip_item/horsemask/New()
 	..()
-	equipped_summons = list("[slot_wear_mask]" = /obj/item/clothing/mask/horsehead)
+	equipped_summons = list("[slot_wear_mask_str]" = /obj/item/clothing/mask/horsehead)
 
 /spell/targeted/equip_item/horsemask/cast(list/targets, mob/user = usr)
 	..()

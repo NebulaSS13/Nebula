@@ -58,8 +58,8 @@
 			cooldown_ability(ability_cooldown / 1.5)
 			visible_message(SPAN_MFAUNA("\The [src] flaps its wings mightily and bowls over \the [H] with a gust!"))
 
-		else if(H.get_equipped_item(slot_head))
-			var/obj/item/clothing/head/HAT = H.get_equipped_item(slot_head)
+		else if(H.get_equipped_item(slot_head_str))
+			var/obj/item/clothing/head/HAT = H.get_equipped_item(slot_head_str)
 			if(H.canUnEquip(HAT))
 				visible_message(SPAN_MFAUNA("\The [src] rips \the [H]'s [HAT] off!"))
 				cooldown_ability(ability_cooldown)

@@ -147,13 +147,13 @@
 
 		// Instead of running equip_to_slot_if_possible() we check here first,
 		// to avoid dousing cig with reagents if we're not going to equip it
-		if(!cig.mob_can_equip(user, slot_wear_mask))
+		if(!cig.mob_can_equip(user, slot_wear_mask_str))
 			return
 
 		// We call remove_from_storage first to manage the reagent transfer and
 		// UI updates.
 		remove_from_storage(cig, null)
-		user.equip_to_slot(cig, slot_wear_mask)
+		user.equip_to_slot(cig, slot_wear_mask_str)
 
 		reagents.maximum_volume = 5 * contents.len
 		to_chat(user, "<span class='notice'>You take a cigarette out of the pack.</span>")

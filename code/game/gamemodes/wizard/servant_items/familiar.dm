@@ -16,4 +16,4 @@
 
 /obj/item/clothing/under/familiargard/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_w_uniform] = -3
+	LAZYSET(slowdown_per_slot, slot_w_uniform_str, -3)

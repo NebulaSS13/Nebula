@@ -1,7 +1,7 @@
 
 /datum/gear/shoes
 	sort_category = "Shoes and Footwear"
-	slot = slot_shoes
+	slot = slot_shoes_str
 	category = /datum/gear/shoes
 
 /datum/gear/shoes/athletic

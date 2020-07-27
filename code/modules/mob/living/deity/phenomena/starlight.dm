@@ -34,7 +34,7 @@
 	var/mob/living/carbon/human/H = a
 	if(!istype(H))
 		return FALSE
-	var/obj/item/I = H.get_equipped_item(slot_wear_suit)
+	var/obj/item/I = H.get_equipped_item(slot_wear_suit_str)
 	if(I)
 		var/datum/extension/deity_be_near/dbn = get_extension(I, /datum/extension/deity_be_near)
 		if(dbn)
@@ -62,15 +62,15 @@
 		var/type = form["armor"]
 		var/obj/item/I = new type(T)
 		var/datum/extension/deity_be_near/extension = set_extension(I, form["extension"], linked)
-		L.equip_to_slot_or_store_or_drop(I, slot_wear_suit)
+		L.equip_to_slot_or_store_or_drop(I, slot_wear_suit_str)
 		if(form["helm"])
 			var/h_type = form["helm"]
 			var/obj/item/helm = new h_type(T)
-			L.equip_to_slot_or_store_or_drop(helm, slot_head)
+			L.equip_to_slot_or_store_or_drop(helm, slot_head_str)
 			extension.expected_helmet = helm.type //We only do by type because A. its easier to manage and B the chances of it being non-unique in a normal game is very small
 		if(form["weapon"])
 			var/w_type = form["weapon"]
-			L.equip_to_slot_or_store_or_drop(new w_type(T), slot_r_hand)
+			L.equip_to_slot_or_store_or_drop(new w_type(T), slot_r_hand_str)
 		if(form["spells"])
 			for(var/s in form["spells"])
 				var/spell/S = new s
@@ -182,7 +182,7 @@
 		to_chat(linked, "<span class='warning'>You do not have enough gateways activated.</span>")
 		return FALSE
 
-	var/obj/O = L.get_equipped_item(slot_wear_suit)
+	var/obj/O = L.get_equipped_item(slot_wear_suit_str)
 	if(O && has_extension(O, /datum/extension/deity_be_near))
 		var/datum/extension/deity_be_near/dbn = get_extension(O, /datum/extension/deity_be_near)
 		if(dbn.wearing_full())

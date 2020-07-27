@@ -1,6 +1,6 @@
 /datum/gear/gloves
 	cost = 2
-	slot = slot_gloves
+	slot = slot_gloves_str
 	sort_category = "Gloves and Handwear"
 	category = /datum/gear/gloves
 

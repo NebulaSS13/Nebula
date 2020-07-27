@@ -197,7 +197,7 @@
 
 /obj/item/rig/proc/set_slowdown_and_vision(var/active)
 	if(chest)
-		chest.slowdown_per_slot[slot_wear_suit] = (active? online_slowdown : offline_slowdown)
+		LAZYSET(chest.slowdown_per_slot, slot_wear_suit_str, (active? online_slowdown : offline_slowdown))
 	if(helmet)
 		helmet.tint = (active? vision_restriction : offline_vision_restriction)
 		helmet.update_vision()
@@ -689,19 +689,19 @@
 
 	switch(piece)
 		if("helmet")
-			equip_to = slot_head
+			equip_to = slot_head_str
 			use_obj = helmet
 			check_slot = wearer.head
 		if("gauntlets")
-			equip_to = slot_gloves
+			equip_to = slot_gloves_str
 			use_obj = gloves
 			check_slot = wearer.gloves
 		if("boots")
-			equip_to = slot_shoes
+			equip_to = slot_shoes_str
 			use_obj = boots
 			check_slot = wearer.shoes
 		if("chest")
-			equip_to = slot_wear_suit
+			equip_to = slot_wear_suit_str
 			use_obj = chest
 			check_slot = wearer.wear_suit
 

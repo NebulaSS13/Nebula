@@ -1,6 +1,6 @@
 /datum/gear/uniform
 	sort_category = "Uniforms and Casual Dress"
-	slot = slot_w_uniform
+	slot = slot_w_uniform_str
 	category = /datum/gear/uniform
 
 /datum/gear/uniform/jumpsuit

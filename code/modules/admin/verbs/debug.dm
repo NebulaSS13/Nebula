@@ -170,7 +170,7 @@
 			id.registered_name = H.real_name
 			id.assignment = "Captain"
 			id.SetName("[id.registered_name]'s ID Card ([id.assignment])")
-			H.equip_to_slot_or_del(id, slot_wear_id)
+			H.equip_to_slot_or_del(id, slot_wear_id_str)
 			H.update_inv_wear_id()
 	else
 		alert("Invalid mob")

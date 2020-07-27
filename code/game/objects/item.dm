@@ -46,7 +46,7 @@
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
 	var/slowdown_general = 0 // How much clothing is slowing you down. Negative values speeds you up. This is a genera##l slowdown, no matter equipment slot.
-	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. This is an associative list: item slot - slowdown
+	var/slowdown_per_slot // How much clothing is slowing you down. This is an associative list: item slot - slowdown
 	var/slowdown_accessory // How much an accessory will slow you down when attached to a worn article of clothing.
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
 	var/material_armor_multiplier  // if set, item will use material's armor values multiplied by this.
@@ -69,7 +69,7 @@
 
 	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
 	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
-	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
+	// Only slot_l_hand_str/slot_r_hand_str are implemented at the moment. Others to be implemented as needed.
 	var/list/item_icons
 
 	//** These specify item/icon overrides for _species_
@@ -398,19 +398,19 @@
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(
-	"[slot_wear_mask]" = SLOT_MASK,
-	"[slot_back]" = SLOT_BACK,
-	"[slot_wear_suit]" = SLOT_OCLOTHING,
-	"[slot_gloves]" = SLOT_GLOVES,
-	"[slot_shoes]" = SLOT_FEET,
-	"[slot_belt]" = SLOT_BELT,
-	"[slot_glasses]" = SLOT_EYES,
-	"[slot_head]" = SLOT_HEAD,
-	"[slot_l_ear]" = SLOT_EARS|SLOT_TWOEARS,
-	"[slot_r_ear]" = SLOT_EARS|SLOT_TWOEARS,
-	"[slot_w_uniform]" = SLOT_ICLOTHING,
-	"[slot_wear_id]" = SLOT_ID,
-	"[slot_tie]" = SLOT_TIE,
+	"[slot_wear_mask_str]" = SLOT_MASK,
+	"[slot_back_str]" = SLOT_BACK,
+	"[slot_wear_suit_str]" = SLOT_OCLOTHING,
+	"[slot_gloves_str]" = SLOT_GLOVES,
+	"[slot_shoes_str]" = SLOT_FEET,
+	"[slot_belt_str]" = SLOT_BELT,
+	"[slot_glasses_str]" = SLOT_EYES,
+	"[slot_head_str]" = SLOT_HEAD,
+	"[slot_l_ear_str]" = SLOT_EARS|SLOT_TWOEARS,
+	"[slot_r_ear_str]" = SLOT_EARS|SLOT_TWOEARS,
+	"[slot_w_uniform_str]" = SLOT_ICLOTHING,
+	"[slot_wear_id_str]" = SLOT_ID,
+	"[slot_tie_str]" = SLOT_TIE,
 	)
 
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
@@ -450,21 +450,21 @@ var/list/global/slot_flags_enumeration = list(
 
 	//Lastly, check special rules for the desired slot.
 	switch(slot)
-		if(slot_l_ear, slot_r_ear)
-			var/slot_other_ear = (slot == slot_l_ear)? slot_r_ear : slot_l_ear
+		if(slot_l_ear_str, slot_r_ear_str)
+			var/slot_other_ear = (slot == slot_l_ear_str)? slot_r_ear_str : slot_l_ear_str
 			if( (w_class > ITEM_SIZE_TINY) && !(slot_flags & SLOT_EARS) )
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
-		if(slot_belt)
-			if(slot == slot_belt && (item_flags & ITEM_FLAG_IS_BELT))
+		if(slot_belt_str)
+			if(slot == slot_belt_str && (item_flags & ITEM_FLAG_IS_BELT))
 				return 1
-			else if(!H.w_uniform && (slot_w_uniform in mob_equip))
+			else if(!H.w_uniform && (slot_w_uniform_str in mob_equip))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>")
 				return 0
-		if(slot_l_store, slot_r_store)
-			if(!H.w_uniform && (slot_w_uniform in mob_equip))
+		if(slot_l_store_str, slot_r_store_str)
+			if(!H.w_uniform && (slot_w_uniform_str in mob_equip))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>")
 				return 0
@@ -474,8 +474,8 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if(get_storage_cost() >= ITEM_SIZE_NO_CONTAINER)
 				return 0
-		if(slot_s_store)
-			if(!H.wear_suit && (slot_wear_suit in mob_equip))
+		if(slot_s_store_str)
+			if(!H.wear_suit && (slot_wear_suit_str in mob_equip))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need a suit before you can attach this [name].</span>")
 				return 0
@@ -485,10 +485,10 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
 				return 0
-		if(slot_handcuffed)
+		if(slot_handcuffed_str)
 			if(!istype(src, /obj/item/handcuffs))
 				return 0
-		if(slot_in_backpack) //used entirely for equipping spawned mobs or at round start
+		if(slot_in_backpack_str) //used entirely for equipping spawned mobs or at round start
 			var/allow = 0
 			if(H.back && istype(H.back, /obj/item/storage/backpack))
 				var/obj/item/storage/backpack/B = H.back
@@ -496,19 +496,19 @@ var/list/global/slot_flags_enumeration = list(
 					allow = 1
 			if(!allow)
 				return 0
-		if(slot_tie)
-			if((!H.w_uniform && (slot_w_uniform in mob_equip)) && (!H.wear_suit && (slot_wear_suit in mob_equip)))
+		if(slot_tie_str)
+			if((!H.w_uniform && (slot_w_uniform_str in mob_equip)) && (!H.wear_suit && (slot_wear_suit_str in mob_equip)))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need something you can attach \the [src] to.</span>")
 				return 0
-			if(H.w_uniform && (slot_w_uniform in mob_equip))
+			if(H.w_uniform && (slot_w_uniform_str in mob_equip))
 				var/obj/item/clothing/under/uniform = H.w_uniform
 				if(uniform && !uniform.can_attach_accessory(src))
 					if (!disable_warning)
 						to_chat(H, "<span class='warning'>You cannot equip \the [src] to \the [uniform].</span>")
 					return 0
 				else return 1
-			if(H.wear_suit && (slot_wear_suit in mob_equip))
+			if(H.wear_suit && (slot_wear_suit_str in mob_equip))
 				var/obj/item/clothing/suit/suit = H.wear_suit
 				if(suit && !suit.can_attach_accessory(src))
 					if (!disable_warning)
@@ -872,9 +872,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		if(slot == 	slot_r_hand_str || slot == slot_r_ear_str)
 			mob_state = "[mob_state]_r"
 	else if(use_spritesheet(bodytype, slot, mob_state))
-		if(slot == slot_l_ear)
+		if(slot == slot_l_ear_str)
 			mob_state = "[mob_state]_l"
-		if(slot == slot_r_ear)
+		if(slot == slot_r_ear_str)
 			mob_state = "[mob_state]_r"
 		spritesheet = TRUE
 		mob_icon = sprite_sheets[bodytype]

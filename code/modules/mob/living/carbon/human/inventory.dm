@@ -50,7 +50,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		return 0
 	if(!check_dexterity(DEXTERITY_GRIP, silent = TRUE, force_active_hand = BP_L_HAND))
 		return 0
-	equip_to_slot(W,slot_l_hand)
+	equip_to_slot(W,slot_l_hand_str)
 	W.add_fingerprint(src)
 	return 1
 
@@ -59,7 +59,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		return 0
 	if(!check_dexterity(DEXTERITY_GRIP, silent = TRUE, force_active_hand = BP_R_HAND))
 		return 0
-	equip_to_slot(W,slot_r_hand)
+	equip_to_slot(W,slot_r_hand_str)
 	W.add_fingerprint(src)
 	return 1
 
@@ -69,48 +69,48 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
 	switch(slot)
-		if(slot_back)
+		if(slot_back_str)
 			return has_organ(BP_CHEST)
-		if(slot_wear_mask)
+		if(slot_wear_mask_str)
 			return has_organ(BP_HEAD)
-		if(slot_handcuffed)
+		if(slot_handcuffed_str)
 			return has_organ(BP_L_HAND) && has_organ(BP_R_HAND)
-		if(slot_legcuffed)
+		if(slot_legcuffed_str)
 			return has_organ(BP_L_FOOT) && has_organ(BP_R_FOOT)
-		if(slot_l_hand)
+		if(slot_l_hand_str)
 			return has_organ(BP_L_HAND)
-		if(slot_r_hand)
+		if(slot_r_hand_str)
 			return has_organ(BP_R_HAND)
-		if(slot_belt)
+		if(slot_belt_str)
 			return has_organ(BP_CHEST)
-		if(slot_wear_id)
+		if(slot_wear_id_str)
 			// the only relevant check for this is the uniform check
 			return 1
-		if(slot_l_ear)
+		if(slot_l_ear_str)
 			return has_organ(BP_HEAD)
-		if(slot_r_ear)
+		if(slot_r_ear_str)
 			return has_organ(BP_HEAD)
-		if(slot_glasses)
+		if(slot_glasses_str)
 			return has_organ(BP_HEAD)
-		if(slot_gloves)
+		if(slot_gloves_str)
 			return has_organ(BP_L_HAND) || has_organ(BP_R_HAND)
-		if(slot_head)
+		if(slot_head_str)
 			return has_organ(BP_HEAD)
-		if(slot_shoes)
+		if(slot_shoes_str)
 			return has_organ(BP_L_FOOT) || has_organ(BP_R_FOOT)
-		if(slot_wear_suit)
+		if(slot_wear_suit_str)
 			return has_organ(BP_CHEST)
-		if(slot_w_uniform)
+		if(slot_w_uniform_str)
 			return has_organ(BP_CHEST)
-		if(slot_l_store)
+		if(slot_l_store_str)
 			return has_organ(BP_CHEST)
-		if(slot_r_store)
+		if(slot_r_store_str)
 			return has_organ(BP_CHEST)
-		if(slot_s_store)
+		if(slot_s_store_str)
 			return has_organ(BP_CHEST)
-		if(slot_in_backpack)
+		if(slot_in_backpack_str)
 			return 1
-		if(slot_tie)
+		if(slot_tie_str)
 			return 1
 
 /mob/living/carbon/human/u_equip(obj/W)
@@ -147,7 +147,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 				update_inv_ears(0)
 				update_inv_wear_mask(0)
 		if(src)
-			var/obj/item/clothing/mask/wear_mask = src.get_equipped_item(slot_wear_mask)
+			var/obj/item/clothing/mask/wear_mask = src.get_equipped_item(slot_wear_mask_str)
 			if(!(wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)))
 				set_internals(null)
 		update_inv_head()
@@ -174,7 +174,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(I.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR))
 				update_hair(0)	//rebuild hair
 				update_inv_ears(0)
-		var/obj/item/clothing/mask/head = src.get_equipped_item(slot_head)
+		var/obj/item/clothing/mask/head = src.get_equipped_item(slot_head_str)
 		if(!(head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))
 			set_internals(null)
 		update_inv_wear_mask()
@@ -231,61 +231,61 @@ This saves us from having to call add_fingerprint() any time something is put in
 	var/obj/item/old_item = get_equipped_item(slot)
 
 	switch(slot)
-		if(slot_back)
+		if(slot_back_str)
 			src.back = W
 			W.equipped(src, slot)
 			update_inv_back(redraw_mob)
-		if(slot_wear_mask)
+		if(slot_wear_mask_str)
 			src.wear_mask = W
 			if(wear_mask.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR))
 				update_hair(redraw_mob)	//rebuild hair
 				update_inv_ears(0)
 			W.equipped(src, slot)
 			update_inv_wear_mask(redraw_mob)
-		if(slot_handcuffed)
+		if(slot_handcuffed_str)
 			src.handcuffed = W
 			drop_r_hand()
 			drop_l_hand()
 			update_inv_handcuffed(redraw_mob)
-		if(slot_l_hand)
+		if(slot_l_hand_str)
 			src.l_hand = W
 			W.equipped(src, slot)
 			W.screen_loc = ui_lhand
 			update_inv_l_hand(redraw_mob)
-		if(slot_r_hand)
+		if(slot_r_hand_str)
 			src.r_hand = W
 			W.equipped(src, slot)
 			W.screen_loc = ui_rhand
 			update_inv_r_hand(redraw_mob)
-		if(slot_belt)
+		if(slot_belt_str)
 			src.belt = W
 			W.equipped(src, slot)
 			update_inv_belt(redraw_mob)
-		if(slot_wear_id)
+		if(slot_wear_id_str)
 			src.wear_id = W
 			W.equipped(src, slot)
 			update_inv_wear_id(redraw_mob)
-		if(slot_l_ear)
+		if(slot_l_ear_str)
 			src.l_ear = W
 			if(l_ear.slot_flags & SLOT_TWOEARS)
 				src.r_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
-		if(slot_r_ear)
+		if(slot_r_ear_str)
 			src.r_ear = W
 			if(r_ear.slot_flags & SLOT_TWOEARS)
 				src.l_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
-		if(slot_glasses)
+		if(slot_glasses_str)
 			src.glasses = W
 			W.equipped(src, slot)
 			update_inv_glasses(redraw_mob)
-		if(slot_gloves)
+		if(slot_gloves_str)
 			src.gloves = W
 			W.equipped(src, slot)
 			update_inv_gloves(redraw_mob)
-		if(slot_head)
+		if(slot_head_str)
 			src.head = W
 			if(head.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR|HIDEMASK))
 				update_hair(redraw_mob)	//rebuild hair
@@ -295,11 +295,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 				W.update_icon(src)
 			W.equipped(src, slot)
 			update_inv_head(redraw_mob)
-		if(slot_shoes)
+		if(slot_shoes_str)
 			src.shoes = W
 			W.equipped(src, slot)
 			update_inv_shoes(redraw_mob)
-		if(slot_wear_suit)
+		if(slot_wear_suit_str)
 			src.wear_suit = W
 			if(wear_suit.flags_inv & HIDESHOES)
 				update_inv_shoes(0)
@@ -309,29 +309,29 @@ This saves us from having to call add_fingerprint() any time something is put in
 				update_inv_w_uniform(0)
 			W.equipped(src, slot)
 			update_inv_wear_suit(redraw_mob)
-		if(slot_w_uniform)
+		if(slot_w_uniform_str)
 			src.w_uniform = W
 			if(w_uniform.flags_inv & HIDESHOES)
 				update_inv_shoes(0)
 			W.equipped(src, slot)
 			update_inv_w_uniform(redraw_mob)
-		if(slot_l_store)
+		if(slot_l_store_str)
 			src.l_store = W
 			W.equipped(src, slot)
 			update_inv_pockets(redraw_mob)
-		if(slot_r_store)
+		if(slot_r_store_str)
 			src.r_store = W
 			W.equipped(src, slot)
 			update_inv_pockets(redraw_mob)
-		if(slot_s_store)
+		if(slot_s_store_str)
 			src.s_store = W
 			W.equipped(src, slot)
 			update_inv_s_store(redraw_mob)
-		if(slot_in_backpack)
+		if(slot_in_backpack_str)
 			if(src.get_active_hand() == W)
 				src.remove_from_mob(W)
 			W.forceMove(src.back)
-		if(slot_tie)
+		if(slot_tie_str)
 			var/obj/item/clothing/under/uniform = src.w_uniform
 			if(uniform)
 				uniform.attackby(W,src)
@@ -339,10 +339,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 			to_chat(src, "<span class='danger'>You are trying to eqip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]</span>")
 			return
 
-	if((W == src.l_hand) && (slot != slot_l_hand))
+	if((W == src.l_hand) && (slot != slot_l_hand_str))
 		src.l_hand = null
 		update_inv_l_hand() //So items actually disappear from hands.
-	else if((W == src.r_hand) && (slot != slot_r_hand))
+	else if((W == src.r_hand) && (slot != slot_r_hand_str))
 		src.r_hand = null
 		update_inv_r_hand()
 
@@ -366,13 +366,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 	var/check_flags = 0
 
 	switch(slot)
-		if(slot_wear_mask)
+		if(slot_wear_mask_str)
 			covering = src.head
 			check_flags = FACE
-		if(slot_glasses)
+		if(slot_glasses_str)
 			covering = src.head
 			check_flags = EYES
-		if(slot_gloves, slot_w_uniform)
+		if(slot_gloves_str, slot_w_uniform_str)
 			covering = src.wear_suit
 
 	if(covering && (covering.body_parts_covered & (I.body_parts_covered|check_flags)))
@@ -382,24 +382,24 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/get_equipped_item(var/slot)
 	switch(slot)
-		if(slot_back)       return back
-		if(slot_handcuffed) return handcuffed
-		if(slot_l_store)    return l_store
-		if(slot_r_store)    return r_store
-		if(slot_wear_mask)  return wear_mask
-		if(slot_l_hand)     return l_hand
-		if(slot_r_hand)     return r_hand
-		if(slot_wear_id)    return wear_id
-		if(slot_glasses)    return glasses
-		if(slot_gloves)     return gloves
-		if(slot_head)       return head
-		if(slot_shoes)      return shoes
-		if(slot_belt)       return belt
-		if(slot_wear_suit)  return wear_suit
-		if(slot_w_uniform)  return w_uniform
-		if(slot_s_store)    return s_store
-		if(slot_l_ear)      return l_ear
-		if(slot_r_ear)      return r_ear
+		if(slot_back_str)       return back
+		if(slot_handcuffed_str) return handcuffed
+		if(slot_l_store_str)    return l_store
+		if(slot_r_store_str)    return r_store
+		if(slot_wear_mask_str)  return wear_mask
+		if(slot_l_hand_str)     return l_hand
+		if(slot_r_hand_str)     return r_hand
+		if(slot_wear_id_str)    return wear_id
+		if(slot_glasses_str)    return glasses
+		if(slot_gloves_str)     return gloves
+		if(slot_head_str)       return head
+		if(slot_shoes_str)      return shoes
+		if(slot_belt_str)       return belt
+		if(slot_wear_suit_str)  return wear_suit
+		if(slot_w_uniform_str)  return w_uniform
+		if(slot_s_store_str)    return s_store
+		if(slot_l_ear_str)      return l_ear
+		if(slot_r_ear_str)      return r_ear
 	return ..()
 
 /mob/living/carbon/human/get_equipped_items(var/include_carried = 0)

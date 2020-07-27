@@ -367,7 +367,7 @@ meteor_act
 		affecting.embed(O, supplied_wound = supplied_wound)
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
-	var/obj/item/clothing/gloves/gloves = get_equipped_item(slot_gloves)
+	var/obj/item/clothing/gloves/gloves = get_equipped_item(slot_gloves_str)
 	if(istype(gloves))
 		gloves.add_blood(source)
 		gloves.transfer_blood = amount

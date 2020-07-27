@@ -33,12 +33,12 @@
 			tally += E ? E.movement_delay(4) : 4
 	else
 		var/total_item_slowdown = -1
-		for(var/slot = slot_first to slot_last)
+		for(var/slot in global.all_inventory_slots)
 			var/obj/item/I = get_equipped_item(slot)
 			if(istype(I))
 				var/item_slowdown = 0
 				item_slowdown += I.slowdown_general
-				item_slowdown += I.slowdown_per_slot[slot]
+				item_slowdown += LAZYACCESS(I.slowdown_per_slot, slot)
 				item_slowdown += I.slowdown_accessory
 				total_item_slowdown += max(item_slowdown, 0)
 		tally += total_item_slowdown

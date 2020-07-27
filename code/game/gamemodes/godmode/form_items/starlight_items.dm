@@ -3,7 +3,7 @@
 
 /obj/item/clothing/ring/aura_ring/equipped(var/mob/living/L, var/slot)
 	..()
-	if(granted_aura && slot == slot_gloves)
+	if(granted_aura && slot == slot_gloves_str)
 		L.add_aura(granted_aura)
 
 /obj/item/clothing/ring/aura_ring/dropped(var/mob/living/L)

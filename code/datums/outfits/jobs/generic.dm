@@ -20,7 +20,7 @@
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
 	pda_type = /obj/item/modular_computer/pda/engineering
-	pda_slot = slot_l_store
+	pda_slot = slot_l_store_str
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/generic/engineer/New()
@@ -36,7 +36,7 @@
 	l_ear = /obj/item/radio/headset/headset_med
 	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/medical
-	pda_slot = slot_l_store
+	pda_slot = slot_l_store_str
 
 /decl/hierarchy/outfit/job/generic/doctor/New()
 	..()

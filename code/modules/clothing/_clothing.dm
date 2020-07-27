@@ -143,7 +143,7 @@
 				if(H.species.get_bodytype(H) in bodytype_restricted)
 					wearable = 1
 
-			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
+			if(!wearable && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("\The [src] does not fit you."))
 				return 0

@@ -27,7 +27,7 @@
 		var/obj/item/rig/rig = new rig_type(player)
 		rig.seal_delay = 0
 		player.put_in_hands(rig)
-		player.equip_to_slot_or_del(rig,slot_back)
+		player.equip_to_slot_or_del(rig,slot_back_str)
 		if(rig)
 			rig.visible_name = player.real_name
 			rig.toggle_seals(src,1)

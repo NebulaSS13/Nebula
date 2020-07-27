@@ -29,11 +29,11 @@
 	cell = new initial_cell_type(src)
 	if (ispath(loaded))
 		loaded = new loaded (src, load_sheet_max)
-	slowdown_per_slot[slot_l_hand] =  slowdown_held
-	slowdown_per_slot[slot_r_hand] =  slowdown_held
-	slowdown_per_slot[slot_back] =    slowdown_worn
-	slowdown_per_slot[slot_belt] =    slowdown_worn
-	slowdown_per_slot[slot_s_store] = slowdown_worn
+	LAZYSET(slowdown_per_slot, slot_l_hand_str,  slowdown_held)
+	LAZYSET(slowdown_per_slot, slot_r_hand_str,  slowdown_held)
+	LAZYSET(slowdown_per_slot, slot_back_str,    slowdown_worn)
+	LAZYSET(slowdown_per_slot, slot_belt_str,    slowdown_worn)
+	LAZYSET(slowdown_per_slot, slot_s_store_str, slowdown_worn)
 
 	. = ..()
 

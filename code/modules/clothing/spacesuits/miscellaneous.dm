@@ -12,4 +12,4 @@
 
 /obj/item/clothing/suit/space/emergency/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 4
+	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 4)

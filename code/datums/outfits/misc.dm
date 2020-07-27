@@ -24,7 +24,7 @@
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
 	suit = /obj/item/clothing/suit/hgpirate
 
-	id_slot = slot_wear_id
+	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/centcom/station
 	id_pda_assignment = "Admiral"
 
@@ -33,9 +33,9 @@
 	shoes = /obj/item/clothing/shoes/color/black
 	l_ear = /obj/item/radio/headset
 	uniform = /obj/item/clothing/under/color/grey
-	id_slot = slot_wear_id
+	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/merchant
-	pda_slot = slot_r_store
+	pda_slot = slot_r_store_str
 	pda_type = /obj/item/modular_computer/pda //cause I like the look
 	id_pda_assignment = "Merchant"
 
