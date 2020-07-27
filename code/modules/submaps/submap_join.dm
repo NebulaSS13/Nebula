@@ -90,6 +90,7 @@
 			character.mind.assigned_job = job
 			character.mind.assigned_role = character.job
 
+		job.create_cash_on_hand(character)
 		to_chat(character, "<B>You are [job.total_positions == 1 ? "the" : "a"] [job.title] of the [name].</B>")
 
 		if(job.supervisors)

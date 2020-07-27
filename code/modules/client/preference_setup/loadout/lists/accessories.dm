@@ -80,11 +80,3 @@
 	path = /obj/item/clothing/accessory/bracelet
 	cost = 1
 	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/accessory/charge_stick
-	display_name = "charge stick"
-	path = /obj/item/charge_stick
-	cost = 1
-
-/datum/gear/accessory/charge_stick/get_gear_tweak_options()
-	. = ..() | /datum/gear_tweak/charge_stick

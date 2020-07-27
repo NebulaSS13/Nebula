@@ -94,13 +94,16 @@
 	. = . || outfit_type
 	. = outfit_by_type(.)
 
-/datum/job/proc/setup_account(var/mob/living/carbon/human/H)
-	if(!account_allowed || (H.mind && H.mind.initial_account))
-		return
+/datum/job/proc/create_cash_on_hand(var/mob/living/carbon/human/H, var/datum/money_account/M)
+	if(!istype(M) || !ispath(H.client?.prefs?.starting_cash_choice, /decl/starting_cash_choice))
+		return 0
+	var/decl/starting_cash_choice/cash = decls_repository.get_decl(H.client.prefs.starting_cash_choice)
+	for(var/obj/item/thing in cash.get_cash_objects(H, M))
+		. += thing.get_base_value()
+		H.equip_to_storage_or_put_in_hands(thing)
 
-	// Calculate our pay and apply all relevant modifiers.
-	var/money_amount = 4 * rand(75, 100) * economic_power
-
+/datum/job/proc/get_total_starting_money(var/mob/living/carbon/human/H)
+	. = 4 * rand(75, 100) * economic_power
 	// Get an average economic power for our cultures.
 	var/culture_mod =   0
 	var/culture_count = 0
@@ -111,27 +114,36 @@
 			culture_mod += culture.economic_power
 	if(culture_count)
 		culture_mod /= culture_count
-	money_amount *= culture_mod
-
+	. *= culture_mod
 	// Apply other mods.
-	money_amount *= GLOB.using_map.salary_modifier
-	money_amount *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
-	money_amount = round(money_amount)
+	. *= GLOB.using_map.salary_modifier
+	. *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
+	. = round(.)
 
+/datum/job/proc/setup_account(var/mob/living/carbon/human/H)
+	if(!account_allowed || (H.mind && H.mind.initial_account))
+		return
+
+	// Calculate our pay and apply all relevant modifiers.
+	var/money_amount = get_total_starting_money(H)
 	if(money_amount <= 0)
 		return // You are too poor for an account.
 
 	//give them an account in the station database
 	var/datum/money_account/M = create_account("[H.real_name]'s account", H.real_name, money_amount)
+	var/cash_on_hand = create_cash_on_hand(H, M)
+	// Store their financial info.
 	if(H.mind)
 		var/remembered_info = ""
 		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
 		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
 		remembered_info += "<b>Your account funds are:</b> [M.format_value_by_currency(M.money)]<br>"
-
 		if(M.transaction_log.len)
 			var/datum/transaction/T = M.transaction_log[1]
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
+		if(cash_on_hand > 0)
+			var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+			remembered_info += "<b>Your cash on hand is:</b> [cur.format_value(cash_on_hand)]<br>"
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 		H.mind.initial_account = M
 

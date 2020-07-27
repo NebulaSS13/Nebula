@@ -364,35 +364,3 @@
 	if(ValidTeslaLinks[metadata[7]])
 		var/t = ValidTeslaLinks[metadata[7]]
 		assembly.add_replace_component(null, PART_TESLA, new t(I))
-
-/datum/gear_tweak/charge_stick/get_contents(var/metadata)
-	return "Charge Stick: [metadata]"
-
-/datum/gear_tweak/charge_stick/get_default()
-	return "Half"
-
-/datum/gear_tweak/charge_stick/get_metadata(var/user, var/list/metadata, title)
-	. = input(user, "Choose an entry.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in (list("None", "Half", "Full"))
-	if(!.)
-		return metadata
-
-/datum/gear_tweak/charge_stick/tweak_item(var/mob/living/user, var/obj/item/I, var/metadata)
-	if(metadata == "None")
-		return
-	if(!istype(user))
-		return
-	
-	var/datum/money_account/M = user.mind.initial_account
-	var/obj/item/charge_stick/stick = I
-	if(stick.loaded_worth)
-		M.money += stick.loaded_worth // Return any money.
-	stick.creator = user.real_name
-	stick.currency = M.currency
-	var/amount = 0
-	switch(metadata)
-		if("Half")
-			amount = min(stick.max_worth, M.money * 0.5)
-		if("Full")
-			amount = min(stick.max_worth, M.money)
-	stick.loaded_worth = amount
-	M.money -= amount 
