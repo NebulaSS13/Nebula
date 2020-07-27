@@ -16,7 +16,7 @@
 	var/footer = null
 	var/footerOn = FALSE
 
-	var/logo_list = list() // Todo: Ivenmoth logo.
+	var/logo_list = list()
 	var/logo = ""
 
 /obj/item/paper/admin/Initialize()

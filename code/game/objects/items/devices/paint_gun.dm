@@ -31,7 +31,6 @@
 		"CMO" =               list("path" = /obj/effect/floor_decal/sign/cmo),
 		"Ex" =                list("path" = /obj/effect/floor_decal/sign/ex),
 		"Psy" =               list("path" = /obj/effect/floor_decal/sign/p),
-		"Ivenmoth" =		  list("path" = /obj/effect/floor_decal/ivenmoth),
 		"remove all decals" = list("path" = /obj/effect/floor_decal/reset)
 
 		)

@@ -1,5 +1,5 @@
 /obj/effect/overmap/visitable/ship/tradeship
-	name = "Tradeship Ivenmoth"
+	name = "Tradeship Ocelot Alpha"
 	color = "#00ffff"
 	start_x = 4
 	start_y = 4
