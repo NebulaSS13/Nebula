@@ -325,6 +325,9 @@
 
 	item.throw_at(target, throw_range, item.throw_speed * skill_mod, src)
 
+	playsound(src, 'sound/effects/throw.ogg', 50, 1)
+	animate_throw(src)
+
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
 	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
