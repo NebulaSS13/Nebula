@@ -223,6 +223,9 @@
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
 
+	if(!istype(mob, world.mob))
+		prefs?.apply_post_login_preferences()
+
 	//////////////
 	//DISCONNECT//
 	//////////////

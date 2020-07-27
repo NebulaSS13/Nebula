@@ -74,12 +74,6 @@
 
 	my_client = client
 
-	if(get_preference_value(/datum/client_preference/chat_position) == GLOB.PREF_YES)
-		client.update_chat_position(TRUE)
-
-	if(get_preference_value(/datum/client_preference/fullscreen_mode) != GLOB.PREF_OFF)
-		client.toggle_fullscreen(get_preference_value(/datum/client_preference/fullscreen_mode))
-
 	if(loc && !isturf(loc))
 		client.eye = loc
 		client.perspective = EYE_PERSPECTIVE

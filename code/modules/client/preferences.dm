@@ -324,3 +324,12 @@
 		panel.close()
 		panel = null
 	close_browser(user, "window=saves")
+
+/datum/preferences/proc/apply_post_login_preferences()
+	set waitfor = 0
+	if(!client)
+		return
+	if(client.get_preference_value(/datum/client_preference/chat_position) == GLOB.PREF_YES)
+		client.update_chat_position(TRUE)
+	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != GLOB.PREF_OFF)
+		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))
