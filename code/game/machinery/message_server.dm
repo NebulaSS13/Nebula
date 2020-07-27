@@ -34,9 +34,9 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 				priority = "Undetermined"
 
 /obj/machinery/message_server
-	icon = 'icons/obj/machines/server.dmi'
-	icon_state = "server"
-	name = "Messaging Server"
+	name = "messaging server"
+	icon = 'icons/obj/machines/tcomms/message_server.dmi'
+	icon_state = "message_server"
 	density = 1
 	anchored = 1.0
 	idle_power_usage = 10
@@ -131,14 +131,11 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		return ..()
 
 /obj/machinery/message_server/on_update_icon()
-	if((stat & (BROKEN|NOPOWER)))
-		icon_state = "server-nopower"
-	else if (!active)
-		icon_state = "server-off"
-	else
-		icon_state = "server-on"
-
-	return
+	icon_state = initial(icon_state)
+	if(panel_open)
+		icon_state = "[icon_state]_o"
+	if((stat & (BROKEN|NOPOWER)) || !active)
+		icon_state = "[icon_state]_off"
 
 /obj/machinery/message_server/proc/send_to_department(var/department, var/message, var/tone)
 	var/reached = 0

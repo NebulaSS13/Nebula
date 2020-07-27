@@ -1,6 +1,7 @@
 /obj/machinery/network/router
 	name = "network router"
 	icon = 'icons/obj/machines/tcomms/comm_server.dmi'
+	icon_state = "comm_server"
 	network_device_type =  /datum/extension/network_device/broadcaster/router
 	main_template = "network_router.tmpl"
 	construct_state = /decl/machine_construction/default/panel_closed
@@ -22,12 +23,6 @@
 	if(net)
 		data["is_router"] = R.is_router()
 	return data
-
-/obj/machinery/network/router/on_update_icon()
-	if(operable())
-		icon_state = panel_open ? "comm_server_o" : "comm_server"
-	else
-		icon_state = panel_open ? "comm_server_o_off" : "comm_server_off"
 
 /obj/machinery/network/router/update_network_status()
 	..()

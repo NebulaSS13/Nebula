@@ -1,6 +1,7 @@
 /obj/machinery/network/acl
 	name = "network access controller"
 	icon = 'icons/obj/machines/tcomms/aas.dmi'
+	icon_state = "aas"
 	network_device_type =  /datum/extension/network_device/acl
 	main_template = "network_acl.tmpl"
 	construct_state = /decl/machine_construction/default/panel_closed
@@ -195,12 +196,6 @@
 				"size" = AR.size
 			)))
 		.["users"] = users
-
-/obj/machinery/network/acl/on_update_icon()
-	if(operable())
-		icon_state = panel_open ? "AAS_On_Open" : "AAS_On"
-	else
-		icon_state = panel_open ? "AAS_Off_Open" : "AAS_Off"
 
 /obj/machinery/network/acl/proc/get_all_users()
 	var/list/users = list()
