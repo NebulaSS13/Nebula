@@ -141,9 +141,9 @@
 	if(!istype(M))
 		return 0 //not equipped
 
-	if((slot_flags & SLOT_BACK) && M.get_equipped_item(slot_back) == src)
+	if((slot_flags & SLOT_BACK) && M.get_equipped_item(slot_back_str) == src)
 		return 1
-	if((slot_flags & SLOT_BELT) && M.get_equipped_item(slot_belt) == src)
+	if((slot_flags & SLOT_BELT) && M.get_equipped_item(slot_belt_str) == src)
 		return 1
 
 	return 0

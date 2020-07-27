@@ -51,4 +51,4 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 	l_hand =   /obj/item/storage/briefcase/foundation
 	l_ear =    /obj/item/radio/headset/foundation
 	holster =  /obj/item/clothing/accessory/storage/holster/armpit
-	id_slot =  slot_wear_id
+	id_slot =  slot_wear_id_str

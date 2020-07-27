@@ -2,7 +2,7 @@
 /datum/gear/accessory
 	sort_category = "Accessories"
 	category = /datum/gear/accessory
-	slot = slot_tie
+	slot = slot_tie_str
 
 /datum/gear/accessory/tie
 	display_name = "tie selection"

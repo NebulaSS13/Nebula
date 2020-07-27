@@ -146,16 +146,16 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	var/new_helmet =  pick(raider_helmets)
 	var/new_suit =    pick(raider_suits)
 
-	player.equip_to_slot_or_del(new new_shoes(player),slot_shoes)
+	player.equip_to_slot_or_del(new new_shoes(player),slot_shoes_str)
 	if(!player.shoes)
 		//If equipping shoes failed, fall back to equipping sandals
 		var/fallback_type = pick(/obj/item/clothing/shoes/sandal)
-		player.equip_to_slot_or_del(new fallback_type(player), slot_shoes)
+		player.equip_to_slot_or_del(new fallback_type(player), slot_shoes_str)
 
-	player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform)
-	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
-	player.equip_to_slot_or_del(new new_helmet(player),slot_head)
-	player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
+	player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform_str)
+	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses_str)
+	player.equip_to_slot_or_del(new new_helmet(player),slot_head_str)
+	player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit_str)
 	equip_weapons(player)
 
 	var/obj/item/card/id/id = create_id("Visitor", player, equip = 0)
@@ -163,7 +163,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	id.assignment = "Visitor"
 	var/obj/item/storage/wallet/W = new(player)
 	W.handle_item_insertion(id)
-	if(player.equip_to_slot_or_del(W, slot_wear_id))
+	if(player.equip_to_slot_or_del(W, slot_wear_id_str))
 		var/obj/item/cash/cash = new(get_turf(player))
 		cash.adjust_worth(rand(50,150)*10)
 		player.put_in_hands(cash)
@@ -188,7 +188,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			H.holstered = secondary
 			secondary.forceMove(holster)
 		else
-			player.equip_to_slot_or_del(secondary, slot_belt)
+			player.equip_to_slot_or_del(secondary, slot_belt_str)
 
 	if(primary.slot_flags & SLOT_HOLSTER)
 		holster = new new_holster(T)
@@ -196,9 +196,9 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		H.holstered = primary
 		primary.forceMove(holster)
 	else if(!player.belt && (primary.slot_flags & SLOT_BELT))
-		player.equip_to_slot_or_del(primary, slot_belt)
+		player.equip_to_slot_or_del(primary, slot_belt_str)
 	else if(!player.back && (primary.slot_flags & SLOT_BACK))
-		player.equip_to_slot_or_del(primary, slot_back)
+		player.equip_to_slot_or_del(primary, slot_back_str)
 	else
 		player.put_in_any_hand_if_possible(primary)
 
@@ -216,9 +216,9 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	if(istype(gun, /obj/item/gun/projectile))
 		var/obj/item/gun/projectile/bullet_thrower = gun
 		if(bullet_thrower.magazine_type)
-			player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_l_store)
+			player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_l_store_str)
 			if(prob(20)) //don't want to give them too much
-				player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_r_store)
+				player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_r_store_str)
 		else if(bullet_thrower.ammo_type)
 			var/obj/item/storage/box/ammobox = new(get_turf(player.loc))
 			for(var/i in 1 to rand(3,5) + rand(0,2))

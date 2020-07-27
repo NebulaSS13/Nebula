@@ -25,13 +25,13 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 	player.current.show_message("Entertain the crew! Try not to disrupt them from their work too much and remind them how great [GLOB.using_map.company_name] is!")
 
 /datum/antagonist/actor/equip(var/mob/living/carbon/human/player)
-	player.equip_to_slot_or_del(new /obj/item/clothing/under/chameleon(src), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/chameleon(src), slot_shoes)
-	player.equip_to_slot_or_del(new /obj/item/radio/headset/entertainment(src), slot_l_ear)
+	player.equip_to_slot_or_del(new /obj/item/clothing/under/chameleon(src), slot_w_uniform_str)
+	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/chameleon(src), slot_shoes_str)
+	player.equip_to_slot_or_del(new /obj/item/radio/headset/entertainment(src), slot_l_ear_str)
 	var/obj/item/card/id/centcom/ERT/C = new(player.loc)
 	C.assignment = "Actor"
 	player.set_id_info(C)
-	player.equip_to_slot_or_del(C,slot_wear_id)
+	player.equip_to_slot_or_del(C,slot_wear_id_str)
 
 	return 1
 

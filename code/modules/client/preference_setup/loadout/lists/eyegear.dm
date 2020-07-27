@@ -1,7 +1,7 @@
 /datum/gear/eyes
 	sort_category = "Glasses and Eyewear"
 	category = /datum/gear/eyes
-	slot = slot_glasses
+	slot = slot_glasses_str
 
 /datum/gear/eyes/glasses
 	display_name = "prescription glasses"

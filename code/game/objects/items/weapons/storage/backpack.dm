@@ -25,7 +25,7 @@
 	return ..()
 
 /obj/item/storage/backpack/equipped(var/mob/user, var/slot)
-	if (slot == slot_back && src.use_sound)
+	if (slot == slot_back_str && src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	..(user, slot)
 
@@ -170,9 +170,9 @@
 
 /obj/item/storage/backpack/dufflebag/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_back] = 3
-	slowdown_per_slot[slot_r_hand] = 1
-	slowdown_per_slot[slot_l_hand] = 1
+	LAZYSET(slowdown_per_slot, slot_back_str, 3)
+	LAZYSET(slowdown_per_slot, slot_r_hand_str, 1)
+	LAZYSET(slowdown_per_slot, slot_l_hand_str, 1)
 
 /obj/item/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
@@ -181,7 +181,7 @@
 
 /obj/item/storage/backpack/dufflebag/syndie/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_back] = 1
+	LAZYSET(slowdown_per_slot, slot_back_str, 1)
 
 /obj/item/storage/backpack/dufflebag/syndie/med
 	name = "medical dufflebag"

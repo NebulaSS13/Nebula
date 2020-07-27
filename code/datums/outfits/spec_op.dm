@@ -11,7 +11,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots/swat/combat
 	gloves = /obj/item/clothing/gloves/thick/combat
 
-	id_slot = slot_wear_id
+	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/centcom/ERT
 	id_desc = "Special operations ID."
 	id_pda_assignment = "Special Operations Officer"
@@ -34,7 +34,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses
 	back = /obj/item/storage/backpack/satchel
 
-	id_slot = slot_wear_id
+	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/centcom/ERT
 
 /decl/hierarchy/outfit/mercenary
@@ -47,7 +47,7 @@
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_pocket = /obj/item/chems/pill/cyanide
 
-	id_slot = slot_wear_id
+	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/syndicate
 	id_pda_assignment = "Mercenary"
 

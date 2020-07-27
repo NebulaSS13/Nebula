@@ -32,8 +32,8 @@
 				H.drop_from_inventory(W)
 			//teleport person to cell
 			H.forceMove(pick(GLOB.prisonwarp))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/color/orange(H), slot_shoes)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(H), slot_w_uniform_str)
+			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/color/orange(H), slot_shoes_str)
 		else
 			//teleport security person
 			H.forceMove(pick(GLOB.prisonsecuritywarp))

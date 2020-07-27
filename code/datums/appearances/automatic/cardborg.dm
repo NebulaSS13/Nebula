@@ -2,7 +2,7 @@
 	var/static/list/appearances
 
 /decl/appearance_handler/cardborg/proc/item_equipped(var/obj/item/item, var/mob/user, var/slot)
-	if(!(slot == slot_head || slot == slot_wear_suit|| slot == slot_back))
+	if(!(slot == slot_head_str || slot == slot_wear_suit_str || slot == slot_back_str))
 		return
 	if(!ishuman(user))
 		return

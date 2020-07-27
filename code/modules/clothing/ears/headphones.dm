@@ -65,7 +65,7 @@
 /obj/item/clothing/ears/headphones/proc/play_music(mob/user)
 	if(!user || !user.client)
 		return
-	if(!(user.get_inventory_slot(src) in list(slot_l_ear, slot_r_ear)))
+	if(!(user.get_inventory_slot(src) in list(slot_l_ear_str, slot_r_ear_str)))
 		return
 	if(current_track)
 		var/music_track/track = decls_repository.get_decl(GLOB.music_tracks[current_track])

@@ -11,7 +11,7 @@
 	r_pocket = /obj/item/bikehorn
 	r_hand = /obj/item/twohanded/fireaxe
 
-	id_slot = slot_wear_id
+	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/centcom/station
 	id_pda_assignment = "Tunnel Clown!"
 
@@ -44,9 +44,9 @@
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_pocket = /obj/item/energy_blade/sword
 
-	id_slot = slot_wear_id
+	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/syndicate/station_access
-	pda_slot = slot_belt
+	pda_slot = slot_belt_str
 	pda_type = /obj/item/modular_computer/pda/heads
 
 /decl/hierarchy/outfit/reaper/post_equip(var/mob/living/carbon/human/H)
@@ -60,4 +60,4 @@
 	new /obj/item/gun/projectile/revolver(sec_briefcase)
 	new /obj/item/ammo_magazine/speedloader(sec_briefcase)
 	new /obj/item/plastique(sec_briefcase)
-	H.equip_to_slot_or_del(sec_briefcase, slot_l_hand)
+	H.equip_to_slot_or_del(sec_briefcase, slot_l_hand_str)

@@ -53,53 +53,53 @@
 #define BLOCKHEADHAIR   0x20    // Hides the user's hair overlay. Leaves facial hair.
 #define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
 
-// Slots.
-#define slot_first       1
-#define slot_back        1
-#define slot_wear_mask   2
-#define slot_handcuffed  3
-#define slot_l_hand      4
-#define slot_r_hand      5
-#define slot_belt        6
-#define slot_wear_id     7
-#define slot_l_ear       8
-#define slot_glasses     9
-#define slot_gloves      10
-#define slot_head        11
-#define slot_shoes       12
-#define slot_wear_suit   13
-#define slot_w_uniform   14
-#define slot_l_store     15
-#define slot_r_store     16
-#define slot_s_store     17
-#define slot_in_backpack 18
-#define slot_legcuffed   19
-#define slot_r_ear       20
-#define slot_legs        21
-#define slot_tie         22
-#define slot_last        22
-
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
 //icon_back, icon_l_hand, etc would be much better names for these...
-#define slot_back_str		"slot_back"
-#define slot_l_hand_str		"slot_l_hand"
-#define slot_r_hand_str		"slot_r_hand"
-#define slot_w_uniform_str	"slot_w_uniform"
-#define slot_head_str		"slot_head"
-#define slot_wear_suit_str	"slot_suit"
-#define slot_l_ear_str      "slot_l_ear"
-#define slot_r_ear_str      "slot_r_ear"
-#define slot_belt_str       "slot_belt"
-#define slot_shoes_str      "slot_shoes"
-#define slot_wear_mask_str 	"slot_wear_mask"
-#define slot_handcuffed_str "slot_handcuffed"
-#define slot_legcuffed_str "slot_legcuffed"
-#define slot_wear_id_str  	"slot_wear_id"
-#define slot_gloves_str  	"slot_gloves"
-#define slot_glasses_str  	"slot_glasses"
-#define slot_s_store_str	"slot_s_store"
-#define slot_tie_str		"slot_tie"
+#define slot_back_str        "slot_back"
+#define slot_l_hand_str      "slot_l_hand"
+#define slot_r_hand_str      "slot_r_hand"
+#define slot_w_uniform_str   "slot_w_uniform"
+#define slot_head_str        "slot_head"
+#define slot_wear_suit_str   "slot_suit"
+#define slot_l_ear_str       "slot_l_ear"
+#define slot_r_ear_str       "slot_r_ear"
+#define slot_belt_str        "slot_belt"
+#define slot_shoes_str       "slot_shoes"
+#define slot_wear_mask_str   "slot_wear_mask"
+#define slot_handcuffed_str  "slot_handcuffed"
+#define slot_legcuffed_str   "slot_legcuffed"
+#define slot_wear_id_str     "slot_wear_id"
+#define slot_gloves_str      "slot_gloves"
+#define slot_glasses_str     "slot_glasses"
+#define slot_tie_str         "slot_tie"
+#define slot_l_store_str     "slot_l_store"
+#define slot_r_store_str     "slot_r_store"
+#define slot_s_store_str     "slot_s_store"
+#define slot_in_backpack_str "slot_s_store"
+
+var/list/all_inventory_slots = list(
+	slot_back_str,
+	slot_l_hand_str,
+	slot_r_hand_str,
+	slot_w_uniform_str,
+	slot_head_str,
+	slot_wear_suit_str,
+	slot_l_ear_str,
+	slot_r_ear_str,
+	slot_belt_str,
+	slot_shoes_str,
+	slot_wear_mask_str,
+	slot_handcuffed_str,
+	slot_legcuffed_str,
+	slot_wear_id_str,
+	slot_gloves_str,
+	slot_glasses_str,
+	slot_s_store_str,
+	slot_tie_str,
+	slot_l_store_str,
+	slot_r_store_str
+)
 
 // Bitflags for clothing parts.
 #define HEAD        0x1

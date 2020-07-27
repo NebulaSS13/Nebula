@@ -40,7 +40,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ITEM_FLAG_NO_CONTAMINATION        0x0002 // Does not get contaminated.
 #define ITEM_FLAG_NO_PRINT                0x0004 // This object does not leave the user's prints/fibres when using it
 #define ITEM_FLAG_INVALID_FOR_CHAMELEON   0x0008 // Chameleon items cannot mimick this.
-#define ITEM_FLAG_THICKMATERIAL           0x0010 // Prevents syringes, reagent pens, and hyposprays if equiped to slot_suit or slot_head.
+#define ITEM_FLAG_THICKMATERIAL           0x0010 // Prevents syringes, reagent pens, and hyposprays if equiped to slot_suit or slot_head_str.
 #define ITEM_FLAG_AIRTIGHT                0x0040 // Functions with internals.
 #define ITEM_FLAG_NOSLIP                  0x0080 // Prevents from slipping on wet floors, in space, etc.
 #define ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT  0x0100 // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)

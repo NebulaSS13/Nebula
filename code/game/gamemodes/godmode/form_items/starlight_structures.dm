@@ -179,7 +179,7 @@
 /obj/structure/deity/radiant_statue/attack_hand(var/mob/living/L)
 	if(!istype(L))
 		return
-	var/obj/O = L.get_equipped_item(slot_wear_suit)
+	var/obj/O = L.get_equipped_item(slot_wear_suit_str)
 	if(O && has_extension(O,/datum/extension/deity_be_near))
 		if(activate_charging())
 			to_chat(L, "<span class='notice'>You place your hands on \the [src], feeling your master's power course through you.</span>")

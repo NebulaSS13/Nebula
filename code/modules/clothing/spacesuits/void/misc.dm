@@ -19,4 +19,4 @@
 
 /obj/item/clothing/suit/space/void/swat/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 1
+	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)

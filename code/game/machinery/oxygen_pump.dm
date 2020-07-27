@@ -74,7 +74,7 @@
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))
 		contained.dropInto(C.loc)
-		C.equip_to_slot(contained, slot_wear_mask)
+		C.equip_to_slot(contained, slot_wear_mask_str)
 		if(tank)
 			tank.forceMove(C)
 		breather = C

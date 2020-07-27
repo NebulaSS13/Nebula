@@ -77,7 +77,7 @@
 	if(!istype(H))
 		return 0
 
-	if (!H.has_organ_for_slot(slot_handcuffed))
+	if (!H.has_organ_for_slot(slot_handcuffed_str))
 		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
 		return 0
 
@@ -108,7 +108,7 @@
 	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
 
 	// Apply cuffs.
-	target.equip_to_slot(cuffs,slot_handcuffed)
+	target.equip_to_slot(cuffs,slot_handcuffed_str)
 	return 1
 
 var/last_chew = 0

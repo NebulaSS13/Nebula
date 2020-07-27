@@ -31,11 +31,11 @@
 	var/slot = null
 
 	if(limb.organ_tag in list(BP_L_ARM, BP_L_HAND))
-		slot = slot_l_hand
+		slot = slot_l_hand_str
 	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
-		slot = slot_r_hand
+		slot = slot_r_hand_str
 
-	var/obj/I = slot == slot_l_hand ? owner.l_hand : owner.r_hand
+	var/obj/I = slot == slot_l_hand_str ? owner.l_hand : owner.r_hand
 
 	if(I)
 		if(is_type_in_list(I,paths) && !(I.type in items)) //We don't want several of same but you can replace parts whenever

@@ -1,5 +1,5 @@
 /datum/gear/suit
-	slot = slot_wear_suit
+	slot = slot_wear_suit_str
 	sort_category = "Suits and Overwear"
 	category = /datum/gear/suit
 

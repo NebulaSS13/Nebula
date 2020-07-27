@@ -30,9 +30,9 @@
 
 	var/slot = null
 	if(limb.organ_tag in list(BP_L_ARM, BP_L_HAND))
-		slot = slot_l_hand
+		slot = slot_l_hand_str
 	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
-		slot = slot_r_hand
+		slot = slot_r_hand_str
 	if(owner.equip_to_slot_if_possible(holding, slot))
 		GLOB.item_unequipped_event.register(holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
 		owner.visible_message(

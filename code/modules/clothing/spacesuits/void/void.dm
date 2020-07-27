@@ -103,13 +103,13 @@ else if(##equipment_var) {\
 		return
 
 	if(boots)
-		if (H.equip_to_slot_if_possible(boots, slot_shoes))
+		if (H.equip_to_slot_if_possible(boots, slot_shoes_str))
 			boots.canremove = 0
 
 	if(helmet)
 		if(H.head)
 			to_chat(M, "You are unable to deploy your suit's helmet as \the [H.head] is in the way.")
-		else if (H.equip_to_slot_if_possible(helmet, slot_head))
+		else if (H.equip_to_slot_if_possible(helmet, slot_head_str))
 			to_chat(M, "Your suit's helmet deploys with a hiss.")
 			playsound(loc, helmet_deploy_sound, 30)
 			helmet.canremove = 0
@@ -117,7 +117,7 @@ else if(##equipment_var) {\
 	if(tank)
 		if(H.s_store) //In case someone finds a way.
 			to_chat(M, "Alarmingly, the valve on your suit's installed tank fails to engage.")
-		else if (H.equip_to_slot_if_possible(tank, slot_s_store))
+		else if (H.equip_to_slot_if_possible(tank, slot_s_store_str))
 			to_chat(M, "The valve on your suit's installed tank safely engages.")
 			tank.canremove = 0
 
@@ -172,7 +172,7 @@ else if(##equipment_var) {\
 		if(H.head)
 			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>")
 			return
-		if(H.equip_to_slot_if_possible(helmet, slot_head))
+		if(H.equip_to_slot_if_possible(helmet, slot_head_str))
 			helmet.pickup(H)
 			helmet.canremove = 0
 			playsound(loc, helmet_deploy_sound, 30)
@@ -196,7 +196,7 @@ else if(##equipment_var) {\
 	if(!istype(H)) return
 	if(H.incapacitated()) return
 	var/slot = H.get_inventory_slot(src)
-	if(slot != slot_wear_suit && slot != slot_l_hand && slot != slot_r_hand) return// let them eject those tanks when they're in hand or stuff for ease of use
+	if(slot != slot_wear_suit_str && slot != slot_l_hand_str && slot != slot_r_hand_str) return// let them eject those tanks when they're in hand or stuff for ease of use
 
 
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
@@ -214,7 +214,7 @@ else if(##equipment_var) {\
 		return ..()
 
 	if(istype(W,/obj/item/screwdriver))
-		if(user.get_inventory_slot(src) == slot_wear_suit)//maybe I should make this into a proc?
+		if(user.get_inventory_slot(src) == slot_wear_suit_str)//maybe I should make this into a proc?
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 
@@ -239,7 +239,7 @@ else if(##equipment_var) {\
 			to_chat(user, "\The [src] does not have anything installed.")
 		return
 	else if(istype(W,/obj/item/clothing/head/helmet/space))
-		if(user.get_inventory_slot(src) == slot_wear_suit)
+		if(user.get_inventory_slot(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(helmet)
@@ -252,7 +252,7 @@ else if(##equipment_var) {\
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
-		if(user.get_inventory_slot(src) == slot_wear_suit)
+		if(user.get_inventory_slot(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(boots)
@@ -265,7 +265,7 @@ else if(##equipment_var) {\
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/tank))
-		if(user.get_inventory_slot(src) == slot_wear_suit)
+		if(user.get_inventory_slot(src) == slot_wear_suit_str)
 			to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
 			return
 		if(tank)
@@ -285,12 +285,12 @@ else if(##equipment_var) {\
 
 /obj/item/clothing/suit/space/void/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	if(tank && slot == slot_back)
+	if(tank && slot == slot_back_str)
 		ret.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
 	return ret
 
 /obj/item/clothing/suit/space/void/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	var/image/ret = ..()
-	if(tank && slot == slot_back)
+	if(tank && slot == slot_back_str)
 		ret.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
 	return ret

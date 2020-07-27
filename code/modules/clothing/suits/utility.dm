@@ -31,7 +31,7 @@
 
 /obj/item/clothing/suit/fire/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 0.5
+	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 0.5)
 
 /*
  * Bomb protection
@@ -72,7 +72,7 @@
 
 /obj/item/clothing/suit/bomb_suit/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 2
+	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 2)
 
 /obj/item/clothing/head/bomb_hood/security
 	icon_state = "bombsuitsec"
@@ -115,7 +115,7 @@
 
 /obj/item/clothing/suit/radiation/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_shoes] = 1.5
+	LAZYSET(slowdown_per_slot, slot_shoes_str, 1.5)
 
 /*
  * chemical protection

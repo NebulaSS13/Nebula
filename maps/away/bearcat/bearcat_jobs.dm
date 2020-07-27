@@ -21,7 +21,7 @@
 /decl/hierarchy/outfit/job/bearcat
 	hierarchy_type = /decl/hierarchy/outfit/job/bearcat
 	pda_type = /obj/item/modular_computer/pda
-	pda_slot = slot_l_store
+	pda_slot = slot_l_store_str
 	r_pocket = /obj/item/radio
 	l_ear = null
 	r_ear = null

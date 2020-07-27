@@ -21,7 +21,7 @@
 	ToggleHood()
 
 /obj/item/clothing/suit/storage/hooded/equipped(mob/user, slot)
-	if(slot != slot_wear_suit)
+	if(slot != slot_wear_suit_str)
 		RemoveHood()
 	..()
 
@@ -50,7 +50,7 @@
 				to_chat(H, "<span class='warning'>You're already wearing something on your head!</span>")
 				return
 			else
-				H.equip_to_slot_if_possible(hood,slot_head,0,0,1)
+				H.equip_to_slot_if_possible(hood, slot_head_str, 0, 0, 1)
 				suittoggled = 1
 				update_icon()
 				H.update_inv_wear_suit()

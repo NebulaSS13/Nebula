@@ -1,7 +1,7 @@
 /datum/gear/storage/
 	sort_category = "Storage Accessories"
 	category = /datum/gear/storage/
-	slot = slot_tie
+	slot = slot_tie_str
 
 /datum/gear/storage/webbing
 	display_name = "webbing, small"
@@ -21,7 +21,7 @@
 /datum/gear/storage/waistpack
 	display_name = "waist pack"
 	path = /obj/item/storage/belt/waistpack
-	slot = slot_belt
+	slot = slot_belt_str
 	cost = 2
 	flags = GEAR_HAS_COLOR_SELECTION
 

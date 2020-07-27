@@ -396,26 +396,26 @@
 	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
 	visible_message("<span class='warning'>\The [src] disappears with a flash of red light, and a set of armor appears on \the [user].</span>", "<span class='warning'>You are blinded by the flash of red light. After you're able to see again, you see that you are now wearing a set of armor.</span>")
 
-	var/obj/O = user.get_equipped_item(slot_head) // This will most likely kill you if you are wearing a spacesuit, and it's 100% intended
+	var/obj/O = user.get_equipped_item(slot_head_str) // This will most likely kill you if you are wearing a spacesuit, and it's 100% intended
 	if(O && !istype(O, /obj/item/clothing/head/culthood) && user.unEquip(O))
-		user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
-	O = user.get_equipped_item(slot_wear_suit)
+		user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head_str)
+	O = user.get_equipped_item(slot_wear_suit_str)
 	if(O && !istype(O, /obj/item/clothing/suit/cultrobes) && user.unEquip(O))
-		user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)
-	O = user.get_equipped_item(slot_shoes)
+		user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit_str)
+	O = user.get_equipped_item(slot_shoes_str)
 	if(O && !istype(O, /obj/item/clothing/shoes/cult) && user.unEquip(O))
-		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)
+		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes_str)
 
-	O = user.get_equipped_item(slot_back)
+	O = user.get_equipped_item(slot_back_str)
 	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.unEquip(O)) // We don't want to make the vox drop their nitrogen tank, though
 		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
-		user.equip_to_slot_or_del(C, slot_back)
+		user.equip_to_slot_or_del(C, slot_back_str)
 		if(C)
 			for(var/obj/item/I in O)
 				I.forceMove(C)
 	else if(!O)
 		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
-		user.equip_to_slot_or_del(C, slot_back)
+		user.equip_to_slot_or_del(C, slot_back_str)
 
 	user.update_icons()
 
@@ -613,7 +613,7 @@
 	strokes = 4
 
 /obj/effect/rune/weapon/cast(var/mob/living/user)
-	if(!istype(user.get_equipped_item(slot_head), /obj/item/clothing/head/culthood) || !istype(user.get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) || !istype(user.get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
+	if(!istype(user.get_equipped_item(slot_head_str), /obj/item/clothing/head/culthood) || !istype(user.get_equipped_item(slot_wear_suit_str), /obj/item/clothing/suit/cultrobes) || !istype(user.get_equipped_item(slot_shoes_str), /obj/item/clothing/shoes/cult))
 		to_chat(user, "<span class='warning'>You need to be wearing your robes to use this rune.</span>")
 		return fizzle(user)
 	var/turf/T = get_turf(src)

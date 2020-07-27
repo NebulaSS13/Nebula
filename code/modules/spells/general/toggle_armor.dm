@@ -43,19 +43,19 @@
 	name = "Greytide Worldwide"
 	invocation_type = SpI_EMOTE
 	invocation = "screams incoherently!"
-	armor_pieces = list(/obj/item/clothing/under/color/grey = slot_w_uniform,
-						/obj/item/clothing/gloves/insulated/cheap = slot_gloves,
-						/obj/item/clothing/mask/gas = slot_wear_mask,
-						/obj/item/clothing/shoes/color/black = slot_shoes,
-						/obj/item/storage/toolbox/mechanical = slot_r_hand,
-						/obj/item/extinguisher = slot_l_hand)
+	armor_pieces = list(/obj/item/clothing/under/color/grey = slot_w_uniform_str,
+						/obj/item/clothing/gloves/insulated/cheap = slot_gloves_str,
+						/obj/item/clothing/mask/gas = slot_wear_mask_str,
+						/obj/item/clothing/shoes/color/black = slot_shoes_str,
+						/obj/item/storage/toolbox/mechanical = slot_r_hand_str,
+						/obj/item/extinguisher = slot_l_hand_str)
 
 /spell/toggle_armor/caretaker
 	name = "Toggle Armor (Caretaker)"
 	invocation_type = SpI_EMOTE
 	invocation = "radiates a holy light"
-	armor_pieces = list(/obj/item/clothing/head/caretakerhood = slot_head,
-						/obj/item/clothing/suit/caretakercloak = slot_wear_suit
+	armor_pieces = list(/obj/item/clothing/head/caretakerhood = slot_head_str,
+						/obj/item/clothing/suit/caretakercloak = slot_wear_suit_str
 						)
 	hud_state = "caretaker"
 
@@ -63,8 +63,8 @@
 	name = "Toggle Armor (Champion)"
 	invocation_type = SpI_EMOTE
 	invocation = "is covered in golden embers for a moment, before they fade"
-	armor_pieces = list(/obj/item/clothing/head/champhelm = slot_head,
-						/obj/item/clothing/suit/champarmor = slot_wear_suit
+	armor_pieces = list(/obj/item/clothing/head/champhelm = slot_head_str,
+						/obj/item/clothing/suit/champarmor = slot_wear_suit_str
 						)
 	hud_state = "champion"
 
@@ -72,50 +72,50 @@
 	name = "Toggle Sword"
 	invocation_type = SpI_EMOTE
 	invocation = "thrusts /his hand forward, and it is enveloped in golden embers!"
-	armor_pieces = list(/obj/item/sword/excalibur = slot_r_hand)
+	armor_pieces = list(/obj/item/sword/excalibur = slot_r_hand_str)
 	hud_state = "excalibur"
 
 /spell/toggle_armor/fiend
 	name = "Toggle Armor (Fiend)"
 	invocation_type = SpI_EMOTE
 	invocation = "snaps /his fingers, and /his clothes begin to shift and change"
-	armor_pieces = list(/obj/item/clothing/head/fiendhood = slot_head,
-						/obj/item/clothing/suit/fiendcowl = slot_wear_suit
+	armor_pieces = list(/obj/item/clothing/head/fiendhood = slot_head_str,
+						/obj/item/clothing/suit/fiendcowl = slot_wear_suit_str
 						)
 	hud_state = "fiend"
 
 /spell/toggle_armor/fiend/fem
-	armor_pieces = list(/obj/item/clothing/head/fiendhood/fem = slot_head,
-						/obj/item/clothing/suit/fiendcowl/fem = slot_wear_suit
+	armor_pieces = list(/obj/item/clothing/head/fiendhood/fem = slot_head_str,
+						/obj/item/clothing/suit/fiendcowl/fem = slot_wear_suit_str
 						)
 
 /spell/toggle_armor/infiltrator
 	name = "Toggle Armor (Infiltrator)"
 	invocation_type = SpI_EMOTE
 	invocation = "winks. In an instant, /his clothes change dramatically"
-	armor_pieces = list(/obj/item/clothing/head/infilhat = slot_head,
-						/obj/item/clothing/suit/infilsuit = slot_wear_suit
+	armor_pieces = list(/obj/item/clothing/head/infilhat = slot_head_str,
+						/obj/item/clothing/suit/infilsuit = slot_wear_suit_str
 						)
 	hud_state = "infiltrator"
 
 /spell/toggle_armor/infiltrator/fem
-	armor_pieces = list(/obj/item/clothing/head/infilhat/fem = slot_head,
-						/obj/item/clothing/suit/infilsuit/fem = slot_wear_suit
+	armor_pieces = list(/obj/item/clothing/head/infilhat/fem = slot_head_str,
+						/obj/item/clothing/suit/infilsuit/fem = slot_wear_suit_str
 						)
 
 /spell/toggle_armor/infil_items
 	name = "Toggle Counterfeit Kit"
 	invocation_type = SpI_EMOTE
 	invocation = "flicks /his wrists, one at a time"
-	armor_pieces = list(/obj/item/stamp/chameleon = slot_l_hand,
-						/obj/item/pen/chameleon = slot_r_hand)
+	armor_pieces = list(/obj/item/stamp/chameleon = slot_l_hand_str,
+						/obj/item/pen/chameleon = slot_r_hand_str)
 	hud_state = "forgery"
 
 /spell/toggle_armor/overseer
 	name = "Toggle Armor (Overseer)"
 	invocation_type = SpI_EMOTE
 	invocation = " is enveloped in shadows, before /his form begins to shift rapidly"
-	armor_pieces = list(/obj/item/clothing/head/overseerhood = slot_head,
-						/obj/item/clothing/suit/straight_jacket/overseercloak = slot_wear_suit
+	armor_pieces = list(/obj/item/clothing/head/overseerhood = slot_head_str,
+						/obj/item/clothing/suit/straight_jacket/overseercloak = slot_wear_suit_str
 						)
 	hud_state = "overseer"

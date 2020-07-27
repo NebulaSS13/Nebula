@@ -81,11 +81,11 @@
 					user.put_in_active_hand(UW)
 				return
 
-	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip_text))
+	var/obj/item/target_slot = get_equipped_item(slot_to_strip_text)
 	if(stripping)
 		if(!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
 			return
-		if(!target_slot.mob_can_unequip(src, text2num(slot_to_strip_text), disable_warning=1))
+		if(!target_slot.mob_can_unequip(src, slot_to_strip_text, disable_warning=1))
 			to_chat(user, "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>")
 			return
 
@@ -103,10 +103,10 @@
 		else
 			admin_attack_log(user, src, "Attempted to strip \a [target_slot]", "Target of a failed strip of \a [target_slot].", "attempted to strip \a [target_slot] from")
 	else if(user.unEquip(held))
-		var/obj/item/clothing/C = get_equipped_item(text2num(slot_to_strip_text))
+		var/obj/item/clothing/C = get_equipped_item(slot_to_strip_text)
 		if(istype(C) && C.can_attach_accessory(held))
 			C.attach_accessory(user, held)
-		else if(!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail=0, disable_warning=1, redraw_mob=1))
+		else if(!equip_to_slot_if_possible(held, slot_to_strip_text, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			user.put_in_active_hand(held)
 
 // Empty out everything in the target's pockets.
@@ -124,10 +124,10 @@
 	if(!user.unEquip(I))
 		return
 	if(!r_store)
-		if(equip_to_slot_if_possible(I, slot_r_store, del_on_fail=0, disable_warning=1, redraw_mob=1))
+		if(equip_to_slot_if_possible(I, slot_r_store_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return
 	if(!l_store)
-		if(equip_to_slot_if_possible(I, slot_l_store, del_on_fail=0, disable_warning=1, redraw_mob=1))
+		if(equip_to_slot_if_possible(I, slot_l_store_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return
 	to_chat(user, "<span class='warning'>You are unable to place [I] in [src]'s pockets.</span>")
 	user.put_in_active_hand(I)

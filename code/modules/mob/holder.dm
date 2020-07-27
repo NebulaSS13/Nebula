@@ -147,7 +147,7 @@ var/list/holder_mob_icon_cache = list()
 	var/obj/item/holder/H = new holder_type(get_turf(src))
 
 	if(self_grab)
-		if(!grabber.equip_to_slot_if_possible(H, slot_back, del_on_fail=0, disable_warning=1))
+		if(!grabber.equip_to_slot_if_possible(H, slot_back_str, del_on_fail=0, disable_warning=1))
 			to_chat(src, "<span class='warning'>You can't climb onto [grabber]!</span>")
 			return
 
