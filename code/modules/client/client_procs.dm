@@ -416,6 +416,9 @@ client/verb/character_setup()
 /client/verb/SetWindowIconSize(var/val as num|text)
 	set hidden = 1
 	winset(src, "mapwindow.map", "icon-size=[val]")
+	if(prefs && val != prefs.icon_size)
+		prefs.icon_size = val
+		SScharacter_setup.queue_preferences_save(prefs)
 	OnResize()
 
 /client
@@ -443,35 +446,34 @@ client/verb/character_setup()
 
 /client/verb/OnResize()
 	set hidden = 1
-	handle_resize(src)
-
-/proc/handle_resize(client/C)
-	if (!C)
-		return
-	var/divisor = text2num(winget(C, "mapwindow.map", "icon-size")) || world.icon_size
-	var/winsize_string = winget(C, "mapwindow.map", "size")
-	C.last_view_x_dim = Clamp(ceil(text2num(winsize_string) / divisor), 15, 41)
-	C.last_view_y_dim = Clamp(ceil(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, 41)
-	if(C.last_view_x_dim % 2 == 0) C.last_view_x_dim++
-	if(C.last_view_y_dim % 2 == 0) C.last_view_y_dim++
-	C.view = "[C.last_view_x_dim]x[C.last_view_y_dim]"
+	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
+	var/winsize_string = winget(src, "mapwindow.map", "size")
+	last_view_x_dim = Clamp(ceil(text2num(winsize_string) / divisor), 15, 41)
+	last_view_y_dim = Clamp(ceil(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, 41)
+	if(last_view_x_dim % 2 == 0) last_view_x_dim++
+	if(last_view_y_dim % 2 == 0) last_view_y_dim++
+	view = "[last_view_x_dim]x[last_view_y_dim]"
 
 	// Reset eye/perspective
-	var/last_perspective = C.perspective
-	C.perspective = MOB_PERSPECTIVE
-	if(C.perspective != last_perspective)
-		C.perspective = last_perspective
-	var/last_eye = C.eye
-	C.eye = C.mob
-	if(C.eye != last_eye)
-		C.eye = last_eye
+	var/last_perspective = perspective
+	perspective = MOB_PERSPECTIVE
+	if(perspective != last_perspective)
+		perspective = last_perspective
+	var/last_eye = eye
+	eye = mob
+	if(eye != last_eye)
+		eye = last_eye
 
 	// Recenter skybox and lighting.
-	C.set_skybox_offsets(C.last_view_x_dim, C.last_view_y_dim)
-	if(C.mob)
-		if(C.mob.l_general)
-			C.mob.l_general.fit_to_client_view(C.last_view_x_dim, C.last_view_y_dim)
-		C.mob.reload_fullscreen()
+	set_skybox_offsets(last_view_x_dim, last_view_y_dim)
+	if(mob)
+		if(mob.l_general)
+			mob.l_general.fit_to_client_view(last_view_x_dim, last_view_y_dim)
+		mob.reload_fullscreen()
+
+	for(var/check_icon_size in global.valid_icon_sizes)
+		winset(src, "menu.icon[check_icon_size]", "is-checked=false")
+	winset(src, "menu.icon[divisor]", "is-checked=true")
 
 /client/proc/update_chat_position(use_alternative)
 	var/input_height = 0
@@ -574,14 +576,3 @@ client/verb/character_setup()
 
 		pct += delta
 		winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
-	addtimer(CALLBACK(src, .proc/update_initial_icon_size), 0)
-
-/client/proc/update_initial_icon_size()
-	set waitfor = 0
-	var/set_initial_window_size = 48
-	for(var/check_icon_size in list(32, 48, 64, 96, 128))
-		if(winget(src, "menu.icon[check_icon_size]", "is-checked") == "true")
-			set_initial_window_size = check_icon_size
-			break
-	winset(src, "menu.icon[set_initial_window_size]", "is-checked=true")
-	SetWindowIconSize(set_initial_window_size)

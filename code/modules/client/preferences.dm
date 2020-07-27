@@ -1,6 +1,6 @@
 #define SAVE_RESET -1
 
-datum/preferences
+/datum/preferences
 	//doohickeys for savefiles
 	var/path
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
@@ -15,7 +15,7 @@ datum/preferences
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 
-		//Mob preview
+	//Mob preview
 	var/icon/preview_icon = null
 
 	var/client/client = null
