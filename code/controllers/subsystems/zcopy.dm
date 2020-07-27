@@ -203,6 +203,12 @@ SUBSYSTEM_DEF(zcopy)
 						if (T.z_flags & ZM_FIX_BIGTURF)
 							override_depth = min((zstack_maximums[T.z] - object.z) + 1, OPENTURF_MAX_DEPTH)
 
+					if (/atom/movable/openspace/turf_overlay)
+						// If we're a turf overlay (the mimic for a non-OVERWRITE turf), we need to make sure copies of us respect space parallax too
+						if (T.z_eventually_space)
+							// Yes, this is an awful hack; I don't want to add yet another override_* var.
+							override_depth = OPENTURF_MAX_PLANE - SPACE_PLANE
+
 				var/atom/movable/openspace/overlay/OO = object.bound_overlay
 
 				// If the OO was queued for destruction but was claimed by another OT, stop the destruction timer.
