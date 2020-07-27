@@ -171,6 +171,6 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, 
 
 /obj/item/proxy_debug/proc/update_turfs(var/list/old_turfs, var/list/new_turfs)
 	for(var/turf/T in old_turfs)
-		T.overlays -= overlay
+		T.cut_overlay(overlay, TRUE)
 	for(var/turf/T in new_turfs)
-		T.overlays += overlay
+		T.add_overlay(overlay, TRUE)
