@@ -3,6 +3,25 @@
 	#include "../../mods/corporate/_corporate.dme"
 	#include "../../mods/ascent/_ascent.dme"
 
+	#include "../../mods/government/away_sites/icarus/icarus.dm"
+	#include "../../mods/government/ruins/ec_old_crash/ec_old_crash.dm"
+	#include "../../mods/corporate/away_sites/lar_maria/lar_maria.dm"
+	#include "../../mods/ascent/away_sites/ascent/ascent.dm"
+
+	#include "../away/bearcat/bearcat.dm"
+	#include "../away/casino/casino.dm"
+	#include "../away/derelict/derelict.dm"
+	#include "../away/empty.dmm"
+	#include "../away/errant_pisces/errant_pisces.dm"
+	#include "../away/lost_supply_base/lost_supply_base.dm"
+	#include "../away/magshield/magshield.dm"
+	#include "../away/mining/mining.dm"
+	#include "../away/mobius_rift/mobius_rift.dm"
+	#include "../away/smugglers/smugglers.dm"
+	#include "../away/slavers/slavers_base.dm"
+	#include "../away/unishi/unishi.dm"
+	#include "../away/yacht/yacht.dm"
+
 	#include "tradeship_antagonists.dm"
 	#include "tradeship_areas.dm"
 	#include "tradeship_documents.dm"
@@ -27,18 +46,6 @@
 	#include "outfits/engineering.dm"
 	#include "outfits/medical.dm"
 	#include "outfits/science.dm"
-
-	#include "../away/mining/mining.dm"
-	#include "../away/derelict/derelict.dm"
-	#include "../away/bearcat/bearcat.dm"
-	#include "../away/lost_supply_base/lost_supply_base.dm"
-	#include "../away/smugglers/smugglers.dm"
-	#include "../away/casino/casino.dm"
-	#include "../away/magshield/magshield.dm"
-	#include "../away/slavers/slavers_base.dm"
-	#include "../away/mobius_rift/mobius_rift.dm"
-	#include "../away/errant_pisces/errant_pisces.dm"
-	#include "../away/unishi/unishi.dm"
 
 	#define USING_MAP_DATUM /datum/map/tradeship
 

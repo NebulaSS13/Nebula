@@ -13,7 +13,7 @@
 	) // Interferes with resin globules.
 
 /datum/chemical_reaction/synthesis/crystalization/can_happen(datum/reagents/holder)
-	. = ..() && length(holder.reagent_volumes > 1)
+	. = ..() && length(holder.reagent_volumes) > 1
 	if(.)
 		. = FALSE
 		for(var/rtype in holder.reagent_volumes)
