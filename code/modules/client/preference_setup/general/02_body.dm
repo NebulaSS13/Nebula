@@ -523,7 +523,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		switch(new_state)
 			if("Normal")
 				if(limb == BP_CHEST)
-					for(var/other_limb in (BP_ALL_LIMBS - BP_CHEST))
+					for(var/other_limb in global.all_limb_tags)
+						if(other_limb == BP_CHEST)
+							continue
 						pref.organ_data[other_limb] = null
 						pref.rlimb_data[other_limb] = null
 						for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH,BP_BRAIN))
@@ -571,7 +573,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.organ_data[third_limb] = null
 
 				if(limb == BP_CHEST)
-					for(var/other_limb in BP_ALL_LIMBS - BP_CHEST)
+					for(var/other_limb in global.all_limb_tags)
+						if(other_limb == BP_CHEST)
+							continue
 						pref.organ_data[other_limb] = "cyborg"
 						pref.rlimb_data[other_limb] = choice
 					if(!pref.organ_data[BP_BRAIN])

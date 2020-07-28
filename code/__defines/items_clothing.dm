@@ -208,19 +208,21 @@ var/list/all_inventory_slots = list(
 
 // Storage
 
-/*
-	A note on w_classes - this is an attempt to describe the w_classes currently in use
-	with an attempt at providing examples of the kinds of things that fit each w_class
+// Limbs.
+#define BP_L_FOOT       "l_foot"
+#define BP_R_FOOT       "r_foot"
+#define BP_L_LEG        "l_leg"
+#define BP_R_LEG        "r_leg"
+#define BP_L_HAND       "l_hand"
+#define BP_R_HAND       "r_hand"
+#define BP_L_ARM        "l_arm"
+#define BP_R_ARM        "r_arm"
+#define BP_HEAD         "head"
+#define BP_CHEST        "chest"
+#define BP_GROIN        "groin"
 
-	1 - tiny items - things like screwdrivers and pens, sheets of paper
-	2 - small items - things that can fit in a pocket
-	3 - normal items
-	4 - large items - the largest things you can fit in a backpack
-	5 - bulky items - backpacks are this size, for reference
-	6 - human sized objects
-	7 - things that are large enough to contain humans, like closets, but smaller than entire turfs
-	8 - things that take up an entire turf, like wall girders or door assemblies
-*/
+var/list/all_limb_tags = list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
+var/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
 
 var/list/default_onmob_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand.dmi',

@@ -183,7 +183,7 @@
 					TODO: proc for melee combat miss chances depending on organ?
 				*/
 				if(prob(80))
-					hit_zone = ran_zone(hit_zone)
+					hit_zone = ran_zone(hit_zone, target = src)
 				if(prob(15) && hit_zone != BP_CHEST) // Missed!
 					if(!src.lying)
 						attack_message = "[H] attempted to strike [src], but missed!"

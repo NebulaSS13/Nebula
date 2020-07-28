@@ -351,7 +351,7 @@ This function restores the subjects blood to max.
 This function restores all organs.
 */
 /mob/living/carbon/human/restore_all_organs(var/ignore_prosthetic_prefs)
-	for(var/bodypart in BP_BY_DEPTH)
+	for(var/bodypart in global.all_limb_tags_by_depth)
 		var/obj/item/organ/external/current_organ = organs_by_name[bodypart]
 		if(istype(current_organ))
 			current_organ.rejuvenate(ignore_prosthetic_prefs)
@@ -367,7 +367,7 @@ This function restores all organs.
 	return
 
 /mob/living/carbon/human/get_organ(var/zone)
-	return organs_by_name[check_zone(zone)]
+	return organs_by_name[check_zone(zone, src, base_zone_only = TRUE)]
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
 
@@ -388,8 +388,8 @@ This function restores all organs.
 						def_zone = zone
 						. = .() || .
 					return
-				def_zone = ran_zone(def_zone)
-			organ = get_organ(check_zone(def_zone))
+				def_zone = ran_zone(def_zone, target = src)
+			organ = get_organ(check_zone(def_zone, src))
 
 	//Handle other types of damage
 	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))

@@ -264,8 +264,8 @@
 	if (!G.force_danger())
 		to_chat(G.assailant, SPAN_DANGER("You need a better grip to do that!"))
 		return TRUE
-	var/def_zone = ran_zone(BP_HEAD, 20)
 	var/mob/affecting_mob = G.get_affecting_mob()
+	var/def_zone = ran_zone(BP_HEAD, 20, affecting_mob)
 	if(!affecting_mob)
 		attackby(G.affecting, G.assailant)
 		return TRUE

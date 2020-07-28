@@ -179,6 +179,13 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	// Check for multi-surgery drifting.
 	var/zone = user.zone_sel.selecting
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(length(LAZYACCESS(H.species.limb_mapping, zone)) > 1)
+			zone = input("Which bodypart do you wish to operate on?", "Non-standard surgery") as null|anything in H.species.limb_mapping[zone]
+			if(!zone)
+				return FALSE
+
 	if(LAZYACCESS(M.surgeries_in_progress, zone))
 		to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
 		return TRUE
@@ -266,7 +273,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 		. = TRUE
 
 	if(M == user)
-		var/hitzone = check_zone(user.zone_sel.selecting)
+		var/hitzone = check_zone(user.zone_sel.selecting, M)
 		var/list/badzones = list(BP_HEAD)
 		if(user.hand)
 			badzones += BP_L_ARM

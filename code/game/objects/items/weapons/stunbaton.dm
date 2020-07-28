@@ -105,7 +105,7 @@
 
 /obj/item/baton/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	if(istype(hit_atom,/mob/living))
-		apply_hit_effect(hit_atom, hit_zone = ran_zone(TT.target_zone, 30))//more likely to hit the zone you target!
+		apply_hit_effect(hit_atom, hit_zone = ran_zone(TT.target_zone, 30, hit_atom)) // more likely to hit the zone you target!
 	else
 		..()
 

@@ -138,7 +138,7 @@
 					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 
-			var/allow = T.can_inject(user, check_zone(user.zone_sel.selecting))
+			var/allow = T.can_inject(user, check_zone(user.zone_sel.selecting, T))
 			if(!allow)
 				return
 
@@ -157,7 +157,7 @@
 
 			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
 				to_chat(user, "<span class='warning'>You miss the vein!</span>")
-				var/target_zone = check_zone(user.zone_sel.selecting)
+				var/target_zone = check_zone(user.zone_sel.selecting, T)
 				T.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
 				return
 
@@ -227,7 +227,7 @@
 	if(!trackTarget)
 		trackTarget = target
 
-	var/allow = target.can_inject(user, check_zone(user.zone_sel.selecting))
+	var/allow = target.can_inject(user, check_zone(user.zone_sel.selecting, target))
 	if(!allow)
 		return
 
@@ -270,7 +270,7 @@
 
 		var/mob/living/carbon/human/H = target
 
-		var/target_zone = check_zone(user.zone_sel.selecting)
+		var/target_zone = check_zone(user.zone_sel.selecting, H)
 		var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
 		if (!affecting || affecting.is_stump())
