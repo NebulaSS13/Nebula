@@ -2,7 +2,7 @@
 	name = "Expeditionary Ship"
 	id = "ec_old_wreck"
 	description = "An abandoned ancient STL exploration ship."
-	prefix = list("mods/government/ruins/")
+	prefix = "mods/government/ruins/"
 	suffixes = list("ec_old_crash/ec_old_crash.dmm")
 	cost = 0.5
 	apc_test_exempt_areas = list(

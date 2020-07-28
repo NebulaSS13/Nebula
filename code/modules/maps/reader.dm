@@ -83,14 +83,14 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				if(!key_len)
 					key_len = length(key)
 				else
-					throw EXCEPTION("Inconsistant key length in DMM")
+					CRASH("Inconsistant key length in DMM")
 			if(!measureOnly)
 				grid_models[key] = dmmRegex.group[2]
 
 		// (1,1,1) = {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
 		else if(dmmRegex.group[3]) // Coords
 			if(!key_len)
-				throw EXCEPTION("Coords before model definition in DMM")
+				CRASH("Coords before model definition in DMM")
 
 			var/curr_x = text2num(dmmRegex.group[3])
 

@@ -11,6 +11,7 @@
 	name = "Lar Maria"
 	id = "awaysite_lar_maria"
 	description = "An orbital virus research station."
+	prefix = "mods/corporate/away_sites/"
 	suffixes = list("lar_maria/lar_maria-1.dmm", "lar_maria/lar_maria-2.dmm")
 	cost = 2
 	area_usage_test_exempted_root_areas = list(/area/lar_maria)
