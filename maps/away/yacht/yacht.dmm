@@ -156,7 +156,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/silver,
+/obj/machinery/door/airlock,
 /turf/simulated/floor/wood/yew,
 /area/yacht/bridge)
 "ax" = (
@@ -279,7 +279,7 @@
 /turf/simulated/wall/titanium,
 /area/yacht/living)
 "aP" = (
-/obj/machinery/door/airlock/silver,
+/obj/machinery/door/airlock,
 /turf/simulated/floor/wood,
 /area/yacht/living)
 "aQ" = (
@@ -334,7 +334,7 @@
 	},
 /obj/structure/closet/walllocker/emerglocker/north,
 /obj/effect/decal/cleanable/blood/drip,
-/obj/machinery/door/airlock/silver,
+/obj/machinery/door/airlock,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
 "aX" = (
@@ -443,7 +443,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/yacht/living)
 "bo" = (
-/obj/machinery/door/airlock/silver,
+/obj/machinery/door/airlock,
 /turf/simulated/floor/tiled/freezer,
 /area/yacht/living)
 "bp" = (
@@ -535,7 +535,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/airlock/silver,
+/obj/machinery/door/airlock,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
 "bD" = (
@@ -621,7 +621,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/decal/cleanable/blood/gibs/robot/down,
-/obj/machinery/door/airlock/silver,
+/obj/machinery/door/airlock,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
 "bP" = (
