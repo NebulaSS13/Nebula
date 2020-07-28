@@ -177,3 +177,9 @@ SUBSYSTEM_DEF(fluids)
 
 		if (MC_TICK_CHECK)
 			return 
+
+/datum/controller/subsystem/fluids/StartLoadingMap()
+	suspend()
+
+/datum/controller/subsystem/fluids/StopLoadingMap()
+	wake()

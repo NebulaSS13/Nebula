@@ -48,3 +48,9 @@ PROCESSING_SUBSYSTEM_DEF(icon_update)
 /atom/proc/queue_icon_update(...)
 	SSicon_update.queue[src] = args.len ? args : TRUE
 	SSicon_update.wake()
+
+/datum/controller/subsystem/processing/icon_update/StartLoadingMap()
+	suspend()
+
+/datum/controller/subsystem/processing/icon_update/StopLoadingMap()
+	wake()
