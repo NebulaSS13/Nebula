@@ -50,10 +50,10 @@ SUBSYSTEM_DEF(unit_tests)
 			GLOB.using_map.sealed_levels += world.maxz
 			var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
 			log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
-			map_template.load(corner)
+			ASSERT(map_template.load(corner))
 		else // Multi-Z templates are loaded using different means
 			log_unit_test("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
-			map_template.load_new_z()
+			ASSERT(map_template.load_new_z())
 	log_unit_test("Map Templates Loaded")
 
 /datum/controller/subsystem/unit_tests/proc/start_game()

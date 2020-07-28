@@ -192,7 +192,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		CHECK_TICK
 
 	if(bounds[1] == 1.#INF) // Shouldn't need to check every item
-		return null
+		CRASH("Failed to parse map file.")
 	else
 		if(!measureOnly)
 			if(clear_contents)
