@@ -60,6 +60,7 @@
 	if(network)
 		for(var/z_level in GetConnectedZlevels(network.get_router_z()))
 			data["crewmembers"] += crew_repository.health_data(z_level)
+	data["crewmembers"] = sortByKey(data["crewmembers"], "name")
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
