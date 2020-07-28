@@ -7,7 +7,7 @@
 
 /obj/item/razorweb/throw_impact(var/atom/hit_atom)
 	var/obj/effect/razorweb/web = new web_type(get_turf(hit_atom))
-	. = ..()
+	..()
 	if(isliving(hit_atom))
 		web.buckle_mob(hit_atom)
 		web.visible_message(SPAN_DANGER("\The [hit_atom] is tangled in \the [web]!"))

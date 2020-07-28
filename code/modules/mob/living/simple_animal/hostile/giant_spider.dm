@@ -444,13 +444,13 @@ Hunter caste procs
 		stop_automation = first_stop_automation
 	
 /mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom)
+	..()
 	if(isliving(hit_atom))
 		var/mob/living/target = hit_atom
 		stop_automation = FALSE
 		visible_message(SPAN_DANGER("\The [src] slams into \the [target], knocking them over!"))
 		target.Weaken(1)
 		MoveToTarget()
-	. = ..()
 
 /******************
 Spitter caste procs

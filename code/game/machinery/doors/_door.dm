@@ -182,6 +182,7 @@
 		take_damage(min(damage, 100))
 
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
+	..()
 	visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
 	var/tforce = 0
 	if(ismob(AM))

@@ -9,11 +9,11 @@
 							//One breaks the egg on hit,
 
 /obj/item/slugegg/throw_impact(atom/hit_atom)
+	..()
 	if(break_on_impact)
 		squish()
 	else
 		movable_flags |= MOVABLE_FLAG_PROXMOVE //Dont want it active during the throw... loooots of unneeded checking.
-	return ..()
 
 /obj/item/slugegg/attack_self(var/mob/living/user)
 	squish()

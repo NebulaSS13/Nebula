@@ -55,6 +55,6 @@
 		charge_user(AM)
 
 /obj/structure/adherent_pylon/hitby(atom/AM)
-	. =..()
+	..()
 	if(ishuman(AM))
 		charge_user(AM)

@@ -40,7 +40,7 @@ var/list/holder_mob_icon_cache = list()
 	update_state(1)
 
 /obj/item/holder/throw_impact(atom/hit_atom, datum/thrownthing/TT)
-	. = ..()
+	..()
 	update_state(1)
 
 /obj/item/holder/proc/update_state(var/delay)
