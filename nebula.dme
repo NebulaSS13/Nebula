@@ -2590,6 +2590,7 @@
 #include "code\modules\overmap\ships\device_types\_engine.dm"
 #include "code\modules\overmap\ships\device_types\fusion_thruster.dm"
 #include "code\modules\overmap\ships\device_types\gas_thruster.dm"
+#include "code\modules\overmap\ships\machines\bluespace_thruster.dm"
 #include "code\modules\overmap\ships\machines\fusion_thruster.dm"
 #include "code\modules\overmap\ships\machines\gas_thruster.dm"
 #include "code\modules\paperwork\adminpaper.dm"

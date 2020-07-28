@@ -248,7 +248,7 @@
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
-	if(material.combustion_effect(src, temperature, 0.7))
+	if(material?.combustion_effect(src, temperature, 0.7))
 		spawn(2)
 			for(var/turf/simulated/wall/W in range(3,src))
 				W.burn((temperature/4))

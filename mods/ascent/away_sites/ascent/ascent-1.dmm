@@ -831,7 +831,6 @@
 /area/ship/ascent/wing_port)
 "cm" = (
 /obj/structure/ascent_spawn,
-/obj/effect/submap_landmark/spawnpoint/ascent_seedship/adjunct,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "cn" = (
@@ -1361,7 +1360,6 @@
 /area/ship/ascent/wing_port)
 "dB" = (
 /obj/structure/ascent_spawn,
-/obj/effect/submap_landmark/spawnpoint/ascent_seedship/queen,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "dC" = (
@@ -4108,7 +4106,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_port)
 "jM" = (
-/obj/machinery/button/access/exterior/airlock_interior{
+/obj/machinery/button/access/interior{
 	id_tag = "ascent_port_shuttle_dock";
 	pixel_x = 24
 	},

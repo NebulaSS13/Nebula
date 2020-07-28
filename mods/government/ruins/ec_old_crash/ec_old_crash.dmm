@@ -136,9 +136,6 @@
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "aw" = (
-/obj/structure/sign/ecplaque{
-	pixel_y = 32
-	},
 /obj/effect/floor_decal/corner/purple{
 	icon_state = "corner_white";
 	dir = 5
@@ -350,9 +347,6 @@
 /turf/simulated/floor/airless,
 /area/map_template/ecship/cryo)
 "aT" = (
-/obj/structure/sign/ecplaque{
-	pixel_x = -26
-	},
 /obj/structure/closet/wardrobe/mixed,
 /turf/simulated/floor/tiled/white/lowpressure,
 /area/map_template/ecship/cryo)
