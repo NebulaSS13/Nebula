@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(customitems)
 		report_progress("Custom item directory [CUSTOM_ITEM_CONFIG] does not exist, no custom items will be loaded.")
 		return
 
-	var/dir_count = -1
+	var/dir_count = 0
 	var/item_count = 0
 	var/list/directories_to_check = list(CUSTOM_ITEM_CONFIG)
 	while(length(directories_to_check))
