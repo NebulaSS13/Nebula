@@ -140,8 +140,12 @@
 /obj/machinery/vending/attackby(obj/item/W, mob/user)
 
 	var/obj/item/charge_stick/CS = W.GetChargeStick()
-
 	if (currently_vending && vendor_account && !vendor_account.suspended)
+
+		if(!vend_ready)
+			to_chat(user, SPAN_WARNING("\The [src] is vending a product, wait a second!"))
+			return TRUE
+
 		var/paid = 0
 		var/handled = 0
 
