@@ -19,10 +19,17 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a PDA")
 
 /decl/uplink_source/pda/setup_uplink_source(var/mob/M, var/amount)
+
 	var/obj/item/modular_computer/pda/P = find_in_mob(M, /obj/item/modular_computer/pda)
+	if(!P)
+		return SETUP_FAILED
+
 	var/datum/extension/assembly/assembly = get_extension(P, /datum/extension/assembly)
+	if(!assembly)
+		return SETUP_FAILED
+
 	var/obj/item/stock_parts/computer/hard_drive/HDD = assembly.get_component(PART_HDD)
-	if(!P || !HDD)
+	if(!HDD)
 		return SETUP_FAILED
 
 	var/pda_pass = "[rand(100,999)] [pick(GLOB.greek_letters)]"

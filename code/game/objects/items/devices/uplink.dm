@@ -216,29 +216,25 @@
 // Includes normal radio uplink, multitool uplink,
 // implant uplink (not the implant tool) and a preset headset uplink.
 
-/obj/item/radio/uplink/Initialize(mapload, var/owner, var/amount)
-	. = ..()
-	hidden_uplink = new(src, owner, amount)
-	icon_state = "radio"
-
 /obj/item/radio/uplink/attack_self(mob/user)
+	if(!hidden_uplink && user.mind)
+		hidden_uplink = new(src, user.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 
-/obj/item/multitool/uplink/Initialize(mapload, var/owner)
-	. = ..()
-	hidden_uplink = new(src, owner)
-
 /obj/item/multitool/uplink/attack_self(mob/user)
+	if(!hidden_uplink && user.mind)
+		hidden_uplink = new(src, user.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 
 /obj/item/radio/headset/uplink
 	traitor_frequency = 1445
 
-/obj/item/radio/headset/uplink/Initialize()
+/obj/item/radio/headset/uplink/attack_self(mob/user)
+	if(!hidden_uplink && user.mind)
+		hidden_uplink = new(src, user.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	. = ..()
-	hidden_uplink = new(src)
-
+	
 /obj/item/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.contained_state)
 	return ..()
