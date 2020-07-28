@@ -14,7 +14,7 @@
 	if(hud_type)
 		hud_used = new hud_type(src)
 	else
-		hud_used = new /datum/hud
+		hud_used = new /datum/hud(src)
 
 /datum/hud
 	var/mob/mymob
