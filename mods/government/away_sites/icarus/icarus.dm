@@ -39,6 +39,7 @@
 	name = "Fallen Icarus"
 	id = "awaysite_icarus"
 	description = "The crashlanding site of the SEV Icarus."
+	prefix = "mods/government/away_sites/"
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
 	cost = 2
 	generate_mining_by_z = list(1, 2)
