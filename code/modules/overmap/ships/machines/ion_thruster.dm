@@ -49,9 +49,12 @@
 	. = thrust_limit * generated_thrust
 
 /obj/machinery/ion_thruster/on_update_icon()
-	icon_state = initial(icon_state)
-	if(!powered() || (stat & BROKEN))
-		icon_state = "[icon_state]_off"
+	cut_overlays()
+	if(powered() && !(stat & BROKEN))
+		var/image/I = image(icon, "ion_glow")
+		I.appearance_flags |= RESET_COLOR
+		I.layer = ABOVE_LIGHTING_LAYER
+		add_overlay(I)
 
 /obj/machinery/ion_thruster/power_change()
 	. = ..()
@@ -71,10 +74,8 @@
 							/obj/item/stack/cable_coil = 2,
 							/obj/item/stock_parts/matter_bin = 1,
 							/obj/item/stock_parts/capacitor = 2)
-	material = /decl/material/solid/metal/gold
 	matter = list(
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE,
-		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/gold =       MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/silver =     MATTER_AMOUNT_TRACE
 	)

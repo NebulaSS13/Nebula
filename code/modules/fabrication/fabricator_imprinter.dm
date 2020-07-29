@@ -9,10 +9,10 @@
 	base_type = /obj/machinery/fabricator/imprinter
 	fabricator_class = FABRICATOR_CLASS_IMPRINTER
 	base_storage_capacity = list(
-		/decl/material/solid/glass =                        SHEET_MATERIAL_AMOUNT * 50,
-		/decl/material/solid/metal/gold =                         SHEET_MATERIAL_AMOUNT * 50,
-		/decl/material/solid/metal/silver =                       SHEET_MATERIAL_AMOUNT * 50,
-		/decl/material/solid/gemstone/diamond =                      SHEET_MATERIAL_AMOUNT * 50,
+		/decl/material/solid/glass =              SHEET_MATERIAL_AMOUNT * 50,
+		/decl/material/solid/metal/gold =         SHEET_MATERIAL_AMOUNT * 50,
+		/decl/material/solid/metal/silver =       SHEET_MATERIAL_AMOUNT * 50,
+		/decl/material/solid/gemstone/diamond =   SHEET_MATERIAL_AMOUNT * 50,
 		/decl/material/liquid/acid =              120,
 		/decl/material/liquid/acid/hydrochloric = 120,
 		/decl/material/liquid/acid/polyacid =     120

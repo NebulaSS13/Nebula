@@ -11,7 +11,6 @@
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/casino/casino.dm"
 	#include "../away/derelict/derelict.dm"
-	#include "../away/empty.dmm"
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/lost_supply_base/lost_supply_base.dm"
 	#include "../away/magshield/magshield.dm"
@@ -35,6 +34,7 @@
 	#include "tradeship-1.dmm"
 	#include "tradeship-2.dmm"
 	#include "tradeship-3.dmm"
+	#include "../away/empty.dmm"
 
 	#include "jobs/_jobs.dm"
 	#include "jobs/command.dm"

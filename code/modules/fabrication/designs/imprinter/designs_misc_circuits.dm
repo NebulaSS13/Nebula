@@ -260,6 +260,9 @@
 /datum/fabricator_recipe/imprinter/circuit/engine
 	path = /obj/item/stock_parts/circuitboard/engine
 
+/datum/fabricator_recipe/imprinter/circuit/ion_engine
+	path = /obj/item/stock_parts/circuitboard/engine/ion
+
 /datum/fabricator_recipe/imprinter/circuit/shuttle
 	path = /obj/item/stock_parts/circuitboard/shuttle_console
 

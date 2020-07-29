@@ -2,6 +2,7 @@
 
 	#include "away_sites_testing_lobby.dm"
 	#include "blank.dmm"
+	#include "../away/empty.dmm"
 
 	#include "../../mods/government/away_sites/icarus/icarus.dm"
 	#include "../../mods/government/ruins/ec_old_crash/ec_old_crash.dm"
@@ -11,7 +12,6 @@
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/casino/casino.dm"
 	#include "../away/derelict/derelict.dm"
-	#include "../away/empty.dmm"
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/lost_supply_base/lost_supply_base.dm"
 	#include "../away/magshield/magshield.dm"
