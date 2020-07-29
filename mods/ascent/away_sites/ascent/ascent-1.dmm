@@ -61,7 +61,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "ar" = (
-/obj/machinery/zero_point_thruster{
+/obj/machinery/ion_thruster{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -3045,7 +3045,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_port)
 "ha" = (
-/obj/machinery/zero_point_thruster{
+/obj/machinery/ion_thruster{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -3070,7 +3070,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_prow)
 "hd" = (
-/obj/machinery/zero_point_thruster{
+/obj/machinery/ion_thruster{
 	dir = 8
 	},
 /turf/simulated/floor/ascent{
@@ -3484,7 +3484,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
 "ik" = (
-/obj/machinery/zero_point_thruster,
+/obj/machinery/ion_thruster,
 /obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
@@ -4841,7 +4841,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "KO" = (
-/obj/machinery/zero_point_thruster{
+/obj/machinery/ion_thruster{
 	dir = 8
 	},
 /obj/structure/window/borosilicate_reinforced{
@@ -5000,7 +5000,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "Qz" = (
-/obj/machinery/zero_point_thruster{
+/obj/machinery/ion_thruster{
 	dir = 1
 	},
 /obj/structure/window/borosilicate_reinforced{
