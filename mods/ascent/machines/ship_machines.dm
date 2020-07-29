@@ -94,10 +94,6 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 	base_type = /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/no_deconstruct
 
-/obj/machinery/power/apc/hyper/ascent
-	req_access = list(access_ascent)
-	base_type = /obj/machinery/power/apc
-
 /obj/machinery/hologram/holopad/longrange/ascent
 	req_access = list(access_ascent)
 
@@ -126,6 +122,9 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 		/decl/stock_part_preset/radio/receiver/airlock/shuttle = 1,
 		/decl/stock_part_preset/radio/event_transmitter/airlock/shuttle = 1
 	)
+
+/obj/machinery/power/apc/hyper/ascent
+	req_access = list(access_ascent)
 
 /obj/machinery/power/apc/hyper/ascent/north
 	name = "north bump"

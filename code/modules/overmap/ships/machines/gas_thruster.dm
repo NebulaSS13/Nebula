@@ -18,7 +18,6 @@
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()
 	update_nearby_tiles(need_rebuild=1)
-
 	set_extension(src, engine_extension, "propellant thruster")
 
 /obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

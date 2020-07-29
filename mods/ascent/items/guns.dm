@@ -49,7 +49,7 @@
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	overlays = list(
 		image(icon, "[get_world_inventory_state()]-[istype(current_mode) ? current_mode.name : "lethal"]"),
-		image(icon, "[get_world_inventory_state()]-charge-[Floor(power_supply.percent()/20)]")
+		image(icon, "[get_world_inventory_state()]-charge-[istype(power_supply) ? Floor(power_supply.percent()/20) : 0]")
 	)
 
 /obj/item/gun/magnetic/railgun/flechette/ascent

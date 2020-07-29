@@ -8,6 +8,7 @@
 	name = "\improper Ascent seedship"
 	id = "awaysite_ascent_seedship"
 	description = "A small Ascent colony ship."
+	prefix = "mods/ascent/away_sites/"
 	suffixes = list("ascent/ascent-1.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(

@@ -61,7 +61,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "ar" = (
-/obj/machinery/ion_engine{
+/obj/machinery/ion_thruster{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -831,7 +831,6 @@
 /area/ship/ascent/wing_port)
 "cm" = (
 /obj/structure/ascent_spawn,
-/obj/effect/submap_landmark/spawnpoint/ascent_seedship/adjunct,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "cn" = (
@@ -1361,7 +1360,6 @@
 /area/ship/ascent/wing_port)
 "dB" = (
 /obj/structure/ascent_spawn,
-/obj/effect/submap_landmark/spawnpoint/ascent_seedship/queen,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "dC" = (
@@ -3047,7 +3045,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/hydroponics_port)
 "ha" = (
-/obj/machinery/ion_engine{
+/obj/machinery/ion_thruster{
 	dir = 8
 	},
 /turf/simulated/floor/ascent,
@@ -3072,7 +3070,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_prow)
 "hd" = (
-/obj/machinery/ion_engine{
+/obj/machinery/ion_thruster{
 	dir = 8
 	},
 /turf/simulated/floor/ascent{
@@ -3486,7 +3484,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
 "ik" = (
-/obj/machinery/ion_engine,
+/obj/machinery/ion_thruster,
 /obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
@@ -4108,7 +4106,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_port)
 "jM" = (
-/obj/machinery/button/access/exterior/airlock_interior{
+/obj/machinery/button/access/interior{
 	id_tag = "ascent_port_shuttle_dock";
 	pixel_x = 24
 	},
@@ -4843,7 +4841,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "KO" = (
-/obj/machinery/ion_engine{
+/obj/machinery/ion_thruster{
 	dir = 8
 	},
 /obj/structure/window/borosilicate_reinforced{
@@ -5002,7 +5000,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "Qz" = (
-/obj/machinery/ion_engine{
+/obj/machinery/ion_thruster{
 	dir = 1
 	},
 /obj/structure/window/borosilicate_reinforced{
