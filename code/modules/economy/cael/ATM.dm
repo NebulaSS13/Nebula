@@ -22,6 +22,7 @@
 	var/view_screen = NO_SCREEN
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/account_security_level = 0
+	var/charge_stick_type = /obj/item/charge_stick
 
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
@@ -229,7 +230,8 @@
 					t += "<b>PIN:</b> <input type='text' id='account_pin' name='account_pin' style='width:250px; background-color:white;'><BR><BR>"
 				t += "<input type='submit' value='Submit'><br>"
 				t += "</div></form>"
-
+				if(user?.mind?.initial_account)
+					t += "<i>You recall your personal account number is <b>#[user.mind.initial_account.account_number]</b> and your PIN is <b>[user.mind.initial_account.remote_access_pin]</b>.</i><br/>"
 
 		var/datum/browser/written/popup = new(user, "ATM", machine_id)
 		popup.set_content(jointext(t,null))
@@ -326,16 +328,17 @@
 			if("e_withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				amount = round(amount, 0.01)
-				var/obj/item/charge_stick/E
+				var/obj/item/charge_stick/E = charge_stick_type
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(amount > initial(E.max_worth))
-					alert("That amount exceeds the max amount holdable by basic charge sticks.")
+					var/decl/currency/cur = decls_repository.get_decl(initial(E.currency) || GLOB.using_map.default_currency)
+					alert("That amount exceeds the maximum amount holdable by charge sticks from this machine ([cur.format_value(initial(E.max_worth))]).")
 				else if(authenticated_account && amount > 0)
 					//create an entry in the account transaction log
 					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						E = new(loc)
+						E = new charge_stick_type(loc)
 						E.adjust_worth(amount)
 						E.creator = authenticated_account.owner_name
 						usr.put_in_hands(E)

@@ -140,8 +140,12 @@
 /obj/machinery/vending/attackby(obj/item/W, mob/user)
 
 	var/obj/item/charge_stick/CS = W.GetChargeStick()
-
 	if (currently_vending && vendor_account && !vendor_account.suspended)
+
+		if(!vend_ready)
+			to_chat(user, SPAN_WARNING("\The [src] is vending a product, wait a second!"))
+			return TRUE
+
 		var/paid = 0
 		var/handled = 0
 
@@ -295,7 +299,7 @@
 
 /obj/machinery/vending/OnTopic(mob/user, href_list, datum/topic_state/state)
 
-	if (href_list["vend"] && vend_ready && !currently_vending)
+	if (href_list["vend"] && !currently_vending)
 		var/key = text2num(href_list["vend"])
 		if(!is_valid_index(key, product_records))
 			return TOPIC_REFRESH
@@ -335,6 +339,8 @@
 	return ..()
 
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
+	if(!vend_ready)
+		return
 	if((!allowed(user)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		to_chat(user, "<span class='warning'>Access denied.</span>")//Unless emagged of course
 		flick(icon_deny,src)

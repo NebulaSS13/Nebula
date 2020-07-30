@@ -54,7 +54,7 @@
 	var/key_num = text2num(href_list["key"])
 	if(isnum(key_num))
 		code += href_list["key"]
-		return
+		return TOPIC_REFRESH
 
 	var/atom/A = holder
 	if(href_list["key"] == "E")
@@ -62,7 +62,7 @@
 			// We're in lock set mode.
 			if(length(code) < Floor(max_code_length * 0.5) || length(code) > max_code_length)
 				error = "Incorrect code length. Must be between [Floor(max_code_length * 0.5)] and [max_code_length] numbers long."
-				return
+				return TOPIC_REFRESH
 			l_code = code
 			code = null
 			l_set = TRUE
@@ -71,17 +71,17 @@
 			if(code != l_code)
 				error = "Invalid keycode entered."
 				bad_access_attempt(user)
-				return
+				return TOPIC_REFRESH
 			locked = FALSE
 			code = null
 		A.update_icon()
-		return
+		return TOPIC_REFRESH
 	if(href_list["key"] == "C")
 		code = null
 		error = null
 		locked = TRUE
 		A.update_icon()
-		return
+		return TOPIC_REFRESH
 
 /datum/extension/lockable/proc/bad_access_attempt(var/mob/user)
 
