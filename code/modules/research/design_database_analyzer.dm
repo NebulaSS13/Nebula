@@ -110,7 +110,7 @@
 		loaded_item = O
 		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]."))
 		flick("d_analyzer_la", src)
-		addtimer(CALLBACK(src, .proc/refresh_busy, 1 SECOND))
+		addtimer(CALLBACK(src, .proc/refresh_busy), 1 SECOND)
 		return TRUE
 
 /obj/machinery/destructive_analyzer/proc/refresh_busy()
@@ -133,7 +133,7 @@
 		LAZYSET(cached_materials, mat, cached_materials[mat] + (loaded_item.matter[mat] * material_return_modifier))
 	QDEL_NULL(loaded_item)
 	flick("d_analyzer_process", src)
-	addtimer(CALLBACK(src, .proc/refresh_busy, 2 SECONDS))
+	addtimer(CALLBACK(src, .proc/refresh_busy), 2 SECONDS)
 
 /obj/item/research
 	name = "research debugging device"

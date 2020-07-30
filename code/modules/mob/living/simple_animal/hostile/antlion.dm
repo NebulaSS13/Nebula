@@ -3,10 +3,10 @@
 	desc = "A large insectoid creature."
 	icon = 'icons/mob/simple_animal/antlion.dmi'
 	icon_state = "antlion" // these are placeholders, as otherwise the mob is complete
-	icon_living = "antlion" 
-	icon_dead = "antlion_dead" 
+	icon_living = "antlion"
+	icon_dead = "antlion_dead"
 	mob_size = MOB_SIZE_MEDIUM
-	speak_emote = list("clicks") 
+	speak_emote = list("clicks")
 	emote_hear = list("clicks its mandibles")
 	emote_see = list("shakes the sand off itself")
 	response_harm   = "strikes"
@@ -38,7 +38,7 @@
 
 	if(!.)
 		return
-	
+
 	if(can_perform_ability())
 		vanish()
 
@@ -72,12 +72,12 @@
 				continue
 			turf_targets += T
 	if(!LAZYLEN(turf_targets)) //oh no
-		addtimer(CALLBACK(src, .proc/emerge, 2 SECONDS))
+		addtimer(CALLBACK(src, .proc/emerge), 2 SECONDS)
 		return
 	var/turf/T = pick(turf_targets)
 	if(T && !incapacitated())
 		forceMove(T)
-	addtimer(CALLBACK(src, .proc/emerge, 2 SECONDS))
+	addtimer(CALLBACK(src, .proc/emerge), 2 SECONDS)
 
 /mob/living/simple_animal/hostile/antlion/proc/emerge()
 	var/turf/T = get_turf(src)
@@ -91,7 +91,7 @@
 		H.attackby(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)
-	
+
 /mob/living/simple_animal/hostile/antlion/proc/process_healing()
 	if(!incapacitated() && healing)
 		var/old_health = health
