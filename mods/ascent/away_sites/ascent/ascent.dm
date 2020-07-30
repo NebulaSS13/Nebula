@@ -11,6 +11,7 @@
 	prefix = "mods/ascent/away_sites/"
 	suffixes = list("ascent/ascent-1.dmm")
 	cost = 0.5
+	area_usage_test_exempted_root_areas = list(/area/ship/ascent)
 	shuttles_to_initialise = list(
 		/datum/shuttle/autodock/overmap/ascent,
 		/datum/shuttle/autodock/overmap/ascent/two
