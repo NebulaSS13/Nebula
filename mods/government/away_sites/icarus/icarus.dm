@@ -1,4 +1,5 @@
 #include "../../_government.dme"
+#include "../../../corporate/_corporate.dme"
 #include "icarus_areas.dm"
 
 /obj/effect/overmap/visitable/sector/icarus

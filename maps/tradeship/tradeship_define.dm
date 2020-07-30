@@ -17,7 +17,6 @@
 	company_name  = "Legit Cargo Ltd."
 	company_short = "LC"
 	overmap_event_areas = 11
-	default_law_type = /datum/ai_laws/corporate
 	lobby_screens = list('maps/tradeship/lobby/bloodmoney.png','maps/tradeship/lobby/vapormoney.png')
 	use_overmap = 1
 	num_exoplanets = 3
