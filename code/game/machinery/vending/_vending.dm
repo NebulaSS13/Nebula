@@ -321,7 +321,7 @@
 				status_message = "This machine is currently unable to process payments due to problems with the associated account."
 				status_error = 1
 			else
-				status_message = "Please swipe a card or insert cash to pay for the item."
+				status_message = "Please insert cash or a credstick to pay for the product."
 				status_error = 0
 		return TOPIC_REFRESH
 
