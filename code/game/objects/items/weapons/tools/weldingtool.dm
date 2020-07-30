@@ -22,6 +22,9 @@
 	var/welding_resource = "welding fuel"
 	var/obj/item/welder_tank/tank = /obj/item/welder_tank // where the fuel is stored
 
+	var/activate_sound = 'sound/items/welderactivate.ogg'
+	var/deactivate_sound = 'sound/items/welderdeactivate.ogg'
+
 /obj/item/weldingtool/Initialize()
 	if(ispath(tank))
 		tank = new tank
@@ -263,6 +266,7 @@
 			else
 				src.force = tank.lit_force
 				src.damtype = BURN
+			playsound(src, activate_sound, 50, 1)
 			welding = 1
 			update_icon()
 			START_PROCESSING(SSobj, src)
@@ -281,6 +285,7 @@
 			src.force = initial(force)
 		else
 			src.force = tank.unlit_force
+		playsound(src, deactivate_sound, 50, 1)
 		src.damtype = BRUTE
 		src.welding = 0
 		update_icon()
