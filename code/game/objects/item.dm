@@ -97,6 +97,13 @@
 	var/unbreakable = FALSE                    // Whether or not this weapon degrades.
 	var/anomaly_shielding					   // 0..1 value of how well it shields against xenoarch anomalies
 
+	///Sound used when equipping the item into a valid slot
+	var/equip_sound
+	///Sound uses when picking the item up (into your hands)
+	var/pickup_sound = 'sound/items/pickup/device.ogg'
+	///Sound uses when dropping the item, or when its thrown.
+	var/drop_sound = 'sound/items/drop/device.ogg'
+
 /obj/item/create_matter()
 	..()
 	LAZYINITLIST(matter)
@@ -350,6 +357,28 @@
 /obj/item/proc/moved(mob/user, old_loc)
 	return
 
+/obj/item/proc/get_volume_by_throwforce_and_or_w_class()
+	if(throwforce && w_class)
+		return Clamp((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
+	else if(w_class)
+		return Clamp(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
+	else
+		return 0
+
+/obj/item/throw_impact(atom/hit_atom)
+	..()
+	if(isliving(hit_atom)) //Living mobs handle hit sounds differently.
+		var/volume = get_volume_by_throwforce_and_or_w_class()
+		if (throwforce > 0)
+			if(hitsound)
+				playsound(hit_atom, hitsound, volume, TRUE, -1)
+			else
+				playsound(hit_atom, 'sound/weapons/genhit.ogg', volume, TRUE, -1)
+		else
+			playsound(hit_atom, 'sound/weapons/throwtap.ogg', 1, volume, -1)
+	else if(drop_sound)
+		playsound(src, drop_sound, 50)
+
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user)
 	if(randpixel)
@@ -395,6 +424,15 @@
 		M.l_hand.update_twohanding()
 	if(M.r_hand)
 		M.r_hand.update_twohanding()
+
+	if((slot_flags & slot))
+		if(equip_sound)
+			playsound(src, equip_sound, 50)
+		else if(drop_sound)
+			playsound(src, drop_sound, 50)
+	else if(slot == slot_l_hand || slot == slot_r_hand)
+		if(pickup_sound)
+			playsound(src, pickup_sound, 50)
 
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(

@@ -190,7 +190,13 @@ var/list/slot_equipment_priority = list( \
 		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 		if(hattable?.drop_hat(src))
 			return TRUE
-	return hand ? drop_l_hand(Target) : drop_r_hand(Target)
+
+	. = (hand ? drop_l_hand(Target) : drop_r_hand(Target))
+
+	if(istype(Target, /obj/item) && !QDELETED(Target))
+		var/obj/item/I = Target
+		if(I.drop_sound)
+			playsound(I, I.drop_sound, 25, 0)
 
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
