@@ -302,8 +302,8 @@ var/const/NO_EMAG_ACT = -50
 	return jointext(dat,null)
 
 /obj/item/card/id/attack_self(mob/user)
-	user.visible_message("\The [user] shows you: \icon[src] [src.name]. The assignment on the card: [src.assignment]",\
-		"You flash your ID card: \icon[src] [src.name]. The assignment on the card: [src.assignment]")
+	user.visible_message("\The [user] shows you: [html_icon(src)] [src.name]. The assignment on the card: [src.assignment]",\
+		"You flash your ID card: [html_icon(src)] [src.name]. The assignment on the card: [src.assignment]")
 
 	src.add_fingerprint(user)
 	return
@@ -319,7 +319,7 @@ var/const/NO_EMAG_ACT = -50
 	set category = "Object"
 	set src in usr
 
-	to_chat(usr, text("\icon[] []: The current assignment on the card is [].", src, src.name, src.assignment))
+	to_chat(usr, "[html_icon(src)] [name]: The current assignment on the card is [assignment].")
 	to_chat(usr, "The blood type on the card is [blood_type].")
 	to_chat(usr, "The DNA hash on the card is [dna_hash].")
 	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")

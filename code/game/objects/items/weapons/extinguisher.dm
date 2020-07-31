@@ -48,7 +48,7 @@
 /obj/item/extinguisher/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0)
-		to_chat(user, text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume))
+		to_chat(user, "[html_icon(src)] [name] contains [reagents.total_volume] units of water!")
 
 /obj/item/extinguisher/attack_self(mob/user)
 	safety = !safety

@@ -80,7 +80,7 @@
 /obj/machinery/suspension_gen/proc/activate()
 	var/turf/T = get_turf(get_step(src,dir))
 	suspension_field = new(T)
-	visible_message(SPAN_NOTICE("\icon[src] [src] activates with a low hum."))
+	visible_message(SPAN_NOTICE("[html_icon(src)] [src] activates with a low hum."))
 	update_icon()
 	update_use_power(POWER_USE_ACTIVE)
 

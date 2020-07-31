@@ -109,6 +109,9 @@
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 #define open_link(target, url)             target << link(url)
 
+/proc/html_icon(var/thing) // Proc instead of macro to avoid precompiler problems. 
+	. = "\icon[thing]"
+
 #define MAP_IMAGE_PATH "nano/images/[GLOB.using_map.path]/"
 
 #define map_image_file_name(z_level) "[GLOB.using_map.path]-[z_level].png"

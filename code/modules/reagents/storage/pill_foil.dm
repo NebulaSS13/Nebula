@@ -65,4 +65,4 @@
 	. = ..()
 	to_chat(user, SPAN_NOTICE("It has the following pills in it:"))
 	for(var/obj/item/chems/pill/C in pill_positions)
-		to_chat(user, SPAN_NOTICE("\icon[C] [C.name]"))
+		to_chat(user, SPAN_NOTICE("[html_icon(C)] [C.name]"))

@@ -88,7 +88,7 @@
 /obj/item/organ/internal/posibrain/examine(mob/user)
 	. = ..()
 
-	var/msg = "<span class='info'>*---------*</span>\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
+	var/msg = "<span class='info'>*---------*</span>\nThis is [html_icon(src)] \a <EM>[src]</EM>!\n[desc]\n"
 
 	if(shackle)	msg += "<span class='warning'>It is clamped in a set of metal straps with a complex digital lock.</span>\n"
 
