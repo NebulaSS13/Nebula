@@ -28,6 +28,8 @@ jobs:
       env: TEST=MAP MAP_PATH=tradeship
     - name: "Map - Away Sites"
       env: TEST=MAP MAP_PATH=away_sites_testing
+    - name: "Map - Modpacks"
+      env: TEST=MAP MAP_PATH=modpack_testing
 
 cache:
   directories:

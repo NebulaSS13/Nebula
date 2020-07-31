@@ -77,8 +77,7 @@
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/suit/storage/toggle/bomber,
 		/obj/item/clothing/suit/storage/leather_jacket,
-		/obj/item/clothing/suit/storage/toggle/brown_jacket,
-		/obj/item/clothing/suit/storage/mbill
+		/obj/item/clothing/suit/storage/toggle/brown_jacket
 	)
 
 /datum/gear/suit/wintercoat

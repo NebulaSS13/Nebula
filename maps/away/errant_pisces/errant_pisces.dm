@@ -1,3 +1,4 @@
+#include "../../../mods/corporate/_corporate.dme"
 #include "errant_pisces_areas.dm"
 
 /obj/effect/overmap/visitable/ship/errant_pisces
