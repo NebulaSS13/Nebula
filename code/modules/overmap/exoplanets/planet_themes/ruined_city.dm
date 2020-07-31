@@ -57,17 +57,27 @@
 		blocks_y += blocks_x[i] + block_size + 1
 	blocks_x += limit_x - 1
 	blocks_y += limit_y - 1
+
 	//Draw roads
 	for(var/x in blocks_x)
+		if(x > limit_x)
+			continue
 		for(var/y = 1 to limit_y)
-			map[TRANSLATE_COORD(x-1,y)] = ROAD_VALUE
+			if(x > 1)
+				map[TRANSLATE_COORD(x-1,y)] = ROAD_VALUE
 			map[TRANSLATE_COORD(x,y)] = ROAD_VALUE
-			map[TRANSLATE_COORD(x+1,y)] = ROAD_VALUE
+			if(x < limit_x)
+				map[TRANSLATE_COORD(x+1,y)] = ROAD_VALUE
+
 	for(var/y in blocks_y)
+		if(y > limit_y)
+			continue
 		for(var/x = 1 to limit_x)
-			map[TRANSLATE_COORD(x,y-1)] = ROAD_VALUE
+			if(y > 1)
+				map[TRANSLATE_COORD(x,y-1)] = ROAD_VALUE
 			map[TRANSLATE_COORD(x,y)] = ROAD_VALUE
-			map[TRANSLATE_COORD(x,y+1)] = ROAD_VALUE
+			if(y < limit_y)
+				map[TRANSLATE_COORD(x,y+1)] = ROAD_VALUE
 
 	//Place buildings
 	for(var/i = 1 to blocks_x.len - 1)
