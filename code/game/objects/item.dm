@@ -430,7 +430,7 @@
 			playsound(src, equip_sound, 50)
 		else if(drop_sound)
 			playsound(src, drop_sound, 50)
-	else if(slot == slot_l_hand || slot == slot_r_hand)
+	else if(slot == slot_l_hand_str || slot == slot_r_hand_str)
 		if(pickup_sound)
 			playsound(src, pickup_sound, 50)
 
