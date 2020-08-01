@@ -425,17 +425,17 @@
 	if(M.r_hand)
 		M.r_hand.update_twohanding()
 
-	if((slot_flags & slot))
+	if(slot_flags & global.slot_flags_enumeration[slot])
 		if(equip_sound)
 			playsound(src, equip_sound, 50)
 		else if(drop_sound)
 			playsound(src, drop_sound, 50)
-	else if(slot == slot_l_hand || slot == slot_r_hand)
+	else if(slot == slot_l_hand_str || slot == slot_r_hand_str)
 		if(pickup_sound)
 			playsound(src, pickup_sound, 50)
 
 //Defines which slots correspond to which slot flags
-var/list/global/slot_flags_enumeration = list(
+var/list/slot_flags_enumeration = list(
 	"[slot_wear_mask_str]" = SLOT_MASK,
 	"[slot_back_str]" = SLOT_BACK,
 	"[slot_wear_suit_str]" = SLOT_OCLOTHING,
@@ -471,10 +471,9 @@ var/list/global/slot_flags_enumeration = list(
 		return 0
 
 	//First check if the item can be equipped to the desired slot.
-	if("[slot]" in slot_flags_enumeration)
-		var/req_flags = slot_flags_enumeration["[slot]"]
-		if(!(req_flags & slot_flags))
-			return 0
+	var/associated_slot = global.slot_flags_enumeration[slot]
+	if(!isnull(associated_slot) && !(associated_slot & slot_flags))
+		return 0
 
 	if(!force)
 		//Next check that the slot is free
