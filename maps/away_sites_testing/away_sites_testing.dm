@@ -2,7 +2,6 @@
 
 	#include "away_sites_testing_lobby.dm"
 	#include "blank.dmm"
-	#include "../away/empty.dmm"
 
 	#include "../../mods/government/away_sites/icarus/icarus.dm"
 	#include "../../mods/government/ruins/ec_old_crash/ec_old_crash.dm"
