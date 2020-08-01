@@ -729,7 +729,7 @@ About the new airlock wires panel:
 		var/obj/item/weldingtool/W = C
 		if(!W.remove_fuel(0,user))
 			to_chat(user, SPAN_NOTICE("Your [W.name] doesn't have enough fuel."))
-			return
+			return TRUE
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 		user.visible_message(SPAN_WARNING("\The [user] begins welding \the [src] [welded ? "open" : "closed"]!"),
 							SPAN_NOTICE("You begin welding \the [src] [welded ? "open" : "closed"]."))
@@ -738,10 +738,10 @@ About the new airlock wires panel:
 				playsound(src, 'sound/items/Welder2.ogg', 50, 1)
 				welded = !welded
 				update_icon()
-				return
+				return TRUE
 		else
 			to_chat(user, SPAN_NOTICE("You must remain still to complete this task."))
-			return
+			return TRUE
 
 	else if(isWirecutter(C) || isMultitool(C) || istype(C, /obj/item/assembly/signaler))
 		return wires.Interact(user)
@@ -758,6 +758,7 @@ About the new airlock wires panel:
 				open(1)
 			else
 				close(1)
+		return TRUE
 
 	if(istype(C, /obj/item/twohanded/fireaxe) && !arePowerSystemsOn() && !(user.a_intent == I_HURT))
 		var/obj/item/twohanded/fireaxe/F = C
@@ -775,6 +776,7 @@ About the new airlock wires panel:
 				to_chat(user, SPAN_WARNING("You need to be holding \the [C] in both hands to do that!"))
 			else
 				to_chat(user, SPAN_WARNING("You are too small to lever \the [src] open with \the [C]!"))
+		return TRUE
 
 
 	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/simple_animal))
@@ -789,7 +791,7 @@ About the new airlock wires panel:
 				close(1)
 		else
 			visible_message(SPAN_NOTICE("\The [A] strains fruitlessly to force \the [src] [density ? "open" : "closed"]."))
-		return
+		return TRUE
 	else
 		return ..()
 
