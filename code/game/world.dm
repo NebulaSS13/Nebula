@@ -531,9 +531,12 @@ var/world_topic_spam_protect_time = world.timeofday
 				D.associate(GLOB.ckey_directory[ckey])
 
 /world/proc/update_status()
-	var/s = "<b>[station_name()]</b> (<a href=\"https://discord.gg/Ddw58yF\">Discord</a>)"
+	var/s = "<b>[station_name()]</b>"
 
-	if (config && config.server_name)
+	if(config && config.discordurl)
+		s += " (<a href=\"[config.discordurl]\">Discord</a>)"
+
+	if(config && config.server_name)
 		s = "<b>[config.server_name]</b> &#8212; [s]"
 
 	var/list/features = list()
