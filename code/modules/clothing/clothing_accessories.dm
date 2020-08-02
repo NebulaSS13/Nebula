@@ -71,7 +71,7 @@
 /obj/item/clothing/examine(mob/user)
 	. = ..()
 	for(var/obj/item/clothing/accessory/A in accessories)
-		to_chat(user, "\icon[A] \A [A] is attached to it.")
+		to_chat(user, "[html_icon(A)] \A [A] is attached to it.")
 	switch(ironed_state)
 		if(WRINKLES_WRINKLY)
 			to_chat(user, "<span class='bad'>It's wrinkly.</span>")

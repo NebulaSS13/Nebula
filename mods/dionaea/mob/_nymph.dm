@@ -91,10 +91,10 @@
 /mob/living/carbon/alien/diona/examine(mob/user)
 	. = ..()
 	if(holding_item)
-		to_chat(user, SPAN_NOTICE("It is holding \icon[holding_item] \a [holding_item]."))
+		to_chat(user, SPAN_NOTICE("It is holding [html_icon(holding_item)] \a [holding_item]."))
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	if(hattable?.hat)
-		to_chat(user, SPAN_NOTICE("It is wearing \icon[hattable.hat] \a [hattable.hat]."))
+		to_chat(user, SPAN_NOTICE("It is wearing [html_icon(hattable.hat)] \a [hattable.hat]."))
 
 /mob/living/carbon/alien/diona/has_dexterity()
 	return FALSE

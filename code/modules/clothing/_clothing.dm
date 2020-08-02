@@ -190,14 +190,14 @@
 			if(length(accessories) && can_see)
 				var/list/ties = list()
 				for(var/accessory in accessories)
-					ties += "\icon[accessory] \a [accessory]"
+					ties += "[html_icon(accessory)] \a [accessory]"
 				to_chat(user, "Attached to \the [src] are [english_list(ties)].")
 			return TOPIC_HANDLED
 		if(href_list["list_armor_damage"] && can_see)
 			var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor)
 			if(istype(armor_datum))
 				var/list/damages = armor_datum.get_visible_damage()
-				to_chat(user, "\The [src] \icon[src] has some damage:")
+				to_chat(user, "\The [src] [html_icon(src)] has some damage:")
 				for(var/key in damages)
 					to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
 			return TOPIC_HANDLED

@@ -229,20 +229,20 @@
 			to_chat(user, SPAN_WARNING("Cannot transfer funds from a locked [W]."))
 			return TRUE
 		if(sender.currency != currency)
-			to_chat(user, SPAN_WARNING("\icon[src] [src] chirps, \"Mismatched currency detected. Unable to transfer.\""))
+			to_chat(user, SPAN_WARNING("[html_icon(src)] [src] chirps, \"Mismatched currency detected. Unable to transfer.\""))
 			return TRUE
 		var/amount = input(user, "How much of [sender.loaded_worth] do you want to transfer?", "[sender] transfer", "0") as null|num
 		if(!amount)
 			return TRUE
 		if(amount < 0 || amount > sender.loaded_worth)
-			to_chat(user, SPAN_NOTICE("\icon[src] [src] chirps, \"Enter a valid number between 1 and [sender.loaded_worth] to transfer.\""))
+			to_chat(user, SPAN_NOTICE("[html_icon(src)] [src] chirps, \"Enter a valid number between 1 and [sender.loaded_worth] to transfer.\""))
 			return TRUE
 		sender.loaded_worth -= amount
 		loaded_worth += amount
 		sender.update_icon()
 		update_icon()
 		var/decl/currency/cur = decls_repository.get_decl(currency)
-		to_chat(user, SPAN_NOTICE("\icon[src] [src] chirps, \"Completed transfer of [amount] [cur.name].\""))
+		to_chat(user, SPAN_NOTICE("[html_icon(src)] [src] chirps, \"Completed transfer of [amount] [cur.name].\""))
 		return TRUE
 	
 	if(lock.attackby(W, user))
