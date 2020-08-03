@@ -100,9 +100,9 @@
 	///Sound used when equipping the item into a valid slot
 	var/equip_sound
 	///Sound uses when picking the item up (into your hands)
-	var/pickup_sound = 'sound/items/pickup/device.ogg'
+	var/pickup_sound
 	///Sound uses when dropping the item, or when its thrown.
-	var/drop_sound = 'sound/items/drop/device.ogg'
+	var/drop_sound
 
 /obj/item/create_matter()
 	..()
