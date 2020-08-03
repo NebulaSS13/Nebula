@@ -333,7 +333,6 @@
 
 /turf/simulated/floor/beach/sand/desert
 	icon_state = "desert"
-	has_resources = 1
 
 /turf/simulated/floor/beach/sand/desert/Initialize()
 	. = ..()

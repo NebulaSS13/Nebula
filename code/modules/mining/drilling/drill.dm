@@ -15,6 +15,7 @@
 	power_channel = LOCAL
 	active_power_usage = 10 KILOWATTS
 	base_type = /obj/machinery/mining/drill
+	var/list/generated_ore = list()
 	var/braces_needed = 2
 	var/list/supports = list()
 	var/supported = 0
@@ -55,70 +56,54 @@
 		return
 
 	//Drill through the flooring, if any.
-	if(istype(get_turf(src), /turf/simulated/floor/asteroid))
-		var/turf/simulated/floor/asteroid/T = get_turf(src)
-		if(!T.dug)
-			T.gets_dug()
-	else if(istype(get_turf(src), /turf/simulated/floor/exoplanet))
-		var/turf/simulated/floor/exoplanet/T = get_turf(src)
-		if(T.diggable)
-			new /obj/structure/pit(T)
-			T.diggable = 0
-	else if(istype(get_turf(src), /turf/simulated/floor))
-		var/turf/simulated/floor/T = get_turf(src)
-		T.explosion_act(2)
+	var/turf/T = get_turf(src)
+	if(T)
+		T.drill_act()
 
-	//Dig out the tasty ores.
-	if(length(resource_field))
-		var/turf/simulated/harvesting = pick(resource_field)
-
-		while(resource_field.len && !harvesting.resources)
-			harvesting.has_resources = 0
-			harvesting.resources = null
+	while(length(resource_field))
+		var/turf/harvesting = pick(resource_field)
+		var/datum/extension/buried_resources/resources = get_extension(harvesting, /datum/extension/buried_resources)
+		if(!length(resources?.resources))
+			if(resources)
+				remove_extension(harvesting, /datum/extension/buried_resources)
 			resource_field -= harvesting
-			if(resource_field.len)
-				harvesting = pick(resource_field)
+			continue
+		break
 
-		if(!harvesting || !harvesting.resources)
-			return
-
-		var/total_harvest = harvest_speed //Ore harvest-per-tick.
-		for(var/metal in harvesting.resources)
-
-			if(contents.len >= capacity)
-				system_error("insufficient storage space")
-				set_active(FALSE)
-				need_player_check = 1
-				update_icon()
-				return
-
-			if(contents.len + total_harvest >= capacity)
-				total_harvest = capacity - contents.len
-
-			if(total_harvest <= 0) 
-				break
-
-			var/create_ore = 0
-			if(harvesting.resources[metal] >= total_harvest)
-				harvesting.resources[metal] -= total_harvest
-				create_ore = total_harvest
-				total_harvest = 0
-			else
-				total_harvest -= harvesting.resources[metal]
-				create_ore = harvesting.resources[metal]
-				harvesting.resources -= metal
-
-			for(var/i=1, i <= create_ore, i++)
-				new /obj/item/ore(src, metal)
-
-		if(!length(harvesting.resources))
-			harvesting.has_resources = 0
-			harvesting.resources = null
-			resource_field -= harvesting
-	else
+	if(!length(resource_field))
 		set_active(FALSE)
 		need_player_check = 1
 		update_icon()
+		return
+
+	var/turf/harvesting = pick(resource_field)
+	var/datum/extension/buried_resources/resources = get_extension(harvesting, /datum/extension/buried_resources)
+	var/harvested = 0
+	for(var/metal in resources.resources)
+
+		if(length(generated_ore) >= capacity)
+			system_error("insufficient storage space")
+			set_active(FALSE)
+			need_player_check = 1
+			update_icon()
+			return
+
+		var/generating_ore = min(capacity - length(generated_ore), resources.resources[metal])
+		resources.resources[metal] -= generating_ore
+		if(resources.resources[metal] <= 0)
+			resources.resources -= metal
+
+		for(var/i=1, i <= generating_ore, i++)
+			harvested++
+			if(harvested >= harvest_speed)
+				break
+			generated_ore += new /obj/item/ore(src, metal)
+		if(harvested >= harvest_speed)
+			break
+
+	if(!length(resources.resources))
+		remove_extension(harvesting, /datum/extension/buried_resources)
+		resource_field -= harvesting
 
 /obj/machinery/mining/drill/proc/set_active(var/new_active)
 	if(active != new_active)
@@ -164,7 +149,7 @@
 	if(need_player_check)
 		icon_state = "mining_drill_error"
 	else if(active)
-		var/status = Clamp(round( (contents.len / capacity) * 4 ), 0, 3)
+		var/status = Clamp(round( (length(generated_ore) / capacity) * 4 ), 0, 3)
 		icon_state = "mining_drill_active[status]"
 	else if(supported)
 		icon_state = "mining_drill_braced"
@@ -181,18 +166,21 @@
 
 /obj/machinery/mining/drill/proc/check_supports()
 
-	supported = 0
-
-	if((!supports || !supports.len) && initial(anchored) == 0)
-		anchored = 0
+	anchored = initial(anchored)
+	if(length(supports) <= 0)
 		set_active(FALSE)
 	else
-		anchored = 1
+		anchored = TRUE
 
-	if(supports && supports.len >= braces_needed)
-		supported = 1
+	var/last_supported = supported
+	supported = (length(supports) >= braces_needed)
+	if(supported != last_supported && !supported && can_fall())
+		fall()
 
 	update_icon()
+
+/obj/machinery/mining/drill/can_fall()
+	. = (length(supports) <= 0)
 
 /obj/machinery/mining/drill/proc/system_error(var/error)
 
@@ -216,7 +204,7 @@
 	for(var/iy = 0,iy < 5, iy++)
 		for(var/ix = 0, ix < 5, ix++)
 			mine_turf = locate(tx + ix, ty + iy, T.z)
-			if(mine_turf && mine_turf.has_resources)
+			if(mine_turf && has_extension(mine_turf, /datum/extension/buried_resources))
 				resource_field += mine_turf
 
 	if(!resource_field.len)
@@ -231,8 +219,9 @@
 
 	var/obj/structure/ore_box/B = locate() in orange(1)
 	if(B)
-		for(var/obj/item/ore/O in contents)
+		for(var/obj/item/ore/O in generated_ore)
 			O.forceMove(B)
+		generated_ore.Cut()
 		to_chat(usr, "<span class='notice'>You unload the drill's storage cache into the ore box.</span>")
 	else
 		to_chat(usr, "<span class='notice'>You must move an ore box up to the drill before you can unload it.</span>")

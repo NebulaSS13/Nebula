@@ -2,7 +2,6 @@
 	name = "space land"
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
-	has_resources = 1
 	footstep_type = /decl/footsteps/asteroid
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
@@ -146,14 +145,16 @@
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E) && E.grass_color)
 			color = E.grass_color
-	if(!resources)
-		resources = list()
+
+	var/datum/extension/buried_resources/resources = get_or_create_extension(src, /datum/extension/buried_resources)
 	if(prob(70))
-		resources[/decl/material/solid/mineral/graphite] = rand(3,5)
+		LAZYSET(resources.resources, /decl/material/solid/mineral/graphite, rand(3,5))
 	if(prob(5))
-		resources[/decl/material/solid/metal/uranium] = rand(1,3)
+		LAZYSET(resources.resources, /decl/material/solid/metal/uranium, rand(1,3))
 	if(prob(2))
-		resources[/decl/material/solid/gemstone/diamond] = 1
+		LAZYSET(resources.resources, /decl/material/solid/gemstone/diamond, 1)
+	if(!length(resources.resources))
+		remove_extension(src, /datum/extension/buried_resources)
 
 /turf/simulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
