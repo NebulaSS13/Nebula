@@ -93,7 +93,7 @@ SUBSYSTEM_DEF(xenoarch)
 				//sometimes a find will be close enough to the surface to show
 				var/datum/find/F = archeo_turf.finds[1]
 				if(F.excavation_required <= F.view_range)
-					archeo_turf.archaeo_overlay = "overlay_archaeo[rand(1,3)]"
+					archeo_turf.archaeo_overlay = image('icons/turf/excavation_overlays.dmi',"overlay_archaeo[rand(1,3)]")
 					archeo_turf.update_icon()
 
 			//have a chance for an artifact to spawn here, but not in animal or plant digsites
