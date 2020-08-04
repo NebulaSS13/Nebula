@@ -144,12 +144,12 @@
 		else
 			icon = initial(icon)
 
-/obj/item/clothing/get_examine_line()
+/obj/item/clothing/get_examine_line(var/mob/user)
 	. = ..()
 	var/list/ties = list()
 	for(var/obj/item/clothing/accessory/accessory in accessories)
 		if(accessory.high_visibility)
-			ties += "\a [accessory.get_examine_line()]"
+			ties += "\a [accessory.get_examine_line(user)]"
 	if(ties.len)
 		.+= " with [english_list(ties)] attached"
 	if(accessories.len > ties.len)
@@ -170,14 +170,14 @@
 			if(length(accessories) && can_see)
 				var/list/ties = list()
 				for(var/accessory in accessories)
-					ties += "[html_icon(accessory)] \a [accessory]"
+					ties += "[icon2html(accessory, user)] \a [accessory]"
 				to_chat(user, "Attached to \the [src] are [english_list(ties)].")
 			return TOPIC_HANDLED
 		if(href_list["list_armor_damage"] && can_see)
 			var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor)
 			if(istype(armor_datum))
 				var/list/damages = armor_datum.get_visible_damage()
-				to_chat(user, "\The [src] [html_icon(src)] has some damage:")
+				to_chat(user, "\The [src] [icon2html(src, user)] has some damage:")
 				for(var/key in damages)
 					to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
 			return TOPIC_HANDLED

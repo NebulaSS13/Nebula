@@ -311,7 +311,7 @@ Class Procs:
 	set_broken(!!missing, MACHINE_BROKEN_NO_PARTS)
 
 /obj/machinery/proc/state(var/msg)
-	audible_message(SPAN_NOTICE("[html_icon(src)] [msg]"), null, 2)
+	audible_message(SPAN_NOTICE("[icon2html(src, hearers(get_turf(src)))] [msg]"), null, 2)
 
 /obj/machinery/proc/ping(text=null)
 	if (!text)

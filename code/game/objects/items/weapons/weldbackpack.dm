@@ -80,7 +80,7 @@
 
 /obj/item/weldpack/examine(mob/user)
 	. = ..()
-	to_chat(user, "[html_icon(src)] [reagents.total_volume] unit\s of fuel left!")
+	to_chat(user, "[icon2html(src, user)] [reagents.total_volume] unit\s of fuel left!")
 
 	if(welder)
 		to_chat(user, "\The [welder] is attached.")

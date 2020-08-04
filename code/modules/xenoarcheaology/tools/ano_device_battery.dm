@@ -81,7 +81,8 @@
 
 /obj/item/anodevice/Process()
 	if(!activated || !inserted_battery || !inserted_battery.battery_effect || !inserted_battery.stored_charge)
-		visible_message("<span class='notice'>[html_icon(src)] [src] buzzes.</span>", "<span class='notice'>[html_icon(src)] You hear something buzz.</span>")
+		var/viewing = viewers(get_turf(src))
+		visible_message("<span class='notice'>[icon2html(src, viewing)] [src] buzzes.</span>", "<span class='notice'>[icon2html(src, viewing)] You hear something buzz.</span>")
 		shutdown_emission()
 		return
 
@@ -108,11 +109,13 @@
 	if(inserted_battery.battery_effect)
 		inserted_battery.battery_effect.process()
 	else //ran out of charge
-		visible_message("<span class='notice'>[html_icon(src)] [src] buzzes.</span>", "<span class='notice'>[html_icon(src)] You hear something buzz.</span>")
+		var/viewing = viewers(get_turf(src))
+		visible_message("<span class='notice'>[icon2html(src, viewing)] [src] buzzes.</span>", "<span class='notice'>[icon2html(src, viewing)] You hear something buzz.</span>")
 		shutdown_emission()
 
 	if(current_tick >= duration)
-		visible_message("<span class='notice'>[html_icon(src)] [src] chimes.</span>", "<span class='notice'>[html_icon(src)] You hear something chime.</span>")
+		var/viewing = viewers(get_turf(src))
+		visible_message("<span class='notice'>[icon2html(src, viewing)] [src] chimes.</span>", "<span class='notice'>[icon2html(src, viewing)] You hear something chime.</span>")
 		shutdown_emission()
 
 /obj/item/anodevice/proc/start_emission()
@@ -150,7 +153,8 @@
 		. = TOPIC_REFRESH
 	else if(href_list["startup"])
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
-			visible_message("<span class='notice'>[html_icon(src)] [src] whirrs.</span>", "<span class='notice'>[html_icon(src)] You hear something whirr.</span>")
+			var/viewing = viewers(get_turf(src))
+			visible_message("<span class='notice'>[icon2html(src, viewing)] [src] whirrs.</span>", "<span class='notice'>[icon2html(src, viewing)] You hear something whirr.</span>")
 			start_emission()
 			. = TOPIC_REFRESH
 	else if(href_list["shutdown"])

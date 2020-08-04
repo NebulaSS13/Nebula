@@ -22,8 +22,7 @@
 /obj/structure/janitorialcart/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "[src] [html_icon(src)] contains [reagents.total_volume] unit\s of liquid!")
-
+		to_chat(user, "[src] [icon2html(src, user)] contains [reagents.total_volume] unit\s of liquid!")
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/storage/bag/trash) && !mybag)
@@ -185,7 +184,7 @@
 	if(distance > 1)
 		return
 
-	to_chat(user, "[html_icon(src)] This [callme] contains [reagents.total_volume] unit\s of water!")
+	to_chat(user, "[icon2html(src, user)] This [callme] contains [reagents.total_volume] unit\s of water!")
 	if(mybag)
 		to_chat(user, "\A [mybag] is hanging on the [callme].")
 

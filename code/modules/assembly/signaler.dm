@@ -129,7 +129,7 @@
 	if(!(src.wires & WIRE_RADIO_RECEIVE))	return 0
 	pulse(1)
 	if(!holder)
-		audible_message(SPAN_NOTICE("[html_icon(src)] *beep* *beep*"), null, 3)
+		audible_message(SPAN_NOTICE("[icon2html(src, hearers(get_turf(src)))] *beep* *beep*"), null, 3)
 
 /obj/item/assembly/signaler/proc/set_frequency(new_frequency)
 	set waitfor = 0

@@ -988,7 +988,6 @@ window "mainwindow"
 		size = 999x999
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		saved-params = ""
 
@@ -1027,7 +1026,6 @@ window "mapwindow"
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
-		auto-format = false
 
 window "outputwindow"
 	elem "outputwindow"
@@ -1036,6 +1034,7 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1043,22 +1042,22 @@ window "outputwindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 654x494
 	elem "output"
-		type = OUTPUT
+		type = BROWSER
 		pos = 0,0
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		is-default = true
-		saved-params = "max-lines"
-		style = ".system {color:#ff0000;}"
-		max-lines = 0
+		background-color = none
+		saved-params = ""
 	elem "saybutton_alt"
 		type = BUTTON
 		pos = 519,460
 		size = 40x20
 		anchor1 = 100,100
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		is-disabled = true
 		saved-params = "is-checked"
@@ -1083,6 +1082,7 @@ window "outputwindow"
 		size = 80x20
 		anchor1 = 100,100
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		is-disabled = true
 		saved-params = ""

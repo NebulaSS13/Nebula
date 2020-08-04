@@ -23,7 +23,7 @@
 
 /obj/item/clothing/accessory/badge/proc/set_desc(var/mob/living/carbon/human/H)
 
-/obj/item/clothing/accessory/badge/get_examine_line()
+/obj/item/clothing/accessory/badge/get_examine_line(var/mob/user)
 	. = ..()
 	. += "  <a href='?src=\ref[src];look_at_me=1'>\[View\]</a>"
 

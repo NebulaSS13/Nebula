@@ -891,11 +891,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return user_human.species.get_offset_overlay_image(spritesheet, mob_icon, mob_state, color, use_slot)
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
-/obj/item/proc/get_examine_line()
+/obj/item/proc/get_examine_line(var/mob/user)
 	if(blood_color)
-		. = SPAN_WARNING("[html_icon(src)] [gender==PLURAL?"some":"a"] <font color='[blood_color]'>stained</font> [src]")
+		. = SPAN_WARNING("[icon2html(src, user)] [gender==PLURAL?"some":"a"] <font color='[blood_color]'>stained</font> [src]")
 	else
-		. = "[html_icon(src)] \a [src]"
+		. = "[icon2html(src, user)] \a [src]"
 	var/ID = GetIdCard()
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"

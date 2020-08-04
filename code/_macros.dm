@@ -97,8 +97,6 @@
 
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 
-#define to_chat(target, message)                            target << (message)
-#define to_world(message)                                   world << (message)
 #define to_world_log(message)                               world.log << (message)
 #define sound_to(target, sound)                             target << (sound)
 #define to_file(file_entry, source_var)                     file_entry << (source_var)
@@ -108,9 +106,6 @@
 #define show_image(target, image)                           target << (image)
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 #define open_link(target, url)             target << link(url)
-
-/proc/html_icon(var/thing) // Proc instead of macro to avoid precompiler problems. 
-	. = "\icon[thing]"
 
 #define MAP_IMAGE_PATH "nano/images/[GLOB.using_map.path]/"
 

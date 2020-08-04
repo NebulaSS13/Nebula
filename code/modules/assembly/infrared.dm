@@ -107,7 +107,7 @@
 
 	pulse(0)
 	if(!holder)
-		visible_message("[html_icon(src)] *beep* *beep*")
+		visible_message("[icon2html(src, viewers(get_turf(src)))] *beep* *beep*")
 	cooldown = 2
 	spawn(10)
 		process_cooldown()

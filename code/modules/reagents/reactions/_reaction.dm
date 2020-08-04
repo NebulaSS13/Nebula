@@ -74,9 +74,9 @@
 	if(mix_message && container && !ismob(container))
 		var/turf/T = get_turf(container)
 		if(istype(T))
-			T.visible_message(SPAN_NOTICE("[html_icon(container)] [mix_message]"))
+			T.visible_message(SPAN_NOTICE("[icon2html(container, viewers(get_turf(container)))] [mix_message]"))
 		else
-			container.visible_message(SPAN_NOTICE("[html_icon(container)] [mix_message]"))
+			container.visible_message(SPAN_NOTICE("[icon2html(container, viewers(get_turf(container)))] [mix_message]"))
 		if(reaction_sound)
 			playsound(T || container, reaction_sound, 80, 1)
 
