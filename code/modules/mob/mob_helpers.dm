@@ -325,8 +325,10 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 		for(var/i = 1 to steps)
 			animate(M.client, pixel_x = rand(-(strength), strength), pixel_y = rand(-(strength), strength), time = TICKS_PER_RECOIL_ANIM)
 			sleep(TICKS_PER_RECOIL_ANIM)
-	M?.shakecamera = FALSE
-	animate(M.client, pixel_x = 0, pixel_y = 0, time = TICKS_PER_RECOIL_ANIM)
+	if(M)
+		if(M.client)
+			animate(M.client, pixel_x = 0, pixel_y = 0, time = TICKS_PER_RECOIL_ANIM)
+		M.shakecamera = FALSE
 
 #undef TICKS_PER_RECOIL_ANIM
 #undef PIXELS_PER_STRENGTH_VAL
