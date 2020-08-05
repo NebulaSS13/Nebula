@@ -1,3 +1,19 @@
+var/list/default_connection_list = list("0", "0", "0", "0")
+
+var/list/wall_blend_objects = list(
+	/obj/machinery/door, 
+	/obj/structure/wall_frame, 
+	/obj/structure/grille, 
+	/obj/structure/window/reinforced/full, 
+	/obj/structure/window/reinforced/polarized/full, 
+	/obj/structure/window/shuttle, 
+	/obj/structure/window/borosilicate/full, 
+	/obj/structure/window/borosilicate_reinforced/full
+)
+var/list/wall_noblend_objects = list(
+	/obj/machinery/door/window
+)
+
 /turf/simulated/wall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
@@ -22,15 +38,12 @@
 	var/last_state
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
-	var/list/wall_connections = list("0", "0", "0", "0")
-	var/list/other_connections = list("0", "0", "0", "0")
+	var/list/wall_connections
+	var/list/other_connections
 	var/floor_type = /turf/simulated/floor/plating //turf it leaves after destruction
 	var/paint_color
 	var/stripe_color
-	var/global/list/wall_stripe_cache = list()
-	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut)
-	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/borosilicate/full, /obj/structure/window/borosilicate_reinforced/full) // Objects which to blend with
-	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
+	var/handle_structure_blending = TRUE
 
 /turf/simulated/wall/proc/get_default_colour()
 	return paint_color
@@ -42,7 +55,6 @@
 	// Clear mapping icons.
 	icon = 'icons/turf/walls/solid.dmi'
 	icon_state = "blank"
-	color = get_default_colour()
 
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()

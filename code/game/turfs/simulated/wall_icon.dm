@@ -61,7 +61,7 @@
 	. = ..()
 	cut_overlays()
 
-	if(!istype(material))
+	if(!istype(material) || !wall_connections || !other_connections)
 		return
 
 	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
@@ -145,9 +145,9 @@
 /turf/simulated/wall/proc/update_connections(propagate = 0)
 	if(!material)
 		return
+
 	var/list/wall_dirs = list()
 	var/list/other_dirs = list()
-
 	for(var/turf/simulated/wall/W in orange(src, 1))
 		switch(can_join_with(W))
 			if(0)
@@ -161,24 +161,25 @@
 			W.update_connections()
 			W.update_icon()
 
-	for(var/turf/T in orange(src, 1))
-		var/success = 0
-		for(var/obj/O in T)
-			for(var/b_type in blend_objects)
-				if(istype(O, b_type))
-					success = 1
-				for(var/nb_type in noblend_objects)
-					if(istype(O, nb_type))
-						success = 0
+	if(handle_structure_blending)
+		for(var/turf/T in orange(src, 1))
+			var/success = 0
+			for(var/obj/O in T)
+				for(var/b_type in global.wall_blend_objects)
+					if(istype(O, b_type))
+						success = 1
+					for(var/nb_type in global.wall_noblend_objects)
+						if(istype(O, nb_type))
+							success = 0
+					if(success)
+						break
 				if(success)
 					break
-			if(success)
-				break
 
-		if(success)
-			wall_dirs += get_dir(src, T)
-			if(get_dir(src, T) in GLOB.cardinal)
-				other_dirs += get_dir(src, T)
+			if(success)
+				wall_dirs += get_dir(src, T)
+				if(get_dir(src, T) in GLOB.cardinal)
+					other_dirs += get_dir(src, T)
 
 	wall_connections = dirs_to_corner_states(wall_dirs)
 	other_connections = dirs_to_corner_states(other_dirs)
@@ -188,7 +189,4 @@
 		if((reinf_material && W.reinf_material) || (!reinf_material && !W.reinf_material))
 			return 1
 		return 2
-	for(var/wb_type in blend_turfs)
-		if(istype(W, wb_type))
-			return 2
 	return 0

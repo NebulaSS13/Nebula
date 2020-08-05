@@ -10,9 +10,8 @@ var/list/natural_walls = list()
 	girder_material = null
 	construction_stage = -1
 	floor_type = /turf/simulated/floor/asteroid
-	blend_objects = null
-	noblend_objects = null
 	icon_state = "natural"
+	handle_structure_blending = FALSE
 	var/strata
 	var/image/ore_overlay
 

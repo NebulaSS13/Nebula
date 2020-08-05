@@ -62,13 +62,11 @@
 /turf/simulated/wall/wood
 	color = COLOR_BROWN
 	icon_state = "wood"
-	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	material = /decl/material/solid/wood
 
 /turf/simulated/wall/walnut
 	color = COLOR_BROWN_ORANGE
 	icon_state = "wood"
-	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	material = /decl/material/solid/wood/walnut
 
 /turf/simulated/wall/voxshuttle
@@ -83,7 +81,6 @@
 /turf/simulated/wall/alium
 	color = COLOR_BLUE_GRAY
 	floor_type = /turf/simulated/floor/fixed/alium
-	blend_objects = list()
 	material = /decl/material/solid/metal/aliumium
 
 /turf/simulated/wall/alium/explosion_act(severity)
@@ -95,7 +92,6 @@
 /turf/simulated/wall/cult
 	icon_state = "cult"
 	color = COLOR_RED_GRAY
-	blend_turfs = list(/turf/simulated/wall)
 	material = /decl/material/solid/stone/cult
 
 /turf/simulated/wall/cult/reinf
