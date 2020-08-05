@@ -1,8 +1,8 @@
 /turf/simulated/wall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
-	icon = 'icons/turf/wall_masks.dmi'
-	icon_state = "generic"
+	icon = 'icons/turf/walls/solid.dmi'
+	icon_state = "preview"
 	opacity = 1
 	density = 1
 	blocks_air = 1
@@ -32,7 +32,12 @@
 	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
 /turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
+
 	..(ml)
+
+	// Clear mapping icons.
+	icon = 'icons/turf/walls/solid.dmi'
+	icon_state = "blank"
 
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()

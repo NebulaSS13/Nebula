@@ -22,9 +22,9 @@
 	taste_description = "the inside of a reactor"
 	stack_type = /obj/item/stack/material/uranium
 	radioactivity = 12
-	icon_base = "stone"
+	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	color = "#007a00"
 	stack_origin_tech = "{'materials':5}"
 	reflectiveness = MAT_VALUE_MATTE
@@ -97,8 +97,8 @@
 	wall_support_value = MAT_VALUE_VERY_HEAVY // Ideal construction material.
 	integrity = 150
 	brute_armor = 5
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
 	alloy_materials = list(/decl/material/solid/metal/iron = 1875, /decl/material/solid/mineral/graphite = 1875)
@@ -165,8 +165,8 @@
 	stack_type = /obj/item/stack/material/aluminium
 	integrity = 125
 	weight = MAT_VALUE_LIGHT
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	taste_description = "metal"
@@ -195,8 +195,8 @@
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = "#a8a9b2"
 	explosion_resistance = 25
 	brute_armor = 6
@@ -227,10 +227,10 @@
 	melting_point = 3000
 	weight = MAT_VALUE_LIGHT
 	stack_type = /obj/item/stack/material/titanium
-	icon_base = "metal"
+	icon_base = 'icons/turf/walls/metal.dmi'
 	door_icon_base = "metal"
 	color = "#d1e6e3"
-	icon_reinf = "reinf_metal"
+	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	alloy_materials = null
 	alloy_product = FALSE
@@ -241,8 +241,8 @@
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
 	melting_point = 12000
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = "#9bc6f2"
 	brute_armor = 4
 	burn_armor = 20

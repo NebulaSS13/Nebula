@@ -50,8 +50,8 @@
 
 	update_material()
 
-/turf/simulated/wall/proc/get_wall_state()
-	. = material?.icon_base || "metal"
+/turf/simulated/wall/proc/get_wall_icon()
+	. = material?.icon_base || 'icons/turf/walls/solid.dmi'
 
 /turf/simulated/wall/proc/apply_reinf_overlay()
 	. = !!reinf_material
@@ -67,52 +67,62 @@
 	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
 		generate_overlays()
 
-	var/material_icon_base = get_wall_state()
+	var/material_icon_base = get_wall_icon()
 	var/image/I
 	var/base_color = paint_color ? paint_color : material.color
 	if(!density)
-		I = image(icon, "[material_icon_base]fwall_open")
-		I.color = base_color
-		add_overlay(I)
+		if(check_state_in_icon(material_icon_base, "fwall_open"))
+			I = image(material_icon_base, "fwall_open")
+			I.color = base_color
+			add_overlay(I)
 		return
 
 	for(var/i = 1 to 4)
-		I = image(icon, "[material_icon_base][wall_connections[i]]", dir = 1<<(i-1))
-		I.color = base_color
-		add_overlay(I)
-		if(other_connections[i] != "0")
-			I = image(icon, "[material_icon_base]_other[wall_connections[i]]", dir = 1<<(i-1))
+		var/apply_state = "[wall_connections[i]]"
+		if(check_state_in_icon(apply_state, material_icon_base))
+			I = image(material_icon_base, apply_state, dir = 1<<(i-1))
+			I.color = base_color
+			add_overlay(I)
+		if(other_connections[i] != "0" && check_state_in_icon(apply_state, material_icon_base))
+			apply_state = "other[wall_connections[i]]"
+			I = image(material_icon_base, apply_state, dir = 1<<(i-1))
 			I.color = base_color
 			add_overlay(I)
 
 	if(apply_reinf_overlay())
 		var/reinf_color = paint_color ? paint_color : reinf_material.color
 		if(construction_stage != null && construction_stage < 6)
-			I = image(icon, "reinf_construct-[construction_stage]")
+			I = image('icons/turf/walls/construction_overlays.dmi', "[construction_stage]")
 			I.color = reinf_color
 			add_overlay(I)
 		else
-			if("[reinf_material.icon_reinf]0" in icon_states(icon))
+			if(check_state_in_icon("0", reinf_material.icon_reinf))
 				// Directional icon
 				for(var/i = 1 to 4)
-					I = image(icon, "[reinf_material.icon_reinf][wall_connections[i]]", dir = 1<<(i-1))
-					I.color = reinf_color
-					add_overlay(I)
-			else
-				I = image(icon, reinf_material.icon_reinf)
+					var/apply_state = "[wall_connections[i]]"
+					if(check_state_in_icon(apply_state, reinf_material.icon_reinf))
+						I = image(reinf_material.icon_reinf, apply_state, dir = 1<<(i-1))
+						I.color = reinf_color
+						add_overlay(I)
+			else if(check_state_in_icon("full", reinf_material.icon_reinf))
+				I = image(reinf_material.icon_reinf, "full")
 				I.color = reinf_color
 				add_overlay(I)
+
 	var/image/texture = material.get_wall_texture()
 	if(texture)
 		add_overlay(texture)
-	if(stripe_color)
+	if(stripe_color && material.icon_stripe)
 		for(var/i = 1 to 4)
+			var/apply_icon
 			if(other_connections[i] != "0")
-				I = image(icon, "stripe_other[wall_connections[i]]", dir = 1<<(i-1))
+				apply_icon = "other[wall_connections[i]]"
 			else
-				I = image(icon, "stripe[wall_connections[i]]", dir = 1<<(i-1))
-			I.color = stripe_color
-			add_overlay(I)
+				apply_icon = "[wall_connections[i]]"
+			if(apply_icon && check_state_in_icon(apply_icon, material.icon_stripe))
+				I = image(material.icon_stripe, apply_icon, dir = 1<<(i-1))
+				I.color = stripe_color
+				add_overlay(I)
 
 	if(damage != 0)
 		var/integrity = material.integrity
@@ -174,7 +184,7 @@
 	other_connections = dirs_to_corner_states(other_dirs)
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(material && W.material && get_wall_state() == W.get_wall_state())
+	if(material && W.material && get_wall_icon() == W.get_wall_icon())
 		if((reinf_material && W.reinf_material) || (!reinf_material && !W.reinf_material))
 			return 1
 		return 2
