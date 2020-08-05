@@ -1,3 +1,8 @@
+/turf/simulated/wall/uranium
+	icon_state = "metal"
+	color = COLOR_GREEN
+	material = /decl/material/solid/metal/uranium
+
 /datum/map_template/ruin/exoplanet/radshrine
 	name = "radshrine"
 	id = "radshrine"

@@ -12,7 +12,7 @@ var/list/natural_walls = list()
 	floor_type = /turf/simulated/floor/asteroid
 	blend_objects = null
 	noblend_objects = null
-
+	icon_state = "natural"
 	var/strata
 	var/image/ore_overlay
 

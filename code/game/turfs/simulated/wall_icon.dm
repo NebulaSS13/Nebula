@@ -61,7 +61,7 @@
 	. = ..()
 	cut_overlays()
 
-	if(!material)
+	if(!istype(material))
 		return
 
 	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
@@ -92,7 +92,7 @@
 	if(apply_reinf_overlay())
 		var/reinf_color = paint_color ? paint_color : reinf_material.color
 		if(construction_stage != null && construction_stage < 6)
-			I = image('icons/turf/walls/construction_overlays.dmi', "[construction_stage]")
+			I = image('icons/turf/walls/_construction_overlays.dmi', "[construction_stage]")
 			I.color = reinf_color
 			add_overlay(I)
 		else
