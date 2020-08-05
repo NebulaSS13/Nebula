@@ -153,7 +153,6 @@
 
 	// Gas behavior.
 	var/gas_overlay_limit
-	var/gas_burn_product
 	var/gas_specific_heat
 	var/gas_molar_mass
 	var/gas_symbol_html
@@ -210,9 +209,8 @@
 	var/heating_sound = 'sound/effects/bubbles.ogg'
 	var/list/heating_products
 	var/bypass_heating_products_for_root_type
-
 	var/fuel_value = 0
-
+	var/burn_product
 	var/list/vapor_products // If splashed, releases these gasses in these proportions. // TODO add to unit test after solvent PR is merged
 
 	var/scent //refer to _scent.dm

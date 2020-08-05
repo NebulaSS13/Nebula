@@ -15,6 +15,8 @@
 	reflectiveness = MAT_VALUE_SHINY
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	taste_description = "plastic"
+	fuel_value = 0.6
+	burn_product = /decl/material/gas/carbon_monoxide // placeholder for more appropriate toxins
 
 /decl/material/solid/plastic/generate_recipes(var/reinforce_material)
 	. = ..()
