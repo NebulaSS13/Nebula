@@ -124,7 +124,7 @@ var/list/natural_walls = list()
 
 /turf/simulated/wall/natural/on_update_icon()
 	. = ..()
-	if(material?.reflectiveness > 0)
+	if(wall_connections && material?.reflectiveness > 0)
 		var/max_shine = 0.6 * ReadHSV(RGBtoHSV(material.color))[3] // patened formula based on color's Value (in HSV)
 		var/shine = Clamp((material.reflectiveness * 0.01) * 255, 10, max_shine)
 		for(var/i = 1 to 4)

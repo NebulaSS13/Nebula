@@ -64,9 +64,6 @@
 	if(!istype(material) || !wall_connections || !other_connections)
 		return
 
-	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
-		generate_overlays()
-
 	var/material_icon_base = get_wall_icon()
 	var/image/I
 	var/base_color = paint_color ? paint_color : material.color
@@ -124,23 +121,11 @@
 				I.color = stripe_color
 				add_overlay(I)
 
-	if(damage != 0)
+	if(damage != 0 && SSmaterials.wall_damage_overlays)
 		var/integrity = material.integrity
 		if(reinf_material)
 			integrity += reinf_material.integrity
-
-		var/overlay = round(damage / integrity * damage_overlays.len) + 1
-		if(overlay > damage_overlays.len)
-			overlay = damage_overlays.len
-		add_overlay(damage_overlays[overlay])
-
-/turf/simulated/wall/proc/generate_overlays()
-	var/alpha_inc = 256 / damage_overlays.len
-	for(var/i = 1; i <= damage_overlays.len; i++)
-		var/image/img = image(icon = 'icons/turf/walls.dmi', icon_state = "overlay_damage")
-		img.blend_mode = BLEND_MULTIPLY
-		img.alpha = (i * alpha_inc) - 1
-		damage_overlays[i] = img
+		add_overlay(SSmaterials.wall_damage_overlays[Clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
 
 /turf/simulated/wall/proc/update_connections(propagate = 0)
 	if(!material)
@@ -185,7 +170,7 @@
 	other_connections = dirs_to_corner_states(other_dirs)
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(material && W.material && get_wall_icon() == W.get_wall_icon())
+	if(material && istype(W.material) && get_wall_icon() == W.get_wall_icon())
 		if((reinf_material && W.reinf_material) || (!reinf_material && !W.reinf_material))
 			return 1
 		return 2

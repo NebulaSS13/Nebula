@@ -1,5 +1,3 @@
-var/list/default_connection_list = list("0", "0", "0", "0")
-
 var/list/wall_blend_objects = list(
 	/obj/machinery/door, 
 	/obj/structure/wall_frame, 
@@ -29,7 +27,6 @@ var/list/wall_noblend_objects = list(
 
 	var/damage = 0
 	var/damage_overlay = 0
-	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
 	var/decl/material/material
@@ -45,9 +42,6 @@ var/list/wall_noblend_objects = list(
 	var/stripe_color
 	var/handle_structure_blending = TRUE
 
-/turf/simulated/wall/proc/get_default_colour()
-	return paint_color
-
 /turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
 
 	..(ml)
@@ -55,6 +49,7 @@ var/list/wall_noblend_objects = list(
 	// Clear mapping icons.
 	icon = 'icons/turf/walls/solid.dmi'
 	icon_state = "blank"
+	color = null
 
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()
@@ -270,11 +265,11 @@ var/list/wall_noblend_objects = list(
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
-	if(material?.combustion_effect(src, temperature, 0.7))
-		spawn(2)
-			for(var/turf/simulated/wall/W in range(3,src))
-				W.burn((temperature/4))
-			dismantle_wall(TRUE)
+	if(!QDELETED(src) && istype(material) && material.combustion_effect(src, temperature, 0.7))
+		for(var/turf/simulated/wall/W in range(3,src))
+			if(W != src)
+				addtimer(CALLBACK(W, /turf/simulated/wall/proc/burn, temperature/4), 2)
+		dismantle_wall(TRUE)
 
 /turf/simulated/wall/get_color()
 	return paint_color
