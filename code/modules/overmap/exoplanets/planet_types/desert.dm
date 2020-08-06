@@ -51,8 +51,6 @@
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
-	if(is_edge_turf(T))
-		return
 	var/v = noise2value(value)
 	if(v > 6)
 		T.icon_state = "desert[v-1]"
