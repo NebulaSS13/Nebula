@@ -47,7 +47,7 @@
 					    color:white;
 					    font-size:13px;
 					    background-image:url('uiBackground.png');
-					    background-repeat:repeat-x;
+					    background-repeat:repeat;
 					    background-color:#272727;
 						background-position:center top;
 					}

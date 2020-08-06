@@ -4,10 +4,59 @@ NanoBaseHelpers = function ()
 	var _baseHelpers = {
             // change ui styling to "syndicate mode"
 			syndicateMode: function() {
-				$('body').css("background-color","#8f1414");
+				$('body').css("background-color","#330404");
 				$('body').css("background-image","url('uiBackground-Syndicate.png')");
 				$('body').css("background-position","50% 0");
-				$('body').css("background-repeat","repeat-x");
+				$('body').css("background-repeat","repeat");
+				$('body').css("color", "#ff0000");
+
+				$('hr').css("background-color", "#551414");
+				$('a').css("background", "#551414");
+				$('a:link').css("background", "#551414");
+				$('a:visited').css("background", "#551414");
+				$('a:active').css("background", "#551414");
+				$('linkOn').css("background", "#551414");
+				$('linkOff').css("background", "#551414");
+				$('input').css("background", "#551414");
+				$('a:hover').css("color", "#551414");
+				$('a.white').css("color", "#551414"); 
+				$('a.white:link').css("color", "#551414"); 
+				$('a.white:visited').css("color", "#551414"); 
+				$('a.white:active').css("color", "#551414"); 
+				$('a.white:hover').css("background", "#551414");
+				$('linkOn').css("background", "#771414");
+				$('a.linkOn:link').css("background", "#771414");
+				$('a.linkOn:visited').css("background", "#771414");
+				$('a.linkOn:active').css("background", "#771414");
+				$('a.linkOn:hover').css("background", "#771414");
+				$('statusDisplay').css("border", "1px solid #551414");
+				$('block').css("border", "1px solid #551414");
+				$('progressFill').css("background", "#551414");
+				$('statusDisplay').css("border", "1px solid #551414");
+
+				$('itemLabelNarrow').css("color", "#ff0000");
+				$('itemLabel').css("color", "#ff0000");
+				$('itemLabelWide').css("color", "#ff0000");
+				$('itemLabelWider').css("color", "#ff0000");
+				$('itemLabelWidest').css("color", "#ff0000");
+				
+				$('link').css("border", "1px solid #ff0000");
+				$('linkOn').css("border", "1px solid #ff0000");
+				$('linkOff').css("border", "1px solid #ff0000");
+				$('selected').css("border", "1px solid #ff0000");
+				$('disabled').css("border", "1px solid #ff0000");
+				$('yellowButton').css("border", "1px solid #ff0000");
+				$('redButton').css("border", "1px solid #ff0000");
+
+				$('link').css("background", "#330000");
+				$('linkOn').css("background", "#330000");
+				$('linkOff').css("background", "#330000");
+				$('selected').css("background", "#330000");
+				$('disabled').css("background", "#330000");
+				$('yellowButton').css("background", "#330000");
+				$('redButton').css("background", "#330000");
+
+				$('.average').css("color", "#ff0000");
 
 				$('#uiTitleFluff').css("background-image","url('uiTitleFluff-Syndicate.png')");
 				$('#uiTitleFluff').css("background-position","50% 50%");
