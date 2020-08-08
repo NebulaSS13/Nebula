@@ -1,7 +1,14 @@
 #ifndef MODPACK_HALO
 #define MODPACK_HALO
 // BEGIN_INCLUDE
-#include "turfs\example.dm"
+#include "halo.dm"
+#include "items\clothing\halo-accessories.dm"
+#include "items\clothing\halo-backpacks.dm"
+#include "items\clothing\halo-head.dm"
+#include "items\clothing\halo-pouches.dm"
+#include "items\clothing\halo-shoes.dm"
+#include "items\clothing\halo-suit.dm"
+#include "items\clothing\halo-under.dm"
 // END_INCLUDE
 #endif
 // BEGIN_INTERNALS

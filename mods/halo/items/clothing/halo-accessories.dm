@@ -17,7 +17,6 @@
 /obj/item/clothing/gloves/thick/urf //Combined effect of SWAT gloves and insulated gloves
 	desc = "Standard Issue URF Combat Gloves."
 	name = "URF Combat gloves"
-	icon_override = INNIE_OVERRIDE
 	item_state = "urfgloves_worn"
 	icon_state = "urfgloves_obj"
 	siemens_coefficient = 0

@@ -2,11 +2,13 @@
 
 	#include "../../mods/corporate/_corporate.dme"
 	#include "../../mods/ascent/_ascent.dme"
+	#include "../../mods/halo/_halo.dme"
 
 	#include "../../mods/government/away_sites/icarus/icarus.dm"
 	#include "../../mods/government/ruins/ec_old_crash/ec_old_crash.dm"
 	#include "../../mods/corporate/away_sites/lar_maria/lar_maria.dm"
 	#include "../../mods/ascent/away_sites/ascent/ascent.dm"
+
 
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/casino/casino.dm"
