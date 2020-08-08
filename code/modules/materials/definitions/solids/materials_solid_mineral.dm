@@ -34,6 +34,7 @@
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
+	fuel_value = 0.8
 	dirtiness = 15
 	dissolves_into = list(
 		/decl/material/solid/carbon = 0.6,

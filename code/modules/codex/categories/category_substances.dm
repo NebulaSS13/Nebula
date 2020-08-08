@@ -91,8 +91,8 @@
 			gas_info+= "<li>It has a molar mass of [mat.gas_molar_mass] kg/mol.</li>"
 			if(mat.gas_flags & XGM_GAS_FUEL)
 				gas_info+= "<li>It is flammable.</li>"
-				if(mat.gas_burn_product)
-					var/decl/material/firemat = decls_repository.get_decl(mat.gas_burn_product)
+				if(mat.burn_product)
+					var/decl/material/firemat = decls_repository.get_decl(mat.burn_product)
 					gas_info+= "<li>It produces [firemat.gas_name] when burned.</li>"
 			if(mat.gas_flags & XGM_GAS_OXIDIZER)
 				gas_info+= "<li>It is an oxidizer, required to sustain fire.</li>"

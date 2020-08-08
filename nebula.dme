@@ -1158,6 +1158,7 @@
 #include "code\game\objects\structures\electricchair.dm"
 #include "code\game\objects\structures\extinguisher.dm"
 #include "code\game\objects\structures\fireaxe_cabinet.dm"
+#include "code\game\objects\structures\fires.dm"
 #include "code\game\objects\structures\fishtanks.dm"
 #include "code\game\objects\structures\fitness.dm"
 #include "code\game\objects\structures\flora.dm"
