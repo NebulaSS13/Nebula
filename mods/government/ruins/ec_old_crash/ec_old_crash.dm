@@ -83,12 +83,12 @@
 	I've used this module as a strongbox, because it is only one rated for re-entry. I leave the astrodata I managed to salvage here. It has a few promising scans. I would not want it to be wasted.<br>
 	Some of the crew wrote letters to their kin, in case we are found. They deserve any consolation they get, so I've put the letters here, too.<br>
 	The crew for this mission is:<br>
-	Ensign [S.get_random_name(pick(MALE,FEMALE))]<br>
-	Ensign [S.get_random_name(pick(MALE,FEMALE))]<br>
-	Chief Explorer [S.get_random_name(pick(MALE,FEMALE))]<br>
-	Senior Explorer [S.get_random_name(pick(MALE,FEMALE))]<br>
-	Senior Explorer [S.get_random_name(pick(MALE,FEMALE))]<br>
-	Explorer [S.get_random_name(pick(MALE,FEMALE))]<br>
+	Ensign [S.get_random_name(null, pick(MALE,FEMALE))]<br>
+	Ensign [S.get_random_name(null, pick(MALE,FEMALE))]<br>
+	Chief Explorer [S.get_random_name(null, pick(MALE,FEMALE))]<br>
+	Senior Explorer [S.get_random_name(null, pick(MALE,FEMALE))]<br>
+	Senior Explorer [S.get_random_name(null, pick(MALE,FEMALE))]<br>
+	Explorer [S.get_random_name(null, pick(MALE,FEMALE))]<br>
 	I am Lieutenant Hao Ru, captain of [shipname] of the Terran Commonwealth Expeditionary Corps. I will be joining my crew in cryo now.<br>
 	<i>3rd December [game_year - 142]</i></tt>
 	"}

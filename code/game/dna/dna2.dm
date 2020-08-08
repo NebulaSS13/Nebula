@@ -82,11 +82,13 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/species
 	var/skin_base = ""
 	var/list/body_markings = list()
+	var/lineage
 
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
 /datum/dna/proc/Clone()
 	var/datum/dna/new_dna = new()
+	new_dna.lineage=lineage
 	new_dna.unique_enzymes=unique_enzymes
 	new_dna.b_type=b_type
 	new_dna.real_name=real_name

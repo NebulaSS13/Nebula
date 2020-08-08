@@ -1,11 +1,8 @@
-GLOBAL_LIST_INIT(gyne_names, list())
-
-/proc/get_gyne_name()
-	return GLOB.gyne_names.len ? pick(GLOB.gyne_names) : create_gyne_name()
+/mob/living/carbon/proc/get_gyne_name()
+	return dna?.lineage || create_gyne_name()
 
 /proc/create_gyne_name()
 	var/gynename = "[capitalize(pick(GLOB.gyne_architecture))] [capitalize(pick(GLOB.gyne_geoforms))]"
-	GLOB.gyne_names += gynename
 	return gynename
 
 //Thanks to:
@@ -78,11 +75,15 @@ GLOBAL_LIST_INIT(gyne_architecture, list(
 	this stellar power are eusocial to an extent, and their society is shaped around the teeming masses \
 	of workers, soldiers, technicians and 'lesser' citizens supporting a throng of imperious and all-powerful queens."
 
-/decl/cultural_info/culture/ascent/get_random_name(var/gender)
+/decl/cultural_info/culture/ascent/get_random_name(var/mob/M, var/gender)
+	var/mob/living/carbon/human/H = M
+	var/lineage = create_gyne_name()
+	if(istype(H) && H.dna.lineage)
+		lineage = H.dna.lineage
 	if(gender == MALE)
-		return "[random_id(/datum/species/mantid, 10000, 99999)] [get_gyne_name()]"
+		return "[random_id(/datum/species/mantid, 10000, 99999)] [lineage]"
 	else
-		return "[random_id(/datum/species/mantid, 1, 99)] [get_gyne_name()]"
+		return "[random_id(/datum/species/mantid, 1, 99)] [lineage]"
 
 /decl/cultural_info/location/kharmaani
 	name = HOME_SYSTEM_KHARMAANI

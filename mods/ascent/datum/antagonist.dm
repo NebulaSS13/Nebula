@@ -20,8 +20,10 @@ GLOBAL_DATUM_INIT(hunters, /datum/antagonist/hunter, new)
 
 /datum/antagonist/hunter/update_antag_mob(var/datum/mind/player, var/preserve_appearance)
 	. = ..()
+	var lineage = create_gyne_name();
 	if(ishuman(player.current))
 		var/mob/living/carbon/human/H = player.current
+		H.dna.lineage = lineage; // This makes all antag ascent have the same lineage on get_random_name.
 		if(!leader && is_species_whitelisted(player.current, SPECIES_MANTID_GYNE))
 			leader = player
 			if(H.species.get_root_species_name() != SPECIES_MANTID_GYNE)
@@ -32,7 +34,7 @@ GLOBAL_DATUM_INIT(hunters, /datum/antagonist/hunter, new)
 				H.set_species(SPECIES_MANTID_ALATE)
 			H.gender = MALE
 		var/decl/cultural_info/culture/ascent/ascent_culture = SSlore.get_culture(CULTURE_ASCENT)
-		H.real_name = ascent_culture.get_random_name(H.gender)
+		H.real_name = ascent_culture.get_random_name(H, H.gender)
 		H.name = H.real_name
 
 /datum/antagonist/hunter/equip(var/mob/living/carbon/human/player)

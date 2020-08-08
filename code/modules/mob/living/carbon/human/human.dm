@@ -24,7 +24,7 @@
 
 	var/decl/cultural_info/culture = SSlore.get_culture(cultural_info[TAG_CULTURE])
 	if(culture)
-		real_name = culture.get_random_name(gender, species.name)
+		real_name = culture.get_random_name(src, gender, species.name)
 		name = real_name
 		if(mind)
 			mind.name = real_name
