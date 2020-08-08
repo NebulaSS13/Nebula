@@ -19,6 +19,10 @@
 	. = ..(mapload)
 	Make(S)
 	connect_to_network()
+	if(GLOB.using_map.using_sun)
+		if(!istype(src, /obj/machinery/power/tracker/overmap))
+			new /obj/machinery/power/tracker/overmap(get_turf(src))
+			qdel(src)
 
 /obj/machinery/power/tracker/Destroy()
 	unset_control() //remove from control computer

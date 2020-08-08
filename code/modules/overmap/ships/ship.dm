@@ -167,6 +167,8 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/datum/ship_inertial_damper/I in global.ship_inertial_dampers)
 		if(check_ownership(I.holder))
 			inertial_dampers |= I
+	for(var/obj/machinery/power/solar_control/overmap/SC in SSmachines.machinery)
+		SC.attempt_hook_up(src)
 	var/v_mass = recalculate_vessel_mass()
 	if(v_mass)
 		vessel_mass = v_mass

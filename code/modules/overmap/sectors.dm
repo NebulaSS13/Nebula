@@ -120,6 +120,9 @@
 	GLOB.using_map.overmap_z = world.maxz
 
 
+	if(!GLOB.using_map.system_name)
+		GLOB.using_map.system_name = system_name()
+
 	testing("Putting overmap on [GLOB.using_map.overmap_z]")
 	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))
@@ -131,6 +134,22 @@
 		ChangeArea(T, A)
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
+
+	if(GLOB.using_map.using_sun)
+		//Star generation, finally.
+		var/dimension = GLOB.using_map.overmap_size
+		var/sun_x
+		var/sun_y
+
+		if(dimension & 1 == 0)
+			sun_x = (GLOB.using_map.overmap_size / 2) + 0.5
+			sun_y = (GLOB.using_map.overmap_size / 2) + 0.5 //add 0.5 to get the final x/y of the star's location
+		else
+			sun_x = (GLOB.using_map.overmap_size / 2)
+			sun_y = (GLOB.using_map.overmap_size / 2) //This is a rough 'center' because even maps don't have a true center.
+
+		var/turf/sun_turf = locate(sun_x, sun_y, GLOB.using_map.overmap_z)
+		new /obj/effect/overmap/star(sun_turf)
 
 	testing("Overmap build complete.")
 	return 1

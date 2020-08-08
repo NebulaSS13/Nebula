@@ -12,6 +12,7 @@ var/list/solars_list = list()
 	density = 1
 	idle_power_usage = 0
 	active_power_usage = 0
+	appearance_flags = PIXEL_SCALE
 	var/id = 0
 	var/health = 10
 	var/obscured = 0
@@ -21,10 +22,16 @@ var/list/solars_list = list()
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
+	var/obj/effect/solar_panel_dummy/panel = null
 
 /obj/machinery/power/solar/improved
 	name = "improved solar panel"
 	efficiency = 2
+
+/obj/effect/solar_panel_dummy
+	mouse_opacity = 0
+	icon = 'icons/obj/power.dmi'
+	icon_state = "solar_panel"
 
 /obj/machinery/power/solar/drain_power()
 	return -1
@@ -33,8 +40,14 @@ var/list/solars_list = list()
 	. = ..(mapload)
 	Make(S)
 	connect_to_network()
+	panel = new(get_turf(src))
+	if(GLOB.using_map.using_sun)
+		if(!istype(src, /obj/machinery/power/solar/overmap))
+			new /obj/machinery/power/solar/overmap(get_turf(src))
+			qdel(src)
 
 /obj/machinery/power/solar/Destroy()
+	QDEL_NULL(panel)
 	unset_control() //remove from control computer
 	. = ..()
 
@@ -90,12 +103,16 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar/on_update_icon()
 	..()
-	overlays.Cut()
-	if(stat & BROKEN)
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
-	else
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
-		src.set_dir(angle2dir(adir))
+	if(!isnull(panel))
+		if(stat & BROKEN)
+			panel.icon_state = "solar_panel-b"
+		else
+			panel.icon_state = "solar_panel"
+
+		var/matrix/rot_matrix = matrix()
+		rot_matrix.Turn(adir)
+		animate(panel, transform = rot_matrix, 1 SECOND, easing = SINE_EASING)
+
 	return
 
 //calculates the fraction of the sunlight that the panel recieves
@@ -355,6 +372,10 @@ var/list/solars_list = list()
 	. = ..()
 	if(!connect_to_network()) return
 	set_panels(cdir)
+	if(GLOB.using_map.using_sun)
+		if(!istype(src, /obj/machinery/power/solar_control/overmap))
+			new /obj/machinery/power/solar/overmap(get_turf(src))
+			qdel(src)
 
 /obj/machinery/power/solar_control/on_update_icon()
 	if(stat & BROKEN)
@@ -503,3 +524,5 @@ var/list/solars_list = list()
 	var/rate = "[href]=-[Max]'>-</A>[href]=-[Min]'>-</A> [(C?C : 0)] [href]=[Min]'>+</A>[href]=[Max]'>+</A>"
 	if(Limit) return "[href]=-[Limit]'>-</A>"+rate+"[href]=[Limit]'>+</A>"
 	return rate
+
+

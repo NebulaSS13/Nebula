@@ -4,6 +4,7 @@
 	icon_state = "globe"
 	sector_flags = OVERMAP_SECTOR_KNOWN
 	free_landing = TRUE
+	opacity = 1
 	var/area/planetary_area
 
 	var/lightlevel = 0 		//This default makes turfs not generate light. Adjust to have exoplanents be lit.
