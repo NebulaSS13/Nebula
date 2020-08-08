@@ -111,6 +111,7 @@
 		return 1
 
 /obj/machinery/power/solar_control/overmap/Destroy()
+	linked = null
 	for(var/obj/machinery/power/solar/overmap/M in connected_panels)
 		M.unset_control()
 	if(overmap_tracker)
