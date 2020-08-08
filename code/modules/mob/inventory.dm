@@ -118,7 +118,7 @@ var/global/list/slot_equipment_priority = list( \
 /mob/proc/get_active_held_item_slot()
 	return
 
-//Returns the thing in our inactive hand
+//Returns the things in our inactive hands
 /mob/proc/get_inactive_held_items()
 	RETURN_TYPE(/list)
 	return null

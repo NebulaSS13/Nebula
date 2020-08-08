@@ -46,7 +46,7 @@ SUBSYSTEM_DEF(fabrication)
 		fab?.refresh_design_cache()
 	fabricators_to_init.Cut()
 
-	for(var/datum/stack_recipe/recipe in crafting_recipes_to_init)
+	for(var/datum/stack_crafting/recipe/recipe in crafting_recipes_to_init)
 		recipe.InitializeMaterials()
 	crafting_recipes_to_init.Cut()
 
@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(fabrication)
 
 	. = ..()
 
-/datum/controller/subsystem/fabrication/proc/init_crafting_recipe(var/datum/stack_recipe/recipe)
+/datum/controller/subsystem/fabrication/proc/init_crafting_recipe(var/datum/stack_crafting/recipe/recipe)
 	if(post_recipe_init)
 		recipe.InitializeMaterials()
 	else

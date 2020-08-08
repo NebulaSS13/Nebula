@@ -20,7 +20,10 @@
 	if(prob(75))
 		pixel_y = rand(0, 16)
 	. = ..()
-	set_extension(src, /datum/extension/tool, list(TOOL_SCREWDRIVER = TOOL_QUALITY_DEFAULT))
+	set_extension(src, /datum/extension/tool/variable, list(
+		TOOL_SCREWDRIVER = TOOL_QUALITY_DEFAULT,
+		TOOL_CHISEL = TOOL_QUALITY_BAD
+	))
 
 /obj/item/screwdriver/on_update_icon()
 	. = ..()

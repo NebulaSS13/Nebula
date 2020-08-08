@@ -23,9 +23,9 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	if(wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-	. += new/datum/stack_recipe/furniture/planting_bed(src)
-	. += new/datum/stack_recipe/fountain(src)
+		. += new/datum/stack_crafting/recipe/furniture/girder(src)
+	. += new/datum/stack_crafting/recipe/furniture/planting_bed(src)
+	. += new/datum/stack_crafting/recipe/fountain(src)
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"

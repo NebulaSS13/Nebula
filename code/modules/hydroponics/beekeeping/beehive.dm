@@ -265,8 +265,8 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "wax"
 
-var/global/list/wax_recipes = list(new /datum/stack_recipe/candle)
-/obj/item/stack/wax/get_recipes()
+var/global/list/wax_recipes = list(new /datum/stack_crafting/recipe/candle)
+/obj/item/stack/wax/get_all_recipes()
 	return global.wax_recipes
 
 /obj/item/bee_pack

@@ -47,57 +47,57 @@
 		return
 
 	if(wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-		. += new/datum/stack_recipe/furniture/ladder(src)
+		. += new/datum/stack_crafting/recipe/furniture/girder(src)
+		. += new/datum/stack_crafting/recipe/furniture/ladder(src)
 
-	. += new/datum/stack_recipe/sandals(src)
-	. += new/datum/stack_recipe/tile/wood(src)
-	. += create_recipe_list(/datum/stack_recipe/furniture/chair/wood)
-	. += new/datum/stack_recipe/furniture/sofa/m(src)
-	. += new/datum/stack_recipe/furniture/sofa/l(src)
-	. += new/datum/stack_recipe/furniture/sofa/r(src)
-	. += new/datum/stack_recipe/crossbowframe(src)
-	. += new/datum/stack_recipe/furniture/coffin/wooden(src)
-	. += new/datum/stack_recipe/beehive_assembly(src)
-	. += new/datum/stack_recipe/beehive_frame(src)
-	. += new/datum/stack_recipe/furniture/bookcase(src)
-	. += new/datum/stack_recipe/zipgunframe(src)
-	. += new/datum/stack_recipe/coilgun(src)
-	. += new/datum/stack_recipe/stick(src)
-	. += new/datum/stack_recipe/noticeboard(src)
-	. += new/datum/stack_recipe/prosthetic/left_arm(src)
-	. += new/datum/stack_recipe/prosthetic/right_arm(src)
-	. += new/datum/stack_recipe/prosthetic/left_leg(src)
-	. += new/datum/stack_recipe/prosthetic/right_leg(src)
-	. += new/datum/stack_recipe/prosthetic/left_hand(src)
-	. += new/datum/stack_recipe/prosthetic/right_hand(src)
-	. += new/datum/stack_recipe/prosthetic/left_foot(src)
-	. += new/datum/stack_recipe/prosthetic/right_foot(src)
-	. += new/datum/stack_recipe/campfire(src)
+	. += new/datum/stack_crafting/recipe/sandals(src)
+	. += new/datum/stack_crafting/recipe/tile/wood(src)
+	. += create_recipe_list(/datum/stack_crafting/recipe/furniture/chair/wood)
+	. += new/datum/stack_crafting/recipe/furniture/sofa/m(src)
+	. += new/datum/stack_crafting/recipe/furniture/sofa/l(src)
+	. += new/datum/stack_crafting/recipe/furniture/sofa/r(src)
+	. += new/datum/stack_crafting/recipe/crossbowframe(src)
+	. += new/datum/stack_crafting/recipe/furniture/coffin/wooden(src)
+	. += new/datum/stack_crafting/recipe/beehive_assembly(src)
+	. += new/datum/stack_crafting/recipe/beehive_frame(src)
+	. += new/datum/stack_crafting/recipe/furniture/bookcase(src)
+	. += new/datum/stack_crafting/recipe/zipgunframe(src)
+	. += new/datum/stack_crafting/recipe/coilgun(src)
+	. += new/datum/stack_crafting/recipe/stick(src)
+	. += new/datum/stack_crafting/recipe/noticeboard(src)
+	. += new/datum/stack_crafting/recipe/prosthetic/left_arm(src)
+	. += new/datum/stack_crafting/recipe/prosthetic/right_arm(src)
+	. += new/datum/stack_crafting/recipe/prosthetic/left_leg(src)
+	. += new/datum/stack_crafting/recipe/prosthetic/right_leg(src)
+	. += new/datum/stack_crafting/recipe/prosthetic/left_hand(src)
+	. += new/datum/stack_crafting/recipe/prosthetic/right_hand(src)
+	. += new/datum/stack_crafting/recipe/prosthetic/left_foot(src)
+	. += new/datum/stack_crafting/recipe/prosthetic/right_foot(src)
+	. += new/datum/stack_crafting/recipe/campfire(src)
 
 /decl/material/solid/wood/mahogany/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)
 		return
-	. += new/datum/stack_recipe/tile/mahogany(src)
+	. += new/datum/stack_crafting/recipe/tile/mahogany(src)
 
 /decl/material/solid/wood/maple/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)
 		return
-	. += new/datum/stack_recipe/tile/maple(src)
+	. += new/datum/stack_crafting/recipe/tile/maple(src)
 
 /decl/material/solid/wood/ebony/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)
 		return
-	. += new/datum/stack_recipe/tile/ebony(src)
+	. += new/datum/stack_crafting/recipe/tile/ebony(src)
 
 /decl/material/solid/wood/walnut/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)
 		return
-	. += new/datum/stack_recipe/tile/walnut(src)
+	. += new/datum/stack_crafting/recipe/tile/walnut(src)
 
 /decl/material/solid/wood/holographic
 	uid = "solid_holographic_wood"
@@ -107,7 +107,7 @@
 	hidden_from_codex = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 
-/decl/material/solid/wood/holographic/get_recipes(reinf_mat)
+/decl/material/solid/wood/holographic/get_possible_recipes(reinf_mat)
 	return list()
 
 /decl/material/solid/wood/mahogany

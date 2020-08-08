@@ -29,13 +29,13 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/furniture/crate/plastic(src)
-	. += new/datum/stack_recipe/bag(src)
-	. += new/datum/stack_recipe/ivbag(src)
-	. += create_recipe_list(/datum/stack_recipe/cartridge)
-	. += create_recipe_list(/datum/stack_recipe/tile/light)
-	. += new/datum/stack_recipe/hazard_cone(src)
-	. += new/datum/stack_recipe/furniture/flaps(src)
+	. += new/datum/stack_crafting/recipe/furniture/crate/plastic(src)
+	. += new/datum/stack_crafting/recipe/bag(src)
+	. += new/datum/stack_crafting/recipe/ivbag(src)
+	. += create_recipe_list(/datum/stack_crafting/recipe/cartridge)
+	. += create_recipe_list(/datum/stack_crafting/recipe/tile/light)
+	. += new/datum/stack_crafting/recipe/hazard_cone(src)
+	. += new/datum/stack_crafting/recipe/furniture/flaps(src)
 
 /decl/material/solid/plastic/holographic
 	name = "holographic plastic"
@@ -44,7 +44,7 @@
 	hidden_from_codex = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 
-/decl/material/solid/plastic/holographic/get_recipes(reinf_mat)
+/decl/material/solid/plastic/holographic/get_possible_recipes(reinf_mat)
 	return list()
 
 /decl/material/solid/cardboard
@@ -79,10 +79,10 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += create_recipe_list(/datum/stack_recipe/box)
-	. += new/datum/stack_recipe/cardborg_suit(src)
-	. += new/datum/stack_recipe/cardborg_helmet(src)
-	. += new/datum/stack_recipe_list("folders", create_recipe_list(/datum/stack_recipe/folder))
+	. += create_recipe_list(/datum/stack_crafting/recipe/box)
+	. += new/datum/stack_crafting/recipe/cardborg_suit(src)
+	. += new/datum/stack_crafting/recipe/cardborg_helmet(src)
+	. += new/datum/stack_crafting/sublist("folders", create_recipe_list(/datum/stack_crafting/recipe/folder))
 
 /decl/material/solid/paper
 	name                    = "paper"
@@ -118,7 +118,7 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/paper_sheets(src)
+	. += new/datum/stack_crafting/recipe/paper_sheets(src)
 
 /decl/material/solid/cloth //todo
 	name = "cotton"
@@ -285,8 +285,8 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/cloak(src)
-	. += new/datum/stack_recipe/shoes(src)
+	. += new/datum/stack_crafting/recipe/cloak(src)
+	. += new/datum/stack_crafting/recipe/shoes(src)
 
 /decl/material/solid/skin/lizard
 	name = "lizardskin"
@@ -412,8 +412,8 @@
 /decl/material/solid/bone/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(!reinforce_material && wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-		. += new/datum/stack_recipe/furniture/ladder(src)
+		. += new/datum/stack_crafting/recipe/furniture/girder(src)
+		. += new/datum/stack_crafting/recipe/furniture/ladder(src)
 
 /decl/material/solid/bone/fish
 	name = "fishbone"
@@ -454,9 +454,9 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/cloak(src)
-	. += new/datum/stack_recipe/shoes(src)
-	. += new/datum/stack_recipe/boots(src)
+	. += new/datum/stack_crafting/recipe/cloak(src)
+	. += new/datum/stack_crafting/recipe/shoes(src)
+	. += new/datum/stack_crafting/recipe/boots(src)
 
 /decl/material/solid/leather/synth
 	name = "synthleather"

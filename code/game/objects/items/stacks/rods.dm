@@ -17,6 +17,7 @@
 	matter_multiplier = 0.3
 	material = /decl/material/solid/metal/steel
 	is_spawnable_type = TRUE
+	crafting_stack_type = /obj/item/stack/material/rods
 
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
 	drop_sound = 'sound/foley/tooldrop2.ogg'
@@ -57,21 +58,6 @@
 		icon_state = base_state
 
 /obj/item/stack/material/rods/attackby(obj/item/W, mob/user)
-	if(IS_WELDER(W))
-		var/obj/item/weldingtool/WT = W
-
-		if(!can_use(2))
-			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
-			return
-
-		if(WT.weld(0,user))
-			visible_message(SPAN_NOTICE("\The [src] is fused together by \the [user] with \the [WT]."), 3, SPAN_NOTICE("You hear welding."), 2)
-			for(var/obj/item/stack/material/new_item in SSmaterials.create_object((material?.type || /decl/material/solid/metal/steel), usr.loc, 1))
-				new_item.add_to_stacks(usr)
-				if(user.is_holding_offhand(src))
-					user.put_in_hands(new_item)
-			use(2)
-		return
 
 	if (istype(W, /obj/item/stack/tape_roll/duct_tape))
 		var/obj/item/stack/tape_roll/duct_tape/T = W

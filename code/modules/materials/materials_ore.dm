@@ -90,7 +90,7 @@
 	SetName("[(material.ore_name ? material.ore_name : "[material.name] chunk")] [(amount > 1? "pile" : "")]")
 	desc = material.ore_desc ? material.ore_desc : "A lump of ore."
 
-/obj/item/stack/material/ore/get_recipes()
+/obj/item/stack/material/ore/get_all_recipes()
 	return //Can't use recipes with ore
 
 /obj/item/stack/material/ore/attackby(var/obj/item/W, var/mob/user)

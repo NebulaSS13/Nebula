@@ -68,10 +68,10 @@
 //Structures
 /decl/material/solid/metal/chromium/generate_recipes(reinforce_material)
 	. = ..()
-	. += /datum/stack_recipe/structure/anomaly_container
-	
-/datum/stack_recipe/structure/anomaly_container
-	title               = "anomaly container"
+	. += /datum/stack_crafting/recipe/structure/anomaly_container
+
+/datum/stack_crafting/recipe/structure/anomaly_container
+	name                = "anomaly container"
 	result_type         = /obj/structure/anomaly_container
 	time                = 10 SECONDS
 	one_per_turf        = TRUE
@@ -116,7 +116,7 @@
 
 /datum/fabricator_recipe/protolathe/tool/xeno_pick_five
 	path = /obj/item/pickaxe/xeno/five_pick
-	
+
 /datum/fabricator_recipe/protolathe/tool/xeno_pick_six
 	path = /obj/item/pickaxe/xeno/six_pick
 

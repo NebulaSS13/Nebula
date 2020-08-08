@@ -15,6 +15,7 @@
 	drop_sound = 'sound/foley/tooldrop2.ogg'
 	singular_name = "sheet"
 	plural_name = "sheets"
+	crafting_stack_type = /obj/item/stack/material
 	abstract_type = /obj/item/stack/material
 	is_spawnable_type = FALSE // Mapped subtypes set this so they can be spawned from the verb.
 	var/decl/material/reinf_material
@@ -46,8 +47,8 @@
 		drop_sound = material.sound_dropped
 	update_strings()
 
-/obj/item/stack/material/get_recipes()
-	return material.get_recipes(reinf_material && reinf_material.type)
+/obj/item/stack/material/get_all_recipes()
+	return material.get_possible_recipes(reinf_material && reinf_material.type)
 
 /obj/item/stack/material/get_codex_value()
 	return (material && !material.hidden_from_codex) ? "[lowertext(material.solid_name)] (material)" : ..()
@@ -122,6 +123,11 @@
 		if(!reinf_material)
 			material.reinforce(user, W, src)
 		return TRUE
+
+	if(list_recipes(user, tool = W))
+		return TRUE
+
+	. = ..()
 
 	if(reinf_material && reinf_material.default_solid_form && IS_WELDER(W))
 		var/obj/item/weldingtool/WT = W
@@ -353,5 +359,5 @@
 	max_health = ITEM_HEALTH_NO_DAMAGE
 	is_spawnable_type = FALSE
 
-/obj/item/stack/material/strut/get_recipes()
+/obj/item/stack/material/strut/get_all_recipes()
 	return material.get_strut_recipes(reinf_material && reinf_material.type)

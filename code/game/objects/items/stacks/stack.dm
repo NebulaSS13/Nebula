@@ -15,6 +15,7 @@
 	max_health = 32 //Stacks should take damage even if no materials
 	/// A copy of initial matter list when this atom initialized. Stack matter should always assume a single tile.
 	var/list/matter_per_piece
+	var/crafting_stack_type
 	var/singular_name
 	var/plural_name
 	var/base_state
@@ -93,72 +94,63 @@
 		update_icon()
 
 /obj/item/stack/attack_self(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/item/stack/interact(mob/user)
 	list_recipes(user)
 
 /obj/item/stack/get_matter_amount_modifier()
 	. = amount * matter_multiplier
 
-/obj/item/stack/proc/get_recipes()
+/obj/item/stack/proc/get_all_recipes()
 	return
 
-/obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)
-	var/list/recipes = get_recipes()
+/obj/item/stack/proc/get_possible_recipes(tool)
+
+	// We have been passed an atom rather than a list, so grab the tool requirements.
+	var/list/check_tool_types
+	if(isatom(tool))
+		check_tool_types = list()
+		var/datum/extension/tool/tool_extension = get_extension(tool, /datum/extension/tool)
+		for(var/tool_type in tool_extension?.tool_values)
+			check_tool_types += tool_type
+	else if(islist(tool))
+		check_tool_types = tool
+	else if(tool)
+		CRASH("Non-list non-atom non-null tool supplied to [type]/proc/get_recipes_for(): [tool]")
+
+	for(var/datum/stack_crafting/recipe in get_all_recipes())
+		// Invalid stack type.
+		if(recipe.craftable_stack_types && (!crafting_stack_type || !(crafting_stack_type in recipe.craftable_stack_types)))
+			continue
+		// Missing required tool.
+		if(recipe.required_tool && (!length(check_tool_types) || !(recipe.required_tool in check_tool_types)))
+			continue
+		// Recipe doesn't need a tool but one has been supplied.
+		else if(!recipe.required_tool && tool)
+			continue
+		LAZYADD(., recipe)
+
+/obj/item/stack/proc/list_recipes(mob/user, datum/stack_crafting/sublist/recipes_sublist, tool)
+
+	var/list/recipes = get_possible_recipes(tool)
+	if(istype(recipes_sublist) && (recipes_sublist in recipes))
+		recipes = recipes_sublist.recipes
 	if(!islist(recipes) || !length(recipes))
 		return
-	if (!src || get_amount() <= 0)
-		close_browser(user, "window=stack")
-	user.set_machine(src) //for correct work of onclose
-	var/list/recipe_list = recipes
-	if (recipes_sublist && recipe_list[recipes_sublist] && istype(recipe_list[recipes_sublist], /datum/stack_recipe_list))
-		var/datum/stack_recipe_list/srl = recipe_list[recipes_sublist]
-		recipe_list = srl.recipes
-	var/t1 = list()
-	t1 += "<HTML><HEAD><title>Constructions from [src]</title></HEAD><body><TT>Amount Left: [src.get_amount()]<br>"
-	for(var/i=1;i<=recipe_list.len,i++)
-		var/E = recipe_list[i]
-		if (isnull(E))
-			continue
 
-		if (istype(E, /datum/stack_recipe_list))
-			t1+="<br>"
-			var/datum/stack_recipe_list/srl = E
-			t1 += "\[Sub-menu] <a href='?src=\ref[src];sublist=[i]'>[srl.title]</a>"
+	var/dat = list("<b>Amount left:</b> [src.get_amount()]<br>")
+	dat += "<table>"
+	for(var/datum/stack_crafting/recipe in recipes)
+		dat += recipe.get_display_html(user, src, recipes_sublist)
+	dat += "</table>"
 
-		if (istype(E, /datum/stack_recipe))
-			var/datum/stack_recipe/R = E
-			t1+="<br>"
-			var/max_multiplier = round(src.get_amount() / R.req_amount)
-			var/title
-			var/can_build = 1
-			can_build = can_build && (max_multiplier>0)
-			if (R.res_amount>1)
-				title+= "[R.res_amount]x [R.display_name()]\s"
-			else
-				title+= "[R.display_name()]"
-			title+= " ([R.req_amount] [src.singular_name]\s)"
-			var/skill_label = ""
-			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
-				var/decl/hierarchy/skill/S = GET_DECL(SKILL_CONSTRUCTION)
-				skill_label = "<font color='red'>\[[S.levels[R.difficulty]]]</font>"
-			if (can_build)
-				t1 +="[skill_label]<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>"
-			else
-				t1 += "[skill_label][title]"
-			if (R.max_res_amount>1 && max_multiplier>1)
-				max_multiplier = min(max_multiplier, round(R.max_res_amount/R.res_amount))
-				t1 += " |"
-				var/list/multipliers = list(5,10,25)
-				for (var/n in multipliers)
-					if (max_multiplier>=n)
-						t1 += " <A href='?src=\ref[src];make=[i];sublist=[recipes_sublist];multiplier=[n]'>[n*R.res_amount]x</A>"
-				if (!(max_multiplier in multipliers))
-					t1 += " <A href='?src=\ref[src];make=[i];sublist=[recipes_sublist];multiplier=[max_multiplier]'>[max_multiplier*R.res_amount]x</A>"
+	var/datum/browser/popup = new(user, "stack", "Stack Crafting", 420, 680)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 
-	t1 += "</TT></body></HTML>"
-	show_browser(user, JOINTEXT(t1), "window=stack")
-	onclose(user, "stack")
-
-/obj/item/stack/proc/produce_recipe(datum/stack_recipe/recipe, var/quantity, mob/user)
+/obj/item/stack/proc/produce_recipe(datum/stack_crafting/recipe/recipe, var/quantity, mob/user, obj/item/tool)
 	var/required = quantity*recipe.req_amount
 	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
 
@@ -172,7 +164,10 @@
 	if(!recipe.can_make(user))
 		return
 
-	if (recipe.time)
+	if(tool && recipe.required_tool)
+		if(!tool.do_tool_interaction(recipe.required_tool, user, src, recipe.time, "building [ADD_ARTICLE(recipe.name)] from"))
+			return
+	else if(recipe.time)
 		to_chat(user, "<span class='notice'>Building [recipe.display_name()] ...</span>")
 		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION))
 			return
@@ -182,36 +177,51 @@
 			to_chat(user, "<span class='warning'>You waste some [name] and fail to build \the [recipe.display_name()]!</span>")
 			return
 		var/atom/O = recipe.spawn_result(user, user.loc, produced)
+		to_chat(user, SPAN_NOTICE("You shape \a [O] out of \the [src]."))
 		if(!QDELETED(O)) // In case of stack merger.
 			O.add_fingerprint(user)
 			user.put_in_hands(O)
 
-/obj/item/stack/Topic(href, href_list)
-	. = ..()
-	if ((usr.restrained() || usr.stat || usr.get_active_hand() != src))
-		return
+/obj/item/stack/OnTopic(var/mob/user, var/list/href_list)
 
-	if (href_list["sublist"] && !href_list["make"])
-		list_recipes(usr, text2num(href_list["sublist"]))
+	if(!user || !CanPhysicallyInteract(user))
+		return TOPIC_NOACTION
 
-	if (href_list["make"])
+	var/obj/item/tool
+	var/datum/stack_crafting/recipe/recipe
+	if(href_list["make"])
 		if(delete_if_empty()) // Should never happen
 			return
+		recipe = locate(href_list["make"])
+		if(!istype(recipe))
+			return TOPIC_NOACTION
+		if(recipe.required_tool)
+			for(var/obj/item/item in user.get_held_items())
+				if(!tool || item.get_tool_quality(recipe.required_tool) > tool.get_tool_quality(recipe.required_tool))
+					tool = item
+			if(QDELETED(tool))
+				to_chat(user, SPAN_WARNING("You are not holding an appropriate tool to craft that."))
+				return TOPIC_NOACTION
 
-		var/list/recipes_list = get_recipes()
-		if (href_list["sublist"])
-			var/datum/stack_recipe_list/srl = recipes_list[text2num(href_list["sublist"])]
-			recipes_list = srl.recipes
+	var/datum/stack_crafting/sublist/sub_recipe_list
+	if(href_list["sublist"])
+		sub_recipe_list = locate(href_list["sublist"])
+		if(!istype(sub_recipe_list))
+			return TOPIC_NOACTION
+		if(!recipe)
+			list_recipes(user, sub_recipe_list, tool)
+			return TOPIC_REFRESH
 
-		var/datum/stack_recipe/R = recipes_list[text2num(href_list["make"])]
-		var/multiplier = text2num(href_list["multiplier"])
-		if (!multiplier || (multiplier <= 0)) //href exploit protection
-			return
+	if(recipe)
+		var/list/recipes_list = sub_recipe_list?.recipes || get_possible_recipes(tool)
+		if(!(recipe in recipes_list))
+			return TOPIC_NOACTION
+		var/multiplier = max(1, text2num(href_list["multiplier"]))
+		if(!multiplier || (multiplier <= 0)) //href exploit protection
+			return TOPIC_NOACTION
+		produce_recipe(recipe, multiplier, user, tool)
 
-		src.produce_recipe(R, multiplier, usr)
-
-	if(!QDELETED(src))
-		interact(usr)
+	return TOPIC_REFRESH
 
 /**
  * Return 1 if an immediate subsequent call to use() would succeed.

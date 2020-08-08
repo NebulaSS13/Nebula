@@ -11,15 +11,15 @@
 	for(var/decl/material/mat_datum as anything in SSmaterials.materials)
 
 		var/list/recipes = list()
-		for(var/thing in mat_datum.get_recipes())
-			if(istype(thing, /datum/stack_recipe))
+		for(var/thing in mat_datum.get_possible_recipes())
+			if(istype(thing, /datum/stack_crafting/recipe))
 				recipes += thing
-			else if(istype(thing, /datum/stack_recipe_list))
-				var/datum/stack_recipe_list/recipe_stack = thing
+			else if(istype(thing, /datum/stack_crafting/sublist))
+				var/datum/stack_crafting/sublist/recipe_stack = thing
 				if(length(recipe_stack.recipes))
 					recipes |= recipe_stack.recipes
 
-		for(var/datum/stack_recipe/recipe as anything in recipes)
+		for(var/datum/stack_crafting/recipe/recipe as anything in recipes)
 			var/obj/product = recipe.spawn_result()
 			var/failed
 			if(!product)

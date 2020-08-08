@@ -192,24 +192,24 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/furniture/closet(src)
-	. += new/datum/stack_recipe/furniture/tank_dispenser(src)
-	. += new/datum/stack_recipe/furniture/canister(src)
-	. += new/datum/stack_recipe/furniture/tank(src)
-	. += new/datum/stack_recipe/cannon(src)
-	. += new/datum/stack_recipe_list("tiling", create_recipe_list(/datum/stack_recipe/tile/metal))
-	. += new/datum/stack_recipe/furniture/computerframe(src)
-	. += new/datum/stack_recipe/furniture/machine(src)
-	. += new/datum/stack_recipe/furniture/turret(src)
-	. += new/datum/stack_recipe_list("airlock assemblies", create_recipe_list(/datum/stack_recipe/furniture/door_assembly))
-	. += new/datum/stack_recipe/grenade(src)
-	. += new/datum/stack_recipe/light(src)
-	. += new/datum/stack_recipe/light_small(src)
-	. += new/datum/stack_recipe/light_switch(src)
-	. += new/datum/stack_recipe/light_switch/windowtint(src)
-	. += new/datum/stack_recipe/apc(src)
-	. += new/datum/stack_recipe/air_alarm(src)
-	. += new/datum/stack_recipe/fire_alarm(src)
+	. += new/datum/stack_crafting/recipe/key(src)
+	. += new/datum/stack_crafting/recipe/furniture/closet(src)
+	. += new/datum/stack_crafting/recipe/furniture/canister(src)
+	. += new/datum/stack_crafting/recipe/furniture/tank(src)
+	. += new/datum/stack_crafting/recipe/cannon(src)
+	. += new/datum/stack_crafting/sublist("tiling", create_recipe_list(/datum/stack_crafting/recipe/tile/metal))
+	. += new/datum/stack_crafting/recipe/furniture/computerframe(src)
+	. += new/datum/stack_crafting/recipe/furniture/machine(src)
+	. += new/datum/stack_crafting/recipe/furniture/turret(src)
+	. += new/datum/stack_crafting/sublist("airlock assemblies", create_recipe_list(/datum/stack_crafting/recipe/furniture/door_assembly))
+	. += new/datum/stack_crafting/recipe/grenade(src)
+	. += new/datum/stack_crafting/recipe/light(src)
+	. += new/datum/stack_crafting/recipe/light_small(src)
+	. += new/datum/stack_crafting/recipe/light_switch(src)
+	. += new/datum/stack_crafting/recipe/light_switch/windowtint(src)
+	. += new/datum/stack_crafting/recipe/apc(src)
+	. += new/datum/stack_crafting/recipe/air_alarm(src)
+	. += new/datum/stack_crafting/recipe/fire_alarm(src)
 
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
@@ -220,7 +220,7 @@
 	value = 0
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 
-/decl/material/solid/metal/steel/holographic/get_recipes(reinf_mat)
+/decl/material/solid/metal/steel/holographic/get_possible_recipes(reinf_mat)
 	return list()
 
 /decl/material/solid/metal/stainlesssteel
@@ -260,7 +260,7 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/grenade(src)
+	. += new/datum/stack_crafting/recipe/grenade(src)
 
 /decl/material/solid/metal/aluminium/holographic
 	name = "holoaluminium"
@@ -270,7 +270,7 @@
 	hidden_from_codex = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 
-/decl/material/solid/metal/aluminium/holographic/get_recipes(reinf_mat)
+/decl/material/solid/metal/aluminium/holographic/get_possible_recipes(reinf_mat)
 	return list()
 
 /decl/material/solid/metal/plasteel
@@ -300,9 +300,9 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/ai_core(src)
-	. += new/datum/stack_recipe/furniture/crate(src)
-	. += new/datum/stack_recipe/grip(src)
+	. += new/datum/stack_crafting/recipe/ai_core(src)
+	. += new/datum/stack_crafting/recipe/furniture/crate(src)
+	. += new/datum/stack_crafting/recipe/grip(src)
 
 /decl/material/solid/metal/titanium
 	name = "titanium"
@@ -331,9 +331,9 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/ai_core(src)
-	. += new/datum/stack_recipe/furniture/crate(src)
-	. += new/datum/stack_recipe/grip(src)
+	. += new/datum/stack_crafting/recipe/ai_core(src)
+	. += new/datum/stack_crafting/recipe/furniture/crate(src)
+	. += new/datum/stack_crafting/recipe/grip(src)
 
 /decl/material/solid/metal/plasteel/ocp
 	name = "osmium-carbide plasteel"
