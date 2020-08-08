@@ -35,6 +35,8 @@
 
 	var/tmp/changing_turf
 
+	var/prev_type // Previous type of the turf, prior to turf translation.
+
 /turf/Initialize(mapload, ...)
 	. = ..()
 	if(dynamic_lighting)

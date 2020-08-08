@@ -1,4 +1,4 @@
-#define LANDING_VIEW 12
+#define LANDING_VIEW 25
 
 /mob/observer/eye/landing
 	name = "Landing Eye"
@@ -53,25 +53,15 @@
 		. = TRUE
 
 		if(!T || !T.loc || !origin || !origin.loc)
-			img.icon_state = "red"
 			. = FALSE
-			continue
-		if((T.x < TRANSITIONEDGE || T.x > world.maxx - TRANSITIONEDGE) || (T.y < TRANSITIONEDGE || T.y > world.maxy - TRANSITIONEDGE))
-			img.icon_state = "red"
+		else if((T.x < TRANSITIONEDGE || T.x > world.maxx - TRANSITIONEDGE) || (T.y < TRANSITIONEDGE || T.y > world.maxy - TRANSITIONEDGE))
 			. = FALSE // Cannot land past the normal world boundaries.
-			continue
-		if(!istype(T, origin))
-			img.icon_state = "red"
-			. = FALSE // Cannot land on two different types of turfs.
-			continue
-		if(check_collision(origin.loc, list(T))) // Checking for density or multi-area overlap.
-			img.icon_state = "red"
+		else if(check_collision(origin.loc, list(T))) // Checking for density or multi-area overlap.
 			. = FALSE
-			continue
-		if(!istype(A, /area/space) && !istype(A, /area/exoplanet)) // Can only land in space or outside.
-			img.icon_state = "red"
+		else if(!istype(A, /area/space) && !istype(A, /area/exoplanet)) // Can only land in space or outside.
 			. = FALSE
-			continue
+		if(!.)
+			img.icon_state = "red" // Visual indicator the spot is invalid.
 
 /mob/observer/eye/landing/possess(var/mob/user)
 	. = ..()
