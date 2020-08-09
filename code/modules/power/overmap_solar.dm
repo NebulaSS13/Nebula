@@ -41,7 +41,7 @@
 	if(!star.star_luminosity)
 		sunfrac = 0
 
-	sunfrac = clamp(sunfrac, 0, 1)
+	sunfrac = Clamp(sunfrac, 0, 1)
 
 /obj/machinery/power/solar/overmap/unset_control()
 	if(overmap_control)
