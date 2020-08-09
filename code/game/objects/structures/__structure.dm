@@ -5,7 +5,7 @@
 
 	var/last_damage_message
 	var/health = 0
-	var/maxhealth = -1
+	var/maxhealth = 50
 	var/hitsound = 'sound/weapons/smash.ogg'
 	var/breakable
 	var/parts_type
