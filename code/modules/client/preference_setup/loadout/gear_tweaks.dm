@@ -364,3 +364,59 @@
 	if(ValidTeslaLinks[metadata[7]])
 		var/t = ValidTeslaLinks[metadata[7]]
 		assembly.add_replace_component(null, PART_TESLA, new t(I))
+
+/*
+* Custom name
+*/
+
+var/datum/gear_tweak/custom_name/gear_tweak_free_name = new()
+
+/datum/gear_tweak/custom_name
+	var/list/valid_custom_names
+
+/datum/gear_tweak/custom_name/New(list/valid_custom_names)
+	src.valid_custom_names = valid_custom_names
+	..()
+
+/datum/gear_tweak/custom_name/get_contents(metadata)
+	return "Name: [metadata]"
+
+/datum/gear_tweak/custom_name/get_default()
+	return ""
+
+/datum/gear_tweak/custom_name/get_metadata(user, metadata, title)
+	if(valid_custom_names)
+		return input(user, "Choose an item name.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in valid_custom_names
+	return sanitize(input(user, "Choose the item's name. Leave it blank to use the default name.", "Item Name", metadata) as text|null, MAX_LNAME_LEN)
+
+/datum/gear_tweak/custom_name/tweak_item(obj/item/I, metadata)
+	if(metadata)
+		I.name = metadata
+
+/*
+* Custom description
+*/
+
+var/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
+
+/datum/gear_tweak/custom_desc
+	var/list/valid_custom_desc
+
+/datum/gear_tweak/custom_desc/New(list/valid_custom_desc)
+	src.valid_custom_desc = valid_custom_desc
+	..()
+
+/datum/gear_tweak/custom_desc/get_contents(metadata)
+	return "Description: [metadata]"
+
+/datum/gear_tweak/custom_desc/get_default()
+	return ""
+
+/datum/gear_tweak/custom_desc/get_metadata(user, metadata, title)
+	if(valid_custom_desc)
+		return input(user, "Choose an item description.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in valid_custom_desc
+	return sanitize(input(user, "Choose the item's description. Leave it blank to use the default description.", "Item Description", metadata) as message|null)
+
+/datum/gear_tweak/custom_desc/tweak_item(obj/item/I, metadata)
+	if(metadata)
+		I.desc = metadata
