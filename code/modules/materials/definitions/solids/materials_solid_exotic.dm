@@ -37,7 +37,7 @@
 	stack_origin_tech = "{'wormholes':2,'materials':6,'exoticmatter':4}"
 	luminescence = 3
 	value = 3
-	icon_base = "stone"
+	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"
 	shard_type = SHARD_SHARD
 	hardness = MAT_VALUE_RIGID

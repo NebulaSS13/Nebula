@@ -72,9 +72,9 @@
 
 /decl/material/solid/stone/cult
 	name = "disturbing stone"
-	icon_base = "cult"
+	icon_base = 'icons/turf/walls/cult.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced_cult.dmi'
 	color = "#402821"
-	icon_reinf = "reinf_cult"
 	shard_type = SHARD_STONE_PIECE
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"

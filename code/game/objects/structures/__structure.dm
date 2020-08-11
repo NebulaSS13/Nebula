@@ -135,7 +135,7 @@
 /obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
 	var/dmg = 100
-	if(material)
+	if(istype(material))
 		dmg = round(dmg * material.combustion_effect(get_turf(src),temperature, 0.3))
 	if(dmg)
 		take_damage(dmg)

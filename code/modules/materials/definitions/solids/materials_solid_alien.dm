@@ -1,9 +1,9 @@
 /decl/material/solid/metal/aliumium
 	name = "alien alloy"
 	stack_type = null
-	icon_base = "jaggy"
+	icon_base = 'icons/turf/walls/metal.dmi'
 	door_icon_base = "metal"
-	icon_reinf = "reinf_metal"
+	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	hitsound = 'sound/weapons/smash.ogg'
 	sheet_singular_name = "chunk"
 	sheet_plural_name = "chunks"
@@ -13,7 +13,7 @@
 	value = 2.5
 
 /decl/material/solid/metal/aliumium/New()
-	icon_base = "metal"
+	icon_base = 'icons/turf/walls/metal.dmi'
 	color = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
 	brute_armor = rand(10,20)

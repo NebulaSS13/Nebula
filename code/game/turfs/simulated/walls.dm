@@ -1,18 +1,32 @@
+var/list/wall_blend_objects = list(
+	/obj/machinery/door, 
+	/obj/structure/wall_frame, 
+	/obj/structure/grille, 
+	/obj/structure/window/reinforced/full, 
+	/obj/structure/window/reinforced/polarized/full, 
+	/obj/structure/window/shuttle, 
+	/obj/structure/window/borosilicate/full, 
+	/obj/structure/window/borosilicate_reinforced/full
+)
+var/list/wall_noblend_objects = list(
+	/obj/machinery/door/window
+)
+
 /turf/simulated/wall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
-	icon = 'icons/turf/wall_masks.dmi'
-	icon_state = "generic"
+	icon = 'icons/turf/walls/_previews.dmi'
+	icon_state = "solid"
 	opacity = 1
 	density = 1
 	blocks_air = 1
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 	explosion_resistance = 10
+	color = COLOR_GRAY40
 
 	var/damage = 0
 	var/damage_overlay = 0
-	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
 	var/decl/material/material
@@ -21,18 +35,21 @@
 	var/last_state
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
-	var/list/wall_connections = list("0", "0", "0", "0")
-	var/list/other_connections = list("0", "0", "0", "0")
+	var/list/wall_connections
+	var/list/other_connections
 	var/floor_type = /turf/simulated/floor/plating //turf it leaves after destruction
 	var/paint_color
 	var/stripe_color
-	var/global/list/wall_stripe_cache = list()
-	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut, /turf/simulated/wall/maple, /turf/simulated/wall/mahogany, /turf/simulated/wall/ebony)
-	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/borosilicate/full, /obj/structure/window/borosilicate_reinforced/full) // Objects which to blend with
-	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
+	var/handle_structure_blending = TRUE
 
 /turf/simulated/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
+
 	..(ml)
+
+	// Clear mapping icons.
+	icon = 'icons/turf/walls/solid.dmi'
+	icon_state = "blank"
+	color = null
 
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()
@@ -248,11 +265,11 @@
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
-	if(material?.combustion_effect(src, temperature, 0.7))
-		spawn(2)
-			for(var/turf/simulated/wall/W in range(3,src))
-				W.burn((temperature/4))
-			dismantle_wall(TRUE)
+	if(!QDELETED(src) && istype(material) && material.combustion_effect(src, temperature, 0.7))
+		for(var/turf/simulated/wall/W in range(3,src))
+			if(W != src)
+				addtimer(CALLBACK(W, /turf/simulated/wall/proc/burn, temperature/4), 2)
+		dismantle_wall(TRUE)
 
 /turf/simulated/wall/get_color()
 	return paint_color

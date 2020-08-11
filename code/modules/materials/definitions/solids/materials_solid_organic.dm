@@ -3,8 +3,8 @@
 	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
 	stack_type = /obj/item/stack/material/plastic
 	flags = MAT_FLAG_BRITTLE
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = COLOR_EGGSHELL
 	hardness = MAT_VALUE_SOFT
 	weight = MAT_VALUE_LIGHT
@@ -45,8 +45,8 @@
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MAT_FLAG_BRITTLE
 	integrity = 10
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = "#aaaaaa"
 	hardness = MAT_VALUE_SOFT
 	brute_armor = 1

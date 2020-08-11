@@ -87,9 +87,12 @@
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
 
 	// Icons
-	var/icon_base = "metal"                              // Wall and table base icon tag. See header.
+	var/icon_base = 'icons/turf/walls/solid.dmi'
+	var/icon_stripe = 'icons/turf/walls/stripes.dmi'
+	var/icon_base_natural = 'icons/turf/walls/natural.dmi'
+	var/icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
+
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
-	var/icon_reinf = "reinf_metal"                       // Overlay used
 	var/table_icon_base = "metal"
 	var/table_reinf = "reinf_metal"
 	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.

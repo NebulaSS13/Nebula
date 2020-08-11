@@ -107,6 +107,10 @@
 		building.apply_to_map()
 
 // Buildings
+/turf/simulated/wall/concrete
+	icon_state = "stone"
+	floor_type = null
+	material = /decl/material/solid/stone/concrete
 
 //Generic ruin
 /datum/random_map/maze/concrete

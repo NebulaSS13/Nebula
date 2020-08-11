@@ -16,5 +16,5 @@
 /turf/unsimulated/wall/cult
 	name = "cult wall"
 	desc = "Hideous images dance beneath the surface."
-	icon = 'icons/turf/wall_masks.dmi'
-	icon_state = "cult"
+	icon = 'icons/turf/walls/cult.dmi'
+	icon_state = "preview"

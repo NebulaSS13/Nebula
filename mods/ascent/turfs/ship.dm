@@ -11,7 +11,15 @@
 /turf/simulated/wall/ascent
 	color = COLOR_PURPLE
 
+/turf/simulated/wall/ascent/on_update_icon()
+	. = ..()
+	color = COLOR_PURPLE
+
 /turf/simulated/wall/r_wall/ascent
+	color = COLOR_PURPLE
+
+/turf/simulated/wall/r_wall/ascent/on_update_icon()
+	. = ..()
 	color = COLOR_PURPLE
 
 /turf/simulated/floor/shuttle_ceiling/ascent

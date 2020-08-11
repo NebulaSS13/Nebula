@@ -10,9 +10,8 @@ var/list/natural_walls = list()
 	girder_material = null
 	construction_stage = -1
 	floor_type = /turf/simulated/floor/asteroid
-	blend_objects = null
-	noblend_objects = null
-
+	icon_state = "natural"
+	handle_structure_blending = FALSE
 	var/strata
 	var/image/ore_overlay
 
@@ -125,11 +124,11 @@ var/list/natural_walls = list()
 
 /turf/simulated/wall/natural/on_update_icon()
 	. = ..()
-	if(material?.reflectiveness > 0)
+	if(wall_connections && material?.reflectiveness > 0)
 		var/max_shine = 0.6 * ReadHSV(RGBtoHSV(material.color))[3] // patened formula based on color's Value (in HSV)
 		var/shine = Clamp((material.reflectiveness * 0.01) * 255, 10, max_shine)
 		for(var/i = 1 to 4)
-			var/image/I = image(icon, "rockshine[wall_connections[i]]", dir = 1<<(i-1))
+			var/image/I = image(get_wall_icon(), "shine[wall_connections[i]]", dir = 1<<(i-1))
 			I.appearance_flags |= RESET_ALPHA
 			I.alpha = shine
 			add_overlay(I)
@@ -151,8 +150,8 @@ var/list/natural_walls = list()
 		debris.overlay_detail = "asteroid[rand(0,9)]"
 		debris.updateMineralOverlays(1)
 
-/turf/simulated/wall/natural/get_wall_state()
-	. = "rock"
+/turf/simulated/wall/natural/get_wall_icon()
+	. = material.icon_base_natural || 'icons/turf/walls/natural.dmi'
 
 /turf/simulated/wall/natural/get_default_material()
 	. = /decl/material/solid/stone/sandstone

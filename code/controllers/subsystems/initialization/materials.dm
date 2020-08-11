@@ -1,3 +1,5 @@
+#define DAMAGE_OVERLAY_COUNT 16
+
 SUBSYSTEM_DEF(materials)
 	name = "Materials"
 	init_order = SS_INIT_MATERIALS
@@ -22,6 +24,9 @@ SUBSYSTEM_DEF(materials)
 	var/list/processing_holders =              list()
 	var/list/pending_reagent_change =          list()
 	var/list/cocktails_by_primary_ingredient = list()
+
+	// Overlay caches
+	var/list/wall_damage_overlays
 
 /datum/controller/subsystem/materials/Initialize()
 
@@ -58,10 +63,15 @@ SUBSYSTEM_DEF(materials)
 	// Various other material functions.
 	build_material_lists()       // Build core material lists.
 	build_fusion_reaction_list() // Build fusion reaction tree.
-	build_gas_lists()             // Cache our gas data.
-	. = ..()
 
-/datum/controller/subsystem/materials/proc/build_gas_lists()
+	var/alpha_inc = 256 / DAMAGE_OVERLAY_COUNT
+	for(var/i = 1; i <= DAMAGE_OVERLAY_COUNT; i++)
+		var/image/img = image(icon = 'icons/turf/walls.dmi', icon_state = "overlay_damage")
+		img.blend_mode = BLEND_MULTIPLY
+		img.alpha = (i * alpha_inc) - 1
+		LAZYADD(wall_damage_overlays, img)
+
+	. = ..()
 
 /datum/controller/subsystem/materials/proc/build_material_lists()
 
