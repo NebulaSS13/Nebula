@@ -17,7 +17,7 @@
 	//when the shuttle leaves this landmark, it will leave behind the base area
 	//also used to determine if the shuttle can arrive here without obstruction
 	var/area/base_area
-	//Will also leave this type of turf behind if set.
+	//Will also leave this type of turf behind if set, if the turfs do not have prev_type set.
 	var/turf/base_turf
 	//Name of the shuttle, null for generic waypoint
 	var/shuttle_restricted

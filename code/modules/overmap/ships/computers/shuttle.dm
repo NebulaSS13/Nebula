@@ -51,7 +51,7 @@
 		if(!landing_eye)
 			to_chat(user, SPAN_WARNING("Could not begin landing procedure!"))
 			return
-		if(user.skill_check(SKILL_PILOT, SKILL_PROF))
+		if(user.skill_check(SKILL_PILOT, SKILL_EXPERT))
 			if(landing_eye.current_looker && landing_eye.current_looker != user)
 				to_chat(user, SPAN_WARNING("Someone is already performing a landing maneuver!"))
 				return TOPIC_HANDLED
@@ -61,7 +61,6 @@
 		to_chat(usr, SPAN_WARNING("The manual controls look hopelessly complex to you!"))
 
 /obj/machinery/computer/shuttle_control/explore/proc/start_landing(var/mob/user, var/datum/shuttle/autodock/overmap/shuttle)
-
 	var/obj/effect/overmap/visitable/current_sector = map_sectors["[z]"]
 	var/obj/effect/overmap/visitable/target_sector
 	if(current_sector && istype(current_sector))
@@ -93,27 +92,31 @@
 	return
 
 /obj/machinery/computer/shuttle_control/explore/proc/finish_landing(var/mob/user)
-	var/datum/extension/eye/landing_eye = get_extension(src, /datum/extension/eye/)
+	var/datum/extension/eye/eye_extension = get_extension(src, /datum/extension/eye/)
 
-	if(!landing_eye)
+	if(!eye_extension)
 		return
 
-	var/turf/lz_turf = landing_eye.get_eye_turf()
+	var/mob/observer/eye/landing/landing_eye = eye_extension.extension_eye
+	var/turf/lz_turf = eye_extension.get_eye_turf()
 
 	var/obj/effect/overmap/visitable/sector = map_sectors["[lz_turf.z]"]
 	if(!sector.free_landing)	// Additional safety check to ensure the sector permits landing.
 		to_chat(user, SPAN_WARNING("Invalid landing zone!"))
-		landing_eye.unlook()
 		return
 	var/datum/shuttle/autodock/overmap/shuttle = SSshuttle.shuttles[shuttle_tag]
-	var/obj/effect/shuttle_landmark/temporary/lz = new(lz_turf)
-	if(lz.is_valid(shuttle))	// Preliminary check that the shuttle fits.
-		shuttle.set_destination(lz)
-	else
-		qdel(lz)
-		to_chat(user, SPAN_WARNING("Invalid landing zone!"))
-	landing_eye.unlook()
 
+	if(landing_eye.check_landing()) // Make sure the landmark is in a valid location.
+		var/obj/effect/shuttle_landmark/temporary/lz = new(lz_turf)
+		if(lz.is_valid(shuttle))	// Make sure the shuttle fits.
+			to_chat(user, SPAN_NOTICE("Landing zone set!"))
+			shuttle.set_destination(lz)
+			eye_extension.unlook()
+			return
+		else
+			qdel(lz)
+	to_chat(user, SPAN_WARNING("Invalid landing zone!"))
+	
 /obj/machinery/computer/shuttle_control/proc/end_landing()
 	var/datum/extension/eye/landing_eye = get_extension(src, /datum/extension/eye/)
 	if(landing_eye)
