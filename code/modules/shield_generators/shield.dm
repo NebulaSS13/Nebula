@@ -118,9 +118,9 @@
 // Fails shield segments in specific range. Range of 1 affects the shielded turf only.
 /obj/effect/shield/proc/fail_adjacent_segments(var/range, var/hitby = null)
 	if(hitby)
-		visible_message("<span class='danger'>\The [src] flashes a bit as \the [hitby] collides with it, eventually fading out in a rain of sparks!</span>")
+		visible_message(SPAN_DANGER("\The [src] flashes a bit as \the [hitby] collides with it, eventually fading out in a rain of sparks!"))
 	else
-		visible_message("<span class='danger'>\The [src] flashes a bit as it eventually fades out in a rain of sparks!</span>")
+		visible_message(SPAN_DANGER("\The [src] flashes a bit as it eventually fades out in a rain of sparks!"))
 	fail(range * 2)
 
 	for(var/obj/effect/shield/S in range(range, src))

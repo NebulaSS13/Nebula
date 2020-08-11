@@ -56,18 +56,18 @@
 			shatter()
 
 /obj/item/ashtray/throw_impact(atom/hit_atom)
-	if (health > 0)
+	..()
+	if(health > 0)
 		health = max(0,health - 3)
-		if (contents.len)
-			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
-			for (var/obj/O in contents)
+		if(contents.len)
+			visible_message(SPAN_DANGER("\The [src] slams into [hit_atom], spilling its contents!"))
+			for(var/obj/O in contents)
 				O.dropInto(loc)
 			remove_extension(src, /datum/extension/scent)
-		if (health < 1)
+		if(health < 1)
 			shatter()
-			return
-		update_icon()
-	return ..()
+		else
+			update_icon()
 
 /obj/item/ashtray/plastic
 	material = /decl/material/solid/plastic

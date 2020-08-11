@@ -28,10 +28,10 @@
 	return def_zone //Careful with effects, mechs shouldn't be stunned
 	
 /mob/living/exosuit/hitby(atom/movable/AM, var/datum/thrownthing/TT)
+	..()
 	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 		var/mob/living/pilot = pick(pilots)
 		return pilot.hitby(AM, TT)
-	. = ..()
 
 /mob/living/exosuit/bullet_act(obj/item/projectile/P, def_zone, used_weapon)
 	switch(def_zone)

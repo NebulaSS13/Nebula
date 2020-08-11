@@ -16,6 +16,11 @@
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
 
+/obj/hitby(atom/movable/AM, var/datum/thrownthing/TT)
+	..()
+	if(!anchored)
+		step(src, AM.last_move)
+
 /obj/proc/create_matter()
 	if(length(matter))
 		for(var/mat in matter)

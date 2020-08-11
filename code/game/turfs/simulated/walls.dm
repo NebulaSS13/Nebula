@@ -129,13 +129,13 @@ var/list/wall_noblend_objects = list(
 	return
 
 /turf/simulated/wall/hitby(AM, var/datum/thrownthing/TT)
+	..()
 	if(!ismob(AM))
 		var/obj/O = AM
 		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src, hitsound, tforce >= 15? 60 : 25, TRUE)
 		if (tforce >= 15)
 			take_damage(tforce)
-	..()
 
 /turf/simulated/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)

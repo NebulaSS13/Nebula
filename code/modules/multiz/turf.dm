@@ -43,9 +43,9 @@
 
 // Called when thrown object lands on this turf.
 /turf/simulated/open/hitby(var/atom/movable/AM)
-	. = ..()
-	AM.fall()
-
+	..()
+	if(!QDELETED(AM))
+		AM.fall()
 
 // override to make sure nothing is hidden
 /turf/simulated/open/levelupdate()

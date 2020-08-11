@@ -275,12 +275,12 @@
 	qdel(src)
 
 /obj/item/chems/food/snacks/egg/throw_impact(atom/hit_atom)
+	..()
 	if(QDELETED(src))
 		return // Could potentially happen with unscupulous atoms on hitby() throwing again, etc.
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
 	reagents.splash(hit_atom, reagents.total_volume)
 	visible_message("<span class='warning'>\The [src] has been squashed!</span>","<span class='warning'>You hear a smack.</span>")
-	..()
 	qdel(src)
 
 /obj/item/chems/food/snacks/egg/attackby(obj/item/W, mob/user)

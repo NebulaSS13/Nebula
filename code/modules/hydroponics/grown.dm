@@ -143,8 +143,9 @@
 			return
 
 /obj/item/chems/food/snacks/grown/throw_impact(atom/hit_atom)
-	if(seed) seed.thrown_at(src,hit_atom)
 	..()
+	if(seed) 
+		seed.thrown_at(src,hit_atom)
 
 /obj/item/chems/food/snacks/grown/attackby(var/obj/item/W, var/mob/user)
 

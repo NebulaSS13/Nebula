@@ -74,16 +74,13 @@
 	return
 
 /obj/item/toy/water_balloon/throw_impact(atom/hit_atom)
+	..()
 	if(reagents && reagents.total_volume >= 1)
-		src.visible_message("<span class='warning'>\The [src] bursts!</span>","You hear a pop and a splash.")
-		src.reagents.touch_turf(get_turf(hit_atom))
-		for(var/atom/A in get_turf(hit_atom))
-			src.reagents.touch(A)
-		src.icon_state = "burst"
-		spawn(5)
-			if(src)
-				qdel(src)
-	return
+		visible_message(SPAN_WARNING("\The [src] bursts!"),"You hear a pop and a splash.")
+		reagents.trans_to_turf(get_turf(hit_atom), reagents.total_volume)
+		if(!QDELETED(src))
+			icon_state = "burst"
+			qdel(src)
 
 /obj/item/toy/water_balloon/on_update_icon()
 	if(src.reagents.total_volume >= 1)
@@ -292,15 +289,15 @@
 	icon_state = "snappop"
 	w_class = ITEM_SIZE_TINY
 
-	throw_impact(atom/hit_atom)
-		..()
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(3, 1, src)
-		s.start()
-		new /obj/effect/decal/cleanable/ash(src.loc)
-		src.visible_message("<span class='warning'>The [src.name] explodes!</span>","<span class='warning'>You hear a snap!</span>")
-		playsound(src, 'sound/effects/snap.ogg', 50, 1)
-		qdel(src)
+/obj/item/toy/snappop/throw_impact(atom/hit_atom)
+	..()
+	var/datum/effect/effect/system/spark_spread/s = new
+	s.set_up(3, 1, src)
+	s.start()
+	new /obj/effect/decal/cleanable/ash(src.loc)
+	visible_message(SPAN_WARNING("The [src.name] explodes!"),SPAN_WARNING("You hear a snap!"))
+	playsound(src, 'sound/effects/snap.ogg', 50, 1)
+	qdel(src)
 
 /obj/item/toy/snappop/Crossed(H)
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off

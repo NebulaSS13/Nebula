@@ -4,7 +4,7 @@
 		shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/hitby()
-	. = ..()
+	..()
 	shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/bullet_act(var/obj/item/projectile/P, var/def_zone)
