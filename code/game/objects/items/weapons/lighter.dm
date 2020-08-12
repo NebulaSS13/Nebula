@@ -38,10 +38,11 @@
 		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src].</span>")
 	else
 		to_chat(user, "<span class='warning'>You burn yourself while lighting the lighter.</span>")
-		if (user.l_hand == src)
-			user.apply_damage(2,BURN,BP_L_HAND)
-		else
-			user.apply_damage(2,BURN,BP_R_HAND)
+		for(var/bp in user.held_item_slots)
+			var/datum/inventory_slot/inv_slot = user.held_item_slots[bp]
+			if(inv_slot.holding == src)
+				user.apply_damage(2, BURN, bp)
+				break
 		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], burning their finger in the process.</span>")
 	playsound(src.loc, "light_bic", 100, 1, -4)
 

@@ -12,7 +12,7 @@
 /obj/item/organ/external/arm/unbreakable
 	dislocated = -1
 	arterial_bleed_severity = 0
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 
 /obj/item/organ/external/arm/right/unbreakable
 	dislocated = -1
@@ -42,7 +42,7 @@
 /obj/item/organ/external/hand/unbreakable
 	dislocated = -1
 	arterial_bleed_severity = 0
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 
 /obj/item/organ/external/hand/right/unbreakable
 	dislocated = -1

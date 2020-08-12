@@ -2710,7 +2710,7 @@
 		return
 
 	if( boxes.len > 0 )
-		if( user.get_inactive_hand() != src )
+		if(!user.is_holding_offhand(src))
 			..()
 			return
 

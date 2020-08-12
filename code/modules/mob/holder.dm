@@ -9,9 +9,9 @@ var/list/holder_mob_icon_cache = list()
 
 	origin_tech = null
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_holder.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_holder.dmi',
-		)
+		BP_L_HAND = 'icons/mob/onmob/items/lefthand_holder.dmi',
+		BP_R_HAND = 'icons/mob/onmob/items/righthand_holder.dmi'
+	)
 	pixel_y = 8
 
 	var/last_holder
@@ -196,7 +196,7 @@ var/list/holder_mob_icon_cache = list()
 	icon = 'icons/mob/holder_complex.dmi'
 	var/mob_blend_mode = ICON_ADD
 	slot_flags = SLOT_BACK
-	var/list/generate_for_slots = list(slot_l_hand_str, slot_r_hand_str, slot_back_str)
+	var/list/generate_for_slots = list(BP_L_HAND, BP_R_HAND, slot_back_str)
 
 /obj/item/holder/human/sync(var/mob/living/M)
 	// Generate appropriate on-mob icons.

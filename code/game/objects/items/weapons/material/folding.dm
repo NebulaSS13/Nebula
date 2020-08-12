@@ -49,13 +49,10 @@
 		icon_state = "[get_world_inventory_state()]_open"
 	if(ismob(loc))
 		var/mob/M = loc
-		if(M.hand)
-			M.update_inv_l_hand()
-		else
-			M.update_inv_r_hand()
+		M.update_inv_hands()
 	..()
 
-/obj/item/knife/folding/experimental_mob_overlay(mob/user_mob, slot)
+/obj/item/knife/folding/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	if(open)
 		return ..()
 	

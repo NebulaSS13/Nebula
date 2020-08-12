@@ -354,10 +354,7 @@
 		icon_state = "glowstick"
 	var/mob/M = loc
 	if(istype(M))
-		if(M.l_hand == src)
-			M.update_inv_l_hand()
-		if(M.r_hand == src)
-			M.update_inv_r_hand()
+		M.update_inv_hands()
 
 /obj/item/flashlight/flare/glowstick/activate(var/mob/user)
 	if(istype(user))

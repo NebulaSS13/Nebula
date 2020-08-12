@@ -8,7 +8,7 @@
 
 // Yes, you can wear a nymph on your head instead of a radiation mask.
 /obj/item/holder/diona/equipped(var/mob/living/user, var/slot)
-	if(slot == slot_l_hand_str || slot == slot_r_hand_str)
+	if(slot in user.held_item_slots)
 		body_parts_covered = ARMS
 	else if(slot == slot_head_str)
 		body_parts_covered = HEAD

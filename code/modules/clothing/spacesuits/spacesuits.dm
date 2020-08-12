@@ -91,7 +91,7 @@
 	to_chat(usr, "You toggle [src]'s visor tint.")
 	update_tint()
 
-/obj/item/clothing/head/helmet/space/experimental_mob_overlay(var/mob/user_mob, var/slot)
+/obj/item/clothing/head/helmet/space/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
 	if(tint && check_state_in_icon("[ret.icon_state]_dark", ret.icon))
 		ret.icon_state = "[ret.icon_state]_dark"

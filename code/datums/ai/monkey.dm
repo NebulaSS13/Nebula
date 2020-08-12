@@ -22,7 +22,8 @@
 			else
 				body.throw_item(T)
 		else
-			body.unequip_item()
+			body.unEquip(held)
+
 	if(!held && !body.restrained() && prob(5))
 		var/list/touchables = list()
 		for(var/obj/O in range(1,get_turf(body)))

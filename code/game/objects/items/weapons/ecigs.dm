@@ -144,8 +144,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M.update_inv_wear_mask(0)
-		M.update_inv_l_hand(0)
-		M.update_inv_r_hand(1)
+		M.update_inv_hands()
 
 
 /obj/item/clothing/mask/smokable/ecig/attackby(var/obj/item/I, var/mob/user)
@@ -200,13 +199,12 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 			to_chat(user, "<span class='warning'>\The [src] does not have a battery installed.</span>")
 
 /obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user)//eject cartridge
-	if(user.get_inactive_hand() == src)//if being hold
-		if (ec_cartridge)
-			active=0
-			user.put_in_hands(ec_cartridge)
-			to_chat(user, "<span class='notice'>You remove \the [ec_cartridge] from \the [src].</span> ")
-			ec_cartridge = null
-			update_icon()
+	if(user.is_holding_offhand(src) && ec_cartridge)
+		active=FALSE
+		user.put_in_hands(ec_cartridge)
+		to_chat(user, SPAN_NOTICE("You remove \the [ec_cartridge] from \the [src]."))
+		ec_cartridge = null
+		update_icon()
 	else
 		..()
 

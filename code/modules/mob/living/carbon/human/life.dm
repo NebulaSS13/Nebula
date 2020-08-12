@@ -203,7 +203,7 @@
 	..()
 	if(stat != DEAD)
 		if ((disabilities & COUGHING) && prob(5) && paralysis <= 1)
-			unequip_item()
+			drop_held_items()
 			spawn(0)
 				emote("cough")
 

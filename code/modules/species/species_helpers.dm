@@ -16,7 +16,7 @@ var/list/stored_shock_by_ref = list()
 	if(!spritesheet && equip_adjust.len && equip_adjust[slot] && LAZYLEN(equip_adjust[slot]))
 
 		// Check the cache for previously made icons.
-		var/image_key = "[mob_icon]-[mob_state]-[color]"
+		var/image_key = "[mob_icon]-[mob_state]-[color]-[slot]"
 		if(!equip_overlays[image_key])
 
 			var/icon/final_I = new(icon_template)

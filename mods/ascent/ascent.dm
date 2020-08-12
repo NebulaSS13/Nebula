@@ -20,6 +20,10 @@
 #define IS_MANTID    "mantid"
 #define IS_SERPENTID "serpentid"
 
+#define BP_L_HAND_UPPER "l_u_hand"
+#define BP_R_HAND_UPPER "r_u_hand"
+#define BP_M_HAND       "midlimb"
+
 #define MANTIDIFY(_thing, _name, _desc) \
 ##_thing/ascent/name = _name; \
 ##_thing/ascent/desc = "Some kind of strange alien " + _desc + " technology."; \
@@ -29,3 +33,12 @@
 
 /decl/modpack/ascent
 	name = "The Ascent"
+
+/decl/modpack/ascent/pre_initialize()
+	. = ..()
+	global.all_limb_tags |= BP_L_HAND_UPPER
+	global.all_limb_tags |= BP_R_HAND_UPPER
+	global.all_limb_tags |= BP_M_HAND
+	global.all_limb_tags_by_depth.Insert(global.all_limb_tags_by_depth.Find(BP_L_HAND)+1, BP_L_HAND_UPPER)
+	global.all_limb_tags_by_depth.Insert(global.all_limb_tags_by_depth.Find(BP_R_HAND)+1, BP_R_HAND_UPPER)
+	global.all_limb_tags_by_depth.Insert(global.all_limb_tags_by_depth.Find(BP_CHEST)+1,  BP_M_HAND)

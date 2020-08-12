@@ -17,7 +17,7 @@
 		var/mob/M = src.loc
 		M.update_inv_wear_suit()
 
-/obj/item/clothing/suit/get_mob_overlay(mob/user_mob, slot)
+/obj/item/clothing/suit/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(slot in item_state_slots)
 		ret.icon_state = item_state_slots[slot]

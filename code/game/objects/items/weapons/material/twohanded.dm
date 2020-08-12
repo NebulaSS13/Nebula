@@ -63,8 +63,8 @@
 /obj/item/twohanded/on_update_icon()
 	..()
 	icon_state = "[base_icon][wielded]"
-	LAZYSET(item_state_slots, slot_l_hand_str, icon_state)
-	LAZYSET(item_state_slots, slot_r_hand_str, icon_state)
+	LAZYSET(item_state_slots, BP_L_HAND, icon_state)
+	LAZYSET(item_state_slots, BP_R_HAND, icon_state)
 	LAZYSET(item_state_slots, slot_back_str, base_icon)
 
 /*
@@ -136,7 +136,7 @@
 	overlays += get_shaft_overlay("shaft")
 	overlays += get_mutable_overlay(icon, "cable", cable_color)
 
-/obj/item/twohanded/spear/experimental_mob_overlay(mob/user_mob, slot)
+/obj/item/twohanded/spear/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(wielded && check_state_in_icon("[ret.icon_state]_wielded", icon))
 		ret.icon_state = "[ret.icon_state]_wielded"

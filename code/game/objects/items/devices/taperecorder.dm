@@ -70,10 +70,9 @@
 
 
 /obj/item/taperecorder/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
-		if(mytape)
-			eject()
-			return
+	if(user.is_holding_offhand(src) && mytape)
+		eject()
+		return
 	..()
 
 

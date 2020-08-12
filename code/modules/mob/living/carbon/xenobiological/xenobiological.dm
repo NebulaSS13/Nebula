@@ -192,7 +192,8 @@
 			updatehealth()
 
 /mob/living/carbon/slime/u_equip(obj/item/W)
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /mob/living/carbon/slime/attack_ui(slot)
 	return

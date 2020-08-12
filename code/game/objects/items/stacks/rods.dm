@@ -54,7 +54,7 @@
 	else
 		icon_state = base_state
 
-/obj/item/stack/material/rods/attackby(obj/item/W, mob/user)
+/obj/item/stack/material/rods/attackby(obj/item/W, mob/living/user)
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 
@@ -65,14 +65,10 @@
 		if(WT.remove_fuel(0,user))
 			var/obj/item/stack/material/steel/new_item = new(usr.loc)
 			new_item.add_to_stacks(usr)
-			for (var/mob/M in viewers(src))
-				M.show_message("<span class='notice'>[src] is shaped into metal by [user.name] with the weldingtool.</span>", 3, "<span class='notice'>You hear welding.</span>", 2)
-			var/obj/item/stack/material/rods/R = src
-			src = null
-			var/replace = (user.get_inactive_hand()==R)
-			R.use(2)
-			if (!R && replace)
+			visible_message(SPAN_NOTICE("\The [src] is shaped into metal by \the [user] with \the [WT]."), 3, SPAN_NOTICE("You hear welding."), 2)
+			if(user.is_holding_offhand(src))
 				user.put_in_hands(new_item)
+			use(2)
 		return
 
 	if (istype(W, /obj/item/tape_roll))

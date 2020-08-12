@@ -242,11 +242,11 @@
 								var/mob/living/carbon/human/H = C
 								breathes = H.species.breath_type
 								poisons = H.species.poison_types
-								nicename = list ("suit", "back", "belt", "right hand", "left hand", "left pocket", "right pocket")
-								tankcheck = list (H.s_store, C.back, H.belt, C.r_hand, C.l_hand, H.l_store, H.r_store)
+								nicename = list ("suit", "back", "belt", "left pocket", "right pocket")
+								tankcheck = list (H.s_store, C.back, H.belt, H.l_store, H.r_store) | H.get_held_items()
 							else
-								nicename = list("right hand", "left hand", "back")
-								tankcheck = list(C.r_hand, C.l_hand, C.back)
+								nicename = list("back")
+								tankcheck = list(C.back) | C.get_held_items()
 
 							// Rigs are a fucking pain since they keep an air tank in nullspace.
 							if(istype(C.back,/obj/item/rig))
@@ -290,14 +290,15 @@
 									best = i
 									bestcontents = contents[i]
 
-
 							//We've determined the best container now we set it as our internals
-
 							if(best)
-								C.set_internals(tankcheck[best], "\the [tankcheck[best]] [from] your [nicename[best]]")
+								if(nicename[best])
+									C.set_internals(tankcheck[best], "\the [tankcheck[best]] [from] your [nicename[best]]")
+								else
+									C.set_internals(tankcheck[best], "\the [tankcheck[best]]")
 
 							if(!C.internal)
-								to_chat(C, "<span class='notice'>You don't have \a [breathes] tank.</span>")
+								to_chat(C, SPAN_WARNING("You don't have \a [breathes] tank."))
 		if("act_intent")
 			usr.a_intent_change("right")
 
@@ -365,27 +366,21 @@
 		return 1
 	if(usr.incapacitated())
 		return 1
+
+	if(iscarbon(usr))
+		var/mob/living/carbon/C = usr
+		if(name in C.held_item_slots)
+			if(name == C.get_active_held_item_slot())
+				C.attack_empty_hand()
+			else
+				C.select_held_item_slot(name)
+			return TRUE
+
 	switch(name)
-		if("r_hand")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				if(C.hand)
-					C.activate_hand("r")
-				else
-					C.attack_empty_hand(BP_R_HAND)
-		if("l_hand")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				if(!C.hand)
-					C.activate_hand("l")
-				else
-					C.attack_empty_hand(BP_L_HAND)
 		if("swap")
-			usr:swap_hand()
+			usr.swap_hand()
 		if("hand")
-			usr:swap_hand()
-		else
-			if(usr.attack_ui(slot_id))
-				usr.update_inv_l_hand(0)
-				usr.update_inv_r_hand(0)
+			usr.swap_hand()
+		else if(usr.attack_ui(slot_id))
+			usr.update_inv_hands(0)
 	return 1

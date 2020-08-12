@@ -151,38 +151,43 @@
 	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 
 /obj/item/wrapping_paper/attackby(obj/item/W, mob/user)
-	..()
-	if (!( locate(/obj/structure/table, src.loc) ))
-		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")
-	if (W.w_class < ITEM_SIZE_HUGE)
-		if(isWirecutter(user.l_hand) || isWirecutter(user.r_hand))
-			var/a_used = W.get_storage_cost()
-			if (a_used >= ITEM_SIZE_NO_CONTAINER)
-				to_chat(user, "<span class='warning'>You can't wrap that!</span>")//no gift-wrapping lit welders
-				return
-			if (src.amount < a_used)
-				to_chat(user, "<span class='warning'>You need more paper!</span>")
-				return
-			else
-				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/gift)) //No gift wrapping gifts!
-					return
+	. = ..()
+	if (!(locate(/obj/structure/table) in src.loc))
+		to_chat(user, SPAN_WARNING("You must put the paper on a table."))
+		return TRUE
 
-				if(user.unEquip(W))
-					var/obj/item/gift/G = new /obj/item/gift( src.loc, W )
-					G.add_fingerprint(user)
-					W.add_fingerprint(user)
-					src.amount -= a_used
+	if (W.w_class >= ITEM_SIZE_HUGE)
+		to_chat(user, SPAN_WARNING("The object is FAR too large!"))
+		return TRUE
 
-			if (src.amount <= 0)
-				new /obj/item/c_tube( src.loc )
-				qdel(src)
-				return
-		else
-			to_chat(user, "<span class='warning'>You need scissors!</span>")
-	else
-		to_chat(user, "<span class='warning'>The object is FAR too large!</span>")
-	return
+	var/found_scissors = FALSE
+	for(var/obj/item/thing in user.get_held_items())
+		if(isWirecutter(thing))
+			found_scissors = TRUE
+			break
 
+	if(!found_scissors)
+		to_chat(user, SPAN_WARNING("You need cutters!"))
+		return TRUE
+
+	var/a_used = W.get_storage_cost()
+	if (a_used >= ITEM_SIZE_NO_CONTAINER)
+		to_chat(user, SPAN_WARNING("You can't wrap that!"))
+		return TRUE
+
+	if (src.amount < a_used)
+		to_chat(user, SPAN_WARNING("You need more paper!"))
+		return TRUE
+
+	if(!istype(W, /obj/item/smallDelivery) && !istype(W, /obj/item/gift) && user.unEquip(W))
+		var/obj/item/gift/G = new /obj/item/gift( src.loc, W )
+		G.add_fingerprint(user)
+		W.add_fingerprint(user)
+		src.amount -= a_used
+		if(src.amount <= 0)
+			new /obj/item/c_tube( src.loc )
+			qdel(src)
+		return TRUE
 
 /obj/item/wrapping_paper/examine(mob/user, distance)
 	. = ..()

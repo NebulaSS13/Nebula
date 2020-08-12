@@ -185,7 +185,7 @@
 		return
 
 	if(!stop_spin_bottle)
-		if(usr.get_active_hand() == src || usr.get_inactive_hand() == src)
+		if(src in usr.get_held_items())
 			usr.drop_from_inventory(src)
 
 		if(isturf(loc))

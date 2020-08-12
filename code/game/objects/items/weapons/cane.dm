@@ -34,8 +34,7 @@
 		user.put_in_hands(src)
 		concealed_blade = null
 		update_icon()
-		user.update_inv_l_hand()
-		user.update_inv_r_hand()
+		user.update_inv_hands()
 	else
 		..()
 
@@ -44,8 +43,7 @@
 		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into [src]!</span>", "You sheathe \the [W] into [src].")
 		src.concealed_blade = W
 		update_icon()
-		user.update_inv_l_hand()
-		user.update_inv_r_hand()
+		user.update_inv_hands()
 	else
 		..()
 

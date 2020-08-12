@@ -3,8 +3,10 @@
 	shoes = /obj/item/clothing/shoes/sandal
 	l_ear = /obj/item/radio/headset
 	r_pocket = /obj/item/teleportation_scroll
-	l_hand = /obj/item/staff
-	r_hand = /obj/item/spellbook
+	hands = list(
+		/obj/item/staff,
+		/obj/item/spellbook
+	)
 	back = /obj/item/storage/backpack
 	backpack_contents = list(/obj/item/storage/box = 1)
 	hierarchy_type = /decl/hierarchy/outfit/wizard

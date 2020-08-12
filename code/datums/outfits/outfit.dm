@@ -37,9 +37,8 @@ var/list/outfits_decls_by_type_
 	var/l_pocket = null
 	var/r_pocket = null
 	var/suit_store = null
-	var/r_hand = null
-	var/l_hand = null
 	var/holster = null
+	var/list/hands
 	var/list/backpack_contents = list() // In the list(path=count,otherpath=count) format
 
 	var/id_type
@@ -139,10 +138,8 @@ var/list/outfits_decls_by_type_
 		H.equip_to_slot_or_del(new r_pocket(H),slot_r_store_str)
 	if(suit_store)
 		H.equip_to_slot_or_del(new suit_store(H),slot_s_store_str)
-	if(l_hand)
-		H.put_in_l_hand(new l_hand(H))
-	if(r_hand)
-		H.put_in_r_hand(new r_hand(H))
+	for(var/hand in hands)
+		H.put_in_hands(new hand(H))
 
 	if((flags & OUTFIT_HAS_BACKPACK) && !(OUTFIT_ADJUSTMENT_SKIP_BACKPACK & equip_adjustments))
 		var/decl/backpack_outfit/bo

@@ -159,16 +159,13 @@
 		to_chat(usr, "There are no cards in the deck.")
 		return
 
-	var/obj/item/hand/H
-	if(user.l_hand && istype(user.l_hand,/obj/item/hand))
-		H = user.l_hand
-	else if(user.r_hand && istype(user.r_hand,/obj/item/hand))
-		H = user.r_hand
-	else
+	var/obj/item/hand/H = locate() in user.get_held_items()
+	if(!H)
 		H = new(get_turf(src))
 		user.put_in_hands(H)
 
-	if(!H || !user) return
+	if(!H || !user)
+		return
 
 	var/datum/playingcard/P = cards[1]
 	H.cards += P
@@ -255,10 +252,7 @@
 
 		if(!usr.get_active_hand()) //if active hand is empty
 			var/mob/living/carbon/human/H = over
-			var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
-
-			if(H.hand)
-				temp = H.organs_by_name[BP_L_HAND]
+			var/obj/item/organ/external/temp = H.organs_by_name[H.get_active_held_item_slot()]
 			if(temp && !temp.is_usable())
 				to_chat(over, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
 				return

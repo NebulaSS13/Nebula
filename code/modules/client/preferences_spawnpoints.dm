@@ -76,10 +76,7 @@ GLOBAL_VAR(spawntypes)
 			// Store any held or equipped items.
 			var/obj/item/storage/backpack/pack = victim.back
 			if(istype(pack))
-				var/list/stuff_to_store = list()
-				if(victim.l_hand) stuff_to_store += victim.l_hand
-				if(victim.r_hand) stuff_to_store += victim.r_hand
-				for(var/atom/movable/thing in stuff_to_store)
+				for(var/atom/movable/thing in victim.get_held_items())
 					victim.drop_from_inventory(thing)
 					pack.handle_item_insertion(thing)
 

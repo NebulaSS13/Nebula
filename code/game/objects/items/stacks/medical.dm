@@ -273,19 +273,19 @@
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting) //nullchecked by ..()
 		var/limb = affecting.name
 		if(!(affecting.organ_tag in splintable_organs))
-			to_chat(user, SPAN_DANGER("You can't use \the [src] to apply a splint there!"))
+			to_chat(user, SPAN_WARNING("You can't use \the [src] to apply a splint there!"))
 			return
 		if(affecting.splinted)
-			to_chat(user, SPAN_DANGER("[M]'s [limb] is already splinted!"))
+			to_chat(user, SPAN_WARNING("\The [M]'s [limb] is already splinted!"))
 			return
 		if (M != user)
-			user.visible_message(SPAN_DANGER("[user] starts to apply \the [src] to [M]'s [limb]."), SPAN_DANGER("You start to apply \the [src] to [M]'s [limb]."), SPAN_DANGER("You hear something being wrapped."))
+			user.visible_message(SPAN_NOTICE("\The [user] starts to apply \the [src] to [M]'s [limb]."), SPAN_DANGER("You start to apply \the [src] to [M]'s [limb]."), SPAN_DANGER("You hear something being wrapped."))
 		else
-			if(( !user.hand && (affecting.organ_tag in list(BP_R_ARM, BP_R_HAND)) || \
-				user.hand && (affecting.organ_tag in list(BP_L_ARM, BP_L_HAND)) ))
-				to_chat(user, SPAN_DANGER("You can't apply a splint to the arm you're using!"))
+			var/obj/item/organ/external/using = user.get_organ(user.get_active_held_item_slot())
+			if(istype(using) && (affecting == using || (affecting in using.children) || affecting.organ_tag == using.parent_organ))
+				to_chat(user, SPAN_WARNING("You can't apply a splint to the arm you're using!"))
 				return
-			user.visible_message(SPAN_DANGER("[user] starts to apply \the [src] to their [limb]."), SPAN_DANGER("You start to apply \the [src] to your [limb]."), SPAN_DANGER("You hear something being wrapped."))
+			user.visible_message(SPAN_NOTICE("\The [user] starts to apply \the [src] to their [limb]."), SPAN_DANGER("You start to apply \the [src] to your [limb]."), SPAN_DANGER("You hear something being wrapped."))
 		if(user.do_skilled(5 SECONDS, SKILL_MEDICAL, M))
 			if((M == user && prob(75)) || prob(user.skill_fail_chance(SKILL_MEDICAL,50, SKILL_ADEPT)))
 				user.visible_message(SPAN_DANGER("\The [user] fumbles [src]."), SPAN_DANGER("You fumble [src]."), SPAN_DANGER("You hear something being wrapped."))
@@ -296,9 +296,9 @@
 					M.verbs += /mob/living/carbon/human/proc/remove_splints
 					S.forceMove(affecting)
 					if (M != user)
-						user.visible_message(SPAN_DANGER("\The [user] finishes applying [src] to [M]'s [limb]."), SPAN_DANGER("You finish applying \the [src] to [M]'s [limb]."), SPAN_DANGER("You hear something being wrapped."))
+						user.visible_message(SPAN_NOTICE("\The [user] finishes applying [src] to [M]'s [limb]."), SPAN_DANGER("You finish applying \the [src] to [M]'s [limb]."), SPAN_DANGER("You hear something being wrapped."))
 					else
-						user.visible_message(SPAN_DANGER("\The [user] successfully applies [src] to their [limb]."), SPAN_DANGER("You successfully apply \the [src] to your [limb]."), SPAN_DANGER("You hear something being wrapped."))
+						user.visible_message(SPAN_NOTICE("\The [user] successfully applies [src] to their [limb]."), SPAN_DANGER("You successfully apply \the [src] to your [limb]."), SPAN_DANGER("You hear something being wrapped."))
 					return
 				S.dropInto(src.loc) //didn't get applied, so just drop it
 			user.visible_message(SPAN_DANGER("\The [user] fails to apply [src]."), SPAN_DANGER("You fail to apply [src]."), SPAN_DANGER("You hear something being wrapped."))

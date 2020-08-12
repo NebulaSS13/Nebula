@@ -50,7 +50,7 @@
 			//Moving around with fractured ribs won't do you any good
 				if (prob(10) && !stat && can_feel_pain() && chem_effects[CE_PAINKILLER] < 50 && E.is_broken() && E.internal_organs.len)
 					custom_pain("Pain jolts through your broken [E.encased ? E.encased : E.name], staggering you!", 50, affecting = E)
-					unequip_item(loc)
+					drop_held_items()
 					Stun(2)
 
 				//Moving makes open wounds get infected much faster
@@ -112,9 +112,7 @@
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.
 	// Two canes are needed for a lost leg. If you are missing both legs, canes aren't gonna help you.
-	if (l_hand && istype(l_hand, /obj/item/cane))
-		stance_damage -= 2
-	if (r_hand && istype(r_hand, /obj/item/cane))
+	for(var/obj/item/cane/C in get_held_items())
 		stance_damage -= 2
 
 	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
@@ -150,35 +148,13 @@
 		Weaken(3) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
-	if(!l_hand && !r_hand)
-		return
-
-	// You should not be able to pick anything up, but stranger things have happened.
-	if(l_hand)
-		for(var/limb_tag in list(BP_L_HAND, BP_L_ARM))
-			var/obj/item/organ/external/E = get_organ(limb_tag)
-			if(!E)
-				visible_message("<span class='danger'>Lacking a functioning left hand, \the [src] drops \the [l_hand].</span>")
-				drop_from_inventory(l_hand)
-				break
-
-	if(r_hand)
-		for(var/limb_tag in list(BP_R_HAND, BP_R_ARM))
-			var/obj/item/organ/external/E = get_organ(limb_tag)
-			if(!E)
-				visible_message("<span class='danger'>Lacking a functioning right hand, \the [src] drops \the [r_hand].</span>")
-				drop_from_inventory(r_hand)
-				break
-
-	// Check again...
-	if(!l_hand && !r_hand)
-		return
-
-	for (var/obj/item/organ/external/E in organs)
-		if(!E || !(E.limb_flags & ORGAN_FLAG_CAN_GRASP))
-			continue
-		if(((E.is_broken() || E.is_dislocated()) && !E.splinted) || E.is_malfunctioning())
-			grasp_damage_disarm(E)
+	for(var/bp in held_item_slots)
+		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+		var/holding = inv_slot?.holding
+		if(holding)
+			var/obj/item/organ/external/E = organs_by_name[bp]
+			if((!E || !E.is_usable() || E.is_parent_dislocated()) && unEquip(holding))
+				grasp_damage_disarm(inv_slot)
 
 /mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
 
@@ -199,41 +175,41 @@
 	Weaken(4)
 
 /mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
-	var/disarm_slot
-	switch(affected.body_part)
-		if(HAND_LEFT, ARM_LEFT)
-			disarm_slot = slot_l_hand_str
-		if(HAND_RIGHT, ARM_RIGHT)
-			disarm_slot = slot_r_hand_str
 
-	if(!disarm_slot)
+	var/list/drop_held_item_slots
+	if(istype(affected))
+		for(var/bp in (list(affected.organ_tag) | affected.children))
+			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, bp)
+			if(inv_slot?.holding)
+				LAZYDISTINCTADD(drop_held_item_slots, inv_slot)
+	else if(istype(affected, /datum/inventory_slot))
+		drop_held_item_slots = list(affected)
+
+	if(!LAZYLEN(drop_held_item_slots))
 		return
 
-	var/obj/item/thing = get_equipped_item(disarm_slot)
+	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
+		if(!unEquip(inv_slot.holding))
+			continue
+		var/obj/item/organ/external/E = organs_by_name[inv_slot.slot_id]
+		if(!E)
+			continue
+		if(E.is_robotic())
+			visible_message("<B>\The [src]</B> drops what they were holding, \his [affected.name] malfunctioning!")
+			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			spark_system.set_up(5, 0, src)
+			spark_system.attach(src)
+			spark_system.start()
+			spawn(10)
+				qdel(spark_system)
+			continue
 
-	if(!thing)
-		return
-
-	if(!unEquip(thing))
-		return
-
-	if(affected.is_robotic())
-		visible_message("<B>\The [src]</B> drops what they were holding, \his [affected.name] malfunctioning!")
-
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, src)
-		spark_system.attach(src)
-		spark_system.start()
-		spawn(10)
-			qdel(spark_system)
-
-	else
-		var/grasp_name = affected.name
-		if((affected.body_part in list(ARM_LEFT, ARM_RIGHT)) && affected.children.len)
-			var/obj/item/organ/external/hand = pick(affected.children)
+		var/grasp_name = E.name
+		if((E.body_part in list(ARM_LEFT, ARM_RIGHT)) && length(E.children))
+			var/obj/item/organ/external/hand = pick(E.children)
 			grasp_name = hand.name
 
-		if(affected.can_feel_pain())
+		if(E.can_feel_pain())
 			var/emote_scream = pick("screams in pain", "lets out a sharp cry", "cries out")
 			var/emote_scream_alt = pick("scream in pain", "let out a sharp cry", "cry out")
 			visible_message(
@@ -241,7 +217,7 @@
 				null,
 				"You hear someone [emote_scream_alt]!"
 			)
-			custom_pain("The sharp pain in your [affected.name] forces you to drop [thing]!", 30)
+			custom_pain("The sharp pain in your [E.name] forces you to drop what you were holding in your [grasp_name]!", 30)
 		else
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 

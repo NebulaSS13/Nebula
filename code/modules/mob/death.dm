@@ -65,8 +65,7 @@
 	set_see_in_dark(8)
 	set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 
-	drop_r_hand()
-	drop_l_hand()
+	drop_held_items()
 
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	if(hattable?.hat)

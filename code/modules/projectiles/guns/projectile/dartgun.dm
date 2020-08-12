@@ -38,9 +38,9 @@
 	else
 		icon_state = get_world_inventory_state()
 
-/obj/item/gun/projectile/dartgun/experimental_mob_overlay(mob/user_mob, slot)
+/obj/item/gun/projectile/dartgun/experimental_mob_overlay(mob/living/user_mob, slot, bodypart)
 	var/image/I = ..()
-	if(slot == slot_r_hand_str || slot == slot_l_hand_str)
+	if(slot in user_mob.held_item_slots)
 		if(ammo_magazine)
 			I.icon_state += "-[Clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
 	return I

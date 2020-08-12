@@ -65,15 +65,13 @@
 
 
 /obj/structure/table/MouseDrop_T(obj/O, mob/user)
-
 	if ((!( istype(O, /obj/item) ) || user.get_active_hand() != O))
 		return ..()
 	if(isrobot(user))
 		return
-	user.unequip_item()
+	user.unEquip(O)
 	if (O.loc != src.loc)
 		step(O, get_dir(O, src))
-	return
 
 /obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
 

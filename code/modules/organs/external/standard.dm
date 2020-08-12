@@ -71,7 +71,7 @@
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
 	arterial_bleed_severity = 0.75
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -137,6 +137,7 @@
 	organ_tag = BP_L_HAND
 	name = "left hand"
 	icon_name = "l_hand"
+	icon_position = LEFT
 	max_damage = 30
 	min_broken_damage = 15
 	w_class = ITEM_SIZE_SMALL
@@ -146,13 +147,35 @@
 	amputation_point = "left wrist"
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
+	var/gripper_ui_label = "L"
+	var/gripper_ui_loc = ui_lhand
+	var/overlay_slot_id = BP_L_HAND
+
+/obj/item/organ/external/hand/Initialize()
+	. = ..()
+	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
+
+/obj/item/organ/external/hand/replaced(mob/living/carbon/human/target)
+	. = ..()
+	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
+
+/obj/item/organ/external/hand/removed()
+	var/held = owner?.get_equipped_item(organ_tag)
+	if(held)
+		owner.drop_from_inventory(held)
+	owner?.remove_held_item_slot(organ_tag)
+	. = ..()
 
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND
 	name = "right hand"
 	icon_name = "r_hand"
+	icon_position = RIGHT
 	body_part = HAND_RIGHT
 	parent_organ = BP_R_ARM
 	joint = "right wrist"
 	amputation_point = "right wrist"
+	gripper_ui_loc = ui_rhand
+	overlay_slot_id = BP_R_HAND
+	gripper_ui_label = "R"

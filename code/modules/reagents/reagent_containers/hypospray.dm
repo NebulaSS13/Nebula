@@ -104,7 +104,7 @@
 		to_chat(user, "You remove the vial from the [src].")
 
 /obj/item/chems/hypospray/vial/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
+	if(user.is_holding_offhand(src))
 		if(!loaded_vial)
 			to_chat(user, "<span class='notice'>There is no vial loaded in the [src].</span>")
 			return

@@ -28,7 +28,7 @@
 // Sort of a placeholder for proper tailoring.
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	if(made_of_cloth && (I.edge || I.sharp) && user.a_intent == I_HURT)
-		if(!isturf(loc) && user.l_hand != src && user.r_hand != src)
+		if(!isturf(loc) && !(src in user.get_held_items()))
 			var/it = gender == PLURAL ? "them" : "it"
 			to_chat(user, SPAN_WARNING("You must either be holding \the [src], or [it] must be on the ground, before you can shred [it]."))
 			return
@@ -58,10 +58,10 @@
 /obj/item/clothing/proc/needs_vision_update()
 	return flash_protection || tint
 
-/obj/item/clothing/get_mob_overlay(mob/user_mob, slot)
+/obj/item/clothing/get_mob_overlay(mob/living/user_mob, slot, bodypart)
 	var/image/ret = ..()
 
-	if(slot == slot_l_hand_str || slot == slot_r_hand_str)
+	if(slot in user_mob?.held_item_slots)
 		return ret
 
 	if(ishuman(user_mob))
@@ -121,33 +121,13 @@
 	if(markings_color && markings_icon)
 		update_icon()
 
-/obj/item/clothing/mob_can_equip(M, slot, disable_warning = 0)
-
-	//if we can't equip the item anyway, don't bother with bodytype_restricted (cuts down on spam)
-	if (!..())
-		return 0
-
-	if(bodytype_restricted && istype(M,/mob/living/carbon/human))
-		var/exclusive = null
-		var/wearable = null
+/obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = 0)
+	. = ..()
+	if(. && length(bodytype_restricted) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.held_item_slots))
 		var/mob/living/carbon/human/H = M
-
-		if("exclude" in bodytype_restricted)
-			exclusive = 1
-
-		if(H.species)
-			if(exclusive)
-				if(!(H.species.get_bodytype(H) in bodytype_restricted))
-					wearable = 1
-			else
-				if(H.species.get_bodytype(H) in bodytype_restricted)
-					wearable = 1
-
-			if(!wearable && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)))
-				if(!disable_warning)
-					to_chat(H, SPAN_WARNING("\The [src] does not fit you."))
-				return 0
-	return 1
+		. = ("exclude" in bodytype_restricted) ? !(H.species.get_bodytype(H) in bodytype_restricted) : (H.species.get_bodytype(H) in bodytype_restricted)
+		if(!. && !disable_warning)
+			to_chat(H, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
 
 /obj/item/clothing/equipped(var/mob/user)
 	if(needs_vision_update())

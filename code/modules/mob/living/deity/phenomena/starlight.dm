@@ -70,7 +70,7 @@
 			extension.expected_helmet = helm.type //We only do by type because A. its easier to manage and B the chances of it being non-unique in a normal game is very small
 		if(form["weapon"])
 			var/w_type = form["weapon"]
-			L.equip_to_slot_or_store_or_drop(new w_type(T), slot_r_hand_str)
+			L.put_in_hands_or_store_or_drop(new w_type(T))
 		if(form["spells"])
 			for(var/s in form["spells"])
 				var/spell/S = new s

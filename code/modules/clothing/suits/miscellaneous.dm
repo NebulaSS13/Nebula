@@ -129,8 +129,7 @@
 		if(iscarbon(user))
 			var/mob/living/carbon/C = user
 			C.drop_from_inventory(C.handcuffed)
-		user.drop_l_hand()
-		user.drop_r_hand()
+		user.drop_held_items()
 
 /obj/item/clothing/suit/ianshirt
 	name = "worn shirt"

@@ -156,4 +156,4 @@
 		else
 			qdel(eyegore)
 	var/obj/item/cell/super/C = new()
-	H.put_in_any_hand_if_possible(C)
+	H.put_in_hands(C)

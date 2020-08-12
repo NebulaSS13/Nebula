@@ -66,8 +66,8 @@
 /datum/extension/holster/proc/unholster(mob/user, var/avoid_intent = FALSE)
 	if(!holstered)
 		return 0
-	if(user.get_active_hand() && user.get_inactive_hand())
-		to_chat(user, "<span class='warning'>You need an empty hand to draw \the [holstered]!</span>")
+	if(!user.get_empty_hand_slot())
+		to_chat(user, SPAN_WARNING("You need an empty hand to draw \the [holstered]!"))
 		return 1
 	var/using_intent_preference = user.client ? user.client.get_preference_value(/datum/client_preference/holster_on_intent) == GLOB.PREF_YES : FALSE
 	if(avoid_intent || (using_intent_preference && user.a_intent != I_HELP))

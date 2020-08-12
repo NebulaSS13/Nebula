@@ -24,7 +24,7 @@
 	bodytype_restricted = null
 	on_mob_use_spritesheets = TRUE
 
-/obj/item/clothing/head/helmet/space/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)
+/obj/item/clothing/head/helmet/space/rig/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/I = ..()
 	if(user_mob?.check_rig_status())
 		I.icon_state += "_sealed"
@@ -41,7 +41,7 @@
 	gender = PLURAL
 	on_mob_use_spritesheets = TRUE
 
-/obj/item/clothing/gloves/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)
+/obj/item/clothing/gloves/rig/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/I = ..()
 	if(user_mob?.check_rig_status())
 		I.icon_state += "_sealed"
@@ -58,7 +58,7 @@
 	gender = PLURAL
 	on_mob_use_spritesheets = TRUE
 
-/obj/item/clothing/shoes/magboots/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)
+/obj/item/clothing/shoes/magboots/rig/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/I = ..()
 	if(user_mob?.check_rig_status())
 		I.icon_state += "_sealed"
@@ -81,7 +81,7 @@
 	can_breach = 1
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 
-/obj/item/clothing/suit/space/rig/experimental_mob_overlay(var/mob/user_mob, var/slot)
+/obj/item/clothing/suit/space/rig/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/I = ..()
 	if(user_mob?.check_rig_status())
 		I.icon_state += "_sealed"

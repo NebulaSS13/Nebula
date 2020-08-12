@@ -15,28 +15,28 @@
 /spell/hand/burning_grip/valid_target(var/mob/living/L, var/mob/user)
 	if(!..())
 		return 0
-	if(!L.l_hand && !L.r_hand)
+	if(length(L.get_held_items()))
 		return 0
 	return 1
 
 /spell/hand/burning_grip/cast_hand(var/mob/living/carbon/human/H, var/mob/user)
 	var/list/targets = list()
-	if(H.l_hand)
-		targets += BP_L_HAND
-	if(H.r_hand)
-		targets += BP_R_HAND
+	for(var/bp in H.held_item_slots)
+		targets |= bp
 
 	var/obj/O = new /obj/effect/temporary(get_turf(H),3, 'icons/effects/effects.dmi', "fire_goon")
 	O.alpha = 150
 
 	for(var/organ in targets)
 		var/obj/item/organ/external/E = H.get_organ(organ)
+		if(!E)
+			continue
 		E.take_external_damage(burn=10, used_weapon = "hot iron")
 		if(E.can_feel_pain())
-			H.grasp_damage_disarm(E)
+			E.check_pain_disarm()
 		else
 			E.take_external_damage(burn=6, used_weapon = "hot iron")
-			to_chat(H, "<span class='warning'>You look down to notice that your [E] is burned.</span>")
+			to_chat(H, SPAN_WARNING("You notice that your [E] is burned."))
 
 /spell/hand/burning_grip/tower
 	charge_max = 3

@@ -25,7 +25,7 @@
 /atom/proc/attack_hand(mob/user)
 	. = FALSE
 
-/mob/proc/attack_empty_hand(var/bp_hand)
+/mob/proc/attack_empty_hand()
 	return
 
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)

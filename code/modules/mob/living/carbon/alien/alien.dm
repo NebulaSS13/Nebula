@@ -26,7 +26,8 @@
 	. = ..()
 
 /mob/living/carbon/alien/u_equip(obj/item/W)
-	return
+	SHOULD_CALL_PARENT(FALSE)
+	return FALSE
 
 /mob/living/carbon/alien/restrained()
 	return 0

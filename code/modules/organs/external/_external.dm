@@ -153,6 +153,11 @@
 	skin_blend = species.limb_blend
 	skin_base =  new_dna.skin_base
 
+/obj/item/organ/external/proc/check_pain_disarm()
+	if(owner && prob((pain/max_damage)*100))
+		owner.grasp_damage_disarm(src)
+		. = TRUE
+
 /obj/item/organ/external/emp_act(severity)
 
 	if(!is_robotic())
@@ -183,11 +188,9 @@
 	if(owner && burn_damage)
 		owner.custom_pain("Something inside your [src] burns a [severity < 2 ? "bit" : "lot"]!", power * 15) //robotic organs won't feel it anyway
 		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
+		check_pain_disarm()
 
-	if(owner && limb_flags & ORGAN_FLAG_CAN_GRASP)
-		owner.grasp_damage_disarm(src)
-
-	if(owner && limb_flags & ORGAN_FLAG_CAN_STAND)
+	if(owner && (limb_flags & ORGAN_FLAG_CAN_STAND))
 		owner.stance_damage_prone(src)
 
 /obj/item/organ/external/attack_self(var/mob/user)
@@ -204,10 +207,9 @@
 	if(removable_objects.len)
 		var/obj/item/I = pick(removable_objects)
 		I.forceMove(get_turf(user)) //just in case something was embedded that is not an item
-		if(istype(I))
-			if(!(user.l_hand && user.r_hand))
-				user.put_in_hands(I)
-		user.visible_message("<span class='danger'>\The [user] rips \the [I] out of \the [src]!</span>")
+		if(istype(I) && user.get_empty_hand_slot())
+			user.put_in_hands(I)
+		user.visible_message(SPAN_DANGER("\The [user] rips \the [I] out of \the [src]!"))
 		return //no eating the limb until everything's been removed
 	return ..()
 
@@ -258,7 +260,7 @@
 
 					removing.forceMove(get_turf(user))
 
-					if(!(user.l_hand && user.r_hand))
+					if(user.get_empty_hand_slot())
 						user.put_in_hands(removing)
 					user.visible_message("<span class='danger'><b>[user]</b> extracts [removing] from [src] with [W]!</span>")
 				else
@@ -372,27 +374,27 @@
 
 	if(!damage_amount)
 		if(src.hatch_state != HATCH_OPENED)
-			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
+			to_chat(user, SPAN_NOTICE("Nothing to fix!"))
 		return 0
 
 	if(damage_amount >= ROBOLIMB_SELF_REPAIR_CAP)
-		to_chat(user, "<span class='danger'>The damage is far too severe to patch over externally.</span>")
+		to_chat(user, SPAN_WARNING("The damage is far too severe to patch over externally."))
 		return 0
 
 	if(user == src.owner)
 		var/grasp
-		if(user.l_hand == tool && (src.body_part & (ARM_LEFT|HAND_LEFT)))
+		if(user.get_equipped_item(BP_L_HAND) == tool && (src.body_part & (ARM_LEFT|HAND_LEFT)))
 			grasp = BP_L_HAND
-		else if(user.r_hand == tool && (src.body_part & (ARM_RIGHT|HAND_RIGHT)))
+		else if(user.get_equipped_item(BP_R_HAND) == tool && (src.body_part & (ARM_RIGHT|HAND_RIGHT)))
 			grasp = BP_R_HAND
 
 		if(grasp)
-			to_chat(user, "<span class='warning'>You can't reach your [src.name] while holding [tool] in your [owner.get_bodypart_name(grasp)].</span>")
+			to_chat(user, SPAN_WARNING("You can't reach your [src.name] while holding [tool] in your [owner.get_bodypart_name(grasp)]."))
 			return 0
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(!do_mob(user, owner, 10))
-		to_chat(user, "<span class='warning'>You must stand still to do that.</span>")
+		to_chat(user, SPAN_WARNING("You must stand still to do that."))
 		return 0
 
 	switch(damage_type)
@@ -1094,7 +1096,7 @@ obj/item/organ/external/proc/remove_clamps()
 		if(R)
 			return R.manual_dexterity
 	if(species)
-		return species.get_manual_dexterity()
+		return species.get_manual_dexterity(owner)
 
 /obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0)
 
@@ -1165,7 +1167,12 @@ obj/item/organ/external/proc/remove_clamps()
 	return 0
 
 /obj/item/organ/external/is_usable()
-	return ..() && !is_stump() && !(status & ORGAN_TENDON_CUT) && (!can_feel_pain() || get_pain() < pain_disability_threshold) && brute_ratio < 1 && burn_ratio < 1
+	. = ..()
+	. = . && !is_malfunctioning() 
+	. = . && (!is_broken() || splinted) && !is_stump()
+	. = . && !(status & ORGAN_TENDON_CUT)
+	. = . && (!can_feel_pain() || get_pain() < pain_disability_threshold)
+	. = . && brute_ratio < 1 && burn_ratio < 1
 
 /obj/item/organ/external/proc/is_malfunctioning()
 	return (is_robotic() && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))

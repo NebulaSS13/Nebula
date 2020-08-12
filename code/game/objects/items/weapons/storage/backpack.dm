@@ -171,8 +171,8 @@
 /obj/item/storage/backpack/dufflebag/Initialize()
 	. = ..()
 	LAZYSET(slowdown_per_slot, slot_back_str, 3)
-	LAZYSET(slowdown_per_slot, slot_r_hand_str, 1)
-	LAZYSET(slowdown_per_slot, slot_l_hand_str, 1)
+	LAZYSET(slowdown_per_slot, BP_L_HAND, 1)
+	LAZYSET(slowdown_per_slot, BP_R_HAND, 1)
 
 /obj/item/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
@@ -337,7 +337,7 @@
 	startswith = list(
 		/obj/item/stack/tile/floor,
 		/obj/item/crowbar
-		)
+	)
 
 /obj/item/storage/backpack/satchel/flat/MouseDrop(var/obj/over_object)
 	var/turf/T = get_turf(src)

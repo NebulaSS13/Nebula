@@ -510,10 +510,8 @@
 		M.was_bloodied = null
 
 	if(dirtiness <= DIRTINESS_CLEAN)
-		if(M.r_hand)
-			M.r_hand.clean_blood()
-		if(M.l_hand)
-			M.l_hand.clean_blood()
+		for(var/obj/item/thing in M.get_held_items())
+			thing.clean_blood()
 		if(M.wear_mask)
 			if(M.wear_mask.clean_blood())
 				M.update_inv_wear_mask(0)

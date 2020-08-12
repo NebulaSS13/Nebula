@@ -177,8 +177,9 @@
 			if(r_ear && istype(r_ear,/obj/item/radio))
 				R = r_ear
 				has_radio = 1
-			if(r_hand && istype(r_hand, /obj/item/radio))
-				R = r_hand
+			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, BP_R_HAND)
+			if(istype(inv_slot?.holding, /obj/item/radio))
+				R = inv_slot.holding
 				has_radio = 1
 			if(has_radio)
 				R.talk_into(src,message,null,verb,speaking)
@@ -189,8 +190,9 @@
 			if(l_ear && istype(l_ear,/obj/item/radio))
 				R = l_ear
 				has_radio = 1
-			if(l_hand && istype(l_hand,/obj/item/radio))
-				R = l_hand
+			var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, BP_L_HAND)
+			if(istype(inv_slot?.holding, /obj/item/radio))
+				R = inv_slot.holding
 				has_radio = 1
 			if(has_radio)
 				R.talk_into(src,message,null,verb,speaking)

@@ -20,8 +20,7 @@
 	var/mob/affecting_mob = G.get_affecting_mob()
 	if(istype(affecting_mob))
 		if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
-			affecting_mob.drop_l_hand()
-			affecting_mob.drop_r_hand()
+			affecting_mob.drop_held_items()
 		// Keeps those who are on the ground down
 		if(affecting_mob.lying)
 			affecting_mob.Weaken(4)

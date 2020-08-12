@@ -57,8 +57,7 @@ There are several things that need to be remembered:
 		update_inv_shoes()
 		update_inv_w_uniform()
 		update_inv_glasse()
-		update_inv_l_hand()
-		update_inv_r_hand()
+		update_inv_hands()
 		update_inv_belt()
 		update_inv_wear_id()
 		update_inv_ears()
@@ -86,13 +85,11 @@ There are several things that need to be remembered:
 	it manually:
 		e.g.
 		update_inv_head(0)
-		update_inv_l_hand(0)
-		update_inv_r_hand()		//<---calls update_icons()
+		update_inv_hands()		//<---calls update_icons()
 
 	or equivillantly:
 		update_inv_head(0)
-		update_inv_l_hand(0)
-		update_inv_r_hand(0)
+		update_inv_hands(0)
 		update_icons()
 
 >	If you need to update all overlays you can use regenerate_icons(). it works exactly like update_clothing used to.
@@ -135,10 +132,9 @@ Please contact me on #coderbus IRC. ~Carn x
 #define HO_HEAD_LAYER       21
 #define HO_COLLAR_LAYER     22
 #define HO_HANDCUFF_LAYER   23
-#define HO_L_HAND_LAYER     24
-#define HO_R_HAND_LAYER     25
-#define HO_FIRE_LAYER       26 //If you're on fire
-#define TOTAL_LAYERS        26
+#define HO_INHAND_LAYER     24
+#define HO_FIRE_LAYER       25 //If you're on fire
+#define TOTAL_LAYERS        25
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -158,7 +154,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		if(is_cloaked())
 			icon = 'icons/mob/human.dmi'
 			icon_state = "blank"
-			visible_overlays = list(overlays_standing[HO_R_HAND_LAYER], overlays_standing[HO_L_HAND_LAYER])
+			visible_overlays = overlays_standing[HO_INHAND_LAYER]
 		else
 			icon = stand_icon
 			icon_state = null
@@ -420,7 +416,7 @@ var/global/list/damage_icon_parts = list()
 			queue_icon_update()
 		return
 
-	overlays_standing[HO_HAIR_LAYER]	= head_organ.get_hair_icon()
+	overlays_standing[HO_HAIR_LAYER] = head_organ.get_hair_icon()
 
 	if(update_icons)
 		queue_icon_update()
@@ -482,8 +478,7 @@ var/global/list/damage_icon_parts = list()
 	update_inv_belt(0)
 	update_inv_back(0)
 	update_inv_wear_suit(0)
-	update_inv_r_hand(0)
-	update_inv_l_hand(0)
+	update_inv_hands(0)
 	update_inv_handcuffed(0)
 	update_inv_pockets(0)
 	update_fire(0)
@@ -652,30 +647,20 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
-/mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
-	if(r_hand)
-		var/image/standing = r_hand.get_mob_overlay(src,slot_r_hand_str)
-		if(standing)
-			standing.appearance_flags |= RESET_ALPHA
-		overlays_standing[HO_R_HAND_LAYER] = standing
-
-		if (handcuffed) drop_r_hand() //this should be moved out of icon code
-	else
-		overlays_standing[HO_R_HAND_LAYER] = null
-
-	if(update_icons)
-		queue_icon_update()
-
-/mob/living/carbon/human/update_inv_l_hand(var/update_icons=1)
-	if(l_hand)
-		var/image/standing = l_hand.get_mob_overlay(src,slot_l_hand_str)
-		if(standing)
-			standing.appearance_flags |= RESET_ALPHA
-		overlays_standing[HO_L_HAND_LAYER] = standing
-
-		if (handcuffed) drop_l_hand() //This probably should not be here
-	else
-		overlays_standing[HO_L_HAND_LAYER] = null
+/mob/living/carbon/human/update_inv_hands(var/update_icons=1)
+	overlays_standing[HO_INHAND_LAYER] = null
+	for(var/bp in held_item_slots)
+		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+		var/obj/item/held = inv_slot?.holding
+		if(istype(held))
+			// This should be moved out of icon code
+			if(handcuffed)
+				drop_from_inventory(held)
+				continue
+			var/image/standing = held.get_mob_overlay(src, inv_slot.overlay_slot, bp)
+			if(standing)
+				standing.appearance_flags |= RESET_ALPHA
+				LAZYADD(overlays_standing[HO_INHAND_LAYER], standing)
 
 	if(update_icons)
 		queue_icon_update()
@@ -848,7 +833,6 @@ var/global/list/damage_icon_parts = list()
 #undef HO_HEAD_LAYER
 #undef HO_COLLAR_LAYER
 #undef HO_HANDCUFF_LAYER
-#undef HO_L_HAND_LAYER
-#undef HO_R_HAND_LAYER
+#undef HO_INHAND_LAYER
 #undef HO_FIRE_LAYER
 #undef TOTAL_LAYERS

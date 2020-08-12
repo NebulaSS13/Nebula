@@ -110,10 +110,8 @@
 	if(istype(M))
 		if(M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
 			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
-		if (src == M.r_hand)
-			M.update_inv_r_hand()
-		else if (src == M.l_hand)
-			M.update_inv_l_hand()
+		if(src in M.get_held_items())
+			M.update_inv_hands()
 	if(safety_icon)
 		overlays +=	get_safety_indicator()
 
@@ -122,13 +120,13 @@
 /obj/item/gun/proc/get_safety_indicator()
 	return get_mutable_overlay(icon, "[get_world_inventory_state()][safety_icon][safety()]")
 
-/obj/item/gun/get_mob_overlay(mob/user_mob, slot)
+/obj/item/gun/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/I = ..()
 	if(wielded_item_state && user_mob.can_wield_item(src) && is_held_twohanded(user_mob))
 		I.icon_state = wielded_item_state
 	return I
 
-/obj/item/gun/experimental_mob_overlay(mob/user_mob, slot)
+/obj/item/gun/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/I = ..()
 	if(user_mob.can_wield_item(src) && is_held_twohanded(user_mob) && check_state_in_icon("[I.icon_state]-wielded", icon))
 		I.icon_state = "[I.icon_state]-wielded"
@@ -161,7 +159,7 @@
 					"<span class='danger'>\The [user] shoots \himself in the foot with \the [src]!</span>",
 					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
 					)
-				M.unequip_item()
+				M.unEquip(src)
 		else
 			handle_click_empty(user)
 		return 0

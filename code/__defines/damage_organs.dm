@@ -53,13 +53,12 @@
 // Organ flag defines.
 #define ORGAN_FLAG_CAN_AMPUTATE   (1<<0) // The organ can be amputated.
 #define ORGAN_FLAG_CAN_BREAK      (1<<1) // The organ can be broken.
-#define ORGAN_FLAG_CAN_GRASP      (1<<2) // The organ contributes to grasping.
-#define ORGAN_FLAG_CAN_STAND      (1<<3) // The organ contributes to standing.
-#define ORGAN_FLAG_HAS_TENDON     (1<<4) // The organ can have its tendon cut.
-#define ORGAN_FLAG_FINGERPRINT    (1<<5) // The organ has a fingerprint.
-#define ORGAN_FLAG_GENDERED_ICON  (1<<6) // The icon state for this organ appends _m/_f.
-#define ORGAN_FLAG_HEALS_OVERKILL (1<<7) // The organ heals from overkill damage.
-#define ORGAN_FLAG_DEFORMED       (1<<8) // The organ is permanently disfigured.
+#define ORGAN_FLAG_CAN_STAND      (1<<2) // The organ contributes to standing.
+#define ORGAN_FLAG_HAS_TENDON     (1<<3) // The organ can have its tendon cut.
+#define ORGAN_FLAG_FINGERPRINT    (1<<4) // The organ has a fingerprint.
+#define ORGAN_FLAG_GENDERED_ICON  (1<<5) // The icon state for this organ appends _m/_f.
+#define ORGAN_FLAG_HEALS_OVERKILL (1<<6) // The organ heals from overkill damage.
+#define ORGAN_FLAG_DEFORMED       (1<<7) // The organ is permanently disfigured.
 
 // Droplimb types.
 #define DROPLIMB_EDGE 0

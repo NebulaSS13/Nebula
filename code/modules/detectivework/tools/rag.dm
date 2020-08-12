@@ -117,11 +117,11 @@
 		var/mob/living/M = target
 		if(on_fire)
 			user.visible_message("<span class='danger'>\The [user] hits [target] with [src]!</span>",)
-			user.do_attack_animation(src)
+			user.do_attack_animation(target)
 			M.IgniteMob()
 		else if(reagents.total_volume)
 			if(user.zone_sel.selecting == BP_MOUTH)
-				user.do_attack_animation(src)
+				user.do_attack_animation(target)
 				user.visible_message(
 					"<span class='danger'>\The [user] smothers [target] with [src]!</span>",
 					"<span class='warning'>You smother [target] with [src]!</span>",

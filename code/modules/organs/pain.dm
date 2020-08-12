@@ -49,7 +49,7 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 				emote(force_emote)
 	next_pain_time = world.time + (100-power)
 
-mob/living/carbon/human/proc/handle_pain()
+/mob/living/carbon/human/proc/handle_pain()
 	if(stat)
 		return
 	if(!can_feel_pain())
@@ -70,7 +70,7 @@ mob/living/carbon/human/proc/handle_pain()
 		if(maxdam > 10 && paralysis)
 			paralysis = max(0, paralysis - round(maxdam/10))
 		if(maxdam > 50 && prob(maxdam / 5))
-			unequip_item()
+			drop_held_items()
 		var/burning = damaged_organ.burn_dam > damaged_organ.brute_dam
 		var/msg
 		switch(maxdam)

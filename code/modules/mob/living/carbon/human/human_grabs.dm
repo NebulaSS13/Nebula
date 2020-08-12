@@ -4,12 +4,14 @@
 /mob/living/carbon/human/can_be_grabbed(var/mob/grabber, var/target_zone)
 	. = ..()
 	if(.)
-		var/obj/item/organ/organ = target_zone && organs_by_name[target_zone]
+		var/obj/item/organ/external/organ = target_zone && organs_by_name[target_zone]
 		if(!istype(organ))
 			to_chat(grabber, SPAN_WARNING("\The [src] is missing that body part!"))
 			return FALSE
-		if(grabber == src)
-			var/list/bad_parts = hand ? list(BP_L_ARM, BP_L_HAND) : list(BP_R_ARM, BP_R_HAND)
+		if(grabber == src && istype(organ))
+			var/list/bad_parts = list(organ.organ_tag) | organ.parent_organ
+			for(var/obj/item/organ/external/child in organ.children)
+				bad_parts |= child.organ_tag
 			if(organ && (organ.organ_tag in bad_parts))
 				to_chat(src, SPAN_WARNING("You can't grab your own [organ.name] with itself!"))
 				return FALSE

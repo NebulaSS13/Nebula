@@ -77,7 +77,7 @@
 			P.info = "The nuclear authorization code is: <b>[code]</b>"
 			P.SetName("nuclear bomb code")
 			if(leader && leader.current)
-				if(get_turf(P) == get_turf(leader.current) && !(leader.current.l_hand && leader.current.r_hand))
+				if(get_turf(P) == get_turf(leader.current) && leader.current.get_empty_hand_slot())
 					leader.current.put_in_hands(P)
 
 		if(!code_owner && leader)

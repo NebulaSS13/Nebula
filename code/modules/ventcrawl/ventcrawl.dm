@@ -61,7 +61,7 @@ var/list/ventcrawl_machinery = list(
 		return TRUE
 	if(carried_item in list(w_uniform, gloves, glasses, wear_mask, l_ear, r_ear, belt, l_store, r_store))
 		return TRUE
-	if(carried_item in list(l_hand,r_hand))
+	if(carried_item in get_held_items())
 		return carried_item.w_class <= ITEM_SIZE_NORMAL
 	return ..()
 
