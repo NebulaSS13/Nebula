@@ -71,7 +71,7 @@
 /mob/living/get_empty_hand_slot()
 	for(var/bp in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-		if(inv_slot?.holding)
+		if(inv_slot && !inv_slot.holding)
 			return bp
 
 /mob/living/get_empty_hand_slots()
