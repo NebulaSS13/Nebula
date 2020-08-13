@@ -9,26 +9,26 @@
 		)
 	siemens_coefficient = 0.9
 	icon = 'mods/corporate/icons/obj/clothing/obj_under.dmi'
-	item_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_under.dmi')
+	item_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_under.dmi')
 	gender_icons = 1
 
 /obj/item/clothing/under/rank/security/corp
 	icon_state = "sec_corporate"
 	worn_state = "sec_corporate"
 	icon = 'mods/corporate/icons/obj/clothing/obj_under.dmi'
-	item_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_under.dmi')
+	item_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_under.dmi')
 
 /obj/item/clothing/under/rank/warden/corp
 	icon_state = "warden_corporate"
 	worn_state = "warden_corporate"
 	icon = 'mods/corporate/icons/obj/clothing/obj_under.dmi'
-	item_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_under.dmi')
+	item_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_under.dmi')
 
 /obj/item/clothing/under/rank/head_of_security/corp
 	icon_state = "hos_corporate"
 	worn_state = "hos_corporate"
 	icon = 'mods/corporate/icons/obj/clothing/obj_under.dmi'
-	item_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_under.dmi')
+	item_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_under.dmi')
 
 /obj/item/clothing/under/rank/guard/heph
 	name = "cyan security guard uniform"

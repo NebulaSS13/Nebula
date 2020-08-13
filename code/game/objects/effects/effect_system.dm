@@ -191,12 +191,12 @@ steam.start() -- spawns the effect
 	if (!istype(M))
 		return 0
 	if (M.internal != null)
-		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+		var/obj/item/mask = M.get_equipped_item(BP_MOUTH)
+		if(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			return 0
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.head && (H.head.item_flags & ITEM_FLAG_AIRTIGHT))
-				return 0
+		var/obj/item/head = M.get_equipped_item(BP_HEAD)
+		if(head?.item_flags & ITEM_FLAG_AIRTIGHT)
+			return 0
 		return 0
 	return 1
 
@@ -283,7 +283,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/mustard/affect(var/mob/living/carbon/human/R)
 	if (!..())
 		return 0
-	if (R.wear_suit != null)
+	if (!R.get_equipped_item(BP_BODY))
 		return 0
 
 	R.burn_skin(0.75)

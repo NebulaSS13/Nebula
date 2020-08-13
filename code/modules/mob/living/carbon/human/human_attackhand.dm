@@ -85,12 +85,19 @@
 				if(!check_has_mouth())
 					to_chat(H, "<span class='warning'>They don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
 					return TRUE
-				if((H.head && (H.head.body_parts_covered & SLOT_FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & SLOT_FACE)))
+
+				var/obj/item/head = H.get_equipped_item(BP_HEAD)
+				var/obj/item/mask = H.get_equipped_item(BP_EYES)
+				if((head && (head.body_parts_covered & SLOT_FACE)) || (mask && (mask.body_parts_covered & SLOT_FACE)))
 					to_chat(H, "<span class='warning'>You need to remove your mouth covering for mouth-to-mouth resuscitation!</span>")
 					return TRUE
-				if((head && (head.body_parts_covered & SLOT_FACE)) || (wear_mask && (wear_mask.body_parts_covered & SLOT_FACE)))
+
+				head = get_equipped_item(BP_HEAD)
+				mask = get_equipped_item(BP_MOUTH)
+				if((head && (head.body_parts_covered & SLOT_FACE)) || (mask && (mask.body_parts_covered & SLOT_FACE)))
 					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!</span>")
 					return TRUE
+
 				if (!H.internal_organs_by_name[H.species.breathing_organ])
 					to_chat(H, "<span class='danger'>You need lungs for mouth-to-mouth resuscitation!</span>")
 					return TRUE

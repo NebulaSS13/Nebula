@@ -15,7 +15,7 @@
 	desc = "A dark uniform coat worn by Magnitka fleet officers." 
 	icon_state = "magnitka_officer" 
 	icon = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi' 
-	item_icons = list(slot_w_uniform_str = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi') 
+	item_icons = list(BP_CHEST = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi') 
  
 /obj/item/clothing/accessory/medal/silver/marooned_medal 
 	name = "silver medal" 

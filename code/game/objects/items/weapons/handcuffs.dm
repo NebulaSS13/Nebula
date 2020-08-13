@@ -120,8 +120,8 @@ var/last_chew = 0
 	if (!H.handcuffed) return
 	if (H.a_intent != I_HURT) return
 	if (H.zone_sel.selecting != BP_MOUTH) return
-	if (H.wear_mask) return
-	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket)) return
+	if (H.get_equipped_item(BP_MOUTH)) return
+	if (istype(H.get_equipped_item(BP_BODY), /obj/item/clothing/suit/straight_jacket)) return
 
 	var/obj/item/organ/external/O = H.organs_by_name[H.get_active_held_item_slot()]
 	if (!O) return

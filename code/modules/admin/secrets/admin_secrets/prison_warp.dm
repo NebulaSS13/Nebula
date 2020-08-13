@@ -18,7 +18,7 @@
 		//don't warp them if they aren't ready or are already there
 			continue
 		H.Paralyse(5)
-		if(H.wear_id)
+		if(H.get_equipped_item(BP_NECK))
 			var/obj/item/card/id/id = H.GetIdCard()
 			for(var/A in id.access)
 				if(A == access_security)
@@ -32,7 +32,7 @@
 				H.drop_from_inventory(W)
 			//teleport person to cell
 			H.forceMove(pick(GLOB.prisonwarp))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(H), slot_w_uniform_str)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(H), BP_CHEST)
 			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/color/orange(H), slot_shoes_str)
 		else
 			//teleport security person

@@ -1,6 +1,6 @@
 /datum/gear/head
 	sort_category = "Hats and Headwear"
-	slot = slot_head_str
+	slot = BP_HEAD
 	category = /datum/gear/head
 
 /datum/gear/head/beret

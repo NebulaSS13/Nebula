@@ -125,7 +125,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
 /obj/item/clothing/suit/straight_jacket/equipped(var/mob/user, var/slot)
-	if(slot == slot_wear_suit_str)
+	if(slot == BP_BODY)
 		if(iscarbon(user))
 			var/mob/living/carbon/C = user
 			C.drop_from_inventory(C.handcuffed)
@@ -173,7 +173,7 @@
 
 /obj/item/clothing/suit/leathercoat/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	var/image/I = ..()
-	if(shine > 0 && slot == slot_wear_suit_str)
+	if(shine > 0 && slot == BP_BODY)
 		var/mutable_appearance/S = get_mutable_overlay(I.icon, "shine")
 		S.alpha = max(shine, artificial_shine)/100 * 255
 		I.overlays += S

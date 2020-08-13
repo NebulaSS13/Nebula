@@ -66,9 +66,9 @@ Scent intensity
 /datum/extension/scent/proc/check_smeller(var/mob/living/carbon/human/smeller)
 	if(!istype(smeller) || smeller.stat != CONSCIOUS || smeller.failed_last_breath)
 		return FALSE
-	if(smeller.get_equipped_item(slot_wear_mask_str))
+	if(smeller.get_equipped_item(BP_MOUTH))
 		return FALSE
-	var/obj/item/head = smeller.get_equipped_item(slot_head_str)
+	var/obj/item/head = smeller.get_equipped_item(BP_HEAD)
 	if(head?.permeability_coefficient < 1)
 		return FALSE
 	return TRUE

@@ -24,6 +24,22 @@
 	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 	can_be_printed = FALSE
 
+/obj/item/organ/external/chest/replaced(mob/living/carbon/human/target)
+	. = ..()
+	if(owner)
+		owner.add_inventory_slot(BP_CHEST,     inventory_slot_type = /datum/inventory_slot/chest)
+		owner.add_inventory_slot(BP_BODY,      inventory_slot_type = /datum/inventory_slot/body)
+		owner.add_inventory_slot(BP_SHOULDERS, inventory_slot_type = /datum/inventory_slot/shoulders)
+		owner.add_inventory_slot(BP_NECK,      inventory_slot_type = /datum/inventory_slot/neck)
+
+/obj/item/organ/external/chest/removed(mob/living/user, ignore_children)
+	if(owner)
+		owner.remove_inventory_slot(BP_CHEST)
+		owner.remove_inventory_slot(BP_BODY)
+		owner.remove_inventory_slot(BP_SHOULDERS)
+		owner.remove_inventory_slot(BP_NECK)
+	. = ..()
+
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
 
@@ -56,6 +72,16 @@
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/groin/removed(mob/living/user, ignore_children)
+	if(owner)
+		owner.remove_inventory_slot(BP_GROIN)
+	. = ..()
+	
+/obj/item/organ/external/groin/replaced(mob/living/carbon/human/target)
+	. = ..()
+	if(owner)
+		owner.add_inventory_slot(BP_GROIN, inventory_slot_type = /datum/inventory_slot/groin)
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
@@ -159,13 +185,6 @@
 /obj/item/organ/external/hand/replaced(mob/living/carbon/human/target)
 	. = ..()
 	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
-
-/obj/item/organ/external/hand/removed()
-	var/held = owner?.get_equipped_item(organ_tag)
-	if(held)
-		owner.drop_from_inventory(held)
-	owner?.remove_held_item_slot(organ_tag)
-	. = ..()
 
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND

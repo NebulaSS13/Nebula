@@ -26,7 +26,7 @@ var/list/mob_hat_cache = list()
 	return TRUE
 
 /datum/extension/hattable/proc/get_hat_overlay(var/mob/wearer)
-	var/image/I = hat?.get_mob_overlay(wearer, slot_head_str)
+	var/image/I = hat?.get_mob_overlay(wearer, BP_HEAD)
 	if(I)
 		I.pixel_x += offset_x
 		I.pixel_y += offset_y

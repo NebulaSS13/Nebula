@@ -16,13 +16,13 @@ GLOBAL_DATUM_INIT(commandos, /datum/antagonist/deathsquad/mercenary, new)
 
 /datum/antagonist/deathsquad/mercenary/equip(var/mob/living/carbon/human/player)
 
-	player.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(player), slot_w_uniform_str)
+	player.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(player), BP_CHEST)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots/swat(player), slot_shoes_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(player), slot_glasses_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/syndicate(player), slot_wear_mask_str)
+	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(player), BP_EYES)
+	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/syndicate(player), BP_MOUTH)
 	player.equip_to_slot_or_del(new /obj/item/storage/box(player), slot_in_backpack_str)
 	player.equip_to_slot_or_del(new /obj/item/ammo_magazine/box/pistol(player), slot_in_backpack_str)
-	player.equip_to_slot_or_del(new /obj/item/rig/merc(player), slot_back_str)
+	player.equip_to_slot_or_del(new /obj/item/rig/merc(player), BP_SHOULDERS)
 	player.put_in_hands_or_del(new /obj/item/gun/energy/laser(player))
 	player.put_in_hands_or_del(new /obj/item/energy_blade/sword(player))
 

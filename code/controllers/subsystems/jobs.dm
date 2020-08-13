@@ -534,9 +534,8 @@ SUBSYSTEM_DEF(jobs)
 
 	//Gives glasses to the vision impaired
 	if(H.disabilities & NEARSIGHTED)
-		var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses_str)
-		if(equipped)
-			var/obj/item/clothing/glasses/G = H.glasses
+		if(H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), BP_EYES))
+			var/obj/item/clothing/glasses/G = H.get_equipped_item(BP_EYES)
 			G.prescription = 7
 
 	if(H.needs_wheelchair())

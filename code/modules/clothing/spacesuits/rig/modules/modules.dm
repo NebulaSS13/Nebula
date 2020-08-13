@@ -266,10 +266,10 @@
 
 /mob/living/carbon/human/Stat()
 	. = ..()
-
-	if(. && istype(back,/obj/item/rig))
-		var/obj/item/rig/R = back
-		SetupStat(R)
+	if(.)
+		var/obj/item/rig/R = get_equipped_item(BP_SHOULDERS)
+		if(istype(R))
+			SetupStat(R)
 
 /mob/proc/SetupStat(var/obj/item/rig/R)
 	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))

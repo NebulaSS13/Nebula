@@ -21,7 +21,7 @@
 	var/image/ret = ..()
 	if(light_overlay_image)
 		ret.overlays -= light_overlay_image
-	if(on && slot == slot_head_str)
+	if(on && slot == BP_HEAD)
 		if(!light_overlay_image)
 			if(ishuman(user_mob))
 				var/mob/living/carbon/human/user_human = user_mob

@@ -6,7 +6,7 @@
 	if(!istype(M))
 		return
 	var/covered = 0
-	for(var/obj/item/clothing/C in list(M.wear_suit, M.gloves, M.w_uniform))
+	for(var/obj/item/clothing/C in list(M.get_equipped_item(BP_BODY), M.gloves, M.get_equipped_item(BP_CHEST)))
 		if(prob(15) && (C.body_parts_covered & ~covered))
 			add_data(C.get_fibers())
 		covered |= C.body_parts_covered

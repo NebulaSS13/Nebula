@@ -6,9 +6,9 @@
 	l_ear = /obj/item/radio/headset
 	shoes = /obj/item/clothing/shoes/color/black
 
-	id_slot = slot_wear_id_str
+	id_slot = BP_NECK
 	id_type = /obj/item/card/id/civilian
-	pda_slot = slot_belt_str
+	pda_slot = BP_GROIN
 	pda_type = /obj/item/modular_computer/pda
 
 	flags = OUTFIT_HAS_BACKPACK

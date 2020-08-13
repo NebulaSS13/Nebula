@@ -135,7 +135,8 @@
 	if(owner.h_style)
 		var/style = owner.h_style
 		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[style]
-		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
+		var/obj/item/head = owner.get_equipped_item(BP_HEAD)
+		if(head && (head.flags_inv & BLOCKHEADHAIR))
 			if(!(hair_style.flags & VERY_SHORT))
 				hair_style = GLOB.hair_styles_list["Short Hair"]
 		if(hair_style)
@@ -165,3 +166,27 @@
 
 /obj/item/organ/external/head/no_eyes
 	draw_eyes = FALSE
+
+/obj/item/organ/external/head/proc/remove_inventory_slots()
+	if(owner)
+		owner.remove_inventory_slot(BP_HEAD)
+		owner.remove_inventory_slot(BP_EYES)
+		owner.remove_inventory_slot(BP_MOUTH)
+		owner.remove_inventory_slot(BP_L_EAR)
+		owner.remove_inventory_slot(BP_R_EAR)
+
+/obj/item/organ/external/head/proc/add_inventory_slots()
+	if(owner)
+		owner.add_inventory_slot(BP_HEAD,  inventory_slot_type = /datum/inventory_slot/head)
+		owner.add_inventory_slot(BP_EYES,  inventory_slot_type = /datum/inventory_slot/eyes)
+		owner.add_inventory_slot(BP_MOUTH, inventory_slot_type = /datum/inventory_slot/face)
+		owner.add_inventory_slot(BP_L_EAR, ui_l_ear, BP_L_EAR, inventory_slot_type = /datum/inventory_slot/ear)
+		owner.add_inventory_slot(BP_R_EAR, ui_r_ear, BP_R_EAR, inventory_slot_type = /datum/inventory_slot/ear) 
+
+/obj/item/organ/external/head/removed()
+	remove_inventory_slots()
+	. = ..()
+
+/obj/item/organ/external/head/replaced()
+	. = ..()
+	add_inventory_slots()

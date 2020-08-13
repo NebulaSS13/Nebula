@@ -23,7 +23,7 @@
 
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user)
-	if(user.wear_mask == src && !user.check_dexterity(DEXTERITY_GRIP))
+	if(user.get_equipped_item(BP_MOUTH) == src && !user.check_dexterity(DEXTERITY_GRIP))
 		return 0
 	..()
 
@@ -106,7 +106,7 @@
 /obj/item/clothing/mask/ai/attack_self(var/mob/user)
 	if(user.incapacitated())
 		return
-	if(user.get_equipped_item(slot_wear_mask_str) != src)
+	if(user.get_equipped_item(BP_MOUTH) != src)
 		to_chat(user, SPAN_WARNING("You must be wearing \the [src] to activate it!"))
 		return
 	var/datum/extension/eye/cameranet/CN = get_extension(src, /datum/extension/eye)
@@ -188,11 +188,11 @@
 
 /obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
 	switch(slot)
-		if(slot_wear_mask_str) //Mask is the default for all the settings
+		if(BP_MOUTH) //Mask is the default for all the settings
 			flags_inv = initial(flags_inv)
 			body_parts_covered = initial(body_parts_covered)
 			icon_state = initial(icon_state)
-		if(slot_head_str)
+		if(BP_HEAD)
 			flags_inv = 0
 			body_parts_covered = SLOT_HEAD
 			icon_state = "[initial(icon_state)]_up"

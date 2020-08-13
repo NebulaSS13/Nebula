@@ -31,23 +31,23 @@
 				toggle_sensors(user)
 			return
 		if ("lock_sensors")
-			if (!istype(w_uniform, /obj/item/clothing/under))
+			var/obj/item/clothing/under/uniform = get_equipped_item(BP_CHEST)
+			if (!istype(uniform))
 				return
-			var/obj/item/clothing/under/subject_uniform = w_uniform
-			visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"))
+			visible_message(SPAN_DANGER("\The [user] is trying to [uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"))
 			if (do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
-				if (subject_uniform != w_uniform)
-					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [subject_uniform] anymore."))
+				if (get_equipped_item(BP_CHEST) != uniform)
+					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [uniform] anymore."))
 					return
-				if (!subject_uniform.has_sensor)
-					to_chat(user, SPAN_WARNING("\The [subject_uniform] has no sensors to lock."))
+				if (!uniform.has_sensor)
+					to_chat(user, SPAN_WARNING("\The [uniform] has no sensors to lock."))
 					return
 				var/obj/item/multitool/user_multitool = user.get_multitool()
 				if (!istype(user_multitool))
-					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [subject_uniform]'s sensors."))
+					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [uniform]'s sensors."))
 					return
-				subject_uniform.has_sensor = subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? SUIT_HAS_SENSORS : SUIT_LOCKED_SENSORS
-				visible_message(SPAN_NOTICE("\The [user] [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [subject_uniform]'s suit sensor controls."), range = 2)
+				uniform.has_sensor = uniform.has_sensor == SUIT_LOCKED_SENSORS ? SUIT_HAS_SENSORS : SUIT_LOCKED_SENSORS
+				visible_message(SPAN_NOTICE("\The [user] [uniform.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [uniform]'s suit sensor controls."), range = 2)
 			return
 		if("internals")
 			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
@@ -134,8 +134,8 @@
 
 // Modify the current target sensor level.
 /mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)
-	var/obj/item/clothing/under/suit = w_uniform
-	if(!suit)
+	var/obj/item/clothing/under/suit = get_equipped_item(BP_CHEST)
+	if(!istype(suit))
 		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
 		return
 	if (suit.has_sensor >= 2)
@@ -154,17 +154,21 @@
 		return
 	else
 		// Check for airtight mask/helmet.
-		if(!(wear_mask && wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+		var/obj/item/mask = get_equipped_item(BP_MOUTH)
+		if(!(mask && mask.item_flags & ITEM_FLAG_AIRTIGHT))
+			var/obj/item/head = get_equipped_item(BP_HEAD)
 			if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
 				to_chat(user, "<span class='warning'>\The [src] does not have a suitable mask or helmet.</span>")
 				return
 
 		// Find an internal source.
-		if(istype(back, /obj/item/tank))
+		var/obj/item/tank/back = get_equipped_item(BP_SHOULDERS)
+		var/obj/item/tank/belt = get_equipped_item(BP_GROIN)
+		if(istype(back))
 			set_internals(back)
 		else if(istype(s_store, /obj/item/tank))
 			set_internals(s_store)
-		else if(istype(belt, /obj/item/tank))
+		else if(istype(belt))
 			set_internals(belt)
 		else
 			to_chat(user, "<span class='warning'>You could not find a suitable tank!</span>")

@@ -273,24 +273,22 @@
 	/** breathing **/
 
 /mob/living/carbon/human/handle_chemical_smoke(var/datum/gas_mixture/environment)
-	if(wear_mask && (wear_mask.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
-	if(glasses && (glasses.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
-	if(head && (head.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
-		return
+	for(var/obj/item/gear in list(get_equipped_item(BP_MOUTH), get_equipped_item(BP_EYES), get_equipped_item(BP_HEAD)))
+		if(gear.item_flags & ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT)
+			return
 	..()
 
 /mob/living/carbon/human/get_breath_from_internal(volume_needed=STD_BREATH_VOLUME)
 	if(internal)
 
 		var/obj/item/tank/rig_supply
-		if(istype(back,/obj/item/rig))
-			var/obj/item/rig/rig = back
-			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
-				rig_supply = rig.air_supply
+		var/obj/item/rig/rig = get_equipped_item(BP_SHOULDERS)
+		if(istype(rig) && !rig.offline && (rig.air_supply && internal == rig.air_supply))
+			rig_supply = rig.air_supply
 
-		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
+		var/obj/item/head = get_equipped_item(BP_HEAD)
+		var/obj/item/mask = get_equipped_item(BP_EYES)
+		if (!rig_supply && (!contents.Find(internal) || !((mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
 			set_internals(null)
 
 		if(internal)
@@ -457,7 +455,7 @@
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
+	for(var/obj/item/clothing/C in get_equipped_items(FALSE))
 		if(C)
 			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
@@ -470,7 +468,7 @@
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
+	for(var/obj/item/clothing/C in get_equipped_items(FALSE))
 		if(C)
 			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
@@ -975,8 +973,9 @@
 	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		holder.icon_state = "hudunknown"
-		if(wear_id)
-			var/obj/item/card/id/I = wear_id.GetIdCard()
+		var/obj/item/id = get_equipped_item(BP_NECK)
+		if(id)
+			var/obj/item/card/id/I = id.GetIdCard()
 			if(I)
 				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
 				if(J)
@@ -988,8 +987,9 @@
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name
-		if(wear_id)
-			var/obj/item/card/id/I = wear_id.GetIdCard()
+		var/obj/item/id = get_equipped_item(BP_NECK)
+		if(id)
+			var/obj/item/card/id/I = id.GetIdCard()
 			if(I)
 				perpname = I.registered_name
 

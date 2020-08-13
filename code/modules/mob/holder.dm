@@ -147,7 +147,7 @@ var/list/holder_mob_icon_cache = list()
 	var/obj/item/holder/H = new holder_type(get_turf(src))
 
 	if(self_grab)
-		if(!grabber.equip_to_slot_if_possible(H, slot_back_str, del_on_fail=0, disable_warning=1))
+		if(!grabber.equip_to_slot_if_possible(H, BP_SHOULDERS, del_on_fail=0, disable_warning=1))
 			to_chat(src, "<span class='warning'>You can't climb onto [grabber]!</span>")
 			return
 
@@ -196,7 +196,7 @@ var/list/holder_mob_icon_cache = list()
 	icon = 'icons/mob/holder_complex.dmi'
 	var/mob_blend_mode = ICON_ADD
 	slot_flags = SLOT_BACK
-	var/list/generate_for_slots = list(BP_L_HAND, BP_R_HAND, slot_back_str)
+	var/list/generate_for_slots = list(BP_L_HAND, BP_R_HAND, BP_SHOULDERS)
 
 /obj/item/holder/human/sync(var/mob/living/M)
 	// Generate appropriate on-mob icons.

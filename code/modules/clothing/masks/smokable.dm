@@ -42,7 +42,7 @@
 	if(reagents && reagents.total_volume) // check if it has any reagents at all
 		if(ishuman(loc))
 			var/mob/living/carbon/human/C = loc
-			if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
+			if (src == C.get_equipped_item(BP_MOUTH) && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
 				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
 				add_trace_DNA(C)
 		else // else just remove some of the reagents
@@ -52,7 +52,7 @@
 		var/datum/gas_mixture/environment = T.return_air()
 		if(ishuman(loc))
 			var/mob/living/carbon/human/C = loc
-			if (src == C.wear_mask && C.internal)
+			if (src == C.get_equipped_item(BP_MOUTH) && C.internal)
 				environment = C.internal.return_air()
 		if(environment.get_by_flag(XGM_GAS_OXIDIZER) < gas_consumption)
 			extinguish()

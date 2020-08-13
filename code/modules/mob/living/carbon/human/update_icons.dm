@@ -411,7 +411,9 @@ var/global/list/damage_icon_parts = list()
 		return
 
 	//masks and helmets can obscure our hair.
-	if( (head && (head.flags_inv & BLOCKHAIR)) || (wear_mask && (wear_mask.flags_inv & BLOCKHAIR)))
+	var/obj/item/head = get_equipped_item(BP_HEAD)
+	var/obj/item/mask = get_equipped_item(BP_MOUTH)
+	if((head && (head.flags_inv & BLOCKHAIR)) || (mask && (mask.flags_inv & BLOCKHAIR)))
 		if(update_icons)
 			queue_icon_update()
 		return
@@ -492,21 +494,23 @@ var/global/list/damage_icon_parts = list()
 //vvvvvv UPDATE_INV PROCS vvvvvv
 
 /mob/living/carbon/human/update_inv_w_uniform(var/update_icons=1)
-	if(istype(w_uniform, /obj/item/clothing/under) && !(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT))
-		overlays_standing[HO_UNIFORM_LAYER]	= w_uniform.get_mob_overlay(src,slot_w_uniform_str)
+	var/obj/item/uniform = get_equipped_item(BP_CHEST)
+	var/obj/item/suit =    get_equipped_item(BP_BODY)
+	if(uniform && !(suit && suit.flags_inv & HIDEJUMPSUIT))
+		overlays_standing[HO_UNIFORM_LAYER]	= uniform.get_mob_overlay(src,BP_CHEST)
 	else
 		overlays_standing[HO_UNIFORM_LAYER]	= null
-
 	if(update_icons)
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_wear_id(var/update_icons=1)
 	overlays_standing[HO_ID_LAYER] = null
-	if(wear_id)
-		var/obj/item/clothing/under/U = w_uniform
+	var/obj/item/id = get_equipped_item(BP_NECK)
+	if(id)
+		var/obj/item/clothing/under/U = get_equipped_item(BP_CHEST)
 		if(istype(U) && !U.displays_id && !U.rolled_down)
 			return
-		overlays_standing[HO_ID_LAYER] = wear_id.get_mob_overlay(src, slot_wear_id_str)
+		overlays_standing[HO_ID_LAYER] = id.get_mob_overlay(src, BP_NECK)
 	BITSET(hud_updateflag, ID_HUD)
 	BITSET(hud_updateflag, WANTED_HUD)
 
@@ -514,7 +518,8 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_gloves(var/update_icons=1)
-	if(gloves && !(wear_suit && wear_suit.flags_inv & HIDEGLOVES))
+	var/obj/item/suit = get_equipped_item(BP_BODY)
+	if(gloves && !(suit && suit.flags_inv & HIDEGLOVES))
 		overlays_standing[HO_GLOVES_LAYER]	= gloves.get_mob_overlay(src,slot_gloves_str)
 	else
 		if(blood_DNA && species.blood_mask)
@@ -526,8 +531,9 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_glasses(var/update_icons=1)
+	var/obj/item/glasses = get_equipped_item(BP_EYES)
 	if(glasses)
-		overlays_standing[glasses.use_alt_layer ? HO_GOGGLES_LAYER : HO_GLASSES_LAYER] = glasses.get_mob_overlay(src,slot_glasses_str)
+		overlays_standing[glasses.use_alt_layer ? HO_GOGGLES_LAYER : HO_GLASSES_LAYER] = glasses.get_mob_overlay(src, BP_EYES)
 		overlays_standing[glasses.use_alt_layer ? HO_GLASSES_LAYER : HO_GOGGLES_LAYER] = null
 	else
 		overlays_standing[HO_GLASSES_LAYER]	= null
@@ -536,28 +542,34 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_ears(var/update_icons=1)
+
 	overlays_standing[HO_EARS_LAYER] = null
-	if( (head && (head.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))) || (wear_mask && (wear_mask.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))))
+	var/obj/item/head = get_equipped_item(BP_HEAD)
+	var/obj/item/mask = get_equipped_item(BP_MOUTH)
+	if( (head && (head.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))) || (mask && (mask.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))))
 		if(update_icons)
 			queue_icon_update()
 		return
 
+	var/obj/item/l_ear = get_equipped_item(BP_L_EAR)
+	var/obj/item/r_ear = get_equipped_item(BP_R_EAR)
 	if(l_ear || r_ear)
 		// Blank image upon which to layer left & right overlays.
 		var/image/both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")
 		if(l_ear)
-			both.overlays += l_ear.get_mob_overlay(src,slot_l_ear_str)
+			both.overlays += l_ear.get_mob_overlay(src,BP_L_EAR)
 		if(r_ear)
-			both.overlays += r_ear.get_mob_overlay(src,slot_r_ear_str)
+			both.overlays += r_ear.get_mob_overlay(src,BP_R_EAR )
 		overlays_standing[HO_EARS_LAYER] = both
-
 	else
 		overlays_standing[HO_EARS_LAYER]	= null
 	if(update_icons)
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_shoes(var/update_icons=1)
-	if(shoes && !((wear_suit && wear_suit.flags_inv & HIDESHOES) || (w_uniform && w_uniform.flags_inv & HIDESHOES)))
+	var/obj/item/uniform = get_equipped_item(BP_CHEST)
+	var/obj/item/suit =    get_equipped_item(BP_BODY)
+	if(shoes && !((suit && suit.flags_inv & HIDESHOES) || (uniform && uniform.flags_inv & HIDESHOES)))
 		overlays_standing[HO_SHOES_LAYER] = shoes.get_mob_overlay(src,slot_shoes_str)
 	else
 		if(feet_blood_DNA && species.blood_mask)
@@ -577,16 +589,19 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_head(var/update_icons=1)
+	var/obj/item/head = get_equipped_item(BP_HEAD)
 	if(head)
-		overlays_standing[HO_HEAD_LAYER] = head.get_mob_overlay(src,slot_head_str)
+		overlays_standing[HO_HEAD_LAYER] = head.get_mob_overlay(src, BP_HEAD)
 	else
-		overlays_standing[HO_HEAD_LAYER]	= null
+		overlays_standing[HO_HEAD_LAYER] = null
+
 	if(update_icons)
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_belt(var/update_icons=1)
+	var/obj/item/belt = get_equipped_item(BP_GROIN)
 	if(belt)
-		overlays_standing[belt.use_alt_layer ? HO_BELT_LAYER_ALT : HO_BELT_LAYER] = belt.get_mob_overlay(src,slot_belt_str)
+		overlays_standing[belt.use_alt_layer ? HO_BELT_LAYER_ALT : HO_BELT_LAYER] = belt.get_mob_overlay(src,BP_GROIN)
 		overlays_standing[belt.use_alt_layer ? HO_BELT_LAYER : HO_BELT_LAYER_ALT] = null
 	else
 		overlays_standing[HO_BELT_LAYER] = null
@@ -596,11 +611,12 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/update_inv_wear_suit(var/update_icons=1)
 
-	if(wear_suit)
-		overlays_standing[HO_SUIT_LAYER]	= wear_suit.get_mob_overlay(src,slot_wear_suit_str)
+	var/obj/item/suit = get_equipped_item(BP_BODY)
+	if(suit)
+		overlays_standing[HO_SUIT_LAYER] = suit.get_mob_overlay(src,BP_BODY)
 		update_tail_showing(0)
 	else
-		overlays_standing[HO_SUIT_LAYER]	= null
+		overlays_standing[HO_SUIT_LAYER] = null
 		update_tail_showing(0)
 		update_inv_w_uniform(0)
 		update_inv_shoes(0)
@@ -616,16 +632,19 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
-	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/accessory) ) && !(head && head.flags_inv & HIDEMASK))
-		overlays_standing[HO_FACEMASK_LAYER]	= wear_mask.get_mob_overlay(src,slot_wear_mask_str)
+	var/obj/item/head = get_equipped_item(BP_HEAD)
+	var/obj/item/mask = get_equipped_item(BP_MOUTH)
+	if( mask && ( istype(mask, /obj/item/clothing/mask) || istype(mask, /obj/item/clothing/accessory) ) && !(head && head.flags_inv & HIDEMASK))
+		overlays_standing[HO_FACEMASK_LAYER]	= mask.get_mob_overlay(src,BP_MOUTH)
 	else
 		overlays_standing[HO_FACEMASK_LAYER]	= null
 	if(update_icons)
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
+	var/obj/item/back = get_equipped_item(BP_SHOULDERS)
 	if(back)
-		overlays_standing[HO_BACK_LAYER] = back.get_mob_overlay(src,slot_back_str)
+		overlays_standing[HO_BACK_LAYER] = back.get_mob_overlay(src, BP_SHOULDERS)
 	else
 		overlays_standing[HO_BACK_LAYER] = null
 
@@ -667,10 +686,9 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[HO_TAIL_LAYER] = null
-
+	var/obj/item/suit = get_equipped_item(BP_BODY)
 	var/species_tail = species.get_tail(src)
-
-	if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+	if(species_tail && !(suit && suit.flags_inv & HIDETAIL))
 		var/icon/tail_s = get_tail_icon()
 		overlays_standing[HO_TAIL_LAYER] = image(tail_s, icon_state = "[species_tail]_s")
 		animate_tail_reset(0)
@@ -755,8 +773,8 @@ var/global/list/damage_icon_parts = list()
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi
 /mob/living/carbon/human/proc/update_collar(var/update_icons=1)
-	if(istype(wear_suit,/obj/item/clothing/suit))
-		var/obj/item/clothing/suit/S = wear_suit
+	var/obj/item/clothing/suit/S = get_equipped_item(BP_BODY)
+	if(istype(S))
 		overlays_standing[HO_COLLAR_LAYER]	= S.get_collar()
 	else
 		overlays_standing[HO_COLLAR_LAYER]	= null

@@ -156,6 +156,11 @@
 	body_parts_covered = 0
 	siemens_coefficient = 1.5
 
+/obj/item/clothing/head/kitty/equipped(mob/user, slot)
+	. = ..()
+	if(slot == BP_HEAD)
+		update_icon(user)
+
 /obj/item/clothing/head/richard
 	name = "chicken mask"
 	desc = "You can hear the distant sounds of rhythmic electronica."

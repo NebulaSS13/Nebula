@@ -189,7 +189,7 @@
 
 		if(istype(src.loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src.loc
-			if(H.wear_suit == src)
+			if(H.get_equipped_item(BP_BODY) == src)
 				to_chat(user, "<span class='warning'>You cannot repair \the [src] while it is being worn.</span>")
 				return
 
@@ -207,7 +207,7 @@
 
 		if(istype(src.loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src.loc
-			if(H.wear_suit == src)
+			if(H.get_equipped_item(BP_BODY) == src)
 				to_chat(user, "<span class='warning'>You cannot repair \the [src] while it is being worn.</span>")
 				return
 
@@ -237,7 +237,7 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			var/mob/living/carbon/human/H = user
 			if(!istype(H)) return
-			if(do_after(user, H.wear_suit == src? 60 : 30, istype(src.loc,/mob/living)? src.loc : null)) //Sealing a breach on your own suit is awkward and time consuming
+			if(do_after(user, H.get_equipped_item(BP_BODY) == src? 60 : 30, istype(src.loc,/mob/living)? src.loc : null)) //Sealing a breach on your own suit is awkward and time consuming
 				user.visible_message("<b>[user]</b> uses \the [W] to seal \the [target_breach.descriptor] on \the [src].")
 				target_breach.patched = TRUE
 				target_breach.update_descriptor()

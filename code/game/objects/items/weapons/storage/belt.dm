@@ -36,7 +36,7 @@
 
 /obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	if(slot == slot_belt_str && contents.len)
+	if(slot == BP_GROIN && contents.len)
 		var/list/ret_overlays = list()
 		for(var/obj/item/I in contents)
 			if(I.use_single_icon)
@@ -454,7 +454,7 @@
 
 /obj/item/storage/belt/holster/security/tactical/Initialize()
 	.=..()
-	LAZYSET(slowdown_per_slot, slot_belt_str, 1)
+	LAZYSET(slowdown_per_slot, BP_GROIN, 1)
 
 /obj/item/storage/belt/waistpack
 	name = "waist pack"
@@ -477,7 +477,7 @@
 
 /obj/item/storage/belt/waistpack/big/Initialize()
 	.=..()
-	LAZYSET(slowdown_per_slot, slot_belt_str, 1)
+	LAZYSET(slowdown_per_slot, BP_GROIN, 1)
 
 /obj/item/storage/belt/fire_belt
 	name = "firefighting equipment belt"

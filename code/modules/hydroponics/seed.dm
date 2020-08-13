@@ -153,7 +153,7 @@
 
 		var/obj/item/organ/external/affecting = pick(target.organs)
 
-		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
+		for(var/obj/item/clothing/C in list(target.get_equipped_item(BP_HEAD), target.get_equipped_item(BP_MOUTH), target.get_equipped_item(BP_BODY), target.get_equipped_item(BP_CHEST), target.gloves, target.shoes))
 			if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				affecting = null
 

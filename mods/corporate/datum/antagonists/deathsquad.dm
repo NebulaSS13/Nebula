@@ -28,19 +28,19 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 		return
 
 	if (player.mind == leader)
-		player.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(player), slot_w_uniform_str)
+		player.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(player), BP_CHEST)
 	else
-		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/green(player), slot_w_uniform_str)
+		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/green(player), BP_CHEST)
 
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots/swat(player), slot_shoes_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(player), slot_glasses_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat(player), slot_wear_mask_str)
+	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(player), BP_EYES)
+	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat(player), BP_MOUTH)
 	if (player.mind == leader)
 		player.equip_to_slot_or_del(new /obj/item/pinpointer(player), slot_l_store_str)
 		player.equip_to_slot_or_del(new /obj/item/disk/nuclear(player), slot_r_store_str)
 	else
 		player.equip_to_slot_or_del(new /obj/item/plastique(player), slot_l_store_str)
-	player.equip_to_slot_or_del(new /obj/item/gun/projectile/revolver(player), slot_belt_str)
+	player.equip_to_slot_or_del(new /obj/item/gun/projectile/revolver(player), BP_GROIN)
 	player.put_in_hands_or_del(new /obj/item/gun/energy/laser(player))
 	player.put_in_hands_or_del(new /obj/item/energy_blade/sword(player))
 	player.implant_loyalty(player)

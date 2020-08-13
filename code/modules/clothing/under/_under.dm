@@ -82,7 +82,7 @@
 	else
 		. = icon_state
 	if(!findtext(.,"_s", -2)) // If we don't already have our suffix
-		if((icon_state + "_f_s") in icon_states(global.default_onmob_icons[slot_w_uniform_str]))
+		if((icon_state + "_f_s") in icon_states(global.default_onmob_icons[BP_CHEST]))
 			. +=  get_gender_suffix()
 		else
 			. += "_s"
@@ -97,12 +97,12 @@
 /obj/item/clothing/under/Initialize()
 	. = ..()
 	if(worn_state)
-		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state)
+		LAZYSET(item_state_slots, BP_CHEST, worn_state)
 	else
 		worn_state = icon_state
 	//autodetect rollability
 	if(rolled_down < 0)
-		if(("[worn_state]_d_s") in icon_states(global.default_onmob_icons[slot_w_uniform_str]))
+		if(("[worn_state]_d_s") in icon_states(global.default_onmob_icons[BP_CHEST]))
 			rolled_down = 0
 
 /obj/item/clothing/under/proc/update_rolldown_status()
@@ -115,10 +115,10 @@
 		under_icon = icon_override
 	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
 		under_icon = sprite_sheets[H.species.get_bodytype(H)]
-	else if(item_icons && item_icons[slot_w_uniform_str])
-		under_icon = item_icons[slot_w_uniform_str]
+	else if(item_icons && item_icons[BP_CHEST])
+		under_icon = item_icons[BP_CHEST]
 	else
-		under_icon = global.default_onmob_icons[slot_w_uniform_str]
+		under_icon = global.default_onmob_icons[BP_CHEST]
 
 	// The _s is because the icon update procs append it.
 	if(("[worn_state]_d_s") in icon_states(under_icon))
@@ -138,10 +138,10 @@
 		under_icon = icon_override
 	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
 		under_icon = sprite_sheets[H.species.get_bodytype(H)]
-	else if(item_icons && item_icons[slot_w_uniform_str])
-		under_icon = item_icons[slot_w_uniform_str]
+	else if(item_icons && item_icons[BP_CHEST])
+		under_icon = item_icons[BP_CHEST]
 	else
-		under_icon = global.default_onmob_icons[slot_w_uniform_str]
+		under_icon = global.default_onmob_icons[BP_CHEST]
 
 	// The _s is because the icon update procs append it.
 	if(("[worn_state]_r_s") in icon_states(under_icon))
@@ -243,10 +243,10 @@
 	rolled_down = !rolled_down
 	if(rolled_down)
 		body_parts_covered &= SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET
-		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix("_d_s"))
+		LAZYSET(item_state_slots, BP_CHEST, worn_state + get_gender_suffix("_d_s"))
 	else
 		body_parts_covered = initial(body_parts_covered)
-		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix())
+		LAZYSET(item_state_slots, BP_CHEST, worn_state + get_gender_suffix())
 	update_clothing_icon()
 
 /obj/item/clothing/under/verb/rollsleeves()
@@ -267,11 +267,11 @@
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
 		body_parts_covered &= ~(SLOT_ARMS|SLOT_HANDS)
-		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix("_r_s"))
+		LAZYSET(item_state_slots, BP_CHEST, worn_state + get_gender_suffix("_r_s"))
 		to_chat(usr, "<span class='notice'>You roll up your [src]'s sleeves.</span>")
 	else
 		body_parts_covered = initial(body_parts_covered)
-		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix())
+		LAZYSET(item_state_slots, BP_CHEST, worn_state + get_gender_suffix())
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
 

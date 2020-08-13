@@ -173,7 +173,7 @@
 		ear_safety += 1
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(istype(H.head, /obj/item/clothing/head/helmet))
+		if(istype(H.get_equipped_item(BP_HEAD), /obj/item/clothing/head/helmet))
 			ear_safety += 1
 
 	if(!ear_safety)

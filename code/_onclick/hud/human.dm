@@ -109,7 +109,7 @@
 		using.alpha = ui_alpha
 		src.adding += using
 
-		rebuild_hands(skip_client_update = TRUE)
+		rebuild_equipment_slots(skip_client_update = TRUE)
 
 	if(hud_data.has_resist)
 		using = new /obj/screen()
@@ -251,10 +251,9 @@
 	mymob.radio_use_icon.alpha = ui_alpha
 
 	mymob.client.screen = list()
-	if(length(hand_hud_objects))
-		mymob.client.screen += hand_hud_objects
 	if(length(hud_elements))
 		mymob.client.screen += hud_elements
+
 	mymob.client.screen += src.adding + src.hotkeybuttons
 	inventory_shown = 0
 

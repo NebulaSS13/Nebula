@@ -123,16 +123,18 @@
 		var/obj/item/weldingtool/welder = tool
 		if(!welder.isOn() || !welder.remove_fuel(1,user))
 			return FALSE
-	return (target_zone == BP_CHEST) && istype(target.back, /obj/item/rig) && !(target.back.canremove)
+	var/obj/item/rig/back = target.get_equipped_item(BP_SHOULDERS)
+	return (target_zone == BP_CHEST) && istype(back) && !(back.canremove)
 
 /decl/surgery_step/hardsuit/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts cutting through the support systems of [target]'s [target.back] with \the [tool]." , \
-	"You start cutting through the support systems of [target]'s [target.back] with \the [tool].")
+	var/obj/item/back = target.get_equipped_item(BP_SHOULDERS)
+	user.visible_message("[user] starts cutting through the support systems of [target]'s [back] with \the [tool]." , \
+	"You start cutting through the support systems of [target]'s [back] with \the [tool].")
 	..()
 
 /decl/surgery_step/hardsuit/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-	var/obj/item/rig/rig = target.back
+	var/obj/item/rig/rig = target.get_equipped_item(BP_SHOULDERS)
 	if(!istype(rig))
 		return
 	rig.reset()

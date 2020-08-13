@@ -2,7 +2,7 @@
 	var/static/list/appearances
 
 /decl/appearance_handler/cardborg/proc/item_equipped(var/obj/item/item, var/mob/user, var/slot)
-	if(!(slot == slot_head_str || slot == slot_wear_suit_str || slot == slot_back_str))
+	if(!(slot == BP_HEAD || slot == BP_BODY || slot == BP_SHOULDERS))
 		return
 	if(!ishuman(user))
 		return
@@ -12,7 +12,7 @@
 		return
 
 	var/mob/living/carbon/human/H = user
-	if(!(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg) && istype(H.back, /obj/item/storage/backpack)))
+	if(!(istype(H.get_equipped_item(BP_BODY), /obj/item/clothing/suit/cardborg) && istype(H.get_equipped_item(BP_HEAD), /obj/item/clothing/head/cardborg) && istype(H.get_equipped_item(BP_SHOULDERS), /obj/item/storage/backpack)))
 		return
 
 	var/image/I = get_image_from_backpack(H)
@@ -31,13 +31,15 @@
 
 /decl/appearance_handler/cardborg/proc/get_image_from_backpack(var/mob/living/carbon/human/H)
 	init_appearances()
-	var/decl/cardborg_appearance/ca = appearances[H.back.type]
-	if(!ca) ca = appearances[/obj/item/storage/backpack]
+	var/obj/item/back = H.get_equipped_item(BP_SHOULDERS)
+	if(back)
+		var/decl/cardborg_appearance/ca = appearances[back.type]
+		if(!ca) ca = appearances[/obj/item/storage/backpack]
 
-	var/image/I = image(icon = 'icons/mob/robots.dmi', icon_state = ca.icon_state, loc = H)
-	I.override = 1
-	I.overlays += image(icon = 'icons/mob/robots.dmi', icon_state = "eyes-[ca.icon_state]") //gotta look realistic
-	return I
+		var/image/I = image(icon = 'icons/mob/robots.dmi', icon_state = ca.icon_state, loc = H)
+		I.override = 1
+		I.overlays += image(icon = 'icons/mob/robots.dmi', icon_state = "eyes-[ca.icon_state]") //gotta look realistic
+		return I
 
 /decl/appearance_handler/cardborg/proc/init_appearances()
 	if(!appearances)

@@ -119,7 +119,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 			Deactivate()
 			return
 
-		if (src == C.wear_mask && C.check_has_mouth()) //transfer, but only when not disabled
+		if (src == C.get_equipped_item(BP_MOUTH) && C.check_has_mouth()) //transfer, but only when not disabled
 			idle = 0
 			//here we'll reduce battery by usage, and check powerlevel - you only use batery while smoking
 			if(!cigcell.checked_use(power_usage * CELLRATE)) //if this passes, there's not enough power in the battery

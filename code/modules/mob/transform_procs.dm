@@ -2,7 +2,7 @@
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)
-		if (W==w_uniform) // will be torn
+		if (W == get_equipped_item(BP_CHEST)) // will be torn
 			continue
 		drop_from_inventory(W)
 	regenerate_icons()

@@ -1082,7 +1082,7 @@
 		M.forceMove(prison_cell)
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/prisoner = M
-			prisoner.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(prisoner), slot_w_uniform_str)
+			prisoner.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(prisoner), BP_CHEST)
 			prisoner.equip_to_slot_or_del(new /obj/item/clothing/shoes/color/orange(prisoner), slot_shoes_str)
 
 		to_chat(M, "<span class='warning'>You have been sent to the prison station!</span>")
@@ -1179,7 +1179,7 @@
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/observer = M
-			observer.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket(observer), slot_w_uniform_str)
+			observer.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket(observer), BP_CHEST)
 			observer.equip_to_slot_or_del(new /obj/item/clothing/shoes/color/black(observer), slot_shoes_str)
 		M.Paralyse(5)
 		sleep(5)
@@ -1470,7 +1470,7 @@
 		if(!istype(H))
 			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
 			return
-		if(!istype(H.l_ear, /obj/item/radio/headset) && !istype(H.r_ear, /obj/item/radio/headset))
+		if(!istype(H.get_equipped_item(BP_L_EAR), /obj/item/radio/headset) && !istype(H.get_equipped_item(BP_R_EAR), /obj/item/radio/headset))
 			to_chat(usr, "The person you are trying to contact is not wearing a headset")
 			return
 
@@ -2014,7 +2014,7 @@ mob/living/proc/can_centcom_reply()
 	return 0
 
 mob/living/carbon/human/can_centcom_reply()
-	return istype(l_ear, /obj/item/radio/headset) || istype(r_ear, /obj/item/radio/headset)
+	return istype(get_equipped_item(BP_L_EAR), /obj/item/radio/headset) || istype(get_equipped_item(BP_R_EAR), /obj/item/radio/headset)
 
 mob/living/silicon/ai/can_centcom_reply()
 	return silicon_radio != null && !check_unable(2)

@@ -61,7 +61,17 @@ var/list/icon_state_cache = list()
 // `l/r_hand-foo`. TODO: check if this is still here in 2025.
 var/list/bodypart_to_slot_lookup_table = list(
 	BP_L_HAND = "slot_l_hand",
-	BP_R_HAND = "slot_r_hand"
+	BP_R_HAND = "slot_r_hand",
+	BP_HEAD =   "slot_head",
+	BP_EYES =   "slot_glasses",
+	BP_MOUTH =  "slot_mask",
+	BP_CHEST =  "slot_uniform",
+	BP_BODY =   "slot_suit",
+	BP_SHOULDERS =   "slot_back",
+	BP_GROIN =  "slot_belt",
+	BP_L_EAR =  "slot_l_ear",
+	BP_R_EAR =  "slot_r_ear",
+	BP_NECK =   "slot_wear_id"
 )
 
 /obj/item/proc/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)

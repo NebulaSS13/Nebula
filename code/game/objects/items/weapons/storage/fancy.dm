@@ -134,7 +134,7 @@
 	if(!istype(M, /mob))
 		return
 
-	if(M == user && user.zone_sel.selecting == BP_MOUTH && contents.len > 0 && !user.wear_mask)
+	if(M == user && user.zone_sel.selecting == BP_MOUTH && contents.len > 0 && !user.get_equipped_item(BP_MOUTH))
 		// Find ourselves a cig. Note that we could be full of lighters.
 		var/obj/item/clothing/mask/smokable/cigarette/cig = null
 		for(var/obj/item/clothing/mask/smokable/cigarette/C in contents)
@@ -147,13 +147,13 @@
 
 		// Instead of running equip_to_slot_if_possible() we check here first,
 		// to avoid dousing cig with reagents if we're not going to equip it
-		if(!cig.mob_can_equip(user, slot_wear_mask_str))
+		if(!cig.mob_can_equip(user, BP_MOUTH))
 			return
 
 		// We call remove_from_storage first to manage the reagent transfer and
 		// UI updates.
 		remove_from_storage(cig, null)
-		user.equip_to_slot(cig, slot_wear_mask_str)
+		user.equip_to_slot(cig, BP_MOUTH)
 
 		reagents.maximum_volume = 5 * contents.len
 		to_chat(user, "<span class='notice'>You take a cigarette out of the pack.</span>")

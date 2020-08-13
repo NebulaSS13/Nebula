@@ -152,10 +152,10 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		var/fallback_type = pick(/obj/item/clothing/shoes/sandal)
 		player.equip_to_slot_or_del(new fallback_type(player), slot_shoes_str)
 
-	player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform_str)
-	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses_str)
-	player.equip_to_slot_or_del(new new_helmet(player),slot_head_str)
-	player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit_str)
+	player.equip_to_slot_or_del(new new_uniform(player),BP_CHEST)
+	player.equip_to_slot_or_del(new new_glasses(player),BP_EYES)
+	player.equip_to_slot_or_del(new new_helmet(player), BP_HEAD)
+	player.equip_to_slot_or_del(new new_suit(player), BP_BODY)
 	equip_weapons(player)
 
 	var/obj/item/card/id/id = create_id("Visitor", player, equip = 0)
@@ -163,7 +163,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	id.assignment = "Visitor"
 	var/obj/item/storage/wallet/W = new(player)
 	W.handle_item_insertion(id)
-	if(player.equip_to_slot_or_del(W, slot_wear_id_str))
+	if(player.equip_to_slot_or_del(W, BP_NECK))
 		var/obj/item/cash/cash = new(get_turf(player))
 		cash.adjust_worth(rand(50,150)*10)
 		player.put_in_hands(cash)
@@ -188,17 +188,17 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			H.holstered = secondary
 			secondary.forceMove(holster)
 		else
-			player.equip_to_slot_or_del(secondary, slot_belt_str)
+			player.equip_to_slot_or_del(secondary, BP_GROIN)
 
 	if(primary.slot_flags & SLOT_HOLSTER)
 		holster = new new_holster(T)
 		var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
 		H.holstered = primary
 		primary.forceMove(holster)
-	else if(!player.belt && (primary.slot_flags & SLOT_LOWER_BODY))
-		player.equip_to_slot_or_del(primary, slot_belt_str)
-	else if(!player.back && (primary.slot_flags & SLOT_BACK))
-		player.equip_to_slot_or_del(primary, slot_back_str)
+	else if(!player.get_equipped_item(BP_GROIN) && (primary.slot_flags & SLOT_LOWER_BODY))
+		player.equip_to_slot_or_del(primary, BP_GROIN)
+	else if(!player.get_equipped_item(BP_SHOULDERS) && (primary.slot_flags & SLOT_BACK))
+		player.equip_to_slot_or_del(primary, BP_SHOULDERS)
 	else
 		player.put_in_hands(primary)
 
@@ -206,7 +206,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	equip_ammo(player, primary)
 
 	if(holster)
-		var/obj/item/clothing/under/uniform = player.w_uniform
+		var/obj/item/clothing/under/uniform = player.get_equipped_item(BP_CHEST)
 		if(istype(uniform) && uniform.can_attach_accessory(holster))
 			uniform.attackby(holster, player)
 		else

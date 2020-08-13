@@ -94,18 +94,20 @@ obj/var/contaminated = 0
 
 	//Burn eyes if exposed.
 	if(vsc.contaminant_control.EYE_BURNS)
+		var/obj/item/head = get_equipped_item(BP_HEAD)
+		var/obj/item/mask = get_equipped_item(BP_MOUTH)
 		if(!head)
-			if(!wear_mask)
+			if(!mask)
 				burn_eyes()
 			else
-				if(!(wear_mask.body_parts_covered & SLOT_EYES))
+				if(!(mask.body_parts_covered & SLOT_EYES))
 					burn_eyes()
 		else
 			if(!(head.body_parts_covered & SLOT_EYES))
-				if(!wear_mask)
+				if(!mask)
 					burn_eyes()
 				else
-					if(!(wear_mask.body_parts_covered & SLOT_EYES))
+					if(!(mask.body_parts_covered & SLOT_EYES))
 						burn_eyes()
 
 	//Genetic Corruption
@@ -128,6 +130,7 @@ obj/var/contaminated = 0
 
 /mob/living/carbon/human/proc/contaminant_head_protected()
 	//Checks if the head is adequately sealed.
+	var/obj/item/head = get_equipped_item(BP_HEAD)
 	if(head)
 		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY)
 			if(head.item_flags & ITEM_FLAG_NO_CONTAMINATION)
@@ -139,7 +142,7 @@ obj/var/contaminated = 0
 /mob/living/carbon/human/proc/contaminant_suit_protected()
 	//Checks if the suit is adequately sealed.
 	var/coverage = 0
-	for(var/obj/item/protection in list(wear_suit, gloves, shoes))
+	for(var/obj/item/protection in list(get_equipped_item(BP_BODY), gloves, shoes))
 		if(!protection)
 			continue
 		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY && !(protection.item_flags & ITEM_FLAG_NO_CONTAMINATION))
@@ -153,7 +156,9 @@ obj/var/contaminated = 0
 
 /mob/living/carbon/human/proc/suit_contamination()
 	//Runs over the things that can be contaminated and does so.
-	if(w_uniform) w_uniform.contaminate()
+	var/obj/item/uniform = get_equipped_item(BP_CHEST)
+	if(uniform)
+		uniform.contaminate()
 	if(shoes) shoes.contaminate()
 	if(gloves) gloves.contaminate()
 

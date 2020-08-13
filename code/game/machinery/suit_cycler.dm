@@ -68,9 +68,9 @@
 	if(boots)
 		LAZYADD(new_overlays, boots.get_mob_overlay(null, slot_shoes_str))
 	if(suit)
-		LAZYADD(new_overlays, suit.get_mob_overlay(null, slot_wear_suit_str))
+		LAZYADD(new_overlays, suit.get_mob_overlay(null, BP_BODY))
 	if(helmet)
-		LAZYADD(new_overlays, helmet.get_mob_overlay(null, slot_head_str))
+		LAZYADD(new_overlays, helmet.get_mob_overlay(null, BP_HEAD))
 	if(occupant)
 		LAZYADD(new_overlays, image(occupant))
 	LAZYADD(new_overlays, image(icon, "overbase"))
@@ -263,7 +263,7 @@
 	user.set_machine(src)
 
 	var/dat = list()
-	dat += "<HEAD><TITLE>Suit Cycler Interface</TITLE></HEAD>"
+	dat += "<><TITLE>Suit Cycler Interface</TITLE></>"
 
 	if(active)
 		dat+= "<br><font color='red'><B>The [model_text ? "[model_text] " : ""]suit cycler is currently in use. Please wait...</b></font>"

@@ -65,7 +65,7 @@
 	icon_state = "[base_icon][wielded]"
 	LAZYSET(item_state_slots, BP_L_HAND, icon_state)
 	LAZYSET(item_state_slots, BP_R_HAND, icon_state)
-	LAZYSET(item_state_slots, slot_back_str, base_icon)
+	LAZYSET(item_state_slots, BP_SHOULDERS, base_icon)
 
 /*
  * Fireaxe

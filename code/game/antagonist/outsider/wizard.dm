@@ -113,13 +113,13 @@ Made a proc so this is not repeated 14 (or more) times.*/
 
 // Humans can wear clothes.
 /mob/living/carbon/human/wearing_wiz_garb()
-	if(!is_wiz_garb(src.wear_suit) && (!src.species.hud || (slot_wear_suit_str in src.species.hud.equip_slots)))
+	if(!is_wiz_garb(get_equipped_item(BP_BODY)) && (!src.species.hud || (BP_BODY in inventory_slots)))
 		to_chat(src, "<span class='warning'>I don't feel strong enough without my robe.</span>")
 		return 0
-	if(!is_wiz_garb(src.shoes) && (!species.hud || (slot_shoes_str in src.species.hud.equip_slots)))
+	if(!is_wiz_garb(src.shoes) && (!species.hud || (slot_shoes_str in inventory_slots)))
 		to_chat(src, "<span class='warning'>I don't feel strong enough without my sandals.</span>")
 		return 0
-	if(!is_wiz_garb(src.head) && (!species.hud || (slot_head_str in src.species.hud.equip_slots)))
+	if(!is_wiz_garb(get_equipped_item(BP_HEAD)) && (!species.hud || (BP_HEAD in inventory_slots)))
 		to_chat(src, "<span class='warning'>I don't feel strong enough without my hat.</span>")
 		return 0
 	return 1

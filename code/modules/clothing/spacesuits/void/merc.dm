@@ -34,7 +34,7 @@
 
 /obj/item/clothing/suit/space/void/merc/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)
+	LAZYSET(slowdown_per_slot, BP_BODY, 1)
 
 /obj/item/clothing/suit/space/void/merc/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/merc

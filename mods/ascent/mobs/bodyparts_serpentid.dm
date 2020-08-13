@@ -162,6 +162,18 @@
 	vital = 0
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
 
+/obj/item/organ/external/head/insectoid/serpentid/remove_inventory_slots()
+	if(owner)
+		owner.remove_inventory_slot(BP_HEAD)
+		owner.remove_inventory_slot(BP_EYES)
+		owner.remove_inventory_slot(BP_L_EAR)
+		
+/obj/item/organ/external/head/insectoid/serpentid/add_inventory_slots()
+	if(owner)
+		owner.add_inventory_slot(BP_HEAD,  ui_mask,            inventory_slot_type = /datum/inventory_slot/head)
+		owner.add_inventory_slot(BP_EYES,  ui_glasses,         inventory_slot_type = /datum/inventory_slot/eyes)
+		owner.add_inventory_slot(BP_L_EAR, ui_l_ear, BP_L_EAR, inventory_slot_type = /datum/inventory_slot/ear)
+
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
 	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
 	if(eyes)

@@ -1,5 +1,5 @@
 /obj/item/clothing/under/rank/corp
-	item_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_under.dmi')
+	item_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_under.dmi')
 	icon = 'mods/corporate/icons/obj/clothing/obj_under.dmi'
 
 /obj/item/clothing/under/rank/corp/work
@@ -40,7 +40,7 @@
 	icon_state = "pilot"
 	item_state = "g_suit"
 	worn_state = "pilot"
-	item_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_under.dmi')
+	item_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_under.dmi')
 	icon = 'mods/corporate/icons/obj/clothing/obj_under.dmi'
 	gender_icons = 1
 
@@ -52,7 +52,7 @@
 	worn_state = "suit"
 	starting_accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket, /obj/item/clothing/accessory/corptie)
 	icon = 'mods/corporate/icons/obj/clothing/obj_under.dmi'
-	item_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_under.dmi')
+	item_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_under.dmi')
 	gender_icons = 1
 
 /obj/item/clothing/under/rank/corp/work/nanotrasen

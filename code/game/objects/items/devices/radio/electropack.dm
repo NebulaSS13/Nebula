@@ -15,7 +15,7 @@
 	var/code = 2
 
 /obj/item/radio/electropack/attack_hand(mob/user)
-	if(src == user.back)
+	if(src == user.get_equipped_item(BP_SHOULDERS))
 		to_chat(user, "<span class='notice'>You need help taking this off!</span>")
 		return
 	..()

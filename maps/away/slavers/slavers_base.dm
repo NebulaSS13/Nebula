@@ -181,7 +181,7 @@
 	desc = "Lightly armored suit worn by abolition extremists during raids. It has green patches on the right sleeve and the chest. There is big green \"A\" on the back."
 	icon = 'maps/away/slavers/slavers_base_sprites.dmi'
 	icon_state = "abol_suit"
-	item_icons = list(slot_w_uniform_str = 'maps/away/slavers/slavers_base_sprites.dmi')
+	item_icons = list(BP_CHEST = 'maps/away/slavers/slavers_base_sprites.dmi')
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES, 

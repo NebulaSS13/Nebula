@@ -197,21 +197,21 @@
 
 /obj/item/rig/proc/set_slowdown_and_vision(var/active)
 	if(chest)
-		LAZYSET(chest.slowdown_per_slot, slot_wear_suit_str, (active? online_slowdown : offline_slowdown))
+		LAZYSET(chest.slowdown_per_slot, BP_BODY, (active? online_slowdown : offline_slowdown))
 	if(helmet)
 		helmet.tint = (active? vision_restriction : offline_vision_restriction)
 		helmet.update_vision()
 
 /obj/item/rig/proc/suit_is_deployed()
-	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
+	if(!istype(wearer) || src.loc != wearer || wearer.get_equipped_item(BP_SHOULDERS) != src)
 		return 0
-	if(helm_type && !(helmet && wearer.head == helmet))
+	if(helm_type && !(helmet && wearer.get_equipped_item(BP_HEAD) == helmet))
 		return 0
 	if(glove_type && !(gloves && wearer.gloves == gloves))
 		return 0
 	if(boot_type && !(boots && wearer.shoes == boots))
 		return 0
-	if(chest_type && !(chest && wearer.wear_suit == chest))
+	if(chest_type && !(chest && wearer.get_equipped_item(BP_BODY) == chest))
 		return 0
 	return 1
 
@@ -263,7 +263,7 @@
 		if(!wearer)
 			failed_to_seal = 1
 		else
-			for(var/list/piece_data in list(list(wearer.shoes,boots,"boots",boot_type),list(wearer.gloves,gloves,"gloves",glove_type),list(wearer.head,helmet,"helmet",helm_type),list(wearer.wear_suit,chest,"chest",chest_type)))
+			for(var/list/piece_data in list(list(wearer.shoes,boots,"boots",boot_type),list(wearer.gloves,gloves,"gloves",glove_type),list(wearer.get_equipped_item(BP_HEAD),helmet,"helmet",helm_type),list(wearer.get_equipped_item(BP_BODY),chest,"chest",chest_type)))
 
 				var/obj/item/piece = piece_data[1]
 				var/obj/item/compare_piece = piece_data[2]
@@ -278,7 +278,7 @@
 					failed_to_seal = 1
 					break
 
-				if(!failed_to_seal && wearer.back == src && piece == compare_piece)
+				if(!failed_to_seal && wearer.get_equipped_item(BP_SHOULDERS) == src && piece == compare_piece)
 
 					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,needhand=0))
 						failed_to_seal = 1
@@ -309,7 +309,7 @@
 				else
 					failed_to_seal = 1
 
-		if((wearer && !(istype(wearer) && wearer.back == src)) || (!seal_target && !suit_is_deployed()))
+		if((wearer && !(istype(wearer) && wearer.get_equipped_item(BP_SHOULDERS) == src)) || (!seal_target && !suit_is_deployed()))
 			failed_to_seal = 1
 
 	sealing = null
@@ -416,7 +416,7 @@
 
 //offline should not change outside this proc
 /obj/item/rig/proc/update_offline()
-	var/go_offline = (!istype(wearer) || loc != wearer || wearer.back != src || canremove || sealing || !cell || cell.charge <= 0)
+	var/go_offline = (!istype(wearer) || loc != wearer || wearer.get_equipped_item(BP_SHOULDERS) != src || canremove || sealing || !cell || cell.charge <= 0)
 	if(offline != go_offline)
 		offline = go_offline
 		return 1
@@ -431,7 +431,7 @@
 
 	if(!user_is_ai)
 		var/mob/living/carbon/human/H = user
-		if(istype(H) && H.back != src)
+		if(istype(H) && H.get_equipped_item(BP_SHOULDERS) != src)
 			fail_msg = "<span class='warning'>You must be wearing \the [src] to do this.</span>"
 	if(sealing)
 		fail_msg = "<span class='warning'>The hardsuit is in the process of adjusting seals and cannot be activated.</span>"
@@ -489,10 +489,12 @@
 	if(wearer) //Internals below!!!
 		data["valveOpen"] = (wearer.internal == air_supply)
 
+		var/obj/item/head = wearer.get_equipped_item(BP_HEAD)
 		if(!wearer.internal || wearer.internal == air_supply)	// if they have no active internals or if tank is current internal
-			if(wearer.wear_mask && (wearer.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))// mask
+			var/obj/item/mask = wearer.get_equipped_item(BP_MOUTH)
+			if(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT))// mask
 				data["maskConnected"] = 1
-			else if(wearer.head && (wearer.head.item_flags & ITEM_FLAG_AIRTIGHT)) // Make sure they have a helmet and its airtight
+			else if(head && (head.item_flags & ITEM_FLAG_AIRTIGHT)) // Make sure they have a helmet and its airtight
 				data["maskConnected"] = 1
 			else
 				data["maskConnected"] = 0
@@ -566,7 +568,7 @@
 
 /obj/item/rig/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	if(slot != slot_back_str || offline)
+	if(slot != BP_SHOULDERS || offline)
 		return ret
 
 	if(equipment_overlay_icon && LAZYLEN(installed_modules))
@@ -590,7 +592,7 @@
 			return 1
 		if(malfunction_check(user))
 			return 0
-		if(user.back != src)
+		if(user.get_equipped_item(BP_SHOULDERS) != src)
 			return 0
 		else if(!src.allowed(user))
 			to_chat(user, "<span class='danger'>Unauthorized user. Access denied.</span>")
@@ -654,16 +656,16 @@
 /obj/item/rig/equipped(mob/living/carbon/human/M)
 	..()
 
-	if(seal_delay > 0 && istype(M) && M.back == src)
+	if(seal_delay > 0 && istype(M) && M.get_equipped_item(BP_BODY) == src)
 		M.visible_message("<font color='blue'>[M] starts putting on \the [src]...</font>", "<font color='blue'>You start putting on \the [src]...</font>")
 		if(!do_after(M,seal_delay,src))
-			if(M && M.back == src)
+			if(M && M.get_equipped_item(BP_BODY) == src)
 				if(!M.unEquip(src))
 					return
 			src.dropInto(loc)
 			return
 
-	if(istype(M) && M.back == src)
+	if(istype(M) && M.get_equipped_item(BP_BODY) == src)
 		M.visible_message("<font color='blue'><b>[M] struggles into \the [src].</b></font>", "<font color='blue'><b>You struggle into \the [src].</b></font>")
 		wearer = M
 		wearer.wearing_rig = src
@@ -674,7 +676,7 @@
 	if(sealing || !cell || !cell.charge)
 		return
 
-	if(!istype(wearer) || !wearer.back == src)
+	if(!istype(wearer) || !wearer.get_equipped_item(BP_SHOULDERS) == src)
 		return
 
 	if(initiator == wearer && wearer.incapacitated(INCAPACITATION_DISABLED)) // If the initiator isn't wearing the suit it's probably an AI.
@@ -689,9 +691,9 @@
 
 	switch(piece)
 		if("helmet")
-			equip_to = slot_head_str
+			equip_to = BP_HEAD
 			use_obj = helmet
-			check_slot = wearer.head
+			check_slot = wearer.get_equipped_item(BP_HEAD)
 		if("gauntlets")
 			equip_to = slot_gloves_str
 			use_obj = gloves
@@ -701,9 +703,9 @@
 			use_obj = boots
 			check_slot = wearer.shoes
 		if("chest")
-			equip_to = slot_wear_suit_str
+			equip_to = BP_BODY
 			use_obj = chest
-			check_slot = wearer.wear_suit
+			check_slot = wearer.get_equipped_item(BP_BODY)
 
 	if(use_obj)
 		if(check_slot == use_obj && deploy_mode != ONLY_DEPLOY)
@@ -741,14 +743,14 @@
 
 	if(!H || !istype(H)) return
 
-	if(H.back != src)
+	if(H.get_equipped_item(BP_SHOULDERS) != src)
 		return
 
 	if(sealed)
-		if(H.head)
-			var/obj/item/garbage = H.head
-			H.head = null
-			qdel(garbage)
+		var/obj/item/head = H.get_equipped_item(BP_HEAD)
+		if(head)
+			H.drop_from_inventory(head)
+			qdel(head)
 
 		if(H.gloves)
 			var/obj/item/garbage = H.gloves
@@ -760,10 +762,10 @@
 			H.shoes = null
 			qdel(garbage)
 
-		if(H.wear_suit)
-			var/obj/item/garbage = H.wear_suit
-			H.wear_suit = null
-			qdel(garbage)
+		var/obj/item/suit = H.get_equipped_item(BP_BODY)
+		if(suit)
+			H.drop_from_inventory(suit)
+			qdel(suit)
 
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)
@@ -892,7 +894,7 @@
 	if(offline || !cell || !cell.charge || locked_down)
 		if(user) to_chat(user, "<span class='warning'>Your host rig is unpowered and unresponsive.</span>")
 		return 0
-	if(!wearer || wearer.back != src)
+	if(!wearer || wearer.get_equipped_item(BP_SHOULDERS) != src)
 		if(user) to_chat(user, "<span class='warning'>Your host rig is not being worn.</span>")
 		return 0
 	if(!wearer.stat && !control_overridden && !ai_override_enabled)

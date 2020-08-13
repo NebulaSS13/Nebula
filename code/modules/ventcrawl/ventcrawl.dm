@@ -48,7 +48,7 @@ var/list/ventcrawl_machinery = list(
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(is_type_in_list(carried_item, can_enter_vent_with))
-		return !get_inventory_slot(carried_item)
+		return !get_inventory_slot_for_item(carried_item)
 
 /mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	return (carried_item in internal_organs) || ..()
@@ -59,7 +59,7 @@ var/list/ventcrawl_machinery = list(
 		return TRUE
 	if(carried_item in organs)
 		return TRUE
-	if(carried_item in list(w_uniform, gloves, glasses, wear_mask, l_ear, r_ear, belt, l_store, r_store))
+	if(carried_item in list(get_equipped_item(BP_CHEST), gloves, get_equipped_item(BP_EYES), get_equipped_item(BP_MOUTH), get_equipped_item(BP_L_EAR), get_equipped_item(BP_R_EAR), get_equipped_item(BP_GROIN), l_store, r_store))
 		return TRUE
 	if(carried_item in get_held_items())
 		return carried_item.w_class <= ITEM_SIZE_NORMAL

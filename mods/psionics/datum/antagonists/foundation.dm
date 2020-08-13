@@ -51,4 +51,4 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 	hands =    list(/obj/item/storage/briefcase/foundation)
 	l_ear =    /obj/item/radio/headset/foundation
 	holster =  /obj/item/clothing/accessory/storage/holster/armpit
-	id_slot =  slot_wear_id_str
+	id_slot =  BP_NECK

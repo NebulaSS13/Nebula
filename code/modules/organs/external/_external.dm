@@ -1059,8 +1059,8 @@ obj/item/organ/external/proc/remove_clamps()
 	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
 	// TODO: consider moving this to a suit proc or process() or something during
 	// hardsuit rewrite.
-	if(!splinted && owner && istype(owner.wear_suit, /obj/item/clothing/suit/space/rig))
-		var/obj/item/clothing/suit/space/rig/suit = owner.wear_suit
+	var/obj/item/clothing/suit/space/rig/suit = owner.get_equipped_item(BP_BODY)
+	if(!splinted && owner && istype(suit))
 		suit.handle_fracture(owner, src)
 
 /obj/item/organ/external/proc/mend_fracture()
@@ -1214,16 +1214,11 @@ obj/item/organ/external/proc/remove_clamps()
 	if(!owner)
 		return
 
-	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
-		owner.drop_from_inventory(owner.shoes)
-	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
-		owner.drop_from_inventory(owner.gloves)
-	if(body_part & SLOT_HEAD)
-		owner.drop_from_inventory(owner.head)
-		owner.drop_from_inventory(owner.glasses)
-		owner.drop_from_inventory(owner.l_ear)
-		owner.drop_from_inventory(owner.r_ear)
-		owner.drop_from_inventory(owner.wear_mask)
+	switch(body_part)
+		if(SLOT_FOOT_LEFT, SLOT_FOOT_RIGHT)
+			owner.drop_from_inventory(owner.shoes)
+		if(SLOT_HAND_LEFT, SLOT_HAND_RIGHT)
+			owner.drop_from_inventory(owner.gloves)
 
 	var/mob/living/carbon/human/victim = owner
 	var/is_robotic = BP_IS_PROSTHETIC(src)

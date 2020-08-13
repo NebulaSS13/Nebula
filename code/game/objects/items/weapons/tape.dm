@@ -15,11 +15,13 @@
 			if(!H.check_has_eyes())
 				to_chat(user, "<span class='warning'>\The [H] doesn't have any eyes.</span>")
 				return
-			if(H.glasses)
-				to_chat(user, "<span class='warning'>\The [H] is already wearing somethign on their eyes.</span>")
+			if(H.get_equipped_item(BP_EYES))
+				to_chat(user, "<span class='warning'>\The [H] is already wearing something on their eyes.</span>")
 				return
-			if(H.head && (H.head.body_parts_covered & SLOT_FACE))
-				to_chat(user, "<span class='warning'>Remove their [H.head] first.</span>")
+
+			var/obj/item/head = H.get_equipped_item(BP_HEAD)
+			if(head && (head.body_parts_covered & SLOT_FACE))
+				to_chat(user, "<span class='warning'>Remove their [head] first.</span>")
 				return
 			user.visible_message("<span class='danger'>\The [user] begins taping over \the [H]'s eyes!</span>")
 
@@ -27,12 +29,12 @@
 				return
 
 			// Repeat failure checks.
-			if(!H || !src || !H.organs_by_name[BP_HEAD] || !H.check_has_eyes() || H.glasses || (H.head && (H.head.body_parts_covered & SLOT_FACE)))
+			if(!H || !src || !H.organs_by_name[BP_HEAD] || !H.check_has_eyes() || H.get_equipped_item(BP_EYES) || (head && (head.body_parts_covered & SLOT_FACE)))
 				return
 
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s eyes!</span>")
-			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), slot_glasses_str)
+			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), BP_EYES)
 
 		else if(user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
 			if(!H.organs_by_name[BP_HEAD])
@@ -41,11 +43,12 @@
 			if(!H.check_has_mouth())
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a mouth.</span>")
 				return
-			if(H.wear_mask)
+			if(H.get_equipped_item(BP_MOUTH))
 				to_chat(user, "<span class='warning'>\The [H] is already wearing a mask.</span>")
 				return
-			if(H.head && (H.head.body_parts_covered & SLOT_FACE))
-				to_chat(user, "<span class='warning'>Remove their [H.head] first.</span>")
+			var/obj/item/head = H.get_equipped_item(BP_HEAD)
+			if(head && (head.body_parts_covered & SLOT_FACE))
+				to_chat(user, "<span class='warning'>Remove their [head] first.</span>")
 				return
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] begins taping up \the [H]'s mouth!</span>")
@@ -54,11 +57,11 @@
 				return
 
 			// Repeat failure checks.
-			if(!H || !src || !H.organs_by_name[BP_HEAD] || !H.check_has_mouth() || H.wear_mask || (H.head && (H.head.body_parts_covered & SLOT_FACE)))
+			if(!H || !src || !H.organs_by_name[BP_HEAD] || !H.check_has_mouth() || H.get_equipped_item(BP_MOUTH) || (head && (head.body_parts_covered & SLOT_FACE)))
 				return
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s mouth!</span>")
-			H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), slot_wear_mask_str)
+			H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), BP_MOUTH)
 
 		else if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
 			playsound(src, 'sound/effects/tape.ogg',25)
@@ -67,8 +70,9 @@
 				qdel(T)
 
 		else if(user.zone_sel.selecting == BP_CHEST)
-			if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
-				H.wear_suit.attackby(src, user)//everything is handled by attackby
+			var/obj/item/clothing/suit/space/suit = H.get_equipped_item(BP_BODY)
+			if(istype(suit))
+				suit.attackby(src, user)//everything is handled by attackby
 			else
 				to_chat(user, "<span class='warning'>\The [H] isn't wearing a spacesuit for you to reseal.</span>")
 

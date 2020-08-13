@@ -31,8 +31,8 @@
 		loaded = new loaded (src, load_sheet_max)
 	LAZYSET(slowdown_per_slot, BP_L_HAND,        slowdown_held)
 	LAZYSET(slowdown_per_slot, BP_R_HAND,        slowdown_held)
-	LAZYSET(slowdown_per_slot, slot_back_str,    slowdown_worn)
-	LAZYSET(slowdown_per_slot, slot_belt_str,    slowdown_worn)
+	LAZYSET(slowdown_per_slot, BP_SHOULDERS,    slowdown_worn)
+	LAZYSET(slowdown_per_slot, BP_GROIN,    slowdown_worn)
 	LAZYSET(slowdown_per_slot, slot_s_store_str, slowdown_worn)
 
 	. = ..()

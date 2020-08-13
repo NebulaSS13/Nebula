@@ -141,9 +141,9 @@
 	if(!istype(M))
 		return 0 //not equipped
 
-	if((slot_flags & SLOT_BACK) && M.get_equipped_item(slot_back_str) == src)
+	if((slot_flags & SLOT_BACK) && M.get_equipped_item(BP_SHOULDERS) == src)
 		return 1
-	if((slot_flags & SLOT_LOWER_BODY) && M.get_equipped_item(slot_belt_str) == src)
+	if((slot_flags & SLOT_LOWER_BODY) && M.get_equipped_item(BP_GROIN) == src)
 		return 1
 
 	return 0
@@ -276,7 +276,7 @@
 
 /obj/item/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
 	if(!combat)
-		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
+		for(var/obj/item/clothing/cloth in list(H.get_equipped_item(BP_BODY), H.get_equipped_item(BP_CHEST)))
 			if((cloth.body_parts_covered & SLOT_UPPER_BODY) && (cloth.item_flags & ITEM_FLAG_THICKMATERIAL))
 				return FALSE
 	return TRUE

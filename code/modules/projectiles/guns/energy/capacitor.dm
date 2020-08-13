@@ -223,7 +223,7 @@ var/list/laser_wavelengths
 
 /obj/item/gun/energy/capacitor/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	if(slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str)
+	if(slot == BP_L_HAND || slot == BP_R_HAND || slot == BP_SHOULDERS)
 		var/image/I = image(icon, "[ret.icon_state]-wiring")
 		I.color = wiring_color
 		I.appearance_flags |= RESET_COLOR
@@ -231,7 +231,7 @@ var/list/laser_wavelengths
 		if(power_supply)
 			I = image(icon, "[ret.icon_state]-cell")
 			ret.add_overlay(I)
-		if(slot != slot_back_str)
+		if(slot != BP_SHOULDERS)
 			for(var/i = 1 to length(capacitors))
 				var/obj/item/stock_parts/capacitor/capacitor = capacitors[i]
 				if(capacitor.charge > 0)

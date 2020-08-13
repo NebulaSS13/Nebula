@@ -25,7 +25,7 @@
 	return ..()
 
 /obj/item/storage/backpack/equipped(var/mob/user, var/slot)
-	if (slot == slot_back_str && src.use_sound)
+	if (slot == BP_SHOULDERS && src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	..(user, slot)
 
@@ -170,7 +170,7 @@
 
 /obj/item/storage/backpack/dufflebag/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_back_str, 3)
+	LAZYSET(slowdown_per_slot, BP_SHOULDERS, 3)
 	LAZYSET(slowdown_per_slot, BP_L_HAND, 1)
 	LAZYSET(slowdown_per_slot, BP_R_HAND, 1)
 
@@ -181,7 +181,7 @@
 
 /obj/item/storage/backpack/dufflebag/syndie/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_back_str, 1)
+	LAZYSET(slowdown_per_slot, BP_SHOULDERS, 1)
 
 /obj/item/storage/backpack/dufflebag/syndie/med
 	name = "medical dufflebag"
@@ -375,7 +375,7 @@
 
 /obj/item/storage/backpack/ert/get_mob_overlay(mob/user_mob, slot, bodypart)
 	. = ..()
-	if(slot == slot_back_str && marking_state)
+	if(slot == BP_SHOULDERS && marking_state)
 		var/image/ret = .
 		var/image/I = image(icon, "[ret.icon_state]-[marking_state]")
 		I.color = marking_colour

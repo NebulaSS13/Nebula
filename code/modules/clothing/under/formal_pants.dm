@@ -6,7 +6,7 @@
 	icon_state = "pants"
 	gender = PLURAL
 	body_parts_covered = SLOT_LOWER_BODY|SLOT_LEGS
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_pants.dmi')
+	item_icons = list(BP_CHEST = 'icons/mob/onmob/onmob_under_pants.dmi')
 
 /obj/item/clothing/under/formal_pants/red
 	name = "red pants"

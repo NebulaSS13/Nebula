@@ -37,20 +37,10 @@
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
 //icon_back, icon_l_hand, etc would be much better names for these...
-#define slot_back_str        "slot_back"
-#define slot_w_uniform_str   "slot_w_uniform"
-#define slot_head_str        "slot_head"
-#define slot_wear_suit_str   "slot_suit"
-#define slot_l_ear_str       "slot_l_ear"
-#define slot_r_ear_str       "slot_r_ear"
-#define slot_belt_str        "slot_belt"
 #define slot_shoes_str       "slot_shoes"
-#define slot_wear_mask_str   "slot_wear_mask"
 #define slot_handcuffed_str  "slot_handcuffed"
 #define slot_legcuffed_str   "slot_legcuffed"
-#define slot_wear_id_str     "slot_wear_id"
 #define slot_gloves_str      "slot_gloves"
-#define slot_glasses_str     "slot_glasses"
 #define slot_tie_str         "slot_tie"
 #define slot_l_store_str     "slot_l_store"
 #define slot_r_store_str     "slot_r_store"
@@ -181,6 +171,15 @@
 #define BP_HEAD         "head"
 #define BP_CHEST        "chest"
 #define BP_GROIN        "groin"
+// Limb-related organs
+#define BP_EYES         "eyes"
+// Pseudo-limbs
+#define BP_BODY         "body"
+#define BP_MOUTH        "face"
+#define BP_SHOULDERS    "shoulders"
+#define BP_L_EAR        "l_ear"
+#define BP_R_EAR        "r_ear"
+#define BP_NECK         "neck"
 
 var/list/all_limb_tags = list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 var/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
@@ -188,15 +187,15 @@ var/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, 
 var/list/default_onmob_icons = list(
 	BP_L_HAND = 'icons/mob/onmob/items/lefthand.dmi',
 	BP_R_HAND = 'icons/mob/onmob/items/righthand.dmi',
-	slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi',
-	slot_back_str = 'icons/mob/onmob/onmob_back.dmi',
-	slot_l_ear_str = 'icons/mob/onmob/onmob_ears.dmi',
-	slot_r_ear_str = 'icons/mob/onmob/onmob_ears.dmi',
-	slot_glasses_str = 'icons/mob/onmob/onmob_eyes.dmi',
-	slot_w_uniform_str = 'icons/mob/onmob/onmob_under.dmi',
-	slot_wear_suit_str = 'icons/mob/onmob/onmob_suit.dmi',
-	slot_head_str = 'icons/mob/onmob/onmob_head.dmi',
-	slot_wear_mask_str = 'icons/mob/onmob/onmob_mask.dmi',
+	BP_GROIN = 'icons/mob/onmob/onmob_belt.dmi',
+	BP_SHOULDERS = 'icons/mob/onmob/onmob_back.dmi',
+	BP_EYES = 'icons/mob/onmob/onmob_eyes.dmi',
+	BP_CHEST = 'icons/mob/onmob/onmob_under.dmi',
+	BP_BODY = 'icons/mob/onmob/onmob_suit.dmi',
+	BP_HEAD = 'icons/mob/onmob/onmob_head.dmi',
+	BP_MOUTH = 'icons/mob/onmob/onmob_mask.dmi',
+	BP_L_EAR = 'icons/mob/onmob/onmob_ears.dmi',
+	BP_R_EAR  = 'icons/mob/onmob/onmob_ears.dmi',
 	slot_handcuffed_str = 'icons/mob/onmob/onmob_cuff.dmi',
 	slot_legcuffed_str = 'icons/mob/onmob/onmob_cuff.dmi',
 	slot_s_store_str = 'icons/mob/onmob/onmob_belt_mirror.dmi',
@@ -204,22 +203,22 @@ var/list/default_onmob_icons = list(
 )
 
 var/list/all_inventory_slots = list(
-	slot_back_str,
+	BP_SHOULDERS,
 	BP_L_HAND,
 	BP_R_HAND,
-	slot_w_uniform_str,
-	slot_head_str,
-	slot_wear_suit_str,
-	slot_l_ear_str,
-	slot_r_ear_str,
-	slot_belt_str,
+	BP_CHEST,
+	BP_HEAD,
+	BP_BODY,
+	BP_GROIN,
+	BP_MOUTH,
+	BP_EYES,
+	BP_L_EAR,
+	BP_R_EAR ,
 	slot_shoes_str,
-	slot_wear_mask_str,
 	slot_handcuffed_str,
 	slot_legcuffed_str,
-	slot_wear_id_str,
+	BP_NECK,
 	slot_gloves_str,
-	slot_glasses_str,
 	slot_s_store_str,
 	slot_tie_str,
 	slot_l_store_str,

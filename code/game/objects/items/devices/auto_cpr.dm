@@ -11,7 +11,7 @@
 
 /obj/item/auto_cpr/mob_can_equip(mob/living/carbon/human/H, slot, disable_warning = 0, force = 0)
 	. = ..()
-	if(force || !istype(H) || slot != slot_wear_suit_str)
+	if(force || !istype(H) || slot != BP_BODY)
 		return
 	if(H.species.get_bodytype() != BODYTYPE_HUMANOID) //non-humanoids btfo
 		return
@@ -20,8 +20,9 @@
 
 /obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user, var/target_zone)
 	if(istype(M) && user.a_intent == I_HELP)
-		if(M.wear_suit)
-			to_chat(user, SPAN_WARNING("Their [M.wear_suit] is in the way, remove it first!"))
+		var/obj/item/suit = M.get_equipped_item(BP_BODY)
+		if(suit)
+			to_chat(user, SPAN_WARNING("Their [suit] is in the way, remove it first!"))
 			return 1
 		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto the [M]'s chest."))
 
@@ -29,7 +30,7 @@
 			return
 			
 		if(user.unEquip(src))
-			if(!M.equip_to_slot_if_possible(src, slot_wear_suit_str, del_on_fail=0, disable_warning=1, redraw_mob=1))
+			if(!M.equip_to_slot_if_possible(src, BP_BODY, del_on_fail=0, disable_warning=1, redraw_mob=1))
 				user.put_in_active_hand(src)
 			return 1
 	else
@@ -52,7 +53,7 @@
 		return PROCESS_KILL
 
 	var/mob/living/carbon/human/H = loc
-	if(H.get_inventory_slot(src) != slot_wear_suit_str)
+	if(H.get_inventory_slot_for_item(src) != BP_BODY)
 		return PROCESS_KILL
 
 	if(world.time > last_pump + 15 SECONDS)

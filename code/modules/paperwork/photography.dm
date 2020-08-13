@@ -117,7 +117,7 @@ var/global/photo_count = 0
 		if(!( istype(over_object, /obj/screen/inventory) ))
 			return ..()
 		playsound(loc, "rustle", 50, 1, -5)
-		if((!( M.restrained() ) && !( M.stat ) && M.back == src))
+		if((!( M.restrained() ) && !( M.stat ) && M.get_equipped_item(BP_SHOULDERS) == src))
 			var/obj/screen/inventory/inv = over_object
 			src.add_fingerprint(M)
 			if(M.unEquip(src))

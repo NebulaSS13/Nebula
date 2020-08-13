@@ -62,7 +62,7 @@
 		return ..(freq, level)
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
-		if(H.l_ear == src || H.r_ear == src)
+		if(H.get_equipped_item(BP_L_EAR) == src || H.get_equipped_item(BP_R_EAR) == src)
 			return ..(freq, level)
 	return -1
 

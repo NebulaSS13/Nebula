@@ -34,7 +34,7 @@
 
 /obj/item/clothing/suit/space/void/engineering/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)
+	LAZYSET(slowdown_per_slot, BP_BODY, 1)
 
 /obj/item/clothing/suit/space/void/engineering/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering
@@ -204,7 +204,7 @@
 
 /obj/item/clothing/suit/space/void/engineering/alt/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 2)
+	LAZYSET(slowdown_per_slot, BP_BODY, 2)
 
 /obj/item/clothing/suit/space/void/engineering/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/alt
@@ -252,7 +252,7 @@
 
 /obj/item/clothing/suit/space/void/medical/alt/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 0)
+	LAZYSET(slowdown_per_slot, BP_BODY, 0)
 
 /obj/item/clothing/suit/space/void/medical/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt

@@ -36,8 +36,8 @@
 	if(electric)
 		if(istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
-			to_chat(M, "<span class='danger'>Your [name] malfunction[gender != PLURAL ? "s":""], blinding you!</span>")
-			if(M.glasses == src)
+			to_chat(M, SPAN_DANGER("Your [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
+			if(M.get_equipped_item(BP_EYES) == src)
 				M.eye_blind = 2
 				M.eye_blurry = 4
 				// Don't cure being nearsighted

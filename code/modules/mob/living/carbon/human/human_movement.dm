@@ -95,6 +95,7 @@
 	. = ..()
 
 /mob/living/carbon/human/proc/get_jetpack()
+	var/obj/item/back = get_equipped_item(BP_SHOULDERS)
 	if(back)
 		if(istype(back,/obj/item/tank/jetpack))
 			return back

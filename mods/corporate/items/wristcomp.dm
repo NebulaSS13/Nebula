@@ -12,7 +12,7 @@
 	var/image/ret = ..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
-	if(slot == slot_wear_id_str)
+	if(slot == BP_NECK)
 		if(assembly?.enabled)
 			var/image/I = image(screen_icon, icon_state = "[ret.icon_state]-screen")
 			I.appearance_flags |= RESET_COLOR
@@ -42,7 +42,7 @@
 		if(user.incapacitated() || user.restrained())
 			return
 		var/mob/living/carbon/human/H = user
-		if(istype(H) && src == H.wear_id)
+		if(istype(H) && src == H.get_equipped_item(BP_NECK))
 			return attack_self(user)
 	return ..()
 

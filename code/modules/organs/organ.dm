@@ -285,6 +285,7 @@ var/list/organ_cache = list()
 			admin_attack_log(user, owner, "Removed a vital organ ([src]).", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
 		owner.death()
 	screen_loc = null
+
 	owner.client?.screen -= src
 	owner = null
 

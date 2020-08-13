@@ -11,22 +11,25 @@
 	var/skipface = 0
 
 	//exosuits and helmets obscure our view and stuff.
-	if(wear_suit)
-		skipgloves = wear_suit.flags_inv & HIDEGLOVES
-		skipsuitstorage = wear_suit.flags_inv & HIDESUITSTORAGE
-		skipjumpsuit = wear_suit.flags_inv & HIDEJUMPSUIT
-		skipshoes = wear_suit.flags_inv & HIDESHOES
+	var/obj/item/clothing/suit/suit = get_equipped_item(BP_BODY)
+	if(suit)
+		skipgloves =      suit.flags_inv & HIDEGLOVES
+		skipsuitstorage = suit.flags_inv & HIDESUITSTORAGE
+		skipjumpsuit =    suit.flags_inv & HIDEJUMPSUIT
+		skipshoes =       suit.flags_inv & HIDESHOES
 
+	var/obj/item/head = get_equipped_item(BP_HEAD)
 	if(head)
 		skipmask = head.flags_inv & HIDEMASK
 		skipeyes = head.flags_inv & HIDEEYES
 		skipears = head.flags_inv & HIDEEARS
 		skipface = head.flags_inv & HIDEFACE
 
-	if(wear_mask)
-		skipeyes |= wear_mask.flags_inv & HIDEEYES
-		skipears |= wear_mask.flags_inv & HIDEEARS
-		skipface |= wear_mask.flags_inv & HIDEFACE
+	var/obj/item/mask = get_equipped_item(BP_MOUTH)
+	if(mask)
+		skipeyes |= mask.flags_inv & HIDEEYES
+		skipears |= mask.flags_inv & HIDEEARS
+		skipface |= mask.flags_inv & HIDEFACE
 
 	//no accuately spotting headsets from across the room.
 	if(distance > 3)
@@ -62,75 +65,33 @@
 
 	msg += "<br>"
 
-	//uniform
-	if(w_uniform && !skipjumpsuit)
-		msg += "[T.He] [T.is] wearing [w_uniform.get_examine_line()].\n"
+	// new system for equipped items
+	for(var/bp in inventory_slots)
+		var/datum/inventory_slot/inv_slot = inventory_slots[bp]
+		if(inv_slot.holding)
+			var/inv_line = inv_slot.get_examine_line(src, skipmask, skipgloves, skipsuitstorage, skipjumpsuit, skipshoes, skipmask, skipears, skipeyes, skipface)
+			if(inv_line)
+				msg += "[inv_line]\n"
 
-	//head
-	if(head)
-		msg += "[T.He] [T.is] wearing [head.get_examine_line()] on [T.his] head.\n"
-
-	//suit/armour
-	if(wear_suit)
-		msg += "[T.He] [T.is] wearing [wear_suit.get_examine_line()].\n"
-		//suit/armour storage
-		if(s_store && !skipsuitstorage)
-			msg += "[T.He] [T.is] carrying [s_store.get_examine_line()] on [T.his] [wear_suit.name].\n"
-
-	//back
-	if(back)
-		msg += "[T.He] [T.has] [back.get_examine_line()] on [T.his] back.\n"
-
-	//held items
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, bp)
-		var/obj/item/organ/external/E = organs_by_name[bp]
-		if(inv_slot?.holding)
-			msg += "[T.He] [T.is] holding [inv_slot.holding.get_examine_line()] in [T.his] [E.name].\n"
-
+	//suit storage
+	if(istype(suit) && s_store && !skipsuitstorage)
+		msg += "[T.He] [T.is] carrying [s_store.get_examine_line()] on [T.his] [suit.name].\n"
 	//gloves
 	if(gloves && !skipgloves)
 		msg += "[T.He] [T.has] [gloves.get_examine_line()] on [T.his] hands.\n"
 	else if(blood_DNA)
 		msg += "<span class='warning'>[T.He] [T.has] [(hand_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained hands!</span>\n"
-
-	//belt
-	if(belt)
-		msg += "[T.He] [T.has] [belt.get_examine_line()] about [T.his] waist.\n"
-
 	//shoes
 	if(shoes && !skipshoes)
 		msg += "[T.He] [T.is] wearing [shoes.get_examine_line()] on [T.his] feet.\n"
 	else if(feet_blood_DNA)
 		msg += "<span class='warning'>[T.He] [T.has] [(feet_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained feet!</span>\n"
-
-	//mask
-	if(wear_mask && !skipmask)
-		msg += "[T.He] [T.has] [wear_mask.get_examine_line()] on [T.his] face.\n"
-
-	//eyes
-	if(glasses && !skipeyes)
-		msg += "[T.He] [T.has] [glasses.get_examine_line()] covering [T.his] eyes.\n"
-
-	//left ear
-	if(l_ear && !skipears)
-		msg += "[T.He] [T.has] [l_ear.get_examine_line()] on [T.his] left ear.\n"
-
-	//right ear
-	if(r_ear && !skipears)
-		msg += "[T.He] [T.has] [r_ear.get_examine_line()] on [T.his] right ear.\n"
-
-	//ID
-	if(wear_id)
-		msg += "[T.He] [T.is] wearing [wear_id.get_examine_line()].\n"
-
 	//handcuffed?
 	if(handcuffed)
 		if(istype(handcuffed, /obj/item/handcuffs/cable))
 			msg += "<span class='warning'>[T.He] [T.is] [html_icon(handcuffed)] restrained with cable!</span>\n"
 		else
 			msg += "<span class='warning'>[T.He] [T.is] [html_icon(handcuffed)] handcuffed!</span>\n"
-
 	//buckled
 	if(buckled)
 		msg += "<span class='warning'>[T.He] [T.is] [html_icon(buckled)] buckled to [buckled]!</span>\n"
@@ -220,8 +181,7 @@
 			applying_pressure = "<span class='info'>[T.He] [T.is] applying pressure to [T.his] [E.name].</span><br>"
 
 		var/obj/item/clothing/hidden
-		var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
-		for(var/obj/item/clothing/C in clothing_items)
+		for(var/obj/item/clothing/C in list(get_equipped_item(BP_HEAD), get_equipped_item(BP_EYES), get_equipped_item(BP_BODY), get_equipped_item(BP_CHEST), gloves, shoes))
 			if(istype(C) && (C.body_parts_covered & E.body_part))
 				hidden = C
 				break
@@ -343,7 +303,7 @@
 	return
 
 /mob/living/carbon/human/getHUDsource(hudtype)
-	var/obj/item/clothing/glasses/G = glasses
+	var/obj/item/clothing/glasses/G = get_equipped_item(BP_EYES)
 	if(!istype(G))
 		return 
 	if(G.hud_type & hudtype)

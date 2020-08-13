@@ -39,25 +39,13 @@
 			if(!do_mob(user, target, time))
 				return
 
-			if(istype(target, /mob/living/carbon/human))
-				var/mob/living/carbon/human/victim = target
-
-				var/obj/item/safe_thing = null
-				if(victim.wear_mask)
-					if (victim.wear_mask.body_parts_covered & SLOT_EYES)
-						safe_thing = victim.wear_mask
-				if(victim.head)
-					if (victim.head.body_parts_covered & SLOT_EYES)
-						safe_thing = victim.head
-				if(victim.glasses)
-					if (victim.glasses.body_parts_covered & SLOT_EYES)
-						safe_thing = victim.glasses
-				if(safe_thing)
+			var/mob/living/M = target
+			for(var/obj/item/safe_thing in list(M.get_equipped_item(BP_MOUTH), M.get_equipped_item(BP_HEAD), M.get_equipped_item(BP_EYES)))
+				if(safe_thing && (safe_thing.body_parts_covered & SLOT_EYES))
 					trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
 					user.visible_message(SPAN_DANGER("\The [user] tries to squirt something into [target]'s eyes, but fails!"), SPAN_DANGER("You squirt [trans] unit\s at \the [target]'s eyes, but fail!"))
 					return
 
-			var/mob/living/M = target
 			var/contained = REAGENT_LIST(src)
 			admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
 

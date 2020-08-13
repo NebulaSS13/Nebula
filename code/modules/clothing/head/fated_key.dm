@@ -8,7 +8,7 @@
 
 /obj/item/clothing/head/fated/equipped(mob/living/user, slot)
 	. = ..()
-	if(istype(user) && canremove && loc == user && slot == slot_head_str)
+	if(istype(user) && canremove && loc == user && slot == BP_HEAD)
 		canremove = FALSE
 		to_chat(user, SPAN_DANGER("<font size=3>\The [src] shatters your mind as it sears through [user.isSynthetic() ? "metal and circuitry" : "flesh and bone"], embedding itself into your skull!</font>"))
 		user.Paralyse(5)

@@ -3,7 +3,7 @@
 	desc = "An iron medal awarded to employees for merit."
 	icon_state = "iron_nt"
 	icon = 'mods/corporate/icons/obj/clothing/obj_accessories.dmi'
-	accessory_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_accessories.dmi', slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_accessories.dmi')
+	accessory_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_accessories.dmi', BP_BODY = 'mods/corporate/icons/mob/onmob_accessories.dmi')
 
 /obj/item/clothing/accessory/medal/nanotrasen/gold
 	name = "corporate command medal"

@@ -187,12 +187,10 @@
 	switch(name)
 		if("toggle")
 			if(usr.hud_used.inventory_shown)
-				usr.hud_used.inventory_shown = 0
 				usr.client.screen -= usr.hud_used.other
 			else
-				usr.hud_used.inventory_shown = 1
-				usr.client.screen += usr.hud_used.other
-
+				usr.client.screen |= usr.hud_used.other
+			usr.hud_used.inventory_shown = !usr.hud_used.inventory_shown
 			usr.hud_used.hidden_inventory_update()
 
 		if("equip")
@@ -220,12 +218,12 @@
 					if(C.internal)
 						C.set_internals(null)
 					else
-
 						var/no_mask
-						if(!(C.wear_mask && C.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
-							var/mob/living/carbon/human/H = C
-							if(!(H.head && H.head.item_flags & ITEM_FLAG_AIRTIGHT))
-								no_mask = 1
+						var/obj/item/mask = C.get_equipped_item(BP_MOUTH)
+						if(!(mask && (mask.item_flags & ITEM_FLAG_AIRTIGHT)))
+							var/obj/item/head = C.get_equipped_item(BP_HEAD)
+							if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
+								no_mask = TRUE
 
 						if(no_mask)
 							to_chat(C, "<span class='notice'>You are not wearing a suitable mask or helmet.</span>")
@@ -243,18 +241,17 @@
 								breathes = H.species.breath_type
 								poisons = H.species.poison_types
 								nicename = list ("suit", "back", "belt", "left pocket", "right pocket")
-								tankcheck = list (H.s_store, C.back, H.belt, H.l_store, H.r_store) | H.get_held_items()
+								tankcheck = list (H.s_store, C.get_equipped_item(BP_SHOULDERS), C.get_equipped_item(BP_GROIN), H.l_store, H.r_store) | H.get_held_items()
 							else
 								nicename = list("back")
-								tankcheck = list(C.back) | C.get_held_items()
+								tankcheck = list(C.get_equipped_item(BP_SHOULDERS)) | C.get_held_items()
 
 							// Rigs are a fucking pain since they keep an air tank in nullspace.
-							if(istype(C.back,/obj/item/rig))
-								var/obj/item/rig/rig = C.back
-								if(rig.air_supply)
-									from = "in"
-									nicename |= "hardsuit"
-									tankcheck |= rig.air_supply
+							var/obj/item/rig/rig = C.get_equipped_item(BP_SHOULDERS)
+							if(istype(rig) && rig.air_supply)
+								from = "in"
+								nicename |= "hardsuit"
+								tankcheck |= rig.air_supply
 
 							for(var/i=1, i<tankcheck.len+1, ++i)
 								if(istype(tankcheck[i], /obj/item/tank))

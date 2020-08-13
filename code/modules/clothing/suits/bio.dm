@@ -32,7 +32,7 @@
 
 /obj/item/clothing/suit/bio_suit/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)
+	LAZYSET(slowdown_per_slot, BP_BODY, 1)
 
 //Standard biosuit, orange stripe
 /obj/item/clothing/head/bio_hood/general

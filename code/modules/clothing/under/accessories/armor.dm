@@ -4,7 +4,7 @@
 	desc = "A collection of black pouches that can be attached to a plate carrier. Carries up to two items."
 	icon_override = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
-	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
+	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', BP_BODY = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "pouches"
 	color = COLOR_GRAY40
 	gender = PLURAL
@@ -72,7 +72,7 @@
 	desc = "A pair of black arm pads reinforced with armor plating. Attaches to a plate carrier."
 	icon_override = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
-	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
+	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', BP_BODY = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "armguards"
 	color = COLOR_GRAY40
 	gender = PLURAL
@@ -98,7 +98,7 @@
 	desc = "A pair of armored leg pads in black. Attaches to a plate carrier."
 	icon_override = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
-	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
+	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', BP_BODY = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "legguards"
 	color = COLOR_GRAY40
 	gender = PLURAL
@@ -124,7 +124,7 @@
 	desc = "A collection of various tags for placing on the front of a plate carrier."
 	icon_override = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
-	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
+	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', BP_BODY = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "null"
 	slot = ACCESSORY_SLOT_ARMOR_M
 	w_class = ITEM_SIZE_TINY
@@ -186,7 +186,10 @@
 	desc = "A fabric cover for armored helmets."
 	icon_override = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
-	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_head_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
+	accessory_icons = list(
+		slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', 
+		BP_HEAD = 'icons/mob/onmob/onmob_modular_armor.dmi'
+	)
 	icon_state = "helmcover"
 	slot = ACCESSORY_SLOT_HELM_C
 

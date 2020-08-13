@@ -281,7 +281,7 @@ the direction to shift the thing and what direction.
 
 example:
 	equip_adjust = list(
-		slot_back_str = list(NORTH = list(SOUTH = 12, EAST = 7), EAST = list(SOUTH = 2, WEST = 12))
+		BP_SHOULDERS = list(NORTH = list(SOUTH = 12, EAST = 7), EAST = list(SOUTH = 2, WEST = 12))
 			)
 
 This would shift back items (backpacks, axes, etc.) when the mob
@@ -357,11 +357,12 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		organ_data["descriptor"] = initial(limb_path.name)
 	
 /datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
-	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
+	var/obj/item/storage/backpack/backpack = H.get_equipped_item(BP_SHOULDERS)
+	if(istype(backpack))
 		if (extendedtank)
-			H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack_str)
+			H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(backpack), slot_in_backpack_str)
 		else
-			H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack_str)
+			H.equip_to_slot_or_del(new /obj/item/storage/box/survival(backpack), slot_in_backpack_str)
 	else
 		if (extendedtank)
 			H.put_in_hands_or_del(new /obj/item/storage/box/engineer(H))
@@ -621,8 +622,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/get_move_trail(var/mob/living/carbon/human/H)
 	if(H.lying)
 		return /obj/effect/decal/cleanable/blood/tracks/body
-	if(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & SLOT_FEET)))
-		var/obj/item/clothing/shoes = (H.wear_suit && (H.wear_suit.body_parts_covered & SLOT_FEET)) ? H.wear_suit : H.shoes // suits take priority over shoes
+	var/obj/item/clothing/suit = H.get_equipped_item(BP_BODY)
+	if(H.shoes || (istype(suit) && (suit.body_parts_covered & SLOT_FEET)))
+		var/obj/item/clothing/shoes = (istype(suit) && (suit.body_parts_covered & SLOT_FEET)) ? suit : H.shoes // suits take priority over shoes
 		return shoes.move_trail
 	else
 		return move_trail
@@ -632,9 +634,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
 	attacker.do_attack_animation(target)
-
-	if(target.w_uniform)
-		target.w_uniform.add_fingerprint(attacker)
+	var/obj/item/uniform = target.get_equipped_item(BP_CHEST)
+	if(uniform)
+		uniform.add_fingerprint(attacker)
 	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(attacker.zone_sel.selecting, target = target))
 
 	var/list/holding = list(target.get_active_hand() = 60)

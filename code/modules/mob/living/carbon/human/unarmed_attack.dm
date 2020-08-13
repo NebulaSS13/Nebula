@@ -155,8 +155,8 @@ var/global/list/sparring_attack_cache = list()
 /decl/natural_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
 	if(user.is_muzzled())
-		return 0
-	for(var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
+		return FALSE
+	for(var/obj/item/clothing/C in list(user.get_equipped_item(BP_HEAD), user.get_equipped_item(BP_MOUTH), user.get_equipped_item(BP_BODY)))
 		if(C && (C.body_parts_covered & SLOT_FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 			return 0 //prevent biting through a space helmet or similar
 	if (user == target && (zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH))

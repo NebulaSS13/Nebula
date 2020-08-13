@@ -104,7 +104,7 @@
 
 /obj/item/clothing/suit/cultrobes/magusred/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)
+	LAZYSET(slowdown_per_slot, BP_BODY, 1)
 
 /obj/item/clothing/head/helmet/space/cult
 	name = "cult helmet"
@@ -140,4 +140,4 @@
 
 /obj/item/clothing/suit/space/cult/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)
+	LAZYSET(slowdown_per_slot, BP_BODY, 1)

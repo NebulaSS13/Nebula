@@ -51,7 +51,7 @@
 /obj/item/clothing/mask/monitor/equipped()
 	..()
 	var/mob/living/carbon/human/H = loc
-	if(istype(H) && H.wear_mask == src)
+	if(istype(H) && H.get_equipped_item(BP_MOUTH) == src)
 		canremove = 0
 		to_chat(H, "<span class='notice'>\The [src] connects to your display output.</span>")
 
@@ -78,7 +78,7 @@
 	var/mob/living/carbon/human/H = loc
 	if(!istype(H) || H != usr)
 		return
-	if(H.wear_mask != src)
+	if(H.get_equipped_item(BP_MOUTH) != src)
 		to_chat(usr, "<span class='warning'>You have not installed \the [src] yet.</span>")
 		return
 	var/choice = input("Select a screen icon.") as null|anything in monitor_states

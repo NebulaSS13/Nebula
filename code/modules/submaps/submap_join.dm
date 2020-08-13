@@ -100,9 +100,8 @@
 			to_chat(character, ojob.info)
 
 		if(user_human && user_human.disabilities & NEARSIGHTED)
-			var/equipped = user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(user_human), slot_glasses_str)
-			if(equipped)
-				var/obj/item/clothing/glasses/G = user_human.glasses
+			if(user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(user_human), BP_EYES))
+				var/obj/item/clothing/glasses/G = user_human.get_equipped_item(BP_EYES)
 				G.prescription = 7
 
 		BITSET(character.hud_updateflag, ID_HUD)

@@ -3,7 +3,7 @@
 	desc = "A fabric cover for armored helmets. This one has corporate colors."
 	icon_state = "helmcover_nt"
 	icon = 'mods/corporate/icons/obj/clothing/obj_modular_armor.dmi'
-	accessory_icons = list(slot_head_str = 'mods/corporate/icons/mob/onmob_modular_armor.dmi')
+	accessory_icons = list(BP_HEAD = 'mods/corporate/icons/mob/onmob_modular_armor.dmi')
 
 /obj/item/clothing/accessory/armor/helmcover/corp/pcrc
 	name = "\improper PCRC helmet cover"
@@ -20,7 +20,7 @@
 	desc = "An armor tag with the words CORPORATE SECURITY printed in bottle green lettering on it."
 	icon_state = "nanotag"
 	icon = 'mods/corporate/icons/obj/clothing/obj_modular_armor.dmi'
-	accessory_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_modular_armor.dmi', slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_modular_armor.dmi')
+	accessory_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_modular_armor.dmi', BP_BODY = 'mods/corporate/icons/mob/onmob_modular_armor.dmi')
 
 /obj/item/clothing/accessory/armor/tag/corp/pcrc
 	name = "\improper PCRC tag"

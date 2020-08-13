@@ -72,24 +72,15 @@ proc/get_radio_key_from_channel(var/channel)
 	if (istype(src, /mob/living/silicon/pai))
 		return
 
-	if (!ishuman(src))
-		return
-
-	var/mob/living/carbon/human/H = src
-	if (H.l_ear || H.r_ear)
-		var/obj/item/radio/headset/dongle
-		if(istype(H.l_ear,/obj/item/radio/headset))
-			dongle = H.l_ear
-		else
-			dongle = H.r_ear
-		if(!istype(dongle)) return
-		if(dongle.translate_binary) return 1
+	var/obj/item/radio/headset/l_ear = get_equipped_item(BP_L_EAR)
+	var/obj/item/radio/headset/r_ear = get_equipped_item(BP_R_EAR)
+	return (istype(l_ear) && l_ear.translate_binary) || (istype(r_ear) && r_ear.translate_binary)
 
 /mob/living/proc/get_default_language()
 	. = ispath(default_language, /decl/language) && decls_repository.get_decl(default_language)
 
 /mob/proc/is_muzzled()
-	return istype(wear_mask, /obj/item/clothing/mask/muzzle)
+	return istype(get_equipped_item(BP_MOUTH), /obj/item/clothing/mask/muzzle)
 
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
 //Returns 1 if a speech problem was applied, 0 otherwise

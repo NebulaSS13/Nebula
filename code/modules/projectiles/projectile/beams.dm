@@ -138,7 +138,7 @@
 /obj/item/projectile/beam/lastertag/blue/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
-		if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
+		if(istype(M.get_equipped_item(BP_BODY), /obj/item/clothing/suit/redtag))
 			M.Weaken(5)
 	return 1
 
@@ -153,7 +153,7 @@
 /obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
-		if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
+		if(istype(M.get_equipped_item(BP_BODY), /obj/item/clothing/suit/bluetag))
 			M.Weaken(5)
 	return 1
 
@@ -169,9 +169,10 @@
 	impact_type = /obj/effect/projectile/laser/omni/impact
 
 /obj/item/projectile/beam/lastertag/omni/on_hit(var/atom/target, var/blocked = 0)
-	if(istype(target, /mob/living/carbon/human))
-		var/mob/living/carbon/human/M = target
-		if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
+	if(isliving(target))
+		var/mob/living/M = target
+		var/obj/item/suit = M.get_equipped_item(BP_BODY)
+		if((istype(suit, /obj/item/clothing/suit/bluetag))||(istype(suit, /obj/item/clothing/suit/redtag)))
 			M.Weaken(5)
 	return 1
 

@@ -81,9 +81,9 @@
 		var/obj/item/organ/internal/cell/potato = H.internal_organs_by_name[BP_CELL]
 		if(potato)
 			target = potato.cell
-		if((!target || target.percent() > 95) && istype(H.back,/obj/item/rig))
-			var/obj/item/rig/R = H.back
-			if(R.cell && !R.cell.fully_charged())
+		if((!target || target.percent() > 95))
+			var/obj/item/rig/R = H.get_equipped_item(BP_SHOULDERS)
+			if(istype(R) && R.cell && !R.cell.fully_charged())
 				target = R.cell
 
 	if(target && !target.fully_charged())
@@ -196,10 +196,10 @@
 		var/mob/living/carbon/human/H = M		
 		if(H.isSynthetic())
 			return 1
-		if(istype(H.back,/obj/item/rig))
-			var/obj/item/rig/R = H.back
+		var/obj/item/rig/R = H.get_equipped_item(BP_SHOULDERS)
+		if(istype(R))
 			return R.cell
-		return H.internal_organs_by_name["cell"]
+		return H.internal_organs_by_name[BP_CELL]
 	return 0
 
 /obj/machinery/recharge_station/proc/go_out()

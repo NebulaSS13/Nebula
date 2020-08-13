@@ -21,17 +21,17 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	if(!..())
 		return 0
 
-	player.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/psi_amp(player), slot_head_str)
+	player.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/psi_amp(player), BP_HEAD)
 	player.set_psi_rank(PSI_REDACTION, 3,     defer_update = TRUE)
 	player.set_psi_rank(PSI_COERCION, 3,      defer_update = TRUE)
 	player.set_psi_rank(PSI_PSYCHOKINESIS, 3, defer_update = TRUE)
 	player.set_psi_rank(PSI_ENERGISTICS, 3,   defer_update = TRUE)
 	player.psi.update(TRUE)
 
-	player.equip_to_slot_or_del(new /obj/item/clothing/under/psysuit(player), slot_w_uniform_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe/psypurple(player), slot_wear_suit_str)
+	player.equip_to_slot_or_del(new /obj/item/clothing/under/psysuit(player), BP_CHEST)
+	player.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe/psypurple(player), BP_BODY)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(player), slot_shoes_str)
-	player.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel(player), slot_back_str)
+	player.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel(player), BP_SHOULDERS)
 	var/obj/item/clothing/gloves/color/gloves = new()
 	gloves.color = COLOR_GRAY80
 	player.equip_to_slot_or_del(gloves, slot_gloves_str)

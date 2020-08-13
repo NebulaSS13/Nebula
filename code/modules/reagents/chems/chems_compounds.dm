@@ -133,15 +133,11 @@
 	var/obj/item/partial_face_protection = null
 
 	var/effective_strength = 5
-
-	var/list/protection
+	var/list/protection = list(M.get_equipped_item(BP_HEAD), M.get_equipped_item(BP_EYES), M.get_equipped_item(BP_MOUTH))
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		protection = list(H.head, H.glasses, H.wear_mask)
 		if(!H.can_feel_pain())
 			no_pain = 1 //TODO: living-level can_feel_pain() proc
-	else
-		protection = list(M.wear_mask)
 
 	for(var/obj/item/I in protection)
 		if(I)

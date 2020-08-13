@@ -33,7 +33,7 @@
 
 /obj/item/clothing/suit/space/syndicate/Initialize()
 	. = ..()
-	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)
+	LAZYSET(slowdown_per_slot, BP_BODY, 1)
 
 //Green syndicate space suit
 /obj/item/clothing/head/helmet/space/syndicate/green

@@ -29,7 +29,7 @@
 // than relying on overlay order. This also overlays over inhands but it looks ok.
 /obj/item/clothing/accessory/cloak/apply_overlays(mob/user_mob, bodytype, image/overlay, slot)
 
-	if(slot == slot_wear_suit_str || slot == slot_tie_str || slot == slot_w_uniform_str)
+	if(slot == BP_BODY || slot == slot_tie_str || slot == BP_CHEST)
 
 		var/image/underlay
 		var/image/cloverlay

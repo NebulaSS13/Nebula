@@ -3,7 +3,7 @@
 	desc = "A jacket that the EXO has their executives wear."
 	icon_state = "jacket_tl"
 	icon = 'mods/corporate/icons/obj/clothing/obj_accessories.dmi'
-	accessory_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_accessories.dmi', slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_accessories.dmi')
+	accessory_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_accessories.dmi', BP_BODY = 'mods/corporate/icons/mob/onmob_accessories.dmi')
 
 /obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen
 	name = "\improper NanoTrasen suit jacket"

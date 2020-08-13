@@ -39,8 +39,8 @@
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
-	var/obj/item/clothing/uniform = H.w_uniform
-	if(uniform)
+	var/obj/item/clothing/uniform = H.get_equipped_item(BP_CHEST)
+	if(istype(uniform))
 		var/obj/item/clothing/accessory/toggleable/hawaii/random/eyegore = new()
 		if(uniform.can_attach_accessory(eyegore))
 			uniform.attach_accessory(null, eyegore)

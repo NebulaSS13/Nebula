@@ -1,5 +1,5 @@
 /datum/gear/suit
-	slot = slot_wear_suit_str
+	slot = BP_BODY
 	sort_category = "Suits and Overwear"
 	category = /datum/gear/suit
 

@@ -173,7 +173,7 @@
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
 	icon = 'mods/government/away_sites/icarus/icarus_sprites.dmi'
-	item_icons = list(slot_w_uniform_str = 'mods/government/away_sites/icarus/icarus_sprites.dmi')
+	item_icons = list(BP_CHEST = 'mods/government/away_sites/icarus/icarus_sprites.dmi')
 
 /obj/structure/sign/double/icarus/solgovflag
 	name = "Sol Central Government Flag"

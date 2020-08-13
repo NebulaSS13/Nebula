@@ -102,10 +102,10 @@
 		if(potato && potato.cell)
 			stat("Battery charge:", "[potato.get_charge()]/[potato.cell.maxcharge]")
 
-		if(back && istype(back,/obj/item/rig))
-			var/obj/item/rig/suit = back
+		var/obj/item/rig/rig = get_equipped_item(BP_SHOULDERS)
+		if(istype(rig))
 			var/cell_status = "ERROR"
-			if(suit.cell) cell_status = "[suit.cell.charge]/[suit.cell.maxcharge]"
+			if(rig.cell) cell_status = "[rig.cell.charge]/[rig.cell.maxcharge]"
 			stat(null, "Suit charge: [cell_status]")
 
 		if(mind)
@@ -171,7 +171,7 @@
 		return 1
 	if(grab_restrained())
 		return 1
-	if (istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
+	if (istype(get_equipped_item(BP_BODY), /obj/item/clothing/suit/straight_jacket))
 		return 1
 	return 0
 
@@ -203,17 +203,17 @@
 				dat += "<BR><A href='?src=\ref[src];item=tie;holder=\ref[C]'>Remove accessory</A>"
 	dat += "<BR><HR>"
 
-	for(var/bp in held_item_slots)
-		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
+	for(var/bp in inventory_slots)
+		var/datum/inventory_slot/inv_slot = inventory_slots[bp]
 		var/obj/item/organ/external/E = organs_by_name[bp]
 		dat += "<BR><b>[capitalize(E.name)]:</b> <A href='?src=\ref[src];item=[bp]'>[inv_slot.holding?.name || "nothing"]</A>"
 
 	// Do they get an option to set internals?
-	if(istype(wear_mask, /obj/item/clothing/mask) || istype(head, /obj/item/clothing/head/helmet/space))
-		if(istype(back, /obj/item/tank) || istype(belt, /obj/item/tank) || istype(s_store, /obj/item/tank))
+	if(istype(get_equipped_item(BP_MOUTH), /obj/item/clothing/mask) || istype(get_equipped_item(BP_HEAD), /obj/item/clothing/head/helmet/space))
+		if(istype(get_equipped_item(BP_SHOULDERS), /obj/item/tank) || istype(get_equipped_item(BP_GROIN), /obj/item/tank) || istype(s_store, /obj/item/tank))
 			dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
 
-	var/obj/item/clothing/under/suit = w_uniform
+	var/obj/item/clothing/under/suit = get_equipped_item(BP_CHEST)
 	// Other incidentals.
 	if(istype(suit))
 		dat += "<BR><b>Pockets:</b> <A href='?src=\ref[src];item=pockets'>Empty or Place Item</A>"
@@ -284,9 +284,11 @@
 //Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
-	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || (MUTATION_HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
-		if(istype(wear_mask) && wear_mask.visible_name)
-			return wear_mask.visible_name
+	var/obj/item/head = get_equipped_item(BP_HEAD)
+	var/obj/item/clothing/mask/mask = get_equipped_item(BP_MOUTH)
+	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || (MUTATION_HUSK in mutations) || (mask && (mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
+		if(istype(mask) && mask.visible_name)
+			return mask.visible_name
 		else if(istype(wearing_rig) && wearing_rig.visible_name)
 			return wearing_rig.visible_name
 		else
@@ -428,8 +430,9 @@
 
 			var/modified = 0
 			var/perpname = "wot"
-			if(wear_id)
-				var/obj/item/card/id/I = wear_id.GetIdCard()
+			var/obj/item/id = user.get_equipped_item(BP_NECK)
+			if(id)
+				var/obj/item/card/id/I = id.GetIdCard()
 				if(I)
 					perpname = I.registered_name
 				else
@@ -627,7 +630,7 @@
 
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
 	if(full_body)
-		if(src.head || src.shoes || src.w_uniform || src.wear_suit || src.glasses || src.l_ear || src.r_ear || src.gloves)
+		if(get_equipped_item(BP_HEAD) || src.shoes || get_equipped_item(BP_CHEST) || get_equipped_item(BP_BODY) || get_equipped_item(BP_EYES) || get_equipped_item(BP_L_EAR) || get_equipped_item(BP_R_EAR) || src.gloves)
 			return FALSE
 	return ..()
 
@@ -875,7 +878,10 @@
 	return gender
 
 /mob/living/carbon/human/get_visible_gender()
-	if(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT && ((head && head.flags_inv & HIDEMASK) || wear_mask))
+	var/obj/item/head = get_equipped_item(BP_HEAD)
+	var/obj/item/mask = get_equipped_item(BP_MOUTH)
+	var/obj/item/suit = get_equipped_item(BP_BODY)
+	if(suit && (suit.flags_inv & HIDEJUMPSUIT) && ((head && head.flags_inv & HIDEMASK) || mask))
 		return NEUTER
 	return ..()
 
@@ -1285,7 +1291,7 @@
 		return 0
 
 	. = CAN_INJECT
-	for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes))
+	for(var/obj/item/clothing/C in list(get_equipped_item(BP_HEAD), get_equipped_item(BP_MOUTH), get_equipped_item(BP_BODY), get_equipped_item(BP_CHEST), gloves, shoes))
 		if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 			if(istype(C, /obj/item/clothing/suit/space))
 				. = INJECTION_PORT //it was going to block us, but it's a space suit so it doesn't because it has some kind of port
@@ -1295,7 +1301,7 @@
 
 
 /mob/living/carbon/human/print_flavor_text(var/shrink = 1)
-	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
+	var/list/equipment = list(get_equipped_item(BP_HEAD), get_equipped_item(BP_MOUTH), get_equipped_item(BP_EYES), get_equipped_item(BP_CHEST), get_equipped_item(BP_BODY), src.gloves, src.shoes)
 	var/head_exposed = 1
 	var/face_exposed = 1
 	var/eyes_exposed = 1
@@ -1609,7 +1615,7 @@
 			else
 				src.show_message("My [org.name] is <span class='notice'>OK.</span>",1)
 
-		if((MUTATION_SKELETON in mutations) && (!w_uniform) && (!wear_suit))
+		if((MUTATION_SKELETON in mutations) && !get_equipped_item(BP_CHEST) && !get_equipped_item(BP_BODY))
 			play_xylophone()
 
 /mob/living/carbon/human/proc/resuscitate()
@@ -1677,7 +1683,8 @@
 		. += 2
 
 /mob/living/carbon/human/can_drown()
-	if(!internal && (!istype(wear_mask) || !wear_mask.filters_water()))
+	var/obj/item/clothing/mask/mask = get_equipped_item(BP_MOUTH)
+	if(!internal && (!istype(mask) || !mask.filters_water()))
 		var/obj/item/organ/internal/lungs/L = locate() in internal_organs
 		return (!L || L.can_drown())
 	return FALSE
@@ -1686,7 +1693,8 @@
 	var/datum/gas_mixture/breath = ..(volume_needed)
 	var/turf/T = get_turf(src)
 	if(istype(T) && T.is_flooded(lying) && should_have_organ(BP_LUNGS))
-		var/can_breathe_water = (istype(wear_mask) && wear_mask.filters_water()) ? TRUE : FALSE
+		var/obj/item/clothing/mask/mask = get_equipped_item(BP_MOUTH)
+		var/can_breathe_water = (istype(mask) && mask.filters_water()) ? TRUE : FALSE
 		if(!can_breathe_water)
 			var/obj/item/organ/internal/lungs/lungs = internal_organs_by_name[BP_LUNGS]
 			if(lungs && lungs.can_drown())
@@ -1742,7 +1750,7 @@
 
 /mob/living/carbon/human/get_sound_volume_multiplier()
 	. = ..()
-	for(var/obj/item/clothing/ears/C in list(l_ear, r_ear, head))
+	for(var/obj/item/clothing/ears/C in list(get_equipped_item(BP_L_EAR), get_equipped_item(BP_R_EAR), get_equipped_item(BP_HEAD)))
 		. = min(., C.volume_multiplier)
 
 /mob/living/carbon/human/get_bullet_impact_effect_type(var/def_zone)

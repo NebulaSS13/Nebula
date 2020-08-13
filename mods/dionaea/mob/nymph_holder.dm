@@ -10,8 +10,8 @@
 /obj/item/holder/diona/equipped(var/mob/living/user, var/slot)
 	if(slot in user.held_item_slots)
 		body_parts_covered = SLOT_ARMS
-	else if(slot == slot_head_str)
+	else if(slot == BP_HEAD)
 		body_parts_covered = SLOT_HEAD
-	else if(slot == slot_wear_suit_str)
+	else if(slot == BP_BODY)
 		body_parts_covered = SLOT_UPPER_BODY
 	. = ..()

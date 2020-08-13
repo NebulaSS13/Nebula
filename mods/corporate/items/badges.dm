@@ -10,7 +10,7 @@
 	icon_state = "ntbadge"
 	badge_string = "Corporate Executive Body"
 	icon = 'mods/corporate/icons/obj/clothing/obj_accessories.dmi'
-	accessory_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_accessories.dmi', slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_accessories.dmi')
+	accessory_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_accessories.dmi', BP_BODY = 'mods/corporate/icons/mob/onmob_accessories.dmi')
 
 /obj/item/clothing/accessory/badge/holo/NT
 	name = "corporate holobadge"
@@ -20,7 +20,7 @@
 	badge_string = "Corporate Security"
 	badge_access = access_research
 	icon = 'mods/corporate/icons/obj/clothing/obj_accessories.dmi'
-	accessory_icons = list(slot_w_uniform_str = 'mods/corporate/icons/mob/onmob_accessories.dmi', slot_wear_suit_str = 'mods/corporate/icons/mob/onmob_accessories.dmi')
+	accessory_icons = list(BP_CHEST = 'mods/corporate/icons/mob/onmob_accessories.dmi', BP_BODY = 'mods/corporate/icons/mob/onmob_accessories.dmi')
 
 /obj/item/clothing/accessory/badge/holo/NT/cord
 	icon_state = "holobadge-cord"

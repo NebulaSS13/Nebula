@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(customitems)
 		if(citem.ckey != M.ckey || lowertext(citem.character_name) != lowertext(M.real_name))
 			continue
 		// Check for required access.
-		var/obj/item/card/id/current_id = M.wear_id
+		var/obj/item/card/id/current_id = M.get_equipped_item(BP_NECK)
 		if(length(citem.req_access) && (!istype(current_id) || !has_access(current_id.access, citem.req_access)))
 			continue
 		// Check for required job title.
