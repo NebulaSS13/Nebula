@@ -40,10 +40,10 @@
 	if(slot != last_slot && LAZYACCESS(held_item_slots, slot))
 		held_item_slot_selected = slot
 		for(var/obj/screen/inventory/hand in hud_used?.hand_hud_objects)
+			hand.cut_overlay("hand_selected")
 			if(hand.slot_id == slot)
-				hand.overlays |= "hand_selected"
-			else
-				hand.overlays -= "hand_selected"
+				hand.add_overlay("hand_selected")
+			hand.compile_overlays()
 		var/obj/item/I = get_active_hand()
 		if(istype(I))
 			I.on_active_hand()
@@ -71,7 +71,7 @@
 /mob/living/get_empty_hand_slot()
 	for(var/bp in held_item_slots)
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-		if(inv_slot?.holding)
+		if(inv_slot && !inv_slot.holding)
 			return bp
 
 /mob/living/get_empty_hand_slots()
