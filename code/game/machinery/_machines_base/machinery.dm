@@ -112,6 +112,7 @@ Class Procs:
 	var/base_type           // For mapped buildable types, set this to be the base type actually buildable.
 	var/id_tag              // This generic variable is to be used by mappers to give related machines a string key. In principle used by radio stock parts.
 	var/frame_type = /obj/machinery/constructable_frame/machine_frame/deconstruct // what is created when the machine is dismantled.
+	var/required_interaction_dexterity = DEXTERITY_KEYBOARDS
 
 	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/stock_parts
 	var/processing_flags         // What is being processed
@@ -269,8 +270,7 @@ Class Procs:
 		return
 	if(!CanPhysicallyInteract(user))
 		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
-	if(!user.check_dexterity(DEXTERITY_KEYBOARDS))
-		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
+	if(!user.check_dexterity(required_interaction_dexterity))
 		return TRUE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
