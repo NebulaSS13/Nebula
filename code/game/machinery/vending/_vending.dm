@@ -18,6 +18,7 @@
 	idle_power_usage = 10
 	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	wires = /datum/wires/vending
+	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access
