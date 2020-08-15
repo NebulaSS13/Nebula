@@ -59,7 +59,7 @@
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
-		D.disconnect()
+		D?.disconnect()
 
 	if(updating)
 		updating = FALSE
