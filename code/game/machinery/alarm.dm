@@ -791,6 +791,7 @@ FIRE ALARM
 	desc = "<i>\"Pull this in case of emergency\"</i>. Thus, keep pulling it forever."
 	icon = 'icons/obj/firealarm.dmi'
 	icon_state = "casing"
+	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 	var/detecting = 1.0
 	var/working = 1.0
 	var/time = 10.0

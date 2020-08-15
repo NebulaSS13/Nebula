@@ -5,7 +5,9 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "sheater-off"
 	name = "space heater"
-	desc = "Made by Space Amish using traditional space techniques, this heater is guaranteed not to set anything, or anyone, on fire."
+	desc = "This heater is guaranteed not to set anything, or anyone, on fire."
+	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
+
 	var/on = 0
 	var/set_temperature = T0C + 20	//K
 	var/active = 0

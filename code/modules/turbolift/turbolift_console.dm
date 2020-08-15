@@ -42,8 +42,10 @@
 
 /obj/structure/lift/interact(var/mob/user)
 	if(!lift.is_functional())
-		return 0
-	return 1
+		return FALSE
+	if(!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return FALSE
+	return TRUE
 // End base.
 
 // Button. No HTML interface, just calls the associated lift to its floor.
