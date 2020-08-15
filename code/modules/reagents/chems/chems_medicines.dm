@@ -217,26 +217,29 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
 
-/decl/material/liquid/retrovirals/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.adjustCloneLoss(-20 * removed)
-	M.adjustOxyLoss(-2 * removed)
-	M.heal_organ_damage(20 * removed, 20 * removed)
-	M.adjustToxLoss(-20 * removed)
-	if(M.chem_doses[type] > 3 && ishuman(M))
+/decl/material/liquid/retrovirals/affect_overdose(mob/living/carbon/M, alien, datum/reagents/holder)
+	. = ..()
+	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in H.organs)
-			E.status |= ORGAN_DISFIGURED //currently only matters for the head, but might as well disfigure them all.
+			if(!BP_IS_PROSTHETIC(E) && prob(25) && !(E.status & ORGAN_MUTATED))
+				E.mutate()
+				E.limb_flags |= ORGAN_FLAG_DEFORMED
+	
+/decl/material/liquid/retrovirals/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	M.adjustCloneLoss(-20 * removed)
 	if(M.chem_doses[type] > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
-
 	var/needs_update = M.mutations.len > 0
+	M.mutations.Cut()
 	M.disabilities = 0
 	M.sdisabilities = 0
 	if(needs_update && ishuman(M))
 		M.dna.ResetUI()
 		M.dna.ResetSE()
 		domutcheck(M, null, MUTCHK_FORCED)
+		M.update_icons()
 
 /decl/material/liquid/adrenaline
 	name = "adrenaline"
