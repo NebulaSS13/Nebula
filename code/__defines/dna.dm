@@ -28,16 +28,16 @@
 #define mSmallsize     110 // Table climbing.
 
 // disabilities
-#define NEARSIGHTED 0x1
-#define EPILEPSY    0x2
-#define COUGHING    0x4
-#define TOURETTES   0x8
-#define NERVOUS     0x10
+#define NEARSIGHTED BITFLAG(0)
+#define EPILEPSY    BITFLAG(1)
+#define COUGHING    BITFLAG(2)
+#define TOURETTES   BITFLAG(3)
+#define NERVOUS     BITFLAG(4)
 
 // sdisabilities
-#define BLINDED 0x1
-#define MUTED  0x2
-#define DEAFENED  0x4
+#define BLINDED  BITFLAG(0)
+#define MUTED    BITFLAG(1)
+#define DEAFENED BITFLAG(2)
 
 // The way blocks are handled badly needs a rewrite, this is horrible.
 // Too much of a project to handle at the moment, TODO for later.

@@ -2,16 +2,16 @@
 #define DEFAULT_WALL_MATERIAL       /decl/material/solid/metal/steel
 #define DEFAULT_FURNITURE_MATERIAL  /decl/material/solid/metal/aluminium
 
-#define MAT_FLAG_ALTERATION_NONE    0x1
-#define MAT_FLAG_ALTERATION_NAME    0x2
-#define MAT_FLAG_ALTERATION_DESC    0x4
-#define MAT_FLAG_ALTERATION_COLOR   0x8
+#define MAT_FLAG_ALTERATION_NONE    BITFLAG(0)
+#define MAT_FLAG_ALTERATION_NAME    BITFLAG(1)
+#define MAT_FLAG_ALTERATION_DESC    BITFLAG(2)
+#define MAT_FLAG_ALTERATION_COLOR   BITFLAG(3)
 #define MAT_FLAG_ALTERATION_ALL     (~MAT_FLAG_ALTERATION_NONE)
 
-#define MAT_FLAG_UNMELTABLE         0x1
-#define MAT_FLAG_BRITTLE            0x2
-#define MAT_FLAG_PADDING            0x4
-#define MAT_FLAG_FUSION_FUEL        0x8
+#define MAT_FLAG_UNMELTABLE         BITFLAG(0)
+#define MAT_FLAG_BRITTLE            BITFLAG(1)
+#define MAT_FLAG_PADDING            BITFLAG(2)
+#define MAT_FLAG_FUSION_FUEL        BITFLAG(3)
 
 #define SHARD_SHARD                 "shard"
 #define SHARD_SHRAPNEL              "shrapnel"
@@ -34,9 +34,9 @@
 #define MAT_VALUE_VERY_HARD_DIY     3
 
 //Stack flags
-#define USE_MATERIAL_COLOR          0x1
-#define USE_MATERIAL_SINGULAR_NAME  0x2
-#define USE_MATERIAL_PLURAL_NAME    0x4
+#define USE_MATERIAL_COLOR          BITFLAG(0)
+#define USE_MATERIAL_SINGULAR_NAME  BITFLAG(1)
+#define USE_MATERIAL_PLURAL_NAME    BITFLAG(2)
 
 //Arbitrary hardness thresholds
 #define MAT_VALUE_SOFT              10

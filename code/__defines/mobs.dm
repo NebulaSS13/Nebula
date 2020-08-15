@@ -4,20 +4,20 @@
 #define DEAD        2
 
 // Bitflags defining which status effects could be or are inflicted on a mob.
-#define CANSTUN     0x1
-#define CANWEAKEN   0x2
-#define CANPARALYSE 0x4
-#define CANPUSH     0x8
-#define PASSEMOTES  0x10    // Mob has a holder inside of it that need to see emotes.
-#define GODMODE     0x1000
-#define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
-#define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
-#define ENABLE_AI	0x8000	// Regardless of player control, the mob is using AI.
+#define CANSTUN      BITFLAG(0)
+#define CANWEAKEN    BITFLAG(1)
+#define CANPARALYSE  BITFLAG(2)
+#define CANPUSH      BITFLAG(3)
+#define PASSEMOTES   BITFLAG(4) // Mob has a holder inside of it that need to see emotes.
+#define GODMODE      BITFLAG(5)
+#define FAKEDEATH    BITFLAG(6) // Replaces stuff like changeling.changeling_fakedeath.
+#define NO_ANTAG     BITFLAG(7) // Players are restricted from gaining antag roles when occupying this mob
+#define ENABLE_AI    BITFLAG(8) // Regardless of player control, the mob is using AI.
 
-#define BORGMESON 0x1
-#define BORGTHERM 0x2
-#define BORGXRAY  0x4
-#define BORGMATERIAL  8
+#define BORGMESON    BITFLAG(0)
+#define BORGTHERM    BITFLAG(1)
+#define BORGXRAY     BITFLAG(2)
+#define BORGMATERIAL BITFLAG(3)
 
 #define HOSTILE_STANCE_IDLE      1
 #define HOSTILE_STANCE_ALERT     2
@@ -26,9 +26,9 @@
 #define HOSTILE_STANCE_TIRED     5
 #define HOSTILE_STANCE_INSIDE    6
 
-#define LEFT  0x1
-#define RIGHT 0x2
-#define UNDER 0x4
+#define LEFT  BITFLAG(0)
+#define RIGHT BITFLAG(1)
+#define UNDER BITFLAG(2)
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0   // So !M.pulse checks would be possible.
@@ -64,17 +64,17 @@
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
 
 // Appearance change flags
-#define APPEARANCE_UPDATE_DNA  0x1
-#define APPEARANCE_RACE       (0x2|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_GENDER     (0x4|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_SKIN        0x8
-#define APPEARANCE_HAIR        0x10
-#define APPEARANCE_HAIR_COLOR  0x20
-#define APPEARANCE_FACIAL_HAIR 0x40
-#define APPEARANCE_FACIAL_HAIR_COLOR 0x80
-#define APPEARANCE_EYE_COLOR 0x100
-#define APPEARANCE_ALL_HAIR (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
-#define APPEARANCE_ALL       0xFFFF
+#define APPEARANCE_UPDATE_DNA        BITFLAG(0)
+#define APPEARANCE_RACE              (BITFLAG(1)|APPEARANCE_UPDATE_DNA)
+#define APPEARANCE_GENDER            (BITFLAG(2)|APPEARANCE_UPDATE_DNA)
+#define APPEARANCE_SKIN              BITFLAG(3)
+#define APPEARANCE_HAIR              BITFLAG(4)
+#define APPEARANCE_HAIR_COLOR        BITFLAG(5)
+#define APPEARANCE_FACIAL_HAIR       BITFLAG(6)
+#define APPEARANCE_FACIAL_HAIR_COLOR BITFLAG(7)
+#define APPEARANCE_EYE_COLOR         BITFLAG(8)
+#define APPEARANCE_ALL_HAIR          (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
+#define APPEARANCE_ALL               (APPEARANCE_UPDATE_DNA|APPEARANCE_RACE|APPEARANCE_GENDER|APPEARANCE_SKIN|APPEARANCE_EYE_COLOR|APPEARANCE_ALL_HAIR)
 
 // Click cooldown
 #define DEFAULT_ATTACK_COOLDOWN 8 //Default timeout for aggressive actions
@@ -300,7 +300,7 @@
 
 #define RADIO_INTERRUPT_DEFAULT 30
 
-#define MOB_FLAG_HOLY_BAD                0x001  // If this mob is allergic to holiness
+#define MOB_FLAG_HOLY_BAD BITFLAG(0)  // If this mob is allergic to holiness
 
 #define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
 #define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns

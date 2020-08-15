@@ -11,7 +11,7 @@
 	if(slot in user.held_item_slots)
 		body_parts_covered = SLOT_ARMS
 	else if(slot == slot_head_str)
-		body_parts_covered = HEAD
+		body_parts_covered = SLOT_HEAD
 	else if(slot == slot_wear_suit_str)
 		body_parts_covered = SLOT_UPPER_BODY
 	. = ..()

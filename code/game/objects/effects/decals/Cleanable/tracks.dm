@@ -86,7 +86,7 @@ var/global/list/image/fluidtrack_cache=list()
 
 	// Process 4 bits
 	for(var/bi=0;bi<4;bi++)
-		b=1<<bi
+		b=BITFLAG(bi)
 		// COMING BIT
 		// If setting
 		if(comingdir&b)
