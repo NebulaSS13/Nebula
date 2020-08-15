@@ -10,8 +10,7 @@
 /datum/extension/assembly/proc/battery_power(var/power_usage = 0)
 	apc_powered = FALSE
 	for(var/obj/item/stock_parts/computer/battery_module/battery_module in parts)
-		if(battery_module.check_functionality() && battery_module.battery.charge >= power_usage)
-			battery_module.battery.use(power_usage * CELLRATE)
+		if(battery_module.check_functionality() && battery_module.battery.checked_use(power_usage * CELLRATE))
 			return TRUE
 
 // Tries to use power from APC, if present.
