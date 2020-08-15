@@ -2,24 +2,6 @@
 
 #define CANDLE_LUM 3 // For how bright candles are.
 
-// Item inventory slot bitmasks.
-#define SLOT_OCLOTHING  0x1
-#define SLOT_ICLOTHING  0x2
-#define SLOT_GLOVES     0x4
-#define SLOT_EYES       0x8
-#define SLOT_EARS       0x10
-#define SLOT_MASK       0x20
-#define SLOT_HEAD       0x40
-#define SLOT_FEET       0x80
-#define SLOT_ID         0x100
-#define SLOT_BELT       0x200
-#define SLOT_BACK       0x400
-#define SLOT_POCKET     0x800  // This is to allow items with a w_class of 3 or 4 to fit in pockets.
-#define SLOT_DENYPOCKET 0x1000  // This is to  deny items with a w_class of 2 or 1 from fitting in pockets.
-#define SLOT_TWOEARS    0x2000
-#define SLOT_TIE        0x4000
-#define SLOT_HOLSTER	0x8000 //16th bit - higher than this will overflow
-
 #define ACCESSORY_SLOT_UTILITY  "Utility"
 #define ACCESSORY_SLOT_HOLSTER	"Holster"
 #define ACCESSORY_SLOT_ARMBAND  "Armband"
@@ -38,20 +20,19 @@
 
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!
-#define HIDEGLOVES      0x1
-#define HIDESUITSTORAGE 0x2
-#define HIDEJUMPSUIT    0x4
-#define HIDESHOES       0x8
-#define HIDETAIL        0x10
+#define HIDEGLOVES      BITFLAG(0)
+#define HIDESUITSTORAGE BITFLAG(1)
+#define HIDEJUMPSUIT    BITFLAG(2)
+#define HIDESHOES       BITFLAG(3)
+#define HIDETAIL        BITFLAG(4)
 
 // WARNING: The following flags apply only to the helmets and masks!
-#define HIDEMASK 0x1
-#define HIDEEARS 0x2 // Headsets and such.
-#define HIDEEYES 0x4 // Glasses.
-#define HIDEFACE 0x8 // Dictates whether we appear as "Unknown".
-
-#define BLOCKHEADHAIR   0x20    // Hides the user's hair overlay. Leaves facial hair.
-#define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
+#define HIDEMASK      BITFLAG(0)
+#define HIDEEARS      BITFLAG(1) // Headsets and such.
+#define HIDEEYES      BITFLAG(2) // Glasses.
+#define HIDEFACE      BITFLAG(3) // Dictates whether we appear as "Unknown".
+#define BLOCKHEADHAIR BITFLAG(4)    // Hides the user's hair overlay. Leaves facial hair.
+#define BLOCKHAIR     BITFLAG(5)    // Hides the user's hair, facial and otherwise.
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.
@@ -76,26 +57,32 @@
 #define slot_s_store_str     "slot_s_store"
 #define slot_in_backpack_str "slot_s_store"
 
-
-// Bitflags for clothing parts.
-#define HEAD        0x1
-#define FACE        0x2
-#define EYES        0x4
-#define UPPER_TORSO 0x8
-#define LOWER_TORSO 0x10
-#define LEG_LEFT    0x20
-#define LEG_RIGHT   0x40
-#define LEGS        0x60   //  LEG_LEFT | LEG_RIGHT
-#define FOOT_LEFT   0x80
-#define FOOT_RIGHT  0x100
-#define FEET        0x180  // FOOT_LEFT | FOOT_RIGHT
-#define ARM_LEFT    0x200
-#define ARM_RIGHT   0x400
-#define ARMS        0x600 //  ARM_LEFT | ARM_RIGHT
-#define HAND_LEFT   0x800
-#define HAND_RIGHT  0x1000
-#define HANDS       0x1800 // HAND_LEFT | HAND_RIGHT
-#define FULL_BODY   0xFFFF
+// Bodypart coverage bitflags.
+#define SLOT_UPPER_BODY  BITFLAG(0)
+#define SLOT_LOWER_BODY  BITFLAG(1)
+#define SLOT_OVER_BODY   BITFLAG(2)
+#define SLOT_LEG_LEFT    BITFLAG(3)
+#define SLOT_LEG_RIGHT   BITFLAG(4)
+#define SLOT_FOOT_LEFT   BITFLAG(5)
+#define SLOT_FOOT_RIGHT  BITFLAG(6)
+#define SLOT_ARM_LEFT    BITFLAG(7)
+#define SLOT_ARM_RIGHT   BITFLAG(8)
+#define SLOT_HAND_LEFT   BITFLAG(9)
+#define SLOT_HAND_RIGHT  BITFLAG(10)
+#define SLOT_EYES        BITFLAG(11)
+#define SLOT_EARS        BITFLAG(12)
+#define SLOT_FACE        BITFLAG(13)
+#define SLOT_HEAD        BITFLAG(14)
+#define SLOT_ID          BITFLAG(15)
+#define SLOT_BACK        BITFLAG(16)
+#define SLOT_TIE         BITFLAG(17)
+#define SLOT_HOLSTER     BITFLAG(18)
+#define SLOT_POCKET      BITFLAG(19)
+#define SLOT_LEGS        (SLOT_LEG_LEFT|SLOT_LEG_RIGHT)
+#define SLOT_FEET        (SLOT_FOOT_LEFT|SLOT_FOOT_RIGHT)
+#define SLOT_ARMS        (SLOT_ARM_LEFT|SLOT_ARM_RIGHT)
+#define SLOT_HANDS       (SLOT_HAND_LEFT|SLOT_HAND_RIGHT)
+#define SLOT_FULL_BODY   (SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS|SLOT_UPPER_BODY|SLOT_LOWER_BODY)
 
 // Bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection().
@@ -166,21 +153,21 @@
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
 
-#define SUIT_NO_SENSORS 0
-#define SUIT_HAS_SENSORS 1
-#define SUIT_LOCKED_SENSORS 2
+#define SUIT_NO_SENSORS      0
+#define SUIT_HAS_SENSORS     1
+#define SUIT_LOCKED_SENSORS  2
 
 // Hair Flags
-#define VERY_SHORT 0x1
-#define HAIR_TIEABLE 0x2
-#define HAIR_BALD 0x4
-#define HAIR_LOSS_VULNERABLE 0x8
+#define VERY_SHORT           BITFLAG(0)
+#define HAIR_TIEABLE         BITFLAG(1)
+#define HAIR_BALD            BITFLAG(2)
+#define HAIR_LOSS_VULNERABLE BITFLAG(3)
 
 //flags to determine if an eyepiece is a hud.
-#define HUD_SCIENCE 0x1
-#define HUD_SECURITY 0x2
-#define HUD_MEDICAL 0x4
-#define HUD_JANITOR 0x8
+#define HUD_SCIENCE  BITFLAG(0)
+#define HUD_SECURITY BITFLAG(1)
+#define HUD_MEDICAL  BITFLAG(2)
+#define HUD_JANITOR  BITFLAG(3)
 
 // Limbs.
 #define BP_L_FOOT       "l_foot"

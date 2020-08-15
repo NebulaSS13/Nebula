@@ -3,7 +3,7 @@
 	desc = "A suit that protects against minor chemical spills."
 	icon = 'icons/clothing/suit/labcoat/default.dmi'
 	blood_overlay_type = "coat"
-	body_parts_covered = UPPER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 	allowed = list(/obj/item/scanner/gas,/obj/item/stack/medical,/obj/item/chems/dropper,/obj/item/chems/syringe,/obj/item/chems/hypospray,/obj/item/scanner/health,/obj/item/flashlight/pen,/obj/item/chems/glass/bottle,/obj/item/chems/glass/beaker,/obj/item/chems/pill,/obj/item/storage/pill_bottle,/obj/item/paper)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT
@@ -55,7 +55,7 @@
 	name = "research director's labcoat"
 	desc = "A full-body labcoat covered in designs, denoting it as management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon = 'icons/clothing/suit/labcoat/rd.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	markings_color = COLOR_BOTTLE_GREEN
 	markings_icon = "_marking"
 

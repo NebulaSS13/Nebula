@@ -4,7 +4,7 @@
 	name = "display monitor"
 	desc = "A rather clunky old CRT-style display screen, fit for mounting on an optical output."
 	flags_inv = HIDEEYES
-	body_parts_covered = EYES
+	body_parts_covered = SLOT_EYES
 	dir = SOUTH
 
 	icon = 'icons/obj/clothing/obj_head_ipc.dmi'

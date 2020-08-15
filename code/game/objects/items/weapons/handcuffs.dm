@@ -6,7 +6,7 @@
 	icon_state = "handcuff"
 	health = 0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2

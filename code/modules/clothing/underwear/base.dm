@@ -108,13 +108,13 @@
 	RemoveUnderwear(usr, usr)
 
 /obj/item/underwear/socks
-	required_free_body_parts = FEET
+	required_free_body_parts = SLOT_FEET
 
 /obj/item/underwear/top
-	required_free_body_parts = UPPER_TORSO
+	required_free_body_parts = SLOT_UPPER_BODY
 
 /obj/item/underwear/bottom
-	required_free_body_parts = FEET|LEGS|LOWER_TORSO
+	required_free_body_parts = SLOT_FEET|SLOT_LEGS|SLOT_LOWER_BODY
 
 /obj/item/underwear/undershirt
-	required_free_body_parts = UPPER_TORSO
+	required_free_body_parts = SLOT_UPPER_BODY

@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	fire_sound = 'sound/weapons/emitter.ogg'
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT|SLOT_BACK
+	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	max_shots = 5
 	projectile_type = /obj/item/projectile/change

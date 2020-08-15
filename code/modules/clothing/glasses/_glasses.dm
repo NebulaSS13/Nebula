@@ -2,7 +2,7 @@
 	name = "glasses"
 	icon = 'icons/obj/clothing/obj_eyes.dmi'
 	w_class = ITEM_SIZE_SMALL
-	body_parts_covered = EYES
+	body_parts_covered = SLOT_EYES
 	slot_flags = SLOT_EYES
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2

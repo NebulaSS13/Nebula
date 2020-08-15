@@ -85,6 +85,6 @@
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 7
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 
 	startswith = list(/obj/item/flame/candle = 7)

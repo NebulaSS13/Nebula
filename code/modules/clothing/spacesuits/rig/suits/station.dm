@@ -352,7 +352,7 @@
 //All in one suit
 /obj/item/clothing/suit/space/rig/zero
 	breach_threshold = 18
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 
 /obj/item/rig/zero/on_update_icon(var/update_mob_icon)
 	..()

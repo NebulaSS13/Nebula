@@ -94,7 +94,7 @@
 	desc = "A pair of magic, black shoes."
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
 	color = COLOR_GRAY40
-	body_parts_covered = FEET
+	body_parts_covered = SLOT_FEET
 
 /obj/item/clothing/shoes/clown_shoes
 	desc = "The prankster's standard-issue clowning shoes. Damn they're huge!"
@@ -127,9 +127,9 @@
 	force = 2
 	siemens_coefficient = 0.7
 
-	cold_protection = FEET
+	cold_protection = SLOT_FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
+	heat_protection = SLOT_FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 	bodytype_restricted = null
 

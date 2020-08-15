@@ -9,7 +9,7 @@
 	throw_speed = 4
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	req_access = list(list(access_heads, access_security))
 	var/datum/computer_file/report/warrant/active
 

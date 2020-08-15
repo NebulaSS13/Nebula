@@ -32,32 +32,33 @@ var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, 
 
 // Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
 var/global/list/string_part_flags = list(
-	"head" = HEAD,
-	"face" = FACE,
-	"eyes" = EYES,
-	"upper body" = UPPER_TORSO,
-	"lower body" = LOWER_TORSO,
-	"legs" = LEGS,
-	"feet" = FEET,
-	"arms" = ARMS,
-	"hands" = HANDS
+	"head" =       SLOT_HEAD,
+	"face" =       SLOT_FACE,
+	"eyes" =       SLOT_EYES,
+	"ears" =       SLOT_EARS,
+	"upper body" = SLOT_UPPER_BODY,
+	"lower body" = SLOT_LOWER_BODY,
+	"legs" =       SLOT_LEGS,
+	"feet" =       SLOT_FEET,
+	"arms" =       SLOT_ARMS,
+	"hands" =      SLOT_HANDS
 )
 
 // Strings which corraspond to slot flags, useful for outputting what slot something is.
 var/global/list/string_slot_flags = list(
-	"back" = SLOT_BACK,
-	"face" = SLOT_MASK,
-	"waist" = SLOT_BELT,
-	"ID slot" = SLOT_ID,
-	"ears" = SLOT_EARS,
-	"eyes" = SLOT_EYES,
-	"hands" = SLOT_GLOVES,
-	"head" = SLOT_HEAD,
-	"feet" = SLOT_FEET,
-	"exo slot" = SLOT_OCLOTHING,
-	"body" = SLOT_ICLOTHING,
-	"uniform" = SLOT_TIE,
-	"holster" = SLOT_HOLSTER
+	"back" =     SLOT_BACK,
+	"face" =     SLOT_FACE,
+	"waist" =    SLOT_LOWER_BODY,
+	"ID slot" =  SLOT_ID,
+	"ears" =     SLOT_EARS,
+	"eyes" =     SLOT_EYES,
+	"hands" =    SLOT_HANDS,
+	"head" =     SLOT_HEAD,
+	"feet" =     SLOT_FEET,
+	"exo slot" = SLOT_OVER_BODY,
+	"body" =     SLOT_UPPER_BODY,
+	"uniform" =  SLOT_TIE,
+	"holster" =  SLOT_HOLSTER
 )
 
 //////////////////////////

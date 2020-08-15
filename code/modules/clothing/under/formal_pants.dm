@@ -5,7 +5,7 @@
 	desc = "Plain suit pants."
 	icon_state = "pants"
 	gender = PLURAL
-	body_parts_covered = LOWER_TORSO|LEGS
+	body_parts_covered = SLOT_LOWER_BODY|SLOT_LEGS
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_pants.dmi')
 
 /obj/item/clothing/under/formal_pants/red

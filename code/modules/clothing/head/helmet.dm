@@ -6,7 +6,7 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_RESISTANT,
@@ -15,9 +15,9 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	flags_inv = HIDEEARS|BLOCKHEADHAIR
-	cold_protection = HEAD
+	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HEAD
+	heat_protection = SLOT_HEAD
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
@@ -56,7 +56,7 @@
 	desc = "It's a helmet specifically designed to protect against close range attacks."
 	icon = 'icons/clothing/head/armor/riot.dmi'
 	valid_accessory_slots = null
-	body_parts_covered = HEAD|FACE|EYES //face shield
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES //face shield
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_MINOR
@@ -123,7 +123,7 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	cold_protection = HEAD
+	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5
 
@@ -139,7 +139,7 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	cold_protection = HEAD
+	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
 
@@ -149,7 +149,7 @@
 	icon = 'icons/clothing/head/armor/gladiator.dmi'
 	valid_accessory_slots = null
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
-	body_parts_covered = HEAD|FACE
+	body_parts_covered = SLOT_HEAD|SLOT_FACE
 	siemens_coefficient = 1
 
 /obj/item/clothing/head/helmet/augment
@@ -165,7 +165,7 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	flags_inv = HIDEEARS|HIDEEYES
-	body_parts_covered = HEAD|EYES|BLOCKHEADHAIR
-	cold_protection = HEAD
+	body_parts_covered = SLOT_HEAD|SLOT_EYES|BLOCKHEADHAIR
+	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5

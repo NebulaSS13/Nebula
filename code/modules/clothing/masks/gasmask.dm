@@ -5,7 +5,7 @@
 	item_state = "fullgas"
 	item_flags = ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT | ITEM_FLAG_AIRTIGHT
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
-	body_parts_covered = FACE|EYES
+	body_parts_covered = SLOT_FACE|SLOT_EYES
 	w_class = ITEM_SIZE_NORMAL
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
@@ -63,7 +63,7 @@
 	icon_state = "halfgas"
 	item_state = "halfgas"
 	siemens_coefficient = 0.7
-	body_parts_covered = FACE
+	body_parts_covered = SLOT_FACE
 	w_class = ITEM_SIZE_SMALL
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
@@ -79,7 +79,7 @@
 	desc = "A face-covering mask that can be connected to an air supply. Filters harmful gases from the air. This one has additional filters to remove radioactive particles."
 	icon_state = "gas_mask"
 	item_state = "gas_mask"
-	body_parts_covered = FACE|EYES
+	body_parts_covered = SLOT_FACE|SLOT_EYES
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
 		bio = ARMOR_BIO_STRONG,
@@ -91,7 +91,7 @@
 	desc = "A face-covering mask that can be connected to an air supply. Filters harmful gases from the air. This one looks pretty dodgy. Are you sure it works?"
 	icon_state = "gas_alt"
 	item_state = "gas_alt"
-	body_parts_covered = FACE|EYES
+	body_parts_covered = SLOT_FACE|SLOT_EYES
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
 		bio = ARMOR_BIO_SMALL
@@ -103,7 +103,7 @@
 	icon_state = "swat"
 	item_state = "swat"
 	siemens_coefficient = 0.7
-	body_parts_covered = FACE|EYES
+	body_parts_covered = SLOT_FACE|SLOT_EYES
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -146,7 +146,7 @@
 	armor = list(
 		bio = ARMOR_BIO_SHIELDED
 		)
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
@@ -171,7 +171,7 @@
 	desc = "A mask used when acting as a monkey."
 	icon_state = "monkeymask"
 	item_state = "monkeymask"
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"
@@ -184,7 +184,7 @@
 	desc = "Twoooo!"
 	icon_state = "owl"
 	item_state = "owl"
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 //Vox Unique Masks
 
@@ -203,7 +203,7 @@
 	desc = "Clearly not designed for a human face."
 	icon_state = "voxswat"
 	item_state = "voxswat"
-	body_parts_covered = EYES
+	body_parts_covered = SLOT_EYES
 	filtered_gases = list(
 		/decl/material/gas/oxygen,
 		/decl/material/gas/nitrous_oxide,
@@ -219,5 +219,5 @@
 	desc = "A compact CO2 scrubber and breathing apparatus that draws oxygen from water."
 	icon_state = "halfgas"
 	filter_water = TRUE
-	body_parts_covered = FACE
+	body_parts_covered = SLOT_FACE
 	w_class = ITEM_SIZE_SMALL

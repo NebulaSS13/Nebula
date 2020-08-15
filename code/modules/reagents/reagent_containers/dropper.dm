@@ -44,13 +44,13 @@
 
 				var/obj/item/safe_thing = null
 				if(victim.wear_mask)
-					if (victim.wear_mask.body_parts_covered & EYES)
+					if (victim.wear_mask.body_parts_covered & SLOT_EYES)
 						safe_thing = victim.wear_mask
 				if(victim.head)
-					if (victim.head.body_parts_covered & EYES)
+					if (victim.head.body_parts_covered & SLOT_EYES)
 						safe_thing = victim.head
 				if(victim.glasses)
-					if (victim.glasses.body_parts_covered & EYES)
+					if (victim.glasses.body_parts_covered & SLOT_EYES)
 						safe_thing = victim.glasses
 				if(safe_thing)
 					trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)

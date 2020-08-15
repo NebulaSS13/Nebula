@@ -98,7 +98,7 @@
 	desc = "Used to control something remotely. Even has a tiny screen!"
 	icon_state = "forensic1"
 	w_class = ITEM_SIZE_SMALL
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	item_state = "electronic"
 	var/mob/living/bot/remotebot/bot
 

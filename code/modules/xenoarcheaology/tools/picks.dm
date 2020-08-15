@@ -89,7 +89,7 @@
 	desc = "A rugged case containing a set of standardized picks used in archaeological digs."
 	item_state = "syringe_kit"
 	storage_slots = 7
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/pickaxe/xeno)
 	max_storage_space = 18

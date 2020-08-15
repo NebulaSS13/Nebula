@@ -4,7 +4,7 @@
 	desc = "A high-power laser gun capable of emitting concentrated x-ray blasts, that are able to penetrate laser-resistant armor much more readily than standard photonic beams."
 	icon = 'icons/obj/guns/xray.dmi'
 	icon_state = ICON_STATE_WORLD
-	slot_flags = SLOT_BELT|SLOT_BACK
+	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	origin_tech = "{'combat':5,'materials':3,'magnets':2,'esoteric':2}"
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	one_hand_penalty = 2

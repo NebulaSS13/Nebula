@@ -42,8 +42,8 @@
 #define CE_GLOWINGEYES   "eyeglow"      // Causes eyes to glow.
 
 //reagent flags
-#define IGNORE_MOB_SIZE 0x1
-#define AFFECTS_DEAD    0x2
+#define IGNORE_MOB_SIZE BITFLAG(0)
+#define AFFECTS_DEAD    BITFLAG(1)
 
 #define HANDLE_REACTIONS(_reagents)  SSmaterials.active_holders[_reagents] = TRUE
 #define UNQUEUE_REACTIONS(_reagents) SSmaterials.active_holders -= _reagents

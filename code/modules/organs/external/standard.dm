@@ -12,7 +12,7 @@
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
 	cavity_max_w_class = ITEM_SIZE_NORMAL
-	body_part = UPPER_TORSO
+	body_part = SLOT_UPPER_BODY
 	vital = 1
 	amputation_point = "spine"
 	joint = "neck"
@@ -48,7 +48,7 @@
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_LARGE
 	cavity_max_w_class = ITEM_SIZE_SMALL
-	body_part = LOWER_TORSO
+	body_part = SLOT_LOWER_BODY
 	parent_organ = BP_CHEST
 	amputation_point = "lumbar"
 	joint = "hip"
@@ -64,7 +64,7 @@
 	max_damage = 50
 	min_broken_damage = 30
 	w_class = ITEM_SIZE_NORMAL
-	body_part = ARM_LEFT
+	body_part = SLOT_ARM_LEFT
 	parent_organ = BP_CHEST
 	joint = "left elbow"
 	amputation_point = "left shoulder"
@@ -77,7 +77,7 @@
 	organ_tag = BP_R_ARM
 	name = "right arm"
 	icon_name = "r_arm"
-	body_part = ARM_RIGHT
+	body_part = SLOT_ARM_RIGHT
 	joint = "right elbow"
 	amputation_point = "right shoulder"
 
@@ -88,7 +88,7 @@
 	max_damage = 50
 	min_broken_damage = 30
 	w_class = ITEM_SIZE_NORMAL
-	body_part = LEG_LEFT
+	body_part = SLOT_LEG_LEFT
 	icon_position = LEFT
 	parent_organ = BP_GROIN
 	joint = "left knee"
@@ -102,7 +102,7 @@
 	organ_tag = BP_R_LEG
 	name = "right leg"
 	icon_name = "r_leg"
-	body_part = LEG_RIGHT
+	body_part = SLOT_LEG_RIGHT
 	icon_position = RIGHT
 	joint = "right knee"
 	amputation_point = "right hip"
@@ -114,7 +114,7 @@
 	max_damage = 30
 	min_broken_damage = 15
 	w_class = ITEM_SIZE_SMALL
-	body_part = FOOT_LEFT
+	body_part = SLOT_FOOT_LEFT
 	icon_position = LEFT
 	parent_organ = BP_L_LEG
 	joint = "left ankle"
@@ -127,7 +127,7 @@
 	organ_tag = BP_R_FOOT
 	name = "right foot"
 	icon_name = "r_foot"
-	body_part = FOOT_RIGHT
+	body_part = SLOT_FOOT_RIGHT
 	icon_position = RIGHT
 	parent_organ = BP_R_LEG
 	joint = "right ankle"
@@ -141,7 +141,7 @@
 	max_damage = 30
 	min_broken_damage = 15
 	w_class = ITEM_SIZE_SMALL
-	body_part = HAND_LEFT
+	body_part = SLOT_HAND_LEFT
 	parent_organ = BP_L_ARM
 	joint = "left wrist"
 	amputation_point = "left wrist"
@@ -172,7 +172,7 @@
 	name = "right hand"
 	icon_name = "r_hand"
 	icon_position = RIGHT
-	body_part = HAND_RIGHT
+	body_part = SLOT_HAND_RIGHT
 	parent_organ = BP_R_ARM
 	joint = "right wrist"
 	amputation_point = "right wrist"

@@ -4,7 +4,7 @@
 	name = "roughspun robes"
 	desc = "A simple garment."
 	icon = 'icons/clothing/suit/rough_robe.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 
 //Misc Xeno clothing.
 
@@ -12,7 +12,7 @@
 	name = "headscarf"
 	desc = "A scarf of coarse fabric. Seems to have ear-holes."
 	icon = 'icons/clothing/head/headscarf.dmi'
-	body_parts_covered = HEAD|FACE
+	body_parts_covered = SLOT_HEAD|SLOT_FACE
 
 /obj/item/clothing/accessory/shouldercape
 	name = "shoulder cape"

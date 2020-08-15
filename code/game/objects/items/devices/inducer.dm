@@ -8,7 +8,7 @@
 	origin_tech = "{'powerstorage':6,'engineering':4}"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 
 	var/powertransfer = 500
 	var/coefficient = 0.9

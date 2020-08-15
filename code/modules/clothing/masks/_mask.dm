@@ -1,8 +1,8 @@
 /obj/item/clothing/mask
 	name = "mask"
 	icon = 'icons/obj/clothing/obj_mask.dmi'
-	slot_flags = SLOT_MASK
-	body_parts_covered = FACE|EYES
+	slot_flags = SLOT_FACE
+	body_parts_covered = SLOT_FACE|SLOT_EYES
 	blood_overlay_type = "maskblood"
 
 	var/voicechange = 0

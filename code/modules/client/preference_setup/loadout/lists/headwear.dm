@@ -167,3 +167,11 @@
 /datum/gear/tactical/balaclava
 	display_name = "balaclava"
 	path = /obj/item/clothing/mask/balaclava
+
+/datum/gear/head/earmuffs
+	display_name = "earmuffs"
+	path = /obj/item/clothing/head/earmuffs
+
+/datum/gear/head/headphones
+	display_name = "headphones"
+	path = /obj/item/clothing/head/headphones

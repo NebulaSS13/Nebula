@@ -6,7 +6,7 @@
 	force = 1
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = null
-	slot_flags = SLOT_BELT | SLOT_HOLSTER
+	slot_flags = SLOT_LOWER_BODY | SLOT_HOLSTER
 	release_force = 1.5
 	throw_distance = 6
 	accuracy = 1

@@ -145,13 +145,13 @@
 
 	for(var/obj/item/I in protection)
 		if(I)
-			if(I.body_parts_covered & EYES)
+			if(I.body_parts_covered & SLOT_EYES)
 				eyes_covered = 1
 				eye_protection = I.name
-			if((I.body_parts_covered & FACE) && !(I.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
+			if((I.body_parts_covered & SLOT_FACE) && !(I.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 				mouth_covered = 1
 				face_protection = I.name
-			else if(I.body_parts_covered & FACE)
+			else if(I.body_parts_covered & SLOT_FACE)
 				partial_mouth_covered = 1
 				partial_face_protection = I.name
 

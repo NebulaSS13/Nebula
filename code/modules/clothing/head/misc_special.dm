@@ -22,7 +22,7 @@
 		melee = ARMOR_MELEE_SMALL
 	)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	action_button_name = "Flip Welding Mask"
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
@@ -44,14 +44,14 @@
 	if(CanPhysicallyInteract(usr))
 		if(src.up)
 			src.up = !src.up
-			body_parts_covered |= (EYES|FACE)
+			body_parts_covered |= (SLOT_EYES|SLOT_FACE)
 			flags_inv |= (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
 			to_chat(usr, "You flip the [src] down to protect your eyes.")
 		else
 			src.up = !src.up
-			body_parts_covered &= ~(EYES|FACE)
+			body_parts_covered &= ~(SLOT_EYES|SLOT_FACE)
 			flash_protection = FLASH_PROTECTION_NONE
 			tint = TINT_NONE
 			flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
@@ -107,7 +107,7 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/ushanka.dmi'
 	flags_inv = HIDEEARS|BLOCKHEADHAIR
-	cold_protection = HEAD
+	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	var/up = FALSE
 
@@ -139,7 +139,7 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/pumpkin.dmi'
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 0.2
 	light_overlay = "helmet_light"
 	w_class = ITEM_SIZE_NORMAL
@@ -161,5 +161,5 @@
 	desc = "You can hear the distant sounds of rhythmic electronica."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/richard.dmi'
-	body_parts_covered = HEAD|FACE
+	body_parts_covered = SLOT_HEAD|SLOT_FACE
 	flags_inv = BLOCKHAIR

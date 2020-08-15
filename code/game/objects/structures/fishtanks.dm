@@ -115,7 +115,7 @@ GLOBAL_LIST_INIT(aquarium_states_and_layers, list(
 				continue
 			var/cache_key = "[c_states[i]][key_mod]-[i]"
 			if(!GLOB.fishtank_cache[cache_key])
-				var/image/I = image(icon, icon_state = "[c_states[i]][key_mod]", dir = 1 << (i-1))
+				var/image/I = image(icon, icon_state = "[c_states[i]][key_mod]", dir = 1<<(i-1))
 				if(GLOB.aquarium_states_and_layers[key_mod])
 					I.layer = GLOB.aquarium_states_and_layers[key_mod]
 				GLOB.fishtank_cache[cache_key] = I

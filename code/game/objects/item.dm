@@ -23,8 +23,8 @@
 	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 	var/melee_accuracy_bonus = 0
 
-	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
-	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
+	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
+	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the SLOT_HEAD, SLOT_UPPER_BODY, SLOT_LOWER_BODY, etc. flags. See setup.dm
 	var/max_heat_protection_temperature //Set this variable to determine up to which temperature (IN KELVIN) the item protects against heat damage. Keep at null to disable protection. Only protects areas set by heat_protection flags
 	var/min_cold_protection_temperature //Set this variable to determine down to which temperature (IN KELVIN) the item protects against cold damage. 0 is NOT an acceptable number due to if(varname) tests!! Keep at null to disable protection. Only protects areas set by cold_protection flags
 	var/max_pressure_protection // Set this variable if the item protects its wearer against high pressures below an upper bound. Keep at null to disable protection.
@@ -420,17 +420,17 @@
 
 //Defines which slots correspond to which slot flags
 var/list/slot_flags_enumeration = list(
-	"[slot_wear_mask_str]" = SLOT_MASK,
+	"[slot_wear_mask_str]" = SLOT_FACE,
 	"[slot_back_str]" = SLOT_BACK,
-	"[slot_wear_suit_str]" = SLOT_OCLOTHING,
-	"[slot_gloves_str]" = SLOT_GLOVES,
+	"[slot_wear_suit_str]" = SLOT_OVER_BODY,
+	"[slot_gloves_str]" = SLOT_HANDS,
 	"[slot_shoes_str]" = SLOT_FEET,
-	"[slot_belt_str]" = SLOT_BELT,
+	"[slot_belt_str]" = SLOT_LOWER_BODY,
 	"[slot_glasses_str]" = SLOT_EYES,
 	"[slot_head_str]" = SLOT_HEAD,
-	"[slot_l_ear_str]" = SLOT_EARS|SLOT_TWOEARS,
-	"[slot_r_ear_str]" = SLOT_EARS|SLOT_TWOEARS,
-	"[slot_w_uniform_str]" = SLOT_ICLOTHING,
+	"[slot_l_ear_str]" = SLOT_EARS,
+	"[slot_r_ear_str]" = SLOT_EARS,
+	"[slot_w_uniform_str]" = SLOT_UPPER_BODY,
 	"[slot_wear_id_str]" = SLOT_ID,
 	"[slot_tie_str]" = SLOT_TIE,
 	)
@@ -474,10 +474,7 @@ var/list/slot_flags_enumeration = list(
 	//Lastly, check special rules for the desired slot.
 	switch(slot)
 		if(slot_l_ear_str, slot_r_ear_str)
-			var/slot_other_ear = (slot == slot_l_ear_str)? slot_r_ear_str : slot_l_ear_str
-			if( (w_class > ITEM_SIZE_TINY) && !(slot_flags & SLOT_EARS) )
-				return FALSE
-			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
+			if((w_class > ITEM_SIZE_TINY) && !(slot_flags & SLOT_EARS))
 				return FALSE
 		if(slot_belt_str)
 			if(slot == slot_belt_str && (item_flags & ITEM_FLAG_IS_BELT))
@@ -490,8 +487,6 @@ var/list/slot_flags_enumeration = list(
 			if(!H.w_uniform && (slot_w_uniform_str in H.species.hud?.equip_slots))
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need a jumpsuit before you can attach this [name]."))
-				return FALSE
-			if(slot_flags & SLOT_DENYPOCKET)
 				return FALSE
 			if( w_class > ITEM_SIZE_SMALL && !(slot_flags & SLOT_POCKET) )
 				return FALSE
@@ -626,7 +621,7 @@ var/list/slot_flags_enumeration = list(
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		for(var/obj/item/protection in list(H.head, H.wear_mask, H.glasses))
-			if(protection && (protection.body_parts_covered & EYES))
+			if(protection && (protection.body_parts_covered & SLOT_EYES))
 				// you can't stab someone in the eyes wearing a mask!
 				to_chat(user, SPAN_WARNING("You're going to need to remove the eye covering first."))
 				return

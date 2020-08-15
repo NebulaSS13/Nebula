@@ -19,7 +19,7 @@
 	var/syndie = 0//Holder to see if it's a syndicate encrypted radio
 	var/intercept = 0 //can intercept other channels
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	throw_speed = 2
 	throw_range = 9
 	w_class = ITEM_SIZE_SMALL

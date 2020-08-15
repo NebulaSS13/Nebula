@@ -1,7 +1,7 @@
 // Quick and deliberate movements are not necessarily mutually exclusive
-#define MOVE_INTENT_DELIBERATE 0x0001
-#define MOVE_INTENT_EXERTIVE   0x0002
-#define MOVE_INTENT_QUICK      0x0004
+#define MOVE_INTENT_DELIBERATE BITFLAG(0)
+#define MOVE_INTENT_EXERTIVE   BITFLAG(1)
+#define MOVE_INTENT_QUICK      BITFLAG(2)
 
 /decl/move_intent
 	var/name

@@ -56,7 +56,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 10
 	throwforce = 2
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	startswith = list(/obj/item/paper/cig = 10)
 
 /obj/item/storage/cigpaper/fancy
@@ -83,7 +83,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	throwforce = 2
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco = 6)
 	make_exact_fit()
 

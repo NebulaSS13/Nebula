@@ -7,7 +7,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT | SLOT_EARS
+	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	throwforce = 3
 	force = 3
 	w_class = ITEM_SIZE_TINY
@@ -68,7 +68,7 @@
 	w_class = ITEM_SIZE_LARGE
 	force = 7
 	material = /decl/material/solid/metal/steel
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic thunk"

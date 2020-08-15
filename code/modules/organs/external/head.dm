@@ -2,12 +2,12 @@
 	organ_tag = BP_HEAD
 	icon_name = "head"
 	name = "head"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	max_damage = 75
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_NORMAL
 	cavity_max_w_class = ITEM_SIZE_SMALL
-	body_part = HEAD
+	body_part = SLOT_HEAD
 	parent_organ = BP_CHEST
 	joint = "jaw"
 	amputation_point = "neck"

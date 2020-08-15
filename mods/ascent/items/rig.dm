@@ -250,7 +250,7 @@
 	boot_type =  null
 
 /obj/item/clothing/suit/space/rig/mantid/serpentid
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET
 
 /obj/item/rig/mantid/mob_can_equip(var/mob/M, var/slot)
 	. = ..()

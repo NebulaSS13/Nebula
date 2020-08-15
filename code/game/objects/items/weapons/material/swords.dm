@@ -3,7 +3,7 @@
 	desc = "What are you standing around staring at this for? Get to killing!"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/obj/items/weapon/swords/claymore.dmi'
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_LARGE
 	material_force_multiplier = 0.5 // 30 when wielded with hardnes 60 (steel)
 	armor_penetration = 10
@@ -56,7 +56,7 @@
 	name = "katana"
 	desc = "Woefully underpowered in D20. This one looks pretty sharp."
 	icon = 'icons/obj/items/weapon/swords/katana.dmi'
-	slot_flags = SLOT_BELT | SLOT_BACK
+	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
 
 /obj/item/sword/katana/set_material(new_material)
 	. = ..()

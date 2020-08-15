@@ -32,7 +32,7 @@
 	item_state = "lb_suit"
 	worn_state = "cargo"
 	gender_icons = 1
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 
 /obj/item/clothing/under/rank/chaplain

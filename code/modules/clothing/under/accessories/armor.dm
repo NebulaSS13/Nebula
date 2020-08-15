@@ -27,7 +27,7 @@
 	desc = "A basic armor plate made of steel-reinforced synthetic fibers. Attaches to a plate carrier."
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	icon_state = "armor_light"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_SMALL,
@@ -76,7 +76,7 @@
 	icon_state = "armguards"
 	color = COLOR_GRAY40
 	gender = PLURAL
-	body_parts_covered = ARMS
+	body_parts_covered = SLOT_ARMS
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -102,7 +102,7 @@
 	icon_state = "legguards"
 	color = COLOR_GRAY40
 	gender = PLURAL
-	body_parts_covered = LEGS
+	body_parts_covered = SLOT_LEGS
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -133,7 +133,7 @@
 	name = "\improper PRESS tag"
 	desc = "A tag with the word PRESS printed in white lettering on it."
 	icon_state = "smalltag"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 
 /obj/item/clothing/accessory/armor/tag/warden
 	name = "\improper WARDEN tag"

@@ -35,7 +35,7 @@
 	burst = 1
 	one_hand_penalty = 0
 	w_class = ITEM_SIZE_NORMAL
-	slot_flags = SLOT_DENYPOCKET | SLOT_HOLSTER
+	slot_flags = SLOT_HOLSTER
 	projectile_type = /obj/item/projectile/beam/particle/small
 	firemodes = list(
 		list(mode_name="stun",   projectile_type = /obj/item/projectile/beam/stun),

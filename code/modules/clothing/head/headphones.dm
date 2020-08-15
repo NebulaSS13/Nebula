@@ -1,30 +1,34 @@
-/obj/item/clothing/ears/headphones
+/obj/item/clothing/head/headphones
 	name = "headphones"
 	desc = "It's probably not in accordance with company policy to listen to music on the job... but fuck it."
-	var/headphones_on = 0
-	icon = 'icons/obj/items/headphones.dmi'
-	icon_state = "headphones_off"
-	item_state = "headphones_off"
-	slot_flags = SLOT_EARS | SLOT_TWOEARS
+	icon = 'icons/clothing/head/headphones.dmi'
+	icon_state = ICON_STATE_WORLD
 	volume_multiplier = 0.5
+	body_parts_covered = SLOT_HEAD|SLOT_EARS
+	gender = PLURAL
+
+	var/headphones_on = 0
 	var/sound_channel
 	var/current_track
 	var/music_volume = 50
 
-/obj/item/clothing/ears/headphones/Initialize()
+/obj/item/clothing/head/headphones/Initialize()
 	. = ..()
 	sound_channel = GLOB.sound_channels.RequestChannel(type)
 
-/obj/item/clothing/ears/headphones/on_update_icon()
+/obj/item/clothing/head/headphones/on_update_icon()
+	icon_state = get_world_inventory_state()
 	if(headphones_on)
-		icon_state = "headphones_on"
-		item_state = "headphones_on"
-	else
-		icon_state = "headphones_off"
-		item_state = "headphones_off"
+		icon_state = "[icon_state]-on"
 	update_clothing_icon()
-	
-/obj/item/clothing/ears/headphones/verb/togglemusic()
+
+/obj/item/clothing/head/headphones/get_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	if(headphones_on)
+		ret.icon_state = "[ret.icon_state]-on"
+	return ret
+
+/obj/item/clothing/head/headphones/verb/togglemusic()
 	set name = "Toggle Headphone Music"
 	set category = "Object"
 	set src in usr
@@ -32,7 +36,7 @@
 	if(usr.incapacitated()) return
 	toggle(usr)
 
-/obj/item/clothing/ears/headphones/proc/toggle(mob/user)
+/obj/item/clothing/head/headphones/proc/toggle(mob/user)
 	if(headphones_on)
 		headphones_on = 0
 		to_chat(user, "<span class='notice'>You turn the music off.</span>")
@@ -46,23 +50,23 @@
 
 	update_icon()
 
-/obj/item/clothing/ears/headphones/MouseDrop(mob/user)
+/obj/item/clothing/head/headphones/MouseDrop(mob/user)
 	interact(user)
 
-/obj/item/clothing/ears/headphones/attack_self(mob/user)
+/obj/item/clothing/head/headphones/attack_self(mob/user)
 	..()
 	interact(user)
 
-/obj/item/clothing/ears/headphones/equipped(mob/user)
+/obj/item/clothing/head/headphones/equipped(mob/user)
 	. = ..()
 	if(headphones_on)
 		play_music(user)
 
-/obj/item/clothing/ears/headphones/dropped(mob/user)
+/obj/item/clothing/head/headphones/dropped(mob/user)
 	. = ..()
 	stop_music(user)
 
-/obj/item/clothing/ears/headphones/proc/play_music(mob/user)
+/obj/item/clothing/head/headphones/proc/play_music(mob/user)
 	if(!user || !user.client)
 		return
 	if(!(user.get_inventory_slot(src) in list(slot_l_ear_str, slot_r_ear_str)))
@@ -72,12 +76,12 @@
 		sound_to(user, sound(null, channel = sound_channel))
 		sound_to(user, sound(track.song, repeat = 1, wait = 0, volume = music_volume, channel = sound_channel))
 
-/obj/item/clothing/ears/headphones/proc/stop_music(mob/user)
+/obj/item/clothing/head/headphones/proc/stop_music(mob/user)
 	if(!user || !user.client)
 		return
 	sound_to(user, sound(null, channel = sound_channel))
 
-/obj/item/clothing/ears/headphones/interact(var/mob/user)
+/obj/item/clothing/head/headphones/interact(var/mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
 	var/list/dat = list()
@@ -94,7 +98,7 @@
 	popup.set_content(jointext(dat,"<br>"))
 	popup.open()
 
-/obj/item/clothing/ears/headphones/OnTopic(var/user, var/list/href_list)
+/obj/item/clothing/head/headphones/OnTopic(var/user, var/list/href_list)
 	if(href_list["toggle"])
 		toggle(user)
 		interact(user)

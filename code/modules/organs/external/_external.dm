@@ -383,9 +383,9 @@
 
 	if(user == src.owner)
 		var/grasp
-		if(user.get_equipped_item(BP_L_HAND) == tool && (src.body_part & (ARM_LEFT|HAND_LEFT)))
+		if(user.get_equipped_item(BP_L_HAND) == tool && (src.body_part & (SLOT_ARM_LEFT|SLOT_HAND_LEFT)))
 			grasp = BP_L_HAND
-		else if(user.get_equipped_item(BP_R_HAND) == tool && (src.body_part & (ARM_RIGHT|HAND_RIGHT)))
+		else if(user.get_equipped_item(BP_R_HAND) == tool && (src.body_part & (SLOT_ARM_RIGHT|SLOT_HAND_RIGHT)))
 			grasp = BP_R_HAND
 
 		if(grasp)
@@ -948,7 +948,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		holder = owner
 	if(!holder)
 		return
-	if (holder.handcuffed && (body_part in list(ARM_LEFT, ARM_RIGHT, HAND_LEFT, HAND_RIGHT)))
+	if (holder.handcuffed && (body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT, SLOT_HAND_LEFT, SLOT_HAND_RIGHT)))
 		holder.visible_message(\
 			"\The [holder.handcuffed.name] falls off of [holder.name].",\
 			"\The [holder.handcuffed.name] falls off you.")
@@ -1214,17 +1214,16 @@ obj/item/organ/external/proc/remove_clamps()
 	if(!owner)
 		return
 
-	switch(body_part)
-		if(FOOT_LEFT, FOOT_RIGHT)
-			owner.drop_from_inventory(owner.shoes)
-		if(HAND_LEFT, HAND_RIGHT)
-			owner.drop_from_inventory(owner.gloves)
-		if(HEAD)
-			owner.drop_from_inventory(owner.glasses)
-			owner.drop_from_inventory(owner.head)
-			owner.drop_from_inventory(owner.l_ear)
-			owner.drop_from_inventory(owner.r_ear)
-			owner.drop_from_inventory(owner.wear_mask)
+	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
+		owner.drop_from_inventory(owner.shoes)
+	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
+		owner.drop_from_inventory(owner.gloves)
+	if(body_part & SLOT_HEAD)
+		owner.drop_from_inventory(owner.head)
+		owner.drop_from_inventory(owner.glasses)
+		owner.drop_from_inventory(owner.l_ear)
+		owner.drop_from_inventory(owner.r_ear)
+		owner.drop_from_inventory(owner.wear_mask)
 
 	var/mob/living/carbon/human/victim = owner
 	var/is_robotic = BP_IS_PROSTHETIC(src)

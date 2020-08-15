@@ -2,7 +2,7 @@
 	name = "head"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/softcap.dmi'
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL
 	blood_overlay_type = "helmetblood"

@@ -81,7 +81,7 @@
 		BODYTYPE_SNAKE =        'mods/ascent/icons/harness/serpentid.dmi'
 		)
 	body_parts_covered = 0
-	slot_flags = SLOT_OCLOTHING | SLOT_BELT
+	slot_flags = SLOT_OVER_BODY | SLOT_LOWER_BODY
 	allowed = list(
 		/obj/item/flashlight,
 		/obj/item/tank,

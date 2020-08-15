@@ -17,7 +17,7 @@
 	name = "wizard hat"
 	desc = "It has WIZZARD written across it in sequins. Comes with a cool beard."
 	icon = 'icons/clothing/head/wizard/fake.dmi'
-	body_parts_covered = HEAD|FACE
+	body_parts_covered = SLOT_HEAD|SLOT_FACE
 
 /obj/item/clothing/head/wizard/marisa
 	name = "Witch Hat"
@@ -30,7 +30,7 @@
 	desc = "A mysterious helmet that hums with an unearthly power."
 	icon = 'icons/clothing/head/wizard/magus.dmi'
 	siemens_coefficient = 0.8
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/wizard/cap
 	name = "Gentlemans Cap"
@@ -71,13 +71,13 @@
 	name = "Magus Robe"
 	desc = "A set of armoured robes that seem to radiate a dark power."
 	icon = 'icons/clothing/suit/wizard/magusblue.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET
 
 /obj/item/clothing/suit/wizrobe/magusred
 	name = "Magus Robe"
 	desc = "A set of armoured robes that seem to radiate a dark power."
 	icon = 'icons/clothing/suit/wizard/magusred.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET
 
 /obj/item/clothing/suit/wizrobe/psypurple
 	name = "purple robes"
@@ -89,7 +89,7 @@
 	name = "Gentlemans Coat"
 	desc = "A heavy threaded tweed gray jacket. For a different sort of Gentleman."
 	icon = 'icons/clothing/suit/wizard/gentleman.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/suit/wizrobe/fake
 	name = "wizard robe"
@@ -107,7 +107,7 @@
 /obj/item/clothing/suit/wizrobe/marisa/fake
 	name = "Witch Robe"
 	desc = "Magic is all about the spell power, ZE!"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	armor = null
 	siemens_coefficient = 1.0
 

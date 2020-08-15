@@ -52,7 +52,7 @@ var/list/laser_wavelengths
 	charge_cost = 100
 	accuracy = 2
 	fire_delay = 10
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	cell_type = /obj/item/cell/high
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/variable

@@ -5,9 +5,9 @@
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
 	gender = PLURAL
 	siemens_coefficient = 0.9
-	cold_protection = FEET
-	body_parts_covered = FEET
-	heat_protection = FEET
+	cold_protection = SLOT_FEET
+	body_parts_covered = SLOT_FEET
+	heat_protection = SLOT_FEET
 	slot_flags = SLOT_FEET
 	permeability_coefficient = 0.50
 	force = 2
@@ -100,7 +100,7 @@
 	if (hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
 		return
-	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES) || (I.slot_flags & SLOT_DENYPOCKET))
+	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES))
 		to_chat(user, SPAN_WARNING("\The [src] can't hold the [I]."))
 		return
 	if (I.w_class > hidden_item_max_w_class)

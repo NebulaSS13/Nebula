@@ -5,9 +5,9 @@
 		BP_R_HAND = 'icons/mob/onmob/items/righthand_uniforms.dmi',
 		)
 	name = "under"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	permeability_coefficient = 0.90
-	slot_flags = SLOT_ICLOTHING
+	slot_flags = SLOT_UPPER_BODY
 	w_class = ITEM_SIZE_NORMAL
 	force = 0
 	made_of_cloth = TRUE
@@ -242,7 +242,7 @@
 
 	rolled_down = !rolled_down
 	if(rolled_down)
-		body_parts_covered &= LOWER_TORSO|LEGS|FEET
+		body_parts_covered &= SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET
 		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix("_d_s"))
 	else
 		body_parts_covered = initial(body_parts_covered)
@@ -266,7 +266,7 @@
 
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
-		body_parts_covered &= ~(ARMS|HANDS)
+		body_parts_covered &= ~(SLOT_ARMS|SLOT_HANDS)
 		LAZYSET(item_state_slots, slot_w_uniform_str, worn_state + get_gender_suffix("_r_s"))
 		to_chat(usr, "<span class='notice'>You roll up your [src]'s sleeves.</span>")
 	else

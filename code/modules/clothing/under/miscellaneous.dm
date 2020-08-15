@@ -57,7 +57,7 @@
 	icon_state = "sexyclown"
 	item_state = "clown"
 	worn_state = "sexyclown"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/rank/vice
 	name = "vice officer's jumpsuit"
@@ -100,8 +100,8 @@
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS //Needs gloves and shoes with cold protection to be fully protected.
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
+	cold_protection = SLOT_UPPER_BODY | SLOT_LOWER_BODY | SLOT_LEGS | SLOT_ARMS //Needs gloves and shoes with cold protection to be fully protected.
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/under/acj
@@ -112,7 +112,7 @@
 	desc = "it's a cybernetically enhanced jumpsuit used for administrative duties."
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	armor = list(
 		melee = ARMOR_MELEE_SHIELDED, 
 		bullet = ARMOR_BALLISTIC_HEAVY, 
@@ -122,7 +122,7 @@
 		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_SHIELDED
 		)
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	cold_protection = SLOT_UPPER_BODY | SLOT_LOWER_BODY | SLOT_LEGS | SLOT_FEET | SLOT_ARMS | SLOT_HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
 
@@ -153,7 +153,7 @@
 	icon_state = "psysuit"
 	item_state = "bl_suit"
 	worn_state = "psysuit"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 
 /obj/item/clothing/under/gentlesuit
 	name = "gentlemans suit"
@@ -214,7 +214,7 @@
 	icon_state = "blackskirt"
 	item_state = "bl_suit"
 	worn_state = "blackskirt"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/under/schoolgirl
 	name = "schoolgirl uniform"
@@ -222,7 +222,7 @@
 	icon_state = "schoolgirl"
 	item_state = "b_suit"
 	worn_state = "schoolgirl"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/overalls
 	name = "laborer's overalls"
@@ -238,7 +238,7 @@
 	item_state = "sl_suit"
 	worn_state = "pirate"
 	gender_icons = 1
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 
 /obj/item/clothing/under/soviet
 	name = "soviet uniform"
@@ -260,7 +260,7 @@
 	icon_state = "kilt"
 	item_state = "kilt"
 	worn_state = "kilt"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|FEET
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_FEET
 
 /obj/item/clothing/under/sexymime
 	name = "sexy mime outfit"
@@ -268,7 +268,7 @@
 	icon_state = "sexymime"
 	item_state = "w_suit"
 	worn_state = "sexymime"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/gladiator
 	name = "gladiator uniform"
@@ -276,7 +276,7 @@
 	icon_state = "gladiator"
 	item_state = "o_suit"
 	worn_state = "gladiator"
-	body_parts_covered = LOWER_TORSO
+	body_parts_covered = SLOT_LOWER_BODY
 
 //dress
 /obj/item/clothing/under/dress
@@ -284,7 +284,7 @@
 	desc = "A fancy dress."
 	icon_state = "dress_fire"
 	worn_state = "dress_fire"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/dress/dress_fire
 	name = "flame dress"
@@ -342,7 +342,7 @@
 	icon_state = "dress_cap"
 	item_state = "b_suit"
 	worn_state = "dress_cap"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/under/dress/dress_hop
 	name = "head of personnel dress uniform"
@@ -350,7 +350,7 @@
 	icon_state = "dress_hop"
 	item_state = "b_suit"
 	worn_state = "dress_hop"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/under/dress/dress_hr
 	name = "human resources director uniform"
@@ -358,7 +358,7 @@
 	icon_state = "huresource"
 	item_state = "y_suit"
 	worn_state = "huresource"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/under/dress/plaid_blue
 	name = "blue plaid skirt"
@@ -382,7 +382,7 @@
 
 //wedding stuff
 /obj/item/clothing/under/wedding/
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 
 /obj/item/clothing/under/wedding/bride_orange
 	name = "orange wedding dress"
@@ -423,7 +423,7 @@
 	item_state = "nursesuit"
 	worn_state = "bride_white"
 	flags_inv = HIDESHOES
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/sundress
 	name = "sundress"
@@ -431,7 +431,7 @@
 	icon_state = "sundress"
 	item_state = "bl_suit"
 	worn_state = "sundress"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/sundress_white
 	name = "white sundress"
@@ -439,7 +439,7 @@
 	icon_state = "sundress_white"
 	item_state = "sundress_white"
 	worn_state = "sundress_white"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/blackjumpskirt
 	name = "black jumpskirt"
@@ -541,7 +541,7 @@
 	icon_state = "mai_yang"
 	item_state = "mai_yang"
 	worn_state = "mai_yang"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 
 /obj/item/clothing/under/abaya
 	name = "abaya"
@@ -549,7 +549,7 @@
 	icon_state = "abaya"
 	item_state = "abaya"
 	worn_state = "abaya"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"
@@ -607,13 +607,13 @@
 	icon_state = "hunterhide"
 	item_state = "hunter"
 	worn_state = "hunter"
-	body_parts_covered = LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 
 /obj/item/clothing/under/savage_hunter/female
 	name = "savage huntress's hides"
 	desc = "Makeshift hides bound together with the sinew, packwax, and leather of some alien creature. Includes a chestwrap so as not to leave one topless."
 	worn_state = "huntress"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 
 /obj/item/clothing/under/wetsuit
 	name = "tactical wetsuit"
@@ -621,7 +621,7 @@
 	icon_state = "wetsuit"
 	item_state = "wetsuit"
 	worn_state = "wetsuit"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/hazard
 	name = "hazard jumpsuit"
@@ -654,4 +654,4 @@
 	name = "kimono"
 	icon_state = "kimono"
 	worn_state = "kimono"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS

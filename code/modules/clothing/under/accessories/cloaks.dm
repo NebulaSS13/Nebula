@@ -5,12 +5,12 @@
 	icon = 'icons/clothing/suit/cloaks/_cloak.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	slot = ACCESSORY_SLOT_OVER
-	slot_flags = SLOT_OCLOTHING
+	slot_flags = SLOT_OVER_BODY
 	allowed = list(/obj/item/tank/emergency/oxygen)
 	high_visibility = TRUE
 	made_of_cloth = TRUE
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/accessory/cloak/on_update_icon()
@@ -138,7 +138,7 @@
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	armor_type = /datum/extension/armor/ablative
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	material_armor_multiplier = 0.5
 
 /obj/item/clothing/accessory/cloak/hide/set_material(var/new_material)

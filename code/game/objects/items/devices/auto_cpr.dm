@@ -5,7 +5,7 @@
 	icon_state = "pumper"
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'magnets':2,'biotech':2}"
-	slot_flags = SLOT_OCLOTHING
+	slot_flags = SLOT_OVER_BODY
 	var/last_pump
 	var/skilled_setup
 

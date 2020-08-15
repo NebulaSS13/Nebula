@@ -16,15 +16,15 @@
 	w_class = ITEM_SIZE_LARGE//large item
 	flags_inv = HIDETAIL
 
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO| ARMS
+	body_parts_covered = SLOT_UPPER_BODY | SLOT_LOWER_BODY| SLOT_ARMS
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/clothing/head/hardhat)
 	
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 
-	heat_protection = UPPER_TORSO | LOWER_TORSO | ARMS
-	cold_protection = UPPER_TORSO | LOWER_TORSO | ARMS
+	heat_protection = SLOT_UPPER_BODY | SLOT_LOWER_BODY | SLOT_ARMS
+	cold_protection = SLOT_UPPER_BODY | SLOT_LOWER_BODY | SLOT_ARMS
 
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
@@ -48,7 +48,7 @@
 		bomb = ARMOR_BOMB_SHIELDED
 		)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	siemens_coefficient = 0
 
 /obj/item/clothing/suit/bomb_suit
@@ -66,7 +66,7 @@
 		bomb = ARMOR_BOMB_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
-	heat_protection = UPPER_TORSO|LOWER_TORSO
+	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
 
@@ -76,13 +76,13 @@
 
 /obj/item/clothing/head/bomb_hood/security
 	icon_state = "bombsuitsec"
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 	icon = 'icons/clothing/head/bombsuit_olive.dmi'
 
 /obj/item/clothing/suit/bomb_suit/security
 	icon = 'icons/clothing/suit/bombsuit_olive.dmi'
 	allowed = list(/obj/item/gun/energy,/obj/item/baton,/obj/item/handcuffs)
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 
 /*
  * Radiation protection
@@ -92,7 +92,7 @@
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
 	icon = 'icons/clothing/head/radsuit.dmi'
 	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT, 
 		rad = ARMOR_RAD_SHIELDED
@@ -105,7 +105,7 @@
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HANDS|SLOT_FEET
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/geiger)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT, 
@@ -132,7 +132,7 @@
 		)
 	flags_inv = HIDEEARS|HIDEEYES|BLOCKHAIR
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/suit/chem_suit
@@ -142,7 +142,7 @@
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	allowed = list(/obj/item/tank/emergency,/obj/item/pen,/obj/item/flashlight/pen,/obj/item/scanner/health,/obj/item/ano_scanner,/obj/item/clothing/head/chem_hood,/obj/item/clothing/mask/gas,/obj/item/geiger)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT, 

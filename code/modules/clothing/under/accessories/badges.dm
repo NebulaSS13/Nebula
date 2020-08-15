@@ -8,7 +8,7 @@
 	name = "badge"
 	desc = "A leather-backed badge, with gold trimmings."
 	icon_state = "detectivebadge"
-	slot_flags = SLOT_BELT | SLOT_TIE
+	slot_flags = SLOT_LOWER_BODY | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	high_visibility = 1
 	var/badge_string = "Detective"
@@ -72,7 +72,7 @@
 
 /obj/item/clothing/accessory/badge/holo/cord
 	icon_state = "holobadge-cord"
-	slot_flags = SLOT_MASK | SLOT_TIE
+	slot_flags = SLOT_FACE | SLOT_TIE
 
 /obj/item/clothing/accessory/badge/holo/set_name(var/new_name)
 	..()

@@ -237,14 +237,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_wear_id(redraw_mob)
 		if(slot_l_ear_str)
 			src.l_ear = W
-			if(l_ear.slot_flags & SLOT_TWOEARS)
-				src.r_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_r_ear_str)
 			src.r_ear = W
-			if(r_ear.slot_flags & SLOT_TWOEARS)
-				src.l_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_glasses_str)
@@ -331,12 +327,15 @@ This saves us from having to call add_fingerprint() any time something is put in
 	switch(slot)
 		if(slot_wear_mask_str)
 			covering = src.head
-			check_flags = FACE
+			check_flags = SLOT_FACE
 		if(slot_glasses_str)
 			covering = src.head
-			check_flags = EYES
+			check_flags = SLOT_EYES
 		if(slot_gloves_str, slot_w_uniform_str)
 			covering = src.wear_suit
+		if(slot_l_ear_str, slot_r_ear_str)
+			covering = src.head
+			check_flags = SLOT_EARS
 
 	if(covering && (covering.body_parts_covered & (I.body_parts_covered|check_flags)))
 		to_chat(user, SPAN_WARNING("\The [covering] is in the way."))

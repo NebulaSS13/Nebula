@@ -64,7 +64,7 @@
 	for(var/obj/item/clothing/clothes in H)
 		if(clothes in held_items)
 			continue
-		if((clothes.body_parts_covered & UPPER_TORSO) && (clothes.body_parts_covered & LOWER_TORSO))
+		if((clothes.body_parts_covered & SLOT_UPPER_BODY) && (clothes.body_parts_covered & SLOT_LOWER_BODY))
 			covered = 1
 			break
 

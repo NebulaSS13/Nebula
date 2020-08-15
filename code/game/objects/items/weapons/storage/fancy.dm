@@ -113,7 +113,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	throwforce = 2
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
@@ -261,7 +261,7 @@
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	throwforce = 2
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	storage_slots = 7
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar

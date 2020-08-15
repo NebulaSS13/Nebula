@@ -109,7 +109,7 @@
 	name = "necklace"
 	desc = "A simple necklace."
 	icon_state = "necklace"
-	slot_flags = SLOT_MASK | SLOT_TIE
+	slot_flags = SLOT_FACE | SLOT_TIE
 
 //Misc
 /obj/item/clothing/accessory/kneepads

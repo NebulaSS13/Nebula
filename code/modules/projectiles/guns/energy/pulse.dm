@@ -5,7 +5,7 @@
 	icon = 'icons/obj/guns/pulse_pistol.dmi'
 	icon_state = ICON_STATE_WORLD
 	indicator_color = COLOR_LUMINOL
-	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
 	force = 6
 	projectile_type = /obj/item/projectile/beam/pulse
 	max_shots = 21

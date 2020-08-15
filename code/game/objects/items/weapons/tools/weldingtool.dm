@@ -5,7 +5,7 @@
 	item_state = "welder"
 	desc = "A portable welding gun with a port for attaching fuel tanks."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	center_of_mass = @"{'x':14,'y':15}"
 	force = 5
 	throwforce = 5

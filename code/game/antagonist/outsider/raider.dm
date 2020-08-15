@@ -195,7 +195,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
 		H.holstered = primary
 		primary.forceMove(holster)
-	else if(!player.belt && (primary.slot_flags & SLOT_BELT))
+	else if(!player.belt && (primary.slot_flags & SLOT_LOWER_BODY))
 		player.equip_to_slot_or_del(primary, slot_belt_str)
 	else if(!player.back && (primary.slot_flags & SLOT_BACK))
 		player.equip_to_slot_or_del(primary, slot_back_str)

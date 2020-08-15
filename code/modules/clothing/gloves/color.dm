@@ -19,4 +19,4 @@
 	desc = "A pair of gloves that reach past the elbow. Fancy!"
 	icon = 'icons/clothing/hands/gloves_evening.dmi'
 	color = COLOR_WHITE
-	body_parts_covered = ARMS|HANDS 
+	body_parts_covered = SLOT_ARMS|SLOT_HANDS 

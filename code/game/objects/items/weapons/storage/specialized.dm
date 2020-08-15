@@ -14,7 +14,7 @@
 	desc = "This sturdy bag can be used to store and transport ores."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
@@ -56,7 +56,7 @@
 	desc = "This bag can be used to store all kinds of plant products and botanical specimen."
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "plantbag"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL

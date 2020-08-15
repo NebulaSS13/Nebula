@@ -22,10 +22,10 @@
 		return
 	if(active)
 		flags_inv &= ~HIDEEYES
-		body_parts_covered &= ~EYES
+		body_parts_covered &= ~SLOT_EYES
 	else 
 		flags_inv |= HIDEEYES
-		body_parts_covered |= EYES
+		body_parts_covered |= SLOT_EYES
 
 /obj/item/clothing/glasses/blindfold/tape
 	name = "length of tape"
