@@ -57,8 +57,7 @@
 	var/datum/extension/interactive/ntos/os = get_extension(holder, /datum/extension/interactive/ntos)
 	if(os)
 		os.event_powerfailure()
-	shutdown_device()
-	return ..()
+	. = ..()
 
 /datum/extension/assembly/modular_computer/turn_on(var/mob/user)
 	if(bsod)
