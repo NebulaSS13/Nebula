@@ -32,7 +32,7 @@
 		held_item_slots -= slot
 		qdel(inv_slot)
 		hud_used?.rebuild_hands(FALSE, list(slot))
-		if(get_active_held_item_slot() == slot)
+		if(get_active_held_item_slot() == slot && length(held_item_slots))
 			select_held_item_slot(held_item_slots[1])
 
 /mob/living/proc/select_held_item_slot(var/slot)
