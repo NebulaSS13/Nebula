@@ -7,7 +7,7 @@
 	attack_verb = list("plunged")
 	force = 1
 	w_class = ITEM_SIZE_NORMAL
-	slot_flags = SLOT_HEAD | SLOT_MASK
+	slot_flags = SLOT_HEAD | SLOT_FACE
 	hitsound = 'sound/effects/plunger.ogg'
 	material = /decl/material/solid/plastic
 

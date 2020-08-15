@@ -5,7 +5,7 @@
 	icon_state = "shorts"
 	desc = "95% Polyester, 5% Spandex!"
 	gender = PLURAL
-	body_parts_covered = LOWER_TORSO
+	body_parts_covered = SLOT_LOWER_BODY
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_pants.dmi')
 
 /obj/item/clothing/under/shorts/red

@@ -160,12 +160,12 @@
 
 	if(affected && (!BP_IS_PROSTHETIC(affected) || affected.is_robotic()))
 		switch(affected.body_part)
-			if(FOOT_LEFT, FOOT_RIGHT)
+			if(SLOT_FOOT_LEFT, SLOT_FOOT_RIGHT)
 				if(!BP_IS_PROSTHETIC(affected))
 					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
 				else
 					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
-			if(LEG_LEFT, LEG_RIGHT)
+			if(SLOT_LEG_LEFT, SLOT_LEG_RIGHT)
 				if(!BP_IS_PROSTHETIC(affected))
 					to_chat(src, SPAN_WARNING("Your [affected.name] buckles from the shock!"))
 				else
@@ -205,7 +205,7 @@
 			continue
 
 		var/grasp_name = E.name
-		if((E.body_part in list(ARM_LEFT, ARM_RIGHT)) && length(E.children))
+		if((E.body_part in list(SLOT_ARM_LEFT, SLOT_ARM_RIGHT)) && length(E.children))
 			var/obj/item/organ/external/hand = pick(E.children)
 			grasp_name = hand.name
 

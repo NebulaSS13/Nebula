@@ -214,7 +214,7 @@
 		if(src.up)
 			src.up = !src.up
 			flags_inv |= HIDEEYES
-			body_parts_covered |= EYES
+			body_parts_covered |= SLOT_EYES
 			icon_state = initial(icon_state)
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
@@ -222,7 +222,7 @@
 		else
 			src.up = !src.up
 			flags_inv &= ~HIDEEYES
-			body_parts_covered &= ~EYES
+			body_parts_covered &= ~SLOT_EYES
 			icon_state = "[initial(icon_state)]up"
 			flash_protection = FLASH_PROTECTION_NONE
 			tint = TINT_NONE

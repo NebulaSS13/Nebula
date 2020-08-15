@@ -49,4 +49,4 @@
 	name = "white dress"
 	desc = "It's a simple, sleeveless white dress with black trim."
 	icon_state = "inffem"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET

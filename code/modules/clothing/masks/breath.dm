@@ -4,7 +4,7 @@
 	icon_state = "breath"
 	item_state = "breath"
 	item_flags = ITEM_FLAG_AIRTIGHT|ITEM_FLAG_FLEXIBLEMATERIAL
-	body_parts_covered = FACE
+	body_parts_covered = SLOT_FACE
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
@@ -45,6 +45,6 @@
 	down_icon_state = "scba_maskdown"
 	item_flags = ITEM_FLAG_AIRTIGHT|ITEM_FLAG_FLEXIBLEMATERIAL
 	flags_inv = HIDEEYES
-	body_parts_covered = FACE|EYES
+	body_parts_covered = SLOT_FACE|SLOT_EYES
 	gas_transfer_coefficient = 0.01
 

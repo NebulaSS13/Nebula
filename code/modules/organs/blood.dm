@@ -74,7 +74,7 @@
 						if(ran_zone() == BP_HEAD)
 							blinding = TRUE
 							for(var/obj/item/I in list(H.head, H.glasses, H.wear_mask))
-								if(I && (I.body_parts_covered & EYES))
+								if(I && (I.body_parts_covered & SLOT_EYES))
 									blinding = FALSE
 									break
 						if(blinding)

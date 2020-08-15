@@ -44,7 +44,7 @@
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/security2
@@ -155,7 +155,7 @@
 	name = "armored coat"
 	desc = "A greatcoat enhanced with a special alloy for some protection and style."
 	icon = 'icons/clothing/suit/hos.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR, 
 		bullet = ARMOR_BALLISTIC_PISTOL, 

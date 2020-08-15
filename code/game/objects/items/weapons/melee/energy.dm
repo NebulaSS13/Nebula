@@ -46,7 +46,8 @@
 	throwforce = active_throwforce
 	sharp = 1
 	edge = 1
-	slot_flags |= SLOT_DENYPOCKET
+	w_class = max(w_class, ITEM_SIZE_NORMAL)
+	slot_flags &= ~SLOT_POCKET
 	attack_verb = active_attack_verb
 	update_icon()
 	if(user)
@@ -62,6 +63,7 @@
 	throwforce = initial(throwforce)
 	sharp = initial(sharp)
 	edge = initial(edge)
+	w_class = initial(w_class)
 	slot_flags = initial(slot_flags)
 	attack_verb = inactive_attack_verb
 	update_icon()

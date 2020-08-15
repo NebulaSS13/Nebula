@@ -1,10 +1,10 @@
 /obj/item/clothing/head/headphones
 	name = "headphones"
 	desc = "It's probably not in accordance with company policy to listen to music on the job... but fuck it."
-	icon = 'icons/clothing/headphones.dmi'
+	icon = 'icons/clothing/head/headphones.dmi'
 	icon_state = ICON_STATE_WORLD
 	volume_multiplier = 0.5
-	body_parts_covered = HEAD|EARS
+	body_parts_covered = SLOT_HEAD|SLOT_EARS
 	var/headphones_on = 0
 	var/sound_channel
 	var/current_track

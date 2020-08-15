@@ -3,7 +3,7 @@
 	icon = 'icons/obj/items/device/pinpointer.dmi'
 	icon_state = "pinoff"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	material = /decl/material/solid/metal/steel

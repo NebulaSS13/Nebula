@@ -28,7 +28,7 @@
 
 /obj/item/clothing/ring/magic/equipped(var/mob/living/carbon/human/H, var/slot)
 	..()
-	if(istype(H) && slot == SLOT_GLOVES)
+	if(istype(H) && slot == SLOT_HANDS)
 		H.add_cloaking_source(src)
 
 /obj/item/clothing/ring/magic/dropped(var/mob/living/carbon/human/H)

@@ -17,9 +17,9 @@
 	icon_state = "helmet"
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
-	heat_protection =    HEAD|FACE|EYES
-	cold_protection =    HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	heat_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	cold_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	brightness_on = 0.5
 	bodytype_restricted = null
 	on_mob_use_spritesheets = TRUE
@@ -34,9 +34,9 @@
 	name = "gauntlets"
 	icon_state = "gloves"
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
-	body_parts_covered = HANDS
-	heat_protection =    HANDS
-	cold_protection =    HANDS
+	body_parts_covered = SLOT_HANDS
+	heat_protection =    SLOT_HANDS
+	cold_protection =    SLOT_HANDS
 	bodytype_restricted = null
 	gender = PLURAL
 	on_mob_use_spritesheets = TRUE
@@ -51,9 +51,9 @@
 	name = "boots"
 	icon_state = "boots"
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
-	body_parts_covered = FEET
-	cold_protection = FEET
-	heat_protection = FEET
+	body_parts_covered = SLOT_FEET
+	cold_protection = SLOT_FEET
+	heat_protection = SLOT_FEET
 	bodytype_restricted = null
 	gender = PLURAL
 	on_mob_use_spritesheets = TRUE
@@ -69,9 +69,9 @@
 	icon_state = "chest"
 	on_mob_use_spritesheets = TRUE
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit)
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
+	heat_protection =    SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
+	cold_protection =    SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	// HIDEJUMPSUIT no longer needed, see "hides_uniform" and "update_component_sealed()" in rig.dm
 	flags_inv =          HIDETAIL
 	item_flags =         ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
@@ -150,33 +150,33 @@
 
 /obj/item/clothing/head/lightrig
 	name = "mask"
-	body_parts_covered = HEAD|FACE|EYES
-	heat_protection =    HEAD|FACE|EYES
-	cold_protection =    HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	heat_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	cold_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	item_flags =         ITEM_FLAG_THICKMATERIAL|ITEM_FLAG_AIRTIGHT
 
 /obj/item/clothing/suit/lightrig
 	name = "suit"
 	allowed = list(/obj/item/flashlight)
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
+	heat_protection =    SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
+	cold_protection =    SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	flags_inv =          HIDEJUMPSUIT
 	item_flags =         ITEM_FLAG_THICKMATERIAL
 
 /obj/item/clothing/shoes/lightrig
 	name = "boots"
-	body_parts_covered = FEET
-	cold_protection = FEET
-	heat_protection = FEET
+	body_parts_covered = SLOT_FEET
+	cold_protection = SLOT_FEET
+	heat_protection = SLOT_FEET
 	bodytype_restricted = null
 	gender = PLURAL
 
 /obj/item/clothing/gloves/lightrig
 	name = "gloves"
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	body_parts_covered = HANDS
-	heat_protection =    HANDS
-	cold_protection =    HANDS
+	body_parts_covered = SLOT_HANDS
+	heat_protection =    SLOT_HANDS
+	cold_protection =    SLOT_HANDS
 	bodytype_restricted = null
 	gender = PLURAL

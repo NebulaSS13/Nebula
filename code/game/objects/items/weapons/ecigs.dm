@@ -8,7 +8,7 @@
 	var/obj/item/chems/ecig_cartridge/ec_cartridge
 	var/cell_type = /obj/item/cell/device/standard
 	w_class = ITEM_SIZE_TINY
-	slot_flags = SLOT_EARS | SLOT_MASK
+	slot_flags = SLOT_EARS | SLOT_FACE
 	attack_verb = list("attacked", "poked", "battered")
 	body_parts_covered = 0
 	var/brightness_on = 1

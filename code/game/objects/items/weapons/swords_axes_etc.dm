@@ -13,7 +13,7 @@
 	icon = 'icons/obj/items/weapon/old_baton.dmi'
 	icon_state = "baton"
 	item_state = "classic_baton"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	force = 10
 
 /obj/item/classic_baton/attack(mob/M, mob/living/user)
@@ -35,7 +35,7 @@
 	icon = 'icons/obj/items/weapon/telebaton.dmi'
 	icon_state = "telebaton_0"
 	item_state = "telebaton_0"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	force = 3
 	var/on = 0

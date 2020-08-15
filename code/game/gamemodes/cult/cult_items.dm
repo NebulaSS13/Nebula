@@ -45,12 +45,12 @@
 
 	icon = 'icons/clothing/head/cult.dmi'
 	flags_inv = HIDEFACE
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_SMALL
 	)
-	cold_protection = HEAD
+	cold_protection = SLOT_HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.8 //That's a pretty cool opening in the hood. Also: Cloth making physical contact to the skull.
 
@@ -59,7 +59,7 @@
 	desc = "A helm worn by the followers of Nar-Sie."
 	icon = 'icons/clothing/head/wizard/magus.dmi'
 	flags_inv = HIDEFACE | BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -73,7 +73,7 @@
 	name = "cult robes"
 	desc = "A set of durable robes worn by the followers of Nar-Sie."
 	icon_state = "cultrobes"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	allowed = list(/obj/item/book/tome,/obj/item/sword/cultblade)
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
@@ -92,7 +92,7 @@
 	name = "magus robes"
 	desc = "A set of plated robes worn by the followers of Nar-Sie."
 	icon_state = "magusred"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
@@ -136,7 +136,7 @@
 		rad = ARMOR_RAD_MINOR
 	)
 	siemens_coefficient = 0.2
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS|SLOT_HANDS
 
 /obj/item/clothing/suit/space/cult/Initialize()
 	. = ..()

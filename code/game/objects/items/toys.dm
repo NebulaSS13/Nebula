@@ -756,7 +756,7 @@
 	icon_state = "inflatable"
 	item_state = "inflatable"
 	icon = 'icons/obj/clothing/obj_belt.dmi'
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 
 /obj/item/marshalling_wand
 	name = "marshalling wand"
@@ -768,7 +768,7 @@
 		icon_l_hand = 'icons/mob/onmob/items/lefthand.dmi',
 		icon_r_hand = 'icons/mob/onmob/items/righthand.dmi',
 		)
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	force = 1
 	attack_verb = list("attacked", "whacked", "jabbed", "poked", "marshalled")

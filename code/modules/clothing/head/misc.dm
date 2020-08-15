@@ -53,7 +53,7 @@
 	desc = "It's unspeakably stylish."
 	icon = 'icons/clothing/head/hastur.dmi'
 	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/nursehat
 	name = "nurse's hat"
@@ -67,7 +67,7 @@
 	desc = "A helmet made out of a box."
 	icon = 'icons/clothing/head/cardborg.dmi'
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/cardborg/Initialize()
 	. = ..()
@@ -160,7 +160,7 @@
 	icon = 'icons/clothing/head/chicken.dmi'
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.7
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/bearpelt
 	name = "bear pelt hat"
@@ -177,7 +177,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/philosopher_wig
 	name = "natural philosopher's wig"
@@ -254,5 +254,5 @@
 	icon = 'icons/clothing/head/facecover.dmi'
 	tint = TINT_BLIND
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	flash_protection = FLASH_PROTECTION_MAJOR

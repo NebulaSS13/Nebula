@@ -7,8 +7,8 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/hands/gloves_generic.dmi'
 	siemens_coefficient = 0.75
-	body_parts_covered = HANDS
-	slot_flags = SLOT_GLOVES
+	body_parts_covered = SLOT_HANDS
+	slot_flags = SLOT_HANDS
 	attack_verb = list("challenged")
 	blood_overlay_type = "bloodyhands"
 	bodytype_restricted = list(BODYTYPE_HUMANOID)

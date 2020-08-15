@@ -98,14 +98,14 @@ obj/var/contaminated = 0
 			if(!wear_mask)
 				burn_eyes()
 			else
-				if(!(wear_mask.body_parts_covered & EYES))
+				if(!(wear_mask.body_parts_covered & SLOT_EYES))
 					burn_eyes()
 		else
-			if(!(head.body_parts_covered & EYES))
+			if(!(head.body_parts_covered & SLOT_EYES))
 				if(!wear_mask)
 					burn_eyes()
 				else
-					if(!(wear_mask.body_parts_covered & EYES))
+					if(!(wear_mask.body_parts_covered & SLOT_EYES))
 						burn_eyes()
 
 	//Genetic Corruption
@@ -132,7 +132,7 @@ obj/var/contaminated = 0
 		if(vsc.contaminant_control.STRICT_PROTECTION_ONLY)
 			if(head.item_flags & ITEM_FLAG_NO_CONTAMINATION)
 				return 1
-		else if(head.body_parts_covered & EYES)
+		else if(head.body_parts_covered & SLOT_EYES)
 			return 1
 	return 0
 
@@ -149,7 +149,7 @@ obj/var/contaminated = 0
 	if(vsc.contaminant_control.STRICT_PROTECTION_ONLY)
 		return 1
 
-	return BIT_TEST_ALL(coverage, UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS)
+	return BIT_TEST_ALL(coverage, SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS)
 
 /mob/living/carbon/human/proc/suit_contamination()
 	//Runs over the things that can be contaminated and does so.

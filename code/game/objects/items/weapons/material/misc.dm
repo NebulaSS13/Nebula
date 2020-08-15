@@ -72,7 +72,7 @@
 	icon = 'icons/obj/items/weapon/machete.dmi'
 	item_state = "machete"
 	w_class = ITEM_SIZE_NORMAL
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/plasteel/titanium
 	base_parry_chance = 50
 	max_force = 20

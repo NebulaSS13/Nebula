@@ -64,7 +64,7 @@
 	gauge_icon = "indicator_emergency"
 	gauge_cap = 4
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	force = 5
 	attack_cooldown = DEFAULT_WEAPON_COOLDOWN
@@ -95,7 +95,7 @@
 	name = "self contained breathing apparatus"
 	desc = "A self contained breathing apparatus, well known as SCBA. Generally filled with oxygen."
 	icon_state = "oxygen_fr"
-	slot_flags = SLOT_BELT | SLOT_BACK
+	slot_flags = SLOT_LOWER_BODY | SLOT_BACK
 
 /obj/item/tank/emergency/nitrogen
 	name = "emergency nitrogen tank"

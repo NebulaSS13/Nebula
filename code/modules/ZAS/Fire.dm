@@ -424,15 +424,15 @@ datum/gas_mixture/proc/check_recombustibility(list/fuel_objs)
 			continue
 
 		if( C.max_heat_protection_temperature >= last_temperature )
-			if(C.body_parts_covered & HEAD)
+			if(C.body_parts_covered & SLOT_HEAD)
 				head_exposure = 0
-			if(C.body_parts_covered & UPPER_TORSO)
+			if(C.body_parts_covered & SLOT_UPPER_BODY)
 				chest_exposure = 0
-			if(C.body_parts_covered & LOWER_TORSO)
+			if(C.body_parts_covered & SLOT_LOWER_BODY)
 				groin_exposure = 0
-			if(C.body_parts_covered & LEGS)
+			if(C.body_parts_covered & SLOT_LEGS)
 				legs_exposure = 0
-			if(C.body_parts_covered & ARMS)
+			if(C.body_parts_covered & SLOT_ARMS)
 				arms_exposure = 0
 	//minimize this for low-pressure enviroments
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)

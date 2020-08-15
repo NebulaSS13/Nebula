@@ -4,7 +4,7 @@
 	icon_state = "camcorder"
 	item_state = "camcorder"
 	w_class = ITEM_SIZE_LARGE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	var/channel = "General News Feed"
 	var/obj/machinery/camera/network/thunder/camera
 	var/obj/item/radio/radio

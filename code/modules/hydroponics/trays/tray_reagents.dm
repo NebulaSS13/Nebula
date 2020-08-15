@@ -3,7 +3,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	item_state = "spray"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	throwforce = 4
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2

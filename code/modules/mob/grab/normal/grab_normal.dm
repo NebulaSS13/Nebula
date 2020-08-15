@@ -122,7 +122,7 @@
 	if(!istype(attack))
 		return
 	for(var/obj/item/protection in list(target.head, target.wear_mask, target.glasses))
-		if(protection && (protection.body_parts_covered & EYES))
+		if(protection && (protection.body_parts_covered & SLOT_EYES))
 			to_chat(attacker, "<span class='danger'>You're going to need to remove the eye covering first.</span>")
 			return
 	if(!target.check_has_eyes())
@@ -235,7 +235,7 @@
 	var/damage_flags = W.damage_flags()
 	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
 	var/obj/item/clothing/head/helmet = affecting.get_equipped_item(slot_head_str)
-	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & ITEM_FLAG_AIRTIGHT) && !isnull(helmet.max_pressure_protection))
+	if(istype(helmet) && (helmet.body_parts_covered & SLOT_HEAD) && (helmet.item_flags & ITEM_FLAG_AIRTIGHT) && !isnull(helmet.max_pressure_protection))
 		var/datum/extension/armor/armor_datum = get_extension(helmet, /datum/extension/armor)
 		if(armor_datum)
 			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, W.armor_penetration, W.force*1.5)

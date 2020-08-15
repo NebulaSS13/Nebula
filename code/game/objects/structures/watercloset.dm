@@ -539,7 +539,7 @@
 	tape_type = /obj/item/tape/bog
 	icon_state = "bogroll"
 	item_state = "mummy_poor"
-	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
+	slot_flags = SLOT_HEAD | SLOT_OVER_BODY
 	var/sheets = 30
 
 /obj/item/tape/bog

@@ -19,7 +19,7 @@
 	throw_speed = 1
 	layer = ABOVE_OBJ_LAYER
 	slot_flags = SLOT_HEAD
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 	attack_verb = list("bapped")
 
 	var/info		//What's actually written on the paper.

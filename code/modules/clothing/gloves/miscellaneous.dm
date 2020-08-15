@@ -28,9 +28,9 @@
 	color = COLOR_BROWN_ORANGE
 	siemens_coefficient = 0.50
 	permeability_coefficient = 0.05
-	cold_protection = HANDS
+	cold_protection = SLOT_HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HANDS
+	heat_protection = SLOT_HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/gloves/tactical
@@ -51,7 +51,7 @@
 	desc = "A pair of synthetic gloves and arm pads reinforced with armor plating."
 	name = "arm guards"
 	icon = 'icons/clothing/hands/armguards.dmi'
-	body_parts_covered = HANDS|ARMS
+	body_parts_covered = SLOT_HANDS|SLOT_ARMS
 	w_class = ITEM_SIZE_NORMAL
 	siemens_coefficient = 0.7
 	permeability_coefficient = 0.03
@@ -72,11 +72,11 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	body_parts_covered = HANDS
-	cold_protection = HANDS
-	heat_protection = HANDS
+	body_parts_covered = SLOT_HANDS
+	cold_protection = SLOT_HANDS
+	heat_protection = SLOT_HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HANDS
+	heat_protection = SLOT_HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 

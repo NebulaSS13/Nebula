@@ -113,7 +113,7 @@
 	icon = 'icons/obj/guns/plasmacutter.dmi'
 	icon_state = ICON_STATE_WORLD
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
-	slot_flags = SLOT_BELT|SLOT_BACK
+	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
 	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"

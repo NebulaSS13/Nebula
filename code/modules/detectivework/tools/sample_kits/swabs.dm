@@ -22,7 +22,7 @@
 		return
 
 	if(user.zone_sel.selecting == BP_MOUTH)
-		var/cover = H.get_covering_equipped_item(FACE)
+		var/cover = H.get_covering_equipped_item(SLOT_FACE)
 		if(cover)
 			to_chat(user, SPAN_WARNING("\The [H]'s [cover] is in the way."))
 			return

@@ -5,7 +5,7 @@
 	icon = 'icons/obj/items/weapon/stunbaton.dmi'
 	icon_state = "stunbaton"
 	item_state = "baton"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	force = 15
 	sharp = 0
 	edge = 0

@@ -2,23 +2,6 @@
 
 #define CANDLE_LUM 3 // For how bright candles are.
 
-// Item inventory slot bitmasks.
-#define SLOT_OCLOTHING  0x1
-#define SLOT_ICLOTHING  0x2
-#define SLOT_GLOVES     0x4
-#define SLOT_EYES       0x8
-#define SLOT_EARS       0x10
-#define SLOT_MASK       0x20
-#define SLOT_HEAD       0x40
-#define SLOT_FEET       0x80
-#define SLOT_ID         0x100
-#define SLOT_BELT       0x200
-#define SLOT_BACK       0x400
-#define SLOT_POCKET     0x800  // This is to allow items with a w_class of 3 or 4 to fit in pockets.
-#define SLOT_DENYPOCKET 0x1000  // This is to  deny items with a w_class of 2 or 1 from fitting in pockets.
-#define SLOT_TIE        0x2000
-#define SLOT_HOLSTER	0x4000 //16th bit - higher than this will overflow
-
 #define ACCESSORY_SLOT_UTILITY  "Utility"
 #define ACCESSORY_SLOT_HOLSTER	"Holster"
 #define ACCESSORY_SLOT_ARMBAND  "Armband"
@@ -75,27 +58,32 @@
 #define slot_s_store_str     "slot_s_store"
 #define slot_in_backpack_str "slot_s_store"
 
-
-// Bitflags for clothing parts.
-#define HEAD        (1<<0)
-#define FACE        (1<<1)
-#define EYES        (1<<2)
-#define EARS        (1<<3)
-#define UPPER_TORSO (1<<4)
-#define LOWER_TORSO (1<<5)
-#define LEG_LEFT    (1<<6)
-#define LEG_RIGHT   (1<<7)
-#define FOOT_LEFT   (1<<8)
-#define FOOT_RIGHT  (1<<9)
-#define ARM_LEFT    (1<<10)
-#define ARM_RIGHT   (1<<11)
-#define HAND_LEFT   (1<<12)
-#define HAND_RIGHT  (1<<13)
-#define LEGS        (LEG_LEFT  | LEG_RIGHT)
-#define FEET        (FOOT_LEFT | FOOT_RIGHT)
-#define ARMS        (ARM_LEFT  | ARM_RIGHT)
-#define HANDS       (HAND_LEFT | HAND_RIGHT)
-#define FULL_BODY   (LEGS|FEET|ARMS|HANDS|HEAD|FACE|EYES|EARS|UPPER_TORSO|LOWER_TORSO)
+// Bodypart coverage bitflags.
+#define SLOT_UPPER_BODY  (1<<1)
+#define SLOT_LOWER_BODY  (1<<2)
+#define SLOT_OVER_BODY   (1<<3)
+#define SLOT_LEG_LEFT    (1<<4)
+#define SLOT_LEG_RIGHT   (1<<5)
+#define SLOT_FOOT_LEFT   (1<<6)
+#define SLOT_FOOT_RIGHT  (1<<7)
+#define SLOT_ARM_LEFT    (1<<8)
+#define SLOT_ARM_RIGHT   (1<<9)
+#define SLOT_HAND_LEFT   (1<<10)
+#define SLOT_HAND_RIGHT  (1<<11)
+#define SLOT_EYES        (1<<12)
+#define SLOT_EARS        (1<<13)
+#define SLOT_FACE        (1<<14)
+#define SLOT_HEAD        (1<<15)
+#define SLOT_ID          (1<<16)
+#define SLOT_BACK        (1<<17)
+#define SLOT_TIE         (1<<18)
+#define SLOT_HOLSTER	 (1<<19)
+#define SLOT_POCKET      (1<<20)
+#define SLOT_LEGS        (SLOT_LEG_LEFT|SLOT_LEG_RIGHT)
+#define SLOT_FEET        (SLOT_FOOT_LEFT|SLOT_FOOT_RIGHT)
+#define SLOT_ARMS        (SLOT_ARM_LEFT|SLOT_ARM_RIGHT)
+#define SLOT_HANDS       (SLOT_HAND_LEFT|SLOT_HAND_RIGHT)
+#define SLOT_FULL_BODY   (SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS|SLOT_HEAD|SLOT_FACE|SLOT_EYES|SLOT_EARS|SLOT_UPPER_BODY|SLOT_LOWER_BODY)
 
 // Bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection().

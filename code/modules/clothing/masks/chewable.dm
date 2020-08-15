@@ -56,7 +56,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	icon_state = "chew"
 	type_butt = /obj/item/trash/cigbutt/spitwad
 	w_class = ITEM_SIZE_TINY
-	slot_flags = SLOT_EARS | SLOT_MASK
+	slot_flags = SLOT_EARS | SLOT_FACE
 	chem_volume = 50
 	chewtime = 300
 	brand = "tobacco"
@@ -108,7 +108,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	icon_state = "chew"
 	type_butt = /obj/item/trash/cigbutt/spitgum
 	w_class = ITEM_SIZE_TINY
-	slot_flags = SLOT_EARS | SLOT_MASK
+	slot_flags = SLOT_EARS | SLOT_FACE
 	chem_volume = 50
 	chewtime = 300
 	filling = list(/decl/material/liquid/nutriment/sugar = 2)

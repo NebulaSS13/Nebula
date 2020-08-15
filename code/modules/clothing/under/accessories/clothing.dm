@@ -16,7 +16,7 @@
 		melee = ARMOR_MELEE_SMALL,
 		energy = ARMOR_ENERGY_MINOR
 		)
-	body_parts_covered = UPPER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY
 	origin_tech = "{'combat':2,'materials':3,'esoteric':2}"
 
 /obj/item/clothing/accessory/suspenders
@@ -286,11 +286,11 @@
 	permeability_coefficient = 0.50
 
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
-	body_parts_covered = LOWER_TORSO | LEGS
+	body_parts_covered = SLOT_LOWER_BODY | SLOT_LEGS
 	slowdown = 0.5
 
-	heat_protection = LOWER_TORSO | LEGS
-	cold_protection = LOWER_TORSO | LEGS
+	heat_protection = SLOT_LOWER_BODY | SLOT_LEGS
+	cold_protection = SLOT_LOWER_BODY | SLOT_LEGS
 
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE

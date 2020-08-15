@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/launcher/money.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':1,'materials':1}"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	release_force = 80
 	fire_sound_text = "a whoosh and a crisp, papery rustle"

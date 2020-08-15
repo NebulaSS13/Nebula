@@ -3,7 +3,7 @@
 	icon = 'icons/obj/items/device/chameleon_proj.dmi'
 	icon_state = "shield0"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	item_state = "electronic"
 	throwforce = 5.0
 	throw_speed = 1

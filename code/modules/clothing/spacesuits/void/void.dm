@@ -4,7 +4,7 @@
 	desc = "A high-tech dark red space suit helmet. Used for AI satellite maintenance."
 	icon = 'icons/clothing/spacesuit/void/nasa/helmet.dmi'
 
-	heat_protection = HEAD
+	heat_protection = SLOT_HEAD
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
 		bullet = ARMOR_BALLISTIC_MINOR, 
@@ -35,7 +35,7 @@
 		rad = ARMOR_RAD_MINOR
 		)
 	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit)
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	siemens_coefficient = 0.4

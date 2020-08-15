@@ -327,10 +327,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 	switch(slot)
 		if(slot_wear_mask_str)
 			covering = src.head
-			check_flags = FACE
+			check_flags = SLOT_FACE
 		if(slot_glasses_str)
 			covering = src.head
-			check_flags = EYES
+			check_flags = SLOT_EYES
 		if(slot_gloves_str, slot_w_uniform_str)
 			covering = src.wear_suit
 

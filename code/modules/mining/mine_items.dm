@@ -30,7 +30,7 @@
 	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
 	icon = 'icons/obj/items/tool/mining_drill.dmi'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	force = 15.0
 	throwforce = 4.0
 	icon_state = "drill"
@@ -152,7 +152,7 @@
 	icon = 'icons/obj/items/tool/shovel.dmi'
 	icon_state = "shovel"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	force = 8.0
 	throwforce = 4.0
 	item_state = "shovel"

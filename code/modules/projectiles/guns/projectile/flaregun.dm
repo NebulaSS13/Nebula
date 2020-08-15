@@ -5,10 +5,10 @@
 	icon_state = ICON_STATE_WORLD
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a satisfying 'thump'"
-	slot_flags = SLOT_BELT | SLOT_HOLSTER
+	slot_flags = SLOT_LOWER_BODY | SLOT_HOLSTER
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = 0
-	slot_flags = SLOT_BELT | SLOT_HOLSTER
+	slot_flags = SLOT_LOWER_BODY | SLOT_HOLSTER
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 

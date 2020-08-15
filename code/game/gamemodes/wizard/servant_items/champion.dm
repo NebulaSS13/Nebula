@@ -18,7 +18,7 @@
 	desc = "A mighty suit of silver and gold armor, with a gleaming blue crystal inlaid into its left gaunlet."
 	icon = 'icons/clothing/suit/wizard/servant/champion.dmi'
 	siemens_coefficient = 0.5
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_AP,
@@ -33,7 +33,7 @@
 	desc = "A royal blue tunic. Beautifully archaic."
 	icon_state = "bluetunic"
 	siemens_coefficient = 0.8
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	armor = list(
 		melee = ARMOR_MELEE_MINOR
 	)

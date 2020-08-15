@@ -12,7 +12,7 @@
 	desc = "Transports delicate fossils in suspension so they don't break during transit."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
-	slot_flags = SLOT_BELT | SLOT_POCKET
+	slot_flags = SLOT_LOWER_BODY | SLOT_POCKET
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 50
 	max_storage_space = 200

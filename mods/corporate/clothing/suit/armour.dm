@@ -15,7 +15,7 @@
 	name = "asset protection command armor"
 	desc = "A set of armor worn by many corporate and private asset protection forces. Has blue highlights."
 	icon = 'mods/corporate/icons/clothing/suit/armor/ert_cmd.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_PISTOL,

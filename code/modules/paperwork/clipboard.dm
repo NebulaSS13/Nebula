@@ -10,7 +10,7 @@
 	throw_range = 10
 	var/obj/item/pen/haspen		//The stored pen.
 	var/obj/item/toppaper	//The topmost piece of paper.
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/wood
 	applies_material_name = FALSE
 	material = /decl/material/solid/wood

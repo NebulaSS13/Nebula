@@ -73,8 +73,8 @@
 	name = "winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs."
 	icon = 'icons/clothing/suit/wintercoat/coat.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
-	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
+	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 	armor = list(
 		bio = ARMOR_BIO_MINOR
@@ -88,8 +88,8 @@
 	name = "winter hood"
 	desc = "A hood attached to a heavy winter jacket."
 	icon_state = "generic_hood"
-	body_parts_covered = HEAD
-	cold_protection = HEAD
+	body_parts_covered = SLOT_HEAD
+	cold_protection = SLOT_HEAD
 	flags_inv = HIDEEARS | BLOCKHAIR
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 
@@ -160,7 +160,7 @@
 	desc = "A warm sweatshirt."
 	icon = 'icons/clothing/suit/hoodie.dmi'
 	min_cold_protection_temperature = T0C - 20
-	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	action_button_name = "Toggle Hood"
 	hoodtype = /obj/item/clothing/head/hoodiehood
 
@@ -169,7 +169,7 @@
 	desc = "A hood attached to a warm sweatshirt."
 	icon_state = "hood"
 	icon = 'icons/clothing/suit/hoodie.dmi'
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 	min_cold_protection_temperature = T0C - 20
-	cold_protection = HEAD
+	cold_protection = SLOT_HEAD
 	flags_inv = HIDEEARS | BLOCKHAIR

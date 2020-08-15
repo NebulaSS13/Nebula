@@ -39,7 +39,7 @@
 
 	icon = 'icons/clothing/head/chaplain.dmi'
 	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 
 //Chaplain
 /obj/item/clothing/head/nun_hood
@@ -48,7 +48,7 @@
 
 	icon = 'icons/clothing/head/nun.dmi'
 	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD
+	body_parts_covered = SLOT_HEAD
 
 //Medical
 /obj/item/clothing/head/surgery

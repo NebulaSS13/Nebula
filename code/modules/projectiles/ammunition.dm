@@ -5,7 +5,7 @@
 	icon_state = "pistolcasing"
 	randpixel = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT | SLOT_EARS
+	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	throwforce = 1
 	w_class = ITEM_SIZE_TINY
 
@@ -108,7 +108,7 @@
 	icon_state = "357"
 	icon = 'icons/obj/ammo.dmi'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	item_state = "syringe_kit"
 	material = /decl/material/solid/metal/steel
 	throwforce = 5

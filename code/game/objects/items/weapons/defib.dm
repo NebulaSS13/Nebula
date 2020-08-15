@@ -143,7 +143,7 @@
 
 	if((slot_flags & SLOT_BACK) && M.get_equipped_item(slot_back_str) == src)
 		return 1
-	if((slot_flags & SLOT_BELT) && M.get_equipped_item(slot_belt_str) == src)
+	if((slot_flags & SLOT_LOWER_BODY) && M.get_equipped_item(slot_belt_str) == src)
 		return 1
 
 	return 0
@@ -174,7 +174,7 @@
 	icon_state = "defibcompact"
 	item_state = "defibcompact"
 	w_class = ITEM_SIZE_NORMAL
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_LOWER_BODY
 	origin_tech = "{'biotech':5,'powerstorage':3}"
 
 /obj/item/defibrillator/compact/loaded
@@ -277,7 +277,7 @@
 /obj/item/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
 	if(!combat)
 		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
-			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & ITEM_FLAG_THICKMATERIAL))
+			if((cloth.body_parts_covered & SLOT_UPPER_BODY) && (cloth.item_flags & ITEM_FLAG_THICKMATERIAL))
 				return FALSE
 	return TRUE
 

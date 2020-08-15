@@ -29,18 +29,18 @@
 	desc = "This jacket is for those special occasions when a security officer actually feels safe."
 	icon_state = ICON_STATE_WORLD
 	icon = 'mods/corporate/icons/clothing/suit/navy/officer.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/suit/navywarden
 	name = "warden's jacket"
 	desc = "Perfectly suited for the warden that wants to leave an impression of style on those who visit the brig."
 	icon_state = ICON_STATE_WORLD
 	icon = 'mods/corporate/icons/clothing/suit/navy/warden.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
 /obj/item/clothing/suit/navyhos
 	name = "head of security's jacket"
 	desc = "This piece of clothing was specifically designed for asserting superior authority."
 	icon_state = ICON_STATE_WORLD
 	icon = 'mods/corporate/icons/clothing/suit/navy/hos.dmi'
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS

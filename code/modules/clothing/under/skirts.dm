@@ -4,7 +4,7 @@
 	icon_state = "blackskirt"
 	item_state = "bl_suit"
 	worn_state = "blackskirt"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	rolled_sleeves = -1
 
 /obj/item/clothing/under/skirt/plaid_blue
@@ -33,14 +33,14 @@
 	desc = "A khaki skirt with a flare at the hem."
 	icon_state = "skirt_khaki"
 	worn_state = "skirt_khaki"
-	body_parts_covered = LOWER_TORSO
+	body_parts_covered = SLOT_LOWER_BODY
 
 /obj/item/clothing/under/skirt/swept
 	name = "swept skirt"
 	desc = "A skirt that is swept to one side."
 	icon_state = "skirt_swept"
 	worn_state = "skirt_swept"
-	body_parts_covered = LOWER_TORSO
+	body_parts_covered = SLOT_LOWER_BODY
 
 // colour selection, needs to be different for loadout type selection
 
@@ -49,7 +49,7 @@
 	desc = "A short skirt, made of some semi-gloss material."
 	icon_state = "skirt_short"
 	worn_state = "skirt_short"
-	body_parts_covered = LOWER_TORSO
+	body_parts_covered = SLOT_LOWER_BODY
 
 // dresses
 /obj/item/clothing/under/skirt_c/dress
@@ -57,7 +57,7 @@
 	desc = "A short plain sleeveless dress."
 	icon_state = "shortdress"
 	worn_state = "shortdress"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
 /obj/item/clothing/under/skirt_c/dress/long
 	name = "maxi dress"
@@ -65,7 +65,7 @@
 	icon_state = "longdress"
 	worn_state = "longdress"
 	flags_inv = HIDESHOES
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET
+	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET
 
 /obj/item/clothing/under/skirt_c/dress/long/gown
 	name = "silk gown"

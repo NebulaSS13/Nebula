@@ -14,7 +14,7 @@
 	name = "collectable alien monster helmet!"
 	desc = "Hiss hiss hiss!"
 	icon = 'icons/clothing/head/xeno.dmi'
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/collectable/chef
 	name = "collectable chef's hat"
@@ -57,7 +57,7 @@
 	desc = "A Collectable Welding Helmet. Now with 80% less lead! Not for actual welding. Any welding done while wearing this Helmet is done so at the owner's own risk!"
 	icon = 'icons/clothing/head/welding/default.dmi'
 	w_class = ITEM_SIZE_NORMAL
-	body_parts_covered = HEAD|FACE|EYES
+	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 
 /obj/item/clothing/head/collectable/slime
 	name = "collectable slime hat"
