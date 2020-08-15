@@ -19,13 +19,12 @@ var/list/mining_floors = list()
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
 	base_icon_state = "asteroid"
 	footstep_type = /decl/footsteps/asteroid
-
 	initial_flooring = null
 	initial_gas = null
 	temperature = TCMB
+
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail
-	has_resources = 1
 
 /turf/simulated/floor/asteroid/Initialize()
 	. = ..()

@@ -62,6 +62,7 @@
 		QDEL_NULL(flood_object)
 
 /turf/Destroy()
+
 	if (!changing_turf)
 		crash_with("Improper turf qdel. Do not qdel turfs directly.")
 
