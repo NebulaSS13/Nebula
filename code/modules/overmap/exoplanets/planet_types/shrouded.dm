@@ -33,8 +33,8 @@
 	megafauna_spawn_prob = 2 //Remember to change this if more types are added.
 	water_level_max = 3
 	water_level_min = 2
-	land_type = /turf/simulated/floor/exoplanet/shrouded
-	water_type = /turf/simulated/floor/exoplanet/water/shallow/tar
+	land_type = /turf/exterior/shrouded
+	water_type = /turf/exterior/water/tar
 
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(var/value, var/turf/T)
 	..()
@@ -43,28 +43,4 @@
 
 /area/exoplanet/shrouded
 	forced_ambience = list("sound/ambience/spookyspace1.ogg", "sound/ambience/spookyspace2.ogg")
-	base_turf = /turf/simulated/floor/exoplanet/shrouded
-
-/turf/simulated/floor/exoplanet/water/shallow/tar
-	name = "tar"
-	icon = 'icons/turf/shrouded.dmi'
-	icon_state = "shrouded_tar"
-	desc = "A pool of viscous and sticky tar."
-	movement_delay = 12
-	reagent_type = /decl/material/liquid/tar
-	dirt_color = "#3e3960"
-
-/turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(var/mob/caller)
-	return get_footstep(/decl/footsteps/water, caller)
-
-
-/turf/simulated/floor/exoplanet/shrouded
-	name = "packed sand"
-	icon = 'icons/turf/shrouded.dmi'
-	icon_state = "shrouded"
-	desc = "Sand that has been packed in to solid earth."
-	dirt_color = "#3e3960"
-
-/turf/simulated/floor/exoplanet/shrouded/Initialize(var/ml)
-	. = ..()
-	icon_state = "shrouded[rand(0,8)]"
+	base_turf = /turf/exterior/shrouded

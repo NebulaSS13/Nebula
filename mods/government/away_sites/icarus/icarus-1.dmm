@@ -6,7 +6,7 @@
 /turf/unsimulated/mask,
 /area/mine/unexplored)
 "ac" = (
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "ae" = (
 /turf/simulated/wall/natural,
@@ -34,7 +34,7 @@
 /area/icarus/vessel)
 "al" = (
 /obj/structure/flora/ausbushes/palebush,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "am" = (
 /obj/structure/bed/chair/comfy/black,
@@ -58,7 +58,7 @@
 /area/icarus/open)
 "ar" = (
 /obj/structure/flora/tree/dead,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "as" = (
 /turf/simulated/wall/r_wall,
@@ -83,7 +83,7 @@
 /area/icarus/vessel)
 "ax" = (
 /obj/item/ore/slag,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "ay" = (
 /obj/item/shreddedp,
@@ -1378,7 +1378,7 @@
 /area/icarus/open)
 "eF" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "eG" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2638,24 +2638,24 @@
 /area/icarus/open)
 "io" = (
 /obj/effect/decal/cleanable/ash,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "ip" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "jb" = (
 /obj/effect/shuttle_landmark/nav_icarus/nav1,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "kb" = (
 /obj/effect/shuttle_landmark/nav_icarus/nav2,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "lb" = (
 /obj/effect/shuttle_landmark/nav_icarus/nav3,
-/turf/simulated/floor/exoplanet/grass,
+/turf/exterior/wildgrass,
 /area/icarus/open)
 "mb" = (
 /obj/structure/hygiene/sink{

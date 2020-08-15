@@ -50,12 +50,12 @@
 		else
 			to_chat(usr, "No active fluids.")
 
+/turf/exterior/seafloor/non_flooded
+	flooded = FALSE
+
 /turf/simulated/open/flooded
 	name = "open water"
 	flooded = TRUE
-
-/turf/simulated/ocean/non_flooded
-	flooded = FALSE
 
 GLOBAL_LIST_INIT(submerged_levels, new)
 /datum/admins/proc/submerge_map()
@@ -98,7 +98,7 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 			var/area/A = get_area(T)
 			if(A && (A.area_flags & AREA_FLAG_EXTERNAL))
 				if(A.base_turf)
-					A.base_turf = /turf/simulated/ocean/non_flooded
+					A.base_turf = /turf/exterior/seafloor/non_flooded
 				if(!istype(T, /turf/space))
 					T.make_flooded()
 
@@ -109,7 +109,7 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 			first_level = check_level
 	flooding_levels -= first_level
 	GLOB.submerged_levels["[first_level]"] = TRUE
-	GLOB.using_map.base_turf_by_z["[first_level]"] = /turf/simulated/ocean
+	GLOB.using_map.base_turf_by_z["[first_level]"] = /turf/exterior/seafloor
 	new /datum/random_map/noise/seafloor/replace_space(null, 1, 1, first_level, world.maxx, world.maxy)
 
 	// Generate open space for the remaining z-levels.
