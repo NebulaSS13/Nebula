@@ -127,8 +127,6 @@
 		repopulating = 1
 		max_animal_count = round(max_animal_count * 0.5)
 
-	handle_atmosphere()
-
 	if(repopulating)
 		handle_repopulation()
 
@@ -143,7 +141,7 @@
 	var/light = 0.1
 	if(!night)
 		light = lightlevel
-	for(var/turf/simulated/floor/exoplanet/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
+	for(var/turf/exterior/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
 		T.set_light(light, 0.1, 2)
 	daycolumn++
 	if(daycolumn > maxx)
@@ -164,7 +162,7 @@
 		edges |= block(locate(1, 1, zlevel), locate(maxx, TRANSITIONEDGE, zlevel))
 		edges |= block(locate(1, maxy-TRANSITIONEDGE, zlevel),locate(maxx, maxy, zlevel))
 		for(var/turf/T in edges)
-			T.ChangeTurf(/turf/simulated/planet_edge)
+			T.ChangeTurf(/turf/exterior/planet_edge)
 		for(var/map_type in map_generators)
 			if(ispath(map_type, /datum/random_map/noise/exoplanet))
 				new map_type(null,x_origin,y_origin,zlevel,x_size,y_size,0,1,1,planetary_area, plant_colors)

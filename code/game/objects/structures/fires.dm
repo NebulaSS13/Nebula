@@ -28,6 +28,9 @@
 	var/const/light_colour_mid =  "#ff9900"
 	var/const/light_colour_low =  "#ff0000"
 
+	var/list/affected_exterior_turfs
+	var/list/exterior_temperature = 30 // Celcius, but it is added directly to a Kelvin value so don't do any conversion.
+
 	var/output_temperature = T0C+50  // The amount that the fire will try to heat up the air.
 	var/fuel = 0                     // How much fuel is left?
 	var/lit = 0
@@ -40,6 +43,33 @@
 	steam = new(name)
 	steam.attach(get_turf(src))
 	steam.set_up(3, 0, get_turf(src))
+
+/obj/structure/fire_source/Move()
+	. = ..()
+	if(. && lit == FIRE_LIT)
+		refresh_affected_exterior_turfs()
+
+/obj/structure/fire_source/proc/refresh_affected_exterior_turfs()
+
+	if(lit != FIRE_LIT)
+		for(var/thing in affected_exterior_turfs)
+			var/turf/exterior/T = thing
+			LAZYREMOVE(T.affecting_heat_sources, src)
+		affected_exterior_turfs = null
+	else
+		var/list/new_affecting
+		for(var/turf/exterior/T in RANGE_TURFS(loc, light_range_high))
+			LAZYADD(new_affecting, T)
+		for(var/thing in affected_exterior_turfs)
+			var/turf/exterior/T = thing
+			if(!(thing in new_affecting))
+				LAZYREMOVE(T.affecting_heat_sources, src)
+				LAZYREMOVE(affected_exterior_turfs, T)
+			LAZYREMOVE(new_affecting, T)
+		for(var/thing in new_affecting)
+			var/turf/exterior/T = thing
+			LAZYDISTINCTADD(T.affecting_heat_sources, src)
+			LAZYDISTINCTADD(affected_exterior_turfs, T)
 
 /obj/structure/fire_source/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
@@ -82,6 +112,7 @@
 /obj/structure/fire_source/proc/die()
 	if(lit == FIRE_LIT)
 		lit = FIRE_DEAD
+		refresh_affected_exterior_turfs()
 		visible_message(SPAN_DANGER("\The [src] goes out!"))
 		STOP_PROCESSING(SSobj, src)
 		update_icon()
@@ -101,6 +132,7 @@
 	if(!process_fuel())
 		return FALSE
 	lit = FIRE_LIT
+	refresh_affected_exterior_turfs()
 	visible_message(SPAN_DANGER("\The [src] catches alight!"))
 	START_PROCESSING(SSobj, src)
 	update_icon()
@@ -256,6 +288,8 @@
 /obj/structure/fire_source/Destroy()
 	QDEL_NULL(steam)
 	STOP_PROCESSING(SSobj, src)
+	lit = FIRE_DEAD
+	refresh_affected_exterior_turfs()
 	return ..()
 
 /obj/structure/fire_source/Process()

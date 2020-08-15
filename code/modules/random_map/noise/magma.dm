@@ -3,7 +3,7 @@
 /datum/random_map/noise/volcanism
 	descriptor = "volcanism"
 	smoothing_iterations = 6
-	target_turf_type = /turf/simulated
+	target_turf_type = /turf/exterior
 
 // Get rid of those dumb little single-tile volcanic areas.
 /datum/random_map/noise/volcanism/cleanup()

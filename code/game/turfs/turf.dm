@@ -49,6 +49,8 @@
 	if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(mapload)
 	update_starlight()
+	if(flooded && !density)
+		fluid_update(FALSE)
 
 /turf/on_update_icon()
 	update_flood_overlay()
@@ -363,3 +365,6 @@ var/const/enterloopsanity = 100
 			set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
 			return
 	set_light(0)
+
+/turf/proc/get_footstep_sound(var/mob/caller)
+	return
