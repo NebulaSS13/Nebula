@@ -8,6 +8,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
+	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
 	active_power_usage = 200
 	power_channel = LIGHT

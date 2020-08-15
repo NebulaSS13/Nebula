@@ -13,6 +13,7 @@
 	interact_offline = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed/door
 	uncreated_component_parts = null
+	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
 	var/open_layer = OPEN_DOOR_LAYER
 	var/closed_layer = CLOSED_DOOR_LAYER
