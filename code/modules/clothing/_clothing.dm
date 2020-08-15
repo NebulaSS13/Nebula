@@ -16,7 +16,7 @@
 	var/smell_state = SMELL_DEFAULT
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 	var/made_of_cloth = FALSE
-
+	var/volume_multiplier = 1
 	var/markings_icon	// simple colored overlay that would be applied to the icon
 	var/markings_color	// for things like colored parts of labcoats or shoes
 

@@ -428,8 +428,8 @@ var/list/slot_flags_enumeration = list(
 	"[slot_belt_str]" = SLOT_BELT,
 	"[slot_glasses_str]" = SLOT_EYES,
 	"[slot_head_str]" = SLOT_HEAD,
-	"[slot_l_ear_str]" = SLOT_EARS|SLOT_TWOEARS,
-	"[slot_r_ear_str]" = SLOT_EARS|SLOT_TWOEARS,
+	"[slot_l_ear_str]" = SLOT_EARS,
+	"[slot_r_ear_str]" = SLOT_EARS,
 	"[slot_w_uniform_str]" = SLOT_ICLOTHING,
 	"[slot_wear_id_str]" = SLOT_ID,
 	"[slot_tie_str]" = SLOT_TIE,
@@ -474,10 +474,7 @@ var/list/slot_flags_enumeration = list(
 	//Lastly, check special rules for the desired slot.
 	switch(slot)
 		if(slot_l_ear_str, slot_r_ear_str)
-			var/slot_other_ear = (slot == slot_l_ear_str)? slot_r_ear_str : slot_l_ear_str
-			if( (w_class > ITEM_SIZE_TINY) && !(slot_flags & SLOT_EARS) )
-				return FALSE
-			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
+			if((w_class > ITEM_SIZE_TINY) && !(slot_flags & SLOT_EARS))
 				return FALSE
 		if(slot_belt_str)
 			if(slot == slot_belt_str && (item_flags & ITEM_FLAG_IS_BELT))

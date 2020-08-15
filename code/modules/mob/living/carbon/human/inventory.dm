@@ -237,14 +237,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_wear_id(redraw_mob)
 		if(slot_l_ear_str)
 			src.l_ear = W
-			if(l_ear.slot_flags & SLOT_TWOEARS)
-				src.r_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_r_ear_str)
 			src.r_ear = W
-			if(r_ear.slot_flags & SLOT_TWOEARS)
-				src.l_ear = W
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_glasses_str)

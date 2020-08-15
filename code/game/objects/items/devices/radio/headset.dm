@@ -1,7 +1,6 @@
 /obj/item/radio/headset
 	name = "radio headset"
 	desc = "An updated, modular intercom that fits over the head. Takes encryption keys."
-	var/radio_desc = ""
 	icon = 'icons/obj/items/device/radio/headset.dmi'
 	icon_state = "headset"
 	item_state = "headset"
@@ -12,6 +11,8 @@
 	slot_flags = SLOT_EARS
 	cell = null
 	power_usage = 0
+
+	var/radio_desc = ""
 	var/translate_binary = 0
 	var/list/encryption_keys = list()
 	var/max_keys = 2

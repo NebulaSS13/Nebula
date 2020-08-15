@@ -35,6 +35,7 @@ var/global/list/string_part_flags = list(
 	"head" = HEAD,
 	"face" = FACE,
 	"eyes" = EYES,
+	"ears" = EARS,
 	"upper body" = UPPER_TORSO,
 	"lower body" = LOWER_TORSO,
 	"legs" = LEGS,
