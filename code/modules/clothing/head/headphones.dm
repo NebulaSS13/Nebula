@@ -5,6 +5,8 @@
 	icon_state = ICON_STATE_WORLD
 	volume_multiplier = 0.5
 	body_parts_covered = SLOT_HEAD|SLOT_EARS
+	gender = PLURAL
+
 	var/headphones_on = 0
 	var/sound_channel
 	var/current_track

@@ -333,6 +333,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 			check_flags = SLOT_EYES
 		if(slot_gloves_str, slot_w_uniform_str)
 			covering = src.wear_suit
+		if(slot_l_ear_str, slot_r_ear_str)
+			covering = src.head
+			check_flags = SLOT_EARS
 
 	if(covering && (covering.body_parts_covered & (I.body_parts_covered|check_flags)))
 		to_chat(user, SPAN_WARNING("\The [covering] is in the way."))

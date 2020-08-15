@@ -77,7 +77,7 @@
 #define SLOT_ID          (1<<16)
 #define SLOT_BACK        (1<<17)
 #define SLOT_TIE         (1<<18)
-#define SLOT_HOLSTER	 (1<<19)
+#define SLOT_HOLSTER     (1<<19)
 #define SLOT_POCKET      (1<<20)
 #define SLOT_LEGS        (SLOT_LEG_LEFT|SLOT_LEG_RIGHT)
 #define SLOT_FEET        (SLOT_FOOT_LEFT|SLOT_FOOT_RIGHT)
