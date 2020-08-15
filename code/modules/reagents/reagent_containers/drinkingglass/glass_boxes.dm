@@ -2,7 +2,6 @@
 	name = "glassware box"
 	desc = "A box of assorted glassware"
 	can_hold = list(/obj/item/chems/food/drinks/glass2)
-
 	startswith = list(
 		/obj/item/chems/food/drinks/glass2/square,
 		/obj/item/chems/food/drinks/glass2/rocks,

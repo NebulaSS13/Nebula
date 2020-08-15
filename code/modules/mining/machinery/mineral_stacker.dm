@@ -1,5 +1,6 @@
 /obj/machinery/mineral/stacking_machine
 	name = "stacking machine"
+	icon_state = "stacker"
 	console = /obj/machinery/computer/mining
 	input_turf =  EAST
 	output_turf = WEST
