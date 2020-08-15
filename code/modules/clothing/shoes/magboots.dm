@@ -18,10 +18,12 @@
 	origin_tech = "{'materials':2,'engineering':2,'magnets':3}"
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
-	LAZYINITLIST(slowdown_per_slot[slot_shoes_str])
-	slowdown_per_slot[slot_shoes_str] = shoes? max(0, shoes.slowdown_per_slot[slot_shoes_str]): 0	//So you can't put on magboots to make you walk faster.
-	if (magpulse)
-		slowdown_per_slot[slot_shoes_str] += online_slowdown
+	LAZYSET(slowdown_per_slot, slot_shoes_str, (shoes? max(0, LAZYACCESS(shoes.slowdown_per_slot, slot_shoes_str)) : 0))	//So you can't put on magboots to make you walk faster.
+	if(magpulse)
+		if(slot_shoes_str in slowdown_per_slot)
+			slowdown_per_slot[slot_shoes_str] += online_slowdown
+		else
+			LAZYSET(slowdown_per_slot, slot_shoes_str, online_slowdown)
 
 /obj/item/clothing/shoes/magboots/attack_self(mob/user)
 	if(magpulse)
