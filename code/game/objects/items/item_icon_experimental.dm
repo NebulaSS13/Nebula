@@ -6,6 +6,8 @@
 // Cached cause asking icons is expensive
 var/list/icon_state_cache = list()
 /proc/check_state_in_icon(var/checkstate, var/checkicon)
+	if(!checkstate || !istext(checkstate) || !isicon(checkicon))
+		return FALSE
 	var/list/check = global.icon_state_cache[checkicon]
 	if(!check)
 		check = list()
