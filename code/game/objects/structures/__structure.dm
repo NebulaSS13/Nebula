@@ -214,7 +214,7 @@
 
 /obj/structure/explosion_act(severity)
 	..()
-	if(QDELETED(src))
+	if(!QDELETED(src))
 		if(severity == 1)
 			physically_destroyed()
 		else if(severity == 2)
