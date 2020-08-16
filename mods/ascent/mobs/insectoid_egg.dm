@@ -1,10 +1,12 @@
 GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
 
-/datum/ghosttrap/kharmaani_egg
-	object = "mantid nymph"
+/decl/ghosttrap/kharmaani_egg
+	name = "mantid nymph"
 	ban_checks = list(MODE_MISC_AGITATOR)
 	ghost_trap_message = "They are hatching from a kharmaan egg now."
-	ghost_trap_role = "Mantid Nymph"
+
+/decl/ghosttrap/kharmaani_egg/forced(var/mob/user)
+	request_player(new /mob/living/carbon/alien/ascent_nymph(get_turf(user)), "A mantid nymph is ready to hatch and needs a player.")
 
 /obj/structure/insectoid_egg
 	name = "alien egg"
@@ -87,7 +89,7 @@ GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
 	maturity = min(100, maturity + 1)
 	ready_to_hatch = maturity == 100 && !ready_to_hatch // Lazy flip from change.
 	if(ready_to_hatch)
-		var/datum/ghosttrap/G = get_ghost_trap("mantid nymph")
+		var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/kharmaani_egg)
 		G.request_player(src, "A mantid nymph is ready to hatch and needs a player.")
 
 /obj/structure/insectoid_egg/proc/hatch(var/client/C)
