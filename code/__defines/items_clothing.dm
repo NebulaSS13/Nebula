@@ -186,8 +186,6 @@ var/list/all_limb_tags = list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, B
 var/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
 
 var/list/default_onmob_icons = list(
-	slot_l_hand_str = 'icons/mob/onmob/items/lefthand.dmi',
-	slot_r_hand_str = 'icons/mob/onmob/items/righthand.dmi',
 	BP_L_HAND = 'icons/mob/onmob/items/lefthand.dmi',
 	BP_R_HAND = 'icons/mob/onmob/items/righthand.dmi',
 	slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi',
