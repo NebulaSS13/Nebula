@@ -42,7 +42,7 @@
 	markup = 0
 	vend_delay = 21
 	base_type = /obj/machinery/vending/engivend
-	initial_access = list(list(access_atmospherics, access_engine_equip))
+	initial_access = list(access_atmospherics, access_engine_equip)
 	products = list(
 		/obj/item/clothing/glasses/meson = 2,
 		/obj/item/multitool = 4,
@@ -65,7 +65,7 @@
 	icon_vend = "engi-vend"
 	base_type = /obj/machinery/vending/engineering
 	markup = 0
-	initial_access = list(list(access_atmospherics, access_engine_equip))
+	initial_access = list(access_atmospherics, access_engine_equip)
 	products = list(
 		/obj/item/storage/belt/utility = 4,
 		/obj/item/clothing/glasses/meson = 4,
