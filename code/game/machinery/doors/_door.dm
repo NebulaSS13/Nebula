@@ -15,6 +15,8 @@
 	uncreated_component_parts = null
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
+	var/can_open_manually = TRUE
+
 	var/open_layer = OPEN_DOOR_LAYER
 	var/closed_layer = CLOSED_DOOR_LAYER
 
@@ -195,7 +197,7 @@
 
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/physical_attack_hand(user)
-	if(operating)
+	if(operating || !can_open_manually)
 		return FALSE
 
 	if(allowed(user))
@@ -525,7 +527,7 @@
 		req_access = req_access_diff(fore, aft)
 
 /obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
-	if(!requiresID() || allowed(null))
+	if((!requiresID() || allowed(null)) && can_open_manually)
 		toggle()
 	return TRUE
 
