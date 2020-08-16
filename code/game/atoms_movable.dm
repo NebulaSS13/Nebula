@@ -329,4 +329,9 @@
 	. = ..()
 
 /atom/movable/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-	. = ..() || (mover && !(mover.movable_flags & MOVABLE_FLAG_NONDENSE_COLLISION) && !mover.density)
+	. = ..()
+	if(. && mover)
+		if(!density && (mover.movable_flags & MOVABLE_FLAG_NONDENSE_COLLISION))
+			return FALSE
+		if(!mover.density && (movable_flags & MOVABLE_FLAG_NONDENSE_COLLISION))
+			return FALSE

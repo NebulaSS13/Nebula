@@ -395,7 +395,7 @@
 	icon_state = "intake"
 	base_type = /obj/machinery/disposal/deliveryChute/buildable
 	frame_type = /obj/structure/disposalconstruct/machine/chute
-
+	movable_flags = MOVABLE_FLAG_NONDENSE_COLLISION
 	var/c_mode = 0
 
 /obj/machinery/disposal/deliveryChute/buildable
