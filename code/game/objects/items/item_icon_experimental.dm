@@ -80,7 +80,7 @@ var/list/bodypart_to_slot_lookup_table = list(
 	if(!check_state_in_icon(use_state, useicon))
 		return new /image
 
-	var/image/I = image(useicon, "[bodytype]-[slot]")
+	var/image/I = image(useicon, use_state)
 	I.color = color
 	I.appearance_flags = RESET_COLOR
 	. = apply_offsets(user_mob,  bodytype, I, slot, bodypart)
