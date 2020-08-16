@@ -226,6 +226,8 @@
 	var/list/id_cards = get_held_items()
 	LAZYDISTINCTADD(id_cards, wear_id)
 	for(var/obj/item/I in id_cards)
+		if(istype(I, /obj/item/holder))
+			continue
 		var/obj/item/card/id = I ? I.GetIdCard() : null
 		if(istype(id))
 			return id
