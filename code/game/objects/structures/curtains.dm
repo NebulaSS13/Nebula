@@ -46,6 +46,7 @@
 	layer = ABOVE_WINDOW_LAYER
 	opacity = TRUE
 	density = FALSE
+	anchored = TRUE
 	var/obj/item/curtain/holder = /obj/item/curtain
 
 /obj/structure/curtain/open
