@@ -15,7 +15,7 @@
 	material = DEFAULT_WALL_MATERIAL
 	handle_generic_blending = TRUE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
-	maxhealth = 100
+	maxhealth = 40
 
 	var/paint_color
 	var/stripe_color
