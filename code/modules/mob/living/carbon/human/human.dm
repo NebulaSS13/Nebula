@@ -265,7 +265,7 @@
 //gets name from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
 /mob/living/carbon/human/proc/get_authentification_name(var/if_no_id = "Unknown")
-	var/obj/item/card/id/id = GetIdCard()
+	var/obj/item/card/id/id = GetIdCard(exceptions = list(/obj/item/holder))
 	if(istype(id))
 		return id.registered_name
 	else
