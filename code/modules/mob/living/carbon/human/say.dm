@@ -1,4 +1,7 @@
 /mob/living/carbon/human/say(var/message, var/decl/language/speaking = null, whispering)
+	var/prefix = copytext(message,1,2)
+	if(prefix == get_prefix_key(/decl/prefix/custom_emote) || prefix == get_prefix_key(/decl/prefix/visible_emote) || prefix == get_prefix_key(/decl/prefix/audible_emote))
+		return ..(message, null, null)
 	if(name != GetVoice())
 		if(get_id_name("Unknown") == GetVoice())
 			SetName(get_id_name("Unknown"))
@@ -35,6 +38,10 @@
 			whisper_say(length(message) > 5 ? stars(message) : message, speaking)
 		else if(L.breath_fail_ratio > 0.4 && length(message) > 10)
 			whisper_say(message, speaking)
+		else if(L.breath_fail_ratio > 0.2 && length(message) > 30)
+			whisper_say(message, speaking)
+		else
+			return ..(message, speaking = speaking, whispering = whispering)
 	else
 		return ..(message, speaking = speaking, whispering = whispering)
 
