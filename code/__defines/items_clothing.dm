@@ -202,22 +202,10 @@ var/list/default_onmob_icons = list(
 	slot_tie_str = 'icons/mob/onmob/onmob_accessories.dmi'
 )
 
-var/list/all_inventory_slots = list(
-	BP_SHOULDERS,
-	BP_L_HAND,
-	BP_R_HAND,
-	BP_CHEST,
-	BP_HEAD,
-	BP_BODY,
-	BP_GROIN,
-	BP_MOUTH,
-	BP_EYES,
-	BP_L_EAR,
-	BP_R_EAR ,
+var/list/aux_inventory_slots = list(
 	slot_shoes_str,
 	slot_handcuffed_str,
 	slot_legcuffed_str,
-	BP_NECK,
 	slot_gloves_str,
 	slot_s_store_str,
 	slot_tie_str,

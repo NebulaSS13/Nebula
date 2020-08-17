@@ -1182,10 +1182,18 @@
 		update_languages()
 
 	//recheck species-restricted clothing
-	for(var/slot in global.all_inventory_slots)
-		var/obj/item/clothing/C = get_equipped_item(slot)
-		if(istype(C) && !C.mob_can_equip(src, slot, 1))
+	for(var/bp in inventory_slots)
+		var/datum/inventory_slot/inv_slot = inventory_slots[bp]
+		var/obj/item/clothing/C = inv_slot?.holding
+		if(istype(C) && !C.mob_can_equip(src, bp, TRUE))
 			unEquip(C)
+
+	//TODO remove this when slots are fully converted.
+	for(var/slot in global.aux_inventory_slots)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C) && !C.mob_can_equip(src, slot, TRUE))
+			unEquip(C)
+	//END TODO
 
 	return 1
 
