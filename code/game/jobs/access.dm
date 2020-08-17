@@ -222,10 +222,13 @@
 /mob/living/bot/GetIdCard()
 	return botcard
 
-/mob/living/carbon/human/GetIdCard()
+// Gets the ID card of a mob, but will not check types in the exceptions list
+/mob/living/carbon/human/GetIdCard(exceptions = null)
 	var/list/id_cards = get_held_items()
 	LAZYDISTINCTADD(id_cards, wear_id)
 	for(var/obj/item/I in id_cards)
+		if(is_type_in_list(I, exceptions))
+			continue
 		var/obj/item/card/id = I ? I.GetIdCard() : null
 		if(istype(id))
 			return id
