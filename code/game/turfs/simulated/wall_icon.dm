@@ -51,10 +51,10 @@
 	update_material()
 
 /turf/simulated/wall/proc/get_wall_icon()
-	. = material?.icon_base || 'icons/turf/walls/solid.dmi'
+	. = (istype(material) && material.icon_base) || 'icons/turf/walls/solid.dmi'
 
 /turf/simulated/wall/proc/apply_reinf_overlay()
-	. = !!reinf_material
+	. = istype(reinf_material)
 
 /turf/simulated/wall/on_update_icon()
 
