@@ -238,6 +238,8 @@ var/list/gamemode_cache = list()
 
 	var/lock_client_view_x
 	var/lock_client_view_y
+	var/max_client_view_x
+	var/max_client_view_y
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -836,6 +838,10 @@ var/list/gamemode_cache = list()
 					config.lock_client_view_x = text2num(value)
 				if("lock_client_view_y")
 					config.lock_client_view_y = text2num(value)
+				if("max_client_view_x")
+					config.max_client_view_x = text2num(value)
+				if("max_client_view_y")
+					config.max_client_view_y = text2num(value)
 
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1

@@ -67,3 +67,11 @@ ANIMAL_DELAY 0
 
 ## Remove the # in front of this config option to have loyalty implants spawn by default on your server.
 #USE_LOYALTY_IMPLANTS
+
+## Uncomment to lock the automatic client view scaling on the X or Y boundary.
+#LOCK_CLIENT_VIEW_X 15
+#LOCK_CLIENT_VIEW_Y 15
+
+## Change to set a maximum size for the client view scaling.
+MAX_CLIENT_VIEW_X 30
+MAX_CLIENT_VIEW_Y 30
