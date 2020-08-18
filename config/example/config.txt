@@ -438,3 +438,7 @@ RADIATION_LOWER_LIMIT 0.15
 ## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
 ## Spaces are prohibited in each URL by spec, you must use encoded spaces.
 #RESOURCE_URLS URL URL2 URL3
+
+## Uncomment to lock the automatic client view scaling on the X or Y boundary.
+#LOCK_CLIENT_VIEW_X 15
+#LOCK_CLIENT_VIEW_Y 15
