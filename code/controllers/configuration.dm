@@ -236,6 +236,9 @@ var/list/gamemode_cache = list()
 	var/max_acts_per_interval = 140 //Number of actions per interval permitted for spam protection.
 	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
 
+	var/lock_client_view_x
+	var/lock_client_view_y
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -829,6 +832,10 @@ var/list/gamemode_cache = list()
 				if("maximum_mushrooms")
 					config.maximum_mushrooms = value
 
+				if("lock_client_view_x")
+					config.lock_client_view_x = text2num(value)
+				if("lock_client_view_y")
+					config.lock_client_view_y = text2num(value)
 
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1
