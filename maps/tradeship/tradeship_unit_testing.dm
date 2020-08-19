@@ -13,7 +13,6 @@
 		/area/ship/trade/crew/hallway/starboard = NO_SCRUBBER|NO_VENT,
 		/area/ship/trade/maintenance/hallway = NO_SCRUBBER|NO_VENT,
 		/area/ship/trade/maintenance/lower = NO_SCRUBBER|NO_VENT,
-		/area/ship/trade/command/hallway = NO_SCRUBBER|NO_VENT,
 		/area/ship/trade/escape_port = NO_SCRUBBER|NO_VENT,
 		/area/ship/trade/escape_star = NO_SCRUBBER|NO_VENT,
 		/area/ship/trade/shuttle/outgoing = NO_SCRUBBER,

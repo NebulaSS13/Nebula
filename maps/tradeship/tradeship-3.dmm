@@ -348,6 +348,26 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/open,
 /area/ship/trade/maintenance/solars)
+"hJ" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/ship/trade/bridge_unused)
 "iz" = (
 /obj/structure/cable/yellow{
 	icon_state = "5-10"
@@ -412,9 +432,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
-"kL" = (
-/turf/simulated/floor/tiled/dark,
-/area/ship/trade/command/bridge_upper)
 "ma" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -431,6 +448,9 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/solars)
+"mn" = (
+/turf/simulated/floor/tiled/dark,
+/area/ship/trade/bridge_unused)
 "mV" = (
 /obj/structure/cable/yellow{
 	icon_state = "2-9"
@@ -497,6 +517,17 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
+"pt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/ship/trade/command/bridge_upper)
 "pC" = (
 /obj/item/wrench,
 /obj/structure/handrai{
@@ -742,6 +773,20 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/trade/bridge_unused)
+"Dg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/ship/trade/bridge_unused)
 "Dl" = (
 /obj/item/mollusc/barnacle{
 	pixel_x = 0
@@ -855,20 +900,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/open,
 /area/ship/trade/maintenance/solars)
-"Jm" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/ship/trade/command/bridge_upper)
 "Jo" = (
 /obj/machinery/message_server,
 /turf/simulated/floor/bluegrid,
@@ -954,30 +985,6 @@
 	},
 /turf/simulated/open,
 /area/ship/trade/maintenance/solars)
-"MD" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
-/turf/simulated/floor/plating,
-/area/ship/trade/command/bridge_upper)
-"Nc" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
-/turf/simulated/floor/airless,
-/area/ship/trade/command/bridge_upper)
 "NY" = (
 /obj/item/mollusc/barnacle{
 	pixel_w = 16
@@ -1085,26 +1092,6 @@
 "Su" = (
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/comms)
-"SC" = (
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	icon_state = "map-scrubbers";
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/ship/trade/command/bridge_upper)
 "SO" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1299,7 +1286,8 @@
 /obj/machinery/light_switch{
 	pixel_x = 32
 	},
-/turf/simulated/floor/tiled/monotile,
+/obj/structure/lattice,
+/turf/simulated/open,
 /area/ship/trade/command/bridge_upper)
 "ZU" = (
 /obj/machinery/alarm{
@@ -3646,22 +3634,22 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
 ax
-aa
 ax
-aa
-aa
-aa
-aa
-aa
-ac
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4034,17 +4022,17 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
 Ob
 Ob
 QK
 Ob
 ax
-aa
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4115,18 +4103,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-ax
-ax
 Ob
 jz
 jz
 aN
 jz
 Ob
-ac
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4154,11 +4142,11 @@ aV
 vi
 ax
 ax
-aV
-au
-au
-aV
 ax
+aV
+au
+au
+aV
 ax
 ax
 ax
@@ -4197,18 +4185,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-ax
-ax
 Ob
 jz
 ds
 Jo
 ZU
 Ob
-ac
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4236,12 +4224,12 @@ aV
 aV
 aV
 ax
+ax
 aV
 bf
 ak
 aV
 aH
-ax
 ax
 ax
 ax
@@ -4279,18 +4267,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-ax
 Ob
 jz
 Tx
 Su
 Su
 Dr
-ac
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4318,11 +4306,11 @@ FY
 Pg
 aV
 ax
+ax
 aV
 aB
 as
 aV
-ax
 ax
 ax
 ax
@@ -4361,11 +4349,6 @@ aa
 aa
 aa
 aa
-ax
-ax
-ax
-ax
-ax
 Ob
 jz
 ZD
@@ -4375,12 +4358,17 @@ Ob
 tJ
 tJ
 SQ
+SQ
 tJ
 tJ
 ax
-aa
-aa
-aa
+ax
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4401,10 +4389,10 @@ Fe
 aV
 aV
 aV
+aV
 aL
 av
 aV
-ax
 ax
 ax
 ax
@@ -4443,11 +4431,6 @@ aa
 aa
 ac
 ac
-ax
-ax
-ax
-ax
-ax
 Ob
 jz
 jz
@@ -4457,8 +4440,13 @@ jz
 Xb
 RZ
 HN
+PZ
 bE
 SQ
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4481,12 +4469,12 @@ GP
 GP
 Al
 XQ
+aR
 UY
 aR
 ah
 ap
 aV
-ax
 ax
 ax
 ax
@@ -4525,22 +4513,22 @@ aa
 aa
 aa
 aa
-ax
-ax
-ax
-ax
-ax
-Nc
-MD
-kL
-SC
-Jm
+Db
+jv
+mn
+hJ
+Dg
 KK
 YA
 rl
 fi
 PZ
+PZ
 PJ
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4564,12 +4552,12 @@ GP
 zh
 vC
 qw
+ao
 oE
 BD
 We
 aV
 aH
-ax
 ax
 ax
 ax
@@ -4607,11 +4595,6 @@ aa
 aa
 aa
 ac
-ax
-ax
-ax
-ax
-ax
 zY
 ne
 ne
@@ -4621,8 +4604,13 @@ ne
 Xb
 wc
 nZ
+pt
 ZT
 SQ
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4647,10 +4635,10 @@ UT
 aV
 aV
 aV
+aV
 au
 au
 aV
-ax
 ax
 ax
 ax
@@ -4689,11 +4677,6 @@ aa
 aa
 aa
 aa
-ax
-ax
-ax
-ax
-ax
 zY
 ne
 oq
@@ -4703,12 +4686,17 @@ zY
 tJ
 tJ
 SQ
+SQ
 tJ
 tJ
 ax
-aa
-aa
-aa
+ax
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4727,12 +4715,12 @@ aS
 Mk
 Ko
 aV
+aa
 ax
 ax
 ax
 ax
 mW
-ax
 ax
 ax
 ax
@@ -4771,18 +4759,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-ax
 zY
 ne
 wq
 zn
 KS
 oY
-aa
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4853,18 +4841,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-ax
-ax
 zY
 cB
 cO
 XF
 XF
 zY
-ac
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -4935,18 +4923,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-ax
-ax
 zY
 ne
 ne
 jv
 cB
 zY
-ac
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -5018,17 +5006,17 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
 zY
 zY
 Db
 zY
 ax
-aa
+ax
+ax
+ax
+ax
+ax
+ax
 ax
 ax
 ax
@@ -5067,9 +5055,9 @@ ax
 ax
 ax
 ax
+ax
+ax
 ac
-ac
-aa
 aa
 aa
 aa
@@ -5149,9 +5137,9 @@ ax
 ax
 ax
 ax
+ax
+ax
 ac
-aa
-aa
 aa
 aa
 aa
@@ -5230,9 +5218,9 @@ ax
 ax
 ax
 ax
-aa
-aa
-aa
+ax
+ax
+ax
 aa
 aa
 aa
@@ -5311,10 +5299,10 @@ ax
 ax
 Dl
 ax
-aa
-aa
-aa
-aa
+ax
+ax
+ax
+ax
 aa
 aa
 aa
@@ -5385,17 +5373,17 @@ ax
 ax
 ax
 ax
-ac
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
 aa
 aa
 aa
@@ -5450,34 +5438,34 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
 ax
-aa
 ax
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
 aa
 aa
 aa
@@ -5549,15 +5537,15 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
+ax
 aa
 aa
 aa

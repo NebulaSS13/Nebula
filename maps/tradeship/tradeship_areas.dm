@@ -72,6 +72,11 @@
 	name = "\improper Underside - Fore Port Maintenance"
 	icon_state = "green"
 
+/area/ship/trade/livestock
+	name = "\improper Underside - Livestock Handling"
+	icon_state = "red"
+	req_access = list(access_xenobiology)
+
 /area/ship/trade/fore_starboard_underside_maint
 	name = "\improper Underside - Fore Starboard Maintenance"
 	icon_state = "locker"
@@ -79,6 +84,10 @@
 /area/ship/trade/disused
 	name = "\improper Underside - Disused"
 	icon_state = "yellow"
+
+/area/ship/trade/undercomms
+	name = "\improper Underside - Communications Relay"
+	icon_state = "blue"
 
 /area/ship/trade/garden
 	name = "\improper Garden"
@@ -193,6 +202,11 @@
 	icon_state = "heads_hop"
 	req_access = list(access_hop)
 
+/area/ship/trade/shieldbay
+	name = "\improper Auxillary Shield Bay"
+	icon_state = "engine"
+	req_access = list(access_engine_equip)
+
 /area/ship/trade/command/bridge_upper
 	name = "\improper Upper Bridge"
 	icon_state = "blue"
@@ -219,9 +233,10 @@
 	icon_state = "SolarcontrolA"
 	req_access = list(access_engine)
 
-/area/ship/trade/maintenance/robot
-	name = "\improper Robot Storage"
+/area/ship/trade/artifact_storage
+	name = "\improper Artifact Storage"
 	icon_state = "ai_cyborg"
+	req_access = list(access_xenoarch)
 
 /area/ship/trade/drunk_tank
 	name = "Drunk Tank"
