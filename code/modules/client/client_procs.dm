@@ -178,6 +178,9 @@
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	apply_fps(prefs.clientfps)
 
+	if(!isnull(config.lock_client_view_x) && !isnull(config.lock_client_view_y))
+		view = "[config.lock_client_view_x]x[config.lock_client_view_y]"
+
 	. = ..()	//calls mob.Login()
 
 	GLOB.using_map.map_info(src)
@@ -449,12 +452,21 @@ client/verb/character_setup()
 
 /client/verb/OnResize()
 	set hidden = 1
+
 	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
-	var/winsize_string = winget(src, "mapwindow.map", "size")
-	last_view_x_dim = Clamp(ceil(text2num(winsize_string) / divisor), 15, 41)
-	last_view_y_dim = Clamp(ceil(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, 41)
-	if(last_view_x_dim % 2 == 0) last_view_x_dim++
-	if(last_view_y_dim % 2 == 0) last_view_y_dim++
+	if(!isnull(config.lock_client_view_x) && !isnull(config.lock_client_view_y))
+		last_view_x_dim = config.lock_client_view_x
+		last_view_y_dim = config.lock_client_view_y
+	else
+		var/winsize_string = winget(src, "mapwindow.map", "size")
+		last_view_x_dim = config.lock_client_view_x || Clamp(ceil(text2num(winsize_string) / divisor), 15, config.max_client_view_x || 41)
+		last_view_y_dim = config.lock_client_view_y || Clamp(ceil(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, config.max_client_view_y || 41)
+		if(last_view_x_dim % 2 == 0) last_view_x_dim++
+		if(last_view_y_dim % 2 == 0) last_view_y_dim++
+	for(var/check_icon_size in global.valid_icon_sizes)
+		winset(src, "menu.icon[check_icon_size]", "is-checked=false")
+	winset(src, "menu.icon[divisor]", "is-checked=true")
+
 	view = "[last_view_x_dim]x[last_view_y_dim]"
 
 	// Reset eye/perspective
@@ -473,10 +485,6 @@ client/verb/character_setup()
 		if(mob.l_general)
 			mob.l_general.fit_to_client_view(last_view_x_dim, last_view_y_dim)
 		mob.reload_fullscreen()
-
-	for(var/check_icon_size in global.valid_icon_sizes)
-		winset(src, "menu.icon[check_icon_size]", "is-checked=false")
-	winset(src, "menu.icon[divisor]", "is-checked=true")
 
 /client/proc/update_chat_position(use_alternative)
 	var/input_height = 0
