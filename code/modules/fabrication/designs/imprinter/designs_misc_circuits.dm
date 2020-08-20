@@ -119,8 +119,11 @@
 /datum/fabricator_recipe/imprinter/circuit/autobinder
 	path = /obj/item/stock_parts/circuitboard/autolathe/book
 
-/datum/fabricator_recipe/imprinter/circuit/mining_console
-	path = /obj/item/stock_parts/circuitboard/mineral_processing
+/datum/fabricator_recipe/imprinter/circuit/mining_console_processing
+	path = /obj/item/stock_parts/circuitboard/mineral_processing_console
+
+/datum/fabricator_recipe/imprinter/circuit/mining_console_stacking
+	path = /obj/item/stock_parts/circuitboard/mineral_stacking_console
 
 /datum/fabricator_recipe/imprinter/circuit/mining_processor
 	path = /obj/item/stock_parts/circuitboard/mining_processor

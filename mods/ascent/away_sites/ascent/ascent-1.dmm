@@ -4432,7 +4432,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "uk" = (
-/obj/machinery/computer/mining{
+/obj/machinery/computer/mining/stacking{
 	color = "PURPLE";
 	name = "distributor control";
 	pixel_y = 32
@@ -4691,7 +4691,7 @@
 /area/ship/ascent/fore_starboard_jut)
 "EB" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/computer/mining{
+/obj/machinery/computer/mining/processing{
 	color = "PURPLE";
 	name = "compression dynamo control"
 	},

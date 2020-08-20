@@ -1,7 +1,15 @@
 /obj/machinery/computer/mining
-	name = "ore processing console"
 	icon = 'icons/obj/machines/mining_machines.dmi'
+	icon_state = "console"
 	var/obj/machinery/mineral/connected
+
+// Subtypes to make mapping easier prior to a total rewrite of 
+// how mining machines find and connect to their consoles.
+/obj/machinery/computer/mining/processing
+	name = "material processing console"
+
+/obj/machinery/computer/mining/stacking
+	name = "material stacking console"
 
 // Apparently mapped on walls, so must do this to avoid being hidden behind them.
 /obj/machinery/computer/mining/hide()
@@ -28,18 +36,18 @@
 		return STATUS_CLOSE
 	. = ..()	
 
+/obj/machinery/computer/mining/proc/find_machine()
+	for(var/obj/machinery/mineral/M in range(3, src))
+		if(ispath(M.console) && istype(src, M.console))
+			M.console = src
+			connected = M
+			break
+
 /obj/machinery/computer/mining/Topic(href, href_list)
 	if((. = ..()))
 		return
 	if(href_list["scan_for_machine"])
-		for(var/c in GLOB.alldirs)
-			var/turf/T = get_step(loc, c)
-			if(T)
-				var/obj/machinery/mineral/M = locate(/obj/machinery/mineral) in T
-				if(M && ispath(M.console) && istype(src, M.console))
-					M.console = src
-					connected = M
-					break
+		find_machine()
 		return TRUE
 
 /obj/machinery/computer/mining/Destroy()

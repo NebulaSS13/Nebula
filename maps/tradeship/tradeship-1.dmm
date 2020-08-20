@@ -2293,6 +2293,7 @@
 	input_turf = 2;
 	output_turf = 1
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/cargo/lower)
 "kb" = (
@@ -2633,7 +2634,6 @@
 	icon_state = "conveyor0";
 	id_tag = "con"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
 "tE" = (
@@ -2892,6 +2892,12 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
+"Ao" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/mining/stacking,
+/turf/simulated/floor/tiled,
+/area/ship/trade/cargo/lower)
 "AM" = (
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/drunk_tank)
@@ -2913,14 +2919,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/crew/dorms1)
 "Bq" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/machinery/conveyor{
-	backwards = 8;
-	dir = 9;
-	forwards = 2;
-	icon_state = "conveyor1";
-	id_tag = "con";
-	movedir = 6
+	dir = 2;
+	icon_state = "conveyor0";
+	id_tag = "con"
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
@@ -3051,6 +3053,12 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/maintenance/eva)
+"Gp" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/mining/processing,
+/turf/simulated/floor/tiled,
+/area/ship/trade/cargo/lower)
 "Hb" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -3120,15 +3128,11 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "IU" = (
-/obj/machinery/conveyor{
-	dir = 4;
-	icon_state = "conveyor0";
-	id_tag = "con"
-	},
 /obj/machinery/mineral/processing_unit{
-	input_turf = 1;
-	output_turf = 2
+	input_turf = 8;
+	output_turf = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
 "Jb" = (
@@ -3430,7 +3434,11 @@
 /area/ship/trade/cargo/lower)
 "Rl" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/mineral/stacking_machine,
+/obj/machinery/mineral/stacking_machine{
+	input_turf = 1;
+	output_turf = 2
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/cargo/lower)
 "Rs" = (
@@ -3459,14 +3467,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/drunk_tank)
-"Sc" = (
-/obj/machinery/conveyor{
-	dir = 10;
-	icon_state = "conveyor1";
-	id_tag = "con"
-	},
-/turf/simulated/floor/plating,
-/area/ship/trade/cargo/lower)
 "Sm" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -6939,7 +6939,7 @@ aa
 aa
 aa
 xj
-Sc
+Sx
 Sx
 jM
 CN
@@ -7188,8 +7188,8 @@ pr
 pr
 pr
 pr
-ao
-al
+Gp
+Ao
 al
 ao
 ao

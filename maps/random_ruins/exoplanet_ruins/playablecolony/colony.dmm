@@ -6335,7 +6335,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony/airlock)
 "kZ" = (
-/obj/machinery/computer/mining,
+/obj/machinery/computer/mining/processing,
 /obj/structure/table/steel_reinforced,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/railing/mapped{
@@ -6584,7 +6584,7 @@
 	icon_state = "railing0-1";
 	
 	},
-/obj/machinery/computer/mining,
+/obj/machinery/computer/mining/stacking,
 /obj/structure/table/steel_reinforced,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,

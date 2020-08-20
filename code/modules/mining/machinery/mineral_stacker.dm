@@ -1,7 +1,7 @@
 /obj/machinery/mineral/stacking_machine
 	name = "stacking machine"
 	icon_state = "stacker"
-	console = /obj/machinery/computer/mining
+	console = /obj/machinery/computer/mining/stacking
 	input_turf =  EAST
 	output_turf = WEST
 	var/stack_amt = 50
@@ -35,7 +35,8 @@
 	var/line = ""
 	for(var/stacktype in stacks)
 		if(stacks[stacktype] > 0)
-			line += "<tr><td>[capitalize(stacktype)]</td><td>[stacks[stacktype]]</td><td><A href='?src=\ref[src];release_stack=[stacktype]'>Release</a></td></tr>"
+			var/decl/material/mat = decls_repository.get_decl(stacktype)
+			line += "<tr><td>[capitalize(mat.solid_name)]</td><td>[stacks[stacktype]]</td><td><A href='?src=\ref[src];release_stack=\ref[mat]'>Release</a></td></tr>"
 	. += "<table>[line]</table>"
 
 /obj/machinery/mineral/stacking_machine/Topic(href, href_list)
@@ -46,11 +47,12 @@
 		if(!choice) return
 		stack_amt = choice
 		. = TRUE
-	else if(href_list["release_stack"] && stacks[href_list["release_stack"]] > 0)
-		var/decl/material/stackmat = decls_repository.get_decl(href_list["release_stack"])
-		stackmat.place_sheet(output_turf, stacks[href_list["release_stack"]])
-		stacks[href_list["release_stack"]] = 0
-		. = TRUE
+	if(href_list["release_stack"])
+		var/decl/material/mat = locate(href_list["release_stack"])
+		if(istype(mat) && stacks[mat.type] > 0)
+			mat.place_sheet(output_turf, stacks[mat.type])
+			stacks -= mat.type
+			. = TRUE
 	if(. && console)
 		console.updateUsrDialog()
 

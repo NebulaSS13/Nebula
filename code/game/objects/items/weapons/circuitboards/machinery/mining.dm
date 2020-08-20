@@ -1,6 +1,11 @@
-/obj/item/stock_parts/circuitboard/mineral_processing
+/obj/item/stock_parts/circuitboard/mineral_processing_console
 	name = T_BOARD("mineral processing console")
-	build_path = /obj/machinery/computer/mining
+	build_path = /obj/machinery/computer/mining/processing
+	origin_tech = "{'programming':2,'engineering':2}"
+
+/obj/item/stock_parts/circuitboard/mineral_stacking_console
+	name = T_BOARD("mineral stacking console")
+	build_path = /obj/machinery/computer/mining/stacking
 	origin_tech = "{'programming':2,'engineering':2}"
 
 /obj/item/stock_parts/circuitboard/mining_processor

@@ -6,7 +6,7 @@
 /obj/machinery/mineral/processing_unit
 	name = "mineral processor"
 	icon_state = "furnace"
-	console = /obj/machinery/computer/mining
+	console = /obj/machinery/computer/mining/processing
 	input_turf =  NORTH
 	output_turf = SOUTH
 
