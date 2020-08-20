@@ -142,7 +142,8 @@
 					status_string = "<font color='gray'>alloying</font>"
 		else
 			status_string = "<font color='red'>not processing</font>"
-		result += "<tr><td>[line]</td><td><a href='?src=\ref[src];toggle_smelting=[ore]'>[status_string]</a></td></tr>"
+		var/decl/material/ore_mat = decls_repository.get_decl(ore)
+		result += "<tr><td>[line]</td><td><a href='?src=\ref[src];toggle_smelting=\ref[ore_mat]'>[status_string]</a></td></tr>"
 	. += "<table>[result]</table>"
 	. += "Currently displaying [report_all_ores ? "all ore types" : "only available ore types"]. <A href='?src=\ref[src];toggle_ores=1'>[report_all_ores ? "Show less" : "Show more"]</a>"
 	. += "The ore processor is currently <A href='?src=\ref[src];toggle_power=1'>[(active ? "enabled" : "disabled")].</a>"
@@ -151,15 +152,17 @@
 	if((. = ..()))
 		return
 	if(href_list["toggle_smelting"])
-		var/choice = input("What setting do you wish to use for processing [href_list["toggle_smelting"]]?") as null|anything in list("Smelting","Compressing","Alloying","Nothing")
-		if(!choice) return
-		switch(choice)
-			if("Nothing")     choice = ORE_DISABLED
-			if("Smelting")    choice = ORE_SMELT
-			if("Compressing") choice = ORE_COMPRESS
-			if("Alloying")    choice = ORE_ALLOY
-		ores_processing[href_list["toggle_smelting"]] = choice
-		. = TRUE
+		var/decl/material/ore_mat = locate(href_list["toggle_smelting"])
+		if(istype(ore_mat) && (ore_mat.type in ores_processing))
+			var/choice = input("What setting do you wish to use for processing [ore_mat.solid_name]?") as null|anything in list("Smelting","Compressing","Alloying","Nothing")
+			if(!choice) return
+			switch(choice)
+				if("Nothing")     choice = ORE_DISABLED
+				if("Smelting")    choice = ORE_SMELT
+				if("Compressing") choice = ORE_COMPRESS
+				if("Alloying")    choice = ORE_ALLOY
+			ores_processing[ore_mat.type] = choice
+			. = TRUE
 	else if(href_list["toggle_power"])
 		active = !active
 		. = TRUE
