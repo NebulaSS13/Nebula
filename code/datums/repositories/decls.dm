@@ -12,6 +12,7 @@
 	fetched_decl_subtypes = list()
 
 /repository/decls/proc/get_decl(var/decl_type)
+	ASSERT(ispath(decl_type))
 	. = fetched_decls[decl_type]
 	if(!.)
 		. = new decl_type()
