@@ -19,9 +19,9 @@
 /obj/machinery/mineral/processing_unit/Initialize()
 	ores_processing = list()
 	ores_stored = list()
-	for(var/orename in SSmaterials.processable_ores)
-		ores_processing[orename] = 0
-		ores_stored[orename] = 0
+	for(var/orepath in SSmaterials.processable_ores)
+		ores_processing[orepath] = 0
+		ores_stored[orepath] = 0
 	. = ..()
 
 /obj/machinery/mineral/processing_unit/Process()
@@ -158,7 +158,7 @@
 			if("Smelting")    choice = ORE_SMELT
 			if("Compressing") choice = ORE_COMPRESS
 			if("Alloying")    choice = ORE_ALLOY
-		ores_processing[href_list["toggle_smelting"]] = choice
+		ores_processing[text2path(href_list["toggle_smelting"])] = choice
 		. = TRUE
 	else if(href_list["toggle_power"])
 		active = !active
