@@ -683,14 +683,13 @@ var/global/list/damage_icon_parts = list()
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
 		//generate a new one
-		var/species_tail_anim = species.get_tail_animation(src)
-		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
+		var/species_tail_anim = species.get_tail_animation(src) || species.tail_icon
 		tail_icon = new/icon(species_tail_anim)
 		tail_icon.Blend(skin_colour, species.tail_blend)
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)
-			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
+			var/icon/hair_icon = icon(species.tail_icon, "[species.get_tail(src)]_[use_species_tail]")
 			hair_icon.Blend(hair_colour, ICON_ADD)
 			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
