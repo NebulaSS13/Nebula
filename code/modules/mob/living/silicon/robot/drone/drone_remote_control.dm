@@ -34,6 +34,7 @@
 
 	add_language(/decl/language/binary/drone, 1)
 	add_language(/decl/language/binary, 1)
+	add_language(/decl/language/machine, 1)
 	default_language = controlling_ai.default_language
 
 	stat = CONSCIOUS
