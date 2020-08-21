@@ -3,8 +3,8 @@
 /obj/item/mmi/digital/Initialize()
 	src.brainmob = new(src)
 	src.brainmob.set_stat(CONSCIOUS)
-	src.brainmob.add_language("Robot Talk")
-	src.brainmob.add_language("Encoded Audio Language")
+	src.brainmob.add_language(/decl/language/binary)
+	src.brainmob.add_language(/decl/language/machine)
 
 	src.brainmob.container = src
 	src.brainmob.silent = 0

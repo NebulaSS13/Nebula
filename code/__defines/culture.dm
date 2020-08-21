@@ -22,6 +22,7 @@
 #define CULTURE_MONKEY         "Test Subjects"
 #define CULTURE_ALIUM          "Mysterious Aliens"
 #define CULTURE_CULTIST        "Blood Cult"
+#define CULTURE_SYNTHETIC      "Artificial Intelligence"
 
 #define RELIGION_OTHER         "Other Religion"
 

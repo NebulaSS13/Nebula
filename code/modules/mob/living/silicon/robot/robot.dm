@@ -107,6 +107,7 @@
 	spark_system.attach(src)
 
 	add_language(/decl/language/binary, 1)
+	add_language(/decl/language/machine, 1)
 	add_language(/decl/language/human/common, 1)
 
 	wires = new(src)
