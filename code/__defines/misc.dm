@@ -251,7 +251,7 @@
 #define TOOL_INTERACTION_ALL         (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_WIRING)
 
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
-#define ADD_ARTICLE(X) "[(lowertext(copytext(X, 1, 2)) in list("a", "e", "i", "o", "u")) ? "an" : "a"] [X]"
+#define ADD_ARTICLE(X) "[(lowertext(X[1]) in GLOB.vowels) ? "an" : "a"] [X]"
 
 #define SOULSTONE_CRACKED -1
 #define SOULSTONE_EMPTY 0
@@ -270,3 +270,9 @@
 
 #define  ICON_STATE_WORLD  "world"
 #define  ICON_STATE_INV  "inventory"
+
+#if DM_VERSION < 513
+#define hex2num(X) hex2num_inner(X)
+#else
+#define hex2num(X) text2num(X, 16)
+#endif

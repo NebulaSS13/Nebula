@@ -10,7 +10,8 @@
  */
 
 // Returns an integer given a hexadecimal number string as input.
-/proc/hex2num(hex, safe=FALSE)
+#if DM_VERSION < 513
+/proc/hex2num_inner(hex)
 	. = 0
 	var/place = 1
 	for(var/i in length(hex) to 1 step -1)
@@ -25,13 +26,11 @@
 			if(45)
 				return . * -1 // -
 			else
-				if(safe)
-					return null
-				else
-					CRASH("Malformed hex number")
+				CRASH("Malformed hex number")
 
 		. += num * place
 		place *= 16
+#endif
 
 // Returns the hex value of a number given a value assumed to be a base-ten value
 /proc/num2hex(num, len=2)
@@ -259,13 +258,13 @@
 
 // Decodes hex to raw byte string.
 // If safe=TRUE, returns null on incorrect input strings instead of CRASHing
-/proc/hex2str(str, safe=FALSE)
+/proc/hex2str(str)
 	if(!istext(str)||!str)
 		return
 	var/r
 	var/c
 	for(var/i = 1 to length(str)/2)
-		c = hex2num(copytext(str,i*2-1,i*2+1), safe)
+		c = hex2num(copytext(str,i*2-1,i*2+1))
 		if(isnull(c))
 			return null
 		r += ascii2text(c)
