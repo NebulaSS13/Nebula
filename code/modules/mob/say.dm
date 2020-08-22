@@ -10,19 +10,20 @@
 	set name = "Say"
 	set category = "IC"
 	remove_typing_indicator()
-	usr.say(message)
+	if(!filter_block_message(usr, message))
+		usr.say(message)
 
 /mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
 
-	message = sanitize(message)
-
 	remove_typing_indicator()
-	if(use_me)
-		usr.emote("me",usr.emote_type,message)
-	else
-		usr.emote(message)
+	if(!filter_block_message(usr, message))
+		message = sanitize(message)
+		if(use_me)
+			usr.emote("me",usr.emote_type,message)
+		else
+			usr.emote(message)
 
 /mob/proc/say_dead(var/message)
 	communicate(/decl/communication_channel/dsay, client, message)

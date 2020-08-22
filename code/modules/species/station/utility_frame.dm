@@ -7,6 +7,7 @@
 	icobase =               'icons/mob/human_races/cyberlimbs/utility/body.dmi'
 	deform =                'icons/mob/human_races/cyberlimbs/utility/body.dmi'
 	limb_blend =            ICON_MULTIPLY
+	cyborg_noun = null
 
 	min_age =               1
 	max_age =               20

@@ -7,13 +7,13 @@
 	hidden_from_codex = 1
 
 /decl/language/noise/format_message(message, verb)
-	return "<span class='message'><span class='[colour]'>[message]</span></span>"
+	return "<span class='message'><span class='[colour]'>[filter_modify_message(message)]</span></span>"
 
 /decl/language/noise/format_message_plain(message, verb)
-	return message
+	return filter_modify_message(message)
 
 /decl/language/noise/format_message_radio(message, verb)
-	return "<span class='[colour]'>[message]</span>"
+	return "<span class='[colour]'>[filter_modify_message(message)]</span>"
 
 /decl/language/noise/get_talkinto_msg_range(message)
 	// if you make a loud noise (screams etc), you'll be heard from 4 tiles over instead of two
