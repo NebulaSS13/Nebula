@@ -3,13 +3,16 @@
 	icon = 'icons/obj/structures/displaycase.dmi'
 	icon_state = "glassbox"
 	desc = "A display case for prized possessions. It taunts you to kick it."
-	density = 1
-	anchored = 1
-	unacidable = 1//Dissolving the case would also delete the gun.
+	density = TRUE
+	anchored = TRUE
+	unacidable = TRUE //Dissolving the case would also delete the gun.
 	alpha = 150
 	maxhealth = 100
 	hitsound = 'sound/effects/Glasshit.ogg'
-	var/destroyed = 0
+	req_access = null
+
+	var/destroyed = FALSE
+	var/locked = TRUE
 
 /obj/structure/displaycase/Initialize()
 	. = ..()
@@ -19,10 +22,19 @@
 			AM.forceMove(src)
 	update_icon()
 
-/obj/structure/displaycase/examine(mob/user)
+	if(!req_access)
+		var/area/A = get_area(src)
+		if(!istype(A) || !islist(A.req_access))
+			return
+		req_access = A.req_access.Copy()
+
+/obj/structure/displaycase/examine(mob/user, distance)
 	. = ..()
 	if(contents.len)
 		to_chat(user, "Inside you see [english_list(contents)].")
+
+	if(distance <= 1)
+		to_chat(user, "It looks [locked ? "locked. You can open it with your ID card" : "unlocked"].")
 
 /obj/structure/displaycase/explosion_act(severity)
 	..()
@@ -78,12 +90,48 @@
 
 /obj/structure/displaycase/attackby(obj/item/W, mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	take_damage(W.force)
-	..()
+	var/obj/item/card/id/id = W.GetIdCard()
+	if(istype(id))
+		if(allowed(usr))
+			locked = !locked
+			to_chat(user, "\The [src] was [locked ? "locked" : "unlocked"].")
+		else
+			to_chat(user, "\The [src]'s card reader denies you access.")
+		return
+
+	if(isitem(W) && (!locked || destroyed))
+		if(!W.simulated || W.anchored)
+			return
+
+		if(user.unEquip(W, src))
+			W.pixel_x = 0
+			W.pixel_y = -7
+			update_icon()
+		return
+	. = ..()
 
 /obj/structure/displaycase/attack_hand(mob/user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	add_fingerprint(user)
-	if(!destroyed)
-		to_chat(usr, text("<span class='warning'>You kick the display case.</span>"))
-		visible_message("<span class='warning'>[usr] kicks the display case.</span>")
+
+	if(!locked || destroyed)
+		var/obj/item/selected_item
+		var/list/options = list()
+
+		for(var/atom/movable/AM in src)
+			var/image/radial_button = image(icon = AM.icon, icon_state = AM.icon_state)
+			options[AM] = radial_button
+
+		selected_item = show_radial_menu(user, src, options, radius = 42, require_near = TRUE, use_labels = TRUE)
+		if(QDELETED(selected_item) || !contents.Find(selected_item) || !Adjacent(user) || user.incapacitated())
+			return
+
+		to_chat(user, SPAN_NOTICE("You remove \the [selected_item] from \the [src]."))
+		selected_item.dropInto(loc)
+		update_icon()
+		return TRUE
+
+	else if(!destroyed && user.a_intent == I_HURT)
+		visible_message(SPAN_WARNING("[user] kicks \the [src]."), SPAN_WARNING("You kick \the [src]"))
 		take_damage(2)
+		return TRUE
