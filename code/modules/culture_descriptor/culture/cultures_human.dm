@@ -13,3 +13,12 @@
 		/decl/language/human/common,
 		/decl/language/sign
 	)
+
+/decl/cultural_info/culture/synthetic
+	name = CULTURE_SYNTHETIC
+	description = "You are a simple artificial intelligence created by humanity to serve a menial purpose."
+	secondary_langs = list(
+		/decl/language/machine,
+		/decl/language/human/common,
+		/decl/language/sign
+	)

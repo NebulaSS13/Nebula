@@ -1,3 +1,26 @@
+/decl/language/machine
+	name = "Encoded Audio Language"
+	shorthand = "EAL"
+	desc = "A efficient language of encoded tones used by synthetics."
+	speech_verb = "whistles"
+	ask_verb = "chirps"
+	exclaim_verb = "whistles loudly"
+	colour = "changeling"
+	key = "6"
+	flags = NO_STUTTER
+	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
+	space_chance = 10
+	speech_sounds = list(
+		'sound/voice/eal/eal1.ogg',
+		'sound/voice/eal/eal2.ogg',
+		'sound/voice/eal/eal3.ogg',
+		'sound/voice/eal/eal4.ogg',
+		'sound/voice/eal/eal5.ogg',
+		'sound/voice/eal/eal6.ogg',
+		'sound/voice/eal/eal7.ogg',
+		'sound/voice/eal/eal8.ogg'
+	)
+		
 /decl/language/binary
 	name = "Robot Talk"
 	desc = "Most human facilities support free-use communications protocols and routing hubs for synthetic use."

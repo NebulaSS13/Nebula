@@ -153,6 +153,7 @@ var/list/ai_verbs_default = list(
 
 	//Languages
 	add_language(/decl/language/binary, 1)
+	add_language(/decl/language/machine, 1)
 	add_language(/decl/language/human/common, 1)
 	add_language(/decl/language/sign, 0)
 

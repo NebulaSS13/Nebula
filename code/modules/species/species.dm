@@ -38,6 +38,7 @@
 	var/tail_animation                        // If set, the icon to obtain tail animation states from.
 	var/tail_blend = ICON_ADD
 	var/tail_hair
+	var/tail_icon = 'icons/effects/species.dmi'
 
 	var/list/hair_styles
 	var/list/facial_hair_styles

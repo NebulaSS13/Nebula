@@ -24,6 +24,15 @@
 	var/warning = ""
 	var/hidden_from_codex			  // If it should not show up in Codex
 	var/category = /decl/language    // Used to point at root language types that shouldn't be visible
+	var/list/scramble_cache = list()
+	var/list/speech_sounds
+
+/decl/language/proc/get_spoken_sound()
+	if(speech_sounds)
+		var/list/result[2]
+		result[1] = pick(speech_sounds)
+		result[2] = 40
+		return result
 
 /decl/language/proc/can_be_spoken_properly_by(var/mob/speaker)
 	return TRUE
@@ -48,9 +57,6 @@
 		full_name += " [capitalize(lowertext(new_name))]"
 
 	return "[trim(full_name)]"
-
-/decl/language
-	var/list/scramble_cache = list()
 
 /decl/language/proc/scramble(var/input, var/list/known_languages)
 
