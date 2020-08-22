@@ -1,4 +1,5 @@
 /mob/living/carbon/human/say(var/message, var/decl/language/speaking = null, whispering)
+	set waitfor = FALSE
 	var/prefix = copytext(message,1,2)
 	if(prefix == get_prefix_key(/decl/prefix/custom_emote) || prefix == get_prefix_key(/decl/prefix/visible_emote) || prefix == get_prefix_key(/decl/prefix/audible_emote))
 		return ..(message, null, null)

@@ -119,6 +119,7 @@
 		new expandType(T, min(health, 30))
 
 /obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
+	set waitfor = FALSE
 	sleep(4)
 	var/pushDir = pick(dirs)
 	var/turf/T = get_step(src, pushDir)
@@ -262,11 +263,9 @@ regen() will cover update_icon() for this proc
 			icon_state = "blob_factory"
 
 /obj/effect/blob/core/Process()
-	set waitfor = 0
 	if(!blob_may_process)
 		return
 	blob_may_process = 0
-	sleep(0)
 	process_core_health()
 	regen()
 	for(var/I in 1 to times_to_pulse)

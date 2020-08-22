@@ -14,7 +14,6 @@
 	. = ..()
 
 /datum/submap/proc/setup_submap(var/decl/submap_archetype/_archetype)
-
 	if(!istype(_archetype))
 		testing( "Submap error - [name] - null or invalid archetype supplied ([_archetype]).")
 		qdel(src)
@@ -40,24 +39,6 @@
 		if(!job.blacklisted_species)
 			job.blacklisted_species = archetype.blacklisted_species
 		jobs[job.title] = job
-
-	// Either find or build our map.
-	if(!associated_z)
-		// Load a map + overmap object from archetype map file.
-		if(archetype.map && SSmapping.map_templates[archetype.map])
-			var/datum/map_template/template = SSmapping.map_templates[archetype.map]
-			if (template.loaded && !(template.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
-				testing( "Submap ([template.name]) tried to place duplicate of existing non-duplicate template.")
-				qdel(src)
-				return
-			var/turf/new_z_centre = template.load_new_z()
-			if(!istype(new_z_centre))
-				testing( "Failed to place submap ([template.name])")
-				qdel(src)
-				return
-			testing( "Submap '[template.name]' placed on zlevel [new_z_centre.z].")
-			log_and_message_admins("Submap ([template.name]) has been placed on a new zlevel.", location=new_z_centre)
-			associated_z = new_z_centre.z
 
 	if(!associated_z)
 		testing( "Submap error - [name]/[archetype ? archetype.descriptor : "NO ARCHETYPE"] could not find an associated z-level for spawnpoint placement.")

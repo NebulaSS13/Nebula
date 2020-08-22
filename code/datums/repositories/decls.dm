@@ -46,6 +46,7 @@
 
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
 	return
 
 /decl/Destroy()

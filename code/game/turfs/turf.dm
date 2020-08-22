@@ -259,6 +259,7 @@ var/const/enterloopsanity = 100
 
 //expects an atom containing the reagents used to clean the turf
 /turf/proc/clean(atom/source, mob/user = null, var/time = null, var/message = null)
+	set waitfor = FALSE
 	if(source.reagents.has_reagent(/decl/material/liquid/water, 1) || source.reagents.has_reagent(/decl/material/liquid/cleaner, 1))
 		if(user && time && !do_after(user, time, src))
 			return
