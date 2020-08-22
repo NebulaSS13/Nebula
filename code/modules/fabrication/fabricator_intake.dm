@@ -137,5 +137,5 @@
 	if((fab_status_flags & FAB_DISABLED) && !panel_open)
 		to_chat(user, SPAN_WARNING("\The [src] is disabled!"))
 		return TRUE
-	interact(user)
+	ui_interact(user)
 	return TRUE
