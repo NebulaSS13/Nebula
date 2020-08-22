@@ -256,6 +256,7 @@
 	return null
 
 /obj/item/radio/talk_into(mob/living/M, message, channel, var/verb = "says", var/decl/language/speaking = null)
+	set waitfor = FALSE
 	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return 0

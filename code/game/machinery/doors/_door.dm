@@ -398,6 +398,7 @@
 	return world.time + (normalspeed ? 150 : 5)
 
 /obj/machinery/door/proc/close(var/forced = 0)
+	set waitfor = FALSE
 	if(!can_close(forced))
 		return
 	operating = 1
@@ -418,7 +419,6 @@
 	var/obj/fire/fire = locate() in loc
 	if(fire)
 		qdel(fire)
-	return
 
 /obj/machinery/door/proc/toggle(to_open = density)
 	if(to_open)

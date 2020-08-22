@@ -98,6 +98,7 @@
 // Parameters: None
 // Description: Opens the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_open()
+	set waitfor = FALSE
 	operating = 1
 	playsound(src.loc, open_sound, 100, 1)
 	flick(icon_state_opening, src)

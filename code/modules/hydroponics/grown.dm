@@ -55,7 +55,7 @@
 		bitesize = 1+round(reagents.total_volume / 2, 1)
 
 /obj/item/chems/food/snacks/grown/proc/update_desc()
-
+	set waitfor = FALSE
 	if(!seed)
 		return
 	if(!SSplants)
