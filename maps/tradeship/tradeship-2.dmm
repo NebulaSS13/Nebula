@@ -585,6 +585,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/overmap/visitable/ship/tradeship,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "cy" = (
