@@ -207,6 +207,7 @@
 	return plasma_temperature < 1000
 
 /obj/effect/fusion_em_field/proc/Rupture()
+	set waitfor = FALSE
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
 	set_light(1, 0.1, 15, 2, "#ccccff")
 	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
