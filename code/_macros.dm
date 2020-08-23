@@ -85,7 +85,7 @@
 
 #define isopenspace(A) istype(A, /turf/simulated/open)
 
-#define isPlunger(A) istype(A, /obj/item/clothing/mask/plunger) || istype(A, /obj/item/plunger/robot)
+#define isplunger(A) istype(A, /obj/item/plunger)
 
 /proc/isspecies(A, B)
 	if(!iscarbon(A))

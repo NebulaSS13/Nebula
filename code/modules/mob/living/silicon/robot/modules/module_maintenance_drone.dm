@@ -24,7 +24,7 @@
 		/obj/item/pipe_painter,
 		/obj/item/floor_painter,
 		/obj/item/inducer/borg,
-		/obj/item/plunger/robot,
+		/obj/item/plunger,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/chems/spray/cleaner/drone,
 		/obj/item/borg/sight/hud/jani,

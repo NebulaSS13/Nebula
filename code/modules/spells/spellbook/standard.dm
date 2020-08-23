@@ -47,6 +47,6 @@
 							/obj/item/caution,
 							/obj/item/towel,
 							/obj/item/tank/jetpack,
-							/obj/item/clothing/mask/plunger,
+							/obj/item/plunger,
 							/obj/item/megaphone,
 							/obj/item/deck/cards)
