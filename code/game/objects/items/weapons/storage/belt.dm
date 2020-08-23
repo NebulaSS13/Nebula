@@ -315,7 +315,7 @@
 		/obj/item/clothing/gloves,
 		/obj/item/assembly/mousetrap,
 		/obj/item/crowbar,
-		/obj/item/clothing/mask/plunger
+		/obj/item/plunger
 		)
 
 /obj/item/storage/belt/holster/general
