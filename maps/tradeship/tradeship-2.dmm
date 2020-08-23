@@ -46,12 +46,33 @@
 /turf/simulated/floor/carpet/blue,
 /area/ship/trade/command/captain)
 "af" = (
-/obj/item/bedsheet/captain,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/structure/table/woodentable,
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/obj/machinery/light_switch{
+	pixel_y = 25
+	},
+/obj/random/action_figure,
+/obj/random_multi/single_item/captains_spare_id,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/wood,
+/area/ship/trade/command/captain)
+"ag" = (
+/obj/item/bedsheet/captain,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/structure/bed/padded,
 /obj/effect/landmark{
 	name = "JoinLateCryoCaptain"
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
 	},
 /turf/simulated/floor/wood,
 /area/ship/trade/command/captain)
@@ -77,22 +98,6 @@
 /obj/random/voidhelmet,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/maintenance/hallway)
-"aJ" = (
-/obj/item/paper_bin,
-/obj/item/pen,
-/obj/structure/table/woodentable,
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
-/obj/machinery/light_switch{
-	pixel_y = 25
-	},
-/obj/random/action_figure,
-/obj/random_multi/single_item/captains_spare_id,
-/turf/simulated/floor/wood,
-/area/ship/trade/command/captain)
 "aL" = (
 /turf/simulated/wall/titanium,
 /area/ship/trade/shuttle/outgoing)
@@ -11425,7 +11430,7 @@ uP
 IM
 ar
 Wp
-aJ
+ag
 aW
 Rb
 SC
