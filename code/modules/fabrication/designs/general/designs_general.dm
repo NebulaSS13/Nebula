@@ -88,4 +88,4 @@
 	hidden = TRUE
 
 /datum/fabricator_recipe/plunger
-	path = /obj/item/clothing/mask/plunger
+	path = /obj/item/plunger

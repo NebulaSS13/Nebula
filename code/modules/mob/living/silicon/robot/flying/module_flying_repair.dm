@@ -40,7 +40,7 @@
 		/obj/item/stack/material/cyborg/glass/reinforced,
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel,
-		/obj/item/plunger/robot
+		/obj/item/plunger
 	)
 	synths = list(
 		/datum/matter_synth/metal = 	30000,
