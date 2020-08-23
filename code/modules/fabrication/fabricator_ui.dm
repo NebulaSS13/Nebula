@@ -88,8 +88,4 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/fabricator/interface_interact(mob/user)
-	ui_interact(user)
-	return TRUE
-
 #undef PRINT_MULTIPLIER_DIVISOR
