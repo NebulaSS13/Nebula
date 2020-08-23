@@ -46,23 +46,6 @@
 			total_moles = max(total_moles - part, 0)
 			i++
 
-//Tries to 'reset' planet's surface atmos to normal values
-/obj/effect/overmap/visitable/sector/exoplanet/proc/handle_atmosphere()
-	if(!atmosphere)
-		return
-	for(var/zlevel in map_z)
-		var/zone/Z
-		for(var/i = TRANSITIONEDGE to maxx - TRANSITIONEDGE)
-			var/turf/simulated/floor/exoplanet/T = locate(i, 2, zlevel)
-			if(istype(T) && T.zone && T.zone.contents.len > (maxx*maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
-				Z = T.zone
-				break
-		if(Z && !Z.fire_tiles.len && !atmosphere.compare(Z.air)) //let fire die out first if there is one
-			var/datum/gas_mixture/daddy = new() //make a fake 'planet' zone gas
-			daddy.copy_from(atmosphere)
-			daddy.group_multiplier = Z.air.group_multiplier
-			Z.air.equalize(daddy)
-
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_habitability()
 	var/roll = rand(1,100)
 	switch(roll)

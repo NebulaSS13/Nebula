@@ -24,8 +24,8 @@
 	if(istype(T))
 		T.drill_act()
 
-/turf/simulated/floor/exoplanet/drill_act()
-	var/turf/simulated/floor/exoplanet/digging = ..()
+/turf/exterior/drill_act()
+	var/turf/exterior/digging = ..()
 	if(istype(digging) && digging.diggable)
 		new /obj/structure/pit(digging)
 		digging.diggable = FALSE

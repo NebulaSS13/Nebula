@@ -2014,7 +2014,7 @@
 	icon_state = "0-1";
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/concrete,
+/turf/exterior/concrete,
 /area/template_noop)
 "eM" = (
 /obj/effect/floor_decal/industrial/warning{
