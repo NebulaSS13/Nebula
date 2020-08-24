@@ -171,12 +171,14 @@ I said no!
 		/obj/item/chems/food/snacks/meatball
 	)
 	result = /obj/item/chems/food/snacks/donkpocket //SPECIAL
-	proc/warm_up(var/obj/item/chems/food/snacks/donkpocket/being_cooked)
-		being_cooked.heat()
-	make_food(var/obj/container as obj)
-		var/obj/item/chems/food/snacks/donkpocket/being_cooked = ..(container)
-		warm_up(being_cooked)
-		return being_cooked
+
+/datum/recipe/donkpocket/proc/warm_up(var/obj/item/chems/food/snacks/donkpocket/being_cooked)
+	being_cooked.heat()
+
+/datum/recipe/donkpocket/make_food(var/obj/container)
+	var/obj/item/chems/food/snacks/donkpocket/being_cooked = ..(container)
+	warm_up(being_cooked)
+	return being_cooked
 
 /datum/recipe/donkpocket2
 	items = list(
@@ -199,11 +201,12 @@ I said no!
 		/obj/item/chems/food/snacks/donkpocket
 	)
 	result = /obj/item/chems/food/snacks/donkpocket //SPECIAL
-	make_food(var/obj/container as obj)
-		var/obj/item/chems/food/snacks/donkpocket/being_cooked = locate() in container
-		if(being_cooked && !being_cooked.warm)
-			warm_up(being_cooked)
-		return being_cooked
+
+/datum/recipe/donkpocket/warm/make_food(var/obj/container)
+	var/obj/item/chems/food/snacks/donkpocket/being_cooked = locate() in container
+	if(being_cooked && !being_cooked.warm)
+		warm_up(being_cooked)
+	return being_cooked
 
 /datum/recipe/meatbread
 	items = list(
@@ -465,10 +468,11 @@ I said no!
 /datum/recipe/amanitajelly
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/ethanol/vodka = 5, /decl/material/liquid/amatoxin = 5)
 	result = /obj/item/chems/food/snacks/amanitajelly
-	make_food(var/obj/container as obj)
-		var/obj/item/chems/food/snacks/amanitajelly/being_cooked = ..(container)
-		being_cooked.reagents.clear_reagent(/decl/material/liquid/amatoxin)
-		return being_cooked
+
+/datum/recipe/amanitajelly/make_food(var/obj/container)
+	var/obj/item/chems/food/snacks/amanitajelly/being_cooked = ..(container)
+	being_cooked.reagents.clear_reagent(/decl/material/liquid/amatoxin)
+	return being_cooked
 
 /datum/recipe/meatballsoup
 	fruit = list("carrot" = 1, "potato" = 1)
@@ -983,7 +987,7 @@ I said no!
 	result = /obj/item/chems/food/snacks/sliceable/chocolatecake
 
 /datum/recipe/cake/birthday
-	reagents = list(/decl/material/liquid/nutriment/sprinkles = 10)
+	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 60, /decl/material/liquid/nutriment/sprinkles = 10)
 	result = /obj/item/chems/food/snacks/sliceable/birthdaycake
 
 /datum/recipe/cake/apple
