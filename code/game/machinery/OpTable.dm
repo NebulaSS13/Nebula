@@ -31,6 +31,7 @@
 	if(connected_monitor)
 		connected_monitor.update_victim()
 		connected_monitor.update_optable()
+		connected_monitor = null
 	. = ..()
 
 /obj/machinery/optable/examine(mob/user)

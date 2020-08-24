@@ -78,12 +78,9 @@
 		to_chat(user, SPAN_NOTICE("Connected to adjacent [connected_optable]."))
 
 /obj/machinery/vitals_monitor/Process()
-	if(QDELETED(victim))
-		update_victim()
-	if(victim && !Adjacent(victim))
+	if(QDELETED(victim) || (victim && !Adjacent(victim)))
 		update_victim()
 	if(connected_optable && !Adjacent(connected_optable))
-		update_victim()
 		update_optable()
 	if(victim)
 		update_icon()
@@ -122,14 +119,13 @@
 	else if(ishuman(over_object))
 		update_victim(over_object)
 	else if(istype(over_object, /obj/machinery/optable/))
-		var/obj/machinery/optable/new_table_connection = over_object
-		update_optable(new_table_connection)
+		update_optable(over_object)
 
 /obj/machinery/vitals_monitor/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(stat & NOPOWER)
 		return
-	overlays += image(icon, icon_state = "screen")
+	add_overlay(image(icon, icon_state = "screen"))
 
 	handle_pulse()
 	handle_brain()
@@ -143,29 +139,29 @@
 	if(istype(heart) && !BP_IS_PROSTHETIC(heart))
 		switch(victim.pulse())
 			if(PULSE_NONE)
-				overlays += image(icon, icon_state = "pulse_flatline")
-				overlays += image(icon, icon_state = "pulse_warning")
+				add_overlay(image(icon, icon_state = "pulse_flatline"))
+				add_overlay(image(icon, icon_state = "pulse_warning"))
 				if(beep)
 					playsound(src, 'sound/machines/flatline.ogg', 20)
 				if(read_alerts)
 					alerts[PULSE_ALERT] = "Cardiac flatline detected!"
 			if(PULSE_SLOW, PULSE_NORM,)
-				overlays += image(icon, icon_state = "pulse_normal")
+				add_overlay(image(icon, icon_state = "pulse_normal"))
 				if(beep)
 					playsound(src, 'sound/machines/quiet_beep.ogg', 40)
 			if(PULSE_FAST, PULSE_2FAST)
-				overlays += image(icon, icon_state = "pulse_veryfast")
+				add_overlay(image(icon, icon_state = "pulse_veryfast"))
 				if(beep)
 					playsound(src, 'sound/machines/quiet_double_beep.ogg', 40)
 			if(PULSE_THREADY)
-				overlays += image(icon, icon_state = "pulse_thready")
-				overlays += image(icon, icon_state = "pulse_warning")
+				add_overlay(image(icon, icon_state = "pulse_thready"))
+				add_overlay(image(icon, icon_state = "pulse_warning"))
 				if(beep)
 					playsound(src, 'sound/machines/ekg_alert.ogg', 40)
 				if(read_alerts)
 					alerts[PULSE_ALERT] = "Excessive heartbeat! Possible Shock Detected!"
 	else
-		overlays += image(icon, icon_state = "pulse_warning")
+		add_overlay(image(icon, icon_state = "pulse_warning"))
 
 /obj/machinery/vitals_monitor/proc/handle_brain()
 	if(!victim)
@@ -174,18 +170,18 @@
 	if(istype(brain) && victim.stat != DEAD && !(victim.status_flags & FAKEDEATH))
 		switch(brain.get_current_damage_threshold())
 			if(0 to 2)
-				overlays += image(icon, icon_state = "brain_ok")
+				add_overlay(image(icon, icon_state = "brain_ok"))
 			if(3 to 5)
-				overlays += image(icon, icon_state = "brain_bad")
+				add_overlay(image(icon, icon_state = "brain_bad"))
 				if(read_alerts)
 					alerts[BRAIN_ALERT] = "Weak brain activity!"
 			if(6 to INFINITY)
-				overlays += image(icon, icon_state = "brain_verybad")
-				overlays += image(icon, icon_state = "brain_warning")
+				add_overlay(image(icon, icon_state = "brain_verybad"))
+				add_overlay(image(icon, icon_state = "brain_warning"))
 				if(read_alerts)
 					alerts[BRAIN_ALERT] = "Very weak brain activity!"
 	else
-		overlays += image(icon, icon_state = "brain_warning")
+		add_overlay(image(icon, icon_state = "brain_warning"))
 
 /obj/machinery/vitals_monitor/proc/handle_lungs()
 	if(!victim)
@@ -193,23 +189,21 @@
 	var/obj/item/organ/internal/lungs/lungs = victim.internal_organs_by_name[BP_LUNGS]
 	if(istype(lungs) && !(victim.status_flags & FAKEDEATH))
 		if(lungs.breath_fail_ratio < 0.3)
-			overlays += image(icon, icon_state = "breathing_normal")
+			add_overlay(image(icon, icon_state = "breathing_normal"))
 		else if(lungs.breath_fail_ratio < 1)
-			overlays += image(icon, icon_state = "breathing_shallow")
+			add_overlay(image(icon, icon_state = "breathing_shallow"))
 			if(read_alerts)
 				alerts[LUNGS_ALERT] = "Abnormal breathing detected!"
 		else
-			overlays += image(icon, icon_state = "breathing_warning")
+			add_overlay(image(icon, icon_state = "breathing_warning"))
 			if(read_alerts)
 				alerts[LUNGS_ALERT] = "Patient is not breathing!"
 	else
-		overlays += image(icon, icon_state = "breathing_warning")
+		add_overlay(image(icon, icon_state = "breathing_warning"))
 
 /obj/machinery/vitals_monitor/proc/handle_alerts()
 	if(!victim || !read_alerts) //Clear our alerts
-		alerts[PULSE_ALERT] = ""
-		alerts[BRAIN_ALERT] = ""
-		alerts[LUNGS_ALERT] = ""
+		alerts.Cut()
 		return
 	if(last_alert_time + alert_cooldown < world.time)
 		if(alerts[PULSE_ALERT] && alerts[PULSE_ALERT] != last_alert[PULSE_ALERT])
@@ -221,30 +215,12 @@
 		last_alert = alerts.Copy()
 		last_alert_time = world.time
 
-
-
-/obj/machinery/vitals_monitor/verb/toggle_beep()
-	set name = "Toggle Monitor Beeping"
-	set category = "Object"
-	set src in view(1)
-
-	var/mob/user = usr
-	if(!istype(user))
-		return
-
+/obj/machinery/vitals_monitor/AltClick(mob/user)
 	if(CanPhysicallyInteract(user))
 		beep = !beep
 		to_chat(user, SPAN_NOTICE("You turn the sound on \the [src] [beep ? "on" : "off"]."))
 
-/obj/machinery/vitals_monitor/verb/toggle_alerts()
-	set name = "Toggle Alert Annunciator"
-	set category = "Object"
-	set src in view(1)
-
-	var/mob/user = usr
-	if(!istype(user))
-		return
-
+/obj/machinery/vitals_monitor/attack_hand(mob/user)
 	if(CanPhysicallyInteract(user))
 		read_alerts = !read_alerts
 		to_chat(user, SPAN_NOTICE("You turn the alert reader on \the [src] [read_alerts ? "on" : "off"]."))
