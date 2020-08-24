@@ -355,7 +355,7 @@
 /obj/item/trash/candy/proteinbar,
 /obj/item/trash/liquidfood,
 /obj/item/storage/box/detergent,
-/obj/item/clothing/mask/plunger,
+/obj/item/plunger,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "aL" = (
