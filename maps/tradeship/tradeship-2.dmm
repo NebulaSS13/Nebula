@@ -197,7 +197,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/walllocker/emerglocker/north,
 /obj/machinery/floodlight,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -249,7 +249,7 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -547,7 +547,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -604,7 +604,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -887,7 +887,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -1468,7 +1468,7 @@
 	pixel_y = 28
 	},
 /obj/structure/closet/walllocker/emerglocker/west,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -1548,7 +1548,7 @@
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -1589,7 +1589,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -1962,7 +1962,7 @@
 /area/ship/trade/cargo)
 "fs" = (
 /obj/structure/catwalk,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -1992,7 +1992,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -2069,7 +2069,7 @@
 	icon_state = "intact";
 	dir = 6
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -2123,7 +2123,7 @@
 	icon_state = "intact";
 	dir = 10
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -2399,7 +2399,7 @@
 /obj/machinery/light_switch{
 	pixel_x = 28
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -2429,7 +2429,7 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -3069,7 +3069,7 @@
 	dir = 1
 	},
 /obj/machinery/disposal,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "hU" = (
@@ -3112,7 +3112,7 @@
 /obj/item/chems/chem_disp_cartridge/coffee{
 	name = "coffee canister"
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "hW" = (
@@ -3128,7 +3128,7 @@
 	pixel_y = 32
 	},
 /obj/item/storage/firstaid/regular,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "hX" = (
@@ -4850,7 +4850,7 @@
 "pe" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -4925,7 +4925,7 @@
 /obj/item/storage/backpack/dufflebag/eng,
 /obj/item/stack/material/glass/reinforced/fifty,
 /obj/item/stack/material/steel/fifty,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "qb" = (
@@ -5265,11 +5265,11 @@
 /turf/simulated/floor/airless,
 /area/ship/trade/crew/medbay/chemistry)
 "uP" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -5592,7 +5592,7 @@
 	dir = 8;
 	id_tag = "tradeship_shuttle_pump_out_external"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -6337,7 +6337,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)
 "Is" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -6462,7 +6462,7 @@
 /obj/structure/sign/deck/first{
 	pixel_x = 32
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -6605,7 +6605,7 @@
 	pixel_x = -25
 	},
 /obj/structure/catwalk,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -6700,7 +6700,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/command/fmate)
 "Lx" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -7192,7 +7192,7 @@
 /area/ship/trade/cargo)
 "RL" = (
 /obj/structure/closet/walllocker/emerglocker/north,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
 "RW" = (
@@ -7322,7 +7322,7 @@
 	dir = 10;
 	icon_state = "intact"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -7448,7 +7448,7 @@
 "UD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /obj/structure/lattice,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -7482,7 +7482,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -7542,7 +7542,7 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -7698,7 +7698,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "Yt" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -7777,11 +7777,11 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
 "Zg" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -7790,7 +7790,7 @@
 /area/ship/trade/command/fmate)
 "Zv" = (
 /obj/structure/lattice,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},

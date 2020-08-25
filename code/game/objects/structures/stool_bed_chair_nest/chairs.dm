@@ -248,7 +248,7 @@
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
 	icon_state = "shuttle_chair"
-	buckling_sound = 'sound/effects/metal_close.ogg'
+	buckle_sound = 'sound/effects/metal_close.ogg'
 	material = /decl/material/solid/metal/steel
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
