@@ -3073,7 +3073,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "ge" = (
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "gf" = (
