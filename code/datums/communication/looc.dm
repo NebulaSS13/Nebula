@@ -39,7 +39,11 @@
 
 /client/proc/receive_looc(var/client/C, var/commkey, var/message, var/prefix)
 	var/mob/M = C.mob
-	var/display_name = isghost(M) ? commkey : M.name
+	var/display_name
+	if(isghost(M) && C.get_preference_value(/datum/client_preference/anon_say) != GLOB.PREF_YES)
+		display_name = commkey
+	else
+		display_name = M.name
 	var/admin_stuff = holder ? "/([commkey])" : ""
 	if(prefix)
 		prefix = "\[[prefix]\] "

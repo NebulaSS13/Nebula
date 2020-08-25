@@ -175,6 +175,11 @@ var/list/_client_preferences_by_type
 	key = "CHAT_DEAD"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
+/datum/client_preference/anon_say
+	description = "Anonymous Chat"
+	key = "CHAT_ANONSAY"
+	options = list(GLOB.PREF_NO, GLOB.PREF_YES)
+
 /datum/client_preference/show_progress_bar
 	description ="Progress Bar"
 	key = "SHOW_PROGRESS"

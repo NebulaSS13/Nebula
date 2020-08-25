@@ -441,6 +441,8 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			C = M.original.client
 
 	if(C)
+		if(C.get_preference_value(/datum/client_preference/anon_say) == GLOB.PREF_YES)
+			return
 		var/name
 		if(C.mob)
 			var/mob/M = C.mob
