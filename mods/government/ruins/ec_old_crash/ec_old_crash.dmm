@@ -1642,13 +1642,13 @@
 /area/map_template/ecship/engineering)
 "dl" = (
 /obj/structure/catwalk,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dm" = (
 /obj/structure/catwalk,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	icon_state = "intact";
 	dir = 6
@@ -1793,7 +1793,7 @@
 /area/map_template/ecship/engineering)
 "dv" = (
 /obj/structure/catwalk,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	icon_state = "intact";
 	dir = 4
@@ -1834,7 +1834,7 @@
 /area/map_template/ecship/engine)
 "dz" = (
 /obj/structure/catwalk,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/structure/cable{
 	icon_state = "0-2";
 	dir = 4;

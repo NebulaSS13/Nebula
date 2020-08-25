@@ -126,7 +126,7 @@
 /area/map_template/marooned)
 "au" = (
 /obj/structure/closet/crate/freezer,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "av" = (
@@ -137,7 +137,7 @@
 /area/map_template/marooned)
 "aw" = (
 /obj/machinery/space_heater,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "ax" = (
