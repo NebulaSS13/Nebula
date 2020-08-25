@@ -5,6 +5,7 @@
 	var/buckle_lying = -1 //bed-like behavior, forces mob.lying = buckle_lying if != -1
 	var/buckle_pixel_shift = @"{'x':0,'y':0,'z':0}" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 //require people to be handcuffed before being able to buckle. eg: pipes
+	var/buckle_require_same_tile = FALSE
 	var/buckle_sound
 	var/mob/living/buckled_mob = null
 
@@ -22,16 +23,15 @@
 	unbuckle_mob()
 	return ..()
 
-
 /obj/proc/buckle_mob(mob/living/M)
 	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
-		return 0
+		return FALSE
 	if(!istype(M) || (M.loc != loc) || M.buckled || M.pinned.len || (buckle_require_restraints && !M.restrained()))
-		return 0
+		return FALSE
 	if(ismob(src))
 		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
 		if(M != src && C.incapacitated())
-			return 0
+			return FALSE
 
 	M.buckled = src
 	M.facing_dir = null
@@ -44,7 +44,7 @@
 		playsound(src, buckle_sound, 20)
 
 	post_buckle_mob(M)
-	return 1
+	return TRUE
 
 /obj/proc/unbuckle_mob()
 	if(buckled_mob && buckled_mob.buckled == src)
@@ -67,19 +67,22 @@
 
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
 	if(!user.Adjacent(M) || istype(user, /mob/living/silicon/pai) || (M != user && user.incapacitated()))
-		return 0
+		return FALSE
 	if(M == buckled_mob)
-		return 0
+		return FALSE
 	if(istype(M, /mob/living/carbon/slime))
 		to_chat(user, "<span class='warning'>\The [M] is too squishy to buckle in.</span>")
-		return 0
+		return FALSE
 
 	add_fingerprint(user)
 	unbuckle_mob()
 
-	//can't buckle unless you share locs so try to move M to the obj.
+	//can't buckle unless you share locs so try to move M to the obj if buckle_require_same_tile turned off.
 	if(M.loc != src.loc)
-		step_towards(M, src)
+		if(!buckle_require_same_tile)
+			step_towards(M, src)
+		else
+			return FALSE
 
 	. = buckle_mob(M)
 	if(.)
@@ -110,5 +113,5 @@
 		add_fingerprint(user)
 	return M
 
-/obj/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
+/obj/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
 	. = ..() || (buckled_mob == mover)
