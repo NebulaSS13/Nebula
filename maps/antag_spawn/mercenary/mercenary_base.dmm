@@ -681,7 +681,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
 "bh" = (
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "merc_shuttle_pump"
@@ -1341,7 +1341,7 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "ci" = (
@@ -1448,7 +1448,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "co" = (
@@ -2412,7 +2412,7 @@
 	dir = 4;
 	id_tag = "merc_shuttle_pump_out_internal"
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/machinery/light/small{
 	dir = 1
 	},
