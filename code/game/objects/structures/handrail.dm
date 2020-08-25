@@ -7,6 +7,7 @@
 	anchored = TRUE
 	can_buckle = TRUE
 	buckle_sound = 'sound/effects/buckle.ogg'
+	buckle_allow_rotation = TRUE
 
 /obj/structure/handrail/attack_hand(mob/living/user)
 	if(can_buckle && !buckled_mob && istype(user))

@@ -1,6 +1,7 @@
 /obj
 	var/can_buckle = 0
 	var/buckle_movable = 0
+	var/buckle_allow_rotation = 0
 	var/buckle_dir = 0
 	var/buckle_lying = -1 //bed-like behavior, forces mob.lying = buckle_lying if != -1
 	var/buckle_pixel_shift = @"{'x':0,'y':0,'z':0}" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
@@ -35,7 +36,8 @@
 
 	M.buckled = src
 	M.facing_dir = null
-	M.set_dir(buckle_dir ? buckle_dir : dir)
+	if(!buckle_allow_rotation)
+		M.set_dir(buckle_dir ? buckle_dir : dir)
 	M.UpdateLyingBuckledAndVerbStatus()
 	M.update_floating()
 	buckled_mob = M
