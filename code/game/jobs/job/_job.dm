@@ -15,6 +15,7 @@
 	var/guestbanned = 0					  // If set to 1 this job will be unavalible to guests
 	var/must_fill = 0					  // If set to 1 this job will be have priority over other job preferences. Do not reccommend on jobs with more that one position.
 	var/not_random_selectable = 0		  // If set to 1 this job will not be selected when a player asks for a random job.
+	var/description						  // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
 
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#515151"       // Selection screen color
@@ -337,7 +338,7 @@
 	return english_list(res)
 
 /datum/job/proc/get_description_blurb()
-	return ""
+	return description
 
 /datum/job/proc/get_job_icon()
 	if(!SSjobs.job_icons[title])
