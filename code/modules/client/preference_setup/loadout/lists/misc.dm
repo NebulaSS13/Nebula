@@ -121,8 +121,7 @@
 	)
 
 /datum/gear/passport
-	display_name = "passports selection"
-	description = "A selection of passports."
+	display_name = "passport"
 	path = /obj/item/passport
 	custom_setup_proc = /obj/item/passport/proc/set_info
 
