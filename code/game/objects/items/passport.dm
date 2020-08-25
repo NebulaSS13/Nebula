@@ -14,12 +14,15 @@
 /obj/item/passport/proc/set_info(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
+
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_HOMEWORLD)
 	var/pob = culture ? culture.name : "Unset"
+
 	if(H.dna)
 		fingerprint = md5(H.dna.uni_identity)
 	else
 		fingerprint = "N/A"
+
 	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
 
 /obj/item/passport/attack_self(mob/user)
