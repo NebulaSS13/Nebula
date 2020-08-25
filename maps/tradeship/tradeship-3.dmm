@@ -146,7 +146,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
 "aH" = (
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "aI" = (
@@ -530,7 +530,7 @@
 /area/ship/trade/command/bridge_upper)
 "pC" = (
 /obj/item/wrench,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -615,7 +615,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
 "vi" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -856,7 +856,7 @@
 	icon_state = "warning";
 	dir = 4
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -979,7 +979,7 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -1209,7 +1209,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
 "Yq" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 1
 	},
@@ -1234,7 +1234,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/command/bridge_upper)
 "Zx" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
