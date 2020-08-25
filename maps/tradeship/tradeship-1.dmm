@@ -269,7 +269,7 @@
 /turf/simulated/wall/r_wall,
 /area/ship/trade/artifact_storage)
 "aR" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -309,7 +309,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -386,7 +386,7 @@
 	pixel_y = 1;
 	d2 = 2
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -431,7 +431,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},
@@ -2106,7 +2106,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science)
 "fX" = (
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/space,
 /area/space)
 "gb" = (
@@ -2521,7 +2521,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/artifact_storage)
 "ql" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 1
 	},
@@ -2567,7 +2567,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/maintenance/lower)
 "rP" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
 	},
@@ -3634,7 +3634,7 @@
 /turf/simulated/wall,
 /area/ship/trade/science)
 "XF" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 8
 	},

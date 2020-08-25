@@ -13,14 +13,14 @@
 	desc = "This is used to lie in, sleep in or strap on."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "bed"
-	anchored = 1
-	can_buckle = 1
+	anchored = TRUE
+	can_buckle = TRUE
 	buckle_dir = SOUTH
-	buckle_lying = 1
+	buckle_lying = TRUE
+	buckle_sound = 'sound/effects/buckle.ogg'
 	material = DEFAULT_FURNITURE_MATERIAL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
-	var/buckling_sound = 'sound/effects/buckle.ogg'
 
 /obj/structure/bed/update_material_name()
 	if(reinf_material)
@@ -32,7 +32,7 @@
 
 /obj/structure/bed/update_material_desc()
 	if(reinf_material)
-		desc = "[initial(desc)] It's made of [material.use_name] and covered with [reinf_material.use_name]." 
+		desc = "[initial(desc)] It's made of [material.use_name] and covered with [reinf_material.use_name]."
 	else
 		desc = "[initial(desc)] It's made of [material.use_name]."
 
@@ -103,11 +103,6 @@
 				if(do_after(user, 20, src))
 					if(user_buckle_mob(affecting, user))
 						qdel(W)
-
-/obj/structure/bed/buckle_mob(mob/living/M)
-	. = ..()
-	if(. && buckling_sound)
-		playsound(src, buckling_sound, 20)
 
 /obj/structure/bed/Move()
 	. = ..()
