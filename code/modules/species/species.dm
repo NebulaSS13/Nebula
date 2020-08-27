@@ -114,6 +114,9 @@
 	var/halloss_message = "slumps over, too weak to continue fighting..."
 	var/halloss_message_self = "The pain is too severe for you to keep going..."
 
+	var/sniff_message_3p = "sniffs the air."
+	var/sniff_message_1p = "You sniff the air."
+
 	var/limbs_are_nonsolid
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.

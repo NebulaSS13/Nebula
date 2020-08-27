@@ -8,6 +8,7 @@
 	var/list/random_icon_states
 	var/image/hud_overlay/hud_overlay
 	var/cleanable_scent
+	var/scent_type = /datum/extension/scent/custom
 	var/scent_intensity = /decl/scent_intensity/normal
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 2
@@ -41,7 +42,7 @@
 
 /obj/effect/decal/cleanable/proc/set_cleanable_scent()
 	if(cleanable_scent)
-		set_extension(src, /datum/extension/scent/custom, cleanable_scent, scent_intensity, scent_descriptor, scent_range)
+		set_extension(src, scent_type, cleanable_scent, scent_intensity, scent_descriptor, scent_range)
 
 /obj/effect/decal/cleanable/fluid_act(var/datum/reagents/fluid)
 	reagents?.trans_to(fluid, reagents.total_volume)
