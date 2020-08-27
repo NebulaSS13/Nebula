@@ -625,6 +625,12 @@
 		. = min(., STATUS_UPDATE)
 
 /obj/machinery/power/apc/OnTopic(mob/user, list/href_list, state)
+	if(href_list["reboot"] )
+		failure_timer = 0
+		update_icon()
+		update()
+		return TOPIC_REFRESH
+
 	if(href_list["toggleaccess"])
 		if(emagged || (stat & (BROKEN|MAINT)) || (hacker && !hacker.hacked_apcs_hidden))
 			to_chat(user, "The APC does not respond to the command.")
@@ -645,12 +651,6 @@
 				break
 		for(var/obj/item/stock_parts/access_lock/lock in locks)
 			lock.locked = !coverlocked
-		return TOPIC_REFRESH
-
-	if(href_list["reboot"] )
-		failure_timer = 0
-		update_icon()
-		update()
 		return TOPIC_REFRESH
 
 	if(href_list["breaker"])
