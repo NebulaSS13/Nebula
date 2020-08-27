@@ -103,6 +103,8 @@ var/list/outfits_decls_by_type_
 	//Start with uniform,suit,backpack for additional slots
 	if(uniform)
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform_str)
+		if(!H.get_equipped_item(slot_w_uniform_str))
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/harness, slot_w_uniform_str)
 	if(holster && H.w_uniform)
 		var/obj/item/clothing/accessory/equip_holster = new holster
 		H.w_uniform.attackby(H, equip_holster)
