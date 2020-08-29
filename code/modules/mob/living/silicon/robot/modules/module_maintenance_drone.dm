@@ -22,7 +22,7 @@
 		/obj/item/gripper/no_use/loader,
 		/obj/item/extinguisher/mini,
 		/obj/item/pipe_painter,
-		/obj/item/floor_painter,
+		/obj/item/paint_sprayer,
 		/obj/item/inducer/borg,
 		/obj/item/plunger,
 		/obj/item/inflatable_dispenser/robot,
