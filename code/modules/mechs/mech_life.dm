@@ -42,7 +42,7 @@
 
 	if(radiation)
 		radiation--
-	
+
 /mob/living/exosuit/get_cell()
 	RETURN_TYPE(/obj/item/cell)
 	return body ? body.cell : null
@@ -75,9 +75,14 @@
 	//A possibility is to hook up interface icons here. But this works pretty well in my experience
 		if(prob(5))
 			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))
-			
+
 
 /mob/living/exosuit/death(var/gibbed)
+	// Eject the pilot.
+	if(LAZYLEN(pilots))
+		hatch_locked = 0 // So they can get out.
+		for(var/pilot in pilots)
+			eject(pilot, silent=1)
 
 	// Salvage moves into the wreck unless we're exploding violently.
 	var/obj/wreck = new wreckage_path(get_turf(src), src, gibbed)
@@ -91,12 +96,6 @@
 			head = null
 		if(body.loc != src)
 			body = null
-
-	// Eject the pilot.
-	if(LAZYLEN(pilots))
-		hatch_locked = 0 // So they can get out.
-		for(var/pilot in pilots)
-			eject(pilot, silent=1)
 
 	// Handle the rest of things.
 	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
@@ -131,7 +130,7 @@
 	if(head)
 		sight = head.get_sight()
 		see_invisible = head.get_invisible()
-	if(body && (body.pilot_coverage < 100 || body.transparent_cabin))
+	if(body && (body.pilot_coverage < 100 || body.transparent_cabin) || !hatch_closed)
 		sight &= ~BLIND
 
 /mob/living/exosuit/additional_sight_flags()
@@ -139,4 +138,3 @@
 
 /mob/living/exosuit/additional_see_invisible()
 	return see_invisible
-
