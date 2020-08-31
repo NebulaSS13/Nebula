@@ -5012,7 +5012,7 @@
 "qO" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/computer/modular/preset/merchant,
+/obj/machinery/computer/modular/preset/merchant/tradeship,
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
