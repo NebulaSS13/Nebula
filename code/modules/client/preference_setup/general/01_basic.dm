@@ -64,6 +64,9 @@ datum/preferences
 
 			var/decl/cultural_info/check = SSlore.get_culture(pref.cultural_info[TAG_CULTURE])
 			var/new_name = check.sanitize_name(raw_name, pref.species)
+			if(filter_block_message(user, new_name))
+				return TOPIC_NOACTION
+
 			if(new_name)
 				pref.real_name = new_name
 				return TOPIC_REFRESH

@@ -164,10 +164,10 @@ proc/get_radio_key_from_channel(var/channel)
 			return say_dead(message)
 		return
 
-	var/prefix = copytext(message,1,2)
-	if(prefix == get_prefix_key(/decl/prefix/custom_emote))
+	if(findlasttextEx(message, get_prefix_key(/decl/prefix/custom_emote)) == 1)
 		return emote(copytext(message,2))
-	if(prefix == get_prefix_key(/decl/prefix/visible_emote))
+
+	if(findlasttextEx(message, get_prefix_key(/decl/prefix/visible_emote)) == 1)
 		return custom_emote(1, copytext(message,2))
 
 	//parse the radio code and consume it
@@ -323,6 +323,7 @@ proc/get_radio_key_from_channel(var/channel)
 	return 1
 
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/decl/language/language)
+	message = filter_modify_message(message)
 	for (var/mob/O in viewers(src, null))
 		O.hear_signlang(message, verb, language, src)
 	return 1

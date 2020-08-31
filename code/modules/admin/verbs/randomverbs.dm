@@ -592,6 +592,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!customname)
 		customname = "[command_name()] Update"
 
+	// Even admin must bow to the whim of the autolanguagefilter.
+	if(filter_block_message(mob, input) || filter_block_message(mob, customname))
+		return
+
 	//New message handling
 	post_comm_message(customname, replacetext(input, "\n", "<br/>"))
 
