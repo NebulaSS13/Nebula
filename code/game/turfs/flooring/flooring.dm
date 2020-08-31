@@ -29,6 +29,7 @@
 
 	var/descriptor = "tiles"
 	var/flags
+	var/remove_timer = 10
 	var/can_paint
 	var/can_engrave = TRUE
 

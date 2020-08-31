@@ -20,18 +20,26 @@
 	if(flooring)
 		if(isCrowbar(C) && user.a_intent != I_HURT)
 			if(broken || burnt)
+				if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src, 0.15))
+					return TRUE
+				if(!flooring)
+					return
 				to_chat(user, "<span class='notice'>You remove the broken [flooring.descriptor].</span>")
 				make_plating()
 			else if(flooring.flags & TURF_IS_FRAGILE)
+				if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src, 0.15))
+					return TRUE
+				if(!flooring)
+					return
 				to_chat(user, "<span class='danger'>You forcefully pry off the [flooring.descriptor], destroying them in the process.</span>")
 				make_plating()
 			else if(flooring.flags & TURF_REMOVE_CROWBAR)
-				if(user.do_skilled(0.5, SKILL_CONSTRUCTION, src, 10))
-					if(!flooring) return
-					to_chat(user, "<span class='notice'>You lever off the [flooring.descriptor].</span>")
-					make_plating(1)
-				else
-					return 0
+				if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
+					return TRUE
+				if(!flooring)
+					return
+				to_chat(user, "<span class='notice'>You lever off the [flooring.descriptor].</span>")
+				make_plating(1)
 			else
 				return
 			playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
@@ -39,11 +47,19 @@
 		else if(isScrewdriver(C) && (flooring.flags & TURF_REMOVE_SCREWDRIVER))
 			if(broken || burnt)
 				return
+			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
+				return TRUE
+			if(!flooring)
+				return
 			to_chat(user, "<span class='notice'>You unscrew and remove the [flooring.descriptor].</span>")
 			make_plating(1)
 			playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
 			return TRUE
 		else if(isWrench(C) && (flooring.flags & TURF_REMOVE_WRENCH))
+			if(!user.do_skilled(flooring.remove_timer, SKILL_CONSTRUCTION, src))
+				return TRUE
+			if(!flooring)
+				return
 			to_chat(user, "<span class='notice'>You unwrench and remove the [flooring.descriptor].</span>")
 			make_plating(1)
 			playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
