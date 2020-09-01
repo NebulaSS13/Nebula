@@ -1,0 +1,47 @@
+<div class='block'>
+    <div class='item'>
+        <div class='itemLabel'>
+            Power
+        </div>
+        <div class='itemContent'>
+        {{if data.on}}
+            {{:helper.link("On", null, { 'toggle_power' : 1 }, null, 'selected')}}
+        {{else}}
+            {{:helper.link("Off", null, { 'toggle_power' : 1 }, null, null)}}
+        {{/if}}
+        </div>
+        <div class='itemLabel'>
+            Input
+        </div>
+        <div class='itemContent'>
+        {{if data.can_configure == 1}}
+            {{:helper.link("Disable", null, { 'set_input' : 0 }, null, data.input_value == 0 ? 'selected' : null)}}
+            {{:helper.link("North",   null, { 'set_input' : 1 }, null, data.input_value == 1 ? 'selected' : null)}}
+            {{:helper.link("South",   null, { 'set_input' : 2 }, null, data.input_value == 2 ? 'selected' : null)}}
+            {{:helper.link("East",    null, { 'set_input' : 4 }, null, data.input_value == 4 ? 'selected' : null)}}
+            {{:helper.link("West",    null, { 'set_input' : 8 }, null, data.input_value == 8 ? 'selected' : null)}}
+        {{else}}
+            {{:data.input_label}}
+        {{/if}}
+        </div>
+        <div class='itemLabel'>
+            Output 
+        </div>
+        <div class='itemContent'>
+        {{if data.can_configure == 1}}
+            {{:helper.link("Disable", null, { 'set_output' : 0 }, null, data.output_value == 0 ? 'selected' : null)}}
+            {{:helper.link("North",   null, { 'set_output' : 1 }, null, data.output_value == 1 ? 'selected' : null)}}
+            {{:helper.link("South",   null, { 'set_output' : 2 }, null, data.output_value == 2 ? 'selected' : null)}}
+            {{:helper.link("East",    null, { 'set_output' : 4 }, null, data.output_value == 4 ? 'selected' : null)}}
+            {{:helper.link("West",    null, { 'set_output' : 8 }, null, data.output_value == 8 ? 'selected' : null)}}
+        {{else}}
+            {{:data.output_label}}
+        {{/if}}
+        </div>
+    </div>
+    {{if data.can_configure == 1}}
+        {{:helper.link("Hide", null, { 'toggle_configuration' : 1 }, null, null)}}
+    {{else}}
+        {{:helper.link("Configure", null, { 'toggle_configuration' : 1 }, null, null)}}
+    {{/if}}
+</div>

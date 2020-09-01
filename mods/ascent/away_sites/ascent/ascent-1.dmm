@@ -4432,11 +4432,6 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "uk" = (
-/obj/machinery/computer/mining{
-	color = "PURPLE";
-	name = "distributor control";
-	pixel_y = 32
-	},
 /obj/structure/railing/mapped{
 	icon_state = "railing0-1";
 	dir = 4
@@ -4631,7 +4626,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/hydroponics_port)
 "AI" = (
-/obj/machinery/mineral/stacking_machine{
+/obj/machinery/material_processing/stacker{
 	color = "PURPLE";
 	input_turf = 4;
 	name = "materials distributor";
@@ -4691,10 +4686,6 @@
 /area/ship/ascent/fore_starboard_jut)
 "EB" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/computer/mining{
-	color = "PURPLE";
-	name = "compression dynamo control"
-	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "ER" = (
@@ -4955,7 +4946,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "OZ" = (
-/obj/machinery/mineral/unloading_machine{
+/obj/machinery/material_processing/unloader{
 	color = "PURPLE";
 	input_turf = 2;
 	name = "mineral collector";
@@ -4964,7 +4955,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "Pv" = (
-/obj/machinery/mineral/processing_unit{
+/obj/machinery/material_processing/smeltery{
 	color = "PURPLE";
 	input_turf = 4;
 	name = "compression dynamo";

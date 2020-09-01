@@ -70,16 +70,18 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		var/list/replace_self_with
 		var/replace_message
 		var/replace_sound
-
+	
 		if(!isnull(R.chilling_point) && R.type != R.bypass_cooling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
 			replace_self_with = R.chilling_products
-			replace_message =   "\The [lowertext(R.name)] [R.chilling_message]"
-			replace_sound =     R.chilling_sound
+			if(R.chilling_message)
+				replace_message = "\The [lowertext(R.name)] [R.chilling_message]"
+			replace_sound = R.chilling_sound
 
 		else if(!isnull(R.heating_point) && R.type != R.bypass_heating_products_for_root_type && LAZYLEN(R.heating_products) && temperature >= R.heating_point)
 			replace_self_with = R.heating_products
-			replace_message =   "\The [lowertext(R.name)] [R.heating_message]"
-			replace_sound =     R.heating_sound
+			if(R.heating_message)
+				replace_message = "\The [lowertext(R.name)] [R.heating_message]"
+			replace_sound = R.heating_sound
 
 		else if(!isnull(R.dissolves_in) && LAZYLEN(R.dissolves_into))
 			for(var/other in reagent_volumes)
@@ -88,7 +90,8 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 				var/decl/material/solvent = decls_repository.get_decl(other)
 				if(solvent.solvent_power >= R.dissolves_in)
 					replace_self_with = R.dissolves_into
-					replace_message = "\The [lowertext(R.name)] [R.dissolve_message] \the [lowertext(solvent.name)]."
+					if(R.dissolve_message)
+						replace_message = "\The [lowertext(R.name)] [R.dissolve_message] \the [lowertext(solvent.name)]."
 					replace_sound = R.dissolve_sound
 					break
 

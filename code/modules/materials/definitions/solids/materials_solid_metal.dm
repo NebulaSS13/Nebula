@@ -10,11 +10,6 @@
 	hardness = MAT_VALUE_FLEXIBLE
 	wall_support_value = MAT_VALUE_HEAVY
 
-/decl/material/solid/metal/New()
-	if(!ore_smelts_to)
-		ore_smelts_to = type
-	..()
-
 /decl/material/solid/metal/uranium
 	name = "uranium"
 	lore_text = "A silvery-white metallic chemical element in the actinide series, weakly radioactive. Commonly used as fuel in fission reactors."
@@ -46,7 +41,6 @@
 	hardness = MAT_VALUE_FLEXIBLE + 5
 	integrity = 100
 	stack_origin_tech = "{'materials':4}"
-	ore_smelts_to = /decl/material/solid/metal/gold
 	ore_result_amount = 5
 	ore_name = "native gold"
 	ore_spread_chance = 10
@@ -77,7 +71,6 @@
 	color = "#d1e6e3"
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	stack_origin_tech = "{'materials':3}"
-	ore_smelts_to = /decl/material/solid/metal/silver
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "native silver"
@@ -101,9 +94,6 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
-	alloy_materials = list(/decl/material/solid/metal/iron = 1875, /decl/material/solid/mineral/graphite = 1875)
-	alloy_product = TRUE
-	ore_smelts_to = /decl/material/solid/metal/steel
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	value = 1.1
 	dissolves_into = list(
@@ -151,8 +141,6 @@
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
-	alloy_materials = null
-	alloy_product = FALSE
 	hidden_from_codex = TRUE
 	value = 0
 
@@ -182,8 +170,6 @@
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
-	alloy_materials = null
-	alloy_product = FALSE
 	hidden_from_codex = TRUE
 
 /decl/material/solid/metal/aluminium/holographic/get_recipes(reinf_mat)
@@ -204,9 +190,7 @@
 	hardness = MAT_VALUE_VERY_HARD
 	stack_origin_tech = "{'materials':2}"
 	hitsound = 'sound/weapons/smash.ogg'
-	alloy_materials = list(/decl/material/solid/metal/steel = 2500, /decl/material/solid/metal/platinum = 1250)
 	alloy_product = TRUE
-	ore_smelts_to = /decl/material/solid/metal/plasteel
 	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
 
@@ -232,8 +216,6 @@
 	color = "#d1e6e3"
 	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
-	alloy_materials = null
-	alloy_product = FALSE
 	value = 1.5
 
 /decl/material/solid/metal/plasteel/ocp
@@ -247,9 +229,7 @@
 	brute_armor = 4
 	burn_armor = 20
 	stack_origin_tech = "{'materials':3}"
-	alloy_materials = list(/decl/material/solid/metal/plasteel = 7500, /decl/material/solid/metal/osmium = 3750)
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
-	alloy_product = TRUE
 	value = 1.8
 
 /decl/material/solid/metal/osmium
@@ -259,7 +239,6 @@
 	color = "#9999ff"
 	stack_origin_tech = "{'materials':5}"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
-	ore_smelts_to = /decl/material/solid/metal/osmium
 	value = 1.3
 
 /decl/material/solid/metal/platinum
@@ -270,7 +249,6 @@
 	weight = MAT_VALUE_VERY_HEAVY
 	wall_support_value = MAT_VALUE_VERY_HEAVY
 	stack_origin_tech = "{'materials':2}"
-	ore_smelts_to = /decl/material/solid/metal/platinum
 	ore_compresses_to = /decl/material/solid/metal/osmium
 	ore_result_amount = 5
 	ore_spread_chance = 10
