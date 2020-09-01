@@ -510,7 +510,7 @@
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
 		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
 		for(var/gas_id in env_info.important_gasses)
-			var/decl/material/mat = decls_repository.get_decl(gas_id)	
+			var/decl/material/mat = decls_repository.get_decl(gas_id)
 			environment_data[++environment_data.len] = list(
 				"name" =  capitalize(mat.gas_name),
 				"value" = environment.gas[gas_id] / total * 100,
@@ -813,8 +813,9 @@ FIRE ALARM
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	to_chat(user, "The current alert level is [security_state.current_security_level.name].")
+	if(loc.z in GLOB.using_map.contact_levels)
+		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/proc/get_cached_overlay(key)
 	if(!LAZYACCESS(overlays_cache, key))

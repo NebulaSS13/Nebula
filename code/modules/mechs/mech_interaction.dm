@@ -21,7 +21,7 @@
 	if(body)
 		if(!body.MouseDrop(over_object))
 			return ..()
-	
+
 /mob/living/exosuit/RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
 	if(user && (user in pilots) && user.loc == src)
 		return OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
@@ -61,7 +61,7 @@
 	. = ..()
 	if(!hatch_closed)
 		return max(shared_living_nano_distance(src_object), .) //Either visible to mech(outside) or visible to user (inside)
-	
+
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
 	if(!user || incapacitated() || user.incapacitated())
@@ -74,18 +74,18 @@
 	if(modifiers["shift"])
 		user.examinate(A)
 		return
-		
+
 	if(modifiers["ctrl"] && selected_system == A)
 		selected_system.CtrlClick(user)
 		setClickCooldown(3)
-		return	
+		return
 
 	if(!(user in pilots) && user != src)
 		return
 
 	if(!canClick())
 		return
-	
+
 	// Are we facing the target?
 	if(A.loc != src && !(get_dir(src, A) & dir))
 		return
@@ -206,7 +206,7 @@
 		for(var/hardpoint in hardpoints)
 			if(hardpoint != selected_hardpoint)
 				continue
-			var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
+			var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 			if(istype(H))
 				H.icon_state = "hardpoint"
 				break
@@ -396,13 +396,19 @@
 				if(!body || body.cell)
 					to_chat(user, SPAN_WARNING("There is already a cell in there!"))
 					return
-				
+
 				if(user.unEquip(thing))
 					thing.forceMove(body)
 					body.cell = thing
 					to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))
 					playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 					visible_message(SPAN_NOTICE("\The [user] installs \the [body.cell] into \the [src]."))
+				return
+			else if(istype(thing, /obj/item/robotanalyzer))
+				to_chat(user, SPAN_NOTICE("Diagnostic Report for \the [src]:"))
+				for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
+					if(MC)
+						MC.return_diagnostics(user)
 				return
 	return ..()
 
