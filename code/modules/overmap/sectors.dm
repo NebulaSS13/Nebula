@@ -142,5 +142,7 @@
 			for(var/weakref/W in machine.viewers)
 				var/mob/M = W.resolve()
 				if(istype(M) && M.client)
+					M.client.default_pixel_x = pixel_x
+					M.client.default_pixel_y = pixel_y
 					M.client.pixel_x = pixel_x
 					M.client.pixel_y = pixel_y

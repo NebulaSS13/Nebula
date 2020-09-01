@@ -9,6 +9,9 @@
 	var/adminhelped = 0
 	var/staffwarn = null
 
+	var/default_pixel_x = 0
+	var/default_pixel_y = 0
+
 	// * Other things *
 	var/datum/preferences/prefs = null
 

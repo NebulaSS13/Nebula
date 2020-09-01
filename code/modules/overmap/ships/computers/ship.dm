@@ -78,6 +78,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(user.client)
 		user.client.view = world.view
 		user.client.OnResize()
+		user.reset_view()
 	if(linked)
 		for(var/obj/machinery/computer/ship/sensors/sensor in linked.consoles)
 			sensor.hide_contacts(user)
