@@ -120,6 +120,11 @@
 		"spider plush" = /obj/item/toy/plushie/spider
 	)
 
+/datum/gear/passport
+	display_name = "passport"
+	path = /obj/item/passport
+	custom_setup_proc = /obj/item/passport/proc/set_info
+
 /datum/gear/mirror
 	display_name = "handheld mirror"
 	sort_category = "Cosmetics"

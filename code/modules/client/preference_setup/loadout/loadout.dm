@@ -351,6 +351,7 @@ var/list/gear_datums = list()
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
 	var/flags              //Special tweaks in new
+	var/custom_setup_proc  //Special tweak in New
 	var/category
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
@@ -369,6 +370,8 @@ var/list/gear_datums = list()
 	if(flags & GEAR_HAS_CUSTOM_SELECTION)
 		gear_tweaks += gear_tweak_free_name
 		gear_tweaks += gear_tweak_free_desc
+	if(custom_setup_proc)
+		gear_tweaks += new/datum/gear_tweak/custom_setup(custom_setup_proc)
 	var/options = get_gear_tweak_options()
 	for(var/tweak in options)
 		var/optargs = options[tweak]
