@@ -14,6 +14,7 @@
 	var/signal_strength = NETWORK_CONNECTION_WIRELESS	// How good the wireless capabilities are of this card.
 	var/interact_sounds = list("keyboard", "keystroke")
 	var/interact_sound_volume = 40
+	var/global/legacy_compatibility_mode = TRUE     // Makes legacy access on ids play well with mapped devices with network locks. Override if your server is fully using network-enabled ids or has no mapped access.
 
 /obj/item/stock_parts/network_lock/Initialize()
 	. = ..()
@@ -44,6 +45,8 @@
 		if(!istype(grant))
 			continue // couldn't find.
 		resulting_grants |= uppertext("[D.network_id].[grant_data]")
+		if(legacy_compatibility_mode)
+			resulting_grants |= grant_data // This lets just grant_data, which is the access string for mapped machines, be used as an alternative.
 
 	if(!resulting_grants.len)
 		return
