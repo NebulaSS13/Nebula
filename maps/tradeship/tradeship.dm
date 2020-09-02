@@ -27,6 +27,7 @@
 	#include "tradeship_jobs.dm"
 	#include "tradeship_loadouts.dm"
 	#include "tradeship_overmap.dm"
+	#include "tradeship_overrides.dm"
 	#include "tradeship_shuttles.dm"
 	#include "tradeship_spawnpoints.dm"
 	#include "tradeship_unit_testing.dm"
