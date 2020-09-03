@@ -22,7 +22,7 @@
 
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	cut_overlays()
-	if(powered() && !(stat & BROKEN))
+	if(!(stat & (NOPOWER | BROKEN)))
 		var/image/I = image(icon, "nozzle_idle")
 		I.appearance_flags |= RESET_COLOR
 		I.layer = ABOVE_LIGHTING_LAYER
@@ -39,10 +39,6 @@
 	. = ..()
 	if(stat & NOPOWER)
 		update_use_power(POWER_USE_OFF)
-
-/obj/machinery/atmospherics/unary/engine/update_use_power()
-	. = ..()
-	update_icon()
 
 /obj/machinery/atmospherics/unary/engine/RefreshParts()
 	..()
