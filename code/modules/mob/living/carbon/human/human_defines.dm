@@ -95,6 +95,6 @@
 
 	var/list/descriptors
 
-	var/last_smelt = 0
+	var/list/smell_cooldown
 
 	ai = /datum/ai/human

@@ -53,6 +53,7 @@
 /mob/living/carbon/human/Destroy()
 	GLOB.human_mob_list -= src
 	worn_underwear = null
+	LAZYCLEARLIST(smell_cooldown)
 	for(var/organ in organs)
 		qdel(organ)
 	return ..()
