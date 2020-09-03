@@ -35,13 +35,6 @@
 				else
 					production_strings += "Mixing [english_list(reactant_values)], producing [reaction.result_amount]u [lowertext(initial(result.name))]."
 
-			if(LAZYLEN(mat.alloy_materials))
-				var/parts = list()
-				for(var/alloy_part in mat.alloy_materials)
-					var/decl/material/part = SSmaterials.materials_by_name[alloy_part]
-					parts += "[mat.alloy_materials[alloy_part]]u [part.name]"
-				production_strings += "Alloying [english_list(parts)]."
-
 			if(length(production_strings))
 				material_info += "<br>This substance can be produced by:<ul>"
 				for(var/prodstr in production_strings)
@@ -80,9 +73,19 @@
 			if(mat.ore_compresses_to && mat.ore_compresses_to != mat.type)
 				var/decl/material/M = decls_repository.get_decl(mat.ore_compresses_to)
 				material_info += "<li>It can be compressed into [M.solid_name].</li>"
-			if(mat.ore_smelts_to && mat.ore_smelts_to != mat.type)
-				var/decl/material/M = decls_repository.get_decl(mat.ore_smelts_to)
-				material_info += "<li>It can be smelted into [M.solid_name].</li>"
+			if(length(mat.heating_products))
+				var/list/heat_prod = list()
+				for(var/mtype in mat.heating_products)
+					var/decl/material/M = decls_repository.get_decl(mtype)
+					heat_prod += "[mat.heating_products[mtype] * 100]% [M.solid_name]"
+				material_info += "<li>It can be smelted into [english_list(heat_prod)] at a temperature of [mat.heating_point] Kelvin.</li>"
+			if(length(mat.chilling_products))
+				var/list/chill_prod = list()
+				for(var/mtype in mat.chilling_products)
+					var/decl/material/M = decls_repository.get_decl(mtype)
+					chill_prod += "[mat.chilling_products[mtype] * 100]% [M.solid_name]"
+				material_info += "<li>It can be cooled into [english_list(chill_prod)] at a temperature of [mat.chilling_point] Kelvin.</li>"
+
 			material_info += "</ul>"
 
 			material_info += "As a gas or vapor, it has the following properties:<ul>"

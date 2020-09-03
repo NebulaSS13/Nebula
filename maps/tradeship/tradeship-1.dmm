@@ -115,21 +115,8 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
 "ax" = (
-/obj/structure/table/standard,
-/obj/item/flashlight/lamp,
-/obj/item/paper_bin,
-/obj/item/stamp/cargo,
-/obj/item/stamp/denied,
-/obj/random/clipboard,
-/obj/item/radio,
-/obj/item/radio/intercom{
-	dir = 8;
-	pixel_x = 22
-	},
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 6
-	},
+/obj/effect/floor_decal/corner/beige,
+/obj/machinery/mining/drill,
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "ay" = (
@@ -435,7 +422,11 @@
 	icon_state = "handrail";
 	dir = 8
 	},
-/obj/structure/ore_box,
+/obj/item/storage/firstaid/regular,
+/obj/structure/closet/crate,
+/obj/item/stack/tile/carpet/fifty,
+/obj/item/bodybag,
+/obj/random/soap,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "bi" = (
@@ -657,12 +648,6 @@
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/structure/closet/crate,
-/obj/random/soap,
-/obj/random/soap,
-/obj/item/bodybag,
-/obj/item/stack/tile/carpet/fifty,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
 	dir = 9
@@ -670,9 +655,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "bK" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/mech_wreckage/powerloader,
-/obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "bL" = (
@@ -690,16 +672,12 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "bN" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable{
 	icon_state = "6-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/closet/coffin,
-/obj/random/drinkbottle,
-/obj/item/contraband/poster,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "bP" = (
@@ -747,37 +725,26 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/light{
-	icon_state = "bulb1";
-	dir = 8
-	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/light/small{
 	icon_state = "bulb_map";
 	dir = 8
 	},
-/obj/item/storage/firstaid/regular,
 /obj/structure/sign/warning/fall{
 	pixel_w = -31
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "bU" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/industrial/warning,
-/obj/structure/closet/crate,
-/obj/item/fossil/skull,
-/obj/item/fossil/animal,
-/obj/item/fossil/animal,
-/obj/item/fossil,
-/obj/item/ore/strangerock,
 /obj/structure/railing/mapped,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "bV" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/cargo/lower)
 "bW" = (
@@ -796,7 +763,6 @@
 	icon_state = "warningcorner";
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable{
 	icon_state = "2-9"
 	},
@@ -2134,6 +2100,13 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/ship/trade/maintenance/eva)
+"gh" = (
+/obj/machinery/material_processing/stacker{
+	input_turf = 1;
+	output_turf = 8
+	},
+/turf/simulated/floor/plating,
+/area/ship/trade/cargo/lower)
 "gX" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -2143,9 +2116,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/floodlight,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
@@ -2160,8 +2131,11 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/eva)
 "he" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/firedoor,
+/obj/machinery/conveyor{
+	dir = 4;
+	icon_state = "conveyor0";
+	id_tag = "con"
+	},
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
 "hf" = (
@@ -2210,9 +2184,10 @@
 /area/ship/trade/cargo/lower)
 "ib" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/structure/railing/mapped,
+/obj/structure/closet/coffin,
+/obj/random/drinkbottle,
+/obj/item/contraband/poster,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "it" = (
@@ -2271,29 +2246,30 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_port)
-"js" = (
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 9
-	},
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/tiled,
-/area/ship/trade/cargo/lower)
 "jD" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/crew/dorms1)
-"jM" = (
-/obj/machinery/light{
-	icon_state = "bulb1";
-	dir = 8
+"jV" = (
+/obj/item/radio/intercom{
+	dir = 8;
+	pixel_x = 22
 	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/mineral/unloading_machine{
-	input_turf = 2;
-	output_turf = 1
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 10
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 6
+	},
+/obj/structure/table/standard,
+/obj/item/radio,
+/obj/random/clipboard,
+/obj/item/stamp/denied,
+/obj/item/stamp/cargo,
+/obj/item/paper_bin,
+/turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "kb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -2353,11 +2329,16 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
 "lw" = (
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
+	dir = 1
+	},
 /obj/machinery/conveyor_switch{
 	id_tag = "con";
 	pixel_x = 0;
 	pixel_y = 0
 	},
+/obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
@@ -2435,6 +2416,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
+"nf" = (
+/obj/structure/mech_wreckage/powerloader,
+/obj/machinery/mech_recharger,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled,
+/area/ship/trade/cargo/lower)
 "ni" = (
 /obj/structure/table/rack,
 /obj/item/stock_parts/circuitboard/pacman/super/potato,
@@ -2466,6 +2453,25 @@
 /obj/machinery/artifact_scanpad,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/artifact_storage)
+"od" = (
+/obj/structure/ore_box,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 6
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/cargo/lower)
+"oC" = (
+/obj/machinery/conveyor{
+	dir = 2;
+	icon_state = "conveyor0";
+	id_tag = "con"
+	},
+/turf/simulated/floor/plating,
+/area/ship/trade/cargo/lower)
 "pn" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -2627,13 +2633,10 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/drunk_tank)
 "tz" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/conveyor{
-	dir = 2;
-	icon_state = "conveyor0";
-	id_tag = "con"
+/obj/machinery/material_processing/smeltery{
+	input_turf = 8;
+	output_turf = 4
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
 "tE" = (
@@ -2665,6 +2668,15 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall,
 /area/ship/trade/maintenance/eva)
+"ui" = (
+/obj/structure/closet/crate,
+/obj/item/ore/strangerock,
+/obj/item/fossil,
+/obj/item/fossil/animal,
+/obj/item/fossil/animal,
+/obj/item/fossil/skull,
+/turf/simulated/floor/tiled,
+/area/ship/trade/cargo/lower)
 "uj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2676,6 +2688,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
+"un" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/fabricator/industrial,
+/obj/item/stack/material/osmium/ten,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled,
+/area/ship/trade/cargo/lower)
 "uo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2821,11 +2840,6 @@
 /obj/effect/shuttle_landmark/below_deck_starboardastern,
 /turf/space,
 /area/space)
-"xj" = (
-/obj/structure/lattice,
-/obj/effect/paint/brown,
-/turf/simulated/wall/r_wall/hull,
-/area/ship/trade/cargo/lower)
 "yb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/corner/beige{
@@ -2887,6 +2901,17 @@
 /obj/machinery/door/airlock/hatch/autoname/science,
 /turf/simulated/floor/plating,
 /area/ship/trade/artifact_storage)
+"zC" = (
+/obj/machinery/conveyor{
+	backwards = 8;
+	dir = 9;
+	forwards = 2;
+	icon_state = "conveyor1";
+	id_tag = "con";
+	movedir = 6
+	},
+/turf/simulated/floor/plating,
+/area/ship/trade/cargo/lower)
 "Ab" = (
 /obj/machinery/door/airlock/hatch/autoname/general,
 /obj/machinery/door/firedoor,
@@ -2914,15 +2939,15 @@
 /area/ship/trade/crew/dorms1)
 "Bq" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/conveyor{
-	backwards = 8;
-	dir = 9;
-	forwards = 2;
-	icon_state = "conveyor1";
-	id_tag = "con";
-	movedir = 6
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 5
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/light{
+	icon_state = "tube_map";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "BO" = (
 /obj/structure/bed/padded,
@@ -2941,22 +2966,22 @@
 /turf/simulated/wall,
 /area/ship/trade/drunk_tank)
 "Cr" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/loading{
+	icon_state = "loadingarea";
+	dir = 4
+	},
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
-	dir = 9
+	dir = 8
 	},
-/obj/machinery/fabricator/industrial,
-/obj/item/stack/material/osmium/ten,
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "CN" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/loading{
-	icon_state = "loadingarea";
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
 	dir = 1
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "Db" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -3080,10 +3105,6 @@
 /area/ship/trade/cargo/lower)
 "HH" = (
 /obj/structure/ladder,
-/obj/effect/floor_decal/corner/beige{
-	icon_state = "corner_white";
-	dir = 6
-	},
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "HY" = (
@@ -3120,16 +3141,13 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "IU" = (
-/obj/machinery/conveyor{
-	dir = 4;
-	icon_state = "conveyor0";
-	id_tag = "con"
+/obj/structure/window/reinforced,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 5
 	},
-/obj/machinery/mineral/processing_unit{
-	input_turf = 1;
-	output_turf = 2
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "Jb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3223,6 +3241,17 @@
 /obj/item/stool/padded,
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
+"LA" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/ship/trade/cargo/lower)
 "LE" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -3231,6 +3260,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
+"LN" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 5
+	},
+/turf/simulated/floor/tiled,
+/area/ship/trade/cargo/lower)
 "Mb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3276,13 +3313,6 @@
 /obj/machinery/portable_atmospherics/hydroponics,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science)
-"NM" = (
-/obj/effect/floor_decal/industrial/loading{
-	icon_state = "loadingarea";
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/ship/trade/cargo/lower)
 "Ob" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -3429,9 +3459,8 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
 "Rl" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/mineral/stacking_machine,
-/turf/simulated/floor/tiled/steel_grid,
+/obj/machinery/material_processing/compressor,
+/turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
 "Rs" = (
 /obj/machinery/button/blast_door{
@@ -3460,12 +3489,12 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/drunk_tank)
 "Sc" = (
-/obj/machinery/conveyor{
-	dir = 10;
-	icon_state = "conveyor1";
-	id_tag = "con"
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/corner/beige{
+	icon_state = "corner_white";
+	dir = 5
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "Sm" = (
 /obj/effect/floor_decal/corner/beige{
@@ -3490,10 +3519,9 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/cargo/lower)
 "Sx" = (
-/obj/machinery/conveyor{
-	dir = 1;
-	icon_state = "conveyor0";
-	id_tag = "con"
+/obj/machinery/material_processing/unloader{
+	input_turf = 8;
+	output_turf = 4
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/cargo/lower)
@@ -3624,11 +3652,6 @@
 	},
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/maintenance/techstorage)
-"WT" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/steel_grid,
-/area/ship/trade/cargo/lower)
 "WZ" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall,
@@ -3681,7 +3704,8 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/random/accessory,
 /obj/random/accessory,
-/obj/machinery/mining/drill,
+/obj/machinery/floodlight,
+/obj/random/soap,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "Zs" = (
@@ -6527,12 +6551,12 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
 ql
-sY
-sY
+pr
+pr
+al
+al
+al
 ah
 ah
 ah
@@ -6610,13 +6634,13 @@ aa
 aa
 aa
 aa
-pr
-pr
-al
-al
-al
-al
-al
+ad
+aj
+au
+aG
+aF
+nf
+un
 ao
 ao
 Ab
@@ -6692,12 +6716,12 @@ aa
 aa
 aa
 aa
-ad
-aj
-au
-aG
-aF
-js
+ae
+ak
+av
+aH
+aS
+du
 Cr
 aR
 bd
@@ -6774,13 +6798,13 @@ aa
 aa
 aa
 aa
-ae
-ak
-av
-aH
-aS
+pr
+lE
+al
+al
+aT
+aU
 du
-NM
 Js
 gb
 bu
@@ -6856,11 +6880,11 @@ aa
 aa
 aa
 aa
-pr
-lE
-al
-al
-aT
+LA
+LN
+du
+du
+du
 aU
 du
 du
@@ -6938,14 +6962,14 @@ aa
 aa
 aa
 aa
-xj
+LA
 Sc
 Sx
-jM
+Sx
 CN
 rB
 du
-aU
+ui
 bf
 bw
 bM
@@ -7020,10 +7044,10 @@ aa
 aa
 aa
 aa
-xj
+pr
 IU
 he
-xj
+he
 lw
 aU
 Lx
@@ -7102,11 +7126,11 @@ aa
 aa
 aa
 aa
-xj
+pr
 Bq
 tz
 Rl
-WT
+aU
 HH
 ax
 aV
@@ -7185,12 +7209,12 @@ aa
 aa
 aa
 pr
-pr
-pr
-pr
-ao
-al
-al
+Sc
+zC
+oC
+gh
+od
+jV
 ao
 ao
 Ab
@@ -7265,11 +7289,11 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
 ql
-gX
+pr
+pr
+pr
+pr
 gX
 ZJ
 ZJ

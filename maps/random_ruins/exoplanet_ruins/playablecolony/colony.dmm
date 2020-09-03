@@ -5918,7 +5918,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "ko" = (
-/obj/machinery/mineral/processing_unit{
+/obj/machinery/material_processing/smeltery{
 	input_turf = 2;
 	output_turf = 1
 	},
@@ -6335,7 +6335,6 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony/airlock)
 "kZ" = (
-/obj/machinery/computer/mining,
 /obj/structure/table/steel_reinforced,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/railing/mapped{
@@ -6581,10 +6580,8 @@
 "lz" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	
+	icon_state = "railing0-1"
 	},
-/obj/machinery/computer/mining,
 /obj/structure/table/steel_reinforced,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -8075,7 +8072,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
 "nT" = (
-/obj/machinery/mineral/stacking_machine{
+/obj/machinery/material_processing/stacker{
 	input_turf = 8;
 	output_turf = 4
 	},
@@ -8122,7 +8119,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "nX" = (
-/obj/machinery/mineral/unloading_machine{
+/obj/machinery/material_processing/unloader{
 	input_turf = 2;
 	output_turf = 1
 	},

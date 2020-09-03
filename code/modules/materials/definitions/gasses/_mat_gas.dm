@@ -6,8 +6,6 @@
 	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
-	alloy_materials = null
-	alloy_product = FALSE
 	value = 0
 	burn_product = /decl/material/gas/carbon_dioxide
 	gas_specific_heat = 20    // J/(mol*K)

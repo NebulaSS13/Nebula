@@ -119,11 +119,11 @@
 /datum/fabricator_recipe/imprinter/circuit/autobinder
 	path = /obj/item/stock_parts/circuitboard/autolathe/book
 
-/datum/fabricator_recipe/imprinter/circuit/mining_console
-	path = /obj/item/stock_parts/circuitboard/mineral_processing
-
 /datum/fabricator_recipe/imprinter/circuit/mining_processor
 	path = /obj/item/stock_parts/circuitboard/mining_processor
+
+/datum/fabricator_recipe/imprinter/circuit/mining_compressor
+	path = /obj/item/stock_parts/circuitboard/mining_compressor
 
 /datum/fabricator_recipe/imprinter/circuit/mining_unloader
 	path = /obj/item/stock_parts/circuitboard/mining_unloader

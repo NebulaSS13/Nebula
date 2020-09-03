@@ -5,7 +5,8 @@
 	stack_type = /obj/item/stack/material/mhydrogen
 	color = "#e6c5de"
 	stack_origin_tech = "{'materials':6,'powerstorage':6,'magnets':5}"
-	ore_smelts_to = /decl/material/gas/hydrogen/tritium
+	heating_products = list(/decl/material/gas/hydrogen/tritium = 1)
+	heating_point = 990
 	ore_name = "raw hydrogen"
 	ore_scan_icon = "mineral_rare"
 	ore_icon_overlay = "gems"

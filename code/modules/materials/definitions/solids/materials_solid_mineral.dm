@@ -1,7 +1,13 @@
 /decl/material/solid/mineral/pitchblende
 	name = "pitchblende"
 	color = "#917d1a"
-	ore_smelts_to = /decl/material/solid/metal/uranium
+	heating_products = list(
+		/decl/material/solid/metal/uranium = 0.8,
+		/decl/material/solid/slag = 0.2
+	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "pitchblende"
@@ -172,7 +178,13 @@
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
 	color = "#d8ad97"
-	ore_smelts_to = /decl/material/solid/metal/aluminium
+	heating_products = list(
+		/decl/material/solid/metal/aluminium = 0.8,
+		/decl/material/solid/slag = 0.2
+	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	value = 0.8
 	sparse_material_weight = 3
 	rich_material_weight = 1
@@ -184,7 +196,10 @@
 	name = "sand"
 	stack_type = null
 	color = "#e2dbb5"
-	ore_smelts_to = /decl/material/solid/glass
+	heating_products = list(/decl/material/solid/glass = 1)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_compresses_to = /decl/material/solid/stone/sandstone
 	ore_name = "sand"
 	ore_icon_overlay = "dust"
@@ -202,7 +217,10 @@
 	color = COLOR_OFF_WHITE
 	ore_name = "clay"
 	ore_icon_overlay = "lump"
-	ore_smelts_to = /decl/material/solid/stone/ceramic
+	heating_products = list(/decl/material/solid/stone/ceramic = 1)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_compresses_to = null
 	ore_icon_overlay = "dust"
 	value = 0.8
@@ -211,7 +229,13 @@
 	name = "hematite"
 	stack_type = null
 	color = "#aa6666"
-	ore_smelts_to = /decl/material/solid/metal/iron
+	heating_products = list(
+		/decl/material/solid/metal/iron = 0.8,
+		/decl/material/solid/slag = 0.2
+	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_result_amount = 5
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
@@ -227,7 +251,13 @@
 	name = "rutile"
 	stack_type = null
 	color = "#d8ad97"
-	ore_smelts_to = /decl/material/solid/metal/plasteel/titanium
+	heating_products = list(
+		/decl/material/solid/metal/plasteel/titanium = 0.8,
+		/decl/material/solid/slag = 0.2
+	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_result_amount = 5
 	ore_spread_chance = 15
 	ore_scan_icon = "mineral_uncommon"
@@ -241,7 +271,14 @@
 
 /decl/material/solid/mineral/tetrahedrite
 	name = "tetrahedrite"
-	ore_smelts_to = /decl/material/solid/metal/copper
+	heating_products = list(
+		/decl/material/solid/metal/copper = 0.4,
+		/decl/material/solid/metal/silver = 0.4,
+		/decl/material/solid/slag = 0.2
+	)
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null
 	ore_result_amount = 5
 	ore_spread_chance = 10
 	ore_name = "tetrahedrite"

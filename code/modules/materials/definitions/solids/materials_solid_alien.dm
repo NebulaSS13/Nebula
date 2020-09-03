@@ -21,7 +21,7 @@
 	hardness = rand(15,100)
 	reflectiveness = rand(15,100)
 	integrity = rand(200,400)
-	melting_point = rand(400,10000)
+	melting_point = rand(400,11000)
 	..()
 
 /decl/material/solid/metal/aliumium/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
