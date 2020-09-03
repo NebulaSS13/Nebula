@@ -343,8 +343,9 @@
 	data["fuel_capacity"] = round(max_sheets * 1000, 0.1)
 	data["fuel_usage"] = active ? round((power_output / time_per_sheet) * 1000) : 0
 	data["fuel_type"] = sheet_name
-
-
+	data["uses_coolant"] = !!reagents
+	data["coolant_stored"] = reagents?.total_volume
+	data["coolant_capacity"] = reagents?.maximum_volume
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
