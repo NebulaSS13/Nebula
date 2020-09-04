@@ -25,7 +25,7 @@
 	var/turf/T = get_step(holder, exhaust_dir)
 	if(T)
 		T.assume_air(removed)
-		new/obj/effect/engine_exhaust(T, exhaust_dir, removed.check_combustibility() && removed.temperature >= FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
+		new/obj/effect/engine_exhaust(T, E.dir, removed.check_combustibility() && removed.temperature >= FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 
 /datum/extension/ship_engine/gas/proc/get_propellant(var/sample_only = TRUE, var/partial = 1)
 	var/obj/machinery/atmospherics/unary/engine/E = holder
@@ -111,5 +111,5 @@
 
 	var/exit_pressure = get_nozzle_exit_pressure()
 	.+= exit_pressure ? "Nozzle exit pressure: [exit_pressure] kPA" : "Nozzle exit pressure: VACUUM"
-	
+
 	return jointext(.,"<br>")

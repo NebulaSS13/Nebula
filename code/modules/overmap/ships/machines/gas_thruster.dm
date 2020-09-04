@@ -20,6 +20,14 @@
 	update_nearby_tiles(need_rebuild=1)
 	set_extension(src, engine_extension, "propellant thruster")
 
+/obj/machinery/atmospherics/unary/engine/on_update_icon()
+	cut_overlays()
+	if(!(stat & (NOPOWER | BROKEN)))
+		var/image/I = image(icon, "nozzle_idle")
+		I.appearance_flags |= RESET_COLOR
+		I.layer = ABOVE_LIGHTING_LAYER
+		add_overlay(I)
+
 /obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
 
@@ -49,10 +57,10 @@
 //Exhaust effect
 /obj/effect/engine_exhaust
 	name = "engine exhaust"
-	icon = 'icons/effects/effects.dmi'
-	icon_state = "smoke"
-	light_color = "#ed9200"
-	anchored = 1
+	icon = 'icons/obj/ship_engine.dmi'
+	icon_state = "nozzle_burn"
+	light_color = "#00a2ff"
+	anchored = TRUE
 
 /obj/effect/engine_exhaust/Initialize(mapload, var/ndir, var/flame)
 	. = ..(mapload)
