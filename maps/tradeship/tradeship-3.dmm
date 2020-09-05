@@ -282,10 +282,6 @@
 	},
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/comms)
-"eX" = (
-/turf/space,
-/turf/simulated/open,
-/area/space)
 "fi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -3229,8 +3225,8 @@ aa
 aa
 aa
 aa
-eX
-eX
+aa
+aa
 ax
 ax
 ax
@@ -3310,8 +3306,8 @@ aa
 aa
 aa
 aa
-eX
-eX
+aa
+aa
 ax
 ax
 ax
@@ -3392,7 +3388,7 @@ aa
 aa
 aa
 aa
-eX
+aa
 ax
 ax
 ax
@@ -5605,8 +5601,8 @@ aa
 aa
 aa
 aa
-eX
-eX
+aa
+aa
 ax
 ax
 ax
@@ -5688,7 +5684,7 @@ aa
 aa
 aa
 aa
-eX
+aa
 ax
 ax
 ax
@@ -5770,8 +5766,8 @@ aa
 aa
 aa
 aa
-eX
-eX
+aa
+aa
 ax
 ax
 ax
