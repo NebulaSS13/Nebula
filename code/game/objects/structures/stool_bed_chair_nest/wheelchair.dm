@@ -2,9 +2,9 @@
 	name = "wheelchair"
 	desc = "Now we're getting somewhere."
 	icon_state = "wheelchair"
-	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(2), /datum/movement_handler/move_relay_self)
 	anchored = FALSE
 	buckle_movable = TRUE
+	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(5), /datum/movement_handler/move_relay_self)
 	movable_flags = MOVABLE_FLAG_NONDENSE_COLLISION
 
 	var/item_form_type = /obj/item/wheelchair_kit
