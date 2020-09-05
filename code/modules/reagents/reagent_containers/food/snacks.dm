@@ -20,7 +20,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/chems/food/snacks/Initialize()
-	.=..()
+	. = ..()
 	if(nutriment_amt)
 		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
 
@@ -250,7 +250,7 @@
 	nutriment_desc = list("apples" = 3,"salad" = 4, "quintessence" = 2)
 	bitesize = 3
 /obj/item/chems/food/snacks/aesirsalad/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/regenerator, 8)
 
 /obj/item/chems/food/snacks/egg
@@ -262,7 +262,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 
 /obj/item/chems/food/snacks/egg/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein/egg, 3)
 
 /obj/item/chems/food/snacks/egg/afterattack(obj/O, mob/user, proximity)
@@ -322,7 +322,7 @@
 	icon_state = "egg-yellow"
 
 /obj/item/chems/food/snacks/egg/lizard/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein/egg, 5)
 	if(prob(30))	//extra nutriment
 		reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
@@ -335,7 +335,7 @@
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
 /obj/item/chems/food/snacks/friedegg/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
@@ -347,7 +347,7 @@
 	icon_state = "egg"
 	filling_color = "#ffffff"
 /obj/item/chems/food/snacks/boiledegg/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/snacks/organ
@@ -359,7 +359,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 3
 /obj/item/chems/food/snacks/organ/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, rand(3,5))
 	reagents.add_reagent(/decl/material/liquid/bromide, rand(1,3))
 
@@ -375,7 +375,7 @@
 	bitesize = 3
 
 /obj/item/chems/food/snacks/tofu/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/plant_protein, 6)
 
 /obj/item/chems/food/snacks/tofurkey
@@ -406,7 +406,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
 /obj/item/chems/food/snacks/fishfingers/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/hugemushroomslice
@@ -419,7 +419,7 @@
 	nutriment_desc = list("raw" = 2, "mushroom" = 2)
 	bitesize = 6
 /obj/item/chems/food/snacks/hugemushroomslice/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)
 
 /obj/item/chems/food/snacks/tomatomeat
@@ -440,7 +440,7 @@
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
 /obj/item/chems/food/snacks/bearmeat/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 12)
 	reagents.add_reagent(/decl/material/liquid/amphetamines, 5)
 
@@ -470,7 +470,7 @@
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 6
 /obj/item/chems/food/snacks/xenomeat/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 	reagents.add_reagent(/decl/material/liquid/acid/polyacid,6)
 
@@ -482,7 +482,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 /obj/item/chems/food/snacks/meatball/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/snacks/sausage
@@ -494,7 +494,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 /obj/item/chems/food/snacks/sausage/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/snacks/fatsausage
@@ -505,7 +505,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 /obj/item/chems/food/snacks/fatsausage/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/snacks/donkpocket/sinpocket
@@ -513,8 +513,8 @@
 	desc = "The food of choice for the veteran. Do <b>NOT</b> overconsume."
 	filling_color = "#6d6d00"
 	heated_reagents = list(
-		/decl/material/liquid/regenerator = 5, 
-		/decl/material/liquid/amphetamines = 0.75, 
+		/decl/material/liquid/regenerator = 5,
+		/decl/material/liquid/amphetamines = 0.75,
 		/decl/material/liquid/stimulants = 0.25
 	)
 	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
@@ -546,7 +546,7 @@
 	var/list/heated_reagents = list(/decl/material/liquid/regenerator = 5)
 
 /obj/item/chems/food/snacks/donkpocket/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/snacks/donkpocket/proc/heat()
@@ -575,7 +575,7 @@
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/brainburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 	reagents.add_reagent(/decl/material/liquid/neuroannealer, 6)
 
@@ -601,7 +601,7 @@
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/human/burger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/snacks/cheeseburger
@@ -612,7 +612,7 @@
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 	nutriment_amt = 2
 /obj/item/chems/food/snacks/cheeseburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/snacks/meatburger
@@ -625,7 +625,7 @@
 	nutriment_amt = 3
 	bitesize = 2
 /obj/item/chems/food/snacks/meatburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/snacks/plainburger
@@ -639,7 +639,7 @@
 	nutriment_amt = 3
 	bitesize = 2
 /obj/item/chems/food/snacks/plainburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/snacks/hamburger
@@ -653,7 +653,7 @@
 	nutriment_amt = 3
 	bitesize = 2
 /obj/item/chems/food/snacks/hamburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 
 /obj/item/chems/food/snacks/fishburger
@@ -664,7 +664,7 @@
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
 /obj/item/chems/food/snacks/fishburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/snacks/tofuburger
@@ -687,7 +687,7 @@
 	nutriment_amt = 2
 	bitesize = 2
 /obj/item/chems/food/snacks/roburger/Initialize()
-	.=..()
+	. = ..()
 	if(prob(5))
 		reagents.add_reagent(/decl/material/liquid/nanitefluid, 2)
 
@@ -700,7 +700,7 @@
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 0.1
 /obj/item/chems/food/snacks/roburgerbig/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nanitefluid, 100)
 
 /obj/item/chems/food/snacks/xenoburger
@@ -711,7 +711,7 @@
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/xenoburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/snacks/clownburger
@@ -743,7 +743,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 1
 /obj/item/chems/food/snacks/omelette/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/snacks/muffin
@@ -767,7 +767,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 /obj/item/chems/food/snacks/pie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream,5)
 
 /obj/item/chems/food/snacks/pie/throw_impact(atom/hit_atom)
@@ -786,7 +786,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 /obj/item/chems/food/snacks/berryclafoutis/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/berry, 5)
 
 /obj/item/chems/food/snacks/waffles
@@ -840,7 +840,7 @@
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/soylentgreen/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/snacks/soylenviridians
@@ -863,7 +863,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
 /obj/item/chems/food/snacks/meatpie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/snacks/tofupie
@@ -887,7 +887,7 @@
 	nutriment_amt = 5
 	bitesize = 3
 /obj/item/chems/food/snacks/amanita_pie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/amatoxin, 3)
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 1)
 
@@ -901,7 +901,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 /obj/item/chems/food/snacks/plump_pie/Initialize()
-	.=..()
+	. = ..()
 	if(prob(10))
 		name = "exceptional plump pie"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
@@ -916,7 +916,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
 /obj/item/chems/food/snacks/xemeatpie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/snacks/meatkabob
@@ -928,7 +928,7 @@
 	center_of_mass = @"{'x':17,'y':15}"
 	bitesize = 2
 /obj/item/chems/food/snacks/meatkabob/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/snacks/tofukabob
@@ -953,7 +953,7 @@
 	nutriment_amt = 3
 	bitesize = 3
 /obj/item/chems/food/snacks/cubancarp/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 	reagents.add_reagent(/decl/material/liquid/capsaicin, 3)
 
@@ -978,7 +978,7 @@
 	nutriment_amt = 3
 	bitesize = 2
 /obj/item/chems/food/snacks/loadedbakedpotato/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/snacks/fries
@@ -1035,7 +1035,7 @@
 	nutriment_amt = 4
 	bitesize = 2
 /obj/item/chems/food/snacks/cheesyfries/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/snacks/fortunecookie
@@ -1056,7 +1056,7 @@
 	center_of_mass = @"{'x':16,'y':12}"
 	bitesize = 2
 /obj/item/chems/food/snacks/badrecipe/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/bromide, 1)
 	reagents.add_reagent(/decl/material/solid/carbon, 3)
 
@@ -1071,7 +1071,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
 /obj/item/chems/food/snacks/plainsteak/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/meatsteak
@@ -1083,7 +1083,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
 /obj/item/chems/food/snacks/meatsteak/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
@@ -1103,7 +1103,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 /obj/item/chems/food/snacks/loadedsteak/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/garlicsauce, 2)
 
@@ -1118,7 +1118,7 @@
 	nutriment_amt = 6
 	bitesize = 3
 /obj/item/chems/food/snacks/spacylibertyduff/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 6)
 
 /obj/item/chems/food/snacks/amanitajelly
@@ -1132,7 +1132,7 @@
 	nutriment_amt = 6
 	bitesize = 3
 /obj/item/chems/food/snacks/amanitajelly/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/amatoxin, 6)
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)
 
@@ -1158,7 +1158,7 @@
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 
 /obj/item/chems/food/snacks/meatballsoup/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 	reagents.add_reagent(/decl/material/liquid/water, 5)
 
@@ -1171,7 +1171,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/slimesoup/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
 	reagents.add_reagent(/decl/material/liquid/water, 10)
 
@@ -1185,7 +1185,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/bloodsoup/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 	reagents.add_reagent(/decl/material/liquid/blood, 10)
 	reagents.add_reagent(/decl/material/liquid/water, 5)
@@ -1202,7 +1202,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/clownstears/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
 	reagents.add_reagent(/decl/material/liquid/water, 10)
 
@@ -1219,7 +1219,7 @@
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 
 /obj/item/chems/food/snacks/vegetablesoup/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/water, 5)
 
 /obj/item/chems/food/snacks/nettlesoup
@@ -1235,7 +1235,7 @@
 	eat_sound = list('sound/items/eatfood.ogg', 'sound/items/drink.ogg')
 
 /obj/item/chems/food/snacks/nettlesoup/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/water, 5)
 	reagents.add_reagent(/decl/material/liquid/regenerator, 5)
 
@@ -1252,7 +1252,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/mysterysoup/Initialize()
-	.=..()
+	. = ..()
 	switch(rand(1,10))
 		if(1)
 			reagents.add_reagent(/decl/material/liquid/nutriment, 6)
@@ -1300,7 +1300,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/wishsoup/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/water, 10)
 	if(prob(25))
 		src.desc = "A wish come true!"
@@ -1317,7 +1317,7 @@
 	nutriment_amt = 3
 	bitesize = 5
 /obj/item/chems/food/snacks/hotchili/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 	reagents.add_reagent(/decl/material/liquid/capsaicin, 3)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 2)
@@ -1333,7 +1333,7 @@
 	trash = /obj/item/trash/snack_bowl
 	bitesize = 5
 /obj/item/chems/food/snacks/coldchili/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 	reagents.add_reagent(/decl/material/liquid/frostoil, 3)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 2)
@@ -1354,7 +1354,7 @@
 	var/monkey_type = /mob/living/carbon/human/monkey
 
 /obj/item/chems/food/snacks/monkeycube/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/snacks/monkeycube/attack_self(var/mob/user)
@@ -1425,7 +1425,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 /obj/item/chems/food/snacks/bigbiteburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/snacks/enchiladas
@@ -1439,7 +1439,7 @@
 	nutriment_amt = 2
 	bitesize = 4
 /obj/item/chems/food/snacks/enchiladas/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 	reagents.add_reagent(/decl/material/liquid/capsaicin, 6)
 
@@ -1452,7 +1452,7 @@
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 6
 /obj/item/chems/food/snacks/monkeysdelight/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
@@ -1470,7 +1470,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/baguette/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
 	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
 
@@ -1484,7 +1484,7 @@
 	nutriment_amt = 3
 	bitesize = 3
 /obj/item/chems/food/snacks/fishandchips/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/snacks/sandwich
@@ -1500,7 +1500,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/snacks/sandwich/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/snacks/toastedsandwich
@@ -1516,7 +1516,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/snacks/toastedsandwich/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 	reagents.add_reagent(/decl/material/solid/carbon, 2)
 
@@ -1532,7 +1532,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/grilledcheese/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/tomatosoup
@@ -1548,7 +1548,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/tomatosoup/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 10)
 
 /obj/item/chems/food/snacks/rofflewaffles
@@ -1562,7 +1562,7 @@
 	nutriment_amt = 8
 	bitesize = 4
 /obj/item/chems/food/snacks/rofflewaffles/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 8)
 
 /obj/item/chems/food/snacks/stew
@@ -1575,7 +1575,7 @@
 	nutriment_amt = 6
 	bitesize = 10
 /obj/item/chems/food/snacks/stew/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 5)
 	reagents.add_reagent(/decl/material/liquid/eyedrops, 5)
@@ -1595,12 +1595,12 @@
 
 /obj/item/chems/food/snacks/jelliedtoast/cherry
 /obj/item/chems/food/snacks/jelliedtoast/cherry/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/snacks/jelliedtoast/slime
 /obj/item/chems/food/snacks/jelliedtoast/slime/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
 
 /obj/item/chems/food/snacks/jellyburger
@@ -1615,12 +1615,12 @@
 
 /obj/item/chems/food/snacks/jellyburger/slime
 /obj/item/chems/food/snacks/jellyburger/slime/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
 
 /obj/item/chems/food/snacks/jellyburger/cherry
 /obj/item/chems/food/snacks/jellyburger/cherry/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/snacks/milosoup
@@ -1635,7 +1635,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/milosoup/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/water, 5)
 
 
@@ -1712,7 +1712,7 @@
 	nutriment_amt = 6
 	bitesize = 4
 /obj/item/chems/food/snacks/pastatomato/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 10)
 
 /obj/item/chems/food/snacks/nanopasta
@@ -1725,7 +1725,7 @@
 	nutriment_amt = 6
 	bitesize = 4
 /obj/item/chems/food/snacks/nanopasta/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nanitefluid, 10)
 
 /obj/item/chems/food/snacks/meatballspagetti
@@ -1739,7 +1739,7 @@
 	nutriment_amt = 4
 	bitesize = 2
 /obj/item/chems/food/snacks/meatballspagetti/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/spesslaw
@@ -1752,7 +1752,7 @@
 	nutriment_amt = 4
 	bitesize = 2
 /obj/item/chems/food/snacks/spesslaw/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/carrotfries
@@ -1766,7 +1766,7 @@
 	nutriment_amt = 3
 	bitesize = 2
 /obj/item/chems/food/snacks/carrotfries/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/eyedrops, 3)
 
 /obj/item/chems/food/snacks/superbiteburger
@@ -1779,7 +1779,7 @@
 	nutriment_amt = 25
 	bitesize = 10
 /obj/item/chems/food/snacks/superbiteburger/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 25)
 
 /obj/item/chems/food/snacks/candiedapple
@@ -1848,12 +1848,12 @@
 
 /obj/item/chems/food/snacks/jellysandwich/slime
 /obj/item/chems/food/snacks/jellysandwich/slime/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
 
 /obj/item/chems/food/snacks/jellysandwich/cherry
 /obj/item/chems/food/snacks/jellysandwich/cherry/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/snacks/mint
@@ -1864,7 +1864,7 @@
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
 /obj/item/chems/food/snacks/mint/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, 1)
 
 
@@ -1890,7 +1890,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 /obj/item/chems/food/snacks/plumphelmetbiscuit/Initialize()
-	.=..()
+	. = ..()
 	if(prob(10))
 		name = "exceptional plump helmet biscuit"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump helmet biscuit!"
@@ -1907,7 +1907,7 @@
 	center_of_mass = @"{'x':17,'y':10}"
 	bitesize = 1
 /obj/item/chems/food/snacks/chawanmushi/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 
 
@@ -1924,7 +1924,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/beetsoup/Initialize()
-	.=..()
+	. = ..()
 	name = pick(list("borsch","bortsch","borstch","borsh","borshch","borscht"))
 
 
@@ -1950,7 +1950,7 @@
 	nutriment_amt = 6
 	bitesize = 3
 /obj/item/chems/food/snacks/validsalad/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/snacks/appletart
@@ -1964,7 +1964,7 @@
 	nutriment_amt = 8
 	bitesize = 3
 /obj/item/chems/food/snacks/appletart/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/solid/metal/gold, 5)
 
 /////////////////////////////////////////////////Sliceable////////////////////////////////////////
@@ -1994,7 +1994,7 @@
  *  have performance implications.
  */
 /obj/item/chems/food/snacks/slice/Initialize()
-	.=..()
+	. = ..()
 	if(filled)
 		var/obj/item/chems/food/snacks/whole = new whole_path()
 		if(whole && whole.slices_num)
@@ -2017,7 +2017,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/sliceable/meatbread/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 20)
 
 /obj/item/chems/food/snacks/slice/meatbread
@@ -2047,7 +2047,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/sliceable/xenomeatbread/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 20)
 
 /obj/item/chems/food/snacks/slice/xenomeatbread
@@ -2077,7 +2077,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/sliceable/bananabread/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream, 20)
 
 /obj/item/chems/food/snacks/slice/bananabread
@@ -2133,7 +2133,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
 /obj/item/chems/food/snacks/sliceable/carrotcake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/eyedrops, 10)
 
 /obj/item/chems/food/snacks/slice/carrotcake
@@ -2163,7 +2163,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
 /obj/item/chems/food/snacks/sliceable/braincake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 25)
 	reagents.add_reagent(/decl/material/liquid/neuroannealer, 10)
 
@@ -2193,7 +2193,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/snacks/sliceable/cheesecake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/snacks/slice/cheesecake
@@ -2347,7 +2347,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/snacks/sliceable/cheesewheel/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/snacks/cheesewedge
@@ -2372,7 +2372,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
 /obj/item/chems/food/snacks/sliceable/birthdaycake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
 
 
@@ -2430,7 +2430,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/sliceable/creamcheesebread/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/snacks/slice/creamcheesebread
@@ -2533,7 +2533,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/sliceable/pizza/margherita/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 6)
 
@@ -2562,7 +2562,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/sliceable/pizza/meatpizza/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 34)
 	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, 6)
 
@@ -2591,7 +2591,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/sliceable/pizza/mushroompizza/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 
 /obj/item/chems/food/snacks/slice/mushroompizza
@@ -2619,7 +2619,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup, 6)
 	reagents.add_reagent(/decl/material/liquid/eyedrops, 12)
@@ -2831,7 +2831,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 //obj/item/chems/food/snacks/dough/Initialize()
-//	.=..()
+//	. = ..()
 //	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 
 // Dough + rolling pin = flat dough
@@ -2852,7 +2852,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 
 /obj/item/chems/food/snacks/sliceable/flatdough/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 	reagents.add_reagent(/decl/material/liquid/nutriment, 3)
 
@@ -2991,7 +2991,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/taco/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/snacks/rawcutlet
@@ -3003,7 +3003,7 @@
 	center_of_mass = @"{'x':17,'y':20}"
 
 /obj/item/chems/food/snacks/rawcutlet/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 
 /obj/item/chems/food/snacks/cutlet
@@ -3015,7 +3015,7 @@
 	center_of_mass = @"{'x':17,'y':20}"
 
 /obj/item/chems/food/snacks/cutlet/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/snacks/rawmeatball
@@ -3027,7 +3027,7 @@
 	center_of_mass = @"{'x':16,'y':15}"
 
 /obj/item/chems/food/snacks/rawmeatball/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/snacks/hotdog
@@ -3039,7 +3039,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/hotdog/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/snacks/classichotdog
@@ -3050,7 +3050,7 @@
 	center_of_mass = @"{'x':16,'y':17}"
 
 /obj/item/chems/food/snacks/classichotdog/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 16)
 
 /obj/item/chems/food/snacks/flatbread
@@ -3127,7 +3127,7 @@
 	nutriment_desc = list("beef" = 1)
 	bitesize = 3
 /obj/item/chems/food/snacks/canned/beef/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 12)
 
 /obj/item/chems/food/snacks/canned/beans
@@ -3153,7 +3153,7 @@
 	eat_sound = 'sound/items/drink.ogg'
 
 /obj/item/chems/food/snacks/canned/tomato/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 12)
 
 
@@ -3170,7 +3170,7 @@
 	nutriment_desc = list("sogginess" = 1, "vegetable" = 1)
 	bitesize = 20
 /obj/item/chems/food/snacks/canned/spinach/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 5,
 						/decl/material/liquid/adrenaline, 5,
 						/decl/material/liquid/amphetamines, 5,
@@ -3213,7 +3213,7 @@
 	center_of_mass = @"{'x':15,'y':9}"
 	bitesize = 2
 /obj/item/chems/food/snacks/sosjerky/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/no_raisin
@@ -3234,7 +3234,7 @@
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
 /obj/item/chems/food/snacks/spacetwinkie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 4)
 
 /obj/item/chems/food/snacks/cheesiehonkers
@@ -3260,7 +3260,7 @@
 	bitesize = 3
 
 /obj/item/chems/food/snacks/syndicake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/regenerator, 5)
 
 //terran delights
@@ -3298,7 +3298,7 @@
 	nutriment_amt = 2
 	bitesize = 1
 /obj/item/chems/food/snacks/squid/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/croutons
@@ -3324,7 +3324,7 @@
 	nutriment_amt = 2
 	bitesize = 2
 /obj/item/chems/food/snacks/salo/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/snacks/driedfish
@@ -3338,7 +3338,7 @@
 	nutriment_amt = 2
 	bitesize = 1
 /obj/item/chems/food/snacks/driedfish/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/snacks/liquidfood
@@ -3352,7 +3352,7 @@
 	nutriment_amt = 20
 	bitesize = 4
 /obj/item/chems/food/snacks/liquidfood/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/solid/metal/iron, 3)
 
 /obj/item/chems/food/snacks/meatcube
@@ -3363,7 +3363,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 3
 /obj/item/chems/food/snacks/meatcube/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/snacks/tastybread
@@ -3389,7 +3389,7 @@
 	nutriment_desc = list("candy" = 1)
 	bitesize = 2
 /obj/item/chems/food/snacks/candy/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 3)
 
 /obj/item/chems/food/snacks/candy/proteinbar
@@ -3398,8 +3398,10 @@
 	icon_state = "proteinbar"
 	trash = /obj/item/trash/candy/proteinbar
 	bitesize = 6
+	atom_flags = ATOM_FLAG_NO_REACT
+
 /obj/item/chems/food/snacks/candy/proteinbar/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 9)
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 4)
@@ -3411,7 +3413,7 @@
 	nutriment_desc = list("candy" = 10)
 	bitesize = 5
 /obj/item/chems/food/snacks/candy/donor/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 10)
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 3)
 
@@ -3425,7 +3427,7 @@
 	nutriment_desc = list("candy corn" = 4)
 	bitesize = 2
 /obj/item/chems/food/snacks/candy_corn/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 4)
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
 
@@ -3463,7 +3465,7 @@
 	nutriment_desc = list("chocolate" = 5)
 	bitesize = 2
 /obj/item/chems/food/snacks/chocolatebar/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/coco, 2)
 
@@ -3478,7 +3480,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/snacks/chocolateegg/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/coco, 2)
 
@@ -3501,7 +3503,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/donut/normal/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 
 	if(prob(30))
@@ -3521,7 +3523,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/donut/chaos/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(pick(list(
 		/decl/material/liquid/nutriment,
@@ -3552,7 +3554,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/snacks/donut/jelly/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 	if(prob(30))
@@ -3570,7 +3572,7 @@
 	nutriment_amt = 3
 	bitesize = 5
 /obj/item/chems/food/snacks/donut/slimejelly/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
 	if(prob(30))
@@ -3588,7 +3590,7 @@
 	nutriment_amt = 3
 	bitesize = 5
 /obj/item/chems/food/snacks/donut/cherryjelly/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 	if(prob(30))
@@ -3695,7 +3697,7 @@ obj/item/chems/food/snacks/venus
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
 /obj/item/chems/food/snacks/venus/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/capsaicin = 5)
 
 obj/item/chems/food/snacks/oort
@@ -3709,7 +3711,7 @@ obj/item/chems/food/snacks/oort
 	nutriment_amt = 5
 	bitesize = 2
 /obj/item/chems/food/snacks/oort/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/frostoil = 5)
 
 //weebo vend! So japanese it hurts
@@ -3739,7 +3741,7 @@ obj/item/chems/food/snacks/weebonuts
 	nutriment_amt = 5
 	bitesize = 2
 /obj/item/chems/food/snacks/weebonuts/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/capsaicin = 1)
 
 obj/item/chems/food/snacks/chocobanana
@@ -3751,7 +3753,7 @@ obj/item/chems/food/snacks/chocobanana
 	nutriment_amt = 5
 	bitesize = 2
 /obj/item/chems/food/snacks/chocobanana/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
 
 obj/item/chems/food/snacks/dango
@@ -3774,7 +3776,7 @@ obj/item/chems/food/snacks/dango
 	bitesize = 3
 	filling_color = "#336b42"
 /obj/item/chems/food/snacks/old/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(pick(list(
 				/decl/material/liquid/fuel,
 				/decl/material/liquid/amatoxin,
