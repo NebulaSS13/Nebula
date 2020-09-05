@@ -2,11 +2,13 @@
 	name = "wheelchair"
 	desc = "Now we're getting somewhere."
 	icon_state = "wheelchair"
-	anchored = 0
-	buckle_movable = 1
 	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(2), /datum/movement_handler/move_relay_self)
+	anchored = FALSE
+	buckle_movable = TRUE
 	movable_flags = MOVABLE_FLAG_NONDENSE_COLLISION
-	var/driving = 0
+
+	var/item_form_type = /obj/item/wheelchair_kit
+	var/driving = FALSE
 	var/bloodiness
 
 /obj/structure/bed/chair/wheelchair/on_update_icon()
@@ -33,7 +35,7 @@
 	if(propelled)
 		return
 	// Let's roll
-	driving = 1
+	driving = TRUE
 	//--1---Move occupant---1--//
 	if(buckled_mob)
 		buckled_mob.buckled = null
@@ -46,7 +48,7 @@
 	set_dir(direction)
 	if(bloodiness)
 		create_track()
-	driving = 0
+	driving = FALSE
 
 /obj/structure/bed/chair/wheelchair/Move()
 	. = ..()
@@ -111,3 +113,46 @@
 	var/obj/structure/bed/chair/wheelchair/W = new(get_turf(H))
 	if(isturf(H.loc))
 		W.buckle_mob(H)
+
+/obj/structure/bed/chair/wheelchair/verb/collapse()
+	set name = "Collapse Wheelchair"
+	set category = "Object"
+	set src in oview(1)
+
+	if(!CanPhysicallyInteract(usr))
+		return
+
+	if(!ishuman(usr))
+		return
+
+	if(usr.incapacitated())
+		return
+
+	if(buckled_mob)
+		to_chat(usr, SPAN_WARNING("You can't collapse \the [src.name] while it still on use."))
+		return
+
+	usr.visible_message("<b>[usr]</b> starts collapse \the [src.name].")
+	if(do_after(usr, 4 SECONDS, src))
+		var/obj/item/wheelchair_kit/K = new item_form_type(get_turf(src))
+		visible_message(SPAN_NOTICE("<b>[usr]</b> collapses \the [src.name]."))
+		K.add_fingerprint(usr)
+		qdel(src)
+
+/obj/item/wheelchair_kit
+	name = "compressed wheelchair kit"
+	desc = "Collapsed parts, prepared to immediately spring into the shape of a wheelchair."
+	icon = 'icons/obj/items/wheelchairkit.dmi'
+	icon_state = "wheelchair-item"
+	item_state = "rbed"
+	w_class = ITEM_SIZE_LARGE
+
+	var/structure_form_type = /obj/structure/bed/chair/wheelchair
+
+/obj/item/wheelchair_kit/attack_self(mob/user)
+	user.visible_message("<b>[user]</b> starts lay out \the [src.name].")
+	if(do_after(user, 4 SECONDS, src))
+		var/obj/structure/bed/chair/wheelchair/W = new structure_form_type(get_turf(user))
+		user.visible_message(SPAN_NOTICE("[user]</b> lay out \the [W.name]."))
+		W.add_fingerprint(user)
+		qdel(src)
