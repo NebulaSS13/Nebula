@@ -89,7 +89,10 @@
 /mob/living/carbon/attack_hand(var/mob/living/carbon/human/M)
 	if(istype(M))
 		var/obj/item/organ/external/temp = M.organs_by_name[M.get_active_held_item_slot()]
-		if(!temp || !temp.is_usable())
+		if(!temp)
+			to_chat(M, SPAN_WARNING("You don't have a usable limb!"))
+			return TRUE
+		if(!temp.is_usable())
 			to_chat(M, SPAN_WARNING("You can't use your [temp.name]."))
 			return TRUE
 	. = ..()
