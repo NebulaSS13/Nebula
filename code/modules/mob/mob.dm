@@ -201,6 +201,7 @@
 	. += move_intent.move_delay
 	. += encumbrance() * (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN)) //Varies between 0.5 and 2, depending on skill
 
+#define ENCUMBERANCE_MOD 0.5
 /mob/proc/encumbrance()
 	for(var/obj/item/grab/G in get_active_grabs())
 		var/atom/movable/pulling = G.affecting
@@ -213,6 +214,8 @@
 		else
 			. += 1
 	. *= (0.8 ** size_strength_mod())
+	. *= ENCUMBERANCE_MOD
+#undef ENCUMBERANCE_MOD
 
 //Determines mob size/strength effects for slowdown purposes. Standard is 0; can be pos/neg.
 /mob/proc/size_strength_mod()
