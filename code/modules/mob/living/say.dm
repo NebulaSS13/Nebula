@@ -146,7 +146,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 	message = html_decode(message)
 
-	var/end_char = copytext(message, length(message), length(message) + 1)
+	var/end_char = copytext_char(message, -1)
 	if(!(end_char in list(".", "?", "!", "-", "~")))
 		message += "."
 
@@ -174,9 +174,9 @@ proc/get_radio_key_from_channel(var/channel)
 	var/message_mode = parse_message_mode(message, "headset")
 	if (message_mode)
 		if (message_mode == "headset")
-			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
+			message = copytext_char(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
-			message = copytext(message,3)
+			message = copytext_char(message,3)
 
 	message = trim_left(message)
 
@@ -184,7 +184,7 @@ proc/get_radio_key_from_channel(var/channel)
 	if(!speaking)
 		speaking = parse_language(message)
 		if(speaking)
-			message = copytext(message,2+length(speaking.key))
+			message = copytext_char(message,2+length_char(speaking.key))
 		else
 			speaking = get_default_language()
 
