@@ -1,8 +1,8 @@
-/datum/codex_category/skills/
+/decl/codex_category/skills/
 	name = "Skills"
 	desc = "Certifiable skills."
 
-/datum/codex_category/skills/Initialize()
+/decl/codex_category/skills/Initialize()
 	for(var/decl/hierarchy/skill/skill in GLOB.skills)
 		var/list/skill_info = list()
 		if(skill.prerequisites)
@@ -17,4 +17,4 @@
 		SScodex.add_entry_by_string(entry.display_name, entry)
 		SScodex.add_entry_by_string(skill.name, entry)
 		items += skill.name
-	..()
+	. = ..()

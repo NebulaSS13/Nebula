@@ -19,7 +19,7 @@
 				</style>
 				</head>
 				<body>
-				[SScodex.get_guide(/datum/codex_category/recipes)]
+				[SScodex.get_guide(/decl/codex_category/recipes)]
 				</body>
 			</html>
 			"}
@@ -45,7 +45,7 @@
 				</style>
 				</head>
 				<body>
-				[SScodex.get_guide(/datum/codex_category/cocktails)]
+				[SScodex.get_guide(/decl/codex_category/cocktails)]
 				</body>
 			</html>
 			"}

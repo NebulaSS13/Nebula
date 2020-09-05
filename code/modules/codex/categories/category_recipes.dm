@@ -1,10 +1,10 @@
-/datum/codex_category/recipes
+/decl/codex_category/recipes
 	name = "Recipes"
 	desc = "Recipes for a variety of different kinds of foods and condiments."
 	guide_name = "Cooking"
 	guide_strings = list("chef", "cooking", "recipes")
 
-/datum/codex_category/recipes/Initialize()
+/decl/codex_category/recipes/Initialize()
 
 	var/list/entries_to_register = list()
 
@@ -115,4 +115,4 @@
 		SScodex.add_entry_by_string(entry.display_name, entry)
 		items += entry.display_name
 
-	..()
+	. = ..()

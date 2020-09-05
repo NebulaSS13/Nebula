@@ -1,8 +1,8 @@
-/datum/codex_category/substances
+/decl/codex_category/substances
 	name = "Substances"
 	desc = "Various natural and artificial substances."
 
-/datum/codex_category/substances/Initialize()
+/decl/codex_category/substances/Initialize()
 	for(var/thing in SSmaterials.materials)
 		var/decl/material/mat = thing
 		if(!mat.hidden_from_codex)
@@ -160,4 +160,4 @@
 			entry.mechanics_text = jointext(material_info, null)
 			SScodex.add_entry_by_string(entry.display_name, entry)
 			items += entry.display_name
-	..()
+	. = ..()

@@ -1,4 +1,4 @@
-/datum/codex_category/surgery
+/decl/codex_category/surgery
 	name = "Surgical Procedures"
 	desc = "A list of surgeries, their requirements and their effects."
 
@@ -67,7 +67,7 @@
 		</ol>
 	"}
 
-/datum/codex_category/surgery/Initialize()
+/decl/codex_category/surgery/Initialize()
 	var/list/procedures = decls_repository.get_decls_of_subtype(/decl/surgery_step)
 	for(var/stype in procedures)
 		var/decl/surgery_step/procedure = procedures[stype]

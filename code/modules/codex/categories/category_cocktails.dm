@@ -1,10 +1,10 @@
-/datum/codex_category/cocktails
+/decl/codex_category/cocktails
 	name = "Cocktails"
 	desc = "Various mixes of drinks, alcoholic and otherwise, that can be made by a skilled bartender."
 	guide_name = "Bartending"
 	guide_strings = list("bartender", "cocktails", "bartending")
 
-/datum/codex_category/cocktails/Initialize()
+/decl/codex_category/cocktails/Initialize()
 
 	var/list/entries_to_register = list()
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
@@ -39,4 +39,4 @@
 		SScodex.add_entry_by_string(entry.display_name, entry)
 		items += entry.display_name
 
-	..()
+	. = ..()

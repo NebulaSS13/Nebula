@@ -1,4 +1,4 @@
-/datum/codex_category
+/decl/codex_category
 	var/name = "Generic Category"
 	var/desc = "Some description for category's codex entry"
 	var/list/items = list()
@@ -8,8 +8,8 @@
 	var/list/guide_strings
 
 //Children should call ..() at the end after filling the items list
-/datum/codex_category/proc/Initialize()
-
+/decl/codex_category/Initialize()
+	. = ..()
 	if(items.len)
 		var/datum/codex_entry/entry = new(_display_name = "[name] (category)")
 		entry.lore_text = desc + "<hr>"
