@@ -43,19 +43,12 @@ var/global/list/sparring_attack_cache = list()
 	return sparring_variant_type && decls_repository.get_decl(sparring_variant_type)
 
 /decl/natural_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
-	if(user.restrained())
-		return 0
-
-	// Check if they have a functioning hand.
-	var/obj/item/organ/external/E = user.organs_by_name[BP_L_HAND]
-	if(E && !E.is_stump())
-		return 1
-
-	E = user.organs_by_name[BP_R_HAND]
-	if(E && !E.is_stump())
-		return 1
-
-	return 0
+	if(!user.restrained() && !user.incapacitated())
+		for(var/etype in usable_with_limbs)
+			var/obj/item/organ/external/E = user.organs_by_name[etype]
+			if(E && !E.is_stump())
+				return TRUE
+	return FALSE
 
 /decl/natural_attack/proc/get_unarmed_damage()
 	return damage
@@ -227,18 +220,9 @@ var/global/list/sparring_attack_cache = list()
 	sparring_variant_type = /decl/natural_attack/light_strike/kick
 
 /decl/natural_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
-		return 0
-
-	var/obj/item/organ/external/E = user.organs_by_name[BP_L_FOOT]
-	if(E && !E.is_stump())
-		return 1
-
-	E = user.organs_by_name[BP_R_FOOT]
-	if(E && !E.is_stump())
-		return 1
-
-	return 0
+	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
+		zone = BP_CHEST
+	. = ..()
 
 /decl/natural_attack/kick/get_unarmed_damage(var/mob/living/carbon/human/user)
 	var/obj/item/clothing/shoes = user.shoes
@@ -329,3 +313,8 @@ var/global/list/sparring_attack_cache = list()
 	attack_name = "light kick"
 	attack_noun = list("foot")
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
+
+/decl/natural_attack/light_strike/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+	if(zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH)
+		zone = BP_CHEST
+	. = ..()

@@ -26,15 +26,11 @@
 
 /mob/living/carbon/human/attack_hand(mob/living/carbon/M)
 
-	. = ..()
-	if(.)
-		return
-
 	remove_cloaking_source(species)
 
 	// Grabs are handled at a lower level.
 	if(istype(M) && M.a_intent == I_GRAB)
-		return 0
+		return ..()
 
 	// Should this all be in Touch()?
 	var/mob/living/carbon/human/H = M
@@ -230,6 +226,7 @@
 				admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
 				H.species.disarm_attackhand(H, src)
 				return TRUE
+	. = ..()
 
 /mob/living/carbon/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
 	return
