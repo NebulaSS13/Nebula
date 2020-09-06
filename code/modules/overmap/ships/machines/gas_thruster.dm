@@ -23,10 +23,7 @@
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	cut_overlays()
 	if(!(stat & (NOPOWER | BROKEN)))
-		var/image/I = image(icon, "nozzle_idle")
-		I.appearance_flags |= RESET_COLOR
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(image_repository.overlay_image(icon, "nozzle_idle", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 
 /obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
@@ -62,14 +59,12 @@
 	light_color = "#00a2ff"
 	anchored = TRUE
 
-/obj/effect/engine_exhaust/Initialize(mapload, var/ndir, var/flame)
+/obj/effect/engine_exhaust/Initialize(mapload, ndir)
 	. = ..(mapload)
-	if(flame)
-		icon_state = "exhaust"
-		if(isturf(loc))
-			var/turf/T = loc
-			T.hotspot_expose(1000,125)
-		set_light(0.5, 1, 4)
+	if(isturf(loc))
+		var/turf/T = loc
+		T.hotspot_expose(1000,125)
+	set_light(0.5, 1, 4)
 	set_dir(ndir)
 	QDEL_IN(src, 2 SECONDS)
 
