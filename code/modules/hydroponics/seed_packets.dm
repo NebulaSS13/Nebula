@@ -52,10 +52,10 @@ var/global/list/plant_seed_sprites = list()
 
 	if(is_seeds)
 		src.SetName("packet of [seed.seed_name] [seed.seed_noun]")
-		src.desc = "It has a picture of [seed.display_name] on the front."
+		src.desc = "It has a picture of \a [seed.display_name] on the front."
 	else
 		src.SetName("sample of [seed.seed_name] [seed.seed_noun]")
-		src.desc = "It's labelled as coming from [seed.display_name]."
+		src.desc = "It's labelled as coming from \a [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
 	. = ..()
@@ -284,3 +284,12 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/bruisegrassseed
 	seed_type = "bruisegrass"
+
+/obj/item/seeds/clam
+	seed_type = "clam"
+
+/obj/item/seeds/barnacle
+	seed_type = "barnacle"
+
+/obj/item/seeds/mollusc
+	seed_type = "mollusc"
