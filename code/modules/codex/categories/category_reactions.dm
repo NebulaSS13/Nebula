@@ -1,10 +1,10 @@
-/datum/codex_category/reactions
+/decl/codex_category/reactions
 	name = "Reactions"
 	desc = "Chemical reactions with mundane, interesting or spectacular effects."
 	guide_name = "Chemistry"
 	guide_strings = list("chemist", "reactions")
 
-/datum/codex_category/reactions/Initialize()
+/decl/codex_category/reactions/Initialize()
 
 	guide_html = {"
 		<h1>Chemistry Basics</h1>
@@ -107,4 +107,4 @@
 		SScodex.add_entry_by_string(entry.display_name, entry)
 		items += entry.display_name
 
-	..()
+	. = ..()

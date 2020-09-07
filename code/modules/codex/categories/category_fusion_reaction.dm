@@ -1,8 +1,8 @@
-/datum/codex_category/fusion_reaction
+/decl/codex_category/fusion_reaction
 	name = "Fusion Reactions"
 	desc = "A list of fusion reactions that the R-UST tokamak can ignite."
 
-/datum/codex_category/fusion_reaction/Initialize()
+/decl/codex_category/fusion_reaction/Initialize()
 	var/list/reactions = decls_repository.get_decls_of_subtype(/decl/fusion_reaction)
 	for(var/rtype in reactions)
 		var/decl/fusion_reaction/reaction = reactions[rtype]

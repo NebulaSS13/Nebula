@@ -1,8 +1,8 @@
-/datum/codex_category/species/
+/decl/codex_category/species/
 	name = "Species"
 	desc = "Sapient species encountered in known space."
 
-/datum/codex_category/species/Initialize()
+/decl/codex_category/species/Initialize()
 	for(var/thing in get_all_species())
 		var/datum/species/species = get_species_by_key(thing)
 		if(!species.hidden_from_codex)
@@ -12,4 +12,4 @@
 			SScodex.add_entry_by_string(entry.display_name, entry)
 			SScodex.add_entry_by_string(species.name, entry)
 			items += entry.display_name
-	..()
+	. = ..()
