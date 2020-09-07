@@ -8,11 +8,15 @@
 		if(!istype(organ))
 			to_chat(grabber, SPAN_WARNING("\The [src] is missing that body part!"))
 			return FALSE
-		if(grabber == src && istype(organ))
+		if(grabber == src)
+			var/using_slot = get_active_held_item_slot()
+			if(!using_slot)
+				to_chat(src, SPAN_WARNING("You cannot grab yourself without a usable hand!"))
+				return FALSE
 			var/list/bad_parts = list(organ.organ_tag) | organ.parent_organ
 			for(var/obj/item/organ/external/child in organ.children)
 				bad_parts |= child.organ_tag
-			if(organ && (organ.organ_tag in bad_parts))
+			if(using_slot in bad_parts)
 				to_chat(src, SPAN_WARNING("You can't grab your own [organ.name] with itself!"))
 				return FALSE
 		if(pull_damage())

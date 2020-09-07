@@ -213,13 +213,15 @@
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
 
-	// Something with dragging things
-	var/extra_delay = HandleGrabs(direction, old_turf)
+	if(isturf(mob.loc))
+		for(var/atom/movable/M in mob.ret_grab())
+			if(M != src && M.loc != mob.loc && !M.anchored && get_dist(old_turf, M) <= 1)
+				step(M, get_dir(M.loc, old_turf))
+		for(var/obj/item/grab/G in mob.get_active_grabs())
+			G.adjust_position()
 
 	if(QDELETED(mob)) // No idea why, but this was causing null check runtimes on live.
 		return
-
-	mob.ExtraMoveCooldown(extra_delay)
 
 	for (var/obj/item/grab/G in mob)
 		if (G.assailant_reverse_facing())
@@ -276,21 +278,6 @@
 			mod *= 0.8
 
 	return config.minimum_sprint_cost + (config.skill_sprint_cost_range * mod)
-
-/datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction, var/old_turf)
-	. = 0
-	// TODO: Look into making grabs use movement events instead, this is a mess.
-	for(var/obj/item/grab/G in mob?.get_active_grabs())
-		if(G.assailant == G.affecting)
-			return
-		if(G.affecting.anchored)
-			return
-		. = max(., G.grab_slowdown())
-		if(isturf(mob.loc) && mob.loc != old_turf)
-			for(var/atom/movable/M in (mob.ret_grab()-mob))
-				if(isturf(M.loc) && M.loc != mob.loc && get_dist(old_turf, M) <= 1)
-					step(M, get_dir(M.loc, old_turf))
-		G.adjust_position()
 
 // Misc. helpers
 /mob/proc/MayEnterTurf(var/turf/T)
