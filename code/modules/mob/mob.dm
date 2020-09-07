@@ -147,7 +147,7 @@
 
 		if(self_message && M == src)
 			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
-		else if(M.see_invisible >= invisibility || narrate) // Cannot view the invisible
+		else if(is_invisible_to(M) || narrate) // Cannot view the invisible
 			M.show_message(mob_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 		else
 			M.show_message(mob_message, AUDIBLE_MESSAGE)
@@ -1057,7 +1057,7 @@
 /mob/physically_destroyed()
 	SHOULD_CALL_PARENT(FALSE)
 	gib()
-	
+
 /mob/explosion_act()
 	. = ..()
 	if(!blinded)

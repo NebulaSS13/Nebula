@@ -442,7 +442,7 @@ var/list/slot_flags_enumeration = list(
 //set force to ignore blocking overwear and occupied slots
 /obj/item/proc/mob_can_equip(M, slot, disable_warning = 0, force = 0)
 
-	if(!slot || !M || !ishuman(M)) 
+	if(!slot || !M || !ishuman(M))
 		return FALSE
 
 	var/can_hold = FALSE
@@ -734,8 +734,9 @@ GLOBAL_LIST_EMPTY(blood_overlay_cache)
 	GLOB.blood_overlay_cache["[icon]" + icon_state] = blood_overlay
 
 /obj/item/proc/showoff(mob/user)
-	for (var/mob/M in view(user))
-		M.show_message("[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a>",1)
+	for(var/mob/M in view(user))
+		if(!user.is_invisible_to(M))
+			M.show_message("[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a>", 1)
 
 /mob/living/carbon/verb/showoff()
 	set name = "Show Held Item"
