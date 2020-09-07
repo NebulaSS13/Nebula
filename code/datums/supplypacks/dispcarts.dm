@@ -45,6 +45,7 @@ SEC_PACK(radium,    /obj/item/chems/chem_disp_cartridge/radium,     "Reagent ref
 SEC_PACK(ethanol,   /obj/item/chems/chem_disp_cartridge/ethanol,    "Reagent refill - Ethanol",       "ethanol reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(sacid,     /obj/item/chems/chem_disp_cartridge/sacid,      "Reagent refill - Sulfuric Acid", "sulfuric acid reagent cartridge crate", 15, access_chemistry)
 SEC_PACK(tungsten,  /obj/item/chems/chem_disp_cartridge/tungsten,   "Reagent refill - Tungsten",      "tungsten reagent cartridge crate",      15, access_chemistry)
+SEC_PACK(stabilizer, /obj/item/chems/chem_disp_cartridge/stabilizer, "Reagent refill - Stabilizer",   "stabilizer reagent cartridge crate",    15, access_chemistry)
 
 // Bar-restricted (alcoholic drinks)
 //      Datum path Contents type                                                     Supply pack name             Container name                    Cost  Container access

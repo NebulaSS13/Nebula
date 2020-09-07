@@ -90,3 +90,4 @@
 	amphetamines  spawn_reagent = /decl/material/liquid/amphetamines
 	antibiotics   spawn_reagent = /decl/material/liquid/antibiotics
 	sedatives	  spawn_reagent = /decl/material/liquid/sedatives
+	stabilizer    spawn_reagent = /decl/material/liquid/stabilizer
