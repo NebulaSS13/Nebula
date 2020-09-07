@@ -1,6 +1,6 @@
 /obj/machinery/portable_atmospherics/hydroponics
 	name = "hydroponics tray"
-	desc = "A mechanical basin designed to nurture plants. It has various useful sensors."
+	desc = "A mechanical basin designed to nurture plants and other aquatic life. It has various useful sensors."
 	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
 	density = 1
@@ -126,7 +126,7 @@
 	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/observer/ghost/user)
-	if(!(harvest && seed && seed.has_mob_product))
+	if(!(harvest && seed && ispath(seed.product_type, /mob)))
 		return
 
 	if(!user.can_admin_interact())
@@ -284,13 +284,16 @@
 
 //Clears out a dead plant.
 /obj/machinery/portable_atmospherics/hydroponics/proc/remove_dead(var/mob/user, var/silent)
-	if(!dead)
+	if(!dead || !seed)
 		return
 
 	if(closed_system)
-		if(user)
-			to_chat(user, "You can't remove the dead plant while the lid is shut.")
+		if(!silent)
+			to_chat(user, SPAN_WARNING("You can't remove the dead [seed.display_name] while the lid is shut."))
 		return FALSE
+
+	if(!silent)
+		to_chat(user, SPAN_NOTICE("You remove the dead [seed.display_name]."))
 
 	seed = null
 	dead = 0
@@ -298,9 +301,6 @@
 	age = 0
 	yield_mod = 0
 	mutation_mod = 0
-
-	if(!silent && user)
-		to_chat(user, "You remove the dead plant.")
 	lastproduce = 0
 	check_health()
 	return TRUE
@@ -513,15 +513,19 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(var/mob/user, var/obj/item/seeds/S)
 
 	if(seed)
-		to_chat(user, "<span class='warning'>\The [src] already has seeds in it!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] already has seeds in it!"))
 		return
 
 	if(!S.seed)
-		to_chat(user, "The packet seems to be empty. You throw it away.")
+		to_chat(user, SPAN_WARNING("The packet seems to be empty. You throw it away."))
 		qdel(S)
 		return
 
-	to_chat(user, "You plant the [S.seed.seed_name] [S.seed.seed_noun].")
+	if(S.seed.hydrotray_only && !mechanical)
+		to_chat(user, SPAN_WARNING("This packet can only be planted in a hydroponics tray."))
+		return
+
+	to_chat(user, SPAN_NOTICE("You plant the [S.seed.seed_name] [S.seed.seed_noun]."))
 	lastproduce = 0
 	seed = S.seed //Grab the seed datum.
 	dead = 0
@@ -556,7 +560,7 @@
 		to_chat(user, "\The [src] is empty.")
 		return
 
-	to_chat(user, "<span class='notice'>\An [seed.display_name] plant is growing here.</span>")
+	to_chat(user, "<span class='notice'>\An [seed.display_name] is growing here.</span>")
 
 	if(user.skill_check(SKILL_BOTANY, SKILL_BASIC))
 		if(weedlevel >= 5)
@@ -565,9 +569,9 @@
 			to_chat(user, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
 
 		if(dead)
-			to_chat(user, "<span class='danger'>The [seed.display_name] plant is dead.</span>")
+			to_chat(user, "<span class='danger'>The [seed.display_name] is dead.</span>")
 		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-			to_chat(user, "The [seed.display_name] plant looks <span class='danger'>unhealthy</span>.")
+			to_chat(user, "The [seed.display_name] looks <span class='danger'>unhealthy</span>.")
 
 	if(mechanical && Adjacent(user))
 		var/turf/T = loc

@@ -109,7 +109,10 @@
 		/obj/item/seeds/watermelonseed = 15,
 		/obj/item/seeds/wheatseed = 15,
 		/obj/item/seeds/whitebeetseed = 15,
-		/obj/item/seeds/algaeseed = 15
+		/obj/item/seeds/algaeseed = 15,
+		/obj/item/seeds/clam = 15,
+		/obj/item/seeds/barnacle = 15,
+		/obj/item/seeds/mollusc = 15
 	)
 
 /obj/machinery/seed_storage/xenobotany

@@ -4,7 +4,7 @@
 	seed_noun = SEED_NOUN_NODES
 	display_name = "diona nymph pods"
 	can_self_harvest = 1
-	has_mob_product = /mob/living/carbon/alien/diona
+	product_type = /mob/living/carbon/alien/diona
 
 /datum/seed/diona/New()
 	..()

@@ -13,7 +13,7 @@
 			seed.set_trait(TRAIT_STINGS, 1)
 			seed.set_trait(TRAIT_CARNIVOROUS,2)
 
-			seed.display_name = "strange plants" //more thematic for the vine infestation event
+			seed.display_name = "strange plant" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
 			new /obj/effect/vine(T, seed, null, 1)
