@@ -54,6 +54,9 @@
 
 /mob/living/get_active_held_item_slot()
 	. = held_item_slot_selected
+	if(. && !(. in held_item_slots))
+		held_item_slot_selected = null
+		. = null
 
 /mob/living/get_inactive_held_items()
 	for(var/bp in (held_item_slots - get_active_held_item_slot()))
