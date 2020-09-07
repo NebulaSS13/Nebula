@@ -289,6 +289,10 @@
 	src.add_fingerprint(user)
 	return
 
+/obj/item/storage/attack_ghost(mob/user)
+	if(user.client && user.client.holder)
+		show_to(user)
+
 /obj/item/storage/proc/gather_all(var/turf/T, var/mob/user)
 	var/success = 0
 	var/failure = 0
