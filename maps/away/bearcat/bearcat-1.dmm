@@ -1501,7 +1501,6 @@
 /obj/machinery/power/apc/derelict{
 	dir = 1
 	},
-/obj/machinery/organ_printer/robot/mapped,
 /obj/item/radio/intercom{
 	pixel_y = 22
 	},

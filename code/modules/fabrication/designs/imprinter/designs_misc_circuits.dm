@@ -56,9 +56,6 @@
 /datum/fabricator_recipe/imprinter/circuit/bioprinter
 	path = /obj/item/stock_parts/circuitboard/bioprinter
 
-/datum/fabricator_recipe/imprinter/circuit/roboprinter
-	path = /obj/item/stock_parts/circuitboard/roboprinter
-
 /datum/fabricator_recipe/imprinter/circuit/teleconsole
 	path = /obj/item/stock_parts/circuitboard/teleporter
 

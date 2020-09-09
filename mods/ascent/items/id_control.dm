@@ -50,8 +50,8 @@
 /obj/item/organ/internal/controller/Initialize()
 	if(ispath(id_card))
 		id_card = new id_card(src)
-	robotize()
 	. = ..()
+	robotize()
 	if(owner)
 		owner.set_id_info(id_card)
 

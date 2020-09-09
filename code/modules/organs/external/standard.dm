@@ -22,12 +22,11 @@
 	artery_name = "aorta"
 	cavity_name = "thoracic"
 	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
-	can_be_printed = FALSE
 
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
 
-/obj/item/organ/external/chest/robotize()
+/obj/item/organ/external/chest/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	if(..())
 		// Give them a new cell.
 		var/obj/item/organ/internal/cell/C = owner.internal_organs_by_name[BP_CELL]

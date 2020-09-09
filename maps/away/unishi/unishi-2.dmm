@@ -249,7 +249,6 @@
 "aH" = (
 /obj/structure/table/standard,
 /obj/item/stock_parts/circuitboard/solar_control,
-/obj/item/stock_parts/circuitboard/roboprinter,
 /obj/item/bot_kit,
 /turf/simulated/floor,
 /area/unishi/common)
@@ -260,7 +259,6 @@
 /area/unishi/common)
 "aJ" = (
 /obj/structure/table/standard,
-/obj/item/stock_parts/circuitboard/roboprinter,
 /obj/item/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)

@@ -101,16 +101,10 @@
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
 
-/obj/item/organ/internal/robotize()
+/obj/item/organ/internal/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	..()
 	min_bruised_damage += 5
 	min_broken_damage += 10
-	LAZYINITLIST(matter)
-	var/mat_amt = 0
-	for(var/mat in matter)
-		mat_amt += matter[mat]
-	matter.Cut()
-	matter[/decl/material/solid/metal/steel] = max(3000, mat_amt)
 
 /obj/item/organ/internal/proc/getToxLoss()
 	if(BP_IS_PROSTHETIC(src))

@@ -19,7 +19,7 @@
 /obj/machinery/acting/changer
 	name = "Quickee's Plastic Surgeon"
 	desc = "For when you need to be someone else right now."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/machines/fabricators/bioprinter.dmi'
 	icon_state = "bioprinter"
 	anchored = 1
 	density = 1
