@@ -31,14 +31,14 @@
 
 /datum/job/tradeship_captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
-	if(H.client)
-		H.client.verbs += /client/proc/tradehouse_rename_ship
-		H.client.verbs += /client/proc/tradehouse_rename_company
+	if(H)
+		H.verbs |= /mob/proc/tradehouse_rename_ship
+		H.verbs |= /mob/proc/tradehouse_rename_company
 
 /datum/job/tradeship_captain/get_access()
 	return get_all_station_access()
 
-/client/proc/tradehouse_rename_ship()
+/mob/proc/tradehouse_rename_ship()
 	set name = "Rename Tradeship"
 	set category = "Captain's Powers"
 
@@ -51,9 +51,9 @@
 	if(B)
 		B.SetName(GLOB.using_map.station_name)
 	command_announcement.Announce("Attention all hands on [GLOB.using_map.station_name]! Thank you for your attention.", "Ship re-Christened")
-	verbs -= /client/proc/tradehouse_rename_ship
+	verbs -= /mob/proc/tradehouse_rename_ship
 
-/client/proc/tradehouse_rename_company()
+/mob/proc/tradehouse_rename_company()
 	set name = "Rename Tradehouse"
 	set category = "Captain's Powers"
 	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", GLOB.using_map.company_name), MAX_NAME_LEN)
@@ -66,7 +66,7 @@
 		if(company_s)
 			GLOB.using_map.company_short = company_s
 		command_announcement.Announce("Congratulations to all members of [capitalize(GLOB.using_map.company_name)] on the new name. Their rebranding has changed the [GLOB.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Tradehouse Name Change")
-	verbs -= /client/proc/tradehouse_rename_company
+	verbs -= /mob/proc/tradehouse_rename_company
 
 /datum/job/tradeship_first_mate
 	title = "First Mate"

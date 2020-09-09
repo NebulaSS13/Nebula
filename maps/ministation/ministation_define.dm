@@ -11,11 +11,11 @@
 	station_name = "Space Station Zebra"
 	station_short = "Zebra"
 
-	dock_name     = "Val Salia Station"
+	dock_name     = "Finite Beginnings Free Dock"
 	boss_name     = "Trade Administration"
 	boss_short    = "Admin"
-	company_name  = "Tradehouse Ivenmoth"
-	company_short = "Ivenmoth"
+	company_name  = "Free Trade Union Residual Delta"
+	company_short = "RD"
 	overmap_event_areas = 11
 
 	default_law_type = /datum/ai_laws/nanotrasen
