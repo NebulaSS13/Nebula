@@ -30,6 +30,8 @@ jobs:
       env: TEST=MAP MAP_PATH=away_sites_testing
     - name: "Map - Modpacks"
       env: TEST=MAP MAP_PATH=modpack_testing
+    - name: "Map - Ministation"
+      env: TEST=MAP MAP_PATH=ministation
 
 cache:
   directories:
