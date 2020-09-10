@@ -1,3 +1,5 @@
+var/list/all_field_generators
+
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
 
@@ -59,6 +61,7 @@ field_generator power level display
 	. = ..()
 	fields = list()
 	connected_gens = list()
+	LAZYADD(global.all_field_generators, src)
 
 /obj/machinery/field_generator/Process()
 	if(Varedit_start == 1)
@@ -163,12 +166,10 @@ field_generator power level display
 		update_icon()
 	return 0
 
-
 /obj/machinery/field_generator/Destroy()
 	src.cleanup()
+	LAZYREMOVE(global.all_field_generators, src)
 	. = ..()
-
-
 
 /obj/machinery/field_generator/proc/turn_off()
 	active = 0

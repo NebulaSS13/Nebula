@@ -196,13 +196,13 @@
 	icon_state = "yellow"
 
 /area/turbolift/ministation_lower
-	name = "Lower Level"
+	name = "Lower Level Landing"
 	base_turf = /turf/simulated/floor
 
 /area/turbolift/ministation_middle
-	name = "Central Level"
+	name = "Central Level Landing"
 	base_turf = /turf/simulated/open
 
 /area/turbolift/ministation_upper
-	name = "Upper Level"
+	name = "Upper Level Landing"
 	base_turf = /turf/simulated/open

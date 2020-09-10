@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
-/obj/singularity/
+/obj/singularity
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
@@ -294,18 +294,26 @@
 
 	if(target && prob(60))
 		movement_dir = get_dir(src,target) //moves to a singulo beacon, if there is one
-	else
-		var/location
-		if(prob(16))
-			location = GetAbove(src)
-			if (location)
-				src.Move(location, UP)
-				return TRUE
-		else if(prob(16))
-			location = GetBelow(src)
-			if (location)
-				src.Move(location, DOWN)
-				return TRUE
+	else if(prob(16))
+		var/suppressed = FALSE
+		for(var/obj/machinery/field_generator/gen in global.all_field_generators)
+			if(gen.active && gen.z == z && get_dist(gen, src) <= 10)
+				suppressed = TRUE
+				break
+		if(!suppressed)
+			var/location
+			if(prob(50))
+				location = GetAbove(src)
+				if(location)
+					src.Move(location, UP)
+					. = TRUE
+			else
+				location = GetBelow(src)
+				if (location)
+					src.Move(location, DOWN)
+					. = TRUE
+			if(.)
+				return
 
 	if(current_size >= 9)//The superlarge one does not care about things in its way
 		spawn(0)
