@@ -243,14 +243,14 @@ var/list/_client_preferences_by_type
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/examine_messages
-	description ="Examining messages"
+	description = "Examining messages"
 	key = "EXAMINE_MESSAGES"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/floating_messages
-	description ="Floating chat messages"
+	description = "Floating chat messages"
 	key = "FLOATING_CHAT"
-	options = list(GLOB.PREF_HIDE, GLOB.PREF_SHOW)
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /********************
 * General Staff Preferences *
