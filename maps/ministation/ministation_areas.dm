@@ -186,3 +186,23 @@
 	secure = TRUE
 	req_access = list(access_ai_upload)
 	icon_state = "light_blue"
+
+/area/ministation/upper_level
+	name = "Upper Level"
+	icon_state = "yellow"
+
+/area/ministation/lower_level
+	name = "Lower Level"
+	icon_state = "yellow"
+
+/area/turbolift/ministation_lower
+	name = "Lower Level"
+	base_turf = /turf/simulated/floor
+
+/area/turbolift/ministation_middle
+	name = "Central Level"
+	base_turf = /turf/simulated/open
+
+/area/turbolift/ministation_upper
+	name = "Upper Level"
+	base_turf = /turf/simulated/open

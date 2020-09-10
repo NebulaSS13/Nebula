@@ -11,8 +11,10 @@ Now poorly imported for Nebula!
 
 	#define USING_MAP_DATUM /datum/map/ministation
 
-	#include "ministation.dmm"
-	#include "space.dmm"
+	#include "ministation-1.dmm"
+	#include "ministation-2.dmm"
+	#include "ministation-3.dmm"
+	#include "ministation-offsite.dmm"
 	#include "ministation_unit_testing.dm"
 
 	#include "ministation_antagonists.dm"

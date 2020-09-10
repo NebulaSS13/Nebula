@@ -43,3 +43,26 @@ ESCAPE_POD(1)
 	docking_controller = "cargo_bay"
 	base_area = /area/ministation/supply_dock
 	base_turf = /turf/space
+
+// Essentially a bare platform that moves up and down.
+/obj/turbolift_map_holder/ministation
+	name = "Ministation elevator placeholder"
+	icon = 'icons/obj/turbolift_preview_3x3.dmi'
+	depth = 3
+	lift_size_x = 2
+	lift_size_y = 2
+	dir = EAST
+	door_type =     null
+	wall_type =     null
+	firedoor_type = null
+	light_type =    null
+	floor_type =  /turf/simulated/floor/tiled/steel_grid
+	button_type = /obj/structure/lift/button/standalone
+	panel_type =  /obj/structure/lift/panel/standalone
+	areas_to_use = list(
+		/area/turbolift/ministation_lower,
+		/area/turbolift/ministation_middle,
+		/area/turbolift/ministation_upper
+	)
+	floor_departure_sound = 'sound/effects/lift_heavy_start.ogg'
+	floor_arrival_sound =   'sound/effects/lift_heavy_stop.ogg'
