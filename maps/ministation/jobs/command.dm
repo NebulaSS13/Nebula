@@ -30,13 +30,13 @@
 
 /datum/job/ministation/captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
-	if(H.client)  //should be converted to mob verb in future PR
-		H.client.verbs += /client/proc/freetradeunion_rename_company
+	if(H) 
+		H.verbs |= /mob/proc/freetradeunion_rename_company
 
 /datum/job/ministation/captain/get_access()
 	return get_all_station_access()
 
-/client/proc/freetradeunion_rename_company()
+/mob/proc/freetradeunion_rename_company()
 	set name = "Rename Free Trade Union"
 	set category = "Captain's Powers"
 	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", GLOB.using_map.company_name), MAX_NAME_LEN)
@@ -49,7 +49,7 @@
 		if(company_s)
 			GLOB.using_map.company_short = company_s
 		command_announcement.Announce("Congratulations to all members of [capitalize(GLOB.using_map.company_name)] on the new name. Their rebranding has changed the [GLOB.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Trade Union Name Change")
-	verbs -= /client/proc/freetradeunion_rename_company
+	verbs -= /mob/proc/freetradeunion_rename_company
 
 /datum/job/ministation/hop
 	title = "Lieutenant"
