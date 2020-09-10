@@ -75,6 +75,8 @@
 	var/mechanics_text
 	var/antag_text
 
+	var/affect_blood_on_ingest = TRUE
+
 	var/narcosis = 0 // Not a great word for it. Constant for causing mild confusion when ingested.
 	var/toxicity = 0 // Organ damage from ingestion.
 	var/toxicity_targets_organ // Bypass liver/kidneys when ingested, harm this organ directly (using BP_FOO defines).
@@ -491,7 +493,8 @@
 		M.adjust_drugged(euphoriant, euphoriant_max)
 
 /decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	affect_blood(M, alien, removed * 0.5, holder)
+	if(affect_blood_on_ingest)
+		affect_blood(M, alien, removed * 0.5, holder)
 
 /decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 
