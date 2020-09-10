@@ -82,6 +82,13 @@
 	add_overlay(overlay_image(icon, "[icon_state]_color", paint_color))
 	add_overlay(color_picker ? "[icon_state]_red" : "[icon_state]_blue")
 
+/obj/item/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	var/bodytype = lowertext(user_mob?.get_bodytype())
+	var/image/overlay = overlay_image(ret.icon, "[bodytype]-slot_[slot]_color", paint_color)
+	ret.add_overlay(overlay)
+	return ret
+
 /obj/item/paint_sprayer/afterattack(var/atom/A, var/mob/user, var/proximity, var/params)
 	if (!proximity)
 		return
