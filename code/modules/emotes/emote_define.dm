@@ -13,6 +13,8 @@
 	var/emote_message_1p_target        // 'You do a flip at Urist McTarget!'
 	var/emote_message_3p_target        // 'Urist McShitter does a flip at Urist McTarget!'
 
+	var/emote_message_radio            // A message to send over the radio if one picks up this emote.
+
 	// Two-dimensional array
 	// First is list of genders, associated to a list of the sound effects to use
 	var/list/emote_sound = null
@@ -65,6 +67,7 @@
 
 	var/use_3p
 	var/use_1p
+	var/use_radio_message
 	if(emote_message_1p)
 		if(target && emote_message_1p_target)
 			use_1p = get_emote_message_1p(user, target, extra_params)
@@ -91,6 +94,12 @@
 		use_3p = replacetext(use_3p, "USER", "<b>\the [user]</b>")
 		use_3p = capitalize(use_3p)
 
+	if(emote_message_radio)
+		use_radio_message = replacetext(emote_message_radio, "USER_THEM", user_gender.him)
+		use_radio_message = replacetext(use_radio_message, "USER_THEIR", user_gender.his)
+		use_radio_message = replacetext(use_radio_message, "USER_SELF", user_gender.self)
+		use_radio_message = replacetext(use_radio_message, "USER", "<b>\the [user]</b>")
+
 	if(ismob(user))
 		var/mob/M = user
 		if(message_type == AUDIBLE_MESSAGE)
@@ -100,7 +109,7 @@
 					M.visible_message(message = "[user] opens their mouth silently!", self_message = "You cannot say anything!", blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
 					return
 				else
-					M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
+					M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight, radio_message = use_radio_message)
 		else
 			M.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
 
