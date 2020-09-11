@@ -439,6 +439,8 @@
 	filling_color = "#db0000"
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/bearmeat/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 12)
@@ -451,6 +453,7 @@
 	filling_color = "#d5f5dc"
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
+	material = /decl/material/solid/meat
 
 /obj/item/chems/food/snacks/spider/Initialize()
 	. = ..()
@@ -469,6 +472,8 @@
 	filling_color = "#43de18"
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 6
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/xenomeat/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
@@ -481,6 +486,8 @@
 	filling_color = "#db0000"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/meatball/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
@@ -493,6 +500,8 @@
 	filling_color = "#db0000"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/sausage/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
@@ -504,6 +513,8 @@
 	filling_color = "#db0000"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/fatsausage/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
@@ -574,6 +585,8 @@
 	filling_color = "#f2b6ea"
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/brainburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
@@ -591,6 +604,7 @@
 
 /obj/item/chems/food/snacks/human
 	filling_color = "#d63c3c"
+	material = /decl/material/solid/meat
 	var/hname = ""
 	var/job = null
 
@@ -1070,6 +1084,8 @@
 	filling_color = "#7a3d11"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/plainsteak/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
@@ -1082,6 +1098,8 @@
 	filling_color = "#7a3d11"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/meatsteak/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
@@ -1102,6 +1120,8 @@
 	nutriment_desc = list("onion" = 2, "mushroom" = 2)
 	nutriment_amt = 4
 	bitesize = 3
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/loadedsteak/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
@@ -3001,6 +3021,7 @@
 	icon_state = "rawcutlet"
 	bitesize = 1
 	center_of_mass = @"{'x':17,'y':20}"
+	material = /decl/material/solid/meat
 
 /obj/item/chems/food/snacks/rawcutlet/Initialize()
 	.=..()
@@ -3013,6 +3034,7 @@
 	icon_state = "cutlet"
 	bitesize = 2
 	center_of_mass = @"{'x':17,'y':20}"
+	material = /decl/material/solid/meat
 
 /obj/item/chems/food/snacks/cutlet/Initialize()
 	.=..()
@@ -3025,6 +3047,7 @@
 	icon_state = "rawmeatball"
 	bitesize = 2
 	center_of_mass = @"{'x':16,'y':15}"
+	material = /decl/material/solid/meat
 
 /obj/item/chems/food/snacks/rawmeatball/Initialize()
 	.=..()
@@ -3037,6 +3060,7 @@
 	bitesize = 2
 	center_of_mass = @"{'x':16,'y':17}"
 	nutriment_type = /decl/material/liquid/nutriment/bread
+	material = /decl/material/solid/meat
 
 /obj/item/chems/food/snacks/hotdog/Initialize()
 	.=..()
@@ -3048,6 +3072,7 @@
 	icon_state = "hotcorgi"
 	bitesize = 6
 	center_of_mass = @"{'x':16,'y':17}"
+	material = /decl/material/solid/meat
 
 /obj/item/chems/food/snacks/classichotdog/Initialize()
 	.=..()
@@ -3212,6 +3237,8 @@
 	filling_color = "#631212"
 	center_of_mass = @"{'x':15,'y':9}"
 	bitesize = 2
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/sosjerky/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
@@ -3362,6 +3389,8 @@
 	filling_color = "#7a3d11"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 3
+	material = /decl/material/solid/meat
+
 /obj/item/chems/food/snacks/meatcube/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)

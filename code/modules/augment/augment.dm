@@ -4,11 +4,12 @@
 	icon = 'icons/obj/augment.dmi'
 	//By default these fit on both flesh and robotic organs and are robotic
 	status = ORGAN_PROSTHETIC
-	var/augment_flags = AUGMENTATION_MECHANIC | AUGMENTATION_ORGANIC
-	var/list/allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 	default_action_type = /datum/action/item_action/organ/augment
+	material = /decl/material/solid/metal/steel
 	var/descriptor = ""
 	var/known = TRUE
+	var/augment_flags = AUGMENTATION_MECHANIC | AUGMENTATION_ORGANIC
+	var/list/allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 
 /obj/item/organ/internal/augment/Initialize()
 	. = ..()

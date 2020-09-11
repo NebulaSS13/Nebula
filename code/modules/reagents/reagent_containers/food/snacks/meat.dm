@@ -8,6 +8,7 @@
 	health = 180
 	filling_color = "#ff1c1c"
 	center_of_mass = @"{'x':16,'y':14}"
+	material = /decl/material/solid/meat
 
 /obj/item/chems/food/snacks/meat/Initialize()
 	. = ..()

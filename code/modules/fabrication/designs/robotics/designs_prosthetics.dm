@@ -6,12 +6,18 @@
 /datum/fabricator_recipe/robotics/prosthetic/get_resources()
 	. = ..()
 	for(var/key in resources)
-		if(ispath(key, /decl/material))
+		if(!ispath(key, /decl/material/solid))
 			resources -= key
+	var/meat_amount = LAZYACCESS(resources, /decl/material/solid/meat)
+	if(meat_amount)
+		if(LAZYACCESS(resources, /decl/material/solid/metal/steel))
+			resources[/decl/material/solid/metal/steel] += meat_amount
+		else
+			LAZYSET(resources, /decl/material/solid/metal/steel, meat_amount)
+		LAZYREMOVE(resources, /decl/material/solid/meat)
 
 /datum/fabricator_recipe/robotics/prosthetic/get_product_name()
-	. = ..()
-	. = "prosthetic ([.])"
+	. = "prosthetic limb ([..()])"
 	if(model)
 		var/datum/robolimb/brand = model
 		return "[.] ([initial(brand.company)])"

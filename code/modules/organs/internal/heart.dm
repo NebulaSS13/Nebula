@@ -22,7 +22,7 @@
 		icon_state = dead_icon
 	..()
 
-/obj/item/organ/internal/heart/robotize()
+/obj/item/organ/internal/heart/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
 	icon_state = "heart-prosthetic"
 

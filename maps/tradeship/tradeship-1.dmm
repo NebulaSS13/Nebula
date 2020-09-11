@@ -3137,7 +3137,6 @@
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms2)
 "Ic" = (
-/obj/machinery/organ_printer/robot/mapped,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "IU" = (

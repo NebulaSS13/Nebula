@@ -8,4 +8,5 @@
 #define FABRICATOR_CLASS_IMPRINTER  "imprinter"
 #define FABRICATOR_CLASS_INDUSTRIAL "industrial"
 #define FABRICATOR_CLASS_ROBOTICS   "robotics"
-#define FABRICATOR_CLASS_TEXTILE	"textiles"
+#define FABRICATOR_CLASS_TEXTILE    "textiles"
+#define FABRICATOR_CLASS_MEAT       "bioprinter"

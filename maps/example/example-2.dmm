@@ -201,7 +201,7 @@
 /area/medical/surgery)
 "aF" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/organ_printer/flesh/mapped,
+/obj/machinery/fabricator/bioprinter,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aG" = (
@@ -231,7 +231,6 @@
 /area/medical/surgery)
 "aJ" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/organ_printer/robot/mapped,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "aK" = (

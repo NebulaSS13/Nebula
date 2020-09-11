@@ -9,7 +9,7 @@
 	max_damage = 70
 	relative_size = 10
 
-/obj/item/organ/internal/kidneys/robotize()
+/obj/item/organ/internal/kidneys/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
 	icon_state = "kidneys-prosthetic"
 

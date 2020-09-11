@@ -1,11 +1,10 @@
-var/list/organ_cache = list()
-
 /obj/item/organ
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
 	germ_level = 0
 	w_class = ITEM_SIZE_TINY
 	default_action_type = /datum/action/item_action/organ
+	material = /decl/material/solid/meat
 
 	// Strings.
 	var/organ_tag = "organ"           // Unique identifier.
@@ -25,12 +24,7 @@ var/list/organ_cache = list()
 	var/min_broken_damage = 30        // Damage before becoming broken
 	var/max_damage = 30               // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
-
 	var/death_time
-
-	// Bioprinter stats
-	var/can_be_printed = TRUE
-	var/print_cost
 
 /obj/item/organ/Destroy()
 	owner = null
@@ -249,10 +243,12 @@ var/list/organ_cache = list()
 	if (can_recover())
 		damage = between(0, damage - round(amount, 0.1), max_damage)
 
-
-/obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
+/obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
 	status = ORGAN_PROSTHETIC
 	reagents?.clear_reagents()
+	material = decls_repository.get_decl(apply_material)
+	matter = null
+	create_matter()
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = ORGAN_ASSISTED

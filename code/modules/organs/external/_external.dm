@@ -1098,7 +1098,7 @@ obj/item/organ/external/proc/remove_clamps()
 	if(species)
 		return species.get_manual_dexterity(owner)
 
-/obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0)
+/obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
 
 	if(BP_IS_PROSTHETIC(src))
 		return
