@@ -22,6 +22,7 @@
 		/decl/material/liquid/water =   0.25
 	)
 	bypass_cooling_products_for_root_type = /decl/material/liquid/ethanol
+	affect_blood_on_ingest = FALSE // prevents automatic toxins/inebriation as though injected
 
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
@@ -38,14 +39,16 @@
 /decl/material/liquid/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjustToxLoss(removed * 2 * alcohol_toxicity)
+	M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 
 /decl/material/liquid/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+
 	..()
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
-	var/strength_mod = 1
 	M.add_chemical_effect(CE_ALCOHOL, 1)
-	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + REAGENT_VOLUME(holder, type)/60) //drinking a LOT will make you go down faster
+
+	var/effective_dose = M.chem_doses[type] * (1 + REAGENT_VOLUME(holder, type)/60) //drinking a LOT will make you go down faster
 	if(effective_dose >= strength) // Early warning
 		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
 	if(effective_dose >= strength * 2) // Slurring
