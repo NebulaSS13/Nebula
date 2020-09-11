@@ -3,6 +3,14 @@
 	w_class = ITEM_SIZE_HUGE
 	gender = PLURAL
 	color = COLOR_GUNMETAL
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
+
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
+	)
+	dir = SOUTH
 
 	var/on_mech_icon = 'icons/mecha/mech_parts.dmi'
 	var/exosuit_desc_string
@@ -14,16 +22,10 @@
 	var/list/has_hardpoints = list()
 	var/decal
 	var/power_use = 0
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
-	)
-	dir = SOUTH
 
-/obj/item/mech_component/proc/set_colour(new_colour)
+/obj/item/mech_component/set_color(new_color)
 	var/last_colour = color
-	color = new_colour
+	color = new_color
 	return color != last_colour
 
 /obj/item/mech_component/emp_act(var/severity)

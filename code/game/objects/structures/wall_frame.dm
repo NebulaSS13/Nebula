@@ -6,7 +6,7 @@
 	desc = "A low wall section which serves as the base of windows, amongst other things."
 	icon = 'icons/obj/structures/wall_frame.dmi'
 	icon_state = "frame"
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED
 	anchored = 1
 	density = 1
 	throwpass = 1
@@ -21,7 +21,7 @@
 	var/stripe_color
 	var/list/connections
 	var/list/other_connections
-	
+
 /obj/structure/wall_frame/clear_connections()
 	connections = null
 	other_connections = null
@@ -153,6 +153,13 @@
 	if (tforce < 15)
 		return
 	take_damage(tforce)
+
+/obj/structure/wall_frame/get_color()
+	return paint_color
+
+/obj/structure/wall_frame/set_color(new_color)
+	paint_color = new_color
+	update_icon()
 
 //Subtypes
 /obj/structure/wall_frame/standard

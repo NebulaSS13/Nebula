@@ -1,11 +1,11 @@
 var/list/wall_blend_objects = list(
-	/obj/machinery/door, 
-	/obj/structure/wall_frame, 
-	/obj/structure/grille, 
-	/obj/structure/window/reinforced/full, 
-	/obj/structure/window/reinforced/polarized/full, 
-	/obj/structure/window/shuttle, 
-	/obj/structure/window/borosilicate/full, 
+	/obj/machinery/door,
+	/obj/structure/wall_frame,
+	/obj/structure/grille,
+	/obj/structure/window/reinforced/full,
+	/obj/structure/window/reinforced/polarized/full,
+	/obj/structure/window/shuttle,
+	/obj/structure/window/borosilicate/full,
 	/obj/structure/window/borosilicate_reinforced/full
 )
 var/list/wall_noblend_objects = list(
@@ -24,6 +24,7 @@ var/list/wall_noblend_objects = list(
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 	explosion_resistance = 10
 	color = COLOR_GRAY40
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 	var/damage = 0
 	var/damage_overlay = 0
@@ -273,6 +274,10 @@ var/list/wall_noblend_objects = list(
 
 /turf/simulated/wall/get_color()
 	return paint_color
+
+/turf/simulated/wall/set_color(new_color)
+	paint_color = new_color
+	update_icon()
 
 /turf/simulated/wall/proc/CheckPenetration(var/base_chance, var/damage)
 	return round(damage/material.integrity*180)

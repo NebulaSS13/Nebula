@@ -2322,7 +2322,7 @@
 /obj/item/stack/flag/yellow,
 /obj/item/storage/box/glowsticks,
 /obj/item/scanner/mining,
-/obj/item/floor_painter,
+/obj/item/paint_sprayer,
 /obj/item/radio,
 /obj/item/radio,
 /obj/item/radio,
