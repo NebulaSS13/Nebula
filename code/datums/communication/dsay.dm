@@ -74,7 +74,7 @@
 
 	var/lname
 	var/mob/observer/ghost/DM
-	var/anon_say_pref = (DM.get_preference_value(/datum/client_preference/anon_say) == GLOB.PREF_YES)
+	var/anon_say_pref = (C.get_preference_value(/datum/client_preference/anon_say) == GLOB.PREF_YES)
 	if(isghost(C.mob))
 		DM = C.mob
 	if(M.client.holder) 							// What admins see
