@@ -94,7 +94,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/command/hallway)
 "aj" = (
-/obj/structure/closet/walllocker/emerglocker/south,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -305,6 +304,11 @@
 	},
 /turf/simulated/floor/tiled,
 /area/ship/trade/shuttle/outgoing)
+"br" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/walllocker/emerglocker/north,
+/turf/simulated/floor/tiled/monotile,
+/area/ship/trade/dock)
 "bv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1669,10 +1673,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/cargo)
 "eI" = (
-/obj/machinery/light{
-	icon_state = "bulb1";
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/sign/directions/engineering{
@@ -4922,18 +4922,6 @@
 /obj/structure/closet/crate/uranium,
 /turf/simulated/floor/plating,
 /area/ship/trade/shieldbay)
-"pI" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "Docking Area APC"
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/ship/trade/dock)
 "pT" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -5499,8 +5487,16 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
 "xl" = (
-/obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/command/hallway)
 "xn" = (
 /obj/structure/cable{
@@ -5814,6 +5810,12 @@
 /obj/structure/table/marble,
 /obj/machinery/door/window/brigdoor/southright,
 /obj/machinery/door/blast/shutters{
+	id_tag = "fmate"
+	},
+/obj/machinery/button/blast_door{
+	pixel_x = 25;
+	pixel_y = -2;
+	pixel_w = -47;
 	id_tag = "fmate"
 	},
 /turf/simulated/floor/wood,
@@ -6458,11 +6460,6 @@
 /area/ship/trade/command/hallway)
 "Jk" = (
 /obj/structure/bed/chair/office/dark,
-/obj/machinery/button/blast_door{
-	id_tag = "fmate";
-	pixel_x = 25;
-	pixel_y = -2
-	},
 /obj/effect/landmark/start{
 	name = "First Mate"
 	},
@@ -6499,6 +6496,17 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/trade/maintenance/power)
+"Jv" = (
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "Docking Area APC"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/ship/trade/dock)
 "JI" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -10871,7 +10879,7 @@ CP
 aw
 aw
 oK
-UV
+br
 bD
 DO
 DO
@@ -11117,8 +11125,8 @@ Bb
 ai
 OS
 xl
-pI
-EA
+UV
+DE
 KP
 Qb
 FS
@@ -11199,8 +11207,8 @@ Kj
 as
 as
 SC
-tg
-DE
+Jv
+EA
 DO
 DO
 DO
@@ -11460,7 +11468,7 @@ Mv
 SL
 hs
 TR
-YN
+hs
 lZ
 SL
 EN

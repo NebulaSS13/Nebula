@@ -1,10 +1,9 @@
 /datum/job/tradeship_researcher
 	title = "Junior Researcher"
 	supervisors = "the Head Researcher and the Captain"
-	spawn_positions = 1
 	total_positions = 2
-	department_refs = list(DEPT_SCIENCE)
-	alt_titles = list()
+	spawn_positions = 1
+	alt_titles = list()	
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,
@@ -18,6 +17,10 @@
 		SKILL_SCIENCE  = SKILL_MAX
 	)
 	skill_points = 24
+	department_refs = list(DEPT_SCIENCE)
+	selection_color = "#633d63"
+	economic_power = 7
+	minimal_player_age = 7
 	access = list(
 		access_robotics, 
 		access_tox, 
@@ -34,9 +37,8 @@
 		access_xenobiology,
 		access_xenoarch
 	)
-	selection_color = "#633d63"
-	economic_power = 7
-	minimal_player_age = 7
+
+
 
 /datum/job/tradeship_researcher/head
 	title = "Head Researcher"
