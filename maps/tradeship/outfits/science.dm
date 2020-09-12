@@ -4,7 +4,7 @@
 	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/card/id/tradeship/science/head
 
-/obj/item/card/id/science
+/obj/item/card/id/tradeship/science
 	name = "identification card"
 	desc = "A card issued to science staff."
 	job_access_type = /datum/job/tradeship_researcher
