@@ -19,7 +19,7 @@
 /datum/artifact_trigger/proc/on_bump(atom/movable/AM)
 	return FALSE
 
-/datum/artifact_trigger/proc/on_water_act(depth)
+/datum/artifact_trigger/proc/on_fluid_act(datum/reagents/fluids)
 	return FALSE
 
 // Used by effect copying

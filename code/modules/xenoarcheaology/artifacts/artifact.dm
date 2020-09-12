@@ -131,5 +131,5 @@
 
 	return out
 
-/obj/structure/artifact/fluid_act(depth)
-	check_triggers(/datum/artifact_trigger/proc/on_water_act, depth)
+/obj/structure/artifact/fluid_act(datum/reagents/fluids)
+	check_triggers(/datum/artifact_trigger/proc/on_fluid_act, fluids)
