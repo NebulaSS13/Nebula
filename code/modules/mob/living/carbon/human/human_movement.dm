@@ -50,12 +50,18 @@
 	if(shock_stage >= 10 || get_stamina() <= 0)
 		tally += 3
 
-	if(is_asystole()) tally += 10  //heart attacks are kinda distracting
+	if(is_asystole())
+		tally += 10 // Heart attacks are kinda distracting.
 
-	if(aiming && aiming.aiming_at) tally += 5 // Iron sights make you slower, it's a well-known fact.
+	if(aiming && aiming.aiming_at)
+		tally += 5 // Iron sights make you slower, it's a well-known fact.
+
+	if(facing_dir)
+		tally += 3 // Locking direction will slow you down.
 
 	if(MUTATION_FAT in src.mutations)
 		tally += 1.5
+
 	if (bodytemperature < species.cold_discomfort_level)
 		tally += (species.cold_discomfort_level - bodytemperature) / 10 * 1.75
 
@@ -129,7 +135,7 @@
 	if(.) //We moved
 		handle_exertion()
 		handle_leg_damage()
-	
+
 		if(client)
 			var/turf/B = GetAbove(src)
 			up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"
