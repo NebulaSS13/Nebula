@@ -61,9 +61,9 @@
 			success = 1
 			if(propagate)
 				var/turf/simulated/wall/W = T
-				W.update_connections()
-				W.update_icon()
-
+				W.wall_connections = null
+				W.other_connections = null
+				W.queue_icon_update()
 		else if( istype(T, /turf/simulated/shuttle/wall))
 			success = 1
 		else
