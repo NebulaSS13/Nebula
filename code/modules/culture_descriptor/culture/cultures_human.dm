@@ -22,3 +22,6 @@
 		/decl/language/human/common,
 		/decl/language/sign
 	)
+
+/decl/cultural_info/culture/synthetic/sanitize_name(new_name)
+	return sanitizeName(new_name, allow_numbers = TRUE)
