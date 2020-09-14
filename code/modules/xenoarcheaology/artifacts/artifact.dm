@@ -3,8 +3,9 @@
 	desc = "A large alien device."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "ano00"
+	density = TRUE
+
 	var/base_icon = "ano0"
-	density = 1
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
 	var/being_used = 0
@@ -129,3 +130,6 @@
 		out += secondary_effect.getDescription()
 
 	return out
+
+/obj/structure/artifact/fluid_act(datum/reagents/fluids)
+	check_triggers(/datum/artifact_trigger/proc/on_fluid_act, fluids)

@@ -1,6 +1,6 @@
 /datum/artifact_trigger
 	var/name = "nothing ever"
-	var/toggle = TRUE  //TRUE - effect is toggled between on and off when triggered. FALSE - effects is on when triggered, off if not triggered. 
+	var/toggle = TRUE  //TRUE - effect is toggled between on and off when triggered. FALSE - effects is on when triggered, off if not triggered.
 
 //There procs should return TRUE if trigger is activated, FALSE if nothing happens
 
@@ -17,6 +17,9 @@
 	return FALSE
 
 /datum/artifact_trigger/proc/on_bump(atom/movable/AM)
+	return FALSE
+
+/datum/artifact_trigger/proc/on_fluid_act(datum/reagents/fluids)
 	return FALSE
 
 // Used by effect copying

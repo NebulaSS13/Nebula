@@ -24,6 +24,12 @@
 		/decl/material/solid/ice
 	)
 
+/datum/artifact_trigger/chemical/on_fluid_act(datum/reagents/fluids)
+	for(var/reagent in required_chemicals)
+		if(fluids.remove_reagent(reagent, 5))
+			return TRUE
+	return ..()
+
 /datum/artifact_trigger/chemical/acid
 	name = "presence of acid"
 	required_chemicals = list(
