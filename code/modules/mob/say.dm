@@ -1,3 +1,17 @@
+var/global/list/special_channel_keys = list(
+	  "r" = "right ear",
+	  "l" = "left ear",
+	  "i" = "intercom",
+	  "h" = "department",
+	  "+" = "binarycomms",
+	  "w" = "whisper",
+	  "ê" = "right ear",
+	  "ä" = "left ear",
+	  "ø" = "intercom",
+	  "ð" = "department",
+	  "ö" = "whisper"
+)
+
 /mob/proc/say()
 	return
 
@@ -31,9 +45,11 @@
 /mob/proc/say_understands(mob/speaker, decl/language/speaking)
 	if(stat == DEAD || universal_speak || universal_understand)
 		return TRUE
+	if(!istype(speaker))
+		return TRUE
 	if(speaking)
 		return speaking.can_be_understood_by(speaker, src)
-	return (!speaker || speaker.universal_speak || istype(speaker, type) || istype(src, speaker.type))
+	return (speaker.universal_speak || istype(speaker, type) || istype(src, speaker.type))
 
 /mob/proc/say_quote(var/message, var/decl/language/speaking = null)
 	var/ending = copytext(message, length(message))
@@ -68,14 +84,14 @@
 //returns the message mode string or null for no message mode.
 //standard mode is the mode returned for the special ';' radio code.
 /mob/proc/parse_message_mode(var/message, var/standard_mode="headset")
-	if(length(message) >= 1 && copytext_char(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
+	if(length(message) <= 0)
+		return null
+	var/initial_char = copytext_char(message,1,2)
+	if(initial_char == get_common_radio_prefix())
 		return standard_mode
-
-	if(length(message) >= 2)
-		var/channel_prefix = copytext_char(message, 1 ,3)
-		return department_radio_keys[channel_prefix]
-
-	return null
+	if(initial_char == get_department_radio_prefix() && length(message) >= 2)
+		var/channel_prefix = copytext(message, 2, 3)
+		. = global.special_channel_keys[channel_prefix] || channel_prefix
 
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.

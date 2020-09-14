@@ -26,10 +26,10 @@
 			var/virgin = 1	//has the text been modified yet?
 			var/temp = winget(client, "input", "text")
 			if(findtextEx(temp, "Say \"", 1, 7) && length(temp) > 5)	//case sensitive means
-				var/main_key = get_prefix_key(/decl/prefix/radio_main_channel)
+				var/main_key = get_common_radio_prefix()
 				temp = replacetext(temp, main_key, "")	//general radio
 
-				var/channel_key = get_prefix_key(/decl/prefix/radio_channel_selection)
+				var/channel_key = get_department_radio_prefix()
 				if(findtext(trim_left(temp), channel_key, 6, 7))	//dept radio
 					temp = copytext(trim_left(temp), 8)
 					virgin = 0

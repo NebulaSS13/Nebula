@@ -48,7 +48,7 @@
 	name = "Encrypted Radio Channel Key"
 	desc = "This headset encryption key will allow you to speak on a hidden, encrypted radio channel. Use a screwdriver on your headset to exchange keys."
 	item_cost = 1
-	path = /obj/item/encryptionkey/syndicate
+	path = /obj/item/encryptionkey/hacked
 
 /datum/uplink_item/item/tools/shield_diffuser
 	name = "Handheld Shield Diffuser"

@@ -135,27 +135,6 @@
 		/obj/item/holowarrant,
 	)
 
-/obj/structure/closet/secure_closet/security/cargo/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-		/obj/item/clothing/accessory/armband/cargo,
-		/obj/item/encryptionkey/headset_cargo
-	))
-
-/obj/structure/closet/secure_closet/security/engine/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-			/obj/item/clothing/accessory/armband/engine,
-			/obj/item/encryptionkey/headset_eng
-		))
-
-/obj/structure/closet/secure_closet/security/science/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(/obj/item/encryptionkey/headset_sci))
-
-/obj/structure/closet/secure_closet/security/med/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-			/obj/item/clothing/accessory/armband/medgreen,
-			/obj/item/encryptionkey/headset_med
-		))
-
 /obj/structure/closet/secure_closet/detective
 	name = "detective's cabinet"
 	req_access = list(access_forensics_lockers)

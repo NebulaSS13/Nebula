@@ -674,6 +674,13 @@
 /obj/structure/closet/secure_closet/freezer/kitchen,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/cargo)
+"bo" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/ship/trade/command/bridge)
 "bp" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/light,
@@ -10560,7 +10567,7 @@ bb
 DO
 DO
 DO
-Qz
+bo
 rH
 rI
 DO

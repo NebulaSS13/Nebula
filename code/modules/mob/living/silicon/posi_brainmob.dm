@@ -67,14 +67,11 @@
 		var/obj/item/radio/R = owner.get_equipped_item(slot)
 		if(istype(R))
 			var/list/new_channels = list()
-			new_channels["Common"] = ";"
-			for(var/i = 1 to R.channels.len)
-				var/channel = R.channels[i]
-				var/key = get_radio_key_from_channel(channel)
-				new_channels[channel] = key
+			new_channels["Common"] = get_common_radio_prefix()
+			for(var/datum/radio_channel/channel in R.channels)
+				new_channels[channel.name] = channel.key
 			owner_channels = new_channels
 			return TRUE
-
 	return FALSE
 
 /mob/living/silicon/sil_brainmob/statelaw(var/law, var/mob/living/L = src)

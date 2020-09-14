@@ -26,6 +26,7 @@
 	salary_modifier = 0.2
 
 	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Please move to a shielded area such as the cargo bay, dormitories or medbay until the radiation has passed."
+	default_telecomms_channels = list(COMMON_FREQUENCY_DATA)
 
 /datum/map/tradeship/get_map_info()
 	return "You're aboard the <b>[station_name],</b> a survey and mercantile vessel affiliated with the Free Trade Union. \

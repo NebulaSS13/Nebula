@@ -21,7 +21,6 @@ Now poorly imported for Nebula!
 	#include "ministation_antagonists.dm"
 	#include "ministation_areas.dm"
 	#include "ministation_departments.dm"
-	#include "ministation_telecomms.dm"
 	#include "ministation_jobs.dm"
 	#include "ministation_shuttles.dm"
 	#include "ministation_objects.dm"

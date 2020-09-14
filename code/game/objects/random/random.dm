@@ -1027,7 +1027,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/circular_saw = 7,
 				/obj/item/scalpel = 7,
 				/obj/item/baton/loaded = 9,
-				/obj/item/radio/headset/syndicate = 6)
+				/obj/item/radio/headset/hacked = 6)
 
 /obj/random/voidhelmet
 	name = "Random Voidsuit Helmet"

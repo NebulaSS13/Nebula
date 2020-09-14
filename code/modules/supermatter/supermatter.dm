@@ -402,11 +402,10 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else
 		alert_msg = null
 	if(alert_msg)
-		var/obj/item/radio/announcer = get_global_announcer()
-		announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
+		do_telecomms_announcement(src, alert_msg, "Supermatter Monitor", "Engineering")
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
-			announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
+			do_telecomms_announcement(src, "WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
 			global.using_map.unbolt_saferooms()
 			for(var/mob/M in global.player_list)
@@ -414,7 +413,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 				if(T && isStationLevel(T.z) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
-			announcer.autosay(alert_msg, "Supermatter Monitor")
+			do_telecomms_announcement(src, alert_msg, "Supermatter Monitor")
 			public_alert = 0
 
 

@@ -1,11 +1,22 @@
 /decl/hierarchy/outfit/job/ministation/cargo
-	l_ear = /obj/item/radio/headset/headset_cargo
+	l_ear = /obj/item/radio/headset/ministation_headset_cargo
 	name = "Ministation - Job - Cargo technician"
 	uniform = /obj/item/clothing/under/cargotech
 	id_type = /obj/item/card/id/ministation/cargo
 	pda_type = /obj/item/modular_computer/pda/cargo
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/storage/ore = 1)
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
+/obj/item/encryptionkey/ministation_headset_cargo
+	name = "cargo radio encryption key"
+	icon_state = "srv_cypherkey"
+	can_decrypt = list(access_cargo)
+
+/obj/item/radio/headset/ministation_headset_cargo
+	name = "supply radio headset"
+	desc = "A headset used by the box-pushers."
+	icon = 'maps/ministation/icons/headset_cargo.dmi'
+	encryption_keys = list(/obj/item/encryptionkey/ministation_headset_cargo)
 
 /decl/hierarchy/outfit/job/ministation/cargo/Initialize()
 	. = ..()

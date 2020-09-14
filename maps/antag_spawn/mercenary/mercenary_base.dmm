@@ -115,9 +115,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
-/obj/machinery/telecomms/allinone{
-	intercept = 1
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "am" = (
@@ -255,8 +252,9 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "az" = (
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 8
+/obj/machinery/network/relay/long_range{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -403,6 +401,10 @@
 	pixel_x = -21;
 	req_access = list("ACCESS_MERCENARY")
 	},
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair";
+	dir = 4
+	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "aN" = (
@@ -504,6 +506,10 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair";
+	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -1607,7 +1613,7 @@
 "cU" = (
 /obj/vehicle/bike/electric,
 /turf/simulated/floor/airless,
-/area/space)
+/area/map_template/merc_spawn)
 "cW" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -1814,6 +1820,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
+"hv" = (
+/obj/machinery/computer/message_monitor,
+/turf/simulated/floor/airless,
+/area/map_template/merc_spawn)
+"hx" = (
+/obj/machinery/network/telecomms_hub/mercenary,
+/turf/simulated/floor/airless,
+/area/map_template/merc_spawn)
 "hG" = (
 /obj/machinery/computer/ship/sensors{
 	dir = 4
@@ -1876,6 +1890,13 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"jv" = (
+/obj/machinery/network/acl{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
+	},
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "jE" = (
 /obj/structure/bed/chair/shuttle/blue{
@@ -2038,6 +2059,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
+"nq" = (
+/obj/machinery/network/mainframe{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
+	},
+/turf/simulated/floor/airless,
+/area/map_template/merc_spawn)
 "nE" = (
 /obj/machinery/fabricator/pipe/disposal,
 /obj/structure/railing/mapped/no_density,
@@ -2088,6 +2116,9 @@
 	},
 /obj/machinery/light/spot,
 /turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"pQ" = (
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "qa" = (
 /obj/abstract/landmark{
@@ -2213,12 +2244,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
-"vU" = (
-/obj/structure/window/reinforced/crescent{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/airless,
-/area/map_template/merc_spawn)
 "wG" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -2239,12 +2264,6 @@
 /obj/item/rig/merc/empty,
 /obj/item/rig/merc/empty,
 /turf/simulated/floor/plating,
-/area/map_template/merc_spawn)
-"xw" = (
-/obj/structure/window/reinforced/crescent{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/airless,
 /area/map_template/merc_spawn)
 "yz" = (
 /obj/effect/shuttle_landmark/merc/nav3,
@@ -2541,15 +2560,16 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
+"No" = (
+/obj/machinery/network/router{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
+	},
+/turf/simulated/floor/airless,
+/area/map_template/merc_spawn)
 "NX" = (
 /obj/item/chems/ivbag/nanoblood,
 /turf/space,
-/area/space)
-"NZ" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning"
-	},
-/turf/simulated/floor/airless,
 /area/space)
 "Ok" = (
 /obj/machinery/mining/brace,
@@ -9073,10 +9093,10 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
+XS
+XS
+XS
+XS
 aa
 aa
 aa
@@ -9172,13 +9192,13 @@ aa
 aa
 aa
 aa
-cY
-cY
-cY
-cY
 aa
 aa
 aa
+XS
+jv
+hv
+XS
 aa
 aa
 aa
@@ -9274,14 +9294,14 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
-cY
 aa
 aa
 aa
-aa
+XS
+nq
+pQ
+XS
+di
 di
 di
 XS
@@ -9376,17 +9396,17 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
-cY
 aa
 aa
 aa
-aa
-xw
-Hz
-Mj
+XS
+No
+pQ
+sf
+dj
+dj
+dj
+rR
 FO
 FO
 xb
@@ -9478,17 +9498,17 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
-NZ
-dh
 aa
 aa
-Hz
-vU
-vU
-Mj
+aa
+XS
+hx
+pQ
+sf
+dk
+dk
+dk
+rR
 gZ
 gZ
 kc
@@ -9580,15 +9600,15 @@ aa
 aa
 aa
 aa
-cY
+aa
+aa
+aa
+XS
 cU
-Pb
-aa
-aa
-di
-aa
+cU
+XS
 dh
-aa
+dh
 dh
 XS
 Ip
@@ -9682,13 +9702,13 @@ aa
 aa
 aa
 aa
-cY
+aa
+aa
+aa
+XS
 cU
-aa
-aa
-aa
-aa
-aa
+cU
+XS
 aa
 aa
 aa
@@ -9784,13 +9804,13 @@ aa
 aa
 aa
 aa
-cY
-cU
 aa
 aa
 aa
-aa
-aa
+XS
+XS
+XS
+XS
 aa
 aa
 aa
@@ -9886,8 +9906,8 @@ aa
 aa
 aa
 aa
-cY
-cY
+aa
+aa
 aa
 aa
 aa

@@ -13,7 +13,7 @@
 
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 	antaghud_indicator = "hudloyalist"
-	default_access = list(access_cent_specops)
+	default_access = list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
 
 	hard_cap = 5
 	hard_cap_round = 7
@@ -21,6 +21,7 @@
 	initial_spawn_target = 7
 	show_objectives_on_creation = 0 //we are not antagonists, we do not need the antagonist shpiel/objectives
 	default_outfit = /decl/hierarchy/outfit/ert
+
 	base_to_load = "ERT Base"
 
 /decl/special_role/ert/create_default(var/mob/source)
@@ -38,5 +39,3 @@
 		return
 	to_chat(player.current, "The Emergency Response Team works for Asset Protection; your job is to protect [global.using_map.company_name]'s ass-ets. There is a code red alert on [station_name()], you are tasked to go and fix the problem.")
 	to_chat(player.current, "You should first gear up and discuss a plan with your team. More members may be joining, don't move out before you're ready.")
-
-//Equip proc has been moved to the map specific folders.

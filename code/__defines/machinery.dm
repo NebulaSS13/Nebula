@@ -103,11 +103,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define ATMOS_DEFAULT_VOLUME_MIXER  500 // L.
 #define ATMOS_DEFAULT_VOLUME_PIPE   70  // L.
 
-#define TELECOMMS_RECEPTION_NONE 0
-#define TELECOMMS_RECEPTION_SENDER 1
-#define TELECOMMS_RECEPTION_RECEIVER 2
-#define TELECOMMS_RECEPTION_BOTH 3
-
 // These are used by supermatter and supermatter monitor program, mostly for UI updating purposes. Higher should always be worse!
 #define SUPERMATTER_ERROR -1		// Unknown status, shouldn't happen but just in case.
 #define SUPERMATTER_INACTIVE 0		// No or minimal energy
