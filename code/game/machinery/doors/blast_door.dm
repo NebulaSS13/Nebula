@@ -295,8 +295,8 @@
 /obj/machinery/door/blast/regular/escape_pod
 	name = "Escape Pod release Door"
 
-/obj/machinery/door/blast/regular/escape_pod/Process()	
-	if(SSevac.evacuation_controller.emergency_evacuation && SSevac.evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)		
+/obj/machinery/door/blast/regular/escape_pod/Process()
+	if(SSevac.evacuation_controller.emergency_evacuation && SSevac.evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)
 		src.force_open()
 	. = ..()
 
@@ -328,3 +328,4 @@
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE
+	icon_state = "shutter0"
