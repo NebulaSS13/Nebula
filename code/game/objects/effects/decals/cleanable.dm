@@ -27,7 +27,7 @@
 	hud_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	set_cleanable_scent()
 
-	if(istype(loc, /turf/space))
+	if(isspaceturf(loc))
 		animate(src, alpha = 0, time = 5 SECONDS)
 		QDEL_IN(src, 5 SECONDS)
 
