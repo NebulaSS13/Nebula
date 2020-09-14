@@ -23,7 +23,10 @@
 						thing.forceMove(src)
 
 /obj/structure/mech_wreckage/powerloader/Initialize(mapload)
-	. = ..(mapload, new /mob/living/exosuit/premade/powerloader(loc), FALSE)
+	var/mob/living/exosuit/premade/powerloader/new_mech = new(loc)
+	. = ..(mapload, new_mech, FALSE)
+	if(!QDELETED(new_mech))
+		qdel(new_mech)
 
 /obj/structure/mech_wreckage/attack_hand(var/mob/user)
 	if(contents.len)
