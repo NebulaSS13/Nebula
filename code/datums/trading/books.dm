@@ -40,7 +40,6 @@
 					"how_much" = "Hmmmmm, I give zhis to you for maybe... VALUE CURRENCY.",
 					"trade_complete" = "Yesssss zhank you for transactionings!!",
 					"trade_refuse" = "No! No no no no!",
-					"what_want" = "Give clam! Clam clem clom. Soslimy, soyum. Gimme",
 					"trade_blacklist" = "Aaaaaa! No want, no want! Go away!",
 					"trade_found_unwanted" = "Hmmm, no. Do not want.",
 					"trade_not_enough" = "Not enough! More! More!")
