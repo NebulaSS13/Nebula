@@ -29,8 +29,9 @@
 
 /decl/hierarchy/outfit/commando
 	name =     "Special Role - Deathsquad Commando"
-	l_ear =    /obj/item/radio/headset/deathsquad
+	l_ear =    /obj/item/radio/headset/ert
 	uniform =  /obj/item/clothing/under/color/green
+	l_ear =    /obj/item/radio/headset/hacked
 	l_pocket = /obj/item/plastique
 	shoes =    /obj/item/clothing/shoes/jackboots/swat
 	glasses =  /obj/item/clothing/glasses/thermal
@@ -55,14 +56,6 @@
 	. = ..()
 	if(.)
 		player.implant_loyalty(player)
-
-/obj/item/radio/headset/deathsquad
-	origin_tech = "{'esoteric':2}"
-	syndie = 1
-
-/obj/item/radio/headset/deathsquad/Initialize()
-	. = ..()
-	set_frequency(DTH_FREQ)
 
 /decl/special_role/deathsquad/update_antag_mob(var/datum/mind/player)
 

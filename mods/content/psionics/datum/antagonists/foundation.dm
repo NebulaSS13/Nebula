@@ -44,3 +44,9 @@
 	holster =  /obj/item/clothing/accessory/storage/holster/armpit
 	id_type = /obj/item/card/id/foundation
 	id_slot =  slot_wear_id_str
+
+/obj/item/radio/headset/foundation
+	name = "\improper Foundation radio headset"
+	desc = "The headeset of the occult cavalry."
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
+	encryption_keys = list(/obj/item/encryptionkey/ert)

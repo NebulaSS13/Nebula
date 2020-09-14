@@ -21,11 +21,11 @@ var/global/list/radio_beacons = list()
 	global.radio_beacons -= src
 	. = ..()
 
+/obj/item/radio/beacon/toggle_panel(var/mob/user)
+	return FALSE
+
 /obj/item/radio/beacon/hear_talk()
 	return
-
-/obj/item/radio/beacon/send_hear()
-	return null
 
 /obj/item/radio/beacon/emp_act(severity)
 	if(functioning && severity >= 1)
@@ -75,7 +75,6 @@ var/global/list/radio_beacons = list()
 	hide(hides_under_flooring() && !T.is_plating())
 
 /obj/item/radio/beacon/anchored/attackby(obj/item/I, mob/user)
-	..()
 	if(istype(I, /obj/item/stack/nanopaste))
 		if(functioning)
 			to_chat(user, SPAN_WARNING("\The [src] does not need any repairs."))
@@ -85,7 +84,7 @@ var/global/list/radio_beacons = list()
 			return TRUE
 
 		var/obj/item/stack/nanopaste/S = I
-		if(!b_stat)
+		if(!panel_open)
 			to_chat(user, SPAN_WARNING("You can't work on \the [src] until its been opened up."))
 			return TRUE
 		if(!S.use(1))

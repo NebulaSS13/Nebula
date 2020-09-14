@@ -122,8 +122,9 @@
 	hat_y = -12
 
 /mob/living/silicon/robot/drone/init()
-	additional_law_channels["Drone"] = ":d"
-	if(!module) module = new module_type(src)
+	additional_law_channels["Drone"] = "d"
+	if(!module)
+		module = new module_type(src)
 
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with a logo and the subscript: '[global.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)

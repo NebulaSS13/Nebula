@@ -2,9 +2,10 @@
 
 /obj/machinery/computer/message_monitor
 	name = "messaging monitor console"
-	desc = "Used to access and maintain data on messaging servers. Allows you to view request console messages."
+	desc = "Used to access and maintain data on messaging servers. Allows you to view request console messages and telecommunication logs."
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
+
 	var/hack_icon = "error"
 	var/noserver = "<span class='alert'>ALERT: No server detected.</span>"
 	var/incorrectkey = "<span class='warning'>ALERT: Incorrect decryption key!</span>"
@@ -51,6 +52,7 @@
 	return
 
 /obj/machinery/computer/message_monitor/emag_act(var/remaining_charges, var/mob/user)
+
 	// Will create sparks and print out the console's password. You will then have to wait a while for the console to be back online.
 	// It'll take more time if there's more characters in the password..
 	if(!emag && operable())

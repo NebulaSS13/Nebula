@@ -43,9 +43,13 @@
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
+/obj/item/radio/headset/heads/ia
+	name = "internal affair's headset"
+	desc = "The headset of your worst enemy."
+
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = "Job - Internal affairs agent"
-	l_ear = /obj/item/radio/headset/ia
+	l_ear = /obj/item/radio/headset/heads/ia
 	uniform = /obj/item/clothing/under/internalaffairs
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/color/brown

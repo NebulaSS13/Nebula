@@ -223,6 +223,12 @@
 
 	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & LANG_FLAG_INNATE) || (speaking in src.languages)))
 
+/mob/proc/get_common_radio_prefix()
+	return get_prefix_key(/decl/prefix/radio_main_channel)
+
+/mob/proc/get_department_radio_prefix()
+	return get_prefix_key(/decl/prefix/radio_channel_selection)
+
 /mob/proc/get_language_prefix()
 	return get_prefix_key(/decl/prefix/language)
 

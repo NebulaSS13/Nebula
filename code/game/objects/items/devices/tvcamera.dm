@@ -1,3 +1,4 @@
+// TODO make this a network device.
 /obj/item/camera/tvcamera
 	name = "press camera drone"
 	desc = "An EyeBuddy livestreaming press camera drone. Weapon of choice for war correspondents and reality show cameramen. It does not appear to have any internal memory storage."
@@ -26,7 +27,6 @@
 	set_extension(src, /datum/extension/network_device/camera/television, null, null, null, TRUE, list(CAMERA_CHANNEL_TELEVISION), channel, FALSE)
 	radio = new(src)
 	radio.listening = FALSE
-	radio.set_frequency(ENT_FREQ)
 	radio.power_usage = 0
 	global.listening_objects += src
 	. = ..()
@@ -46,7 +46,7 @@
 	dat += "Channel name is: <a href='?src=\ref[src];channel=1'>[channel ? channel : "unidentified broadcast"]</a><br>"
 	dat += "Video streaming is: <a href='?src=\ref[src];video=1'>[video_enabled ? "Online" : "Offline"]</a><br>"
 	dat += "Microphone is: <a href='?src=\ref[src];sound=1'>[radio.broadcasting ? "Online" : "Offline"]</a><br>"
-	dat += "Sound is being broadcasted on frequency: [format_frequency(radio.frequency)] ([get_frequency_default_name(radio.frequency)])<br>"
+	dat += "Sound is being broadcasted on frequency: [format_frequency(radio.frequency)]<br>"
 	dat += "<a href='?src=\ref[src];net_options=1'>Network Options</a>"
 	var/datum/browser/written_digital/popup = new(user, "Press Camera Drone", "EyeBuddy", 300, 390, src)
 	popup.set_content(jointext(dat,null))
@@ -74,7 +74,7 @@
 			to_chat(usr,"<span class='notice'>Video streaming: Deactivated.</span>")
 		update_icon()
 	if(href_list["sound"])
-		radio.ToggleBroadcast()
+		radio.toggle_broadcast()
 		if(radio.broadcasting)
 			to_chat(usr,"<span class='notice'>Audio streaming: Activated. Broadcasting on frequency: [format_frequency(radio.frequency)].</span>")
 		else

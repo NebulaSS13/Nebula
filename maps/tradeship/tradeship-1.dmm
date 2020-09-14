@@ -3001,7 +3001,7 @@
 /area/ship/trade/escape_port)
 "Nb" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	pixel_y = 20
 	},
 /turf/simulated/floor/tiled/dark,

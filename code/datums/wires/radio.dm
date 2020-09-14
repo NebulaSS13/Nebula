@@ -13,7 +13,7 @@ var/global/const/WIRE_TRANSMIT = 4
 
 /datum/wires/radio/CanUse(var/mob/living/L)
 	var/obj/item/radio/R = holder
-	if(R.b_stat)
+	if(R.panel_open)
 		return 1
 	return 0
 

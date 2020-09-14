@@ -1,106 +1,7 @@
-var/global/list/department_radio_keys = list(
-	":r" = MESSAGE_MODE_RIGHT,      ".r" = MESSAGE_MODE_RIGHT,
-	":l" = MESSAGE_MODE_LEFT,       ".l" = MESSAGE_MODE_LEFT,
-	":i" = MESSAGE_MODE_INTERCOM,   ".i" = MESSAGE_MODE_INTERCOM,
-	":h" = MESSAGE_MODE_DEPARTMENT, ".h" = MESSAGE_MODE_DEPARTMENT,
-	":+" = MESSAGE_MODE_SPECIAL,    ".+" = MESSAGE_MODE_SPECIAL, //activate radio-specific special functions
-	":w" = MESSAGE_MODE_WHISPER,    ".w" = MESSAGE_MODE_WHISPER,
-	":c" = "Command",               ".c" = "Command",
-	":n" = "Science",               ".n" = "Science",
-	":m" = "Medical",               ".m" = "Medical",
-	":e" = "Engineering",           ".e" = "Engineering",
-	":s" = "Security",              ".s" = "Security",
-	":t" = "Mercenary",             ".t" = "Mercenary",
-	":x" = "Raider",                ".x" = "Raider",
-	":u" = "Supply",                ".u" = "Supply",
-	":v" = "Service",               ".v" = "Service",
-	":p" = "AI Private",            ".p" = "AI Private",
-	":z" = "Entertainment",         ".z" = "Entertainment",
-	":y" = "Exploration",           ".y" = "Exploration",
-
-	":R" = MESSAGE_MODE_RIGHT,      ".R" = MESSAGE_MODE_RIGHT,
-	":L" = MESSAGE_MODE_LEFT,       ".L" = MESSAGE_MODE_LEFT,
-	":I" = MESSAGE_MODE_INTERCOM,   ".I" = MESSAGE_MODE_INTERCOM,
-	":H" = MESSAGE_MODE_DEPARTMENT, ".H" = MESSAGE_MODE_DEPARTMENT,
-	":W" = MESSAGE_MODE_WHISPER,    ".W" = MESSAGE_MODE_WHISPER,
-	":C" = "Command",               ".C" = "Command",
-	":N" = "Science",               ".N" = "Science",
-	":M" = "Medical",               ".M" = "Medical",
-	":E" = "Engineering",           ".E" = "Engineering",
-	":S" = "Security",              ".S" = "Security",
-	":T" = "Mercenary",             ".T" = "Mercenary",
-	":X" = "Raider",                ".X" = "Raider",
-	":U" = "Supply",                ".U" = "Supply",
-	":V" = "Service",               ".V" = "Service",
-	":P" = "AI Private",            ".P" = "AI Private",
-	":Z" = "Entertainment",         ".Z" = "Entertainment",
-	":Y" = "Exploration",           ".Y" = "Exploration",
-
-//russian version below
-	":к" = MESSAGE_MODE_RIGHT,         ".к" = MESSAGE_MODE_RIGHT,
-	":д" = MESSAGE_MODE_LEFT,          ".д" = MESSAGE_MODE_LEFT,
-	":ш" = MESSAGE_MODE_INTERCOM,      ".ш" = MESSAGE_MODE_INTERCOM,
-	":р" = MESSAGE_MODE_DEPARTMENT,    ".р" = MESSAGE_MODE_DEPARTMENT,
-	":ц" = MESSAGE_MODE_WHISPER,       ".ц" = MESSAGE_MODE_WHISPER,
-	":с" = "Command",                  ".с" = "Command",
-	":т" = "Science",                  ".т" = "Science",
-	":ь" = "Medical",                  ".ь" = "Medical",
-	":у" = "Engineering",              ".у" = "Engineering",
-	":ы" = "Security",                 ".ы" = "Security",
-	":е" = "Mercenary",                ".е" = "Mercenary",
-	":г" = "Supply",                   ".г" = "Supply",
-	":ч" = "Raider",                   ".ч" = "Raider",
-	":м" = "Service",                  ".м" = "Service",
-	":з" = "AI Private",               ".з" = "AI Private",
-	":я" = "Entertainment",            ".я" = "Entertainment",
-	":н" = "Exploration",              ".н" = "Exploration",
-
-	":К" = MESSAGE_MODE_RIGHT,         ".К" = MESSAGE_MODE_RIGHT,
-	":Д" = MESSAGE_MODE_LEFT,          ".Д" = MESSAGE_MODE_LEFT,
-	":Ш" = MESSAGE_MODE_INTERCOM,	   ".Ш" = MESSAGE_MODE_INTERCOM,
-	":Р" = MESSAGE_MODE_DEPARTMENT,    ".Р" = MESSAGE_MODE_DEPARTMENT,
-	":Ц" = MESSAGE_MODE_WHISPER,       ".Ц" = MESSAGE_MODE_WHISPER,
-	":С" = "Command",                  ".С" = "Command",
-	":Т" = "Science",                  ".Т" = "Science",
-	":Ь" = "Medical",                  ".Ь" = "Medical",
-	":У" = "Engineering",              ".У" = "Engineering",
-	":Ы" = "Security",                 ".Ы" = "Security",
-	":Е" = "Mercenary",                ".Е" = "Mercenary",
-	":Г" = "Supply",                   ".Г" = "Supply",
-	":Ч" = "Raider",                   ".Ч" = "Raider",
-	":М" = "Service",                  ".М" = "Service",
-	":З" = "AI Private",               ".З" = "AI Private",
-	":Я" = "Entertainment",            ".Я" = "Entertainment",
-	":Н" = "Exploration",              ".Н" = "Exploration",
-)
-
-// Assoc for lookup speed since this is in potentially semihot code
-var/global/list/nondepartmental_message_modes = list(
-	MESSAGE_MODE_LEFT =     TRUE,
-	MESSAGE_MODE_RIGHT =    TRUE,
-	MESSAGE_MODE_INTERCOM = TRUE,
-	MESSAGE_MODE_DEFAULT =  TRUE,
-	MESSAGE_MODE_WHISPER =  TRUE
-)
-
-var/global/list/channel_to_radio_key = new
-/proc/get_radio_key_from_channel(var/channel)
-	var/key = channel_to_radio_key[channel]
-	if(!key)
-		for(var/radio_key in department_radio_keys)
-			if(department_radio_keys[radio_key] == channel)
-				key = radio_key
-				break
-		if(!key)
-			key = ""
-		channel_to_radio_key[channel] = key
-
-	return key
-
 /mob/living/proc/binarycheck()
 	for(var/slot in global.ear_slots)
 		var/obj/item/radio/headset/dongle = get_equipped_item(slot)
-		if(istype(dongle) && dongle.translate_binary)
+		if(dongle?.can_transmit_binary())
 			return TRUE
 	return FALSE
 
@@ -236,12 +137,12 @@ var/global/list/channel_to_radio_key = new
 		return custom_emote(1, copytext(message,2))
 
 	//parse the radio code and consume it
-	var/message_mode = parse_message_mode(message)
-	if (message_mode)
-		if (message_mode == MESSAGE_MODE_DEFAULT)
-			message = copytext_char(message,2)	//it would be really nice if the parse procs could do this for us.
+	var/message_mode = parse_message_mode(message, standard_mode = MESSAGE_MODE_DEFAULT)
+	if(message_mode)
+		if(message_mode == MESSAGE_MODE_DEFAULT)
+			message = copytext_char(message, 2)
 		else
-			message = copytext_char(message,3)
+			message = copytext_char(message, 3)
 
 	message = trim_left(message)
 

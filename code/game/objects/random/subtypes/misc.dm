@@ -361,7 +361,7 @@
 		/obj/item/circular_saw =                                  7,
 		/obj/item/scalpel =                                       7,
 		/obj/item/baton/loaded =                                  9,
-		/obj/item/radio/headset/syndicate =                       6
+		/obj/item/radio/headset/hacked =                          6
 	)
 	return spawnable_choices
 

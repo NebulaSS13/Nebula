@@ -339,25 +339,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	maint_all_access = 0
 	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
 
-// Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
-// This list needs to be purged but people insist on adding more cruft to the radio.
-/datum/map/proc/default_internal_channels()
-	return list(
-		num2text(PUB_FREQ)   = list(),
-		num2text(AI_FREQ)    = list(access_synth),
-		num2text(ENT_FREQ)   = list(),
-		num2text(ERT_FREQ)   = list(access_cent_specops),
-		num2text(COMM_FREQ)  = list(access_bridge),
-		num2text(ENG_FREQ)   = list(access_engine_equip, access_atmospherics),
-		num2text(MED_FREQ)   = list(access_medical_equip),
-		num2text(MED_I_FREQ) = list(access_medical_equip),
-		num2text(SEC_FREQ)   = list(access_security),
-		num2text(SEC_I_FREQ) = list(access_security),
-		num2text(SCI_FREQ)   = list(access_tox,access_robotics,access_xenobiology),
-		num2text(SUP_FREQ)   = list(access_cargo),
-		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
-	)
-
 /datum/map/proc/show_titlescreen(client/C)
 	set waitfor = FALSE
 

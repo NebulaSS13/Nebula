@@ -229,7 +229,6 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/telecomms/broadcaster/preset_right,
 /turf/simulated/floor/bluegrid{
 	name = "Mainframe Base";
 	temperature = 263
@@ -2680,7 +2679,7 @@
 "hd" = (
 /obj/structure/bed,
 /obj/item/bedsheet/mime,
-/obj/item/radio/intercom/department/security{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -27
 	},
@@ -5211,7 +5210,6 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/telecomms/receiver/preset_right,
 /turf/simulated/floor/bluegrid{
 	name = "Mainframe Base";
 	temperature = 263
@@ -5621,13 +5619,7 @@
 	pixel_x = 24
 	},
 /obj/structure/closet/crate,
-/obj/item/stock_parts/circuitboard/telecomms/broadcaster,
-/obj/item/stock_parts/circuitboard/telecomms/bus,
-/obj/item/stock_parts/circuitboard/telecomms/hub,
-/obj/item/stock_parts/circuitboard/telecomms/message_server,
-/obj/item/stock_parts/circuitboard/telecomms/processor,
-/obj/item/stock_parts/circuitboard/telecomms/receiver,
-/obj/item/stock_parts/circuitboard/telecomms/server,
+/obj/item/stock_parts/circuitboard/telecomms_hub,
 /obj/item/cell,
 /turf/simulated/floor/holofloor/lino,
 /area/ministation/telecomms)
@@ -8952,7 +8944,6 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/w)
 "xg" = (
-/obj/machinery/computer/telecomms/monitor,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -9414,7 +9405,6 @@
 /turf/simulated/floor/tiled,
 /area/ministation/cafe)
 "ys" = (
-/obj/machinery/telecomms/server/presets/ministation,
 /turf/simulated/floor/bluegrid{
 	name = "Mainframe Base";
 	temperature = 263
@@ -9981,7 +9971,6 @@
 /turf/simulated/floor/plating,
 /area/ministation/ai_sat)
 "Aa" = (
-/obj/machinery/telecomms/bus/preset_one/ministation,
 /turf/simulated/floor/bluegrid{
 	name = "Mainframe Base";
 	temperature = 263
@@ -10163,7 +10152,6 @@
 /turf/simulated/floor/wood,
 /area/ministation/cafe)
 "Ax" = (
-/obj/machinery/telecomms/processor/preset_one/ministation,
 /turf/simulated/floor/bluegrid{
 	name = "Mainframe Base";
 	temperature = 263
@@ -10231,7 +10219,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/sw)
 "AL" = (
-/obj/machinery/telecomms/hub/preset/ministation,
+/obj/machinery/network/telecomms_hub,
 /turf/simulated/floor/bluegrid{
 	name = "Mainframe Base";
 	temperature = 263
@@ -10515,7 +10503,6 @@
 /turf/simulated/floor/holofloor/lino,
 /area/ministation/telecomms)
 "Bu" = (
-/obj/machinery/computer/telecomms/server,
 /turf/simulated/floor/holofloor/lino,
 /area/ministation/telecomms)
 "Bv" = (

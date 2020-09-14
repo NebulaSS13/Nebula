@@ -371,7 +371,7 @@
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
 
-/obj/item/proc/talk_into(mob/M, text)
+/obj/item/proc/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
 	return
 
 /obj/item/proc/moved(mob/user, old_loc)

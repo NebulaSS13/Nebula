@@ -393,8 +393,7 @@
 		control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
-	var/obj/item/radio/announcer = get_global_announcer()
-	announcer.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
+	do_telecomms_announcement(src, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 
 	//This should guarantee that ghosts don't spawn.
 	occupant.ckey = null

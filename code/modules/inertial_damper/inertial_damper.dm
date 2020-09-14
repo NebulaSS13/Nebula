@@ -90,8 +90,7 @@ var/global/list/ship_inertial_dampers = list()
 		if(!warned && damping_strength < 0.3*initial(damping_strength) && target_strength < damping_strength && lastwarning - world.timeofday >= WARNING_DELAY)
 			warned = TRUE
 			lastwarning = world.timeofday
-			var/obj/item/radio/announcer = get_global_announcer()
-			announcer.autosay("WARNING: Inertial dampening level dangerously low! All crew must be secured before firing thrusters!", "inertial damper Monitor")
+			do_telecomms_announcement(src, "WARNING: Inertial dampening level dangerously low! All crew must be secured before firing thrusters!", "Inertial Damper Monitor")
 	else
 		delta = initial(delta) * 5 // rate of dampening strength decay is higher if we have no power
 		target_strength = 0

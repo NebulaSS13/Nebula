@@ -187,7 +187,7 @@
 /obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -261,7 +261,7 @@
 "aL" = (
 /obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -272,7 +272,7 @@
 /obj/structure/table/reinforced,
 /obj/machinery/chemical_dispenser/bar_soft/full,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -332,7 +332,7 @@
 	},
 /area/map_template/rescue_base/base)
 "aU" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -464,7 +464,7 @@
 /obj/machinery/recharger{
 	pixel_y = 4
 	},
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -779,7 +779,7 @@
 "bQ" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/captain,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -1107,7 +1107,7 @@
 /obj/item/cell/high,
 /obj/item/cell/high,
 /obj/item/cell/high,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -1721,7 +1721,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dw" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -1733,7 +1733,7 @@
 "dx" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	frequency = 1331;
-	id_tag = "ert_rescue_base";
+	id_tag = "rescue_base";
 	pixel_x = 5;
 	pixel_y = -25
 	},
@@ -1775,7 +1775,7 @@
 /area/map_template/rescue_base/base)
 "dC" = (
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "ert_rescue_base_hatch";
+	id_tag = "rescue_base_hatch";
 	name = "Landing Pad"
 	},
 /turf/unsimulated/floor{
@@ -1804,7 +1804,7 @@
 /obj/structure/table/reinforced,
 /obj/item/aicard,
 /obj/item/pinpointer/advpinpointer,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -1844,7 +1844,7 @@
 /area/map_template/rescue_base/base)
 "dK" = (
 /obj/machinery/fabricator/pipe,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -1881,7 +1881,7 @@
 "dQ" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "ert_rescue_base_hatch"
+	id_tag = "rescue_base_hatch"
 	},
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
@@ -1902,7 +1902,7 @@
 /area/map_template/rescue_base/base)
 "dS" = (
 /obj/structure/table/steel,
-/obj/item/radio/intercom/specops,
+/obj/item/radio/intercom,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -1983,7 +1983,7 @@
 /area/map_template/rescue_base/base)
 "ed" = (
 /obj/structure/table/reinforced,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -2327,7 +2327,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eG" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
@@ -2474,7 +2474,7 @@
 /area/map_template/rescue_base/start)
 "eX" = (
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "ert_rescue_shuttle_outer";
+	id_tag = "rescue_shuttle_outer";
 	name = "Ship External Access"
 	},
 /obj/effect/shuttle_landmark/ert/start,
@@ -2510,10 +2510,10 @@
 "fc" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "ert_rescue_shuttle_pump"
+	id_tag = "rescue_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor/shuttle{
-	id_tag = "ert_rescue_shuttle_sensor";
+	id_tag = "rescue_shuttle_sensor";
 	pixel_x = 8;
 	pixel_y = 25
 	},
@@ -2532,11 +2532,11 @@
 "fe" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "ert_rescue_shuttle_pump"
+	id_tag = "rescue_shuttle_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1331;
-	id_tag = "ert_rescue_shuttle";
+	id_tag = "rescue_shuttle";
 	initial_access = list();
 	pixel_x = -8;
 	pixel_y = 25
@@ -2562,7 +2562,7 @@
 /area/map_template/rescue_base/start)
 "fi" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2610,7 +2610,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fq" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2639,7 +2639,7 @@
 "ft" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "ert_rescue_shuttle_pump"
+	id_tag = "rescue_shuttle_pump"
 	},
 /obj/machinery/light{
 	dir = 8
@@ -2658,7 +2658,7 @@
 "fw" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "ert_rescue_shuttle_pump"
+	id_tag = "rescue_shuttle_pump"
 	},
 /obj/machinery/light{
 	dir = 4
@@ -2685,7 +2685,7 @@
 "fA" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/door/airlock/external/shuttle{
-	id_tag = "ert_rescue_shuttle_inner";
+	id_tag = "rescue_shuttle_inner";
 	name = "Ship External Access"
 	},
 /turf/simulated/floor/plating,
@@ -2744,7 +2744,7 @@
 "fH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /obj/machinery/button/access/shuttle/interior{
-	id_tag = "ert_rescue_shuttle";
+	id_tag = "rescue_shuttle";
 	initial_access = list("ACCESS_CENT_SPECOPS");
 	name = "interior access button";
 	pixel_x = 25;
@@ -2812,7 +2812,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fP" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2866,7 +2866,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fX" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -2968,9 +2968,6 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/sleeper/standard{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "go" = (
@@ -3056,6 +3053,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
+"gF" = (
+/obj/machinery/sleeper/standard{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
 "gG" = (
 /obj/machinery/recharger/wallcharger{
 	pixel_x = -25
@@ -3091,7 +3094,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gM" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = -22
 	},
@@ -3102,7 +3105,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "gO" = (
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -3189,7 +3192,7 @@
 	},
 /obj/item/clothing/shoes/color/orange,
 /obj/item/clothing/under/color/orange,
-/obj/item/radio/intercom/specops{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -3299,6 +3302,52 @@
 	},
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
+	},
+/area/map_template/rescue_base/base)
+"mn" = (
+/obj/machinery/network/acl{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"sm" = (
+/obj/machinery/network/router{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"tO" = (
+/obj/machinery/network/relay/long_range{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"Ab" = (
+/obj/machinery/computer/message_monitor,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"BI" = (
+/obj/machinery/network/telecomms_hub/ert,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"TK" = (
+/obj/machinery/network/mainframe{
+	initial_network_id = "responsenet";
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
 
@@ -4286,9 +4335,9 @@ ad
 aR
 bc
 ad
-bA
-bB
-bg
+mn
+Ab
+ad
 ar
 ar
 ad
@@ -4351,9 +4400,9 @@ av
 aR
 bc
 ad
-bB
-bK
-bg
+TK
+ar
+ar
 ar
 ar
 bg
@@ -4416,9 +4465,9 @@ aB
 aS
 aB
 ad
-bC
-bA
-bg
+sm
+BI
+ad
 ar
 ar
 bg
@@ -4980,7 +5029,7 @@ eU
 gu
 gu
 gK
-gt
+tO
 gY
 hf
 eQ
@@ -5563,7 +5612,7 @@ eQ
 eU
 go
 gw
-gw
+gF
 gO
 gS
 ha

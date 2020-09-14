@@ -20,7 +20,6 @@
 		return
 	var/datum/signal/signal = new()
 	signal.source = src
-	signal.transmission_method = TRANSMISSION_RADIO
 	signal.encryption = encryption
 	signal.data = buffer
 	signal.data["tag"] = id_tag

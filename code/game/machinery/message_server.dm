@@ -1,3 +1,10 @@
+var/global/list/message_servers = list()
+/proc/get_message_server_for_z(z)
+	var/list/local_zs = SSmapping.get_connected_levels(z)
+	for(var/obj/machinery/network/message_server/MS in global.message_servers)
+		if((MS.z in local_zs) && !(MS.stat & (BROKEN|NOPOWER)))
+			return MS
+
 #define MESSAGE_SERVER_SPAM_REJECT 1
 #define MESSAGE_SERVER_DEFAULT_SPAM_LIMIT 10
 
@@ -45,10 +52,16 @@
 	var/power_failure = 0 // Reboot timer after power outage
 	var/decryptkey = "password"
 
-	//Spam filtering stuff
-	var/list/spamfilter = list("You have won", "your prize", "male enhancement", "shitcurity", \
-			"are happy to inform you", "account number", "enter your PIN")
-			//Messages having theese tokens will be rejected by server. Case sensitive
+	/// Spam filtering stuff. Messages having theese tokens will be rejected by server. Case sensitive.
+	var/list/spamfilter = list(
+		"You have won",
+		"your prize",
+		"male enhancement",
+		"shitcurity",
+		"are happy to inform you",
+		"account number",
+		"enter your PIN"
+	)
 	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
 
 	stat_immune = 0
@@ -56,8 +69,13 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 
 /obj/machinery/network/message_server/Initialize()
+	global.message_servers += src
 	. = ..()
 	decryptkey = GenerateKey()
+
+/obj/machinery/network/message_server/Destroy()
+	global.message_servers -= src
+	return ..()
 
 /obj/machinery/network/message_server/Process()
 	..()
@@ -88,7 +106,7 @@
 		var/obj/machinery/network/requests_console/Console = console.holder
 		if(!istype(Console))
 			continue
-		if (ckey(Console.department) == ckey(recipient))
+		if(ckey(Console.department) == ckey(recipient))
 			if(Console.inoperable())
 				Console.message_log += "<B>Message lost due to console failure.</B><BR>Please contact [station_name()] system administrator or AI for technical assistance.<BR>"
 				continue

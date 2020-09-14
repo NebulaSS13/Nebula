@@ -270,9 +270,6 @@
 
 	flavor_text =  sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text)
 
-/mob/living/silicon/binarycheck()
-	return TRUE
-
 /mob/living/silicon/explosion_act(severity)
 	..()
 	var/brute

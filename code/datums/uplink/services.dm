@@ -245,7 +245,7 @@
 	if(istype(job) && job.announced)
 		var/announce_channel = get_announcement_frequency(job)
 		if(announce_channel)
-			AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), "has completed cryogenic revival", announce_channel)
+			do_telecomms_announcement(user, "[new_record.get_name()], [new_record.get_job()], has completed cryogenic revival.", "Arrivals Announcement Computer", announce_channel)
 	. = ..()
 
 #undef COPY_VALUE
