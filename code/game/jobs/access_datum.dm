@@ -442,6 +442,18 @@ var/global/const/access_syndicate = "ACCESS_SYNDICATE" //150
 	desc = "Syndicate"
 	access_type = ACCESS_TYPE_SYNDICATE
 
+var/global/const/access_raider = "ACCESS_RAIDER"
+/datum/access/raider
+	id = access_raider
+	desc = "Raider"
+	access_type = ACCESS_TYPE_NONE
+
+var/global/const/access_mercenary = "ACCESS_MERCENARY"
+/datum/access/mercenary
+	id = access_mercenary
+	desc = "Mercenary"
+	access_type = ACCESS_TYPE_NONE
+
 /*******
 * Misc *
 *******/

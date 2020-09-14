@@ -17,7 +17,7 @@
 /decl/special_role/deathsquad/mercenary/equip(var/mob/living/carbon/human/player)
 	. = ..()
 	if(.)
-		create_radio(SYND_FREQ, player)
+		create_radio(/obj/item/radio/headset/syndicate, player)
 
 /decl/hierarchy/outfit/mercenary_commando
 	name =    "Special Role - Mercenary Commando"
@@ -30,3 +30,16 @@
 		/obj/item/gun/energy/laser,
 		/obj/item/energy_blade/sword
 	)
+
+/obj/item/encryptionkey/syndicate
+	icon_state = "cypherkey"
+	can_decrypt = list(access_syndicate)
+	origin_tech = "{'esoteric':3}"
+
+/obj/item/encryptionkey/syndicate/Initialize(ml, material_key)
+	. = ..()
+	can_decrypt |= get_all_station_access()
+
+/obj/item/radio/headset/syndicate
+	origin_tech = "{'esoteric':3}"
+	encryption_keys = list(/obj/item/encryptionkey/syndicate)

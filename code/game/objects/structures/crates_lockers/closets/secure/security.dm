@@ -31,7 +31,6 @@
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/head/helmet,
-		/obj/item/radio/headset/heads/hop,
 		/obj/item/storage/box/ids = 2,
 		/obj/item/flash
 	)
@@ -71,7 +70,6 @@
 		/obj/item/clothing/under/head_of_security/jensen,
 		/obj/item/clothing/suit/armor/hos/jensen,
 		/obj/item/clothing/suit/armor/hos,
-		/obj/item/radio/headset/heads/hos,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/shield/riot,
@@ -98,7 +96,6 @@
 		/obj/item/clothing/under/warden,
 		/obj/item/clothing/suit/armor/warden,
 		/obj/item/clothing/head/warden,
-		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/storage/box/flashbangs,
@@ -121,7 +118,6 @@
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/head/helmet,
-		/obj/item/radio/headset/headset_sec,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/flash,
 		/obj/item/chems/spray/pepper,
@@ -134,27 +130,6 @@
 		/obj/item/gun/energy/taser,
 		/obj/item/holowarrant,
 	)
-
-/obj/structure/closet/secure_closet/security/cargo/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-		/obj/item/clothing/accessory/armband/cargo,
-		/obj/item/encryptionkey/headset_cargo
-	))
-
-/obj/structure/closet/secure_closet/security/engine/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-			/obj/item/clothing/accessory/armband/engine,
-			/obj/item/encryptionkey/headset_eng
-		))
-
-/obj/structure/closet/secure_closet/security/science/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(/obj/item/encryptionkey/headset_sci))
-
-/obj/structure/closet/secure_closet/security/med/WillContain()
-	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
-			/obj/item/clothing/accessory/armband/medgreen,
-			/obj/item/encryptionkey/headset_med
-		))
 
 /obj/structure/closet/secure_closet/detective
 	name = "detective's cabinet"
@@ -175,7 +150,6 @@
 		/obj/item/clothing/head/det/grey,
 		/obj/item/clothing/shoes/dress,
 		/obj/item/storage/box/evidence,
-		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/pcarrier/detective,
 		/obj/item/taperoll/police,
 		/obj/item/gun/projectile/pistol,

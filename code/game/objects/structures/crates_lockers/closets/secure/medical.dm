@@ -47,7 +47,6 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/color/white,
-		/obj/item/radio/headset/headset_med,
 		/obj/item/taperoll/medical,
 		/obj/item/storage/belt/medical/emt,
 		RANDOM_SCRUBS,
@@ -70,7 +69,6 @@
 	    /obj/item/clothing/mask/gas,
 	    /obj/item/clothing/suit/storage/toggle/fr_jacket,
 	    /obj/item/clothing/suit/storage/toggle/labcoat,
-	    /obj/item/radio/headset/headset_med,
 	    /obj/item/flashlight,
 	    /obj/item/tank/emergency/oxygen/engi,
 	    /obj/item/clothing/glasses/hud/health,
@@ -100,7 +98,6 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/shoes/color/brown,
-		/obj/item/radio/headset/heads/cmo,
 		/obj/item/flash,
 		/obj/item/chems/hypospray/vial,
 		RANDOM_SCRUBS

@@ -242,7 +242,9 @@
 		new_record.set_skillset(jointext(skills,"\n"))
 
 	if(istype(job) && job.announced)
-		AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), "has completed cryogenic revival", get_announcement_frequency(job))
+		var/obj/item/radio/announcer = get_announcer(user)
+		announcer?.autosay("[new_record.get_name()], [new_record.get_job()], has completed cryogenic revival.", "Arrivals Announcement Computer", get_announcement_frequency(job))
+
 	. = ..()
 
 #undef COPY_VALUE

@@ -9,7 +9,6 @@
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag, 25),
 		/obj/item/clothing/under/cargotech,
 		/obj/item/clothing/shoes/color/black,
-		/obj/item/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/storage/belt/general,
 		/obj/item/clothing/head/soft
@@ -26,7 +25,6 @@
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag, 25),
 		/obj/item/clothing/under/cargotech,
 		/obj/item/clothing/shoes/color/brown,
-		/obj/item/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/suit/fire,
 		/obj/item/tank/emergency/oxygen,

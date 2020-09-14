@@ -1,13 +1,13 @@
 /decl/hierarchy/outfit/job/science
 	abstract_type = /decl/hierarchy/outfit/job/science
-	l_ear = /obj/item/radio/headset/headset_sci
+	l_ear = /obj/item/radio/headset/corp_sci
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/science
 
 /decl/hierarchy/outfit/job/science/rd
 	name = "Job - Chief Science Officer"
-	l_ear = /obj/item/radio/headset/heads/rd
+	l_ear = /obj/item/radio/headset/corp_rd
 	uniform = /obj/item/clothing/under/research_director
 	shoes = /obj/item/clothing/shoes/color/brown
 	hands = list(/obj/item/clipboard)

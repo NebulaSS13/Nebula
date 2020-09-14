@@ -33,7 +33,6 @@
 	belt = /obj/item/gun/energy/gun
 	glasses = /obj/item/clothing/glasses/sunglasses
 	back = /obj/item/storage/backpack/satchel
-
 	id_slot = slot_wear_id_str
 	id_type = /obj/item/card/id/centcom/ERT
 
@@ -41,7 +40,7 @@
 	name = "Spec Ops - Mercenary"
 	uniform = /obj/item/clothing/under/syndicate
 	shoes = /obj/item/clothing/shoes/jackboots/swat/combat
-	l_ear = /obj/item/radio/headset/syndicate/alt
+	l_ear = /obj/item/radio/headset/mercenary
 	belt = /obj/item/storage/belt/holster/security
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat

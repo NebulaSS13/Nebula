@@ -25,6 +25,39 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 	{{:helper.syndicateMode()}}
 {{/if}}
 
+{{if data.network}}
+<div class="item">
+	<div class="itemLabelWide">
+		Network Connectivity
+	</div>
+	<div class="itemContentMedium">
+		{{:helper.link(data.network, null, { 'network_settings': 1 }, null)}}
+		{{:helper.link("Sync with hub", null, { 'sync': 1 }, null)}}
+	</div>
+</div>
+{{/if}}
+
+{{if data.can_use_peer_to_peer}}
+<div class="item">
+	<div class="itemLabelWide">
+		P2P/Local Transmission
+	</div>
+	<div class="itemContentMedium">
+		{{:helper.link('On',  null, {'peer_to_peer' : 1}, data.peer_to_peer ? 'selected' : null)}}
+		{{:helper.link('Off', null, {'peer_to_peer' : 0}, data.peer_to_peer ? null : 'selected')}}
+	</div>
+</div>
+<div class="item">
+	<div class="itemLabelWide">
+		P2P/Local Password
+	</div>
+	<div class="itemContentMedium">
+		{{:helper.link(data.peer_to_peer_password, null, {'change_peer_to_peer_pass' : 1}, null)}}
+		{{:helper.link('Clear', null, {'clear_peer_to_peer_pass' : 1}, null)}}
+	</div>
+</div>
+{{/if}}
+
 <div class="item">
 	<div class="itemLabelWide">
 		Microphone
@@ -103,17 +136,17 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 	</div>
 </div>
 
-{{if data.chan_list_len >= 1}}
+{{if data.show_channels}}
 	<h3>Channels</h3>
 	<div class="item">
-	{{for data.chan_list}}
+	{{for data.channel_list}}
 		<div class="itemLabelWide">
 			<span class='{{:value.chan_span}}'>&#9724</span>{{:value.display_name}}
 		</div>
 		<div class="itemContentMedium">
 			{{if value.secure_channel}}
-				{{:helper.link('On', null, {'ch_name' : value.chan, 'listen' : value.sec_channel_listen}, value.sec_channel_listen ? null : 'selected')}}
-				{{:helper.link('Off', null, {'ch_name' : value.chan, 'listen' : value.sec_channel_listen}, value.sec_channel_listen ? 'selected' : null)}}
+				{{:helper.link('On', null, {'ch_name' : value.chan,  'listen' : 1}, value.listening ? 'selected' : null)}}
+				{{:helper.link('Off', null, {'ch_name' : value.chan, 'listen' : 0}, value.listening ? null : 'selected')}}
 			{{else}}
 				{{:helper.link('Switch', null, {'spec_freq' : value.chan}, data.rawfreq == value.chan ? 'selected' : null)}}
 			{{/if}}

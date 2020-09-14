@@ -2,17 +2,6 @@
 "aa" = (
 /turf/space,
 /area/space)
-"ab" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 2;
-	icon_state = "pdoor0";
-	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
-/turf/simulated/floor/airless,
-/area/ship/trade/bridge_unused)
 "ac" = (
 /obj/structure/lattice,
 /turf/space,
@@ -410,6 +399,13 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
+"kU" = (
+/obj/machinery/shipcomms/broadcaster{
+	icon_state = "maser";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/ship/trade/comms)
 "ma" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -487,6 +483,20 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
+"pd" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/item/radio/intercom{
+	dir = 1;
+	pixel_y = -30
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ship/trade/comms)
 "pt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -502,6 +512,12 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"qj" = (
+/obj/machinery/network/telecomms_hub{
+	initial_network_id = "tradenet"
+	},
+/turf/simulated/floor/bluegrid,
+/area/ship/trade/comms)
 "qw" = (
 /obj/machinery/light_switch{
 	pixel_w = 24
@@ -608,6 +624,19 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
+"wF" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 2;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/ship/trade/comms)
 "xe" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -637,17 +666,10 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	level = 2
-	},
-/obj/item/radio/intercom{
-	dir = 1;
-	pixel_y = -30
-	},
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/comms)
 "yQ" = (
@@ -818,6 +840,22 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/command/bridge_upper)
+"IX" = (
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/cable{
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/ship/trade/comms)
 "IY" = (
 /obj/structure/cable/yellow{
 	icon_state = "1-8"
@@ -905,6 +943,10 @@
 	},
 /turf/simulated/open,
 /area/ship/trade/maintenance/solars)
+"Mv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/plating,
+/area/ship/trade/bridge_unused)
 "NY" = (
 /obj/item/mollusc/barnacle{
 	pixel_w = 16
@@ -947,9 +989,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/command/bridge_upper)
+"PX" = (
+/obj/machinery/shipcomms/receiver,
+/turf/simulated/floor/reinforced/airless,
+/area/ship/trade/bridge_unused)
 "PZ" = (
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/command/bridge_upper)
+"Qb" = (
+/turf/simulated/floor/plating,
+/area/ship/trade/bridge_unused)
 "QK" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -1069,6 +1118,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
+"Vy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/ship/trade/bridge_unused)
 "We" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -3907,8 +3960,8 @@ aa
 Ob
 Ob
 QK
+QK
 Ob
-ax
 ax
 ax
 ax
@@ -3984,14 +4037,14 @@ aa
 aa
 aa
 aa
-aa
+Ob
 Ob
 jz
 jz
 aN
+aN
 jz
 Ob
-ax
 ax
 ax
 ax
@@ -4065,15 +4118,15 @@ aa
 aa
 aa
 aa
-aa
-aa
 Ob
-jz
+Ob
+Ob
+Tx
 ds
 Jo
+qj
 ZU
 Ob
-ax
 ax
 ax
 ax
@@ -4148,14 +4201,14 @@ aa
 aa
 aa
 aa
-aa
-Ob
-jz
-Tx
+kU
+wF
+Su
+Su
+Su
 Su
 Su
 Dr
-ax
 ax
 ax
 ax
@@ -4229,14 +4282,14 @@ aa
 aa
 aa
 aa
-aa
-aa
 Ob
-jz
+Ob
+Ob
 ZD
+IX
 sX
 yA
-Ob
+pd
 tJ
 tJ
 SQ
@@ -4312,7 +4365,7 @@ aa
 aa
 aa
 ac
-ac
+Ob
 Ob
 jz
 jz
@@ -4395,8 +4448,8 @@ aa
 aa
 aa
 aa
-ab
 ad
+mn
 mn
 hJ
 Dg
@@ -4475,8 +4528,8 @@ aa
 aa
 aa
 aa
-aa
 ac
+zY
 zY
 ne
 ne
@@ -4557,14 +4610,14 @@ aa
 aa
 aa
 aa
-aa
-aa
 zY
-ne
+zY
+zY
+Qb
 oq
 gw
+Qb
 uT
-zY
 tJ
 tJ
 SQ
@@ -4597,7 +4650,7 @@ aS
 Mk
 Ko
 aV
-aa
+ax
 ax
 ax
 ax
@@ -4640,14 +4693,14 @@ aa
 aa
 aa
 aa
-aa
-zY
-ne
+PX
+ad
 wq
+Mv
 zn
+Vy
 KS
 oY
-ax
 ax
 ax
 ax
@@ -4721,15 +4774,15 @@ aa
 aa
 aa
 aa
-aa
-aa
+zY
+zY
 zY
 cB
 cO
 XF
+Qb
 XF
 zY
-ax
 ax
 ax
 ax
@@ -4804,14 +4857,14 @@ aa
 aa
 aa
 aa
-aa
+zY
 zY
 ne
 ne
 jv
+jv
 cB
 zY
-ax
 ax
 ax
 ax
@@ -4891,8 +4944,8 @@ aa
 zY
 zY
 Db
+Db
 zY
-ax
 ax
 ax
 ax

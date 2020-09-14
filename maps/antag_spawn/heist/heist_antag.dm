@@ -81,4 +81,4 @@
 	default_outfit = LAZYACCESS(outfits_per_species, player.species.name) || initial(default_outfit)
 	. = ..()
 	if(.)
-		create_radio(RAID_FREQ, player)
+		create_radio(/obj/item/radio/headset/raider, player)

@@ -763,3 +763,10 @@ th.bot {
 	text-align		: center;
 	white-space		: pre-line;
 }
+
+.rect {
+    display: inline;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+}

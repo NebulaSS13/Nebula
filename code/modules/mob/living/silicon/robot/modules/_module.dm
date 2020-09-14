@@ -56,9 +56,6 @@
 	add_subsystems(R)
 	apply_status_flags(R)
 
-	if(R.silicon_radio)
-		R.silicon_radio.recalculateChannels()
-
 	build_equipment(R)
 	build_emag(R)
 	build_synths(R)
@@ -121,8 +118,6 @@
 	remove_subsystems(R)
 	remove_status_flags(R)
 	reset_skills(R)
-	if(R.silicon_radio)
-		R.silicon_radio.recalculateChannels()
 	R.choose_icon(list("Basic" = initial(R.icon)))
 
 /obj/item/robot_module/proc/get_sprites_for(var/mob/living/silicon/robot/R)
