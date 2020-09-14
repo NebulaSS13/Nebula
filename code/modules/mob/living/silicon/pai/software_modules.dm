@@ -94,16 +94,13 @@
 
 	data["listening"] = user.silicon_radio.broadcasting
 	data["frequency"] = format_frequency(user.silicon_radio.frequency)
-
 	var/channels[0]
-	for(var/ch_name in user.silicon_radio.channels)
-		var/ch_stat = user.silicon_radio.channels[ch_name]
+	var/list/pai_channels = user.silicon_radio.get_available_channels() 
+	for(var/datum/radio_channel/channel in pai_channels)
 		var/ch_dat[0]
-		ch_dat["name"] = ch_name
-		// FREQ_LISTENING is const in /obj/item/radio
-		ch_dat["listening"] = !!(ch_stat & user.silicon_radio.FREQ_LISTENING)
+		ch_dat["name"] = channel.name || format_frequency(channel.frequency)
+		ch_dat["listening"] = (LAZYACCESS(user.silicon_radio.channels, channel) == TRUE)
 		channels[++channels.len] = ch_dat
-
 	data["channels"] = channels
 
 	ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)

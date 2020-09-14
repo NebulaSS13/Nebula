@@ -22,7 +22,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
@@ -114,7 +114,7 @@
 /area/map_template/merc_shuttle)
 "ak" = (
 /obj/machinery/computer/shuttle_control/explore/merc_shuttle{
-	req_access = list("ACCESS_SYNDICATE");
+	req_access = list("ACCESS_MERCENARY");
 	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
 	},
 /obj/structure/cable{
@@ -133,9 +133,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
-/obj/machinery/telecomms/allinone{
-	intercept = 1
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "am" = (
@@ -179,7 +176,7 @@
 /obj/machinery/button/blast_door{
 	id_tag = "merc_external";
 	name = "Protective Shutters Control";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -220,7 +217,7 @@
 	check_arrest = 0;
 	check_records = 0;
 	pixel_y = 32;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -294,8 +291,9 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "az" = (
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 8
+/obj/machinery/network/relay/long_range{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -343,14 +341,14 @@
 	name = "OFD Viewing Shutters";
 	pixel_x = -5;
 	pixel_y = -3;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "merc_bsa";
 	name = "OFD Firing Blast Doors";
 	pixel_x = -5;
 	pixel_y = 6;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/recharger{
 	pixel_x = 6
@@ -408,7 +406,7 @@
 "aI" = (
 /obj/machinery/pointdefense_control{
 	initial_id_tag = "merc_pd";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -426,7 +424,7 @@
 "aK" = (
 /obj/structure/catwalk,
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/light/spot{
 	icon_state = "tube_map";
@@ -463,7 +461,11 @@
 /obj/machinery/power/apc/hyper{
 	dir = 8;
 	pixel_x = -21;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair";
+	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -585,6 +587,10 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair";
+	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -887,7 +893,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -24;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/effect/shuttle_landmark/merc/start,
 /obj/effect/overmap/visitable/ship/landable/merc,
@@ -908,7 +914,7 @@
 /obj/item/crowbar,
 /obj/machinery/button/blast_door{
 	id_tag = "merc_airlock";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/item/binoculars,
 /obj/item/binoculars,
@@ -1037,7 +1043,7 @@
 	id_tag = "merc_shuttle";
 	pixel_x = 0;
 	pixel_y = -25;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -1202,14 +1208,14 @@
 	name = "EMERGENCY VENT";
 	pixel_x = 8;
 	pixel_y = 32;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "merc_fuel";
 	name = "Fuel Storage Shutters";
 	pixel_x = -6;
 	pixel_y = 36;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/button/ignition{
 	id_tag = "merc_igniter";
@@ -1323,11 +1329,11 @@
 /obj/machinery/power/apc/hyper{
 	dir = 8;
 	pixel_x = -21;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/alarm{
 	pixel_y = 24;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -1827,7 +1833,7 @@
 "cU" = (
 /obj/vehicle/bike/electric,
 /turf/simulated/floor/airless,
-/area/space)
+/area/map_template/merc_spawn)
 "cW" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -1992,7 +1998,7 @@
 	id_tag = "merc_shuttle";
 	pixel_x = 37;
 	pixel_y = -32;
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
@@ -2049,6 +2055,14 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"hv" = (
+/obj/machinery/computer/message_monitor,
+/turf/simulated/floor/airless,
+/area/map_template/merc_spawn)
+"hx" = (
+/obj/machinery/network/telecomms_hub/mercenary,
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "hG" = (
 /obj/machinery/computer/ship/sensors{
@@ -2116,6 +2130,13 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"jv" = (
+/obj/machinery/network/acl{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
+	},
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "jE" = (
 /obj/structure/bed/chair/shuttle/blue{
@@ -2251,7 +2272,7 @@
 "mi" = (
 /obj/structure/catwalk,
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/light/spot{
 	dir = 8
@@ -2286,6 +2307,13 @@
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"nq" = (
+/obj/machinery/network/mainframe{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
+	},
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "nE" = (
 /obj/machinery/fabricator/pipe/disposal,
@@ -2342,6 +2370,9 @@
 	},
 /obj/machinery/light/spot,
 /turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"pQ" = (
+/turf/simulated/floor/airless,
 /area/map_template/merc_spawn)
 "qa" = (
 /obj/effect/landmark{
@@ -2475,12 +2506,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
-"vU" = (
-/obj/structure/window/reinforced/crescent{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/airless,
-/area/map_template/merc_spawn)
 "wG" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "stripe";
@@ -2504,12 +2529,6 @@
 /obj/item/rig/merc/empty,
 /obj/item/rig/merc/empty,
 /turf/simulated/floor/plating,
-/area/map_template/merc_spawn)
-"xw" = (
-/obj/structure/window/reinforced/crescent{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/airless,
 /area/map_template/merc_spawn)
 "yz" = (
 /obj/effect/shuttle_landmark/merc/nav3,
@@ -2820,16 +2839,16 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
+"No" = (
+/obj/machinery/network/router{
+	initial_network_id = "mercnet";
+	req_access = list("ACCESS_MERCENARY")
+	},
+/turf/simulated/floor/airless,
+/area/map_template/merc_spawn)
 "NX" = (
 /obj/item/chems/ivbag/nanoblood,
 /turf/space,
-/area/space)
-"NZ" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 2;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/airless,
 /area/space)
 "Ok" = (
 /obj/machinery/mining/brace,
@@ -2988,7 +3007,7 @@
 "UA" = (
 /obj/structure/catwalk,
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/light/spot{
 	dir = 8
@@ -3086,7 +3105,7 @@
 "Zx" = (
 /obj/structure/catwalk,
 /obj/machinery/porta_turret{
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_MERCENARY")
 	},
 /obj/machinery/light/spot{
 	icon_state = "tube_map";
@@ -9368,10 +9387,10 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
+XS
+XS
+XS
+XS
 aa
 aa
 aa
@@ -9467,13 +9486,13 @@ aa
 aa
 aa
 aa
-cY
-cY
-cY
-cY
 aa
 aa
 aa
+XS
+jv
+hv
+XS
 aa
 aa
 aa
@@ -9569,14 +9588,14 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
-cY
 aa
 aa
 aa
-aa
+XS
+nq
+pQ
+XS
+di
 di
 di
 XS
@@ -9671,17 +9690,17 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
-cY
 aa
 aa
 aa
-aa
-xw
-Hz
-Mj
+XS
+No
+pQ
+sf
+dj
+dj
+dj
+rR
 FO
 FO
 xb
@@ -9773,17 +9792,17 @@ aa
 aa
 aa
 aa
-cY
-cU
-Pb
-NZ
-dh
 aa
 aa
-Hz
-vU
-vU
-Mj
+aa
+XS
+hx
+pQ
+sf
+dk
+dk
+dk
+rR
 gZ
 gZ
 kc
@@ -9875,15 +9894,15 @@ aa
 aa
 aa
 aa
-cY
+aa
+aa
+aa
+XS
 cU
-Pb
-aa
-aa
-di
-aa
+cU
+XS
 dh
-aa
+dh
 dh
 XS
 Ip
@@ -9977,13 +9996,13 @@ aa
 aa
 aa
 aa
-cY
+aa
+aa
+aa
+XS
 cU
-aa
-aa
-aa
-aa
-aa
+cU
+XS
 aa
 aa
 aa
@@ -10079,13 +10098,13 @@ aa
 aa
 aa
 aa
-cY
-cU
 aa
 aa
 aa
-aa
-aa
+XS
+XS
+XS
+XS
 aa
 aa
 aa
@@ -10181,8 +10200,8 @@ aa
 aa
 aa
 aa
-cY
-cY
+aa
+aa
 aa
 aa
 aa

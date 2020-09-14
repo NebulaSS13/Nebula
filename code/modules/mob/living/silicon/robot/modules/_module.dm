@@ -56,9 +56,6 @@
 	add_subsystems(R)
 	apply_status_flags(R)
 
-	if(R.silicon_radio)
-		R.silicon_radio.recalculateChannels()
-
 	build_equipment(R)
 	build_emag(R)
 	build_synths(R)
@@ -121,9 +118,6 @@
 	remove_subsystems(R)
 	remove_status_flags(R)
 	reset_skills(R)
-
-	if(R.silicon_radio)
-		R.silicon_radio.recalculateChannels()
 	R.choose_icon(R.set_module_sprites(list("Default" = initial(R.icon_state))))
 
 /obj/item/robot_module/Destroy()

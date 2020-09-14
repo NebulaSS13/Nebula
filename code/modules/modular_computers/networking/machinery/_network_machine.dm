@@ -64,7 +64,7 @@
 	produce_heat()
 
 /obj/machinery/network/proc/RuntimeInitialize()
-
+	return
 	
 /obj/machinery/network/interface_interact(user)
 	ui_interact(user)

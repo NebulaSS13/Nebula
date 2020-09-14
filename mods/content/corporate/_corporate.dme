@@ -13,6 +13,7 @@
 #include "clothing\head\caps.dm"
 #include "clothing\head\captain.dm"
 #include "clothing\head\ert.dm"
+#include "clothing\head\headsets.dm"
 #include "clothing\head\helmets.dm"
 #include "clothing\masks\rubber.dm"
 #include "clothing\rigs\ert.dm"

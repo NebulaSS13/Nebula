@@ -262,7 +262,6 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/machinery/telecomms/server,
 /turf/simulated/floor/bluegrid,
 /area/icarus/vessel)
 "ba" = (
@@ -344,7 +343,6 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bk" = (
-/obj/machinery/telecomms/server/presets/common,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/bluegrid,
 /area/icarus/vessel)
@@ -390,7 +388,9 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bs" = (
-/obj/machinery/telecomms/server,
+/obj/machinery/network/telecomms_hub{
+	initial_network_id = "daedalus"
+	},
 /turf/simulated/floor/bluegrid,
 /area/icarus/vessel)
 "bt" = (

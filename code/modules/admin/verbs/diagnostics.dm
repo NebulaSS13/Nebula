@@ -98,6 +98,15 @@
 	show_browser(usr, output, "window=radioreport")
 	SSstatistics.add_field_details("admin_verb","RR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/show_network_coverage()
+	set name = "Show Network Coverage"
+	set category = "Debug"
+	if(!check_rights(R_DEBUG))
+		return
+	for(var/turf/T in world)
+	
+	message_admins("[usr] drew network coverage.")
+
 /client/proc/reload_admins()
 	set name = "Reload Admins"
 	set category = "Debug"

@@ -687,7 +687,6 @@
 
 /obj/item/integrated_circuit/input/signaler/proc/create_signal()
 	var/datum/signal/signal = new()
-	signal.transmission_method = 1
 	signal.source = src
 	if(isnum(code))
 		signal.encryption = code
@@ -735,7 +734,6 @@
 
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
 	var/datum/signal/signal = new()
-	signal.transmission_method = 1
 	signal.data["tag"] = code
 	signal.data["command"] = command
 	signal.encryption = 0

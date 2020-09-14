@@ -1,3 +1,9 @@
+/proc/get_message_server_for_z(z)
+	var/list/local_zs = GetConnectedZlevels(z)
+	for(var/obj/machinery/network/message_server/MS in SSmachines.machinery)
+		if((MS.z in local_zs) && !(MS.stat & (BROKEN|NOPOWER)))
+			return MS
+			
 #define MESSAGE_SERVER_SPAM_REJECT 1
 #define MESSAGE_SERVER_DEFAULT_SPAM_LIMIT 10
 
@@ -88,7 +94,7 @@
 		var/obj/machinery/network/requests_console/Console = console.holder
 		if(!istype(Console))
 			continue
-		if (ckey(Console.department) == ckey(recipient))
+		if(ckey(Console.department) == ckey(recipient))
 			if(Console.inoperable())
 				Console.message_log += "<B>Message lost due to console failure.</B><BR>Please contact [station_name()] system administrator or AI for technical assistance.<BR>"
 				continue

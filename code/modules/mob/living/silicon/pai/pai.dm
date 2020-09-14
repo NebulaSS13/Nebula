@@ -291,7 +291,7 @@ var/global/list/possible_say_verbs = list(
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
-	return 0
+	. = FALSE
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"

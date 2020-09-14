@@ -135,3 +135,6 @@
 #undef IS_AI
 #undef IS_ROBOT
 #undef IS_PAI
+
+/mob/living/silicon/binarycheck()
+	. = TRUE

@@ -20,7 +20,6 @@
 /decl/hierarchy/outfit/soviet_soldier/admiral
 	name = "Soviet admiral"
 	head = /obj/item/clothing/head/hgpiratecap
-	l_ear = /obj/item/radio/headset/heads/captain
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
 	suit = /obj/item/clothing/suit/hgpirate
 

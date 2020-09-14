@@ -13,7 +13,6 @@
 		/obj/item/clothing/head/welding,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/shoes/color/brown,
-		/obj/item/radio/headset/heads/ce,
 		/obj/item/storage/toolbox/mechanical,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
