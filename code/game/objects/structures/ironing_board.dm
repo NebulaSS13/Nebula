@@ -36,7 +36,7 @@
 // make a screeching noise to drive people mad
 /obj/structure/bed/roller/ironingboard/Move()
 	var/turf/T = get_turf(src)
-	if(isspace(T) || istype(T, /turf/simulated/floor/carpet))
+	if(isspaceturf(T) || istype(T, /turf/simulated/floor/carpet))
 		return
 	playsound(T, pick(move_sounds), 75, 1)
 
@@ -103,7 +103,7 @@
 				holding = R
 				GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 				update_icon()
-				return	
+				return
 			to_chat(user, "<span class='notice'>There isn't anything on the ironing board.</span>")
 			return
 

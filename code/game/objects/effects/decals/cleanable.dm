@@ -13,14 +13,6 @@
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 2
 
-/obj/effect/decal/cleanable/Initialize()
-	. = ..()
-	if(isspace(loc))
-		return INITIALIZE_HINT_QDEL
-	hud_overlay = new /image/hud_overlay('icons/effects/hud_tile.dmi', src, "caution")
-	hud_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-	set_cleanable_scent()
-
 /obj/effect/decal/cleanable/Initialize(var/ml, var/_age)
 	if(random_icon_states && length(src.random_icon_states) > 0)
 		src.icon_state = pick(src.random_icon_states)
@@ -28,7 +20,16 @@
 		if(!isnull(_age))
 			age = _age
 		SSpersistence.track_value(src, /datum/persistent/filth)
+
 	. = ..()
+
+	hud_overlay = new /image/hud_overlay('icons/effects/hud_tile.dmi', src, "caution")
+	hud_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	set_cleanable_scent()
+
+	if(isspaceturf(loc))
+		animate(src, alpha = 0, time = 5 SECONDS)
+		QDEL_IN(src, 5 SECONDS)
 
 /obj/effect/decal/cleanable/Destroy()
 	SSpersistence.forget_value(src, /datum/persistent/filth)

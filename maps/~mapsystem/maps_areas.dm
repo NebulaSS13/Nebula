@@ -9,7 +9,7 @@
 	..()
 	if(!post_round_safe_areas.len)
 		for(var/area/A)
-			if(isspace(A))
+			if(isspacearea(A))
 				continue
 			if(A.z && (A.z in admin_levels))
 				post_round_safe_areas += A.type
