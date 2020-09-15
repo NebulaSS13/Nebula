@@ -658,11 +658,8 @@
 /turf/simulated/floor,
 /area/ship/trade/aft_port_underside_maint)
 "bu" = (
-/obj/machinery/door/window,
-/obj/machinery/door/window{
-	icon_state = "right";
-	dir = 1
-	},
+/obj/machinery/door/window/brigdoor/northright,
+/obj/machinery/door/window/brigdoor/southright,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/livestock)
 "bv" = (
@@ -1525,6 +1522,9 @@
 /obj/item/scalpel,
 /obj/item/storage/box/monkeycubes,
 /obj/item/circular_saw,
+/obj/structure/extinguisher_cabinet{
+	pixel_z = 29
+	},
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/livestock)
 "sO" = (
@@ -1595,10 +1595,6 @@
 	},
 /turf/simulated/floor,
 /area/ship/trade/fore_port_underside_maint)
-"vn" = (
-/obj/structure/extinguisher_cabinet,
-/turf/simulated/wall,
-/area/ship/trade/undercomms)
 "vP" = (
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/livestock)
@@ -6080,7 +6076,7 @@ Ux
 JQ
 Yh
 Ft
-vn
+JQ
 rI
 Ms
 AG
