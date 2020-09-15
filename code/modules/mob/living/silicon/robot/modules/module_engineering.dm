@@ -39,7 +39,6 @@
 		/obj/item/gripper,
 		/obj/item/gripper/no_use/loader,
 		/obj/item/lightreplacer,
-		/obj/item/pipe_painter,
 		/obj/item/paint_sprayer,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/inducer/borg,

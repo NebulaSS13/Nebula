@@ -2386,7 +2386,7 @@
 	dir = 9
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/pipe_painter,
+/obj/item/paint_sprayer,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
 "eJ" = (
