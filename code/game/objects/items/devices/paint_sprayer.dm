@@ -82,6 +82,9 @@
 	cut_overlays()
 	add_overlay(overlay_image(icon, "[icon_state]_color", paint_color))
 	add_overlay(color_picker ? "[icon_state]_red" : "[icon_state]_blue")
+	if(ismob(loc))
+		var/mob/M = loc
+		M.update_inv_hands()
 
 /obj/item/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
