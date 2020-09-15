@@ -11,7 +11,7 @@
 	var/screensaver_icon = "standby"
 
 	// Used for deciding if various tray icons need to be updated
-	var/last_battery_percent							
+	var/last_battery_percent
 	var/last_world_time
 	var/list/last_header_icons
 
@@ -55,7 +55,7 @@
 	on = FALSE
 	for(var/datum/computer_file/program/P in running_programs)
 		kill_program(P, 1)
-	
+
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		var/datum/extension/network_device/D = get_extension(network_card, /datum/extension/network_device)
@@ -116,8 +116,8 @@
 	else if(P.can_run(user, 1))
 		P.on_startup(user, src)
 		active_program = P
+		running_programs |= P
 
-	running_programs |= P
 	update_host_icon()
 	return 1
 
