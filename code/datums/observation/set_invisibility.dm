@@ -23,4 +23,4 @@ GLOBAL_DATUM_INIT(invisibility_set_event, /decl/observ/invisibility_set, new)
 	if(old_invisibility != new_invisibility)
 		invisibility = new_invisibility
 		GLOB.invisibility_set_event.raise_event(src, old_invisibility, new_invisibility)
-
+		update_above()
