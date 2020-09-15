@@ -40,11 +40,17 @@
 		return
 	..()
 
+/obj/item/storage/secure/AltClick(mob/user)
+	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
+	if(lock.locked)
+		src.add_fingerprint(user)
+		return
+	..()
 
 /obj/item/storage/secure/attack_self(var/mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	lock.ui_interact(user)		
-	
+	lock.ui_interact(user)
+
 /obj/item/storage/secure/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
@@ -62,7 +68,7 @@
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
 	if(!istype(lock))
 		return
-		
+
 	overlays.Cut()
 	if(lock.emagged)
 		overlays += image(icon, icon_locking)
