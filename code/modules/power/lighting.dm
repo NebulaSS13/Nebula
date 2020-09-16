@@ -428,7 +428,7 @@
 /obj/machinery/light/navigation/on_update_icon()
 	. = ..() // this will handle pixel offsets
 	overlays.Cut()
-	icon_state = "[delay][!!(lightbulb && on)]"	
+	icon_state = "nav[delay][!!(lightbulb && on)]"
 
 /obj/machinery/light/navigation/attackby(obj/item/W, mob/user)
 	. = ..()
