@@ -2045,6 +2045,7 @@
 #include "code\modules\mechs\interface\screen_objects.dm"
 #include "code\modules\mechs\premade\_premade.dm"
 #include "code\modules\mechs\premade\combat.dm"
+#include "code\modules\mechs\premade\exploration.dm"
 #include "code\modules\mechs\premade\heavy.dm"
 #include "code\modules\mechs\premade\light.dm"
 #include "code\modules\mechs\premade\misc.dm"
