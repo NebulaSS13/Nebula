@@ -88,8 +88,9 @@
 	hidden_from_codex = TRUE
 
 /decl/fusion_reaction/helium_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
-
-	wormhole_event(GetConnectedZlevels(holder))
+	var/datum/event/wormholes/WM = /datum/event/wormholes
+	WM.setup(affected_z_levels = GetConnectedZlevels(holder))
+	new WM(new /datum/event_meta(EVENT_LEVEL_MAJOR))
 
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()
