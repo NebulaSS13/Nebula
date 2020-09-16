@@ -116,7 +116,7 @@
 	icon = 'icons/clothing/suit/hazard_vest/orange.dmi'
 	blood_overlay_type = "armor"
 	bodytype_restricted = null
-	allowed = list (/obj/item/scanner/gas, /obj/item/flashlight, /obj/item/multitool, /obj/item/pipe_painter, /obj/item/radio, /obj/item/t_scanner, \
+	allowed = list (/obj/item/scanner/gas, /obj/item/flashlight, /obj/item/multitool, /obj/item/radio, /obj/item/t_scanner, \
 	/obj/item/crowbar, /obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/tank/emergency, \
 	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
 	body_parts_covered = SLOT_UPPER_BODY

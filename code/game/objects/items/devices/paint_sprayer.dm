@@ -33,7 +33,8 @@
 		"CMO" =               list("path" = /obj/effect/floor_decal/sign/cmo),
 		"Ex" =                list("path" = /obj/effect/floor_decal/sign/ex),
 		"Psy" =               list("path" = /obj/effect/floor_decal/sign/p),
-		"Remove all decals" = list("path" = /obj/effect/floor_decal/reset)
+		"Remove all decals" = list("path" = /obj/effect/floor_decal/reset),
+		"Remove top decal" =  list("path" = /obj/effect/floor_decal/undo)
 		)
 
 	var/list/paint_dirs = list(
@@ -81,6 +82,9 @@
 	cut_overlays()
 	add_overlay(overlay_image(icon, "[icon_state]_color", paint_color))
 	add_overlay(color_picker ? "[icon_state]_red" : "[icon_state]_blue")
+	if(ismob(loc))
+		var/mob/M = loc
+		M.update_inv_hands()
 
 /obj/item/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()

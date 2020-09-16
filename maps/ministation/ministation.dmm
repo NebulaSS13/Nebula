@@ -13999,7 +13999,6 @@
 "HJ" = (
 /obj/structure/table/standard,
 /obj/item/folder/yellow,
-/obj/item/pipe_painter,
 /obj/item/clothing/head/earmuffs,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)

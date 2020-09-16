@@ -5488,7 +5488,7 @@
 /obj/item/multitool{
 	pixel_x = 5
 	},
-/obj/item/pipe_painter,
+/obj/item/paint_sprayer,
 /obj/item/clamp,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/atmos)

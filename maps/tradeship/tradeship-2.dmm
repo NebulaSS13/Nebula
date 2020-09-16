@@ -5999,7 +5999,6 @@
 /obj/item/multitool{
 	pixel_x = 5
 	},
-/obj/item/pipe_painter,
 /obj/item/clamp,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/atmos)
