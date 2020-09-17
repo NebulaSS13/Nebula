@@ -1,24 +1,16 @@
 /datum/event/gravity
-	announceWhen = 5
+	announceWhen = 30
 
 /datum/event/gravity/setup()
-	endWhen = rand(15, 60)
+	announceWhen = rand(15, 60)
 
 /datum/event/gravity/announce()
-	command_announcement.Announce("Feedback surge detected in mass-distributions systems. Artificial gravity has been disabled whilst the system reinitializes.", "[location_name()] Gravity Subsystem", zlevels = affecting_z)
+	command_announcement.Announce("Feedback surge detected in mass-distributions systems. Engineers are strongly advised to deal with the problem.", "Gravity Failure", zlevels = affecting_z)
 
 /datum/event/gravity/start()
-	gravity_is_on = 0
-	for(var/area/A in world)
-		if(A.z in affecting_z)
-			A.gravitychange(gravity_is_on)
+	var/obj/machinery/gravity_generator/main/GG = GLOB.station_gravity_generator
+	if(!GG)
+		log_debug("The gravity generator was not found while trying to start an event.")
+		return
 
-/datum/event/gravity/end()
-	if(!gravity_is_on)
-		gravity_is_on = 1
-
-		for(var/area/A in world)
-			if((A.z in affecting_z) && initial(A.has_gravity))
-				A.gravitychange(gravity_is_on)
-
-		command_announcement.Announce("Gravity generators are again functioning within normal parameters. Sorry for any inconvenience.", "[location_name()] Gravity Subsystem", zlevels = affecting_z)
+	GG.set_state(FALSE)

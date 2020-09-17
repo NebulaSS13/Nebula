@@ -28,6 +28,12 @@
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
+	switch(gravity_state)
+		if(AREA_GRAVITY_NEVER)
+			has_gravity = 0
+		if(AREA_GRAVITY_ALWAYS)
+			has_gravity = 1
+
 /area/Destroy()
 	..()
 	return QDEL_HINT_HARDDEL
@@ -255,8 +261,11 @@ var/list/mob/living/forced_ambiance_list = new
 		sound_to(L, sound(null, channel = GLOB.lobby_sound_channel))
 		forced_ambiance_list -= L
 
-/area/proc/gravitychange(var/gravitystate = 0)
-	has_gravity = gravitystate
+/area/proc/gravitychange(new_state = 0)
+	if(gravity_state in list(AREA_GRAVITY_NEVER, AREA_GRAVITY_ALWAYS))
+		return
+
+	has_gravity = new_state
 
 	for(var/mob/M in src)
 		if(has_gravity)
@@ -315,11 +324,11 @@ var/list/mob/living/forced_ambiance_list = new
 /area/space/has_gravity()
 	return 0
 
-/atom/proc/has_gravity()
-	var/area/A = get_area(src)
-	if(A && A.has_gravity())
-		return 1
-	return 0
+/proc/has_gravity(atom/AT)
+	var/area/A = get_area(AT)
+	if(A?.has_gravity())
+		return TRUE
+	return FALSE
 
 /mob/has_gravity()
 	if(!lastarea)

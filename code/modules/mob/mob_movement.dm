@@ -138,7 +138,7 @@
 		src.m_flag = 1
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
-	
+
 	if(!inertia_moving)
 		inertia_next_move = world.time + inertia_move_delay
 		space_drift(direct ? direct : last_move)
@@ -161,7 +161,7 @@
 			return backup
 		return -1
 
-/mob/proc/space_do_move(var/allow_move, var/direction)	
+/mob/proc/space_do_move(var/allow_move, var/direction)
 	if(ismovable(allow_move))//push off things in space
 		handle_space_pushoff(allow_move, direction)
 		allow_move = -1
@@ -243,6 +243,15 @@
 	if(MOVING_DELIBERATELY(src))
 		prob_slip *= 0.5
 	return prob_slip
+
+/mob/proc/update_gravity()
+	return
+
+/mob/proc/mob_has_gravity()
+	return has_gravity(src)
+
+/mob/proc/mob_negates_gravity()
+	return 0
 
 #define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_step(mob, final_dir), final_dir);
 
