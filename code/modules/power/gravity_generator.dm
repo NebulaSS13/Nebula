@@ -349,8 +349,9 @@ GLOBAL_VAR(station_gravity_generator)
 			to_chat(user, SPAN_WARNING("\The [middle] discharged!"))
 			return
 
-		user.visible_message(SPAN_WARNING("[user] starts to press a lot of buttons on \the [src]!"),
-                             SPAN_NOTICE("You start to press many buttons on \the [src], as if you know what you are doing."))
+		user.visible_message(
+			SPAN_WARNING("[user] starts to press a lot of buttons on \the [src]!"),
+			SPAN_NOTICE("You start to press many buttons on \the [src], as if you know what you are doing."))
 		if(do_after(user, 15 SECONDS, src))
 			emergency_shutoff()
 
