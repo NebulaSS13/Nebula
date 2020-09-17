@@ -36,7 +36,7 @@
 /obj/machinery/gravity_generator/proc/show_broken_info()
 	return
 
-/obj/machinery/gravity_generator/ex_act(severity)
+/obj/machinery/gravity_generator/explosion_act(severity)
 	return
 
 /obj/machinery/gravity_generator/emp_act(severity)
@@ -45,10 +45,7 @@
 /obj/machinery/gravity_generator/bullet_act(obj/item/projectile/P, def_zone)
 	return
 
-/obj/machinery/gravity_generator/blob_act(destroy, obj/effect/blob/source)
-	return
-
-/obj/machinery/gravity_generator/proc/take_damage(amount)
+/obj/machinery/gravity_generator/take_damage(amount)
 	return
 
 //
@@ -90,7 +87,6 @@ GLOBAL_VAR(station_gravity_generator)
 	var/list/parts = list()
 	var/list/lights = list()
 	var/list/connected_areas = list()
-	var/datum/wires/gravity_generator/wires = null
 	var/obj/machinery/gravity_generator/part/middle = null
 
 	// Wires
@@ -136,7 +132,7 @@ GLOBAL_VAR(station_gravity_generator)
 		if(GRAV_NEEDS_SCREWDRIVER)
 			to_chat(user, "It requires a screwdriver to repair.")
 
-/obj/machinery/gravity_generator/main/ex_act(severity)
+/obj/machinery/gravity_generator/main/explosion_act(severity)
 	switch(severity)
 		if(1)
 			take_damage(rand(750, 1250))
