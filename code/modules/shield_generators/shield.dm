@@ -21,10 +21,10 @@
 		set_opacity(0)
 
 	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
-		icon_state = "shield_overcharged"
+		color = COLOR_VIOLET
 		set_light(1, 0.1, 2, l_color = "#ff9900")
 	else
-		icon_state = "shield_normal"
+		color = COLOR_DEEP_SKY_BLUE
 		set_light(1, 0.1, 2, l_color = "#66ffff")
 
 	cut_overlays()

@@ -1,11 +1,14 @@
 /datum/artifact_effect/forcefield
 	name = "force field"
-	var/list/created_field
 	origin_type = EFFECT_PARTICLE
+
+	var/list/created_field
+	var/field_color
 
 /datum/artifact_effect/forcefield/New()
 	..()
 	effect_range = rand(2, 14)
+	field_color = get_random_colour(1)
 
 /datum/artifact_effect/forcefield/Destroy()
 	QDEL_NULL_LIST(created_field)
@@ -40,6 +43,7 @@
 		for(var/i = 1 to min(length(created_field), length(circle)))
 			var/obj/effect/energy_field/E = created_field[i]
 			E.forceMove(circle[i])
+			E.color = field_color
 
 //Subtype with all the needed vars set, ready to block stuff
 /obj/effect/energy_field/prepared

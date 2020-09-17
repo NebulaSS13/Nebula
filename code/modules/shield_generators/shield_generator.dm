@@ -33,6 +33,7 @@
 	var/ai_control_disabled = 0			// Whether the AI control is disabled.
 	var/list/mode_list = null			// A list of shield_mode datums.
 	var/full_shield_strength = 0        // The amount of power shields need to be at full operating strength.
+	var/vessel_reverse_dir	= EAST		// Reverse dir of our vessel
 
 	var/idle_multiplier   = 1           // Trades off cost vs. spin-up time from idle to running
 	var/idle_valid_values = list(1, 2, 5, 10)
@@ -109,11 +110,22 @@
 	else
 		shielded_turfs = fieldtype_square()
 
+	// Rotate shield's animation relative to located ship
+	if(GLOB.using_map.use_overmap)
+		var/obj/effect/overmap/visitable/ship/sector = map_sectors["[src.z]"]
+		if(sector && istype(sector))
+			if(!sector.check_ownership(src))
+				for(var/obj/effect/overmap/visitable/ship/candidate in sector)
+					if(candidate.check_ownership(src))
+						sector = candidate
+			vessel_reverse_dir = GLOB.reverse_dir[sector.fore_dir]
+
 	for(var/turf/T in shielded_turfs)
 		var/obj/effect/shield/S = new(T)
 		S.gen = src
 		S.flags_updated()
 		field_segments |= S
+		S.set_dir(vessel_reverse_dir)
 	update_icon()
 
 
@@ -308,7 +320,7 @@
 		var/old_energy = current_energy
 		shutdown_field()
 		log_and_message_admins("has triggered \the [src]'s emergency shutdown!", user)
-		spawn()	
+		spawn()
 			empulse(src, old_energy / 60000000, old_energy / 32000000, 1) // If shields are charged at 450 MJ, the EMP will be 7.5, 14.0625. 90 MJ, 1.5, 2.8125
 		old_energy = 0
 
