@@ -103,7 +103,7 @@
 
 	var/obj/item/stock_parts/computer/card_slot/card_slot = assembly.get_component(PART_CARD)
 	if(card_slot && card_slot.stored_card)
-		to_chat(user, "The [card_slot.stored_card] is inserted into it.")
+		to_chat(user, "\The [card_slot.stored_card] is inserted into it.")
 	assembly.examine(user)
 
 /obj/item/modular_computer/MouseDrop(var/atom/over_object)
