@@ -324,8 +324,8 @@ var/list/mob/living/forced_ambiance_list = new
 /area/space/has_gravity()
 	return 0
 
-/proc/has_gravity(atom/AT)
-	var/area/A = get_area(AT)
+/atom/proc/has_gravity()
+	var/area/A = get_area(src)
 	if(A?.has_gravity())
 		return TRUE
 	return FALSE
