@@ -371,13 +371,13 @@ GLOBAL_VAR(station_gravity_generator)
 	for(var/i = 0, i <= 3, i++)
 		switch(i)
 			if(0)
-				set_light(8, 1,"#b30f00")
+				set_light(8, 1, l_color = "#b30f00")
 			if(1)
-				set_light(8, 0.75,"#b30f00")
+				set_light(8, 0.75, l_color = "#b30f00")
 			if(2)
-				set_light(8, 0.5,"#b30f00")
+				set_light(8, 0.5, l_color = "#b30f00")
 			if(3)
-				set_light(8, 0.25,"#b30f00")
+				set_light(8, 0.25, l_color = "#b30f00")
 
 		playsound(loc, 'sound/effects/EMPulse.ogg', 100, 1)
 		sleep(25)
@@ -406,39 +406,39 @@ GLOBAL_VAR(station_gravity_generator)
 			console = charge_count ? "console_charged" : "console_discharged"
 		else
 			console = "console_charging"
-		add_overlay(console)
+		add_overlay(image_repository.overlay_image(icon, console, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 		if(breaker)
 			for(var/obj/machinery/gravity_generator/part/P in lights)
-				P.add_overlay("[P.sprite_number]_light")
+				P.add_overlay(image_repository.overlay_image(icon, "[P.sprite_number]_light", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 
 	if(!panel_open)
 		if(power_supply && !(stat & BROKEN|NOPOWER))
-			add_overlay("keyboard_on")
+			add_overlay(image_repository.overlay_image(icon, "keyboard_on", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 		else
-			add_overlay("keyboard_off")
+			add_overlay(image_repository.overlay_image(icon, "keyboard_off", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 
 	var/overlay_state
 	switch(charge_count)
 		if(0 to 20)
 			overlay_state = null
-			set_light(0,0,"#000000")
+			set_light(0,0, l_color ="#000000")
 		if(21 to 40)
 			overlay_state = "startup"
-			set_light(4,0.2,"#6496fa")
+			set_light(4,0.2, l_color ="#6496fa")
 		if(41 to 60)
 			overlay_state = "idle"
-			set_light(6,0.5,"#7d9bff")
+			set_light(6,0.5, l_color ="#7d9bff")
 		if(61 to 80)
 			overlay_state = "activating"
-			set_light(6,0.8,"#7dc3ff")
+			set_light(6,0.8, l_color ="#7dc3ff")
 		if(81 to 100)
 			overlay_state = "activated"
-			set_light(8,1,"#7de1e1")
+			set_light(8,1, l_color ="#7de1e1")
 
 	if(middle)
 		middle.cut_overlays()
 		if(overlay_state)
-			middle.add_overlay(overlay_state)
+			middle.add_overlay(image_repository.overlay_image(icon, overlay_state, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 
 	for(var/obj/machinery/gravity_generator/part/P in parts)
 		P.update_icon()
