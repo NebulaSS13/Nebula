@@ -120,4 +120,7 @@
 /obj/item/implant/Destroy()
 	if(part)
 		part.implants.Remove(src)
+	var/obj/item/implanter/implanter = loc
+	if(istype(implanter) && implanter.imp == src)
+		implanter.imp = null
 	return ..()
