@@ -10,31 +10,6 @@ var/datum/robolimb/basic_robolimb
 		if(!R.unavailable_at_chargen)
 			chargen_robolimbs[R.company] = R
 
-#define DEFINE_ROBOLIMB_DESIGNS(MODEL_PATH, MODEL_ID, MODEL_NAME)         \
-/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID {           \
-	category = MODEL_NAME + " Prosthetics";                               \
-	path = /obj/item/organ/external/leg;                                  \
-	model = MODEL_PATH;                                                   \
-}                                                                         \
-/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/right_leg { \
-	path = /obj/item/organ/external/leg/right;                            \
-}                                                                         \
-/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/left_arm {  \
-	path = /obj/item/organ/external/arm;                                  \
-}                                                                         \
-/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/right_arm { \
-	path = /obj/item/organ/external/arm/right;                            \
-}                                                                         \
-/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/head {      \
-	path = /obj/item/organ/external/head;                                 \
-}                                                                         \
-/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/chest {     \
-	path = /obj/item/organ/external/chest;                                \
-}                                                                         \
-/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {     \
-	path = /obj/item/organ/external/groin;                                \
-}
-
 /datum/robolimb
 	var/company = "Unbranded"                                 // Shown when selecting the limb.
 	var/desc = "A generic unbranded robotic prosthesis."      // Seen when examining a limb.
@@ -64,3 +39,11 @@ var/datum/robolimb/basic_robolimb
 	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
 	movement_slowdown = 1
 	is_robotic = FALSE
+
+/datum/robolimb/utility_frame
+	company = "Utility Frame"
+	desc = "This limb is extremely cheap and simplistic, with a raw steel frame and plastic casing."
+	icon = 'icons/mob/human_races/cyberlimbs/utility/body.dmi'
+	skintone = TRUE
+	species_restricted = list(SPECIES_FRAME)
+	limb_blend = ICON_MULTIPLY

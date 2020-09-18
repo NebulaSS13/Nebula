@@ -260,6 +260,7 @@
 #define SPECIES_MONKEY           "Monkey"
 #define SPECIES_ALIEN            "Humanoid"
 #define SPECIES_GOLEM            "Golem"
+#define SPECIES_FRAME            "Utility Frame"
 
 #define BODYTYPE_HUMANOID        "Humanoid Body"
 #define BODYTYPE_OTHER           "Alien Body"
