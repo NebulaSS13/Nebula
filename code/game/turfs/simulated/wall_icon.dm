@@ -13,8 +13,10 @@
 	update_strings()
 	set_opacity(material.opacity >= 0.5)
 	SSradiation.resistance_cache.Remove(src)
-	update_connections(1)
-	queue_icon_update()
+	for(var/turf/simulated/wall/W in RANGE_TURFS(src, 1))
+		W.wall_connections = null
+		W.other_connections = null
+		W.queue_icon_update()
 
 /turf/simulated/wall/proc/update_strings()
 	if(reinf_material)
@@ -61,8 +63,44 @@
 	. = ..()
 	cut_overlays()
 
-	if(!istype(material) || !wall_connections || !other_connections)
+	if(!istype(material))
 		return
+
+	if(!wall_connections || !other_connections)
+
+		var/list/wall_dirs =  list()
+		var/list/other_dirs = list()
+		for(var/stepdir in GLOB.alldirs)
+			var/turf/T = get_step(src, stepdir)
+			if(!T)
+				continue
+			if(istype(T, /turf/simulated/wall))
+				switch(can_join_with(T))
+					if(0)
+						continue
+					if(1)
+						wall_dirs += get_dir(src, T)
+					if(2)
+						wall_dirs += get_dir(src, T)
+						other_dirs += get_dir(src, T)
+			if(handle_structure_blending)
+				var/success = 0
+				for(var/O in T)
+					for(var/b_type in global.wall_blend_objects)
+						if(istype(O, b_type))
+							success = TRUE
+							break
+					for(var/nb_type in global.wall_noblend_objects)
+						if(istype(O, nb_type))
+							success = FALSE
+							break
+					if(success)
+						wall_dirs += get_dir(src, T)
+						if(get_dir(src, T) in GLOB.cardinal)
+							other_dirs += get_dir(src, T)
+						break
+		wall_connections = dirs_to_corner_states(wall_dirs)
+		other_connections = dirs_to_corner_states(other_dirs)
 
 	var/material_icon_base = get_wall_icon()
 	var/image/I
@@ -126,48 +164,6 @@
 		if(reinf_material)
 			integrity += reinf_material.integrity
 		add_overlay(SSmaterials.wall_damage_overlays[Clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
-
-/turf/simulated/wall/proc/update_connections(propagate = 0)
-	if(!material)
-		return
-
-	var/list/wall_dirs = list()
-	var/list/other_dirs = list()
-	for(var/turf/simulated/wall/W in orange(src, 1))
-		switch(can_join_with(W))
-			if(0)
-				continue
-			if(1)
-				wall_dirs += get_dir(src, W)
-			if(2)
-				wall_dirs += get_dir(src, W)
-				other_dirs += get_dir(src, W)
-		if(propagate)
-			W.update_connections()
-			W.update_icon()
-
-	if(handle_structure_blending)
-		for(var/turf/T in orange(src, 1))
-			var/success = 0
-			for(var/obj/O in T)
-				for(var/b_type in global.wall_blend_objects)
-					if(istype(O, b_type))
-						success = 1
-					for(var/nb_type in global.wall_noblend_objects)
-						if(istype(O, nb_type))
-							success = 0
-					if(success)
-						break
-				if(success)
-					break
-
-			if(success)
-				wall_dirs += get_dir(src, T)
-				if(get_dir(src, T) in GLOB.cardinal)
-					other_dirs += get_dir(src, T)
-
-	wall_connections = dirs_to_corner_states(wall_dirs)
-	other_connections = dirs_to_corner_states(other_dirs)
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
 	if(material && istype(W.material) && get_wall_icon() == W.get_wall_icon())

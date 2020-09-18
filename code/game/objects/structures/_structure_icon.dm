@@ -29,8 +29,10 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/
 /obj/structure/proc/find_blendable_obj_in_turf(var/turf/T, var/propagate)
 	if(is_type_in_list(T, GLOB.default_blend_objects))
 		if(propagate && istype(T, /turf/simulated/wall))
-			var/turf/simulated/wall/W = T
-			W.update_connections(1)
+			for(var/turf/simulated/wall/W in RANGE_TURFS(T, 1))
+				W.wall_connections = null
+				W.other_connections = null
+				W.queue_icon_update()
 		return TRUE
 	for(var/obj/O in T)
 		if(!is_type_in_list(O, GLOB.default_blend_objects))

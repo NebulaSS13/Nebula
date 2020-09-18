@@ -84,7 +84,8 @@ var/list/wall_noblend_objects = list(
 	var/turf/debris = locate(old_x, old_y, old_z)
 	if(debris)
 		for(var/turf/simulated/wall/W in RANGE_TURFS(debris, 1))
-			W.update_connections()
+			W.wall_connections = null
+			W.other_connections = null
 			W.queue_icon_update()
 
 // Walls always hide the stuff below them.
