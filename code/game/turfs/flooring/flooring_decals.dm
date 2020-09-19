@@ -60,8 +60,9 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/undo/Initialize()
 	SHOULD_CALL_PARENT(FALSE)
 	var/turf/T = get_turf(src)
-	T.decals.len--
-	T.update_icon()
+	if(length(T.decals))
+		T.decals.len--
+		T.update_icon()
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_QDEL
 
