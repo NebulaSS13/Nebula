@@ -49,9 +49,14 @@
 
 /obj/item/toy/water_balloon/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
-	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
-		A.reagents.trans_to_obj(src, 10)
-		to_chat(user, "<span class='notice'>You fill the balloon with the contents of [A].</span>")
+	var/issink = istype(A, /obj/structure/hygiene/sink)
+	if((istype(A, /obj/structure/reagent_dispensers/watertank) || issink) && get_dist(src,A) <= 1)
+		if(!issink)
+			A.reagents.trans_to_obj(src, 10)
+			to_chat(user, "<span class='notice'>You fill the balloon with the contents of [A].</span>")
+		else
+			reagents.add_reagent(/decl/material/liquid/water, 10)
+			to_chat(user, "<span class='notice'>You fill the balloon from [A].</span>")
 		src.desc = "A translucent balloon with some form of liquid sloshing around in it."
 		src.update_icon()
 	return

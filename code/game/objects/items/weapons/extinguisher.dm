@@ -101,7 +101,7 @@
 		sleep(3)
 
 /obj/item/extinguisher/resolve_attackby(var/atom/target, var/mob/user, var/flag)
-	if (istype(target, /obj/structure/hygiene/sink) && REAGENTS_FREE_SPACE(target.reagents) > 0) // fill first, wash if full
+	if (istype(target, /obj/structure/hygiene/sink) && REAGENTS_FREE_SPACE(reagents) > 0) // fill first, wash if full
 		return FALSE
 	return ..()
 
@@ -111,7 +111,7 @@
 
 	if (flag && (issink || istype(target, /obj/structure/reagent_dispensers)))
 		var/obj/dispenser = target
-		var/amount = REAGENTS_FREE_SPACE(target.reagents)
+		var/amount = REAGENTS_FREE_SPACE(reagents)
 		if (amount <= 0)
 			to_chat(user, SPAN_NOTICE("\The [src] is full."))
 			return
