@@ -11,19 +11,19 @@
 	<h3>{{:value.id}}</h3>
 	<div class="item">
 		<div class="itemLabel">
-			Status
+			Status:
 		</div>
 		<div class="itemContent">
 			 {{if value.injecting}}
-				Online.<br/>{{:helper.link('Shut down.', null, {'toggle_injecting': value.ref})}}
+				Online<br/>{{:helper.link('Shut down', null, {'toggle_injecting': value.ref})}}
 			 {{else}}
-				Offline.<br/>{{:helper.link('Start up.', null, {'toggle_injecting': value.ref})}}
+				Offline<br/>{{:helper.link('Start up', null, {'toggle_injecting': value.ref})}}
 			 {{/if}}
 		</div>
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Injection rate
+			Injection rate:
 		</div>
 		<div class="itemContent">
 			{{:helper.link(value.injection_rate, null, {'machine': value.ref, 'injection_rate': 1})}}
@@ -31,7 +31,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Fuel material
+			Fuel material:
 		</div>
 		<div class="itemContent">
 			{{:value.fueltype}}
@@ -39,7 +39,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Fuel depletion
+			Fuel depletion:
 		</div>
 		<div class="itemContent">
 			{{:value.depletion}}
