@@ -1,6 +1,45 @@
+#define DEFINE_ROBOLIMB_DESIGNS(MODEL_PATH, MODEL_ID, MODEL_NAME)          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID {            \
+	category = MODEL_NAME + " Prosthetics";                                \
+	model = MODEL_PATH;                                                    \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/left_leg {   \
+	path = /obj/item/organ/external/leg;                                   \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/left_foot {  \
+	path = /obj/item/organ/external/foot;                                  \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/right_leg {  \
+	path = /obj/item/organ/external/leg/right;                             \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/right_foot { \
+	path = /obj/item/organ/external/foot/right;                            \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/left_arm {   \
+	path = /obj/item/organ/external/arm;                                   \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/left_hand {  \
+	path = /obj/item/organ/external/hand;                                  \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/right_arm {  \
+	path = /obj/item/organ/external/arm/right;                             \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/right_hand { \
+	path = /obj/item/organ/external/hand/right;                            \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/head {       \
+	path = /obj/item/organ/external/head;                                  \
+}                                                                          \
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {      \
+	path = /obj/item/organ/external/groin;                                 \
+}
+/* Readd if FBP/utility frame construction is desirable
+/datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/chest {      \
+	path = /obj/item/organ/external/chest;                                 \
+}                                                                          \
+*/
+
 /datum/fabricator_recipe/robotics/prosthetic
-	category = "Unbranded Prosthetics"
-	path = /obj/item/organ/external/leg
 	var/model
 
 /datum/fabricator_recipe/robotics/prosthetic/get_resources()
@@ -27,20 +66,5 @@
 	for(var/obj/item/organ/external/E in .)
 		E.robotize(model)
 
-/datum/fabricator_recipe/robotics/prosthetic/right_leg
-	path = /obj/item/organ/external/leg/right
-
-/datum/fabricator_recipe/robotics/prosthetic/left_arm
-	path = /obj/item/organ/external/arm
-
-/datum/fabricator_recipe/robotics/prosthetic/right_arm
-	path = /obj/item/organ/external/arm/right
-
-/datum/fabricator_recipe/robotics/prosthetic/head
-	path = /obj/item/organ/external/head
-
-/datum/fabricator_recipe/robotics/prosthetic/chest
-	path = /obj/item/organ/external/chest
-
-/datum/fabricator_recipe/robotics/prosthetic/groin
-	path = /obj/item/organ/external/groin
+DEFINE_ROBOLIMB_DESIGNS(/datum/robolimb, generic, "Unbranded")
+DEFINE_ROBOLIMB_DESIGNS(/datum/robolimb/utility_frame, utility_frame, "Utility Frame")
