@@ -132,8 +132,7 @@
 
 	if(update_flag == old_flag)
 		return 1
-	else
-		return 0
+	return 0
 
 /obj/machinery/portable_atmospherics/canister/on_update_icon()
 /*

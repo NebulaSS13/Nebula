@@ -307,8 +307,7 @@
 	if(BP_IS_PROSTHETIC(src))
 		if(is_bruised())
 			return "malfunctioning fans"
-		else
-			return "air flowing"
+		return "air flowing"
 
 	. = list()
 	if(is_bruised())

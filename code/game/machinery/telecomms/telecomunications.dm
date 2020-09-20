@@ -111,8 +111,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		return 0
 	if((signal.frequency in freq_listening) || (!freq_listening.len))
 		return 1
-	else
-		return 0
+	return 0
 
 /obj/machinery/telecomms/Initialize()
 	. = ..()

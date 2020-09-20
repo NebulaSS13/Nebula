@@ -158,8 +158,7 @@
 /datum/job/proc/get_access()
 	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
 		return minimal_access?.Copy()
-	else
-		return access?.Copy()
+	return access?.Copy()
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/C)
@@ -290,8 +289,7 @@
 
 	if(is_type_in_list(branch, allowed_branches))
 		return 1
-	else
-		return 0
+	return 0
 
 /**
  *  Check if people with given rank are allowed in this job
@@ -315,8 +313,7 @@
 
 	if(is_type_in_list(rank, allowed_ranks))
 		return 1
-	else
-		return 0
+	return 0
 
 //Returns human-readable list of branches this job allows.
 /datum/job/proc/get_branches()
@@ -403,8 +400,7 @@
 		loc_list += sloc
 	if(loc_list.len)
 		return pick(loc_list)
-	else
-		return locate("start*[title]") // use old stype
+	return locate("start*[title]") // use old stype
 
 /**
  *  Return appropriate /datum/spawnpoint for given client

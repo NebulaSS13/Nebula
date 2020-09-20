@@ -41,9 +41,8 @@
 	//Allow override (in case your instrument has to sound funky or muted)
 	if(use_env)
 		return sound.environment
-	else
-		var/area/A = get_area(listener)
-		return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
+	var/area/A = get_area(listener)
+	return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
 
 
 datum/sound_token/instrument/PrivAddListener(var/atom/listener)

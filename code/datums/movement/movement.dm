@@ -25,11 +25,10 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 		return FALSE
 	if(ispath(movement_handlers[1]))
 		return (handler_path in movement_handlers)
-	else
-		for(var/mh in movement_handlers)
-			var/datum/MH = mh
-			if(MH.type == handler_path)
-				return TRUE
+	for(var/mh in movement_handlers)
+		var/datum/MH = mh
+		if(MH.type == handler_path)
+			return TRUE
 	return FALSE
 
 /atom/movable/proc/AddMovementHandler(var/handler_path, var/handler_path_to_add_before)

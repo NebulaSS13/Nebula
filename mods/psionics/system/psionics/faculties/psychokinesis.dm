@@ -29,8 +29,7 @@
 				return new /obj/item/psychic_power/psiblade/master/grand(user, user)
 			if(PSI_RANK_MASTER)
 				return new /obj/item/psychic_power/psiblade/master(user, user)
-			else
-				return new /obj/item/psychic_power/psiblade(user, user)
+		return new /obj/item/psychic_power/psiblade(user, user)
 
 /decl/psionic_power/psychokinesis/tinker
 	name =            "Tinker"

@@ -214,11 +214,10 @@
 	if(!uses_charge)
 		if(amount + extra > get_max_amount())
 			return 0
-		else
-			amount += extra
-			update_icon()
-			update_matter()
-			return 1
+		amount += extra
+		update_icon()
+		update_matter()
+		return 1
 	else if(!synths || synths.len < uses_charge)
 		return 0
 	else

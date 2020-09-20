@@ -51,8 +51,7 @@ obj/structure/windoor_assembly/Destroy()
 		return 1
 	if(get_dir(loc, target) == dir)
 		return !density
-	else
-		return 1
+	return 1
 
 /obj/structure/windoor_assembly/can_unanchor(var/mob/user)
 	if(electronics)
@@ -70,7 +69,7 @@ obj/structure/windoor_assembly/Destroy()
 	. = initial(name)
 	if(electronics)
 		. = "nearly complete [.]"
-	else 
+	else
 		if(wired)
 			. = "wired [.]"
 		if(anchored)
@@ -100,7 +99,7 @@ obj/structure/windoor_assembly/Destroy()
 			visible_message(SPAN_NOTICE("\The [user] finishes \the [windoor]!"))
 			windoor.construct_state.post_construct(windoor)
 			qdel(src)
-		return TRUE	
+		return TRUE
 	. = ..()
 
 /obj/structure/windoor_assembly/handle_default_screwdriver_attackby(var/mob/user, var/obj/item/screwdriver)

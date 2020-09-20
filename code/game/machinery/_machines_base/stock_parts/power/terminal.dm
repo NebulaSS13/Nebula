@@ -26,7 +26,7 @@
 			machine.update_power_channel(cached_channel)
 			machine.power_change()
 		return
-	
+
 
 
 	var/surplus = terminal.surplus()
@@ -40,12 +40,11 @@
 		terminal.draw_power(usage)
 		if(surplus >= usage)
 			return // had enough power and good to go.
-		else 
-			// Try and use other (local) sources of power to make up for the deficit.
-			var/deficit = machine.use_power_oneoff(usage - surplus)
-			if(deficit > 0)
-				machine.update_power_channel(cached_channel)
-				machine.power_change()
+		// Try and use other (local) sources of power to make up for the deficit.
+		var/deficit = machine.use_power_oneoff(usage - surplus)
+		if(deficit > 0)
+			machine.update_power_channel(cached_channel)
+			machine.power_change()
 
 //Is willing to provide power if the wired contribution is nonnegligible and there is enough total local power to run the machine.
 /obj/item/stock_parts/power/terminal/can_provide_power(var/obj/machinery/machine)

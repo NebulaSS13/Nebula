@@ -329,8 +329,7 @@
 	if(!forced)
 		if(stat & (BROKEN|NOPOWER))
 			return //needs power to open unless it was forced
-		else
-			use_power_oneoff(360)
+		use_power_oneoff(360)
 	else
 		log_and_message_admins("has forced open an emergency shutter.")
 	latetoggle()

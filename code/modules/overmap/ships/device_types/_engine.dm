@@ -24,8 +24,7 @@ var/list/ship_engines = list()
 	if(M.use_power && M.operable())
 		if(next_on > world.time)
 			return FALSE
-		else
-			return TRUE
+		return TRUE
 	return FALSE
 
 // Does the engine have an appropriate amount of fuel to be operational?

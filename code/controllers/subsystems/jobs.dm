@@ -181,9 +181,8 @@ SUBSYSTEM_DEF(jobs)
 		Spawn anyway? More information: [airstatus] Radiation: [radlevel] Roentgen", "Atmosphere warning", "Abort", "Spawn anyway")
 		if(reply == "Abort")
 			return FALSE
-		else
-			// Let the staff know, in case the person complains about dying due to this later. They've been warned.
-			log_and_message_admins("User [spawner] spawned at spawn point with dangerous atmosphere.")
+		// Let the staff know, in case the person complains about dying due to this later. They've been warned.
+		log_and_message_admins("User [spawner] spawned at spawn point with dangerous atmosphere.")
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/assign_role(var/mob/new_player/player, var/rank, var/latejoin = 0, var/datum/game_mode/mode = SSticker.mode)
@@ -585,7 +584,7 @@ SUBSYSTEM_DEF(jobs)
 	for(var/i = 1 to length(text)+1)
 		T.maptext = "<span style=\"[style]\">[copytext(text,1,i)] </span>"
 		sleep(1)
-	
+
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, C, T), duration)
 
 /proc/fade_location_blurb(client/C, obj/T)

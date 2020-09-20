@@ -14,8 +14,7 @@
 /datum/job/assistant/get_access()
 	if(config.assistant_maint)
 		return list(access_maint_tunnels)
-	else
-		return list()
+	return list()
 
 /decl/hierarchy/outfit/job/assistant
 	name = OUTFIT_JOB_NAME("Assistant")

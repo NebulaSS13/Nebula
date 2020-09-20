@@ -63,8 +63,7 @@
 			return meteors_major
 		if(EVENT_LEVEL_MODERATE)
 			return meteors_moderate
-		else
-			return meteors_minor
+	return meteors_minor
 
 /var/list/meteors_minor = list(
 	/obj/effect/meteor/medium     = 80,
@@ -130,7 +129,7 @@
 		. = round(. * 0.5)
 	if(speed > SHIP_SPEED_FAST) //Sanic stahp
 		. *= 2
-	
+
 	//Smol ship evasion
 	if(victim.vessel_size < SHIP_SIZE_LARGE && speed < SHIP_SPEED_FAST)
 		var/skill_needed = SKILL_PROF

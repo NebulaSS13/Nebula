@@ -74,15 +74,13 @@
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(H.holster(W, user))
 		return
-	else
-		. = ..(W, user)
+	return ..(W, user)
 
 /obj/item/storage/belt/holster/attack_hand(mob/user)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(H.unholster(user))
 		return
-	else
-		. = ..(user)
+	return ..(user)
 
 /obj/item/storage/belt/holster/examine(mob/user)
 	. = ..()

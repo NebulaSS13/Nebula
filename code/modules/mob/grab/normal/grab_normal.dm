@@ -208,11 +208,9 @@
 	return TRUE
 
 /decl/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I)
-	switch(G.target_zone)
-		if(BP_HEAD)
-			return attack_throat(G, I, user)
-		else
-			return attack_tendons(G, I, user, G.target_zone)
+	if(G.target_zone == BP_HEAD)
+		return attack_throat(G, I, user)
+	return attack_tendons(G, I, user, G.target_zone)
 
 /decl/grab/normal/proc/attack_throat(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user)
 	var/mob/living/affecting = G.get_affecting_mob()

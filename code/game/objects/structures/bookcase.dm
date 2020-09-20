@@ -37,8 +37,7 @@ GLOBAL_LIST_INIT(station_bookcases, new)
 			var/newname = sanitizeSafe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
 			if(!newname)
 				return
-			else
-				SetName("bookcase ([newname])")
+			SetName("bookcase ([newname])")
 
 /obj/structure/bookcase/attack_hand(var/mob/user)
 	if(contents.len)

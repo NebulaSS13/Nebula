@@ -63,8 +63,7 @@
 
 		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
 			return overlay_image(icon_override, "[tmp_icon_state]_mob", color, RESET_COLOR)
-		else
-			return overlay_image(use_sprite_sheet, tmp_icon_state, color, RESET_COLOR)
+		return overlay_image(use_sprite_sheet, tmp_icon_state, color, RESET_COLOR)
 
 //when user attached an accessory to S
 /obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)

@@ -27,8 +27,7 @@
 			else
 				if(safe)
 					return null
-				else
-					CRASH("Malformed hex number")
+				CRASH("Malformed hex number")
 
 		. += num * place
 		place *= 16

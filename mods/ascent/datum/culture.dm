@@ -82,8 +82,7 @@ GLOBAL_LIST_INIT(gyne_architecture, list(
 		lineage = H.dna.lineage
 	if(gender == MALE)
 		return "[random_id(/datum/species/mantid, 10000, 99999)] [lineage]"
-	else
-		return "[random_id(/datum/species/mantid, 1, 99)] [lineage]"
+	return "[random_id(/datum/species/mantid, 1, 99)] [lineage]"
 
 /decl/cultural_info/location/kharmaani
 	name = HOME_SYSTEM_KHARMAANI

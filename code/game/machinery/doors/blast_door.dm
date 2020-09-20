@@ -74,8 +74,7 @@
 /obj/machinery/door/blast/Bumped(atom/AM)
 	if(!density)
 		return ..()
-	else
-		return 0
+	return 0
 
 // Proc: update_icon()
 // Parameters: None

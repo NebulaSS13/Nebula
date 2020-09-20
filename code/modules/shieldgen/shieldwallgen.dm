@@ -341,11 +341,9 @@
 
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return prob(20)
-	else
-		if (istype(mover, /obj/item/projectile))
-			return prob(10)
-		else
-			return !src.density
+	if (istype(mover, /obj/item/projectile))
+		return prob(10)
+	return !src.density
 
 /obj/machinery/shieldwallgen/online
 	anchored = 1

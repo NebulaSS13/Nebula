@@ -519,8 +519,7 @@
 	if(mind)
 		if(!role)
 			return mind.special_role
-		else
-			return (mind.special_role == role) ? 1 : 0
+		return (mind.special_role == role) ? 1 : 0
 	else
 		return 0
 

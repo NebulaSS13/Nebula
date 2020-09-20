@@ -122,8 +122,7 @@
 	if(value == WALL_VALUE)
 		if(prob(80))
 			return /turf/simulated/wall/concrete
-		else
-			return /turf/exterior/concrete/reinforced/damaged
+		return /turf/exterior/concrete/reinforced/damaged
 	return ..()
 
 /datum/random_map/maze/concrete/get_additional_spawns(var/value, var/turf/simulated/floor/T)
@@ -206,6 +205,6 @@
 			new/obj/structure/rubble/lab(T)
 		if(prob(20))
 			new/obj/item/remains/xeno/charred(T)
-	
+
 
 #undef TRANSLATE_COORD

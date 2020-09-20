@@ -75,8 +75,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			return 1
 		if(slot_tie_str)
 			return 1
-		else
-			return has_organ(slot)
+	return has_organ(slot)
 
 /mob/living/carbon/human/u_equip(obj/W)
 	. = ..()
@@ -173,10 +172,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 //set redraw_mob to 0 if you don't wish the hud to be updated - if you're doing it manually in your own proc.
 
 // Hands rewrite note July 2020 - prior to this commit, slot is always numerical (using the slot_blah constants)
-// but I need to pass it arbitrary bodypart flags for use in the new held items system. If slot is not a number, 
+// but I need to pass it arbitrary bodypart flags for use in the new held items system. If slot is not a number,
 // we assume it is expecting to map to a held item inventory slot. The explicit isnum() check is there because if
 // we go ahead and let it try to evaluate a number, the associative list will try to use it as a numerical index
-// and will runtime out the ass. 
+// and will runtime out the ass.
 // Post hands rewrite I plan to conver the rest of the inventory system to a string-based inventory slot system
 // so at that point the numerical flags will be removed and this proc (and the rest of the chain) can be rewritten.
 
@@ -207,7 +206,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			return TRUE
 	// End boilerplate.
 
-	if(!species || !species.hud || !(slot in species.hud.equip_slots)) 
+	if(!species || !species.hud || !(slot in species.hud.equip_slots))
 		return
 	W.forceMove(src)
 

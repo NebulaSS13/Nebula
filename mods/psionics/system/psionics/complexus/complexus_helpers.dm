@@ -17,8 +17,7 @@
 /datum/psi_complexus/proc/get_armour(var/armourtype)
 	if(use_psi_armour && can_use_passive())
 		return round(Clamp(Clamp(4 * rating, 0, 20) * get_rank(SSpsi.armour_faculty_by_type[armourtype]), 0, 100) * (stamina/max_stamina))
-	else
-		return 0
+	return 0
 
 /datum/psi_complexus/proc/get_rank(var/faculty)
 	return LAZYACCESS(ranks, faculty)

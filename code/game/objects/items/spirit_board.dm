@@ -15,8 +15,7 @@
 /obj/item/spirit_board/attack_hand(mob/user)
 	if (user.a_intent == I_GRAB)
 		return ..()
-	else
-		spirit_board_pick_letter(user)
+	spirit_board_pick_letter(user)
 
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE

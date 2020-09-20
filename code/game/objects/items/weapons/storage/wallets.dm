@@ -97,8 +97,7 @@
 	var/obj/item/I = GetIdCard()
 	if(I)
 		return I.GetAccess()
-	else
-		return ..()
+	return ..()
 
 /obj/item/storage/wallet/random/Initialize()
 	. = ..()

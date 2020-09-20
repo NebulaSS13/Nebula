@@ -87,8 +87,7 @@
 		return 1
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
-	else
-		return 0
+	return 0
 
 /obj/machinery/deployable/barrier/proc/explode()
 

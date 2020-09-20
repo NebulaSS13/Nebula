@@ -14,8 +14,7 @@
 /datum/playingcard/custom/card_image(concealed, deck_icon)
 	if(concealed)
 		return image((src.use_custom_back ? CUSTOM_ITEM_OBJ : deck_icon), "[back_icon]")
-	else
-		return image((src.use_custom_front ? CUSTOM_ITEM_OBJ : deck_icon), "[card_icon]")
+	return image((src.use_custom_front ? CUSTOM_ITEM_OBJ : deck_icon), "[card_icon]")
 
 /obj/item/deck
 	w_class = ITEM_SIZE_SMALL

@@ -83,8 +83,7 @@
 /atom/proc/return_air()
 	if(loc)
 		return loc.return_air()
-	else
-		return null
+	return null
 
 //return flags that should be added to the viewer's sight var.
 //Otherwise return a negative number to indicate that the view should be cancelled.
@@ -393,8 +392,7 @@ its easier to just keep the beam vertical.
 
 	if(cur_x && cur_y)
 		return list("x"=cur_x,"y"=cur_y)
-	else
-		return 0
+	return 0
 
 /atom/proc/checkpass(passflag)
 	return pass_flags&passflag
@@ -402,8 +400,7 @@ its easier to just keep the beam vertical.
 /atom/proc/isinspace()
 	if(istype(get_turf(src), /turf/space))
 		return 1
-	else
-		return 0
+	return 0
 
 // Show a message to all mobs and objects in sight of this atom
 // Use for objects performing visible actions

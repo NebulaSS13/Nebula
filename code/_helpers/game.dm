@@ -277,14 +277,13 @@ proc
 		if(X1==X2)
 			if(Y1==Y2)
 				return 1 //Light cannot be blocked on same tile
-			else
-				var/s = SIMPLE_SIGN(Y2-Y1)
+			var/s = SIMPLE_SIGN(Y2-Y1)
+			Y1+=s
+			while(Y1!=Y2)
+				T=locate(X1,Y1,Z)
+				if(T.opacity)
+					return 0
 				Y1+=s
-				while(Y1!=Y2)
-					T=locate(X1,Y1,Z)
-					if(T.opacity)
-						return 0
-					Y1+=s
 		else
 			var/m=(32*(Y2-Y1)+(PY2-PY1))/(32*(X2-X1)+(PX2-PX1))
 			var/b=(Y1+PY1/32-0.015625)-m*(X1+PX1/32-0.015625) //In tiles
@@ -322,13 +321,10 @@ proc/isInSight(var/atom/A, var/atom/B)
 	if(abs(dy) > abs (dx)) //slope is above 1:1 (move horizontally in a tie)
 		if(dy > 0)
 			return get_step(start, SOUTH)
-		else
-			return get_step(start, NORTH)
-	else
-		if(dx > 0)
-			return get_step(start, WEST)
-		else
-			return get_step(start, EAST)
+		return get_step(start, NORTH)
+	if(dx > 0)
+		return get_step(start, WEST)
+	return get_step(start, EAST)
 
 /proc/get_mob_by_key(var/key)
 	for(var/mob/M in SSmobs.mob_list)

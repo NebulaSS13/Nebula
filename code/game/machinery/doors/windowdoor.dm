@@ -86,8 +86,7 @@
 		return 1
 	if(get_dir(loc, target) == dir)
 		return !density
-	else
-		return 1
+	return 1
 
 /obj/machinery/door/window/open()
 	if (operating == 1) //doors can still open when emag-disabled

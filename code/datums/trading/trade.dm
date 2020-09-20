@@ -219,8 +219,7 @@
 		refuse_comms = 1
 	if(disposition > 50)
 		return get_response("insult_good","What? I thought we were cool!")
-	else
-		return get_response("insult_bad", "Right back at you asshole!")
+	return get_response("insult_bad", "Right back at you asshole!")
 
 /datum/trader/proc/compliment()
 	if(prob(-disposition))

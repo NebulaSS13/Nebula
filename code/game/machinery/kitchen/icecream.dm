@@ -42,8 +42,7 @@
 			return list(/decl/material/liquid/nutriment/flour, /decl/material/liquid/nutriment/sugar)
 		if(CONE_CHOC)
 			return list(/decl/material/liquid/nutriment/flour, /decl/material/liquid/nutriment/sugar, /decl/material/liquid/nutriment/coco)
-		else
-			return list(/decl/material/liquid/drink/milk, /decl/material/solid/ice)
+	return list(/decl/material/liquid/drink/milk, /decl/material/solid/ice)
 
 /obj/machinery/icecream_vat/proc/get_flavour_name(var/flavour_type)
 	switch(flavour_type)
@@ -61,8 +60,7 @@
 			return "waffle"
 		if(CONE_CHOC)
 			return "chocolate"
-		else
-			return "vanilla"
+	return "vanilla"
 
 /obj/machinery/icecream_vat/Initialize(mapload, d, populate_parts)
 	. = ..()

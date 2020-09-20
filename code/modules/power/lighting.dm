@@ -161,8 +161,7 @@
 /obj/machinery/light/proc/get_status()
 	if(!lightbulb)
 		return LIGHT_EMPTY
-	else
-		return lightbulb.status
+	return lightbulb.status
 
 /obj/machinery/light/proc/switch_check()
 	lightbulb.switch_on()

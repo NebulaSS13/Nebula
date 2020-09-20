@@ -21,7 +21,7 @@
 /datum/extension/eye/proc/look(var/mob/new_looker, var/list/eye_args)
 	if(new_looker.eyeobj || current_looker)
 		return FALSE
-	
+
 	LAZYINSERT(eye_args, get_turf(new_looker), 1) // Make sure that a loc is provided to the eye.
 
 	if(!extension_eye)
@@ -58,7 +58,7 @@
 
 	GLOB.moved_event.unregister(holder, src, /datum/extension/eye/proc/unlook)
 	GLOB.moved_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
-	
+
 	GLOB.destroyed_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
 	GLOB.destroyed_event.unregister(extension_eye, src, /datum/extension/eye/proc/unlook)
 
@@ -90,8 +90,7 @@
 			return ..(eye_extension.extension_eye)
 		if(EXTENSION_TARGET)
 			return ..(eye_extension)
-		else
-			CRASH("Attempted to generate eye action [src] but an improper target_type ([target_type]) was defined.")
+	CRASH("Attempted to generate eye action [src] but an improper target_type ([target_type]) was defined.")
 
 /datum/action/eye/CheckRemoval(mob/living/user)
 	if(!user.eyeobj || !istype(user.eyeobj, eye_type))

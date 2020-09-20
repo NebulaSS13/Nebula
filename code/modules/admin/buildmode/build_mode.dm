@@ -56,5 +56,4 @@
 
 	if(matches.len==1)
 		return matches[1]
-	else
-		return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)
+	return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)

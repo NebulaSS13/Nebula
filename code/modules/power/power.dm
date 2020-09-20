@@ -56,14 +56,12 @@
 /obj/machinery/power/proc/surplus()
 	if(powernet)
 		return powernet.avail-powernet.load
-	else
-		return 0
+	return 0
 
 /obj/machinery/power/proc/avail()
 	if(powernet)
 		return powernet.avail
-	else
-		return 0
+	return 0
 
 // connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()

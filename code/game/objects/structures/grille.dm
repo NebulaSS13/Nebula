@@ -18,7 +18,7 @@
 	var/destroyed = 0
 	var/list/connections
 	var/list/other_connections
-	
+
 /obj/structure/grille/clear_connections()
 	connections = null
 	other_connections = null
@@ -106,18 +106,16 @@
 		damage_dealt += 5
 	else
 		damage_dealt += 1
-	
+
 	attack_generic(user,damage_dealt,attack_message)
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GRILLE))
 		return 1
-	else
-		if(istype(mover, /obj/item/projectile))
-			return prob(30)
-		else
-			return !density
+	if(istype(mover, /obj/item/projectile))
+		return prob(30)
+	return !density
 
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)	return

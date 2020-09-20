@@ -94,7 +94,7 @@
 		stored_units += store_mobs(stored_units)
 	if(storage_types & CLOSET_STORAGE_STRUCTURES)
 		stored_units += store_structures(stored_units)
-		
+
 /obj/structure/closet/proc/open()
 	if(src.opened)
 		return 0
@@ -226,7 +226,7 @@
 		take_damage(proj_damage)
 
 /obj/structure/closet/attackby(obj/item/W, mob/user)
-	
+
 	if(user.a_intent == I_HURT && W.force)
 		return ..()
 
@@ -279,11 +279,9 @@
 	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
-			if(!WT.isOn())
-				return
-			else
+			if(WT.isOn())
 				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-				return
+			return
 		src.welded = !src.welded
 		src.update_icon()
 		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)

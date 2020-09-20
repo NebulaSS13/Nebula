@@ -124,8 +124,7 @@
 		return 0
 	if(used_capacity + size > max_capacity)
 		return 0
-	else
-		return 1
+	return 1
 
 // Checks whether we can store the file. We can only store unique files, so this checks whether we wouldn't get a duplicity by adding a file.
 /obj/item/stock_parts/computer/hard_drive/proc/try_store_file(var/datum/computer_file/F)

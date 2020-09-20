@@ -19,7 +19,7 @@
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
 	if(autojoin)
 		SSnetworking.queue_connection(src)
-	
+
 /datum/extension/network_device/Destroy()
 	disconnect()
 	. = ..()
@@ -43,7 +43,7 @@
 	if(!net.check_connection(src, specific_action) || !net.add_device(src))
 		return FALSE
 	return net.get_signal_strength(src)
-	
+
 /datum/extension/network_device/proc/get_signal_wordlevel()
 	var/datum/computer_network/network = get_network()
 	if(!network)
@@ -53,8 +53,7 @@
 		return "Not Connected"
 	if(signal_strength < (NETWORK_BASE_BROADCAST_STRENGTH * 0.5))
 		return "Low Signal"
-	else
-		return "High Signal"
+	return "High Signal"
 
 /datum/extension/network_device/proc/get_nearby_networks()
 	var/list/networks = list()

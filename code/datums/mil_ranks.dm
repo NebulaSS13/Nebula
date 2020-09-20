@@ -47,8 +47,7 @@ var/datum/mil_branches/mil_branches = new()
 		rank_name = initial(rank.name)
 	if(rank_name && rank_name != "None")
 		var/datum/mil_branch/branch = get_branch(branch_name)
-		if(branch)
-			return branch.ranks[rank_name]
+		return branch?.ranks[rank_name]
 
 /**
  *  Return all spawn branches for the given input
@@ -85,8 +84,7 @@ var/datum/mil_branches/mil_branches = new()
 	var/datum/mil_branch/branch = get_branch(branch_name)
 	if(branch && (rank_name in branch.spawn_ranks(S)))
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 /**
  *  A single military branch, such as Fleet or Marines

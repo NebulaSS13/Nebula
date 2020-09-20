@@ -59,9 +59,8 @@
 
 	if(!charged_item)
 		return 0
-	else
-		charged_item.visible_message("<span class='notice'>[charged_item] suddenly sparks with energy!</span>")
-		return 1
+	charged_item.visible_message("<span class='notice'>[charged_item] suddenly sparks with energy!</span>")
+	return 1
 
 
 /spell/aoe_turf/charge/blood

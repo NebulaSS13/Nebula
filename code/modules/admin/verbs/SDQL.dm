@@ -362,21 +362,18 @@
 
 			if((v in object.vars) && istype(object.vars[v], /datum))
 				return SDQL_text2value(object.vars[v], copytext(text, split + 1))
-			else
-				return null
+			return null
 
 		else
 			if(text in object.vars)
 				return object.vars[text]
-			else
-				return null
+			return null
 
 
 /proc/text_starts_with(text, start)
 	if(copytext(text, 1, length(start) + 1) == start)
 		return 1
-	else
-		return 0
+	return 0
 
 
 

@@ -393,8 +393,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		if(isnum(age))
 			if(age >= 0)
 				return "[age]"
-			else
-				return "Ckey not found"
+			return "Ckey not found"
 		else
 			return "Database connection failed or not set up"
 
@@ -639,8 +638,7 @@ proc/establish_db_connection()
 
 	if(!dbcon || !dbcon.IsConnected())
 		return setup_database_connection()
-	else
-		return 1
+	return 1
 
 
 /hook/startup/proc/connectOldDB()
@@ -682,8 +680,7 @@ proc/establish_old_db_connection()
 
 	if(!dbcon_old || !dbcon_old.IsConnected())
 		return setup_old_database_connection()
-	else
-		return 1
+	return 1
 
 #undef FAILED_DB_CONNECTION_CUTOFF
 

@@ -382,8 +382,7 @@
 /datum/species/serpentid/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
 	if(!H.handcuffed || H.buckled)
 		return ..(H, ignore_intent, TRUE)
-	else
-		return 0
+	return 0
 
 /datum/species/serpentid/handle_movement_delay_special(var/mob/living/carbon/human/H)
 	var/tally = 0

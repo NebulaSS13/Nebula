@@ -1,7 +1,7 @@
 /*
  MODULAR ANTAGONIST SYSTEM
 
- Attempts to centralize antag tracking code into its own system, which has the added bonus of making 
+ Attempts to centralize antag tracking code into its own system, which has the added bonus of making
  the display procs consistent. Should be fairly self-explanatory with a review of the procs.
 
  To use:
@@ -16,12 +16,11 @@
 /proc/get_antag_data(var/antag_type)
 	if(GLOB.all_antag_types_[antag_type])
 		return GLOB.all_antag_types_[antag_type]
-	else
-		var/list/all_antag_types = GLOB.all_antag_types_
-		for(var/cur_antag_type in all_antag_types)
-			var/datum/antagonist/antag = all_antag_types[cur_antag_type]
-			if(antag && antag.is_type(antag_type))
-				return antag
+	var/list/all_antag_types = GLOB.all_antag_types_
+	for(var/cur_antag_type in all_antag_types)
+		var/datum/antagonist/antag = all_antag_types[cur_antag_type]
+		if(antag && antag.is_type(antag_type))
+			return antag
 
 /proc/clear_antag_roles(var/datum/mind/player, var/implanted)
 	var/list/all_antag_types = GLOB.all_antag_types_

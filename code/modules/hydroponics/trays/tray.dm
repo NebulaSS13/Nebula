@@ -185,8 +185,7 @@
 
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
-	else
-		return !density
+	return !density
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_health(var/icon_update = 1)
 	if(seed && !dead && health <= 0)
@@ -441,9 +440,8 @@
 		if (S.mode == 1)
 			if(seed)
 				return ..()
-			else
-				to_chat(user, "There's no plant to inject.")
-				return 1
+			to_chat(user, "There's no plant to inject.")
+			return 1
 		else
 			if(seed)
 				//Leaving this in in case we want to extract from plants later.

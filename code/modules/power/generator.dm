@@ -72,18 +72,17 @@
 		circ2.temperature_overlay = null
 	if (stat & (NOPOWER|BROKEN))
 		return 1
-	else
-		if (lastgenlev != 0)
-			overlays += image('icons/obj/power.dmi', "teg-op[lastgenlev]")
-			if (circ1 && circ2)
-				var/extreme = (lastgenlev > 9) ? "ex" : ""
-				if (circ1.last_temperature < circ2.last_temperature)
-					circ1.temperature_overlay = "circ-[extreme]cold"
-					circ2.temperature_overlay = "circ-[extreme]hot"
-				else
-					circ1.temperature_overlay = "circ-[extreme]hot"
-					circ2.temperature_overlay = "circ-[extreme]cold"
-		return 1
+	if (lastgenlev != 0)
+		overlays += image('icons/obj/power.dmi', "teg-op[lastgenlev]")
+		if (circ1 && circ2)
+			var/extreme = (lastgenlev > 9) ? "ex" : ""
+			if (circ1.last_temperature < circ2.last_temperature)
+				circ1.temperature_overlay = "circ-[extreme]cold"
+				circ2.temperature_overlay = "circ-[extreme]hot"
+			else
+				circ1.temperature_overlay = "circ-[extreme]hot"
+				circ2.temperature_overlay = "circ-[extreme]cold"
+	return 1
 
 /obj/machinery/power/generator/Process()
 	if(!circ1 || !circ2 || !anchored || stat & (BROKEN|NOPOWER))

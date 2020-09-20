@@ -35,8 +35,7 @@
 		if(sponge)
 			if(sponge.status & ORGAN_DEAD)
 				return sponge.species.total_health
-			else
-				return sponge.damage
+			return sponge.damage
 		else
 			return species.total_health
 	return 0
@@ -143,17 +142,15 @@
 /mob/living/carbon/human/getOxyLoss()
 	if(!need_breathe())
 		return 0
-	else
-		var/obj/item/organ/internal/lungs/breathe_organ = internal_organs_by_name[species.breathing_organ]
-		if(!breathe_organ)
-			return maxHealth/2
-		return breathe_organ.get_oxygen_deprivation()
+	var/obj/item/organ/internal/lungs/breathe_organ = internal_organs_by_name[species.breathing_organ]
+	if(!breathe_organ)
+		return maxHealth/2
+	return breathe_organ.get_oxygen_deprivation()
 
 /mob/living/carbon/human/setOxyLoss(var/amount)
 	if(!need_breathe())
 		return 0
-	else
-		adjustOxyLoss(getOxyLoss()-amount)
+	adjustOxyLoss(getOxyLoss()-amount)
 
 /mob/living/carbon/human/adjustOxyLoss(var/amount)
 	if(!need_breathe())

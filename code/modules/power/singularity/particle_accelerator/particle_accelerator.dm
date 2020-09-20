@@ -89,7 +89,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 /obj/structure/particle_accelerator/on_update_icon()
 	..()
 	return
-	
+
 /obj/structure/particle_accelerator/examine(mob/user)
 	. = ..()
 	switch(construction_state)
@@ -208,12 +208,11 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 				temp_state--
 	if(temp_state == src.construction_state)//Nothing changed
 		return 0
-	else
-		src.construction_state = temp_state
-		if(src.construction_state < 3)//Was taken apart, update state
-			update_state()
-		update_icon()
-		return 1
+	src.construction_state = temp_state
+	if(src.construction_state < 3)//Was taken apart, update state
+		update_state()
+	update_icon()
+	return 1
 
 /obj/machinery/particle_accelerator
 	name = "Particle Accelerator"
@@ -309,13 +308,12 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 				active = 0
 	if(temp_state == src.construction_state)//Nothing changed
 		return 0
-	else
-		if(src.construction_state < 3)//Was taken apart, update state
-			update_state()
-			if(use_power)
-				update_use_power(POWER_USE_OFF)
-		src.construction_state = temp_state
-		if(src.construction_state >= 3)
-			update_use_power(POWER_USE_IDLE)
-		update_icon()
-		return 1
+	if(src.construction_state < 3)//Was taken apart, update state
+		update_state()
+		if(use_power)
+			update_use_power(POWER_USE_OFF)
+	src.construction_state = temp_state
+	if(src.construction_state >= 3)
+		update_use_power(POWER_USE_IDLE)
+	update_icon()
+	return 1

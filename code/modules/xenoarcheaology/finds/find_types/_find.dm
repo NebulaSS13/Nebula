@@ -27,7 +27,7 @@ var/list/responsive_carriers = list(
 
 	if(prob(engraving_chance))
 		descriptors += generate_engravings(I)
-	
+
 	var/extra_desc = get_additional_description()
 	if(extra_desc)
 		descriptors += extra_desc
@@ -49,7 +49,7 @@ var/list/responsive_carriers = list(
 	I.SetName(new_name)
 	if(prob(5))
 		I.talking_atom = new(I)
-	
+
 	return I
 
 /decl/archaeological_find/proc/spawn_item(atom/loc)
@@ -59,8 +59,7 @@ var/list/responsive_carriers = list(
 /decl/archaeological_find/proc/new_icon_state()
 	if(new_icon_state)
 		return new_icon_state
-	else
-		return "unknown[rand(1,4)]"
+	return "unknown[rand(1,4)]"
 
 /decl/archaeological_find/proc/generate_name()
 	return item_type

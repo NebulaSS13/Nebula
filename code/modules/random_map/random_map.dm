@@ -99,8 +99,7 @@ var/global/list/map_count = list()
 			return "_"
 		if(ARTIFACT_CHAR)
 			return "A"
-		else
-			return " "
+	return " "
 
 /datum/random_map/proc/display_map(atom/user)
 

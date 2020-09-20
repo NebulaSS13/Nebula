@@ -49,19 +49,18 @@
 	//First do species check
 	if(species && species.can_overcome_gravity(src))
 		return 1
-	else
-		for(var/atom/a in src.loc)
-			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
-				return 1
+	for(var/atom/a in src.loc)
+		if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
+			return 1
 
-		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
-		var/list/objects_to_stand_on = list(
-				/obj/item/stool,
-				/obj/structure/bed,
-			)
-		for(var/type in objects_to_stand_on)
-			if(locate(type) in src.loc)
-				return 1
+	//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
+	var/list/objects_to_stand_on = list(
+			/obj/item/stool,
+			/obj/structure/bed,
+		)
+	for(var/type in objects_to_stand_on)
+		if(locate(type) in src.loc)
+			return 1
 	return 0
 
 /mob/proc/can_ztravel()
@@ -176,8 +175,7 @@
 	forceMove(landing)
 	if(locate(/obj/structure/stairs) in landing)
 		return 1
-	else
-		handle_fall_effect(landing)
+	handle_fall_effect(landing)
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
 	if(istype(landing, /turf/simulated/open))

@@ -44,8 +44,7 @@
 /datum/random_map/noise/exoplanet/get_appropriate_path(var/value)
 	if(water_type && noise2value(value) < water_level)
 		return water_type
-	else
-		return land_type
+	return land_type
 
 /datum/random_map/noise/exoplanet/get_additional_spawns(var/value, var/turf/T)
 	if(T.is_wall())

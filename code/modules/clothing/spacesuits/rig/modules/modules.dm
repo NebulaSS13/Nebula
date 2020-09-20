@@ -256,8 +256,7 @@
 /obj/item/rig_module/Process()
 	if(active)
 		return active_power_cost
-	else
-		return passive_power_cost
+	return passive_power_cost
 
 // Called by holder rigsuit attackby()
 // Checks if an item is usable with this module and handles it if it is

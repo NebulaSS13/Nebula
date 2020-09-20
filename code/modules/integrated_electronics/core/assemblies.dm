@@ -422,10 +422,9 @@
 			return FALSE
 		if(try_add_component(I, user))
 			return TRUE
-		else
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
-			return ..()
+		for(var/obj/item/integrated_circuit/input/S in assembly_components)
+			S.attackby_react(I,user,user.a_intent)
+		return ..()
 	else if(istype(I, /obj/item/multitool) || istype(I, /obj/item/integrated_electronics/wirer) || istype(I, /obj/item/integrated_electronics/debugger))
 		if(opened)
 			interact(user)

@@ -339,8 +339,7 @@ Ccomp's first proc.
 		ghosts[name] = M                                        //get the name of the mob for the popup list
 	if(what==1)
 		return ghosts
-	else
-		return mobs
+	return mobs
 
 /client/proc/get_ghosts_by_key()
 	. = list()
@@ -717,8 +716,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(confirm == "Yes")
 		if (isobserver(mob)) // so they don't spam gibs everywhere
 			return
-		else
-			mob.gib()
+		mob.gib()
 
 		log_and_message_admins("used gibself.")
 		SSstatistics.add_field_details("admin_verb","GIBS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

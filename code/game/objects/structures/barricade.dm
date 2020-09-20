@@ -48,7 +48,7 @@
 		overlays = overlay_image(icon, "cheval_spikes", color = reinf_material.color, flags = RESET_COLOR)
 	else
 		icon_state = "barricade"
-	
+
 /obj/structure/barricade/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material/rods) && !reinf_material)
 		var/obj/item/stack/material/rods/R = W
@@ -80,8 +80,7 @@
 		return 1
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
-	else
-		return 0
+	return 0
 
 /obj/structure/barricade/Bumped(mob/living/victim)
 	. = ..()

@@ -22,7 +22,7 @@
 		Consume(A)
 
 /turf/unsimulated/wall/cascade/Destroy()
-	STOP_PROCESSING(SSturf, src)	
+	STOP_PROCESSING(SSturf, src)
 	. = ..()
 
 /turf/unsimulated/wall/cascade/Process(wait, times_fired)
@@ -52,8 +52,7 @@
 /turf/unsimulated/wall/cascade/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
-	else
-		user.examinate(src)
+	user.examinate(src)
 
 // /vg/: Don't let ghosts fuck with this.
 /turf/unsimulated/wall/cascade/attack_ghost(mob/user)

@@ -184,8 +184,7 @@ SUBSYSTEM_DEF(vote)
 		return (SSticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_added
 	if(is_admin(creator))
 		return SSticker.mode.addantag_allowed & (ADDANTAG_ADMIN|ADDANTAG_PLAYER)
-	else
-		return (SSticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_added
+	return (SSticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_added
 
 /mob/verb/vote()
 	set category = "OOC"

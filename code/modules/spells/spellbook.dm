@@ -277,8 +277,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 						return S.quicken_spell()
 					if("Power")
 						return S.empower_spell()
-					else
-						return
+				return
 			else if(S.can_improve(Sp_POWER))
 				return S.empower_spell()
 			else if(S.can_improve(Sp_SPEED))

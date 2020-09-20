@@ -90,8 +90,7 @@
 /obj/machinery/cablelayer/proc/layCable(var/turf/new_turf,var/M_Dir)
 	if(!on)
 		return reset()
-	else
-		dismantleFloor(new_turf)
+	dismantleFloor(new_turf)
 	if(!istype(new_turf) || !dismantleFloor(new_turf))
 		return reset()
 	var/fdirn = turn(M_Dir,180)

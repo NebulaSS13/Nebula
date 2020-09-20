@@ -22,8 +22,7 @@ GLOBAL_LIST_EMPTY(skills)
 			return difficulty
 		if(SKILL_EXPERT, SKILL_PROF)
 			return 2*difficulty
-		else
-			return 0
+	return 0
 
 /decl/hierarchy/skill/proc/update_special_effects(mob/mob, level)
 
@@ -200,8 +199,7 @@ GLOBAL_LIST_EMPTY(skills)
 			return 2*difficulty
 		if(SKILL_PROF)
 			return 4*difficulty
-		else
-			return 0
+	return 0
 
 /decl/hierarchy/skill/security/weapons
 	ID = "weapons"
@@ -221,8 +219,7 @@ GLOBAL_LIST_EMPTY(skills)
 			return 2*difficulty
 		if(SKILL_EXPERT, SKILL_PROF)
 			return 4*difficulty
-		else
-			return 0
+	return 0
 
 /decl/hierarchy/skill/security/forensics
 	ID = "forensics"
@@ -241,8 +238,7 @@ GLOBAL_LIST_EMPTY(skills)
 			return difficulty * 2
 		if(SKILL_PROF)
 			return 3 * difficulty
-		else
-			return 0
+	return 0
 
 // Category: Engineering
 

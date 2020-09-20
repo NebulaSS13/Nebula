@@ -407,14 +407,13 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		edges += edge
 		edge.recheck()
 		return edge
-	else
-		for(var/connection_edge/unsimulated/edge in A.edges)
-			if(has_same_air(edge.B,B))
-				return edge
-		var/connection_edge/edge = new/connection_edge/unsimulated(A,B)
-		edges += edge
-		edge.recheck()
-		return edge
+	for(var/connection_edge/unsimulated/edge in A.edges)
+		if(has_same_air(edge.B,B))
+			return edge
+	var/connection_edge/edge = new/connection_edge/unsimulated(A,B)
+	edges += edge
+	edge.recheck()
+	return edge
 
 /datum/controller/subsystem/air/proc/has_same_air(turf/A, turf/B)
 	if(A.initial_gas)

@@ -16,9 +16,8 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected)
 		return affected
-	else
-		var/list/organ_data = target.species.has_limbs["[target_zone]"]
-		return !isnull(organ_data)
+	var/list/organ_data = target.species.has_limbs["[target_zone]"]
+	return !isnull(organ_data)
 
 //////////////////////////////////////////////////////////////////
 //	 limb attachment surgery step
@@ -54,8 +53,7 @@
 	if(istype(tool) && BP_IS_PROSTHETIC(tool))
 		if(target.isSynthetic())
 			return SURGERY_SKILLS_ROBOTIC
-		else
-			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 	return ..()
 
 /decl/surgery_step/limb/attach/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -106,8 +104,7 @@
 	if(istype(E) && BP_IS_PROSTHETIC(E))
 		if(target.isSynthetic())
 			return SURGERY_SKILLS_ROBOTIC
-		else
-			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 	return ..()
 
 /decl/surgery_step/limb/connect/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

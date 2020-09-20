@@ -283,8 +283,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 		if(custom_check_callback && next_check < world.time)
 			if(!custom_check_callback.Invoke())
 				return
-			else
-				next_check = world.time + check_delay
+			next_check = world.time + check_delay
 		stoplag(1)
 
 /datum/radial_menu/Destroy()

@@ -67,8 +67,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 /obj/item/integrated_circuit/proc/check_interactivity(mob/user)
 	if(assembly)
 		return assembly.check_interactivity(user)
-	else
-		return CanUseTopic(user)
+	return CanUseTopic(user)
 
 /obj/item/integrated_circuit/Initialize()
 	displayed_name = name
@@ -369,8 +368,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	// If the component is located in an assembly, let assembly determine it.
 	if(assembly)
 		return assembly.get_object()
-	else
-		return src	// If not, the component is acting on its own.
+	return src	// If not, the component is acting on its own.
 
 
 // Checks if the target object is reachable. Useful for various manipulators and manipulator-like objects.

@@ -329,8 +329,7 @@
 			return room_wall_type
 		if(BORDER_CHAR)
 			return border_wall_type
-		else
-			return floor_type
+	return floor_type
 
 /datum/random_map/winding_dungeon/get_map_char(var/value)
 	. = ..(value)

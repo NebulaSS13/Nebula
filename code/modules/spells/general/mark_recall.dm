@@ -21,8 +21,7 @@
 /spell/mark_recall/choose_targets()
 	if(!mark)
 		return list("magical fairy dust") //because why not
-	else
-		return list(mark)
+	return list(mark)
 
 /spell/mark_recall/cast(var/list/targets,mob/user)
 	if(!targets.len)

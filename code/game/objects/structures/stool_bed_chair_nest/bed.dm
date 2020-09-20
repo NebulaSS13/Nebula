@@ -51,8 +51,7 @@
 /obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
-	else
-		return ..()
+	return ..()
 
 /obj/structure/bed/explosion_act(severity)
 	. = ..()

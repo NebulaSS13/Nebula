@@ -84,8 +84,7 @@
 		return FALSE
 	if(recharging)
 		return TRUE
-	else
-		recharging = TRUE
+	recharging = TRUE
 	var/obj/item/cell/MyC = get_cell()
 	var/obj/item/cell/C = A.get_cell()
 	var/obj/O
@@ -134,8 +133,7 @@
 /obj/item/inducer/proc/safety()
 	if (failsafe)
 		return 1
-	else
-		return 0
+	return 0
 
 /obj/item/inducer/attack(mob/M, mob/user)
 	return

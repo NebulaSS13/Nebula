@@ -48,8 +48,7 @@
 /obj/machinery/flasher/attack_ai()
 	if (src.anchored)
 		return src.flash()
-	else
-		return
+	return
 
 /obj/machinery/flasher/proc/flash()
 	if (!(powered()))

@@ -49,15 +49,14 @@ var/list/icon_state_cache = list()
 		return
 	if(plane == HUD_PLANE && has_inventory_icon)
 		return ICON_STATE_INV
-	else
-		return ICON_STATE_WORLD
+	return ICON_STATE_WORLD
 
 /mob/proc/get_bodytype()
 	return
 
-// This is a temporary workaround for the slot => bodypart 
-// changes. In the long term this should be removed after 
-// all the `slot_l/r_hand-foo` states are renamed to just 
+// This is a temporary workaround for the slot => bodypart
+// changes. In the long term this should be removed after
+// all the `slot_l/r_hand-foo` states are renamed to just
 // `l/r_hand-foo`. TODO: check if this is still here in 2025.
 var/list/bodypart_to_slot_lookup_table = list(
 	BP_L_HAND = "slot_l_hand",
@@ -102,7 +101,7 @@ var/list/bodypart_to_slot_lookup_table = list(
 /obj/item/proc/apply_offsets(var/mob/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/H = user_mob
-		if(lowertext(H.species.get_bodytype(H)) != bodytype) 
+		if(lowertext(H.species.get_bodytype(H)) != bodytype)
 			overlay = H.species.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, bodypart || slot)
 	. = overlay
 

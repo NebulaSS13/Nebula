@@ -89,8 +89,7 @@
 			return EAST
 		if("west")
 			return WEST
-		else
-			return 0
+	return 0
 
 /proc/mode_to_gasid(var/mode)
 	switch(mode)
@@ -104,5 +103,4 @@
 			return /decl/material/gas/nitrous_oxide
 		if(ATM_H2)
 			return /decl/material/gas/hydrogen
-		else
-			return null
+	return null

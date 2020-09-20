@@ -73,5 +73,4 @@ var/const/CAMERA_WIRE_NOTHING2 = 32
 /datum/wires/camera/proc/CanDeconstruct()
 	if(IsIndexCut(CAMERA_WIRE_POWER) && IsIndexCut(CAMERA_WIRE_FOCUS) && IsIndexCut(CAMERA_WIRE_LIGHT) && IsIndexCut(CAMERA_WIRE_NOTHING1) && IsIndexCut(CAMERA_WIRE_NOTHING2))
 		return 1
-	else
-		return 0
+	return 0

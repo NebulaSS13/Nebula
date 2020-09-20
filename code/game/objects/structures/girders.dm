@@ -57,11 +57,11 @@
 	anchored = prob(50)
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
-	
+
 	var/effective_cover = cover
 	if(reinf_material)
 		effective_cover *= 2
-	if(!anchored) 
+	if(!anchored)
 		effective_cover *= 0.5
 	effective_cover = Clamp(Floor(effective_cover), 0, 100)
 	if(Proj.original != src && !prob(effective_cover))
@@ -116,11 +116,10 @@
 	if(istype(W, /obj/item/stack/material))
 		if(anchored)
 			return construct_wall(W, user)
+		if(reinf_material)
+			to_chat(user, SPAN_WARNING("\The [src] is already reinforced with [reinf_material.solid_name]."))
 		else
-			if(reinf_material)
-				to_chat(user, SPAN_WARNING("\The [src] is already reinforced with [reinf_material.solid_name]."))
-			else
-				return reinforce_with_material(W, user)
+			return reinforce_with_material(W, user)
 		return TRUE
 	. = ..()
 

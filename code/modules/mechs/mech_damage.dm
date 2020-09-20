@@ -26,7 +26,7 @@
 					return AR
 
 	return def_zone //Careful with effects, mechs shouldn't be stunned
-	
+
 /mob/living/exosuit/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
 	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
@@ -73,8 +73,7 @@
 			return arms
 		if(BP_L_LEG , BP_R_LEG)
 			return legs
-		else
-			return body
+	return body
 
 
 /mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
@@ -84,7 +83,7 @@
 	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, TRUE)
 	damage = after_armor[1]
 	damagetype = after_armor[2]
-	
+
 	if(!damage)
 		return 0
 

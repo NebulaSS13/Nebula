@@ -61,8 +61,7 @@
 	if (is_evacuating())
 		if (emergency_evacuation)
 			return list(evacuation_options[EVAC_OPT_CANCEL_ABANDON_SHIP])
-		else
-			return list(evacuation_options[EVAC_OPT_CANCEL_JUMP])
+		return list(evacuation_options[EVAC_OPT_CANCEL_JUMP])
 
 /datum/evacuation_option/abandon_ship
 	option_text = "Abandon spacecraft"

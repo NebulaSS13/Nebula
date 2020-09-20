@@ -125,8 +125,7 @@
 	if(istype(T))
 		if(emagged)
 			return 1
-		else
-			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
+		return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
 
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
 	if(!..())

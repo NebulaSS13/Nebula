@@ -435,8 +435,7 @@ obj/structure/disposalpipe/Destroy()
 
 		if(prob(50))	// 50% chance to choose the found bit or the other one
 			return setbit
-		else
-			return mask & (~setbit)
+		return mask & (~setbit)
 
 /obj/structure/disposalpipe/tagger
 	name = "package tagger"
@@ -556,8 +555,7 @@ obj/structure/disposalpipe/Destroy()
 	if(fromdir != sortdir)
 		if(active)
 			return sortdir
-		else
-			return inactive_dir
+		return inactive_dir
 	else
 		return inactive_dir
 
@@ -659,8 +657,7 @@ obj/structure/disposalpipe/Destroy()
 	if(fromdir != sortdir)	// probably came from the negdir
 		if(divert_check(sortTag))
 			return sortdir
-		else
-			return posdir
+		return posdir
 	else				// came from sortdir
 						// so go with the flow to positive direction
 		return posdir
@@ -804,8 +801,7 @@ obj/structure/disposalpipe/Destroy()
 /obj/structure/disposalpipe/trunk/nextdir(var/fromdir)
 	if(fromdir == DOWN)
 		return dir
-	else
-		return 0
+	return 0
 
 // a broken pipe
 /obj/structure/disposalpipe/broken

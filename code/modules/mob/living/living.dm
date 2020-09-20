@@ -29,18 +29,16 @@ default behaviour is:
 		return 1
 	if(!passive)
 		return swapped.can_move_mob(src, swapping, 1)
+	var/context_flags = 0
+	if(swapping)
+		context_flags = swapped.mob_swap_flags
 	else
-		var/context_flags = 0
-		if(swapping)
-			context_flags = swapped.mob_swap_flags
-		else
-			context_flags = swapped.mob_push_flags
-		if(!mob_bump_flag) //nothing defined, go wild
-			return 1
-		if(mob_bump_flag & context_flags)
-			return 1
-		else
-			return ((a_intent == I_HELP && swapped.a_intent == I_HELP) && swapped.can_move_mob(src, swapping, 1))
+		context_flags = swapped.mob_push_flags
+	if(!mob_bump_flag) //nothing defined, go wild
+		return 1
+	if(mob_bump_flag & context_flags)
+		return 1
+	return ((a_intent == I_HELP && swapped.a_intent == I_HELP) && swapped.can_move_mob(src, swapping, 1))
 
 /mob/living/canface()
 	if(stat)

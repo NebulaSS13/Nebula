@@ -46,13 +46,13 @@
 	// pulse mod starts out as just the chemical effect amount
 	var/pulse_mod = owner.chem_effects[CE_PULSE]
 	var/is_stable = owner.chem_effects[CE_STABLE]
-		
+
 	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(prob(damage_chance))
 			take_internal_damage(0.5)
-	
+
 	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > 30)
 		pulse_mod++
@@ -199,8 +199,7 @@
 	if(BP_IS_PROSTHETIC(src) && is_working())
 		if(is_bruised())
 			return "sputtering pump"
-		else
-			return "steady whirr of the pump"
+		return "steady whirr of the pump"
 
 	if(!pulse || (owner.status_flags & FAKEDEATH))
 		return "no pulse"

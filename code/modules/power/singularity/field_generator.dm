@@ -207,13 +207,12 @@ field_generator power level display
 	power_draw /= 2	//because this will be mirrored for both generators
 	if(draw_power(round(power_draw)) >= power_draw)
 		return 1
-	else
-		for(var/mob/M in viewers(src))
-			M.show_message("<span class='warning'>\The [src] shuts down!</span>")
-		turn_off()
-		investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
-		src.power = 0
-		return 0
+	for(var/mob/M in viewers(src))
+		M.show_message("<span class='warning'>\The [src] shuts down!</span>")
+	turn_off()
+	investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
+	src.power = 0
+	return 0
 
 //Tries to draw the needed power from our own power reserve, or connected generators if we can. Returns the amount of power we were able to get.
 /obj/machinery/field_generator/proc/draw_power(var/draw = 0, var/list/flood_list = list())

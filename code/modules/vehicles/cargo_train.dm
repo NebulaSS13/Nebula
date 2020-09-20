@@ -125,17 +125,16 @@
 /obj/vehicle/train/cargo/engine/turn_on()
 	if(!key)
 		return
+	..()
+	update_stats()
+
+	verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
+	verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
+
+	if(on)
+		verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
 	else
-		..()
-		update_stats()
-
-		verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
-		verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
-
-		if(on)
-			verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
-		else
-			verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
+		verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
 
 /obj/vehicle/train/cargo/engine/turn_off()
 	..()

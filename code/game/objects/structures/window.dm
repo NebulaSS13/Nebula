@@ -25,7 +25,7 @@
 	var/reinf_basestate = "rwindow"
 	var/list/connections
 	var/list/other_connections
-	
+
 /obj/structure/window/clear_connections()
 	connections = null
 	other_connections = null
@@ -109,8 +109,7 @@
 		return 0	//full tile window, you can't move into it!
 	if(get_dir(loc, target) & dir)
 		return !density
-	else
-		return 1
+	return 1
 
 /obj/structure/window/CheckExit(atom/movable/O, target)
 	if(istype(O) && O.checkpass(PASS_FLAG_GLASS))

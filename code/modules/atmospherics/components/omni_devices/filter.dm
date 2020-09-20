@@ -162,8 +162,7 @@
 			return "Nitrous Oxide"
 		if(ATM_H2)
 			return "Hydrogen"
-		else
-			return null
+	return null
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
 	if(..()) return 1
@@ -212,8 +211,7 @@
 			return ATM_OUTPUT
 		if("None")
 			return ATM_NONE
-		else
-			return null
+	return null
 
 /obj/machinery/atmospherics/omni/filter/proc/switch_filter(var/dir, var/mode)
 	//check they aren't trying to disable the input or output ~this can only happen if they hack the cached tmpl file

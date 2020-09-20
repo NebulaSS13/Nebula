@@ -431,8 +431,7 @@ Checks if a list has the same entries and values as an element of big.
 
 	if(i == 1 || i ==  L.len) // Edge cases
 		return (call(cmp)(L[i],A) > 0) ? i : i+1
-	else
-		return i
+	return i
 
 
 /proc/dd_sortedObjectList(var/list/L, var/cache=list())

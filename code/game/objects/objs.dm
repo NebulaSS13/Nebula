@@ -40,20 +40,17 @@
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)
 		return loc.assume_air(giver)
-	else
-		return null
+	return null
 
 /obj/remove_air(amount)
 	if(loc)
 		return loc.remove_air(amount)
-	else
-		return null
+	return null
 
 /obj/return_air()
 	if(loc)
 		return loc.return_air()
-	else
-		return null
+	return null
 
 /obj/proc/updateUsrDialog()
 	if(in_use)
@@ -190,7 +187,7 @@
 		return
 
 	set_dir(turn(dir, 90))
-	update_icon() 
+	update_icon()
 
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)

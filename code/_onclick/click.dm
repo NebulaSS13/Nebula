@@ -141,13 +141,12 @@
 
 			trigger_aiming(TARGET_CAN_CLICK)
 			return
-		else // non-adjacent click
-			if(W)
-				W.afterattack(A, src, 0, params) // 0: not Adjacent
-			else
-				RangedAttack(A, params)
+		if(W) // non-adjacent click
+			W.afterattack(A, src, 0, params) // 0: not Adjacent
+		else
+			RangedAttack(A, params)
 
-			trigger_aiming(TARGET_CAN_CLICK)
+		trigger_aiming(TARGET_CAN_CLICK)
 	return 1
 
 /mob/proc/setClickCooldown(var/timeout)

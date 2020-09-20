@@ -186,8 +186,7 @@ The Appraise verb. Used on objects to estimate their value.
 			return 10
 		if(SKILL_ADEPT)
 			return 20
-		else
-			return 50
+	return 50
 
 /datum/skill_verb/noirvision
 	the_verb = /mob/proc/noirvision

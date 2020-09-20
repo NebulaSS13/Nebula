@@ -508,8 +508,7 @@
 
 	if(returntext)
 		return jointext(status, " ")
-	else
-		return status.len
+	return status.len
 
 /decl/public_access/public_variable/power_draw
 	expected_type = /obj/machinery/atmospherics

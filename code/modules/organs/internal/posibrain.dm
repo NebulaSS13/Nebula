@@ -109,14 +109,13 @@
 /obj/item/organ/internal/posibrain/emp_act(severity)
 	if(!src.brainmob)
 		return
-	else
-		switch(severity)
-			if(1)
-				src.brainmob.emp_damage += rand(20,30)
-			if(2)
-				src.brainmob.emp_damage += rand(10,20)
-			if(3)
-				src.brainmob.emp_damage += rand(0,10)
+	switch(severity)
+		if(1)
+			src.brainmob.emp_damage += rand(20,30)
+		if(2)
+			src.brainmob.emp_damage += rand(10,20)
+		if(3)
+			src.brainmob.emp_damage += rand(0,10)
 	..()
 
 /obj/item/organ/internal/posibrain/proc/PickName()
@@ -246,7 +245,7 @@
 		return 0
 	return cell && cell.use(amount)
 
-/obj/item/organ/internal/cell/proc/get_power_drain()	
+/obj/item/organ/internal/cell/proc/get_power_drain()
 	var/damage_factor = 1 + 10 * damage/max_damage
 	return servo_cost * damage_factor
 

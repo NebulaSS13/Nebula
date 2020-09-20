@@ -175,8 +175,7 @@
 /datum/computer_file/program/proc/check_eye(var/mob/user)
 	if(NM)
 		return NM.check_eye(user)
-	else
-		return -1
+	return -1
 
 /datum/nano_module/program
 	available_to_ai = FALSE

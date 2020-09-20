@@ -18,9 +18,8 @@ meteor_act
 	if(shield_check)
 		if(shield_check < 0)
 			return shield_check
-		else
-			P.on_hit(src, 100, def_zone)
-			return 100
+		P.on_hit(src, 100, def_zone)
+		return 100
 
 	var/blocked = ..(P, def_zone)
 

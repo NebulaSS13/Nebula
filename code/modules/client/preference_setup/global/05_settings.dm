@@ -103,8 +103,7 @@
 		var/datum/client_preference/cp = get_client_preference(preference)
 		if(cp)
 			return prefs.preference_values[cp.key]
-		else
-			return null
+		return null
 	else
 		log_error("Client is lacking preferences: [log_info_line(src)]")
 
@@ -135,8 +134,7 @@
 		var/datum/client_preference/cp = get_client_preference(preference)
 		if(cp)
 			return cp.default_value
-		else
-			return null
+		return null
 
 	return client.get_preference_value(preference)
 

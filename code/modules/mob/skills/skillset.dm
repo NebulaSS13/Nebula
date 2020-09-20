@@ -112,8 +112,7 @@
 			return max(0, 1 + 3*factor)
 		if(SKILL_NONE)
 			return max(0, 1 + 6*factor)
-		else
-			return max(0, 1 + (SKILL_DEFAULT - points) * factor)
+	return max(0, 1 + (SKILL_DEFAULT - points) * factor)
 
 /mob/proc/do_skilled(base_delay, skill_path , atom/target = null, factor = 0.3)
 	return do_after(src, base_delay * skill_delay_mult(skill_path, factor), target)
@@ -123,8 +122,7 @@
 	var/points = get_skill_value(skill_path)
 	if(points >= no_more_fail)
 		return 0
-	else
-		return fail_chance * 2 ** (factor*(SKILL_MIN - points))
+	return fail_chance * 2 ** (factor*(SKILL_MIN - points))
 
 // Simple prob using above
 /mob/proc/skill_fail_prob(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)

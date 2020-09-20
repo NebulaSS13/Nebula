@@ -154,8 +154,7 @@
 				if(equal_or_better)
 					if(A.difficulty >= E.difficulty)
 						return TRUE
-					else
-						hazards -= A
+					hazards -= A
 				else
 					if(A.difficulty == E.difficulty)
 						return TRUE

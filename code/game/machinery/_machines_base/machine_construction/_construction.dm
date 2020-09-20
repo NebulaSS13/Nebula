@@ -52,8 +52,7 @@
 		var/obj/item/stock_parts/circuitboard/board = machine.get_component_of_type(/obj/item/stock_parts/circuitboard)
 		if(board)
 			return board.req_components
-		else
-			return list(/obj/item/stock_parts/circuitboard = 1)
+		return list(/obj/item/stock_parts/circuitboard = 1)
 
 // There are many machines, so this is designed to catch errors.  This proc must either return TRUE or set the machine's construct_state to a valid one (or null).
 /decl/machine_construction/proc/validate_state(obj/machinery/machine)

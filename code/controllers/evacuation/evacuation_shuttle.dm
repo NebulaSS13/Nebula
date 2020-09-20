@@ -103,16 +103,14 @@
 /datum/evacuation_controller/shuttle/proc/get_long_jump_time()
 	if (shuttle.location)
 		return round(evac_prep_delay/10)/2
-	else
-		return round(evac_transit_delay/10)
+	return round(evac_transit_delay/10)
 
 /datum/evacuation_controller/shuttle/available_evac_options()
 	if (!shuttle.location)
 		return list()
 	if (is_idle())
 		return list(evacuation_options[EVAC_OPT_CALL_SHUTTLE])
-	else
-		return list(evacuation_options[EVAC_OPT_RECALL_SHUTTLE])
+	return list(evacuation_options[EVAC_OPT_RECALL_SHUTTLE])
 
 /datum/evacuation_option/call_shuttle
 	option_text = "Call emergency shuttle"

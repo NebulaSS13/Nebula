@@ -19,8 +19,7 @@
 /obj/item/board/attack_hand(mob/living/carbon/human/M)
 	if(M.machine == src)
 		return ..()
-	else
-		M.examinate(src)
+	M.examinate(src)
 
 obj/item/board/attackby(obj/item/I, mob/user)
 	if(!addPiece(I,user))

@@ -146,8 +146,7 @@
 	if(istype(node, /obj/machinery/atmospherics/pipe/manifold) || istype(node, /obj/machinery/atmospherics/pipe/manifold4w))
 		if(pipe_color == node.pipe_color)
 			return node.pipe_color
-		else
-			return null
+		return null
 	else if(istype(node, /obj/machinery/atmospherics/pipe/simple))
 		return node.pipe_color
 	else

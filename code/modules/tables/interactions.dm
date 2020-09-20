@@ -6,8 +6,7 @@
 	if (flipped == 1)
 		if (get_dir(loc, target) == dir)
 			return !density
-		else
-			return 1
+		return 1
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 	var/obj/structure/table/T = (locate() in get_turf(mover))
@@ -59,8 +58,7 @@
 	if (flipped==1)
 		if (get_dir(loc, target) == dir)
 			return !density
-		else
-			return 1
+		return 1
 	return 1
 
 

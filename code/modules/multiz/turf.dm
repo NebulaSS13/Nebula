@@ -1,11 +1,10 @@
 /turf/proc/CanZPass(atom/A, direction)
 	if(z == A.z) //moving FROM this turf
 		return direction == UP //can't go below
-	else
-		if(direction == UP) //on a turf below, trying to enter
-			return 0
-		if(direction == DOWN) //on a turf above, trying to enter
-			return !density
+	if(direction == UP) //on a turf below, trying to enter
+		return 0
+	if(direction == DOWN) //on a turf above, trying to enter
+		return !density
 
 /turf/simulated/open/CanZPass(atom/A, direction)
 	if(locate(/obj/structure/catwalk, src))

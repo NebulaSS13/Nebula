@@ -186,9 +186,8 @@
 	if(M.ckey)
 		if(alert("This mob is being controlled by [M.ckey]. Are you sure you wish to assume control of it? [M.ckey] will be made a ghost.",,"Yes","No") != "Yes")
 			return
-		else
-			var/mob/observer/ghost/ghost = new/mob/observer/ghost(M,1)
-			ghost.ckey = M.ckey
+		var/mob/observer/ghost/ghost = new/mob/observer/ghost(M,1)
+		ghost.ckey = M.ckey
 	log_and_message_admins("assumed direct control of [M].")
 	var/mob/adminmob = src.mob
 	M.ckey = src.ckey

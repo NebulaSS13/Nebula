@@ -193,15 +193,14 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	if(bounds[1] == 1.#INF) // Shouldn't need to check every item
 		return null
-	else
-		if(!measureOnly)
-			if(clear_contents)
-				for(var/atom/to_delete in atoms_to_delete)
-					qdel(to_delete)
-		var/datum/map_load_metadata/M = new
-		M.bounds = bounds
-		M.atoms_to_initialise = atoms_to_initialise
-		return M
+	if(!measureOnly)
+		if(clear_contents)
+			for(var/atom/to_delete in atoms_to_delete)
+				qdel(to_delete)
+	var/datum/map_load_metadata/M = new
+	M.bounds = bounds
+	M.atoms_to_initialise = atoms_to_initialise
+	return M
 
 /**
  * Fill a given tile with its area/turf/objects/mobs
@@ -422,8 +421,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 /dmm_suite/proc/trim_text(what as text,trim_quotes=0)
 	if(trim_quotes)
 		return trimQuotesRegex.Replace(what, "")
-	else
-		return trimRegex.Replace(what, "")
+	return trimRegex.Replace(what, "")
 
 
 //find the position of the next delimiter,skipping whatever is comprised between opening_escape and closing_escape

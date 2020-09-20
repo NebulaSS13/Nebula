@@ -175,8 +175,7 @@
 	// The return value will be the adjusted_pressure of the human that is the basis of pressure warnings and damage.
 	if(pressure < ONE_ATMOSPHERE)
 		return ONE_ATMOSPHERE - pressure_difference
-	else
-		return ONE_ATMOSPHERE + pressure_difference
+	return ONE_ATMOSPHERE + pressure_difference
 
 /mob/living/carbon/human/handle_impaired_vision()
 	..()
@@ -264,7 +263,7 @@
 		damage = Floor(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
-			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT) 
+			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
 			if(!isSynthetic() && organs.len)
 				var/obj/item/organ/external/O = pick(organs)

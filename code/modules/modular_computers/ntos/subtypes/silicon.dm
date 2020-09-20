@@ -37,8 +37,7 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		return os.check_eye()
-	else 
-		return ..()
+	return ..()
 
 /datum/extension/interactive/ntos/silicon/small/get_hardware_flag()
 	return PROGRAM_TABLET

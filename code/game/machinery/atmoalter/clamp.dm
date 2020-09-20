@@ -25,10 +25,9 @@
 /obj/machinery/clamp/proc/update_networks()
 	if(!target)
 		return
-	else
-		for(var/obj/machinery/atmospherics/pipe/node in target.pipeline_expansion())
-			var/datum/pipeline/PL = node.parent
-			LAZYADD(network_nodes, PL.network)
+	for(var/obj/machinery/atmospherics/pipe/node in target.pipeline_expansion())
+		var/datum/pipeline/PL = node.parent
+		LAZYADD(network_nodes, PL.network)
 
 /obj/machinery/clamp/physical_attack_hand(var/mob/user)
 	if(!target)

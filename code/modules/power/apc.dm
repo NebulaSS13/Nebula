@@ -178,7 +178,7 @@
 	GLOB.name_set_event.register(area, src, .proc/change_area_name)
 
 	. = ..()
-	
+
 	if (populate_parts)
 		init_round_start()
 	else
@@ -412,7 +412,7 @@
 /obj/machinery/power/apc/cannot_transition_to(state_path, mob/user)
 	if(ispath(state_path, /decl/machine_construction/wall_frame/panel_closed) && cover_removed)
 		return SPAN_NOTICE("You cannot close the cover: it was completely removed!")
-	. = ..()	
+	. = ..()
 
 /obj/machinery/power/apc/proc/force_open_panel(mob/user)
 	var/decl/machine_construction/wall_frame/panel_closed/closed_state = construct_state
@@ -914,8 +914,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 			return POWERCHAN_OFF_AUTO
 		if(1)
 			return POWERCHAN_OFF_TEMP
-		else
-			return POWERCHAN_OFF
+	return POWERCHAN_OFF
 
 // Malfunction: Transfers APC under AI's control
 /obj/machinery/power/apc/proc/ai_hack(var/mob/living/silicon/ai/A = null)

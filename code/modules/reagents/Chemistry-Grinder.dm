@@ -54,13 +54,12 @@
 
 		if (beaker)
 			return TRUE
-		else
-			if(!user.unEquip(O, src))
-				return FALSE
-			beaker =  O
-			update_icon()
-			SSnano.update_uis(src)
+		if(!user.unEquip(O, src))
 			return FALSE
+		beaker =  O
+		update_icon()
+		SSnano.update_uis(src)
+		return FALSE
 
 	if(LAZYLEN(holdingitems) >= limit)
 		to_chat(user, SPAN_NOTICE("\The [src] cannot hold any additional items."))

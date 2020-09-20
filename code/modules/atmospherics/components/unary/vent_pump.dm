@@ -159,11 +159,10 @@
 			return
 		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			return
+		if(node)
+			add_underlay(T, node, dir, node.icon_connect_type)
 		else
-			if(node)
-				add_underlay(T, node, dir, node.icon_connect_type)
-			else
-				add_underlay(T,, dir)
+			add_underlay(T,, dir)
 
 /obj/machinery/atmospherics/unary/vent_pump/hide()
 	update_icon()
@@ -550,7 +549,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/engine/Initialize()
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
-	
+
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	. = ..()
 	if(.)

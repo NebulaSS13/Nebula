@@ -43,8 +43,7 @@ var/repository/client/client_repository = new()
 	if(!ref)
 		if(ckey == NO_CLIENT_CKEY)
 			return "[key]/([name])"
-		else
-			return "[key]/([name]) (DC)"
+		return "[key]/([name]) (DC)"
 	if(check_if_offline && !client_by_ckey(ckey))
 		return "[key]/([name]) (DC)"
 	return pm_link ? "<a href='?priv_msg=[ref];ticket=\ref[ticket]'>[key]</a>/([name])[rank2text()]" : "[key]/([name])"

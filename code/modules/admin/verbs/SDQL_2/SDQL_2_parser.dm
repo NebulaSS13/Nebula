@@ -75,8 +75,7 @@
 
 	if(error)
 		return list()
-	else
-		return tree
+	return tree
 
 /datum/SDQL_parser/proc/token(i)
 	if(i <= query.len)

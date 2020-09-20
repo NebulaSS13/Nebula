@@ -53,8 +53,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 			return idle_power_usage
 		if(POWER_USE_ACTIVE)
 			return active_power_usage
-		else
-			return 0
+	return 0
 
 // This will have this machine have its area eat this much power next tick, and not afterwards. Do not use for continued power draw.
 /obj/machinery/proc/use_power_oneoff(var/amount, var/chan = POWER_CHAN)

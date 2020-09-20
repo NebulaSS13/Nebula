@@ -318,8 +318,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(BP_IS_PROSTHETIC(affected))
 		return SURGERY_SKILLS_ROBOTIC
-	else
-		return ..()
+	return ..()
 
 /decl/surgery_step/generic/amputate/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

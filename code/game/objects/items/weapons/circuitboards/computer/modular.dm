@@ -18,6 +18,5 @@
 /obj/item/stock_parts/circuitboard/modular_computer/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged)
 		return ..()
-	else
-		emagged = TRUE
-		to_chat(user, "<span class='warning'>You disable the factory safeties on \the [src].</span>")
+	emagged = TRUE
+	to_chat(user, "<span class='warning'>You disable the factory safeties on \the [src].</span>")

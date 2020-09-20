@@ -264,8 +264,7 @@
 
 	if(query.NextRow())
 		return text2num(query.item[1])
-	else
-		return -1
+	return -1
 
 
 /client/proc/log_client_to_db()

@@ -747,9 +747,8 @@ MEDICAL
 /obj/item/book/skill/custom/proc/can_write(var/obj/item/pen, var/mob/user)
 	if(user.get_active_hand() == pen && CanPhysicallyInteractWith(user,src) && !QDELETED(src) && !QDELETED(pen))
 		return TRUE
-	else
-		to_chat(user,SPAN_DANGER("How can you expect to write anything when you can't physically put pen to paper?"))
-		return FALSE
+	to_chat(user,SPAN_DANGER("How can you expect to write anything when you can't physically put pen to paper?"))
+	return FALSE
 
 /obj/item/book/skill/custom/proc/edit_title(var/obj/item/pen, var/mob/user)
 	var/newtitle = reject_bad_text(sanitizeSafe(input(user, "Write a new title:")))

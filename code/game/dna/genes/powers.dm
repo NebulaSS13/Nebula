@@ -150,8 +150,7 @@
 /datum/dna/gene/basic/hulk/OnDrawUnderlays(var/mob/M,var/g,var/fat)
 	if(fat)
 		return "hulk_[fat]_s"
-	else
-		return "hulk_[g]_s"
+	return "hulk_[g]_s"
 
 /datum/dna/gene/basic/hulk/OnMobLife(var/mob/living/carbon/human/M)
 	if(!istype(M)) return

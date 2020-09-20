@@ -111,8 +111,7 @@
 		return FALSE
 	if (world.time < last_burn + burn_delay)
 		return FALSE
-	else
-		return TRUE
+	return TRUE
 
 /obj/effect/overmap/Process()
 	if(!halted && !is_still() && can_move)

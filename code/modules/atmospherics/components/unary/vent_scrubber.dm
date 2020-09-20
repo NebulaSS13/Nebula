@@ -103,11 +103,10 @@
 			return
 		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			return
+		if(node)
+			add_underlay(T, node, dir, node.icon_connect_type)
 		else
-			if(node)
-				add_underlay(T, node, dir, node.icon_connect_type)
-			else
-				add_underlay(T,, dir)
+			add_underlay(T,, dir)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
 	if (!id_tag)

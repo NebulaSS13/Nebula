@@ -12,8 +12,7 @@
 /obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
 	if(slot in item_state_slots)
 		return item_state_slots[slot]
-	else
-		return icon_state
+	return icon_state
 
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))

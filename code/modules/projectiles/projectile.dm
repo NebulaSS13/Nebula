@@ -318,7 +318,7 @@
 
 /obj/item/projectile/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)
-	return 
+	return
 
 /obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 1
@@ -477,10 +477,9 @@
 		var/mob/living/M = locate() in get_turf(src)
 		if(istype(M)) //If there is someting living...
 			return 1 //Return 1
-		else
-			M = locate() in get_step(src,targloc)
-			if(istype(M))
-				return 1
+		M = locate() in get_step(src,targloc)
+		if(istype(M))
+			return 1
 
 //Helper proc to check if you can hit them or not.
 /proc/check_trajectory(atom/target, atom/firer, var/pass_flags=PASS_FLAG_TABLE|PASS_FLAG_GLASS|PASS_FLAG_GRILLE, item_flags, obj_flags)
@@ -525,7 +524,7 @@
 		SP.SetName((name != "shrapnel")? "[name] shrapnel" : "shrapnel")
 		SP.desc += " It looks like it was fired from [shot_from]."
 		return SP
-	
+
 /obj/item/projectile/get_autopsy_descriptors()
 	return list(name)
 

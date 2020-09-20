@@ -158,8 +158,7 @@
 	var/mob/living/carbon/human/h_user = null
 	if (!istype(user, /mob/living/carbon/human))
 		return
-	else
-		h_user = user
+	h_user = user
 
 
 	// Preparations

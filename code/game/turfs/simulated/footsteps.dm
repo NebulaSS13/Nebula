@@ -23,8 +23,7 @@
 	if(!.)
 		if(!flooring || !flooring.footstep_type)
 			return get_footstep(/decl/footsteps/blank, caller)
-		else
-			return get_footstep(flooring.footstep_type, caller)
+		return get_footstep(flooring.footstep_type, caller)
 
 /turf/simulated/Entered(var/mob/living/carbon/human/H)
 	..()

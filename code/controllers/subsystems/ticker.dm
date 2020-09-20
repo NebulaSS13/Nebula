@@ -334,18 +334,17 @@ Helpers
 			antag.finalize_spawn()
 			additional_antag_types.Add(antag.id)
 			return 1
+		if(antag.initial_spawn_req > 1)
+			log_and_message_admins("Failed to find enough [antag.role_text_plural].")
+
 		else
-			if(antag.initial_spawn_req > 1)
-				log_and_message_admins("Failed to find enough [antag.role_text_plural].")
+			log_and_message_admins("Failed to find a [antag.role_text].")
 
-			else
-				log_and_message_admins("Failed to find a [antag.role_text].")
-
-			antag_choices -= antag
-			if(length(antag_choices))
-				antag = antag_choices[1]
-				if(antag)
-					log_and_message_admins("Attempting to spawn [antag.role_text_plural].")
+		antag_choices -= antag
+		if(length(antag_choices))
+			antag = antag_choices[1]
+			if(antag)
+				log_and_message_admins("Attempting to spawn [antag.role_text_plural].")
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
@@ -355,14 +354,12 @@ Helpers
 		return 0
 	if(config.continous_rounds)
 		return SSevac.evacuation_controller.round_over() || mode.station_was_nuked
-	else
-		return mode.check_finished() || (SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation) || universe_has_ended
+	return mode.check_finished() || (SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation) || universe_has_ended
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
 	if(config.continous_rounds)
 		return mode.check_finished()
-	else
-		return game_finished()
+	return game_finished()
 
 /datum/controller/subsystem/ticker/proc/notify_delay()
 	if(!delay_notified)

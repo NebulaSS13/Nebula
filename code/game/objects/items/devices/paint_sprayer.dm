@@ -229,8 +229,7 @@
 			return D.door_color
 		if (AIRLOCK_REGION_STRIPE)
 			return D.stripe_color
-		else
-			return FALSE
+	return FALSE
 
 
 /obj/item/paint_sprayer/proc/select_airlock_region(var/obj/machinery/door/airlock/D, var/mob/user, var/input_text)

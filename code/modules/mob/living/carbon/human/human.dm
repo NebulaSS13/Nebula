@@ -251,8 +251,7 @@
 	var/obj/item/card/id/id = GetIdCard()
 	if(istype(id))
 		return id.rank ? id.rank : if_no_job
-	else
-		return if_no_id
+	return if_no_id
 
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
@@ -260,8 +259,7 @@
 	var/obj/item/card/id/id = GetIdCard()
 	if(istype(id))
 		return id.assignment ? id.assignment : if_no_job
-	else
-		return if_no_id
+	return if_no_id
 
 //gets name from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
@@ -269,8 +267,7 @@
 	var/obj/item/card/id/id = GetIdCard()
 	if(istype(id))
 		return id.registered_name
-	else
-		return if_no_id
+	return if_no_id
 
 //repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
@@ -1331,8 +1328,7 @@
 				flavor_text += "\n\n"
 	if(!shrink)
 		return flavor_text
-	else
-		return ..()
+	return ..()
 
 /mob/living/carbon/human/getDNA()
 	if(species.species_flags & SPECIES_FLAG_NO_SCAN)
@@ -1550,8 +1546,7 @@
 /mob/living/carbon/human/need_breathe()
 	if(!(mNobreath in mutations) && species.breathing_organ && should_have_organ(species.breathing_organ))
 		return 1
-	else
-		return 0
+	return 0
 
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)

@@ -628,8 +628,7 @@ var/list/ai_verbs_default = list(
 		return
 	if(try_stock_parts_removal(W, user))
 		return
-	else
-		return ..()
+	return ..()
 
 /mob/living/silicon/ai/proc/control_integrated_radio()
 	set name = "Radio Settings"

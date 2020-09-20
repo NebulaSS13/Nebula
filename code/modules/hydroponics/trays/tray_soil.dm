@@ -11,8 +11,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/tank))
 		return
-	else
-		..()
+	..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/Initialize()
 	. = ..()

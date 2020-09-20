@@ -44,8 +44,7 @@
 	if(!syllables || !syllables.len)
 		if(gender==FEMALE)
 			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
-		else
-			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+		return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
 	var/full_name = ""
 	var/new_name = ""
@@ -122,7 +121,7 @@
 	scramble_cache[input] = scrambled_text
 	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
 		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
-	
+
 	return scrambled_text
 
 /decl/language/proc/format_message(message, verb)

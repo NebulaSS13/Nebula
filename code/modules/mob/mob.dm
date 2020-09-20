@@ -70,17 +70,15 @@
 		if((type & VISIBLE_MESSAGE) && is_blind())//Vision related
 			if(!alt)
 				return
-			else
-				msg = alt
-				type = alt_type
+			msg = alt
+			type = alt_type
 		if((type & AUDIBLE_MESSAGE) && is_deaf())//Hearing related
 			if(!alt)
 				return
-			else
-				msg = alt
-				type = alt_type
-				if(((type & VISIBLE_MESSAGE) && is_blind()))
-					return
+			msg = alt
+			type = alt_type
+			if(((type & VISIBLE_MESSAGE) && is_blind()))
+				return
 
 	to_chat(src, msg)
 
@@ -397,8 +395,7 @@
 		var/msg = replacetext(flavor_text, "\n", " ")
 		if(length(msg) <= 40)
 			return "<span class='notice'>[msg]</span>"
-		else
-			return "<span class='notice'>[copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a></span>"
+		return "<span class='notice'>[copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a></span>"
 
 /client/verb/changes()
 	set name = "Changelog"

@@ -19,8 +19,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 /mob/living/silicon/pai/default_can_use_topic(var/src_object)
 	if((src_object == src || src_object == silicon_radio) && !stat)
 		return STATUS_INTERACTIVE
-	else
-		return ..()
+	return ..()
 
 /mob/living/silicon/robot/default_can_use_topic(var/src_object)
 	. = shared_nano_interaction()

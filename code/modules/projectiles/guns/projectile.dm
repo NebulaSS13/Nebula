@@ -57,10 +57,9 @@
 		if(istype(user))
 			if(prob(user.skill_fail_chance(SKILL_WEAPONS, 100, SKILL_PROF)))
 				return null
-			else
-				to_chat(user, "<span class='notice'>You reflexively clear the jam on \the [src].</span>")
-				is_jammed = 0
-				playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+			to_chat(user, "<span class='notice'>You reflexively clear the jam on \the [src].</span>")
+			is_jammed = 0
+			playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 	if(is_jammed)
 		return null
 	//get the next casing
@@ -264,15 +263,15 @@
 	..()
 	if(ammo_indicator)
 		overlays += get_ammo_indicator()
-	
+
 /obj/item/gun/projectile/proc/get_ammo_indicator()
 	var/base_state = get_world_inventory_state()
 	if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
 		return get_mutable_overlay(icon, "[base_state]_ammo_bad")
 	else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
-		return get_mutable_overlay(icon, "[base_state]_ammo_warn") 
+		return get_mutable_overlay(icon, "[base_state]_ammo_warn")
 	else
-		return get_mutable_overlay(icon, "[base_state]_ammo_ok") 
+		return get_mutable_overlay(icon, "[base_state]_ammo_ok")
 
 /* Unneeded -- so far.
 //in case the weapon has firemodes and can't unload using attack_hand()

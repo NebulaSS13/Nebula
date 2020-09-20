@@ -106,8 +106,7 @@ SUBSYSTEM_DEF(fabrication)
 			var/obj/item/crafting_holder/H = new /obj/item/crafting_holder(get_turf(target), initial_stage, target, thing, user)
 			if(initial_stage.progress_to(thing, user, H))
 				return H
-			else
-				qdel(H)
+			qdel(H)
 
 /datum/controller/subsystem/fabrication/proc/init_fabricator(obj/machinery/fabricator/fab)
 	if(post_recipe_init)
@@ -116,4 +115,3 @@ SUBSYSTEM_DEF(fabrication)
 		fab.refresh_design_cache()
 	else
 		fabricators_to_init |= weakref(fab)
-	

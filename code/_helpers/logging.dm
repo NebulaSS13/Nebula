@@ -202,8 +202,7 @@
 	var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 	if(istype(O))
 		return "[..()] ([x],[y],[z] - [O.name]) ([loc ? loc.type : "NULL"])"
-	else
-		return "[..()] ([x],[y],[z]) ([loc ? loc.type : "NULL"])"
+	return "[..()] ([x],[y],[z]) ([loc ? loc.type : "NULL"])"
 
 /atom/movable/get_log_info_line()
 	var/turf/t = get_turf(src)

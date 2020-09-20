@@ -104,8 +104,7 @@
 			return (0.8 + 0.4 * rand()) * value
 		if(SKILL_ADEPT)
 			return (0.95 + 0.1 * rand()) * value
-		else
-			return value
+	return value
 
 /datum/nano_module/program/supermatter_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()

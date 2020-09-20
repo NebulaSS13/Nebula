@@ -63,7 +63,7 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type)
 	if(node)
-		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))			
+		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
@@ -73,8 +73,7 @@ Pipelines + Other Objects -> Pipe network
 /obj/machinery/atmospherics/proc/update_underlays()
 	if(check_icon_cache())
 		return 1
-	else
-		return 0
+	return 0
 
 obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/atmos1, obj/machinery/atmospherics/atmos2)
 	return (atmos1.connect_types & atmos2.connect_types)

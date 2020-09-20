@@ -60,5 +60,4 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		return os.check_eye()
-	else
-		return ..()
+	return ..()

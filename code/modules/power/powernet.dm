@@ -62,8 +62,7 @@
 	if(C.powernet)// if C already has a powernet...
 		if(C.powernet == src)
 			return
-		else
-			C.powernet.remove_cable(C) //..remove it
+		C.powernet.remove_cable(C) //..remove it
 	C.powernet = src
 	cables +=C
 
@@ -83,8 +82,7 @@
 	if(M.powernet)// if M already has a powernet...
 		if(M.powernet == src)
 			return
-		else
-			M.disconnect_from_network()//..remove it
+		M.disconnect_from_network()//..remove it
 	M.powernet = src
 	nodes[M] = M
 
@@ -167,8 +165,7 @@
 			return min(rand(15,40),rand(15,40))
 		if (1000 to 50000)
 			return min(rand(10,20),rand(10,20))
-		else
-			return 0
+	return 0
 
 ////////////////////////////////////////////////
 // Misc.

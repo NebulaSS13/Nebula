@@ -116,8 +116,7 @@
 			return min(rand(15,40),rand(15,40))
 		if (1000 to 50000-1)
 			return min(rand(10,20),rand(10,20))
-		else
-			return 0
+	return 0
 
 /obj/item/cell/get_cell()
 	return src //no shit Sherlock

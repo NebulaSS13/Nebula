@@ -114,7 +114,7 @@
 	return TRUE
 
 /decl/surgery_step/hardsuit/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	return list(SKILL_EVA = SKILL_BASIC) 
+	return list(SKILL_EVA = SKILL_BASIC)
 
 /decl/surgery_step/hardsuit/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!istype(target))
@@ -171,7 +171,7 @@
 		return affected
 
 /decl/surgery_step/sterilize/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	return list(SKILL_MEDICAL = SKILL_BASIC) 
+	return list(SKILL_MEDICAL = SKILL_BASIC)
 
 /decl/surgery_step/sterilize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -219,9 +219,8 @@
 	if(istype(container) && ATOM_IS_OPEN_CONTAINER(container))
 		if(container.reagents.has_reagent(/decl/material/liquid/antiseptic))
 			return TRUE
-		else
-			for(var/rtype in container?.reagents?.reagent_volumes)
-				var/decl/material/liquid/ethanol/booze = decls_repository.get_decl(rtype)
-				if(istype(booze) && booze.strength <= 40)
-					return TRUE
+		for(var/rtype in container?.reagents?.reagent_volumes)
+			var/decl/material/liquid/ethanol/booze = decls_repository.get_decl(rtype)
+			if(istype(booze) && booze.strength <= 40)
+				return TRUE
 	return FALSE

@@ -76,8 +76,7 @@
 
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
-	else
-		return 0
+	return 0
 
 
 /obj/machinery/optable/MouseDrop_T(obj/O, mob/user)

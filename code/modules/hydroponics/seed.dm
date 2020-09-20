@@ -820,8 +820,7 @@
 				return GROWTH_BIOMASS
 			if(SEED_NOUN_SPORES)
 				return GROWTH_MOLD
-			else
-				return GROWTH_VINES
+		return GROWTH_VINES
 	return 0
 
 /datum/seed/proc/get_icon(growth_stage)

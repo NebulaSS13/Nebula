@@ -434,8 +434,7 @@
 /obj/machinery/power/supermatter/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
-	else
-		ui_interact(user)
+	ui_interact(user)
 	return
 
 /obj/machinery/power/supermatter/attack_ai(mob/user)
