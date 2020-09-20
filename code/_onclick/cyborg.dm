@@ -92,7 +92,6 @@
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 			return
 		W.afterattack(A, src, 0, params)
-		return
 	return
 
 //Middle click cycles through selected modules.
