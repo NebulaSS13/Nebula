@@ -77,6 +77,8 @@
 	var/atom/movable/applied_pressure
 	var/atom/movable/splinted
 
+	var/internal_organs_size = 0       // Currently size cost of internal organs in this body part
+
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
 
@@ -352,6 +354,10 @@
 		O = O.parent
 	return 0
 
+/obj/item/organ/external/proc/update_internal_organs_cost()
+	internal_organs_size = 0
+	for(var/obj/item/organ/internal/org in internal_organs)
+		internal_organs_size += org.get_storage_cost()
 
 /obj/item/organ/external/proc/dislocate()
 	if(dislocated == -1)
