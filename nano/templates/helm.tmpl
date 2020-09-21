@@ -72,6 +72,12 @@
 			<br>
 			{{:helper.link(data.manual_control ? 'Engaged' : 'Disengaged', 'shuffle', { 'manual' : 1 }, null, data.manual_control ? 'selected' : null)}}
 		</div>
+
+		<div class='item'>
+			<span class='white'>Distress call</span>
+			<br>
+			{{:helper.link(data.distress ? 'Engaged' : 'Disengaged', 'shuffle', { 'distress' : 1 }, null, data.distress ? 'selected' : null)}}
+		</div>
 	</div>
 </fieldset>
 </div>
