@@ -4,15 +4,15 @@
 	{{if value.field}}
 		<div class="item">
 			<div class="itemLabel">
-				Field generator
+				Field generator:
 			</div>
 			<div class="itemContent">
-				 Online.<br/>{{:helper.link('Shut down.', null, {'machine': value.ref, 'toggle_active': 1})}}
+				 Online<br/>{{:helper.link('Shut down', null, {'machine': value.ref, 'toggle_active': 1})}}
 			</div>
 		</div>
 		<div class="item">
 			<div class="itemLabel">
-				Power status
+				Power status:
 			</div>
 			<div class="itemContent">
 				{{:value.powerstatus}}
@@ -20,7 +20,7 @@
 		</div>
 		<div class="item">
 			<div class="itemLabel">
-				Field strength
+				Field strength:
 			</div>
 			<div class="itemContent">
 				{{:value.power}}<br/>{{:helper.link('-10', null, {'machine': value.ref, 'str': -100})}}{{:helper.link('-1', null, {'machine': value.ref, 'str': -10})}}{{:helper.link('-0.1', null, {'machine': value.ref, 'str': -1})}}{{:helper.link('+0.1', null, {'machine': value.ref, 'str': 1})}}{{:helper.link('+1', null, {'machine': value.ref, 'str': 10})}}{{:helper.link('+10', null, {'machine': value.ref, 'str': 100})}}
@@ -28,7 +28,7 @@
 		</div>
 		<div class="item">
 			<div class="itemLabel">
-				Size
+				Size:
 			</div>
 			<div class="itemContent">
 				{{:value.size}}
@@ -36,7 +36,7 @@
 		</div>
 		<div class="item">
 			<div class="itemLabel">
-				Instability
+				Instability:
 			</div>
 			<div class="itemContent">
 				{{:value.instability}}
@@ -44,7 +44,7 @@
 		</div>
 		<div class="item">
 			<div class="itemLabel">
-				Plasma temperature
+				Plasma temperature:
 			</div>
 			<div class="itemContent">
 				{{:value.temperature}}
@@ -52,7 +52,7 @@
 		</div>
 		<div class="item">
 			<div class="itemLabel">
-				Reactants
+				Reactants:
 			</div>
 			<div class="itemContent">
 				{{:value.fuel}}
@@ -61,10 +61,10 @@
 	{{else}}
 		<div class="item">
 			<div class="itemLabel">
-				Field generator
+				Field generator:
 			</div>
 			<div class="itemContent">
-				Offline.<br/>{{:helper.link('Start up.', null, {'machine': value.ref, 'toggle_active': 1})}}
+				Offline<br/>{{:helper.link('Start up', null, {'machine': value.ref, 'toggle_active': 1})}}
 			</div>
 		</div>
 	{{/if}}

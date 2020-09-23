@@ -7,15 +7,15 @@
 		</div>
 		<div class="itemContent">
 			 {{if value.active}}
-				Online.<br/>{{:helper.link('Shut down.', null, {'machine': value.ref, 'toggle': 1})}}
+				Online<br/>{{:helper.link('Shut down', null, {'machine': value.ref, 'toggle': 1})}}
 			 {{else}}
-				Offline.<br/>{{:helper.link('Start up.', null, {'machine': value.ref, 'toggle': 1})}}
+				Offline<br/>{{:helper.link('Start up', null, {'machine': value.ref, 'toggle': 1})}}
 			 {{/if}}
 		</div>
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Fire delay
+			Fire delay:
 		</div>
 		<div class="itemContent">
 			{{:helper.link(value.firedelay, null, {'machine': value.ref, 'modifyrate': 1})}}
@@ -23,7 +23,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Power output
+			Power output:
 		</div>
 		<div class="itemContent">
 			{{:helper.link(value.energy, null, {'machine': value.ref, 'modifypower': 1})}}
