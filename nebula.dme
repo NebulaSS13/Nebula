@@ -846,6 +846,7 @@
 #include "code\game\objects\auras\starlight.dm"
 #include "code\game\objects\auras\personal_shields\personal_shield.dm"
 #include "code\game\objects\effects\bump_teleporter.dm"
+#include "code\game\objects\effects\cig_smoke.dm"
 #include "code\game\objects\effects\effect_system.dm"
 #include "code\game\objects\effects\explosion_particles.dm"
 #include "code\game\objects\effects\fake_fire.dm"
