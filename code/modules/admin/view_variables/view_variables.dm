@@ -1,5 +1,5 @@
 // Variables not to expand the lists of. Vars is pointless to expand, and overlays/underlays cannot be expanded.
-/var/list/view_variables_dont_expand = list("overlays", "underlays", "vars")
+/var/list/view_variables_dont_expand = list("overlays", "underlays", "vars", "vis_contents")
 // Variables that runtime if you try to test associativity of the lists they contain by indexing
 /var/list/view_variables_no_assoc = list("verbs", "contents","screen","images")
 
