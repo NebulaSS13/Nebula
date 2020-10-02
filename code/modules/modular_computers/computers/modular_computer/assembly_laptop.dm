@@ -7,3 +7,4 @@
 
 /datum/extension/assembly/modular_computer/laptop/New()
 	broken_damage = max_damage / 2
+	..()

@@ -19,9 +19,10 @@
 	if(!istype(loc, /turf/))
 		to_chat(usr, "\The [src] has to be on a stable surface first!")
 		return
-	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, computer_type)
 	anchored = !anchored
-	assembly.screen_on = anchored
+	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, computer_type)
+	if(assembly)
+		assembly.screen_on = anchored
 	update_icon()
 
 /obj/item/modular_computer/laptop/on_update_icon()
