@@ -64,16 +64,16 @@
 	var/nx = x
 	var/ny = y
 	var/low_edge = 1
-	var/high_edge = GLOB.using_map.overmap_size - 1
+	var/high_edge = GLOB.using_map.overmap_size
 
 	if((dir & WEST) && x == low_edge)
-		nx = high_edge
+		nx = high_edge - 1
 	else if((dir & EAST) && x == high_edge)
-		nx = low_edge
+		nx = low_edge + 1
 	if((dir & SOUTH)  && y == low_edge)
-		ny = high_edge
+		ny = high_edge - 1
 	else if((dir & NORTH) && y == high_edge)
-		ny = low_edge
+		ny = low_edge + 1
 	if((x == nx) && (y == ny))
 		return //we're not flying off anywhere
 
