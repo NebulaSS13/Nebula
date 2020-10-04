@@ -8,3 +8,4 @@
 
 /datum/extension/assembly/modular_computer/telescreen/New()
 	broken_damage = max_damage / 2
+	..()
