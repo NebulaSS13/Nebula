@@ -1804,3 +1804,7 @@
 	if(.)
 		update_body()
 		to_chat(src, SPAN_DANGER("You feel a chill and your skin feels lighter..."))
+
+/mob/living/carbon/human/increaseBodyTemp(value)
+	bodytemperature += value
+	return bodytemperature
