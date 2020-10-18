@@ -580,8 +580,8 @@
 	..()
 	if(istype(I, /obj/item/chems/syringe) && I.reagents?.total_volume)
 		var/obj/item/chems/syringe/S = I
-		to_chat(user, "You inject the solution into the [src].")
-		for(var/rtype in S.reagents)
+		to_chat(user, "You inject the solution into \the [src].")
+		for(var/rtype in S.reagents?.reagent_volumes)
 			var/decl/material/R = decls_repository.get_decl(rtype)
 			if(R.fuel_value)
 				rigged = TRUE

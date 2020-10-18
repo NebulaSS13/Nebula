@@ -12,7 +12,7 @@
 		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && (!possible_target.special_role))
 			possible_targets += possible_target
 			if(length(roles))
-				for(var/datum/job/role in SSjobs.get_by_path(roles))
+				for(var/datum/job/role in SSjobs.get_by_paths(roles))
 					if(possible_target.assigned_role == role.title)
 						priority_targets += possible_target
 						continue
