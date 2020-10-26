@@ -9,19 +9,20 @@
 	name = "Basic"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/physical/basic/load_character(var/savefile/S)
-	from_file(S["gender"],                pref.gender)
-	from_file(S["bodytype"],              pref.bodytype)
-	from_file(S["spawnpoint"],            pref.spawnpoint)
-	from_file(S["real_name"],             pref.real_name)
-	from_file(S["name_is_always_random"], pref.be_random_name)
+/datum/category_item/player_setup_item/physical/basic/load_character(datum/pref_record_reader/R)
+	pref.gender =         R.read("gender")
+	pref.bodytype =       R.read("bodytype")
+	pref.spawnpoint =     R.read("spawnpoint")
+	pref.real_name =      R.read("real_name")
+	pref.be_random_name = R.read("name_is_always_random")
 
-/datum/category_item/player_setup_item/physical/basic/save_character(var/savefile/S)
-	to_file(S["gender"],                  pref.gender)
-	to_file(S["bodytype"],                pref.bodytype)
-	to_file(S["spawnpoint"],              pref.spawnpoint)
-	to_file(S["real_name"],               pref.real_name)
-	to_file(S["name_is_always_random"],   pref.be_random_name)
+/datum/category_item/player_setup_item/physical/basic/save_character(datum/pref_record_writer/W)
+	W.write("gender",                pref.gender)
+	W.write("age",                   pref.age)
+	W.write("bodytype",              pref.bodytype)
+	W.write("spawnpoint",            pref.spawnpoint)
+	W.write("real_name",             pref.real_name)
+	W.write("name_is_always_random", pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 

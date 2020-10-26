@@ -7,7 +7,7 @@
 	var/icon/bgstate = DEFAULT_WALL_MATERIAL
 	var/list/bgstate_options = list("FFF", DEFAULT_WALL_MATERIAL, "white")
 
-/datum/category_item/player_setup_item/player_global/pai/load_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/player_global/pai/load_preferences(datum/pref_record_reader/R)
 	if(!candidate)
 		candidate = new()
 
@@ -17,7 +17,7 @@
 	candidate.savefile_load(preference_mob())
 	update_pai_preview()
 
-/datum/category_item/player_setup_item/player_global/pai/save_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/player_global/pai/save_preferences(datum/pref_record_writer/W)
 	if(!candidate)
 		return
 

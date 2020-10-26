@@ -9,10 +9,9 @@
 	var/list/allowed_languages
 	var/list/free_languages
 
-/datum/category_item/player_setup_item/background/languages/load_character(var/savefile/S)
+/datum/category_item/player_setup_item/background/languages/load_character(datum/pref_record_reader/R)
 	pref.alternate_languages = list()
-	var/list/language_names = list()
-	from_file(S["language"], language_names)
+	var/list/language_names =  R.read("language")
 	for(var/lang in language_names)
 		var/decl/language/lang_decl = SSlore.get_language_by_name(lang)
 		if(istype(lang_decl))
@@ -24,7 +23,7 @@
 		var/decl/language/lang_decl = GET_DECL(lang)
 		if(istype(lang_decl))
 			language_names |= lang_decl.name
-	to_file(S["language"], language_names)
+	W.write("language", language_names)
 
 /datum/category_item/player_setup_item/background/languages/sanitize_character()
 	if(!islist(pref.alternate_languages))

@@ -18,9 +18,11 @@ var/global/list/time_prefs_fixed = list()
 
 /datum/preferences
 	//doohickeys for savefiles
-	var/path
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
-	var/savefile_version = 0
+
+	// Cache, mapping slot record ids to character names
+	// Saves reading all the slot records when listing
+	var/list/slot_names = null
 
 	//non-preference stuff
 	var/warns = 0
@@ -44,8 +46,6 @@ var/global/list/time_prefs_fixed = list()
 	var/client/client = null
 	var/client_ckey = null
 
-	var/savefile/loaded_preferences
-	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
 
@@ -72,20 +72,62 @@ var/global/list/time_prefs_fixed = list()
 	real_name = get_random_name()
 	b_type = RANDOM_BLOOD_TYPE
 
-	if(client && !IsGuestKey(client.key))
-		load_path(client.ckey)
-		load_preferences()
-		load_and_update_character()
+	if(client)
+		if(IsGuestKey(client.key))
+			is_guest = TRUE
+		else
+			load_data()
 	sanitize_preferences()
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
 		np.show_lobby_menu(TRUE)
 
-/datum/preferences/proc/load_and_update_character(var/slot)
-	load_character(slot)
-	if(update_setup(loaded_preferences, loaded_character))
-		SScharacter_setup.queue_preferences_save(src)
-		save_character()
+/datum/preferences/proc/load_data()
+	var/pref_path = get_path(client.ckey, "preferences")
+	if(!fexists(pref_path))
+		// Try to migrate legacy savefile-based preferences
+		if(!migrate_legacy_preferences())
+			// If there's no old file or migration fails, there'll be nothing to load.
+			return
+
+	load_preferences()
+	load_character()
+
+/datum/preferences/proc/migrate_legacy_preferences()
+	// We make some assumptions here:
+	// - all relevant savefiles were version 17, which covers anything saved from 2018+
+	// - legacy saves were only made on the "torch" map
+	// - a maximum of 40 slots were used
+
+	var/legacy_pref_path = get_path(client.ckey, "preferences", "sav")
+	if(!fexists(legacy_pref_path))
+		return 0
+
+	var/savefile/S = new(legacy_pref_path)
+	if(S["version"] != 17)
+		return 0
+
+	// Legacy version 17 ~= new version 1
+	var/datum/pref_record_reader/savefile/savefile_reader = new(S, 1)
+
+	player_setup.load_preferences(savefile_reader)
+	var/orig_slot = default_slot
+
+	S.cd = "/torch"
+	for(var/slot = 1 to 40)
+		if(!S.dir.Find("character[slot]"))
+			continue
+		S.cd = "/torch/character[slot]"
+		default_slot = slot
+		player_setup.load_character(savefile_reader)
+		save_character(override_key="character_torch_[slot]")
+		S.cd = "/torch"
+	S.cd = "/"
+
+	default_slot = orig_slot
+	save_preferences()
+
+	return 1
 
 /datum/preferences/proc/get_content(mob/user)
 	if(!SScharacter_setup.initialized)
@@ -104,8 +146,7 @@ var/global/list/time_prefs_fixed = list()
 
 	var/dat = list("<center>")
 
-	if(path)
-		dat += "Slot - "
+	if(!is_guest)		dat += "Slot - "
 		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
 		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
@@ -383,17 +424,12 @@ var/global/list/time_prefs_fixed = list()
 	dat += "<body>"
 	dat += "<tt><center>"
 
-	var/savefile/S = new /savefile(path)
-	if(S)
-		dat += "<b>Select a character slot to load</b><hr>"
-		var/name
-		for(var/i=1, i<= config.character_slots, i++)
-			S.cd = global.using_map.character_load_path(S, i)
-			S["real_name"] >> name
-			if(!name)	name = "Character[i]"
-			if(i==default_slot)
-				name = "<b>[name]</b>"
-			dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
+	dat += "<b>Select a character slot to load</b><hr>"
+	for(var/i=1, i<= config.character_slots, i++)
+		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
+		if(i==default_slot)
+			name = "<b>[name]</b>"
+		dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
 
 	dat += "<hr>"
 	dat += "</center></tt>"
