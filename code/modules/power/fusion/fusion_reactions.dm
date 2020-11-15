@@ -88,6 +88,8 @@
 	hidden_from_codex = TRUE
 
 /decl/fusion_reaction/helium_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
+	set waitfor = FALSE
+	. = 1
 	var/datum/event/wormholes/WM = /datum/event/wormholes
 	WM.setup(affected_z_levels = GetConnectedZlevels(holder))
 	new WM(new /datum/event_meta(EVENT_LEVEL_MAJOR))
@@ -116,8 +118,6 @@
 
 	sleep(5)
 	explosion(origin, 1, 2, 5)
-
-	return 1
 
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen

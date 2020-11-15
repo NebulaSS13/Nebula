@@ -123,6 +123,7 @@
 		overlays |= fruit_leaves
 
 /obj/item/chems/food/snacks/grown/Crossed(var/mob/living/M)
+	set waitfor = FALSE
 	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
 		if(istype(M))
 
@@ -139,9 +140,7 @@
 			M.Stun(8)
 			M.Weaken(5)
 			seed.thrown_at(src,M)
-			sleep(-1)
-			if(src) qdel(src)
-			return
+			QDEL_IN(src, 0)
 
 /obj/item/chems/food/snacks/grown/throw_impact(atom/hit_atom)
 	..()

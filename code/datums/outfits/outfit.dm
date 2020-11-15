@@ -98,6 +98,7 @@ var/list/outfits_decls_by_type_
 	return 1
 
 /decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H, var/equip_adjustments)
+	set waitfor = FALSE
 	pre_equip(H)
 
 	//Start with uniform,suit,backpack for additional slots
