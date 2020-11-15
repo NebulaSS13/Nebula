@@ -197,6 +197,9 @@ default behaviour is:
 /mob/living/proc/burn_skin(burn_amount)
 	take_overall_damage(0, burn_amount)
 
+/mob/living/proc/increaseBodyTemp(value)
+	return 0
+
 /mob/living/proc/adjustBodyTemp(actual, desired, incrementboost)
 	var/btemperature = actual
 	var/difference = abs(actual-desired)	//get difference

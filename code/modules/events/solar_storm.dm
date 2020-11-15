@@ -31,6 +31,8 @@
 /datum/event/solar_storm/proc/radiate()
 	// Note: Too complicated to be worth trying to use the radiation system for this.  Its only in space anyway, so we make an exception in this case.
 	for(var/mob/living/L in GLOB.living_mob_list_)
+		if(L.loc?.atom_flags & ATOM_FLAG_SHIELD_CONTENTS)
+			continue
 		var/turf/T = get_turf(L)
 		if(!T || !(T.z in GLOB.using_map.player_levels))
 			continue
@@ -39,10 +41,10 @@
 			continue
 
 		//Apply some heat or burn damage from the sun.
-		if(istype(L, /mob/living/carbon/human))
-			L.bodytemperature += temp_incr
-		else
-			L.adjustFireLoss(fire_loss)
+		if(L.increaseBodyTemp(temp_incr))
+			continue
+			
+		L.adjustFireLoss(fire_loss)
 
 
 /datum/event/solar_storm/end()
