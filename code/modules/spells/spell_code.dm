@@ -27,17 +27,17 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/holder_var_amount = 20 //same. The amount adjusted with the mob's var when the spell is used
 
 	var/spell_flags = NEEDSCLOTHES
-	var/invocation = "HURP DURP"	//what is uttered when the wizard casts the spell
-	var/invocation_type = SpI_NONE	//can be none, whisper, shout, and emote
-	var/range = 7					//the range of the spell; outer radius for aoe spells
-	var/message = ""				//whatever it says to the guy affected by it
-	var/selection_type = "view"		//can be "range" or "view"
-	var/atom/movable/holder			//where the spell is. Normally the user, can be an item
-	var/duration = 0 //how long the spell lasts
+	var/invocation = "HURP DURP"   //what is uttered when the wizard casts the spell
+	var/invocation_type = SpI_NONE //can be none, whisper, shout, and emote
+	var/range = 7                  //the range of the spell; outer radius for aoe spells
+	var/message = ""               //whatever it says to the guy affected by it
+	var/selection_type = "view"    //can be "range" or "view"
+	var/atom/movable/holder	       //where the spell is. Normally the user, can be an item
+	var/duration = 0               //how long the spell lasts
 
 	var/list/spell_levels = list(Sp_SPEED = 0, Sp_POWER = 0) //the current spell levels - total spell levels can be obtained by just adding the two values
 	var/list/level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 0) //maximum possible levels in each category. Total does cover both.
-	var/cooldown_reduc = 0		//If set, defines how much charge_max drops by every speed upgrade
+	var/cooldown_reduc = 0 //If set, defines how much charge_max drops by every speed upgrade
 	var/delay_reduc = 0
 	var/cooldown_min = 0 //minimum possible cooldown for a charging spell
 
@@ -106,10 +106,12 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		holder = user //just in case
 	if(!cast_check(skipcharge, user))
 		return
+	to_chat(user, SPAN_NOTICE("You start casting \the [name]..."))
 	if(cast_delay && !spell_do_after(user, cast_delay))
 		return
 	var/list/targets = choose_targets(user)
 	if(!check_valid_targets(targets))
+		to_chat(user, SPAN_WARNING("\The [name] fizzles. There are no valid targets nearby."))
 		return
 	var/time = 0
 	admin_attacker_log(user, "attempted to cast the spell [name]")
@@ -213,7 +215,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 /*Checkers, cost takers, message makers, etc*/
 
 /spell/proc/cast_check(skipcharge = 0,mob/user = usr, var/list/targets) //checks if the spell can be cast based on its settings; skipcharge is used when an additional cast_check is called inside the spell
-	
+
 	if(silenced > 0)
 		return 0
 
