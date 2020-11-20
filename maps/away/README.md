@@ -54,13 +54,13 @@ The game will read this to learn about your new shiny away sites, including what
 
 ### Include your .dm file in any main map file, and away sites testing
 
-That's `maps/away_sites_testing/away_sites_testing.dm` plus your main map definition. It goes in the testing one to make sure Travis runs it through unit testing, and it goes in the primary map to make it available during real play.
+That's `maps/away_sites_testing/away_sites_testing.dm` plus your main map definition. It goes in the testing one to make sure it is runs through unit testing, and it goes in the primary map to make it available during real play.
 
 ### Don't include it, or the .dmms, in the .dme
 
 That means don't have any of your away map stuff checked in Dream Maker. It'll get included, as if by magic, via the work you did in the previous step!
 
-That's it! You're probably done! Unless Travis explodes at you.
+That's it! You're probably done! Unless the unit tests explode on you.
 
 ### Some of the stuff I put in my map isn't behaving properly!
 
