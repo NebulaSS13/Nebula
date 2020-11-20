@@ -10,6 +10,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "code\_513_char_macros.dm"
 #include "code\_macros.dm"
 #include "code\client_macros.dm"
 #include "code\hub.dm"
