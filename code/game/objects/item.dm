@@ -978,3 +978,26 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/attack_message_name()
 	return "\a [src]"
+
+/obj/item/proc/fill_from_pressurized_fluid_source(obj/structure/source, mob/user)
+	if(!istype(source) || !source.is_pressurized_fluid_source())
+		return FALSE
+	var/free_space =  Floor(REAGENTS_FREE_SPACE(reagents))
+	if(free_space <= 0)
+		to_chat(user, SPAN_WARNING("\The [src] is full!"))
+		return TRUE
+	if(istype(source, /obj/structure/reagent_dispensers))
+		free_space = min(free_space, source.reagents?.total_volume)
+		if(free_space <= 0)
+			to_chat(user, SPAN_WARNING("There is not enough fluid in \the [source] to fill \the [src]."))
+			return TRUE
+	if(free_space > 0)
+		if(istype(source, /obj/structure/reagent_dispensers/watertank))
+			source.reagents.trans_to_obj(src, free_space)
+		else
+			reagents.add_reagent(/decl/material/liquid/water, free_space)
+		if(reagents && reagents.total_volume >= reagents.maximum_volume)
+			to_chat(user, SPAN_NOTICE("You fill \the [src] with [free_space] unit\s from \the [source]."))
+			reagents.touch(src)
+			return TRUE
+	return FALSE
