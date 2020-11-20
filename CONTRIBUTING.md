@@ -17,7 +17,7 @@ This is a quick and dirty set of agreed-upon standards for contributions to the 
 ---
 
 ### Pull requests
-- It's ultimately the responsibility of the person opening the PR to keep it up to date with the codebase and fix any issues found by Travis/pointed out during review. Reviewers should be open to discussion objections/alternatives either on Discord or in the diff.
+- It's ultimately the responsibility of the person opening the PR to keep it up to date with the codebase and fix any issues found by unit testing or pointed out during review. Reviewers should be open to discussion objections/alternatives either on Discord or in the diff.
 - Opening a PR on behalf of someone else is not recommended unless you are willing to see it through even with changes requested, etc. Opening a PR in bad faith or to make a point is not acceptable.
 
 #### Pull request reviews:
