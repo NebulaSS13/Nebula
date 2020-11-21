@@ -3,9 +3,9 @@
 	var/mob/living/owner
 	var/hidden = TRUE
 
-/obj/screen/psi/Initialize()
+/obj/screen/psi/Initialize(var/ml, var/mob/_owner)
 	. = ..()
-	owner = loc
+	owner = _owner
 	loc = null
 	update_icon()
 

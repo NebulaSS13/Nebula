@@ -6,10 +6,10 @@
 /obj/screen/psi/armour/on_update_icon()
 	..()
 	if(invisibility == 0)
-		icon_state = owner.psi.use_psi_armour ? "psiarmour_on" : "psiarmour_off"
+		icon_state = owner?.psi.use_psi_armour ? "psiarmour_on" : "psiarmour_off"
 
 /obj/screen/psi/armour/Click()
-	if(!owner.psi)
+	if(!owner?.psi)
 		return
 	owner.psi.use_psi_armour = !owner.psi.use_psi_armour
 	if(owner.psi.use_psi_armour)
@@ -26,8 +26,8 @@
 	icon_state = "arrow_left"
 	var/obj/screen/psi/hub/controller
 
-/obj/screen/psi/toggle_psi_menu/Initialize(mapload, var/obj/screen/psi/hub/_controller)
-	. = ..(mapload)
+/obj/screen/psi/toggle_psi_menu/Initialize(mapload, var/mob/_owner, var/obj/screen/psi/hub/_controller)
+	. = ..(mapload, _owner)
 	controller = _controller
 
 /obj/screen/psi/toggle_psi_menu/Click()
