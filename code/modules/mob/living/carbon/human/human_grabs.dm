@@ -4,7 +4,7 @@
 /mob/living/carbon/human/can_be_grabbed(var/mob/grabber, var/target_zone)
 	. = ..()
 	if(.)
-		var/obj/item/organ/external/organ = target_zone && organs_by_name[target_zone]
+		var/obj/item/organ/external/organ = get_organ(target_zone)
 		if(!istype(organ))
 			to_chat(grabber, SPAN_WARNING("\The [src] is missing that body part!"))
 			return FALSE
