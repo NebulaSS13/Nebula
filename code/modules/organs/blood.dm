@@ -286,6 +286,9 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 				pulse_mod *= 1.25
 	blood_volume *= pulse_mod
 
+	if(lying)
+		blood_volume *= 1.25
+
 	var/min_efficiency = recent_pump ? 0.5 : 0.3
 	blood_volume *= max(min_efficiency, (1-(heart.damage / heart.max_damage)))
 
