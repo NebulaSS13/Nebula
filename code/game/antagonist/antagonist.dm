@@ -198,10 +198,9 @@
 	if(!candidates.len)
 		return 0
 
-	//Grab candidates randomly until we have enough.
+	//Grab candidates until we have enough.
 	while(candidates.len && pending_antagonists.len < spawn_target)
-		var/datum/mind/player = pick(candidates)
-		candidates -= player
+		var/datum/mind/player = popleft(candidates)
 		draft_antagonist(player)
 
 	return 1
