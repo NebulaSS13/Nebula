@@ -216,12 +216,6 @@ Checks if a list has the same entries and values as an element of big.
 	for(var/e in L)
 		. += L[e]
 
-// Return a list of the keys in an assoc list
-/proc/list_keys(var/list/L)
-	. = list()
-	for(var/e in L)
-		. += e
-
 //Mergesort: divides up the list into halves to begin the sort
 /proc/sortKey(var/list/client/L, var/order = 1)
 	if(isnull(L) || L.len < 2)

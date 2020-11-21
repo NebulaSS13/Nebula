@@ -212,7 +212,9 @@ var/global/list/additional_antag_types = list()
 			antag_templates_by_initial_spawn_req[antag] = antag.initial_spawn_req
 
 		sortTim(antag_templates_by_initial_spawn_req, /proc/cmp_numeric_asc, TRUE)
-		antag_templates = list_keys(antag_templates_by_initial_spawn_req)
+		antag_templates = list()
+		for(var/template in antag_templates_by_initial_spawn_req)
+			antag_templates += template
 
 		var/list/valid_templates_per_candidate = list() // number of roles each candidate can satisfy
 		for(var/candidate in all_candidates)
@@ -220,9 +222,12 @@ var/global/list/additional_antag_types = list()
 
 		valid_templates_per_candidate = shuffle(valid_templates_per_candidate) // shuffle before sorting so that candidates with the same number of templates will be in random order
 		sortTim(valid_templates_per_candidate, /proc/cmp_numeric_asc, TRUE)
+		var/list/sorted_candidates = list()
+		for(var/sorted_candidate in valid_templates_per_candidate)
+			sorted_candidates += sorted_candidate
 
 		for(var/datum/antagonist/antag in antag_templates)
-			antag.candidates = list_keys(valid_templates_per_candidate) & antag.candidates // orders antag.candidates by valid_templates_per_candidate
+			antag.candidates = sorted_candidates & antag.candidates // orders antag.candidates by sorted_candidates
 
 		var/datum/antagonist/last_template = antag_templates[antag_templates.len]
 		last_template.candidates = shuffle(last_template.candidates) // last template to be considered can have its candidates in any order
