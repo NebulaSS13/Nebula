@@ -47,7 +47,7 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 			var/decl/emote/use_emote = usable_emotes[force_emote]
 			if(!(use_emote.message_type == AUDIBLE_MESSAGE && silent))
 				emote(force_emote)
-	next_pain_time = world.time + (100-power)
+	next_pain_time = world.time + max(30 SECONDS - power, 10 SECONDS)
 
 /mob/living/carbon/human/proc/handle_pain()
 	if(stat)
