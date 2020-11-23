@@ -22,8 +22,10 @@
 
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	cut_overlays()
-	if(!(stat & (NOPOWER | BROKEN)))
-		add_overlay(image_repository.overlay_image(icon, "nozzle_idle", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+	if(operable())
+		add_overlay(image_repository.overlay_image(icon, "indicator_power", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+		if(use_power)
+			add_overlay(image_repository.overlay_image(icon, "nozzle_idle", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 
 /obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
@@ -36,6 +38,10 @@
 	. = ..()
 	if(stat & NOPOWER)
 		update_use_power(POWER_USE_OFF)
+
+/obj/machinery/atmospherics/unary/engine/update_use_power(new_use_power)
+	..()
+	update_icon()
 
 /obj/machinery/atmospherics/unary/engine/RefreshParts()
 	..()
