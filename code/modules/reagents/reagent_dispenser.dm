@@ -22,6 +22,9 @@
 		var/reagent_ratio = initial_reagent_types[reagent_type]
 		reagents.add_reagent(reagent_type, reagent_ratio * initial_capacity)
 
+/obj/structure/reagent_dispensers/is_pressurized_fluid_source()
+	return TRUE
+
 /obj/structure/reagent_dispensers/proc/leak()
 	var/turf/T = get_turf(src)
 	if(reagents && T)
