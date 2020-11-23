@@ -34,7 +34,7 @@
 			if(rating > 1)
 				cost_modifier -= min(1, max(0.1, (rating-1) / 10))
 			if(!ui)
-				ui = new(owner)
+				ui = new(null, owner)
 				if(owner.client)
 					owner.client.screen += ui.components
 					owner.client.screen += ui
