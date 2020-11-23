@@ -23,6 +23,7 @@
 	.=..()
 	if(nutriment_amt)
 		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
+	amount_per_transfer_from_this = bitesize
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/chems/food/snacks/proc/On_Consume(var/mob/M)
@@ -45,6 +46,30 @@
 /obj/item/chems/food/snacks/dragged_onto(var/mob/user)
 	attack(user, user)
 
+/obj/item/chems/food/snacks/self_feed_message(mob/user)
+	if(!iscarbon(user))
+		return ..()
+	var/mob/living/carbon/C = user
+	var/fullness = C.get_fullness()
+	if (fullness <= 50)
+		to_chat(C, SPAN_WARNING("You hungrily chew out a piece of [src] and gobble it!"))
+	if (fullness > 50 && fullness <= 150)
+		to_chat(C, SPAN_NOTICE("You hungrily begin to eat [src]."))
+	if (fullness > 150 && fullness <= 350)
+		to_chat(C, SPAN_NOTICE("You take a bite of [src]."))
+	if (fullness > 350 && fullness <= 550)
+		to_chat(C, SPAN_NOTICE("You unwillingly chew a bit of [src]."))
+	
+/obj/item/chems/food/snacks/feed_sound(mob/user)
+	if(eat_sound)
+		playsound(user, pick(eat_sound), rand(10, 50), 1)
+
+/obj/item/chems/food/snacks/standard_feed_mob(mob/user, mob/target)
+	. = ..()
+	if(.)
+		bitecount++
+		On_Consume(target)
+
 /obj/item/chems/food/snacks/attack(mob/M, mob/user, def_zone)
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
@@ -57,58 +82,12 @@
 		//TODO: replace with standard_feed_mob() call.
 		var/mob/living/carbon/C = M
 		var/fullness = C.get_fullness()
-		if(C == user)								//If you're eating it yourself
-			if(istype(C,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
-					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
-					return
-				var/obj/item/blocked = H.check_mouth_coverage()
-				if(blocked)
-					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
-					return
-
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)//puts a limit on how fast people can eat/drink things
-			if (fullness <= 50)
-				to_chat(C, "<span class='danger'>You hungrily chew out a piece of [src] and gobble it!</span>")
-			if (fullness > 50 && fullness <= 150)
-				to_chat(C, "<span class='notice'>You hungrily begin to eat [src].</span>")
-			if (fullness > 150 && fullness <= 350)
-				to_chat(C, "<span class='notice'>You take a bite of [src].</span>")
-			if (fullness > 350 && fullness <= 550)
-				to_chat(C, "<span class='notice'>You unwillingly chew a bit of [src].</span>")
-			if (fullness > 550)
-				to_chat(C, "<span class='danger'>You cannot force any more of [src] to go down your throat.</span>")
-				return 0
-		else
-			if(!M.can_force_feed(user, src))
-				return
-
-			if (fullness <= 550)
-				user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
-			else
-				user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")
-				return 0
-
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_mob(user, M)) return
-
-			var/contained = REAGENT_LIST(src)
-			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
-			user.visible_message("<span class='danger'>[user] feeds [M] [src].</span>")
-
-		if(reagents) //Handle ingestion of the reagent.
-			if(eat_sound)
-				playsound(M, pick(eat_sound), rand(10, 50), 1)
-			if(reagents.total_volume)
-				if(reagents.total_volume > bitesize)
-					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
-				else
-					reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-				bitecount++
-				On_Consume(M)
+		if (fullness > 550)
+			var/message = C == user ? "You cannot force any more of [src] to go down your throat." : "[user] cannot force anymore of [src] down [M]'s throat."
+			to_chat(user, SPAN_WARNING(message))
+			return 0
+		if(standard_feed_mob(user, M))
 			return 1
-
 	return 0
 
 /obj/item/chems/food/snacks/examine(mob/user, distance)
