@@ -310,14 +310,20 @@
 	face_atom(A)
 
 	if(!isghost(src))
-		if(A.loc != src || (A in get_held_items()))
+		if((A.loc != src || (A in get_held_items())))
+			var/look_target = "at \the [A]"
+			if(isobj(A.loc))
+				look_target = "inside \the [A.loc]"
+			if(A == src)
+				var/datum/gender/T = gender_datums[get_gender()]
+				look_target = "at [T.self]"
 			for(var/mob/M in viewers(4, src))
 				if(M == src)
 					continue
 				if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == GLOB.PREF_SHOW)
 					if(M.is_blind() || is_invisible_to(M))
 						continue
-					to_chat(M, "<span class='subtle'><b>\The [src]</b> looks at \the [A].</span>")
+					to_chat(M, "<span class='subtle'><b>\The [src]</b> looks [look_target].</span>")
 
 	var/distance = INFINITY
 	if(isghost(src) || stat == DEAD)
