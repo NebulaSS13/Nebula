@@ -8,6 +8,7 @@
 	cleanable_scent = "industrial lubricant"
 	scent_intensity = /decl/scent_intensity/normal
 	scent_range = 2
+	chemical = /decl/material/liquid/lube
 
 /obj/effect/decal/cleanable/blood/gibs/robot/on_update_icon()
 	color = "#ffffff"
@@ -42,6 +43,7 @@
 
 /obj/effect/decal/cleanable/blood/oil
 	basecolor = SYNTH_BLOOD_COLOUR
+	chemical = /decl/material/liquid/lube
 
 /obj/effect/decal/cleanable/blood/oil/dry()
 	return

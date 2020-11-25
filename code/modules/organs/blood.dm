@@ -241,9 +241,9 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 	if(spray_dir)
 		splatter.icon_state = "squirt"
 		splatter.set_dir(spray_dir)
-
 	// Update blood information.
 	if(blood_data["blood_DNA"])
+		LAZYSET(splatter.blood_data, blood_data["blood_DNA"], blood_data)
 		splatter.blood_DNA = list()
 		if(blood_data["blood_type"])
 			splatter.blood_DNA[blood_data["blood_DNA"]] = blood_data["blood_type"]
