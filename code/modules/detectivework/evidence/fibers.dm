@@ -10,3 +10,6 @@
 		if(prob(15) && (C.body_parts_covered & ~covered))
 			add_data(C.get_fibers())
 		covered |= C.body_parts_covered
+
+/datum/forensics/fibers/spot_message(mob/detective, atom/location)
+	to_chat(detective, SPAN_NOTICE("You notice some fibers embedded in \the [location]."))

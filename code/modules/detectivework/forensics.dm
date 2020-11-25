@@ -63,22 +63,6 @@
 		to_chat(src, SPAN_INFO("As a murder weapon, it's [english_list(I.get_autopsy_descriptors())]."))
 
 	//Detective is on the case
-	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
-		var/datum/extension/forensic_evidence/forensics = get_extension(src, /datum/extension/forensic_evidence)
-		var/clue
-		if(forensics)
-			if(forensics.has_evidence(/datum/forensics/fibers))
-				to_chat(src, SPAN_NOTICE("You notice some fibers embedded in \the [A]."))
-				clue = 1
-			if(forensics.has_evidence(/datum/forensics/fingerprints))
-				to_chat(src, SPAN_NOTICE("You notice a partial print on \the [A]."))
-				clue = 1
-			if(forensics.has_evidence(/datum/forensics/gunshot_residue))
-				to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
-				clue = 1
-			//Noticing wiped blood is a bit harder
-			if((get_skill_value(SKILL_FORENSICS) >= SKILL_PROF) && forensics.has_evidence(/datum/forensics/blood_dna))
-				to_chat(src, SPAN_WARNING("You notice faint blood traces on \The [A]."))
-				clue = 1
-			if(clue && has_client_color(/datum/client_color/noir))
-				playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)
+	var/datum/extension/forensic_evidence/forensics = get_extension(A, /datum/extension/forensic_evidence)
+	if(forensics?.check_spotting(src) && has_client_color(/datum/client_color/noir))
+		playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)

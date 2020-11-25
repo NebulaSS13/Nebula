@@ -34,6 +34,9 @@
 			. += "<li>INCOMPLETE FINGERPRINT ([F.completeness]%)"
 	return jointext(., "<br>")
 
+/datum/forensics/fingerprints/spot_message(mob/detective, atom/location)
+	to_chat(detective, SPAN_NOTICE("You notice a partial print on \the [location]."))
+	
 // Single (possibly partial) fingerprint
 /datum/fingerprint
 	var/full_print

@@ -9,3 +9,6 @@
 	for(var/D in data)
 		. += "<li>Residue matching a caliber [D] bullet"
 	return jointext(., "<br>")
+
+/datum/forensics/gunshot_residue/spot_message(mob/detective, atom/location)
+	to_chat(detective, SPAN_NOTICE("You notice a faint acrid smell coming from \the [location]."))

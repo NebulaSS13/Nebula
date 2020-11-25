@@ -30,3 +30,13 @@
 	temp.add_from_atom(arglist(args.Copy(2)))
 	for(var/item in temp.data)
 		add_data(evidence_type, item)
+
+/datum/extension/forensic_evidence/proc/check_spotting(mob/detective)
+	. = FALSE
+	if(get_dist(detective, holder) > (detective.get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
+		return FALSE
+	for(var/T in evidence)
+		var/datum/forensics/F = evidence[T]
+		if(F.can_spot(detective, holder))
+			F.spot_message(detective, holder)
+			. |= TRUE
