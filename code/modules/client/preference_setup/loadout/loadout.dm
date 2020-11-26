@@ -113,7 +113,7 @@ var/list/gear_datums = list()
 		else
 			pref.gear_list[index] = list()
 
-/datum/category_item/player_setup_item/loadout/content()
+/datum/category_item/player_setup_item/loadout/content(mob/user)
 	. = list()
 	var/total_cost = 0
 	var/list/gears = pref.gear_list[pref.gear_slot]
@@ -121,6 +121,10 @@ var/list/gear_datums = list()
 		var/datum/gear/G = gear_datums[gears[i]]
 		if(G)
 			total_cost += G.cost
+
+	pref.update_preview_icon()
+	send_rsc(user, pref.preview_icon, "previewicon.png")
+	. += "<center><div class='statusDisplay'><img src=previewicon.png width=[pref.preview_icon.Width() * 2] height=[pref.preview_icon.Height() * 2]></div></center>"
 
 	var/fcolor =  "#3366cc"
 	if(total_cost < config.max_gear_cost)
@@ -273,7 +277,7 @@ var/list/gear_datums = list()
 	if(href_list["toggle_gear"])
 		var/datum/gear/TG = locate(href_list["toggle_gear"])
 		if(!istype(TG) || gear_datums[TG.display_name] != TG)
-			return TOPIC_REFRESH
+			return TOPIC_REFRESH_UPDATE_PREVIEW
 		if(TG.display_name in pref.gear_list[pref.gear_slot])
 			pref.gear_list[pref.gear_slot] -= TG.display_name
 		else
