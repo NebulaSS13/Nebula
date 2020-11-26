@@ -573,6 +573,9 @@ SUBSYSTEM_DEF(jobs)
 /proc/show_location_blurb(client/C, duration)
 	set waitfor = 0
 
+	if(!C)
+		return
+
 	var/style = "font-family: 'Fixedsys'; -dm-text-outline: 1 black; font-size: 11px;"
 	var/area/A = get_area(C.mob)
 	var/text = "[stationdate2text()], [stationtime2text()]\n[station_name()], [A.name]"
@@ -591,7 +594,7 @@ SUBSYSTEM_DEF(jobs)
 	for(var/i = 1 to length(text)+1)
 		T.maptext = "<span style=\"[style]\">[copytext(text,1,i)] </span>"
 		sleep(1)
-	
+
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, C, T), duration)
 
 /proc/fade_location_blurb(client/C, obj/T)
