@@ -115,6 +115,8 @@
 	max_gas = null
 	minbodytemp = 0
 
+	bleed_colour = SYNTH_BLOOD_COLOUR
+
 	meat_type =     null
 	meat_amount =   0
 	bone_material = null
