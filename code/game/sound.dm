@@ -80,7 +80,8 @@ var/const/FALLOFF_SOUNDS = 0.5
 			S.frequency = get_rand_frequency()
 
 	var/turf/T = get_turf(src)
-	S.volume = adjust_volume_for_hearer(S.volume, turf_source, src)
+	if(!is_global)
+		S.volume = adjust_volume_for_hearer(S.volume, turf_source, src)
 	// 3D sounds, the technology is here!
 
 	if(isturf(turf_source))
