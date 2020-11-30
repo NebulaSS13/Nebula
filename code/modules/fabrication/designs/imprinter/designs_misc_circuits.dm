@@ -448,3 +448,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/inertial_damper
 	path = /obj/item/stock_parts/circuitboard/inertial_damper
+
+/datum/fabricator_recipe/imprinter/circuit/docking_beacon
+	path = /obj/item/stock_parts/circuitboard/docking_beacon

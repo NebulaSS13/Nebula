@@ -212,3 +212,11 @@
 				results += device.holder
 	return results
 
+/datum/computer_network/proc/get_tags_by_type(var/type)
+	var/list/results = list()
+	for(var/tag in devices_by_tag)
+		var/datum/extension/network_device/device = devices_by_tag[tag]
+		if(istype(device.holder, type))
+			results |= tag
+	return results
+

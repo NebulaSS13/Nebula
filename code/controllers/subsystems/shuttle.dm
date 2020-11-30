@@ -14,6 +14,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/shuttle_logs = list()               //Keeps records of shuttle movement, format is list(datum/shuttle = datum/shuttle_log)
 	var/list/shuttle_areas = list()              //All the areas of all shuttles.
 	var/list/docking_registry = list()           //Docking controller tag -> docking controller program, mostly for init purposes.
+	var/list/docking_beacons = list()			 //Magnetic docking beacons, used for free-form landing in secure areas.
 
 	var/list/landmarks_awaiting_sector = list()  //Stores automatic landmarks that are waiting for a sector to finish loading.
 	var/list/landmarks_still_needed = list()     //Stores landmark_tags that need to be assigned to the sector (landmark_tag = sector) when registered.
@@ -155,6 +156,14 @@ SUBSYSTEM_DEF(shuttle)
 	for (var/obj/effect/overmap/visitable/ship/ship in ships)
 		if (ship.type == type)
 			return ship
+
+/datum/controller/subsystem/shuttle/proc/docking_beacons_by_z(z_levels)
+	. = list()
+	if(!islist(z_levels))
+		z_levels = list(z_levels)
+	for(var/obj/machinery/docking_beacon/beacon in docking_beacons)
+		if(beacon.z in z_levels)
+			. |= beacon
 
 /datum/controller/subsystem/shuttle/stat_entry()
 	..("Shuttles:[shuttles.len], Ships:[ships.len], L:[registered_shuttle_landmarks.len][overmap_halted ? ", HALT" : ""]")
