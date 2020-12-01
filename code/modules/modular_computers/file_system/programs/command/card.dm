@@ -206,7 +206,7 @@
 				var/static/regex/hash_check = regex(@"^[0-9a-fA-F]{32}$")
 				if(href_list["name"])
 					var/temp_name = sanitizeName(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
-					if(temp_name)
+					if(temp_name && CanUseTopic(user))
 						id_card.registered_name = temp_name
 						id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
 						id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
@@ -222,32 +222,32 @@
 					var/email_password = input("Enter email password.", "Email password")
 					id_card.associated_email_login["password"] = email_password
 				else if(href_list["sex"])
-					var/sex = input("Type gender.", "Gender")
-					if(!isnull(sex))
+					var/sex = input("Type gender.", "Gender", id_card.sex)
+					if(!isnull(sex) && CanUseTopic(user))
 						id_card.sex = sex
 				else if(href_list["age"])
 					var/sug_age = text2num(input("Enter age.", "Age", id_card.age))
-					if(!isnull(sug_age))
+					if(!isnull(sug_age) && CanUseTopic(user))
 						id_card.age = sug_age
 				else if(href_list["fingerprint_hash"])
 					var/sug_fingerprint_hash = sanitize(input("Enter fingerprint hash.", "Fingerprint hash", id_card.fingerprint_hash), 32)
-					if(hash_check.Find(sug_fingerprint_hash))
+					if(hash_check.Find(sug_fingerprint_hash) && CanUseTopic(user))
 						id_card.fingerprint_hash = sug_fingerprint_hash
 				else if(href_list["dna_hash"])
 					var/sug_dna_hash = sanitize(input("Enter DNA hash.", "DNA hash", id_card.dna_hash), 32)
-					if(hash_check.Find(sug_dna_hash))
+					if(hash_check.Find(sug_dna_hash) && CanUseTopic(user))
 						id_card.dna_hash = sug_dna_hash
 				else if(href_list["blood_type"])
 					var/sug_blood_type = input("Select blood type.", "Blood type") as null|anything in GLOB.blood_types
-					if(!isnull(sug_blood_type))
+					if(!isnull(sug_blood_type) && CanUseTopic(user))
 						id_card.blood_type = sug_blood_type
 				else if(href_list["front_photo"])
 					var/photo = get_photo(usr)
-					if(photo)
+					if(photo && CanUseTopic(user))
 						id_card.front = photo
 				else if(href_list["side_photo"])
 					var/photo = get_photo(usr)
-					if(photo)
+					if(photo && CanUseTopic(user))
 						id_card.side = photo
 				else if(href_list["load_data"])
 					var/list/ass_data = list()
@@ -255,7 +255,7 @@
 						ass_data.Add(list(CR.get_name() = CR))
 					var/selected_CR_name = input("Select crew record for write down to the card.", "Crew record selection") as null|anything in ass_data
 					var/datum/computer_file/report/crew_record/selected_CR = get_crewmember_record(selected_CR_name)
-					if(!isnull(selected_CR))
+					if(!isnull(selected_CR) && CanUseTopic(user))
 						id_card.registered_name = selected_CR.get_name()
 						id_card.assignment = selected_CR.get_job()
 						id_card.rank = selected_CR.get_rank()
