@@ -72,7 +72,7 @@
 	if(owner.chem_effects[CE_GLOWINGEYES])
 		eye_colour = "#75bdd6" // blue glow, hardcoded for now.
 	else
-		eye_colour = owner.eye_colour || COLOR_BLACK
+		eye_colour = owner.eye_colour
 
 /obj/item/organ/internal/eyes/take_internal_damage(amount, var/silent=0)
 	var/oldbroken = is_broken()

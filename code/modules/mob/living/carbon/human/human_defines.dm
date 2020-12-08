@@ -3,10 +3,10 @@
 	var/h_style = "Bald"
 	var/f_style = "Shaved"
 
-	var/hair_colour
-	var/facial_hair_colour
-	var/skin_colour
-	var/eye_colour
+	var/hair_colour =        COLOR_BLACK
+	var/facial_hair_colour = COLOR_BLACK
+	var/skin_colour =        COLOR_BLACK
+	var/eye_colour =         COLOR_BLACK
 
 	var/skin_tone = 0  //Skin tone
 	var/skin_base = "" //Skin base
