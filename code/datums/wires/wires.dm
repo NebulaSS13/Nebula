@@ -3,6 +3,7 @@
 var/global/list/same_wires = list()
 // 14 colours, if you're adding more than 14 wires then add more colours here
 var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
+var/global/list/wireColourNames = list("darkred" = "dark red")
 
 /datum/wires
 	var/random = 0 // Will the wires be different for every single instance.
@@ -102,9 +103,15 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 	if(!user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 		wires_used = shuffle(wires_used)
 
+	var/list/replace_colours = user?.get_visual_colour_substitutions() || list()
 	for(var/colour in wires_used)
+
+		var/colour_name = replace_colours[colour] || colour
+		if(colour_name in wireColourNames)
+			colour_name = wireColourNames[colour_name] 
+
 		html += "<tr>"
-		html += "<td[row_options1]><font color='[colour]'>&#9724;</font>[capitalize(colour)]</td>"
+		html += "<td[row_options1]><font color='[colour_name]'>&#9724;</font>[capitalize(colour_name)]</td>"
 		html += "<td[row_options2]>"
 		html += "<A href='?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
 		html += " <A href='?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"

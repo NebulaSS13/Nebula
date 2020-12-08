@@ -8,9 +8,14 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	sort_order = 1
 	category_item_type = /datum/category_item/player_setup_item/physical
 
+/datum/category_group/player_setup_category/aspect_preferences
+	name = "Aspects"
+	sort_order = 2
+	category_item_type = /datum/category_item/player_setup_item/aspects
+
 /datum/category_group/player_setup_category/background_preferences
 	name = "Background"
-	sort_order = 2
+	sort_order = 3
 	category_item_type = /datum/category_item/player_setup_item/background
 
 /datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
@@ -20,39 +25,38 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 /datum/category_group/player_setup_category/occupation_preferences
 	name = "Occupation"
-	sort_order = 3
+	sort_order = 4
 	category_item_type = /datum/category_item/player_setup_item/occupation
 
 /datum/category_group/player_setup_category/record_preferences
 	name = "Records"
-	sort_order = 4
+	sort_order = 5
 	category_item_type = /datum/category_item/player_setup_item/records
 
 /datum/category_group/player_setup_category/appearance_preferences
 	name = "Roles"
-	sort_order = 5
+	sort_order = 6
 	category_item_type = /datum/category_item/player_setup_item/antagonism
 
 /datum/category_group/player_setup_category/relations_preferences
 	name = "Matchmaking"
-	sort_order = 6
+	sort_order = 7
 	category_item_type = /datum/category_item/player_setup_item/relations
 
 /datum/category_group/player_setup_category/loadout_preferences
-	name = "Loadout"
-	sort_order = 7
+	name = "Equipment"
+	sort_order = 8
 	category_item_type = /datum/category_item/player_setup_item/loadout
 
 /datum/category_group/player_setup_category/global_preferences
 	name = "Global"
-	sort_order = 8
+	sort_order = 9
 	category_item_type = /datum/category_item/player_setup_item/player_global
 
 /datum/category_group/player_setup_category/law_pref
 	name = "Laws"
-	sort_order = 9
+	sort_order = 10
 	category_item_type = /datum/category_item/player_setup_item/law_pref
-
 
 /****************************
 * Category Collection Setup *
@@ -135,15 +139,23 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		PI.sanitize_preferences()
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_character()
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.finalize_character()
 
 /datum/category_group/player_setup_category/proc/load_character(datum/pref_record_reader/R)
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_character(R)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.sanitize_character()
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.finalize_character()
 
 /datum/category_group/player_setup_category/proc/save_character(datum/pref_record_writer/W)
 	// Sanitize all data, then save it
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.sanitize_character()
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.finalize_character()
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.save_character(W)
 
@@ -219,6 +231,9 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	return
 
 /datum/category_item/player_setup_item/proc/sanitize_character()
+	return
+
+/datum/category_item/player_setup_item/proc/finalize_character()
 	return
 
 /datum/category_item/player_setup_item/proc/sanitize_preferences()
