@@ -36,6 +36,15 @@
 
 	<div class='item'>
 	  <div class='itemLabel'>
+		Terminations:
+	  </div>
+	  <div class='itemContent'>
+		{{:helper.link('Terminate ' + data.id_owner, 'gear', {'action' : 'terminate'}, data.id_rank == "Terminated" ? 'disabled' : null, data.id_rank == "Terminated" ? 'disabled' : 'linkDanger')}}
+	  </div>
+	</div>
+
+	<div class='item'>
+	  <div class='itemLabel'>
 		Registered Name:
 	  </div>
 	  <div class='itemContent'>
@@ -69,14 +78,77 @@
 		{{:helper.link(data.id_email_password, 'pencil', {'action' : 'edit', 'epswd' : 1})}}
 	  </div>
 	</div>
-	
+
 	<div class='item'>
-	  <div class='itemLabel'>
-		Terminations:
-	  </div>
-	  <div class='itemContent'>
-		{{:helper.link('Terminate ' + data.id_owner, 'gear', {'action' : 'terminate'}, data.id_rank == "Terminated" ? 'disabled' : null, data.id_rank == "Terminated" ? 'disabled' : 'linkDanger')}}
-	  </div>
+		<div class='itemLabel'>
+			Sex:
+		</div>
+		<div class='itemContent'>
+			{{:helper.link(data.sex , 'pencil', {'action' : 'edit', 'sex' : 1})}}
+		</div>
+	</div>
+
+	<div class='item'>
+		<div class='itemLabel'>
+			Age:
+		</div>
+		<div class='itemContent'>
+			{{:helper.link(data.age , 'pencil', {'action' : 'edit', 'age' : 1})}}
+		</div>
+	</div>
+
+	<div class='item'>
+		<div class='itemLabel'>
+			DNA hash:
+		</div>
+		<div class='itemContent'>
+			{{:helper.link(data.dna_hash , 'pencil', {'action' : 'edit', 'dna_hash' : 1})}}
+		</div>
+	</div>
+
+	<div class='item'>
+		<div class='itemLabel'>
+			Fingerprint hash:
+		</div>
+		<div class='itemContent'>
+			{{:helper.link(data.fingerprint_hash , 'pencil', {'action' : 'edit', 'fingerprint_hash' : 1})}}
+		</div>
+	</div>
+
+	<div class='item'>
+		<div class='itemLabel'>
+			Blood type:
+		</div>
+		<div class='itemContent'>
+			{{:helper.link(data.blood_type , 'pencil', {'action' : 'edit', 'blood_type' : 1})}}
+		</div>
+	</div>
+
+	<div class='item'>
+		<div class='itemLabel'>
+			Edit front photo
+		</div>
+		<div class='itemContent'>
+			{{:helper.link('Use photo in your hands', 'pencil', {'action': 'edit', 'front_photo' : 1})}}
+		</div>
+	</div>
+
+	<div class='item'>
+		<div class='itemLabel'>
+			Edit side photo
+		</div>
+		<div class='itemContent'>
+			{{:helper.link('Use photo in your hands', 'pencil', {'action' : 'edit', 'side_photo' : 1})}}
+		</div>
+	</div>
+
+	<div class='item'>
+		<div class='itemLabel'>
+			Load data from crew records
+		</div>
+		<div class='itemContent'>
+			{{:helper.link('', 'pencil', {'action' : 'edit', 'load_data' : 1})}}
+		</div>
 	</div>
 
 	<div class='item'>
