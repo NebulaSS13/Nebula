@@ -65,7 +65,7 @@
 
 /obj/item/ecletters/Initialize()
 	. = ..()
-	desc = "A bunch of letters from Expeditionary Corps explorers to their family and loved ones, dated [game_year - 142]. They're not hopeful."
+	desc = "A bunch of letters from Expeditionary Corps explorers to their family and loved ones, dated [GLOB.using_map.game_year - 142]. They're not hopeful."
 
 /obj/item/paper/ecrashlog
 	name = "handwritten note"
@@ -90,7 +90,7 @@
 	Senior Explorer [S.get_random_name(null, pick(MALE,FEMALE))]<br>
 	Explorer [S.get_random_name(null, pick(MALE,FEMALE))]<br>
 	I am Lieutenant Hao Ru, captain of [shipname] of the Terran Commonwealth Expeditionary Corps. I will be joining my crew in cryo now.<br>
-	<i>3rd December [game_year - 142]</i></tt>
+	<i>3rd December [GLOB.using_map.game_year - 142]</i></tt>
 	"}
 	set_content(new_info)
 
