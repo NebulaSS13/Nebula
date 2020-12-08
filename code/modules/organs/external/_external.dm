@@ -253,9 +253,10 @@
 			if(loc != E)
 				return
 
-			E.children |= src
+			LAZYDISTINCTADD(E.children, src)
 			parent = E
 			owner = E.owner
+			status &= ~ORGAN_CUT_AWAY
 			combined = TRUE
 
 		else if(E.parent_organ == organ_tag)
@@ -267,10 +268,15 @@
 			if(!user.unEquip(E, src))
 				return
 
-			children |= E
+			LAZYDISTINCTADD(children, E)
 			E.parent = src
 			E.owner = owner
+			E.status &= ~ORGAN_CUT_AWAY
 			combined = TRUE
+
+		else
+			to_chat(user, SPAN_WARNING("\The [E] cannot be connected to \the [src]."))
+			return
 
 		if(combined)
 			to_chat(user, SPAN_NOTICE("You connect \the [E] to \the [src]."))
