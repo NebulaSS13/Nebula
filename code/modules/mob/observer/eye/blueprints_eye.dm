@@ -255,7 +255,7 @@
 
 	M.overlay_fullscreen("blueprints", /obj/screen/fullscreen/blueprints)
 	M.client.screen += area_name_effect
-	M.add_client_color(/datum/client_color/monochrome)
+	M.add_client_color(/datum/client_color/achromatopsia)
 
 /mob/observer/eye/blueprints/remove_visual(var/mob/M)
 	. = ..()
@@ -263,7 +263,7 @@
 
 	M.clear_fullscreen("blueprints", 0)
 	M.client.screen -= area_name_effect
-	M.remove_client_color(/datum/client_color/monochrome)
+	M.remove_client_color(/datum/client_color/achromatopsia)
 
 /mob/observer/eye/blueprints/additional_sight_flags()
 	return SEE_TURFS|BLIND

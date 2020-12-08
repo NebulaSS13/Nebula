@@ -1,3 +1,7 @@
+#define EQUIP_PREVIEW_LOADOUT 1
+#define EQUIP_PREVIEW_JOB 2
+#define EQUIP_PREVIEW_ALL (EQUIP_PREVIEW_LOADOUT|EQUIP_PREVIEW_JOB)
+
 #define SAVE_RESET -1
 
 /* PLACEHOLDER VERB UNTIL SAVE INIT (or whatever the issue is) IS FIXED */
@@ -164,11 +168,17 @@ var/global/list/time_prefs_fixed = list()
 	else if(load_failed)
 		dat += "Loading your savefile failed. Please adminhelp for assistance."
 	else
-		dat += "Slot - "
+
+		dat += "<b>Slot</b> - "
 		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
 		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
+		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a><br>"
+
+		dat += "<b>Preview</b> - "
+		dat += "<a href='?src=\ref[src];cycle_bg=1'>Cycle background</a> - "
+		dat += "<a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a> - "
+		dat += "<a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
 
 	dat += "<br>"
 	dat += player_setup.header()
@@ -251,7 +261,7 @@ var/global/list/time_prefs_fixed = list()
 
 /datum/preferences/Topic(href, list/href_list)
 	if(..())
-		return 1
+		return TRUE
 
 	if(href_list["save"])
 		save_preferences()
@@ -263,7 +273,7 @@ var/global/list/time_prefs_fixed = list()
 	else if(href_list["load"])
 		if(!IsGuestKey(usr.key))
 			open_load_dialog(usr)
-			return 1
+			return TRUE
 	else if(href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
 		sanitize_preferences()
@@ -275,15 +285,19 @@ var/global/list/time_prefs_fixed = list()
 
 	else if(href_list["resetslot"])
 		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
-			return 0
+			return FALSE
 		load_character(SAVE_RESET)
 		sanitize_preferences()
 	else if(href_list["close"])
 		// User closed preferences window, cleanup anything we need to.
 		clear_character_previews()
-		return 1
+		return TRUE
+	else if(href_list["toggle_preview_value"])
+		equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
+	else if(href_list["cycle_bg"])
+		bgstate = next_in_list(bgstate, bgstate_options)
 	else
-		return 0
+		return FALSE
 
 	update_preview_icon()
 	update_setup_window(usr)
@@ -292,6 +306,7 @@ var/global/list/time_prefs_fixed = list()
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
+	character.personal_aspects = list()
 	character.set_species(species)
 	character.set_bodytype((character.species.get_bodytype_by_name(bodytype) || character.species.default_bodytype), TRUE)
 
@@ -326,51 +341,7 @@ var/global/list/time_prefs_fixed = list()
 	character.h_style = h_style
 	character.f_style = f_style
 
-	// Replace any missing limbs.
-	for(var/name in global.all_limb_tags)
-		var/obj/item/organ/external/O = character.organs_by_name[name]
-		if(!O && organ_data[name] != "amputated")
-			var/list/organ_data = character.species.has_limbs[name]
-			if(!islist(organ_data)) continue
-			var/limb_path = organ_data["path"]
-			O = new limb_path(character)
-
-	// Destroy/cyborgize organs and limbs. The order is important for preserving low-level choices for robolimb sprites being overridden.
-	for(var/name in global.all_limb_tags_by_depth)
-		var/status = organ_data[name]
-		var/obj/item/organ/external/O = character.organs_by_name[name]
-		if(!O)
-			continue
-		O.status = 0
-		O.model = null
-		if(status == "amputated")
-			character.organs_by_name[O.organ_tag] = null
-			character.organs -= O
-			if(O.children) // This might need to become recursive.
-				for(var/obj/item/organ/external/child in O.children)
-					character.organs_by_name[child.organ_tag] = null
-					character.organs -= child
-					qdel(child)
-			qdel(O)
-		else if(status == "cyborg")
-			O.robotize(rlimb_data[name])
-		else //normal organ
-			O.SetName(initial(O.name))
-			O.desc = initial(O.desc)
-
-	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)
-	if(!is_preview_copy)
-		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH))
-			var/status = organ_data[name]
-			if(!status)
-				continue
-			var/obj/item/organ/I = character.get_internal_organ(name)
-			if(I)
-				if(status == "assisted")
-					I.mechassist()
-				else if(status == "mechanical")
-					I.robotize()
 
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()
@@ -413,8 +384,17 @@ var/global/list/time_prefs_fixed = list()
 	character.update_icons()
 	character.update_transform()
 
+	if(length(aspects))
+		for(var/atype in aspects)
+			character.personal_aspects |= GET_DECL(atype)
+		character.need_aspect_sort = TRUE
+		character.apply_aspects(ASPECTS_PHYSICAL)
+
 	if(is_preview_copy)
 		return
+
+	if(length(aspects))
+		character.apply_aspects(ASPECTS_MENTAL)
 
 	for(var/token in cultural_info)
 		character.set_cultural_value(token, cultural_info[token], defer_language_update = TRUE)
@@ -435,6 +415,8 @@ var/global/list/time_prefs_fixed = list()
 	if(!character.isSynthetic())
 		character.set_nutrition(rand(140,360))
 		character.set_hydration(rand(140,360))
+
+	return character
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat  = list()

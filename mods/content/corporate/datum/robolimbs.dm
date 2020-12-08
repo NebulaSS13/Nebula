@@ -83,3 +83,9 @@ DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/nanotrasen, nanotrasen, "
 DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/xion, xion, "Xion")
 DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/economy, wardtakahashi, "Ward-Takahashi")
 DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/bishop, bishop, "Bishop")
+
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/shellguard, shellguard,    "Shellguard",     0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/nanotrasen, nanotrasen,    "NanoTrasen",     0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/xion,       xion,          "Xion",           0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/economy,    wardtakahashi, "Ward-Takahashi", 0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/bishop,     bishop,        "Bishop",         0)

@@ -117,9 +117,9 @@ var/global/list/gear_datums = list()
 	. = list()
 
 	recalculate_loadout_cost()
-	var/fcolor =  "#3366cc"
+	var/fcolor = COLOR_CYAN_BLUE
 	if(pref.total_loadout_cost < config.max_gear_cost)
-		fcolor = "#e67300"
+		fcolor = COLOR_FONT_ORANGE
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
 	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a>"

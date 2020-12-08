@@ -3,7 +3,7 @@
 	var/priority = 1 //Since only one client.color can be rendered on screen, we take the one with the highest priority value:
 	//eg: "Bloody screen" > "goggles color" as the former is much more important
 	var/override = FALSE //If set to override we will stop multiplying the moment we get here. NOTE: Priority remains, if your override is on position 4, the other 3 will still have a say.
-
+	var/list/wire_colour_substitutions // used for swapping the names/fonts of colours in the hacking panel.
 
 /mob
 	var/list/client_colors = list()
@@ -79,37 +79,3 @@
 			break
 
 	animate(client, color = c)
-
-/datum/client_color/monochrome
-	client_color = list(0.33,0.33,0.33, 0.33,0.33,0.33, 0.33,0.33,0.33)
-	priority = 100
-
-//Similar to monochrome but shouldn't look as flat, same priority
-/datum/client_color/noir
-	client_color = list(0.299,0.299,0.299, 0.587,0.587,0.587, 0.114,0.114,0.114)
-	priority = 200
-
-/datum/client_color/thirdeye
-	client_color = list(0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.05, 0.05, 0.05)
-	priority = 300
-
-//Disabilities, could be hooked to brain damage or chargen if so desired.
-/datum/client_color/deuteranopia
-	client_color = list(0.47,0.38,0.15, 0.54,0.31,0.15, 0,0.3,0.7)
-	priority = 100
-
-/datum/client_color/protanopia
-	client_color = list(0.51,0.4,0.12, 0.49,0.41,0.12, 0,0.2,0.76)
-	priority = 100
-
-/datum/client_color/tritanopia
-	client_color = list(0.95,0.07,0, 0,0.44,0.52, 0.05,0.49,0.48)
-	priority = 100
-
-/datum/client_color/berserk
-	client_color = "#af111c"
-	priority = INFINITY //This effect sort of exists on its own you /have/ to be seeing RED
-	override = TRUE //Because multiplying this will inevitably fail
-
-/datum/client_color/oversaturated/New()
-	client_color = color_saturation(40)

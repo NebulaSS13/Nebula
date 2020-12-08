@@ -4,7 +4,7 @@
 
 /datum/category_item/player_setup_item/physical/flavor
 	name = "Flavor"
-	sort_order = 4
+	sort_order = 5
 
 /datum/category_item/player_setup_item/physical/flavor/load_character(datum/pref_record_reader/R)
 	pref.flavor_texts["general"] = R.read("flavor_texts_general")
@@ -47,22 +47,9 @@
 	. += "<a href='?src=\ref[src];flavor_text=open'>Set Flavor Text</a><br/>"
 	. += "<a href='?src=\ref[src];flavour_text_robot=open'>Set Robot Flavor Text</a><br/>"
 
-	. += "<br/><b>Preview:</b><br/>"
-	. += "<a href='?src=\ref[src];cycle_bg=1'>Cycle background</a>"
-	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[pref.equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a>"
-	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[pref.equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
-
 /datum/category_item/player_setup_item/physical/flavor/OnTopic(var/href,var/list/href_list, var/mob/user)
 
-	if(href_list["toggle_preview_value"])
-		pref.equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
-		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["cycle_bg"])
-		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
-		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["flavor_text"])
+	if(href_list["flavor_text"])
 		switch(href_list["flavor_text"])
 			if("open")
 			if("general")
