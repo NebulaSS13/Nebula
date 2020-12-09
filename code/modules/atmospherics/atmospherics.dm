@@ -177,3 +177,8 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 		if(!do_after(user, 4 SECONDS, src))
 			return MCS_BLOCK
 	return ..()
+
+/obj/machinery/atmospherics/explosion_act(var/severity)
+	..()
+	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50))))
+		qdel(src)
