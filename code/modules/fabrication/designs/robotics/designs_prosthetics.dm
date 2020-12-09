@@ -33,7 +33,7 @@
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/groin {      \
 	path = /obj/item/organ/external/groin;                                 \
 }
-/* Readd if FBP/utility frame construction is desirable
+/* Readd if FBP construction is desirable
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/chest {      \
 	path = /obj/item/organ/external/chest;                                 \
 }                                                                          \
@@ -67,4 +67,3 @@
 		E.robotize(model)
 
 DEFINE_ROBOLIMB_DESIGNS(/datum/robolimb, generic, "Unbranded")
-DEFINE_ROBOLIMB_DESIGNS(/datum/robolimb/utility_frame, utility_frame, "Utility Frame")

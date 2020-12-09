@@ -39,11 +39,3 @@ var/datum/robolimb/basic_robolimb
 	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
 	movement_slowdown = 1
 	is_robotic = FALSE
-
-/datum/robolimb/utility_frame
-	company = "Utility Frame"
-	desc = "This limb is extremely cheap and simplistic, with a raw steel frame and plastic casing."
-	icon = 'icons/mob/human_races/cyberlimbs/utility/body.dmi'
-	skintone = TRUE
-	species_restricted = list(SPECIES_FRAME)
-	limb_blend = ICON_MULTIPLY
