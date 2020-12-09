@@ -24,7 +24,7 @@
 /datum/unit_test/human_breath/start_test()
 	var/turf/T = get_space_turf()
 
-	if(!istype(T, /turf/space))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
+	if(!isspaceturf(T))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
 	for(var/species_name in get_all_species())
 		var/datum/species/S = get_species_by_key(species_name)

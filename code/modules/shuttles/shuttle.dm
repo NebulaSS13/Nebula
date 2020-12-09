@@ -238,7 +238,7 @@
 		for(var/area/A in shuttle_area)
 			for(var/turf/TD in A.contents)
 				var/turf/TA = GetAbove(TD)
-				if(istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
+				if(istype(TA, get_base_turf_by_area(TA)) || (istype(TA) && TA.is_open()))
 					if(get_area(TA) in shuttle_area)
 						continue
 					TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)

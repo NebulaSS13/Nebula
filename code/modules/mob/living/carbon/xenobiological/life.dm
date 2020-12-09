@@ -20,7 +20,7 @@
 
 	//var/environment_heat_capacity = environment.heat_capacity()
 	var/loc_temp = T0C
-	if(istype(get_turf(src), /turf/space))
+	if(isspaceturf(get_turf(src)))
 		//environment_heat_capacity = loc:heat_capacity
 		var/turf/heat_turf = get_turf(src)
 		loc_temp = heat_turf.temperature

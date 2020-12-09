@@ -370,7 +370,7 @@
 	if(mixture)
 		var/pressure = mixture.return_pressure()
 		if(pressure > 50)
-			if(istype(landing, /turf/simulated/open))
+			if(istype(landing) && landing.is_open())
 				H.visible_message("\The [H] descends from the deck above through \the [landing]!", "Your wings slow your descent.")
 			else
 				H.visible_message("\The [H] buzzes down from \the [landing], wings slowing their descent!", "You land on \the [landing], folding your wings.")

@@ -51,7 +51,7 @@
 
 /datum/goal/movement/walk/eva/valid_step()
 	var/datum/mind/mind = owner
-	return istype(mind.current.loc, /turf/space)
+	return isspaceturf(mind.current.loc)
 
 /datum/goal/movement/walk/eva/update_strings()
 	description = "It's so stuffy inside. Go for a spacewalk - at least [required_steps] step\s."

@@ -59,7 +59,7 @@
 	var/min_temperature = T20C + rand(0, 20) // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
 
 	var/hotspot = (locate(/obj/fire) in T)
-	if(hotspot && !istype(T, /turf/space))
+	if(hotspot && !isspaceturf(T))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
 		lowertemp.react()

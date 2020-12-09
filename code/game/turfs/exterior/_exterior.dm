@@ -19,6 +19,9 @@
 	if(istype(ext))
 		ext.affecting_heat_sources = last_affecting_heat_sources
 
+/turf/exterior/is_plating()
+	return !density
+
 /turf/exterior/can_engrave()
 	return FALSE
 
@@ -58,6 +61,10 @@
 			ChangeArea(src, owner.planetary_area)
 	update_icon(TRUE)
 	. = ..()
+
+/turf/exterior/levelupdate()
+	for(var/obj/O in src)
+		O.hide(0)
 
 /turf/exterior/attackby(obj/item/C, mob/user)
 

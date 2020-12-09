@@ -310,7 +310,7 @@
 			do
 				sleep(last_delay)
 
-				if(!istype(loc, /turf/space))
+				if(!isspaceturf(loc))
 					last_delay++
 
 				if(last_delay > 10)
@@ -350,10 +350,6 @@
 			var/turf/T = get_turf(src)
 			mob.forceMove(T)
 			mob.client.Move(get_step(T, direction), direction)
-
-			//if(moving && istype(loc, /turf/space))
-				// Todo: If you get out of a moving pod in space, you should move as well.
-				//  Same direction as pod? Direcion you moved? Halfway between?
 
 		if(!moving)
 			for(var/obj/structure/transit_tube/station/station in loc)

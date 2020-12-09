@@ -296,7 +296,7 @@ var/bomb_set
 					visible_message("<span class='warning'>\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut.</span>")
 					return 1
 
-				if(!isinspace())
+				if(!isspaceturf(get_turf(src)))
 					anchored = !anchored
 					if(anchored)
 						visible_message("<span class='warning'>With a steely snap, bolts slide out of \the [src] and anchor it to the flooring.</span>")

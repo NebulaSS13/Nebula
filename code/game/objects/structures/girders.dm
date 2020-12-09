@@ -17,11 +17,10 @@
 
 /obj/structure/girder/can_unanchor(var/mob/user)
 	. = ..()
-	if(!anchored && .)
-		var/turf/simulated/open/T = loc
-		if(istype(T))
-			to_chat(user, SPAN_WARNING("You can only secure \the [src] to solid ground."))
-			return FALSE
+	var/turf/T = loc
+	if(!anchored && . && (!istype(T) || T.is_open()))
+		to_chat(user, SPAN_WARNING("You can only secure \the [src] to solid ground."))
+		return FALSE
 
 /obj/structure/girder/handle_default_screwdriver_attackby(var/mob/user, var/obj/item/screwdriver)
 

@@ -14,11 +14,11 @@
 
 /obj/structure/synthesized_instrument/synthesizer/attackby(obj/item/O, mob/user, params)
 	if (istype(O, /obj/item/wrench))
-		if (!anchored && !isinspace())
+		if (!anchored && !isspaceturf(get_turf(src)))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(usr, "<span class='notice'> You begin to tighten \the [src] to the floor...</span>")
 			if (do_after(user, 20))
-				if(!anchored && !isinspace())
+				if(!anchored && !isspaceturf(get_turf(src)))
 					user.visible_message( \
 						"[user] tightens \the [src]'s casters.", \
 						"<span class='notice'> You tighten \the [src]'s casters. Now it can be played again.</span>", \

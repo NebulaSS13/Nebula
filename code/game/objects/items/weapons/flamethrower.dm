@@ -163,7 +163,7 @@
 	if(!lit || operating)	return
 	operating = 1
 	for(var/turf/T in turflist)
-		if(T.density || istype(T, /turf/space))
+		if(T.density || isspaceturf(T))
 			break
 		if(!previousturf && length(turflist)>1)
 			previousturf = get_turf(src)

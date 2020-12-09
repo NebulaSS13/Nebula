@@ -74,7 +74,7 @@
 					T.hotspot_expose(700, 5)
 					for(var/mob/living/M in T.contents)
 						M.IgniteMob()
-				if(HasBelow(T.z) && istype(T, /turf/simulated/open))
+				if(HasBelow(T.z) && T.is_open())
 					T = GetBelow(T)
 				else
 					T = null

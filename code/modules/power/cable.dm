@@ -637,7 +637,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		dirn = get_dir(F, user)
 
 	var/end_dir = 0
-	if(istype(F, /turf/simulated/open))
+	if(istype(F) && F.is_open())
 		if(!can_use(2))
 			to_chat(user, "You don't have enough cable to do this!")
 			return

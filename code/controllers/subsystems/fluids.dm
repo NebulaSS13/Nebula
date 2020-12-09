@@ -98,7 +98,7 @@ SUBSYSTEM_DEF(fluids)
 			qdel(F)
 			continue
 
-		if(T.density || istype(T, /turf/space) || istype(T, /turf/exterior))
+		if(T.density || isspaceturf(T) || istype(T, /turf/exterior))
 			F.reagents.remove_any(max(FLUID_EVAPORATION_POINT-1, round(F.reagents.total_volume * 0.5)))
 			if(F.reagents.total_volume <= FLUID_EVAPORATION_POINT)
 				qdel(F)
