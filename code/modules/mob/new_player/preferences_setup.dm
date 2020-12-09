@@ -88,19 +88,4 @@
 	mannequin.delete_inventory(TRUE)
 	dress_preview_mob(mannequin)
 
-	preview_icon = icon('icons/effects/128x48.dmi', bgstate)
-	preview_icon.Scale(48+32, 16+32)
-
-	mannequin.set_dir(NORTH)
-	var/icon/stamp = getFlatIcon(mannequin, NORTH, always_use_defdir = 1)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
-
-	mannequin.set_dir(WEST)
-	stamp = getFlatIcon(mannequin, WEST, always_use_defdir = 1)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
-
-	mannequin.set_dir(SOUTH)
-	stamp = getFlatIcon(mannequin, SOUTH, always_use_defdir = 1)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
-
-	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
+	update_character_previews(new /mutable_appearance(mannequin))
