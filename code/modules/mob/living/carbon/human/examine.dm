@@ -91,8 +91,15 @@
 	//gloves
 	if(gloves && !skipgloves)
 		msg += "[T.He] [T.has] [gloves.get_examine_line()] on [T.his] hands.\n"
-	else if(blood_DNA)
-		msg += "<span class='warning'>[T.He] [T.has] [(hand_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained hands!</span>\n"
+	else
+		var/list/jazzhands = get_hands_organs()
+		var/datum/reagents/coating
+		for(var/obj/item/organ/external/E in jazzhands)
+			if(!E.is_stump() && E.coating)
+				coating = E.coating
+				break
+		if(coating)
+			msg += "There's something <font color='[coating.get_color()]'>something on [T.his] hands</font>!\n"
 
 	//belt
 	if(belt)
@@ -101,8 +108,15 @@
 	//shoes
 	if(shoes && !skipshoes)
 		msg += "[T.He] [T.is] wearing [shoes.get_examine_line()] on [T.his] feet.\n"
-	else if(feet_blood_DNA)
-		msg += "<span class='warning'>[T.He] [T.has] [(feet_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained feet!</span>\n"
+	else
+		var/datum/reagents/coating
+		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/E = get_organ(bp)
+			if(E && !E.is_stump() && E.coating)
+				coating = E.coating
+				break
+		if(coating)
+			msg += "There's <font color='[coating.get_color()]'>something on [T.his] feet</font>!\n"
 
 	//mask
 	if(wear_mask && !skipmask)

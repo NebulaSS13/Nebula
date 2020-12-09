@@ -915,43 +915,33 @@
 	if(L)
 		L.rupture()
 
-/mob/living/carbon/human/add_blood(mob/living/carbon/human/M)
+/mob/living/carbon/human/add_blood(mob/living/carbon/human/M, amount = 2, blood_data)
 	if (!..())
 		return 0
-	//if this blood isn't already in the list, add it
-	if(istype(M))
-		if(!blood_DNA[M.dna.unique_enzymes])
-			blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
-		forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
-	hand_blood_color = blood_color
-	src.update_inv_gloves()	//handles bloody hands overlays and updating
-	verbs += /mob/living/carbon/human/proc/bloody_doodle
+	var/bloodied
+	for(var/obj/item/organ/external/grabber in get_hands_organs())
+		if(!grabber.is_stump())
+			bloodied |= grabber.add_blood(M, amount, blood_data)
+	if(bloodied)
+		update_inv_gloves()	//handles bloody hands overlays and updating
+		verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
 	if(gloves)
-		if(gloves.clean_blood())
-			update_inv_gloves(1)
+		gloves.clean()
 		gloves.germ_level = 0
 	else
-		if(!isnull(bloody_hands))
-			bloody_hands = null
-			update_inv_gloves(1)
 		germ_level = 0
 
 	for(var/obj/item/organ/external/organ in organs)
+		//TODO check that organ is not covered
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
-			var/datum/extension/forensic_evidence/forensics = get_extension(organ, /datum/extension/forensic_evidence)
-			if(forensics)
-				forensics.remove_data(/datum/forensics/gunshot_residue)
-
-	if(clean_feet && !shoes)
-		feet_blood_color = null
-		feet_blood_DNA = null
-		update_inv_shoes(1)
-		return 1
+			organ.clean()
+	update_inv_gloves(1)
+	update_inv_shoes(1)
+	return 1
 
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
 
@@ -1230,6 +1220,10 @@
 	if (usr != src)
 		return 0 //something is terribly wrong
 
+	var/bloody_hands = 0
+	for(var/obj/item/organ/external/grabber in get_hands_organs())
+		if(grabber.coating)
+			bloody_hands += REAGENT_VOLUME(grabber.coating, /decl/material/liquid/blood)
 	if (!bloody_hands)
 		verbs -= /mob/living/carbon/human/proc/bloody_doodle
 
@@ -1808,3 +1802,9 @@
 /mob/living/carbon/human/increaseBodyTemp(value)
 	bodytemperature += value
 	return bodytemperature
+
+/mob/living/carbon/human/proc/get_hands_organs()
+	. = list()
+	for(var/bp in held_item_slots) 
+		if(organs_by_name[bp])
+			. |= organs_by_name[bp]

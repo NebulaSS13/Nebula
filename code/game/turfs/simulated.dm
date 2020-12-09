@@ -103,29 +103,37 @@
 
 /mob/living/carbon/human/HandleBloodTrail(turf/simulated/T)
 	// Tracking blood
-	var/list/bloodDNA = null
-	var/bloodcolor = ""
+	var/obj/item/source
 	if(shoes)
 		var/obj/item/clothing/shoes/S = shoes
 		if(istype(S))
 			S.handle_movement(src, MOVING_QUICKLY(src))
-			if(S.track_blood && S.blood_DNA)
-				bloodDNA = S.blood_DNA
-				bloodcolor = S.blood_color
-				S.track_blood--
+			if(S.coating && S.coating.total_volume > 1)
+				source = S
 	else
-		if(track_blood && feet_blood_DNA)
-			bloodDNA = feet_blood_DNA
-			bloodcolor = feet_blood_color
-			track_blood--
+		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
+			var/obj/item/organ/external/stomper = get_organ(bp)
+			if(stomper && !stomper.is_stump() && stomper.coating && stomper.coating.total_volume > 1)
+				source = stomper
+	if(!source)
+		return
 
-	if (bloodDNA && species.get_move_trail(src))
+	var/list/bloodDNA
+	var/bloodcolor
+	var/list/blood_data = REAGENT_DATA(source.coating, /decl/material/liquid/blood)
+	if(blood_data)
+		bloodDNA = list(blood_data["blood_DNA"] = blood_data["blood_type"])
+	else
+		bloodDNA = list()
+	bloodcolor = source.coating.get_color()
+	source.remove_coating(1)
+	update_inv_shoes(1)
+
+	if(species.get_move_trail(src))
 		T.AddTracks(species.get_move_trail(src),bloodDNA, dir, 0, bloodcolor) // Coming
 		var/turf/simulated/from = get_step(src, GLOB.reverse_dir[dir])
 		if(istype(from))
 			from.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
-
-		bloodDNA = null
 
 //returns 1 if made bloody, returns 0 otherwise
 /turf/simulated/add_blood(mob/living/carbon/human/M)
@@ -138,6 +146,7 @@
 				B.blood_DNA = list()
 			if(!B.blood_DNA[M.dna.unique_enzymes])
 				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+				B.blood_data[M.dna.unique_enzymes] = REAGENT_DATA(M.vessel, M.species.blood_reagent)
 				var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)
 				forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
 			return 1 //we bloodied the floor
