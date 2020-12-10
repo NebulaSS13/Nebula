@@ -15,7 +15,7 @@
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/jelly/mega)
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_habitability()
-	return HABITABILITY_BAD
+	habitability_class =  HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_atmosphere_color()
 	return "#e5f2bd"
