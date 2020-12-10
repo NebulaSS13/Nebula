@@ -18,7 +18,7 @@
 	..()
 	
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_habitability()
-	return HABITABILITY_BAD
+	habitability_class =  HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_atmosphere()
 	..()

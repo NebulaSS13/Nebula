@@ -27,7 +27,7 @@
 	return COLOR_GRAY20
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_habitability()
-	return HABITABILITY_BAD
+	habitability_class =  HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
