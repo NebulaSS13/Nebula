@@ -91,11 +91,20 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/overmap_event_areas = 0 //How many event "clouds" will be generated
 	var/pray_reward_type = /obj/item/chems/food/snacks/cookie // What reward should be given by admin when a prayer is received?
 
-	var/list/lobby_screens = list('icons/default_lobby.png')    // The list of lobby screen images to pick() from.
+	// The list of lobby screen images to pick() from.
+	var/list/lobby_screens = list('icons/default_lobby.png')
 	var/current_lobby_screen
-	var/music_track/lobby_track                     // The track that will play in the lobby screen.
-	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
-	var/welcome_sound = 'sound/AI/welcome.ogg'		// Sound played on roundstart
+	// The track that will play in the lobby screen.
+	var/music_track/lobby_track
+	// The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
+	var/list/lobby_tracks = list()
+
+	// Sounds played on roundstart
+	var/list/welcome_sound = 'sound/AI/welcome.ogg'
+	// Sounds played with end titles (credits)
+	var/list/credit_sound = list('sound/music/THUNDERDOME.ogg', 'sound/music/europa/Chronox_-_03_-_In_Orbit.ogg', 'sound/music/europa/asfarasitgets.ogg')
+	// Sounds played on server reboot
+	var/list/reboot_sound = list('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')
 
 	var/default_law_type = /datum/ai_laws/asimov  // The default lawset use by synth units, if not overriden by their laws var.
 	var/security_state = /decl/security_state/default // The default security state system to use.
