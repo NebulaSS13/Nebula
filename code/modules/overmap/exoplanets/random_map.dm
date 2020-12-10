@@ -33,9 +33,6 @@
 
 	GLOB.using_map.base_turf_by_z[num2text(tz)] = land_type
 
-/datum/random_map/noise/exoplanet/proc/noise2value(var/value)
-	return min(9,max(0,round((value/cell_range)*10)))
-
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
 		return "~"
