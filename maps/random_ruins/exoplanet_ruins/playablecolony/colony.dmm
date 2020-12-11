@@ -171,8 +171,8 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
-/obj/item/clothing/suit/storage/toggle/hoodie/smw,
-/obj/item/clothing/suit/storage/toggle/track/gcc,
+/obj/item/clothing/suit/storage/toggle/hoodie,
+/obj/item/clothing/suit/storage/toggle/track,
 /obj/item/radio,
 /obj/structure/closet/shipping_wall{
 	pixel_y = -28
@@ -1063,7 +1063,7 @@
 /area/template_noop)
 "cj" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/cash/c1000,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -1081,7 +1081,7 @@
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/cash/c1000,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/tcomms)
 "ck" = (
@@ -1540,7 +1540,7 @@
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
-/obj/item/clothing/suit/storage/toggle/hoodie/smw,
+/obj/item/clothing/suit/storage/toggle/hoodie,
 /obj/item/radio,
 /obj/structure/closet/cabinet,
 /turf/simulated/floor/carpet,
@@ -2571,7 +2571,7 @@
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
-/obj/item/clothing/suit/storage/toggle/hoodie/smw,
+/obj/item/clothing/suit/storage/toggle/hoodie,
 /obj/item/radio,
 /obj/structure/closet/shipping_wall{
 	pixel_y = 34
@@ -3057,8 +3057,8 @@
 /obj/item/clothing/suit/storage/toggle/bomber,
 /obj/item/clothing/suit/storage/toggle/brown_jacket,
 /obj/item/clothing/suit/storage/toggle/hoodie/nt,
-/obj/item/clothing/suit/storage/toggle/hoodie/smw,
-/obj/item/clothing/suit/storage/toggle/track/gcc,
+/obj/item/clothing/suit/storage/toggle/hoodie,
+/obj/item/clothing/suit/storage/toggle/track,
 /obj/item/radio,
 /obj/structure/closet/cabinet,
 /turf/simulated/floor/carpet,
@@ -3547,7 +3547,7 @@
 /obj/item/storage/box/snack/tastybread,
 /obj/item/storage/box/snack/tastybread,
 /obj/item/storage/box/snack/noraisin,
-/obj/item/storage/box/snack/jerky,
+/obj/item/storage/box/snack,
 /obj/item/storage/box/snack/candy,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
