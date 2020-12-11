@@ -6,18 +6,6 @@
 
 #define ismovable(A) istype(A, /atom/movable)
 
-/proc/copytext_char(T, Start = 1, End = 0)
-	return copytext(T, Start, End)
-
-/proc/length_char(E)
-	return length(E)
-
-/proc/findtext_char(Haystack, Needle, Start = 1, End = 0)
-	return findtext(Haystack, Needle, Start, End)
-
-/proc/replacetextEx_char(Haystack, Needle, Replacement, Start = 1, End = 0)
-	return replacetextEx(Haystack, Needle, Replacement, Start, End)
-
 #endif
 
 #define PUBLIC_GAME_MODE SSticker.master_mode
@@ -113,22 +101,17 @@
 
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 
-/proc/place_meta_charset(content)
-	if(istext(content))
-		content = "<meta charset=\"utf-8\">" + content
-	return content
-
 #define to_chat(target, message)                            target << (message)
 #define to_world(message)                                   world << (message)
 #define to_world_log(message)                               world.log << (message)
 #define sound_to(target, sound)                             target << (sound)
 #define to_file(file_entry, source_var)                     file_entry << (source_var)
 #define from_file(file_entry, target_var)                   file_entry >> (target_var)
-#define show_browser(target, browser_content, browser_name) target << browse(place_meta_charset(browser_content), browser_name)
+#define show_browser(target, browser_content, browser_name) target << browse(browser_content, browser_name)
 #define close_browser(target, browser_name)                 target << browse(null, browser_name)
 #define show_image(target, image)                           target << (image)
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
-#define open_link(target, url)                              target << link(url)
+#define open_link(target, url)             target << link(url)
 
 /proc/html_icon(var/thing) // Proc instead of macro to avoid precompiler problems.
 	. = "\icon[thing]"
