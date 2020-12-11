@@ -29,6 +29,11 @@
 
 /datum/goal/achievement/specific_object/food/New()
 	possible_objects = subtypesof(/obj/item/chems/food/snacks)
+	blacklisted_objects = blacklisted_objects || list()
+	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/amanita_pie)
+	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/amanitajelly)
+	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/canned/caviar/true)
+	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/old)
 	..()
 
 /datum/goal/achievement/specific_object/food/update_strings()

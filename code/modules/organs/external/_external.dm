@@ -232,6 +232,60 @@
 		child.show_decay_status(user)
 
 /obj/item/organ/external/attackby(obj/item/W, mob/user)
+	
+	var/obj/item/organ/external/E = W
+	if(BP_IS_PROSTHETIC(src) && istype(E) && BP_IS_PROSTHETIC(E))
+		
+		var/combined = FALSE
+		if(E.organ_tag == parent_organ) 
+
+			if(length(E.children))
+				to_chat(usr, SPAN_WARNING("You cannot connect additional limbs to \the [E]."))
+				return
+
+			var/mob/M = loc
+			if(istype(M))
+				M.unEquip(src, E)
+			else
+				dropInto(loc)
+				forceMove(E)
+	
+			if(loc != E)
+				return
+
+			LAZYDISTINCTADD(E.children, src)
+			parent = E
+			owner = E.owner
+			status &= ~ORGAN_CUT_AWAY
+			combined = TRUE
+
+		else if(E.parent_organ == organ_tag)
+
+			if(length(children))
+				to_chat(usr, SPAN_WARNING("You cannot connect additional limbs to \the [src]."))
+				return
+
+			if(!user.unEquip(E, src))
+				return
+
+			LAZYDISTINCTADD(children, E)
+			E.parent = src
+			E.owner = owner
+			E.status &= ~ORGAN_CUT_AWAY
+			combined = TRUE
+
+		else
+			to_chat(user, SPAN_WARNING("\The [E] cannot be connected to \the [src]."))
+			return
+
+		if(combined)
+			to_chat(user, SPAN_NOTICE("You connect \the [E] to \the [src]."))
+			compile_icon()
+			update_icon()
+			E.compile_icon()
+			E.update_icon()
+			return
+
 	switch(stage)
 		if(0)
 			if(W.sharp)

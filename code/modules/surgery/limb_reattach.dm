@@ -76,6 +76,7 @@
 	user.visible_message("<span class='notice'>[user] has attached [target]'s [E.name] to the [E.amputation_point].</span>",	\
 	"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
 	E.replaced(target)
+	E.status |= ORGAN_CUT_AWAY
 	target.update_body()
 	target.updatehealth()
 	target.UpdateDamageIcon()

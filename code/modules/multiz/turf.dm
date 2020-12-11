@@ -64,6 +64,10 @@
 	return TRUE
 
 /turf/simulated/open/attackby(obj/item/C, mob/user)
+
+	if(istype(C, /obj/item/grab))
+		return ..()
+
 	if (istype(C, /obj/item/stack/material/rods))
 
 		var/ladder = (locate(/obj/structure/ladder) in src)
