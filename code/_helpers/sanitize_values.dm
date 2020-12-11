@@ -43,6 +43,7 @@
 			else		return default
 	return default
 
+// UNICODE: Use text2num?
 /proc/sanitize_hexcolor(color, default="#000000")
 	if(!istext(color)) return default
 	var/len = length(color)
@@ -60,16 +61,18 @@
 
 //Valid format codes: YY, YEAR, MM, DD, hh, mm, ss, :, -. " " (space). Invalid format will return default.
 /proc/sanitize_time(time, default, format = "hh:mm")
+	var/static/list/time_fragments = list("YY", "YEAR", "MM", "DD", "hh", "mm", "ss")
+	var/static/list/separators = list(":", "-", " ")
 	if(!istext(time) || !(length(time) == length(format)))
 		return default
 	var/fragment = ""
 	. = list()
 	for(var/i = 1, i <= length(format), i++)
 		fragment += copytext(format,i,i+1)
-		if(fragment in list("YY", "YEAR", "MM", "DD", "hh", "mm", "ss"))
+		if(fragment in time_fragments)
 			. += sanitize_one_time(copytext(time, i - length(fragment) + 1, i + 1), copytext(default, i - length(fragment) + 1, i + 1), fragment)
 			fragment = ""
-		else if(fragment in list(":", "-", " "))
+		else if(fragment in separators)
 			. += fragment
 			fragment = ""
 	if(fragment)

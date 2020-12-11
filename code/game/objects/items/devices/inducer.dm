@@ -92,7 +92,7 @@
 	if(istype(A, /obj))
 		O = A
 	if(C)
-		var/length = 10
+		var/charge_length = 10
 		var/done_any = FALSE
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 		sparks.set_up(1, 1, user.loc)
@@ -103,13 +103,13 @@
 			return TRUE
 		user.visible_message("\The [user] starts recharging \the [A] with \the [src].","<span class='notice'>You start recharging \the [A] with \the [src].</span>")
 		if (istype(A, /obj/item/gun/energy))
-			length = 30
+			charge_length = 30
 			if (user.get_skill_value(SKILL_WEAPONS) <= SKILL_ADEPT)
-				length += rand(10, 30)
+				charge_length += rand(10, 30)
 		if (user.get_skill_value(SKILL_ELECTRICAL) < SKILL_ADEPT)
-			length += rand(40, 60)
+			charge_length += rand(40, 60)
 		while(C.charge < C.maxcharge)
-			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length, target = user))
+			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, charge_length, target = user))
 				if(CannotUse(user))
 					return TRUE
 				if(QDELETED(C))

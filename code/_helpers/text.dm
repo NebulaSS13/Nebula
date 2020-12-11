@@ -29,12 +29,11 @@
 		return
 
 	if(max_length)
-		//testing shows that just looking for > max_length alone will actually cut off the final character if message is precisely max_length, so >= instead
-		if(length(input) >= max_length)
-			var/overflow = ((length(input)+1) - max_length)
-			to_chat(usr, "<span class='warning'>Your message is too long by [overflow] character\s.</span>")
+		var/input_length = length_char(input)
+		if(input_length > max_length)
+			to_chat(usr, SPAN_WARNING("Your message is too long by [input_length - max_length] character\s."))
 			return
-		input = copytext(input,1,max_length)
+		input = copytext_char(input, 1, max_length + 1)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
@@ -129,6 +128,8 @@
 
 	return output
 
+// UNICODE: Convert to regex?
+
 //Used to strip text of everything but letters and numbers, make letters lowercase, and turn spaces into .'s.
 //Make sure the text hasn't been encoded if using this.
 /proc/sanitize_for_email(text)
@@ -154,6 +155,8 @@
 	if(dat[length(dat)] == ".")	//kill trailing .
 		dat.Cut(length(dat))
 	return jointext(dat, null)
+
+// UNICODE: Convert to regex?
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(var/text, var/max_length=512)
@@ -268,7 +271,7 @@
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+	return uppertext(copytext_char(t, 1, 2)) + copytext_char(t, 2)
 
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()

@@ -152,7 +152,7 @@ DBColumn
 	var/position //1-based index into item data
 	var/sql_type
 	var/flags
-	var/length
+	var/dblength
 	var/max_length
 
 DBColumn/New(name_handler,table_handler,position_handler,type_handler,flag_handler,length_handler,max_length_handler)
@@ -161,7 +161,7 @@ DBColumn/New(name_handler,table_handler,position_handler,type_handler,flag_handl
 	src.position = position_handler
 	src.sql_type = type_handler
 	src.flags = flag_handler
-	src.length = length_handler
+	src.dblength = length_handler
 	src.max_length = max_length_handler
 	return ..()
 
