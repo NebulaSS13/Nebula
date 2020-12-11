@@ -191,17 +191,17 @@
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(
-		/obj/item/chems/food/drinks/coffee = 15,
-		/obj/item/chems/food/drinks/tea/black = 15,
-		/obj/item/chems/food/drinks/tea/green = 15,
-		/obj/item/chems/food/drinks/tea/chai = 15,
-		/obj/item/chems/food/drinks/h_chocolate = 10,
-		/obj/item/chems/food/condiment/small/packet/sugar = 25,
-		/obj/item/chems/pill/pod/cream = 25,
-		/obj/item/chems/pill/pod/cream_soy = 25,
-		/obj/item/chems/pill/pod/orange = 10,
-		/obj/item/chems/pill/pod/mint = 10,
-		/obj/item/chems/food/drinks/ice = 10
+		/obj/item/chems/food/drinks/coffee = 5,
+		/obj/item/chems/food/drinks/tea/black = 10,
+		/obj/item/chems/food/drinks/tea/green = 10,
+		/obj/item/chems/food/drinks/tea/chai = 10,
+		/obj/item/chems/food/drinks/h_chocolate = 5,
+		/obj/item/chems/food/condiment/small/packet/sugar = 20,
+		/obj/item/chems/pill/pod/cream = 20,
+		/obj/item/chems/pill/pod/cream_soy = 20,
+		/obj/item/chems/pill/pod/orange = 5,
+		/obj/item/chems/pill/pod/mint = 5,
+		/obj/item/chems/food/drinks/ice = 5
 	)
 
 /obj/machinery/vending/coffee/on_update_icon()
