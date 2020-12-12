@@ -27,7 +27,7 @@ datum/preferences
 	to_file(S["name_is_always_random"],   pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
-	var/datum/species/S =   get_species_by_key(pref.species) || get_species_by_key(GLOB.using_map.default_species)
+	var/decl/species/S =   get_species_by_key(pref.species) || get_species_by_key(GLOB.using_map.default_species)
 	pref.age                = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
 	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
@@ -56,7 +56,7 @@ datum/preferences
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
-	var/datum/species/S = get_species_by_key(pref.species)
+	var/decl/species/S = get_species_by_key(pref.species)
 
 	if(href_list["rename"])
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null

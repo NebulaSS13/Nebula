@@ -3,7 +3,7 @@
 // used for slimes but it may be useful for changelings later.
 var/list/wrapped_species_by_ref = list()
 
-/datum/species/shapeshifter
+/decl/species/shapeshifter
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/shapeshifter_select_shape,
@@ -15,87 +15,87 @@ var/list/wrapped_species_by_ref = list()
 	var/monochromatic
 	var/default_form
 
-/datum/species/shapeshifter/New()
+/decl/species/shapeshifter/New()
 	default_form = GLOB.using_map.default_species
 	valid_transform_species |= default_form
 	..()
 
-/datum/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
 	return valid_transform_species
 
-/datum/species/shapeshifter/get_icobase(var/mob/living/carbon/human/H, var/get_deform)
+/decl/species/shapeshifter/get_icobase(var/mob/living/carbon/human/H, var/get_deform)
 	if(!H) return ..(null, get_deform)
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_icobase(H, get_deform)
 
-/datum/species/shapeshifter/get_icon_cache_uid(var/mob/H)
+/decl/species/shapeshifter/get_icon_cache_uid(var/mob/H)
 	. = ..()
 	if(H)
 		. = "[.]-[wrapped_species_by_ref["\ref[H]"]]"
 
-/datum/species/shapeshifter/get_bodytype(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_bodytype(var/mob/living/carbon/human/H)
 	if(!H) return ..()
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_bodytype(H)
 
-/datum/species/shapeshifter/get_root_species_name(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_root_species_name(var/mob/living/carbon/human/H)
 	if(!H) return ..()
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_root_species_name(H)
 
-/datum/species/shapeshifter/get_blood_mask(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_blood_mask(var/mob/living/carbon/human/H)
 	if(!H) return ..()
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_blood_mask(H)
 
-/datum/species/shapeshifter/get_damage_mask(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_damage_mask(var/mob/living/carbon/human/H)
 	if(!H) return ..()
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_damage_mask(H)
 
-/datum/species/shapeshifter/get_damage_overlays(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_damage_overlays(var/mob/living/carbon/human/H)
 	if(!H) return ..()
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_damage_overlays(H)
 
-/datum/species/shapeshifter/get_tail(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_tail(var/mob/living/carbon/human/H)
 	if(!H) return ..()
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_tail(H)
 
-/datum/species/shapeshifter/get_tail_animation(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_tail_animation(var/mob/living/carbon/human/H)
 	if(!H) return ..()
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_tail_animation(H)
 
-/datum/species/shapeshifter/get_tail_hair(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_tail_hair(var/mob/living/carbon/human/H)
 	if(!H) return ..()
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_tail_hair(H)
 
-/datum/species/shapeshifter/get_husk_icon(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/get_husk_icon(var/mob/living/carbon/human/H)
 	if(H)
-		var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+		var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 		if(S) return S.get_husk_icon(H)
 	 return ..()
 
-/datum/species/shapeshifter/handle_pre_spawn(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/handle_pre_spawn(var/mob/living/carbon/human/H)
 	..()
 	wrapped_species_by_ref["\ref[H]"] = default_form
 
-/datum/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(monochromatic)
 		H.hair_colour = H.skin_colour
 		H.facial_hair_colour = H.skin_colour
 	..()
 
-/datum/species/shapeshifter/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
 	if(H && istype(E))
 		E.sync_colour_to_human(H)
 
-/datum/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
-	var/datum/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
+/decl/species/shapeshifter/get_pain_emote(var/mob/living/carbon/human/H, var/pain_power)
+	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_pain_emote(H, pain_power)
 
 // Verbs follow.
@@ -171,7 +171,7 @@ var/list/wrapped_species_by_ref = list()
 
 	skin_colour = new_skin
 
-	var/datum/species/shapeshifter/S = species
+	var/decl/species/shapeshifter/S = species
 	if(S.monochromatic)
 		hair_colour = skin_colour
 		facial_hair_colour = skin_colour

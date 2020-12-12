@@ -152,7 +152,7 @@ client
 		else if(H.real_name)
 			corpses += H.real_name
 	for(var/spec in monkies)
-		var/datum/species/S = get_species_by_key(spec)
+		var/decl/species/S = get_species_by_key(spec)
 		corpses += "[monkies[spec]] [lowertext(monkies[spec] > 1 ? S.name_plural : S.name)]"
 	if(corpses.len)
 		titles += "<center>BASED ON REAL EVENTS<br>In memory of [english_list(corpses)].</center>"

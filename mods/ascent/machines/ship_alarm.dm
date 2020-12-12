@@ -36,7 +36,7 @@ MANTIDIFY(/obj/machinery/alarm, "mantid thermostat", "atmospherics")
 /datum/fabricator_recipe/engineering/airalarm_kit/ascent
 	path = /obj/item/frame/air_alarm/ascent/kit
 	species_locked = list(
-		/datum/species/mantid
+		/decl/species/mantid
 	)
 
 /obj/item/stock_parts/circuitboard/air_alarm/ascent
@@ -46,5 +46,5 @@ MANTIDIFY(/obj/machinery/alarm, "mantid thermostat", "atmospherics")
 /datum/fabricator_recipe/engineering/airalarm/ascent
 	path = /obj/item/stock_parts/circuitboard/air_alarm/ascent
 	species_locked = list(
-		/datum/species/mantid
+		/decl/species/mantid
 	)

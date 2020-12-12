@@ -106,7 +106,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if(!pref.species || !(pref.species in get_playable_species()))
 		pref.species = GLOB.using_map.default_species
 
-	var/datum/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 
 	var/low_skin_tone = mob_species ? (35 - mob_species.max_skin_tone()) : -185
 	sanitize_integer(pref.skin_tone, low_skin_tone, 34, initial(pref.skin_tone))
@@ -144,7 +144,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/category_item/player_setup_item/physical/body/content(var/mob/user)
 	. = list()
 
-	var/datum/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/title = "<b>Species<a href='?src=\ref[src];show_species=1'><small>?</small></a>:</b> <a href='?src=\ref[src];set_species=1'>[mob_species.name]</a>"
 	var/append_text = "<a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a>"
 	. += "<hr>"
@@ -290,12 +290,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	. = jointext(.,null)
 
-/datum/category_item/player_setup_item/physical/body/proc/has_flag(var/datum/species/mob_species, var/flag)
+/datum/category_item/player_setup_item/physical/body/proc/has_flag(var/decl/species/mob_species, var/flag)
 	return mob_species && (mob_species.appearance_flags & flag)
 
 /datum/category_item/player_setup_item/physical/body/OnTopic(var/href,var/list/href_list, var/mob/user)
 
-	var/datum/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 	if(href_list["toggle_species_verbose"])
 		hide_species = !hide_species
 		return TOPIC_REFRESH
@@ -323,7 +323,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["show_species"])
 		var/choice = input("Which species would you like to look at?") as null|anything in get_playable_species()
 		if(choice)
-			var/datum/species/current_species = get_species_by_key(choice)
+			var/decl/species/current_species = get_species_by_key(choice)
 			show_browser(user, current_species.get_description(), "window=species;size=700x400")
 			return TOPIC_HANDLED
 
@@ -332,7 +332,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/list/species_to_pick = list()
 		for(var/species in get_playable_species())
 			if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
-				var/datum/species/current_species = get_species_by_key(species)
+				var/decl/species/current_species = get_species_by_key(species)
 				if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
 					continue
 				else if((current_species.spawn_flags & SPECIES_IS_WHITELISTED) && !is_alien_whitelisted(preference_mob(),current_species))
@@ -540,7 +540,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.rlimb_data[second_limb] = null
 
 			if("Prosthesis")
-				var/datum/species/temp_species = get_species_by_key(pref.species || GLOB.using_map.default_species)
+				var/decl/species/temp_species = get_species_by_key(pref.species || GLOB.using_map.default_species)
 				var/tmp_bodytype = temp_species.get_bodytype(user)
 				var/list/usable_manufacturers = list()
 				for(var/company in chargen_robolimbs)
@@ -647,7 +647,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	ResetFacialHair()
 
 /datum/category_item/player_setup_item/proc/ResetHair()
-	var/datum/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/list/valid_hairstyles = mob_species.get_hair_styles()
 
 	if(valid_hairstyles.len)
@@ -657,7 +657,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.h_style = GLOB.hair_styles_list["Bald"]
 
 /datum/category_item/player_setup_item/proc/ResetFacialHair()
-	var/datum/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(pref.gender)
 
 	if(valid_facialhairstyles.len)
@@ -667,7 +667,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.f_style = GLOB.facial_hair_styles_list["Shaved"]
 
 /datum/category_item/player_setup_item/physical/body/proc/sanitize_organs()
-	var/datum/species/mob_species = get_species_by_key(pref.species)
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 	if(mob_species && mob_species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
 		for(var/name in pref.organ_data)
 			var/status = pref.organ_data[name]

@@ -4,7 +4,7 @@
 /datum/unit_test/culture/start_test()
 	var/fails = 0
 	for(var/species_name in get_all_species())
-		var/datum/species/species = get_species_by_key(species_name)
+		var/decl/species/species = get_species_by_key(species_name)
 		if(!islist(species.default_cultural_info))
 			fails++
 			log_bad("Default cultural info for [species_name] is not a list.")

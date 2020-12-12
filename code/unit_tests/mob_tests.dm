@@ -27,7 +27,7 @@
 	if(!isspaceturf(T))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
 	for(var/species_name in get_all_species())
-		var/datum/species/S = get_species_by_key(species_name)
+		var/decl/species/S = get_species_by_key(species_name)
 		var/mob/living/carbon/human/H = new(T, S.name)
 		if(H.need_breathe())
 			var/species_organ = H.species.breathing_organ
@@ -303,7 +303,7 @@ datum/unit_test/mob_damage/halloss
 
 /datum/unit_test/species_base_skin/start_test()
 	for(var/species_name in get_all_species())
-		var/datum/species/S = get_species_by_key(species_name)
+		var/decl/species/S = get_species_by_key(species_name)
 		if(S.base_skin_colours)
 			if(!(S.appearance_flags & HAS_BASE_SKIN_COLOURS))
 				log_unit_test("[S.name] has a skin colour list but no HAS_BASE_SKIN_COLOURS flag.")

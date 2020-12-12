@@ -1,4 +1,4 @@
-/datum/species/mantid
+/decl/species/mantid
 
 	name =                   SPECIES_MANTID_ALATE
 	name_plural =            "Kharmaan Alates"
@@ -114,24 +114,24 @@
 			list(/decl/emote/visible/ascent_flicker, /decl/emote/visible/ascent_glint) = 20,
 		)
 
-///datum/species/mantid/New()
+///decl/species/mantid/New()
 	//..()
 	//LAZYINITLIST(limb_mapping)
 	//LAZYDISTINCTADD(limb_mapping, BP_CHEST, BP_M_HAND)
 
-/datum/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
+/decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 
-/datum/species/mantid/get_blood_name()
+/decl/species/mantid/get_blood_name()
 	return "hemolymph"
 
-/datum/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+/decl/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= ORGAN_CRYSTAL
 
-/datum/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
+/decl/species/mantid/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 1)
 	return
 
-/datum/species/mantid/gyne
+/decl/species/mantid/gyne
 
 	name =                    SPECIES_MANTID_GYNE
 	name_plural =             "Kharmaan Gynes"
@@ -178,7 +178,7 @@
 		TAG_RELIGION =  RELIGION_KHARMAANI
 	)
 
-/datum/species/mantid/gyne/New()
+/decl/species/mantid/gyne/New()
 	equip_adjust = list(
 		BP_L_HAND = list(
 			"[NORTH]" = list("x" = -4, "y" = 12),
@@ -208,7 +208,7 @@
 		"belt" =         list("loc" = ui_belt,      "name" = "Belt",         "slot" = slot_belt_str,      "state" = "belt")
 		)
 
-/datum/species/serpentid
+/decl/species/serpentid
 	name = SPECIES_SERPENTID
 	name_plural = "Serpentids"
 	spawn_flags = SPECIES_IS_RESTRICTED
@@ -310,7 +310,7 @@
 			list(/decl/emote/audible/bug_hiss) = 40
 	)
 
-/datum/species/serpentid/New()
+/decl/species/serpentid/New()
 	..()
 	//LAZYINITLIST(limb_mapping)
 	//LAZYDISTINCTADD(limb_mapping, BP_L_HAND, BP_L_HAND_UPPER)
@@ -326,10 +326,10 @@
 		slot_glasses_str = list("[NORTH]" = list("x" =  0, "y" = 10), "[EAST]" = list("x" = 0, "y" = 11), "[SOUTH]" = list("x" =  0, "y" = 11), "[WEST]" = list("x" =  0, "y" = 11))
 	)
 
-/datum/species/serpentid/get_blood_name()
+/decl/species/serpentid/get_blood_name()
 	return "haemolymph"
 
-/datum/species/serpentid/can_overcome_gravity(var/mob/living/carbon/human/H)
+/decl/species/serpentid/can_overcome_gravity(var/mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 
 	if(mixture)
@@ -342,12 +342,12 @@
 
 	return FALSE
 
-/datum/species/serpentid/handle_environment_special(var/mob/living/carbon/human/H)
+/decl/species/serpentid/handle_environment_special(var/mob/living/carbon/human/H)
 	if(!H.on_fire && H.fire_stacks < 2)
 		H.fire_stacks += 0.2
 	return
 
-/datum/species/serpentid/can_fall(var/mob/living/carbon/human/H)
+/decl/species/serpentid/can_fall(var/mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 	var/turf/T = GetBelow(H.loc)
 	for(var/obj/O in T)
@@ -359,7 +359,7 @@
 			return FALSE
 	return TRUE
 
-/datum/species/serpentid/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
+/decl/species/serpentid/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 	var/turf/T = GetBelow(H.loc)
@@ -379,13 +379,13 @@
 
 	return FALSE
 
-/datum/species/serpentid/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
+/decl/species/serpentid/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
 	if(!H.handcuffed || H.buckled)
 		return ..(H, ignore_intent, TRUE)
 	else
 		return 0
 
-/datum/species/serpentid/handle_movement_delay_special(var/mob/living/carbon/human/H)
+/decl/species/serpentid/handle_movement_delay_special(var/mob/living/carbon/human/H)
 	var/tally = 0
 
 	H.remove_cloaking_source(src)
@@ -396,7 +396,7 @@
 		tally += N.lowblood_tally * 2
 	return tally
 
-/datum/species/serpentid/update_skin(var/mob/living/carbon/human/H)
+/decl/species/serpentid/update_skin(var/mob/living/carbon/human/H)
 
 	if(H.stat)
 		H.skin_state = SKIN_NORMAL
@@ -435,7 +435,7 @@
 			return(threat_image)
 
 
-/datum/species/serpentid/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+/decl/species/serpentid/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
 	if(attacker.pulling_punches || target.lying || attacker == target)
 		return ..(attacker, target)
 	if(world.time < attacker.last_attack + 20)
@@ -452,7 +452,7 @@
 	if(prob(50))
 		target.set_dir(GLOB.reverse_dir[target.dir])
 
-/datum/species/serpentid/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
+/decl/species/serpentid/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
 		if(0 to 18) 	. = 8
 		if(19 to 27) 	. = 2

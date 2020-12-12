@@ -67,7 +67,7 @@
 					continue
 
 
-				var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/datum/species/mantid, 1000, 9999) : random_id(/datum/species/mantid, 10000, 99999)
+				var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/decl/species/mantid, 1000, 9999) : random_id(/decl/species/mantid, 10000, 99999)
 				H.fully_replace_character_name("[new_alate_number] [new_name]")
 				to_chat(H, SPAN_NOTICE("<font size = 3>Your gyne, [real_name], has awakened, and you recall your place in the nest-lineage: <b>[H.real_name]</b>.</font>"))
 
@@ -136,10 +136,10 @@
 		H.set_species(set_species_on_join)
 	switch(H.species.name)
 		if(SPECIES_MANTID_GYNE)
-			H.real_name = "[random_id(/datum/species/mantid, 1, 99)] [cutter.gyne_name]"
+			H.real_name = "[random_id(/decl/species/mantid, 1, 99)] [cutter.gyne_name]"
 			H.verbs |= /mob/living/carbon/human/proc/gyne_rename_lineage
 		if(SPECIES_MANTID_ALATE)
-			var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/datum/species/mantid, 1000, 9999) : random_id(/datum/species/mantid, 10000, 99999)
+			var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/decl/species/mantid, 1000, 9999) : random_id(/decl/species/mantid, 10000, 99999)
 			H.real_name = "[new_alate_number] [cutter.gyne_name]"
 	H.name = H.real_name
 	if(H.mind)

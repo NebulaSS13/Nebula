@@ -129,7 +129,7 @@
 /mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
 	for(var/current_species_name in get_all_species())
-		var/datum/species/current_species = get_species_by_key(current_species_name)
+		var/decl/species/current_species = get_species_by_key(current_species_name)
 
 		if(check_whitelist) //If we're using the whitelist, make sure to check it!
 			if((current_species.spawn_flags & SPECIES_IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))

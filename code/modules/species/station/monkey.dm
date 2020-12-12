@@ -1,4 +1,4 @@
-/datum/species/monkey
+/decl/species/monkey
 	name = SPECIES_MONKEY
 	name_plural = "Monkeys"
 	description = "Ook."
@@ -56,7 +56,7 @@
 
 	ai = /datum/ai/monkey
 
-/datum/species/monkey/New()
+/decl/species/monkey/New()
 	equip_adjust = list(
 		BP_L_HAND = list("[NORTH]" = list("x" = 1, "y" = 3), "[EAST]" = list("x" = -3, "y" = 2), "[SOUTH]" = list("x" = -1, "y" = 3), "[WEST]" = list("x" = 3, "y" = 2)),
 		BP_R_HAND = list("[NORTH]" = list("x" = -1, "y" = 3), "[EAST]" = list("x" = 3, "y" = 2), "[SOUTH]" = list("x" = 1, "y" = 3), "[WEST]" = list("x" = -3, "y" = 2)),

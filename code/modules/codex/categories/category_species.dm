@@ -4,7 +4,7 @@
 
 /decl/codex_category/species/Initialize()
 	for(var/thing in get_all_species())
-		var/datum/species/species = get_species_by_key(thing)
+		var/decl/species/species = get_species_by_key(thing)
 		if(!species.hidden_from_codex)
 			var/datum/codex_entry/entry = new(_display_name = "[species.name] (species)")
 			entry.lore_text = species.codex_description

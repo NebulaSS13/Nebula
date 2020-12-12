@@ -100,7 +100,7 @@ GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
 	new_nymph.loc = src
 	new_nymph.lastarea = get_area(src)
 	new_nymph.key = C.ckey
-	new_nymph.real_name = "[random_id(/datum/species/mantid, 10000, 99999)] [lineage]"
+	new_nymph.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [lineage]"
 	hatching = TRUE
 	update_icon()
 	visible_message(SPAN_NOTICE("\icon[src] \The [src] trembles and cracks as it begins to hatch."))
