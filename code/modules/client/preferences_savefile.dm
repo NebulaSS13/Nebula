@@ -53,6 +53,7 @@
 		S.cd = GLOB.using_map.character_load_path(S, default_slot)
 
 	loaded_character = S
+	clear_character_previews() // Recalculate them on next show
 
 	return 1
 
