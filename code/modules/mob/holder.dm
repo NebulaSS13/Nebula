@@ -216,11 +216,11 @@ var/list/holder_mob_icon_cache = list()
 				mob_icon.Blend(skin_colour, ICON_ADD)
 				var/icon/hair_icon = icon(icon, "[species_name]_holder_[cache_entry]_hair")
 				hair_icon.Blend(hair_colour, ICON_ADD)
-				var/icon/eyes_icon = icon(icon, "[species_name]_holder_[cache_entry]_eyes")
-				eyes_icon.Blend(eye_colour, ICON_ADD)
-
-				// Blend them together.
-				mob_icon.Blend(eyes_icon, ICON_OVERLAY)
+				var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[BP_EYES]
+				if(eyes)
+					var/icon/eyes_icon = icon(icon, "[species_name]_holder_[cache_entry]_eyes")
+					eyes_icon.Blend(eye_colour, (eyes.eye_blend || ICON_ADD))
+					mob_icon.Blend(eyes_icon, ICON_OVERLAY)
 				mob_icon.Blend(hair_icon, ICON_OVERLAY)
 
 				// Add to the cache.
