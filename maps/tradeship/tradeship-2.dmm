@@ -6988,7 +6988,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "Np" = (
-/obj/machinery/requests_console{
+/obj/machinery/network/requests_console{
 	announcementConsole = 1;
 	department = "Captain";
 	pixel_x = 0;

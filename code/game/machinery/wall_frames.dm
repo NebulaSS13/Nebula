@@ -173,7 +173,7 @@
 	desc = "Used for building request consoles."
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
-	build_machine_type = /obj/machinery/requests_console
+	build_machine_type = /obj/machinery/network/requests_console
 
 /obj/item/frame/stock_offset/request_console/kit
 	fully_construct = TRUE
