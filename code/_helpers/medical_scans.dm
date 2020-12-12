@@ -312,7 +312,7 @@
 			else if(I["is_bruised"])
 				row += "<td><span class='average'>Moderate</span></td>"
 			else if(I["is_damaged"])
-				row += "<td>Minor</td>"
+				row += "<td><span class='mild'>Minor</span></td>"
 			else
 				row += "<td>None</td>"
 			row += "<td>"
@@ -367,7 +367,6 @@
 /proc/get_severity(amount, var/tag = FALSE)
 	if(!amount)
 		return "none"
-	. = "minor"
 	if(amount > 50)
 		if(tag)
 			. = "<span class='bad'>severe</span>"
@@ -383,3 +382,8 @@
 			. = "<span class='average'>moderate</span>"
 		else
 			. = "moderate"
+	else
+		if (tag)
+			.= "<span class='mild'>minor</span>"
+		else
+			.= "minor"
