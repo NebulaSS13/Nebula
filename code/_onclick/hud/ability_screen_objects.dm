@@ -170,7 +170,7 @@
 /obj/screen/ability/on_update_icon()
 	overlays.Cut()
 	icon_state = "[background_base_state]_spell_base"
-	
+
 	overlays += ability_icon_state
 
 /obj/screen/ability/Click()
