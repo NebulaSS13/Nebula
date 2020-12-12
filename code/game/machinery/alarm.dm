@@ -159,7 +159,7 @@
 
 	GLOB.name_set_event.register(alarm_area, src, .proc/change_area_name)
 	set_frequency(frequency)
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/alarm/get_req_access()
 	if(!locked)
@@ -870,7 +870,16 @@ FIRE ALARM
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
-			overlays += image(sl.icon, sl.overlay_alarm)
+
+			if(sl.alarm_appearance.alarm_icon)
+				var/image/alert1 = image(sl.icon, sl.alarm_appearance.alarm_icon)
+				alert1.color = sl.alarm_appearance.alarm_icon_color
+				overlays |= alert1
+
+			if(sl.alarm_appearance.alarm_icon_twotone)
+				var/image/alert2 = image(sl.icon, sl.alarm_appearance.alarm_icon_twotone)
+				alert2.color = sl.alarm_appearance.alarm_icon_twotone_color
+				overlays |= alert2
 		else
 			overlays += get_cached_overlay("fire0")
 

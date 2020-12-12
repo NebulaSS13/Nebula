@@ -165,9 +165,22 @@
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	var/decl/security_level/sl = security_state.current_security_level
 
-	var/image/alert = image(sl.icon, sl.overlay_status_display)
 	set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
-	overlays |= alert
+
+	if(sl.alarm_appearance.display_icon)
+		var/image/alert1 = image(sl.icon, sl.alarm_appearance.display_icon)
+		alert1.color = sl.alarm_appearance.display_icon_color
+		overlays |= alert1
+
+	if(sl.alarm_appearance.display_icon_twotone)
+		var/image/alert2 = image(sl.icon, sl.alarm_appearance.display_icon_twotone)
+		alert2.color = sl.alarm_appearance.display_icon_twotone_color
+		overlays |= alert2
+
+	if(sl.alarm_appearance.display_emblem)
+		var/image/alert3 = image(sl.icon, sl.alarm_appearance.display_emblem)
+		alert3.color = sl.alarm_appearance.display_emblem_color
+		overlays |= alert3
 
 /obj/machinery/status_display/proc/set_picture(state)
 	remove_display()

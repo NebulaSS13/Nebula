@@ -3208,6 +3208,7 @@
 #include "code\unit_tests\music_test.dm"
 #include "code\unit_tests\organ_tests.dm"
 #include "code\unit_tests\power_tests.dm"
+#include "code\unit_tests\security_state.dm"
 #include "code\unit_tests\seed_tests.dm"
 #include "code\unit_tests\shuttle_tests.dm"
 #include "code\unit_tests\submaps.dm"
