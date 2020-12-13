@@ -40,7 +40,6 @@
 		return
 	..()
 
-
 /obj/item/organ/internal/augment/proc/update_parent_organ()
 	//This tries to match a parent organ to an augment slot
 	//This is intended to match the possible positions to a parent organ

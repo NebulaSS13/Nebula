@@ -18,6 +18,7 @@
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
 	var/datum/dna/dna                 // Original DNA.
 	var/decl/species/species         // Original species.
+	var/list/ailments                 // Current active ailments if any.
 
 	// Damage vars.
 	var/damage = 0                    // Current damage to the organ
@@ -29,6 +30,7 @@
 /obj/item/organ/Destroy()
 	owner = null
 	dna = null
+	QDEL_NULL_LIST(ailments)
 	return ..()
 
 /obj/item/organ/proc/refresh_action_button()
@@ -284,13 +286,20 @@
 	owner.client?.screen -= src
 	owner = null
 
+	for(var/datum/ailment/ailment in ailments)
+		if(ailment.timer_id)
+			deltimer(ailment.timer_id)
+			ailment.timer_id = null
+
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
 	owner = target
 	action_button_name = initial(action_button_name)
 	forceMove(owner) //just in case
 	if(BP_IS_PROSTHETIC(src))
 		set_dna(owner.dna)
-	return 1
+	for(var/datum/ailment/ailment in ailments)
+		ailment.begin_malfunction()
+	return TRUE
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(status & ORGAN_PROSTHETIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
@@ -384,3 +393,30 @@
 
 /obj/item/organ/proc/get_mechanical_assisted_descriptor()
 	return "mechanically-assisted [name]"
+
+var/list/ailment_reference_cache = list()
+/obj/item/organ/proc/get_possible_ailments()
+	. = list()
+	for(var/ailment_type in subtypesof(/datum/ailment))
+		var/datum/ailment/ailment = ailment_type
+		if(initial(ailment.category) == ailment_type)
+			continue
+		if(!global.ailment_reference_cache[ailment_type])
+			global.ailment_reference_cache[ailment_type] = new ailment_type
+		ailment = global.ailment_reference_cache[ailment_type]
+		if(ailment.can_apply_to(src))
+			. += ailment_type
+	for(var/datum/ailment/ailment in ailments)
+		. -= ailment.type
+
+/obj/item/organ/emp_act(severity)
+	. = ..()
+	if(BP_IS_PROSTHETIC(src))
+		if(length(ailments) < 3 && prob(15 - (5 * length(ailments))))
+			var/list/possible_ailments = get_possible_ailments()
+			if(length(possible_ailments))
+				var/ailment_type = pick(possible_ailments)
+				add_ailment(ailment_type)
+
+/obj/item/organ/proc/add_ailment(var/ailment_type)
+	LAZYADD(ailments, new ailment_type(src))
