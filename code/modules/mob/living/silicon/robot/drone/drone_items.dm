@@ -28,6 +28,14 @@
 
 	var/obj/item/wrapped = null // Item currently being held.
 
+// Ensures any removed items are actually removed from the gripper
+/obj/item/forceMove(atom/dest)
+	if (istype(loc, /obj/item/gripper))
+		var/obj/item/gripper/gripper = loc
+		gripper.wrapped = null
+
+	. = ..(dest)
+
 // VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
 /obj/item/gripper/miner
 	name = "drill maintenance gripper"

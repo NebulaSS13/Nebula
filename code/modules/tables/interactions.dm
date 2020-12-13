@@ -85,10 +85,7 @@
 		return ..()
 
 	// Handle dismantling or placing things on the table from here on.
-	if(isrobot(user))
-		return
-
-	if(W.loc != user) // This should stop mounted modules ending up outside the module.
+	if(isrobot(user) && W.loc == user)
 		return
 
 	if(W.is_special_cutting_tool())
