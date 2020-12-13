@@ -89,6 +89,7 @@
 	damage = max_damage
 	status |= ORGAN_DEAD
 	STOP_PROCESSING(SSobj, src)
+	QDEL_NULL_LIST(ailments)
 	death_time = world.time
 	if(owner && vital)
 		owner.death()
@@ -127,6 +128,22 @@
 		handle_antibiotics()
 		handle_rejection()
 		handle_germ_effects()
+
+	if(owner && length(ailments))
+		for(var/datum/ailment/ailment in ailments)
+			if(!ailment.treated_by_reagent_type)
+				continue
+			var/treated
+			if(REAGENT_VOLUME(owner.bloodstr, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+				treated = owner.bloodstr
+			else if(REAGENT_VOLUME(owner.reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+				treated = owner.reagents
+			else
+				var/datum/reagents/ingested = owner.get_ingested_reagents()
+				if(ingested && REAGENT_VOLUME(ingested, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+					treated = ingested
+			if(treated)
+				ailment.was_treated_by_medication(treated)
 
 	//check if we've hit max_damage
 	if(damage >= max_damage)
@@ -298,7 +315,7 @@
 	if(BP_IS_PROSTHETIC(src))
 		set_dna(owner.dna)
 	for(var/datum/ailment/ailment in ailments)
-		ailment.begin_malfunction()
+		ailment.begin_ailment_event()
 	return TRUE
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
@@ -395,15 +412,20 @@
 	return "mechanically-assisted [name]"
 
 var/list/ailment_reference_cache = list()
+/proc/get_ailment_reference(var/ailment_type)
+	if(!ispath(ailment_type, /datum/ailment))
+		return
+	if(!global.ailment_reference_cache[ailment_type])
+		global.ailment_reference_cache[ailment_type] = new ailment_type
+	return global.ailment_reference_cache[ailment_type]
+
 /obj/item/organ/proc/get_possible_ailments()
 	. = list()
 	for(var/ailment_type in subtypesof(/datum/ailment))
 		var/datum/ailment/ailment = ailment_type
 		if(initial(ailment.category) == ailment_type)
 			continue
-		if(!global.ailment_reference_cache[ailment_type])
-			global.ailment_reference_cache[ailment_type] = new ailment_type
-		ailment = global.ailment_reference_cache[ailment_type]
+		ailment = get_ailment_reference(ailment_type)
 		if(ailment.can_apply_to(src))
 			. += ailment_type
 	for(var/datum/ailment/ailment in ailments)
@@ -415,8 +437,25 @@ var/list/ailment_reference_cache = list()
 		if(length(ailments) < 3 && prob(15 - (5 * length(ailments))))
 			var/list/possible_ailments = get_possible_ailments()
 			if(length(possible_ailments))
-				var/ailment_type = pick(possible_ailments)
-				add_ailment(ailment_type)
+				add_ailment(pick(possible_ailments))
 
-/obj/item/organ/proc/add_ailment(var/ailment_type)
-	LAZYADD(ailments, new ailment_type(src))
+/obj/item/organ/proc/add_ailment(var/datum/ailment/ailment)
+	if(ispath(ailment, /datum/ailment))
+		ailment = get_ailment_reference(ailment)
+	if(!istype(ailment) || !ailment.can_apply_to(src))
+		return FALSE
+	LAZYADD(ailments, new ailment.type(src))
+	return TRUE
+
+/obj/item/organ/proc/remove_ailment(var/datum/ailment/ailment)
+	if(ispath(ailment, /datum/ailment))
+		for(var/datum/ailment/ext_ailment in ailments)
+			if(ailment == ext_ailment.type)
+				LAZYREMOVE(ailments, ext_ailment)
+				return TRUE
+	else if(istype(ailment))
+		for(var/datum/ailment/ext_ailment in ailments)
+			if(ailment == ext_ailment)
+				LAZYREMOVE(ailments, ext_ailment)
+				return TRUE
+	return FALSE

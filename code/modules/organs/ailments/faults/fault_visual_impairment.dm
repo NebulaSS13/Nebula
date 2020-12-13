@@ -1,4 +1,5 @@
 /datum/ailment/fault/visual_impair
+	name = "visual impairment"
 	applies_to_organ = list(
 		BP_HEAD, 
 		BP_AUGMENT_HEAD

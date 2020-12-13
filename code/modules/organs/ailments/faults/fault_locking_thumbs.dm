@@ -1,4 +1,5 @@
 /datum/ailment/fault/locking_thumbs
+	name = "self-locking thumbs"
 	applies_to_organ = list(
 		BP_L_ARM,
 		BP_L_HAND, 
@@ -10,7 +11,7 @@
 		BP_AUGMENT_L_HAND
 	)
 
-/datum/ailment/fault/locking_thumbs/on_malfunction()
+/datum/ailment/fault/locking_thumbs/on_ailment_event()
 	var/slot = null
 	switch (organ.organ_tag)
 		if (BP_L_ARM, BP_L_HAND, BP_AUGMENT_L_HAND, BP_AUGMENT_L_ARM)

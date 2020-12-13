@@ -611,6 +611,8 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/proc/need_process()
 	if(get_pain())
 		return 1
+	if(length(ailments))
+		return 1
 	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED))
 		return 1
 	if((brute_dam || burn_dam) && !BP_IS_PROSTHETIC(src)) //Robot limbs don't autoheal and thus don't need to process when damaged
@@ -626,21 +628,18 @@ This function completely restores a damaged organ to perfect condition.
 
 /obj/item/organ/external/Process()
 	if(owner)
-
 		if(pain)
 			pain -= owner.lying ? 3 : 1
 			if(pain<0)
 				pain = 0
-
 		// Process wounds, doing healing etc. Only do this every few ticks to save processing power
 		if(owner.life_tick % wound_update_accuracy == 0)
 			update_wounds()
-
 		//Infections
 		update_germs()
 	else
 		pain = 0
-		..()
+	..()
 
 //Updating germ levels. Handles organ germ levels and necrosis.
 /*
@@ -1474,3 +1473,8 @@ obj/item/organ/external/proc/remove_clamps()
 
 /obj/item/organ/external/proc/has_growths()
 	return FALSE
+
+/obj/item/organ/external/add_ailment(var/datum/ailment/ailment)
+	. = ..()
+	if(. && owner)
+		owner.bad_external_organs |= src

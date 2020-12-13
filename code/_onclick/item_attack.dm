@@ -63,13 +63,20 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return I.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
-	if(user == src && zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
+	if(user == src && user.zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)
 			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
 			return TRUE
 		if(devour(I))
 			return TRUE
+	if(user.a_intent == I_HELP)
+		var/obj/item/organ/external/E = get_organ(user.zone_sel.selecting)
+		if(istype(E) && !E.is_stump())
+			for(var/datum/ailment/ailment in E.ailments)
+				if(ailment.treated_by_item(I))
+					ailment.was_treated_by_item(I, user, src)
+					return TRUE
 	return ..()
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
