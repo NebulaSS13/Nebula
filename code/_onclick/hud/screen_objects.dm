@@ -298,7 +298,8 @@
 									C.set_internals(tankcheck[best], "\the [tankcheck[best]]")
 
 							if(!C.internal)
-								to_chat(C, SPAN_WARNING("You don't have \a [breathes] tank."))
+								var/decl/material/breath_data = decls_repository.get_decl(breathes)
+								to_chat(C, SPAN_WARNING("You don't have \a [breath_data.gas_name] tank."))
 		if("act_intent")
 			usr.a_intent_change("right")
 
