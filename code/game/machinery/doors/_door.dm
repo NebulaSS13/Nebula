@@ -318,6 +318,10 @@
 	else if(src.health < src.maxhealth * 3/4)
 		to_chat(user, "\The [src] shows signs of damage!")
 
+	var/mob/living/carbon/human/H = user
+	if (emagged && istype(H) && H.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
+		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
+
 /obj/machinery/door/set_broken(new_state, cause)
 	. = ..()
 	if(. && new_state && (cause & MACHINE_BROKEN_GENERIC))

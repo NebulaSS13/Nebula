@@ -183,6 +183,9 @@
 		if (src.density)
 			open()
 		else
+			if (emagged)
+				to_chat(user, SPAN_WARNING("\The [src] seems to be stuck and refuses to close!"))
+				return
 			close()
 
 	else if (src.density)

@@ -35,3 +35,5 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes:
   - bugfix: "Windoors are now properly emag-able."
+  - tweak: "Emagged windoors will now provide feedback that they are broken when you try to close them."
+  - tweak: "You can now tell if a door's control board has been fried by examining the door with an IT skill of trained or higher."
