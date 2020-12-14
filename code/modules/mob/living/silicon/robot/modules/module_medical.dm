@@ -38,12 +38,16 @@
 		/obj/item/bonesetter,
 		/obj/item/circular_saw,
 		/obj/item/surgicaldrill,
-		/obj/item/gripper/organ,
 		/obj/item/shockpaddles/robot,
 		/obj/item/crowbar,
 		/obj/item/stack/nanopaste,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/chems/dropper
+	)
+	can_hold = list(
+		/obj/item/organ =       TRUE,
+		/obj/item/robot_parts = TRUE,
+		/obj/item/chems/ivbag = TRUE
 	)
 	synths = list(
 		/datum/matter_synth/medicine = 10000,
@@ -108,13 +112,18 @@
 		/obj/item/shockpaddles/robot,
 		/obj/item/chems/dropper/industrial,
 		/obj/item/chems/syringe,
-		/obj/item/gripper/chemistry,
 		/obj/item/extinguisher/mini,
 		/obj/item/taperoll/medical,
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/stack/medical/ointment,
 		/obj/item/stack/medical/bruise_pack,
 		/obj/item/stack/medical/splint
+	)
+	can_hold = list(
+		/obj/item/chems/glass =         TRUE,
+		/obj/item/chems/pill =          TRUE,
+		/obj/item/chems/ivbag =         TRUE,
+		/obj/item/storage/pill_bottle = TRUE
 	)
 	synths = list(
 		/datum/matter_synth/medicine = 15000

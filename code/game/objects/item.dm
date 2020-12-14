@@ -442,35 +442,33 @@ var/list/slot_flags_enumeration = list(
 //Set disable_warning to 1 if you wish it to not give you outputs.
 //Should probably move the bulk of this into mob code some time, as most of it is related to the definition of slots and not item-specific
 //set force to ignore blocking overwear and occupied slots
-/obj/item/proc/mob_can_equip(M, slot, disable_warning = 0, force = 0)
+/obj/item/proc/mob_can_equip(mob/living/M, slot, disable_warning = 0, force = 0)
 
-	if(!slot || !M || !ishuman(M))
+	if(!slot || !istype(M) || !length(M.held_item_slots))
 		return FALSE
 
 	var/can_hold = FALSE
-	if(isliving(M) && !isnum(slot))
-		var/mob/living/L = M
-		can_hold = !!LAZYACCESS(L.held_item_slots, slot)
+	if(!isnum(slot))
+		can_hold = !!LAZYACCESS(M.held_item_slots, slot)
 
 	//First check if the item can be equipped to the desired slot.
 	var/list/mob_equip = list()
 	var/mob/living/carbon/human/H = M
-	if(!can_hold)
+	if(!can_hold && istype(H))
 		if(H.species.hud && H.species.hud.equip_slots)
 			mob_equip = H.species.hud.equip_slots
 		if(H.species && !(slot in mob_equip))
 			return FALSE
 		var/associated_slot = global.slot_flags_enumeration[slot]
 		if(!isnull(associated_slot) && !(associated_slot & slot_flags))
-			return 0
+			return FALSE
 
 	if(!force)
 		//Next check that the slot is free
-		if(H.get_equipped_item(slot))
+		if(M.get_equipped_item(slot))
 			return FALSE
 		//Next check if the slot is accessible.
-		var/mob/_user = disable_warning? null : H
-		if(!H.slot_is_accessible(slot, src, _user))
+		if(!M.slot_is_accessible(slot, src, (disable_warning ? null : M)))
 			return FALSE
 
 	//Lastly, check special rules for the desired slot.

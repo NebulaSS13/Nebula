@@ -161,9 +161,11 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/put_in_hands(var/obj/item/W)
 	if(!W)
-		return 0
+		return FALSE
+	if(put_in_active_hand(W) || put_in_inactive_hand(W))
+		return TRUE
 	drop_from_inventory(W)
-	return 0
+	return FALSE
 
 /mob/proc/put_in_hands_or_store_or_drop(var/obj/item/W)
 	. = put_in_hands(W)

@@ -6,11 +6,21 @@
 		"Supply" = TRUE
 		)
 	sprites = list("Drone" = "drone-service")
+	can_hold = list(
+		/obj/item/clipboard =        TRUE,
+		/obj/item/paper =            TRUE,
+		/obj/item/paper_bundle =     TRUE,
+		/obj/item/photo =            TRUE,
+		/obj/item/card/id =          TRUE,
+		/obj/item/book =             TRUE,
+		/obj/item/newspaper =        TRUE,
+		/obj/item/smallDelivery =    TRUE,
+		/obj/item/forensics/sample = TRUE
+	)
 	equipment = list(
 		/obj/item/flash,
 		/obj/item/pen/robopen,
 		/obj/item/form_printer,
-		/obj/item/gripper/clerical,
 		/obj/item/hand_labeler,
 		/obj/item/stamp,
 		/obj/item/stamp/denied,

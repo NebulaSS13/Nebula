@@ -8,6 +8,25 @@
 	languages = list(
 		/decl/language/human/common = FALSE
 	)
+
+	can_hold = list(
+		/obj/item/cell =                                         TRUE,
+		/obj/item/stock_parts/circuitboard/airlock_electronics = TRUE,
+		/obj/item/tracker_electronics =                          TRUE,
+		/obj/item/stock_parts =                                  TRUE,
+		/obj/item/frame =                                        TRUE,
+		/obj/item/camera_assembly =                              TRUE,
+		/obj/item/tank =                                         TRUE,
+		/obj/item/stock_parts/circuitboard =                     TRUE,
+		/obj/item/stock_parts/smes_coil =                        TRUE,
+		/obj/item/stock_parts/computer =                         TRUE,
+		/obj/item/fuel_assembly =                                TRUE,
+		/obj/item/stack/material/deuterium =                     TRUE,
+		/obj/item/stack/material/tritium =                       TRUE,
+		/obj/item/stack/tile =                                   TRUE,
+		/obj/item/stack/material =                               FALSE
+	)
+
 	equipment = list(
 		/obj/item/weldingtool,
 		/obj/item/screwdriver,
@@ -17,9 +36,7 @@
 		/obj/item/multitool,
 		/obj/item/t_scanner,
 		/obj/item/lightreplacer,
-		/obj/item/gripper,
 		/obj/item/soap,
-		/obj/item/gripper/no_use/loader,
 		/obj/item/extinguisher/mini,
 		/obj/item/paint_sprayer,
 		/obj/item/inducer/borg,

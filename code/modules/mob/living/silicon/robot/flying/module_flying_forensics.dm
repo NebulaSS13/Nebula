@@ -11,12 +11,22 @@
 		"Drone" = "drone-sec",
 		"Eyebot" = "eyebot-security"
 	)
+	can_hold = list(
+		/obj/item/clipboard =        TRUE,
+		/obj/item/paper =            TRUE,
+		/obj/item/paper_bundle =     TRUE,
+		/obj/item/photo =            TRUE,
+		/obj/item/card/id =          TRUE,
+		/obj/item/book =             TRUE,
+		/obj/item/newspaper =        TRUE,
+		/obj/item/smallDelivery =    TRUE,
+		/obj/item/forensics/sample = TRUE
+	)
 	equipment = list(
 		/obj/item/forensics/sample_kit/swabs,
 		/obj/item/storage/evidence,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
-		/obj/item/gripper/clerical,
 		/obj/item/flash,
 		/obj/item/borg/sight/hud/sec,
 		/obj/item/taperoll/police,

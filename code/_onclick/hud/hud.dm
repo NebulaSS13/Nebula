@@ -199,7 +199,8 @@
 
 		inv_box.cut_overlays()
 		inv_box.add_overlay("hand_[bp]")
-		inv_box.add_overlay("hand_[inv_slot.ui_label]")
+		if(inv_slot.ui_label)
+			inv_box.add_overlay("hand_[inv_slot.ui_label]")
 		if(target.get_active_held_item_slot() == bp)
 			inv_box.add_overlay("hand_selected")
 		inv_box.compile_overlays()

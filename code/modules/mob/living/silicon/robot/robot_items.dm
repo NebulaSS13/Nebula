@@ -1,4 +1,4 @@
-//A portable analyzer, for research borgs.  This is better then giving them a gripper which can hold anything and letting them use the normal analyzer.
+//A portable analyzer, for research borgs.
 /obj/item/portable_destructive_analyzer
 	name = "portable destructive analyzer"
 	icon = 'icons/obj/items/borg_module/borg_rnd_analyser.dmi'

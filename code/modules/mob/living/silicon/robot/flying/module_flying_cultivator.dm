@@ -16,9 +16,15 @@
 		/obj/item/scalpel/laser1,
 		/obj/item/circular_saw,
 		/obj/item/extinguisher,
-		/obj/item/gripper/cultivator,
 		/obj/item/scanner/plant,
 		/obj/item/robot_harvester
+	)
+	can_hold = list(
+		/obj/item/chems/glass =   TRUE,
+		/obj/item/seeds =         TRUE,
+		/obj/item/grown =         TRUE,
+		/obj/item/slime_extract = TRUE,
+		/obj/item/disk/botany =   TRUE
 	)
 	emag = /obj/item/energy_blade/machete
 	skills = list(

@@ -24,8 +24,6 @@
 		/obj/item/scanner/gas,
 		/obj/item/scanner/health,
 		/obj/item/geiger,
-		/obj/item/gripper,
-		/obj/item/gripper/no_use/loader,
 		/obj/item/inducer/borg,
 		/obj/item/stack/medical/resin,
 		/obj/item/surgicaldrill,
@@ -41,6 +39,23 @@
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel,
 		/obj/item/stack/nanopaste
+	)
+	can_hold = list(
+		/obj/item/cell =                                         TRUE,
+		/obj/item/stock_parts/circuitboard/airlock_electronics = TRUE,
+		/obj/item/tracker_electronics =                          TRUE,
+		/obj/item/stock_parts =                                  TRUE,
+		/obj/item/frame =                                        TRUE,
+		/obj/item/camera_assembly =                              TRUE,
+		/obj/item/tank =                                         TRUE,
+		/obj/item/stock_parts/circuitboard =                     TRUE,
+		/obj/item/stock_parts/smes_coil =                        TRUE,
+		/obj/item/stock_parts/computer =                         TRUE,
+		/obj/item/fuel_assembly =                                TRUE,
+		/obj/item/stack/material/deuterium =                     TRUE,
+		/obj/item/stack/material/tritium =                       TRUE,
+		/obj/item/stack/tile =                                   TRUE,
+		/obj/item/stack/material =                               FALSE
 	)
 	synths = list(
 		/datum/matter_synth/metal = 	30000,

@@ -24,9 +24,15 @@
 		"Rich" = "maximillion",
 		"Default" = "Service2"
 	)
+	can_hold = list(
+		/obj/item/chems/glass = TRUE,
+		/obj/item/chems/food =  TRUE,
+		/obj/item/seeds =       TRUE,
+		/obj/item/grown =       TRUE,
+		/obj/item/glass_extra = TRUE
+	)
 	equipment = list(
 		/obj/item/flash,
-		/obj/item/gripper/service,
 		/obj/item/chems/glass/bucket,
 		/obj/item/minihoe,
 		/obj/item/hatchet,
@@ -94,11 +100,21 @@
 		"Rich" =     "maximillion",
 		"Default" =  "Service2"
 	)
+	can_hold = list(
+		/obj/item/clipboard =        TRUE,
+		/obj/item/paper =            TRUE,
+		/obj/item/paper_bundle =     TRUE,
+		/obj/item/photo =            TRUE,
+		/obj/item/card/id =          TRUE,
+		/obj/item/book =             TRUE,
+		/obj/item/newspaper =        TRUE,
+		/obj/item/smallDelivery =    TRUE,
+		/obj/item/forensics/sample = TRUE
+	)
 	equipment = list(
 		/obj/item/flash,
 		/obj/item/pen/robopen,
 		/obj/item/form_printer,
-		/obj/item/gripper/clerical,
 		/obj/item/hand_labeler,
 		/obj/item/stamp,
 		/obj/item/stamp/denied,

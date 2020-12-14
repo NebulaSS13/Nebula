@@ -27,9 +27,13 @@
 		/obj/item/storage/ore,
 		/obj/item/pickaxe/borgdrill,
 		/obj/item/storage/sheetsnatcher/borg,
-		/obj/item/gripper/miner,
 		/obj/item/scanner/mining,
 		/obj/item/crowbar
+	)
+	can_hold = list(
+		/obj/item/cell =                                 TRUE,
+		/obj/item/stock_parts =                          TRUE,
+		/obj/item/stock_parts/circuitboard/miningdrill = TRUE
 	)
 	emag = /obj/item/gun/energy/plasmacutter
 	skills = list(

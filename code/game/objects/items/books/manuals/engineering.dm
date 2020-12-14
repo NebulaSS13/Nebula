@@ -69,7 +69,6 @@
 				The research cyborg module is an effective researching machine. It is equipped with tools to effectively run RnD.<be>A Research Cyborg comes with:
 				<ul>
 				  <li>Portable Destructive Analyzer</li>
-				  <li>Research Gripper</li>
 				  <li>Sheet Loader</li>
 				  <li>Robot Analyzer</li>
 				  <li>Robot Card</li>
@@ -78,7 +77,6 @@
 				  <li>Circular Saw</li>
 				  <li>Fire Extinguisher</li>
 				  <li>Syringe</li>
-				  <li>Chemistry Gripper</li>
 				  <li>Nanopaste</li>
 				</ul>
 
@@ -103,7 +101,6 @@
 				  <li>Crowbar</li>
 				  <li>Ore Satchel</li>
 				  <li>Borg Drill</li>
-				  <li>Mining Gripper</li>
 				  <li>Ore Scanner</li>
 				</ul>
 
@@ -130,7 +127,6 @@
 				<h3>Service Cyborg</h3>
 				The service cyborg module comes ready to serve your human needs. It includes various entertainment and refreshment devices. Occasionally some service cyborgs may have been referred to as "Bros."<br>A Service Cyborg comes with:
 				<ul>
-				  <li>Service Gripper</li>
 				  <li>Bucket</li>
 				  <li>Hoe</li>
 				  <li>Hatchet</li>
@@ -147,7 +143,6 @@
 				<ul>
 				  <li>Pen</li>
 				  <li>Paper Dispenser</li>
-				  <li>Clerical Gripper</li>
 				  <li>Hand Labeler</li>
 				  <li>Generic Stamp</li>
 				  <li>Denied Stamp</li>
@@ -167,7 +162,6 @@
 				  <li>Automatic Defibrillator</li>
 				  <li>Industrial Dropper</li>
 				  <li>Syringe</li>
-				  <li>Chemistry Gripper</li>
 				  <li>Fire Extinguisher</li>
 				  <li>Inflatables Dispenser</li>
 				  <li>Roll of Tape</li>
@@ -184,7 +178,6 @@
 				  <li>Automatic Defibrillator</li>
 				  <li>Industrial Dropper</li>
 				  <li>Syringe</li>
-				  <li>Chemistry Gripper</li>
 				  <li>Fire Extinguisher</li>
 				  <li>Inflatables Dispenser</li>
 				  <li>Roll of Tape</li>

@@ -1,9 +1,9 @@
 //These procs handle putting s tuff in your hand. It's probably best to use these rather than setting stuff manually
 //as they handle all relevant stuff like adding it to the player's screen and such
 
-//Returns the thing in our active hand (whatever is in our active module-slot, in this case)
+//Returns whatever is in our active module slot or the thing in our hand (if applicable)
 /mob/living/silicon/robot/get_active_hand()
-	return module_active
+	return module_active || ..()
 
 /*-------TODOOOOOOOOOO--------*/
 
@@ -241,14 +241,33 @@
 	else
 		to_chat(src, "<span class='notice'>You need to disable a module first!</span>")
 
-/mob/living/silicon/robot/put_in_hands(var/obj/item/W) // No hands.
-	W.forceMove(get_turf(src))
-	return 1
+/mob/living/silicon/robot/put_in_hands(var/obj/item/W)
+	if(get_active_hand() != null || !length(module?.can_hold))
+		if(W.loc == src)
+			drop_from_inventory(W)
+		return FALSE
+	. = ..()
 
 //Robots don't use inventory slots, so we need to override this.
 /mob/living/silicon/robot/canUnEquip(obj/item/I)
 	if(!I)
 		return 1
 	if((I in module) || (I in src)) //Includes all modules and installed components.
-		return I.canremove          //Will be 0 for modules, but items held by grippers will also be checked here.
+		return I.canremove          //Will be 0 for modules
 	return 1
+
+/mob/living/silicon/robot/equip_to_slot(obj/item/W, slot)
+	. = ..()
+	if(. && !isnum(slot))
+		var/datum/inventory_slot/inv_slot = LAZYACCESS(held_item_slots, slot)
+		if(!inv_slot || inv_slot.holding)
+			return FALSE
+		W.forceMove(src)
+		inv_slot.holding = W
+		W.screen_loc = inv_slot.ui_loc
+		W.hud_layerise()
+		W.equipped(src, slot)
+		W.update_held_icon()
+		if(W.action_button_name)
+			update_action_buttons()
+		return TRUE

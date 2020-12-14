@@ -1,3 +1,6 @@
+#define ROBOT_MODULE_HAND "robot_gripper"
+#define robot_gripper_ui_loc "CENTER-4:24,BOTTOM:5"
+
 /obj/item/robot_module
 	name = "robot module"
 	icon = 'icons/obj/modules/module_standard.dmi'
@@ -5,6 +8,7 @@
 	w_class = ITEM_SIZE_NO_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
+	var/list/can_hold
 	var/hide_on_manifest = 0
 	var/channels = list()
 	var/networks = list()
@@ -69,6 +73,10 @@
 	R.set_module_sprites(sprites)
 	R.choose_icon(R.module_sprites)
 
+	if(length(can_hold))
+		R.add_held_item_slot(ROBOT_MODULE_HAND, robot_gripper_ui_loc, BP_L_HAND)
+		R.select_held_item_slot(null)
+
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
 	for(var/thing in equipment)
@@ -124,6 +132,7 @@
 	if(R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
 	R.choose_icon(R.set_module_sprites(list("Default" = initial(R.icon_state))))
+	R.remove_held_item_slot(ROBOT_MODULE_HAND)
 
 /obj/item/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)
@@ -133,6 +142,7 @@
 	var/mob/living/silicon/robot/R = loc
 	if(istype(R) && R.module == src)
 		R.module = null
+	R.remove_held_item_slot(ROBOT_MODULE_HAND)
 	. = ..()
 
 /obj/item/robot_module/emp_act(severity)
@@ -227,3 +237,6 @@
 		var/obj/item/stock_parts/computer/hard_drive/disk = os.get_component(PART_HDD)
 		for(var/T in software)
 			disk.store_file(new T(disk))
+
+#undef ROBOT_MODULE_HAND
+#undef robot_gripper_ui_loc

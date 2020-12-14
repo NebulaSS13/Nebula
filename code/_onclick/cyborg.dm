@@ -47,18 +47,15 @@
 			to_chat(src, "<span class='userdanger'>Your camera isn't functional.</span>")
 		return
 
-	/*
-	cyborg restrained() currently does nothing
-	if(restrained())
-		RestrainedClickOn(A)
-		return
-	*/
-
 	var/obj/item/W = get_active_hand()
-
-	// Cyborgs have no range-checking unless there is item use
 	if(!W)
 		A.add_hiddenprint(src)
+		var/obj/item/I = A
+		if(istype(I) && Adjacent(I) && !I.anchored && I.simulated && isturf(I.loc) && length(module?.can_hold))
+			for(var/itype in module.can_hold)
+				if(istype(I, itype))
+					put_in_hands(I)
+					return		
 		A.attack_robot(src)
 		return
 
@@ -66,8 +63,7 @@
 	if( buckled )
 		return
 
-	if(W == A)
-
+	if(W == A && (W == module_active || (W in get_held_items())))
 		W.attack_self(src)
 		return
 

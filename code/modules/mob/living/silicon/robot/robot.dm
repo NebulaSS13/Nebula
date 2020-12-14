@@ -506,7 +506,6 @@
 
 				to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
 				return
-		// If the robot is having something inserted which will remain inside it, self-inserting must be handled before exiting to avoid logic errors. Use the handle_selfinsert proc.
 		if(try_stock_parts_install(W, user))
 			return
 
@@ -611,7 +610,6 @@
 			to_chat(user, "\The [W] is too [W.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
 		else if(user.unEquip(W, src))
 			cell = W
-			handle_selfinsert(W, user) //Just in case.
 			to_chat(user, "You insert the power cell.")
 			C.installed = 1
 			C.wrapped = W
@@ -667,7 +665,6 @@
 				if(!user.unEquip(U, src))
 					return
 				to_chat(usr, "You apply the upgrade to [src]!")
-				handle_selfinsert(W, user)
 			else
 				to_chat(usr, "Upgrade error!")
 
@@ -675,14 +672,6 @@
 		if(!(istype(W, /obj/item/robotanalyzer) || istype(W, /obj/item/scanner/health)) && W.force && user.a_intent != I_HELP)
 			spark_system.start()
 		return ..()
-
-/mob/living/silicon/robot/proc/handle_selfinsert(obj/item/W, mob/user)
-	if ((user == src) && istype(get_active_hand(),/obj/item/gripper))
-		var/obj/item/gripper/H = get_active_hand()
-		if (W.loc == H) //if this triggers something has gone very wrong, and it's safest to abort
-			return
-		else if (H.wrapped == W)
-			H.wrapped = null
 
 /mob/living/silicon/robot/attack_hand(mob/user)
 
@@ -1118,5 +1107,4 @@
 		return
 	. = ..()
 	if(.)
-		handle_selfinsert(W, user)
 		recalculate_synth_capacities()
