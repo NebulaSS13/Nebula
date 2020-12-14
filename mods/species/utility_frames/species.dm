@@ -35,12 +35,12 @@
 		"You are dangerously close to overheating!"
 	)
 	unarmed_attacks = list(
-		/decl/natural_attack/stomp, 
-		/decl/natural_attack/kick, 
+		/decl/natural_attack/stomp,
+		/decl/natural_attack/kick,
 		/decl/natural_attack/punch
 	)
 	genders = list(
-		NEUTER, 
+		NEUTER,
 		PLURAL
 	)
 	available_cultural_info = list(
@@ -56,6 +56,12 @@
 	exertion_emotes_synthetic = list(
 		/decl/emote/exertion/synthetic,
 		/decl/emote/exertion/synthetic/creak
+	)
+
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/detach_limb,
+		/mob/living/carbon/human/proc/attach_limb,
+		/mob/living/carbon/human/proc/eyeglow
 	)
 
 /decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
