@@ -168,7 +168,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(AM == user)
 		user.visible_message("<span class='danger'>[user] climbs into [src].</span>", \
 							 "<span class='notice'>You climb into [src].</span>")
-		log_and_message_admins("has stuffed themselves into [src].", AM)
+		admin_attack_log(user, null, "Stuffed themselves into \the [src].", null, "stuffed themselves into \the [src].")
 	else
 		user.visible_message("<span class='[is_dangerous ? "danger" : "notice"]'>[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]</span>", \
 							 "<span class='notice'>You stuff [AM] into [src].</span>")
@@ -399,7 +399,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	for(var/mob/M in H.check_mob(stuff))
 		if(M.ckey)
-			log_and_message_admins("has been flushed down [src].", M)
+			admin_attack_log(null, M, null, "Was flushed down [src].", "has been flushed down [src].")
 
 	H.start(src) // start the holder processing movement
 	flushing = 0
