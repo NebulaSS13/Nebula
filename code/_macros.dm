@@ -99,8 +99,6 @@
 
 #define attack_animation(A) if(istype(A)) A.do_attack_animation(src)
 
-#define isopenspace(A) istype(A, /turf/simulated/open)
-
 #define isplunger(A) istype(A, /obj/item/plunger)
 
 /proc/isspecies(A, B)

@@ -287,7 +287,7 @@ var/list/turret_icons
 		if(wrenching)
 			to_chat(user, "<span class='warning'>Someone is already [anchored ? "un" : ""]securing the turret!</span>")
 			return
-		if(!anchored && isinspace())
+		if(!anchored && isspaceturf(get_turf(src)))
 			to_chat(user, "<span class='warning'>Cannot secure turrets in space!</span>")
 			return
 

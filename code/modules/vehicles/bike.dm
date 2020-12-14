@@ -58,7 +58,7 @@
 	if(kickstand)
 		usr.visible_message("\The [usr] puts up \the [src]'s kickstand.")
 	else
-		if(istype(src.loc,/turf/space))
+		if(isspaceturf(src.loc))
 			to_chat(usr, "<span class='warning'> You don't think kickstands work in space...</span>")
 			return
 		usr.visible_message("\The [usr] puts down \the [src]'s kickstand.")
@@ -142,7 +142,7 @@
 /obj/vehicle/bike/Move(var/turf/destination)
 	if(kickstand || (world.time <= l_move_time + move_delay)) return
 	//these things like space, not turf. Dragging shouldn't weigh you down.
-	if(istype(destination,/turf/space))
+	if(isspaceturf(destination))
 		if(!space_speed)
 			return 0
 		move_delay = space_speed

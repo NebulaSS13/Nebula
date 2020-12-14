@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 	var/I = 0
 	while(I < n)
 		var/turf/T = get_random_edge_turf(direction,TRANSITIONEDGE + 2, Z)
-		if(istype(T,/turf/space))
+		if(isspaceturf(T))
 			var/mob/living/simple_animal/hostile/M
 			if(prob(96))
 				M = new /mob/living/simple_animal/hostile/carp(T)

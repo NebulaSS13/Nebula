@@ -24,6 +24,12 @@
 	if(istype(T))
 		T.drill_act()
 
+/turf/exterior/open/drill_act()
+	SHOULD_CALL_PARENT(FALSE)
+	var/turf/T = GetBelow(src)
+	if(istype(T))
+		T.drill_act()
+
 /turf/exterior/drill_act()
 	var/turf/exterior/digging = ..()
 	if(istype(digging) && digging.diggable)

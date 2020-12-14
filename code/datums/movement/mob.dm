@@ -111,7 +111,7 @@
 		return MOVEMENT_HANDLED
 
 	if(mob.buckled) // Wheelchair driving!
-		if(istype(mob.loc, /turf/space))
+		if(isspaceturf(mob.loc))
 			return // No wheelchair driving in space
 		if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
 			. = MOVEMENT_HANDLED

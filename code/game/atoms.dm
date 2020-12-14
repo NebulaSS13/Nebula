@@ -399,12 +399,6 @@ its easier to just keep the beam vertical.
 /atom/proc/checkpass(passflag)
 	return pass_flags&passflag
 
-/atom/proc/isinspace()
-	if(istype(get_turf(src), /turf/space))
-		return 1
-	else
-		return 0
-
 // Show a message to all mobs and objects in sight of this atom
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"

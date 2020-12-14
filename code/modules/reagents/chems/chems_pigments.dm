@@ -59,7 +59,7 @@
 	color_weight = 0
 
 /decl/material/liquid/paint/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	if(istype(T) && !istype(T, /turf/space))
+	if(istype(T) && !isspaceturf(T))
 		T.color = holder.get_color()
 
 /decl/material/liquid/paint/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)

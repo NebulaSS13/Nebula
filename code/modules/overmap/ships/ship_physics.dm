@@ -38,7 +38,7 @@
 	var/list/zones = list()
 	for(var/area/A in get_areas())
 		for(var/turf/simulated/T in A)
-			if(istype(T, /turf/simulated/open))
+			if(T.is_open())
 				continue
 
 			. += DEFAULT_TURF_MASS

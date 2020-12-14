@@ -37,7 +37,7 @@
 		if(!T || !(T.z in GLOB.using_map.player_levels))
 			continue
 
-		if(!istype(T.loc,/area/space) && !istype(T,/turf/space))	//Make sure you're in a space area or on a space turf
+		if(!istype(T.loc,/area/space) && !isspaceturf(T))	//Make sure you're in a space area or on a space turf
 			continue
 
 		//Apply some heat or burn damage from the sun.

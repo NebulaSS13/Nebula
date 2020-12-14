@@ -46,7 +46,7 @@
 
 /mob/living/simple_animal/hostile/bear/do_delayed_life_action()
 	..()
-	if(loc && istype(loc,/turf/space))
+	if(isspaceturf(loc))
 		icon_state = "bear"
 	else
 		icon_state = "bearfloor"

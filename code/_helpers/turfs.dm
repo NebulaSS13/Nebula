@@ -58,11 +58,6 @@
 	Predicate helpers
 */
 
-/proc/is_space_turf(var/turf/T)
-	return istype(T, /turf/space)
-
-/proc/is_not_space_turf(var/turf/T)
-	return !is_space_turf(T)
 
 /proc/is_holy_turf(var/turf/T)
 	return T && T.holy
@@ -83,7 +78,7 @@
 	return !!T.return_air()
 
 /proc/IsTurfAtmosUnsafe(var/turf/T)
-	if(istype(T, /turf/space)) // Space tiles
+	if(isspaceturf(T)) // Space tiles
 		return "Spawn location is open to space."
 	var/datum/gas_mixture/air = T.return_air()
 	if(!air)

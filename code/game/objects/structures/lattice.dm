@@ -18,7 +18,8 @@
 		DELETE_IF_DUPLICATE_OF(/obj/structure/lattice)
 		if(!istype(material))
 			return INITIALIZE_HINT_QDEL
-		if(!istype(src.loc, /turf/space) && !istype(src.loc, /turf/simulated/open))
+		var/turf/T = loc
+		if(!istype(T) || !T.is_open())
 			return INITIALIZE_HINT_QDEL
 		. = INITIALIZE_HINT_LATELOAD
 
@@ -99,6 +100,7 @@
 		if(locate(/obj/structure/lattice, T) || locate(/obj/structure/catwalk, T))
 			dir_sum += direction
 		else
-			if(!(istype(get_step(src, direction), /turf/space)) && !(istype(get_step(src, direction), /turf/simulated/open)))
+			var/turf/O = get_step(src, direction) 
+			if(!istype(O) || !O.is_open())
 				dir_sum += direction
 	icon_state = "lattice[dir_sum]"

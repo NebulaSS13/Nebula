@@ -45,7 +45,7 @@
 				if(!T.implanted) continue
 				var/loc_display = "Space"
 				var/mob/living/carbon/M = T.imp_in
-				if(!istype(M.loc, /turf/space))
+				if(!isspaceturf(M.loc))
 					var/turf/mob_loc = get_turf(M)
 					loc_display = mob_loc.loc
 				if(T.malfunction)

@@ -281,8 +281,8 @@
 		corners |= T.get_corners()
 		turfs   += T
 
-		var/turf/simulated/open/O = T
-		if(istype(O) && O.below)
+		var/turf/O = T
+		if(istype(O) && O.is_open() && O.below)
 			// Consider the turf below us as well. (Z-lights)
 			for(T = O.below; !isnull(T); T = update_the_turf(T,corners, turfs));
 
@@ -316,9 +316,8 @@
 	corners |= T.get_corners()
 	turfs   += T
 
-	var/turf/simulated/open/O = T
-	if(istype(O) && O.below)
-		return O.below
+	if(T.is_open() && T.below)
+		return T.below
 	return null
 
 #undef effect_update

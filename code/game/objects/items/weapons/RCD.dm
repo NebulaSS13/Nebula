@@ -99,7 +99,7 @@
 	if(!proximity) return
 	if(disabled && !isrobot(user))
 		return 0
-	if(istype(get_area(A),/area/shuttle)||istype(get_area(A),/turf/space/transit))
+	if(istype(get_area(A),/area/shuttle) || istype(get_turf(A), /turf/space/transit))
 		return 0
 	work_id++
 	work_mode.do_work(src, A, user)

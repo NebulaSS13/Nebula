@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 			if(A && (A.area_flags & AREA_FLAG_EXTERNAL))
 				if(A.base_turf)
 					A.base_turf = /turf/exterior/seafloor/non_flooded
-				if(!istype(T, /turf/space))
+				if(!isspaceturf(T))
 					T.make_flooded()
 
 	// Generate the sea floor on the highest z-level in the set.
@@ -122,9 +122,9 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 			if(A && (A.area_flags & AREA_FLAG_EXTERNAL))
 				if(A.base_turf)
 					A.base_turf = /turf/simulated/open
-				if(istype(T, /turf/space))
+				if(isspaceturf(T))
 					T.ChangeTurf(/turf/simulated/open/flooded)
-				else if(istype(T, /turf/simulated/open))
+				else if(T.is_open())
 					T.make_flooded()
 				CHECK_TICK
 

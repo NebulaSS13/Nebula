@@ -249,18 +249,19 @@
 
 /obj/structure/hoist/proc/can_move_dir(direction)
 	var/turf/dest = direction == UP ? GetAbove(source_hook) : GetBelow(source_hook)
+	if(!istype(dest))
+		return FALSE
 	switch(direction)
 		if (UP)
-			if (!isopenspace(dest)) // can't move into a solid tile
-				return 0
+			if(!dest.is_open()) // can't move into a solid tile
+				return FALSE
 			if (source_hook in get_step(src, dir)) // you don't get to move above the hoist
-				return 0
+				return FALSE
 		if (DOWN)
-			if (!isopenspace(get_turf(source_hook))) // can't move down through a solid tile
-				return 0
-	if (!dest) // can't move if there's nothing to move to
-		return 0
-	return 1 // i thought i could trust myself to write something as simple as this, guess i was wrong
+			var/turf/T = get_turf(source_hook)
+			if(!istype(T) || !T.is_open()) // can't move down through a solid tile
+				return FALSE
+	return TRUE // i thought i could trust myself to write something as simple as this, guess i was wrong
 
 /obj/structure/hoist/proc/move_dir(direction, ishoisting)
 	var/can = can_move_dir(direction)

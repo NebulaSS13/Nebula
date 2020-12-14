@@ -246,7 +246,7 @@
 				var/turf/neighbor = get_step(T,dir)
 				if(!neighbor || (neighbor in closed_turfs) || (neighbor in open_turfs))
 					continue
-				if(neighbor.density || get_dist(neighbor,origin_turf) > flood_dist || istype(neighbor,/turf/space))
+				if(neighbor.density || get_dist(neighbor,origin_turf) > flood_dist || isspaceturf(neighbor))
 					closed_turfs |= neighbor
 					continue
 				// Check for windows.

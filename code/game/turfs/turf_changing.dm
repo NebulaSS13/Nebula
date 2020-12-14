@@ -28,7 +28,7 @@
 	// This makes sure that turfs are not changed to space when one side is part of a zone
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
-		if(istype(below) && !istype(below,/turf/space))
+		if(istype(below) && !isspaceturf(below))
 			N = /turf/simulated/open
 
 	var/old_air = air

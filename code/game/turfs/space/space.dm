@@ -36,7 +36,7 @@
 		return
 	var/turf/below = GetBelow(src)
 
-	if(istype(below, /turf/space))
+	if(isspaceturf(below))
 		return
 	var/area/A = below.loc
 

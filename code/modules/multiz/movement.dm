@@ -23,7 +23,7 @@
 	var/atom/climb_target
 	if(istype(O))
 		for(var/turf/T in RANGE_TURFS(O, 1))
-			if(!isopenspace(T) && T.is_floor())
+			if(!T.is_open() && T.is_floor())
 				climb_target = T
 			else
 				for(var/obj/I in T)
@@ -180,7 +180,7 @@
 		handle_fall_effect(landing)
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
-	if(istype(landing, /turf/simulated/open))
+	if(istype(landing) && landing.is_open())
 		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the [GLOB.using_map.ground_noun].")

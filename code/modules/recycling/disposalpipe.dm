@@ -80,9 +80,9 @@ obj/structure/disposalpipe/Destroy()
 
 	// update the icon_state to reflect hidden status
 /obj/structure/disposalpipe/proc/update()
-	var/turf/T = src.loc
-	if(loc)
-		hide(!T.is_plating() && !istype(T,/turf/space))	// space never hides pipes
+	var/turf/T = loc
+	if(istype(T))
+		hide(!T.is_plating() && !T.is_open()) // space never hides pipes
 
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon
@@ -120,7 +120,7 @@ obj/structure/disposalpipe/Destroy()
 
 	var/turf/target
 	if(direction)		// direction is specified
-		if(istype(T, /turf/space)) // if ended in space, then range is unlimited
+		if(isspaceturf(T)) // if ended in space, then range is unlimited
 			target = get_edge_target_turf(T, direction)
 		else						// otherwise limit to 10 tiles
 			target = get_ranged_target_turf(T, direction, 10)

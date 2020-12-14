@@ -16,7 +16,7 @@
 
 /datum/build_mode/basic/OnClick(var/atom/object, var/list/pa)
 	if(istype(object,/turf) && pa["left"] && !pa["alt"] && !pa["ctrl"] )
-		if(istype(object,/turf/space))
+		if(isspaceturf(object))
 			var/turf/T = object
 			Log("Upgraded - [log_info_line(object)]")
 			T.ChangeTurf(/turf/simulated/floor)

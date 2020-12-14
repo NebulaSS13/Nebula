@@ -57,7 +57,8 @@
 		target_up = null
 
 	if(anchored)
-		if(HasBelow(z) && istype(loc, /turf/simulated/open))
+		var/turf/L = loc
+		if(HasBelow(z) && istype(L) && L.is_open())
 			var/failed
 			for(var/obj/structure/catwalk/catwalk in loc)
 				if(catwalk.plated_tile)
@@ -72,7 +73,7 @@
 						break
 		if(HasAbove(z))
 			var/turf/T = GetAbove(src)
-			if(istype(T, /turf/simulated/open))
+			if(istype(T) && T.is_open())
 				var/failed
 				for(var/obj/structure/catwalk/catwalk in T)
 					if(catwalk.plated_tile)
@@ -197,7 +198,8 @@
 
 	if(.)
 		if(. == target_up)
-			if(!istype(target_up.loc, /turf/simulated/open))
+			var/turf/T = target_up.loc
+			if(!istype(T) || !T.is_open())
 				to_chat(M, SPAN_WARNING("The ceiling is in the way!"))
 				return null
 			for(var/obj/structure/catwalk/catwalk in target_up.loc)
@@ -205,7 +207,8 @@
 					to_chat(M, SPAN_WARNING("\The [catwalk] is in the way!"))
 					return null
 		if(. == target_down)
-			if(!istype(loc, /turf/simulated/open))
+			var/turf/T = loc
+			if(!istype(T) || !T.is_open())
 				to_chat(M, SPAN_WARNING("\The [loc] is in the way!"))
 				return null
 			for(var/obj/structure/catwalk/catwalk in loc)
@@ -277,11 +280,11 @@
 
 /obj/structure/stairs/Initialize()
 	for(var/turf/turf in locs)
-		var/turf/simulated/open/above = GetAbove(turf)
-		if(!above)
+		var/turf/above = GetAbove(turf)
+		if(!istype(above))
 			warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
 			return INITIALIZE_HINT_QDEL
-		if(!istype(above))
+		if(!above.is_open())
 			above.ChangeTurf(/turf/simulated/open)
 	. = ..()
 
